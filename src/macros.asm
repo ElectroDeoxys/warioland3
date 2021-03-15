@@ -1,0 +1,5 @@
+INCLUDE "macros/constants.asm"
+INCLUDE "macros/code.asm"
+INCLUDE "macros/data.asm"
+INCLUDE "macros/gfx.asm"
+INCLUDE "macros/wram.asm"

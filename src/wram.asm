@@ -1,0 +1,1242 @@
+INCLUDE "macros.asm"
+INCLUDE "constants.asm"
+
+INCLUDE "vram.asm"
+
+SECTION "WRAM0", WRAM0
+
+w0Start:: ; c000
+
+wTempPals1:: ; c000
+	ds 8 palettes
+
+wTempPals2:: ; c040
+	ds 8 palettes
+
+wBackupVBlankFunc:: ; c080
+	ds $3
+
+wTempSCY:: ; c083
+	ds $1
+
+	ds $1
+
+wTempSCX:: ; c085
+	ds $1
+
+wc086:: ; c086
+	ds $1
+
+wc087:: ; c087
+	ds $1
+
+wc088:: ; c088
+	ds $1
+
+wc089:: ; c089
+	ds $1
+
+wc08a:: ; c08a
+	ds $1
+
+wc08b:: ; c08b
+	ds $1
+
+wc08c:: ; c08c
+	ds $1
+
+wc08d:: ; c08d
+	ds $1
+
+wSRAMBank:: ; c08e
+	ds $1
+
+wc08f:: ; c08f
+	ds $1
+
+wc090:: ; c090
+	ds $1
+
+; whether VBlank function has been executed or not
+; $0 false, $1 true
+wVBlankFuncExecuted:: ; c091
+	ds $1
+
+; whether to run the VBlank function
+; $0, don't run; $1 run
+wEnableVBlankFunc:: ; c092
+	ds $1
+
+wc093:: ; c093
+	ds $1
+
+wc094:: ; c094
+	ds $1
+
+; number of elements that wVirtualOAM holds
+wNumOAMSprites:: ; c095
+	ds $1
+
+wCurSpriteYOffset:: ; c096
+	ds $1
+
+wCurSpriteXOffset:: ; c097
+	ds $1
+
+wc098:: ; c098
+	ds $1
+
+wCurSpriteAttributes:: ; c099
+	ds $1
+
+wc09a:: ; c09a
+	ds $1
+
+wSequence:: ; c09b
+	ds $1
+
+wSubSequence:: ; c09c
+	ds $1
+
+	ds $1
+
+wTempIE:: ; c09e
+	ds $1
+
+wc09f:: ; c09f
+	ds $1
+
+wc0a0:: ; c0a0
+	ds $1
+
+wc0a1:: ; c0a1
+	ds $1
+
+wc0a2:: ; c0a2
+	ds $1
+
+wc0a3:: ; c0a3
+	ds $1
+
+wc0a4:: ; c0a4
+	ds $1
+
+wc0a5:: ; c0a5
+	ds $1
+
+wc0a6:: ; c0a6
+	ds $1
+
+wc0a7:: ; c0a7
+	ds $1
+
+	ds $4
+
+wc0ac:: ; c0ac
+	ds $1
+
+wc0ad:: ; c0ad
+	ds $1
+
+wc0ae:: ; c0ae
+	ds $1
+
+	ds $4
+
+wc0b3:: ; c0b3
+	ds $1
+
+wc0b4:: ; c0b4
+	ds $1
+
+wc0b5:: ; c0b5
+	ds $1
+
+wc0b6:: ; c0b6
+	ds $1
+
+wc0b7:: ; c0b7
+	ds $1
+
+wc0b8:: ; c0b8
+	ds $1
+
+wc0b9:: ; c0b9
+	ds $1
+
+wc0ba:: ; c0ba
+	ds $1
+
+wc0bb:: ; c0bb
+	ds $1
+
+wc0bc:: ; c0bc
+	ds $1
+
+wc0bd:: ; c0bd
+	ds $1
+
+wc0be:: ; c0be
+	ds $1
+
+wc0bf:: ; c0bf
+	ds $1
+
+wc0c0:: ; c0c0
+	ds $1
+
+	ds $1
+
+wc0c2:: ; c0c2
+	ds $1
+
+wc0c3:: ; c0c3
+	ds $1
+
+wc0c4:: ; c0c4
+	ds $1
+
+wc0c5:: ; c0c5
+	ds $1
+
+wc0c6:: ; c0c6
+	ds $1
+
+wc0c7:: ; c0c7
+	ds $1
+
+wEnemyGroup:: ; c0c8
+	ds $1
+
+wCurRoom:: ; c0c9
+	ds $1
+
+; PERMISSION_MAP_* constant for current room
+wPermissionMapID:: ; c0ca
+	ds $1
+
+wRoomTileMap:: ; c0cb
+	ds $1
+
+wRoomMainTiles:: ; c0cc
+	ds $1
+
+wRoomSpecialTiles:: ; c0cd
+	ds $1
+
+wRoomPalettes:: ; c0ce
+	ds $1
+
+wc0cf:: ; c0cf
+	ds $1
+
+wc0d0:: ; c0d0
+	ds $1
+
+wRoomMainTilesBank:: ; c0d1
+	ds $1
+
+wRoomSpecialTilesBank:: ; c0d2
+	ds $1
+
+wPaletteBank:: ; c0d3
+	ds $1
+
+wc0d4:: ; c0d4
+	ds $1
+
+wc0d5:: ; c0d5
+	ds $1
+
+wc0d6:: ; c0d6
+	ds $1
+
+wc0d7:: ; c0d7
+	ds $1
+
+wc0d8:: ; c0d8
+	ds $1
+
+wc0d9:: ; c0d9
+	ds $1
+
+wc0da:: ; c0da
+	ds $1
+
+wc0db:: ; c0db
+	ds $1
+
+	ds $1
+
+wc0dd:: ; c0dd
+	ds $1
+
+	ds $4
+
+wc0e2:: ; c0e2
+	ds $1
+
+wc0e3:: ; c0e3
+	ds $1
+
+wc0e4:: ; c0e4
+	ds $1
+
+	ds $1
+
+wc0e6:: ; c0e6
+	ds $1
+
+	ds $19
+
+wTempBGPals:: ; c100
+	ds 8 palettes
+
+wTempOBPals:: ; c140
+	ds 8 palettes
+
+; target rgb values for fading
+wTargetRed:: ; c180
+	ds $1
+
+wTargetGreen:: ; c181
+	ds $1
+
+wTargetBlue:: ; c182
+	ds $1
+
+; current rgb values for color fade
+wCurRGB:: ; c183
+	ds $3
+
+wc186:: ; c186
+	ds $1
+
+; keeps track of the fade amount, starting at 1
+; when it reaches 32 + 1 (maximum amount of fade possible),
+; fading is stopped
+wPalFadeCounter:: ; c187
+	ds $1
+
+	ds $1
+
+wc189:: ; c189
+	ds $1
+
+	ds $3
+
+wc18d:: ; c18d
+	ds $1
+
+wc18e:: ; c18e
+	ds $1
+
+	ds $10
+
+wc19f:: ; c19f
+	ds $1
+
+wc1a0:: ; c1a0
+	ds $1
+
+wc1a1:: ; c1a1
+	ds $1
+
+wc1a2:: ; c1a2
+	ds $2
+
+wc1a4:: ; c1a3
+	ds $1
+
+wc1a5:: ; c1a4
+	ds $1
+
+wc1a6:: ; c1a5
+	ds $1
+
+wc1a7:: ; c1a6
+	ds $1
+
+wc1a8:: ; c1a8
+	ds $1
+
+wc1a9:: ; c1a9
+	ds $1
+
+wc1aa:: ; c1aa
+	ds $1
+
+wc1ab:: ; c1ab
+	ds $1
+
+wAnimatedTilesFrameDuration:: ; c1ac
+	ds $1
+
+wAnimatedTilesGroup:: ; c1ad
+	ds $1
+
+wAnimatedTilesFrame:: ; c1ae
+	ds $1
+
+wAnimatedTilesFrameCount:: ; c1af
+	ds $1
+
+wc1b0:: ; c1b0
+	ds $1
+
+wc1b1:: ; c1b1
+	ds $1
+
+wc1b2:: ; c1b2
+	ds $2
+
+wc1b4:: ; c1b4
+	ds $1
+
+wc1b5:: ; c1b5
+	ds $1
+
+wc1b6:: ; c1b6
+	ds $2
+
+wc1b8:: ; c1b8
+	ds $1
+
+wc1b9:: ; c1b9
+	ds $1
+
+wc1ba:: ; c1ba
+	ds $1
+
+wc1bb:: ; c1bb
+	ds $1
+
+wc1bc:: ; c1bc
+	ds $1
+
+wc1bd:: ; c1bd
+	ds $1
+
+wc1be:: ; c1be
+	ds $1
+
+wc1bf:: ; c1bf
+	ds $1
+
+wc1c0:: ; c1c0
+	ds $1
+
+wc1c1:: ; c1c1
+	ds $1
+
+wc1c2:: ; c1c2
+	ds $1
+
+wc1c3:: ; c1c3
+	ds $1
+
+wc1c4:: ; c1c4
+	ds $1
+
+	ds $1
+
+wc1c6:: ; c1c6
+	ds $1
+
+	ds $39
+
+; function called on V-Blank
+wVBlankFunc:: ; c200
+	ds $200
+
+; function called on LCD
+wLCDFunc:: ; c400
+	ds $1ff
+
+wROMBank:: ; c5ff
+	ds $1
+
+wc600:: ; c600
+	ds $200
+
+wc800:: ; c800
+	ds $200
+
+wca00:: ; ca00
+	ds $1
+
+	ds $3
+
+wca04:: ; ca04
+	ds $1
+
+wca05:: ; ca05
+	ds $1
+
+; each level selectable in the overworld has 8 states
+; divided by 2, which are the day and night variants
+wLevel:: ; ca06
+	ds $1
+
+wca07:: ; ca07
+	ds $32
+
+wca39:: ; ca39
+	ds $1
+
+	ds $1
+
+wca3b:: ; ca3b
+	ds $1
+
+wca3c:: ; ca3c
+	ds $1
+
+wca3d:: ; ca3d
+	ds $1
+
+	ds $4
+
+wca42:: ; ca42
+	ds $4
+
+wca46:: ; ca46
+	ds $1
+
+	ds $14
+
+wca5b:: ; ca5b
+	ds $1
+
+wca5c:: ; ca5c
+	ds $1
+
+wca5d:: ; ca5d
+	ds $1
+
+wca5e:: ; ca5e
+	ds $1
+
+wca5f:: ; ca5f
+	ds $1
+
+wca60:: ; ca60
+	ds $1
+
+wca61:: ; ca61
+	ds $1
+
+wca62:: ; ca62
+	ds $1
+
+wca63:: ; ca63
+	ds $1
+
+wca64:: ; ca64
+	ds $1
+
+wca65:: ; ca65
+	ds $1
+
+wca66:: ; ca66
+	ds $1
+
+wFrameDuration:: ; ca67
+	ds $1
+
+wca68:: ; ca68
+	ds $1
+
+wca69:: ; ca69
+	ds $1
+
+wca6a:: ; ca6a
+	ds $1
+
+wca6b:: ; ca6b
+	ds $1
+
+wca6c:: ; ca6c
+	ds $1
+
+wca6d:: ; ca6d
+	ds $1
+
+wca6e:: ; ca6e
+	ds $1
+
+wca6f:: ; ca6f
+	ds $1
+
+wca70:: ; ca70
+	ds $1
+
+wca71:: ; ca71
+	ds $1
+
+wca72:: ; ca72
+	ds $1
+
+wca73:: ; ca73
+	ds $1
+
+wca74:: ; ca74
+	ds $1
+
+wca75:: ; ca75
+	ds $1
+
+	ds $2
+
+wca78:: ; ca78
+	ds $1
+
+; palette pointer
+wca79:: ; ca79
+	ds $2
+
+wca7b:: ; ca7b
+	ds $1
+
+wca7c:: ; ca7d
+	ds $2
+
+wca7e:: ; ca7e
+	ds $1
+
+wca7f:: ; ca7f
+	ds $2
+
+wFramesetPtr:: ; ca81
+	ds $2
+
+wca83:: ; ca83
+	ds $1
+
+wca84:: ; ca84
+	ds $1
+
+wca85:: ; ca85
+	ds $1
+
+wca86:: ; ca86
+	ds $1
+
+wca87:: ; ca87
+	ds $1
+
+wca88:: ; ca88
+	ds $1
+
+wca89:: ; ca89
+	ds $1
+
+wca8a:: ; ca8a
+	ds $1
+
+wca8b:: ; ca8b
+	ds $1
+
+wca8c:: ; ca8c
+	ds $1
+
+wca8d:: ; ca8d
+	ds $1
+
+wca8e:: ; ca8e
+	ds $1
+
+wca8f:: ; ca8f
+	ds $1
+
+wca90:: ; ca90
+	ds $1
+
+wca91:: ; ca91
+	ds $1
+
+wca92:: ; ca92
+	ds $1
+
+wca93:: ; ca93
+	ds $1
+
+wca94:: ; ca94
+	ds $1
+
+	ds $1
+
+wca96:: ; ca96
+	ds $1
+
+wca97:: ; ca97
+	ds $1
+
+wca98:: ; ca98
+	ds $1
+
+wca99:: ; ca99
+	ds $1
+
+wca9a:: ; ca9a
+	ds $1
+
+wca9b:: ; ca9b
+	ds $1
+
+wca9c:: ; ca9c
+	ds $1
+
+wca9d:: ; ca9d
+	ds $1
+
+	ds $3
+
+wcaa1:: ; caa1
+	ds 4 palettes
+
+wcac1:: ; cac1
+	ds $1
+
+wcac2:: ; cac2
+	ds $1
+
+wcac3:: ; cac3
+	ds $1
+
+wcac4:: ; cac4
+	ds $1
+
+wcac5:: ; cac5
+	ds $1
+
+wcac6:: ; cac6
+	ds $1
+
+wcac7:: ; cac7
+	ds $1
+
+wcac8:: ; cac8
+	ds $1
+
+wcac9:: ; cac9
+	ds $1
+
+	ds $136
+
+wVirtualOAM:: ; cc00
+wVirtualOAMSprite00:: sprite_oam_struct wVirtualOAMSprite00
+wVirtualOAMSprite01:: sprite_oam_struct wVirtualOAMSprite01
+wVirtualOAMSprite02:: sprite_oam_struct wVirtualOAMSprite02
+wVirtualOAMSprite03:: sprite_oam_struct wVirtualOAMSprite03
+wVirtualOAMSprite04:: sprite_oam_struct wVirtualOAMSprite04
+wVirtualOAMSprite05:: sprite_oam_struct wVirtualOAMSprite05
+wVirtualOAMSprite06:: sprite_oam_struct wVirtualOAMSprite06
+wVirtualOAMSprite07:: sprite_oam_struct wVirtualOAMSprite07
+wVirtualOAMSprite08:: sprite_oam_struct wVirtualOAMSprite08
+wVirtualOAMSprite09:: sprite_oam_struct wVirtualOAMSprite09
+wVirtualOAMSprite10:: sprite_oam_struct wVirtualOAMSprite10
+wVirtualOAMSprite11:: sprite_oam_struct wVirtualOAMSprite11
+wVirtualOAMSprite12:: sprite_oam_struct wVirtualOAMSprite12
+wVirtualOAMSprite13:: sprite_oam_struct wVirtualOAMSprite13
+wVirtualOAMSprite14:: sprite_oam_struct wVirtualOAMSprite14
+wVirtualOAMSprite15:: sprite_oam_struct wVirtualOAMSprite15
+wVirtualOAMSprite16:: sprite_oam_struct wVirtualOAMSprite16
+wVirtualOAMSprite17:: sprite_oam_struct wVirtualOAMSprite17
+wVirtualOAMSprite18:: sprite_oam_struct wVirtualOAMSprite18
+wVirtualOAMSprite19:: sprite_oam_struct wVirtualOAMSprite19
+wVirtualOAMSprite20:: sprite_oam_struct wVirtualOAMSprite20
+wVirtualOAMSprite21:: sprite_oam_struct wVirtualOAMSprite21
+wVirtualOAMSprite22:: sprite_oam_struct wVirtualOAMSprite22
+wVirtualOAMSprite23:: sprite_oam_struct wVirtualOAMSprite23
+wVirtualOAMSprite24:: sprite_oam_struct wVirtualOAMSprite24
+wVirtualOAMSprite25:: sprite_oam_struct wVirtualOAMSprite25
+wVirtualOAMSprite26:: sprite_oam_struct wVirtualOAMSprite26
+wVirtualOAMSprite27:: sprite_oam_struct wVirtualOAMSprite27
+wVirtualOAMSprite28:: sprite_oam_struct wVirtualOAMSprite28
+wVirtualOAMSprite29:: sprite_oam_struct wVirtualOAMSprite29
+wVirtualOAMSprite30:: sprite_oam_struct wVirtualOAMSprite30
+wVirtualOAMSprite31:: sprite_oam_struct wVirtualOAMSprite31
+wVirtualOAMSprite32:: sprite_oam_struct wVirtualOAMSprite32
+wVirtualOAMSprite33:: sprite_oam_struct wVirtualOAMSprite33
+wVirtualOAMSprite34:: sprite_oam_struct wVirtualOAMSprite34
+wVirtualOAMSprite35:: sprite_oam_struct wVirtualOAMSprite35
+wVirtualOAMSprite36:: sprite_oam_struct wVirtualOAMSprite36
+wVirtualOAMSprite37:: sprite_oam_struct wVirtualOAMSprite37
+wVirtualOAMSprite38:: sprite_oam_struct wVirtualOAMSprite38
+wVirtualOAMSprite39:: sprite_oam_struct wVirtualOAMSprite39
+wVirtualOAMEnd::
+
+wcca0:: ; cca0
+	ds $1
+
+	ds $f
+
+wccb0:: ; ccb0
+	ds $10
+
+wccc0:: ; ccc0
+	ds $10
+
+wccd0:: ; ccd0
+	ds $10
+
+wcce0:: ; cce0
+	ds $1
+
+wcce1:: ; cce1
+	ds $1
+
+	ds $5
+
+wcce7:: ; cce7
+	ds $1
+
+wcce8:: ; cce8
+	ds $1
+
+wcce9:: ; cce9
+	ds $1
+
+wccea:: ; ccea
+	ds $1
+
+wcceb:: ; cceb
+	ds $1
+
+wccec:: ; ccec
+	ds $1
+
+wcced:: ; cced
+	ds $1
+
+wccee:: ; ccee
+	ds $1
+
+wccef:: ; ccef
+	ds $1
+
+wccf0:: ; ccf0
+	ds $1
+
+wccf1:: ; ccf1
+	ds $1
+
+	ds $e
+
+wPermissionMap:: ; cd00
+	ds $42
+
+	ds $be
+
+wce00:: ; ce00
+	ds $1
+
+wce01:: ; ce01
+	ds $1
+
+	ds $33
+
+wce35:: ; ce35
+	ds $20
+
+	ds $14
+
+wce69:: ; ce69
+	ds $1
+
+wce6a:: ; ce6a
+	ds $1
+
+	ds $67
+
+wced2:: ; ced2
+	ds $1
+
+	ds $1
+
+wced4:: ; ced4
+	ds $1
+
+wced5:: ; ced5
+	ds $1
+
+wced6:: ; ced6
+	ds $1
+
+; the speed in which to perform fading between palettes
+; uses a FADE_SPEED_* constant
+wFadeSpeed:: ; ced7
+	ds $1
+
+wced8:: ; ced8
+	ds $1
+
+wced9:: ; ced9
+	ds $1
+
+wceda:: ; ceda
+	ds $1
+
+wcedb:: ; cedb
+	ds $1
+
+wcedc:: ; cedc
+	ds $1
+
+wcedd:: ; cedd
+	ds $1
+
+wcede:: ; cede
+	ds $1
+
+	ds $1
+
+wcee0:: ; cee0
+	ds $1
+
+wcee1:: ; cee1
+	ds $1
+
+wcee2:: ; cee2
+	ds $1
+
+wcee3:: ; cee3
+	ds $1
+
+wcee4:: ; cee4
+	ds $1
+
+wcee5:: ; cee5
+	ds $1
+
+wcee6:: ; cee6
+	ds $1
+
+wcee7:: ; cee7
+	ds $1
+
+wcee8:: ; cee8
+	ds $1
+
+wcee9:: ; cee9
+	ds $1
+
+wceea:: ; ceea
+	ds $1
+
+wceeb:: ; ceeb
+	ds $1
+
+wceec:: ; ceec
+	ds $1
+
+wceed:: ; ceed
+	ds $1
+
+wceee:: ; ceee
+	ds $1
+
+wceef:: ; ceef
+	ds $1
+
+wcef0:: ; cef0
+	ds $1
+
+wcef1:: ; cef1
+	ds $1
+
+SECTION "WRAM1", WRAMX
+
+w1d000:: unk2_struct w1d000 ; d000
+w1d020:: unk2_struct w1d020 ; d020
+w1d040:: unk2_struct w1d040 ; d040
+w1d060:: unk2_struct w1d060 ; d060
+w1d080:: unk2_struct w1d080 ; d080
+w1d0a0:: unk2_struct w1d0a0 ; d0a0
+w1d0c0:: unk2_struct w1d0c0 ; d0c0
+w1d0e0:: unk2_struct w1d0e0 ; d0e0
+
+w1d100:: ; d100
+	ds $20
+
+; pointers related to Func_64000
+w1d120:: ; d120
+	ds $2
+
+w1d122:: ; d122
+	ds $2
+
+w1d124:: ; d124
+	ds $2
+
+w1d126:: ; d126
+	ds $2
+
+w1d128:: ; d128
+	ds $2
+
+w1d12a:: ; d12a
+	ds $2
+
+w1d12c:: ; d12c
+	ds $2
+
+w1d12e:: ; d12e
+	ds $2
+
+w1d130:: ; d130
+	ds $2
+
+w1d132:: ; d132
+	ds $2
+
+w1d134:: ; d134
+	ds $2
+
+w1d136:: ; d136
+	ds $2
+
+w1d138:: ; d138
+	ds $2
+
+w1d13a:: ; d13a
+	ds $2
+
+w1d13c:: ; d13c
+	ds $2
+
+w1d13e:: ; d13e
+	ds $2
+
+w1d140:: ; d140
+	ds $1
+
+w1d141:: ; d141
+	ds $1
+
+w1d142:: ; d142
+	ds $1
+
+w1d143:: ; d143
+	ds $1
+
+w1d144:: ; d144
+	ds $1
+
+w1d145:: ; d145
+	ds $1
+
+	ds $4
+
+w1d14a:: ; d14a
+	ds $1
+
+
+SECTION "WRAM2", WRAMX
+
+w2d000:: ; d000
+	ds $f
+
+w2d00f:: ; d00f
+	ds $1
+
+	ds $e0
+
+wLevelTreasureIDs::
+wLevelTreasure0ID:: ds $1 ; d0f0
+wLevelTreasure1ID:: ds $1 ; d0f1
+wLevelTreasure2ID:: ds $1 ; d0f2
+wLevelTreasure3ID:: ds $1 ; d0f3
+
+wLevelTreasure0Unk:: ds $1 ; d0f4
+wLevelTreasure1Unk:: ds $1 ; d0f5
+wLevelTreasure2Unk:: ds $1 ; d0f6
+wLevelTreasure3Unk:: ds $1 ; d0f7
+
+	ds $b08
+
+wTreasureTiles:: ; dc00
+	ds 16 palettes
+
+SECTION "Audio RAM", WRAMX
+
+w3d000:: ; d000
+	ds $1
+
+w3d001:: ; d001
+	ds $1
+
+	ds $1
+
+w3d003:: ; d003
+	ds $2
+
+w3d005:: ; d005
+	ds $1
+
+w3d006:: ; d006
+	ds $1
+
+w3d007:: ; d007
+	ds $3
+
+w3d00a:: ; d00a
+	ds $1
+
+w3d00b:: ; d00b
+	ds $1
+
+w3d00c:: ; d00c
+	ds $3
+
+wNumAudioChannels:: ; d00f
+	ds $1
+
+; points to one of channel_struct
+wCurChannelPtr:: ; d010
+	ds $2
+
+w3d012:: ; d012
+	ds $4
+
+	ds $1
+
+w3d017:: ; d017
+	ds $2
+
+w3d019:: ; d019
+	ds $1
+
+	ds $1
+
+wLoadedMusic:: ; d01b
+	ds $2
+
+w3d01d:: ; d01d
+	ds $1
+
+	ds $2
+
+w3d020:: ; d020
+	ds $1
+
+	ds $3
+
+w3d024:: ; d024
+	ds $1
+
+w3d025:: ; d025
+	ds $1
+
+wSoundBank:: ; d026
+	ds $1
+
+	ds $11
+
+wCurSoundID:: ; d038
+	ds $2
+
+w3d03a:: ; d03a
+	ds $1
+
+w3d03b:: ; d03b
+	ds $1
+
+w3d03c:: ; d03c
+	ds $1
+
+	ds $1
+
+w3d03e:: ; d03e
+	ds $1
+
+wCurChannel:: ; d03f
+	ds $1
+
+wChannels::
+wChannel1:: channel_struct wChannel1 ; d040
+wChannel2:: channel_struct wChannel2 ; d07c
+wChannel3:: channel_struct wChannel3 ; d0b8
+wChannel4:: channel_struct wChannel4 ; d0f4
+wChannel5:: channel_struct wChannel5 ; d130
+wChannel6:: channel_struct wChannel6 ; d16c
+wChannel7:: channel_struct wChannel7 ; d1a8
+wChannel8:: channel_struct wChannel8 ; d1e4
+
+wAudioStruct1:: audio_struct wAudioStruct1 ; d220
+wAudioStruct2:: audio_struct wAudioStruct2 ; d238
+wAudioStruct3:: audio_struct wAudioStruct3 ; d250
+wAudioStruct4:: audio_struct wAudioStruct4 ; d268
+
+w3d280:: ; d280
+	ds 16 palettes
+
+w3d300:: ; d300
+	ds $200
+
+w3d500:: ; d500
+	ds $1
+
+w3d501:: ; d501
+	ds $1
+
+	ds $e
+
+w3d510:: ; d510
+	ds $1
+
+w3d511:: ; d511
+	ds $1
+
+	ds $1
+
+w3d513:: ; d513
+	ds $1
+
+w3d514:: ; d514
+	ds $1
+
+wUnk:: unk1_struct wUnk ; d515
+
+	ds $2
+
+w3d520:: ; d520
+	ds $1
+
+	ds $1
+
+w3d522:: ; d522
+	ds $1
+
+wObj0:: obj_struct wObj0 ; d523
+wObj1:: obj_struct wObj1 ; d52b
+wObj2:: obj_struct wObj2 ; d533
+wObj3:: obj_struct wObj3 ; d53b
+
+	ds $4
+
+w3d547:: ; d547
+	ds $8
+
+SECTION "WRAM4", WRAMX
+
+w4d000:: ; d000
+	ds $1000
+
+SECTION "WRAM5", WRAMX
+
+w5d000:: ; d000
+	ds $1000
+
+SECTION "WRAM6", WRAMX
+
+w6d000:: ; d000
+	ds $1000
+
+SECTION "WRAM7", WRAMX
+
+w7d000:: ; d000
+	ds $1000
+
+INCLUDE "sram.asm"

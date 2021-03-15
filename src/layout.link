@@ -1,0 +1,279 @@
+ROM0
+	org $0000
+	"rst00"
+	org $0008
+	"rst08"
+	org $0010
+	"rst10"
+	org $0018
+	"rst18"
+	org $0020
+	"rst20"
+	org $0028
+	"rst28"
+	org $0038
+	"rst38"
+	org $0040
+	"vblank"
+	org $0048
+	"lcd"
+	org $0050
+	"timer"
+	org $0058
+	"serial"
+	org $0060
+	"joypad"
+	org $0100
+	"romheader"
+	org $0150
+	"start"
+ROMX $01
+	"Bank 1"
+ROMX $02
+	"Bank 2"
+ROMX $03
+	"Bank 3"
+ROMX $04
+	"Bank 4"
+ROMX $05
+	"Bank 5"
+ROMX $06
+	"Bank 6"
+ROMX $07
+	"Bank 7"
+ROMX $08
+	"Bank 8"
+ROMX $09
+	"Bank 9"
+ROMX $0a
+	"Bank A"
+ROMX $0b
+	"Bank B"
+ROMX $0c
+	"Bank C"
+ROMX $0d
+	"Bank D"
+ROMX $0e
+	"Bank E"
+ROMX $0f
+	"Bank F"
+ROMX $10
+	"Bank 10"
+ROMX $11
+	"Bank 11"
+ROMX $12
+	"Bank 12"
+ROMX $13
+	"Bank 13"
+ROMX $14
+	"Bank 14"
+ROMX $15
+	"Bank 15"
+ROMX $16
+	"Bank 16"
+ROMX $17
+	"Bank 17"
+ROMX $18
+	"Bank 18"
+ROMX $19
+	"Bank 19"
+ROMX $1a
+	"Bank 1A"
+ROMX $1b
+	"Bank 1B"
+ROMX $1c
+	"Bank 1C"
+ROMX $1d
+	"Bank 1D"
+ROMX $1e
+	"Bank 1E"
+ROMX $1f
+	"Bank 1F"
+ROMX $20
+	"Bank 20"
+ROMX $21
+	"Bank 21"
+ROMX $22
+	"Bank 22"
+ROMX $23
+	"Bank 23"
+ROMX $24
+	"Bank 24"
+ROMX $25
+	"Bank 25"
+ROMX $26
+	"Bank 26"
+ROMX $27
+	"Bank 27"
+ROMX $28
+	"Bank 28"
+ROMX $29
+	"Bank 29"
+ROMX $2a
+	"Bank 2A"
+ROMX $2b
+	"Bank 2B"
+ROMX $2c
+	"Bank 2C"
+ROMX $2d
+	"Bank 2D"
+ROMX $2e
+	"Bank 2E"
+ROMX $2f
+	"Bank 2F"
+ROMX $30
+	"Bank 30"
+ROMX $31
+	"Bank 31"
+ROMX $32
+	"Permission Maps 1"
+ROMX $33
+	"Palettes"
+ROMX $34
+	"Bank 34"
+ROMX $35
+	"Bank 35"
+ROMX $36
+	"Bank 36"
+ROMX $37
+	"Bank 37"
+ROMX $38
+	"Bank 38"
+ROMX $39
+	"Bank 39"
+ROMX $3a
+	"Bank 3A"
+ROMX $3b
+	"Bank 3B"
+ROMX $3c
+	"Bank 3C"
+ROMX $3d
+	"Bank 3D"
+ROMX $3e
+	"Bank 3E"
+ROMX $3f
+	"Bank 3F"
+ROMX $40
+	"Bank 40"
+ROMX $41
+	"Bank 41"
+ROMX $42
+	"Bank 42"
+ROMX $43
+	"Bank 43"
+ROMX $44
+	"Bank 44"
+ROMX $45
+	"Bank 45"
+ROMX $46
+	"Bank 46"
+ROMX $47
+	"Bank 47"
+ROMX $48
+	"Bank 48"
+ROMX $49
+	"Bank 49"
+ROMX $4a
+	"Bank 4A"
+ROMX $4b
+	"Bank 4B"
+ROMX $4c
+	"Bank 4C"
+ROMX $4d
+	"Bank 4D"
+ROMX $4e
+	"Room Special Tiles 1"
+ROMX $4f
+	"Room Special Tiles 2"
+ROMX $50
+	"Permission Maps 2"
+ROMX $51
+	"Room Main Tiles 1"
+ROMX $52
+	"Room Main Tiles 2"
+ROMX $53
+	"Room Main Tiles 3"
+ROMX $54
+	"Room Main Tiles 4"
+ROMX $55
+	"Room Main Tiles 5"
+ROMX $56
+	"Bank 56"
+ROMX $57
+	"Bank 57"
+ROMX $58
+	"Bank 58"
+ROMX $59
+	"Bank 59"
+ROMX $60
+	"Bank 60"
+ROMX $61
+	"Bank 61"
+ROMX $62
+	"Bank 62"
+ROMX $63
+	"Bank 63"
+ROMX $64
+	"Bank 64"
+ROMX $65
+	"Bank 65"
+ROMX $68
+	"Enemy Gfx 1"
+ROMX $69
+	"Enemy Gfx 2"
+ROMX $6a
+	"Enemy Gfx 3"
+ROMX $6b
+	"Enemy Gfx 4"
+ROMX $6c
+	"Enemy Gfx 5"
+ROMX $6d
+	"Enemy Gfx 6"
+ROMX $6e
+	"Enemy Gfx 7"
+ROMX $6f
+	"Enemy Gfx 8"
+ROMX $70
+	"Bank 70"
+ROMX $71
+	"Bank 71"
+ROMX $72
+	"Bank 72"
+ROMX $76
+	"Bank 76"
+ROMX $77
+	"Bank 77"
+ROMX $78
+	"Bank 78"
+ROMX $79
+	"Bank 79"
+ROMX $7a
+	"Bank 7A"
+ROMX $7b
+	"Bank 7B"
+ROMX $7c
+	"Bank 7C"
+ROMX $7d
+	"Bank 7D"
+ROMX $7e
+	"Bank 7E"
+ROMX $7f
+	"Bank 7F"
+WRAM0
+	"WRAM0"
+WRAMX 1
+	"WRAM1"
+WRAMX 2
+	"WRAM2"
+WRAMX 3
+	"Audio RAM"
+VRAM $00
+	"VRAM0"
+VRAM $01
+	"VRAM1"
+SRAM $00
+	"SRAM0"
+SRAM $01
+	"SRAM1"
+HRAM
+	"HRAM"

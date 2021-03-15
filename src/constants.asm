@@ -1,0 +1,7 @@
+INCLUDE "constants/audio_constants.asm"
+INCLUDE "constants/gfx_constants.asm"
+INCLUDE "constants/hardware_constants.asm"
+INCLUDE "constants/level_constants.asm"
+INCLUDE "constants/misc_constants.asm"
+INCLUDE "constants/sound_constants.asm"
+INCLUDE "constants/treasure_constants.asm"
