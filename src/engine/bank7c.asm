@@ -73,9 +73,9 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld a, [wAnimatedTilesGroup]
 	ld [$d510], a
 	ld a, $ff
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $00
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ld a, $00
 	ldh [hffb1], a
 	ld a, $25

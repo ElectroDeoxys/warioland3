@@ -40,11 +40,8 @@ hffb2:: ; ffb2
 
 	ds $2
 
-hffb5:: ; ffb5
-	ds $1
-
-hffb6:: ; ffb6
-	ds $1
+hSoundID:: ; ffb5
+	ds $2
 
 	ds $31
 

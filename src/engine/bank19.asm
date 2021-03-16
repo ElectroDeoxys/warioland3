@@ -287,7 +287,148 @@ Func_640e5: ; 640e5 (19:40e5)
 	ret
 ; 0x64187
 
-	INCROM $64187, $643a1
+Func_64187: ; 64187 (19:4187)
+	ld h, $d0
+	ld l, $00
+	ld a, [hl]
+	rra
+	jr nc, .asm_641a9
+	rla
+	rla
+	rla
+	jr nc, .asm_64198
+	xor a
+	ld [hl], a
+	jr .asm_641a9
+.asm_64198
+	inc l
+	inc l
+	farcall Func_baee
+
+.asm_641a9
+	ld l, $20
+	ld a, [hl]
+	rra
+	jr nc, .asm_641c9
+	rla
+	rla
+	rla
+	jr nc, .asm_641b8
+	xor a
+	ld [hl], a
+	jr .asm_641c9
+.asm_641b8
+	inc l
+	inc l
+	farcall Func_baee
+
+.asm_641c9
+	ld l, $40
+	ld a, [hl]
+	rra
+	jr nc, .asm_641e9
+	rla
+	rla
+	rla
+	jr nc, .asm_641d8
+	xor a
+	ld [hl], a
+	jr .asm_641e9
+.asm_641d8
+	inc l
+	inc l
+	farcall Func_baee
+
+.asm_641e9
+	ld l, $60
+	ld a, [hl]
+	rra
+	jr nc, .asm_64209
+	rla
+	rla
+	rla
+	jr nc, .asm_641f8
+	xor a
+	ld [hl], a
+	jr .asm_64209
+.asm_641f8
+	inc l
+	inc l
+	farcall Func_baee
+
+.asm_64209
+	ld l, $80
+	ld a, [hl]
+	rra
+	jr nc, .asm_64229
+	rla
+	rla
+	rla
+	jr nc, .asm_64218
+	xor a
+	ld [hl], a
+	jr .asm_64229
+.asm_64218
+	inc l
+	inc l
+	farcall Func_baee
+
+.asm_64229
+	ld l, $a0
+	ld a, [hl]
+	rra
+	jr nc, .asm_64249
+	rla
+	rla
+	rla
+	jr nc, .asm_64238
+	xor a
+	ld [hl], a
+	jr .asm_64249
+.asm_64238
+	inc l
+	inc l
+	farcall Func_baee
+
+.asm_64249
+	ld l, $c0
+	ld a, [hl]
+	rra
+	jr nc, .asm_64269
+	rla
+	rla
+	rla
+	jr nc, .asm_64258
+	xor a
+	ld [hl], a
+	jr .asm_64269
+.asm_64258
+	inc l
+	inc l
+	farcall Func_baee
+
+.asm_64269
+	ld l, $e0
+	ld a, [hl]
+	rra
+	jr nc, .asm_64289
+	rla
+	rla
+	rla
+	jr nc, .asm_64278
+	xor a
+	ld [hl], a
+	jr .asm_64289
+.asm_64278
+	inc l
+	inc l
+	farcall Func_baee
+
+.asm_64289
+	ret
+; 0x6428a
+
+	INCROM $6428a, $643a1
 
 ; loads a pointer to w1d126
 Func_643a1: ; 643a1 (19:43a1)

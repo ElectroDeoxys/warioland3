@@ -1,5 +1,5 @@
 Func_28000: ; 28000 (a:4000)
-	ld a, [wca83]
+	ld a, [wWarioState]
 	sub $60
 	jumptable
 

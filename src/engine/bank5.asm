@@ -304,7 +304,86 @@ Frameset_14d18: ; 14d18 (5:4d18)
 	db $ff
 ; 0x14d1b
 
-	INCROM $14d1b, $158d6
+	INCROM $14d1b, $151e4
+
+Frameset_151e4:
+	db $00, $01
+	db $01, $01
+	db $02, $01
+	db $03, $01
+	db $00, $01
+	db $01, $01
+	db $02, $01
+	db $03, $01
+	db $04, $01
+	db $05, $01
+	db $06, $01
+	db $07, $01
+	db $ff
+
+Frameset_151fd:
+	db $08, $01
+	db $09, $02
+	db $0a, $01
+	db $0b, $01
+	db $08, $01
+	db $09, $02
+	db $0a, $01
+	db $0b, $01
+	db $0c, $02
+	db $0d, $01
+	db $0e, $01
+	db $0f, $01
+	db $ff
+
+Frameset_15216:
+	db $02, $04
+	db $ff
+
+Frameset_15219:
+	db $0a, $01
+	db $ff
+
+Frameset_1521c:
+	db $10, $01
+	db $11, $01
+	db $12, $01
+	db $13, $01
+	db $14, $01
+	db $15, $01
+	db $02, $01
+	db $03, $01
+	db $ff
+
+Frameset_1522d:
+	db $16, $01
+	db $17, $01
+	db $18, $01
+	db $19, $01
+	db $1a, $01
+	db $1b, $01
+	db $0a, $01
+	db $0b, $01
+	db $ff
+
+Frameset_1523e:
+	db $1c, $01
+	db $1d, $01
+	db $12, $01
+	db $1e, $01
+	db $02, $01
+	db $ff
+
+Frameset_15249:
+	db $1f, $01
+	db $20, $01
+	db $21, $01
+	db $22, $01
+	db $0a, $01
+	db $ff
+; 0x15254
+
+	INCROM $15254, $158d6
 
 Frameset_158d6: ; 158d6 (5:58d6)
 	db $00, $03
@@ -341,7 +420,7 @@ Frameset_15900: ; 15900 (5:5900)
 	db $03, $04
 	db $ff
 
-Frameset_159003: ; 159003 (5:19003)
+Frameset_159003: ; 159003 (5:5903)
 	db $0a, $08
 	db $0b, $0a
 	db $0c, $0a

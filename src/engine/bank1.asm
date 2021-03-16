@@ -549,17 +549,17 @@ Func_42ed: ; 42ed (1:42ed)
 	and a
 	jr nz, .asm_436c
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $23
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 .asm_436c
 	ld hl, wcee5
 	dec [hl]
 	jr nz, .asm_4394
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $f9
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ld hl, wUnkObjUnknown2
 	xor a
 	ld [hli], a
@@ -610,9 +610,9 @@ Func_43c8: ; 43c8 (1:43c8)
 	and a
 	jp z, Func_4497
 	ld a, $02
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $19
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ld hl, wUnkObjUnknown2
 	xor a
 	ld [hli], a
@@ -686,9 +686,9 @@ Func_442f: ; 442f (1:442f)
 	cp $70
 	jr c, Func_4497
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $61
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ld hl, wUnkObjUnknown2
 	xor a
 	ld [hli], a
@@ -988,8 +988,8 @@ Func_4640: ; 4640 (1:4640)
 
 Func_4670: ; 4670 (1:4670)
 	call Func_4d7f
-	ld a, [wc094]
-	bit 0, a
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
 	ret z
 	call DisableLCD
 	call FillWhiteBGPal
@@ -1012,9 +1012,9 @@ Func_4686: ; 4686 (1:4686)
 	cp $02
 	ret nz
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $e3
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	call Func_4ae7
 	ld a, [wLevel]
 	cp $ff
@@ -1030,9 +1030,9 @@ Func_4686: ; 4686 (1:4686)
 
 .final_battle
 	ld a, $ff
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $00
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 ; 0x46cc
 
@@ -1270,15 +1270,16 @@ Func_4857: ; 4857 (1:4857)
 ; 0x48c9
 
 Func_48c9: ; 48c9 (1:48c9)
-	ld a, [wc094]
-	bit 0, a
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
 	jp nz, Func_4619
-	bit 7, a
-	jr nz, .asm_48db
-	bit 6, a
-	jr nz, .asm_48e8
+	bit D_DOWN_F, a
+	jr nz, .down
+	bit D_UP_F, a
+	jr nz, .up
 	jr .asm_4907
-.asm_48db
+
+.down
 	ld a, [wca46]
 	and a
 	ret z
@@ -1286,7 +1287,8 @@ Func_48c9: ; 48c9 (1:48c9)
 	ld [wObj0YCoord], a
 	xor a
 	jr .asm_48f7
-.asm_48e8
+
+.up
 	ld a, [wca46]
 	dec a
 	ret z
@@ -1299,9 +1301,9 @@ Func_48c9: ; 48c9 (1:48c9)
 	add $80
 	ld [wcee4], a
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $e2
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 .asm_4907
 	ld hl, wObj0End - 1
 	call Func_145a
@@ -1642,24 +1644,25 @@ Func_4bb3: ; 4bb3 (1:4bb3)
 	jp nz, .asm_4c81
 	bit 6, a
 	jp nz, .asm_4c96
-	ld a, [wc094]
-	bit 0, a
+
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
 	jr nz, .asm_4bdd
-	bit 7, a
+	bit D_DOWN_F, a
 	jr nz, .asm_4c08
-	bit 6, a
+	bit D_UP_F, a
 	jr nz, .asm_4c15
-	bit 4, a
+	bit D_RIGHT_F, a
 	jr nz, .asm_4c39
-	bit 5, a
+	bit D_LEFT_F, a
 	jr nz, .asm_4c29
 	ret
 
 .asm_4bdd
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $e3
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ld hl, w3d513
 	ld a, [hl]
 	and $0f
@@ -1697,9 +1700,9 @@ Func_4bb3: ; 4bb3 (1:4bb3)
 
 .asm_4c20
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $e2
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 
 .asm_4c29
@@ -2073,9 +2076,9 @@ Func_4e5e: ; 4e5e (1:4e5e)
 	ld a, $0c
 	ld [w3d522], a
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $f6
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 .asm_4e80
 	ret
 
@@ -2087,9 +2090,9 @@ Func_4e81: ; 4e81 (1:4e81)
 	ld a, $0c
 	ld [w3d522], a
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $f7
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 .asm_4e98
 	ret
 
@@ -2101,9 +2104,9 @@ Func_4e99: ; 4e99 (1:4e99)
 	ld a, $0c
 	ld [w3d522], a
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $f8
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 .asm_4eb0
 	ret
 ; 0x4eb1

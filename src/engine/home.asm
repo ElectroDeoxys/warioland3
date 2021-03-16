@@ -199,10 +199,10 @@ Init: ; 15e (0:15e)
 	jr .asm_21d
 .asm_21a
 	call Func_1690
-
 .asm_21d
+
 	xor a
-	ld [wc094], a
+	ld [wJoypadPressed], a
 	call FillWhiteBGPal
 	ld a, LCDC_ON
 	ldh [rLCDC], a
@@ -211,14 +211,17 @@ Init: ; 15e (0:15e)
 	ei
 
 .asm_22d
-	call Func_3d8
+	call UpdateJoypad
 	ld a, [wc09a]
 	and a
 	jr nz, .asm_24e
-	ld a, [wc093]
-	and JOY_INPUT_MASK
-	cp $0f
+
+; restart the game if all four buttons are down
+	ld a, [wJoypadDown]
+	and BUTTONS
+	cp A_BUTTON | B_BUTTON | SELECT | START
 	jr nz, .asm_24e
+	; restart game
 	call Func_1002
 	ld bc, SOUND_OFF
 	call Func_ff4
@@ -266,7 +269,7 @@ HandleSound: ; 290 (0:290)
 	ld a, [wc090]
 	and a
 	ret nz
-	ld hl, hffb5
+	ld hl, hSoundID
 	ld a, [hli]
 	cp $ff
 	jr nz, .asm_2a2
@@ -440,40 +443,56 @@ ClearVirtualOAM: ; 3b9 (0:3b9)
 	ret
 ; 0x3d8
 
-Func_3d8: ; 3d8 (0:3d8)
-	ld a, JOY_BTNS_SELECT
+UpdateJoypad: ; 3d8 (0:3d8)
+; read the joypad register and translate it to something more
+; workable for use in-game. There are 8 buttons, so we can use
+; one byte to contain all player input.
+
+; can only get four inputs at a time
+; take d-pad first
+	ld a, R_DPAD
 	ldh [rJOYP], a
+
+; read a couple of times to give some time
+rept 4
 	ldh a, [rJOYP]
-	ldh a, [rJOYP]
-	ldh a, [rJOYP]
-	ldh a, [rJOYP]
+endr
+
+; the Joypad register output is in the lo nybble (inverted)
+; make the hi nybble of our new container d-pad input
 	cpl
 	and JOY_INPUT_MASK
 	swap a
 	ld b, a
-	ld a, JOY_DPAD_SELECT
+
+; buttons make 8 total inputs (A, B, Select, Start)
+; we can fit this into one byte
+	ld a, R_BUTTONS
 	ldh [rJOYP], a
+
+; read a couple of times to give some time
+rept 10
 	ldh a, [rJOYP]
-	ldh a, [rJOYP]
-	ldh a, [rJOYP]
-	ldh a, [rJOYP]
-	ldh a, [rJOYP]
-	ldh a, [rJOYP]
-	ldh a, [rJOYP]
-	ldh a, [rJOYP]
-	ldh a, [rJOYP]
-	ldh a, [rJOYP]
+endr
+
+; input is in the lo nybble
 	cpl
 	and JOY_INPUT_MASK
 	or b
 	ld c, a
-	ld a, [wc093]
+
+	ld a, [wJoypadDown]
+	; xor-ing then and-ing makes it so only
+	; bits set this frame remain set
 	xor c
 	and c
-	ld [wc094], a
+	ld [wJoypadPressed], a
+	; set the inputs which are pressed down
 	ld a, c
-	ld [wc093], a
-	ld a, JOY_BTNS_SELECT | JOY_DPAD_SELECT
+	ld [wJoypadDown], a
+
+; reset joypad
+	ld a, $30
 	ldh [rJOYP], a
 	ret
 ; 0x418
@@ -1298,9 +1317,9 @@ Func_928: ; 928 (0:928)
 	ld a, $00
 	ldh [hffb2], a
 	ld a, $ff
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $00
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ld hl, wSubSequence
 	inc [hl]
 	jr .asm_95a
@@ -1802,7 +1821,14 @@ Func_c4c: ; c4c (0:c4c)
 	ret
 ; 0xcab
 
-	INCROM $cab, $cc0
+	INCROM $cab, $cb8
+
+Func_cb8: ; cb8 (0:cb8)
+	xor a
+	ld [wce00], a
+	ld [wce69], a
+	ret
+; 0xcc0
 
 Func_cc0: ; cc0 (0:cc0)
 	ld a, [hli]
@@ -2475,7 +2501,71 @@ Func_114e: ; 114e (0:114e)
 	ret
 ; 0x1169
 
-	INCROM $1169, $12c3
+	INCROM $1169, $11f6
+
+Func_11f6: ; 11f6 (0:11f6)
+	xor a
+	ld [wca9a], a
+	ld [wc1b1], a
+	ld [wced9], a
+	ld [wcee0], a
+	ld [wcee1], a
+	ld [wcee2], a
+	ld [wcac3], a
+	ld [wc0e6], a
+	inc a
+	ld [wca8a], a
+	ld a, [wc0d7]
+	bit 7, a
+	ret nz
+	ld hl, wSubSequence
+	ld a, [wc0d7]
+	bit 5, a
+	jr z, .asm_1246
+	inc [hl]
+	farcall Func_8e06
+	ldh a, [rSVBK]
+	push af
+	ld a, $03
+	ldh [rSVBK], a
+	ld a, h
+	ld [$d508], a
+	ld a, l
+	ld [$d507], a
+	pop af
+	ldh [rSVBK], a
+	ret
+
+.asm_1246
+	inc [hl]
+	inc [hl]
+	ld a, $ff
+	ldh [hffb1], a
+	ld a, $00
+	ldh [hffb2], a
+	ld a, $ff
+	ldh [hSoundID + 0], a
+	ld a, $00
+	ldh [hSoundID + 1], a
+	ret
+; 0x1259
+
+	INCROM $1259, $129e
+
+Func_129e: ; 129e (0:129e)
+	ld a, [wc0c2]
+	sub b
+	ld [wc0c2], a
+	ld a, [wca62]
+	sub b
+	ld [wca62], a
+	ld a, [wca61]
+	sbc $00
+	ld [wca61], a
+	ret
+; 0x12b5
+
+	INCROM $12b5, $12c3
 
 ; clears wcca0
 Func_12c3: ; 12c3 (0:12c3)
@@ -3564,7 +3654,74 @@ endr
 	ret
 ; 0x2b25
 
-	INCROM $2b25, $3104
+	INCROM $2b25, $3000
+
+Func_3000: ; 3000 (0:3000)
+	ld a, [wROMBank]
+	push af
+	ld a, [hl]
+	swap a
+	and $07
+	or $60
+	ld [wROMBank], a
+	ld [$2100], a
+	ld l, e
+	ld a, [hli]
+	ld [wCurSpriteYOffset], a
+	ld a, [hli]
+	ld [wCurSpriteXOffset], a
+	ld a, [hli]
+	ld [wc098], a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [wc098]
+	ld d, $00
+	add a
+	ld e, a
+	add hl, de
+	ld a, [hli]
+	ld e, a
+	ld d, [hl]
+	ld hl, wCurSpriteXOffset
+	ld a, [hld]
+	ld c, a
+	ld a, [hld]
+	ld b, a
+	ld l, [hl]
+	ld h, $cc
+.asm_3036
+	ld a, l
+	cp $a0
+	jr nc, .asm_3054
+	ld a, [de]
+	cp $80
+	jr z, .asm_3054
+	ld a, [de]
+	add b
+	ld [hli], a
+	inc de
+	ld a, [de]
+	add c
+	ld [hli], a
+	inc de
+	ld a, [de]
+	ld [hli], a
+	inc de
+	ld a, [de]
+	ld [hli], a
+	ld a, l
+	ld [wNumOAMSprites], a
+	inc de
+	jr .asm_3036
+.asm_3054
+	pop af
+	ld [wROMBank], a
+	ld [$2100], a
+	ret
+; 0x305c
+
+	INCROM $305c, $3104
 
 Func_3104: ; 3104 (0:3104)
 	ld hl, $d114

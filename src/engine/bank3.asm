@@ -155,13 +155,7 @@ Func_d132: ; d132 (3:5132)
 	push af
 	ld a, $01
 	ldh [rSVBK], a
-	ld a, $19
-	ldh [hCallFuncBank], a
-	ld a, $e5
-	ldh [hCallFuncPointer], a
-	ld a, $40
-	ldh [$ff8e], a
-	call hCallFunc
+	farcall Func_640e5
 	pop af
 	ldh [rSVBK], a
 	pop hl
@@ -221,13 +215,7 @@ Func_d19e: ; d19e (3:519e)
 	push af
 	ld a, $01
 	ldh [rSVBK], a
-	ld a, $19
-	ldh [hCallFuncBank], a
-	ld a, $e5
-	ldh [hCallFuncPointer], a
-	ld a, $40
-	ldh [$ff8e], a
-	call hCallFunc
+	farcall Func_640e5
 	pop af
 	ldh [rSVBK], a
 	pop hl

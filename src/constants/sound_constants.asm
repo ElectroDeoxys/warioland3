@@ -60,3 +60,51 @@
 	const MUSIC_OUTRO                      ; 038
 	const MUSIC_HIDDEN_FIGURE_REVEAL       ; 039
 	const MUSIC_HIDDEN_FIGURE_BATTLE_2     ; 03a
+
+	const_def $101
+	const SFX_01                           ; 101
+	const SFX_02                           ; 102
+	const SFX_03                           ; 103
+	const SFX_04                           ; 104
+	const SFX_05                           ; 105
+	const SFX_06                           ; 106
+	const SFX_07                           ; 107
+	const SFX_08                           ; 108
+	const SFX_09                           ; 109
+	const SFX_0a                           ; 10a
+	const SFX_0b                           ; 10b
+	const SFX_0c                           ; 10c
+	const SFX_0d                           ; 10d
+	const SFX_0e                           ; 10e
+	const SFX_0f                           ; 10f
+	const SFX_10                           ; 110
+	const SFX_11                           ; 111
+	const SFX_12                           ; 112
+	const SFX_13                           ; 113
+	const SFX_14                           ; 114
+	const SFX_15                           ; 115
+	const SFX_16                           ; 116
+	const SFX_17                           ; 117
+	const SFX_18                           ; 118
+	const SFX_19                           ; 119
+	const SFX_1a                           ; 11a
+	const SFX_1b                           ; 11b
+	const SFX_1c                           ; 11c
+	const SFX_1d                           ; 11d
+	const SFX_1e                           ; 11e
+	const SFX_1f                           ; 11f
+	const SFX_21                           ; 121
+	const SFX_22                           ; 122
+	const SFX_23                           ; 123
+	const SFX_24                           ; 124
+	const SFX_25                           ; 125
+	const SFX_26                           ; 126
+	const SFX_27                           ; 127
+	const SFX_28                           ; 128
+	const SFX_29                           ; 129
+	const SFX_2a                           ; 12a
+	const SFX_2b                           ; 12b
+	const SFX_2c                           ; 12c
+	const SFX_2d                           ; 12d
+	const SFX_2e                           ; 12e
+	const SFX_2f                           ; 12f

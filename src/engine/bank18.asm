@@ -606,7 +606,173 @@ Func_61513: ; 61513 (18:5513)
 	ret
 ; 0x6164e
 
-	INCROM $6164e, $61760
+Func_6164e: ; 6164e (18:564e)
+	ld hl, w1d000
+	ld a, [hl]
+	and $93
+	cp $83
+	jr nz, .asm_6165f
+	ld e, $0d
+	ld l, $07
+	call Func_3000
+
+.asm_6165f
+	ld hl, w1d020Unk00
+	ld a, [hl]
+	and $93
+	cp $83
+	jr nz, .asm_61670
+	ld e, $2d
+	ld l, $27
+	call Func_3000
+
+.asm_61670
+	ld hl, w1d040
+	ld a, [hl]
+	and $93
+	cp $83
+	jr nz, .asm_61681
+	ld e, $4d
+	ld l, $47
+	call Func_3000
+
+.asm_61681
+	ld hl, w1d060Unk00
+	ld a, [hl]
+	and $93
+	cp $83
+	jr nz, .asm_61692
+	ld e, $6d
+	ld l, $67
+	call Func_3000
+
+.asm_61692
+	ld hl, w1d080Unk00
+	ld a, [hl]
+	and $93
+	cp $83
+	jr nz, .asm_616a3
+	ld e, $8d
+	ld l, $87
+	call Func_3000
+
+.asm_616a3
+	ld hl, w1d0a0Unk00
+	ld a, [hl]
+	and $93
+	cp $83
+	jr nz, .asm_616b4
+	ld e, $ad
+	ld l, $a7
+	call Func_3000
+
+.asm_616b4
+	ld hl, w1d0c0Unk00
+	ld a, [hl]
+	and $93
+	cp $83
+	jr nz, .asm_616c5
+	ld e, $cd
+	ld l, $c7
+	call Func_3000
+
+.asm_616c5
+	ld hl, w1d0e0
+	ld a, [hl]
+	and $93
+	cp $83
+	jr nz, .asm_616d6
+	ld e, $ed
+	ld l, $e7
+	call Func_3000
+
+.asm_616d6
+	ret
+; 0x616d7
+
+Func_616d7: ; 616d7 (18:56d7)
+	ld hl, w1d000
+	ld a, [hl]
+	and $93
+	cp $03
+	jr nz, .asm_616e8
+	ld e, $0d
+	ld l, $07
+	call Func_3000
+
+.asm_616e8
+	ld hl, w1d020Unk00
+	ld a, [hl]
+	and $93
+	cp $03
+	jr nz, .asm_616f9
+	ld e, $2d
+	ld l, $27
+	call Func_3000
+
+.asm_616f9
+	ld hl, w1d040
+	ld a, [hl]
+	and $93
+	cp $03
+	jr nz, .asm_6170a
+	ld e, $4d
+	ld l, $47
+	call Func_3000
+
+.asm_6170a
+	ld hl, w1d060Unk00
+	ld a, [hl]
+	and $93
+	cp $03
+	jr nz, .asm_6171b
+	ld e, $6d
+	ld l, $67
+	call Func_3000
+
+.asm_6171b
+	ld hl, w1d080Unk00
+	ld a, [hl]
+	and $93
+	cp $03
+	jr nz, .asm_6172c
+	ld e, $8d
+	ld l, $87
+	call Func_3000
+
+.asm_6172c
+	ld hl, w1d0a0Unk00
+	ld a, [hl]
+	and $93
+	cp $03
+	jr nz, .asm_6173d
+	ld e, $ad
+	ld l, $a7
+	call Func_3000
+
+.asm_6173d
+	ld hl, w1d0c0Unk00
+	ld a, [hl]
+	and $93
+	cp $03
+	jr nz, .asm_6174e
+	ld e, $cd
+	ld l, $c7
+	call Func_3000
+
+.asm_6174e
+	ld hl, w1d0e0
+	ld a, [hl]
+	and $93
+	cp $03
+	jr nz, .asm_6175f
+	ld e, $ed
+	ld l, $e7
+	call Func_3000
+
+.asm_6175f
+	ret
+; 0x61760
 
 Func_61760: ; 61760 (18:5760)
 	ld a, [w1d100 + $1c]
@@ -852,9 +1018,9 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld l, $00
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 .asm_61a16
 	ld a, [$d020]
@@ -915,9 +1081,9 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld l, $20
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 .asm_61a86
 	ld a, [$d040]
@@ -978,9 +1144,9 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld l, $40
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 .asm_61af6
 	ld a, [$d060]
@@ -1041,9 +1207,9 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld l, $60
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 .asm_61b66
 	ld a, [$d080]
@@ -1104,9 +1270,9 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld l, $80
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 .asm_61bd6
 	ld a, [$d0a0]
@@ -1167,9 +1333,9 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld l, $a0
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 .asm_61c46
 	ld a, [$d0c0]
@@ -1230,9 +1396,9 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld l, $c0
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 .asm_61cb6
 	ld a, [$d0e0]
@@ -1293,9 +1459,9 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld l, $e0
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 
 .asm_61d26
@@ -1314,9 +1480,9 @@ Func_61d28: ; 61d28 (18:5d28)
 	ld l, $00
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 ; 0x61d41
 
@@ -1331,9 +1497,9 @@ Func_61d41: ; 61d41 (18:5d41)
 	ld l, $20
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 ; 0x61d5a
 
@@ -1348,9 +1514,9 @@ Func_61d5a: ; 61d5a (18:5d5a)
 	ld l, $40
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 ; 0x61d73
 
@@ -1365,9 +1531,9 @@ Func_61d73: ; 61d73 (18:5d73)
 	ld l, $60
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 ; 0x61d8c
 
@@ -1382,9 +1548,9 @@ Func_61d8c: ; 61d8c (18:5d8c)
 	ld l, $80
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 ; 0x61da5
 
@@ -1399,9 +1565,9 @@ Func_61da5: ; 61da5 (18:5da5)
 	ld l, $a0
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 ; 0x61dbe
 
@@ -1416,9 +1582,9 @@ Func_61dbe: ; 61dbe (18:5dbe)
 	ld l, $c0
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 ; 0x61dd7
 
@@ -1433,9 +1599,9 @@ Func_61dd7: ; 61dd7 (18:5dd7)
 	ld l, $e0
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 ; 0x61df0
 
@@ -1458,9 +1624,9 @@ Func_61df0: ; 61df0 (18:5df0)
 	ld l, $00
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 ; 0x61e14
 
@@ -1483,9 +1649,9 @@ Func_61e14: ; 61e14 (18:5e14)
 	ld l, $20
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 ; 0x61e38
 
@@ -1508,9 +1674,9 @@ Func_61e38: ; 61e38 (18:5e38)
 	ld l, $40
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 ; 0x61e5c
 
@@ -1533,9 +1699,9 @@ Func_61e5c: ; 61e5c (18:5e5c)
 	ld l, $60
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 ; 0x61e80
 
@@ -1558,9 +1724,9 @@ Func_61e80: ; 61e80 (18:5e80)
 	ld l, $80
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 ; 0x61ea4
 
@@ -1583,9 +1749,9 @@ Func_61ea4: ; 61ea4 (18:5ea4)
 	ld l, $a0
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 ; 0x61ec8
 
@@ -1608,9 +1774,9 @@ Func_61ec8: ; 61ec8 (18:5ec8)
 	ld l, $c0
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 ; 0x61eec
 
@@ -1633,9 +1799,9 @@ Func_61eec: ; 61eec (18:5eec)
 	ld l, $e0
 	set 3, [hl]
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $16
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 ; 0x61f10
 
@@ -1652,7 +1818,17 @@ Func_61f10: ; 61f10 (18:5f10)
 	ret
 ; 0x61f2a
 
-	INCROM $61f2a, $61f41
+Func_61f2a: ; 61f2a (18:5f2a)
+	xor a
+	call Func_61f41 ; clears whole w1d000
+	call Func_61f4a ; clears whole w1d120
+	ld [w1d141], a
+	ld [w1d142], a
+	ld [w1d143], a
+	ld [w1d144], a
+	ld [w1d145], a
+	ret
+; 0x61f41
 
 Func_61f41: ; 61f41 (18:5f41)
 	ld hl, w1d000

@@ -67,10 +67,10 @@ wVBlankFuncExecuted:: ; c091
 wEnableVBlankFunc:: ; c092
 	ds $1
 
-wc093:: ; c093
+wJoypadDown:: ; c093
 	ds $1
 
-wc094:: ; c094
+wJoypadPressed:: ; c094
 	ds $1
 
 ; number of elements that wVirtualOAM holds
@@ -443,7 +443,16 @@ wc1c4:: ; c1c4
 wc1c6:: ; c1c6
 	ds $1
 
-	ds $39
+wLadderInteraction:: ; c1c7
+	ds $1
+
+wc1c8:: ; c1c8
+	ds $1
+
+wc1c9:: ; c1c9
+	ds $1
+
+	ds $36
 
 ; function called on V-Blank
 wVBlankFunc:: ; c200
@@ -547,7 +556,10 @@ wFrameDuration:: ; ca67
 wca68:: ; ca68
 	ds $1
 
-wca69:: ; ca69
+; which way Wario is facing
+; DIRECTION_LEFT  = 0
+; DIRECTION_RIGHT = 1
+wDirection:: ; ca69
 	ds $1
 
 wca6a:: ; ca6a
@@ -586,7 +598,10 @@ wca74:: ; ca74
 wca75:: ; ca75
 	ds $1
 
-	ds $2
+	ds $1
+
+wca77:: ; ca77
+	ds $1
 
 wca78:: ; ca78
 	ds $1
@@ -598,7 +613,7 @@ wca79:: ; ca79
 wca7b:: ; ca7b
 	ds $1
 
-wca7c:: ; ca7d
+wca7c:: ; ca7c
 	ds $2
 
 wca7e:: ; ca7e
@@ -610,13 +625,19 @@ wca7f:: ; ca7f
 wFramesetPtr:: ; ca81
 	ds $2
 
-wca83:: ; ca83
+; a STATE_* constant, corresponding
+; to Wario's current state
+wWarioState:: ; ca83
 	ds $1
 
-wca84:: ; ca84
+; increments every frame
+; that Wario is in the idle state
+wIdleCounter:: ; ca84
 	ds $1
 
-wca85:: ; ca85
+; counts how many times wIdleCounter overflows
+; used for knowing how long Wario is idling
+wIdleCycles:: ; ca85
 	ds $1
 
 wca86:: ; ca86
@@ -690,7 +711,10 @@ wca9c:: ; ca9c
 wca9d:: ; ca9d
 	ds $1
 
-	ds $3
+	ds $2
+
+wcaa0:: ; caa0
+	ds $1
 
 wcaa1:: ; caa1
 	ds 4 palettes
@@ -853,6 +877,7 @@ wce6a:: ; ce6a
 wced2:: ; ced2
 	ds $1
 
+wced3:: ; ced3
 	ds $1
 
 wced4:: ; ced4

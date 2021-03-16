@@ -157,13 +157,7 @@ Func_80aa: ; 80aa (2:40aa)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	ld a, $18
-	ldh [hCallFuncBank], a
-	ld a, $4e
-	ldh [hCallFuncPointer], a
-	ld a, $56
-	ldh [$ff8e], a
-	call hCallFunc
+	farcall Func_6164e
 	pop af
 	ldh [rSVBK], a
 
@@ -172,13 +166,7 @@ Func_80aa: ; 80aa (2:40aa)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	ld a, $18
-	ldh [hCallFuncBank], a
-	ld a, $d7
-	ldh [hCallFuncPointer], a
-	ld a, $56
-	ldh [$ff8e], a
-	call hCallFunc
+	farcall Func_616d7
 	pop af
 
 	ldh [rSVBK], a
@@ -251,7 +239,7 @@ Func_80aa: ; 80aa (2:40aa)
 .asm_8229
 	ld a, [wSRAMBank]
 	push af
-	ld a, $01
+	ld a, BANK("SRAM1")
 	sramswitch
 	call Func_8ed9
 	call Func_bb85
@@ -346,9 +334,11 @@ Func_80aa: ; 80aa (2:40aa)
 	ld a, [wc0d7]
 	and a
 	ret nz
-	ld a, [wc094]
-	and $0c
+
+	ld a, [wJoypadPressed]
+	and SELECT | START
 	ret z
+
 	ld a, [wca8e]
 	cp $53
 	jr z, .asm_82ff
@@ -361,16 +351,16 @@ Func_80aa: ; 80aa (2:40aa)
 
 .asm_82ff
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $e5
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ret
 
 .asm_8308
 	ld a, $01
-	ldh [hffb5], a
+	ldh [hSoundID + 0], a
 	ld a, $e4
-	ldh [hffb6], a
+	ldh [hSoundID + 1], a
 	ld a, $ff
 	ldh [hffb1], a
 	ld a, $00
@@ -419,13 +409,7 @@ Func_80aa: ; 80aa (2:40aa)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	ld a, $18
-	ldh [hCallFuncBank], a
-	ld a, $4e
-	ldh [hCallFuncPointer], a
-	ld a, $56
-	ldh [$ff8e], a
-	call hCallFunc
+	farcall Func_6164e
 	pop af
 	ldh [rSVBK], a
 
@@ -434,13 +418,7 @@ Func_80aa: ; 80aa (2:40aa)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	ld a, $18
-	ldh [hCallFuncBank], a
-	ld a, $d7
-	ldh [hCallFuncPointer], a
-	ld a, $56
-	ldh [$ff8e], a
-	call hCallFunc
+	farcall Func_616d7
 	pop af
 	ldh [rSVBK], a
 
@@ -483,13 +461,7 @@ Func_80aa: ; 80aa (2:40aa)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	ld a, $18
-	ldh [hCallFuncBank], a
-	ld a, $4e
-	ldh [hCallFuncPointer], a
-	ld a, $56
-	ldh [$ff8e], a
-	call hCallFunc
+	farcall Func_6164e
 	pop af
 	ldh [rSVBK], a
 
@@ -498,13 +470,7 @@ Func_80aa: ; 80aa (2:40aa)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	ld a, $18
-	ldh [hCallFuncBank], a
-	ld a, $d7
-	ldh [hCallFuncPointer], a
-	ld a, $56
-	ldh [$ff8e], a
-	call hCallFunc
+	farcall Func_616d7
 	pop af
 	ldh [rSVBK], a
 
@@ -541,24 +507,12 @@ Func_846e: ; 846e (2:446e)
 	ret
 .asm_849d
 	call DisableLCD
-	ld a, $19
-	ldh [hCallFuncBank], a
-	ld a, $87
-	ldh [hCallFuncPointer], a
-	ld a, $41
-	ldh [$ff8e], a
-	call hCallFunc
+	farcall Func_64187
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	ld a, $18
-	ldh [hCallFuncBank], a
-	ld a, $2a
-	ldh [hCallFuncPointer], a
-	ld a, $5f
-	ldh [$ff8e], a
-	call hCallFunc
+	farcall Func_61f2a
 	pop af
 	ldh [rSVBK], a
 	ld a, $00
@@ -622,21 +576,22 @@ Func_846e: ; 846e (2:446e)
 	call Func_bc5e
 	ld a, [wSRAMBank]
 	push af
-	ld a, $01
+	ld a, BANK("SRAM1")
 	sramswitch
 	call Func_8cd7
 	pop af
 	sramswitch
 	ld a, [wSRAMBank]
 	push af
-	ld a, $01
+	ld a, BANK("SRAM1")
 	sramswitch
 	call Func_896f
 	pop af
 	sramswitch
 	call Func_b8d3
-	ld a, [wca83]
-	cp $2c
+
+	ld a, [wWarioState]
+	cp ST_ENTERING_DOOR
 	jr nz, .asm_85a7
 	xor a
 	ld [wFrameDuration], a
@@ -667,13 +622,7 @@ Func_846e: ; 846e (2:446e)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	ld a, $18
-	ldh [hCallFuncBank], a
-	ld a, $4e
-	ldh [hCallFuncPointer], a
-	ld a, $56
-	ldh [$ff8e], a
-	call hCallFunc
+	farcall Func_6164e
 	pop af
 	ldh [rSVBK], a
 	call Func_d9e
@@ -681,13 +630,7 @@ Func_846e: ; 846e (2:446e)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	ld a, $18
-	ldh [hCallFuncBank], a
-	ld a, $d7
-	ldh [hCallFuncPointer], a
-	ld a, $56
-	ldh [$ff8e], a
-	call hCallFunc
+	farcall Func_616d7
 	pop af
 	ldh [rSVBK], a
 	xor a
@@ -706,13 +649,7 @@ Func_861c: ; 861c (2:461c)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	ld a, $18
-	ldh [hCallFuncBank], a
-	ld a, $4e
-	ldh [hCallFuncPointer], a
-	ld a, $56
-	ldh [$ff8e], a
-	call hCallFunc
+	farcall Func_6164e
 	pop af
 	ldh [rSVBK], a
 	call Func_d9e
@@ -720,19 +657,13 @@ Func_861c: ; 861c (2:461c)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	ld a, $18
-	ldh [hCallFuncBank], a
-	ld a, $d7
-	ldh [hCallFuncPointer], a
-	ld a, $56
-	ldh [$ff8e], a
-	call hCallFunc
+	farcall Func_616d7
 	pop af
 	ldh [rSVBK], a
 	call ClearVirtualOAM
 	ld a, [wSRAMBank]
 	push af
-	ld a, $01
+	ld a, BANK("SRAM1")
 	sramswitch
 	di
 	call Func_b681
@@ -916,8 +847,8 @@ Func_8747: ; 8747 (2:4747)
 	and %00111100
 	jr nz, .asm_883a
 	call Func_8a41
-	ld a, $01
-	ld [wca69], a
+	ld a, DIRECTION_RIGHT
+	ld [wDirection], a
 
 	farcall Func_1e99b
 
@@ -964,7 +895,7 @@ Func_8747: ; 8747 (2:4747)
 
 	ld a, [wSRAMBank]
 	push af
-	ld a, $01
+	ld a, BANK("SRAM1")
 	sramswitch
 	call Func_8cd7
 	pop af
@@ -974,7 +905,7 @@ Func_8747: ; 8747 (2:4747)
 	jr nz, .asm_88b7
 	ld a, [wSRAMBank]
 	push af
-	ld a, $01
+	ld a, BANK("SRAM1")
 	sramswitch
 	call Func_896f
 	pop af
@@ -1037,13 +968,7 @@ Func_8747: ; 8747 (2:4747)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	ld a, $18
-	ldh [hCallFuncBank], a
-	ld a, $4e
-	ldh [hCallFuncPointer], a
-	ld a, $56
-	ldh [$ff8e], a
-	call hCallFunc
+	farcall Func_6164e
 	pop af
 	ldh [rSVBK], a
 
@@ -1052,13 +977,7 @@ Func_8747: ; 8747 (2:4747)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	ld a, $18
-	ldh [hCallFuncBank], a
-	ld a, $d7
-	ldh [hCallFuncPointer], a
-	ld a, $56
-	ldh [$ff8e], a
-	call hCallFunc
+	farcall Func_616d7
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -1186,13 +1105,7 @@ Func_89e2: ; 89e2 (2:49e2)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	ld a, $19
-	ldh [hCallFuncBank], a
-	ld a, $e5
-	ldh [hCallFuncPointer], a
-	ld a, $40
-	ldh [$ff8e], a
-	call hCallFunc
+	farcall Func_640e5
 	pop af
 	ldh [rSVBK], a
 	pop hl
@@ -1311,7 +1224,7 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 	ld [wcac7], a
 	jr .asm_8b69
 .asm_8af7
-	ld a, [wca69]
+	ld a, [wDirection]
 	and a
 	jr nz, .asm_8b05
 	ld a, [wca60]
@@ -1730,7 +1643,54 @@ Func_8d69: ; 8d69 (2:4d69)
 	ret
 ; 0x8e06
 
-	INCROM $8e06, $8e5b
+Func_8e06: ; 8e06 (2:4e06)
+	ld a, [wca62]
+	sub $18
+	ld l, a
+	ld a, [wca61]
+	sbc $00
+	ld h, a
+	srl h
+	rr l
+	srl h
+	rr l
+	srl h
+	rr l
+	sla l
+	rl h
+	sla l
+	rl h
+	sla l
+	rl h
+	sla l
+	rl h
+	sla l
+	rl h
+	ld a, h
+	and $03
+	ld d, a
+	ld e, l
+	ld a, [wca63]
+	ld h, a
+	ld a, [wca64]
+	ld l, a
+	srl h
+	rr l
+	srl h
+	rr l
+	srl h
+	rr l
+	ld a, l
+	and $1f
+	ld l, a
+	ld h, $98
+	add hl, de
+	ld a, h
+	ld [wccf0], a
+	ld a, l
+	ld [wccf1], a
+	ret
+; 0x8e5b
 
 Func_8e5b: ; 8e5b (2:4e5b)
 	ld a, [wc0a3]
@@ -8211,7 +8171,7 @@ Func_b6d5: ; b6d5 (2:76d5)
 	ld a, [wca63]
 	cp c
 	ret nz
-	ld a, [wca69]
+	ld a, [wDirection]
 	and a
 	jr nz, .asm_b722
 	ld a, [wca60]
@@ -8285,7 +8245,7 @@ Func_b74c: ; b74c (2:774c)
 	ld a, [wca63]
 	cp c
 	ret nz
-	ld a, [wca69]
+	ld a, [wDirection]
 	and a
 	jr nz, .asm_b7a5
 	ld a, [wca60]
@@ -8557,13 +8517,15 @@ Func_b915: ; b915 (2:7915)
 	ld a, [wca75]
 	and a
 	ret nz
-	ld a, [wca83]
-	cp $4c
+
+	ld a, [wWarioState]
+	cp ST_LADDER_SCRATCHING
 	ret z
-	cp $3a
+	cp ST_LADDER_CLIMBING
 	jr c, .asm_b97b
-	cp $3f
+	cp ST_UNKNOWN_3F
 	ret c
+
 .asm_b97b
 	ld a, [wc0d4]
 	inc a
@@ -8603,7 +8565,7 @@ Func_b9a6: ; b9a6 (2:79a6)
 	bit 7, b
 	jr nz, .asm_b9e2
 	ld hl, wca88
-	ld a, [wca69]
+	ld a, [wDirection]
 	and a
 	jr nz, .asm_b9c3
 	ld a, [wca60]
@@ -8635,7 +8597,7 @@ Func_b9a6: ; b9a6 (2:79a6)
 	inc a
 	ld b, a
 	ld hl, wca88
-	ld a, [wca69]
+	ld a, [wDirection]
 	and a
 	jr nz, .asm_b9f4
 	ld a, [wca60]
@@ -8676,7 +8638,7 @@ Func_b9a6: ; b9a6 (2:79a6)
 	ret z
 	ld b, $01
 	ld hl, wca88
-	ld a, [wca69]
+	ld a, [wDirection]
 	and a
 	jr nz, .asm_ba38
 	ld a, [wca60]
@@ -8699,7 +8661,7 @@ Func_baee: ; baee (2:7aee)
 	ldh [rSVBK], a
 	ld a, [wSRAMBank]
 	push af
-	ld a, $01
+	ld a, BANK("SRAM1")
 	sramswitch
 	ld c, $01
 	ld a, [hld]
@@ -8891,7 +8853,7 @@ Func_bc5e: ; bc5e (2:7c5e)
 	jr z, .asm_bcd5
 	ld a, [wSRAMBank]
 	push af
-	ld a, $01
+	ld a, BANK("SRAM1")
 	sramswitch
 	ld hl, s0a000
 .asm_bc7d
@@ -8947,7 +8909,7 @@ Func_bc5e: ; bc5e (2:7c5e)
 .asm_bcd5
 	ld a, [wSRAMBank]
 	push af
-	ld a, $01
+	ld a, BANK("SRAM1")
 	sramswitch
 	ld hl, s0a000
 .asm_bce4

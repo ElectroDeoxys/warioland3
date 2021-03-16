@@ -1,5 +1,5 @@
 Func_1ec000: ; 1ec000 (7b:4000)
-	ld a, [wca83]
+	ld a, [wWarioState]
 	sub $b0
 	jumptable
 
