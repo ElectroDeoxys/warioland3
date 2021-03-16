@@ -127,14 +127,13 @@ UpdateState_Idling: ; 1c0b6 (7:40b6)
 	jp nz, Func_11f6
 	ld a, [wLadderInteraction]
 	and a
-	jr z, .asm_1c157
+	jr z, .skip_ladder
 	ld a, [wJoypadDown]
 	bit D_UP_F, a
-	jr z, .asm_1c157
+	jr z, .skip_ladder
 	farcall SetState_LadderClimbing
 	ret
-
-.asm_1c157
+.skip_ladder
 	ld a, [wc1c8]
 	and a
 	jr z, .asm_1c174
@@ -147,11 +146,13 @@ UpdateState_Idling: ; 1c0b6 (7:40b6)
 .asm_1c174
 	ld a, [wWarioState]
 	cp ST_IDLING
-	ret nz
-	call Func_1e68a
+	ret nz ; not idling
+	call HandleInput_Idling
 	ld a, [wWarioState]
 	cp ST_IDLING
 	ret nz ; not idling
+
+; still idling, increment idle counter
 	ld a, [wcac9]
 	and a
 	ret nz
@@ -161,13 +162,75 @@ UpdateState_Idling: ; 1c0b6 (7:40b6)
 	ld a, [wIdleCycles]
 	adc 0
 	ld [wIdleCycles], a
+; if the idle cycles reaches a certain value
+; then change the state to sleeping
 	cp NUM_SLEEPING_IDLE_CYCLES
 	ret c
-	farcall Func_1ac10
+	farcall SetState_Sleeping
 	ret
 ; 0x1c1ab
 
-	INCROM $1c1ab, $1c2ae
+Func_1c1ab: ; 1c1ab (7:41ab)
+	ld a, [wceed]
+	sub $01
+	ld [wceed], a
+	jr nc, .asm_1c1c2
+	ld a, $24
+	ld [wceed], a
+	load_sound SFX_04
+.asm_1c1c2
+	ld a, $05
+	ldh [hCallFuncBank], a
+	call_hram Func_e53
+
+	ld a, [wc1a8]
+	and a
+	jr z, .asm_1c1f9
+	ld hl, wca61
+	ld de, hffa8
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ld b, $04
+	farcall Func_c9f3
+.asm_1c1f9
+	call HandleInput_Walking
+	ld a, [wWarioState]
+	cp ST_WALKING
+	ret nz ; return if not walking anymore
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wWarioState]
+	cp ST_WALKING
+	ret nz ; return if not walking anymore
+	farcall Func_198e0
+	ld a, [wWarioState]
+	cp ST_WALKING
+	ret nz ; return if not walking anymore
+	ld a, b
+	and a
+	jp z, Func_1c2ae
+	ld hl, hffa8
+	ld de, wca61
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ret
+; 0x1c244
+
+	INCROM $1c244, $1c2ae
 
 Func_1c2ae: ; 1c2ae (7:42ae)
 	xor a
@@ -176,7 +239,7 @@ Func_1c2ae: ; 1c2ae (7:42ae)
 	ld [wca75], a
 	jr StartJump
 
-Func_1c2b9: ; 1c2b9 (7:42b9)
+StartJump_FromInput: ; 1c2b9 (7:42b9)
 	load_sound SFX_01
 	xor a
 	ld [wca75], a
@@ -356,12 +419,12 @@ SetState_Sliding: ; 1def1 (7:5ef1)
 
 	INCROM $1dfd4, $1e68a
 
-Func_1e68a: ; 1e68a (7:668a)
+HandleInput_Idling: ; 1e68a (7:668a)
 	ld a, [wJoypadPressed]
 	bit B_BUTTON_F, a
 	jp nz, SetState_Attacking
 	bit A_BUTTON_F, a
-	jp nz, Func_1c2b9
+	jp nz, StartJump_FromInput
 	ld a, [wJoypadDown]
 	bit D_RIGHT_F, a
 	jr nz, .d_right_1
@@ -381,6 +444,7 @@ Func_1e68a: ; 1e68a (7:668a)
 	jp SetState_Turning
 .no_turning
 
+; set walking state
 	xor a
 	ld [wca86], a
 	ld a, ST_WALKING
@@ -390,16 +454,16 @@ Func_1e68a: ; 1e68a (7:668a)
 	jr nz, .d_right_2
 	bit D_LEFT_F, a
 	jr nz, .d_left_2
-	jr .asm_1e6d7
+	jr .ok
 .d_right_2
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
-	jr .asm_1e6d7
+	jr .ok
 .d_left_2
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
-.asm_1e6d7
 
+.ok
 	xor a
 	ld [wceed], a
 	ld [wca75], a
@@ -433,13 +497,13 @@ Func_1e68a: ; 1e68a (7:668a)
 	ld [wFramesetPtr + 0], a
 	ld a, LOW(Frameset_149b4)
 	ld [wFramesetPtr + 1], a
-	jr .asm_1e72e
+	jr .got_frameset
 .dir_right
 	ld a, HIGH(Frameset_149c5)
 	ld [wFramesetPtr + 0], a
 	ld a, LOW(Frameset_149c5)
 	ld [wFramesetPtr + 1], a
-.asm_1e72e
+.got_frameset
 	ld a, BANK(Frameset_149c5)
 	ldh [hCallFuncBank], a
 	call_hram Func_e53
@@ -631,7 +695,76 @@ Func_1e855: ; 1e855 (7:6855)
 	ret
 ; 0x1e8ed
 
-	INCROM $1e8ed, $1e99b
+HandleInput_Walking: ; 1e8ed (7:68ed)
+	ld a, [wca77]
+	and a
+	jr nz, .skip_jump
+	ld a, [wJoypadDown]
+	bit A_BUTTON_F, a
+	jp nz, StartJump_FromInput
+.skip_jump
+
+	ld a, [wJoypadPressed]
+	bit B_BUTTON_F, a
+	jp nz, SetState_Attacking
+	bit A_BUTTON_F, a
+	jp nz, StartJump_FromInput
+
+	ld a, [wJoypadDown]
+	bit D_DOWN_F, a
+	jr nz, .d_down
+	bit D_RIGHT_F, a
+	jr nz, .d_right
+	bit D_LEFT_F, a
+	jr nz, .d_left
+	jr .asm_1e970
+
+.d_right
+	ld a, [wDirection]
+	and a
+	jp z, SetState_Turning
+	ld a, $01
+	ld [wDirection], a
+	farcall Func_19734
+	ld a, b
+	and a
+	ret nz
+	call Func_151e
+	call Func_1259
+.asm_1e93d
+	ld a, [wca86]
+	cp $10
+	jr c, .asm_1e949
+	ld a, $0c
+	ld [wca86], a
+.asm_1e949
+	ret
+
+.d_left
+	ld a, [wDirection]
+	and a
+	jp nz, SetState_Turning
+	ld a, $00
+	ld [wDirection], a
+	farcall Func_19734
+	ld a, b
+	and a
+	ret nz
+	call Func_151e.asm_153f
+	call Func_1270
+	jr .asm_1e93d
+
+.asm_1e970
+	call Func_1700
+	jr z, Func_1e99b
+	farcall Func_19c81
+	ret
+
+.d_down
+	call Func_1700
+	jp z, Func_1e855
+	farcall Func_19e7f
+	ret
 
 Func_1e99b: ; 1e99b (7:699b)
 	xor a

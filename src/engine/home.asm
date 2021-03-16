@@ -2550,7 +2550,33 @@ Func_11f6: ; 11f6 (0:11f6)
 	ret
 ; 0x1259
 
-	INCROM $1259, $129e
+Func_1259: ; 1259 (0:1259)
+	ld a, [wc0c3]
+	add b
+	ld [wc0c3], a
+	ld a, [wca64]
+	add b
+	ld [wca64], a
+	ld a, [wca63]
+	adc $00
+	ld [wca63], a
+	ret
+; 0x1270
+
+Func_1270: ; 1270 (0:1270)
+	ld a, [wc0c3]
+	sub b
+	ld [wc0c3], a
+	ld a, [wca64]
+	sub b
+	ld [wca64], a
+	ld a, [wca63]
+	sbc $00
+	ld [wca63], a
+	ret
+; 0x1287
+
+	INCROM $1287, $129e
 
 Func_129e: ; 129e (0:129e)
 	ld a, [wc0c2]
@@ -2698,7 +2724,59 @@ Func_145a: ; 145a (0:145a)
 	ret
 ; 0x1488
 
-	INCROM $1488, $156d
+	INCROM $1488, $151e
+
+Func_151e: ; 151e (0:151e)
+	ld a, [wDirection]
+	and a
+	jr nz, .dir_right
+; dir left
+	xor a
+	ld [wca86], a
+	jr .asm_1554
+
+.dir_right
+	ld a, [wc189]
+	bit 0, a
+	jr z, .asm_1554
+.asm_1531
+	ld a, [wca86]
+	cp $08
+	jr c, .asm_1554
+	ld a, $04
+	ld [wca86], a
+	jr .asm_1554
+
+.asm_153f
+	ld a, [wDirection]
+	and a
+	jr z, .dir_left
+	xor a
+	ld [wca86], a
+	jr .asm_1554
+.dir_left
+	ld a, [wc189]
+	bit 1, a
+	jr z, .asm_1554
+	jr .asm_1531
+.asm_1554
+	ld a, [wca86]
+	ld e, a
+	ld d, $00
+	ld hl, Data_196f
+	add hl, de
+	ld b, [hl]
+	ld hl, wca86
+	ld a, [hl]
+	cp $1b
+	jr z, .asm_1569
+	inc [hl]
+	ret
+.asm_1569
+	and $fc
+	ld [hl], a
+	ret
+; 0x156d
 
 Func_156d: ; 156d (0:156d)
 	jp Init
@@ -2848,7 +2926,60 @@ Func_16d0: ; 16d0 (0:16d0)
 	ret
 ; 0x16d9
 
-	INCROM $16d9, $1827
+	INCROM $16d9, $1700
+
+Func_1700: ; 1700 (0:1700)
+	xor a
+	ld [wc0de], a
+	ld a, [wca71]
+	cpl
+	inc a
+	sub $03
+	ld c, a
+	ld hl, wca64
+	ld de, hffab
+	ld a, [hld]
+	sub c
+	ld [de], a
+	dec de
+	ld a, [hld]
+	sbc $00
+	ld [de], a
+	dec de
+	ld a, [hld]
+	ld [de], a
+	dec de
+	ld a, [hl]
+	ld [de], a
+	farcall Func_19b51
+	ld a, [wc0de]
+	and a
+	ret nz
+	ld a, [wca72]
+	sub $03
+	ld c, a
+	ld hl, wca64
+	ld de, hffab
+	ld a, [hld]
+	add c
+	ld [de], a
+	dec de
+	ld a, [hld]
+	adc $00
+	ld [de], a
+	dec de
+	ld a, [hld]
+	ld [de], a
+	dec de
+	ld a, [hl]
+	ld [de], a
+	farcall Func_19b51
+	ld a, [wc0de]
+	and a
+	ret
+; 0x1762
+
+	INCROM $1762, $1827
 
 PalsWhite: ; 1827 (0:1827)
 	rgb 31, 31, 31
@@ -2934,7 +3065,11 @@ PalsBlack: ; 1867 (0:1867)
 	rgb 0, 0, 0
 ; 0x18a7
 
-	INCROM $18a7, $198b
+	INCROM $18a7, $196f
+
+Data_196f: ; 196f (0:196f)
+	db $00, $01, $00, $01, $01, $01, $01, $01, $01, $01, $02, $02, $02, $02, $02, $02, $02, $02, $03, $03, $03, $03, $03, $03, $04, $04, $04, $04
+; 0x198b
 
 ; treasure IDs of each level
 LevelTreasureIDs: ; 198b (0:198b)

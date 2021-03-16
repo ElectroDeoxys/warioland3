@@ -266,12 +266,16 @@ wc0da:: ; c0da
 wc0db:: ; c0db
 	ds $1
 
+wc0dc:: ; c0dc
 	ds $1
 
 wc0dd:: ; c0dd
 	ds $1
 
-	ds $4
+wc0de:: ; c0de
+	ds $1
+
+	ds $3
 
 wc0e2:: ; c0e2
 	ds $1
