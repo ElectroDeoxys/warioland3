@@ -179,7 +179,7 @@ Func_80aa: ; 80aa (2:40aa)
 	jr nz, .asm_8215
 	xor a
 	ld [wc0c2], a
-	ld a, [wca87]
+	ld a, [wWarioYPos]
 	ld [wca5e], a
 	ld a, [wc1aa]
 	bit 3, a
@@ -601,9 +601,7 @@ Func_846e: ; 846e (2:446e)
 	ld [wFramesetPtr + 0], a
 	ld a, LOW(Frameset_14d18)
 	ld [wFramesetPtr + 1], a
-	ld a, BANK(Frameset_14d18)
-	ldh [hCallFuncBank], a
-	call_hram Func_e53
+	update_anim
 
 .asm_85a7
 	call Func_161a
@@ -850,7 +848,7 @@ Func_8747: ; 8747 (2:4747)
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
 
-	farcall Func_1e99b
+	farcall SetState_Idling
 
 	ld hl, Pals_c800
 	ld a, h
@@ -8435,13 +8433,13 @@ Func_b8d3: ; b8d3 (2:78d3)
 	ld a, [wca62]
 	add $10
 	sub b
-	ld [wca87], a
+	ld [wWarioYPos], a
 	ld a, [wTempSCX]
 	ld b, a
 	ld a, [wca64]
 	add $08
 	sub b
-	ld [wca88], a
+	ld [wWarioXPos], a
 	ret
 
 .asm_b8f5
@@ -8453,13 +8451,13 @@ Func_b8d3: ; b8d3 (2:78d3)
 	ld a, [wca62]
 	add $10
 	sub b
-	ld [wca87], a
+	ld [wWarioYPos], a
 	ld a, [wc08c]
 	ld b, a
 	ld a, [wca64]
 	add $08
 	sub b
-	ld [wca88], a
+	ld [wWarioXPos], a
 	ret
 ; 0xb915
 
@@ -8472,7 +8470,7 @@ Func_b915: ; b915 (2:7915)
 	ld [wc0d4], a
 	bit 7, b
 	jr nz, .asm_b941
-	ld hl, wca87
+	ld hl, wWarioYPos
 	ld a, [wca5e]
 	cp [hl]
 	jr nc, .asm_b92e
@@ -8493,7 +8491,7 @@ Func_b915: ; b915 (2:7915)
 	cpl
 	inc a
 	ld b, a
-	ld hl, wca87
+	ld hl, wWarioYPos
 	ld a, [wca5e]
 	cp [hl]
 	jr c, .asm_b951
@@ -8510,14 +8508,14 @@ Func_b915: ; b915 (2:7915)
 	xor a
 	ld [wc0c2], a
 	ret
+
 .asm_b964
 	ld a, [wc0db]
 	and a
 	ret nz
-	ld a, [wca75]
+	ld a, [wJumpVelIndex]
 	and a
 	ret nz
-
 	ld a, [wWarioState]
 	cp ST_LADDER_SCRATCHING
 	ret z
@@ -8532,7 +8530,7 @@ Func_b915: ; b915 (2:7915)
 	ld [wc0d4], a
 	dec a
 	ret z
-	ld hl, wca87
+	ld hl, wWarioYPos
 	ld a, [wca5e]
 	sub [hl]
 	jr nc, .asm_b98f
@@ -8564,7 +8562,7 @@ Func_b9a6: ; b9a6 (2:79a6)
 	ld [wc0d5], a
 	bit 7, b
 	jr nz, .asm_b9e2
-	ld hl, wca88
+	ld hl, wWarioXPos
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_b9c3
@@ -8596,7 +8594,7 @@ Func_b9a6: ; b9a6 (2:79a6)
 	cpl
 	inc a
 	ld b, a
-	ld hl, wca88
+	ld hl, wWarioXPos
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_b9f4
@@ -8627,7 +8625,7 @@ Func_b9a6: ; b9a6 (2:79a6)
 	ld a, [wca8e]
 	cp $42
 	jr nz, .asm_ba1f
-	ld a, [wca74]
+	ld a, [wJumpVelTable]
 	and a
 	ret nz
 .asm_ba1f
@@ -8637,7 +8635,7 @@ Func_b9a6: ; b9a6 (2:79a6)
 	dec a
 	ret z
 	ld b, $01
-	ld hl, wca88
+	ld hl, wWarioXPos
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_ba38

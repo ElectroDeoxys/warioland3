@@ -847,9 +847,9 @@ Func_4508: ; 4508 (1:4508)
 	xor a
 	ld [hld], a
 	ld [hl], a
-	ld a, [wca3c]
+	ld a, [wPowerUpLevel]
 	or $40
-	ld [wca3c], a
+	ld [wPowerUpLevel], a
 	jp Func_16d0
 .asm_4578
 	ld hl, w3d513
@@ -902,14 +902,16 @@ Func_4508: ; 4508 (1:4508)
 	ld [hl], a
 	call Func_145a
 	ret
+
 .asm_45d6
 	ld a, $0e
 	ld [wSequence], a
 	xor a
 	ld [wSubSequence], a
 	ret
-	ld a, $09
-	ld [wca3c], a
+
+	ld a, POWER_UP_SUPER_GRAB_GLOVES
+	ld [wPowerUpLevel], a
 	ld a, [wceef]
 	and $03
 	ld [wceef], a

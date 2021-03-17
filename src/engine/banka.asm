@@ -85,4 +85,18 @@ Func_28000: ; 28000 (a:4000)
 	dw Func_156d
 ; 0x280a6
 
-	INCROM $280a6, $2c000
+	INCROM $280a6, $2b1a6
+
+Func_2b1a6: ; 2b1a6 (a:71a6)
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_2b1bc
+	farcall Func_1f104
+	ret
+
+.asm_2b1bc
+	farcall Func_1f0ed
+	ret
+; 0x2b1cc
+
+	INCROM $2b1cc, $2c000

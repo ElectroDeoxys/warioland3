@@ -1696,12 +1696,13 @@ Func_bdb: ; bdb (0:bdb)
 	ld d, a
 	ld a, [hli]
 	swap a
-	and $0f
+	and $0f ; high nybble
 	ld b, a
 	ld a, d
-	and $0f
+	and $0f ; low nybble
 	swap a
 	add b
+
 	ld b, $01
 	add $a0
 	cp $c0
@@ -2005,19 +2006,19 @@ Func_d9e: ; d9e (0:d9e)
 	ret nz
 
 .asm_db6
-	ld a, [wca7e]
+	ld a, [wSpriteBank]
 	ld [wc0ac], a
 	ld a, [wROMBank]
 	push af
 	ld a, [wc0ac]
 	bankswitch
-	ld a, [wca7f + 0]
+	ld a, [wSpritePtr + 0]
 	ld h, a
-	ld a, [wca7f + 1]
+	ld a, [wSpritePtr + 1]
 	ld l, a
-	ld a, [wca87]
+	ld a, [wWarioYPos]
 	ld [wCurSpriteYOffset], a
-	ld a, [wca88]
+	ld a, [wWarioXPos]
 	ld [wCurSpriteXOffset], a
 	ld a, [wca65]
 	ld [wc098], a
@@ -2079,7 +2080,7 @@ TryAddSprite: ; df4 (0:df4)
 
 	INCROM $e2b, $e53
 
-Func_e53: ; e53 (0:e53)
+UpdateAnimation: ; e53 (0:e53)
 	ld a, [wFramesetPtr + 0]
 	ld d, a
 	ld a, [wFramesetPtr + 1]
@@ -2501,7 +2502,43 @@ Func_114e: ; 114e (0:114e)
 	ret
 ; 0x1169
 
-	INCROM $1169, $11f6
+	INCROM $1169, $11ae
+
+Func_11ae: ; 11ae (0:11ae)
+	ld a, c
+	ld [wca78], a
+	cp $05
+	jr z, .asm_11ba
+	ld a, $80
+	jr .asm_11bc
+.asm_11ba
+	ld a, $68
+.asm_11bc
+	ld [wc1a9], a
+	load_sound SFX_E1
+	ld a, $08
+	ld [wc1aa], a
+	ld a, $01
+	ld [wca73], a
+	xor a
+	ld [wcac8], a
+	ret
+; 0x11d6
+
+Func_11d6: ; 11d6 (0:11d6)
+	ld a, c
+	ld [wca78], a
+	load_sound SFX_E1
+	ld a, $04
+	ld [wc1aa], a
+	ld a, $01
+	ld [wca73], a
+	ld a, $80
+	ld [wc1a9], a
+	xor a
+	ld [wcac8], a
+	ret
+; 0x11f6
 
 Func_11f6: ; 11f6 (0:11f6)
 	xor a
@@ -2576,8 +2613,21 @@ Func_1270: ; 1270 (0:1270)
 	ret
 ; 0x1287
 
-	INCROM $1287, $129e
+; b = y offset
+Func_1287: ; 1287 (0:1287)
+	ld a, [wc0c2]
+	add b
+	ld [wc0c2], a
+	ld a, [wca62]
+	add b
+	ld [wca62], a
+	ld a, [wca61]
+	adc $00
+	ld [wca61], a
+	ret
+; 0x129e
 
+; b = y offset
 Func_129e: ; 129e (0:129e)
 	ld a, [wc0c2]
 	sub b
@@ -2724,7 +2774,111 @@ Func_145a: ; 145a (0:145a)
 	ret
 ; 0x1488
 
-	INCROM $1488, $151e
+Func_1488: ; 1488 (0:1488)
+	ld a, [wJumpVelTable]
+	dec a
+	jr z, .knock_back
+	dec a
+	jr z, .normal_jump
+	dec a
+	jr z, .high_jump
+	dec a
+	jr z, .asm_14a0
+	dec a
+	jr z, .asm_149b
+	ret
+
+.asm_149b
+	ld hl, JumpVelTable5
+	jr .asm_14b2
+.asm_14a0
+	ld hl, JumpVelTable4
+	jr .asm_14b2
+.high_jump
+	ld hl, JumpVelTable_HighJump
+	jr .asm_14b2
+.normal_jump
+	ld hl, JumpVelTable_Normal
+	jr .asm_14b2
+.knock_back
+	ld hl, JumpVelTable_KnockBack
+.asm_14b2
+
+	ld a, [wJumpVelIndex]
+	ld e, a
+	ld d, $00
+	add hl, de
+	bit 7, [hl]
+	jr z, .falling
+
+; raising
+	ld a, [hl]
+	cpl
+	inc a
+	ld b, a
+	call Func_129e
+	ld hl, wJumpVelIndex
+	inc [hl]
+	jr .done
+
+.falling
+	xor a
+	ld [wca76], a
+	ld b, [hl]
+	call Func_1287
+	ld hl, wJumpVelIndex
+	inc [hl]
+	ld a, [hl]
+	cp MAX_JUMP_VEL_INDEX
+	jr c, .done
+	ld [hl], MAX_JUMP_VEL_INDEX
+
+.done
+	ret
+; 0x14de
+
+Func_14de: ; 14de (0:14de)
+	ld a, [wc0ba]
+	and $0f
+	cp $08
+	jr c, .done
+	call Func_114e
+	ld a, [wca78]
+	sub c
+	jr z, .done
+	jr c, .done
+	jp Func_11ae
+.done
+	ret
+; 0x14f6
+
+Func_14f6: ; 14f6 (0:14f6)
+	ld hl, hffa8
+	ld de, wca61
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+;	fallthrough
+
+Func_1501: ; 1501 (0:1501)
+	ld a, [wc0ba]
+	and $0f
+	cp $08
+	jr c, .done
+	call Func_114e
+	ld a, [wca78]
+	sub c
+	jr z, .done
+	jr c, .asm_151a
+	call Func_11ae
+	jr .done
+.asm_151a
+	call Func_11d6
+.done
+	ret
+; 0x151e
 
 Func_151e: ; 151e (0:151e)
 	ld a, [wDirection]
@@ -2759,6 +2913,7 @@ Func_151e: ; 151e (0:151e)
 	bit 1, a
 	jr z, .asm_1554
 	jr .asm_1531
+
 .asm_1554
 	ld a, [wca86]
 	ld e, a
@@ -2772,6 +2927,7 @@ Func_151e: ; 151e (0:151e)
 	jr z, .asm_1569
 	inc [hl]
 	ret
+
 .asm_1569
 	and $fc
 	ld [hl], a
@@ -2979,7 +3135,29 @@ Func_1700: ; 1700 (0:1700)
 	ret
 ; 0x1762
 
-	INCROM $1762, $1827
+Func_1762: ; 1762 (0:1762)
+	ld a, [wJumpVelIndex]
+	cp FALLING_JUMP_VEL_INDEX
+	jr nc, .asm_1776
+	ld a, [wca86]
+	cp $10
+	jr c, .asm_1775
+	ld a, $0c
+	ld [wca86], a
+.asm_1775
+	ret
+
+.asm_1776
+	ld a, [wca86]
+	cp $08
+	jr c, .asm_1782
+	ld a, $04
+	ld [wca86], a
+.asm_1782
+	ret
+; 0x1783
+
+	INCROM $1783, $1827
 
 PalsWhite: ; 1827 (0:1827)
 	rgb 31, 31, 31
@@ -3065,7 +3243,220 @@ PalsBlack: ; 1867 (0:1867)
 	rgb 0, 0, 0
 ; 0x18a7
 
-	INCROM $18a7, $196f
+JumpVelTable_Normal: ; 18a7 (0:18a7)
+	db -4 ; $00
+	db -4 ; $01
+	db -3 ; $02
+	db -3 ; $03
+	db -3 ; $04
+	db -3 ; $05
+	db -2 ; $06
+	db -2 ; $07
+	db -2 ; $08
+	db -2 ; $09
+	db -1 ; $0a
+	db -1 ; $0b
+	db -1 ; $0c
+	db -1 ; $0d
+	db -1 ; $0e
+	db -1 ; $0f
+	db -1 ; $10
+	db -1 ; $11
+	db  0 ; $12
+	db  0 ; $13
+	db  0 ; $14
+	db  0 ; $15
+	db  0 ; $16
+	db  0 ; $17
+	db  1 ; $18
+	db  1 ; $19
+	db  1 ; $1a
+	db  1 ; $1b
+	db  2 ; $1c
+	db  2 ; $1d
+	db  2 ; $1e
+	db  2 ; $1f
+	db  2 ; $20
+	db  2 ; $21
+	db  3 ; $22
+	db  3 ; $23
+	db  3 ; $24
+	db  3 ; $25
+	db  4 ; $26
+	db  4 ; $27
+; 0x18cf
+
+JumpVelTable_HighJump: ; 18cf (0:18cf)
+	db -4 ; $00
+	db -4 ; $01
+	db -4 ; $02
+	db -4 ; $03
+	db -4 ; $04
+	db -4 ; $05
+	db -3 ; $06
+	db -3 ; $07
+	db -3 ; $08
+	db -3 ; $09
+	db -2 ; $0a
+	db -2 ; $0b
+	db -2 ; $0c
+	db -2 ; $0d
+	db -1 ; $0e
+	db -1 ; $0f
+	db -1 ; $10
+	db -1 ; $11
+	db -1 ; $12
+	db -1 ; $13
+	db  0 ; $14
+	db  0 ; $15
+	db  0 ; $16
+	db  0 ; $17
+	db  1 ; $18
+	db  1 ; $19
+	db  1 ; $1a
+	db  1 ; $1b
+	db  2 ; $1c
+	db  2 ; $1d
+	db  2 ; $1e
+	db  2 ; $1f
+	db  2 ; $20
+	db  2 ; $21
+	db  3 ; $22
+	db  3 ; $23
+	db  3 ; $24
+	db  3 ; $25
+	db  4 ; $26
+	db  4 ; $27
+; 0x18f7
+
+JumpVelTable_KnockBack: ; 18f7 (0:18f7)
+	db -2 ; $00
+	db -2 ; $01
+	db -2 ; $02
+	db -2 ; $03
+	db -1 ; $04
+	db -1 ; $05
+	db -1 ; $06
+	db -1 ; $07
+	db -1 ; $08
+	db -1 ; $09
+	db -1 ; $0a
+	db -1 ; $0b
+	db -1 ; $0c
+	db -1 ; $0d
+	db -1 ; $0e
+	db -1 ; $0f
+	db  0 ; $10
+	db  0 ; $11
+	db  0 ; $12
+	db  0 ; $13
+	db  0 ; $14
+	db  0 ; $15
+	db  0 ; $16
+	db  0 ; $17
+	db  1 ; $18
+	db  1 ; $19
+	db  1 ; $1a
+	db  1 ; $1b
+	db  2 ; $1c
+	db  2 ; $1d
+	db  2 ; $1e
+	db  2 ; $1f
+	db  2 ; $20
+	db  2 ; $21
+	db  3 ; $22
+	db  3 ; $23
+	db  3 ; $24
+	db  3 ; $25
+	db  4 ; $26
+	db  4 ; $27
+; 0x191f
+
+JumpVelTable4: ; 191f (0:191f)
+	db -2 ; $00
+	db -2 ; $01
+	db -3 ; $02
+	db -4 ; $03
+	db -4 ; $04
+	db -4 ; $05
+	db -4 ; $06
+	db -4 ; $07
+	db -4 ; $08
+	db -4 ; $09
+	db -4 ; $0a
+	db -4 ; $0b
+	db -4 ; $0c
+	db -4 ; $0d
+	db -3 ; $0e
+	db -3 ; $0f
+	db -2 ; $10
+	db -2 ; $11
+	db -2 ; $12
+	db -1 ; $13
+	db -1 ; $14
+	db -1 ; $15
+	db  0 ; $16
+	db  0 ; $17
+	db  1 ; $18
+	db  1 ; $19
+	db  2 ; $1a
+	db  2 ; $1b
+	db  3 ; $1c
+	db  3 ; $1d
+	db  3 ; $1e
+	db  3 ; $1f
+	db  4 ; $20
+	db  4 ; $21
+	db  4 ; $22
+	db  4 ; $23
+	db  4 ; $24
+	db  4 ; $25
+	db  4 ; $26
+	db  4 ; $27
+; 0x1947
+
+JumpVelTable5: ; 1947 (0:1947)
+	db -2 ; $00
+	db -3 ; $01
+	db -4 ; $02
+	db -4 ; $03
+	db -4 ; $04
+	db -4 ; $05
+	db -4 ; $06
+	db -4 ; $07
+	db -4 ; $08
+	db -4 ; $09
+	db -4 ; $0a
+	db -4 ; $0b
+	db -4 ; $0c
+	db -4 ; $0d
+	db -4 ; $0e
+	db -4 ; $0f
+	db -4 ; $10
+	db -4 ; $11
+	db -4 ; $12
+	db -3 ; $13
+	db -3 ; $14
+	db -2 ; $15
+	db -1 ; $16
+	db  0 ; $17
+	db  1 ; $18
+	db  1 ; $19
+	db  2 ; $1a
+	db  2 ; $1b
+	db  3 ; $1c
+	db  3 ; $1d
+	db  3 ; $1e
+	db  3 ; $1f
+	db  4 ; $20
+	db  4 ; $21
+	db  4 ; $22
+	db  4 ; $23
+	db  4 ; $24
+	db  4 ; $25
+	db  4 ; $26
+	db  4 ; $27
+; 0x196f
 
 Data_196f: ; 196f (0:196f)
 	db $00, $01, $00, $01, $01, $01, $01, $01, $01, $01, $02, $02, $02, $02, $02, $02, $02, $02, $03, $03, $03, $03, $03, $03, $04, $04, $04, $04

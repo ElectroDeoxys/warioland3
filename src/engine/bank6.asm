@@ -36,13 +36,15 @@ Func_19734: ; 19734 (6:5734)
 	ld [wc0d8], a
 	ld a, [wDirection]
 	and a
-	jr z, .dir_left
-	jr .dir_right
+	jr z, Func_197b6
+	jr Func_19746
 
+Func_19741: ; 19741 (6:5741)
 	ld a, $01
 	ld [wc0d8], a
+;	fallthrough
 
-.dir_right
+Func_19746: ; 19746 (6:5746)
 	ld a, [wca8e]
 	cp $42
 	jr z, .asm_19774
@@ -105,16 +107,19 @@ Func_19734: ; 19734 (6:5734)
 	ld [wc0dc], a
 	call Func_19bc3
 	and $0f
-	jp z, .asm_19832
+	jp z, Func_19832
 	ld a, [wca89]
 	and a
-	jp nz, .asm_19823
+	jp nz, Func_19823
 	ld a, b
 	ret
 
+Func_197b1: ; 197b1 (6:57b1)
 	ld a, $01
 	ld [wc0d8], a
-.dir_left
+;	fallthrough
+
+Func_197b6: ; 197b6 (6:57b6)
 	ld a, [wca8e]
 	cp $42
 	jr z, .asm_197e6
@@ -181,14 +186,14 @@ Func_19734: ; 19734 (6:5734)
 	ld [wc0dc], a
 	call Func_19bc3
 	and $0f
-	jr z, .asm_19832
+	jr z, Func_19832
 	ld a, [wca89]
 	and a
-	jr nz, .asm_19823
+	jr nz, Func_19823
 	ld a, b
 	ret
 
-.asm_19823
+Func_19823: ; 19823 (6:5823)
 	ld a, $01
 	ld [wc0d8], a
 	call Func_19bd3
@@ -197,7 +202,7 @@ Func_19734: ; 19734 (6:5734)
 	ld b, a
 	ret
 
-.asm_19832
+Func_19832: ; 19832 (6:5832)
 	ld a, [wca8b]
 	and a
 	jp nz, .asm_198c1
@@ -216,7 +221,7 @@ Func_19734: ; 19734 (6:5734)
 	call Func_19bd3
 	and $0f
 	ret z
-	ld a, [wca74]
+	ld a, [wJumpVelTable]
 	and a
 	jp nz, .asm_198c0
 	ld a, [wca89]
@@ -462,7 +467,159 @@ Func_1996e: ; 1996e (6:596e)
 	ret
 ; 0x199e9
 
-	INCROM $199e9, $19b12
+Func_199e9: ; 199e9 (6:59e9)
+	call Func_19a53
+	and a
+	ret nz
+	ld a, [wca96]
+	and a
+	jr z, .asm_199f9
+	ld a, $01
+	ld [wc0d8], a
+.asm_199f9
+	ld a, [wca71]
+	cpl
+	inc a
+	sub $03
+	ld c, a
+	ld hl, wca64
+	ld de, hffab
+	ld a, [hld]
+	sub c
+	ld [de], a
+	dec de
+	ld a, [hld]
+	sbc $00
+	ld [de], a
+	dec de
+	ld a, [hld]
+	ld [de], a
+	dec de
+	ld a, [hl]
+	ld [de], a
+	call Func_19bfb
+	and a
+	ret nz
+	ld a, [wcac9]
+	and a
+	jr z, .asm_19a22
+	ld b, a
+	ret
+.asm_19a22
+	ld a, [wca96]
+	and a
+	jr z, .asm_19a2d
+	ld a, $01
+	ld [wc0d8], a
+.asm_19a2d
+	ld a, [wca72]
+	sub $03
+	ld c, a
+	ld hl, wca64
+	ld de, hffab
+	ld a, [hld]
+	add c
+	ld [de], a
+	dec de
+	ld a, [hld]
+	adc $00
+	ld [de], a
+	dec de
+	ld a, [hld]
+	ld [de], a
+	dec de
+	ld a, [hl]
+	ld [de], a
+	call Func_19bfb
+	and a
+	ret nz
+	ld a, [wcac9]
+	and a
+	ret z
+	ld b, a
+	ret
+; 0x19a53
+
+Func_19a53: ; 19a53 (6:5a53)
+	xor a
+	ld [wc189], a
+	ld a, [wca96]
+	and a
+	jr z, .asm_19a62
+	ld a, $01
+	ld [wc0d8], a
+.asm_19a62
+	ld hl, wca61
+	ld de, hffa8
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	call Func_19b7b
+	ret
+; 0x19a77
+
+	INCROM $19a77, $19acd
+
+Func_19acd: ; 19acd (6:5acd)
+	ld hl, wca64
+	ld de, hffab
+	ld a, [hld]
+	ld [de], a
+	dec de
+	ld a, [hld]
+	ld [de], a
+	dec de
+	ld a, [hld]
+	sub $0c
+	ld [de], a
+	dec de
+	ld a, [hl]
+	sbc $00
+	ld [de], a
+	jr Func_19b3a
+
+	ld hl, wca64
+	ld de, hffab
+	ld a, [hld]
+	ld [de], a
+	dec de
+	ld a, [hld]
+	ld [de], a
+	dec de
+	ld a, [hld]
+	sub $1a
+	ld [de], a
+	dec de
+	ld a, [hl]
+	sbc $00
+	ld [de], a
+	jr Func_19b3a
+
+Func_19afb: ; 19afb (6:5afb)
+	ld hl, wca64
+	ld de, hffab
+	ld a, [hld]
+	ld [de], a
+	dec de
+	ld a, [hld]
+	ld [de], a
+	dec de
+	ld a, [hld]
+	sub $18
+	ld [de], a
+	dec de
+	ld a, [hl]
+	sbc $00
+	ld [de], a
+	jr Func_19b3a
 
 Func_19b12: ; 19b12 (6:5b12)
 	ld hl, wca61
@@ -520,7 +677,17 @@ Func_19b51: ; 19b51 (6:5b51)
 	ret
 ; 0x19b61
 
-	INCROM $19b61, $19b8b
+	INCROM $19b61, $19b7b
+
+Func_19b7b: ; 19b7b (6:5b7b)
+	ld hl, hffa8
+	call Func_bdb
+	ld a, $02
+	ld [wc0d6], a
+	call Func_18000
+	ld b, a
+	ret
+; 0x19b8b
 
 Func_19b8b: ; 19b8b (6:5b8b)
 	ld hl, hffa8
@@ -585,7 +752,15 @@ Func_19beb: ; 19beb (6:5beb)
 	ret
 ; 0x19bfb
 
-	INCROM $19bfb, $19c0b
+Func_19bfb: ; 19bfb (6:5bfb)
+	ld hl, hffa8
+	call Func_bdb
+	ld a, $40
+	ld [wc0d6], a
+	call Func_18000
+	ld b, a
+	ret
+; 0x19c0b
 
 Func_19c0b: ; 19c0b (6:5c0b)
 	ld hl, hffa8
@@ -602,54 +777,54 @@ Func_19c1b: ; 19c1b (6:5c1b)
 	sub $30
 	jumptable
 
-	dw $5ce7
-	dw $5ef1
-	dw $6046
-	dw $6077
-	dw $60b4
-	dw $617e
-	dw $61c5
-	dw $6296
-	dw $62d6
-	dw $6394
-	dw $6436
-	dw $651d
-	dw $655c
-	dw $6617
-	dw $66b6
-	dw $67d6
-	dw $689e
-	dw $68ff
-	dw $6980
-	dw $69e9
-	dw $6a5c
-	dw $6ac9
-	dw $6b44
-	dw $68ff
-	dw $6980
-	dw $6bb1
-	dw $6bf4
-	dw $6c73
-	dw $6d7d
-	dw $6dfb
-	dw $6ed0
-	dw $6f98
-	dw $700f
-	dw $70a9
-	dw Func_156d
-	dw Func_156d
-	dw Func_156d
-	dw Func_156d
-	dw Func_156d
-	dw Func_156d
-	dw Func_156d
-	dw Func_156d
-	dw Func_156d
-	dw Func_156d
-	dw Func_156d
-	dw Func_156d
-	dw Func_156d
-	dw Func_156d
+	dw $5ce7     ; ST_UNKNOWN_30
+	dw $5ef1     ; ST_UNKNOWN_31
+	dw $6046     ; ST_UNKNOWN_32
+	dw $6077     ; ST_UNKNOWN_33
+	dw $60b4     ; ST_UNKNOWN_34
+	dw $617e     ; ST_UNKNOWN_35
+	dw $61c5     ; ST_UNKNOWN_36
+	dw $6296     ; ST_UNKNOWN_37
+	dw $62d6     ; ST_UNKNOWN_38
+	dw $6394     ; ST_UNKNOWN_39
+	dw $6436     ; ST_LADDER_CLIMBING
+	dw $651d     ; ST_LADDER_IDLING
+	dw $655c     ; ST_UNKNOWN_3C
+	dw $6617     ; ST_UNKNOWN_3D
+	dw $66b6     ; ST_LADDER_SLIDING
+	dw $67d6     ; ST_UNKNOWN_3F
+	dw $689e     ; ST_UNKNOWN_40
+	dw $68ff     ; ST_UNKNOWN_41
+	dw $6980     ; ST_UNKNOWN_42
+	dw $69e9     ; ST_UNKNOWN_43
+	dw $6a5c     ; ST_UNKNOWN_44
+	dw $6ac9     ; ST_UNKNOWN_45
+	dw $6b44     ; ST_UNKNOWN_46
+	dw $68ff     ; ST_UNKNOWN_47
+	dw $6980     ; ST_UNKNOWN_48
+	dw $6bb1     ; ST_UNKNOWN_49
+	dw $6bf4     ; ST_UNKNOWN_4A
+	dw $6c73     ; ST_SLEEPING
+	dw $6d7d     ; ST_LADDER_SCRATCHING
+	dw $6dfb     ; ST_UNKNOWN_4D
+	dw $6ed0     ; ST_UNKNOWN_4E
+	dw $6f98     ; ST_UNKNOWN_4F
+	dw $700f     ; ST_UNKNOWN_50
+	dw $70a9     ; ST_UNKNOWN_51
+	dw Func_156d ; ST_UNKNOWN_52
+	dw Func_156d ; ST_UNKNOWN_53
+	dw Func_156d ; ST_UNKNOWN_54
+	dw Func_156d ; ST_UNKNOWN_55
+	dw Func_156d ; ST_UNKNOWN_56
+	dw Func_156d ; ST_UNKNOWN_57
+	dw Func_156d ; ST_UNKNOWN_58
+	dw Func_156d ; ST_UNKNOWN_59
+	dw Func_156d ; ST_UNKNOWN_5A
+	dw Func_156d ; ST_UNKNOWN_5B
+	dw Func_156d ; ST_UNKNOWN_5C
+	dw Func_156d ; ST_UNKNOWN_5D
+	dw Func_156d ; ST_UNKNOWN_5E
+	dw Func_156d ; ST_UNKNOWN_5F
 ; 0x19c81
 
 Func_19c81: ; 19c81 (6:5c81)
@@ -657,47 +832,35 @@ Func_19c81: ; 19c81 (6:5c81)
 	ld [wWarioState], a
 	xor a
 	ld [wceed], a
-	ld [wIdleCounter], a
+	ld [wWarioStateCounter], a
 	ld [wca89], a
 	ld a, $04
 	ld [wca7b], a
 	ld a, $40
-	ld [wca7c], a
+	ld [wca7c + 0], a
 	ld a, $00
-	ld [$ca7d], a
+	ld [wca7c + 1], a
 	call Func_15b0
 	ld a, $05
-	ld [wca7e], a
+	ld [wSpriteBank], a
 	ld a, $40
-	ld [wca7f], a
+	ld [wSpritePtr + 0], a
 	ld a, $00
-	ld [$ca80], a
+	ld [wSpritePtr + 1], a
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
 
 	ld a, [wDirection]
-	ld [wIdleCycles], a
+	ld [wWarioStateCycles], a
 	and a
 	jr nz, .asm_19ccd
-	ld a, HIGH(Frameset_14252)
-	ld [wFramesetPtr + 0], a
-	ld a, LOW(Frameset_14252)
-	ld [wFramesetPtr + 1], a
+	load_frameset_ptr Frameset_14252
 	jr .got_frameset
 .asm_19ccd
-	ld a, HIGH(Frameset_1425f)
-	ld [wFramesetPtr + 0], a
-	ld a, LOW(Frameset_1425f)
-	ld [wFramesetPtr + 1], a
+	load_frameset_ptr Frameset_1425f
 .got_frameset
-	ld a, $05
-	ldh [hCallFuncBank], a
-	ld a, $53
-	ldh [hCallFuncPointer], a
-	ld a, $0e
-	ldh [$ff8e], a
-	call hCallFunc
+	update_anim
 	ret
 ; 0x19ce7
 
@@ -705,9 +868,9 @@ Func_19c81: ; 19c81 (6:5c81)
 
 Func_19e7f: ; 19e7f (6:5e7f)
 	xor a
-	ld [wIdleCounter], a
+	ld [wWarioStateCounter], a
 	ld a, [wDirection]
-	ld [wIdleCycles], a
+	ld [wWarioStateCycles], a
 	ld a, ST_UNKNOWN_31
 	ld [wWarioState], a
 	xor a
@@ -719,44 +882,88 @@ Func_19e7f: ; 19e7f (6:5e7f)
 	ld a, $04
 	ld [wca7b], a
 	ld a, $48
-	ld [wca7c], a
+	ld [wca7c + 0], a
 	ld a, $00
-	ld [$ca7d], a
+	ld [wca7c + 1], a
 	call Func_15b0
 	ld a, $05
-	ld [wca7e], a
+	ld [wSpriteBank], a
 	ld a, $42
-	ld [wca7f], a
+	ld [wSpritePtr + 0], a
 	ld a, $6c
-	ld [$ca80], a
+	ld [wSpritePtr + 1], a
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	ld a, [wIdleCycles]
+	ld a, [wWarioStateCycles]
 	cp $01
 	jr z, .asm_19ed7
-	ld a, HIGH(Frameset_14a38)
-	ld [wFramesetPtr + 0], a
-	ld a, LOW(Frameset_14a38)
-	ld [wFramesetPtr + 1], a
+	load_frameset_ptr Frameset_14a38
 	jr .got_frameset
 .asm_19ed7
-	ld a, HIGH(Frameset_14a3b)
-	ld [wFramesetPtr + 0], a
-	ld a, LOW(Frameset_14a3b)
-	ld [wFramesetPtr + 1], a
+	load_frameset_ptr Frameset_14a3b
 .got_frameset
-	ld a, $05
-	ldh [hCallFuncBank], a
-	ld a, $53
-	ldh [hCallFuncPointer], a
-	ld a, $0e
-	ldh [$ff8e], a
-	call hCallFunc
+	update_anim
 	ret
 ; 0x19ef1
 
-	INCROM $19ef1, $1a3bb
+	INCROM $19ef1, $1a0e8
+
+Func_1a0e8: ; 1a0e8 (6:60e8)
+	xor a
+	ld [wca9a], a
+	ld a, ST_UNKNOWN_35
+	ld [wWarioState], a
+	ld a, $ff
+	ld [wca70], a
+	ld a, $e5
+	ld [wca6f], a
+	ld a, $f7
+	ld [wca71], a
+	ld a, $09
+	ld [wca72], a
+	xor a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wca96], a
+	ld [wca89], a
+	ld [wca9d], a
+	ld [wca6d], a
+	ld [wca8b], a
+	ld [wc0e0], a
+	ld hl, Pals_c800
+	call Func_1af6
+	ld a, $04
+	ld [wca7b], a
+	ld a, $78
+	ld [wca7c + 0], a
+	ld a, $00
+	ld [wca7c + 1], a
+	call Func_15b0
+	ld a, $05
+	ld [wSpriteBank], a
+	ld a, $59
+	ld [wSpritePtr + 0], a
+	ld a, $55
+	ld [wSpritePtr + 1], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1a164
+	load_frameset_ptr Frameset_15f94
+	jr .asm_1a16e
+.asm_1a164
+	load_frameset_ptr Frameset_15f97
+.asm_1a16e
+	update_anim
+	ret
+; 0x1a17e
+
+	INCROM $1a17e, $1a3bb
 
 SetState_LadderClimbing: ; 1a3bb (6:63bb)
 	ld a, ST_LADDER_CLIMBING
@@ -767,11 +974,11 @@ SetState_LadderClimbing: ; 1a3bb (6:63bb)
 	ld [wca64], a
 	xor a
 	ld [wceed], a
-	ld [wIdleCounter], a
-	ld [wIdleCycles], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
 	ld [wca96], a
-	ld [wca75], a
-	ld [wca74], a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
 	ld [wca99], a
 	ld a, $ff
 	ld [wca70], a
@@ -789,21 +996,16 @@ SetState_LadderClimbing: ; 1a3bb (6:63bb)
 	ld [wca7c + 1], a
 	call Func_15b0
 	ld a, $05
-	ld [wca7e], a
+	ld [wSpriteBank], a
 	ld a, $55
-	ld [wca7f + 0], a
+	ld [wSpritePtr + 0], a
 	ld a, $cc
-	ld [wca7f + 1], a
+	ld [wSpritePtr + 1], a
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	ld a, HIGH(Frameset_158d6)
-	ld [wFramesetPtr + 0], a
-	ld a, LOW(Frameset_158d6)
-	ld [wFramesetPtr + 1], a
-	ld a, BANK(Frameset_158d6)
-	ldh [hCallFuncBank], a
-	call_hram Func_e53
+	load_frameset_ptr Frameset_158d6
+	update_anim
 	ret
 ; 0x1a436
 
@@ -814,8 +1016,8 @@ SetState_Sleeping: ; 1ac10 (6:6c10)
 	ld [wWarioState], a
 	xor a
 	ld [wceed], a
-	ld [wIdleCounter], a
-	ld [wIdleCycles], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
 	ld a, $04
 	ld [wca7b], a
 	ld a, $40
@@ -824,11 +1026,11 @@ SetState_Sleeping: ; 1ac10 (6:6c10)
 	ld [wca7c + 1], a
 	call Func_15b0
 	ld a, $05
-	ld [wca7e], a
+	ld [wSpriteBank], a
 	ld a, $40
-	ld [wca7f + 0], a
+	ld [wSpritePtr + 0], a
 	ld a, $00
-	ld [wca7f + 1], a
+	ld [wSpritePtr + 1], a
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -836,20 +1038,12 @@ SetState_Sleeping: ; 1ac10 (6:6c10)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1ac59
-	ld a, HIGH(Frameset_1421c)
-	ld [wFramesetPtr + 0], a
-	ld a, LOW(Frameset_1421c)
-	ld [wFramesetPtr + 1], a
+	load_frameset_ptr Frameset_1421c
 	jr .got_frameset
 .asm_1ac59
-	ld a, HIGH(Frameset_14225)
-	ld [wFramesetPtr + 0], a
-	ld a, LOW(Frameset_14225)
-	ld [wFramesetPtr + 1], a
+	load_frameset_ptr Frameset_14225
 .got_frameset
-	ld a, BANK(Frameset_14225)
-	ldh [hCallFuncBank], a
-	call_hram Func_e53
+	update_anim
 	ret
 ; 0x1ac73
 
@@ -861,7 +1055,7 @@ Func_1ad9a: ; 1ad9a (6:6d9a)
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	ld [wIdleCounter], a
+	ld [wWarioStateCounter], a
 	ld a, $03
 	ld [wca9b], a
 
@@ -873,29 +1067,21 @@ Func_1ad9a: ; 1ad9a (6:6d9a)
 	ld [wca7c + 1], a
 	call Func_15b0
 	ld a, $05
-	ld [wca7e], a
+	ld [wSpriteBank], a
 	ld a, $4a
-	ld [wca7f + 0], a
+	ld [wSpritePtr + 0], a
 	ld a, $82
-	ld [wca7f + 1], a
+	ld [wSpritePtr + 1], a
 
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1ade1
-	ld a, HIGH(Frameset_14d0b)
-	ld [wFramesetPtr + 0], a
-	ld a, LOW(Frameset_14d0b)
-	ld [wFramesetPtr + 1], a
+	load_frameset_ptr Frameset_14d0b
 	jr .asm_1adeb
 .asm_1ade1
-	ld a, HIGH(Frameset_14d10)
-	ld [wFramesetPtr + 0], a
-	ld a, LOW(Frameset_14d10)
-	ld [wFramesetPtr + 1], a
+	load_frameset_ptr Frameset_14d10
 .asm_1adeb
-	ld a, BANK(Frameset_14d10)
-	ldh [hCallFuncBank], a
-	call_hram Func_e53
+	update_anim
 	ret
 ; 0x1adfb
 
@@ -906,8 +1092,8 @@ Func_1ae68: ; 1ae68 (6:6e68)
 	ld [wWarioState], a
 	xor a
 	ld [wceed], a
-	ld [wIdleCounter], a
-	ld [wIdleCycles], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
 	ld [wca96], a
 	ld a, $ff
 	ld [wca70], a
@@ -925,21 +1111,16 @@ Func_1ae68: ; 1ae68 (6:6e68)
 	ld [wca7c + 1], a
 	call Func_15b0
 	ld a, $05
-	ld [wca7e], a
+	ld [wSpriteBank], a
 	ld a, $55
-	ld [wca7f + 0], a
+	ld [wSpritePtr + 0], a
 	ld a, $cc
-	ld [wca7f + 1], a
+	ld [wSpritePtr + 1], a
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	ld a, HIGH(Frameset_158d6)
-	ld [wFramesetPtr + 0], a
-	ld a, LOW(Frameset_158d6)
-	ld [wFramesetPtr + 1], a
-	ld a, BANK(Frameset_158d6)
-	ldh [hCallFuncBank], a
-	call_hram Func_e53
+	load_frameset_ptr Frameset_158d6
+	update_anim
 	ret
 ; 0x1aed0
 

@@ -275,7 +275,13 @@ wc0dd:: ; c0dd
 wc0de:: ; c0de
 	ds $1
 
-	ds $3
+	ds $1
+
+wc0e0:: ; c0e0
+	ds $1
+
+wc0e1:: ; c0e1
+	ds $1
 
 wc0e2:: ; c0e2
 	ds $1
@@ -502,7 +508,10 @@ wca39:: ; ca39
 wca3b:: ; ca3b
 	ds $1
 
-wca3c:: ; ca3c
+; a POWER_UP_* constant
+; this value is incremental which means that
+; a Power Up level unlocks all levels before it
+wPowerUpLevel:: ; ca3c
 	ds $1
 
 wca3d:: ; ca3d
@@ -596,15 +605,23 @@ wca72:: ; ca72
 wca73:: ; ca73
 	ds $1
 
-wca74:: ; ca74
+; which table to use for jump velocities
+; JUMP_VEL_* constant
+wJumpVelTable:: ; ca74
 	ds $1
 
-wca75:: ; ca75
+; the index of the jump velocity value
+; corresponding to wJumpVelTable
+wJumpVelIndex:: ; ca75
 	ds $1
 
+wca76:: ; ca76
 	ds $1
 
-wca77:: ; ca77
+; whether Wario is jumping upwards or not
+; used to check if the player can still
+; gain height while holding down the jump button
+wJumpingUpwards:: ; ca77
 	ds $1
 
 wca78:: ; ca78
@@ -620,10 +637,10 @@ wca7b:: ; ca7b
 wca7c:: ; ca7c
 	ds $2
 
-wca7e:: ; ca7e
+wSpriteBank:: ; ca7e
 	ds $1
 
-wca7f:: ; ca7f
+wSpritePtr:: ; ca7f
 	ds $2
 
 wFramesetPtr:: ; ca81
@@ -635,22 +652,22 @@ wWarioState:: ; ca83
 	ds $1
 
 ; increments every frame
-; that Wario is in the idle state
-wIdleCounter:: ; ca84
+; that Wario is in some state
+wWarioStateCounter:: ; ca84
 	ds $1
 
-; counts how many times wIdleCounter overflows
-; used for knowing how long Wario is idling
-wIdleCycles:: ; ca85
+; counts how many times wWarioStateCounter overflows
+; used for knowing how long Wario is some state
+wWarioStateCycles:: ; ca85
 	ds $1
 
 wca86:: ; ca86
 	ds $1
 
-wca87:: ; ca87
+wWarioYPos:: ; ca87
 	ds $1
 
-wca88:: ; ca88
+wWarioXPos:: ; ca88
 	ds $1
 
 wca89:: ; ca89
@@ -689,6 +706,7 @@ wca93:: ; ca93
 wca94:: ; ca94
 	ds $1
 
+wca95:: ; ca95
 	ds $1
 
 wca96:: ; ca96

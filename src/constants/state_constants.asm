@@ -10,10 +10,10 @@
 	const ST_ATTACKING_AIRBORNE   ; 08
 	const ST_ATTACK_KNOCK_BACK    ; 09
 	const ST_DIVING               ; 0a
-	const ST_SUBMERGING           ; 0b
+	const ST_SUBMERGED            ; 0b
 	const ST_WATER_SURFACE_IDLING ; 0c
 	const ST_WATER_SURFACE_MOVING ; 0d
-	const ST_UNKNOWN_0E           ; 0e
+	const ST_UNDERWATER_THRUSTING ; 0e
 	const ST_UNKNOWN_0F           ; 0f
 	const ST_UNKNOWN_10           ; 10
 	const ST_UNKNOWN_11           ; 11
@@ -25,7 +25,7 @@
 	const ST_UNKNOWN_17           ; 17
 	const ST_UNKNOWN_18           ; 18
 	const ST_UNKNOWN_19           ; 19
-	const ST_UNKNOWN_1A           ; 1a
+	const ST_SMASH_ATTACKING      ; 1a
 	const ST_UNKNOWN_1B           ; 1b
 	const ST_UNKNOWN_1C           ; 1c
 	const ST_UNKNOWN_1D           ; 1d

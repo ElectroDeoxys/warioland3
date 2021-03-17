@@ -90,14 +90,14 @@ Func_20000: ; 20000 (8:4000)
 	sub e
 	ld b, a
 	ld hl, wca70
-	ld a, [wca87]
+	ld a, [wWarioYPos]
 	add [hl]
 	sub e
 	sub b
 	jp c, .asm_20028
 	ld c, a
 	ld hl, wca6f
-	ld a, [wca87]
+	ld a, [wWarioYPos]
 	add [hl]
 	sub e
 	ld b, a
@@ -130,14 +130,14 @@ Func_20000: ; 20000 (8:4000)
 	sub e
 	ld b, a
 	ld hl, wca72
-	ld a, [wca88]
+	ld a, [wWarioXPos]
 	add [hl]
 	sub e
 	sub b
 	jp c, .asm_20028
 	ld c, a
 	ld hl, wca71
-	ld a, [wca88]
+	ld a, [wWarioXPos]
 	add [hl]
 	sub e
 	ld b, a

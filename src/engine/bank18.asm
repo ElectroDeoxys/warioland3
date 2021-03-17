@@ -196,7 +196,7 @@ Func_6130b: ; 6130b (18:530b)
 ; 0x61348
 
 Func_61348: ; 61348 (18:5348)
-	ld a, [wca3c]
+	ld a, [wPowerUpLevel]
 	ld e, a
 	ld a, [wca8e]
 	rla
