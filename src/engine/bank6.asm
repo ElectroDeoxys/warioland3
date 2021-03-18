@@ -272,7 +272,7 @@ Func_19832: ; 19832 (6:5832)
 
 Func_198c7: ; 198c7 (6:58c7)
 	xor a
-	ld [wc189], a
+	ld [wIsStandingOnSlope], a
 	ld hl, wca61
 	ld de, hffa8
 	ld a, [hli]
@@ -542,7 +542,7 @@ Func_199e9: ; 199e9 (6:59e9)
 
 Func_19a53: ; 19a53 (6:5a53)
 	xor a
-	ld [wc189], a
+	ld [wIsStandingOnSlope], a
 	ld a, [wca96]
 	and a
 	jr z, .asm_19a62

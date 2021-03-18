@@ -915,6 +915,7 @@ Func_4508: ; 4508 (1:4508)
 	ld a, [wceef]
 	and $03
 	ld [wceef], a
+
 .asm_45ed
 	ld a, [wca3d]
 	bit 1, a
@@ -929,6 +930,7 @@ Func_4508: ; 4508 (1:4508)
 	xor a
 	ld [wSubSequence], a
 	ret
+
 .asm_4607
 	call DisableLCD
 	call FillWhiteBGPal

@@ -330,7 +330,7 @@ wPalFadeCounter:: ; c187
 
 	ds $1
 
-wc189:: ; c189
+wIsStandingOnSlope:: ; c189
 	ds $1
 
 	ds $3

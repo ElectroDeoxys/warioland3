@@ -88,7 +88,7 @@ Func_20000: ; 20000 (8:4000)
 	ld a, [wc1be]
 	add [hl]
 	sub e
-	ld b, a
+	ld b, a ; wc1ba + wc1be - $d0
 	ld hl, wca70
 	ld a, [wWarioYPos]
 	add [hl]

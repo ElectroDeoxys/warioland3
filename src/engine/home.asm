@@ -2595,7 +2595,7 @@ Func_1259: ; 1259 (0:1259)
 	add b
 	ld [wca64], a
 	ld a, [wca63]
-	adc $00
+	adc 0
 	ld [wca63], a
 	ret
 ; 0x1270
@@ -2608,7 +2608,7 @@ Func_1270: ; 1270 (0:1270)
 	sub b
 	ld [wca64], a
 	ld a, [wca63]
-	sbc $00
+	sbc 0
 	ld [wca63], a
 	ret
 ; 0x1287
@@ -2618,11 +2618,14 @@ Func_1287: ; 1287 (0:1287)
 	ld a, [wc0c2]
 	add b
 	ld [wc0c2], a
+;	fallthrough
+
+Func_128e: ; 128e (0:128e)
 	ld a, [wca62]
 	add b
 	ld [wca62], a
 	ld a, [wca61]
-	adc $00
+	adc 0
 	ld [wca61], a
 	ret
 ; 0x129e
@@ -2632,11 +2635,14 @@ Func_129e: ; 129e (0:129e)
 	ld a, [wc0c2]
 	sub b
 	ld [wc0c2], a
+;	fallthrough
+
+Func_12a5: ; 12a5 (0:12a5)
 	ld a, [wca62]
 	sub b
 	ld [wca62], a
 	ld a, [wca61]
-	sbc $00
+	sbc 0
 	ld [wca61], a
 	ret
 ; 0x12b5
@@ -2890,7 +2896,7 @@ Func_151e: ; 151e (0:151e)
 	jr .asm_1554
 
 .dir_right
-	ld a, [wc189]
+	ld a, [wIsStandingOnSlope]
 	bit 0, a
 	jr z, .asm_1554
 .asm_1531
@@ -2909,7 +2915,7 @@ Func_151e: ; 151e (0:151e)
 	ld [wca86], a
 	jr .asm_1554
 .dir_left
-	ld a, [wc189]
+	ld a, [wIsStandingOnSlope]
 	bit 1, a
 	jr z, .asm_1554
 	jr .asm_1531

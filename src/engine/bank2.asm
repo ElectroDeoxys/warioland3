@@ -597,10 +597,7 @@ Func_846e: ; 846e (2:446e)
 	ld [wFrameDuration], a
 	ld [wca68], a
 
-	ld a, HIGH(Frameset_14d18)
-	ld [wFramesetPtr + 0], a
-	ld a, LOW(Frameset_14d18)
-	ld [wFramesetPtr + 1], a
+	load_frameset_ptr Frameset_14d18
 	update_anim
 
 .asm_85a7
@@ -8538,7 +8535,7 @@ Func_b915: ; b915 (2:7915)
 	inc a
 .asm_b98f
 	ld b, a
-	ld a, [wc189]
+	ld a, [wIsStandingOnSlope]
 	and a
 	jr nz, .asm_b99c
 	ld a, b

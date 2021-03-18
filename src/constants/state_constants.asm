@@ -14,16 +14,16 @@
 	const ST_WATER_SURFACE_IDLING ; 0c
 	const ST_WATER_SURFACE_MOVING ; 0d
 	const ST_UNDERWATER_THRUSTING ; 0e
-	const ST_UNKNOWN_0F           ; 0f
-	const ST_UNKNOWN_10           ; 10
-	const ST_UNKNOWN_11           ; 11
+	const ST_SWIM_KNOCK_BACK      ; 0f
+	const ST_WATER_STUNG          ; 10
+	const ST_TRYING_SUBMERGE      ; 11
 	const ST_CROUCHING            ; 12
 	const ST_CROUCH_WALKING       ; 13
-	const ST_UNKNOWN_14           ; 14
+	const ST_CROUCH_AIRBORNE      ; 14
 	const ST_STUNG                ; 15
-	const ST_UNKNOWN_16           ; 16
-	const ST_UNKNOWN_17           ; 17
-	const ST_UNKNOWN_18           ; 18
+	const ST_STUNG_RECOVERY       ; 16
+	const ST_PIPE_GOING_DOWN      ; 17
+	const ST_PIPE_GOING_UP        ; 18
 	const ST_UNKNOWN_19           ; 19
 	const ST_SMASH_ATTACKING      ; 1a
 	const ST_UNKNOWN_1B           ; 1b
@@ -40,7 +40,7 @@
 	const ST_UNKNOWN_26           ; 26
 	const ST_SLIDING              ; 27
 	const ST_ROLLING              ; 28
-	const ST_UNKNOWN_29           ; 29
+	const ST_ROLLING_AIRBORNE     ; 29
 	const ST_UNKNOWN_2A           ; 2a
 	const ST_UNKNOWN_2B           ; 2b
 	const ST_ENTERING_DOOR        ; 2c
