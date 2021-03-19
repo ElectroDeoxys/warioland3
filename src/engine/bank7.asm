@@ -8,11 +8,11 @@ Func_1c000: ; 1c000 (7:4000)
 	call Func_1f6dc
 	call Func_1f64a
 	ld a, [wWarioState]
-	cp $30
+	cp $30 ; ST_UNKNOWN_30
 	jr c, .asm_1c04d
-	cp $60
+	cp $60 ; ST_UNKNOWN_60
 	jr c, .asm_1c03d
-	cp $b0
+	cp $b0 ; ST_UNKNOWN_B0
 	jr c, .asm_1c02d
 	farcall Func_1ec000
 	ret
@@ -58,20 +58,20 @@ Func_1c000: ; 1c000 (7:4000)
 	dw Func_156d                       ; ST_UNKNOWN_1B
 	dw Func_156d                       ; ST_UNKNOWN_1C
 	dw Func_156d                       ; ST_UNKNOWN_1D
-	dw $5916                           ; ST_UNKNOWN_1E
-	dw $5943                           ; ST_UNKNOWN_1F
-	dw $5995                           ; ST_UNKNOWN_20
-	dw $5a4f                           ; ST_UNKNOWN_21
-	dw $5cfc                           ; ST_UNKNOWN_22
-	dw $5d7f                           ; ST_UNKNOWN_23
-	dw $5e88                           ; ST_UNKNOWN_24
-	dw $5eaa                           ; ST_UNKNOWN_25
-	dw Func_1decc                      ; ST_UNKNOWN_26
+	dw UpdateState_PickingUp           ; ST_PICKING_UP
+	dw UpdateState_GrabIdling          ; ST_GRAB_IDLING
+	dw UpdateState_GrabWalking         ; ST_GRAB_WALKING
+	dw UpdateState_GrabAirborne        ; ST_GRAB_AIRBORNE
+	dw UpdateState_ThrowCharging       ; ST_THROW_CHARGING
+	dw UpdateState_ThrowFullyCharged   ; ST_THROW_FULLY_CHARGED
+	dw UpdateState_Throwing            ; ST_THROWING
+	dw UpdateState_ThrowingAirborne    ; ST_THROWING_AIRBORNE
+	dw UpdateState_GrabSmashAttacking  ; ST_GRAB_SMASH_ATTACKING
 	dw UpdateState_Sliding             ; ST_SLIDING
 	dw UpdateState_Rolling             ; ST_ROLLING
 	dw UpdateState_RollingAirborne     ; ST_ROLLING_AIRBORNE
 	dw $62c5                           ; ST_UNKNOWN_2A
-	dw $6347                           ; ST_UNKNOWN_2B
+	dw UpdateState_GroundShakeStunned  ; ST_GROUND_SHAKE_STUNNED
 	dw UpdateState_EnteringDoor        ; ST_ENTERING_DOOR
 	dw Func_156d                       ; ST_UNKNOWN_2D
 	dw Func_156d                       ; ST_UNKNOWN_2E
@@ -974,6 +974,7 @@ UpdateState_Attacking: ; 1c8df (7:48df)
 	ld a, [wWarioState]
 	cp ST_ATTACKING
 	ret nz ; done if not attacking anymore
+
 	ld a, [wca89]
 	cp $2b
 	jr nc, .asm_1c9b2
@@ -989,6 +990,7 @@ UpdateState_Attacking: ; 1c8df (7:48df)
 	ld [wca86], a
 .asm_1c99e
 	jr .asm_1c9b2
+
 .asm_1c9a0
 	call Func_151e
 	call Func_1259
@@ -1009,6 +1011,7 @@ UpdateState_Attacking: ; 1c8df (7:48df)
 	ld a, [wWarioState]
 	cp ST_ATTACKING
 	ret nz ; done if not attacking anymore
+
 	ld hl, wca89
 	dec [hl]
 	ret nz
@@ -1016,6 +1019,7 @@ UpdateState_Attacking: ; 1c8df (7:48df)
 	jr z, .asm_1c9ec
 	farcall Func_19c81
 	ret
+
 .asm_1c9ec
 	ld a, [wJoypadDown]
 	and D_RIGHT | D_LEFT
@@ -2504,9 +2508,565 @@ UpdateState_SmashAttacking: ; 1d8f8 (7:58f8)
 	jp SetState_Idling
 ; 0x1d916
 
-	INCROM $1d916, $1decc
+UpdateState_PickingUp: ; 1d916 (7:5916)
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	jp nz, Func_1dd78
+	ld a, [wca9a]
+	and a
+	jp z, SetState_Idling
+	and $0f
+	cp $02
+	jp z, Func_1efe7
+	update_anim
+	ld a, [wc1a8]
+	and a
+	ret z
+	jp Func_1efe7
+; 0x1d943
 
-Func_1decc: ; 1decc (7:5ecc)
+UpdateState_GrabIdling: ; 1d943 (7:5943)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wWarioState]
+	cp ST_GRAB_IDLING
+	ret nz ; done not grab idling anymore
+
+	ld a, [wca9a]
+	and a
+	jp z, SetState_Idling
+	call Func_1ee88
+	ld a, [wWarioState]
+	cp ST_GRAB_IDLING
+	ret nz ; done not grab idling anymore
+
+	farcall Func_198e0
+	ld a, [wWarioState]
+	cp ST_GRAB_IDLING
+	ret nz ; done not grab idling anymore
+
+	ld a, b
+	and a
+	jp z, Func_1edd3
+	ld hl, hffa8
+	ld de, wca61
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ret
+; 0x1d995
+
+UpdateState_GrabWalking: ; 1d995 (7:5995)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wWarioState]
+	cp ST_GRAB_WALKING
+	ret nz ; done if not grab walking anymore
+
+	ld a, [wca9a]
+	and a
+	jp z, HandleInput_Idling.no_turning
+	ld a, [wceed]
+	sub $01
+	ld [wceed], a
+	jr nc, .asm_1d9cf
+	ld a, $24
+	ld [wceed], a
+	load_sound SFX_04
+.asm_1d9cf
+	update_anim
+	call Func_1eefc
+	ld a, [wWarioState]
+	cp ST_GRAB_WALKING
+	ret nz ; done if not grab walking anymore
+
+	farcall Func_198e0
+	ld a, b
+	and a
+	jp z, Func_1edd3
+	ld hl, hffa8
+	ld de, wca61
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ret
+; 0x1da07
+
+SetState_ThrowingAirborne: ; 1da07 (7:5a07)
+	ld a, ST_THROWING_AIRBORNE
+	ld [wWarioState], a
+	ld a, [wca9a]
+	and $f0
+	or $07
+	ld [wca9a], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1da43
+	load_frameset_ptr Frameset_15fae
+.asm_1da33
+	update_anim
+	ret
+.asm_1da43
+	load_frameset_ptr Frameset_15fb3
+	jr .asm_1da33
+; 0x1da4f
+
+UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wWarioState]
+	cp ST_GRAB_AIRBORNE
+	ret nz ; done if not grabbing airborne anymore
+
+	ld a, [wc0db]
+	and a
+	jp nz, Func_1cd48
+	ld a, [wca9a]
+	and a
+	jp z, Func_1c2ae
+	ld a, [wcaa0]
+	and a
+	jr z, .asm_1da8f
+	farcall Func_1a0e8
+	ret
+
+.asm_1da8f
+	ld a, [wJoypadPressed]
+	bit B_BUTTON_F, a
+	jp nz, SetState_ThrowingAirborne
+	call Func_1f077
+	ld a, [wWarioState]
+	cp ST_GRAB_AIRBORNE
+	ret nz ; done if not grabbing airborne anymore
+
+	ld a, [wPowerUpLevel]
+	cp POWER_UP_LEAD_OVERALLS
+	jr c, .asm_1dadc
+	ld a, [wca96]
+	and a
+	jr nz, .asm_1dacf
+	ld a, [wJumpVelIndex]
+	cp FALLING_JUMP_VEL_INDEX
+	jr c, .asm_1dadc
+	ld a, [wJoypadDown]
+	bit D_DOWN_F, a
+	jr z, .asm_1dadc
+	ld a, $01
+	ld [wca96], a
+
+.asm_1dac0
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1db2c
+	jr .asm_1db0d
+
+.asm_1dacf
+	ld a, [wJoypadDown]
+	bit D_DOWN_F, a
+	jr nz, .asm_1dadc
+	xor a
+	ld [wca96], a
+	jr .asm_1dae8
+.asm_1dadc
+	ld a, [wca95]
+	and a
+	jr z, .asm_1db49
+	ld a, [wca96]
+	and a
+	jr nz, .asm_1dac0
+.asm_1dae8
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1db01
+	load_frameset_ptr Frameset_15fa8
+	jr .asm_1db49
+.asm_1db01
+	load_frameset_ptr Frameset_15fab
+	jr .asm_1db49
+
+.asm_1db0d
+	ld a, [wPowerUpLevel]
+	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
+	jr nc, .asm_1db20
+	load_frameset_ptr Frameset_15fec
+	jr .asm_1db49
+.asm_1db20
+	load_frameset_ptr Frameset_1605c
+	jr .asm_1db49
+.asm_1db2c
+	ld a, [wPowerUpLevel]
+	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
+	jr nc, .asm_1db3f
+	load_frameset_ptr Frameset_15fef
+	jr .asm_1db49
+.asm_1db3f
+	load_frameset_ptr Frameset_16063
+.asm_1db49
+	update_anim
+
+	ld a, [wca9a]
+	bit 7, a
+	jr z, .asm_1db6b
+	ld a, [wca86]
+	cp $08
+	jr c, .asm_1db6b
+	ld a, $04
+	ld [wca86], a
+.asm_1db6b
+	ld a, [wJumpVelIndex]
+	cp FALLING_JUMP_VEL_INDEX
+	jr nc, .asm_1db8a
+	farcall Func_1996e
+	ld a, b
+	and a
+	ret z
+	ld a, FALLING_JUMP_VEL_INDEX
+	ld [wJumpVelIndex], a
+	ret
+
+.asm_1db8a
+	farcall Func_199e9
+	ld a, [wWarioState]
+	cp ST_GRAB_AIRBORNE
+	ret nz ; done if not grabbing airborne anymore
+
+	ld a, b
+	and a
+	jr nz, .asm_1dba6
+	jp Func_14de
+.asm_1dba6
+	call Func_14f6
+	ld a, [wc1aa]
+	and a
+	jr nz, .asm_1dbb7
+	load_sound SFX_10
+.asm_1dbb7
+	xor a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	ld [wca86], a
+	ld a, [wca96]
+	and a
+	jr z, .asm_1dbd0
+	ld a, [wPowerUpLevel]
+	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
+	jr c, .asm_1dc25
+	jr .asm_1dbd3
+.asm_1dbd0
+	jp Func_1efe7
+
+.asm_1dbd3
+	ld a, [wca97]
+	and a
+	jr nz, .asm_1dbe3
+	ld a, $20
+	ld [wca97], a
+	ld a, $01
+	ld [wca98], a
+.asm_1dbe3
+	ld a, [wc1aa]
+	and a
+	jr nz, .asm_1dbf1
+	load_sound SFX_02
+.asm_1dbf1
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1dc0a
+	load_frameset_ptr Frameset_15fd2
+	jr .asm_1dc14
+.asm_1dc0a
+	load_frameset_ptr Frameset_15fdf
+.asm_1dc14
+	update_anim
+	jr .asm_1dc5f
+
+.asm_1dc25
+	load_sound SFX_33
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1dc46
+	load_frameset_ptr Frameset_16020
+	jr .asm_1dc50
+.asm_1dc46
+	load_frameset_ptr Frameset_16037
+.asm_1dc50
+	update_anim
+
+.asm_1dc5f
+	ld a, $81
+	ld [wca96], a
+	ld a, ST_GRAB_SMASH_ATTACKING
+	ld [wWarioState], a
+	xor a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	ld a, $ff
+	ld [wca70], a
+	ld a, $e5
+	ld [wca6f], a
+	ld a, $f7
+	ld [wca71], a
+	ld a, $09
+	ld [wca72], a
+	ret
+; 0x1dc8b
+
+SetState_ThrowCharging: ; 1dc8b (7:5c8b)
+	load_sound SFX_2C
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld a, ST_THROW_CHARGING
+	ld [wWarioState], a
+	ld a, [wca9a]
+	and $f0
+	add $04
+	ld [wca9a], a
+	ld a, $04
+	ld [wca7b], a
+	ld a, $70
+	ld [wca7c + 0], a
+	ld a, $00
+	ld [wca7c + 1], a
+	call Func_15b0
+	ld a, $05
+	ld [wSpriteBank], a
+	ld a, $60
+	ld [wSpritePtr + 0], a
+	ld a, $6a
+	ld [wSpritePtr + 1], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1dce2
+	load_frameset_ptr Frameset_1642c
+	jr .asm_1dcec
+.asm_1dce2
+	load_frameset_ptr Frameset_1642f
+.asm_1dcec
+	update_anim
+	ret
+; 0x1dcfc
+
+UpdateState_ThrowCharging: ; 1dcfc (7:5cfc)
+	ld a, [wca9a]
+	and a
+	jp z, SetState_Idling
+	ld a, [wJoypadDown]
+	bit B_BUTTON_F, a
+	jp z, Func_1de3f
+	bit A_BUTTON_F, a
+	jp nz, Func_1dd78
+	bit D_DOWN_F, a
+	jp nz, Func_1e855
+
+	ld a, [wca9a]
+	bit 7, a
+	jr nz, .asm_1dd20
+	ld b, $1e
+	jr .asm_1dd22
+.asm_1dd20
+	ld b, $3c
+.asm_1dd22
+	ld a, [wWarioStateCounter]
+	inc a
+	ld [wWarioStateCounter], a
+	cp b
+	jr nc, .asm_1dd2d
+	ret
+
+.asm_1dd2d
+	xor a
+	ld [wceed], a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+
+	ld a, ST_THROW_FULLY_CHARGED
+	ld [wWarioState], a
+	ld a, [wca9a]
+	and $f0
+	add $05
+	ld [wca9a], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1dd5e
+	load_frameset_ptr Frameset_16432
+	jr .asm_1dd68
+.asm_1dd5e
+	load_frameset_ptr Frameset_16435
+.asm_1dd68
+	update_anim
+	ret
+; 0x1dd78
+
+Func_1dd78: ; 1dd78 (7:5d78)
+	xor a
+	ld [wca9a], a
+	jp StartJump_FromInput
+; 0x1dd7f
+
+UpdateState_ThrowFullyCharged: ; 1dd7f (7:5d7f)
+	ld a, [wceed]
+	sub $01
+	ld [wceed], a
+	jr nc, .asm_1dd96
+	ld a, $1e
+	ld [wceed], a
+	load_sound SFX_2D
+.asm_1dd96
+	ld a, [wca9a]
+	and a
+	jp z, SetState_Idling
+	and $0f
+	cp $06
+	jr z, .asm_1dde0
+	ld a, [wWarioStateCounter]
+	and a
+	jr nz, .asm_1dde0
+	ld a, [wc1a8]
+	and a
+	jr z, .asm_1dde0
+	ld a, [wca9a]
+	and $f0
+	add $06
+	ld [wca9a], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	inc a
+	ld [wWarioStateCounter], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1ddd6
+	load_frameset_ptr Frameset_16438
+	jr .asm_1dde0
+.asm_1ddd6
+	load_frameset_ptr Frameset_16441
+.asm_1dde0
+	update_anim
+
+	ld a, [wJoypadDown]
+	bit B_BUTTON_F, a
+	jr z, .asm_1de01
+	bit A_BUTTON_F, a
+	jp nz, Func_1dd78
+	bit D_DOWN_F, a
+	jp nz, Func_1e855
+	ret
+
+.asm_1de01
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1de1a
+	load_frameset_ptr Frameset_16403
+	jr .asm_1de24
+.asm_1de1a
+	load_frameset_ptr Frameset_16423
+.asm_1de24
+	update_anim
+
+	ld a, [wca9a]
+	and $f0
+	add $47
+	ld [wca9a], a
+	jr SetState_Throwing
+
+Func_1de3f: ; 1de3f (7:5e3f)
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1de58
+	load_frameset_ptr Frameset_163fe
+	jr .asm_1de62
+.asm_1de58
+	load_frameset_ptr Frameset_1641e
+.asm_1de62
+	update_anim
+
+	ld a, [wca9a]
+	and $f0
+	add $07
+	ld [wca9a], a
+;	fallthrough
+
+SetState_Throwing: ; 1de7b (7:5e7b)
+	xor a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld a, ST_THROWING
+	ld [wWarioState], a
+	ret
+; 0x1de88
+
+UpdateState_Throwing: ; 1de88 (7:5e88)
+	ld a, [wca9a]
+	and a
+	jp z, SetState_Idling
+	update_anim
+	ld a, [wc1a8]
+	and a
+	ret z
+	xor a
+	ld [wca9a], a
+	jp SetState_Idling
+; 0x1deaa
+
+UpdateState_ThrowingAirborne: ; 1deaa (7:5eaa)
+	ld a, [wca9a]
+	and a
+	jp z, Func_1c2ae
+	update_anim
+	ld a, [wc1a8]
+	and a
+	ret z
+	xor a
+	ld [wca9a], a
+	jp Func_1c2ae
+; 0x1decc
+
+UpdateState_GrabSmashAttacking: ; 1decc (7:5ecc)
 	ld a, [wca9a]
 	and a
 	jp z, SetState_Idling
@@ -2908,7 +3468,57 @@ UpdateState_RollingAirborne: ; 1e1e9 (7:61e9)
 	jp SetState_Rolling
 ; 0x1e2c5
 
-	INCROM $1e2c5, $1e3e8
+	INCROM $1e2c5, $1e347
+
+UpdateState_GroundShakeStunned: ; 1e347 (7:6347)
+	update_anim
+	ld a, [wca97]
+	and a
+	jr z, .asm_1e3b6
+	ld a, [wJumpVelTable]
+	and a
+	ret z
+	call Func_1488
+	farcall Func_2b1a6
+	call Func_1762
+	ld a, [wJumpVelIndex]
+	cp FALLING_JUMP_VEL_INDEX
+	jr nc, .asm_1e395
+	farcall Func_1996e
+	ld a, b
+	and a
+	ret z
+	ld a, FALLING_JUMP_VEL_INDEX
+	ld [wJumpVelIndex], a
+	ret
+
+.asm_1e395
+	farcall Func_198e0
+	ld a, b
+	and a
+	jr nz, .asm_1e3ab
+	jp Func_14de
+.asm_1e3ab
+	call Func_14f6
+	xor a
+	ld [wJumpVelTable], a
+	ld [wJumpVelIndex], a
+	ret
+.asm_1e3b6
+	ld a, $e5
+	ld [wca6f], a
+	farcall Func_1996e
+	ld a, b
+	and a
+	jr z, .asm_1e3d1
+	jp Func_1e855
+.asm_1e3d1
+	farcall Func_198e0
+	ld a, b
+	and a
+	jp z, Func_1c2ae
+	jp SetState_Idling
+; 0x1e3e8
 
 UpdateState_EnteringDoor: ; 1e3e8 (7:63e8)
 	ld a, [wceed]
@@ -3973,7 +4583,231 @@ Func_1ed4b: ; 1ed4b (7:6d4b)
 	ret
 ; 0x1edd3
 
-	INCROM $1edd3, $1efe7
+Func_1edd3: ; 1edd3 (7:6dd3)
+	ld a, [wca9a]
+	and $f0
+	add $03
+	ld [wca9a], a
+	ld a, FALLING_JUMP_VEL_INDEX
+	ld [wJumpVelIndex], a
+	ld a, JUMP_VEL_HIGH_JUMP
+	ld [wJumpVelTable], a
+	jr SetState_GrabAirborne
+;	fallthrough
+
+Func_1ede9: ; 1ede9 (7:6de9)
+	load_sound SFX_01
+	xor a
+	ld [wJumpVelIndex], a
+	ld [wca96], a
+	ld a, [wPowerUpLevel]
+	cp POWER_UP_HIGH_JUMP_BOOTS
+	ld a, JUMP_VEL_NORMAL
+	jr c, .asm_1ee0a
+	ld hl, wJoypadDown
+	bit D_UP_F, [hl]
+	jr z, .asm_1ee0a
+	ld a, JUMP_VEL_HIGH_JUMP
+.asm_1ee0a
+	ld [wJumpVelTable], a
+;	fallthrough
+
+SetState_GrabAirborne: ; 1ee0d (7:6e0d)
+	ld a, ST_GRAB_AIRBORNE
+	ld [wWarioState], a
+	ld a, $ff
+	ld [wca70], a
+	ld a, $e5
+	ld [wca6f], a
+	ld a, $f7
+	ld [wca71], a
+	ld a, $09
+	ld [wca72], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld a, $04
+	ld [wca7b], a
+	ld a, $78
+	ld [wca7c + 0], a
+	ld a, $00
+	ld [wca7c + 1], a
+	call Func_15b0
+	ld a, $05
+	ld [wSpriteBank], a
+	ld a, $59
+	ld [wSpritePtr + 0], a
+	ld a, $55
+	ld [wSpritePtr + 1], a
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1ee66
+	load_frameset_ptr Frameset_15fa8
+	jr .asm_1ee70
+.asm_1ee66
+	load_frameset_ptr Frameset_15fab
+.asm_1ee70
+	update_anim
+	ld a, [wcac9]
+	and a
+	ret z
+	call UpdateState_GrabAirborne
+	ret
+; 0x1ee88
+
+Func_1ee88: ; 1ee88 (7:6e88)
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	jp nz, Func_1ede9
+	ld a, [wJoypadDown]
+	bit B_BUTTON_F, a
+	jp nz, SetState_ThrowCharging
+	bit D_DOWN_F, a
+	jp nz, Func_1e855
+	and D_RIGHT | D_LEFT
+	jr nz, .asm_1eea2
+	ret
+
+.asm_1eea2
+	ld a, ST_GRAB_WALKING
+	ld [wWarioState], a
+	xor a
+	ld [wceed], a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld a, $ff
+	ld [wca70], a
+	ld a, $e5
+	ld [wca6f], a
+	ld a, $f7
+	ld [wca71], a
+	ld a, $09
+	ld [wca72], a
+
+	ld a, [wJoypadDown]
+	bit D_RIGHT_F, a
+	jr nz, .asm_1eeeb
+	ld a, DIRECTION_LEFT
+	ld [wDirection], a
+	load_frameset_ptr Frameset_149fe
+.asm_1eedb
+	update_anim
+	ret
+.asm_1eeeb
+	ld a, DIRECTION_RIGHT
+	ld [wDirection], a
+	load_frameset_ptr Frameset_14a0f
+	jr .asm_1eedb
+; 0x1eefc
+
+Func_1eefc: ; 1eefc (7:6efc)
+	ld a, [wJoypadPressed]
+	bit B_BUTTON_F, a
+	jp nz, SetState_ThrowCharging
+	bit A_BUTTON_F, a
+	jp nz, Func_1ede9
+	bit D_DOWN_F, a
+	jp nz, .asm_1efaf
+	ld a, [wJoypadDown]
+	bit D_RIGHT_F, a
+	jr nz, .asm_1ef31
+	bit D_LEFT_F, a
+	jr nz, .asm_1ef4d
+	call Func_1700
+	jr z, .asm_1ef2e
+	farcall Func_1a773
+	ret
+.asm_1ef2e
+	jp Func_1efe7
+
+.asm_1ef31
+	ld a, [wDirection]
+	and a
+	jp z, Func_1efe7
+	farcall Func_19734
+	ld a, b
+	and $0f
+	ret nz
+	jr .asm_1ef69
+
+.asm_1ef4d
+	ld a, [wDirection]
+	and a
+	jp nz, Func_1efe7
+	farcall Func_19734
+	ld a, b
+	and $0f
+	ret nz
+	jr .asm_1ef7b
+
+.asm_1ef69
+	call Func_151e
+	call Func_1259
+	ld a, [wIsStandingOnSlope]
+	and a
+	jr z, .asm_1ef8d
+	bit 0, a
+	jr z, .asm_1ef8d
+	jr .asm_1efc5
+
+.asm_1ef7b
+	call Func_151e.asm_153f
+	call Func_1270
+	ld a, [wIsStandingOnSlope]
+	and a
+	jr z, .asm_1ef8d
+	bit 0, a
+	jr nz, .asm_1ef8d
+	jr .asm_1efc5
+.asm_1ef8d
+	ld a, [wca9a]
+	bit 7, a
+	jr nz, .asm_1efa1
+	ld a, [wca86]
+	cp $10
+	jr c, .asm_1efa0
+	ld a, $0c
+	ld [wca86], a
+.asm_1efa0
+	ret
+
+.asm_1efa1
+	ld a, [wca86]
+	cp $08
+	jr c, .asm_1efa0
+	ld a, $04
+	ld [wca86], a
+	jr .asm_1efa0
+
+.asm_1efaf
+	call Func_1700
+	jp z, Func_1e855
+	farcall Func_19e7f
+	ret
+
+.asm_1efc5
+	ld a, [wca9a]
+	bit 7, a
+	jr nz, .asm_1efd9
+	ld a, [wca86]
+	cp $08
+	jr c, .asm_1efd8
+	ld a, $04
+	ld [wca86], a
+.asm_1efd8
+	ret
+
+.asm_1efd9
+	ld a, [wca86]
+	cp $04
+	jr c, .asm_1efd8
+	ld a, $00
+	ld [wca86], a
+	jr .asm_1efd8
+; 0x1efe7
 
 Func_1efe7: ; 1efe7 (7:6fe7)
 	ld a, [wca9a]
@@ -3993,7 +4827,7 @@ Func_1efe7: ; 1efe7 (7:6fe7)
 	add $03
 	ld [wca9a], a
 
-	ld a, ST_UNKNOWN_1F
+	ld a, ST_GRAB_IDLING
 	ld [wWarioState], a
 	ld a, $ff
 	ld [wca70], a
@@ -4808,7 +5642,7 @@ Func_1f6dc: ; 1f6dc (7:76dc)
 	and a
 	jr nz, .asm_1f72b
 	ld a, [wWarioState]
-	cp ST_UNKNOWN_2B
+	cp ST_GROUND_SHAKE_STUNNED
 	jr z, .asm_1f72b
 	jr .asm_1f73c
 	ret ; unnecessary
@@ -4835,12 +5669,13 @@ Func_1f6dc: ; 1f6dc (7:76dc)
 .asm_1f73c
 	ld a, [wWarioState]
 	cp ST_LADDER_CLIMBING
-	jp z, Func_1f7e6
+	jp z, SetState_LadderShakeStunned
 	cp ST_LADDER_IDLING
-	jp z, Func_1f7e6
+	jp z, SetState_LadderShakeStunned
 	cp ST_LADDER_SCRATCHING
-	jp z, Func_1f7e6
-	ld a, ST_UNKNOWN_2B
+	jp z, SetState_LadderShakeStunned
+
+	ld a, ST_GROUND_SHAKE_STUNNED
 	ld [wWarioState], a
 	xor a
 	ld [wJumpVelIndex], a
@@ -4899,10 +5734,11 @@ Func_1f6dc: ; 1f6dc (7:76dc)
 	ret
 ; 0x1f7e6
 
-Func_1f7e6: ; 1f7e6 (7:77e6)
-	ld a, ST_UNKNOWN_3C
+SetState_LadderShakeStunned: ; 1f7e6 (7:77e6)
+	ld a, ST_LADDER_SHAKE_STUNNED
 	ld [wWarioState], a
 	load_sound SFX_0C
+
 	xor a
 	ld [wceed], a
 	ld [wWarioStateCounter], a

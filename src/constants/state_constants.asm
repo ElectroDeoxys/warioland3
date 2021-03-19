@@ -29,20 +29,20 @@
 	const ST_UNKNOWN_1B           ; 1b
 	const ST_UNKNOWN_1C           ; 1c
 	const ST_UNKNOWN_1D           ; 1d
-	const ST_UNKNOWN_1E           ; 1e
-	const ST_UNKNOWN_1F           ; 1f
-	const ST_UNKNOWN_20           ; 20
-	const ST_UNKNOWN_21           ; 21
-	const ST_UNKNOWN_22           ; 22
-	const ST_UNKNOWN_23           ; 23
-	const ST_UNKNOWN_24           ; 24
-	const ST_UNKNOWN_25           ; 25
-	const ST_UNKNOWN_26           ; 26
+	const ST_PICKING_UP           ; 1e
+	const ST_GRAB_IDLING          ; 1f
+	const ST_GRAB_WALKING         ; 20
+	const ST_GRAB_AIRBORNE        ; 21
+	const ST_THROW_CHARGING       ; 22
+	const ST_THROW_FULLY_CHARGED  ; 23
+	const ST_THROWING             ; 24
+	const ST_THROWING_AIRBORNE    ; 25
+	const ST_GRAB_SMASH_ATTACKING ; 26
 	const ST_SLIDING              ; 27
 	const ST_ROLLING              ; 28
 	const ST_ROLLING_AIRBORNE     ; 29
 	const ST_UNKNOWN_2A           ; 2a
-	const ST_UNKNOWN_2B           ; 2b
+	const ST_GROUND_SHAKE_STUNNED ; 2b
 	const ST_ENTERING_DOOR        ; 2c
 	const ST_UNKNOWN_2D           ; 2d
 	const ST_UNKNOWN_2E           ; 2e
@@ -59,8 +59,8 @@
 	const ST_UNKNOWN_39           ; 39
 	const ST_LADDER_CLIMBING      ; 3a
 	const ST_LADDER_IDLING        ; 3b
-	const ST_UNKNOWN_3C           ; 3c
-	const ST_UNKNOWN_3D           ; 3d
+	const ST_LADDER_SHAKE_STUNNED ; 3c
+	const ST_GETTING_OFF_LADDER   ; 3d
 	const ST_LADDER_SLIDING       ; 3e
 	const ST_UNKNOWN_3F           ; 3f
 	const ST_UNKNOWN_40           ; 40

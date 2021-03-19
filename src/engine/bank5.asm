@@ -523,7 +523,7 @@ Frameset_15900: ; 15900 (5:5900)
 	db $03, $04
 	db $ff
 
-Frameset_159003: ; 159003 (5:5903)
+Frameset_15903: ; 15903 (5:5903)
 	db $0a, $08
 	db $0b, $0a
 	db $0c, $0a
@@ -768,7 +768,92 @@ Frameset_16063: ; 16063 (5:6063)
 	db $ff
 ; 0x1606a
 
-	INCROM $1606a, $166e6
+	INCROM $1606a, $163ec
+
+Frameset_163ec: ; 163ec (5:63ec)
+	db $00, $03
+	db $01, $03
+	db $02, $01
+	db $03, $01
+	db $ff
+
+Frameset_163f5: ; 163f5 (5:63f5)
+	db $04, $07
+	db $05, $06
+	db $02, $02
+	db $03, $02
+	db $ff
+
+Frameset_163fe: ; 163fe (5:63fe)
+	db $06, $02
+	db $07, $02
+	db $ff
+
+Frameset_16403: ; 16403 (5:6403)
+	db $08, $04
+	db $04, $04
+	db $0a, $02
+	db $0b, $02
+	db $ff
+
+Frameset_1640c: ; 1640c (5:640c)
+	db $0c, $03
+	db $0d, $03
+	db $0e, $03
+	db $0f, $01
+	db $ff
+
+Frameset_16415: ; 16415 (5:6415)
+	db $10, $07
+	db $11, $06
+	db $0e, $02
+	db $0f, $02
+	db $ff
+
+Frameset_1641e: ; 1641e (5:641e)
+	db $12, $02
+	db $13, $02
+	db $ff
+
+Frameset_16423: ; 16423 (5:6423)
+	db $14, $04
+	db $10, $04
+	db $16, $02
+	db $17, $02
+	db $ff
+
+Frameset_1642c: ; 1642c (5:642c)
+	db $03, $04
+	db $ff
+
+Frameset_1642f: ; 1642f (5:642f)
+	db $0f, $04
+	db $ff
+
+Frameset_16432: ; 16432 (5:6432)
+	db $08, $04
+	db $ff
+
+Frameset_16435: ; 16435 (5:6435)
+	db $14, $04
+	db $ff
+
+Frameset_16438: ; 16438 (5:6438)
+	db $18, $02
+	db $1a, $01
+	db $1b, $01
+	db $09, $02
+	db $ff
+
+Frameset_16441: ; 16441 (5:6441)
+	db $19, $02
+	db $1c, $01
+	db $1d, $01
+	db $15, $02
+	db $ff
+; 0x1644a
+
+	INCROM $1644a, $166e6
 
 Frameset_166e6: ; 166e6 (5:66e6)
 	db $00, $02
