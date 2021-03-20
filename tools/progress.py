@@ -66,7 +66,7 @@ def reportINCROMs(incromDir):
 		diff = incEnd - incStart
 		incromBytes[incBank] += diff
 		incromByteTotal += diff
-	print("Total: " + str(incromByteTotal) + " bytes")
+	print("Total: " + str(incromByteTotal) + " bytes (" + "{0:.2f}".format(incromByteTotal / (0x4000 * banks) * 100) + "%)")
 	print("Made up of the following: ")
 	for i in range(0,banks):
 		if incromBytes[i] == 0:
@@ -77,7 +77,7 @@ def reportINCROMs(incromDir):
 			bankName = "home:   "
 		bytesString = str(incromBytes[i])
 		formattingStrings = " "*(8-len(bytesString)) 
-		print(bankName + bytesString + formattingStrings + "bytes")
+		print(bankName + bytesString + formattingStrings + "bytes (" + "{0:.2f}".format(incromBytes[i] / 0x4000 * 100) + "%)")
 
 
 # reads sym files and looks for instances of tcgdisasm's automatic symbols
