@@ -302,7 +302,68 @@ Func_20202: ; 20202 (8:4202)
 	ret
 ; 0x20203
 
-	INCROM $20203, $21f51
+	INCROM $20203, $20ed3
+
+SetState_OnFire: ; 20ed3 (8:4ed3)
+	ld a, ST_ON_FIRE
+	ld [wWarioState], a
+
+	xor a
+	ld [wca8d], a
+	ld [wceed], a
+	ld [wWarioStateCycles], a
+	ld [wca9a], a
+	ld [wca89], a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	ld [wca8b], a
+	ld [wca9d], a
+	ld [wca96], a
+	ld a, $ff
+	ld [wca70], a
+	ld a, $e5
+	ld [wca6f], a
+	ld a, $f7
+	ld [wca71], a
+	ld a, $09
+	ld [wca72], a
+	ld a, [wWarioStateCounter]
+	and a
+	ret nz
+
+	ld hl, Pals_c820
+	call Func_1af6
+
+	ld a, $09
+	ld [wca7b], a
+	ld a, $40
+	ld [wca7c + 0], a
+	ld a, $00
+	ld [wca7c + 1], a
+	call Func_15b0
+	ld a, $05
+	ld [wSpriteBank], a
+	ld a, $67
+	ld [wSpritePtr + 0], a
+	ld a, $3c
+	ld [wSpritePtr + 1], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_20f50
+	load_frameset_ptr Frameset_16b38
+	jr .asm_20f5a
+.asm_20f50
+	load_frameset_ptr Frameset_16b49
+.asm_20f5a
+	update_anim
+	ret
+; 0x20f6a
+
+	INCROM $20f6a, $21f51
 
 Func_21f51: ; 21f51 (8:5f51)
 	ld a, [wce00]

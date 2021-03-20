@@ -914,4 +914,303 @@ Frameset_16737: ; 16737 (5:6737)
 	db $ff
 ; 0x1673c
 
-	INCROM $1673c, $18000
+	INCROM $1673c, $16b14
+
+Frameset_16b14:
+	db $00, $02
+	db $01, $02
+	db $02, $02
+	db $03, $02
+	db $ff
+
+Frameset_16b1d:
+	db $04, $02
+	db $05, $02
+	db $06, $02
+	db $07, $02
+	db $ff
+
+Frameset_16b26:
+	db $08, $04
+	db $09, $04
+	db $0a, $04
+	db $0b, $04
+	db $ff
+
+Frameset_16b2f:
+	db $0c, $04
+	db $0d, $04
+	db $0e, $04
+	db $0f, $04
+	db $ff
+
+Frameset_16b38:
+	db $10, $02
+	db $11, $02
+	db $12, $02
+	db $13, $02
+	db $10, $02
+	db $11, $02
+	db $12, $02
+	db $13, $02
+	db $ff
+
+Frameset_16b49:
+	db $14, $02
+	db $15, $02
+	db $16, $02
+	db $17, $02
+	db $14, $02
+	db $15, $02
+	db $16, $02
+	db $17, $02
+	db $ff
+
+Frameset_16b5a:
+	db $18, $02
+	db $19, $02
+	db $1a, $02
+	db $1b, $02
+	db $ff
+
+Frameset_16b63:
+	db $1c, $02
+	db $1d, $02
+	db $1e, $02
+	db $1f, $02
+	db $ff
+; 0x16b6c
+
+	INCROM $16b6c, $16e47
+
+Frameset_16e47: ; 16e47 (5:6e47)
+	db $00, $05
+	db $01, $06
+	db $02, $03
+	db $03, $02
+	db $04, $06
+	db $05, $07
+	db $02, $01
+	db $03, $01
+	db $05, $03
+	db $02, $01
+	db $03, $01
+	db $04, $01
+	db $06, $03
+	db $07, $08
+	db $08, $02
+	db $09, $03
+	db $0a, $03
+	db $0b, $03
+	db $0c, $03
+	db $0d, $04
+	db $0e, $01
+	db $ff
+
+Frameset_16e72: ; 16e72 (5:6e72)
+	db $13, $05
+	db $14, $06
+	db $0f, $03
+	db $10, $02
+	db $11, $06
+	db $12, $07
+	db $0f, $01
+	db $10, $01
+	db $12, $03
+	db $0f, $01
+	db $10, $01
+	db $12, $01
+	db $06, $03
+	db $07, $08
+	db $08, $02
+	db $09, $03
+	db $0a, $03
+	db $0b, $03
+	db $0c, $03
+	db $0d, $04
+	db $0e, $01
+	db $ff
+; 0x16e9d
+
+	INCROM $16e9d, $173fe
+
+Frameset_173fe:
+	db $00, $03
+	db $01, $03
+	db $02, $03
+	db $03, $03
+	db $04, $03
+	db $ff
+
+Frameset_17409:
+	db $05, $0c
+	db $06, $08
+	db $07, $06
+	db $08, $06
+	db $09, $08
+	db $ff
+
+Frameset_17414:
+	db $0a, $05
+	db $0b, $05
+	db $0c, $06
+	db $06, $07
+	db $05, $08
+	db $ff
+
+Frameset_1741f:
+	db $0d, $03
+	db $0e, $03
+	db $0f, $03
+	db $10, $03
+	db $11, $03
+	db $ff
+
+Frameset_1742a:
+	db $05, $04
+	db $ff
+; 0x1742d
+
+	INCROM $1742d, $17b76
+
+Frameset_17b76: ; 17b76 (5:7b76)
+	db $00, $04
+	db $ff
+
+Frameset_17b79: ; 17b79 (5:7b79)
+	db $08, $04
+	db $ff
+
+Frameset_17b7c: ; 17b7c (5:7b7c)
+	db $02, $02
+	db $01, $02
+	db $02, $02
+	db $01, $02
+	db $04, $02
+	db $03, $02
+	db $04, $02
+	db $03, $02
+	db $ff
+
+Frameset_17b8d: ; 17b8d (5:7b8d)
+	db $0a, $02
+	db $09, $02
+	db $0a, $02
+	db $09, $02
+	db $0c, $02
+	db $0b, $02
+	db $0c, $02
+	db $0b, $02
+	db $ff
+
+Frameset_17b9e: ; 17b9e (5:7b9e)
+	db $00, $04
+	db $05, $07
+	db $06, $07
+	db $07, $07
+	db $06, $07
+	db $05, $07
+	db $06, $07
+	db $ff
+
+Frameset_17bad: ; 17bad (5:7bad)
+	db $08, $04
+	db $0d, $07
+	db $0e, $07
+	db $0f, $07
+	db $0e, $07
+	db $0d, $07
+	db $0e, $07
+	db $ff
+; 0x17bbc
+
+	INCROM $17bbc, $17ce2
+
+Frameset_17ce2:
+	db $00, $06
+	db $01, $07
+	db $02, $08
+	db $03, $0a
+	db $04, $08
+	db $05, $06
+	db $06, $07
+	db $07, $08
+	db $08, $0a
+	db $09, $08
+	db $ff
+; 0x17cf7
+
+	INCROM $17cf7, $17e1b
+
+Frameset_17e1b:
+	db $05, $06
+	db $00, $06
+	db $01, $04
+	db $02, $04
+	db $03, $03
+	db $04, $03
+	db $00, $04
+	db $01, $02
+	db $02, $02
+	db $03, $02
+	db $04, $03
+	db $01, $02
+	db $02, $02
+	db $03, $02
+	db $04, $03
+	db $ff
+
+Frameset_17e3a:
+	db $0b, $06
+	db $06, $06
+	db $07, $04
+	db $08, $04
+	db $09, $03
+	db $0a, $03
+	db $06, $04
+	db $07, $02
+	db $08, $02
+	db $09, $02
+	db $0a, $03
+	db $07, $02
+	db $08, $02
+	db $09, $02
+	db $0a, $03
+	db $ff
+
+Frameset_17e59:
+	db $04, $02
+	db $03, $02
+	db $02, $02
+	db $01, $03
+	db $04, $04
+	db $03, $02
+	db $02, $02
+	db $01, $02
+	db $00, $03
+	db $04, $03
+	db $03, $04
+	db $02, $04
+	db $01, $04
+	db $00, $06
+	db $05, $06
+	db $ff
+
+Frameset_17e78:
+	db $0a, $02
+	db $09, $02
+	db $08, $02
+	db $07, $03
+	db $0a, $04
+	db $09, $02
+	db $08, $02
+	db $07, $02
+	db $06, $03
+	db $0a, $03
+	db $09, $04
+	db $08, $04
+	db $07, $04
+	db $06, $06
+	db $0b, $06
+	db $ff
+; 0x17e97

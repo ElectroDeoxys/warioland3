@@ -2378,7 +2378,10 @@ PlayNewMusic_SetNoise: ; 1062 (0:1062)
 	ret
 ; 0x1070
 
-	INCROM $1070, $1079
+Func_1070: ; 1070 (0:1070)
+	load_sound SFX_12
+	ret
+; 0x1079
 
 Func_1079: ; 1079 (0:1079)
 	ld a, [wca8e]
@@ -2944,7 +2947,25 @@ Func_156d: ; 156d (0:156d)
 	jp Init
 ; 0x1570
 
-	INCROM $1570, $15b0
+Func_1570: ; 1570 (0:1570)
+	call Func_1079
+	ld a, $10
+	ld [wca8c], a
+	jr .asm_157d
+	call Func_1079
+.asm_157d
+	call Func_161a
+	ld hl, Pals_c800
+	call Func_1af6
+	ld a, [wJumpVelTable]
+	and a
+	jr nz, .asm_159e
+	farcall SetState_Idling
+	jp Func_1070
+.asm_159e
+	farcall Func_1c2ae
+	jp Func_1070
+; 0x15b0
 
 Func_15b0: ; 15b0 (0:15b0)
 	ld a, [wca7b]
@@ -4496,4 +4517,6 @@ Func_3fb5: ; 3fb5 (0:3fb5)
 	jp SwitchBankC.skip_backup_bank
 ; 0x3fc3
 
-	INCROM $3fc3, $4000
+rept $3d
+	db $00
+endr

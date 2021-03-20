@@ -777,54 +777,54 @@ Func_19c1b: ; 19c1b (6:5c1b)
 	sub $30
 	jumptable
 
-	dw $5ce7                        ; ST_UNKNOWN_30
-	dw $5ef1                        ; ST_UNKNOWN_31
-	dw $6046                        ; ST_UNKNOWN_32
-	dw $6077                        ; ST_UNKNOWN_33
-	dw $60b4                        ; ST_UNKNOWN_34
-	dw $617e                        ; ST_UNKNOWN_35
-	dw $61c5                        ; ST_UNKNOWN_36
-	dw $6296                        ; ST_UNKNOWN_37
-	dw $62d6                        ; ST_UNKNOWN_38
-	dw $6394                        ; ST_UNKNOWN_39
-	dw UpdateState_LadderClimbing   ; ST_LADDER_CLIMBING
-	dw UpdateState_LadderIdling     ; ST_LADDER_IDLING
-	dw $655c                        ; ST_LADDER_SHAKE_STUNNED
-	dw UpdateState_GettingOffLadder ; ST_GETTING_OFF_LADDER
-	dw UpdateState_LadderSliding    ; ST_LADDER_SLIDING
-	dw $67d6                        ; ST_UNKNOWN_3F
-	dw $689e                        ; ST_UNKNOWN_40
-	dw $68ff                        ; ST_UNKNOWN_41
-	dw $6980                        ; ST_UNKNOWN_42
-	dw $69e9                        ; ST_UNKNOWN_43
-	dw $6a5c                        ; ST_UNKNOWN_44
-	dw $6ac9                        ; ST_UNKNOWN_45
-	dw $6b44                        ; ST_UNKNOWN_46
-	dw $68ff                        ; ST_UNKNOWN_47
-	dw $6980                        ; ST_UNKNOWN_48
-	dw $6bb1                        ; ST_UNKNOWN_49
-	dw $6bf4                        ; ST_UNKNOWN_4A
-	dw UpdateState_Sleeping         ; ST_SLEEPING
-	dw UpdateState_LadderScratching ; ST_LADDER_SCRATCHING
-	dw $6dfb                        ; ST_UNKNOWN_4D
-	dw $6ed0                        ; ST_UNKNOWN_4E
-	dw $6f98                        ; ST_UNKNOWN_4F
-	dw $700f                        ; ST_UNKNOWN_50
-	dw $70a9                        ; ST_UNKNOWN_51
-	dw Func_156d                    ; ST_UNKNOWN_52
-	dw Func_156d                    ; ST_UNKNOWN_53
-	dw Func_156d                    ; ST_UNKNOWN_54
-	dw Func_156d                    ; ST_UNKNOWN_55
-	dw Func_156d                    ; ST_UNKNOWN_56
-	dw Func_156d                    ; ST_UNKNOWN_57
-	dw Func_156d                    ; ST_UNKNOWN_58
-	dw Func_156d                    ; ST_UNKNOWN_59
-	dw Func_156d                    ; ST_UNKNOWN_5A
-	dw Func_156d                    ; ST_UNKNOWN_5B
-	dw Func_156d                    ; ST_UNKNOWN_5C
-	dw Func_156d                    ; ST_UNKNOWN_5D
-	dw Func_156d                    ; ST_UNKNOWN_5E
-	dw Func_156d                    ; ST_UNKNOWN_5F
+	dw $5ce7                          ; ST_UNKNOWN_30
+	dw $5ef1                          ; ST_UNKNOWN_31
+	dw $6046                          ; ST_UNKNOWN_32
+	dw $6077                          ; ST_UNKNOWN_33
+	dw $60b4                          ; ST_UNKNOWN_34
+	dw $617e                          ; ST_UNKNOWN_35
+	dw $61c5                          ; ST_UNKNOWN_36
+	dw $6296                          ; ST_UNKNOWN_37
+	dw $62d6                          ; ST_UNKNOWN_38
+	dw $6394                          ; ST_UNKNOWN_39
+	dw UpdateState_LadderClimbing     ; ST_LADDER_CLIMBING
+	dw UpdateState_LadderIdling       ; ST_LADDER_IDLING
+	dw UpdateState_LadderShakeStunned ; ST_LADDER_SHAKE_STUNNED
+	dw UpdateState_GettingOffLadder   ; ST_GETTING_OFF_LADDER
+	dw UpdateState_LadderSliding      ; ST_LADDER_SLIDING
+	dw $67d6                          ; ST_UNKNOWN_3F
+	dw $689e                          ; ST_UNKNOWN_40
+	dw $68ff                          ; ST_UNKNOWN_41
+	dw $6980                          ; ST_UNKNOWN_42
+	dw $69e9                          ; ST_UNKNOWN_43
+	dw $6a5c                          ; ST_UNKNOWN_44
+	dw $6ac9                          ; ST_UNKNOWN_45
+	dw $6b44                          ; ST_UNKNOWN_46
+	dw $68ff                          ; ST_UNKNOWN_47
+	dw $6980                          ; ST_UNKNOWN_48
+	dw $6bb1                          ; ST_UNKNOWN_49
+	dw $6bf4                          ; ST_UNKNOWN_4A
+	dw UpdateState_Sleeping           ; ST_SLEEPING
+	dw UpdateState_LadderScratching   ; ST_LADDER_SCRATCHING
+	dw $6dfb                          ; ST_UNKNOWN_4D
+	dw $6ed0                          ; ST_UNKNOWN_4E
+	dw $6f98                          ; ST_UNKNOWN_4F
+	dw $700f                          ; ST_UNKNOWN_50
+	dw $70a9                          ; ST_UNKNOWN_51
+	dw Func_156d                      ; ST_UNKNOWN_52
+	dw Func_156d                      ; ST_UNKNOWN_53
+	dw Func_156d                      ; ST_UNKNOWN_54
+	dw Func_156d                      ; ST_UNKNOWN_55
+	dw Func_156d                      ; ST_UNKNOWN_56
+	dw Func_156d                      ; ST_UNKNOWN_57
+	dw Func_156d                      ; ST_UNKNOWN_58
+	dw Func_156d                      ; ST_UNKNOWN_59
+	dw Func_156d                      ; ST_UNKNOWN_5A
+	dw Func_156d                      ; ST_UNKNOWN_5B
+	dw Func_156d                      ; ST_UNKNOWN_5C
+	dw Func_156d                      ; ST_UNKNOWN_5D
+	dw Func_156d                      ; ST_UNKNOWN_5E
+	dw Func_156d                      ; ST_UNKNOWN_5F
 ; 0x19c81
 
 Func_19c81: ; 19c81 (6:5c81)
@@ -1111,7 +1111,55 @@ UpdateState_LadderIdling: ; 1a51d (6:651d)
 	ret
 ; 0x1a55c
 
-	INCROM $1a55c, $1a5ee
+UpdateState_LadderShakeStunned: ; 1a55c (6:655c)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wLadderInteraction]
+	and a
+	jr nz, .asm_1a588
+	farcall Func_1c2ae
+	ret
+.asm_1a588
+	update_anim
+
+	ld b, $02
+	call Func_1287
+	ld a, [wc0ba]
+	and $0f
+	cp $08
+	jr c, .asm_1a5b3
+	call Func_114e
+	ld a, [wca78]
+	sub c
+	jr z, .asm_1a5b3
+	jr c, .asm_1a5b3
+	call Func_11ae
+.asm_1a5b3
+	farcall Func_199e9
+	ld a, b
+	and a
+	jr z, .asm_1a5e1
+	ld hl, hffa8
+	ld de, wca61
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	farcall SetState_Idling
+	ret
+
+.asm_1a5e1
+	ld hl, wWarioStateCounter
+	inc [hl]
+	ld a, [hl]
+	cp $40
+	ret c
+	ld [hl], $00
+	jp SetState_LadderIdling
+; 0x1a5ee
 
 SetState_GettingOffLadder: ; 1a5ee (6:65ee)
 	ld a, ST_GETTING_OFF_LADDER
@@ -1648,5 +1696,3 @@ Func_1b480: ; 1b480 (6:7480)
 	ld [wca72], a
 	ret
 ; 0x1b4f6
-
-	INCROM $1b4f6, $1c000

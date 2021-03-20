@@ -10,7 +10,7 @@ Func_1c000: ; 1c000 (7:4000)
 	ld a, [wWarioState]
 	cp $30 ; ST_UNKNOWN_30
 	jr c, .asm_1c04d
-	cp $60 ; ST_UNKNOWN_60
+	cp $60 ; ST_ON_FIRE
 	jr c, .asm_1c03d
 	cp $b0 ; ST_UNKNOWN_B0
 	jr c, .asm_1c02d
@@ -1394,6 +1394,9 @@ Func_1cd48: ; 1cd48 (7:4d48)
 	ld b, $03
 	farcall Func_c9f3
 	load_sound SFX_0D
+;	fallthrough
+
+Func_1cd7c: ; 1cd7c (7:4d7c)
 	ld a, $e5
 	ld [wca6f], a
 	ld a, $05

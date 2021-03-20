@@ -14,7 +14,19 @@ Pals_c800: ; c800 (3:4800)
 ; 0xc810
 
 Pals_c810: ; c810 (3:4810)
-	INCROM $c810, $c9f3
+	INCROM $c810, $c820
+
+Pals_c820: ; c820 (3:4820)
+	INCROM $c820, $c830
+
+Pals_c830: ; c830 (3:4830)
+	INCROM $c830, $c840
+
+Pals_c840: ; c840 (3:4840)
+	INCROM $c840, $c850
+
+Pals_c850: ; c850 (3:4850)
+	INCROM $c850, $c9f3
 
 Func_c9f3: ; c9f3 (3:49f3)
 	ld a, [wcce1]
