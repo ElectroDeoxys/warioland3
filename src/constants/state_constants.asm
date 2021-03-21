@@ -134,15 +134,15 @@
 	const ST_UNKNOWN_84                  ; 84
 	const ST_UNKNOWN_85                  ; 85
 	const ST_UNKNOWN_86                  ; 86
-	const ST_UNKNOWN_87                  ; 87
-	const ST_UNKNOWN_88                  ; 88
-	const ST_UNKNOWN_89                  ; 89
-	const ST_UNKNOWN_8A                  ; 8a
-	const ST_UNKNOWN_8B                  ; 8b
-	const ST_UNKNOWN_8C                  ; 8c
-	const ST_UNKNOWN_8D                  ; 8d
-	const ST_UNKNOWN_8E                  ; 8e
-	const ST_UNKNOWN_8F                  ; 8f
+	const ST_ZOMBIE_IDLING                  ; 87
+	const ST_ZOMBIE_WALKING                  ; 88
+	const ST_ZOMBIE_TURNING                  ; 89
+	const ST_ZOMBIE_AIRBORNE                  ; 8a
+	const ST_ZOMBIE_LANDING                  ; 8b
+	const ST_ZOMBIE_SLIPPING_THROUGH_FLOOR                  ; 8c
+	const ST_ZOMBIE_RECOVERING                  ; 8d
+	const ST_ZOMBIE_KNOCK_BACK                  ; 8e
+	const ST_ZOMBIE_WRITHING                  ; 8f
 	const ST_UNKNOWN_90                  ; 90
 	const ST_UNKNOWN_91                  ; 91
 	const ST_UNKNOWN_92                  ; 92

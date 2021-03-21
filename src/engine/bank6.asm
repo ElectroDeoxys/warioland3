@@ -8,7 +8,7 @@ Func_18000: ; 18000 (6:4000)
 	ld l, [hl]
 	ld h, a
 	ld a, [hl]
-	add a
+	add a ; *2
 	ld e, a
 	ld d, $00
 	ld hl, wPermissionMap
@@ -270,22 +270,22 @@ Func_19832: ; 19832 (6:5832)
 	ret
 ; 0x198c7
 
+; resets wIsStandingOnSlope
+; copies wca61 to hffa8
 Func_198c7: ; 198c7 (6:58c7)
 	xor a
 	ld [wIsStandingOnSlope], a
+
 	ld hl, wca61
 	ld de, hffa8
+rept 3
 	ld a, [hli]
 	ld [de], a
 	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
+endr
 	ld a, [hl]
 	ld [de], a
+
 	call Func_19b51
 	ret
 ; 0x198e0
@@ -296,8 +296,10 @@ Func_198e0: ; 198e0 (6:58e0)
 	call Func_198c7
 	and a
 	ret nz
+
 	xor a
 	ld [wced3], a
+
 	ld a, [wca71]
 	cpl
 	inc a
@@ -566,7 +568,66 @@ Func_19a53: ; 19a53 (6:5a53)
 	ret
 ; 0x19a77
 
-	INCROM $19a77, $19acd
+Func_19a77: ; 19a77 (6:5a77)
+	xor a
+	ld [wc1ca], a
+	ld a, [wca71]
+	cpl
+	inc a
+	sub $03
+	ld c, a
+	ld hl, wca64
+	ld de, hffab
+	ld a, [hld]
+	sub c
+	ld [de], a
+	dec de
+	ld a, [hld]
+	sbc $00
+	ld [de], a
+	dec de
+	ld a, [hld]
+	ld [de], a
+	dec de
+	ld a, [hl]
+	ld [de], a
+	call Func_19b3a
+	and a
+	jr z, .asm_19aa2
+	ld a, [wc1ca]
+	and a
+	ret z
+
+.asm_19aa2
+	xor a
+	ld [wc1ca], a
+	ld a, [wca72]
+	sub $03
+	ld c, a
+	ld hl, wca64
+	ld de, hffab
+	ld a, [hld]
+	add c
+	ld [de], a
+	dec de
+	ld a, [hld]
+	adc $00
+	ld [de], a
+	dec de
+	ld a, [hld]
+	ld [de], a
+	dec de
+	ld a, [hl]
+	ld [de], a
+	call Func_19b3a
+	and a
+	jr z, .asm_19ac7
+	ret
+.asm_19ac7
+	ld a, $01
+	ld [wc1ca], a
+	ret
+; 0x19acd
 
 Func_19acd: ; 19acd (6:5acd)
 	ld hl, wca64
@@ -860,7 +921,7 @@ Func_19c81: ; 19c81 (6:5c81)
 .asm_19ccd
 	load_frameset_ptr Frameset_1425f
 .got_frameset
-	update_anim
+	update_anim_1
 	ret
 ; 0x19ce7
 
@@ -903,7 +964,7 @@ Func_19e7f: ; 19e7f (6:5e7f)
 .asm_19ed7
 	load_frameset_ptr Frameset_14a3b
 .got_frameset
-	update_anim
+	update_anim_1
 	ret
 ; 0x19ef1
 
@@ -959,7 +1020,7 @@ Func_1a0e8: ; 1a0e8 (6:60e8)
 .asm_1a164
 	load_frameset_ptr Frameset_15f97
 .asm_1a16e
-	update_anim
+	update_anim_1
 	ret
 ; 0x1a17e
 
@@ -1005,7 +1066,7 @@ SetState_LadderClimbing: ; 1a3bb (6:63bb)
 	ld [wFrameDuration], a
 	ld [wca68], a
 	load_frameset_ptr Frameset_158d6
-	update_anim
+	update_anim_1
 	ret
 ; 0x1a436
 
@@ -1022,7 +1083,7 @@ UpdateState_LadderClimbing: ; 1a436 (6:6436)
 	ld [wceed], a
 	load_sound SFX_38
 .asm_1a463
-	update_anim
+	update_anim_1
 
 	ld a, [wc1a8]
 	and a
@@ -1086,7 +1147,7 @@ SetState_LadderIdling: ; 1a49e (6:649e)
 	jr nz, .asm_1a511
 	load_frameset_ptr Frameset_15900
 .asm_1a501
-	update_anim
+	update_anim_1
 	ret
 
 .asm_1a511
@@ -1106,7 +1167,7 @@ UpdateState_LadderIdling: ; 1a51d (6:651d)
 	ret
 
 .asm_1a549
-	update_anim
+	update_anim_1
 	call Func_1b480
 	ret
 ; 0x1a55c
@@ -1122,7 +1183,7 @@ UpdateState_LadderShakeStunned: ; 1a55c (6:655c)
 	farcall Func_1c2ae
 	ret
 .asm_1a588
-	update_anim
+	update_anim_1
 
 	ld b, $02
 	call Func_1287
@@ -1238,7 +1299,7 @@ SetState_LadderSliding: ; 1a66b (6:666b)
 	ld [wFrameDuration], a
 	ld [wca68], a
 	load_frameset_ptr Frameset_15945
-	update_anim
+	update_anim_1
 	ret
 ; 0x1a6b6
 
@@ -1256,7 +1317,7 @@ UpdateState_LadderSliding: ; 1a6b6 (6:66b6)
 	ret
 
 .asm_1a6e6
-	update_anim
+	update_anim_1
 
 	ld a, [wJoypadDown]
 	bit D_UP_F, a
@@ -1337,7 +1398,7 @@ Func_1a773: ; 1a773 (6:6773)
 .asm_1a7bc
 	load_frameset_ptr Frameset_14a23
 .asm_1a7c6
-	update_anim
+	update_anim_1
 	ret
 ; 0x1a7d6
 
@@ -1375,12 +1436,12 @@ SetState_Sleeping: ; 1ac10 (6:6c10)
 .asm_1ac59
 	load_frameset_ptr Frameset_14225
 .got_frameset
-	update_anim
+	update_anim_1
 	ret
 ; 0x1ac73
 
 UpdateState_Sleeping: ; 1ac73 (6:6c73)
-	update_anim
+	update_anim_1
 
 	ld a, [wWarioStateCounter]
 	dec a
@@ -1405,7 +1466,7 @@ UpdateState_Sleeping: ; 1ac73 (6:6c73)
 .asm_1acb6
 	load_frameset_ptr Frameset_14237
 .asm_1acc0
-	update_anim
+	update_anim_1
 	ret
 
 .asm_1acd0
@@ -1469,12 +1530,12 @@ SetState_LadderScratching: ; 1ad21 (6:6d21)
 .asm_1ad63
 	load_frameset_ptr Frameset_15924
 .asm_1ad6d
-	update_anim
+	update_anim_1
 	ret
 ; 0x1ad7d
 
 UpdateState_LadderScratching: ; 1ad7d (6:6d7d)
-	update_anim
+	update_anim_1
 	ld a, [wJoypadDown]
 	and a
 	jr nz, .asm_1ad97
@@ -1517,7 +1578,7 @@ Func_1ad9a: ; 1ad9a (6:6d9a)
 .asm_1ade1
 	load_frameset_ptr Frameset_14d10
 .asm_1adeb
-	update_anim
+	update_anim_1
 	ret
 ; 0x1adfb
 
@@ -1556,7 +1617,7 @@ Func_1ae68: ; 1ae68 (6:6e68)
 	ld [wFrameDuration], a
 	ld [wca68], a
 	load_frameset_ptr Frameset_158d6
-	update_anim
+	update_anim_1
 	ret
 ; 0x1aed0
 

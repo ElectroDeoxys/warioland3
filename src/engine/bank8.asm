@@ -359,7 +359,7 @@ SetState_OnFire: ; 20ed3 (8:4ed3)
 .asm_20f50
 	load_frameset_ptr Frameset_16b49
 .asm_20f5a
-	update_anim
+	update_anim_1
 	ret
 ; 0x20f6a
 

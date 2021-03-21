@@ -492,11 +492,12 @@ def check_update_anim(ops):
 	if len(ops) != 15:
 		raise ValueError("Wrong number of bytes to check for farcall")
 
-	return (ops[0] == 0x3e  and ops[1] == 0x05  and ops[2] == 0xe0 \
+	return (ops[0] == 0x3e  and ops[2] == 0xe0 \
 		and ops[3] == 0x85  and ops[4] == 0x3e  and ops[5] == 0x53 \
 		and ops[6] == 0xe0  and ops[7] == 0x8d  and ops[8] == 0x3e \
 		and ops[9] == 0x0e  and ops[10] == 0xe0 and ops[11] == 0x8e \
-		and ops[12] == 0xcd and ops[13] == 0x80 and ops[14] == 0xff)
+		and ops[12] == 0xcd and ops[13] == 0x80 and ops[14] == 0xff \
+		and (ops[1] == 0x05 or ops[1] == 0x7f))
 
 class Disassembler(object):
 	"""
@@ -710,7 +711,10 @@ class Disassembler(object):
 				is_update_anim = check_update_anim(rom[offset : offset + 15])
 
 				if is_update_anim:
-					opcode_output_str = "update_anim"
+					if opcode_arg_1 == 0x05:
+						opcode_output_str = "update_anim_1"
+					else:
+						opcode_output_str = "update_anim_2"
 
 				elif opcode_nargs == 0:
 				# set output string simply as the opcode
@@ -884,7 +888,7 @@ class Disassembler(object):
 				output += self.spacing + opcode_output_str + "\n" #+ " ; " + hex(offset)
 				# increase the current byte number and offset by the amount of arguments plus 1 (opcode itself)
 				if is_farcall or is_update_anim:
-				# farcalls and update_anim are 15 bytes long
+				# farcalls and update_anim_1 are 15 bytes long
 					current_byte_number += 15
 					offset += 15
 				else:

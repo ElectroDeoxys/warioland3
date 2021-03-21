@@ -1717,6 +1717,7 @@ Func_bdb: ; bdb (0:bdb)
 	ld [wccea], a
 	ld a, b
 	ld [wcce9], a
+
 	ld a, [hli]
 	ld d, a
 	ld a, [hl]

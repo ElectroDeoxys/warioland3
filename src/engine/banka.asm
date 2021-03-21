@@ -3,86 +3,86 @@ Func_28000: ; 28000 (a:4000)
 	sub $60
 	jumptable
 
-	dw UpdateState_OnFire                   ; ST_ON_FIRE
-	dw UpdateState_OnFireAirborne           ; ST_ON_FIRE_AIRBORNE
-	dw UpdateState_Hot                      ; ST_HOT
-	dw UpdateState_HotAirborne              ; ST_HOT_AIRBORNE
-	dw UpdateState_Burnt                    ; ST_BURNT
-	dw $4511                                ; ST_UNKNOWN_65
-	dw $4599                                ; ST_UNKNOWN_66
-	dw $4601                                ; ST_UNKNOWN_67
-	dw $4672                                ; ST_UNKNOWN_68
-	dw $471f                                ; ST_UNKNOWN_69
-	dw $47a2                                ; ST_UNKNOWN_6A
-	dw $48e5                                ; ST_UNKNOWN_6B
-	dw $494e                                ; ST_UNKNOWN_6C
-	dw $4a39                                ; ST_UNKNOWN_6D
-	dw $4a5a                                ; ST_UNKNOWN_6E
-	dw $4a8a                                ; ST_UNKNOWN_6F
-	dw UpdateState_GettingWrappedInString   ; ST_GETTING_WRAPPED_IN_STRING
-	dw UpdateState_BallOString              ; ST_BALL_O_STRING
-	dw UpdateState_BallOStringAirborne      ; ST_BALL_O_STRING_AIRBORNE
-	dw UpdateState_BallOStringKnockBack     ; ST_BALL_O_STRING_KNOCK_BACK
-	dw UpdateState_GettingUnwrappedInString ; ST_GETTING_UNWRAPPED_IN_STRING
-	dw UpdateState_BallOStringDizzy         ; ST_BALL_O_STRING_DIZZY
-	dw $4e70                                ; ST_UNKNOWN_76
-	dw $4e87                                ; ST_UNKNOWN_77
-	dw $4f39                                ; ST_UNKNOWN_78
-	dw $4fc0                                ; ST_UNKNOWN_79
-	dw $506d                                ; ST_UNKNOWN_7A
-	dw $5123                                ; ST_UNKNOWN_7B
-	dw $5243                                ; ST_UNKNOWN_7C
-	dw $52e5                                ; ST_UNKNOWN_7D
-	dw $53b9                                ; ST_UNKNOWN_7E
-	dw $53d0                                ; ST_UNKNOWN_7F
-	dw UpdateState_Electric                 ; ST_ELECTRIC
-	dw UpdateState_ElectricDizzy            ; ST_ELECTRIC_DIZZY
-	dw $572e                                ; ST_UNKNOWN_82
-	dw $5816                                ; ST_UNKNOWN_83
-	dw $5871                                ; ST_UNKNOWN_84
-	dw $58f3                                ; ST_UNKNOWN_85
-	dw $5975                                ; ST_UNKNOWN_86
-	dw $5a74                                ; ST_UNKNOWN_87
-	dw $5b06                                ; ST_UNKNOWN_88
-	dw $5ba2                                ; ST_UNKNOWN_89
-	dw $5c29                                ; ST_UNKNOWN_8A
-	dw $5d6f                                ; ST_UNKNOWN_8B
-	dw $5dd3                                ; ST_UNKNOWN_8C
-	dw $5e7e                                ; ST_UNKNOWN_8D
-	dw $5ef3                                ; ST_UNKNOWN_8E
-	dw $5f42                                ; ST_UNKNOWN_8F
-	dw $5ffa                                ; ST_UNKNOWN_90
-	dw $6087                                ; ST_UNKNOWN_91
-	dw $60f9                                ; ST_UNKNOWN_92
-	dw $61f5                                ; ST_UNKNOWN_93
-	dw $6267                                ; ST_UNKNOWN_94
-	dw $62d3                                ; ST_UNKNOWN_95
-	dw $6362                                ; ST_UNKNOWN_96
-	dw $6489                                ; ST_UNKNOWN_97
-	dw $6544                                ; ST_UNKNOWN_98
-	dw $65d8                                ; ST_UNKNOWN_99
-	dw $6657                                ; ST_UNKNOWN_9A
-	dw $66c0                                ; ST_UNKNOWN_9B
-	dw $677b                                ; ST_UNKNOWN_9C
-	dw $6804                                ; ST_UNKNOWN_9D
-	dw $6890                                ; ST_UNKNOWN_9E
-	dw $68d2                                ; ST_UNKNOWN_9F
-	dw $69b2                                ; ST_UNKNOWN_A0
-	dw $6a08                                ; ST_UNKNOWN_A1
-	dw $6b18                                ; ST_UNKNOWN_A2
-	dw $6b42                                ; ST_UNKNOWN_A3
-	dw $6c04                                ; ST_UNKNOWN_A4
-	dw $6d06                                ; ST_UNKNOWN_A5
-	dw Func_156d                            ; ST_UNKNOWN_A6
-	dw Func_156d                            ; ST_UNKNOWN_A7
-	dw Func_156d                            ; ST_UNKNOWN_A8
-	dw Func_156d                            ; ST_UNKNOWN_A9
-	dw Func_156d                            ; ST_UNKNOWN_AA
-	dw Func_156d                            ; ST_UNKNOWN_AB
-	dw Func_156d                            ; ST_UNKNOWN_AC
-	dw Func_156d                            ; ST_UNKNOWN_AD
-	dw Func_156d                            ; ST_UNKNOWN_AE
-	dw Func_156d                            ; ST_UNKNOWN_AF
+	dw UpdateState_OnFire                     ; ST_ON_FIRE
+	dw UpdateState_OnFireAirborne             ; ST_ON_FIRE_AIRBORNE
+	dw UpdateState_Hot                        ; ST_HOT
+	dw UpdateState_HotAirborne                ; ST_HOT_AIRBORNE
+	dw UpdateState_Burnt                      ; ST_BURNT
+	dw $4511                                  ; ST_UNKNOWN_65
+	dw $4599                                  ; ST_UNKNOWN_66
+	dw $4601                                  ; ST_UNKNOWN_67
+	dw $4672                                  ; ST_UNKNOWN_68
+	dw $471f                                  ; ST_UNKNOWN_69
+	dw $47a2                                  ; ST_UNKNOWN_6A
+	dw $48e5                                  ; ST_UNKNOWN_6B
+	dw $494e                                  ; ST_UNKNOWN_6C
+	dw $4a39                                  ; ST_UNKNOWN_6D
+	dw $4a5a                                  ; ST_UNKNOWN_6E
+	dw $4a8a                                  ; ST_UNKNOWN_6F
+	dw UpdateState_GettingWrappedInString     ; ST_GETTING_WRAPPED_IN_STRING
+	dw UpdateState_BallOString                ; ST_BALL_O_STRING
+	dw UpdateState_BallOStringAirborne        ; ST_BALL_O_STRING_AIRBORNE
+	dw UpdateState_BallOStringKnockBack       ; ST_BALL_O_STRING_KNOCK_BACK
+	dw UpdateState_GettingUnwrappedInString   ; ST_GETTING_UNWRAPPED_IN_STRING
+	dw UpdateState_BallOStringDizzy           ; ST_BALL_O_STRING_DIZZY
+	dw $4e70                                  ; ST_UNKNOWN_76
+	dw $4e87                                  ; ST_UNKNOWN_77
+	dw $4f39                                  ; ST_UNKNOWN_78
+	dw $4fc0                                  ; ST_UNKNOWN_79
+	dw $506d                                  ; ST_UNKNOWN_7A
+	dw $5123                                  ; ST_UNKNOWN_7B
+	dw $5243                                  ; ST_UNKNOWN_7C
+	dw $52e5                                  ; ST_UNKNOWN_7D
+	dw $53b9                                  ; ST_UNKNOWN_7E
+	dw $53d0                                  ; ST_UNKNOWN_7F
+	dw UpdateState_Electric                   ; ST_ELECTRIC
+	dw UpdateState_ElectricDizzy              ; ST_ELECTRIC_DIZZY
+	dw $572e                                  ; ST_UNKNOWN_82
+	dw $5816                                  ; ST_UNKNOWN_83
+	dw $5871                                  ; ST_UNKNOWN_84
+	dw $58f3                                  ; ST_UNKNOWN_85
+	dw $5975                                  ; ST_UNKNOWN_86
+	dw UpdateState_ZombieIdling               ; ST_ZOMBIE_IDLING
+	dw UpdateState_ZombieWalking              ; ST_ZOMBIE_WALKING
+	dw UpdateState_ZombieTurning              ; ST_ZOMBIE_TURNING
+	dw UpdateState_ZombieAirborne             ; ST_ZOMBIE_AIRBORNE
+	dw UpdateState_ZombieLanding              ; ST_ZOMBIE_LANDING
+	dw UpdateState_ZombieSlippingThroughFloor ; ST_ZOMBIE_SLIPPING_THROUGH_FLOOR
+	dw UpdateState_ZombieRecovering           ; ST_ZOMBIE_RECOVERING
+	dw UpdateState_ZombieKnockBack            ; ST_ZOMBIE_KNOCK_BACK
+	dw UpdateState_ZombieWrithing             ; ST_ZOMBIE_WRITHING
+	dw $5ffa                                  ; ST_UNKNOWN_90
+	dw $6087                                  ; ST_UNKNOWN_91
+	dw $60f9                                  ; ST_UNKNOWN_92
+	dw $61f5                                  ; ST_UNKNOWN_93
+	dw $6267                                  ; ST_UNKNOWN_94
+	dw $62d3                                  ; ST_UNKNOWN_95
+	dw $6362                                  ; ST_UNKNOWN_96
+	dw $6489                                  ; ST_UNKNOWN_97
+	dw $6544                                  ; ST_UNKNOWN_98
+	dw $65d8                                  ; ST_UNKNOWN_99
+	dw $6657                                  ; ST_UNKNOWN_9A
+	dw $66c0                                  ; ST_UNKNOWN_9B
+	dw $677b                                  ; ST_UNKNOWN_9C
+	dw $6804                                  ; ST_UNKNOWN_9D
+	dw $6890                                  ; ST_UNKNOWN_9E
+	dw $68d2                                  ; ST_UNKNOWN_9F
+	dw $69b2                                  ; ST_UNKNOWN_A0
+	dw $6a08                                  ; ST_UNKNOWN_A1
+	dw $6b18                                  ; ST_UNKNOWN_A2
+	dw $6b42                                  ; ST_UNKNOWN_A3
+	dw $6c04                                  ; ST_UNKNOWN_A4
+	dw $6d06                                  ; ST_UNKNOWN_A5
+	dw Func_156d                              ; ST_UNKNOWN_A6
+	dw Func_156d                              ; ST_UNKNOWN_A7
+	dw Func_156d                              ; ST_UNKNOWN_A8
+	dw Func_156d                              ; ST_UNKNOWN_A9
+	dw Func_156d                              ; ST_UNKNOWN_AA
+	dw Func_156d                              ; ST_UNKNOWN_AB
+	dw Func_156d                              ; ST_UNKNOWN_AC
+	dw Func_156d                              ; ST_UNKNOWN_AD
+	dw Func_156d                              ; ST_UNKNOWN_AE
+	dw Func_156d                              ; ST_UNKNOWN_AF
 ; 0x280a6
 
 UpdateState_OnFire: ; 280a6 (a:40a6)
@@ -116,7 +116,7 @@ UpdateState_OnFire: ; 280a6 (a:40a6)
 .asm_280f6
 	load_frameset_ptr Frameset_16b1d
 .asm_28100
-	update_anim
+	update_anim_1
 
 	call Func_2ae2f
 	ld hl, wca90
@@ -192,7 +192,7 @@ SetState_Hot: ; 28154 (a:4154)
 	jr nz, .asm_281b5
 	load_frameset_ptr Frameset_16b26
 .asm_281a5
-	update_anim
+	update_anim_1
 	ret
 .asm_281b5
 	load_frameset_ptr Frameset_16b2f
@@ -224,7 +224,7 @@ UpdateState_OnFireAirborne: ; 281c1 (a:41c1)
 .asm_28201
 	load_frameset_ptr Frameset_16b1d
 .asm_2820b
-	update_anim
+	update_anim_1
 
 	call Func_2af9c
 	ld a, [wWarioState]
@@ -276,7 +276,7 @@ UpdateState_Hot: ; 2827a (a:427a)
 	ld [wceed], a
 	load_sound SFX_1F
 .asm_282a7
-	update_anim
+	update_anim_1
 	call Func_2ae2f
 
 	ld hl, wca90
@@ -358,7 +358,7 @@ UpdateState_Hot: ; 2827a (a:427a)
 .asm_28366
 	load_frameset_ptr Frameset_16e72
 .asm_28370
-	update_anim
+	update_anim_1
 	ret
 ; 0x28380
 
@@ -389,7 +389,7 @@ UpdateState_HotAirborne: ; 2839f (a:439f)
 	ld a, [wc0db]
 	and a
 	jp nz, Func_2ade4
-	update_anim
+	update_anim_1
 	call Func_2b027
 	ld a, [wWarioState]
 	cp ST_HOT_AIRBORNE
@@ -429,7 +429,7 @@ UpdateState_HotAirborne: ; 2839f (a:439f)
 ; 0x2841e
 
 UpdateState_Burnt: ; 2841e (a:441e)
-	update_anim
+	update_anim_1
 	ld a, [wc1a8]
 	and a
 	ret z
@@ -439,7 +439,7 @@ UpdateState_Burnt: ; 2841e (a:441e)
 	INCROM $28435, $28aad
 
 UpdateState_GettingWrappedInString: ; 28aad (a:4aad)
-	update_anim
+	update_anim_1
 	ld a, [wc1a8]
 	and a
 	ret z
@@ -478,7 +478,7 @@ SetState_BallOString: ; 28ad5 (a:4ad5)
 	jr nz, .asm_28b2a
 	load_frameset_ptr Frameset_1741f
 .asm_28b1a
-	update_anim
+	update_anim_1
 	ret
 .asm_28b2a
 	load_frameset_ptr Frameset_173fe
@@ -498,7 +498,7 @@ UpdateState_BallOString: ; 28b36 (a:4b36)
 	ld [wceed], a
 	load_sound SFX_0A
 .asm_28b63
-	update_anim
+	update_anim_1
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_28b80
@@ -556,7 +556,7 @@ Func_28bd5: ; 28bd5 (a:4bd5)
 	jr nz, .asm_28c06
 	load_frameset_ptr Frameset_1741f
 .asm_28bf6
-	update_anim
+	update_anim_1
 	ret
 .asm_28c06
 	load_frameset_ptr Frameset_173fe
@@ -584,7 +584,7 @@ UpdateState_BallOStringAirborne: ; 28c25 (a:4c25)
 	ld a, [wc0db]
 	and a
 	jp nz, Func_1570
-	update_anim
+	update_anim_1
 
 	farcall Func_19734
 	ld a, b
@@ -634,7 +634,7 @@ SetState_BallOStringKnockBack: ; 28c94 (a:4c94)
 	ld [wFrameDuration], a
 	ld [wca68], a
 	load_frameset_ptr Frameset_1742a
-	update_anim
+	update_anim_1
 	ret
 ; 0x28ceb
 
@@ -646,7 +646,7 @@ UpdateState_BallOStringKnockBack: ; 28ceb (a:4ceb)
 	ld a, [wc0db]
 	and a
 	jp nz, Func_1570
-	update_anim
+	update_anim_1
 	call Func_2b1cc
 	ld a, [wJumpVelIndex]
 	cp FALLING_JUMP_VEL_INDEX
@@ -688,12 +688,12 @@ UpdateState_BallOStringKnockBack: ; 28ceb (a:4ceb)
 	ld [wFrameDuration], a
 	ld [wca68], a
 	load_frameset_ptr Frameset_17409
-	update_anim
+	update_anim_1
 	ret
 ; 0x28d92
 
 UpdateState_GettingUnwrappedInString: ; 28d92 (a:4d92)
-	update_anim
+	update_anim_1
 	ld a, [wc1a8]
 	and a
 	ret z
@@ -735,12 +735,12 @@ UpdateState_GettingUnwrappedInString: ; 28d92 (a:4d92)
 	ld a, $bc
 	ld [wSpritePtr + 1], a
 	load_frameset_ptr Frameset_17ce2
-	update_anim
+	update_anim_1
 	ret
 ; 0x28e1a
 
 UpdateState_BallOStringDizzy: ; 28e1a (a:4e1a)
-	update_anim
+	update_anim_1
 	ld a, [wc1a8]
 	and a
 	ret z
@@ -757,7 +757,7 @@ UpdateState_Electric: ; 294bf (a:54bf)
 	ld a, [wc0db]
 	and a
 	jp nz, Func_1570
-	update_anim
+	update_anim_1
 
 	farcall Func_19734
 	ld a, b
@@ -941,19 +941,521 @@ UpdateState_Electric: ; 294bf (a:54bf)
 .asm_29658
 	load_frameset_ptr Frameset_17bad
 .asm_29662
-	update_anim
+	update_anim_1
 	ret
 ; 0x29672
 
 UpdateState_ElectricDizzy: ; 29672 (a:5672)
-	update_anim
+	update_anim_1
 	ld a, [wc1a8]
 	and a
 	ret z
 	jp Func_1570
 ; 0x29689
 
-	INCROM $29689, $2ade4
+	INCROM $29689, $299d0
+
+SetState_ZombieIdling: ; 299d0 (a:59d0)
+	ld a, ST_ZOMBIE_IDLING
+	ld [wWarioState], a
+
+	ld a, $ff
+	ld [wca70], a
+	ld a, $e5
+	ld [wca6f], a
+	ld a, $f7
+	ld [wca71], a
+	ld a, $09
+	ld [wca72], a
+	ld a, $04
+	ld [wca93], a
+	ld a, $04
+	ld [wca92], a
+	ld a, $02
+	ld [wca94], a
+
+	xor a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wca8d], a
+	ld [wca9a], a
+	ld [wca89], a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	ld [wca8b], a
+	ld [wca9d], a
+	ld [wca96], a
+	call Func_161a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld hl, Pals_c890
+	call Func_1af6
+
+	ld a, $0b
+	ld [wca7b], a
+	ld a, $40
+	ld [wca7c + 0], a
+	ld a, $00
+	ld [wca7c + 1], a
+	call Func_15b0
+	ld a, $7f
+	ld [wSpriteBank], a
+	ld a, $44
+	ld [wSpritePtr + 0], a
+	ld a, $8b
+	ld [wSpritePtr + 1], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_29a5a
+	load_frameset_ptr Frameset_1fc8b6
+	jr .asm_29a64
+.asm_29a5a
+	load_frameset_ptr Frameset_1fc8b9
+.asm_29a64
+	update_anim_2
+	ret
+; 0x29a74
+
+UpdateState_ZombieIdling: ; 29a74 (a:5a74)
+	farcall Func_19b25
+	ld a, [wWarioState]
+	cp ST_ZOMBIE_IDLING
+	ret nz ; done if not zombie idling anymore
+
+	farcall Func_198e0
+	ld a, [wWarioState]
+	cp ST_ZOMBIE_IDLING
+	ret nz ; done if not zombie idling anymore
+
+	ld a, b
+	and a
+	jp z, Func_29bb9
+	ld hl, hffa8
+	ld de, wca61
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	update_anim_2
+	call Func_2b34e
+	ret
+; 0x29ac1
+
+SetState_ZombieWalking: ; 29ac1 (a:5ac1)
+	xor a
+	ld [wceed], a
+	ld [wca86], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+
+	ld a, ST_ZOMBIE_WALKING
+	ld [wWarioState], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_29aec
+	load_frameset_ptr Frameset_1fc870
+	jr .asm_29af6
+.asm_29aec
+	load_frameset_ptr Frameset_1fc879
+.asm_29af6
+	update_anim_2
+	ret
+; 0x29b06
+
+UpdateState_ZombieWalking: ; 29b06 (a:5b06)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wceed]
+	sub $01
+	ld [wceed], a
+	jr nc, .asm_29b33
+	ld a, $24
+	ld [wceed], a
+	load_sound SFX_29
+.asm_29b33
+	update_anim_2
+	call Func_2b381
+
+	ld a, [wWarioState]
+	cp ST_ZOMBIE_WALKING
+	ret nz ; done if not zombie walking anymore
+
+	farcall Func_198e0
+	ld a, b
+	and a
+	jr z, Func_29bb9
+
+	ld hl, hffa8
+	ld de, wca61
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ret
+; 0x29b6a
+
+SetState_ZombieTurning: ; 29b6a (a:5b6a)
+	ld a, ST_ZOMBIE_TURNING
+	ld [wWarioState], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_29b88
+	load_frameset_ptr Frameset_1fc89d
+	jr .asm_29b92
+.asm_29b88
+	load_frameset_ptr Frameset_1fc894
+.asm_29b92
+	update_anim_2
+	ret
+; 0x29ba2
+
+UpdateState_ZombieTurning: ; 29ba2 (a:5ba2)
+	update_anim_2
+	ld a, [wc1a8]
+	and a
+	ret z
+	jp SetState_ZombieWalking
+; 0x29bb9
+
+Func_29bb9: ; 29bb9 (a:5bb9)
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_29bcb
+	load_frameset_ptr Frameset_1fc8b0
+	jr .asm_29bd5
+.asm_29bcb
+	load_frameset_ptr Frameset_1fc8b3
+
+.asm_29bd5
+	ld a, $01
+	ld [wWarioStateCounter], a
+	ld a, FALLING_JUMP_VEL_INDEX
+	ld [wJumpVelIndex], a
+	jr SetState_ZombieAirborne
+
+Func_29be1: ; 29be1 (a:5be1)
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_29bf3
+	load_frameset_ptr Frameset_1fc8a6
+	jr .asm_29bfd
+.asm_29bf3
+	load_frameset_ptr Frameset_1fc8ab
+
+.asm_29bfd
+	xor a
+	ld [wWarioStateCounter], a
+	ld [wJumpVelIndex], a
+;	fallthrough
+
+SetState_ZombieAirborne: ; 29c04 (a:5c04)
+	ld a, JUMP_VEL_KNOCK_BACK
+	ld [wJumpVelTable], a
+	xor a
+	ld [wWarioStateCycles], a
+	ld a, ST_ZOMBIE_AIRBORNE
+	ld [wWarioState], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	update_anim_2
+	ret
+; 0x29c29
+
+UpdateState_ZombieAirborne: ; 29c29 (a:5c29)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wc0db]
+	and a
+	jp nz, Func_1570
+	ld a, [wWarioState]
+	cp ST_ZOMBIE_AIRBORNE
+	ret nz ; done if not zombie airborne anymore
+
+	call Func_2b3dd
+	ld a, [wWarioState]
+	cp ST_ZOMBIE_AIRBORNE
+	ret nz ; done if not zombie airborne anymore
+
+	ld a, [wWarioStateCounter]
+	and a
+	jr nz, .asm_29c88
+	ld a, [wc1a8]
+	and a
+	jr z, .asm_29c88
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	inc a
+	ld [wWarioStateCounter], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_29c7e
+	load_frameset_ptr Frameset_1fc8b0
+	jr .asm_29c88
+.asm_29c7e
+	load_frameset_ptr Frameset_1fc8b3
+.asm_29c88
+	update_anim_2
+	ld a, [wWarioState]
+	cp ST_ZOMBIE_AIRBORNE
+	ret nz ; done if not zombie airborne anymore
+
+	ld a, [wJumpVelIndex]
+	cp FALLING_JUMP_VEL_INDEX
+	jr nc, .asm_29cbf
+	farcall Func_1996e
+	ld a, b
+	and a
+	ret z
+	ld a, [wWarioState]
+	cp ST_ZOMBIE_AIRBORNE
+	ret nz ; done if not zombie airborne anymore
+	jp Func_29bb9
+
+.asm_29cbf
+	farcall Func_199e9
+	ld a, b
+	and a
+	jr nz, .asm_29cd5
+	jp Func_14de
+.asm_29cd5
+	call Func_14f6
+	ld a, [wWarioState]
+	cp ST_ZOMBIE_AIRBORNE
+	ret nz ; done if not zombie airborne anymore
+;	fallthrough
+
+SetState_ZombieLanding: ; 29cde (a:5cde)
+	load_sound SFX_2A
+	ld a, $02
+	ld [wca93], a
+	ld a, $02
+	ld [wca92], a
+	ld a, $02
+	ld [wca94], a
+
+	xor a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+
+	ld a, ST_ZOMBIE_LANDING
+	ld [wWarioState], a
+	xor a
+	ld [wWarioStateCounter], a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	farcall Func_19a77
+	ld a, [wc1ca]
+	and a
+	jr z, .asm_29d43
+
+	ld a, $01
+	ld [wWarioStateCounter], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_29d37
+	load_frameset_ptr Frameset_1fc8bc
+	jr .asm_29d5f
+.asm_29d37
+	load_frameset_ptr Frameset_1fc8d5
+	jr .asm_29d5f
+
+.asm_29d43
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_29d55
+	load_frameset_ptr Frameset_1fc948
+	jr .asm_29d5f
+.asm_29d55
+	load_frameset_ptr Frameset_1fc953
+.asm_29d5f
+	update_anim_2
+	ret
+; 0x29d6f
+
+UpdateState_ZombieLanding: ; 29d6f (a:5d6f)
+	update_anim_2
+	ld a, [wc1a8]
+	and a
+	ret z
+	ld a, [wWarioStateCounter]
+	dec a
+	jr z, .asm_29d8c
+	jp SetState_ZombieIdling
+
+.asm_29d8c
+	ld a, FALLING_JUMP_VEL_INDEX
+	ld [wJumpVelIndex], a
+	ld a, JUMP_VEL_NORMAL
+	ld [wJumpVelTable], a
+	ld a, $06
+	ld [wWarioStateCycles], a
+
+	ld a, ST_ZOMBIE_SLIPPING_THROUGH_FLOOR
+	ld [wWarioState], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_29db9
+	load_frameset_ptr Frameset_1fc928
+	jr .asm_29dc3
+.asm_29db9
+	load_frameset_ptr Frameset_1fc92b
+.asm_29dc3
+	update_anim_2
+	ret
+; 0x29dd3
+
+UpdateState_ZombieSlippingThroughFloor: ; 29dd3 (a:5dd3)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wc0db]
+	and a
+	jp nz, Func_1570
+	ld a, [wWarioState]
+	cp ST_ZOMBIE_SLIPPING_THROUGH_FLOOR
+	ret nz ; done if not slipping through floor anymore
+
+	call Func_2b3dd
+	update_anim_2
+	ld a, [wWarioState]
+	cp ST_ZOMBIE_SLIPPING_THROUGH_FLOOR
+	ret nz ; done if not slipping through floor anymore
+
+	farcall Func_199e9
+	ld a, b
+	and a
+	jr nz, .asm_29e2a
+	ld a, [wWarioState]
+	cp ST_ZOMBIE_SLIPPING_THROUGH_FLOOR
+	ret nz ; done if not slipping through floor anymore
+	jp Func_14de
+
+.asm_29e2a
+	call Func_14f6
+	ld a, [wWarioState]
+	cp ST_ZOMBIE_SLIPPING_THROUGH_FLOOR
+	ret nz ; done if not slipping through floor anymore
+
+	call SetState_ZombieLanding
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_29e48
+	load_frameset_ptr Frameset_1fc8ee
+	jr .asm_29e52
+.asm_29e48
+	load_frameset_ptr Frameset_1fc90b
+.asm_29e52
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld [wc1a8], a
+	ld a, $02
+	ld [wWarioStateCounter], a
+	update_anim_2
+	ret
+; 0x29e71
+
+	INCROM $29e71, $29e7e
+
+UpdateState_ZombieRecovering: ; 29e7e (a:5e7e)
+	ld a, [wc08f]
+	and $03
+	ret nz
+	ld hl, wWarioStateCounter
+	inc [hl]
+	ld a, [hli]
+	cp $08
+	jr c, .asm_29e95
+	cp $0b
+	jr z, .asm_29ea5
+	dec [hl]
+	ld a, [hl]
+	jr .asm_29e96
+.asm_29e95
+	ld [hl], a
+.asm_29e96
+	add a
+	add a
+	add a
+	add a ; *16
+	ld e, a
+	ld d, $00
+	ld hl, Pals_c890
+	add hl, de
+	call Func_1af6
+	ret
+
+.asm_29ea5
+	jp Func_1570
+; 0x29ea8
+
+	INCROM $29ea8, $29ef3
+
+UpdateState_ZombieKnockBack: ; 29ef3 (a:5ef3)
+	update_anim_2
+	ld a, [wc1a8]
+	and a
+	ret z
+	jp SetState_ZombieIdling
+; 0x29f0a
+
+SetState_ZombieWrithing: ; 29f0a (a:5f0a)
+	ld a, ST_ZOMBIE_WRITHING
+	ld [wWarioState], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_29f28
+	load_frameset_ptr Frameset_1fc882
+	jr .asm_29f32
+.asm_29f28
+	load_frameset_ptr Frameset_1fc88b
+.asm_29f32
+	update_anim_2
+	ret
+; 0x29f42
+
+UpdateState_ZombieWrithing: ; 29f42 (a:5f42)
+	update_anim_2
+	ld a, [wJoypadDown]
+	and a
+	jp nz, SetState_ZombieIdling
+	ret
+; 0x29f59
+
+	INCROM $29f59, $2ade4
 
 Func_2ade4: ; 2ade4 (a:6de4)
 	call Func_1079
@@ -1062,7 +1564,7 @@ Func_2ae8a: ; 2ae8a (a:6e8a)
 .asm_2af35
 	load_frameset_ptr Frameset_16b14
 .asm_2af3f
-	update_anim
+	update_anim_1
 
 	farcall Func_198e0
 	ld a, b
@@ -1142,7 +1644,7 @@ Func_2af9c: ; 2af9c (a:6f9c)
 .asm_2b00d
 	load_frameset_ptr Frameset_16b1d
 .asm_2b017
-	update_anim
+	update_anim_1
 	ret
 ; 0x2b027
 
@@ -1178,7 +1680,7 @@ Func_2b027: ; 2b027 (a:7027)
 .asm_2b060
 	load_frameset_ptr Frameset_16b2f
 .asm_2b06a
-	update_anim
+	update_anim_1
 	ret
 ; 0x2b07a
 
@@ -1198,7 +1700,7 @@ Func_2b07a: ; 2b07a (a:707a)
 	ld [wFrameDuration], a
 	ld [wca68], a
 	load_frameset_ptr Frameset_16b26
-	update_anim
+	update_anim_1
 .asm_2b0af
 	farcall Func_19734
 	ld a, b
@@ -1219,7 +1721,7 @@ Func_2b07a: ; 2b07a (a:707a)
 	ld [wFrameDuration], a
 	ld [wca68], a
 	load_frameset_ptr Frameset_16b2f
-	update_anim
+	update_anim_1
 
 .asm_2b0f2
 	farcall Func_19734
@@ -1315,4 +1817,92 @@ Func_2b1cc: ; 2b1cc (a:71cc)
 	ret
 ; 0x2b239
 
-	INCROM $2b239, $2c000
+	INCROM $2b239, $2b34e
+
+Func_2b34e: ; 2b34e (a:734e)
+	ld a, [wJoypadDown]
+	bit A_BUTTON_F, a
+	jp nz, Func_29be1
+	and D_RIGHT | D_LEFT
+	jp nz, SetState_ZombieWalking
+
+	farcall Func_198e0
+	ld a, b
+	and a
+	jp z, Func_29bb9
+
+	ld hl, wWarioStateCounter
+	ld a, [hl]
+	add $01
+	ld [hli], a
+	ld a, [hl]
+	adc $00
+	ld [hl], a
+	cp $02
+	ret c
+	jp SetState_ZombieWrithing
+
+	ret ; unnecessary
+; 0x2b381
+
+Func_2b381: ; 2b381 (a:7381)
+	ld a, [wJoypadDown]
+	bit A_BUTTON_F, a
+	jp nz, Func_29be1
+	bit D_RIGHT_F, a
+	jr nz, .asm_2b394
+	bit D_LEFT_F, a
+	jr nz, .asm_2b3b3
+	jp SetState_ZombieIdling
+
+.asm_2b394
+	ld a, [wDirection]
+	and a
+	jr z, .asm_2b3ab
+	farcall Func_1f11b
+	jr .asm_2b3c8
+
+.asm_2b3ab
+	ld a, DIRECTION_RIGHT
+	ld [wDirection], a
+	jp SetState_ZombieTurning
+.asm_2b3b3
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_2b3d5
+	farcall Func_1f135
+.asm_2b3c8
+	ld a, [wca86]
+	cp $04
+	jr c, .asm_2b3d4
+	ld a, $00
+	ld [wca86], a
+.asm_2b3d4
+	ret
+.asm_2b3d5
+	ld a, DIRECTION_LEFT
+	ld [wDirection], a
+	jp SetState_ZombieTurning
+; 0x2b3dd
+
+Func_2b3dd: ; 2b3dd (a:73dd)
+	call Func_1488
+	ld hl, wWarioStateCycles
+	ld a, [hl]
+	and a
+	jr z, .asm_2b3e9
+	dec [hl]
+	ret
+
+.asm_2b3e9
+	call Func_2b17a
+	ld a, [wca86]
+	cp $04
+	jr c, .asm_2b3f8
+	ld a, $00
+	ld [wca86], a
+.asm_2b3f8
+	ret
+; 0x2b3f9
+
+	INCROM $2b3f9, $2c000

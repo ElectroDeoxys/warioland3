@@ -14,19 +14,80 @@ Pals_c800: ; c800 (3:4800)
 ; 0xc810
 
 Pals_c810: ; c810 (3:4810)
-	INCROM $c810, $c820
+	rgb  0, 22, 16
+	rgb  0,  0,  0
+	rgb  0,  7, 11
+	rgb 31, 31, 31
+
+	rgb  0, 22, 16
+	rgb 10, 10, 10
+	rgb 21, 21, 21
+	rgb 31, 31, 31
+; 0xc820
 
 Pals_c820: ; c820 (3:4820)
-	INCROM $c820, $c830
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 31, 15, 10
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 31,  0
+	rgb 31,  0,  0
+	rgb  0,  0,  0
+; 0xc830
 
 Pals_c830: ; c830 (3:4830)
-	INCROM $c830, $c840
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 31, 15, 10
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 20,  0,  0
+	rgb 31,  0,  0
+	rgb  0,  0,  0
+; 0xc840
 
 Pals_c840: ; c840 (3:4840)
-	INCROM $c840, $c850
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 31, 15, 10
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 11,  0,  0
+	rgb 24,  0,  0
+	rgb  0,  0,  0
+; 0xc850
 
 Pals_c850: ; c850 (3:4850)
-	INCROM $c850, $c9f3
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 31, 15, 10
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb  0,  0,  0
+	rgb 20,  0,  0
+	rgb  0,  0,  0
+; 0xc860
+
+	INCROM $c860, $c890
+
+Pals_c890: ; c890 (3:4890)
+	rgb 21, 21, 21
+	rgb 31, 31, 21
+	rgb  0, 23, 10
+	rgb  2,  3,  7
+
+	rgb 21, 21, 21
+	rgb 31, 31, 31
+	rgb 21, 21, 21
+	rgb  0,  0,  0
+; 0xc8a0
+
+	INCROM $c8a0, $c9f3
 
 Func_c9f3: ; c9f3 (3:49f3)
 	ld a, [wcce1]

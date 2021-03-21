@@ -462,7 +462,10 @@ wc1c8:: ; c1c8
 wc1c9:: ; c1c9
 	ds $1
 
-	ds $36
+wc1ca:: ; c1ca
+	ds $1
+
+	ds $35
 
 ; function called on V-Blank
 wVBlankFunc:: ; c200

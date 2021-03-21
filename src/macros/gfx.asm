@@ -6,8 +6,14 @@ palettes EQUS "* PALETTE_SIZE"
 palette  EQUS "+ PALETTE_SIZE *"
 color    EQUS "+ PAL_COLOR_SIZE *"
 
-update_anim: MACRO
+update_anim_1: MACRO
 	ld a, BANK("Bank 5")
+	ldh [hCallFuncBank], a
+	call_hram UpdateAnimation
+ENDM
+
+update_anim_2: MACRO
+	ld a, BANK("Bank 7F")
 	ldh [hCallFuncBank], a
 	call_hram UpdateAnimation
 ENDM

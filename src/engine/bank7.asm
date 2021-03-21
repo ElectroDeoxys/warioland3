@@ -117,7 +117,7 @@ UpdateState_Idling: ; 1c0b6 (7:40b6)
 	ret
 
 .asm_1c115
-	update_anim
+	update_anim_1
 
 	farcall Func_19b25
 	ld a, [wc0d7]
@@ -177,7 +177,7 @@ UpdateState_Walking: ; 1c1ab (7:41ab)
 	ld [wceed], a
 	load_sound SFX_04
 .asm_1c1c2
-	update_anim
+	update_anim_1
 
 	ld a, [wc1a8]
 	and a
@@ -236,7 +236,7 @@ UpdateState_Turning: ; 1c244 (7:4244)
 	jp nz, StartJump_FromInput
 	bit B_BUTTON_F, a
 	jp nz, SetState_Attacking
-	update_anim
+	update_anim_1
 	ld a, [wc1a8]
 	and a
 	ret z
@@ -347,7 +347,7 @@ SetState_Airborne: ; 1c2e2 (7:42e2)
 .asm_1c345
 	load_frameset_ptr Frameset_15f97
 .asm_1c34f
-	update_anim
+	update_anim_1
 	ld a, [wcac9]
 	and a
 	ret z
@@ -476,7 +476,7 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 .asm_1c4a0
 	load_frameset_ptr Frameset_16055
 .asm_1c4aa
-	update_anim
+	update_anim_1
 
 	ld a, [wJumpVelIndex]
 	cp FALLING_JUMP_VEL_INDEX
@@ -605,7 +605,7 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 .asm_1c5e3
 	load_frameset_ptr Frameset_15fa1
 .asm_1c5ed
-	update_anim
+	update_anim_1
 	ret
 ; 0x1c5fd
 
@@ -645,7 +645,7 @@ Func_1c5fd: ; 1c5fd (7:45fd)
 .asm_1c650
 	load_frameset_ptr Frameset_15fc5
 .asm_1c65a
-	update_anim
+	update_anim_1
 	jr SetState_SmashAttacking
 
 Func_1c66b: ; 1c66b (7:466b)
@@ -672,7 +672,7 @@ Func_1c66b: ; 1c66b (7:466b)
 .asm_1c6a8
 	load_frameset_ptr Frameset_16009
 .asm_1c6b2
-	update_anim
+	update_anim_1
 ;	fallthrough
 
 SetState_SmashAttacking: ; 1c6c1 (7:46c1)
@@ -700,7 +700,7 @@ UpdateState_Landing: ; 1c6ed (7:46ed)
 	ld a, [wJoypadPressed]
 	and D_RIGHT | D_LEFT
 	jr nz, .asm_1c70a
-	update_anim
+	update_anim_1
 	ld a, [wc1a8]
 	and a
 	jr nz, .asm_1c70d
@@ -776,7 +776,7 @@ SetState_CrouchSliding: ; 1c73b (7:473b)
 ; dir left
 	load_frameset_ptr Frameset_14a38
 .asm_1c7a7
-	update_anim
+	update_anim_1
 	ret
 
 .dir_right
@@ -944,7 +944,7 @@ UpdateState_Attacking: ; 1c8df (7:48df)
 	load_sound SFX_08
 
 .asm_1c916
-	update_anim
+	update_anim_1
 
 	call HandleInput_Attacking
 	ld a, [wWarioState]
@@ -1103,11 +1103,11 @@ Func_1ca20: ; 1ca20 (7:4a20)
 	and a
 	jr nz, .asm_1caa4
 	load_frameset_ptr Frameset_15219
-	update_anim
+	update_anim_1
 	jr .asm_1cabe
 .asm_1caa4
 	load_frameset_ptr Frameset_15216
-	update_anim
+	update_anim_1
 .asm_1cabd
 	ret
 .asm_1cabe
@@ -1139,7 +1139,7 @@ Func_1ca20: ; 1ca20 (7:4a20)
 	call .asm_1cabd
 	load_frameset_ptr Frameset_15f70
 .asm_1cb06
-	update_anim
+	update_anim_1
 
 	ld a, $e5
 	ld [wca6f], a
@@ -1201,7 +1201,7 @@ SetState_AttackingAirborne: ; 1cb43 (7:4b43)
 .asm_1cb97
 	load_frameset_ptr Frameset_15249
 .asm_1cba1
-	update_anim
+	update_anim_1
 
 	ld a, [wcac9]
 	and a
@@ -1237,7 +1237,7 @@ UpdateState_AttackingAirborne: ; 1cbb9 (7:4bb9)
 	ld [wceed], a
 	load_sound SFX_07
 .asm_1cc09
-	update_anim
+	update_anim_1
 
 	call Func_1ea64
 	ld a, [wWarioState]
@@ -1416,7 +1416,7 @@ Func_1cd7c: ; 1cd7c (7:4d7c)
 .asm_1cda9
 	load_frameset_ptr Frameset_155a3
 .asm_1cdb3
-	update_anim
+	update_anim_1
 	jr SetState_Diving
 ; 0x1cdc4
 
@@ -1432,7 +1432,7 @@ Func_1cdc4: ; 1cdc4 (7:4dc4)
 .asm_1cddd
 	load_frameset_ptr Frameset_15573
 .asm_1cde7
-	update_anim
+	update_anim_1
 ;	fallthrough
 
 SetState_Diving: ; 1cdf6 (7:4df6)
@@ -1556,7 +1556,7 @@ SetState_Submerged: ; 1ce95 (7:4e95)
 .asm_1cf06
 	load_frameset_ptr Frameset_1558b
 .asm_1cf10
-	update_anim
+	update_anim_1
 	ret
 
 .asm_1cf20
@@ -1571,7 +1571,7 @@ SetState_Submerged: ; 1ce95 (7:4e95)
 .asm_1cf39
 	load_frameset_ptr Frameset_155a3
 .asm_1cf43
-	update_anim
+	update_anim_1
 	ret
 ; 0x1cf53
 
@@ -1643,7 +1643,7 @@ SetState_WaterSurfaceIdling: ; 1cfa2 (7:4fa2)
 .asm_1cfee
 	load_frameset_ptr Frameset_1555b
 .asm_1cff8
-	update_anim
+	update_anim_1
 	ret
 ; 0x1d008
 
@@ -1666,7 +1666,7 @@ UpdateState_WaterSurfaceIdling: ; 1d008 (7:5008)
 	ld [wceed], a
 	load_sound SFX_37
 .asm_1d03f
-	update_anim
+	update_anim_1
 	call Func_1d1bc
 	call Func_1f40f
 	ld a, [wWarioState]
@@ -1705,7 +1705,7 @@ SetState_WaterSurfaceMoving: ; 1d065 (7:5065)
 .asm_1d0a0
 	load_frameset_ptr Frameset_1555b
 .asm_1d0aa
-	update_anim
+	update_anim_1
 	ret
 ; 0x1d0ba
 
@@ -1724,7 +1724,7 @@ UpdateState_WaterSurfaceMoving: ; 1d0ba (7:50ba)
 	ld [wceed], a
 	load_sound SFX_37
 .asm_1d0eb
-	update_anim
+	update_anim_1
 
 	call Func_1d1bc
 	call Func_1e46a
@@ -1751,7 +1751,7 @@ Func_1d107: ; 1d107 (7:5107)
 	ld [wFrameDuration], a
 	ld [wca68], a
 	load_frameset_ptr Frameset_1555b
-	update_anim
+	update_anim_1
 	ret
 
 .asm_1d141
@@ -1785,7 +1785,7 @@ Func_1d107: ; 1d107 (7:5107)
 	ld [wFrameDuration], a
 	ld [wca68], a
 	load_frameset_ptr Frameset_15554
-	update_anim
+	update_anim_1
 	ret
 
 .asm_1d19a
@@ -1888,7 +1888,7 @@ SetState_UnderwaterThrusting: ; 1d1ec (7:51ec)
 .asm_1d268
 	load_frameset_ptr Frameset_155c5
 .asm_1d272
-	update_anim
+	update_anim_1
 	ret
 
 .asm_1d282
@@ -1923,7 +1923,7 @@ UpdateState_UnderwaterThrusting: ; 1d297 (7:5297)
 	ld [wceed], a
 	load_sound SFX_0F
 .asm_1d2ce
-	update_anim
+	update_anim_1
 	call Func_1f470
 	ld a, [wWarioState]
 	cp ST_UNDERWATER_THRUSTING
@@ -1964,7 +1964,7 @@ SetState_SwimKnockBack: ; 1d2ea (7:52ea)
 .asm_1d33a
 	load_frameset_ptr Frameset_15569
 .asm_1d344
-	update_anim
+	update_anim_1
 	ret
 ; 0x1d354
 
@@ -2004,7 +2004,7 @@ UpdateState_SwimKnockBack: ; 1d354 (7:5354)
 ; 0x1d395
 
 UpdateState_WaterStung: ; 1d395 (7:5395)
-	update_anim
+	update_anim_1
 
 	ld hl, wWarioStateCounter
 	inc [hl]
@@ -2072,7 +2072,7 @@ SetState_TryingSubmerge: ; 1d416 (7:5416)
 .asm_1d43b
 	load_frameset_ptr Frameset_155b7
 .asm_1d445
-	update_anim
+	update_anim_1
 	ret
 ; 0x1d455
 
@@ -2080,7 +2080,7 @@ UpdateState_TryingSubmerge: ; 1d455 (7:5455)
 	ld a, [wJoypadDown]
 	bit D_DOWN_F, a
 	jp z, SetState_WaterSurfaceIdling
-	update_anim
+	update_anim_1
 	ret
 ; 0x1d46d
 
@@ -2114,7 +2114,7 @@ UpdateState_CrouchWalking: ; 1d4a7 (7:54a7)
 	ld [wceed], a
 	load_sound SFX_4A
 .asm_1d4be
-	update_anim
+	update_anim_1
 
 	farcall Func_19b25
 	ld a, [wc0d7]
@@ -2205,7 +2205,7 @@ UpdateState_CrouchAirborne: ; 1d522 (7:5522)
 .asm_1d5b0
 	load_frameset_ptr Frameset_14a3b
 .asm_1d5ba
-	update_anim
+	update_anim_1
 .asm_1d5c9
 	ld a, [wJumpVelIndex]
 	cp FALLING_JUMP_VEL_INDEX
@@ -2269,7 +2269,7 @@ UpdateState_Stung: ; 1d627 (7:5627)
 
 .asm_1d65a
 	call Func_1f6c2
-	update_anim
+	update_anim_1
 	farcall Func_19734
 	ld a, b
 	and a
@@ -2396,7 +2396,7 @@ UpdateState_Stung: ; 1d627 (7:5627)
 
 UpdateState_StungRecovery: ; 1d766 (7:5766)
 	call Func_1f6c2
-	update_anim
+	update_anim_1
 	ld hl, wWarioStateCounter
 	inc [hl]
 	ld a, [hl]
@@ -2433,7 +2433,7 @@ UpdateState_StungRecovery: ; 1d766 (7:5766)
 UpdateState_PipeGoingDown: ; 1d7c1 (7:57c1)
 	ld a, $01
 	ld [wca8a], a
-	update_anim
+	update_anim_1
 	ld b, $01
 	call Func_1287
 
@@ -2466,7 +2466,7 @@ UpdateState_PipeGoingDown: ; 1d7c1 (7:57c1)
 UpdateState_PipeGoingUp: ; 1d80d (7:580d)
 	ld a, $01
 	ld [wca8a], a
-	update_anim
+	update_anim_1
 	ld b, $01
 	call Func_129e
 
@@ -2500,7 +2500,7 @@ UpdateState_PipeGoingUp: ; 1d80d (7:580d)
 	INCROM $1d85c, $1d8f8
 
 UpdateState_SmashAttacking: ; 1d8f8 (7:58f8)
-	update_anim
+	update_anim_1
 	ld hl, wWarioStateCounter
 	inc [hl]
 	ld a, [hl]
@@ -2521,7 +2521,7 @@ UpdateState_PickingUp: ; 1d916 (7:5916)
 	and $0f
 	cp $02
 	jp z, Func_1efe7
-	update_anim
+	update_anim_1
 	ld a, [wc1a8]
 	and a
 	ret z
@@ -2583,7 +2583,7 @@ UpdateState_GrabWalking: ; 1d995 (7:5995)
 	ld [wceed], a
 	load_sound SFX_04
 .asm_1d9cf
-	update_anim
+	update_anim_1
 	call Func_1eefc
 	ld a, [wWarioState]
 	cp ST_GRAB_WALKING
@@ -2622,7 +2622,7 @@ SetState_ThrowingAirborne: ; 1da07 (7:5a07)
 	jr nz, .asm_1da43
 	load_frameset_ptr Frameset_15fae
 .asm_1da33
-	update_anim
+	update_anim_1
 	ret
 .asm_1da43
 	load_frameset_ptr Frameset_15fb3
@@ -2728,7 +2728,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 .asm_1db3f
 	load_frameset_ptr Frameset_16063
 .asm_1db49
-	update_anim
+	update_anim_1
 
 	ld a, [wca9a]
 	bit 7, a
@@ -2806,7 +2806,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 .asm_1dc0a
 	load_frameset_ptr Frameset_15fdf
 .asm_1dc14
-	update_anim
+	update_anim_1
 	jr .asm_1dc5f
 
 .asm_1dc25
@@ -2822,7 +2822,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 .asm_1dc46
 	load_frameset_ptr Frameset_16037
 .asm_1dc50
-	update_anim
+	update_anim_1
 
 .asm_1dc5f
 	ld a, $81
@@ -2880,7 +2880,7 @@ SetState_ThrowCharging: ; 1dc8b (7:5c8b)
 .asm_1dce2
 	load_frameset_ptr Frameset_1642f
 .asm_1dcec
-	update_anim
+	update_anim_1
 	ret
 ; 0x1dcfc
 
@@ -2934,7 +2934,7 @@ UpdateState_ThrowCharging: ; 1dcfc (7:5cfc)
 .asm_1dd5e
 	load_frameset_ptr Frameset_16435
 .asm_1dd68
-	update_anim
+	update_anim_1
 	ret
 ; 0x1dd78
 
@@ -2983,7 +2983,7 @@ UpdateState_ThrowFullyCharged: ; 1dd7f (7:5d7f)
 .asm_1ddd6
 	load_frameset_ptr Frameset_16441
 .asm_1dde0
-	update_anim
+	update_anim_1
 
 	ld a, [wJoypadDown]
 	bit B_BUTTON_F, a
@@ -3006,7 +3006,7 @@ UpdateState_ThrowFullyCharged: ; 1dd7f (7:5d7f)
 .asm_1de1a
 	load_frameset_ptr Frameset_16423
 .asm_1de24
-	update_anim
+	update_anim_1
 
 	ld a, [wca9a]
 	and $f0
@@ -3026,7 +3026,7 @@ Func_1de3f: ; 1de3f (7:5e3f)
 .asm_1de58
 	load_frameset_ptr Frameset_1641e
 .asm_1de62
-	update_anim
+	update_anim_1
 
 	ld a, [wca9a]
 	and $f0
@@ -3047,7 +3047,7 @@ UpdateState_Throwing: ; 1de88 (7:5e88)
 	ld a, [wca9a]
 	and a
 	jp z, SetState_Idling
-	update_anim
+	update_anim_1
 	ld a, [wc1a8]
 	and a
 	ret z
@@ -3060,7 +3060,7 @@ UpdateState_ThrowingAirborne: ; 1deaa (7:5eaa)
 	ld a, [wca9a]
 	and a
 	jp z, Func_1c2ae
-	update_anim
+	update_anim_1
 	ld a, [wc1a8]
 	and a
 	ret z
@@ -3073,7 +3073,7 @@ UpdateState_GrabSmashAttacking: ; 1decc (7:5ecc)
 	ld a, [wca9a]
 	and a
 	jp z, SetState_Idling
-	update_anim
+	update_anim_1
 	ld hl, wWarioStateCounter
 	inc [hl]
 	ld a, [hl]
@@ -3170,7 +3170,7 @@ SetState_Sliding: ; 1def1 (7:5ef1)
 	ld [wDirection], a
 	load_frameset_ptr Frameset_1671d
 .asm_1dfc4
-	update_anim
+	update_anim_1
 	ret
 ; 0x1dfd4
 
@@ -3183,7 +3183,7 @@ UpdateState_Sliding: ; 1dfd4 (7:5fd4)
 	ld [wceed], a
 	load_sound SFX_0B
 .asm_1dfeb
-	update_anim
+	update_anim_1
 	call Func_1f825
 	ld a, [wWarioState]
 	cp ST_SLIDING
@@ -3245,7 +3245,7 @@ SetState_Rolling: ; 1e042 (7:6042)
 .asm_1e083
 	load_frameset_ptr Frameset_166f7
 .asm_1e08d
-	update_anim
+	update_anim_1
 	ret
 ; 0x1e09d
 
@@ -3262,7 +3262,7 @@ UpdateState_Rolling: ; 1e09d (7:609d)
 	ld [wceed], a
 	load_sound SFX_0A
 .asm_1e0ca
-	update_anim
+	update_anim_1
 
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
@@ -3372,7 +3372,7 @@ SetState_Unknown29: ; 1e179 (7:6179)
 .asm_1e1c9
 	load_frameset_ptr Frameset_166f7
 .asm_1e1d3
-	update_anim
+	update_anim_1
 	ret
 ; 0x1e1e3
 
@@ -3397,7 +3397,7 @@ UpdateState_RollingAirborne: ; 1e1e9 (7:61e9)
 	ret
 
 .asm_1e21c
-	update_anim
+	update_anim_1
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1e239
@@ -3474,7 +3474,7 @@ UpdateState_RollingAirborne: ; 1e1e9 (7:61e9)
 	INCROM $1e2c5, $1e347
 
 UpdateState_GroundShakeStunned: ; 1e347 (7:6347)
-	update_anim
+	update_anim_1
 	ld a, [wca97]
 	and a
 	jr z, .asm_1e3b6
@@ -3532,7 +3532,7 @@ UpdateState_EnteringDoor: ; 1e3e8 (7:63e8)
 	ld [wceed], a
 	load_sound SFX_04
 .asm_1e3ff
-	update_anim
+	update_anim_1
 
 	ld a, [wWarioStateCounter]
 	dec a
@@ -3549,7 +3549,7 @@ UpdateState_EnteringDoor: ; 1e3e8 (7:63e8)
 	ld [wFrameDuration], a
 	ld [wca68], a
 	load_frameset_ptr Frameset_14d15
-	update_anim
+	update_anim_1
 	ld hl, wWarioStateCounter
 	inc [hl]
 	ret
@@ -3909,7 +3909,7 @@ SetState_Walking: ; 1e6b9 (7:66b9)
 .dir_right
 	load_frameset_ptr Frameset_149c5
 .got_frameset
-	update_anim
+	update_anim_1
 	ret
 ; 0x1e73e
 
@@ -3947,7 +3947,7 @@ SetState_Turning: ; 1e73e (7:673e)
 .asm_1e791
 	load_frameset_ptr Frameset_14cc5
 .asm_1e79b
-	update_anim
+	update_anim_1
 	ret
 ; 0x1e7ab
 
@@ -4008,7 +4008,7 @@ SetState_Attacking: ; 1e7ab (7:67ab)
 .asm_1e83b
 	load_frameset_ptr Frameset_1522d
 .asm_1e845
-	update_anim
+	update_anim_1
 	ret
 ; 0x1e855
 
@@ -4065,7 +4065,7 @@ Func_1e855: ; 1e855 (7:6855)
 .asm_1e8d3
 	load_frameset_ptr Frameset_14a3b
 .asm_1e8dd
-	update_anim
+	update_anim_1
 	ret
 ; 0x1e8ed
 
@@ -4193,7 +4193,7 @@ SetState_Idling: ; 1e99b (7:699b)
 .asm_1ea24
 	load_frameset_ptr Frameset_1425f
 .asm_1ea2e
-	update_anim
+	update_anim_1
 	ret
 ; 0x1ea3e
 
@@ -4395,7 +4395,7 @@ SetState_CrouchWalking: ; 1eb94 (7:6b94)
 	jr z, .asm_1ec0d
 	load_frameset_ptr Frameset_14a26
 .asm_1ebfd
-	update_anim
+	update_anim_1
 	ret
 .asm_1ec0d
 	load_frameset_ptr Frameset_14a2f
@@ -4576,7 +4576,7 @@ Func_1ed4b: ; 1ed4b (7:6d4b)
 .asm_1edaf
 	load_frameset_ptr Frameset_14a3b
 .asm_1edb9
-	update_anim
+	update_anim_1
 
 	ld a, [wcac9]
 	and a
@@ -4653,7 +4653,7 @@ SetState_GrabAirborne: ; 1ee0d (7:6e0d)
 .asm_1ee66
 	load_frameset_ptr Frameset_15fab
 .asm_1ee70
-	update_anim
+	update_anim_1
 	ld a, [wcac9]
 	and a
 	ret z
@@ -4697,7 +4697,7 @@ Func_1ee88: ; 1ee88 (7:6e88)
 	ld [wDirection], a
 	load_frameset_ptr Frameset_149fe
 .asm_1eedb
-	update_anim
+	update_anim_1
 	ret
 .asm_1eeeb
 	ld a, DIRECTION_RIGHT
@@ -4862,7 +4862,7 @@ Func_1efe7: ; 1efe7 (7:6fe7)
 .asm_1f05d
 	load_frameset_ptr Frameset_14a23
 .asm_1f067
-	update_anim
+	update_anim_1
 	ret
 ; 0x1f077
 
@@ -5060,7 +5060,7 @@ Func_1f1a9: ; 1f1a9 (7:71a9)
 .asm_1f1eb
 	load_frameset_ptr Frameset_15573
 .asm_1f1f5
-	update_anim
+	update_anim_1
 
 	ld a, $01
 	ld [wWarioStateCycles], a
@@ -5114,7 +5114,7 @@ Func_1f24c: ; 1f24c (7:724c)
 .asm_1f285
 	load_frameset_ptr Frameset_1558b
 .asm_1f28f
-	update_anim
+	update_anim_1
 
 	ld a, [wc08f]
 	and $01
@@ -5159,7 +5159,7 @@ Func_1f24c: ; 1f24c (7:724c)
 	ld [wFrameDuration], a
 	ld [wca68], a
 	load_frameset_ptr Frameset_1558b
-	update_anim
+	update_anim_1
 	ret
 ; 0x1f310
 
@@ -5229,7 +5229,7 @@ Func_1f357: ; 1f357 (7:7357)
 	ld [wFrameDuration], a
 	ld [wca68], a
 	load_frameset_ptr Frameset_15576
-	update_anim
+	update_anim_1
 	ret
 ; 0x1f3a7
 
@@ -5733,7 +5733,7 @@ Func_1f6dc: ; 1f6dc (7:76dc)
 .asm_1f7cc
 	load_frameset_ptr Frameset_15f7f
 .asm_1f7d6
-	update_anim
+	update_anim_1
 	ret
 ; 0x1f7e6
 
@@ -5753,7 +5753,7 @@ SetState_LadderShakeStunned: ; 1f7e6 (7:77e6)
 	ld [wFrameDuration], a
 	ld [wca68], a
 	load_frameset_ptr Frameset_15948
-	update_anim
+	update_anim_1
 	ret
 ; 0x1f825
 

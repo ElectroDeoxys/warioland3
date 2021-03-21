@@ -598,7 +598,7 @@ Func_846e: ; 846e (2:446e)
 	ld [wca68], a
 
 	load_frameset_ptr Frameset_14d18
-	update_anim
+	update_anim_1
 
 .asm_85a7
 	call Func_161a
