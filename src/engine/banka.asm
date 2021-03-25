@@ -37,11 +37,11 @@ Func_28000: ; 28000 (a:4000)
 	dw $53d0                                  ; ST_UNKNOWN_7F
 	dw UpdateState_Electric                   ; ST_ELECTRIC
 	dw UpdateState_ElectricDizzy              ; ST_ELECTRIC_DIZZY
-	dw $572e                                  ; ST_UNKNOWN_82
-	dw $5816                                  ; ST_UNKNOWN_83
-	dw $5871                                  ; ST_UNKNOWN_84
-	dw $58f3                                  ; ST_UNKNOWN_85
-	dw $5975                                  ; ST_UNKNOWN_86
+	dw UpdateState_TurningInvisible           ; ST_TURNING_INVISIBLE
+	dw UpdateState_PuffyInflating             ; ST_PUFFY_INFLATING
+	dw UpdateState_PuffyRaising               ; ST_PUFFY_RAISING
+	dw UpdateState_PuffyTurning               ; ST_PUFFY_TURNING
+	dw UpdateState_PuffyDeflating             ; ST_PUFFY_DEFLATING
 	dw UpdateState_ZombieIdling               ; ST_ZOMBIE_IDLING
 	dw UpdateState_ZombieWalking              ; ST_ZOMBIE_WALKING
 	dw UpdateState_ZombieTurning              ; ST_ZOMBIE_TURNING
@@ -1462,7 +1462,221 @@ UpdateState_ElectricDizzy: ; 29672 (a:5672)
 	jp Func_1570
 ; 0x29689
 
-	INCROM $29689, $299d0
+	INCROM $29689, $2972e
+
+UpdateState_TurningInvisible: ; 2972e (a:572e)
+	update_anim_1
+	ld a, [wc1a8]
+	and a
+	ret z
+	xor a
+	ld [wca8a], a
+	ld a, $06
+	ld [wca8e], a
+	call Func_161a
+	farcall SetState_Idling
+	ret
+; 0x2975e
+
+	INCROM $2975e, $29816
+
+UpdateState_PuffyInflating: ; 29816 (a:5816)
+	ld a, [wSpriteBank]
+	ldh [hCallFuncBank], a
+	call_hram UpdateAnimation
+
+	ld a, [wc1a8]
+	and a
+	ret z
+;	fallthrough
+
+SetState_PuffyRaising: ; 2982b (a:582b)
+	ld a, ST_PUFFY_RAISING
+	ld [wWarioState], a
+
+	xor a
+	ld [wceed], a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	inc a
+	ld [wJumpVelTable], a
+
+	ld hl, Pals_c800
+	call Func_1af6
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_29856
+	ld a, $4d
+	ld [wFramesetPtr], a
+	ld a, $4e
+	ld [$ca82], a
+	jr .asm_29860
+.asm_29856
+	ld a, $4d
+	ld [wFramesetPtr], a
+	ld a, $57
+	ld [$ca82], a
+.asm_29860
+	ld a, [wSpriteBank]
+	ldh [hCallFuncBank], a
+	call_hram UpdateAnimation
+	ret
+; 0x29871
+
+UpdateState_PuffyRaising: ; 29871 (a:5871)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wceed]
+	sub $01
+	ld [wceed], a
+	jr nc, .asm_2989e
+	ld a, $20
+	ld [wceed], a
+	load_sound SFX_26
+
+.asm_2989e
+	ld a, [wSpriteBank]
+	ldh [hCallFuncBank], a
+	call_hram UpdateAnimation
+
+	call Func_2b2c2
+	ret
+; 0x298b2
+
+SetState_PuffyTurning: ; 298b2 (a:58b2)
+	ld a, [wDirection]
+	xor $1 ; switch direction
+	ld [wDirection], a
+
+	ld a, ST_PUFFY_TURNING
+	ld [wWarioState], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_298d8
+	ld a, $4c
+	ld [wFramesetPtr], a
+	ld a, $e3
+	ld [$ca82], a
+	jr .asm_298e2
+.asm_298d8
+	ld a, $4c
+	ld [wFramesetPtr], a
+	ld a, $d8
+	ld [$ca82], a
+.asm_298e2
+	ld a, [wSpriteBank]
+	ldh [hCallFuncBank], a
+	call_hram UpdateAnimation
+	ret
+; 0x298f3
+
+UpdateState_PuffyTurning: ; 298f3 (a:58f3)
+	ld a, [wSpriteBank]
+	ldh [hCallFuncBank], a
+	call_hram UpdateAnimation
+
+	call Func_2b342
+	farcall Func_1996e
+
+	ld a, [wWarioState]
+	cp ST_PUFFY_TURNING
+	ret nz ; done if not puffy turning any more
+
+	ld a, b
+	and a
+	jr z, .asm_29922
+	jp SetState_PuffyDeflating
+
+.asm_29922
+	ld a, [wc1a8]
+	and a
+	ret z
+	jp SetState_PuffyRaising
+; 0x2992a
+
+SetState_PuffyDeflating: ; 2992a (a:592a)
+	load_sound SFX_27
+
+	ld a, ST_PUFFY_DEFLATING
+	ld [wWarioState], a
+
+	xor a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	inc a
+	ld [wca8a], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_2995a
+	ld a, $4c
+	ld [wFramesetPtr], a
+	ld a, $ee
+	ld [$ca82], a
+	jr .asm_29964
+.asm_2995a
+	ld a, $4d
+	ld [wFramesetPtr], a
+	ld a, $1e
+	ld [$ca82], a
+.asm_29964
+	ld a, [wSpriteBank]
+	ldh [hCallFuncBank], a
+	call_hram UpdateAnimation
+	ret
+; 0x29975
+
+UpdateState_PuffyDeflating: ; 29975 (a:5975)
+	ld a, [wWarioStateCounter]
+	and a
+	jr nz, .asm_299b8
+
+	ld a, [wSpriteBank]
+	ldh [hCallFuncBank], a
+	call_hram UpdateAnimation
+
+	ld a, [wc1a8]
+	and a
+	ret z
+	ld a, $01
+	ld [wWarioStateCounter], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_299ae
+	ld a, $4d
+	ld [wFramesetPtr], a
+	ld a, $01
+	ld [$ca82], a
+	jr .asm_299b8
+.asm_299ae
+	ld a, $4d
+	ld [wFramesetPtr], a
+	ld a, $31
+	ld [$ca82], a
+.asm_299b8
+	ld a, [wSpriteBank]
+	ldh [hCallFuncBank], a
+	call_hram UpdateAnimation
+
+	ld a, [wc1a8]
+	and a
+	ret z
+	jp Func_1570
+; 0x299d0
 
 SetState_ZombieIdling: ; 299d0 (a:59d0)
 	ld a, ST_ZOMBIE_IDLING
@@ -2877,7 +3091,69 @@ Func_2b2a4: ; 2b2a4 (a:72a4)
 	ret
 ; 0x2b2c2
 
-	INCROM $2b2c2, $2b34e
+Func_2b2c2: ; 2b2c2 (a:72c2)
+	call Func_2b342
+	farcall Func_1996e
+	ld a, [wWarioState]
+	cp ST_PUFFY_RAISING
+	ret nz ; done if not puffy raising
+
+	ld a, b
+	and a
+	jr z, .asm_2b2e1
+	jp SetState_PuffyDeflating
+
+.asm_2b2e1
+	ld a, [wc0ba]
+	and $0f
+	cp $08
+	jr c, .asm_2b2f6
+	call Func_114e
+	ld a, [wca78]
+	sub c
+	jr nc, .asm_2b2f6
+	call Func_11d6
+
+.asm_2b2f6
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_2b31f
+	ld a, [wJoypadDown]
+	bit D_RIGHT_F, a
+	jp nz, SetState_PuffyTurning
+	bit D_LEFT_F, a
+	ret z
+	farcall Func_197b1
+	ld a, b
+	and a
+	ret nz
+	ld b, $01
+	call Func_1270
+	ret
+
+.asm_2b31f
+	ld a, [wJoypadDown]
+	bit D_LEFT_F, a
+	jp nz, SetState_PuffyTurning
+	bit D_RIGHT_F, a
+	ret z
+	farcall Func_19741
+	ld a, b
+	and a
+	ret nz
+	ld b, $01
+	call Func_1259
+	ret
+; 0x2b342
+
+Func_2b342: ; 2b342 (a:7342)
+	ld a, [wc08f]
+	and $01
+	ret nz
+	ld b, $01
+	call Func_129e
+	ret
+; 0x2b34e
 
 Func_2b34e: ; 2b34e (a:734e)
 	ld a, [wJoypadDown]

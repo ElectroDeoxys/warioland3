@@ -129,11 +129,11 @@
 	const ST_UNKNOWN_7F                    ; 7f
 	const ST_ELECTRIC                      ; 80
 	const ST_ELECTRIC_DIZZY                ; 81
-	const ST_UNKNOWN_82                    ; 82
-	const ST_UNKNOWN_83                    ; 83
-	const ST_UNKNOWN_84                    ; 84
-	const ST_UNKNOWN_85                    ; 85
-	const ST_UNKNOWN_86                    ; 86
+	const ST_TURNING_INVISIBLE                    ; 82
+	const ST_PUFFY_INFLATING                    ; 83
+	const ST_PUFFY_RAISING                    ; 84
+	const ST_PUFFY_TURNING                    ; 85
+	const ST_PUFFY_DEFLATING                    ; 86
 	const ST_ZOMBIE_IDLING                 ; 87
 	const ST_ZOMBIE_WALKING                ; 88
 	const ST_ZOMBIE_TURNING                ; 89
