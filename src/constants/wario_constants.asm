@@ -23,7 +23,9 @@ MAX_JUMP_VEL_INDEX     EQU $27
 FALLING_JUMP_VEL_INDEX EQU $18
 
 	const_def
-	const JUMP_VEL_NONE       ; 0
-	const JUMP_VEL_KNOCK_BACK ; 1
-	const JUMP_VEL_NORMAL     ; 2
-	const JUMP_VEL_HIGH_JUMP  ; 3
+	const JUMP_VEL_NONE             ; 0
+	const JUMP_VEL_KNOCK_BACK       ; 1
+	const JUMP_VEL_NORMAL           ; 2
+	const JUMP_VEL_HIGH_JUMP        ; 3
+	const JUMP_VEL_BOUNCY_JUMP      ; 4
+	const JUMP_VEL_BOUNCY_HIGH_JUMP ; 5

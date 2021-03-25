@@ -76,7 +76,7 @@ Func_1c000: ; 1c000 (7:4000)
 	dw Func_156d                       ; ST_UNKNOWN_2D
 	dw Func_156d                       ; ST_UNKNOWN_2E
 	dw Func_156d                       ; ST_UNKNOWN_2F
-	dw Func_156d                                
+	dw Func_156d
 	dw Func_156d
 	dw Func_156d
 	dw Func_156d

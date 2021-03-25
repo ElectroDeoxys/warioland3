@@ -178,4 +178,92 @@ Frameset_1fc953: ; 1fc953 (127:4953)
 	db $ff
 ; 0x1fc95e
 
-	INCROM $1fc95e, $200000
+	INCROM $1fc95e, $1fcc5f
+
+Frameset_1fcc5f: ; 1fcc5f (127:4c5f)
+	db $04,  1
+	db $03,  1
+	db $02,  1
+	db $01,  2
+	db $00,  7
+	db $01,  2
+	db $ff
+; 0x1fcc6c
+
+Frameset_1fcc6c: ; 1fcc6c (127:4c6c)
+	db $02,  1
+	db $03,  1
+	db $04,  1
+	db $05,  2
+	db $ff
+; 0x1fcc75
+
+Frameset_1fcc75: ; 1fcc75 (127:4c75)
+	db $06,  1
+	db $07,  1
+	db $08,  1
+	db $09,  2
+	db $0a,  7
+	db $09,  2
+	db $ff
+; 0x1fcc82
+
+Frameset_1fcc82: ; 1fcc82 (127:4c82)
+	db $10,  4
+	db $ff
+; 0x1fcc85
+
+Frameset_1fcc85: ; 1fcc85 (127:4c85)
+	db $16,  1
+	db $17,  1
+	db $18,  1
+	db $19,  2
+	db $1a,  7
+	db $19,  2
+	db $18,  1
+	db $17,  1
+	db $16,  1
+	db $ff
+; 0x1fcc98
+
+Frameset_1fcc98: ; 1fcc98 (127:4c98)
+	db $10,  1
+	db $15,  4
+	db $14,  4
+	db $13,  6
+	db $11,  4
+	db $12,  3
+	db $ff
+; 0x1fcca5
+
+Frameset_1fcca5: ; 1fcca5 (127:4ca5)
+	db $10,  1
+	db $0f,  4
+	db $0e,  4
+	db $0d,  6
+	db $0b,  4
+	db $0c,  3
+	db $ff
+; 0x1fccb2
+
+Frameset_1fccb2: ; 1fccb2 (127:4cb2)
+	db $0b,  3
+	db $0c,  4
+	db $0d,  6
+	db $0e,  4
+	db $0f,  4
+	db $10,  1
+	db $ff
+; 0x1fccbf
+
+Frameset_1fccbf: ; 1fccbf (127:4cbf)
+	db $11,  3
+	db $12,  4
+	db $13,  6
+	db $14,  4
+	db $15,  4
+	db $10,  1
+	db $ff
+; 0x1fcccc
+
+	INCROM $1fcccc, $200000

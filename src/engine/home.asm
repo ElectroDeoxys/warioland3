@@ -2799,10 +2799,10 @@ Func_1488: ; 1488 (0:1488)
 	ret
 
 .asm_149b
-	ld hl, JumpVelTable5
+	ld hl, JumpVelTable_BouncyHighJump
 	jr .asm_14b2
 .asm_14a0
-	ld hl, JumpVelTable4
+	ld hl, JumpVelTable_BouncyJump
 	jr .asm_14b2
 .high_jump
 	ld hl, JumpVelTable_HighJump
@@ -3400,7 +3400,7 @@ JumpVelTable_KnockBack: ; 18f7 (0:18f7)
 	db  4 ; $27
 ; 0x191f
 
-JumpVelTable4: ; 191f (0:191f)
+JumpVelTable_BouncyJump: ; 191f (0:191f)
 	db -2 ; $00
 	db -2 ; $01
 	db -3 ; $02
@@ -3443,7 +3443,7 @@ JumpVelTable4: ; 191f (0:191f)
 	db  4 ; $27
 ; 0x1947
 
-JumpVelTable5: ; 1947 (0:1947)
+JumpVelTable_BouncyHighJump: ; 1947 (0:1947)
 	db -2 ; $00
 	db -3 ; $01
 	db -4 ; $02

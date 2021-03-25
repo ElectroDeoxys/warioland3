@@ -51,13 +51,13 @@ Func_28000: ; 28000 (a:4000)
 	dw UpdateState_ZombieRecovering           ; ST_ZOMBIE_RECOVERING
 	dw UpdateState_ZombieKnockBack            ; ST_ZOMBIE_KNOCK_BACK
 	dw UpdateState_ZombieWrithing             ; ST_ZOMBIE_WRITHING
-	dw $5ffa                                  ; ST_UNKNOWN_90
-	dw $6087                                  ; ST_UNKNOWN_91
-	dw $60f9                                  ; ST_UNKNOWN_92
-	dw $61f5                                  ; ST_UNKNOWN_93
-	dw $6267                                  ; ST_UNKNOWN_94
-	dw $62d3                                  ; ST_UNKNOWN_95
-	dw $6362                                  ; ST_UNKNOWN_96
+	dw UpdateState_BouncyStart                ; ST_BOUNCY_START
+	dw UpdateState_BouncyFloor                ; ST_BOUNCY_FLOOR
+	dw UpdateState_BouncyAirborne             ; ST_BOUNCY_AIRBORNE
+	dw UpdateState_BouncyCeiling              ; ST_BOUNCY_CEILING
+	dw UpdateState_BouncyUpsideDown           ; ST_BOUNCY_UPSIDE_DOWN
+	dw UpdateState_BouncyUpsideLanding        ; ST_BOUNCY_UPSIDE_DOWN_LANDING
+	dw UpdateState_BouncyLastBounce           ; ST_BOUNCY_LAST_BOUNCE
 	dw $6489                                  ; ST_UNKNOWN_97
 	dw $6544                                  ; ST_UNKNOWN_98
 	dw $65d8                                  ; ST_UNKNOWN_99
@@ -1964,7 +1964,400 @@ UpdateState_ZombieWrithing: ; 29f42 (a:5f42)
 	ret
 ; 0x29f59
 
-	INCROM $29f59, $2ad6a
+	INCROM $29f59, $29ffa
+
+UpdateState_BouncyStart: ; 29ffa (a:5ffa)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wc0db]
+	and a
+	jp nz, Func_1570
+	call Func_1488
+	call Func_2b1a6
+	ld a, [wca86]
+	cp $08
+	jr c, .asm_2a029
+	ld a, $04
+	ld [wca86], a
+
+.asm_2a029
+	ld a, [wWarioState]
+	cp ST_BOUNCY_START
+	ret nz ; done if not bouncy start anymore
+
+	farcall Func_199e9
+	ld a, b
+	and a
+	jr nz, .asm_2a04b
+	ld a, [wWarioState]
+	cp ST_BOUNCY_START
+	ret nz ; done if not bouncy start anymore
+	jp Func_14de
+
+.asm_2a04b
+	call Func_14f6
+	ld a, [wWarioState]
+	cp ST_BOUNCY_START
+	ret nz ; done if not bouncy start anymore
+;	fallthrough
+
+SetState_BouncyFloor: ; 2a054 (a:6054)
+	xor a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	ld [wWarioStateCounter], a
+	ld [wca86], a
+	ld a, ST_BOUNCY_FLOOR
+	ld [wWarioState], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	load_frameset_ptr Frameset_1fcc5f
+	update_anim_2
+	ret
+; 0x2a087
+
+UpdateState_BouncyFloor: ; 2a087 (a:6087)
+	call Func_2ae2f
+	ld hl, wca90
+	ld a, [hli]
+	or [hl]
+	jp z, Func_2a2e7
+	call Func_2ae3b
+	update_anim_2
+
+	ld a, [wc1a8]
+	and a
+	ret z
+
+	ld a, [wJoypadDown]
+	bit A_BUTTON_F, a
+	jr nz, .asm_2a0bb
+	jr .asm_2a0c2
+
+	; these lines are the same as above
+	; and are completely redundant
+	ld a, [wJoypadDown]
+	bit A_BUTTON_F, a
+	jr nz, .asm_2a0bb
+	jr .asm_2a0c2
+
+.asm_2a0bb
+	ld a, JUMP_VEL_BOUNCY_HIGH_JUMP
+	ld [wJumpVelTable], a
+	jr .asm_2a0c7
+.asm_2a0c2
+	ld a, JUMP_VEL_BOUNCY_JUMP
+	ld [wJumpVelTable], a
+.asm_2a0c7
+	xor a
+	ld [wJumpVelIndex], a
+;	fallthrough
+
+SetState_BouncyAirborne: ; 2a0cb (a:60cb)
+	ld a, ST_BOUNCY_AIRBORNE
+	ld [wWarioState], a
+	load_sound SFX_2B
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	load_frameset_ptr Frameset_1fcc6c
+	update_anim_2
+	ret
+; 0x2a0f9
+
+UpdateState_BouncyAirborne: ; 2a0f9 (a:60f9)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wc0db]
+	and a
+	jp nz, Func_1570
+	ld a, [wc1a8]
+	and a
+	jr nz, .asm_2a15a
+	update_anim_2
+
+	ld a, [wJumpVelTable]
+	cp JUMP_VEL_BOUNCY_HIGH_JUMP
+	jr nz, .asm_2a15a
+	ld a, [wc1a8]
+	and a
+	jr z, .asm_2a15a
+
+	ld hl, wca61
+	ld de, hffa8
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ld b, $0a
+	farcall Func_c9f3
+
+.asm_2a15a
+	call Func_2ae2f
+	ld hl, wca90
+	ld a, [hli]
+	or [hl]
+	jp z, SetState_BouncyUpsideDown
+	call Func_2ae3b
+	call Func_1488
+	call Func_2b17a
+	ld a, [wca86]
+	cp $08
+	jr c, .asm_2a17a
+	ld a, $04
+	ld [wca86], a
+.asm_2a17a
+	ld a, [wWarioState]
+	cp ST_BOUNCY_AIRBORNE
+	ret nz ; done if not bouncy airborne any more
+
+	ld a, [wJumpVelIndex]
+	cp FALLING_JUMP_VEL_INDEX
+	jr nc, .falling
+
+; raising
+	farcall Func_1996e
+	ld a, b
+	and a
+	ret z
+	ld a, [wWarioState]
+	cp ST_BOUNCY_AIRBORNE
+	ret nz ; done if not bouncy airborne any more
+
+	ld a, FALLING_JUMP_VEL_INDEX
+	ld [wJumpVelIndex], a
+	jr .asm_2a1ce
+
+.falling
+	farcall Func_199e9
+	ld a, b
+	and a
+	jr nz, .asm_2a1c2
+	ld a, [wWarioState]
+	cp ST_BOUNCY_AIRBORNE
+	ret nz ; done if not bouncy airborne any more
+	jp Func_14de
+
+.asm_2a1c2
+	call Func_14f6
+	ld a, [wWarioState]
+	cp ST_BOUNCY_AIRBORNE
+	ret nz ; done if not bouncy airborne any more
+	jp SetState_BouncyFloor
+
+.asm_2a1ce
+	xor a
+	ld a, $93
+	ld [wWarioState], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	load_frameset_ptr Frameset_1fcc75
+	update_anim_2
+	ret
+; 0x2a1f5
+
+UpdateState_BouncyCeiling: ; 2a1f5 (a:61f5)
+	call Func_2ae2f
+	ld hl, wca90
+	ld a, [hli]
+	or [hl]
+	jr z, SetState_BouncyUpsideDown
+	call Func_2ae3b
+	update_anim_2
+
+	ld a, [wc1a8]
+	and a
+	ret z
+	ld a, FALLING_JUMP_VEL_INDEX
+	ld [wJumpVelIndex], a
+	jp SetState_BouncyAirborne
+; 0x2a21e
+
+SetState_BouncyUpsideDown: ; 2a21e (a:621e)
+	ld a, ST_BOUNCY_UPSIDE_DOWN
+	ld [wWarioState], a
+	ld a, FALLING_JUMP_VEL_INDEX
+	ld [wJumpVelIndex], a
+	ld a, JUMP_VEL_NORMAL
+	ld [wJumpVelTable], a
+
+	xor a
+	ld [wWarioStateCycles], a
+	ld a, $05
+	ld [wca93], a
+	ld a, $05
+	ld [wca92], a
+	ld a, $02
+	ld [wca94], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld hl, Pals_c910
+	call Func_1af6
+
+	load_frameset_ptr Frameset_1fcc82
+	update_anim_2
+	ret
+; 0x2a267
+
+UpdateState_BouncyUpsideDown: ; 2a267 (a:6267)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wc0db]
+	and a
+	jp nz, Func_1570
+	call Func_1488
+	farcall Func_199e9
+	ld a, b
+	and a
+	jr nz, .asm_2a29d
+	jp Func_14de
+
+.asm_2a29d
+	call Func_14f6
+	ld a, [wWarioState]
+	cp ST_BOUNCY_UPSIDE_DOWN
+	ret nz ; done if not bouncy upside down
+
+	ld a, ST_BOUNCY_UPSIDE_DOWN_LANDING
+	ld [wWarioState], a
+	xor a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	load_frameset_ptr Frameset_1fcc85
+	update_anim_2
+	ret
+; 0x2a2d3
+
+UpdateState_BouncyUpsideLanding: ; 2a2d3 (a:62d3)
+	update_anim_2
+	ld a, [wc1a8]
+	and a
+	ret z
+;	fallthrough
+
+Func_2a2e7: ; 2a2e7 (a:62e7)
+	ld a, $05
+	ld [wca93], a
+	ld a, $05
+	ld [wca92], a
+	ld a, $02
+	ld [wca94], a
+
+	ld hl, Pals_c910
+	call Func_1af6
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_2a30e
+	load_frameset_ptr Frameset_1fccbf
+	jr .asm_2a318
+.asm_2a30e
+	load_frameset_ptr Frameset_1fccb2
+.asm_2a318
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	jr SetState_BouncyLastBounce
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_2a333
+	load_frameset_ptr Frameset_1fcca5
+	jr .asm_2a33d
+.asm_2a333
+	load_frameset_ptr Frameset_1fcc98
+.asm_2a33d
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+;	fallthrough
+
+SetState_BouncyLastBounce: ; 2a344 (a:6344)
+	ld a, ST_BOUNCY_LAST_BOUNCE
+	ld [wWarioState], a
+	xor a
+	ld [wJumpVelIndex], a
+	ld a, JUMP_VEL_NORMAL
+	ld [wJumpVelTable], a
+	update_anim_2
+	ret
+; 0x2a362
+
+UpdateState_BouncyLastBounce: ; 2a362 (a:6362)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wc0db]
+	and a
+	jp nz, Func_1570
+	ld a, [wc1a8]
+	and a
+	jr nz, .asm_2a394
+	update_anim_2
+
+.asm_2a394
+	call Func_1488
+	call Func_2b1a6
+	ld a, [wca86]
+	cp $08
+	jr c, .asm_2a3a6
+	ld a, $04
+	ld [wca86], a
+.asm_2a3a6
+	ld a, [wJumpVelIndex]
+	cp FALLING_JUMP_VEL_INDEX
+	jr nc, .asm_2a3cb
+	farcall Func_1996e
+	ld a, b
+	and a
+	ret z
+	ld a, [wWarioState]
+	cp ST_BOUNCY_LAST_BOUNCE
+	ret nz ; done if not in last bouncy any more
+
+	ld a, FALLING_JUMP_VEL_INDEX
+	ld [wJumpVelIndex], a
+	ret
+
+.asm_2a3cb
+	farcall Func_199e9
+	ld a, b
+	and a
+	jr nz, .asm_2a3e1
+	jp Func_14de
+
+.asm_2a3e1
+	call Func_14f6
+	ld a, [wWarioState]
+	cp ST_BOUNCY_LAST_BOUNCE
+	ret nz ; done if not in last bouncy any more
+	jp Func_1570
+; 0x2a3ed
+
+	INCROM $2a3ed, $2ad6a
 
 Func_2ad6a: ; 2ad6a (a:6d6a)
 	call Func_1079
@@ -2045,7 +2438,61 @@ Func_2ae2f: ; 2ae2f (a:6e2f)
 	ret
 ; 0x2ae3b
 
-	INCROM $2ae3b, $2ae8a
+Func_2ae3b: ; 2ae3b (a:6e3b)
+	call Func_2ae5c
+	ret nc
+	ld de, $0
+	ld a, [wWarioStateCycles]
+	xor $1
+	ld [wWarioStateCycles], a
+	jr z, .asm_2ae54
+	ld hl, Pals_c920
+	add hl, de
+	call Func_1af6
+	ret
+
+.asm_2ae54
+	ld hl, Pals_c910
+	add hl, de
+	call Func_1af6
+	ret
+; 0x2ae5c
+
+Func_2ae5c: ; 2ae5c (a:6e5c)
+	ld hl, wca90
+	ld a, [hli]
+	cp $02
+	jr nc, .no_carry
+	and a
+	jr z, .asm_2ae6e
+	ld a, [hl]
+	cp $68
+	jr nc, .no_carry
+	jr .asm_2ae7e
+
+.asm_2ae6e
+	ld a, [hl]
+	cp $78
+	jr nc, .asm_2ae7e
+	ld a, [wc08f]
+	and $03
+	jr nz, .no_carry
+	ld a, $01
+	jr .set_carry
+.asm_2ae7e
+	ld a, [wc08f]
+	and $0f
+	jr nz, .no_carry
+
+.set_carry
+	scf
+	ret
+
+.no_carry
+	scf
+	ccf
+	ret
+; 0x2ae8a
 
 Func_2ae8a: ; 2ae8a (a:6e8a)
 	ld a, [wJoypadPressed]

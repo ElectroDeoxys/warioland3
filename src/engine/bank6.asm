@@ -841,7 +841,7 @@ Func_19c1b: ; 19c1b (6:5c1b)
 	dw $5ce7                          ; ST_UNKNOWN_30
 	dw $5ef1                          ; ST_UNKNOWN_31
 	dw $6046                          ; ST_UNKNOWN_32
-	dw $6077                          ; ST_UNKNOWN_33
+	dw UpdateState_Teleporting        ; ST_TELEPORTING
 	dw $60b4                          ; ST_UNKNOWN_34
 	dw $617e                          ; ST_UNKNOWN_35
 	dw $61c5                          ; ST_UNKNOWN_36
@@ -968,7 +968,35 @@ Func_19e7f: ; 19e7f (6:5e7f)
 	ret
 ; 0x19ef1
 
-	INCROM $19ef1, $1a0e8
+	INCROM $19ef1, $1a077
+
+UpdateState_Teleporting: ; 1a077 (6:6077)
+	ld a, $01
+	ld [wca8a], a
+	update_anim_1
+
+	ld hl, wWarioStateCounter
+	inc [hl]
+	ld a, [hl]
+	cp $01
+	jr z, .play_sfx
+	cp $b4
+	ret c
+	ld [hl], $00
+	ld a, ST_STUNG
+	ld [wWarioState], a
+	ld a, $01
+	ld [wca8c], a
+	ld hl, wc0d7
+	res 7, [hl]
+	jp Func_11f6
+
+.play_sfx
+	load_sound SFX_82
+	ret
+; 0x1a0b4
+
+	INCROM $1a0b4, $1a0e8
 
 Func_1a0e8: ; 1a0e8 (6:60e8)
 	xor a

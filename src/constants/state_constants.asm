@@ -50,7 +50,7 @@
 	const ST_UNKNOWN_30                    ; 30
 	const ST_UNKNOWN_31                    ; 31
 	const ST_UNKNOWN_32                    ; 32
-	const ST_UNKNOWN_33                    ; 33
+	const ST_TELEPORTING                   ; 33
 	const ST_UNKNOWN_34                    ; 34
 	const ST_UNKNOWN_35                    ; 35
 	const ST_UNKNOWN_36                    ; 36
@@ -143,13 +143,13 @@
 	const ST_ZOMBIE_RECOVERING             ; 8d
 	const ST_ZOMBIE_KNOCK_BACK             ; 8e
 	const ST_ZOMBIE_WRITHING               ; 8f
-	const ST_UNKNOWN_90                    ; 90
-	const ST_UNKNOWN_91                    ; 91
-	const ST_UNKNOWN_92                    ; 92
-	const ST_UNKNOWN_93                    ; 93
-	const ST_UNKNOWN_94                    ; 94
-	const ST_UNKNOWN_95                    ; 95
-	const ST_UNKNOWN_96                    ; 96
+	const ST_BOUNCY_START                  ; 90
+	const ST_BOUNCY_FLOOR                  ; 91
+	const ST_BOUNCY_AIRBORNE               ; 92
+	const ST_BOUNCY_CEILING                ; 93
+	const ST_BOUNCY_UPSIDE_DOWN            ; 94
+	const ST_BOUNCY_UPSIDE_DOWN_LANDING    ; 95
+	const ST_BOUNCY_LAST_BOUNCE            ; 96
 	const ST_UNKNOWN_97                    ; 97
 	const ST_UNKNOWN_98                    ; 98
 	const ST_UNKNOWN_99                    ; 99
