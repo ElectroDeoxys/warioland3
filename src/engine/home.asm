@@ -1221,6 +1221,7 @@ DisableLCD: ; 8e6 (0:8e6)
 	ret
 ; 0x909
 
+; decompresses data from hl and writes to bc
 ; the game stores some data in compressed form, such as tile gfx and bg maps
 ; this routine decompresses it by doing the following logic:
 ; - if bit 7 is not set, repeat the following byte that amount of times

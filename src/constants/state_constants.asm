@@ -100,17 +100,17 @@
 	const ST_HOT                           ; 62
 	const ST_HOT_AIRBORNE                  ; 63
 	const ST_BURNT                         ; 64
-	const ST_UNKNOWN_65                    ; 65
-	const ST_UNKNOWN_66                    ; 66
-	const ST_UNKNOWN_67                    ; 67
-	const ST_UNKNOWN_68                    ; 68
-	const ST_UNKNOWN_69                    ; 69
-	const ST_UNKNOWN_6A                    ; 6a
-	const ST_UNKNOWN_6B                    ; 6b
-	const ST_UNKNOWN_6C                    ; 6c
-	const ST_UNKNOWN_6D                    ; 6d
-	const ST_UNKNOWN_6E                    ; 6e
-	const ST_UNKNOWN_6F                    ; 6f
+	const ST_GETTING_FLAT_AIRBORNE                    ; 65
+	const ST_GETTING_FLAT                    ; 66
+	const ST_FLAT_IDLING                    ; 67
+	const ST_FLAT_WALKING                    ; 68
+	const ST_FLAT_JUMPING                    ; 69
+	const ST_FLAT_FALLING                    ; 6a
+	const ST_FLAT_STRETCHING                    ; 6b
+	const ST_FLAT_SINKING                    ; 6c
+	const ST_FLAT_STRETCHING_UNDERWATER                    ; 6d
+	const ST_FLAT_SQUISHED                    ; 6e
+	const ST_FLAT_SQUISHED_LIFTING                    ; 6f
 	const ST_GETTING_WRAPPED_IN_STRING     ; 70
 	const ST_BALL_O_STRING                 ; 71
 	const ST_BALL_O_STRING_AIRBORNE        ; 72
@@ -129,11 +129,11 @@
 	const ST_UNKNOWN_7F                    ; 7f
 	const ST_ELECTRIC                      ; 80
 	const ST_ELECTRIC_DIZZY                ; 81
-	const ST_TURNING_INVISIBLE                    ; 82
-	const ST_PUFFY_INFLATING                    ; 83
-	const ST_PUFFY_RAISING                    ; 84
-	const ST_PUFFY_TURNING                    ; 85
-	const ST_PUFFY_DEFLATING                    ; 86
+	const ST_TURNING_INVISIBLE             ; 82
+	const ST_PUFFY_INFLATING               ; 83
+	const ST_PUFFY_RAISING                 ; 84
+	const ST_PUFFY_TURNING                 ; 85
+	const ST_PUFFY_DEFLATING               ; 86
 	const ST_ZOMBIE_IDLING                 ; 87
 	const ST_ZOMBIE_WALKING                ; 88
 	const ST_ZOMBIE_TURNING                ; 89

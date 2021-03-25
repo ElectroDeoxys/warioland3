@@ -8,17 +8,17 @@ Func_28000: ; 28000 (a:4000)
 	dw UpdateState_Hot                        ; ST_HOT
 	dw UpdateState_HotAirborne                ; ST_HOT_AIRBORNE
 	dw UpdateState_Burnt                      ; ST_BURNT
-	dw $4511                                  ; ST_UNKNOWN_65
-	dw $4599                                  ; ST_UNKNOWN_66
-	dw $4601                                  ; ST_UNKNOWN_67
-	dw $4672                                  ; ST_UNKNOWN_68
-	dw $471f                                  ; ST_UNKNOWN_69
-	dw $47a2                                  ; ST_UNKNOWN_6A
-	dw $48e5                                  ; ST_UNKNOWN_6B
-	dw $494e                                  ; ST_UNKNOWN_6C
-	dw $4a39                                  ; ST_UNKNOWN_6D
-	dw $4a5a                                  ; ST_UNKNOWN_6E
-	dw $4a8a                                  ; ST_UNKNOWN_6F
+	dw UpdateState_GettingFlatAirborne        ; ST_GETTING_FLAT_AIRBORNE
+	dw UpdateState_GettingFlat                ; ST_GETTING_FLAT
+	dw UpdateState_FlatIdling                 ; ST_FLAT_IDLING
+	dw UpdateState_FlatWalking                ; ST_FLAT_WALKING
+	dw UpdateState_FlatJumping                ; ST_FLAT_JUMPING
+	dw UpdateState_FlatFalling                ; ST_FLAT_FALLING
+	dw UpdateState_FlatStretching             ; ST_FLAT_STRETCHING
+	dw UpdateState_FlatSinking                ; ST_FLAT_SINKING
+	dw UpdateState_FlatStretchingUnderwater   ; ST_FLAT_STRETCHING_UNDERWATER
+	dw UpdateState_FlatSquished               ; ST_FLAT_SQUISHED
+	dw UpdateState_FlatSquishedLifting        ; ST_FLAT_SQUISHED_LIFTING
 	dw UpdateState_GettingWrappedInString     ; ST_GETTING_WRAPPED_IN_STRING
 	dw UpdateState_BallOString                ; ST_BALL_O_STRING
 	dw UpdateState_BallOStringAirborne        ; ST_BALL_O_STRING_AIRBORNE
@@ -436,7 +436,542 @@ UpdateState_Burnt: ; 2841e (a:441e)
 	jp Func_1570
 ; 0x28435
 
-	INCROM $28435, $28aad
+	INCROM $28435, $28511
+
+UpdateState_GettingFlatAirborne: ; 28511 (a:4511)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wc0db]
+	and a
+	jp nz, SetState_FlatSinking
+	ld b, $02
+	call Func_1287
+	farcall Func_199e9
+	ld a, b
+	and a
+	jr nz, .asm_28549
+	jp Func_14de
+
+.asm_28549
+	call Func_14f6
+
+	ld a, ST_GETTING_FLAT
+	ld [wWarioState], a
+
+	xor a
+	ld [wca86], a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld [wWarioStateCycles], a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	ld [wca9b], a
+	inc a
+	ld [wca8a], a
+	ld a, $ff
+	ld [wca70], a
+	ld a, $f8
+	ld [wca6f], a
+	ld a, $f5
+	ld [wca71], a
+	ld a, $0b
+	ld [wca72], a
+
+	load_frameset_ptr Frameset_1715f
+	update_anim_1
+	ret
+; 0x28599
+
+UpdateState_GettingFlat: ; 28599 (a:4599)
+	update_anim_1
+
+	ld a, [wc1a8]
+	and a
+	ret z
+	xor a
+	ld [wca8a], a
+	ld a, [wWarioStateCounter]
+	and a
+	jp nz, SetState_FlatSquished
+;	fallthrough
+
+SetState_FlatIdling: ; 285b8 (a:45b8)
+	ld a, ST_FLAT_IDLING
+	ld [wWarioState], a
+
+	xor a
+	ld [wca86], a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wJumpVelTable], a
+	ld [wJumpVelIndex], a
+	ld a, $ff
+	ld [wca70], a
+	ld a, $f8
+	ld [wca6f], a
+	ld a, $f5
+	ld [wca71], a
+	ld a, $0b
+	ld [wca72], a
+
+	load_frameset_ptr Frameset_1718b
+	update_anim_1
+	ret
+; 0x28601
+
+UpdateState_FlatIdling: ; 28601 (a:4601)
+	update_anim_1
+
+	call Func_2b10a
+	farcall Func_198e0
+	ld a, b
+	and a
+	ret nz
+	jp SetState_FlatFalling
+; 0x28628
+
+SetState_FlatWalking: ; 28628 (a:4628)
+	ld a, ST_FLAT_WALKING
+	ld [wWarioState], a
+
+	xor a
+	ld [wceed], a
+	ld [wca86], a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wJumpVelTable], a
+	ld [wJumpVelIndex], a
+
+	load_frameset_ptr Frameset_17175
+	update_anim_1
+
+	ld a, [wJoypadDown]
+	bit D_RIGHT_F, a
+	jr nz, .asm_2866c
+	ld a, DIRECTION_LEFT
+	ld [wDirection], a
+	ret
+.asm_2866c
+	ld a, DIRECTION_RIGHT
+	ld [wDirection], a
+	ret
+; 0x28672
+
+UpdateState_FlatWalking: ; 28672 (a:4672)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wceed]
+	sub $01
+	ld [wceed], a
+	jr nc, .asm_2869f
+	ld a, $0a
+	ld [wceed], a
+	load_sound SFX_1C
+.asm_2869f
+	update_anim_1
+
+	call Func_2b11b
+	farcall Func_198e0
+	ld a, b
+	and a
+	jp z, SetState_FlatFalling
+
+	ld hl, hffa8
+	ld de, wca61
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ret
+; 0x286d1
+
+SetState_FlatJumping: ; 286d1 (a:46d1)
+	load_sound SFX_1D
+
+	ld a, ST_FLAT_JUMPING
+	ld [wWarioState], a
+
+	xor a
+	ld [wca86], a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wJumpVelIndex], a
+	ld a, [wJoypadDown]
+	bit D_UP_F, a
+	jr nz, .asm_286fc
+	ld a, JUMP_VEL_KNOCK_BACK
+	jr .asm_286fe
+.asm_286fc
+	ld a, JUMP_VEL_NORMAL
+.asm_286fe
+	ld [wJumpVelTable], a
+
+	load_frameset_ptr Frameset_17190
+	update_anim_1
+
+	ld a, [wcac9]
+	and a
+	ret z
+;	fallthrough
+
+UpdateState_FlatJumping: ; 2871f (a:471f)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	call Func_1488
+	call Func_2b17a
+	call Func_1762
+	ld a, [wJumpVelIndex]
+	cp FALLING_JUMP_VEL_INDEX
+	jr nc, SetState_FlatFalling
+	farcall Func_1996e
+	ld a, b
+	and a
+	ret z
+;	fallthrough
+
+SetState_FlatFalling: ; 28757 (a:4757)
+	ld a, ST_FLAT_FALLING
+	ld [wWarioState], a
+
+	xor a
+	ld [wca86], a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wIsStandingOnSlope], a
+	inc a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_28796
+
+	load_frameset_ptr Frameset_171b8
+.asm_28786
+	update_anim_1
+	ret
+.asm_28796
+	load_frameset_ptr Frameset_17186
+	jr .asm_28786
+; 0x287a2
+
+UpdateState_FlatFalling: ; 287a2 (a:47a2)
+	farcall Func_19b25
+
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wc0db]
+	and a
+	jp nz, SetState_FlatSinking
+
+	ld a, [wc1a8]
+	and a
+	jr nz, .asm_287ff
+	update_anim_1
+
+	ld a, [wc1a8]
+	and a
+	jr z, .asm_287ff
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	load_frameset_ptr Frameset_17190
+	update_anim_1
+
+	ld a, $01
+	ld [wc1a8], a
+.asm_287ff
+	ld hl, wca86
+	ld e, [hl]
+	ld d, $00
+	inc [hl]
+
+	push de
+	ld a, [wDirection]
+	and a
+	jp nz, .asm_288ad
+	ld hl, $768c
+	add hl, de
+	ld b, [hl]
+	call Func_1270
+
+.asm_28816
+	ld a, [wca86]
+	cp $28
+	jr nc, .asm_28857
+	farcall Func_19734
+	ld a, b
+	and a
+	jp z, .asm_288b8
+	load_sound SFX_03
+
+	ld a, [wDirection]
+	xor $1 ; switch direction
+	ld [wDirection], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_2884e
+	ld b, $03
+	call Func_1270
+	jr .asm_28853
+.asm_2884e
+	ld b, $03
+	call Func_1259
+.asm_28853
+	ld a, $00
+	jr .asm_288a8
+.asm_28857
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_28866
+
+	ld a, [wJoypadDown]
+	bit D_LEFT_F, a
+	jr nz, .asm_288a7
+	jr .asm_2886d
+.asm_28866
+	ld a, [wJoypadDown]
+	bit D_RIGHT_F, a
+	jr nz, .asm_288a7
+
+.asm_2886d
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld [wc1a8], a
+
+	ld a, [wDirection]
+	xor $1 ; switch direction
+	ld [wDirection], a
+	and a
+	jr nz, .asm_2888e
+	load_frameset_ptr Frameset_171b8
+	jr .asm_28898
+.asm_2888e
+	load_frameset_ptr Frameset_17186
+.asm_28898
+	update_anim_1
+
+.asm_288a7
+	xor a
+.asm_288a8
+	ld [wca86], a
+	pop de
+	ret
+
+.asm_288ad
+	ld hl, $768c
+	add hl, de
+	ld b, [hl]
+	call Func_1259
+	jp .asm_28816
+
+.asm_288b8
+	pop de
+	ld hl, $7664
+	add hl, de
+	ld b, [hl]
+	call Func_1287
+	farcall Func_199e9
+	ld a, b
+	and a
+	jr nz, .asm_288d7
+	jp Func_14de
+.asm_288d7
+	load_sound SFX_20
+	call Func_14f6
+	jp SetState_FlatIdling
+; 0x288e5
+
+UpdateState_FlatStretching: ; 288e5 (a:48e5)
+	update_anim_1
+
+	ld a, [wc1a8]
+	and a
+	ret z
+	xor a
+	ld [wca9b], a
+	jp Func_1570
+; 0x28900
+
+SetState_FlatSinking: ; 28900 (a:4900)
+	ld a, ST_FLAT_SINKING
+	ld [wWarioState], a
+
+	xor a
+	ld [wca86], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	inc a
+	ld [wca8a], a
+	ld a, $ff
+	ld [wca70], a
+	ld a, $f8
+	ld [wca6f], a
+	ld a, $f5
+	ld [wca71], a
+	ld a, $0b
+	ld [wca72], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	load_frameset_ptr Frameset_1719a
+	update_anim_1
+	ret
+; 0x2894e
+
+UpdateState_FlatSinking: ; 2894e (a:494e)
+	update_anim_1
+
+	farcall Func_19b25
+
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wc08f]
+	and $0f
+	call z, .Func_2899a
+
+	ld a, [wc08f]
+	and $01
+	ret nz
+	ld b, $01
+	call Func_1287
+	farcall Func_198e0
+	ld a, b
+	and a
+	ret z
+	jr Func_289c5
+
+.Func_2899a
+	ld hl, wca64
+	ld de, hffab
+	ld a, [hld]
+	sub $04
+	ld [de], a
+	dec de
+	ld a, [hld]
+	sbc $00
+	ld [de], a
+	dec de
+	ld a, [hld]
+	sub $08
+	ld [de], a
+	dec de
+	ld a, [hl]
+	sbc $00
+	ld [de], a
+	ld b, $09
+	farcall Func_c9f3
+	ret
+; 0x289c5
+
+Func_289c5: ; 289c5 (a:49c5)
+	ld hl, wca64
+	ld de, hffab
+	ld a, [hld]
+	sub $04
+	ld [de], a
+	dec de
+	ld a, [hld]
+	sbc $00
+	ld [de], a
+	dec de
+	ld a, [hld]
+	sub $08
+	ld [de], a
+	dec de
+	ld a, [hl]
+	sbc $00
+	ld [de], a
+	ld b, $09
+	farcall Func_c9f3
+
+	ld a, ST_FLAT_STRETCHING_UNDERWATER
+	ld [wWarioState], a
+
+	xor a
+	ld [wca86], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	ld a, $ff
+	ld [wca70], a
+	ld a, $f8
+	ld [wca6f], a
+	ld a, $f5
+	ld [wca71], a
+	ld a, $0b
+	ld [wca72], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	load_frameset_ptr Frameset_171a3
+	update_anim_1
+	ret
+; 0x28a39
+
+UpdateState_FlatStretchingUnderwater: ; 28a39 (a:4a39)
+	update_anim_1
+
+	ld a, [wc1a8]
+	and a
+	ret z
+	jp Func_2ad6a
+; 0x28a50
+
+SetState_FlatSquished: ; 28a50 (a:4a50)
+	ld a, ST_FLAT_SQUISHED
+	ld [wWarioState], a
+	xor a
+	ld [wWarioStateCounter], a
+	ret
+; 0x28a5a
+
+UpdateState_FlatSquished: ; 28a5a (a:4a5a)
+	ret
+; 0x28a5b
+
+	INCROM $28a5b, $28a8a
+
+UpdateState_FlatSquishedLifting: ; 28a8a (a:4a8a)
+	update_anim_1
+
+	ld b, $01
+	call Func_129e
+	ld hl, wWarioStateCounter
+	inc [hl]
+	ld a, [hl]
+	cp $32
+	ret c
+	xor a
+	ld [wca8a], a
+	jp SetState_FlatFalling
+; 0x28aad
 
 UpdateState_GettingWrappedInString: ; 28aad (a:4aad)
 	update_anim_1
@@ -2943,7 +3478,57 @@ Func_2b07a: ; 2b07a (a:707a)
 	ret
 ; 0x2b10a
 
-	INCROM $2b10a, $2b17a
+Func_2b10a: ; 2b10a (a:710a)
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	jp nz, SetState_FlatJumping
+	ld a, [wJoypadDown]
+	and D_RIGHT | D_LEFT
+	jp nz, SetState_FlatWalking
+	ret
+; 0x2b11b
+
+Func_2b11b: ; 2b11b (a:711b)
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	jp nz, SetState_FlatJumping
+	ld a, [wJoypadDown]
+	bit D_LEFT_F, a
+	jr nz, .asm_2b131
+	bit D_RIGHT_F, a
+	jr nz, .asm_2b150
+	jp SetState_FlatIdling
+
+.asm_2b131
+	ld a, DIRECTION_LEFT
+	ld [wDirection], a
+	farcall Func_19734
+	ld a, b
+	and a
+	ret nz
+	call Func_151e.asm_153f
+	call Func_1270
+	jr .asm_2b16d
+
+.asm_2b150
+	ld a, DIRECTION_RIGHT
+	ld [wDirection], a
+	farcall Func_19734
+	ld a, b
+	and a
+	ret nz
+	call Func_151e
+	call Func_1259
+
+.asm_2b16d
+	ld a, [wca86]
+	cp $04
+	jr c, .asm_2b179
+	ld a, $00
+	ld [wca86], a
+.asm_2b179
+	ret
+; 0x2b17a
 
 Func_2b17a: ; 2b17a (a:717a)
 	ld a, [wJoypadDown]
