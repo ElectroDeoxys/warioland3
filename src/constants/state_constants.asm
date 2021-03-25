@@ -124,7 +124,7 @@
 	const ST_FAT_TURNING                   ; 7a
 	const ST_FAT_AIRBORNE                  ; 7b
 	const ST_FAT_LANDING                   ; 7c
-	const ST_FAT_SINKING                    ; 7d
+	const ST_FAT_SINKING                   ; 7d
 	const ST_FAT_RECOVERING                ; 7e
 	const ST_UNKNOWN_7F                    ; 7f
 	const ST_ELECTRIC                      ; 80
@@ -219,10 +219,10 @@
 	const ST_UNKNOWN_D9                    ; d9
 	const ST_UNKNOWN_DA                    ; da
 	const ST_UNKNOWN_DB                    ; db
-	const ST_UNKNOWN_DC                    ; dc
-	const ST_UNKNOWN_DD                    ; dd
-	const ST_UNKNOWN_DE                    ; de
-	const ST_UNKNOWN_DF                    ; df
+	const ST_BLIND_IDLING                    ; dc
+	const ST_BLIND_WALKING                    ; dd
+	const ST_BLIND_TURNING                    ; de
+	const ST_BLIND_AIRBORNE                    ; df
 	const ST_UNKNOWN_E0                    ; e0
 	const ST_UNKNOWN_E1                    ; e1
 	const ST_UNKNOWN_E2                    ; e2
@@ -242,16 +242,3 @@
 	const ST_UNKNOWN_F0                    ; f0
 	const ST_UNKNOWN_F1                    ; f1
 	const ST_UNKNOWN_F2                    ; f2
-	const ST_UNKNOWN_F3                    ; f3
-	const ST_UNKNOWN_F4                    ; f4
-	const ST_UNKNOWN_F5                    ; f5
-	const ST_UNKNOWN_F6                    ; f6
-	const ST_UNKNOWN_F7                    ; f7
-	const ST_UNKNOWN_F8                    ; f8
-	const ST_UNKNOWN_F9                    ; f9
-	const ST_UNKNOWN_FA                    ; fa
-	const ST_UNKNOWN_FB                    ; fb
-	const ST_UNKNOWN_FC                    ; fc
-	const ST_UNKNOWN_FD                    ; fd
-	const ST_UNKNOWN_FE                    ; fe
-	const ST_UNKNOWN_FF                    ; ff
