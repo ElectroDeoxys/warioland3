@@ -2032,6 +2032,7 @@ Func_d9e: ; d9e (0:d9e)
 	ret
 ; 0xdf4
 
+; hl = sprite pointer
 TryAddSprite: ; df4 (0:df4)
 	ld a, [wc098]
 	ld d, $00
@@ -2087,23 +2088,26 @@ UpdateAnimation: ; e53 (0:e53)
 	ld d, a
 	ld a, [wFramesetPtr + 1]
 	ld e, a
-	xor a
-	ld [wc1a8], a
+
+	xor a ; FALSE
+	ld [wAnimationHasFinished], a
 	ld hl, wFrameDuration
 	ld a, [hl]
 	sub 1
 	ld [hli], a
-	ret nc
+	ret nc ; return if duration hasn't elapsed yet
 
 	ld a, [hl] ; wca68
 	add e
 	ld c, a
 	ld a, d
-	adc $00
+	adc 0
 	ld b, a
 	ld a, [bc]
 	cp $ff
-	jr z, .asm_e7e
+	jr z, .finished
+
+; next frame
 	ld [wca65], a
 	ld a, [hl] ; wca68
 	add 2
@@ -2113,12 +2117,12 @@ UpdateAnimation: ; e53 (0:e53)
 	ld [hl], a ; wFrameDuration
 	ret
 
-.asm_e7e
+.finished
 	xor a
-	ld [hld], a
-	ld [hl], a
-	ld a, $01
-	ld [wc1a8], a
+	ld [hld], a ; wca68
+	ld [hl], a ; wFrameDuration
+	ld a, TRUE
+	ld [wAnimationHasFinished], a
 	ret
 ; 0xe87
 
@@ -2965,7 +2969,7 @@ Func_1570: ; 1570 (0:1570)
 	farcall SetState_Idling
 	jp Func_1070
 .asm_159e
-	farcall Func_1c2ae
+	farcall StartFall
 	jp Func_1070
 ; 0x15b0
 
@@ -3116,6 +3120,7 @@ Func_16d0: ; 16d0 (0:16d0)
 Func_1700: ; 1700 (0:1700)
 	xor a
 	ld [wc0de], a
+
 	ld a, [wca71]
 	cpl
 	inc a
@@ -3140,6 +3145,7 @@ Func_1700: ; 1700 (0:1700)
 	ld a, [wc0de]
 	and a
 	ret nz
+
 	ld a, [wca72]
 	sub $03
 	ld c, a

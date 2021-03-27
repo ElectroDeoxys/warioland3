@@ -90,19 +90,20 @@ UpdateState_OnFire: ; 280a6 (a:40a6)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
-	jr nc, .asm_280d3
-	ld a, $0e
-	ld [wceed], a
-	load_sound SFX_1E
 
-.asm_280d3
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, 14
+	ld [wSFXLoopCounter], a
+	load_sound SFX_1E
+.skip_sfx
+
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_28100
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	jr z, .asm_28100
 	ld a, $01
@@ -161,7 +162,7 @@ SetState_Hot: ; 28154 (a:4154)
 	ld a, ST_HOT
 	ld [wWarioState], a
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld a, $04
@@ -210,7 +211,7 @@ UpdateState_OnFireAirborne: ; 281c1 (a:41c1)
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_2820b
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	jr z, .asm_2820b
 	ld a, $01
@@ -268,17 +269,18 @@ UpdateState_Hot: ; 2827a (a:427a)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
-	jr nc, .asm_282a7
-	ld a, $10
-	ld [wceed], a
-	load_sound SFX_1F
-.asm_282a7
-	update_anim_1
-	call Func_2ae2f
 
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, 16
+	ld [wSFXLoopCounter], a
+	load_sound SFX_1F
+.skip_sfx
+	update_anim_1
+
+	call Func_2ae2f
 	ld hl, wca90
 	ld a, [hli]
 	cp $00
@@ -430,7 +432,7 @@ UpdateState_HotAirborne: ; 2839f (a:439f)
 
 UpdateState_Burnt: ; 2841e (a:441e)
 	update_anim_1
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	jp Func_1570
@@ -487,7 +489,7 @@ UpdateState_GettingFlatAirborne: ; 28511 (a:4511)
 UpdateState_GettingFlat: ; 28599 (a:4599)
 	update_anim_1
 
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	xor a
@@ -539,7 +541,7 @@ SetState_FlatWalking: ; 28628 (a:4628)
 	ld [wWarioState], a
 
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wca86], a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -568,14 +570,15 @@ UpdateState_FlatWalking: ; 28672 (a:4672)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
-	jr nc, .asm_2869f
-	ld a, $0a
-	ld [wceed], a
-	load_sound SFX_1C
-.asm_2869f
+
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, 10
+	ld [wSFXLoopCounter], a
+	load_sound SFX_FLAT_WALK
+.skip_sfx
 	update_anim_1
 
 	call Func_2b11b
@@ -679,12 +682,12 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 	and a
 	jp nz, SetState_FlatSinking
 
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	jr nz, .asm_287ff
 	update_anim_1
 
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	jr z, .asm_287ff
 
@@ -696,7 +699,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 	update_anim_1
 
 	ld a, $01
-	ld [wc1a8], a
+	ld [wAnimationHasFinished], a
 .asm_287ff
 	ld hl, wca86
 	ld e, [hl]
@@ -707,7 +710,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 	ld a, [wDirection]
 	and a
 	jp nz, .asm_288ad
-	ld hl, $768c
+	ld hl, Data_2b68c
 	add hl, de
 	ld b, [hl]
 	call Func_1270
@@ -756,7 +759,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	ld [wc1a8], a
+	ld [wAnimationHasFinished], a
 
 	ld a, [wDirection]
 	xor $1 ; switch direction
@@ -778,7 +781,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 	ret
 
 .asm_288ad
-	ld hl, $768c
+	ld hl, Data_2b68c
 	add hl, de
 	ld b, [hl]
 	call Func_1259
@@ -786,7 +789,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 
 .asm_288b8
 	pop de
-	ld hl, $7664
+	ld hl, Data_2b664
 	add hl, de
 	ld b, [hl]
 	call Func_1287
@@ -804,7 +807,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 UpdateState_FlatStretching: ; 288e5 (a:48e5)
 	update_anim_1
 
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	xor a
@@ -938,7 +941,7 @@ Func_289c5: ; 289c5 (a:49c5)
 UpdateState_FlatStretchingUnderwater: ; 28a39 (a:4a39)
 	update_anim_1
 
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	jp Func_2ad6a
@@ -975,7 +978,7 @@ UpdateState_FlatSquishedLifting: ; 28a8a (a:4a8a)
 
 UpdateState_GettingWrappedInString: ; 28aad (a:4aad)
 	update_anim_1
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	farcall Func_198e0
@@ -991,7 +994,7 @@ SetState_BallOString: ; 28ad5 (a:4ad5)
 	ld a, $01
 	ld [wca8f], a
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wca86], a
 	ld [wWarioStateCycles], a
 	ld [wJumpVelTable], a
@@ -1025,15 +1028,17 @@ UpdateState_BallOString: ; 28b36 (a:4b36)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
-	jr nc, .asm_28b63
-	ld a, $0c
-	ld [wceed], a
-	load_sound SFX_0A
-.asm_28b63
+
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, 12
+	ld [wSFXLoopCounter], a
+	load_sound SFX_ROLL
+.skip_sfx
 	update_anim_1
+
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_28b80
@@ -1229,7 +1234,7 @@ UpdateState_BallOStringKnockBack: ; 28ceb (a:4ceb)
 
 UpdateState_GettingUnwrappedInString: ; 28d92 (a:4d92)
 	update_anim_1
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 
@@ -1276,7 +1281,7 @@ UpdateState_GettingUnwrappedInString: ; 28d92 (a:4d92)
 
 UpdateState_BallOStringDizzy: ; 28e1a (a:4e1a)
 	update_anim_1
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	jp Func_1570
@@ -1286,7 +1291,7 @@ UpdateState_BallOStringDizzy: ; 28e1a (a:4e1a)
 
 UpdateState_FatBumping: ; 28e70 (a:4e70)
 	update_anim_1
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	jp SetState_FatIdling
@@ -1317,7 +1322,7 @@ UpdateState_FatEating: ; 28e87 (a:4e87)
 	ld [wJumpVelIndex], a
 .asm_28ecd
 	update_anim_1
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	ld a, $f7
@@ -1389,7 +1394,7 @@ SetState_FatWalking: ; 28f7d (a:4f7d)
 	ld a, ST_FAT_WALKING
 	ld [wWarioState], a
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wJumpVelIndex], a
 	xor a
 	ld [wFrameDuration], a
@@ -1412,14 +1417,15 @@ UpdateState_FatWalking: ; 28fc0 (a:4fc0)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
-	jr nc, .asm_28fed
-	ld a, $1c
-	ld [wceed], a
-	load_sound SFX_3B
-.asm_28fed
+
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, 28
+	ld [wSFXLoopCounter], a
+	load_sound SFX_FAT_WALK
+.skip_sfx
 	update_anim_1
 
 	call Func_2ae2f
@@ -1475,7 +1481,7 @@ UpdateState_FatTurning: ; 2906d (a:506d)
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jr nz, Func_290a1
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	jp SetState_FatWalking
@@ -1549,7 +1555,7 @@ UpdateState_FatAirborne: ; 29123 (a:5123)
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_2919d
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	jr z, .asm_2919d
 	xor a
@@ -1785,7 +1791,7 @@ SetState_FatRecovering: ; 29363 (a:5363)
 
 UpdateState_FatRecovering: ; 293b9 (a:53b9)
 	update_anim_1
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	jp Func_1570
@@ -1991,7 +1997,7 @@ UpdateState_Electric: ; 294bf (a:54bf)
 
 UpdateState_ElectricDizzy: ; 29672 (a:5672)
 	update_anim_1
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	jp Func_1570
@@ -2001,7 +2007,7 @@ UpdateState_ElectricDizzy: ; 29672 (a:5672)
 
 UpdateState_TurningInvisible: ; 2972e (a:572e)
 	update_anim_1
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	xor a
@@ -2020,7 +2026,7 @@ UpdateState_PuffyInflating: ; 29816 (a:5816)
 	ldh [hCallFuncBank], a
 	call_hram UpdateAnimation
 
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 ;	fallthrough
@@ -2030,7 +2036,7 @@ SetState_PuffyRaising: ; 2982b (a:582b)
 	ld [wWarioState], a
 
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wFrameDuration], a
 	ld [wca68], a
 	inc a
@@ -2064,15 +2070,16 @@ UpdateState_PuffyRaising: ; 29871 (a:5871)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
-	jr nc, .asm_2989e
-	ld a, $20
-	ld [wceed], a
-	load_sound SFX_26
 
-.asm_2989e
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, 32
+	ld [wSFXLoopCounter], a
+	load_sound SFX_PUFF_RAISE
+.skip_sfx
+
 	ld a, [wSpriteBank]
 	ldh [hCallFuncBank], a
 	call_hram UpdateAnimation
@@ -2131,7 +2138,7 @@ UpdateState_PuffyTurning: ; 298f3 (a:58f3)
 	jp SetState_PuffyDeflating
 
 .asm_29922
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	jp SetState_PuffyRaising
@@ -2180,7 +2187,7 @@ UpdateState_PuffyDeflating: ; 29975 (a:5975)
 	ldh [hCallFuncBank], a
 	call_hram UpdateAnimation
 
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	ld a, $01
@@ -2207,7 +2214,7 @@ UpdateState_PuffyDeflating: ; 29975 (a:5975)
 	ldh [hCallFuncBank], a
 	call_hram UpdateAnimation
 
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	jp Func_1570
@@ -2306,7 +2313,7 @@ UpdateState_ZombieIdling: ; 29a74 (a:5a74)
 
 SetState_ZombieWalking: ; 29ac1 (a:5ac1)
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wca86], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
@@ -2334,15 +2341,17 @@ UpdateState_ZombieWalking: ; 29b06 (a:5b06)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
-	jr nc, .asm_29b33
-	ld a, $24
-	ld [wceed], a
-	load_sound SFX_29
-.asm_29b33
+
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, 36
+	ld [wSFXLoopCounter], a
+	load_sound SFX_ZOMBIE_WALK
+.skip_sfx
 	update_anim_2
+
 	call Func_2b381
 
 	ld a, [wWarioState]
@@ -2385,7 +2394,7 @@ SetState_ZombieTurning: ; 29b6a (a:5b6a)
 
 UpdateState_ZombieTurning: ; 29ba2 (a:5ba2)
 	update_anim_2
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	jp SetState_ZombieWalking
@@ -2456,7 +2465,7 @@ UpdateState_ZombieAirborne: ; 29c29 (a:5c29)
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_29c88
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	jr z, .asm_29c88
 	xor a
@@ -2554,7 +2563,7 @@ SetState_ZombieLanding: ; 29cde (a:5cde)
 
 UpdateState_ZombieLanding: ; 29d6f (a:5d6f)
 	update_anim_2
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	ld a, [wWarioStateCounter]
@@ -2634,7 +2643,7 @@ UpdateState_ZombieSlippingThroughFloor: ; 29dd3 (a:5dd3)
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	ld [wc1a8], a
+	ld [wAnimationHasFinished], a
 	ld a, $02
 	ld [wWarioStateCounter], a
 	update_anim_2
@@ -2679,7 +2688,7 @@ UpdateState_ZombieRecovering: ; 29e7e (a:5e7e)
 
 UpdateState_ZombieKnockBack: ; 29ef3 (a:5ef3)
 	update_anim_2
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	jp SetState_ZombieIdling
@@ -2778,7 +2787,7 @@ UpdateState_BouncyFloor: ; 2a087 (a:6087)
 	call Func_2ae3b
 	update_anim_2
 
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 
@@ -2827,7 +2836,7 @@ UpdateState_BouncyAirborne: ; 2a0f9 (a:60f9)
 	ld a, [wc0db]
 	and a
 	jp nz, Func_1570
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	jr nz, .asm_2a15a
 	update_anim_2
@@ -2835,7 +2844,7 @@ UpdateState_BouncyAirborne: ; 2a0f9 (a:60f9)
 	ld a, [wJumpVelTable]
 	cp JUMP_VEL_BOUNCY_HIGH_JUMP
 	jr nz, .asm_2a15a
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	jr z, .asm_2a15a
 
@@ -2929,7 +2938,7 @@ UpdateState_BouncyCeiling: ; 2a1f5 (a:61f5)
 	call Func_2ae3b
 	update_anim_2
 
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	ld a, FALLING_JUMP_VEL_INDEX
@@ -3001,7 +3010,7 @@ UpdateState_BouncyUpsideDown: ; 2a267 (a:6267)
 
 UpdateState_BouncyUpsideLanding: ; 2a2d3 (a:62d3)
 	update_anim_2
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 ;	fallthrough
@@ -3062,7 +3071,7 @@ UpdateState_BouncyLastBounce: ; 2a362 (a:6362)
 	ld a, [wc0db]
 	and a
 	jp nz, Func_1570
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	jr nz, .asm_2a394
 	update_anim_2
@@ -3330,7 +3339,7 @@ Func_2af75: ; 2af75 (a:6f75)
 	jr SetState_OnFireAirborne
 
 Func_2af81: ; 2af81 (a:6f81)
-	load_sound SFX_01
+	load_sound SFX_JUMP
 
 	xor a
 	ld [wJumpVelIndex], a
@@ -3826,4 +3835,138 @@ Func_2b3dd: ; 2b3dd (a:73dd)
 	ret
 ; 0x2b3f9
 
-	INCROM $2b3f9, $2c000
+	INCROM $2b3f9, $2b664
+
+Data_2b664: ; 2b664 (a:7664)
+	db $03
+	db $02
+	db $02
+	db $01
+	db $01
+	db $00
+	db $01
+	db $00
+	db $01
+	db $00
+	db $01
+	db $00
+	db $01
+	db $00
+	db $01
+	db $01
+	db $01
+	db $02
+	db $01
+	db $01
+	db $01
+	db $01
+	db $01
+	db $00
+	db $01
+	db $00
+	db $01
+	db $00
+	db $01
+	db $01
+	db $00
+	db $01
+	db $00
+	db $00
+	db $00
+	db $00
+	db $00
+	db $00
+	db $00
+	db $00
+; 0x2b68c
+
+Data_2b68c: ; 2b68c (a:768c)
+	db $03
+	db $02
+	db $01
+	db $01
+	db $00
+	db $00
+	db $01
+	db $00
+	db $00
+	db $01
+	db $01
+	db $00
+	db $01
+	db $01
+	db $01
+	db $01
+	db $01
+	db $02
+	db $02
+	db $02
+	db $02
+	db $02
+	db $02
+	db $02
+	db $02
+	db $02
+	db $03
+	db $03
+	db $03
+	db $03
+	db $03
+	db $03
+	db $03
+	db $03
+	db $02
+	db $02
+	db $02
+	db $01
+	db $00
+	db $00
+	db $00
+	db $00
+	db $00
+	db $00
+	db $00
+	db $00
+	db $00
+	db $01
+	db $00
+	db $00
+	db $01
+	db $00
+	db $01
+	db $00
+	db $01
+	db $01
+	db $01
+	db $01
+	db $01
+	db $01
+	db $01
+	db $01
+	db $01
+	db $01
+	db $01
+	db $01
+	db $01
+	db $01
+	db $01
+	db $01
+	db $01
+	db $01
+	db $01
+	db $01
+	db $01
+	db $01
+	db $00
+	db $01
+	db $00
+	db $01
+	db $00
+	db $01
+	db $00
+	db $00
+	db $01
+	db $00
+	db $00
+	db $00
+; 0x2b6e4

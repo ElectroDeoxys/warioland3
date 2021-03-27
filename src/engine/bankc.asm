@@ -3141,7 +3141,7 @@ Data_3155e: ; 3155e (c:555e)
 	sound $5308, $0e, $00, $64, $00, $04, $00 ; MUSIC_BOSS_BATTLE
 	sound $54cc, $0e, $00, $64, $00, $04, $00 ; MUSIC_LEVEL_CLEAR_GOT_TREASURE
 	sound $55e1, $0e, $00, $64, $00, $02, $00 ; MUSIC_BOSS_DEFEAT
-	sound $5641, $0e, $00, $64, $00, $03, $00 ; MUSIC_GOLF_NOT_CLEARED
+	sound $5641, $0e, $00, $64, $00, $03, $00 ; MUSIC_GOLF_GAME_OVER
 	sound $56bc, $0e, $00, $64, $00, $04, $00 ; MUSIC_GOLF_CLEARED
 	sound $57f2, $0e, $00, $64, $00, $03, $00 ; MUSIC_MUSIC_BOXES
 	sound $58b4, $0e, $00, $64, $00, $02, $00 ; MUSIC_45

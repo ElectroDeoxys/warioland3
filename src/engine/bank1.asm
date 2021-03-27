@@ -1522,11 +1522,12 @@ Func_4ae7: ; 4ae7 (1:4ae7)
 	ld d, $00
 	ld hl, Data_4eba
 	add hl, de
-
 	ld a, [hli]
+
 	push hl
 	call Func_3aac
 	pop hl
+
 	ld c, a
 	ld a, [hli]
 	push hl

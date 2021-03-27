@@ -62,6 +62,25 @@ unk2_struct: MACRO
 \1Unk1f:: db
 ENDM
 
+unk3_struct: MACRO
+\1Unk00:: db
+\1Unk01:: db
+\1Unk02:: db
+\1Unk03:: db
+\1Unk04:: db
+\1Unk05:: db
+\1Unk06:: db
+\1Unk07:: db
+\1Unk08:: db
+\1Unk09:: db
+\1Unk0a:: db
+\1Unk0b:: db
+\1Unk0c:: db
+\1Unk0d:: db
+\1Unk0e:: db
+\1Unk0f:: db
+ENDM
+
 channel_struct: MACRO
 \1Flags1:: db
 \1Unk01:: db

@@ -89,7 +89,7 @@ UpdateState_Idling: ; 1c0b6 (7:40b6)
 	ret nz ; not idling
 	ld a, b
 	and a
-	jp z, Func_1c2ae
+	jp z, StartFall
 
 	ld hl, hffa8
 	ld de, wca61
@@ -101,6 +101,7 @@ UpdateState_Idling: ; 1c0b6 (7:40b6)
 	ld a, [wWarioState]
 	cp ST_IDLING
 	ret nz ; not idling
+
 	ld a, [wJoypadDown]
 	bit D_DOWN_F, a
 	jr z, .asm_1c115
@@ -131,17 +132,18 @@ UpdateState_Idling: ; 1c0b6 (7:40b6)
 	jr z, .skip_ladder
 	farcall SetState_LadderClimbing
 	ret
+
 .skip_ladder
 	ld a, [wc1c8]
 	and a
-	jr z, .asm_1c174
+	jr z, .handle_input
 	ld a, [wJoypadDown]
 	bit D_UP_F, a
-	jr z, .asm_1c174
+	jr z, .handle_input
 	farcall Func_1ae68
 	ret
 
-.asm_1c174
+.handle_input
 	ld a, [wWarioState]
 	cp ST_IDLING
 	ret nz ; not idling
@@ -169,19 +171,19 @@ UpdateState_Idling: ; 1c0b6 (7:40b6)
 ; 0x1c1ab
 
 UpdateState_Walking: ; 1c1ab (7:41ab)
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
-	jr nc, .asm_1c1c2
-	ld a, $24
-	ld [wceed], a
-	load_sound SFX_04
-.asm_1c1c2
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, 36
+	ld [wSFXLoopCounter], a
+	load_sound SFX_WALK
+.skip_sfx
 	update_anim_1
 
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
-	jr z, .asm_1c1f9
+	jr z, .handle_input
 	ld hl, wca61
 	ld de, hffa8
 	ld a, [hli]
@@ -198,7 +200,7 @@ UpdateState_Walking: ; 1c1ab (7:41ab)
 	ld b, $04
 	farcall Func_c9f3
 
-.asm_1c1f9
+.handle_input
 	call HandleInput_Walking
 	ld a, [wWarioState]
 	cp ST_WALKING
@@ -216,10 +218,10 @@ UpdateState_Walking: ; 1c1ab (7:41ab)
 	ld a, [wWarioState]
 	cp ST_WALKING
 	ret nz ; return if not walking anymore
-
 	ld a, b
 	and a
-	jp z, Func_1c2ae
+	jp z, StartFall
+
 	ld hl, hffa8
 	ld de, wca61
 	ld a, [hli]
@@ -237,7 +239,8 @@ UpdateState_Turning: ; 1c244 (7:4244)
 	bit B_BUTTON_F, a
 	jp nz, SetState_Attacking
 	update_anim_1
-	ld a, [wc1a8]
+
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	ld a, [wJoypadDown]
@@ -273,8 +276,9 @@ Func_1c270: ; 1c270 (7:4270)
 .asm_1c2a9
 	ld [wJumpVelTable], a
 	jr SetState_Airborne
+; 0x1c2ae
 
-Func_1c2ae: ; 1c2ae (7:42ae)
+StartFall: ; 1c2ae (7:42ae)
 	xor a ; FALSE
 	ld [wJumpingUpwards], a
 ;	fallthrough
@@ -283,9 +287,10 @@ Func_1c2b2: ; 1c2b2 (7:42b2)
 	ld a, FALLING_JUMP_VEL_INDEX
 	ld [wJumpVelIndex], a
 	jr StartJump
+; 0x1c2b9
 
 StartJump_FromInput: ; 1c2b9 (7:42b9)
-	load_sound SFX_01
+	load_sound SFX_JUMP
 	xor a
 	ld [wJumpVelIndex], a
 	ld [wca96], a
@@ -297,20 +302,22 @@ StartJump: ; 1c2cd (7:42cd)
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_HIGH_JUMP_BOOTS
 	ld a, JUMP_VEL_NORMAL
-	jr c, .asm_1c2df
+	jr c, .got_jump_vel_table
 	ld hl, wJoypadDown
 	bit D_UP_F, [hl]
-	jr z, .asm_1c2df
+	jr z, .got_jump_vel_table
 	ld a, JUMP_VEL_HIGH_JUMP
-.asm_1c2df
+.got_jump_vel_table
 	ld [wJumpVelTable], a
 ;	fallthrough
 
 SetState_Airborne: ; 1c2e2 (7:42e2)
 	xor a
 	ld [wIsStandingOnSlope], a
+
 	ld a, ST_AIRBORNE
 	ld [wWarioState], a
+
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -339,6 +346,7 @@ SetState_Airborne: ; 1c2e2 (7:42e2)
 	ld [wSpritePtr + 0], a
 	ld a, $55
 	ld [wSpritePtr + 1], a
+
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1c345
@@ -348,6 +356,7 @@ SetState_Airborne: ; 1c2e2 (7:42e2)
 	load_frameset_ptr Frameset_15f97
 .asm_1c34f
 	update_anim_1
+
 	ld a, [wcac9]
 	and a
 	ret z
@@ -363,7 +372,9 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	jp nz, Func_11f6
 	ld a, [wJumpVelIndex]
 	cp FALLING_JUMP_VEL_INDEX
-	jr c, .asm_1c3f2
+	jr c, .handle_input
+
+; falling
 	ld a, [wc0db]
 	and a
 	jp nz, Func_1cd48
@@ -391,19 +402,18 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	farcall Func_19afb
 	ld a, [wc1c8]
 	and a
-	jr z, .asm_1c3f2
+	jr z, .handle_input
 	ld a, [wJoypadDown]
 	bit D_UP_F, a
-	jr z, .asm_1c3f2
+	jr z, .handle_input
 	farcall Func_1ae68
 	ret
 
-.asm_1c3f2
+.handle_input
 	ld a, [wWarioState]
 	cp ST_AIRBORNE
 	ret nz ; done if not airborne anymore
-
-	call Func_1f077
+	call HandleInput_Airborne
 	ld a, [wWarioState]
 	cp ST_AIRBORNE
 	ret nz ; done if not airborne anymore
@@ -701,7 +711,7 @@ UpdateState_Landing: ; 1c6ed (7:46ed)
 	and D_RIGHT | D_LEFT
 	jr nz, .asm_1c70a
 	update_anim_1
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	jr nz, .asm_1c70d
 	ret
@@ -736,7 +746,7 @@ UpdateState_Landing: ; 1c6ed (7:46ed)
 
 SetState_CrouchSliding: ; 1c73b (7:473b)
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wca89], a
 	load_sound SFX_0C
 	ld a, ST_CROUCH_SLIDING
@@ -923,27 +933,27 @@ UpdateState_CrouchSliding: ; 1c7c3 (7:47c3)
 UpdateState_Attacking: ; 1c8df (7:48df)
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_GARLIC
-	jr nc, .asm_1c8ff
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
-	jr nc, .asm_1c8fd
-	ld a, $06
-	ld [wceed], a
-	load_sound SFX_07
-.asm_1c8fd
-	jr .asm_1c916
+	jr nc, .powered_up
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx_1
+	ld a, 6
+	ld [wSFXLoopCounter], a
+	load_sound SFX_ATTACK
+.skip_sfx_1
+	jr .skip_sfx_2
 
-.asm_1c8ff
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
-	jr nc, .asm_1c916
-	ld a, $06
-	ld [wceed], a
-	load_sound SFX_08
+.powered_up
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx_2
+	ld a, 6
+	ld [wSFXLoopCounter], a
+	load_sound SFX_ATTACK_POWERED_UP
 
-.asm_1c916
+.skip_sfx_2
 	update_anim_1
 
 	call HandleInput_Attacking
@@ -1229,14 +1239,14 @@ UpdateState_AttackingAirborne: ; 1cbb9 (7:4bb9)
 	cp ST_ATTACKING_AIRBORNE
 	ret nz ; done if nor attacking airborne anymore
 
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
-	jr nc, .asm_1cc09
-	ld a, $06
-	ld [wceed], a
-	load_sound SFX_07
-.asm_1cc09
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, 6
+	ld [wSFXLoopCounter], a
+	load_sound SFX_ATTACK
+.skip_sfx
 	update_anim_1
 
 	call Func_1ea64
@@ -1266,7 +1276,7 @@ UpdateState_AttackingAirborne: ; 1cbb9 (7:4bb9)
 .asm_1cc51
 	xor a
 	ld [wca89], a
-	jp Func_1c2ae
+	jp StartFall
 
 .asm_1cc58
 	ld a, [wJoypadPressed]
@@ -1388,9 +1398,11 @@ Func_1cd48: ; 1cd48 (7:4d48)
 	inc de
 	ld a, [hl]
 	ld [de], a
+
 	ldh a, [hffa9]
 	and $f0
 	ldh [hffa9], a
+
 	ld b, $03
 	farcall Func_c9f3
 	load_sound SFX_0D
@@ -1408,6 +1420,7 @@ Func_1cd7c: ; 1cd7c (7:4d7c)
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
+
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1cda9
@@ -1592,7 +1605,7 @@ UpdateState_Submerged: ; 1cf53 (7:4f53)
 
 Func_1cf7a: ; 1cf7a (7:4f7a)
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wca6e], a
 	ld a, $04
 	ld [wca7b], a
@@ -1658,15 +1671,16 @@ UpdateState_WaterSurfaceIdling: ; 1d008 (7:5008)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
-	jr nc, .asm_1d03f
-	ld a, $1c
-	ld [wceed], a
-	load_sound SFX_37
-.asm_1d03f
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, 28
+	ld [wSFXLoopCounter], a
+	load_sound SFX_WATER_SURFACE
+.skip_sfx
 	update_anim_1
+
 	call Func_1d1bc
 	call Func_1f40f
 	ld a, [wWarioState]
@@ -1716,14 +1730,14 @@ UpdateState_WaterSurfaceMoving: ; 1d0ba (7:50ba)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
-	jr nc, .asm_1d0eb
-	ld a, $1c
-	ld [wceed], a
-	load_sound SFX_37
-.asm_1d0eb
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, 28
+	ld [wSFXLoopCounter], a
+	load_sound SFX_WATER_SURFACE
+.skip_sfx
 	update_anim_1
 
 	call Func_1d1bc
@@ -1850,7 +1864,7 @@ SetState_UnderwaterThrusting: ; 1d1ec (7:51ec)
 	ld a, $09
 	ld [wca72], a
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wca6d], a
 	ld [wWarioStateCycles], a
 	ld [wFrameDuration], a
@@ -1915,15 +1929,16 @@ UpdateState_UnderwaterThrusting: ; 1d297 (7:5297)
 	cp ST_UNDERWATER_THRUSTING
 	ret nz ; done if not underwater thrusting anymore
 
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
-	jr nc, .asm_1d2ce
-	ld a, $0f
-	ld [wceed], a
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, 15
+	ld [wSFXLoopCounter], a
 	load_sound SFX_0F
-.asm_1d2ce
+.skip_sfx
 	update_anim_1
+
 	call Func_1f470
 	ld a, [wWarioState]
 	cp ST_UNDERWATER_THRUSTING
@@ -2106,14 +2121,14 @@ UpdateState_Crouching: ; 1d46d (7:546d)
 ; 0x1d4a7
 
 UpdateState_CrouchWalking: ; 1d4a7 (7:54a7)
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
-	jr nc, .asm_1d4be
-	ld a, $15
-	ld [wceed], a
-	load_sound SFX_4A
-.asm_1d4be
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, 21
+	ld [wSFXLoopCounter], a
+	load_sound SFX_CROUCH_WALK
+.skip_sfx
 	update_anim_1
 
 	farcall Func_19b25
@@ -2186,7 +2201,7 @@ UpdateState_CrouchAirborne: ; 1d522 (7:5522)
 .asm_1d583
 	ld a, $f1
 	ld [wca6f], a
-	call Func_1f077
+	call HandleInput_Airborne
 	ld a, [wWarioState]
 	cp ST_CROUCH_AIRBORNE
 	ret nz ; done if not crouch jumping anymore
@@ -2522,7 +2537,7 @@ UpdateState_PickingUp: ; 1d916 (7:5916)
 	cp $02
 	jp z, Func_1efe7
 	update_anim_1
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	jp Func_1efe7
@@ -2575,15 +2590,16 @@ UpdateState_GrabWalking: ; 1d995 (7:5995)
 	ld a, [wca9a]
 	and a
 	jp z, HandleInput_Idling.no_turning
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
 	jr nc, .asm_1d9cf
-	ld a, $24
-	ld [wceed], a
-	load_sound SFX_04
+	ld a, 36
+	ld [wSFXLoopCounter], a
+	load_sound SFX_WALK
 .asm_1d9cf
 	update_anim_1
+
 	call Func_1eefc
 	ld a, [wWarioState]
 	cp ST_GRAB_WALKING
@@ -2643,7 +2659,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 	jp nz, Func_1cd48
 	ld a, [wca9a]
 	and a
-	jp z, Func_1c2ae
+	jp z, StartFall
 	ld a, [wcaa0]
 	and a
 	jr z, .asm_1da8f
@@ -2654,7 +2670,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 	ld a, [wJoypadPressed]
 	bit B_BUTTON_F, a
 	jp nz, SetState_ThrowingAirborne
-	call Func_1f077
+	call HandleInput_Airborne
 	ld a, [wWarioState]
 	cp ST_GRAB_AIRBORNE
 	ret nz ; done if not grabbing airborne anymore
@@ -2913,7 +2929,7 @@ UpdateState_ThrowCharging: ; 1dcfc (7:5cfc)
 
 .asm_1dd2d
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wFrameDuration], a
 	ld [wca68], a
 	ld [wWarioStateCounter], a
@@ -2945,14 +2961,15 @@ Func_1dd78: ; 1dd78 (7:5d78)
 ; 0x1dd7f
 
 UpdateState_ThrowFullyCharged: ; 1dd7f (7:5d7f)
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
-	jr nc, .asm_1dd96
-	ld a, $1e
-	ld [wceed], a
-	load_sound SFX_2D
-.asm_1dd96
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, 30
+	ld [wSFXLoopCounter], a
+	load_sound SFX_FULLY_CHARGED_THROW
+.skip_sfx
+
 	ld a, [wca9a]
 	and a
 	jp z, SetState_Idling
@@ -2962,7 +2979,7 @@ UpdateState_ThrowFullyCharged: ; 1dd7f (7:5d7f)
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_1dde0
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	jr z, .asm_1dde0
 	ld a, [wca9a]
@@ -3048,7 +3065,7 @@ UpdateState_Throwing: ; 1de88 (7:5e88)
 	and a
 	jp z, SetState_Idling
 	update_anim_1
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	xor a
@@ -3059,14 +3076,14 @@ UpdateState_Throwing: ; 1de88 (7:5e88)
 UpdateState_ThrowingAirborne: ; 1deaa (7:5eaa)
 	ld a, [wca9a]
 	and a
-	jp z, Func_1c2ae
+	jp z, StartFall
 	update_anim_1
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	xor a
 	ld [wca9a], a
-	jp Func_1c2ae
+	jp StartFall
 ; 0x1decc
 
 UpdateState_GrabSmashAttacking: ; 1decc (7:5ecc)
@@ -3088,7 +3105,7 @@ SetState_Sliding: ; 1def1 (7:5ef1)
 	ld a, ST_SLIDING
 	ld [wWarioState], a
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wca8b], a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -3175,15 +3192,16 @@ SetState_Sliding: ; 1def1 (7:5ef1)
 ; 0x1dfd4
 
 UpdateState_Sliding: ; 1dfd4 (7:5fd4)
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
-	jr nc, .asm_1dfeb
-	ld a, $0c
-	ld [wceed], a
-	load_sound SFX_0B
-.asm_1dfeb
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, 12
+	ld [wSFXLoopCounter], a
+	load_sound SFX_SLIDE
+.skip_sfx
 	update_anim_1
+
 	call Func_1f825
 	ld a, [wWarioState]
 	cp ST_SLIDING
@@ -3211,14 +3229,14 @@ UpdateState_Sliding: ; 1dfd4 (7:5fd4)
 	ld a, b
 	and $0f
 	jp nz, Func_1ca0e
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 ;	fallthrough
 
 SetState_Rolling: ; 1e042 (7:6042)
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
 
@@ -3254,14 +3272,15 @@ UpdateState_Rolling: ; 1e09d (7:609d)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
-	jr nc, .asm_1e0ca
-	ld a, $0c
-	ld [wceed], a
-	load_sound SFX_0A
-.asm_1e0ca
+
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, 12
+	ld [wSFXLoopCounter], a
+	load_sound SFX_ROLL
+.skip_sfx
 	update_anim_1
 
 	ld a, [wJoypadPressed]
@@ -3519,19 +3538,19 @@ UpdateState_GroundShakeStunned: ; 1e347 (7:6347)
 	farcall Func_198e0
 	ld a, b
 	and a
-	jp z, Func_1c2ae
+	jp z, StartFall
 	jp SetState_Idling
 ; 0x1e3e8
 
 UpdateState_EnteringDoor: ; 1e3e8 (7:63e8)
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
-	jr nc, .asm_1e3ff
-	ld a, $24
-	ld [wceed], a
-	load_sound SFX_04
-.asm_1e3ff
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, 36
+	ld [wSFXLoopCounter], a
+	load_sound SFX_WALK
+.skip_sfx
 	update_anim_1
 
 	ld a, [wWarioStateCounter]
@@ -3541,7 +3560,7 @@ UpdateState_EnteringDoor: ; 1e3e8 (7:63e8)
 	jr z, .asm_1e455
 	dec a
 	jr z, .asm_1e45a
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 
@@ -3555,7 +3574,7 @@ UpdateState_EnteringDoor: ; 1e3e8 (7:63e8)
 	ret
 
 .asm_1e444
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	ld hl, wWarioStateCounter
@@ -3570,7 +3589,7 @@ UpdateState_EnteringDoor: ; 1e3e8 (7:63e8)
 	ret
 
 .asm_1e45a
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	ld a, [wJoypadDown]
@@ -3876,7 +3895,7 @@ SetState_Walking: ; 1e6b9 (7:66b9)
 
 .ok
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
 	ld [wca96], a
@@ -3955,7 +3974,7 @@ SetState_Attacking: ; 1e7ab (7:67ab)
 	ld a, $30
 	ld [wca89], a
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld a, ST_ATTACKING
 	ld [wWarioState], a
 	ld a, $ff
@@ -4263,7 +4282,7 @@ Func_1ea83: ; 1ea83 (7:6a83)
 .asm_1ead1
 	xor a
 	ld [wca86], a
-	jp Func_1c2ae
+	jp StartFall
 
 .asm_1ead8
 	ld a, [wDirection]
@@ -4368,14 +4387,14 @@ SetState_CrouchWalking: ; 1eb94 (7:6b94)
 	ld a, $01
 	ld [wca8b], a
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wFrameDuration], a
 	ld [wca68], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wca89], a
 	ld [wca9a], a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a ; redundant
 
 	ld a, $05
 	ld [wSpriteBank], a
@@ -4530,7 +4549,7 @@ Func_1ed34: ; 1ed34 (7:6d34)
 	jr Func_1ed4b
 
 Func_1ed3f: ; 1ed3f (7:6d3f)
-	load_sound SFX_01
+	load_sound SFX_JUMP
 	xor a
 	ld [wJumpVelIndex], a
 
@@ -4599,7 +4618,7 @@ Func_1edd3: ; 1edd3 (7:6dd3)
 ;	fallthrough
 
 Func_1ede9: ; 1ede9 (7:6de9)
-	load_sound SFX_01
+	load_sound SFX_JUMP
 	xor a
 	ld [wJumpVelIndex], a
 	ld [wca96], a
@@ -4678,7 +4697,7 @@ Func_1ee88: ; 1ee88 (7:6e88)
 	ld a, ST_GRAB_WALKING
 	ld [wWarioState], a
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wFrameDuration], a
 	ld [wca68], a
 	ld a, $ff
@@ -4866,37 +4885,44 @@ Func_1efe7: ; 1efe7 (7:6fe7)
 	ret
 ; 0x1f077
 
-Func_1f077: ; 1f077 (7:7077)
+HandleInput_Airborne: ; 1f077 (7:7077)
 	ld a, [wJoypadDown]
 	bit A_BUTTON_F, a
-	jr nz, .asm_1f094
+	jr nz, .skip_set_fall
+
+; not pressing A button any more, so
+; set wJumpingUpwards to false and
+; if still in a raising jump vel index
+; then immediately set it to the falling index
 	xor a ; FALSE
 	ld [wJumpingUpwards], a
 	ld a, [wJumpVelIndex]
 	cp FALLING_JUMP_VEL_INDEX
-	jr nc, .asm_1f094
+	jr nc, .skip_set_fall
 	ld a, [wca76]
 	and a
-	jr nz, .asm_1f094
+	jr nz, .skip_set_fall
 	ld a, FALLING_JUMP_VEL_INDEX
 	ld [wJumpVelIndex], a
-.asm_1f094
+.skip_set_fall
+
 	ld a, [wJumpVelIndex]
 	ld e, a
 	ld d, $00
 	ld a, [wJumpVelTable]
 	dec a
-	jr z, .asm_1f0ad
+	jr z, .knock_back
 	dec a
-	jr z, .asm_1f0a8
+	jr z, .normal_jump
+; high jump
 	ld hl, JumpVelTable_HighJump ; JUMP_VEL_HIGH_JUMP
-	jr .asm_1f0b0
-.asm_1f0a8
+	jr .got_jump_vel_table
+.normal_jump
 	ld hl, JumpVelTable_Normal ; JUMP_VEL_NORMAL
-	jr .asm_1f0b0
-.asm_1f0ad
+	jr .got_jump_vel_table
+.knock_back
 	ld hl, JumpVelTable_KnockBack ; JUMP_VEL_KNOCK_BACK
-.asm_1f0b0
+.got_jump_vel_table
 	add hl, de
 	bit 7, [hl]
 	jr z, .falling
@@ -4909,7 +4935,7 @@ Func_1f077: ; 1f077 (7:7077)
 	call Func_129e
 	ld hl, wJumpVelIndex
 	inc [hl]
-	jr .asm_1f0d5
+	jr .check_input
 
 .falling
 	xor a
@@ -4920,10 +4946,10 @@ Func_1f077: ; 1f077 (7:7077)
 	inc [hl]
 	ld a, [hl]
 	cp MAX_JUMP_VEL_INDEX
-	jr c, .asm_1f0d5
+	jr c, .check_input
 	ld [hl], MAX_JUMP_VEL_INDEX
 
-.asm_1f0d5
+.check_input
 	ld a, [wJoypadDown]
 	bit D_RIGHT_F, a
 	jr nz, .d_right
@@ -5091,14 +5117,15 @@ Func_1f1a9: ; 1f1a9 (7:71a9)
 ; 0x1f24c
 
 Func_1f24c: ; 1f24c (7:724c)
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
-	jr nc, .asm_1f263
-	ld a, $25
-	ld [wceed], a
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, 37
+	ld [wSFXLoopCounter], a
 	load_sound SFX_0E
-.asm_1f263
+.skip_sfx
+
 	ld a, [wWarioStateCycles]
 	and a
 	jr z, .asm_1f28f
@@ -5743,7 +5770,7 @@ SetState_LadderShakeStunned: ; 1f7e6 (7:77e6)
 	load_sound SFX_0C
 
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wca99], a

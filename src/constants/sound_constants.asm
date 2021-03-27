@@ -43,7 +43,7 @@
 	const MUSIC_BOSS_BATTLE                ; 027
 	const MUSIC_LEVEL_CLEAR_GOT_TREASURE   ; 028
 	const MUSIC_BOSS_DEFEAT                ; 029
-	const MUSIC_GOLF_NOT_CLEARED           ; 02a
+	const MUSIC_GOLF_GAME_OVER             ; 02a
 	const MUSIC_GOLF_CLEARED               ; 02b
 	const MUSIC_MUSIC_BOXES                ; 02c
 	const MUSIC_45                         ; 02d
@@ -62,17 +62,17 @@
 	const MUSIC_HIDDEN_FIGURE_BATTLE_2     ; 03a
 
 	const_def $101
-	const SFX_01                           ; 101
+	const SFX_JUMP                         ; 101
 	const SFX_02                           ; 102
 	const SFX_03                           ; 103
-	const SFX_04                           ; 104
+	const SFX_WALK                         ; 104
 	const SFX_05                           ; 105
 	const SFX_06                           ; 106
-	const SFX_07                           ; 107
-	const SFX_08                           ; 108
+	const SFX_ATTACK                       ; 107
+	const SFX_ATTACK_POWERED_UP            ; 108
 	const SFX_09                           ; 109
-	const SFX_0A                           ; 10a
-	const SFX_0B                           ; 10b
+	const SFX_ROLL                         ; 10a
+	const SFX_SLIDE                        ; 10b
 	const SFX_0C                           ; 10c
 	const SFX_0D                           ; 10d
 	const SFX_0E                           ; 10e
@@ -89,7 +89,7 @@
 	const SFX_19                           ; 119
 	const SFX_1A                           ; 11a
 	const SFX_1B                           ; 11b
-	const SFX_1C                           ; 11c
+	const SFX_FLAT_WALK                    ; 11c
 	const SFX_1D                           ; 11d
 	const SFX_1E                           ; 11e
 	const SFX_1F                           ; 11f
@@ -99,14 +99,14 @@
 	const SFX_23                           ; 123
 	const SFX_24                           ; 124
 	const SFX_25                           ; 125
-	const SFX_26                           ; 126
+	const SFX_PUFF_RAISE                   ; 126
 	const SFX_27                           ; 127
 	const SFX_28                           ; 128
-	const SFX_29                           ; 129
+	const SFX_ZOMBIE_WALK                  ; 129
 	const SFX_2A                           ; 12a
 	const SFX_2B                           ; 12b
 	const SFX_2C                           ; 12c
-	const SFX_2D                           ; 12d
+	const SFX_FULLY_CHARGED_THROW          ; 12d
 	const SFX_2E                           ; 12e
 	const SFX_2F                           ; 12f
 	const SFX_30                           ; 130
@@ -116,11 +116,11 @@
 	const SFX_34                           ; 134
 	const SFX_35                           ; 135
 	const SFX_36                           ; 136
-	const SFX_37                           ; 137
-	const SFX_38                           ; 138
+	const SFX_WATER_SURFACE                ; 137
+	const SFX_CLIMB                        ; 138
 	const SFX_39                           ; 139
 	const SFX_3A                           ; 13a
-	const SFX_3B                           ; 13b
+	const SFX_FAT_WALK                     ; 13b
 	const SFX_3C                           ; 13c
 	const SFX_3D                           ; 13d
 	const SFX_3E                           ; 13e
@@ -135,7 +135,7 @@
 	const SFX_47                           ; 147
 	const SFX_48                           ; 148
 	const SFX_49                           ; 149
-	const SFX_4A                           ; 14a
+	const SFX_CROUCH_WALK                  ; 14a
 	const SFX_4B                           ; 14b
 	const SFX_4C                           ; 14c
 	const SFX_4D                           ; 14d

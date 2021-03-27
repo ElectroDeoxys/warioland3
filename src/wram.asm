@@ -367,7 +367,7 @@ wc1a6:: ; c1a5
 wc1a7:: ; c1a6
 	ds $1
 
-wc1a8:: ; c1a8
+wAnimationHasFinished:: ; c1a8
 	ds $1
 
 wc1a9:: ; c1a9
@@ -816,19 +816,10 @@ wVirtualOAMSprite38:: sprite_oam_struct wVirtualOAMSprite38
 wVirtualOAMSprite39:: sprite_oam_struct wVirtualOAMSprite39
 wVirtualOAMEnd::
 
-wcca0:: ; cca0
-	ds $1
-
-	ds $f
-
-wccb0:: ; ccb0
-	ds $10
-
-wccc0:: ; ccc0
-	ds $10
-
-wccd0:: ; ccd0
-	ds $10
+wcca0:: unk3_struct wcca0 ; cca0
+wccb0:: unk3_struct wccb0 ; ccb0
+wccc0:: unk3_struct wccc0 ; ccc0
+wccd0:: unk3_struct wccd0 ; ccd0
 
 wcce0:: ; cce0
 	ds $1
@@ -981,7 +972,11 @@ wceeb:: ; ceeb
 wceec:: ; ceec
 	ds $1
 
-wceed:: ; ceed
+; used to control SFX looping
+; every frame 1 is subtracted
+; when it reaches 0 it plays SFX
+; then it's reset to loop duration
+wSFXLoopCounter:: ; ceed
 	ds $1
 
 wceee:: ; ceee

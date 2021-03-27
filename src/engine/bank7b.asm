@@ -78,7 +78,7 @@ SetState_BlindIdling: ; 1ed331 (7b:5331)
 	ld a, ST_BLIND_IDLING
 	ld [wWarioState], a
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wca86], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
@@ -154,7 +154,7 @@ SetState_BlindWalking: ; 1ed3fa (7b:53fa)
 	ld [wWarioState], a
 
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wJumpVelIndex], a
 	xor a
 	ld [wFrameDuration], a
@@ -264,7 +264,7 @@ UpdateState_BlindTurning: ; 1ed52a (7b:552a)
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jr nz, Func_1ed558
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	jp SetState_BlindWalking
@@ -281,7 +281,7 @@ Func_1ed548: ; 1ed548 (7b:5548)
 ; 0x1ed558
 
 Func_1ed558: ; 1ed558 (7b:5558)
-	load_sound SFX_01
+	load_sound SFX_JUMP
 
 	xor a
 	ld [wJumpVelIndex], a

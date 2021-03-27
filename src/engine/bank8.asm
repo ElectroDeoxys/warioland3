@@ -310,7 +310,7 @@ SetState_OnFire: ; 20ed3 (8:4ed3)
 
 	xor a
 	ld [wca8d], a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wWarioStateCycles], a
 	ld [wca9a], a
 	ld [wca89], a

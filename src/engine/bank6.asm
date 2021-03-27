@@ -892,7 +892,7 @@ Func_19c81: ; 19c81 (6:5c81)
 	ld a, ST_UNKNOWN_30
 	ld [wWarioState], a
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
 	ld [wca89], a
 	ld a, $04
@@ -935,7 +935,7 @@ Func_19e7f: ; 19e7f (6:5e7f)
 	ld a, ST_UNKNOWN_31
 	ld [wWarioState], a
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wca89], a
 	ld [wca9a], a
 	inc a
@@ -1062,7 +1062,7 @@ SetState_LadderClimbing: ; 1a3bb (6:63bb)
 	add $08
 	ld [wca64], a
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wca96], a
@@ -1103,17 +1103,18 @@ UpdateState_LadderClimbing: ; 1a436 (6:6436)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
-	jr nc, .asm_1a463
-	ld a, $20
-	ld [wceed], a
-	load_sound SFX_38
-.asm_1a463
+
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, 32
+	ld [wSFXLoopCounter], a
+	load_sound SFX_CLIMB
+.skip_sfx
 	update_anim_1
 
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	jr z, .asm_1a49a
 	ld hl, wca61
@@ -1191,7 +1192,7 @@ UpdateState_LadderIdling: ; 1a51d (6:651d)
 	ld a, [wLadderInteraction]
 	and a
 	jr nz, .asm_1a549
-	farcall Func_1c2ae
+	farcall StartFall
 	ret
 
 .asm_1a549
@@ -1208,7 +1209,7 @@ UpdateState_LadderShakeStunned: ; 1a55c (6:655c)
 	ld a, [wLadderInteraction]
 	and a
 	jr nz, .asm_1a588
-	farcall Func_1c2ae
+	farcall StartFall
 	ret
 .asm_1a588
 	update_anim_1
@@ -1254,7 +1255,7 @@ SetState_GettingOffLadder: ; 1a5ee (6:65ee)
 	ld a, ST_GETTING_OFF_LADDER
 	ld [wWarioState], a
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	inc a
@@ -1274,15 +1275,15 @@ SetState_GettingOffLadder: ; 1a5ee (6:65ee)
 ; 0x1a617
 
 UpdateState_GettingOffLadder: ; 1a617 (6:6617)
-	ld a, [wceed]
-	sub $01
-	ld [wceed], a
-	jr nc, .asm_1a62e
-	ld a, $20
-	ld [wceed], a
-	load_sound SFX_38
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, 32
+	ld [wSFXLoopCounter], a
+	load_sound SFX_CLIMB
+.skip_sfx
 
-.asm_1a62e
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1a63b
@@ -1301,7 +1302,7 @@ UpdateState_GettingOffLadder: ; 1a617 (6:6617)
 	xor a
 	ld [wca99], a
 	ld [wca8a], a
-	farcall Func_1c2ae
+	farcall StartFall
 	ret
 ; 0x1a66b
 
@@ -1310,7 +1311,7 @@ SetState_LadderSliding: ; 1a66b (6:666b)
 	ld [wWarioState], a
 	load_sound SFX_0C
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wca99], a
@@ -1341,7 +1342,7 @@ UpdateState_LadderSliding: ; 1a6b6 (6:66b6)
 	jr nz, .asm_1a6e6
 	xor a
 	ld [wca96], a
-	farcall Func_1c2ae
+	farcall StartFall
 	ret
 
 .asm_1a6e6
@@ -1398,7 +1399,7 @@ Func_1a773: ; 1a773 (6:6773)
 	ld a, ST_UNKNOWN_3F
 	ld [wWarioState], a
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
 	ld [wca89], a
 	ld a, $04
@@ -1436,7 +1437,7 @@ SetState_Sleeping: ; 1ac10 (6:6c10)
 	ld a, ST_SLEEPING
 	ld [wWarioState], a
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld a, $04
@@ -1476,7 +1477,7 @@ UpdateState_Sleeping: ; 1ac73 (6:6c73)
 	jr z, .asm_1acd0
 	dec a
 	jp z, .asm_1ad0c
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	load_sound SFX_36
@@ -1498,7 +1499,7 @@ UpdateState_Sleeping: ; 1ac73 (6:6c73)
 	ret
 
 .asm_1acd0
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	jr z, .asm_1acde
 	load_sound SFX_36
@@ -1521,7 +1522,7 @@ UpdateState_Sleeping: ; 1ac73 (6:6c73)
 	jr .asm_1acc0
 
 .asm_1ad0c
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 	farcall SetState_Idling
@@ -1567,7 +1568,7 @@ UpdateState_LadderScratching: ; 1ad7d (6:6d7d)
 	ld a, [wJoypadDown]
 	and a
 	jr nz, .asm_1ad97
-	ld a, [wc1a8]
+	ld a, [wAnimationHasFinished]
 	and a
 	ret z
 .asm_1ad97
@@ -1616,7 +1617,7 @@ Func_1ae68: ; 1ae68 (6:6e68)
 	ld a, ST_UNKNOWN_4E
 	ld [wWarioState], a
 	xor a
-	ld [wceed], a
+	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wca96], a
@@ -1727,7 +1728,7 @@ Func_1b3a0: ; 1b3a0 (6:73a0)
 	ld a, b
 	and a
 	jr nz, .asm_1b3ff
-	farcall Func_1c2ae
+	farcall StartFall
 	ret
 ; 0x1b480
 
