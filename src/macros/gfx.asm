@@ -24,3 +24,17 @@ load_frameset_ptr: MACRO
 	ld a, LOW(\1)
 	ld [wFramesetPtr + 1], a
 ENDM
+
+frame_oam: MACRO
+; ycoord, xcoord, tile ID, attributes
+	db \1, \2, \3, \4
+ENDM
+
+load_oam_ptr: MACRO
+	ld a, BANK(\1)
+	ld [wOAMBank], a
+	ld a, HIGH(\1)
+	ld [wOAMPtr + 0], a
+	ld a, LOW(\1)
+	ld [wOAMPtr + 1], a
+ENDM

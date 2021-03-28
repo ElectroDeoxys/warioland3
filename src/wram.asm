@@ -640,10 +640,10 @@ wca7b:: ; ca7b
 wca7c:: ; ca7c
 	ds $2
 
-wSpriteBank:: ; ca7e
+wOAMBank:: ; ca7e
 	ds $1
 
-wSpritePtr:: ; ca7f
+wOAMPtr:: ; ca7f
 	ds $2
 
 wFramesetPtr:: ; ca81

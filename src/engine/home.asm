@@ -2008,15 +2008,15 @@ Func_d9e: ; d9e (0:d9e)
 	ret nz
 
 .asm_db6
-	ld a, [wSpriteBank]
+	ld a, [wOAMBank]
 	ld [wc0ac], a
 	ld a, [wROMBank]
 	push af
 	ld a, [wc0ac]
 	bankswitch
-	ld a, [wSpritePtr + 0]
+	ld a, [wOAMPtr + 0]
 	ld h, a
-	ld a, [wSpritePtr + 1]
+	ld a, [wOAMPtr + 1]
 	ld l, a
 	ld a, [wWarioYPos]
 	ld [wCurSpriteYOffset], a

@@ -245,7 +245,7 @@ UpdateState_Turning: ; 1c244 (7:4244)
 	ret z
 	ld a, [wJoypadDown]
 	and D_RIGHT | D_LEFT
-	jp nz, HandleInput_Idling.no_turning
+	jp nz, Func_1e6b5
 	jp SetState_Idling
 ; 0x1c270
 
@@ -340,12 +340,8 @@ SetState_Airborne: ; 1c2e2 (7:42e2)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $59
-	ld [wSpritePtr + 0], a
-	ld a, $55
-	ld [wSpritePtr + 1], a
+	
+	load_oam_ptr OAM_15955
 
 	ld a, [wDirection]
 	and a
@@ -586,6 +582,7 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	ld [wFrameDuration], a
 	ld [wca68], a
 	ld [wca86], a
+
 	ld a, [wca96]
 	and a
 	jr z, .asm_1c5ad
@@ -593,19 +590,17 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
 	jp c, Func_1c66b
 	jr Func_1c5fd
+
 .asm_1c5ad
 	ld a, [wJoypadDown]
 	and D_DOWN
 	jp nz, Func_1e855
-	load_sound SFX_10
+
+	load_sound SFX_LAND
 	ld a, ST_LANDING
 	ld [wWarioState], a
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $59
-	ld [wSpritePtr + 0], a
-	ld a, $55
-	ld [wSpritePtr + 1], a
+	
+	load_oam_ptr OAM_15955
 
 	ld a, [wDirection]
 	and a
@@ -644,9 +639,9 @@ Func_1c5fd: ; 1c5fd (7:45fd)
 	ld [wca7c + 1], a
 	call Func_15b0
 	ld a, $59
-	ld [wSpritePtr + 0], a
+	ld [wOAMPtr + 0], a
 	ld a, $55
-	ld [wSpritePtr + 1], a
+	ld [wOAMPtr + 1], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1c650
@@ -671,9 +666,9 @@ Func_1c66b: ; 1c66b (7:466b)
 	ld [wca7c + 1], a
 	call Func_15b0
 	ld a, $59
-	ld [wSpritePtr + 0], a
+	ld [wOAMPtr + 0], a
 	ld a, $55
-	ld [wSpritePtr + 1], a
+	ld [wOAMPtr + 1], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1c6a8
@@ -716,7 +711,7 @@ UpdateState_Landing: ; 1c6ed (7:46ed)
 	jr nz, .asm_1c70d
 	ret
 .asm_1c70a
-	jp HandleInput_Idling.no_turning
+	jp Func_1e6b5
 
 .asm_1c70d
 	ld a, [wJumpingUpwards]
@@ -773,12 +768,8 @@ SetState_CrouchSliding: ; 1c73b (7:473b)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $42
-	ld [wSpritePtr + 0], a
-	ld a, $6c
-	ld [wSpritePtr + 1], a
+	
+	load_oam_ptr OAM_1426c
 	ld a, [wDirection]
 	cp DIRECTION_RIGHT
 	jr z, .dir_right
@@ -1033,7 +1024,7 @@ UpdateState_Attacking: ; 1c8df (7:48df)
 .asm_1c9ec
 	ld a, [wJoypadDown]
 	and D_RIGHT | D_LEFT
-	jp nz, HandleInput_Idling.no_turning
+	jp nz, Func_1e6b5
 	jp SetState_Idling
 ; 0x1c9f7
 
@@ -1133,12 +1124,8 @@ Func_1ca20: ; 1ca20 (7:4a20)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $59
-	ld [wSpritePtr + 0], a
-	ld a, $55
-	ld [wSpritePtr + 1], a
+	
+	load_oam_ptr OAM_15955
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1caf9
@@ -1411,12 +1398,8 @@ Func_1cd48: ; 1cd48 (7:4d48)
 Func_1cd7c: ; 1cd7c (7:4d7c)
 	ld a, $e5
 	ld [wca6f], a
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $52
-	ld [wSpritePtr + 0], a
-	ld a, $54
-	ld [wSpritePtr + 1], a
+	
+	load_oam_ptr OAM_15254
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -1537,12 +1520,8 @@ SetState_Submerged: ; 1ce95 (7:4e95)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $52
-	ld [wSpritePtr + 0], a
-	ld a, $54
-	ld [wSpritePtr + 1], a
+	
+	load_oam_ptr OAM_15254
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_SWIMMING_FLIPPERS
 	jr c, .asm_1cf20
@@ -1614,12 +1593,8 @@ Func_1cf7a: ; 1cf7a (7:4f7a)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $52
-	ld [wSpritePtr + 0], a
-	ld a, $54
-	ld [wSpritePtr + 1], a
+	
+	load_oam_ptr OAM_15254
 ;	fallthrough
 
 SetState_WaterSurfaceIdling: ; 1cfa2 (7:4fa2)
@@ -2589,7 +2564,7 @@ UpdateState_GrabWalking: ; 1d995 (7:5995)
 
 	ld a, [wca9a]
 	and a
-	jp z, HandleInput_Idling.no_turning
+	jp z, Func_1e6b5
 	ld a, [wSFXLoopCounter]
 	sub 1
 	ld [wSFXLoopCounter], a
@@ -2781,7 +2756,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 	ld a, [wc1aa]
 	and a
 	jr nz, .asm_1dbb7
-	load_sound SFX_10
+	load_sound SFX_LAND
 .asm_1dbb7
 	xor a
 	ld [wJumpVelIndex], a
@@ -2881,12 +2856,8 @@ SetState_ThrowCharging: ; 1dc8b (7:5c8b)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $60
-	ld [wSpritePtr + 0], a
-	ld a, $6a
-	ld [wSpritePtr + 1], a
+	
+	load_oam_ptr OAM_1606a
 
 	ld a, [wDirection]
 	and a
@@ -3130,12 +3101,8 @@ SetState_Sliding: ; 1def1 (7:5ef1)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $64
-	ld [wSpritePtr + 0], a
-	ld a, $4a
-	ld [wSpritePtr + 1], a
+	
+	load_oam_ptr OAM_1644a
 	ld a, [wIsStandingOnSlope]
 	bit 1, a
 	jr nz, .asm_1df8b
@@ -3374,12 +3341,8 @@ SetState_Unknown29: ; 1e179 (7:6179)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $64
-	ld [wSpritePtr + 0], a
-	ld a, $4a
-	ld [wSpritePtr + 1], a
+	
+	load_oam_ptr OAM_1644a
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -3594,7 +3557,7 @@ UpdateState_EnteringDoor: ; 1e3e8 (7:63e8)
 	ret z
 	ld a, [wJoypadDown]
 	and D_RIGHT | D_LEFT
-	jp nz, HandleInput_Idling.no_turning
+	jp nz, Func_1e6b5
 	jp SetState_Idling
 ; 0x1e46a
 
@@ -3863,15 +3826,16 @@ HandleInput_Idling: ; 1e68a (7:668a)
 .d_right_1
 	ld a, [wDirection]
 	and a
-	jr nz, .no_turning
+	jr nz, Func_1e6b5
 	jp SetState_Turning
 .d_left_1
 	ld a, [wDirection]
 	and a
-	jr z, .no_turning
+	jr z, Func_1e6b5
 	jp SetState_Turning
-.no_turning
+; 0x1e6b5
 
+Func_1e6b5: ; 1e6b5 (7:66b5)
 	xor a
 	ld [wca86], a
 ;	fallthrough
@@ -3912,12 +3876,8 @@ SetState_Walking: ; 1e6b9 (7:66b9)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $42
-	ld [wSpritePtr + 0], a
-	ld a, $6c
-	ld [wSpritePtr + 1], a
+	
+	load_oam_ptr OAM_1426c
 
 	ld a, [wDirection]
 	and a
@@ -3950,12 +3910,8 @@ SetState_Turning: ; 1e73e (7:673e)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $4a
-	ld [wSpritePtr + 0], a
-	ld a, $82
-	ld [wSpritePtr + 1], a
+	
+	load_oam_ptr OAM_14a82
 	ld a, [wDirection]
 	xor $1 ; switch direction
 	ld [wDirection], a
@@ -3993,12 +3949,8 @@ SetState_Attacking: ; 1e7ab (7:67ab)
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
 	ld [wca8b], a
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $4d
-	ld [wSpritePtr + 0], a
-	ld a, $1b
-	ld [wSpritePtr + 1], a
+	
+	load_oam_ptr OAM_14d1b
 	ld a, $04
 	ld [wca7b], a
 	ld a, $58
@@ -4067,12 +4019,8 @@ Func_1e855: ; 1e855 (7:6855)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $42
-	ld [wSpritePtr + 0], a
-	ld a, $6c
-	ld [wSpritePtr + 1], a
+	
+	load_oam_ptr OAM_1426c
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -4198,12 +4146,8 @@ SetState_Idling: ; 1e99b (7:699b)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $40
-	ld [wSpritePtr + 0], a
-	ld a, $00
-	ld [wSpritePtr + 1], a
+	
+	load_oam_ptr OAM_14000
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1ea24
@@ -4396,12 +4340,8 @@ SetState_CrouchWalking: ; 1eb94 (7:6b94)
 	ld [wca9a], a
 	ld [wSFXLoopCounter], a ; redundant
 
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $42
-	ld [wSpritePtr + 0], a
-	ld a, $6c
-	ld [wSpritePtr + 1], a
+	
+	load_oam_ptr OAM_1426c
 	ld a, $04
 	ld [wca7b], a
 	ld a, $48
@@ -4580,12 +4520,8 @@ Func_1ed4b: ; 1ed4b (7:6d4b)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $42
-	ld [wSpritePtr + 0], a
-	ld a, $6c
-	ld [wSpritePtr + 1], a
+	
+	load_oam_ptr OAM_1426c
 
 	ld a, [wDirection]
 	and a
@@ -4658,12 +4594,8 @@ SetState_GrabAirborne: ; 1ee0d (7:6e0d)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $59
-	ld [wSpritePtr + 0], a
-	ld a, $55
-	ld [wSpritePtr + 1], a
+	
+	load_oam_ptr OAM_15955
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1ee66
@@ -4866,12 +4798,8 @@ Func_1efe7: ; 1efe7 (7:6fe7)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $42
-	ld [wSpritePtr + 0], a
-	ld a, $6c
-	ld [wSpritePtr + 1], a
+	
+	load_oam_ptr OAM_1426c
 
 	ld a, [wDirection]
 	and a
@@ -5745,12 +5673,8 @@ Func_1f6dc: ; 1f6dc (7:76dc)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $59
-	ld [wSpritePtr + 0], a
-	ld a, $55
-	ld [wSpritePtr + 1], a
+	
+	load_oam_ptr OAM_15955
 
 	ld a, [wDirection]
 	and a

@@ -345,12 +345,7 @@ UpdateState_Hot: ; 2827a (a:427a)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $6b
-	ld [wSpritePtr + 0], a
-	ld a, $6c
-	ld [wSpritePtr + 1], a
+	load_oam_ptr OAM_16b6c
 
 	ld a, [wDirection]
 	and a
@@ -1268,12 +1263,7 @@ UpdateState_GettingUnwrappedInString: ; 28d92 (a:4d92)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $7b
-	ld [wSpritePtr + 0], a
-	ld a, $bc
-	ld [wSpritePtr + 1], a
+	load_oam_ptr OAM_17bbc
 	load_frameset_ptr Frameset_17ce2
 	update_anim_1
 	ret
@@ -2022,7 +2012,7 @@ UpdateState_TurningInvisible: ; 2972e (a:572e)
 	INCROM $2975e, $29816
 
 UpdateState_PuffyInflating: ; 29816 (a:5816)
-	ld a, [wSpriteBank]
+	ld a, [wOAMBank]
 	ldh [hCallFuncBank], a
 	call_hram UpdateAnimation
 
@@ -2059,7 +2049,7 @@ SetState_PuffyRaising: ; 2982b (a:582b)
 	ld a, $57
 	ld [$ca82], a
 .asm_29860
-	ld a, [wSpriteBank]
+	ld a, [wOAMBank]
 	ldh [hCallFuncBank], a
 	call_hram UpdateAnimation
 	ret
@@ -2080,7 +2070,7 @@ UpdateState_PuffyRaising: ; 29871 (a:5871)
 	load_sound SFX_PUFF_RAISE
 .skip_sfx
 
-	ld a, [wSpriteBank]
+	ld a, [wOAMBank]
 	ldh [hCallFuncBank], a
 	call_hram UpdateAnimation
 
@@ -2114,14 +2104,14 @@ SetState_PuffyTurning: ; 298b2 (a:58b2)
 	ld a, $d8
 	ld [$ca82], a
 .asm_298e2
-	ld a, [wSpriteBank]
+	ld a, [wOAMBank]
 	ldh [hCallFuncBank], a
 	call_hram UpdateAnimation
 	ret
 ; 0x298f3
 
 UpdateState_PuffyTurning: ; 298f3 (a:58f3)
-	ld a, [wSpriteBank]
+	ld a, [wOAMBank]
 	ldh [hCallFuncBank], a
 	call_hram UpdateAnimation
 
@@ -2172,7 +2162,7 @@ SetState_PuffyDeflating: ; 2992a (a:592a)
 	ld a, $1e
 	ld [$ca82], a
 .asm_29964
-	ld a, [wSpriteBank]
+	ld a, [wOAMBank]
 	ldh [hCallFuncBank], a
 	call_hram UpdateAnimation
 	ret
@@ -2183,7 +2173,7 @@ UpdateState_PuffyDeflating: ; 29975 (a:5975)
 	and a
 	jr nz, .asm_299b8
 
-	ld a, [wSpriteBank]
+	ld a, [wOAMBank]
 	ldh [hCallFuncBank], a
 	call_hram UpdateAnimation
 
@@ -2210,7 +2200,7 @@ UpdateState_PuffyDeflating: ; 29975 (a:5975)
 	ld a, $31
 	ld [$ca82], a
 .asm_299b8
-	ld a, [wSpriteBank]
+	ld a, [wOAMBank]
 	ldh [hCallFuncBank], a
 	call_hram UpdateAnimation
 
@@ -2266,12 +2256,7 @@ SetState_ZombieIdling: ; 299d0 (a:59d0)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $7f
-	ld [wSpriteBank], a
-	ld a, $44
-	ld [wSpritePtr + 0], a
-	ld a, $8b
-	ld [wSpritePtr + 1], a
+	load_oam_ptr OAM_1fc48b
 
 	ld a, [wDirection]
 	and a
@@ -3138,12 +3123,7 @@ Func_2ad6a: ; 2ad6a (a:6d6a)
 	ld a, $00
 	ld [$ca7d], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $52
-	ld [wSpritePtr], a
-	ld a, $54
-	ld [$ca80], a
+	load_oam_ptr OAM_15254
 
 	ld a, [wDirection]
 	and a

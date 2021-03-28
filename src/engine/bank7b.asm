@@ -114,12 +114,7 @@ SetState_BlindIdling: ; 1ed331 (7b:5331)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $40
-	ld [wSpritePtr + 0], a
-	ld a, $00
-	ld [wSpritePtr + 1], a
+	load_oam_ptr OAM_14000
 
 	ld a, [wDirection]
 	and a
@@ -166,12 +161,7 @@ SetState_BlindWalking: ; 1ed3fa (7b:53fa)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $42
-	ld [wSpritePtr + 0], a
-	ld a, $6c
-	ld [wSpritePtr + 1], a
+	load_oam_ptr OAM_1426c
 
 	ld a, [wJoypadDown]
 	bit D_LEFT_F, a
@@ -240,12 +230,7 @@ SetState_BlindTurning: ; 1ed4d1 (7b:54d1)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $4a
-	ld [wSpritePtr + 0], a
-	ld a, $82
-	ld [wSpritePtr + 1], a
+	load_oam_ptr OAM_14a82
 
 	ld a, [wDirection]
 	and a
@@ -313,12 +298,7 @@ SetState_BlindAirborne: ; 1ed571 (7b:5571)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $59
-	ld [wSpritePtr + 0], a
-	ld a, $55
-	ld [wSpritePtr + 1], a
+	load_oam_ptr OAM_15955
 
 	ld a, [wDirection]
 	and a

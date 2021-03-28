@@ -341,12 +341,8 @@ SetState_OnFire: ; 20ed3 (8:4ed3)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $67
-	ld [wSpritePtr + 0], a
-	ld a, $3c
-	ld [wSpritePtr + 1], a
+	load_oam_ptr OAM_1673c
+
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a

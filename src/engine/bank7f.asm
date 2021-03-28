@@ -1,4 +1,289 @@
-	INCROM $1fc000, $1fc870
+	INCROM $1fc000, $1fc48b
+
+OAM_1fc48b: ; 1fc48b (127:448b)
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
+	dw .frame_7
+	dw .frame_8
+	dw .frame_9
+	dw .frame_10
+	dw .frame_11
+	dw .frame_12
+	dw .frame_13
+	dw .frame_14
+	dw .frame_15
+	dw .frame_16
+	dw .frame_17
+	dw .frame_18
+	dw .frame_19
+	dw .frame_20
+	dw .frame_21
+	dw .frame_22
+	dw .frame_23
+	dw .frame_24
+	dw .frame_25
+	dw .frame_26
+	dw .frame_27
+	dw .frame_28
+	dw .frame_29
+	dw .frame_30
+	dw .frame_31
+	dw .frame_32
+	dw .frame_33
+	dw .frame_34
+	dw .frame_35
+	dw .frame_36
+	dw .frame_37
+	dw .frame_38
+	dw .frame_39
+	dw .frame_40
+	dw .frame_41
+	dw .frame_42
+	dw .frame_43
+	dw .frame_44
+	dw .frame_45
+	dw .frame_46
+
+.frame_0
+	frame_oam -32, -13, $00, $00
+
+	INCROM $1fc4ed, $1fc502
+
+.frame_1
+	frame_oam -32, -13, $06, $00
+
+	INCROM $1fc506, $1fc51b
+
+.frame_2
+	frame_oam -32, -13, $0c, $00
+
+	INCROM $1fc51f, $1fc534
+
+.frame_3
+	frame_oam -32, -13, $12, $00
+
+	INCROM $1fc538, $1fc54d
+
+.frame_4
+	frame_oam -32,   5, $00, $20
+
+	INCROM $1fc551, $1fc566
+
+.frame_5
+	frame_oam -32,   5, $06, $20
+
+	INCROM $1fc56a, $1fc57f
+
+.frame_6
+	frame_oam -32,   5, $0c, $20
+
+	INCROM $1fc583, $1fc598
+
+.frame_7
+	frame_oam -32,   5, $12, $20
+
+	INCROM $1fc59c, $1fc5b1
+
+.frame_8
+	frame_oam -32, -13, $00, $00
+
+	INCROM $1fc5b5, $1fc5ca
+
+.frame_9
+	frame_oam -32, -13, $06, $00
+
+	INCROM $1fc5ce, $1fc5e3
+
+.frame_10
+	frame_oam -32, -13, $0c, $00
+
+	INCROM $1fc5e7, $1fc5fc
+
+.frame_11
+	frame_oam -32, -13, $12, $00
+
+	INCROM $1fc600, $1fc615
+
+.frame_12
+	frame_oam -32,   5, $00, $20
+
+	INCROM $1fc619, $1fc62e
+
+.frame_13
+	frame_oam -32,   5, $06, $20
+
+	INCROM $1fc632, $1fc647
+
+.frame_14
+	frame_oam -32,   5, $0c, $20
+
+	INCROM $1fc64b, $1fc660
+
+.frame_15
+	frame_oam -32,   5, $12, $20
+
+	INCROM $1fc664, $1fc679
+
+.frame_16
+	frame_oam -32, -12, $52, $00
+
+	INCROM $1fc67d, $1fc692
+
+.frame_17
+	frame_oam -32, -12, $5e, $00
+
+	INCROM $1fc696, $1fc6ab
+
+.frame_18
+	frame_oam -32,   4, $52, $20
+
+	INCROM $1fc6af, $1fc6c4
+
+.frame_19
+	frame_oam -32, -13, $18, $00
+
+	INCROM $1fc6c8, $1fc6dd
+
+.frame_20
+	frame_oam -32,   5, $18, $20
+
+	INCROM $1fc6e1, $1fc6f6
+
+.frame_21
+	frame_oam -16, -13, $6a, $00
+
+	INCROM $1fc6fa, $1fc70b
+
+.frame_22
+	frame_oam -16,   3, $74, $00
+
+	INCROM $1fc70f, $1fc718
+
+.frame_23
+	frame_oam -16, -13, $70, $00
+
+	INCROM $1fc71c, $1fc725
+
+.frame_24
+	frame_oam -16,  -5, $7c, $20
+
+	INCROM $1fc729, $1fc73a
+
+.frame_25
+	frame_oam -17, -13, $7a, $00
+
+	INCROM $1fc73e, $1fc74f
+
+.frame_26
+	frame_oam -16, -13, $7a, $00
+
+	INCROM $1fc753, $1fc764
+
+.frame_27
+	frame_oam -31,  -1, $66, $20
+
+	INCROM $1fc768, $1fc76d
+
+.frame_28
+	frame_oam -25,   1, $66, $20
+
+	INCROM $1fc771, $1fc776
+
+.frame_29
+	frame_oam -21,  -1, $66, $20
+
+	INCROM $1fc77a, $1fc77f
+
+.frame_30
+	frame_oam -19, -10, $66, $00
+
+	INCROM $1fc783, $1fc788
+
+.frame_31
+	frame_oam -16, -11, $66, $00
+
+	INCROM $1fc78c, $1fc791
+
+.frame_32
+	frame_oam -16,   5, $6a, $20
+
+	INCROM $1fc795, $1fc7a6
+
+.frame_33
+	frame_oam -16, -11, $74, $20
+
+	INCROM $1fc7aa, $1fc7b3
+
+.frame_34
+	frame_oam -16,   5, $70, $20
+
+	INCROM $1fc7b7, $1fc7c0
+
+.frame_35
+	frame_oam -16,  -3, $7c, $00
+
+	INCROM $1fc7c4, $1fc7d5
+
+.frame_36
+	frame_oam -17,   5, $7a, $20
+
+	INCROM $1fc7d9, $1fc7ea
+
+.frame_37
+	frame_oam -16,   5, $7a, $20
+
+	INCROM $1fc7ee, $1fc7ff
+
+.frame_38
+	frame_oam -31,  -7, $66, $00
+
+	INCROM $1fc803, $1fc808
+
+.frame_39
+	frame_oam -25,  -9, $66, $00
+
+	INCROM $1fc80c, $1fc811
+
+.frame_40
+	frame_oam -21,  -7, $66, $00
+
+	INCROM $1fc815, $1fc81a
+
+.frame_41
+	frame_oam -19,   2, $66, $20
+
+	INCROM $1fc81e, $1fc823
+
+.frame_42
+	frame_oam -16,   3, $66, $20
+
+	INCROM $1fc827, $1fc82c
+
+.frame_43
+	frame_oam -18, -11, $66, $00
+
+	INCROM $1fc830, $1fc835
+
+.frame_44
+	frame_oam -18,   3, $66, $20
+
+	INCROM $1fc839, $1fc83e
+
+.frame_45
+	frame_oam -33, -14, $18, $00
+
+	INCROM $1fc842, $1fc857
+
+.frame_46
+	frame_oam -33,   6, $18, $20
+; 0x1fc85b
+
+	INCROM $1fc85b, $1fc870
 
 Frameset_1fc870: ; 1fc870 (127:4870)
 	db $01,  9

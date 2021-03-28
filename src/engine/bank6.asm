@@ -902,12 +902,8 @@ Func_19c81: ; 19c81 (6:5c81)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $40
-	ld [wSpritePtr + 0], a
-	ld a, $00
-	ld [wSpritePtr + 1], a
+	load_oam_ptr OAM_14000
+
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -947,12 +943,8 @@ Func_19e7f: ; 19e7f (6:5e7f)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $42
-	ld [wSpritePtr + 0], a
-	ld a, $6c
-	ld [wSpritePtr + 1], a
+	load_oam_ptr OAM_1426c
+
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -1031,12 +1023,8 @@ Func_1a0e8: ; 1a0e8 (6:60e8)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $59
-	ld [wSpritePtr + 0], a
-	ld a, $55
-	ld [wSpritePtr + 1], a
+	load_oam_ptr OAM_15955
+
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -1084,12 +1072,8 @@ SetState_LadderClimbing: ; 1a3bb (6:63bb)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $55
-	ld [wSpritePtr + 0], a
-	ld a, $cc
-	ld [wSpritePtr + 1], a
+	load_oam_ptr OAM_155cc
+
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -1164,12 +1148,7 @@ SetState_LadderIdling: ; 1a49e (6:649e)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $55
-	ld [wSpritePtr], a
-	ld a, $cc
-	ld [$ca80], a
+	load_oam_ptr OAM_155cc
 
 	ld a, [wDirection]
 	and a
@@ -1409,12 +1388,8 @@ Func_1a773: ; 1a773 (6:6773)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $42
-	ld [wSpritePtr + 0], a
-	ld a, $6c
-	ld [wSpritePtr + 1], a
+	load_oam_ptr OAM_1426c
+
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -1447,12 +1422,7 @@ SetState_Sleeping: ; 1ac10 (6:6c10)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $40
-	ld [wSpritePtr + 0], a
-	ld a, $00
-	ld [wSpritePtr + 1], a
+	load_oam_ptr OAM_14000
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -1592,12 +1562,7 @@ Func_1ad9a: ; 1ad9a (6:6d9a)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $4a
-	ld [wSpritePtr + 0], a
-	ld a, $82
-	ld [wSpritePtr + 1], a
+	load_oam_ptr OAM_14a82
 
 	ld a, [wDirection]
 	and a
@@ -1636,12 +1601,8 @@ Func_1ae68: ; 1ae68 (6:6e68)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wSpriteBank], a
-	ld a, $55
-	ld [wSpritePtr + 0], a
-	ld a, $cc
-	ld [wSpritePtr + 1], a
+	load_oam_ptr OAM_155cc
+
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
