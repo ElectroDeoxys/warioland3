@@ -35,9 +35,9 @@ Func_1ec000: ; 1ec000 (7b:4000)
 	dw $4e65     ; ST_UNKNOWN_CD
 	dw Func_156d ; ST_UNKNOWN_CE
 	dw Func_156d ; ST_UNKNOWN_CF
-	dw $4f3a     ; ST_UNKNOWN_D0
-	dw $4f86     ; ST_UNKNOWN_D1
-	dw $5018     ; ST_UNKNOWN_D2
+	dw UpdateState_SplitHit         ; ST_SPLIT_HIT
+	dw UpdateState_SplitKnockedBack ; ST_SPLIT_KNOCKED_BACK
+	dw UpdateState_Splitting        ; ST_SPLITTING
 	dw $504f     ; ST_UNKNOWN_D3
 	dw $5136     ; ST_UNKNOWN_D4
 	dw $51af     ; ST_UNKNOWN_D5
@@ -72,7 +72,124 @@ Func_1ec000: ; 1ec000 (7b:4000)
 	dw Func_156d ; ST_UNKNOWN_F2
 ; 0x1ec08c
 
-	INCROM $1ec08c, $1ed331
+	INCROM $1ec08c, $1ecf3a
+
+UpdateState_SplitHit: ; 1ecf3a (7b:4f3a)
+	update_anim_2
+	ld a, [wAnimationHasFinished]
+	and a
+	ret z
+
+	ld a, ST_SPLIT_KNOCKED_BACK
+	ld [wWarioState], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1ecf6c
+	load_frameset_ptr Frameset_1ffd19
+	jr .asm_1ecf76
+.asm_1ecf6c
+	load_frameset_ptr Frameset_1ffd13
+.asm_1ecf76
+	update_anim_2
+	ret
+; 0x1ecf86
+
+UpdateState_SplitKnockedBack: ; 1ecf86 (7b:4f86)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wc0db]
+	and a
+	jp nz, Func_1570
+	call Func_1488
+	farcall Func_199e9
+	ld a, b
+	and a
+	jr nz, .play_sfx
+	farcall Func_2b1a6
+	call Func_1762
+	jp Func_14de
+
+.play_sfx
+	load_sound SFX_44
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1ecfef
+	load_frameset_ptr Frameset_1ffccf
+	jr .asm_1ecff9
+.asm_1ecfef
+	load_frameset_ptr Frameset_1ffc8e
+.asm_1ecff9
+	update_anim_2
+;	fallthrough
+
+SetState_Splitting: ; 1ed008 (7b:5008)
+	call Func_14f6
+	ld a, ST_SPLITTING
+	ld [wWarioState], a
+	xor a
+	ld [wJumpVelTable], a
+	ld [wJumpVelIndex], a
+	ret
+; 0x1ed018
+
+UpdateState_Splitting: ; 1ed018 (7b:5018)
+	update_anim_2
+	ld a, [wAnimationHasFinished]
+	and a
+	jr nz, .asm_1ed09b
+
+	farcall Func_198e0
+	ld a, b
+	and a
+	ret nz
+
+	ld a, ST_UNKNOWN_D3
+	ld [wWarioState], a
+
+	ld a, JUMP_VEL_NORMAL
+	ld [wJumpVelTable], a
+	ld a, FALLING_JUMP_VEL_INDEX
+	ld [wJumpVelIndex], a
+	ret
+
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wc0db]
+	and a
+	jp nz, Func_1570
+	update_anim_2
+	ld a, [wAnimationHasFinished]
+	and a
+	jr nz, .asm_1ed09b
+	call Func_1488
+	farcall Func_199e9
+	ld a, b
+	and a
+	jp nz, SetState_Splitting
+	jp Func_14de
+
+.asm_1ed09b
+	ld a, [wDirection]
+	xor $1 ; switch direction
+	ld [wDirection], a
+	jp Func_1570
+; 0x1ed0a6
+
+	INCROM $1ed0a6, $1ed331
 
 SetState_BlindIdling: ; 1ed331 (7b:5331)
 	ld a, ST_BLIND_IDLING

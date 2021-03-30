@@ -72,7 +72,7 @@ Func_28000: ; 28000 (a:4000)
 	dw $6b18                                  ; ST_UNKNOWN_A2
 	dw $6b42                                  ; ST_UNKNOWN_A3
 	dw $6c04                                  ; ST_UNKNOWN_A4
-	dw $6d06                                  ; ST_UNKNOWN_A5
+	dw UpdateState_InBubble                   ; ST_IN_BUBBLE
 	dw Func_156d                              ; ST_UNKNOWN_A6
 	dw Func_156d                              ; ST_UNKNOWN_A7
 	dw Func_156d                              ; ST_UNKNOWN_A8
@@ -3100,7 +3100,44 @@ UpdateState_BouncyLastBounce: ; 2a362 (a:6362)
 	jp Func_1570
 ; 0x2a3ed
 
-	INCROM $2a3ed, $2ad6a
+	INCROM $2a3ed, $2ad06
+
+UpdateState_InBubble: ; 2ad06 (a:6d06)
+	farcall Func_19b25
+	ld a, [wc0db]
+	and a
+	jr z, .asm_2ad45
+
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, $0e
+	ld [wSFXLoopCounter], a
+	load_sound SFX_23
+.skip_sfx
+	update_anim_2
+	call Func_2b56f
+	ret
+
+.asm_2ad45
+	ld hl, wca61
+	ld de, hffa8
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ld b, $0b
+	farcall Func_c9f3
+	jp Func_1570
+; 0x2ad6a
 
 Func_2ad6a: ; 2ad6a (a:6d6a)
 	call Func_1079
@@ -3815,7 +3852,99 @@ Func_2b3dd: ; 2b3dd (a:73dd)
 	ret
 ; 0x2b3f9
 
-	INCROM $2b3f9, $2b664
+	INCROM $2b3f9, $2b56f
+
+Func_2b56f: ; 2b56f (a:756f)
+	ld a, [wc08f]
+	and $01
+	jr z, .asm_2b5b2
+	ld b, $01
+	call Func_129e
+	farcall Func_1996e
+	ld a, b
+	and a
+	ret z
+
+	ld hl, wca61
+	ld de, hffa8
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ld b, $0b
+	farcall Func_c9f3
+	jp Func_1570
+
+.asm_2b5b2
+	ld a, [wJoypadDown]
+	bit D_RIGHT_F, a
+	jr nz, .asm_2b607
+	bit D_LEFT_F, a
+	jr nz, .asm_2b621
+
+	ld a, [wWarioStateCounter]
+	ld [wDirection], a
+	farcall Func_19734
+	ld a, b
+	and a
+	jr nz, .asm_2b5f7
+
+	ld hl, Data_2b6b4
+	ld a, [wJumpVelIndex]
+	ld e, a
+	ld d, $00
+	add hl, de
+	ld b, [hl]
+	ld a, [wWarioStateCounter]
+	and a
+	jr nz, .asm_2b5ec
+	call Func_1270
+	jr .asm_2b5ef
+.asm_2b5ec
+	call Func_1259
+.asm_2b5ef
+	ld hl, wJumpVelIndex
+	inc [hl]
+	ld a, [hl]
+	cp $2f
+	ret c
+
+.asm_2b5f7
+	ld a, [wWarioStateCounter]
+	xor $1
+	ld [wWarioStateCounter], a
+	ld [wDirection], a
+.asm_2b602
+	xor a
+	ld [wJumpVelIndex], a
+	ret
+
+.asm_2b607
+	farcall Func_19741
+	ld a, b
+	and a
+	jr nz, .asm_2b5f7
+	ld b, $01
+	call Func_1259
+	jr .asm_2b602
+.asm_2b621
+	farcall Func_197b1
+	ld a, b
+	and a
+	jr nz, .asm_2b5f7
+	ld b, $01
+	call Func_1270
+	jr .asm_2b602
+; 0x2b63b
+
+	INCROM $2b63b, $2b664
 
 Data_2b664: ; 2b664 (a:7664)
 	db $03
@@ -3901,6 +4030,9 @@ Data_2b68c: ; 2b68c (a:768c)
 	db $01
 	db $00
 	db $00
+; 0x2b68c
+
+Data_2b6b4: ; 2b6b4 (a:76b4)
 	db $00
 	db $00
 	db $00
