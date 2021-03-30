@@ -150,11 +150,11 @@
 	const ST_BOUNCY_UPSIDE_DOWN            ; 94
 	const ST_BOUNCY_UPSIDE_DOWN_LANDING    ; 95
 	const ST_BOUNCY_LAST_BOUNCE            ; 96
-	const ST_UNKNOWN_97                    ; 97
-	const ST_UNKNOWN_98                    ; 98
-	const ST_UNKNOWN_99                    ; 99
-	const ST_UNKNOWN_9A                    ; 9a
-	const ST_UNKNOWN_9B                    ; 9b
+	const ST_CRAZY_SPINNING                ; 97
+	const ST_CRAZY_DIZZY                   ; 98
+	const ST_CRAZY                         ; 99
+	const ST_CRAZY_TURNING                 ; 9a
+	const ST_CRAZY_AIRBORNE                ; 9b
 	const ST_VAMPIRE_IDLING                ; 9c
 	const ST_VAMPIRE_WALKING               ; 9d
 	const ST_VAMPIRE_TURNING               ; 9e

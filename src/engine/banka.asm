@@ -58,11 +58,11 @@ Func_28000: ; 28000 (a:4000)
 	dw UpdateState_BouncyUpsideDown           ; ST_BOUNCY_UPSIDE_DOWN
 	dw UpdateState_BouncyUpsideLanding        ; ST_BOUNCY_UPSIDE_DOWN_LANDING
 	dw UpdateState_BouncyLastBounce           ; ST_BOUNCY_LAST_BOUNCE
-	dw $6489                                  ; ST_UNKNOWN_97
-	dw $6544                                  ; ST_UNKNOWN_98
-	dw $65d8                                  ; ST_UNKNOWN_99
-	dw $6657                                  ; ST_UNKNOWN_9A
-	dw $66c0                                  ; ST_UNKNOWN_9B
+	dw UpdateState_CrazySpinning              ; ST_CRAZY_SPINNING
+	dw UpdateState_CrazyDizzy                 ; ST_CRAZY_DIZZY
+	dw UpdateState_Crazy                      ; ST_CRAZY
+	dw UpdateState_CrazyTurning               ; ST_CRAZY_TURNING
+	dw UpdateState_CrazyAirborne              ; ST_CRAZY_AIRBORNE
 	dw UpdateState_VampireIdling              ; ST_VAMPIRE_IDLING
 	dw UpdateState_VampireWalking             ; ST_VAMPIRE_WALKING
 	dw UpdateState_VampireTurning             ; ST_VAMPIRE_TURNING
@@ -3098,7 +3098,274 @@ UpdateState_BouncyLastBounce: ; 2a362 (a:6362)
 	jp Func_1570
 ; 0x2a3ed
 
-	INCROM $2a3ed, $2a739
+	INCROM $2a3ed, $2a489
+
+UpdateState_CrazySpinning: ; 2a489 (a:6489)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wc0db]
+	and a
+	jp nz, Func_1570
+
+	ld a, [wJumpVelTable]
+	and a
+	jr z, .asm_2a4cf
+	call Func_1488
+	farcall Func_199e9
+	ld a, b
+	and a
+	jr nz, .asm_2a4c5
+	jp Func_14de
+
+.asm_2a4c5
+	call Func_14f6
+	xor a
+	ld [wJumpVelTable], a
+	ld [wJumpVelIndex], a
+.asm_2a4cf
+	update_anim_1
+
+	ld hl, wWarioStateCounter
+	inc [hl]
+	ld a, [hl]
+	cp $80
+	ret c
+	ld [hl], $00
+
+	load_sound SFX_43
+	ld a, ST_CRAZY_DIZZY
+	ld [wWarioState], a
+
+	xor a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wJumpVelTable], a
+	ld [wJumpVelIndex], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld a, $04
+	ld [wca7b], a
+	ld a, $50
+	ld [wca7c], a
+	ld a, $00
+	ld [$ca7d], a
+	call Func_15b0
+	ld a, $05
+	ld [wOAMBank], a
+	ld a, $7b
+	ld [wOAMPtr], a
+	ld a, $bc
+	ld [$ca80], a
+	ld a, $7c
+	ld [wFramesetPtr], a
+	ld a, $e2
+	ld [$ca82], a
+	update_anim_1
+	ret
+; 0x2a544
+
+UpdateState_CrazyDizzy: ; 2a544 (a:6544)
+	update_anim_1
+	ld a, [wAnimationHasFinished]
+	and a
+	ret z
+;	fallthrough
+
+SetState_Crazy: ; 2a558 (a:6558)
+	load_sound SFX_43
+	ld a, ST_CRAZY
+	ld [wWarioState], a
+
+	ld a, $02
+	ld [wca93], a
+	ld a, $01
+	ld [wca92], a
+	ld a, $01
+	ld [wca94], a
+
+	xor a
+	ld [wca86], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wJumpVelTable], a
+	ld [wJumpVelIndex], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld a, $0b
+	ld [wca7b], a
+	ld a, $50
+	ld [wca7c], a
+	ld a, $00
+	ld [$ca7d], a
+	call Func_15b0
+	ld a, $7f
+	ld [wOAMBank], a
+	ld a, $4c
+	ld [wOAMPtr], a
+	ld a, $d5
+	ld [$ca80], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_2a5be
+	ld a, $4f
+	ld [wFramesetPtr], a
+	ld a, $9f
+	ld [$ca82], a
+	jr .asm_2a5c8
+.asm_2a5be
+	ld a, $4f
+	ld [wFramesetPtr], a
+	ld a, $6e
+	ld [$ca82], a
+.asm_2a5c8
+	update_anim_2
+	ret
+; 0x2a5d8
+
+UpdateState_Crazy: ; 2a5d8 (a:65d8)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	update_anim_2
+
+	call Func_2b3f9
+	ld a, [wWarioState]
+	cp ST_CRAZY
+	ret nz ; done if not crazy any more
+
+	farcall Func_198e0
+	ld a, b
+	and a
+	jr z, Func_2a67b
+	ret
+; 0x2a61a
+
+SetState_CrazyTurning: ; 2a61a (a:661a)
+	ld a, ST_CRAZY_TURNING
+	ld [wWarioState], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld a, [wDirection]
+	xor $1 ; switch direction
+	ld [wDirection], a
+	and a
+	jr nz, .asm_2a63d
+	ld a, $4f
+	ld [wFramesetPtr], a
+	ld a, $d0
+	ld [$ca82], a
+	jr .asm_2a647
+.asm_2a63d
+	ld a, $4f
+	ld [wFramesetPtr], a
+	ld a, $d7
+	ld [$ca82], a
+.asm_2a647
+	update_anim_2
+	ret
+; 0x2a657
+
+UpdateState_CrazyTurning: ; 2a657 (a:6657)
+	update_anim_2
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	jr nz, Func_2a675
+	ld a, [wAnimationHasFinished]
+	and a
+	ret z
+	jp SetState_Crazy
+; 0x2a675
+
+Func_2a675: ; 2a675 (a:6675)
+	xor a
+	ld [wJumpVelIndex], a
+	jr SetState_CrazyAirborne
+; 0x2a67b
+
+Func_2a67b: ; 2a67b (a:667b)
+	ld a, FALLING_JUMP_VEL_INDEX
+	ld [wJumpVelIndex], a
+;	fallthrough
+
+SetState_CrazyAirborne: ; 2a680 (a:6680)
+	ld a, ST_CRAZY_AIRBORNE
+	ld [wWarioState], a
+	ld a, JUMP_VEL_NORMAL
+	ld [wJumpVelTable], a
+
+	xor a
+	ld [wca86], a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_2a6a6
+	ld a, $4f
+	ld [wFramesetPtr], a
+	ld a, $9f
+	ld [$ca82], a
+	jr .asm_2a6b0
+.asm_2a6a6
+	ld a, $4f
+	ld [wFramesetPtr], a
+	ld a, $6e
+	ld [$ca82], a
+.asm_2a6b0
+	update_anim_2
+	ret
+; 0x2a6c0
+
+UpdateState_CrazyAirborne: ; 2a6c0 (a:66c0)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wc0db]
+	and a
+	jp nz, Func_1570
+	update_anim_2
+
+	call Func_1488
+	call Func_2b1a6
+	ld a, [wca86]
+	cp $10
+	jr c, .asm_2a6fe
+	ld a, $0c
+	ld [wca86], a
+.asm_2a6fe
+	ld a, [wJumpVelIndex]
+	cp FALLING_JUMP_VEL_INDEX
+	jr nc, .falling
+; rising
+	farcall Func_1996e
+	ld a, b
+	and a
+	ret z
+	ld a, FALLING_JUMP_VEL_INDEX
+	ld [wJumpVelIndex], a
+	ret
+
+.falling
+	farcall Func_199e9
+	ld a, b
+	and a
+	jr nz, .asm_2a733
+	jp Func_14de
+.asm_2a733
+	call Func_14f6
+	jp SetState_Crazy
+; 0x2a739
 
 SetState_VampireIdling: ; 2a739 (a:6739)
 	ld a, ST_VAMPIRE_IDLING
@@ -4354,7 +4621,129 @@ Func_2b3dd: ; 2b3dd (a:73dd)
 	ret
 ; 0x2b3f9
 
-	INCROM $2b3f9, $2b4f3
+Func_2b3f9: ; 2b3f9 (a:73f9)
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	jp nz, Func_2a675
+	call Func_2b42b
+	ld a, [wWarioState]
+	cp ST_CRAZY
+	ret nz ; done if not crazy any more
+
+	ld a, [wAnimationHasFinished]
+	and a
+	ret z
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_2b421
+	ld a, [wJoypadDown]
+	bit D_LEFT_F, a
+	jr z, .asm_2b428
+.asm_2b41c
+	xor a
+	ld [wca86], a
+	ret
+.asm_2b421
+	ld a, [wJoypadDown]
+	bit D_RIGHT_F, a
+	jr nz, .asm_2b41c
+.asm_2b428
+	jp SetState_CrazyTurning
+; 0x2b42b
+
+Func_2b42b: ; 2b42b (a:742b)
+	ld hl, wca86
+	inc [hl]
+	ld a, [hl]
+	cp $06
+	jr c, .asm_2b495
+	jp z, Func_2b4d0
+	cp $09
+	ret c
+	cp $12
+	jr c, .asm_2b495
+	jp z, Func_2b4d0
+	cp $15
+	ret c
+	cp $18
+	jr c, .asm_2b495
+	cp $22
+	jr c, .asm_2b45d
+	jp z, Func_2b4d0
+	cp $25
+	ret c
+	cp $2c
+	jr c, .asm_2b457
+	ret
+
+.asm_2b457
+	ld a, [wc08f]
+	and $01
+	ret z
+.asm_2b45d
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_2b47c
+	farcall Func_197b1
+	ld a, b
+	and a
+	jr nz, .asm_2b4cd
+	ld b, $01
+	call Func_1270
+	ret
+
+.asm_2b47c
+	farcall Func_19741
+	ld a, b
+	and a
+	jr nz, .asm_2b4cd
+	ld b, $01
+	call Func_1259
+	ret
+
+.asm_2b495
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_2b4b4
+	farcall Func_197b1
+	ld a, b
+	and a
+	jr nz, .asm_2b4cd
+	ld b, $02
+	call Func_1270
+	ret
+
+.asm_2b4b4
+	farcall Func_19741
+	ld a, b
+	and a
+	jr nz, .asm_2b4cd
+	ld b, $02
+	call Func_1259
+	ret
+.asm_2b4cd
+	jp SetState_CrazyTurning
+; 0x2b4d0
+
+Func_2b4d0: ; 2b4d0 (a:74d0)
+	ld hl, wca61
+	ld de, hffa8
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ld b, $04
+	farcall Func_c9f3
+	ret
+; 0x2b4f3
 
 Func_2b4f3: ; 2b4f3 (a:74f3)
 	ld a, [wJoypadPressed]
