@@ -2511,7 +2511,23 @@ Func_114e: ; 114e (0:114e)
 	ret
 ; 0x1169
 
-	INCROM $1169, $11ae
+	INCROM $1169, $1197
+
+Func_1197: ; 1197 (0:1197)
+	ld a, [wc0ba]
+	and $0f
+	cp $08
+	jr c, .asm_11ad
+	call Func_114e
+	ld a, [wca78]
+	sub c
+	jr c, .asm_11ab
+	jr .asm_11ad
+.asm_11ab
+	jr Func_11d6
+.asm_11ad
+	ret
+; 0x11ae
 
 Func_11ae: ; 11ae (0:11ae)
 	ld a, c
@@ -2826,7 +2842,7 @@ Func_1488: ; 1488 (0:1488)
 	bit 7, [hl]
 	jr z, .falling
 
-; raising
+; rising
 	ld a, [hl]
 	cpl
 	inc a
@@ -2962,6 +2978,7 @@ Func_1570: ; 1570 (0:1570)
 	ld a, $10
 	ld [wca8c], a
 	jr .asm_157d
+.asm_157a
 	call Func_1079
 .asm_157d
 	call Func_161a
@@ -3119,7 +3136,26 @@ Func_16d0: ; 16d0 (0:16d0)
 	ret
 ; 0x16d9
 
-	INCROM $16d9, $1700
+Func_16d9: ; 16d9 (0:16d9)
+	ld hl, wca64
+	ld de, hffab
+	ld a, [hld]
+	ld [de], a
+	dec de
+	ld a, [hld]
+	ld [de], a
+	dec de
+	ld a, [hld]
+	sub $18
+	ld [de], a
+	dec de
+	ld a, [hl]
+	sbc $00
+	ld [de], a
+	ld b, $0e
+	farcall Func_c9f3
+	ret
+; 0x1700
 
 Func_1700: ; 1700 (0:1700)
 	xor a

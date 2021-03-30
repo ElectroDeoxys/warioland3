@@ -24,9 +24,9 @@ SECTION "Bank 4", ROMX
 	INCROM $10000, $14000
 
 
-SECTION "Bank 5", ROMX
+SECTION "Framesets 1", ROMX
 
-INCLUDE "engine/bank5.asm"
+INCLUDE "gfx/framesets1.asm"
 
 
 SECTION "Bank 6", ROMX
@@ -632,9 +632,9 @@ SECTION "Bank 76", ROMX
 	INCROM $1d8000, $1dc000
 
 
-SECTION "Bank 77", ROMX
+SECTION "Framesets 3", ROMX
 
-	INCROM $1dc000, $1e0000
+INCLUDE "gfx/framesets3.asm"
 
 
 SECTION "Bank 78", ROMX
@@ -672,6 +672,6 @@ SECTION "Bank 7E", ROMX
 INCLUDE "engine/bank7e.asm"
 
 
-SECTION "Bank 7F", ROMX
+SECTION "Framesets 2", ROMX
 
-INCLUDE "engine/bank7f.asm"
+INCLUDE "gfx/framesets2.asm"

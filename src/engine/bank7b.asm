@@ -3,76 +3,303 @@ Func_1ec000: ; 1ec000 (7b:4000)
 	sub $b0
 	jumptable
 
-	dw $4124     ; ST_UNKNOWN_B0
-	dw $4177     ; ST_UNKNOWN_B1
-	dw $422b     ; ST_UNKNOWN_B2
-	dw $4300     ; ST_UNKNOWN_B3
-	dw Func_156d ; ST_UNKNOWN_B4
-	dw Func_156d ; ST_UNKNOWN_B5
-	dw Func_156d ; ST_UNKNOWN_B6
-	dw Func_156d ; ST_UNKNOWN_B7
-	dw $4339     ; ST_UNKNOWN_B8
-	dw $43bc     ; ST_UNKNOWN_B9
-	dw $4540     ; ST_UNKNOWN_BA
-	dw $467d     ; ST_UNKNOWN_BB
-	dw $46a8     ; ST_UNKNOWN_BC
-	dw Func_156d ; ST_UNKNOWN_BD
-	dw Func_156d ; ST_UNKNOWN_BE
-	dw Func_156d ; ST_UNKNOWN_BF
-	dw $4703     ; ST_UNKNOWN_C0
-	dw Func_156d ; ST_UNKNOWN_C1
-	dw Func_156d ; ST_UNKNOWN_C2
-	dw Func_156d ; ST_UNKNOWN_C3
-	dw $47eb     ; ST_UNKNOWN_C4
-	dw $4884     ; ST_UNKNOWN_C5
-	dw $490d     ; ST_UNKNOWN_C6
-	dw $49b1     ; ST_UNKNOWN_C7
-	dw $4a6e     ; ST_UNKNOWN_C8
-	dw $4b9b     ; ST_UNKNOWN_C9
-	dw $4bf1     ; ST_UNKNOWN_CA
-	dw $4c7d     ; ST_UNKNOWN_CB
-	dw $4d9c     ; ST_UNKNOWN_CC
-	dw $4e65     ; ST_UNKNOWN_CD
-	dw Func_156d ; ST_UNKNOWN_CE
-	dw Func_156d ; ST_UNKNOWN_CF
-	dw UpdateState_SplitHit         ; ST_SPLIT_HIT
-	dw UpdateState_SplitKnockedBack ; ST_SPLIT_KNOCKED_BACK
-	dw UpdateState_Splitting        ; ST_SPLITTING
-	dw $504f     ; ST_UNKNOWN_D3
-	dw $5136     ; ST_UNKNOWN_D4
-	dw $51af     ; ST_UNKNOWN_D5
-	dw $523f     ; ST_UNKNOWN_D6
-	dw $52a3     ; ST_UNKNOWN_D7
-	dw $531a     ; ST_UNKNOWN_D8
-	dw Func_156d ; ST_UNKNOWN_D9
-	dw Func_156d ; ST_UNKNOWN_DA
-	dw Func_156d ; ST_UNKNOWN_DB
-	dw UpdateState_BlindIdling   ; ST_BLIND_IDLING
-	dw UpdateState_BlindWalking  ; ST_BLIND_WALKING
-	dw UpdateState_BlindTurning  ; ST_BLIND_TURNING
-	dw UpdateState_BlindAirborne ; ST_BLIND_AIRBORNE
-	dw $56ee     ; ST_UNKNOWN_E0
-	dw $57e5     ; ST_UNKNOWN_E1
-	dw $5886     ; ST_UNKNOWN_E2
-	dw Func_156d ; ST_UNKNOWN_E3
-	dw $5972     ; ST_UNKNOWN_E4
-	dw $5a16     ; ST_UNKNOWN_E5
-	dw $5a1e     ; ST_UNKNOWN_E6
-	dw Func_156d ; ST_UNKNOWN_E7
-	dw $5aaa     ; ST_UNKNOWN_E8
-	dw $5b47     ; ST_UNKNOWN_E9
-	dw $5ba0     ; ST_UNKNOWN_EA
-	dw $5c15     ; ST_UNKNOWN_EB
-	dw $5cd0     ; ST_UNKNOWN_EC
-	dw $5d7e     ; ST_UNKNOWN_ED
-	dw $5e36     ; ST_UNKNOWN_EE
-	dw Func_156d ; ST_UNKNOWN_EF
-	dw Func_156d ; ST_UNKNOWN_F0
-	dw Func_156d ; ST_UNKNOWN_F1
-	dw Func_156d ; ST_UNKNOWN_F2
+	dw UpdateState_IceSkatinStart    ; ST_ICE_SKATIN_START
+	dw UpdateState_IceSkatin         ; ST_ICE_SKATIN
+	dw UpdateState_IceSkatinAirborne ; ST_ICE_SKATIN_AIRBORNE
+	dw UpdateState_IceSkatinCrash    ; ST_ICE_SKATIN_CRASH
+	dw Func_156d                     ; ST_UNKNOWN_B4
+	dw Func_156d                     ; ST_UNKNOWN_B5
+	dw Func_156d                     ; ST_UNKNOWN_B6
+	dw Func_156d                     ; ST_UNKNOWN_B7
+	dw $4339                         ; ST_UNKNOWN_B8
+	dw $43bc                         ; ST_UNKNOWN_B9
+	dw $4540                         ; ST_UNKNOWN_BA
+	dw $467d                         ; ST_UNKNOWN_BB
+	dw $46a8                         ; ST_UNKNOWN_BC
+	dw Func_156d                     ; ST_UNKNOWN_BD
+	dw Func_156d                     ; ST_UNKNOWN_BE
+	dw Func_156d                     ; ST_UNKNOWN_BF
+	dw UpdateState_HangingRail       ; ST_HANGING_RAIL
+	dw Func_156d                     ; ST_UNKNOWN_C1
+	dw Func_156d                     ; ST_UNKNOWN_C2
+	dw Func_156d                     ; ST_UNKNOWN_C3
+	dw $47eb                         ; ST_UNKNOWN_C4
+	dw $4884                         ; ST_UNKNOWN_C5
+	dw $490d                         ; ST_UNKNOWN_C6
+	dw $49b1                         ; ST_UNKNOWN_C7
+	dw $4a6e                         ; ST_UNKNOWN_C8
+	dw $4b9b                         ; ST_UNKNOWN_C9
+	dw $4bf1                         ; ST_UNKNOWN_CA
+	dw $4c7d                         ; ST_UNKNOWN_CB
+	dw $4d9c                         ; ST_UNKNOWN_CC
+	dw $4e65                         ; ST_UNKNOWN_CD
+	dw Func_156d                     ; ST_UNKNOWN_CE
+	dw Func_156d                     ; ST_UNKNOWN_CF
+	dw UpdateState_SplitHit          ; ST_SPLIT_HIT
+	dw UpdateState_SplitKnockedBack  ; ST_SPLIT_KNOCKED_BACK
+	dw UpdateState_Splitting         ; ST_SPLITTING
+	dw $504f                         ; ST_UNKNOWN_D3
+	dw $5136                         ; ST_UNKNOWN_D4
+	dw $51af                         ; ST_UNKNOWN_D5
+	dw $523f                         ; ST_UNKNOWN_D6
+	dw $52a3                         ; ST_UNKNOWN_D7
+	dw $531a                         ; ST_UNKNOWN_D8
+	dw Func_156d                     ; ST_UNKNOWN_D9
+	dw Func_156d                     ; ST_UNKNOWN_DA
+	dw Func_156d                     ; ST_UNKNOWN_DB
+	dw UpdateState_BlindIdling       ; ST_BLIND_IDLING
+	dw UpdateState_BlindWalking      ; ST_BLIND_WALKING
+	dw UpdateState_BlindTurning      ; ST_BLIND_TURNING
+	dw UpdateState_BlindAirborne     ; ST_BLIND_AIRBORNE
+	dw $56ee                         ; ST_UNKNOWN_E0
+	dw $57e5                         ; ST_UNKNOWN_E1
+	dw $5886                         ; ST_UNKNOWN_E2
+	dw Func_156d                     ; ST_UNKNOWN_E3
+	dw UpdateState_MagicRising      ; ST_MAGIC_RISING
+	dw UpdateState_MagicStopping     ; ST_MAGIC_STOPPING
+	dw $5a1e                         ; ST_UNKNOWN_E6
+	dw Func_156d                     ; ST_UNKNOWN_E7
+	dw $5aaa                         ; ST_UNKNOWN_E8
+	dw UpdateState_BallBouncing      ; ST_BALL_BOUNCING
+	dw UpdateState_BallAirborne      ; ST_BALL_AIRBORNE
+	dw UpdateState_BallShot          ; ST_BALL_SHOT
+	dw UpdateState_BallThrown        ; ST_BALL_THROWN
+	dw UpdateState_BallSentUpwards   ; ST_BALL_SENT_UPWARDS
+	dw UpdateState_BallTurning       ; ST_BALL_TURNING
+	dw Func_156d                     ; ST_UNKNOWN_EF
+	dw Func_156d                     ; ST_UNKNOWN_F0
+	dw Func_156d                     ; ST_UNKNOWN_F1
+	dw Func_156d                     ; ST_UNKNOWN_F2
 ; 0x1ec08c
 
-	INCROM $1ec08c, $1ecf3a
+	INCROM $1ec08c, $1ec124
+
+UpdateState_IceSkatinStart: ; 1ec124 (7b:4124)
+	update_anim_2
+	ld a, [wAnimationHasFinished]
+	and a
+	ret z
+
+	xor a
+	ld [wca86], a
+;	fallthrough
+
+SetState_IceSkatin: ; 1ec13c (7b:413c)
+	ld a, ST_ICE_SKATIN
+	ld [wWarioState], a
+
+	xor a
+	ld [wSFXLoopCounter], a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1ec15d
+	load_frameset_ptr Frameset_1fdd97
+	jr .asm_1ec167
+.asm_1ec15d
+	load_frameset_ptr Frameset_1fdd94
+.asm_1ec167
+	update_anim_2
+	ret
+; 0x1ec177
+
+UpdateState_IceSkatin: ; 1ec177 (7b:4177)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	farcall Func_19734
+	ld a, b
+	and a
+	jr nz, Func_1ec215
+
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, $0c
+	ld [wSFXLoopCounter], a
+	load_sound SFX_SLIDE
+.skip_sfx
+	update_anim_2
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1ec1d4
+	call Func_153f
+	call Func_1270
+	jr .asm_1ec1da
+.asm_1ec1d4
+	call Func_151e
+	call Func_1259
+.asm_1ec1da
+	ld a, [wca86]
+	cp $14
+	jr c, .asm_1ec1e6
+	ld a, $10
+	ld [wca86], a
+.asm_1ec1e6
+	farcall Func_198e0
+	ld a, b
+	and a
+	jr z, .asm_1ec205
+	ld hl, hffa8
+	ld de, wca61
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ret
+
+.asm_1ec205
+	ld a, ST_ICE_SKATIN_AIRBORNE
+	ld [wWarioState], a
+	ld a, FALLING_JUMP_VEL_INDEX
+	ld [wJumpVelIndex], a
+	ld a, JUMP_VEL_NORMAL
+	ld [wJumpVelTable], a
+	ret
+; 0x1ec215
+
+Func_1ec215: ; 1ec215 (7b:4215)
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1ec223
+	ld b, $03
+	call Func_1259
+	jp SetState_IceSkatinCrash
+.asm_1ec223
+	ld b, $03
+	call Func_1270
+	jp SetState_IceSkatinCrash
+; 0x1ec22b
+
+UpdateState_IceSkatinAirborne: ; 1ec22b (7b:422b)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wc0db]
+	and a
+	jp nz, SetState_IceSkatinCrash
+
+	farcall Func_19734
+	ld a, b
+	and a
+	jr nz, Func_1ec215
+	update_anim_2
+	call Func_1488
+	farcall Func_2b1a6
+	ld a, [wca86]
+	cp $14
+	jr c, .asm_1ec288
+	ld a, $10
+	ld [wca86], a
+.asm_1ec288
+	ld a, [wWarioState]
+	cp ST_ICE_SKATIN_AIRBORNE
+	ret nz ; done if not ice skatin airborne any more
+
+	farcall Func_199e9
+	ld a, b
+	and a
+	jr nz, .asm_1ec2aa
+	ld a, [wWarioState]
+	cp ST_ICE_SKATIN_AIRBORNE
+	ret nz ; done if not ice skatin airborne any more
+	jp Func_14de
+
+.asm_1ec2aa
+	call Func_14f6
+	ld a, [wWarioState]
+	cp ST_ICE_SKATIN_AIRBORNE
+	ret nz ; done if not ice skatin airborne any more
+
+	ld a, $10
+	ld [wca86], a
+	jp SetState_IceSkatin
+; 0x1ec2bb
+
+SetState_IceSkatinCrash: ; 1ec2bb (7b:42bb)
+	load_sound SFX_2E
+
+	ld a, ST_ICE_SKATIN_CRASH
+	ld [wWarioState], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld a, [wDirection]
+	xor $1 ; switch direction
+	ld [wDirection], a
+	and a
+	jr nz, .asm_1ec2e6
+	load_frameset_ptr Frameset_1fdda7
+	jr .asm_1ec2f0
+.asm_1ec2e6
+	load_frameset_ptr Frameset_1fdd9a
+.asm_1ec2f0
+	update_anim_2
+	ret
+; 0x1ec300
+
+UpdateState_IceSkatinCrash: ; 1ec300 (7b:4300)
+	update_anim_2
+	ld a, [wAnimationHasFinished]
+	and a
+	ret z
+	ld hl, wca61
+	ld de, hffa8
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ld b, $0c
+	farcall Func_c9f3
+	jp Func_1570
+; 0x1ec339
+
+	INCROM $1ec339, $1ec703
+
+UpdateState_HangingRail: ; 1ec703 (7b:4703)
+	ld a, [wWarioStateCounter]
+	and a
+	jr nz, .asm_1ec725
+	ld a, [wAnimationHasFinished]
+	and a
+	jr z, .asm_1ec725
+	ld a, $01
+	ld [wWarioStateCounter], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	load_frameset_ptr Frameset_1feeb4
+.asm_1ec725
+	update_anim_2
+
+	ld a, [wJoypadPressed]
+	bit B_BUTTON_F, a
+	jp nz, Func_1570.asm_157a
+	bit A_BUTTON_F, a
+	jp nz, Func_1ede4d
+	ld a, [wca9b]
+	and a
+	jp z, Func_1ede69
+	ret
+; 0x1ec749
+
+	INCROM $1ec749, $1ecf3a
 
 UpdateState_SplitHit: ; 1ecf3a (7b:4f3a)
 	update_anim_2
@@ -478,7 +705,407 @@ UpdateState_BlindAirborne: ; 1ed5e2 (7b:55e2)
 	jp SetState_BlindIdling
 ; 0x1ed660
 
-	INCROM $1ed660, $1edf93
+	INCROM $1ed660, $1ed972
+
+UpdateState_MagicRising: ; 1ed972 (7b:5972)
+	farcall Func_19b25
+	farcall Func_1996e
+	ld a, b
+	and a
+	jr nz, .asm_1ed9d5
+
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, $0c
+	ld [wSFXLoopCounter], a
+	load_sound SFX_7D
+.skip_sfx
+
+	ld a, $77
+	ldh [hCallFuncBank], a
+	call_hram UpdateAnimation
+
+	ld b, $01
+	call Func_129e
+	ld a, [wc0ba]
+	and $0f
+	cp $08
+	jr c, .asm_1ed9d4
+	call Func_114e
+	ld a, [wca78]
+	sub c
+	jr nc, .asm_1ed9d4
+	call Func_11d6
+.asm_1ed9d4
+	ret
+
+.asm_1ed9d5
+	ld hl, wca61
+	ld de, hffa8
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ld b, $12
+	farcall Func_c9f3
+
+	ld a, ST_MAGIC_STOPPING
+	ld [wWarioState], a
+
+	xor a
+	ld [wWarioStateCounter], a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld a, $77
+	ldh [hCallFuncBank], a
+	call_hram UpdateAnimation
+	ret
+; 0x1eda16
+
+UpdateState_MagicStopping: ; 1eda16 (7b:5a16)
+	ld hl, wWarioStateCounter
+	inc [hl]
+	ld a, [hl]
+	cp $20
+	ret c
+	jp Func_1570
+; 0x1eda21
+
+	INCROM $1eda21, $1edaf8
+
+Func_1edaf8: ; 1edaf8 (7b:5af8)
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1edb12
+	ld a, [wJoypadDown]
+	bit D_RIGHT_F, a
+	jp nz, SetState_BallTurning
+	load_frameset_ptr Frameset_1dd230
+	jr .asm_1edb24
+.asm_1edb12
+	ld a, [wJoypadDown]
+	bit D_LEFT_F, a
+	jp nz, SetState_BallTurning
+	load_frameset_ptr Frameset_1dd295
+
+.asm_1edb24
+	xor a
+	ld [wJumpVelTable], a
+	ld [wJumpVelIndex], a
+
+	ld a, ST_BALL_BOUNCING
+	ld [wWarioState], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	update_anim_3
+	ret
+; 0x1edb47
+
+UpdateState_BallBouncing: ; 1edb47 (7b:5b47)
+	update_anim_3
+	ld a, [wAnimationHasFinished]
+	and a
+	ret z
+;	fallthrough
+
+SetState_BallAirborne: ; 1edb5b (7b:5b5b)
+	load_sound SFX_66
+	ld a, JUMP_VEL_KNOCK_BACK
+	ld [wJumpVelTable], a
+
+	ld a, ST_BALL_AIRBORNE
+	ld [wWarioState], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1edb86
+	load_frameset_ptr Frameset_1dd2f3
+	jr .asm_1edb90
+.asm_1edb86
+	load_frameset_ptr Frameset_1dd2f6
+.asm_1edb90
+	update_anim_3
+	ret
+; 0x1edba0
+
+UpdateState_BallAirborne: ; 1edba0 (7b:5ba0)
+	update_anim_3
+
+	call Func_1ee02e
+	ld a, [wJumpVelIndex]
+	cp FALLING_JUMP_VEL_INDEX
+	ret c
+	farcall Func_199e9
+	ld a, b
+	and a
+	ret z
+	ld hl, hffa8
+	ld de, wca61
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	jp Func_1edaf8
+; 0x1edbd8
+
+	INCROM $1edbd8, $1edc15
+
+UpdateState_BallShot: ; 1edc15 (7b:5c15)
+	ld a, [wca9b]
+	and a
+	jr z, .asm_1edc91
+	bit 7, a
+	jr z, .asm_1edc71
+	and $7f
+	ld [wca9b], a
+	dec a
+	jr z, .asm_1edc5a
+	dec a
+	jr z, .asm_1edc2e
+	dec a
+	jr z, .asm_1edc41
+	ret
+
+.asm_1edc2e
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	load_frameset_ptr Frameset_1dd2d1
+	jr .asm_1edc71
+
+.asm_1edc41
+	ld hl, Pals_c9d0
+	call Func_1af6
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	load_frameset_ptr Frameset_1dd27a
+	jr .asm_1edc71
+
+.asm_1edc5a
+	ld hl, Pals_c9c0
+	call Func_1af6
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	load_frameset_ptr Frameset_1dd26c
+
+.asm_1edc71
+	update_anim_3
+
+	ld a, [wca9b]
+	cp $02
+	ret nz
+	ld a, [wAnimationHasFinished]
+	and a
+	ret z
+	ld a, $83
+	ld [wca9b], a
+	ret
+
+.asm_1edc91
+	ld a, DIRECTION_LEFT
+	ld [wDirection], a
+
+	ld a, ST_BALL_THROWN
+	ld [wWarioState], a
+
+	xor a
+	ld [wSFXLoopCounter], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+
+	ld a, $6
+	ld [wJumpVelIndex], a
+	ld a, JUMP_VEL_HIGH_JUMP
+	ld [wJumpVelTable], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	load_frameset_ptr Frameset_1dd2ee
+	update_anim_3
+	ret
+; 0x1edcd0
+
+UpdateState_BallThrown: ; 1edcd0 (7b:5cd0)
+	update_anim_3
+
+	call Func_1488
+	ld a, [wJumpVelIndex]
+	cp FALLING_JUMP_VEL_INDEX
+	jr nc, .falling
+; rising
+	ld b, $03
+	call Func_1270
+	ret
+
+.falling
+	ld b, $02
+	call Func_1270
+	farcall Func_199e9
+	ld a, b
+	and a
+	ret z
+	ld hl, hffa8
+	ld de, wca61
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+
+	xor a
+	ld [wca8a], a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK("WRAM1")
+	ldh [rSVBK], a
+	ld a, [wNumShootGoals]
+	cp 3
+	jr z, .asm_1edd3c
+	pop af
+	ldh [rSVBK], a
+	farcall Func_206eb
+	ret
+
+.asm_1edd3c
+	pop af
+	ldh [rSVBK], a
+
+	ld a, ST_BALL_SENT_UPWARDS
+	ld [wWarioState], a
+	load_sound SFX_66
+
+	xor a
+	ld [wSFXLoopCounter], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wJumpVelIndex], a
+	inc a
+	ld [wca8a], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	load_frameset_ptr Frameset_1dd2ee
+	update_anim_3
+	ret
+; 0x1edd7e
+
+UpdateState_BallSentUpwards: ; 1edd7e (7b:5d7e)
+	update_anim_3
+
+	ld a, [wJumpVelIndex]
+	cp FALLING_JUMP_VEL_INDEX
+	jr nc, .falling
+; rising
+	ld b, $03
+	call Func_129e
+	farcall Func_1996e
+	ld a, b
+	and a
+	jp z, Func_1197
+	ld a, FALLING_JUMP_VEL_INDEX
+	ld [wJumpVelIndex], a
+	ld a, JUMP_VEL_NORMAL
+	ld [wJumpVelTable], a
+	ret
+
+.falling
+	call Func_1488
+	farcall Func_199e9
+	ld a, b
+	and a
+	ret z
+	ld hl, hffa8
+	ld de, wca61
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	xor a
+	ld [wca8a], a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	farcall Func_206eb
+	ret
+; 0x1eddf2
+
+SetState_BallTurning: ; 1eddf2 (7b:5df2)
+	xor a
+	ld [wJumpVelTable], a
+	ld [wJumpVelIndex], a
+
+	ld a, ST_BALL_TURNING
+	ld [wWarioState], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld a, [wDirection]
+	xor $1 ; switch direction
+	ld [wDirection], a
+	and a
+	jr nz, .asm_1ede1c
+	load_frameset_ptr Frameset_1dd28e
+	jr .asm_1ede26
+.asm_1ede1c
+	load_frameset_ptr Frameset_1dd287
+.asm_1ede26
+	update_anim_3
+	ret
+; 0x1ede36
+
+UpdateState_BallTurning: ; 1ede36 (7b:5e36)
+	update_anim_3
+	ld a, [wAnimationHasFinished]
+	and a
+	ret z
+	jp SetState_BallAirborne
+; 0x1ede4d
+
+Func_1ede4d: ; 1ede4d (7b:5e4d)
+	call Func_1079
+	call Func_161a
+	ld hl, Pals_c800
+	call Func_1af6
+	farcall StartJump_FromInput
+	ret
+; 0x1ede69
+
+Func_1ede69: ; 1ede69 (7b:5e69)
+	call Func_1079
+	call Func_161a
+	ld hl, Pals_c800
+	call Func_1af6
+	farcall Func_1e174
+	ret
+; 0x1ede85
+
+	INCROM $1ede85, $1edf93
 
 Func_1edf93: ; 1edf93 (7b:5f93)
 	ld a, [wJoypadPressed]
@@ -550,5 +1177,17 @@ Func_1ee00f: ; 1ee00f (7b:600f)
 	ret
 ; 0x1ee02e
 
-	INCROM $1ee02e, $1f0000
+Func_1ee02e: ; 1ee02e (7b:602e)
+	call Func_1488
+	farcall Func_2b1a6
+	ld a, [wca86]
+	cp $08
+	jr c, .asm_1ee04c
+	ld a, $04
+	ld [wca86], a
+.asm_1ee04c
+	ret
+; 0x1ee04d
+
+	INCROM $1ee04d, $1f0000
 

@@ -77,7 +77,7 @@
 	const SFX_0D                           ; 10d
 	const SFX_0E                           ; 10e
 	const SFX_0F                           ; 10f
-	const SFX_LAND                           ; 110
+	const SFX_LAND                         ; 110
 	const SFX_11                           ; 111
 	const SFX_12                           ; 112
 	const SFX_13                           ; 113

@@ -36,7 +36,7 @@ ROMX $03
 ROMX $04
 	"Bank 4"
 ROMX $05
-	"Bank 5"
+	"Framesets 1"
 ROMX $06
 	"Bank 6"
 ROMX $07
@@ -242,7 +242,7 @@ ROMX $72
 ROMX $76
 	"Bank 76"
 ROMX $77
-	"Bank 77"
+	"Framesets 3"
 ROMX $78
 	"Bank 78"
 ROMX $79
@@ -258,7 +258,7 @@ ROMX $7d
 ROMX $7e
 	"Bank 7E"
 ROMX $7f
-	"Bank 7F"
+	"Framesets 2"
 WRAM0
 	"WRAM0"
 WRAMX 1

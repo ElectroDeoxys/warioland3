@@ -30,7 +30,19 @@ hffaa:: ; ffaa
 hffab:: ; ffab
 	ds $1
 
-	ds $5
+	ds $1
+
+hffad:: ; ffad
+	ds $1
+
+hffae:: ; ffae
+	ds $1
+
+hffaf:: ; ffaf
+	ds $1
+
+hffb0:: ; ffb0
+	ds $1
 
 hffb1:: ; ffb1
 	ds $1

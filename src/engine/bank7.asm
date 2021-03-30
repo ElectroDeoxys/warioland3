@@ -12,7 +12,7 @@ Func_1c000: ; 1c000 (7:4000)
 	jr c, .asm_1c04d
 	cp $60 ; ST_ON_FIRE
 	jr c, .asm_1c03d
-	cp $b0 ; ST_UNKNOWN_B0
+	cp $b0 ; ST_ICE_SKATIN_START
 	jr c, .asm_1c02d
 	farcall Func_1ec000
 	ret
@@ -2196,7 +2196,7 @@ UpdateState_CrouchAirborne: ; 1d522 (7:5522)
 	cp FALLING_JUMP_VEL_INDEX
 	jr nc, .falling
 
-; raising
+; rising
 	farcall Func_1996e
 	ld a, b
 	and a
@@ -2318,7 +2318,7 @@ UpdateState_Stung: ; 1d627 (7:5627)
 	bit 7, [hl]
 	jr z, .falling
 
-; raising
+; rising
 	ld a, [hl]
 	cpl
 	inc a
@@ -3402,7 +3402,7 @@ UpdateState_RollingAirborne: ; 1e1e9 (7:61e9)
 	bit 7, [hl]
 	jr z, .falling
 
-; raising
+; rising
 	ld a, [hl]
 	cpl
 	inc a
@@ -4858,7 +4858,7 @@ HandleInput_Airborne: ; 1f077 (7:7077)
 
 ; not pressing A button any more, so
 ; set wJumpingUpwards to false and
-; if still in a raising jump vel index
+; if still in a rising jump vel index
 ; then immediately set it to the falling index
 	xor a ; FALSE
 	ld [wJumpingUpwards], a
@@ -4893,7 +4893,7 @@ HandleInput_Airborne: ; 1f077 (7:7077)
 	bit 7, [hl]
 	jr z, .falling
 
-; raising
+; rising
 	ld a, [hl]
 	cpl
 	inc a

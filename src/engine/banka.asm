@@ -39,7 +39,7 @@ Func_28000: ; 28000 (a:4000)
 	dw UpdateState_ElectricDizzy              ; ST_ELECTRIC_DIZZY
 	dw UpdateState_TurningInvisible           ; ST_TURNING_INVISIBLE
 	dw UpdateState_PuffyInflating             ; ST_PUFFY_INFLATING
-	dw UpdateState_PuffyRaising               ; ST_PUFFY_RAISING
+	dw UpdateState_PuffyRising               ; ST_PUFFY_RISING
 	dw UpdateState_PuffyTurning               ; ST_PUFFY_TURNING
 	dw UpdateState_PuffyDeflating             ; ST_PUFFY_DEFLATING
 	dw UpdateState_ZombieIdling               ; ST_ZOMBIE_IDLING
@@ -396,7 +396,7 @@ UpdateState_HotAirborne: ; 2839f (a:439f)
 	cp FALLING_JUMP_VEL_INDEX
 	jr nc, .falling
 
-; raising
+; rising
 	farcall Func_1996e
 	ld a, b
 	and a
@@ -1861,7 +1861,7 @@ UpdateState_Electric: ; 294bf (a:54bf)
 	bit 7, [hl]
 	jr z, .falling
 
-; raising
+; rising
 	ld a, [hl]
 	cpl
 	inc a
@@ -2019,8 +2019,8 @@ UpdateState_PuffyInflating: ; 29816 (a:5816)
 	ret z
 ;	fallthrough
 
-SetState_PuffyRaising: ; 2982b (a:582b)
-	ld a, ST_PUFFY_RAISING
+SetState_PuffyRising: ; 2982b (a:582b)
+	ld a, ST_PUFFY_RISING
 	ld [wWarioState], a
 
 	xor a
@@ -2053,7 +2053,7 @@ SetState_PuffyRaising: ; 2982b (a:582b)
 	ret
 ; 0x29871
 
-UpdateState_PuffyRaising: ; 29871 (a:5871)
+UpdateState_PuffyRising: ; 29871 (a:5871)
 	farcall Func_19b25
 	ld a, [wc0d7]
 	and a
@@ -2129,7 +2129,7 @@ UpdateState_PuffyTurning: ; 298f3 (a:58f3)
 	ld a, [wAnimationHasFinished]
 	and a
 	ret z
-	jp SetState_PuffyRaising
+	jp SetState_PuffyRising
 ; 0x2992a
 
 SetState_PuffyDeflating: ; 2992a (a:592a)
@@ -2870,7 +2870,7 @@ UpdateState_BouncyAirborne: ; 2a0f9 (a:60f9)
 	cp FALLING_JUMP_VEL_INDEX
 	jr nc, .falling
 
-; raising
+; rising
 	farcall Func_1996e
 	ld a, b
 	and a
@@ -4118,7 +4118,7 @@ Func_2b1cc: ; 2b1cc (a:71cc)
 	bit 7, [hl]
 	jr z, .falling
 
-; raising
+; rising
 	ld a, [hl]
 	cpl
 	inc a
@@ -4208,8 +4208,8 @@ Func_2b2c2: ; 2b2c2 (a:72c2)
 	call Func_2b342
 	farcall Func_1996e
 	ld a, [wWarioState]
-	cp ST_PUFFY_RAISING
-	ret nz ; done if not puffy raising
+	cp ST_PUFFY_RISING
+	ret nz ; done if not puffy rising
 
 	ld a, b
 	and a

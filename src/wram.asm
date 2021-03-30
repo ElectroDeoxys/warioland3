@@ -1079,7 +1079,7 @@ w1d142:: ; d142
 w1d143:: ; d143
 	ds $1
 
-w1d144:: ; d144
+wNumShootGoals:: ; d144
 	ds $1
 
 w1d145:: ; d145

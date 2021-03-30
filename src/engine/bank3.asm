@@ -113,7 +113,33 @@ Pals_c920: ; c920 (3:4920)
 	rgb 29,  1, 19
 ; 0xc930
 
-	INCROM $c930, $c9f3
+	INCROM $c930, $c9c0
+
+Pals_c9c0: ; c9c0 (03:49c0)
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 30,  8,  5
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 30,  0,  3
+	rgb 31, 30, 12
+	rgb  6,  5, 26
+; 0xc9d0
+
+Pals_c9d0: ; c9d0 (03:49d0)
+	rgb  0, 22, 16
+	rgb 31, 30,  0
+	rgb 30,  0,  3
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 30,  0,  3
+	rgb 31, 30, 12
+	rgb  6,  5, 26
+; 0xc9e0
+
+	INCROM $c9e0, $c9f3
 
 Func_c9f3: ; c9f3 (3:49f3)
 	ld a, [wcce1]

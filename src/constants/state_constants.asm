@@ -131,7 +131,7 @@
 	const ST_ELECTRIC_DIZZY                ; 81
 	const ST_TURNING_INVISIBLE             ; 82
 	const ST_PUFFY_INFLATING               ; 83
-	const ST_PUFFY_RAISING                 ; 84
+	const ST_PUFFY_RISING                  ; 84
 	const ST_PUFFY_TURNING                 ; 85
 	const ST_PUFFY_DEFLATING               ; 86
 	const ST_ZOMBIE_IDLING                 ; 87
@@ -175,10 +175,10 @@
 	const ST_UNKNOWN_AD                    ; ad
 	const ST_UNKNOWN_AE                    ; ae
 	const ST_UNKNOWN_AF                    ; af
-	const ST_UNKNOWN_B0                    ; b0
-	const ST_UNKNOWN_B1                    ; b1
-	const ST_UNKNOWN_B2                    ; b2
-	const ST_UNKNOWN_B3                    ; b3
+	const ST_ICE_SKATIN_START              ; b0
+	const ST_ICE_SKATIN                    ; b1
+	const ST_ICE_SKATIN_AIRBORNE           ; b2
+	const ST_ICE_SKATIN_CRASH              ; b3
 	const ST_UNKNOWN_B4                    ; b4
 	const ST_UNKNOWN_B5                    ; b5
 	const ST_UNKNOWN_B6                    ; b6
@@ -191,7 +191,7 @@
 	const ST_UNKNOWN_BD                    ; bd
 	const ST_UNKNOWN_BE                    ; be
 	const ST_UNKNOWN_BF                    ; bf
-	const ST_UNKNOWN_C0                    ; c0
+	const ST_HANGING_RAIL                  ; c0
 	const ST_UNKNOWN_C1                    ; c1
 	const ST_UNKNOWN_C2                    ; c2
 	const ST_UNKNOWN_C3                    ; c3
@@ -227,17 +227,17 @@
 	const ST_UNKNOWN_E1                    ; e1
 	const ST_UNKNOWN_E2                    ; e2
 	const ST_UNKNOWN_E3                    ; e3
-	const ST_UNKNOWN_E4                    ; e4
-	const ST_UNKNOWN_E5                    ; e5
+	const ST_MAGIC_RISING                  ; e4
+	const ST_MAGIC_STOPPING                ; e5
 	const ST_UNKNOWN_E6                    ; e6
 	const ST_UNKNOWN_E7                    ; e7
 	const ST_UNKNOWN_E8                    ; e8
-	const ST_UNKNOWN_E9                    ; e9
-	const ST_UNKNOWN_EA                    ; ea
-	const ST_UNKNOWN_EB                    ; eb
-	const ST_UNKNOWN_EC                    ; ec
-	const ST_UNKNOWN_ED                    ; ed
-	const ST_UNKNOWN_EE                    ; ee
+	const ST_BALL_BOUNCING                 ; e9
+	const ST_BALL_AIRBORNE                 ; ea
+	const ST_BALL_SHOT                     ; eb
+	const ST_BALL_THROWN                   ; ec
+	const ST_BALL_SENT_UPWARDS             ; ed
+	const ST_BALL_TURNING                  ; ee
 	const ST_UNKNOWN_EF                    ; ef
 	const ST_UNKNOWN_F0                    ; f0
 	const ST_UNKNOWN_F1                    ; f1

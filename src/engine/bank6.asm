@@ -1128,7 +1128,7 @@ UpdateState_SandJumping: ; 1a1c5 (6:61c5)
 	cp FALLING_JUMP_VEL_INDEX
 	jp nc, SetState_SandFalling
 
-; raising
+; rising
 	farcall Func_1996e
 	ld a, b
 	and a

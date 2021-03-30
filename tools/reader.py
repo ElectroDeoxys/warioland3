@@ -38,7 +38,7 @@ def standardiseList(ls):
     return list(dict.fromkeys(listSorted))
 
 def offsetHeaderStr(offset):
-    return '; {:0x} ('.format(offset) + str(floor(offset / 0x4000)) + ':' + '{:0x}'.format(absOffsetToRel(offset)) + ')\n'
+    return '; {:0x} ('.format(offset) + '{:02x}:'.format(floor(offset / 0x4000)) + '{:0x}'.format(absOffsetToRel(offset)) + ')\n'
 
 def getDataString(offset, len, suffix = 'Data_'):
     outStr = suffix + '{:0x}'.format(offset)

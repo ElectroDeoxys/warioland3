@@ -1813,7 +1813,7 @@ Func_61f10: ; 61f10 (18:5f10)
 	ld [w1d141], a
 	ld [w1d142], a
 	ld [w1d143], a
-	ld [w1d144], a
+	ld [wNumShootGoals], a
 	ld [w1d145], a
 	ret
 ; 0x61f2a
@@ -1825,7 +1825,7 @@ Func_61f2a: ; 61f2a (18:5f2a)
 	ld [w1d141], a
 	ld [w1d142], a
 	ld [w1d143], a
-	ld [w1d144], a
+	ld [wNumShootGoals], a
 	ld [w1d145], a
 	ret
 ; 0x61f41

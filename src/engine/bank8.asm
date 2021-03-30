@@ -302,7 +302,116 @@ Func_20202: ; 20202 (8:4202)
 	ret
 ; 0x20203
 
-	INCROM $20203, $20ed3
+	INCROM $20203, $206eb
+
+Func_206eb: ; 206eb (8:46eb)
+	ld a, [wca8e]
+	cp $0e
+	call z, Func_16d9
+	call Func_1079
+	call Func_161a
+	ld a, $01
+	ld [wca8c], a
+
+	load_sound SFX_13
+
+	ld a, ST_STUNG
+	ld [wWarioState], a
+
+	xor a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wca9a], a
+	ld [wca89], a
+	ld [wca9d], a
+	ld [wca96], a
+	ld a, $6
+	ld [wJumpVelIndex], a
+	ld a, $ff
+	ld [wca70], a
+	ld a, $f7
+	ld [wca71], a
+	ld a, $09
+	ld [wca72], a
+	ld a, [wca8b]
+	and a
+	jr z, .asm_20774
+	ld a, $e5
+	ld [wca6f], a
+
+	ldh a, [hffa8]
+	ldh [hffad], a
+	ldh a, [hffa9]
+	ldh [hffae], a
+	ldh a, [hffaa]
+	ldh [hffaf], a
+	ldh a, [hffab]
+	ldh [hffb0], a
+
+	farcall Func_1996e
+	ld a, b
+	and a
+	jr nz, .asm_20780
+
+	xor a
+	ld [wca8b], a
+	ldh a, [hffad]
+	ldh [hffa8], a
+	ldh a, [hffae]
+	ldh [hffa9], a
+	ldh a, [hffaf]
+	ldh [hffaa], a
+	ldh a, [hffb0]
+	ldh [hffab], a
+
+.asm_20774
+	ld a, $e5
+	ld [wca6f], a
+	ld a, JUMP_VEL_KNOCK_BACK
+	ld [wJumpVelTable], a
+	jr .asm_20799
+
+.asm_20780
+	ld a, $f1
+	ld [wca6f], a
+	xor a ; JUMP_VEL_NONE
+	ld [wJumpVelTable], a
+
+	ldh a, [hffad]
+	ldh [hffa8], a
+	ldh a, [hffae]
+	ldh [hffa9], a
+	ldh a, [hffaf]
+	ldh [hffaa], a
+	ldh a, [hffb0]
+	ldh [hffab], a
+
+.asm_20799
+	ld a, $04
+	ld [wca7b], a
+	ld a, $78
+	ld [wca7c + 0], a
+	ld a, $00
+	ld [wca7c + 1], a
+	call Func_15b0
+	load_oam_ptr OAM_15955
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_207d3
+	load_frameset_ptr Frameset_15f7f
+	jr .asm_207dd
+.asm_207d3
+	load_frameset_ptr Frameset_15f70
+.asm_207dd
+	update_anim_1
+	ret
+; 0x207ed
+
+	INCROM $207ed, $20ed3
 
 SetState_OnFire: ; 20ed3 (8:4ed3)
 	ld a, ST_ON_FIRE
