@@ -1188,6 +1188,3 @@ Func_1ee02e: ; 1ee02e (7b:602e)
 .asm_1ee04c
 	ret
 ; 0x1ee04d
-
-	INCROM $1ee04d, $1f0000
-

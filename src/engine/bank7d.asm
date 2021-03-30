@@ -263,4 +263,4 @@ Map_1f6194: ; 1f6194 (7d:6194)
 INCBIN "data/maps/unk_map4.bin"
 ; 0x1f628c
 
-	INCROM $1f628c, $1f8000
+	INCROM $1f628c, $1f6af3

@@ -17,4 +17,4 @@ Func_dc000: ; dc000 (37:4000)
     dw Func_28d
 ; 0xdc01e
 
-	INCROM $dc01e, $e0000
+	INCROM $dc01e, $dd858

@@ -553,4 +553,4 @@ Data_9abf7: ; 9abf7 (26:6bf7)
 	db $03 ; TREASURE_101
 ; 0x9ac5d
 
-	INCROM $9ac5d, $9c000
+	INCROM $9ac5d, $9ad86

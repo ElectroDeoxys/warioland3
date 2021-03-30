@@ -8995,5 +8995,3 @@ Func_bd3c: ; bd3c (2:7d3c)
 	ld [wc0e3], a
 	ret
 ; 0xbd7c
-
-	INCROM $bd7c, $c000

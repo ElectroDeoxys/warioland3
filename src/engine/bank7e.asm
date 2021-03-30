@@ -19,4 +19,4 @@ Func_1f8000: ; 1f8000 (7e:4000)
     dw Func_28d
 ; 0x1f8022
 
-	INCROM $1f8022, $1fc000
+	INCROM $1f8022, $1fbde3

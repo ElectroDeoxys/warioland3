@@ -161,4 +161,4 @@ LoadHiddenFigureGfx: ; db41e (36:741e)
 	ret
 ; 0xdb486
 
-	INCROM $db486, $dc000
+	INCROM $db486, $dbbf7

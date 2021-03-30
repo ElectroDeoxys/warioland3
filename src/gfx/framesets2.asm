@@ -821,5 +821,3 @@ Frameset_1ffd19: ; 1ffd19 (7f:7d19)
 	db $0d,  4
 	db $ff
 ; 0x1ffd1c
-
-	INCROM $1ffd1c, $200000

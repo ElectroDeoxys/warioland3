@@ -69,26 +69,12 @@ ROMX $14
 	"Bank 14"
 ROMX $15
 	"Bank 15"
-ROMX $16
-	"Bank 16"
-ROMX $17
-	"Bank 17"
 ROMX $18
 	"Bank 18"
 ROMX $19
 	"Bank 19"
 ROMX $1a
 	"Bank 1A"
-ROMX $1b
-	"Bank 1B"
-ROMX $1c
-	"Bank 1C"
-ROMX $1d
-	"Bank 1D"
-ROMX $1e
-	"Bank 1E"
-ROMX $1f
-	"Bank 1F"
 ROMX $20
 	"Bank 20"
 ROMX $21
@@ -173,14 +159,6 @@ ROMX $48
 	"Bank 48"
 ROMX $49
 	"Bank 49"
-ROMX $4a
-	"Bank 4A"
-ROMX $4b
-	"Bank 4B"
-ROMX $4c
-	"Bank 4C"
-ROMX $4d
-	"Bank 4D"
 ROMX $4e
 	"Room Special Tiles 1"
 ROMX $4f
@@ -203,8 +181,6 @@ ROMX $57
 	"Bank 57"
 ROMX $58
 	"Bank 58"
-ROMX $59
-	"Bank 59"
 ROMX $60
 	"Bank 60"
 ROMX $61

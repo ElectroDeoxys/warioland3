@@ -374,4 +374,4 @@ Pals_d1fe: ; d1fe (3:51fe)
 	rgb  4,  5,  0
 ; 0xd206
 
-	INCROM $d206, $10000
+	INCROM $d206, $d912

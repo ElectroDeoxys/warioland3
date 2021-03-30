@@ -35,4 +35,4 @@ Func_1c8570: ; 1c8570 (72:4570)
     dw Func_142b
 ; 0x1c8586
 
-	INCROM $1c8586, $1cc000
+	INCROM $1c8586, $1cb5e4

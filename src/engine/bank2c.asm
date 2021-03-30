@@ -3,4 +3,4 @@
 Data_b0f80: ; b0f80 (2c:4f80)
     INCROM $b0f80, $b1780
 
-	INCROM $b1780, $b4000
+	INCROM $b1780, $b3c47

@@ -6129,7 +6129,3 @@ Pals_ce440: ; ce440 (33:6440)
 	rgb  8,  0, 19
 	rgb  0,  0,  0
 ; 0xce480
-
-rept $1b80
-    db $ff
-endr
