@@ -2,7 +2,7 @@
 	const ST_IDLING                        ; 00
 	const ST_WALKING                       ; 01
 	const ST_TURNING                       ; 02
-	const ST_UNKNOWN_03                    ; 03
+	const ST_UNUSED_03                     ; 03
 	const ST_AIRBORNE                      ; 04
 	const ST_LANDING                       ; 05
 	const ST_CROUCH_SLIDING                ; 06
@@ -26,9 +26,9 @@
 	const ST_PIPE_GOING_UP                 ; 18
 	const ST_UNKNOWN_19                    ; 19
 	const ST_SMASH_ATTACKING               ; 1a
-	const ST_UNKNOWN_1B                    ; 1b
-	const ST_UNKNOWN_1C                    ; 1c
-	const ST_UNKNOWN_1D                    ; 1d
+	const ST_UNUSED_1B                     ; 1b
+	const ST_UNUSED_1C                     ; 1c
+	const ST_UNUSED_1D                     ; 1d
 	const ST_PICKING_UP                    ; 1e
 	const ST_GRAB_IDLING                   ; 1f
 	const ST_GRAB_WALKING                  ; 20
@@ -44,9 +44,9 @@
 	const ST_PICKED_UP                     ; 2a
 	const ST_GROUND_SHAKE_STUNNED          ; 2b
 	const ST_ENTERING_DOOR                 ; 2c
-	const ST_UNKNOWN_2D                    ; 2d
-	const ST_UNKNOWN_2E                    ; 2e
-	const ST_UNKNOWN_2F                    ; 2f
+	const ST_UNUSED_2D                     ; 2d
+	const ST_UNUSED_2E                     ; 2e
+	const ST_UNUSED_2F                     ; 2f
 	const ST_UNKNOWN_30                    ; 30
 	const ST_UNKNOWN_31                    ; 31
 	const ST_DRAGGED_DOWN                  ; 32
@@ -81,20 +81,20 @@
 	const ST_UNKNOWN_4F                    ; 4f
 	const ST_UNKNOWN_50                    ; 50
 	const ST_UNKNOWN_51                    ; 51
-	const ST_UNKNOWN_52                    ; 52
-	const ST_UNKNOWN_53                    ; 53
-	const ST_UNKNOWN_54                    ; 54
-	const ST_UNKNOWN_55                    ; 55
-	const ST_UNKNOWN_56                    ; 56
-	const ST_UNKNOWN_57                    ; 57
-	const ST_UNKNOWN_58                    ; 58
-	const ST_UNKNOWN_59                    ; 59
-	const ST_UNKNOWN_5A                    ; 5a
-	const ST_UNKNOWN_5B                    ; 5b
-	const ST_UNKNOWN_5C                    ; 5c
-	const ST_UNKNOWN_5D                    ; 5d
-	const ST_UNKNOWN_5E                    ; 5e
-	const ST_UNKNOWN_5F                    ; 5f
+	const ST_UNUSED_52                     ; 52
+	const ST_UNUSED_53                     ; 53
+	const ST_UNUSED_54                     ; 54
+	const ST_UNUSED_55                     ; 55
+	const ST_UNUSED_56                     ; 56
+	const ST_UNUSED_57                     ; 57
+	const ST_UNUSED_58                     ; 58
+	const ST_UNUSED_59                     ; 59
+	const ST_UNUSED_5A                     ; 5a
+	const ST_UNUSED_5B                     ; 5b
+	const ST_UNUSED_5C                     ; 5c
+	const ST_UNUSED_5D                     ; 5d
+	const ST_UNUSED_5E                     ; 5e
+	const ST_UNUSED_5F                     ; 5f
 	const ST_ON_FIRE                       ; 60
 	const ST_ON_FIRE_AIRBORNE              ; 61
 	const ST_HOT                           ; 62
@@ -165,36 +165,36 @@
 	const ST_BAT_FLYING                    ; a3
 	const ST_BAT_FALLING                   ; a4
 	const ST_IN_BUBBLE                     ; a5
-	const ST_UNKNOWN_A6                    ; a6
-	const ST_UNKNOWN_A7                    ; a7
-	const ST_UNKNOWN_A8                    ; a8
-	const ST_UNKNOWN_A9                    ; a9
-	const ST_UNKNOWN_AA                    ; aa
-	const ST_UNKNOWN_AB                    ; ab
-	const ST_UNKNOWN_AC                    ; ac
-	const ST_UNKNOWN_AD                    ; ad
-	const ST_UNKNOWN_AE                    ; ae
-	const ST_UNKNOWN_AF                    ; af
+	const ST_UNUSED_A6                     ; a6
+	const ST_UNUSED_A7                     ; a7
+	const ST_UNUSED_A8                     ; a8
+	const ST_UNUSED_A9                     ; a9
+	const ST_UNUSED_AA                     ; aa
+	const ST_UNUSED_AB                     ; ab
+	const ST_UNUSED_AC                     ; ac
+	const ST_UNUSED_AD                     ; ad
+	const ST_UNUSED_AE                     ; ae
+	const ST_UNUSED_AF                     ; af
 	const ST_ICE_SKATIN_START              ; b0
 	const ST_ICE_SKATIN                    ; b1
 	const ST_ICE_SKATIN_AIRBORNE           ; b2
 	const ST_ICE_SKATIN_CRASH              ; b3
-	const ST_UNKNOWN_B4                    ; b4
-	const ST_UNKNOWN_B5                    ; b5
-	const ST_UNKNOWN_B6                    ; b6
-	const ST_UNKNOWN_B7                    ; b7
+	const ST_UNUSED_B4                     ; b4
+	const ST_UNUSED_B5                     ; b5
+	const ST_UNUSED_B6                     ; b6
+	const ST_UNUSED_B7                     ; b7
 	const ST_UNKNOWN_B8                    ; b8
 	const ST_UNKNOWN_B9                    ; b9
 	const ST_UNKNOWN_BA                    ; ba
 	const ST_UNKNOWN_BB                    ; bb
 	const ST_UNKNOWN_BC                    ; bc
-	const ST_UNKNOWN_BD                    ; bd
-	const ST_UNKNOWN_BE                    ; be
-	const ST_UNKNOWN_BF                    ; bf
+	const ST_UNUSED_BD                     ; bd
+	const ST_UNUSED_BE                     ; be
+	const ST_UNUSED_BF                     ; bf
 	const ST_HANGING_RAIL                  ; c0
-	const ST_UNKNOWN_C1                    ; c1
-	const ST_UNKNOWN_C2                    ; c2
-	const ST_UNKNOWN_C3                    ; c3
+	const ST_UNUSED_C1                     ; c1
+	const ST_UNUSED_C2                     ; c2
+	const ST_UNUSED_C3                     ; c3
 	const ST_UNKNOWN_C4                    ; c4
 	const ST_UNKNOWN_C5                    ; c5
 	const ST_UNKNOWN_C6                    ; c6
@@ -205,8 +205,8 @@
 	const ST_UNKNOWN_CB                    ; cb
 	const ST_UNKNOWN_CC                    ; cc
 	const ST_UNKNOWN_CD                    ; cd
-	const ST_UNKNOWN_CE                    ; ce
-	const ST_UNKNOWN_CF                    ; cf
+	const ST_UNUSED_CE                     ; ce
+	const ST_UNUSED_CF                     ; cf
 	const ST_SPLIT_HIT                     ; d0
 	const ST_SPLIT_KNOCKED_BACK            ; d1
 	const ST_SPLITTING                     ; d2
@@ -216,9 +216,9 @@
 	const ST_UNKNOWN_D6                    ; d6
 	const ST_UNKNOWN_D7                    ; d7
 	const ST_UNKNOWN_D8                    ; d8
-	const ST_UNKNOWN_D9                    ; d9
-	const ST_UNKNOWN_DA                    ; da
-	const ST_UNKNOWN_DB                    ; db
+	const ST_UNUSED_D9                     ; d9
+	const ST_UNUSED_DA                     ; da
+	const ST_UNUSED_DB                     ; db
 	const ST_BLIND_IDLING                  ; dc
 	const ST_BLIND_WALKING                 ; dd
 	const ST_BLIND_TURNING                 ; de
@@ -226,11 +226,11 @@
 	const ST_UNKNOWN_E0                    ; e0
 	const ST_UNKNOWN_E1                    ; e1
 	const ST_UNKNOWN_E2                    ; e2
-	const ST_UNKNOWN_E3                    ; e3
+	const ST_UNUSED_E3                     ; e3
 	const ST_MAGIC_RISING                  ; e4
 	const ST_MAGIC_STOPPING                ; e5
 	const ST_UNKNOWN_E6                    ; e6
-	const ST_UNKNOWN_E7                    ; e7
+	const ST_UNUSED_E7                     ; e7
 	const ST_UNKNOWN_E8                    ; e8
 	const ST_BALL_BOUNCING                 ; e9
 	const ST_BALL_AIRBORNE                 ; ea
@@ -238,7 +238,7 @@
 	const ST_BALL_THROWN                   ; ec
 	const ST_BALL_SENT_UPWARDS             ; ed
 	const ST_BALL_TURNING                  ; ee
-	const ST_UNKNOWN_EF                    ; ef
-	const ST_UNKNOWN_F0                    ; f0
-	const ST_UNKNOWN_F1                    ; f1
-	const ST_UNKNOWN_F2                    ; f2
+	const ST_UNUSED_EF                     ; ef
+	const ST_UNUSED_F0                     ; f0
+	const ST_UNUSED_F1                     ; f1
+	const ST_UNUSED_F2                     ; f2

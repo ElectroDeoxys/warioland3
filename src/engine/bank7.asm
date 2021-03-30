@@ -31,7 +31,7 @@ Func_1c000: ; 1c000 (7:4000)
 	dw UpdateState_Idling              ; ST_IDLING
 	dw UpdateState_Walking             ; ST_WALKING
 	dw UpdateState_Turning             ; ST_TURNING
-	dw Func_156d                       ; ST_UNKNOWN_03
+	dw Func_156d                       ; ST_UNUSED_03
 	dw UpdateState_Airborne            ; ST_AIRBORNE
 	dw UpdateState_Landing             ; ST_LANDING
 	dw UpdateState_CrouchSliding       ; ST_CROUCH_SLIDING
@@ -55,9 +55,9 @@ Func_1c000: ; 1c000 (7:4000)
 	dw UpdateState_PipeGoingUp         ; ST_PIPE_GOING_UP
 	dw $585c                           ; ST_UNKNOWN_19
 	dw UpdateState_SmashAttacking      ; ST_SMASH_ATTACKING
-	dw Func_156d                       ; ST_UNKNOWN_1B
-	dw Func_156d                       ; ST_UNKNOWN_1C
-	dw Func_156d                       ; ST_UNKNOWN_1D
+	dw Func_156d                       ; ST_UNUSED_1B
+	dw Func_156d                       ; ST_UNUSED_1C
+	dw Func_156d                       ; ST_UNUSED_1D
 	dw UpdateState_PickingUp           ; ST_PICKING_UP
 	dw UpdateState_GrabIdling          ; ST_GRAB_IDLING
 	dw UpdateState_GrabWalking         ; ST_GRAB_WALKING
@@ -73,9 +73,9 @@ Func_1c000: ; 1c000 (7:4000)
 	dw UpdateState_PickedUp            ; ST_PICKED_UP
 	dw UpdateState_GroundShakeStunned  ; ST_GROUND_SHAKE_STUNNED
 	dw UpdateState_EnteringDoor        ; ST_ENTERING_DOOR
-	dw Func_156d                       ; ST_UNKNOWN_2D
-	dw Func_156d                       ; ST_UNKNOWN_2E
-	dw Func_156d                       ; ST_UNKNOWN_2F
+	dw Func_156d                       ; ST_UNUSED_2D
+	dw Func_156d                       ; ST_UNUSED_2E
+	dw Func_156d                       ; ST_UNUSED_2F
 	dw Func_156d
 	dw Func_156d
 	dw Func_156d

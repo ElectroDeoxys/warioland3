@@ -73,16 +73,16 @@ Func_28000: ; 28000 (a:4000)
 	dw UpdateState_BatFlying                  ; ST_BAT_FLYING
 	dw UpdateState_BatFalling                 ; ST_BAT_FALLING
 	dw UpdateState_InBubble                   ; ST_IN_BUBBLE
-	dw Func_156d                              ; ST_UNKNOWN_A6
-	dw Func_156d                              ; ST_UNKNOWN_A7
-	dw Func_156d                              ; ST_UNKNOWN_A8
-	dw Func_156d                              ; ST_UNKNOWN_A9
-	dw Func_156d                              ; ST_UNKNOWN_AA
-	dw Func_156d                              ; ST_UNKNOWN_AB
-	dw Func_156d                              ; ST_UNKNOWN_AC
-	dw Func_156d                              ; ST_UNKNOWN_AD
-	dw Func_156d                              ; ST_UNKNOWN_AE
-	dw Func_156d                              ; ST_UNKNOWN_AF
+	dw Func_156d                              ; ST_UNUSED_A6
+	dw Func_156d                              ; ST_UNUSED_A7
+	dw Func_156d                              ; ST_UNUSED_A8
+	dw Func_156d                              ; ST_UNUSED_A9
+	dw Func_156d                              ; ST_UNUSED_AA
+	dw Func_156d                              ; ST_UNUSED_AB
+	dw Func_156d                              ; ST_UNUSED_AC
+	dw Func_156d                              ; ST_UNUSED_AD
+	dw Func_156d                              ; ST_UNUSED_AE
+	dw Func_156d                              ; ST_UNUSED_AF
 ; 0x280a6
 
 UpdateState_OnFire: ; 280a6 (a:40a6)

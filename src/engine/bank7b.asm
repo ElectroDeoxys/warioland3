@@ -7,22 +7,22 @@ Func_1ec000: ; 1ec000 (7b:4000)
 	dw UpdateState_IceSkatin         ; ST_ICE_SKATIN
 	dw UpdateState_IceSkatinAirborne ; ST_ICE_SKATIN_AIRBORNE
 	dw UpdateState_IceSkatinCrash    ; ST_ICE_SKATIN_CRASH
-	dw Func_156d                     ; ST_UNKNOWN_B4
-	dw Func_156d                     ; ST_UNKNOWN_B5
-	dw Func_156d                     ; ST_UNKNOWN_B6
-	dw Func_156d                     ; ST_UNKNOWN_B7
+	dw Func_156d                     ; ST_UNUSED_B4
+	dw Func_156d                     ; ST_UNUSED_B5
+	dw Func_156d                     ; ST_UNUSED_B6
+	dw Func_156d                     ; ST_UNUSED_B7
 	dw $4339                         ; ST_UNKNOWN_B8
 	dw $43bc                         ; ST_UNKNOWN_B9
 	dw $4540                         ; ST_UNKNOWN_BA
 	dw $467d                         ; ST_UNKNOWN_BB
 	dw $46a8                         ; ST_UNKNOWN_BC
-	dw Func_156d                     ; ST_UNKNOWN_BD
-	dw Func_156d                     ; ST_UNKNOWN_BE
-	dw Func_156d                     ; ST_UNKNOWN_BF
+	dw Func_156d                     ; ST_UNUSED_BD
+	dw Func_156d                     ; ST_UNUSED_BE
+	dw Func_156d                     ; ST_UNUSED_BF
 	dw UpdateState_HangingRail       ; ST_HANGING_RAIL
-	dw Func_156d                     ; ST_UNKNOWN_C1
-	dw Func_156d                     ; ST_UNKNOWN_C2
-	dw Func_156d                     ; ST_UNKNOWN_C3
+	dw Func_156d                     ; ST_UNUSED_C1
+	dw Func_156d                     ; ST_UNUSED_C2
+	dw Func_156d                     ; ST_UNUSED_C3
 	dw $47eb                         ; ST_UNKNOWN_C4
 	dw $4884                         ; ST_UNKNOWN_C5
 	dw $490d                         ; ST_UNKNOWN_C6
@@ -33,8 +33,8 @@ Func_1ec000: ; 1ec000 (7b:4000)
 	dw $4c7d                         ; ST_UNKNOWN_CB
 	dw $4d9c                         ; ST_UNKNOWN_CC
 	dw $4e65                         ; ST_UNKNOWN_CD
-	dw Func_156d                     ; ST_UNKNOWN_CE
-	dw Func_156d                     ; ST_UNKNOWN_CF
+	dw Func_156d                     ; ST_UNUSED_CE
+	dw Func_156d                     ; ST_UNUSED_CF
 	dw UpdateState_SplitHit          ; ST_SPLIT_HIT
 	dw UpdateState_SplitKnockedBack  ; ST_SPLIT_KNOCKED_BACK
 	dw UpdateState_Splitting         ; ST_SPLITTING
@@ -44,9 +44,9 @@ Func_1ec000: ; 1ec000 (7b:4000)
 	dw $523f                         ; ST_UNKNOWN_D6
 	dw $52a3                         ; ST_UNKNOWN_D7
 	dw $531a                         ; ST_UNKNOWN_D8
-	dw Func_156d                     ; ST_UNKNOWN_D9
-	dw Func_156d                     ; ST_UNKNOWN_DA
-	dw Func_156d                     ; ST_UNKNOWN_DB
+	dw Func_156d                     ; ST_UNUSED_D9
+	dw Func_156d                     ; ST_UNUSED_DA
+	dw Func_156d                     ; ST_UNUSED_DB
 	dw UpdateState_BlindIdling       ; ST_BLIND_IDLING
 	dw UpdateState_BlindWalking      ; ST_BLIND_WALKING
 	dw UpdateState_BlindTurning      ; ST_BLIND_TURNING
@@ -54,11 +54,11 @@ Func_1ec000: ; 1ec000 (7b:4000)
 	dw $56ee                         ; ST_UNKNOWN_E0
 	dw $57e5                         ; ST_UNKNOWN_E1
 	dw $5886                         ; ST_UNKNOWN_E2
-	dw Func_156d                     ; ST_UNKNOWN_E3
-	dw UpdateState_MagicRising      ; ST_MAGIC_RISING
+	dw Func_156d                     ; ST_UNUSED_E3
+	dw UpdateState_MagicRising       ; ST_MAGIC_RISING
 	dw UpdateState_MagicStopping     ; ST_MAGIC_STOPPING
 	dw $5a1e                         ; ST_UNKNOWN_E6
-	dw Func_156d                     ; ST_UNKNOWN_E7
+	dw Func_156d                     ; ST_UNUSED_E7
 	dw $5aaa                         ; ST_UNKNOWN_E8
 	dw UpdateState_BallBouncing      ; ST_BALL_BOUNCING
 	dw UpdateState_BallAirborne      ; ST_BALL_AIRBORNE
@@ -66,10 +66,10 @@ Func_1ec000: ; 1ec000 (7b:4000)
 	dw UpdateState_BallThrown        ; ST_BALL_THROWN
 	dw UpdateState_BallSentUpwards   ; ST_BALL_SENT_UPWARDS
 	dw UpdateState_BallTurning       ; ST_BALL_TURNING
-	dw Func_156d                     ; ST_UNKNOWN_EF
-	dw Func_156d                     ; ST_UNKNOWN_F0
-	dw Func_156d                     ; ST_UNKNOWN_F1
-	dw Func_156d                     ; ST_UNKNOWN_F2
+	dw Func_156d                     ; ST_UNUSED_EF
+	dw Func_156d                     ; ST_UNUSED_F0
+	dw Func_156d                     ; ST_UNUSED_F1
+	dw Func_156d                     ; ST_UNUSED_F2
 ; 0x1ec08c
 
 	INCROM $1ec08c, $1ec124

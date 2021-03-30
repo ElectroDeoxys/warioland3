@@ -872,20 +872,20 @@ Func_19c1b: ; 19c1b (6:5c1b)
 	dw $6f98                          ; ST_UNKNOWN_4F
 	dw $700f                          ; ST_UNKNOWN_50
 	dw $70a9                          ; ST_UNKNOWN_51
-	dw Func_156d                      ; ST_UNKNOWN_52
-	dw Func_156d                      ; ST_UNKNOWN_53
-	dw Func_156d                      ; ST_UNKNOWN_54
-	dw Func_156d                      ; ST_UNKNOWN_55
-	dw Func_156d                      ; ST_UNKNOWN_56
-	dw Func_156d                      ; ST_UNKNOWN_57
-	dw Func_156d                      ; ST_UNKNOWN_58
-	dw Func_156d                      ; ST_UNKNOWN_59
-	dw Func_156d                      ; ST_UNKNOWN_5A
-	dw Func_156d                      ; ST_UNKNOWN_5B
-	dw Func_156d                      ; ST_UNKNOWN_5C
-	dw Func_156d                      ; ST_UNKNOWN_5D
-	dw Func_156d                      ; ST_UNKNOWN_5E
-	dw Func_156d                      ; ST_UNKNOWN_5F
+	dw Func_156d                      ; ST_UNUSED_52
+	dw Func_156d                      ; ST_UNUSED_53
+	dw Func_156d                      ; ST_UNUSED_54
+	dw Func_156d                      ; ST_UNUSED_55
+	dw Func_156d                      ; ST_UNUSED_56
+	dw Func_156d                      ; ST_UNUSED_57
+	dw Func_156d                      ; ST_UNUSED_58
+	dw Func_156d                      ; ST_UNUSED_59
+	dw Func_156d                      ; ST_UNUSED_5A
+	dw Func_156d                      ; ST_UNUSED_5B
+	dw Func_156d                      ; ST_UNUSED_5C
+	dw Func_156d                      ; ST_UNUSED_5D
+	dw Func_156d                      ; ST_UNUSED_5E
+	dw Func_156d                      ; ST_UNUSED_5F
 ; 0x19c81
 
 Func_19c81: ; 19c81 (6:5c81)
