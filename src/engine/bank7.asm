@@ -70,7 +70,7 @@ Func_1c000: ; 1c000 (7:4000)
 	dw UpdateState_Sliding             ; ST_SLIDING
 	dw UpdateState_Rolling             ; ST_ROLLING
 	dw UpdateState_RollingAirborne     ; ST_ROLLING_AIRBORNE
-	dw $62c5                           ; ST_UNKNOWN_2A
+	dw UpdateState_PickedUp            ; ST_PICKED_UP
 	dw UpdateState_GroundShakeStunned  ; ST_GROUND_SHAKE_STUNNED
 	dw UpdateState_EnteringDoor        ; ST_ENTERING_DOOR
 	dw Func_156d                       ; ST_UNKNOWN_2D
@@ -259,21 +259,23 @@ Func_1c270: ; 1c270 (7:4270)
 	ld [wca76], a
 	jr StartJump
 
+Func_1c289: ; 1c289 (7:4289)
 	xor a
 	ld [wJumpVelIndex], a
 	ld a, TRUE
 	ld [wJumpingUpwards], a
 	ld a, $01
 	ld [wca76], a
+
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_HIGH_JUMP_BOOTS
 	ld a, JUMP_VEL_KNOCK_BACK
-	jr c, .asm_1c2a9
+	jr c, .got_jump_vel_table
 	ld hl, wJoypadDown
 	bit D_UP_F, [hl]
-	jr z, .asm_1c2a9
+	jr z, .got_jump_vel_table
 	ld a, JUMP_VEL_NORMAL
-.asm_1c2a9
+.got_jump_vel_table
 	ld [wJumpVelTable], a
 	jr SetState_Airborne
 ; 0x1c2ae
@@ -340,7 +342,6 @@ SetState_Airborne: ; 1c2e2 (7:42e2)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	
 	load_oam_ptr OAM_15955
 
 	ld a, [wDirection]
@@ -374,10 +375,10 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	ld a, [wc0db]
 	and a
 	jp nz, Func_1cd48
-	ld a, [wcaa0]
+	ld a, [wIsInSand]
 	and a
 	jr z, .asm_1c3a3
-	farcall Func_1a0e8
+	farcall SetState_SandFalling
 	ret
 
 .asm_1c3a3
@@ -599,7 +600,6 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	load_sound SFX_LAND
 	ld a, ST_LANDING
 	ld [wWarioState], a
-	
 	load_oam_ptr OAM_15955
 
 	ld a, [wDirection]
@@ -768,7 +768,6 @@ SetState_CrouchSliding: ; 1c73b (7:473b)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	
 	load_oam_ptr OAM_1426c
 	ld a, [wDirection]
 	cp DIRECTION_RIGHT
@@ -982,7 +981,7 @@ UpdateState_Attacking: ; 1c8df (7:48df)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1c9a0
-	call Func_151e.asm_153f
+	call Func_153f
 	call Func_1270
 	ld a, [wca86]
 	cp $14
@@ -1124,7 +1123,6 @@ Func_1ca20: ; 1ca20 (7:4a20)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	
 	load_oam_ptr OAM_15955
 	ld a, [wDirection]
 	and a
@@ -1215,10 +1213,10 @@ UpdateState_AttackingAirborne: ; 1cbb9 (7:4bb9)
 	ld a, [wc0db]
 	and a
 	jp nz, Func_1cd48
-	ld a, [wcaa0]
+	ld a, [wIsInSand]
 	and a
 	jr z, .asm_1cbec
-	farcall Func_1a0e8
+	farcall SetState_SandFalling
 	ret
 
 .asm_1cbec
@@ -1315,10 +1313,10 @@ UpdateState_AttackKnockBack: ; 1ccaf (7:4caf)
 	ld a, [wc0db]
 	and a
 	jp nz, Func_1cd48
-	ld a, [wcaa0]
+	ld a, [wIsInSand]
 	and a
 	jr z, .asm_1cce2
-	farcall Func_1a0e8
+	farcall SetState_SandFalling
 	ret
 
 .asm_1cce2
@@ -1398,7 +1396,6 @@ Func_1cd48: ; 1cd48 (7:4d48)
 Func_1cd7c: ; 1cd7c (7:4d7c)
 	ld a, $e5
 	ld [wca6f], a
-	
 	load_oam_ptr OAM_15254
 	xor a
 	ld [wFrameDuration], a
@@ -1520,7 +1517,6 @@ SetState_Submerged: ; 1ce95 (7:4e95)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	
 	load_oam_ptr OAM_15254
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_SWIMMING_FLIPPERS
@@ -1593,7 +1589,6 @@ Func_1cf7a: ; 1cf7a (7:4f7a)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	
 	load_oam_ptr OAM_15254
 ;	fallthrough
 
@@ -1787,7 +1782,7 @@ Func_1d107: ; 1d107 (7:5107)
 	or [hl]
 	and $03
 	ret nz
-	call Func_151e.asm_153f
+	call Func_153f
 	call Func_1270
 	jr .asm_1d161
 ; 0x1d1bc
@@ -2149,10 +2144,10 @@ UpdateState_CrouchAirborne: ; 1d522 (7:5522)
 	ld a, [wc0db]
 	and a
 	jp nz, Func_1cd48
-	ld a, [wcaa0]
+	ld a, [wIsInSand]
 	and a
 	jr z, .asm_1d555
-	farcall Func_1a0e8
+	farcall SetState_SandFalling
 	ret
 .asm_1d555
 	ld a, [wWarioState]
@@ -2251,10 +2246,10 @@ UpdateState_Stung: ; 1d627 (7:5627)
 	ld a, [wc0db]
 	and a
 	jp nz, Func_1cd48
-	ld a, [wcaa0]
+	ld a, [wIsInSand]
 	and a
 	jr z, .asm_1d65a
-	farcall Func_1a0e8
+	farcall SetState_SandFalling
 	ret
 
 .asm_1d65a
@@ -2635,10 +2630,10 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 	ld a, [wca9a]
 	and a
 	jp z, StartFall
-	ld a, [wcaa0]
+	ld a, [wIsInSand]
 	and a
 	jr z, .asm_1da8f
-	farcall Func_1a0e8
+	farcall SetState_SandFalling
 	ret
 
 .asm_1da8f
@@ -2856,7 +2851,6 @@ SetState_ThrowCharging: ; 1dc8b (7:5c8b)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	
 	load_oam_ptr OAM_1606a
 
 	ld a, [wDirection]
@@ -3101,7 +3095,6 @@ SetState_Sliding: ; 1def1 (7:5ef1)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	
 	load_oam_ptr OAM_1644a
 	ld a, [wIsStandingOnSlope]
 	bit 1, a
@@ -3256,7 +3249,7 @@ UpdateState_Rolling: ; 1e09d (7:609d)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1e0ee
-	call Func_151e.asm_153f
+	call Func_153f
 	call Func_1270
 	jr .asm_1e0f4
 .asm_1e0ee
@@ -3341,7 +3334,6 @@ SetState_Unknown29: ; 1e179 (7:6179)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	
 	load_oam_ptr OAM_1644a
 	xor a
 	ld [wFrameDuration], a
@@ -3372,10 +3364,10 @@ UpdateState_RollingAirborne: ; 1e1e9 (7:61e9)
 	ld a, [wc0db]
 	and a
 	jp nz, Func_1cd48
-	ld a, [wcaa0]
+	ld a, [wIsInSand]
 	and a
 	jr z, .asm_1e21c
-	farcall Func_1a0e8
+	farcall SetState_SandFalling
 	ret
 
 .asm_1e21c
@@ -3383,7 +3375,7 @@ UpdateState_RollingAirborne: ; 1e1e9 (7:61e9)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1e239
-	call Func_151e.asm_153f
+	call Func_153f
 	call Func_1270
 	jr .asm_1e23f
 .asm_1e239
@@ -3453,7 +3445,60 @@ UpdateState_RollingAirborne: ; 1e1e9 (7:61e9)
 	jp SetState_Rolling
 ; 0x1e2c5
 
-	INCROM $1e2c5, $1e347
+UpdateState_PickedUp: ; 1e2c5 (7:62c5)
+	ld a, [wDirection]
+	and a
+	jr nz, .dir_right
+
+; dir left
+	ld a, [wJoypadPressed]
+	and A_BUTTON | B_BUTTON | D_RIGHT
+	jr nz, .wiggle_right
+
+.asm_1e2d2
+	update_anim_1
+
+	ld hl, wPickedUpFrameCounter
+	dec [hl]
+	ret nz
+	ld a, MAX_PICKED_UP_FRAME_COUNTER
+	ld [hl], a ; reset frame counter
+	ld a, NUM_WIGGLES_TO_ESCAPE
+	ld [wPickedUpWiggleCounter], a
+	ret
+
+.wiggle_right
+	ld a, MAX_PICKED_UP_FRAME_COUNTER
+	ld [wPickedUpFrameCounter], a ; reset frame counter
+	ld a, DIRECTION_RIGHT
+	ld [wDirection], a
+	load_frameset_ptr Frameset_15f7f
+.wiggle_left
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	update_anim_1
+
+	ld a, MAX_PICKED_UP_FRAME_COUNTER
+	ld [wPickedUpFrameCounter], a ; reset frame counter
+	ld hl, wPickedUpWiggleCounter
+	dec [hl]
+	ret nz
+	xor a
+	ld [wca9b], a
+	jp StartFall
+
+.dir_right
+	ld a, [wJoypadPressed]
+	and A_BUTTON | B_BUTTON | D_LEFT
+	jr z, .asm_1e2d2
+	ld a, MAX_PICKED_UP_FRAME_COUNTER
+	ld [wPickedUpFrameCounter], a ; reset frame counter
+	ld a, DIRECTION_LEFT
+	ld [wDirection], a
+	load_frameset_ptr Frameset_15f70
+	jr .wiggle_left
+; 0x1e347
 
 UpdateState_GroundShakeStunned: ; 1e347 (7:6347)
 	update_anim_1
@@ -3865,7 +3910,9 @@ SetState_Walking: ; 1e6b9 (7:66b9)
 	ld [wca96], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
+;	fallthrough
 
+Func_1e6ea: ; 1e6ea (7:66ea)
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -3876,7 +3923,6 @@ SetState_Walking: ; 1e6b9 (7:66b9)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	
 	load_oam_ptr OAM_1426c
 
 	ld a, [wDirection]
@@ -3910,7 +3956,6 @@ SetState_Turning: ; 1e73e (7:673e)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	
 	load_oam_ptr OAM_14a82
 	ld a, [wDirection]
 	xor $1 ; switch direction
@@ -3949,7 +3994,6 @@ SetState_Attacking: ; 1e7ab (7:67ab)
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
 	ld [wca8b], a
-	
 	load_oam_ptr OAM_14d1b
 	ld a, $04
 	ld [wca7b], a
@@ -4019,7 +4063,6 @@ Func_1e855: ; 1e855 (7:6855)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	
 	load_oam_ptr OAM_1426c
 	xor a
 	ld [wFrameDuration], a
@@ -4091,7 +4134,7 @@ HandleInput_Walking: ; 1e8ed (7:68ed)
 	ld a, b
 	and a
 	ret nz
-	call Func_151e.asm_153f
+	call Func_153f
 	call Func_1270
 	jr .asm_1e93d
 
@@ -4146,7 +4189,6 @@ SetState_Idling: ; 1e99b (7:699b)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	
 	load_oam_ptr OAM_14000
 	ld a, [wDirection]
 	and a
@@ -4340,7 +4382,6 @@ SetState_CrouchWalking: ; 1eb94 (7:6b94)
 	ld [wca9a], a
 	ld [wSFXLoopCounter], a ; redundant
 
-	
 	load_oam_ptr OAM_1426c
 	ld a, $04
 	ld [wca7b], a
@@ -4470,7 +4511,7 @@ Func_1ec6c: ; 1ec6c (7:6c6c)
 	ld a, b
 	and $0f
 	ret nz
-	call Func_151e.asm_153f
+	call Func_153f
 	call Func_1270
 	ld a, [wca86]
 	cp $04
@@ -4520,7 +4561,6 @@ Func_1ed4b: ; 1ed4b (7:6d4b)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	
 	load_oam_ptr OAM_1426c
 
 	ld a, [wDirection]
@@ -4594,7 +4634,6 @@ SetState_GrabAirborne: ; 1ee0d (7:6e0d)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	
 	load_oam_ptr OAM_15955
 	ld a, [wDirection]
 	and a
@@ -4708,7 +4747,7 @@ Func_1eefc: ; 1eefc (7:6efc)
 	jr .asm_1efc5
 
 .asm_1ef7b
-	call Func_151e.asm_153f
+	call Func_153f
 	call Func_1270
 	ld a, [wIsStandingOnSlope]
 	and a
@@ -4798,7 +4837,6 @@ Func_1efe7: ; 1efe7 (7:6fe7)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	
 	load_oam_ptr OAM_1426c
 
 	ld a, [wDirection]
@@ -4937,7 +4975,7 @@ Func_1f135: ; 1f135 (7:7135)
 	ld a, b
 	and $0f
 	ret nz
-	call Func_151e.asm_153f
+	call Func_153f
 	call Func_1270
 	ret
 ; 0x1f14f
@@ -5565,7 +5603,7 @@ Func_1f6c2: ; 1f6c2 (7:76c2)
 ; 0x1f6dc
 
 Func_1f6dc: ; 1f6dc (7:76dc)
-	ld a, [wced4]
+	ld a, [wLevelEndScreen]
 	and a
 	ret nz
 
@@ -5673,7 +5711,6 @@ Func_1f6dc: ; 1f6dc (7:76dc)
 	ld a, $00
 	ld [wca7c + 1], a
 	call Func_15b0
-	
 	load_oam_ptr OAM_15955
 
 	ld a, [wDirection]

@@ -1,4 +1,4 @@
-	const_def                
+	const_def
 	const ST_IDLING                        ; 00
 	const ST_WALKING                       ; 01
 	const ST_TURNING                       ; 02
@@ -41,7 +41,7 @@
 	const ST_SLIDING                       ; 27
 	const ST_ROLLING                       ; 28
 	const ST_ROLLING_AIRBORNE              ; 29
-	const ST_UNKNOWN_2A                    ; 2a
+	const ST_PICKED_UP                     ; 2a
 	const ST_GROUND_SHAKE_STUNNED          ; 2b
 	const ST_ENTERING_DOOR                 ; 2c
 	const ST_UNKNOWN_2D                    ; 2d
@@ -49,14 +49,14 @@
 	const ST_UNKNOWN_2F                    ; 2f
 	const ST_UNKNOWN_30                    ; 30
 	const ST_UNKNOWN_31                    ; 31
-	const ST_UNKNOWN_32                    ; 32
+	const ST_DRAGGED_DOWN                  ; 32
 	const ST_TELEPORTING                   ; 33
 	const ST_UNKNOWN_34                    ; 34
-	const ST_UNKNOWN_35                    ; 35
-	const ST_UNKNOWN_36                    ; 36
-	const ST_UNKNOWN_37                    ; 37
-	const ST_UNKNOWN_38                    ; 38
-	const ST_UNKNOWN_39                    ; 39
+	const ST_SAND_FALLING                  ; 35
+	const ST_SAND_JUMPING                  ; 36
+	const ST_SAND_IDLING                   ; 37
+	const ST_SAND_WALKING                  ; 38
+	const ST_SAND_TURNING                  ; 39
 	const ST_LADDER_CLIMBING               ; 3a
 	const ST_LADDER_IDLING                 ; 3b
 	const ST_LADDER_SHAKE_STUNNED          ; 3c
@@ -100,17 +100,17 @@
 	const ST_HOT                           ; 62
 	const ST_HOT_AIRBORNE                  ; 63
 	const ST_BURNT                         ; 64
-	const ST_GETTING_FLAT_AIRBORNE                    ; 65
-	const ST_GETTING_FLAT                    ; 66
-	const ST_FLAT_IDLING                    ; 67
-	const ST_FLAT_WALKING                    ; 68
-	const ST_FLAT_JUMPING                    ; 69
-	const ST_FLAT_FALLING                    ; 6a
-	const ST_FLAT_STRETCHING                    ; 6b
-	const ST_FLAT_SINKING                    ; 6c
-	const ST_FLAT_STRETCHING_UNDERWATER                    ; 6d
-	const ST_FLAT_SQUISHED                    ; 6e
-	const ST_FLAT_SQUISHED_LIFTING                    ; 6f
+	const ST_GETTING_FLAT_AIRBORNE         ; 65
+	const ST_GETTING_FLAT                  ; 66
+	const ST_FLAT_IDLING                   ; 67
+	const ST_FLAT_WALKING                  ; 68
+	const ST_FLAT_JUMPING                  ; 69
+	const ST_FLAT_FALLING                  ; 6a
+	const ST_FLAT_STRETCHING               ; 6b
+	const ST_FLAT_SINKING                  ; 6c
+	const ST_FLAT_STRETCHING_UNDERWATER    ; 6d
+	const ST_FLAT_SQUISHED                 ; 6e
+	const ST_FLAT_SQUISHED_LIFTING         ; 6f
 	const ST_GETTING_WRAPPED_IN_STRING     ; 70
 	const ST_BALL_O_STRING                 ; 71
 	const ST_BALL_O_STRING_AIRBORNE        ; 72

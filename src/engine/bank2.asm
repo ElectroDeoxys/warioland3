@@ -253,7 +253,7 @@ Func_80aa: ; 80aa (2:40aa)
 	ld a, [wSequence]
 	cp $02
 	ret nz
-	ld hl, wced4
+	ld hl, wLevelEndScreen
 	ld a, [hl]
 	and a
 	jr z, .asm_82c6
@@ -272,12 +272,14 @@ Func_80aa: ; 80aa (2:40aa)
 	ld [wcee1], a
 	ld [wcee2], a
 	ld [wca9c], a
+
 	ld hl, wca3d
-	ld a, [wced4]
-	cp $06
-	jr z, .asm_829d
-	cp $07
-	jr z, .asm_82a4
+	ld a, [wLevelEndScreen]
+	cp LEVEL_END_GAME_OVER
+	jr z, .game_over
+	cp LEVEL_END_PROLOGUE
+	jr z, .prologue
+
 	ld hl, wSequence
 	inc [hl]
 	xor a
@@ -289,12 +291,12 @@ Func_80aa: ; 80aa (2:40aa)
 	ld [wSubSequence], a
 	ret
 
-.asm_829d
+.game_over
 	ld a, $f3
 	ld [wcee3], a
 	jr .asm_82ba
 
-.asm_82a4
+.prologue
 	ld a, [wca39]
 	dec a
 	jr z, .asm_82b1
@@ -777,7 +779,7 @@ Func_8747: ; 8747 (2:4747)
 	ld [wca5d], a
 
 	xor a
-	ld [wced4], a
+	ld [wLevelEndScreen], a
 	ld [wca5c], a
 	ld [wc1aa], a
 	ld [wc1a9], a
@@ -8963,7 +8965,7 @@ Func_bd3c: ; bd3c (2:7d3c)
 	ld a, [wca3d]
 	bit 1, a
 	ret z
-	ld a, [wced4]
+	ld a, [wLevelEndScreen]
 	and a
 	ret nz
 	ld a, [wc0e4]

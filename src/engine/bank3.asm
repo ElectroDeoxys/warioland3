@@ -218,7 +218,7 @@ Func_ca54: ; ca54 (3:4a54)
 	INCROM $ca86, $d11a
 
 Func_d11a: ; d11a (3:511a)
-	ld a, [wced4]
+	ld a, [wLevelEndScreen]
 	and a
 	ret nz
 	ld hl, wc0a3
@@ -278,7 +278,7 @@ Func_d132: ; d132 (3:5132)
 ; 0xd186
 
 Func_d186: ; d186 (3:5186)
-	ld a, [wced4]
+	ld a, [wLevelEndScreen]
 	and a
 	ret nz
 	ld hl, wc0a3

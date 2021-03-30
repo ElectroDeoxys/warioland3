@@ -2902,34 +2902,38 @@ Func_151e: ; 151e (0:151e)
 ; dir left
 	xor a
 	ld [wca86], a
-	jr .asm_1554
+	jr Func_1554
 
 .dir_right
 	ld a, [wIsStandingOnSlope]
 	bit 0, a
-	jr z, .asm_1554
-.asm_1531
+	jr z, Func_1554
+;	fallthrough
+
+Func_1531: ; 1531 (0:1531)
 	ld a, [wca86]
 	cp $08
-	jr c, .asm_1554
+	jr c, Func_1554
 	ld a, $04
 	ld [wca86], a
-	jr .asm_1554
+	jr Func_1554
+; 0x153f
 
-.asm_153f
+Func_153f: ; 153f (0:153f)
 	ld a, [wDirection]
 	and a
 	jr z, .dir_left
 	xor a
 	ld [wca86], a
-	jr .asm_1554
+	jr Func_1554
 .dir_left
 	ld a, [wIsStandingOnSlope]
 	bit 1, a
-	jr z, .asm_1554
-	jr .asm_1531
+	jr z, Func_1554
+	jr Func_1531
+; 0x1554
 
-.asm_1554
+Func_1554: ; 1554 (0:1554)
 	ld a, [wca86]
 	ld e, a
 	ld d, $00

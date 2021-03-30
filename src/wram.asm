@@ -736,9 +736,20 @@ wca9c:: ; ca9c
 wca9d:: ; ca9d
 	ds $1
 
-	ds $2
+; counter to keep track of number of times
+; Wario needs to "wiggle" to escape being picked up
+; is reset to NUM_WIGGLES_TO_ESCAPE
+wPickedUpWiggleCounter:: ; ca9e
+	ds $1
 
-wcaa0:: ; caa0
+; counter determining number of remaining frames
+; Wario has to wiggle out of being picked up
+; counts down from MAX_PICKED_UP_FRAME_COUNTER
+; then resets after reaching 0
+wPickedUpFrameCounter:: ; ca9f
+	ds $1
+
+wIsInSand:: ; caa0
 	ds $1
 
 wcaa1:: ; caa1
@@ -896,7 +907,9 @@ wced2:: ; ced2
 wced3:: ; ced3
 	ds $1
 
-wced4:: ; ced4
+; which screen to fade out to for level end
+; LEVEL_END_* constant
+wLevelEndScreen:: ; ced4
 	ds $1
 
 wced5:: ; ced5

@@ -239,7 +239,7 @@ Func_19832: ; 19832 (6:5832)
 	ld a, [wca8e]
 	and a
 	jr nz, .asm_198c0
-	ld a, [wcaa0]
+	ld a, [wIsInSand]
 	and a
 	jr nz, .asm_198c0
 
@@ -721,7 +721,7 @@ Func_19b3a: ; 19b3a (6:5b3a)
 	ld [wc0db], a
 	ld [wLadderInteraction], a
 	ld [wc0d7], a
-	ld [wcaa0], a
+	ld [wIsInSand], a
 	ld [wc1c8], a
 	ld [wc1c9], a
 	call Func_19c0b
@@ -840,14 +840,14 @@ Func_19c1b: ; 19c1b (6:5c1b)
 
 	dw $5ce7                          ; ST_UNKNOWN_30
 	dw $5ef1                          ; ST_UNKNOWN_31
-	dw $6046                          ; ST_UNKNOWN_32
+	dw UpdateState_DraggedDown        ; ST_DRAGGED_DOWN
 	dw UpdateState_Teleporting        ; ST_TELEPORTING
 	dw $60b4                          ; ST_UNKNOWN_34
-	dw $617e                          ; ST_UNKNOWN_35
-	dw $61c5                          ; ST_UNKNOWN_36
-	dw $6296                          ; ST_UNKNOWN_37
-	dw $62d6                          ; ST_UNKNOWN_38
-	dw $6394                          ; ST_UNKNOWN_39
+	dw UpdateState_SandFalling        ; ST_SAND_FALLING
+	dw UpdateState_SandJumping        ; ST_SAND_JUMPING
+	dw UpdateState_SandIdling         ; ST_SAND_IDLING
+	dw UpdateState_SandWalking        ; ST_SAND_WALKING
+	dw UpdateState_SandTurning        ; ST_SAND_TURNING
 	dw UpdateState_LadderClimbing     ; ST_LADDER_CLIMBING
 	dw UpdateState_LadderIdling       ; ST_LADDER_IDLING
 	dw UpdateState_LadderShakeStunned ; ST_LADDER_SHAKE_STUNNED
@@ -960,7 +960,24 @@ Func_19e7f: ; 19e7f (6:5e7f)
 	ret
 ; 0x19ef1
 
-	INCROM $19ef1, $1a077
+	INCROM $19ef1, $1a046
+
+UpdateState_DraggedDown: ; 1a046 (6:6046)
+	update_anim_1
+	ld a, [wca9b]
+	and a
+	ret nz
+	ld a, [wLevel]
+	cp LEVEL_HIDDEN_FIGURE_BATTLE
+	jr z, .set_game_over
+	farcall StartFall
+	ret
+
+.set_game_over
+	ld a, LEVEL_END_GAME_OVER
+	ld [wLevelEndScreen], a
+	ret
+; 0x1a077
 
 UpdateState_Teleporting: ; 1a077 (6:6077)
 	ld a, $01
@@ -990,10 +1007,10 @@ UpdateState_Teleporting: ; 1a077 (6:6077)
 
 	INCROM $1a0b4, $1a0e8
 
-Func_1a0e8: ; 1a0e8 (6:60e8)
+SetState_SandFalling: ; 1a0e8 (6:60e8)
 	xor a
 	ld [wca9a], a
-	ld a, ST_UNKNOWN_35
+	ld a, ST_SAND_FALLING
 	ld [wWarioState], a
 	ld a, $ff
 	ld [wca70], a
@@ -1016,6 +1033,9 @@ Func_1a0e8: ; 1a0e8 (6:60e8)
 	ld [wc0e0], a
 	ld hl, Pals_c800
 	call Func_1af6
+;	fallthrough
+
+Func_1a12a: ; 1a12a (6:612a)
 	ld a, $04
 	ld [wca7b], a
 	ld a, $78
@@ -1024,7 +1044,9 @@ Func_1a0e8: ; 1a0e8 (6:60e8)
 	ld [wca7c + 1], a
 	call Func_15b0
 	load_oam_ptr OAM_15955
+;	fallthrough
 
+Func_1a14b: ; 1a14b (6:614b)
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -1040,7 +1062,218 @@ Func_1a0e8: ; 1a0e8 (6:60e8)
 	ret
 ; 0x1a17e
 
-	INCROM $1a17e, $1a3bb
+UpdateState_SandFalling: ; 1a17e (6:617e)
+	call Func_1b2c0
+	ld a, [wWarioState]
+	cp ST_SAND_FALLING
+	ret nz ; done if not falling in sand any more
+
+	farcall Func_198e0
+	ld a, b
+	and a
+	ret z
+
+	ld hl, hffa8
+	ld de, wca61
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	jp SetState_SandIdling
+; 0x1a1a7
+
+SetState_SandJumping: ; 1a1a7 (6:61a7)
+	load_sound SFX_JUMP
+	ld a, ST_SAND_JUMPING
+	ld [wWarioState], a
+	xor a
+	ld [wJumpVelIndex], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	inc a
+	ld [wJumpVelTable], a
+	jp Func_1a12a
+; 0x1a1c5
+
+UpdateState_SandJumping: ; 1a1c5 (6:61c5)
+	farcall Func_19b25
+	ld a, [wIsInSand]
+	and a
+	jr nz, .in_sand
+; not in sand
+	farcall Func_1c289
+	ret
+
+.in_sand
+	call Func_1488
+	farcall Func_2b17a
+	ld a, [wca86]
+	cp $04
+	jr c, .asm_1a208
+	ld a, $00
+	ld [wca86], a
+.asm_1a208
+	ld a, [wca95]
+	and a
+	jr z, .asm_1a211
+	call Func_1a14b
+
+.asm_1a211
+	ld a, [wJoypadDown]
+	bit A_BUTTON_F, a
+	jp z, SetState_SandFalling
+
+	ld a, [wJumpVelIndex]
+	cp FALLING_JUMP_VEL_INDEX
+	jp nc, SetState_SandFalling
+
+; raising
+	farcall Func_1996e
+	ld a, b
+	and a
+	ret z
+	jp SetState_SandFalling
+; 0x1a236
+
+SetState_SandIdling: ; 1a236 (6:6236)
+	ld a, ST_SAND_IDLING
+	ld [wWarioState], a
+
+	xor a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	ld a, $04
+	ld [wca7b], a
+	ld a, $40
+	ld [wca7c + 0], a
+	ld a, $00
+	ld [wca7c + 1], a
+	call Func_15b0
+	load_oam_ptr OAM_14000
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1a27c
+	load_frameset_ptr Frameset_14252
+	jr .asm_1a286
+.asm_1a27c
+	load_frameset_ptr Frameset_1425f
+.asm_1a286
+	update_anim_1
+	ret
+; 0x1a296
+
+UpdateState_SandIdling: ; 1a296 (6:6296)
+	call Func_1b322
+	ret
+; 0x1a29a
+
+SetState_SandWalking: ; 1a29a (6:629a)
+	xor a
+	ld [wca86], a
+
+	ld a, ST_SAND_WALKING
+	ld [wWarioState], a
+
+	ld a, [wJoypadDown]
+	bit D_RIGHT_F, a
+	jr nz, .d_right
+	bit D_LEFT_F, a
+	jr nz, .d_left
+	jr .asm_1a2bc
+
+.d_right
+	ld a, DIRECTION_RIGHT
+	ld [wDirection], a
+	jr .asm_1a2bc
+.d_left
+	ld a, DIRECTION_LEFT
+	ld [wDirection], a
+
+.asm_1a2bc
+	xor a
+	ld [wSFXLoopCounter], a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	farcall Func_1e6ea
+	ret
+; 0x1a2d6
+
+UpdateState_SandWalking: ; 1a2d6 (6:62d6)
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, $24
+	ld [wSFXLoopCounter], a
+	load_sound SFX_WALK
+
+.skip_sfx
+	update_anim_1
+	call Func_1b333
+	ld a, [wWarioState]
+	cp ST_SAND_WALKING
+	ret nz ; done if not walking in sand any more
+
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	farcall Func_198e0
+	ld a, b
+	and a
+	jp z, SetState_SandFalling
+	ret
+; 0x1a330
+
+SetState_SandTurning: ; 1a330 (6:6330)
+	ld a, ST_SAND_TURNING
+	ld [wWarioState], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld a, $04
+	ld [wca7b], a
+	ld a, $40
+	ld [wca7c + 0], a
+	ld a, $00
+	ld [wca7c + 1], a
+	call Func_15b0
+	load_oam_ptr OAM_14a82
+
+	ld a, [wDirection]
+	xor $1 ; switch direction
+	ld [wDirection], a
+	and a
+	jr nz, .asm_1a37a
+	load_frameset_ptr Frameset_14cbe
+	jr .asm_1a384
+.asm_1a37a
+	load_frameset_ptr Frameset_14cc5
+.asm_1a384
+	update_anim_1
+	ret
+; 0x1a394
+
+UpdateState_SandTurning: ; 1a394 (6:6394)
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	jp nz, SetState_SandJumping
+	update_anim_1
+	ld a, [wAnimationHasFinished]
+	and a
+	ret z
+	ld a, [wJoypadDown]
+	and D_RIGHT | D_LEFT
+	jp nz, SetState_SandWalking
+	jp SetState_SandIdling
+; 0x1a3bb
 
 SetState_LadderClimbing: ; 1a3bb (6:63bb)
 	ld a, ST_LADDER_CLIMBING
@@ -1611,7 +1844,114 @@ Func_1ae68: ; 1ae68 (6:6e68)
 	ret
 ; 0x1aed0
 
-	INCROM $1aed0, $1b3a0
+	INCROM $1aed0, $1b2c0
+
+Func_1b2c0: ; 1b2c0 (6:72c0)
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	jp nz, SetState_SandJumping
+	call Func_1b302
+
+	farcall Func_19734
+	ld a, b
+	and a
+	ret nz
+	farcall Func_2b17a
+
+	ld a, [wca86]
+	cp $04
+	jr c, .asm_1b2f8
+	ld a, $00
+	ld [wca86], a
+.asm_1b2f8
+	ld a, [wca95]
+	and a
+	jr z, .asm_1b301
+	call Func_1a14b
+.asm_1b301
+	ret
+; 0x1b302
+
+Func_1b302: ; 1b302 (6:7302)
+	farcall Func_198e0
+	ld a, b
+	and a
+	ret nz
+
+	ld b, $01
+	ld a, [wJoypadDown]
+	bit D_DOWN_F, a
+	jr z, .asm_1b31e
+	inc b
+.asm_1b31e
+	call Func_1287
+	ret
+; 0x1b322
+
+Func_1b322: ; 1b322 (6:7322)
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	jp nz, SetState_SandJumping
+	ld a, [wJoypadDown]
+	and D_RIGHT | D_LEFT
+	jp nz, SetState_SandWalking
+	ret
+; 0x1b333
+
+Func_1b333: ; 1b333 (6:7333)
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	jp nz, SetState_SandJumping
+	ld a, [wJoypadDown]
+	bit D_RIGHT_F, a
+	jr nz, .d_right
+	bit D_LEFT_F, a
+	jr nz, .d_left
+	jp SetState_SandIdling
+
+.d_right
+	; this is buggy, wDirection is already
+	; switched by input handling in the Sand Idling state
+	; as a result, Sand Turning state will never be reached
+	ld a, [wDirection]
+	and a
+	jp z, SetState_SandTurning
+	ld a, DIRECTION_RIGHT
+	ld [wDirection], a
+
+	farcall Func_19734
+	ld a, b
+	and a
+	ret nz
+	call Func_151e
+	call Func_1259
+.asm_1b36d
+	ld a, [wca86]
+	cp $04
+	jr c, .asm_1b379
+	ld a, $00
+	ld [wca86], a
+.asm_1b379
+	ret
+
+.d_left
+	; this is buggy, wDirection is already
+	; switched by input handling in the Sand Idling state
+	; as a result, Sand Turning state will never be reached
+	ld a, [wDirection]
+	and a
+	jp nz, SetState_SandTurning
+	ld a, DIRECTION_LEFT
+	ld [wDirection], a
+
+	farcall Func_19734
+	ld a, b
+	and a
+	ret nz
+	call Func_153f
+	call Func_1270
+	jr .asm_1b36d
+; 0x1b3a0
 
 Func_1b3a0: ; 1b3a0 (6:73a0)
 	ld a, [wJoypadDown]

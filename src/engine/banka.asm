@@ -1037,7 +1037,7 @@ UpdateState_BallOString: ; 28b36 (a:4b36)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_28b80
-	call Func_151e.asm_153f
+	call Func_153f
 	call Func_1270
 	jr .asm_28b86
 .asm_28b80
@@ -3251,7 +3251,7 @@ Func_2ae8a: ; 2ae8a (a:6e8a)
 	ld a, b
 	and a
 	jr nz, .asm_2aef1
-	call Func_151e.asm_153f
+	call Func_153f
 	call Func_1270
 	jp .asm_2aee4 ; should be jr
 .asm_2aecb
@@ -3495,7 +3495,7 @@ Func_2b11b: ; 2b11b (a:711b)
 	ld a, b
 	and a
 	ret nz
-	call Func_151e.asm_153f
+	call Func_153f
 	call Func_1270
 	jr .asm_2b16d
 
@@ -3522,14 +3522,14 @@ Func_2b11b: ; 2b11b (a:711b)
 Func_2b17a: ; 2b17a (a:717a)
 	ld a, [wJoypadDown]
 	bit D_RIGHT_F, a
-	jr nz, .asm_2b186
+	jr nz, .right
 	bit D_LEFT_F, a
-	jr nz, .asm_2b196
+	jr nz, .left
 	ret
-.asm_2b186
+.right
 	farcall Func_1f0ed
 	ret
-.asm_2b196
+.left
 	farcall Func_1f104
 	ret
 ; 0x2b1a6
