@@ -551,7 +551,148 @@ Frameset_1fccbf: ; 1fccbf (127:4cbf)
 	db $ff
 ; 0x1fcccc
 
-	INCROM $1fcccc, $1ffc8e
+	INCROM $1fcccc, $1fd40a
+
+Frameset_1fd40a: ; 1fd40a (127:540a)
+	db $00,  1
+	db $01,  8
+	db $02,  8
+	db $03,  6
+	db $04,  6
+	db $05,  4
+	db $06,  4
+	db $07,  6
+	db $08,  7
+	db $09, 10
+	db $0a, 10
+	db $0b,  8
+	db $0c,  8
+	db $0d,  8
+	db $0e,  1
+	db $ff
+; 0x1fd429
+
+	INCROM $1fd429, $1fd42c
+
+Frameset_1fd42c: ; 1fd42c (127:542c)
+	db $0e,  3
+	db $0f,  4
+	db $ff
+; 0x1fd431
+
+	INCROM $1fd431, $1fd434
+
+Frameset_1fd434: ; 1fd434 (127:5434)
+	db $10,  3
+	db $11,  4
+	db $ff
+; 0x1fd439
+
+Frameset_1fd439: ; 1fd439 (127:5439)
+	db $13,  4
+	db $14,  6
+	db $08,  7
+	db $09, 10
+	db $15, 10
+	db $0b,  2
+	db $16,  1
+	db $0b,  2
+	db $16,  1
+	db $0b,  2
+	db $16,  1
+	db $17,  6
+	db $18,  5
+	db $19,  3
+	db $02, 12
+	db $19, 10
+	db $00,  1
+	db $ff
+; 0x1fd45c
+
+	INCROM $1fd45c, $1fd45f
+
+Frameset_1fd45f: ; 1fd45f (127:545f)
+	db $1a,  8
+	db $0e,  5
+	db $1b,  3
+	db $1a,  2
+	db $0e,  5
+	db $1b,  4
+	db $ff
+; 0x1fd46c
+
+Frameset_1fd46c: ; 1fd46c (127:546c)
+	db $1c,  8
+	db $10,  5
+	db $1d,  3
+	db $1c,  2
+	db $10,  5
+	db $1d,  4
+	db $ff
+; 0x1fd479
+
+Frameset_1fd479: ; 1fd479 (127:5479)
+	db $00,  1
+	db $01,  8
+	db $02,  8
+	db $03,  6
+	db $04,  6
+	db $05,  4
+	db $06,  4
+	db $07,  6
+	db $08,  7
+	db $09, 10
+	db $0a, 10
+	db $0b,  8
+	db $0c,  8
+	db $1e,  8
+	db $10,  1
+	db $ff
+; 0x1fd498
+
+	INCROM $1fd498, $1fd81c
+
+Frameset_1fd81c: ; 1fd81c (127:581c)
+	db $00,  6
+	db $01,  6
+	db $02,  6
+	db $03,  6
+	db $ff
+; 0x1fd825
+
+Frameset_1fd825: ; 1fd825 (127:5825)
+	db $07,  6
+	db $04,  6
+	db $05,  6
+	db $06,  6
+	db $ff
+; 0x1fd82e
+
+Frameset_1fd82e: ; 1fd82e (127:582e)
+	db $0b,  6
+	db $08,  6
+	db $09,  6
+	db $0a,  6
+	db $ff
+; 0x1fd837
+
+	INCROM $1fd837, $1fd83a
+
+Frameset_1fd83a: ; 1fd83a (127:583a)
+	db $0c,  2
+	db $00,  1
+	db $0d,  2
+	db $ff
+; 0x1fd841
+
+Frameset_1fd841: ; 1fd841 (127:5841)
+	db $0d,  2
+	db $00,  1
+	db $0c,  2
+	db $ff
+; 0x1fd848
+
+	INCROM $1fd848, $1ffc8e
 
 Frameset_1ffc8e: ; 1ffc8e (127:7c8e)
 	db $00,  3

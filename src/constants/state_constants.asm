@@ -155,15 +155,15 @@
 	const ST_UNKNOWN_99                    ; 99
 	const ST_UNKNOWN_9A                    ; 9a
 	const ST_UNKNOWN_9B                    ; 9b
-	const ST_UNKNOWN_9C                    ; 9c
-	const ST_UNKNOWN_9D                    ; 9d
-	const ST_UNKNOWN_9E                    ; 9e
-	const ST_UNKNOWN_9F                    ; 9f
-	const ST_UNKNOWN_A0                    ; a0
-	const ST_UNKNOWN_A1                    ; a1
-	const ST_UNKNOWN_A2                    ; a2
-	const ST_UNKNOWN_A3                    ; a3
-	const ST_UNKNOWN_A4                    ; a4
+	const ST_VAMPIRE_IDLING                ; 9c
+	const ST_VAMPIRE_WALKING               ; 9d
+	const ST_VAMPIRE_TURNING               ; 9e
+	const ST_VAMPIRE_AIRBORNE              ; 9f
+	const ST_BAT_TRANSFORMING              ; a0
+	const ST_BAT_IDLING                    ; a1
+	const ST_VAMPIRE_TRANSFORMING          ; a2
+	const ST_BAT_FLYING                    ; a3
+	const ST_BAT_FALLING                   ; a4
 	const ST_IN_BUBBLE                     ; a5
 	const ST_UNKNOWN_A6                    ; a6
 	const ST_UNKNOWN_A7                    ; a7

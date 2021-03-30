@@ -63,15 +63,15 @@ Func_28000: ; 28000 (a:4000)
 	dw $65d8                                  ; ST_UNKNOWN_99
 	dw $6657                                  ; ST_UNKNOWN_9A
 	dw $66c0                                  ; ST_UNKNOWN_9B
-	dw $677b                                  ; ST_UNKNOWN_9C
-	dw $6804                                  ; ST_UNKNOWN_9D
-	dw $6890                                  ; ST_UNKNOWN_9E
-	dw $68d2                                  ; ST_UNKNOWN_9F
-	dw $69b2                                  ; ST_UNKNOWN_A0
-	dw $6a08                                  ; ST_UNKNOWN_A1
-	dw $6b18                                  ; ST_UNKNOWN_A2
-	dw $6b42                                  ; ST_UNKNOWN_A3
-	dw $6c04                                  ; ST_UNKNOWN_A4
+	dw UpdateState_VampireIdling              ; ST_VAMPIRE_IDLING
+	dw UpdateState_VampireWalking             ; ST_VAMPIRE_WALKING
+	dw UpdateState_VampireTurning             ; ST_VAMPIRE_TURNING
+	dw UpdateState_VampireAirborne            ; ST_VAMPIRE_AIRBORNE
+	dw UpdateState_BatTransforming            ; ST_BAT_TRANSFORMING
+	dw UpdateState_BatIdling                  ; ST_BAT_IDLING
+	dw UpdateState_VampireTransforming        ; ST_VAMPIRE_TRANSFORMING
+	dw UpdateState_BatFlying                  ; ST_BAT_FLYING
+	dw UpdateState_BatFalling                 ; ST_BAT_FALLING
 	dw UpdateState_InBubble                   ; ST_IN_BUBBLE
 	dw Func_156d                              ; ST_UNKNOWN_A6
 	dw Func_156d                              ; ST_UNKNOWN_A7
@@ -1477,10 +1477,8 @@ UpdateState_FatTurning: ; 2906d (a:506d)
 	jp SetState_FatWalking
 
 Func_290a1: ; 290a1 (a:50a1)
-	ld a, $01
-	ldh [hSoundID], a
-	ld a, $01
-	ldh [$ffb6], a
+	load_sound SFX_JUMP
+
 	xor a
 	ld [wJumpVelIndex], a
 	ld [wca96], a
@@ -3100,7 +3098,511 @@ UpdateState_BouncyLastBounce: ; 2a362 (a:6362)
 	jp Func_1570
 ; 0x2a3ed
 
-	INCROM $2a3ed, $2ad06
+	INCROM $2a3ed, $2a739
+
+SetState_VampireIdling: ; 2a739 (a:6739)
+	ld a, ST_VAMPIRE_IDLING
+	ld [wWarioState], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld a, $0b
+	ld [wca7b], a
+	ld a, $60
+	ld [wca7c + 0], a
+	ld a, $00
+	ld [wca7c + 1], a
+	call Func_15b0
+	ld a, $54
+	ld [wOAMPtr + 0], a
+	ld a, $98
+	ld [wOAMPtr + 1], a
+	load_frameset_ptr Frameset_1fd81c
+	update_anim_2
+	ret
+; 0x2a77b
+
+UpdateState_VampireIdling: ; 2a77b (a:677b)
+	farcall Func_198e0
+	ld a, [wWarioState]
+	cp ST_VAMPIRE_IDLING
+	ret nz ; done if not vampire idling any more
+
+	ld a, b
+	and a
+	jp z, Func_2a8a7
+	update_anim_2
+	call Func_2b4f3
+	ret
+; 0x2a7a8
+
+SetState_VampireWalking: ; 2a7a8 (a:67a8)
+	ld a, ST_VAMPIRE_WALKING
+	ld [wWarioState], a
+
+	xor a
+	ld [wca86], a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wJumpVelTable], a
+	ld [wJumpVelIndex], a
+
+	ld a, [wJoypadDown]
+	bit D_LEFT_F, a
+	jr nz, .asm_2a7d4
+	bit D_RIGHT_F, a
+	jr nz, .asm_2a7e5
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_2a7e5
+.asm_2a7d4
+	ld a, DIRECTION_LEFT
+	ld [wDirection], a
+	load_frameset_ptr Frameset_1fd825
+	jr .asm_2a7f4
+.asm_2a7e5
+	ld a, DIRECTION_RIGHT
+	ld [wDirection], a
+	load_frameset_ptr Frameset_1fd82e
+.asm_2a7f4
+	update_anim_2
+	ret
+; 0x2a804
+
+UpdateState_VampireWalking: ; 2a804 (a:6804)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wWarioState]
+	cp ST_VAMPIRE_WALKING
+	ret nz ; done if not vampire walking any more
+
+	update_anim_2
+	call Func_2b509
+	ld a, [wWarioState]
+	cp ST_VAMPIRE_WALKING
+	ret nz ; done if not vampire walking any more
+
+	farcall Func_198e0
+
+	ld a, [wWarioState]
+	cp ST_VAMPIRE_WALKING
+	ret nz ; done if not vampire walking any more
+
+	ld a, b
+	and a
+	ret nz
+	jp Func_2a8a7
+; 0x2a853
+
+SetState_VampireTurning: ; 2a853 (a:6853)
+	ld a, ST_VAMPIRE_TURNING
+	ld [wWarioState], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld a, [wDirection]
+	xor $1 ; switch direction
+	ld [wDirection], a
+	and a
+	jr nz, .asm_2a876
+	load_frameset_ptr Frameset_1fd841
+	jr .asm_2a880
+.asm_2a876
+	load_frameset_ptr Frameset_1fd83a
+.asm_2a880
+	update_anim_2
+	ret
+; 0x2a890
+
+UpdateState_VampireTurning: ; 2a890 (a:6890)
+	update_anim_2
+	ld a, [wAnimationHasFinished]
+	and a
+	ret z
+	jp SetState_VampireWalking
+; 0x2a8a7
+
+Func_2a8a7: ; 2a8a7 (a:68a7)
+	ld a, FALLING_JUMP_VEL_INDEX
+	ld [wJumpVelIndex], a
+	jr SetState_VampireAirborne
+; 0x2a8ae
+
+Func_2a8ae: ; 2a8ae (a:68ae)
+	load_sound SFX_1D
+	xor a
+	ld [wJumpVelIndex], a
+;	fallthrough
+
+SetState_VampireAirborne: ; 2a8ba (a:68ba)
+	ld a, ST_VAMPIRE_AIRBORNE
+	ld [wWarioState], a
+	ld a, JUMP_VEL_KNOCK_BACK
+	ld [wJumpVelTable], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ret
+; 0x2a8d2
+
+UpdateState_VampireAirborne: ; 2a8d2 (a:68d2)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wc0db]
+	and a
+	jp nz, Func_1570
+	ld a, [wWarioState]
+	cp ST_VAMPIRE_AIRBORNE
+	ret nz ; done if not vampire airborne any more
+
+	update_anim_2
+	call Func_2b55c
+	ld a, [wWarioState]
+	cp ST_VAMPIRE_AIRBORNE
+	ret nz ; done if not vampire airborne any more
+
+	ld a, [wJumpVelIndex]
+	cp FALLING_JUMP_VEL_INDEX
+	jr nc, .asm_2a92f
+	farcall Func_1996e
+	ld a, [wWarioState]
+	cp ST_VAMPIRE_AIRBORNE
+	ret nz ; done if not vampire airborne any more
+
+	ld a, b
+	and a
+	ret z
+	jp Func_2a8a7
+.asm_2a92f
+	farcall Func_199e9
+	ld a, b
+	and a
+	jr nz, .asm_2a945
+	jp Func_14de
+
+.asm_2a945
+	call Func_14f6
+	ld a, [wWarioState]
+	cp ST_VAMPIRE_AIRBORNE
+	ret nz ; done if not vampire airborne any more
+	jp SetState_VampireIdling
+; 0x2a951
+
+SetState_BatTransforming: ; 2a951 (a:6951)
+	load_sound SFX_46
+	ld a, ST_BAT_TRANSFORMING
+	ld [wWarioState], a
+
+	ld a, $f1
+	ld [wca6f], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld a, $0b
+	ld [wca7b], a
+	ld a, $58
+	ld [wca7c + 0], a
+	ld a, $00
+	ld [wca7c + 1], a
+	call Func_15b0
+	ld a, $50
+	ld [wOAMPtr + 0], a
+	ld a, $31
+	ld [wOAMPtr + 1], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_2a998
+	load_frameset_ptr Frameset_1fd40a
+	jr .asm_2a9a2
+.asm_2a998
+	load_frameset_ptr Frameset_1fd479
+.asm_2a9a2
+	update_anim_2
+	ret
+; 0x2a9b2
+
+UpdateState_BatTransforming: ; 2a9b2 (a:69b2)
+	update_anim_2
+	ld a, [wAnimationHasFinished]
+	and a
+	ret z
+;	fallthrough
+
+SetState_BatIdling: ; 2a9c6 (a:69c6)
+	ld a, ST_BAT_IDLING
+	ld [wWarioState], a
+
+	xor a
+	ld [wSFXLoopCounter], a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_2a9ee
+	load_frameset_ptr Frameset_1fd45f
+	jr .asm_2a9f8
+.asm_2a9ee
+	load_frameset_ptr Frameset_1fd46c
+.asm_2a9f8
+	update_anim_2
+	ret
+; 0x2aa08
+
+UpdateState_BatIdling: ; 2aa08 (a:6a08)
+	farcall Func_198e0
+	ld a, [wWarioState]
+	cp ST_BAT_IDLING
+	ret nz ; done if not bat idling any more
+
+	ld a, b
+	and a
+	jp z, SetState_BatFalling
+
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, $20
+	ld [wSFXLoopCounter], a
+	load_sound SFX_71
+.skip_sfx
+	update_anim_2
+
+	ld a, [wJoypadPressed]
+	bit B_BUTTON_F, a
+	jr nz, .asm_2aa55
+	bit A_BUTTON_F, a
+	jp nz, SetState_BatFlying
+	ret
+
+.asm_2aa55
+	ld a, $e5
+	ld [wca6f], a
+	farcall Func_1996e
+	ld a, [wWarioState]
+	cp ST_BAT_IDLING
+	ret nz ; done if not bat idling any more
+
+	ld a, b
+	and a
+	jr z, .asm_2aa81
+	ld a, $f1
+	ld [wca6f], a
+	load_sound SFX_E5
+	ret
+
+.asm_2aa81
+	load_sound SFX_45
+
+	ld a, ST_VAMPIRE_TRANSFORMING
+	ld [wWarioState], a
+	ld a, $04
+	ld [wca93], a
+	ld a, $04
+	ld [wca92], a
+	ld a, $02
+	ld [wca94], a
+	ld a, $ff
+	ld [wca70], a
+	ld a, $e5
+	ld [wca6f], a
+	ld a, $f7
+	ld [wca71], a
+	ld a, $09
+	ld [wca72], a
+
+	xor a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wca9a], a
+	ld [wca89], a
+	ld [wca8b], a
+	ld [wca9d], a
+	ld [wca96], a
+	ld [wJumpVelTable], a
+	ld [wJumpVelIndex], a
+	call Func_161a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld hl, $4950
+	call Func_1af6
+	ld a, $0b
+	ld [wca7b], a
+	ld a, $58
+	ld [wca7c + 0], a
+	ld a, $00
+	ld [wca7c + 1], a
+	call Func_15b0
+	ld a, $7f
+	ld [wOAMBank], a
+	ld a, $50
+	ld [wOAMPtr + 0], a
+	ld a, $31
+	ld [wOAMPtr + 1], a
+	load_frameset_ptr Frameset_1fd439
+	update_anim_2
+	ret
+; 0x2ab18
+
+UpdateState_VampireTransforming: ; 2ab18 (a:6b18)
+	update_anim_2
+	ld a, [wAnimationHasFinished]
+	and a
+	ret z
+	jp SetState_VampireIdling
+; 0x2ab2f
+
+SetState_BatFlying: ; 2ab2f (a:6b2f)
+	ld a, ST_BAT_FLYING
+	ld [wWarioState], a
+	xor a
+	ld [wSFXLoopCounter], a
+	ld [wJumpVelIndex], a
+	inc a
+	ld [wJumpVelTable], a
+	jp Func_2abc1
+; 0x2ab42
+
+UpdateState_BatFlying: ; 2ab42 (a:6b42)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wc0db]
+	and a
+	jp nz, Func_1570
+	ld a, [wWarioState]
+	cp ST_BAT_FLYING
+	ret nz ; done if not bat flying any more
+
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, $10
+	ld [wSFXLoopCounter], a
+	load_sound SFX_71
+.skip_sfx
+	update_anim_2
+
+	farcall Func_1996e
+	ld a, [wWarioState]
+	cp ST_BAT_FLYING
+	ret nz ; done if not bat flying any more
+
+	ld a, b
+	and a
+	jr nz, SetState_BatFalling
+	call Func_2b63b
+	ld a, [wWarioState]
+	cp ST_BAT_FLYING
+	ret nz ; done if not bat flying any more
+
+	call Func_2b17a
+	ld a, [wca86]
+	cp $08
+	jr c, .asm_2abbc
+	ld a, $04
+	ld [wca86], a
+.asm_2abbc
+	ld a, [wca95]
+	and a
+	ret z
+;	fallthrough
+
+Func_2abc1: ; 2abc1 (a:6bc1)
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_2abda
+	load_frameset_ptr Frameset_1fd42c
+	jr .asm_2abe4
+.asm_2abda
+	load_frameset_ptr Frameset_1fd434
+.asm_2abe4
+	update_anim_2
+	ret
+; 0x2abf4
+
+SetState_BatFalling: ; 2abf4 (a:6bf4)
+	ld a, ST_BAT_FALLING
+	ld [wWarioState], a
+	ld a, JUMP_VEL_HIGH_JUMP
+	ld [wJumpVelTable], a
+	ld a, FALLING_JUMP_VEL_INDEX
+	ld [wJumpVelIndex], a
+	ret
+; 0x2ac04
+
+UpdateState_BatFalling: ; 2ac04 (a:6c04)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wc0db]
+	and a
+	jp nz, Func_1570
+	ld a, [wWarioState]
+	cp ST_BAT_FALLING
+	ret nz ; done if not bat falling any more
+	update_anim_2
+
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	jp nz, SetState_BatFlying
+	call Func_1488
+	call Func_2b17a
+	ld a, [wca86]
+	cp $08
+	jr c, .asm_2ac50
+	ld a, $04
+	ld [wca86], a
+
+.asm_2ac50
+	ld a, [wca95]
+	and a
+	call nz, Func_2abc1
+	farcall Func_199e9
+	ld a, [wWarioState]
+	cp ST_BAT_FALLING
+	ret nz ; done if not bat falling any more
+
+	ld a, b
+	and a
+	ret z
+	ld hl, hffa8
+	ld de, wca61
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	jp SetState_BatIdling
+; 0x2ac7d
+
+	INCROM $2ac7d, $2ad06
 
 UpdateState_InBubble: ; 2ad06 (a:6d06)
 	farcall Func_19b25
@@ -3156,9 +3658,9 @@ Func_2ad6a: ; 2ad6a (a:6d6a)
 	ld a, $04
 	ld [wca7b], a
 	ld a, $60
-	ld [wca7c], a
+	ld [wca7c + 0], a
 	ld a, $00
-	ld [$ca7d], a
+	ld [wca7c + 1], a
 	call Func_15b0
 	load_oam_ptr OAM_15254
 
@@ -3852,7 +4354,64 @@ Func_2b3dd: ; 2b3dd (a:73dd)
 	ret
 ; 0x2b3f9
 
-	INCROM $2b3f9, $2b56f
+	INCROM $2b3f9, $2b4f3
+
+Func_2b4f3: ; 2b4f3 (a:74f3)
+	ld a, [wJoypadPressed]
+	bit B_BUTTON_F, a
+	jp nz, SetState_BatTransforming
+	bit A_BUTTON_F, a
+	jp nz, Func_2a8ae
+	ld a, [wJoypadDown]
+	and D_RIGHT | D_LEFT
+	jp nz, SetState_VampireWalking
+	ret
+; 0x2b509
+
+Func_2b509: ; 2b509 (a:7509)
+	ld a, [wJoypadDown]
+	bit B_BUTTON_F, a
+	jp nz, SetState_BatTransforming
+	bit A_BUTTON_F, a
+	jp nz, Func_2a8ae
+	bit D_RIGHT_F, a
+	jr nz, .asm_2b521
+	bit D_LEFT_F, a
+	jr nz, .asm_2b539
+	jp SetState_VampireIdling
+
+.asm_2b521
+	ld a, [wDirection]
+	and a
+	jp z, SetState_VampireTurning
+	farcall Func_1f11b
+	jr .asm_2b54f
+.asm_2b539
+	ld a, [wDirection]
+	and a
+	jp nz, SetState_VampireTurning
+	farcall Func_1f135
+.asm_2b54f
+	ld a, [wca86]
+	cp $10
+	jr c, .asm_2b55b
+	ld a, $0c
+	ld [wca86], a
+.asm_2b55b
+	ret
+; 0x2b55c
+
+Func_2b55c: ; 2b55c (a:755c)
+	call Func_1488
+	call Func_2b17a
+	ld a, [wca86]
+	cp $10
+	jr c, .asm_2b56e
+	ld a, $0c
+	ld [wca86], a
+.asm_2b56e
+	ret
+; 0x2b56f
 
 Func_2b56f: ; 2b56f (a:756f)
 	ld a, [wc08f]
@@ -3944,7 +4503,26 @@ Func_2b56f: ; 2b56f (a:756f)
 	jr .asm_2b602
 ; 0x2b63b
 
-	INCROM $2b63b, $2b664
+Func_2b63b: ; 2b63b (a:763b)
+	ld a, [wJoypadDown]
+	bit A_BUTTON_F, a
+	jp z, SetState_BatFalling
+
+	ld hl, wJumpVelIndex
+	inc [hl]
+	ld a, [hl]
+	cp MAX_JUMP_VEL_INDEX + 1
+	jr c, .asm_2b651
+	jp SetState_BatFalling
+
+	xor a
+	ld [hl], a
+.asm_2b651
+	ld e, a
+	ld d, $00
+	farcall Func_1f863
+	ret
+; 0x2b664
 
 Data_2b664: ; 2b664 (a:7664)
 	db $03
