@@ -8,7 +8,7 @@ Func_1c000: ; 1c000 (7:4000)
 	call Func_1f6dc
 	call Func_1f64a
 	ld a, [wWarioState]
-	cp $30 ; ST_UNKNOWN_30
+	cp $30 ; ST_SLIPPING
 	jr c, .asm_1c04d
 	cp $60 ; ST_ON_FIRE
 	jr c, .asm_1c03d
@@ -1016,12 +1016,12 @@ UpdateState_Attacking: ; 1c8df (7:48df)
 	ld hl, wca89
 	dec [hl]
 	ret nz
-	call Func_1700
-	jr z, .asm_1c9ec
-	farcall Func_19c81
+	call IsOnSlipperyGround
+	jr z, .not_slippery
+	farcall SetState_Slipping
 	ret
 
-.asm_1c9ec
+.not_slippery
 	ld a, [wJoypadDown]
 	and D_RIGHT | D_LEFT
 	jp nz, Func_1e6b5
@@ -4140,15 +4140,15 @@ HandleInput_Walking: ; 1e8ed (7:68ed)
 	jr .asm_1e93d
 
 .asm_1e970
-	call Func_1700
+	call IsOnSlipperyGround
 	jr z, SetState_Idling
-	farcall Func_19c81
+	farcall SetState_Slipping
 	ret
 
 .d_down
-	call Func_1700
+	call IsOnSlipperyGround
 	jp z, Func_1e855
-	farcall Func_19e7f
+	farcall SetState_CrouchSlipping
 	ret
 
 SetState_Idling: ; 1e99b (7:699b)
@@ -4710,11 +4710,12 @@ Func_1eefc: ; 1eefc (7:6efc)
 	jr nz, .asm_1ef31
 	bit D_LEFT_F, a
 	jr nz, .asm_1ef4d
-	call Func_1700
-	jr z, .asm_1ef2e
-	farcall Func_1a773
+	call IsOnSlipperyGround
+	jr z, .not_slippery
+	farcall SetState_GrabSlipping
 	ret
-.asm_1ef2e
+
+.not_slippery
 	jp Func_1efe7
 
 .asm_1ef31
@@ -4777,9 +4778,9 @@ Func_1eefc: ; 1eefc (7:6efc)
 	jr .asm_1efa0
 
 .asm_1efaf
-	call Func_1700
+	call IsOnSlipperyGround
 	jp z, Func_1e855
-	farcall Func_19e7f
+	farcall SetState_CrouchSlipping
 	ret
 
 .asm_1efc5

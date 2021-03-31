@@ -3158,15 +3158,17 @@ Func_16d9: ; 16d9 (0:16d9)
 	ret
 ; 0x1700
 
-Func_1700: ; 1700 (0:1700)
+; returns nz if standing on slippery ground
+IsOnSlipperyGround: ; 1700 (0:1700)
 	xor a
-	ld [wc0de], a
+	ld [wIsOnSlipperyGround], a
 
 	ld a, [wca71]
 	cpl
 	inc a
 	sub $03
-	ld c, a
+	ld c, a ; - wca71 - 3
+
 	ld hl, wca64
 	ld de, hffab
 	ld a, [hld]
@@ -3174,7 +3176,7 @@ Func_1700: ; 1700 (0:1700)
 	ld [de], a
 	dec de
 	ld a, [hld]
-	sbc $00
+	sbc 0
 	ld [de], a
 	dec de
 	ld a, [hld]
@@ -3183,13 +3185,14 @@ Func_1700: ; 1700 (0:1700)
 	ld a, [hl]
 	ld [de], a
 	farcall Func_19b51
-	ld a, [wc0de]
+	ld a, [wIsOnSlipperyGround]
 	and a
 	ret nz
 
 	ld a, [wca72]
 	sub $03
-	ld c, a
+	ld c, a ; wca72 - 3
+
 	ld hl, wca64
 	ld de, hffab
 	ld a, [hld]
@@ -3206,7 +3209,7 @@ Func_1700: ; 1700 (0:1700)
 	ld a, [hl]
 	ld [de], a
 	farcall Func_19b51
-	ld a, [wc0de]
+	ld a, [wIsOnSlipperyGround]
 	and a
 	ret
 ; 0x1762

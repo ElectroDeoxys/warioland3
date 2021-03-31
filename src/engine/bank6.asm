@@ -840,8 +840,8 @@ Func_19c1b: ; 19c1b (6:5c1b)
 	sub $30
 	jumptable
 
-	dw $5ce7                          ; ST_UNKNOWN_30
-	dw $5ef1                          ; ST_UNKNOWN_31
+	dw UpdateState_Slipping           ; ST_SLIPPING
+	dw UpdateState_CrouchSlipping     ; ST_CROUCH_SLIPPING
 	dw UpdateState_DraggedDown        ; ST_DRAGGED_DOWN
 	dw UpdateState_Teleporting        ; ST_TELEPORTING
 	dw $60b4                          ; ST_UNKNOWN_34
@@ -855,7 +855,7 @@ Func_19c1b: ; 19c1b (6:5c1b)
 	dw UpdateState_LadderShakeStunned ; ST_LADDER_SHAKE_STUNNED
 	dw UpdateState_GettingOffLadder   ; ST_GETTING_OFF_LADDER
 	dw UpdateState_LadderSliding      ; ST_LADDER_SLIDING
-	dw $67d6                          ; ST_UNKNOWN_3F
+	dw UpdateState_GrabSlipping       ; ST_GRAB_SLIPPING
 	dw $689e                          ; ST_UNKNOWN_40
 	dw $68ff                          ; ST_UNKNOWN_41
 	dw $6980                          ; ST_UNKNOWN_42
@@ -890,8 +890,8 @@ Func_19c1b: ; 19c1b (6:5c1b)
 	dw Func_156d                      ; ST_UNUSED_5F
 ; 0x19c81
 
-Func_19c81: ; 19c81 (6:5c81)
-	ld a, ST_UNKNOWN_30
+SetState_Slipping: ; 19c81 (6:5c81)
+	ld a, ST_SLIPPING
 	ld [wWarioState], a
 	xor a
 	ld [wSFXLoopCounter], a
@@ -923,14 +923,174 @@ Func_19c81: ; 19c81 (6:5c81)
 	ret
 ; 0x19ce7
 
-	INCROM $19ce7, $19e7f
+UpdateState_Slipping: ; 19ce7 (6:5ce7)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
 
-Func_19e7f: ; 19e7f (6:5e7f)
+	ld a, [wWarioStateCycles]
+	cp $04
+	jp nc, .asm_19db6
+	cp $02
+	jr nc, .asm_19d62
+	ld b, a
+
+	ld a, [wJoypadDown]
+	and D_RIGHT | D_LEFT
+	jp z, .asm_19db6
+	rlca
+	rlca
+	rlca
+	and $01
+	cp b
+	jp nz, .asm_19db6
+	xor $1
+	add 2
+	ld [wWarioStateCycles], a
+
+	ld a, $04
+	ld [wca7b], a
+	ld a, $40
+	ld [wca7c + 0], a
+	ld a, $00
+	ld [wca7c + 1], a
+	call Func_15b0
+	load_oam_ptr OAM_14a82
+
+	ld a, [wWarioStateCycles]
+	and $01
+	jr nz, .asm_19d56
+	load_frameset_ptr Frameset_14cbe
+	jr .asm_19daf
+.asm_19d56
+	load_frameset_ptr Frameset_14cc5
+	jr .asm_19daf
+
+.asm_19d62
+	ld b, a
+	ld a, [wAnimationHasFinished]
+	and a
+	jr z, .asm_19db6
+	ld a, b
+	add $02
+	ld [wWarioStateCycles], a
+	ld a, $04
+	ld [wca7b], a
+	ld a, $48
+	ld [wca7c + 0], a
+	ld a, $00
+	ld [wca7c + 1], a
+	call Func_15b0
+	load_oam_ptr OAM_1426c
+
+	ld a, [wWarioStateCycles]
+	and $01
+	jr nz, .asm_19da3
+	load_frameset_ptr Frameset_149b4
+	jr .asm_19daf
+.asm_19da3
+	load_frameset_ptr Frameset_149c5
+	jr .asm_19daf
+
+.asm_19daf
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+.asm_19db6
+	update_anim_1
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	jr z, .asm_19ddc
+	farcall StartJump_FromInput
+	ret
+
+.asm_19ddc
+	ld a, [wJoypadDown]
+	bit D_DOWN_F, a
+	jr z, .asm_19de6
+	jp Func_19e89
+
+.asm_19de6
+	farcall Func_198e0
+	ld a, [wWarioState]
+	cp ST_SLIPPING
+	ret nz ; done if not slipping any more
+
+	ld a, b
+	and a
+	jr nz, .asm_19e0f
+	farcall StartFall
+	ret
+
+.asm_19e0f
+	ld hl, hffa8
+	ld de, wca61
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	farcall Func_19734
+	ld a, [wWarioState]
+	cp ST_SLIPPING
+	ret nz ; done if not slipping any more
+
+	ld a, b
+	and a
+	jr nz, .asm_19e67
+	call IsOnSlipperyGround
+	jr z, .asm_19e67
+	ld hl, wWarioStateCounter
+	inc [hl]
+	ld a, [hl]
+	ld a, [hl]
+	cp $08
+	jr c, .asm_19e4d
+	cp $0f
+	jr c, .asm_19e57
+	cp $15
+	jr c, .asm_19e51
+	jr z, .asm_19e67
+	ret
+
+.asm_19e4d
+	ld b, $02
+	jr .asm_19e59
+.asm_19e51
+	ld a, [wc08f]
+	and $01
+	ret z
+.asm_19e57
+	ld b, $01
+.asm_19e59
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_19e63
+	call Func_1270
+	ret
+
+.asm_19e63
+	call Func_1259
+	ret
+
+.asm_19e67
+	ld a, [wWarioStateCycles]
+	and $01
+	ld [wDirection], a
+	farcall SetState_Idling
+	ret
+; 0x19e7f
+
+SetState_CrouchSlipping: ; 19e7f (6:5e7f)
 	xor a
 	ld [wWarioStateCounter], a
 	ld a, [wDirection]
 	ld [wWarioStateCycles], a
-	ld a, ST_UNKNOWN_31
+;	fallthrough
+
+Func_19e89: ; 19e89 (6:5e89)
+	ld a, ST_CROUCH_SLIPPING
 	ld [wWarioState], a
 	xor a
 	ld [wSFXLoopCounter], a
@@ -962,7 +1122,87 @@ Func_19e7f: ; 19e7f (6:5e7f)
 	ret
 ; 0x19ef1
 
-	INCROM $19ef1, $1a046
+UpdateState_CrouchSlipping: ; 19ef1 (6:5ef1)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	jr z, .asm_19f1e
+	farcall Func_1ed3f
+	ret
+
+.asm_19f1e
+	farcall Func_198e0
+	ld a, [wWarioState]
+	cp ST_CROUCH_SLIPPING
+	ret nz ; done if not crouch slipping any more
+	ld a, b
+	and a
+	jr nz, .asm_19f47
+	farcall Func_1ed34
+	ret
+
+.asm_19f47
+	ld hl, hffa8
+	ld de, wca61
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	farcall Func_19734
+	ld a, [wWarioState]
+	cp ST_CROUCH_SLIPPING
+	ret nz ; done if not crouch slipping any more
+	ld a, b
+	and a
+	jr nz, .asm_19f9e
+	call IsOnSlipperyGround
+	jr z, .asm_19f9e
+
+	ld hl, wWarioStateCounter
+	inc [hl]
+	ld a, [hl]
+	cp $06
+	jr c, .asm_19f84
+	cp $0a
+	jr c, .asm_19f8e
+	cp $0e
+	jr c, .asm_19f88
+	jr nc, .asm_19f9e
+	ret
+
+.asm_19f84
+	ld b, $02
+	jr .asm_19f90
+.asm_19f88
+	ld a, [wc08f]
+	and $01
+	ret z
+.asm_19f8e
+	ld b, $01
+.asm_19f90
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_19f9a
+	call Func_1270
+	ret
+
+.asm_19f9a
+	call Func_1259
+	ret
+
+.asm_19f9e
+	ld a, [wWarioStateCycles]
+	and $01
+	ld [wDirection], a
+	farcall Func_1e855
+	ret
+; 0x19fb6
+
+	INCROM $19fb6, $1a046
 
 UpdateState_DraggedDown: ; 1a046 (6:6046)
 	update_anim_1
@@ -1609,8 +1849,8 @@ UpdateState_LadderSliding: ; 1a6b6 (6:66b6)
 	ret
 ; 0x1a773
 
-Func_1a773: ; 1a773 (6:6773)
-	ld a, ST_UNKNOWN_3F
+SetState_GrabSlipping: ; 1a773 (6:6773)
+	ld a, ST_GRAB_SLIPPING
 	ld [wWarioState], a
 	xor a
 	ld [wSFXLoopCounter], a
@@ -1641,7 +1881,83 @@ Func_1a773: ; 1a773 (6:6773)
 	ret
 ; 0x1a7d6
 
-	INCROM $1a7d6, $1ac10
+UpdateState_GrabSlipping: ; 1a7d6 (6:67d6)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wca9a]
+	and a
+	jr nz, .asm_1a802
+	farcall SetState_Idling
+	ret
+.asm_1a802
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	jr z, .asm_1a819
+	farcall Func_1ede9
+	ret
+
+.asm_1a819
+	farcall Func_198e0
+	ld a, [wWarioState]
+	cp ST_GRAB_SLIPPING
+	ret nz ; done if not grab slipping any more
+	ld a, b
+	and a
+	jr nz, .asm_1a842
+	farcall Func_1edd3
+	ret
+
+.asm_1a842
+	farcall Func_19734
+	ld a, [wWarioState]
+	cp ST_GRAB_SLIPPING
+	ret nz ; done if not grab slipping any more
+	ld a, b
+	and a
+	jr nz, .asm_1a88e
+	call IsOnSlipperyGround
+	jr z, .asm_1a88e
+
+	ld hl, wWarioStateCounter
+	inc [hl]
+	ld a, [hl]
+	cp $08
+	jr c, .asm_1a874
+	cp $0f
+	jr c, .asm_1a87e
+	cp $15
+	jr c, .asm_1a878
+	jr z, .asm_1a88e
+	ret
+
+.asm_1a874
+	ld b, $02
+	jr .asm_1a880
+.asm_1a878
+	ld a, [wc08f]
+	and $01
+	ret z
+.asm_1a87e
+	ld b, $01
+.asm_1a880
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1a88a
+	call Func_1270
+	ret
+
+.asm_1a88a
+	call Func_1259
+	ret
+
+.asm_1a88e
+	farcall Func_1efe7
+	ret
+; 0x1a89e
+
+	INCROM $1a89e, $1ac10
 
 SetState_Sleeping: ; 1ac10 (6:6c10)
 	ld a, ST_SLEEPING

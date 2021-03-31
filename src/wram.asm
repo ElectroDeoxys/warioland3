@@ -276,7 +276,7 @@ wc0dc:: ; c0dc
 wc0dd:: ; c0dd
 	ds $1
 
-wc0de:: ; c0de
+wIsOnSlipperyGround:: ; c0de
 	ds $1
 
 	ds $1

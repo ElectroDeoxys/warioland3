@@ -47,8 +47,8 @@
 	const ST_UNUSED_2D                     ; 2d
 	const ST_UNUSED_2E                     ; 2e
 	const ST_UNUSED_2F                     ; 2f
-	const ST_UNKNOWN_30                    ; 30
-	const ST_UNKNOWN_31                    ; 31
+	const ST_SLIPPING                      ; 30
+	const ST_CROUCH_SLIPPING               ; 31
 	const ST_DRAGGED_DOWN                  ; 32
 	const ST_TELEPORTING                   ; 33
 	const ST_UNKNOWN_34                    ; 34
@@ -62,7 +62,7 @@
 	const ST_LADDER_SHAKE_STUNNED          ; 3c
 	const ST_GETTING_OFF_LADDER            ; 3d
 	const ST_LADDER_SLIDING                ; 3e
-	const ST_UNKNOWN_3F                    ; 3f
+	const ST_GRAB_SLIPPING                 ; 3f
 	const ST_UNKNOWN_40                    ; 40
 	const ST_UNKNOWN_41                    ; 41
 	const ST_UNKNOWN_42                    ; 42

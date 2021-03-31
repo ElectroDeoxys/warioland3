@@ -8514,7 +8514,7 @@ Func_b915: ; b915 (2:7915)
 	ret z
 	cp ST_LADDER_CLIMBING
 	jr c, .asm_b97b
-	cp ST_UNKNOWN_3F
+	cp ST_GRAB_SLIPPING
 	ret c
 
 .asm_b97b

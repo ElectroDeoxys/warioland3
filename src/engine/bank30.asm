@@ -1663,7 +1663,9 @@ PalPointers: ; c0b1b (30:4b1b)
 	dw Pals_ce440
 ; 0xc0c3f
 
-	INCROM $c0c3f, $c0c51
+rept $12
+	db $ff
+endr
 
 PointerTable_c0c51: ; c0c51 (30:4c51)
 	dw .data_c0c79
@@ -1746,7 +1748,7 @@ Data_c0ce5: ; c0ce5 (30:4ce5)
 	db $05, $12
 	db $09, $13
 
-	INCROM $c0d0f, $c0d1f
+	ds $10
 
 Data_c0d1f: ; c0d1f (30:4d1f)
 	dw .data_c0d5b
