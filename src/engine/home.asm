@@ -269,7 +269,7 @@ HandleSound: ; 290 (0:290)
 	ld a, [wc090]
 	and a
 	ret nz
-	ld hl, hSoundID
+	ld hl, hSFXID
 	ld a, [hli]
 	cp $ff
 	jr nz, .asm_2a2
@@ -288,7 +288,7 @@ HandleSound: ; 290 (0:290)
 	call PlaySFX
 
 .music
-	ld hl, hffb1
+	ld hl, hMusicID
 	ld a, [hli]
 	cp $ff
 	jr nz, .asm_2c0
@@ -1314,13 +1314,13 @@ Func_928: ; 928 (0:928)
 	ld [wc186], a
 	ld [$d506], a
 	ld a, $ff
-	ldh [hffb1], a
+	ldh [hMusicID + 0], a
 	ld a, $00
-	ldh [hffb2], a
+	ldh [hMusicID + 1], a
 	ld a, $ff
-	ldh [hSoundID + 0], a
+	ldh [hSFXID + 0], a
 	ld a, $00
-	ldh [hSoundID + 1], a
+	ldh [hSFXID + 1], a
 	ld hl, wSubSequence
 	inc [hl]
 	jr .asm_95a
@@ -2386,7 +2386,7 @@ PlayNewMusic_SetNoise: ; 1062 (0:1062)
 ; 0x1070
 
 Func_1070: ; 1070 (0:1070)
-	load_sound SFX_12
+	load_sfx SFX_12
 	ret
 ; 0x1079
 
@@ -2541,7 +2541,7 @@ Func_11ae: ; 11ae (0:11ae)
 	ld a, $68
 .asm_11bc
 	ld [wc1a9], a
-	load_sound SFX_E1
+	load_sfx SFX_E1
 	ld a, $08
 	ld [wc1aa], a
 	ld a, $01
@@ -2554,7 +2554,7 @@ Func_11ae: ; 11ae (0:11ae)
 Func_11d6: ; 11d6 (0:11d6)
 	ld a, c
 	ld [wca78], a
-	load_sound SFX_E1
+	load_sfx SFX_E1
 	ld a, $04
 	ld [wc1aa], a
 	ld a, $01
@@ -2603,13 +2603,13 @@ Func_11f6: ; 11f6 (0:11f6)
 	inc [hl]
 	inc [hl]
 	ld a, $ff
-	ldh [hffb1], a
+	ldh [hMusicID + 0], a
 	ld a, $00
-	ldh [hffb2], a
+	ldh [hMusicID + 1], a
 	ld a, $ff
-	ldh [hSoundID + 0], a
+	ldh [hSFXID + 0], a
 	ld a, $00
-	ldh [hSoundID + 1], a
+	ldh [hSFXID + 1], a
 	ret
 ; 0x1259
 
@@ -3018,7 +3018,7 @@ Func_15b0: ; 15b0 (0:15b0)
 
 	INCROM $15dc, $161a
 
-; loads a music ID to hffb1, depending on wLevel
+; loads a music ID to hMusicID, depending on wLevel
 Func_161a: ; 161a (0:161a)
 	ld a, [wcac3]
 	and a
@@ -3040,9 +3040,9 @@ Func_161a: ; 161a (0:161a)
 	ld hl, LevelMusic
 	add hl, de
 	ld a, [hli]
-	ldh [hffb2], a
+	ldh [hMusicID + 1], a
 	ld a, [hl]
-	ldh [hffb1], a
+	ldh [hMusicID + 0], a
 	pop af
 	bankswitch
 	ret
@@ -3052,12 +3052,12 @@ Func_161a: ; 161a (0:161a)
 	ld d, $00
 	add a
 	ld e, a
-	ld hl, .data
+	ld hl, .BossMusicIDs
 	add hl, de
 	ld a, [hli]
-	ldh [hffb2], a
+	ldh [hMusicID + 1], a
 	ld a, [hl]
-	ldh [hffb1], a
+	ldh [hMusicID + 0], a
 	ret
 
 .asm_165d
@@ -3069,21 +3069,21 @@ Func_161a: ; 161a (0:161a)
 	rl d
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(Data_3fe00)
+	ld a, BANK(TransformationMusicIDs)
 	bankswitch
-	ld hl, Data_3fe00
+	ld hl, TransformationMusicIDs
 	add hl, de
 	ld a, [hli]
 	cp $ff ; is it null?
 	jr z, .asm_1632
-	ldh [hffb2], a
+	ldh [hMusicID + 1], a
 	ld a, [hl]
-	ldh [hffb1], a
+	ldh [hMusicID + 0], a
 	pop af
 	bankswitch
 	ret
 
-.data
+.BossMusicIDs
 	dw MUSIC_HIDDEN_FIGURE_BATTLE_1
 	dw MUSIC_BOSS_BATTLE
 	dw MUSIC_BOSS_DEFEAT

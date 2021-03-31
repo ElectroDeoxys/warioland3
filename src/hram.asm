@@ -44,15 +44,12 @@ hffaf:: ; ffaf
 hffb0:: ; ffb0
 	ds $1
 
-hffb1:: ; ffb1
-	ds $1
-
-hffb2:: ; ffb2
-	ds $1
+hMusicID:: ; ffb1
+	ds $2
 
 	ds $2
 
-hSoundID:: ; ffb5
+hSFXID:: ; ffb5
 	ds $2
 
 	ds $31

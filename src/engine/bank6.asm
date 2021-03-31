@@ -227,7 +227,7 @@ Func_19832: ; 19832 (6:5832)
 	ld a, [wca89]
 	and a
 	jr nz, .asm_198c0
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jr nz, .asm_198c0
 	ld a, [wca8b]
@@ -261,8 +261,10 @@ Func_19832: ; 19832 (6:5832)
 	call Func_1259
 	farcall Func_1e855
 	jr .asm_198c1
+
 .asm_198c0
 	ret
+
 .asm_198c1
 	xor a
 	ld [wc18d], a
@@ -718,7 +720,7 @@ Func_19b25: ; 19b25 (6:5b25)
 
 Func_19b3a: ; 19b3a (6:5b3a)
 	xor a
-	ld [wc0db], a
+	ld [wWaterInteraction], a
 	ld [wLadderInteraction], a
 	ld [wc0d7], a
 	ld [wIsInSand], a
@@ -1001,7 +1003,7 @@ UpdateState_Teleporting: ; 1a077 (6:6077)
 	jp Func_11f6
 
 .play_sfx
-	load_sound SFX_82
+	load_sfx SFX_82
 	ret
 ; 0x1a0b4
 
@@ -1084,7 +1086,7 @@ UpdateState_SandFalling: ; 1a17e (6:617e)
 ; 0x1a1a7
 
 SetState_SandJumping: ; 1a1a7 (6:61a7)
-	load_sound SFX_JUMP
+	load_sfx SFX_JUMP
 	ld a, ST_SAND_JUMPING
 	ld [wWarioState], a
 	xor a
@@ -1209,7 +1211,7 @@ UpdateState_SandWalking: ; 1a2d6 (6:62d6)
 	jr nc, .skip_sfx
 	ld a, $24
 	ld [wSFXLoopCounter], a
-	load_sound SFX_WALK
+	load_sfx SFX_WALK
 
 .skip_sfx
 	update_anim_1
@@ -1327,7 +1329,7 @@ UpdateState_LadderClimbing: ; 1a436 (6:6436)
 	jr nc, .skip_sfx
 	ld a, 32
 	ld [wSFXLoopCounter], a
-	load_sound SFX_CLIMB
+	load_sfx SFX_CLIMB
 .skip_sfx
 	update_anim_1
 
@@ -1493,7 +1495,7 @@ UpdateState_GettingOffLadder: ; 1a617 (6:6617)
 	jr nc, .skip_sfx
 	ld a, 32
 	ld [wSFXLoopCounter], a
-	load_sound SFX_CLIMB
+	load_sfx SFX_CLIMB
 .skip_sfx
 
 	ld a, [wDirection]
@@ -1521,7 +1523,7 @@ UpdateState_GettingOffLadder: ; 1a617 (6:6617)
 SetState_LadderSliding: ; 1a66b (6:666b)
 	ld a, ST_LADDER_SLIDING
 	ld [wWarioState], a
-	load_sound SFX_0C
+	load_sfx SFX_0C
 	xor a
 	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
@@ -1683,7 +1685,7 @@ UpdateState_Sleeping: ; 1ac73 (6:6c73)
 	ld a, [wAnimationHasFinished]
 	and a
 	ret z
-	load_sound SFX_36
+	load_sfx SFX_36
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -1705,7 +1707,7 @@ UpdateState_Sleeping: ; 1ac73 (6:6c73)
 	ld a, [wAnimationHasFinished]
 	and a
 	jr z, .asm_1acde
-	load_sound SFX_36
+	load_sfx SFX_36
 .asm_1acde
 	ld a, [wJoypadDown]
 	and a

@@ -73,13 +73,10 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld a, [wAnimatedTilesGroup]
 	ld [$d510], a
 	ld a, $ff
-	ldh [hSoundID + 0], a
+	ldh [hSFXID + 0], a
 	ld a, $00
-	ldh [hSoundID + 1], a
-	ld a, $00
-	ldh [hffb1], a
-	ld a, $25
-	ldh [hffb2], a
+	ldh [hSFXID + 1], a
+	load_music MUSIC_PAUSE_MENU
 	xor a
 	ld [w3d513], a
 	xor a

@@ -57,7 +57,7 @@
 	const MUSIC_HIDDEN_FIGURE_BATTLE_1     ; 035
 	const MUSIC_PERFECT                    ; 036
 	const MUSIC_TREASURE_COLLECTION        ; 037
-	const MUSIC_OUTRO                      ; 038
+	const MUSIC_PROLOGUE                   ; 038
 	const MUSIC_HIDDEN_FIGURE_REVEAL       ; 039
 	const MUSIC_HIDDEN_FIGURE_BATTLE_2     ; 03a
 
@@ -301,3 +301,19 @@
 	const SFX_ED                           ; 1ed
 	const SFX_EE                           ; 1ee
 	const SFX_EF                           ; 1ef
+	const SFX_F0                           ; 1f0
+	const SFX_F1                           ; 1f1
+	const SFX_F2                           ; 1f2
+	const SFX_F3                           ; 1f3
+	const SFX_F4                           ; 1f4
+	const SFX_F5                           ; 1f5
+	const SFX_F6                           ; 1f6
+	const SFX_F7                           ; 1f7
+	const SFX_F8                           ; 1f8
+	const SFX_F9                           ; 1f9
+	const SFX_FA                           ; 1fa
+	const SFX_FB                           ; 1fb
+	const SFX_FC                           ; 1fc
+	const SFX_FD                           ; 1fd
+	const SFX_FE                           ; 1fe
+	const SFX_FF                           ; 1ff

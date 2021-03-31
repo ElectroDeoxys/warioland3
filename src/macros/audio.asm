@@ -1,6 +1,13 @@
-load_sound: MACRO
+load_music: MACRO
 	ld a, HIGH(\1)
-	ldh [hSoundID + 0], a
+	ldh [hMusicID + 0], a
 	ld a, LOW(\1)
-	ldh [hSoundID + 1], a
+	ldh [hMusicID + 1], a
+ENDM
+
+load_sfx: MACRO
+	ld a, HIGH(\1)
+	ldh [hSFXID + 0], a
+	ld a, LOW(\1)
+	ldh [hSFXID + 1], a
 ENDM

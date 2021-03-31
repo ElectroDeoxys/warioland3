@@ -97,7 +97,7 @@ UpdateState_OnFire: ; 280a6 (a:40a6)
 	jr nc, .skip_sfx
 	ld a, 14
 	ld [wSFXLoopCounter], a
-	load_sound SFX_1E
+	load_sfx SFX_1E
 .skip_sfx
 
 	ld a, [wWarioStateCounter]
@@ -205,7 +205,7 @@ UpdateState_OnFireAirborne: ; 281c1 (a:41c1)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, Func_2ade4
 	ld a, [wWarioStateCounter]
@@ -276,7 +276,7 @@ UpdateState_Hot: ; 2827a (a:427a)
 	jr nc, .skip_sfx
 	ld a, 16
 	ld [wSFXLoopCounter], a
-	load_sound SFX_1F
+	load_sfx SFX_1F
 .skip_sfx
 	update_anim_1
 
@@ -327,7 +327,7 @@ UpdateState_Hot: ; 2827a (a:427a)
 	ret
 
 .asm_28313
-	load_sound SFX_22
+	load_sfx SFX_22
 
 	ld a, ST_BURNT
 	ld [wWarioState], a
@@ -383,7 +383,7 @@ UpdateState_HotAirborne: ; 2839f (a:439f)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, Func_2ade4
 	update_anim_1
@@ -440,7 +440,7 @@ UpdateState_GettingFlatAirborne: ; 28511 (a:4511)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, SetState_FlatSinking
 	ld b, $02
@@ -572,7 +572,7 @@ UpdateState_FlatWalking: ; 28672 (a:4672)
 	jr nc, .skip_sfx
 	ld a, 10
 	ld [wSFXLoopCounter], a
-	load_sound SFX_FLAT_WALK
+	load_sfx SFX_FLAT_WALK
 .skip_sfx
 	update_anim_1
 
@@ -593,7 +593,7 @@ UpdateState_FlatWalking: ; 28672 (a:4672)
 ; 0x286d1
 
 SetState_FlatJumping: ; 286d1 (a:46d1)
-	load_sound SFX_1D
+	load_sfx SFX_1D
 
 	ld a, ST_FLAT_JUMPING
 	ld [wWarioState], a
@@ -673,7 +673,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, SetState_FlatSinking
 
@@ -718,7 +718,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 	ld a, b
 	and a
 	jp z, .asm_288b8
-	load_sound SFX_03
+	load_sfx SFX_03
 
 	ld a, [wDirection]
 	xor $1 ; switch direction
@@ -794,7 +794,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 	jr nz, .asm_288d7
 	jp Func_14de
 .asm_288d7
-	load_sound SFX_20
+	load_sfx SFX_20
 	call Func_14f6
 	jp SetState_FlatIdling
 ; 0x288e5
@@ -1030,7 +1030,7 @@ UpdateState_BallOString: ; 28b36 (a:4b36)
 	jr nc, .skip_sfx
 	ld a, 12
 	ld [wSFXLoopCounter], a
-	load_sound SFX_ROLL
+	load_sfx SFX_ROLL
 .skip_sfx
 	update_anim_1
 
@@ -1116,7 +1116,7 @@ UpdateState_BallOStringAirborne: ; 28c25 (a:4c25)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, Func_1570
 	update_anim_1
@@ -1146,7 +1146,7 @@ UpdateState_BallOStringAirborne: ; 28c25 (a:4c25)
 SetState_BallOStringKnockBack: ; 28c94 (a:4c94)
 	xor a
 	ld [wca8f], a
-	load_sound SFX_03
+	load_sfx SFX_03
 	ld a, ST_BALL_O_STRING_KNOCK_BACK
 	ld [wWarioState], a
 	ld a, $0a
@@ -1178,7 +1178,7 @@ UpdateState_BallOStringKnockBack: ; 28ceb (a:4ceb)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, Func_1570
 	update_anim_1
@@ -1200,7 +1200,7 @@ UpdateState_BallOStringKnockBack: ; 28ceb (a:4ceb)
 	xor $1 ; switch direction
 	ld [wDirection], a
 	call Func_14f6
-	load_sound SFX_3C
+	load_sfx SFX_3C
 
 	ld a, ST_GETTING_UNWRAPPED_IN_STRING
 	ld [wWarioState], a
@@ -1233,7 +1233,7 @@ UpdateState_GettingUnwrappedInString: ; 28d92 (a:4d92)
 	and a
 	ret z
 
-	load_sound SFX_3D
+	load_sfx SFX_3D
 	ld a, ST_BALL_O_STRING_DIZZY
 	ld [wWarioState], a
 	ld a, $ff
@@ -1292,7 +1292,7 @@ UpdateState_FatEating: ; 28e87 (a:4e87)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, Func_2926a
 	ld a, [wJumpVelTable]
@@ -1414,7 +1414,7 @@ UpdateState_FatWalking: ; 28fc0 (a:4fc0)
 	jr nc, .skip_sfx
 	ld a, 28
 	ld [wSFXLoopCounter], a
-	load_sound SFX_FAT_WALK
+	load_sfx SFX_FAT_WALK
 .skip_sfx
 	update_anim_1
 
@@ -1477,7 +1477,7 @@ UpdateState_FatTurning: ; 2906d (a:506d)
 	jp SetState_FatWalking
 
 Func_290a1: ; 290a1 (a:50a1)
-	load_sound SFX_JUMP
+	load_sfx SFX_JUMP
 
 	xor a
 	ld [wJumpVelIndex], a
@@ -1529,7 +1529,7 @@ UpdateState_FatAirborne: ; 29123 (a:5123)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, Func_2926a
 	call Func_2ae2f
@@ -1598,7 +1598,7 @@ UpdateState_FatAirborne: ; 29123 (a:5123)
 	ld a, [wc1aa]
 	and a
 	jr nz, SetState_FatLanding
-	load_sound SFX_24
+	load_sfx SFX_24
 ;	fallthrough
 
 SetState_FatLanding: ; 291ff (a:51ff)
@@ -1658,7 +1658,7 @@ Func_2926a: ; 2926a (a:526a)
 	ldh [hffa9], a
 	ld b, $03
 	farcall Func_c9f3
-	load_sound SFX_0D
+	load_sfx SFX_0D
 
 	ld a, ST_FAT_SINKING
 	ld [wWarioState], a
@@ -1792,7 +1792,7 @@ UpdateState_Electric: ; 294bf (a:54bf)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, Func_1570
 	update_anim_1
@@ -1912,7 +1912,7 @@ UpdateState_Electric: ; 294bf (a:54bf)
 	ret
 
 .asm_295d8
-	load_sound SFX_41
+	load_sfx SFX_41
 
 	ld a, [wDirection]
 	and a
@@ -2065,7 +2065,7 @@ UpdateState_PuffyRising: ; 29871 (a:5871)
 	jr nc, .skip_sfx
 	ld a, 32
 	ld [wSFXLoopCounter], a
-	load_sound SFX_PUFF_RAISE
+	load_sfx SFX_PUFF_RAISE
 .skip_sfx
 
 	ld a, [wOAMBank]
@@ -2133,7 +2133,7 @@ UpdateState_PuffyTurning: ; 298f3 (a:58f3)
 ; 0x2992a
 
 SetState_PuffyDeflating: ; 2992a (a:592a)
-	load_sound SFX_27
+	load_sfx SFX_27
 
 	ld a, ST_PUFFY_DEFLATING
 	ld [wWarioState], a
@@ -2331,7 +2331,7 @@ UpdateState_ZombieWalking: ; 29b06 (a:5b06)
 	jr nc, .skip_sfx
 	ld a, 36
 	ld [wSFXLoopCounter], a
-	load_sound SFX_ZOMBIE_WALK
+	load_sfx SFX_ZOMBIE_WALK
 .skip_sfx
 	update_anim_2
 
@@ -2433,7 +2433,7 @@ UpdateState_ZombieAirborne: ; 29c29 (a:5c29)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, Func_1570
 	ld a, [wWarioState]
@@ -2496,7 +2496,7 @@ UpdateState_ZombieAirborne: ; 29c29 (a:5c29)
 ;	fallthrough
 
 SetState_ZombieLanding: ; 29cde (a:5cde)
-	load_sound SFX_2A
+	load_sfx SFX_2A
 	ld a, $02
 	ld [wca93], a
 	ld a, $02
@@ -2585,7 +2585,7 @@ UpdateState_ZombieSlippingThroughFloor: ; 29dd3 (a:5dd3)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, Func_1570
 	ld a, [wWarioState]
@@ -2712,7 +2712,7 @@ UpdateState_BouncyStart: ; 29ffa (a:5ffa)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, Func_1570
 	call Func_1488
@@ -2801,7 +2801,7 @@ UpdateState_BouncyFloor: ; 2a087 (a:6087)
 SetState_BouncyAirborne: ; 2a0cb (a:60cb)
 	ld a, ST_BOUNCY_AIRBORNE
 	ld [wWarioState], a
-	load_sound SFX_2B
+	load_sfx SFX_2B
 
 	xor a
 	ld [wFrameDuration], a
@@ -2816,7 +2816,7 @@ UpdateState_BouncyAirborne: ; 2a0f9 (a:60f9)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, Func_1570
 	ld a, [wAnimationHasFinished]
@@ -2962,7 +2962,7 @@ UpdateState_BouncyUpsideDown: ; 2a267 (a:6267)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, Func_1570
 	call Func_1488
@@ -3051,7 +3051,7 @@ UpdateState_BouncyLastBounce: ; 2a362 (a:6362)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, Func_1570
 	ld a, [wAnimationHasFinished]
@@ -3105,7 +3105,7 @@ UpdateState_CrazySpinning: ; 2a489 (a:6489)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, Func_1570
 
@@ -3134,7 +3134,7 @@ UpdateState_CrazySpinning: ; 2a489 (a:6489)
 	ret c
 	ld [hl], $00
 
-	load_sound SFX_43
+	load_sfx SFX_43
 	ld a, ST_CRAZY_DIZZY
 	ld [wWarioState], a
 
@@ -3169,7 +3169,7 @@ UpdateState_CrazyDizzy: ; 2a544 (a:6544)
 ;	fallthrough
 
 SetState_Crazy: ; 2a558 (a:6558)
-	load_sound SFX_43
+	load_sfx SFX_43
 	ld a, ST_CRAZY
 	ld [wWarioState], a
 
@@ -3302,7 +3302,7 @@ UpdateState_CrazyAirborne: ; 2a6c0 (a:66c0)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, Func_1570
 	update_anim_2
@@ -3475,7 +3475,7 @@ Func_2a8a7: ; 2a8a7 (a:68a7)
 ; 0x2a8ae
 
 Func_2a8ae: ; 2a8ae (a:68ae)
-	load_sound SFX_1D
+	load_sfx SFX_1D
 	xor a
 	ld [wJumpVelIndex], a
 ;	fallthrough
@@ -3498,7 +3498,7 @@ UpdateState_VampireAirborne: ; 2a8d2 (a:68d2)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, Func_1570
 	ld a, [wWarioState]
@@ -3539,7 +3539,7 @@ UpdateState_VampireAirborne: ; 2a8d2 (a:68d2)
 ; 0x2a951
 
 SetState_BatTransforming: ; 2a951 (a:6951)
-	load_sound SFX_46
+	load_sfx SFX_46
 	ld a, ST_BAT_TRANSFORMING
 	ld [wWarioState], a
 
@@ -3619,7 +3619,7 @@ UpdateState_BatIdling: ; 2aa08 (a:6a08)
 	jr nc, .skip_sfx
 	ld a, $20
 	ld [wSFXLoopCounter], a
-	load_sound SFX_71
+	load_sfx SFX_71
 .skip_sfx
 	update_anim_2
 
@@ -3643,11 +3643,11 @@ UpdateState_BatIdling: ; 2aa08 (a:6a08)
 	jr z, .asm_2aa81
 	ld a, $f1
 	ld [wca6f], a
-	load_sound SFX_E5
+	load_sfx SFX_E5
 	ret
 
 .asm_2aa81
-	load_sound SFX_45
+	load_sfx SFX_45
 
 	ld a, ST_VAMPIRE_TRANSFORMING
 	ld [wWarioState], a
@@ -3725,7 +3725,7 @@ UpdateState_BatFlying: ; 2ab42 (a:6b42)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, Func_1570
 	ld a, [wWarioState]
@@ -3738,7 +3738,7 @@ UpdateState_BatFlying: ; 2ab42 (a:6b42)
 	jr nc, .skip_sfx
 	ld a, $10
 	ld [wSFXLoopCounter], a
-	load_sound SFX_71
+	load_sfx SFX_71
 .skip_sfx
 	update_anim_2
 
@@ -3799,7 +3799,7 @@ UpdateState_BatFalling: ; 2ac04 (a:6c04)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, Func_1570
 	ld a, [wWarioState]
@@ -3844,7 +3844,7 @@ UpdateState_BatFalling: ; 2ac04 (a:6c04)
 
 UpdateState_InBubble: ; 2ad06 (a:6d06)
 	farcall Func_19b25
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jr z, .asm_2ad45
 
@@ -3854,7 +3854,7 @@ UpdateState_InBubble: ; 2ad06 (a:6d06)
 	jr nc, .skip_sfx
 	ld a, $0e
 	ld [wSFXLoopCounter], a
-	load_sound SFX_23
+	load_sfx SFX_23
 .skip_sfx
 	update_anim_2
 	call Func_2b56f
@@ -3937,7 +3937,7 @@ Func_2ade4: ; 2ade4 (a:6de4)
 	ldh [hffa9], a
 	ld b, $07
 	farcall Func_c9f3
-	load_sound SFX_0D
+	load_sfx SFX_0D
 	farcall Func_1cd7c
 	ret
 ; 0x2ae2f
@@ -4096,7 +4096,7 @@ Func_2af75: ; 2af75 (a:6f75)
 	jr SetState_OnFireAirborne
 
 Func_2af81: ; 2af81 (a:6f81)
-	load_sound SFX_JUMP
+	load_sfx SFX_JUMP
 
 	xor a
 	ld [wJumpVelIndex], a

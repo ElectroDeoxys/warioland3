@@ -121,7 +121,7 @@ UpdateState_IceSkatin: ; 1ec177 (7b:4177)
 	jr nc, .skip_sfx
 	ld a, $0c
 	ld [wSFXLoopCounter], a
-	load_sound SFX_SLIDE
+	load_sfx SFX_SLIDE
 .skip_sfx
 	update_anim_2
 
@@ -182,7 +182,7 @@ UpdateState_IceSkatinAirborne: ; 1ec22b (7b:422b)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, SetState_IceSkatinCrash
 
@@ -224,7 +224,7 @@ UpdateState_IceSkatinAirborne: ; 1ec22b (7b:422b)
 ; 0x1ec2bb
 
 SetState_IceSkatinCrash: ; 1ec2bb (7b:42bb)
-	load_sound SFX_2E
+	load_sfx SFX_2E
 
 	ld a, ST_ICE_SKATIN_CRASH
 	ld [wWarioState], a
@@ -331,7 +331,7 @@ UpdateState_SplitKnockedBack: ; 1ecf86 (7b:4f86)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, Func_1570
 	call Func_1488
@@ -344,7 +344,7 @@ UpdateState_SplitKnockedBack: ; 1ecf86 (7b:4f86)
 	jp Func_14de
 
 .play_sfx
-	load_sound SFX_44
+	load_sfx SFX_44
 
 	xor a
 	ld [wFrameDuration], a
@@ -395,7 +395,7 @@ UpdateState_Splitting: ; 1ed018 (7b:5018)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, Func_1570
 	update_anim_2
@@ -610,7 +610,7 @@ Func_1ed548: ; 1ed548 (7b:5548)
 ; 0x1ed558
 
 Func_1ed558: ; 1ed558 (7b:5558)
-	load_sound SFX_JUMP
+	load_sfx SFX_JUMP
 
 	xor a
 	ld [wJumpVelIndex], a
@@ -666,7 +666,7 @@ UpdateState_BlindAirborne: ; 1ed5e2 (7b:55e2)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	jp nz, Func_1570
 	farcall Func_19734
@@ -720,7 +720,7 @@ UpdateState_MagicRising: ; 1ed972 (7b:5972)
 	jr nc, .skip_sfx
 	ld a, $0c
 	ld [wSFXLoopCounter], a
-	load_sound SFX_7D
+	load_sfx SFX_7D
 .skip_sfx
 
 	ld a, $77
@@ -819,7 +819,7 @@ UpdateState_BallBouncing: ; 1edb47 (7b:5b47)
 ;	fallthrough
 
 SetState_BallAirborne: ; 1edb5b (7b:5b5b)
-	load_sound SFX_66
+	load_sfx SFX_66
 	ld a, JUMP_VEL_KNOCK_BACK
 	ld [wJumpVelTable], a
 
@@ -995,7 +995,7 @@ UpdateState_BallThrown: ; 1edcd0 (7b:5cd0)
 
 	ld a, ST_BALL_SENT_UPWARDS
 	ld [wWarioState], a
-	load_sound SFX_66
+	load_sfx SFX_66
 
 	xor a
 	ld [wSFXLoopCounter], a

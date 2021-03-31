@@ -263,7 +263,11 @@ wc0d9:: ; c0d9
 wc0da:: ; c0da
 	ds $1
 
-wc0db:: ; c0db
+; current position's interaction type with the water
+; 0 = no water
+; 1 = submersible water
+; 2 = non-submersible water
+wWaterInteraction:: ; c0db
 	ds $1
 
 wc0dc:: ; c0dc

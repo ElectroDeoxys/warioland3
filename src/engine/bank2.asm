@@ -352,21 +352,15 @@ Func_80aa: ; 80aa (2:40aa)
 	jr nz, .asm_8308
 
 .asm_82ff
-	ld a, $01
-	ldh [hSoundID + 0], a
-	ld a, $e5
-	ldh [hSoundID + 1], a
+	load_sfx SFX_E5
 	ret
 
 .asm_8308
-	ld a, $01
-	ldh [hSoundID + 0], a
-	ld a, $e4
-	ldh [hSoundID + 1], a
+	load_sfx SFX_E4
 	ld a, $ff
-	ldh [hffb1], a
+	ldh [hMusicID + 0], a
 	ld a, $00
-	ldh [hffb2], a
+	ldh [hMusicID + 1], a
 	xor a
 	ld [wced9], a
 	ld a, $01
@@ -8509,7 +8503,7 @@ Func_b915: ; b915 (2:7915)
 	ret
 
 .asm_b964
-	ld a, [wc0db]
+	ld a, [wWaterInteraction]
 	and a
 	ret nz
 	ld a, [wJumpVelIndex]

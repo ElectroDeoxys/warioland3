@@ -313,7 +313,7 @@ Func_206eb: ; 206eb (8:46eb)
 	ld a, $01
 	ld [wca8c], a
 
-	load_sound SFX_13
+	load_sfx SFX_13
 
 	ld a, ST_STUNG
 	ld [wWarioState], a

@@ -1,6 +1,6 @@
 	INCROM $3c000, $3fe00
 
-Data_3fe00: ; 3fe00 (f:7e00)
+TransformationMusicIDs: ; 3fe00 (f:7e00)
 	dw NULL
 	dw MUSIC_HOT_WARIO
 	dw MUSIC_FLAT_WARIO

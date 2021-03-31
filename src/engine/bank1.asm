@@ -326,10 +326,7 @@ Func_41cf: ; 41cf (1:41cf)
 	cp $b4
 	jp c, Func_42cc
 	ld [hl], $00
-	ld a, $00
-	ldh [hffb1], a
-	ld a, $34
-	ldh [hffb2], a
+	load_music MUSIC_INTRO
 	ld hl, wUnkUnknown
 	inc [hl]
 	jp Func_42cc
@@ -548,18 +545,12 @@ Func_42ed: ; 42ed (1:42ed)
 	ld a, [wUnkObjUnknown3]
 	and a
 	jr nz, .asm_436c
-	ld a, $01
-	ldh [hSoundID + 0], a
-	ld a, $23
-	ldh [hSoundID + 1], a
+	load_sfx SFX_23
 .asm_436c
 	ld hl, wcee5
 	dec [hl]
 	jr nz, .asm_4394
-	ld a, $01
-	ldh [hSoundID + 0], a
-	ld a, $f9
-	ldh [hSoundID + 1], a
+	load_sfx SFX_F9
 	ld hl, wUnkObjUnknown2
 	xor a
 	ld [hli], a
@@ -610,9 +601,9 @@ Func_43c8: ; 43c8 (1:43c8)
 	and a
 	jp z, Func_4497
 	ld a, $02
-	ldh [hSoundID + 0], a
+	ldh [hSFXID + 0], a
 	ld a, $19
-	ldh [hSoundID + 1], a
+	ldh [hSFXID + 1], a
 	ld hl, wUnkObjUnknown2
 	xor a
 	ld [hli], a
@@ -685,10 +676,7 @@ Func_442f: ; 442f (1:442f)
 	ld a, [hl]
 	cp $70
 	jr c, Func_4497
-	ld a, $01
-	ldh [hSoundID + 0], a
-	ld a, $61
-	ldh [hSoundID + 1], a
+	load_sfx SFX_61
 	ld hl, wUnkObjUnknown2
 	xor a
 	ld [hli], a
@@ -728,10 +716,7 @@ Func_445a: ; 445a (1:445a)
 	ld hl, Pals_5042
 	call StorePalsInTempPals2
 
-	ld a, $00
-	ldh [hffb1], a
-	ld a, $33
-	ldh [hffb2], a
+	load_music MUSIC_TITLE_SCREEN
 	ld hl, wSubSequence
 	inc [hl]
 	jr Func_449c
@@ -783,10 +768,7 @@ Func_44c3: ; 44c3 (1:44c3)
 	ret nz
 
 Func_44f0: ; 44f0 (1:44f0)
-	ld a, $00
-	ldh [hffb1], a
-	ld a, $33
-	ldh [hffb2], a
+	load_music MUSIC_TITLE_SCREEN
 	ld a, $08
 	ld [wcee6], a
 	ld a, $44
@@ -1015,10 +997,7 @@ Func_4686: ; 4686 (1:4686)
 	ld a, [hl]
 	cp $02
 	ret nz
-	ld a, $01
-	ldh [hSoundID + 0], a
-	ld a, $e3
-	ldh [hSoundID + 1], a
+	load_sfx SFX_E3
 	call Func_4ae7
 	ld a, [wLevel]
 	cp $ff
@@ -1034,9 +1013,9 @@ Func_4686: ; 4686 (1:4686)
 
 .final_battle
 	ld a, $ff
-	ldh [hSoundID + 0], a
+	ldh [hSFXID + 0], a
 	ld a, $00
-	ldh [hSoundID + 1], a
+	ldh [hSFXID + 1], a
 	ret
 ; 0x46cc
 
@@ -1304,10 +1283,7 @@ Func_48c9: ; 48c9 (1:48c9)
 	ld [wca46], a
 	add $80
 	ld [wcee4], a
-	ld a, $01
-	ldh [hSoundID + 0], a
-	ld a, $e2
-	ldh [hSoundID + 1], a
+	load_sfx SFX_E2
 .asm_4907
 	ld hl, wObj0End - 1
 	call Func_145a
@@ -1664,10 +1640,7 @@ Func_4bb3: ; 4bb3 (1:4bb3)
 	ret
 
 .asm_4bdd
-	ld a, $01
-	ldh [hSoundID + 0], a
-	ld a, $e3
-	ldh [hSoundID + 1], a
+	load_sfx SFX_E3
 	ld hl, w3d513
 	ld a, [hl]
 	and $0f
@@ -1704,10 +1677,7 @@ Func_4bb3: ; 4bb3 (1:4bb3)
 	ld [w3d513], a
 
 .asm_4c20
-	ld a, $01
-	ldh [hSoundID + 0], a
-	ld a, $e2
-	ldh [hSoundID + 1], a
+	load_sfx SFX_E2
 	ret
 
 .asm_4c29
@@ -2080,10 +2050,7 @@ Func_4e5e: ; 4e5e (1:4e5e)
 	jr nc, .asm_4e80
 	ld a, $0c
 	ld [w3d522], a
-	ld a, $01
-	ldh [hSoundID + 0], a
-	ld a, $f6
-	ldh [hSoundID + 1], a
+	load_sfx SFX_F6
 .asm_4e80
 	ret
 
@@ -2094,10 +2061,7 @@ Func_4e81: ; 4e81 (1:4e81)
 	jr nc, .asm_4e98
 	ld a, $0c
 	ld [w3d522], a
-	ld a, $01
-	ldh [hSoundID + 0], a
-	ld a, $f7
-	ldh [hSoundID + 1], a
+	load_sfx SFX_F7
 .asm_4e98
 	ret
 
@@ -2108,10 +2072,7 @@ Func_4e99: ; 4e99 (1:4e99)
 	jr nc, .asm_4eb0
 	ld a, $0c
 	ld [w3d522], a
-	ld a, $01
-	ldh [hSoundID + 0], a
-	ld a, $f8
-	ldh [hSoundID + 1], a
+	load_sfx SFX_F8
 .asm_4eb0
 	ret
 ; 0x4eb1
