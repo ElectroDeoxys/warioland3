@@ -135,13 +135,13 @@ UpdateState_Idling: ; 1c0b6 (7:40b6)
 	ret
 
 .skip_ladder
-	ld a, [wc1c8]
+	ld a, [wIsNearFence]
 	and a
 	jr z, .handle_input
 	ld a, [wJoypadDown]
 	bit D_UP_F, a
 	jr z, .handle_input
-	farcall Func_1ae68
+	farcall SetState_FenceMovingVertical
 	ret
 
 .handle_input
@@ -296,7 +296,7 @@ StartJump_FromInput: ; 1c2b9 (7:42b9)
 	load_sfx SFX_JUMP
 	xor a
 	ld [wJumpVelIndex], a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	ld a, TRUE
 	ld [wJumpingUpwards], a
 ;	fallthrough
@@ -398,13 +398,13 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	ret nz ; done if not airborne anymore
 
 	farcall Func_19afb
-	ld a, [wc1c8]
+	ld a, [wIsNearFence]
 	and a
 	jr z, .handle_input
 	ld a, [wJoypadDown]
 	bit D_UP_F, a
 	jr z, .handle_input
-	farcall Func_1ae68
+	farcall SetState_FenceMovingVertical
 	ret
 
 .handle_input
@@ -419,7 +419,7 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_LEAD_OVERALLS
 	jr c, .asm_1c43d
-	ld a, [wca96]
+	ld a, [wIsSmashAttacking]
 	and a
 	jr nz, .asm_1c430
 	ld a, [wJumpVelIndex]
@@ -428,8 +428,8 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	ld a, [wJoypadDown]
 	bit D_DOWN_F, a
 	jr z, .asm_1c43d
-	ld a, $01
-	ld [wca96], a
+	ld a, TRUE
+	ld [wIsSmashAttacking], a
 .asm_1c421
 	xor a
 	ld [wFrameDuration], a
@@ -444,13 +444,13 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	bit D_DOWN_F, a
 	jr nz, .asm_1c43d
 	xor a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	jr .asm_1c449
 .asm_1c43d
 	ld a, [wca95]
 	and a
 	jr z, .asm_1c4aa
-	ld a, [wca96]
+	ld a, [wIsSmashAttacking]
 	and a
 	jr nz, .asm_1c421
 .asm_1c449
@@ -552,7 +552,7 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	xor a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
-	ld a, [wca96]
+	ld a, [wIsSmashAttacking]
 	and a
 	jr z, .asm_1c55c
 	ld a, [wPowerUpLevel]
@@ -585,7 +585,7 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	ld [wca68], a
 	ld [wca86], a
 
-	ld a, [wca96]
+	ld a, [wIsSmashAttacking]
 	and a
 	jr z, .asm_1c5ad
 	ld a, [wPowerUpLevel]
@@ -683,7 +683,7 @@ Func_1c66b: ; 1c66b (7:466b)
 
 SetState_SmashAttacking: ; 1c6c1 (7:46c1)
 	ld a, $81
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	ld a, ST_SMASH_ATTACKING
 	ld [wWarioState], a
 	xor a
@@ -1443,7 +1443,7 @@ SetState_Diving: ; 1cdf6 (7:4df6)
 	ld [wJumpVelTable], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	ld [wca89], a
 	ld [wca9d], a
 	ld [wca6d], a
@@ -2493,7 +2493,7 @@ UpdateState_SmashAttacking: ; 1d8f8 (7:58f8)
 	cp $1b
 	ret c
 	xor a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	jp SetState_Idling
 ; 0x1d916
 
@@ -2649,7 +2649,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_LEAD_OVERALLS
 	jr c, .asm_1dadc
-	ld a, [wca96]
+	ld a, [wIsSmashAttacking]
 	and a
 	jr nz, .asm_1dacf
 	ld a, [wJumpVelIndex]
@@ -2658,8 +2658,8 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 	ld a, [wJoypadDown]
 	bit D_DOWN_F, a
 	jr z, .asm_1dadc
-	ld a, $01
-	ld [wca96], a
+	ld a, TRUE
+	ld [wIsSmashAttacking], a
 
 .asm_1dac0
 	xor a
@@ -2675,13 +2675,13 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 	bit D_DOWN_F, a
 	jr nz, .asm_1dadc
 	xor a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	jr .asm_1dae8
 .asm_1dadc
 	ld a, [wca95]
 	and a
 	jr z, .asm_1db49
-	ld a, [wca96]
+	ld a, [wIsSmashAttacking]
 	and a
 	jr nz, .asm_1dac0
 .asm_1dae8
@@ -2758,7 +2758,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
 	ld [wca86], a
-	ld a, [wca96]
+	ld a, [wIsSmashAttacking]
 	and a
 	jr z, .asm_1dbd0
 	ld a, [wPowerUpLevel]
@@ -2813,7 +2813,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 
 .asm_1dc5f
 	ld a, $81
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	ld a, ST_GRAB_SMASH_ATTACKING
 	ld [wWarioState], a
 	xor a
@@ -3063,7 +3063,7 @@ UpdateState_GrabSmashAttacking: ; 1decc (7:5ecc)
 	cp $1b
 	ret c
 	xor a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	jp Func_1efe7
 ; 0x1def1
 
@@ -3908,7 +3908,7 @@ SetState_Walking: ; 1e6b9 (7:66b9)
 	ld [wSFXLoopCounter], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 ;	fallthrough
@@ -4163,7 +4163,7 @@ SetState_Idling: ; 1e99b (7:699b)
 	ld [wJumpVelTable], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	ld [wca8b], a
 	ld [wca89], a
 	ld [wca9a], a
@@ -4598,7 +4598,7 @@ Func_1ede9: ; 1ede9 (7:6de9)
 	load_sfx SFX_JUMP
 	xor a
 	ld [wJumpVelIndex], a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_HIGH_JUMP_BOOTS
 	ld a, JUMP_VEL_NORMAL
@@ -4811,7 +4811,7 @@ Func_1efe7: ; 1efe7 (7:6fe7)
 	xor a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	ld [wca8b], a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -5728,7 +5728,7 @@ Func_1f6dc: ; 1f6dc (7:76dc)
 ; 0x1f7e6
 
 SetState_LadderShakeStunned: ; 1f7e6 (7:77e6)
-	ld a, ST_LADDER_SHAKE_STUNNED
+	ld a, ST_LADDER_SHAKE_SLIDING
 	ld [wWarioState], a
 	load_sfx SFX_0C
 

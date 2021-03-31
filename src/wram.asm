@@ -460,7 +460,7 @@ wc1c6:: ; c1c6
 wLadderInteraction:: ; c1c7
 	ds $1
 
-wc1c8:: ; c1c8
+wIsNearFence:: ; c1c8
 	ds $1
 
 wc1c9:: ; c1c9
@@ -716,7 +716,7 @@ wca94:: ; ca94
 wca95:: ; ca95
 	ds $1
 
-wca96:: ; ca96
+wIsSmashAttacking:: ; ca96
 	ds $1
 
 wca97:: ; ca97

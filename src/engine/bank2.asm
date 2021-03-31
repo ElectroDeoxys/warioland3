@@ -139,7 +139,7 @@ Func_80aa: ; 80aa (2:40aa)
 	ld a, [wca9b]
 	cp $02
 	jr nz, .asm_814f
-	farcall Func_1ad9a
+	farcall SetState_FenceShakeSliding
 .asm_814f
 	ldh a, [rSVBK]
 	push af

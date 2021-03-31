@@ -475,7 +475,7 @@ Func_199e9: ; 199e9 (6:59e9)
 	call Func_19a53
 	and a
 	ret nz
-	ld a, [wca96]
+	ld a, [wIsSmashAttacking]
 	and a
 	jr z, .asm_199f9
 	ld a, $01
@@ -510,7 +510,7 @@ Func_199e9: ; 199e9 (6:59e9)
 	ld b, a
 	ret
 .asm_19a22
-	ld a, [wca96]
+	ld a, [wIsSmashAttacking]
 	and a
 	jr z, .asm_19a2d
 	ld a, $01
@@ -547,7 +547,7 @@ Func_199e9: ; 199e9 (6:59e9)
 Func_19a53: ; 19a53 (6:5a53)
 	xor a
 	ld [wIsStandingOnSlope], a
-	ld a, [wca96]
+	ld a, [wIsSmashAttacking]
 	and a
 	jr z, .asm_19a62
 	ld a, $01
@@ -648,7 +648,9 @@ Func_19acd: ; 19acd (6:5acd)
 	sbc $00
 	ld [de], a
 	jr Func_19b3a
+; 0x19ae4
 
+Func_19ae4: ; 19ae4 (6:5ae4)
 	ld hl, wca64
 	ld de, hffab
 	ld a, [hld]
@@ -724,7 +726,7 @@ Func_19b3a: ; 19b3a (6:5b3a)
 	ld [wLadderInteraction], a
 	ld [wc0d7], a
 	ld [wIsInSand], a
-	ld [wc1c8], a
+	ld [wIsNearFence], a
 	ld [wc1c9], a
 	call Func_19c0b
 	ret
@@ -840,54 +842,54 @@ Func_19c1b: ; 19c1b (6:5c1b)
 	sub $30
 	jumptable
 
-	dw UpdateState_Slipping           ; ST_SLIPPING
-	dw UpdateState_CrouchSlipping     ; ST_CROUCH_SLIPPING
-	dw UpdateState_DraggedDown        ; ST_DRAGGED_DOWN
-	dw UpdateState_Teleporting        ; ST_TELEPORTING
-	dw $60b4                          ; ST_UNKNOWN_34
-	dw UpdateState_SandFalling        ; ST_SAND_FALLING
-	dw UpdateState_SandJumping        ; ST_SAND_JUMPING
-	dw UpdateState_SandIdling         ; ST_SAND_IDLING
-	dw UpdateState_SandWalking        ; ST_SAND_WALKING
-	dw UpdateState_SandTurning        ; ST_SAND_TURNING
-	dw UpdateState_LadderClimbing     ; ST_LADDER_CLIMBING
-	dw UpdateState_LadderIdling       ; ST_LADDER_IDLING
-	dw UpdateState_LadderShakeStunned ; ST_LADDER_SHAKE_STUNNED
-	dw UpdateState_GettingOffLadder   ; ST_GETTING_OFF_LADDER
-	dw UpdateState_LadderSliding      ; ST_LADDER_SLIDING
-	dw UpdateState_GrabSlipping       ; ST_GRAB_SLIPPING
-	dw $689e                          ; ST_UNKNOWN_40
-	dw $68ff                          ; ST_UNKNOWN_41
-	dw $6980                          ; ST_UNKNOWN_42
-	dw $69e9                          ; ST_UNKNOWN_43
-	dw $6a5c                          ; ST_UNKNOWN_44
-	dw $6ac9                          ; ST_UNKNOWN_45
-	dw $6b44                          ; ST_UNKNOWN_46
-	dw $68ff                          ; ST_UNKNOWN_47
-	dw $6980                          ; ST_UNKNOWN_48
-	dw $6bb1                          ; ST_UNKNOWN_49
-	dw $6bf4                          ; ST_UNKNOWN_4A
-	dw UpdateState_Sleeping           ; ST_SLEEPING
-	dw UpdateState_LadderScratching   ; ST_LADDER_SCRATCHING
-	dw $6dfb                          ; ST_UNKNOWN_4D
-	dw $6ed0                          ; ST_UNKNOWN_4E
-	dw $6f98                          ; ST_UNKNOWN_4F
-	dw $700f                          ; ST_UNKNOWN_50
-	dw $70a9                          ; ST_UNKNOWN_51
-	dw Func_156d                      ; ST_UNUSED_52
-	dw Func_156d                      ; ST_UNUSED_53
-	dw Func_156d                      ; ST_UNUSED_54
-	dw Func_156d                      ; ST_UNUSED_55
-	dw Func_156d                      ; ST_UNUSED_56
-	dw Func_156d                      ; ST_UNUSED_57
-	dw Func_156d                      ; ST_UNUSED_58
-	dw Func_156d                      ; ST_UNUSED_59
-	dw Func_156d                      ; ST_UNUSED_5A
-	dw Func_156d                      ; ST_UNUSED_5B
-	dw Func_156d                      ; ST_UNUSED_5C
-	dw Func_156d                      ; ST_UNUSED_5D
-	dw Func_156d                      ; ST_UNUSED_5E
-	dw Func_156d                      ; ST_UNUSED_5F
+	dw UpdateState_Slipping              ; ST_SLIPPING
+	dw UpdateState_CrouchSlipping        ; ST_CROUCH_SLIPPING
+	dw UpdateState_DraggedDown           ; ST_DRAGGED_DOWN
+	dw UpdateState_Teleporting           ; ST_TELEPORTING
+	dw $60b4                             ; ST_UNKNOWN_34
+	dw UpdateState_SandFalling           ; ST_SAND_FALLING
+	dw UpdateState_SandJumping           ; ST_SAND_JUMPING
+	dw UpdateState_SandIdling            ; ST_SAND_IDLING
+	dw UpdateState_SandWalking           ; ST_SAND_WALKING
+	dw UpdateState_SandTurning           ; ST_SAND_TURNING
+	dw UpdateState_LadderClimbing        ; ST_LADDER_CLIMBING
+	dw UpdateState_LadderIdling          ; ST_LADDER_IDLING
+	dw UpdateState_LadderShakeSlipping   ; ST_LADDER_SHAKE_SLIDING
+	dw UpdateState_GettingOffLadder      ; ST_GETTING_OFF_LADDER
+	dw UpdateState_LadderSliding         ; ST_LADDER_SLIDING
+	dw UpdateState_GrabSlipping          ; ST_GRAB_SLIPPING
+	dw $689e                             ; ST_UNKNOWN_40
+	dw $68ff                             ; ST_UNKNOWN_41
+	dw $6980                             ; ST_UNKNOWN_42
+	dw $69e9                             ; ST_UNKNOWN_43
+	dw $6a5c                             ; ST_UNKNOWN_44
+	dw $6ac9                             ; ST_UNKNOWN_45
+	dw $6b44                             ; ST_UNKNOWN_46
+	dw $68ff                             ; ST_UNKNOWN_47
+	dw $6980                             ; ST_UNKNOWN_48
+	dw $6bb1                             ; ST_UNKNOWN_49
+	dw $6bf4                             ; ST_UNKNOWN_4A
+	dw UpdateState_Sleeping              ; ST_SLEEPING
+	dw UpdateState_LadderScratching      ; ST_LADDER_SCRATCHING
+	dw UpdateState_FenceShakeSliding     ; ST_FENCE_SHAKE_SLIDING
+	dw UpdateState_FenceMovingVertical   ; ST_FENCE_MOVING_VERTICAL
+	dw UpdateState_FenceIdling           ; ST_FENCE_IDLING
+	dw UpdateState_FenceMovingHorizontal ; ST_FENCE_MOVING_HORIZONTAL
+	dw UpdateState_FenceSliding          ; ST_FENCE_SLIDING
+	dw Func_156d                         ; ST_UNUSED_52
+	dw Func_156d                         ; ST_UNUSED_53
+	dw Func_156d                         ; ST_UNUSED_54
+	dw Func_156d                         ; ST_UNUSED_55
+	dw Func_156d                         ; ST_UNUSED_56
+	dw Func_156d                         ; ST_UNUSED_57
+	dw Func_156d                         ; ST_UNUSED_58
+	dw Func_156d                         ; ST_UNUSED_59
+	dw Func_156d                         ; ST_UNUSED_5A
+	dw Func_156d                         ; ST_UNUSED_5B
+	dw Func_156d                         ; ST_UNUSED_5C
+	dw Func_156d                         ; ST_UNUSED_5D
+	dw Func_156d                         ; ST_UNUSED_5E
+	dw Func_156d                         ; ST_UNUSED_5F
 ; 0x19c81
 
 SetState_Slipping: ; 19c81 (6:5c81)
@@ -1267,7 +1269,7 @@ SetState_SandFalling: ; 1a0e8 (6:60e8)
 	ld [wJumpVelTable], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	ld [wca89], a
 	ld [wca9d], a
 	ld [wca6d], a
@@ -1528,7 +1530,7 @@ SetState_LadderClimbing: ; 1a3bb (6:63bb)
 	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
 	ld [wca99], a
@@ -1606,7 +1608,7 @@ SetState_LadderIdling: ; 1a49e (6:649e)
 	ld [wJumpVelTable], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	ld [wca99], a
 	ld a, $ff
 	ld [wca70], a
@@ -1655,7 +1657,7 @@ UpdateState_LadderIdling: ; 1a51d (6:651d)
 	ret
 ; 0x1a55c
 
-UpdateState_LadderShakeStunned: ; 1a55c (6:655c)
+UpdateState_LadderShakeSlipping: ; 1a55c (6:655c)
 	farcall Func_19b25
 	ld a, [wc0d7]
 	and a
@@ -1774,8 +1776,8 @@ SetState_LadderSliding: ; 1a66b (6:666b)
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_LEAD_OVERALLS
 	jr c, .asm_1a695
-	ld a, $01
-	ld [wca96], a
+	ld a, TRUE
+	ld [wIsSmashAttacking], a
 .asm_1a695
 
 	xor a
@@ -1795,7 +1797,7 @@ UpdateState_LadderSliding: ; 1a6b6 (6:66b6)
 	and a
 	jr nz, .asm_1a6e6
 	xor a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	farcall StartFall
 	ret
 
@@ -1831,7 +1833,7 @@ UpdateState_LadderSliding: ; 1a6b6 (6:66b6)
 	inc de
 	ld a, [hl]
 	ld [de], a
-	ld a, [wca96]
+	ld a, [wIsSmashAttacking]
 	and a
 	jr z, .asm_1a753
 	ld a, [wPowerUpLevel]
@@ -1891,6 +1893,7 @@ UpdateState_GrabSlipping: ; 1a7d6 (6:67d6)
 	jr nz, .asm_1a802
 	farcall SetState_Idling
 	ret
+
 .asm_1a802
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
@@ -2096,8 +2099,8 @@ UpdateState_LadderScratching: ; 1ad7d (6:6d7d)
 	jp SetState_LadderIdling
 ; 0x1ad9a
 
-Func_1ad9a: ; 1ad9a (6:6d9a)
-	ld a, ST_UNKNOWN_4D
+SetState_FenceShakeSliding: ; 1ad9a (6:6d9a)
+	ld a, ST_FENCE_SHAKE_SLIDING
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
@@ -2127,16 +2130,56 @@ Func_1ad9a: ; 1ad9a (6:6d9a)
 	ret
 ; 0x1adfb
 
-	INCROM $1adfb, $1ae68
+UpdateState_FenceShakeSliding: ; 1adfb (6:6dfb)
+	update_anim_1
+	ld a, [wWarioStateCounter]
+	and a
+	jr nz, .asm_1ae3a
+	ld a, [wAnimationHasFinished]
+	and a
+	jr z, .asm_1ae3a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	load_frameset_ptr Frameset_14d15
+	update_anim_1
 
-Func_1ae68: ; 1ae68 (6:6e68)
-	ld a, ST_UNKNOWN_4E
+	ld hl, wWarioStateCounter
+	inc [hl]
+.asm_1ae3a
+	ld a, [wJumpVelTable]
+	and a
+	jr z, .asm_1ae67
+	call Func_1488
+	farcall Func_199e9
+	ld a, b
+	and a
+	ret z
+
+	ld hl, hffa8
+	ld de, wca61
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+
+	xor a
+	ld [wJumpVelTable], a
+	ld [wJumpVelIndex], a
+
+.asm_1ae67
+	ret
+; 0x1ae68
+
+SetState_FenceMovingVertical: ; 1ae68 (6:6e68)
+	ld a, ST_FENCE_MOVING_VERTICAL
 	ld [wWarioState], a
 	xor a
 	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	ld a, $ff
 	ld [wca70], a
 	ld a, $f7
@@ -2162,7 +2205,379 @@ Func_1ae68: ; 1ae68 (6:6e68)
 	ret
 ; 0x1aed0
 
-	INCROM $1aed0, $1b2c0
+UpdateState_FenceMovingVertical:;1aed0 (6:6ed0)
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, $20
+	ld [wSFXLoopCounter], a
+	load_sfx SFX_CLIMB
+.skip_sfx
+	update_anim_1
+
+	ld a, [wAnimationHasFinished]
+	and a
+	jr z, .asm_1af1e
+
+	ld hl, wca61
+	ld de, hffa8
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+
+	ld b, $04
+	farcall Func_c9f3
+.asm_1af1e
+	call Func_1b168
+	ret
+; 0x1af22
+
+SetState_FenceIdling: ; 1af22 (6:6f22)
+	ld a, ST_FENCE_IDLING
+	ld [wWarioState], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wIsSmashAttacking], a
+	ld a, $ff
+	ld [wca70], a
+	ld a, $f7
+	ld [wca71], a
+	ld a, $09
+	ld [wca72], a
+	ld a, $e5
+	ld [wca6f], a
+	ld a, $04
+	ld [wca7b], a
+	ld a, $68
+	ld [wca7c], a
+	ld a, $00
+	ld [$ca7d], a
+	call Func_15b0
+	load_oam_ptr OAM_155cc
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1af7e
+	load_frameset_ptr Frameset_15900
+	jr .asm_1af88
+.asm_1af7e
+	load_frameset_ptr Frameset_158fd
+.asm_1af88
+	update_anim_1
+	ret
+; 0x1af98
+
+UpdateState_FenceIdling: ; 1af98 (6:6f98)
+	update_anim_1
+	call Func_1b21a
+	ret
+; 0x1afab
+
+SetState_FenceMovingHorizontal: ; 1afab (6:6fab)
+	ld a, ST_FENCE_MOVING_HORIZONTAL
+	ld [wWarioState], a
+
+	xor a
+	ld [wSFXLoopCounter], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wIsSmashAttacking], a
+	ld a, $ff
+	ld [wca70], a
+	ld a, $f7
+	ld [wca71], a
+	ld a, $09
+	ld [wca72], a
+	ld a, $e5
+	ld [wca6f], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld a, [wJoypadDown]
+	bit D_RIGHT_F, a
+	jr nz, .d_right
+	bit D_LEFT_F, a
+	jr nz, .d_left
+
+	ld a, [wDirection]
+	and a
+	jr nz, .d_right
+.d_left
+	load_frameset_ptr Frameset_158f2
+	jr .asm_1afff
+.d_right
+	load_frameset_ptr Frameset_158e7
+.asm_1afff
+	update_anim_1
+	ret
+; 0x1b00f
+
+UpdateState_FenceMovingHorizontal: ; 1b00f (6:700f)
+	farcall Func_19afb
+	ld a, [wIsNearFence]
+	and a
+	jr nz, .asm_1b034
+	farcall StartFall
+	ret
+
+.asm_1b034
+	ld a, [wSFXLoopCounter]
+	sub 1
+	ld [wSFXLoopCounter], a
+	jr nc, .skip_sfx
+	ld a, $20
+	ld [wSFXLoopCounter], a
+	load_sfx SFX_CLIMB
+.skip_sfx
+	update_anim_1
+	call Func_1b24f
+	ret
+; 0x1b05e
+
+SetState_FenceSliding: ; 1b05e (6:705e)
+	ld a, ST_FENCE_SLIDING
+	ld [wWarioState], a
+	load_sfx SFX_0C
+
+	xor a
+	ld [wSFXLoopCounter], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wca99], a
+	inc a
+	ld [wJumpVelTable], a
+
+	ld a, [wPowerUpLevel]
+	cp POWER_UP_LEAD_OVERALLS
+	jr c, .asm_1b088
+	ld a, TRUE
+	ld [wIsSmashAttacking], a
+.asm_1b088
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	load_frameset_ptr Frameset_15945
+	update_anim_1
+	ret
+; 0x1b0a9
+
+UpdateState_FenceSliding: ; 1b0a9 (6:70a9)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wIsNearFence]
+	and a
+	jr nz, .asm_1b0d9
+
+	xor a
+	ld [wIsSmashAttacking], a
+	farcall StartFall
+	ret
+
+.asm_1b0d9
+	update_anim_1
+	ld a, [wJoypadDown]
+	bit D_UP_F, a
+	jr z, .asm_1b0f2
+	jp SetState_FenceMovingVertical
+
+.asm_1b0f2
+	ld b, $02
+	call Func_1287
+	ld a, [wc0ba]
+	and $0f
+	cp $08
+	jr c, .asm_1b10e
+	call Func_114e
+	ld a, [wca78]
+	sub c
+	jr z, .asm_1b10e
+	jr c, .asm_1b10e
+	call Func_11ae
+.asm_1b10e
+	farcall Func_199e9
+	ld a, b
+	and a
+	ret z
+
+	ld hl, hffa8
+	ld de, wca61
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+
+	ld a, [wIsSmashAttacking]
+	and a
+	jr z, .asm_1b148
+
+	ld a, [wPowerUpLevel]
+	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
+	jr c, .asm_1b158
+	farcall Func_1c5fd
+	ret
+
+.asm_1b148
+	farcall SetState_Idling
+	ret
+
+.asm_1b158
+	farcall Func_1c66b
+	ret
+; 0x1b168
+
+Func_1b168: ; 1b168 (6:7168)
+	ld a, [wJoypadDown]
+	and B_BUTTON | D_DOWN
+	cp B_BUTTON | D_DOWN
+	jp z, SetState_FenceSliding
+
+	ld a, [wJumpingUpwards]
+	and a
+	jr nz, .asm_1b18f
+	ld a, [wJoypadDown]
+	bit A_BUTTON_F, a
+	jr z, .asm_1b18f
+.asm_1b17f
+	farcall StartJump_FromInput
+	ret
+
+.asm_1b18f
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	jr nz, .asm_1b17f
+
+	ld a, [wJoypadDown]
+	bit D_UP_F, a
+	jr nz, .d_up
+	bit D_DOWN_F, a
+	jr nz, .d_down
+	and D_RIGHT | D_LEFT
+	jp nz, SetState_FenceMovingHorizontal
+	jp SetState_FenceIdling
+
+.d_up
+	farcall Func_19ae4 ; unnecessary farcall
+	ld a, [wIsNearFence]
+	and a
+	ret z
+	ld b, $01
+	call Func_129e
+	ret
+
+.d_down
+	ld b, $01
+	call Func_1287
+	farcall Func_198e0
+	ld a, b
+	and a
+	jr nz, .asm_1b1ff
+	farcall Func_19afb
+	ld a, [wIsNearFence]
+	and a
+	ret nz
+	farcall StartFall
+	ret
+
+.asm_1b1ff
+	ld hl, hffa8
+	ld de, wca61
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	farcall SetState_Idling
+	ret
+; 0x1b21a
+
+Func_1b21a: ; 1b21a (6:721a)
+	ld a, [wJumpingUpwards]
+	and a
+	jr nz, .asm_1b237
+	ld a, [wJoypadDown]
+	bit A_BUTTON_F, a
+	jr z, .asm_1b237
+.asm_1b227
+	farcall StartJump_FromInput
+	ret
+
+.asm_1b237
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	jr nz, .asm_1b227
+	ld a, [wJoypadDown]
+	and D_UP | D_DOWN
+	jp nz, SetState_FenceMovingVertical
+	ld a, [wJoypadDown]
+	and D_RIGHT | D_LEFT
+	jp nz, SetState_FenceMovingHorizontal
+	ret
+; 0x1b24f
+
+Func_1b24f: ; 1b24f (6:724f)
+	ld a, [wJumpingUpwards]
+	and a
+	jr nz, .asm_1b26c
+	ld a, [wJoypadDown]
+	bit A_BUTTON_F, a
+	jr z, .asm_1b26c
+.asm_1b25c
+	farcall StartJump_FromInput
+	ret
+
+.asm_1b26c
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	jr nz, .asm_1b25c
+	ld a, [wJoypadDown]
+	bit D_RIGHT_F, a
+	jr nz, .d_right
+	bit D_LEFT_F, a
+	jr nz, .d_left
+	and D_UP | D_DOWN
+	jp nz, SetState_FenceMovingVertical
+	jp SetState_FenceIdling
+
+.d_right
+	ld a, DIRECTION_RIGHT
+	ld [wDirection], a
+	farcall Func_19734
+	ld a, b
+	and a
+	ret nz
+	ld b, $01
+	call Func_1259
+	ret
+
+.d_left
+	ld a, DIRECTION_LEFT
+	ld [wDirection], a
+	farcall Func_19734
+	ld a, b
+	and a
+	ret nz
+	ld b, $01
+	call Func_1270
+	ret
+; 0x1b2c0
 
 Func_1b2c0: ; 1b2c0 (6:72c0)
 	ld a, [wJoypadPressed]

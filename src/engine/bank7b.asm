@@ -430,7 +430,7 @@ SetState_BlindIdling: ; 1ed331 (7b:5331)
 	ld [wca89], a
 	ld [wca8b], a
 	ld [wca9d], a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	ld [wJumpVelTable], a
 	ld [wJumpVelIndex], a
 	ld [wca8d], a
@@ -614,7 +614,7 @@ Func_1ed558: ; 1ed558 (7b:5558)
 
 	xor a
 	ld [wJumpVelIndex], a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	ld a, TRUE
 	ld [wJumpingUpwards], a
 	ld a, JUMP_VEL_NORMAL

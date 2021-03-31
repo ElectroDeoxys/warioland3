@@ -324,7 +324,7 @@ Func_206eb: ; 206eb (8:46eb)
 	ld [wca9a], a
 	ld [wca89], a
 	ld [wca9d], a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	ld a, $6
 	ld [wJumpVelIndex], a
 	ld a, $ff
@@ -427,7 +427,7 @@ SetState_OnFire: ; 20ed3 (8:4ed3)
 	ld [wJumpVelTable], a
 	ld [wca8b], a
 	ld [wca9d], a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	ld a, $ff
 	ld [wca70], a
 	ld a, $e5

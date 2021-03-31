@@ -59,7 +59,7 @@
 	const ST_SAND_TURNING                  ; 39
 	const ST_LADDER_CLIMBING               ; 3a
 	const ST_LADDER_IDLING                 ; 3b
-	const ST_LADDER_SHAKE_STUNNED          ; 3c
+	const ST_LADDER_SHAKE_SLIDING          ; 3c
 	const ST_GETTING_OFF_LADDER            ; 3d
 	const ST_LADDER_SLIDING                ; 3e
 	const ST_GRAB_SLIPPING                 ; 3f
@@ -76,11 +76,11 @@
 	const ST_UNKNOWN_4A                    ; 4a
 	const ST_SLEEPING                      ; 4b
 	const ST_LADDER_SCRATCHING             ; 4c
-	const ST_UNKNOWN_4D                    ; 4d
-	const ST_UNKNOWN_4E                    ; 4e
-	const ST_UNKNOWN_4F                    ; 4f
-	const ST_UNKNOWN_50                    ; 50
-	const ST_UNKNOWN_51                    ; 51
+	const ST_FENCE_SHAKE_SLIDING           ; 4d
+	const ST_FENCE_MOVING_VERTICAL         ; 4e
+	const ST_FENCE_IDLING                  ; 4f
+	const ST_FENCE_MOVING_HORIZONTAL       ; 50
+	const ST_FENCE_SLIDING                 ; 51
 	const ST_UNUSED_52                     ; 52
 	const ST_UNUSED_53                     ; 53
 	const ST_UNUSED_54                     ; 54

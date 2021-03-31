@@ -1481,7 +1481,7 @@ Func_290a1: ; 290a1 (a:50a1)
 
 	xor a
 	ld [wJumpVelIndex], a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	ld [wWarioStateCounter], a
 	ld a, $01
 	ld [wJumpVelTable], a
@@ -1498,8 +1498,8 @@ Func_290a1: ; 290a1 (a:50a1)
 Func_290d6: ; 290d6 (a:50d6)
 	ld a, FALLING_JUMP_VEL_INDEX
 	ld [wJumpVelIndex], a
-	ld a, $01
-	ld [wca96], a
+	ld a, TRUE
+	ld [wIsSmashAttacking], a
 	ld [wWarioStateCounter], a
 	ld a, JUMP_VEL_NORMAL
 	ld [wJumpVelTable], a
@@ -1607,7 +1607,7 @@ SetState_FatLanding: ; 291ff (a:51ff)
 	xor a
 	ld [wJumpVelTable], a
 	ld [wJumpVelIndex], a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	ld [wWarioStateCounter], a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -1665,7 +1665,7 @@ Func_2926a: ; 2926a (a:526a)
 	xor a
 	ld [wJumpVelTable], a
 	ld [wJumpVelIndex], a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wFrameDuration], a
@@ -1759,7 +1759,7 @@ SetState_FatRecovering: ; 29363 (a:5363)
 	xor a
 	ld [wJumpVelTable], a
 	ld [wJumpVelIndex], a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wFrameDuration], a
@@ -2237,7 +2237,7 @@ SetState_ZombieIdling: ; 299d0 (a:59d0)
 	ld [wJumpVelTable], a
 	ld [wca8b], a
 	ld [wca9d], a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	call Func_161a
 
 	xor a
@@ -3673,7 +3673,7 @@ UpdateState_BatIdling: ; 2aa08 (a:6a08)
 	ld [wca89], a
 	ld [wca8b], a
 	ld [wca9d], a
-	ld [wca96], a
+	ld [wIsSmashAttacking], a
 	ld [wJumpVelTable], a
 	ld [wJumpVelIndex], a
 	call Func_161a
@@ -4437,8 +4437,8 @@ Func_2b2a4: ; 2b2a4 (a:72a4)
 	ld a, [wJumpVelIndex]
 	cp FALLING_JUMP_VEL_INDEX
 	ret nz
-	ld a, $01
-	ld [wca96], a
+	ld a, TRUE
+	ld [wIsSmashAttacking], a
 	ret
 ; 0x2b2c2
 
