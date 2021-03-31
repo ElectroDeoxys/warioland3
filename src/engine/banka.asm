@@ -3150,20 +3150,13 @@ UpdateState_CrazySpinning: ; 2a489 (a:6489)
 	ld a, $04
 	ld [wca7b], a
 	ld a, $50
-	ld [wca7c], a
+	ld [wca7c + 0], a
 	ld a, $00
-	ld [$ca7d], a
+	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $05
-	ld [wOAMBank], a
-	ld a, $7b
-	ld [wOAMPtr], a
-	ld a, $bc
-	ld [$ca80], a
-	ld a, $7c
-	ld [wFramesetPtr], a
-	ld a, $e2
-	ld [$ca82], a
+	load_oam_ptr OAM_17bbc
+
+	load_frameset_ptr Frameset_17ce2
 	update_anim_1
 	ret
 ; 0x2a544
@@ -3200,30 +3193,20 @@ SetState_Crazy: ; 2a558 (a:6558)
 	ld a, $0b
 	ld [wca7b], a
 	ld a, $50
-	ld [wca7c], a
+	ld [wca7c + 0], a
 	ld a, $00
-	ld [$ca7d], a
+	ld [wca7c + 1], a
 	call Func_15b0
-	ld a, $7f
-	ld [wOAMBank], a
-	ld a, $4c
-	ld [wOAMPtr], a
-	ld a, $d5
-	ld [$ca80], a
+	
+	load_oam_ptr OAM_1fccd5
 
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_2a5be
-	ld a, $4f
-	ld [wFramesetPtr], a
-	ld a, $9f
-	ld [$ca82], a
+	load_frameset_ptr Frameset_1fcf9f
 	jr .asm_2a5c8
 .asm_2a5be
-	ld a, $4f
-	ld [wFramesetPtr], a
-	ld a, $6e
-	ld [$ca82], a
+	load_frameset_ptr Frameset_1fcf6e
 .asm_2a5c8
 	update_anim_2
 	ret
@@ -3260,16 +3243,10 @@ SetState_CrazyTurning: ; 2a61a (a:661a)
 	ld [wDirection], a
 	and a
 	jr nz, .asm_2a63d
-	ld a, $4f
-	ld [wFramesetPtr], a
-	ld a, $d0
-	ld [$ca82], a
+	load_frameset_ptr Frameset_1fcfd0
 	jr .asm_2a647
 .asm_2a63d
-	ld a, $4f
-	ld [wFramesetPtr], a
-	ld a, $d7
-	ld [$ca82], a
+	load_frameset_ptr Frameset_1fcfd7
 .asm_2a647
 	update_anim_2
 	ret
@@ -3311,16 +3288,10 @@ SetState_CrazyAirborne: ; 2a680 (a:6680)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_2a6a6
-	ld a, $4f
-	ld [wFramesetPtr], a
-	ld a, $9f
-	ld [$ca82], a
+	load_frameset_ptr Frameset_1fcf9f
 	jr .asm_2a6b0
 .asm_2a6a6
-	ld a, $4f
-	ld [wFramesetPtr], a
-	ld a, $6e
-	ld [$ca82], a
+	load_frameset_ptr Frameset_1fcf6e
 .asm_2a6b0
 	update_anim_2
 	ret

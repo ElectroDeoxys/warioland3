@@ -1723,13 +1723,14 @@ Func_bdb: ; bdb (0:bdb)
 	ld d, a
 	ld a, [hl]
 	swap a
-	and $0f
+	and $0f ; high nybble
 	ld l, a
 	ld a, d
-	and $0f
+	and $0f ; low nybble
 	swap a
 	add l
 	ld l, a
+
 	ld [wcceb], a
 	ld a, [wccea]
 	ld h, a

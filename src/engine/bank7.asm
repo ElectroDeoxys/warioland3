@@ -111,6 +111,7 @@ UpdateState_Idling: ; 1c0b6 (7:40b6)
 	ld a, [wWarioState]
 	cp ST_IDLING
 	ret nz ; not idling
+
 	ld a, [wLadderInteraction]
 	cp $02
 	jp nz, Func_1e855
