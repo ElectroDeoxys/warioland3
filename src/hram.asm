@@ -18,16 +18,14 @@ hffa0:: ; ffa0
 
 	ds $7
 
-hffa8:: ; ffa8
+hPos::
+hYPosHi:: ; ffa8
 	ds $1
-
-hffa9:: ; ffa9
+hYPosLo:: ; ffa9
 	ds $1
-
-hffaa:: ; ffaa
+hXPosHi:: ; ffaa
 	ds $1
-
-hffab:: ; ffab
+hXPosLo:: ; ffab
 	ds $1
 
 	ds $1

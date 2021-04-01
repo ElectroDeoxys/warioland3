@@ -552,16 +552,14 @@ wca5f:: ; ca5f
 wca60:: ; ca60
 	ds $1
 
-wca61:: ; ca61
+wPos::
+wYPosHi:: ; ca61
 	ds $1
-
-wca62:: ; ca62
+wYPosLo:: ; ca62
 	ds $1
-
-wca63:: ; ca63
+wXPosHi:: ; ca63
 	ds $1
-
-wca64:: ; ca64
+wXPosLo:: ; ca64
 	ds $1
 
 wca65:: ; ca65
@@ -671,10 +669,10 @@ wWarioStateCycles:: ; ca85
 wca86:: ; ca86
 	ds $1
 
-wWarioYPos:: ; ca87
+wWarioScreenYPos:: ; ca87
 	ds $1
 
-wWarioXPos:: ; ca88
+wWarioScreenXPos:: ; ca88
 	ds $1
 
 wca89:: ; ca89

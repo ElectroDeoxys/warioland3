@@ -179,7 +179,7 @@ Func_80aa: ; 80aa (2:40aa)
 	jr nz, .asm_8215
 	xor a
 	ld [wc0c2], a
-	ld a, [wWarioYPos]
+	ld a, [wWarioScreenYPos]
 	ld [wca5e], a
 	ld a, [wc1aa]
 	bit 3, a
@@ -357,10 +357,7 @@ Func_80aa: ; 80aa (2:40aa)
 
 .asm_8308
 	load_sfx SFX_E4
-	ld a, $ff
-	ldh [hMusicID + 0], a
-	ld a, $00
-	ldh [hMusicID + 1], a
+	stop_music
 	xor a
 	ld [wced9], a
 	ld a, $01
@@ -517,23 +514,25 @@ Func_846e: ; 846e (2:446e)
 	and $0f
 	cp $07
 	jr nz, .asm_84e2
+
 	ld a, $01
-	ld [wca61], a
+	ld [wYPosHi], a
 	xor a
-	ld [wca63], a
+	ld [wXPosHi], a
 .asm_84e2
-	ld a, [wca62]
+	ld a, [wYPosLo]
 	sub $10
-	ld [wca62], a
-	ld a, [wca61]
+	ld [wYPosLo], a
+	ld a, [wYPosHi]
 	sbc $00
-	ld [wca61], a
+	ld [wYPosHi], a
 	ld b, a
 	swap b
-	ld a, [wca63]
+	ld a, [wXPosHi]
 	or b
 	ld [wca6c], a
-	ld hl, wca61
+
+	ld hl, wPos
 	call Func_8ec2
 
 	xor a
@@ -976,7 +975,7 @@ Func_8747: ; 8747 (2:4747)
 
 Func_896f: ; 896f (2:496f)
 	ld de, wc0a6
-	ld hl, hffab
+	ld hl, hXPosLo
 	ld a, [de]
 	ld [hld], a
 	dec de
@@ -1106,7 +1105,7 @@ Func_89e2: ; 89e2 (2:49e2)
 ; 0x8a41
 
 Func_8a41: ; 8a41 (2:4a41)
-	ld hl, hffab
+	ld hl, hXPosLo
 	xor a
 	ld [hld], a
 	ld a, [wc0a1]
@@ -1174,19 +1173,7 @@ Func_8a41: ; 8a41 (2:4a41)
 .asm_8ab0
 	ld c, a
 	call Func_cf8
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos
 	ld a, [wc0ba]
 	and $0f
 	cp $08
@@ -1209,7 +1196,7 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 	cp $00
 	jr nz, .asm_8af7
 .asm_8aea
-	ld a, [wca63]
+	ld a, [wXPosHi]
 	ld [wcac6], a
 	ld a, $30
 	ld [wcac7], a
@@ -1227,11 +1214,11 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 	sub $08
 	ld b, a
 .asm_8b0b
-	ld a, [wca64]
+	ld a, [wXPosLo]
 	sub b
 	ld [wcac7], a
 	ld l, a
-	ld a, [wca63]
+	ld a, [wXPosHi]
 	sbc $00
 	ld [wcac6], a
 	ld h, a
@@ -1291,19 +1278,21 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 .asm_8b78
 	xor a
 	ld [wcac8], a
-	ld a, [wca62]
+
+	ld a, [wYPosLo]
 	sub $60
 	ld [wcac5], a
 	ld l, a
-	ld a, [wca61]
+	ld a, [wYPosHi]
 	sbc $00
 	ld [wcac4], a
 	ld h, a
 	ld a, [wc0ba]
 	bit 6, a
 	jr z, .asm_8b99
-	ld de, $ffe0
+	ld de, -32
 	add hl, de
+
 .asm_8b99
 	ld a, [wc0b7]
 	ld b, a
@@ -1350,27 +1339,30 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 	and $0f
 	cp $08
 	ret c
-	ld a, [wca62]
+	ld a, [wYPosLo]
 	cp $80
 	jr nc, .asm_8c0c
 	ld a, [wc0b7]
 	ld b, a
-	ld a, [wca61]
+	ld a, [wYPosHi]
 	dec a
 	ld [wcac4], a
 	cp b
 	jr c, .asm_8bab
 	bit 7, a
 	jr z, .asm_8c06
+
 	xor a
 	ld [wcac4], a
 	ld a, $01
 	ld [wcac8], a
 	ret
+
 .asm_8c06
 	ld a, $e8
 	ld [wcac5], a
 	ret
+
 .asm_8c0c
 	ld a, $68
 	ld [wcac5], a
@@ -1635,12 +1627,14 @@ Func_8d69: ; 8d69 (2:4d69)
 ; 0x8e06
 
 Func_8e06: ; 8e06 (2:4e06)
-	ld a, [wca62]
+	ld a, [wYPosLo]
 	sub $18
 	ld l, a
-	ld a, [wca61]
+	ld a, [wYPosHi]
 	sbc $00
 	ld h, a
+
+; hl = ypos - 24
 	srl h
 	rr l
 	srl h
@@ -1661,9 +1655,10 @@ Func_8e06: ; 8e06 (2:4e06)
 	and $03
 	ld d, a
 	ld e, l
-	ld a, [wca63]
+
+	ld a, [wXPosHi]
 	ld h, a
-	ld a, [wca64]
+	ld a, [wXPosLo]
 	ld l, a
 	srl h
 	rr l
@@ -8159,7 +8154,7 @@ Func_b6d5: ; b6d5 (2:76d5)
 .asm_b70e
 	ld a, [wc0b8]
 	ld c, a
-	ld a, [wca63]
+	ld a, [wXPosHi]
 	cp c
 	ret nz
 	ld a, [wDirection]
@@ -8179,7 +8174,7 @@ Func_b6d5: ; b6d5 (2:76d5)
 	add $20
 	ld c, a
 .asm_b733
-	ld a, [wca64]
+	ld a, [wXPosLo]
 	cp c
 	ret nc
 	ld a, [wc0ba]
@@ -8233,7 +8228,7 @@ Func_b74c: ; b74c (2:774c)
 	ld a, [wc0b9]
 	dec a
 	ld c, a
-	ld a, [wca63]
+	ld a, [wXPosHi]
 	cp c
 	ret nz
 	ld a, [wDirection]
@@ -8258,7 +8253,7 @@ Func_b74c: ; b74c (2:774c)
 	sub $20
 	ld c, a
 .asm_b7bb
-	ld a, [wca64]
+	ld a, [wXPosLo]
 	cp c
 	ret c
 	ld a, $02
@@ -8309,7 +8304,7 @@ Func_b7db: ; b7db (2:77db)
 	ret nc
 	ld a, [wc0b7]
 	ld c, a
-	ld a, [wca61]
+	ld a, [wYPosHi]
 	cp c
 	jr c, .asm_b836
 	ret nz
@@ -8323,7 +8318,7 @@ Func_b7db: ; b7db (2:77db)
 	add $20
 	ld c, a
 .asm_b831
-	ld a, [wca62]
+	ld a, [wYPosLo]
 	cp c
 	ret nc
 .asm_b836
@@ -8384,7 +8379,7 @@ Func_b850: ; b850 (2:7850)
 	ld a, [wc0b6]
 	dec a
 	ld c, a
-	ld a, [wca61]
+	ld a, [wYPosHi]
 	cp c
 	ret nz
 	ld a, [wca5e]
@@ -8402,7 +8397,7 @@ Func_b850: ; b850 (2:7850)
 	sub $20
 	ld c, a
 .asm_b8ba
-	ld a, [wca62]
+	ld a, [wYPosLo]
 	cp c
 	ret c
 	ld a, $02
@@ -8423,16 +8418,16 @@ Func_b8d3: ; b8d3 (2:78d3)
 	jr z, .asm_b8f5
 	ld a, [wTempSCY]
 	ld b, a
-	ld a, [wca62]
+	ld a, [wYPosLo]
 	add $10
 	sub b
-	ld [wWarioYPos], a
+	ld [wWarioScreenYPos], a
 	ld a, [wTempSCX]
 	ld b, a
-	ld a, [wca64]
+	ld a, [wXPosLo]
 	add $08
 	sub b
-	ld [wWarioXPos], a
+	ld [wWarioScreenXPos], a
 	ret
 
 .asm_b8f5
@@ -8441,16 +8436,16 @@ Func_b8d3: ; b8d3 (2:78d3)
 	ld a, [wc08a]
 	add c
 	ld b, a
-	ld a, [wca62]
+	ld a, [wYPosLo]
 	add $10
 	sub b
-	ld [wWarioYPos], a
+	ld [wWarioScreenYPos], a
 	ld a, [wc08c]
 	ld b, a
-	ld a, [wca64]
+	ld a, [wXPosLo]
 	add $08
 	sub b
-	ld [wWarioXPos], a
+	ld [wWarioScreenXPos], a
 	ret
 ; 0xb915
 
@@ -8463,7 +8458,7 @@ Func_b915: ; b915 (2:7915)
 	ld [wc0d4], a
 	bit 7, b
 	jr nz, .asm_b941
-	ld hl, wWarioYPos
+	ld hl, wWarioScreenYPos
 	ld a, [wca5e]
 	cp [hl]
 	jr nc, .asm_b92e
@@ -8484,7 +8479,7 @@ Func_b915: ; b915 (2:7915)
 	cpl
 	inc a
 	ld b, a
-	ld hl, wWarioYPos
+	ld hl, wWarioScreenYPos
 	ld a, [wca5e]
 	cp [hl]
 	jr c, .asm_b951
@@ -8523,7 +8518,7 @@ Func_b915: ; b915 (2:7915)
 	ld [wc0d4], a
 	dec a
 	ret z
-	ld hl, wWarioYPos
+	ld hl, wWarioScreenYPos
 	ld a, [wca5e]
 	sub [hl]
 	jr nc, .asm_b98f
@@ -8555,7 +8550,7 @@ Func_b9a6: ; b9a6 (2:79a6)
 	ld [wc0d5], a
 	bit 7, b
 	jr nz, .asm_b9e2
-	ld hl, wWarioXPos
+	ld hl, wWarioScreenXPos
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_b9c3
@@ -8587,7 +8582,7 @@ Func_b9a6: ; b9a6 (2:79a6)
 	cpl
 	inc a
 	ld b, a
-	ld hl, wWarioXPos
+	ld hl, wWarioScreenXPos
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_b9f4
@@ -8628,7 +8623,7 @@ Func_b9a6: ; b9a6 (2:79a6)
 	dec a
 	ret z
 	ld b, $01
-	ld hl, wWarioXPos
+	ld hl, wWarioScreenXPos
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_ba38

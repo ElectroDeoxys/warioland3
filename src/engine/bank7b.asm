@@ -129,11 +129,11 @@ UpdateState_IceSkatin: ; 1ec177 (7b:4177)
 	and a
 	jr nz, .asm_1ec1d4
 	call Func_153f
-	call Func_1270
+	call SubXOffset
 	jr .asm_1ec1da
 .asm_1ec1d4
 	call Func_151e
-	call Func_1259
+	call AddXOffset
 .asm_1ec1da
 	ld a, [wca86]
 	cp $14
@@ -145,13 +145,7 @@ UpdateState_IceSkatin: ; 1ec177 (7b:4177)
 	ld a, b
 	and a
 	jr z, .asm_1ec205
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	ret
 
 .asm_1ec205
@@ -169,11 +163,11 @@ Func_1ec215: ; 1ec215 (7b:4215)
 	and a
 	jr nz, .asm_1ec223
 	ld b, $03
-	call Func_1259
+	call AddXOffset
 	jp SetState_IceSkatinCrash
 .asm_1ec223
 	ld b, $03
-	call Func_1270
+	call SubXOffset
 	jp SetState_IceSkatinCrash
 ; 0x1ec22b
 
@@ -252,19 +246,7 @@ UpdateState_IceSkatinCrash: ; 1ec300 (7b:4300)
 	ld a, [wAnimationHasFinished]
 	and a
 	ret z
-	ld hl, wca61
-	ld de, hffa8
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	get_pos
 	ld b, $0c
 	farcall Func_c9f3
 	jp Func_1570
@@ -550,13 +532,7 @@ UpdateState_BlindWalking: ; 1ed469 (7b:5469)
 	ld a, b
 	and a
 	jp z, Func_1ed548
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	ret
 ; 0x1ed4d1
 
@@ -728,7 +704,7 @@ UpdateState_MagicRising: ; 1ed972 (7b:5972)
 	call_hram UpdateAnimation
 
 	ld b, $01
-	call Func_129e
+	call SubYOffset
 	ld a, [wc0ba]
 	and $0f
 	cp $08
@@ -742,19 +718,7 @@ UpdateState_MagicRising: ; 1ed972 (7b:5972)
 	ret
 
 .asm_1ed9d5
-	ld hl, wca61
-	ld de, hffa8
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	get_pos
 	ld b, $12
 	farcall Func_c9f3
 
@@ -853,13 +817,7 @@ UpdateState_BallAirborne: ; 1edba0 (7b:5ba0)
 	ld a, b
 	and a
 	ret z
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	jp Func_1edaf8
 ; 0x1edbd8
 
@@ -954,23 +912,17 @@ UpdateState_BallThrown: ; 1edcd0 (7b:5cd0)
 	jr nc, .falling
 ; rising
 	ld b, $03
-	call Func_1270
+	call SubXOffset
 	ret
 
 .falling
 	ld b, $02
-	call Func_1270
+	call SubXOffset
 	farcall Func_199e9
 	ld a, b
 	and a
 	ret z
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 
 	xor a
 	ld [wca8a], a
@@ -1022,7 +974,7 @@ UpdateState_BallSentUpwards: ; 1edd7e (7b:5d7e)
 	jr nc, .falling
 ; rising
 	ld b, $03
-	call Func_129e
+	call SubYOffset
 	farcall Func_1996e
 	ld a, b
 	and a
@@ -1039,13 +991,7 @@ UpdateState_BallSentUpwards: ; 1edd7e (7b:5d7e)
 	ld a, b
 	and a
 	ret z
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	xor a
 	ld [wca8a], a
 	ld [wJumpVelIndex], a

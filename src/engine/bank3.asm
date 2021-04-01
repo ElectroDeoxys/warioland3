@@ -167,13 +167,13 @@ Func_c9f3: ; c9f3 (3:49f3)
 	inc l
 	xor a
 	ld [hli], a
-	ldh a, [hffa8]
+	ldh a, [hYPosHi]
 	ld [hli], a
-	ldh a, [hffa9]
+	ldh a, [hYPosLo]
 	ld [hli], a
-	ldh a, [hffaa]
+	ldh a, [hXPosHi]
 	ld [hli], a
-	ldh a, [hffab]
+	ldh a, [hXPosLo]
 	ld [hli], a
 	ret
 ; 0xca26

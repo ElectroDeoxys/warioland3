@@ -1012,10 +1012,7 @@ Func_4686: ; 4686 (1:4686)
 	ret
 
 .final_battle
-	ld a, $ff
-	ldh [hSFXID + 0], a
-	ld a, $00
-	ldh [hSFXID + 1], a
+	stop_sfx
 	ret
 ; 0x46cc
 

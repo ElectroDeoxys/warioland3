@@ -1313,14 +1313,8 @@ Func_928: ; 928 (0:928)
 	ld [wPalFadeCounter], a
 	ld [wc186], a
 	ld [$d506], a
-	ld a, $ff
-	ldh [hMusicID + 0], a
-	ld a, $00
-	ldh [hMusicID + 1], a
-	ld a, $ff
-	ldh [hSFXID + 0], a
-	ld a, $00
-	ldh [hSFXID + 1], a
+	stop_music
+	stop_sfx
 	ld hl, wSubSequence
 	inc [hl]
 	jr .asm_95a
@@ -1887,21 +1881,22 @@ Func_cf8: ; cf8 (0:cf8)
 	dec a
 	add a
 	add d
-	ldh [hffa8], a
+	ldh [hYPosHi], a
 	ld a, h
 	and $0f
 	swap a
 	add $10
-	ldh [hffa9], a
-	ldh a, [hffa8]
-	adc $00
-	ldh [hffa8], a
+	ldh [hYPosLo], a
+	ldh a, [hYPosHi]
+	adc 0
+	ldh [hYPosHi], a
+
 	ld a, b
 	xor $01
 	add a
 	add a
 	add a
-	add a
+	add a ; *16
 	add $08
 	ld d, a
 	ld a, l
@@ -1910,15 +1905,15 @@ Func_cf8: ; cf8 (0:cf8)
 	ld l, a
 	and $f0
 	swap a
-	ldh [hffaa], a
+	ldh [hXPosHi], a
 	ld a, l
 	and $0f
 	swap a
 	add d
-	ldh [hffab], a
-	ldh a, [hffaa]
-	adc $00
-	ldh [hffaa], a
+	ldh [hXPosLo], a
+	ldh a, [hXPosHi]
+	adc 0
+	ldh [hXPosHi], a
 	pop hl
 	ret
 ; 0xd3e
@@ -1934,29 +1929,29 @@ Func_d3e: ; d3e (0:d3e)
 	dec a
 	add a
 	add b
-	ldh [hffa8], a
+	ldh [hYPosHi], a
 	ld a, d
 	and $0f
 	swap a
 	add $10
-	ldh [hffa9], a
-	ldh a, [hffa8]
+	ldh [hYPosLo], a
+	ldh a, [hYPosHi]
 	adc $00
-	ldh [hffa8], a
+	ldh [hYPosHi], a
 	ld a, l
 	sub $00
 	ld e, a
 	and $f0
 	swap a
-	ldh [hffaa], a
+	ldh [hXPosHi], a
 	ld a, e
 	and $0f
 	swap a
 	add $08
-	ldh [hffab], a
-	ldh a, [hffaa]
+	ldh [hXPosLo], a
+	ldh a, [hXPosHi]
 	adc $00
-	ldh [hffaa], a
+	ldh [hXPosHi], a
 	ld a, l
 	and $01
 	xor $01
@@ -2019,9 +2014,9 @@ Func_d9e: ; d9e (0:d9e)
 	ld h, a
 	ld a, [wOAMPtr + 1]
 	ld l, a
-	ld a, [wWarioYPos]
+	ld a, [wWarioScreenYPos]
 	ld [wCurSpriteYOffset], a
-	ld a, [wWarioXPos]
+	ld a, [wWarioScreenXPos]
 	ld [wCurSpriteXOffset], a
 	ld a, [wca65]
 	ld [wc098], a
@@ -2491,12 +2486,19 @@ Func_1146: ; 1146 (0:1146)
 	ret
 ; 0x114e
 
+; returns in c:
+; 6 if   $0 <= ypos <  $80
+; 5 if  $80 <= ypos < $100
+; 4 if $100 <= ypos < $180
+; 3 if $180 <= ypos < $200
+; 2 if $200 <= ypos < $280
+; 1 if $280 <= ypos < $300
 Func_114e: ; 114e (0:114e)
-	ld a, [wca61]
+	ld a, [wYPosHi]
 	dec a
-	jr z, .asm_115b
+	jr z, .asm_115b ; 1
 	dec a
-	jr z, .asm_115f
+	jr z, .asm_115f ; 2
 	ld c, $05
 	jr .asm_1161
 .asm_115b
@@ -2504,10 +2506,12 @@ Func_114e: ; 114e (0:114e)
 	jr .asm_1161
 .asm_115f
 	ld c, $01
+
 .asm_1161
-	ld a, [wca62]
+	ld a, [wYPosLo]
 	cp $80
 	ret nc
+	; < $80
 	inc c
 	ret
 ; 0x1169
@@ -2602,74 +2606,68 @@ Func_11f6: ; 11f6 (0:11f6)
 .asm_1246
 	inc [hl]
 	inc [hl]
-	ld a, $ff
-	ldh [hMusicID + 0], a
-	ld a, $00
-	ldh [hMusicID + 1], a
-	ld a, $ff
-	ldh [hSFXID + 0], a
-	ld a, $00
-	ldh [hSFXID + 1], a
+	stop_music
+	stop_sfx
 	ret
 ; 0x1259
 
-Func_1259: ; 1259 (0:1259)
+AddXOffset: ; 1259 (0:1259)
 	ld a, [wc0c3]
 	add b
 	ld [wc0c3], a
-	ld a, [wca64]
+	ld a, [wXPosLo]
 	add b
-	ld [wca64], a
-	ld a, [wca63]
+	ld [wXPosLo], a
+	ld a, [wXPosHi]
 	adc 0
-	ld [wca63], a
+	ld [wXPosHi], a
 	ret
 ; 0x1270
 
-Func_1270: ; 1270 (0:1270)
+SubXOffset: ; 1270 (0:1270)
 	ld a, [wc0c3]
 	sub b
 	ld [wc0c3], a
-	ld a, [wca64]
+	ld a, [wXPosLo]
 	sub b
-	ld [wca64], a
-	ld a, [wca63]
+	ld [wXPosLo], a
+	ld a, [wXPosHi]
 	sbc 0
-	ld [wca63], a
+	ld [wXPosHi], a
 	ret
 ; 0x1287
 
 ; b = y offset
-Func_1287: ; 1287 (0:1287)
+AddYOffset: ; 1287 (0:1287)
 	ld a, [wc0c2]
 	add b
 	ld [wc0c2], a
 ;	fallthrough
 
 Func_128e: ; 128e (0:128e)
-	ld a, [wca62]
+	ld a, [wYPosLo]
 	add b
-	ld [wca62], a
-	ld a, [wca61]
+	ld [wYPosLo], a
+	ld a, [wYPosHi]
 	adc 0
-	ld [wca61], a
+	ld [wYPosHi], a
 	ret
 ; 0x129e
 
 ; b = y offset
-Func_129e: ; 129e (0:129e)
+SubYOffset: ; 129e (0:129e)
 	ld a, [wc0c2]
 	sub b
 	ld [wc0c2], a
 ;	fallthrough
 
 Func_12a5: ; 12a5 (0:12a5)
-	ld a, [wca62]
+	ld a, [wYPosLo]
 	sub b
-	ld [wca62], a
-	ld a, [wca61]
+	ld [wYPosLo], a
+	ld a, [wYPosHi]
 	sbc 0
-	ld [wca61], a
+	ld [wYPosHi], a
 	ret
 ; 0x12b5
 
@@ -2848,7 +2846,7 @@ Func_1488: ; 1488 (0:1488)
 	cpl
 	inc a
 	ld b, a
-	call Func_129e
+	call SubYOffset
 	ld hl, wJumpVelIndex
 	inc [hl]
 	jr .done
@@ -2857,7 +2855,7 @@ Func_1488: ; 1488 (0:1488)
 	xor a
 	ld [wca76], a
 	ld b, [hl]
-	call Func_1287
+	call AddYOffset
 	ld hl, wJumpVelIndex
 	inc [hl]
 	ld a, [hl]
@@ -2885,13 +2883,7 @@ Func_14de: ; 14de (0:14de)
 ; 0x14f6
 
 Func_14f6: ; 14f6 (0:14f6)
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 ;	fallthrough
 
 Func_1501: ; 1501 (0:1501)
@@ -3138,8 +3130,8 @@ Func_16d0: ; 16d0 (0:16d0)
 ; 0x16d9
 
 Func_16d9: ; 16d9 (0:16d9)
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	ld [de], a
 	dec de
@@ -3169,8 +3161,8 @@ IsOnSlipperyGround: ; 1700 (0:1700)
 	sub $03
 	ld c, a ; - wca71 - 3
 
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	sub c
 	ld [de], a
@@ -3193,8 +3185,8 @@ IsOnSlipperyGround: ; 1700 (0:1700)
 	sub $03
 	ld c, a ; wca72 - 3
 
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	add c
 	ld [de], a

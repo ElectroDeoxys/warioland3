@@ -149,7 +149,7 @@ Func_64000: ; 64000 (19:4000)
 ; 0x640e5
 
 Func_640e5: ; 640e5 (19:40e5)
-	ldh a, [hffaa]
+	ldh a, [hXPosHi]
 	cp $0a
 	ret nc
 
@@ -206,13 +206,13 @@ Func_640e5: ; 640e5 (19:40e5)
 	add a ; *32
 	add d
 	ld [hli], a
-	ldh a, [hffa9]
+	ldh a, [hYPosLo]
 	ld [hli], a
-	ldh a, [hffa8]
+	ldh a, [hYPosHi]
 	ld [hli], a
-	ldh a, [hffab]
+	ldh a, [hXPosLo]
 	ld [hli], a
-	ldh a, [hffaa]
+	ldh a, [hXPosHi]
 	ld [hli], a
 
 	push hl

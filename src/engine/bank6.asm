@@ -51,8 +51,8 @@ Func_19746: ; 19746 (6:5746)
 	ld a, [wca72]
 	sub $01
 	ld c, a
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	add c
 	ld [de], a
@@ -79,8 +79,8 @@ Func_19746: ; 19746 (6:5746)
 	ld a, [wca72]
 	sub $01
 	ld c, a
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	add c
 	ld [de], a
@@ -102,7 +102,7 @@ Func_19746: ; 19746 (6:5746)
 	sbc $00
 	ld [de], a
 .asm_19799
-	ldh a, [hffa9]
+	ldh a, [hYPosLo]
 	and $f0
 	ld [wc0dc], a
 	call Func_19bc3
@@ -128,8 +128,8 @@ Func_197b6: ; 197b6 (6:57b6)
 	inc a
 	sub $01
 	ld c, a
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	sub c
 	ld [de], a
@@ -158,8 +158,8 @@ Func_197b6: ; 197b6 (6:57b6)
 	inc a
 	sub $01
 	ld c, a
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	sub c
 	ld [de], a
@@ -181,7 +181,7 @@ Func_197b6: ; 197b6 (6:57b6)
 	sbc $00
 	ld [de], a
 .asm_1980d
-	ldh a, [hffa9]
+	ldh a, [hYPosLo]
 	and $f0
 	ld [wc0dc], a
 	call Func_19bc3
@@ -208,7 +208,7 @@ Func_19832: ; 19832 (6:5832)
 	jp nz, .asm_198c1
 	ld a, [wca6f]
 	ld b, a
-	ld a, [wca62]
+	ld a, [wYPosLo]
 	add b
 	add $02
 	and $f0
@@ -253,12 +253,12 @@ Func_19832: ; 19832 (6:5832)
 	jr nz, .asm_198aa
 .asm_19894
 	ld b, $02
-	call Func_1270
+	call SubXOffset
 	farcall Func_1e855
 	jr .asm_198c1
 .asm_198aa
 	ld b, $02
-	call Func_1259
+	call AddXOffset
 	farcall Func_1e855
 	jr .asm_198c1
 
@@ -273,21 +273,11 @@ Func_19832: ; 19832 (6:5832)
 ; 0x198c7
 
 ; resets wIsStandingOnSlope
-; copies wca61 to hffa8
+; copies wYPosHi to hYPosHi
 Func_198c7: ; 198c7 (6:58c7)
 	xor a
 	ld [wIsStandingOnSlope], a
-
-	ld hl, wca61
-	ld de, hffa8
-rept 3
-	ld a, [hli]
-	ld [de], a
-	inc de
-endr
-	ld a, [hl]
-	ld [de], a
-
+	get_pos
 	call Func_19b51
 	ret
 ; 0x198e0
@@ -307,8 +297,8 @@ Func_198e0: ; 198e0 (6:58e0)
 	inc a
 	sub $03
 	ld c, a
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	sub c
 	ld [de], a
@@ -328,8 +318,8 @@ Func_198e0: ; 198e0 (6:58e0)
 	ld a, [wca72]
 	sub $03
 	ld c, a
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	add c
 	ld [de], a
@@ -350,13 +340,7 @@ Func_198e0: ; 198e0 (6:58e0)
 	and a
 	ret z
 	ld b, a
-	ld hl, wca61
-	ld de, hffa8
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	get_pos_y
 	ld a, $01
 	ret
 ; 0x19942
@@ -373,8 +357,8 @@ Func_19942: ; 19942 (6:5942)
 	inc a
 	add $02
 	ld c, a
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	ld [de], a
 	dec de
@@ -411,8 +395,8 @@ Func_1996e: ; 1996e (6:596e)
 	inc a
 	sub $03
 	ld c, a
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	sub c
 	ld [de], a
@@ -445,8 +429,8 @@ Func_1996e: ; 1996e (6:596e)
 	ld a, [wca72]
 	sub $03
 	ld c, a
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	add c
 	ld [de], a
@@ -486,8 +470,8 @@ Func_199e9: ; 199e9 (6:59e9)
 	inc a
 	sub $03
 	ld c, a
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	sub c
 	ld [de], a
@@ -519,8 +503,8 @@ Func_199e9: ; 199e9 (6:59e9)
 	ld a, [wca72]
 	sub $03
 	ld c, a
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	add c
 	ld [de], a
@@ -553,19 +537,7 @@ Func_19a53: ; 19a53 (6:5a53)
 	ld a, $01
 	ld [wc0d8], a
 .asm_19a62
-	ld hl, wca61
-	ld de, hffa8
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	get_pos
 	call Func_19b7b
 	ret
 ; 0x19a77
@@ -578,8 +550,8 @@ Func_19a77: ; 19a77 (6:5a77)
 	inc a
 	sub $03
 	ld c, a
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	sub c
 	ld [de], a
@@ -606,8 +578,8 @@ Func_19a77: ; 19a77 (6:5a77)
 	ld a, [wca72]
 	sub $03
 	ld c, a
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	add c
 	ld [de], a
@@ -632,8 +604,8 @@ Func_19a77: ; 19a77 (6:5a77)
 ; 0x19acd
 
 Func_19acd: ; 19acd (6:5acd)
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	ld [de], a
 	dec de
@@ -651,8 +623,8 @@ Func_19acd: ; 19acd (6:5acd)
 ; 0x19ae4
 
 Func_19ae4: ; 19ae4 (6:5ae4)
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	ld [de], a
 	dec de
@@ -669,8 +641,8 @@ Func_19ae4: ; 19ae4 (6:5ae4)
 	jr Func_19b3a
 
 Func_19afb: ; 19afb (6:5afb)
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	ld [de], a
 	dec de
@@ -687,24 +659,12 @@ Func_19afb: ; 19afb (6:5afb)
 	jr Func_19b3a
 
 Func_19b12: ; 19b12 (6:5b12)
-	ld hl, wca61
-	ld de, hffa8
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	get_pos
 	jr Func_19b3a
 
 Func_19b25: ; 19b25 (6:5b25)
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	ld [de], a
 	dec de
@@ -733,7 +693,7 @@ Func_19b3a: ; 19b3a (6:5b3a)
 ; 0x19b51
 
 Func_19b51: ; 19b51 (6:5b51)
-	ld hl, hffa8
+	ld hl, hPos
 	call Func_bdb
 	ld a, $01
 	ld [wc0d6], a
@@ -745,7 +705,7 @@ Func_19b51: ; 19b51 (6:5b51)
 	INCROM $19b61, $19b7b
 
 Func_19b7b: ; 19b7b (6:5b7b)
-	ld hl, hffa8
+	ld hl, hPos
 	call Func_bdb
 	ld a, $02
 	ld [wc0d6], a
@@ -755,7 +715,7 @@ Func_19b7b: ; 19b7b (6:5b7b)
 ; 0x19b8b
 
 Func_19b8b: ; 19b8b (6:5b8b)
-	ld hl, hffa8
+	ld hl, hPos
 	call Func_bdb
 	ld a, $04
 	ld [wc0d6], a
@@ -765,7 +725,7 @@ Func_19b8b: ; 19b8b (6:5b8b)
 ; 0x19b9b
 
 Func_19b9b: ; 19b9b (6:5b9b)
-	ld hl, hffa8
+	ld hl, hPos
 	call Func_bdb
 	ld a, $08
 	ld [wc0d6], a
@@ -777,7 +737,7 @@ Func_19b9b: ; 19b9b (6:5b9b)
 	INCROM $19bab, $19bc3
 
 Func_19bc3: ; 19bc3 (6:5bc3)
-	ld hl, hffa8
+	ld hl, hPos
 	call Func_bdb
 	ld a, $10
 	ld [wc0d6], a
@@ -808,7 +768,7 @@ Func_19bd3: ; 19bd3 (6:5bd3)
 ; 0x19beb
 
 Func_19beb: ; 19beb (6:5beb)
-	ld hl, hffa8
+	ld hl, hPos
 	call Func_bdb
 	ld a, $20
 	ld [wc0d6], a
@@ -818,7 +778,7 @@ Func_19beb: ; 19beb (6:5beb)
 ; 0x19bfb
 
 Func_19bfb: ; 19bfb (6:5bfb)
-	ld hl, hffa8
+	ld hl, hPos
 	call Func_bdb
 	ld a, $40
 	ld [wc0d6], a
@@ -828,7 +788,7 @@ Func_19bfb: ; 19bfb (6:5bfb)
 ; 0x19c0b
 
 Func_19c0b: ; 19c0b (6:5c0b)
-	ld hl, hffa8
+	ld hl, hPos
 	call Func_bdb
 	ld a, $80
 	ld [wc0d6], a
@@ -1026,13 +986,7 @@ UpdateState_Slipping: ; 19ce7 (6:5ce7)
 	ret
 
 .asm_19e0f
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	farcall Func_19734
 	ld a, [wWarioState]
 	cp ST_SLIPPING
@@ -1069,11 +1023,11 @@ UpdateState_Slipping: ; 19ce7 (6:5ce7)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_19e63
-	call Func_1270
+	call SubXOffset
 	ret
 
 .asm_19e63
-	call Func_1259
+	call AddXOffset
 	ret
 
 .asm_19e67
@@ -1147,13 +1101,7 @@ UpdateState_CrouchSlipping: ; 19ef1 (6:5ef1)
 	ret
 
 .asm_19f47
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	farcall Func_19734
 	ld a, [wWarioState]
 	cp ST_CROUCH_SLIPPING
@@ -1189,11 +1137,11 @@ UpdateState_CrouchSlipping: ; 19ef1 (6:5ef1)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_19f9a
-	call Func_1270
+	call SubXOffset
 	ret
 
 .asm_19f9a
-	call Func_1259
+	call AddXOffset
 	ret
 
 .asm_19f9e
@@ -1264,6 +1212,7 @@ SetState_SandFalling: ; 1a0e8 (6:60e8)
 	ld [wca71], a
 	ld a, $09
 	ld [wca72], a
+
 	xor a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
@@ -1317,13 +1266,7 @@ UpdateState_SandFalling: ; 1a17e (6:617e)
 	and a
 	ret z
 
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	jp SetState_SandIdling
 ; 0x1a1a7
 
@@ -1522,10 +1465,11 @@ UpdateState_SandTurning: ; 1a394 (6:6394)
 SetState_LadderClimbing: ; 1a3bb (6:63bb)
 	ld a, ST_LADDER_CLIMBING
 	ld [wWarioState], a
-	ld a, [wca64]
+	ld a, [wXPosLo]
 	and $f0
 	add $08
-	ld [wca64], a
+	ld [wXPosLo], a
+
 	xor a
 	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
@@ -1578,19 +1522,7 @@ UpdateState_LadderClimbing: ; 1a436 (6:6436)
 	ld a, [wAnimationHasFinished]
 	and a
 	jr z, .asm_1a49a
-	ld hl, wca61
-	ld de, hffa8
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	get_pos
 	ld b, $04
 	farcall Func_c9f3
 .asm_1a49a
@@ -1601,6 +1533,7 @@ UpdateState_LadderClimbing: ; 1a436 (6:6436)
 SetState_LadderIdling: ; 1a49e (6:649e)
 	ld a, ST_LADDER_IDLING
 	ld [wWarioState], a
+
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -1671,7 +1604,7 @@ UpdateState_LadderShakeSlipping: ; 1a55c (6:655c)
 	update_anim_1
 
 	ld b, $02
-	call Func_1287
+	call AddYOffset
 	ld a, [wc0ba]
 	and $0f
 	cp $08
@@ -1687,13 +1620,7 @@ UpdateState_LadderShakeSlipping: ; 1a55c (6:655c)
 	ld a, b
 	and a
 	jr z, .asm_1a5e1
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	farcall SetState_Idling
 	ret
 
@@ -1744,11 +1671,11 @@ UpdateState_GettingOffLadder: ; 1a617 (6:6617)
 	and a
 	jr nz, .asm_1a63b
 	ld b, $01
-	call Func_1270
+	call SubXOffset
 	jr .asm_1a640
 .asm_1a63b
 	ld b, $01
-	call Func_1259
+	call AddXOffset
 
 .asm_1a640
 	farcall Func_19b25
@@ -1796,7 +1723,7 @@ UpdateState_LadderSliding: ; 1a6b6 (6:66b6)
 	ld a, [wLadderInteraction]
 	and a
 	jr nz, .asm_1a6e6
-	xor a
+	xor a ; FALSE
 	ld [wIsSmashAttacking], a
 	farcall StartFall
 	ret
@@ -1809,7 +1736,7 @@ UpdateState_LadderSliding: ; 1a6b6 (6:66b6)
 	jp nz, SetState_LadderClimbing
 
 	ld b, $02
-	call Func_1287
+	call AddYOffset
 	ld a, [wc0ba]
 	and $0f
 	cp $08
@@ -1826,13 +1753,7 @@ UpdateState_LadderSliding: ; 1a6b6 (6:66b6)
 	ld a, b
 	and a
 	ret z
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	ld a, [wIsSmashAttacking]
 	and a
 	jr z, .asm_1a753
@@ -1948,11 +1869,11 @@ UpdateState_GrabSlipping: ; 1a7d6 (6:67d6)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1a88a
-	call Func_1270
+	call SubXOffset
 	ret
 
 .asm_1a88a
-	call Func_1259
+	call AddXOffset
 	ret
 
 .asm_1a88e
@@ -2156,13 +2077,7 @@ UpdateState_FenceShakeSliding: ; 1adfb (6:6dfb)
 	and a
 	ret z
 
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 
 	xor a
 	ld [wJumpVelTable], a
@@ -2175,6 +2090,7 @@ UpdateState_FenceShakeSliding: ; 1adfb (6:6dfb)
 SetState_FenceMovingVertical: ; 1ae68 (6:6e68)
 	ld a, ST_FENCE_MOVING_VERTICAL
 	ld [wWarioState], a
+
 	xor a
 	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
@@ -2220,19 +2136,7 @@ UpdateState_FenceMovingVertical:;1aed0 (6:6ed0)
 	and a
 	jr z, .asm_1af1e
 
-	ld hl, wca61
-	ld de, hffa8
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	get_pos
 
 	ld b, $04
 	farcall Func_c9f3
@@ -2385,7 +2289,7 @@ UpdateState_FenceSliding: ; 1b0a9 (6:70a9)
 	and a
 	jr nz, .asm_1b0d9
 
-	xor a
+	xor a ; FALSE
 	ld [wIsSmashAttacking], a
 	farcall StartFall
 	ret
@@ -2399,7 +2303,7 @@ UpdateState_FenceSliding: ; 1b0a9 (6:70a9)
 
 .asm_1b0f2
 	ld b, $02
-	call Func_1287
+	call AddYOffset
 	ld a, [wc0ba]
 	and $0f
 	cp $08
@@ -2416,13 +2320,7 @@ UpdateState_FenceSliding: ; 1b0a9 (6:70a9)
 	and a
 	ret z
 
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 
 	ld a, [wIsSmashAttacking]
 	and a
@@ -2479,12 +2377,12 @@ Func_1b168: ; 1b168 (6:7168)
 	and a
 	ret z
 	ld b, $01
-	call Func_129e
+	call SubYOffset
 	ret
 
 .d_down
 	ld b, $01
-	call Func_1287
+	call AddYOffset
 	farcall Func_198e0
 	ld a, b
 	and a
@@ -2497,13 +2395,7 @@ Func_1b168: ; 1b168 (6:7168)
 	ret
 
 .asm_1b1ff
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	farcall SetState_Idling
 	ret
 ; 0x1b21a
@@ -2564,7 +2456,7 @@ Func_1b24f: ; 1b24f (6:724f)
 	and a
 	ret nz
 	ld b, $01
-	call Func_1259
+	call AddXOffset
 	ret
 
 .d_left
@@ -2575,7 +2467,7 @@ Func_1b24f: ; 1b24f (6:724f)
 	and a
 	ret nz
 	ld b, $01
-	call Func_1270
+	call SubXOffset
 	ret
 ; 0x1b2c0
 
@@ -2617,7 +2509,7 @@ Func_1b302: ; 1b302 (6:7302)
 	jr z, .asm_1b31e
 	inc b
 .asm_1b31e
-	call Func_1287
+	call AddYOffset
 	ret
 ; 0x1b322
 
@@ -2657,7 +2549,7 @@ Func_1b333: ; 1b333 (6:7333)
 	and a
 	ret nz
 	call Func_151e
-	call Func_1259
+	call AddXOffset
 .asm_1b36d
 	ld a, [wca86]
 	cp $04
@@ -2682,7 +2574,7 @@ Func_1b333: ; 1b333 (6:7333)
 	and a
 	ret nz
 	call Func_153f
-	call Func_1270
+	call SubXOffset
 	jr .asm_1b36d
 ; 0x1b3a0
 
@@ -2705,7 +2597,7 @@ Func_1b3a0: ; 1b3a0 (6:73a0)
 	and a
 	ret nz
 	ld b, $01
-	call Func_129e
+	call SubYOffset
 	ld a, [wc0ba]
 	and $0f
 	cp $08
@@ -2730,7 +2622,7 @@ Func_1b3a0: ; 1b3a0 (6:73a0)
 
 .d_down
 	ld b, $01
-	call Func_1287
+	call AddYOffset
 	ld a, [wc0ba]
 	and $0f
 	cp $08
@@ -2751,10 +2643,10 @@ Func_1b3a0: ; 1b3a0 (6:73a0)
 	ld a, b
 	and a
 	ret z
-	ld a, [wca64]
+	ld a, [wXPosLo]
 	and $f0
 	add $08
-	ld [wca64], a
+	ld [wXPosLo], a
 	ret
 
 .asm_1b45d

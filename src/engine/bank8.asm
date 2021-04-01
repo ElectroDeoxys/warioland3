@@ -90,14 +90,14 @@ Func_20000: ; 20000 (8:4000)
 	sub e
 	ld b, a ; wc1ba + wc1be - $d0
 	ld hl, wca70
-	ld a, [wWarioYPos]
+	ld a, [wWarioScreenYPos]
 	add [hl]
 	sub e
 	sub b
 	jp c, .asm_20028
 	ld c, a
 	ld hl, wca6f
-	ld a, [wWarioYPos]
+	ld a, [wWarioScreenYPos]
 	add [hl]
 	sub e
 	ld b, a
@@ -130,14 +130,14 @@ Func_20000: ; 20000 (8:4000)
 	sub e
 	ld b, a
 	ld hl, wca72
-	ld a, [wWarioXPos]
+	ld a, [wWarioScreenXPos]
 	add [hl]
 	sub e
 	sub b
 	jp c, .asm_20028
 	ld c, a
 	ld hl, wca71
-	ld a, [wWarioXPos]
+	ld a, [wWarioScreenXPos]
 	add [hl]
 	sub e
 	ld b, a
@@ -339,13 +339,13 @@ Func_206eb: ; 206eb (8:46eb)
 	ld a, $e5
 	ld [wca6f], a
 
-	ldh a, [hffa8]
+	ldh a, [hYPosHi]
 	ldh [hffad], a
-	ldh a, [hffa9]
+	ldh a, [hYPosLo]
 	ldh [hffae], a
-	ldh a, [hffaa]
+	ldh a, [hXPosHi]
 	ldh [hffaf], a
-	ldh a, [hffab]
+	ldh a, [hXPosLo]
 	ldh [hffb0], a
 
 	farcall Func_1996e
@@ -356,13 +356,13 @@ Func_206eb: ; 206eb (8:46eb)
 	xor a
 	ld [wca8b], a
 	ldh a, [hffad]
-	ldh [hffa8], a
+	ldh [hYPosHi], a
 	ldh a, [hffae]
-	ldh [hffa9], a
+	ldh [hYPosLo], a
 	ldh a, [hffaf]
-	ldh [hffaa], a
+	ldh [hXPosHi], a
 	ldh a, [hffb0]
-	ldh [hffab], a
+	ldh [hXPosLo], a
 
 .asm_20774
 	ld a, $e5
@@ -378,13 +378,13 @@ Func_206eb: ; 206eb (8:46eb)
 	ld [wJumpVelTable], a
 
 	ldh a, [hffad]
-	ldh [hffa8], a
+	ldh [hYPosHi], a
 	ldh a, [hffae]
-	ldh [hffa9], a
+	ldh [hYPosLo], a
 	ldh a, [hffaf]
-	ldh [hffaa], a
+	ldh [hXPosHi], a
 	ldh a, [hffb0]
-	ldh [hffab], a
+	ldh [hXPosLo], a
 
 .asm_20799
 	ld a, $04

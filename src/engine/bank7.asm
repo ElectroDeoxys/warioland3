@@ -91,13 +91,7 @@ UpdateState_Idling: ; 1c0b6 (7:40b6)
 	and a
 	jp z, StartFall
 
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	ld a, [wWarioState]
 	cp ST_IDLING
 	ret nz ; not idling
@@ -185,19 +179,7 @@ UpdateState_Walking: ; 1c1ab (7:41ab)
 	ld a, [wAnimationHasFinished]
 	and a
 	jr z, .handle_input
-	ld hl, wca61
-	ld de, hffa8
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	get_pos
 	ld b, $04
 	farcall Func_c9f3
 
@@ -223,13 +205,7 @@ UpdateState_Walking: ; 1c1ab (7:41ab)
 	and a
 	jp z, StartFall
 
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	ret
 ; 0x1c244
 
@@ -359,7 +335,7 @@ SetState_Airborne: ; 1c2e2 (7:42e2)
 	and a
 	ret z
 	ld b, $02
-	call Func_129e
+	call SubYOffset
 	ret
 ; 0x1c369
 
@@ -425,6 +401,7 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	ld a, [wJumpVelIndex]
 	cp FALLING_JUMP_VEL_INDEX
 	jr c, .asm_1c43d
+
 	ld a, [wJoypadDown]
 	bit D_DOWN_F, a
 	jr z, .asm_1c43d
@@ -443,7 +420,7 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	ld a, [wJoypadDown]
 	bit D_DOWN_F, a
 	jr nz, .asm_1c43d
-	xor a
+	xor a ; FALSE
 	ld [wIsSmashAttacking], a
 	jr .asm_1c449
 .asm_1c43d
@@ -466,6 +443,7 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 .asm_1c462
 	load_frameset_ptr Frameset_15f97
 	jr .asm_1c4aa
+
 .asm_1c46e
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
@@ -500,10 +478,10 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	ld a, [wced2]
 	and a
 	jp nz, Func_1c2b2
-	ld a, [wca64]
+	ld a, [wXPosLo]
 	and $f0
 	add $08
-	ld [wca64], a
+	ld [wXPosLo], a
 	ret
 
 .asm_1c4ea
@@ -518,26 +496,8 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	jp Func_14de
 .asm_1c506
 
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
-	ld hl, wca61
-	ld de, hffa8
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
+	get_pos
 	ld b, $04
 	farcall Func_c9f3
 
@@ -549,9 +509,11 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	jr z, .asm_1c58a
 .asm_1c541
 	call Func_1501
+
 	xor a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
+
 	ld a, [wIsSmashAttacking]
 	and a
 	jr z, .asm_1c55c
@@ -559,6 +521,7 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
 	jp c, Func_1c66b
 	jp Func_1c5fd
+
 .asm_1c55c
 	ld a, [wJoypadDown]
 	and D_DOWN
@@ -570,6 +533,7 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	and a
 	jr z, .asm_1c57f
 	jp Func_1e855
+
 .asm_1c57f
 	ld a, [wJoypadDown]
 	and D_RIGHT | D_LEFT
@@ -578,6 +542,7 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 
 .asm_1c58a
 	call Func_1501
+
 	xor a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
@@ -808,13 +773,7 @@ UpdateState_CrouchSliding: ; 1c7c3 (7:47c3)
 	ld a, [wIsStandingOnSlope]
 	and a
 	jr z, .asm_1c815
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	jp SetState_Sliding
 
 .asm_1c815
@@ -858,10 +817,10 @@ UpdateState_CrouchSliding: ; 1c7c3 (7:47c3)
 	and a
 	jr nz, .asm_1c867
 .asm_1c863
-	call Func_1270
+	call SubXOffset
 	ret
 .asm_1c867
-	call Func_1259
+	call AddXOffset
 	ret
 
 .asm_1c86b
@@ -983,7 +942,7 @@ UpdateState_Attacking: ; 1c8df (7:48df)
 	and a
 	jr nz, .asm_1c9a0
 	call Func_153f
-	call Func_1270
+	call SubXOffset
 	ld a, [wca86]
 	cp $14
 	jr c, .asm_1c99e
@@ -994,7 +953,7 @@ UpdateState_Attacking: ; 1c8df (7:48df)
 
 .asm_1c9a0
 	call Func_151e
-	call Func_1259
+	call AddXOffset
 	ld a, [wca86]
 	cp $14
 	jr c, .asm_1c9b2
@@ -1002,13 +961,7 @@ UpdateState_Attacking: ; 1c8df (7:48df)
 	ld [wca86], a
 .asm_1c9b2
 	farcall Func_198e0
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	ld a, [wWarioState]
 	cp ST_ATTACKING
 	ret nz ; done if not attacking anymore
@@ -1037,11 +990,11 @@ Func_1c9fa: ; 1c9fa (7:49fa)
 	and a
 	jr nz, .asm_1ca07
 	ld b, $03
-	call Func_1259
+	call AddXOffset
 	jr .asm_1ca0c
 .asm_1ca07
 	ld b, $03
-	call Func_1270
+	call SubXOffset
 .asm_1ca0c
 	jr Func_1ca20
 ; 0x1ca0e
@@ -1051,11 +1004,11 @@ Func_1ca0e: ; 1ca0e (7:4a0e)
 	and a
 	jr nz, .asm_1ca1b
 	ld b, $02
-	call Func_1259
+	call AddXOffset
 	jr Func_1ca20
 .asm_1ca1b
 	ld b, $02
-	call Func_1270
+	call SubXOffset
 ;	fallthrough
 
 Func_1ca20: ; 1ca20 (7:4a20)
@@ -1352,13 +1305,7 @@ UpdateState_AttackKnockBack: ; 1ccaf (7:4caf)
 	jr nz, .asm_1cd2c
 	jp Func_14de
 .asm_1cd2c
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	ld a, [wDirection]
 	xor $1 ; switch direction
 	ld [wDirection], a
@@ -1371,23 +1318,11 @@ UpdateState_AttackKnockBack: ; 1ccaf (7:4caf)
 Func_1cd48: ; 1cd48 (7:4d48)
 	xor a
 	ld [wca9a], a
-	ld hl, wca61
-	ld de, hffa8
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	get_pos
 
-	ldh a, [hffa9]
+	ldh a, [hYPosLo]
 	and $f0
-	ldh [hffa9], a
+	ldh [hYPosLo], a
 
 	ld b, $03
 	farcall Func_c9f3
@@ -1438,6 +1373,7 @@ SetState_Diving: ; 1cdf6 (7:4df6)
 	ld [wca71], a
 	ld a, $09
 	ld [wca72], a
+
 	xor a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
@@ -1449,6 +1385,7 @@ SetState_Diving: ; 1cdf6 (7:4df6)
 	ld [wca6d], a
 	ld [wca8b], a
 	ld [wc0e0], a
+
 	ld hl, Pals_c800
 	call Func_1af6
 	ld a, $04
@@ -1485,7 +1422,7 @@ UpdateState_Diving: ; 1ce42 (7:4e42)
 .asm_1ce71
 	ld b, $01
 .asm_1ce73
-	call Func_1287
+	call AddYOffset
 	farcall Func_198e0
 	ld a, b
 	and a
@@ -1493,13 +1430,7 @@ UpdateState_Diving: ; 1ce42 (7:4e42)
 	ret
 
 .asm_1ce8a
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 ;	fallthrough
 
 SetState_Submerged: ; 1ce95 (7:4e95)
@@ -1750,7 +1681,7 @@ Func_1d107: ; 1d107 (7:5107)
 	and $03
 	ret nz
 	call Func_151e
-	call Func_1259
+	call AddXOffset
 .asm_1d161
 	ld a, [wca86]
 	cp $04
@@ -1784,7 +1715,7 @@ Func_1d107: ; 1d107 (7:5107)
 	and $03
 	ret nz
 	call Func_153f
-	call Func_1270
+	call SubXOffset
 	jr .asm_1d161
 ; 0x1d1bc
 
@@ -1976,10 +1907,10 @@ UpdateState_SwimKnockBack: ; 1d354 (7:5354)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1d386
-	call Func_1270
+	call SubXOffset
 	ret
 .asm_1d386
-	call Func_1259
+	call AddXOffset
 	ret
 
 .asm_1d38a
@@ -2009,7 +1940,7 @@ UpdateState_WaterStung: ; 1d395 (7:5395)
 	and $01
 	ret nz
 	ld b, $01
-	call Func_129e
+	call SubYOffset
 	ld a, [wcee0]
 	and a
 	ret z
@@ -2122,13 +2053,7 @@ UpdateState_CrouchWalking: ; 1d4a7 (7:54a7)
 	ld a, b
 	and a
 	jp z, Func_1ed34
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	ld a, [wIsStandingOnSlope]
 	and a
 	jr nz, .asm_1d51f
@@ -2221,13 +2146,7 @@ UpdateState_CrouchAirborne: ; 1d522 (7:5522)
 	jp Func_14de
 
 .asm_1d60a
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	ld a, [wWarioState]
 	cp ST_CROUCH_AIRBORNE
 	ret nz ; done if not crouch jumping anymore
@@ -2269,7 +2188,7 @@ UpdateState_Stung: ; 1d627 (7:5627)
 	jr nc, .asm_1d68f
 	inc b
 .asm_1d68f
-	call Func_1270
+	call SubXOffset
 	jr .asm_1d6b5
 .asm_1d694
 	ld b, $01
@@ -2278,19 +2197,19 @@ UpdateState_Stung: ; 1d627 (7:5627)
 	jr nc, .asm_1d69e
 	inc b
 .asm_1d69e
-	call Func_1259
+	call AddXOffset
 	jr .asm_1d6b5
 .asm_1d6a3
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1d6b0
 	ld b, $01
-	call Func_1259
+	call AddXOffset
 	jr .asm_1d6b5
 
 .asm_1d6b0
 	ld b, $01
-	call Func_1270
+	call SubXOffset
 .asm_1d6b5
 	ld a, [wJumpVelTable]
 	and a
@@ -2324,7 +2243,7 @@ UpdateState_Stung: ; 1d627 (7:5627)
 	cpl
 	inc a
 	ld b, a
-	call Func_129e
+	call SubYOffset
 	ld hl, wJumpVelIndex
 	inc [hl]
 	farcall Func_1996e
@@ -2337,7 +2256,7 @@ UpdateState_Stung: ; 1d627 (7:5627)
 
 .falling
 	ld b, [hl]
-	call Func_1287
+	call AddYOffset
 	ld hl, wJumpVelIndex
 	inc [hl]
 	ld a, [hl]
@@ -2421,7 +2340,7 @@ UpdateState_PipeGoingDown: ; 1d7c1 (7:57c1)
 	ld [wca8a], a
 	update_anim_1
 	ld b, $01
-	call Func_1287
+	call AddYOffset
 
 	ld hl, wWarioStateCounter
 	inc [hl]
@@ -2432,9 +2351,9 @@ UpdateState_PipeGoingDown: ; 1d7c1 (7:57c1)
 	jr z, .asm_1d804
 	cp $40
 	ret c
-	ld a, [wca64]
+	ld a, [wXPosLo]
 	sub $08
-	ld [wca64], a
+	ld [wXPosLo], a
 	xor a
 	ld [wca8a], a
 	jp SetState_Idling
@@ -2454,7 +2373,7 @@ UpdateState_PipeGoingUp: ; 1d80d (7:580d)
 	ld [wca8a], a
 	update_anim_1
 	ld b, $01
-	call Func_129e
+	call SubYOffset
 
 	ld hl, wWarioStateCounter
 	inc [hl]
@@ -2465,9 +2384,9 @@ UpdateState_PipeGoingUp: ; 1d80d (7:580d)
 	jr z, .asm_1d853
 	cp $40
 	ret c
-	ld a, [wca64]
+	ld a, [wXPosLo]
 	sub $08
-	ld [wca64], a
+	ld [wXPosLo], a
 	xor a
 	ld [wca8a], a
 	call Func_1146
@@ -2492,7 +2411,7 @@ UpdateState_SmashAttacking: ; 1d8f8 (7:58f8)
 	ld a, [hl]
 	cp $1b
 	ret c
-	xor a
+	xor a ; FALSE
 	ld [wIsSmashAttacking], a
 	jp SetState_Idling
 ; 0x1d916
@@ -2539,13 +2458,7 @@ UpdateState_GrabIdling: ; 1d943 (7:5943)
 	ld a, b
 	and a
 	jp z, Func_1edd3
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	ret
 ; 0x1d995
 
@@ -2580,13 +2493,7 @@ UpdateState_GrabWalking: ; 1d995 (7:5995)
 	ld a, b
 	and a
 	jp z, Func_1edd3
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	ret
 ; 0x1da07
 
@@ -2674,7 +2581,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 	ld a, [wJoypadDown]
 	bit D_DOWN_F, a
 	jr nz, .asm_1dadc
-	xor a
+	xor a ; FALSE
 	ld [wIsSmashAttacking], a
 	jr .asm_1dae8
 .asm_1dadc
@@ -3062,7 +2969,7 @@ UpdateState_GrabSmashAttacking: ; 1decc (7:5ecc)
 	ld a, [hl]
 	cp $1b
 	ret c
-	xor a
+	xor a ; FALSE
 	ld [wIsSmashAttacking], a
 	jp Func_1efe7
 ; 0x1def1
@@ -3100,8 +3007,8 @@ SetState_Sliding: ; 1def1 (7:5ef1)
 	ld a, [wIsStandingOnSlope]
 	bit 1, a
 	jr nz, .asm_1df8b
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	add $0c
 	ld [de], a
@@ -3125,8 +3032,8 @@ SetState_Sliding: ; 1def1 (7:5ef1)
 	jr .asm_1dfc4
 
 .asm_1df8b
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	sub $0c
 	ld [de], a
@@ -3173,19 +3080,7 @@ UpdateState_Sliding: ; 1dfd4 (7:5fd4)
 	and a
 	jp z, Func_1e174
 
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos
 	farcall Func_19734
 	ld a, b
 	and $0f
@@ -3251,11 +3146,11 @@ UpdateState_Rolling: ; 1e09d (7:609d)
 	and a
 	jr nz, .asm_1e0ee
 	call Func_153f
-	call Func_1270
+	call SubXOffset
 	jr .asm_1e0f4
 .asm_1e0ee
 	call Func_151e
-	call Func_1259
+	call AddXOffset
 
 .asm_1e0f4
 	ld a, [wca86]
@@ -3273,13 +3168,7 @@ UpdateState_Rolling: ; 1e09d (7:609d)
 	and a
 	jp z, Func_1e174
 
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 
 	ld a, [wIsStandingOnSlope]
 	and a
@@ -3294,13 +3183,7 @@ UpdateState_Rolling: ; 1e09d (7:609d)
 
 .asm_1e145
 	farcall Func_198e0
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	ld a, [wIsStandingOnSlope]
 	and a
 	jp z, Func_1e1e3
@@ -3377,11 +3260,11 @@ UpdateState_RollingAirborne: ; 1e1e9 (7:61e9)
 	and a
 	jr nz, .asm_1e239
 	call Func_153f
-	call Func_1270
+	call SubXOffset
 	jr .asm_1e23f
 .asm_1e239
 	call Func_151e
-	call Func_1259
+	call AddXOffset
 
 .asm_1e23f
 	ld a, [wca86]
@@ -3408,14 +3291,14 @@ UpdateState_RollingAirborne: ; 1e1e9 (7:61e9)
 	cpl
 	inc a
 	ld b, a
-	call Func_129e
+	call SubYOffset
 	ld hl, wJumpVelIndex
 	inc [hl]
 	jr .asm_1e28a
 
 .falling
 	ld b, [hl]
-	call Func_1287
+	call AddYOffset
 	ld hl, wJumpVelIndex
 	inc [hl]
 	ld a, [hl]
@@ -3650,7 +3533,7 @@ Func_1e46a: ; 1e46a (7:646a)
 	ret nc
 .asm_1e4c7
 	ld b, $02
-	call Func_1259
+	call AddXOffset
 	ret
 
 .asm_1e4cd
@@ -3678,7 +3561,7 @@ Func_1e46a: ; 1e46a (7:646a)
 	ret nc
 .asm_1e506
 	ld b, $02
-	call Func_1270
+	call SubXOffset
 	ret
 
 .asm_1e50c
@@ -3706,7 +3589,7 @@ Func_1e46a: ; 1e46a (7:646a)
 	ret nc
 .asm_1e545
 	ld b, $02
-	call Func_129e
+	call SubYOffset
 	ret
 
 .asm_1e54b
@@ -3734,7 +3617,7 @@ Func_1e46a: ; 1e46a (7:646a)
 	ret nc
 .asm_1e584
 	ld b, $02
-	call Func_1287
+	call AddYOffset
 	ret
 
 .asm_1e58a
@@ -3779,7 +3662,7 @@ Func_1e598: ; 1e598 (7:6598)
 	jr nc, .asm_1e614
 .asm_1e5dc
 	ld b, $01
-	call Func_1259
+	call AddXOffset
 	jr .asm_1e614
 
 .asm_1e5e3
@@ -3800,7 +3683,7 @@ Func_1e598: ; 1e598 (7:6598)
 	jr nc, .asm_1e614
 .asm_1e60f
 	ld b, $01
-	call Func_1270
+	call SubXOffset
 .asm_1e614
 	ld a, [wcee1]
 	sub $10
@@ -3831,7 +3714,7 @@ Func_1e598: ; 1e598 (7:6598)
 	jr nc, .asm_1e614
 .asm_1e650
 	ld b, $01
-	call Func_129e
+	call SubYOffset
 	jr .asm_1e614
 
 .asm_1e657
@@ -3852,7 +3735,7 @@ Func_1e598: ; 1e598 (7:6598)
 	jr nc, .asm_1e614
 .asm_1e683
 	ld b, $01
-	call Func_1287
+	call AddYOffset
 	jr .asm_1e614
 ; 0x1e68a
 
@@ -4115,7 +3998,7 @@ HandleInput_Walking: ; 1e8ed (7:68ed)
 	and a
 	ret nz
 	call Func_151e
-	call Func_1259
+	call AddXOffset
 .asm_1e93d
 	ld a, [wca86]
 	cp $10
@@ -4136,7 +4019,7 @@ HandleInput_Walking: ; 1e8ed (7:68ed)
 	and a
 	ret nz
 	call Func_153f
-	call Func_1270
+	call SubXOffset
 	jr .asm_1e93d
 
 .asm_1e970
@@ -4254,7 +4137,7 @@ Func_1ea83: ; 1ea83 (7:6a83)
 	and a
 	jr nz, .asm_1ead1
 	ld b, $01
-	call Func_1259
+	call AddXOffset
 	jr .asm_1ead1
 
 .asm_1eab4
@@ -4265,7 +4148,7 @@ Func_1ea83: ; 1ea83 (7:6a83)
 	and a
 	jr nz, .asm_1ead1
 	ld b, $01
-	call Func_1270
+	call SubXOffset
 .asm_1ead1
 	xor a
 	ld [wca86], a
@@ -4276,23 +4159,23 @@ Func_1ea83: ; 1ea83 (7:6a83)
 	cp DIRECTION_RIGHT
 	jr z, .asm_1eafe
 	ld b, $01
-	call Func_1270
+	call SubXOffset
 	farcall Func_197b1
 	ld a, b
 	and a
 	jr z, .asm_1eb1b
 	ld b, $01
-	call Func_1259
+	call AddXOffset
 	jr .asm_1eb1b
 .asm_1eafe
 	ld b, $01
-	call Func_1259
+	call AddXOffset
 	farcall Func_19741
 	ld a, b
 	and a
 	jr z, .asm_1eb1b
 	ld b, $01
-	call Func_1270
+	call SubXOffset
 .asm_1eb1b
 
 	ld a, [wJumpVelIndex]
@@ -4306,13 +4189,13 @@ Func_1ea83: ; 1ea83 (7:6a83)
 	cpl
 	inc a
 	ld b, a
-	call Func_129e
+	call SubYOffset
 	ld hl, wJumpVelIndex
 	inc [hl]
 	jr .done
 .asm_1eb36
 	ld b, [hl]
-	call Func_1287
+	call AddYOffset
 	ld hl, wJumpVelIndex
 	inc [hl]
 	ld a, [hl]
@@ -4488,7 +4371,7 @@ Func_1ec6c: ; 1ec6c (7:6c6c)
 	and $0f
 	ret nz
 	call Func_151e
-	call Func_1259
+	call AddXOffset
 	ld a, [wca86]
 	cp $04
 	jr c, .asm_1ecf1
@@ -4513,7 +4396,7 @@ Func_1ec6c: ; 1ec6c (7:6c6c)
 	and $0f
 	ret nz
 	call Func_153f
-	call Func_1270
+	call SubXOffset
 	ld a, [wca86]
 	cp $04
 	jr c, .asm_1ed33
@@ -4578,7 +4461,7 @@ Func_1ed4b: ; 1ed4b (7:6d4b)
 	and a
 	ret z
 	ld b, $02
-	call Func_129e
+	call SubYOffset
 	ret
 ; 0x1edd3
 
@@ -4740,7 +4623,7 @@ Func_1eefc: ; 1eefc (7:6efc)
 
 .asm_1ef69
 	call Func_151e
-	call Func_1259
+	call AddXOffset
 	ld a, [wIsStandingOnSlope]
 	and a
 	jr z, .asm_1ef8d
@@ -4750,7 +4633,7 @@ Func_1eefc: ; 1eefc (7:6efc)
 
 .asm_1ef7b
 	call Func_153f
-	call Func_1270
+	call SubXOffset
 	ld a, [wIsStandingOnSlope]
 	and a
 	jr z, .asm_1ef8d
@@ -4900,7 +4783,7 @@ HandleInput_Airborne: ; 1f077 (7:7077)
 	cpl
 	inc a
 	ld b, a
-	call Func_129e
+	call SubYOffset
 	ld hl, wJumpVelIndex
 	inc [hl]
 	jr .check_input
@@ -4909,7 +4792,7 @@ HandleInput_Airborne: ; 1f077 (7:7077)
 	xor a
 	ld [wca76], a
 	ld b, [hl]
-	call Func_1287
+	call AddYOffset
 	ld hl, wJumpVelIndex
 	inc [hl]
 	ld a, [hl]
@@ -4968,7 +4851,7 @@ Func_1f11b: ; 1f11b (7:711b)
 	and $0f
 	ret nz
 	call Func_151e
-	call Func_1259
+	call AddXOffset
 	ret
 ; 0x1f135
 
@@ -4978,7 +4861,7 @@ Func_1f135: ; 1f135 (7:7135)
 	and $0f
 	ret nz
 	call Func_153f
-	call Func_1270
+	call SubXOffset
 	ret
 ; 0x1f14f
 
@@ -5005,7 +4888,7 @@ Func_1f14f: ; 1f14f (7:714f)
 	and a
 	ret nz
 	ld b, $01
-	call Func_1259
+	call AddXOffset
 	ret
 
 .asm_1f185
@@ -5020,7 +4903,7 @@ Func_1f14f: ; 1f14f (7:714f)
 	and a
 	ret nz
 	ld b, $01
-	call Func_1270
+	call SubXOffset
 	ret
 ; 0x1f1a9
 
@@ -5075,7 +4958,7 @@ Func_1f1a9: ; 1f1a9 (7:71a9)
 	and $0c
 	ret nz
 	ld b, $01
-	call Func_129e
+	call SubYOffset
 	ret
 
 .asm_1f246
@@ -5134,13 +5017,7 @@ Func_1f24c: ; 1f24c (7:724c)
 	ld a, b
 	and a
 	jr z, .asm_1f2de
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 .asm_1f2de
 	ld a, [wWarioState]
 	cp ST_WATER_STUNG
@@ -5172,7 +5049,7 @@ Func_1f310: ; 1f310 (7:7310)
 	and $03
 	ret nz
 	ld b, $01
-	call Func_1259
+	call AddXOffset
 	ret
 
 .asm_1f337
@@ -5182,7 +5059,7 @@ Func_1f310: ; 1f310 (7:7310)
 	and $03
 	ret nz
 	ld b, $01
-	call Func_1270
+	call SubXOffset
 	ret
 
 .asm_1f345
@@ -5204,13 +5081,7 @@ Func_1f357: ; 1f357 (7:7357)
 	ld a, b
 	and a
 	jr z, .asm_1f375
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 .asm_1f375
 	ld a, [wWarioState]
 	cp ST_WATER_STUNG
@@ -5233,13 +5104,7 @@ Func_1f3a7: ; 1f3a7 (7:73a7)
 	ld a, b
 	and a
 	jr z, .asm_1f3cb
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	ld a, $80
 	ld [wc0e1], a
 	ret
@@ -5251,7 +5116,7 @@ Func_1f3a7: ; 1f3a7 (7:73a7)
 	and $0c
 	ret nz
 	ld b, $01
-	call Func_1287
+	call AddYOffset
 	ret
 ; 0x1f3d9
 
@@ -5270,7 +5135,7 @@ Func_1f3d9: ; 1f3d9 (7:73d9)
 	and $0c
 	ret nz
 	ld b, $01
-	call Func_129e
+	call SubYOffset
 	ret
 ; 0x1f40f
 
@@ -5292,7 +5157,7 @@ Func_1f40f: ; 1f40f (7:740f)
 	cp $02
 	jp z, SetState_TryingSubmerge
 	ld b, $03
-	call Func_1287
+	call AddYOffset
 	jp Func_1d1e4
 
 .asm_1f448
@@ -5340,13 +5205,7 @@ Func_1f470: ; 1f470 (7:7470)
 	ld a, b
 	and a
 	jr z, .asm_1f4ba
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 .asm_1f4ba
 	ld a, [wWarioState]
 	cp ST_WATER_STUNG
@@ -5367,7 +5226,7 @@ Func_1f470: ; 1f470 (7:7470)
 .asm_1f4e7
 	add hl, de
 	ld b, [hl]
-	call Func_1259
+	call AddXOffset
 
 	ld a, [wca9c]
 	bit 6, a
@@ -5380,13 +5239,7 @@ Func_1f470: ; 1f470 (7:7470)
 	ld a, b
 	and a
 	jr z, .asm_1f519
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 .asm_1f519
 	ld a, [wWarioState]
 	cp ST_WATER_STUNG
@@ -5407,7 +5260,7 @@ Func_1f470: ; 1f470 (7:7470)
 .asm_1f546
 	add hl, de
 	ld b, [hl]
-	call Func_1270
+	call SubXOffset
 
 	ld a, [wca9c]
 	bit 6, a
@@ -5431,7 +5284,7 @@ Func_1f470: ; 1f470 (7:7470)
 	and a
 	jp z, Func_1cf7a
 	ld b, $01
-	call Func_129e
+	call SubYOffset
 	ret
 
 .asm_1f593
@@ -5445,17 +5298,11 @@ Func_1f470: ; 1f470 (7:7470)
 	and a
 	jr nz, .asm_1f5b2
 	ld b, $01
-	call Func_1287
+	call AddYOffset
 	ret
 
 .asm_1f5b2
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	ld hl, wc0e1
 	set 7, [hl]
 	ret
@@ -5476,17 +5323,11 @@ Func_1f470: ; 1f470 (7:7470)
 .asm_1f5e9
 	add hl, de
 	ld b, [hl]
-	call Func_1287
+	call AddYOffset
 	ret
 
 .asm_1f5ef
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	ld hl, wc0e1
 	set 7, [hl]
 	ret
@@ -5511,7 +5352,7 @@ Func_1f470: ; 1f470 (7:7470)
 .asm_1f63c
 	add hl, de
 	ld b, [hl]
-	call Func_129e
+	call SubYOffset
 	ret
 
 .asm_1f642
@@ -5790,7 +5631,7 @@ Func_1f863: ; 1f863 (7:7863)
 	ld hl, Data_1f86c
 	add hl, de
 	ld b, [hl]
-	call Func_129e
+	call SubYOffset
 	ret
 ; 0x1f86c
 

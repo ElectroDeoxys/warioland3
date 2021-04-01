@@ -2,65 +2,65 @@ Func_1f0000: ; 1f0000 (7c:4000)
 	ld a, [wSubSequence]
 	jumptable
 
-    dw SubSeq_SlowFadeBGToWhite
-    dw Func_1f0087
-    dw DarkenBGToPal_Fast
-    dw $42a2
-    dw SubSeq_SlowFadeBGToWhite
-    dw $433c
-    dw DarkenBGToPal_Fast
-    dw $141a
-    dw SubSeq_SlowFadeBGToWhite
-    dw $4370
-    dw DarkenBGToPal_Fast
-    dw $43d1
-    dw SubSeq_SlowFadeBGToWhite
-    dw $43fa
-    dw DarkenBGToPal_Fast
-    dw $46e1
-    dw $46fe
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw SubSeq_SlowFadeBGToWhite
-    dw $4701
-    dw DarkenBGToPal_Fast
-    dw $43d1
-    dw SubSeq_SlowFadeBGToWhite
-    dw $4768
-    dw DarkenBGToPal_Fast
-    dw $46e1
-    dw SubSeq_SlowFadeBGToWhite
-    dw $48af
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw SubSeq_SlowFadeBGToWhite
-    dw $4701
-    dw DarkenBGToPal_Fast
-    dw $43d1
-    dw SubSeq_SlowFadeBGToWhite
-    dw $4768
-    dw DarkenBGToPal_Fast
-    dw $46e1
-    dw SubSeq_SlowFadeBGToWhite
-    dw $48f4
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
+	dw SubSeq_SlowFadeBGToWhite
+	dw Func_1f0087
+	dw DarkenBGToPal_Fast
+	dw $42a2
+	dw SubSeq_SlowFadeBGToWhite
+	dw $433c
+	dw DarkenBGToPal_Fast
+	dw $141a
+	dw SubSeq_SlowFadeBGToWhite
+	dw $4370
+	dw DarkenBGToPal_Fast
+	dw $43d1
+	dw SubSeq_SlowFadeBGToWhite
+	dw $43fa
+	dw DarkenBGToPal_Fast
+	dw $46e1
+	dw $46fe
+	dw Func_28d
+	dw Func_28d
+	dw Func_28d
+	dw Func_28d
+	dw Func_28d
+	dw Func_28d
+	dw Func_28d
+	dw SubSeq_SlowFadeBGToWhite
+	dw $4701
+	dw DarkenBGToPal_Fast
+	dw $43d1
+	dw SubSeq_SlowFadeBGToWhite
+	dw $4768
+	dw DarkenBGToPal_Fast
+	dw $46e1
+	dw SubSeq_SlowFadeBGToWhite
+	dw $48af
+	dw Func_28d
+	dw Func_28d
+	dw Func_28d
+	dw Func_28d
+	dw Func_28d
+	dw Func_28d
+	dw SubSeq_SlowFadeBGToWhite
+	dw $4701
+	dw DarkenBGToPal_Fast
+	dw $43d1
+	dw SubSeq_SlowFadeBGToWhite
+	dw $4768
+	dw DarkenBGToPal_Fast
+	dw $46e1
+	dw SubSeq_SlowFadeBGToWhite
+	dw $48f4
+	dw Func_28d
+	dw Func_28d
+	dw Func_28d
+	dw Func_28d
+	dw Func_28d
+	dw Func_28d
+	dw Func_28d
+	dw Func_28d
+	dw Func_28d
 ; 0x1f007a
 
 	INCROM $1f007a, $1f0087
@@ -72,10 +72,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld [$d50f], a
 	ld a, [wAnimatedTilesGroup]
 	ld [$d510], a
-	ld a, $ff
-	ldh [hSFXID + 0], a
-	ld a, $00
-	ldh [hSFXID + 1], a
+	stop_sfx
 	load_music MUSIC_PAUSE_MENU
 	xor a
 	ld [w3d513], a

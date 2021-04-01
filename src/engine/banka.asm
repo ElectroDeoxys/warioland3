@@ -139,13 +139,7 @@ UpdateState_OnFire: ; 280a6 (a:40a6)
 	ld a, b
 	and a
 	jp z, Func_2af75
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	ret
 ; 0x2814a
 
@@ -317,13 +311,7 @@ UpdateState_Hot: ; 2827a (a:427a)
 	ld a, b
 	and a
 	jp z, Func_28380
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	ret
 
 .asm_28313
@@ -360,10 +348,10 @@ UpdateState_Hot: ; 2827a (a:427a)
 ; 0x28380
 
 Func_28380: ; 28380 (a:4380)
-	ld a, [wca64]
+	ld a, [wXPosLo]
 	and $f0
 	add $08
-	ld [wca64], a
+	ld [wXPosLo], a
 ;	fallthrough
 
 Func_2838a: ; 2838a (a:438a)
@@ -444,7 +432,7 @@ UpdateState_GettingFlatAirborne: ; 28511 (a:4511)
 	and a
 	jp nz, SetState_FlatSinking
 	ld b, $02
-	call Func_1287
+	call AddYOffset
 	farcall Func_199e9
 	ld a, b
 	and a
@@ -582,13 +570,7 @@ UpdateState_FlatWalking: ; 28672 (a:4672)
 	and a
 	jp z, SetState_FlatFalling
 
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	ret
 ; 0x286d1
 
@@ -708,7 +690,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 	ld hl, Data_2b68c
 	add hl, de
 	ld b, [hl]
-	call Func_1270
+	call SubXOffset
 
 .asm_28816
 	ld a, [wca86]
@@ -728,11 +710,11 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 	and a
 	jr nz, .asm_2884e
 	ld b, $03
-	call Func_1270
+	call SubXOffset
 	jr .asm_28853
 .asm_2884e
 	ld b, $03
-	call Func_1259
+	call AddXOffset
 .asm_28853
 	ld a, $00
 	jr .asm_288a8
@@ -779,7 +761,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 	ld hl, Data_2b68c
 	add hl, de
 	ld b, [hl]
-	call Func_1259
+	call AddXOffset
 	jp .asm_28816
 
 .asm_288b8
@@ -787,7 +769,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 	ld hl, Data_2b664
 	add hl, de
 	ld b, [hl]
-	call Func_1287
+	call AddYOffset
 	farcall Func_199e9
 	ld a, b
 	and a
@@ -855,7 +837,7 @@ UpdateState_FlatSinking: ; 2894e (a:494e)
 	and $01
 	ret nz
 	ld b, $01
-	call Func_1287
+	call AddYOffset
 	farcall Func_198e0
 	ld a, b
 	and a
@@ -863,8 +845,8 @@ UpdateState_FlatSinking: ; 2894e (a:494e)
 	jr Func_289c5
 
 .Func_2899a
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	sub $04
 	ld [de], a
@@ -886,8 +868,8 @@ UpdateState_FlatSinking: ; 2894e (a:494e)
 ; 0x289c5
 
 Func_289c5: ; 289c5 (a:49c5)
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	sub $04
 	ld [de], a
@@ -960,7 +942,7 @@ UpdateState_FlatSquishedLifting: ; 28a8a (a:4a8a)
 	update_anim_1
 
 	ld b, $01
-	call Func_129e
+	call SubYOffset
 	ld hl, wWarioStateCounter
 	inc [hl]
 	ld a, [hl]
@@ -1038,11 +1020,11 @@ UpdateState_BallOString: ; 28b36 (a:4b36)
 	and a
 	jr nz, .asm_28b80
 	call Func_153f
-	call Func_1270
+	call SubXOffset
 	jr .asm_28b86
 .asm_28b80
 	call Func_151e
-	call Func_1259
+	call AddXOffset
 .asm_28b86
 	ld a, [wca86]
 	cp $18
@@ -1059,13 +1041,7 @@ UpdateState_BallOString: ; 28b36 (a:4b36)
 	and a
 	jp z, Func_28c15
 
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	ld a, [wIsStandingOnSlope]
 	and a
 	ret z
@@ -1434,13 +1410,7 @@ UpdateState_FatWalking: ; 28fc0 (a:4fc0)
 	ld a, b
 	and a
 	jp z, Func_290d6
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	ret
 ; 0x29035
 
@@ -1640,22 +1610,10 @@ UpdateState_FatLanding: ; 29243 (a:5243)
 ; 0x2926a
 
 Func_2926a: ; 2926a (a:526a)
-	ld hl, wca61
-	ld de, hffa8
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
-	ldh a, [hffa9]
+	get_pos
+	ldh a, [hYPosLo]
 	and $f0
-	ldh [hffa9], a
+	ldh [hYPosLo], a
 	ld b, $03
 	farcall Func_c9f3
 	load_sfx SFX_0D
@@ -1691,7 +1649,7 @@ UpdateState_FatSinking: ; 292e5 (a:52e5)
 	and $0f
 	call z, Func_29317
 	ld b, $01
-	call Func_1287
+	call AddYOffset
 	farcall Func_198e0
 	ld a, b
 	and a
@@ -1704,8 +1662,8 @@ Func_29317: ; 29317 (a:5317)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29338
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	sub $04
 	ld [de], a
@@ -1723,8 +1681,8 @@ Func_29317: ; 29317 (a:5317)
 	ld [de], a
 	jr .asm_29351
 .asm_29338
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	add $04
 	ld [de], a
@@ -1810,7 +1768,7 @@ UpdateState_Electric: ; 294bf (a:54bf)
 	jr nc, .asm_2950e
 	inc b
 .asm_2950e
-	call Func_1270
+	call SubXOffset
 	jr .asm_29534
 
 .asm_29513
@@ -1820,7 +1778,7 @@ UpdateState_Electric: ; 294bf (a:54bf)
 	jr nc, .asm_2951d
 	inc b
 .asm_2951d
-	call Func_1259
+	call AddXOffset
 	jr .asm_29534
 
 .asm_29522
@@ -1828,11 +1786,11 @@ UpdateState_Electric: ; 294bf (a:54bf)
 	and a
 	jr nz, .asm_2952f
 	ld b, $01
-	call Func_1259
+	call AddXOffset
 	jr .asm_29534
 .asm_2952f
 	ld b, $01
-	call Func_1270
+	call SubXOffset
 .asm_29534
 	ld a, [wJumpVelTable]
 	and a
@@ -1866,7 +1824,7 @@ UpdateState_Electric: ; 294bf (a:54bf)
 	cpl
 	inc a
 	ld b, a
-	call Func_129e
+	call SubYOffset
 	ld hl, wJumpVelIndex
 	inc [hl]
 	farcall Func_1996e
@@ -1879,7 +1837,7 @@ UpdateState_Electric: ; 294bf (a:54bf)
 
 .falling
 	ld b, [hl]
-	call Func_1287
+	call AddYOffset
 	ld hl, wJumpVelIndex
 	inc [hl]
 	ld a, [hl]
@@ -1917,8 +1875,8 @@ UpdateState_Electric: ; 294bf (a:54bf)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29601
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	sub $08
 	ld [de], a
@@ -1937,8 +1895,8 @@ UpdateState_Electric: ; 294bf (a:54bf)
 	jr .asm_2961a
 
 .asm_29601
-	ld hl, wca64
-	ld de, hffab
+	ld hl, wXPosLo
+	ld de, hXPosLo
 	ld a, [hld]
 	add $08
 	ld [de], a
@@ -2282,13 +2240,7 @@ UpdateState_ZombieIdling: ; 29a74 (a:5a74)
 	ld a, b
 	and a
 	jp z, Func_29bb9
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	update_anim_2
 	call Func_2b34e
 	ret
@@ -2346,13 +2298,7 @@ UpdateState_ZombieWalking: ; 29b06 (a:5b06)
 	and a
 	jr z, Func_29bb9
 
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	ret
 ; 0x29b6a
 
@@ -2831,19 +2777,7 @@ UpdateState_BouncyAirborne: ; 2a0f9 (a:60f9)
 	and a
 	jr z, .asm_2a15a
 
-	ld hl, wca61
-	ld de, hffa8
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	get_pos
 	ld b, $0a
 	farcall Func_c9f3
 
@@ -3830,13 +3764,7 @@ UpdateState_BatFalling: ; 2ac04 (a:6c04)
 	ld a, b
 	and a
 	ret z
-	ld hl, hffa8
-	ld de, wca61
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	update_pos_y
 	jp SetState_BatIdling
 ; 0x2ac7d
 
@@ -3861,19 +3789,7 @@ UpdateState_InBubble: ; 2ad06 (a:6d06)
 	ret
 
 .asm_2ad45
-	ld hl, wca61
-	ld de, hffa8
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	get_pos
 	ld b, $0b
 	farcall Func_c9f3
 	jp Func_1570
@@ -3919,22 +3835,10 @@ Func_2ade4: ; 2ade4 (a:6de4)
 	ld a, $10
 	ld [wca8c], a
 	call Func_161a
-	ld hl, wca61
-	ld de, hffa8
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
-	ldh a, [hffa9]
+	get_pos
+	ldh a, [hYPosLo]
 	and $f0
-	ldh [hffa9], a
+	ldh [hYPosLo], a
 	ld b, $07
 	farcall Func_c9f3
 	load_sfx SFX_0D
@@ -4029,7 +3933,7 @@ Func_2ae8a: ; 2ae8a (a:6e8a)
 	and a
 	jr nz, .asm_2aef1
 	call Func_153f
-	call Func_1270
+	call SubXOffset
 	jp .asm_2aee4 ; should be jr
 .asm_2aecb
 	farcall Func_19734
@@ -4037,7 +3941,7 @@ Func_2ae8a: ; 2ae8a (a:6e8a)
 	and a
 	jr nz, .asm_2af19
 	call Func_151e
-	call Func_1259
+	call AddXOffset
 
 .asm_2aee4
 	ld a, [wca86]
@@ -4050,7 +3954,7 @@ Func_2ae8a: ; 2ae8a (a:6e8a)
 
 .asm_2aef1
 	ld b, $02
-	call Func_1259
+	call AddXOffset
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
 	ld a, [wWarioStateCounter]
@@ -4064,7 +3968,7 @@ Func_2ae8a: ; 2ae8a (a:6e8a)
 
 .asm_2af19
 	ld b, $02
-	call Func_1270
+	call SubXOffset
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
 	ld a, [wWarioStateCounter]
@@ -4135,7 +4039,7 @@ Func_2af9c: ; 2af9c (a:6f9c)
 	and a
 	jr nz, .asm_2aff6
 	ld b, $03
-	call Func_1270
+	call SubXOffset
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_2afea
@@ -4146,7 +4050,7 @@ Func_2af9c: ; 2af9c (a:6f9c)
 	jr .asm_2b017
 .asm_2aff6
 	ld b, $03
-	call Func_1259
+	call AddXOffset
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_2b00d
@@ -4218,7 +4122,7 @@ Func_2b07a: ; 2b07a (a:707a)
 	and a
 	ret nz
 	ld b, $01
-	call Func_1270
+	call SubXOffset
 	ret
 
 .asm_2b0c7
@@ -4240,7 +4144,7 @@ Func_2b07a: ; 2b07a (a:707a)
 	and a
 	ret nz
 	ld b, $01
-	call Func_1259
+	call AddXOffset
 	ret
 ; 0x2b10a
 
@@ -4273,7 +4177,7 @@ Func_2b11b: ; 2b11b (a:711b)
 	and a
 	ret nz
 	call Func_153f
-	call Func_1270
+	call SubXOffset
 	jr .asm_2b16d
 
 .asm_2b150
@@ -4284,7 +4188,7 @@ Func_2b11b: ; 2b11b (a:711b)
 	and a
 	ret nz
 	call Func_151e
-	call Func_1259
+	call AddXOffset
 
 .asm_2b16d
 	ld a, [wca86]
@@ -4328,24 +4232,24 @@ Func_2b1cc: ; 2b1cc (a:71cc)
 	and a
 	jr nz, .asm_2b1f1
 	ld b, $02
-	call Func_1270
+	call SubXOffset
 	farcall Func_197b1
 
 	ld a, b
 	and a
 	jr z, .asm_2b20e
 	ld b, $02
-	call Func_1259
+	call AddXOffset
 	jr .asm_2b20e
 .asm_2b1f1
 	ld b, $02
-	call Func_1259
+	call AddXOffset
 	farcall Func_19741
 	ld a, b
 	and a
 	jr z, .asm_2b20e
 	ld b, $02
-	call Func_1270
+	call SubXOffset
 
 .asm_2b20e
 	ld a, [wJumpVelIndex]
@@ -4361,13 +4265,13 @@ Func_2b1cc: ; 2b1cc (a:71cc)
 	cpl
 	inc a
 	ld b, a
-	call Func_129e
+	call SubYOffset
 	ld hl, wJumpVelIndex
 	inc [hl]
 	jr .asm_2b238
 .falling
 	ld b, [hl]
-	call Func_1287
+	call AddYOffset
 	ld hl, wJumpVelIndex
 	inc [hl]
 	ld a, [hl]
@@ -4479,7 +4383,7 @@ Func_2b2c2: ; 2b2c2 (a:72c2)
 	and a
 	ret nz
 	ld b, $01
-	call Func_1270
+	call SubXOffset
 	ret
 
 .asm_2b31f
@@ -4493,7 +4397,7 @@ Func_2b2c2: ; 2b2c2 (a:72c2)
 	and a
 	ret nz
 	ld b, $01
-	call Func_1259
+	call AddXOffset
 	ret
 ; 0x2b342
 
@@ -4502,7 +4406,7 @@ Func_2b342: ; 2b342 (a:7342)
 	and $01
 	ret nz
 	ld b, $01
-	call Func_129e
+	call SubYOffset
 	ret
 ; 0x2b34e
 
@@ -4661,7 +4565,7 @@ Func_2b42b: ; 2b42b (a:742b)
 	and a
 	jr nz, .asm_2b4cd
 	ld b, $01
-	call Func_1270
+	call SubXOffset
 	ret
 
 .asm_2b47c
@@ -4670,7 +4574,7 @@ Func_2b42b: ; 2b42b (a:742b)
 	and a
 	jr nz, .asm_2b4cd
 	ld b, $01
-	call Func_1259
+	call AddXOffset
 	ret
 
 .asm_2b495
@@ -4682,7 +4586,7 @@ Func_2b42b: ; 2b42b (a:742b)
 	and a
 	jr nz, .asm_2b4cd
 	ld b, $02
-	call Func_1270
+	call SubXOffset
 	ret
 
 .asm_2b4b4
@@ -4691,26 +4595,14 @@ Func_2b42b: ; 2b42b (a:742b)
 	and a
 	jr nz, .asm_2b4cd
 	ld b, $02
-	call Func_1259
+	call AddXOffset
 	ret
 .asm_2b4cd
 	jp SetState_CrazyTurning
 ; 0x2b4d0
 
 Func_2b4d0: ; 2b4d0 (a:74d0)
-	ld hl, wca61
-	ld de, hffa8
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	get_pos
 	ld b, $04
 	farcall Func_c9f3
 	ret
@@ -4778,25 +4670,13 @@ Func_2b56f: ; 2b56f (a:756f)
 	and $01
 	jr z, .asm_2b5b2
 	ld b, $01
-	call Func_129e
+	call SubYOffset
 	farcall Func_1996e
 	ld a, b
 	and a
 	ret z
 
-	ld hl, wca61
-	ld de, hffa8
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
+	get_pos
 	ld b, $0b
 	farcall Func_c9f3
 	jp Func_1570
@@ -4824,10 +4704,10 @@ Func_2b56f: ; 2b56f (a:756f)
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_2b5ec
-	call Func_1270
+	call SubXOffset
 	jr .asm_2b5ef
 .asm_2b5ec
-	call Func_1259
+	call AddXOffset
 .asm_2b5ef
 	ld hl, wJumpVelIndex
 	inc [hl]
@@ -4851,7 +4731,7 @@ Func_2b56f: ; 2b56f (a:756f)
 	and a
 	jr nz, .asm_2b5f7
 	ld b, $01
-	call Func_1259
+	call AddXOffset
 	jr .asm_2b602
 .asm_2b621
 	farcall Func_197b1
@@ -4859,7 +4739,7 @@ Func_2b56f: ; 2b56f (a:756f)
 	and a
 	jr nz, .asm_2b5f7
 	ld b, $01
-	call Func_1270
+	call SubXOffset
 	jr .asm_2b602
 ; 0x2b63b
 
