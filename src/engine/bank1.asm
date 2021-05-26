@@ -79,10 +79,10 @@ Func_405f: ; 405f (1:405f)
 	jr nz, .asm_40fc
 
 	ld hl, wUnk
-	ld a, $40
-	ld [hli], a
-	ld a, $d0
-	ld [hli], a
+	ld a, 64
+	ld [hli], a ; y coord
+	ld a, 208
+	ld [hli], a ; x coord
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -98,10 +98,10 @@ Func_405f: ; 405f (1:405f)
 	call Func_145a
 
 	ld hl, wObj0
-	ld a, $80
-	ld [hli], a
-	ld a, $50
-	ld [hli], a
+	ld a, 128
+	ld [hli], a ; y coord
+	ld a, 80
+	ld [hli], a ; x coord
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -114,10 +114,10 @@ Func_405f: ; 405f (1:405f)
 	call Func_145a
 
 	ld hl, wObj3
-	ld a, $10
-	ld [hli], a
-	ld a, $00
-	ld [hli], a
+	ld a, 16
+	ld [hli], a ; y coord
+	ld a, 0
+	ld [hli], a ; x coord
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -129,11 +129,11 @@ Func_405f: ; 405f (1:405f)
 	ld [hl], a
 	call Func_145a
 
-	ld hl, w3d547
-	ld a, $08
-	ld [hli], a
-	ld a, $20
-	ld [hli], a
+	ld hl, wObj4
+	ld a, 8
+	ld [hli], a ; y coord
+	ld a, 32
+	ld [hli], a ; x coord
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -147,7 +147,7 @@ Func_405f: ; 405f (1:405f)
 
 	ld hl, wObj3
 	call Func_4b93
-	ld hl, w3d547
+	ld hl, wObj4
 	call Func_4b93
 
 	ld a, $00
@@ -469,7 +469,7 @@ Func_42cf: ; 42cf (1:42cf)
 	call Func_4b93
 	ld hl, wObj3
 	call Func_4b93
-	ld hl, w3d547
+	ld hl, wObj4
 	call Func_4b93
 	call ClearVirtualOAM
 	jp ScrollIntroBackground
@@ -577,7 +577,7 @@ Func_43a0: ; 43a0 (1:43a0)
 	call Func_4b93
 	ld hl, wUnk
 	call Func_4b93
-	ld hl, w3d547
+	ld hl, wObj4
 	call Func_4b93
 	call ClearVirtualOAM
 	jp ScrollIntroBackground
@@ -738,7 +738,7 @@ Func_449f: ; 449f (1:449f)
 	call Func_4b93
 	ld hl, wUnk
 	call Func_4b93
-	ld hl, w3d547
+	ld hl, wObj4
 	call Func_4b93
 	call ClearVirtualOAM
 	jp ScrollIntroBackground
@@ -1587,7 +1587,7 @@ Func_4b73: ; 4b73 (1:4b73)
 	add $08
 	ld [wCurSpriteXOffset], a
 	ld a, [hli]
-	ld [wc098], a
+	ld [wCurSpriteFrame], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, Data_6b5f
@@ -1606,7 +1606,7 @@ Func_4b93: ; 4b93 (1:4b93)
 	add $08
 	ld [wCurSpriteXOffset], a
 	ld a, [hli]
-	ld [wc098], a
+	ld [wCurSpriteFrame], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, Data_6d21
@@ -1877,7 +1877,7 @@ Func_4d45: ; 4d45 (1:4d45)
 	ld a, [wc08f]
 	and $01
 	jr z, .asm_4d66
-	ld hl, w3d547 + $1
+	ld hl, wObj4 + $1
 	ld a, [hl]
 	cp $b0
 	jr c, .asm_4d65
@@ -2026,7 +2026,7 @@ Func_4e3e: ; 4e3e (1:4e3e)
 	add $08
 	ld [wCurSpriteXOffset], a
 	ld a, [hli]
-	ld [wc098], a
+	ld [wCurSpriteFrame], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, $75c3

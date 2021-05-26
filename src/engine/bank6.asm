@@ -1,9 +1,9 @@
 Func_18000: ; 18000 (6:4000)
 	xor a
 	ld [wc0dd], a
-	ld a, [wcce9]
+	ld a, [wFloorNum]
 	sramswitch
-	ld hl, wccea
+	ld hl, wYCell
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
@@ -695,7 +695,7 @@ Func_19b3a: ; 19b3a (6:5b3a)
 Func_19b51: ; 19b51 (6:5b51)
 	ld hl, hPos
 	call Func_bdb
-	ld a, $01
+	ld a, 1 << 0
 	ld [wc0d6], a
 	call Func_18000
 	ld b, a
@@ -707,7 +707,7 @@ Func_19b51: ; 19b51 (6:5b51)
 Func_19b7b: ; 19b7b (6:5b7b)
 	ld hl, hPos
 	call Func_bdb
-	ld a, $02
+	ld a, 1 << 1
 	ld [wc0d6], a
 	call Func_18000
 	ld b, a
@@ -717,7 +717,7 @@ Func_19b7b: ; 19b7b (6:5b7b)
 Func_19b8b: ; 19b8b (6:5b8b)
 	ld hl, hPos
 	call Func_bdb
-	ld a, $04
+	ld a, 1 << 2
 	ld [wc0d6], a
 	call Func_18000
 	ld b, a
@@ -727,7 +727,7 @@ Func_19b8b: ; 19b8b (6:5b8b)
 Func_19b9b: ; 19b9b (6:5b9b)
 	ld hl, hPos
 	call Func_bdb
-	ld a, $08
+	ld a, 1 << 3
 	ld [wc0d6], a
 	call Func_18000
 	ld b, a
@@ -739,7 +739,7 @@ Func_19b9b: ; 19b9b (6:5b9b)
 Func_19bc3: ; 19bc3 (6:5bc3)
 	ld hl, hPos
 	call Func_bdb
-	ld a, $10
+	ld a, 1 << 4
 	ld [wc0d6], a
 ;	fallthrough
 
@@ -750,16 +750,17 @@ Func_19bce: ; 19bce (6:5bce)
 ; 0x19bd3
 
 Func_19bd3: ; 19bd3 (6:5bd3)
-	ld hl, wccea
+	ld hl, wYCell
 	dec [hl]
 	ld a, [hl]
-	cp $9f
+	cp $a0 - 1
 	jr nz, .asm_19be6
-	ld a, [wcce9]
+	ld a, [wFloorNum]
 	dec a
-	ld [wcce9], a
-	ld a, $bf
+	ld [wFloorNum], a
+	ld a, $c0 - 1
 	ld [hl], a
+
 .asm_19be6
 	ld a, [hli]
 	ld l, [hl]
@@ -770,7 +771,7 @@ Func_19bd3: ; 19bd3 (6:5bd3)
 Func_19beb: ; 19beb (6:5beb)
 	ld hl, hPos
 	call Func_bdb
-	ld a, $20
+	ld a, 1 << 5
 	ld [wc0d6], a
 	call Func_18000
 	ld b, a
@@ -780,7 +781,7 @@ Func_19beb: ; 19beb (6:5beb)
 Func_19bfb: ; 19bfb (6:5bfb)
 	ld hl, hPos
 	call Func_bdb
-	ld a, $40
+	ld a, 1 << 6
 	ld [wc0d6], a
 	call Func_18000
 	ld b, a
@@ -790,7 +791,7 @@ Func_19bfb: ; 19bfb (6:5bfb)
 Func_19c0b: ; 19c0b (6:5c0b)
 	ld hl, hPos
 	call Func_bdb
-	ld a, $80
+	ld a, 1 << 7
 	ld [wc0d6], a
 	call Func_18000
 	ld b, a

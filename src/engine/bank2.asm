@@ -682,61 +682,61 @@ Func_867f: ; 867f (2:467f)
 	ld a, [wcedc]
 	inc a
 	ld h, a
-	ld [wccea], a
+	ld [wYCell], a
 	cp $c0
 	ld a, [wcedb]
 	jr nz, .asm_86b5
 	ld a, $a0
 	ld h, a
-	ld [wccea], a
+	ld [wYCell], a
 	ld a, [wcedb]
 	inc a
 .asm_86b5
-	ld [wcce9], a
+	ld [wFloorNum], a
 	ld a, [wcedd]
 	ld l, a
-	ld [wcceb], a
+	ld [wXCell], a
 	jr .asm_8712
 .asm_86c1
 	ld a, [wcedb]
-	ld [wcce9], a
+	ld [wFloorNum], a
 	ld a, [wcedc]
 	ld h, a
-	ld [wccea], a
+	ld [wYCell], a
 	ld a, [wcedd]
 	inc a
 	ld l, a
-	ld [wcceb], a
+	ld [wXCell], a
 	jr .asm_8712
 .asm_86d8
 	ld a, [wcedb]
-	ld [wcce9], a
+	ld [wFloorNum], a
 	ld a, [wcedd]
 	dec a
 	ld l, a
-	ld [wcceb], a
+	ld [wXCell], a
 	ld a, [wcedc]
 	ld h, a
-	ld [wccea], a
+	ld [wYCell], a
 	jr .asm_8712
 .asm_86ef
 	ld a, [wcedc]
 	dec a
 	ld h, a
-	ld [wccea], a
+	ld [wYCell], a
 	cp $9f
 	ld a, [wcedb]
 	jr nz, .asm_8708
 	ld a, $bf
 	ld h, a
-	ld [wccea], a
+	ld [wYCell], a
 	ld a, [wcedb]
 	dec a
 .asm_8708
-	ld [wcce9], a
+	ld [wFloorNum], a
 	ld a, [wcedd]
 	ld l, a
-	ld [wcceb], a
+	ld [wXCell], a
 .asm_8712
 	ld a, [wceda]
 	and $f8
@@ -1596,7 +1596,7 @@ Func_8d69: ; 8d69 (2:4d69)
 	ld [wce69], a
 	ld hl, wc0a3
 	call Func_bdb
-	ld a, [wcce9]
+	ld a, [wFloorNum]
 	sramswitch
 	ld a, [wc0a6]
 	and $08
@@ -1606,7 +1606,7 @@ Func_8d69: ; 8d69 (2:4d69)
 	farcall Func_21f51
 	pop hl
 
-	ld a, [wcce9]
+	ld a, [wFloorNum]
 	sramswitch
 	farcall Func_22012
 	jr .asm_8dfd
@@ -1616,7 +1616,7 @@ Func_8d69: ; 8d69 (2:4d69)
 	farcall Func_220fc
 	pop hl
 
-	ld a, [wcce9]
+	ld a, [wFloorNum]
 	sramswitch
 	farcall Func_221bb
 .asm_8dfd
@@ -2323,7 +2323,7 @@ Func_9085: ; 9085 (2:5085)
 	ld hl, wc0a3
 	call Func_bdb
 
-	ld a, [wcce9]
+	ld a, [wFloorNum]
 	sramswitch
 	ld a, [wc0a4]
 	and $08
@@ -2331,7 +2331,7 @@ Func_9085: ; 9085 (2:5085)
 	push hl
 	call Func_9254
 	pop hl
-	ld a, [wcce9]
+	ld a, [wFloorNum]
 	sramswitch
 	call Func_9605
 	jr .asm_924b
@@ -2340,7 +2340,7 @@ Func_9085: ; 9085 (2:5085)
 	push hl
 	call Func_99ca
 	pop hl
-	ld a, [wcce9]
+	ld a, [wFloorNum]
 	sramswitch
 	call Func_9d4c
 .asm_924b
@@ -5014,7 +5014,7 @@ Func_a0e2: ; a0e2 (2:60e2)
 	ld [wce69], a
 	ld hl, wc0a3
 	call Func_bdb
-	ld a, [wcce9]
+	ld a, [wFloorNum]
 	sramswitch
 	ld a, [wc0a6]
 	and $08
@@ -5022,7 +5022,7 @@ Func_a0e2: ; a0e2 (2:60e2)
 	push hl
 	call Func_a2aa
 	pop hl
-	ld a, [wcce9]
+	ld a, [wFloorNum]
 	sramswitch
 	call Func_a79e
 	jr .asm_a2a1
@@ -5030,7 +5030,7 @@ Func_a0e2: ; a0e2 (2:60e2)
 	push hl
 	call Func_aca6
 	pop hl
-	ld a, [wcce9]
+	ld a, [wFloorNum]
 	sramswitch
 	call Func_b182
 .asm_a2a1
@@ -8704,7 +8704,7 @@ Func_bb85: ; bb85 (2:7b85)
 .asm_bba8
 	ld h, a
 	ld a, b
-	ld [wcce9], a
+	ld [wFloorNum], a
 	sramswitch
 	push hl
 	call Func_c19

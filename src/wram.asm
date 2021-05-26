@@ -83,7 +83,7 @@ wCurSpriteYOffset:: ; c096
 wCurSpriteXOffset:: ; c097
 	ds $1
 
-wc098:: ; c098
+wCurSpriteFrame:: ; c098
 	ds $1
 
 wCurSpriteAttributes:: ; c099
@@ -848,13 +848,17 @@ wcce7:: ; cce7
 wcce8:: ; cce8
 	ds $1
 
-wcce9:: ; cce9
+; each y section is divided in 20-cell high slices
+; this stores the floor number of the current position
+wFloorNum:: ; cce9
 	ds $1
 
-wccea:: ; ccea
+; the world is divided in a grid,
+; with each cell being 16x16 units in dimension
+; these store the y and x cells of the current position
+wYCell:: ; ccea
 	ds $1
-
-wcceb:: ; cceb
+wXCell:: ; cceb
 	ds $1
 
 wccec:: ; ccec
@@ -1276,8 +1280,7 @@ wObj3:: obj_struct wObj3 ; d53b
 
 	ds $4
 
-w3d547:: ; d547
-	ds $8
+wObj4:: obj_struct wObj4 ; d547
 
 SECTION "WRAM4", WRAMX
 

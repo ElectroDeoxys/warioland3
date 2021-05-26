@@ -1687,9 +1687,10 @@ Func_b7b: ; b7b (0:b7b)
 ; 0xbdb
 
 Func_bdb: ; bdb (0:bdb)
-	ld a, [hli]
+; y position
+	ld a, [hli] ; hi
 	ld d, a
-	ld a, [hli]
+	ld a, [hli] ; lo
 	swap a
 	and $0f ; high nybble
 	ld b, a
@@ -1709,13 +1710,14 @@ Func_bdb: ; bdb (0:bdb)
 	inc b
 	sub $20
 .asm_bfb
-	ld [wccea], a
+	ld [wYCell], a
 	ld a, b
-	ld [wcce9], a
+	ld [wFloorNum], a
 
-	ld a, [hli]
+; x position
+	ld a, [hli] ; hi
 	ld d, a
-	ld a, [hl]
+	ld a, [hl] ; lo
 	swap a
 	and $0f ; high nybble
 	ld l, a
@@ -1724,9 +1726,9 @@ Func_bdb: ; bdb (0:bdb)
 	swap a
 	add l
 	ld l, a
+	ld [wXCell], a
 
-	ld [wcceb], a
-	ld a, [wccea]
+	ld a, [wYCell]
 	ld h, a
 	ret
 ; 0xc19
@@ -1925,7 +1927,7 @@ Func_d3e: ; d3e (0:d3e)
 	and $f0
 	swap a
 	ld b, a
-	ld a, [wcce9]
+	ld a, [wFloorNum]
 	dec a
 	add a
 	add b
@@ -1973,7 +1975,7 @@ Func_d81: ; d81 (0:d81)
 ; 0xd8c
 
 Func_d8c: ; d8c (0:d8c)
-	ld a, [wcce9]
+	ld a, [wFloorNum]
 	ld [wccec], a
 	ld b, $01
 	ld a, l
@@ -2019,7 +2021,7 @@ Func_d9e: ; d9e (0:d9e)
 	ld a, [wWarioScreenXPos]
 	ld [wCurSpriteXOffset], a
 	ld a, [wca65]
-	ld [wc098], a
+	ld [wCurSpriteFrame], a
 	ld a, [wca66]
 	ld [wCurSpriteAttributes], a
 	call TryAddSprite
@@ -2030,7 +2032,7 @@ Func_d9e: ; d9e (0:d9e)
 
 ; hl = sprite pointer
 TryAddSprite: ; df4 (0:df4)
-	ld a, [wc098]
+	ld a, [wCurSpriteFrame]
 	ld d, $00
 	add a
 	ld e, a
@@ -2765,12 +2767,12 @@ Func_142b: ; 142b (0:142b)
 Func_145a: ; 145a (0:145a)
 	xor a
 	ld [w3d514], a
-	ld a, [hld]
-	ld e, a
-	ld a, [hld]
-	ld d, a
-	ld a, [hl]
-	sub $01
+	ld a, [hld] ;
+	ld e, a     ; frame pointer
+	ld a, [hld] ;
+	ld d, a     ;
+	ld a, [hl] ; unknown3
+	sub 1
 	ld [hld], a
 	ret nc
 
@@ -2778,7 +2780,7 @@ Func_145a: ; 145a (0:145a)
 	add e
 	ld c, a
 	ld a, d
-	adc $00
+	adc 0
 	ld b, a
 	ld a, [bc]
 	cp $ff
@@ -2799,7 +2801,7 @@ Func_145a: ; 145a (0:145a)
 	xor a
 	ld [hli], a
 	ld [hl], a
-	ld a, $01
+	ld a, TRUE
 	ld [w3d514], a
 	ret
 ; 0x1488
@@ -4268,11 +4270,11 @@ Func_3000: ; 3000 (0:3000)
 	ld a, [hli]
 	ld [wCurSpriteXOffset], a
 	ld a, [hli]
-	ld [wc098], a
+	ld [wCurSpriteFrame], a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [wc098]
+	ld a, [wCurSpriteFrame]
 	ld d, $00
 	add a
 	ld e, a

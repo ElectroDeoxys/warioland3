@@ -249,7 +249,7 @@ Func_d11a: ; d11a (3:511a)
 	ret nz
 	ld hl, wc0a3
 	call Func_bdb
-	ld a, [wcce9]
+	ld a, [wFloorNum]
 	sramswitch
 	call Func_d132
 	ret
@@ -293,9 +293,9 @@ Func_d132: ; d132 (3:5132)
 	cp $c0
 	jr nz, .asm_d182
 	ld h, $a0
-	ld a, [wcce9]
+	ld a, [wFloorNum]
 	inc a
-	ld [wcce9], a
+	ld [wFloorNum], a
 	sramswitch
 .asm_d182
 	dec e
@@ -309,7 +309,7 @@ Func_d186: ; d186 (3:5186)
 	ret nz
 	ld hl, wc0a3
 	call Func_bdb
-	ld a, [wcce9]
+	ld a, [wFloorNum]
 	sramswitch
 	call Func_d19e
 	ret

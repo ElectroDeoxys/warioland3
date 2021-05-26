@@ -158,7 +158,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld a, [wca5b]
 	bit 1, a
 	jr z, .asm_1f018f
-	ld hl, w3d547
+	ld hl, wObj4
 	ld a, $54
 	ld [hli], a
 	ld a, $48
@@ -175,7 +175,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld a, $4d
 	ld [hl], a
 	call Func_145a
-	ld hl, w3d547
+	ld hl, wObj4
 	call Func_1f0940
 .asm_1f018f
 	ld a, [wca5b]
@@ -402,7 +402,7 @@ Func_1f0940: ; 1f0940 (7c:4940)
 	add $08
 	ld [wCurSpriteXOffset], a
 	ld a, [hli]
-	ld [wc098], a
+	ld [wCurSpriteFrame], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, $556c
