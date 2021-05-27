@@ -2,12 +2,12 @@ Func_8000: ; 8000 (2:4000)
 	ld a, [wSubSequence]
 	jumptable
 
-	dw SubSeq_FastFadeToWhite
+	dw FastFadeToWhite
 	dw Func_8024
-	dw SubSeq_SlowFadeFromWhite
+	dw SlowFadeFromWhite
 	dw Func_80aa
 	dw Func_928
-	dw SubSeq_FastFadeToWhite
+	dw FastFadeToWhite
 	dw Func_846e
 	dw Func_861c
 	dw Func_28d
@@ -37,7 +37,7 @@ Func_8024: ; 8024 (2:4024)
 	call Func_8747
 	call Func_161a
 
-	ld a, $01
+	ld a, TRUE
 	ld [wced8], a
 	xor a
 	ld [wceef], a
@@ -83,7 +83,7 @@ Func_8024: ; 8024 (2:4024)
 ; 0x80aa
 
 Func_80aa: ; 80aa (2:40aa)
-	ld a, $01
+	ld a, TRUE
 	ld [wced9], a
 	farcall Func_ca26
 
@@ -352,11 +352,11 @@ Func_80aa: ; 80aa (2:40aa)
 	jr nz, .asm_8308
 
 .asm_82ff
-	load_sfx SFX_E5
+	load_sfx SFX_0E5
 	ret
 
 .asm_8308
-	load_sfx SFX_E4
+	load_sfx SFX_0E4
 	stop_music
 	xor a
 	ld [wced9], a

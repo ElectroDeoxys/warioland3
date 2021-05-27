@@ -835,6 +835,46 @@ def png_to_1bpp(filename, **kwargs):
     return convert_2bpp_to_1bpp(image)
 
 
+def export_lz_to_png(filename, fileout=None):
+
+    if fileout == None:
+        fileout = os.path.splitext(filename)[0]
+        fileout = os.path.splitext(fileout)[0] + '.png'
+
+    arguments = read_filename_arguments(filename)
+
+    imageSrc = bytearray(open(filename, 'rb').read())
+    image = []
+    pos = 0
+
+    while (True):
+        if (pos >= len(imageSrc)):
+            break
+
+        cmdByte = imageSrc[pos]
+
+        pos += 1
+        length = cmdByte & 0b01111111
+        if (cmdByte & 0b10000000 != 0):
+            image.extend(imageSrc[pos : pos + length])
+            pos += length
+        else:
+            for x in range(length):
+                image.append(imageSrc[pos])
+            pos += 1
+
+    result = convert_2bpp_to_png(image, **arguments)
+    width, height, palette, greyscale, bitdepth, px_map = result
+
+    w = png.Writer(width, height, palette=palette, compression=9, greyscale=greyscale, bitdepth=bitdepth)
+    with open(fileout, 'wb') as f:
+        w.write(f, px_map)
+
+def png_to_1bpp(filename, **kwargs):
+    image, kwargs = png_to_2bpp(filename, **kwargs)
+    return convert_2bpp_to_1bpp(image)
+
+
 def convert_to_2bpp(filenames=[]):
     for filename in filenames:
         name, extension = os.path.splitext(filename)
@@ -871,6 +911,13 @@ def convert_to_png(filenames=[]):
         else:
             raise Exception, "Don't know how to convert {} to png!".format(filename)
 
+def convert_lz_to_png(filenames=[]):
+    for filename in filenames:
+        name, extension = os.path.splitext(filename)
+        if extension == '.lz':
+            export_lz_to_png(filename)
+        else:
+            raise Exception, "Don't know how to convert {} to png!".format(filename)
 
 def main():
     ap = argparse.ArgumentParser()
@@ -882,6 +929,7 @@ def main():
         '2bpp': convert_to_2bpp,
         '1bpp': convert_to_1bpp,
         'png':  convert_to_png,
+        'lz' : convert_lz_to_png
     }.get(args.mode, None)
 
     if method == None:

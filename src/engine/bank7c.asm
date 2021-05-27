@@ -2,19 +2,19 @@ Func_1f0000: ; 1f0000 (7c:4000)
 	ld a, [wSubSequence]
 	jumptable
 
-	dw SubSeq_SlowFadeBGToWhite
+	dw SlowFadeBGToWhite
 	dw Func_1f0087
 	dw DarkenBGToPal_Fast
 	dw $42a2
-	dw SubSeq_SlowFadeBGToWhite
+	dw SlowFadeBGToWhite
 	dw $433c
 	dw DarkenBGToPal_Fast
 	dw $141a
-	dw SubSeq_SlowFadeBGToWhite
+	dw SlowFadeBGToWhite
 	dw $4370
 	dw DarkenBGToPal_Fast
 	dw $43d1
-	dw SubSeq_SlowFadeBGToWhite
+	dw SlowFadeBGToWhite
 	dw $43fa
 	dw DarkenBGToPal_Fast
 	dw $46e1
@@ -26,15 +26,15 @@ Func_1f0000: ; 1f0000 (7c:4000)
 	dw Func_28d
 	dw Func_28d
 	dw Func_28d
-	dw SubSeq_SlowFadeBGToWhite
+	dw SlowFadeBGToWhite
 	dw $4701
 	dw DarkenBGToPal_Fast
 	dw $43d1
-	dw SubSeq_SlowFadeBGToWhite
+	dw SlowFadeBGToWhite
 	dw $4768
 	dw DarkenBGToPal_Fast
 	dw $46e1
-	dw SubSeq_SlowFadeBGToWhite
+	dw SlowFadeBGToWhite
 	dw $48af
 	dw Func_28d
 	dw Func_28d
@@ -42,15 +42,15 @@ Func_1f0000: ; 1f0000 (7c:4000)
 	dw Func_28d
 	dw Func_28d
 	dw Func_28d
-	dw SubSeq_SlowFadeBGToWhite
+	dw SlowFadeBGToWhite
 	dw $4701
 	dw DarkenBGToPal_Fast
 	dw $43d1
-	dw SubSeq_SlowFadeBGToWhite
+	dw SlowFadeBGToWhite
 	dw $4768
 	dw DarkenBGToPal_Fast
 	dw $46e1
-	dw SubSeq_SlowFadeBGToWhite
+	dw SlowFadeBGToWhite
 	dw $48f4
 	dw Func_28d
 	dw Func_28d
@@ -75,7 +75,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	stop_sfx
 	load_music MUSIC_PAUSE_MENU
 	xor a
-	ld [w3d513], a
+	ld [wStartMenuSelection], a
 	xor a
 	ld [wced8], a
 	call ClearBGMap0
@@ -110,7 +110,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld [hli], a
 	ld a, $b8
 	ld [hl], a
-	call Func_145a
+	call UpdateObjAnim
 	ld hl, wObj1
 	call Func_1f0940
 
@@ -128,7 +128,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld [hli], a
 	ld a, $d4
 	ld [hl], a
-	call Func_145a
+	call UpdateObjAnim
 	ld hl, wObj2
 	call Func_1f0940
 
@@ -151,7 +151,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld [hli], a
 	ld a, $4a
 	ld [hl], a
-	call Func_145a
+	call UpdateObjAnim
 	ld hl, wObj3
 	call Func_1f0940
 .asm_1f0168
@@ -174,7 +174,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld [hli], a
 	ld a, $4d
 	ld [hl], a
-	call Func_145a
+	call UpdateObjAnim
 	ld hl, wObj4
 	call Func_1f0940
 .asm_1f018f
@@ -197,7 +197,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld [hli], a
 	ld a, $4a
 	ld [hl], a
-	call Func_145a
+	call UpdateObjAnim
 	ld hl, $d553
 	call Func_1f0940
 .asm_1f01b6
@@ -220,7 +220,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld [hli], a
 	ld a, $4d
 	ld [hl], a
-	call Func_145a
+	call UpdateObjAnim
 	ld hl, $d55e
 	call Func_1f0940
 .asm_1f01dd
@@ -250,7 +250,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld a, $ed
 	ld [hl], a
 .asm_1f0203
-	call Func_145a
+	call UpdateObjAnim
 	ld hl, $d56a
 	call Func_1f0940
 	ld hl, $d572
@@ -279,7 +279,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld a, $f3
 	ld [hl], a
 .asm_1f0232
-	call Func_145a
+	call UpdateObjAnim
 	ld hl, $d572
 	call Func_1f0940
 	ld hl, $d57a
@@ -308,7 +308,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld a, $ed
 	ld [hl], a
 .asm_1f0261
-	call Func_145a
+	call UpdateObjAnim
 	ld hl, $d57a
 	call Func_1f0940
 	ld hl, $d582
@@ -337,7 +337,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld a, $f3
 	ld [hl], a
 .asm_1f0290
-	call Func_145a
+	call UpdateObjAnim
 	ld hl, $d582
 	call Func_1f0940
 	ld a, $8f
@@ -349,8 +349,8 @@ Func_1f0087: ; 1f0087 (7c:4087)
 
 	INCROM $1f02a2, $1f08f7
 
-Func_1f08f7: ; 1f08f7 (7c:48f7)
-	ld hl, $5d5d
+LoadFontTiles: ; 1f08f7 (7c:48f7)
+	ld hl, FontGFX
 	ld bc, v0Tiles0
 	call Decompress
 	ret
@@ -372,7 +372,7 @@ LoadGBIncompatibleScreenMap: ; 1f090b (7c:490b)
 	ret
 ; 0x1f0919
 
-Func_1f0919: ; 1f0919 (7c:4919)
+LoadFontPals: ; 1f0919 (7c:4919)
 	ld hl, Pals_1f3610
 	call StorePalsInTempPals1
 	ld hl, Pals_1f3610
@@ -380,15 +380,16 @@ Func_1f0919: ; 1f0919 (7c:4919)
 	ret
 ; 0x1f0926
 
-Func_1f0926: ; 1f0926 (7c:4926)
+LoadLanguageSelectionText: ; 1f0926 (7c:4926)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, $767f
+	ld hl, LanguageSelection2TextMap
 	ld bc, v1BGMap0
 	call Decompress
+
 	xor a
 	ldh [rVBK], a
-	ld hl, $7650
+	ld hl, LanguageSelection1TextMap
 	ld bc, v0BGMap0
 	call Decompress
 	ret
@@ -1699,7 +1700,13 @@ Func_1f1420: ; 1f1420 (7c:5420)
 	ret
 ; 0x1f14c6
 
-	INCROM $1f14c6, $1f3610
+	INCROM $1f14c6, $1f1d5d
+
+FontGFX: ; 1f1d5d (2c:5d5d)
+INCBIN "gfx/font.2bpp.lz"
+; 0x1f2bc2
+
+	INCROM $1f2bc2, $1f3610
 
 Pals_1f3610: ; 1f3610 (2c:7610)
 	rgb  0, 22, 16
@@ -1743,4 +1750,8 @@ Pals_1f3610: ; 1f3610 (2c:7610)
 	rgb  0,  0,  0
 ; 0x1f3650
 
-	INCROM $1f3650, $1f369e
+LanguageSelection1TextMap: ; 1f3650 (2c:7650)
+INCBIN "data/maps/text/language_selection1.bin"
+
+LanguageSelection2TextMap: ; 1f367f (2c:767f)
+INCBIN "data/maps/text/language_selection2.bin"

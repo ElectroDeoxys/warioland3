@@ -2,7 +2,7 @@ Func_dc000: ; dc000 (37:4000)
 	ld a, [wSubSequence]
 	jumptable
 
-    dw SubSeq_SlowFadeBGToWhite
+    dw SlowFadeBGToWhite
     dw $401e
     dw DarkenBGToPal_Fast
     dw $4073

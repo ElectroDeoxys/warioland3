@@ -4,13 +4,13 @@ Func_80392: ; 80392 (20:4392)
 	ld a, [wSubSequence]
 	jumptable
 
-    dw SubSeq_FastFadeToWhite
+    dw FastFadeToWhite
     dw $43f9
-    dw SubSeq_SlowFadeFromWhite
+    dw SlowFadeFromWhite
     dw $44ec
-    dw SubSeq_FastFadeToWhite
+    dw FastFadeToWhite
     dw $44f7
-    dw SubSeq_SlowFadeFromWhite
+    dw SlowFadeFromWhite
     dw $4540
     dw FadeBGToWhite_Normal
     dw $455f
@@ -39,9 +39,9 @@ Func_80392: ; 80392 (20:4392)
     dw $4e45
     dw DarkenBGToPal_Normal
     dw $4e55
-    dw SubSeq_FastFadeToWhite
+    dw FastFadeToWhite
     dw $4e65
-    dw SubSeq_SlowFadeFromWhite
+    dw SlowFadeFromWhite
     dw $4e75
     dw $4e85
 ; 0x803e6

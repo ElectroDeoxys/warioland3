@@ -12,19 +12,19 @@ sprite_oam_struct: MACRO
 ENDM
 
 obj_struct: MACRO
-\1YCoord::        db
-\1XCoord::        db
-\1Frame::         db
-\1Unknown1::      db
-\1Unknown2::      db
-\1Unknown3::      db
-\1FramesPointer:: dw
+\1YCoord::          db
+\1XCoord::          db
+\1Frame::           db
+\1Attributes::      db
+\1FramesetOffset::  db
+\1Duration::        db
+\1FramesetPtr::     dw
 \1End::
 ENDM
 
-unk1_struct: MACRO
-\1Obj::     obj_struct \1Obj
-\1Unknown:: db
+wario_plane: MACRO
+\1Obj::   obj_struct \1
+\1State:: db
 ENDM
 
 unk2_struct: MACRO

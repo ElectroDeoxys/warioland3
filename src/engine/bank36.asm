@@ -89,12 +89,12 @@ Func_db277: ; db277 (36:7277)
 	ld a, [wSubSequence]
 	jumptable
 
-	dw SubSeq_FastFadeToWhite
+	dw FastFadeToWhite
 	dw $729b
-	dw SubSeq_SlowFadeFromWhite
+	dw SlowFadeFromWhite
 	dw $7317
 	dw $73e4
-	dw SubSeq_FastFadeToWhite
+	dw FastFadeToWhite
 	dw $741b
 	dw Func_28d
 	dw Func_28d

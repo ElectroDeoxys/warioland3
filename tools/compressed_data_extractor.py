@@ -32,46 +32,24 @@ def convertWordToInt(byteArr):
 def getCompressedData(offset):
     data = []
     pos = offset # init current position
-    repeatToggle = False
-    lenByte = 0x00
 
-    size = convertWordToInt(getByteString(pos, 2))
-    #data.extend(getByteString(pos, 2)) don't append size bytes to output
-    pos += 2
-
-    while (size > 0):
+    while (True):
         cmdByte = getByte(pos)
         pos += 1
         data.append(cmdByte)
 
-        for b in range(8):
-            if (cmdByte & (1 << (7 - b)) != 0):
-                # copy one byte literally
-                data.append(getByte(pos))
-                pos += 1
-                size -= 1
-            else:
-                # copy previous sequence
-                data.append(getByte(pos))
-                pos += 1
+        if (cmdByte == 0x00):
+            break
 
-                repeatToggle = not repeatToggle
-                if (repeatToggle):
-                    # sequence length
-                    lenByte = getByte(pos)
-                    data.append(lenByte)
-                    pos += 1
-                    size -= (lenByte >> 4) + 2
-                else:
-                    # no sequence length byte if toggle is off
-                    size -= (lenByte & 0x0f) + 2
-
-            assert(size >= 0)
-
-            # the decompression might finish while still
-            # reading command bits, so break early when this happens
-            if (size == 0):
-                break
+        if (cmdByte & (1 << 7) != 0):
+            # copy bytes literally
+            length = cmdByte & (0b01111111)
+            data.extend(getByteString(pos, length))
+            pos += length
+        else:
+            # copy n times
+            data.append(getByte(pos))
+            pos += 1
 
     return bytes(data)
 

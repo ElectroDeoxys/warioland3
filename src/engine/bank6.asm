@@ -1015,8 +1015,8 @@ UpdateState_Slipping: ; 19ce7 (6:5ce7)
 	ld b, $02
 	jr .asm_19e59
 .asm_19e51
-	ld a, [wc08f]
-	and $01
+	ld a, [wGlobalCounter]
+	and %1
 	ret z
 .asm_19e57
 	ld b, $01
@@ -1129,8 +1129,8 @@ UpdateState_CrouchSlipping: ; 19ef1 (6:5ef1)
 	ld b, $02
 	jr .asm_19f90
 .asm_19f88
-	ld a, [wc08f]
-	and $01
+	ld a, [wGlobalCounter]
+	and %1
 	ret z
 .asm_19f8e
 	ld b, $01
@@ -1194,7 +1194,7 @@ UpdateState_Teleporting: ; 1a077 (6:6077)
 	jp Func_11f6
 
 .play_sfx
-	load_sfx SFX_82
+	load_sfx SFX_082
 	ret
 ; 0x1a0b4
 
@@ -1693,7 +1693,7 @@ UpdateState_GettingOffLadder: ; 1a617 (6:6617)
 SetState_LadderSliding: ; 1a66b (6:666b)
 	ld a, ST_LADDER_SLIDING
 	ld [wWarioState], a
-	load_sfx SFX_0C
+	load_sfx SFX_00C
 	xor a
 	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
@@ -1861,8 +1861,8 @@ UpdateState_GrabSlipping: ; 1a7d6 (6:67d6)
 	ld b, $02
 	jr .asm_1a880
 .asm_1a878
-	ld a, [wc08f]
-	and $01
+	ld a, [wGlobalCounter]
+	and %1
 	ret z
 .asm_1a87e
 	ld b, $01
@@ -1926,7 +1926,7 @@ UpdateState_Sleeping: ; 1ac73 (6:6c73)
 	ld a, [wAnimationHasFinished]
 	and a
 	ret z
-	load_sfx SFX_36
+	load_sfx SFX_036
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -1948,7 +1948,7 @@ UpdateState_Sleeping: ; 1ac73 (6:6c73)
 	ld a, [wAnimationHasFinished]
 	and a
 	jr z, .asm_1acde
-	load_sfx SFX_36
+	load_sfx SFX_036
 .asm_1acde
 	ld a, [wJoypadDown]
 	and a
@@ -2257,7 +2257,7 @@ UpdateState_FenceMovingHorizontal: ; 1b00f (6:700f)
 SetState_FenceSliding: ; 1b05e (6:705e)
 	ld a, ST_FENCE_SLIDING
 	ld [wWarioState], a
-	load_sfx SFX_0C
+	load_sfx SFX_00C
 
 	xor a
 	ld [wSFXLoopCounter], a

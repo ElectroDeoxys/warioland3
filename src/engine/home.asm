@@ -192,9 +192,9 @@ Init: ; 15e (0:15e)
 	ldh a, [hCGB]
 	and a
 	jr nz, .asm_21a
-	ld a, $0b
+	ld a, MAIN_SEQTABLE_0b
 	ld [wSequence], a
-	xor a
+	xor a ; MAIN_SEQTABLE_TITLE
 	ld [wSubSequence], a
 	jr .asm_21d
 .asm_21a
@@ -210,7 +210,8 @@ Init: ; 15e (0:15e)
 	call InitAudio
 	ei
 
-.asm_22d
+; main game loop
+.GameLoop
 	call UpdateJoypad
 	ld a, [wc09a]
 	and a
@@ -229,7 +230,8 @@ Init: ; 15e (0:15e)
 	jp Init
 
 .asm_24e
-	call Func_4000
+	call MainSequenceTable
+
 	ld a, [wced8]
 	and a
 	jr z, .asm_266
@@ -240,24 +242,24 @@ Init: ; 15e (0:15e)
 	and a
 	jr z, .asm_26f
 	call Func_2a77
+
 .asm_26f
 	ld a, TRUE
 	ld [wEnableVBlankFunc], a
 	halt
 	nop
-
 .wait_vblank_exec
 	ld a, [wVBlankFuncExecuted]
 	and a
 	jr z, .wait_vblank_exec
 
-	ld hl, wc08f
+	ld hl, wGlobalCounter
 	inc [hl]
 	xor a
 	ld [wEnableVBlankFunc], a
 	ld [wVBlankFuncExecuted], a
 	call HandleSound
-	jp .asm_22d
+	jp .GameLoop
 ; 0x28d
 
 Func_28d: ; 28d (0:28d)
@@ -568,12 +570,12 @@ FadeBGToWhite_Normal: ; 46d (0:46d)
 	ld [wFadeSpeed], a
 	jr FadeBGToWhite
 
-SubSeq_SlowFadeBGToWhite: ; 474 (0:474)
+SlowFadeBGToWhite: ; 474 (0:474)
 	ld a, FADE_SPEED_FAST
 	ld [wFadeSpeed], a
 	jr FadeBGToWhite
 
-SubSeq_FastFadeToWhite: ; 47b (0:47b)
+FastFadeToWhite: ; 47b (0:47b)
 	xor a ; FADE_SPEED_SLOW
 	ld [wFadeSpeed], a
 	; fallthrough
@@ -750,7 +752,7 @@ DarkenBGToPal_Fast: ; 5e6 (0:5e6)
 	ld [wFadeSpeed], a
 	jr DarkenBGToPal
 
-SubSeq_SlowFadeFromWhite: ; 5ed (0:5ed)
+SlowFadeFromWhite: ; 5ed (0:5ed)
 	xor a ; FADE_SPEED_SLOW
 	ld [wFadeSpeed], a
 	; fallthrough
@@ -963,7 +965,8 @@ DarkenBGToPal: ; 5f1 (0:5f1)
 
 ; fades BG palettes to wTempPals1
 ; gradually lightens up to wTempPals1
-LightenBGToPal: ; 6fa (0:6fa)
+; when fading is complete, advances wSubSequence
+FadeInTitle: ; 6fa (0:6fa)
 	ld a, [wPalFadeCounter]
 	cp 2
 	jr nc, .fade ; jump if in middle of fade
@@ -1502,7 +1505,7 @@ InitHRAMCallFunc: ; a92 (0:a92)
 	push af
 	ld a, $0
 	bankswitch
-	call Func_4000
+	call MainSequenceTable
 	pop af
 	bankswitch
 	ret
@@ -2383,7 +2386,7 @@ PlayNewMusic_SetNoise: ; 1062 (0:1062)
 ; 0x1070
 
 Func_1070: ; 1070 (0:1070)
-	load_sfx SFX_12
+	load_sfx SFX_012
 	ret
 ; 0x1079
 
@@ -2547,7 +2550,7 @@ Func_11ae: ; 11ae (0:11ae)
 	ld a, $68
 .asm_11bc
 	ld [wc1a9], a
-	load_sfx SFX_E1
+	load_sfx SFX_0E1
 	ld a, $08
 	ld [wc1aa], a
 	ld a, $01
@@ -2560,7 +2563,7 @@ Func_11ae: ; 11ae (0:11ae)
 Func_11d6: ; 11d6 (0:11d6)
 	ld a, c
 	ld [wca78], a
-	load_sfx SFX_E1
+	load_sfx SFX_0E1
 	ld a, $04
 	ld [wc1aa], a
 	ld a, $01
@@ -2764,19 +2767,20 @@ Func_142b: ; 142b (0:142b)
 
 	INCROM $1440, $145a
 
-Func_145a: ; 145a (0:145a)
+UpdateObjAnim: ; 145a (0:145a)
 	xor a
-	ld [w3d514], a
+	ld [wObjAnimWasReset], a
 	ld a, [hld] ;
-	ld e, a     ; frame pointer
+	ld e, a     ; frameset pointer
 	ld a, [hld] ;
 	ld d, a     ;
-	ld a, [hl] ; unknown3
+	ld a, [hl] ; duration
 	sub 1
 	ld [hld], a
 	ret nc
 
-	ld a, [hl]
+	; new frame
+	ld a, [hl] ; frameset offset
 	add e
 	ld c, a
 	ld a, d
@@ -2787,22 +2791,22 @@ Func_145a: ; 145a (0:145a)
 	jr z, .reset_anim
 	dec l
 	dec l
-	ld [hli], a
+	ld [hli], a ; frame
 	inc l
-	ld a, [hl]
-	add $02
+	ld a, [hl] ; frameset offset
+	add $2
 	ld [hli], a
 	inc bc
 	ld a, [bc]
-	ld [hl], a
+	ld [hl], a ; duration
 	ret
 
 .reset_anim
 	xor a
-	ld [hli], a
-	ld [hl], a
+	ld [hli], a ; frameset offset
+	ld [hl], a ; duration
 	ld a, TRUE
-	ld [w3d514], a
+	ld [wObjAnimWasReset], a
 	ret
 ; 0x1488
 
@@ -3085,7 +3089,7 @@ Func_161a: ; 161a (0:161a)
 
 ; clears wSequence and wSubSequence
 Func_1690: ; 1690 (0:1690)
-	xor a
+	xor a ; MAIN_SEQTABLE_TITLE
 	ld [wSequence], a
 	ld [wSubSequence], a
 	ret
@@ -3125,9 +3129,9 @@ Func_1698: ; 1698 (0:1698)
 
 Func_16d0: ; 16d0 (0:16d0)
 	ld hl, wSequence
-	ld a, $07
+	ld a, MAIN_SEQTABLE_07
 	ld [hli], a
-	ld [hl], $00
+	ld [hl], $00 ; wSubSequence
 	ret
 ; 0x16d9
 

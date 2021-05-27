@@ -1017,7 +1017,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld [hl], a
 	ld l, $00
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 
 .asm_61a16
@@ -1078,7 +1078,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld [hl], a
 	ld l, $20
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 
 .asm_61a86
@@ -1139,7 +1139,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld [hl], a
 	ld l, $40
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 
 .asm_61af6
@@ -1200,7 +1200,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld [hl], a
 	ld l, $60
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 
 .asm_61b66
@@ -1261,7 +1261,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld [hl], a
 	ld l, $80
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 
 .asm_61bd6
@@ -1322,7 +1322,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld [hl], a
 	ld l, $a0
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 
 .asm_61c46
@@ -1383,7 +1383,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld [hl], a
 	ld l, $c0
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 
 .asm_61cb6
@@ -1444,7 +1444,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld [hl], a
 	ld l, $e0
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 
 .asm_61d26
@@ -1462,7 +1462,7 @@ Func_61d28: ; 61d28 (18:5d28)
 	ld [hl], a
 	ld l, $00
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 ; 0x61d41
 
@@ -1476,7 +1476,7 @@ Func_61d41: ; 61d41 (18:5d41)
 	ld [hl], a
 	ld l, $20
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 ; 0x61d5a
 
@@ -1490,7 +1490,7 @@ Func_61d5a: ; 61d5a (18:5d5a)
 	ld [hl], a
 	ld l, $40
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 ; 0x61d73
 
@@ -1504,7 +1504,7 @@ Func_61d73: ; 61d73 (18:5d73)
 	ld [hl], a
 	ld l, $60
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 ; 0x61d8c
 
@@ -1518,7 +1518,7 @@ Func_61d8c: ; 61d8c (18:5d8c)
 	ld [hl], a
 	ld l, $80
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 ; 0x61da5
 
@@ -1532,7 +1532,7 @@ Func_61da5: ; 61da5 (18:5da5)
 	ld [hl], a
 	ld l, $a0
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 ; 0x61dbe
 
@@ -1546,7 +1546,7 @@ Func_61dbe: ; 61dbe (18:5dbe)
 	ld [hl], a
 	ld l, $c0
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 ; 0x61dd7
 
@@ -1560,7 +1560,7 @@ Func_61dd7: ; 61dd7 (18:5dd7)
 	ld [hl], a
 	ld l, $e0
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 ; 0x61df0
 
@@ -1582,7 +1582,7 @@ Func_61df0: ; 61df0 (18:5df0)
 	ld [hl], a
 	ld l, $00
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 ; 0x61e14
 
@@ -1604,7 +1604,7 @@ Func_61e14: ; 61e14 (18:5e14)
 	ld [hl], a
 	ld l, $20
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 ; 0x61e38
 
@@ -1626,7 +1626,7 @@ Func_61e38: ; 61e38 (18:5e38)
 	ld [hl], a
 	ld l, $40
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 ; 0x61e5c
 
@@ -1648,7 +1648,7 @@ Func_61e5c: ; 61e5c (18:5e5c)
 	ld [hl], a
 	ld l, $60
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 ; 0x61e80
 
@@ -1670,7 +1670,7 @@ Func_61e80: ; 61e80 (18:5e80)
 	ld [hl], a
 	ld l, $80
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 ; 0x61ea4
 
@@ -1692,7 +1692,7 @@ Func_61ea4: ; 61ea4 (18:5ea4)
 	ld [hl], a
 	ld l, $a0
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 ; 0x61ec8
 
@@ -1714,7 +1714,7 @@ Func_61ec8: ; 61ec8 (18:5ec8)
 	ld [hl], a
 	ld l, $c0
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 ; 0x61eec
 
@@ -1736,7 +1736,7 @@ Func_61eec: ; 61eec (18:5eec)
 	ld [hl], a
 	ld l, $e0
 	set 3, [hl]
-	load_sfx SFX_16
+	load_sfx SFX_016
 	ret
 ; 0x61f10
 

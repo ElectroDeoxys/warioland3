@@ -3,9 +3,9 @@ Func_160000: ; 160000 (58:4000)
 	ld a, [wSubSequence]
 	jumptable
 
-    dw SubSeq_FastFadeToWhite
+    dw FastFadeToWhite
     dw $4028
-    dw SubSeq_SlowFadeFromWhite
+    dw SlowFadeFromWhite
     dw $40d4
     dw $4190
     dw $426c

@@ -227,7 +227,7 @@ UpdateState_Turning: ; 1c244 (7:4244)
 ; 0x1c270
 
 Func_1c270: ; 1c270 (7:4270)
-	load_sfx SFX_0D
+	load_sfx SFX_00D
 	ld a, $01
 	ld [wJumpVelIndex], a
 	ld a, TRUE
@@ -592,7 +592,7 @@ Func_1c5fd: ; 1c5fd (7:45fd)
 	ld a, [wc1aa]
 	and a
 	jr nz, .asm_1c61b
-	load_sfx SFX_02
+	load_sfx SFX_002
 .asm_1c61b
 	xor a
 	ld [wFrameDuration], a
@@ -620,7 +620,7 @@ Func_1c5fd: ; 1c5fd (7:45fd)
 	jr SetState_SmashAttacking
 
 Func_1c66b: ; 1c66b (7:466b)
-	load_sfx SFX_33
+	load_sfx SFX_033
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -709,7 +709,7 @@ SetState_CrouchSliding: ; 1c73b (7:473b)
 	xor a
 	ld [wSFXLoopCounter], a
 	ld [wca89], a
-	load_sfx SFX_0C
+	load_sfx SFX_00C
 	ld a, ST_CROUCH_SLIDING
 	ld [wWarioState], a
 	ld a, $01
@@ -831,8 +831,8 @@ UpdateState_CrouchSliding: ; 1c7c3 (7:47c3)
 	jr .asm_1c863
 
 .asm_1c875
-	ld a, [wc08f]
-	and $01
+	ld a, [wGlobalCounter]
+	and %1
 	ret z
 	ld b, $01
 	ld a, [wDirection]
@@ -887,23 +887,23 @@ UpdateState_Attacking: ; 1c8df (7:48df)
 	ld a, [wSFXLoopCounter]
 	sub 1
 	ld [wSFXLoopCounter], a
-	jr nc, .skip_sfx_1
+	jr nc, .skip_SFX_01
 	ld a, 6
 	ld [wSFXLoopCounter], a
 	load_sfx SFX_ATTACK
-.skip_sfx_1
-	jr .skip_sfx_2
+.skip_SFX_01
+	jr .skip_SFX_02
 
 .powered_up
 	ld a, [wSFXLoopCounter]
 	sub 1
 	ld [wSFXLoopCounter], a
-	jr nc, .skip_sfx_2
+	jr nc, .skip_SFX_02
 	ld a, 6
 	ld [wSFXLoopCounter], a
 	load_sfx SFX_ATTACK_POWERED_UP
 
-.skip_sfx_2
+.skip_SFX_02
 	update_anim_1
 
 	call HandleInput_Attacking
@@ -1012,7 +1012,7 @@ Func_1ca0e: ; 1ca0e (7:4a0e)
 ;	fallthrough
 
 Func_1ca20: ; 1ca20 (7:4a20)
-	load_sfx SFX_03
+	load_sfx SFX_003
 	ld a, [wJumpVelTable]
 	and a
 	jr nz, .asm_1ca32
@@ -1023,7 +1023,7 @@ Func_1ca20: ; 1ca20 (7:4a20)
 .asm_1ca34
 	ld [wJumpVelIndex], a
 	jr .asm_1ca46
-	load_sfx SFX_03
+	load_sfx SFX_003
 	ld a, 10
 	ld [wJumpVelIndex], a
 
@@ -1326,7 +1326,7 @@ Func_1cd48: ; 1cd48 (7:4d48)
 
 	ld b, $03
 	farcall Func_c9f3
-	load_sfx SFX_0D
+	load_sfx SFX_00D
 ;	fallthrough
 
 Func_1cd7c: ; 1cd7c (7:4d7c)
@@ -1720,8 +1720,8 @@ Func_1d107: ; 1d107 (7:5107)
 ; 0x1d1bc
 
 Func_1d1bc: ; 1d1bc (7:51bc)
-	ld a, [wc08f]
-	and $03
+	ld a, [wGlobalCounter]
+	and %11
 	ret nz
 	ld hl, wca6e
 	inc [hl]
@@ -1837,7 +1837,7 @@ UpdateState_UnderwaterThrusting: ; 1d297 (7:5297)
 	jr nc, .skip_sfx
 	ld a, 15
 	ld [wSFXLoopCounter], a
-	load_sfx SFX_0F
+	load_sfx SFX_00F
 .skip_sfx
 	update_anim_1
 
@@ -1854,7 +1854,7 @@ SetState_SwimKnockBack: ; 1d2ea (7:52ea)
 	ld a, [wDirection]
 	xor $1 ; switch direction
 	ld [wDirection], a
-	load_sfx SFX_03
+	load_sfx SFX_003
 	ld a, ST_SWIM_KNOCK_BACK
 	ld [wWarioState], a
 	xor a
@@ -1936,8 +1936,8 @@ UpdateState_WaterStung: ; 1d395 (7:5395)
 	ld a, [wWarioStateCounter]
 	cp $78
 	jr nc, .asm_1d3f8
-	ld a, [wc08f]
-	and $01
+	ld a, [wGlobalCounter]
+	and %1
 	ret nz
 	ld b, $01
 	call SubYOffset
@@ -2364,7 +2364,7 @@ UpdateState_PipeGoingDown: ; 1d7c1 (7:57c1)
 	res 7, [hl]
 	jp Func_11f6
 .asm_1d804
-	load_sfx SFX_E1
+	load_sfx SFX_0E1
 	ret
 ; 0x1d80d
 
@@ -2398,7 +2398,7 @@ UpdateState_PipeGoingUp: ; 1d80d (7:580d)
 	res 7, [hl]
 	jp Func_11f6
 .asm_1d853
-	load_sfx SFX_E1
+	load_sfx SFX_0E1
 	ret
 ; 0x1d85c
 
@@ -2687,7 +2687,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 	ld a, [wc1aa]
 	and a
 	jr nz, .asm_1dbf1
-	load_sfx SFX_02
+	load_sfx SFX_002
 .asm_1dbf1
 	xor a
 	ld [wFrameDuration], a
@@ -2704,7 +2704,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 	jr .asm_1dc5f
 
 .asm_1dc25
-	load_sfx SFX_33
+	load_sfx SFX_033
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -2740,7 +2740,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 ; 0x1dc8b
 
 SetState_ThrowCharging: ; 1dc8b (7:5c8b)
-	load_sfx SFX_2C
+	load_sfx SFX_02C
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -4949,8 +4949,8 @@ Func_1f1a9: ; 1f1a9 (7:71a9)
 	ld a, [wWaterInteraction]
 	and a
 	jp z, Func_1cf7a
-	ld a, [wc08f]
-	and $01
+	ld a, [wGlobalCounter]
+	and %1
 	ret nz
 	ld hl, wcee2
 	ld a, [hld]
@@ -4974,7 +4974,7 @@ Func_1f24c: ; 1f24c (7:724c)
 	jr nc, .skip_sfx
 	ld a, 37
 	ld [wSFXLoopCounter], a
-	load_sfx SFX_0E
+	load_sfx SFX_00E
 .skip_sfx
 
 	ld a, [wWarioStateCycles]
@@ -4994,8 +4994,8 @@ Func_1f24c: ; 1f24c (7:724c)
 .asm_1f28f
 	update_anim_1
 
-	ld a, [wc08f]
-	and $01
+	ld a, [wGlobalCounter]
+	and %1
 	jr z, .asm_1f2b2
 	ld a, [wJoypadDown]
 	bit D_RIGHT_F, a
@@ -5391,8 +5391,8 @@ Func_1f64a: ; 1f64a (7:764a)
 	ret
 
 .asm_1f67c
-	ld a, [wc08f]
-	and $03
+	ld a, [wGlobalCounter]
+	and %11
 	ret nz
 	ld a, [wca8c]
 	inc a
@@ -5400,8 +5400,8 @@ Func_1f64a: ; 1f64a (7:764a)
 	jr .asm_1f6b9
 
 .asm_1f68b
-	ld a, [wc08f]
-	and $01
+	ld a, [wGlobalCounter]
+	and %1
 	ret nz
 	ld a, [wca8c]
 	inc a
@@ -5427,8 +5427,8 @@ Func_1f64a: ; 1f64a (7:764a)
 ; 0x1f6c2
 
 Func_1f6c2: ; 1f6c2 (7:76c2)
-	ld a, [wc08f]
-	and $07
+	ld a, [wGlobalCounter]
+	and %111
 	jr z, .asm_1f6ce
 	cp $03
 	jr z, .asm_1f6d5
@@ -5571,7 +5571,7 @@ Func_1f6dc: ; 1f6dc (7:76dc)
 SetState_LadderShakeStunned: ; 1f7e6 (7:77e6)
 	ld a, ST_LADDER_SHAKE_SLIDING
 	ld [wWarioState], a
-	load_sfx SFX_0C
+	load_sfx SFX_00C
 
 	xor a
 	ld [wSFXLoopCounter], a

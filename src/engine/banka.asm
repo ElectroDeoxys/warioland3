@@ -97,7 +97,7 @@ UpdateState_OnFire: ; 280a6 (a:40a6)
 	jr nc, .skip_sfx
 	ld a, 14
 	ld [wSFXLoopCounter], a
-	load_sfx SFX_1E
+	load_sfx SFX_01E
 .skip_sfx
 
 	ld a, [wWarioStateCounter]
@@ -270,7 +270,7 @@ UpdateState_Hot: ; 2827a (a:427a)
 	jr nc, .skip_sfx
 	ld a, 16
 	ld [wSFXLoopCounter], a
-	load_sfx SFX_1F
+	load_sfx SFX_01F
 .skip_sfx
 	update_anim_1
 
@@ -315,7 +315,7 @@ UpdateState_Hot: ; 2827a (a:427a)
 	ret
 
 .asm_28313
-	load_sfx SFX_22
+	load_sfx SFX_022
 
 	ld a, ST_BURNT
 	ld [wWarioState], a
@@ -575,7 +575,7 @@ UpdateState_FlatWalking: ; 28672 (a:4672)
 ; 0x286d1
 
 SetState_FlatJumping: ; 286d1 (a:46d1)
-	load_sfx SFX_1D
+	load_sfx SFX_01D
 
 	ld a, ST_FLAT_JUMPING
 	ld [wWarioState], a
@@ -700,7 +700,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 	ld a, b
 	and a
 	jp z, .asm_288b8
-	load_sfx SFX_03
+	load_sfx SFX_003
 
 	ld a, [wDirection]
 	xor $1 ; switch direction
@@ -776,7 +776,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 	jr nz, .asm_288d7
 	jp Func_14de
 .asm_288d7
-	load_sfx SFX_20
+	load_sfx SFX_020
 	call Func_14f6
 	jp SetState_FlatIdling
 ; 0x288e5
@@ -829,12 +829,12 @@ UpdateState_FlatSinking: ; 2894e (a:494e)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wc08f]
-	and $0f
+	ld a, [wGlobalCounter]
+	and %1111
 	call z, .Func_2899a
 
-	ld a, [wc08f]
-	and $01
+	ld a, [wGlobalCounter]
+	and %1
 	ret nz
 	ld b, $01
 	call AddYOffset
@@ -1122,7 +1122,7 @@ UpdateState_BallOStringAirborne: ; 28c25 (a:4c25)
 SetState_BallOStringKnockBack: ; 28c94 (a:4c94)
 	xor a
 	ld [wca8f], a
-	load_sfx SFX_03
+	load_sfx SFX_003
 	ld a, ST_BALL_O_STRING_KNOCK_BACK
 	ld [wWarioState], a
 	ld a, $0a
@@ -1176,7 +1176,7 @@ UpdateState_BallOStringKnockBack: ; 28ceb (a:4ceb)
 	xor $1 ; switch direction
 	ld [wDirection], a
 	call Func_14f6
-	load_sfx SFX_3C
+	load_sfx SFX_03C
 
 	ld a, ST_GETTING_UNWRAPPED_IN_STRING
 	ld [wWarioState], a
@@ -1209,7 +1209,7 @@ UpdateState_GettingUnwrappedInString: ; 28d92 (a:4d92)
 	and a
 	ret z
 
-	load_sfx SFX_3D
+	load_sfx SFX_03D
 	ld a, ST_BALL_O_STRING_DIZZY
 	ld [wWarioState], a
 	ld a, $ff
@@ -1568,7 +1568,7 @@ UpdateState_FatAirborne: ; 29123 (a:5123)
 	ld a, [wc1aa]
 	and a
 	jr nz, SetState_FatLanding
-	load_sfx SFX_24
+	load_sfx SFX_024
 ;	fallthrough
 
 SetState_FatLanding: ; 291ff (a:51ff)
@@ -1616,7 +1616,7 @@ Func_2926a: ; 2926a (a:526a)
 	ldh [hYPosLo], a
 	ld b, $03
 	farcall Func_c9f3
-	load_sfx SFX_0D
+	load_sfx SFX_00D
 
 	ld a, ST_FAT_SINKING
 	ld [wWarioState], a
@@ -1645,8 +1645,8 @@ Func_2926a: ; 2926a (a:526a)
 
 UpdateState_FatSinking: ; 292e5 (a:52e5)
 	update_anim_1
-	ld a, [wc08f]
-	and $0f
+	ld a, [wGlobalCounter]
+	and %1111
 	call z, Func_29317
 	ld b, $01
 	call AddYOffset
@@ -1870,7 +1870,7 @@ UpdateState_Electric: ; 294bf (a:54bf)
 	ret
 
 .asm_295d8
-	load_sfx SFX_41
+	load_sfx SFX_041
 
 	ld a, [wDirection]
 	and a
@@ -2091,7 +2091,7 @@ UpdateState_PuffyTurning: ; 298f3 (a:58f3)
 ; 0x2992a
 
 SetState_PuffyDeflating: ; 2992a (a:592a)
-	load_sfx SFX_27
+	load_sfx SFX_027
 
 	ld a, ST_PUFFY_DEFLATING
 	ld [wWarioState], a
@@ -2442,7 +2442,7 @@ UpdateState_ZombieAirborne: ; 29c29 (a:5c29)
 ;	fallthrough
 
 SetState_ZombieLanding: ; 29cde (a:5cde)
-	load_sfx SFX_2A
+	load_sfx SFX_02A
 	ld a, $02
 	ld [wca93], a
 	ld a, $02
@@ -2582,8 +2582,8 @@ UpdateState_ZombieSlippingThroughFloor: ; 29dd3 (a:5dd3)
 	INCROM $29e71, $29e7e
 
 UpdateState_ZombieRecovering: ; 29e7e (a:5e7e)
-	ld a, [wc08f]
-	and $03
+	ld a, [wGlobalCounter]
+	and %11
 	ret nz
 	ld hl, wWarioStateCounter
 	inc [hl]
@@ -2747,7 +2747,7 @@ UpdateState_BouncyFloor: ; 2a087 (a:6087)
 SetState_BouncyAirborne: ; 2a0cb (a:60cb)
 	ld a, ST_BOUNCY_AIRBORNE
 	ld [wWarioState], a
-	load_sfx SFX_2B
+	load_sfx SFX_02B
 
 	xor a
 	ld [wFrameDuration], a
@@ -3068,7 +3068,7 @@ UpdateState_CrazySpinning: ; 2a489 (a:6489)
 	ret c
 	ld [hl], $00
 
-	load_sfx SFX_43
+	load_sfx SFX_043
 	ld a, ST_CRAZY_DIZZY
 	ld [wWarioState], a
 
@@ -3103,7 +3103,7 @@ UpdateState_CrazyDizzy: ; 2a544 (a:6544)
 ;	fallthrough
 
 SetState_Crazy: ; 2a558 (a:6558)
-	load_sfx SFX_43
+	load_sfx SFX_043
 	ld a, ST_CRAZY
 	ld [wWarioState], a
 
@@ -3409,7 +3409,7 @@ Func_2a8a7: ; 2a8a7 (a:68a7)
 ; 0x2a8ae
 
 Func_2a8ae: ; 2a8ae (a:68ae)
-	load_sfx SFX_1D
+	load_sfx SFX_01D
 	xor a
 	ld [wJumpVelIndex], a
 ;	fallthrough
@@ -3473,7 +3473,7 @@ UpdateState_VampireAirborne: ; 2a8d2 (a:68d2)
 ; 0x2a951
 
 SetState_BatTransforming: ; 2a951 (a:6951)
-	load_sfx SFX_46
+	load_sfx SFX_046
 	ld a, ST_BAT_TRANSFORMING
 	ld [wWarioState], a
 
@@ -3553,7 +3553,7 @@ UpdateState_BatIdling: ; 2aa08 (a:6a08)
 	jr nc, .skip_sfx
 	ld a, $20
 	ld [wSFXLoopCounter], a
-	load_sfx SFX_71
+	load_sfx SFX_071
 .skip_sfx
 	update_anim_2
 
@@ -3577,11 +3577,11 @@ UpdateState_BatIdling: ; 2aa08 (a:6a08)
 	jr z, .asm_2aa81
 	ld a, $f1
 	ld [wca6f], a
-	load_sfx SFX_E5
+	load_sfx SFX_0E5
 	ret
 
 .asm_2aa81
-	load_sfx SFX_45
+	load_sfx SFX_045
 
 	ld a, ST_VAMPIRE_TRANSFORMING
 	ld [wWarioState], a
@@ -3672,7 +3672,7 @@ UpdateState_BatFlying: ; 2ab42 (a:6b42)
 	jr nc, .skip_sfx
 	ld a, $10
 	ld [wSFXLoopCounter], a
-	load_sfx SFX_71
+	load_sfx SFX_071
 .skip_sfx
 	update_anim_2
 
@@ -3782,7 +3782,7 @@ UpdateState_InBubble: ; 2ad06 (a:6d06)
 	jr nc, .skip_sfx
 	ld a, $0e
 	ld [wSFXLoopCounter], a
-	load_sfx SFX_23
+	load_sfx SFX_023
 .skip_sfx
 	update_anim_2
 	call Func_2b56f
@@ -3841,7 +3841,7 @@ Func_2ade4: ; 2ade4 (a:6de4)
 	ldh [hYPosLo], a
 	ld b, $07
 	farcall Func_c9f3
-	load_sfx SFX_0D
+	load_sfx SFX_00D
 	farcall Func_1cd7c
 	ret
 ; 0x2ae2f
@@ -3893,14 +3893,14 @@ Func_2ae5c: ; 2ae5c (a:6e5c)
 	ld a, [hl]
 	cp $78
 	jr nc, .asm_2ae7e
-	ld a, [wc08f]
-	and $03
+	ld a, [wGlobalCounter]
+	and %11
 	jr nz, .no_carry
 	ld a, $01
 	jr .set_carry
 .asm_2ae7e
-	ld a, [wc08f]
-	and $0f
+	ld a, [wGlobalCounter]
+	and %1111
 	jr nz, .no_carry
 
 .set_carry
@@ -4402,8 +4402,8 @@ Func_2b2c2: ; 2b2c2 (a:72c2)
 ; 0x2b342
 
 Func_2b342: ; 2b342 (a:7342)
-	ld a, [wc08f]
-	and $01
+	ld a, [wGlobalCounter]
+	and %1
 	ret nz
 	ld b, $01
 	call SubYOffset
@@ -4553,8 +4553,8 @@ Func_2b42b: ; 2b42b (a:742b)
 	ret
 
 .asm_2b457
-	ld a, [wc08f]
-	and $01
+	ld a, [wGlobalCounter]
+	and %1
 	ret z
 .asm_2b45d
 	ld a, [wDirection]
@@ -4666,8 +4666,8 @@ Func_2b55c: ; 2b55c (a:755c)
 ; 0x2b56f
 
 Func_2b56f: ; 2b56f (a:756f)
-	ld a, [wc08f]
-	and $01
+	ld a, [wGlobalCounter]
+	and %1
 	jr z, .asm_2b5b2
 	ld b, $01
 	call SubYOffset

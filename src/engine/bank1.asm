@@ -1,32 +1,32 @@
-Func_4000: ; 4000 (1:4000)
+MainSequenceTable: ; 4000 (1:4000)
 	ld a, [wSequence]
 	jumptable
 
-	dw Func_402b
-	dw Func_4686
-	dw Func_46cc
-	dw Func_46dc
-	dw Func_46f6
-	dw Func_4710
-	dw Func_472a
-	dw Func_474c
-	dw Func_4766
-	dw Func_4776
-	dw Func_4790
-	dw Func_47aa
-	dw Func_47fd
-	dw Func_4817
-	dw Func_4831
-	dw Func_4028
-	dw Func_4028
-	dw Func_4028
+	dw TitleSequence             ; MAIN_SEQTABLE_TITLE
+	dw Func_4686                 ; MAIN_SEQTABLE_01
+	dw Func_46cc                 ; MAIN_SEQTABLE_02
+	dw Func_46dc                 ; MAIN_SEQTABLE_03
+	dw Func_46f6                 ; MAIN_SEQTABLE_04
+	dw Func_4710                 ; MAIN_SEQTABLE_05
+	dw Func_472a                 ; MAIN_SEQTABLE_06
+	dw Func_474c                 ; MAIN_SEQTABLE_07
+	dw Func_4766                 ; MAIN_SEQTABLE_08
+	dw Func_4776                 ; MAIN_SEQTABLE_09
+	dw Func_4790                 ; MAIN_SEQTABLE_0a
+	dw Func_47aa                 ; MAIN_SEQTABLE_0b
+	dw Func_47fd                 ; MAIN_SEQTABLE_0c
+	dw Func_4817                 ; MAIN_SEQTABLE_0d
+	dw LanguageSelectionSequence ; MAIN_SEQTABLE_LANGUAGE_SELECTION
+	dw Func_4028                 ; MAIN_SEQTABLE_0f
+	dw Func_4028                 ; MAIN_SEQTABLE_10
+	dw Func_4028                 ; MAIN_SEQTABLE_11
 ; 0x4028
 
 Func_4028: ; 4028 (1:4028)
 	jp Init
 ; 0x402b
 
-Func_402b: ; 402b (1:402b)
+TitleSequence: ; 402b (1:402b)
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -40,17 +40,17 @@ Func_402b: ; 402b (1:402b)
 	ld a, [wSubSequence]
 	jumptable
 
-	dw SubSeq_FastFadeToWhite
-	dw Func_405f
-	dw SubSeq_SlowFadeFromWhite
-	dw Func_41cf
-	dw Func_42ed
-	dw Func_43b5
-	dw Func_44c3
-	dw Func_4508
-	dw SubSeq_SlowFadeBGToWhite
-	dw Func_4640
-	dw Func_4670
+	dw FastFadeToWhite
+	dw InitIntroSequence
+	dw SlowFadeFromWhite
+	dw IntroSequencePhase1
+	dw IntroSequencePhase2
+	dw IntroSequencePhase3
+	dw EndIntroSequence
+	dw StartMenu
+	dw SlowFadeBGToWhite
+	dw InitTimeAttackDescription
+	dw TimeAttackDescription
 	dw Func_28d
 	dw Func_28d
 	dw Func_28d
@@ -59,7 +59,7 @@ Func_402b: ; 402b (1:402b)
 	dw Func_28d
 ; 0x405f
 
-Func_405f: ; 405f (1:405f)
+InitIntroSequence: ; 405f (1:405f)
 	call DisableLCD
 	call FillBGMap0_With7f
 	call ClearWholeVirtualOAM
@@ -78,7 +78,7 @@ Func_405f: ; 405f (1:405f)
 	and a
 	jr nz, .asm_40fc
 
-	ld hl, wUnk
+	ld hl, wWarioPlane
 	ld a, 64
 	ld [hli], a ; y coord
 	ld a, 208
@@ -88,14 +88,14 @@ Func_405f: ; 405f (1:405f)
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld a, HIGH(FrameData_712c)
+	ld a, HIGH(Frameset_712c)
 	ld [hli], a
-	ld a, LOW(FrameData_712c)
+	ld a, LOW(Frameset_712c)
 	ld [hli], a
 	xor a
-	ld [hld], a
-	ld [w3d522], a
-	call Func_145a
+	ld [hld], a ; state
+	ld [wIntroSeqSFXTimer], a
+	call UpdateObjAnim
 
 	ld hl, wObj0
 	ld a, 128
@@ -107,11 +107,11 @@ Func_405f: ; 405f (1:405f)
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld a, HIGH(FrameData_6ce6)
+	ld a, HIGH(Frameset_6ce6)
 	ld [hli], a
-	ld a, LOW(FrameData_6ce6)
+	ld a, LOW(Frameset_6ce6)
 	ld [hl], a
-	call Func_145a
+	call UpdateObjAnim
 
 	ld hl, wObj3
 	ld a, 16
@@ -123,11 +123,11 @@ Func_405f: ; 405f (1:405f)
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld a, HIGH(FrameData_71a1)
+	ld a, HIGH(Frameset_71a1)
 	ld [hli], a
-	ld a, LOW(FrameData_71a1)
+	ld a, LOW(Frameset_71a1)
 	ld [hl], a
-	call Func_145a
+	call UpdateObjAnim
 
 	ld hl, wObj4
 	ld a, 8
@@ -139,11 +139,11 @@ Func_405f: ; 405f (1:405f)
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld a, HIGH(FrameData_71a4)
+	ld a, HIGH(Frameset_71a4)
 	ld [hli], a
-	ld a, LOW(FrameData_71a4)
+	ld a, LOW(Frameset_71a4)
 	ld [hl], a
-	call Func_145a
+	call UpdateObjAnim
 
 	ld hl, wObj3
 	call Func_4b93
@@ -151,27 +151,27 @@ Func_405f: ; 405f (1:405f)
 	call Func_4b93
 
 	ld a, $00
-	ld [w3d513], a
+	ld [wStartMenuSelection], a
 	jp .asm_41a8
 
 .asm_40fc
-	ld hl, wUnk
-	ld a, $6c
-	ld [hli], a
-	ld a, $80
-	ld [hli], a
+	ld hl, wWarioPlane
+	ld a, 108
+	ld [hli], a ; y coord
+	ld a, 128
+	ld [hli], a ; x coord
 	xor a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld a, HIGH(FrameData_7198)
+	ld a, HIGH(Frameset_7198)
 	ld [hli], a
-	ld a, LOW(FrameData_7198)
+	ld a, LOW(Frameset_7198)
 	ld [hli], a
 	xor a
 	ld [hld], a
-	ld [w3d522], a
+	ld [wIntroSeqSFXTimer], a
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
@@ -234,18 +234,18 @@ Func_405f: ; 405f (1:405f)
 	ld a, [wca3d]
 	bit 1, a
 	jr nz, .asm_4178
-	ld a, HIGH(FrameData_6ce9)
+	ld a, HIGH(Frameset_6ce9)
 	ld [hli], a
-	ld a, LOW(FrameData_6ce9)
+	ld a, LOW(Frameset_6ce9)
 	ld [hl], a
 	jr .asm_417e
 .asm_4178
-	ld a, HIGH(FrameData_6d1e)
+	ld a, HIGH(Frameset_6d1e)
 	ld [hli], a
-	ld a, LOW(FrameData_6d1e)
+	ld a, LOW(Frameset_6d1e)
 	ld [hl], a
 .asm_417e
-	call Func_145a
+	call UpdateObjAnim
 
 	ld hl, wObj1
 	ld a, $86
@@ -264,452 +264,486 @@ Func_405f: ; 405f (1:405f)
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld a, HIGH(FrameData_6d1b)
+	ld a, HIGH(Frameset_6d1b)
 	ld [hli], a
-	ld a, LOW(FrameData_6d1b)
+	ld a, LOW(Frameset_6d1b)
 	ld [hl], a
-	call Func_145a
+	call UpdateObjAnim
 
 	ld a, $01
-	ld [w3d513], a
+	ld [wStartMenuSelection], a
 
 .asm_41a8
 	ld hl, wObj2
-	ld a, $24
-	ld [hli], a
-	ld a, $68
-	ld [hli], a
+	ld a, 36
+	ld [hli], a ; y coord
+	ld a, 104
+	ld [hli], a ; x coord
 	xor a
+	ld [hli], a ; frame
 	ld [hli], a
+	ld [hli], a ; frameset offset
+	ld [hli], a ; duration
+	ld a, HIGH(Frameset_6d18)
 	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld a, HIGH(FrameData_6d18)
-	ld [hli], a
-	ld a, LOW(FrameData_6d18)
+	ld a, LOW(Frameset_6d18)
 	ld [hl], a
-	call Func_145a
+	call UpdateObjAnim
 
 	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
 	ldh [rLCDC], a
 	xor a
-	ld [wcee5], a
-	ld [wc08f], a
+	ld [wIntroSeqTimer], a
+	ld [wGlobalCounter], a
 	ld hl, wSubSequence
 	inc [hl]
 	ret
 ; 0x41cf
 
-Func_41cf: ; 41cf (1:41cf)
+; phase 1 of Intro sequence has Wario's plane
+; fly to the center of the screen from the right
+; then exiting after hovering for a while
+IntroSequencePhase1: ; 41cf (1:41cf)
 	ld a, [wceef]
 	and a
-	jp nz, Func_44f0
-	call Func_4e5e
+	jp nz, StartTitleScreen
+	call PlayIntroSFXPlane_Close
 	call Func_4d45
 
-	ld a, [wUnkUnknown]
+	ld a, [wWarioPlaneState]
 	dec a
-	jr z, .asm_420a ; 1
+	jr z, .State1 ; 1
 	dec a
-	jr z, .asm_4235 ; 2
+	jr z, .State2 ; 2
 	dec a
-	jr z, .asm_4250 ; 3
+	jr z, .State3 ; 3
 	dec a
-	jr z, .asm_4266 ; 4
+	jr z, .State4 ; 4
 	dec a
-	jp z, .asm_4294 ; 5
+	jp z, .State5 ; 5
 
-	; > 5
-	ld hl, wcee5
+; State0
+; start playing Intro music
+; when timer reaches 180
+; then advance to next state
+	ld hl, wIntroSeqTimer
 	inc [hl]
 	ld a, [hl]
-	cp $b4
-	jp c, Func_42cc
-	ld [hl], $00
+	cp 180
+	jp c, .continue
+	ld [hl], 0 ; reset timer
 	load_music MUSIC_INTRO
-	ld hl, wUnkUnknown
+	ld hl, wWarioPlaneState
 	inc [hl]
-	jp Func_42cc
+	jp .continue
 
-.asm_420a
-	ld hl, wUnkObjXCoord
+.State1
+; move left up to 48 units
+; then set timer to 48 and advance state
+	ld hl, wWarioPlaneXCoord
 	ld a, [hl]
-	cp $48
-	jr nc, .asm_4224
-	cp $38
-	jr nc, .asm_4225
-	cp $30
-	jr z, .asm_4229
-	ld a, [wc08f]
-	and %00000011
-	jp nz, Func_42cc
-	jr .asm_4225
-
-.asm_4224
+	cp 72
+	jr nc, .move_left_quick
+	cp 56
+	jr nc, .move_left_slow
+	cp 48
+	jr z, .go_to_state2
+	; only move every 4 ticks
+	ld a, [wGlobalCounter]
+	and %11
+	jp nz, .continue
+	jr .move_left_slow
+.move_left_quick
 	dec [hl]
-.asm_4225
+.move_left_slow
 	dec [hl]
-	jp Func_42cc
+	jp .continue
 
-.asm_4229
-	ld a, $30
-	ld [wcee5], a
-	ld hl, wUnkUnknown
+.go_to_state2
+	ld a, 48
+	ld [wIntroSeqTimer], a
+	ld hl, wWarioPlaneState
 	inc [hl]
-	jp Func_42cc
+	jp .continue
 
-.asm_4235
-	ld hl, wcee5
+.State2
+; wait for timer then change frameset and advance state
+	ld hl, wIntroSeqTimer
 	dec [hl]
-	jp nz, Func_42cc
-	ld [hl], $03
-	ld hl, wUnkObjUnknown2
+	jp nz, .continue
+	ld [hl], 3
+	ld hl, wWarioPlaneFramesetOffset
 	xor a
 	ld [hli], a
+	ld [hli], a ; duration
+	ld a, HIGH(Frameset_71a7)
 	ld [hli], a
-	ld a, HIGH(FrameData_71a7)
-	ld [hli], a
-	ld a, LOW(FrameData_71a7)
+	ld a, LOW(Frameset_71a7)
 	ld [hl], a
-	ld hl, wUnkUnknown
+	ld hl, wWarioPlaneState
 	inc [hl]
-	jr Func_42cc
+	jr .continue
 
-.asm_4250
-	ld a, [wc08f]
-	and $07
-	jr nz, Func_42cc
-	ld hl, wUnk
+.State3
+; move 1 unit down every 8 ticks up to 70
+; then go to state 4
+	ld a, [wGlobalCounter]
+	and %111
+	jr nz, .continue
+	ld hl, wWarioPlaneYCoord
 	inc [hl]
 	ld a, [hl]
-	cp $46
-	jr nz, Func_42cc
-	ld hl, wUnkUnknown
+	cp 70
+	jr nz, .continue
+	ld hl, wWarioPlaneState
 	inc [hl]
-	jr Func_42cc
+	jr .continue
 
-.asm_4266
-	ld a, [wc08f]
-	and $07
-	jr nz, Func_42cc
-	ld hl, wUnk
+.State4
+; move 1 unit up every 8 ticks up to 64
+; then go to state 3
+; if timer reaches 0, then advance to state 5
+	ld a, [wGlobalCounter]
+	and %111
+	jr nz, .continue
+	ld hl, wWarioPlane
 	dec [hl]
 	ld a, [hl]
-	cp $40
-	jr nz, Func_42cc
-	ld hl, wcee5
+	cp 64
+	jr nz, .continue
+	ld hl, wIntroSeqTimer
 	dec [hl]
-	jr z, .asm_4282
-	ld hl, wUnkUnknown
+	jr z, .go_to_state5
+	ld hl, wWarioPlaneState
 	dec [hl]
-	jr Func_42cc
+	jr .continue
 
-.asm_4282
-	ld hl, wUnkObjUnknown2
+.go_to_state5
+	ld hl, wWarioPlaneFramesetOffset
 	xor a
 	ld [hli], a
+	ld [hli], a ; duration
+	ld a, HIGH(Frameset_712c)
 	ld [hli], a
-	ld a, $71
-	ld [hli], a
-	ld a, $2c
+	ld a, LOW(Frameset_712c)
 	ld [hl], a
-	ld hl, wUnkUnknown
+	ld hl, wWarioPlaneState
 	inc [hl]
-	jr Func_42cc
+	jr .continue
 
-.asm_4294
-	ld hl, wUnkObjXCoord
+.State5
+; move to the right and then
+; set to new coordinates when off the screen
+	ld hl, wWarioPlaneXCoord
 	ld a, [hl]
-	cp $c0
-	jr z, .asm_42aa
-	cp $38
-	jr nc, .asm_42a7
-	ld a, [wc08f]
-	and %00000011
-	jr nz, Func_42cc
-.asm_42a7
+	cp 192
+	jr z, .skip_move_right
+	; move 1 unit if x >= 56
+	cp 56
+	jr nc, .move_right
+	; else move every 4 ticks
+	ld a, [wGlobalCounter]
+	and %11
+	jr nz, .continue
+.move_right
 	inc [hl]
-	jr Func_42cc
+	jr .continue
 
-.asm_42aa
-	ld hl, wUnk
-	ld a, $10
+.skip_move_right
+	; set plane coordinate on top of screen
+	ld hl, wWarioPlaneYCoord
+	ld a, 16
 	ld [hli], a
-	ld a, $c0
+	ld a, 192
 	ld [hli], a
 	xor a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	; fallthrough
-
-Func_42b8: ; 42b8 (1:42b8)
-	ld a, $71
+	ld a, HIGH(Frameset_713d)
 	ld [hli], a
-	ld a, $3d
+	ld a, LOW((Frameset_713d))
 	ld [hli], a
 	xor a
-	ld [hl], a
-	ld [w3d522], a
-	ld a, $1c
-	ld [wcee5], a
+	ld [hl], a ; state
+	ld [wIntroSeqSFXTimer], a
+	ld a, 28
+	ld [wIntroSeqTimer], a
 	ld hl, wSubSequence
 	inc [hl]
 	; fallthrough
 
-Func_42cc: ; 42cc (1:42cc)
-	call Func_4cbb
-	; fallthrough
-
-Func_42cf: ; 42cf (1:42cf)
-	ld hl, wUnkObjEnd - 1
-	call Func_145a
-	ld hl, wUnk
+.continue
+	call ScrollIntroBackgroundLayers
+	ld hl, wWarioPlaneEnd - 1
+	call UpdateObjAnim
+	ld hl, wWarioPlane
 	call Func_4b93
 	ld hl, wObj3
 	call Func_4b93
 	ld hl, wObj4
 	call Func_4b93
 	call ClearVirtualOAM
-	jp ScrollIntroBackground
+	jp DrawIntroBackgroundLayers
 ; 0x42ed
 
-Func_42ed: ; 42ed (1:42ed)
+; phase 2 of Intro sequence, where Wario's plane
+; comes into the centre while far away from the foreground
+IntroSequencePhase2: ; 42ed (1:42ed)
 	call Func_4d45
-	call Func_4eb1
-	ld a, [wUnkUnknown]
+	call PlayIntroSFXPlane_Far
+
+	ld a, [wWarioPlaneState]
 	dec a
-	jr z, .asm_4336
+	jr z, .State1
 	dec a
-	jr z, .asm_4357
-	ld hl, wcee5
+	jr z, .State2
+
+; State0
+; wait for timer, then slowly move plane towards centre
+; when reaches the centre, advance to next state
+	ld hl, wIntroSeqTimer
 	ld a, [hl]
 	and a
-	jr z, .asm_4307
+	jr z, .move_to_centre
 	dec [hl]
-	jp .asm_4394
+	jp .continue
 
-.asm_4307
-	ld hl, wUnkObjXCoord
+.move_to_centre
+	ld hl, wWarioPlaneXCoord
 	ld a, [hl]
-	cp $40
-	jr z, .asm_432b
-	cp $48
-	jr nc, .asm_431d
-	ld a, [wc08f]
-	and %00000011
-	jp nz, .asm_4394
-	jr .asm_4325
-
-.asm_431d
-	ld a, [wc08f]
-	and $01
-	jp nz, .asm_4394
-.asm_4325
-	ld hl, wUnkObjXCoord
+	cp 64
+	jr z, .go_to_state1
+	cp 72
+	jr nc, .move_left_slow
+	; move every 4 ticks
+	ld a, [wGlobalCounter]
+	and %11
+	jp nz, .continue
+	jr .move_left
+.move_left_slow
+	; move every 2 ticks
+	ld a, [wGlobalCounter]
+	and %1
+	jp nz, .continue
+.move_left
+	ld hl, wWarioPlaneXCoord
 	dec [hl]
-	jr .asm_4394
+	jr .continue
 
-.asm_432b
-	ld a, $30
-	ld [wcee5], a
-	ld hl, wUnkUnknown
+.go_to_state1
+	ld a, 48
+	ld [wIntroSeqTimer], a
+	ld hl, wWarioPlaneState
 	inc [hl]
-	jr .asm_4394
+	jr .continue
 
-.asm_4336
-	ld hl, wcee5
+.State1
+; wait for timer, then change frameset and advance state
+	ld hl, wIntroSeqTimer
 	dec [hl]
-	jr nz, .asm_4394
-	ld hl, wUnkObjUnknown2
+	jr nz, .continue
+	ld hl, wWarioPlaneFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, $71
+	ld a, HIGH(Frameset_7144)
 	ld [hli], a
-	ld a, $44
+	ld a, LOW(Frameset_7144)
 	ld [hli], a
 	xor a
-	ld [w3d522], a
-	ld a, $e0
-	ld [wcee5], a
-	ld hl, wUnkUnknown
+	ld [wIntroSeqSFXTimer], a
+	ld a, 224
+	ld [wIntroSeqTimer], a
+	ld hl, wWarioPlaneState
 	inc [hl]
-	jr .asm_4394
+	jr .continue
 
-.asm_4357
-	ld a, [wUnkObjUnknown2]
+.State2
+; plays plane exploding animation
+	ld a, [wWarioPlaneFramesetOffset]
 	cp $18
-	jr nz, .asm_436c
-	ld a, [wUnkObjUnknown3]
+	jr nz, .skip_sfx
+	ld a, [wWarioPlaneDuration]
 	and a
-	jr nz, .asm_436c
-	load_sfx SFX_23
-.asm_436c
-	ld hl, wcee5
+	jr nz, .skip_sfx
+	load_sfx SFX_023
+.skip_sfx
+
+	ld hl, wIntroSeqTimer
 	dec [hl]
-	jr nz, .asm_4394
-	load_sfx SFX_F9
-	ld hl, wUnkObjUnknown2
+	jr nz, .continue
+
+	load_sfx SFX_PLANE_EXPLOSION
+	ld hl, wWarioPlaneFramesetOffset
 	xor a
 	ld [hli], a
+	ld [hli], a ; duration
+	ld a, HIGH(Frameset_7165)
 	ld [hli], a
-	ld a, $71
-	ld [hli], a
-	ld a, $65
+	ld a, LOW(Frameset_7165)
 	ld [hli], a
 	xor a
-	ld [hl], a
-	ld [w3d522], a
-	ld a, $30
-	ld [wcee5], a
+	ld [hl], a ; state
+	ld [wIntroSeqSFXTimer], a
+	ld a, 48
+	ld [wIntroSeqTimer], a
 	ld hl, wSubSequence
 	inc [hl]
-.asm_4394
-	call Func_4cbb
-	ld hl, wUnkObjEnd - 1
-	call Func_145a
-	ld hl, wObj3
-	; fallthrough
 
-Func_43a0: ; 43a0 (1:43a0)
+.continue
+	call ScrollIntroBackgroundLayers
+	ld hl, wWarioPlaneEnd - 1
+	call UpdateObjAnim
+	ld hl, wObj3
 	call Func_4b93
-	ld hl, wUnk
+	ld hl, wWarioPlane
 	call Func_4b93
 	ld hl, wObj4
 	call Func_4b93
 	call ClearVirtualOAM
-	jp ScrollIntroBackground
+	jp DrawIntroBackgroundLayers
 ; 0x43b5
 
-Func_43b5: ; 43b5 (1:43b5)
+; phase 3 of the Intro sequence where Wario's plane
+; starts wobbling and then explodes, making it nosedive
+IntroSequencePhase3: ; 43b5 (1:43b5)
 	call Func_4d45
-	ld a, [wUnkUnknown]
-	dec a
-	jr z, Func_43e7
-	dec a
-	jr z, Func_440c
-	dec a
-	jr z, Func_442f
-	dec a
-	jp z, Func_445a
-	; fallthrough
 
-Func_43c8: ; 43c8 (1:43c8)
-	ld a, [w3d520]
+	ld a, [wWarioPlaneState]
+	dec a
+	jr z, .State1
+	dec a
+	jr z, .State2
+	dec a
+	jr z, .State3
+	dec a
+	jp z, .State4
+
+; State0
+; waits for the animation of the plane to end
+; then advances to the next state
+	ld a, [wPlaneAnimationEnded]
 	and a
-	jp z, Func_4497
-	ld a, $02
-	ldh [hSFXID + 0], a
-	ld a, $19
-	ldh [hSFXID + 1], a
-	ld hl, wUnkObjUnknown2
+	jp z, .continue
+	load_sfx SFX_119
+	ld hl, wWarioPlaneFramesetOffset
 	xor a
 	ld [hli], a
+	ld [hli], a ; duration
+	ld a, HIGH(Frameset_7172)
 	ld [hli], a
-	ld a, $71
+	ld a, LOW(Frameset_7172)
 	ld [hli], a
-	ld a, $72
-	ld [hli], a
-	inc [hl]
-	jp Func_4497
-; 0x43e7
+	inc [hl] ; next state
+	jp .continue
 
-Func_43e7: ; 43e7 (1:43e7)
-	ld a, [wc08f]
-	and %00000011
-	jr nz, .asm_43f2
-	ld hl, wUnkObjXCoord
+.State1
+; moves plane right every 4 ticks
+; moves plane down 1 unit
+; once y offset reaches 16, set new frameset and advance state
+	ld a, [wGlobalCounter]
+	and %11
+	jr nz, .skip_x1
+	ld hl, wWarioPlaneXCoord
 	inc [hl]
-.asm_43f2
-	ld hl, wUnk
+.skip_x1
+	ld hl, wWarioPlaneYCoord
 	inc [hl]
 	ld a, [hl]
-	cp $10
-	jp c, Func_4497
-	ld hl, wUnkObjUnknown2
+	cp 16
+	jp c, .continue
+	ld hl, wWarioPlaneFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, $71
+	ld a, HIGH(Frameset_717b)
 	ld [hli], a
-	ld a, $7b
+	ld a, LOW(Frameset_717b)
 	ld [hli], a
-	inc [hl]
-	jp Func_4497
-; 0x440c
+	inc [hl] ; next state
+	jp .continue
 
-Func_440c: ; 440c (1:440c)
-	ld a, [wc08f]
-	and %00000011
-	jr nz, .asm_4417
-	ld hl, wUnkObjXCoord
+.State2
+; moves plane right every 4 ticks
+; moves plane down 1 unit
+; once y offset reaches 48, set new frameset and advance state
+	ld a, [wGlobalCounter]
+	and %11
+	jr nz, .skip_x2
+	ld hl, wWarioPlaneXCoord
 	inc [hl]
-
-.asm_4417
-	ld hl, wUnk
+.skip_x2
+	ld hl, wWarioPlaneYCoord
 	inc [hl]
 	ld a, [hl]
-	cp $30
-	jr c, Func_4497
-	ld hl, wUnkObjUnknown2
+	cp 48
+	jr c, .continue
+	ld hl, wWarioPlaneFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, $71
+	ld a, HIGH(Frameset_7184)
 	ld [hli], a
-	ld a, $84
+	ld a, LOW(Frameset_7184)
 	ld [hli], a
-	inc [hl]
-	jr Func_4497
+	inc [hl] ; next state
+	jr .continue
 
-Func_442f: ; 442f (1:442f)
-	ld a, [wc08f]
-	and %00000011
-	jr nz, .asm_443a
-	ld hl, wUnkObjXCoord
+.State3
+; moves plane right every 4 ticks
+; moves plane down 1 unit
+; once y offset reaches 112, set new frameset and advance state
+	ld a, [wGlobalCounter]
+	and %11
+	jr nz, .skip_x3
+	ld hl, wWarioPlaneXCoord
 	inc [hl]
-.asm_443a
-	ld hl, wUnk
+.skip_x3
+	ld hl, wWarioPlaneYCoord
 	inc [hl]
 	ld a, [hl]
-	cp $70
-	jr c, Func_4497
-	load_sfx SFX_61
-	ld hl, wUnkObjUnknown2
+	cp 112
+	jr c, .continue
+	load_sfx SFX_061
+	ld hl, wWarioPlaneFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, $71
+	ld a, HIGH(Frameset_718d)
 	ld [hli], a
-	ld a, $8d
+	ld a, LOW(Frameset_718d)
 	ld [hli], a
-	inc [hl]
-	jr Func_4497
+	inc [hl] ; next state
+	jr .continue
 
-Func_445a: ; 445a (1:445a)
-	ld a, [wc088]
-	cp $e0
-	jr z, .asm_4466
-	ld hl, wUnkObjXCoord
+.State4
+	ld a, [wIntroBGXOffsetNear]
+	cp 224
+	jr z, .skip_x4
+	; make plane x offset follow the near layer
+	ld hl, wWarioPlaneXCoord
 	inc [hl]
 	inc [hl]
-.asm_4466
-	ld a, [w3d520]
+.skip_x4
+	ld a, [wPlaneAnimationEnded]
 	and a
-	jr z, Func_449c
-	ld hl, wUnkObjUnknown2
+	jr z, .finish_scroll
+
+	; animation ended, load new frameset
+	; and play the Title Screen music
+	ld hl, wWarioPlaneFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, $71
+	ld a, HIGH(Frameset_7198)
 	ld [hli], a
-	ld a, $98
+	ld a, LOW(Frameset_7198)
 	ld [hli], a
 	xor a
-	ld [hld], a
-	ld [wcee5], a
+	ld [hld], a ; state
+	ld [wIntroSeqTimer], a
 
 	ld hl, Pals_5002
 	call StorePalsInTempPals1
@@ -719,126 +753,143 @@ Func_445a: ; 445a (1:445a)
 	load_music MUSIC_TITLE_SCREEN
 	ld hl, wSubSequence
 	inc [hl]
-	jr Func_449c
+	jr .finish_scroll
 
-Func_4497: ; 4497 (1:4497)
-	call Func_4cbb
-	jr Func_449f
+.continue
+	call ScrollIntroBackgroundLayers
+	jr .update_anim
 
-Func_449c: ; 449c (1:449c)
-	call Func_4cd0
-	; fallthrough
+.finish_scroll
+	call FinishIntroBackgroundScroll
 
-Func_449f: ; 449f (1:449f)
-	ld hl, wUnkObjEnd - 1
-	call Func_145a
-	ld a, [w3d514]
-	ld [w3d520], a
+.update_anim
+	ld hl, wWarioPlaneEnd - 1
+	call UpdateObjAnim
+	ld a, [wObjAnimWasReset]
+	ld [wPlaneAnimationEnded], a
 	ld hl, wObj3
 	call Func_4b93
-	ld hl, wUnk
+	ld hl, wWarioPlane
 	call Func_4b93
 	ld hl, wObj4
 	call Func_4b93
 	call ClearVirtualOAM
-	jp ScrollIntroBackground
+	jp DrawIntroBackgroundLayers
 ; 0x44c3
 
-Func_44c3: ; 44c3 (1:44c3)
-	ld hl, wUnkObjEnd - 1
-	call Func_145a
-	ld hl, wUnk
+EndIntroSequence: ; 44c3 (1:44c3)
+	ld hl, wWarioPlaneEnd - 1
+	call UpdateObjAnim
+	ld hl, wWarioPlane
 	call Func_4b93
 	call ClearVirtualOAM
+
 	ld a, [wceef]
 	and a
-	jr nz, Func_44f0
-	ld hl, wcee5
+	jr nz, StartTitleScreen
+	ld hl, wIntroSeqTimer
 	ld a, [hl]
-	cp $78
+	cp 120
 	jr nc, .asm_44e2
 	inc [hl]
 	ret
+
 .asm_44e2
-	ld a, [wc08f]
-	and %00000011
-	call z, LightenBGToPal
+	ld a, [wGlobalCounter]
+	and %11
+	call z, FadeInTitle
+	; continue when subsequence is advanced
+	; after the title has faded in completely
 	ld a, [wSubSequence]
 	cp $07
 	ret nz
+;	fallthrough
 
-Func_44f0: ; 44f0 (1:44f0)
+; loads TitleScreen music
+; then starts demo timer
+StartTitleScreen: ; 44f0 (1:44f0)
 	load_music MUSIC_TITLE_SCREEN
-	ld a, $08
-	ld [wcee6], a
-	ld a, $44
-	ld [wcee5], a
+	ld a, 8
+	ld [wIntroSeqTimer + 1], a
+	ld a, 68
+	ld [wIntroSeqTimer], a
 	ld hl, wSubSequence
 	ld [hl], $07
 	ret
 ; 0x4508
 
-Func_4508: ; 4508 (1:4508)
-	ld hl, $d51c
-	call Func_145a
-	ld hl, wUnk
+StartMenu: ; 4508 (1:4508)
+	ld hl, wWarioPlaneEnd - 1
+	call UpdateObjAnim
+	ld hl, wWarioPlane
 	call Func_4b93
 	ld hl, wObj2
 	call Func_4b73
-	call Func_4bb3
+
+	call HandleStartMenuSelection
+
 	ld hl, wObj0
 	call Func_4b73
+
 	ld a, [wceef]
 	and a
 	jr z, .asm_453e
-	ld a, [wc08f]
-	and $07
+
+	ld a, [wGlobalCounter]
+	and %111
 	jr nz, .asm_4538
-	ld a, [$d52e]
-	xor $03
-	ld [$d52e], a
+	ld a, [wObj1Attributes]
+	xor %11
+	ld [wObj1Attributes], a
 .asm_4538
 	ld hl, wObj1
 	call Func_4b73
+
 .asm_453e
 	call ClearVirtualOAM
-	ld hl, w3d513
+	ld hl, wStartMenuSelection
 	bit 7, [hl]
 	jr nz, .asm_4578
 	ld a, [hl]
 	cp $00
-	jr z, .asm_455c
+	jr z, .demo_timer
 	cp $01
-	jr z, .asm_455c
-	ld a, $08
-	ld [wcee6], a
-	ld a, $44
-	ld [wcee5], a
+	jr z, .demo_timer
+	; start demo timer
+	ld a, 8
+	ld [wIntroSeqTimer + 1], a
+	ld a, 68
+	ld [wIntroSeqTimer], a
 	ret
-.asm_455c
-	ld hl, wcee5
+
+.demo_timer
+	; decrement timer
+	ld hl, wIntroSeqTimer
 	ld a, [hl]
-	sub $01
+	sub 1
 	ld [hli], a
 	ld b, a
 	ld a, [hl]
-	sbc $00
+	sbc 0
 	ld [hl], a
 	or b
-	ret nz
+	ret nz ; return if still not 0
+
+; enter Demo mode
 	xor a
 	ld [hld], a
 	ld [hl], a
 	ld a, [wPowerUpLevel]
-	or $40
+	or %1000000
 	ld [wPowerUpLevel], a
 	jp Func_16d0
+
 .asm_4578
-	ld hl, w3d513
+	ld hl, wStartMenuSelection
 	ld a, [hl]
-	and $0f
+	and $f
 	cp $00
-	jr z, .asm_45d6
+	jr z, .NewGame
 	cp $01
 	jr z, .asm_45ed
 	cp $02
@@ -846,9 +897,9 @@ Func_4508: ; 4508 (1:4508)
 	cp $04
 	jp z, Func_1698
 
-	ld a, $86
+	ld a, 134
 	ld [wObj1YCoord], a
-	ld a, $82
+	ld a, 130
 	ld [wObj0YCoord], a
 
 	ld a, [wca3d]
@@ -856,37 +907,37 @@ Func_4508: ; 4508 (1:4508)
 	jr nz, .asm_45aa
 	ld a, $80
 	ld [wcee4], a
-	ld bc, $6ce9
-	jr .asm_45ad
+	ld bc, Frameset_6ce9
+	jr .got_frameset
 .asm_45aa
-	ld bc, $6d1e
-.asm_45ad
+	ld bc, Frameset_6d1e
+.got_frameset
 	ld a, $01
 	jr .asm_45c5
 .asm_45b1
 	ld a, $81
 	ld [wcee4], a
-	ld a, $90
+	ld a, 144
 	ld [wObj1YCoord], a
-	ld a, $78
+	ld a, 120
 	ld [wObj0YCoord], a
-	ld bc, $6cec
+	ld bc, Frameset_6cec
 	ld a, $03
 .asm_45c5
-	ld [w3d513], a
-	ld hl, $d527
+	ld [wStartMenuSelection], a
+	ld hl, wObj0FramesetOffset
 	xor a
 	ld [hli], a
-	ld [hli], a
-	ld a, b
-	ld [hli], a
-	ld a, c
-	ld [hl], a
-	call Func_145a
+	ld [hli], a ; duration
+	ld a, b     ;
+	ld [hli], a ; frameset ptr
+	ld a, c     ;
+	ld [hl], a  ;
+	call UpdateObjAnim
 	ret
 
-.asm_45d6
-	ld a, $0e
+.NewGame
+	ld a, MAIN_SEQTABLE_LANGUAGE_SELECTION
 	ld [wSequence], a
 	xor a
 	ld [wSubSequence], a
@@ -901,19 +952,19 @@ Func_4508: ; 4508 (1:4508)
 .asm_45ed
 	ld a, [wca3d]
 	bit 1, a
-	jr nz, .asm_4607
+	jr nz, .TimeAttack
 	ld a, [wceef]
 	and $3c
 	jr nz, .asm_45fd
 	jr Func_461e
 .asm_45fd
-	ld a, $02
+	ld a, MAIN_SEQTABLE_02
 	ld [wSequence], a
 	xor a
 	ld [wSubSequence], a
 	ret
 
-.asm_4607
+.TimeAttack
 	call DisableLCD
 	call FillWhiteBGPal
 	call FillWhiteOBPal
@@ -929,7 +980,7 @@ Func_4619: ; 4619 (1:4619)
 	; fallthrough
 
 Func_461e: ; 461e (1:461e)
-	ld a, $01
+	ld a, MAIN_SEQTABLE_01
 	ld [wSequence], a
 	xor a
 	ld [wSubSequence], a
@@ -943,21 +994,22 @@ Func_4628: ; 4628 (1:4628)
 	ld [wAnimatedTilesFrameCount], a
 	ld [wAnimatedTilesFrame], a
 	xor a
-	ld [$d50d], a
+	ld [w3d50d], a
 	ld hl, wca3b
 	set 7, [hl]
 	jr Func_461e
 ; 0x4640
 
-Func_4640: ; 4640 (1:4640)
+InitTimeAttackDescription: ; 4640 (1:4640)
 	call DisableLCD
 	call FillBGMap0_With7f
 	call ClearWholeVirtualOAM
-	call Func_496b
+	call LoadTimeAttackDescriptionPals
 	call Func_1c4a
-	call Func_4972
-	call Func_49a1
+	call LoadTimeAttackDescriptionTiles
+	call LoadTimeAttackText
 	call VBlank_354
+
 	xor a
 	ld [wTempSCY], a
 	ldh [rSCY], a
@@ -966,14 +1018,14 @@ Func_4640: ; 4640 (1:4640)
 	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
 	ldh [rLCDC], a
 	xor a
-	ld [wcee5], a
+	ld [wIntroSeqTimer], a
 	ld hl, wSubSequence
 	inc [hl]
 	ret
 ; 0x4670
 
-Func_4670: ; 4670 (1:4670)
-	call Func_4d7f
+TimeAttackDescription: ; 4670 (1:4670)
+	call AdjustJapaneseTimeAttackDescriptionWindow
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	ret z
@@ -995,9 +1047,9 @@ Func_4686: ; 4686 (1:4686)
 
 	ld hl, wSequence
 	ld a, [hl]
-	cp $02
+	cp MAIN_SEQTABLE_02
 	ret nz
-	load_sfx SFX_E3
+	load_sfx SFX_0E3
 	call Func_4ae7
 	ld a, [wLevel]
 	cp $ff
@@ -1007,7 +1059,7 @@ Func_4686: ; 4686 (1:4686)
 	ret
 
 .asm_46bd
-	ld a, $0a
+	ld a, MAIN_SEQTABLE_0a
 	ld [wSequence], a
 	ret
 
@@ -1063,10 +1115,10 @@ Func_472a: ; 472a (1:472a)
 ; 0x4732
 
 Func_4732: ; 4732 (1:4732)
-	ld a, [wc08f]
+	ld a, [wGlobalCounter]
 	and $03
 	ret nz
-	call SubSeq_FastFadeToWhite
+	call FastFadeToWhite
 	ret
 ; 0x473c
 
@@ -1087,13 +1139,13 @@ Func_474c: ; 474c (1:474c)
 ; 0x4766
 
 Func_4766: ; 4766 (1:4766)
-	ld hl, wcee5
+	ld hl, wIntroSeqTimer
 	inc [hl]
 	ld a, [hl]
 	cp $64
 	ret c
 	ld [hl], $00
-	ld a, $02
+	ld a, MAIN_SEQTABLE_02
 	ld [wSequence], a
 	ret
 ; 0x4776
@@ -1124,9 +1176,9 @@ Func_47aa: ; 47aa (1:47aa)
 	ld a, [wSubSequence]
 	jumptable
 
-	dw  SubSeq_FastFadeToWhite
+	dw  FastFadeToWhite
 	dw  SubSeq_GBIncompatibleScreen
-	dw  SubSeq_SlowFadeFromWhite
+	dw  SlowFadeFromWhite
 	dw  Func_47fc
 	dw  Func_28d
 	dw  Func_28d
@@ -1148,7 +1200,7 @@ SubSeq_GBIncompatibleScreen: ; 47be (1:47be)
 	ldh [rSCX], a
 	ld [wTempSCY], a
 	ldh [rSCY], a
-	ld a, $87
+	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
 	ldh [rLCDC], a
 	ld hl, wSubSequence
 	inc [hl]
@@ -1181,7 +1233,7 @@ Func_4817: ; 4817 (1:4817)
 	ret
 ; 0x4831
 
-Func_4831: ; 4831 (1:4831)
+LanguageSelectionSequence: ; 4831 (1:4831)
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -1195,10 +1247,10 @@ Func_4831: ; 4831 (1:4831)
 	ld a, [wSubSequence]
 	jumptable
 
-	dw SubSeq_FastFadeToWhite
-	dw Func_4857
-	dw SubSeq_SlowFadeFromWhite
-	dw Func_48c9
+	dw FastFadeToWhite
+	dw InitLanguageSelection
+	dw SlowFadeFromWhite
+	dw HandleLanguageSelectionInput
 	dw Func_28d
 	dw Func_28d
 	dw Func_28d
@@ -1207,14 +1259,14 @@ Func_4831: ; 4831 (1:4831)
 	dw Func_28d
 ; 0x4857
 
-Func_4857: ; 4857 (1:4857)
+InitLanguageSelection: ; 4857 (1:4857)
 	call DisableLCD
 	call FillBGMap0_With7f
 	call ClearWholeVirtualOAM
 
-	farcall Func_1f0919
-	farcall Func_1f08f7
-	farcall Func_1f0926
+	farcall LoadFontPals
+	farcall LoadFontTiles
+	farcall LoadLanguageSelectionText
 	call VBlank_4ddf
 
 	xor a
@@ -1223,67 +1275,71 @@ Func_4857: ; 4857 (1:4857)
 	ld [wTempSCX], a
 	ldh [rSCX], a
 	ld a, $01
-	ld [wca46], a
-	ld hl, wObj0
-	ld a, $46
+	ld [wLanguage], a
+
+	ld hl, wObj0YCoord
+	ld a, 70
 	ld [hli], a
-	ld a, $18
+	ld a, 24
 	ld [hli], a
 	xor a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld a, $76
+	ld a, HIGH(Frameset_76b5)
 	ld [hli], a
-	ld a, $b5
+	ld a, LOW(Frameset_76b5)
 	ld [hl], a
-	call Func_145a
+	call UpdateObjAnim
 	ld hl, wObj0
 	call Func_4e3e
 	call ClearVirtualOAM
-	ld a, $87
+	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
 	ldh [rLCDC], a
+
 	ld hl, wSubSequence
 	inc [hl]
 	ret
 ; 0x48c9
 
-Func_48c9: ; 48c9 (1:48c9)
+HandleLanguageSelectionInput: ; 48c9 (1:48c9)
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jp nz, Func_4619
 	bit D_DOWN_F, a
-	jr nz, .down
+	jr nz, .d_down
 	bit D_UP_F, a
-	jr nz, .up
-	jr .asm_4907
+	jr nz, .d_up
+	jr .update_anim
 
-.down
-	ld a, [wca46]
+.d_down
+	ld a, [wLanguage]
 	and a
-	ret z
-	ld a, $56
+	ret z ; can't go down
+	ld a, 86
 	ld [wObj0YCoord], a
 	xor a
-	jr .asm_48f7
+	jr .got_language
 
-.up
-	ld a, [wca46]
+.d_up
+	ld a, [wLanguage]
 	dec a
-	ret z
+	ret z ; can't go up
 	ld hl, wObj0
-	ld a, $46
+	ld a, 70
 	ld [wObj0YCoord], a
 	ld a, $01
-.asm_48f7
-	ld [wca46], a
+
+.got_language
+	ld [wLanguage], a
 	add $80
 	ld [wcee4], a
-	load_sfx SFX_E2
-.asm_4907
+	load_sfx SFX_0E2
+
+.update_anim
 	ld hl, wObj0End - 1
-	call Func_145a
+	call UpdateObjAnim
 	ld hl, wObj0
 	call Func_4e3e
 	call ClearVirtualOAM
@@ -1338,56 +1394,56 @@ LoadTitleScreenTileMap: ; 4951 (1:4951)
 	ret
 ; 0x496b
 
-Func_496b: ; 496b (1:496b)
+LoadTimeAttackDescriptionPals: ; 496b (1:496b)
 	ld hl, Pal_71b0
 	call StorePalsInTempPals1
 	ret
 ; 0x4972
 
-Func_4972: ; 4972 (1:4972)
+LoadTimeAttackDescriptionTiles: ; 4972 (1:4972)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	farcall Func_1f08f7
+	farcall LoadFontTiles
 
 	xor a ; VRAM0
 	ldh [rVBK], a
-	ld hl, Data_b0f80
+	ld hl, UnknownTiles1
 	ld de, v0Tiles2
 	ld bc, $800
-	ld a, BANK(Data_b0f80)
+	ld a, BANK(UnknownTiles1)
 	ldh [hCallFuncBank], a
-	call_hram CopyHLToDE_BC ; unnecessary hram call
+	call_hram CopyHLToDE_BC
 	ret
 ; 0x49a1
 
-Func_49a1: ; 49a1 (1:49a1)
-	ld a, [wca46]
+LoadTimeAttackText: ; 49a1 (1:49a1)
+	ld a, [wLanguage]
 	and a
-	jr nz, .asm_49c1
+	jr nz, .japanese
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, $7316
+	ld hl, TimeAttack2ENTextMap
 	ld bc, v1BGMap0
 	call Decompress
 
 	xor a ; VRAM0
 	ldh [rVBK], a
-	ld hl, $71f0
+	ld hl, TimeAttack1ENTextMap
 	ld bc, v0BGMap0
 	call Decompress
 	ret
 
-.asm_49c1
+.japanese
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, $74e8
+	ld hl, TimeAttack2JPTextMap
 	ld bc, v1BGMap0
 	call Decompress
 
 	xor a ; VRAM0
 	ldh [rVBK], a
-	ld hl, $73e6
+	ld hl, TimeAttack1JPTextMap
 	ld bc, v0BGMap0
 	call Decompress
 	ret
@@ -1577,15 +1633,19 @@ Func_4ae7: ; 4ae7 (1:4ae7)
 ; 0x4b73
 
 Func_4b73: ; 4b73 (1:4b73)
+	; y coord
 	ld a, [wTempSCY]
 	ld b, a
 	ld a, [hli]
 	add $10
 	sub b
 	ld [wCurSpriteYOffset], a
+
+	; x coord
 	ld a, [hli]
 	add $08
 	ld [wCurSpriteXOffset], a
+
 	ld a, [hli]
 	ld [wCurSpriteFrame], a
 	ld a, [hl]
@@ -1596,15 +1656,19 @@ Func_4b73: ; 4b73 (1:4b73)
 ; 0x4b93
 
 Func_4b93: ; 4b93 (1:4b93)
+	; y coord
 	ld a, [wTempSCY]
 	ld b, a
 	ld a, [hli]
 	add $10
 	sub b
 	ld [wCurSpriteYOffset], a
+
+	; x coord
 	ld a, [hli]
 	add $08
 	ld [wCurSpriteXOffset], a
+
 	ld a, [hli]
 	ld [wCurSpriteFrame], a
 	ld a, [hl]
@@ -1614,88 +1678,90 @@ Func_4b93: ; 4b93 (1:4b93)
 	ret
 ; 0x4bb3
 
-Func_4bb3: ; 4bb3 (1:4bb3)
-	ld a, [w3d513]
+HandleStartMenuSelection: ; 4bb3 (1:4bb3)
+	ld a, [wStartMenuSelection]
 	bit 4, a
-	jp nz, .asm_4c58
+	jp nz, .MoveVertical
 	bit 5, a
-	jp nz, .asm_4c81
+	jp nz, .UpdateAnim
 	bit 6, a
 	jp nz, .asm_4c96
 
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
-	jr nz, .asm_4bdd
+	jr nz, .a_btn
 	bit D_DOWN_F, a
-	jr nz, .asm_4c08
+	jr nz, .d_down
 	bit D_UP_F, a
-	jr nz, .asm_4c15
+	jr nz, .d_up
 	bit D_RIGHT_F, a
-	jr nz, .asm_4c39
+	jr nz, .d_right
 	bit D_LEFT_F, a
-	jr nz, .asm_4c29
+	jr nz, .d_left
 	ret
 
-.asm_4bdd
-	load_sfx SFX_E3
-	ld hl, w3d513
+.a_btn
+	load_sfx SFX_0E3
+	ld hl, wStartMenuSelection
 	ld a, [hl]
-	and $0f
+	and $f
 	cp $03
 	jr z, .asm_4bfa
 	cp $04
 	jr z, .asm_4c01
 	set 6, [hl]
 	xor a
-	ld [$d527], a
+	ld [wObj0FramesetOffset], a
 	ret
-.asm_4bfa
-	ld bc, $6cf2
-	ld a, $23
-	jr .asm_4c47
-.asm_4c01
-	ld bc, $6d05
-	ld a, $24
-	jr .asm_4c47
 
-.asm_4c08
-	ld a, [w3d513]
+.asm_4bfa
+	ld bc, Frameset_6cf2
+	ld a, $23
+	jr .update_obj
+.asm_4c01
+	ld bc, Frameset_6d05
+	ld a, $24
+	jr .update_obj
+
+.d_down
+	ld a, [wStartMenuSelection]
 	cp $01
 	ret nz
 	ld a, $12
-	ld [w3d513], a
+	ld [wStartMenuSelection], a
 	jr .asm_4c20
 
-.asm_4c15
-	ld a, [w3d513]
+.d_up
+	ld a, [wStartMenuSelection]
 	cp $02
 	ret nz
 	ld a, $11
-	ld [w3d513], a
+	ld [wStartMenuSelection], a
 
 .asm_4c20
-	load_sfx SFX_E2
+	load_sfx SFX_0E2
 	ret
 
-.asm_4c29
-	ld a, [w3d513]
+.d_left
+	ld a, [wStartMenuSelection]
 	cp $03
 	ret nz
 	call .asm_4c20
-	ld bc, $6cef
+	ld bc, Frameset_6cef
 	ld a, $04
-	jr .asm_4c47
+	jr .update_obj
 
-.asm_4c39
-	ld a, [w3d513]
+.d_right
+	ld a, [wStartMenuSelection]
 	cp $04
 	ret nz
 	call .asm_4c20
-	ld bc, $6cec
+	ld bc, Frameset_6cec
 	ld a, $03
-.asm_4c47
-	ld [w3d513], a
-	ld hl, $d527
+
+.update_obj
+	ld [wStartMenuSelection], a
+	ld hl, wObj0FramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -1703,53 +1769,57 @@ Func_4bb3: ; 4bb3 (1:4bb3)
 	ld [hli], a
 	ld a, c
 	ld [hl], a
-	call Func_145a
+	call UpdateObjAnim
 	ret
 
-.asm_4c58
-	ld a, [w3d513]
+.MoveVertical
+	ld a, [wStartMenuSelection]
 	cp $12
-	jr z, .asm_4c6e
-	ld hl, wObj0
+	jr z, .move_up
+
+; move down
+	ld hl, wObj0YCoord
 	inc [hl]
 	ld a, [hl]
-	cp $82
+	cp 130
 	ret nz
-	ld a, $86
+	ld a, 134
 	ld [wObj1YCoord], a
-	jr .asm_4c7b
-.asm_4c6e
-	ld hl, wObj0
+	jr .reset_move_vertical_flag
+
+.move_up
+	ld hl, wObj0YCoord
 	dec [hl]
 	ld a, [hl]
-	cp $74
+	cp 116
 	ret nz
-	ld a, $76
+	ld a, 118
 	ld [wObj1YCoord], a
-.asm_4c7b
-	ld hl, w3d513
+
+.reset_move_vertical_flag
+	ld hl, wStartMenuSelection
 	res 4, [hl]
 	ret
 
-.asm_4c81
-	ld hl, $d52a
-	call Func_145a
-	ld a, [w3d514]
+.UpdateAnim
+	ld hl, wObj0End - 1
+	call UpdateObjAnim
+	ld a, [wObjAnimWasReset]
 	and a
 	ret z
 
 .asm_4c8c
-	ld hl, w3d513
+	ld hl, wStartMenuSelection
 	set 7, [hl]
 	xor a
-	ld [$d527], a
+	ld [wObj0FramesetOffset], a
 	ret
 
 .asm_4c96
-	ld a, [wc08f]
-	and $01
+	ld a, [wGlobalCounter]
+	and %1
 	ret nz
-	ld hl, $d527
+	ld hl, wObj0FramesetOffset
 	ld a, [hl]
 	cp $10
 	jr z, .asm_4c8c
@@ -1774,67 +1844,72 @@ Func_4bb3: ; 4bb3 (1:4bb3)
 	ret
 ; 0x4cbb
 
-Func_4cbb: ; 4cbb (1:4cbb)
-	ld a, [wc08f]
-	and %00000011
+; decreases wIntroBGXOffsetFar every 4 ticks
+; decreases wIntroBGXOffsetCentre by 1
+; decreases wIntroBGXOffsetNear by 2
+ScrollIntroBackgroundLayers: ; 4cbb (1:4cbb)
+	ld a, [wGlobalCounter]
+	and %11
 	jr nz, .asm_4cc6
-	ld hl, wc086
+	ld hl, wIntroBGXOffsetFar
 	dec [hl]
 .asm_4cc6
-	ld hl, wc087
+	ld hl, wIntroBGXOffsetCentre
 	dec [hl]
-	ld hl, wc088
+	ld hl, wIntroBGXOffsetNear
 	dec [hl]
 	dec [hl]
 	ret
 ; 0x4cd0
 
-Func_4cd0: ; 4cd0 (1:4cd0)
-	ld a, [wc08f]
-	and %00000011
-	jr nz, .asm_4ce6
-	ld hl, wc086
+; scrolls the intro background layers
+; until they align to the centre
+FinishIntroBackgroundScroll: ; 4cd0 (1:4cd0)
+; only update far layer evert 4 ticks
+	ld a, [wGlobalCounter]
+	and %11
+	jr nz, .centre_layer
+	ld hl, wIntroBGXOffsetFar
 	ld a, [hl]
-	and %00011111
-	jr nz, .asm_4ce5
+	and %11111
+	jr nz, .scroll_far
 	ld a, [wTempSCX]
 	ld [hl], a
-	jr .asm_4ce6
-.asm_4ce5
+	jr .centre_layer
+.scroll_far
 	dec [hl]
 
-.asm_4ce6
-	ld hl, wc087
+.centre_layer
+	ld hl, wIntroBGXOffsetCentre
 	ld a, [hl]
-	and %00011111
-	jr nz, .asm_4cf4
+	and %11111
+	jr nz, .scroll_centre
 	ld a, [wTempSCX]
 	ld [hl], a
-	jr .asm_4cf5
-
-.asm_4cf4
+	jr .far_layer
+.scroll_centre
 	dec [hl]
-.asm_4cf5
-	ld hl, wc088
+
+.far_layer
+	ld hl, wIntroBGXOffsetNear
 	ld a, [hl]
-	cp $e0
+	cp 224
 	jr z, .asm_4cff
-	jr .asm_4d04
-
+	jr .scroll_near
 .asm_4cff
-	ld a, $e0
+	ld a, 224
 	ld [hl], a
-	jr .asm_4d06
-.asm_4d04
+	jr .done
+.scroll_near
 	dec [hl]
 	dec [hl]
-.asm_4d06
+.done
 	ret
 ; 0x4d07
 
 ; pans the background of the intro airplane scene
 ; each horizontal layer scrolls at different speed
-ScrollIntroBackground: ; 4d07 (1:4d07)
+DrawIntroBackgroundLayers: ; 4d07 (1:4d07)
 	ld a, [wceef]
 	and a
 	ret nz
@@ -1844,7 +1919,7 @@ ScrollIntroBackground: ; 4d07 (1:4d07)
 	jr c, .asm_4d0c
 	call WaitVBlank
 
-	ld a, [wc086]
+	ld a, [wIntroBGXOffsetFar]
 	ldh [rSCX], a
 .asm_4d1a
 	ldh a, [rLY]
@@ -1852,7 +1927,7 @@ ScrollIntroBackground: ; 4d07 (1:4d07)
 	jr c, .asm_4d1a
 	call WaitVBlank
 
-	ld a, [wc087]
+	ld a, [wIntroBGXOffsetCentre]
 	ldh [rSCX], a
 .asm_4d28
 	ldh a, [rLY]
@@ -1860,7 +1935,7 @@ ScrollIntroBackground: ; 4d07 (1:4d07)
 	jr c, .asm_4d28
 	call WaitVBlank
 
-	ld a, [wc088]
+	ld a, [wIntroBGXOffsetNear]
 	ldh [rSCX], a
 .asm_4d36
 	ldh a, [rLY]
@@ -1874,46 +1949,48 @@ ScrollIntroBackground: ; 4d07 (1:4d07)
 ; 0x4d45
 
 Func_4d45: ; 4d45 (1:4d45)
-	ld a, [wc08f]
-	and $01
+	ld a, [wGlobalCounter]
+	and %1
 	jr z, .asm_4d66
-	ld hl, wObj4 + $1
+
+	ld hl, wObj4XCoord
 	ld a, [hl]
-	cp $b0
-	jr c, .asm_4d65
+	cp 176
+	jr c, .incr_x1
 	ld a, [wSubSequence]
 	cp $05
 	jr nc, .asm_4d66
 	cp $04
-	jr c, .asm_4d65
-	ld a, [wUnkUnknown]
+	jr c, .incr_x1
+	ld a, [wWarioPlaneState]
 	and a
 	jr nz, .asm_4d66
-.asm_4d65
+.incr_x1
 	inc [hl]
 
 .asm_4d66
 	ld hl, wObj3XCoord
 	ld a, [hl]
-	cp $b0
-	jr c, .asm_4d7d
+	cp 176
+	jr c, .incr_x2
 	ld a, [wSubSequence]
 	cp $05
 	ret nc
 	cp $04
-	jr c, .asm_4d7d
-	ld a, [wUnkUnknown]
+	jr c, .incr_x2
+	ld a, [wWarioPlaneState]
 	and a
 	ret nz
-.asm_4d7d
+.incr_x2
 	inc [hl]
 	ret
 ; 0x4d7f
 
-Func_4d7f: ; 4d7f (1:4d7f)
-	ld a, [wca46]
+AdjustJapaneseTimeAttackDescriptionWindow: ; 4d7f (1:4d7f)
+	ld a, [wLanguage]
 	and a
-	ret nz
+	ret nz ; return if English
+
 .asm_4d84
 	ldh a, [rLY]
 	cp $2f
@@ -2034,51 +2111,52 @@ Func_4e3e: ; 4e3e (1:4e3e)
 	ret
 ; 0x4e5e
 
-Func_4e5e: ; 4e5e (1:4e5e)
-	ld a, [wUnkObjXCoord]
-	cp $a0
-	jr nc, Func_4e99
-	cp $70
-	jr nc, Func_4e81
+PlayIntroSFXPlane_Close: ; 4e5e (1:4e5e)
+	ld a, [wWarioPlaneXCoord]
+	cp 160
+	jr nc, PlayIntroSFXPlane3
+	cp 112
+	jr nc, PlayIntroSFXPlane2
 
-	ld a, [w3d522]
-	sub $01
-	ld [w3d522], a
-	jr nc, .asm_4e80
-	ld a, $0c
-	ld [w3d522], a
-	load_sfx SFX_F6
-.asm_4e80
+; play plane1
+	ld a, [wIntroSeqSFXTimer]
+	sub 1
+	ld [wIntroSeqSFXTimer], a
+	jr nc, .no_sfx
+	ld a, 12
+	ld [wIntroSeqSFXTimer], a
+	load_sfx SFX_PLANE1
+.no_sfx
 	ret
 
-Func_4e81: ; 4e81 (1:4e81)
-	ld a, [w3d522]
-	sub $01
-	ld [w3d522], a
-	jr nc, .asm_4e98
-	ld a, $0c
-	ld [w3d522], a
-	load_sfx SFX_F7
-.asm_4e98
+PlayIntroSFXPlane2: ; 4e81 (1:4e81)
+	ld a, [wIntroSeqSFXTimer]
+	sub 1
+	ld [wIntroSeqSFXTimer], a
+	jr nc, .no_sfx
+	ld a, 12
+	ld [wIntroSeqSFXTimer], a
+	load_sfx SFX_PLANE2
+.no_sfx
 	ret
 
-Func_4e99: ; 4e99 (1:4e99)
-	ld a, [w3d522]
-	sub $01
-	ld [w3d522], a
-	jr nc, .asm_4eb0
-	ld a, $0c
-	ld [w3d522], a
-	load_sfx SFX_F8
-.asm_4eb0
+PlayIntroSFXPlane3: ; 4e99 (1:4e99)
+	ld a, [wIntroSeqSFXTimer]
+	sub 1
+	ld [wIntroSeqSFXTimer], a
+	jr nc, .no_sfx
+	ld a, 12
+	ld [wIntroSeqSFXTimer], a
+	load_sfx SFX_PLANE3
+.no_sfx
 	ret
 ; 0x4eb1
 
-Func_4eb1: ; 4eb1 (1:4eb1)
-	ld a, [wUnkObjXCoord]
-	cp $a0
-	jr nc, Func_4e99
-	jr Func_4e81
+PlayIntroSFXPlane_Far: ; 4eb1 (1:4eb1)
+	ld a, [wWarioPlaneXCoord]
+	cp 160
+	jr nc, PlayIntroSFXPlane3
+	jr PlayIntroSFXPlane2
 ; 0x4eba
 
 Data_4eba: ; 4eba (1:4eba)
@@ -2421,23 +2499,23 @@ Data_6b5f: ; 6b5f (1:6b5f)
 	db $80
 ; 0x6ce6
 
-FrameData_6ce6: ; 6ce6 (1:6ce6)
+Frameset_6ce6: ; 6ce6 (1:6ce6)
 	db 0, 4
 	db $ff
 
-FrameData_6ce9: ; 6ce9 (1:6ce9)
+Frameset_6ce9: ; 6ce9 (1:6ce9)
 	db 1, 4
 	db $ff
 
-FrameData_6cec: ; 6cec (1:6cec)
+Frameset_6cec: ; 6cec (1:6cec)
 	db 2, 4
 	db $ff
 
-FrameData_6cef: ; 6cef (1:6cef)
+Frameset_6cef: ; 6cef (1:6cef)
 	db 3, 4
 	db $ff
 
-FrameData_6cf2: ; 6cf2 (1:6cf2)
+Frameset_6cf2: ; 6cf2 (1:6cf2)
 	db 4, 30
 	db 2,  3
 	db 4,  3
@@ -2449,7 +2527,7 @@ FrameData_6cf2: ; 6cf2 (1:6cf2)
 	db 4,  3
 	db $ff
 
-FrameData_6d05: ; 6d05 (1:6d05)
+Frameset_6d05: ; 6d05 (1:6d05)
 	db 5, 30
 	db 3,  3
 	db 5,  3
@@ -2461,15 +2539,15 @@ FrameData_6d05: ; 6d05 (1:6d05)
 	db 5,  3
 	db $ff
 
-FrameData_6d18: ; 6d18 (1:6d18)
+Frameset_6d18: ; 6d18 (1:6d18)
 	db 6, 4
 	db $ff
 
-FrameData_6d1b: ; 6d1b (1:6d1b)
+Frameset_6d1b: ; 6d1b (1:6d1b)
 	db 7, 4
 	db $ff
 
-FrameData_6d1e: ; 6d1e (1:6d1e)
+Frameset_6d1e: ; 6d1e (1:6d1e)
 	db 8, 4
 	db $ff
 
@@ -2868,7 +2946,7 @@ Data_6d21: ; 6d21 (1:6d21)
 	db $80
 ; 0x712c
 
-FrameData_712c: ; 712c (1:712c)
+Frameset_712c: ; 712c (1:712c)
 	db 0, 2
 	db 1, 2
 	db 2, 2
@@ -2879,13 +2957,13 @@ FrameData_712c: ; 712c (1:712c)
 	db 7, 2
 	db $ff
 
-FrameData_713d: ; 713d (1:713d)
+Frameset_713d: ; 713d (1:713d)
 	db  8, 3
 	db  9, 3
 	db 10, 3
 	db $ff
 
-FrameData_7144: ; 7144 (1:7144)
+Frameset_7144: ; 7144 (1:7144)
 	db  8, 3
 	db  9, 3
 	db 10, 3
@@ -2904,7 +2982,7 @@ FrameData_7144: ; 7144 (1:7144)
 	db 11, 4
 	db $ff
 
-FrameData_7165: ; 7165 (1:7165)
+Frameset_7165: ; 7165 (1:7165)
 	db 13,  6
 	db 14,  6
 	db 13,  6
@@ -2913,28 +2991,28 @@ FrameData_7165: ; 7165 (1:7165)
 	db 16, 40
 	db $ff
 
-FrameData_7172: ; 7172 (1:7172)
+Frameset_7172: ; 7172 (1:7172)
 	db 17, 2
 	db 18, 2
 	db 19, 2
 	db 20, 2
 	db $ff
 
-FrameData_717b: ; 717b (1:717b)
+Frameset_717b: ; 717b (1:717b)
 	db 21, 2
 	db 22, 2
 	db 23, 2
 	db 24, 2
 	db $ff
 
-FrameData_7184: ; 7184 (1:7184)
+Frameset_7184: ; 7184 (1:7184)
 	db 25, 2
 	db 26, 2
 	db 27, 2
 	db 28, 2
 	db $ff
 
-FrameData_718d: ; 718d (1:718d)
+Frameset_718d: ; 718d (1:718d)
 	db 29, 9
 	db 30, 9
 	db 31, 9
@@ -2942,22 +3020,22 @@ FrameData_718d: ; 718d (1:718d)
 	db 33, 9
 	db $ff
 
-FrameData_7198: ; 7198 (1:7198)
+Frameset_7198: ; 7198 (1:7198)
 	db 34, 9
 	db 35, 9
 	db 36, 9
 	db 37, 9
 	db $ff
 
-FrameData_71a1: ; 71a1 (1:71a1)
+Frameset_71a1: ; 71a1 (1:71a1)
 	db 39, 4
 	db $ff
 
-FrameData_71a4: ; 71a4 (1:71a4)
+Frameset_71a4: ; 71a4 (1:71a4)
 	db 40, 4
 	db $ff
 
-FrameData_71a7: ; 71a7 (1:71a7)
+Frameset_71a7: ; 71a7 (1:71a7)
 	db 0, 2
 	db 1, 2
 	db 2, 2
@@ -3007,4 +3085,36 @@ Pal_71b0: ; 71b0 (1:71b0)
 	rgb  0,  0,  0
 ; 0x71f0
 
-	INCROM $71f0, $76d6
+TimeAttack1ENTextMap: ; 71f0 (2c:71f0)
+INCBIN "data/maps/text/time_attack1_en.bin"
+; 0x7316
+
+TimeAttack2ENTextMap: ; 7316 (2c:7316)
+INCBIN "data/maps/text/time_attack2_en.bin"
+; 0x73e7
+
+TimeAttack1JPTextMap: ; 73e7 (2c:73e7)
+INCBIN "data/maps/text/time_attack1_jp.bin"
+; 0x74e8
+
+TimeAttack2JPTextMap: ; 74e8 (2c:74e8)
+INCBIN "data/maps/text/time_attack2_jp.bin"
+; 0x73e7
+
+	INCROM $75c3, $76b5
+
+Frameset_76b5: ; 76b5 (01:76b5)
+	db $00,  8
+	db $05,  8
+	db $06,  8
+	db $07,  8
+	db $08,  8
+	db $09,  8
+	db $0a,  8
+	db $0b,  8
+	db $0c,  8
+	db $0d,  8
+	db $ff
+; 0x76ca
+
+	INCROM $76ca, $76d6

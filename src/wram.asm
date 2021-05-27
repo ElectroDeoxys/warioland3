@@ -24,13 +24,13 @@ wTempSCY:: ; c083
 wTempSCX:: ; c085
 	ds $1
 
-wc086:: ; c086
+; intro background layers x offsets,
+; that all scroll at different speeds
+wIntroBGXOffsetFar:: ; c086
 	ds $1
-
-wc087:: ; c087
+wIntroBGXOffsetCentre:: ; c087
 	ds $1
-
-wc088:: ; c088
+wIntroBGXOffsetNear:: ; c088
 	ds $1
 
 wc089:: ; c089
@@ -51,7 +51,8 @@ wc08d:: ; c08d
 wSRAMBank:: ; c08e
 	ds $1
 
-wc08f:: ; c08f
+; ticks up by one every game loop
+wGlobalCounter:: ; c08f
 	ds $1
 
 wc090:: ; c090
@@ -529,7 +530,9 @@ wca3d:: ; ca3d
 wca42:: ; ca42
 	ds $4
 
-wca46:: ; ca46
+; $0 = Japanese
+; $1 = English
+wLanguage:: ; ca46
 	ds $1
 
 	ds $14
@@ -967,11 +970,11 @@ wcee3:: ; cee3
 wcee4:: ; cee4
 	ds $1
 
-wcee5:: ; cee5
-	ds $1
-
-wcee6:: ; cee6
-	ds $1
+; used in the Intro Sequence
+; to time various events such as
+; when the intro music starts playing, etc
+wIntroSeqTimer:: ; cee5
+	ds $2
 
 wcee7:: ; cee7
 	ds $1
@@ -1245,7 +1248,12 @@ w3d500:: ; d500
 w3d501:: ; d501
 	ds $1
 
-	ds $e
+	ds $b
+
+w3d50d:: ; d50d
+	ds $1
+
+	ds $2
 
 w3d510:: ; d510
 	ds $1
@@ -1255,22 +1263,24 @@ w3d511:: ; d511
 
 	ds $1
 
-w3d513:: ; d513
+wStartMenuSelection:: ; d513
 	ds $1
 
-w3d514:: ; d514
+wObjAnimWasReset:: ; d514
 	ds $1
 
-wUnk:: unk1_struct wUnk ; d515
+wWarioPlane:: wario_plane wWarioPlane ; d515
 
 	ds $2
 
-w3d520:: ; d520
+; whether the animation of the plane
+; in the Intro sequence has ended
+wPlaneAnimationEnded:: ; d520
 	ds $1
 
 	ds $1
 
-w3d522:: ; d522
+wIntroSeqSFXTimer:: ; d522
 	ds $1
 
 wObj0:: obj_struct wObj0 ; d523
