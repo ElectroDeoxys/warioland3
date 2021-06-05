@@ -167,7 +167,7 @@ Init: ; 15e (0:15e)
 
 	ld c, LOW(hTransferVirtualOAM)
 	; should be ld b, (PushOAM.end - PushOAM) + 1
-	ld b, (WriteAToHL_BTimes.end - PushOAM) + 1
+	ld b, (WriteAToHL_BCTimes - PushOAM) + 1
 	ld hl, PushOAM
 .loop_write_oam_func
 	ld a, [hli]
@@ -515,7 +515,6 @@ WriteAToHL_BTimes: ; 420 (0:420)
 	dec b
 	jr nz, WriteAToHL_BTimes
 	ret
-.end
 ; 0x425
 
 ; write a to hl, bc times
@@ -1781,7 +1780,7 @@ Func_c4c: ; c4c (0:c4c)
 	ldh [rSCY], a
 	ld a, [wTempSCX]
 	ldh [rSCX], a
-	ld a, $cc
+	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
 	ld hl, wce6a
 	ld bc, wce01
@@ -1816,7 +1815,7 @@ Func_c4c: ; c4c (0:c4c)
 	ldh [rSCY], a
 	ld a, [wTempSCX]
 	ldh [rSCX], a
-	ld a, $cc
+	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
 	xor a
 	ld [wce00], a
@@ -3014,7 +3013,38 @@ Func_15b0: ; 15b0 (0:15b0)
 	ret
 ; 0x15dc
 
-	INCROM $15dc, $161a
+Func_15dc: ; 15dc (0:15dc)
+	ld a, [wca3d]
+	bit 1, a
+	jr nz, .asm_15ff
+	ld a, [wcee3]
+	cp $f1
+	jr z, .asm_15ff
+	cp $f2
+	jr z, .asm_15ff
+	cp $f3
+	jr z, .asm_15ff
+	ld a, [wca3d]
+	and $01
+	jr z, .asm_15ff
+	ld a, [wca39]
+	dec a
+	jr z, .asm_1610
+.asm_15ff
+	ld a, [wSubSequence]
+	ld [wced5], a
+	ld a, MAIN_SEQTABLE_04
+	ld [wSequence], a
+	ld a, $18
+	ld [wSubSequence], a
+	ret
+.asm_1610
+	ld hl, wSequence
+	ld [hl], MAIN_SEQTABLE_0d
+	xor a
+	ld [wSubSequence], a
+	ret
+; 0x161a
 
 ; loads a music ID to hMusicID, depending on wLevel
 Func_161a: ; 161a (0:161a)
@@ -3598,7 +3628,7 @@ LoadOBPalettesFromWRAM: ; 1a04 (0:1a04)
 ; 0x1a15
 
 ; copies hl to wTempPals1
-StorePalsInTempPals1: ; 1a15 (0:1a15)
+LoadPalsToTempPals1: ; 1a15 (0:1a15)
 	ld de, wTempPals1
 	ld b, 8 palettes
 .loop
@@ -3611,7 +3641,7 @@ StorePalsInTempPals1: ; 1a15 (0:1a15)
 ; 0x1a21
 
 ; copies hl to wTempPals2
-StorePalsInTempPals2: ; 1a21 (0:1a21)
+LoadPalsToTempPals2: ; 1a21 (0:1a21)
 	ld de, wTempPals2
 	ld b, 8 palettes
 .loop
@@ -4161,7 +4191,7 @@ LoadRoomPalettes: ; 2a52 (0:2a52)
 	ld [wc0ac], a
 	ld a, [wc0ac]
 	ldh [hCallFuncBank], a
-	call_hram StorePalsInTempPals1
+	call_hram LoadPalsToTempPals1
 	ret
 ; 0x2a77
 
@@ -4266,8 +4296,7 @@ Func_3000: ; 3000 (0:3000)
 	swap a
 	and $07
 	or $60
-	ld [wROMBank], a
-	ld [$2100], a
+	bankswitch
 	ld l, e
 	ld a, [hli]
 	ld [wCurSpriteYOffset], a
@@ -4319,8 +4348,7 @@ Func_3000: ; 3000 (0:3000)
 	jr .asm_3036
 .asm_3054
 	pop af
-	ld [wROMBank], a
-	ld [$2100], a
+	bankswitch
 	ret
 ; 0x305c
 
@@ -4402,7 +4430,91 @@ Func_312f: ; 312f (0:312f)
 	ret
 ; 0x3173
 
-	INCROM $3173, $3aac
+	INCROM $3173, $3a38
+
+; hl = OAM data
+; b = sprite bank
+; de = pointer to sprite
+Func_3a38: ; 3a38 (0:3a38)
+	ld a, [hli]
+	ld c, $10
+	add c
+	ld [wCurSpriteYOffset], a
+	ld a, [hli]
+	ld c, $08
+	add c
+	ld [wCurSpriteXOffset], a
+	ld a, [hli]
+	ld [wCurSpriteFrame], a
+	ld a, [hl]
+	ld [wCurSpriteAttributes], a
+
+	ld h, d
+	ld l, e
+	ld a, [wROMBank]
+	push af
+	ld a, b
+	bankswitch
+	call TryAddSprite
+	pop af
+	bankswitch
+	ret
+; 0x3a66
+
+Func_3a66: ; 3a66 (0:3a66)
+	xor a
+	ld [w2d024], a
+
+	ld a, [wROMBank]
+	push af
+	ld a, b
+	bankswitch
+	ld a, [hl]
+	sub $1
+	ld [hli], a
+	jr nc, .asm_3a92
+	ld a, [hl]
+	add e
+	ld c, a
+	ld a, d
+	adc 0
+	ld b, a
+	ld a, [bc]
+	cp $ff
+	jr z, .asm_3aa2
+	ld d, a
+	ld a, [hl]
+
+.asm_3a89
+	add $02
+	ld [hld], a
+	inc bc
+	ld a, [bc]
+	dec a
+	ld [hld], a
+	dec l
+	ld [hl], d
+
+.asm_3a92
+	ld a, $f8
+	and l
+	ld l, a
+	ld b, h
+	add $06
+	ld c, a
+	pop af
+	bankswitch
+	ret
+
+.asm_3aa2
+	ld [w2d024], a
+	ld b, d
+	ld c, e
+	ld a, [de]
+	ld d, a
+	xor a
+	jr .asm_3a89
+; 0x3aac
 
 Func_3aac: ; 3aac (0:3aac)
 	ld hl, $d000
@@ -4438,7 +4550,138 @@ Func_3aac: ; 3aac (0:3aac)
 	ret
 ; 0x3ad7
 
-	INCROM $3ad7, $3f00
+	INCROM $3ad7, $3b42
+
+; copies c * $100 bytes from bank b
+; at address hl to de
+CopyFarBytes: ; 3b42 (0:3b42)
+	ld a, [wROMBank]
+	push af
+	ld a, b
+	bankswitch
+	ld b, c
+	ld c, $00
+	call CopyHLToDE_BC
+	pop af
+	bankswitch
+	ret
+; 0x3b5b
+
+LoadFarTiles: ; 3b5b (0:3b5b)
+	ld a, [wROMBank]
+	push af
+	ld a, b
+	bankswitch
+	ld bc, $800
+	ld de, v0Tiles2
+	call CopyHLToDE_BC
+	pop af
+	bankswitch
+	ret
+; 0x3b77
+
+	INCROM $3b77, $3b93
+
+Func_3b93: ; 3b93 (0:3b93)
+	ld [hld], a
+	xor a
+	ld [hld], a
+	ld [hl], a
+	ret
+; 0x3b98
+
+	INCROM $3b98, $3bb8
+
+LoadFarPalsToTempPals1: ; 3bb8 (0:3bb8)
+	ld a, [wROMBank]
+	push af
+	ld a, b
+	bankswitch
+	call LoadPalsToTempPals1
+	pop af
+	bankswitch
+	ret
+; 0x3bce
+
+LoadFarPalsToTempPals2: ; 3bce (0:3bce)
+	ld a, [wROMBank]
+	push af
+	ld a, b
+	bankswitch
+	call LoadPalsToTempPals2
+	pop af
+	bankswitch
+	ret
+; 0x3be4
+
+Func_3be4: ; 3be4 (0:3be4)
+	ld c, [hl]
+	xor a
+	ld [hli], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	inc c
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld l, [hl]
+	ld h, a
+.loop
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	dec b
+	jr nz, .loop
+	ret
+; 0x3c03
+
+	INCROM $3c03, $3c4f
+
+AddOffsetInPointerTable: ; 3c4f (0:3c4f)
+	add a
+	ld e, a
+	ld a, $00
+	adc 0
+	ld d, a
+	add hl, de
+	ret
+; 0x3c58
+
+; outputs in hl the pointer corresponding
+; to the index given in register a
+; from the pointer table given in hl
+GetPointerFromTableHL: ; 3c58 (0:3c58)
+	call AddOffsetInPointerTable
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret
+; 0x3c5f
+
+; same as GetPointerFromTableHL
+; but outputs pointer to de
+GetPointerFromTableDE: ; 3c5f (0:3c5f)
+	call AddOffsetInPointerTable
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
+	ret
+; 0x3c66
+
+	INCROM $3c66, $3f00
 
 DoAudioFunc_InitAudio: ; 3f00 (0:3f00)
 	call SwitchBankC

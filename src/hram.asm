@@ -45,6 +45,7 @@ hffb0:: ; ffb0
 hMusicID:: ; ffb1
 	ds $2
 
+hffb3:: ; ffb3
 	ds $2
 
 hSFXID:: ; ffb5

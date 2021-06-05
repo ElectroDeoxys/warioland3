@@ -92,9 +92,9 @@ ROMX $26
 ROMX $27
 	"Bank 27"
 ROMX $28
-	"Bank 28"
+	"Cutscenes Gfx 1"
 ROMX $29
-	"Bank 29"
+	"Cutscenes Gfx 2"
 ROMX $2a
 	"Bank 2A"
 ROMX $2b

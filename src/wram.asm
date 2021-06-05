@@ -1103,12 +1103,117 @@ w1d14a:: ; d14a
 SECTION "WRAM2", WRAMX
 
 w2d000:: ; d000
-	ds $f
+	ds $1
+
+	ds $a
+
+w2d00b:: ; d00b
+	ds $2
+
+w2d00d:: ; d00d
+	ds $1
+
+w2d00e:: ; d00e
+	ds $1
 
 w2d00f:: ; d00f
 	ds $1
 
-	ds $e0
+	ds $2
+
+w2d012:: ; d012
+	ds $1
+
+w2d013:: ; d013
+	ds $1
+
+w2d014:: ; d014
+	ds $1
+
+	ds $1
+
+w2d016:: ; d016
+	ds $1
+
+w2d017:: ; d017
+	ds $1
+
+	ds $3
+
+w2d01b:: ; d01b
+	ds $1
+
+	ds $1
+
+w2d01d:: ; d01d
+	ds $1
+
+w2d01e:: ; d01e
+	ds $1
+
+	ds $3
+
+w2d022:: ; d022
+	ds $1
+
+w2d023:: ; d023
+	ds $1
+
+w2d024:: ; d024
+	ds $1
+
+w2d025:: ; d025
+	ds $1
+
+w2d026:: ; d026
+	ds $1
+
+w2d027:: ; d027
+	ds $1
+
+w2d028:: ; d028
+	ds $1
+
+	ds $27
+
+w2d050:: ; d050
+	ds $1
+
+	ds $6
+
+w2d057:: ; d057
+	ds $1
+
+	ds $8
+
+w2d060:: ; d060
+	ds $1
+
+	ds $18
+
+w2d079:: ; d079
+	ds $1
+
+	ds $36
+
+wHDMA:: ; d0b0
+	ds $5
+
+	ds $1b
+
+w2d0d0:: ; d0d0
+	ds $5
+
+w2d0d5:: ; d5d5
+	ds $1
+
+w2d0d6:: ; d6d6
+	ds $5
+
+w2d0db:: ; d6db
+	ds $1
+
+	ds $14
 
 wLevelTreasureIDs::
 wLevelTreasure0ID:: ds $1 ; d0f0
@@ -1121,10 +1226,109 @@ wLevelTreasure1Unk:: ds $1 ; d0f5
 wLevelTreasure2Unk:: ds $1 ; d0f6
 wLevelTreasure3Unk:: ds $1 ; d0f7
 
-	ds $b08
+	ds $48
+
+w2d140:: ; d140
+	ds $1
+
+	ds $3
+
+w2d144:: ; d144
+	ds $2
+
+w2d146:: ; d146
+	ds $1
+
+	ds $1
+
+w2d148:: ; d148
+	ds $1
+
+w2d149:: ; d149
+	ds $1
+
+w2d14a:: ; d14a
+	ds $1
+
+w2d14b:: ; d14b
+	ds $1
+
+w2d14c:: ; d14c
+	ds $1
+
+	ds $b
+
+w2d158:: ; d158
+	ds $1
+
+	ds $27
+
+w2d180:: ; d180
+	ds $4
+
+w2d184:: ; d184
+	ds $4
+
+w2d188:: ; d188
+	ds $1
+
+	ds $7
+
+w2d190:: ; d190
+	ds $2
+
+	ds $2
+
+w2d194:: ; d194
+	ds $2
+
+w2d196:: ; d196
+	ds $2
+
+w2d198:: ; d198
+	ds $2
+
+	ds $2
+
+w2d19c:: ; d19c
+	ds $2
+
+w2d19e:: ; d19e
+	ds $2
+
+w2d1a0:: ; d1a0
+	ds $2
+
+	ds $2
+
+w2d1a4:: ; d1a4
+	ds $2
+
+w2d1a6:: ; d1a6
+	ds $2
+
+	ds $658
+
+w2d800:: ; d800
+	ds $1
+
+w2d801:: ; d801
+	ds $1
+
+	ds $286
+
+w2da88:: ; da88
+	ds $1
+
+	ds $f7
+
+w2db80:: ; db80
+	ds $1
+
+	ds $7f
 
 wTreasureTiles:: ; dc00
-	ds 16 palettes
+	ds 16 tiles
 
 SECTION "Audio RAM", WRAMX
 

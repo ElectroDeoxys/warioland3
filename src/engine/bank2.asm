@@ -277,8 +277,8 @@ Func_80aa: ; 80aa (2:40aa)
 	ld a, [wLevelEndScreen]
 	cp LEVEL_END_GAME_OVER
 	jr z, .game_over
-	cp LEVEL_END_PROLOGUE
-	jr z, .prologue
+	cp LEVEL_END_EPILOGUE
+	jr z, .epilogue
 
 	ld hl, wSequence
 	inc [hl]
@@ -296,7 +296,7 @@ Func_80aa: ; 80aa (2:40aa)
 	ld [wcee3], a
 	jr .asm_82ba
 
-.prologue
+.epilogue
 	ld a, [wca39]
 	dec a
 	jr z, .asm_82b1

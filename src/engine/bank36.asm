@@ -74,16 +74,16 @@ Pals_db040: ; db040 (36:7040)
 ; 0xdb068
 
 HiddenFigure1Map:: ; db068 (36:7068)
-INCBIN "data/maps/hidden_figure1.bin"
+INCBIN "gfx/bgmaps/hidden_figure1.bin"
 	
 HiddenFigure2Map:: ; db193 (36:7193)
-INCBIN "data/maps/hidden_figure2.bin"
+INCBIN "gfx/bgmaps/hidden_figure2.bin"
 
 HiddenFigure3Map:: ; db23b (36:723b)
-INCBIN "data/maps/hidden_figure3.bin"
+INCBIN "gfx/bgmaps/hidden_figure3.bin"
 	
 HiddenFigure4Map:: ; db268 (36:7268)
-INCBIN "data/maps/hidden_figure4.bin"
+INCBIN "gfx/bgmaps/hidden_figure4.bin"
 
 Func_db277: ; db277 (36:7277)
 	ld a, [wSubSequence]
@@ -117,7 +117,7 @@ LoadHiddenFigureGfx: ; db41e (36:741e)
 
 .LoadPals
 	ld hl, Pals_db000
-	call StorePalsInTempPals1
+	call LoadPalsToTempPals1
 	ld hl, Pals_db040
 	ld de, wTempPals2 + palette 3
 	ld b, 5 palettes

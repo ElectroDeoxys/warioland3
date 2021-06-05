@@ -3155,7 +3155,7 @@ Data_3155e: ; 3155e (c:555e)
 	sound $6c2b, $0e, $00, $64, $00, $04, $00 ; MUSIC_HIDDEN_FIGURE_BATTLE_1
 	sound $7152, $0e, $00, $64, $00, $04, $00 ; MUSIC_PERFECT
 	sound $72a6, $0e, $00, $64, $00, $03, $00 ; MUSIC_TREASURE_COLLECTION
-	sound $748d, $0e, $00, $64, $00, $03, $00 ; MUSIC_PROLOGUE
+	sound $748d, $0e, $00, $64, $00, $03, $00 ; MUSIC_EPILOGUE
 	sound $74e5, $0e, $00, $64, $00, $03, $00 ; MUSIC_HIDDEN_FIGURE_REVEAL
 	sound $7834, $0e, $00, $64, $00, $04, $00 ; MUSIC_HIDDEN_FIGURE_BATTLE_2
 	filler_sounds 198

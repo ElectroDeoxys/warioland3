@@ -374,9 +374,9 @@ LoadGBIncompatibleScreenMap: ; 1f090b (7c:490b)
 
 LoadFontPals: ; 1f0919 (7c:4919)
 	ld hl, Pals_1f3610
-	call StorePalsInTempPals1
+	call LoadPalsToTempPals1
 	ld hl, Pals_1f3610
-	call StorePalsInTempPals2
+	call LoadPalsToTempPals2
 	ret
 ; 0x1f0926
 
@@ -1751,7 +1751,7 @@ Pals_1f3610: ; 1f3610 (2c:7610)
 ; 0x1f3650
 
 LanguageSelection1TextMap: ; 1f3650 (2c:7650)
-INCBIN "data/maps/text/language_selection1.bin"
+INCBIN "gfx/bgmaps/text/language_selection1.bin"
 
 LanguageSelection2TextMap: ; 1f367f (2c:767f)
-INCBIN "data/maps/text/language_selection2.bin"
+INCBIN "gfx/bgmaps/text/language_selection2.bin"

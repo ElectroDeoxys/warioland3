@@ -1,8 +1,8 @@
 Func_1f4000: ; 1f4000 (7d:4000)
 	ld hl, Pals_1f4182
-	call StorePalsInTempPals1
+	call LoadPalsToTempPals1
 	ld hl, Pals_1f41c2
-	call StorePalsInTempPals2
+	call LoadPalsToTempPals2
 	ret
 ; 0x1f400d
 
@@ -40,12 +40,12 @@ Func_1f403f: ; 1f403f (7d:403f)
 	jr nz, .asm_1f4060
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, Map_1f5f49
+	ld hl, BGMap_1f5f49
 	ld bc, v1BGMap1
 	call Decompress
 	xor a
 	ldh [rVBK], a
-	ld hl, Map_1f5de1
+	ld hl, BGMap_1f5de1
 	ld bc, v1BGMap1
 	call Decompress
 	ret
@@ -53,12 +53,12 @@ Func_1f403f: ; 1f403f (7d:403f)
 .asm_1f4060
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, Map_1f6194
+	ld hl, BGMap_1f6194
 	ld bc, v0BGMap1
 	call Decompress
 	xor a
 	ldh [rVBK], a
-	ld hl, Map_1f603a
+	ld hl, BGMap_1f603a
 	ld bc, v0BGMap1
 	call Decompress
 
@@ -250,17 +250,17 @@ Pals_1f41c2: ; 1f41c2 (7d:41c2)
 
 	INCROM $1f4202, $1f5de1
 
-Map_1f5de1: ; 1f5de1 (7d:5de1)
-INCBIN "data/maps/unk_map1.bin"
+BGMap_1f5de1: ; 1f5de1 (7d:5de1)
+INCBIN "gfx/bgmaps/map_1f5de1.bin"
 
-Map_1f5f49: ; 1f5f49 (7d:5f49)
-INCBIN "data/maps/unk_map2.bin"
+BGMap_1f5f49: ; 1f5f49 (7d:5f49)
+INCBIN "gfx/bgmaps/map_1f5f49.bin"
 
-Map_1f603a: ; 1f603a (7d:603a)
-INCBIN "data/maps/unk_map3.bin"
+BGMap_1f603a: ; 1f603a (7d:603a)
+INCBIN "gfx/bgmaps/map_1f603a.bin"
 
-Map_1f6194: ; 1f6194 (7d:6194)
-INCBIN "data/maps/unk_map4.bin"
+BGMap_1f6194: ; 1f6194 (7d:6194)
+INCBIN "gfx/bgmaps/map_1f6194.bin"
 ; 0x1f628c
 
 	INCROM $1f628c, $1f6af3

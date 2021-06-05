@@ -131,7 +131,7 @@ INCLUDE "engine/bank20.asm"
 
 SECTION "Bank 21", ROMX
 
-	INCROM $84000, $86b5d
+INCLUDE "engine/bank21.asm"
 
 
 SECTION "Bank 22", ROMX
@@ -161,17 +161,29 @@ INCLUDE "engine/bank26.asm"
 
 SECTION "Bank 27", ROMX
 
-	INCROM $9c000, $a0000
+INCLUDE "engine/bank27.asm"
 
 
-SECTION "Bank 28", ROMX
+SECTION "Cutscenes Gfx 1", ROMX
 
-	INCROM $a0000, $a4000
+Cutscenes6Gfx:: INCBIN "gfx/cutscenes/cutscenes6.2bpp.lz"
+Cutscenes7Gfx:: INCBIN "gfx/cutscenes/cutscenes7.2bpp.lz"
+Cutscenes8Gfx:: INCBIN "gfx/cutscenes/cutscenes8.2bpp.lz"
+Cutscenes9Gfx:: INCBIN "gfx/cutscenes/cutscenes9.2bpp.lz"
+Cutscenes10Gfx:: INCBIN "gfx/cutscenes/cutscenes10.2bpp.lz"
+
+rept $932
+	db $00
+endr
 
 
-SECTION "Bank 29", ROMX
+SECTION "Cutscenes Gfx 2", ROMX
 
-	INCROM $a4000, $a796d
+Cutscenes1Gfx:: INCBIN "gfx/cutscenes/cutscenes1.2bpp.lz"
+Cutscenes2Gfx:: INCBIN "gfx/cutscenes/cutscenes2.2bpp.lz"
+Cutscenes3Gfx:: INCBIN "gfx/cutscenes/cutscenes3.2bpp.lz"
+Cutscenes4Gfx:: INCBIN "gfx/cutscenes/cutscenes4.2bpp.lz"
+Cutscenes5Gfx:: INCBIN "gfx/cutscenes/cutscenes5.2bpp.lz"
 
 
 SECTION "Bank 2A", ROMX
@@ -181,7 +193,7 @@ SECTION "Bank 2A", ROMX
 
 SECTION "Bank 2B", ROMX
 
-	INCROM $ac000, $b0000
+INCLUDE "engine/bank2b.asm"
 
 
 SECTION "Bank 2C", ROMX
@@ -196,12 +208,12 @@ SECTION "Bank 2D", ROMX
 
 SECTION "Bank 2E", ROMX
 
-	INCROM $b8000, $baade
+INCLUDE "engine/bank2e.asm"
 
 
 SECTION "Bank 2F", ROMX
 
-	INCROM $bc000, $bf92c
+INCLUDE "engine/bank2f.asm"
 
 
 SECTION "Bank 30", ROMX

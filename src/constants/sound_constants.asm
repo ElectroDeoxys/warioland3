@@ -57,7 +57,7 @@
 	const MUSIC_HIDDEN_FIGURE_BATTLE_1     ; 035
 	const MUSIC_PERFECT                    ; 036
 	const MUSIC_TREASURE_COLLECTION        ; 037
-	const MUSIC_PROLOGUE                   ; 038
+	const MUSIC_EPILOGUE                   ; 038
 	const MUSIC_HIDDEN_FIGURE_REVEAL       ; 039
 	const MUSIC_HIDDEN_FIGURE_BATTLE_2     ; 03a
 

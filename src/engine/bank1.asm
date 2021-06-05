@@ -746,9 +746,9 @@ IntroSequencePhase3: ; 43b5 (1:43b5)
 	ld [wIntroSeqTimer], a
 
 	ld hl, Pals_5002
-	call StorePalsInTempPals1
+	call LoadPalsToTempPals1
 	ld hl, Pals_5042
-	call StorePalsInTempPals2
+	call LoadPalsToTempPals2
 
 	load_music MUSIC_TITLE_SCREEN
 	ld hl, wSubSequence
@@ -1039,7 +1039,7 @@ TimeAttackDescription: ; 4670 (1:4670)
 Func_4686: ; 4686 (1:4686)
 	ldh a, [rSVBK]
 	push af
-	ld a, 2 ; WRAM2
+	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
 	farcall Func_80392
 	pop af
@@ -1250,7 +1250,7 @@ LanguageSelectionSequence: ; 4831 (1:4831)
 	dw FastFadeToWhite
 	dw InitLanguageSelection
 	dw SlowFadeFromWhite
-	dw HandleLanguageSelectionInput
+	dw LanguageSelection
 	dw Func_28d
 	dw Func_28d
 	dw Func_28d
@@ -1303,7 +1303,7 @@ InitLanguageSelection: ; 4857 (1:4857)
 	ret
 ; 0x48c9
 
-HandleLanguageSelectionInput: ; 48c9 (1:48c9)
+LanguageSelection: ; 48c9 (1:48c9)
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jp nz, Func_4619
@@ -1351,16 +1351,16 @@ LoadTitleScreenPals: ; 4917 (1:4917)
 	and a
 	jr nz, .asm_492a
 	ld hl, Pals_4f82
-	call StorePalsInTempPals1
+	call LoadPalsToTempPals1
 	ld hl, Pals_4fc2
-	call StorePalsInTempPals2
+	call LoadPalsToTempPals2
 	ret
 
 .asm_492a
 	ld hl, Pals_5002
-	call StorePalsInTempPals1
+	call LoadPalsToTempPals1
 	ld hl, Pals_5042
-	call StorePalsInTempPals2
+	call LoadPalsToTempPals2
 	ret
 ; 0x4937
 
@@ -1396,7 +1396,7 @@ LoadTitleScreenTileMap: ; 4951 (1:4951)
 
 LoadTimeAttackDescriptionPals: ; 496b (1:496b)
 	ld hl, Pal_71b0
-	call StorePalsInTempPals1
+	call LoadPalsToTempPals1
 	ret
 ; 0x4972
 
@@ -1407,10 +1407,10 @@ LoadTimeAttackDescriptionTiles: ; 4972 (1:4972)
 
 	xor a ; VRAM0
 	ldh [rVBK], a
-	ld hl, UnknownTiles1
+	ld hl, Tiles_b0f80
 	ld de, v0Tiles2
 	ld bc, $800
-	ld a, BANK(UnknownTiles1)
+	ld a, BANK(Tiles_b0f80)
 	ldh [hCallFuncBank], a
 	call_hram CopyHLToDE_BC
 	ret
@@ -3086,19 +3086,19 @@ Pal_71b0: ; 71b0 (1:71b0)
 ; 0x71f0
 
 TimeAttack1ENTextMap: ; 71f0 (2c:71f0)
-INCBIN "data/maps/text/time_attack1_en.bin"
+INCBIN "gfx/bgmaps/text/time_attack1_en.bin"
 ; 0x7316
 
 TimeAttack2ENTextMap: ; 7316 (2c:7316)
-INCBIN "data/maps/text/time_attack2_en.bin"
+INCBIN "gfx/bgmaps/text/time_attack2_en.bin"
 ; 0x73e7
 
 TimeAttack1JPTextMap: ; 73e7 (2c:73e7)
-INCBIN "data/maps/text/time_attack1_jp.bin"
+INCBIN "gfx/bgmaps/text/time_attack1_jp.bin"
 ; 0x74e8
 
 TimeAttack2JPTextMap: ; 74e8 (2c:74e8)
-INCBIN "data/maps/text/time_attack2_jp.bin"
+INCBIN "gfx/bgmaps/text/time_attack2_jp.bin"
 ; 0x73e7
 
 	INCROM $75c3, $76b5
