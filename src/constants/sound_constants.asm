@@ -138,26 +138,26 @@
 	const SFX_CROUCH_WALK                  ; 14a
 	const SFX_04B                          ; 14b
 	const SFX_04C                          ; 14c
-	const SFX_04D                          ; 14d
-	const SFX_04E                          ; 14e
-	const SFX_04F                          ; 14f
-	const SFX_050                          ; 150
-	const SFX_051                          ; 151
-	const SFX_052                          ; 152
-	const SFX_053                          ; 153
-	const SFX_054                          ; 154
-	const SFX_055                          ; 155
-	const SFX_056                          ; 156
-	const SFX_057                          ; 157
-	const SFX_058                          ; 158
-	const SFX_059                          ; 159
-	const SFX_05A                          ; 15a
-	const SFX_05B                          ; 15b
-	const SFX_05C                          ; 15c
-	const SFX_05D                          ; 15d
-	const SFX_05E                          ; 15e
-	const SFX_05F                          ; 15f
-	const SFX_060                          ; 160
+	const SFX_04D                          ; 14d (unused)
+	const SFX_04E                          ; 14e (unused)
+	const SFX_04F                          ; 14f (unused)
+	const SFX_050                          ; 150 (unused)
+	const SFX_051                          ; 151 (unused)
+	const SFX_052                          ; 152 (unused)
+	const SFX_053                          ; 153 (unused)
+	const SFX_054                          ; 154 (unused)
+	const SFX_055                          ; 155 (unused)
+	const SFX_056                          ; 156 (unused)
+	const SFX_057                          ; 157 (unused)
+	const SFX_058                          ; 158 (unused)
+	const SFX_059                          ; 159 (unused)
+	const SFX_05A                          ; 15a (unused)
+	const SFX_05B                          ; 15b (unused)
+	const SFX_05C                          ; 15c (unused)
+	const SFX_05D                          ; 15d (unused)
+	const SFX_05E                          ; 15e (unused)
+	const SFX_05F                          ; 15f (unused)
+	const SFX_060                          ; 160 (unused)
 	const SFX_061                          ; 161
 	const SFX_062                          ; 162
 	const SFX_063                          ; 163
@@ -205,23 +205,23 @@
 	const SFX_08D                          ; 18d
 	const SFX_08E                          ; 18e
 	const SFX_08F                          ; 18f
-	const SFX_090                          ; 190
-	const SFX_091                          ; 191
-	const SFX_092                          ; 192
-	const SFX_093                          ; 193
-	const SFX_094                          ; 194
-	const SFX_095                          ; 195
-	const SFX_096                          ; 196
-	const SFX_097                          ; 197
-	const SFX_098                          ; 198
-	const SFX_099                          ; 199
-	const SFX_09A                          ; 19a
-	const SFX_09B                          ; 19b
-	const SFX_09C                          ; 19c
-	const SFX_09D                          ; 19d
-	const SFX_09E                          ; 19e
-	const SFX_09F                          ; 19f
-	const SFX_0A0                          ; 1a0
+	const SFX_090                          ; 190 (unused)
+	const SFX_091                          ; 191 (unused)
+	const SFX_092                          ; 192 (unused)
+	const SFX_093                          ; 193 (unused)
+	const SFX_094                          ; 194 (unused)
+	const SFX_095                          ; 195 (unused)
+	const SFX_096                          ; 196 (unused)
+	const SFX_097                          ; 197 (unused)
+	const SFX_098                          ; 198 (unused)
+	const SFX_099                          ; 199 (unused)
+	const SFX_09A                          ; 19a (unused)
+	const SFX_09B                          ; 19b (unused)
+	const SFX_09C                          ; 19c (unused)
+	const SFX_09D                          ; 19d (unused)
+	const SFX_09E                          ; 19e (unused)
+	const SFX_09F                          ; 19f (unused)
+	const SFX_0A0                          ; 1a0 (unused)
 	const SFX_0A1                          ; 1a1
 	const SFX_0A2                          ; 1a2
 	const SFX_0A3                          ; 1a3
@@ -271,21 +271,21 @@
 	const SFX_0CF                          ; 1cf
 	const SFX_0D0                          ; 1d0
 	const SFX_0D1                          ; 1d1
-	const SFX_0D2                          ; 1d2
-	const SFX_0D3                          ; 1d3
-	const SFX_0D4                          ; 1d4
-	const SFX_0D5                          ; 1d5
-	const SFX_0D6                          ; 1d6
-	const SFX_0D7                          ; 1d7
-	const SFX_0D8                          ; 1d8
-	const SFX_0D9                          ; 1d9
-	const SFX_0DA                          ; 1da
-	const SFX_0DB                          ; 1db
-	const SFX_0DC                          ; 1dc
-	const SFX_0DD                          ; 1dd
-	const SFX_0DE                          ; 1de
-	const SFX_0DF                          ; 1df
-	const SFX_0E0                          ; 1e0
+	const SFX_0D2                          ; 1d2 (unused)
+	const SFX_0D3                          ; 1d3 (unused)
+	const SFX_0D4                          ; 1d4 (unused)
+	const SFX_0D5                          ; 1d5 (unused)
+	const SFX_0D6                          ; 1d6 (unused)
+	const SFX_0D7                          ; 1d7 (unused)
+	const SFX_0D8                          ; 1d8 (unused)
+	const SFX_0D9                          ; 1d9 (unused)
+	const SFX_0DA                          ; 1da (unused)
+	const SFX_0DB                          ; 1db (unused)
+	const SFX_0DC                          ; 1dc (unused)
+	const SFX_0DD                          ; 1dd (unused)
+	const SFX_0DE                          ; 1de (unused)
+	const SFX_0DF                          ; 1df (unused)
+	const SFX_0E0                          ; 1e0 (unused)
 	const SFX_0E1                          ; 1e1
 	const SFX_0E2                          ; 1e2
 	const SFX_0E3                          ; 1e3
@@ -312,13 +312,13 @@
 	const SFX_PLANE3                       ; 1f8
 	const SFX_PLANE_EXPLOSION              ; 1f9
 	const SFX_0FA                          ; 1fa
-	const SFX_0FB                          ; 1fb
-	const SFX_0FC                          ; 1fc
-	const SFX_0FD                          ; 1fd
-	const SFX_0FE                          ; 1fe
-	const SFX_0FF                          ; 1ff
+	const SFX_0FB                          ; 1fb (unused)
+	const SFX_0FC                          ; 1fc (unused)
+	const SFX_0FD                          ; 1fd (unused)
+	const SFX_0FE                          ; 1fe (unused)
+	const SFX_0FF                          ; 1ff (unused)
 
-	const SFX_100                          ; 200
+	const SFX_100                          ; 200 (unused)
 	const SFX_101                          ; 201
 	const SFX_102                          ; 202
 	const SFX_103                          ; 203
@@ -350,3 +350,29 @@
 	const SFX_11D                          ; 21d
 	const SFX_11E                          ; 21e
 	const SFX_11F                          ; 21f
+	const SFX_120                          ; 220
+	const SFX_121                          ; 221
+	const SFX_122                          ; 222
+	const SFX_123                          ; 223
+	const SFX_124                          ; 224
+	const SFX_125                          ; 225
+	const SFX_126                          ; 226
+	const SFX_127                          ; 227
+	const SFX_128                          ; 228
+	const SFX_129                          ; 229
+	const SFX_12A                          ; 22a
+	const SFX_12B                          ; 22b
+	const SFX_12C                          ; 22c
+	const SFX_12D                          ; 22d
+	const SFX_12E                          ; 22e
+	const SFX_12F                          ; 22f
+	const SFX_130                          ; 230
+	const SFX_131                          ; 231
+	const SFX_132                          ; 232
+	const SFX_133                          ; 233
+	const SFX_134                          ; 234
+	const SFX_135                          ; 235
+	const SFX_136                          ; 236
+	const SFX_137                          ; 237
+	const SFX_138                          ; 238
+NUM_SOUNDS EQU const_value

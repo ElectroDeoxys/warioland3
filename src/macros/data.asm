@@ -2,8 +2,11 @@ INCROM: MACRO
 INCBIN "baserom.gbc", \1, \2 - \1
 ENDM
 
-dn: MACRO
-	db \1 << 4 | \2
+dn: MACRO ; nybbles
+rept _NARG / 2
+	db ((\1) << 4) | (\2)
+	shift 2
+endr
 ENDM
 
 dbw: MACRO

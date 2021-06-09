@@ -97,6 +97,23 @@ rNR50       EQU $ff24 ; Channel control / ON-OFF / Volume (R/W)
 rNR51       EQU $ff25 ; Selection of Sound output terminal (R/W)
 rNR52       EQU $ff26 ; Sound on/off
 
+rWave_0     EQU $ff30
+rWave_1     EQU $ff31
+rWave_2     EQU $ff32
+rWave_3     EQU $ff33
+rWave_4     EQU $ff34
+rWave_5     EQU $ff35
+rWave_6     EQU $ff36
+rWave_7     EQU $ff37
+rWave_8     EQU $ff38
+rWave_9     EQU $ff39
+rWave_a     EQU $ff3a
+rWave_b     EQU $ff3b
+rWave_c     EQU $ff3c
+rWave_d     EQU $ff3d
+rWave_e     EQU $ff3e
+rWave_f     EQU $ff3f
+
 rLCDC       EQU $ff40 ; LCD Control (R/W)
 LCDC_OFF        EQU %01111111 ; LCD Control Operation (and)
 LCDC_ON         EQU %10000000 ; LCD Control Operation (ld/or)

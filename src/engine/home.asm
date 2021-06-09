@@ -277,7 +277,6 @@ HandleSound: ; 290 (0:290)
 	jr nz, .asm_2a2
 	ld bc, SOUND_OFF
 	jr .got_sfx
-
 .asm_2a2
 	ld c, [hl]
 	ld b, a
@@ -300,7 +299,6 @@ HandleSound: ; 290 (0:290)
 	ld [hl], a
 	call Func_fe6
 	jr .asm_2cb
-
 .asm_2c0
 	ld c, [hl]
 	ld b, a
@@ -2311,6 +2309,7 @@ InitAudio: ; fae (0:fae)
 	ret
 ; 0xfbc
 
+; bc = sound ID
 Func_fbc: ; fbc (0:fbc)
 	ldh a, [rSVBK]
 	push af
@@ -4799,7 +4798,7 @@ Func_3faa: ; 3faa (0:3faa)
 	jp SwitchBankC.skip_backup_bank
 ; 0x3fb5
 
-Func_3fb5: ; 3fb5 (0:3fb5)
+Get2AudioCommandBytes: ; 3fb5 (0:3fb5)
 	ld a, [wSoundBank]
 	call SwitchBankC.switch_bank
 	ld a, [de]

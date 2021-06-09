@@ -1350,7 +1350,10 @@ w3d006:: ; d006
 	ds $1
 
 w3d007:: ; d007
-	ds $3
+	ds $1
+
+w3d008:: ; d008
+	ds $2
 
 w3d00a:: ; d00a
 	ds $1
@@ -1359,7 +1362,10 @@ w3d00b:: ; d00b
 	ds $1
 
 w3d00c:: ; d00c
-	ds $3
+	ds $1
+
+w3d00d:: ; d00d
+	ds $2
 
 wNumAudioChannels:: ; d00f
 	ds $1
@@ -1368,31 +1374,54 @@ wNumAudioChannels:: ; d00f
 wCurChannelPtr:: ; d010
 	ds $2
 
-w3d012:: ; d012
-	ds $4
+wNumTracks:: ; d012
+	ds $1
+
+wCurTrackPtr:: ; d013
+	ds $2
+
+; low byte of a sound register:
+; sound1 = rNR12
+; sound2 = rNR22
+; sound3 = rNR32
+; sound4 = rNR42
+wCurSoundRegister:: ; d015
+	ds $1
 
 	ds $1
 
-w3d017:: ; d017
+wAudioCmdPtr:: ; d017
 	ds $2
 
+; channel Flags1
 w3d019:: ; d019
 	ds $1
 
+w3d01a:: ; d01a
 	ds $1
 
 wLoadedMusic:: ; d01b
 	ds $2
 
-w3d01d:: ; d01d
+wCurWaveSample:: ; d01d
 	ds $1
 
-	ds $2
+w3d01e:: ; d01e
+	ds $1
+
+w3d01f:: ; d01f
+	ds $1
 
 w3d020:: ; d020
 	ds $1
 
-	ds $3
+w3d021:: ; d021
+	ds $1
+
+w3d022:: ; d022
+	ds $1
+
+	ds $1
 
 w3d024:: ; d024
 	ds $1
@@ -1414,12 +1443,12 @@ w3d03a:: ; d03a
 w3d03b:: ; d03b
 	ds $1
 
-w3d03c:: ; d03c
+wNumChannels:: ; d03c
 	ds $1
 
 	ds $1
 
-w3d03e:: ; d03e
+wSoundPriority:: ; d03e
 	ds $1
 
 wCurChannel:: ; d03f
@@ -1430,15 +1459,18 @@ wChannel1:: channel_struct wChannel1 ; d040
 wChannel2:: channel_struct wChannel2 ; d07c
 wChannel3:: channel_struct wChannel3 ; d0b8
 wChannel4:: channel_struct wChannel4 ; d0f4
+
+wSFXChannels::
 wChannel5:: channel_struct wChannel5 ; d130
 wChannel6:: channel_struct wChannel6 ; d16c
 wChannel7:: channel_struct wChannel7 ; d1a8
 wChannel8:: channel_struct wChannel8 ; d1e4
 
-wAudioStruct1:: audio_struct wAudioStruct1 ; d220
-wAudioStruct2:: audio_struct wAudioStruct2 ; d238
-wAudioStruct3:: audio_struct wAudioStruct3 ; d250
-wAudioStruct4:: audio_struct wAudioStruct4 ; d268
+wTracks::
+wTrack1:: track_struct wTrack1 ; d220
+wTrack2:: track_struct wTrack2 ; d238
+wTrack3:: track_struct wTrack3 ; d250
+wTrack4:: track_struct wTrack4 ; d268
 
 w3d280:: ; d280
 	ds 16 palettes
