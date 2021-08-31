@@ -357,7 +357,7 @@ Func_d19e: ; d19e (3:519e)
 	ret
 ; 0xd1e2
 
-Func_d1e2: ; d1e2 (3:51e2)
+LoadLevelCommonGfxAndTreasures: ; d1e2 (3:51e2)
 	ld hl, LevelsCommonGfx
 	ld de, v0Tiles1
 	ld bc, $800

@@ -18,7 +18,7 @@ LoadRoom: ; c0000 (30:4000)
 
 .ok
 	ld a, [hli]
-	ld [wPermissionMapID], a
+	ld [wRoomPermissionMap], a
 	ld a, [hli]
 	ld [wRoomTileMap], a
 	ld a, [hli]
@@ -28,9 +28,9 @@ LoadRoom: ; c0000 (30:4000)
 	ld a, [hl]
 	ld [wRoomPalettes], a
 
-; divide wPermissionMapID by 6
+; divide wRoomPermissionMap by 6
 	ld b, 0
-	ld a, [wPermissionMapID]
+	ld a, [wRoomPermissionMap]
 .loop
 	sub $6
 	jr c, .div_done
@@ -111,208 +111,208 @@ Func_c0095: ; c0095 (30:4095)
 	ret
 ; 0xc00be
 
-PointerTable_c00be: ; c00be (30:40be)
-	dw .data_c026a
-	dw .data_c026a
-	dw .data_c026a
-	dw .data_c026a
-	dw .data_c026a
-	dw .data_c026a
-	dw .data_c026a
-	dw .data_c026a
-	dw .data_c026f
-	dw .data_c026f
-	dw .data_c026f
-	dw .data_c026f
-	dw .data_c0314
-	dw .data_c026f
-	dw .data_c026f
-	dw .data_c026f
-	dw .data_c0274
-	dw .data_c0274
-	dw .data_c02ec
-	dw .data_c02ec
-	dw .data_c0274
-	dw .data_c0274
-	dw .data_c02ec
-	dw .data_c02ec
-	dw .data_c0279
-	dw .data_c0279
-	dw .data_c0279
-	dw .data_c0279
-	dw .data_c0279
-	dw .data_c0279
-	dw .data_c0279
-	dw .data_c0279
-	dw .data_c027e
-	dw .data_c027e
-	dw .data_c027e
-	dw .data_c027e
-	dw .data_c0300
-	dw .data_c0300
-	dw .data_c0300
-	dw .data_c0300
-	dw .data_c0283
-	dw .data_c0283
-	dw .data_c0283
-	dw .data_c0283
-	dw .data_c0283
-	dw .data_c0283
-	dw .data_c0283
-	dw .data_c0283
-	dw .data_c0288
-	dw .data_c0288
-	dw .data_c0288
-	dw .data_c0288
-	dw .data_c0288
-	dw .data_c0288
-	dw .data_c0288
-	dw .data_c0288
-	dw .data_c028d
-	dw .data_c028d
-	dw .data_c028d
-	dw .data_c02f1
-	dw .data_c028d
-	dw .data_c028d
-	dw .data_c028d
-	dw .data_c02f1
-	dw .data_c0292
-	dw .data_c02f6
-	dw .data_c02f6
-	dw .data_c02f6
-	dw .data_c0292
-	dw .data_c02f6
-	dw .data_c02f6
-	dw .data_c02f6
-	dw .data_c0297
-	dw .data_c0297
-	dw .data_c0297
-	dw .data_c0297
-	dw .data_c0297
-	dw .data_c0297
-	dw .data_c0297
-	dw .data_c0297
-	dw .data_c029c
-	dw .data_c029c
-	dw .data_c029c
-	dw .data_c029c
-	dw .data_c029c
-	dw .data_c029c
-	dw .data_c029c
-	dw .data_c029c
-	dw .data_c02a1
-	dw .data_c02a1
-	dw .data_c02a1
-	dw .data_c02a1
-	dw .data_c02a1
-	dw .data_c02a1
-	dw .data_c02a1
-	dw .data_c02a1
-	dw .data_c02a6
-	dw .data_c02a6
-	dw .data_c02a6
-	dw .data_c02a6
-	dw .data_c02a6
-	dw .data_c02a6
-	dw .data_c02a6
-	dw .data_c02a6
-	dw .data_c02ab
-	dw .data_c02ab
-	dw .data_c02ab
-	dw .data_c02ab
-	dw .data_c02ab
-	dw .data_c02ab
-	dw .data_c02ab
-	dw .data_c02ab
-	dw .data_c02b0
-	dw .data_c02b0
-	dw .data_c02b0
-	dw .data_c02b0
-	dw .data_c02b0
-	dw .data_c02b0
-	dw .data_c02b0
-	dw .data_c02b0
-	dw .data_c02b5
-	dw .data_c030f
-	dw .data_c030f
-	dw .data_c030f
-	dw .data_c02b5
-	dw .data_c030f
-	dw .data_c030f
-	dw .data_c030f
-	dw .data_c02ba
-	dw .data_c02ba
-	dw .data_c02ba
-	dw .data_c02ba
-	dw .data_c02ba
-	dw .data_c02ba
-	dw .data_c02ba
-	dw .data_c02ba
-	dw .data_c02bf
-	dw .data_c02bf
-	dw .data_c02bf
-	dw .data_c02bf
-	dw .data_c02bf
-	dw .data_c02bf
-	dw .data_c02bf
-	dw .data_c030a
-	dw .data_c02c4
-	dw .data_c0305
-	dw .data_c0305
-	dw .data_c0305
-	dw .data_c02c4
-	dw .data_c0305
-	dw .data_c0305
-	dw .data_c0305
-	dw .data_c02c9
-	dw .data_c02c9
-	dw .data_c02c9
-	dw .data_c02c9
-	dw .data_c02c9
-	dw .data_c02c9
-	dw .data_c02c9
-	dw .data_c02c9
-	dw .data_c02ce
-	dw .data_c02ce
-	dw .data_c02ce
-	dw .data_c02ce
-	dw .data_c02ce
-	dw .data_c02ce
-	dw .data_c02ce
-	dw .data_c02ce
-	dw .data_c02d3
-	dw .data_c02d3
-	dw .data_c02d3
-	dw .data_c02d3
-	dw .data_c02fb
-	dw .data_c02fb
-	dw .data_c02fb
-	dw .data_c02fb
-	dw .data_c02d8
-	dw .data_c02d8
-	dw .data_c02d8
-	dw .data_c02d8
-	dw .data_c02d8
-	dw .data_c02d8
-	dw .data_c02d8
-	dw .data_c02d8
-	dw .data_c02dd
-	dw .data_c02dd
-	dw .data_c02dd
-	dw .data_c02dd
-	dw .data_c02dd
-	dw .data_c02dd
-	dw .data_c02dd
-	dw .data_c02dd
-	dw .data_c02e2
-	dw .data_c02e2
-	dw .data_c02e2
-	dw .data_c02e2
-	dw .data_c02e2
-	dw .data_c02e2
-	dw .data_c02e2
-	dw .data_c02e2
-	dw .data_c02e7
+LevelHeaders: ; c00be (30:40be)
+	dw .out_of_the_woods       ; LEVEL_OUT_OF_THE_WOODS_DAY_1
+	dw .out_of_the_woods       ; LEVEL_OUT_OF_THE_WOODS_DAY_2
+	dw .out_of_the_woods       ; LEVEL_OUT_OF_THE_WOODS_DAY_3
+	dw .out_of_the_woods       ; LEVEL_OUT_OF_THE_WOODS_DAY_4
+	dw .out_of_the_woods       ; LEVEL_OUT_OF_THE_WOODS_NIGHT_1
+	dw .out_of_the_woods       ; LEVEL_OUT_OF_THE_WOODS_NIGHT_2
+	dw .out_of_the_woods       ; LEVEL_OUT_OF_THE_WOODS_NIGHT_3
+	dw .out_of_the_woods       ; LEVEL_OUT_OF_THE_WOODS_NIGHT_4
+	dw .the_peaceful_village_1 ; LEVEL_THE_PEACEFUL_VILLAGE_DAY_1
+	dw .the_peaceful_village_1 ; LEVEL_THE_PEACEFUL_VILLAGE_DAY_2
+	dw .the_peaceful_village_1 ; LEVEL_THE_PEACEFUL_VILLAGE_DAY_3
+	dw .the_peaceful_village_1 ; LEVEL_THE_PEACEFUL_VILLAGE_DAY_4
+	dw .the_peaceful_village_2 ; LEVEL_THE_PEACEFUL_VILLAGE_NIGHT_1
+	dw .the_peaceful_village_1 ; LEVEL_THE_PEACEFUL_VILLAGE_NIGHT_2
+	dw .the_peaceful_village_1 ; LEVEL_THE_PEACEFUL_VILLAGE_NIGHT_3
+	dw .the_peaceful_village_1 ; LEVEL_THE_PEACEFUL_VILLAGE_NIGHT_4
+	dw .the_vast_plain_1       ; LEVEL_THE_VAST_PLAIN_DAY_1
+	dw .the_vast_plain_1       ; LEVEL_THE_VAST_PLAIN_DAY_2
+	dw .the_vast_plain_2       ; LEVEL_THE_VAST_PLAIN_DAY_3
+	dw .the_vast_plain_2       ; LEVEL_THE_VAST_PLAIN_DAY_4
+	dw .the_vast_plain_1       ; LEVEL_THE_VAST_PLAIN_NIGHT_1
+	dw .the_vast_plain_1       ; LEVEL_THE_VAST_PLAIN_NIGHT_2
+	dw .the_vast_plain_2       ; LEVEL_THE_VAST_PLAIN_NIGHT_3
+	dw .the_vast_plain_2       ; LEVEL_THE_VAST_PLAIN_NIGHT_4
+	dw .bank_of_the_wild_river ; LEVEL_BANK_OF_THE_WILD_RIVER_DAY_1
+	dw .bank_of_the_wild_river ; LEVEL_BANK_OF_THE_WILD_RIVER_DAY_2
+	dw .bank_of_the_wild_river ; LEVEL_BANK_OF_THE_WILD_RIVER_DAY_3
+	dw .bank_of_the_wild_river ; LEVEL_BANK_OF_THE_WILD_RIVER_DAY_4
+	dw .bank_of_the_wild_river ; LEVEL_BANK_OF_THE_WILD_RIVER_NIGHT_1
+	dw .bank_of_the_wild_river ; LEVEL_BANK_OF_THE_WILD_RIVER_NIGHT_2
+	dw .bank_of_the_wild_river ; LEVEL_BANK_OF_THE_WILD_RIVER_NIGHT_3
+	dw .bank_of_the_wild_river ; LEVEL_BANK_OF_THE_WILD_RIVER_NIGHT_4
+	dw .the_tidal_coast_1      ; LEVEL_THE_TIDAL_COAST_DAY_1
+	dw .the_tidal_coast_1      ; LEVEL_THE_TIDAL_COAST_DAY_2
+	dw .the_tidal_coast_1      ; LEVEL_THE_TIDAL_COAST_DAY_3
+	dw .the_tidal_coast_1      ; LEVEL_THE_TIDAL_COAST_DAY_4
+	dw .the_tidal_coast_2      ; LEVEL_THE_TIDAL_COAST_NIGHT_1
+	dw .the_tidal_coast_2      ; LEVEL_THE_TIDAL_COAST_NIGHT_2
+	dw .the_tidal_coast_2      ; LEVEL_THE_TIDAL_COAST_NIGHT_3
+	dw .the_tidal_coast_2      ; LEVEL_THE_TIDAL_COAST_NIGHT_4
+	dw .sea_turtle_rocks       ; LEVEL_SEA_TURTLE_ROCKS_DAY_1
+	dw .sea_turtle_rocks       ; LEVEL_SEA_TURTLE_ROCKS_DAY_2
+	dw .sea_turtle_rocks       ; LEVEL_SEA_TURTLE_ROCKS_DAY_3
+	dw .sea_turtle_rocks       ; LEVEL_SEA_TURTLE_ROCKS_DAY_4
+	dw .sea_turtle_rocks       ; LEVEL_SEA_TURTLE_ROCKS_NIGHT_1
+	dw .sea_turtle_rocks       ; LEVEL_SEA_TURTLE_ROCKS_NIGHT_2
+	dw .sea_turtle_rocks       ; LEVEL_SEA_TURTLE_ROCKS_NIGHT_3
+	dw .sea_turtle_rocks       ; LEVEL_SEA_TURTLE_ROCKS_NIGHT_4
+	dw .desert_ruins           ; LEVEL_DESERT_RUINS_DAY_1
+	dw .desert_ruins           ; LEVEL_DESERT_RUINS_DAY_2
+	dw .desert_ruins           ; LEVEL_DESERT_RUINS_DAY_3
+	dw .desert_ruins           ; LEVEL_DESERT_RUINS_DAY_4
+	dw .desert_ruins           ; LEVEL_DESERT_RUINS_NIGHT_1
+	dw .desert_ruins           ; LEVEL_DESERT_RUINS_NIGHT_2
+	dw .desert_ruins           ; LEVEL_DESERT_RUINS_NIGHT_3
+	dw .desert_ruins           ; LEVEL_DESERT_RUINS_NIGHT_4
+	dw .the_volcanos_base_1    ; LEVEL_THE_VOLCANOS_BASE_DAY_1
+	dw .the_volcanos_base_1    ; LEVEL_THE_VOLCANOS_BASE_DAY_2
+	dw .the_volcanos_base_1    ; LEVEL_THE_VOLCANOS_BASE_DAY_3
+	dw .the_volcanos_base_2    ; LEVEL_THE_VOLCANOS_BASE_DAY_4
+	dw .the_volcanos_base_1    ; LEVEL_THE_VOLCANOS_BASE_NIGHT_1
+	dw .the_volcanos_base_1    ; LEVEL_THE_VOLCANOS_BASE_NIGHT_2
+	dw .the_volcanos_base_1    ; LEVEL_THE_VOLCANOS_BASE_NIGHT_3
+	dw .the_volcanos_base_2    ; LEVEL_THE_VOLCANOS_BASE_NIGHT_4
+	dw .the_pool_of_rain_1     ; LEVEL_THE_POOL_OF_RAIN_DAY_1
+	dw .the_pool_of_rain_2     ; LEVEL_THE_POOL_OF_RAIN_DAY_2
+	dw .the_pool_of_rain_2     ; LEVEL_THE_POOL_OF_RAIN_DAY_3
+	dw .the_pool_of_rain_2     ; LEVEL_THE_POOL_OF_RAIN_DAY_4
+	dw .the_pool_of_rain_1     ; LEVEL_THE_POOL_OF_RAIN_NIGHT_1
+	dw .the_pool_of_rain_2     ; LEVEL_THE_POOL_OF_RAIN_NIGHT_2
+	dw .the_pool_of_rain_2     ; LEVEL_THE_POOL_OF_RAIN_NIGHT_3
+	dw .the_pool_of_rain_2     ; LEVEL_THE_POOL_OF_RAIN_NIGHT_4
+	dw .a_town_in_chaos        ; LEVEL_A_TOWN_IN_CHAOS_DAY_1
+	dw .a_town_in_chaos        ; LEVEL_A_TOWN_IN_CHAOS_DAY_2
+	dw .a_town_in_chaos        ; LEVEL_A_TOWN_IN_CHAOS_DAY_3
+	dw .a_town_in_chaos        ; LEVEL_A_TOWN_IN_CHAOS_DAY_4
+	dw .a_town_in_chaos        ; LEVEL_A_TOWN_IN_CHAOS_NIGHT_1
+	dw .a_town_in_chaos        ; LEVEL_A_TOWN_IN_CHAOS_NIGHT_2
+	dw .a_town_in_chaos        ; LEVEL_A_TOWN_IN_CHAOS_NIGHT_3
+	dw .a_town_in_chaos        ; LEVEL_A_TOWN_IN_CHAOS_NIGHT_4
+	dw .beneath_the_waves      ; LEVEL_BENEATH_THE_WAVES_DAY_1
+	dw .beneath_the_waves      ; LEVEL_BENEATH_THE_WAVES_DAY_2
+	dw .beneath_the_waves      ; LEVEL_BENEATH_THE_WAVES_DAY_3
+	dw .beneath_the_waves      ; LEVEL_BENEATH_THE_WAVES_DAY_4
+	dw .beneath_the_waves      ; LEVEL_BENEATH_THE_WAVES_NIGHT_1
+	dw .beneath_the_waves      ; LEVEL_BENEATH_THE_WAVES_NIGHT_2
+	dw .beneath_the_waves      ; LEVEL_BENEATH_THE_WAVES_NIGHT_3
+	dw .beneath_the_waves      ; LEVEL_BENEATH_THE_WAVES_NIGHT_4
+	dw .the_west_crater        ; LEVEL_THE_WEST_CRATER_DAY_1
+	dw .the_west_crater        ; LEVEL_THE_WEST_CRATER_DAY_2
+	dw .the_west_crater        ; LEVEL_THE_WEST_CRATER_DAY_3
+	dw .the_west_crater        ; LEVEL_THE_WEST_CRATER_DAY_4
+	dw .the_west_crater        ; LEVEL_THE_WEST_CRATER_NIGHT_1
+	dw .the_west_crater        ; LEVEL_THE_WEST_CRATER_NIGHT_2
+	dw .the_west_crater        ; LEVEL_THE_WEST_CRATER_NIGHT_3
+	dw .the_west_crater        ; LEVEL_THE_WEST_CRATER_NIGHT_4
+	dw .the_grasslands         ; LEVEL_THE_GRASSLANDS_DAY_1
+	dw .the_grasslands         ; LEVEL_THE_GRASSLANDS_DAY_2
+	dw .the_grasslands         ; LEVEL_THE_GRASSLANDS_DAY_3
+	dw .the_grasslands         ; LEVEL_THE_GRASSLANDS_DAY_4
+	dw .the_grasslands         ; LEVEL_THE_GRASSLANDS_NIGHT_1
+	dw .the_grasslands         ; LEVEL_THE_GRASSLANDS_NIGHT_2
+	dw .the_grasslands         ; LEVEL_THE_GRASSLANDS_NIGHT_3
+	dw .the_grasslands         ; LEVEL_THE_GRASSLANDS_NIGHT_4
+	dw .the_big_bridge         ; LEVEL_THE_BIG_BRIDGE_DAY_1
+	dw .the_big_bridge         ; LEVEL_THE_BIG_BRIDGE_DAY_2
+	dw .the_big_bridge         ; LEVEL_THE_BIG_BRIDGE_DAY_3
+	dw .the_big_bridge         ; LEVEL_THE_BIG_BRIDGE_DAY_4
+	dw .the_big_bridge         ; LEVEL_THE_BIG_BRIDGE_NIGHT_1
+	dw .the_big_bridge         ; LEVEL_THE_BIG_BRIDGE_NIGHT_2
+	dw .the_big_bridge         ; LEVEL_THE_BIG_BRIDGE_NIGHT_3
+	dw .the_big_bridge         ; LEVEL_THE_BIG_BRIDGE_NIGHT_4
+	dw .tower_of_revival       ; LEVEL_TOWER_OF_REVIVAL_DAY_1
+	dw .tower_of_revival       ; LEVEL_TOWER_OF_REVIVAL_DAY_2
+	dw .tower_of_revival       ; LEVEL_TOWER_OF_REVIVAL_DAY_3
+	dw .tower_of_revival       ; LEVEL_TOWER_OF_REVIVAL_DAY_4
+	dw .tower_of_revival       ; LEVEL_TOWER_OF_REVIVAL_NIGHT_1
+	dw .tower_of_revival       ; LEVEL_TOWER_OF_REVIVAL_NIGHT_2
+	dw .tower_of_revival       ; LEVEL_TOWER_OF_REVIVAL_NIGHT_3
+	dw .tower_of_revival       ; LEVEL_TOWER_OF_REVIVAL_NIGHT_4
+	dw .the_steep_canyon_1     ; LEVEL_THE_STEEP_CANYON_DAY_1
+	dw .the_steep_canyon_2     ; LEVEL_THE_STEEP_CANYON_DAY_2
+	dw .the_steep_canyon_2     ; LEVEL_THE_STEEP_CANYON_DAY_3
+	dw .the_steep_canyon_2     ; LEVEL_THE_STEEP_CANYON_DAY_4
+	dw .the_steep_canyon_1     ; LEVEL_THE_STEEP_CANYON_NIGHT_1
+	dw .the_steep_canyon_2     ; LEVEL_THE_STEEP_CANYON_NIGHT_2
+	dw .the_steep_canyon_2     ; LEVEL_THE_STEEP_CANYON_NIGHT_3
+	dw .the_steep_canyon_2     ; LEVEL_THE_STEEP_CANYON_NIGHT_4
+	dw .cave_of_flames         ; LEVEL_CAVE_OF_FLAMES_DAY_1
+	dw .cave_of_flames         ; LEVEL_CAVE_OF_FLAMES_DAY_2
+	dw .cave_of_flames         ; LEVEL_CAVE_OF_FLAMES_DAY_3
+	dw .cave_of_flames         ; LEVEL_CAVE_OF_FLAMES_DAY_4
+	dw .cave_of_flames         ; LEVEL_CAVE_OF_FLAMES_NIGHT_1
+	dw .cave_of_flames         ; LEVEL_CAVE_OF_FLAMES_NIGHT_2
+	dw .cave_of_flames         ; LEVEL_CAVE_OF_FLAMES_NIGHT_3
+	dw .cave_of_flames         ; LEVEL_CAVE_OF_FLAMES_NIGHT_4
+	dw .above_the_clouds_1     ; LEVEL_ABOVE_THE_CLOUDS_DAY_1
+	dw .above_the_clouds_1     ; LEVEL_ABOVE_THE_CLOUDS_DAY_2
+	dw .above_the_clouds_1     ; LEVEL_ABOVE_THE_CLOUDS_DAY_3
+	dw .above_the_clouds_1     ; LEVEL_ABOVE_THE_CLOUDS_DAY_4
+	dw .above_the_clouds_1     ; LEVEL_ABOVE_THE_CLOUDS_NIGHT_1
+	dw .above_the_clouds_1     ; LEVEL_ABOVE_THE_CLOUDS_NIGHT_2
+	dw .above_the_clouds_1     ; LEVEL_ABOVE_THE_CLOUDS_NIGHT_3
+	dw .above_the_clouds_2     ; LEVEL_ABOVE_THE_CLOUDS_NIGHT_4
+	dw .the_stagnant_swamp_1   ; LEVEL_THE_STAGNANT_SWAMP_DAY_1
+	dw .the_stagnant_swamp_2   ; LEVEL_THE_STAGNANT_SWAMP_DAY_2
+	dw .the_stagnant_swamp_2   ; LEVEL_THE_STAGNANT_SWAMP_DAY_3
+	dw .the_stagnant_swamp_2   ; LEVEL_THE_STAGNANT_SWAMP_DAY_4
+	dw .the_stagnant_swamp_1   ; LEVEL_THE_STAGNANT_SWAMP_NIGHT_1
+	dw .the_stagnant_swamp_2   ; LEVEL_THE_STAGNANT_SWAMP_NIGHT_2
+	dw .the_stagnant_swamp_2   ; LEVEL_THE_STAGNANT_SWAMP_NIGHT_3
+	dw .the_stagnant_swamp_2   ; LEVEL_THE_STAGNANT_SWAMP_NIGHT_4
+	dw .the_frigid_sea         ; LEVEL_THE_FRIGID_SEA_DAY_1
+	dw .the_frigid_sea         ; LEVEL_THE_FRIGID_SEA_DAY_2
+	dw .the_frigid_sea         ; LEVEL_THE_FRIGID_SEA_DAY_3
+	dw .the_frigid_sea         ; LEVEL_THE_FRIGID_SEA_DAY_4
+	dw .the_frigid_sea         ; LEVEL_THE_FRIGID_SEA_NIGHT_1
+	dw .the_frigid_sea         ; LEVEL_THE_FRIGID_SEA_NIGHT_2
+	dw .the_frigid_sea         ; LEVEL_THE_FRIGID_SEA_NIGHT_3
+	dw .the_frigid_sea         ; LEVEL_THE_FRIGID_SEA_NIGHT_4
+	dw .castle_of_illusions    ; LEVEL_CASTLE_OF_ILLUSIONS_DAY_1
+	dw .castle_of_illusions    ; LEVEL_CASTLE_OF_ILLUSIONS_DAY_2
+	dw .castle_of_illusions    ; LEVEL_CASTLE_OF_ILLUSIONS_DAY_3
+	dw .castle_of_illusions    ; LEVEL_CASTLE_OF_ILLUSIONS_DAY_4
+	dw .castle_of_illusions    ; LEVEL_CASTLE_OF_ILLUSIONS_NIGHT_1
+	dw .castle_of_illusions    ; LEVEL_CASTLE_OF_ILLUSIONS_NIGHT_2
+	dw .castle_of_illusions    ; LEVEL_CASTLE_OF_ILLUSIONS_NIGHT_3
+	dw .castle_of_illusions    ; LEVEL_CASTLE_OF_ILLUSIONS_NIGHT_4
+	dw .the_colossal_hole_1    ; LEVEL_THE_COLOSSAL_HOLE_DAY_1
+	dw .the_colossal_hole_1    ; LEVEL_THE_COLOSSAL_HOLE_DAY_2
+	dw .the_colossal_hole_1    ; LEVEL_THE_COLOSSAL_HOLE_DAY_3
+	dw .the_colossal_hole_1    ; LEVEL_THE_COLOSSAL_HOLE_DAY_4
+	dw .the_colossal_hole_2    ; LEVEL_THE_COLOSSAL_HOLE_NIGHT_1
+	dw .the_colossal_hole_2    ; LEVEL_THE_COLOSSAL_HOLE_NIGHT_2
+	dw .the_colossal_hole_2    ; LEVEL_THE_COLOSSAL_HOLE_NIGHT_3
+	dw .the_colossal_hole_2    ; LEVEL_THE_COLOSSAL_HOLE_NIGHT_4
+	dw .the_warped_void        ; LEVEL_THE_WARPED_VOID_DAY_1
+	dw .the_warped_void        ; LEVEL_THE_WARPED_VOID_DAY_2
+	dw .the_warped_void        ; LEVEL_THE_WARPED_VOID_DAY_3
+	dw .the_warped_void        ; LEVEL_THE_WARPED_VOID_DAY_4
+	dw .the_warped_void        ; LEVEL_THE_WARPED_VOID_NIGHT_1
+	dw .the_warped_void        ; LEVEL_THE_WARPED_VOID_NIGHT_2
+	dw .the_warped_void        ; LEVEL_THE_WARPED_VOID_NIGHT_3
+	dw .the_warped_void        ; LEVEL_THE_WARPED_VOID_NIGHT_4
+	dw .the_east_crater        ; LEVEL_THE_EAST_CRATER_DAY_1
+	dw .the_east_crater        ; LEVEL_THE_EAST_CRATER_DAY_2
+	dw .the_east_crater        ; LEVEL_THE_EAST_CRATER_DAY_3
+	dw .the_east_crater        ; LEVEL_THE_EAST_CRATER_DAY_4
+	dw .the_east_crater        ; LEVEL_THE_EAST_CRATER_NIGHT_1
+	dw .the_east_crater        ; LEVEL_THE_EAST_CRATER_NIGHT_2
+	dw .the_east_crater        ; LEVEL_THE_EAST_CRATER_NIGHT_3
+	dw .the_east_crater        ; LEVEL_THE_EAST_CRATER_NIGHT_4
+	dw .forest_of_fear         ; LEVEL_FOREST_OF_FEAR_DAY_1
+	dw .forest_of_fear         ; LEVEL_FOREST_OF_FEAR_DAY_2
+	dw .forest_of_fear         ; LEVEL_FOREST_OF_FEAR_DAY_3
+	dw .forest_of_fear         ; LEVEL_FOREST_OF_FEAR_DAY_4
+	dw .forest_of_fear         ; LEVEL_FOREST_OF_FEAR_NIGHT_1
+	dw .forest_of_fear         ; LEVEL_FOREST_OF_FEAR_NIGHT_2
+	dw .forest_of_fear         ; LEVEL_FOREST_OF_FEAR_NIGHT_3
+	dw .forest_of_fear         ; LEVEL_FOREST_OF_FEAR_NIGHT_4
+	dw .hidden_figure_room     ; LEVEL_HIDDEN_FIGURE_ROOM
 	dw NULL
 	dw NULL
 	dw NULL
@@ -327,76 +327,111 @@ PointerTable_c00be: ; c00be (30:40be)
 	dw NULL
 	dw NULL
 
-.data_c026a
-	db $00, $40, $38, $4c, $69
-.data_c026f
-	db $10, $58, $38, $d3, $6a
-.data_c0274
-	db $00, $40, $39, $8a, $6a
-.data_c0279
-	db $84, $58, $3f, $4b, $6a
-.data_c027e
-	db $00, $40, $3a, $e6, $61
-.data_c0283
-	db $a0, $4e, $3a, $63, $63
-.data_c0288
-	db $00, $40, $3b, $f5, $6a
-.data_c028d
-	db $ab, $57, $3b, $43, $6c
-.data_c0292
-	db $00, $40, $3c, $20, $68
-.data_c0297
-	db $9d, $52, $3c, $47, $69
-.data_c029c
-	db $00, $40, $3d, $13, $65
-.data_c02a1
-	db $33, $55, $3d, $7c, $66
-.data_c02a6
-	db $00, $40, $3e, $8d, $62
-.data_c02ab
-	db $ba, $53, $3e, $e6, $63
-.data_c02b0
-	db $00, $40, $3f, $ff, $68
-.data_c02b5
-	db $89, $52, $39, $bd, $6b
-.data_c02ba
-	db $00, $40, $40, $f4, $69
-.data_c02bf
-	db $1e, $53, $40, $43, $6b
-.data_c02c4
-	db $00, $40, $41, $c8, $5f
-.data_c02c9
-	db $dd, $51, $41, $da, $60
-.data_c02ce
-	db $00, $40, $42, $5e, $6c
-.data_c02d3
-	db $dd, $5a, $42, $5e, $6d
-.data_c02d8
-	db $00, $40, $43, $3a, $62
-.data_c02dd
-	db $04, $55, $43, $32, $63
-.data_c02e2
-	db $00, $40, $44, $64, $54
-.data_c02e7
-	db $9a, $53, $44, $60, $55
-.data_c02ec
-	db $00, $40, $45, $13, $67
-.data_c02f1
-	db $e3, $53, $45, $4a, $68
-.data_c02f6
-	db $00, $40, $46, $b2, $65
-.data_c02fb
-	db $61, $53, $46, $d9, $66
-.data_c0300
-	db $00, $40, $47, $6e, $62
-.data_c0305
-	db $69, $50, $47, $e7, $63
-.data_c030a
-	db $00, $40, $48, $d5, $6e
-.data_c030f
-	db $de, $56, $48, $23, $70
-.data_c0314
-	db $00, $40, $49, $3d, $51
+.out_of_the_woods
+	dab OutOfTheWoodsLayout
+	dw OutOfTheWoodsObjectsMap
+.the_peaceful_village_1
+	dab ThePeacefulVillage1Layout
+	dw ThePeacefulVillage1ObjectsMap
+.the_vast_plain_1
+	dab TheVastPlain1Layout
+	dw TheVastPlain1ObjectsMap
+.bank_of_the_wild_river
+	dab BankOfTheWildRiverLayout
+	dw BankOfTheWildRiverObjectsMap
+.the_tidal_coast_1
+	dab TheTidalCoast1Layout
+	dw TheTidalCoast1ObjectsMap
+.sea_turtle_rocks
+	dab SeaTurtleRocksLayout
+	dw SeaTurtleRocksObjectsMap
+.desert_ruins
+	dab DesertRuinsLayout
+	dw DesertRuinsObjectsMap
+.the_volcanos_base_1
+	dab TheVolcanosBase1Layout
+	dw TheVolcanosBase1ObjectsMap
+.the_pool_of_rain_1
+	dab ThePoolOfRain1Layout
+	dw ThePoolOfRain1ObjectsMap
+.a_town_in_chaos
+	dab ATownInChaosLayout
+	dw ATownInChaosObjectsMap
+.beneath_the_waves
+	dab BeneathTheWavesLayout
+	dw BeneathTheWavesObjectsMap
+.the_west_crater
+	dab TheWestCraterLayout
+	dw TheWestCraterObjectsMap
+.the_grasslands
+	dab TheGrasslandsLayout
+	dw TheGrasslandsObjectsMap
+.the_big_bridge
+	dab TheBigBridgeLayout
+	dw TheBigBridgeObjectsMap
+.tower_of_revival
+	dab TowerOfRevivalLayout
+	dw TowerOfRevivalObjectsMap
+.the_steep_canyon_1
+	dab TheSteepCanyon1Layout
+	dw TheSteepCanyon1ObjectsMap
+.cave_of_flames
+	dab CaveOfFlamesLayout
+	dw CaveOfFlamesObjectsMap
+.above_the_clouds_1
+	dab AboveTheClouds1Layout
+	dw AboveTheClouds1ObjectsMap
+.the_stagnant_swamp_1
+	dab TheStagnantSwamp1Layout
+	dw TheStagnantSwamp1ObjectsMap
+.the_frigid_sea
+	dab TheFrigidSeaLayout
+	dw TheFrigidSeaObjectsMap
+.castle_of_illusions
+	dab CastleOfIllusionsLayout
+	dw CastleOfIllusionsObjectsMap
+.the_colossal_hole_1
+	dab TheColossalHole1Layout
+	dw TheColossalHole1ObjectsMap
+.the_warped_void
+	dab TheWarpedVoidLayout
+	dw TheWarpedVoidObjectsMap
+.the_east_crater
+	dab TheEastCraterLayout
+	dw TheEastCraterObjectsMap
+.forest_of_fear
+	dab ForestOfFearLayout
+	dw ForestOfFearObjectsMap
+.hidden_figure_room
+	dab HiddenFigureRoomLayout
+	dw HiddenFigureRoomObjectsMap
+.the_vast_plain_2
+	dab TheVastPlain2Layout
+	dw TheVastPlain2ObjectsMap
+.the_volcanos_base_2
+	dab TheVolcanosBase2Layout
+	dw TheVolcanosBase2ObjectsMap
+.the_pool_of_rain_2
+	dab ThePoolOfRain2Layout
+	dw ThePoolOfRain2ObjectsMap
+.the_colossal_hole_2
+	dab TheColossalHole2Layout
+	dw TheColossalHole2ObjectsMap
+.the_tidal_coast_2
+	dab TheTidalCoast2Layout
+	dw TheTidalCoast2ObjectsMap
+.the_stagnant_swamp_2
+	dab TheStagnantSwamp2Layout
+	dw TheStagnantSwamp2ObjectsMap
+.above_the_clouds_2
+	dab AboveTheClouds2Layout
+	dw AboveTheClouds2ObjectsMap
+.the_steep_canyon_2
+	dab TheSteepCanyon2Layout
+	dw TheSteepCanyon2ObjectsMap
+.the_peaceful_village_2
+	dab ThePeacefulVillage2Layout
+	dw ThePeacefulVillage2ObjectsMap
 ; 0xc0319
 
 PointerTable_c0319: ; c0319 (30:4319)
@@ -616,724 +651,578 @@ PointerTable_c0319: ; c0319 (30:4319)
 	dw NULL      ; d5
 ; 0xc04c5
 
+room: MACRO
+	db \1, \1 ; permission and tile maps coincide
+	db \2
+	db \3
+	db \4
+ENDM
+
 PointerTable_c04c5: ; c04c5 (30:44c5)
-	dw NULL
-	dw .data_c060b
-	dw .data_c0610
-	dw .data_c0615
-	dw .data_c061a
-	dw .data_c061f
-	dw .data_c0624
-	dw .data_c0629
-	dw .data_c062e
-	dw .data_c0633
-	dw .data_c0638
-	dw .data_c063d
-	dw .data_c0642
-	dw .data_c0647
-	dw .data_c064c
-	dw .data_c0651
-	dw .data_c0656
-	dw .data_c065b
-	dw .data_c0660
-	dw .data_c0665
-	dw .data_c066a
-	dw .data_c066f
-	dw .data_c0674
-	dw .data_c0679
-	dw .data_c067e
-	dw .data_c0683
-	dw .data_c0688
-	dw .data_c068d
-	dw .data_c0692
-	dw .data_c0697
-	dw .data_c069c
-	dw .data_c06a1
-	dw .data_c06a6
-	dw .data_c06ab
-	dw .data_c06b0
-	dw .data_c06b5
-	dw .data_c06ba
-	dw .data_c06bf
-	dw .data_c06c4
-	dw .data_c06c9
-	dw .data_c06ce
-	dw .data_c06d3
-	dw .data_c06d8
-	dw .data_c06dd
-	dw .data_c06e2
-	dw .data_c06e7
-	dw .data_c06ec
-	dw .data_c06f1
-	dw .data_c06f6
-	dw .data_c06fb
-	dw .data_c0700
-	dw .data_c0705
-	dw .data_c070a
-	dw .data_c070f
-	dw .data_c0714
-	dw .data_c0719
-	dw .data_c071e
-	dw .data_c0723
-	dw .data_c0728
-	dw .data_c072d
-	dw .data_c0732
-	dw .data_c0737
-	dw .data_c073c
-	dw .data_c0741
-	dw .data_c0746
-	dw .data_c074b
-	dw .data_c0750
-	dw .data_c0755
-	dw .data_c075a
-	dw .data_c075f
-	dw .data_c0764
-	dw .data_c0769
-	dw .data_c076e
-	dw .data_c0773
-	dw .data_c0778
-	dw .data_c077d
-	dw .data_c0782
-	dw .data_c0787
-	dw .data_c078c
-	dw .data_c0791
-	dw .data_c0796
-	dw .data_c079b
-	dw .data_c07a0
-	dw .data_c07a5
-	dw .data_c07aa
-	dw .data_c07af
-	dw .data_c07b4
-	dw .data_c07b9
-	dw .data_c07be
-	dw .data_c07c3
-	dw .data_c07c8
-	dw .data_c07cd
-	dw .data_c07d2
-	dw .data_c07d7
-	dw .data_c07dc
-	dw .data_c07e1
-	dw .data_c07e6
-	dw .data_c07eb
-	dw .data_c07f0
-	dw .data_c07f5
-	dw .data_c07fa
-	dw .data_c07ff
-	dw .data_c0804
-	dw .data_c0809
-	dw .data_c080e
-	dw .data_c0813
-	dw .data_c0818
-	dw .data_c081d
-	dw .data_c0822
-	dw .data_c0827
-	dw .data_c082c
-	dw .data_c0831
-	dw .data_c0836
-	dw .data_c083b
-	dw .data_c0840
-	dw .data_c0845
-	dw .data_c084a
-	dw .data_c084f
-	dw .data_c0854
-	dw .data_c0859
-	dw .data_c085e
-	dw .data_c0863
-	dw .data_c0868
-	dw .data_c086d
-	dw .data_c0872
-	dw .data_c0877
-	dw .data_c087c
-	dw .data_c0881
-	dw .data_c0886
-	dw .data_c088b
-	dw .data_c0890
-	dw .data_c0895
-	dw .data_c089a
-	dw .data_c089f
-	dw .data_c08a4
-	dw .data_c08a9
-	dw .data_c08ae
-	dw .data_c08b3
-	dw .data_c08b8
-	dw .data_c08bd
-	dw .data_c08c2
-	dw .data_c08c7
-	dw .data_c08cc
-	dw .data_c08d1
-	dw .data_c08d6
-	dw .data_c08db
-	dw .data_c08e0
-	dw .data_c08e5
-	dw .data_c08ea
-	dw .data_c08ef
-	dw .data_c08f4
-	dw .data_c08f9
-	dw .data_c08fe
-	dw .data_c0903
-	dw .data_c0908
-	dw NULL
-	dw NULL
+	dw NULL      ; ROOM_000
+	dw .room_001 ; ROOM_001
+	dw .room_002 ; ROOM_002
+	dw .room_003 ; ROOM_003
+	dw .room_004 ; ROOM_004
+	dw .room_005 ; ROOM_005
+	dw .room_006 ; ROOM_006
+	dw .room_007 ; ROOM_007
+	dw .room_008 ; ROOM_008
+	dw .room_009 ; ROOM_009
+	dw .room_010 ; ROOM_010
+	dw .room_011 ; ROOM_011
+	dw .room_012 ; ROOM_012
+	dw .room_013 ; ROOM_013
+	dw .room_014 ; ROOM_014
+	dw .room_015 ; ROOM_015
+	dw .room_016 ; ROOM_016
+	dw .room_017 ; ROOM_017
+	dw .room_018 ; ROOM_018
+	dw .room_019 ; ROOM_019
+	dw .room_020 ; ROOM_020
+	dw .room_021 ; ROOM_021
+	dw .room_022 ; ROOM_022
+	dw .room_023 ; ROOM_023
+	dw .room_024 ; ROOM_024
+	dw .room_025 ; ROOM_025
+	dw .room_026 ; ROOM_026
+	dw .room_027 ; ROOM_027
+	dw .room_028 ; ROOM_028
+	dw .room_029 ; ROOM_029
+	dw .room_030 ; ROOM_030
+	dw .room_031 ; ROOM_031
+	dw .room_032 ; ROOM_032
+	dw .room_033 ; ROOM_033
+	dw .room_034 ; ROOM_034
+	dw .room_035 ; ROOM_035
+	dw .room_036 ; ROOM_036
+	dw .room_037 ; ROOM_037
+	dw .room_038 ; ROOM_038
+	dw .room_039 ; ROOM_039
+	dw .room_040 ; ROOM_040
+	dw .room_041 ; ROOM_041
+	dw .room_042 ; ROOM_042
+	dw .room_043 ; ROOM_043
+	dw .room_044 ; ROOM_044
+	dw .room_045 ; ROOM_045
+	dw .room_046 ; ROOM_046
+	dw .room_047 ; ROOM_047
+	dw .room_048 ; ROOM_048
+	dw .room_049 ; ROOM_049
+	dw .room_050 ; ROOM_050
+	dw .room_051 ; ROOM_051
+	dw .room_052 ; ROOM_052
+	dw .room_053 ; ROOM_053
+	dw .room_054 ; ROOM_054
+	dw .room_055 ; ROOM_055
+	dw .room_056 ; ROOM_056
+	dw .room_057 ; ROOM_057
+	dw .room_058 ; ROOM_058
+	dw .room_059 ; ROOM_059
+	dw .room_060 ; ROOM_060
+	dw .room_061 ; ROOM_061
+	dw .room_062 ; ROOM_062
+	dw .room_063 ; ROOM_063
+	dw .room_064 ; ROOM_064
+	dw .room_065 ; ROOM_065
+	dw .room_066 ; ROOM_066
+	dw .room_067 ; ROOM_067
+	dw .room_068 ; ROOM_068
+	dw .room_069 ; ROOM_069
+	dw .room_070 ; ROOM_070
+	dw .room_071 ; ROOM_071
+	dw .room_072 ; ROOM_072
+	dw .room_073 ; ROOM_073
+	dw .room_074 ; ROOM_074
+	dw .room_075 ; ROOM_075
+	dw .room_076 ; ROOM_076
+	dw .room_077 ; ROOM_077
+	dw .room_078 ; ROOM_078
+	dw .room_079 ; ROOM_079
+	dw .room_080 ; ROOM_080
+	dw .room_081 ; ROOM_081
+	dw .room_082 ; ROOM_082
+	dw .room_083 ; ROOM_083
+	dw .room_084 ; ROOM_084
+	dw .room_085 ; ROOM_085
+	dw .room_086 ; ROOM_086
+	dw .room_087 ; ROOM_087
+	dw .room_088 ; ROOM_088
+	dw .room_089 ; ROOM_089
+	dw .room_090 ; ROOM_090
+	dw .room_091 ; ROOM_091
+	dw .room_092 ; ROOM_092
+	dw .room_093 ; ROOM_093
+	dw .room_094 ; ROOM_094
+	dw .room_095 ; ROOM_095
+	dw .room_096 ; ROOM_096
+	dw .room_097 ; ROOM_097
+	dw .room_098 ; ROOM_098
+	dw .room_099 ; ROOM_099
+	dw .room_100 ; ROOM_100
+	dw .room_101 ; ROOM_101
+	dw .room_102 ; ROOM_102
+	dw .room_103 ; ROOM_103
+	dw .room_104 ; ROOM_104
+	dw .room_105 ; ROOM_105
+	dw .room_106 ; ROOM_106
+	dw .room_107 ; ROOM_107
+	dw .room_108 ; ROOM_108
+	dw .room_109 ; ROOM_109
+	dw .room_110 ; ROOM_110
+	dw .room_111 ; ROOM_111
+	dw .room_112 ; ROOM_112
+	dw .room_113 ; ROOM_113
+	dw .room_114 ; ROOM_114
+	dw .room_115 ; ROOM_115
+	dw .room_116 ; ROOM_116
+	dw .room_117 ; ROOM_117
+	dw .room_118 ; ROOM_118
+	dw .room_119 ; ROOM_119
+	dw .room_120 ; ROOM_120
+	dw .room_121 ; ROOM_121
+	dw .room_122 ; ROOM_122
+	dw .room_123 ; ROOM_123
+	dw .room_124 ; ROOM_124
+	dw .room_125 ; ROOM_125
+	dw .room_126 ; ROOM_126
+	dw .room_127 ; ROOM_127
+	dw .room_128 ; ROOM_128
+	dw .room_129 ; ROOM_129
+	dw .room_130 ; ROOM_130
+	dw .room_131 ; ROOM_131
+	dw .room_132 ; ROOM_132
+	dw .room_133 ; ROOM_133
+	dw .room_134 ; ROOM_134
+	dw .room_135 ; ROOM_135
+	dw .room_136 ; ROOM_136
+	dw .room_137 ; ROOM_137
+	dw .room_138 ; ROOM_138
+	dw .room_139 ; ROOM_139
+	dw .room_140 ; ROOM_140
+	dw .room_141 ; ROOM_141
+	dw .room_142 ; ROOM_142
+	dw .room_143 ; ROOM_143
+	dw .room_144 ; ROOM_144
+	dw .room_145 ; ROOM_145
+	dw .room_146 ; ROOM_146
+	dw .room_147 ; ROOM_147
+	dw .room_148 ; ROOM_148
+	dw .room_149 ; ROOM_149
+	dw .room_150 ; ROOM_150
+	dw .room_151 ; ROOM_151
+	dw .room_152 ; ROOM_152
+	dw .room_153 ; ROOM_153
+	dw .room_154 ; ROOM_154
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
-
-.data_c060b
-	db $00, $00, $00, $00, $00
-
-.data_c0610
-	db $00, $00, $00, $00, $01
-
-.data_c0615
-	db $01, $01, $00, $00, $00
-
-.data_c061a
-	db $01, $01, $00, $00, $01
-
-.data_c061f
-	db $02, $02, $01, $01, $02
-
-.data_c0624
-	db $03, $03, $02, $02, $04
-
-.data_c0629
-	db $03, $03, $02, $02, $05
-
-.data_c062e
-	db $04, $04, $02, $02, $04
-
-.data_c0633
-	db $04, $04, $02, $02, $05
-
-.data_c0638
-	db $05, $05, $03, $03, $06
-
-.data_c063d
-	db $05, $05, $03, $03, $07
-
-.data_c0642
-	db $06, $06, $04, $03, $08
-
-.data_c0647
-	db $0a, $0a, $04, $03, $0d
-
-.data_c064c
-	db $09, $09, $26, $03, $09
-
-.data_c0651
-	db $07, $07, $05, $03, $0b
-
-.data_c0656
-	db $08, $08, $06, $03, $0c
-
-.data_c065b
-	db $09, $09, $26, $03, $0a
-
-.data_c0660
-	db $3b, $3b, $07, $03, $0e
-
-.data_c0665
-	db $0c, $0c, $08, $03, $0f
-
-.data_c066a
-	db $0d, $0d, $09, $01, $10
-
-.data_c066f
-	db $42, $42, $0a, $01, $11
-
-.data_c0674
-	db $3d, $3d, $0b, $01, $12
-
-.data_c0679
-	db $10, $10, $0c, $04, $13
-
-.data_c067e
-	db $11, $11, $0c, $04, $14
-
-.data_c0683
-	db $12, $12, $0d, $01, $15
-
-.data_c0688
-	db $09, $09, $26, $03, $16
-
-.data_c068d
-	db $13, $13, $0e, $01, $17
-
-.data_c0692
-	db $13, $13, $0e, $01, $18
-
-.data_c0697
-	db $34, $34, $0f, $05, $19
-
-.data_c069c
-	db $32, $32, $0f, $05, $1a
-
-.data_c06a1
-	db $15, $15, $10, $08, $1b
-
-.data_c06a6
-	db $16, $16, $11, $01, $1c
-
-.data_c06ab
-	db $16, $16, $11, $01, $1d
-
-.data_c06b0
-	db $17, $17, $12, $01, $1e
-
-.data_c06b5
-	db $36, $36, $13, $01, $1f
-
-.data_c06ba
-	db $37, $37, $14, $01, $4a
-
-.data_c06bf
-	db $1a, $1a, $15, $01, $21
-
-.data_c06c4
-	db $38, $38, $16, $01, $22
-
-.data_c06c9
-	db $1c, $1c, $17, $01, $23
-
-.data_c06ce
-	db $1d, $1d, $18, $01, $24
-
-.data_c06d3
-	db $1e, $1e, $19, $07, $25
-
-.data_c06d8
-	db $1f, $1f, $0c, $04, $26
-
-.data_c06dd
-	db $3f, $3f, $1a, $01, $27
-
-.data_c06e2
-	db $21, $21, $1b, $01, $28
-
-.data_c06e7
-	db $22, $22, $1c, $01, $29
-
-.data_c06ec
-	db $44, $44, $19, $07, $2a
-
-.data_c06f1
-	db $24, $24, $1d, $01, $2b
-
-.data_c06f6
-	db $51, $51, $1d, $01, $2c
-
-.data_c06fb
-	db $1b, $1b, $16, $01, $2d
-
-.data_c0700
-	db $0f, $0f, $0b, $01, $2e
-
-.data_c0705
-	db $25, $25, $1e, $01, $2f
-
-.data_c070a
-	db $26, $26, $1f, $01, $30
-
-.data_c070f
-	db $27, $27, $20, $01, $31
-
-.data_c0714
-	db $28, $28, $21, $01, $32
-
-.data_c0719
-	db $17, $17, $12, $01, $33
-
-.data_c071e
-	db $29, $29, $22, $01, $34
-
-.data_c0723
-	db $2a, $2a, $23, $01, $35
-
-.data_c0728
-	db $35, $35, $24, $01, $36
-
-.data_c072d
-	db $2c, $2c, $25, $01, $37
-
-.data_c0732
-	db $08, $08, $06, $03, $38
-
-.data_c0737
-	db $08, $08, $06, $03, $39
-
-.data_c073c
-	db $2d, $2d, $0c, $04, $3a
-
-.data_c0741
-	db $15, $15, $10, $08, $3b
-
-.data_c0746
-	db $16, $16, $11, $01, $3c
-
-.data_c074b
-	db $16, $16, $11, $01, $3d
-
-.data_c0750
-	db $3e, $3e, $0b, $01, $51
-
-.data_c0755
-	db $2e, $2e, $06, $03, $0c
-
-.data_c075a
-	db $2e, $2e, $06, $03, $38
-
-.data_c075f
-	db $24, $24, $1d, $01, $3f
-
-.data_c0764
-	db $24, $24, $1d, $01, $40
-
-.data_c0769
-	db $33, $33, $16, $01, $41
-
-.data_c076e
-	db $2f, $2f, $1a, $06, $27
-
-.data_c0773
-	db $18, $18, $13, $01, $42
-
-.data_c0778
-	db $30, $30, $06, $03, $0c
-
-.data_c077d
-	db $58, $58, $06, $03, $38
-
-.data_c0782
-	db $31, $31, $19, $07, $43
-
-.data_c0787
-	db $25, $25, $1e, $01, $44
-
-.data_c078c
-	db $25, $25, $1e, $01, $45
-
-.data_c0791
-	db $25, $25, $1e, $01, $46
-
-.data_c0796
-	db $55, $55, $0e, $01, $47
-
-.data_c079b
-	db $34, $34, $0f, $05, $48
-
-.data_c07a0
-	db $14, $14, $0f, $05, $19
-
-.data_c07a5
-	db $14, $14, $0f, $05, $48
-
-.data_c07aa
-	db $15, $15, $10, $08, $3b
-
-.data_c07af
-	db $16, $16, $11, $01, $3c
-
-.data_c07b4
-	db $16, $16, $11, $01, $3d
-
-.data_c07b9
-	db $2b, $2b, $24, $01, $36
-
-.data_c07be
-	db $18, $18, $13, $01, $1f
-
-.data_c07c3
-	db $36, $36, $13, $01, $49
-
-.data_c07c8
-	db $18, $18, $13, $01, $49
-
-.data_c07cd
-	db $19, $19, $14, $01, $20
-
-.data_c07d2
-	db $37, $37, $14, $01, $4b
-
-.data_c07d7
-	db $19, $19, $14, $01, $4c
-
-.data_c07dc
-	db $1b, $1b, $16, $01, $22
-
-.data_c07e1
-	db $39, $39, $16, $01, $41
-
-.data_c07e6
-	db $3a, $3a, $16, $01, $41
-
-.data_c07eb
-	db $38, $38, $16, $01, $4d
-
-.data_c07f0
-	db $1b, $1b, $16, $01, $4d
-
-.data_c07f5
-	db $33, $33, $16, $01, $4e
-
-.data_c07fa
-	db $39, $39, $16, $01, $4e
-
-.data_c07ff
-	db $3a, $3a, $16, $01, $4e
-
-.data_c0804
-	db $0b, $0b, $07, $03, $0e
-
-.data_c0809
-	db $3b, $3b, $07, $03, $4f
-
-.data_c080e
-	db $0b, $0b, $07, $03, $4f
-
-.data_c0813
-	db $3c, $3c, $0b, $01, $2e
-
-.data_c0818
-	db $0f, $0f, $0b, $01, $12
-
-.data_c081d
-	db $0f, $0f, $0b, $01, $3e
-
-.data_c0822
-	db $3d, $3d, $0b, $01, $50
-
-.data_c0827
-	db $0f, $0f, $0b, $01, $50
-
-.data_c082c
-	db $20, $20, $1a, $01, $27
-
-.data_c0831
-	db $40, $40, $1a, $01, $52
-
-.data_c0836
-	db $41, $41, $1a, $01, $52
-
-.data_c083b
-	db $43, $43, $0a, $01, $11
-
-.data_c0840
-	db $0e, $0e, $0a, $01, $11
-
-.data_c0845
-	db $0d, $0d, $09, $01, $53
-
-.data_c084a
-	db $1e, $1e, $19, $07, $54
-
-.data_c084f
-	db $23, $23, $19, $07, $2a
-
-.data_c0854
-	db $45, $45, $18, $01, $5a
-
-.data_c0859
-	db $46, $46, $27, $01, $5d
-
-.data_c085e
-	db $27, $27, $20, $01, $5e
-
-.data_c0863
-	db $47, $47, $20, $01, $31
-
-.data_c0868
-	db $48, $48, $20, $01, $31
-
-.data_c086d
-	db $49, $49, $12, $01, $1e
-
-.data_c0872
-	db $4a, $4a, $12, $01, $1e
-
-.data_c0877
-	db $17, $17, $12, $01, $61
-
-.data_c087c
-	db $49, $49, $12, $01, $61
-
-.data_c0881
-	db $4a, $4a, $12, $01, $61
-
-.data_c0886
-	db $4b, $4b, $1c, $01, $29
-
-.data_c088b
-	db $22, $22, $1c, $01, $62
-
-.data_c0890
-	db $4b, $4b, $1c, $01, $62
-
-.data_c0895
-	db $4c, $4c, $1b, $01, $28
-
-.data_c089a
-	db $4d, $4d, $1b, $01, $63
-
-.data_c089f
-	db $4e, $4e, $1b, $01, $63
-
-.data_c08a4
-	db $2a, $2a, $23, $01, $64
-
-.data_c08a9
-	db $4f, $4f, $18, $01, $24
-
-.data_c08ae
-	db $56, $56, $18, $01, $65
-
-.data_c08b3
-	db $57, $57, $18, $01, $65
-
-.data_c08b8
-	db $45, $45, $18, $01, $68
-
-.data_c08bd
-	db $50, $50, $1f, $01, $30
-
-.data_c08c2
-	db $26, $26, $1f, $01, $6b
-
-.data_c08c7
-	db $50, $50, $1f, $01, $6b
-
-.data_c08cc
-	db $51, $51, $1d, $01, $6c
-
-.data_c08d1
-	db $24, $24, $1d, $01, $6d
-
-.data_c08d6
-	db $51, $51, $1d, $01, $6e
-
-.data_c08db
-	db $51, $51, $1d, $01, $3f
-
-.data_c08e0
-	db $24, $24, $1d, $01, $6f
-
-.data_c08e5
-	db $51, $51, $1d, $01, $6f
-
-.data_c08ea
-	db $51, $51, $1d, $01, $40
-
-.data_c08ef
-	db $52, $52, $1e, $01, $2f
-
-.data_c08f4
-	db $53, $53, $1e, $01, $2f
-
-.data_c08f9
-	db $54, $54, $17, $01, $70
-
-.data_c08fe
-	db $1c, $1c, $17, $01, $71
-
-.data_c0903
-	db $54, $54, $17, $01, $72
-
-.data_c0908
-	db $13, $13, $0e, $01, $75
+	dw NULL
+	dw NULL
+
+.room_001
+	room TILE_MAP_00, $00, $00, $00
+.room_002
+	room TILE_MAP_00, $00, $00, $01
+.room_003
+	room TILE_MAP_01, $00, $00, $00
+.room_004
+	room TILE_MAP_01, $00, $00, $01
+.room_005
+	room TILE_MAP_02, $01, $01, $02
+.room_006
+	room TILE_MAP_03, $02, $02, $04
+.room_007
+	room TILE_MAP_03, $02, $02, $05
+.room_008
+	room TILE_MAP_04, $02, $02, $04
+.room_009
+	room TILE_MAP_04, $02, $02, $05
+.room_010
+	room TILE_MAP_05, $03, $03, $06
+.room_011
+	room TILE_MAP_05, $03, $03, $07
+.room_012
+	room TILE_MAP_06, $04, $03, $08
+.room_013
+	room TILE_MAP_10, $04, $03, $0d
+.room_014
+	room TILE_MAP_09, $26, $03, $09
+.room_015
+	room TILE_MAP_07, $05, $03, $0b
+.room_016
+	room TILE_MAP_08, $06, $03, $0c
+.room_017
+	room TILE_MAP_09, $26, $03, $0a
+.room_018
+	room TILE_MAP_59, $07, $03, $0e
+.room_019
+	room TILE_MAP_12, $08, $03, $0f
+.room_020
+	room TILE_MAP_13, $09, $01, $10
+.room_021
+	room TILE_MAP_66, $0a, $01, $11
+.room_022
+	room TILE_MAP_61, $0b, $01, $12
+.room_023
+	room TILE_MAP_16, $0c, $04, $13
+.room_024
+	room TILE_MAP_17, $0c, $04, $14
+.room_025
+	room TILE_MAP_18, $0d, $01, $15
+.room_026
+	room TILE_MAP_09, $26, $03, $16
+.room_027
+	room TILE_MAP_19, $0e, $01, $17
+.room_028
+	room TILE_MAP_19, $0e, $01, $18
+.room_029
+	room TILE_MAP_52, $0f, $05, $19
+.room_030
+	room TILE_MAP_50, $0f, $05, $1a
+.room_031
+	room TILE_MAP_21, $10, $08, $1b
+.room_032
+	room TILE_MAP_22, $11, $01, $1c
+.room_033
+	room TILE_MAP_22, $11, $01, $1d
+.room_034
+	room TILE_MAP_23, $12, $01, $1e
+.room_035
+	room TILE_MAP_54, $13, $01, $1f
+.room_036
+	room TILE_MAP_55, $14, $01, $4a
+.room_037
+	room TILE_MAP_26, $15, $01, $21
+.room_038
+	room TILE_MAP_56, $16, $01, $22
+.room_039
+	room TILE_MAP_28, $17, $01, $23
+.room_040
+	room TILE_MAP_29, $18, $01, $24
+.room_041
+	room TILE_MAP_30, $19, $07, $25
+.room_042
+	room TILE_MAP_31, $0c, $04, $26
+.room_043
+	room TILE_MAP_63, $1a, $01, $27
+.room_044
+	room TILE_MAP_33, $1b, $01, $28
+.room_045
+	room TILE_MAP_34, $1c, $01, $29
+.room_046
+	room TILE_MAP_68, $19, $07, $2a
+.room_047
+	room TILE_MAP_36, $1d, $01, $2b
+.room_048
+	room TILE_MAP_81, $1d, $01, $2c
+.room_049
+	room TILE_MAP_27, $16, $01, $2d
+.room_050
+	room TILE_MAP_15, $0b, $01, $2e
+.room_051
+	room TILE_MAP_37, $1e, $01, $2f
+.room_052
+	room TILE_MAP_38, $1f, $01, $30
+.room_053
+	room TILE_MAP_39, $20, $01, $31
+.room_054
+	room TILE_MAP_40, $21, $01, $32
+.room_055
+	room TILE_MAP_23, $12, $01, $33
+.room_056
+	room TILE_MAP_41, $22, $01, $34
+.room_057
+	room TILE_MAP_42, $23, $01, $35
+.room_058
+	room TILE_MAP_53, $24, $01, $36
+.room_059
+	room TILE_MAP_44, $25, $01, $37
+.room_060
+	room TILE_MAP_08, $06, $03, $38
+.room_061
+	room TILE_MAP_08, $06, $03, $39
+.room_062
+	room TILE_MAP_45, $0c, $04, $3a
+.room_063
+	room TILE_MAP_21, $10, $08, $3b
+.room_064
+	room TILE_MAP_22, $11, $01, $3c
+.room_065
+	room TILE_MAP_22, $11, $01, $3d
+.room_066
+	room TILE_MAP_62, $0b, $01, $51
+.room_067
+	room TILE_MAP_46, $06, $03, $0c
+.room_068
+	room TILE_MAP_46, $06, $03, $38
+.room_069
+	room TILE_MAP_36, $1d, $01, $3f
+.room_070
+	room TILE_MAP_36, $1d, $01, $40
+.room_071
+	room TILE_MAP_51, $16, $01, $41
+.room_072
+	room TILE_MAP_47, $1a, $06, $27
+.room_073
+	room TILE_MAP_24, $13, $01, $42
+.room_074
+	room TILE_MAP_48, $06, $03, $0c
+.room_075
+	room TILE_MAP_88, $06, $03, $38
+.room_076
+	room TILE_MAP_49, $19, $07, $43
+.room_077
+	room TILE_MAP_37, $1e, $01, $44
+.room_078
+	room TILE_MAP_37, $1e, $01, $45
+.room_079
+	room TILE_MAP_37, $1e, $01, $46
+.room_080
+	room TILE_MAP_85, $0e, $01, $47
+.room_081
+	room TILE_MAP_52, $0f, $05, $48
+.room_082
+	room TILE_MAP_20, $0f, $05, $19
+.room_083
+	room TILE_MAP_20, $0f, $05, $48
+.room_084
+	room TILE_MAP_21, $10, $08, $3b
+.room_085
+	room TILE_MAP_22, $11, $01, $3c
+.room_086
+	room TILE_MAP_22, $11, $01, $3d
+.room_087
+	room TILE_MAP_43, $24, $01, $36
+.room_088
+	room TILE_MAP_24, $13, $01, $1f
+.room_089
+	room TILE_MAP_54, $13, $01, $49
+.room_090
+	room TILE_MAP_24, $13, $01, $49
+.room_091
+	room TILE_MAP_25, $14, $01, $20
+.room_092
+	room TILE_MAP_55, $14, $01, $4b
+.room_093
+	room TILE_MAP_25, $14, $01, $4c
+.room_094
+	room TILE_MAP_27, $16, $01, $22
+.room_095
+	room TILE_MAP_57, $16, $01, $41
+.room_096
+	room TILE_MAP_58, $16, $01, $41
+.room_097
+	room TILE_MAP_56, $16, $01, $4d
+.room_098
+	room TILE_MAP_27, $16, $01, $4d
+.room_099
+	room TILE_MAP_51, $16, $01, $4e
+.room_100
+	room TILE_MAP_57, $16, $01, $4e
+.room_101
+	room TILE_MAP_58, $16, $01, $4e
+.room_102
+	room TILE_MAP_11, $07, $03, $0e
+.room_103
+	room TILE_MAP_59, $07, $03, $4f
+.room_104
+	room TILE_MAP_11, $07, $03, $4f
+.room_105
+	room TILE_MAP_60, $0b, $01, $2e
+.room_106
+	room TILE_MAP_15, $0b, $01, $12
+.room_107
+	room TILE_MAP_15, $0b, $01, $3e
+.room_108
+	room TILE_MAP_61, $0b, $01, $50
+.room_109
+	room TILE_MAP_15, $0b, $01, $50
+.room_110
+	room TILE_MAP_32, $1a, $01, $27
+.room_111
+	room TILE_MAP_64, $1a, $01, $52
+.room_112
+	room TILE_MAP_65, $1a, $01, $52
+.room_113
+	room TILE_MAP_67, $0a, $01, $11
+.room_114
+	room TILE_MAP_14, $0a, $01, $11
+.room_115
+	room TILE_MAP_13, $09, $01, $53
+.room_116
+	room TILE_MAP_30, $19, $07, $54
+.room_117
+	room TILE_MAP_35, $19, $07, $2a
+.room_118
+	room TILE_MAP_69, $18, $01, $5a
+.room_119
+	room TILE_MAP_70, $27, $01, $5d
+.room_120
+	room TILE_MAP_39, $20, $01, $5e
+.room_121
+	room TILE_MAP_71, $20, $01, $31
+.room_122
+	room TILE_MAP_72, $20, $01, $31
+.room_123
+	room TILE_MAP_73, $12, $01, $1e
+.room_124
+	room TILE_MAP_74, $12, $01, $1e
+.room_125
+	room TILE_MAP_23, $12, $01, $61
+.room_126
+	room TILE_MAP_73, $12, $01, $61
+.room_127
+	room TILE_MAP_74, $12, $01, $61
+.room_128
+	room TILE_MAP_75, $1c, $01, $29
+.room_129
+	room TILE_MAP_34, $1c, $01, $62
+.room_130
+	room TILE_MAP_75, $1c, $01, $62
+.room_131
+	room TILE_MAP_76, $1b, $01, $28
+.room_132
+	room TILE_MAP_77, $1b, $01, $63
+.room_133
+	room TILE_MAP_78, $1b, $01, $63
+.room_134
+	room TILE_MAP_42, $23, $01, $64
+.room_135
+	room TILE_MAP_79, $18, $01, $24
+.room_136
+	room TILE_MAP_86, $18, $01, $65
+.room_137
+	room TILE_MAP_87, $18, $01, $65
+.room_138
+	room TILE_MAP_69, $18, $01, $68
+.room_139
+	room TILE_MAP_80, $1f, $01, $30
+.room_140
+	room TILE_MAP_38, $1f, $01, $6b
+.room_141
+	room TILE_MAP_80, $1f, $01, $6b
+.room_142
+	room TILE_MAP_81, $1d, $01, $6c
+.room_143
+	room TILE_MAP_36, $1d, $01, $6d
+.room_144
+	room TILE_MAP_81, $1d, $01, $6e
+.room_145
+	room TILE_MAP_81, $1d, $01, $3f
+.room_146
+	room TILE_MAP_36, $1d, $01, $6f
+.room_147
+	room TILE_MAP_81, $1d, $01, $6f
+.room_148
+	room TILE_MAP_81, $1d, $01, $40
+.room_149
+	room TILE_MAP_82, $1e, $01, $2f
+.room_150
+	room TILE_MAP_83, $1e, $01, $2f
+.room_151
+	room TILE_MAP_84, $17, $01, $70
+.room_152
+	room TILE_MAP_28, $17, $01, $71
+.room_153
+	room TILE_MAP_84, $17, $01, $72
+.room_154
+	room TILE_MAP_19, $0e, $01, $75
 
 PointerTable_c090d: ; c090d (30:490d)
-	dw $6c0b
-	dw $6eef
-	dw $71cc
-	dw $74b4
-	dw $7739
-	dw $79be
-	dw $6cf7
-	dw $6fe5
-	dw $7281
-	dw $758f
-	dw $7886
-	dw $7b99
-	dw $643f
-	dw $66d1
-	dw $6973
-	dw $6c1d
-	dw $6ecd
-	dw $71c3
-	dw $6d97
-	dw $7038
-	dw $732c
-	dw $7664
-	dw $7943
-	dw $7be2
-	dw $6ab7
-	dw $6d75
-	dw $706a
-	dw $730d
-	dw $75fa
-	dw $78d7
-	dw $6759
-	dw $6a29
-	dw $6d24
-	dw $700f
-	dw $72d5
-	dw $7603
-	dw $64fe
-	dw $67e2
-	dw $6a74
-	dw $6d9f
-	dw $7048
-	dw $72f0
-	dw $6b90
-	dw $6e1d
-	dw $709f
-	dw $72e5
-	dw $7598
-	dw $78a4
-	dw $6c8e
-	dw $6fb0
-	dw $725c
-	dw $758e
-	dw $786d
-	dw $7b9c
-	dw $61f4
-	dw $64ae
-	dw $67a3
-	dw $6a79
-	dw $6d5c
-	dw $703d
-	dw $6e4f
-	dw $70f8
-	dw $73ac
-	dw $793d
-	dw $7c28
-	dw $765c
-	dw $6436
-	dw $66de
-	dw $6988
-	dw $6c3b
-	dw $6f3b
-	dw $7192
-	dw $55a5
-	dw $584a
-	dw $5b7f
-	dw $5eb0
-	dw $61dd
-	dw $64a3
-	dw $699e
-	dw $6c52
-	dw $6f8d
-	dw $72b2
-	dw $7599
-	dw $781c
-	dw $67c8
-	dw $6aa5
-	dw $6d9c
-	dw $70e2
-	dw $7424
-	dw NULL
+	dw $6c0b ; TILE_MAP_00
+	dw $6eef ; TILE_MAP_01
+	dw $71cc ; TILE_MAP_02
+	dw $74b4 ; TILE_MAP_03
+	dw $7739 ; TILE_MAP_04
+	dw $79be ; TILE_MAP_05
+	dw $6cf7 ; TILE_MAP_06
+	dw $6fe5 ; TILE_MAP_07
+	dw $7281 ; TILE_MAP_08
+	dw $758f ; TILE_MAP_09
+	dw $7886 ; TILE_MAP_10
+	dw $7b99 ; TILE_MAP_11
+	dw $643f ; TILE_MAP_12
+	dw $66d1 ; TILE_MAP_13
+	dw $6973 ; TILE_MAP_14
+	dw $6c1d ; TILE_MAP_15
+	dw $6ecd ; TILE_MAP_16
+	dw $71c3 ; TILE_MAP_17
+	dw $6d97 ; TILE_MAP_18
+	dw $7038 ; TILE_MAP_19
+	dw $732c ; TILE_MAP_20
+	dw $7664 ; TILE_MAP_21
+	dw $7943 ; TILE_MAP_22
+	dw $7be2 ; TILE_MAP_23
+	dw $6ab7 ; TILE_MAP_24
+	dw $6d75 ; TILE_MAP_25
+	dw $706a ; TILE_MAP_26
+	dw $730d ; TILE_MAP_27
+	dw $75fa ; TILE_MAP_28
+	dw $78d7 ; TILE_MAP_29
+	dw $6759 ; TILE_MAP_30
+	dw $6a29 ; TILE_MAP_31
+	dw $6d24 ; TILE_MAP_32
+	dw $700f ; TILE_MAP_33
+	dw $72d5 ; TILE_MAP_34
+	dw $7603 ; TILE_MAP_35
+	dw $64fe ; TILE_MAP_36
+	dw $67e2 ; TILE_MAP_37
+	dw $6a74 ; TILE_MAP_38
+	dw $6d9f ; TILE_MAP_39
+	dw $7048 ; TILE_MAP_40
+	dw $72f0 ; TILE_MAP_41
+	dw $6b90 ; TILE_MAP_42
+	dw $6e1d ; TILE_MAP_43
+	dw $709f ; TILE_MAP_44
+	dw $72e5 ; TILE_MAP_45
+	dw $7598 ; TILE_MAP_46
+	dw $78a4 ; TILE_MAP_47
+	dw $6c8e ; TILE_MAP_48
+	dw $6fb0 ; TILE_MAP_49
+	dw $725c ; TILE_MAP_50
+	dw $758e ; TILE_MAP_51
+	dw $786d ; TILE_MAP_52
+	dw $7b9c ; TILE_MAP_53
+	dw $61f4 ; TILE_MAP_54
+	dw $64ae ; TILE_MAP_55
+	dw $67a3 ; TILE_MAP_56
+	dw $6a79 ; TILE_MAP_57
+	dw $6d5c ; TILE_MAP_58
+	dw $703d ; TILE_MAP_59
+	dw $6e4f ; TILE_MAP_60
+	dw $70f8 ; TILE_MAP_61
+	dw $73ac ; TILE_MAP_62
+	dw $793d ; TILE_MAP_63
+	dw $7c28 ; TILE_MAP_64
+	dw $765c ; TILE_MAP_65
+	dw $6436 ; TILE_MAP_66
+	dw $66de ; TILE_MAP_67
+	dw $6988 ; TILE_MAP_68
+	dw $6c3b ; TILE_MAP_69
+	dw $6f3b ; TILE_MAP_70
+	dw $7192 ; TILE_MAP_71
+	dw $55a5 ; TILE_MAP_72
+	dw $584a ; TILE_MAP_73
+	dw $5b7f ; TILE_MAP_74
+	dw $5eb0 ; TILE_MAP_75
+	dw $61dd ; TILE_MAP_76
+	dw $64a3 ; TILE_MAP_77
+	dw $699e ; TILE_MAP_78
+	dw $6c52 ; TILE_MAP_79
+	dw $6f8d ; TILE_MAP_80
+	dw $72b2 ; TILE_MAP_81
+	dw $7599 ; TILE_MAP_82
+	dw $781c ; TILE_MAP_83
+	dw $67c8 ; TILE_MAP_84
+	dw $6aa5 ; TILE_MAP_85
+	dw $6d9c ; TILE_MAP_86
+	dw $70e2 ; TILE_MAP_87
+	dw $7424 ; TILE_MAP_88
+	dw NULL  ; TILE_MAP_89
 	dw NULL
 	dw NULL
 	dw NULL
@@ -1344,96 +1233,96 @@ PointerTable_c090d: ; c090d (30:490d)
 	dw NULL
 
 TileMapsPointers: ; c09d1 (30:49d1)
-	dw $6e0b
-	dw $70ef
-	dw $73cc
-	dw $76b4
-	dw $7939
-	dw $7bbe
-	dw $6ef7
-	dw $71e5
-	dw $7481
-	dw $778f
-	dw $7a86
-	dw $7d99
-	dw $663f
-	dw $68d1
-	dw $6b73
-	dw $6e1d
-	dw $70cd
-	dw $73c3
-	dw $6f97
-	dw $7238
-	dw $752c
-	dw $7864
-	dw $7b43
-	dw $7de2
-	dw $6cb7
-	dw $6f75
-	dw $726a
-	dw $750d
-	dw $77fa
-	dw $7ad7
-	dw $6959
-	dw $6c29
-	dw $6f24
-	dw $720f
-	dw $74d5
-	dw $7803
-	dw $66fe
-	dw $69e2
-	dw $6c74
-	dw $6f9f
-	dw $7248
-	dw $74f0
-	dw $6d90
-	dw $701d
-	dw $729f
-	dw $74e5
-	dw $7798
-	dw $7aa4
-	dw $6e8e
-	dw $71b0
-	dw $745c
-	dw $778e
-	dw $7a6d
-	dw $7d9c
-	dw $63f4
-	dw $66ae
-	dw $69a3
-	dw $6c79
-	dw $6f5c
-	dw $723d
-	dw $704f
-	dw $72f8
-	dw $75ac
-	dw $7b3d
-	dw $7e28
-	dw $785c
-	dw $6636
-	dw $68de
-	dw $6b88
-	dw $6e3b
-	dw $713b
-	dw $7392
-	dw $57a5
-	dw $5a4a
-	dw $5d7f
-	dw $60b0
-	dw $63dd
-	dw $66a3
-	dw $6b9e
-	dw $6e52
-	dw $718d
-	dw $74b2
-	dw $7799
-	dw $7a1c
-	dw $69c8
-	dw $6ca5
-	dw $6f9c
-	dw $72e2
-	dw $7624
-	dw NULL
+	dw $6e0b ; TILE_MAP_00
+	dw $70ef ; TILE_MAP_01
+	dw $73cc ; TILE_MAP_02
+	dw $76b4 ; TILE_MAP_03
+	dw $7939 ; TILE_MAP_04
+	dw $7bbe ; TILE_MAP_05
+	dw $6ef7 ; TILE_MAP_06
+	dw $71e5 ; TILE_MAP_07
+	dw $7481 ; TILE_MAP_08
+	dw $778f ; TILE_MAP_09
+	dw $7a86 ; TILE_MAP_10
+	dw $7d99 ; TILE_MAP_11
+	dw $663f ; TILE_MAP_12
+	dw $68d1 ; TILE_MAP_13
+	dw $6b73 ; TILE_MAP_14
+	dw $6e1d ; TILE_MAP_15
+	dw $70cd ; TILE_MAP_16
+	dw $73c3 ; TILE_MAP_17
+	dw $6f97 ; TILE_MAP_18
+	dw $7238 ; TILE_MAP_19
+	dw $752c ; TILE_MAP_20
+	dw $7864 ; TILE_MAP_21
+	dw $7b43 ; TILE_MAP_22
+	dw $7de2 ; TILE_MAP_23
+	dw $6cb7 ; TILE_MAP_24
+	dw $6f75 ; TILE_MAP_25
+	dw $726a ; TILE_MAP_26
+	dw $750d ; TILE_MAP_27
+	dw $77fa ; TILE_MAP_28
+	dw $7ad7 ; TILE_MAP_29
+	dw $6959 ; TILE_MAP_30
+	dw $6c29 ; TILE_MAP_31
+	dw $6f24 ; TILE_MAP_32
+	dw $720f ; TILE_MAP_33
+	dw $74d5 ; TILE_MAP_34
+	dw $7803 ; TILE_MAP_35
+	dw $66fe ; TILE_MAP_36
+	dw $69e2 ; TILE_MAP_37
+	dw $6c74 ; TILE_MAP_38
+	dw $6f9f ; TILE_MAP_39
+	dw $7248 ; TILE_MAP_40
+	dw $74f0 ; TILE_MAP_41
+	dw $6d90 ; TILE_MAP_42
+	dw $701d ; TILE_MAP_43
+	dw $729f ; TILE_MAP_44
+	dw $74e5 ; TILE_MAP_45
+	dw $7798 ; TILE_MAP_46
+	dw $7aa4 ; TILE_MAP_47
+	dw $6e8e ; TILE_MAP_48
+	dw $71b0 ; TILE_MAP_49
+	dw $745c ; TILE_MAP_50
+	dw $778e ; TILE_MAP_51
+	dw $7a6d ; TILE_MAP_52
+	dw $7d9c ; TILE_MAP_53
+	dw $63f4 ; TILE_MAP_54
+	dw $66ae ; TILE_MAP_55
+	dw $69a3 ; TILE_MAP_56
+	dw $6c79 ; TILE_MAP_57
+	dw $6f5c ; TILE_MAP_58
+	dw $723d ; TILE_MAP_59
+	dw $704f ; TILE_MAP_60
+	dw $72f8 ; TILE_MAP_61
+	dw $75ac ; TILE_MAP_62
+	dw $7b3d ; TILE_MAP_63
+	dw $7e28 ; TILE_MAP_64
+	dw $785c ; TILE_MAP_65
+	dw $6636 ; TILE_MAP_66
+	dw $68de ; TILE_MAP_67
+	dw $6b88 ; TILE_MAP_68
+	dw $6e3b ; TILE_MAP_69
+	dw $713b ; TILE_MAP_70
+	dw $7392 ; TILE_MAP_71
+	dw $57a5 ; TILE_MAP_72
+	dw $5a4a ; TILE_MAP_73
+	dw $5d7f ; TILE_MAP_74
+	dw $60b0 ; TILE_MAP_75
+	dw $63dd ; TILE_MAP_76
+	dw $66a3 ; TILE_MAP_77
+	dw $6b9e ; TILE_MAP_78
+	dw $6e52 ; TILE_MAP_79
+	dw $718d ; TILE_MAP_80
+	dw $74b2 ; TILE_MAP_81
+	dw $7799 ; TILE_MAP_82
+	dw $7a1c ; TILE_MAP_83
+	dw $69c8 ; TILE_MAP_84
+	dw $6ca5 ; TILE_MAP_85
+	dw $6f9c ; TILE_MAP_86
+	dw $72e2 ; TILE_MAP_87
+	dw $7624 ; TILE_MAP_88
+	dw NULL  ; TILE_MAP_89
 	dw NULL
 	dw NULL
 	dw NULL

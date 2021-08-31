@@ -90,7 +90,8 @@ wCurSpriteFrame:: ; c098
 wCurSpriteAttributes:: ; c099
 	ds $1
 
-wc09a:: ; c09a
+; if TRUE, hard reset is not possible
+wResetDisabled:: ; c09a
 	ds $1
 
 wSequence:: ; c09b
@@ -133,14 +134,11 @@ wc0a7:: ; c0a7
 
 	ds $4
 
-wc0ac:: ; c0ac
+wCompressedDataBank:: ; c0ac
 	ds $1
 
-wc0ad:: ; c0ad
-	ds $1
-
-wc0ae:: ; c0ae
-	ds $1
+wCompressedLevelLayoutPtr:: ; c0ad
+	ds $2
 
 	ds $4
 
@@ -212,8 +210,7 @@ wEnemyGroup:: ; c0c8
 wCurRoom:: ; c0c9
 	ds $1
 
-; PERMISSION_MAP_* constant for current room
-wPermissionMapID:: ; c0ca
+wRoomPermissionMap:: ; c0ca
 	ds $1
 
 wRoomTileMap:: ; c0cb

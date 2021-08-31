@@ -256,94 +256,194 @@ SECTION "Bank 37", ROMX
 INCLUDE "engine/bank37.asm"
 
 
-SECTION "Bank 38", ROMX
+SECTION "Level Data 1", ROMX
 
-	INCROM $e0000, $e3d04
+OutOfTheWoodsLayout::       INCBIN "data/levels/layouts/out_of_the_woods.bin"
+ThePeacefulVillage1Layout:: INCBIN "data/levels/layouts/the_peaceful_village_1.bin"
 
+OutOfTheWoodsObjectsMap::       INCBIN "data/levels/objects_map/out_of_the_woods.bin"
+ThePeacefulVillage1ObjectsMap:: INCBIN "data/levels/objects_map/the_peaceful_village_1.bin"
 
-SECTION "Bank 39", ROMX
-
-	INCROM $e4000, $e7e76
-
-
-SECTION "Bank 3A", ROMX
-
-	INCROM $e8000, $eb478
+	INCROM $e2c0b, $e3d04
 
 
-SECTION "Bank 3B", ROMX
+SECTION "Level Data 2", ROMX
 
-	INCROM $ec000, $eff0d
+TheVastPlain1Layout::   INCBIN "data/levels/layouts/the_vast_plain_1.bin"
+TheSteepCanyon1Layout:: INCBIN "data/levels/layouts/the_steep_canyon_1.bin"
 
+TheVastPlain1ObjectsMap::   INCBIN "data/levels/objects_map/the_vast_plain_1.bin"
+TheSteepCanyon1ObjectsMap:: INCBIN "data/levels/objects_map/the_steep_canyon_1.bin"
 
-SECTION "Bank 3C", ROMX
-
-	INCROM $f0000, $f3c16
-
-
-SECTION "Bank 3D", ROMX
-
-	INCROM $f4000, $f78b4
+	INCROM $e6cf7, $e7e76
 
 
-SECTION "Bank 3E", ROMX
+SECTION "Level Data 3", ROMX
 
-	INCROM $f8000, $fb5b0
+TheTidalCoast1Layout:: INCBIN "data/levels/layouts/the_tidal_coast_1.bin"
+SeaTurtleRocksLayout:: INCBIN "data/levels/layouts/sea_turtle_rocks.bin"
 
+TheTidalCoast1ObjectsMap:: INCBIN "data/levels/objects_map/the_tidal_coast_1.bin"
+SeaTurtleRocksObjectsMap:: INCBIN "data/levels/objects_map/sea_turtle_rocks.bin"
 
-SECTION "Bank 3F", ROMX
-
-	INCROM $fc000, $ffb97
-
-
-SECTION "Bank 40", ROMX
-
-	INCROM $100000, $103e21
+	INCROM $ea43f, $eb478
 
 
-SECTION "Bank 41", ROMX
+SECTION "Level Data 4", ROMX
 
-	INCROM $104000, $107322
+DesertRuinsLayout::      INCBIN "data/levels/layouts/desert_ruins.bin"
+TheVolcanosBase1Layout:: INCBIN "data/levels/layouts/the_volcanos_base_1.bin"
 
+DesertRuinsObjectsMap::      INCBIN "data/levels/objects_map/desert_ruins.bin"
+TheVolcanosBase1ObjectsMap:: INCBIN "data/levels/objects_map/the_volcanos_base_1.bin"
 
-SECTION "Bank 42", ROMX
-
-	INCROM $108000, $10bf09
-
-
-SECTION "Bank 43", ROMX
-
-	INCROM $10c000, $10f437
+	INCROM $eed97, $eff0d
 
 
-SECTION "Bank 44", ROMX
+SECTION "Level Data 5", ROMX
 
-	INCROM $110000, $112757
+ThePoolOfRain1Layout:: INCBIN "data/levels/layouts/the_pool_of_rain_1.bin"
+ATownInChaosLayout::   INCBIN "data/levels/layouts/a_town_in_chaos.bin"
 
+ThePoolOfRain1ObjectsMap:: INCBIN "data/levels/objects_map/the_pool_of_rain_1.bin"
+ATownInChaosObjectsMap::   INCBIN "data/levels/objects_map/a_town_in_chaos.bin"
 
-SECTION "Bank 45", ROMX
-
-	INCROM $114000, $117aa6
-
-
-SECTION "Bank 46", ROMX
-
-	INCROM $118000, $11b746
+	INCROM $f2ab7, $f3c16
 
 
-SECTION "Bank 47", ROMX
+SECTION "Level Data 6", ROMX
 
-	INCROM $11c000, $11e4f9
+BeneathTheWavesLayout:: INCBIN "data/levels/layouts/beneath_the_waves.bin"
+TheWestCraterLayout::   INCBIN "data/levels/layouts/the_west_crater.bin"
+
+BeneathTheWavesObjectsMap:: INCBIN "data/levels/objects_map/beneath_the_waves.bin"
+TheWestCraterObjectsMap::   INCBIN "data/levels/objects_map/the_west_crater.bin"
+
+	INCROM $f6759, $f78b4
 
 
-SECTION "Bank 48", ROMX
+SECTION "Level Data 7", ROMX
 
-	INCROM $120000, $12315d
+TheGrasslandsLayout:: INCBIN "data/levels/layouts/the_grasslands.bin"
+TheBigBridgeLayout::  INCBIN "data/levels/layouts/the_big_bridge.bin"
+
+TheGrasslandsObjectsMap:: INCBIN "data/levels/objects_map/the_grasslands.bin"
+TheBigBridgeObjectsMap::  INCBIN "data/levels/objects_map/the_big_bridge.bin"
+
+	INCROM $fa4fe, $fb5b0
 
 
-SECTION "Bank 49", ROMX
+SECTION "Level Data 8", ROMX
 
-	INCROM $124000, $12526f
+TowerOfRevivalLayout::     INCBIN "data/levels/layouts/tower_of_revival.bin"
+BankOfTheWildRiverLayout:: INCBIN "data/levels/layouts/bank_of_the_wild_river.bin"
+
+TowerOfRevivalObjectsMap::     INCBIN "data/levels/objects_map/tower_of_revival.bin"
+BankOfTheWildRiverObjectsMap:: INCBIN "data/levels/objects_map/bank_of_the_wild_river.bin"
+
+	INCROM $feb90, $ffb97
+
+
+SECTION "Level Data 9", ROMX
+
+CaveOfFlamesLayout::    INCBIN "data/levels/layouts/cave_of_flames.bin"
+AboveTheClouds1Layout:: INCBIN "data/levels/layouts/above_the_clouds_1.bin"
+
+CaveOfFlamesObjectsMap::    INCBIN "data/levels/objects_map/cave_of_flames.bin"
+AboveTheClouds1ObjectsMap:: INCBIN "data/levels/objects_map/above_the_clouds_1.bin"
+
+	INCROM $102c8e, $103e21
+
+
+SECTION "Level Data 10", ROMX
+
+TheStagnantSwamp1Layout:: INCBIN "data/levels/layouts/the_stagnant_swamp_1.bin"
+TheFrigidSeaLayout::      INCBIN "data/levels/layouts/the_frigid_sea.bin"
+
+TheStagnantSwamp1ObjectsMap:: INCBIN "data/levels/objects_map/the_stagnant_swamp_1.bin"
+TheFrigidSeaObjectsMap::      INCBIN "data/levels/objects_map/the_frigid_sea.bin"
+
+	INCROM $1061f4, $107322
+
+
+SECTION "Level Data 11", ROMX
+
+CastleOfIllusionsLayout:: INCBIN "data/levels/layouts/castle_of_illusions.bin"
+TheColossalHole1Layout::  INCBIN "data/levels/layouts/the_colossal_hole_1.bin"
+
+CastleOfIllusionsObjectsMap:: INCBIN "data/levels/objects_map/castle_of_illusions.bin"
+TheColossalHole1ObjectsMap::  INCBIN "data/levels/objects_map/the_colossal_hole_1.bin"
+
+	INCROM $10ae4f, $10bf09
+
+
+SECTION "Level Data 12", ROMX
+
+TheWarpedVoidLayout:: INCBIN "data/levels/layouts/the_warped_void.bin"
+TheEastCraterLayout:: INCBIN "data/levels/layouts/the_east_crater.bin"
+
+TheWarpedVoidObjectsMap:: INCBIN "data/levels/objects_map/the_warped_void.bin"
+TheEastCraterObjectsMap:: INCBIN "data/levels/objects_map/the_east_crater.bin"
+
+	INCROM $10e436, $10f437
+
+
+SECTION "Level Data 13", ROMX
+
+ForestOfFearLayout::     INCBIN "data/levels/layouts/forest_of_fear.bin"
+HiddenFigureRoomLayout:: INCBIN "data/levels/layouts/hidden_figure_room.bin"
+
+ForestOfFearObjectsMap::     INCBIN "data/levels/objects_map/forest_of_fear.bin"
+HiddenFigureRoomObjectsMap:: INCBIN "data/levels/objects_map/hidden_figure_room.bin"
+
+	INCROM $1115a5, $112757
+
+
+SECTION "Level Data 14", ROMX
+
+TheVastPlain2Layout::    INCBIN "data/levels/layouts/the_vast_plain_2.bin"
+TheVolcanosBase2Layout:: INCBIN "data/levels/layouts/the_volcanos_base_2.bin"
+
+TheVastPlain2ObjectsMap::    INCBIN "data/levels/objects_map/the_vast_plain_2.bin"
+TheVolcanosBase2ObjectsMap:: INCBIN "data/levels/objects_map/the_volcanos_base_2.bin"
+
+	INCROM $11699e, $117aa6
+
+
+SECTION "Level Data 15", ROMX
+
+ThePoolOfRain2Layout::   INCBIN "data/levels/layouts/the_pool_of_rain_2.bin"
+TheColossalHole2Layout:: INCBIN "data/levels/layouts/the_colossal_hole_2.bin"
+
+ThePoolOfRain2ObjectsMap::   INCBIN "data/levels/objects_map/the_pool_of_rain_2.bin"
+TheColossalHole2ObjectsMap:: INCBIN "data/levels/objects_map/the_colossal_hole_2.bin"
+
+	INCROM $11a7c8, $11b746
+
+
+SECTION "Level Data 16", ROMX
+
+TheTidalCoast2Layout::    INCBIN "data/levels/layouts/the_tidal_coast_2.bin"
+TheStagnantSwamp2Layout:: INCBIN "data/levels/layouts/the_stagnant_swamp_2.bin"
+
+TheTidalCoast2ObjectsMap::    INCBIN "data/levels/objects_map/the_tidal_coast_2.bin"
+TheStagnantSwamp2ObjectsMap:: INCBIN "data/levels/objects_map/the_stagnant_swamp_2.bin"
+
+
+SECTION "Level Data 17", ROMX
+
+AboveTheClouds2Layout:: INCBIN "data/levels/layouts/above_the_clouds_2.bin"
+TheSteepCanyon2Layout:: INCBIN "data/levels/layouts/the_steep_canyon_2.bin"
+
+AboveTheClouds2ObjectsMap:: INCBIN "data/levels/objects_map/above_the_clouds_2.bin"
+TheSteepCanyon2ObjectsMap:: INCBIN "data/levels/objects_map/the_steep_canyon_2.bin"
+
+
+SECTION "Level Data 18", ROMX
+
+ThePeacefulVillage2Layout:: INCBIN "data/levels/layouts/the_peaceful_village_2.bin"
+
+ThePeacefulVillage2ObjectsMap:: INCBIN "data/levels/objects_map/the_peaceful_village_2.bin"
 
 
 SECTION "Room Special Tiles 1", ROMX

@@ -257,20 +257,20 @@ _InitPrologueSequence: ; ade49 (2b:5e49)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld a, BANK(BGMap_b34c3)
-	ld [wc0ac], a
+	ld [wCompressedDataBank], a
 	ld hl, BGMap_b34c3
 	ld bc, v1BGMap1
-	ld a, [wc0ac]
+	ld a, [wCompressedDataBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 
 	xor a
 	ldh [rVBK], a
 	ld a, BANK(BGMap_b330c)
-	ld [wc0ac], a
+	ld [wCompressedDataBank], a
 	ld hl, BGMap_b330c
 	ld bc, v0BGMap1
-	ld a, [wc0ac]
+	ld a, [wCompressedDataBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 
@@ -281,10 +281,10 @@ _InitPrologueSequence: ; ade49 (2b:5e49)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld a, BANK(FontGFX)
-	ld [wc0ac], a
+	ld [wCompressedDataBank], a
 	ld hl, FontGFX
 	ld bc, v1Tiles0
-	ld a, [wc0ac]
+	ld a, [wCompressedDataBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 
@@ -295,10 +295,10 @@ _InitPrologueSequence: ; ade49 (2b:5e49)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld a, BANK(PrologueGfx)
-	ld [wc0ac], a
+	ld [wCompressedDataBank], a
 	ld hl, PrologueGfx
 	ld bc, v1Tiles0
-	ld a, [wc0ac]
+	ld a, [wCompressedDataBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 
@@ -309,20 +309,20 @@ _InitPrologueSequence: ; ade49 (2b:5e49)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld a, BANK(BGMap_b3a5b)
-	ld [wc0ac], a
+	ld [wCompressedDataBank], a
 	ld hl, BGMap_b3a5b
 	ld bc, v1BGMap0
-	ld a, [wc0ac]
+	ld a, [wCompressedDataBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 
 	xor a
 	ldh [rVBK], a
 	ld a, BANK(BGMap_b3a03)
-	ld [wc0ac], a
+	ld [wCompressedDataBank], a
 	ld hl, BGMap_b3a03
 	ld bc, v0BGMap0
-	ld a, [wc0ac]
+	ld a, [wCompressedDataBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 
@@ -337,19 +337,19 @@ _InitPrologueSequence: ; ade49 (2b:5e49)
 	jr z, .japanese
 ; english
 	ld a, BANK(Data_b37f9)
-	ld [wc0ac], a
+	ld [wCompressedDataBank], a
 	ld hl, Data_b37f9
 	ld bc, wTreasureTiles
-	ld a, [wc0ac]
+	ld a, [wCompressedDataBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 	jr .asm_adf63
 .japanese
 	ld a, BANK(Data_b3675)
-	ld [wc0ac], a
+	ld [wCompressedDataBank], a
 	ld hl, Data_b3675
 	ld bc, wTreasureTiles
-	ld a, [wc0ac]
+	ld a, [wCompressedDataBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 

@@ -213,15 +213,15 @@ Init: ; 15e (0:15e)
 ; main game loop
 .GameLoop
 	call UpdateJoypad
-	ld a, [wc09a]
+	ld a, [wResetDisabled]
 	and a
-	jr nz, .asm_24e
+	jr nz, .no_reset
 
 ; restart the game if all four buttons are down
 	ld a, [wJoypadDown]
 	and BUTTONS
 	cp A_BUTTON | B_BUTTON | SELECT | START
-	jr nz, .asm_24e
+	jr nz, .no_reset
 	; restart game
 	call Func_1002
 	ld bc, SOUND_OFF
@@ -229,7 +229,7 @@ Init: ; 15e (0:15e)
 	call Func_fbc
 	jp Init
 
-.asm_24e
+.no_reset
 	call MainSequenceTable
 
 	ld a, [wced8]
@@ -1510,24 +1510,26 @@ InitHRAMCallFunc: ; a92 (0:a92)
 .func_end
 ; 0xab5
 
-Func_ab5: ; ab5 (0:ab5)
+; decompresses level layout data pointed
+; by wCompressedLevelLayoutPtr to SRAM
+DecompressLevelLayout: ; ab5 (0:ab5)
 	ld a, [wceef]
 	and $3c
 	ret nz
 
 	ld a, [wSRAMBank]
 	push af
-	ld a, $01
+	ld a, BANK("SRAM1")
 	sramswitch
 	ld a, [wROMBank]
 	push af
-	ld a, [wc0ac]
+	ld a, [wCompressedDataBank]
 	bankswitch
-	ld a, [wc0ad]
+	ld a, [wCompressedLevelLayoutPtr + 0]
 	ld h, a
-	ld a, [wc0ae]
+	ld a, [wCompressedLevelLayoutPtr + 1]
 	ld l, a
-	call Func_aee
+	call .Decompress
 	pop af
 	bankswitch
 	pop af
@@ -1535,85 +1537,89 @@ Func_ab5: ; ab5 (0:ab5)
 	ret
 ; 0xaee
 
-Func_aee: ; aee (0:aee)
-	ld c, $a0
+; decompresses level layout data
+; - if bit 7 is not set, repeat the following byte that amount of times
+; - if bit 7 is set, copy the next amount of bytes literally
+; each row is 160 blocks wide
+.Decompress: ; aee (0:aee)
+	ld c, LEVEL_WIDTH
 	ld de, s1a000
-.asm_af3
+.loop_data
 	ld a, [hli]
 	and a
-	ret z
+	ret z ; done
+
 	bit 7, a
-	jr nz, .asm_b23
+	jr nz, .literal_copy
 	ld b, a
 	ld a, [hli]
 	ld [wc09f], a
-.asm_aff
+.loop_repeat
 	ld a, [wc09f]
 	ld [de], a
 	inc de
 	ld a, e
 	cp c
-	jr z, .asm_b0d
-
-.asm_b08
+	jr z, .next_row_1
+.next_repeat
 	dec b
-	jr nz, .asm_aff
-	jr .asm_af3
-.asm_b0d
-	ld e, $00
+	jr nz, .loop_repeat
+	jr .loop_data
+.next_row_1
+	ld e, LOW($a000)
 	inc d
 	ld a, d
-	cp $c0
-	jr nz, .asm_b21 ; can be .asm_b08
-	ld d, $a0
+	cp $c0 ; check if already outside SRAM
+	jr nz, .skip_sram_switch ; can be .next_repeat
+	ld d, HIGH($a000)
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
-.asm_b21
-	jr .asm_b08
+.skip_sram_switch
+	jr .next_repeat
 
-.asm_b23
-	and $7f
+.literal_copy
+	and %01111111
 	ld b, a
-.asm_b26
+.loop_copy
 	ld a, [hli]
 	ld [de], a
 	inc de
 	ld a, e
 	cp c
-	jr z, .asm_b32
-.asm_b2d
+	jr z, .next_row_2
+.next_copy
 	dec b
-	jr nz, .asm_b26
-	jr .asm_af3
+	jr nz, .loop_copy
+	jr .loop_data
 
-.asm_b32
-	ld e, $00
+.next_row_2
+	ld e, LOW($a000)
 	inc d
 	ld a, d
 	cp $c0
-	jr nz, .asm_b2d
-	ld d, $a0
+	jr nz, .next_copy
+	ld d, HIGH($a000)
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
-	jr .asm_b2d
+	jr .next_copy
 ; 0xb48
 
 Func_b48: ; b48 (0:b48)
 	ld a, [wSRAMBank]
 	push af
-	ld a, $01
+	ld a, BANK("SRAM1")
 	sramswitch
 	ld a, [wROMBank]
 	push af
-	ld a, [wc0ac]
+	ld a, [wCompressedDataBank]
 	bankswitch
-	ld a, [wc0ad]
+	ld a, [wCompressedLevelLayoutPtr + 0]
 	ld h, a
-	ld a, [wc0ae]
+	ld a, [wCompressedLevelLayoutPtr + 1]
 	ld l, a
-	call Func_b7b
+	call .Decompress
 	pop af
 	bankswitch
 	pop af
@@ -1621,70 +1627,72 @@ Func_b48: ; b48 (0:b48)
 	ret
 ; 0xb7b
 
-Func_b7b: ; b7b (0:b7b)
-	ld a, $a0
-	srl a
+.Decompress: ; b7b (0:b7b)
+	ld a, LEVEL_WIDTH
+	srl a ; /2
 	add $b0
 	dec a
 	ld c, a
-	ld de, $a0b0
-.asm_b86
+	ld de, s1a000 + $b0
+.loop_data
 	ld a, [hli]
 	and a
-	ret z
+	ret z ; done
+
 	bit 7, a
-	jr nz, .asm_bb6
+	jr nz, .literal_copy
 	ld b, a
 	ld a, [hli]
 	ld [wc09f], a
-.asm_b92
+.loop_repeat
 	ld a, [wc09f]
 	ld [de], a
 	ld a, e
 	cp c
-	jr z, .asm_ba0
+	jr z, .next_row_1
 	inc de
-.asm_b9b
+.next_repeat
 	dec b
-	jr nz, .asm_b92
-	jr .asm_b86
-.asm_ba0
+	jr nz, .loop_repeat
+	jr .loop_data
+.next_row_1
 	ld e, $b0
 	inc d
 	ld a, d
-	cp $c0
-	jr nz, .asm_bb4
-	ld d, $a0
+	cp $c0 ; check if already outside SRAM
+	jr nz, .skip_sram_switch ; can be .next_repeat
+	ld d, HIGH($a000)
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
-.asm_bb4
-	jr .asm_b9b
-.asm_bb6
-	and $7f
+.skip_sram_switch
+	jr .next_repeat
+
+.literal_copy
+	and %01111111
 	ld b, a
-.asm_bb9
+.loop_copy
 	ld a, [hli]
 	ld [de], a
 	ld a, e
 	cp c
-	jr z, .asm_bc5
+	jr z, .next_row_2
 	inc de
-.asm_bc0
+.next_copy
 	dec b
-	jr nz, .asm_bb9
-	jr .asm_b86
-.asm_bc5
+	jr nz, .loop_copy
+	jr .loop_data
+.next_row_2
 	ld e, $b0
 	inc d
 	ld a, d
 	cp $c0
-	jr nz, .asm_bc0
-	ld d, $a0
+	jr nz, .next_copy
+	ld d, HIGH($a000)
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
-	jr .asm_bc0
+	jr .next_copy
 ; 0xbdb
 
 Func_bdb: ; bdb (0:bdb)
@@ -2008,10 +2016,10 @@ Func_d9e: ; d9e (0:d9e)
 
 .asm_db6
 	ld a, [wOAMBank]
-	ld [wc0ac], a
+	ld [wCompressedDataBank], a
 	ld a, [wROMBank]
 	push af
-	ld a, [wc0ac]
+	ld a, [wCompressedDataBank]
 	bankswitch
 	ld a, [wOAMPtr + 0]
 	ld h, a
@@ -2132,37 +2140,37 @@ Func_e87: ; e87 (0:e87)
 Func_e8a: ; e8a (0:e8a)
 	ld d, $00
 	ld a, [wLevel]
-	add a
+	add a ; *2
 	ld e, a
 	rl d
-	ld hl, PointerTable_c00be
+	ld hl, LevelHeaders
 	add hl, de
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(PointerTable_c00be)
+	ld a, BANK(LevelHeaders)
 	bankswitch
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	ld a, h
 	inc a
-	jr z, Func_e87
+	jr z, Func_e87 ; null
 
 	ld a, [hli]
-	ld [wc0ae], a
+	ld [wCompressedLevelLayoutPtr + 1], a
 	ld a, [hli]
-	ld [wc0ad], a
+	ld [wCompressedLevelLayoutPtr + 0], a
 	ld a, [hl]
-	ld [wc0ac], a
+	ld [wCompressedDataBank], a
 	push hl
-	call Func_ab5
+	call DecompressLevelLayout
 	pop hl
 	ld a, [hli]
-	ld [wc0ac], a
+	ld [wCompressedDataBank], a
 	ld a, [hli]
-	ld [wc0ae], a
+	ld [wCompressedLevelLayoutPtr + 1], a
 	ld a, [hl]
-	ld [wc0ad], a
+	ld [wCompressedLevelLayoutPtr + 0], a
 	pop af
 	bankswitch
 
@@ -2182,11 +2190,11 @@ Func_edb: ; edb (0:edb)
 	add a
 	ld e, a
 	rl d
-	ld hl, PointerTable_c00be
+	ld hl, LevelHeaders
 	add hl, de
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(PointerTable_c00be)
+	ld a, BANK(LevelHeaders)
 	bankswitch
 	ld a, [hli]
 	ld h, [hl]
@@ -2196,11 +2204,11 @@ Func_edb: ; edb (0:edb)
 	jp z, Func_e87
 
 	ld a, [hli]
-	ld [wc0ae], a
+	ld [wCompressedLevelLayoutPtr + 1], a
 	ld a, [hli]
-	ld [wc0ad], a
+	ld [wCompressedLevelLayoutPtr + 0], a
 	ld a, [hl]
-	ld [wc0ac], a
+	ld [wCompressedDataBank], a
 	pop af
 	bankswitch
 	call Func_f13
@@ -2217,11 +2225,11 @@ Func_f13: ; f13 (0:f13)
 	sramswitch
 	ld a, [wROMBank]
 	push af
-	ld a, [wc0ac]
+	ld a, [wCompressedDataBank]
 	bankswitch
-	ld a, [wc0ad]
+	ld a, [wCompressedLevelLayoutPtr + 0]
 	ld d, a
-	ld a, [wc0ae]
+	ld a, [wCompressedLevelLayoutPtr + 1]
 	ld e, a
 	call Func_f4c
 	pop af
@@ -3885,7 +3893,7 @@ Func_1c4a: ; 1c4a (0:1c4a)
 	INCROM $1c5b, $2800
 
 LoadPermissionMap: ; 2800 (0:2800)
-	ld a, [wPermissionMapID]
+	ld a, [wRoomPermissionMap]
 	add a
 	ld e, a
 	ld d, $00
@@ -3901,8 +3909,8 @@ LoadPermissionMap: ; 2800 (0:2800)
 	ld a, h
 	cp $ff
 	jr z, .asm_2859
-	ld a, [wPermissionMapID]
-	cp NUM_PERMISSION_MAPS_GROUP_1 - 1
+	ld a, [wRoomPermissionMap]
+	cp NUM_TILE_MAPS_GROUP_1 - 1
 	jr nc, .group_2
 
 ; group_1
@@ -4083,7 +4091,7 @@ Func_285c: ; 285c (0:285c)
 ; 0x298d
 
 Func_298d: ; 298d (0:298d)
-	ld a, [wPermissionMapID]
+	ld a, [wRoomPermissionMap]
 	add a
 	ld e, a
 	ld d, $00
@@ -4093,10 +4101,10 @@ Func_298d: ; 298d (0:298d)
 	ld h, [hl]
 	ld l, a
 	ld a, [wc0cf]
-	ld [wc0ac], a
+	ld [wCompressedDataBank], a
 	ld a, [wROMBank]
 	push af
-	ld a, [wc0ac]
+	ld a, [wCompressedDataBank]
 	bankswitch
 	ld de, wc600
 	ld bc, $200
@@ -4117,9 +4125,9 @@ LoadRoomTileMap: ; 29bf (0:29bf)
 	ld h, [hl]
 	ld l, a
 	ld a, [wc0d0]
-	ld [wc0ac], a
+	ld [wCompressedDataBank], a
 	ld bc, w3d300
-	ld a, [wc0ac]
+	ld a, [wCompressedDataBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 	ret
@@ -4136,10 +4144,10 @@ LoadRoomMainTiles: ; 29e7 (0:29e7)
 	ld h, [hl]
 	ld l, a
 	ld a, [wRoomMainTilesBank]
-	ld [wc0ac], a
+	ld [wCompressedDataBank], a
 	ld a, [wROMBank]
 	push af
-	ld a, [wc0ac]
+	ld a, [wCompressedDataBank]
 	bankswitch
 	ld de, v0Tiles2
 	ld bc, $800
@@ -4162,10 +4170,10 @@ LoadRoomSpecialTiles: ; 2a19 (0:2a19)
 	ld h, [hl]
 	ld l, a
 	ld a, [wRoomSpecialTilesBank]
-	ld [wc0ac], a
+	ld [wCompressedDataBank], a
 	ld a, [wROMBank]
 	push af
-	ld a, [wc0ac]
+	ld a, [wCompressedDataBank]
 	bankswitch
 	ld de, v0Tiles2
 	ld bc, $800
@@ -4188,8 +4196,8 @@ LoadRoomPalettes: ; 2a52 (0:2a52)
 	ld h, [hl]
 	ld l, a
 	ld a, [wPaletteBank]
-	ld [wc0ac], a
-	ld a, [wc0ac]
+	ld [wCompressedDataBank], a
+	ld a, [wCompressedDataBank]
 	ldh [hCallFuncBank], a
 	call_hram LoadPalsToTempPals1
 	ret

@@ -206,7 +206,7 @@ Func_61348: ; 61348 (18:5348)
 	ld a, e
 	ld [w1d14a], a
 	ld a, [wLevel]
-	cp LEVEL_HIDDEN_FIGURE_BATTLE
+	cp LEVEL_HIDDEN_FIGURE_ROOM
 	jr z, Func_6130b
 	ld a, [wca73]
 	and a

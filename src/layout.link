@@ -124,41 +124,41 @@ ROMX $36
 ROMX $37
 	"Bank 37"
 ROMX $38
-	"Bank 38"
+	"Level Data 1"
 ROMX $39
-	"Bank 39"
+	"Level Data 2"
 ROMX $3a
-	"Bank 3A"
+	"Level Data 3"
 ROMX $3b
-	"Bank 3B"
+	"Level Data 4"
 ROMX $3c
-	"Bank 3C"
+	"Level Data 5"
 ROMX $3d
-	"Bank 3D"
+	"Level Data 6"
 ROMX $3e
-	"Bank 3E"
+	"Level Data 7"
 ROMX $3f
-	"Bank 3F"
+	"Level Data 8"
 ROMX $40
-	"Bank 40"
+	"Level Data 9"
 ROMX $41
-	"Bank 41"
+	"Level Data 10"
 ROMX $42
-	"Bank 42"
+	"Level Data 11"
 ROMX $43
-	"Bank 43"
+	"Level Data 12"
 ROMX $44
-	"Bank 44"
+	"Level Data 13"
 ROMX $45
-	"Bank 45"
+	"Level Data 14"
 ROMX $46
-	"Bank 46"
+	"Level Data 15"
 ROMX $47
-	"Bank 47"
+	"Level Data 16"
 ROMX $48
-	"Bank 48"
+	"Level Data 17"
 ROMX $49
-	"Bank 49"
+	"Level Data 18"
 ROMX $4e
 	"Room Special Tiles 1"
 ROMX $4f

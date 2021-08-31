@@ -1054,7 +1054,7 @@ Func_4686: ; 4686 (1:4686)
 	ld a, [wLevel]
 	cp $ff
 	jr z, .asm_46bd
-	cp LEVEL_HIDDEN_FIGURE_BATTLE
+	cp LEVEL_HIDDEN_FIGURE_ROOM
 	jr z, .final_battle
 	ret
 

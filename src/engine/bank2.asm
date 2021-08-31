@@ -32,7 +32,7 @@ Func_8024: ; 8024 (2:4024)
 	ldh [rSCX], a
 	ld [wTempSCX], a
 
-	farcall Func_d1e2
+	farcall LoadLevelCommonGfxAndTreasures
 
 	call Func_8747
 	call Func_161a
@@ -63,7 +63,7 @@ Func_8024: ; 8024 (2:4024)
 	ld hl, wSubSequence
 	inc [hl]
 	ld a, [wLevel]
-	cp LEVEL_HIDDEN_FIGURE_BATTLE
+	cp LEVEL_HIDDEN_FIGURE_ROOM
 	jr z, .final_battle
 	ld a, $87
 	ldh [rLCDC], a
@@ -134,7 +134,7 @@ Func_80aa: ; 80aa (2:40aa)
 
 	call Func_b8d3
 	ld a, [wLevel]
-	cp LEVEL_HIDDEN_FIGURE_BATTLE
+	cp LEVEL_HIDDEN_FIGURE_ROOM
 	jr nz, .asm_814f
 	ld a, [wca9b]
 	cp $02
@@ -259,8 +259,8 @@ Func_80aa: ; 80aa (2:40aa)
 	jr z, .asm_82c6
 	bit 7, a
 	ret nz
-	ld a, $01
-	ld [wc09a], a
+	ld a, TRUE
+	ld [wResetDisabled], a
 	xor a
 	ld [wca97], a
 	ld [wc0bc], a
@@ -903,7 +903,7 @@ Func_8747: ; 8747 (2:4747)
 
 .asm_88b7
 	ld a, [wLevel]
-	cp LEVEL_HIDDEN_FIGURE_BATTLE
+	cp LEVEL_HIDDEN_FIGURE_ROOM
 	jr nz, .asm_88db
 
 	xor a
