@@ -1,4 +1,4 @@
-Func_64000: ; 64000 (19:4000)
+LoadEnemyGroupData: ; 64000 (19:4000)
 ; fills w1d120 with $43c3
 	ld hl, w1d120
 	ld bc, Data_643c3

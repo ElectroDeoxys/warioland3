@@ -38,7 +38,7 @@ Func_8024: ; 8024 (2:4024)
 	call Func_161a
 
 	ld a, TRUE
-	ld [wced8], a
+	ld [wRoomAnimatedTilesEnabled], a
 	xor a
 	ld [wceef], a
 
@@ -84,7 +84,7 @@ Func_8024: ; 8024 (2:4024)
 
 Func_80aa: ; 80aa (2:40aa)
 	ld a, TRUE
-	ld [wced9], a
+	ld [wRoomAnimatedPalsEnabled], a
 	farcall Func_ca26
 
 	ld a, [wc0ba]
@@ -266,8 +266,8 @@ Func_80aa: ; 80aa (2:40aa)
 	ld [wc0bc], a
 	ld [wAnimatedTilesFrameDuration], a
 	ld [wc1b1], a
-	ld [wced8], a
-	ld [wced9], a
+	ld [wRoomAnimatedTilesEnabled], a
+	ld [wRoomAnimatedPalsEnabled], a
 	ld [wcee0], a
 	ld [wcee1], a
 	ld [wcee2], a
@@ -359,7 +359,7 @@ Func_80aa: ; 80aa (2:40aa)
 	load_sfx SFX_0E4
 	stop_music
 	xor a
-	ld [wced9], a
+	ld [wRoomAnimatedPalsEnabled], a
 	ld a, $01
 	ld [wced6], a
 	ld a, [wSubSequence]
@@ -802,8 +802,8 @@ Func_8747: ; 8747 (2:4747)
 	ld [wca9c], a
 	ld [wAnimatedTilesFrameDuration], a
 	ld [wc1b1], a
-	ld [wced8], a
-	ld [wced9], a
+	ld [wRoomAnimatedTilesEnabled], a
+	ld [wRoomAnimatedPalsEnabled], a
 	ld [wcee0], a
 	ld [wcee1], a
 	ld [wcee2], a

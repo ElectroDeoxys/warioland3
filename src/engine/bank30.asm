@@ -72,7 +72,7 @@ InitRoomAnimatedTiles: ; c0078 (30:4078)
 	ld hl, Data_c0ce5
 	ld d, $00
 	ld a, [wc1ab]
-	add a
+	add a ; *2
 	ld e, a
 	rl d
 	add hl, de
@@ -86,18 +86,18 @@ InitRoomAnimatedTiles: ; c0078 (30:4078)
 	ret
 ; 0xc0095
 
-Func_c0095: ; c0095 (30:4095)
-	ld hl, PointerTable_c0c51
+InitRoomAnimatedPals: ; c0095 (30:4095)
+	ld hl, RoomAnimatedPals
 	ld d, $00
 	ld a, [wc1b0]
-	add a
+	add a ; *2
 	ld e, a
 	rl d
 	add hl, de
 	ld a, [hli]
-	ld [wc1b2 + 1], a
+	ld [wRoomAnimatedPals + 1], a
 	ld a, [hld]
-	ld [wc1b2 + 0], a
+	ld [wRoomAnimatedPals + 0], a
 	ld l, [hl]
 	ld h, a
 	ld de, $8
@@ -107,7 +107,7 @@ Func_c0095: ; c0095 (30:4095)
 	srl a
 	ld [wc1b5], a
 	xor a
-	ld [wc1b4], a
+	ld [wCurRoomAnimatedPal], a
 	ret
 ; 0xc00be
 
@@ -1403,7 +1403,7 @@ BackgroundTilesPointers: ; c0af7 (30:4af7)
 	dw NULL
 	dw NULL
 
-PalPointers: ; c0b1b (30:4b1b)
+LevelPals: ; c0b1b (30:4b1b)
 	dw Pals_cc000
 	dw Pals_cc040
 	dw Pals_cc080
@@ -1556,7 +1556,7 @@ rept $12
 	db $ff
 endr
 
-PointerTable_c0c51: ; c0c51 (30:4c51)
+RoomAnimatedPals: ; c0c51 (30:4c51)
 	dw .data_c0c79
 	dw .data_c0c82
 	dw .data_c0c8b
@@ -1615,29 +1615,36 @@ PointerTable_c0c51: ; c0c51 (30:4c51)
 	db $46, $8b, $8c, $8d, $8e, $8f, $90, $91, $10
 
 Data_c0ce5: ; c0ce5 (30:4ce5)
-	db $00, $00
-	db $02, $00
-	db $0b, $01
-	db $06, $02
-	db $05, $03
-	db $0b, $04
-	db $06, $05
-	db $06, $06
-	db $09, $07
-	db $06, $08
-	db $06, $09
-	db $06, $0a
-	db $03, $0b
-	db $02, $0c
-	db $0b, $0d
-	db $08, $0e
-	db $06, $0f
-	db $06, $10
-	db $06, $11
-	db $05, $12
-	db $09, $13
-
-	ds $10
+; frame duration, group
+	db  0, $00
+	db  2, $00
+	db 11, $01
+	db  6, $02
+	db  5, $03
+	db 11, $04
+	db  6, $05
+	db  6, $06
+	db  9, $07
+	db  6, $08
+	db  6, $09
+	db  6, $0a
+	db  3, $0b
+	db  2, $0c
+	db 11, $0d
+	db  8, $0e
+	db  6, $0f
+	db  6, $10
+	db  6, $11
+	db  5, $12
+	db  9, $13
+	db  0, $00
+	db  0, $00
+	db  0, $00
+	db  0, $00
+	db  0, $00
+	db  0, $00
+	db  0, $00
+	db  0, $00
 
 Data_c0d1f: ; c0d1f (30:4d1f)
 	dw .data_c0d5b

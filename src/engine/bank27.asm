@@ -79,10 +79,10 @@ Func_9c072: ; 9c072 (27:4072)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld a, BANK(Cutscenes1Gfx)
-	ld [wCompressedDataBank], a
+	ld [wTempBank], a
 	ld hl, Cutscenes1Gfx
 	ld bc, v1Tiles0
-	ld a, [wCompressedDataBank]
+	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 	xor a
@@ -232,20 +232,20 @@ Func_9c1b6: ; 9c1b6 (27:41b6)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld a, BANK(BGMap_b956d)
-	ld [wCompressedDataBank], a
+	ld [wTempBank], a
 	ld hl, BGMap_b956d
 	ld bc, v1BGMap0
-	ld a, [wCompressedDataBank]
+	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 
 	xor a
 	ldh [rVBK], a
 	ld a, BANK(BGMap_b951f)
-	ld [wCompressedDataBank], a
+	ld [wTempBank], a
 	ld hl, BGMap_b951f
 	ld bc, v0BGMap0
-	ld a, [wCompressedDataBank]
+	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 
@@ -263,20 +263,20 @@ Func_9c209: ; 9c209 (27:4209)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld a, BANK(BGMap_b9424)
-	ld [wCompressedDataBank], a
+	ld [wTempBank], a
 	ld hl, BGMap_b9424
 	ld bc, v1BGMap0
-	ld a, [wCompressedDataBank]
+	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 
 	xor a
 	ldh [rVBK], a
 	ld a, BANK(BGMap_b93c8)
-	ld [wCompressedDataBank], a
+	ld [wTempBank], a
 	ld hl, BGMap_b93c8
 	ld bc, v0BGMap0
-	ld a, [wCompressedDataBank]
+	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 
@@ -368,10 +368,10 @@ Func_9c2ec: ; 9c2ec (27:42ec)
 
 Func_9c832: ; 9c832 (27:4832)
 	ld a, BANK(Cutscenes6Gfx)
-	ld [wCompressedDataBank], a
+	ld [wTempBank], a
 	ld hl, Cutscenes6Gfx
 	ld bc, v0Tiles0
-	ld a, [wCompressedDataBank]
+	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 	jr Func_9c8cd
@@ -379,10 +379,10 @@ Func_9c832: ; 9c832 (27:4832)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld a, BANK(Cutscenes6Gfx)
-	ld [wCompressedDataBank], a
+	ld [wTempBank], a
 	ld hl, Cutscenes6Gfx
 	ld bc, v1Tiles0
-	ld a, [wCompressedDataBank]
+	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 
@@ -393,10 +393,10 @@ Func_9c832: ; 9c832 (27:4832)
 
 LoadCutscenes7Gfx: ; 9c873 (27:4873)
 	ld a, BANK(Cutscenes7Gfx)
-	ld [wCompressedDataBank], a
+	ld [wTempBank], a
 	ld hl, Cutscenes7Gfx
 	ld bc, v0Tiles0
-	ld a, [wCompressedDataBank]
+	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 	jp Func_9c8cd ; can be jr
@@ -404,10 +404,10 @@ LoadCutscenes7Gfx: ; 9c873 (27:4873)
 
 LoadCutscenes8Gfx: ; 9c891 (27:4891)
 	ld a, BANK(Cutscenes8Gfx)
-	ld [wCompressedDataBank], a
+	ld [wTempBank], a
 	ld hl, Cutscenes8Gfx
 	ld bc, v0Tiles0
-	ld a, [wCompressedDataBank]
+	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 	jp Func_9c8cd ; can be jr
@@ -415,10 +415,10 @@ LoadCutscenes8Gfx: ; 9c891 (27:4891)
 
 LoadCutscenes9Gfx: ; 9c8af (27:48af)
 	ld a, BANK(Cutscenes9Gfx)
-	ld [wCompressedDataBank], a
+	ld [wTempBank], a
 	ld hl, Cutscenes9Gfx
 	ld bc, v0Tiles0
-	ld a, [wCompressedDataBank]
+	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 	jp Func_9c8cd ; unnecessary jump
@@ -426,10 +426,10 @@ LoadCutscenes9Gfx: ; 9c8af (27:48af)
 
 Func_9c8cd: ; 9c8cd (27:48cd)
 	ld a, BANK(Cutscenes10Gfx)
-	ld [wCompressedDataBank], a
+	ld [wTempBank], a
 	ld hl, Cutscenes10Gfx
 	ld bc, v0Tiles2
-	ld a, [wCompressedDataBank]
+	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 	ret
@@ -439,10 +439,10 @@ Func_9c8e9: ; 9c8e9 (27:48e9)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld a, BANK(Cutscenes10Gfx)
-	ld [wCompressedDataBank], a
+	ld [wTempBank], a
 	ld hl, Cutscenes10Gfx
 	ld bc, v1Tiles2
-	ld a, [wCompressedDataBank]
+	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 
@@ -455,10 +455,10 @@ Func_9c8e9: ; 9c8e9 (27:48e9)
 
 Func_9c959: ; 9c959 (27:4959)
 	ld a, BANK(Cutscenes3Gfx)
-	ld [wCompressedDataBank], a
+	ld [wTempBank], a
 	ld hl, Cutscenes3Gfx
 	ld bc, v0Tiles0
-	ld a, [wCompressedDataBank]
+	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 	jp Func_9c8cd
@@ -475,8 +475,8 @@ Func_9ca45: ; 9ca45 (27:4a45)
 ;	fallthrough
 Func_9ca48: ; 9ca48 (27:4a48)
 	ld a, $2e
-	ld [wCompressedDataBank], a
-	ld a, [wCompressedDataBank]
+	ld [wTempBank], a
+	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 	xor a

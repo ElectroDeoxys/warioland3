@@ -134,7 +134,7 @@ wc0a7:: ; c0a7
 
 	ds $4
 
-wCompressedDataBank:: ; c0ac
+wTempBank:: ; c0ac
 	ds $1
 
 wCompressedLevelLayoutPtr:: ; c0ad
@@ -399,10 +399,10 @@ wc1b0:: ; c1b0
 wc1b1:: ; c1b1
 	ds $1
 
-wc1b2:: ; c1b2
+wRoomAnimatedPals:: ; c1b2
 	ds $2
 
-wc1b4:: ; c1b4
+wCurRoomAnimatedPal:: ; c1b4
 	ds $1
 
 wc1b5:: ; c1b5
@@ -929,10 +929,10 @@ wced6:: ; ced6
 wFadeSpeed:: ; ced7
 	ds $1
 
-wced8:: ; ced8
+wRoomAnimatedTilesEnabled:: ; ced8
 	ds $1
 
-wced9:: ; ced9
+wRoomAnimatedPalsEnabled:: ; ced9
 	ds $1
 
 wceda:: ; ceda
@@ -1025,7 +1025,7 @@ wEnemy8:: enemy_struct wEnemy8 ; d0e0
 w1d100:: ; d100
 	ds $20
 
-; pointers related to Func_64000
+; pointers related to LoadEnemyGroupData
 w1d120:: ; d120
 	ds $2
 

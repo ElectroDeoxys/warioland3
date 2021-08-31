@@ -232,18 +232,17 @@ Init: ; 15e (0:15e)
 .no_reset
 	call MainSequenceTable
 
-	ld a, [wced8]
+	ld a, [wRoomAnimatedTilesEnabled]
 	and a
-	jr z, .asm_266
-	farcall LoadAnimatedTiles
-
-.asm_266
-	ld a, [wced9]
+	jr z, .animated_pals
+	farcall UpdateRoomAnimatedTiles
+.animated_pals
+	ld a, [wRoomAnimatedPalsEnabled]
 	and a
-	jr z, .asm_26f
-	call Func_2a77
+	jr z, .skip_animated_pals
+	call UpdateRoomAnimatedPals
 
-.asm_26f
+.skip_animated_pals
 	ld a, TRUE
 	ld [wEnableVBlankFunc], a
 	halt
@@ -1523,7 +1522,7 @@ DecompressLevelLayout: ; ab5 (0:ab5)
 	sramswitch
 	ld a, [wROMBank]
 	push af
-	ld a, [wCompressedDataBank]
+	ld a, [wTempBank]
 	bankswitch
 	ld a, [wCompressedLevelLayoutPtr + 0]
 	ld h, a
@@ -1613,7 +1612,7 @@ DecompressLevelObjectsMap: ; b48 (0:b48)
 	sramswitch
 	ld a, [wROMBank]
 	push af
-	ld a, [wCompressedDataBank]
+	ld a, [wTempBank]
 	bankswitch
 	ld a, [wCompressedLevelLayoutPtr + 0]
 	ld h, a
@@ -2016,10 +2015,10 @@ Func_d9e: ; d9e (0:d9e)
 
 .asm_db6
 	ld a, [wOAMBank]
-	ld [wCompressedDataBank], a
+	ld [wTempBank], a
 	ld a, [wROMBank]
 	push af
-	ld a, [wCompressedDataBank]
+	ld a, [wTempBank]
 	bankswitch
 	ld a, [wOAMPtr + 0]
 	ld h, a
@@ -2161,12 +2160,12 @@ LoadLevelLayoutAndObjects: ; e8a (0:e8a)
 	ld a, [hli]
 	ld [wCompressedLevelLayoutPtr + 0], a
 	ld a, [hl]
-	ld [wCompressedDataBank], a
+	ld [wTempBank], a
 	push hl
 	call DecompressLevelLayout
 	pop hl
 	ld a, [hli]
-	ld [wCompressedDataBank], a
+	ld [wTempBank], a
 	ld a, [hli]
 	ld [wCompressedLevelLayoutPtr + 1], a
 	ld a, [hl]
@@ -2208,7 +2207,7 @@ Func_edb: ; edb (0:edb)
 	ld a, [hli]
 	ld [wCompressedLevelLayoutPtr + 0], a
 	ld a, [hl]
-	ld [wCompressedDataBank], a
+	ld [wTempBank], a
 	pop af
 	bankswitch
 	call Func_f13
@@ -2225,7 +2224,7 @@ Func_f13: ; f13 (0:f13)
 	sramswitch
 	ld a, [wROMBank]
 	push af
-	ld a, [wCompressedDataBank]
+	ld a, [wTempBank]
 	bankswitch
 	ld a, [wCompressedLevelLayoutPtr + 0]
 	ld d, a
@@ -2586,7 +2585,7 @@ Func_11f6: ; 11f6 (0:11f6)
 	xor a
 	ld [wca9a], a
 	ld [wc1b1], a
-	ld [wced9], a
+	ld [wRoomAnimatedPalsEnabled], a
 	ld [wcee0], a
 	ld [wcee1], a
 	ld [wcee2], a
@@ -4030,7 +4029,7 @@ Func_285c: ; 285c (0:285c)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	farcall Func_64000
+	farcall LoadEnemyGroupData
 	pop af
 	ldh [rSVBK], a
 	pop hl
@@ -4044,7 +4043,7 @@ Func_285c: ; 285c (0:285c)
 	ld a, [hli]
 	ld [wc1b0], a
 	push hl
-	farcall Func_c0095
+	farcall InitRoomAnimatedPals
 	pop hl
 
 	ld a, [hl]
@@ -4102,10 +4101,10 @@ Func_298d: ; 298d (0:298d)
 	ld h, [hl]
 	ld l, a
 	ld a, [wc0cf]
-	ld [wCompressedDataBank], a
+	ld [wTempBank], a
 	ld a, [wROMBank]
 	push af
-	ld a, [wCompressedDataBank]
+	ld a, [wTempBank]
 	bankswitch
 	ld de, wc600
 	ld bc, $200
@@ -4126,9 +4125,9 @@ LoadRoomTileMap: ; 29bf (0:29bf)
 	ld h, [hl]
 	ld l, a
 	ld a, [wc0d0]
-	ld [wCompressedDataBank], a
+	ld [wTempBank], a
 	ld bc, w3d300
-	ld a, [wCompressedDataBank]
+	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	call_hram Decompress
 	ret
@@ -4145,10 +4144,10 @@ LoadRoomMainTiles: ; 29e7 (0:29e7)
 	ld h, [hl]
 	ld l, a
 	ld a, [wRoomMainTilesBank]
-	ld [wCompressedDataBank], a
+	ld [wTempBank], a
 	ld a, [wROMBank]
 	push af
-	ld a, [wCompressedDataBank]
+	ld a, [wTempBank]
 	bankswitch
 	ld de, v0Tiles2
 	ld bc, $800
@@ -4171,10 +4170,10 @@ LoadRoomSpecialTiles: ; 2a19 (0:2a19)
 	ld h, [hl]
 	ld l, a
 	ld a, [wRoomSpecialTilesBank]
-	ld [wCompressedDataBank], a
+	ld [wTempBank], a
 	ld a, [wROMBank]
 	push af
-	ld a, [wCompressedDataBank]
+	ld a, [wTempBank]
 	bankswitch
 	ld de, v0Tiles2
 	ld bc, $800
@@ -4188,23 +4187,23 @@ LoadRoomSpecialTiles: ; 2a19 (0:2a19)
 
 LoadRoomPalettes: ; 2a52 (0:2a52)
 	ld a, [wRoomPalettes]
-	add a
+	add a ; *2
 	ld e, a
 	ld d, $00
-	ld hl, PalPointers
+	ld hl, LevelPals
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	ld a, [wPaletteBank]
-	ld [wCompressedDataBank], a
-	ld a, [wCompressedDataBank]
+	ld [wTempBank], a
+	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	call_hram LoadPalsToTempPals1
 	ret
 ; 0x2a77
 
-Func_2a77: ; 2a77 (0:2a77)
+UpdateRoomAnimatedPals: ; 2a77 (0:2a77)
 	ldh a, [rLY]
 	cp $88
 	jp nc, .done
@@ -4220,30 +4219,32 @@ Func_2a77: ; 2a77 (0:2a77)
 
 	xor a
 	ld [wc1b5], a
-	ld a, [wc1b2]
+	ld a, [wRoomAnimatedPals + 0]
 	ld h, a
-	ld a, [wc1b2 + 1]
+	ld a, [wRoomAnimatedPals + 1]
 	ld l, a
-	ld a, [wc1b4]
+
+	ld a, [wCurRoomAnimatedPal]
 	inc a
 	cp $08
-	jr c, .asm_2aa6
-	xor a
-.asm_2aa6
-	ld [wc1b4], a
+	jr c, .ok
+	xor a ; reset to 0
+.ok
+	ld [wCurRoomAnimatedPal], a
+
 	ld e, a
 	ld d, $00
 	add hl, de
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(PalPointers)
+	ld a, BANK(RoomAnimatedPals)
 	bankswitch
 	ld d, $00
 	ld a, [hl]
-	add a
+	add a ; *2
 	ld e, a
 	rl d
-	ld hl, PalPointers
+	ld hl, LevelPals
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]

@@ -3,7 +3,7 @@
 ; (8 * $10 * 4 = $200 bytes each block)
 ; wAnimatedTilesGroup determines which of these blocks to load (up to 24)
 ; wAnimatedTilesFrame determines which of the subset (frame) to load
-LoadAnimatedTiles: ; d0000 (34:4000)
+UpdateRoomAnimatedTiles: ; d0000 (34:4000)
 	ldh a, [rLY]
 	cp $7c
 	jr nc, .done
@@ -32,9 +32,9 @@ LoadAnimatedTiles: ; d0000 (34:4000)
 	ld a, [wAnimatedTilesFrame]
 	inc a
 	cp $4
-	jr nz, .asm_d002f
-	xor a
-.asm_d002f
+	jr nz, .ok
+	xor a ; reset to 0
+.ok
 	ld [wAnimatedTilesFrame], a
 	swap a
 	add a

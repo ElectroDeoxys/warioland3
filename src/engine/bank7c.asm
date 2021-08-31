@@ -77,7 +77,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	xor a
 	ld [wStartMenuSelection], a
 	xor a
-	ld [wced8], a
+	ld [wRoomAnimatedTilesEnabled], a
 	call ClearBGMap0
 	call ClearWholeVirtualOAM
 

@@ -87,7 +87,7 @@ Func_803f9: ; 803f9 (20:43f9)
 	ld a, [wcee3]
 	ld [w2d01b], a
 	xor a
-	ld [wced8], a
+	ld [wRoomAnimatedTilesEnabled], a
 	ld a, [w2d01b]
 	inc a
 	jr nz, .asm_8041e
