@@ -59,9 +59,9 @@ SECTION "Bank B", ROMX
 	INCROM $2c000, $30000
 
 
-SECTION "Bank C", ROMX
+SECTION "Audio Engine", ROMX
 
-INCLUDE "engine/bankc.asm"
+INCLUDE "audio/engine.asm"
 
 
 SECTION "Bank D", ROMX

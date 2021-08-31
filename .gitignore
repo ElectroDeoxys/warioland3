@@ -24,3 +24,6 @@
 
 # *disasm.py output file
 *output.asm
+
+# vscode
+*.vscode/*

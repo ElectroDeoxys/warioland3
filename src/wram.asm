@@ -1332,18 +1332,21 @@ wTreasureTiles:: ; dc00
 
 SECTION "Audio RAM", WRAMX
 
-w3d000:: ; d000
+; bit 5: ???
+; bit 6: whether to invoke audio callback function
+; bit 7: ???
+wAudioEngineFlags:: ; d000
 	ds $1
 
-w3d001:: ; d001
+wAudioBankBackup:: ; d001
 	ds $1
 
 	ds $1
 
-w3d003:: ; d003
+wAudioBankCallback:: ; d003
 	ds $2
 
-w3d005:: ; d005
+wSFXTempo:: ; d005
 	ds $1
 
 w3d006:: ; d006
@@ -1355,7 +1358,7 @@ w3d007:: ; d007
 w3d008:: ; d008
 	ds $2
 
-w3d00a:: ; d00a
+wMusicTempo:: ; d00a
 	ds $1
 
 w3d00b:: ; d00b
@@ -1406,10 +1409,10 @@ wLoadedMusic:: ; d01b
 wCurWaveSample:: ; d01d
 	ds $1
 
-w3d01e:: ; d01e
+wVibratoValue:: ; d01e
 	ds $1
 
-w3d01f:: ; d01f
+wAudioCmdArg:: ; d01f
 	ds $1
 
 w3d020:: ; d020
@@ -1423,7 +1426,11 @@ w3d022:: ; d022
 
 	ds $1
 
-w3d024:: ; d024
+; each bit represents whether a channel is active/inactive
+; bit 0: MusicChannel1
+; bit 1: MusicChannel2
+; ...
+wActiveChannels:: ; d024
 	ds $1
 
 w3d025:: ; d025
@@ -1451,7 +1458,7 @@ wNumChannels:: ; d03c
 wSoundPriority:: ; d03e
 	ds $1
 
-wCurChannel:: ; d03f
+wStartChannel:: ; d03f
 	ds $1
 
 wChannels::
@@ -1460,7 +1467,7 @@ wChannel2:: channel_struct wChannel2 ; d07c
 wChannel3:: channel_struct wChannel3 ; d0b8
 wChannel4:: channel_struct wChannel4 ; d0f4
 
-wSFXChannels::
+wMusicChannels::
 wChannel5:: channel_struct wChannel5 ; d130
 wChannel6:: channel_struct wChannel6 ; d16c
 wChannel7:: channel_struct wChannel7 ; d1a8

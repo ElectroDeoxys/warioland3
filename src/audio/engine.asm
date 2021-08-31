@@ -1,10 +1,10 @@
 _InitAudio: ; 30000 (c:4000)
 	ld a, $ff
-	ld [w3d000], a
+	ld [wAudioEngineFlags], a
 
-	ld a, [w3d001]
+	ld a, [wAudioBankBackup]
 	push af
-	ld hl, w3d001
+	ld hl, wAudioBankBackup
 	ld b, $3f
 	xor a
 .loop_clear
@@ -12,12 +12,12 @@ _InitAudio: ; 30000 (c:4000)
 	dec b
 	jr nz, .loop_clear
 	pop af
-	ld [w3d001], a
+	ld [wAudioBankBackup], a
 
 	ld a, $4a
-	ld [w3d005], a
+	ld [wSFXTempo], a
 	ld [w3d007], a
-	ld [w3d00a], a
+	ld [wMusicTempo], a
 	ld [w3d00c], a
 
 	ld a, $40
@@ -53,7 +53,7 @@ _InitAudio: ; 30000 (c:4000)
 	ldh [rNR52], a
 	ld a, $00
 	ldh [rNR51], a
-	ld a, $08
+	ld a, %1000
 	ldh [rNR12], a
 	ldh [rNR22], a
 	ldh [rNR42], a
@@ -68,9 +68,9 @@ _InitAudio: ; 30000 (c:4000)
 	ld a, MAX_VOLUME
 	ldh [rNR50], a
 	ld a, $00
-	ld [w3d000], a
+	ld [wAudioEngineFlags], a
 
-	jp SwitchBackFromBankC
+	jp SwitchBackFromAudioBank
 ; 0x3007a
 
 Func_3007a: ; 3007a (c:407a)
@@ -78,7 +78,7 @@ Func_3007a: ; 3007a (c:407a)
 	push de
 	call Func_30527
 
-	ld hl, w3d000
+	ld hl, wAudioEngineFlags
 	set 5, [hl]
 
 	ld hl, w3d007
@@ -88,7 +88,6 @@ Func_3007a: ; 3007a (c:407a)
 	ld a, 0
 	adc [hl]
 	ld [hld], a
-
 	ld a, [hli] ; w3d008
 	sub $4a
 	ld b, a
@@ -96,7 +95,7 @@ Func_3007a: ; 3007a (c:407a)
 	sbc 0
 	jr nc, .asm_300a4
 
-	call SetMusicChannels
+	call SetSFXChannels
 .loop_chs_1
 	call Func_30547
 	call NextChannel
@@ -106,15 +105,16 @@ Func_3007a: ; 3007a (c:407a)
 .asm_300a4
 	ld [hld], a
 	ld [hl], b
+
 	call SetAllTracks
 .loop_tracks
 	call Func_30bb0
 	call NextTrack
 	jr nz, .loop_tracks
 
-	call SetMusicChannels
+	call SetSFXChannels
 .loop_chs_2
-	call Func_30559
+	call UpdateChannel
 	call NextChannel
 	jr nz, .loop_chs_2
 
@@ -127,22 +127,23 @@ Func_3007a: ; 3007a (c:407a)
 	jr nc, .asm_300a4
 
 .asm_300c8
-	ld hl, w3d000
+	ld hl, wAudioEngineFlags
 	res 5, [hl]
 	ld hl, w3d00c
 	ld a, [hli]
 	add [hl]
 	ld [hli], a
-	ld a, $00
+	ld a, 0
 	adc [hl]
 	ld [hld], a
 	ld a, [hli]
 	sub $4a
 	ld b, a
 	ld a, [hl]
-	sbc $00
+	sbc 0
 	jr nc, .asm_300ed
-	call SetNoiseChannels
+
+	call SetMusicChannels
 .asm_300e3
 	call Func_30547
 	call NextChannel
@@ -152,29 +153,34 @@ Func_3007a: ; 3007a (c:407a)
 .asm_300ed
 	ld [hld], a
 	ld [hl], b
+
 	call SetAllTracks
 .asm_300f2
 	call Func_30bc2
 	call NextTrack
 	jr nz, .asm_300f2
-	call SetNoiseChannels
+
+	call SetMusicChannels
 .asm_300fd
-	call Func_30559
+	call UpdateChannel
 	call NextChannel
 	jr nz, .asm_300fd
+
 	ld hl, w3d00d
 	ld a, [hli]
 	sub $4a
 	ld b, a
 	ld a, [hl]
-	sbc $00
+	sbc 0
 	jr nc, .asm_300ed
+
 .asm_30111
 	call SetAllTracks
 .asm_30114
 	call Func_30bfb
 	call NextTrack
 	jr nz, .asm_30114
+
 	ld a, [w3d01a]
 	and a
 	jr nz, .asm_30124
@@ -183,12 +189,13 @@ Func_3007a: ; 3007a (c:407a)
 	dec a
 	ld [w3d01a], a
 
+; get active channels
 	ld c, NUM_CHANNELS
 	ld de, CHANNEL_STRUCT_LENGTH
 	ld hl, wChannels
 .loop_chs
 	ld a, [hl]
-	and $f8
+	and CHANNEL_FLAGS_ACTIVE | CHANNEL_FLAGS_6 | CHANNEL_FLAGS_5 | CHANNEL_FLAGS_4 | CHANNEL_FLAGS_3
 	ld [hl], a
 	rla
 	rr b
@@ -196,24 +203,24 @@ Func_3007a: ; 3007a (c:407a)
 	dec c
 	jr nz, .loop_chs
 	ld a, b
-	ld [w3d024], a
+	ld [wActiveChannels], a
 	pop de
 	pop bc
 	jp Func_3f8d
 ; 0x30144
 
-SetMusicChannels: ; 30144 (c:4144)
+SetSFXChannels: ; 30144 (c:4144)
 	ld de, wChannels
+	ld a, NUM_SFX_CHANS
+	jr SetAudioChannels
+
+SetMusicChannels: ; 3014b (c:414b)
+	ld de, wMusicChannels
 	ld a, NUM_MUSIC_CHANS
 	jr SetAudioChannels
 
-SetNoiseChannels: ; 3014b (c:414b)
-	ld de, wSFXChannels
-	ld a, NUM_NOISE_CHANS
-	jr SetAudioChannels
-
 	ld de, wChannel1
-	ld a, $08
+	ld a, NUM_CHANNELS
 	; fallthrough
 
 SetAudioChannels: ; 30157 (c:4157)
@@ -236,7 +243,7 @@ NextChannel: ; 3015f (c:415f)
 	ld a, CHANNEL_STRUCT_LENGTH
 	add [hl]
 	ld [hli], a
-	ld a, $00
+	ld a, 0
 	adc [hl]
 	ld [hl], a
 	rra
@@ -245,35 +252,37 @@ NextChannel: ; 3015f (c:415f)
 
 SetTrack1: ; 3016f (c:416f)
 	ld de, wTrack1
-	ld a, $01
+	ld a, 1
 	ld c, LOW(rNR12)
 	jr SetTrack
 
 SetTrack2: ; 30178 (c:4178)
 	ld de, wTrack2
-	ld a, $01
+	ld a, 1
 	ld c, LOW(rNR22)
 	jr SetTrack
 
 SetTrack3: ; 30181 (c:4181)
 	ld de, wTrack3
-	ld a, $01
+	ld a, 1
 	ld c, LOW(rNR32)
 	jr SetTrack
 
 SetTrack4: ; 3018a (c:418a)
 	ld de, wTrack4
-	ld a, $01
+	ld a, 1
 	ld c, LOW(rNR42)
 	jr SetTrack
 
 SetAllTracks: ; 30193 (c:4193)
 	ld de, wTrack1
-	ld a, $04
+	ld a, NUM_TRACKS
 	ld c, LOW(rNR12)
 	; fallthrough
 
-; de = track
+; a = number of tracks
+; de = pointer to first track
+; c = sound register for this track
 SetTrack: ; 3019a (c:419a)
 	ld hl, wNumTracks
 	ld [hli], a
@@ -307,16 +316,16 @@ NextTrack: ; 301a4 (c:41a4)
 _PlaySFX: ; 301b8 (c:41b8)
 	ld a, b
 	or c
-	jp z, TurnMusicOff
+	jp z, TurnSFXOff
 	call GetSound
 
-	ld a, [wCurChannel]
+	ld a, [wStartChannel]
 	bit 7, a
-	jr nz, .asm_30211 ; unused jump
+	jr nz, .asm_30211 ; jump never taken
 
 	ld b, a
 	sub CHAN5
-	jr nc, .asm_3020e
+	jr nc, .done_1
 	cpl
 	inc a
 	ld [wNumAudioChannels], a
@@ -343,7 +352,7 @@ _PlaySFX: ; 301b8 (c:41b8)
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
 .asm_301f1
-	bit 7, [hl]
+	bit CHANNEL_FLAGS_ACTIVE_F, [hl]
 	jr z, .load_to_channel
 	ld bc, CHANNEL_PRIORITY
 	add hl, bc
@@ -351,20 +360,21 @@ _PlaySFX: ; 301b8 (c:41b8)
 	cp [hl]
 	jr nc, .load_to_channel
 	; lower priority, ignore
-	call Func_30366
-	jr .asm_30207
+	call SkipLoadingChannel
+	jr .skip_load_to_channel
 .load_to_channel
-	call InitChannel
-.asm_30207
-	jr z, .asm_3020e
+	call LoadChannelWithSound
+.skip_load_to_channel
+	jr z, .done_1
 	call NextChannel
 	jr nz, .loop_1
-.asm_3020e
+
+.done_1
 	jp Func_3f8d
 
 .asm_30211
-	call SetMusicChannels
-	ld a, $01
+	call SetSFXChannels
+	ld a, $1
 	ld [w3d03b], a
 	xor a
 	ld [w3d03a], a
@@ -373,24 +383,24 @@ _PlaySFX: ; 301b8 (c:41b8)
 	ld l, a
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
-	bit 7, [hl] ; CHANNEL_FLAGS1
-	jr nz, .asm_30239
-	call InitChannel
-	jr z, .done
+	bit CHANNEL_FLAGS_ACTIVE_F, [hl] ; CHANNEL_FLAGS
+	jr nz, .active_ch
+	call LoadChannelWithSound
+	jr z, .done_2
 	ld a, [w3d03b]
 	ld b, a
 	ld a, [w3d03a]
 	or b
 	ld [w3d03a], a
-.asm_30239
+.active_ch
 	ld a, [w3d03b]
 	sla a
 	ld [w3d03b], a
 	call NextChannel
 	jr nz, .loop_2
 
-	call SetMusicChannels
-	ld a, $01
+	call SetSFXChannels
+	ld a, $1
 	ld [w3d03b], a
 .loop_3
 	ld a, [w3d03b]
@@ -408,8 +418,8 @@ _PlaySFX: ; 301b8 (c:41b8)
 	ld a, [wSoundPriority]
 	cp [hl]
 	jr c, .asm_3026f
-	call InitChannel
-	jr z, .done
+	call LoadChannelWithSound
+	jr z, .done_2
 .asm_3026f
 	ld a, [w3d03b]
 	sla a
@@ -417,12 +427,12 @@ _PlaySFX: ; 301b8 (c:41b8)
 	call NextChannel
 	jr nz, .loop_3
 
-.done
+.done_2
 	jp Func_3f8d
 ; 0x3027f
 
 ; bc = sound ID
-_PlayMusic: ; 3027f (c:427f)
+PlayMusic: ; 3027f (c:427f)
 	ld a, b
 	or c
 	jp z, Func_30416
@@ -437,15 +447,15 @@ _PlayMusic: ; 3027f (c:427f)
 	call GetSound
 
 ; init noise channels
-	call SetNoiseChannels
+	call SetMusicChannels
 .loop_noise_chs
-	call InitChannel
+	call LoadChannelWithSound
 	jr z, .next_music_ch
 	call NextChannel
 	jr nz, .loop_noise_chs
 	jr .done
 
-; init music channels
+; reset music channels
 .loop_music_chs
 	ld a, [wCurChannelPtr + 0]
 	ld l, a
@@ -465,13 +475,13 @@ _PlayMusic: ; 3027f (c:427f)
 Func_302b8: ; 302b8 (c:42b8)
 	ld a, [wLoadedMusic + 0]
 	cp c
-	jr nz, _PlayMusic
+	jr nz, PlayMusic
 	ld a, [wLoadedMusic + 1]
 	cp b
-	jr nz, _PlayMusic
-	ld a, [w3d024]
-	and $f0
-	jr z, _PlayMusic
+	jr nz, PlayMusic
+	ld a, [wActiveChannels]
+	and (1 << CHAN5) | (1 << CHAN6) | (1 << CHAN7) | (1 << CHAN8)
+	jr z, PlayMusic
 	jp Func_3f8d
 ; 0x302ce
 
@@ -483,30 +493,30 @@ _PlayNewMusic_SetNoise: ; 302ce (c:42ce)
 ; the same as the loaded one
 	ld a, [wLoadedMusic + 0]
 	cp c
-	jr nz, _PlayMusic
+	jr nz, PlayMusic
 	ld a, [wLoadedMusic + 1]
 	cp b
-	jr nz, _PlayMusic
+	jr nz, PlayMusic
 
 ; same as wLoadedMusic
-	ld a, [w3d024]
-	and $f0
+	ld a, [wActiveChannels]
+	and (1 << CHAN5) | (1 << CHAN6) | (1 << CHAN7) | (1 << CHAN8)
 	jr z, .asm_302e4
 	jp Func_3f8d
 
 .asm_302e4
 	xor a
 	ld [w3d025], a
-	call SetNoiseChannels
+	call SetMusicChannels
 .loop_chs
 	ld a, [wCurChannelPtr + 0]
 	ld l, a
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
 	ld a, [hl]
-	and %01100000 ; CHANNEL_FLAGS1
+	and CHANNEL_FLAGS_6 | CHANNEL_FLAGS_5 ; CHANNEL_FLAGS
 	jr z, .next_ch
-	set 7, [hl]
+	set CHANNEL_FLAGS_ACTIVE_F, [hl]
 .next_ch
 	call NextChannel
 	jr nz, .loop_chs
@@ -551,7 +561,7 @@ GetSound: ; 30302 (c:4302)
 	ld a, [hli]
 	ld [wSoundPriority], a
 	ld a, [hli]
-	ld [wCurChannel], a
+	ld [wStartChannel], a
 	ld a, [hl]
 	ld [wNumChannels], a
 	inc de
@@ -563,13 +573,13 @@ GetSound: ; 30302 (c:4302)
 	ret
 ; 0x30341
 
-InitChannel: ; 30341 (c:4341)
+LoadChannelWithSound: ; 30341 (c:4341)
 	ld a, [wCurChannelPtr + 0]
 	ld l, a
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
-	ld a, $a0
-	ld [hli], a ; CHANNEL_FLAGS1
+	ld a, CHANNEL_FLAGS_ACTIVE | CHANNEL_FLAGS_5
+	ld [hli], a ; CHANNEL_FLAGS
 	inc hl
 	ld a, [wAudioCmdPtr + 0]
 	ld [hli], a ; CHANNEL_CMD_PTR
@@ -586,7 +596,9 @@ InitChannel: ; 30341 (c:4341)
 	ld [hli], a ; CHANNEL_PRIORITY
 	; fallthrough
 
-Func_30366: ; 30366 (c:4366)
+; decrements wNumChannels
+; and advances wAudioCmdPtr to the next pointer
+SkipLoadingChannel: ; 30366 (c:4366)
 	ld hl, wNumChannels
 	dec [hl]
 	ret z
@@ -601,93 +613,95 @@ Func_30366: ; 30366 (c:4366)
 	ret
 ; 0x30378
 
-Func_30378: ; 30378 (c:4378)
-	ld a, $c0
+InitChannel: ; 30378 (c:4378)
+	ld a, %11000000
 	ld [hli], a
 	xor a
-	ld [hli], a
-	ld a, [hli]
+	ld [hli], a ; CHANNEL_DURATION
+	ld a, [hli] ; CHANNEL_CMD_PTR
 	ld e, a
 	ld a, [hli]
 	ld d, a
-	ld a, [hld]
+	ld a, [hld] ; CHANNEL_SOUND_BANK
 	ld [wSoundBank], a
-	call Get2AudioCommandBytes
+	call ReadAudioCommands_2Bytes
 	ld a, b
 	ld [hld], a
-	ld [hl], c
-	ld bc, $7
+	ld [hl], c ; CHANNEL_CMD_PTR
+	ld bc, CHANNEL_PITCH - CHANNEL_CMD_PTR
 	add hl, bc
 	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
+	ld [hli], a ; CHANNEL_PITCH
+	ld [hli], a ; CHANNEL_UNK_0A
+	ld [hli], a ; CHANNEL_UNK_0B
+	ld [hli], a ; CHANNEL_TIMBRE
+	ld [hli], a ; CHANNEL_LENGTH
+	ld [hli], a ; CHANNEL_SWEEP
 	ld a, $ff
-	ld [hli], a
-	ld [hli], a
+	ld [hli], a ; CHANNEL_FADE_IN_SPEED
+	ld [hli], a ; CHANNEL_FADE_OUT_SPEED
 	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
+	ld [hli], a ; CHANNEL_ACTIVE_COMMAND
+	ld [hli], a ; CHANNEL_PITCH_OFFSET
+	ld [hli], a ; CHANNEL_UNK_13
 	ld [hli], a
 	ld a, $ff
-	ld [hli], a
+	ld [hli], a ; CHANNEL_UNK_15
 	ld a, $40
-	ld [hli], a
+	ld [hli], a ; CHANNEL_UNK_16
 	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
+	ld [hli], a ; CHANNEL_SO1
+	ld [hli], a ; CHANNEL_SO2
+	ld [hli], a ; CHANNEL_UNK_19
 	ld a, $02
-	ld [hli], a
+	ld [hli], a ; CHANNEL_UNK_1A
 	xor a
+	ld [hli], a ; CHANNEL_UNK_1B
 	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
+	ld [hli], a ; CHANNEL_UNK_1D
+	ld [hli], a ; CHANNEL_UNK_2E
 	ld a, $17
-	ld [hli], a
+	ld [hli], a ; CHANNEL_VIBRATO_SPEED
 	xor a
+	ld [hli], a ; CHANNEL_UNK_VIBRATO_VALUE
+	ld [hli], a ; CHANNEL_VIBRATO_AMPLITUDE
+	ld [hli], a ; CHANNEL_UNK_22
+	ld [hli], a ; CHANNEL_VIBRATO_DISABLED
+	ld [hli], a ; CHANNEL_UNK_24
 	ld [hli], a
+	ld [hli], a ; CHANNEL_UNK_26
+	ld [hli], a ; CHANNEL_UNK_27
+	ld [hli], a ; CHANNEL_UNK_28
+	ld [hli], a ; CHANNEL_UNK_29
+	ld [hli], a ; CHANNEL_VIBRATO_DELAY
+	ld [hli], a ; CHANNEL_VIBRATO_COUNTER
+	ld [hli], a ; CHANNEL_UNK_2C
 	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
+	ld [hli], a ; CHANNEL_SO_FLAGS
+	ld [hli], a ; CHANNEL_UNK_2F
 	ld a, $ff
-	ld [hli], a
+	ld [hli], a ; CHANNEL_UNK_30
 	ret
 ; 0x303c9
 
+; bc = sound ID
 Func_303c9: ; 303c9 (c:43c9)
 	ld a, b
 	or c
-	jp z, TurnMusicOff
+	jp z, TurnSFXOff
+
 	ld a, c
 	ld [wCurSoundID + 0], a
 	ld a, b
 	ld [wCurSoundID + 1], a
-	call SetMusicChannels
+	call SetSFXChannels
 .asm_303d9
 	ld a, [wCurChannelPtr + 0]
 	ld c, a
 	ld a, [wCurChannelPtr + 1]
 	ld b, a
 	ld a, [bc]
-	bit 7, a
+	bit CHANNEL_FLAGS_ACTIVE_F, a
 	jr z, .asm_303f9
 	ld hl, $6
 	add hl, bc
@@ -706,22 +720,22 @@ Func_303c9: ; 303c9 (c:43c9)
 	jp Func_3f8d
 ; 0x30401
 
-TurnMusicOff: ; 30401 (c:4401)
-	call SetMusicChannels
+TurnSFXOff: ; 30401 (c:4401)
+	call SetSFXChannels
 .loop_chs
 	ld a, [wCurChannelPtr + 0]
 	ld l, a
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
 	xor a
-	ld [hl], a ; CHANNEL_FLAGS1
+	ld [hl], a ; CHANNEL_FLAGS
 	call NextChannel
 	jr nz, .loop_chs
 	jp Func_3f8d
 ; 0x30416
 
 Func_30416: ; 30416 (c:4416)
-	call TurnNoiseOff
+	call TurnMusicOff
 	jp Func_3f8d
 ; 0x3041c
 
@@ -730,16 +744,16 @@ Func_3041c: ; 3041c (c:441c)
 	ld [w3d020], a
 	; fallthrough
 
-TurnNoiseOff: ; 30420 (c:4420)
+TurnMusicOff: ; 30420 (c:4420)
 	ld a, $ff
 	ld [w3d025], a
-	call SetNoiseChannels
+	call SetMusicChannels
 .loop_chs
 	ld a, [wCurChannelPtr + 0]
 	ld l, a
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
-	res 7, [hl] ; CHANNEL_FLAGS1
+	res CHANNEL_FLAGS_ACTIVE_F, [hl] ; CHANNEL_FLAGS
 	call NextChannel
 	jr nz, .loop_chs
 	ret
@@ -787,7 +801,7 @@ Func_304bc: ; 304bc (c:44bc)
 .loop_chs
 	rrc d
 	jr nc, .next_ch
-	bit 7, [hl] ; CHANNEL_FLAGS1
+	bit CHANNEL_FLAGS_ACTIVE_F, [hl] ; CHANNEL_FLAGS
 	jr z, .next_ch
 	ld a, [wNumChannels]
 	or [hl]
@@ -798,7 +812,7 @@ Func_304bc: ; 304bc (c:44bc)
 	ld [hl], a
 	pop hl
 .next_ch
-	call Func_3050f
+	call AddChannelStructLengthToHL
 	jr nz, .loop_chs
 	ret
 ; 0x304d9
@@ -808,7 +822,7 @@ Func_304d9: ; 304d9 (c:44d9)
 .loop_chs
 	rrc d
 	jr nc, .next_ch
-	bit 7, [hl] ; CHANNEL_FLAGS1
+	bit CHANNEL_FLAGS_ACTIVE_F, [hl] ; CHANNEL_FLAGS
 	jr z, .next_ch
 	ld a, [wNumChannels]
 	or [hl]
@@ -821,15 +835,19 @@ Func_304d9: ; 304d9 (c:44d9)
 	ld [hld], a
 	pop hl
 .next_ch
-	call Func_3050f
+	call AddChannelStructLengthToHL
 	jr nz, .loop_chs
 	ret
 ; 0x304fa
 
+; output:
+; - d = (w3d03a low nibble << 4) | w3d03b low nibble
+; - e = number of channels
+; - hl = wChannel1
 Func_304fa: ; 304fa (c:44fa)
 	ld a, [w3d03b]
 	and $0f
-	ld d, a ; low nybble
+	ld d, a ; low nibble
 	ld a, [w3d03a]
 	swap a
 	and $f0 ; *16
@@ -840,7 +858,7 @@ Func_304fa: ; 304fa (c:44fa)
 	ret
 ; 0x3050f
 
-Func_3050f: ; 3050f (c:450f)
+AddChannelStructLengthToHL: ; 3050f (c:450f)
 	ld a, CHANNEL_STRUCT_LENGTH
 	add l
 	ld l, a
@@ -880,38 +898,38 @@ Func_30547: ; 30547 (c:4547)
 	ld l, a
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
-	ld a, [hl] ; CHANNEL_FLAGS1
-	cp $c0
+	ld a, [hl] ; CHANNEL_FLAGS
+	cp CHANNEL_FLAGS_ACTIVE | CHANNEL_FLAGS_6
 	ret c
 	ld [w3d019], a
 	jp Func_30651
 ; 0x30559
 
-Func_30559: ; 30559 (c:4559)
+UpdateChannel: ; 30559 (c:4559)
 	ld a, [wCurChannelPtr + 0]
 	ld l, a
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
 	ld a, [hl]
-	bit 7, a
-	ret z
-	bit 6, a
-	jr nz, .asm_3056f
+	bit CHANNEL_FLAGS_ACTIVE_F, a
+	ret z ; not active
+	bit CHANNEL_FLAGS_6_F, a
+	jr nz, .skip_init
 	push hl
-	call Func_30378
+	call InitChannel
 	pop hl
 	ld a, [hl]
-.asm_3056f
+.skip_init
 	ld [w3d019], a
 	inc hl
-	ld a, [hl] ; CHANNEL_UNK_01
+	ld a, [hl] ; CHANNEL_DURATION
 	and a
-	jr z, .start_audio_cmds
+	jr z, .do_audio_cmds
 	dec [hl]
 	inc hl
 	jr Func_305cf
 
-.start_audio_cmds
+.do_audio_cmds
 	inc hl
 	ld a, [hli] ; CHANNEL_CMD_PTR
 	ld e, a
@@ -926,26 +944,26 @@ DoAudioCommand: ; 30584 (c:4584)
 	ld l, a
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
-	ld bc, CHANNEL_UNK_11
+	ld bc, CHANNEL_ACTIVE_COMMAND
 	add hl, bc
-	call Get2AudioCommandBytes
+	call ReadAudioCommands_2Bytes
 	bit 7, c
 	jr nz, .has_argument
 
-; no arguments
+; previous cmd
 	ld a, c
-	ld [w3d01f], a
+	ld [wAudioCmdArg], a
 	dec de
 	ld a, [hl]
 	jr .asm_305a9
 
 .has_argument
 	ld a, b
-	ld [w3d01f], a
+	ld [wAudioCmdArg], a
 	ld a, c
 	cp $be
 	jr c, .asm_305a9 ; if < $be
-	ld [hl], a
+	ld [hl], a ; CHANNEL_ACTIVE_COMMAND
 .asm_305a9
 	cp $d0
 	jp nc, Func_30a14 ; if >= $d0
@@ -971,7 +989,7 @@ JumpToPointerInTable: ; 305b6 (c:45b6)
 	jp hl
 ; 0x305c4
 
-Func_305c4: ; 305c4 (c:45c4)
+AudioCmd_ClearFlags: ; 305c4 (c:45c4)
 	ld a, [wCurChannelPtr + 0]
 	ld l, a
 	ld a, [wCurChannelPtr + 1]
@@ -982,36 +1000,37 @@ Func_305c4: ; 305c4 (c:45c4)
 ; 0x305cf
 
 Func_305cf: ; 305cf (c:45cf)
-	ld bc, CHANNEL_UNK_2B - CHANNEL_CMD_PTR
+	ld bc, CHANNEL_VIBRATO_COUNTER - CHANNEL_CMD_PTR
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .asm_305e0
+	jr z, .counter_done
+	; still counting down vibrato delay
 	dec [hl]
-	ld bc, CHANNEL_UNK_20 - CHANNEL_UNK_2B
+	ld bc, CHANNEL_UNK_VIBRATO_VALUE - CHANNEL_VIBRATO_COUNTER
 	add hl, bc
 	ld a, $40
-	jr .asm_305e6
-.asm_305e0
-	ld bc, CHANNEL_UNK_1F - CHANNEL_UNK_2B
+	jr .write_vibrato_value
+.counter_done
+	ld bc, CHANNEL_VIBRATO_SPEED - CHANNEL_VIBRATO_COUNTER
 	add hl, bc
 	ld a, [hli]
-	add [hl]
-.asm_305e6
-	ld [hl], a ; CHANNEL_UNK_20
+	add [hl] ; CHANNEL_UNK_VIBRATO_VALUE
+.write_vibrato_value
+	ld [hl], a ; CHANNEL_UNK_VIBRATO_VALUE
 	sla a
-	jr nc, .asm_305ec
+	jr nc, .got_vibrato_value
 	cpl
-.asm_305ec
-	ld [w3d01e], a
+.got_vibrato_value
+	ld [wVibratoValue], a
 
-	ld bc, CHANNEL_UNK_21 - CHANNEL_UNK_20
+	ld bc, CHANNEL_VIBRATO_AMPLITUDE - CHANNEL_UNK_VIBRATO_VALUE
 	add hl, bc
 	ld a, [hli]
 	add [hl] ; CHANNEL_UNK_22
 	jr z, .asm_3060c
 	ld c, a
-	ld a, [w3d01e]
+	ld a, [wVibratoValue]
 	ld b, a
 	push hl
 	push bc
@@ -1020,23 +1039,24 @@ Func_305cf: ; 305cf (c:45cf)
 	ld b, h
 	pop hl
 	inc hl
-	ld a, [hli]
-	cp $00
-	jr z, .asm_30617
-	jr .asm_30646
+	ld a, [hli] ; CHANNEL_VIBRATO_DISABLED
+	cp FALSE
+	jr z, .calculate_vibrato
+	jr .skip_vibrato
+
 .asm_3060c
 	lb bc, $0, $0
 	inc hl
-	ld a, [hli] ; CHANNEL_UNK_23
-	cp $00
+	ld a, [hli] ; CHANNEL_VIBRATO_DISABLED
+	cp FALSE
 	jr z, .asm_30629
-	jr .asm_30646
+	jr .skip_vibrato
 
-.asm_30617
+.calculate_vibrato
 	ld a, b
 	srl c
 	sub c
-	ld c, a
+	ld c, a ; = b - c / 2
 	ld a, 0
 	sbc a
 	sla c
@@ -1045,10 +1065,10 @@ Func_305cf: ; 305cf (c:45cf)
 	rla
 	sla c
 	rla
-	ld b, a
+	ld b, a ; *8
 .asm_30629
 	ld a, c
-	cp [hl]
+	cp [hl] ; CHANNEL_UNK_24
 	jr z, .asm_30636
 	ld a, [w3d019]
 	set 2, a
@@ -1057,16 +1077,16 @@ Func_305cf: ; 305cf (c:45cf)
 .asm_30636
 	inc hl
 	ld a, b
-	cp [hl]
+	cp [hl] ; CHANNEL_UNK_25
 	jr z, .asm_30644
 	ld a, [w3d019]
 	set 2, a
 	ld [w3d019], a
 	ld [hl], b
 .asm_30644
-	jr .asm_30646
+	jr .skip_vibrato ; unnecessary jump
 
-.asm_30646
+.skip_vibrato
 	ld a, [wCurChannelPtr + 0]
 	ld l, a
 	ld a, [wCurChannelPtr + 1]
@@ -1103,7 +1123,7 @@ Func_30651: ; 30651 (c:4651)
 	adc d
 	ld d, a
 
-	ld bc, CHANNEL_UNK_23 - CHANNEL_UNK_13
+	ld bc, CHANNEL_VIBRATO_DISABLED - CHANNEL_UNK_13
 	add hl, bc
 	ld a, [hli]
 	cp $00
@@ -1128,12 +1148,12 @@ Func_30651: ; 30651 (c:4651)
 .asm_30691
 	bit 0, a
 	jr z, .asm_306a8
-	ld bc, CHANNEL_UNK_17
+	ld bc, CHANNEL_SO1
 	add hl, bc
 	ld a, [hli]
-	add [hl] ; CHANNEL_UNK_18
+	add [hl] ; CHANNEL_SO2
 	ld e, a
-	ld bc, CHANNEL_SO_FLAGS - CHANNEL_UNK_18
+	ld bc, CHANNEL_SO_FLAGS - CHANNEL_SO2
 	add hl, bc
 	ld [hl], e
 	ld bc, -CHANNEL_SO_FLAGS
@@ -1152,9 +1172,9 @@ Func_30651: ; 30651 (c:4651)
 	add $0f
 	and $f0
 	cp $40
-	jr c, .asm_306c0
+	jr c, .no_cap
 	ld a, $ff
-.asm_306c0
+.no_cap
 	rlca
 	rlca
 	ld e, a
@@ -1171,62 +1191,65 @@ Func_30651: ; 30651 (c:4651)
 ; 0x306d1
 
 PointerTable_306d1: ; 306d1 (c:46d1)
-	dw Func_305c4               ; b1
-	dw Func_30784               ; b2
-	dw Func_30760               ; b3
-	dw Func_3078c               ; b4
-	dw Func_307ae               ; b5
-	dw Func_30a0d               ; b6
-	dw Func_30a0d               ; b7
-	dw Func_30a0d               ; b8
-	dw Func_305c4               ; b9
-	dw Func_305c4               ; ba
-	dw Func_305c4               ; bb
-	dw AudioCmd_BC              ; bc
-	dw AudioCmd_SetChannelUnk12 ; bd
-	dw AudioCmd_BE              ; be
-	dw AudioCmd_SetChannelUnk15 ; bf
-	dw Func_3093e               ; c0
-	dw Func_3087f               ; c1
-	dw Func_308be               ; c2
-	dw AudioCmd_C3              ; c3
-	dw AudioCmd_SetChannelUnk2a ; c4
-	dw AudioCmd_SetChannelUnk21 ; c5
-	dw AudioCmd_SetChannelUnk23 ; c6
-	dw Func_30a0d               ; c7
-	dw Func_30a0d               ; c8
-	dw Func_30980               ; c9
-	dw AudioCmd_SetChannelUnk1e ; ca
-	dw Func_30a0d               ; cb
-	dw Func_305c4               ; cc
-	dw Func_30727               ; cd
-	dw Func_30a10               ; ce
-	dw Func_30b4d               ; cf
-	dw Func_305c4               ; d0
-	dw AudioCmd_SetChannelTimbre ; d1
-	dw Func_309cb               ; d2
-	dw Func_309e8               ; d3
-	dw Func_30a03               ; d4
-	dw Func_30a08               ; d5
-	dw AudioCmd_SetChannelUnk27 ; d6
-	dw AudioCmd_SetChannelUnk28 ; d7
-	dw Func_30a0d               ; d8
-	dw Func_30a0d               ; d9
-	dw AudioCmd_SetChannelDuration ; da
-	dw AudioCmd_SetChannelSweep ; db
+	dw AudioCmd_ClearFlags           ; b1
+	dw AudioCmd_Jump                 ; b2
+	dw AudioCmd_Call                 ; b3
+	dw AudioCmd_Ret                  ; b4
+	dw AudioCmd_Loop                 ; b5
+	dw Func_30a0d                    ; b6
+	dw Func_30a0d                    ; b7
+	dw Func_30a0d                    ; b8
+	dw AudioCmd_ClearFlags           ; b9
+	dw AudioCmd_ClearFlags           ; ba
+	dw AudioCmd_ClearFlags           ; bb
+	dw AudioCmd_SetTempo             ; bc
+	dw AudioCmd_SetPitchOffset       ; bd
+	dw AudioCmd_SetWave              ; be
+	dw AudioCmd_SetChannelUnk15      ; bf
+	dw Func_3093e                    ; c0
+	dw Func_3087f                    ; c1
+	dw Func_308be                    ; c2
+	dw AudioCmd_SetVibratoSpeed      ; c3
+	dw AudioCmd_SetVibratoDelay      ; c4
+	dw AudioCmd_SetVibratoAmplitude  ; c5
+	dw AudioCmd_SetChannelVibratoDisabled      ; c6
+	dw Func_30a0d                    ; c7
+	dw Func_30a0d                    ; c8
+	dw Func_30980                    ; c9
+	dw AudioCmd_SetChannelUnk1e      ; ca
+	dw Func_30a0d                    ; cb
+	dw AudioCmd_ClearFlags           ; cc
+	dw Func_30727                    ; cd
+	dw Func_30a10                    ; ce
+	dw Func_30b4d                    ; cf
+; 0x3070f
+
+PointerTable_3070f: ; 3070f (c:470f)
+	dw AudioCmd_ClearFlags           ; 00
+	dw AudioCmd_SetChannelTimbre     ; 01
+	dw AudioCmd_SetChannelFadeInSpeed ; 02
+	dw Func_309e8                    ; 03
+	dw Func_30a03                    ; 04
+	dw AudioCmd_SetChannelFadeOutSpeed ; 05
+	dw AudioCmd_SetChannelUnk27      ; 06
+	dw AudioCmd_SetChannelUnk28      ; 07
+	dw Func_30a0d                    ; 08
+	dw Func_30a0d                    ; 09
+	dw AudioCmd_SetChannelDuration   ; 0a
+	dw AudioCmd_SetChannelSweep      ; 0b
 ; 0x30727
 
 Func_30727: ; 30727 (c:4727)
-	ld a, [w3d01f]
+	ld a, [wAudioCmdArg]
 	inc de
 	cp $0c
-	jp nc, Func_305c4
+	jp nc, AudioCmd_ClearFlags
 	ld b, a
-	call Func_3faa
+	call ReadAudioCommands_1Byte
 	ld a, c
-	ld [w3d01f], a
+	ld [wAudioCmdArg], a
 	ld a, b
-	ld bc, $470f
+	ld bc, PointerTable_3070f
 	jp JumpToPointerInTable
 ; 0x3073f
 
@@ -1236,7 +1259,7 @@ Func_3073f: ; 3073f (c:473f)
 
 	add LOW(Data_3102b)
 	ld l, a
-	ld a, $00
+	ld a, 0
 	adc HIGH(Data_3102b)
 	ld h, a
 	ld b, [hl]
@@ -1248,7 +1271,7 @@ Func_3073f: ; 3073f (c:473f)
 	ld h, a
 	inc hl
 	ld a, b
-	ld [hli], a ; CHANNEL_UNK_01
+	ld [hli], a ; CHANNEL_DURATION
 	ld a, e
 	ld [hli], a ; CHANNEL_CMD_PTR
 	ld a, d
@@ -1256,7 +1279,8 @@ Func_3073f: ; 3073f (c:473f)
 	jp Func_305cf
 ; 0x30760
 
-Func_30760: ; 30760 (c:4760)
+AudioCmd_Call: ; 30760 (c:4760)
+; audiocmd_call
 	ld a, [wCurChannelPtr + 0]
 	ld l, a
 	ld a, [wCurChannelPtr + 1]
@@ -1265,7 +1289,7 @@ Func_30760: ; 30760 (c:4760)
 	add hl, bc
 	ld a, [hl]
 	cp $0a
-	jp nc, Func_305c4
+	jp nc, AudioCmd_ClearFlags
 	inc a
 	inc a
 	ld [hl], a
@@ -1283,14 +1307,16 @@ Func_30760: ; 30760 (c:4760)
 	dec de
 ;	fallthrough
 
-Func_30784: ; 30784 (c:4784)
-	call Get2AudioCommandBytes
+AudioCmd_Jump: ; 30784 (c:4784)
+; audiocmd_jump
+	call ReadAudioCommands_2Bytes
 	ld e, c
 	ld d, b
 	jp DoAudioCommand
 ; 0x3078c
 
-Func_3078c: ; 3078c (c:478c)
+AudioCmd_Ret: ; 3078c (c:478c)
+; audiocmd_ret
 	ld a, [wCurChannelPtr + 0]
 	ld l, a
 	ld a, [wCurChannelPtr + 1]
@@ -1314,20 +1340,21 @@ Func_3078c: ; 3078c (c:478c)
 	jp DoAudioCommand
 ; 0x307ae
 
-Func_307ae: ; 307ae (c:47ae)
+AudioCmd_Loop: ; 307ae (c:47ae)
+; audiocmd_loop
 	ld a, [wCurChannelPtr + 0]
 	ld l, a
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
 	ld bc, CHANNEL_UNK_29
 	add hl, bc
-	ld a, [w3d01f]
+	ld a, [wAudioCmdArg]
 	inc de
 	and a
-	jr z, Func_30784
+	jr z, AudioCmd_Jump ; if arg == 0
 	inc [hl]
 	cp [hl]
-	jr nz, Func_30784
+	jr nz, AudioCmd_Jump ; if arg != CHANNEL_UNK_29 + 1
 	xor a
 	ld [hl], a
 	inc de
@@ -1335,15 +1362,15 @@ Func_307ae: ; 307ae (c:47ae)
 	jp DoAudioCommand
 ; 0x307cc
 
-AudioCmd_BC: ; 307cc (c:47cc)
-; audiocmd_bc
-	ld hl, w3d000
+AudioCmd_SetTempo: ; 307cc (c:47cc)
+; tempo
+	ld hl, wAudioEngineFlags
 	bit 5, [hl]
-	ld hl, w3d00a
-	jr z, .asm_307d9
-	ld hl, w3d005
-.asm_307d9
-	ld a, [w3d01f]
+	ld hl, wMusicTempo
+	jr z, .not_set
+	ld hl, wSFXTempo
+.not_set
+	ld a, [wAudioCmdArg]
 	inc de
 	ld [hl], a
 	call Func_307e4
@@ -1396,9 +1423,9 @@ Func_30802: ; 30802 (c:4802)
 	ret
 ; 0x30823
 
-AudioCmd_SetChannelUnk12: ; 30823 (c:4823)
-; audiocmd_bd
-	ld bc, CHANNEL_UNK_12
+AudioCmd_SetPitchOffset: ; 30823 (c:4823)
+; pitch_offset
+	ld bc, CHANNEL_PITCH_OFFSET
 	jp SetChannelProperty
 ; 0x30829
 
@@ -1406,18 +1433,18 @@ Func_30829: ; 30829 (c:4829)
 	ld a, [wNumChannels]
 	set 2, a
 	ld [wNumChannels], a
-	ld bc, $13
+	ld bc, CHANNEL_UNK_13
 	jp Func_304d9
 ; 0x30837
 
-AudioCmd_BE: ; 30837 (c:4837)
-; audiocmd_be
-	ld a, [w3d01f]
+AudioCmd_SetWave: ; 30837 (c:4837)
+; wave
+	ld a, [wAudioCmdArg]
 	inc de
 	cp $28
 	jr z, .asm_30867
 
-	call Func_30872
+	call GetWave
 
 	ld a, [wCurChannelPtr + 0]
 	add CHANNEL_TIMBRE
@@ -1426,19 +1453,19 @@ AudioCmd_BE: ; 30837 (c:4837)
 	adc 0
 	ld b, a
 
-	ld a, [hli]
+	ld a, [hli] ; timbre
 	ld [bc], a
 	inc bc
-	ld a, [hli]
+	ld a, [hli] ; duration
 	ld [bc], a
 	inc bc
-	ld a, [hli]
+	ld a, [hli] ; sweep
 	ld [bc], a
 	inc bc
-	ld a, [hli]
+	ld a, [hli] ; fade in speed
 	ld [bc], a
 	inc bc
-	ld a, [hli]
+	ld a, [hli] ; fade out speed
 	ld [bc], a
 
 	ld a, [w3d019]
@@ -1453,7 +1480,7 @@ AudioCmd_BE: ; 30837 (c:4837)
 	jp DoAudioCommand
 ; 0x30872
 
-Func_30872: ; 30872 (c:4872)
+GetWave: ; 30872 (c:4872)
 	ld l, a
 	ld h, $00
 	add hl, hl ; *2
@@ -1461,7 +1488,7 @@ Func_30872: ; 30872 (c:4872)
 	ld b, h
 	add hl, hl ; *4
 	add hl, bc ; *6
-	ld bc, Data_311c4
+	ld bc, Waves
 	add hl, bc
 	ret
 ; 0x3087f
@@ -1471,9 +1498,9 @@ Func_3087f: ; 3087f (c:487f)
 	ld l, a
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
-	ld bc, $19
+	ld bc, CHANNEL_UNK_19
 	add hl, bc
-	ld a, [w3d01f]
+	ld a, [wAudioCmdArg]
 	inc de
 	rlca
 	sub $80
@@ -1519,9 +1546,9 @@ Func_308be: ; 308be (c:48be)
 	ld l, a
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
-	ld bc, $1a
+	ld bc, CHANNEL_UNK_1A
 	add hl, bc
-	ld a, [w3d01f]
+	ld a, [wAudioCmdArg]
 	inc de
 	ld [hld], a
 	ld c, a
@@ -1531,15 +1558,15 @@ Func_308be: ; 308be (c:48be)
 	jr Func_30896
 ; 0x308d5
 
-AudioCmd_C3: ; 308d5 (c:48d5)
-; audiocmd_c3
+AudioCmd_SetVibratoSpeed: ; 308d5 (c:48d5)
+; vibrato_speed
 	ld a, [wCurChannelPtr + 0]
 	ld l, a
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
-	ld bc, CHANNEL_UNK_1F
+	ld bc, CHANNEL_VIBRATO_SPEED
 	add hl, bc
-	ld a, [w3d01f]
+	ld a, [wAudioCmdArg]
 	inc de
 	ld [hli], a
 	sla a
@@ -1547,7 +1574,7 @@ AudioCmd_C3: ; 308d5 (c:48d5)
 	ccf
 	rra
 	rra
-	ld [hl], a ; CHANNEL_UNK_20
+	ld [hl], a ; CHANNEL_UNK_VIBRATO_VALUE
 .asm_308ee
 	jp DoAudioCommand
 ; 0x308f1
@@ -1556,7 +1583,7 @@ Func_308f1: ; 308f1 (c:48f1)
 	ld a, [wCurSoundID + 1]
 	sla a
 	jr z, .asm_308fe
-	ld bc, CHANNEL_UNK_1F
+	ld bc, CHANNEL_VIBRATO_SPEED
 	jp Func_304bc
 .asm_308fe
 	rra
@@ -1564,13 +1591,13 @@ Func_308f1: ; 308f1 (c:48f1)
 	rra
 	xor $40
 	ld [wCurSoundID + 1], a
-	ld bc, $1f
+	ld bc, CHANNEL_VIBRATO_SPEED
 	jp Func_304d9
 ; 0x3090e
 
-AudioCmd_SetChannelUnk2a: ; 3090e (c:490e)
-; audiocmd_c4
-	ld bc, CHANNEL_UNK_2A
+AudioCmd_SetVibratoDelay: ; 3090e (c:490e)
+; vibrato_delay
+	ld bc, CHANNEL_VIBRATO_DELAY
 	jr SetChannelProperty
 ; 0x30913
 
@@ -1586,7 +1613,7 @@ AudioCmd_SetChannelUnk15: ; 30913 (c:4913)
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
 	add hl, bc
-	ld a, [w3d01f]
+	ld a, [wAudioCmdArg]
 	inc de
 	rlca
 	ld [hl], a
@@ -1605,7 +1632,7 @@ Func_3093e: ; 3093e (c:493e)
 	ld a, [w3d019]
 	set 0, a
 	ld [w3d019], a
-	ld bc, $17
+	ld bc, CHANNEL_SO1
 	jr Func_3098b
 ; 0x3094b
 
@@ -1613,13 +1640,13 @@ Func_3094b: ; 3094b (c:494b)
 	ld a, [wNumChannels]
 	set 0, a
 	ld [wNumChannels], a
-	ld bc, CHANNEL_UNK_18
+	ld bc, CHANNEL_SO2
 	jp Func_304bc
 ; 0x30959
 
-AudioCmd_SetChannelUnk21: ; 30959 (c:4959)
-; audiocmd_c5
-	ld bc, CHANNEL_UNK_21
+AudioCmd_SetVibratoAmplitude: ; 30959 (c:4959)
+; vibrato_amplitude
+	ld bc, CHANNEL_VIBRATO_AMPLITUDE
 ;	fallthrough
 
 SetChannelProperty: ; 3095c (c:495c)
@@ -1628,18 +1655,18 @@ SetChannelProperty: ; 3095c (c:495c)
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
 	add hl, bc
-	ld a, [w3d01f]
+	ld a, [wAudioCmdArg]
 	inc de
 	ld [hl], a
 	jp DoAudioCommand
 ; 0x3096d
 
-AudioCmd_SetChannelUnk23: ; 3096d (c:496d)
-; audiocmd_c6
+AudioCmd_SetChannelVibratoDisabled: ; 3096d (c:496d)
+; set_vibrato_disabled
 	ld a, [w3d019]
-	or $07
+	or %111
 	ld [w3d019], a
-	ld bc, CHANNEL_UNK_23
+	ld bc, CHANNEL_VIBRATO_DISABLED
 	jr SetChannelProperty
 ; 0x3097a
 
@@ -1652,7 +1679,7 @@ Func_30980: ; 30980 (c:4980)
 	ld a, [w3d019]
 	set 2, a
 	ld [w3d019], a
-	ld bc, $1d
+	ld bc, CHANNEL_UNK_1D
 ; 0x3098b
 
 Func_3098b: ; 3098b (c:498b)
@@ -1661,7 +1688,7 @@ Func_3098b: ; 3098b (c:498b)
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
 	add hl, bc
-	ld a, [w3d01f]
+	ld a, [wAudioCmdArg]
 	inc de
 	rlca
 	sub $80
@@ -1691,30 +1718,31 @@ AudioCmd_SetChannelUnk28: ; 309b1 (c:49b1)
 ; 0x309b6
 
 Func_309b6: ; 309b6 (c:49b6)
-	ld bc, $27
+	ld bc, CHANNEL_UNK_27
 	jp Func_304d9
 ; 0x309bc
 
 AudioCmd_SetChannelTimbre: ; 309bc (c:49bc)
-; audiocmd_set_timbre
+; set_timbre
 	ld bc, CHANNEL_TIMBRE
 	jr SetChannelProperty
 ; 0x309c1
 
 AudioCmd_SetChannelDuration: ; 309c1 (c:49c1)
-; audiocmd_set_duration
-	ld bc, CHANNEL_DURATION
+; set_duration
+	ld bc, CHANNEL_LENGTH
 	jr SetChannelProperty
 ; 0x309c6
 
 AudioCmd_SetChannelSweep: ; 309c6 (c:49c6)
-; audiocmd_set_sweep
+; set_sweep
 	ld bc, CHANNEL_SWEEP
 	jr SetChannelProperty
 ; 0x309cb
 
-Func_309cb: ; 309cb (c:49cb)
-	ld bc, $f
+AudioCmd_SetChannelFadeInSpeed: ; 309cb (c:49cb)
+; fade_in
+	ld bc, CHANNEL_FADE_IN_SPEED
 ;	fallthrough
 
 Func_309ce: ; 309ce (c:49ce)
@@ -1723,7 +1751,7 @@ Func_309ce: ; 309ce (c:49ce)
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
 	add hl, bc
-	ld a, [w3d01f]
+	ld a, [wAudioCmdArg]
 	inc de
 	swap a
 	and $f0
@@ -1736,7 +1764,7 @@ Func_309ce: ; 309ce (c:49ce)
 ; 0x309e8
 
 Func_309e8: ; 309e8 (c:49e8)
-	ld bc, $f
+	ld bc, CHANNEL_FADE_IN_SPEED
 ;	fallthrough
 
 Func_309eb: ; 309eb (c:49eb)
@@ -1745,7 +1773,7 @@ Func_309eb: ; 309eb (c:49eb)
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
 	add hl, bc
-	ld a, [w3d01f]
+	ld a, [wAudioCmdArg]
 	inc de
 	and $0f
 	ld b, a
@@ -1757,17 +1785,17 @@ Func_309eb: ; 309eb (c:49eb)
 ; 0x30a03
 
 Func_30a03: ; 30a03 (c:4a03)
-	ld bc, $10
+	ld bc, CHANNEL_FADE_OUT_SPEED
 	jr Func_309ce
 ; 0x30a08
 
-Func_30a08: ; 30a08 (c:4a08)
-	ld bc, $10
+AudioCmd_SetChannelFadeOutSpeed: ; 30a08 (c:4a08)
+	ld bc, CHANNEL_FADE_OUT_SPEED
 	jr Func_309eb
 ; 0x30a0d
 
 Func_30a0d: ; 30a0d (c:4a0d)
-	jp Func_305c4
+	jp AudioCmd_ClearFlags
 ; 0x30a10
 
 Func_30a10: ; 30a10 (c:4a10)
@@ -1795,37 +1823,39 @@ Func_30a1f: ; 30a1f (c:4a1f)
 	add hl, bc
 	ld [hld], a
 	ld b, $00
-	ld a, [w3d01f]
+	ld a, [wAudioCmdArg]
 	jr .got_arg
 
 .loop_args
 	inc de
-	call Func_3faa
+	call ReadAudioCommands_1Byte
 	ld a, c
 .got_arg
 	bit 7, a
-	jr nz, .asm_30a68
+	jr nz, .done_args
 	cp $24
-	jr nc, .asm_30a50 ; if >= $24
+	jr nc, .pitch ; if >= $24
 	cp $20
 	jr c, .asm_30a5a ; if < $20
 	bit 5, b
-	jr nz, .asm_30a68
+	jr nz, .done_args
 	set 5, b
 	inc hl
 	add [hl] ; CHANNEL_UNK_0B
 	ld [hld], a
 	jr .loop_args
-.asm_30a50
+
+.pitch
 	bit 7, b
-	jr nz, .asm_30a68
+	jr nz, .done_args
 	set 7, b
 	dec hl
-	ld [hli], a ; CHANNEL_UNK_09
+	ld [hli], a ; CHANNEL_PITCH
 	jr .loop_args
+
 .asm_30a5a
 	bit 6, b
-	jr nz, .asm_30a68
+	jr nz, .done_args
 	set 6, b
 	rlca
 	rlca
@@ -1834,21 +1864,21 @@ Func_30a1f: ; 30a1f (c:4a1f)
 	ld [hl], a ; CHANNEL_UNK_0A
 	jr .loop_args
 
-.asm_30a68
+.done_args
 	push de
 	dec hl
-	ld a, [hl] ; CHANNEL_UNK_09
-	ld bc, CHANNEL_UNK_12 - CHANNEL_UNK_09
+	ld a, [hl] ; CHANNEL_PITCH
+	ld bc, CHANNEL_PITCH_OFFSET - CHANNEL_PITCH
 	add hl, bc
-	add [hl]
+	add [hl] ; add pitch offset
 	ld [w3d03a], a
 	ld [w3d03b], a
-	ld bc, CHANNEL_UNK_2A - CHANNEL_UNK_12
+	ld bc, CHANNEL_VIBRATO_DELAY - CHANNEL_PITCH_OFFSET
 	add hl, bc
 	ld a, [hli]
-	ld [hld], a ; CHANNEL_UNK_2B
+	ld [hld], a ; CHANNEL_VIBRATO_COUNTER
 
-	ld bc, CHANNEL_TIMBRE - CHANNEL_UNK_2A
+	ld bc, CHANNEL_TIMBRE - CHANNEL_VIBRATO_DELAY
 	add hl, bc
 	ld a, [w3d019]
 	bit 4, a
@@ -1858,18 +1888,18 @@ Func_30a1f: ; 30a1f (c:4a1f)
 	ld d, h
 	ld a, [w3d03a]
 	add $04
-	call Func_30872
+	call GetWave
 	ld a, [hli]
 	ld [de], a ; CHANNEL_TIMBRE
 	inc de
 	ld a, [hli]
-	ld [de], a ; CHANNEL_DURATION
+	ld [de], a ; CHANNEL_LENGTH
 	inc de
 	ld a, [hli]
 	ld [de], a ; CHANNEL_SWEEP
 	inc de
 	ld a, [hli]
-	ld [de], a ; CHANNEL_UNK_FADE_IN_SPEED
+	ld [de], a ; CHANNEL_FADE_IN_SPEED
 	inc de
 	ld a, [hli]
 	ld [de], a ; CHANNEL_FADE_OUT_SPEED
@@ -1905,7 +1935,7 @@ Func_30a1f: ; 30a1f (c:4a1f)
 
 .got_track
 	ld a, [wNumAudioChannels]
-	ld hl, w3d000
+	ld hl, wAudioEngineFlags
 	bit 5, [hl]
 	jr z, .asm_30ad0
 	set 7, a
@@ -1928,22 +1958,22 @@ Func_30a1f: ; 30a1f (c:4a1f)
 	ld h, a
 	ld a, [hli] ; TRACK_UNK00
 	and a
-	jr z, .InitTrack
+	jr z, .UpdateTrack
 	bit 5, a
 	jr nz, .asm_30af7
-	jr .InitTrack
+	jr .UpdateTrack
 
 .asm_30af7
 	ld a, [hli] ; TRACK_UNK01
 	cp d
-	jr c, .InitTrack
+	jr c, .UpdateTrack
 	jr nz, .skip
 	ld a, e
 	cp [hl] ; TRACK_UNK02
 	jr c, .skip
 
-.InitTrack
-	call Func_30fbb
+.UpdateTrack
+	call TurnSoundRegisterOff
 	ld a, [wCurChannelPtr + 0]
 	ld e, a
 	ld a, [wCurChannelPtr + 1]
@@ -1975,13 +2005,13 @@ Func_30a1f: ; 30a1f (c:4a1f)
 	ld [hli], a ; TRACK_UNK06
 	inc de
 	ld a, [de]
-	ld [hli], a ; TRACK_UNK07
+	ld [hli], a ; TRACK_DURATION
 	inc de
 	ld a, [de]
 	ld [hli], a ; TRACK_TIMBRE
 	inc de
 	ld a, [de]
-	ld [hli], a ; TRACK_DURATION
+	ld [hli], a ; TRACK_LENGTH
 	inc de
 	ld a, [de]
 	ld [hli], a ; TRACK_SWEEP
@@ -2005,9 +2035,9 @@ Func_30b4d: ; 30b4d (c:4b4d)
 	ld l, a
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
-	ld bc, $9
+	ld bc, CHANNEL_PITCH
 	add hl, bc
-	ld a, [w3d01f]
+	ld a, [wAudioCmdArg]
 	bit 7, a
 	jr nz, .asm_30b66
 	cp $24
@@ -2016,14 +2046,15 @@ Func_30b4d: ; 30b4d (c:4b4d)
 	ld [hl], a
 .asm_30b66
 	ld a, [hl]
-	ld bc, $9
+	ld bc, CHANNEL_PITCH_OFFSET - CHANNEL_PITCH
 	add hl, bc
 	add [hl]
 	ld [w3d03a], a
+
 	push de
 	call SetAllTracks
 	ld a, [wNumAudioChannels]
-	ld hl, w3d000
+	ld hl, wAudioEngineFlags
 	bit 5, [hl]
 	jr z, .asm_30b7f
 	set 7, a
@@ -2031,32 +2062,34 @@ Func_30b4d: ; 30b4d (c:4b4d)
 	ld e, a
 	ld a, [w3d03a]
 	ld d, a
-.asm_30b84
+
+.loop_tracks
 	ld a, [wCurTrackPtr + 0]
 	ld l, a
 	ld a, [wCurTrackPtr + 1]
 	ld h, a
-	ld a, [hli]
+	ld a, [hli] ; TRACK_UNK00
 	bit 5, a
-	jr z, .asm_30ba7
+	jr z, .next_track
 	inc hl
-	ld a, [hli]
+	ld a, [hli] ; TRACK_UNK02
 	cp e
-	jr nz, .asm_30ba7
-	ld a, [hl]
+	jr nz, .next_track
+	ld a, [hl] ; TRACK_UNK03
 	cp d
-	jr nz, .asm_30ba7
-	ld bc, $4
+	jr nz, .next_track
+	ld bc, TRACK_DURATION - TRACK_UNK03
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr nz, .asm_30ba7
+	jr nz, .next_track
 	call Func_30be3
-	jr .asm_30bac
-.asm_30ba7
+	jr .done
+.next_track
 	call NextTrack
-	jr nz, .asm_30b84
-.asm_30bac
+	jr nz, .loop_tracks
+
+.done
 	pop de
 	jp DoAudioCommand
 ; 0x30bb0
@@ -2079,11 +2112,11 @@ Func_30bc2: ; 30bc2 (c:4bc2)
 	ld l, a
 	ld a, [wCurTrackPtr + 1]
 	ld h, a
-	bit 7, [hl]
+	bit 7, [hl] ; TRACK_UNK00
 	ret z
 	inc hl
 	inc hl
-	bit 7, [hl]
+	bit 7, [hl] ; TRACK_UNK02
 	ret nz
 	; fallthrough
 
@@ -2098,7 +2131,7 @@ Func_30bd2: ; 30bd2 (c:4bd2)
 	cp $c0
 	jr c, Func_30bf2
 	inc hl
-	ld a, [hl] ; TRACK_UNK07
+	ld a, [hl] ; TRACK_DURATION
 	and a
 	ret z
 	dec [hl]
@@ -2106,7 +2139,7 @@ Func_30bd2: ; 30bd2 (c:4bd2)
 ;	fallthrough
 
 Func_30be3: ; 30be3 (c:4be3)
-	ld bc, TRACK_UNK00 - TRACK_UNK07
+	ld bc, TRACK_UNK00 - TRACK_DURATION
 	add hl, bc
 	ld a, [hl]
 	bit 6, a
@@ -2118,14 +2151,14 @@ Func_30be3: ; 30be3 (c:4be3)
 ; 0x30bf2
 
 Func_30bf2: ; 30bf2 (c:4bf2)
-	ld bc, TRACK_UNK00 - TRACK_UNK06
+	ld bc, TRACK_UNK00 - (TRACK_CHANNEL + 2)
 	add hl, bc
 	; fallthrough
 
 Func_30bf6: ; 30bf6 (c:4bf6)
 	xor a
 	ld [hl], a
-	jp Func_30fbb
+	jp TurnSoundRegisterOff
 ; 0x30bfb
 
 Func_30bfb: ; 30bfb (c:4bfb)
@@ -2148,7 +2181,7 @@ Func_30bfb: ; 30bfb (c:4bfb)
 	ld [wCurChannelPtr + 1], a
 	ld d, a
 	ld a, [de]
-	cp $c0
+	cp CHANNEL_FLAGS_ACTIVE | CHANNEL_FLAGS_6
 	jr nc, .asm_30c1f
 	pop hl
 	jr Func_30bf6
@@ -2157,7 +2190,7 @@ Func_30bfb: ; 30bfb (c:4bfb)
 	ld [w3d019], a
 	bit 6, b
 	jr nz, .asm_30c46
-	ld de, TRACK_FREQUENCY - TRACK_UNK06
+	ld de, TRACK_FREQUENCY - (TRACK_CHANNEL + 2)
 	add hl, de
 	ld a, [w3d01a]
 	and a
@@ -2184,7 +2217,7 @@ Func_30bfb: ; 30bfb (c:4bfb)
 	jr z, .fade_out
 
 	push hl
-	call Func_30e32
+	call SetTimbre
 	pop hl
 
 	ld a, [w3d019]
@@ -2247,7 +2280,7 @@ Func_30bfb: ; 30bfb (c:4bfb)
 	ld a, [hl] ; TRACK_VOLUME_ENVELOPE
 	add $10
 	jr c, .asm_30cba
-	call Func_30e1b
+	call .Func_30e1b
 	ld [hli], a
 .asm_30cb3
 	dec hl
@@ -2256,44 +2289,45 @@ Func_30bfb: ; 30bfb (c:4bfb)
 	jp c, .asm_30d84
 	inc hl
 .asm_30cba
-	ld bc, -6
+	ld bc, TRACK_FADE_IN_SPEED - TRACK_VOLUME_ENVELOPE
 	add hl, bc
 	ld b, [hl]
-	ld de, $5
+	ld de, TRACK_UNK10 - TRACK_FADE_IN_SPEED
 	add hl, de
 	ld c, [hl]
 	push bc
-	ld bc, -16
+	ld bc, TRACK_UNK00 - TRACK_UNK10
 	add hl, bc
 	res 4, [hl]
-	call .asm_30deb
+	call .Func_30deb
 	ld d, a
-	ld bc, $11
+	ld bc, TRACK_VOLUME_ENVELOPE
 	add hl, bc
 	pop bc
 	ld a, b
 	cpl
 	rrca
-	and $07
+	and %111
 	jr nz, .asm_30ce2
-	call .Func_30dba
+	call .CheckEnvelopeValue
 	jr z, .asm_30d3b
 	ld a, d
 	ld c, d
 .asm_30ce2
 	or c
-	ld [hli], a
+	ld [hli], a ; TRACK_VOLUME_ENVELOPE
 	xor a
-	ld [hli], a
+	ld [hli], a ; TRACK_FREQUENCY lo
 	jp .asm_30d95
+
 .asm_30ce9
 	ld a, [w3d019]
 	bit 1, a
-	call nz, .asm_30deb
-	ld bc, $11
+	call nz, .Func_30deb
+	ld bc, TRACK_VOLUME_ENVELOPE
 	add hl, bc
 	ld a, [hli]
-	and $07
+	and %111
 	jr z, .asm_30d1b
 	dec a
 	cp [hl]
@@ -2303,7 +2337,7 @@ Func_30bfb: ; 30bfb (c:4bfb)
 	ld a, [hl]
 	sub $10
 	jr c, .asm_30d11
-	call Func_30e1b
+	call .Func_30e1b
 	ld [hli], a
 .asm_30d09
 	dec hl
@@ -2313,21 +2347,23 @@ Func_30bfb: ; 30bfb (c:4bfb)
 	cp [hl]
 	jr c, .asm_30d84
 .asm_30d11
-	call .Func_30dba
+	call .CheckEnvelopeValue
 	jr z, .asm_30d3b
 	dec hl
 .asm_30d17
 	ld a, [hli]
 	ld [hl], a
 	jr .asm_30d95
+
 .asm_30d1b
 	dec hl
 	ld a, [hld]
 	xor [hl]
 	jr nz, .asm_30d17
 	jr .asm_30d9d
+
 .asm_30d22
-	ld bc, $11
+	ld bc, TRACK_VOLUME_ENVELOPE
 	add hl, bc
 	ld a, [hli]
 	and $07
@@ -2339,24 +2375,25 @@ Func_30bfb: ; 30bfb (c:4bfb)
 	ld a, [hl]
 	sub $10
 	jr c, .asm_30d3b
-	call Func_30e1b
+	call .Func_30e1b
 	ld [hl], a
 	jr .asm_30d84
 	dec hl
+
 .asm_30d3b
 	push hl
 	ld a, [wCurChannelPtr + 0]
 	ld l, a
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
-	ld bc, $2f
+	ld bc, CHANNEL_UNK_2F
 	add hl, bc
 	ld b, [hl]
-	ld de, -8
+	ld de, CHANNEL_UNK_27 - CHANNEL_UNK_2F
 	add hl, de
 	ld a, [hli]
 	ld c, a
-	ld d, [hl]
+	ld d, [hl] ; CHANNEL_UNK_28
 	pop hl
 	ld a, b
 	and a
@@ -2378,8 +2415,9 @@ Func_30bfb: ; 30bfb (c:4bfb)
 	and $8f
 	ld [hl], a
 	jr .asm_30d95
+
 .asm_30d70
-	ld bc, $12
+	ld bc, TRACK_FREQUENCY
 	add hl, bc
 	dec [hl]
 	jr nz, .asm_30d9d
@@ -2390,7 +2428,8 @@ Func_30bfb: ; 30bfb (c:4bfb)
 	ld h, a
 	xor a
 	ld [hl], a
-	jp Func_30fbb
+	jp TurnSoundRegisterOff
+
 .asm_30d84
 	ld a, [wCurSoundRegister]
 	cp LOW(rNR32)
@@ -2399,6 +2438,7 @@ Func_30bfb: ; 30bfb (c:4bfb)
 	res 1, a
 	ld [w3d019], a
 	jr .asm_30d9d
+
 .asm_30d95
 	ld a, [w3d019]
 	set 1, a
@@ -2422,11 +2462,11 @@ Func_30bfb: ; 30bfb (c:4bfb)
 	ret z ; skip envelope
 	jp SetVolumeEnvelope
 
-.Func_30dba
-	ld bc, -5
+.CheckEnvelopeValue
+	ld bc, TRACK_FADE_OUT_SPEED - TRACK_VOLUME_ENVELOPE
 	add hl, bc
 	ld a, [hl]
-	ld bc, $5
+	ld bc, TRACK_VOLUME_ENVELOPE - TRACK_FADE_OUT_SPEED
 	add hl, bc
 	and $f0
 	ret
@@ -2454,12 +2494,12 @@ Func_30bfb: ; 30bfb (c:4bfb)
 	add hl, de
 	ret
 
-.asm_30deb
+.Func_30deb
 	push hl
-	ld bc, $c
+	ld bc, TRACK_FADE_OUT_SPEED
 	add hl, bc
 	ld b, [hl]
-	ld de, -6
+	ld de, TRACK_UNK06 - TRACK_FADE_OUT_SPEED
 	add hl, de
 	ld c, [hl]
 	call Func_31012
@@ -2469,22 +2509,21 @@ Func_30bfb: ; 30bfb (c:4bfb)
 	ld l, a
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
-	ld de, $2f
+	ld de, CHANNEL_UNK_2F
 	add hl, de
 	ld b, [hl]
 	call Func_31012
 	add $0f
 	and $f0
 	pop hl
-	ld de, $10
+	ld de, TRACK_UNK10
 	add hl, de
 	ld [hl], a
-	ld de, -16
+	ld de, -TRACK_UNK10
 	add hl, de
 	ret
-; 0x30e1b
 
-Func_30e1b: ; 30e1b (c:4e1b)
+.Func_30e1b
 	ld b, a
 	ld a, [wCurSoundRegister]
 	cp LOW(rNR32)
@@ -2501,7 +2540,7 @@ Func_30e1b: ; 30e1b (c:4e1b)
 	ret
 ; 0x30e32
 
-Func_30e32: ; 30e32 (c:4e32)
+SetTimbre: ; 30e32 (c:4e32)
 	ld a, [wCurTrackPtr + 0]
 	ld l, a
 	ld a, [wCurTrackPtr + 1]
@@ -2573,7 +2612,7 @@ Func_30e32: ; 30e32 (c:4e32)
 	ld a, [hli]
 	sub WAVEFORM_SINE
 	ld b, a
-	ld a, [hl] ; TRACK_DURATION
+	ld a, [hl] ; TRACK_LENGTH
 	and a
 	jr z, .no_sound3_duration
 	cpl
@@ -2818,12 +2857,12 @@ SetVolumeEnvelope: ; 30f7e (c:4f7e)
 	ret
 ; 0x30fbb
 
-Func_30fbb: ; 30fbb (c:4fbb)
+TurnSoundRegisterOff: ; 30fbb (c:4fbb)
 	ld a, [wCurSoundRegister]
 	ld c, a
 	cp LOW(rNR32)
 	jr z, .sound3
-	ld a, %1000 ; envelope up
+	ld a, %00001000 ; envelope up
 	ld [$ff00+c], a
 	inc c
 	inc c
@@ -2839,9 +2878,9 @@ Func_30fbb: ; 30fbb (c:4fbb)
 
 Func_30fd1: ; 30fd1 (c:4fd1)
 	sub $24
-	jr nc, .asm_30fd6
+	jr nc, .no_underflow
 	xor a
-.asm_30fd6
+.no_underflow
 	cp $78
 	jr c, .no_cap
 	; cap to $77
@@ -2906,7 +2945,7 @@ Func_30fee: ; 30fee (c:4fee)
 Func_31012: ; 31012 (c:5012)
 	ld a, c
 	and $f0
-	swap a ; / 16
+	swap a
 	ld c, a
 	ld a, b
 	and $f0
@@ -2929,308 +2968,308 @@ Func_31012: ; 31012 (c:5012)
 ; 0x3102b
 
 Data_3102b: ; 3102b (c:502b)
-	db $00 ; 80 | cf
-	db $01 ; 81 | d0
-	db $02 ; 82 | d1
-	db $03 ; 83 | d2
-	db $04 ; 84 | d3
-	db $05 ; 85 | d4
-	db $06 ; 86 | d5
-	db $07 ; 87 | d6
-	db $08 ; 88 | d7
-	db $09 ; 89 | d8
-	db $0a ; 8a | d9
-	db $0b ; 8b | da
-	db $0c ; 8c | db
-	db $0d ; 8d | dc
-	db $0e ; 8e | dd
-	db $0f ; 8f | de
-	db $10 ; 90 | df
-	db $11 ; 91 | d0
-	db $12 ; 92 | d1
-	db $13 ; 93 | d2
-	db $14 ; 94 | d3
-	db $15 ; 95 | d4
-	db $16 ; 96 | d5
-	db $17 ; 97 | d6
-	db $18 ; 98 | d7
-	db $1c ; 99 | d8
-	db $1e ; 9a | d9
-	db $20 ; 9b | da
-	db $24 ; 9c | db
-	db $28 ; 9d | dc
-	db $2a ; 9e | dd
-	db $2c ; 9f | de
-	db $30 ; a0 | df
-	db $34 ; a1 | d0
-	db $36 ; a2 | d1
-	db $38 ; a3 | d2
-	db $3c ; a4 | d3
-	db $40 ; a5 | d4
-	db $42 ; a6 | d5
-	db $44 ; a7 | d6
-	db $48 ; a8 | d7
-	db $4c ; a9 | d8
-	db $4e ; aa | d9
-	db $50 ; ab | da
-	db $54 ; ac | db
-	db $58 ; ad | dc
-	db $5a ; ae | dd
-	db $5c ; af | de
-	db $60 ; b0 | df
+	db  0 ; 80 | cf
+	db  1 ; 81 | d0
+	db  2 ; 82 | d1
+	db  3 ; 83 | d2
+	db  4 ; 84 | d3
+	db  5 ; 85 | d4
+	db  6 ; 86 | d5
+	db  7 ; 87 | d6
+	db  8 ; 88 | d7
+	db  9 ; 89 | d8
+	db 10 ; 8a | d9
+	db 11 ; 8b | da
+	db 12 ; 8c | db
+	db 13 ; 8d | dc
+	db 14 ; 8e | dd
+	db 15 ; 8f | de
+	db 16 ; 90 | df
+	db 17 ; 91 | d0
+	db 18 ; 92 | d1
+	db 19 ; 93 | d2
+	db 20 ; 94 | d3
+	db 21 ; 95 | d4
+	db 22 ; 96 | d5
+	db 23 ; 97 | d6
+	db 24 ; 98 | d7
+	db 28 ; 99 | d8
+	db 30 ; 9a | d9
+	db 32 ; 9b | da
+	db 36 ; 9c | db
+	db 40 ; 9d | dc
+	db 42 ; 9e | dd
+	db 44 ; 9f | de
+	db 48 ; a0 | df
+	db 52 ; a1 | d0
+	db 54 ; a2 | d1
+	db 56 ; a3 | d2
+	db 60 ; a4 | d3
+	db 64 ; a5 | d4
+	db 66 ; a6 | d5
+	db 68 ; a7 | d6
+	db 72 ; a8 | d7
+	db 76 ; a9 | d8
+	db 78 ; aa | d9
+	db 80 ; ab | da
+	db 84 ; ac | db
+	db 88 ; ad | dc
+	db 90 ; ae | dd
+	db 92 ; af | de
+	db 96 ; b0 | df
 ; 0x3105c
 
 Data_3105c: ; 3105c (c:505c)
-	dwb  $2c, $70 ; $00
-	dwb  $9d, $6a ; $01
-	dwb $107, $64 ; $02
-	dwb $16b, $5f ; $03
-	dwb $1c9, $59 ; $04
-	dwb $223, $54 ; $05
-	dwb $277, $50 ; $06
-	dwb $2c7, $4b ; $07
-	dwb $312, $47 ; $08
-	dwb $358, $43 ; $09
-	dwb $39b, $3f ; $0a
-	dwb $3da, $3c ; $0b
-	dwb $416, $38 ; $0c
-	dwb $44e, $35 ; $0d
-	dwb $483, $32 ; $0e
-	dwb $4b5, $30 ; $0f
-	dwb $4e4, $2d ; $10
-	dwb $511, $2a ; $11
-	dwb $53b, $28 ; $12
-	dwb $563, $26 ; $13
-	dwb $589, $24 ; $14
-	dwb $5ac, $22 ; $15
-	dwb $5cd, $20 ; $16
-	dwb $5ed, $1e ; $17
-	dwb $60b, $1c ; $18
-	dwb $627, $1b ; $19
-	dwb $642, $19 ; $1a
-	dwb $65b, $18 ; $1b
-	dwb $672, $16 ; $1c
-	dwb $689, $15 ; $1d
-	dwb $69e, $14 ; $1e
-	dwb $6b2, $13 ; $1f
-	dwb $6c4, $12 ; $20
-	dwb $6d6, $11 ; $21
-	dwb $6e7, $10 ; $22
-	dwb $6f6, $0f ; $23
-	dwb $705, $0e ; $24
-	dwb $714, $0d ; $25
-	dwb $721, $0d ; $26
-	dwb $72d, $0c ; $27
-	dwb $739, $0b ; $28
-	dwb $744, $0b ; $29
-	dwb $74f, $0a ; $2a
-	dwb $759, $09 ; $2b
-	dwb $762, $09 ; $2c
-	dwb $76b, $08 ; $2d
-	dwb $773, $08 ; $2e
-	dwb $77b, $08 ; $2f
-	dwb $783, $07 ; $30
-	dwb $78a, $07 ; $31
-	dwb $790, $06 ; $32
-	dwb $797, $06 ; $33
-	dwb $79d, $06 ; $34
-	dwb $7a2, $05 ; $35
-	dwb $7a7, $05 ; $36
-	dwb $7ac, $05 ; $37
-	dwb $7b1, $04 ; $38
-	dwb $7b5, $04 ; $39
-	dwb $7ba, $04 ; $3a
-	dwb $7be, $04 ; $3b
-	dwb $7c1, $04 ; $3c
-	dwb $7c5, $03 ; $3d
-	dwb $7c8, $03 ; $3e
-	dwb $7cb, $03 ; $3f
-	dwb $7ce, $03 ; $40
-	dwb $7d1, $03 ; $41
-	dwb $7d4, $03 ; $42
-	dwb $7d6, $02 ; $43
-	dwb $7d9, $02 ; $44
-	dwb $7db, $02 ; $45
-	dwb $7dd, $02 ; $46
-	dwb $7df, $02 ; $47
-	dwb $7e1, $02 ; $48
-	dwb $7e2, $02 ; $49
-	dwb $7e4, $02 ; $4a
-	dwb $7e6, $01 ; $4b
-	dwb $7e8, $01 ; $4c
-	dwb $7e9, $01 ; $4d
-	dwb $7ea, $01 ; $4e
-	dwb $7eb, $01 ; $4f
-	dwb $7ec, $01 ; $50
-	dwb $7ed, $01 ; $51
-	dwb $7ee, $01 ; $52
-	dwb $7ef, $01 ; $53
-	dwb $7f0, $01 ; $54
-	dwb $7f1, $01 ; $55
-	dwb $7f2, $01 ; $56
-	dwb $7f3, $01 ; $57
-	dwb $7f4, $01 ; $58
-	dwb $7f4, $01 ; $59
-	dwb $7f5, $01 ; $5a
-	dwb $7f6, $01 ; $5b
-	dwb $7f6, $01 ; $5c
-	dwb $7f7, $01 ; $5d
-	dwb $7f7, $01 ; $5e
-	dwb $7f8, $01 ; $5f
-	dwb $7f8, $01 ; $60
-	dwb $7f9, $01 ; $61
-	dwb $7f9, $01 ; $62
-	dwb $7f9, $01 ; $63
-	dwb $7fa, $01 ; $64
-	dwb $7fa, $01 ; $65
-	dwb $7fa, $01 ; $66
-	dwb $7fb, $01 ; $67
-	dwb $7fb, $01 ; $68
-	dwb $7fb, $01 ; $69
-	dwb $7fc, $01 ; $6a
-	dwb $7fc, $01 ; $6b
-	dwb $7fc, $01 ; $6c
-	dwb $7fc, $01 ; $6d
-	dwb $7fd, $01 ; $6e
-	dwb $7fd, $01 ; $6f
-	dwb $7fd, $01 ; $70
-	dwb $7fd, $01 ; $71
-	dwb $7fd, $01 ; $72
-	dwb $7fd, $01 ; $73
-	dwb $7fe, $01 ; $74
-	dwb $7fe, $01 ; $75
-	dwb $7fe, $01 ; $76
-	dwb $7fe, $01 ; $77
+	dwb  $2c, $70 ; C_0
+	dwb  $9d, $6a ; C#0
+	dwb $107, $64 ; D_0
+	dwb $16b, $5f ; D#0
+	dwb $1c9, $59 ; E_0
+	dwb $223, $54 ; F_0
+	dwb $277, $50 ; F#0
+	dwb $2c7, $4b ; G_0
+	dwb $312, $47 ; G#0
+	dwb $358, $43 ; A_0
+	dwb $39b, $3f ; A#0
+	dwb $3da, $3c ; B_0
+	dwb $416, $38 ; C_1
+	dwb $44e, $35 ; C#1
+	dwb $483, $32 ; D_1
+	dwb $4b5, $30 ; D#1
+	dwb $4e4, $2d ; E_1
+	dwb $511, $2a ; F_1
+	dwb $53b, $28 ; F#1
+	dwb $563, $26 ; G_1
+	dwb $589, $24 ; G#1
+	dwb $5ac, $22 ; A_1
+	dwb $5cd, $20 ; A#1
+	dwb $5ed, $1e ; B_1
+	dwb $60b, $1c ; C_2
+	dwb $627, $1b ; C#2
+	dwb $642, $19 ; D_2
+	dwb $65b, $18 ; D#2
+	dwb $672, $16 ; E_2
+	dwb $689, $15 ; F_2
+	dwb $69e, $14 ; F#2
+	dwb $6b2, $13 ; G_2
+	dwb $6c4, $12 ; G#2
+	dwb $6d6, $11 ; A_2
+	dwb $6e7, $10 ; A#2
+	dwb $6f6, $0f ; B_2
+	dwb $705, $0e ; C_3
+	dwb $714, $0d ; C#3
+	dwb $721, $0d ; D_3
+	dwb $72d, $0c ; D#3
+	dwb $739, $0b ; E_3
+	dwb $744, $0b ; F_3
+	dwb $74f, $0a ; F#3
+	dwb $759, $09 ; G_3
+	dwb $762, $09 ; G#3
+	dwb $76b, $08 ; A_3
+	dwb $773, $08 ; A#3
+	dwb $77b, $08 ; B_3
+	dwb $783, $07 ; C_4
+	dwb $78a, $07 ; C#4
+	dwb $790, $06 ; D_4
+	dwb $797, $06 ; D#4
+	dwb $79d, $06 ; E_4
+	dwb $7a2, $05 ; F_4
+	dwb $7a7, $05 ; F#4
+	dwb $7ac, $05 ; G_4
+	dwb $7b1, $04 ; G#4
+	dwb $7b5, $04 ; A_4
+	dwb $7ba, $04 ; A#4
+	dwb $7be, $04 ; B_4
+	dwb $7c1, $04 ; C_5
+	dwb $7c5, $03 ; C#5
+	dwb $7c8, $03 ; D_5
+	dwb $7cb, $03 ; D#5
+	dwb $7ce, $03 ; E_5
+	dwb $7d1, $03 ; F_5
+	dwb $7d4, $03 ; F#5
+	dwb $7d6, $02 ; G_5
+	dwb $7d9, $02 ; G#5
+	dwb $7db, $02 ; A_5
+	dwb $7dd, $02 ; A#5
+	dwb $7df, $02 ; B_5
+	dwb $7e1, $02 ; C_6
+	dwb $7e2, $02 ; C#6
+	dwb $7e4, $02 ; D_6
+	dwb $7e6, $01 ; D#6
+	dwb $7e8, $01 ; E_6
+	dwb $7e9, $01 ; F_6
+	dwb $7ea, $01 ; F#6
+	dwb $7eb, $01 ; G_6
+	dwb $7ec, $01 ; G#6
+	dwb $7ed, $01 ; A_6
+	dwb $7ee, $01 ; A#6
+	dwb $7ef, $01 ; B_6
+	dwb $7f0, $01 ; C_7
+	dwb $7f1, $01 ; C#7
+	dwb $7f2, $01 ; D_7
+	dwb $7f3, $01 ; D#7
+	dwb $7f4, $01 ; E_7
+	dwb $7f4, $01 ; F_7
+	dwb $7f5, $01 ; F#7
+	dwb $7f6, $01 ; G_7
+	dwb $7f6, $01 ; G#7
+	dwb $7f7, $01 ; A_7
+	dwb $7f7, $01 ; A#7
+	dwb $7f8, $01 ; B_7
+	dwb $7f8, $01 ; C_8
+	dwb $7f9, $01 ; C#8
+	dwb $7f9, $01 ; D_8
+	dwb $7f9, $01 ; D#8
+	dwb $7fa, $01 ; E_8
+	dwb $7fa, $01 ; F_8
+	dwb $7fa, $01 ; F#8
+	dwb $7fb, $01 ; G_8
+	dwb $7fb, $01 ; G#8
+	dwb $7fb, $01 ; A_8
+	dwb $7fc, $01 ; A#8
+	dwb $7fc, $01 ; B_8
+	dwb $7fc, $01 ; C_9
+	dwb $7fc, $01 ; C#9
+	dwb $7fd, $01 ; D_9
+	dwb $7fd, $01 ; D#9
+	dwb $7fd, $01 ; E_9
+	dwb $7fd, $01 ; F_9
+	dwb $7fd, $01 ; F#9
+	dwb $7fd, $01 ; G_9
+	dwb $7fe, $01 ; G#9
+	dwb $7fe, $01 ; A_9
+	dwb $7fe, $01 ; A#9
+	dwb $7fe, $01 ; B_9
 ; 0x311c4
 
-Data_311c4: ; 311c4 (c:51c4)
-	db WAVEFORM_SQUARE_1_2_SAWTOOTH, $00, $00, $ff, $ff, $3c
-	db $00,                          $00, $00, $fb, $28, $3c
-	db $00,                          $00, $00, $f0, $10, $3c
-	db $01,                          $00, $00, $ff, $ff, $3c
-	db $01,                          $00, $00, $fb, $28, $3c
-	db $01,                          $00, $00, $f0, $10, $3c
-	db $02,                          $00, $00, $ff, $ff, $3c
-	db $02,                          $00, $00, $fb, $28, $3c
-	db $02,                          $00, $00, $f0, $10, $3c
-	db $02,                          $00, $00, $f1, $13, $3c
-	db $00,                          $00, $00, $ff, $ff, $3c
-	db $00,                          $00, $00, $fc, $18, $3c
-	db $00,                          $00, $00, $f0, $10, $3c
-	db $01,                          $00, $00, $ff, $ff, $3c
-	db $01,                          $00, $00, $fc, $10, $3c
-	db $01,                          $00, $00, $f0, $18, $3c
-	db $02,                          $00, $00, $ff, $ff, $3c
-	db $02,                          $00, $00, $fc, $18, $3c
-	db $02,                          $00, $00, $f0, $10, $3c
-	db $02,                          $00, $00, $f1, $13, $3c
-	db $08,                          $00, $00, $ff, $ff, $3c
-	db $08,                          $00, $00, $fc, $18, $3c
-	db $08,                          $00, $00, $f0, $10, $3c
-	db $09,                          $00, $00, $ff, $ff, $3c
-	db $09,                          $00, $00, $fc, $18, $3c
-	db $09,                          $00, $00, $f0, $10, $3c
-	db $0a,                          $00, $00, $ff, $ff, $3c
-	db $0a,                          $00, $00, $fc, $18, $3c
-	db $0a,                          $00, $00, $f0, $10, $3c
-	db $0a,                          $00, $00, $f1, $13, $3c
-	db WAVEFORM_SINE,                $00, $00, $f6, $24, $3c
-	db WAVEFORM_TRIANGLE,            $00, $00, $f6, $24, $3c
-	db WAVEFORM_SAWTOOTH,            $00, $00, $f6, $24, $3c
-	db WAVEFORM_STEP,                $00, $00, $f6, $24, $3c
-	db WAVEFORM_SQUARE_1_8,          $00, $00, $f6, $24, $3c
-	db WAVEFORM_SQUARE_2_8,          $00, $00, $f6, $24, $3c
-	db WAVEFORM_SQUARE_3_8,          $00, $00, $f6, $24, $3c
-	db WAVEFORM_SQUARE_4_8,          $00, $00, $f6, $24, $3c
-	db WAVEFORM_SQUARE_1_2_SAWTOOTH, $00, $00, $f6, $24, $3c
-	db WAVEFORM_SQUARE_1_2_SAWTOOTH, $00, $00, $f6, $24, $3c
-	db $41,                          $0a, $00, $ff, $ff, $31
-	db $41,                          $00, $00, $f0, $10, $4f
-	db $40,                          $08, $00, $ff, $ff, $3e
-	db $41,                          $06, $00, $ff, $ff, $41
-	db $41,                          $06, $00, $ff, $ff, $4f
-	db $40,                          $00, $00, $fd, $0f, $3c
-	db $41,                          $02, $00, $ff, $ff, $4c
-	db $40,                          $00, $00, $fd, $0f, $3c
-	db $40,                          $0c, $00, $ff, $ff, $4f
-	db $40,                          $24, $00, $ff, $ff, $4f
-	db $02,                          $00, $15, $f6, $00, $3c
-	db $02,                          $00, $24, $ff, $ff, $3c
-	db $02,                          $00, $3c, $ff, $ff, $3c
-	db $02,                          $00, $1c, $fc, $0c, $3c
-	db $02,                          $00, $15, $ff, $ff, $3c
-	db $02,                          $00, $37, $ff, $ff, $3c
-	db $00,                          $00, $75, $ff, $ff, $3c
-	db $00,                          $00, $7d, $ff, $ff, $3c
-	db $02,                          $00, $3f, $ff, $ff, $3c
-	db $00,                          $00, $1d, $ff, $ff, $3c
-	db $00,                          $00, $17, $ff, $ff, $3c
-	db $01,                          $00, $45, $ff, $ff, $3c
-	db $02,                          $00, $25, $ff, $ff, $3c
-	db $02,                          $00, $1a, $ff, $ff, $3c
-	db $02,                          $00, $15, $fa, $4c, $3c
-	db $02,                          $00, $6c, $ff, $ff, $3c
-	db $01,                          $00, $15, $ff, $ff, $3c
-	db $02,                          $00, $47, $ff, $ff, $3c
-	db $02,                          $00, $27, $ff, $ff, $3c
-	db $02,                          $00, $1d, $fc, $0c, $3c
-	db $00,                          $00, $00, $fa, $4c, $3c
-	db $01,                          $00, $00, $fa, $4c, $3c
-	db $02,                          $00, $00, $fa, $4c, $3c
-	db $00,                          $00, $00, $fc, $0c, $3c
-	db $01,                          $00, $00, $fc, $0c, $3c
-	db $02,                          $00, $00, $fc, $0c, $3c
-	db $00,                          $00, $00, $cf, $fa, $3c
-	db $01,                          $00, $00, $cf, $fa, $3c
-	db $02,                          $00, $00, $cf, $fa, $3c
-	db $02,                          $00, $5c, $f0, $10, $3c
-	db $08,                          $00, $00, $fa, $4c, $3c
-	db $09,                          $00, $00, $fa, $4c, $3c
-	db $0a,                          $00, $00, $fa, $4c, $3c
-	db $08,                          $00, $00, $fc, $0c, $3c
-	db $09,                          $00, $00, $fc, $0c, $3c
-	db $0a,                          $00, $00, $fc, $0c, $3c
-	db $08,                          $00, $00, $cf, $fa, $3c
-	db $09,                          $00, $00, $cf, $fa, $3c
-	db $0a,                          $00, $00, $cf, $fa, $3c
-	db $02,                          $00, $45, $f0, $10, $3c
-	db WAVEFORM_SAWTOOTH,            $00, $00, $ff, $ff, $3c
-	db WAVEFORM_SAWTOOTH,            $00, $00, $fc, $0c, $3c
-	db WAVEFORM_SQUARE_1_8,          $00, $00, $cf, $fa, $3c
-	db WAVEFORM_SQUARE_2_8,          $00, $00, $ff, $ff, $3c
-	db WAVEFORM_SQUARE_2_8,          $00, $00, $fa, $4c, $3c
-	db WAVEFORM_SQUARE_2_8,          $00, $00, $cf, $fa, $3c
-	db WAVEFORM_SQUARE_4_8,          $00, $00, $ff, $ff, $3c
-	db WAVEFORM_SQUARE_4_8,          $00, $00, $fa, $4c, $3c
-	db WAVEFORM_SQUARE_4_8,          $00, $00, $cf, $fa, $3c
-	db WAVEFORM_SPIKY,               $00, $00, $ff, $ff, $3c
-	db WAVEFORM_TRIANGLE,            $00, $00, $ff, $ff, $3c
-	db $40,                          $00, $00, $ff, $ff, $3c
-	db $40,                          $00, $00, $fa, $4c, $3c
-	db $40,                          $00, $00, $fc, $0c, $3c
-	db $40,                          $00, $00, $cf, $fa, $3c
-	db $40,                          $00, $00, $e8, $18, $3c
-	db $41,                          $00, $00, $ff, $ff, $3c
-	db $41,                          $00, $00, $f6, $24, $3c
-	db $41,                          $00, $00, $fc, $0c, $3c
-	db $41,                          $00, $00, $cf, $fa, $3c
-	db $02,                          $00, $1d, $ff, $ff, $3c
-	db WAVEFORM_SQUISHED_SINE,       $00, $00, $ff, $ff, $3c
-	db $00,                          $00, $00, $fa, $6c, $3c
-	db $01,                          $00, $00, $fa, $6c, $3c
-	db $02,                          $00, $00, $fa, $6c, $3c
-	db $08,                          $00, $00, $fa, $6c, $3c
-	db $09,                          $00, $00, $fa, $6c, $3c
-	db $0a,                          $00, $00, $fa, $6c, $3c
-	db WAVEFORM_SQUARE_1_8,          $00, $00, $fa, $6c, $3c
-	db WAVEFORM_SQUARE_2_8,          $00, $00, $fa, $6c, $3c
-	db WAVEFORM_SQUARE_4_8,          $00, $00, $fa, $6c, $3c
-	db WAVEFORM_SPIKY,               $00, $00, $fa, $4c, $3c
-	db WAVEFORM_SQUARE_1_8,          $00, $00, $ff, $ff, $3c
+Waves: ; 311c4 (c:51c4)
+	db WAVEFORM_SQUARE_1_2_SAWTOOTH, $00, $00, $ff, $ff, $3c ; $00
+	db $00,                          $00, $00, $fb, $28, $3c ; $01
+	db $00,                          $00, $00, $f0, $10, $3c ; $02
+	db $01,                          $00, $00, $ff, $ff, $3c ; $03
+	db $01,                          $00, $00, $fb, $28, $3c ; $04
+	db $01,                          $00, $00, $f0, $10, $3c ; $05
+	db $02,                          $00, $00, $ff, $ff, $3c ; $06
+	db $02,                          $00, $00, $fb, $28, $3c ; $07
+	db $02,                          $00, $00, $f0, $10, $3c ; $08
+	db $02,                          $00, $00, $f1, $13, $3c ; $09
+	db $00,                          $00, $00, $ff, $ff, $3c ; $0a
+	db $00,                          $00, $00, $fc, $18, $3c ; $0b
+	db $00,                          $00, $00, $f0, $10, $3c ; $0c
+	db $01,                          $00, $00, $ff, $ff, $3c ; $0d
+	db $01,                          $00, $00, $fc, $10, $3c ; $0e
+	db $01,                          $00, $00, $f0, $18, $3c ; $0f
+	db $02,                          $00, $00, $ff, $ff, $3c ; $10
+	db $02,                          $00, $00, $fc, $18, $3c ; $11
+	db $02,                          $00, $00, $f0, $10, $3c ; $12
+	db $02,                          $00, $00, $f1, $13, $3c ; $13
+	db $08,                          $00, $00, $ff, $ff, $3c ; $14
+	db $08,                          $00, $00, $fc, $18, $3c ; $15
+	db $08,                          $00, $00, $f0, $10, $3c ; $16
+	db $09,                          $00, $00, $ff, $ff, $3c ; $17
+	db $09,                          $00, $00, $fc, $18, $3c ; $18
+	db $09,                          $00, $00, $f0, $10, $3c ; $19
+	db $0a,                          $00, $00, $ff, $ff, $3c ; $1a
+	db $0a,                          $00, $00, $fc, $18, $3c ; $1b
+	db $0a,                          $00, $00, $f0, $10, $3c ; $1c
+	db $0a,                          $00, $00, $f1, $13, $3c ; $1d
+	db WAVEFORM_SINE,                $00, $00, $f6, $24, $3c ; $1e
+	db WAVEFORM_TRIANGLE,            $00, $00, $f6, $24, $3c ; $1f
+	db WAVEFORM_SAWTOOTH,            $00, $00, $f6, $24, $3c ; $20
+	db WAVEFORM_STEP,                $00, $00, $f6, $24, $3c ; $21
+	db WAVEFORM_SQUARE_1_8,          $00, $00, $f6, $24, $3c ; $22
+	db WAVEFORM_SQUARE_2_8,          $00, $00, $f6, $24, $3c ; $23
+	db WAVEFORM_SQUARE_3_8,          $00, $00, $f6, $24, $3c ; $24
+	db WAVEFORM_SQUARE_4_8,          $00, $00, $f6, $24, $3c ; $25
+	db WAVEFORM_SQUARE_1_2_SAWTOOTH, $00, $00, $f6, $24, $3c ; $26
+	db WAVEFORM_SQUARE_1_2_SAWTOOTH, $00, $00, $f6, $24, $3c ; $27
+	db $41,                          $0a, $00, $ff, $ff, $31 ; $28
+	db $41,                          $00, $00, $f0, $10, $4f ; $29
+	db $40,                          $08, $00, $ff, $ff, $3e ; $2a
+	db $41,                          $06, $00, $ff, $ff, $41 ; $2b
+	db $41,                          $06, $00, $ff, $ff, $4f ; $2c
+	db $40,                          $00, $00, $fd, $0f, $3c ; $2d
+	db $41,                          $02, $00, $ff, $ff, $4c ; $2e
+	db $40,                          $00, $00, $fd, $0f, $3c ; $2f
+	db $40,                          $0c, $00, $ff, $ff, $4f ; $30
+	db $40,                          $24, $00, $ff, $ff, $4f ; $31
+	db $02,                          $00, $15, $f6, $00, $3c ; $32
+	db $02,                          $00, $24, $ff, $ff, $3c ; $33
+	db $02,                          $00, $3c, $ff, $ff, $3c ; $34
+	db $02,                          $00, $1c, $fc, $0c, $3c ; $35
+	db $02,                          $00, $15, $ff, $ff, $3c ; $36
+	db $02,                          $00, $37, $ff, $ff, $3c ; $37
+	db $00,                          $00, $75, $ff, $ff, $3c ; $38
+	db $00,                          $00, $7d, $ff, $ff, $3c ; $39
+	db $02,                          $00, $3f, $ff, $ff, $3c ; $3a
+	db $00,                          $00, $1d, $ff, $ff, $3c ; $3b
+	db $00,                          $00, $17, $ff, $ff, $3c ; $3c
+	db $01,                          $00, $45, $ff, $ff, $3c ; $3d
+	db $02,                          $00, $25, $ff, $ff, $3c ; $3e
+	db $02,                          $00, $1a, $ff, $ff, $3c ; $3f
+	db $02,                          $00, $15, $fa, $4c, $3c ; $40
+	db $02,                          $00, $6c, $ff, $ff, $3c ; $41
+	db $01,                          $00, $15, $ff, $ff, $3c ; $42
+	db $02,                          $00, $47, $ff, $ff, $3c ; $43
+	db $02,                          $00, $27, $ff, $ff, $3c ; $44
+	db $02,                          $00, $1d, $fc, $0c, $3c ; $45
+	db $00,                          $00, $00, $fa, $4c, $3c ; $46
+	db $01,                          $00, $00, $fa, $4c, $3c ; $47
+	db $02,                          $00, $00, $fa, $4c, $3c ; $48
+	db $00,                          $00, $00, $fc, $0c, $3c ; $49
+	db $01,                          $00, $00, $fc, $0c, $3c ; $4a
+	db $02,                          $00, $00, $fc, $0c, $3c ; $4b
+	db $00,                          $00, $00, $cf, $fa, $3c ; $4c
+	db $01,                          $00, $00, $cf, $fa, $3c ; $4d
+	db $02,                          $00, $00, $cf, $fa, $3c ; $4e
+	db $02,                          $00, $5c, $f0, $10, $3c ; $4f
+	db $08,                          $00, $00, $fa, $4c, $3c ; $50
+	db $09,                          $00, $00, $fa, $4c, $3c ; $51
+	db $0a,                          $00, $00, $fa, $4c, $3c ; $52
+	db $08,                          $00, $00, $fc, $0c, $3c ; $53
+	db $09,                          $00, $00, $fc, $0c, $3c ; $54
+	db $0a,                          $00, $00, $fc, $0c, $3c ; $55
+	db $08,                          $00, $00, $cf, $fa, $3c ; $56
+	db $09,                          $00, $00, $cf, $fa, $3c ; $57
+	db $0a,                          $00, $00, $cf, $fa, $3c ; $58
+	db $02,                          $00, $45, $f0, $10, $3c ; $59
+	db WAVEFORM_SAWTOOTH,            $00, $00, $ff, $ff, $3c ; $5a
+	db WAVEFORM_SAWTOOTH,            $00, $00, $fc, $0c, $3c ; $5b
+	db WAVEFORM_SQUARE_1_8,          $00, $00, $cf, $fa, $3c ; $5c
+	db WAVEFORM_SQUARE_2_8,          $00, $00, $ff, $ff, $3c ; $5d
+	db WAVEFORM_SQUARE_2_8,          $00, $00, $fa, $4c, $3c ; $5e
+	db WAVEFORM_SQUARE_2_8,          $00, $00, $cf, $fa, $3c ; $5f
+	db WAVEFORM_SQUARE_4_8,          $00, $00, $ff, $ff, $3c ; $60
+	db WAVEFORM_SQUARE_4_8,          $00, $00, $fa, $4c, $3c ; $61
+	db WAVEFORM_SQUARE_4_8,          $00, $00, $cf, $fa, $3c ; $62
+	db WAVEFORM_SPIKY,               $00, $00, $ff, $ff, $3c ; $63
+	db WAVEFORM_TRIANGLE,            $00, $00, $ff, $ff, $3c ; $64
+	db $40,                          $00, $00, $ff, $ff, $3c ; $65
+	db $40,                          $00, $00, $fa, $4c, $3c ; $66
+	db $40,                          $00, $00, $fc, $0c, $3c ; $67
+	db $40,                          $00, $00, $cf, $fa, $3c ; $68
+	db $40,                          $00, $00, $e8, $18, $3c ; $69
+	db $41,                          $00, $00, $ff, $ff, $3c ; $6a
+	db $41,                          $00, $00, $f6, $24, $3c ; $6b
+	db $41,                          $00, $00, $fc, $0c, $3c ; $6c
+	db $41,                          $00, $00, $cf, $fa, $3c ; $6d
+	db $02,                          $00, $1d, $ff, $ff, $3c ; $6e
+	db WAVEFORM_SQUISHED_SINE,       $00, $00, $ff, $ff, $3c ; $6f
+	db $00,                          $00, $00, $fa, $6c, $3c ; $70
+	db $01,                          $00, $00, $fa, $6c, $3c ; $71
+	db $02,                          $00, $00, $fa, $6c, $3c ; $72
+	db $08,                          $00, $00, $fa, $6c, $3c ; $73
+	db $09,                          $00, $00, $fa, $6c, $3c ; $74
+	db $0a,                          $00, $00, $fa, $6c, $3c ; $75
+	db WAVEFORM_SQUARE_1_8,          $00, $00, $fa, $6c, $3c ; $76
+	db WAVEFORM_SQUARE_2_8,          $00, $00, $fa, $6c, $3c ; $77
+	db WAVEFORM_SQUARE_4_8,          $00, $00, $fa, $6c, $3c ; $78
+	db WAVEFORM_SPIKY,               $00, $00, $fa, $4c, $3c ; $79
+	db WAVEFORM_SQUARE_1_8,          $00, $00, $ff, $ff, $3c ; $7a
 ; 0x314a6
 
 WaveSamples: ; 314a6 (c:54a6)
-; These are streams of 32 nybbles (4-bit values) used as wave patterns.
+; These are streams of 32 nibbles (4-bit values) used as wave patterns.
 ; Plot them as a line chart to see the wave's shape.
 	dn  0,  0,  1,  1,  2,  3,  5,  6,  8,  9, 10, 12, 13, 14, 14, 15, 15, 15, 14, 14, 13, 12, 10,  9,  8,  6,  5,  3,  2,  1,  1,  0 ; WAVEFORM_SINE
 	dn  0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 15, 14, 13, 12, 11, 10,  9,  8,  7,  6,  5,  4,  3,  2,  1,  0 ; WAVEFORM_TRIANGLE
@@ -3601,22 +3640,27 @@ SoundHeaders: ; 3155e (c:555e)
 	sfx $738e, $0f, $00, 220, CHAN8, 1 ; SFX_138
 ; 0x32726
 
-	audiocmd_bd $00
-	audiocmd_bc $37
-	audiocmd_be $63
-	audiocmd_c3 $14
-	audiocmd_c4 $05
-	audiocmd_c5 $0a
-	audiocmd_c6 $00
+	pitch_offset $00
+	tempo $37
+	wave $63
+	vibrato_speed $14
+	vibrato_delay $05
+	vibrato_amplitude $0a
+	set_vibrato_disabled FALSE
 	audiocmd_bf $6c
-	audiocmd_b0
-	audiocmd_b0
+	audio_wait_96
+	audio_wait_96
 	audiocmd_bf $6c
-	audiocmd_be $63
+	wave $63
+	note NOTE_DURATION_92, A_1, 24
+	audio_wait_18
+	fade_out $86
+	fade_in $37
+	audio_wait_12
 
-	INCROM $3273c, $32a98
+	INCROM $32745, $32a98
 
-Music_OutOfTheWoodsDay: ; 32a98 (c:62a98)
+Music_OutOfTheWoodsDay: ; 32a98 (c:6a98)
 	db $4, $2
 	dw $6726 ; channel1
 	dw $685e ; channel2

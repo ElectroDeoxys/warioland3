@@ -299,6 +299,7 @@ HandleSound: ; 290 (0:290)
 	ld [hl], a
 	call Func_fe6
 	jr .asm_2cb
+
 .asm_2c0
 	ld c, [hl]
 	ld b, a
@@ -4683,7 +4684,7 @@ GetPointerFromTableDE: ; 3c5f (0:3c5f)
 	INCROM $3c66, $3f00
 
 DoAudioFunc_InitAudio: ; 3f00 (0:3f00)
-	call SwitchBankC
+	call BackupBankAndSwitchToAudioBank
 	jp _InitAudio
 ; 0x3f06
 
@@ -4721,92 +4722,97 @@ DoAudioFunc_PlayNewMusic_SetNoise: ; 3f48 (0:3f48)
 	jp _PlayNewMusic_SetNoise
 ; 0x3f4e
 
-SwitchBankC: ; 3f4e (0:3f4e)
+BackupBankAndSwitchToAudioBank: ; 3f4e (0:3f4e)
 	ld a, [wROMBank]
-	ld [w3d001], a
+	ld [wAudioBankBackup], a
+;	fallthrough
 
-.skip_backup_bank
-	ld a, $0c
+SwitchToAudioBank: ; 3f54 (0:3f54)
+	ld a, BANK("Audio Engine")
 
 .switch_bank
 	ld [wROMBank], a
 	ld [MBC5RomBank - $100], a
 	ret
 
-SwitchBackFromBankC: ; 3f5d (0:3f5d)
-	ld a, [w3d001]
-	jr SwitchBankC.switch_bank
+SwitchBackFromAudioBank: ; 3f5d (0:3f5d)
+	ld a, [wAudioBankBackup]
+	jr SwitchToAudioBank.switch_bank
 ; 0x3f62
 
 Func_3f62: ; 3f62 (0:3f62)
-	ld hl, w3d000
+	ld hl, wAudioEngineFlags
 	bit 7, [hl]
-	jr nz, .asm_3f71
+	jr nz, .pop_hl
 .asm_3f69
 	set 7, [hl]
 	push af
-	call SwitchBankC
+	call BackupBankAndSwitchToAudioBank
 	pop af
 	ret
-.asm_3f71
+.pop_hl
 	pop hl
 	ld a, $ff
 	ret
 ; 0x3f75
 
 Func_3f75: ; 3f75 (0:3f75)
-	ld hl, w3d000
+	ld hl, wAudioEngineFlags
 	bit 7, [hl]
 	jr z, Func_3f62.asm_3f69
 	bit 6, [hl]
-	jr nz, Func_3f62.asm_3f71
+	jr nz, Func_3f62.pop_hl
 	set 6, [hl]
+
+	; pop calling function from the stack
+	; and store the it in WRAM
 	pop hl
 	ld a, h
-	ld [w3d003 + 1], a
+	ld [wAudioBankCallback + 1], a
 	ld a, l
-	ld [w3d003], a
+	ld [wAudioBankCallback + 0], a
 	xor a
 	ret
 ; 0x3f8d
 
 Func_3f8d: ; 3f8d (0:3f8d)
-	ld hl, w3d000
+	ld hl, wAudioEngineFlags
 	bit 6, [hl]
-	jr nz, .asm_3f9b
-	call SwitchBackFromBankC
+	jr nz, .push_callback
+	call SwitchBackFromAudioBank
 	res 7, [hl]
 	xor a
 	ret
 
-.asm_3f9b
-	ld a, [w3d003 + 1]
+.push_callback
+	; push callback to stack and return to it
+	ld a, [wAudioBankCallback + 1]
 	ld h, a
-	ld a, [w3d003 + 0]
+	ld a, [wAudioBankCallback + 0]
 	ld l, a
 	push hl
-	ld hl, w3d000
+	ld hl, wAudioEngineFlags
 	res 6, [hl]
 	ret
 ; 0x3faa
 
-Func_3faa: ; 3faa (0:3faa)
+ReadAudioCommands_1Byte: ; 3faa (0:3faa)
 	ld a, [wSoundBank]
-	call SwitchBankC.switch_bank
+	call SwitchToAudioBank.switch_bank
 	ld a, [de]
 	ld c, a
-	jp SwitchBankC.skip_backup_bank
+	jp SwitchToAudioBank
 ; 0x3fb5
 
-Get2AudioCommandBytes: ; 3fb5 (0:3fb5)
+ReadAudioCommands_2Bytes: ; 3fb5 (0:3fb5)
 	ld a, [wSoundBank]
-	call SwitchBankC.switch_bank
+	call SwitchToAudioBank.switch_bank
 	ld a, [de]
 	ld c, a
 	inc de
 	ld a, [de]
 	ld b, a
-	jp SwitchBankC.skip_backup_bank
+	jp SwitchToAudioBank
 ; 0x3fc3
 
 rept $3d

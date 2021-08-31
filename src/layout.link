@@ -50,7 +50,7 @@ ROMX $0a
 ROMX $0b
 	"Bank B"
 ROMX $0c
-	"Bank C"
+	"Audio Engine"
 ROMX $0d
 	"Bank D"
 ROMX $0e
