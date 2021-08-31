@@ -27,7 +27,7 @@ wario_plane: MACRO
 \1State:: db
 ENDM
 
-unk2_struct: MACRO
+enemy_struct: MACRO
 \1Unk00:: db
 \1Unk01:: db
 \1Unk02:: db

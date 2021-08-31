@@ -78,10 +78,10 @@ Func_803f9: ; 803f9 (20:43f9)
 	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
 	ld a, $ff
-	ldh [hffb3 + 0], a
+	ldh [hffb3], a
 	ldh [hMusicID + 0], a
 	ld a, $00
-	ldh [hffb3 + 1], a
+	ldh [hffb4], a
 	ldh [hMusicID + 1], a
 
 	ld a, [wcee3]

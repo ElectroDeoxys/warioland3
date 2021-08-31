@@ -1615,7 +1615,7 @@ Func_1f13f2: ; 1f13f2 (7c:53f2)
 	push af
 	ld a, 1 ; WRAM1
 	ldh [rSVBK], a
-	ld de, w1d000
+	ld de, wEnemies
 	ld bc, $14a
 	call CopyHLToDE_BC
 	pop af

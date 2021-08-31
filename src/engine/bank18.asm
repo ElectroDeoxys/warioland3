@@ -160,7 +160,7 @@ Func_611cb: ; 611cb (18:51cb)
 
 Func_6130b: ; 6130b (18:530b)
 	call Func_618e2
-	ld hl, w1d000
+	ld hl, wEnemies
 	ld a, [hl]
 	rra
 	call c, Func_611cb
@@ -212,7 +212,7 @@ Func_61348: ; 61348 (18:5348)
 	and a
 	jr nz, .asm_613a2
 	call Func_618e2
-	ld hl, w1d000
+	ld hl, wEnemies
 	ld a, [hl]
 	rra
 	call c, Func_613dc
@@ -246,7 +246,7 @@ Func_61348: ; 61348 (18:5348)
 	call c, Func_613dc
 	ret
 .asm_613a2
-	ld hl, w1d000
+	ld hl, wEnemies
 	ld a, [hl]
 	rra
 	call c, Func_61513
@@ -607,170 +607,170 @@ Func_61513: ; 61513 (18:5513)
 ; 0x6164e
 
 Func_6164e: ; 6164e (18:564e)
-	ld hl, w1d000
+	ld hl, wEnemy1
 	ld a, [hl]
 	and $93
 	cp $83
-	jr nz, .asm_6165f
-	ld e, $0d
-	ld l, $07
-	call Func_3000
+	jr nz, .enemy_2
+	ld e, LOW(wEnemy1Unk0d)
+	ld l, LOW(wEnemy1Unk07)
+	call UpdateEnemySprite
 
-.asm_6165f
-	ld hl, w1d020Unk00
+.enemy_2
+	ld hl, wEnemy2
 	ld a, [hl]
 	and $93
 	cp $83
-	jr nz, .asm_61670
-	ld e, $2d
-	ld l, $27
-	call Func_3000
+	jr nz, .enemy_3
+	ld e, LOW(wEnemy2Unk0d)
+	ld l, LOW(wEnemy2Unk07)
+	call UpdateEnemySprite
 
-.asm_61670
-	ld hl, w1d040
+.enemy_3
+	ld hl, wEnemy3
 	ld a, [hl]
 	and $93
 	cp $83
-	jr nz, .asm_61681
-	ld e, $4d
-	ld l, $47
-	call Func_3000
+	jr nz, .enemy_4
+	ld e, LOW(wEnemy3Unk0d)
+	ld l, LOW(wEnemy3Unk07)
+	call UpdateEnemySprite
 
-.asm_61681
-	ld hl, w1d060Unk00
+.enemy_4
+	ld hl, wEnemy4
 	ld a, [hl]
 	and $93
 	cp $83
-	jr nz, .asm_61692
-	ld e, $6d
-	ld l, $67
-	call Func_3000
+	jr nz, .enemy_5
+	ld e, LOW(wEnemy4Unk0d)
+	ld l, LOW(wEnemy4Unk07)
+	call UpdateEnemySprite
 
-.asm_61692
-	ld hl, w1d080Unk00
+.enemy_5
+	ld hl, wEnemy5
 	ld a, [hl]
 	and $93
 	cp $83
-	jr nz, .asm_616a3
-	ld e, $8d
-	ld l, $87
-	call Func_3000
+	jr nz, .enemy_6
+	ld e, LOW(wEnemy5Unk0d)
+	ld l, LOW(wEnemy5Unk07)
+	call UpdateEnemySprite
 
-.asm_616a3
-	ld hl, w1d0a0Unk00
+.enemy_6
+	ld hl, wEnemy6
 	ld a, [hl]
 	and $93
 	cp $83
-	jr nz, .asm_616b4
-	ld e, $ad
-	ld l, $a7
-	call Func_3000
+	jr nz, .enemy_7
+	ld e, LOW(wEnemy6Unk0d)
+	ld l, LOW(wEnemy6Unk07)
+	call UpdateEnemySprite
 
-.asm_616b4
-	ld hl, w1d0c0Unk00
+.enemy_7
+	ld hl, wEnemy7
 	ld a, [hl]
 	and $93
 	cp $83
-	jr nz, .asm_616c5
-	ld e, $cd
-	ld l, $c7
-	call Func_3000
+	jr nz, .enemy_8
+	ld e, LOW(wEnemy7Unk0d)
+	ld l, LOW(wEnemy7Unk07)
+	call UpdateEnemySprite
 
-.asm_616c5
-	ld hl, w1d0e0
+.enemy_8
+	ld hl, wEnemy8
 	ld a, [hl]
 	and $93
 	cp $83
-	jr nz, .asm_616d6
-	ld e, $ed
-	ld l, $e7
-	call Func_3000
+	jr nz, .done
+	ld e, LOW(wEnemy8Unk0d)
+	ld l, LOW(wEnemy8Unk07)
+	call UpdateEnemySprite
 
-.asm_616d6
+.done
 	ret
 ; 0x616d7
 
 Func_616d7: ; 616d7 (18:56d7)
-	ld hl, w1d000
+	ld hl, wEnemy1
 	ld a, [hl]
 	and $93
 	cp $03
-	jr nz, .asm_616e8
-	ld e, $0d
-	ld l, $07
-	call Func_3000
+	jr nz, .enemy_2
+	ld e, LOW(wEnemy1Unk0d)
+	ld l, LOW(wEnemy1Unk07)
+	call UpdateEnemySprite
 
-.asm_616e8
-	ld hl, w1d020Unk00
+.enemy_2
+	ld hl, wEnemy2
 	ld a, [hl]
 	and $93
 	cp $03
-	jr nz, .asm_616f9
-	ld e, $2d
-	ld l, $27
-	call Func_3000
+	jr nz, .enemy_3
+	ld e, LOW(wEnemy2Unk0d)
+	ld l, LOW(wEnemy2Unk07)
+	call UpdateEnemySprite
 
-.asm_616f9
-	ld hl, w1d040
+.enemy_3
+	ld hl, wEnemy3
 	ld a, [hl]
 	and $93
 	cp $03
-	jr nz, .asm_6170a
-	ld e, $4d
-	ld l, $47
-	call Func_3000
+	jr nz, .enemy_4
+	ld e, LOW(wEnemy3Unk0d)
+	ld l, LOW(wEnemy3Unk07)
+	call UpdateEnemySprite
 
-.asm_6170a
-	ld hl, w1d060Unk00
+.enemy_4
+	ld hl, wEnemy4
 	ld a, [hl]
 	and $93
 	cp $03
-	jr nz, .asm_6171b
-	ld e, $6d
-	ld l, $67
-	call Func_3000
+	jr nz, .enemy_5
+	ld e, LOW(wEnemy4Unk0d)
+	ld l, LOW(wEnemy4Unk07)
+	call UpdateEnemySprite
 
-.asm_6171b
-	ld hl, w1d080Unk00
+.enemy_5
+	ld hl, wEnemy5
 	ld a, [hl]
 	and $93
 	cp $03
-	jr nz, .asm_6172c
-	ld e, $8d
-	ld l, $87
-	call Func_3000
+	jr nz, .enemy_6
+	ld e, LOW(wEnemy5Unk0d)
+	ld l, LOW(wEnemy5Unk07)
+	call UpdateEnemySprite
 
-.asm_6172c
-	ld hl, w1d0a0Unk00
+.enemy_6
+	ld hl, wEnemy6
 	ld a, [hl]
 	and $93
 	cp $03
-	jr nz, .asm_6173d
-	ld e, $ad
-	ld l, $a7
-	call Func_3000
+	jr nz, .enemy_7
+	ld e, LOW(wEnemy6Unk0d)
+	ld l, LOW(wEnemy6Unk07)
+	call UpdateEnemySprite
 
-.asm_6173d
-	ld hl, w1d0c0Unk00
+.enemy_7
+	ld hl, wEnemy7
 	ld a, [hl]
 	and $93
 	cp $03
-	jr nz, .asm_6174e
-	ld e, $cd
-	ld l, $c7
-	call Func_3000
+	jr nz, .enemy_8
+	ld e, LOW(wEnemy7Unk0d)
+	ld l, LOW(wEnemy7Unk07)
+	call UpdateEnemySprite
 
-.asm_6174e
-	ld hl, w1d0e0
+.enemy_8
+	ld hl, wEnemy8
 	ld a, [hl]
 	and $93
 	cp $03
-	jr nz, .asm_6175f
-	ld e, $ed
-	ld l, $e7
-	call Func_3000
+	jr nz, .done
+	ld e, LOW(wEnemy8Unk0d)
+	ld l, LOW(wEnemy8Unk07)
+	call UpdateEnemySprite
 
-.asm_6175f
+.done
 	ret
 ; 0x61760
 
@@ -816,7 +816,7 @@ Func_61760: ; 61760 (18:5760)
 	INCROM $6179c, $618e2
 
 Func_618e2: ; 618e2 (18:58e2)
-	ld hl, w1d000
+	ld hl, wEnemies
 	ld e, $05
 	ld a, [hl]
 	and e
@@ -960,7 +960,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld a, $09
 	ld [hli], a
 .asm_619a6
-	ld a, [w1d000]
+	ld a, [wEnemies]
 	and $1f
 	cp $03
 	jr nz, .asm_61a16
@@ -1742,7 +1742,7 @@ Func_61eec: ; 61eec (18:5eec)
 
 Func_61f10: ; 61f10 (18:5f10)
 	xor a
-	call Func_61f41 ; clears whole w1d000
+	call Func_61f41 ; clears whole wEnemies
 	call Func_61f4a ; clears whole w1d120
 	ld [w1d140], a
 	ld [w1d141], a
@@ -1755,7 +1755,7 @@ Func_61f10: ; 61f10 (18:5f10)
 
 Func_61f2a: ; 61f2a (18:5f2a)
 	xor a
-	call Func_61f41 ; clears whole w1d000
+	call Func_61f41 ; clears whole wEnemies
 	call Func_61f4a ; clears whole w1d120
 	ld [w1d141], a
 	ld [w1d142], a
@@ -1766,7 +1766,7 @@ Func_61f2a: ; 61f2a (18:5f2a)
 ; 0x61f41
 
 Func_61f41: ; 61f41 (18:5f41)
-	ld hl, w1d000
+	ld hl, wEnemies
 	ld c, a
 .loop
 	ld [hli], a

@@ -1,5 +1,5 @@
 Func_64000: ; 64000 (19:4000)
-; fills w1d120 with $c3, $43
+; fills w1d120 with $43c3
 	ld hl, w1d120
 	ld bc, Data_643c3
 	ld e, $10
@@ -21,7 +21,7 @@ Func_64000: ; 64000 (19:4000)
 	rl d
 	sla e
 	rl d ; *4
-	ld hl, PointerTable_65009
+	ld hl, EnemyGroups
 	add hl, de
 	ld a, [hli]
 	ld c, a
@@ -153,49 +153,49 @@ Func_640e5: ; 640e5 (19:40e5)
 	cp $0a
 	ret nc
 
-	ld h, HIGH(w1d000)
-	ld l, LOW(w1d000)
+	ld h, HIGH(wEnemy1)
+	ld l, LOW(wEnemy1)
 	ld a, [hli]
 	rra
-	jr nc, .asm_6411d
-	ld l, $20
+	jr nc, .got_enemy
+	ld l, LOW(wEnemy2)
 	ld a, [hli]
 	rra
-	jr nc, .asm_6411d
-	ld l, $40
+	jr nc, .got_enemy
+	ld l, LOW(wEnemy3)
 	ld a, [hli]
 	rra
-	jr nc, .asm_6411d
-	ld l, $60
+	jr nc, .got_enemy
+	ld l, LOW(wEnemy4)
 	ld a, [hli]
 	rra
-	jr nc, .asm_6411d
-	ld l, $80
+	jr nc, .got_enemy
+	ld l, LOW(wEnemy5)
 	ld a, [hli]
 	rra
-	jr nc, .asm_6411d
-	ld l, $a0
+	jr nc, .got_enemy
+	ld l, LOW(wEnemy6)
 	ld a, [hli]
 	rra
-	jr nc, .asm_6411d
-	ld l, $c0
+	jr nc, .got_enemy
+	ld l, LOW(wEnemy7)
 	ld a, [hli]
 	rra
-	jr nc, .asm_6411d
-	ld l, $e0
+	jr nc, .got_enemy
+	ld l, LOW(wEnemy8)
 	ld a, [hli]
 	rra
-	jr nc, .asm_6411d
+	jr nc, .got_enemy
 	ret
 
-.asm_6411d
+.got_enemy
 	ld a, [de]
 	rlca
 	ret nc
 	rrca
 	and $7f
 	ld [de], a
-	ld [hl], e
+	ld [hl], e ; ENEMY_UNK_01
 	inc l
 	ld a, [wccec]
 	dec a
@@ -205,13 +205,13 @@ Func_640e5: ; 640e5 (19:40e5)
 	add a ; *16
 	add a ; *32
 	add d
-	ld [hli], a
+	ld [hli], a ; ENEMY_UNK_02
 	ldh a, [hYPosLo]
-	ld [hli], a
+	ld [hli], a ; ENEMY_Y_POS
 	ldh a, [hYPosHi]
 	ld [hli], a
 	ldh a, [hXPosLo]
-	ld [hli], a
+	ld [hli], a ; ENEMY_X_POS
 	ldh a, [hXPosHi]
 	ld [hli], a
 
@@ -227,63 +227,60 @@ Func_640e5: ; 640e5 (19:40e5)
 	pop de
 
 	ld a, [hli]
-	ld [de], a
+	ld [de], a ; ENEMY_UNK_07
 	inc e
 	ld a, [hli]
-	ld [de], a
+	ld [de], a ; ENEMY_UNK_08
 	inc e
 	ld a, [hli]
-	ld [de], a
+	ld [de], a ; ENEMY_UNK_09
 	inc e
 	xor a
+	ld [de], a ; ENEMY_UNK_0A
+
+	ld a, e
+	add ENEMY_UNK_0F - ENEMY_UNK_0A
+	ld e, a
+	xor a
+	ld [de], a ; ENEMY_UNK_0F
+	inc e
+	ld a, [hli] ; ENEMY_UNK_10
+	ld [de], a
+	inc e
+	ld a, [hli]
 	ld [de], a
 
 	ld a, e
-	add $5
+	add ENEMY_UNK_14 - (ENEMY_UNK_10 + 1)
 	ld e, a
-
-	xor a
-	ld [de], a
-	inc e
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hli]
-	ld [de], a
-
-	ld a, e
-	add $3
-	ld e, a
-
 	ld a, $7f
-	ld [de], a
+	ld [de], a ; ENEMY_UNK_14
 
 	ld a, e
-	add $6
+	add ENEMY_UNK_1A - ENEMY_UNK_14
 	ld e, a
-
 	ld a, $21
-	ld [de], a
+	ld [de], a ; ENEMY_UNK_1A
 	inc e
 	xor a
-	ld [de], a
+	ld [de], a ; ENEMY_UNK_1B
 	inc e
 	ld a, $82
-	ld [de], a
+	ld [de], a ; ENEMY_UNK_1C
 	inc e
 	inc e
 	ld a, [hli]
-	ld [de], a
+	ld [de], a ; ENEMY_UNK_1E
 	inc e
 	ld a, [hli]
 	ld [de], a
 
 	ld a, e
-	sub $1f
+	sub (ENEMY_UNK_1E + 1) - ENEMY_UNK_00
 	ld e, a
 	ld a, [hl]
 	or $11
-	ld [de], a
+	ld [de], a ; ENEMY_UNK_00
 	ret
 ; 0x64187
 
@@ -1240,153 +1237,153 @@ Data_64ffb: ; 64ffb (19:4ffb)
 	rgb  5,  0,  0
 ; 0x65009
 
-PointerTable_65009: ; 65009 (19:5009)
-	dw Data_64fc3, EnemyGroupGfx0   ; 00
-	dw Data_64fdf, EnemyGroupGfx2   ; 01
-	dw Data_64fd1, EnemyGroupGfx3   ; 02
-	dw Data_64fdf, EnemyGroupGfx6   ; 03
-	dw Data_64fdf, EnemyGroupGfx7   ; 04
-	dw Data_64fdf, EnemyGroupGfx8   ; 05
-	dw Data_64fdf, EnemyGroupGfx9   ; 06
-	dw Data_64fed, EnemyGroupGfx10  ; 07
-	dw Data_64fc3, EnemyGroupGfx11  ; 08
-	dw Data_64fc3, EnemyGroupGfx13  ; 09
-	dw Data_64fc3, EnemyGroupGfx14  ; 0a
-	dw Data_64fc3, EnemyGroupGfx15  ; 0b
-	dw Data_64fc3, EnemyGroupGfx16  ; 0c
-	dw Data_64fd1, EnemyGroupGfx11  ; 0d
-	dw Data_64fd1, EnemyGroupGfx17  ; 0e
-	dw Data_64fdf, EnemyGroupGfx18  ; 0f
-	dw Data_64fc3, EnemyGroupGfx1   ; 10
-	dw Data_64fc3, EnemyGroupGfx12  ; 11
-	dw Data_64fc3, EnemyGroupGfx21  ; 12
-	dw Data_64fc3, EnemyGroupGfx4   ; 13
-	dw Data_64fc3, EnemyGroupGfx3   ; 14
-	dw Data_64fdf, EnemyGroupGfx19  ; 15
-	dw Data_64fdf, EnemyGroupGfx3   ; 16
-	dw Data_64fc3, EnemyGroupGfx22  ; 17
-	dw Data_64fed, EnemyGroupGfx24  ; 18
-	dw Data_64fed, EnemyGroupGfx25  ; 19
-	dw Data_64fdf, EnemyGroupGfx25  ; 1a
-	dw Data_64fd1, EnemyGroupGfx26  ; 1b
-	dw Data_64fed, EnemyGroupGfx33  ; 1c
-	dw Data_64fdf, EnemyGroupGfx34  ; 1d
-	dw Data_64fc3, EnemyGroupGfx35  ; 1e
-	dw Data_64fc3, EnemyGroupGfx37  ; 1f
-	dw Data_64fc3, EnemyGroupGfx38  ; 20
-	dw Data_64fc3, EnemyGroupGfx39  ; 21
-	dw Data_64fd1, EnemyGroupGfx33  ; 22
-	dw Data_64fdf, EnemyGroupGfx40  ; 23
-	dw Data_64fed, EnemyGroupGfx41  ; 24
-	dw Data_64fd1, EnemyGroupGfx42  ; 25
-	dw Data_64fc3, EnemyGroupGfx42  ; 26
-	dw Data_64fc3, EnemyGroupGfx2   ; 27
-	dw Data_64fed, EnemyGroupGfx40  ; 28
-	dw Data_64fd1, EnemyGroupGfx43  ; 29
-	dw Data_64fdf, EnemyGroupGfx44  ; 2a
-	dw Data_64fed, EnemyGroupGfx44  ; 2b
-	dw Data_64fc3, EnemyGroupGfx45  ; 2c
-	dw Data_64fdf, EnemyGroupGfx24  ; 2d
-	dw Data_64fed, EnemyGroupGfx35  ; 2e
-	dw Data_64fd1, EnemyGroupGfx15  ; 2f
-	dw Data_64fed, EnemyGroupGfx46  ; 30
-	dw Data_64fc3, EnemyGroupGfx47  ; 31
-	dw Data_64fd1, EnemyGroupGfx34  ; 32
-	dw Data_64fed, EnemyGroupGfx48  ; 33
-	dw Data_64fc3, EnemyGroupGfx49  ; 34
-	dw Data_64fc3, EnemyGroupGfx50  ; 35
-	dw Data_64fc3, EnemyGroupGfx51  ; 36
-	dw Data_64fed, EnemyGroupGfx52  ; 37
-	dw Data_64fdf, EnemyGroupGfx20  ; 38
-	dw Data_64fdf, EnemyGroupGfx53  ; 39
-	dw Data_64fd1, EnemyGroupGfx54  ; 3a
-	dw Data_64fc3, EnemyGroupGfx30  ; 3b
-	dw Data_64fdf, EnemyGroupGfx31  ; 3c
-	dw Data_64fc3, EnemyGroupGfx23  ; 3d
-	dw Data_64fed, EnemyGroupGfx36  ; 3e
-	dw Data_64fed, EnemyGroupGfx29  ; 3f
-	dw Data_64fd1, EnemyGroupGfx32  ; 40
-	dw Data_64fd1, EnemyGroupGfx27  ; 41
-	dw Data_64fd1, EnemyGroupGfx27  ; 42
-	dw Data_64fd1, EnemyGroupGfx28  ; 43
-	dw Data_64fc3, EnemyGroupGfx55  ; 44
-	dw Data_64fc3, EnemyGroupGfx56  ; 45
-	dw Data_64fc3, EnemyGroupGfx57  ; 46
-	dw Data_64fc3, EnemyGroupGfx58  ; 47
-	dw Data_64fd1, EnemyGroupGfx59  ; 48
-	dw Data_64fc3, EnemyGroupGfx60  ; 49
-	dw Data_64fed, EnemyGroupGfx61  ; 4a
-	dw Data_64fed, EnemyGroupGfx17  ; 4b
-	dw Data_64fd1, EnemyGroupGfx13  ; 4c
-	dw Data_64fc3, EnemyGroupGfx62  ; 4d
-	dw Data_64fed, EnemyGroupGfx63  ; 4e
-	dw Data_64fdf, EnemyGroupGfx64  ; 4f
-	dw Data_64fdf, EnemyGroupGfx65  ; 50
-	dw Data_64fd1, EnemyGroupGfx35  ; 51
-	dw Data_64fc3, EnemyGroupGfx66  ; 52
-	dw Data_64fd1, EnemyGroupGfx67  ; 53
-	dw Data_64fdf, EnemyGroupGfx68  ; 54
-	dw Data_64fed, EnemyGroupGfx69  ; 55
-	dw Data_64fc3, EnemyGroupGfx70  ; 56
-	dw Data_64fdf, EnemyGroupGfx60  ; 57
-	dw Data_64fc3, EnemyGroupGfx71  ; 58
-	dw Data_64fed, EnemyGroupGfx72  ; 59
-	dw Data_64fed, EnemyGroupGfx73  ; 5a
-	dw Data_64fdf, EnemyGroupGfx4   ; 5b
-	dw Data_64fed, EnemyGroupGfx14  ; 5c
-	dw Data_64fd1, EnemyGroupGfx24  ; 5d
-	dw Data_64fc3, EnemyGroupGfx74  ; 5e
-	dw Data_64fdf, EnemyGroupGfx75  ; 5f
-	dw Data_64fc3, EnemyGroupGfx76  ; 60
-	dw Data_64fed, EnemyGroupGfx77  ; 61
-	dw Data_64fed, EnemyGroupGfx78  ; 62
-	dw Data_64fed, EnemyGroupGfx79  ; 63
-	dw Data_64fed, EnemyGroupGfx80  ; 64
-	dw Data_64fc3, EnemyGroupGfx81  ; 65
-	dw Data_64fdf, EnemyGroupGfx82  ; 66
-	dw Data_64fed, EnemyGroupGfx3   ; 67
-	dw Data_64fed, EnemyGroupGfx83  ; 68
-	dw Data_64fed, EnemyGroupGfx84  ; 69
-	dw Data_64fed, EnemyGroupGfx85  ; 6a
-	dw Data_64fd1, EnemyGroupGfx86  ; 6b
-	dw Data_64fdf, EnemyGroupGfx87  ; 6c
-	dw Data_64fdf, EnemyGroupGfx88  ; 6d
-	dw Data_64fed, EnemyGroupGfx89  ; 6e
-	dw Data_64fd1, EnemyGroupGfx95  ; 6f
-	dw Data_64fd1, EnemyGroupGfx90  ; 70
-	dw Data_64fc3, EnemyGroupGfx91  ; 71
-	dw Data_64fed, EnemyGroupGfx92  ; 72
-	dw Data_64fed, EnemyGroupGfx93  ; 73
-	dw Data_64fc3, EnemyGroupGfx94  ; 74
-	dw Data_64fdf, EnemyGroupGfx96  ; 75
-	dw Data_64fd1, EnemyGroupGfx91  ; 76
-	dw Data_64fdf, EnemyGroupGfx97  ; 77
-	dw Data_64fd1, EnemyGroupGfx77  ; 78
-	dw Data_64fd1, EnemyGroupGfx98  ; 79
-	dw Data_64fdf, EnemyGroupGfx99  ; 7a
-	dw Data_64fdf, EnemyGroupGfx100 ; 7b
-	dw Data_64fc3, EnemyGroupGfx5   ; 7c
-	dw Data_64fc3, EnemyGroupGfx101 ; 7d
-	dw Data_64fed, EnemyGroupGfx101 ; 7e
-	dw Data_64fc3, EnemyGroupGfx85  ; 7f
-	dw Data_64fd1, EnemyGroupGfx105 ; 80
-	dw Data_64fdf, EnemyGroupGfx102 ; 81
-	dw Data_64fc3, EnemyGroupGfx103 ; 82
-	dw Data_64fed, EnemyGroupGfx104 ; 83
-	dw Data_64fdf, EnemyGroupGfx106 ; 84
-	dw Data_64fed, EnemyGroupGfx107 ; 85
-	dw Data_64fed, EnemyGroupGfx108 ; 86
-	dw Data_64fed, EnemyGroupGfx109 ; 87
-	dw Data_64fc3, EnemyGroupGfx110 ; 88
-	dw Data_64fd1, EnemyGroupGfx111 ; 89
-	dw Data_64fc3, EnemyGroupGfx112 ; 8a
-	dw Data_64fdf, EnemyGroupGfx113 ; 8b
-	dw Data_64fc3, EnemyGroupGfx114 ; 8c
-	dw Data_64fc3, EnemyGroupGfx115 ; 8d
-	dw Data_64fd1, EnemyGroupGfx116 ; 8e
-	dw Data_64fdf, EnemyGroupGfx43  ; 8f
-	dw Data_64fd1, EnemyGroupGfx44  ; 90
-	dw Data_64ffb, EnemyGroupGfx117 ; 91
+EnemyGroups: ; 65009 (19:5009)
+	dw Data_64fc3, EnemyGroupGfx0   ; ENEMY_GROUP_000
+	dw Data_64fdf, EnemyGroupGfx2   ; ENEMY_GROUP_001
+	dw Data_64fd1, EnemyGroupGfx3   ; ENEMY_GROUP_002
+	dw Data_64fdf, EnemyGroupGfx6   ; ENEMY_GROUP_003
+	dw Data_64fdf, EnemyGroupGfx7   ; ENEMY_GROUP_004
+	dw Data_64fdf, EnemyGroupGfx8   ; ENEMY_GROUP_005
+	dw Data_64fdf, EnemyGroupGfx9   ; ENEMY_GROUP_006
+	dw Data_64fed, EnemyGroupGfx10  ; ENEMY_GROUP_007
+	dw Data_64fc3, EnemyGroupGfx11  ; ENEMY_GROUP_008
+	dw Data_64fc3, EnemyGroupGfx13  ; ENEMY_GROUP_009
+	dw Data_64fc3, EnemyGroupGfx14  ; ENEMY_GROUP_010
+	dw Data_64fc3, EnemyGroupGfx15  ; ENEMY_GROUP_011
+	dw Data_64fc3, EnemyGroupGfx16  ; ENEMY_GROUP_012
+	dw Data_64fd1, EnemyGroupGfx11  ; ENEMY_GROUP_013
+	dw Data_64fd1, EnemyGroupGfx17  ; ENEMY_GROUP_014
+	dw Data_64fdf, EnemyGroupGfx18  ; ENEMY_GROUP_015
+	dw Data_64fc3, EnemyGroupGfx1   ; ENEMY_GROUP_016
+	dw Data_64fc3, EnemyGroupGfx12  ; ENEMY_GROUP_017
+	dw Data_64fc3, EnemyGroupGfx21  ; ENEMY_GROUP_018
+	dw Data_64fc3, EnemyGroupGfx4   ; ENEMY_GROUP_019
+	dw Data_64fc3, EnemyGroupGfx3   ; ENEMY_GROUP_020
+	dw Data_64fdf, EnemyGroupGfx19  ; ENEMY_GROUP_021
+	dw Data_64fdf, EnemyGroupGfx3   ; ENEMY_GROUP_022
+	dw Data_64fc3, EnemyGroupGfx22  ; ENEMY_GROUP_023
+	dw Data_64fed, EnemyGroupGfx24  ; ENEMY_GROUP_024
+	dw Data_64fed, EnemyGroupGfx25  ; ENEMY_GROUP_025
+	dw Data_64fdf, EnemyGroupGfx25  ; ENEMY_GROUP_026
+	dw Data_64fd1, EnemyGroupGfx26  ; ENEMY_GROUP_027
+	dw Data_64fed, EnemyGroupGfx33  ; ENEMY_GROUP_028
+	dw Data_64fdf, EnemyGroupGfx34  ; ENEMY_GROUP_029
+	dw Data_64fc3, EnemyGroupGfx35  ; ENEMY_GROUP_030
+	dw Data_64fc3, EnemyGroupGfx37  ; ENEMY_GROUP_031
+	dw Data_64fc3, EnemyGroupGfx38  ; ENEMY_GROUP_032
+	dw Data_64fc3, EnemyGroupGfx39  ; ENEMY_GROUP_033
+	dw Data_64fd1, EnemyGroupGfx33  ; ENEMY_GROUP_034
+	dw Data_64fdf, EnemyGroupGfx40  ; ENEMY_GROUP_035
+	dw Data_64fed, EnemyGroupGfx41  ; ENEMY_GROUP_036
+	dw Data_64fd1, EnemyGroupGfx42  ; ENEMY_GROUP_037
+	dw Data_64fc3, EnemyGroupGfx42  ; ENEMY_GROUP_038
+	dw Data_64fc3, EnemyGroupGfx2   ; ENEMY_GROUP_039
+	dw Data_64fed, EnemyGroupGfx40  ; ENEMY_GROUP_040
+	dw Data_64fd1, EnemyGroupGfx43  ; ENEMY_GROUP_041
+	dw Data_64fdf, EnemyGroupGfx44  ; ENEMY_GROUP_042
+	dw Data_64fed, EnemyGroupGfx44  ; ENEMY_GROUP_043
+	dw Data_64fc3, EnemyGroupGfx45  ; ENEMY_GROUP_044
+	dw Data_64fdf, EnemyGroupGfx24  ; ENEMY_GROUP_045
+	dw Data_64fed, EnemyGroupGfx35  ; ENEMY_GROUP_046
+	dw Data_64fd1, EnemyGroupGfx15  ; ENEMY_GROUP_047
+	dw Data_64fed, EnemyGroupGfx46  ; ENEMY_GROUP_048
+	dw Data_64fc3, EnemyGroupGfx47  ; ENEMY_GROUP_049
+	dw Data_64fd1, EnemyGroupGfx34  ; ENEMY_GROUP_050
+	dw Data_64fed, EnemyGroupGfx48  ; ENEMY_GROUP_051
+	dw Data_64fc3, EnemyGroupGfx49  ; ENEMY_GROUP_052
+	dw Data_64fc3, EnemyGroupGfx50  ; ENEMY_GROUP_053
+	dw Data_64fc3, EnemyGroupGfx51  ; ENEMY_GROUP_054
+	dw Data_64fed, EnemyGroupGfx52  ; ENEMY_GROUP_055
+	dw Data_64fdf, EnemyGroupGfx20  ; ENEMY_GROUP_056
+	dw Data_64fdf, EnemyGroupGfx53  ; ENEMY_GROUP_057
+	dw Data_64fd1, EnemyGroupGfx54  ; ENEMY_GROUP_058
+	dw Data_64fc3, EnemyGroupGfx30  ; ENEMY_GROUP_059
+	dw Data_64fdf, EnemyGroupGfx31  ; ENEMY_GROUP_060
+	dw Data_64fc3, EnemyGroupGfx23  ; ENEMY_GROUP_061
+	dw Data_64fed, EnemyGroupGfx36  ; ENEMY_GROUP_062
+	dw Data_64fed, EnemyGroupGfx29  ; ENEMY_GROUP_063
+	dw Data_64fd1, EnemyGroupGfx32  ; ENEMY_GROUP_064
+	dw Data_64fd1, EnemyGroupGfx27  ; ENEMY_GROUP_065
+	dw Data_64fd1, EnemyGroupGfx27  ; ENEMY_GROUP_066
+	dw Data_64fd1, EnemyGroupGfx28  ; ENEMY_GROUP_067
+	dw Data_64fc3, EnemyGroupGfx55  ; ENEMY_GROUP_068
+	dw Data_64fc3, EnemyGroupGfx56  ; ENEMY_GROUP_069
+	dw Data_64fc3, EnemyGroupGfx57  ; ENEMY_GROUP_070
+	dw Data_64fc3, EnemyGroupGfx58  ; ENEMY_GROUP_071
+	dw Data_64fd1, EnemyGroupGfx59  ; ENEMY_GROUP_072
+	dw Data_64fc3, EnemyGroupGfx60  ; ENEMY_GROUP_073
+	dw Data_64fed, EnemyGroupGfx61  ; ENEMY_GROUP_074
+	dw Data_64fed, EnemyGroupGfx17  ; ENEMY_GROUP_075
+	dw Data_64fd1, EnemyGroupGfx13  ; ENEMY_GROUP_076
+	dw Data_64fc3, EnemyGroupGfx62  ; ENEMY_GROUP_077
+	dw Data_64fed, EnemyGroupGfx63  ; ENEMY_GROUP_078
+	dw Data_64fdf, EnemyGroupGfx64  ; ENEMY_GROUP_079
+	dw Data_64fdf, EnemyGroupGfx65  ; ENEMY_GROUP_080
+	dw Data_64fd1, EnemyGroupGfx35  ; ENEMY_GROUP_081
+	dw Data_64fc3, EnemyGroupGfx66  ; ENEMY_GROUP_082
+	dw Data_64fd1, EnemyGroupGfx67  ; ENEMY_GROUP_083
+	dw Data_64fdf, EnemyGroupGfx68  ; ENEMY_GROUP_084
+	dw Data_64fed, EnemyGroupGfx69  ; ENEMY_GROUP_085
+	dw Data_64fc3, EnemyGroupGfx70  ; ENEMY_GROUP_086
+	dw Data_64fdf, EnemyGroupGfx60  ; ENEMY_GROUP_087
+	dw Data_64fc3, EnemyGroupGfx71  ; ENEMY_GROUP_088
+	dw Data_64fed, EnemyGroupGfx72  ; ENEMY_GROUP_089
+	dw Data_64fed, EnemyGroupGfx73  ; ENEMY_GROUP_090
+	dw Data_64fdf, EnemyGroupGfx4   ; ENEMY_GROUP_091
+	dw Data_64fed, EnemyGroupGfx14  ; ENEMY_GROUP_092
+	dw Data_64fd1, EnemyGroupGfx24  ; ENEMY_GROUP_093
+	dw Data_64fc3, EnemyGroupGfx74  ; ENEMY_GROUP_094
+	dw Data_64fdf, EnemyGroupGfx75  ; ENEMY_GROUP_095
+	dw Data_64fc3, EnemyGroupGfx76  ; ENEMY_GROUP_096
+	dw Data_64fed, EnemyGroupGfx77  ; ENEMY_GROUP_097
+	dw Data_64fed, EnemyGroupGfx78  ; ENEMY_GROUP_098
+	dw Data_64fed, EnemyGroupGfx79  ; ENEMY_GROUP_099
+	dw Data_64fed, EnemyGroupGfx80  ; ENEMY_GROUP_100
+	dw Data_64fc3, EnemyGroupGfx81  ; ENEMY_GROUP_101
+	dw Data_64fdf, EnemyGroupGfx82  ; ENEMY_GROUP_102
+	dw Data_64fed, EnemyGroupGfx3   ; ENEMY_GROUP_103
+	dw Data_64fed, EnemyGroupGfx83  ; ENEMY_GROUP_104
+	dw Data_64fed, EnemyGroupGfx84  ; ENEMY_GROUP_105
+	dw Data_64fed, EnemyGroupGfx85  ; ENEMY_GROUP_106
+	dw Data_64fd1, EnemyGroupGfx86  ; ENEMY_GROUP_107
+	dw Data_64fdf, EnemyGroupGfx87  ; ENEMY_GROUP_108
+	dw Data_64fdf, EnemyGroupGfx88  ; ENEMY_GROUP_109
+	dw Data_64fed, EnemyGroupGfx89  ; ENEMY_GROUP_110
+	dw Data_64fd1, EnemyGroupGfx95  ; ENEMY_GROUP_111
+	dw Data_64fd1, EnemyGroupGfx90  ; ENEMY_GROUP_112
+	dw Data_64fc3, EnemyGroupGfx91  ; ENEMY_GROUP_113
+	dw Data_64fed, EnemyGroupGfx92  ; ENEMY_GROUP_114
+	dw Data_64fed, EnemyGroupGfx93  ; ENEMY_GROUP_115
+	dw Data_64fc3, EnemyGroupGfx94  ; ENEMY_GROUP_116
+	dw Data_64fdf, EnemyGroupGfx96  ; ENEMY_GROUP_117
+	dw Data_64fd1, EnemyGroupGfx91  ; ENEMY_GROUP_118
+	dw Data_64fdf, EnemyGroupGfx97  ; ENEMY_GROUP_119
+	dw Data_64fd1, EnemyGroupGfx77  ; ENEMY_GROUP_120
+	dw Data_64fd1, EnemyGroupGfx98  ; ENEMY_GROUP_121
+	dw Data_64fdf, EnemyGroupGfx99  ; ENEMY_GROUP_122
+	dw Data_64fdf, EnemyGroupGfx100 ; ENEMY_GROUP_123
+	dw Data_64fc3, EnemyGroupGfx5   ; ENEMY_GROUP_124
+	dw Data_64fc3, EnemyGroupGfx101 ; ENEMY_GROUP_125
+	dw Data_64fed, EnemyGroupGfx101 ; ENEMY_GROUP_126
+	dw Data_64fc3, EnemyGroupGfx85  ; ENEMY_GROUP_127
+	dw Data_64fd1, EnemyGroupGfx105 ; ENEMY_GROUP_128
+	dw Data_64fdf, EnemyGroupGfx102 ; ENEMY_GROUP_129
+	dw Data_64fc3, EnemyGroupGfx103 ; ENEMY_GROUP_130
+	dw Data_64fed, EnemyGroupGfx104 ; ENEMY_GROUP_131
+	dw Data_64fdf, EnemyGroupGfx106 ; ENEMY_GROUP_132
+	dw Data_64fed, EnemyGroupGfx107 ; ENEMY_GROUP_133
+	dw Data_64fed, EnemyGroupGfx108 ; ENEMY_GROUP_134
+	dw Data_64fed, EnemyGroupGfx109 ; ENEMY_GROUP_135
+	dw Data_64fc3, EnemyGroupGfx110 ; ENEMY_GROUP_136
+	dw Data_64fd1, EnemyGroupGfx111 ; ENEMY_GROUP_137
+	dw Data_64fc3, EnemyGroupGfx112 ; ENEMY_GROUP_138
+	dw Data_64fdf, EnemyGroupGfx113 ; ENEMY_GROUP_139
+	dw Data_64fc3, EnemyGroupGfx114 ; ENEMY_GROUP_140
+	dw Data_64fc3, EnemyGroupGfx115 ; ENEMY_GROUP_141
+	dw Data_64fd1, EnemyGroupGfx116 ; ENEMY_GROUP_142
+	dw Data_64fdf, EnemyGroupGfx43  ; ENEMY_GROUP_143
+	dw Data_64fd1, EnemyGroupGfx44  ; ENEMY_GROUP_144
+	dw Data_64ffb, EnemyGroupGfx117 ; ENEMY_GROUP_145
 ; 0x65251
 
 EnemyGroupGfx0: ; 65251 (19:5251)

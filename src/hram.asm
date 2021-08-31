@@ -28,6 +28,7 @@ hXPosHi:: ; ffaa
 hXPosLo:: ; ffab
 	ds $1
 
+hffac:: ; ffac
 	ds $1
 
 hffad:: ; ffad
@@ -46,7 +47,10 @@ hMusicID:: ; ffb1
 	ds $2
 
 hffb3:: ; ffb3
-	ds $2
+	ds $1
+
+hffb4:: ; ffb4
+	ds $1
 
 hSFXID:: ; ffb5
 	ds $2

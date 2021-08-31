@@ -108,7 +108,7 @@ wTempIE:: ; c09e
 wc09f:: ; c09f
 	ds $1
 
-wc0a0:: ; c0a0
+wSpawnPointID:: ; c0a0
 	ds $1
 
 wc0a1:: ; c0a1
@@ -1012,14 +1012,15 @@ wcef1:: ; cef1
 
 SECTION "WRAM1", WRAMX
 
-w1d000:: unk2_struct w1d000 ; d000
-w1d020:: unk2_struct w1d020 ; d020
-w1d040:: unk2_struct w1d040 ; d040
-w1d060:: unk2_struct w1d060 ; d060
-w1d080:: unk2_struct w1d080 ; d080
-w1d0a0:: unk2_struct w1d0a0 ; d0a0
-w1d0c0:: unk2_struct w1d0c0 ; d0c0
-w1d0e0:: unk2_struct w1d0e0 ; d0e0
+wEnemies::
+wEnemy1:: enemy_struct wEnemy1 ; d000
+wEnemy2:: enemy_struct wEnemy2 ; d020
+wEnemy3:: enemy_struct wEnemy3 ; d040
+wEnemy4:: enemy_struct wEnemy4 ; d060
+wEnemy5:: enemy_struct wEnemy5 ; d080
+wEnemy6:: enemy_struct wEnemy6 ; d0a0
+wEnemy7:: enemy_struct wEnemy7 ; d0c0
+wEnemy8:: enemy_struct wEnemy8 ; d0e0
 
 w1d100:: ; d100
 	ds $20

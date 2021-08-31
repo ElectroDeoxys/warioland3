@@ -544,7 +544,7 @@ Func_846e: ; 846e (2:446e)
 	ld [wc0bd], a
 	ld [wca97], a
 	ld [wc0bc], a
-	ld a, [wc0a0]
+	ld a, [wSpawnPointID]
 	ld [wca5d], a
 
 	ldh a, [rSVBK]
@@ -767,7 +767,7 @@ Func_8747: ; 8747 (2:4747)
 	jp nz, .asm_87e2
 
 	xor a
-	ld [wc0a0], a
+	ld [wSpawnPointID], a
 	ld [wca6c], a
 	ld [wca5d], a
 
@@ -815,15 +815,15 @@ Func_8747: ; 8747 (2:4747)
 	farcall Func_61f10
 	pop af
 	ldh [rSVBK], a
-	jr .asm_87eb
+	jr .load_layout
 
 .asm_87e2
 	ld a, [wca5d]
-	ld [wc0a0], a
+	ld [wSpawnPointID], a
 	call Func_15b0
 
-.asm_87eb
-	call Func_e8a
+.load_layout
+	call LoadLevelLayoutAndObjects
 
 	ldh a, [rSVBK]
 	push af
@@ -1739,12 +1739,12 @@ Func_8ec2: ; 8ec2 (2:4ec2)
 	add c
 	dec b
 	jr nz, .asm_8ecb
-	ld [wc0a0], a
+	ld [wSpawnPointID], a
 	ret
 .asm_8ed3
 	inc hl
 	ld a, [hl]
-	ld [wc0a0], a
+	ld [wSpawnPointID], a
 	ret
 ; 0x8ed9
 

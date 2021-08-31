@@ -11,7 +11,7 @@ Func_20000: ; 20000 (8:4000)
 	xor a
 	ld [wcac9], a
 
-	ld hl, w1d000
+	ld hl, wEnemies
 .asm_20016
 	ld a, h
 	cp HIGH(w1d100)

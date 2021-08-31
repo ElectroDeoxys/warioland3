@@ -27,10 +27,10 @@ Func_9c021: ; 9c021 (27:4021)
 	call DisableLCD
 	call ClearWholeVirtualOAM
 	ld a, $ff
-	ldh [hffb3 + 0], a
+	ldh [hffb3], a
 	ldh [hMusicID + 0], a
 	ld a, $00
-	ldh [hffb3 + 1], a
+	ldh [hffb4], a
 	ldh [hMusicID + 1], a
 
 	xor a

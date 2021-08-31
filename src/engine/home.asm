@@ -1606,7 +1606,7 @@ DecompressLevelLayout: ; ab5 (0:ab5)
 	jr .next_copy
 ; 0xb48
 
-Func_b48: ; b48 (0:b48)
+DecompressLevelObjectsMap: ; b48 (0:b48)
 	ld a, [wSRAMBank]
 	push af
 	ld a, BANK("SRAM1")
@@ -2137,7 +2137,7 @@ Func_e87: ; e87 (0:e87)
 	jp Init
 ; 0xe8a
 
-Func_e8a: ; e8a (0:e8a)
+LoadLevelLayoutAndObjects: ; e8a (0:e8a)
 	ld d, $00
 	ld a, [wLevel]
 	add a ; *2
@@ -2177,9 +2177,9 @@ Func_e8a: ; e8a (0:e8a)
 	push hl
 	ld a, [wceef]
 	and $3c
-	jr nz, .asm_ed9
-	call Func_b48
-.asm_ed9
+	jr nz, .skip_loading_objects
+	call DecompressLevelObjectsMap
+.skip_loading_objects
 	pop hl
 	ret
 ; 0xedb
@@ -2187,7 +2187,7 @@ Func_e8a: ; e8a (0:e8a)
 Func_edb: ; edb (0:edb)
 	ld d, $00
 	ld a, [wLevel]
-	add a
+	add a ; *2
 	ld e, a
 	rl d
 	ld hl, LevelHeaders
@@ -2201,7 +2201,7 @@ Func_edb: ; edb (0:edb)
 	ld l, a
 	ld a, h
 	inc a
-	jp z, Func_e87
+	jp z, Func_e87 ; null
 
 	ld a, [hli]
 	ld [wCompressedLevelLayoutPtr + 1], a
@@ -3955,7 +3955,7 @@ Func_285c: ; 285c (0:285c)
 	ld a, BANK(PointerTable_c0319)
 	bankswitch
 	ld a, [wLevel]
-	add a
+	add a ; *2
 	ld e, a
 	ld d, $00
 	rl d
@@ -3966,30 +3966,31 @@ Func_285c: ; 285c (0:285c)
 	ld l, a
 	ld a, h
 	cp $ff
-	jr nz, .asm_2893
-	jp Init
+	jr nz, .valid_level
+	jp Init ; null reset
 
-.asm_2893
+.valid_level
 	pop af
 	bankswitch
 
 	ld a, [wLevel]
-	cp $64
-	jr nc, .asm_28af
+	cp THE_GRASSLANDS_NIGHT_1
+	jr nc, .group_2
+; group_1
 	ld a, [wROMBank]
 	push af
 	ld a, $30
 	bankswitch
-	jr .asm_28bb
-.asm_28af
+	jr .got_bank
+.group_2
 	ld a, [wROMBank]
 	push af
 	ld a, $31
 	bankswitch
 
-.asm_28bb
-	ld a, [wc0a0]
-	add a
+.got_bank
+	ld a, [wSpawnPointID]
+	add a ; *2
 	ld e, a
 	ld d, $00
 	add hl, de
@@ -3999,10 +4000,10 @@ Func_285c: ; 285c (0:285c)
 	ld l, e
 	ld a, h
 	cp $ff
-	jr nz, .asm_28cf
-	jp Init
+	jr nz, .valid_spawn_point
+	jp Init ; null reset
 
-.asm_28cf
+.valid_spawn_point
 	ld a, [hli]
 	ld [wc0a1], a
 	ld a, [hl]
@@ -4297,12 +4298,14 @@ endr
 
 	INCROM $2b25, $3000
 
-Func_3000: ; 3000 (0:3000)
+; given the enemy struct in hl
+; update its sprite with its current position
+UpdateEnemySprite: ; 3000 (0:3000)
 	ld a, [wROMBank]
 	push af
 	ld a, [hl]
 	swap a
-	and $07
+	and %111
 	or $60
 	bankswitch
 	ld l, e
@@ -4317,44 +4320,45 @@ Func_3000: ; 3000 (0:3000)
 	ld l, a
 	ld a, [wCurSpriteFrame]
 	ld d, $00
-	add a
+	add a ; *2
 	ld e, a
 	add hl, de
 	ld a, [hli]
 	ld e, a
 	ld d, [hl]
+
 	ld hl, wCurSpriteXOffset
 	ld a, [hld]
 	ld c, a
-	ld a, [hld]
+	ld a, [hld] ; wCurSpriteYOffset
 	ld b, a
-	ld l, [hl]
-	ld h, $cc
-.asm_3036
+	ld l, [hl] ; wNumOAMSprites
+	ld h, HIGH(wVirtualOAM)
+.loop_sprites
 	ld a, l
-	cp $a0
-	jr nc, .asm_3054
+	cp LOW(wVirtualOAMEnd)
+	jr nc, .done
 	ld a, [de]
 	cp $80
-	jr z, .asm_3054
+	jr z, .done
 	ld a, [de]
 	add b
-	ld [hli], a
+	ld [hli], a ; SPRITEOAMSTRUCT_YCOORD
 	inc de
 	ld a, [de]
 	add c
-	ld [hli], a
+	ld [hli], a ; SPRITEOAMSTRUCT_XCOORD
 	inc de
 	ld a, [de]
-	ld [hli], a
+	ld [hli], a ; SPRITEOAMSTRUCT_TILE_ID
 	inc de
 	ld a, [de]
-	ld [hli], a
+	ld [hli], a ; SPRITEOAMSTRUCT_ATTRIBUTES
 	ld a, l
 	ld [wNumOAMSprites], a
 	inc de
-	jr .asm_3036
-.asm_3054
+	jr .loop_sprites
+.done
 	pop af
 	bankswitch
 	ret
