@@ -11,7 +11,20 @@ def getSigned(x):
     return (x - 0x100, x)[x < 0x80]
 
 def getOAM(data):
-    return [getSigned(data[0]), getSigned(data[1]), data[2], data[3]]
+    offset = 0
+    yCoords = []
+    xCoords = []
+    tileIDs = []
+    attrs = []
+
+    while (offset < len(data)):
+        yCoords.append(getSigned(data[offset + 0]))
+        xCoords.append(getSigned(data[offset + 1]))
+        tileIDs.append(data[offset + 2])
+        attrs.append(data[offset + 3])
+        offset = offset + 4
+
+    return [yCoords, xCoords, tileIDs, attrs]
 
 def getPointers(offset):
     curOffset = offset
@@ -29,6 +42,15 @@ def getPointers(offset):
 
     return ptrs
 
+def getOAMBytes(offset):
+    byteArray = []
+
+    while (int.from_bytes(reader.getROMByte(offset), 'little') != 0x80):
+        byteArray.extend(reader.getROMBytes(offset, 4))
+        offset = offset + 4
+
+    return byteArray
+
 for offsetStr in reader.standardiseList(args.offsets):
     offset = int(offsetStr, 16)
     outStr = ''
@@ -42,13 +64,16 @@ for offsetStr in reader.standardiseList(args.offsets):
     for ptrOffset in ptrs:
         ptrTableStr += '\tdw .frame_{}\n'.format(i)
 
-        yCoord, xCoord, tileID, attr = getOAM(reader.getROMBytes(ptrOffset, 4))
-        if prevOffset < ptrOffset:
-            outStr += '\n\tINCROM ' + '${:0x}, '.format(prevOffset) + '${:0x}\n\n'.format(ptrOffset)
-        outStr += '.frame_{}\n'.format(i)
-        outStr += '\tframe_oam ' + '{0:3}, '.format(yCoord) + '{0:3}, '.format(xCoord) + '${0:02x}, '.format(tileID) + '${0:02x}\n'.format(attr)
+        yCoords, xCoords, tileIDs, attrs = getOAM(getOAMBytes(ptrOffset))
 
-        prevOffset = ptrOffset + 4
+        outStr += '\n.frame_{}\n'.format(i)
+
+        for j in range(len(yCoords)):
+            outStr += '\tframe_oam ' + '{0:3}, '.format(yCoords[j]) + '{0:3}, '.format(xCoords[j]) + '${0:02x}, '.format(tileIDs[j]) + '${0:02x}\n'.format(attrs[j])
+        
+        outStr += '\tdb $80\n'
+
+        prevOffset = ptrOffset + 4 * len(yCoords) + 1
         i += 1
 
-    print(reader.getDataString(offset, prevOffset - offset, 'OAM_').format(ptrTableStr + '\n' + outStr))
+    print(reader.getDataString(offset, prevOffset - offset, 'OAM_').format(ptrTableStr + outStr))

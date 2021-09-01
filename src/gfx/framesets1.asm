@@ -1,4 +1,4 @@
-OAM_14000: ; 14000 (5:4000)
+OAM_14000: ; 14000 (05:4000)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -22,104 +22,184 @@ OAM_14000: ; 14000 (5:4000)
 
 .frame_0
 	frame_oam -31, -12, $00, $00
-
-	INCROM $1402c, $14041
+	frame_oam -31,  -4, $02, $00
+	frame_oam -31,   4, $04, $00
+	frame_oam -15, -12, $20, $00
+	frame_oam -15,  -4, $22, $00
+	frame_oam -15,   4, $24, $00
+	db $80
 
 .frame_1
 	frame_oam -31, -12, $06, $00
-
-	INCROM $14045, $1405a
+	frame_oam -31,  -4, $08, $00
+	frame_oam -15, -12, $26, $00
+	frame_oam -15,  -4, $28, $00
+	frame_oam -15,   4, $2a, $00
+	frame_oam -31,   4, $04, $00
+	db $80
 
 .frame_2
 	frame_oam -32, -12, $0c, $00
-
-	INCROM $1405e, $14073
+	frame_oam -32,  -4, $0e, $00
+	frame_oam -32,   4, $10, $00
+	frame_oam -16, -12, $2c, $00
+	frame_oam -16,  -4, $2e, $00
+	frame_oam -16,   4, $30, $00
+	db $80
 
 .frame_3
 	frame_oam -32, -15, $12, $00
-
-	INCROM $14077, $1408c
+	frame_oam -32,  -7, $14, $00
+	frame_oam -32,   1, $16, $00
+	frame_oam -16, -15, $32, $00
+	frame_oam -16,  -7, $34, $00
+	frame_oam -16,   1, $36, $00
+	db $80
 
 .frame_4
 	frame_oam -31,   4, $00, $20
-
-	INCROM $14090, $140a5
+	frame_oam -31,  -4, $02, $20
+	frame_oam -31, -12, $04, $20
+	frame_oam -15,   4, $20, $20
+	frame_oam -15,  -4, $22, $20
+	frame_oam -15, -12, $24, $20
+	db $80
 
 .frame_5
 	frame_oam -31,   4, $06, $20
-
-	INCROM $140a9, $140be
+	frame_oam -31,  -4, $08, $20
+	frame_oam -15,   4, $26, $20
+	frame_oam -15,  -4, $28, $20
+	frame_oam -15, -12, $2a, $20
+	frame_oam -31, -12, $04, $20
+	db $80
 
 .frame_6
 	frame_oam -32,   4, $0c, $20
-
-	INCROM $140c2, $140d7
+	frame_oam -32,  -4, $0e, $20
+	frame_oam -32, -12, $10, $20
+	frame_oam -16,   4, $2c, $20
+	frame_oam -16,  -4, $2e, $20
+	frame_oam -16, -12, $30, $20
+	db $80
 
 .frame_7
 	frame_oam -32,   7, $12, $20
-
-	INCROM $140db, $140f0
+	frame_oam -32,  -1, $14, $20
+	frame_oam -32,  -9, $16, $20
+	frame_oam -16,   7, $32, $20
+	frame_oam -16,  -1, $34, $20
+	frame_oam -16,  -9, $36, $20
+	db $80
 
 .frame_8
 	frame_oam -32,  -7, $14, $00
-
-	INCROM $140f4, $14109
+	frame_oam -32,   1, $16, $00
+	frame_oam -16, -15, $32, $00
+	frame_oam -16,  -7, $34, $00
+	frame_oam -16,   1, $36, $00
+	frame_oam -32, -15, $1e, $00
+	db $80
 
 .frame_9
 	frame_oam -32, -15, $18, $00
-
-	INCROM $1410d, $14122
+	frame_oam -32,  -7, $1a, $00
+	frame_oam -32,   1, $1c, $00
+	frame_oam -16, -15, $38, $00
+	frame_oam -16,  -7, $3a, $00
+	frame_oam -16,   1, $3c, $00
+	db $80
 
 .frame_10
 	frame_oam -32,  -1, $14, $20
-
-	INCROM $14126, $1413b
+	frame_oam -32,  -9, $16, $20
+	frame_oam -16,   7, $32, $20
+	frame_oam -16,  -1, $34, $20
+	frame_oam -16,  -9, $36, $20
+	frame_oam -32,   7, $1e, $20
+	db $80
 
 .frame_11
 	frame_oam -32,   7, $18, $20
-
-	INCROM $1413f, $14154
+	frame_oam -32,  -1, $1a, $20
+	frame_oam -32,  -9, $1c, $20
+	frame_oam -16,   7, $38, $20
+	frame_oam -16,  -1, $3a, $20
+	frame_oam -16,  -9, $3c, $20
+	db $80
 
 .frame_12
 	frame_oam -32,  -7, $1a, $00
-
-	INCROM $14158, $1416d
+	frame_oam -32,   1, $1c, $00
+	frame_oam -16, -15, $38, $00
+	frame_oam -16,  -7, $3a, $00
+	frame_oam -16,   1, $3c, $00
+	frame_oam -32, -15, $3e, $00
+	db $80
 
 .frame_13
 	frame_oam -32,  -1, $1a, $20
-
-	INCROM $14171, $14186
+	frame_oam -32,  -9, $1c, $20
+	frame_oam -16,   7, $38, $20
+	frame_oam -16,  -1, $3a, $20
+	frame_oam -16,  -9, $3c, $20
+	frame_oam -32,   7, $3e, $20
+	db $80
 
 .frame_14
 	frame_oam -15, -12, $20, $00
-
-	INCROM $1418a, $1419f
+	frame_oam -15,  -4, $22, $00
+	frame_oam -15,   4, $24, $00
+	frame_oam -31, -12, $06, $00
+	frame_oam -31,  -4, $08, $00
+	frame_oam -31,   4, $04, $00
+	db $80
 
 .frame_15
 	frame_oam -31, -12, $06, $00
-
-	INCROM $141a3, $141b8
+	frame_oam -31,   4, $04, $00
+	frame_oam -15, -12, $20, $00
+	frame_oam -15,  -4, $22, $00
+	frame_oam -15,   4, $24, $00
+	frame_oam -31,  -4, $0a, $00
+	db $80
 
 .frame_16
 	frame_oam -15,   4, $20, $20
-
-	INCROM $141bc, $141d1
+	frame_oam -15,  -4, $22, $20
+	frame_oam -15, -12, $24, $20
+	frame_oam -31,   4, $06, $20
+	frame_oam -31,  -4, $08, $20
+	frame_oam -31, -12, $04, $20
+	db $80
 
 .frame_17
 	frame_oam -31,   4, $06, $20
-
-	INCROM $141d5, $141ea
+	frame_oam -31, -12, $04, $20
+	frame_oam -15,   4, $20, $20
+	frame_oam -15,  -4, $22, $20
+	frame_oam -15, -12, $24, $20
+	frame_oam -31,  -4, $0a, $20
+	db $80
 
 .frame_18
 	frame_oam -31, -12, $40, $00
-
-	INCROM $141ee, $14203
+	frame_oam -31,  -4, $42, $00
+	frame_oam -31,   4, $44, $00
+	frame_oam -15, -12, $60, $00
+	frame_oam -15,  -4, $62, $00
+	frame_oam -15,   4, $64, $00
+	db $80
 
 .frame_19
 	frame_oam -31,   4, $40, $20
-; 0x14207
-
-	INCROM $14207, $1421c
+	frame_oam -31,  -4, $42, $20
+	frame_oam -31, -12, $44, $20
+	frame_oam -15,   4, $60, $20
+	frame_oam -15,  -4, $62, $20
+	frame_oam -15, -12, $64, $20
+	db $80
+; 0x1421c
 
 Frameset_1421c: ; 1421c (5:421c)
 	db $12,  4
@@ -182,7 +262,7 @@ Frameset_1425f: ; 1425f (5:425f)
 	db $ff
 ; 0x1426c
 
-OAM_1426c: ; 1426c (5:426c)
+OAM_1426c: ; 1426c (05:426c)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -250,324 +330,614 @@ OAM_1426c: ; 1426c (5:426c)
 
 .frame_0
 	frame_oam -32, -12, $00, $00
-
-	INCROM $142f0, $14305
+	frame_oam -32,  -4, $02, $00
+	frame_oam -32,   4, $04, $00
+	frame_oam -16, -12, $20, $00
+	frame_oam -16,  -4, $22, $00
+	frame_oam -16,   4, $24, $00
+	db $80
 
 .frame_1
 	frame_oam -32, -12, $06, $00
-
-	INCROM $14309, $1431e
+	frame_oam -32,  -4, $08, $00
+	frame_oam -32,   4, $0a, $00
+	frame_oam -16, -12, $26, $00
+	frame_oam -16,  -4, $28, $00
+	frame_oam -16,   4, $2a, $00
+	db $80
 
 .frame_2
 	frame_oam -34,  -4, $0e, $00
-
-	INCROM $14322, $14337
+	frame_oam -34,   4, $10, $00
+	frame_oam -18, -12, $2c, $00
+	frame_oam -18,  -4, $2e, $00
+	frame_oam -18,   4, $30, $00
+	frame_oam -34, -12, $00, $00
+	db $80
 
 .frame_3
 	frame_oam -32, -13, $12, $00
-
-	INCROM $1433b, $14350
+	frame_oam -32,  -5, $14, $00
+	frame_oam -32,   3, $16, $00
+	frame_oam -16, -13, $32, $00
+	frame_oam -16,  -5, $34, $00
+	frame_oam -16,   3, $36, $00
+	db $80
 
 .frame_4
 	frame_oam -32,   4, $00, $20
-
-	INCROM $14354, $14369
+	frame_oam -32,  -4, $02, $20
+	frame_oam -32, -12, $04, $20
+	frame_oam -16,   4, $20, $20
+	frame_oam -16,  -4, $22, $20
+	frame_oam -16, -12, $24, $20
+	db $80
 
 .frame_5
 	frame_oam -32,   4, $06, $20
-
-	INCROM $1436d, $14382
+	frame_oam -32,  -4, $08, $20
+	frame_oam -32, -12, $0a, $20
+	frame_oam -16,   4, $26, $20
+	frame_oam -16,  -4, $28, $20
+	frame_oam -16, -12, $2a, $20
+	db $80
 
 .frame_6
 	frame_oam -34,  -4, $0e, $20
-
-	INCROM $14386, $1439b
+	frame_oam -34, -12, $10, $20
+	frame_oam -18,   4, $2c, $20
+	frame_oam -18,  -4, $2e, $20
+	frame_oam -18, -12, $30, $20
+	frame_oam -34,   4, $00, $20
+	db $80
 
 .frame_7
 	frame_oam -32,   5, $12, $20
-
-	INCROM $1439f, $143b4
+	frame_oam -32,  -3, $14, $20
+	frame_oam -32, -11, $16, $20
+	frame_oam -16,   5, $32, $20
+	frame_oam -16,  -3, $34, $20
+	frame_oam -16, -11, $36, $20
+	db $80
 
 .frame_8
 	frame_oam -32, -12, $00, $00
-
-	INCROM $143b8, $143d1
+	frame_oam -32,  -4, $02, $00
+	frame_oam -32,   4, $04, $00
+	frame_oam -16, -12, $20, $00
+	frame_oam -16,  -4, $22, $00
+	frame_oam -16,   4, $24, $00
+	frame_oam -18, -16, $0c, $00
+	db $80
 
 .frame_9
 	frame_oam -32, -12, $06, $00
-
-	INCROM $143d5, $143ee
+	frame_oam -32,  -4, $08, $00
+	frame_oam -32,   4, $0a, $00
+	frame_oam -16, -12, $26, $00
+	frame_oam -16,  -4, $28, $00
+	frame_oam -16,   4, $2a, $00
+	frame_oam -17, -16, $0c, $00
+	db $80
 
 .frame_10
 	frame_oam -34,  -4, $0e, $00
-
-	INCROM $143f2, $1440b
+	frame_oam -34,   4, $10, $00
+	frame_oam -18, -12, $2c, $00
+	frame_oam -18,  -4, $2e, $00
+	frame_oam -18,   4, $30, $00
+	frame_oam -34, -12, $00, $00
+	frame_oam -17, -16, $0c, $00
+	db $80
 
 .frame_11
 	frame_oam -32, -13, $12, $00
-
-	INCROM $1440f, $14428
+	frame_oam -32,  -5, $14, $00
+	frame_oam -32,   3, $16, $00
+	frame_oam -16, -13, $32, $00
+	frame_oam -16,  -5, $34, $00
+	frame_oam -16,   3, $36, $00
+	frame_oam -17, -16, $0c, $00
+	db $80
 
 .frame_12
 	frame_oam -32, -12, $00, $00
-
-	INCROM $1442c, $14445
+	frame_oam -32,  -4, $02, $00
+	frame_oam -32,   4, $04, $00
+	frame_oam -16, -12, $20, $00
+	frame_oam -16,  -4, $22, $00
+	frame_oam -16,   4, $24, $00
+	frame_oam -17, -15, $0c, $00
+	db $80
 
 .frame_13
 	frame_oam -32, -12, $06, $00
-
-	INCROM $14449, $14462
+	frame_oam -32,  -4, $08, $00
+	frame_oam -32,   4, $0a, $00
+	frame_oam -16, -12, $26, $00
+	frame_oam -16,  -4, $28, $00
+	frame_oam -16,   4, $2a, $00
+	frame_oam -17, -15, $0c, $00
+	db $80
 
 .frame_14
 	frame_oam -34,  -4, $0e, $00
-
-	INCROM $14466, $1447f
+	frame_oam -34,   4, $10, $00
+	frame_oam -18, -12, $2c, $00
+	frame_oam -18,  -4, $2e, $00
+	frame_oam -18,   4, $30, $00
+	frame_oam -34, -12, $00, $00
+	frame_oam -18, -15, $0c, $00
+	db $80
 
 .frame_15
 	frame_oam -32, -13, $12, $00
-
-	INCROM $14483, $1449c
+	frame_oam -32,  -5, $14, $00
+	frame_oam -32,   3, $16, $00
+	frame_oam -16, -13, $32, $00
+	frame_oam -16,  -5, $34, $00
+	frame_oam -16,   3, $36, $00
+	frame_oam -17, -15, $0c, $00
+	db $80
 
 .frame_16
 	frame_oam -32,   4, $00, $20
-
-	INCROM $144a0, $144b9
+	frame_oam -32,  -4, $02, $20
+	frame_oam -32, -12, $04, $20
+	frame_oam -16,   4, $20, $20
+	frame_oam -16,  -4, $22, $20
+	frame_oam -16, -12, $24, $20
+	frame_oam -18,   8, $0c, $20
+	db $80
 
 .frame_17
 	frame_oam -32,   4, $06, $20
-
-	INCROM $144bd, $144d6
+	frame_oam -32,  -4, $08, $20
+	frame_oam -32, -12, $0a, $20
+	frame_oam -16,   4, $26, $20
+	frame_oam -16,  -4, $28, $20
+	frame_oam -16, -12, $2a, $20
+	frame_oam -17,   8, $0c, $20
+	db $80
 
 .frame_18
 	frame_oam -34,  -4, $0e, $20
-
-	INCROM $144da, $144f3
+	frame_oam -34, -12, $10, $20
+	frame_oam -18,   4, $2c, $20
+	frame_oam -18,  -4, $2e, $20
+	frame_oam -18, -12, $30, $20
+	frame_oam -34,   4, $00, $20
+	frame_oam -17,   8, $0c, $20
+	db $80
 
 .frame_19
 	frame_oam -32,   5, $12, $20
-
-	INCROM $144f7, $14510
+	frame_oam -32,  -3, $14, $20
+	frame_oam -32, -11, $16, $20
+	frame_oam -16,   5, $32, $20
+	frame_oam -16,  -3, $34, $20
+	frame_oam -16, -11, $36, $20
+	frame_oam -17,   8, $0c, $20
+	db $80
 
 .frame_20
 	frame_oam -32,   4, $00, $20
-
-	INCROM $14514, $1452d
+	frame_oam -32,  -4, $02, $20
+	frame_oam -32, -12, $04, $20
+	frame_oam -16,   4, $20, $20
+	frame_oam -16,  -4, $22, $20
+	frame_oam -16, -12, $24, $20
+	frame_oam -17,   7, $0c, $20
+	db $80
 
 .frame_21
 	frame_oam -32,   4, $06, $20
-
-	INCROM $14531, $1454a
+	frame_oam -32,  -4, $08, $20
+	frame_oam -32, -12, $0a, $20
+	frame_oam -16,   4, $26, $20
+	frame_oam -16,  -4, $28, $20
+	frame_oam -16, -12, $2a, $20
+	frame_oam -17,   7, $0c, $20
+	db $80
 
 .frame_22
 	frame_oam -34,  -4, $0e, $20
-
-	INCROM $1454e, $14567
+	frame_oam -34, -12, $10, $20
+	frame_oam -18,   4, $2c, $20
+	frame_oam -18,  -4, $2e, $20
+	frame_oam -18, -12, $30, $20
+	frame_oam -34,   4, $00, $20
+	frame_oam -18,   7, $0c, $20
+	db $80
 
 .frame_23
 	frame_oam -32,   5, $12, $20
-
-	INCROM $1456b, $14584
+	frame_oam -32,  -3, $14, $20
+	frame_oam -32, -11, $16, $20
+	frame_oam -16,   5, $32, $20
+	frame_oam -16,  -3, $34, $20
+	frame_oam -16, -11, $36, $20
+	frame_oam -17,   7, $0c, $20
+	db $80
 
 .frame_24
 	frame_oam -32, -12, $18, $00
-
-	INCROM $14588, $1459d
+	frame_oam -32,  -4, $1a, $00
+	frame_oam -16, -12, $26, $00
+	frame_oam -16,  -4, $28, $00
+	frame_oam -16,   4, $2a, $00
+	frame_oam -32,   4, $0a, $00
+	db $80
 
 .frame_25
 	frame_oam -33, -12, $1e, $00
-
-	INCROM $145a1, $145b6
+	frame_oam -33,  -4, $3e, $00
+	frame_oam -33,   4, $10, $00
+	frame_oam -17, -12, $2c, $00
+	frame_oam -17,  -4, $2e, $00
+	frame_oam -17,   4, $30, $00
+	db $80
 
 .frame_26
 	frame_oam -32, -13, $40, $00
-
-	INCROM $145ba, $145cf
+	frame_oam -32,  -5, $42, $00
+	frame_oam -32,   3, $16, $00
+	frame_oam -16, -13, $32, $00
+	frame_oam -16,  -5, $34, $00
+	frame_oam -16,   3, $36, $00
+	db $80
 
 .frame_27
 	frame_oam -32,   4, $18, $20
-
-	INCROM $145d3, $145e8
+	frame_oam -32,  -4, $1a, $20
+	frame_oam -16,   4, $26, $20
+	frame_oam -16,  -4, $28, $20
+	frame_oam -16, -12, $2a, $20
+	frame_oam -32, -12, $0a, $20
+	db $80
 
 .frame_28
 	frame_oam -33,   4, $1e, $20
-
-	INCROM $145ec, $14601
+	frame_oam -33,  -4, $3e, $20
+	frame_oam -33, -12, $10, $20
+	frame_oam -17,   4, $2c, $20
+	frame_oam -17,  -4, $2e, $20
+	frame_oam -17, -12, $30, $20
+	db $80
 
 .frame_29
 	frame_oam -32,   5, $40, $20
-
-	INCROM $14605, $1461a
+	frame_oam -32,  -3, $42, $20
+	frame_oam -32, -11, $16, $20
+	frame_oam -16,   5, $32, $20
+	frame_oam -16,  -3, $34, $20
+	frame_oam -16, -11, $36, $20
+	db $80
 
 .frame_30
 	frame_oam -32, -12, $18, $00
-
-	INCROM $1461e, $14633
+	frame_oam -32,  -4, $1a, $00
+	frame_oam -32,   4, $1c, $00
+	frame_oam -16, -12, $38, $00
+	frame_oam -16,  -4, $3a, $00
+	frame_oam -16,   4, $3c, $00
+	db $80
 
 .frame_31
 	frame_oam -32,   4, $18, $20
-
-	INCROM $14637, $1464c
+	frame_oam -32,  -4, $1a, $20
+	frame_oam -32, -12, $1c, $20
+	frame_oam -16,   4, $38, $20
+	frame_oam -16,  -4, $3a, $20
+	frame_oam -16, -12, $3c, $20
+	db $80
 
 .frame_32
 	frame_oam -31, -12, $44, $00
-
-	INCROM $14650, $14665
+	frame_oam -31,  -4, $46, $00
+	frame_oam -31,   4, $48, $00
+	frame_oam -15, -12, $4c, $00
+	frame_oam -15,  -4, $4e, $00
+	frame_oam -15,   4, $50, $00
+	db $80
 
 .frame_33
 	frame_oam -32, -12, $44, $00
-
-	INCROM $14669, $1467e
+	frame_oam -32,  -4, $46, $00
+	frame_oam -32,   4, $4a, $00
+	frame_oam -16, -12, $52, $00
+	frame_oam -16,  -4, $54, $00
+	frame_oam -16,   4, $56, $00
+	db $80
 
 .frame_34
 	frame_oam -32, -12, $44, $00
-
-	INCROM $14682, $14697
+	frame_oam -32,  -4, $46, $00
+	frame_oam -32,   4, $4a, $00
+	frame_oam -16, -12, $58, $00
+	frame_oam -16,  -4, $5a, $00
+	frame_oam -16,   4, $5c, $00
+	db $80
 
 .frame_35
 	frame_oam -31, -13, $44, $00
-
-	INCROM $1469b, $146b0
+	frame_oam -31,  -5, $46, $00
+	frame_oam -31,   3, $48, $00
+	frame_oam -15, -13, $5e, $00
+	frame_oam -15,  -5, $60, $00
+	frame_oam -15,   3, $62, $00
+	db $80
 
 .frame_36
 	frame_oam -31,   4, $44, $20
-
-	INCROM $146b4, $146c9
+	frame_oam -31,  -4, $46, $20
+	frame_oam -31, -12, $48, $20
+	frame_oam -15,   4, $4c, $20
+	frame_oam -15,  -4, $4e, $20
+	frame_oam -15, -12, $50, $20
+	db $80
 
 .frame_37
 	frame_oam -32,   4, $44, $20
-
-	INCROM $146cd, $146e2
+	frame_oam -32,  -4, $46, $20
+	frame_oam -32, -12, $4a, $20
+	frame_oam -16,   4, $52, $20
+	frame_oam -16,  -4, $54, $20
+	frame_oam -16, -12, $56, $20
+	db $80
 
 .frame_38
 	frame_oam -32,   4, $44, $20
-
-	INCROM $146e6, $146fb
+	frame_oam -32,  -4, $46, $20
+	frame_oam -32, -12, $4a, $20
+	frame_oam -16,   4, $58, $20
+	frame_oam -16,  -4, $5a, $20
+	frame_oam -16, -12, $5c, $20
+	db $80
 
 .frame_39
 	frame_oam -31,   5, $44, $20
-
-	INCROM $146ff, $14714
+	frame_oam -31,  -3, $46, $20
+	frame_oam -31, -11, $48, $20
+	frame_oam -15,   5, $5e, $20
+	frame_oam -15,  -3, $60, $20
+	frame_oam -15, -11, $62, $20
+	db $80
 
 .frame_40
 	frame_oam -31, -12, $44, $00
-
-	INCROM $14718, $14731
+	frame_oam -31,  -4, $46, $00
+	frame_oam -31,   4, $48, $00
+	frame_oam -15, -12, $4c, $00
+	frame_oam -15,  -4, $4e, $00
+	frame_oam -15,   4, $50, $00
+	frame_oam -15, -18, $0c, $00
+	db $80
 
 .frame_41
 	frame_oam -32, -12, $44, $00
-
-	INCROM $14735, $1474e
+	frame_oam -32,  -4, $46, $00
+	frame_oam -32,   4, $4a, $00
+	frame_oam -16, -12, $52, $00
+	frame_oam -16,  -4, $54, $00
+	frame_oam -16,   4, $56, $00
+	frame_oam -15, -18, $0c, $00
+	db $80
 
 .frame_42
 	frame_oam -32, -12, $44, $00
-
-	INCROM $14752, $1476b
+	frame_oam -32,  -4, $46, $00
+	frame_oam -32,   4, $4a, $00
+	frame_oam -16, -12, $58, $00
+	frame_oam -16,  -4, $5a, $00
+	frame_oam -16,   4, $5c, $00
+	frame_oam -15, -18, $0c, $00
+	db $80
 
 .frame_43
 	frame_oam -31, -13, $44, $00
-
-	INCROM $1476f, $14788
+	frame_oam -31,  -5, $46, $00
+	frame_oam -31,   3, $48, $00
+	frame_oam -15, -13, $5e, $00
+	frame_oam -15,  -5, $60, $00
+	frame_oam -15,   3, $62, $00
+	frame_oam -15, -19, $0c, $00
+	db $80
 
 .frame_44
 	frame_oam -31, -12, $44, $00
-
-	INCROM $1478c, $147a5
+	frame_oam -31,  -4, $46, $00
+	frame_oam -31,   4, $48, $00
+	frame_oam -15, -12, $4c, $00
+	frame_oam -15,  -4, $4e, $00
+	frame_oam -15,   4, $50, $00
+	frame_oam -15, -17, $0c, $00
+	db $80
 
 .frame_45
 	frame_oam -32, -12, $44, $00
-
-	INCROM $147a9, $147c2
+	frame_oam -32,  -4, $46, $00
+	frame_oam -32,   4, $4a, $00
+	frame_oam -16, -12, $52, $00
+	frame_oam -16,  -4, $54, $00
+	frame_oam -16,   4, $56, $00
+	frame_oam -15, -17, $0c, $00
+	db $80
 
 .frame_46
 	frame_oam -32, -12, $44, $00
-
-	INCROM $147c6, $147df
+	frame_oam -32,  -4, $46, $00
+	frame_oam -32,   4, $4a, $00
+	frame_oam -16, -12, $58, $00
+	frame_oam -16,  -4, $5a, $00
+	frame_oam -16,   4, $5c, $00
+	frame_oam -15, -17, $0c, $00
+	db $80
 
 .frame_47
 	frame_oam -31, -13, $44, $00
-
-	INCROM $147e3, $147fc
+	frame_oam -31,  -5, $46, $00
+	frame_oam -31,   3, $48, $00
+	frame_oam -15, -13, $5e, $00
+	frame_oam -15,  -5, $60, $00
+	frame_oam -15,   3, $62, $00
+	frame_oam -15, -18, $0c, $00
+	db $80
 
 .frame_48
 	frame_oam -31,   4, $44, $20
-
-	INCROM $14800, $14819
+	frame_oam -31,  -4, $46, $20
+	frame_oam -31, -12, $48, $20
+	frame_oam -15,   4, $4c, $20
+	frame_oam -15,  -4, $4e, $20
+	frame_oam -15, -12, $50, $20
+	frame_oam -15,  10, $0c, $20
+	db $80
 
 .frame_49
 	frame_oam -32,   4, $44, $20
-
-	INCROM $1481d, $14836
+	frame_oam -32,  -4, $46, $20
+	frame_oam -32, -12, $4a, $20
+	frame_oam -16,   4, $52, $20
+	frame_oam -16,  -4, $54, $20
+	frame_oam -16, -12, $56, $20
+	frame_oam -15,  10, $0c, $20
+	db $80
 
 .frame_50
 	frame_oam -32,   4, $44, $20
-
-	INCROM $1483a, $14853
+	frame_oam -32,  -4, $46, $20
+	frame_oam -32, -12, $4a, $20
+	frame_oam -16,   4, $58, $20
+	frame_oam -16,  -4, $5a, $20
+	frame_oam -16, -12, $5c, $20
+	frame_oam -15,  10, $0c, $20
+	db $80
 
 .frame_51
 	frame_oam -31,   5, $44, $20
-
-	INCROM $14857, $14870
+	frame_oam -31,  -3, $46, $20
+	frame_oam -31, -11, $48, $20
+	frame_oam -15,   5, $5e, $20
+	frame_oam -15,  -3, $60, $20
+	frame_oam -15, -11, $62, $20
+	frame_oam -15,  11, $0c, $20
+	db $80
 
 .frame_52
 	frame_oam -31,   4, $44, $20
-
-	INCROM $14874, $1488d
+	frame_oam -31,  -4, $46, $20
+	frame_oam -31, -12, $48, $20
+	frame_oam -15,   4, $4c, $20
+	frame_oam -15,  -4, $4e, $20
+	frame_oam -15, -12, $50, $20
+	frame_oam -15,   9, $0c, $20
+	db $80
 
 .frame_53
 	frame_oam -32,   4, $44, $20
-
-	INCROM $14891, $148aa
+	frame_oam -32,  -4, $46, $20
+	frame_oam -32, -12, $4a, $20
+	frame_oam -16,   4, $52, $20
+	frame_oam -16,  -4, $54, $20
+	frame_oam -16, -12, $56, $20
+	frame_oam -15,   9, $0c, $20
+	db $80
 
 .frame_54
 	frame_oam -32,   4, $44, $20
-
-	INCROM $148ae, $148c7
+	frame_oam -32,  -4, $46, $20
+	frame_oam -32, -12, $4a, $20
+	frame_oam -16,   4, $58, $20
+	frame_oam -16,  -4, $5a, $20
+	frame_oam -16, -12, $5c, $20
+	frame_oam -15,   9, $0c, $20
+	db $80
 
 .frame_55
 	frame_oam -31,   4, $44, $20
-
-	INCROM $148cb, $148e4
+	frame_oam -31,  -4, $46, $20
+	frame_oam -31, -12, $48, $20
+	frame_oam -15,   4, $5e, $20
+	frame_oam -15,  -4, $60, $20
+	frame_oam -15, -12, $62, $20
+	frame_oam -15,   9, $0c, $20
+	db $80
 
 .frame_56
 	frame_oam -32, -11, $64, $00
-
-	INCROM $148e8, $148fd
+	frame_oam -32,  -3, $66, $00
+	frame_oam -32,   5, $68, $00
+	frame_oam -16, -11, $6a, $00
+	frame_oam -16,  -3, $6c, $00
+	frame_oam -16,   5, $6e, $00
+	db $80
 
 .frame_57
 	frame_oam -32,   3, $64, $20
-
-	INCROM $14901, $14916
+	frame_oam -32,  -5, $66, $20
+	frame_oam -32, -13, $68, $20
+	frame_oam -16,   3, $6a, $20
+	frame_oam -16,  -5, $6c, $20
+	frame_oam -16, -13, $6e, $20
+	db $80
 
 .frame_58
 	frame_oam -32, -12, $06, $00
-
-	INCROM $1491a, $1492f
+	frame_oam -32,  -4, $70, $00
+	frame_oam -32,   4, $72, $00
+	frame_oam -16, -12, $74, $00
+	frame_oam -16,  -4, $76, $00
+	frame_oam -16,   4, $78, $00
+	db $80
 
 .frame_59
 	frame_oam -32,   4, $06, $20
-
-	INCROM $14933, $14948
+	frame_oam -32,  -4, $70, $20
+	frame_oam -32, -12, $72, $20
+	frame_oam -16,   4, $74, $20
+	frame_oam -16,  -4, $76, $20
+	frame_oam -16, -12, $78, $20
+	db $80
 
 .frame_60
 	frame_oam -32,   4, $1c, $00
-
-	INCROM $1494c, $14965
+	frame_oam -16, -12, $38, $00
+	frame_oam -16,  -4, $3a, $00
+	frame_oam -16,   4, $3c, $00
+	frame_oam -32, -12, $06, $00
+	frame_oam -32,  -4, $08, $00
+	frame_oam -19, -16, $0c, $00
+	db $80
 
 .frame_61
 	frame_oam -32, -12, $1c, $20
-
-	INCROM $14969, $14982
+	frame_oam -16,   4, $38, $20
+	frame_oam -16,  -4, $3a, $20
+	frame_oam -16, -12, $3c, $20
+	frame_oam -32,   4, $06, $20
+	frame_oam -32,  -4, $08, $20
+	frame_oam -19,   8, $0c, $20
+	db $80
 
 .frame_62
 	frame_oam -32,   4, $04, $00
-
-	INCROM $14986, $1499b
+	frame_oam -16, -12, $20, $00
+	frame_oam -16,  -4, $22, $00
+	frame_oam -16,   4, $24, $00
+	frame_oam -32, -12, $7a, $00
+	frame_oam -32,  -4, $7c, $00
+	db $80
 
 .frame_63
 	frame_oam -32, -12, $04, $20
-; 0x1499f
-
-	INCROM $1499f, $149b4
+	frame_oam -16,   4, $20, $20
+	frame_oam -16,  -4, $22, $20
+	frame_oam -16, -12, $24, $20
+	frame_oam -32,   4, $7a, $20
+	frame_oam -32,  -4, $7c, $20
+	db $80
+; 0x149b4
 
 Frameset_149b4: ; 149b4 (5:49b4)
 	db $00,  3
@@ -738,7 +1108,7 @@ Frameset_14a7f: ; 14a7f (5:4a7f)
 	db $ff
 ; 0x14a82
 
-OAM_14a82: ; 14a82 (5:4a82)
+OAM_14a82: ; 14a82 (05:4a82)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -762,104 +1132,192 @@ OAM_14a82: ; 14a82 (5:4a82)
 
 .frame_0
 	frame_oam -31,   4, $00, $20
-
-	INCROM $14aae, $14ac3
+	frame_oam -31,  -4, $02, $20
+	frame_oam -31, -12, $04, $20
+	frame_oam -15,   4, $20, $20
+	frame_oam -15,  -4, $22, $20
+	frame_oam -15, -12, $24, $20
+	db $80
 
 .frame_1
 	frame_oam -32,   4, $46, $20
-
-	INCROM $14ac7, $14adc
+	frame_oam -32,  -4, $48, $20
+	frame_oam -32, -12, $4a, $20
+	frame_oam -16,   4, $66, $20
+	frame_oam -16,  -4, $68, $20
+	frame_oam -16, -12, $6a, $20
+	db $80
 
 .frame_2
 	frame_oam -32, -16, $4c, $00
-
-	INCROM $14ae0, $14afd
+	frame_oam -32,  -8, $4e, $00
+	frame_oam -16, -16, $6c, $00
+	frame_oam -16,  -8, $6e, $00
+	frame_oam -32,   8, $4c, $20
+	frame_oam -32,   0, $4e, $20
+	frame_oam -16,   8, $6c, $20
+	frame_oam -16,   0, $6e, $20
+	db $80
 
 .frame_3
 	frame_oam -32, -12, $46, $00
-
-	INCROM $14b01, $14b16
+	frame_oam -32,  -4, $48, $00
+	frame_oam -32,   4, $4a, $00
+	frame_oam -16, -12, $66, $00
+	frame_oam -16,  -4, $68, $00
+	frame_oam -16,   4, $6a, $00
+	db $80
 
 .frame_4
 	frame_oam -31, -12, $00, $00
-
-	INCROM $14b1a, $14b2f
+	frame_oam -31,  -4, $02, $00
+	frame_oam -31,   4, $04, $00
+	frame_oam -15, -12, $20, $00
+	frame_oam -15,  -4, $22, $00
+	frame_oam -15,   4, $24, $00
+	db $80
 
 .frame_5
 	frame_oam -32,  -4, $5c, $00
-
-	INCROM $14b33, $14b48
+	frame_oam -32,   4, $5e, $00
+	frame_oam -16, -12, $7a, $00
+	frame_oam -16,  -4, $7c, $00
+	frame_oam -16,   4, $7e, $00
+	frame_oam -31, -12, $00, $00
+	db $80
 
 .frame_6
 	frame_oam -32, -12, $54, $00
-
-	INCROM $14b4c, $14b61
+	frame_oam -32,  -4, $56, $00
+	frame_oam -32,   4, $58, $00
+	frame_oam -16, -12, $74, $00
+	frame_oam -16,  -4, $76, $00
+	frame_oam -16,   4, $78, $00
+	db $80
 
 .frame_7
 	frame_oam -32,   0, $50, $00
-
-	INCROM $14b65, $14b82
+	frame_oam -16,   0, $70, $00
+	frame_oam -16,   8, $72, $00
+	frame_oam -32,   8, $4c, $20
+	frame_oam -32,  -8, $50, $20
+	frame_oam -16,  -8, $70, $20
+	frame_oam -16, -16, $72, $20
+	frame_oam -32, -16, $4c, $00
+	db $80
 
 .frame_8
 	frame_oam -32,   4, $54, $20
-
-	INCROM $14b86, $14b9b
+	frame_oam -32,  -4, $56, $20
+	frame_oam -32, -12, $58, $20
+	frame_oam -16,   4, $74, $20
+	frame_oam -16,  -4, $76, $20
+	frame_oam -16, -12, $78, $20
+	db $80
 
 .frame_9
 	frame_oam -32,  -4, $5c, $20
-
-	INCROM $14b9f, $14bb4
+	frame_oam -32, -12, $5e, $20
+	frame_oam -16,   4, $7a, $20
+	frame_oam -16,  -4, $7c, $20
+	frame_oam -16, -12, $7e, $20
+	frame_oam -32,   4, $40, $20
+	db $80
 
 .frame_10
 	frame_oam -31,  -4, $00, $20
-
-	INCROM $14bb8, $14bcd
+	frame_oam -31, -12, $02, $20
+	frame_oam -31, -20, $04, $20
+	frame_oam -15,  -4, $20, $20
+	frame_oam -15, -12, $22, $20
+	frame_oam -15, -20, $24, $20
+	db $80
 
 .frame_11
 	frame_oam -32,  -4, $46, $20
-
-	INCROM $14bd1, $14be6
+	frame_oam -32, -12, $48, $20
+	frame_oam -32, -20, $4a, $20
+	frame_oam -16,  -4, $66, $20
+	frame_oam -16, -12, $68, $20
+	frame_oam -16, -20, $6a, $20
+	db $80
 
 .frame_12
 	frame_oam -32, -24, $4c, $00
-
-	INCROM $14bea, $14c07
+	frame_oam -32, -16, $4e, $00
+	frame_oam -16, -24, $6c, $00
+	frame_oam -16, -16, $6e, $00
+	frame_oam -32,   0, $4c, $20
+	frame_oam -32,  -8, $4e, $20
+	frame_oam -16,   0, $6c, $20
+	frame_oam -16,  -8, $6e, $20
+	db $80
 
 .frame_13
 	frame_oam -32, -20, $46, $00
-
-	INCROM $14c0b, $14c20
+	frame_oam -32, -12, $48, $00
+	frame_oam -32,  -4, $4a, $00
+	frame_oam -16, -20, $66, $00
+	frame_oam -16, -12, $68, $00
+	frame_oam -16,  -4, $6a, $00
+	db $80
 
 .frame_14
 	frame_oam -31, -20, $00, $00
-
-	INCROM $14c24, $14c39
+	frame_oam -31, -12, $02, $00
+	frame_oam -31,  -4, $04, $00
+	frame_oam -15, -20, $20, $00
+	frame_oam -15, -12, $22, $00
+	frame_oam -15,  -4, $24, $00
+	db $80
 
 .frame_15
 	frame_oam -32, -12, $5c, $00
-
-	INCROM $14c3d, $14c52
+	frame_oam -32,  -4, $5e, $00
+	frame_oam -16, -20, $7a, $00
+	frame_oam -16, -12, $7c, $00
+	frame_oam -16,  -4, $7e, $00
+	frame_oam -31, -20, $40, $00
+	db $80
 
 .frame_16
 	frame_oam -32, -20, $54, $00
-
-	INCROM $14c56, $14c6b
+	frame_oam -32, -12, $56, $00
+	frame_oam -32,  -4, $58, $00
+	frame_oam -16, -20, $74, $00
+	frame_oam -16, -12, $76, $00
+	frame_oam -16,  -4, $78, $00
+	db $80
 
 .frame_17
 	frame_oam -32,  -8, $50, $00
-
-	INCROM $14c6f, $14c8c
+	frame_oam -16,  -8, $70, $00
+	frame_oam -16,   0, $72, $00
+	frame_oam -32,   0, $4c, $20
+	frame_oam -32, -16, $50, $20
+	frame_oam -16, -16, $70, $20
+	frame_oam -16, -24, $72, $20
+	frame_oam -32, -24, $4c, $00
+	db $80
 
 .frame_18
 	frame_oam -32,  -4, $54, $20
-
-	INCROM $14c90, $14ca5
+	frame_oam -32, -12, $56, $20
+	frame_oam -32, -20, $58, $20
+	frame_oam -16,  -4, $74, $20
+	frame_oam -16, -12, $76, $20
+	frame_oam -16, -20, $78, $20
+	db $80
 
 .frame_19
 	frame_oam -32, -12, $5c, $20
-; 0x14ca9
-
-	INCROM $14ca9, $14cbe
+	frame_oam -32, -20, $5e, $20
+	frame_oam -16,  -4, $7a, $20
+	frame_oam -16, -12, $7c, $20
+	frame_oam -16, -20, $7e, $20
+	frame_oam -31,  -4, $40, $20
+	db $80
+; 0x14cbe
 
 Frameset_14cbe: ; 14cbe (5:4cbe)
 	db $01,  1
@@ -931,7 +1389,7 @@ Frameset_14d18: ; 14d18 (5:4d18)
 	db $ff
 ; 0x14d1b
 
-OAM_14d1b: ; 14d1b (5:4d1b)
+OAM_14d1b: ; 14d1b (05:4d1b)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -970,179 +1428,389 @@ OAM_14d1b: ; 14d1b (5:4d1b)
 
 .frame_0
 	frame_oam -40, -16, $00, $00
-
-	INCROM $14d65, $14d82
+	frame_oam -31,  -8, $02, $00
+	frame_oam -31,   0, $04, $00
+	frame_oam -31,   8, $06, $00
+	frame_oam -24, -16, $20, $00
+	frame_oam -15,  -8, $22, $00
+	frame_oam -15,   0, $24, $00
+	frame_oam -15,   8, $26, $00
+	db $80
 
 .frame_1
 	frame_oam -31,  -9, $0a, $00
-
-	INCROM $14d86, $14da3
+	frame_oam -31,  -1, $0c, $00
+	frame_oam -31,   7, $0e, $00
+	frame_oam -25, -17, $28, $00
+	frame_oam -15,  -9, $2a, $00
+	frame_oam -15,  -1, $2c, $00
+	frame_oam -15,   7, $2e, $00
+	frame_oam -41, -17, $00, $00
+	db $80
 
 .frame_2
 	frame_oam -32,  -9, $12, $00
-
-	INCROM $14da7, $14dc4
+	frame_oam -32,  -1, $14, $00
+	frame_oam -32,   7, $16, $00
+	frame_oam -26, -17, $30, $00
+	frame_oam -16,  -9, $32, $00
+	frame_oam -16,  -1, $34, $00
+	frame_oam -16,   7, $36, $00
+	frame_oam -42, -17, $00, $00
+	db $80
 
 .frame_3
 	frame_oam -40, -15, $18, $00
-
-	INCROM $14dc8, $14de5
+	frame_oam -31,  -7, $1a, $00
+	frame_oam -31,   1, $1c, $00
+	frame_oam -31,   9, $1e, $00
+	frame_oam -24, -15, $38, $00
+	frame_oam -15,  -7, $3a, $00
+	frame_oam -15,   1, $3c, $00
+	frame_oam -15,   9, $3e, $00
+	db $80
 
 .frame_4
 	frame_oam -40, -16, $00, $00
-
-	INCROM $14de9, $14e06
+	frame_oam -31,   8, $06, $00
+	frame_oam -24, -16, $20, $00
+	frame_oam -15,  -8, $22, $00
+	frame_oam -15,   0, $24, $00
+	frame_oam -15,   8, $26, $00
+	frame_oam -31,  -8, $40, $00
+	frame_oam -31,   0, $42, $00
+	db $80
 
 .frame_5
 	frame_oam -31,   7, $0e, $00
-
-	INCROM $14e0a, $14e27
+	frame_oam -25, -17, $28, $00
+	frame_oam -15,  -9, $2a, $00
+	frame_oam -15,  -1, $2c, $00
+	frame_oam -15,   7, $2e, $00
+	frame_oam -31,  -9, $44, $00
+	frame_oam -31,  -1, $46, $00
+	frame_oam -41, -17, $00, $00
+	db $80
 
 .frame_6
 	frame_oam -32,   7, $16, $00
-
-	INCROM $14e2b, $14e48
+	frame_oam -26, -17, $30, $00
+	frame_oam -16,  -9, $32, $00
+	frame_oam -16,  -1, $34, $00
+	frame_oam -16,   7, $36, $00
+	frame_oam -32,  -9, $48, $00
+	frame_oam -32,  -1, $4a, $00
+	frame_oam -42, -17, $00, $00
+	db $80
 
 .frame_7
 	frame_oam -40, -15, $18, $00
-
-	INCROM $14e4c, $14e69
+	frame_oam -31,   9, $1e, $00
+	frame_oam -24, -15, $38, $00
+	frame_oam -15,  -7, $3a, $00
+	frame_oam -15,   1, $3c, $00
+	frame_oam -15,   9, $3e, $00
+	frame_oam -31,  -7, $4c, $00
+	frame_oam -31,   1, $4e, $00
+	db $80
 
 .frame_8
 	frame_oam -40,   8, $00, $20
-
-	INCROM $14e6d, $14e8a
+	frame_oam -31,   0, $02, $20
+	frame_oam -31,  -8, $04, $20
+	frame_oam -31, -16, $06, $20
+	frame_oam -24,   8, $20, $20
+	frame_oam -15,   0, $22, $20
+	frame_oam -15,  -8, $24, $20
+	frame_oam -15, -16, $26, $20
+	db $80
 
 .frame_9
 	frame_oam -31,   1, $0a, $20
-
-	INCROM $14e8e, $14eab
+	frame_oam -31,  -7, $0c, $20
+	frame_oam -31, -15, $0e, $20
+	frame_oam -25,   9, $28, $20
+	frame_oam -15,   1, $2a, $20
+	frame_oam -15,  -7, $2c, $20
+	frame_oam -15, -15, $2e, $20
+	frame_oam -41,   9, $00, $20
+	db $80
 
 .frame_10
 	frame_oam -32,   1, $12, $20
-
-	INCROM $14eaf, $14ecc
+	frame_oam -32,  -7, $14, $20
+	frame_oam -32, -15, $16, $20
+	frame_oam -26,   9, $30, $20
+	frame_oam -16,   1, $32, $20
+	frame_oam -16,  -7, $34, $20
+	frame_oam -16, -15, $36, $20
+	frame_oam -42,   9, $00, $20
+	db $80
 
 .frame_11
 	frame_oam -40,   7, $18, $20
-
-	INCROM $14ed0, $14eed
+	frame_oam -31,  -1, $1a, $20
+	frame_oam -31,  -9, $1c, $20
+	frame_oam -31, -17, $1e, $20
+	frame_oam -24,   7, $38, $20
+	frame_oam -15,  -1, $3a, $20
+	frame_oam -15,  -9, $3c, $20
+	frame_oam -15, -17, $3e, $20
+	db $80
 
 .frame_12
 	frame_oam -40,   8, $00, $20
-
-	INCROM $14ef1, $14f0e
+	frame_oam -31, -16, $06, $20
+	frame_oam -24,   8, $20, $20
+	frame_oam -15,   0, $22, $20
+	frame_oam -15,  -8, $24, $20
+	frame_oam -15, -16, $26, $20
+	frame_oam -31,   0, $40, $20
+	frame_oam -31,  -8, $42, $20
+	db $80
 
 .frame_13
 	frame_oam -31, -15, $0e, $20
-
-	INCROM $14f12, $14f2f
+	frame_oam -25,   9, $28, $20
+	frame_oam -15,   1, $2a, $20
+	frame_oam -15,  -7, $2c, $20
+	frame_oam -15, -15, $2e, $20
+	frame_oam -31,   1, $44, $20
+	frame_oam -31,  -7, $46, $20
+	frame_oam -41,   9, $00, $20
+	db $80
 
 .frame_14
 	frame_oam -32, -15, $16, $20
-
-	INCROM $14f33, $14f50
+	frame_oam -26,   9, $30, $20
+	frame_oam -16,   1, $32, $20
+	frame_oam -16,  -7, $34, $20
+	frame_oam -16, -15, $36, $20
+	frame_oam -32,   1, $48, $20
+	frame_oam -32,  -7, $4a, $20
+	frame_oam -42,   9, $00, $20
+	db $80
 
 .frame_15
 	frame_oam -40,   7, $18, $20
-
-	INCROM $14f54, $14f71
+	frame_oam -31, -17, $1e, $20
+	frame_oam -24,   7, $38, $20
+	frame_oam -15,  -1, $3a, $20
+	frame_oam -15,  -9, $3c, $20
+	frame_oam -15, -17, $3e, $20
+	frame_oam -31,  -1, $4c, $20
+	frame_oam -31,  -9, $4e, $20
+	db $80
 
 .frame_16
 	frame_oam -31,  -8, $02, $00
-
-	INCROM $14f75, $14f92
+	frame_oam -31,   0, $04, $00
+	frame_oam -15,  -8, $22, $00
+	frame_oam -15,   0, $24, $00
+	frame_oam -31,   8, $06, $00
+	frame_oam -15,   8, $26, $00
+	frame_oam -32, -16, $50, $01
+	frame_oam -16, -16, $50, $41
+	db $80
 
 .frame_17
 	frame_oam -32, -15, $52, $01
-
-	INCROM $14f96, $14fb3
+	frame_oam -16, -15, $52, $41
+	frame_oam -31,   7, $0e, $00
+	frame_oam -15,  -1, $2c, $00
+	frame_oam -15,   7, $2e, $00
+	frame_oam -31,  -1, $46, $00
+	frame_oam -15,  -9, $2a, $00
+	frame_oam -31,  -9, $44, $00
+	db $80
 
 .frame_18
 	frame_oam -32,  -1, $14, $00
-
-	INCROM $14fb7, $14fd4
+	frame_oam -32,   7, $16, $00
+	frame_oam -16,  -1, $34, $00
+	frame_oam -16,   7, $36, $00
+	frame_oam -33,  -9, $56, $00
+	frame_oam -17,  -9, $56, $40
+	frame_oam -33, -17, $54, $01
+	frame_oam -17, -17, $54, $41
+	db $80
 
 .frame_19
 	frame_oam -31,   9, $1e, $00
-
-	INCROM $14fd8, $14ff5
+	frame_oam -15,   9, $3e, $00
+	frame_oam -40, -15, $18, $01
+	frame_oam -32,   1, $58, $00
+	frame_oam -16,   1, $58, $40
+	frame_oam -32,  -7, $56, $00
+	frame_oam -16,  -7, $56, $40
+	frame_oam -24, -15, $5e, $01
+	db $80
 
 .frame_20
 	frame_oam -40, -16, $00, $00
-
-	INCROM $14ff9, $15016
+	frame_oam -31,  -8, $02, $00
+	frame_oam -31,   0, $04, $00
+	frame_oam -31,   8, $06, $00
+	frame_oam -15,  -8, $22, $00
+	frame_oam -15,   0, $24, $00
+	frame_oam -15,   8, $26, $00
+	frame_oam -24, -16, $5a, $00
+	db $80
 
 .frame_21
 	frame_oam -31,  -9, $0a, $00
-
-	INCROM $1501a, $15037
+	frame_oam -31,  -1, $0c, $00
+	frame_oam -31,   7, $0e, $00
+	frame_oam -15,  -9, $2a, $00
+	frame_oam -15,  -1, $2c, $00
+	frame_oam -15,   7, $2e, $00
+	frame_oam -41, -17, $00, $00
+	frame_oam -25, -17, $5c, $00
+	db $80
 
 .frame_22
 	frame_oam -31,   0, $02, $20
-
-	INCROM $1503b, $15058
+	frame_oam -31,  -8, $04, $20
+	frame_oam -15,   0, $22, $20
+	frame_oam -15,  -8, $24, $20
+	frame_oam -31, -16, $06, $20
+	frame_oam -15, -16, $26, $20
+	frame_oam -32,   8, $50, $21
+	frame_oam -16,   8, $50, $61
+	db $80
 
 .frame_23
 	frame_oam -32,   7, $52, $21
-
-	INCROM $1505c, $15079
+	frame_oam -16,   7, $52, $61
+	frame_oam -31, -15, $0e, $20
+	frame_oam -15,  -7, $2c, $20
+	frame_oam -15, -15, $2e, $20
+	frame_oam -31,  -7, $46, $20
+	frame_oam -15,   1, $2a, $20
+	frame_oam -31,   1, $44, $20
+	db $80
 
 .frame_24
 	frame_oam -32,  -7, $14, $20
-
-	INCROM $1507d, $1509a
+	frame_oam -32, -15, $16, $20
+	frame_oam -16,  -7, $34, $20
+	frame_oam -16, -15, $36, $20
+	frame_oam -33,   1, $56, $20
+	frame_oam -17,   1, $56, $60
+	frame_oam -33,   9, $54, $21
+	frame_oam -17,   9, $54, $61
+	db $80
 
 .frame_25
 	frame_oam -31, -17, $1e, $20
-
-	INCROM $1509e, $150bb
+	frame_oam -15, -17, $3e, $20
+	frame_oam -40,   7, $18, $21
+	frame_oam -32,  -9, $58, $20
+	frame_oam -16,  -9, $58, $60
+	frame_oam -32,  -1, $56, $20
+	frame_oam -16,  -1, $56, $60
+	frame_oam -24,   7, $5e, $21
+	db $80
 
 .frame_26
 	frame_oam -40,   8, $00, $20
-
-	INCROM $150bf, $150dc
+	frame_oam -31,   0, $02, $20
+	frame_oam -31,  -8, $04, $20
+	frame_oam -31, -16, $06, $20
+	frame_oam -15,   0, $22, $20
+	frame_oam -15,  -8, $24, $20
+	frame_oam -15, -16, $26, $20
+	frame_oam -24,   8, $5a, $20
+	db $80
 
 .frame_27
 	frame_oam -31,   1, $0a, $20
-
-	INCROM $150e0, $150fd
+	frame_oam -31,  -7, $0c, $20
+	frame_oam -31, -15, $0e, $20
+	frame_oam -15,   1, $2a, $20
+	frame_oam -15,  -7, $2c, $20
+	frame_oam -15, -15, $2e, $20
+	frame_oam -41,   9, $00, $20
+	frame_oam -25,   9, $5c, $20
+	db $80
 
 .frame_28
 	frame_oam -33, -17, $50, $01
-
-	INCROM $15101, $1511e
+	frame_oam -17, -17, $50, $41
+	frame_oam -32,  -9, $12, $00
+	frame_oam -32,  -1, $14, $00
+	frame_oam -32,   7, $16, $00
+	frame_oam -16,  -9, $32, $00
+	frame_oam -16,  -1, $34, $00
+	frame_oam -16,   7, $36, $00
+	db $80
 
 .frame_29
 	frame_oam -33, -15, $52, $01
-
-	INCROM $15122, $1513f
+	frame_oam -17, -15, $52, $41
+	frame_oam -32,  -9, $12, $00
+	frame_oam -32,  -1, $14, $00
+	frame_oam -32,   7, $16, $00
+	frame_oam -16,  -9, $32, $00
+	frame_oam -16,  -1, $34, $00
+	frame_oam -16,   7, $36, $00
+	db $80
 
 .frame_30
 	frame_oam -41, -17, $18, $01
-
-	INCROM $15143, $15160
+	frame_oam -33,  -1, $58, $00
+	frame_oam -17,  -1, $58, $40
+	frame_oam -33,  -9, $56, $00
+	frame_oam -17,  -9, $56, $40
+	frame_oam -25, -17, $5e, $01
+	frame_oam -32,   7, $16, $00
+	frame_oam -16,   7, $36, $00
+	db $80
 
 .frame_31
 	frame_oam -33,   9, $50, $21
-
-	INCROM $15164, $15181
+	frame_oam -17,   9, $50, $61
+	frame_oam -32,   1, $12, $20
+	frame_oam -32,  -7, $14, $20
+	frame_oam -32, -15, $16, $20
+	frame_oam -16,   1, $32, $20
+	frame_oam -16,  -7, $34, $20
+	frame_oam -16, -15, $36, $20
+	db $80
 
 .frame_32
 	frame_oam -33,   7, $52, $21
-
-	INCROM $15185, $151a2
+	frame_oam -17,   7, $52, $61
+	frame_oam -32,   1, $12, $20
+	frame_oam -32,  -7, $14, $20
+	frame_oam -32, -15, $16, $20
+	frame_oam -16,   1, $32, $20
+	frame_oam -16,  -7, $34, $20
+	frame_oam -16, -15, $36, $20
+	db $80
 
 .frame_33
 	frame_oam -32,  -7, $14, $20
-
-	INCROM $151a6, $151c3
+	frame_oam -32, -15, $16, $20
+	frame_oam -16,  -7, $34, $20
+	frame_oam -16, -15, $36, $20
+	frame_oam -33,   1, $56, $20
+	frame_oam -17,   1, $56, $60
+	frame_oam -33,   9, $54, $21
+	frame_oam -17,   9, $54, $61
+	db $80
 
 .frame_34
 	frame_oam -41,   9, $18, $21
-; 0x151c7
-
-	INCROM $151c7, $151e4
+	frame_oam -33,  -7, $58, $20
+	frame_oam -17,  -7, $58, $60
+	frame_oam -33,   1, $56, $20
+	frame_oam -17,   1, $56, $60
+	frame_oam -25,   9, $5e, $21
+	frame_oam -32, -15, $16, $20
+	frame_oam -16, -15, $36, $20
+	db $80
+; 0x151e4
 
 Frameset_151e4: ; 151e4 (5:51e4)
 	db $00,  1
@@ -1221,7 +1889,7 @@ Frameset_15249: ; 15249 (5:5249)
 	db $ff
 ; 0x15254
 
-OAM_15254: ; 15254 (5:5254)
+OAM_15254: ; 15254 (05:5254)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1249,124 +1917,250 @@ OAM_15254: ; 15254 (5:5254)
 
 .frame_0
 	frame_oam -32,  -4, $02, $00
-
-	INCROM $15288, $152a9
+	frame_oam -32,   4, $04, $00
+	frame_oam -32,  12, $06, $00
+	frame_oam -32, -12, $00, $00
+	frame_oam -16, -12, $16, $00
+	frame_oam -16,  -4, $18, $00
+	frame_oam -16,   4, $1a, $00
+	frame_oam -19, -20, $14, $00
+	frame_oam  -8,  12, $1c, $00
+	db $80
 
 .frame_1
 	frame_oam -33,   3, $0c, $00
-
-	INCROM $152ad, $152ca
+	frame_oam -33, -13, $08, $00
+	frame_oam -33,  -5, $0a, $00
+	frame_oam -19, -21, $1e, $00
+	frame_oam -17, -13, $20, $00
+	frame_oam -17,  -5, $22, $00
+	frame_oam -17,   3, $24, $00
+	frame_oam -18,  11, $26, $00
+	db $80
 
 .frame_2
 	frame_oam -32,  -4, $02, $00
-
-	INCROM $152ce, $152ef
+	frame_oam -32, -20, $0e, $00
+	frame_oam -32, -12, $10, $00
+	frame_oam -32,   4, $12, $00
+	frame_oam -16, -20, $28, $00
+	frame_oam -16, -12, $2a, $00
+	frame_oam -16,  -4, $2c, $00
+	frame_oam -16,   4, $2e, $00
+	frame_oam -18,  12, $30, $00
+	db $80
 
 .frame_3
 	frame_oam -32,  -4, $02, $20
-
-	INCROM $152f3, $15314
+	frame_oam -32, -12, $04, $20
+	frame_oam -32, -20, $06, $20
+	frame_oam -32,   4, $00, $20
+	frame_oam -16,   4, $16, $20
+	frame_oam -16,  -4, $18, $20
+	frame_oam -16, -12, $1a, $20
+	frame_oam -19,  12, $14, $20
+	frame_oam  -8, -20, $1c, $20
+	db $80
 
 .frame_4
 	frame_oam -33, -11, $0c, $20
-
-	INCROM $15318, $15335
+	frame_oam -33,   5, $08, $20
+	frame_oam -33,  -3, $0a, $20
+	frame_oam -19,  13, $1e, $20
+	frame_oam -17,   5, $20, $20
+	frame_oam -17,  -3, $22, $20
+	frame_oam -17, -11, $24, $20
+	frame_oam -18, -19, $26, $20
+	db $80
 
 .frame_5
 	frame_oam -32,  -4, $02, $20
-
-	INCROM $15339, $1535a
+	frame_oam -32,  12, $0e, $20
+	frame_oam -32,   4, $10, $20
+	frame_oam -32, -12, $12, $20
+	frame_oam -16,  12, $28, $20
+	frame_oam -16,   4, $2a, $20
+	frame_oam -16,  -4, $2c, $20
+	frame_oam -16, -12, $2e, $20
+	frame_oam -18, -20, $30, $20
+	db $80
 
 .frame_6
 	frame_oam -31, -14, $32, $00
-
-	INCROM $1535e, $15373
+	frame_oam -31,  -6, $34, $00
+	frame_oam -15, -16, $36, $00
+	frame_oam -15,  -8, $38, $00
+	frame_oam -15,   0, $3a, $00
+	frame_oam -15,   8, $3c, $00
+	db $80
 
 .frame_7
 	frame_oam -31, -14, $32, $00
-
-	INCROM $15377, $1538c
+	frame_oam -31,  -6, $34, $00
+	frame_oam -15, -16, $36, $00
+	frame_oam -15,  -8, $3e, $00
+	frame_oam -15,   0, $40, $00
+	frame_oam -15,   8, $42, $00
+	db $80
 
 .frame_8
 	frame_oam -31, -14, $32, $00
-
-	INCROM $15390, $153a5
+	frame_oam -31,  -6, $34, $00
+	frame_oam -15, -16, $44, $00
+	frame_oam -15,  -8, $46, $00
+	frame_oam -15,   0, $48, $00
+	frame_oam -15,   8, $4a, $00
+	db $80
 
 .frame_9
 	frame_oam -31, -14, $32, $00
-
-	INCROM $153a9, $153be
+	frame_oam -31,  -6, $34, $00
+	frame_oam -15, -16, $36, $00
+	frame_oam -15,  -8, $4c, $00
+	frame_oam -15,   0, $4e, $00
+	frame_oam -14,   7, $50, $00
+	db $80
 
 .frame_10
 	frame_oam -31, -14, $32, $00
-
-	INCROM $153c2, $153d7
+	frame_oam -31,  -6, $34, $00
+	frame_oam -15, -16, $36, $00
+	frame_oam -15,  -8, $52, $00
+	frame_oam -15,   8, $56, $00
+	frame_oam -15,   0, $54, $00
+	db $80
 
 .frame_11
 	frame_oam -31,   6, $32, $20
-
-	INCROM $153db, $153f0
+	frame_oam -31,  -2, $34, $20
+	frame_oam -15,   8, $36, $20
+	frame_oam -15,   0, $38, $20
+	frame_oam -15,  -8, $3a, $20
+	frame_oam -15, -16, $3c, $20
+	db $80
 
 .frame_12
 	frame_oam -31,   6, $32, $20
-
-	INCROM $153f4, $15409
+	frame_oam -31,  -2, $34, $20
+	frame_oam -15,   8, $36, $20
+	frame_oam -15,   0, $3e, $20
+	frame_oam -15,  -8, $40, $20
+	frame_oam -15, -16, $42, $20
+	db $80
 
 .frame_13
 	frame_oam -31,   6, $32, $20
-
-	INCROM $1540d, $15422
+	frame_oam -31,  -2, $34, $20
+	frame_oam -15,   8, $44, $20
+	frame_oam -15,   0, $46, $20
+	frame_oam -15,  -8, $48, $20
+	frame_oam -15, -16, $4a, $20
+	db $80
 
 .frame_14
 	frame_oam -31,   6, $32, $20
-
-	INCROM $15426, $1543b
+	frame_oam -31,  -2, $34, $20
+	frame_oam -15,   8, $36, $20
+	frame_oam -15,   0, $4c, $20
+	frame_oam -15,  -8, $4e, $20
+	frame_oam -14, -15, $50, $20
+	db $80
 
 .frame_15
 	frame_oam -31,   6, $32, $20
-
-	INCROM $1543f, $15454
+	frame_oam -31,  -2, $34, $20
+	frame_oam -15,   8, $36, $20
+	frame_oam -15,   0, $52, $20
+	frame_oam -15,  -8, $54, $20
+	frame_oam -15, -16, $56, $20
+	db $80
 
 .frame_16
 	frame_oam -32, -15, $58, $00
-
-	INCROM $15458, $15471
+	frame_oam -32,  -7, $5a, $00
+	frame_oam -32,   1, $5c, $00
+	frame_oam -26,   9, $5e, $00
+	frame_oam -16, -15, $60, $00
+	frame_oam -16,  -7, $62, $00
+	frame_oam -16,   1, $64, $00
+	db $80
 
 .frame_17
 	frame_oam -32, -15, $66, $00
-
-	INCROM $15475, $15496
+	frame_oam -32,  -7, $68, $00
+	frame_oam -32,   1, $6a, $00
+	frame_oam -32,   9, $6c, $00
+	frame_oam -16, -15, $6e, $00
+	frame_oam -16,  -7, $70, $00
+	frame_oam -16,   1, $72, $00
+	frame_oam -16,   9, $74, $00
+	frame_oam   0,  -4, $7e, $00
+	db $80
 
 .frame_18
 	frame_oam -16,  -8, $78, $00
-
-	INCROM $1549a, $154bb
+	frame_oam -16,   0, $7a, $00
+	frame_oam -16,   8, $7c, $00
+	frame_oam -32, -16, $66, $00
+	frame_oam -32,  -8, $68, $00
+	frame_oam -32,   0, $6a, $00
+	frame_oam -32,   8, $6c, $00
+	frame_oam -16, -16, $76, $00
+	frame_oam   1,  -3, $7e, $20
+	db $80
 
 .frame_19
 	frame_oam -32,   7, $58, $20
-
-	INCROM $154bf, $154d8
+	frame_oam -32,  -1, $5a, $20
+	frame_oam -32,  -9, $5c, $20
+	frame_oam -26, -17, $5e, $20
+	frame_oam -16,   7, $60, $20
+	frame_oam -16,  -1, $62, $20
+	frame_oam -16,  -9, $64, $20
+	db $80
 
 .frame_20
 	frame_oam -32,   7, $66, $20
-
-	INCROM $154dc, $154fd
+	frame_oam -32,  -1, $68, $20
+	frame_oam -32,  -9, $6a, $20
+	frame_oam -32, -17, $6c, $20
+	frame_oam -16,   7, $6e, $20
+	frame_oam -16,  -1, $70, $20
+	frame_oam -16,  -9, $72, $20
+	frame_oam -16, -17, $74, $20
+	frame_oam   0,  -4, $7e, $20
+	db $80
 
 .frame_21
 	frame_oam -16,   0, $78, $20
-
-	INCROM $15501, $15522
+	frame_oam -16,  -8, $7a, $20
+	frame_oam -16, -16, $7c, $20
+	frame_oam -32,   8, $66, $20
+	frame_oam -32,   0, $68, $20
+	frame_oam -32,  -8, $6a, $20
+	frame_oam -32, -16, $6c, $20
+	frame_oam -16,   8, $76, $20
+	frame_oam   1,  -5, $7e, $00
+	db $80
 
 .frame_22
 	frame_oam -32, -14, $32, $00
-
-	INCROM $15526, $1553b
+	frame_oam -32,  -6, $34, $00
+	frame_oam -16, -16, $36, $00
+	frame_oam -16,  -8, $4c, $00
+	frame_oam -15,  -1, $4e, $00
+	frame_oam -15,   7, $50, $00
+	db $80
 
 .frame_23
 	frame_oam -32,   6, $32, $20
-; 0x1553f
-
-	INCROM $1553f, $15554
+	frame_oam -32,  -2, $34, $20
+	frame_oam -16,   8, $36, $20
+	frame_oam -16,   0, $4c, $20
+	frame_oam -15,  -7, $4e, $20
+	frame_oam -15, -15, $50, $20
+	db $80
+; 0x15554
 
 Frameset_15554: ; 15554 (5:5554)
 	db $00,  5
@@ -1469,7 +2263,7 @@ Frameset_155c5: ; 155c5 (5:55c5)
 	db $ff
 ; 0x155cc
 
-OAM_155cc: ; 155cc (5:55cc)
+OAM_155cc: ; 155cc (05:55cc)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1499,134 +2293,257 @@ OAM_155cc: ; 155cc (5:55cc)
 
 .frame_0
 	frame_oam -32, -12, $00, $00
-
-	INCROM $15604, $15619
+	frame_oam -32,  -4, $02, $00
+	frame_oam -32,   4, $04, $00
+	frame_oam -16, -12, $20, $00
+	frame_oam -16,  -4, $22, $00
+	frame_oam -16,   4, $24, $00
+	db $80
 
 .frame_1
 	frame_oam -32, -12, $06, $00
-
-	INCROM $1561d, $15632
+	frame_oam -32,  -4, $08, $00
+	frame_oam -32,   4, $0a, $00
+	frame_oam -16, -11, $26, $00
+	frame_oam -16,  -3, $28, $00
+	frame_oam -16,   5, $2a, $00
+	db $80
 
 .frame_2
 	frame_oam -32, -12, $0c, $00
-
-	INCROM $15636, $1564b
+	frame_oam -32,  -4, $0e, $00
+	frame_oam -32,   4, $10, $00
+	frame_oam -16, -12, $2c, $00
+	frame_oam -16,  -4, $2e, $00
+	frame_oam -16,   4, $30, $00
+	db $80
 
 .frame_3
 	frame_oam -32,   4, $00, $20
-
-	INCROM $1564f, $15664
+	frame_oam -32,  -4, $02, $20
+	frame_oam -32, -12, $04, $20
+	frame_oam -16,   4, $20, $20
+	frame_oam -16,  -4, $22, $20
+	frame_oam -16, -12, $24, $20
+	db $80
 
 .frame_4
 	frame_oam -32,   4, $06, $20
-
-	INCROM $15668, $1567d
+	frame_oam -32,  -4, $08, $20
+	frame_oam -32, -12, $0a, $20
+	frame_oam -16,   3, $26, $20
+	frame_oam -16,  -5, $28, $20
+	frame_oam -16, -13, $2a, $20
+	db $80
 
 .frame_5
 	frame_oam -32,   4, $0c, $20
-
-	INCROM $15681, $15696
+	frame_oam -32,  -4, $0e, $20
+	frame_oam -32, -12, $10, $20
+	frame_oam -16,   4, $2c, $20
+	frame_oam -16,  -4, $2e, $20
+	frame_oam -16, -12, $30, $20
+	db $80
 
 .frame_6
 	frame_oam -32, -16, $12, $00
-
-	INCROM $1569a, $156b7
+	frame_oam -32,  -8, $14, $00
+	frame_oam -32,   0, $16, $00
+	frame_oam -32,   8, $18, $00
+	frame_oam -16, -16, $32, $00
+	frame_oam -16,  -8, $34, $00
+	frame_oam -16,   0, $36, $00
+	frame_oam -16,   8, $38, $00
+	db $80
 
 .frame_7
 	frame_oam -32,   8, $12, $20
-
-	INCROM $156bb, $156d8
+	frame_oam -32,   0, $14, $20
+	frame_oam -32,  -8, $16, $20
+	frame_oam -32, -16, $18, $20
+	frame_oam -16,   8, $32, $20
+	frame_oam -16,   0, $34, $20
+	frame_oam -16,  -8, $36, $20
+	frame_oam -16, -16, $38, $20
+	db $80
 
 .frame_8
 	frame_oam -32, -16, $1a, $00
-
-	INCROM $156dc, $156f9
+	frame_oam -32,  -8, $1c, $00
+	frame_oam -32,   0, $1e, $00
+	frame_oam -16, -16, $3a, $00
+	frame_oam -16,  -8, $3c, $00
+	frame_oam -16,   0, $3e, $00
+	frame_oam -32,   8, $6a, $00
+	frame_oam -16,   8, $6c, $00
+	db $80
 
 .frame_9
 	frame_oam -32,   8, $1a, $20
-
-	INCROM $156fd, $1571a
+	frame_oam -32,   0, $1c, $20
+	frame_oam -32,  -8, $1e, $20
+	frame_oam -16,   8, $3a, $20
+	frame_oam -16,   0, $3c, $20
+	frame_oam -16,  -8, $3e, $20
+	frame_oam -32, -16, $6a, $20
+	frame_oam -16, -16, $6c, $20
+	db $80
 
 .frame_10
 	frame_oam -16,   4, $2c, $20
-
-	INCROM $1571e, $15733
+	frame_oam -16,  -4, $2e, $20
+	frame_oam -16, -12, $30, $20
+	frame_oam -32,   4, $50, $20
+	frame_oam -32,  -4, $52, $20
+	frame_oam -32, -12, $54, $20
+	db $80
 
 .frame_11
 	frame_oam -32, -12, $40, $20
-
-	INCROM $15737, $15750
+	frame_oam -29, -20, $42, $20
+	frame_oam -16,   4, $44, $20
+	frame_oam -16,  -4, $46, $20
+	frame_oam -16, -12, $48, $20
+	frame_oam -32,   4, $50, $20
+	frame_oam -32,  -4, $52, $20
+	db $80
 
 .frame_12
 	frame_oam -16,   4, $44, $20
-
-	INCROM $15754, $1576d
+	frame_oam -16,  -4, $46, $20
+	frame_oam -32,   4, $50, $20
+	frame_oam -32,  -4, $52, $20
+	frame_oam -32, -12, $56, $20
+	frame_oam -28, -20, $58, $20
+	frame_oam -16, -12, $5a, $20
+	db $80
 
 .frame_13
 	frame_oam -32, -12, $4a, $20
-
-	INCROM $15771, $15786
+	frame_oam -16,   4, $44, $20
+	frame_oam -16,  -4, $4c, $20
+	frame_oam -16, -12, $4e, $20
+	frame_oam -32,   4, $50, $20
+	frame_oam -32,  -4, $52, $20
+	db $80
 
 .frame_14
 	frame_oam -16,   4, $44, $20
-
-	INCROM $1578a, $1579f
+	frame_oam -32,   4, $50, $20
+	frame_oam -32,  -4, $52, $20
+	frame_oam -32, -12, $64, $20
+	frame_oam -16,  -4, $66, $20
+	frame_oam -16, -12, $68, $20
+	db $80
 
 .frame_15
 	frame_oam -16,   4, $44, $20
-
-	INCROM $157a3, $157b8
+	frame_oam -32,   4, $50, $20
+	frame_oam -32,  -4, $5c, $20
+	frame_oam -32, -12, $5e, $20
+	frame_oam -16,  -4, $60, $20
+	frame_oam -16, -12, $62, $20
+	db $80
 
 .frame_16
 	frame_oam -16, -12, $2c, $00
-
-	INCROM $157bc, $157d1
+	frame_oam -16,  -4, $2e, $00
+	frame_oam -16,   4, $30, $00
+	frame_oam -32, -12, $50, $00
+	frame_oam -32,  -4, $52, $00
+	frame_oam -32,   4, $54, $00
+	db $80
 
 .frame_17
 	frame_oam -32,   4, $40, $00
-
-	INCROM $157d5, $157ee
+	frame_oam -29,  12, $42, $00
+	frame_oam -16, -12, $44, $00
+	frame_oam -16,  -4, $46, $00
+	frame_oam -16,   4, $48, $00
+	frame_oam -32, -12, $50, $00
+	frame_oam -32,  -4, $52, $00
+	db $80
 
 .frame_18
 	frame_oam -16, -12, $44, $00
-
-	INCROM $157f2, $1580b
+	frame_oam -16,  -4, $46, $00
+	frame_oam -32, -12, $50, $00
+	frame_oam -32,  -4, $52, $00
+	frame_oam -32,   4, $56, $00
+	frame_oam -28,  12, $58, $00
+	frame_oam -16,   4, $5a, $00
+	db $80
 
 .frame_19
 	frame_oam -32,   4, $4a, $00
-
-	INCROM $1580f, $15824
+	frame_oam -16, -12, $44, $00
+	frame_oam -16,  -4, $4c, $00
+	frame_oam -16,   4, $4e, $00
+	frame_oam -32, -12, $50, $00
+	frame_oam -32,  -4, $52, $00
+	db $80
 
 .frame_20
 	frame_oam -16, -12, $44, $00
-
-	INCROM $15828, $1583d
+	frame_oam -32, -12, $50, $00
+	frame_oam -32,  -4, $52, $00
+	frame_oam -32,   4, $64, $00
+	frame_oam -16,  -4, $66, $00
+	frame_oam -16,   4, $68, $00
+	db $80
 
 .frame_21
 	frame_oam -16, -12, $44, $00
-
-	INCROM $15841, $15856
+	frame_oam -32, -12, $50, $00
+	frame_oam -32,  -4, $5c, $00
+	frame_oam -32,   4, $5e, $00
+	frame_oam -16,  -4, $60, $00
+	frame_oam -16,   4, $62, $00
+	db $80
 
 .frame_22
 	frame_oam -16,  -8, $78, $00
-
-	INCROM $1585a, $15877
+	frame_oam -16,   0, $78, $20
+	frame_oam -32, -16, $72, $00
+	frame_oam -32,  -8, $74, $00
+	frame_oam -32,   8, $72, $20
+	frame_oam -32,   0, $74, $20
+	frame_oam -16, -16, $76, $00
+	frame_oam -16,   8, $76, $20
+	db $80
 
 .frame_23
 	frame_oam -32,   7, $72, $20
-
-	INCROM $1587b, $15898
+	frame_oam -32,  -1, $74, $20
+	frame_oam -16, -14, $32, $00
+	frame_oam -16,  -6, $34, $00
+	frame_oam -16,   7, $76, $20
+	frame_oam -16,  -1, $78, $20
+	frame_oam -32,  -5, $70, $20
+	frame_oam -32, -13, $6e, $00
+	db $80
 
 .frame_24
 	frame_oam -32, -12, $6e, $00
-
-	INCROM $1589c, $158b5
+	frame_oam -32,  -4, $70, $00
+	frame_oam -32,   4, $6e, $20
+	frame_oam -16, -16, $7a, $00
+	frame_oam -16,  -8, $7c, $00
+	frame_oam -16,   8, $7a, $20
+	frame_oam -16,   0, $7c, $20
+	db $80
 
 .frame_25
 	frame_oam -32, -15, $72, $00
-; 0x158b9
-
-	INCROM $158b9, $158d6
+	frame_oam -32,  -7, $74, $00
+	frame_oam -16,   6, $32, $20
+	frame_oam -16,  -2, $34, $20
+	frame_oam -16, -15, $76, $00
+	frame_oam -16,  -7, $78, $00
+	frame_oam -32,  -3, $70, $00
+	frame_oam -32,   5, $6e, $20
+	db $80
+; 0x158d6
 
 Frameset_158d6: ; 158d6 (5:58d6)
 	db $00,  3
@@ -1715,7 +2632,7 @@ Frameset_15948: ; 15948 (5:5948)
 	db $ff
 ; 0x15955
 
-OAM_15955: ; 15955 (5:5955)
+OAM_15955: ; 15955 (05:5955)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1776,289 +2693,523 @@ OAM_15955: ; 15955 (5:5955)
 
 .frame_0
 	frame_oam -14, -12, $20, $00
-
-	INCROM $159cb, $159e0
+	frame_oam -14,  -4, $22, $00
+	frame_oam -14,   4, $24, $00
+	frame_oam -30, -12, $00, $00
+	frame_oam -30,  -4, $02, $00
+	frame_oam -30,   4, $04, $00
+	db $80
 
 .frame_1
 	frame_oam -33, -12, $06, $00
-
-	INCROM $159e4, $159f9
+	frame_oam -33,  -4, $08, $00
+	frame_oam -33,   4, $0a, $00
+	frame_oam -17, -12, $20, $00
+	frame_oam -17,  -4, $22, $00
+	frame_oam -17,   4, $24, $00
+	db $80
 
 .frame_2
 	frame_oam -34, -12, $12, $00
-
-	INCROM $159fd, $15a1a
+	frame_oam -34,  -4, $14, $00
+	frame_oam -34,   4, $16, $00
+	frame_oam -50,  -8, $1c, $00
+	frame_oam -50,   0, $1e, $00
+	frame_oam -18, -12, $20, $00
+	frame_oam -18,  -4, $26, $00
+	frame_oam -18,   4, $28, $00
+	db $80
 
 .frame_3
 	frame_oam -34, -12, $0c, $00
-
-	INCROM $15a1e, $15a33
+	frame_oam -34,  -4, $0e, $00
+	frame_oam -34,   4, $10, $00
+	frame_oam -18, -10, $2a, $00
+	frame_oam -18,  -2, $30, $00
+	frame_oam -18,   6, $32, $00
+	db $80
 
 .frame_4
 	frame_oam -32, -12, $0c, $00
-
-	INCROM $15a37, $15a4c
+	frame_oam -32,  -4, $0e, $00
+	frame_oam -32,   4, $10, $00
+	frame_oam -16, -10, $2a, $00
+	frame_oam -16,  -2, $30, $00
+	frame_oam -16,   6, $32, $00
+	db $80
 
 .frame_5
 	frame_oam -31, -12, $00, $00
-
-	INCROM $15a50, $15a65
+	frame_oam -31,   4, $04, $00
+	frame_oam -15, -10, $2a, $00
+	frame_oam -15,  -2, $2c, $00
+	frame_oam -15,   6, $2e, $00
+	frame_oam -31,  -4, $34, $00
+	db $80
 
 .frame_6
 	frame_oam -33, -12, $00, $00
-
-	INCROM $15a69, $15a7e
+	frame_oam -33,   4, $04, $00
+	frame_oam -33,  -4, $34, $00
+	frame_oam -17,  -2, $30, $00
+	frame_oam -17,   6, $32, $00
+	frame_oam -17, -10, $2a, $00
+	db $80
 
 .frame_7
 	frame_oam -14,   4, $20, $20
-
-	INCROM $15a82, $15a97
+	frame_oam -14,  -4, $22, $20
+	frame_oam -14, -12, $24, $20
+	frame_oam -30,   4, $00, $20
+	frame_oam -30,  -4, $02, $20
+	frame_oam -30, -12, $04, $20
+	db $80
 
 .frame_8
 	frame_oam -33,   4, $06, $20
-
-	INCROM $15a9b, $15ab0
+	frame_oam -33,  -4, $08, $20
+	frame_oam -33, -12, $0a, $20
+	frame_oam -17,   4, $20, $20
+	frame_oam -17,  -4, $22, $20
+	frame_oam -17, -12, $24, $20
+	db $80
 
 .frame_9
 	frame_oam -34,   4, $12, $20
-
-	INCROM $15ab4, $15ad1
+	frame_oam -34,  -4, $14, $20
+	frame_oam -34, -12, $16, $20
+	frame_oam -50,   0, $1c, $20
+	frame_oam -50,  -8, $1e, $20
+	frame_oam -18,   4, $20, $20
+	frame_oam -18,  -4, $26, $20
+	frame_oam -18, -12, $28, $20
+	db $80
 
 .frame_10
 	frame_oam -34,   4, $0c, $20
-
-	INCROM $15ad5, $15aea
+	frame_oam -34,  -4, $0e, $20
+	frame_oam -34, -12, $10, $20
+	frame_oam -18,   2, $2a, $20
+	frame_oam -18,  -6, $30, $20
+	frame_oam -18, -14, $32, $20
+	db $80
 
 .frame_11
 	frame_oam -32,   4, $0c, $20
-
-	INCROM $15aee, $15b03
+	frame_oam -32,  -4, $0e, $20
+	frame_oam -32, -12, $10, $20
+	frame_oam -16,   2, $2a, $20
+	frame_oam -16,  -6, $30, $20
+	frame_oam -16, -14, $32, $20
+	db $80
 
 .frame_12
 	frame_oam -31,   4, $00, $20
-
-	INCROM $15b07, $15b1c
+	frame_oam -31, -12, $04, $20
+	frame_oam -15,   2, $2a, $20
+	frame_oam -15,  -6, $2c, $20
+	frame_oam -15, -14, $2e, $20
+	frame_oam -31,  -4, $34, $20
+	db $80
 
 .frame_13
 	frame_oam -33,   4, $00, $20
-
-	INCROM $15b20, $15b35
+	frame_oam -33, -12, $04, $20
+	frame_oam -33,  -4, $34, $20
+	frame_oam -17,  -6, $30, $20
+	frame_oam -17, -14, $32, $20
+	frame_oam -17,   2, $2a, $20
+	db $80
 
 .frame_14
 	frame_oam -32, -12, $36, $00
-
-	INCROM $15b39, $15b4e
+	frame_oam -32,  -4, $38, $00
+	frame_oam -32,   4, $3a, $00
+	frame_oam -16, -12, $3c, $00
+	frame_oam -16,  -4, $3e, $00
+	frame_oam -16,   4, $40, $00
+	db $80
 
 .frame_15
 	frame_oam -33, -12, $36, $00
-
-	INCROM $15b52, $15b67
+	frame_oam -33,  -4, $38, $00
+	frame_oam -33,   4, $42, $00
+	frame_oam -17, -12, $44, $00
+	frame_oam -17,  -4, $46, $00
+	frame_oam -17,   4, $48, $00
+	db $80
 
 .frame_16
 	frame_oam -32, -12, $4a, $00
-
-	INCROM $15b6b, $15b80
+	frame_oam -32,  -4, $4c, $00
+	frame_oam -32,   4, $4e, $00
+	frame_oam -16, -12, $50, $00
+	frame_oam -16,  -4, $52, $00
+	frame_oam -16,   4, $54, $00
+	db $80
 
 .frame_17
 	frame_oam -32, -10, $56, $00
-
-	INCROM $15b84, $15b95
+	frame_oam -32,  -2, $58, $00
+	frame_oam -16, -12, $5a, $00
+	frame_oam -16,  -4, $5c, $00
+	frame_oam -16,   4, $5e, $00
+	db $80
 
 .frame_18
 	frame_oam -32,   4, $36, $20
-
-	INCROM $15b99, $15bae
+	frame_oam -32,  -4, $38, $20
+	frame_oam -32, -12, $3a, $20
+	frame_oam -16,   4, $3c, $20
+	frame_oam -16,  -4, $3e, $20
+	frame_oam -16, -12, $40, $20
+	db $80
 
 .frame_19
 	frame_oam -33,   4, $36, $20
-
-	INCROM $15bb2, $15bc7
+	frame_oam -33,  -4, $38, $20
+	frame_oam -33, -12, $42, $20
+	frame_oam -17,   4, $44, $20
+	frame_oam -17,  -4, $46, $20
+	frame_oam -17, -12, $48, $20
+	db $80
 
 .frame_20
 	frame_oam -32,   4, $4a, $20
-
-	INCROM $15bcb, $15be0
+	frame_oam -32,  -4, $4c, $20
+	frame_oam -32, -12, $4e, $20
+	frame_oam -16,   4, $50, $20
+	frame_oam -16,  -4, $52, $20
+	frame_oam -16, -12, $54, $20
+	db $80
 
 .frame_21
 	frame_oam -32,   2, $56, $20
-
-	INCROM $15be4, $15bf5
+	frame_oam -32,  -6, $58, $20
+	frame_oam -16,   4, $5a, $20
+	frame_oam -16,  -4, $5c, $20
+	frame_oam -16, -12, $5e, $20
+	db $80
 
 .frame_22
 	frame_oam -33,   4, $42, $00
-
-	INCROM $15bf9, $15c0e
+	frame_oam -17, -12, $44, $00
+	frame_oam -17,  -4, $46, $00
+	frame_oam -17,   4, $48, $00
+	frame_oam -33, -12, $60, $00
+	frame_oam -33,  -4, $62, $00
+	db $80
 
 .frame_23
 	frame_oam -33, -12, $42, $20
-
-	INCROM $15c12, $15c27
+	frame_oam -17,   4, $44, $20
+	frame_oam -17,  -4, $46, $20
+	frame_oam -17, -12, $48, $20
+	frame_oam -33,   4, $60, $20
+	frame_oam -33,  -4, $62, $20
+	db $80
 
 .frame_24
 	frame_oam -33,   4, $42, $00
-
-	INCROM $15c2b, $15c40
+	frame_oam -17, -12, $44, $00
+	frame_oam -17,  -4, $46, $00
+	frame_oam -17,   4, $48, $00
+	frame_oam -33, -12, $60, $00
+	frame_oam -33,  -4, $62, $00
+	db $80
 
 .frame_25
 	frame_oam -33,   4, $42, $00
-
-	INCROM $15c44, $15c59
+	frame_oam -17, -12, $44, $00
+	frame_oam -17,  -4, $46, $00
+	frame_oam -17,   4, $48, $00
+	frame_oam -33, -12, $64, $00
+	frame_oam -33,  -4, $66, $00
+	db $80
 
 .frame_26
 	frame_oam -33,   4, $42, $00
-
-	INCROM $15c5d, $15c72
+	frame_oam -17,  -4, $46, $00
+	frame_oam -17,   4, $48, $00
+	frame_oam -33,  -4, $66, $00
+	frame_oam -33, -12, $36, $00
+	frame_oam -17, -12, $68, $00
+	db $80
 
 .frame_27
 	frame_oam -33, -12, $42, $20
-
-	INCROM $15c76, $15c8b
+	frame_oam -17,   4, $44, $20
+	frame_oam -17,  -4, $46, $20
+	frame_oam -17, -12, $48, $20
+	frame_oam -33,   4, $64, $20
+	frame_oam -33,  -4, $66, $20
+	db $80
 
 .frame_28
 	frame_oam -33, -12, $42, $20
-
-	INCROM $15c8f, $15ca4
+	frame_oam -17,  -4, $46, $20
+	frame_oam -17, -12, $48, $20
+	frame_oam -33,  -4, $66, $20
+	frame_oam -33,   4, $36, $20
+	frame_oam -17,   4, $68, $20
+	db $80
 
 .frame_29
 	frame_oam -30, -12, $06, $00
-
-	INCROM $15ca8, $15cbd
+	frame_oam -30,  -4, $08, $00
+	frame_oam -30,   4, $0a, $00
+	frame_oam -14, -12, $20, $00
+	frame_oam -14,  -4, $22, $00
+	frame_oam -14,   4, $24, $00
+	db $80
 
 .frame_30
 	frame_oam -14, -12, $20, $00
-
-	INCROM $15cc1, $15cd6
+	frame_oam -14,  -4, $22, $00
+	frame_oam -14,   4, $24, $00
+	frame_oam -30, -12, $0c, $00
+	frame_oam -30,  -4, $0e, $00
+	frame_oam -30,   4, $10, $00
+	db $80
 
 .frame_31
 	frame_oam -30,   4, $06, $20
-
-	INCROM $15cda, $15cef
+	frame_oam -30,  -4, $08, $20
+	frame_oam -30, -12, $0a, $20
+	frame_oam -14,   4, $20, $20
+	frame_oam -14,  -4, $22, $20
+	frame_oam -14, -12, $24, $20
+	db $80
 
 .frame_32
 	frame_oam -14,   4, $20, $20
-
-	INCROM $15cf3, $15d08
+	frame_oam -14,  -4, $22, $20
+	frame_oam -14, -12, $24, $20
+	frame_oam -30,   4, $0c, $20
+	frame_oam -30,  -4, $0e, $20
+	frame_oam -30, -12, $10, $20
+	db $80
 
 .frame_33
 	frame_oam -14, -12, $20, $00
-
-	INCROM $15d0c, $15d21
+	frame_oam -14,  -4, $22, $00
+	frame_oam -14,   4, $24, $00
+	frame_oam -30,   4, $04, $00
+	frame_oam -30, -12, $6a, $00
+	frame_oam -30,  -4, $6c, $00
+	db $80
 
 .frame_34
 	frame_oam -30,  -4, $08, $00
-
-	INCROM $15d25, $15d3a
+	frame_oam -30,   4, $0a, $00
+	frame_oam -14, -12, $20, $00
+	frame_oam -14,  -4, $22, $00
+	frame_oam -14,   4, $24, $00
+	frame_oam -30, -12, $6e, $00
+	db $80
 
 .frame_35
 	frame_oam -14, -12, $20, $00
-
-	INCROM $15d3e, $15d53
+	frame_oam -14,  -4, $22, $00
+	frame_oam -14,   4, $24, $00
+	frame_oam -30,   4, $10, $00
+	frame_oam -30, -12, $70, $00
+	frame_oam -30,  -4, $72, $00
+	db $80
 
 .frame_36
 	frame_oam -14,   4, $20, $20
-
-	INCROM $15d57, $15d6c
+	frame_oam -14,  -4, $22, $20
+	frame_oam -14, -12, $24, $20
+	frame_oam -30, -12, $04, $20
+	frame_oam -30,   4, $6a, $20
+	frame_oam -30,  -4, $6c, $20
+	db $80
 
 .frame_37
 	frame_oam -30,  -4, $08, $20
-
-	INCROM $15d70, $15d85
+	frame_oam -30, -12, $0a, $20
+	frame_oam -14,   4, $20, $20
+	frame_oam -14,  -4, $22, $20
+	frame_oam -14, -12, $24, $20
+	frame_oam -30,   4, $6e, $20
+	db $80
 
 .frame_38
 	frame_oam -14,   4, $20, $20
-
-	INCROM $15d89, $15d9e
+	frame_oam -14,  -4, $22, $20
+	frame_oam -14, -12, $24, $20
+	frame_oam -30, -12, $10, $20
+	frame_oam -30,   4, $70, $20
+	frame_oam -30,  -4, $72, $20
+	db $80
 
 .frame_39
 	frame_oam -16, -12, $20, $00
-
-	INCROM $15da2, $15db7
+	frame_oam -16,  -4, $22, $00
+	frame_oam -16,   4, $24, $00
+	frame_oam -32,   4, $04, $00
+	frame_oam -32, -12, $6a, $00
+	frame_oam -32,  -4, $6c, $00
+	db $80
 
 .frame_40
 	frame_oam -18, -12, $20, $00
-
-	INCROM $15dbb, $15dd0
+	frame_oam -18,  -4, $22, $00
+	frame_oam -18,   4, $24, $00
+	frame_oam -34,  -4, $08, $00
+	frame_oam -34,   4, $0a, $00
+	frame_oam -34, -12, $6e, $00
+	db $80
 
 .frame_41
 	frame_oam -16,   4, $20, $20
-
-	INCROM $15dd4, $15de9
+	frame_oam -16,  -4, $22, $20
+	frame_oam -16, -12, $24, $20
+	frame_oam -32, -12, $04, $20
+	frame_oam -32,   4, $6a, $20
+	frame_oam -32,  -4, $6c, $20
+	db $80
 
 .frame_42
 	frame_oam -34,  -4, $08, $20
-
-	INCROM $15ded, $15e02
+	frame_oam -34, -12, $0a, $20
+	frame_oam -18,   4, $20, $20
+	frame_oam -18,  -4, $22, $20
+	frame_oam -18, -12, $24, $20
+	frame_oam -34,   4, $6e, $20
+	db $80
 
 .frame_43
 	frame_oam -16, -12, $20, $00
-
-	INCROM $15e06, $15e1b
+	frame_oam -16,  -4, $22, $00
+	frame_oam -16,   4, $24, $00
+	frame_oam -32, -12, $00, $00
+	frame_oam -32,  -4, $02, $00
+	frame_oam -32,   4, $04, $00
+	db $80
 
 .frame_44
 	frame_oam -34, -12, $0c, $00
-
-	INCROM $15e1f, $15e34
+	frame_oam -34,  -4, $0e, $00
+	frame_oam -34,   4, $10, $00
+	frame_oam -18, -12, $20, $00
+	frame_oam -18,  -4, $22, $00
+	frame_oam -18,   4, $24, $00
+	db $80
 
 .frame_45
 	frame_oam -16,   4, $20, $20
-
-	INCROM $15e38, $15e4d
+	frame_oam -16,  -4, $22, $20
+	frame_oam -16, -12, $24, $20
+	frame_oam -32,   4, $00, $20
+	frame_oam -32,  -4, $02, $20
+	frame_oam -32, -12, $04, $20
+	db $80
 
 .frame_46
 	frame_oam -34,   4, $0c, $20
-
-	INCROM $15e51, $15e66
+	frame_oam -34,  -4, $0e, $20
+	frame_oam -34, -12, $10, $20
+	frame_oam -18,   4, $20, $20
+	frame_oam -18,  -4, $22, $20
+	frame_oam -18, -12, $24, $20
+	db $80
 
 .frame_47
 	frame_oam -18, -12, $20, $00
-
-	INCROM $15e6a, $15e7f
+	frame_oam -18,  -4, $22, $00
+	frame_oam -18,   4, $24, $00
+	frame_oam -34, -12, $70, $00
+	frame_oam -34,  -4, $72, $00
+	frame_oam -34,   4, $10, $00
+	db $80
 
 .frame_48
 	frame_oam -18,   4, $20, $20
-
-	INCROM $15e83, $15e98
+	frame_oam -18,  -4, $22, $20
+	frame_oam -18, -12, $24, $20
+	frame_oam -34,   4, $70, $20
+	frame_oam -34,  -4, $72, $20
+	frame_oam -34, -12, $10, $20
+	db $80
 
 .frame_49
 	frame_oam -14, -16, $74, $00
-
-	INCROM $15e9c, $15eb5
+	frame_oam -14,  -8, $76, $00
+	frame_oam -14,   0, $78, $00
+	frame_oam -14,   8, $7a, $00
+	frame_oam -30, -12, $00, $01
+	frame_oam -30,  -4, $02, $01
+	frame_oam -30,   4, $04, $01
+	db $80
 
 .frame_50
 	frame_oam -30, -12, $00, $01
-
-	INCROM $15eb9, $15ece
+	frame_oam -30,  -4, $02, $01
+	frame_oam -30,   4, $04, $01
+	frame_oam -14,  -4, $22, $01
+	frame_oam -14, -12, $7c, $01
+	frame_oam -14,   4, $7e, $01
+	db $80
 
 .frame_51
 	frame_oam -14,   8, $74, $20
-
-	INCROM $15ed2, $15eeb
+	frame_oam -14,   0, $76, $20
+	frame_oam -14,  -8, $78, $20
+	frame_oam -14, -16, $7a, $20
+	frame_oam -30,   4, $00, $21
+	frame_oam -30,  -4, $02, $21
+	frame_oam -30, -12, $04, $21
+	db $80
 
 .frame_52
 	frame_oam -30,   4, $00, $21
-
-	INCROM $15eef, $15f04
+	frame_oam -30,  -4, $02, $21
+	frame_oam -30, -12, $04, $21
+	frame_oam -14,  -4, $22, $21
+	frame_oam -14,   4, $7c, $21
+	frame_oam -14, -12, $7e, $21
+	db $80
 
 .frame_53
 	frame_oam -30,   4, $04, $01
-
-	INCROM $15f08, $15f21
+	frame_oam -30, -12, $6a, $01
+	frame_oam -30,  -4, $6c, $01
+	frame_oam -14, -16, $74, $00
+	frame_oam -14,  -8, $76, $00
+	frame_oam -14,   0, $78, $00
+	frame_oam -14,   8, $7a, $00
+	db $80
 
 .frame_54
 	frame_oam -30,   4, $04, $01
-
-	INCROM $15f25, $15f3a
+	frame_oam -30, -12, $6a, $01
+	frame_oam -30,  -4, $6c, $01
+	frame_oam -14,  -4, $22, $01
+	frame_oam -14, -12, $7c, $01
+	frame_oam -14,   4, $7e, $01
+	db $80
 
 .frame_55
 	frame_oam -30, -12, $04, $21
-
-	INCROM $15f3e, $15f57
+	frame_oam -30,   4, $6a, $21
+	frame_oam -30,  -4, $6c, $21
+	frame_oam -14,   8, $74, $20
+	frame_oam -14,   0, $76, $20
+	frame_oam -14,  -8, $78, $20
+	frame_oam -14, -16, $7a, $20
+	db $80
 
 .frame_56
 	frame_oam -30, -12, $04, $21
-; 0x15f5b
-
-	INCROM $15f5b, $15f70
+	frame_oam -30,   4, $6a, $21
+	frame_oam -30,  -4, $6c, $21
+	frame_oam -14,  -4, $22, $21
+	frame_oam -14,   4, $7c, $21
+	frame_oam -14, -12, $7e, $21
+	db $80
+; 0x15f70
 
 Frameset_15f70: ; 15f70 (5:5f70)
 	db $00,  2
@@ -2251,7 +3402,7 @@ Frameset_16063: ; 16063 (5:6063)
 	db $ff
 ; 0x1606a
 
-OAM_1606a: ; 1606a (5:606a)
+OAM_1606a: ; 1606a (05:606a)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -2285,154 +3436,296 @@ OAM_1606a: ; 1606a (5:606a)
 
 .frame_0
 	frame_oam -30, -12, $08, $00
-
-	INCROM $160aa, $160c3
+	frame_oam -30,  -4, $0a, $00
+	frame_oam -30,   4, $0c, $00
+	frame_oam -14, -12, $28, $00
+	frame_oam -14,  -4, $2a, $00
+	frame_oam -14,   4, $2c, $00
+	frame_oam -18, -20, $00, $00
+	db $80
 
 .frame_1
 	frame_oam -32, -12, $0e, $00
-
-	INCROM $160c7, $160dc
+	frame_oam -16, -12, $2e, $00
+	frame_oam -16,  -4, $30, $00
+	frame_oam -16,   4, $32, $00
+	frame_oam -32,   4, $0c, $00
+	frame_oam -32,  -4, $0a, $00
+	db $80
 
 .frame_2
 	frame_oam -16, -12, $34, $00
-
-	INCROM $160e0, $160f5
+	frame_oam -16,  -4, $36, $00
+	frame_oam -16,   4, $38, $00
+	frame_oam -32,   4, $0c, $00
+	frame_oam -32, -12, $10, $00
+	frame_oam -32,  -4, $12, $00
+	db $80
 
 .frame_3
 	frame_oam -32, -12, $1a, $00
-
-	INCROM $160f9, $1610e
+	frame_oam -32,  -4, $1c, $00
+	frame_oam -32,   4, $1e, $00
+	frame_oam -16, -12, $14, $00
+	frame_oam -16,  -4, $16, $00
+	frame_oam -16,   4, $18, $00
+	db $80
 
 .frame_4
 	frame_oam -30,  -4, $0a, $00
-
-	INCROM $16112, $1612f
+	frame_oam -30,   4, $0c, $00
+	frame_oam -18, -20, $00, $00
+	frame_oam -30, -12, $08, $00
+	frame_oam -14, -12, $22, $00
+	frame_oam -14,  -4, $24, $00
+	frame_oam -14,   4, $26, $00
+	frame_oam -30, -17, $c6, $20
+	db $80
 
 .frame_5
 	frame_oam -32, -12, $0e, $00
-
-	INCROM $16133, $16148
+	frame_oam -32,  -4, $0a, $00
+	frame_oam -32,   4, $0c, $00
+	frame_oam -16, -12, $3a, $00
+	frame_oam -16,  -4, $3c, $00
+	frame_oam -16,   4, $3e, $00
+	db $80
 
 .frame_6
 	frame_oam -32, -12, $0e, $00
-
-	INCROM $1614c, $16161
+	frame_oam -16,   4, $32, $00
+	frame_oam -32,   4, $0c, $00
+	frame_oam -32,  -4, $20, $00
+	frame_oam -16, -12, $50, $00
+	frame_oam -16,  -4, $52, $00
+	db $80
 
 .frame_7
 	frame_oam -31,  -4, $0a, $00
-
-	INCROM $16165, $1617a
+	frame_oam -31,   4, $0c, $00
+	frame_oam -31, -12, $54, $00
+	frame_oam -15, -12, $56, $00
+	frame_oam -15,  -4, $58, $00
+	frame_oam -15,   4, $5a, $00
+	db $80
 
 .frame_8
 	frame_oam -32,   4, $1e, $00
-
-	INCROM $1617e, $16193
+	frame_oam -16, -12, $60, $00
+	frame_oam -16,  -4, $62, $00
+	frame_oam -16,   4, $64, $00
+	frame_oam -32, -12, $1a, $00
+	frame_oam -32,  -4, $5c, $00
+	db $80
 
 .frame_9
 	frame_oam -32, -12, $66, $00
-
-	INCROM $16197, $161ac
+	frame_oam -32,  -4, $68, $00
+	frame_oam -32,   4, $6a, $00
+	frame_oam -16, -12, $6c, $00
+	frame_oam -16,  -4, $6e, $00
+	frame_oam -16,   4, $70, $00
+	db $80
 
 .frame_10
 	frame_oam -32, -20, $40, $00
-
-	INCROM $161b0, $161d1
+	frame_oam -32, -12, $42, $00
+	frame_oam -32,  -4, $44, $00
+	frame_oam -32,   4, $46, $00
+	frame_oam -16, -20, $48, $00
+	frame_oam -16, -12, $4a, $00
+	frame_oam -16,  -4, $4c, $00
+	frame_oam -16,   4, $4e, $00
+	frame_oam -32, -27, $fe, $00
+	db $80
 
 .frame_11
 	frame_oam -32, -20, $5e, $00
-
-	INCROM $161d5, $161f2
+	frame_oam -32, -12, $72, $00
+	frame_oam -32,  -4, $74, $00
+	frame_oam -32,   4, $76, $00
+	frame_oam -16, -20, $78, $00
+	frame_oam -16, -12, $7a, $00
+	frame_oam -16,  -4, $7c, $00
+	frame_oam -16,   4, $7e, $00
+	db $80
 
 .frame_12
 	frame_oam -30,   4, $08, $20
-
-	INCROM $161f6, $1620f
+	frame_oam -30,  -4, $0a, $20
+	frame_oam -30, -12, $0c, $20
+	frame_oam -14,   4, $28, $20
+	frame_oam -14,  -4, $2a, $20
+	frame_oam -14, -12, $2c, $20
+	frame_oam -18,  12, $00, $20
+	db $80
 
 .frame_13
 	frame_oam -32,   4, $0e, $20
-
-	INCROM $16213, $16228
+	frame_oam -16,   4, $2e, $20
+	frame_oam -16,  -4, $30, $20
+	frame_oam -16, -12, $32, $20
+	frame_oam -32, -12, $0c, $20
+	frame_oam -32,  -4, $0a, $20
+	db $80
 
 .frame_14
 	frame_oam -16,   4, $34, $20
-
-	INCROM $1622c, $16241
+	frame_oam -16,  -4, $36, $20
+	frame_oam -16, -12, $38, $20
+	frame_oam -32, -12, $0c, $20
+	frame_oam -32,   4, $10, $20
+	frame_oam -32,  -4, $12, $20
+	db $80
 
 .frame_15
 	frame_oam -32,   4, $1a, $20
-
-	INCROM $16245, $1625a
+	frame_oam -32,  -4, $1c, $20
+	frame_oam -32, -12, $1e, $20
+	frame_oam -16,   4, $14, $20
+	frame_oam -16,  -4, $16, $20
+	frame_oam -16, -12, $18, $20
+	db $80
 
 .frame_16
 	frame_oam -30,  -4, $0a, $20
-
-	INCROM $1625e, $1627b
+	frame_oam -30, -12, $0c, $20
+	frame_oam -18,  12, $00, $20
+	frame_oam -30,   4, $08, $20
+	frame_oam -14,   4, $22, $20
+	frame_oam -14,  -4, $24, $20
+	frame_oam -14, -12, $26, $20
+	frame_oam -30,   9, $c6, $00
+	db $80
 
 .frame_17
 	frame_oam -32,   4, $0e, $20
-
-	INCROM $1627f, $16294
+	frame_oam -32,  -4, $0a, $20
+	frame_oam -32, -12, $0c, $20
+	frame_oam -16,   4, $3a, $20
+	frame_oam -16,  -4, $3c, $20
+	frame_oam -16, -12, $3e, $20
+	db $80
 
 .frame_18
 	frame_oam -32,   4, $0e, $20
-
-	INCROM $16298, $162ad
+	frame_oam -16, -12, $32, $20
+	frame_oam -32, -12, $0c, $20
+	frame_oam -32,  -4, $20, $20
+	frame_oam -16,   4, $50, $20
+	frame_oam -16,  -4, $52, $20
+	db $80
 
 .frame_19
 	frame_oam -31,  -4, $0a, $20
-
-	INCROM $162b1, $162c6
+	frame_oam -31, -12, $0c, $20
+	frame_oam -31,   4, $54, $20
+	frame_oam -15,   4, $56, $20
+	frame_oam -15,  -4, $58, $20
+	frame_oam -15, -12, $5a, $20
+	db $80
 
 .frame_20
 	frame_oam -32, -12, $1e, $20
-
-	INCROM $162ca, $162df
+	frame_oam -16,   4, $60, $20
+	frame_oam -16,  -4, $62, $20
+	frame_oam -16, -12, $64, $20
+	frame_oam -32,   4, $1a, $20
+	frame_oam -32,  -4, $5c, $20
+	db $80
 
 .frame_21
 	frame_oam -32,   4, $66, $20
-
-	INCROM $162e3, $162f8
+	frame_oam -32,  -4, $68, $20
+	frame_oam -32, -12, $6a, $20
+	frame_oam -16,   4, $6c, $20
+	frame_oam -16,  -4, $6e, $20
+	frame_oam -16, -12, $70, $20
+	db $80
 
 .frame_22
 	frame_oam -32,  12, $40, $20
-
-	INCROM $162fc, $1631d
+	frame_oam -32,   4, $42, $20
+	frame_oam -32,  -4, $44, $20
+	frame_oam -32, -12, $46, $20
+	frame_oam -16,  12, $48, $20
+	frame_oam -16,   4, $4a, $20
+	frame_oam -16,  -4, $4c, $20
+	frame_oam -16, -12, $4e, $20
+	frame_oam -32,  19, $fe, $20
+	db $80
 
 .frame_23
 	frame_oam -32,  12, $5e, $20
-
-	INCROM $16321, $1633e
+	frame_oam -32,   4, $72, $20
+	frame_oam -32,  -4, $74, $20
+	frame_oam -32, -12, $76, $20
+	frame_oam -16,  12, $78, $20
+	frame_oam -16,   4, $7a, $20
+	frame_oam -16,  -4, $7c, $20
+	frame_oam -16, -12, $7e, $20
+	db $80
 
 .frame_24
 	frame_oam -32, -12, $66, $01
-
-	INCROM $16342, $1635b
+	frame_oam -32,  -4, $68, $01
+	frame_oam -32,   4, $6a, $01
+	frame_oam -16, -12, $6c, $01
+	frame_oam -16,  -4, $6e, $01
+	frame_oam -16,   4, $70, $01
+	frame_oam -30,   6, $b6, $20
+	db $80
 
 .frame_25
 	frame_oam -32,   4, $66, $21
-
-	INCROM $1635f, $16378
+	frame_oam -32,  -4, $68, $21
+	frame_oam -32, -12, $6a, $21
+	frame_oam -16,   4, $6c, $21
+	frame_oam -16,  -4, $6e, $21
+	frame_oam -16, -12, $70, $21
+	frame_oam -30, -14, $b6, $00
+	db $80
 
 .frame_26
 	frame_oam -32, -12, $66, $01
-
-	INCROM $1637c, $16395
+	frame_oam -32,  -4, $68, $01
+	frame_oam -32,   4, $6a, $01
+	frame_oam -16, -12, $6c, $01
+	frame_oam -16,  -4, $6e, $01
+	frame_oam -16,   4, $70, $01
+	frame_oam -30,   7, $ba, $20
+	db $80
 
 .frame_27
 	frame_oam -32, -12, $66, $00
-
-	INCROM $16399, $163b2
+	frame_oam -32,  -4, $68, $00
+	frame_oam -32,   4, $6a, $00
+	frame_oam -16, -12, $6c, $00
+	frame_oam -16,  -4, $6e, $00
+	frame_oam -16,   4, $70, $00
+	frame_oam -27,  10, $fe, $40
+	db $80
 
 .frame_28
 	frame_oam -32,   4, $66, $21
-
-	INCROM $163b6, $163cf
+	frame_oam -32,  -4, $68, $21
+	frame_oam -32, -12, $6a, $21
+	frame_oam -16,   4, $6c, $21
+	frame_oam -16,  -4, $6e, $21
+	frame_oam -16, -12, $70, $21
+	frame_oam -30, -15, $ba, $00
+	db $80
 
 .frame_29
 	frame_oam -32,   4, $66, $20
-; 0x163d3
-
-	INCROM $163d3, $163ec
+	frame_oam -32,  -4, $68, $20
+	frame_oam -32, -12, $6a, $20
+	frame_oam -16,   4, $6c, $20
+	frame_oam -16,  -4, $6e, $20
+	frame_oam -16, -12, $70, $20
+	frame_oam -27, -18, $fe, $60
+	db $80
+; 0x163ec
 
 Frameset_163ec: ; 163ec (5:63ec)
 	db $00,  3
@@ -2517,7 +3810,7 @@ Frameset_16441: ; 16441 (5:6441)
 	db $ff
 ; 0x1644a
 
-OAM_1644a: ; 1644a (5:644a)
+OAM_1644a: ; 1644a (05:644a)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -2549,144 +3842,234 @@ OAM_1644a: ; 1644a (5:644a)
 
 .frame_0
 	frame_oam -24,  -8, $46, $00
-
-	INCROM $16486, $16493
+	frame_oam -24,   0, $48, $00
+	frame_oam  -8,  -8, $4a, $00
+	frame_oam  -8,   0, $4c, $00
+	db $80
 
 .frame_1
 	frame_oam -16, -15, $40, $00
-
-	INCROM $16497, $164a0
+	frame_oam -16,  -7, $42, $00
+	frame_oam -16,   1, $44, $00
+	db $80
 
 .frame_2
 	frame_oam -10,   0, $46, $60
-
-	INCROM $164a4, $164b1
+	frame_oam -10,  -8, $48, $60
+	frame_oam -26,   0, $4a, $60
+	frame_oam -26,  -8, $4c, $60
+	db $80
 
 .frame_3
 	frame_oam -16,   7, $40, $60
-
-	INCROM $164b5, $164be
+	frame_oam -16,  -1, $42, $60
+	frame_oam -16,  -9, $44, $60
+	db $80
 
 .frame_4
 	frame_oam -24,   0, $46, $20
-
-	INCROM $164c2, $164cf
+	frame_oam -24,  -8, $48, $20
+	frame_oam  -8,   0, $4a, $20
+	frame_oam  -8,  -8, $4c, $20
+	db $80
 
 .frame_5
 	frame_oam -16,   7, $40, $20
-
-	INCROM $164d3, $164dc
+	frame_oam -16,  -1, $42, $20
+	frame_oam -16,  -9, $44, $20
+	db $80
 
 .frame_6
 	frame_oam -10,  -8, $46, $40
-
-	INCROM $164e0, $164ed
+	frame_oam -10,   0, $48, $40
+	frame_oam -26,  -8, $4a, $40
+	frame_oam -26,   0, $4c, $40
+	db $80
 
 .frame_7
 	frame_oam -16, -15, $40, $40
-
-	INCROM $164f1, $164fa
+	frame_oam -16,  -7, $42, $40
+	frame_oam -16,   1, $44, $40
+	db $80
 
 .frame_8
 	frame_oam -32, -14, $60, $00
-
-	INCROM $164fe, $16517
+	frame_oam -32,  -6, $62, $00
+	frame_oam -32,   2, $64, $00
+	frame_oam -16, -16, $66, $00
+	frame_oam -16,  -8, $68, $00
+	frame_oam -16,   0, $6a, $00
+	frame_oam -16,   8, $6c, $00
+	db $80
 
 .frame_9
 	frame_oam -31, -15, $60, $00
-
-	INCROM $1651b, $16534
+	frame_oam -31,  -7, $62, $00
+	frame_oam -31,   1, $64, $00
+	frame_oam -15, -17, $66, $00
+	frame_oam -15,  -9, $68, $00
+	frame_oam -15,  -1, $6a, $00
+	frame_oam -15,   7, $6c, $00
+	db $80
 
 .frame_10
 	frame_oam -32,   6, $60, $20
-
-	INCROM $16538, $16551
+	frame_oam -32,  -2, $62, $20
+	frame_oam -32, -10, $64, $20
+	frame_oam -16,   8, $66, $20
+	frame_oam -16,   0, $68, $20
+	frame_oam -16,  -8, $6a, $20
+	frame_oam -16, -16, $6c, $20
+	db $80
 
 .frame_11
 	frame_oam -31,   7, $60, $20
-
-	INCROM $16555, $1656e
+	frame_oam -31,  -1, $62, $20
+	frame_oam -31,  -9, $64, $20
+	frame_oam -15,   9, $66, $20
+	frame_oam -15,   1, $68, $20
+	frame_oam -15,  -7, $6a, $20
+	frame_oam -15, -15, $6c, $20
+	db $80
 
 .frame_12
 	frame_oam -37, -16, $4e, $00
-
-	INCROM $16572, $1658b
+	frame_oam -37,  -8, $50, $00
+	frame_oam -21, -18, $52, $00
+	frame_oam -21, -10, $7e, $00
+	frame_oam -21,  -2, $6a, $00
+	frame_oam -21,   6, $6c, $00
+	frame_oam -37,   0, $64, $00
+	db $80
 
 .frame_13
 	frame_oam -43, -17, $4e, $00
-
-	INCROM $1658f, $165a8
+	frame_oam -43,  -9, $50, $00
+	frame_oam -27, -19, $52, $00
+	frame_oam -27, -11, $7e, $00
+	frame_oam -27,  -3, $6a, $00
+	frame_oam -27,   5, $6c, $00
+	frame_oam -43,  -1, $64, $00
+	db $80
 
 .frame_14
 	frame_oam -34, -16, $6e, $00
-
-	INCROM $165ac, $165c9
+	frame_oam -34,  -8, $70, $00
+	frame_oam -32,   0, $72, $00
+	frame_oam -32,   8, $74, $00
+	frame_oam -18, -16, $76, $00
+	frame_oam -18,  -8, $78, $00
+	frame_oam -16,   0, $7a, $00
+	frame_oam -16,   8, $7c, $00
+	db $80
 
 .frame_15
 	frame_oam -13,   2, $60, $60
-
-	INCROM $165cd, $165e6
+	frame_oam -13,  -6, $62, $60
+	frame_oam -13, -14, $64, $60
+	frame_oam -29,   4, $66, $60
+	frame_oam -29,  -4, $68, $60
+	frame_oam -29, -12, $6a, $60
+	frame_oam -29, -20, $6c, $60
+	db $80
 
 .frame_16
 	frame_oam -34,   8, $6e, $20
-
-	INCROM $165ea, $16607
+	frame_oam -34,   0, $70, $20
+	frame_oam -32,  -8, $72, $20
+	frame_oam -32, -16, $74, $20
+	frame_oam -18,   8, $76, $20
+	frame_oam -18,   0, $78, $20
+	frame_oam -16,  -8, $7a, $20
+	frame_oam -16, -16, $7c, $20
+	db $80
 
 .frame_17
 	frame_oam -13, -10, $60, $40
-
-	INCROM $1660b, $16624
+	frame_oam -13,  -2, $62, $40
+	frame_oam -13,   6, $64, $40
+	frame_oam -29, -12, $66, $40
+	frame_oam -29,  -4, $68, $40
+	frame_oam -29,   4, $6a, $40
+	frame_oam -29,  12, $6c, $40
+	db $80
 
 .frame_18
 	frame_oam -37,   8, $4e, $20
-
-	INCROM $16628, $16641
+	frame_oam -37,   0, $50, $20
+	frame_oam -21,  10, $52, $20
+	frame_oam -21,   2, $7e, $20
+	frame_oam -21,  -6, $6a, $20
+	frame_oam -21, -14, $6c, $20
+	frame_oam -37,  -8, $64, $20
+	db $80
 
 .frame_19
 	frame_oam -43,   9, $4e, $20
-
-	INCROM $16645, $1665e
+	frame_oam -43,   1, $50, $20
+	frame_oam -27,  11, $52, $20
+	frame_oam -27,   3, $7e, $20
+	frame_oam -27,  -5, $6a, $20
+	frame_oam -27, -13, $6c, $20
+	frame_oam -43,  -7, $64, $20
+	db $80
 
 .frame_20
 	frame_oam -16, -15, $56, $00
-
-	INCROM $16662, $1666f
+	frame_oam -16,  -7, $58, $00
+	frame_oam -16,   1, $5a, $00
+	frame_oam -32,  -7, $54, $00
+	db $80
 
 .frame_21
 	frame_oam -16,  -7, $5c, $00
-
-	INCROM $16673, $16680
+	frame_oam -16,   1, $5e, $00
+	frame_oam -10, -15, $56, $00
+	frame_oam   0,  -7, $54, $40
+	db $80
 
 .frame_22
 	frame_oam -16,   8, $56, $60
-
-	INCROM $16684, $16691
+	frame_oam -16,   0, $58, $60
+	frame_oam -16,  -8, $5a, $60
+	frame_oam   0,   0, $54, $60
+	db $80
 
 .frame_23
 	frame_oam -16,   0, $5c, $60
-
-	INCROM $16695, $166a2
+	frame_oam -16,  -8, $5e, $60
+	frame_oam -22,   8, $56, $60
+	frame_oam -32,   0, $54, $20
+	db $80
 
 .frame_24
 	frame_oam -16,   7, $56, $20
-
-	INCROM $166a6, $166b3
+	frame_oam -16,  -1, $58, $20
+	frame_oam -16,  -9, $5a, $20
+	frame_oam -32,  -1, $54, $20
+	db $80
 
 .frame_25
 	frame_oam -16,  -1, $5c, $20
-
-	INCROM $166b7, $166c4
+	frame_oam -16,  -9, $5e, $20
+	frame_oam -10,   7, $56, $20
+	frame_oam   0,  -1, $54, $60
+	db $80
 
 .frame_26
 	frame_oam -16, -16, $56, $40
-
-	INCROM $166c8, $166d5
+	frame_oam -16,  -8, $58, $40
+	frame_oam -16,   0, $5a, $40
+	frame_oam   0,  -8, $54, $40
+	db $80
 
 .frame_27
 	frame_oam -16,  -8, $5c, $40
-; 0x166d9
-
-	INCROM $166d9, $166e6
+	frame_oam -16,   0, $5e, $40
+	frame_oam -22, -16, $56, $40
+	frame_oam -32,  -8, $54, $00
+	db $80
+; 0x166e6
 
 Frameset_166e6: ; 166e6 (5:66e6)
 	db $00,  2
@@ -2747,7 +4130,7 @@ Frameset_16737: ; 16737 (5:6737)
 	db $ff
 ; 0x1673c
 
-OAM_1673c: ; 1673c (5:673c)
+OAM_1673c: ; 1673c (05:673c)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -2783,164 +4166,322 @@ OAM_1673c: ; 1673c (5:673c)
 
 .frame_0
 	frame_oam -32, -12, $00, $00
-
-	INCROM $16780, $1679d
+	frame_oam -32,  -4, $16, $00
+	frame_oam -32,   4, $18, $00
+	frame_oam -16, -12, $1a, $00
+	frame_oam -16,  -4, $1c, $00
+	frame_oam -16,   4, $1e, $00
+	frame_oam -22,   7, $20, $01
+	frame_oam -22,  15, $22, $01
+	db $80
 
 .frame_1
 	frame_oam -33, -12, $00, $00
-
-	INCROM $167a1, $167be
+	frame_oam -33,  -4, $02, $00
+	frame_oam -33,   4, $04, $00
+	frame_oam -17, -12, $06, $00
+	frame_oam -17,  -4, $08, $00
+	frame_oam -17,   4, $0a, $00
+	frame_oam -23,   7, $24, $01
+	frame_oam -23,  15, $26, $01
+	db $80
 
 .frame_2
 	frame_oam -31, -12, $00, $00
-
-	INCROM $167c2, $167df
+	frame_oam -31,  -4, $0c, $00
+	frame_oam -31,   4, $0e, $00
+	frame_oam -15, -12, $10, $00
+	frame_oam -15,  -4, $12, $00
+	frame_oam -15,   4, $14, $00
+	frame_oam -20,   7, $28, $01
+	frame_oam -20,  15, $2a, $01
+	db $80
 
 .frame_3
 	frame_oam -31, -12, $00, $00
-
-	INCROM $167e3, $16800
+	frame_oam -31,  -4, $0c, $00
+	frame_oam -31,   4, $0e, $00
+	frame_oam -15, -12, $10, $00
+	frame_oam -15,  -4, $12, $00
+	frame_oam -15,   4, $14, $00
+	frame_oam -20,   7, $2c, $01
+	frame_oam -20,  15, $2e, $01
+	db $80
 
 .frame_4
 	frame_oam -32,   4, $00, $20
-
-	INCROM $16804, $16821
+	frame_oam -32,  -4, $16, $20
+	frame_oam -32, -12, $18, $20
+	frame_oam -16,   4, $1a, $20
+	frame_oam -16,  -4, $1c, $20
+	frame_oam -16, -12, $1e, $20
+	frame_oam -22, -15, $20, $21
+	frame_oam -22, -23, $22, $21
+	db $80
 
 .frame_5
 	frame_oam -33,   4, $00, $20
-
-	INCROM $16825, $16842
+	frame_oam -33,  -4, $02, $20
+	frame_oam -33, -12, $04, $20
+	frame_oam -17,   4, $06, $20
+	frame_oam -17,  -4, $08, $20
+	frame_oam -17, -12, $0a, $20
+	frame_oam -23, -15, $24, $21
+	frame_oam -23, -23, $26, $21
+	db $80
 
 .frame_6
 	frame_oam -31,   4, $00, $20
-
-	INCROM $16846, $16863
+	frame_oam -31,  -4, $0c, $20
+	frame_oam -31, -12, $0e, $20
+	frame_oam -15,   4, $10, $20
+	frame_oam -15,  -4, $12, $20
+	frame_oam -15, -12, $14, $20
+	frame_oam -20, -15, $28, $21
+	frame_oam -20, -23, $2a, $21
+	db $80
 
 .frame_7
 	frame_oam -31,   4, $00, $20
-
-	INCROM $16867, $16884
+	frame_oam -31,  -4, $0c, $20
+	frame_oam -31, -12, $0e, $20
+	frame_oam -15,   4, $10, $20
+	frame_oam -15,  -4, $12, $20
+	frame_oam -15, -12, $14, $20
+	frame_oam -20, -15, $2c, $21
+	frame_oam -20, -23, $2e, $21
+	db $80
 
 .frame_8
 	frame_oam -32, -11, $30, $01
-
-	INCROM $16888, $1689d
+	frame_oam -32,  -3, $32, $01
+	frame_oam -32,   5, $34, $01
+	frame_oam -16, -11, $36, $01
+	frame_oam -16,  -3, $38, $01
+	frame_oam -16,   5, $3a, $01
+	db $80
 
 .frame_9
 	frame_oam -32, -11, $3c, $01
-
-	INCROM $168a1, $168b6
+	frame_oam -32,  -3, $3e, $01
+	frame_oam -32,   5, $40, $01
+	frame_oam -16, -11, $42, $01
+	frame_oam -16,  -3, $44, $01
+	frame_oam -16,   5, $46, $01
+	db $80
 
 .frame_10
 	frame_oam -32, -11, $48, $01
-
-	INCROM $168ba, $168cf
+	frame_oam -32,  -3, $4a, $01
+	frame_oam -32,   5, $4c, $01
+	frame_oam -16, -11, $4e, $01
+	frame_oam -16,  -3, $50, $01
+	frame_oam -16,   5, $52, $01
+	db $80
 
 .frame_11
 	frame_oam -32, -11, $54, $01
-
-	INCROM $168d3, $168e8
+	frame_oam -32,  -3, $56, $01
+	frame_oam -32,   5, $58, $01
+	frame_oam -16, -11, $5a, $01
+	frame_oam -16,  -3, $5c, $01
+	frame_oam -16,   5, $5e, $01
+	db $80
 
 .frame_12
 	frame_oam -32,   5, $30, $21
-
-	INCROM $168ec, $16901
+	frame_oam -32,  -3, $32, $21
+	frame_oam -32, -11, $34, $21
+	frame_oam -16,   5, $36, $21
+	frame_oam -16,  -3, $38, $21
+	frame_oam -16, -11, $3a, $21
+	db $80
 
 .frame_13
 	frame_oam -32,   5, $3c, $21
-
-	INCROM $16905, $1691a
+	frame_oam -32,  -3, $3e, $21
+	frame_oam -32, -11, $40, $21
+	frame_oam -16,   5, $42, $21
+	frame_oam -16,  -3, $44, $21
+	frame_oam -16, -11, $46, $21
+	db $80
 
 .frame_14
 	frame_oam -32,   5, $48, $21
-
-	INCROM $1691e, $16933
+	frame_oam -32,  -3, $4a, $21
+	frame_oam -32, -11, $4c, $21
+	frame_oam -16,   5, $4e, $21
+	frame_oam -16,  -3, $50, $21
+	frame_oam -16, -11, $52, $21
+	db $80
 
 .frame_15
 	frame_oam -32,   5, $54, $21
-
-	INCROM $16937, $1694c
+	frame_oam -32,  -3, $56, $21
+	frame_oam -32, -11, $58, $21
+	frame_oam -16,   5, $5a, $21
+	frame_oam -16,  -3, $5c, $21
+	frame_oam -16, -11, $5e, $21
+	db $80
 
 .frame_16
 	frame_oam -32, -12, $00, $00
-
-	INCROM $16950, $16969
+	frame_oam -32,  -4, $16, $00
+	frame_oam -32,   4, $18, $00
+	frame_oam -16, -12, $1a, $00
+	frame_oam -16,  -4, $1c, $00
+	frame_oam -16,   4, $1e, $00
+	frame_oam -21,   8, $60, $01
+	db $80
 
 .frame_17
 	frame_oam -33, -12, $00, $00
-
-	INCROM $1696d, $16986
+	frame_oam -33,  -4, $02, $00
+	frame_oam -33,   4, $04, $00
+	frame_oam -17, -12, $06, $00
+	frame_oam -17,  -4, $08, $00
+	frame_oam -17,   4, $0a, $00
+	frame_oam -22,   8, $62, $01
+	db $80
 
 .frame_18
 	frame_oam -31, -12, $00, $00
-
-	INCROM $1698a, $169a3
+	frame_oam -31,  -4, $0c, $00
+	frame_oam -31,   4, $0e, $00
+	frame_oam -15, -12, $10, $00
+	frame_oam -15,  -4, $12, $00
+	frame_oam -15,   4, $14, $00
+	frame_oam -19,   8, $64, $01
+	db $80
 
 .frame_19
 	frame_oam -31, -12, $00, $00
-
-	INCROM $169a7, $169c0
+	frame_oam -31,  -4, $0c, $00
+	frame_oam -31,   4, $0e, $00
+	frame_oam -15, -12, $10, $00
+	frame_oam -15,  -4, $12, $00
+	frame_oam -15,   4, $14, $00
+	frame_oam -18,   8, $66, $01
+	db $80
 
 .frame_20
 	frame_oam -32,   4, $00, $20
-
-	INCROM $169c4, $169dd
+	frame_oam -32,  -4, $16, $20
+	frame_oam -32, -12, $18, $20
+	frame_oam -16,   4, $1a, $20
+	frame_oam -16,  -4, $1c, $20
+	frame_oam -16, -12, $1e, $20
+	frame_oam -21, -16, $60, $21
+	db $80
 
 .frame_21
 	frame_oam -33,   4, $00, $20
-
-	INCROM $169e1, $169fa
+	frame_oam -33,  -4, $02, $20
+	frame_oam -33, -12, $04, $20
+	frame_oam -17,   4, $06, $20
+	frame_oam -17,  -4, $08, $20
+	frame_oam -17, -12, $0a, $20
+	frame_oam -22, -16, $62, $21
+	db $80
 
 .frame_22
 	frame_oam -31,   4, $00, $20
-
-	INCROM $169fe, $16a17
+	frame_oam -31,  -4, $0c, $20
+	frame_oam -31, -12, $0e, $20
+	frame_oam -15,   4, $10, $20
+	frame_oam -15,  -4, $12, $20
+	frame_oam -15, -12, $14, $20
+	frame_oam -19, -16, $64, $21
+	db $80
 
 .frame_23
 	frame_oam -31,   4, $00, $20
-
-	INCROM $16a1b, $16a34
+	frame_oam -31,  -4, $0c, $20
+	frame_oam -31, -12, $0e, $20
+	frame_oam -15,   4, $10, $20
+	frame_oam -15,  -4, $12, $20
+	frame_oam -15, -12, $14, $20
+	frame_oam -18, -16, $66, $21
+	db $80
 
 .frame_24
 	frame_oam -32, -12, $00, $00
-
-	INCROM $16a38, $16a51
+	frame_oam -32,  -4, $16, $00
+	frame_oam -32,   4, $18, $00
+	frame_oam -16, -12, $1a, $00
+	frame_oam -16,  -4, $1c, $00
+	frame_oam -16,   4, $1e, $00
+	frame_oam -44,   5, $68, $00
+	db $80
 
 .frame_25
 	frame_oam -33, -12, $00, $00
-
-	INCROM $16a55, $16a6e
+	frame_oam -33,  -4, $02, $00
+	frame_oam -33,   4, $04, $00
+	frame_oam -17, -12, $06, $00
+	frame_oam -17,  -4, $08, $00
+	frame_oam -17,   4, $0a, $00
+	frame_oam -44,   7, $6a, $00
+	db $80
 
 .frame_26
 	frame_oam -31, -12, $00, $00
-
-	INCROM $16a72, $16a8b
+	frame_oam -31,  -4, $0c, $00
+	frame_oam -31,   4, $0e, $00
+	frame_oam -15, -12, $10, $00
+	frame_oam -15,  -4, $12, $00
+	frame_oam -15,   4, $14, $00
+	frame_oam -44,   8, $6c, $00
+	db $80
 
 .frame_27
 	frame_oam -31, -12, $00, $00
-
-	INCROM $16a8f, $16aa4
+	frame_oam -31,  -4, $0c, $00
+	frame_oam -31,   4, $0e, $00
+	frame_oam -15, -12, $10, $00
+	frame_oam -15,  -4, $12, $00
+	frame_oam -15,   4, $14, $00
+	db $80
 
 .frame_28
 	frame_oam -32,   4, $00, $20
-
-	INCROM $16aa8, $16ac1
+	frame_oam -32,  -4, $16, $20
+	frame_oam -32, -12, $18, $20
+	frame_oam -16,   4, $1a, $20
+	frame_oam -16,  -4, $1c, $20
+	frame_oam -16, -12, $1e, $20
+	frame_oam -44, -13, $68, $20
+	db $80
 
 .frame_29
 	frame_oam -33,   4, $00, $20
-
-	INCROM $16ac5, $16ade
+	frame_oam -33,  -4, $02, $20
+	frame_oam -33, -12, $04, $20
+	frame_oam -17,   4, $06, $20
+	frame_oam -17,  -4, $08, $20
+	frame_oam -17, -12, $0a, $20
+	frame_oam -44, -15, $6a, $20
+	db $80
 
 .frame_30
 	frame_oam -31,   4, $00, $20
-
-	INCROM $16ae2, $16afb
+	frame_oam -31,  -4, $0c, $20
+	frame_oam -31, -12, $0e, $20
+	frame_oam -15,   4, $10, $20
+	frame_oam -15,  -4, $12, $20
+	frame_oam -15, -12, $14, $20
+	frame_oam -44, -16, $6c, $20
+	db $80
 
 .frame_31
 	frame_oam -31,   4, $00, $20
-; 0x16aff
-
-	INCROM $16aff, $16b14
+	frame_oam -31,  -4, $0c, $20
+	frame_oam -31, -12, $0e, $20
+	frame_oam -15,   4, $10, $20
+	frame_oam -15,  -4, $12, $20
+	frame_oam -15, -12, $14, $20
+	db $80
+; 0x16b14
 
 Frameset_16b14:
 	db $00,  2
@@ -3007,7 +4548,7 @@ Frameset_16b63:
 	db $ff
 ; 0x16b6c
 
-OAM_16b6c: ; 16b6c (5:6b6c)
+OAM_16b6c: ; 16b6c (05:6b6c)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -3032,109 +4573,234 @@ OAM_16b6c: ; 16b6c (5:6b6c)
 
 .frame_0
 	frame_oam -32, -12, $00, $00
-
-	INCROM $16b9a, $16bbb
+	frame_oam -32,  -4, $02, $00
+	frame_oam -32,   4, $04, $00
+	frame_oam -16,  -8, $08, $00
+	frame_oam -16, -16, $06, $00
+	frame_oam -16,   0, $08, $20
+	frame_oam -16,   8, $06, $20
+	frame_oam -48, -11, $40, $00
+	frame_oam -48,   4, $42, $00
+	db $80
 
 .frame_1
 	frame_oam -32, -12, $00, $00
-
-	INCROM $16bbf, $16be0
+	frame_oam -32,  -4, $02, $00
+	frame_oam -32,   4, $04, $00
+	frame_oam -16,  -8, $08, $00
+	frame_oam -16, -16, $06, $00
+	frame_oam -16,   0, $08, $20
+	frame_oam -16,   8, $06, $20
+	frame_oam -50, -12, $40, $00
+	frame_oam -52,   3, $40, $20
+	db $80
 
 .frame_2
 	frame_oam -32, -12, $00, $00
-
-	INCROM $16be4, $16bfd
+	frame_oam -32,  -4, $02, $00
+	frame_oam -32,   4, $04, $00
+	frame_oam -16,  -8, $08, $00
+	frame_oam -16, -16, $06, $00
+	frame_oam -16,   0, $08, $20
+	frame_oam -16,   8, $06, $20
+	db $80
 
 .frame_3
 	frame_oam -32, -12, $00, $00
-
-	INCROM $16c01, $16c1a
+	frame_oam -32,   4, $04, $00
+	frame_oam -16, -16, $06, $00
+	frame_oam -16,  -8, $08, $00
+	frame_oam -16,   8, $06, $20
+	frame_oam -16,   0, $08, $20
+	frame_oam -32,  -4, $0a, $00
+	db $80
 
 .frame_4
 	frame_oam -32, -12, $00, $00
-
-	INCROM $16c1e, $16c37
+	frame_oam -32,   4, $04, $00
+	frame_oam -16, -16, $06, $00
+	frame_oam -16,   8, $06, $20
+	frame_oam -16,  -8, $0c, $00
+	frame_oam -16,   0, $0e, $00
+	frame_oam -32,  -4, $0a, $00
+	db $80
 
 .frame_5
 	frame_oam -32,   4, $04, $00
-
-	INCROM $16c3b, $16c54
+	frame_oam -16, -16, $06, $00
+	frame_oam -16,   8, $06, $20
+	frame_oam -32, -12, $10, $00
+	frame_oam -32,  -4, $12, $00
+	frame_oam -16,  -8, $0c, $00
+	frame_oam -16,   0, $0e, $00
+	db $80
 
 .frame_6
 	frame_oam -35, -16, $14, $00
-
-	INCROM $16c58, $16c75
+	frame_oam -35,  -8, $16, $00
+	frame_oam -19, -16, $18, $00
+	frame_oam -19,  -8, $1a, $00
+	frame_oam -35,   8, $14, $20
+	frame_oam -35,   0, $16, $20
+	frame_oam -19,   8, $18, $20
+	frame_oam -19,   0, $1a, $20
+	db $80
 
 .frame_7
 	frame_oam -32, -16, $14, $00
-
-	INCROM $16c79, $16c96
+	frame_oam -32,  -8, $16, $00
+	frame_oam -16, -16, $18, $00
+	frame_oam -16,  -8, $1a, $00
+	frame_oam -32,   8, $14, $20
+	frame_oam -32,   0, $16, $20
+	frame_oam -16,   8, $18, $20
+	frame_oam -16,   0, $1a, $20
+	db $80
 
 .frame_8
 	frame_oam -32, -16, $14, $00
-
-	INCROM $16c9a, $16cb7
+	frame_oam -32,  -8, $16, $00
+	frame_oam -16, -16, $18, $00
+	frame_oam -32,   8, $14, $20
+	frame_oam -32,   0, $16, $20
+	frame_oam -16,   8, $18, $20
+	frame_oam -16,  -8, $08, $00
+	frame_oam -16,   0, $08, $20
+	db $80
 
 .frame_9
 	frame_oam -32, -16, $1c, $00
-
-	INCROM $16cbb, $16cd8
+	frame_oam -32,  -8, $1e, $00
+	frame_oam -16, -16, $18, $00
+	frame_oam -16,  -8, $08, $00
+	frame_oam -32,   8, $1c, $20
+	frame_oam -32,   0, $1e, $20
+	frame_oam -16,   8, $18, $20
+	frame_oam -16,   0, $08, $20
+	db $80
 
 .frame_10
 	frame_oam -32, -16, $20, $00
-
-	INCROM $16cdc, $16cf9
+	frame_oam -32,  -8, $22, $00
+	frame_oam -32,   0, $24, $00
+	frame_oam -32,   8, $26, $00
+	frame_oam -16, -16, $18, $00
+	frame_oam -16,  -8, $08, $00
+	frame_oam -16,   0, $08, $20
+	frame_oam -16,   8, $18, $20
+	db $80
 
 .frame_11
 	frame_oam -32, -16, $38, $00
-
-	INCROM $16cfd, $16d1e
+	frame_oam -32,  -8, $3a, $00
+	frame_oam -32,   0, $22, $20
+	frame_oam -32,   8, $28, $00
+	frame_oam -16, -16, $2a, $00
+	frame_oam -16,  -8, $2c, $00
+	frame_oam -16,   0, $08, $20
+	frame_oam -16,   8, $2e, $00
+	frame_oam -16,  16, $30, $00
+	db $80
 
 .frame_12
 	frame_oam -32, -16, $38, $00
-
-	INCROM $16d22, $16d43
+	frame_oam -32,  -8, $3a, $00
+	frame_oam -16, -16, $3c, $00
+	frame_oam -16,  -8, $3e, $00
+	frame_oam -32,   0, $3a, $20
+	frame_oam -32,   8, $20, $20
+	frame_oam -16,   0, $2c, $20
+	frame_oam -16,   8, $32, $00
+	frame_oam -16,  16, $34, $00
+	db $80
 
 .frame_13
 	frame_oam -32, -16, $38, $00
-
-	INCROM $16d47, $16d68
+	frame_oam -32,  -8, $3a, $00
+	frame_oam -32,   8, $38, $20
+	frame_oam -32,   0, $3a, $20
+	frame_oam -16, -16, $3c, $00
+	frame_oam -16,  -8, $3e, $00
+	frame_oam -16,   0, $3e, $20
+	frame_oam -16,   8, $36, $00
+	frame_oam -15,  19, $34, $00
+	db $80
 
 .frame_14
 	frame_oam -32, -16, $38, $00
-
-	INCROM $16d6c, $16d89
+	frame_oam -32,  -8, $3a, $00
+	frame_oam -32,   8, $38, $20
+	frame_oam -32,   0, $3a, $20
+	frame_oam -16, -16, $3c, $00
+	frame_oam -16,  -8, $3e, $00
+	frame_oam -16,   8, $3c, $20
+	frame_oam -16,   0, $3e, $20
+	db $80
 
 .frame_15
 	frame_oam -32,   4, $00, $20
-
-	INCROM $16d8d, $16da6
+	frame_oam -32,  -4, $02, $20
+	frame_oam -32, -12, $04, $20
+	frame_oam -16,  -8, $08, $00
+	frame_oam -16, -16, $06, $00
+	frame_oam -16,   0, $08, $20
+	frame_oam -16,   8, $06, $20
+	db $80
 
 .frame_16
 	frame_oam -32,   4, $00, $20
-
-	INCROM $16daa, $16dc3
+	frame_oam -32, -12, $04, $20
+	frame_oam -16, -16, $06, $00
+	frame_oam -16,  -8, $08, $00
+	frame_oam -16,   8, $06, $20
+	frame_oam -16,   0, $08, $20
+	frame_oam -32,  -4, $0a, $20
+	db $80
 
 .frame_17
 	frame_oam -32,   4, $00, $20
-
-	INCROM $16dc7, $16de0
+	frame_oam -32, -12, $04, $20
+	frame_oam -16, -16, $06, $00
+	frame_oam -16,   8, $06, $20
+	frame_oam -16,   0, $0c, $20
+	frame_oam -16,  -8, $0e, $20
+	frame_oam -32,  -4, $0a, $20
+	db $80
 
 .frame_18
 	frame_oam -32, -12, $04, $20
-
-	INCROM $16de4, $16dfd
+	frame_oam -16, -16, $06, $00
+	frame_oam -16,   8, $06, $20
+	frame_oam -32,   4, $10, $20
+	frame_oam -32,  -4, $12, $20
+	frame_oam -16,   0, $0c, $20
+	frame_oam -16,  -8, $0e, $20
+	db $80
 
 .frame_19
 	frame_oam -32,   4, $00, $20
-
-	INCROM $16e01, $16e22
+	frame_oam -32,  -4, $02, $20
+	frame_oam -32, -12, $04, $20
+	frame_oam -16,  -8, $08, $00
+	frame_oam -16, -16, $06, $00
+	frame_oam -16,   0, $08, $20
+	frame_oam -16,   8, $06, $20
+	frame_oam -48,   3, $40, $20
+	frame_oam -48, -12, $42, $20
+	db $80
 
 .frame_20
 	frame_oam -32,   4, $00, $20
-; 0x16e26
-
-	INCROM $16e26, $16e47
+	frame_oam -32,  -4, $02, $20
+	frame_oam -32, -12, $04, $20
+	frame_oam -16,  -8, $08, $00
+	frame_oam -16, -16, $06, $00
+	frame_oam -16,   0, $08, $20
+	frame_oam -16,   8, $06, $20
+	frame_oam -50,   4, $40, $20
+	frame_oam -52, -11, $40, $00
+	db $80
+; 0x16e47
 
 Frameset_16e47: ; 16e47 (5:6e47)
 	db $00,  5
@@ -3219,154 +4885,248 @@ OAM_16e9d: ; 16e9d (05:6e9d)
 
 .frame_0
 	frame_oam -16,   0, $06, $20
-
-	INCROM $16edd, $16ef6
+	frame_oam -16,   8, $04, $20
+	frame_oam -32,   4, $00, $20
+	frame_oam -16,  -8, $06, $00
+	frame_oam -16, -16, $04, $00
+	frame_oam -32,  -4, $02, $00
+	frame_oam -32, -12, $00, $00
+	db $80
 
 .frame_1
 	frame_oam -16,   4, $0a, $20
-
-	INCROM $16efa, $16f0b
+	frame_oam -16,  12, $08, $20
+	frame_oam -16,  -4, $0c, $00
+	frame_oam -16, -12, $0a, $00
+	frame_oam -16, -20, $08, $00
+	db $80
 
 .frame_2
 	frame_oam -16,   4, $10, $20
-
-	INCROM $16f0f, $16f20
+	frame_oam -16,  12, $0e, $20
+	frame_oam -16,  -4, $12, $00
+	frame_oam -16, -12, $10, $00
+	frame_oam -16, -20, $0e, $00
+	db $80
 
 .frame_3
 	frame_oam -15,  -4, $1e, $00
-
-	INCROM $16f24, $16f35
+	frame_oam -16,  12, $18, $20
+	frame_oam -16, -20, $18, $00
+	frame_oam -15,   4, $16, $20
+	frame_oam -15, -12, $16, $00
+	db $80
 
 .frame_4
 	frame_oam -16,  -4, $1e, $00
-
-	INCROM $16f39, $16f4a
+	frame_oam -16,  12, $18, $20
+	frame_oam -16, -20, $18, $00
+	frame_oam -16,   4, $16, $20
+	frame_oam -16, -12, $16, $00
+	db $80
 
 .frame_5
 	frame_oam -15,  -4, $1e, $00
-
-	INCROM $16f4e, $16f5f
+	frame_oam -16,   4, $1c, $20
+	frame_oam -16,  12, $18, $20
+	frame_oam -17, -20, $14, $00
+	frame_oam -15, -12, $16, $00
+	db $80
 
 .frame_6
 	frame_oam -16,  -4, $1e, $00
-
-	INCROM $16f63, $16f74
+	frame_oam -17,  12, $18, $20
+	frame_oam -17, -20, $18, $00
+	frame_oam -16,   4, $1a, $20
+	frame_oam -16, -12, $1a, $00
+	db $80
 
 .frame_7
 	frame_oam -15,  -4, $1e, $00
-
-	INCROM $16f78, $16f89
+	frame_oam -16, -12, $1c, $00
+	frame_oam -16, -20, $18, $00
+	frame_oam -17,  12, $14, $20
+	frame_oam -15,   4, $16, $20
+	db $80
 
 .frame_8
 	frame_oam -16,  12, $18, $20
-
-	INCROM $16f8d, $16f9e
+	frame_oam -16,   4, $1c, $20
+	frame_oam -17,  -4, $1e, $00
+	frame_oam -17, -12, $20, $00
+	frame_oam -18, -20, $14, $00
+	db $80
 
 .frame_9
 	frame_oam -16,   4, $20, $20
-
-	INCROM $16fa2, $16fb3
+	frame_oam -16, -12, $20, $00
+	frame_oam -16,  -4, $1e, $00
+	frame_oam -16,  12, $18, $20
+	frame_oam -17, -20, $18, $00
+	db $80
 
 .frame_10
 	frame_oam -15,   4, $20, $20
-
-	INCROM $16fb7, $16fc8
+	frame_oam -15, -12, $20, $00
+	frame_oam -15,  -4, $1e, $00
+	frame_oam -16,  12, $18, $20
+	frame_oam -16, -20, $18, $00
+	db $80
 
 .frame_11
 	frame_oam -16, -12, $20, $00
-
-	INCROM $16fcc, $16fdd
+	frame_oam -17,  12, $18, $20
+	frame_oam -16, -20, $18, $00
+	frame_oam -16,  -4, $1e, $20
+	frame_oam -16,   4, $20, $20
+	db $80
 
 .frame_12
 	frame_oam -18,  12, $14, $20
-
-	INCROM $16fe1, $16ff2
+	frame_oam -16, -20, $18, $00
+	frame_oam -16, -12, $1c, $00
+	frame_oam -17,  -4, $1e, $20
+	frame_oam -17,   4, $20, $20
+	db $80
 
 .frame_13
 	frame_oam -16,  11, $18, $20
-
-	INCROM $16ff6, $17007
+	frame_oam -18, -21, $14, $00
+	frame_oam -18, -13, $1a, $00
+	frame_oam -16,  -5, $24, $20
+	frame_oam -16,   3, $22, $20
+	db $80
 
 .frame_14
 	frame_oam -16,   4, $20, $20
-
-	INCROM $1700b, $1701c
+	frame_oam -18, -20, $18, $00
+	frame_oam -17, -12, $1c, $00
+	frame_oam -16,  12, $18, $20
+	frame_oam -15,  -4, $24, $20
+	db $80
 
 .frame_15
 	frame_oam -15,  12, $18, $20
-
-	INCROM $17020, $17031
+	frame_oam -15, -20, $18, $00
+	frame_oam -15,   4, $20, $20
+	frame_oam -15, -12, $20, $00
+	frame_oam -15,  -4, $1e, $00
+	db $80
 
 .frame_16
 	frame_oam -16, -12, $20, $00
-
-	INCROM $17035, $17046
+	frame_oam -18,  12, $18, $20
+	frame_oam -17,   4, $1c, $20
+	frame_oam -16, -20, $18, $00
+	frame_oam -15,  -4, $24, $00
+	db $80
 
 .frame_17
 	frame_oam -16, -19, $18, $00
-
-	INCROM $1704a, $1705b
+	frame_oam -18,  13, $14, $20
+	frame_oam -18,   5, $1a, $20
+	frame_oam -16,  -3, $24, $00
+	frame_oam -16, -11, $22, $00
+	db $80
 
 .frame_18
 	frame_oam -16,  12, $14, $20
-
-	INCROM $1705f, $17070
+	frame_oam -16, -20, $14, $00
+	frame_oam -16,   4, $20, $20
+	frame_oam -16, -12, $20, $00
+	frame_oam -16,  -4, $1e, $00
+	db $80
 
 .frame_19
 	frame_oam -16,   4, $28, $20
-
-	INCROM $17074, $17085
+	frame_oam -16,  12, $26, $20
+	frame_oam -16,  -4, $2a, $00
+	frame_oam -16, -12, $28, $00
+	frame_oam -16, -20, $26, $00
+	db $80
 
 .frame_20
 	frame_oam -15,  -4, $1e, $00
-
-	INCROM $17089, $1709a
+	frame_oam -16,   4, $1c, $20
+	frame_oam -16,  12, $18, $20
+	frame_oam -16, -20, $14, $00
+	frame_oam -15, -12, $16, $00
+	db $80
 
 .frame_21
 	frame_oam -14,  11, $14, $20
-
-	INCROM $1709e, $170af
+	frame_oam -15,   3, $1c, $20
+	frame_oam -16,  -5, $1e, $00
+	frame_oam -17, -21, $18, $00
+	frame_oam -16, -13, $1a, $00
+	db $80
 
 .frame_22
 	frame_oam -14, -20, $14, $00
-
-	INCROM $170b3, $170c4
+	frame_oam -15, -12, $1c, $00
+	frame_oam -16,  -4, $1e, $00
+	frame_oam -17,  12, $18, $20
+	frame_oam -16,   4, $1a, $20
+	db $80
 
 .frame_23
 	frame_oam -15,  -3, $1e, $00
-
-	INCROM $170c8, $170d9
+	frame_oam -16, -11, $1c, $00
+	frame_oam -16, -19, $18, $00
+	frame_oam -16,  13, $14, $20
+	frame_oam -15,   5, $16, $20
+	db $80
 
 .frame_24
 	frame_oam -15,   2, $28, $20
-
-	INCROM $170dd, $170ee
+	frame_oam -15,  10, $26, $20
+	frame_oam -16,  -6, $2a, $00
+	frame_oam -17, -14, $28, $00
+	frame_oam -16, -22, $26, $00
+	db $80
 
 .frame_25
 	frame_oam -16,   3, $28, $20
-
-	INCROM $170f2, $17103
+	frame_oam -15,  11, $26, $20
+	frame_oam -16,  -5, $2a, $00
+	frame_oam -16, -13, $28, $00
+	frame_oam -16, -21, $26, $00
+	db $80
 
 .frame_26
 	frame_oam -16, -11, $28, $00
-
-	INCROM $17107, $17118
+	frame_oam -15, -19, $26, $00
+	frame_oam -16,  -3, $2a, $00
+	frame_oam -16,   5, $28, $20
+	frame_oam -16,  13, $26, $20
+	db $80
 
 .frame_27
 	frame_oam -15, -10, $28, $00
-
-	INCROM $1711c, $1712d
+	frame_oam -15, -18, $26, $00
+	frame_oam -16,  -2, $2a, $00
+	frame_oam -17,   6, $28, $20
+	frame_oam -16,  14, $26, $20
+	db $80
 
 .frame_28
 	frame_oam -15,  10, $38, $00
-
-	INCROM $17131, $1714a
+	frame_oam -15,   2, $36, $00
+	frame_oam -15,  -6, $34, $00
+	frame_oam -15, -14, $32, $00
+	frame_oam -31,  10, $30, $00
+	frame_oam -31,   2, $2e, $00
+	frame_oam -31,  -6, $2c, $00
+	db $80
 
 .frame_29
 	frame_oam -16,   4, $20, $20
-; 0x1714e
-
-	INCROM $1714e, $1715f
+	frame_oam -16, -12, $20, $00
+	frame_oam -16,  -4, $1e, $00
+	frame_oam -16,  12, $18, $20
+	frame_oam -16, -20, $18, $00
+	db $80
+; 0x1715f
 
 Frameset_1715f: ; 1715f (5:715f)
 	db $01,  6
@@ -3471,94 +5231,188 @@ OAM_171c0: ; 171c0 (05:71c0)
 
 .frame_0
 	frame_oam -16,   4, $0a, $01
-
-	INCROM $171e8, $171fd
+	frame_oam -16,  -4, $08, $01
+	frame_oam -16, -12, $06, $01
+	frame_oam -32,   4, $04, $01
+	frame_oam -32,  -4, $02, $01
+	frame_oam -32, -12, $00, $01
+	db $80
 
 .frame_1
 	frame_oam -20,   4, $16, $01
-
-	INCROM $17201, $17216
+	frame_oam -20,  -4, $14, $01
+	frame_oam -20, -12, $12, $01
+	frame_oam -36,   4, $10, $01
+	frame_oam -36,  -4, $0e, $01
+	frame_oam -36, -12, $0c, $01
+	db $80
 
 .frame_2
 	frame_oam -24,   4, $16, $41
-
-	INCROM $1721a, $1722f
+	frame_oam -24,  -4, $14, $41
+	frame_oam -24, -12, $12, $41
+	frame_oam  -8,   4, $10, $41
+	frame_oam  -8,  -4, $0e, $41
+	frame_oam  -8, -12, $0c, $41
+	db $80
 
 .frame_3
 	frame_oam -26,   4, $0a, $41
-
-	INCROM $17233, $17248
+	frame_oam -26,  -4, $08, $41
+	frame_oam -26, -12, $06, $41
+	frame_oam -10,   4, $04, $41
+	frame_oam -10,  -4, $02, $41
+	frame_oam -10, -12, $00, $41
+	db $80
 
 .frame_4
 	frame_oam -25, -12, $16, $61
-
-	INCROM $1724c, $17261
+	frame_oam -25,  -4, $14, $61
+	frame_oam -25,   4, $12, $61
+	frame_oam  -9, -12, $10, $61
+	frame_oam  -9,  -4, $0e, $61
+	frame_oam  -9,   4, $0c, $61
+	db $80
 
 .frame_5
 	frame_oam -16,   4, $1e, $01
-
-	INCROM $17265, $1727a
+	frame_oam -16,  -4, $1c, $01
+	frame_oam -16, -12, $06, $01
+	frame_oam -32,   4, $18, $21
+	frame_oam -32,  -4, $1a, $01
+	frame_oam -32, -12, $18, $01
+	db $80
 
 .frame_6
 	frame_oam -16, -20, $28, $21
-
-	INCROM $1727e, $172a3
+	frame_oam -16,  12, $30, $01
+	frame_oam -16,   4, $2e, $01
+	frame_oam -16,  -4, $2c, $01
+	frame_oam -16, -12, $2a, $01
+	frame_oam -32,  12, $28, $01
+	frame_oam -32,   4, $26, $01
+	frame_oam -32,  -4, $24, $01
+	frame_oam -32, -12, $22, $01
+	frame_oam -32, -20, $20, $01
+	db $80
 
 .frame_7
 	frame_oam -32,   4, $46, $00
-
-	INCROM $172a7, $172cc
+	frame_oam -32,  -4, $44, $00
+	frame_oam -32, -12, $42, $00
+	frame_oam -16,  12, $34, $21
+	frame_oam -16,   4, $3a, $01
+	frame_oam -16,  -4, $38, $01
+	frame_oam -16, -12, $36, $01
+	frame_oam -16, -20, $34, $01
+	frame_oam -32,  12, $32, $21
+	frame_oam -32, -20, $32, $01
+	db $80
 
 .frame_8
 	frame_oam -16,   4, $40, $01
-
-	INCROM $172d0, $172ed
+	frame_oam -16,  -4, $3e, $01
+	frame_oam -16, -12, $3c, $01
+	frame_oam -32,   4, $46, $00
+	frame_oam -32,  -4, $44, $00
+	frame_oam -32, -12, $42, $00
+	frame_oam -16,  12, $30, $41
+	frame_oam -16, -20, $30, $61
+	db $80
 
 .frame_9
 	frame_oam -16,   4, $4c, $20
-
-	INCROM $172f1, $1730e
+	frame_oam -32,   4, $46, $00
+	frame_oam -32,  -4, $44, $00
+	frame_oam -32, -12, $42, $00
+	frame_oam -16,  -4, $4e, $00
+	frame_oam -16, -12, $4c, $00
+	frame_oam -16,  12, $4a, $01
+	frame_oam -16, -20, $48, $01
+	db $80
 
 .frame_10
 	frame_oam -11, -20, $32, $41
-
-	INCROM $17312, $17337
+	frame_oam -17,  12, $32, $61
+	frame_oam -33,  12, $28, $41
+	frame_oam -16,   4, $4c, $20
+	frame_oam -16,  -4, $4e, $00
+	frame_oam -16, -12, $4c, $00
+	frame_oam -32,   4, $26, $01
+	frame_oam -32,  -4, $24, $01
+	frame_oam -32, -12, $22, $01
+	frame_oam -31, -20, $20, $01
+	db $80
 
 .frame_11
 	frame_oam -17,  11, $30, $01
-
-	INCROM $1733b, $17358
+	frame_oam -24, -20, $30, $61
+	frame_oam -16,   4, $50, $21
+	frame_oam -16,  -4, $52, $01
+	frame_oam -16, -12, $50, $01
+	frame_oam -32,   4, $46, $00
+	frame_oam -32,  -4, $44, $00
+	frame_oam -32, -12, $42, $00
+	db $80
 
 .frame_12
 	frame_oam -36,  12, $20, $21
-
-	INCROM $1735c, $17381
+	frame_oam -32, -20, $32, $01
+	frame_oam -16, -20, $30, $61
+	frame_oam -20,  12, $30, $41
+	frame_oam -16,   4, $2e, $01
+	frame_oam -16,  -4, $2c, $01
+	frame_oam -16, -12, $2a, $01
+	frame_oam -32,   4, $46, $00
+	frame_oam -32,  -4, $44, $00
+	frame_oam -32, -12, $42, $00
+	db $80
 
 .frame_13
 	frame_oam -16, -12, $0a, $21
-
-	INCROM $17385, $1739a
+	frame_oam -16,  -4, $08, $21
+	frame_oam -16,   4, $06, $21
+	frame_oam -32, -12, $04, $21
+	frame_oam -32,  -4, $02, $21
+	frame_oam -32,   4, $00, $21
+	db $80
 
 .frame_14
 	frame_oam -20, -12, $16, $21
-
-	INCROM $1739e, $173b3
+	frame_oam -20,  -4, $14, $21
+	frame_oam -20,   4, $12, $21
+	frame_oam -36, -12, $10, $21
+	frame_oam -36,  -4, $0e, $21
+	frame_oam -36,   4, $0c, $21
+	db $80
 
 .frame_15
 	frame_oam -24, -12, $16, $61
-
-	INCROM $173b7, $173cc
+	frame_oam -24,  -4, $14, $61
+	frame_oam -24,   4, $12, $61
+	frame_oam  -8, -12, $10, $61
+	frame_oam  -8,  -4, $0e, $61
+	frame_oam  -8,   4, $0c, $61
+	db $80
 
 .frame_16
 	frame_oam -26,   4, $0a, $41
-
-	INCROM $173d0, $173e5
+	frame_oam -26,  -4, $08, $41
+	frame_oam -26, -12, $06, $41
+	frame_oam -10,   4, $04, $41
+	frame_oam -10,  -4, $02, $41
+	frame_oam -10, -12, $00, $41
+	db $80
 
 .frame_17
 	frame_oam -25,   4, $16, $41
-; 0x173e9
-
-	INCROM $173e9, $173fe
+	frame_oam -25,  -4, $14, $41
+	frame_oam -25, -12, $12, $41
+	frame_oam  -9,   4, $10, $41
+	frame_oam  -9,  -4, $0e, $41
+	frame_oam  -9, -12, $0c, $41
+	db $80
+; 0x173fe
 
 Frameset_173fe: ; 173fe (5:73fe)
 	db $00,  3
@@ -3638,189 +5492,339 @@ OAM_1742d: ; 1742d (05:742d)
 
 .frame_0
 	frame_oam -32,   4, $04, $00
-
-	INCROM $1747b, $17490
+	frame_oam -32,  -4, $02, $00
+	frame_oam -32, -12, $00, $00
+	frame_oam -16,   4, $0a, $00
+	frame_oam -16,  -4, $08, $00
+	frame_oam -16, -12, $06, $00
+	db $80
 
 .frame_1
 	frame_oam -32,   4, $38, $00
-
-	INCROM $17494, $174a9
+	frame_oam -32,  -4, $02, $00
+	frame_oam -32, -12, $00, $00
+	frame_oam -16,   4, $10, $00
+	frame_oam -16,  -4, $0e, $00
+	frame_oam -16, -12, $0c, $00
+	db $80
 
 .frame_2
 	frame_oam -33,   4, $7a, $00
-
-	INCROM $174ad, $174c2
+	frame_oam -33,  -4, $02, $00
+	frame_oam -33, -12, $00, $00
+	frame_oam -17,   4, $16, $00
+	frame_oam -17,  -4, $14, $00
+	frame_oam -17, -12, $12, $00
+	db $80
 
 .frame_3
 	frame_oam -32,   4, $3a, $00
-
-	INCROM $174c6, $174db
+	frame_oam -32,  -4, $02, $00
+	frame_oam -32, -12, $00, $00
+	frame_oam -16,   4, $1c, $00
+	frame_oam -16,  -4, $1a, $00
+	frame_oam -16, -12, $18, $00
+	db $80
 
 .frame_4
 	frame_oam -32, -12, $04, $20
-
-	INCROM $174df, $174f4
+	frame_oam -32,  -4, $02, $20
+	frame_oam -32,   4, $00, $20
+	frame_oam -16, -12, $0a, $20
+	frame_oam -16,  -4, $08, $20
+	frame_oam -16,   4, $06, $20
+	db $80
 
 .frame_5
 	frame_oam -32, -12, $38, $20
-
-	INCROM $174f8, $1750d
+	frame_oam -32,  -4, $02, $20
+	frame_oam -32,   4, $00, $20
+	frame_oam -16, -12, $10, $20
+	frame_oam -16,  -4, $0e, $20
+	frame_oam -16,   4, $0c, $20
+	db $80
 
 .frame_6
 	frame_oam -33, -12, $7a, $20
-
-	INCROM $17511, $17526
+	frame_oam -33,  -4, $02, $20
+	frame_oam -33,   4, $00, $20
+	frame_oam -17, -12, $16, $20
+	frame_oam -17,  -4, $14, $20
+	frame_oam -17,   4, $12, $20
+	db $80
 
 .frame_7
 	frame_oam -32, -12, $3a, $20
-
-	INCROM $1752a, $1753f
+	frame_oam -32,  -4, $02, $20
+	frame_oam -32,   4, $00, $20
+	frame_oam -16, -12, $1c, $20
+	frame_oam -16,  -4, $1a, $20
+	frame_oam -16,   4, $18, $20
+	db $80
 
 .frame_8
 	frame_oam -14,   4, $24, $00
-
-	INCROM $17543, $17558
+	frame_oam -14,  -4, $22, $00
+	frame_oam -14, -12, $20, $00
+	frame_oam -30,   4, $04, $00
+	frame_oam -30,  -4, $02, $00
+	frame_oam -30, -12, $00, $00
+	db $80
 
 .frame_9
 	frame_oam -14,   4, $2a, $00
-
-	INCROM $1755c, $17571
+	frame_oam -14,  -4, $28, $00
+	frame_oam -14, -12, $26, $00
+	frame_oam -30,   4, $04, $00
+	frame_oam -30,  -4, $02, $00
+	frame_oam -30, -12, $00, $00
+	db $80
 
 .frame_10
 	frame_oam -14, -12, $24, $20
-
-	INCROM $17575, $1758a
+	frame_oam -14,  -4, $22, $20
+	frame_oam -14,   4, $20, $20
+	frame_oam -30, -12, $04, $20
+	frame_oam -30,  -4, $02, $20
+	frame_oam -30,   4, $00, $20
+	db $80
 
 .frame_11
 	frame_oam -14, -12, $2a, $20
-
-	INCROM $1758e, $175a3
+	frame_oam -14,  -4, $28, $20
+	frame_oam -14,   4, $26, $20
+	frame_oam -30, -12, $04, $20
+	frame_oam -30,  -4, $02, $20
+	frame_oam -30,   4, $00, $20
+	db $80
 
 .frame_12
 	frame_oam -30,   4, $30, $00
-
-	INCROM $175a7, $175bc
+	frame_oam -30,  -4, $2e, $00
+	frame_oam -30, -12, $2c, $00
+	frame_oam -14,   4, $2a, $00
+	frame_oam -14,  -4, $28, $00
+	frame_oam -14, -12, $26, $00
+	db $80
 
 .frame_13
 	frame_oam -30,   4, $36, $00
-
-	INCROM $175c0, $175d5
+	frame_oam -30,  -4, $34, $00
+	frame_oam -30, -12, $32, $00
+	frame_oam -14,   4, $2a, $00
+	frame_oam -14,  -4, $28, $00
+	frame_oam -14, -12, $26, $00
+	db $80
 
 .frame_14
 	frame_oam -30, -12, $30, $20
-
-	INCROM $175d9, $175ee
+	frame_oam -30,  -4, $2e, $20
+	frame_oam -30,   4, $2c, $20
+	frame_oam -14, -12, $2a, $20
+	frame_oam -14,  -4, $28, $20
+	frame_oam -14,   4, $26, $20
+	db $80
 
 .frame_15
 	frame_oam -30, -12, $36, $20
-
-	INCROM $175f2, $17607
+	frame_oam -30,  -4, $34, $20
+	frame_oam -30,   4, $32, $20
+	frame_oam -14, -12, $2a, $20
+	frame_oam -14,  -4, $28, $20
+	frame_oam -14,   4, $26, $20
+	db $80
 
 .frame_16
 	frame_oam -32,   4, $48, $00
-
-	INCROM $1760b, $17620
+	frame_oam -32,  -4, $42, $00
+	frame_oam -32, -12, $40, $00
+	frame_oam -16,   4, $1e, $00
+	frame_oam -16,  -4, $3e, $00
+	frame_oam -16, -12, $3c, $00
+	db $80
 
 .frame_17
 	frame_oam -32,   4, $50, $00
-
-	INCROM $17624, $17639
+	frame_oam -32,  -4, $4c, $00
+	frame_oam -32, -12, $4a, $00
+	frame_oam -16,   4, $1e, $00
+	frame_oam -16,  -4, $3e, $00
+	frame_oam -16, -12, $3c, $00
+	db $80
 
 .frame_18
 	frame_oam -32, -12, $4a, $00
-
-	INCROM $1763d, $17652
+	frame_oam -32,   4, $50, $00
+	frame_oam -32,  -4, $4e, $00
+	frame_oam -16,   4, $1e, $00
+	frame_oam -16,  -4, $3e, $00
+	frame_oam -16, -12, $3c, $00
+	db $80
 
 .frame_19
 	frame_oam -32,   4, $48, $00
-
-	INCROM $17656, $1766b
+	frame_oam -32,  -4, $46, $00
+	frame_oam -32, -12, $44, $00
+	frame_oam -16,   4, $1e, $00
+	frame_oam -16,  -4, $3e, $00
+	frame_oam -16, -12, $3c, $00
+	db $80
 
 .frame_20
 	frame_oam -32,  -4, $5e, $00
-
-	INCROM $1766f, $17684
+	frame_oam -32,   4, $48, $00
+	frame_oam -32, -12, $44, $00
+	frame_oam -16,   4, $1e, $00
+	frame_oam -16,  -4, $3e, $00
+	frame_oam -16, -12, $3c, $00
+	db $80
 
 .frame_21
 	frame_oam -31,  -4, $5e, $00
-
-	INCROM $17688, $1769d
+	frame_oam -15,   4, $56, $00
+	frame_oam -15,  -4, $54, $00
+	frame_oam -15, -12, $52, $00
+	frame_oam -31,   4, $48, $00
+	frame_oam -31, -12, $44, $00
+	db $80
 
 .frame_22
 	frame_oam -15,   4, $5c, $00
-
-	INCROM $176a1, $176b6
+	frame_oam -31,  -4, $5e, $00
+	frame_oam -15,  -4, $5a, $00
+	frame_oam -15, -12, $58, $00
+	frame_oam -31,   4, $48, $00
+	frame_oam -31, -12, $44, $00
+	db $80
 
 .frame_23
 	frame_oam -32, -12, $48, $20
-
-	INCROM $176ba, $176cf
+	frame_oam -32,  -4, $42, $20
+	frame_oam -32,   4, $40, $20
+	frame_oam -16, -12, $1e, $20
+	frame_oam -16,  -4, $3e, $20
+	frame_oam -16,   4, $3c, $20
+	db $80
 
 .frame_24
 	frame_oam -32, -12, $50, $20
-
-	INCROM $176d3, $176e8
+	frame_oam -32,  -4, $4c, $20
+	frame_oam -32,   4, $4a, $20
+	frame_oam -16, -12, $1e, $20
+	frame_oam -16,  -4, $3e, $20
+	frame_oam -16,   4, $3c, $20
+	db $80
 
 .frame_25
 	frame_oam -32,   4, $4a, $20
-
-	INCROM $176ec, $17701
+	frame_oam -32, -12, $50, $20
+	frame_oam -32,  -4, $4e, $20
+	frame_oam -16, -12, $1e, $20
+	frame_oam -16,  -4, $3e, $20
+	frame_oam -16,   4, $3c, $20
+	db $80
 
 .frame_26
 	frame_oam -32, -12, $48, $20
-
-	INCROM $17705, $1771a
+	frame_oam -32,  -4, $46, $20
+	frame_oam -32,   4, $44, $20
+	frame_oam -16, -12, $1e, $20
+	frame_oam -16,  -4, $3e, $20
+	frame_oam -16,   4, $3c, $20
+	db $80
 
 .frame_27
 	frame_oam -32,  -4, $5e, $20
-
-	INCROM $1771e, $17733
+	frame_oam -32, -12, $48, $20
+	frame_oam -32,   4, $44, $20
+	frame_oam -16, -12, $1e, $20
+	frame_oam -16,  -4, $3e, $20
+	frame_oam -16,   4, $3c, $20
+	db $80
 
 .frame_28
 	frame_oam -31,  -4, $5e, $20
-
-	INCROM $17737, $1774c
+	frame_oam -15, -12, $56, $20
+	frame_oam -15,  -4, $54, $20
+	frame_oam -15,   4, $52, $20
+	frame_oam -31, -12, $48, $20
+	frame_oam -31,   4, $44, $20
+	db $80
 
 .frame_29
 	frame_oam -15, -12, $5c, $20
-
-	INCROM $17750, $17765
+	frame_oam -31,  -4, $5e, $20
+	frame_oam -15,  -4, $5a, $20
+	frame_oam -15,   4, $58, $20
+	frame_oam -31, -12, $48, $20
+	frame_oam -31,   4, $44, $20
+	db $80
 
 .frame_30
 	frame_oam -16,   4, $72, $00
-
-	INCROM $17769, $1777e
+	frame_oam -16,  -4, $70, $00
+	frame_oam -16, -12, $6e, $00
+	frame_oam -32,   4, $6c, $00
+	frame_oam -32,  -4, $6a, $00
+	frame_oam -32, -12, $68, $00
+	db $80
 
 .frame_31
 	frame_oam -16,   0, $66, $20
-
-	INCROM $17782, $1779f
+	frame_oam -16,   8, $64, $20
+	frame_oam -32,   0, $62, $20
+	frame_oam -32,   8, $60, $20
+	frame_oam -16,  -8, $66, $00
+	frame_oam -16, -16, $64, $00
+	frame_oam -32,  -8, $62, $00
+	frame_oam -32, -16, $60, $00
+	db $80
 
 .frame_32
 	frame_oam -16, -12, $72, $20
-
-	INCROM $177a3, $177b8
+	frame_oam -16,  -4, $70, $20
+	frame_oam -16,   4, $6e, $20
+	frame_oam -32, -12, $6c, $20
+	frame_oam -32,  -4, $6a, $20
+	frame_oam -32,   4, $68, $20
+	db $80
 
 .frame_33
 	frame_oam -16, -12, $52, $00
-
-	INCROM $177bc, $177d1
+	frame_oam -32,   4, $78, $00
+	frame_oam -32,  -4, $76, $00
+	frame_oam -32, -12, $74, $00
+	frame_oam -16,   4, $7e, $00
+	frame_oam -16,  -4, $7c, $00
+	db $80
 
 .frame_34
 	frame_oam -16,   4, $52, $20
-
-	INCROM $177d5, $177ea
+	frame_oam -32, -12, $78, $20
+	frame_oam -32,  -4, $76, $20
+	frame_oam -32,   4, $74, $20
+	frame_oam -16, -12, $7e, $20
+	frame_oam -16,  -4, $7c, $20
+	db $80
 
 .frame_35
 	frame_oam -31,   4, $78, $00
-
-	INCROM $177ee, $17803
+	frame_oam -31,  -4, $76, $00
+	frame_oam -31, -12, $74, $00
+	frame_oam -15,   4, $56, $00
+	frame_oam -15,  -4, $54, $00
+	frame_oam -15, -12, $52, $00
+	db $80
 
 .frame_36
 	frame_oam -31, -12, $78, $20
-; 0x17807
-
-	INCROM $17807, $1781c
+	frame_oam -31,  -4, $76, $20
+	frame_oam -31,   4, $74, $20
+	frame_oam -15, -12, $56, $20
+	frame_oam -15,  -4, $54, $20
+	frame_oam -15,   4, $52, $20
+	db $80
+; 0x1781c
 
 Frameset_1781c: ; 1781c (5:781c)
 	db $00,  7
@@ -4059,7 +6063,7 @@ Frameset_17bad: ; 17bad (5:7bad)
 	db $ff
 ; 0x17bbc
 
-OAM_17bbc: ; 17bbc (5:7bbc)
+OAM_17bbc: ; 17bbc (05:7bbc)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -4073,54 +6077,100 @@ OAM_17bbc: ; 17bbc (5:7bbc)
 
 .frame_0
 	frame_oam -16, -12, $46, $00
-
-	INCROM $17bd4, $17be9
+	frame_oam -16,  -4, $48, $00
+	frame_oam -16,   4, $46, $20
+	frame_oam -32, -12, $40, $00
+	frame_oam -32,  -4, $42, $00
+	frame_oam -32,   4, $44, $00
+	db $80
 
 .frame_1
 	frame_oam -32, -13, $4a, $00
-
-	INCROM $17bed, $17c06
+	frame_oam -32,   3, $4c, $00
+	frame_oam -32,  -5, $42, $00
+	frame_oam -16, -16, $4e, $00
+	frame_oam -16,  -8, $50, $00
+	frame_oam -16,   0, $52, $00
+	frame_oam -16,   8, $54, $00
+	db $80
 
 .frame_2
 	frame_oam -32, -15, $56, $00
-
-	INCROM $17c0a, $17c23
+	frame_oam -32,  -7, $58, $00
+	frame_oam -32,   1, $5a, $00
+	frame_oam -16, -16, $5c, $00
+	frame_oam -16,  -8, $5e, $00
+	frame_oam -16,   0, $60, $00
+	frame_oam -16,   8, $62, $00
+	db $80
 
 .frame_3
 	frame_oam -32, -15, $64, $00
-
-	INCROM $17c27, $17c40
+	frame_oam -32,  -7, $66, $00
+	frame_oam -32,   1, $68, $00
+	frame_oam -16, -16, $6a, $00
+	frame_oam -16,  -8, $6c, $00
+	frame_oam -16,   0, $6e, $00
+	frame_oam -16,   8, $70, $00
+	db $80
 
 .frame_4
 	frame_oam -16, -13, $76, $00
-
-	INCROM $17c44, $17c59
+	frame_oam -16,  -5, $78, $00
+	frame_oam -16,   3, $7a, $00
+	frame_oam -32,  -5, $72, $00
+	frame_oam -32,   3, $74, $00
+	frame_oam -32, -13, $68, $20
+	db $80
 
 .frame_5
 	frame_oam -16, -12, $46, $00
-
-	INCROM $17c5d, $17c72
+	frame_oam -16,  -4, $48, $00
+	frame_oam -16,   4, $46, $20
+	frame_oam -32,   4, $40, $20
+	frame_oam -32,  -4, $42, $20
+	frame_oam -32, -12, $44, $20
+	db $80
 
 .frame_6
 	frame_oam -32,   5, $4a, $20
-
-	INCROM $17c76, $17c8f
+	frame_oam -32, -11, $4c, $20
+	frame_oam -32,  -3, $42, $20
+	frame_oam -16,   8, $4e, $20
+	frame_oam -16,   0, $50, $20
+	frame_oam -16,  -8, $52, $20
+	frame_oam -16, -16, $54, $20
+	db $80
 
 .frame_7
 	frame_oam -32,   7, $56, $20
-
-	INCROM $17c93, $17cac
+	frame_oam -32,  -1, $58, $20
+	frame_oam -32,  -9, $5a, $20
+	frame_oam -16,   8, $5c, $20
+	frame_oam -16,   0, $5e, $20
+	frame_oam -16,  -8, $60, $20
+	frame_oam -16, -16, $62, $20
+	db $80
 
 .frame_8
 	frame_oam -32,   7, $64, $20
-
-	INCROM $17cb0, $17cc9
+	frame_oam -32,  -1, $66, $20
+	frame_oam -32,  -9, $68, $20
+	frame_oam -16,   8, $6a, $20
+	frame_oam -16,   0, $6c, $20
+	frame_oam -16,  -8, $6e, $20
+	frame_oam -16, -16, $70, $20
+	db $80
 
 .frame_9
 	frame_oam -16,   5, $76, $20
-; 0x17ccd
-
-	INCROM $17ccd, $17ce2
+	frame_oam -16,  -3, $78, $20
+	frame_oam -16, -11, $7a, $20
+	frame_oam -32,  -3, $72, $20
+	frame_oam -32, -11, $74, $20
+	frame_oam -32,   5, $68, $00
+	db $80
+; 0x17ce2
 
 Frameset_17ce2:
 	db $00,  6
