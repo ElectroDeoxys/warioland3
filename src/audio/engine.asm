@@ -3424,7 +3424,7 @@ SoundHeaders: ; 3155e (c:555e)
 	sfx $4015, $0f, $00, 232, CHAN5, 1 ; SFX_02E
 	sfx $402a, $0f, $00, 236, CHAN5, 1 ; SFX_02F
 	sfx $403d, $0f, $00, 220, CHAN5, 1 ; SFX_030
-	sfx $40ae, $0f, $00, 255, CHAN5, 2 ; SFX_031
+	sfx $40ae, $0f, $00, 255, CHAN5, 2 ; SFX_MUSICAL_COIN
 	sfx $414f, $0f, $00, 255, CHAN5, 2 ; SFX_032
 	sfx $4166, $0f, $00, 237, CHAN5, 1 ; SFX_033
 	sfx $41ac, $0f, $00, 237, CHAN5, 2 ; SFX_034

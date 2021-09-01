@@ -493,11 +493,10 @@ wca00:: ; ca00
 
 	ds $3
 
-wca04:: ; ca04
-	ds $1
-
-wca05:: ; ca05
-	ds $1
+; number of coins collected
+; it's in big endian decimal form
+wNumCoins:: ; ca04
+	ds $2
 
 ; each level selectable in the overworld has 8 states
 ; divided by 2, which are the day and night variants
@@ -539,7 +538,7 @@ wLanguage:: ; ca46
 wca5b:: ; ca5b
 	ds $1
 
-wca5c:: ; ca5c
+wNumMusicalCoins:: ; ca5c
 	ds $1
 
 wca5d:: ; ca5d
@@ -692,6 +691,7 @@ wca8c:: ; ca8c
 wca8d:: ; ca8d
 	ds $1
 
+; lower 5 bits: TRANSFORMATION_* constant
 wca8e:: ; ca8e
 	ds $1
 

@@ -448,7 +448,7 @@ SetState_BlindIdling: ; 1ed331 (7b:5331)
 	ld a, $09
 	ld [wca72], a
 	xor a
-	call Func_161a
+	call UpdateLevelMusic
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -1058,7 +1058,7 @@ UpdateState_BallTurning: ; 1ede36 (7b:5e36)
 
 Func_1ede4d: ; 1ede4d (7b:5e4d)
 	call Func_1079
-	call Func_161a
+	call UpdateLevelMusic
 	ld hl, Pals_c800
 	call Func_1af6
 	farcall StartJump_FromInput
@@ -1067,7 +1067,7 @@ Func_1ede4d: ; 1ede4d (7b:5e4d)
 
 Func_1ede69: ; 1ede69 (7b:5e69)
 	call Func_1079
-	call Func_161a
+	call UpdateLevelMusic
 	ld hl, Pals_c800
 	call Func_1af6
 	farcall Func_1e174

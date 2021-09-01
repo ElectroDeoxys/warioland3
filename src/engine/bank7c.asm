@@ -412,7 +412,7 @@ Func_1f0940: ; 1f0940 (7c:4940)
 ; 0x1f095b
 
 Func_1f095b: ; 1f095b (7c:495b)
-	ld a, [wca5c]
+	ld a, [wNumMusicalCoins]
 	add a
 	add $a0
 	ld [$9de7], a

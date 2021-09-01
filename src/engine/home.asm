@@ -3000,7 +3000,7 @@ Func_1570: ; 1570 (0:1570)
 .asm_157a
 	call Func_1079
 .asm_157d
-	call Func_161a
+	call UpdateLevelMusic
 	ld hl, Pals_c800
 	call Func_1af6
 	ld a, [wJumpVelTable]
@@ -3068,19 +3068,20 @@ Func_15dc: ; 15dc (0:15dc)
 ; 0x161a
 
 ; loads a music ID to hMusicID, depending on wLevel
-Func_161a: ; 161a (0:161a)
+; and whether there's a new transformation music
+UpdateLevelMusic: ; 161a (0:161a)
 	ld a, [wcac3]
 	and a
-	jr nz, .boss_song
+	jr nz, .boss_music
 	ld a, [wca8e]
 	and a
-	jr nz, .asm_165d
+	jr nz, .transformation
 
 	ld a, [wROMBank]
 	push af
 	ld a, BANK(LevelMusic)
 	bankswitch
-.asm_1632
+.level_music
 	ld a, [wLevel]
 	ld d, $00
 	add a
@@ -3096,7 +3097,7 @@ Func_161a: ; 161a (0:161a)
 	bankswitch
 	ret
 
-.boss_song
+.boss_music
 	dec a
 	ld d, $00
 	add a
@@ -3109,11 +3110,11 @@ Func_161a: ; 161a (0:161a)
 	ldh [hMusicID + 0], a
 	ret
 
-.asm_165d
+.transformation
 	ld a, [wca8e]
-	and $1f
+	and %11111
 	ld d, $00
-	add a
+	add a ; *2
 	ld e, a
 	rl d
 	ld a, [wROMBank]
@@ -3124,7 +3125,7 @@ Func_161a: ; 161a (0:161a)
 	add hl, de
 	ld a, [hli]
 	cp $ff ; is it null?
-	jr z, .asm_1632
+	jr z, .level_music
 	ldh [hMusicID + 1], a
 	ld a, [hl]
 	ldh [hMusicID + 0], a

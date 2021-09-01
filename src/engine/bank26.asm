@@ -404,7 +404,7 @@ GetLevelTreasures: ; 9ab8f (26:6b8f)
 	ld c, a
 	ld b, $00
 	add hl, bc
-	ld b, NUM_TREASURES_PER_LEVEL
+	ld b, NUM_LEVEL_TREASURES
 .loop
 	ld a, [hli]
 	ld [de], a

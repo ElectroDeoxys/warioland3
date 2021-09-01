@@ -80,9 +80,9 @@
 	const SFX_LAND                         ; 110
 	const SFX_011                          ; 111
 	const SFX_012                          ; 112
-	const SFX_STING                          ; 113
+	const SFX_STING                        ; 113
 	const SFX_014                          ; 114
-	const SFX_GRAB                          ; 115
+	const SFX_GRAB                         ; 115
 	const SFX_016                          ; 116
 	const SFX_017                          ; 117
 	const SFX_018                          ; 118
@@ -110,7 +110,7 @@
 	const SFX_02E                          ; 12e
 	const SFX_02F                          ; 12f
 	const SFX_030                          ; 130
-	const SFX_031                          ; 131
+	const SFX_MUSICAL_COIN                 ; 131
 	const SFX_032                          ; 132
 	const SFX_033                          ; 133
 	const SFX_034                          ; 134

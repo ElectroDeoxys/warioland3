@@ -35,7 +35,7 @@ Func_8024: ; 8024 (2:4024)
 	farcall LoadLevelCommonGfxAndTreasures
 
 	call Func_8747
-	call Func_161a
+	call UpdateLevelMusic
 
 	ld a, TRUE
 	ld [wRoomAnimatedTilesEnabled], a
@@ -596,7 +596,7 @@ Func_846e: ; 846e (2:446e)
 	update_anim_1
 
 .asm_85a7
-	call Func_161a
+	call UpdateLevelMusic
 	xor a
 	ld [wc0da], a
 	ld [wca73], a
@@ -773,7 +773,7 @@ Func_8747: ; 8747 (2:4747)
 
 	xor a
 	ld [wLevelEndScreen], a
-	ld [wca5c], a
+	ld [wNumMusicalCoins], a
 	ld [wc1aa], a
 	ld [wc1a9], a
 	ld [wc0c2], a

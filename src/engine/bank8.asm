@@ -221,9 +221,9 @@ Func_20000: ; 20000 (8:4000)
 	dw Func_20e60 ; OBJ_INTERACTION_0A
 	dw Func_20e6a ; OBJ_INTERACTION_0B
 	dw Func_20e77 ; OBJ_INTERACTION_0C
-	dw Func_20e82 ; OBJ_INTERACTION_0D
-	dw $4e97      ; OBJ_INTERACTION_0E
-	dw $4f6a      ; OBJ_INTERACTION_0F
+	dw ObjInteraction_MusicalCoin ; OBJ_INTERACTION_0D
+	dw Func_20e97 ; OBJ_INTERACTION_0E
+	dw Func_20f6a ; OBJ_INTERACTION_0F
 	dw $4fed      ; OBJ_INTERACTION_10
 	dw $4ff4      ; OBJ_INTERACTION_11
 	dw $4ffb      ; OBJ_INTERACTION_12
@@ -823,7 +823,7 @@ Func_206eb: ; 206eb (8:46eb)
 	cp $0e
 	call z, Func_16d9
 	call Func_1079
-	call Func_161a
+	call UpdateLevelMusic
 ;	fallthrough
 
 SetState_Stung: ; 206f9 (8:46f9)
@@ -1542,17 +1542,44 @@ Func_20e77: ; 20e77 (8:4e77)
 	jp Func_20932
 ; 0x20e82
 
-Func_20e82: ; 20e82 (8:4e82)
-	ld hl, wca5c
+ObjInteraction_MusicalCoin: ; 20e82 (8:4e82)
+	ld hl, wNumMusicalCoins
 	ld a, [hl]
-	cp $08
+	cp NUM_LEVEL_MUSICAL_COINS
 	jp nc, Func_20000.next_obj
 	inc [hl]
-	load_sfx SFX_031
-	jp Func_21ddb
+	load_sfx SFX_MUSICAL_COIN
+	jp CollectMusicalCoin
 ; 0x20e97
 
-	INCROM $20e97, $20ed3
+Func_20e97: ; 20e97 (8:4e97)
+	ld b, $06
+	call SetObjUnk1C
+
+	ld a, [wca8c]
+	and a
+	ret nz
+	ld a, [wca8e]
+	bit 6, a
+	jp nz, Func_2022c
+	ld a, $c1
+	ld [wca8e], a
+	ld a, $01
+	ld [wca8f], a
+	ld a, $02
+	ld [wca93], a
+	ld a, $02
+	ld [wca92], a
+	ld a, $02
+	ld [wca94], a
+	ld a, $02
+	ld [wca90], a
+	ld a, $58
+	ld [wca91], a
+	call UpdateLevelMusic
+	xor a
+	ld [wWarioStateCounter], a
+;	fallthrough
 
 SetState_OnFire: ; 20ed3 (8:4ed3)
 	ld a, ST_ON_FIRE
@@ -1609,7 +1636,55 @@ SetState_OnFire: ; 20ed3 (8:4ed3)
 	ret
 ; 0x20f6a
 
-	INCROM $20f6a, $21aac
+Func_20f6a: ; 20f6a (8:4f6a)
+	ld a, [wc1c0]
+	bit 6, a
+	jr nz, .asm_20f78
+	bit 7, a
+	jr nz, .asm_20f82
+	jp Func_20932
+
+.asm_20f78
+	ld a, [wIsSmashAttacking]
+	dec a
+	jp z, Func_20602
+	jp Func_20447
+.asm_20f82
+	ld a, [wca8c]
+	and a
+	ret nz
+	ld a, [wca8e]
+	bit 6, a
+	jp nz, Func_2022c
+	ld a, $f5
+	ld [wca71], a
+	ld a, $0b
+	ld [wca72], a
+	ld a, [wLadderInteraction]
+	cp $02
+	jr z, .asm_20fdb
+	farcall Func_197b1
+	ld a, b
+	and a
+	jr nz, .asm_20fdb
+	farcall Func_19741
+	ld a, b
+	and a
+	jr nz, .asm_20fdb
+	ld b, $0b
+	call SetObjUnk1C
+	farcall SetState_FlatAirborne
+	ret
+
+.asm_20fdb
+	ld a, $f7
+	ld [wca71], a
+	ld a, $09
+	ld [wca72], a
+	jp Func_20447
+; 0x20fe8
+
+	INCROM $20fe8, $21aac
 
 Func_21aac: ; 21aac (8:5aac)
 	ld a, [wIsSmashAttacking]
@@ -1622,8 +1697,9 @@ Func_21aac: ; 21aac (8:5aac)
 
 	INCROM $21abb, $21ddb
 
-Func_21ddb: ; 21ddb (8:5ddb)
-	ld hl, wca05
+; adds 10 to coin count
+CollectMusicalCoin: ; 21ddb (8:5ddb)
+	ld hl, wNumCoins + 1
 	ld a, [hl]
 	add $10
 	daa
@@ -1633,12 +1709,12 @@ Func_21ddb: ; 21ddb (8:5ddb)
 	daa
 	ld [hl], a
 	and $f0
-	jr z, .asm_21df2
-	ld a, $09
+	jr z, .no_cap
+	ld a, HIGH(MAX_NUM_COINS)
 	ld [hli], a
-	ld a, $99
+	ld a, LOW(MAX_NUM_COINS)
 	ld [hl], a
-.asm_21df2
+.no_cap
 	call Func_20a63
 	jp Func_20000.next_obj
 ; 0x21df8

@@ -1496,10 +1496,10 @@ VBlank_49db: ; 49db (1:49db)
 ; 0x4a33
 
 Func_4a33: ; 4a33 (1:4a33)
-	ld bc, $ffe0
+	ld bc, -$20
 	ld de, $20
-	ld a, [wca04]
-	and $0f
+	ld a, [wNumCoins]
+	and $0f ; hundreds
 	add a
 	add $a0
 	ld [hl], a
@@ -1507,9 +1507,9 @@ Func_4a33: ; 4a33 (1:4a33)
 	inc a
 	ld [hli], a
 	add hl, bc
-	ld a, [wca05]
+	ld a, [wNumCoins + 1]
 	swap a
-	and $0f
+	and $0f ; tens
 	add a
 	add $a0
 	ld [hl], a
@@ -1517,8 +1517,8 @@ Func_4a33: ; 4a33 (1:4a33)
 	inc a
 	ld [hli], a
 	add hl, bc
-	ld a, [wca05]
-	and $0f
+	ld a, [wNumCoins + 1]
+	and $0f ; ones
 	add a
 	add $a0
 	ld [hl], a

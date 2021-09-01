@@ -421,7 +421,91 @@ UpdateState_Burnt: ; 2841e (a:441e)
 	jp Func_1570
 ; 0x28435
 
-	INCROM $28435, $28511
+SetState_FlatAirborne: ; 28435 (a:4435)
+	ld a, [wca8e]
+	bit 6, a
+	ret nz
+	ld a, [wca8e]
+	cp $0e
+	call z, Func_16d9
+
+	ldh a, [rSVBK]
+	push af
+	ld a, $01
+	ldh [rSVBK], a
+	ld a, [wObjPtr + 0]
+	ld h, a
+	ld a, [wObjPtr + 1]
+	ld l, a
+	ld de, OBJ_X_POS
+	add hl, de
+	ld b, $0
+	ld a, [wObjInteractionType]
+	and $ff ^ (HEAVY_OBJ)
+	sub OBJ_INTERACTION_0F
+	jr z, .asm_2846a
+	ld a, $01
+	ld [wWarioStateCounter], a
+	ld b, $8
+	jr .got_x_offset
+.asm_2846a
+	ld [wWarioStateCounter], a
+.got_x_offset
+	ld a, [hli] ; OBJ_X_POS
+	sub b
+	ld [wXPosLo], a
+	ld a, [hl]
+	sbc $00
+	ld [wXPosHi], a
+	pop af
+	ldh [rSVBK], a
+
+	ld a, $42
+	ld [wca8e], a
+	load_sfx SFX_01B
+	call UpdateLevelMusic
+
+	ld a, $02
+	ld [wca93], a
+	ld a, $02
+	ld [wca92], a
+	ld a, $02
+	ld [wca94], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld [wWarioStateCycles], a
+	ld [wca9a], a
+	ld [wca89], a
+	ld [wJumpVelIndex], a
+	ld [wca8b], a
+	ld [wca9d], a
+	ld [wIsSmashAttacking], a
+	inc a
+	ld [wca9b], a
+	ld [wJumpVelTable], a
+	ld a, ST_GETTING_FLAT_AIRBORNE
+	ld [wWarioState], a
+	ld a, $ff
+	ld [wca70], a
+	ld a, $f8
+	ld [wca6f], a
+	ld a, $f5
+	ld [wca71], a
+	ld a, $0b
+	ld [wca72], a
+	ld a, $09
+	ld [wca7b], a
+	ld a, $50
+	ld [wca7c + 0], a
+	ld a, $00
+	ld [wca7c + 1], a
+	call Func_15b0
+	load_oam_ptr OAM_16e9d
+	load_frameset_ptr Frameset_171bd
+	update_anim_1
+	ret
+; 0x28511
 
 UpdateState_GettingFlatAirborne: ; 28511 (a:4511)
 	farcall Func_19b25
@@ -1979,7 +2063,7 @@ UpdateState_TurningInvisible: ; 2972e (a:572e)
 	ld [wca8a], a
 	ld a, $06
 	ld [wca8e], a
-	call Func_161a
+	call UpdateLevelMusic
 	farcall SetState_Idling
 	ret
 ; 0x2975e
@@ -2215,7 +2299,7 @@ SetState_ZombieIdling: ; 299d0 (a:59d0)
 	ld [wca8b], a
 	ld [wca9d], a
 	ld [wIsSmashAttacking], a
-	call Func_161a
+	call UpdateLevelMusic
 
 	xor a
 	ld [wFrameDuration], a
@@ -3660,7 +3744,7 @@ UpdateState_BatIdling: ; 2aa08 (a:6a08)
 	ld [wIsSmashAttacking], a
 	ld [wJumpVelTable], a
 	ld [wJumpVelIndex], a
-	call Func_161a
+	call UpdateLevelMusic
 
 	xor a
 	ld [wFrameDuration], a
@@ -3849,7 +3933,7 @@ Func_2ad6a: ; 2ad6a (a:6d6a)
 	call Func_1079
 	ld a, $10
 	ld [wca8c], a
-	call Func_161a
+	call UpdateLevelMusic
 	farcall SetState_Submerged
 
 	xor a
@@ -3884,7 +3968,7 @@ Func_2ade4: ; 2ade4 (a:6de4)
 	call Func_1079
 	ld a, $10
 	ld [wca8c], a
-	call Func_161a
+	call UpdateLevelMusic
 	get_pos
 	ldh a, [hYPosLo]
 	and $f0
