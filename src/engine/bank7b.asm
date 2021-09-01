@@ -281,7 +281,30 @@ UpdateState_HangingRail: ; 1ec703 (7b:4703)
 	ret
 ; 0x1ec749
 
-	INCROM $1ec749, $1ecf3a
+	INCROM $1ec749, $1ecbb2
+
+SetState_UnknownCA: ; 1ecbb2 (7b:4bb2)
+	ld a, ST_UNKNOWN_CA
+	ld [wWarioState], a
+	xor a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1ecbd7
+	load_frameset_ptr Frameset_1ff628
+	jr .asm_1ecbe1
+.asm_1ecbd7
+	load_frameset_ptr Frameset_1ff639
+.asm_1ecbe1
+	update_anim_2
+	ret
+; 0x1ecbf1
+
+	INCROM $1ecbf1, $1ecf3a
 
 UpdateState_SplitHit: ; 1ecf3a (7b:4f3a)
 	update_anim_2

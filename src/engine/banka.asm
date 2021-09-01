@@ -700,7 +700,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 	ld a, b
 	and a
 	jp z, .asm_288b8
-	load_sfx SFX_003
+	load_sfx SFX_BUMP
 
 	ld a, [wDirection]
 	xor $1 ; switch direction
@@ -1122,7 +1122,7 @@ UpdateState_BallOStringAirborne: ; 28c25 (a:4c25)
 SetState_BallOStringKnockBack: ; 28c94 (a:4c94)
 	xor a
 	ld [wca8f], a
-	load_sfx SFX_003
+	load_sfx SFX_BUMP
 	ld a, ST_BALL_O_STRING_KNOCK_BACK
 	ld [wWarioState], a
 	ld a, $0a
@@ -1253,7 +1253,26 @@ UpdateState_BallOStringDizzy: ; 28e1a (a:4e1a)
 	jp Func_1570
 ; 0x28e31
 
-	INCROM $28e31, $28e70
+SetState_FatBumping: ; 28e31 (a:4e31)
+	ld a, ST_FAT_BUMPING
+	ld [wWarioState], a
+	xor a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_28e64
+	load_frameset_ptr Frameset_178fc
+.asm_28e54
+	update_anim_1
+	ret
+.asm_28e64
+	load_frameset_ptr Frameset_17905
+	jr .asm_28e54
+; 0x28e70
 
 UpdateState_FatBumping: ; 28e70 (a:4e70)
 	update_anim_1
@@ -2613,7 +2632,34 @@ UpdateState_ZombieRecovering: ; 29e7e (a:5e7e)
 	jp Func_1570
 ; 0x29ea8
 
-	INCROM $29ea8, $29ef3
+SetState_ZombieKnockBack: ; 29ea8 (a:5ea8)
+	ld a, [wWarioState]
+	cp ST_ZOMBIE_KNOCK_BACK
+	ret z
+	cp ST_ZOMBIE_SLIPPING_THROUGH_FLOOR
+	ret z
+	cp ST_ZOMBIE_LANDING
+	ret z
+
+	xor a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	ld a, ST_ZOMBIE_KNOCK_BACK
+	ld [wWarioState], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_29ed9
+	load_frameset_ptr Frameset_1fc92e
+	jr .asm_29ee3
+.asm_29ed9
+	load_frameset_ptr Frameset_1fc93b
+.asm_29ee3
+	update_anim_2
+	ret
+; 0x29ef3
 
 UpdateState_ZombieKnockBack: ; 29ef3 (a:5ef3)
 	update_anim_2
@@ -2722,24 +2768,28 @@ UpdateState_BouncyFloor: ; 2a087 (a:6087)
 
 	ld a, [wJoypadDown]
 	bit A_BUTTON_F, a
-	jr nz, .asm_2a0bb
-	jr .asm_2a0c2
+	jr nz, Func_2a0bb
+	jr Func_2a0c2
 
-	; these lines are the same as above
-	; and are completely redundant
+Func_2a0b2: ; 2a0b2 (a:60b2)
 	ld a, [wJoypadDown]
 	bit A_BUTTON_F, a
-	jr nz, .asm_2a0bb
-	jr .asm_2a0c2
+	jr nz, Func_2a0bb
+	jr Func_2a0c2
+; 0x2a0bb
 
-.asm_2a0bb
+Func_2a0bb: ; 2a0bb (a:60bb)
 	ld a, JUMP_VEL_BOUNCY_HIGH_JUMP
 	ld [wJumpVelTable], a
-	jr .asm_2a0c7
-.asm_2a0c2
+	jr Func_2a0c7
+; 0x2a0c2
+
+Func_2a0c2: ; 2a0c2 (a:60c2)
 	ld a, JUMP_VEL_BOUNCY_JUMP
 	ld [wJumpVelTable], a
-.asm_2a0c7
+;	fallthrough
+
+Func_2a0c7: ; 2a0c7 (a:60c7)
 	xor a
 	ld [wJumpVelIndex], a
 ;	fallthrough

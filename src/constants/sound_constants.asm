@@ -64,7 +64,7 @@
 	const_def $101
 	const SFX_JUMP                         ; 101
 	const SFX_002                          ; 102
-	const SFX_003                          ; 103
+	const SFX_BUMP                         ; 103
 	const SFX_WALK                         ; 104
 	const SFX_005                          ; 105
 	const SFX_006                          ; 106
@@ -80,9 +80,9 @@
 	const SFX_LAND                         ; 110
 	const SFX_011                          ; 111
 	const SFX_012                          ; 112
-	const SFX_013                          ; 113
+	const SFX_STING                          ; 113
 	const SFX_014                          ; 114
-	const SFX_015                          ; 115
+	const SFX_GRAB                          ; 115
 	const SFX_016                          ; 116
 	const SFX_017                          ; 117
 	const SFX_018                          ; 118

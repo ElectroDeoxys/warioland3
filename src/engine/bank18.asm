@@ -4,88 +4,89 @@ Func_611cb: ; 611cb (18:51cb)
 	push hl
 	inc l
 	rla
-	ld [w1d100 + $00], a
+	ld [wCurEnemyUnk00], a
 	ld a, [hli]
-	ld [w1d100 + $01], a
+	ld [wCurEnemyUnk01], a
 	ld a, [hli]
-	ld [w1d100 + $02], a
+	ld [wCurEnemyUnk02], a
 	ld a, [hli]
-	ld [w1d100 + $03], a
+	ld [wCurEnemyYPos], a
 	ld a, [hli]
-	ld [w1d100 + $04], a
+	ld [wCurEnemyYPos + 1], a
 	ld a, [hli]
-	ld [w1d100 + $05], a
+	ld [wCurEnemyXPos], a
 	ld a, [hli]
-	ld [w1d100 + $06], a
+	ld [wCurEnemyXPos + 1], a
 	ld a, [hli]
-	ld [w1d100 + $07], a
+	ld [wCurEnemyUnk07], a
 	ld a, [hli]
-	ld [w1d100 + $08], a
+	ld [wCurEnemyInteractionType], a
 	ld a, [hli]
-	ld [w1d100 + $09], a
+	ld [wCurEnemyUnk09], a
 	ld a, [hli]
-	ld [w1d100 + $0a], a
+	ld [wCurEnemyUnk0a], a
 	ld a, [hli]
-	ld [w1d100 + $0b], a
+	ld [wCurEnemyUnk0b], a
 	ld a, [hli]
-	ld [w1d100 + $0c], a
+	ld [wCurEnemyUnk0c], a
 	ld a, [hli]
-	ld [w1d100 + $0d], a
+	ld [wCurEnemyUnk0d], a
 	ld a, [hli]
-	ld [w1d100 + $0e], a
+	ld [wCurEnemyUnk0e], a
 	ld a, [hli]
-	ld [w1d100 + $0f], a
+	ld [wCurEnemyUnk0f], a
 	ld a, [hli]
-	ld [w1d100 + $10], a
+	ld [wCurEnemyUnk10], a
 	ld a, [hli]
-	ld [w1d100 + $11], a
+	ld [wCurEnemyUnk10 + 1], a
 	ld a, [hli]
-	ld [w1d100 + $12], a
+	ld [wCurEnemyUnk12], a
 	ld a, [hli]
-	ld [w1d100 + $13], a
+	ld [wCurEnemyUnk13], a
 	ld a, [hli]
-	ld [w1d100 + $14], a
+	ld [wCurEnemyUnk14], a
 	ld a, [hli]
-	ld [w1d100 + $15], a
+	ld [wCurEnemyUnk15], a
 	ld a, [hli]
-	ld [w1d100 + $16], a
+	ld [wCurEnemyUnk16], a
 	ld a, [hli]
-	ld [w1d100 + $17], a
+	ld [wCurEnemyUnk17], a
 	ld a, [hli]
-	ld [w1d100 + $18], a
+	ld [wCurEnemyUnk18], a
 	ld a, [hli]
-	ld [w1d100 + $19], a
+	ld [wCurEnemyUnk19], a
 	ld a, [hli]
-	ld [w1d100 + $1a], a
+	ld [wCurEnemyUnk1a], a
 	ld a, [hli]
-	ld [w1d100 + $1b], a
+	ld [wCurEnemyUnk1b], a
 	ld a, [hli]
-	ld [w1d100 + $1c], a
+	ld [wCurEnemyUnk1c], a
 	ld a, [hli]
-	ld [w1d100 + $1d], a
+	ld [wCurEnemyUnk1d], a
 	ld a, [hli]
-	ld [w1d100 + $1e], a
+	ld [wCurEnemyUnk1e], a
 	ld a, [hl]
-	ld [w1d100 + $1f], a
+	ld [wCurEnemyUnk1e + 1], a
 	call Func_61760
 
-	farcall $13, w1d100 + $1e
+	farcall $13, wCurEnemyUnk1e
 
 	call Func_312f
 	call Func_6307b
-	ld hl, w1d100 + $d
+	ld hl, wCurEnemyUnk0d
 	ld a, [wTempSCY]
 	ld b, a
-	ld a, [w1d100 + $03]
+	ld a, [wCurEnemyYPos]
 	add $10
 	sub b
 	ld [hli], a
 	ld a, [wTempSCX]
 	ld b, a
-	ld a, [w1d100 + $05]
+	ld a, [wCurEnemyXPos]
 	add $08
 	sub b
 	ld [hli], a
+
 	ld hl, wc0bc
 	ld a, [wc089]
 	add [hl]
@@ -93,102 +94,103 @@ Func_611cb: ; 611cb (18:51cb)
 	ld a, [wc08b]
 	ld [wTempSCX], a
 	pop hl
-	ld a, [w1d100 + $00]
+
+	ld a, [wCurEnemyUnk00]
 	and $df
 	ld [hli], a
 	inc l
 	inc l
-	ld a, [w1d100 + $03]
+	ld a, [wCurEnemyYPos]
 	ld [hli], a
-	ld a, [w1d100 + $04]
+	ld a, [wCurEnemyYPos + 1]
 	ld [hli], a
-	ld a, [w1d100 + $05]
+	ld a, [wCurEnemyXPos]
 	ld [hli], a
-	ld a, [w1d100 + $06]
+	ld a, [wCurEnemyXPos + 1]
 	ld [hli], a
-	ld a, [w1d100 + $07]
+	ld a, [wCurEnemyUnk07]
 	ld [hli], a
-	ld a, [w1d100 + $08]
+	ld a, [wCurEnemyInteractionType]
 	ld [hli], a
-	ld a, [w1d100 + $09]
+	ld a, [wCurEnemyUnk09]
 	ld [hli], a
-	ld a, [w1d100 + $0a]
+	ld a, [wCurEnemyUnk0a]
 	ld [hli], a
-	ld a, [w1d100 + $0b]
+	ld a, [wCurEnemyUnk0b]
 	ld [hli], a
-	ld a, [w1d100 + $0c]
+	ld a, [wCurEnemyUnk0c]
 	ld [hli], a
-	ld a, [w1d100 + $0d]
+	ld a, [wCurEnemyUnk0d]
 	ld [hli], a
-	ld a, [w1d100 + $0e]
+	ld a, [wCurEnemyUnk0e]
 	ld [hli], a
-	ld a, [w1d100 + $0f]
+	ld a, [wCurEnemyUnk0f]
 	ld [hli], a
-	ld a, [w1d100 + $10]
+	ld a, [wCurEnemyUnk10]
 	ld [hli], a
-	ld a, [w1d100 + $11]
+	ld a, [wCurEnemyUnk10 + 1]
 	ld [hli], a
-	ld a, [w1d100 + $12]
+	ld a, [wCurEnemyUnk12]
 	ld [hli], a
-	ld a, [w1d100 + $13]
+	ld a, [wCurEnemyUnk13]
 	ld [hli], a
-	ld a, [w1d100 + $14]
+	ld a, [wCurEnemyUnk14]
 	ld [hli], a
-	ld a, [w1d100 + $15]
+	ld a, [wCurEnemyUnk15]
 	ld [hli], a
-	ld a, [w1d100 + $16]
+	ld a, [wCurEnemyUnk16]
 	ld [hli], a
-	ld a, [w1d100 + $17]
+	ld a, [wCurEnemyUnk17]
 	ld [hli], a
-	ld a, [w1d100 + $18]
+	ld a, [wCurEnemyUnk18]
 	ld [hli], a
-	ld a, [w1d100 + $19]
+	ld a, [wCurEnemyUnk19]
 	ld [hli], a
-	ld a, [w1d100 + $1a]
+	ld a, [wCurEnemyUnk1a]
 	ld [hli], a
-	ld a, [w1d100 + $1b]
+	ld a, [wCurEnemyUnk1b]
 	ld [hli], a
-	ld a, [w1d100 + $1c]
+	ld a, [wCurEnemyUnk1c]
 	ld [hli], a
 	inc l
-	ld a, [w1d100 + $1e]
+	ld a, [wCurEnemyUnk1e]
 	ld [hli], a
-	ld a, [w1d100 + $1f]
+	ld a, [wCurEnemyUnk1e + 1]
 	ld [hl], a
 	ret
 ; 0x6130b
 
 Func_6130b: ; 6130b (18:530b)
 	call Func_618e2
-	ld hl, wEnemies
+	ld hl, wEnemy1Unk00
 	ld a, [hl]
 	rra
 	call c, Func_611cb
-	ld l, $20
+	ld l, LOW(wEnemy2Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_611cb
-	ld l, $40
+	ld l, LOW(wEnemy3Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_611cb
-	ld l, $60
+	ld l, LOW(wEnemy4Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_611cb
-	ld l, $80
+	ld l, LOW(wEnemy5Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_611cb
-	ld l, $a0
+	ld l, LOW(wEnemy6Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_611cb
-	ld l, $c0
+	ld l, LOW(wEnemy7Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_611cb
-	ld l, $e0
+	ld l, LOW(wEnemy8Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_611cb
@@ -204,77 +206,80 @@ Func_61348: ; 61348 (18:5348)
 	ld e, $06
 .asm_61354
 	ld a, e
+
 	ld [w1d14a], a
 	ld a, [wLevel]
 	cp LEVEL_HIDDEN_FIGURE_ROOM
 	jr z, Func_6130b
+
 	ld a, [wca73]
 	and a
 	jr nz, .asm_613a2
 	call Func_618e2
-	ld hl, wEnemies
+	ld hl, wEnemy1Unk00
 	ld a, [hl]
 	rra
 	call c, Func_613dc
-	ld l, $20
+	ld l, LOW(wEnemy2Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_613dc
-	ld l, $40
+	ld l, LOW(wEnemy3Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_613dc
-	ld l, $60
+	ld l, LOW(wEnemy4Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_613dc
-	ld l, $80
+	ld l, LOW(wEnemy5Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_613dc
-	ld l, $a0
+	ld l, LOW(wEnemy6Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_613dc
-	ld l, $c0
+	ld l, LOW(wEnemy7Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_613dc
-	ld l, $e0
+	ld l, LOW(wEnemy8Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_613dc
 	ret
+
 .asm_613a2
-	ld hl, wEnemies
+	ld hl, wEnemy1Unk00
 	ld a, [hl]
 	rra
 	call c, Func_61513
-	ld l, $20
+	ld l, LOW(wEnemy2Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_61513
-	ld l, $40
+	ld l, LOW(wEnemy3Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_61513
-	ld l, $60
+	ld l, LOW(wEnemy4Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_61513
-	ld l, $80
+	ld l, LOW(wEnemy5Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_61513
-	ld l, $a0
+	ld l, LOW(wEnemy6Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_61513
-	ld l, $c0
+	ld l, LOW(wEnemy7Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_61513
-	ld l, $e0
+	ld l, LOW(wEnemy8Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_61513
@@ -285,159 +290,159 @@ Func_613dc: ; 613dc (18:53dc)
 	push hl
 	inc l
 	rla
-	ld [w1d100 + $00], a
+	ld [wCurEnemyUnk00], a
 	ld a, [hli]
-	ld [w1d100 + $01], a
+	ld [wCurEnemyUnk01], a
 	ld a, [hli]
-	ld [w1d100 + $02], a
+	ld [wCurEnemyUnk02], a
 	ld a, [hli]
-	ld [w1d100 + $03], a
+	ld [wCurEnemyYPos], a
 	ld a, [hli]
-	ld [w1d100 + $04], a
+	ld [wCurEnemyYPos + 1], a
 	ld a, [hli]
-	ld [w1d100 + $05], a
+	ld [wCurEnemyXPos], a
 	ld a, [hli]
-	ld [w1d100 + $06], a
+	ld [wCurEnemyXPos + 1], a
 	ld a, [hli]
-	ld [w1d100 + $07], a
+	ld [wCurEnemyUnk07], a
 	ld a, [hli]
-	ld [w1d100 + $08], a
+	ld [wCurEnemyInteractionType], a
 	ld a, [hli]
-	ld [w1d100 + $09], a
+	ld [wCurEnemyUnk09], a
 	ld a, [hli]
-	ld [w1d100 + $0a], a
+	ld [wCurEnemyUnk0a], a
 	ld a, [hli]
-	ld [w1d100 + $0b], a
+	ld [wCurEnemyUnk0b], a
 	ld a, [hli]
-	ld [w1d100 + $0c], a
+	ld [wCurEnemyUnk0c], a
 	ld a, [hli]
-	ld [w1d100 + $0d], a
+	ld [wCurEnemyUnk0d], a
 	ld a, [hli]
-	ld [w1d100 + $0e], a
+	ld [wCurEnemyUnk0e], a
 	ld a, [hli]
-	ld [w1d100 + $0f], a
+	ld [wCurEnemyUnk0f], a
 	ld a, [hli]
-	ld [w1d100 + $10], a
+	ld [wCurEnemyUnk10], a
 	ld a, [hli]
-	ld [w1d100 + $11], a
+	ld [wCurEnemyUnk10 + 1], a
 	ld a, [hli]
-	ld [w1d100 + $12], a
+	ld [wCurEnemyUnk12], a
 	ld a, [hli]
-	ld [w1d100 + $13], a
+	ld [wCurEnemyUnk13], a
 	ld a, [hli]
-	ld [w1d100 + $14], a
+	ld [wCurEnemyUnk14], a
 	ld a, [hli]
-	ld [w1d100 + $15], a
+	ld [wCurEnemyUnk15], a
 	ld a, [hli]
-	ld [w1d100 + $16], a
+	ld [wCurEnemyUnk16], a
 	ld a, [hli]
-	ld [w1d100 + $17], a
+	ld [wCurEnemyUnk17], a
 	ld a, [hli]
-	ld [w1d100 + $18], a
+	ld [wCurEnemyUnk18], a
 	ld a, [hli]
-	ld [w1d100 + $19], a
+	ld [wCurEnemyUnk19], a
 	ld a, [hli]
-	ld [w1d100 + $1a], a
+	ld [wCurEnemyUnk1a], a
 	ld a, [hli]
-	ld [w1d100 + $1b], a
+	ld [wCurEnemyUnk1b], a
 	ld a, [hli]
-	ld [w1d100 + $1c], a
+	ld [wCurEnemyUnk1c], a
 	ld a, [hli]
-	ld [w1d100 + $1d], a
+	ld [wCurEnemyUnk1d], a
 	ld a, [hli]
-	ld [w1d100 + $1e], a
+	ld [wCurEnemyUnk1e], a
 	ld a, [hl]
-	ld [w1d100 + $1f], a
+	ld [wCurEnemyUnk1e + 1], a
 
 	call Func_61760
-	ld a, [w1d100 + $07]
+	ld a, [wCurEnemyUnk07]
 	swap a
 	and $0f
 	or $10
 	ldh [hCallFuncBank], a
-	ld a, [w1d100 + $1e]
+	ld a, [wCurEnemyUnk1e + 0]
 	ldh [hCallFuncPointer], a
-	ld a, [w1d100 + $1f]
+	ld a, [wCurEnemyUnk1e + 1]
 	ldh [hCallFuncPointer + 1], a
 	call hCallFunc
 
 	call Func_312f
 	call Func_6307b
-	ld hl, w1d100 + $d
+	ld hl, wCurEnemyUnk0d
 	ld a, [wTempSCY]
 	ld b, a
-	ld a, [w1d100 + $03]
+	ld a, [wCurEnemyYPos]
 	add $10
 	sub b
 	ld [hli], a
 	ld a, [wTempSCX]
 	ld b, a
-	ld a, [w1d100 + $05]
+	ld a, [wCurEnemyXPos]
 	add $08
 	sub b
 	ld [hli], a
 	pop hl
-	ld a, [w1d100 + $00]
+	ld a, [wCurEnemyUnk00]
 	and $df
 	ld [hli], a
 	inc l
 	inc l
-	ld a, [w1d100 + $03]
+	ld a, [wCurEnemyYPos]
 	ld [hli], a
-	ld a, [w1d100 + $04]
+	ld a, [wCurEnemyYPos + 1]
 	ld [hli], a
-	ld a, [w1d100 + $05]
+	ld a, [wCurEnemyXPos]
 	ld [hli], a
-	ld a, [w1d100 + $06]
+	ld a, [wCurEnemyXPos + 1]
 	ld [hli], a
-	ld a, [w1d100 + $07]
+	ld a, [wCurEnemyUnk07]
 	ld [hli], a
-	ld a, [w1d100 + $08]
+	ld a, [wCurEnemyInteractionType]
 	ld [hli], a
-	ld a, [w1d100 + $09]
+	ld a, [wCurEnemyUnk09]
 	ld [hli], a
-	ld a, [w1d100 + $0a]
+	ld a, [wCurEnemyUnk0a]
 	ld [hli], a
-	ld a, [w1d100 + $0b]
+	ld a, [wCurEnemyUnk0b]
 	ld [hli], a
-	ld a, [w1d100 + $0c]
+	ld a, [wCurEnemyUnk0c]
 	ld [hli], a
-	ld a, [w1d100 + $0d]
+	ld a, [wCurEnemyUnk0d]
 	ld [hli], a
-	ld a, [w1d100 + $0e]
+	ld a, [wCurEnemyUnk0e]
 	ld [hli], a
-	ld a, [w1d100 + $0f]
+	ld a, [wCurEnemyUnk0f]
 	ld [hli], a
-	ld a, [w1d100 + $10]
+	ld a, [wCurEnemyUnk10]
 	ld [hli], a
-	ld a, [w1d100 + $11]
+	ld a, [wCurEnemyUnk10 + 1]
 	ld [hli], a
-	ld a, [w1d100 + $12]
+	ld a, [wCurEnemyUnk12]
 	ld [hli], a
-	ld a, [w1d100 + $13]
+	ld a, [wCurEnemyUnk13]
 	ld [hli], a
-	ld a, [w1d100 + $14]
+	ld a, [wCurEnemyUnk14]
 	ld [hli], a
-	ld a, [w1d100 + $15]
+	ld a, [wCurEnemyUnk15]
 	ld [hli], a
-	ld a, [w1d100 + $16]
+	ld a, [wCurEnemyUnk16]
 	ld [hli], a
-	ld a, [w1d100 + $17]
+	ld a, [wCurEnemyUnk17]
 	ld [hli], a
-	ld a, [w1d100 + $18]
+	ld a, [wCurEnemyUnk18]
 	ld [hli], a
-	ld a, [w1d100 + $19]
+	ld a, [wCurEnemyUnk19]
 	ld [hli], a
-	ld a, [w1d100 + $1a]
+	ld a, [wCurEnemyUnk1a]
 	ld [hli], a
-	ld a, [w1d100 + $1b]
+	ld a, [wCurEnemyUnk1b]
 	ld [hli], a
-	ld a, [w1d100 + $1c]
+	ld a, [wCurEnemyUnk1c]
 	ld [hli], a
 	inc l
-	ld a, [w1d100 + $1e]
+	ld a, [wCurEnemyUnk1e]
 	ld [hli], a
-	ld a, [w1d100 + $1f]
+	ld a, [wCurEnemyUnk1e + 1]
 	ld [hl], a
 	ret
 ; 0x61513
@@ -446,162 +451,162 @@ Func_61513: ; 61513 (18:5513)
 	push hl
 	inc l
 	rla
-	ld [w1d100 + $00], a
+	ld [wCurEnemyUnk00], a
 	ld a, [hli]
-	ld [w1d100 + $01], a
+	ld [wCurEnemyUnk01], a
 	ld a, [hli]
-	ld [w1d100 + $02], a
+	ld [wCurEnemyUnk02], a
 	ld a, [hli]
-	ld [w1d100 + $03], a
+	ld [wCurEnemyYPos], a
 	ld a, [hli]
-	ld [w1d100 + $04], a
+	ld [wCurEnemyYPos + 1], a
 	ld a, [hli]
-	ld [w1d100 + $05], a
+	ld [wCurEnemyXPos], a
 	ld a, [hli]
-	ld [w1d100 + $06], a
+	ld [wCurEnemyXPos + 1], a
 	ld a, [hli]
-	ld [w1d100 + $07], a
+	ld [wCurEnemyUnk07], a
 	ld a, [hli]
-	ld [w1d100 + $08], a
+	ld [wCurEnemyInteractionType], a
 	ld a, [hli]
-	ld [w1d100 + $09], a
+	ld [wCurEnemyUnk09], a
 	ld a, [hli]
-	ld [w1d100 + $0a], a
+	ld [wCurEnemyUnk0a], a
 	ld a, [hli]
-	ld [w1d100 + $0b], a
+	ld [wCurEnemyUnk0b], a
 	ld a, [hli]
-	ld [w1d100 + $0c], a
+	ld [wCurEnemyUnk0c], a
 	ld a, [hli]
-	ld [w1d100 + $0d], a
+	ld [wCurEnemyUnk0d], a
 	ld a, [hli]
-	ld [w1d100 + $0e], a
+	ld [wCurEnemyUnk0e], a
 	ld a, [hli]
-	ld [w1d100 + $0f], a
+	ld [wCurEnemyUnk0f], a
 	ld a, [hli]
-	ld [w1d100 + $10], a
+	ld [wCurEnemyUnk10], a
 	ld a, [hli]
-	ld [w1d100 + $11], a
+	ld [wCurEnemyUnk10 + 1], a
 	ld a, [hli]
-	ld [w1d100 + $12], a
+	ld [wCurEnemyUnk12], a
 	ld a, [hli]
-	ld [w1d100 + $13], a
+	ld [wCurEnemyUnk13], a
 	ld a, [hli]
-	ld [w1d100 + $14], a
+	ld [wCurEnemyUnk14], a
 	ld a, [hli]
-	ld [w1d100 + $15], a
+	ld [wCurEnemyUnk15], a
 	ld a, [hli]
-	ld [w1d100 + $16], a
+	ld [wCurEnemyUnk16], a
 	ld a, [hli]
-	ld [w1d100 + $17], a
+	ld [wCurEnemyUnk17], a
 	ld a, [hli]
-	ld [w1d100 + $18], a
+	ld [wCurEnemyUnk18], a
 	ld a, [hli]
-	ld [w1d100 + $19], a
+	ld [wCurEnemyUnk19], a
 	ld a, [hli]
-	ld [w1d100 + $1a], a
+	ld [wCurEnemyUnk1a], a
 	ld a, [hli]
-	ld [w1d100 + $1b], a
+	ld [wCurEnemyUnk1b], a
 	ld a, [hli]
-	ld [w1d100 + $1c], a
+	ld [wCurEnemyUnk1c], a
 	ld a, [hli]
-	ld [w1d100 + $1d], a
+	ld [wCurEnemyUnk1d], a
 	ld a, [hli]
-	ld [w1d100 + $1e], a
+	ld [wCurEnemyUnk1e], a
 	ld a, [hl]
-	ld [w1d100 + $1f], a
-	ld hl, w1d100 + $1a
+	ld [wCurEnemyUnk1e + 1], a
+	ld hl, wCurEnemyUnk1a
 	bit 5, [hl]
 	jr z, .asm_615b4
 
-	ld a, [w1d100 + $07]
+	ld a, [wCurEnemyUnk07]
 	swap a
 	and $0f
 	or $10
 	ldh [hCallFuncBank], a
-	ld a, [w1d100 + $1e]
+	ld a, [wCurEnemyUnk1e + 0]
 	ldh [hCallFuncPointer], a
-	ld a, [w1d100 + $1f]
+	ld a, [wCurEnemyUnk1e + 1]
 	ldh [hCallFuncPointer + 1], a
 	call hCallFunc
 
 .asm_615b4
 	call Func_3104
 	call Func_6307b
-	ld hl, w1d100 + $d
+	ld hl, wCurEnemyUnk0d
 	ld a, [wTempSCY]
 	ld b, a
-	ld a, [w1d100 + $03]
+	ld a, [wCurEnemyYPos]
 	add $10
 	sub b
 	ld [hli], a
 	ld a, [wTempSCX]
 	ld b, a
-	ld a, [w1d100 + $05]
+	ld a, [wCurEnemyXPos]
 	add $08
 	sub b
 	ld [hli], a
 	pop hl
-	ld a, [w1d100 + $00]
+	ld a, [wCurEnemyUnk00]
 	and $df
 	ld [hli], a
 	inc l
 	inc l
-	ld a, [w1d100 + $03]
+	ld a, [wCurEnemyYPos]
 	ld [hli], a
-	ld a, [w1d100 + $04]
+	ld a, [wCurEnemyYPos + 1]
 	ld [hli], a
-	ld a, [w1d100 + $05]
+	ld a, [wCurEnemyXPos]
 	ld [hli], a
-	ld a, [w1d100 + $06]
+	ld a, [wCurEnemyXPos + 1]
 	ld [hli], a
-	ld a, [w1d100 + $07]
+	ld a, [wCurEnemyUnk07]
 	ld [hli], a
-	ld a, [w1d100 + $08]
+	ld a, [wCurEnemyInteractionType]
 	ld [hli], a
-	ld a, [w1d100 + $09]
+	ld a, [wCurEnemyUnk09]
 	ld [hli], a
-	ld a, [w1d100 + $0a]
+	ld a, [wCurEnemyUnk0a]
 	ld [hli], a
-	ld a, [w1d100 + $0b]
+	ld a, [wCurEnemyUnk0b]
 	ld [hli], a
-	ld a, [w1d100 + $0c]
+	ld a, [wCurEnemyUnk0c]
 	ld [hli], a
-	ld a, [w1d100 + $0d]
+	ld a, [wCurEnemyUnk0d]
 	ld [hli], a
-	ld a, [w1d100 + $0e]
+	ld a, [wCurEnemyUnk0e]
 	ld [hli], a
-	ld a, [w1d100 + $0f]
+	ld a, [wCurEnemyUnk0f]
 	ld [hli], a
-	ld a, [w1d100 + $10]
+	ld a, [wCurEnemyUnk10]
 	ld [hli], a
-	ld a, [w1d100 + $11]
+	ld a, [wCurEnemyUnk10 + 1]
 	ld [hli], a
-	ld a, [w1d100 + $12]
+	ld a, [wCurEnemyUnk12]
 	ld [hli], a
-	ld a, [w1d100 + $13]
+	ld a, [wCurEnemyUnk13]
 	ld [hli], a
-	ld a, [w1d100 + $14]
+	ld a, [wCurEnemyUnk14]
 	ld [hli], a
-	ld a, [w1d100 + $15]
+	ld a, [wCurEnemyUnk15]
 	ld [hli], a
-	ld a, [w1d100 + $16]
+	ld a, [wCurEnemyUnk16]
 	ld [hli], a
-	ld a, [w1d100 + $17]
+	ld a, [wCurEnemyUnk17]
 	ld [hli], a
-	ld a, [w1d100 + $18]
+	ld a, [wCurEnemyUnk18]
 	ld [hli], a
-	ld a, [w1d100 + $19]
+	ld a, [wCurEnemyUnk19]
 	ld [hli], a
-	ld a, [w1d100 + $1a]
+	ld a, [wCurEnemyUnk1a]
 	ld [hli], a
-	ld a, [w1d100 + $1b]
+	ld a, [wCurEnemyUnk1b]
 	ld [hli], a
-	ld a, [w1d100 + $1c]
+	ld a, [wCurEnemyUnk1c]
 	ld [hli], a
 	inc l
-	ld a, [w1d100 + $1e]
+	ld a, [wCurEnemyUnk1e]
 	ld [hli], a
-	ld a, [w1d100 + $1f]
+	ld a, [wCurEnemyUnk1e + 1]
 	ld [hl], a
 	ret
 ; 0x6164e
@@ -775,7 +780,7 @@ Func_616d7: ; 616d7 (18:56d7)
 ; 0x61760
 
 Func_61760: ; 61760 (18:5760)
-	ld a, [w1d100 + $1c]
+	ld a, [wCurEnemyUnk1c]
 	and a
 	ret z
 	bit 7, a
@@ -785,7 +790,7 @@ Func_61760: ; 61760 (18:5760)
 	jr nz, .asm_6176f
 	xor a
 .asm_6176f
-	ld [w1d100 + $1c], a
+	ld [wCurEnemyUnk1c], a
 	ret
 
 .jump
@@ -816,43 +821,43 @@ Func_61760: ; 61760 (18:5760)
 	INCROM $6179c, $618e2
 
 Func_618e2: ; 618e2 (18:58e2)
-	ld hl, wEnemies
-	ld e, $05
+	ld hl, wEnemy1
+	ld e, %101
 	ld a, [hl]
 	and e
 	cp e
 	jr z, .asm_6191c
-	ld l, $20
+	ld l, LOW(wEnemy2)
 	ld a, [hl]
 	and e
 	cp e
 	jr z, .asm_6191c
-	ld l, $40
+	ld l, LOW(wEnemy3)
 	ld a, [hl]
 	and e
 	cp e
 	jr z, .asm_6191c
-	ld l, $60
+	ld l, LOW(wEnemy4)
 	ld a, [hl]
 	and e
 	cp e
 	jr z, .asm_6191c
-	ld l, $80
+	ld l, LOW(wEnemy5)
 	ld a, [hl]
 	and e
 	cp e
 	jr z, .asm_6191c
-	ld l, $a0
+	ld l, LOW(wEnemy6)
 	ld a, [hl]
 	and e
 	cp e
 	jr z, .asm_6191c
-	ld l, $c0
+	ld l, LOW(wEnemy7)
 	ld a, [hl]
 	and e
 	cp e
 	jr z, .asm_6191c
-	ld l, $e0
+	ld l, LOW(wEnemy8)
 	ld a, [hl]
 	and e
 	cp e
@@ -861,42 +866,43 @@ Func_618e2: ; 618e2 (18:58e2)
 .asm_6191c
 	push hl
 	ld a, l
-	add $08
+	add ENEMY_INTERACTION_TYPE
 	ld l, a
-	ld a, [hli]
+	ld a, [hli] ; ENEMY_INTERACTION_TYPE
 	ldh [hffa0], a
-	ld a, [hli]
+	ld a, [hli] ; ENEMY_UNK_09
 	ld b, a
-	ld a, [hli]
+	ld a, [hli] ; ENEMY_UNK_0A
 	ld c, a
-	ld a, [hli]
+	ld a, [hli] ; ENEMY_UNK_0B
 	ld d, a
-	ld a, [hli]
+	ld a, [hli] ; ENEMY_UNK_0C
 	ld e, a
-	ld a, [hl]
+	ld a, [hl] ; ENEMY_UNK_0D
 	add $2a
 	add b
 	ld b, a
-	ld a, [hli]
+	ld a, [hli] ; ENEMY_UNK_0D
 	add $2a
 	add c
 	ld c, a
-	ld a, [hl]
+	ld a, [hl] ; ENEMY_UNK_0E
 	add $2a
 	add d
 	ld d, a
-	ld a, [hli]
+	ld a, [hli] ; ENEMY_UNK_0E
 	add $2a
 	add e
 	ld e, a
 	ld a, l
-	add $0c
+	add ENEMY_UNK_1B - ENEMY_UNK_0F
 	ld l, a
-	ld a, [hl]
+	ld a, [hl] ; ENEMY_UNK_1B
 	cp $4c
 	jr nc, .asm_6194d
 	cp $48
 	jr nc, .asm_61992
+
 .asm_6194d
 	rra
 	ld hl, hffa0
@@ -905,91 +911,97 @@ Func_618e2: ; 618e2 (18:58e2)
 	rla
 	jr c, .asm_61965
 	ld a, $28
-	ld [hli], a
+	ld [hli], a ; hffa1
 	ld a, $29
-	ld [hli], a
+	ld [hli], a ; hffa2
 	ld a, $09
-	ld [hli], a
+	ld [hli], a ; hffa3
 	ld a, $29
-	ld [hli], a
-	jr .asm_619a6
+	ld [hli], a ; hffa4
+	jr .enemy_1
+
 .asm_61965
 	ld a, $28
-	ld [hli], a
+	ld [hli], a ; hffa1
 	ld a, $08
-	ld [hli], a
+	ld [hli], a ; hffa2
 	ld a, $28
-	ld [hli], a
+	ld [hli], a ; hffa3
 	ld a, $29
-	ld [hli], a
-	jr .asm_619a6
+	ld [hli], a ; hffa4
+	jr .enemy_1
+
 .asm_61973
 	rla
 	jr c, .asm_61984
 	ld a, $29
-	ld [hli], a
+	ld [hli], a ; ; hffa1
 	ld a, $28
-	ld [hli], a
+	ld [hli], a ; ; hffa2
 	ld a, $08
-	ld [hli], a
+	ld [hli], a ; ; hffa3
 	ld a, $28
-	ld [hli], a
-	jr .asm_619a6
+	ld [hli], a ; ; hffa4
+	jr .enemy_1
+
 .asm_61984
 	ld a, $29
-	ld [hli], a
+	ld [hli], a ; hffa1
 	ld a, $09
-	ld [hli], a
+	ld [hli], a ; hffa2
 	ld a, $29
-	ld [hli], a
+	ld [hli], a ; hffa3
 	ld a, $28
-	ld [hli], a
-	jr .asm_619a6
+	ld [hli], a ; hffa4
+	jr .enemy_1
+
 .asm_61992
 	rra
-	ld hl, $ffa1
+	ld hl, hffa1
 	jr c, .asm_619a0
 	ld a, $09
-	ld [hli], a
+	ld [hli], a ; hffa1
 	ld a, $08
-	ld [hli], a
-	jr .asm_619a6
+	ld [hli], a ; hffa2
+	jr .enemy_1
+
 .asm_619a0
 	ld a, $08
-	ld [hli], a
+	ld [hli], a ; hffa1
 	ld a, $09
-	ld [hli], a
-.asm_619a6
-	ld a, [wEnemies]
+	ld [hli], a ; hffa2
+
+.enemy_1
+	ld a, [wEnemy1Unk00]
 	and $1f
-	cp $03
-	jr nz, .asm_61a16
-	ld a, [$d00d]
+	cp %11
+	jr nz, .enemy_2
+	ld a, [wEnemy1Unk0d]
 	add $2a
 	ld h, a
-	ld a, [$d00e]
+	ld a, [wEnemy1Unk0e]
 	add $2a
 	ld l, a
-	ld a, [$d00a]
+	ld a, [wEnemy1Unk0a]
 	add h
 	sub b
-	jr c, .asm_61a16
-	ld a, [$d009]
+	jr c, .enemy_2
+	ld a, [wEnemy1Unk09]
 	add h
 	sub c
-	jr nc, .asm_61a16
-	ld a, [$d00c]
+	jr nc, .enemy_2
+	ld a, [wEnemy1Unk0c]
 	add l
 	sub d
-	jr c, .asm_61a16
-	ld a, [$d00b]
+	jr c, .enemy_2
+	ld a, [wEnemy1Unk0b]
 	add l
 	sub e
-	jr nc, .asm_61a16
+	jr nc, .enemy_2
 	pop hl
 	res 2, [hl]
 	ld a, l
-	add $1b
+	add ENEMY_UNK_1B - ENEMY_UNK_00
 	ld l, a
 	ld a, [hl]
 	and $fe
@@ -997,12 +1009,12 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61d28
 	cp $48
 	jp z, Func_61d28
-	ld a, [$d008]
+	ld a, [wEnemy1InteractionType]
 	rla
 	jp c, Func_61df0
-	ldh a, [$ffa2]
+	ldh a, [hffa2]
 	ld [hl], a
-	ld l, $1b
+	ld l, LOW(wEnemy1Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1013,44 +1025,44 @@ Func_618e2: ; 618e2 (18:58e2)
 	xor a
 	ld [wca9a], a
 .asm_61a06
-	ldh a, [$ffa1]
+	ldh a, [hffa1]
 	ld [hl], a
-	ld l, $00
+	ld l, LOW(wEnemy1Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 
-.asm_61a16
-	ld a, [$d020]
+.enemy_2
+	ld a, [wEnemy2Unk00]
 	and $1f
 	cp $03
-	jr nz, .asm_61a86
-	ld a, [$d02d]
+	jr nz, .enemy_3
+	ld a, [wEnemy2Unk0d]
 	add $2a
 	ld h, a
-	ld a, [$d02e]
+	ld a, [wEnemy2Unk0e]
 	add $2a
 	ld l, a
-	ld a, [$d02a]
+	ld a, [wEnemy2Unk0a]
 	add h
 	sub b
-	jr c, .asm_61a86
-	ld a, [$d029]
+	jr c, .enemy_3
+	ld a, [wEnemy2Unk09]
 	add h
 	sub c
-	jr nc, .asm_61a86
-	ld a, [$d02c]
+	jr nc, .enemy_3
+	ld a, [wEnemy2Unk0c]
 	add l
 	sub d
-	jr c, .asm_61a86
-	ld a, [$d02b]
+	jr c, .enemy_3
+	ld a, [wEnemy2Unk0b]
 	add l
 	sub e
-	jr nc, .asm_61a86
+	jr nc, .enemy_3
 	pop hl
 	res 2, [hl]
 	ld a, l
-	add $1b
+	add ENEMY_UNK_1B - ENEMY_UNK_00
 	ld l, a
 	ld a, [hl]
 	and $fe
@@ -1058,12 +1070,12 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61d41
 	cp $48
 	jp z, Func_61d41
-	ld a, [$d028]
+	ld a, [wEnemy2InteractionType]
 	rla
 	jp c, Func_61e14
-	ldh a, [$ffa2]
+	ldh a, [hffa2]
 	ld [hl], a
-	ld l, $3b
+	ld l, LOW(wEnemy2Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1074,44 +1086,44 @@ Func_618e2: ; 618e2 (18:58e2)
 	xor a
 	ld [wca9a], a
 .asm_61a76
-	ldh a, [$ffa1]
+	ldh a, [hffa1]
 	ld [hl], a
-	ld l, $20
+	ld l, LOW(wEnemy2Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 
-.asm_61a86
-	ld a, [$d040]
+.enemy_3
+	ld a, [wEnemy3Unk00]
 	and $1f
 	cp $03
-	jr nz, .asm_61af6
-	ld a, [$d04d]
+	jr nz, .enemy_4
+	ld a, [wEnemy3Unk0d]
 	add $2a
 	ld h, a
-	ld a, [$d04e]
+	ld a, [wEnemy3Unk0e]
 	add $2a
 	ld l, a
-	ld a, [$d04a]
+	ld a, [wEnemy3Unk0a]
 	add h
 	sub b
-	jr c, .asm_61af6
-	ld a, [$d049]
+	jr c, .enemy_4
+	ld a, [wEnemy3Unk09]
 	add h
 	sub c
-	jr nc, .asm_61af6
-	ld a, [$d04c]
+	jr nc, .enemy_4
+	ld a, [wEnemy3Unk0c]
 	add l
 	sub d
-	jr c, .asm_61af6
-	ld a, [$d04b]
+	jr c, .enemy_4
+	ld a, [wEnemy3Unk0b]
 	add l
 	sub e
-	jr nc, .asm_61af6
+	jr nc, .enemy_4
 	pop hl
 	res 2, [hl]
 	ld a, l
-	add $1b
+	add ENEMY_UNK_1B - ENEMY_UNK_00
 	ld l, a
 	ld a, [hl]
 	and $fe
@@ -1119,12 +1131,12 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61d5a
 	cp $48
 	jp z, Func_61d5a
-	ld a, [$d048]
+	ld a, [wEnemy3InteractionType]
 	rla
 	jp c, Func_61e38
-	ldh a, [$ffa2]
+	ldh a, [hffa2]
 	ld [hl], a
-	ld l, $5b
+	ld l, LOW(wEnemy3Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1135,44 +1147,44 @@ Func_618e2: ; 618e2 (18:58e2)
 	xor a
 	ld [wca9a], a
 .asm_61ae6
-	ldh a, [$ffa1]
+	ldh a, [hffa1]
 	ld [hl], a
-	ld l, $40
+	ld l, LOW(wEnemy3Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 
-.asm_61af6
-	ld a, [$d060]
+.enemy_4
+	ld a, [wEnemy4Unk00]
 	and $1f
 	cp $03
-	jr nz, .asm_61b66
-	ld a, [$d06d]
+	jr nz, .enemy_5
+	ld a, [wEnemy4Unk0d]
 	add $2a
 	ld h, a
-	ld a, [$d06e]
+	ld a, [wEnemy4Unk0e]
 	add $2a
 	ld l, a
-	ld a, [$d06a]
+	ld a, [wEnemy4Unk0a]
 	add h
 	sub b
-	jr c, .asm_61b66
-	ld a, [$d069]
+	jr c, .enemy_5
+	ld a, [wEnemy4Unk09]
 	add h
 	sub c
-	jr nc, .asm_61b66
-	ld a, [$d06c]
+	jr nc, .enemy_5
+	ld a, [wEnemy4Unk0c]
 	add l
 	sub d
-	jr c, .asm_61b66
-	ld a, [$d06b]
+	jr c, .enemy_5
+	ld a, [wEnemy4Unk0b]
 	add l
 	sub e
-	jr nc, .asm_61b66
+	jr nc, .enemy_5
 	pop hl
 	res 2, [hl]
 	ld a, l
-	add $1b
+	add ENEMY_UNK_1B - ENEMY_UNK_00
 	ld l, a
 	ld a, [hl]
 	and $fe
@@ -1180,12 +1192,12 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61d73
 	cp $48
 	jp z, Func_61d73
-	ld a, [$d068]
+	ld a, [wEnemy4InteractionType]
 	rla
 	jp c, Func_61e5c
-	ldh a, [$ffa2]
+	ldh a, [hffa2]
 	ld [hl], a
-	ld l, $7b
+	ld l, LOW(wEnemy4Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1196,44 +1208,44 @@ Func_618e2: ; 618e2 (18:58e2)
 	xor a
 	ld [wca9a], a
 .asm_61b56
-	ldh a, [$ffa1]
+	ldh a, [hffa1]
 	ld [hl], a
-	ld l, $60
+	ld l, LOW(wEnemy4Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 
-.asm_61b66
-	ld a, [$d080]
+.enemy_5
+	ld a, [wEnemy5Unk00]
 	and $1f
 	cp $03
-	jr nz, .asm_61bd6
-	ld a, [$d08d]
+	jr nz, .enemy_6
+	ld a, [wEnemy5Unk0d]
 	add $2a
 	ld h, a
-	ld a, [$d08e]
+	ld a, [wEnemy5Unk0e]
 	add $2a
 	ld l, a
-	ld a, [$d08a]
+	ld a, [wEnemy5Unk0a]
 	add h
 	sub b
-	jr c, .asm_61bd6
-	ld a, [$d089]
+	jr c, .enemy_6
+	ld a, [wEnemy5Unk09]
 	add h
 	sub c
-	jr nc, .asm_61bd6
-	ld a, [$d08c]
+	jr nc, .enemy_6
+	ld a, [wEnemy5Unk0c]
 	add l
 	sub d
-	jr c, .asm_61bd6
-	ld a, [$d08b]
+	jr c, .enemy_6
+	ld a, [wEnemy5Unk0b]
 	add l
 	sub e
-	jr nc, .asm_61bd6
+	jr nc, .enemy_6
 	pop hl
 	res 2, [hl]
 	ld a, l
-	add $1b
+	add ENEMY_UNK_1B - ENEMY_UNK_00
 	ld l, a
 	ld a, [hl]
 	and $fe
@@ -1241,12 +1253,12 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61d8c
 	cp $48
 	jp z, Func_61d8c
-	ld a, [$d088]
+	ld a, [wEnemy5InteractionType]
 	rla
 	jp c, Func_61e80
-	ldh a, [$ffa2]
+	ldh a, [hffa2]
 	ld [hl], a
-	ld l, $9b
+	ld l, LOW(wEnemy5Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1257,44 +1269,44 @@ Func_618e2: ; 618e2 (18:58e2)
 	xor a
 	ld [wca9a], a
 .asm_61bc6
-	ldh a, [$ffa1]
+	ldh a, [hffa1]
 	ld [hl], a
-	ld l, $80
+	ld l, LOW(wEnemy5Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 
-.asm_61bd6
-	ld a, [$d0a0]
+.enemy_6
+	ld a, [wEnemy6Unk00]
 	and $1f
 	cp $03
-	jr nz, .asm_61c46
-	ld a, [$d0ad]
+	jr nz, .enemy_7
+	ld a, [wEnemy6Unk0d]
 	add $2a
 	ld h, a
-	ld a, [$d0ae]
+	ld a, [wEnemy6Unk0e]
 	add $2a
 	ld l, a
-	ld a, [$d0aa]
+	ld a, [wEnemy6Unk0a]
 	add h
 	sub b
-	jr c, .asm_61c46
-	ld a, [$d0a9]
+	jr c, .enemy_7
+	ld a, [wEnemy6Unk09]
 	add h
 	sub c
-	jr nc, .asm_61c46
-	ld a, [$d0ac]
+	jr nc, .enemy_7
+	ld a, [wEnemy6Unk0c]
 	add l
 	sub d
-	jr c, .asm_61c46
-	ld a, [$d0ab]
+	jr c, .enemy_7
+	ld a, [wEnemy6Unk0b]
 	add l
 	sub e
-	jr nc, .asm_61c46
+	jr nc, .enemy_7
 	pop hl
 	res 2, [hl]
 	ld a, l
-	add $1b
+	add ENEMY_UNK_1B - ENEMY_UNK_00
 	ld l, a
 	ld a, [hl]
 	and $fe
@@ -1302,12 +1314,12 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61da5
 	cp $48
 	jp z, Func_61da5
-	ld a, [$d0a8]
+	ld a, [wEnemy6InteractionType]
 	rla
 	jp c, Func_61ea4
-	ldh a, [$ffa2]
+	ldh a, [hffa2]
 	ld [hl], a
-	ld l, $bb
+	ld l, LOW(wEnemy6Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1318,44 +1330,44 @@ Func_618e2: ; 618e2 (18:58e2)
 	xor a
 	ld [wca9a], a
 .asm_61c36
-	ldh a, [$ffa1]
+	ldh a, [hffa1]
 	ld [hl], a
-	ld l, $a0
+	ld l, LOW(wEnemy6Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 
-.asm_61c46
-	ld a, [$d0c0]
+.enemy_7
+	ld a, [wEnemy7Unk00]
 	and $1f
 	cp $03
-	jr nz, .asm_61cb6
-	ld a, [$d0cd]
+	jr nz, .enemy_8
+	ld a, [wEnemy7Unk0d]
 	add $2a
 	ld h, a
-	ld a, [$d0ce]
+	ld a, [wEnemy7Unk0e]
 	add $2a
 	ld l, a
-	ld a, [$d0ca]
+	ld a, [wEnemy7Unk0a]
 	add h
 	sub b
-	jr c, .asm_61cb6
-	ld a, [$d0c9]
+	jr c, .enemy_8
+	ld a, [wEnemy7Unk09]
 	add h
 	sub c
-	jr nc, .asm_61cb6
-	ld a, [$d0cc]
+	jr nc, .enemy_8
+	ld a, [wEnemy7Unk0c]
 	add l
 	sub d
-	jr c, .asm_61cb6
-	ld a, [$d0cb]
+	jr c, .enemy_8
+	ld a, [wEnemy7Unk0b]
 	add l
 	sub e
-	jr nc, .asm_61cb6
+	jr nc, .enemy_8
 	pop hl
 	res 2, [hl]
 	ld a, l
-	add $1b
+	add ENEMY_UNK_1B - ENEMY_UNK_00
 	ld l, a
 	ld a, [hl]
 	and $fe
@@ -1363,12 +1375,12 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61dbe
 	cp $48
 	jp z, Func_61dbe
-	ld a, [$d0c8]
+	ld a, [wEnemy7InteractionType]
 	rla
 	jp c, Func_61ec8
-	ldh a, [$ffa2]
+	ldh a, [hffa2]
 	ld [hl], a
-	ld l, $db
+	ld l, LOW(wEnemy7Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1379,44 +1391,44 @@ Func_618e2: ; 618e2 (18:58e2)
 	xor a
 	ld [wca9a], a
 .asm_61ca6
-	ldh a, [$ffa1]
+	ldh a, [hffa1]
 	ld [hl], a
-	ld l, $c0
+	ld l, LOW(wEnemy7Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 
-.asm_61cb6
-	ld a, [$d0e0]
+.enemy_8
+	ld a, [wEnemy8Unk00]
 	and $1f
 	cp $03
-	jr nz, .asm_61d26
-	ld a, [$d0ed]
+	jr nz, .done
+	ld a, [wEnemy8Unk0d]
 	add $2a
 	ld h, a
-	ld a, [$d0ee]
+	ld a, [wEnemy8Unk0e]
 	add $2a
 	ld l, a
-	ld a, [$d0ea]
+	ld a, [wEnemy8Unk0a]
 	add h
 	sub b
-	jr c, .asm_61d26
-	ld a, [$d0e9]
+	jr c, .done
+	ld a, [wEnemy8Unk09]
 	add h
 	sub c
-	jr nc, .asm_61d26
-	ld a, [$d0ec]
+	jr nc, .done
+	ld a, [wEnemy8Unk0c]
 	add l
 	sub d
-	jr c, .asm_61d26
-	ld a, [$d0eb]
+	jr c, .done
+	ld a, [wEnemy8Unk0b]
 	add l
 	sub e
-	jr nc, .asm_61d26
+	jr nc, .done
 	pop hl
 	res 2, [hl]
 	ld a, l
-	add $1b
+	add ENEMY_UNK_1B - ENEMY_UNK_00
 	ld l, a
 	ld a, [hl]
 	and $fe
@@ -1424,12 +1436,12 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61dd7
 	cp $48
 	jp z, Func_61dd7
-	ld a, [$d0e8]
+	ld a, [wEnemy8InteractionType]
 	rla
 	jp c, Func_61eec
-	ldh a, [$ffa2]
+	ldh a, [hffa2]
 	ld [hl], a
-	ld l, $fb
+	ld l, LOW(wEnemy8Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1440,14 +1452,14 @@ Func_618e2: ; 618e2 (18:58e2)
 	xor a
 	ld [wca9a], a
 .asm_61d16
-	ldh a, [$ffa1]
+	ldh a, [hffa1]
 	ld [hl], a
-	ld l, $e0
+	ld l, LOW(wEnemy8Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 
-.asm_61d26
+.done
 	pop hl
 	ret
 ; 0x61d28
@@ -1455,12 +1467,12 @@ Func_618e2: ; 618e2 (18:58e2)
 Func_61d28: ; 61d28 (18:5d28)
 	xor a
 	ld [wca9a], a
-	ldh a, [$ffa2]
+	ldh a, [hffa2]
 	ld [hl], a
-	ld l, $1b
-	ldh a, [$ffa1]
+	ld l, LOW(wEnemy1Unk1b)
+	ldh a, [hffa1]
 	ld [hl], a
-	ld l, $00
+	ld l, LOW(wEnemy1Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1469,12 +1481,12 @@ Func_61d28: ; 61d28 (18:5d28)
 Func_61d41: ; 61d41 (18:5d41)
 	xor a
 	ld [wca9a], a
-	ldh a, [$ffa2]
+	ldh a, [hffa2]
 	ld [hl], a
-	ld l, $3b
-	ldh a, [$ffa1]
+	ld l, LOW(wEnemy2Unk1b)
+	ldh a, [hffa1]
 	ld [hl], a
-	ld l, $20
+	ld l, LOW(wEnemy2Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1483,12 +1495,12 @@ Func_61d41: ; 61d41 (18:5d41)
 Func_61d5a: ; 61d5a (18:5d5a)
 	xor a
 	ld [wca9a], a
-	ldh a, [$ffa2]
+	ldh a, [hffa2]
 	ld [hl], a
-	ld l, $5b
-	ldh a, [$ffa1]
+	ld l, LOW(wEnemy3Unk1b)
+	ldh a, [hffa1]
 	ld [hl], a
-	ld l, $40
+	ld l, LOW(wEnemy3Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1497,12 +1509,12 @@ Func_61d5a: ; 61d5a (18:5d5a)
 Func_61d73: ; 61d73 (18:5d73)
 	xor a
 	ld [wca9a], a
-	ldh a, [$ffa2]
+	ldh a, [hffa2]
 	ld [hl], a
-	ld l, $7b
-	ldh a, [$ffa1]
+	ld l, LOW(wEnemy4Unk1b)
+	ldh a, [hffa1]
 	ld [hl], a
-	ld l, $60
+	ld l, LOW(wEnemy4Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1511,12 +1523,12 @@ Func_61d73: ; 61d73 (18:5d73)
 Func_61d8c: ; 61d8c (18:5d8c)
 	xor a
 	ld [wca9a], a
-	ldh a, [$ffa2]
+	ldh a, [hffa2]
 	ld [hl], a
-	ld l, $9b
-	ldh a, [$ffa1]
+	ld l, LOW(wEnemy5Unk1b)
+	ldh a, [hffa1]
 	ld [hl], a
-	ld l, $80
+	ld l, LOW(wEnemy5Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1525,12 +1537,12 @@ Func_61d8c: ; 61d8c (18:5d8c)
 Func_61da5: ; 61da5 (18:5da5)
 	xor a
 	ld [wca9a], a
-	ldh a, [$ffa2]
+	ldh a, [hffa2]
 	ld [hl], a
-	ld l, $bb
-	ldh a, [$ffa1]
+	ld l, LOW(wEnemy6Unk1b)
+	ldh a, [hffa1]
 	ld [hl], a
-	ld l, $a0
+	ld l, LOW(wEnemy6Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1539,12 +1551,12 @@ Func_61da5: ; 61da5 (18:5da5)
 Func_61dbe: ; 61dbe (18:5dbe)
 	xor a
 	ld [wca9a], a
-	ldh a, [$ffa2]
+	ldh a, [hffa2]
 	ld [hl], a
-	ld l, $db
-	ldh a, [$ffa1]
+	ld l, LOW(wEnemy7Unk1b)
+	ldh a, [hffa1]
 	ld [hl], a
-	ld l, $c0
+	ld l, LOW(wEnemy7Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1553,21 +1565,21 @@ Func_61dbe: ; 61dbe (18:5dbe)
 Func_61dd7: ; 61dd7 (18:5dd7)
 	xor a
 	ld [wca9a], a
-	ldh a, [$ffa2]
+	ldh a, [hffa2]
 	ld [hl], a
-	ld l, $fb
-	ldh a, [$ffa1]
+	ld l, LOW(wEnemy8Unk1b)
+	ldh a, [hffa1]
 	ld [hl], a
-	ld l, $e0
+	ld l, LOW(wEnemy8Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61df0
 
 Func_61df0: ; 61df0 (18:5df0)
-	ldh a, [$ffa4]
+	ldh a, [hffa4]
 	ld [hl], a
-	ld l, $1b
+	ld l, LOW(wEnemy1Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1578,18 +1590,18 @@ Func_61df0: ; 61df0 (18:5df0)
 	xor a
 	ld [wca9a], a
 .asm_61e04
-	ldh a, [$ffa3]
+	ldh a, [hffa3]
 	ld [hl], a
-	ld l, $00
+	ld l, LOW(wEnemy1Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61e14
 
 Func_61e14: ; 61e14 (18:5e14)
-	ldh a, [$ffa4]
+	ldh a, [hffa4]
 	ld [hl], a
-	ld l, $3b
+	ld l, LOW(wEnemy2Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1600,18 +1612,18 @@ Func_61e14: ; 61e14 (18:5e14)
 	xor a
 	ld [wca9a], a
 .asm_61e28
-	ldh a, [$ffa3]
+	ldh a, [hffa3]
 	ld [hl], a
-	ld l, $20
+	ld l, LOW(wEnemy2Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61e38
 
 Func_61e38: ; 61e38 (18:5e38)
-	ldh a, [$ffa4]
+	ldh a, [hffa4]
 	ld [hl], a
-	ld l, $5b
+	ld l, LOW(wEnemy3Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1622,18 +1634,18 @@ Func_61e38: ; 61e38 (18:5e38)
 	xor a
 	ld [wca9a], a
 .asm_61e4c
-	ldh a, [$ffa3]
+	ldh a, [hffa3]
 	ld [hl], a
-	ld l, $40
+	ld l, LOW(wEnemy3Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61e5c
 
 Func_61e5c: ; 61e5c (18:5e5c)
-	ldh a, [$ffa4]
+	ldh a, [hffa4]
 	ld [hl], a
-	ld l, $7b
+	ld l, LOW(wEnemy4Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1644,18 +1656,18 @@ Func_61e5c: ; 61e5c (18:5e5c)
 	xor a
 	ld [wca9a], a
 .asm_61e70
-	ldh a, [$ffa3]
+	ldh a, [hffa3]
 	ld [hl], a
-	ld l, $60
+	ld l, LOW(wEnemy4Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61e80
 
 Func_61e80: ; 61e80 (18:5e80)
-	ldh a, [$ffa4]
+	ldh a, [hffa4]
 	ld [hl], a
-	ld l, $9b
+	ld l, LOW(wEnemy5Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1666,18 +1678,18 @@ Func_61e80: ; 61e80 (18:5e80)
 	xor a
 	ld [wca9a], a
 .asm_61e94
-	ldh a, [$ffa3]
+	ldh a, [hffa3]
 	ld [hl], a
-	ld l, $80
+	ld l, LOW(wEnemy5Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61ea4
 
 Func_61ea4: ; 61ea4 (18:5ea4)
-	ldh a, [$ffa4]
+	ldh a, [hffa4]
 	ld [hl], a
-	ld l, $bb
+	ld l, LOW(wEnemy6Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1688,18 +1700,18 @@ Func_61ea4: ; 61ea4 (18:5ea4)
 	xor a
 	ld [wca9a], a
 .asm_61eb8
-	ldh a, [$ffa3]
+	ldh a, [hffa3]
 	ld [hl], a
-	ld l, $a0
+	ld l, LOW(wEnemy6Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61ec8
 
 Func_61ec8: ; 61ec8 (18:5ec8)
-	ldh a, [$ffa4]
+	ldh a, [hffa4]
 	ld [hl], a
-	ld l, $db
+	ld l, LOW(wEnemy7Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1710,18 +1722,18 @@ Func_61ec8: ; 61ec8 (18:5ec8)
 	xor a
 	ld [wca9a], a
 .asm_61edc
-	ldh a, [$ffa3]
+	ldh a, [hffa3]
 	ld [hl], a
-	ld l, $c0
+	ld l, LOW(wEnemy7Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61eec
 
 Func_61eec: ; 61eec (18:5eec)
-	ldh a, [$ffa4]
+	ldh a, [hffa4]
 	ld [hl], a
-	ld l, $fb
+	ld l, LOW(wEnemy8Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1732,9 +1744,9 @@ Func_61eec: ; 61eec (18:5eec)
 	xor a
 	ld [wca9a], a
 .asm_61f00
-	ldh a, [$ffa3]
+	ldh a, [hffa3]
 	ld [hl], a
-	ld l, $e0
+	ld l, LOW(wEnemy8Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1788,7 +1800,7 @@ Func_61f4a: ; 61f4a (18:5f4a)
 	INCROM $61f54, $6307b
 
 Func_6307b: ; 6307b (18:707b)
-	ld hl, $d103
+	ld hl, wCurEnemyYPos
 	ld a, [hli]
 	ld c, a
 	ld a, [hli]
@@ -1885,16 +1897,16 @@ Func_6307b: ; 6307b (18:707b)
 	cp l
 	jr nc, .asm_63106
 .asm_630f6
-	ld hl, $d100
+	ld hl, wCurEnemyUnk00
 	set 1, [hl]
 	jr .asm_6310b
 .asm_630fd
-	ld a, [$d11b]
+	ld a, [wCurEnemyUnk1b]
 	and $fe
 	cp $48
 	jr z, .asm_6310b
 .asm_63106
-	ld hl, $d100
+	ld hl, wCurEnemyUnk00
 	res 1, [hl]
 .asm_6310b
 	pop hl
@@ -1988,18 +2000,18 @@ Func_6307b: ; 6307b (18:707b)
 	cp l
 	jr c, .asm_631a0
 .asm_6317e
-	ld a, [$d11a]
+	ld a, [wCurEnemyUnk1a]
 	and $1f
 	cp $10
 	ret nc
-	ld hl, $d102
+	ld hl, wCurEnemyUnk02
 	and a
 	jr z, .asm_6319c
 	farcall Func_baee
 	ret
 .asm_6319c
 	xor a
-	ld [$d100], a
+	ld [wCurEnemyUnk00], a
 .asm_631a0
 	ret
 ; 0x631a1

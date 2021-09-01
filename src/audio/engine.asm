@@ -3378,7 +3378,7 @@ SoundHeaders: ; 3155e (c:555e)
 
 	sfx $785b, $0e, $00, 220, CHAN5, 1 ; SFX_JUMP
 	sfx $792e, $0e, $00, 237, CHAN8, 1 ; SFX_002
-	sfx $793f, $0e, $00, 236, CHAN5, 1 ; SFX_003
+	sfx $793f, $0e, $00, 236, CHAN5, 1 ; SFX_BUMP
 	sfx $7958, $0e, $00, 226, CHAN8, 1 ; SFX_WALK
 	sfx $7981, $0e, $00, 236, CHAN8, 1 ; SFX_005
 	sfx $79bc, $0e, $00, 236, CHAN8, 1 ; SFX_006
@@ -3394,9 +3394,9 @@ SoundHeaders: ; 3155e (c:555e)
 	sfx $7af2, $0e, $00, 228, CHAN8, 1 ; SFX_LAND
 	sfx $7b05, $0e, $00, 200, CHAN5, 1 ; SFX_011
 	sfx $7b38, $0e, $00, 255, CHAN5, 1 ; SFX_012
-	sfx $7b70, $0e, $00, 237, CHAN7, 1 ; SFX_013
+	sfx $7b70, $0e, $00, 237, CHAN7, 1 ; SFX_STING
 	sfx $7b83, $0e, $00, 239, CHAN5, 1 ; SFX_014
-	sfx $7b94, $0e, $00, 210, CHAN5, 1 ; SFX_015
+	sfx $7b94, $0e, $00, 210, CHAN5, 1 ; SFX_GRAB
 	sfx $7ba5, $0e, $00, 239, CHAN5, 1 ; SFX_016
 	sfx $7bcf, $0e, $00, 238, CHAN5, 2 ; SFX_017
 	sfx $7bfd, $0e, $00, 230, CHAN8, 1 ; SFX_018

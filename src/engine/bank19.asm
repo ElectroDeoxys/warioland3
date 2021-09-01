@@ -230,7 +230,7 @@ Func_640e5: ; 640e5 (19:40e5)
 	ld [de], a ; ENEMY_UNK_07
 	inc e
 	ld a, [hli]
-	ld [de], a ; ENEMY_UNK_08
+	ld [de], a ; ENEMY_INTERACTION_TYPE
 	inc e
 	ld a, [hli]
 	ld [de], a ; ENEMY_UNK_09

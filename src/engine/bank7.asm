@@ -53,7 +53,7 @@ Func_1c000: ; 1c000 (7:4000)
 	dw UpdateState_StungRecovery       ; ST_STUNG_RECOVERY
 	dw UpdateState_PipeGoingDown       ; ST_PIPE_GOING_DOWN
 	dw UpdateState_PipeGoingUp         ; ST_PIPE_GOING_UP
-	dw $585c                           ; ST_UNKNOWN_19
+	dw UpdateState_EnemyBumping        ; ST_ENEMY_BUMPING
 	dw UpdateState_SmashAttacking      ; ST_SMASH_ATTACKING
 	dw Func_156d                       ; ST_UNUSED_1B
 	dw Func_156d                       ; ST_UNUSED_1C
@@ -503,11 +503,13 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 
 	ld a, [wJumpVelIndex]
 	cp MAX_JUMP_VEL_INDEX
-	jr c, .asm_1c541
+	jr c, Func_1c541
 	ld a, [wJoypadDown]
 	and D_RIGHT | D_LEFT
-	jr z, .asm_1c58a
-.asm_1c541
+	jr z, Func_1d58a
+;	fallthrough
+
+Func_1c541: ; 1c541 (7:5541)
 	call Func_1501
 
 	xor a
@@ -539,8 +541,9 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	and D_RIGHT | D_LEFT
 	jp nz, SetState_Walking
 	jp SetState_Idling
+; 0x1d58a
 
-.asm_1c58a
+Func_1d58a: ; 1d58a (7:558a)
 	call Func_1501
 
 	xor a
@@ -1012,7 +1015,7 @@ Func_1ca0e: ; 1ca0e (7:4a0e)
 ;	fallthrough
 
 Func_1ca20: ; 1ca20 (7:4a20)
-	load_sfx SFX_003
+	load_sfx SFX_BUMP
 	ld a, [wJumpVelTable]
 	and a
 	jr nz, .asm_1ca32
@@ -1022,12 +1025,19 @@ Func_1ca20: ; 1ca20 (7:4a20)
 	ld a, FALLING_JUMP_VEL_INDEX
 .asm_1ca34
 	ld [wJumpVelIndex], a
-	jr .asm_1ca46
-	load_sfx SFX_003
+	jr Func_1ca46
+; 0x1ca39
+
+Func_1ca39: ; 1ca39 (7:4a39)
+	load_sfx SFX_BUMP
+;	fallthrough
+
+Func_1ca41: ; 1ca41 (7:4a41)
 	ld a, 10
 	ld [wJumpVelIndex], a
+;	fallthrough
 
-.asm_1ca46
+Func_1ca46: ; 1ca46 (7:4a46)
 	ld a, ST_ATTACK_KNOCK_BACK
 	ld [wWarioState], a
 	ld a, [wDirection]
@@ -1312,7 +1322,7 @@ UpdateState_AttackKnockBack: ; 1ccaf (7:4caf)
 	ld a, [wWarioState]
 	cp ST_ATTACK_KNOCK_BACK
 	ret nz ; done if not knocked back anymore
-	jp UpdateState_Airborne.asm_1c541
+	jp Func_1c541
 ; 0x1cd48
 
 Func_1cd48: ; 1cd48 (7:4d48)
@@ -1850,11 +1860,14 @@ UpdateState_UnderwaterThrusting: ; 1d297 (7:5297)
 	ret
 ; 0x1d2ea
 
-SetState_SwimKnockBack: ; 1d2ea (7:52ea)
+SetState_SwimKnockBack_SwitchDirection: ; 1d2ea (7:52ea)
 	ld a, [wDirection]
 	xor $1 ; switch direction
 	ld [wDirection], a
-	load_sfx SFX_003
+;	fallthrough
+
+SetState_SwimKnockBack: ; 1d2f2 (7:52f2)
+	load_sfx SFX_BUMP
 	ld a, ST_SWIM_KNOCK_BACK
 	ld [wWarioState], a
 	xor a
@@ -2151,7 +2164,7 @@ UpdateState_CrouchAirborne: ; 1d522 (7:5522)
 	cp ST_CROUCH_AIRBORNE
 	ret nz ; done if not crouch jumping anymore
 
-	call UpdateState_Airborne.asm_1c541
+	call Func_1c541
 	ld a, [wJoypadDown]
 	bit D_DOWN_F, a
 	ret z
@@ -2402,7 +2415,60 @@ UpdateState_PipeGoingUp: ; 1d80d (7:580d)
 	ret
 ; 0x1d85c
 
-	INCROM $1d85c, $1d8f8
+UpdateState_EnemyBumping: ; 1d85c (7:585c)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wWaterInteraction]
+	and a
+	jp nz, Func_1cd48
+	ld a, [wIsInSand]
+	and a
+	jr z, .asm_1d88f
+	farcall SetState_SandFalling
+	ret
+
+.asm_1d88f
+	ld a, [wWarioState]
+	cp ST_ENEMY_BUMPING
+	ret nz
+	update_anim_1
+	call Func_1ea83
+	ld a, [wWarioState]
+	cp ST_ENEMY_BUMPING
+	ret nz
+	ld a, [wJumpVelIndex]
+	cp FALLING_JUMP_VEL_INDEX
+	jr nc, .asm_1d8cc
+	farcall Func_1996e
+	ld a, b
+	and a
+	ret z
+	ld a, FALLING_JUMP_VEL_INDEX
+	ld [wJumpVelIndex], a
+	ret
+
+.asm_1d8cc
+	farcall Func_199e9
+	ld a, b
+	and a
+	jr nz, .asm_1d8e2
+	jp Func_14de
+
+.asm_1d8e2
+	ld a, [wDirection]
+	xor $1
+	ld [wDirection], a
+	ld hl, hYPosHi
+	ld de, wPos
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	jp Func_1c541
+; 0x1d8f8
 
 UpdateState_SmashAttacking: ; 1d8f8 (7:58f8)
 	update_anim_1
@@ -5214,7 +5280,7 @@ Func_1f470: ; 1f470 (7:7470)
 	farcall Func_19741
 	ld a, b
 	and a
-	jp nz, SetState_SwimKnockBack
+	jp nz, SetState_SwimKnockBack_SwitchDirection
 	ld a, [wca6d]
 	ld e, a
 	ld d, $00
@@ -5248,7 +5314,7 @@ Func_1f470: ; 1f470 (7:7470)
 	farcall Func_197b1
 	ld a, b
 	and a
-	jp nz, SetState_SwimKnockBack
+	jp nz, SetState_SwimKnockBack_SwitchDirection
 	ld a, [wca6d]
 	ld e, a
 	ld d, $00
@@ -5378,11 +5444,11 @@ Func_1f64a: ; 1f64a (7:764a)
 
 	ld a, $10
 	ld [wca8c], a
-	ld a, [wca79 + 0]
-	cp $48
+	ld a, [wWarioPalsPtr + 0]
+	cp HIGH(Pals_c810)
 	jr nz, .asm_1f67b
-	ld a, [wca79 + 1]
-	cp $10
+	ld a, [wWarioPalsPtr + 1]
+	cp LOW(Pals_c810)
 	jr nz, .asm_1f67b
 
 	ld hl, Pals_c800

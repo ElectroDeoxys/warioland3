@@ -16,7 +16,19 @@ hCallFuncPointer:: ; ff8d
 hffa0:: ; ffa0
 	ds $1
 
-	ds $7
+hffa1:: ; ffa1
+	ds $1
+
+hffa2:: ; ffa2
+	ds $1
+
+hffa3:: ; ffa3
+	ds $1
+
+hffa4:: ; ffa4
+	ds $1
+
+	ds $3
 
 hPos::
 hYPosHi:: ; ffa8

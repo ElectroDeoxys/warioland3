@@ -1778,6 +1778,7 @@ Func_c4c: ; c4c (0:c4c)
 	ld a, [wc1a0]
 	and a
 	jr nz, .asm_c72
+
 	xor a
 	ld [MBC5SRamBank], a
 	ld hl, wc0bc
@@ -1788,6 +1789,8 @@ Func_c4c: ; c4c (0:c4c)
 	ldh [rSCX], a
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
+
+; copy wce01 to memory pointed by wce6a
 	ld hl, wce6a
 	ld bc, wce01
 	jp wVBlankFunc + $10
@@ -1796,23 +1799,23 @@ Func_c4c: ; c4c (0:c4c)
 	ld hl, wc1a1
 	ld a, [hli]
 	ld [MBC5RomBank], a
-	ld c, $51
+	ld c, LOW(rHDMA1)
 	ld a, [hli]
-	ld [$ff00+c], a
+	ld [$ff00+c], a ; rHDMA1
 	inc c
 	ld a, [hli]
-	ld [$ff00+c], a
+	ld [$ff00+c], a ; rHDMA2
 	ld a, [hli]
 	ldh [rVBK], a
 	inc c
 	ld a, [hli]
-	ld [$ff00+c], a
+	ld [$ff00+c], a ; rHDMA3
 	inc c
 	ld a, [hli]
-	ld [$ff00+c], a
+	ld [$ff00+c], a ; rHDMA4
 	inc c
 	ld a, [hl]
-	ld [$ff00+c], a
+	ld [$ff00+c], a ; rHDMA5
 	xor a
 	ld [wc1a0], a
 	ld hl, wc0bc
@@ -1829,7 +1832,13 @@ Func_c4c: ; c4c (0:c4c)
 	ret
 ; 0xcab
 
-	INCROM $cab, $cb8
+Func_cab: ; cab (0:cab)
+	ld a, $01
+	ldh [rVBK], a
+	ld hl, wce6a
+	ld bc, wce35
+	jp wc800
+; 0xcb8
 
 Func_cb8: ; cb8 (0:cb8)
 	xor a
@@ -1838,6 +1847,11 @@ Func_cb8: ; cb8 (0:cb8)
 	ret
 ; 0xcc0
 
+; input:
+; - hl = hPos
+; output:
+; - h = y cell
+; - l = x cell
 Func_cc0: ; cc0 (0:cc0)
 	ld a, [hli]
 	ld d, a
@@ -1851,7 +1865,7 @@ Func_cc0: ; cc0 (0:cc0)
 	add c
 	add $a0
 	ld c, a
-	ld [wcced], a
+	ld [wSpawnYCell], a
 
 	ld a, [hli]
 	ld d, a
@@ -1869,12 +1883,12 @@ Func_cc0: ; cc0 (0:cc0)
 	adc $00
 	xor $01
 	ld [wccef], a
-
 	ld b, a
+
 	ld a, l
 	add $b0
 	ld l, a
-	ld [wccee], a
+	ld [wSpawnXCell], a
 	ld h, c
 	ret
 ; 0xcf8
@@ -3820,9 +3834,9 @@ FillWhiteOBPal: ; 1ad1 (0:1ad1)
 ; hl = palette to copy from bank 3
 Func_1af6: ; 1af6 (0:1af6)
 	ld a, h
-	ld [wca79 + 0], a
+	ld [wWarioPalsPtr + 0], a
 	ld a, l
-	ld [wca79 + 1], a
+	ld [wWarioPalsPtr + 1], a
 	ld a, [wROMBank]
 	push af
 	ld a, $03
@@ -4004,7 +4018,7 @@ Func_285c: ; 285c (0:285c)
 
 .valid_spawn_point
 	ld a, [hli]
-	ld [wc0a1], a
+	ld [wSpawnPos], a
 	ld a, [hl]
 	swap a
 	and $0f
@@ -4368,7 +4382,7 @@ UpdateEnemySprite: ; 3000 (0:3000)
 	INCROM $305c, $3104
 
 Func_3104: ; 3104 (0:3104)
-	ld hl, $d114
+	ld hl, wCurEnemyUnk14
 	ld a, [hld]
 	sub $01
 	ret nc
@@ -4393,11 +4407,11 @@ Func_3104: ; 3104 (0:3104)
 	jr nz, .asm_312a
 	ld a, [de]
 .asm_312a
-	ld [$d10f], a
+	ld [wCurEnemyUnk0f], a
 	jr Func_312f.pop_af
 
 Func_312f: ; 312f (0:312f)
-	ld hl, $d114
+	ld hl, wCurEnemyUnk14
 	ld a, [hl]
 	sub $01
 	ld [hld], a
@@ -4421,7 +4435,7 @@ Func_312f: ; 312f (0:312f)
 	ld a, [bc]
 	cp $ff
 	jr z, .asm_3161
-	ld [$d10f], a
+	ld [wCurEnemyUnk0f], a
 	ld a, [hl]
 	add $02
 	ld [hld], a
@@ -4433,7 +4447,7 @@ Func_312f: ; 312f (0:312f)
 	ld a, $02
 	ld [hld], a
 	ld a, [de]
-	ld [$d10f], a
+	ld [wCurEnemyUnk0f], a
 	inc de
 	ld a, [de]
 	ld [hl], a

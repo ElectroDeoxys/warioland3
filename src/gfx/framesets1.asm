@@ -3423,7 +3423,23 @@ Frameset_178f3: ; 178f3 (5:78f3)
 	db $ff
 ; 0x178fc
 
-	INCROM $178fc, $17b76
+Frameset_178fc: ; 178fc (05:78fc)
+	db $00,  1
+	db $23,  2
+	db $21,  1
+	db $23,  2
+	db $ff
+; 0x17905
+
+Frameset_17905: ; 17905 (05:7905)
+	db $04,  1
+	db $24,  2
+	db $22,  1
+	db $24,  2
+	db $ff
+; 0x1790e
+
+	INCROM $1790e, $17b76
 
 Frameset_17b76: ; 17b76 (5:7b76)
 	db $00,  4

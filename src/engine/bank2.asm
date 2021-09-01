@@ -844,9 +844,9 @@ Func_8747: ; 8747 (2:4747)
 
 	ld hl, Pals_c800
 	ld a, h
-	ld [wca79 + 0], a
+	ld [wWarioPalsPtr + 0], a
 	ld a, l
-	ld [wca79 + 1], a
+	ld [wWarioPalsPtr + 1], a
 	ld de, wTempPals2
 	ld b, 2 palettes
 	ld a, BANK(Pals_c800)
@@ -855,9 +855,9 @@ Func_8747: ; 8747 (2:4747)
 	jr .asm_8861
 
 .asm_883a
-	ld a, [wca79 + 0]
+	ld a, [wWarioPalsPtr + 0]
 	ld h, a
-	ld a, [wca79 + 1]
+	ld a, [wWarioPalsPtr + 1]
 	ld l, a
 	ld de, wTempPals2
 	ld b, 2 palettes
@@ -890,6 +890,7 @@ Func_8747: ; 8747 (2:4747)
 	call Func_8cd7
 	pop af
 	sramswitch
+
 	ld a, [wceef]
 	and %00111100
 	jr nz, .asm_88b7
@@ -904,7 +905,7 @@ Func_8747: ; 8747 (2:4747)
 .asm_88b7
 	ld a, [wLevel]
 	cp LEVEL_HIDDEN_FIGURE_ROOM
-	jr nz, .asm_88db
+	jr nz, .not_hidden_figure_room
 
 	xor a
 	ld a, [wcac5]
@@ -918,10 +919,11 @@ Func_8747: ; 8747 (2:4747)
 	ld [wTempSCX], a
 	ldh [rSCX], a
 
-.asm_88db
+.not_hidden_figure_room
 	call Func_b8d3
 	xor a
 	ld [wc0da], a
+
 	ld a, [wceef]
 	and %00111100
 	jr nz, .asm_8917
@@ -989,7 +991,7 @@ Func_896f: ; 896f (2:496f)
 	ld [hl], a
 	call Func_cc0
 	ld c, $01
-	ld a, [wcced]
+	ld a, [wSpawnYCell]
 	cp $c0
 	jr c, .asm_8996
 	inc c
@@ -1108,19 +1110,19 @@ Func_8a41: ; 8a41 (2:4a41)
 	ld hl, hXPosLo
 	xor a
 	ld [hld], a
-	ld a, [wc0a1]
+	ld a, [wSpawnPos]
 	and $0f
 	ld [hld], a
 	xor a
 	ld [hld], a
-	ld a, [wc0a1]
+	ld a, [wSpawnPos]
 	and $f0
 	swap a
 	ld [hl], a
 	call Func_cc0
 
 	ld c, $01
-	ld a, [wcced]
+	ld a, [wSpawnYCell]
 	cp $c0
 	jr c, .asm_8a6c
 	inc c
@@ -1134,6 +1136,7 @@ Func_8a41: ; 8a41 (2:4a41)
 	ld a, c
 	ld [wccec], a
 	sramswitch
+
 .asm_8a77
 	ld e, $08
 .asm_8a79
@@ -1142,10 +1145,10 @@ Func_8a41: ; 8a41 (2:4a41)
 	swap a
 	cp $0f
 	jr nc, .asm_8ab0
-
 	ld a, b
 	xor $01
 	ld b, a
+
 	ld a, [hl]
 	and $0f
 	cp $0f
@@ -1154,8 +1157,10 @@ Func_8a41: ; 8a41 (2:4a41)
 	ld a, b
 	xor $01
 	ld b, a
+
 	dec e
 	jr nz, .asm_8a79
+
 	ld a, l
 	sub $08
 	ld l, a
@@ -8067,57 +8072,58 @@ Func_b681: ; b681 (2:7681)
 	jr z, .asm_b6cb
 
 	ld c, a
-.asm_b68b
-	ld a, $2a
+.loop_1
+	ld a, $2a ; ld a, [hli]
 	ld [hli], a
-	ld a, $57
+	ld a, $57 ; ld d, a
 	ld [hli], a
-	ld a, $2a
+	ld a, $2a ; ld a, [hli]
 	ld [hli], a
-	ld a, $5f
+	ld a, $5f ; ld e, a
 	ld [hli], a
-	ld a, $0a
+	ld a, $0a ; ld a, [bc]
 	ld [hli], a
-	ld a, $12
+	ld a, $12 ; ld [de], a
 	ld [hli], a
-	ld a, $0c
+	ld a, $0c ; inc c
 	ld [hli], a
 	dec c
-	jr nz, .asm_b68b
+	jr nz, .loop_1
 
-	ld a, $c3
+	ld a, $c3 ; jp
 	ld [hli], a
-	ld a, $ab
+	ld a, LOW(Func_cab)
 	ld [hli], a
-	ld a, $0c
+	ld a, HIGH(Func_cab)
 	ld [hl], a
+
 	ld a, [wce00]
 	ld c, a
 	ld hl, wc800
-.asm_b6b3
-	ld a, $2a
+.loop_2
+	ld a, $2a ; ld a, [hli]
 	ld [hli], a
-	ld a, $57
+	ld a, $57 ; ld d, a
 	ld [hli], a
-	ld a, $2a
+	ld a, $2a ; ld a, [hli]
 	ld [hli], a
-	ld a, $5f
+	ld a, $5f ; ld e, a
 	ld [hli], a
-	ld a, $0a
+	ld a, $0a ; ld a, [bc]
 	ld [hli], a
-	ld a, $12
+	ld a, $12 ; ld [de], a
 	ld [hli], a
-	ld a, $0c
+	ld a, $0c ; inc c
 	ld [hli], a
 	dec c
-	jr nz, .asm_b6b3
+	jr nz, .loop_2
 
 .asm_b6cb
-	ld a, $c3
+	ld a, $c3 ; jp
 	ld [hli], a
-	ld a, $b8
+	ld a, LOW(Func_cb8)
 	ld [hli], a
-	ld a, $0c
+	ld a, HIGH(Func_cb8)
 	ld [hl], a
 	ret
 ; 0xb6d5

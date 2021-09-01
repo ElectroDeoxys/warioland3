@@ -24,7 +24,7 @@
 	const ST_STUNG_RECOVERY                ; 16
 	const ST_PIPE_GOING_DOWN               ; 17
 	const ST_PIPE_GOING_UP                 ; 18
-	const ST_UNKNOWN_19                    ; 19
+	const ST_ENEMY_BUMPING                 ; 19
 	const ST_SMASH_ATTACKING               ; 1a
 	const ST_UNUSED_1B                     ; 1b
 	const ST_UNUSED_1C                     ; 1c

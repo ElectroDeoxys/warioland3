@@ -111,7 +111,7 @@ wc09f:: ; c09f
 wSpawnPointID:: ; c0a0
 	ds $1
 
-wc0a1:: ; c0a1
+wSpawnPos:: ; c0a1
 	ds $1
 
 wc0a2:: ; c0a2
@@ -408,13 +408,15 @@ wCurRoomAnimatedPal:: ; c1b4
 wc1b5:: ; c1b5
 	ds $1
 
-wc1b6:: ; c1b6
+; pointer to an enemy struct in wEnemies
+wEnemyPtr:: ; c1b6
 	ds $2
 
 wc1b8:: ; c1b8
 	ds $1
 
-wc1b9:: ; c1b9
+; ENEMY_INTERACTION_* constant for Func_20000
+wEnemyInteractionType:: ; c1b9
 	ds $1
 
 wc1ba:: ; c1ba
@@ -452,7 +454,7 @@ wc1c4:: ; c1c4
 
 	ds $1
 
-wc1c6:: ; c1c6
+wEnemyDirection:: ; c1c6
 	ds $1
 
 wLadderInteraction:: ; c1c7
@@ -633,7 +635,7 @@ wca78:: ; ca78
 	ds $1
 
 ; palette pointer
-wca79:: ; ca79
+wWarioPalsPtr:: ; ca79
 	ds $2
 
 wca7b:: ; ca7b
@@ -864,10 +866,10 @@ wXCell:: ; cceb
 wccec:: ; ccec
 	ds $1
 
-wcced:: ; cced
+wSpawnYCell:: ; cced
 	ds $1
 
-wccee:: ; ccee
+wSpawnXCell:: ; ccee
 	ds $1
 
 wccef:: ; ccef
@@ -1022,8 +1024,7 @@ wEnemy6:: enemy_struct wEnemy6 ; d0a0
 wEnemy7:: enemy_struct wEnemy7 ; d0c0
 wEnemy8:: enemy_struct wEnemy8 ; d0e0
 
-w1d100:: ; d100
-	ds $20
+wCurEnemy:: enemy_struct wCurEnemy ; d100
 
 ; pointers related to LoadEnemyGroupData
 w1d120:: ; d120

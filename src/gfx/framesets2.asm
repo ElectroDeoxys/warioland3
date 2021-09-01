@@ -443,7 +443,25 @@ Frameset_1fc92b: ; 1fc92b (7f:492b)
 	db $ff
 ; 0x1fc92e
 
-	INCROM $1fc92e, $1fc948
+Frameset_1fc92e: ; 1fc92e (7f:492e)
+	db $00,  1
+	db $09,  3
+	db $2d,  5
+	db $13,  2
+	db $0a,  3
+	db $08,  3
+	db $ff
+; 0x1fc93b
+
+Frameset_1fc93b: ; 1fc93b (7f:493b)
+	db $04,  1
+	db $0d,  3
+	db $2e,  5
+	db $14,  2
+	db $0e,  3
+	db $0c,  3
+	db $ff
+; 0x1fc948
 
 Frameset_1fc948: ; 1fc948 (7f:4948)
 	db $01,  6
@@ -923,7 +941,33 @@ Frameset_1feeb4: ; 1feeb4 (7f:6eb4)
 	db $ff
 ; 0x1feebd
 
-	INCROM $1feebd, $1ffc8e
+	INCROM $1feebd, $1ff628
+
+Frameset_1ff628: ; 1ff628 (7f:7628)
+	db $35,  2
+	db $36,  1
+	db $35,  2
+	db $36,  1
+	db $37,  2
+	db $35,  2
+	db $36,  1
+	db $37,  2
+	db $ff
+; 0x1ff639
+
+Frameset_1ff639: ; 1ff639 (7f:7639)
+	db $38,  2
+	db $39,  1
+	db $38,  2
+	db $39,  1
+	db $3a,  2
+	db $38,  2
+	db $39,  1
+	db $3a,  2
+	db $ff
+; 0x1ff64a
+
+	INCROM $1ff64a, $1ffc8e
 
 Frameset_1ffc8e: ; 1ffc8e (7f:7c8e)
 	db $00,  3
