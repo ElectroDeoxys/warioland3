@@ -4313,9 +4313,9 @@ endr
 
 	INCROM $2b25, $3000
 
-; given the enemy struct in hl
+; given the obj struct in hl
 ; update its sprite with its current position
-UpdateEnemySprite: ; 3000 (0:3000)
+UpdateObjSprite: ; 3000 (0:3000)
 	ld a, [wROMBank]
 	push af
 	ld a, [hl]
@@ -4382,7 +4382,7 @@ UpdateEnemySprite: ; 3000 (0:3000)
 	INCROM $305c, $3104
 
 Func_3104: ; 3104 (0:3104)
-	ld hl, wCurEnemyUnk14
+	ld hl, wCurObjUnk14
 	ld a, [hld]
 	sub $01
 	ret nc
@@ -4407,11 +4407,11 @@ Func_3104: ; 3104 (0:3104)
 	jr nz, .asm_312a
 	ld a, [de]
 .asm_312a
-	ld [wCurEnemyUnk0f], a
+	ld [wCurObjUnk0f], a
 	jr Func_312f.pop_af
 
 Func_312f: ; 312f (0:312f)
-	ld hl, wCurEnemyUnk14
+	ld hl, wCurObjUnk14
 	ld a, [hl]
 	sub $01
 	ld [hld], a
@@ -4435,7 +4435,7 @@ Func_312f: ; 312f (0:312f)
 	ld a, [bc]
 	cp $ff
 	jr z, .asm_3161
-	ld [wCurEnemyUnk0f], a
+	ld [wCurObjUnk0f], a
 	ld a, [hl]
 	add $02
 	ld [hld], a
@@ -4447,7 +4447,7 @@ Func_312f: ; 312f (0:312f)
 	ld a, $02
 	ld [hld], a
 	ld a, [de]
-	ld [wCurEnemyUnk0f], a
+	ld [wCurObjUnk0f], a
 	inc de
 	ld a, [de]
 	ld [hl], a

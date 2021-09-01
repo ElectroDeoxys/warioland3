@@ -97,7 +97,7 @@ InitIntroSequence: ; 405f (1:405f)
 	ld [wIntroSeqSFXTimer], a
 	call UpdateObjAnim
 
-	ld hl, wObj0
+	ld hl, wIntroObj0
 	ld a, 128
 	ld [hli], a ; y coord
 	ld a, 80
@@ -113,7 +113,7 @@ InitIntroSequence: ; 405f (1:405f)
 	ld [hl], a
 	call UpdateObjAnim
 
-	ld hl, wObj3
+	ld hl, wIntroObj3
 	ld a, 16
 	ld [hli], a ; y coord
 	ld a, 0
@@ -129,7 +129,7 @@ InitIntroSequence: ; 405f (1:405f)
 	ld [hl], a
 	call UpdateObjAnim
 
-	ld hl, wObj4
+	ld hl, wIntroObj4
 	ld a, 8
 	ld [hli], a ; y coord
 	ld a, 32
@@ -145,9 +145,9 @@ InitIntroSequence: ; 405f (1:405f)
 	ld [hl], a
 	call UpdateObjAnim
 
-	ld hl, wObj3
+	ld hl, wIntroObj3
 	call Func_4b93
-	ld hl, wObj4
+	ld hl, wIntroObj4
 	call Func_4b93
 
 	ld a, $00
@@ -221,7 +221,7 @@ InitIntroSequence: ; 405f (1:405f)
 	ld b, 12
 	call CopyHLToDE
 
-	ld hl, wObj0
+	ld hl, wIntroObj0
 	ld a, $82
 	ld [hli], a
 	ld a, $50
@@ -247,7 +247,7 @@ InitIntroSequence: ; 405f (1:405f)
 .asm_417e
 	call UpdateObjAnim
 
-	ld hl, wObj1
+	ld hl, wIntroObj1
 	ld a, $86
 	ld [hli], a
 	ld a, [wca3d]
@@ -274,7 +274,7 @@ InitIntroSequence: ; 405f (1:405f)
 	ld [wStartMenuSelection], a
 
 .asm_41a8
-	ld hl, wObj2
+	ld hl, wIntroObj2
 	ld a, 36
 	ld [hli], a ; y coord
 	ld a, 104
@@ -480,9 +480,9 @@ IntroSequencePhase1: ; 41cf (1:41cf)
 	call UpdateObjAnim
 	ld hl, wWarioPlane
 	call Func_4b93
-	ld hl, wObj3
+	ld hl, wIntroObj3
 	call Func_4b93
-	ld hl, wObj4
+	ld hl, wIntroObj4
 	call Func_4b93
 	call ClearVirtualOAM
 	jp DrawIntroBackgroundLayers
@@ -596,11 +596,11 @@ IntroSequencePhase2: ; 42ed (1:42ed)
 	call ScrollIntroBackgroundLayers
 	ld hl, wWarioPlaneEnd - 1
 	call UpdateObjAnim
-	ld hl, wObj3
+	ld hl, wIntroObj3
 	call Func_4b93
 	ld hl, wWarioPlane
 	call Func_4b93
-	ld hl, wObj4
+	ld hl, wIntroObj4
 	call Func_4b93
 	call ClearVirtualOAM
 	jp DrawIntroBackgroundLayers
@@ -767,11 +767,11 @@ IntroSequencePhase3: ; 43b5 (1:43b5)
 	call UpdateObjAnim
 	ld a, [wObjAnimWasReset]
 	ld [wPlaneAnimationEnded], a
-	ld hl, wObj3
+	ld hl, wIntroObj3
 	call Func_4b93
 	ld hl, wWarioPlane
 	call Func_4b93
-	ld hl, wObj4
+	ld hl, wIntroObj4
 	call Func_4b93
 	call ClearVirtualOAM
 	jp DrawIntroBackgroundLayers
@@ -823,12 +823,12 @@ StartMenu: ; 4508 (1:4508)
 	call UpdateObjAnim
 	ld hl, wWarioPlane
 	call Func_4b93
-	ld hl, wObj2
+	ld hl, wIntroObj2
 	call Func_4b73
 
 	call HandleStartMenuSelection
 
-	ld hl, wObj0
+	ld hl, wIntroObj0
 	call Func_4b73
 
 	ld a, [wceef]
@@ -838,11 +838,11 @@ StartMenu: ; 4508 (1:4508)
 	ld a, [wGlobalCounter]
 	and %111
 	jr nz, .asm_4538
-	ld a, [wObj1Attributes]
+	ld a, [wIntroObj1Attributes]
 	xor %11
-	ld [wObj1Attributes], a
+	ld [wIntroObj1Attributes], a
 .asm_4538
-	ld hl, wObj1
+	ld hl, wIntroObj1
 	call Func_4b73
 
 .asm_453e
@@ -898,9 +898,9 @@ StartMenu: ; 4508 (1:4508)
 	jp z, Func_1698
 
 	ld a, 134
-	ld [wObj1YCoord], a
+	ld [wIntroObj1YCoord], a
 	ld a, 130
-	ld [wObj0YCoord], a
+	ld [wIntroObj0YCoord], a
 
 	ld a, [wca3d]
 	bit 1, a
@@ -918,14 +918,14 @@ StartMenu: ; 4508 (1:4508)
 	ld a, $81
 	ld [wcee4], a
 	ld a, 144
-	ld [wObj1YCoord], a
+	ld [wIntroObj1YCoord], a
 	ld a, 120
-	ld [wObj0YCoord], a
+	ld [wIntroObj0YCoord], a
 	ld bc, Frameset_6cec
 	ld a, $03
 .asm_45c5
 	ld [wStartMenuSelection], a
-	ld hl, wObj0FramesetOffset
+	ld hl, wIntroObj0FramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a ; duration
@@ -1277,7 +1277,7 @@ InitLanguageSelection: ; 4857 (1:4857)
 	ld a, $01
 	ld [wLanguage], a
 
-	ld hl, wObj0YCoord
+	ld hl, wIntroObj0YCoord
 	ld a, 70
 	ld [hli], a
 	ld a, 24
@@ -1292,7 +1292,7 @@ InitLanguageSelection: ; 4857 (1:4857)
 	ld a, LOW(Frameset_76b5)
 	ld [hl], a
 	call UpdateObjAnim
-	ld hl, wObj0
+	ld hl, wIntroObj0
 	call Func_4e3e
 	call ClearVirtualOAM
 	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
@@ -1318,7 +1318,7 @@ LanguageSelection: ; 48c9 (1:48c9)
 	and a
 	ret z ; can't go down
 	ld a, 86
-	ld [wObj0YCoord], a
+	ld [wIntroObj0YCoord], a
 	xor a
 	jr .got_language
 
@@ -1326,9 +1326,9 @@ LanguageSelection: ; 48c9 (1:48c9)
 	ld a, [wLanguage]
 	dec a
 	ret z ; can't go up
-	ld hl, wObj0
+	ld hl, wIntroObj0
 	ld a, 70
-	ld [wObj0YCoord], a
+	ld [wIntroObj0YCoord], a
 	ld a, $01
 
 .got_language
@@ -1338,9 +1338,9 @@ LanguageSelection: ; 48c9 (1:48c9)
 	load_sfx SFX_0E2
 
 .update_anim
-	ld hl, wObj0End - 1
+	ld hl, wIntroObj0End - 1
 	call UpdateObjAnim
-	ld hl, wObj0
+	ld hl, wIntroObj0
 	call Func_4e3e
 	call ClearVirtualOAM
 	ret
@@ -1711,7 +1711,7 @@ HandleStartMenuSelection: ; 4bb3 (1:4bb3)
 	jr z, .asm_4c01
 	set 6, [hl]
 	xor a
-	ld [wObj0FramesetOffset], a
+	ld [wIntroObj0FramesetOffset], a
 	ret
 
 .asm_4bfa
@@ -1761,7 +1761,7 @@ HandleStartMenuSelection: ; 4bb3 (1:4bb3)
 
 .update_obj
 	ld [wStartMenuSelection], a
-	ld hl, wObj0FramesetOffset
+	ld hl, wIntroObj0FramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -1778,23 +1778,23 @@ HandleStartMenuSelection: ; 4bb3 (1:4bb3)
 	jr z, .move_up
 
 ; move down
-	ld hl, wObj0YCoord
+	ld hl, wIntroObj0YCoord
 	inc [hl]
 	ld a, [hl]
 	cp 130
 	ret nz
 	ld a, 134
-	ld [wObj1YCoord], a
+	ld [wIntroObj1YCoord], a
 	jr .reset_move_vertical_flag
 
 .move_up
-	ld hl, wObj0YCoord
+	ld hl, wIntroObj0YCoord
 	dec [hl]
 	ld a, [hl]
 	cp 116
 	ret nz
 	ld a, 118
-	ld [wObj1YCoord], a
+	ld [wIntroObj1YCoord], a
 
 .reset_move_vertical_flag
 	ld hl, wStartMenuSelection
@@ -1802,7 +1802,7 @@ HandleStartMenuSelection: ; 4bb3 (1:4bb3)
 	ret
 
 .UpdateAnim
-	ld hl, wObj0End - 1
+	ld hl, wIntroObj0End - 1
 	call UpdateObjAnim
 	ld a, [wObjAnimWasReset]
 	and a
@@ -1812,14 +1812,14 @@ HandleStartMenuSelection: ; 4bb3 (1:4bb3)
 	ld hl, wStartMenuSelection
 	set 7, [hl]
 	xor a
-	ld [wObj0FramesetOffset], a
+	ld [wIntroObj0FramesetOffset], a
 	ret
 
 .asm_4c96
 	ld a, [wGlobalCounter]
 	and %1
 	ret nz
-	ld hl, wObj0FramesetOffset
+	ld hl, wIntroObj0FramesetOffset
 	ld a, [hl]
 	cp $10
 	jr z, .asm_4c8c
@@ -1953,7 +1953,7 @@ Func_4d45: ; 4d45 (1:4d45)
 	and %1
 	jr z, .asm_4d66
 
-	ld hl, wObj4XCoord
+	ld hl, wIntroObj4XCoord
 	ld a, [hl]
 	cp 176
 	jr c, .incr_x1
@@ -1969,7 +1969,7 @@ Func_4d45: ; 4d45 (1:4d45)
 	inc [hl]
 
 .asm_4d66
-	ld hl, wObj3XCoord
+	ld hl, wIntroObj3XCoord
 	ld a, [hl]
 	cp 176
 	jr c, .incr_x2

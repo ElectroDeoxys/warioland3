@@ -96,7 +96,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld [wTempSCY], a
 	ld [wTempSCX], a
 
-	ld hl, wObj1
+	ld hl, wIntroObj1
 	ld a, $38
 	ld [hli], a
 	ld a, $20
@@ -111,10 +111,10 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld a, $b8
 	ld [hl], a
 	call UpdateObjAnim
-	ld hl, wObj1
+	ld hl, wIntroObj1
 	call Func_1f0940
 
-	ld hl, wObj2
+	ld hl, wIntroObj2
 	ld a, $8c
 	ld [hli], a
 	ld a, $20
@@ -129,13 +129,13 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld a, $d4
 	ld [hl], a
 	call UpdateObjAnim
-	ld hl, wObj2
+	ld hl, wIntroObj2
 	call Func_1f0940
 
 	ld a, [wca5b]
 	bit 0, a
 	jr z, .asm_1f0168
-	ld hl, wObj3
+	ld hl, wIntroObj3
 	ld a, $54
 	ld [hli], a
 	ld a, $38
@@ -152,13 +152,13 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld a, $4a
 	ld [hl], a
 	call UpdateObjAnim
-	ld hl, wObj3
+	ld hl, wIntroObj3
 	call Func_1f0940
 .asm_1f0168
 	ld a, [wca5b]
 	bit 1, a
 	jr z, .asm_1f018f
-	ld hl, wObj4
+	ld hl, wIntroObj4
 	ld a, $54
 	ld [hli], a
 	ld a, $48
@@ -175,7 +175,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld a, $4d
 	ld [hl], a
 	call UpdateObjAnim
-	ld hl, wObj4
+	ld hl, wIntroObj4
 	call Func_1f0940
 .asm_1f018f
 	ld a, [wca5b]
@@ -1615,7 +1615,7 @@ Func_1f13f2: ; 1f13f2 (7c:53f2)
 	push af
 	ld a, 1 ; WRAM1
 	ldh [rSVBK], a
-	ld de, wEnemies
+	ld de, wObjects
 	ld bc, $14a
 	call CopyHLToDE_BC
 	pop af

@@ -11,61 +11,61 @@ Func_20000: ; 20000 (8:4000)
 	xor a
 	ld [wcac9], a
 
-	ld hl, wEnemies
-.loop_enemies
+	ld hl, wObjects
+.loop_objects
 	ld a, h
-	cp HIGH(wCurEnemy)
+	cp HIGH(wCurObj)
 	ret z
-	ld [wEnemyPtr + 0], a
+	ld [wObjPtr + 0], a
 	ld a, l
-	ld [wEnemyPtr + 1], a
+	ld [wObjPtr + 1], a
 	ld a, [hl]
 	and %11
 	cp %11
 	jr z, .asm_20036
-.next_enemy
-	ld a, [wEnemyPtr + 0]
+.next_obj
+	ld a, [wObjPtr + 0]
 	ld h, a
-	ld a, [wEnemyPtr + 1]
+	ld a, [wObjPtr + 1]
 	ld l, a
-	ld de, ENEMY_STRUCT_LENGTH
+	ld de, OBJ_STRUCT_LENGTH
 	add hl, de
-	jr .loop_enemies
+	jr .loop_objects
 
 .asm_20036
 	push hl
-	ld e, ENEMY_UNK_1D
+	ld e, OBJ_UNK_1D
 	ld d, $00
 	add hl, de
 	ld a, [hld]
 	ld [wc1b8], a
-	ld a, [hl] ; ENEMY_UNK_1c
+	ld a, [hl] ; OBJ_UNK_1c
 	pop hl
 	and a
-	jr nz, .next_enemy
+	jr nz, .next_obj
 
-	ld e, ENEMY_INTERACTION_TYPE
+	ld e, OBJ_INTERACTION_TYPE
 	ld d, $00
 	add hl, de
-	ld a, [hli] ; ENEMY_INTERACTION_TYPE
-	ld [wEnemyInteractionType], a
-	ld a, [hli] ; ENEMY_UNK_09
+	ld a, [hli] ; OBJ_INTERACTION_TYPE
+	ld [wObjInteractionType], a
+	ld a, [hli] ; OBJ_UNK_09
 	ld [wc1ba], a
-	ld a, [hli] ; ENEMY_UNK_0A
+	ld a, [hli] ; OBJ_UNK_0A
 	ld [wc1bb], a
-	ld a, [hli] ; ENEMY_UNK_0B
+	ld a, [hli] ; OBJ_UNK_0B
 	ld [wc1bc], a
-	ld a, [hli] ; ENEMY_UNK_0C
+	ld a, [hli] ; OBJ_UNK_0C
 	ld [wc1bd], a
-	ld a, [hli] ; ENEMY_UNK_0D
+	ld a, [hli] ; OBJ_UNK_0D
 	ld [wc1be], a
-	ld a, [hl] ; ENEMY_UNK_0E
+	ld a, [hl] ; OBJ_UNK_0E
 	ld [wc1bf], a
 
-	ld e, ENEMY_UNK_1A - ENEMY_UNK_0E
+	ld e, OBJ_UNK_1A - OBJ_UNK_0E
 	ld d, $00
 	add hl, de
-	ld a, [hl] ; ENEMY_UNK_1A
+	ld a, [hl] ; OBJ_UNK_1A
 	bit 7, a
 	jr nz, .asm_20074
 	ld a, DIRECTION_LEFT
@@ -94,7 +94,7 @@ Func_20000: ; 20000 (8:4000)
 	add [hl]
 	sub e
 	sub b
-	jp c, .next_enemy
+	jp c, .next_obj
 	ld c, a
 	ld hl, wca6f
 	ld a, [wWarioScreenYPos]
@@ -106,7 +106,7 @@ Func_20000: ; 20000 (8:4000)
 	add [hl]
 	sub e
 	sub b
-	jp c, .next_enemy
+	jp c, .next_obj
 	ld d, a
 	ld a, d
 	sub c
@@ -134,7 +134,7 @@ Func_20000: ; 20000 (8:4000)
 	add [hl]
 	sub e
 	sub b
-	jp c, .next_enemy
+	jp c, .next_obj
 	ld c, a
 	ld hl, wca71
 	ld a, [wWarioScreenXPos]
@@ -146,7 +146,7 @@ Func_20000: ; 20000 (8:4000)
 	add [hl]
 	sub e
 	sub b
-	jp c, .next_enemy
+	jp c, .next_obj
 	ld d, a
 	sub c
 	jr c, .asm_20108
@@ -204,99 +204,99 @@ Func_20000: ; 20000 (8:4000)
 	res 7, [hl]
 
 .asm_2014a
-	ld a, [wEnemyInteractionType]
-	and $ff ^ (HEAVY_ENEMY_TYPE)
+	ld a, [wObjInteractionType]
+	and $ff ^ (HEAVY_OBJ)
 	jumptable
 
-	dw Func_20b6b ; ENEMY_INTERACTION_00
-	dw Func_20d1d ; ENEMY_INTERACTION_01
-	dw EnemyInteraction_FrontSting ; ENEMY_INTERACTION_02
-	dw EnemyInteraction_BackSting ; ENEMY_INTERACTION_03
-	dw Func_20d6e ; ENEMY_INTERACTION_04
-	dw EnemyInteraction_FullSting ; ENEMY_INTERACTION_05
-	dw Func_20d81 ; ENEMY_INTERACTION_06
-	dw Func_20d8c ; ENEMY_INTERACTION_07
-	dw Func_20deb ; ENEMY_INTERACTION_08
-	dw Func_20e39 ; ENEMY_INTERACTION_09
-	dw Func_20e60 ; ENEMY_INTERACTION_0A
-	dw Func_20e6a ; ENEMY_INTERACTION_0B
-	dw Func_20e77 ; ENEMY_INTERACTION_0C
-	dw Func_20e82 ; ENEMY_INTERACTION_0D
-	dw $4e97      ; ENEMY_INTERACTION_0E
-	dw $4f6a      ; ENEMY_INTERACTION_0F
-	dw $4fed      ; ENEMY_INTERACTION_10
-	dw $4ff4      ; ENEMY_INTERACTION_11
-	dw $4ffb      ; ENEMY_INTERACTION_12
-	dw $5002      ; ENEMY_INTERACTION_13
-	dw $501c      ; ENEMY_INTERACTION_14
-	dw $503c      ; ENEMY_INTERACTION_15
-	dw $505c      ; ENEMY_INTERACTION_16
-	dw $507c      ; ENEMY_INTERACTION_17
-	dw $5156      ; ENEMY_INTERACTION_18
-	dw $5245      ; ENEMY_INTERACTION_19
-	dw $5358      ; ENEMY_INTERACTION_1A
-	dw $5433      ; ENEMY_INTERACTION_1B
-	dw $5455      ; ENEMY_INTERACTION_1C
-	dw $5548      ; ENEMY_INTERACTION_1D
-	dw $5569      ; ENEMY_INTERACTION_1E
-	dw $55a2      ; ENEMY_INTERACTION_1F
-	dw $55e7      ; ENEMY_INTERACTION_20
-	dw $564f      ; ENEMY_INTERACTION_21
-	dw $5675      ; ENEMY_INTERACTION_22
-	dw $5774      ; ENEMY_INTERACTION_23
-	dw $57b9      ; ENEMY_INTERACTION_24
-	dw $5819      ; ENEMY_INTERACTION_25
-	dw $5853      ; ENEMY_INTERACTION_26
-	dw $5887      ; ENEMY_INTERACTION_27
-	dw $58e7      ; ENEMY_INTERACTION_28
-	dw $5999      ; ENEMY_INTERACTION_29
-	dw $4e0f      ; ENEMY_INTERACTION_2A
-	dw $5a4f      ; ENEMY_INTERACTION_2B
-	dw $5a47      ; ENEMY_INTERACTION_2C
-	dw $5a52      ; ENEMY_INTERACTION_2D
-	dw $5a8c      ; ENEMY_INTERACTION_2E
-	dw $5a97      ; ENEMY_INTERACTION_2F
-	dw $5ac3      ; ENEMY_INTERACTION_30
-	dw $5af1      ; ENEMY_INTERACTION_31
-	dw $5b08      ; ENEMY_INTERACTION_32
-	dw $5b0b      ; ENEMY_INTERACTION_33
-	dw $5b2b      ; ENEMY_INTERACTION_34
-	dw $5b42      ; ENEMY_INTERACTION_35
-	dw $5b78      ; ENEMY_INTERACTION_36
-	dw $5573      ; ENEMY_INTERACTION_37
-	dw $5b89      ; ENEMY_INTERACTION_38
-	dw $5c17      ; ENEMY_INTERACTION_39
-	dw $5c26      ; ENEMY_INTERACTION_3A
-	dw $5c56      ; ENEMY_INTERACTION_3B
-	dw $5c61      ; ENEMY_INTERACTION_3C
-	dw $5c86      ; ENEMY_INTERACTION_3D
-	dw $5c98      ; ENEMY_INTERACTION_3E
-	dw $5ca8      ; ENEMY_INTERACTION_3F
-	dw $5ccf      ; ENEMY_INTERACTION_40
-	dw $5ce9      ; ENEMY_INTERACTION_41
-	dw $5cf8      ; ENEMY_INTERACTION_42
-	dw $47ed      ; ENEMY_INTERACTION_43
-	dw $5cfd      ; ENEMY_INTERACTION_44
-	dw $5d17      ; ENEMY_INTERACTION_45
-	dw $5d3b      ; ENEMY_INTERACTION_46
-	dw $5d64      ; ENEMY_INTERACTION_47
-	dw $5d6f      ; ENEMY_INTERACTION_48
-	dw $5d88      ; ENEMY_INTERACTION_49
-	dw $5dd3      ; ENEMY_INTERACTION_4A
-	dw $5df8      ; ENEMY_INTERACTION_4B
-	dw $5e2e      ; ENEMY_INTERACTION_4C
-	dw $5e3e      ; ENEMY_INTERACTION_4D
-	dw $5e9c      ; ENEMY_INTERACTION_4E
-	dw $5ea6      ; ENEMY_INTERACTION_4F
-	dw $5ecd      ; ENEMY_INTERACTION_50
-	dw $5f01      ; ENEMY_INTERACTION_51
-	dw $5f28      ; ENEMY_INTERACTION_52
-	dw Func_20202 ; ENEMY_INTERACTION_53
-	dw Func_20202 ; ENEMY_INTERACTION_54
-	dw Func_20202 ; ENEMY_INTERACTION_55
-	dw Func_20202 ; ENEMY_INTERACTION_56
-	dw Func_20202 ; ENEMY_INTERACTION_57
-	dw Func_20202 ; ENEMY_INTERACTION_58
+	dw Func_20b6b ; OBJ_INTERACTION_00
+	dw Func_20d1d ; OBJ_INTERACTION_01
+	dw ObjInteraction_FrontSting ; OBJ_INTERACTION_02
+	dw ObjInteraction_BackSting ; OBJ_INTERACTION_03
+	dw Func_20d6e ; OBJ_INTERACTION_04
+	dw ObjInteraction_FullSting ; OBJ_INTERACTION_05
+	dw Func_20d81 ; OBJ_INTERACTION_06
+	dw Func_20d8c ; OBJ_INTERACTION_07
+	dw Func_20deb ; OBJ_INTERACTION_08
+	dw Func_20e39 ; OBJ_INTERACTION_09
+	dw Func_20e60 ; OBJ_INTERACTION_0A
+	dw Func_20e6a ; OBJ_INTERACTION_0B
+	dw Func_20e77 ; OBJ_INTERACTION_0C
+	dw Func_20e82 ; OBJ_INTERACTION_0D
+	dw $4e97      ; OBJ_INTERACTION_0E
+	dw $4f6a      ; OBJ_INTERACTION_0F
+	dw $4fed      ; OBJ_INTERACTION_10
+	dw $4ff4      ; OBJ_INTERACTION_11
+	dw $4ffb      ; OBJ_INTERACTION_12
+	dw $5002      ; OBJ_INTERACTION_13
+	dw $501c      ; OBJ_INTERACTION_14
+	dw $503c      ; OBJ_INTERACTION_15
+	dw $505c      ; OBJ_INTERACTION_16
+	dw $507c      ; OBJ_INTERACTION_17
+	dw $5156      ; OBJ_INTERACTION_18
+	dw $5245      ; OBJ_INTERACTION_19
+	dw $5358      ; OBJ_INTERACTION_1A
+	dw $5433      ; OBJ_INTERACTION_1B
+	dw $5455      ; OBJ_INTERACTION_1C
+	dw $5548      ; OBJ_INTERACTION_1D
+	dw $5569      ; OBJ_INTERACTION_1E
+	dw $55a2      ; OBJ_INTERACTION_1F
+	dw $55e7      ; OBJ_INTERACTION_20
+	dw $564f      ; OBJ_INTERACTION_21
+	dw $5675      ; OBJ_INTERACTION_22
+	dw $5774      ; OBJ_INTERACTION_23
+	dw $57b9      ; OBJ_INTERACTION_24
+	dw $5819      ; OBJ_INTERACTION_25
+	dw $5853      ; OBJ_INTERACTION_26
+	dw $5887      ; OBJ_INTERACTION_27
+	dw $58e7      ; OBJ_INTERACTION_28
+	dw $5999      ; OBJ_INTERACTION_29
+	dw $4e0f      ; OBJ_INTERACTION_2A
+	dw $5a4f      ; OBJ_INTERACTION_2B
+	dw $5a47      ; OBJ_INTERACTION_2C
+	dw $5a52      ; OBJ_INTERACTION_2D
+	dw $5a8c      ; OBJ_INTERACTION_2E
+	dw $5a97      ; OBJ_INTERACTION_2F
+	dw $5ac3      ; OBJ_INTERACTION_30
+	dw $5af1      ; OBJ_INTERACTION_31
+	dw $5b08      ; OBJ_INTERACTION_32
+	dw $5b0b      ; OBJ_INTERACTION_33
+	dw $5b2b      ; OBJ_INTERACTION_34
+	dw $5b42      ; OBJ_INTERACTION_35
+	dw $5b78      ; OBJ_INTERACTION_36
+	dw $5573      ; OBJ_INTERACTION_37
+	dw $5b89      ; OBJ_INTERACTION_38
+	dw $5c17      ; OBJ_INTERACTION_39
+	dw $5c26      ; OBJ_INTERACTION_3A
+	dw $5c56      ; OBJ_INTERACTION_3B
+	dw $5c61      ; OBJ_INTERACTION_3C
+	dw $5c86      ; OBJ_INTERACTION_3D
+	dw $5c98      ; OBJ_INTERACTION_3E
+	dw $5ca8      ; OBJ_INTERACTION_3F
+	dw $5ccf      ; OBJ_INTERACTION_40
+	dw $5ce9      ; OBJ_INTERACTION_41
+	dw $5cf8      ; OBJ_INTERACTION_42
+	dw $47ed      ; OBJ_INTERACTION_43
+	dw $5cfd      ; OBJ_INTERACTION_44
+	dw $5d17      ; OBJ_INTERACTION_45
+	dw $5d3b      ; OBJ_INTERACTION_46
+	dw $5d64      ; OBJ_INTERACTION_47
+	dw $5d6f      ; OBJ_INTERACTION_48
+	dw $5d88      ; OBJ_INTERACTION_49
+	dw $5dd3      ; OBJ_INTERACTION_4A
+	dw $5df8      ; OBJ_INTERACTION_4B
+	dw $5e2e      ; OBJ_INTERACTION_4C
+	dw $5e3e      ; OBJ_INTERACTION_4D
+	dw $5e9c      ; OBJ_INTERACTION_4E
+	dw $5ea6      ; OBJ_INTERACTION_4F
+	dw $5ecd      ; OBJ_INTERACTION_50
+	dw $5f01      ; OBJ_INTERACTION_51
+	dw $5f28      ; OBJ_INTERACTION_52
+	dw Func_20202 ; OBJ_INTERACTION_53
+	dw Func_20202 ; OBJ_INTERACTION_54
+	dw Func_20202 ; OBJ_INTERACTION_55
+	dw Func_20202 ; OBJ_INTERACTION_56
+	dw Func_20202 ; OBJ_INTERACTION_57
+	dw Func_20202 ; OBJ_INTERACTION_58
 ; 0x20202
 
 Func_20202: ; 20202 (8:4202)
@@ -326,14 +326,14 @@ Func_2023b: ; 2023b (8:423b)
 	jp z, Func_20350
 	cp $04
 	jp z, Func_205e7
-	jp Func_20000.next_enemy
+	jp Func_20000.next_obj
 
 .asm_20257
 	ld a, [wca89]
 	and a
 	jp nz, Func_20350
 	ld b, $01
-	call SetEnemyUnk1C
+	call SetObjUnk1C
 	ld a, [wca8c]
 	cp $01
 	ret z
@@ -475,7 +475,7 @@ Func_20350: ; 20350 (8:4350)
 	ld b, $02
 	farcall Func_c9f3
 	ld b, $02
-	call SetEnemyUnk1C
+	call SetObjUnk1C
 	ld a, [wca8e]
 	cp $84
 	jr z, .asm_20422
@@ -486,8 +486,8 @@ Func_20350: ; 20350 (8:4350)
 	ld a, [wca9d]
 	and a
 	jr z, .asm_203e5
-	ld a, [wEnemyInteractionType]
-	bit HEAVY_ENEMY_TYPE_F, a
+	ld a, [wObjInteractionType]
+	bit HEAVY_OBJ_F, a
 	ret z
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_GARLIC
@@ -496,8 +496,8 @@ Func_20350: ; 20350 (8:4350)
 	ret
 
 .asm_203e5
-	ld a, [wEnemyInteractionType]
-	bit HEAVY_ENEMY_TYPE_F, a
+	ld a, [wObjInteractionType]
+	bit HEAVY_OBJ_F, a
 	jr z, .asm_203fc
 	farcall Func_1ca41
 	ret
@@ -646,7 +646,7 @@ Func_20447: ; 20447 (8:4447)
 .asm_20578
 	load_sfx SFX_014
 	ld b, $04
-	jp SetEnemyUnk1C
+	jp SetObjUnk1C
 ; 0x20585
 
 Func_20585: ; 20585 (8:4585)
@@ -676,7 +676,7 @@ Func_20585: ; 20585 (8:4585)
 .asm_205b7
 	load_sfx SFX_014
 	ld b, $04
-	call SetEnemyUnk1C
+	call SetObjUnk1C
 	ld a, [wca8e]
 	cp $42
 	jp z, Func_2028a
@@ -693,7 +693,7 @@ Func_20585: ; 20585 (8:4585)
 
 Func_205e7: ; 205e7 (8:45e7)
 	ld b, $05
-	call SetEnemyUnk1C
+	call SetObjUnk1C
 	ld a, [wca8e]
 	cp $48
 	ret nz
@@ -735,19 +735,19 @@ Func_20602: ; 20602 (8:4602)
 	ld b, $05
 ;	fallthrough
 
-SetEnemyUnk1C: ; 20657 (8:4657)
-	ld a, [wEnemyPtr + 0]
+SetObjUnk1C: ; 20657 (8:4657)
+	ld a, [wObjPtr + 0]
 	ld h, a
-	ld a, [wEnemyPtr + 1]
+	ld a, [wObjPtr + 1]
 	ld l, a
-	ld e, ENEMY_UNK_1C
+	ld e, OBJ_UNK_1C
 	ld d, $00
 	add hl, de
 	ld [hl], b
 	inc l
 	ld a, [wc1c0]
 	ld b, a
-	ld a, [hl] ; ENEMY_UNK_1D
+	ld a, [hl] ; OBJ_UNK_1D
 	and $0f
 	or b
 	ld [hl], a
@@ -761,8 +761,8 @@ Func_20670: ; 20670 (8:4670)
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_GARLIC
 	jr nc, .asm_20685
-	ld a, [wEnemyInteractionType]
-	bit HEAVY_ENEMY_TYPE_F, a
+	ld a, [wObjInteractionType]
+	bit HEAVY_OBJ_F, a
 	jr nz, .asm_2068c
 .asm_20685
 	ld a, [wca9d]
@@ -780,7 +780,7 @@ Func_20670: ; 20670 (8:4670)
 	jp z, Func_20350
 	cp $04
 	jp z, Func_205e7
-	jp Func_20000.next_enemy
+	jp Func_20000.next_obj
 
 .asm_206a8
 	ld a, [wWarioScreenXPos]
@@ -808,7 +808,7 @@ Func_20670: ; 20670 (8:4670)
 	ld [wDirection], a
 .asm_206d7
 	ld b, $06
-	call SetEnemyUnk1C
+	call SetObjUnk1C
 	ld a, [wca8c]
 	cp $01
 	ret z
@@ -946,7 +946,7 @@ Func_207ed: ; 207ed (8:47ed)
 
 .asm_20808
 	ld b, $06
-	call SetEnemyUnk1C
+	call SetObjUnk1C
 	load_sfx SFX_STING
 	ld a, $01
 	ld [wca8c], a
@@ -1020,7 +1020,7 @@ Func_20899: ; 20899 (8:4899)
 .asm_208ca
 	load_sfx SFX_014
 	ld b, $04
-	call SetEnemyUnk1C
+	call SetObjUnk1C
 	ld a, [wca8e]
 	and a
 	ret nz
@@ -1036,7 +1036,7 @@ Func_208f2: ; 208f2 (8:48f2)
 
 .Func_208f4
 	ld b, $01
-	call SetEnemyUnk1C
+	call SetObjUnk1C
 	ret
 
 .start
@@ -1066,7 +1066,7 @@ Func_208f2: ; 208f2 (8:48f2)
 
 Func_2092d: ; 2092d (8:492d)
 	ld b, $05
-	jp SetEnemyUnk1C
+	jp SetObjUnk1C
 ; 0x20932
 
 Func_20932: ; 20932 (8:4932)
@@ -1080,7 +1080,7 @@ Func_20939: ; 20939 (8:4939)
 	and a
 	jp nz, Func_2023b
 	ld b, $06
-	call SetEnemyUnk1C
+	call SetObjUnk1C
 	ld a, [wca8c]
 	cp $01
 	ret z
@@ -1147,7 +1147,7 @@ Func_209ca: ; 209ca (8:49ca)
 	call SubYOffset
 .asm_209f5
 	ld b, $09
-	call SetEnemyUnk1C
+	call SetObjUnk1C
 	ld a, [wJumpVelTable]
 	and a
 	jr z, .asm_20a60
@@ -1182,12 +1182,12 @@ Func_209ca: ; 209ca (8:49ca)
 .asm_20a51
 	farcall Func_1efe7
 .asm_20a60
-	jp Func_20000.next_enemy
+	jp Func_20000.next_obj
 ; 0x20a63
 
 Func_20a63: ; 20a63 (8:4a63)
 	ld b, $07
-	call SetEnemyUnk1C
+	call SetObjUnk1C
 	ret
 ; 0x20a69
 
@@ -1205,7 +1205,7 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	cp $04
 	jp z, Func_205e7
 	cp $05
-	jp z, Func_20000.next_enemy
+	jp z, Func_20000.next_obj
 	jp .asm_20c41
 
 .asm_20b8b
@@ -1274,8 +1274,8 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	ld a, [hl]
 	sbc $00
 	ld [de], a
-	ld a, [wEnemyInteractionType]
-	bit HEAVY_ENEMY_TYPE_F, a
+	ld a, [wObjInteractionType]
+	bit HEAVY_OBJ_F, a
 	jr nz, .asm_20c11
 	ld a, $01
 	ld [wca9a], a
@@ -1289,12 +1289,12 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	ld [wca9a], a
 .asm_20c1d
 	ld b, $03
-	call SetEnemyUnk1C
+	call SetObjUnk1C
 	ld a, [wJumpVelTable]
 	and a
 	jr z, .pick_up
-	ld a, [wEnemyInteractionType]
-	bit HEAVY_ENEMY_TYPE_F, a
+	ld a, [wObjInteractionType]
+	bit HEAVY_OBJ_F, a
 	jr z, .asm_20c31
 	jr .asm_20c41
 .asm_20c31
@@ -1379,7 +1379,7 @@ Func_20d1d: ; 20d1d (8:4d1d)
 	jp Func_2022c
 ; 0x20d20
 
-EnemyInteraction_FrontSting: ; 20d20 (8:4d20)
+ObjInteraction_FrontSting: ; 20d20 (8:4d20)
 	ld a, [wc1c0]
 	and $c0
 	jr nz, .asm_20d44
@@ -1399,7 +1399,7 @@ EnemyInteraction_FrontSting: ; 20d20 (8:4d20)
 	jp Func_20447
 ; 0x20d47
 
-EnemyInteraction_BackSting: ; 20d47 (8:4d47)
+ObjInteraction_BackSting: ; 20d47 (8:4d47)
 	ld a, [wc1c0]
 	and $c0
 	jr nz, .asm_20d6b
@@ -1428,7 +1428,7 @@ Func_20d6e: ; 20d6e (8:4d6e)
 	jp Func_2022c
 ; 0x20d7e
 
-EnemyInteraction_FullSting: ; 20d7e (8:4d7e)
+ObjInteraction_FullSting: ; 20d7e (8:4d7e)
 	jp Func_20670
 ; 0x20d81
 
@@ -1532,7 +1532,7 @@ Func_20e6a: ; 20e6a (8:4e6a)
 	and a
 	ret nz
 	ld b, $0a
-	jp SetEnemyUnk1C
+	jp SetObjUnk1C
 ; 0x20e77
 
 Func_20e77: ; 20e77 (8:4e77)
@@ -1546,7 +1546,7 @@ Func_20e82: ; 20e82 (8:4e82)
 	ld hl, wca5c
 	ld a, [hl]
 	cp $08
-	jp nc, Func_20000.next_enemy
+	jp nc, Func_20000.next_obj
 	inc [hl]
 	load_sfx SFX_031
 	jp Func_21ddb
@@ -1617,7 +1617,7 @@ Func_21aac: ; 21aac (8:5aac)
 	jp nz, Func_209ca
 	call Func_20602
 	ld b, $0f
-	jp SetEnemyUnk1C
+	jp SetObjUnk1C
 ; 0x21abb
 
 	INCROM $21abb, $21ddb
@@ -1640,7 +1640,7 @@ Func_21ddb: ; 21ddb (8:5ddb)
 	ld [hl], a
 .asm_21df2
 	call Func_20a63
-	jp Func_20000.next_enemy
+	jp Func_20000.next_obj
 ; 0x21df8
 
 	INCROM $21df8, $21f51

@@ -408,15 +408,15 @@ wCurRoomAnimatedPal:: ; c1b4
 wc1b5:: ; c1b5
 	ds $1
 
-; pointer to an enemy struct in wEnemies
-wEnemyPtr:: ; c1b6
+; pointer to an object struct in wObjects
+wObjPtr:: ; c1b6
 	ds $2
 
 wc1b8:: ; c1b8
 	ds $1
 
-; ENEMY_INTERACTION_* constant for Func_20000
-wEnemyInteractionType:: ; c1b9
+; OBJ_INTERACTION_* constant for Func_20000
+wObjInteractionType:: ; c1b9
 	ds $1
 
 wc1ba:: ; c1ba
@@ -1014,17 +1014,17 @@ wcef1:: ; cef1
 
 SECTION "WRAM1", WRAMX
 
-wEnemies::
-wEnemy1:: enemy_struct wEnemy1 ; d000
-wEnemy2:: enemy_struct wEnemy2 ; d020
-wEnemy3:: enemy_struct wEnemy3 ; d040
-wEnemy4:: enemy_struct wEnemy4 ; d060
-wEnemy5:: enemy_struct wEnemy5 ; d080
-wEnemy6:: enemy_struct wEnemy6 ; d0a0
-wEnemy7:: enemy_struct wEnemy7 ; d0c0
-wEnemy8:: enemy_struct wEnemy8 ; d0e0
+wObjects::
+wObj1:: obj_struct wObj1 ; d000
+wObj2:: obj_struct wObj2 ; d020
+wObj3:: obj_struct wObj3 ; d040
+wObj4:: obj_struct wObj4 ; d060
+wObj5:: obj_struct wObj5 ; d080
+wObj6:: obj_struct wObj6 ; d0a0
+wObj7:: obj_struct wObj7 ; d0c0
+wObj8:: obj_struct wObj8 ; d0e0
 
-wCurEnemy:: enemy_struct wCurEnemy ; d100
+wCurObj:: obj_struct wCurObj ; d100
 
 ; pointers related to LoadEnemyGroupData
 w1d120:: ; d120
@@ -1525,14 +1525,14 @@ wPlaneAnimationEnded:: ; d520
 wIntroSeqSFXTimer:: ; d522
 	ds $1
 
-wObj0:: obj_struct wObj0 ; d523
-wObj1:: obj_struct wObj1 ; d52b
-wObj2:: obj_struct wObj2 ; d533
-wObj3:: obj_struct wObj3 ; d53b
+wIntroObj0:: intro_obj_struct wIntroObj0 ; d523
+wIntroObj1:: intro_obj_struct wIntroObj1 ; d52b
+wIntroObj2:: intro_obj_struct wIntroObj2 ; d533
+wIntroObj3:: intro_obj_struct wIntroObj3 ; d53b
 
 	ds $4
 
-wObj4:: obj_struct wObj4 ; d547
+wIntroObj4:: intro_obj_struct wIntroObj4 ; d547
 
 SECTION "WRAM4", WRAMX
 

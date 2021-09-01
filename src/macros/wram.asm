@@ -11,7 +11,7 @@ sprite_oam_struct: MACRO
 ; bit 2-0: pal # (cgb only)
 ENDM
 
-obj_struct: MACRO
+intro_obj_struct: MACRO
 \1YCoord::          db
 \1XCoord::          db
 \1Frame::           db
@@ -23,11 +23,11 @@ obj_struct: MACRO
 ENDM
 
 wario_plane: MACRO
-\1Obj::   obj_struct \1
+\1Obj::   intro_obj_struct \1
 \1State:: db
 ENDM
 
-enemy_struct: MACRO
+obj_struct: MACRO
 \1Unk00::           db
 \1Unk01::           db
 \1Unk02::           db

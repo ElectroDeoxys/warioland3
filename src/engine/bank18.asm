@@ -4,85 +4,85 @@ Func_611cb: ; 611cb (18:51cb)
 	push hl
 	inc l
 	rla
-	ld [wCurEnemyUnk00], a
+	ld [wCurObjUnk00], a
 	ld a, [hli]
-	ld [wCurEnemyUnk01], a
+	ld [wCurObjUnk01], a
 	ld a, [hli]
-	ld [wCurEnemyUnk02], a
+	ld [wCurObjUnk02], a
 	ld a, [hli]
-	ld [wCurEnemyYPos], a
+	ld [wCurObjYPos], a
 	ld a, [hli]
-	ld [wCurEnemyYPos + 1], a
+	ld [wCurObjYPos + 1], a
 	ld a, [hli]
-	ld [wCurEnemyXPos], a
+	ld [wCurObjXPos], a
 	ld a, [hli]
-	ld [wCurEnemyXPos + 1], a
+	ld [wCurObjXPos + 1], a
 	ld a, [hli]
-	ld [wCurEnemyUnk07], a
+	ld [wCurObjUnk07], a
 	ld a, [hli]
-	ld [wCurEnemyInteractionType], a
+	ld [wCurObjInteractionType], a
 	ld a, [hli]
-	ld [wCurEnemyUnk09], a
+	ld [wCurObjUnk09], a
 	ld a, [hli]
-	ld [wCurEnemyUnk0a], a
+	ld [wCurObjUnk0a], a
 	ld a, [hli]
-	ld [wCurEnemyUnk0b], a
+	ld [wCurObjUnk0b], a
 	ld a, [hli]
-	ld [wCurEnemyUnk0c], a
+	ld [wCurObjUnk0c], a
 	ld a, [hli]
-	ld [wCurEnemyUnk0d], a
+	ld [wCurObjUnk0d], a
 	ld a, [hli]
-	ld [wCurEnemyUnk0e], a
+	ld [wCurObjUnk0e], a
 	ld a, [hli]
-	ld [wCurEnemyUnk0f], a
+	ld [wCurObjUnk0f], a
 	ld a, [hli]
-	ld [wCurEnemyUnk10], a
+	ld [wCurObjUnk10], a
 	ld a, [hli]
-	ld [wCurEnemyUnk10 + 1], a
+	ld [wCurObjUnk10 + 1], a
 	ld a, [hli]
-	ld [wCurEnemyUnk12], a
+	ld [wCurObjUnk12], a
 	ld a, [hli]
-	ld [wCurEnemyUnk13], a
+	ld [wCurObjUnk13], a
 	ld a, [hli]
-	ld [wCurEnemyUnk14], a
+	ld [wCurObjUnk14], a
 	ld a, [hli]
-	ld [wCurEnemyUnk15], a
+	ld [wCurObjUnk15], a
 	ld a, [hli]
-	ld [wCurEnemyUnk16], a
+	ld [wCurObjUnk16], a
 	ld a, [hli]
-	ld [wCurEnemyUnk17], a
+	ld [wCurObjUnk17], a
 	ld a, [hli]
-	ld [wCurEnemyUnk18], a
+	ld [wCurObjUnk18], a
 	ld a, [hli]
-	ld [wCurEnemyUnk19], a
+	ld [wCurObjUnk19], a
 	ld a, [hli]
-	ld [wCurEnemyUnk1a], a
+	ld [wCurObjUnk1a], a
 	ld a, [hli]
-	ld [wCurEnemyUnk1b], a
+	ld [wCurObjUnk1b], a
 	ld a, [hli]
-	ld [wCurEnemyUnk1c], a
+	ld [wCurObjUnk1c], a
 	ld a, [hli]
-	ld [wCurEnemyUnk1d], a
+	ld [wCurObjUnk1d], a
 	ld a, [hli]
-	ld [wCurEnemyUnk1e], a
+	ld [wCurObjUnk1e], a
 	ld a, [hl]
-	ld [wCurEnemyUnk1e + 1], a
+	ld [wCurObjUnk1e + 1], a
 	call Func_61760
 
-	farcall $13, wCurEnemyUnk1e
+	farcall $13, wCurObjUnk1e
 
 	call Func_312f
 	call Func_6307b
-	ld hl, wCurEnemyUnk0d
+	ld hl, wCurObjUnk0d
 	ld a, [wTempSCY]
 	ld b, a
-	ld a, [wCurEnemyYPos]
+	ld a, [wCurObjYPos]
 	add $10
 	sub b
 	ld [hli], a
 	ld a, [wTempSCX]
 	ld b, a
-	ld a, [wCurEnemyXPos]
+	ld a, [wCurObjXPos]
 	add $08
 	sub b
 	ld [hli], a
@@ -95,102 +95,102 @@ Func_611cb: ; 611cb (18:51cb)
 	ld [wTempSCX], a
 	pop hl
 
-	ld a, [wCurEnemyUnk00]
+	ld a, [wCurObjUnk00]
 	and $df
 	ld [hli], a
 	inc l
 	inc l
-	ld a, [wCurEnemyYPos]
+	ld a, [wCurObjYPos]
 	ld [hli], a
-	ld a, [wCurEnemyYPos + 1]
+	ld a, [wCurObjYPos + 1]
 	ld [hli], a
-	ld a, [wCurEnemyXPos]
+	ld a, [wCurObjXPos]
 	ld [hli], a
-	ld a, [wCurEnemyXPos + 1]
+	ld a, [wCurObjXPos + 1]
 	ld [hli], a
-	ld a, [wCurEnemyUnk07]
+	ld a, [wCurObjUnk07]
 	ld [hli], a
-	ld a, [wCurEnemyInteractionType]
+	ld a, [wCurObjInteractionType]
 	ld [hli], a
-	ld a, [wCurEnemyUnk09]
+	ld a, [wCurObjUnk09]
 	ld [hli], a
-	ld a, [wCurEnemyUnk0a]
+	ld a, [wCurObjUnk0a]
 	ld [hli], a
-	ld a, [wCurEnemyUnk0b]
+	ld a, [wCurObjUnk0b]
 	ld [hli], a
-	ld a, [wCurEnemyUnk0c]
+	ld a, [wCurObjUnk0c]
 	ld [hli], a
-	ld a, [wCurEnemyUnk0d]
+	ld a, [wCurObjUnk0d]
 	ld [hli], a
-	ld a, [wCurEnemyUnk0e]
+	ld a, [wCurObjUnk0e]
 	ld [hli], a
-	ld a, [wCurEnemyUnk0f]
+	ld a, [wCurObjUnk0f]
 	ld [hli], a
-	ld a, [wCurEnemyUnk10]
+	ld a, [wCurObjUnk10]
 	ld [hli], a
-	ld a, [wCurEnemyUnk10 + 1]
+	ld a, [wCurObjUnk10 + 1]
 	ld [hli], a
-	ld a, [wCurEnemyUnk12]
+	ld a, [wCurObjUnk12]
 	ld [hli], a
-	ld a, [wCurEnemyUnk13]
+	ld a, [wCurObjUnk13]
 	ld [hli], a
-	ld a, [wCurEnemyUnk14]
+	ld a, [wCurObjUnk14]
 	ld [hli], a
-	ld a, [wCurEnemyUnk15]
+	ld a, [wCurObjUnk15]
 	ld [hli], a
-	ld a, [wCurEnemyUnk16]
+	ld a, [wCurObjUnk16]
 	ld [hli], a
-	ld a, [wCurEnemyUnk17]
+	ld a, [wCurObjUnk17]
 	ld [hli], a
-	ld a, [wCurEnemyUnk18]
+	ld a, [wCurObjUnk18]
 	ld [hli], a
-	ld a, [wCurEnemyUnk19]
+	ld a, [wCurObjUnk19]
 	ld [hli], a
-	ld a, [wCurEnemyUnk1a]
+	ld a, [wCurObjUnk1a]
 	ld [hli], a
-	ld a, [wCurEnemyUnk1b]
+	ld a, [wCurObjUnk1b]
 	ld [hli], a
-	ld a, [wCurEnemyUnk1c]
+	ld a, [wCurObjUnk1c]
 	ld [hli], a
 	inc l
-	ld a, [wCurEnemyUnk1e]
+	ld a, [wCurObjUnk1e]
 	ld [hli], a
-	ld a, [wCurEnemyUnk1e + 1]
+	ld a, [wCurObjUnk1e + 1]
 	ld [hl], a
 	ret
 ; 0x6130b
 
 Func_6130b: ; 6130b (18:530b)
 	call Func_618e2
-	ld hl, wEnemy1Unk00
+	ld hl, wObj1Unk00
 	ld a, [hl]
 	rra
 	call c, Func_611cb
-	ld l, LOW(wEnemy2Unk00)
+	ld l, LOW(wObj2Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_611cb
-	ld l, LOW(wEnemy3Unk00)
+	ld l, LOW(wObj3Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_611cb
-	ld l, LOW(wEnemy4Unk00)
+	ld l, LOW(wObj4Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_611cb
-	ld l, LOW(wEnemy5Unk00)
+	ld l, LOW(wObj5Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_611cb
-	ld l, LOW(wEnemy6Unk00)
+	ld l, LOW(wObj6Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_611cb
-	ld l, LOW(wEnemy7Unk00)
+	ld l, LOW(wObj7Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_611cb
-	ld l, LOW(wEnemy8Unk00)
+	ld l, LOW(wObj8Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_611cb
@@ -216,70 +216,70 @@ Func_61348: ; 61348 (18:5348)
 	and a
 	jr nz, .asm_613a2
 	call Func_618e2
-	ld hl, wEnemy1Unk00
+	ld hl, wObj1Unk00
 	ld a, [hl]
 	rra
 	call c, Func_613dc
-	ld l, LOW(wEnemy2Unk00)
+	ld l, LOW(wObj2Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_613dc
-	ld l, LOW(wEnemy3Unk00)
+	ld l, LOW(wObj3Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_613dc
-	ld l, LOW(wEnemy4Unk00)
+	ld l, LOW(wObj4Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_613dc
-	ld l, LOW(wEnemy5Unk00)
+	ld l, LOW(wObj5Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_613dc
-	ld l, LOW(wEnemy6Unk00)
+	ld l, LOW(wObj6Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_613dc
-	ld l, LOW(wEnemy7Unk00)
+	ld l, LOW(wObj7Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_613dc
-	ld l, LOW(wEnemy8Unk00)
+	ld l, LOW(wObj8Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_613dc
 	ret
 
 .asm_613a2
-	ld hl, wEnemy1Unk00
+	ld hl, wObj1Unk00
 	ld a, [hl]
 	rra
 	call c, Func_61513
-	ld l, LOW(wEnemy2Unk00)
+	ld l, LOW(wObj2Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_61513
-	ld l, LOW(wEnemy3Unk00)
+	ld l, LOW(wObj3Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_61513
-	ld l, LOW(wEnemy4Unk00)
+	ld l, LOW(wObj4Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_61513
-	ld l, LOW(wEnemy5Unk00)
+	ld l, LOW(wObj5Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_61513
-	ld l, LOW(wEnemy6Unk00)
+	ld l, LOW(wObj6Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_61513
-	ld l, LOW(wEnemy7Unk00)
+	ld l, LOW(wObj7Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_61513
-	ld l, LOW(wEnemy8Unk00)
+	ld l, LOW(wObj8Unk00)
 	ld a, [hl]
 	rra
 	call c, Func_61513
@@ -290,159 +290,159 @@ Func_613dc: ; 613dc (18:53dc)
 	push hl
 	inc l
 	rla
-	ld [wCurEnemyUnk00], a
+	ld [wCurObjUnk00], a
 	ld a, [hli]
-	ld [wCurEnemyUnk01], a
+	ld [wCurObjUnk01], a
 	ld a, [hli]
-	ld [wCurEnemyUnk02], a
+	ld [wCurObjUnk02], a
 	ld a, [hli]
-	ld [wCurEnemyYPos], a
+	ld [wCurObjYPos], a
 	ld a, [hli]
-	ld [wCurEnemyYPos + 1], a
+	ld [wCurObjYPos + 1], a
 	ld a, [hli]
-	ld [wCurEnemyXPos], a
+	ld [wCurObjXPos], a
 	ld a, [hli]
-	ld [wCurEnemyXPos + 1], a
+	ld [wCurObjXPos + 1], a
 	ld a, [hli]
-	ld [wCurEnemyUnk07], a
+	ld [wCurObjUnk07], a
 	ld a, [hli]
-	ld [wCurEnemyInteractionType], a
+	ld [wCurObjInteractionType], a
 	ld a, [hli]
-	ld [wCurEnemyUnk09], a
+	ld [wCurObjUnk09], a
 	ld a, [hli]
-	ld [wCurEnemyUnk0a], a
+	ld [wCurObjUnk0a], a
 	ld a, [hli]
-	ld [wCurEnemyUnk0b], a
+	ld [wCurObjUnk0b], a
 	ld a, [hli]
-	ld [wCurEnemyUnk0c], a
+	ld [wCurObjUnk0c], a
 	ld a, [hli]
-	ld [wCurEnemyUnk0d], a
+	ld [wCurObjUnk0d], a
 	ld a, [hli]
-	ld [wCurEnemyUnk0e], a
+	ld [wCurObjUnk0e], a
 	ld a, [hli]
-	ld [wCurEnemyUnk0f], a
+	ld [wCurObjUnk0f], a
 	ld a, [hli]
-	ld [wCurEnemyUnk10], a
+	ld [wCurObjUnk10], a
 	ld a, [hli]
-	ld [wCurEnemyUnk10 + 1], a
+	ld [wCurObjUnk10 + 1], a
 	ld a, [hli]
-	ld [wCurEnemyUnk12], a
+	ld [wCurObjUnk12], a
 	ld a, [hli]
-	ld [wCurEnemyUnk13], a
+	ld [wCurObjUnk13], a
 	ld a, [hli]
-	ld [wCurEnemyUnk14], a
+	ld [wCurObjUnk14], a
 	ld a, [hli]
-	ld [wCurEnemyUnk15], a
+	ld [wCurObjUnk15], a
 	ld a, [hli]
-	ld [wCurEnemyUnk16], a
+	ld [wCurObjUnk16], a
 	ld a, [hli]
-	ld [wCurEnemyUnk17], a
+	ld [wCurObjUnk17], a
 	ld a, [hli]
-	ld [wCurEnemyUnk18], a
+	ld [wCurObjUnk18], a
 	ld a, [hli]
-	ld [wCurEnemyUnk19], a
+	ld [wCurObjUnk19], a
 	ld a, [hli]
-	ld [wCurEnemyUnk1a], a
+	ld [wCurObjUnk1a], a
 	ld a, [hli]
-	ld [wCurEnemyUnk1b], a
+	ld [wCurObjUnk1b], a
 	ld a, [hli]
-	ld [wCurEnemyUnk1c], a
+	ld [wCurObjUnk1c], a
 	ld a, [hli]
-	ld [wCurEnemyUnk1d], a
+	ld [wCurObjUnk1d], a
 	ld a, [hli]
-	ld [wCurEnemyUnk1e], a
+	ld [wCurObjUnk1e], a
 	ld a, [hl]
-	ld [wCurEnemyUnk1e + 1], a
+	ld [wCurObjUnk1e + 1], a
 
 	call Func_61760
-	ld a, [wCurEnemyUnk07]
+	ld a, [wCurObjUnk07]
 	swap a
 	and $0f
 	or $10
 	ldh [hCallFuncBank], a
-	ld a, [wCurEnemyUnk1e + 0]
+	ld a, [wCurObjUnk1e + 0]
 	ldh [hCallFuncPointer], a
-	ld a, [wCurEnemyUnk1e + 1]
+	ld a, [wCurObjUnk1e + 1]
 	ldh [hCallFuncPointer + 1], a
 	call hCallFunc
 
 	call Func_312f
 	call Func_6307b
-	ld hl, wCurEnemyUnk0d
+	ld hl, wCurObjUnk0d
 	ld a, [wTempSCY]
 	ld b, a
-	ld a, [wCurEnemyYPos]
+	ld a, [wCurObjYPos]
 	add $10
 	sub b
 	ld [hli], a
 	ld a, [wTempSCX]
 	ld b, a
-	ld a, [wCurEnemyXPos]
+	ld a, [wCurObjXPos]
 	add $08
 	sub b
 	ld [hli], a
 	pop hl
-	ld a, [wCurEnemyUnk00]
+	ld a, [wCurObjUnk00]
 	and $df
 	ld [hli], a
 	inc l
 	inc l
-	ld a, [wCurEnemyYPos]
+	ld a, [wCurObjYPos]
 	ld [hli], a
-	ld a, [wCurEnemyYPos + 1]
+	ld a, [wCurObjYPos + 1]
 	ld [hli], a
-	ld a, [wCurEnemyXPos]
+	ld a, [wCurObjXPos]
 	ld [hli], a
-	ld a, [wCurEnemyXPos + 1]
+	ld a, [wCurObjXPos + 1]
 	ld [hli], a
-	ld a, [wCurEnemyUnk07]
+	ld a, [wCurObjUnk07]
 	ld [hli], a
-	ld a, [wCurEnemyInteractionType]
+	ld a, [wCurObjInteractionType]
 	ld [hli], a
-	ld a, [wCurEnemyUnk09]
+	ld a, [wCurObjUnk09]
 	ld [hli], a
-	ld a, [wCurEnemyUnk0a]
+	ld a, [wCurObjUnk0a]
 	ld [hli], a
-	ld a, [wCurEnemyUnk0b]
+	ld a, [wCurObjUnk0b]
 	ld [hli], a
-	ld a, [wCurEnemyUnk0c]
+	ld a, [wCurObjUnk0c]
 	ld [hli], a
-	ld a, [wCurEnemyUnk0d]
+	ld a, [wCurObjUnk0d]
 	ld [hli], a
-	ld a, [wCurEnemyUnk0e]
+	ld a, [wCurObjUnk0e]
 	ld [hli], a
-	ld a, [wCurEnemyUnk0f]
+	ld a, [wCurObjUnk0f]
 	ld [hli], a
-	ld a, [wCurEnemyUnk10]
+	ld a, [wCurObjUnk10]
 	ld [hli], a
-	ld a, [wCurEnemyUnk10 + 1]
+	ld a, [wCurObjUnk10 + 1]
 	ld [hli], a
-	ld a, [wCurEnemyUnk12]
+	ld a, [wCurObjUnk12]
 	ld [hli], a
-	ld a, [wCurEnemyUnk13]
+	ld a, [wCurObjUnk13]
 	ld [hli], a
-	ld a, [wCurEnemyUnk14]
+	ld a, [wCurObjUnk14]
 	ld [hli], a
-	ld a, [wCurEnemyUnk15]
+	ld a, [wCurObjUnk15]
 	ld [hli], a
-	ld a, [wCurEnemyUnk16]
+	ld a, [wCurObjUnk16]
 	ld [hli], a
-	ld a, [wCurEnemyUnk17]
+	ld a, [wCurObjUnk17]
 	ld [hli], a
-	ld a, [wCurEnemyUnk18]
+	ld a, [wCurObjUnk18]
 	ld [hli], a
-	ld a, [wCurEnemyUnk19]
+	ld a, [wCurObjUnk19]
 	ld [hli], a
-	ld a, [wCurEnemyUnk1a]
+	ld a, [wCurObjUnk1a]
 	ld [hli], a
-	ld a, [wCurEnemyUnk1b]
+	ld a, [wCurObjUnk1b]
 	ld [hli], a
-	ld a, [wCurEnemyUnk1c]
+	ld a, [wCurObjUnk1c]
 	ld [hli], a
 	inc l
-	ld a, [wCurEnemyUnk1e]
+	ld a, [wCurObjUnk1e]
 	ld [hli], a
-	ld a, [wCurEnemyUnk1e + 1]
+	ld a, [wCurObjUnk1e + 1]
 	ld [hl], a
 	ret
 ; 0x61513
@@ -451,336 +451,336 @@ Func_61513: ; 61513 (18:5513)
 	push hl
 	inc l
 	rla
-	ld [wCurEnemyUnk00], a
+	ld [wCurObjUnk00], a
 	ld a, [hli]
-	ld [wCurEnemyUnk01], a
+	ld [wCurObjUnk01], a
 	ld a, [hli]
-	ld [wCurEnemyUnk02], a
+	ld [wCurObjUnk02], a
 	ld a, [hli]
-	ld [wCurEnemyYPos], a
+	ld [wCurObjYPos], a
 	ld a, [hli]
-	ld [wCurEnemyYPos + 1], a
+	ld [wCurObjYPos + 1], a
 	ld a, [hli]
-	ld [wCurEnemyXPos], a
+	ld [wCurObjXPos], a
 	ld a, [hli]
-	ld [wCurEnemyXPos + 1], a
+	ld [wCurObjXPos + 1], a
 	ld a, [hli]
-	ld [wCurEnemyUnk07], a
+	ld [wCurObjUnk07], a
 	ld a, [hli]
-	ld [wCurEnemyInteractionType], a
+	ld [wCurObjInteractionType], a
 	ld a, [hli]
-	ld [wCurEnemyUnk09], a
+	ld [wCurObjUnk09], a
 	ld a, [hli]
-	ld [wCurEnemyUnk0a], a
+	ld [wCurObjUnk0a], a
 	ld a, [hli]
-	ld [wCurEnemyUnk0b], a
+	ld [wCurObjUnk0b], a
 	ld a, [hli]
-	ld [wCurEnemyUnk0c], a
+	ld [wCurObjUnk0c], a
 	ld a, [hli]
-	ld [wCurEnemyUnk0d], a
+	ld [wCurObjUnk0d], a
 	ld a, [hli]
-	ld [wCurEnemyUnk0e], a
+	ld [wCurObjUnk0e], a
 	ld a, [hli]
-	ld [wCurEnemyUnk0f], a
+	ld [wCurObjUnk0f], a
 	ld a, [hli]
-	ld [wCurEnemyUnk10], a
+	ld [wCurObjUnk10], a
 	ld a, [hli]
-	ld [wCurEnemyUnk10 + 1], a
+	ld [wCurObjUnk10 + 1], a
 	ld a, [hli]
-	ld [wCurEnemyUnk12], a
+	ld [wCurObjUnk12], a
 	ld a, [hli]
-	ld [wCurEnemyUnk13], a
+	ld [wCurObjUnk13], a
 	ld a, [hli]
-	ld [wCurEnemyUnk14], a
+	ld [wCurObjUnk14], a
 	ld a, [hli]
-	ld [wCurEnemyUnk15], a
+	ld [wCurObjUnk15], a
 	ld a, [hli]
-	ld [wCurEnemyUnk16], a
+	ld [wCurObjUnk16], a
 	ld a, [hli]
-	ld [wCurEnemyUnk17], a
+	ld [wCurObjUnk17], a
 	ld a, [hli]
-	ld [wCurEnemyUnk18], a
+	ld [wCurObjUnk18], a
 	ld a, [hli]
-	ld [wCurEnemyUnk19], a
+	ld [wCurObjUnk19], a
 	ld a, [hli]
-	ld [wCurEnemyUnk1a], a
+	ld [wCurObjUnk1a], a
 	ld a, [hli]
-	ld [wCurEnemyUnk1b], a
+	ld [wCurObjUnk1b], a
 	ld a, [hli]
-	ld [wCurEnemyUnk1c], a
+	ld [wCurObjUnk1c], a
 	ld a, [hli]
-	ld [wCurEnemyUnk1d], a
+	ld [wCurObjUnk1d], a
 	ld a, [hli]
-	ld [wCurEnemyUnk1e], a
+	ld [wCurObjUnk1e], a
 	ld a, [hl]
-	ld [wCurEnemyUnk1e + 1], a
-	ld hl, wCurEnemyUnk1a
+	ld [wCurObjUnk1e + 1], a
+	ld hl, wCurObjUnk1a
 	bit 5, [hl]
 	jr z, .asm_615b4
 
-	ld a, [wCurEnemyUnk07]
+	ld a, [wCurObjUnk07]
 	swap a
 	and $0f
 	or $10
 	ldh [hCallFuncBank], a
-	ld a, [wCurEnemyUnk1e + 0]
+	ld a, [wCurObjUnk1e + 0]
 	ldh [hCallFuncPointer], a
-	ld a, [wCurEnemyUnk1e + 1]
+	ld a, [wCurObjUnk1e + 1]
 	ldh [hCallFuncPointer + 1], a
 	call hCallFunc
 
 .asm_615b4
 	call Func_3104
 	call Func_6307b
-	ld hl, wCurEnemyUnk0d
+	ld hl, wCurObjUnk0d
 	ld a, [wTempSCY]
 	ld b, a
-	ld a, [wCurEnemyYPos]
+	ld a, [wCurObjYPos]
 	add $10
 	sub b
 	ld [hli], a
 	ld a, [wTempSCX]
 	ld b, a
-	ld a, [wCurEnemyXPos]
+	ld a, [wCurObjXPos]
 	add $08
 	sub b
 	ld [hli], a
 	pop hl
-	ld a, [wCurEnemyUnk00]
+	ld a, [wCurObjUnk00]
 	and $df
 	ld [hli], a
 	inc l
 	inc l
-	ld a, [wCurEnemyYPos]
+	ld a, [wCurObjYPos]
 	ld [hli], a
-	ld a, [wCurEnemyYPos + 1]
+	ld a, [wCurObjYPos + 1]
 	ld [hli], a
-	ld a, [wCurEnemyXPos]
+	ld a, [wCurObjXPos]
 	ld [hli], a
-	ld a, [wCurEnemyXPos + 1]
+	ld a, [wCurObjXPos + 1]
 	ld [hli], a
-	ld a, [wCurEnemyUnk07]
+	ld a, [wCurObjUnk07]
 	ld [hli], a
-	ld a, [wCurEnemyInteractionType]
+	ld a, [wCurObjInteractionType]
 	ld [hli], a
-	ld a, [wCurEnemyUnk09]
+	ld a, [wCurObjUnk09]
 	ld [hli], a
-	ld a, [wCurEnemyUnk0a]
+	ld a, [wCurObjUnk0a]
 	ld [hli], a
-	ld a, [wCurEnemyUnk0b]
+	ld a, [wCurObjUnk0b]
 	ld [hli], a
-	ld a, [wCurEnemyUnk0c]
+	ld a, [wCurObjUnk0c]
 	ld [hli], a
-	ld a, [wCurEnemyUnk0d]
+	ld a, [wCurObjUnk0d]
 	ld [hli], a
-	ld a, [wCurEnemyUnk0e]
+	ld a, [wCurObjUnk0e]
 	ld [hli], a
-	ld a, [wCurEnemyUnk0f]
+	ld a, [wCurObjUnk0f]
 	ld [hli], a
-	ld a, [wCurEnemyUnk10]
+	ld a, [wCurObjUnk10]
 	ld [hli], a
-	ld a, [wCurEnemyUnk10 + 1]
+	ld a, [wCurObjUnk10 + 1]
 	ld [hli], a
-	ld a, [wCurEnemyUnk12]
+	ld a, [wCurObjUnk12]
 	ld [hli], a
-	ld a, [wCurEnemyUnk13]
+	ld a, [wCurObjUnk13]
 	ld [hli], a
-	ld a, [wCurEnemyUnk14]
+	ld a, [wCurObjUnk14]
 	ld [hli], a
-	ld a, [wCurEnemyUnk15]
+	ld a, [wCurObjUnk15]
 	ld [hli], a
-	ld a, [wCurEnemyUnk16]
+	ld a, [wCurObjUnk16]
 	ld [hli], a
-	ld a, [wCurEnemyUnk17]
+	ld a, [wCurObjUnk17]
 	ld [hli], a
-	ld a, [wCurEnemyUnk18]
+	ld a, [wCurObjUnk18]
 	ld [hli], a
-	ld a, [wCurEnemyUnk19]
+	ld a, [wCurObjUnk19]
 	ld [hli], a
-	ld a, [wCurEnemyUnk1a]
+	ld a, [wCurObjUnk1a]
 	ld [hli], a
-	ld a, [wCurEnemyUnk1b]
+	ld a, [wCurObjUnk1b]
 	ld [hli], a
-	ld a, [wCurEnemyUnk1c]
+	ld a, [wCurObjUnk1c]
 	ld [hli], a
 	inc l
-	ld a, [wCurEnemyUnk1e]
+	ld a, [wCurObjUnk1e]
 	ld [hli], a
-	ld a, [wCurEnemyUnk1e + 1]
+	ld a, [wCurObjUnk1e + 1]
 	ld [hl], a
 	ret
 ; 0x6164e
 
 Func_6164e: ; 6164e (18:564e)
-	ld hl, wEnemy1
+	ld hl, wObj1
 	ld a, [hl]
 	and $93
 	cp $83
-	jr nz, .enemy_2
-	ld e, LOW(wEnemy1Unk0d)
-	ld l, LOW(wEnemy1Unk07)
-	call UpdateEnemySprite
+	jr nz, .obj_2
+	ld e, LOW(wObj1Unk0d)
+	ld l, LOW(wObj1Unk07)
+	call UpdateObjSprite
 
-.enemy_2
-	ld hl, wEnemy2
+.obj_2
+	ld hl, wObj2
 	ld a, [hl]
 	and $93
 	cp $83
-	jr nz, .enemy_3
-	ld e, LOW(wEnemy2Unk0d)
-	ld l, LOW(wEnemy2Unk07)
-	call UpdateEnemySprite
+	jr nz, .obj_3
+	ld e, LOW(wObj2Unk0d)
+	ld l, LOW(wObj2Unk07)
+	call UpdateObjSprite
 
-.enemy_3
-	ld hl, wEnemy3
+.obj_3
+	ld hl, wObj3
 	ld a, [hl]
 	and $93
 	cp $83
-	jr nz, .enemy_4
-	ld e, LOW(wEnemy3Unk0d)
-	ld l, LOW(wEnemy3Unk07)
-	call UpdateEnemySprite
+	jr nz, .obj_4
+	ld e, LOW(wObj3Unk0d)
+	ld l, LOW(wObj3Unk07)
+	call UpdateObjSprite
 
-.enemy_4
-	ld hl, wEnemy4
+.obj_4
+	ld hl, wObj4
 	ld a, [hl]
 	and $93
 	cp $83
-	jr nz, .enemy_5
-	ld e, LOW(wEnemy4Unk0d)
-	ld l, LOW(wEnemy4Unk07)
-	call UpdateEnemySprite
+	jr nz, .obj_5
+	ld e, LOW(wObj4Unk0d)
+	ld l, LOW(wObj4Unk07)
+	call UpdateObjSprite
 
-.enemy_5
-	ld hl, wEnemy5
+.obj_5
+	ld hl, wObj5
 	ld a, [hl]
 	and $93
 	cp $83
-	jr nz, .enemy_6
-	ld e, LOW(wEnemy5Unk0d)
-	ld l, LOW(wEnemy5Unk07)
-	call UpdateEnemySprite
+	jr nz, .obj_6
+	ld e, LOW(wObj5Unk0d)
+	ld l, LOW(wObj5Unk07)
+	call UpdateObjSprite
 
-.enemy_6
-	ld hl, wEnemy6
+.obj_6
+	ld hl, wObj6
 	ld a, [hl]
 	and $93
 	cp $83
-	jr nz, .enemy_7
-	ld e, LOW(wEnemy6Unk0d)
-	ld l, LOW(wEnemy6Unk07)
-	call UpdateEnemySprite
+	jr nz, .obj_7
+	ld e, LOW(wObj6Unk0d)
+	ld l, LOW(wObj6Unk07)
+	call UpdateObjSprite
 
-.enemy_7
-	ld hl, wEnemy7
+.obj_7
+	ld hl, wObj7
 	ld a, [hl]
 	and $93
 	cp $83
-	jr nz, .enemy_8
-	ld e, LOW(wEnemy7Unk0d)
-	ld l, LOW(wEnemy7Unk07)
-	call UpdateEnemySprite
+	jr nz, .obj_8
+	ld e, LOW(wObj7Unk0d)
+	ld l, LOW(wObj7Unk07)
+	call UpdateObjSprite
 
-.enemy_8
-	ld hl, wEnemy8
+.obj_8
+	ld hl, wObj8
 	ld a, [hl]
 	and $93
 	cp $83
 	jr nz, .done
-	ld e, LOW(wEnemy8Unk0d)
-	ld l, LOW(wEnemy8Unk07)
-	call UpdateEnemySprite
+	ld e, LOW(wObj8Unk0d)
+	ld l, LOW(wObj8Unk07)
+	call UpdateObjSprite
 
 .done
 	ret
 ; 0x616d7
 
 Func_616d7: ; 616d7 (18:56d7)
-	ld hl, wEnemy1
+	ld hl, wObj1
 	ld a, [hl]
 	and $93
 	cp $03
-	jr nz, .enemy_2
-	ld e, LOW(wEnemy1Unk0d)
-	ld l, LOW(wEnemy1Unk07)
-	call UpdateEnemySprite
+	jr nz, .obj_2
+	ld e, LOW(wObj1Unk0d)
+	ld l, LOW(wObj1Unk07)
+	call UpdateObjSprite
 
-.enemy_2
-	ld hl, wEnemy2
+.obj_2
+	ld hl, wObj2
 	ld a, [hl]
 	and $93
 	cp $03
-	jr nz, .enemy_3
-	ld e, LOW(wEnemy2Unk0d)
-	ld l, LOW(wEnemy2Unk07)
-	call UpdateEnemySprite
+	jr nz, .obj_3
+	ld e, LOW(wObj2Unk0d)
+	ld l, LOW(wObj2Unk07)
+	call UpdateObjSprite
 
-.enemy_3
-	ld hl, wEnemy3
+.obj_3
+	ld hl, wObj3
 	ld a, [hl]
 	and $93
 	cp $03
-	jr nz, .enemy_4
-	ld e, LOW(wEnemy3Unk0d)
-	ld l, LOW(wEnemy3Unk07)
-	call UpdateEnemySprite
+	jr nz, .obj_4
+	ld e, LOW(wObj3Unk0d)
+	ld l, LOW(wObj3Unk07)
+	call UpdateObjSprite
 
-.enemy_4
-	ld hl, wEnemy4
+.obj_4
+	ld hl, wObj4
 	ld a, [hl]
 	and $93
 	cp $03
-	jr nz, .enemy_5
-	ld e, LOW(wEnemy4Unk0d)
-	ld l, LOW(wEnemy4Unk07)
-	call UpdateEnemySprite
+	jr nz, .obj_5
+	ld e, LOW(wObj4Unk0d)
+	ld l, LOW(wObj4Unk07)
+	call UpdateObjSprite
 
-.enemy_5
-	ld hl, wEnemy5
+.obj_5
+	ld hl, wObj5
 	ld a, [hl]
 	and $93
 	cp $03
-	jr nz, .enemy_6
-	ld e, LOW(wEnemy5Unk0d)
-	ld l, LOW(wEnemy5Unk07)
-	call UpdateEnemySprite
+	jr nz, .obj_6
+	ld e, LOW(wObj5Unk0d)
+	ld l, LOW(wObj5Unk07)
+	call UpdateObjSprite
 
-.enemy_6
-	ld hl, wEnemy6
+.obj_6
+	ld hl, wObj6
 	ld a, [hl]
 	and $93
 	cp $03
-	jr nz, .enemy_7
-	ld e, LOW(wEnemy6Unk0d)
-	ld l, LOW(wEnemy6Unk07)
-	call UpdateEnemySprite
+	jr nz, .obj_7
+	ld e, LOW(wObj6Unk0d)
+	ld l, LOW(wObj6Unk07)
+	call UpdateObjSprite
 
-.enemy_7
-	ld hl, wEnemy7
+.obj_7
+	ld hl, wObj7
 	ld a, [hl]
 	and $93
 	cp $03
-	jr nz, .enemy_8
-	ld e, LOW(wEnemy7Unk0d)
-	ld l, LOW(wEnemy7Unk07)
-	call UpdateEnemySprite
+	jr nz, .obj_8
+	ld e, LOW(wObj7Unk0d)
+	ld l, LOW(wObj7Unk07)
+	call UpdateObjSprite
 
-.enemy_8
-	ld hl, wEnemy8
+.obj_8
+	ld hl, wObj8
 	ld a, [hl]
 	and $93
 	cp $03
 	jr nz, .done
-	ld e, LOW(wEnemy8Unk0d)
-	ld l, LOW(wEnemy8Unk07)
-	call UpdateEnemySprite
+	ld e, LOW(wObj8Unk0d)
+	ld l, LOW(wObj8Unk07)
+	call UpdateObjSprite
 
 .done
 	ret
 ; 0x61760
 
 Func_61760: ; 61760 (18:5760)
-	ld a, [wCurEnemyUnk1c]
+	ld a, [wCurObjUnk1c]
 	and a
 	ret z
 	bit 7, a
@@ -790,7 +790,7 @@ Func_61760: ; 61760 (18:5760)
 	jr nz, .asm_6176f
 	xor a
 .asm_6176f
-	ld [wCurEnemyUnk1c], a
+	ld [wCurObjUnk1c], a
 	ret
 
 .jump
@@ -821,43 +821,43 @@ Func_61760: ; 61760 (18:5760)
 	INCROM $6179c, $618e2
 
 Func_618e2: ; 618e2 (18:58e2)
-	ld hl, wEnemy1
+	ld hl, wObj1
 	ld e, %101
 	ld a, [hl]
 	and e
 	cp e
 	jr z, .asm_6191c
-	ld l, LOW(wEnemy2)
+	ld l, LOW(wObj2)
 	ld a, [hl]
 	and e
 	cp e
 	jr z, .asm_6191c
-	ld l, LOW(wEnemy3)
+	ld l, LOW(wObj3)
 	ld a, [hl]
 	and e
 	cp e
 	jr z, .asm_6191c
-	ld l, LOW(wEnemy4)
+	ld l, LOW(wObj4)
 	ld a, [hl]
 	and e
 	cp e
 	jr z, .asm_6191c
-	ld l, LOW(wEnemy5)
+	ld l, LOW(wObj5)
 	ld a, [hl]
 	and e
 	cp e
 	jr z, .asm_6191c
-	ld l, LOW(wEnemy6)
+	ld l, LOW(wObj6)
 	ld a, [hl]
 	and e
 	cp e
 	jr z, .asm_6191c
-	ld l, LOW(wEnemy7)
+	ld l, LOW(wObj7)
 	ld a, [hl]
 	and e
 	cp e
 	jr z, .asm_6191c
-	ld l, LOW(wEnemy8)
+	ld l, LOW(wObj8)
 	ld a, [hl]
 	and e
 	cp e
@@ -866,38 +866,38 @@ Func_618e2: ; 618e2 (18:58e2)
 .asm_6191c
 	push hl
 	ld a, l
-	add ENEMY_INTERACTION_TYPE
+	add OBJ_INTERACTION_TYPE
 	ld l, a
-	ld a, [hli] ; ENEMY_INTERACTION_TYPE
+	ld a, [hli] ; OBJ_INTERACTION_TYPE
 	ldh [hffa0], a
-	ld a, [hli] ; ENEMY_UNK_09
+	ld a, [hli] ; OBJ_UNK_09
 	ld b, a
-	ld a, [hli] ; ENEMY_UNK_0A
+	ld a, [hli] ; OBJ_UNK_0A
 	ld c, a
-	ld a, [hli] ; ENEMY_UNK_0B
+	ld a, [hli] ; OBJ_UNK_0B
 	ld d, a
-	ld a, [hli] ; ENEMY_UNK_0C
+	ld a, [hli] ; OBJ_UNK_0C
 	ld e, a
-	ld a, [hl] ; ENEMY_UNK_0D
+	ld a, [hl] ; OBJ_UNK_0D
 	add $2a
 	add b
 	ld b, a
-	ld a, [hli] ; ENEMY_UNK_0D
+	ld a, [hli] ; OBJ_UNK_0D
 	add $2a
 	add c
 	ld c, a
-	ld a, [hl] ; ENEMY_UNK_0E
+	ld a, [hl] ; OBJ_UNK_0E
 	add $2a
 	add d
 	ld d, a
-	ld a, [hli] ; ENEMY_UNK_0E
+	ld a, [hli] ; OBJ_UNK_0E
 	add $2a
 	add e
 	ld e, a
 	ld a, l
-	add ENEMY_UNK_1B - ENEMY_UNK_0F
+	add OBJ_UNK_1B - OBJ_UNK_0F
 	ld l, a
-	ld a, [hl] ; ENEMY_UNK_1B
+	ld a, [hl] ; OBJ_UNK_1B
 	cp $4c
 	jr nc, .asm_6194d
 	cp $48
@@ -918,7 +918,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld [hli], a ; hffa3
 	ld a, $29
 	ld [hli], a ; hffa4
-	jr .enemy_1
+	jr .obj_1
 
 .asm_61965
 	ld a, $28
@@ -929,7 +929,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld [hli], a ; hffa3
 	ld a, $29
 	ld [hli], a ; hffa4
-	jr .enemy_1
+	jr .obj_1
 
 .asm_61973
 	rla
@@ -942,7 +942,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld [hli], a ; ; hffa3
 	ld a, $28
 	ld [hli], a ; ; hffa4
-	jr .enemy_1
+	jr .obj_1
 
 .asm_61984
 	ld a, $29
@@ -953,7 +953,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld [hli], a ; hffa3
 	ld a, $28
 	ld [hli], a ; hffa4
-	jr .enemy_1
+	jr .obj_1
 
 .asm_61992
 	rra
@@ -963,7 +963,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld [hli], a ; hffa1
 	ld a, $08
 	ld [hli], a ; hffa2
-	jr .enemy_1
+	jr .obj_1
 
 .asm_619a0
 	ld a, $08
@@ -971,37 +971,37 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld a, $09
 	ld [hli], a ; hffa2
 
-.enemy_1
-	ld a, [wEnemy1Unk00]
+.obj_1
+	ld a, [wObj1Unk00]
 	and $1f
 	cp %11
-	jr nz, .enemy_2
-	ld a, [wEnemy1Unk0d]
+	jr nz, .obj_2
+	ld a, [wObj1Unk0d]
 	add $2a
 	ld h, a
-	ld a, [wEnemy1Unk0e]
+	ld a, [wObj1Unk0e]
 	add $2a
 	ld l, a
-	ld a, [wEnemy1Unk0a]
+	ld a, [wObj1Unk0a]
 	add h
 	sub b
-	jr c, .enemy_2
-	ld a, [wEnemy1Unk09]
+	jr c, .obj_2
+	ld a, [wObj1Unk09]
 	add h
 	sub c
-	jr nc, .enemy_2
-	ld a, [wEnemy1Unk0c]
+	jr nc, .obj_2
+	ld a, [wObj1Unk0c]
 	add l
 	sub d
-	jr c, .enemy_2
-	ld a, [wEnemy1Unk0b]
+	jr c, .obj_2
+	ld a, [wObj1Unk0b]
 	add l
 	sub e
-	jr nc, .enemy_2
+	jr nc, .obj_2
 	pop hl
 	res 2, [hl]
 	ld a, l
-	add ENEMY_UNK_1B - ENEMY_UNK_00
+	add OBJ_UNK_1B - OBJ_UNK_00
 	ld l, a
 	ld a, [hl]
 	and $fe
@@ -1009,12 +1009,12 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61d28
 	cp $48
 	jp z, Func_61d28
-	ld a, [wEnemy1InteractionType]
+	ld a, [wObj1InteractionType]
 	rla
 	jp c, Func_61df0
 	ldh a, [hffa2]
 	ld [hl], a
-	ld l, LOW(wEnemy1Unk1b)
+	ld l, LOW(wObj1Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1027,42 +1027,42 @@ Func_618e2: ; 618e2 (18:58e2)
 .asm_61a06
 	ldh a, [hffa1]
 	ld [hl], a
-	ld l, LOW(wEnemy1Unk00)
+	ld l, LOW(wObj1Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 
-.enemy_2
-	ld a, [wEnemy2Unk00]
+.obj_2
+	ld a, [wObj2Unk00]
 	and $1f
 	cp $03
-	jr nz, .enemy_3
-	ld a, [wEnemy2Unk0d]
+	jr nz, .obj_3
+	ld a, [wObj2Unk0d]
 	add $2a
 	ld h, a
-	ld a, [wEnemy2Unk0e]
+	ld a, [wObj2Unk0e]
 	add $2a
 	ld l, a
-	ld a, [wEnemy2Unk0a]
+	ld a, [wObj2Unk0a]
 	add h
 	sub b
-	jr c, .enemy_3
-	ld a, [wEnemy2Unk09]
+	jr c, .obj_3
+	ld a, [wObj2Unk09]
 	add h
 	sub c
-	jr nc, .enemy_3
-	ld a, [wEnemy2Unk0c]
+	jr nc, .obj_3
+	ld a, [wObj2Unk0c]
 	add l
 	sub d
-	jr c, .enemy_3
-	ld a, [wEnemy2Unk0b]
+	jr c, .obj_3
+	ld a, [wObj2Unk0b]
 	add l
 	sub e
-	jr nc, .enemy_3
+	jr nc, .obj_3
 	pop hl
 	res 2, [hl]
 	ld a, l
-	add ENEMY_UNK_1B - ENEMY_UNK_00
+	add OBJ_UNK_1B - OBJ_UNK_00
 	ld l, a
 	ld a, [hl]
 	and $fe
@@ -1070,12 +1070,12 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61d41
 	cp $48
 	jp z, Func_61d41
-	ld a, [wEnemy2InteractionType]
+	ld a, [wObj2InteractionType]
 	rla
 	jp c, Func_61e14
 	ldh a, [hffa2]
 	ld [hl], a
-	ld l, LOW(wEnemy2Unk1b)
+	ld l, LOW(wObj2Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1088,42 +1088,42 @@ Func_618e2: ; 618e2 (18:58e2)
 .asm_61a76
 	ldh a, [hffa1]
 	ld [hl], a
-	ld l, LOW(wEnemy2Unk00)
+	ld l, LOW(wObj2Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 
-.enemy_3
-	ld a, [wEnemy3Unk00]
+.obj_3
+	ld a, [wObj3Unk00]
 	and $1f
 	cp $03
-	jr nz, .enemy_4
-	ld a, [wEnemy3Unk0d]
+	jr nz, .obj_4
+	ld a, [wObj3Unk0d]
 	add $2a
 	ld h, a
-	ld a, [wEnemy3Unk0e]
+	ld a, [wObj3Unk0e]
 	add $2a
 	ld l, a
-	ld a, [wEnemy3Unk0a]
+	ld a, [wObj3Unk0a]
 	add h
 	sub b
-	jr c, .enemy_4
-	ld a, [wEnemy3Unk09]
+	jr c, .obj_4
+	ld a, [wObj3Unk09]
 	add h
 	sub c
-	jr nc, .enemy_4
-	ld a, [wEnemy3Unk0c]
+	jr nc, .obj_4
+	ld a, [wObj3Unk0c]
 	add l
 	sub d
-	jr c, .enemy_4
-	ld a, [wEnemy3Unk0b]
+	jr c, .obj_4
+	ld a, [wObj3Unk0b]
 	add l
 	sub e
-	jr nc, .enemy_4
+	jr nc, .obj_4
 	pop hl
 	res 2, [hl]
 	ld a, l
-	add ENEMY_UNK_1B - ENEMY_UNK_00
+	add OBJ_UNK_1B - OBJ_UNK_00
 	ld l, a
 	ld a, [hl]
 	and $fe
@@ -1131,12 +1131,12 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61d5a
 	cp $48
 	jp z, Func_61d5a
-	ld a, [wEnemy3InteractionType]
+	ld a, [wObj3InteractionType]
 	rla
 	jp c, Func_61e38
 	ldh a, [hffa2]
 	ld [hl], a
-	ld l, LOW(wEnemy3Unk1b)
+	ld l, LOW(wObj3Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1149,42 +1149,42 @@ Func_618e2: ; 618e2 (18:58e2)
 .asm_61ae6
 	ldh a, [hffa1]
 	ld [hl], a
-	ld l, LOW(wEnemy3Unk00)
+	ld l, LOW(wObj3Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 
-.enemy_4
-	ld a, [wEnemy4Unk00]
+.obj_4
+	ld a, [wObj4Unk00]
 	and $1f
 	cp $03
-	jr nz, .enemy_5
-	ld a, [wEnemy4Unk0d]
+	jr nz, .obj_5
+	ld a, [wObj4Unk0d]
 	add $2a
 	ld h, a
-	ld a, [wEnemy4Unk0e]
+	ld a, [wObj4Unk0e]
 	add $2a
 	ld l, a
-	ld a, [wEnemy4Unk0a]
+	ld a, [wObj4Unk0a]
 	add h
 	sub b
-	jr c, .enemy_5
-	ld a, [wEnemy4Unk09]
+	jr c, .obj_5
+	ld a, [wObj4Unk09]
 	add h
 	sub c
-	jr nc, .enemy_5
-	ld a, [wEnemy4Unk0c]
+	jr nc, .obj_5
+	ld a, [wObj4Unk0c]
 	add l
 	sub d
-	jr c, .enemy_5
-	ld a, [wEnemy4Unk0b]
+	jr c, .obj_5
+	ld a, [wObj4Unk0b]
 	add l
 	sub e
-	jr nc, .enemy_5
+	jr nc, .obj_5
 	pop hl
 	res 2, [hl]
 	ld a, l
-	add ENEMY_UNK_1B - ENEMY_UNK_00
+	add OBJ_UNK_1B - OBJ_UNK_00
 	ld l, a
 	ld a, [hl]
 	and $fe
@@ -1192,12 +1192,12 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61d73
 	cp $48
 	jp z, Func_61d73
-	ld a, [wEnemy4InteractionType]
+	ld a, [wObj4InteractionType]
 	rla
 	jp c, Func_61e5c
 	ldh a, [hffa2]
 	ld [hl], a
-	ld l, LOW(wEnemy4Unk1b)
+	ld l, LOW(wObj4Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1210,42 +1210,42 @@ Func_618e2: ; 618e2 (18:58e2)
 .asm_61b56
 	ldh a, [hffa1]
 	ld [hl], a
-	ld l, LOW(wEnemy4Unk00)
+	ld l, LOW(wObj4Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 
-.enemy_5
-	ld a, [wEnemy5Unk00]
+.obj_5
+	ld a, [wObj5Unk00]
 	and $1f
 	cp $03
-	jr nz, .enemy_6
-	ld a, [wEnemy5Unk0d]
+	jr nz, .obj_6
+	ld a, [wObj5Unk0d]
 	add $2a
 	ld h, a
-	ld a, [wEnemy5Unk0e]
+	ld a, [wObj5Unk0e]
 	add $2a
 	ld l, a
-	ld a, [wEnemy5Unk0a]
+	ld a, [wObj5Unk0a]
 	add h
 	sub b
-	jr c, .enemy_6
-	ld a, [wEnemy5Unk09]
+	jr c, .obj_6
+	ld a, [wObj5Unk09]
 	add h
 	sub c
-	jr nc, .enemy_6
-	ld a, [wEnemy5Unk0c]
+	jr nc, .obj_6
+	ld a, [wObj5Unk0c]
 	add l
 	sub d
-	jr c, .enemy_6
-	ld a, [wEnemy5Unk0b]
+	jr c, .obj_6
+	ld a, [wObj5Unk0b]
 	add l
 	sub e
-	jr nc, .enemy_6
+	jr nc, .obj_6
 	pop hl
 	res 2, [hl]
 	ld a, l
-	add ENEMY_UNK_1B - ENEMY_UNK_00
+	add OBJ_UNK_1B - OBJ_UNK_00
 	ld l, a
 	ld a, [hl]
 	and $fe
@@ -1253,12 +1253,12 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61d8c
 	cp $48
 	jp z, Func_61d8c
-	ld a, [wEnemy5InteractionType]
+	ld a, [wObj5InteractionType]
 	rla
 	jp c, Func_61e80
 	ldh a, [hffa2]
 	ld [hl], a
-	ld l, LOW(wEnemy5Unk1b)
+	ld l, LOW(wObj5Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1271,42 +1271,42 @@ Func_618e2: ; 618e2 (18:58e2)
 .asm_61bc6
 	ldh a, [hffa1]
 	ld [hl], a
-	ld l, LOW(wEnemy5Unk00)
+	ld l, LOW(wObj5Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 
-.enemy_6
-	ld a, [wEnemy6Unk00]
+.obj_6
+	ld a, [wObj6Unk00]
 	and $1f
 	cp $03
-	jr nz, .enemy_7
-	ld a, [wEnemy6Unk0d]
+	jr nz, .obj_7
+	ld a, [wObj6Unk0d]
 	add $2a
 	ld h, a
-	ld a, [wEnemy6Unk0e]
+	ld a, [wObj6Unk0e]
 	add $2a
 	ld l, a
-	ld a, [wEnemy6Unk0a]
+	ld a, [wObj6Unk0a]
 	add h
 	sub b
-	jr c, .enemy_7
-	ld a, [wEnemy6Unk09]
+	jr c, .obj_7
+	ld a, [wObj6Unk09]
 	add h
 	sub c
-	jr nc, .enemy_7
-	ld a, [wEnemy6Unk0c]
+	jr nc, .obj_7
+	ld a, [wObj6Unk0c]
 	add l
 	sub d
-	jr c, .enemy_7
-	ld a, [wEnemy6Unk0b]
+	jr c, .obj_7
+	ld a, [wObj6Unk0b]
 	add l
 	sub e
-	jr nc, .enemy_7
+	jr nc, .obj_7
 	pop hl
 	res 2, [hl]
 	ld a, l
-	add ENEMY_UNK_1B - ENEMY_UNK_00
+	add OBJ_UNK_1B - OBJ_UNK_00
 	ld l, a
 	ld a, [hl]
 	and $fe
@@ -1314,12 +1314,12 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61da5
 	cp $48
 	jp z, Func_61da5
-	ld a, [wEnemy6InteractionType]
+	ld a, [wObj6InteractionType]
 	rla
 	jp c, Func_61ea4
 	ldh a, [hffa2]
 	ld [hl], a
-	ld l, LOW(wEnemy6Unk1b)
+	ld l, LOW(wObj6Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1332,42 +1332,42 @@ Func_618e2: ; 618e2 (18:58e2)
 .asm_61c36
 	ldh a, [hffa1]
 	ld [hl], a
-	ld l, LOW(wEnemy6Unk00)
+	ld l, LOW(wObj6Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 
-.enemy_7
-	ld a, [wEnemy7Unk00]
+.obj_7
+	ld a, [wObj7Unk00]
 	and $1f
 	cp $03
-	jr nz, .enemy_8
-	ld a, [wEnemy7Unk0d]
+	jr nz, .obj_8
+	ld a, [wObj7Unk0d]
 	add $2a
 	ld h, a
-	ld a, [wEnemy7Unk0e]
+	ld a, [wObj7Unk0e]
 	add $2a
 	ld l, a
-	ld a, [wEnemy7Unk0a]
+	ld a, [wObj7Unk0a]
 	add h
 	sub b
-	jr c, .enemy_8
-	ld a, [wEnemy7Unk09]
+	jr c, .obj_8
+	ld a, [wObj7Unk09]
 	add h
 	sub c
-	jr nc, .enemy_8
-	ld a, [wEnemy7Unk0c]
+	jr nc, .obj_8
+	ld a, [wObj7Unk0c]
 	add l
 	sub d
-	jr c, .enemy_8
-	ld a, [wEnemy7Unk0b]
+	jr c, .obj_8
+	ld a, [wObj7Unk0b]
 	add l
 	sub e
-	jr nc, .enemy_8
+	jr nc, .obj_8
 	pop hl
 	res 2, [hl]
 	ld a, l
-	add ENEMY_UNK_1B - ENEMY_UNK_00
+	add OBJ_UNK_1B - OBJ_UNK_00
 	ld l, a
 	ld a, [hl]
 	and $fe
@@ -1375,12 +1375,12 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61dbe
 	cp $48
 	jp z, Func_61dbe
-	ld a, [wEnemy7InteractionType]
+	ld a, [wObj7InteractionType]
 	rla
 	jp c, Func_61ec8
 	ldh a, [hffa2]
 	ld [hl], a
-	ld l, LOW(wEnemy7Unk1b)
+	ld l, LOW(wObj7Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1393,42 +1393,42 @@ Func_618e2: ; 618e2 (18:58e2)
 .asm_61ca6
 	ldh a, [hffa1]
 	ld [hl], a
-	ld l, LOW(wEnemy7Unk00)
+	ld l, LOW(wObj7Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
 
-.enemy_8
-	ld a, [wEnemy8Unk00]
+.obj_8
+	ld a, [wObj8Unk00]
 	and $1f
 	cp $03
 	jr nz, .done
-	ld a, [wEnemy8Unk0d]
+	ld a, [wObj8Unk0d]
 	add $2a
 	ld h, a
-	ld a, [wEnemy8Unk0e]
+	ld a, [wObj8Unk0e]
 	add $2a
 	ld l, a
-	ld a, [wEnemy8Unk0a]
+	ld a, [wObj8Unk0a]
 	add h
 	sub b
 	jr c, .done
-	ld a, [wEnemy8Unk09]
+	ld a, [wObj8Unk09]
 	add h
 	sub c
 	jr nc, .done
-	ld a, [wEnemy8Unk0c]
+	ld a, [wObj8Unk0c]
 	add l
 	sub d
 	jr c, .done
-	ld a, [wEnemy8Unk0b]
+	ld a, [wObj8Unk0b]
 	add l
 	sub e
 	jr nc, .done
 	pop hl
 	res 2, [hl]
 	ld a, l
-	add ENEMY_UNK_1B - ENEMY_UNK_00
+	add OBJ_UNK_1B - OBJ_UNK_00
 	ld l, a
 	ld a, [hl]
 	and $fe
@@ -1436,12 +1436,12 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61dd7
 	cp $48
 	jp z, Func_61dd7
-	ld a, [wEnemy8InteractionType]
+	ld a, [wObj8InteractionType]
 	rla
 	jp c, Func_61eec
 	ldh a, [hffa2]
 	ld [hl], a
-	ld l, LOW(wEnemy8Unk1b)
+	ld l, LOW(wObj8Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1454,7 +1454,7 @@ Func_618e2: ; 618e2 (18:58e2)
 .asm_61d16
 	ldh a, [hffa1]
 	ld [hl], a
-	ld l, LOW(wEnemy8Unk00)
+	ld l, LOW(wObj8Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1469,10 +1469,10 @@ Func_61d28: ; 61d28 (18:5d28)
 	ld [wca9a], a
 	ldh a, [hffa2]
 	ld [hl], a
-	ld l, LOW(wEnemy1Unk1b)
+	ld l, LOW(wObj1Unk1b)
 	ldh a, [hffa1]
 	ld [hl], a
-	ld l, LOW(wEnemy1Unk00)
+	ld l, LOW(wObj1Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1483,10 +1483,10 @@ Func_61d41: ; 61d41 (18:5d41)
 	ld [wca9a], a
 	ldh a, [hffa2]
 	ld [hl], a
-	ld l, LOW(wEnemy2Unk1b)
+	ld l, LOW(wObj2Unk1b)
 	ldh a, [hffa1]
 	ld [hl], a
-	ld l, LOW(wEnemy2Unk00)
+	ld l, LOW(wObj2Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1497,10 +1497,10 @@ Func_61d5a: ; 61d5a (18:5d5a)
 	ld [wca9a], a
 	ldh a, [hffa2]
 	ld [hl], a
-	ld l, LOW(wEnemy3Unk1b)
+	ld l, LOW(wObj3Unk1b)
 	ldh a, [hffa1]
 	ld [hl], a
-	ld l, LOW(wEnemy3Unk00)
+	ld l, LOW(wObj3Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1511,10 +1511,10 @@ Func_61d73: ; 61d73 (18:5d73)
 	ld [wca9a], a
 	ldh a, [hffa2]
 	ld [hl], a
-	ld l, LOW(wEnemy4Unk1b)
+	ld l, LOW(wObj4Unk1b)
 	ldh a, [hffa1]
 	ld [hl], a
-	ld l, LOW(wEnemy4Unk00)
+	ld l, LOW(wObj4Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1525,10 +1525,10 @@ Func_61d8c: ; 61d8c (18:5d8c)
 	ld [wca9a], a
 	ldh a, [hffa2]
 	ld [hl], a
-	ld l, LOW(wEnemy5Unk1b)
+	ld l, LOW(wObj5Unk1b)
 	ldh a, [hffa1]
 	ld [hl], a
-	ld l, LOW(wEnemy5Unk00)
+	ld l, LOW(wObj5Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1539,10 +1539,10 @@ Func_61da5: ; 61da5 (18:5da5)
 	ld [wca9a], a
 	ldh a, [hffa2]
 	ld [hl], a
-	ld l, LOW(wEnemy6Unk1b)
+	ld l, LOW(wObj6Unk1b)
 	ldh a, [hffa1]
 	ld [hl], a
-	ld l, LOW(wEnemy6Unk00)
+	ld l, LOW(wObj6Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1553,10 +1553,10 @@ Func_61dbe: ; 61dbe (18:5dbe)
 	ld [wca9a], a
 	ldh a, [hffa2]
 	ld [hl], a
-	ld l, LOW(wEnemy7Unk1b)
+	ld l, LOW(wObj7Unk1b)
 	ldh a, [hffa1]
 	ld [hl], a
-	ld l, LOW(wEnemy7Unk00)
+	ld l, LOW(wObj7Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1567,10 +1567,10 @@ Func_61dd7: ; 61dd7 (18:5dd7)
 	ld [wca9a], a
 	ldh a, [hffa2]
 	ld [hl], a
-	ld l, LOW(wEnemy8Unk1b)
+	ld l, LOW(wObj8Unk1b)
 	ldh a, [hffa1]
 	ld [hl], a
-	ld l, LOW(wEnemy8Unk00)
+	ld l, LOW(wObj8Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1579,7 +1579,7 @@ Func_61dd7: ; 61dd7 (18:5dd7)
 Func_61df0: ; 61df0 (18:5df0)
 	ldh a, [hffa4]
 	ld [hl], a
-	ld l, LOW(wEnemy1Unk1b)
+	ld l, LOW(wObj1Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1592,7 +1592,7 @@ Func_61df0: ; 61df0 (18:5df0)
 .asm_61e04
 	ldh a, [hffa3]
 	ld [hl], a
-	ld l, LOW(wEnemy1Unk00)
+	ld l, LOW(wObj1Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1601,7 +1601,7 @@ Func_61df0: ; 61df0 (18:5df0)
 Func_61e14: ; 61e14 (18:5e14)
 	ldh a, [hffa4]
 	ld [hl], a
-	ld l, LOW(wEnemy2Unk1b)
+	ld l, LOW(wObj2Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1614,7 +1614,7 @@ Func_61e14: ; 61e14 (18:5e14)
 .asm_61e28
 	ldh a, [hffa3]
 	ld [hl], a
-	ld l, LOW(wEnemy2Unk00)
+	ld l, LOW(wObj2Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1623,7 +1623,7 @@ Func_61e14: ; 61e14 (18:5e14)
 Func_61e38: ; 61e38 (18:5e38)
 	ldh a, [hffa4]
 	ld [hl], a
-	ld l, LOW(wEnemy3Unk1b)
+	ld l, LOW(wObj3Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1636,7 +1636,7 @@ Func_61e38: ; 61e38 (18:5e38)
 .asm_61e4c
 	ldh a, [hffa3]
 	ld [hl], a
-	ld l, LOW(wEnemy3Unk00)
+	ld l, LOW(wObj3Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1645,7 +1645,7 @@ Func_61e38: ; 61e38 (18:5e38)
 Func_61e5c: ; 61e5c (18:5e5c)
 	ldh a, [hffa4]
 	ld [hl], a
-	ld l, LOW(wEnemy4Unk1b)
+	ld l, LOW(wObj4Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1658,7 +1658,7 @@ Func_61e5c: ; 61e5c (18:5e5c)
 .asm_61e70
 	ldh a, [hffa3]
 	ld [hl], a
-	ld l, LOW(wEnemy4Unk00)
+	ld l, LOW(wObj4Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1667,7 +1667,7 @@ Func_61e5c: ; 61e5c (18:5e5c)
 Func_61e80: ; 61e80 (18:5e80)
 	ldh a, [hffa4]
 	ld [hl], a
-	ld l, LOW(wEnemy5Unk1b)
+	ld l, LOW(wObj5Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1680,7 +1680,7 @@ Func_61e80: ; 61e80 (18:5e80)
 .asm_61e94
 	ldh a, [hffa3]
 	ld [hl], a
-	ld l, LOW(wEnemy5Unk00)
+	ld l, LOW(wObj5Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1689,7 +1689,7 @@ Func_61e80: ; 61e80 (18:5e80)
 Func_61ea4: ; 61ea4 (18:5ea4)
 	ldh a, [hffa4]
 	ld [hl], a
-	ld l, LOW(wEnemy6Unk1b)
+	ld l, LOW(wObj6Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1702,7 +1702,7 @@ Func_61ea4: ; 61ea4 (18:5ea4)
 .asm_61eb8
 	ldh a, [hffa3]
 	ld [hl], a
-	ld l, LOW(wEnemy6Unk00)
+	ld l, LOW(wObj6Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1711,7 +1711,7 @@ Func_61ea4: ; 61ea4 (18:5ea4)
 Func_61ec8: ; 61ec8 (18:5ec8)
 	ldh a, [hffa4]
 	ld [hl], a
-	ld l, LOW(wEnemy7Unk1b)
+	ld l, LOW(wObj7Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1724,7 +1724,7 @@ Func_61ec8: ; 61ec8 (18:5ec8)
 .asm_61edc
 	ldh a, [hffa3]
 	ld [hl], a
-	ld l, LOW(wEnemy7Unk00)
+	ld l, LOW(wObj7Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1733,7 +1733,7 @@ Func_61ec8: ; 61ec8 (18:5ec8)
 Func_61eec: ; 61eec (18:5eec)
 	ldh a, [hffa4]
 	ld [hl], a
-	ld l, LOW(wEnemy8Unk1b)
+	ld l, LOW(wObj8Unk1b)
 	ld a, [hl]
 	and $fe
 	cp $36
@@ -1746,7 +1746,7 @@ Func_61eec: ; 61eec (18:5eec)
 .asm_61f00
 	ldh a, [hffa3]
 	ld [hl], a
-	ld l, LOW(wEnemy8Unk00)
+	ld l, LOW(wObj8Unk00)
 	set 3, [hl]
 	load_sfx SFX_016
 	ret
@@ -1754,7 +1754,7 @@ Func_61eec: ; 61eec (18:5eec)
 
 Func_61f10: ; 61f10 (18:5f10)
 	xor a
-	call Func_61f41 ; clears whole wEnemies
+	call Func_61f41 ; clears whole wObjects
 	call Func_61f4a ; clears whole w1d120
 	ld [w1d140], a
 	ld [w1d141], a
@@ -1767,7 +1767,7 @@ Func_61f10: ; 61f10 (18:5f10)
 
 Func_61f2a: ; 61f2a (18:5f2a)
 	xor a
-	call Func_61f41 ; clears whole wEnemies
+	call Func_61f41 ; clears whole wObjects
 	call Func_61f4a ; clears whole w1d120
 	ld [w1d141], a
 	ld [w1d142], a
@@ -1778,7 +1778,7 @@ Func_61f2a: ; 61f2a (18:5f2a)
 ; 0x61f41
 
 Func_61f41: ; 61f41 (18:5f41)
-	ld hl, wEnemies
+	ld hl, wObjects
 	ld c, a
 .loop
 	ld [hli], a
@@ -1800,7 +1800,7 @@ Func_61f4a: ; 61f4a (18:5f4a)
 	INCROM $61f54, $6307b
 
 Func_6307b: ; 6307b (18:707b)
-	ld hl, wCurEnemyYPos
+	ld hl, wCurObjYPos
 	ld a, [hli]
 	ld c, a
 	ld a, [hli]
@@ -1897,16 +1897,16 @@ Func_6307b: ; 6307b (18:707b)
 	cp l
 	jr nc, .asm_63106
 .asm_630f6
-	ld hl, wCurEnemyUnk00
+	ld hl, wCurObjUnk00
 	set 1, [hl]
 	jr .asm_6310b
 .asm_630fd
-	ld a, [wCurEnemyUnk1b]
+	ld a, [wCurObjUnk1b]
 	and $fe
 	cp $48
 	jr z, .asm_6310b
 .asm_63106
-	ld hl, wCurEnemyUnk00
+	ld hl, wCurObjUnk00
 	res 1, [hl]
 .asm_6310b
 	pop hl
@@ -2000,18 +2000,18 @@ Func_6307b: ; 6307b (18:707b)
 	cp l
 	jr c, .asm_631a0
 .asm_6317e
-	ld a, [wCurEnemyUnk1a]
+	ld a, [wCurObjUnk1a]
 	and $1f
 	cp $10
 	ret nc
-	ld hl, wCurEnemyUnk02
+	ld hl, wCurObjUnk02
 	and a
 	jr z, .asm_6319c
 	farcall Func_baee
 	ret
 .asm_6319c
 	xor a
-	ld [wCurEnemyUnk00], a
+	ld [wCurObjUnk00], a
 .asm_631a0
 	ret
 ; 0x631a1

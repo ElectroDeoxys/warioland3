@@ -153,36 +153,36 @@ Func_640e5: ; 640e5 (19:40e5)
 	cp $0a
 	ret nc
 
-	ld h, HIGH(wEnemy1)
-	ld l, LOW(wEnemy1)
+	ld h, HIGH(wObj1)
+	ld l, LOW(wObj1)
 	ld a, [hli]
 	rra
 	jr nc, .got_enemy
-	ld l, LOW(wEnemy2)
+	ld l, LOW(wObj2)
 	ld a, [hli]
 	rra
 	jr nc, .got_enemy
-	ld l, LOW(wEnemy3)
+	ld l, LOW(wObj3)
 	ld a, [hli]
 	rra
 	jr nc, .got_enemy
-	ld l, LOW(wEnemy4)
+	ld l, LOW(wObj4)
 	ld a, [hli]
 	rra
 	jr nc, .got_enemy
-	ld l, LOW(wEnemy5)
+	ld l, LOW(wObj5)
 	ld a, [hli]
 	rra
 	jr nc, .got_enemy
-	ld l, LOW(wEnemy6)
+	ld l, LOW(wObj6)
 	ld a, [hli]
 	rra
 	jr nc, .got_enemy
-	ld l, LOW(wEnemy7)
+	ld l, LOW(wObj7)
 	ld a, [hli]
 	rra
 	jr nc, .got_enemy
-	ld l, LOW(wEnemy8)
+	ld l, LOW(wObj8)
 	ld a, [hli]
 	rra
 	jr nc, .got_enemy
@@ -195,7 +195,7 @@ Func_640e5: ; 640e5 (19:40e5)
 	rrca
 	and $7f
 	ld [de], a
-	ld [hl], e ; ENEMY_UNK_01
+	ld [hl], e ; OBJ_UNK_01
 	inc l
 	ld a, [wccec]
 	dec a
@@ -205,13 +205,13 @@ Func_640e5: ; 640e5 (19:40e5)
 	add a ; *16
 	add a ; *32
 	add d
-	ld [hli], a ; ENEMY_UNK_02
+	ld [hli], a ; OBJ_UNK_02
 	ldh a, [hYPosLo]
-	ld [hli], a ; ENEMY_Y_POS
+	ld [hli], a ; OBJ_Y_POS
 	ldh a, [hYPosHi]
 	ld [hli], a
 	ldh a, [hXPosLo]
-	ld [hli], a ; ENEMY_X_POS
+	ld [hli], a ; OBJ_X_POS
 	ldh a, [hXPosHi]
 	ld [hli], a
 
@@ -227,60 +227,60 @@ Func_640e5: ; 640e5 (19:40e5)
 	pop de
 
 	ld a, [hli]
-	ld [de], a ; ENEMY_UNK_07
+	ld [de], a ; OBJ_UNK_07
 	inc e
 	ld a, [hli]
-	ld [de], a ; ENEMY_INTERACTION_TYPE
+	ld [de], a ; OBJ_INTERACTION_TYPE
 	inc e
 	ld a, [hli]
-	ld [de], a ; ENEMY_UNK_09
+	ld [de], a ; OBJ_UNK_09
 	inc e
 	xor a
-	ld [de], a ; ENEMY_UNK_0A
+	ld [de], a ; OBJ_UNK_0A
 
 	ld a, e
-	add ENEMY_UNK_0F - ENEMY_UNK_0A
+	add OBJ_UNK_0F - OBJ_UNK_0A
 	ld e, a
 	xor a
-	ld [de], a ; ENEMY_UNK_0F
+	ld [de], a ; OBJ_UNK_0F
 	inc e
-	ld a, [hli] ; ENEMY_UNK_10
+	ld a, [hli] ; OBJ_UNK_10
 	ld [de], a
 	inc e
 	ld a, [hli]
 	ld [de], a
 
 	ld a, e
-	add ENEMY_UNK_14 - (ENEMY_UNK_10 + 1)
+	add OBJ_UNK_14 - (OBJ_UNK_10 + 1)
 	ld e, a
 	ld a, $7f
-	ld [de], a ; ENEMY_UNK_14
+	ld [de], a ; OBJ_UNK_14
 
 	ld a, e
-	add ENEMY_UNK_1A - ENEMY_UNK_14
+	add OBJ_UNK_1A - OBJ_UNK_14
 	ld e, a
 	ld a, $21
-	ld [de], a ; ENEMY_UNK_1A
+	ld [de], a ; OBJ_UNK_1A
 	inc e
 	xor a
-	ld [de], a ; ENEMY_UNK_1B
+	ld [de], a ; OBJ_UNK_1B
 	inc e
 	ld a, $82
-	ld [de], a ; ENEMY_UNK_1C
+	ld [de], a ; OBJ_UNK_1C
 	inc e
 	inc e
 	ld a, [hli]
-	ld [de], a ; ENEMY_UNK_1E
+	ld [de], a ; OBJ_UNK_1E
 	inc e
 	ld a, [hli]
 	ld [de], a
 
 	ld a, e
-	sub (ENEMY_UNK_1E + 1) - ENEMY_UNK_00
+	sub (OBJ_UNK_1E + 1) - OBJ_UNK_00
 	ld e, a
 	ld a, [hl]
 	or $11
-	ld [de], a ; ENEMY_UNK_00
+	ld [de], a ; OBJ_UNK_00
 	ret
 ; 0x64187
 
