@@ -860,14 +860,9 @@ SetState_Slipping: ; 19c81 (6:5c81)
 	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
 	ld [wca89], a
-	ld a, $04
-	ld [wca7b], a
-	ld a, $40
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
-	load_oam_ptr OAM_14000
+	load_gfx WarioIdleGfx
+	call LoadWarioGfx
+	load_oam OAM_14000
 
 	xor a
 	ld [wFrameDuration], a
@@ -877,10 +872,10 @@ SetState_Slipping: ; 19c81 (6:5c81)
 	ld [wWarioStateCycles], a
 	and a
 	jr nz, .asm_19ccd
-	load_frameset_ptr Frameset_14252
+	load_frameset Frameset_14252
 	jr .got_frameset
 .asm_19ccd
-	load_frameset_ptr Frameset_1425f
+	load_frameset Frameset_1425f
 .got_frameset
 	update_anim_1
 	ret
@@ -912,22 +907,17 @@ UpdateState_Slipping: ; 19ce7 (6:5ce7)
 	add 2
 	ld [wWarioStateCycles], a
 
-	ld a, $04
-	ld [wca7b], a
-	ld a, $40
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
-	load_oam_ptr OAM_14a82
+	load_gfx WarioIdleGfx
+	call LoadWarioGfx
+	load_oam OAM_14a82
 
 	ld a, [wWarioStateCycles]
 	and $01
 	jr nz, .asm_19d56
-	load_frameset_ptr Frameset_14cbe
+	load_frameset Frameset_14cbe
 	jr .asm_19daf
 .asm_19d56
-	load_frameset_ptr Frameset_14cc5
+	load_frameset Frameset_14cc5
 	jr .asm_19daf
 
 .asm_19d62
@@ -938,22 +928,17 @@ UpdateState_Slipping: ; 19ce7 (6:5ce7)
 	ld a, b
 	add $02
 	ld [wWarioStateCycles], a
-	ld a, $04
-	ld [wca7b], a
-	ld a, $48
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
-	load_oam_ptr OAM_1426c
+	load_gfx WarioWalkGfx
+	call LoadWarioGfx
+	load_oam OAM_1426c
 
 	ld a, [wWarioStateCycles]
 	and $01
 	jr nz, .asm_19da3
-	load_frameset_ptr Frameset_149b4
+	load_frameset Frameset_149b4
 	jr .asm_19daf
 .asm_19da3
-	load_frameset_ptr Frameset_149c5
+	load_frameset Frameset_149c5
 	jr .asm_19daf
 
 .asm_19daf
@@ -1055,14 +1040,9 @@ Func_19e89: ; 19e89 (6:5e89)
 	ld [wca9a], a
 	inc a
 	ld [wca8b], a
-	ld a, $04
-	ld [wca7b], a
-	ld a, $48
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
-	load_oam_ptr OAM_1426c
+	load_gfx WarioWalkGfx
+	call LoadWarioGfx
+	load_oam OAM_1426c
 
 	xor a
 	ld [wFrameDuration], a
@@ -1070,10 +1050,10 @@ Func_19e89: ; 19e89 (6:5e89)
 	ld a, [wWarioStateCycles]
 	cp $01
 	jr z, .asm_19ed7
-	load_frameset_ptr Frameset_14a38
+	load_frameset Frameset_14a38
 	jr .got_frameset
 .asm_19ed7
-	load_frameset_ptr Frameset_14a3b
+	load_frameset Frameset_14a3b
 .got_frameset
 	update_anim_1
 	ret
@@ -1230,14 +1210,9 @@ SetState_SandFalling: ; 1a0e8 (6:60e8)
 ;	fallthrough
 
 Func_1a12a: ; 1a12a (6:612a)
-	ld a, $04
-	ld [wca7b], a
-	ld a, $78
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
-	load_oam_ptr OAM_15955
+	load_gfx WarioAirborneGfx
+	call LoadWarioGfx
+	load_oam OAM_15955
 ;	fallthrough
 
 Func_1a14b: ; 1a14b (6:614b)
@@ -1247,10 +1222,10 @@ Func_1a14b: ; 1a14b (6:614b)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1a164
-	load_frameset_ptr Frameset_15f94
+	load_frameset Frameset_15f94
 	jr .asm_1a16e
 .asm_1a164
-	load_frameset_ptr Frameset_15f97
+	load_frameset Frameset_15f97
 .asm_1a16e
 	update_anim_1
 	ret
@@ -1331,24 +1306,19 @@ SetState_SandIdling: ; 1a236 (6:6236)
 	xor a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
-	ld a, $04
-	ld [wca7b], a
-	ld a, $40
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
-	load_oam_ptr OAM_14000
+	load_gfx WarioIdleGfx
+	call LoadWarioGfx
+	load_oam OAM_14000
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1a27c
-	load_frameset_ptr Frameset_14252
+	load_frameset Frameset_14252
 	jr .asm_1a286
 .asm_1a27c
-	load_frameset_ptr Frameset_1425f
+	load_frameset Frameset_1425f
 .asm_1a286
 	update_anim_1
 	ret
@@ -1426,24 +1396,19 @@ SetState_SandTurning: ; 1a330 (6:6330)
 	ld [wca68], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld a, $04
-	ld [wca7b], a
-	ld a, $40
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
-	load_oam_ptr OAM_14a82
+	load_gfx WarioIdleGfx
+	call LoadWarioGfx
+	load_oam OAM_14a82
 
 	ld a, [wDirection]
 	xor $1 ; switch direction
 	ld [wDirection], a
 	and a
 	jr nz, .asm_1a37a
-	load_frameset_ptr Frameset_14cbe
+	load_frameset Frameset_14cbe
 	jr .asm_1a384
 .asm_1a37a
-	load_frameset_ptr Frameset_14cc5
+	load_frameset Frameset_14cc5
 .asm_1a384
 	update_anim_1
 	ret
@@ -1487,19 +1452,14 @@ SetState_LadderClimbing: ; 1a3bb (6:63bb)
 	ld [wca72], a
 	ld a, $e5
 	ld [wca6f], a
-	ld a, $04
-	ld [wca7b], a
-	ld a, $68
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
-	load_oam_ptr OAM_155cc
+	load_gfx WarioLadderGfx
+	call LoadWarioGfx
+	load_oam OAM_155cc
 
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	load_frameset_ptr Frameset_158d6
+	load_frameset Frameset_158d6
 	update_anim_1
 	ret
 ; 0x1a436
@@ -1552,25 +1512,20 @@ SetState_LadderIdling: ; 1a49e (6:649e)
 	ld [wca72], a
 	ld a, $e5
 	ld [wca6f], a
-	ld a, $04
-	ld [wca7b], a
-	ld a, $68
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
-	load_oam_ptr OAM_155cc
+	load_gfx WarioLadderGfx
+	call LoadWarioGfx
+	load_oam OAM_155cc
 
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1a511
-	load_frameset_ptr Frameset_15900
+	load_frameset Frameset_15900
 .asm_1a501
 	update_anim_1
 	ret
 
 .asm_1a511
-	load_frameset_ptr Frameset_158fd
+	load_frameset Frameset_158fd
 	jr .asm_1a501
 ; 0x1a51d
 
@@ -1711,7 +1666,7 @@ SetState_LadderSliding: ; 1a66b (6:666b)
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	load_frameset_ptr Frameset_15945
+	load_frameset Frameset_15945
 	update_anim_1
 	ret
 ; 0x1a6b6
@@ -1780,14 +1735,9 @@ SetState_GrabSlipping: ; 1a773 (6:6773)
 	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
 	ld [wca89], a
-	ld a, $04
-	ld [wca7b], a
-	ld a, $48
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
-	load_oam_ptr OAM_1426c
+	load_gfx WarioWalkGfx
+	call LoadWarioGfx
+	load_oam OAM_1426c
 
 	xor a
 	ld [wFrameDuration], a
@@ -1796,10 +1746,10 @@ SetState_GrabSlipping: ; 1a773 (6:6773)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1a7bc
-	load_frameset_ptr Frameset_14a20
+	load_frameset Frameset_14a20
 	jr .asm_1a7c6
 .asm_1a7bc
-	load_frameset_ptr Frameset_14a23
+	load_frameset Frameset_14a23
 .asm_1a7c6
 	update_anim_1
 	ret
@@ -1891,14 +1841,9 @@ SetState_Sleeping: ; 1ac10 (6:6c10)
 	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld a, $04
-	ld [wca7b], a
-	ld a, $40
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
-	load_oam_ptr OAM_14000
+	load_gfx WarioIdleGfx
+	call LoadWarioGfx
+	load_oam OAM_14000
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -1906,10 +1851,10 @@ SetState_Sleeping: ; 1ac10 (6:6c10)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1ac59
-	load_frameset_ptr Frameset_1421c
+	load_frameset Frameset_1421c
 	jr .got_frameset
 .asm_1ac59
-	load_frameset_ptr Frameset_14225
+	load_frameset Frameset_14225
 .got_frameset
 	update_anim_1
 	ret
@@ -1936,10 +1881,10 @@ UpdateState_Sleeping: ; 1ac73 (6:6c73)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1acb6
-	load_frameset_ptr Frameset_1422e
+	load_frameset Frameset_1422e
 	jr .asm_1acc0
 .asm_1acb6
-	load_frameset_ptr Frameset_14237
+	load_frameset Frameset_14237
 .asm_1acc0
 	update_anim_1
 	ret
@@ -1961,10 +1906,10 @@ UpdateState_Sleeping: ; 1ac73 (6:6c73)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1ad00
-	load_frameset_ptr Frameset_14240
+	load_frameset Frameset_14240
 	jr .asm_1acc0
 .asm_1ad00
-	load_frameset_ptr Frameset_14249
+	load_frameset Frameset_14249
 	jr .asm_1acc0
 
 .asm_1ad0c
@@ -2000,10 +1945,10 @@ SetState_LadderScratching: ; 1ad21 (6:6d21)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1ad63
-	load_frameset_ptr Frameset_15903
+	load_frameset Frameset_15903
 	jr .asm_1ad6d
 .asm_1ad63
-	load_frameset_ptr Frameset_15924
+	load_frameset Frameset_15924
 .asm_1ad6d
 	update_anim_1
 	ret
@@ -2031,22 +1976,17 @@ SetState_FenceShakeSliding: ; 1ad9a (6:6d9a)
 	ld a, $03
 	ld [wca9b], a
 
-	ld a, $04
-	ld [wca7b], a
-	ld a, $40
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
-	load_oam_ptr OAM_14a82
+	load_gfx WarioIdleGfx
+	call LoadWarioGfx
+	load_oam OAM_14a82
 
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1ade1
-	load_frameset_ptr Frameset_14d0b
+	load_frameset Frameset_14d0b
 	jr .asm_1adeb
 .asm_1ade1
-	load_frameset_ptr Frameset_14d10
+	load_frameset Frameset_14d10
 .asm_1adeb
 	update_anim_1
 	ret
@@ -2063,7 +2003,7 @@ UpdateState_FenceShakeSliding: ; 1adfb (6:6dfb)
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	load_frameset_ptr Frameset_14d15
+	load_frameset Frameset_14d15
 	update_anim_1
 
 	ld hl, wWarioStateCounter
@@ -2105,19 +2045,14 @@ SetState_FenceMovingVertical: ; 1ae68 (6:6e68)
 	ld [wca72], a
 	ld a, $e5
 	ld [wca6f], a
-	ld a, $04
-	ld [wca7b], a
-	ld a, $68
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
-	load_oam_ptr OAM_155cc
+	load_gfx WarioLadderGfx
+	call LoadWarioGfx
+	load_oam OAM_155cc
 
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	load_frameset_ptr Frameset_158d6
+	load_frameset Frameset_158d6
 	update_anim_1
 	ret
 ; 0x1aed0
@@ -2164,22 +2099,17 @@ SetState_FenceIdling: ; 1af22 (6:6f22)
 	ld [wca72], a
 	ld a, $e5
 	ld [wca6f], a
-	ld a, $04
-	ld [wca7b], a
-	ld a, $68
-	ld [wca7c], a
-	ld a, $00
-	ld [$ca7d], a
-	call Func_15b0
-	load_oam_ptr OAM_155cc
+	load_gfx WarioLadderGfx
+	call LoadWarioGfx
+	load_oam OAM_155cc
 
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1af7e
-	load_frameset_ptr Frameset_15900
+	load_frameset Frameset_15900
 	jr .asm_1af88
 .asm_1af7e
-	load_frameset_ptr Frameset_158fd
+	load_frameset Frameset_158fd
 .asm_1af88
 	update_anim_1
 	ret
@@ -2223,10 +2153,10 @@ SetState_FenceMovingHorizontal: ; 1afab (6:6fab)
 	and a
 	jr nz, .d_right
 .d_left
-	load_frameset_ptr Frameset_158f2
+	load_frameset Frameset_158f2
 	jr .asm_1afff
 .d_right
-	load_frameset_ptr Frameset_158e7
+	load_frameset Frameset_158e7
 .asm_1afff
 	update_anim_1
 	ret
@@ -2276,7 +2206,7 @@ SetState_FenceSliding: ; 1b05e (6:705e)
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	load_frameset_ptr Frameset_15945
+	load_frameset Frameset_15945
 	update_anim_1
 	ret
 ; 0x1b0a9

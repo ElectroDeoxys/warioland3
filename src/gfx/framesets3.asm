@@ -315,7 +315,23 @@ OAM_1dc93f: ; 1dc93f (77:493f)
 	db $80
 ; 0x1dccc0
 
-	INCROM $1dccc0, $1dd230
+Frameset_1dccc0: ; 1dccc0 (77:4cc0)
+	db $00,  8
+	db $01,  9
+	db $02,  7
+	db $03,  7
+	db $ff
+; 0x1dccc9
+
+Frameset_1dccc9: ; 1dccc9 (77:4cc9)
+	db $06,  8
+	db $07,  9
+	db $08,  7
+	db $09,  7
+	db $ff
+; 0x1dccd2
+
+	INCROM $1dccd2, $1dd230
 
 Frameset_1dd230: ; 1dd230 (77:5230)
 	db $03,  2

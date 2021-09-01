@@ -24,7 +24,7 @@ update_anim_3: MACRO
 	call_hram UpdateAnimation
 ENDM
 
-load_frameset_ptr: MACRO
+load_frameset: MACRO
 	ld a, HIGH(\1)
 	ld [wFramesetPtr + 0], a
 	ld a, LOW(\1)
@@ -36,11 +36,20 @@ frame_oam: MACRO
 	db \1, \2, \3, \4
 ENDM
 
-load_oam_ptr: MACRO
+load_oam: MACRO
 	ld a, BANK(\1)
 	ld [wOAMBank], a
 	ld a, HIGH(\1)
 	ld [wOAMPtr + 0], a
 	ld a, LOW(\1)
 	ld [wOAMPtr + 1], a
+ENDM
+
+load_gfx: MACRO
+	ld a, BANK(\1)
+	ld [wDMASourceBank], a
+	ld a, HIGH(\1)
+	ld [wDMASourcePtr + 0], a
+	ld a, LOW(\1)
+	ld [wDMASourcePtr + 1], a
 ENDM

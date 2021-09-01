@@ -66,7 +66,7 @@ VBlank: ; 61 (0:61)
 	sramswitch
 	pop af
 	bankswitch
-	ld a, $01
+	ld a, TRUE
 	ld [wVBlankFuncExecuted], a
 .skip
 	pop hl
@@ -1775,9 +1775,9 @@ Func_c19: ; c19 (0:c19)
 ; 0xc4c
 
 Func_c4c: ; c4c (0:c4c)
-	ld a, [wc1a0]
+	ld a, [wIsDMATransferPending]
 	and a
-	jr nz, .asm_c72
+	jr nz, .dma_transfer
 
 	xor a
 	ld [MBC5SRamBank], a
@@ -1795,29 +1795,30 @@ Func_c4c: ; c4c (0:c4c)
 	ld bc, wce01
 	jp wVBlankFunc + $10
 
-.asm_c72
-	ld hl, wc1a1
+.dma_transfer
+	ld hl, wPendingDMASourceBank
 	ld a, [hli]
 	ld [MBC5RomBank], a
 	ld c, LOW(rHDMA1)
-	ld a, [hli]
+	ld a, [hli] ; wPendingDMASourcePtr
 	ld [$ff00+c], a ; rHDMA1
 	inc c
 	ld a, [hli]
 	ld [$ff00+c], a ; rHDMA2
-	ld a, [hli]
+	ld a, [hli] ; wPendingDMADestinationBank
 	ldh [rVBK], a
 	inc c
-	ld a, [hli]
+	ld a, [hli] ; wPendingDMADestinationPtr
 	ld [$ff00+c], a ; rHDMA3
 	inc c
 	ld a, [hli]
 	ld [$ff00+c], a ; rHDMA4
 	inc c
-	ld a, [hl]
+	ld a, [hl] ; wPendingDMALength
 	ld [$ff00+c], a ; rHDMA5
+
 	xor a
-	ld [wc1a0], a
+	ld [wIsDMATransferPending], a
 	ld hl, wc0bc
 	ld a, [wTempSCY]
 	add [hl]
@@ -1826,6 +1827,7 @@ Func_c4c: ; c4c (0:c4c)
 	ldh [rSCX], a
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
+
 	xor a
 	ld [wce00], a
 	ld [wce69], a
@@ -3013,24 +3015,24 @@ Func_1570: ; 1570 (0:1570)
 	jp Func_1070
 ; 0x15b0
 
-Func_15b0: ; 15b0 (0:15b0)
-	ld a, [wca7b]
-	ld [wc1a1], a
-	ld a, [wca7c + 0]
-	ld [wc1a2 + 0], a
-	ld a, [wca7c + 1]
-	ld [wc1a2 + 1], a
+LoadWarioGfx: ; 15b0 (0:15b0)
+	ld a, [wDMASourceBank]
+	ld [wPendingDMASourceBank], a
+	ld a, [wDMASourcePtr + 0]
+	ld [wPendingDMASourcePtr + 0], a
+	ld a, [wDMASourcePtr + 1]
+	ld [wPendingDMASourcePtr + 1], a
 
-	ld a, $80
-	ld [wc1a5], a
-	ld a, $00
-	ld [wc1a6], a
-	ld a, $00
-	ld [wc1a4], a
-	ld a, $7f
-	ld [wc1a7], a
-	ld a, $01
-	ld [wc1a0], a
+	ld a, HIGH(v0Tiles0)
+	ld [wPendingDMADestinationPtr + 0], a
+	ld a, LOW(v0Tiles0)
+	ld [wPendingDMADestinationPtr + 1], a
+	ld a, BANK("VRAM0")
+	ld [wPendingDMADestinationBank], a
+	ld a, 127
+	ld [wPendingDMALength], a
+	ld a, TRUE
+	ld [wIsDMATransferPending], a
 	ret
 ; 0x15dc
 

@@ -174,7 +174,7 @@ Func_80aa: ; 80aa (2:40aa)
 	ld a, [wc1aa]
 	and $0c
 	jr z, .asm_8215
-	ld a, [wc1a0]
+	ld a, [wIsDMATransferPending]
 	and a
 	jr nz, .asm_8215
 	xor a
@@ -592,7 +592,7 @@ Func_846e: ; 846e (2:446e)
 	ld [wFrameDuration], a
 	ld [wca68], a
 
-	load_frameset_ptr Frameset_14d18
+	load_frameset Frameset_14d18
 	update_anim_1
 
 .asm_85a7
@@ -820,7 +820,7 @@ Func_8747: ; 8747 (2:4747)
 .asm_87e2
 	ld a, [wca5d]
 	ld [wSpawnPointID], a
-	call Func_15b0
+	call LoadWarioGfx
 
 .load_layout
 	call LoadLevelLayoutAndObjects
@@ -8686,7 +8686,7 @@ Func_baee: ; baee (2:7aee)
 	INCROM $bb2d, $bb85
 
 Func_bb85: ; bb85 (2:7b85)
-	ld a, [wc1a0]
+	ld a, [wIsDMATransferPending]
 	and a
 	ret nz
 	ld b, $01

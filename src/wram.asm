@@ -348,25 +348,22 @@ wc18e:: ; c18e
 wc19f:: ; c19f
 	ds $1
 
-wc1a0:: ; c1a0
+wIsDMATransferPending:: ; c1a0
 	ds $1
 
-wc1a1:: ; c1a1
+wPendingDMASourceBank:: ; c1a1
 	ds $1
 
-wc1a2:: ; c1a2
+wPendingDMASourcePtr:: ; c1a2
 	ds $2
 
-wc1a4:: ; c1a3
+wPendingDMADestinationBank:: ; c1a3
 	ds $1
 
-wc1a5:: ; c1a4
-	ds $1
+wPendingDMADestinationPtr:: ; c1a4
+	ds $2
 
-wc1a6:: ; c1a5
-	ds $1
-
-wc1a7:: ; c1a6
+wPendingDMALength:: ; c1a6
 	ds $1
 
 wAnimationHasFinished:: ; c1a8
@@ -642,10 +639,10 @@ wca78:: ; ca78
 wWarioPalsPtr:: ; ca79
 	ds $2
 
-wca7b:: ; ca7b
+wDMASourceBank:: ; ca7b
 	ds $1
 
-wca7c:: ; ca7c
+wDMASourcePtr:: ; ca7c
 	ds $2
 
 wOAMBank:: ; ca7e

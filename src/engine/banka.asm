@@ -112,10 +112,10 @@ UpdateState_OnFire: ; 280a6 (a:40a6)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_280f6
-	load_frameset_ptr Frameset_16b14
+	load_frameset Frameset_16b14
 	jr .asm_28100
 .asm_280f6
-	load_frameset_ptr Frameset_16b1d
+	load_frameset Frameset_16b1d
 .asm_28100
 	update_anim_1
 
@@ -185,12 +185,12 @@ SetState_Hot: ; 28154 (a:4154)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_281b5
-	load_frameset_ptr Frameset_16b26
+	load_frameset Frameset_16b26
 .asm_281a5
 	update_anim_1
 	ret
 .asm_281b5
-	load_frameset_ptr Frameset_16b2f
+	load_frameset Frameset_16b2f
 	jr .asm_281a5
 ; 0x281c1
 
@@ -214,10 +214,10 @@ UpdateState_OnFireAirborne: ; 281c1 (a:41c1)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_28201
-	load_frameset_ptr Frameset_16b14
+	load_frameset Frameset_16b14
 	jr .asm_2820b
 .asm_28201
-	load_frameset_ptr Frameset_16b1d
+	load_frameset Frameset_16b1d
 .asm_2820b
 	update_anim_1
 
@@ -326,22 +326,17 @@ UpdateState_Hot: ; 2827a (a:427a)
 	ld [wWarioStateCycles], a
 	ld hl, Pals_c820
 	call SetWarioPal
-	ld a, $09
-	ld [wca7b], a
-	ld a, $48
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
-	load_oam_ptr OAM_16b6c
+	load_gfx WarioBurntGfx
+	call LoadWarioGfx
+	load_oam OAM_16b6c
 
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_28366
-	load_frameset_ptr Frameset_16e47
+	load_frameset Frameset_16e47
 	jr .asm_28370
 .asm_28366
-	load_frameset_ptr Frameset_16e72
+	load_frameset Frameset_16e72
 .asm_28370
 	update_anim_1
 	ret
@@ -494,15 +489,10 @@ SetState_FlatAirborne: ; 28435 (a:4435)
 	ld [wca71], a
 	ld a, $0b
 	ld [wca72], a
-	ld a, $09
-	ld [wca7b], a
-	ld a, $50
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
-	load_oam_ptr OAM_16e9d
-	load_frameset_ptr Frameset_171bd
+	load_gfx WarioSlideGfx
+	call LoadWarioGfx
+	load_oam OAM_16e9d
+	load_frameset Frameset_171bd
 	update_anim_1
 	ret
 ; 0x28511
@@ -548,7 +538,7 @@ UpdateState_GettingFlatAirborne: ; 28511 (a:4511)
 	ld a, $0b
 	ld [wca72], a
 
-	load_frameset_ptr Frameset_1715f
+	load_frameset Frameset_1715f
 	update_anim_1
 	ret
 ; 0x28599
@@ -587,7 +577,7 @@ SetState_FlatIdling: ; 285b8 (a:45b8)
 	ld a, $0b
 	ld [wca72], a
 
-	load_frameset_ptr Frameset_1718b
+	load_frameset Frameset_1718b
 	update_anim_1
 	ret
 ; 0x28601
@@ -617,7 +607,7 @@ SetState_FlatWalking: ; 28628 (a:4628)
 	ld [wJumpVelTable], a
 	ld [wJumpVelIndex], a
 
-	load_frameset_ptr Frameset_17175
+	load_frameset Frameset_17175
 	update_anim_1
 
 	ld a, [wJoypadDown]
@@ -681,7 +671,7 @@ SetState_FlatJumping: ; 286d1 (a:46d1)
 .asm_286fe
 	ld [wJumpVelTable], a
 
-	load_frameset_ptr Frameset_17190
+	load_frameset Frameset_17190
 	update_anim_1
 
 	ld a, [wcac9]
@@ -724,12 +714,12 @@ SetState_FlatFalling: ; 28757 (a:4757)
 	and a
 	jr nz, .asm_28796
 
-	load_frameset_ptr Frameset_171b8
+	load_frameset Frameset_171b8
 .asm_28786
 	update_anim_1
 	ret
 .asm_28796
-	load_frameset_ptr Frameset_17186
+	load_frameset Frameset_17186
 	jr .asm_28786
 ; 0x287a2
 
@@ -756,7 +746,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 	ld [wFrameDuration], a
 	ld [wca68], a
 
-	load_frameset_ptr Frameset_17190
+	load_frameset Frameset_17190
 	update_anim_1
 
 	ld a, $01
@@ -827,10 +817,10 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 	ld [wDirection], a
 	and a
 	jr nz, .asm_2888e
-	load_frameset_ptr Frameset_171b8
+	load_frameset Frameset_171b8
 	jr .asm_28898
 .asm_2888e
-	load_frameset_ptr Frameset_17186
+	load_frameset Frameset_17186
 .asm_28898
 	update_anim_1
 
@@ -900,7 +890,7 @@ SetState_FlatSinking: ; 28900 (a:4900)
 	ld [wFrameDuration], a
 	ld [wca68], a
 
-	load_frameset_ptr Frameset_1719a
+	load_frameset Frameset_1719a
 	update_anim_1
 	ret
 ; 0x2894e
@@ -994,7 +984,7 @@ Func_289c5: ; 289c5 (a:49c5)
 	ld [wFrameDuration], a
 	ld [wca68], a
 
-	load_frameset_ptr Frameset_171a3
+	load_frameset Frameset_171a3
 	update_anim_1
 	ret
 ; 0x28a39
@@ -1075,12 +1065,12 @@ SetState_BallOString: ; 28ad5 (a:4ad5)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_28b2a
-	load_frameset_ptr Frameset_1741f
+	load_frameset Frameset_1741f
 .asm_28b1a
 	update_anim_1
 	ret
 .asm_28b2a
-	load_frameset_ptr Frameset_173fe
+	load_frameset Frameset_173fe
 	jr .asm_28b1a
 ; 0x28b36
 
@@ -1149,12 +1139,12 @@ Func_28bd5: ; 28bd5 (a:4bd5)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_28c06
-	load_frameset_ptr Frameset_1741f
+	load_frameset Frameset_1741f
 .asm_28bf6
 	update_anim_1
 	ret
 .asm_28c06
-	load_frameset_ptr Frameset_173fe
+	load_frameset Frameset_173fe
 	jr .asm_28bf6
 
 .asm_28c12
@@ -1228,7 +1218,7 @@ SetState_BallOStringKnockBack: ; 28c94 (a:4c94)
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	load_frameset_ptr Frameset_1742a
+	load_frameset Frameset_1742a
 	update_anim_1
 	ret
 ; 0x28ceb
@@ -1282,7 +1272,7 @@ UpdateState_BallOStringKnockBack: ; 28ceb (a:4ceb)
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	load_frameset_ptr Frameset_17409
+	load_frameset Frameset_17409
 	update_anim_1
 	ret
 ; 0x28d92
@@ -1316,15 +1306,10 @@ UpdateState_GettingUnwrappedInString: ; 28d92 (a:4d92)
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	ld a, $04
-	ld [wca7b], a
-	ld a, $50
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
-	load_oam_ptr OAM_17bbc
-	load_frameset_ptr Frameset_17ce2
+	load_gfx WarioDizzyGfx
+	call LoadWarioGfx
+	load_oam OAM_17bbc
+	load_frameset Frameset_17ce2
 	update_anim_1
 	ret
 ; 0x28e1a
@@ -1349,12 +1334,12 @@ SetState_FatBumping: ; 28e31 (a:4e31)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_28e64
-	load_frameset_ptr Frameset_178fc
+	load_frameset Frameset_178fc
 .asm_28e54
 	update_anim_1
 	ret
 .asm_28e64
-	load_frameset_ptr Frameset_17905
+	load_frameset Frameset_17905
 	jr .asm_28e54
 ; 0x28e70
 
@@ -1421,12 +1406,12 @@ SetState_FatIdling: ; 28eeb (a:4eeb)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_28f2d
-	load_frameset_ptr Frameset_1781c
+	load_frameset Frameset_1781c
 .asm_28f1d
 	update_anim_1
 	ret
 .asm_28f2d
-	load_frameset_ptr Frameset_1781f
+	load_frameset Frameset_1781f
 	jr .asm_28f1d
 ; 0x28f39
 
@@ -1472,12 +1457,12 @@ SetState_FatWalking: ; 28f7d (a:4f7d)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_28fb4
-	load_frameset_ptr Frameset_17822
+	load_frameset Frameset_17822
 .asm_28fa4
 	update_anim_1
 	ret
 .asm_28fb4
-	load_frameset_ptr Frameset_1782b
+	load_frameset Frameset_1782b
 	jr .asm_28fa4
 ; 0x28fc0
 
@@ -1526,12 +1511,12 @@ SetState_FatTurning: ; 29035 (a:5035)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29061
-	load_frameset_ptr Frameset_178f3
+	load_frameset Frameset_178f3
 .asm_29051
 	update_anim_1
 	ret
 .asm_29061
-	load_frameset_ptr Frameset_178ea
+	load_frameset Frameset_178ea
 	jr .asm_29051
 ; 0x2906d
 
@@ -1561,10 +1546,10 @@ Func_290a1: ; 290a1 (a:50a1)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_290ca
-	load_frameset_ptr Frameset_17834
+	load_frameset Frameset_17834
 	jr .asm_290d4
 .asm_290ca
-	load_frameset_ptr Frameset_17839
+	load_frameset Frameset_17839
 .asm_290d4
 	jr SetState_FatAirborne
 
@@ -1580,10 +1565,10 @@ Func_290d6: ; 290d6 (a:50d6)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_290fa
-	load_frameset_ptr Frameset_1783e
+	load_frameset Frameset_1783e
 	jr SetState_FatAirborne
 .asm_290fa
-	load_frameset_ptr Frameset_17841
+	load_frameset Frameset_17841
 ;	fallthrough
 
 SetState_FatAirborne: ; 29104 (a:5104)
@@ -1627,10 +1612,10 @@ UpdateState_FatAirborne: ; 29123 (a:5123)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29184
-	load_frameset_ptr Frameset_1783e
+	load_frameset Frameset_1783e
 	jr .asm_2918e
 .asm_29184
-	load_frameset_ptr Frameset_17841
+	load_frameset Frameset_17841
 .asm_2918e
 	update_anim_1
 
@@ -1688,10 +1673,10 @@ SetState_FatLanding: ; 291ff (a:51ff)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29229
-	load_frameset_ptr Frameset_17872
+	load_frameset Frameset_17872
 	jr .asm_29233
 .asm_29229
-	load_frameset_ptr Frameset_17887
+	load_frameset Frameset_17887
 .asm_29233
 	update_anim_1
 	ret
@@ -1737,10 +1722,10 @@ Func_2926a: ; 2926a (a:526a)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_292cb
-	load_frameset_ptr Frameset_17872
+	load_frameset Frameset_17872
 	jr .asm_292d5
 .asm_292cb
-	load_frameset_ptr Frameset_17887
+	load_frameset Frameset_17887
 .asm_292d5
 	update_anim_1
 	ret
@@ -1829,10 +1814,10 @@ SetState_FatRecovering: ; 29363 (a:5363)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_2939f
-	load_frameset_ptr Frameset_17844
+	load_frameset Frameset_17844
 	jr .asm_293a9
 .asm_2939f
-	load_frameset_ptr Frameset_1785b
+	load_frameset Frameset_1785b
 .asm_293a9
 	update_anim_1
 	ret
@@ -1929,10 +1914,10 @@ UpdateState_ElectricStart: ; 293d0 (a:53d0)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_294a5
-	load_frameset_ptr Frameset_17b8d
+	load_frameset Frameset_17b8d
 	jr .asm_294af
 .asm_294a5
-	load_frameset_ptr Frameset_17b7c
+	load_frameset Frameset_17b7c
 .asm_294af
 	update_anim_1
 	ret
@@ -2125,10 +2110,10 @@ UpdateState_Electric: ; 294bf (a:54bf)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29658
-	load_frameset_ptr Frameset_17b9e
+	load_frameset Frameset_17b9e
 	jr .asm_29662
 .asm_29658
-	load_frameset_ptr Frameset_17bad
+	load_frameset Frameset_17bad
 .asm_29662
 	update_anim_1
 	ret
@@ -2179,23 +2164,18 @@ SetState_TurningInvisible: ; 29689 (a:5689)
 	ld hl, Pals_c800
 	call SetWarioPal
 
-	ld a, $04
-	ld [wca7b], a
-	ld a, $50
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
+	load_gfx WarioDizzyGfx
+	call LoadWarioGfx
 
-	load_oam_ptr OAM_17cf7
+	load_oam OAM_17cf7
 
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29714
-	load_frameset_ptr Frameset_17e1b
+	load_frameset Frameset_17e1b
 	jr .asm_2971e
 .asm_29714
-	load_frameset_ptr Frameset_17e3a
+	load_frameset Frameset_17e3a
 .asm_2971e
 	update_anim_1
 	ret
@@ -2260,29 +2240,18 @@ SetState_PuffyInflating: ; 2975e (a:575e)
 	ld [wFrameDuration], a
 	ld [wca68], a
 
-	ld a, $09
-	ld [wca7b], a
-	ld a, $70
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
+	load_gfx WarioPuffyGfx
+	call LoadWarioGfx
 
-	load_oam_ptr OAM_1dc93f
+	load_oam OAM_1dc93f
 
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_297fb
-	ld a, $4c
-	ld [wFramesetPtr], a
-	ld a, $c0
-	ld [$ca82], a
+	load_frameset Frameset_1dccc0
 	jr .asm_29805
 .asm_297fb
-	ld a, $4c
-	ld [wFramesetPtr], a
-	ld a, $c9
-	ld [$ca82], a
+	load_frameset Frameset_1dccc9
 .asm_29805
 	ld a, [wOAMBank]
 	ldh [hCallFuncBank], a
@@ -2532,22 +2501,17 @@ SetState_ZombieIdling: ; 299d0 (a:59d0)
 	ld hl, Pals_c890
 	call SetWarioPal
 
-	ld a, $0b
-	ld [wca7b], a
-	ld a, $40
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
-	load_oam_ptr OAM_1fc48b
+	load_gfx WarioZombieGfx
+	call LoadWarioGfx
+	load_oam OAM_1fc48b
 
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29a5a
-	load_frameset_ptr Frameset_1fc8b6
+	load_frameset Frameset_1fc8b6
 	jr .asm_29a64
 .asm_29a5a
-	load_frameset_ptr Frameset_1fc8b9
+	load_frameset Frameset_1fc8b9
 .asm_29a64
 	update_anim_2
 	ret
@@ -2589,10 +2553,10 @@ SetState_ZombieWalking: ; 29ac1 (a:5ac1)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29aec
-	load_frameset_ptr Frameset_1fc870
+	load_frameset Frameset_1fc870
 	jr .asm_29af6
 .asm_29aec
-	load_frameset_ptr Frameset_1fc879
+	load_frameset Frameset_1fc879
 .asm_29af6
 	update_anim_2
 	ret
@@ -2639,10 +2603,10 @@ SetState_ZombieTurning: ; 29b6a (a:5b6a)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29b88
-	load_frameset_ptr Frameset_1fc89d
+	load_frameset Frameset_1fc89d
 	jr .asm_29b92
 .asm_29b88
-	load_frameset_ptr Frameset_1fc894
+	load_frameset Frameset_1fc894
 .asm_29b92
 	update_anim_2
 	ret
@@ -2660,10 +2624,10 @@ Func_29bb9: ; 29bb9 (a:5bb9)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29bcb
-	load_frameset_ptr Frameset_1fc8b0
+	load_frameset Frameset_1fc8b0
 	jr .asm_29bd5
 .asm_29bcb
-	load_frameset_ptr Frameset_1fc8b3
+	load_frameset Frameset_1fc8b3
 
 .asm_29bd5
 	ld a, $01
@@ -2676,10 +2640,10 @@ Func_29be1: ; 29be1 (a:5be1)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29bf3
-	load_frameset_ptr Frameset_1fc8a6
+	load_frameset Frameset_1fc8a6
 	jr .asm_29bfd
 .asm_29bf3
-	load_frameset_ptr Frameset_1fc8ab
+	load_frameset Frameset_1fc8ab
 
 .asm_29bfd
 	xor a
@@ -2733,10 +2697,10 @@ UpdateState_ZombieAirborne: ; 29c29 (a:5c29)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29c7e
-	load_frameset_ptr Frameset_1fc8b0
+	load_frameset Frameset_1fc8b0
 	jr .asm_29c88
 .asm_29c7e
-	load_frameset_ptr Frameset_1fc8b3
+	load_frameset Frameset_1fc8b3
 .asm_29c88
 	update_anim_2
 	ld a, [wWarioState]
@@ -2798,20 +2762,20 @@ SetState_ZombieLanding: ; 29cde (a:5cde)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29d37
-	load_frameset_ptr Frameset_1fc8bc
+	load_frameset Frameset_1fc8bc
 	jr .asm_29d5f
 .asm_29d37
-	load_frameset_ptr Frameset_1fc8d5
+	load_frameset Frameset_1fc8d5
 	jr .asm_29d5f
 
 .asm_29d43
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29d55
-	load_frameset_ptr Frameset_1fc948
+	load_frameset Frameset_1fc948
 	jr .asm_29d5f
 .asm_29d55
-	load_frameset_ptr Frameset_1fc953
+	load_frameset Frameset_1fc953
 .asm_29d5f
 	update_anim_2
 	ret
@@ -2844,10 +2808,10 @@ UpdateState_ZombieLanding: ; 29d6f (a:5d6f)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29db9
-	load_frameset_ptr Frameset_1fc928
+	load_frameset Frameset_1fc928
 	jr .asm_29dc3
 .asm_29db9
-	load_frameset_ptr Frameset_1fc92b
+	load_frameset Frameset_1fc92b
 .asm_29dc3
 	update_anim_2
 	ret
@@ -2891,10 +2855,10 @@ UpdateState_ZombieSlippingThroughFloor: ; 29dd3 (a:5dd3)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29e48
-	load_frameset_ptr Frameset_1fc8ee
+	load_frameset Frameset_1fc8ee
 	jr .asm_29e52
 .asm_29e48
-	load_frameset_ptr Frameset_1fc90b
+	load_frameset Frameset_1fc90b
 .asm_29e52
 	xor a
 	ld [wFrameDuration], a
@@ -2960,10 +2924,10 @@ SetState_ZombieKnockBack: ; 29ea8 (a:5ea8)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29ed9
-	load_frameset_ptr Frameset_1fc92e
+	load_frameset Frameset_1fc92e
 	jr .asm_29ee3
 .asm_29ed9
-	load_frameset_ptr Frameset_1fc93b
+	load_frameset Frameset_1fc93b
 .asm_29ee3
 	update_anim_2
 	ret
@@ -2988,10 +2952,10 @@ SetState_ZombieWrithing: ; 29f0a (a:5f0a)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29f28
-	load_frameset_ptr Frameset_1fc882
+	load_frameset Frameset_1fc882
 	jr .asm_29f32
 .asm_29f28
-	load_frameset_ptr Frameset_1fc88b
+	load_frameset Frameset_1fc88b
 .asm_29f32
 	update_anim_2
 	ret
@@ -3040,17 +3004,12 @@ SetState_BouncyStart: ; 29f59 (a:5f59)
 	ld hl, Pals_c910
 	call SetWarioPal
 
-	ld a, $0b
-	ld [wca7b], a
-	ld a, $48
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
+	load_gfx WarioBouncyGfx
+	call LoadWarioGfx
 
-	load_oam_ptr OAM_1fc95e
+	load_oam OAM_1fc95e
 
-	load_frameset_ptr Frameset_1fcc6c
+	load_frameset Frameset_1fcc6c
 	update_anim_2
 
 	farcall Func_197b1
@@ -3111,7 +3070,7 @@ SetState_BouncyFloor: ; 2a054 (a:6054)
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	load_frameset_ptr Frameset_1fcc5f
+	load_frameset Frameset_1fcc5f
 	update_anim_2
 	ret
 ; 0x2a087
@@ -3165,7 +3124,7 @@ SetState_BouncyAirborne: ; 2a0cb (a:60cb)
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	load_frameset_ptr Frameset_1fcc6c
+	load_frameset Frameset_1fcc6c
 	update_anim_2
 	ret
 ; 0x2a0f9
@@ -3254,7 +3213,7 @@ UpdateState_BouncyAirborne: ; 2a0f9 (a:60f9)
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	load_frameset_ptr Frameset_1fcc75
+	load_frameset Frameset_1fcc75
 	update_anim_2
 	ret
 ; 0x2a1f5
@@ -3299,7 +3258,7 @@ SetState_BouncyUpsideDown: ; 2a21e (a:621e)
 	ld hl, Pals_c910
 	call SetWarioPal
 
-	load_frameset_ptr Frameset_1fcc82
+	load_frameset Frameset_1fcc82
 	update_anim_2
 	ret
 ; 0x2a267
@@ -3333,7 +3292,7 @@ UpdateState_BouncyUpsideDown: ; 2a267 (a:6267)
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	load_frameset_ptr Frameset_1fcc85
+	load_frameset Frameset_1fcc85
 	update_anim_2
 	ret
 ; 0x2a2d3
@@ -3359,10 +3318,10 @@ Func_2a2e7: ; 2a2e7 (a:62e7)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_2a30e
-	load_frameset_ptr Frameset_1fccbf
+	load_frameset Frameset_1fccbf
 	jr .asm_2a318
 .asm_2a30e
-	load_frameset_ptr Frameset_1fccb2
+	load_frameset Frameset_1fccb2
 .asm_2a318
 	xor a
 	ld [wFrameDuration], a
@@ -3372,10 +3331,10 @@ Func_2a2e7: ; 2a2e7 (a:62e7)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_2a333
-	load_frameset_ptr Frameset_1fcca5
+	load_frameset Frameset_1fcca5
 	jr .asm_2a33d
 .asm_2a333
-	load_frameset_ptr Frameset_1fcc98
+	load_frameset Frameset_1fcc98
 .asm_2a33d
 	xor a
 	ld [wFrameDuration], a
@@ -3494,16 +3453,11 @@ UpdateState_CrazySpinning: ; 2a489 (a:6489)
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	ld a, $04
-	ld [wca7b], a
-	ld a, $50
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
-	load_oam_ptr OAM_17bbc
+	load_gfx WarioDizzyGfx
+	call LoadWarioGfx
+	load_oam OAM_17bbc
 
-	load_frameset_ptr Frameset_17ce2
+	load_frameset Frameset_17ce2
 	update_anim_1
 	ret
 ; 0x2a544
@@ -3537,23 +3491,18 @@ SetState_Crazy: ; 2a558 (a:6558)
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	ld a, $0b
-	ld [wca7b], a
-	ld a, $50
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
+	load_gfx WarioCrazyGfx
+	call LoadWarioGfx
 	
-	load_oam_ptr OAM_1fccd5
+	load_oam OAM_1fccd5
 
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_2a5be
-	load_frameset_ptr Frameset_1fcf9f
+	load_frameset Frameset_1fcf9f
 	jr .asm_2a5c8
 .asm_2a5be
-	load_frameset_ptr Frameset_1fcf6e
+	load_frameset Frameset_1fcf6e
 .asm_2a5c8
 	update_anim_2
 	ret
@@ -3590,10 +3539,10 @@ SetState_CrazyTurning: ; 2a61a (a:661a)
 	ld [wDirection], a
 	and a
 	jr nz, .asm_2a63d
-	load_frameset_ptr Frameset_1fcfd0
+	load_frameset Frameset_1fcfd0
 	jr .asm_2a647
 .asm_2a63d
-	load_frameset_ptr Frameset_1fcfd7
+	load_frameset Frameset_1fcfd7
 .asm_2a647
 	update_anim_2
 	ret
@@ -3635,10 +3584,10 @@ SetState_CrazyAirborne: ; 2a680 (a:6680)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_2a6a6
-	load_frameset_ptr Frameset_1fcf9f
+	load_frameset Frameset_1fcf9f
 	jr .asm_2a6b0
 .asm_2a6a6
-	load_frameset_ptr Frameset_1fcf6e
+	load_frameset Frameset_1fcf6e
 .asm_2a6b0
 	update_anim_2
 	ret
@@ -3692,18 +3641,13 @@ SetState_VampireIdling: ; 2a739 (a:6739)
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	ld a, $0b
-	ld [wca7b], a
-	ld a, $60
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
+	load_gfx WarioVampireGfx
+	call LoadWarioGfx
 	ld a, $54
 	ld [wOAMPtr + 0], a
 	ld a, $98
 	ld [wOAMPtr + 1], a
-	load_frameset_ptr Frameset_1fd81c
+	load_frameset Frameset_1fd81c
 	update_anim_2
 	ret
 ; 0x2a77b
@@ -3747,12 +3691,12 @@ SetState_VampireWalking: ; 2a7a8 (a:67a8)
 .asm_2a7d4
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
-	load_frameset_ptr Frameset_1fd825
+	load_frameset Frameset_1fd825
 	jr .asm_2a7f4
 .asm_2a7e5
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
-	load_frameset_ptr Frameset_1fd82e
+	load_frameset Frameset_1fd82e
 .asm_2a7f4
 	update_anim_2
 	ret
@@ -3798,10 +3742,10 @@ SetState_VampireTurning: ; 2a853 (a:6853)
 	ld [wDirection], a
 	and a
 	jr nz, .asm_2a876
-	load_frameset_ptr Frameset_1fd841
+	load_frameset Frameset_1fd841
 	jr .asm_2a880
 .asm_2a876
-	load_frameset_ptr Frameset_1fd83a
+	load_frameset Frameset_1fd83a
 .asm_2a880
 	update_anim_2
 	ret
@@ -3895,13 +3839,8 @@ SetState_BatTransforming: ; 2a951 (a:6951)
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	ld a, $0b
-	ld [wca7b], a
-	ld a, $58
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
+	load_gfx WarioBatGfx
+	call LoadWarioGfx
 	ld a, $50
 	ld [wOAMPtr + 0], a
 	ld a, $31
@@ -3910,10 +3849,10 @@ SetState_BatTransforming: ; 2a951 (a:6951)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_2a998
-	load_frameset_ptr Frameset_1fd40a
+	load_frameset Frameset_1fd40a
 	jr .asm_2a9a2
 .asm_2a998
-	load_frameset_ptr Frameset_1fd479
+	load_frameset Frameset_1fd479
 .asm_2a9a2
 	update_anim_2
 	ret
@@ -3941,10 +3880,10 @@ SetState_BatIdling: ; 2a9c6 (a:69c6)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_2a9ee
-	load_frameset_ptr Frameset_1fd45f
+	load_frameset Frameset_1fd45f
 	jr .asm_2a9f8
 .asm_2a9ee
-	load_frameset_ptr Frameset_1fd46c
+	load_frameset Frameset_1fd46c
 .asm_2a9f8
 	update_anim_2
 	ret
@@ -4030,20 +3969,15 @@ UpdateState_BatIdling: ; 2aa08 (a:6a08)
 	ld [wca68], a
 	ld hl, $4950
 	call SetWarioPal
-	ld a, $0b
-	ld [wca7b], a
-	ld a, $58
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
+	load_gfx WarioBatGfx
+	call LoadWarioGfx
 	ld a, $7f
 	ld [wOAMBank], a
 	ld a, $50
 	ld [wOAMPtr + 0], a
 	ld a, $31
 	ld [wOAMPtr + 1], a
-	load_frameset_ptr Frameset_1fd439
+	load_frameset Frameset_1fd439
 	update_anim_2
 	ret
 ; 0x2ab18
@@ -4122,10 +4056,10 @@ Func_2abc1: ; 2abc1 (a:6bc1)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_2abda
-	load_frameset_ptr Frameset_1fd42c
+	load_frameset Frameset_1fd42c
 	jr .asm_2abe4
 .asm_2abda
-	load_frameset_ptr Frameset_1fd434
+	load_frameset Frameset_1fd434
 .asm_2abe4
 	update_anim_2
 	ret
@@ -4222,22 +4156,17 @@ Func_2ad6a: ; 2ad6a (a:6d6a)
 	ld [wWarioStateCycles], a
 	ld hl, Pals_c800
 	call SetWarioPal
-	ld a, $04
-	ld [wca7b], a
-	ld a, $60
-	ld [wca7c + 0], a
-	ld a, $00
-	ld [wca7c + 1], a
-	call Func_15b0
-	load_oam_ptr OAM_15254
+	load_gfx WarioSwimGfx
+	call LoadWarioGfx
+	load_oam OAM_15254
 
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_2adc8
-	load_frameset_ptr Frameset_155a6
+	load_frameset Frameset_155a6
 	jr .asm_2add2
 .asm_2adc8
-	load_frameset_ptr Frameset_155ab
+	load_frameset Frameset_155ab
 .asm_2add2
 	update_anim_1
 	jp Func_1070
@@ -4373,10 +4302,10 @@ Func_2ae8a: ; 2ae8a (a:6e8a)
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_2af0d
-	load_frameset_ptr Frameset_16b49
+	load_frameset Frameset_16b49
 	jr .asm_2af3f
 .asm_2af0d
-	load_frameset_ptr Frameset_16b1d
+	load_frameset Frameset_16b1d
 	jr .asm_2af3f
 
 .asm_2af19
@@ -4387,10 +4316,10 @@ Func_2ae8a: ; 2ae8a (a:6e8a)
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_2af35
-	load_frameset_ptr Frameset_16b38
+	load_frameset Frameset_16b38
 	jr .asm_2af3f
 .asm_2af35
-	load_frameset_ptr Frameset_16b14
+	load_frameset Frameset_16b14
 .asm_2af3f
 	update_anim_1
 
@@ -4459,10 +4388,10 @@ Func_2afc5: ; 2afc5 (a:6fc5)
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_2afea
-	load_frameset_ptr Frameset_16b38
+	load_frameset Frameset_16b38
 	jr .asm_2b017
 .asm_2afea
-	load_frameset_ptr Frameset_16b14
+	load_frameset Frameset_16b14
 	jr .asm_2b017
 .asm_2aff6
 	ld b, $03
@@ -4470,10 +4399,10 @@ Func_2afc5: ; 2afc5 (a:6fc5)
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_2b00d
-	load_frameset_ptr Frameset_16b49
+	load_frameset Frameset_16b49
 	jr .asm_2b017
 .asm_2b00d
-	load_frameset_ptr Frameset_16b1d
+	load_frameset Frameset_16b1d
 .asm_2b017
 	update_anim_1
 	ret
@@ -4506,10 +4435,10 @@ Func_2b027: ; 2b027 (a:7027)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_2b060
-	load_frameset_ptr Frameset_16b26
+	load_frameset Frameset_16b26
 	jr .asm_2b06a
 .asm_2b060
-	load_frameset_ptr Frameset_16b2f
+	load_frameset Frameset_16b2f
 .asm_2b06a
 	update_anim_1
 	ret
@@ -4530,7 +4459,7 @@ Func_2b07a: ; 2b07a (a:707a)
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	load_frameset_ptr Frameset_16b26
+	load_frameset Frameset_16b26
 	update_anim_1
 .asm_2b0af
 	farcall Func_19734
@@ -4551,7 +4480,7 @@ Func_2b07a: ; 2b07a (a:707a)
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
-	load_frameset_ptr Frameset_16b2f
+	load_frameset Frameset_16b2f
 	update_anim_1
 
 .asm_2b0f2

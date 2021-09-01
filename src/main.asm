@@ -31,7 +31,14 @@ INCLUDE "engine/bank3.asm"
 
 SECTION "Bank 4", ROMX
 
-	INCROM $10000, $14000
+WarioIdleGfx:: INCBIN "gfx/wario/idle.2bpp"
+WarioWalkGfx:: INCBIN "gfx/wario/walk.2bpp"
+WarioDizzyGfx:: INCBIN "gfx/wario/dizzy.2bpp"
+WarioAttackGfx:: INCBIN "gfx/wario/attack.2bpp"
+WarioSwimGfx:: INCBIN "gfx/wario/swim.2bpp"
+WarioLadderGfx:: INCBIN "gfx/wario/ladder.2bpp"
+WarioThrowGfx:: INCBIN "gfx/wario/throw.2bpp"
+WarioAirborneGfx:: INCBIN "gfx/wario/airborne.2bpp"
 
 
 SECTION "Framesets 1", ROMX
@@ -56,7 +63,13 @@ INCLUDE "engine/bank8.asm"
 
 SECTION "Bank 9", ROMX
 
-	INCROM $24000, $27800
+WarioHotGfx:: INCBIN "gfx/wario/hot.2bpp"
+WarioBurntGfx:: INCBIN "gfx/wario/burnt.2bpp"
+WarioSlideGfx:: INCBIN "gfx/wario/slide.2bpp"
+WarioStringGfx:: INCBIN "gfx/wario/string.2bpp"
+WarioFatGfx:: INCBIN "gfx/wario/fat.2bpp"
+WarioElectricGfx:: INCBIN "gfx/wario/electric.2bpp"
+WarioPuffyGfx:: INCBIN "gfx/wario/puffy.2bpp"
 
 
 SECTION "Bank A", ROMX
@@ -66,7 +79,14 @@ INCLUDE "engine/banka.asm"
 
 SECTION "Bank B", ROMX
 
-	INCROM $2c000, $30000
+WarioZombieGfx:: INCBIN "gfx/wario/zombie.2bpp"
+WarioBouncyGfx:: INCBIN "gfx/wario/bouncy.2bpp"
+WarioCrazyGfx:: INCBIN "gfx/wario/crazy.2bpp"
+WarioBatGfx:: INCBIN "gfx/wario/bat.2bpp"
+WarioVampireGfx:: INCBIN "gfx/wario/vampire.2bpp"
+WarioMagicGfx:: INCBIN "gfx/wario/magic.2bpp"
+WarioUnk1Gfx:: INCBIN "gfx/wario/unk1.2bpp"
+WarioHangGfx:: INCBIN "gfx/wario/hang.2bpp"
 
 
 SECTION "Audio Engine", ROMX
