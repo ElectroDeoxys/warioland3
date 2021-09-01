@@ -212,7 +212,7 @@ Func_20000: ; 20000 (8:4000)
 	dw Func_20d1d ; OBJ_INTERACTION_01
 	dw ObjInteraction_FrontSting ; OBJ_INTERACTION_02
 	dw ObjInteraction_BackSting ; OBJ_INTERACTION_03
-	dw Func_20d6e ; OBJ_INTERACTION_04
+	dw ObjInteraction_TopSting ; OBJ_INTERACTION_04
 	dw ObjInteraction_FullSting ; OBJ_INTERACTION_05
 	dw Func_20d81 ; OBJ_INTERACTION_06
 	dw Func_20d8c ; OBJ_INTERACTION_07
@@ -224,17 +224,17 @@ Func_20000: ; 20000 (8:4000)
 	dw ObjInteraction_MusicalCoin ; OBJ_INTERACTION_0D
 	dw Func_20e97 ; OBJ_INTERACTION_0E
 	dw Func_20f6a ; OBJ_INTERACTION_0F
-	dw $4fed      ; OBJ_INTERACTION_10
-	dw $4ff4      ; OBJ_INTERACTION_11
-	dw $4ffb      ; OBJ_INTERACTION_12
-	dw $5002      ; OBJ_INTERACTION_13
-	dw $501c      ; OBJ_INTERACTION_14
-	dw $503c      ; OBJ_INTERACTION_15
-	dw $505c      ; OBJ_INTERACTION_16
-	dw $507c      ; OBJ_INTERACTION_17
-	dw $5156      ; OBJ_INTERACTION_18
-	dw $5245      ; OBJ_INTERACTION_19
-	dw $5358      ; OBJ_INTERACTION_1A
+	dw ObjInteraction_GreyKey       ; OBJ_INTERACTION_10
+	dw ObjInteraction_RedKey        ; OBJ_INTERACTION_11
+	dw ObjInteraction_GreenKey      ; OBJ_INTERACTION_12
+	dw ObjInteraction_BlueKey       ; OBJ_INTERACTION_13
+	dw ObjInteraction_GreyTreasure  ; OBJ_INTERACTION_14
+	dw ObjInteraction_RedTreasure   ; OBJ_INTERACTION_15
+	dw ObjInteraction_GreenTreasure ; OBJ_INTERACTION_16
+	dw ObjInteraction_BlueTreasure  ; OBJ_INTERACTION_17
+	dw Func_21156 ; OBJ_INTERACTION_18
+	dw Func_21245 ; OBJ_INTERACTION_19
+	dw Func_21358 ; OBJ_INTERACTION_1A
 	dw $5433      ; OBJ_INTERACTION_1B
 	dw $5455      ; OBJ_INTERACTION_1C
 	dw $5548      ; OBJ_INTERACTION_1D
@@ -303,7 +303,34 @@ Func_20202: ; 20202 (8:4202)
 	ret
 ; 0x20203
 
-	INCROM $20203, $2022c
+Func_20203: ; 20203 (8:4203)
+	ld hl, wObjects
+	ld de, OBJ_STRUCT_LENGTH
+.loop_objects
+	ld a, h
+	cp HIGH(wCurObj)
+	ret z
+	ld a, [hl]
+	and $03
+	cp $01
+	jr z, .asm_2021b
+	cp $03
+	jr z, .asm_2021b
+.next_obj
+	add hl, de
+	jr .loop_objects
+.asm_2021b
+	ld a, [wObjPtr + 1]
+	cp l
+	jr z, .next_obj
+	push hl
+	ld c, OBJ_UNK_1C
+	ld b, $00
+	add hl, bc
+	ld [hl], $08
+	pop hl
+	jr .next_obj
+; 0x2022c
 
 Func_2022c: ; 2022c (8:422c)
 	ld a, [wca9d]
@@ -337,8 +364,8 @@ Func_2023b: ; 2023b (8:423b)
 	ld a, [wca8c]
 	cp $01
 	ret z
-	ld a, [wca8e]
-	cp $42
+	ld a, [wTransformation]
+	cp (1 << 6) | TRANFORMATION_FLAT_WARIO
 	jr z, Func_2028a
 	and a
 	ret nz
@@ -476,10 +503,10 @@ Func_20350: ; 20350 (8:4350)
 	farcall Func_c9f3
 	ld b, $02
 	call SetObjUnk1C
-	ld a, [wca8e]
-	cp $84
+	ld a, [wTransformation]
+	cp (1 << 7) | TRANFORMATION_FAT_WARIO
 	jr z, .asm_20422
-	cp $50
+	cp (1 << 6) | TRANFORMATION_SNOWMAN_WARIO
 	jr z, .asm_20432
 	and a
 	ret nz
@@ -532,13 +559,13 @@ Func_20447: ; 20447 (8:4447)
 	ld a, [wIsSmashAttacking]
 	dec a
 	jr nz, .asm_2045e
-	ld a, [wca8e]
-	cp $84
+	ld a, [wTransformation]
+	cp (1 << 7) | TRANFORMATION_FAT_WARIO
 	jp z, Func_205e7
 	jp Func_20602
 
 .asm_2045e
-	ld a, [wca8e]
+	ld a, [wTransformation]
 	and a
 	jp nz, Func_20585
 	xor a
@@ -650,15 +677,15 @@ Func_20447: ; 20447 (8:4447)
 ; 0x20585
 
 Func_20585: ; 20585 (8:4585)
-	ld a, [wca8e]
-	cp $c1
+	ld a, [wTransformation]
+	cp (1 << 6) | (1 << 7) | TRANFORMATION_HOT_WARIO
 	jr nz, .asm_20593
 	ld a, [wca8f]
 	cp $02
 	jr nc, Func_205e7
 .asm_20593
-	ld a, [wca8e]
-	cp $84
+	ld a, [wTransformation]
+	cp (1 << 7) | TRANFORMATION_FAT_WARIO
 	jp z, Func_20350
 	ld a, [wWarioScreenXPos]
 	ld b, a
@@ -677,10 +704,10 @@ Func_20585: ; 20585 (8:4585)
 	load_sfx SFX_014
 	ld b, $04
 	call SetObjUnk1C
-	ld a, [wca8e]
-	cp $42
+	ld a, [wTransformation]
+	cp (1 << 6) | TRANFORMATION_FLAT_WARIO
 	jp z, Func_2028a
-	cp $09
+	cp TRANFORMATION_BOUNCY_WARIO
 	jr z, .asm_205d1
 	ret
 .asm_205d1
@@ -694,16 +721,16 @@ Func_20585: ; 20585 (8:4585)
 Func_205e7: ; 205e7 (8:45e7)
 	ld b, $05
 	call SetObjUnk1C
-	ld a, [wca8e]
-	cp $48
+	ld a, [wTransformation]
+	cp (1 << 6) | TRANFORMATION_ZOMBIE_WARIO
 	ret nz
 	farcall SetState_ZombieKnockBack
 	ret
 ; 0x20602
 
 Func_20602: ; 20602 (8:4602)
-	ld a, [wca8e]
-	cp $06
+	ld a, [wTransformation]
+	cp TRANFORMATION_INVISIBLE_WARIO
 	jr z, .asm_2060c
 	and a
 	jr nz, Func_205e7
@@ -819,8 +846,8 @@ Func_20670: ; 20670 (8:4670)
 ; 0x206eb
 
 Func_206eb: ; 206eb (8:46eb)
-	ld a, [wca8e]
-	cp $0e
+	ld a, [wTransformation]
+	cp TRANFORMATION_OWL_WARIO
 	call z, Func_16d9
 	call Func_1079
 	call UpdateLevelMusic
@@ -1021,7 +1048,7 @@ Func_20899: ; 20899 (8:4899)
 	load_sfx SFX_014
 	ld b, $04
 	call SetObjUnk1C
-	ld a, [wca8e]
+	ld a, [wTransformation]
 	and a
 	ret nz
 	ld a, [wc1c0]
@@ -1057,7 +1084,7 @@ Func_208f2: ; 208f2 (8:48f2)
 	ld a, [wca8c]
 	cp $01
 	ret z
-	ld a, [wca8e]
+	ld a, [wTransformation]
 	and a
 	ret nz
 	farcall Func_1cdc4
@@ -1161,7 +1188,7 @@ Func_209ca: ; 209ca (8:49ca)
 	ld a, [wca8c]
 	cp $01
 	jr z, .asm_20a60
-	ld a, [wca8e]
+	ld a, [wTransformation]
 	and a
 	ret nz
 	ld a, [wca9a]
@@ -1191,7 +1218,94 @@ Func_20a63: ; 20a63 (8:4a63)
 	ret
 ; 0x20a69
 
-	INCROM $20a69, $20b6b
+Func_20a69: ; 20a69 (8:4a69)
+	ld b, $0d
+	call SetObjUnk1C
+	ret
+; 0x20a6f
+
+Func_20a6f: ; 20a6f (8:4a6f)
+	ld a, [wWarioScreenXPos]
+	ld b, a
+	ld a, [wc1bf]
+	cp b
+	jr c, .asm_20aa5
+.asm_20a79
+	ld a, [wDirection]
+	and a
+	jp z, Func_20000.next_obj
+	ld a, $20
+	ld [wc1c0], a
+	farcall Func_197b1
+	ld a, b
+	and a
+	jr nz, .asm_20acf
+	ld a, [wc1c3]
+	cp $ff
+	jr z, .asm_20aa5
+	ld b, a
+	call SubXOffset
+	jr .asm_20acf
+
+.asm_20aa5
+	ld a, [wDirection]
+	and a
+	jp nz, Func_20000.next_obj
+	ld a, $10
+	ld [wc1c0], a
+	farcall Func_19741
+	ld a, b
+	and a
+	jr nz, .asm_20acf
+	ld a, [wc1c4]
+	cp $ff
+	jr z, .asm_20a79
+	ld b, a
+	call AddXOffset
+.asm_20acf
+	ld a, [wTransformation]
+	cp (1 << 6) | (1 << 7) | TRANFORMATION_BALL_O_STRING_WARIO
+	jr z, .asm_20aff
+	cp (1 << 6) | (1 << 7) | TRANFORMATION_HOT_WARIO
+	jr z, .asm_20b15
+	cp (1 << 6) | TRANFORMATION_UNK_0D
+	jr z, .asm_20b2b
+	xor a
+	ld [wca86], a
+	ld a, [wca9d]
+	and a
+	jr nz, .asm_20aef
+	ld a, [wca89]
+	and a
+	jp z, Func_20000.next_obj
+
+.asm_20aef
+	farcall Func_1ca39
+	ret
+
+.asm_20aff
+	ld a, [wca8f]
+	cp $01
+	ret nz
+	farcall Func_28bd5
+	ret
+
+.asm_20b15
+	ld a, [wca8f]
+	cp $01
+	ret nz
+	farcall Func_2afc5
+	ret
+
+.asm_20b2b
+	ld a, [wWarioState]
+	cp ST_ICE_SKATIN_CRASH
+	ret z
+	farcall Func_1ec215
+	ret
+; 0x20b41
+
+	INCROM $20b41, $20b6b
 
 Func_20b6b: ; 20b6b (8:4b6b)
 	ld a, [wc1c0]
@@ -1419,7 +1533,7 @@ ObjInteraction_BackSting: ; 20d47 (8:4d47)
 	jp Func_20447
 ; 0x20d6e
 
-Func_20d6e: ; 20d6e (8:4d6e)
+ObjInteraction_TopSting: ; 20d6e (8:4d6e)
 	ld a, [wc1c0]
 	bit 6, a
 	jp nz, Func_20670
@@ -1447,7 +1561,7 @@ Func_20d8c: ; 20d8c (8:4d8c)
 	bit 6, a
 	jp nz, Func_207ed
 
-	ld a, [wca8e]
+	ld a, [wTransformation]
 	and a
 	ret nz
 	ld a, [wc1c0]
@@ -1559,11 +1673,11 @@ Func_20e97: ; 20e97 (8:4e97)
 	ld a, [wca8c]
 	and a
 	ret nz
-	ld a, [wca8e]
+	ld a, [wTransformation]
 	bit 6, a
 	jp nz, Func_2022c
-	ld a, $c1
-	ld [wca8e], a
+	ld a, (1 << 6) | (1 << 7) | TRANFORMATION_HOT_WARIO
+	ld [wTransformation], a
 	ld a, $01
 	ld [wca8f], a
 	ld a, $02
@@ -1653,7 +1767,7 @@ Func_20f6a: ; 20f6a (8:4f6a)
 	ld a, [wca8c]
 	and a
 	ret nz
-	ld a, [wca8e]
+	ld a, [wTransformation]
 	bit 6, a
 	jp nz, Func_2022c
 	ld a, $f5
@@ -1684,7 +1798,455 @@ Func_20f6a: ; 20f6a (8:4f6a)
 	jp Func_20447
 ; 0x20fe8
 
-	INCROM $20fe8, $21aac
+	INCROM $20fe8, $20fed
+
+ObjInteraction_GreyKey: ; 20fed (8:4fed)
+	ld hl, wKeys
+	set GREY_KEY_F, [hl]
+	jr CollectKey
+; 0x20ff4
+
+ObjInteraction_RedKey: ; 20ff4 (8:4ff4)
+	ld hl, wKeys
+	set RED_KEY_F, [hl]
+	jr CollectKey
+; 0x20ffb
+
+ObjInteraction_GreenKey: ; 20ffb (8:4ffb)
+	ld hl, wKeys
+	set GREEN_KEY_F, [hl]
+	jr CollectKey
+; 0x21002
+
+ObjInteraction_BlueKey: ; 21002 (8:5002)
+	ld hl, wKeys
+	set BLUE_KEY_F, [hl]
+;	fallthrough
+
+CollectKey: ; 21007 (8:5007)
+	load_sfx SFX_KEY
+	call Func_20a63
+	ld a, MAIN_SEQTABLE_COLLECT_KEY
+	ld [wSequence], a
+	xor a
+	ld [wIntroSeqTimer], a
+	ret
+; 0x2101c
+
+ObjInteraction_GreyTreasure: ; 2101c (8:501c)
+	ld a, [wc1c0]
+	bit 6, a
+	jp nz, Func_209ca
+	ld a, [wTransformation]
+	and a
+	jp nz, Func_20a6f
+	ld hl, wKeys
+	bit GREY_KEY_F, [hl]
+	jp z, Func_20a6f
+	set 4, [hl]
+	ld a, LEVEL_END_GREY_TREASURE
+	ld [wLevelEndScreen], a
+	jr GetTreasure
+; 0x2103c
+
+ObjInteraction_RedTreasure: ; 2103c (8:503c)
+	ld a, [wc1c0]
+	bit 6, a
+	jp nz, Func_209ca
+	ld a, [wTransformation]
+	and a
+	jp nz, Func_20a6f
+	ld hl, wKeys
+	bit RED_KEY_F, [hl]
+	jp z, Func_20a6f
+	set 5, [hl]
+	ld a, LEVEL_END_RED_TREASURE
+	ld [wLevelEndScreen], a
+	jr GetTreasure
+; 0x2105c
+
+ObjInteraction_GreenTreasure: ; 2105c (8:505c)
+	ld a, [wc1c0]
+	bit 6, a
+	jp nz, Func_209ca
+	ld a, [wTransformation]
+	and a
+	jp nz, Func_20a6f
+	ld hl, wKeys
+	bit GREEN_KEY_F, [hl]
+	jp z, Func_20a6f
+	set 6, [hl]
+	ld a, LEVEL_END_GREEN_TREASURE
+	ld [wLevelEndScreen], a
+	jr GetTreasure
+; 0x2107c
+
+ObjInteraction_BlueTreasure: ; 2107c (8:507c)
+	ld a, [wc1c0]
+	bit 6, a
+	jp nz, Func_209ca
+	ld a, [wTransformation]
+	and a
+	jp nz, Func_20a6f
+	ld hl, wKeys
+	bit BLUE_KEY_F, [hl]
+	jp z, Func_20a6f
+	set 7, [hl]
+	ld a, LEVEL_END_BLUE_TREASURE
+	ld [wLevelEndScreen], a
+;	fallthrough
+
+GetTreasure: ; 2109a (8:509a)
+	stop_music
+	call Func_20a63
+	call Func_20203
+
+	ld hl, wLevelEndScreen
+	ld a, [hl]
+	cp LEVEL_END_NO_TREASURE
+	ret z
+	set 7, [hl]
+	ld a, TRUE
+	ld [wResetDisabled], a
+	xor a
+	ld [wca86], a
+	ld a, ST_UNKNOWN_40
+	ld [wWarioState], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld [wJumpVelIndex], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wIsSmashAttacking], a
+	ld [wca8b], a
+	ld [wca89], a
+	inc a
+	ld [wca8a], a
+	ld [wca9b], a
+	ld a, [wJumpVelTable]
+	and a
+	jr z, .asm_210ea
+	ld a, FALLING_JUMP_VEL_INDEX
+	ld [wJumpVelIndex], a
+.asm_210ea
+	ld hl, Pals_c800
+	call Func_1af6
+	ld a, $04
+	ld [wca7b], a
+	ld a, $40
+	ld [wca7c + 0], a
+	ld a, $00
+	ld [wca7c + 1], a
+	call Func_15b0
+
+	load_oam_ptr OAM_14000
+
+	ld a, [wc1c0]
+	bit 4, a
+	jr nz, .asm_21130
+	ld a, [wc1c3]
+	ld b, a
+	call SubXOffset
+	ld a, DIRECTION_RIGHT
+	ld [wDirection], a
+	load_frameset_ptr Frameset_1425f
+	jr .asm_21146
+.asm_21130
+	ld a, [wc1c4]
+	ld b, a
+	call AddXOffset
+	ld a, DIRECTION_LEFT
+	ld [wDirection], a
+	load_frameset_ptr Frameset_14252
+.asm_21146
+	update_anim_1
+	ret
+; 0x21156
+
+Func_21156: ; 21156 (8:5156)
+	ld a, [wJumpVelTable]
+	and a
+	jp nz, Func_2022c
+	ld b, $0c
+	call SetObjUnk1C
+	ld a, [wTransformation]
+	cp (1 << 6) | TRANFORMATION_FLAT_WARIO
+	jp z, SetState_FlatStretching
+	and a
+	jp nz, Func_2022c
+
+	ld a, $01
+	ld [wca9b], a
+	ld a, ST_PICKED_UP
+	ld [wWarioState], a
+	ld a, $ff
+	ld [wca70], a
+	ld a, $e5
+	ld [wca6f], a
+	ld a, $f7
+	ld [wca71], a
+	ld a, $09
+	ld [wca72], a
+	xor a
+	ld [wIsSmashAttacking], a
+	ld [wca89], a
+	ld [wca8b], a
+	ld [wca9a], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	inc a
+	ld [wJumpVelTable], a
+	ld a, NUM_WIGGLES_TO_ESCAPE
+	ld [wPickedUpWiggleCounter], a
+
+	ld a, $04
+	ld [wca7b], a
+	ld a, $78
+	ld [wca7c + 0], a
+	ld a, $00
+	ld [wca7c + 1], a
+	call Func_15b0
+
+	load_oam_ptr OAM_15955
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_211e1
+	load_frameset_ptr Frameset_15f70
+	jr .asm_211eb
+.asm_211e1
+	load_frameset_ptr Frameset_15f7f
+.asm_211eb
+	update_anim_1
+	ret
+; 0x211fb
+
+SetState_FlatStretching: ; 211fb (8:51fb)
+	ld a, $01
+	ld [wca9b], a
+	ld a, ST_FLAT_STRETCHING
+	ld [wWarioState], a
+	ld a, $ff
+	ld [wca70], a
+	ld a, $f8
+	ld [wca6f], a
+	ld a, $f5
+	ld [wca71], a
+	ld a, $0b
+	ld [wca72], a
+	ld a, NUM_WIGGLES_TO_ESCAPE
+	ld [wPickedUpWiggleCounter], a
+	xor a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	load_frameset_ptr Frameset_17193
+	update_anim_1
+	ret
+; 0x21245
+
+Func_21245: ; 21245 (8:5245)
+	ld a, [wc1c0]
+	and $c0
+	jr nz, .asm_21267
+	ld a, [wEnemyDirection]
+	cp DIRECTION_RIGHT
+	jr z, .asm_2125d
+	ld a, [wc1c0]
+	bit 5, a
+	jr nz, .asm_2126a
+	jp Func_2022c
+
+.asm_2125d
+	ld a, [wc1c0]
+	bit 4, a
+	jr nz, .asm_2126a
+	jp Func_2022c
+
+.asm_21267
+	jp Func_20447
+
+.asm_2126a
+	ld a, [wca8b]
+	and a
+	jr z, .asm_21290
+	ld a, $e5
+	ld [wca6f], a
+	farcall Func_1996e
+	ld a, b
+	and a
+	jr z, .asm_21290
+	ld a, $f1
+	ld [wca6f], a
+	jp Func_2022c
+
+.asm_21290
+	ld b, $06
+	call SetObjUnk1C
+
+	ld a, [wca8c]
+	and a
+	ret nz
+	ld a, [wTransformation]
+	bit 6, a
+	jp nz, Func_2023b
+	ld a, [wWarioScreenXPos]
+	ld b, a
+	ld a, [wc1bf]
+	cp b
+	jr c, .asm_212b3
+
+	ld a, DIRECTION_LEFT
+	ld [wDirection], a
+	jr .asm_212b8
+.asm_212b3
+	ld a, DIRECTION_RIGHT
+	ld [wDirection], a
+.asm_212b8
+	load_sfx SFX_039
+
+	ld a, (1 << 6) | (1 << 7) | TRANFORMATION_BALL_O_STRING_WARIO
+	ld [wTransformation], a
+	xor a
+	ld [wca8f], a
+	ld a, $03
+	ld [wca93], a
+	ld a, $03
+	ld [wca92], a
+	ld a, $01
+	ld [wca94], a
+	call UpdateLevelMusic
+
+	ld a, ST_GETTING_WRAPPED_IN_STRING
+	ld [wWarioState], a
+	xor a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wca9a], a
+	ld [wca89], a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	ld [wca8b], a
+	ld [wca9d], a
+	ld [wIsSmashAttacking], a
+	ld a, $ff
+	ld [wca70], a
+	ld a, $e5
+	ld [wca6f], a
+	ld a, $f7
+	ld [wca71], a
+	ld a, $09
+	ld [wca72], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld hl, Pals_c860
+	call Func_1af6
+
+	ld a, $09
+	ld [wca7b], a
+	ld a, $58
+	ld [wca7c + 0], a
+	ld a, $00
+	ld [wca7c + 1], a
+	call Func_15b0
+
+	load_oam_ptr OAM_171c0
+
+	load_frameset_ptr Frameset_17414
+	update_anim_1
+	ret
+; 0x21358
+
+Func_21358: ; 21358 (8:5358)
+	ld a, [wca8b]
+	and a
+	jp nz, Func_20a69
+	ld a, [wca8c]
+	and a
+	ret nz
+	ld a, [wTransformation]
+	bit 6, a
+	jp nz, Func_20a69
+	cp $84
+	jr nz, .asm_21373
+	jp Func_20a69
+
+.asm_21373
+	call Func_20a63
+	ld a, (1 << 7) | TRANFORMATION_FAT_WARIO
+	ld [wTransformation], a
+	ld a, $02
+	ld [wca93], a
+	ld a, $02
+	ld [wca92], a
+	ld a, $02
+	ld [wca94], a
+	ld a, $01
+	ld [wca90], a
+	ld a, $a4
+	ld [wca91], a
+	xor a
+	ld [wca8d], a
+	ld [wSFXLoopCounter], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wca9a], a
+	ld [wca89], a
+	ld [wca8b], a
+	ld [wca9d], a
+	ld [wIsSmashAttacking], a
+	ld a, [wJumpVelTable]
+	and a
+	jr z, .asm_213bb
+	ld a, FALLING_JUMP_VEL_INDEX
+	ld [wJumpVelIndex], a
+.asm_213bb
+	load_sfx SFX_03A
+	call UpdateLevelMusic
+
+	ld a, ST_FAT_EATING
+	ld [wWarioState], a
+	ld a, $ff
+	ld [wca70], a
+	ld a, $e5
+	ld [wca6f], a
+	ld a, $f7
+	ld [wca71], a
+	ld a, $09
+	ld [wca72], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld a, $09
+	ld [wca7b], a
+	ld a, $60
+	ld [wca7c + 0], a
+	ld a, $00
+	ld [wca7c + 1], a
+	call Func_15b0
+
+	load_oam_ptr OAM_1742d
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_21419
+	load_frameset_ptr Frameset_1789c
+	jr .asm_21423
+.asm_21419
+	load_frameset_ptr Frameset_178c3
+.asm_21423
+	update_anim_1
+	ret
+; 0x21433
+
+	INCROM $21433, $21aac
 
 Func_21aac: ; 21aac (8:5aac)
 	ld a, [wIsSmashAttacking]

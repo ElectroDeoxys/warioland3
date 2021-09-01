@@ -200,7 +200,7 @@ Func_6130b: ; 6130b (18:530b)
 Func_61348: ; 61348 (18:5348)
 	ld a, [wPowerUpLevel]
 	ld e, a
-	ld a, [wca8e]
+	ld a, [wTransformation]
 	rla
 	jr nc, .asm_61354
 	ld e, $06

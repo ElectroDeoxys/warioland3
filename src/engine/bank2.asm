@@ -341,14 +341,14 @@ Func_80aa: ; 80aa (2:40aa)
 	and SELECT | START
 	ret z
 
-	ld a, [wca8e]
-	cp $53
+	ld a, [wTransformation]
+	cp (1 << 6) | TRANFORMATION_UNK_13
 	jr z, .asm_82ff
 	ld a, [wc0e6]
 	and a
 	jr nz, .asm_82ff
-	ld a, [wca8e]
-	cp $53
+	ld a, [wTransformation]
+	cp (1 << 6) | TRANFORMATION_UNK_13
 	jr nz, .asm_8308
 
 .asm_82ff
@@ -8616,8 +8616,8 @@ Func_b9a6: ; b9a6 (2:79a6)
 	ld [wc0c3], a
 	ret
 .asm_ba13
-	ld a, [wca8e]
-	cp $42
+	ld a, [wTransformation]
+	cp (1 << 6) | TRANFORMATION_FLAT_WARIO
 	jr nz, .asm_ba1f
 	ld a, [wJumpVelTable]
 	and a

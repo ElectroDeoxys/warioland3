@@ -8,7 +8,7 @@
 	const MAIN_SEQTABLE_05                 ; $05
 	const MAIN_SEQTABLE_06                 ; $06
 	const MAIN_SEQTABLE_07                 ; $07
-	const MAIN_SEQTABLE_08                 ; $08
+	const MAIN_SEQTABLE_COLLECT_KEY        ; $08
 	const MAIN_SEQTABLE_09                 ; $09
 	const MAIN_SEQTABLE_0a                 ; $0a
 	const MAIN_SEQTABLE_0b                 ; $0b

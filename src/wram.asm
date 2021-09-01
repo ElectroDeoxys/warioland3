@@ -535,7 +535,12 @@ wLanguage:: ; ca46
 
 	ds $14
 
-wca5b:: ; ca5b
+; collected keys in the level
+; bit 0: grey key
+; bit 1: red key
+; bit 2: green key
+; bit 3: blue key
+wKeys:: ; ca5b
 	ds $1
 
 wNumMusicalCoins:: ; ca5c
@@ -692,7 +697,7 @@ wca8d:: ; ca8d
 	ds $1
 
 ; lower 5 bits: TRANSFORMATION_* constant
-wca8e:: ; ca8e
+wTransformation:: ; ca8e
 	ds $1
 
 wca8f:: ; ca8f

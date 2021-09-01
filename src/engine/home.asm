@@ -2011,8 +2011,8 @@ Func_d8c: ; d8c (0:d8c)
 ; 0xd9e
 
 Func_d9e: ; d9e (0:d9e)
-	ld a, [wca8e]
-	cp $06
+	ld a, [wTransformation]
+	cp TRANFORMATION_INVISIBLE_WARIO
 	jr nz, .asm_db1
 	ld hl, wca8d
 	inc [hl]
@@ -2411,13 +2411,13 @@ Func_1070: ; 1070 (0:1070)
 ; 0x1079
 
 Func_1079: ; 1079 (0:1079)
-	ld a, [wca8e]
-	cp $53
+	ld a, [wTransformation]
+	cp (1 << 6) | TRANFORMATION_UNK_13
 	call z, Func_10a7
 
 	xor a
 	ld [wca8c], a
-	ld [wca8e], a
+	ld [wTransformation], a
 	ld [wca8f], a
 	ld [wca92], a
 	ld [wca93], a
@@ -3073,7 +3073,7 @@ UpdateLevelMusic: ; 161a (0:161a)
 	ld a, [wcac3]
 	and a
 	jr nz, .boss_music
-	ld a, [wca8e]
+	ld a, [wTransformation]
 	and a
 	jr nz, .transformation
 
@@ -3111,7 +3111,7 @@ UpdateLevelMusic: ; 161a (0:161a)
 	ret
 
 .transformation
-	ld a, [wca8e]
+	ld a, [wTransformation]
 	and %11111
 	ld d, $00
 	add a ; *2

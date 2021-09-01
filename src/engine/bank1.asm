@@ -10,7 +10,7 @@ MainSequenceTable: ; 4000 (1:4000)
 	dw Func_4710                 ; MAIN_SEQTABLE_05
 	dw Func_472a                 ; MAIN_SEQTABLE_06
 	dw Func_474c                 ; MAIN_SEQTABLE_07
-	dw Func_4766                 ; MAIN_SEQTABLE_08
+	dw CollectKeySequence        ; MAIN_SEQTABLE_COLLECT_KEY
 	dw Func_4776                 ; MAIN_SEQTABLE_09
 	dw Func_4790                 ; MAIN_SEQTABLE_0a
 	dw Func_47aa                 ; MAIN_SEQTABLE_0b
@@ -1138,13 +1138,14 @@ Func_474c: ; 474c (1:474c)
 	ret
 ; 0x4766
 
-Func_4766: ; 4766 (1:4766)
+; pauses game for 100 ticks
+CollectKeySequence: ; 4766 (1:4766)
 	ld hl, wIntroSeqTimer
 	inc [hl]
 	ld a, [hl]
-	cp $64
+	cp 100
 	ret c
-	ld [hl], $00
+	ld [hl], 0
 	ld a, MAIN_SEQTABLE_02
 	ld [wSequence], a
 	ret

@@ -10,12 +10,12 @@ Func_1f400d: ; 1f400d (7d:400d)
 	ld hl, $4202
 	ld bc, v0Tiles0
 	call Decompress
-	ld a, [wca8e]
-	cp $0e
+	ld a, [wTransformation]
+	cp TRANFORMATION_OWL_WARIO
 	jr z, .asm_1f4026
-	cp $0f
+	cp TRANFORMATION_UNK_0F
 	jr z, .asm_1f402b
-	cp $4b
+	cp (1 << 6) | TRANFORMATION_VAMPIRE_WARIO
 	jr z, .asm_1f4030
 	ret
 .asm_1f4026

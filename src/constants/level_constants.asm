@@ -49,14 +49,20 @@ NUM_LEVEL_MUSICAL_COINS EQU 8
 LEVEL_WIDTH EQU 160
 MAX_NUM_COINS EQU $999 ; in hexadecimal
 
+	const_def
+	const GREY_KEY_F  ; $0
+	const RED_KEY_F   ; $1
+	const GREEN_KEY_F ; $2
+	const BLUE_KEY_F  ; $3
+
 	const_def 1
-	const LEVEL_END_TREASURE_1  ; 01
-	const LEVEL_END_TREASURE_2  ; 02
-	const LEVEL_END_TREASURE_3  ; 03
-	const LEVEL_END_TREASURE_4  ; 04
-	const LEVEL_END_NO_TREASURE ; 05
-	const LEVEL_END_GAME_OVER   ; 06
-	const LEVEL_END_EPILOGUE    ; 07
+	const LEVEL_END_GREY_TREASURE  ; 01
+	const LEVEL_END_RED_TREASURE   ; 02
+	const LEVEL_END_GREEN_TREASURE ; 03
+	const LEVEL_END_BLUE_TREASURE  ; 04
+	const LEVEL_END_NO_TREASURE    ; 05
+	const LEVEL_END_GAME_OVER      ; 06
+	const LEVEL_END_EPILOGUE       ; 07
 
 	const_def
 	const ROOM_000 ; 00

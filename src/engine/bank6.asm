@@ -45,8 +45,8 @@ Func_19741: ; 19741 (6:5741)
 ;	fallthrough
 
 Func_19746: ; 19746 (6:5746)
-	ld a, [wca8e]
-	cp $42
+	ld a, [wTransformation]
+	cp (1 << 6) | TRANFORMATION_FLAT_WARIO
 	jr z, .asm_19774
 	ld a, [wca72]
 	sub $01
@@ -120,8 +120,8 @@ Func_197b1: ; 197b1 (6:57b1)
 ;	fallthrough
 
 Func_197b6: ; 197b6 (6:57b6)
-	ld a, [wca8e]
-	cp $42
+	ld a, [wTransformation]
+	cp (1 << 6) | TRANFORMATION_FLAT_WARIO
 	jr z, .asm_197e6
 	ld a, [wca71]
 	cpl
@@ -236,7 +236,7 @@ Func_19832: ; 19832 (6:5832)
 	ld a, [wcac9]
 	and a
 	jr nz, .asm_198c0
-	ld a, [wca8e]
+	ld a, [wTransformation]
 	and a
 	jr nz, .asm_198c0
 	ld a, [wIsInSand]
@@ -346,8 +346,8 @@ Func_198e0: ; 198e0 (6:58e0)
 ; 0x19942
 
 Func_19942: ; 19942 (6:5942)
-	ld a, [wca8e]
-	cp $07
+	ld a, [wTransformation]
+	cp TRANFORMATION_UNK_07
 	jr z, .asm_1994e
 	ld a, $01
 	ld [wc0d8], a
@@ -384,8 +384,8 @@ Func_1996e: ; 1996e (6:596e)
 	ret nz
 	xor a
 	ld [wced2], a
-	ld a, [wca8e]
-	cp $07
+	ld a, [wTransformation]
+	cp TRANFORMATION_UNK_07
 	jr z, .asm_19988
 	ld a, $01
 	ld [wc0d8], a
@@ -420,8 +420,8 @@ Func_1996e: ; 1996e (6:596e)
 	call Func_19b9b
 	and a
 	ret nz
-	ld a, [wca8e]
-	cp $07
+	ld a, [wTransformation]
+	cp TRANFORMATION_UNK_07
 	jr z, .asm_199c0
 	ld a, $01
 	ld [wc0d8], a

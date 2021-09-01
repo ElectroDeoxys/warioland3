@@ -111,7 +111,7 @@
 	const SFX_02F                          ; 12f
 	const SFX_030                          ; 130
 	const SFX_MUSICAL_COIN                 ; 131
-	const SFX_032                          ; 132
+	const SFX_KEY                          ; 132
 	const SFX_033                          ; 133
 	const SFX_034                          ; 134
 	const SFX_035                          ; 135

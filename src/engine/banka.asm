@@ -422,11 +422,11 @@ UpdateState_Burnt: ; 2841e (a:441e)
 ; 0x28435
 
 SetState_FlatAirborne: ; 28435 (a:4435)
-	ld a, [wca8e]
+	ld a, [wTransformation]
 	bit 6, a
 	ret nz
-	ld a, [wca8e]
-	cp $0e
+	ld a, [wTransformation]
+	cp TRANFORMATION_OWL_WARIO
 	call z, Func_16d9
 
 	ldh a, [rSVBK]
@@ -460,8 +460,8 @@ SetState_FlatAirborne: ; 28435 (a:4435)
 	pop af
 	ldh [rSVBK], a
 
-	ld a, $42
-	ld [wca8e], a
+	ld a, (1 << 6) | TRANFORMATION_FLAT_WARIO
+	ld [wTransformation], a
 	load_sfx SFX_01B
 	call UpdateLevelMusic
 
@@ -2061,8 +2061,8 @@ UpdateState_TurningInvisible: ; 2972e (a:572e)
 	ret z
 	xor a
 	ld [wca8a], a
-	ld a, $06
-	ld [wca8e], a
+	ld a, TRANFORMATION_INVISIBLE_WARIO
+	ld [wTransformation], a
 	call UpdateLevelMusic
 	farcall SetState_Idling
 	ret
@@ -4165,6 +4165,9 @@ Func_2af9c: ; 2af9c (a:6f9c)
 	ret z
 	ld a, FALLING_JUMP_VEL_INDEX
 	ld [wJumpVelIndex], a
+;	fallthrough
+
+Func_2afc5: ; 2afc5 (a:6fc5)
 	ld a, [wDirection]
 	xor $1 ; switch direction
 	ld [wDirection], a

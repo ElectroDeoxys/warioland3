@@ -132,8 +132,8 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld hl, wIntroObj2
 	call Func_1f0940
 
-	ld a, [wca5b]
-	bit 0, a
+	ld a, [wKeys]
+	bit GREY_KEY_F, a
 	jr z, .asm_1f0168
 	ld hl, wIntroObj3
 	ld a, $54
@@ -155,8 +155,8 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld hl, wIntroObj3
 	call Func_1f0940
 .asm_1f0168
-	ld a, [wca5b]
-	bit 1, a
+	ld a, [wKeys]
+	bit RED_KEY_F, a
 	jr z, .asm_1f018f
 	ld hl, wIntroObj4
 	ld a, $54
@@ -178,8 +178,8 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld hl, wIntroObj4
 	call Func_1f0940
 .asm_1f018f
-	ld a, [wca5b]
-	bit 2, a
+	ld a, [wKeys]
+	bit GREEN_KEY_F, a
 	jr z, .asm_1f01b6
 	ld hl, $d553
 	ld a, $54
@@ -201,8 +201,8 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld hl, $d553
 	call Func_1f0940
 .asm_1f01b6
-	ld a, [wca5b]
-	bit 3, a
+	ld a, [wKeys]
+	bit BLUE_KEY_F, a
 	jr z, .asm_1f01dd
 	ld hl, $d55e
 	ld a, $54
@@ -236,7 +236,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, [wca5b]
+	ld a, [wKeys]
 	bit 4, a
 	jr z, .asm_1f01fd
 	ld a, $5c
@@ -265,7 +265,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, [wca5b]
+	ld a, [wKeys]
 	bit 5, a
 	jr z, .asm_1f022c
 	ld a, $5c
@@ -294,7 +294,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, [wca5b]
+	ld a, [wKeys]
 	bit 6, a
 	jr z, .asm_1f025b
 	ld a, $5c
@@ -323,7 +323,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, [wca5b]
+	ld a, [wKeys]
 	bit 7, a
 	jr z, .asm_1f028a
 	ld a, $5c

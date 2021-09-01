@@ -5534,7 +5534,7 @@ Func_1f6dc: ; 1f6dc (7:76dc)
 	ld a, [wWaterInteraction]
 	and a
 	jr nz, .asm_1f72b
-	ld a, [wca8e]
+	ld a, [wTransformation]
 	and a
 	jr nz, .asm_1f72b
 	ld a, [wc0d7]
