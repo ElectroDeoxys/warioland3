@@ -126,7 +126,7 @@
 	const ST_FAT_LANDING                   ; 7c
 	const ST_FAT_SINKING                   ; 7d
 	const ST_FAT_RECOVERING                ; 7e
-	const ST_UNKNOWN_7F                    ; 7f
+	const ST_ELECTRIC_START                ; 7f
 	const ST_ELECTRIC                      ; 80
 	const ST_ELECTRIC_DIZZY                ; 81
 	const ST_TURNING_INVISIBLE             ; 82

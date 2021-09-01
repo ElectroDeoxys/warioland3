@@ -6010,7 +6010,214 @@ Frameset_17905: ; 17905 (05:7905)
 	db $ff
 ; 0x1790e
 
-	INCROM $1790e, $17b76
+OAM_1790e: ; 1790e (05:790e)
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
+	dw .frame_7
+	dw .frame_8
+	dw .frame_9
+	dw .frame_10
+	dw .frame_11
+	dw .frame_12
+	dw .frame_13
+	dw .frame_14
+	dw .frame_15
+
+.frame_0
+	frame_oam -30, -18, $00, $00
+	frame_oam -32, -10, $02, $00
+	frame_oam -32,  -2, $04, $00
+	frame_oam -32,   6, $06, $00
+	frame_oam -18,  14, $08, $00
+	frame_oam -16, -10, $0a, $00
+	frame_oam -16,  -2, $0c, $00
+	frame_oam -16,   6, $0e, $00
+	db $80
+
+.frame_1
+	frame_oam -32, -16, $10, $00
+	frame_oam -32,  -8, $12, $00
+	frame_oam -32,   0, $14, $00
+	frame_oam -32,   8, $16, $00
+	frame_oam -32,  16, $18, $00
+	frame_oam -16, -16, $1a, $00
+	frame_oam -16,  -8, $1c, $00
+	frame_oam -16,   0, $1e, $00
+	frame_oam -16,   8, $20, $00
+	frame_oam -16,  16, $22, $00
+	db $80
+
+.frame_2
+	frame_oam -32, -16, $24, $01
+	frame_oam -32,  -8, $26, $01
+	frame_oam -32,   0, $28, $01
+	frame_oam -32,   8, $2a, $01
+	frame_oam -32,  16, $2c, $01
+	frame_oam -16, -16, $2e, $01
+	frame_oam -16,  -8, $30, $01
+	frame_oam -16,   0, $32, $01
+	frame_oam -16,   8, $34, $01
+	frame_oam -16,  16, $36, $01
+	db $80
+
+.frame_3
+	frame_oam -32,  -8, $12, $00
+	frame_oam -16,  -8, $1c, $00
+	frame_oam -16,   8, $42, $00
+	frame_oam -32,   0, $14, $00
+	frame_oam -32,   8, $3c, $00
+	frame_oam -32, -16, $3a, $00
+	frame_oam -16, -16, $3e, $00
+	frame_oam -18,  16, $44, $00
+	frame_oam -16,   0, $40, $00
+	db $80
+
+.frame_4
+	frame_oam -32, -16, $24, $01
+	frame_oam -32,  -8, $26, $01
+	frame_oam -32,   0, $28, $01
+	frame_oam -32,   8, $2a, $01
+	frame_oam -32,  16, $2c, $01
+	frame_oam -16, -16, $2e, $01
+	frame_oam -16,  -8, $30, $01
+	frame_oam -16,   8, $34, $01
+	frame_oam -16,  16, $36, $01
+	frame_oam -16,   0, $38, $01
+	db $80
+
+.frame_5
+	frame_oam -16,  -5, $50, $00
+	frame_oam -16,   3, $52, $00
+	frame_oam -32, -13, $56, $00
+	frame_oam -32,  -5, $58, $00
+	frame_oam -32,   3, $5a, $00
+	frame_oam -32,  11, $5c, $00
+	frame_oam -16, -13, $5e, $00
+	frame_oam -16,  11, $60, $00
+	db $80
+
+.frame_6
+	frame_oam -32, -13, $46, $00
+	frame_oam -32,  -5, $48, $00
+	frame_oam -32,   3, $4a, $00
+	frame_oam -32,  11, $4c, $00
+	frame_oam -16, -13, $4e, $00
+	frame_oam -16,  -5, $50, $00
+	frame_oam -16,   3, $52, $00
+	frame_oam -16,  11, $54, $00
+	db $80
+
+.frame_7
+	frame_oam -32, -13, $62, $00
+	frame_oam -32,  -5, $64, $00
+	frame_oam -32,   3, $66, $00
+	frame_oam -32,  11, $68, $00
+	frame_oam -16, -13, $6a, $00
+	frame_oam -16,  11, $6c, $00
+	frame_oam -16,  -5, $50, $00
+	frame_oam -16,   3, $52, $00
+	db $80
+
+.frame_8
+	frame_oam -30,  10, $00, $20
+	frame_oam -32,   2, $02, $20
+	frame_oam -32,  -6, $04, $20
+	frame_oam -32, -14, $06, $20
+	frame_oam -18, -22, $08, $20
+	frame_oam -16,   2, $0a, $20
+	frame_oam -16,  -6, $0c, $20
+	frame_oam -16, -14, $0e, $20
+	db $80
+
+.frame_9
+	frame_oam -32,   8, $10, $20
+	frame_oam -32,   0, $12, $20
+	frame_oam -32,  -8, $14, $20
+	frame_oam -32, -16, $16, $20
+	frame_oam -32, -24, $18, $20
+	frame_oam -16,   8, $1a, $20
+	frame_oam -16,   0, $1c, $20
+	frame_oam -16,  -8, $1e, $20
+	frame_oam -16, -16, $20, $20
+	frame_oam -16, -24, $22, $20
+	db $80
+
+.frame_10
+	frame_oam -32,   8, $24, $21
+	frame_oam -32,   0, $26, $21
+	frame_oam -32,  -8, $28, $21
+	frame_oam -32, -16, $2a, $21
+	frame_oam -32, -24, $2c, $21
+	frame_oam -16,   8, $2e, $21
+	frame_oam -16,   0, $30, $21
+	frame_oam -16,  -8, $32, $21
+	frame_oam -16, -16, $34, $21
+	frame_oam -16, -24, $36, $21
+	db $80
+
+.frame_11
+	frame_oam -32,   0, $12, $20
+	frame_oam -16,   0, $1c, $20
+	frame_oam -16, -16, $42, $20
+	frame_oam -32,  -8, $14, $20
+	frame_oam -32, -16, $3c, $20
+	frame_oam -32,   8, $3a, $20
+	frame_oam -16,   8, $3e, $20
+	frame_oam -18, -24, $44, $20
+	frame_oam -16,  -8, $40, $20
+	db $80
+
+.frame_12
+	frame_oam -32,   8, $24, $21
+	frame_oam -32,   0, $26, $21
+	frame_oam -32,  -8, $28, $21
+	frame_oam -32, -16, $2a, $21
+	frame_oam -32, -24, $2c, $21
+	frame_oam -16,   8, $2e, $21
+	frame_oam -16,   0, $30, $21
+	frame_oam -16, -16, $34, $21
+	frame_oam -16, -24, $36, $21
+	frame_oam -16,  -8, $38, $21
+	db $80
+
+.frame_13
+	frame_oam -16,  -3, $50, $20
+	frame_oam -16, -11, $52, $20
+	frame_oam -32,   5, $56, $20
+	frame_oam -32,  -3, $58, $20
+	frame_oam -32, -11, $5a, $20
+	frame_oam -32, -19, $5c, $20
+	frame_oam -16,   5, $5e, $20
+	frame_oam -16, -19, $60, $20
+	db $80
+
+.frame_14
+	frame_oam -32,   5, $46, $20
+	frame_oam -32,  -3, $48, $20
+	frame_oam -32, -11, $4a, $20
+	frame_oam -32, -19, $4c, $20
+	frame_oam -16,   5, $4e, $20
+	frame_oam -16,  -3, $50, $20
+	frame_oam -16, -11, $52, $20
+	frame_oam -16, -19, $54, $20
+	db $80
+
+.frame_15
+	frame_oam -32,   5, $62, $20
+	frame_oam -32,  -3, $64, $20
+	frame_oam -32, -11, $66, $20
+	frame_oam -32, -19, $68, $20
+	frame_oam -16,   5, $6a, $20
+	frame_oam -16, -19, $6c, $20
+	frame_oam -16,  -3, $50, $20
+	frame_oam -16, -11, $52, $20
+	db $80
+; 0x17b76
 
 Frameset_17b76: ; 17b76 (5:7b76)
 	db $00,  4
@@ -6186,7 +6393,120 @@ Frameset_17ce2:
 	db $ff
 ; 0x17cf7
 
-	INCROM $17cf7, $17e1b
+OAM_17cf7: ; 17cf7 (05:7cf7)
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
+	dw .frame_7
+	dw .frame_8
+	dw .frame_9
+	dw .frame_10
+	dw .frame_11
+
+.frame_0
+	frame_oam -32, -12, $00, $00
+	frame_oam -32,  -4, $02, $00
+	frame_oam -32,   4, $04, $00
+	frame_oam -16, -12, $06, $00
+	frame_oam -16,  -4, $08, $00
+	frame_oam -16,   4, $0a, $00
+	db $80
+
+.frame_1
+	frame_oam -32, -12, $00, $00
+	frame_oam -32,  -4, $02, $00
+	frame_oam -32,   4, $04, $00
+	frame_oam -16, -12, $0c, $00
+	frame_oam -16,  -4, $0e, $00
+	frame_oam -16,   4, $10, $00
+	db $80
+
+.frame_2
+	frame_oam -32, -12, $12, $00
+	frame_oam -32,  -4, $14, $00
+	frame_oam -32,   4, $16, $00
+	frame_oam -16, -12, $18, $00
+	frame_oam -16,  -4, $1a, $00
+	frame_oam -16,   4, $1c, $00
+	db $80
+
+.frame_3
+	frame_oam -32, -12, $1e, $00
+	frame_oam -32,  -4, $20, $00
+	frame_oam -32,   4, $22, $00
+	frame_oam -16, -12, $24, $00
+	frame_oam -16,  -4, $26, $00
+	frame_oam -16,   4, $28, $00
+	db $80
+
+.frame_4
+	frame_oam -32,  -8, $2a, $00
+	frame_oam -32,   0, $2c, $00
+	db $80
+
+.frame_5
+	frame_oam -32, -12, $2e, $00
+	frame_oam -32,  -4, $30, $00
+	frame_oam -32,   4, $32, $00
+	frame_oam -16, -12, $34, $00
+	frame_oam -16,  -4, $36, $00
+	frame_oam -16,   4, $38, $00
+	db $80
+
+.frame_6
+	frame_oam -32,   4, $00, $20
+	frame_oam -32,  -4, $02, $20
+	frame_oam -32, -12, $04, $20
+	frame_oam -16,   4, $06, $20
+	frame_oam -16,  -4, $08, $20
+	frame_oam -16, -12, $0a, $20
+	db $80
+
+.frame_7
+	frame_oam -32,   4, $00, $20
+	frame_oam -32,  -4, $02, $20
+	frame_oam -32, -12, $04, $20
+	frame_oam -16,   4, $0c, $20
+	frame_oam -16,  -4, $0e, $20
+	frame_oam -16, -12, $10, $20
+	db $80
+
+.frame_8
+	frame_oam -32,   4, $12, $20
+	frame_oam -32,  -4, $14, $20
+	frame_oam -32, -12, $16, $20
+	frame_oam -16,   4, $18, $20
+	frame_oam -16,  -4, $1a, $20
+	frame_oam -16, -12, $1c, $20
+	db $80
+
+.frame_9
+	frame_oam -32,   4, $1e, $20
+	frame_oam -32,  -4, $20, $20
+	frame_oam -32, -12, $22, $20
+	frame_oam -16,   4, $24, $20
+	frame_oam -16,  -4, $26, $20
+	frame_oam -16, -12, $28, $20
+	db $80
+
+.frame_10
+	frame_oam -32,   0, $2a, $20
+	frame_oam -32,  -8, $2c, $20
+	db $80
+
+.frame_11
+	frame_oam -32,   4, $2e, $20
+	frame_oam -32,  -4, $30, $20
+	frame_oam -32, -12, $32, $20
+	frame_oam -16,   4, $34, $20
+	frame_oam -16,  -4, $36, $20
+	frame_oam -16, -12, $38, $20
+	db $80
+; 0x17e1b
 
 Frameset_17e1b:
 	db $05,  6

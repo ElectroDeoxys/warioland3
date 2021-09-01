@@ -613,7 +613,7 @@ wca71:: ; ca71
 wca72:: ; ca72
 	ds $1
 
-wca73:: ; ca73
+wIsFloorTransition:: ; ca73
 	ds $1
 
 ; which table to use for jump velocities

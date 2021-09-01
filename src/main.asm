@@ -14,6 +14,16 @@ SECTION "Bank 2", ROMX
 INCLUDE "engine/bank2.asm"
 
 
+SECTION "Levels Common Gfx", ROMX
+
+LevelsCommonGfx: INCBIN "gfx/levels/common.2bpp"
+
+
+SECTION "Wario Palettes", romx
+
+INCLUDE "gfx/wario_palettes.asm"
+
+
 SECTION "Bank 3", ROMX
 
 INCLUDE "engine/bank3.asm"

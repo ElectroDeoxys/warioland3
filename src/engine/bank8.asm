@@ -2,7 +2,7 @@ Func_20000: ; 20000 (8:4000)
 	ld a, [wca8a]
 	and a
 	ret nz
-	ld a, [wca73]
+	ld a, [wIsFloorTransition]
 	and a
 	ret nz
 	ld a, [wca9b]
@@ -235,12 +235,12 @@ Func_20000: ; 20000 (8:4000)
 	dw Func_21156 ; OBJ_INTERACTION_18
 	dw Func_21245 ; OBJ_INTERACTION_19
 	dw Func_21358 ; OBJ_INTERACTION_1A
-	dw $5433      ; OBJ_INTERACTION_1B
-	dw $5455      ; OBJ_INTERACTION_1C
-	dw $5548      ; OBJ_INTERACTION_1D
-	dw $5569      ; OBJ_INTERACTION_1E
-	dw $55a2      ; OBJ_INTERACTION_1F
-	dw $55e7      ; OBJ_INTERACTION_20
+	dw ObjInteraction_RegularCoin ; OBJ_INTERACTION_1B
+	dw Func_21455 ; OBJ_INTERACTION_1C
+	dw Func_21548 ; OBJ_INTERACTION_1D
+	dw Func_21569 ; OBJ_INTERACTION_1E
+	dw Func_215a2 ; OBJ_INTERACTION_1F
+	dw Func_215e7 ; OBJ_INTERACTION_20
 	dw $564f      ; OBJ_INTERACTION_21
 	dw $5675      ; OBJ_INTERACTION_22
 	dw $5774      ; OBJ_INTERACTION_23
@@ -291,15 +291,15 @@ Func_20000: ; 20000 (8:4000)
 	dw $5ecd      ; OBJ_INTERACTION_50
 	dw $5f01      ; OBJ_INTERACTION_51
 	dw $5f28      ; OBJ_INTERACTION_52
-	dw Func_20202 ; OBJ_INTERACTION_53
-	dw Func_20202 ; OBJ_INTERACTION_54
-	dw Func_20202 ; OBJ_INTERACTION_55
-	dw Func_20202 ; OBJ_INTERACTION_56
-	dw Func_20202 ; OBJ_INTERACTION_57
-	dw Func_20202 ; OBJ_INTERACTION_58
+	dw ObjInteraction_None ; OBJ_INTERACTION_53
+	dw ObjInteraction_None ; OBJ_INTERACTION_54
+	dw ObjInteraction_None ; OBJ_INTERACTION_55
+	dw ObjInteraction_None ; OBJ_INTERACTION_56
+	dw ObjInteraction_None ; OBJ_INTERACTION_57
+	dw ObjInteraction_None ; OBJ_INTERACTION_58
 ; 0x20202
 
-Func_20202: ; 20202 (8:4202)
+ObjInteraction_None: ; 20202 (8:4202)
 	ret
 ; 0x20203
 
@@ -365,7 +365,7 @@ Func_2023b: ; 2023b (8:423b)
 	cp $01
 	ret z
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANFORMATION_FLAT_WARIO
+	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
 	jr z, Func_2028a
 	and a
 	ret nz
@@ -504,9 +504,9 @@ Func_20350: ; 20350 (8:4350)
 	ld b, $02
 	call SetObjUnk1C
 	ld a, [wTransformation]
-	cp (1 << 7) | TRANFORMATION_FAT_WARIO
+	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
 	jr z, .asm_20422
-	cp (1 << 6) | TRANFORMATION_SNOWMAN_WARIO
+	cp (1 << 6) | TRANSFORMATION_SNOWMAN_WARIO
 	jr z, .asm_20432
 	and a
 	ret nz
@@ -560,7 +560,7 @@ Func_20447: ; 20447 (8:4447)
 	dec a
 	jr nz, .asm_2045e
 	ld a, [wTransformation]
-	cp (1 << 7) | TRANFORMATION_FAT_WARIO
+	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
 	jp z, Func_205e7
 	jp Func_20602
 
@@ -678,14 +678,14 @@ Func_20447: ; 20447 (8:4447)
 
 Func_20585: ; 20585 (8:4585)
 	ld a, [wTransformation]
-	cp (1 << 6) | (1 << 7) | TRANFORMATION_HOT_WARIO
+	cp (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
 	jr nz, .asm_20593
 	ld a, [wca8f]
 	cp $02
 	jr nc, Func_205e7
 .asm_20593
 	ld a, [wTransformation]
-	cp (1 << 7) | TRANFORMATION_FAT_WARIO
+	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
 	jp z, Func_20350
 	ld a, [wWarioScreenXPos]
 	ld b, a
@@ -705,9 +705,9 @@ Func_20585: ; 20585 (8:4585)
 	ld b, $04
 	call SetObjUnk1C
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANFORMATION_FLAT_WARIO
+	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
 	jp z, Func_2028a
-	cp TRANFORMATION_BOUNCY_WARIO
+	cp TRANSFORMATION_BOUNCY_WARIO
 	jr z, .asm_205d1
 	ret
 .asm_205d1
@@ -722,7 +722,7 @@ Func_205e7: ; 205e7 (8:45e7)
 	ld b, $05
 	call SetObjUnk1C
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANFORMATION_ZOMBIE_WARIO
+	cp (1 << 6) | TRANSFORMATION_ZOMBIE_WARIO
 	ret nz
 	farcall SetState_ZombieKnockBack
 	ret
@@ -730,7 +730,7 @@ Func_205e7: ; 205e7 (8:45e7)
 
 Func_20602: ; 20602 (8:4602)
 	ld a, [wTransformation]
-	cp TRANFORMATION_INVISIBLE_WARIO
+	cp TRANSFORMATION_INVISIBLE_WARIO
 	jr z, .asm_2060c
 	and a
 	jr nz, Func_205e7
@@ -847,7 +847,7 @@ Func_20670: ; 20670 (8:4670)
 
 Func_206eb: ; 206eb (8:46eb)
 	ld a, [wTransformation]
-	cp TRANFORMATION_OWL_WARIO
+	cp TRANSFORMATION_OWL_WARIO
 	call z, Func_16d9
 	call Func_1079
 	call UpdateLevelMusic
@@ -1264,11 +1264,11 @@ Func_20a6f: ; 20a6f (8:4a6f)
 	call AddXOffset
 .asm_20acf
 	ld a, [wTransformation]
-	cp (1 << 6) | (1 << 7) | TRANFORMATION_BALL_O_STRING_WARIO
+	cp (1 << 6) | (1 << 7) | TRANSFORMATION_BALL_O_STRING_WARIO
 	jr z, .asm_20aff
-	cp (1 << 6) | (1 << 7) | TRANFORMATION_HOT_WARIO
+	cp (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
 	jr z, .asm_20b15
-	cp (1 << 6) | TRANFORMATION_UNK_0D
+	cp (1 << 6) | TRANSFORMATION_UNK_0D
 	jr z, .asm_20b2b
 	xor a
 	ld [wca86], a
@@ -1676,7 +1676,7 @@ Func_20e97: ; 20e97 (8:4e97)
 	ld a, [wTransformation]
 	bit 6, a
 	jp nz, Func_2022c
-	ld a, (1 << 6) | (1 << 7) | TRANFORMATION_HOT_WARIO
+	ld a, (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
 	ld [wTransformation], a
 	ld a, $01
 	ld [wca8f], a
@@ -1723,7 +1723,7 @@ SetState_OnFire: ; 20ed3 (8:4ed3)
 	ret nz
 
 	ld hl, Pals_c820
-	call Func_1af6
+	call SetWarioPal
 
 	ld a, $09
 	ld [wca7b], a
@@ -1931,7 +1931,7 @@ GetTreasure: ; 2109a (8:509a)
 	ld [wJumpVelIndex], a
 .asm_210ea
 	ld hl, Pals_c800
-	call Func_1af6
+	call SetWarioPal
 	ld a, $04
 	ld [wca7b], a
 	ld a, $40
@@ -1971,7 +1971,7 @@ Func_21156: ; 21156 (8:5156)
 	ld b, $0c
 	call SetObjUnk1C
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANFORMATION_FLAT_WARIO
+	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
 	jp z, SetState_FlatStretching
 	and a
 	jp nz, Func_2022c
@@ -2110,7 +2110,7 @@ Func_21245: ; 21245 (8:5245)
 .asm_212b8
 	load_sfx SFX_039
 
-	ld a, (1 << 6) | (1 << 7) | TRANFORMATION_BALL_O_STRING_WARIO
+	ld a, (1 << 6) | (1 << 7) | TRANSFORMATION_BALL_O_STRING_WARIO
 	ld [wTransformation], a
 	xor a
 	ld [wca8f], a
@@ -2146,7 +2146,7 @@ Func_21245: ; 21245 (8:5245)
 	ld [wFrameDuration], a
 	ld [wca68], a
 	ld hl, Pals_c860
-	call Func_1af6
+	call SetWarioPal
 
 	ld a, $09
 	ld [wca7b], a
@@ -2173,13 +2173,13 @@ Func_21358: ; 21358 (8:5358)
 	ld a, [wTransformation]
 	bit 6, a
 	jp nz, Func_20a69
-	cp $84
+	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
 	jr nz, .asm_21373
 	jp Func_20a69
 
 .asm_21373
 	call Func_20a63
-	ld a, (1 << 7) | TRANFORMATION_FAT_WARIO
+	ld a, (1 << 7) | TRANSFORMATION_FAT_WARIO
 	ld [wTransformation], a
 	ld a, $02
 	ld [wca93], a
@@ -2246,7 +2246,236 @@ Func_21358: ; 21358 (8:5358)
 	ret
 ; 0x21433
 
-	INCROM $21433, $21aac
+ObjInteraction_RegularCoin: ; 21433 (8:5433)
+	ld hl, wNumCoins + 1
+	ld a, [hl]
+	add $1
+	daa
+	ld [hld], a
+	ld a, [hl]
+	adc $00
+	daa
+	ld [hl], a
+	and $f0
+	jr z, .no_cap
+	ld a, HIGH(MAX_NUM_COINS)
+	ld [hli], a
+	ld a, LOW(MAX_NUM_COINS)
+	ld [hl], a
+.no_cap
+	load_sfx SFX_REGULAR_COIN
+	jp Func_20a63
+; 0x21455
+
+Func_21455: ; 21455 (8:5455)
+	ld a, [wWarioScreenXPos]
+	ld b, a
+	ld a, [wc1bf]
+	cp b
+	jr c, .asm_21469
+	ld a, [wc1c0]
+	or $20
+	ld [wc1c0], a
+	jr .asm_21471
+
+.asm_21469
+	ld a, [wc1c0]
+	or $10
+	ld [wc1c0], a
+.asm_21471
+	ld b, $06
+	call SetObjUnk1C
+
+	ld a, [wca8c]
+	and a
+	ret nz
+	ld a, [wTransformation]
+	bit 6, a
+	ret nz
+	cp (1 << 7) | TRANSFORMATION_ELECTRIC
+	ret z
+	ld a, [wc1c0]
+	bit 5, a
+	jr nz, .asm_21492
+	ld a, DIRECTION_RIGHT
+	ld [wDirection], a
+	jr .asm_21497
+.asm_21492
+	ld a, DIRECTION_LEFT
+	ld [wDirection], a
+
+.asm_21497
+	load_sfx SFX_040
+	xor a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wca9a], a
+	ld [wca89], a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	ld [wca8b], a
+	ld [wca9d], a
+	ld [wIsSmashAttacking], a
+	ld [wca8d], a
+
+	ld a, ST_ELECTRIC_START
+	ld [wWarioState], a
+	ld a, $ff
+	ld [wca70], a
+	ld a, $e5
+	ld [wca6f], a
+	ld a, $f7
+	ld [wca71], a
+	ld a, $09
+	ld [wca72], a
+
+	ld a, (1 << 7) | TRANSFORMATION_ELECTRIC
+	ld [wTransformation], a
+	ld a, $04
+	ld [wca93], a
+	ld a, $04
+	ld [wca92], a
+	ld a, $01
+	ld [wca94], a
+	call UpdateLevelMusic
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld hl, Pals_c870
+	call SetWarioPal
+
+	ld a, $09
+	ld [wca7b], a
+	ld a, $68
+	ld [wca7c + 0], a
+	ld a, $00
+	ld [wca7c + 1], a
+	call Func_15b0
+
+	load_oam_ptr OAM_1790e
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_2152e
+	load_frameset_ptr Frameset_17b79
+	jr .asm_21538
+.asm_2152e
+	load_frameset_ptr Frameset_17b76
+.asm_21538
+	update_anim_1
+	ret
+; 0x21548
+
+Func_21548: ; 21548 (8:5548)
+	call Func_20a63
+	ld a, [wca8c]
+	and a
+	ret nz
+	ld a, [wTransformation]
+	bit 6, a
+	ret nz
+	cp TRANSFORMATION_INVISIBLE_WARIO
+	ret z
+	farcall SetState_TurningInvisible
+	ret
+; 0x21569
+
+Func_21569: ; 21569 (8:5569)
+	ld a, [wc1c0]
+	bit 7, a
+	jr nz, .asm_21573
+	jp Func_2022c
+.asm_21573
+	ld a, [wca8c]
+	and a
+	ret nz
+	ld a, [wTransformation]
+	bit 6, a
+	jp nz, Func_2022c
+	cp TRANSFORMATION_PUFFY_WARIO
+	jp z, Func_2022c
+	ld a, [wTransformation]
+	cp TRANSFORMATION_OWL_WARIO
+	call z, Func_16d9
+	ld b, $06
+	call SetObjUnk1C
+	farcall SetState_PuffyInflating
+	ret
+; 0x215a2
+
+Func_215a2: ; 215a2 (8:55a2)
+	ld a, [wca8c]
+	and a
+	jp nz, Func_20a69
+	ld a, [wTransformation]
+	cp (1 << 6) | TRANSFORMATION_ZOMBIE_WARIO
+	jp z, Func_205e7
+	bit 6, a
+	jp nz, Func_20a69
+
+	ld b, $06
+	call SetObjUnk1C
+
+	load_sfx SFX_028
+
+	ld a, (1 << 6) | TRANSFORMATION_ZOMBIE_WARIO
+	ld [wTransformation], a
+	ld a, $04
+	ld [wca93], a
+	ld a, $04
+	ld [wca92], a
+	ld a, $02
+	ld [wca94], a
+	farcall SetState_ZombieIdling
+	ret
+; 0x215e7
+
+Func_215e7: ; 215e7 (8:55e7)
+	ld a, [wc1c0]
+	and $c0
+	jp nz, Func_20447
+	ld a, [wEnemyDirection]
+	cp DIRECTION_RIGHT
+	jr z, .asm_21600
+	ld a, [wc1c0]
+	bit 5, a
+	jr nz, .asm_2160a
+	jp Func_2022c
+.asm_21600
+	ld a, [wc1c0]
+	bit 4, a
+	jr nz, .asm_2160a
+	jp Func_2022c
+.asm_2160a
+	ld a, [wca8c]
+	and a
+	ret nz
+	ld b, $06
+	call SetObjUnk1C
+	ld a, [wTransformation]
+	bit 6, a
+	jp nz, Func_2022c
+	cp TRANSFORMATION_BOUNCY_WARIO
+	jp z, Func_2022c
+	ld a, TRANSFORMATION_BOUNCY_WARIO
+	ld [wTransformation], a
+	ld a, $02
+	ld [wca93], a
+	ld a, $02
+	ld [wca92], a
+	ld a, $01
+	ld [wca94], a
+	ld a, $03
+	ld [wca90], a
+	ld a, $84
+	ld [wca91], a
+	farcall SetState_BouncyStart
+	ret
+; 0x2164f
+
+	INCROM $2164f, $21aac
 
 Func_21aac: ; 21aac (8:5aac)
 	ld a, [wIsSmashAttacking]

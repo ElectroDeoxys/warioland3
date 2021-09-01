@@ -2012,7 +2012,7 @@ Func_d8c: ; d8c (0:d8c)
 
 Func_d9e: ; d9e (0:d9e)
 	ld a, [wTransformation]
-	cp TRANFORMATION_INVISIBLE_WARIO
+	cp TRANSFORMATION_INVISIBLE_WARIO
 	jr nz, .asm_db1
 	ld hl, wca8d
 	inc [hl]
@@ -2412,7 +2412,7 @@ Func_1070: ; 1070 (0:1070)
 
 Func_1079: ; 1079 (0:1079)
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANFORMATION_UNK_13
+	cp (1 << 6) | TRANSFORMATION_UNK_13
 	call z, Func_10a7
 
 	xor a
@@ -2573,8 +2573,8 @@ Func_11ae: ; 11ae (0:11ae)
 	load_sfx SFX_0E1
 	ld a, $08
 	ld [wc1aa], a
-	ld a, $01
-	ld [wca73], a
+	ld a, TRUE
+	ld [wIsFloorTransition], a
 	xor a
 	ld [wcac8], a
 	ret
@@ -2586,8 +2586,8 @@ Func_11d6: ; 11d6 (0:11d6)
 	load_sfx SFX_0E1
 	ld a, $04
 	ld [wc1aa], a
-	ld a, $01
-	ld [wca73], a
+	ld a, TRUE
+	ld [wIsFloorTransition], a
 	ld a, $80
 	ld [wc1a9], a
 	xor a
@@ -3002,7 +3002,7 @@ Func_1570: ; 1570 (0:1570)
 .asm_157d
 	call UpdateLevelMusic
 	ld hl, Pals_c800
-	call Func_1af6
+	call SetWarioPal
 	ld a, [wJumpVelTable]
 	and a
 	jr nz, .asm_159e
@@ -3832,20 +3832,20 @@ FillWhiteOBPal: ; 1ad1 (0:1ad1)
 
 	INCROM $1ae2, $1af6
 
-; hl = palette to copy from bank 3
-Func_1af6: ; 1af6 (0:1af6)
+; hl = palette to copy from Wario Palettes
+SetWarioPal: ; 1af6 (0:1af6)
 	ld a, h
 	ld [wWarioPalsPtr + 0], a
 	ld a, l
 	ld [wWarioPalsPtr + 1], a
 	ld a, [wROMBank]
 	push af
-	ld a, $03
+	ld a, BANK("Wario Palettes")
 	bankswitch
 	push hl
 	ld de, wTempPals2
 	ld b, 2 palettes
-	ld a, $03
+	ld a, BANK("Wario Palettes")
 	ldh [hCallFuncBank], a
 	call_hram CopyHLToDE_Short
 	pop hl

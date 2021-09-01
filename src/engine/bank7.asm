@@ -1397,7 +1397,7 @@ SetState_Diving: ; 1cdf6 (7:4df6)
 	ld [wc0e0], a
 
 	ld hl, Pals_c800
-	call Func_1af6
+	call SetWarioPal
 	ld a, $04
 	ld [wca7b], a
 	ld a, $60
@@ -2328,7 +2328,7 @@ UpdateState_StungRecovery: ; 1d766 (7:5766)
 	ld a, $10
 	ld [wca8c], a
 	ld hl, Pals_c800
-	call Func_1af6
+	call SetWarioPal
 	ld a, $e5
 	ld [wca6f], a
 	farcall Func_1996e
@@ -5452,7 +5452,7 @@ Func_1f64a: ; 1f64a (7:764a)
 	jr nz, .asm_1f67b
 
 	ld hl, Pals_c800
-	call Func_1af6
+	call SetWarioPal
 .asm_1f67b
 	ret
 
@@ -5502,12 +5502,12 @@ Func_1f6c2: ; 1f6c2 (7:76c2)
 
 .asm_1f6ce
 	ld hl, Pals_c810
-	call Func_1af6
+	call SetWarioPal
 	ret
 
 .asm_1f6d5
 	ld hl, Pals_c800
-	call Func_1af6
+	call SetWarioPal
 	ret
 ; 0x1f6dc
 

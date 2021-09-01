@@ -454,7 +454,7 @@ SetState_BlindIdling: ; 1ed331 (7b:5331)
 	ld [wca68], a
 
 	ld hl, Pals_c800
-	call Func_1af6
+	call SetWarioPal
 
 	ld a, $04
 	ld [wca7b], a
@@ -871,7 +871,7 @@ UpdateState_BallShot: ; 1edc15 (7b:5c15)
 
 .asm_1edc41
 	ld hl, Pals_c9d0
-	call Func_1af6
+	call SetWarioPal
 
 	xor a
 	ld [wFrameDuration], a
@@ -881,7 +881,7 @@ UpdateState_BallShot: ; 1edc15 (7b:5c15)
 
 .asm_1edc5a
 	ld hl, Pals_c9c0
-	call Func_1af6
+	call SetWarioPal
 
 	xor a
 	ld [wFrameDuration], a
@@ -1060,7 +1060,7 @@ Func_1ede4d: ; 1ede4d (7b:5e4d)
 	call Func_1079
 	call UpdateLevelMusic
 	ld hl, Pals_c800
-	call Func_1af6
+	call SetWarioPal
 	farcall StartJump_FromInput
 	ret
 ; 0x1ede69
@@ -1069,7 +1069,7 @@ Func_1ede69: ; 1ede69 (7b:5e69)
 	call Func_1079
 	call UpdateLevelMusic
 	ld hl, Pals_c800
-	call Func_1af6
+	call SetWarioPal
 	farcall Func_1e174
 	ret
 ; 0x1ede85

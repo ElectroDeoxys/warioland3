@@ -46,7 +46,7 @@ Func_19741: ; 19741 (6:5741)
 
 Func_19746: ; 19746 (6:5746)
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANFORMATION_FLAT_WARIO
+	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
 	jr z, .asm_19774
 	ld a, [wca72]
 	sub $01
@@ -121,7 +121,7 @@ Func_197b1: ; 197b1 (6:57b1)
 
 Func_197b6: ; 197b6 (6:57b6)
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANFORMATION_FLAT_WARIO
+	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
 	jr z, .asm_197e6
 	ld a, [wca71]
 	cpl
@@ -347,7 +347,7 @@ Func_198e0: ; 198e0 (6:58e0)
 
 Func_19942: ; 19942 (6:5942)
 	ld a, [wTransformation]
-	cp TRANFORMATION_UNK_07
+	cp TRANSFORMATION_PUFFY_WARIO
 	jr z, .asm_1994e
 	ld a, $01
 	ld [wc0d8], a
@@ -385,7 +385,7 @@ Func_1996e: ; 1996e (6:596e)
 	xor a
 	ld [wced2], a
 	ld a, [wTransformation]
-	cp TRANFORMATION_UNK_07
+	cp TRANSFORMATION_PUFFY_WARIO
 	jr z, .asm_19988
 	ld a, $01
 	ld [wc0d8], a
@@ -421,7 +421,7 @@ Func_1996e: ; 1996e (6:596e)
 	and a
 	ret nz
 	ld a, [wTransformation]
-	cp TRANFORMATION_UNK_07
+	cp TRANSFORMATION_PUFFY_WARIO
 	jr z, .asm_199c0
 	ld a, $01
 	ld [wc0d8], a
@@ -1226,7 +1226,7 @@ SetState_SandFalling: ; 1a0e8 (6:60e8)
 	ld [wca8b], a
 	ld [wc0e0], a
 	ld hl, Pals_c800
-	call Func_1af6
+	call SetWarioPal
 ;	fallthrough
 
 Func_1a12a: ; 1a12a (6:612a)

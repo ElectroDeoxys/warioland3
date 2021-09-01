@@ -32,6 +32,8 @@ ROMX $01
 ROMX $02
 	"Bank 2"
 ROMX $03
+	"Levels Common Gfx"
+	"Wario Palettes"
 	"Bank 3"
 ROMX $04
 	"Bank 4"

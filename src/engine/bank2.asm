@@ -194,8 +194,8 @@ Func_80aa: ; 80aa (2:40aa)
 	jr nz, .asm_8209
 	ld hl, wc1aa
 	res 2, [hl]
-	xor a
-	ld [wca73], a
+	xor a ; FALSE
+	ld [wIsFloorTransition], a
 	jr .asm_8209
 .asm_81e4
 	ld b, $04
@@ -214,8 +214,8 @@ Func_80aa: ; 80aa (2:40aa)
 .asm_8200
 	ld hl, wc1aa
 	res 3, [hl]
-	xor a
-	ld [wca73], a
+	xor a ; FALSE
+	ld [wIsFloorTransition], a
 .asm_8209
 	xor a
 	ld [wc0be], a
@@ -342,13 +342,13 @@ Func_80aa: ; 80aa (2:40aa)
 	ret z
 
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANFORMATION_UNK_13
+	cp (1 << 6) | TRANSFORMATION_UNK_13
 	jr z, .asm_82ff
 	ld a, [wc0e6]
 	and a
 	jr nz, .asm_82ff
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANFORMATION_UNK_13
+	cp (1 << 6) | TRANSFORMATION_UNK_13
 	jr nz, .asm_8308
 
 .asm_82ff
@@ -599,7 +599,7 @@ Func_846e: ; 846e (2:446e)
 	call UpdateLevelMusic
 	xor a
 	ld [wc0da], a
-	ld [wca73], a
+	ld [wIsFloorTransition], a
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
@@ -753,7 +753,7 @@ Func_867f: ; 867f (2:467f)
 .asm_8739
 	xor a
 	ld [wceda], a
-	ld [wca73], a
+	ld [wIsFloorTransition], a
 	ld a, [wced5]
 	ld [wSubSequence], a
 	ret
@@ -927,8 +927,8 @@ Func_8747: ; 8747 (2:4747)
 	ld a, [wceef]
 	and %00111100
 	jr nz, .asm_8917
-	xor a
-	ld [wca73], a
+	xor a ; FALSE
+	ld [wIsFloorTransition], a
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
@@ -942,8 +942,8 @@ Func_8747: ; 8747 (2:4747)
 	jr .asm_8935
 
 .asm_8917
-	ld a, $01
-	ld [wca73], a
+	ld a, TRUE
+	ld [wIsFloorTransition], a
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
@@ -953,8 +953,8 @@ Func_8747: ; 8747 (2:4747)
 	ldh [rSVBK], a
 
 .asm_8935
-	xor a
-	ld [wca73], a
+	xor a ; FALSE
+	ld [wIsFloorTransition], a
 
 	ldh a, [rSVBK]
 	push af
@@ -8617,7 +8617,7 @@ Func_b9a6: ; b9a6 (2:79a6)
 	ret
 .asm_ba13
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANFORMATION_FLAT_WARIO
+	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
 	jr nz, .asm_ba1f
 	ld a, [wJumpVelTable]
 	and a

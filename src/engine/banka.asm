@@ -34,7 +34,7 @@ Func_28000: ; 28000 (a:4000)
 	dw UpdateState_FatLanding                 ; ST_FAT_LANDING
 	dw UpdateState_FatSinking                 ; ST_FAT_SINKING
 	dw UpdateState_FatRecovering              ; ST_FAT_RECOVERING
-	dw $53d0                                  ; ST_UNKNOWN_7F
+	dw UpdateState_ElectricStart              ; ST_ELECTRIC_START
 	dw UpdateState_Electric                   ; ST_ELECTRIC
 	dw UpdateState_ElectricDizzy              ; ST_ELECTRIC_DIZZY
 	dw UpdateState_TurningInvisible           ; ST_TURNING_INVISIBLE
@@ -291,15 +291,15 @@ UpdateState_Hot: ; 2827a (a:427a)
 	jr .asm_28313
 .asm_282d4
 	ld hl, Pals_c830
-	call Func_1af6
+	call SetWarioPal
 	jr .asm_282ea
 .asm_282dc
 	ld hl, Pals_c840
-	call Func_1af6
+	call SetWarioPal
 	jr .asm_282ea
 .asm_282e4
 	ld hl, Pals_c850
-	call Func_1af6
+	call SetWarioPal
 .asm_282ea
 	call Func_2b07a
 
@@ -325,7 +325,7 @@ UpdateState_Hot: ; 2827a (a:427a)
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld hl, Pals_c820
-	call Func_1af6
+	call SetWarioPal
 	ld a, $09
 	ld [wca7b], a
 	ld a, $48
@@ -426,7 +426,7 @@ SetState_FlatAirborne: ; 28435 (a:4435)
 	bit 6, a
 	ret nz
 	ld a, [wTransformation]
-	cp TRANFORMATION_OWL_WARIO
+	cp TRANSFORMATION_OWL_WARIO
 	call z, Func_16d9
 
 	ldh a, [rSVBK]
@@ -460,7 +460,7 @@ SetState_FlatAirborne: ; 28435 (a:4435)
 	pop af
 	ldh [rSVBK], a
 
-	ld a, (1 << 6) | TRANFORMATION_FLAT_WARIO
+	ld a, (1 << 6) | TRANSFORMATION_FLAT_WARIO
 	ld [wTransformation], a
 	load_sfx SFX_01B
 	call UpdateLevelMusic
@@ -1846,7 +1846,97 @@ UpdateState_FatRecovering: ; 293b9 (a:53b9)
 	jp Func_1570
 ; 0x293d0
 
-	INCROM $293d0, $294bf
+UpdateState_ElectricStart: ; 293d0 (a:53d0)
+	farcall Func_19b25
+	ld a, [wc0d7]
+	and a
+	jp nz, Func_11f6
+	ld a, [wWaterInteraction]
+	and a
+	jp nz, Func_1570
+	update_anim_1
+
+	ld a, [wAnimationHasFinished]
+	and a
+	ret z
+
+	ld a, $01
+	ld [wca8c], a
+	ld a, ST_ELECTRIC
+	ld [wWarioState], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	ld a, $06
+	ld [wJumpVelIndex], a
+	ld a, $ff
+	ld [wca70], a
+	ld a, $f7
+	ld [wca71], a
+	ld a, $09
+	ld [wca72], a
+	ld a, [wca8b]
+	and a
+	jr z, .asm_2946e
+	ld a, $e5
+	ld [wca6f], a
+	ldh a, [hYPosHi]
+	ldh [hffad], a
+	ldh a, [hYPosLo]
+	ldh [hffae], a
+	ldh a, [hXPosHi]
+	ldh [hffaf], a
+	ldh a, [hXPosLo]
+	ldh [hffb0], a
+	farcall Func_1996e
+	ld a, [wWarioState]
+	cp ST_ELECTRIC
+	ret nz
+	ld a, b
+	and a
+	jr nz, .asm_2947a
+	xor a
+	ld [wca8b], a
+	ldh a, [hffad]
+	ldh [hYPosHi], a
+	ldh a, [hffae]
+	ldh [hYPosLo], a
+	ldh a, [hffaf]
+	ldh [hXPosHi], a
+	ldh a, [hffb0]
+	ldh [hXPosLo], a
+.asm_2946e
+	ld a, $e5
+	ld [wca6f], a
+	ld a, $01
+	ld [wJumpVelTable], a
+	jr .asm_29493
+.asm_2947a
+	ld a, $f1
+	ld [wca6f], a
+	xor a
+	ld [wJumpVelTable], a
+	ldh a, [hffad]
+	ldh [hYPosHi], a
+	ldh a, [hffae]
+	ldh [hYPosLo], a
+	ldh a, [hffaf]
+	ldh [hXPosHi], a
+	ldh a, [hffb0]
+	ldh [hXPosLo], a
+
+.asm_29493
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_294a5
+	load_frameset_ptr Frameset_17b8d
+	jr .asm_294af
+.asm_294a5
+	load_frameset_ptr Frameset_17b7c
+.asm_294af
+	update_anim_1
+	ret
+; 0x294bf
 
 UpdateState_Electric: ; 294bf (a:54bf)
 	farcall Func_19b25
@@ -2052,7 +2142,64 @@ UpdateState_ElectricDizzy: ; 29672 (a:5672)
 	jp Func_1570
 ; 0x29689
 
-	INCROM $29689, $2972e
+SetState_TurningInvisible: ; 29689 (a:5689)
+	load_sfx SFX_03F
+	xor a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wca9a], a
+	ld [wca89], a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	ld [wca8b], a
+	ld [wca9d], a
+	ld [wIsSmashAttacking], a
+	inc a
+	ld [wca8a], a
+
+	ld a, ST_TURNING_INVISIBLE
+	ld [wWarioState], a
+
+	ld a, $ff
+	ld [wca70], a
+	ld a, $e5
+	ld [wca6f], a
+	ld a, $f7
+	ld [wca71], a
+	ld a, $09
+	ld [wca72], a
+	xor a
+	ld [wca93], a
+	ld [wca92], a
+	ld [wca94], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld hl, Pals_c800
+	call SetWarioPal
+
+	ld a, $04
+	ld [wca7b], a
+	ld a, $50
+	ld [wca7c + 0], a
+	ld a, $00
+	ld [wca7c + 1], a
+	call Func_15b0
+
+	load_oam_ptr OAM_17cf7
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_29714
+	load_frameset_ptr Frameset_17e1b
+	jr .asm_2971e
+.asm_29714
+	load_frameset_ptr Frameset_17e3a
+.asm_2971e
+	update_anim_1
+	ret
+; 0x2972e
 
 UpdateState_TurningInvisible: ; 2972e (a:572e)
 	update_anim_1
@@ -2061,14 +2208,91 @@ UpdateState_TurningInvisible: ; 2972e (a:572e)
 	ret z
 	xor a
 	ld [wca8a], a
-	ld a, TRANFORMATION_INVISIBLE_WARIO
+	ld a, TRANSFORMATION_INVISIBLE_WARIO
 	ld [wTransformation], a
 	call UpdateLevelMusic
 	farcall SetState_Idling
 	ret
 ; 0x2975e
 
-	INCROM $2975e, $29816
+SetState_PuffyInflating: ; 2975e (a:575e)
+	ld a, TRANSFORMATION_PUFFY_WARIO
+	ld [wTransformation], a
+	ld a, $01
+	ld [wca92], a
+	ld a, $02
+	ld [wca93], a
+	ld a, $01
+	ld [wca94], a
+
+	load_sfx SFX_025
+
+	ld a, ST_PUFFY_INFLATING
+	ld [wWarioState], a
+
+	ld a, $ff
+	ld [wca70], a
+	ld a, $e5
+	ld [wca6f], a
+	ld a, $f7
+	ld [wca71], a
+	ld a, $09
+	ld [wca72], a
+
+	xor a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wca9a], a
+	ld [wca89], a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	ld [wca8b], a
+	ld [wca9d], a
+	ld [wIsSmashAttacking], a
+	ld [wca6d], a
+	ld [wca6e], a
+	ld [wcee0], a
+	ld [wcee1], a
+	ld [wcee2], a
+	call UpdateLevelMusic
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld a, $09
+	ld [wca7b], a
+	ld a, $70
+	ld [wca7c + 0], a
+	ld a, $00
+	ld [wca7c + 1], a
+	call Func_15b0
+
+	load_oam_ptr OAM_1dc93f
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_297fb
+	ld a, $4c
+	ld [wFramesetPtr], a
+	ld a, $c0
+	ld [$ca82], a
+	jr .asm_29805
+.asm_297fb
+	ld a, $4c
+	ld [wFramesetPtr], a
+	ld a, $c9
+	ld [$ca82], a
+.asm_29805
+	ld a, [wOAMBank]
+	ldh [hCallFuncBank], a
+	ld a, $53
+	ldh [hCallFuncPointer], a
+	ld a, $0e
+	ldh [$ff8e], a
+	call hCallFunc
+	ret
+; 0x29816
 
 UpdateState_PuffyInflating: ; 29816 (a:5816)
 	ld a, [wOAMBank]
@@ -2092,7 +2316,7 @@ SetState_PuffyRising: ; 2982b (a:582b)
 	ld [wJumpVelTable], a
 
 	ld hl, Pals_c800
-	call Func_1af6
+	call SetWarioPal
 
 	ld a, [wDirection]
 	and a
@@ -2306,7 +2530,7 @@ SetState_ZombieIdling: ; 299d0 (a:59d0)
 	ld [wca68], a
 
 	ld hl, Pals_c890
-	call Func_1af6
+	call SetWarioPal
 
 	ld a, $0b
 	ld [wca7b], a
@@ -2709,7 +2933,7 @@ UpdateState_ZombieRecovering: ; 29e7e (a:5e7e)
 	ld d, $00
 	ld hl, Pals_c890
 	add hl, de
-	call Func_1af6
+	call SetWarioPal
 	ret
 
 .asm_29ea5
@@ -2781,7 +3005,62 @@ UpdateState_ZombieWrithing: ; 29f42 (a:5f42)
 	ret
 ; 0x29f59
 
-	INCROM $29f59, $29ffa
+SetState_BouncyStart: ; 29f59 (a:5f59)
+	ld a, ST_BOUNCY_START
+	ld [wWarioState], a
+	ld a, FALLING_JUMP_VEL_INDEX
+	ld [wJumpVelIndex], a
+	ld a, $02
+	ld [wJumpVelTable], a
+	ld a, $ff
+	ld [wca70], a
+	ld a, $e3
+	ld [wca6f], a
+	ld a, $f7
+	ld [wca71], a
+	ld a, $09
+	ld [wca72], a
+
+	xor a
+	ld [wca8d], a
+	ld [wca86], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wca9a], a
+	ld [wca89], a
+	ld [wca8b], a
+	ld [wca9d], a
+	ld [wIsSmashAttacking], a
+	call UpdateLevelMusic
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	ld hl, Pals_c910
+	call SetWarioPal
+
+	ld a, $0b
+	ld [wca7b], a
+	ld a, $48
+	ld [wca7c + 0], a
+	ld a, $00
+	ld [wca7c + 1], a
+	call Func_15b0
+
+	load_oam_ptr OAM_1fc95e
+
+	load_frameset_ptr Frameset_1fcc6c
+	update_anim_2
+
+	farcall Func_197b1
+	ld a, b
+	and a
+	ret z
+	ld b, $02
+	call AddXOffset
+	ret
+; 0x29ffa
 
 UpdateState_BouncyStart: ; 29ffa (a:5ffa)
 	farcall Func_19b25
@@ -3018,7 +3297,7 @@ SetState_BouncyUpsideDown: ; 2a21e (a:621e)
 	ld [wca68], a
 
 	ld hl, Pals_c910
-	call Func_1af6
+	call SetWarioPal
 
 	load_frameset_ptr Frameset_1fcc82
 	update_anim_2
@@ -3075,7 +3354,7 @@ Func_2a2e7: ; 2a2e7 (a:62e7)
 	ld [wca94], a
 
 	ld hl, Pals_c910
-	call Func_1af6
+	call SetWarioPal
 
 	ld a, [wDirection]
 	and a
@@ -3750,7 +4029,7 @@ UpdateState_BatIdling: ; 2aa08 (a:6a08)
 	ld [wFrameDuration], a
 	ld [wca68], a
 	ld hl, $4950
-	call Func_1af6
+	call SetWarioPal
 	ld a, $0b
 	ld [wca7b], a
 	ld a, $58
@@ -3942,7 +4221,7 @@ Func_2ad6a: ; 2ad6a (a:6d6a)
 	inc a
 	ld [wWarioStateCycles], a
 	ld hl, Pals_c800
-	call Func_1af6
+	call SetWarioPal
 	ld a, $04
 	ld [wca7b], a
 	ld a, $60
@@ -4001,13 +4280,13 @@ Func_2ae3b: ; 2ae3b (a:6e3b)
 	jr z, .asm_2ae54
 	ld hl, Pals_c920
 	add hl, de
-	call Func_1af6
+	call SetWarioPal
 	ret
 
 .asm_2ae54
 	ld hl, Pals_c910
 	add hl, de
-	call Func_1af6
+	call SetWarioPal
 	ret
 ; 0x2ae5c
 

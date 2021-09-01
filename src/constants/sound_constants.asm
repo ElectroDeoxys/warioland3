@@ -70,7 +70,7 @@
 	const SFX_006                          ; 106
 	const SFX_ATTACK                       ; 107
 	const SFX_ATTACK_POWERED_UP            ; 108
-	const SFX_009                          ; 109
+	const SFX_REGULAR_COIN                          ; 109
 	const SFX_ROLL                         ; 10a
 	const SFX_SLIDE                        ; 10b
 	const SFX_00C                          ; 10c
