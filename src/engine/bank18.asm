@@ -1023,7 +1023,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	jr nz, .asm_61a06
 .asm_61a02
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 .asm_61a06
 	ldh a, [hffa1]
 	ld [hl], a
@@ -1084,7 +1084,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	jr nz, .asm_61a76
 .asm_61a72
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 .asm_61a76
 	ldh a, [hffa1]
 	ld [hl], a
@@ -1145,7 +1145,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	jr nz, .asm_61ae6
 .asm_61ae2
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 .asm_61ae6
 	ldh a, [hffa1]
 	ld [hl], a
@@ -1206,7 +1206,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	jr nz, .asm_61b56
 .asm_61b52
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 .asm_61b56
 	ldh a, [hffa1]
 	ld [hl], a
@@ -1267,7 +1267,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	jr nz, .asm_61bc6
 .asm_61bc2
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 .asm_61bc6
 	ldh a, [hffa1]
 	ld [hl], a
@@ -1328,7 +1328,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	jr nz, .asm_61c36
 .asm_61c32
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 .asm_61c36
 	ldh a, [hffa1]
 	ld [hl], a
@@ -1389,7 +1389,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	jr nz, .asm_61ca6
 .asm_61ca2
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 .asm_61ca6
 	ldh a, [hffa1]
 	ld [hl], a
@@ -1450,7 +1450,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	jr nz, .asm_61d16
 .asm_61d12
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 .asm_61d16
 	ldh a, [hffa1]
 	ld [hl], a
@@ -1466,7 +1466,7 @@ Func_618e2: ; 618e2 (18:58e2)
 
 Func_61d28: ; 61d28 (18:5d28)
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 	ldh a, [hffa2]
 	ld [hl], a
 	ld l, LOW(wObj1Unk1b)
@@ -1480,7 +1480,7 @@ Func_61d28: ; 61d28 (18:5d28)
 
 Func_61d41: ; 61d41 (18:5d41)
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 	ldh a, [hffa2]
 	ld [hl], a
 	ld l, LOW(wObj2Unk1b)
@@ -1494,7 +1494,7 @@ Func_61d41: ; 61d41 (18:5d41)
 
 Func_61d5a: ; 61d5a (18:5d5a)
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 	ldh a, [hffa2]
 	ld [hl], a
 	ld l, LOW(wObj3Unk1b)
@@ -1508,7 +1508,7 @@ Func_61d5a: ; 61d5a (18:5d5a)
 
 Func_61d73: ; 61d73 (18:5d73)
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 	ldh a, [hffa2]
 	ld [hl], a
 	ld l, LOW(wObj4Unk1b)
@@ -1522,7 +1522,7 @@ Func_61d73: ; 61d73 (18:5d73)
 
 Func_61d8c: ; 61d8c (18:5d8c)
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 	ldh a, [hffa2]
 	ld [hl], a
 	ld l, LOW(wObj5Unk1b)
@@ -1536,7 +1536,7 @@ Func_61d8c: ; 61d8c (18:5d8c)
 
 Func_61da5: ; 61da5 (18:5da5)
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 	ldh a, [hffa2]
 	ld [hl], a
 	ld l, LOW(wObj6Unk1b)
@@ -1550,7 +1550,7 @@ Func_61da5: ; 61da5 (18:5da5)
 
 Func_61dbe: ; 61dbe (18:5dbe)
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 	ldh a, [hffa2]
 	ld [hl], a
 	ld l, LOW(wObj7Unk1b)
@@ -1564,7 +1564,7 @@ Func_61dbe: ; 61dbe (18:5dbe)
 
 Func_61dd7: ; 61dd7 (18:5dd7)
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 	ldh a, [hffa2]
 	ld [hl], a
 	ld l, LOW(wObj8Unk1b)
@@ -1588,7 +1588,7 @@ Func_61df0: ; 61df0 (18:5df0)
 	jr nz, .asm_61e04
 .asm_61e00
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 .asm_61e04
 	ldh a, [hffa3]
 	ld [hl], a
@@ -1610,7 +1610,7 @@ Func_61e14: ; 61e14 (18:5e14)
 	jr nz, .asm_61e28
 .asm_61e24
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 .asm_61e28
 	ldh a, [hffa3]
 	ld [hl], a
@@ -1632,7 +1632,7 @@ Func_61e38: ; 61e38 (18:5e38)
 	jr nz, .asm_61e4c
 .asm_61e48
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 .asm_61e4c
 	ldh a, [hffa3]
 	ld [hl], a
@@ -1654,7 +1654,7 @@ Func_61e5c: ; 61e5c (18:5e5c)
 	jr nz, .asm_61e70
 .asm_61e6c
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 .asm_61e70
 	ldh a, [hffa3]
 	ld [hl], a
@@ -1676,7 +1676,7 @@ Func_61e80: ; 61e80 (18:5e80)
 	jr nz, .asm_61e94
 .asm_61e90
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 .asm_61e94
 	ldh a, [hffa3]
 	ld [hl], a
@@ -1698,7 +1698,7 @@ Func_61ea4: ; 61ea4 (18:5ea4)
 	jr nz, .asm_61eb8
 .asm_61eb4
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 .asm_61eb8
 	ldh a, [hffa3]
 	ld [hl], a
@@ -1720,7 +1720,7 @@ Func_61ec8: ; 61ec8 (18:5ec8)
 	jr nz, .asm_61edc
 .asm_61ed8
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 .asm_61edc
 	ldh a, [hffa3]
 	ld [hl], a
@@ -1742,7 +1742,7 @@ Func_61eec: ; 61eec (18:5eec)
 	jr nz, .asm_61f00
 .asm_61efc
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 .asm_61f00
 	ldh a, [hffa3]
 	ld [hl], a

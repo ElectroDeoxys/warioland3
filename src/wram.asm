@@ -434,7 +434,7 @@ wc1be:: ; c1be
 wc1bf:: ; c1bf
 	ds $1
 
-wc1c0:: ; c1c0
+wInteractionSide:: ; c1c0
 	ds $1
 
 wc1c1:: ; c1c1
@@ -678,7 +678,7 @@ wWarioScreenYPos:: ; ca87
 wWarioScreenXPos:: ; ca88
 	ds $1
 
-wca89:: ; ca89
+wAttackCounter:: ; ca89
 	ds $1
 
 wca8a:: ; ca8a
@@ -687,10 +687,10 @@ wca8a:: ; ca8a
 wca8b:: ; ca8b
 	ds $1
 
-wca8c:: ; ca8c
+wInvincibleCounter:: ; ca8c
 	ds $1
 
-wca8d:: ; ca8d
+wInvisibleFrame:: ; ca8d
 	ds $1
 
 ; lower 5 bits: TRANSFORMATION_* constant
@@ -715,22 +715,26 @@ wca93:: ; ca93
 wca94:: ; ca94
 	ds $1
 
-wca95:: ; ca95
+wIsTurningMidAir:: ; ca95
 	ds $1
 
 wIsSmashAttacking:: ; ca96
 	ds $1
 
-wca97:: ; ca97
+wGroundShakeCounter:: ; ca97
 	ds $1
 
-wca98:: ; ca98
+; whether Wario is causing ground shaking
+wIsWarioGroundShaking:: ; ca98
 	ds $1
 
-wca99:: ; ca99
+wIsGettingOffLadder:: ; ca99
 	ds $1
 
-wca9a:: ; ca9a
+; Wario's grabbing state
+; lower 4 bits is GRAB_* constant
+; bit 7: heavy object
+wGrabState:: ; ca9a
 	ds $1
 
 wca9b:: ; ca9b
@@ -739,7 +743,7 @@ wca9b:: ; ca9b
 wca9c:: ; ca9c
 	ds $1
 
-wca9d:: ; ca9d
+wIsRolling:: ; ca9d
 	ds $1
 
 ; counter to keep track of number of times
@@ -1492,7 +1496,12 @@ w3d500:: ; d500
 w3d501:: ; d501
 	ds $1
 
-	ds $b
+	ds $5
+
+w3d507:: ; d507
+	ds $2
+
+	ds $4
 
 w3d50d:: ; d50d
 	ds $1

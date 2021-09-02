@@ -76,7 +76,7 @@ Func_20000: ; 20000 (8:4000)
 	ld [wEnemyDirection], a
 
 	xor a
-	ld [wc1c0], a
+	ld [wInteractionSide], a
 	ld a, $ff
 	ld [wc1c2], a
 	ld [wc1c1], a
@@ -163,8 +163,8 @@ Func_20000: ; 20000 (8:4000)
 	ld [wc1c4], a
 .asm_2010c
 
-	ld hl, wc1c0
-	ld a, $f0
+	ld hl, wInteractionSide
+	ld a, INTERACTION_LEFT | INTERACTION_RIGHT | INTERACTION_UP | INTERACTION_DOWN
 	ld [hl], a
 	ld a, [wc1c4]
 	ld b, a
@@ -173,10 +173,10 @@ Func_20000: ; 20000 (8:4000)
 	cp b
 	jr z, .asm_20126
 	jr c, .asm_20123
-	res 5, [hl]
+	res INTERACTION_RIGHT_F, [hl]
 	jr .asm_20126
 .asm_20123
-	res 4, [hl]
+	res INTERACTION_LEFT_F, [hl]
 	ld b, c
 .asm_20126
 	ld a, [wc1c2]
@@ -186,24 +186,24 @@ Func_20000: ; 20000 (8:4000)
 	cp d
 	jr z, .asm_2013a
 	jr c, .asm_20137
-	res 6, [hl]
+	res INTERACTION_UP_F, [hl]
 	jr .asm_2013a
 .asm_20137
-	res 7, [hl]
+	res INTERACTION_DOWN_F, [hl]
 	ld d, e
 .asm_2013a
 	ld a, b
 	cp d
-	jr z, .asm_2014a
+	jr z, .do_interaction
 	jr c, .asm_20146
-	res 4, [hl]
-	res 5, [hl]
-	jr .asm_2014a
+	res INTERACTION_LEFT_F, [hl]
+	res INTERACTION_RIGHT_F, [hl]
+	jr .do_interaction
 .asm_20146
-	res 6, [hl]
-	res 7, [hl]
+	res INTERACTION_UP_F, [hl]
+	res INTERACTION_DOWN_F, [hl]
 
-.asm_2014a
+.do_interaction
 	ld a, [wObjInteractionType]
 	and $ff ^ (HEAVY_OBJ)
 	jumptable
@@ -241,9 +241,9 @@ Func_20000: ; 20000 (8:4000)
 	dw Func_21569 ; OBJ_INTERACTION_1E
 	dw Func_215a2 ; OBJ_INTERACTION_1F
 	dw Func_215e7 ; OBJ_INTERACTION_20
-	dw $564f      ; OBJ_INTERACTION_21
-	dw $5675      ; OBJ_INTERACTION_22
-	dw $5774      ; OBJ_INTERACTION_23
+	dw Func_2164f ; OBJ_INTERACTION_21
+	dw Func_21675 ; OBJ_INTERACTION_22
+	dw Func_21774 ; OBJ_INTERACTION_23
 	dw $57b9      ; OBJ_INTERACTION_24
 	dw $5819      ; OBJ_INTERACTION_25
 	dw $5853      ; OBJ_INTERACTION_26
@@ -333,11 +333,11 @@ Func_20203: ; 20203 (8:4203)
 ; 0x2022c
 
 Func_2022c: ; 2022c (8:422c)
-	ld a, [wca9d]
+	ld a, [wIsRolling]
 	and a
 	jp nz, Func_20350
-	ld a, [wc1c0]
-	and $c0
+	ld a, [wInteractionSide]
+	and INTERACTION_UP | INTERACTION_DOWN
 	jp nz, Func_20447
 ;	fallthrough
 
@@ -356,12 +356,12 @@ Func_2023b: ; 2023b (8:423b)
 	jp Func_20000.next_obj
 
 .asm_20257
-	ld a, [wca89]
+	ld a, [wAttackCounter]
 	and a
 	jp nz, Func_20350
 	ld b, $01
 	call SetObjUnk1C
-	ld a, [wca8c]
+	ld a, [wInvincibleCounter]
 	cp $01
 	ret z
 	ld a, [wTransformation]
@@ -416,7 +416,7 @@ SetState_EnemyBumping: ; 202b5 (8:42b5)
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wIsSmashAttacking], a
-	ld [wca9a], a
+	ld [wGrabState], a
 	ld a, ST_ENEMY_BUMPING
 	ld [wWarioState], a
 	load_gfx WarioWalkGfx
@@ -453,8 +453,9 @@ Func_20350: ; 20350 (8:4350)
 	ld a, [wc1bf]
 	cp b
 	jr c, .asm_20382
-	ld a, $20
-	ld [wc1c0], a
+
+	ld a, INTERACTION_RIGHT
+	ld [wInteractionSide], a
 	ld hl, wXPosLo
 	ld de, hXPosLo
 	ld a, [hld]
@@ -473,9 +474,10 @@ Func_20350: ; 20350 (8:4350)
 	sbc $00
 	ld [de], a
 	jr .asm_203a0
+
 .asm_20382
-	ld a, $10
-	ld [wc1c0], a
+	ld a, INTERACTION_LEFT
+	ld [wInteractionSide], a
 	ld hl, wXPosLo
 	ld de, hXPosLo
 	ld a, [hld]
@@ -493,6 +495,7 @@ Func_20350: ; 20350 (8:4350)
 	ld a, [hl]
 	sbc $00
 	ld [de], a
+
 .asm_203a0
 	ld b, $02
 	farcall Func_c9f3
@@ -500,14 +503,15 @@ Func_20350: ; 20350 (8:4350)
 	call SetObjUnk1C
 	ld a, [wTransformation]
 	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
-	jr z, .asm_20422
+	jr z, .fat
 	cp (1 << 6) | TRANSFORMATION_SNOWMAN_WARIO
-	jr z, .asm_20432
+	jr z, .snowman
 	and a
 	ret nz
-	ld a, [wca9d]
+
+	ld a, [wIsRolling]
 	and a
-	jr z, .asm_203e5
+	jr z, .not_rolling
 	ld a, [wObjInteractionType]
 	bit HEAVY_OBJ_F, a
 	ret z
@@ -517,7 +521,7 @@ Func_20350: ; 20350 (8:4350)
 	farcall Func_1ca41
 	ret
 
-.asm_203e5
+.not_rolling
 	ld a, [wObjInteractionType]
 	bit HEAVY_OBJ_F, a
 	jr z, .asm_203fc
@@ -530,16 +534,15 @@ Func_20350: ; 20350 (8:4350)
 	jr nz, .asm_20412
 	farcall SetState_Idling
 	ret
-
 .asm_20412
 	farcall StartFall
 	ret
 
-.asm_20422
+.fat
 	farcall SetState_FatBumping
 	ret
 
-.asm_20432
+.snowman
 	ld a, [wca8f]
 	and a
 	ret nz
@@ -548,7 +551,7 @@ Func_20350: ; 20350 (8:4350)
 ; 0x20447
 
 Func_20447: ; 20447 (8:4447)
-	ld a, [wca8c]
+	ld a, [wInvincibleCounter]
 	cp $01
 	ret z
 	ld a, [wIsSmashAttacking]
@@ -564,8 +567,8 @@ Func_20447: ; 20447 (8:4447)
 	and a
 	jp nz, Func_20585
 	xor a
-	ld [wca89], a
-	ld a, [wca9d]
+	ld [wAttackCounter], a
+	ld a, [wIsRolling]
 	and a
 	jp nz, Func_20350
 	ld a, [wWarioScreenXPos]
@@ -573,29 +576,29 @@ Func_20447: ; 20447 (8:4447)
 	ld a, [wc1bf]
 	cp b
 	jr c, .asm_20484
-	ld a, [wc1c0]
-	or $20
-	ld [wc1c0], a
+	ld a, [wInteractionSide]
+	or INTERACTION_RIGHT
+	ld [wInteractionSide], a
 	jr .asm_2048c
 .asm_20484
-	ld a, [wc1c0]
-	or $10
-	ld [wc1c0], a
+	ld a, [wInteractionSide]
+	or INTERACTION_LEFT
+	ld [wInteractionSide], a
 .asm_2048c
-	ld a, [wc1c0]
-	bit 7, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_DOWN_F, a
 	jr nz, .asm_20506
 	ld a, [wWarioScreenYPos]
 	ld b, a
 	ld a, [wc1be]
 	cp b
 	jr c, .asm_20506
-	ld a, [wca9a]
-	and $0f
-	cp $03
+	ld a, [wGrabState]
+	and $ff ^ (GRAB_FLAGS_MASK)
+	cp GRAB_IDLE
 	jr z, .asm_204d9
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 	ld a, [wca8b]
 	and a
 	jr nz, .asm_204c8
@@ -627,18 +630,18 @@ Func_20447: ; 20447 (8:4447)
 	jr .asm_20578
 
 .asm_20506
-	ld a, [wca8c]
+	ld a, [wInvincibleCounter]
 	cp $01
 	ret z
 	ld a, [wca8b]
 	and a
 	jr nz, .asm_2055e
-	ld a, [wca9a]
-	and $0f
-	cp $03
+	ld a, [wGrabState]
+	and $ff ^ (GRAB_FLAGS_MASK)
+	cp GRAB_IDLE
 	jr z, .asm_20547
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 	ld a, [wJumpVelTable]
 	and a
 	jr nz, .asm_20536
@@ -687,14 +690,14 @@ Func_20585: ; 20585 (8:4585)
 	ld a, [wc1bf]
 	cp b
 	jr c, .asm_205af
-	ld a, [wc1c0]
-	or $20
-	ld [wc1c0], a
+	ld a, [wInteractionSide]
+	or INTERACTION_RIGHT
+	ld [wInteractionSide], a
 	jr .asm_205b7
 .asm_205af
-	ld a, [wc1c0]
-	or $10
-	ld [wc1c0], a
+	ld a, [wInteractionSide]
+	or INTERACTION_LEFT
+	ld [wInteractionSide], a
 .asm_205b7
 	load_sfx SFX_014
 	ld b, $04
@@ -730,12 +733,12 @@ Func_20602: ; 20602 (8:4602)
 	and a
 	jr nz, Func_205e7
 .asm_2060c
-	ld a, [wca9a]
-	and $0f
-	cp $03
+	ld a, [wGrabState]
+	and $ff ^ (GRAB_FLAGS_MASK)
+	cp GRAB_IDLE
 	jr z, .asm_2062a
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 	farcall StartJump_FromInput
 	jr .asm_20639
 .asm_2062a
@@ -767,7 +770,7 @@ SetObjUnk1C: ; 20657 (8:4657)
 	add hl, de
 	ld [hl], b
 	inc l
-	ld a, [wc1c0]
+	ld a, [wInteractionSide]
 	ld b, a
 	ld a, [hl] ; OBJ_UNK_1D
 	and $0f
@@ -777,7 +780,7 @@ SetObjUnk1C: ; 20657 (8:4657)
 ; 0x20670
 
 Func_20670: ; 20670 (8:4670)
-	ld a, [wca8c]
+	ld a, [wInvincibleCounter]
 	and a
 	jp nz, Func_20939
 	ld a, [wPowerUpLevel]
@@ -787,7 +790,7 @@ Func_20670: ; 20670 (8:4670)
 	bit HEAVY_OBJ_F, a
 	jr nz, .asm_2068c
 .asm_20685
-	ld a, [wca9d]
+	ld a, [wIsRolling]
 	and a
 	jp nz, Func_20350
 .asm_2068c
@@ -810,17 +813,17 @@ Func_20670: ; 20670 (8:4670)
 	ld a, [wc1bf]
 	cp b
 	jr c, .asm_206bc
-	ld a, [wc1c0]
-	or $20
-	ld [wc1c0], a
+	ld a, [wInteractionSide]
+	or INTERACTION_RIGHT
+	ld [wInteractionSide], a
 	jr .asm_206c4
 .asm_206bc
-	ld a, [wc1c0]
-	or $10
-	ld [wc1c0], a
+	ld a, [wInteractionSide]
+	or INTERACTION_LEFT
+	ld [wInteractionSide], a
 .asm_206c4
-	ld a, [wc1c0]
-	bit 5, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_RIGHT_F, a
 	jr nz, .asm_206d2
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
@@ -831,7 +834,7 @@ Func_20670: ; 20670 (8:4670)
 .asm_206d7
 	ld b, $06
 	call SetObjUnk1C
-	ld a, [wca8c]
+	ld a, [wInvincibleCounter]
 	cp $01
 	ret z
 	ld a, [wca92]
@@ -850,7 +853,7 @@ Func_206eb: ; 206eb (8:46eb)
 
 SetState_Stung: ; 206f9 (8:46f9)
 	ld a, $01
-	ld [wca8c], a
+	ld [wInvincibleCounter], a
 
 	load_sfx SFX_STING
 
@@ -860,22 +863,22 @@ SetState_Stung: ; 206f9 (8:46f9)
 	xor a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld [wca9a], a
-	ld [wca89], a
-	ld [wca9d], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
+	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
 	ld a, $6
 	ld [wJumpVelIndex], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 	ld a, [wca8b]
 	and a
 	jr z, .asm_20774
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
 
 	ldh a, [hYPosHi]
@@ -904,14 +907,14 @@ SetState_Stung: ; 206f9 (8:46f9)
 	ldh [hXPosLo], a
 
 .asm_20774
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
 	ld a, JUMP_VEL_KNOCK_BACK
 	ld [wJumpVelTable], a
 	jr .asm_20799
 
 .asm_20780
-	ld a, $f1
+	ld a, -15
 	ld [wca6f], a
 	xor a ; JUMP_VEL_NONE
 	ld [wJumpVelTable], a
@@ -946,7 +949,7 @@ SetState_Stung: ; 206f9 (8:46f9)
 ; 0x207ed
 
 Func_207ed: ; 207ed (8:47ed)
-	ld a, [wca8c]
+	ld a, [wInvincibleCounter]
 	and a
 	ret nz
 	ld a, [wWaterInteraction]
@@ -966,7 +969,7 @@ Func_207ed: ; 207ed (8:47ed)
 	call SetObjUnk1C
 	load_sfx SFX_STING
 	ld a, $01
-	ld [wca8c], a
+	ld [wInvincibleCounter], a
 	ld a, ST_WATER_STUNG
 	ld [wWarioState], a
 	xor a
@@ -976,13 +979,13 @@ Func_207ed: ; 207ed (8:47ed)
 	ld [wWarioStateCycles], a
 	ld a, $01
 	ld [wca8a], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $f1
+	ld a, -15
 	ld [wca6f], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 	load_gfx WarioAirborneGfx
 	call LoadWarioGfx
@@ -1021,14 +1024,14 @@ Func_20899: ; 20899 (8:4899)
 	ld a, [wc1bf]
 	cp b
 	jr c, .asm_208c2
-	ld a, [wc1c0]
-	or $20
-	ld [wc1c0], a
+	ld a, [wInteractionSide]
+	or INTERACTION_RIGHT
+	ld [wInteractionSide], a
 	jr .asm_208ca
 .asm_208c2
-	ld a, [wc1c0]
-	or $10
-	ld [wc1c0], a
+	ld a, [wInteractionSide]
+	or INTERACTION_LEFT
+	ld [wInteractionSide], a
 .asm_208ca
 	load_sfx SFX_014
 	ld b, $04
@@ -1036,8 +1039,8 @@ Func_20899: ; 20899 (8:4899)
 	ld a, [wTransformation]
 	and a
 	ret nz
-	ld a, [wc1c0]
-	bit 6, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
 	ret nz
 	farcall Func_1cdc4
 	ret
@@ -1066,7 +1069,7 @@ Func_208f2: ; 208f2 (8:48f2)
 	and a
 	ret z
 	call .Func_208f4
-	ld a, [wca8c]
+	ld a, [wInvincibleCounter]
 	cp $01
 	ret z
 	ld a, [wTransformation]
@@ -1082,7 +1085,7 @@ Func_2092d: ; 2092d (8:492d)
 ; 0x20932
 
 Func_20932: ; 20932 (8:4932)
-	ld a, [wca89]
+	ld a, [wAttackCounter]
 	and a
 	jp nz, Func_20350
 ;	fallthrough
@@ -1093,7 +1096,7 @@ Func_20939: ; 20939 (8:4939)
 	jp nz, Func_2023b
 	ld b, $06
 	call SetObjUnk1C
-	ld a, [wca8c]
+	ld a, [wInvincibleCounter]
 	cp $01
 	ret z
 	farcall Func_1ca39
@@ -1104,14 +1107,14 @@ Func_20939: ; 20939 (8:4939)
 	ld [wca68], a
 	load_oam OAM_1426c
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 	ld a, [wWarioScreenXPos]
 	ld b, a
 	ld a, [wc1bf]
 	cp b
 	jr c, .asm_209b4
-	ld a, $20
-	ld [wc1c0], a
+	ld a, INTERACTION_RIGHT
+	ld [wInteractionSide], a
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
 	load_frameset Frameset_14a79
@@ -1119,8 +1122,8 @@ Func_20939: ; 20939 (8:4939)
 	update_anim_1
 	ret
 .asm_209b4
-	ld a, $10
-	ld [wc1c0], a
+	ld a, INTERACTION_LEFT
+	ld [wInteractionSide], a
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
 	load_frameset Frameset_14a76
@@ -1133,7 +1136,7 @@ Func_209ca: ; 209ca (8:49ca)
 	jr nz, .asm_209d5
 	; airborne
 	xor a
-	ld [wca89], a
+	ld [wAttackCounter], a
 .asm_209d5
 	ld a, [wWaterInteraction]
 	and a
@@ -1158,20 +1161,20 @@ Func_209ca: ; 209ca (8:49ca)
 	ld a, [wJumpVelTable]
 	and a
 	jr z, .asm_20a60
-	ld a, [wca89]
+	ld a, [wAttackCounter]
 	and a
 	jr nz, .asm_20a60
-	ld a, [wca9d]
+	ld a, [wIsRolling]
 	and a
 	jr nz, .asm_20a60
 	call Func_1501
-	ld a, [wca8c]
+	ld a, [wInvincibleCounter]
 	cp $01
 	jr z, .asm_20a60
 	ld a, [wTransformation]
 	and a
 	ret nz
-	ld a, [wca9a]
+	ld a, [wGrabState]
 	and a
 	jr nz, .asm_20a51
 	ld a, [wca8b]
@@ -1187,7 +1190,7 @@ Func_209ca: ; 209ca (8:49ca)
 	farcall Func_1e855
 	jr .asm_20a60
 .asm_20a51
-	farcall Func_1efe7
+	farcall SetState_GrabIdling
 .asm_20a60
 	jp Func_20000.next_obj
 ; 0x20a63
@@ -1214,8 +1217,8 @@ Func_20a6f: ; 20a6f (8:4a6f)
 	ld a, [wDirection]
 	and a
 	jp z, Func_20000.next_obj
-	ld a, $20
-	ld [wc1c0], a
+	ld a, INTERACTION_RIGHT
+	ld [wInteractionSide], a
 	farcall Func_197b1
 	ld a, b
 	and a
@@ -1231,8 +1234,8 @@ Func_20a6f: ; 20a6f (8:4a6f)
 	ld a, [wDirection]
 	and a
 	jp nz, Func_20000.next_obj
-	ld a, $10
-	ld [wc1c0], a
+	ld a, INTERACTION_LEFT
+	ld [wInteractionSide], a
 	farcall Func_19741
 	ld a, b
 	and a
@@ -1252,10 +1255,10 @@ Func_20a6f: ; 20a6f (8:4a6f)
 	jr z, .asm_20b2b
 	xor a
 	ld [wca86], a
-	ld a, [wca9d]
+	ld a, [wIsRolling]
 	and a
 	jr nz, .asm_20aef
-	ld a, [wca89]
+	ld a, [wAttackCounter]
 	and a
 	jp z, Func_20000.next_obj
 
@@ -1288,12 +1291,12 @@ Func_20a6f: ; 20a6f (8:4a6f)
 	INCROM $20b41, $20b6b
 
 Func_20b6b: ; 20b6b (8:4b6b)
-	ld a, [wc1c0]
-	bit 6, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
 	jp nz, Func_20447
 	ld a, [wca93]
 	and a
-	jr z, .asm_20b8b
+	jr z, .check_water
 	cp $03
 	jp z, Func_20350
 	cp $04
@@ -1302,22 +1305,23 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	jp z, Func_20000.next_obj
 	jp .asm_20c41
 
-.asm_20b8b
+.check_water
 	ld a, [wWarioState]
 	cp ST_DIVING
-	jr c, .asm_20b97
+	jr c, .not_in_water
 	cp ST_TRYING_SUBMERGE + 1
 	jp c, Func_20899
 
-.asm_20b97
-	ld a, [wca9d]
+.not_in_water
+	ld a, [wIsRolling]
 	ld b, a
-	ld a, [wca89]
+	ld a, [wAttackCounter]
 	or b
 	jp nz, Func_20350
+
 	ld a, [wca8b]
 	ld b, a
-	ld a, [wca9a]
+	ld a, [wGrabState]
 	or b
 	jp nz, .asm_20c41
 
@@ -1337,21 +1341,21 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	ld a, [wc1bf]
 	cp b
 	jr c, .asm_20bdd
-	ld a, $20
-	ld [wc1c0], a
+	ld a, INTERACTION_RIGHT
+	ld [wInteractionSide], a
 	ld a, [wDirection]
 	and a
-	jr nz, .asm_20be8
+	jr nz, .check_invincible_counter
 	jr .asm_20c41
 .asm_20bdd
-	ld a, $10
-	ld [wc1c0], a
+	ld a, INTERACTION_LEFT
+	ld [wInteractionSide], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_20c41
-.asm_20be8
-	ld a, [wca8c]
-	cp $01
+.check_invincible_counter
+	ld a, [wInvincibleCounter]
+	cp 1
 	ret z
 	ld hl, wXPosLo
 	ld de, hXPosLo
@@ -1368,22 +1372,24 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	ld a, [hl]
 	sbc $00
 	ld [de], a
+
 	ld a, [wObjInteractionType]
 	bit HEAVY_OBJ_F, a
-	jr nz, .asm_20c11
-	ld a, $01
-	ld [wca9a], a
+	jr nz, .heavy_obj
+	ld a, GRAB_PICK_UP
+	ld [wGrabState], a
 	jr .asm_20c1d
-
-.asm_20c11
+.heavy_obj
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_SUPER_GRAB_GLOVES
 	jr c, .asm_20c41
-	ld a, $81
-	ld [wca9a], a
+	ld a, GRAB_PICK_UP | (1 << GRAB_HEAVY_F)
+	ld [wGrabState], a
+
 .asm_20c1d
 	ld b, $03
 	call SetObjUnk1C
+
 	ld a, [wJumpVelTable]
 	and a
 	jr z, .pick_up
@@ -1402,13 +1408,13 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	ld a, [wc1bf]
 	cp b
 	jr c, .asm_20c56
-	ld a, $20
-	ld [wc1c0], a
+	ld a, INTERACTION_RIGHT
+	ld [wInteractionSide], a
 	jp Func_2023b
 
 .asm_20c56
-	ld a, $10
-	ld [wc1c0], a
+	ld a, INTERACTION_LEFT
+	ld [wInteractionSide], a
 	jp Func_2023b
 
 .pick_up
@@ -1420,25 +1426,27 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	ld [wWarioStateCycles], a
 	ld a, ST_PICKING_UP
 	ld [wWarioState], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
+
 	load_gfx WarioThrowGfx
 	call LoadWarioGfx
 	load_oam OAM_1606a
+
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_20cdb
 	ld a, [wIsStandingOnSlope]
 	bit 1, a
 	jr nz, .asm_20cf5
-	ld a, [wca9a]
-	and $80
+	ld a, [wGrabState]
+	and (1 << GRAB_HEAVY_F)
 	jr nz, .asm_20d05
 	load_frameset Frameset_163ec
 .asm_20ccb
@@ -1448,13 +1456,13 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	ld a, [wIsStandingOnSlope]
 	bit 0, a
 	jr nz, .asm_20cf5
-	ld a, [wca9a]
-	and $80
+	ld a, [wGrabState]
+	and (1 << GRAB_HEAVY_F)
 	jr nz, .asm_20d11
 	load_frameset Frameset_1640c
 	jr .asm_20ccb
 .asm_20cf5
-	farcall Func_1efe7
+	farcall SetState_GrabIdling
 	ret
 .asm_20d05
 	load_frameset Frameset_163f5
@@ -1469,19 +1477,19 @@ Func_20d1d: ; 20d1d (8:4d1d)
 ; 0x20d20
 
 ObjInteraction_FrontSting: ; 20d20 (8:4d20)
-	ld a, [wc1c0]
-	and $c0
+	ld a, [wInteractionSide]
+	and INTERACTION_UP | INTERACTION_DOWN
 	jr nz, .asm_20d44
 	ld a, [wEnemyDirection]
 	cp DIRECTION_RIGHT
 	jr z, .asm_20d39
-	ld a, [wc1c0]
-	bit 5, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_RIGHT_F, a
 	jp nz, Func_20670
 	jp Func_2022c
 .asm_20d39
-	ld a, [wc1c0]
-	bit 4, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_LEFT_F, a
 	jp nz, Func_20670
 	jp Func_2022c
 .asm_20d44
@@ -1489,19 +1497,19 @@ ObjInteraction_FrontSting: ; 20d20 (8:4d20)
 ; 0x20d47
 
 ObjInteraction_BackSting: ; 20d47 (8:4d47)
-	ld a, [wc1c0]
-	and $c0
+	ld a, [wInteractionSide]
+	and INTERACTION_UP | INTERACTION_DOWN
 	jr nz, .asm_20d6b
 	ld a, [wEnemyDirection]
 	cp DIRECTION_RIGHT
 	jr z, .asm_20d60
-	ld a, [wc1c0]
-	bit 4, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_LEFT_F, a
 	jp nz, Func_20670
 	jp Func_2022c
 .asm_20d60
-	ld a, [wc1c0]
-	bit 5, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_RIGHT_F, a
 	jp nz, Func_20670
 	jp Func_2022c
 .asm_20d6b
@@ -1509,10 +1517,10 @@ ObjInteraction_BackSting: ; 20d47 (8:4d47)
 ; 0x20d6e
 
 ObjInteraction_TopSting: ; 20d6e (8:4d6e)
-	ld a, [wc1c0]
-	bit 6, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
 	jp nz, Func_20670
-	bit 7, a
+	bit INTERACTION_DOWN_F, a
 	jp nz, Func_20447
 	jp Func_2022c
 ; 0x20d7e
@@ -1522,8 +1530,8 @@ ObjInteraction_FullSting: ; 20d7e (8:4d7e)
 ; 0x20d81
 
 Func_20d81: ; 20d81 (8:4d81)
-	ld a, [wc1c0]
-	and $c0
+	ld a, [wInteractionSide]
+	and INTERACTION_UP | INTERACTION_DOWN
 	jp nz, Func_20899
 	jp Func_208f2
 ; 0x20d8c
@@ -1532,31 +1540,31 @@ Func_20d8c: ; 20d8c (8:4d8c)
 	ld a, [wWaterInteraction]
 	and a
 	ret z
-	ld a, [wc1c0]
-	bit 6, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
 	jp nz, Func_207ed
 
 	ld a, [wTransformation]
 	and a
 	ret nz
-	ld a, [wc1c0]
-	bit 7, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_DOWN_F, a
 	jr nz, .asm_20ddb
 	ld a, [wWarioScreenXPos]
 	ld b, a
 	ld a, [wc1bf]
 	cp b
 	jr c, .asm_20dbe
-	ld a, [wc1c0]
-	or $20
-	ld [wc1c0], a
+	ld a, [wInteractionSide]
+	or INTERACTION_RIGHT
+	ld [wInteractionSide], a
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
 	jr .asm_20dcb
 .asm_20dbe
-	ld a, [wc1c0]
-	or $10
-	ld [wc1c0], a
+	ld a, [wInteractionSide]
+	or INTERACTION_LEFT
+	ld [wInteractionSide], a
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
 
@@ -1570,19 +1578,19 @@ Func_20d8c: ; 20d8c (8:4d8c)
 ; 0x20deb
 
 Func_20deb: ; 20deb (8:4deb)
-	ld a, [wc1c0]
-	and $c0
+	ld a, [wInteractionSide]
+	and INTERACTION_UP | INTERACTION_DOWN
 	jp nz, Func_20899
 	ld a, [wEnemyDirection]
 	and a
 	jr nz, .asm_20e04
-	ld a, [wc1c0]
-	bit 5, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_RIGHT_F, a
 	jp nz, Func_207ed
 	jp Func_208f2
 .asm_20e04
-	ld a, [wc1c0]
-	bit 4, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_LEFT_F, a
 	jp nz, Func_207ed
 	jp Func_208f2
 ; 0x20e0f
@@ -1590,19 +1598,19 @@ Func_20deb: ; 20deb (8:4deb)
 	INCROM $20e0f, $20e39
 
 Func_20e39: ; 20e39 (8:4e39)
-	ld a, [wc1c0]
-	and $c0
+	ld a, [wInteractionSide]
+	and INTERACTION_UP | INTERACTION_DOWN
 	jr nz, .asm_20e5d
 	ld a, [wEnemyDirection]
 	cp DIRECTION_RIGHT
 	jr z, .asm_20e52
-	ld a, [wc1c0]
-	bit 5, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_RIGHT_F, a
 	jp nz, Func_20939
 	jp Func_2022c
 .asm_20e52
-	ld a, [wc1c0]
-	bit 4, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_LEFT_F, a
 	jp nz, Func_20939
 	jp Func_2022c
 .asm_20e5d
@@ -1625,8 +1633,8 @@ Func_20e6a: ; 20e6a (8:4e6a)
 ; 0x20e77
 
 Func_20e77: ; 20e77 (8:4e77)
-	ld a, [wc1c0]
-	bit 6, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
 	jp nz, Func_21aac
 	jp Func_20932
 ; 0x20e82
@@ -1645,7 +1653,7 @@ Func_20e97: ; 20e97 (8:4e97)
 	ld b, $06
 	call SetObjUnk1C
 
-	ld a, [wca8c]
+	ld a, [wInvincibleCounter]
 	and a
 	ret nz
 	ld a, [wTransformation]
@@ -1675,23 +1683,23 @@ SetState_OnFire: ; 20ed3 (8:4ed3)
 	ld [wWarioState], a
 
 	xor a
-	ld [wca8d], a
+	ld [wInvisibleFrame], a
 	ld [wSFXLoopCounter], a
 	ld [wWarioStateCycles], a
-	ld [wca9a], a
-	ld [wca89], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
 	ld [wca8b], a
-	ld [wca9d], a
+	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 	ld a, [wWarioStateCounter]
 	and a
@@ -1721,10 +1729,10 @@ SetState_OnFire: ; 20ed3 (8:4ed3)
 ; 0x20f6a
 
 Func_20f6a: ; 20f6a (8:4f6a)
-	ld a, [wc1c0]
-	bit 6, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
 	jr nz, .asm_20f78
-	bit 7, a
+	bit INTERACTION_DOWN_F, a
 	jr nz, .asm_20f82
 	jp Func_20932
 
@@ -1734,15 +1742,15 @@ Func_20f6a: ; 20f6a (8:4f6a)
 	jp z, Func_20602
 	jp Func_20447
 .asm_20f82
-	ld a, [wca8c]
+	ld a, [wInvincibleCounter]
 	and a
 	ret nz
 	ld a, [wTransformation]
 	bit 6, a
 	jp nz, Func_2022c
-	ld a, $f5
+	ld a, -11
 	ld [wca71], a
-	ld a, $0b
+	ld a, 11
 	ld [wca72], a
 	ld a, [wLadderInteraction]
 	cp $02
@@ -1761,9 +1769,9 @@ Func_20f6a: ; 20f6a (8:4f6a)
 	ret
 
 .asm_20fdb
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 	jp Func_20447
 ; 0x20fe8
@@ -1804,8 +1812,8 @@ CollectKey: ; 21007 (8:5007)
 ; 0x2101c
 
 ObjInteraction_GreyTreasure: ; 2101c (8:501c)
-	ld a, [wc1c0]
-	bit 6, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
 	jp nz, Func_209ca
 	ld a, [wTransformation]
 	and a
@@ -1820,8 +1828,8 @@ ObjInteraction_GreyTreasure: ; 2101c (8:501c)
 ; 0x2103c
 
 ObjInteraction_RedTreasure: ; 2103c (8:503c)
-	ld a, [wc1c0]
-	bit 6, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
 	jp nz, Func_209ca
 	ld a, [wTransformation]
 	and a
@@ -1836,8 +1844,8 @@ ObjInteraction_RedTreasure: ; 2103c (8:503c)
 ; 0x2105c
 
 ObjInteraction_GreenTreasure: ; 2105c (8:505c)
-	ld a, [wc1c0]
-	bit 6, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
 	jp nz, Func_209ca
 	ld a, [wTransformation]
 	and a
@@ -1852,8 +1860,8 @@ ObjInteraction_GreenTreasure: ; 2105c (8:505c)
 ; 0x2107c
 
 ObjInteraction_BlueTreasure: ; 2107c (8:507c)
-	ld a, [wc1c0]
-	bit 6, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
 	jp nz, Func_209ca
 	ld a, [wTransformation]
 	and a
@@ -1890,7 +1898,7 @@ GetTreasure: ; 2109a (8:509a)
 	ld [wWarioStateCycles], a
 	ld [wIsSmashAttacking], a
 	ld [wca8b], a
-	ld [wca89], a
+	ld [wAttackCounter], a
 	inc a
 	ld [wca8a], a
 	ld [wca9b], a
@@ -1907,8 +1915,8 @@ GetTreasure: ; 2109a (8:509a)
 
 	load_oam OAM_14000
 
-	ld a, [wc1c0]
-	bit 4, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_LEFT_F, a
 	jr nz, .asm_21130
 	ld a, [wc1c3]
 	ld b, a
@@ -1945,19 +1953,19 @@ Func_21156: ; 21156 (8:5156)
 	ld [wca9b], a
 	ld a, ST_PICKED_UP
 	ld [wWarioState], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 	xor a
 	ld [wIsSmashAttacking], a
-	ld [wca89], a
+	ld [wAttackCounter], a
 	ld [wca8b], a
-	ld [wca9a], a
+	ld [wGrabState], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wFrameDuration], a
@@ -1989,13 +1997,13 @@ SetState_FlatStretching: ; 211fb (8:51fb)
 	ld [wca9b], a
 	ld a, ST_FLAT_STRETCHING
 	ld [wWarioState], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $f8
+	ld a, -8
 	ld [wca6f], a
-	ld a, $f5
+	ld a, -11
 	ld [wca71], a
-	ld a, $0b
+	ld a, 11
 	ld [wca72], a
 	ld a, NUM_WIGGLES_TO_ESCAPE
 	ld [wPickedUpWiggleCounter], a
@@ -2011,20 +2019,20 @@ SetState_FlatStretching: ; 211fb (8:51fb)
 ; 0x21245
 
 Func_21245: ; 21245 (8:5245)
-	ld a, [wc1c0]
-	and $c0
+	ld a, [wInteractionSide]
+	and INTERACTION_UP | INTERACTION_DOWN
 	jr nz, .asm_21267
 	ld a, [wEnemyDirection]
 	cp DIRECTION_RIGHT
 	jr z, .asm_2125d
-	ld a, [wc1c0]
-	bit 5, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_RIGHT_F, a
 	jr nz, .asm_2126a
 	jp Func_2022c
 
 .asm_2125d
-	ld a, [wc1c0]
-	bit 4, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_LEFT_F, a
 	jr nz, .asm_2126a
 	jp Func_2022c
 
@@ -2035,13 +2043,13 @@ Func_21245: ; 21245 (8:5245)
 	ld a, [wca8b]
 	and a
 	jr z, .asm_21290
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
 	farcall Func_1996e
 	ld a, b
 	and a
 	jr z, .asm_21290
-	ld a, $f1
+	ld a, -15
 	ld [wca6f], a
 	jp Func_2022c
 
@@ -2049,7 +2057,7 @@ Func_21245: ; 21245 (8:5245)
 	ld b, $06
 	call SetObjUnk1C
 
-	ld a, [wca8c]
+	ld a, [wInvincibleCounter]
 	and a
 	ret nz
 	ld a, [wTransformation]
@@ -2087,20 +2095,20 @@ Func_21245: ; 21245 (8:5245)
 	xor a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld [wca9a], a
-	ld [wca89], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
 	ld [wca8b], a
-	ld [wca9d], a
+	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 	xor a
 	ld [wFrameDuration], a
@@ -2122,7 +2130,7 @@ SetState_FatEating: ; 21358 (8:5358)
 	ld a, [wca8b]
 	and a
 	jp nz, Func_20a69
-	ld a, [wca8c]
+	ld a, [wInvincibleCounter]
 	and a
 	ret nz
 	ld a, [wTransformation]
@@ -2147,14 +2155,14 @@ SetState_FatEating: ; 21358 (8:5358)
 	ld a, $a4
 	ld [wca91], a
 	xor a
-	ld [wca8d], a
+	ld [wInvisibleFrame], a
 	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld [wca9a], a
-	ld [wca89], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
 	ld [wca8b], a
-	ld [wca9d], a
+	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
 	ld a, [wJumpVelTable]
 	and a
@@ -2167,13 +2175,13 @@ SetState_FatEating: ; 21358 (8:5358)
 
 	ld a, ST_FAT_EATING
 	ld [wWarioState], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 	xor a
 	ld [wFrameDuration], a
@@ -2223,20 +2231,20 @@ SetState_ElectricStart: ; 21455 (8:5455)
 	ld a, [wc1bf]
 	cp b
 	jr c, .asm_21469
-	ld a, [wc1c0]
-	or $20
-	ld [wc1c0], a
+	ld a, [wInteractionSide]
+	or INTERACTION_RIGHT
+	ld [wInteractionSide], a
 	jr .asm_21471
 
 .asm_21469
-	ld a, [wc1c0]
-	or $10
-	ld [wc1c0], a
+	ld a, [wInteractionSide]
+	or INTERACTION_LEFT
+	ld [wInteractionSide], a
 .asm_21471
 	ld b, $06
 	call SetObjUnk1C
 
-	ld a, [wca8c]
+	ld a, [wInvincibleCounter]
 	and a
 	ret nz
 	ld a, [wTransformation]
@@ -2244,8 +2252,8 @@ SetState_ElectricStart: ; 21455 (8:5455)
 	ret nz
 	cp (1 << 7) | TRANSFORMATION_ELECTRIC
 	ret z
-	ld a, [wc1c0]
-	bit 5, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_RIGHT_F, a
 	jr nz, .asm_21492
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
@@ -2259,24 +2267,24 @@ SetState_ElectricStart: ; 21455 (8:5455)
 	xor a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld [wca9a], a
-	ld [wca89], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
 	ld [wca8b], a
-	ld [wca9d], a
+	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
-	ld [wca8d], a
+	ld [wInvisibleFrame], a
 
 	ld a, ST_ELECTRIC_START
 	ld [wWarioState], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 
 	ld a, (1 << 7) | TRANSFORMATION_ELECTRIC
@@ -2315,7 +2323,7 @@ SetState_ElectricStart: ; 21455 (8:5455)
 
 Func_21548: ; 21548 (8:5548)
 	call Func_20a63
-	ld a, [wca8c]
+	ld a, [wInvincibleCounter]
 	and a
 	ret nz
 	ld a, [wTransformation]
@@ -2328,12 +2336,12 @@ Func_21548: ; 21548 (8:5548)
 ; 0x21569
 
 Func_21569: ; 21569 (8:5569)
-	ld a, [wc1c0]
-	bit 7, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_DOWN_F, a
 	jr nz, .asm_21573
 	jp Func_2022c
 .asm_21573
-	ld a, [wca8c]
+	ld a, [wInvincibleCounter]
 	and a
 	ret nz
 	ld a, [wTransformation]
@@ -2351,7 +2359,7 @@ Func_21569: ; 21569 (8:5569)
 ; 0x215a2
 
 Func_215a2: ; 215a2 (8:55a2)
-	ld a, [wca8c]
+	ld a, [wInvincibleCounter]
 	and a
 	jp nz, Func_20a69
 	ld a, [wTransformation]
@@ -2378,23 +2386,23 @@ Func_215a2: ; 215a2 (8:55a2)
 ; 0x215e7
 
 Func_215e7: ; 215e7 (8:55e7)
-	ld a, [wc1c0]
-	and $c0
+	ld a, [wInteractionSide]
+	and INTERACTION_UP | INTERACTION_DOWN
 	jp nz, Func_20447
 	ld a, [wEnemyDirection]
 	cp DIRECTION_RIGHT
 	jr z, .asm_21600
-	ld a, [wc1c0]
-	bit 5, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_RIGHT_F, a
 	jr nz, .asm_2160a
 	jp Func_2022c
 .asm_21600
-	ld a, [wc1c0]
-	bit 4, a
+	ld a, [wInteractionSide]
+	bit INTERACTION_LEFT_F, a
 	jr nz, .asm_2160a
 	jp Func_2022c
 .asm_2160a
-	ld a, [wca8c]
+	ld a, [wInvincibleCounter]
 	and a
 	ret nz
 	ld b, $06
@@ -2420,7 +2428,187 @@ Func_215e7: ; 215e7 (8:55e7)
 	ret
 ; 0x2164f
 
-	INCROM $2164f, $21aac
+Func_2164f: ; 2164f (8:564f)
+	ld a, [wInteractionSide]
+	and INTERACTION_UP | INTERACTION_DOWN
+	jp nz, Func_20447
+	ld a, [wEnemyDirection]
+	cp DIRECTION_RIGHT
+	jr z, .asm_21668
+	ld a, [wInteractionSide]
+	bit INTERACTION_RIGHT_F, a
+	jr nz, .asm_21672
+	jp Func_2022c
+.asm_21668
+	ld a, [wInteractionSide]
+	bit INTERACTION_LEFT_F, a
+	jr nz, .asm_21672
+	jp Func_2022c
+.asm_21672
+	jp Func_20e97
+; 0x21675
+
+Func_21675: ; 21675 (8:5675)
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
+	jp nz, Func_209ca
+	bit INTERACTION_DOWN_F, a
+	jr nz, .asm_2168b
+	ld a, [wAttackCounter]
+	and a
+	jp nz, Func_217a9
+	jp Func_20a6f
+
+.asm_2168b
+	ld a, [wWarioState]
+	cp ST_FLAT_SQUISHED
+	jr nz, .asm_216a2
+	farcall SetState_FlatSquishedLifting
+	ret
+
+.asm_216a2
+	ld a, [wc1c2]
+	cp $10
+	jr c, .asm_216ab
+	ld a, $0c
+.asm_216ab
+	ld b, a
+	call AddYOffset
+	farcall Func_19b25
+	ld a, [wWaterInteraction]
+	and a
+	jr z, .asm_216d4
+	farcall Func_1cd7c
+	ret
+
+.asm_216d4
+	farcall Func_198e0
+	ld a, b
+	and a
+	jr nz, .asm_21710
+	ld a, [wInvincibleCounter]
+	cp $01
+	ret z
+	ld a, [wTransformation]
+	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
+	jr z, .asm_2173e
+	and a
+	ret nz
+	ld a, [wca8b]
+	and a
+	jr nz, .asm_2174e
+	xor a
+	ld [wGrabState], a
+	farcall StartFall
+	ret
+
+.asm_21710
+	ld hl, hYPosHi
+	ld de, wPos
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ld a, [wInvincibleCounter]
+	cp $01
+	ret z
+	ld a, [wTransformation]
+	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
+	jr z, .asm_2175e
+	and a
+	ret nz
+	xor a
+	ld [wGrabState], a
+	farcall SetState_Idling
+	ret
+
+.asm_2173e
+	farcall SetState_FlatFalling
+	ret
+
+.asm_2174e
+	farcall Func_1ed34
+	ret
+
+.asm_2175e
+	ld a, [wWarioState]
+	cp ST_FLAT_SQUISHED
+	ret z
+	farcall SetState_FlatIdling
+	ret
+; 0x21774
+
+Func_21774: ; 21774 (8:5774)
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
+	jp nz, Func_209ca
+	bit INTERACTION_DOWN_F, a
+	jr nz, .asm_21789
+	ld a, [wAttackCounter]
+	and a
+	jr nz, Func_217a9
+	jp Func_20a6f
+.asm_21789
+	ld a, [wInvincibleCounter]
+	and a
+	ret nz
+	ld a, [wTransformation]
+	bit 6, a
+	ret nz
+	ld b, $0b
+	call SetObjUnk1C
+	farcall SetState_FlatAirborne
+	ret
+; 0x217a9
+
+Func_217a9: ; 217a9 (8:57a9)
+	farcall Func_1ca39
+	ret
+; 0x217b9
+
+Func_217b9: ; 217b9 (8:57b9)
+	ld a, [wInteractionSide]
+	and INTERACTION_UP | INTERACTION_DOWN
+	jr nz, .asm_217db
+	ld a, [wEnemyDirection]
+	cp DIRECTION_RIGHT
+	jr z, .asm_217d1
+	ld a, [wInteractionSide]
+	bit INTERACTION_RIGHT_F, a
+	jr nz, .asm_217de
+	jp Func_2022c
+.asm_217d1
+	ld a, [wInteractionSide]
+	bit INTERACTION_LEFT_F, a
+	jr nz, .asm_217de
+	jp Func_2022c
+.asm_217db
+	jp Func_20447
+.asm_217de
+	ld a, [wInvincibleCounter]
+	and a
+	ret nz
+	ld a, [wTransformation]
+	bit 6, a
+	jp nz, Func_2022c
+	cp TRANSFORMATION_CRAZY_WARIO
+	jp z, Func_2022c
+	ld b, $06
+	call SetObjUnk1C
+	ld a, TRANSFORMATION_CRAZY_WARIO
+	ld [wTransformation], a
+	ld a, $03
+	ld [wca93], a
+	ld a, $03
+	ld [wca92], a
+	ld a, $01
+	ld [wca94], a
+	farcall SetState_CrazySpinning
+	ret
+; 0x21819
+
+	INCROM $21819, $21aac
 
 Func_21aac: ; 21aac (8:5aac)
 	ld a, [wIsSmashAttacking]

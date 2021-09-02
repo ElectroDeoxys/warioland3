@@ -470,24 +470,24 @@ SetState_FlatAirborne: ; 28435 (a:4435)
 	ld [wFrameDuration], a
 	ld [wca68], a
 	ld [wWarioStateCycles], a
-	ld [wca9a], a
-	ld [wca89], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
 	ld [wJumpVelIndex], a
 	ld [wca8b], a
-	ld [wca9d], a
+	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
 	inc a
 	ld [wca9b], a
 	ld [wJumpVelTable], a
 	ld a, ST_GETTING_FLAT_AIRBORNE
 	ld [wWarioState], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $f8
+	ld a, -8
 	ld [wca6f], a
-	ld a, $f5
+	ld a, -11
 	ld [wca71], a
-	ld a, $0b
+	ld a, 11
 	ld [wca72], a
 	load_gfx WarioSlideGfx
 	call LoadWarioGfx
@@ -529,13 +529,13 @@ UpdateState_GettingFlatAirborne: ; 28511 (a:4511)
 	ld [wca9b], a
 	inc a
 	ld [wca8a], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $f8
+	ld a, -8
 	ld [wca6f], a
-	ld a, $f5
+	ld a, -11
 	ld [wca71], a
-	ld a, $0b
+	ld a, 11
 	ld [wca72], a
 
 	load_frameset Frameset_1715f
@@ -568,13 +568,13 @@ SetState_FlatIdling: ; 285b8 (a:45b8)
 	ld [wWarioStateCycles], a
 	ld [wJumpVelTable], a
 	ld [wJumpVelIndex], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $f8
+	ld a, -8
 	ld [wca6f], a
-	ld a, $f5
+	ld a, -11
 	ld [wca71], a
-	ld a, $0b
+	ld a, 11
 	ld [wca72], a
 
 	load_frameset Frameset_1718b
@@ -878,13 +878,13 @@ SetState_FlatSinking: ; 28900 (a:4900)
 	ld [wJumpVelTable], a
 	inc a
 	ld [wca8a], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $f8
+	ld a, -8
 	ld [wca6f], a
-	ld a, $f5
+	ld a, -11
 	ld [wca71], a
-	ld a, $0b
+	ld a, 11
 	ld [wca72], a
 	xor a
 	ld [wFrameDuration], a
@@ -971,13 +971,13 @@ Func_289c5: ; 289c5 (a:49c5)
 	ld [wWarioStateCycles], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $f8
+	ld a, -8
 	ld [wca6f], a
-	ld a, $f5
+	ld a, -11
 	ld [wca71], a
-	ld a, $0b
+	ld a, 11
 	ld [wca72], a
 
 	xor a
@@ -1010,7 +1010,20 @@ UpdateState_FlatSquished: ; 28a5a (a:4a5a)
 	ret
 ; 0x28a5b
 
-	INCROM $28a5b, $28a8a
+SetState_FlatSquishedLifting: ; 28a5b (a:4a5b)
+	ld a, $01
+	ld [wca8a], a
+	ld a, ST_FLAT_SQUISHED_LIFTING
+	ld [wWarioState], a
+	xor a
+	ld [wWarioStateCounter], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+	load_frameset Frameset_1716c
+	update_anim_1
+	ret
+; 0x28a8a
 
 UpdateState_FlatSquishedLifting: ; 28a8a (a:4a8a)
 	update_anim_1
@@ -1050,13 +1063,13 @@ SetState_BallOString: ; 28ad5 (a:4ad5)
 	ld [wWarioStateCycles], a
 	ld [wJumpVelTable], a
 	ld [wJumpVelIndex], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $e8
+	ld a, -24
 	ld [wca6f], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 	xor a
 	ld [wFrameDuration], a
@@ -1204,13 +1217,13 @@ SetState_BallOStringKnockBack: ; 28c94 (a:4c94)
 	ld a, JUMP_VEL_KNOCK_BACK
 	ld [wJumpVelTable], a
 
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 	xor a
 	ld [wWarioStateCounter], a
@@ -1254,13 +1267,13 @@ UpdateState_BallOStringKnockBack: ; 28ceb (a:4ceb)
 
 	ld a, ST_GETTING_UNWRAPPED_IN_STRING
 	ld [wWarioState], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 
 	xor a
@@ -1286,13 +1299,13 @@ UpdateState_GettingUnwrappedInString: ; 28d92 (a:4d92)
 	load_sfx SFX_03D
 	ld a, ST_BALL_O_STRING_DIZZY
 	ld [wWarioState], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 
 	xor a
@@ -1379,9 +1392,9 @@ UpdateState_FatEating: ; 28e87 (a:4e87)
 	ld a, [wAnimationHasFinished]
 	and a
 	ret z
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 ;	fallthrough
 
@@ -1645,13 +1658,13 @@ UpdateState_FatAirborne: ; 29123 (a:5123)
 	jp Func_14de
 .asm_291de
 	call Func_14f6
-	ld a, [wca97]
+	ld a, [wGroundShakeCounter]
 	and a
 	jr nz, .asm_291f1
 	ld a, $20
-	ld [wca97], a
-	ld a, $01
-	ld [wca98], a
+	ld [wGroundShakeCounter], a
+	ld a, TRUE
+	ld [wIsWarioGroundShaking], a
 .asm_291f1
 	ld a, [wc1aa]
 	and a
@@ -1691,7 +1704,7 @@ UpdateState_FatLanding: ; 29243 (a:5243)
 	or [hl]
 	jp z, SetState_FatRecovering
 	update_anim_1
-	ld a, [wca97]
+	ld a, [wGroundShakeCounter]
 	and a
 	ret nz
 	jp SetState_FatIdling
@@ -1704,7 +1717,7 @@ Func_2926a: ; 2926a (a:526a)
 	ldh [hYPosLo], a
 	ld b, $03
 	farcall Func_c9f3
-	load_sfx SFX_00D
+	load_sfx SFX_SLIDE
 
 	ld a, ST_FAT_SINKING
 	ld [wWarioState], a
@@ -1846,7 +1859,7 @@ UpdateState_ElectricStart: ; 293d0 (a:53d0)
 	ret z
 
 	ld a, $01
-	ld [wca8c], a
+	ld [wInvincibleCounter], a
 	ld a, ST_ELECTRIC
 	ld [wWarioState], a
 	xor a
@@ -1854,16 +1867,16 @@ UpdateState_ElectricStart: ; 293d0 (a:53d0)
 	ld [wca68], a
 	ld a, $06
 	ld [wJumpVelIndex], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 	ld a, [wca8b]
 	and a
 	jr z, .asm_2946e
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
 	ldh a, [hYPosHi]
 	ldh [hffad], a
@@ -1891,13 +1904,13 @@ UpdateState_ElectricStart: ; 293d0 (a:53d0)
 	ldh a, [hffb0]
 	ldh [hXPosLo], a
 .asm_2946e
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
 	ld a, $01
 	ld [wJumpVelTable], a
 	jr .asm_29493
 .asm_2947a
-	ld a, $f1
+	ld a, -15
 	ld [wca6f], a
 	xor a
 	ld [wJumpVelTable], a
@@ -2132,12 +2145,12 @@ SetState_TurningInvisible: ; 29689 (a:5689)
 	xor a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld [wca9a], a
-	ld [wca89], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
 	ld [wca8b], a
-	ld [wca9d], a
+	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
 	inc a
 	ld [wca8a], a
@@ -2145,13 +2158,13 @@ SetState_TurningInvisible: ; 29689 (a:5689)
 	ld a, ST_TURNING_INVISIBLE
 	ld [wWarioState], a
 
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 	xor a
 	ld [wca93], a
@@ -2210,24 +2223,24 @@ SetState_PuffyInflating: ; 2975e (a:575e)
 	ld a, ST_PUFFY_INFLATING
 	ld [wWarioState], a
 
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 
 	xor a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld [wca9a], a
-	ld [wca89], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
 	ld [wca8b], a
-	ld [wca9d], a
+	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
 	ld [wca6d], a
 	ld [wca6e], a
@@ -2466,13 +2479,13 @@ SetState_ZombieIdling: ; 299d0 (a:59d0)
 	ld a, ST_ZOMBIE_IDLING
 	ld [wWarioState], a
 
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 	ld a, $04
 	ld [wca93], a
@@ -2484,13 +2497,13 @@ SetState_ZombieIdling: ; 299d0 (a:59d0)
 	xor a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld [wca8d], a
-	ld [wca9a], a
-	ld [wca89], a
+	ld [wInvisibleFrame], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
 	ld [wca8b], a
-	ld [wca9d], a
+	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
 	call UpdateLevelMusic
 
@@ -2976,24 +2989,24 @@ SetState_BouncyStart: ; 29f59 (a:5f59)
 	ld [wJumpVelIndex], a
 	ld a, $02
 	ld [wJumpVelTable], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $e3
+	ld a, -29
 	ld [wca6f], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 
 	xor a
-	ld [wca8d], a
+	ld [wInvisibleFrame], a
 	ld [wca86], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld [wca9a], a
-	ld [wca89], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
 	ld [wca8b], a
-	ld [wca9d], a
+	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
 	call UpdateLevelMusic
 
@@ -3404,7 +3417,56 @@ UpdateState_BouncyLastBounce: ; 2a362 (a:6362)
 	jp Func_1570
 ; 0x2a3ed
 
-	INCROM $2a3ed, $2a489
+SetState_CrazySpinning: ; 2a3ed (a:63ed)
+	load_sfx SFX_042
+	ld a, ST_CRAZY_SPINNING
+	ld [wWarioState], a
+	ld a, -1
+	ld [wca70], a
+	ld a, -27
+	ld [wca6f], a
+	ld a, -9
+	ld [wca71], a
+	ld a, 9
+	ld [wca72], a
+
+	xor a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
+	ld [wca8b], a
+	ld [wIsRolling], a
+	ld [wIsSmashAttacking], a
+	ld a, [wJumpVelTable]
+	and a
+	jr z, .asm_2a42f
+	ld a, FALLING_JUMP_VEL_INDEX
+	ld [wJumpVelIndex], a
+.asm_2a42f
+	call UpdateLevelMusic
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wca68], a
+
+	load_gfx WarioIdleGfx
+	call LoadWarioGfx
+
+	load_oam OAM_14a82
+
+	ld a, [wEnemyDirection]
+	ld [wDirection], a
+	and a
+	jr nz, .asm_2a46f
+	load_frameset Frameset_14ccc
+	jr .asm_2a479
+.asm_2a46f
+	load_frameset Frameset_14ce1
+.asm_2a479
+	update_anim_1
+	ret
+; 0x2a489
 
 UpdateState_CrazySpinning: ; 2a489 (a:6489)
 	farcall Func_19b25
@@ -3834,7 +3896,7 @@ SetState_BatTransforming: ; 2a951 (a:6951)
 	ld a, ST_BAT_TRANSFORMING
 	ld [wWarioState], a
 
-	ld a, $f1
+	ld a, -15
 	ld [wca6f], a
 	xor a
 	ld [wFrameDuration], a
@@ -3917,7 +3979,7 @@ UpdateState_BatIdling: ; 2aa08 (a:6a08)
 	ret
 
 .asm_2aa55
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
 	farcall Func_1996e
 	ld a, [wWarioState]
@@ -3927,7 +3989,7 @@ UpdateState_BatIdling: ; 2aa08 (a:6a08)
 	ld a, b
 	and a
 	jr z, .asm_2aa81
-	ld a, $f1
+	ld a, -15
 	ld [wca6f], a
 	load_sfx SFX_0E5
 	ret
@@ -3943,22 +4005,22 @@ UpdateState_BatIdling: ; 2aa08 (a:6a08)
 	ld [wca92], a
 	ld a, $02
 	ld [wca94], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 
 	xor a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld [wca9a], a
-	ld [wca89], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
 	ld [wca8b], a
-	ld [wca9d], a
+	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
 	ld [wJumpVelTable], a
 	ld [wJumpVelIndex], a
@@ -4043,7 +4105,7 @@ UpdateState_BatFlying: ; 2ab42 (a:6b42)
 	ld a, $04
 	ld [wca86], a
 .asm_2abbc
-	ld a, [wca95]
+	ld a, [wIsTurningMidAir]
 	and a
 	ret z
 ;	fallthrough
@@ -4100,7 +4162,7 @@ UpdateState_BatFalling: ; 2ac04 (a:6c04)
 	ld [wca86], a
 
 .asm_2ac50
-	ld a, [wca95]
+	ld a, [wIsTurningMidAir]
 	and a
 	call nz, Func_2abc1
 	farcall Func_199e9
@@ -4145,7 +4207,7 @@ UpdateState_InBubble: ; 2ad06 (a:6d06)
 Func_2ad6a: ; 2ad6a (a:6d6a)
 	call Func_1079
 	ld a, $10
-	ld [wca8c], a
+	ld [wInvincibleCounter], a
 	call UpdateLevelMusic
 	farcall SetState_Submerged
 
@@ -4175,7 +4237,7 @@ Func_2ad6a: ; 2ad6a (a:6d6a)
 Func_2ade4: ; 2ade4 (a:6de4)
 	call Func_1079
 	ld a, $10
-	ld [wca8c], a
+	ld [wInvincibleCounter], a
 	call UpdateLevelMusic
 	get_pos
 	ldh a, [hYPosLo]
@@ -4183,7 +4245,7 @@ Func_2ade4: ; 2ade4 (a:6de4)
 	ldh [hYPosLo], a
 	ld b, $07
 	farcall Func_c9f3
-	load_sfx SFX_00D
+	load_sfx SFX_SLIDE
 	farcall Func_1cd7c
 	ret
 ; 0x2ae2f
@@ -4425,7 +4487,7 @@ Func_2b027: ; 2b027 (a:7027)
 	ld a, $04
 	ld [wca86], a
 .asm_2b042
-	ld a, [wca95]
+	ld a, [wIsTurningMidAir]
 	and a
 	ret z
 	xor a

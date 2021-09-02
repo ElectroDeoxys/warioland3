@@ -121,7 +121,7 @@ UpdateState_IceSkatin: ; 1ec177 (7b:4177)
 	jr nc, .skip_sfx
 	ld a, $0c
 	ld [wSFXLoopCounter], a
-	load_sfx SFX_SLIDE
+	load_sfx SFX_ZIP_LINE_SLIDE
 .skip_sfx
 	update_anim_2
 
@@ -431,21 +431,21 @@ SetState_BlindIdling: ; 1ed331 (7b:5331)
 	ld [wca86], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld [wca9a], a
-	ld [wca89], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
 	ld [wca8b], a
-	ld [wca9d], a
+	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
 	ld [wJumpVelTable], a
 	ld [wJumpVelIndex], a
-	ld [wca8d], a
-	ld a, $ff
+	ld [wInvisibleFrame], a
+	ld a, -1
 	ld [wca70], a
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 	xor a
 	call UpdateLevelMusic
@@ -618,7 +618,7 @@ SetState_BlindAirborne: ; 1ed571 (7b:5571)
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wca8b], a
-	ld [wca89], a
+	ld [wAttackCounter], a
 	load_gfx WarioAirborneGfx
 	call LoadWarioGfx
 	load_oam OAM_15955

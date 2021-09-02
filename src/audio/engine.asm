@@ -3386,9 +3386,9 @@ SoundHeaders: ; 3155e (c:555e)
 	sfx $79f7, $0e, $00, 235, CHAN5, 2 ; SFX_ATTACK_POWERED_UP
 	sfx $7a24, $0e, $00, 235, CHAN5, 1 ; SFX_REGULAR_COIN
 	sfx $7a44, $0e, $00, 230, CHAN5, 1 ; SFX_ROLL
-	sfx $7a55, $0e, $00, 230, CHAN8, 1 ; SFX_SLIDE
+	sfx $7a55, $0e, $00, 230, CHAN8, 1 ; SFX_ZIP_LINE_SLIDE
 	sfx $7a68, $0e, $00, 237, CHAN5, 1 ; SFX_00C
-	sfx $7aa6, $0e, $00, 235, CHAN5, 2 ; SFX_00D
+	sfx $7aa6, $0e, $00, 235, CHAN5, 2 ; SFX_SLIDE
 	sfx $7ac7, $0e, $00, 228, CHAN5, 1 ; SFX_00E
 	sfx $7add, $0e, $00, 210, CHAN5, 1 ; SFX_00F
 	sfx $7af2, $0e, $00, 228, CHAN8, 1 ; SFX_LAND
@@ -3426,7 +3426,7 @@ SoundHeaders: ; 3155e (c:555e)
 	sfx $403d, $0f, $00, 220, CHAN5, 1 ; SFX_030
 	sfx $40ae, $0f, $00, 255, CHAN5, 2 ; SFX_MUSICAL_COIN
 	sfx $414f, $0f, $00, 255, CHAN5, 2 ; SFX_KEY
-	sfx $4166, $0f, $00, 237, CHAN5, 1 ; SFX_033
+	sfx $4166, $0f, $00, 237, CHAN5, 1 ; SFX_GROUND_POUND
 	sfx $41ac, $0f, $00, 237, CHAN5, 2 ; SFX_034
 	sfx $41c8, $0f, $00, 221, CHAN8, 1 ; SFX_035
 	sfx $41ea, $0f, $00, 228, CHAN8, 1 ; SFX_036

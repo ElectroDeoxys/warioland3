@@ -161,7 +161,7 @@ Func_80aa: ; 80aa (2:40aa)
 	pop af
 	ldh [rSVBK], a
 
-	call Func_d9e
+	call DrawWario
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
@@ -262,7 +262,7 @@ Func_80aa: ; 80aa (2:40aa)
 	ld a, TRUE
 	ld [wResetDisabled], a
 	xor a
-	ld [wca97], a
+	ld [wGroundShakeCounter], a
 	ld [wc0bc], a
 	ld [wAnimatedTilesFrameDuration], a
 	ld [wc1b1], a
@@ -406,7 +406,7 @@ Func_80aa: ; 80aa (2:40aa)
 	pop af
 	ldh [rSVBK], a
 
-	call Func_d9e
+	call DrawWario
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
@@ -458,7 +458,7 @@ Func_80aa: ; 80aa (2:40aa)
 	pop af
 	ldh [rSVBK], a
 
-	call Func_d9e
+	call DrawWario
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
@@ -542,7 +542,7 @@ Func_846e: ; 846e (2:446e)
 	ld [wc0c3], a
 	ld [wc0be], a
 	ld [wc0bd], a
-	ld [wca97], a
+	ld [wGroundShakeCounter], a
 	ld [wc0bc], a
 	ld a, [wSpawnPointID]
 	ld [wca5d], a
@@ -615,7 +615,7 @@ Func_846e: ; 846e (2:446e)
 	farcall Func_6164e
 	pop af
 	ldh [rSVBK], a
-	call Func_d9e
+	call DrawWario
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
@@ -642,7 +642,7 @@ Func_861c: ; 861c (2:461c)
 	farcall Func_6164e
 	pop af
 	ldh [rSVBK], a
-	call Func_d9e
+	call DrawWario
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
@@ -781,10 +781,10 @@ Func_8747: ; 8747 (2:4747)
 	ld [wc0be], a
 	ld [wc0bd], a
 	ld [wca8a], a
-	ld [wca8c], a
+	ld [wInvincibleCounter], a
 	ld [wcac1], a
-	ld [wca9d], a
-	ld [wca99], a
+	ld [wIsRolling], a
+	ld [wIsGettingOffLadder], a
 	ld [wca66], a
 	ld [wca6a], a
 	ld [wc0e2], a
@@ -794,10 +794,10 @@ Func_8747: ; 8747 (2:4747)
 	ld [wca6d], a
 	ld [wca6e], a
 	call Func_1079
-	ld [wca8d], a
+	ld [wInvisibleFrame], a
 	ld [wcac8], a
 	ld [wcac9], a
-	ld [wca97], a
+	ld [wGroundShakeCounter], a
 	ld [wc0bc], a
 	ld [wca9c], a
 	ld [wAnimatedTilesFrameDuration], a
@@ -964,7 +964,7 @@ Func_8747: ; 8747 (2:4747)
 	pop af
 	ldh [rSVBK], a
 
-	call Func_d9e
+	call DrawWario
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")

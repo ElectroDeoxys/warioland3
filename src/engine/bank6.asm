@@ -108,7 +108,7 @@ Func_19746: ; 19746 (6:5746)
 	call Func_19bc3
 	and $0f
 	jp z, Func_19832
-	ld a, [wca89]
+	ld a, [wAttackCounter]
 	and a
 	jp nz, Func_19823
 	ld a, b
@@ -187,7 +187,7 @@ Func_197b6: ; 197b6 (6:57b6)
 	call Func_19bc3
 	and $0f
 	jr z, Func_19832
-	ld a, [wca89]
+	ld a, [wAttackCounter]
 	and a
 	jr nz, Func_19823
 	ld a, b
@@ -224,7 +224,7 @@ Func_19832: ; 19832 (6:5832)
 	ld a, [wJumpVelTable]
 	and a
 	jp nz, .asm_198c0
-	ld a, [wca89]
+	ld a, [wAttackCounter]
 	and a
 	jr nz, .asm_198c0
 	ld a, [wWaterInteraction]
@@ -859,7 +859,7 @@ SetState_Slipping: ; 19c81 (6:5c81)
 	xor a
 	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
-	ld [wca89], a
+	ld [wAttackCounter], a
 	load_gfx WarioIdleGfx
 	call LoadWarioGfx
 	load_oam OAM_14000
@@ -1036,8 +1036,8 @@ Func_19e89: ; 19e89 (6:5e89)
 	ld [wWarioState], a
 	xor a
 	ld [wSFXLoopCounter], a
-	ld [wca89], a
-	ld [wca9a], a
+	ld [wAttackCounter], a
+	ld [wGrabState], a
 	inc a
 	ld [wca8b], a
 	load_gfx WarioWalkGfx
@@ -1168,7 +1168,7 @@ UpdateState_Teleporting: ; 1a077 (6:6077)
 	ld a, ST_STUNG
 	ld [wWarioState], a
 	ld a, $01
-	ld [wca8c], a
+	ld [wInvincibleCounter], a
 	ld hl, wc0d7
 	res 7, [hl]
 	jp Func_11f6
@@ -1182,16 +1182,16 @@ UpdateState_Teleporting: ; 1a077 (6:6077)
 
 SetState_SandFalling: ; 1a0e8 (6:60e8)
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 	ld a, ST_SAND_FALLING
 	ld [wWarioState], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 
 	xor a
@@ -1200,8 +1200,8 @@ SetState_SandFalling: ; 1a0e8 (6:60e8)
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wIsSmashAttacking], a
-	ld [wca89], a
-	ld [wca9d], a
+	ld [wAttackCounter], a
+	ld [wIsRolling], a
 	ld [wca6d], a
 	ld [wca8b], a
 	ld [wc0e0], a
@@ -1277,7 +1277,7 @@ UpdateState_SandJumping: ; 1a1c5 (6:61c5)
 	ld a, $00
 	ld [wca86], a
 .asm_1a208
-	ld a, [wca95]
+	ld a, [wIsTurningMidAir]
 	and a
 	jr z, .asm_1a211
 	call Func_1a14b
@@ -1443,14 +1443,14 @@ SetState_LadderClimbing: ; 1a3bb (6:63bb)
 	ld [wIsSmashAttacking], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
-	ld [wca99], a
-	ld a, $ff
+	ld [wIsGettingOffLadder], a
+	ld a, -1
 	ld [wca70], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
 	load_gfx WarioLadderGfx
 	call LoadWarioGfx
@@ -1503,14 +1503,14 @@ SetState_LadderIdling: ; 1a49e (6:649e)
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wIsSmashAttacking], a
-	ld [wca99], a
-	ld a, $ff
+	ld [wIsGettingOffLadder], a
+	ld a, -1
 	ld [wca70], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
 	load_gfx WarioLadderGfx
 	call LoadWarioGfx
@@ -1598,7 +1598,7 @@ SetState_GettingOffLadder: ; 1a5ee (6:65ee)
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	inc a
-	ld [wca99], a
+	ld [wIsGettingOffLadder], a
 	ld [wca8a], a
 
 	ld a, [wJoypadDown]
@@ -1639,7 +1639,7 @@ UpdateState_GettingOffLadder: ; 1a617 (6:6617)
 	and a
 	ret nz
 	xor a
-	ld [wca99], a
+	ld [wIsGettingOffLadder], a
 	ld [wca8a], a
 	farcall StartFall
 	ret
@@ -1653,7 +1653,7 @@ SetState_LadderSliding: ; 1a66b (6:666b)
 	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld [wca99], a
+	ld [wIsGettingOffLadder], a
 	inc a
 	ld [wJumpVelTable], a
 	ld a, [wPowerUpLevel]
@@ -1712,19 +1712,17 @@ UpdateState_LadderSliding: ; 1a6b6 (6:66b6)
 	update_pos_y
 	ld a, [wIsSmashAttacking]
 	and a
-	jr z, .asm_1a753
+	jr z, .idle
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
-	jr c, .asm_1a763
-	farcall Func_1c5fd
+	jr c, .ground_pound
+	farcall DoGroundShake
 	ret
-
-.asm_1a753
+.idle
 	farcall SetState_Idling
 	ret
-
-.asm_1a763
-	farcall Func_1c66b
+.ground_pound
+	farcall DoGroundPound
 	ret
 ; 0x1a773
 
@@ -1734,7 +1732,7 @@ SetState_GrabSlipping: ; 1a773 (6:6773)
 	xor a
 	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
-	ld [wca89], a
+	ld [wAttackCounter], a
 	load_gfx WarioWalkGfx
 	call LoadWarioGfx
 	load_oam OAM_1426c
@@ -1760,7 +1758,7 @@ UpdateState_GrabSlipping: ; 1a7d6 (6:67d6)
 	ld a, [wc0d7]
 	and a
 	jp nz, Func_11f6
-	ld a, [wca9a]
+	ld a, [wGrabState]
 	and a
 	jr nz, .asm_1a802
 	farcall SetState_Idling
@@ -1828,7 +1826,7 @@ UpdateState_GrabSlipping: ; 1a7d6 (6:67d6)
 	ret
 
 .asm_1a88e
-	farcall Func_1efe7
+	farcall SetState_GrabIdling
 	ret
 ; 0x1a89e
 
@@ -1924,20 +1922,20 @@ SetState_LadderScratching: ; 1ad21 (6:6d21)
 	ld a, ST_LADDER_SCRATCHING
 	ld [wWarioState], a
 
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 	xor a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld [wca99], a
+	ld [wIsGettingOffLadder], a
 	xor a
 	ld [wFrameDuration], a
 	ld [wca68], a
@@ -2037,13 +2035,13 @@ SetState_FenceMovingVertical: ; 1ae68 (6:6e68)
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wIsSmashAttacking], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
 	load_gfx WarioLadderGfx
 	call LoadWarioGfx
@@ -2091,13 +2089,13 @@ SetState_FenceIdling: ; 1af22 (6:6f22)
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wIsSmashAttacking], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
 	load_gfx WarioLadderGfx
 	call LoadWarioGfx
@@ -2130,13 +2128,13 @@ SetState_FenceMovingHorizontal: ; 1afab (6:6fab)
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wIsSmashAttacking], a
-	ld a, $ff
+	ld a, -1
 	ld [wca70], a
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
-	ld a, $e5
+	ld a, -27
 	ld [wca6f], a
 
 	xor a
@@ -2193,7 +2191,7 @@ SetState_FenceSliding: ; 1b05e (6:705e)
 	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld [wca99], a
+	ld [wIsGettingOffLadder], a
 	inc a
 	ld [wJumpVelTable], a
 
@@ -2255,20 +2253,17 @@ UpdateState_FenceSliding: ; 1b0a9 (6:70a9)
 
 	ld a, [wIsSmashAttacking]
 	and a
-	jr z, .asm_1b148
-
+	jr z, .idle
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
-	jr c, .asm_1b158
-	farcall Func_1c5fd
+	jr c, .ground_pound
+	farcall DoGroundShake
 	ret
-
-.asm_1b148
+.idle
 	farcall SetState_Idling
 	ret
-
-.asm_1b158
-	farcall Func_1c66b
+.ground_pound
+	farcall DoGroundPound
 	ret
 ; 0x1b168
 
@@ -2420,7 +2415,7 @@ Func_1b2c0: ; 1b2c0 (6:72c0)
 	ld a, $00
 	ld [wca86], a
 .asm_1b2f8
-	ld a, [wca95]
+	ld a, [wIsTurningMidAir]
 	and a
 	jr z, .asm_1b301
 	call Func_1a14b
@@ -2616,30 +2611,30 @@ Func_1b480: ; 1b480 (6:7480)
 	ld a, [wJoypadDown]
 	bit D_RIGHT_F, a
 	jr nz, .asm_1b4d3
-	ld a, $f0
+	ld a, -16
 	ld [wca71], a
 	farcall Func_197b1
 	ld a, b
 	and a
 	jr nz, .asm_1b4eb
 .asm_1b4c6
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 	jp SetState_GettingOffLadder
 
 .asm_1b4d3
-	ld a, $10
+	ld a, 16
 	ld [wca72], a
 	farcall Func_19741
 	ld a, b
 	and a
 	jr z, .asm_1b4c6
 .asm_1b4eb
-	ld a, $f7
+	ld a, -9
 	ld [wca71], a
-	ld a, $09
+	ld a, 9
 	ld [wca72], a
 	ret
 ; 0x1b4f6

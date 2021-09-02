@@ -5,6 +5,12 @@ DIRECTION_RIGHT EQU 1
 ; while in the idle state
 NUM_SLEEPING_IDLE_CYCLES EQU 7
 
+; number of attack frames on the ground
+MAX_ATTACK_COUNTER EQU $30
+; after wAttackCounter reaches this value
+; Wario will start to charge 
+CHARGE_ATTACK_COUNTER EQU $2b
+
 ; power up level constants
 	const_def
 	const POWER_UP_NONE                     ; 0
@@ -70,3 +76,27 @@ MAX_PICKED_UP_FRAME_COUNTER EQU 32
 	const TRANSFORMATION_UNK_1D              ; $1d
 	const TRANSFORMATION_UNK_1E              ; $1e
 	const TRANSFORMATION_UNK_1F              ; $1f
+
+; grab constants
+	const_def
+	const GRAB_NONE                ; $0
+	const GRAB_PICK_UP             ; $1
+	const GRAB_UNK_02              ; $2
+	const GRAB_IDLE                ; $3
+	const GRAB_CHARGE_THROW        ; $4
+	const GRAB_THROW_FULLY_CHARGED ; $5
+	const GRAB_HOLD_FULL_CHARGE    ; $6
+	const GRAB_THROW               ; $7
+
+	const_def 4
+	const GRAB_UNUSED_0_F    ; 4
+	const GRAB_UNUSED_1_F    ; 5
+	const GRAB_FULL_CHARGE_F ; 6
+	const GRAB_HEAVY_F       ; 7
+
+GRAB_FLAGS_MASK EQU (1 << GRAB_UNUSED_0_F) | (1 << GRAB_UNUSED_1_F) | (1 << GRAB_FULL_CHARGE_F) | (1 << GRAB_HEAVY_F)
+
+; number of frames to reach fully charged throw
+; with a light and heavy object
+THROW_CHARGE_FRAMES_LIGHT EQU $1e
+THROW_CHARGE_FRAMES_HEAVY EQU $3c

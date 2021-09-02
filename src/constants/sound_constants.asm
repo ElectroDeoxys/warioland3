@@ -70,11 +70,11 @@
 	const SFX_006                          ; 106
 	const SFX_ATTACK                       ; 107
 	const SFX_ATTACK_POWERED_UP            ; 108
-	const SFX_REGULAR_COIN                          ; 109
+	const SFX_REGULAR_COIN                 ; 109
 	const SFX_ROLL                         ; 10a
-	const SFX_SLIDE                        ; 10b
+	const SFX_ZIP_LINE_SLIDE               ; 10b
 	const SFX_00C                          ; 10c
-	const SFX_00D                          ; 10d
+	const SFX_SLIDE                          ; 10d
 	const SFX_00E                          ; 10e
 	const SFX_00F                          ; 10f
 	const SFX_LAND                         ; 110
@@ -112,7 +112,7 @@
 	const SFX_030                          ; 130
 	const SFX_MUSICAL_COIN                 ; 131
 	const SFX_KEY                          ; 132
-	const SFX_033                          ; 133
+	const SFX_GROUND_POUND                          ; 133
 	const SFX_034                          ; 134
 	const SFX_035                          ; 135
 	const SFX_036                          ; 136

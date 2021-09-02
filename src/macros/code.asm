@@ -13,7 +13,7 @@ sramswitch: MACRO
 ENDM
 
 jumptable: MACRO
-	rst $28
+	rst JumpTable
 ENDM
 
 call_hram: MACRO

@@ -11,6 +11,7 @@ SECTION "rst18", ROM0
 SECTION "rst20", ROM0
 	ds 8
 SECTION "rst28", ROM0
+JumpTable:
 	add a
 	pop hl
 	ld e, a
@@ -1279,9 +1280,9 @@ Func_928: ; 928 (0:928)
 	ld [$d506], a
 	ld a, $01
 	ld [$d503], a
-	ld a, [$d507]
+	ld a, [w3d507 + 0]
 	ld [$d504], a
-	ld a, [$d508]
+	ld a, [w3d507 + 1]
 	ld [$d505], a
 .asm_95a
 	pop af
@@ -2012,24 +2013,28 @@ Func_d8c: ; d8c (0:d8c)
 	ret
 ; 0xd9e
 
-Func_d9e: ; d9e (0:d9e)
+; draws Wario on screen unless he's invisible
+DrawWario: ; d9e (0:d9e)
 	ld a, [wTransformation]
 	cp TRANSFORMATION_INVISIBLE_WARIO
-	jr nz, .asm_db1
-	ld hl, wca8d
+	jr nz, .invincible
+; show Wario if wInvisibleFrame
+; has upper 4 bits set and bit 2 unset
+	ld hl, wInvisibleFrame
 	inc [hl]
 	ld a, [hl]
-	and $f2
-	cp $f0
-	jr z, .asm_db6
+	and %11110010
+	cp %11110000
+	jr z, .show_wario
 	ret
 
-.asm_db1
-	ld a, [wca8d]
+.invincible
+; show Wario if wInvisibleFrame is 0
+	ld a, [wInvisibleFrame]
 	and a
 	ret nz
 
-.asm_db6
+.show_wario
 	ld a, [wOAMBank]
 	ld [wTempBank], a
 	ld a, [wROMBank]
@@ -2418,7 +2423,7 @@ Func_1079: ; 1079 (0:1079)
 	call z, Func_10a7
 
 	xor a
-	ld [wca8c], a
+	ld [wInvincibleCounter], a
 	ld [wTransformation], a
 	ld [wca8f], a
 	ld [wca92], a
@@ -2428,7 +2433,7 @@ Func_1079: ; 1079 (0:1079)
 	ld [wca90], a
 	ld [wca91], a
 	ld [wca9b], a
-	ld [wca8d], a
+	ld [wInvisibleFrame], a
 	ld [wca9c], a
 	ret
 ; 0x10a7
@@ -2599,7 +2604,7 @@ Func_11d6: ; 11d6 (0:11d6)
 
 Func_11f6: ; 11f6 (0:11f6)
 	xor a
-	ld [wca9a], a
+	ld [wGrabState], a
 	ld [wc1b1], a
 	ld [wRoomAnimatedPalsEnabled], a
 	ld [wcee0], a
@@ -2623,9 +2628,9 @@ Func_11f6: ; 11f6 (0:11f6)
 	ld a, $03
 	ldh [rSVBK], a
 	ld a, h
-	ld [$d508], a
+	ld [w3d507 + 1], a
 	ld a, l
-	ld [$d507], a
+	ld [w3d507 + 0], a
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -2997,7 +3002,7 @@ Func_156d: ; 156d (0:156d)
 Func_1570: ; 1570 (0:1570)
 	call Func_1079
 	ld a, $10
-	ld [wca8c], a
+	ld [wInvincibleCounter], a
 	jr .asm_157d
 .asm_157a
 	call Func_1079

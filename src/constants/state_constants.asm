@@ -8,7 +8,7 @@
 	const ST_CROUCH_SLIDING                ; 06
 	const ST_ATTACKING                     ; 07
 	const ST_ATTACKING_AIRBORNE            ; 08
-	const ST_ATTACK_KNOCK_BACK             ; 09
+	const ST_BUMPING                       ; 09
 	const ST_DIVING                        ; 0a
 	const ST_SUBMERGED                     ; 0b
 	const ST_WATER_SURFACE_IDLING          ; 0c
