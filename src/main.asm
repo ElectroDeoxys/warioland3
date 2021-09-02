@@ -31,13 +31,13 @@ INCLUDE "engine/bank3.asm"
 
 SECTION "Bank 4", ROMX
 
-WarioIdleGfx:: INCBIN "gfx/wario/idle.2bpp"
-WarioWalkGfx:: INCBIN "gfx/wario/walk.2bpp"
-WarioDizzyGfx:: INCBIN "gfx/wario/dizzy.2bpp"
-WarioAttackGfx:: INCBIN "gfx/wario/attack.2bpp"
-WarioSwimGfx:: INCBIN "gfx/wario/swim.2bpp"
-WarioLadderGfx:: INCBIN "gfx/wario/ladder.2bpp"
-WarioThrowGfx:: INCBIN "gfx/wario/throw.2bpp"
+WarioIdleGfx::     INCBIN "gfx/wario/idle.2bpp"
+WarioWalkGfx::     INCBIN "gfx/wario/walk.2bpp"
+WarioDizzyGfx::    INCBIN "gfx/wario/dizzy.2bpp"
+WarioAttackGfx::   INCBIN "gfx/wario/attack.2bpp"
+WarioSwimGfx::     INCBIN "gfx/wario/swim.2bpp"
+WarioLadderGfx::   INCBIN "gfx/wario/ladder.2bpp"
+WarioThrowGfx::    INCBIN "gfx/wario/throw.2bpp"
 WarioAirborneGfx:: INCBIN "gfx/wario/airborne.2bpp"
 
 
@@ -63,13 +63,13 @@ INCLUDE "engine/bank8.asm"
 
 SECTION "Bank 9", ROMX
 
-WarioHotGfx:: INCBIN "gfx/wario/hot.2bpp"
-WarioBurntGfx:: INCBIN "gfx/wario/burnt.2bpp"
-WarioSlideGfx:: INCBIN "gfx/wario/slide.2bpp"
-WarioStringGfx:: INCBIN "gfx/wario/string.2bpp"
-WarioFatGfx:: INCBIN "gfx/wario/fat.2bpp"
+WarioHotGfx::      INCBIN "gfx/wario/hot.2bpp"
+WarioBurntGfx::    INCBIN "gfx/wario/burnt.2bpp"
+WarioSlideGfx::    INCBIN "gfx/wario/slide.2bpp"
+WarioStringGfx::   INCBIN "gfx/wario/string.2bpp"
+WarioFatGfx::      INCBIN "gfx/wario/fat.2bpp"
 WarioElectricGfx:: INCBIN "gfx/wario/electric.2bpp"
-WarioPuffyGfx:: INCBIN "gfx/wario/puffy.2bpp"
+WarioPuffyGfx::    INCBIN "gfx/wario/puffy.2bpp"
 
 
 SECTION "Bank A", ROMX
@@ -79,14 +79,14 @@ INCLUDE "engine/banka.asm"
 
 SECTION "Bank B", ROMX
 
-WarioZombieGfx:: INCBIN "gfx/wario/zombie.2bpp"
-WarioBouncyGfx:: INCBIN "gfx/wario/bouncy.2bpp"
-WarioCrazyGfx:: INCBIN "gfx/wario/crazy.2bpp"
-WarioBatGfx:: INCBIN "gfx/wario/bat.2bpp"
+WarioZombieGfx::  INCBIN "gfx/wario/zombie.2bpp"
+WarioBouncyGfx::  INCBIN "gfx/wario/bouncy.2bpp"
+WarioCrazyGfx::   INCBIN "gfx/wario/crazy.2bpp"
+WarioBatGfx::     INCBIN "gfx/wario/bat.2bpp"
 WarioVampireGfx:: INCBIN "gfx/wario/vampire.2bpp"
-WarioMagicGfx:: INCBIN "gfx/wario/magic.2bpp"
-WarioUnk1Gfx:: INCBIN "gfx/wario/unk1.2bpp"
-WarioHangGfx:: INCBIN "gfx/wario/hang.2bpp"
+WarioBubbleGfx::  INCBIN "gfx/wario/bubble.2bpp"
+WarioUnk1Gfx::    INCBIN "gfx/wario/unk1.2bpp"
+WarioHangGfx::    INCBIN "gfx/wario/hang.2bpp"
 
 
 SECTION "Audio Engine", ROMX
@@ -731,7 +731,12 @@ SECTION "Bank 79", ROMX
 
 SECTION "Bank 7A", ROMX
 
-	INCROM $1e8000, $1eb000
+WarioSnowmanGfx::  INCBIN "gfx/wario/snowman.2bpp"
+WarioSnowballGfx:: INCBIN "gfx/wario/snowball.2bpp"
+WarioFanGfx::      INCBIN "gfx/wario/fan.2bpp"
+WarioLaunchGfx::   INCBIN "gfx/wario/launch.2bpp"
+WarioMagicGfx::    INCBIN "gfx/wario/magic.2bpp"
+WarioBallGfx::     INCBIN "gfx/wario/ball.2bpp"
 
 
 SECTION "Bank 7B", ROMX

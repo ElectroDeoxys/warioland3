@@ -234,9 +234,9 @@ Func_20000: ; 20000 (8:4000)
 	dw ObjInteraction_BlueTreasure  ; OBJ_INTERACTION_17
 	dw Func_21156 ; OBJ_INTERACTION_18
 	dw Func_21245 ; OBJ_INTERACTION_19
-	dw SetState_FatEating ; OBJ_INTERACTION_1A
+	dw Func_21358 ; OBJ_INTERACTION_1A
 	dw ObjInteraction_RegularCoin ; OBJ_INTERACTION_1B
-	dw SetState_ElectricStart ; OBJ_INTERACTION_1C
+	dw Func_21455 ; OBJ_INTERACTION_1C
 	dw Func_21548 ; OBJ_INTERACTION_1D
 	dw Func_21569 ; OBJ_INTERACTION_1E
 	dw Func_215a2 ; OBJ_INTERACTION_1F
@@ -244,53 +244,53 @@ Func_20000: ; 20000 (8:4000)
 	dw Func_2164f ; OBJ_INTERACTION_21
 	dw Func_21675 ; OBJ_INTERACTION_22
 	dw Func_21774 ; OBJ_INTERACTION_23
-	dw $57b9      ; OBJ_INTERACTION_24
-	dw $5819      ; OBJ_INTERACTION_25
-	dw $5853      ; OBJ_INTERACTION_26
-	dw $5887      ; OBJ_INTERACTION_27
-	dw $58e7      ; OBJ_INTERACTION_28
-	dw $5999      ; OBJ_INTERACTION_29
-	dw $4e0f      ; OBJ_INTERACTION_2A
-	dw $5a4f      ; OBJ_INTERACTION_2B
-	dw $5a47      ; OBJ_INTERACTION_2C
-	dw $5a52      ; OBJ_INTERACTION_2D
-	dw $5a8c      ; OBJ_INTERACTION_2E
-	dw $5a97      ; OBJ_INTERACTION_2F
-	dw $5ac3      ; OBJ_INTERACTION_30
-	dw $5af1      ; OBJ_INTERACTION_31
-	dw $5b08      ; OBJ_INTERACTION_32
-	dw $5b0b      ; OBJ_INTERACTION_33
-	dw $5b2b      ; OBJ_INTERACTION_34
-	dw $5b42      ; OBJ_INTERACTION_35
-	dw $5b78      ; OBJ_INTERACTION_36
-	dw $5573      ; OBJ_INTERACTION_37
-	dw $5b89      ; OBJ_INTERACTION_38
-	dw $5c17      ; OBJ_INTERACTION_39
-	dw $5c26      ; OBJ_INTERACTION_3A
-	dw $5c56      ; OBJ_INTERACTION_3B
-	dw $5c61      ; OBJ_INTERACTION_3C
-	dw $5c86      ; OBJ_INTERACTION_3D
-	dw $5c98      ; OBJ_INTERACTION_3E
-	dw $5ca8      ; OBJ_INTERACTION_3F
-	dw $5ccf      ; OBJ_INTERACTION_40
-	dw $5ce9      ; OBJ_INTERACTION_41
-	dw $5cf8      ; OBJ_INTERACTION_42
-	dw $47ed      ; OBJ_INTERACTION_43
-	dw $5cfd      ; OBJ_INTERACTION_44
-	dw $5d17      ; OBJ_INTERACTION_45
-	dw $5d3b      ; OBJ_INTERACTION_46
-	dw $5d64      ; OBJ_INTERACTION_47
-	dw $5d6f      ; OBJ_INTERACTION_48
-	dw $5d88      ; OBJ_INTERACTION_49
-	dw $5dd3      ; OBJ_INTERACTION_4A
-	dw $5df8      ; OBJ_INTERACTION_4B
-	dw $5e2e      ; OBJ_INTERACTION_4C
-	dw $5e3e      ; OBJ_INTERACTION_4D
-	dw $5e9c      ; OBJ_INTERACTION_4E
-	dw $5ea6      ; OBJ_INTERACTION_4F
-	dw $5ecd      ; OBJ_INTERACTION_50
-	dw $5f01      ; OBJ_INTERACTION_51
-	dw $5f28      ; OBJ_INTERACTION_52
+	dw Func_217b9 ; OBJ_INTERACTION_24
+	dw Func_21819 ; OBJ_INTERACTION_25
+	dw ObjInteraction_Bubble ; OBJ_INTERACTION_26
+	dw Func_21887 ; OBJ_INTERACTION_27
+	dw ObjInteraction_Owl ; OBJ_INTERACTION_28
+	dw ObjInteraction_Rail ; OBJ_INTERACTION_29
+	dw Func_20e0f ; OBJ_INTERACTION_2A
+	dw Func_21a4f ; OBJ_INTERACTION_2B
+	dw Func_21a47 ; OBJ_INTERACTION_2C
+	dw Func_21a52 ; OBJ_INTERACTION_2D
+	dw Func_21a8c ; OBJ_INTERACTION_2E
+	dw Func_21a97 ; OBJ_INTERACTION_2F
+	dw Func_21ac3 ; OBJ_INTERACTION_30
+	dw Func_21af1 ; OBJ_INTERACTION_31
+	dw Func_21b08 ; OBJ_INTERACTION_32
+	dw Func_21b0b ; OBJ_INTERACTION_33
+	dw Func_21b2b ; OBJ_INTERACTION_34
+	dw Func_21b42 ; OBJ_INTERACTION_35
+	dw Func_21b78 ; OBJ_INTERACTION_36
+	dw Func_21573 ; OBJ_INTERACTION_37
+	dw Func_21b89 ; OBJ_INTERACTION_38
+	dw Func_21c17 ; OBJ_INTERACTION_39
+	dw Func_21c26 ; OBJ_INTERACTION_3A
+	dw Func_21c56 ; OBJ_INTERACTION_3B
+	dw Func_21c61 ; OBJ_INTERACTION_3C
+	dw Func_21c86 ; OBJ_INTERACTION_3D
+	dw Func_21c98 ; OBJ_INTERACTION_3E
+	dw Func_21ca8 ; OBJ_INTERACTION_3F
+	dw Func_21ccf ; OBJ_INTERACTION_40
+	dw Func_21ce9 ; OBJ_INTERACTION_41
+	dw Func_21cf8 ; OBJ_INTERACTION_42
+	dw Func_207ed ; OBJ_INTERACTION_43
+	dw Func_21cfd ; OBJ_INTERACTION_44
+	dw Func_21d17 ; OBJ_INTERACTION_45
+	dw Func_21d3b ; OBJ_INTERACTION_46
+	dw Func_21d64 ; OBJ_INTERACTION_47
+	dw Func_21d6f ; OBJ_INTERACTION_48
+	dw Func_21d88 ; OBJ_INTERACTION_49
+	dw ObjInteraction_ColourCoin ; OBJ_INTERACTION_4A
+	dw Func_21df8 ; OBJ_INTERACTION_4B
+	dw Func_21e2e ; OBJ_INTERACTION_4C
+	dw Func_21e3e ; OBJ_INTERACTION_4D
+	dw Func_21e9c ; OBJ_INTERACTION_4E
+	dw Func_21ea6 ; OBJ_INTERACTION_4F
+	dw Func_21ecd ; OBJ_INTERACTION_50
+	dw Func_21f01 ; OBJ_INTERACTION_51
+	dw Func_21f28 ; OBJ_INTERACTION_52
 	dw ObjInteraction_None ; OBJ_INTERACTION_53
 	dw ObjInteraction_None ; OBJ_INTERACTION_54
 	dw ObjInteraction_None ; OBJ_INTERACTION_55
@@ -858,7 +858,7 @@ Func_206eb: ; 206eb (8:46eb)
 	ld a, [wTransformation]
 	cp TRANSFORMATION_OWL_WARIO
 	call z, Func_16d9
-	call Func_1079
+	call ClearTransformationValues
 	call UpdateLevelMusic
 ;	fallthrough
 
@@ -978,6 +978,9 @@ Func_207ed: ; 207ed (8:47ed)
 .asm_20808
 	ld b, $06
 	call SetObjUnk1C
+;	fallthrough
+
+Func_2080d: ; 2080d (8:480d)
 	load_sfx SFX_STING
 	ld a, $01
 	ld [wInvincibleCounter], a
@@ -1264,7 +1267,7 @@ Func_20a6f: ; 20a6f (8:4a6f)
 	jr z, .asm_20aff
 	cp (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
 	jr z, .asm_20b15
-	cp (1 << 6) | TRANSFORMATION_UNK_0D
+	cp (1 << 6) | TRANSFORMATION_ICE_SKATIN
 	jr z, .asm_20b2b
 	xor a
 	ld [wca86], a
@@ -1301,7 +1304,27 @@ Func_20a6f: ; 20a6f (8:4a6f)
 	ret
 ; 0x20b41
 
-	INCROM $20b41, $20b6b
+Func_20b41: ; 20b41 (8:4b41)
+	ld a, [wca93]
+	and a
+	jr z, .asm_20b5e
+	cp $02
+	jp z, Func_20a6f
+	cp $01
+	jp z, Func_20a6f
+	cp $03
+	jp z, Func_20350
+	cp $04
+	jp z, Func_205e7
+	jp Func_20a6f
+.asm_20b5e
+	ld a, [wca93]
+	and a
+	ret nz
+	call Func_20939
+	ld b, $12
+	jp SetObjUnk1C
+; 0x20b6b
 
 Func_20b6b: ; 20b6b (8:4b6b)
 	ld a, [wInteractionSide]
@@ -1608,7 +1631,26 @@ Func_20deb: ; 20deb (8:4deb)
 	jp Func_208f2
 ; 0x20e0f
 
-	INCROM $20e0f, $20e39
+Func_20e0f: ; 20e0f (8:4e0f)
+	ld a, [wInteractionSide]
+	bit INTERACTION_DOWN_F, a
+	jp nz, Func_20899
+	bit INTERACTION_UP_F, a
+	jp nz, Func_207ed
+
+	ld a, [wEnemyDirection]
+	cp DIRECTION_RIGHT
+	jr z, .asm_20e2e
+	ld a, [wInteractionSide]
+	bit INTERACTION_RIGHT_F, a
+	jp nz, Func_207ed
+	jp Func_208f2
+.asm_20e2e
+	ld a, [wInteractionSide]
+	bit INTERACTION_LEFT_F, a
+	jp nz, Func_207ed
+	jp Func_208f2
+; 0x20e39
 
 Func_20e39: ; 20e39 (8:4e39)
 	ld a, [wInteractionSide]
@@ -1634,7 +1676,11 @@ Func_20e60: ; 20e60 (8:4e60)
 	jp Func_20939
 ; 0x20e63
 
-	INCROM $20e63, $20e6a
+Func_20e63: ; 20e63 (8:4e63)
+	ld a, [wAttackCounter]
+	and a
+	jp nz, Func_20350
+;	fallthrough
 
 Func_20e6a: ; 20e6a (8:4e6a)
 	call Func_20939
@@ -2049,19 +2095,20 @@ Func_21245: ; 21245 (8:5245)
 	jr z, .asm_2125d
 	ld a, [wInteractionSide]
 	bit INTERACTION_RIGHT_F, a
-	jr nz, .asm_2126a
+	jr nz, Func_2126a
 	jp Func_2022c
 
 .asm_2125d
 	ld a, [wInteractionSide]
 	bit INTERACTION_LEFT_F, a
-	jr nz, .asm_2126a
+	jr nz, Func_2126a
 	jp Func_2022c
 
 .asm_21267
 	jp Func_20447
+; 0x2126a
 
-.asm_2126a
+Func_2126a: ; 2126a (8:526a)
 	ld a, [wIsCrouching]
 	and a
 	jr z, .asm_21290
@@ -2150,7 +2197,7 @@ Func_21245: ; 21245 (8:5245)
 	ret
 ; 0x21358
 
-SetState_FatEating: ; 21358 (8:5358)
+Func_21358: ; 21358 (8:5358)
 	ld a, [wIsCrouching]
 	and a
 	jp nz, Func_20a69
@@ -2252,7 +2299,7 @@ ObjInteraction_RegularCoin: ; 21433 (8:5433)
 	jp Func_20a63
 ; 0x21455
 
-SetState_ElectricStart: ; 21455 (8:5455)
+Func_21455: ; 21455 (8:5455)
 	ld a, [wWarioScreenXPos]
 	ld b, a
 	ld a, [wObjScreenXPos]
@@ -2367,9 +2414,11 @@ Func_21548: ; 21548 (8:5548)
 Func_21569: ; 21569 (8:5569)
 	ld a, [wInteractionSide]
 	bit INTERACTION_DOWN_F, a
-	jr nz, .asm_21573
+	jr nz, Func_21573
 	jp Func_2022c
-.asm_21573
+; 0x21573
+
+Func_21573: ; 21573 (8:5573)
 	ld a, [wInvincibleCounter]
 	and a
 	ret nz
@@ -2423,14 +2472,16 @@ Func_215e7: ; 215e7 (8:55e7)
 	jr z, .asm_21600
 	ld a, [wInteractionSide]
 	bit INTERACTION_RIGHT_F, a
-	jr nz, .asm_2160a
+	jr nz, Func_2160a
 	jp Func_2022c
 .asm_21600
 	ld a, [wInteractionSide]
 	bit INTERACTION_LEFT_F, a
-	jr nz, .asm_2160a
+	jr nz, Func_2160a
 	jp Func_2022c
-.asm_2160a
+; 0x2160a
+
+Func_2160a: ; 2160a (8:560a)
 	ld a, [wInvincibleCounter]
 	and a
 	ret nz
@@ -2484,13 +2535,14 @@ Func_21675: ; 21675 (8:5675)
 	bit INTERACTION_UP_F, a
 	jp nz, Func_209ca
 	bit INTERACTION_DOWN_F, a
-	jr nz, .asm_2168b
+	jr nz, Func_2168b
 	ld a, [wAttackCounter]
 	and a
 	jp nz, Func_217a9
 	jp Func_20a6f
+; 0x2168b
 
-.asm_2168b
+Func_2168b: ; 2168b (8:568b)
 	ld a, [wWarioState]
 	cp ST_FLAT_SQUISHED
 	jr nz, .asm_216a2
@@ -2616,6 +2668,7 @@ Func_217b9: ; 217b9 (8:57b9)
 	jp Func_2022c
 .asm_217db
 	jp Func_20447
+
 .asm_217de
 	ld a, [wInvincibleCounter]
 	and a
@@ -2625,8 +2678,10 @@ Func_217b9: ; 217b9 (8:57b9)
 	jp nz, Func_2022c
 	cp TRANSFORMATION_CRAZY_WARIO
 	jp z, Func_2022c
+
 	ld b, $06
 	call SetObjUnk1C
+
 	ld a, TRANSFORMATION_CRAZY_WARIO
 	ld [wTransformation], a
 	ld a, $03
@@ -2639,7 +2694,267 @@ Func_217b9: ; 217b9 (8:57b9)
 	ret
 ; 0x21819
 
-	INCROM $21819, $21aac
+Func_21819: ; 21819 (8:5819)
+	ld a, [wInvincibleCounter]
+	and a
+	ret nz
+	ld a, [wTransformation]
+	bit 6, a
+	ret nz
+
+	ld b, $06
+	call SetObjUnk1C
+
+	ld a, (1 << 6) | TRANSFORMATION_VAMPIRE_WARIO
+	ld [wTransformation], a
+	farcall Func_19b25
+	ld a, [wTransformation]
+	cp (1 << 6) | TRANSFORMATION_VAMPIRE_WARIO
+	ret nz
+	farcall SetState_VampireTransforming
+	ret
+; 0x21853
+
+ObjInteraction_Bubble: ; 21853 (8:5853)
+	ld a, [wInvincibleCounter]
+	and a
+	ret nz
+	ld a, [wTransformation]
+	bit 6, a
+	ret nz
+
+	ld b, $07
+	call SetObjUnk1C
+
+	ld a, (1 << 6) | TRANSFORMATION_BUBBLE
+	ld [wTransformation], a
+	ld a, $02
+	ld [wca93], a
+	ld a, $02
+	ld [wca92], a
+	ld a, $01
+	ld [wca94], a
+	farcall Func_2ac7d
+	ret
+; 0x21887
+
+Func_21887: ; 21887 (8:5887)
+	ld a, [wInvincibleCounter]
+	and a
+	ret nz
+	ld a, [wTransformation]
+	bit 6, a
+	ret nz
+	ld a, [wIsCrouching]
+	and a
+	jr z, .asm_218b6
+	ld a, -27
+	ld [wca6f], a
+	farcall Func_1996e
+	ld a, b
+	and a
+	jr z, .asm_218b6
+	ld a, -15
+	ld [wca6f], a
+	ret
+
+.asm_218b6
+	ld b, $07
+	call SetObjUnk1C
+
+	load_sfx SFX_028
+	ld a, (1 << 6) | TRANSFORMATION_ICE_SKATIN
+	ld [wTransformation], a
+	ld a, $03
+	ld [wca93], a
+	ld a, $03
+	ld [wca92], a
+	ld a, $02
+	ld [wca94], a
+	farcall SetState_IceSkatinStart
+	ret
+; 0x218e7
+
+ObjInteraction_Owl: ; 218e7 (8:58e7)
+	ld a, [wInteractionSide]
+	bit INTERACTION_DOWN_F, a
+	jr nz, .asm_218f1
+	jp Func_20939
+
+.asm_218f1
+	ld a, [wTransformation]
+	bit 6, a
+	ret nz
+	cp TRANSFORMATION_OWL_WARIO
+	ret z
+
+	call Func_20a63
+
+	load_sfx SFX_HANG_GRAB
+	ld a, TRANSFORMATION_OWL_WARIO
+	ld [wTransformation], a
+
+	ld a, $02
+	ld [wca93], a
+	ld a, $01
+	ld [wca92], a
+	ld a, $01
+	ld [wca94], a
+	ld a, $b8
+	ld [wWarioState], a
+	ld a, $ff
+	ld [wca70], a
+	ld a, $e5
+	ld [wca6f], a
+	ld a, $f7
+	ld [wca71], a
+	ld a, $09
+	ld [wca72], a
+
+	xor a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
+	ld [wIsCrouching], a
+	ld [wIsRolling], a
+	ld [wIsSmashAttacking], a
+	ld [wJumpVelTable], a
+	ld [wJumpVelIndex], a
+
+	call UpdateLevelMusic
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wAnimationFrame], a
+
+	load_gfx WarioHangGfx
+	call LoadWarioGfx
+	load_oam OAM_1fddb4
+	ld a, [wEnemyDirection]
+	ld [wDirection], a
+	load_frameset Frameset_1fed53
+	update_anim_2
+	ret
+; 0x21999
+
+ObjInteraction_Rail: ; 21999 (8:5999)
+	ld a, [wTransformation]
+	bit 6, a
+	ret nz
+	cp TRANSFORMATION_RAIL
+	ret z
+
+	ld b, $06
+	call SetObjUnk1C
+
+	load_sfx SFX_HANG_GRAB
+	ld a, TRANSFORMATION_RAIL
+	ld [wTransformation], a
+
+	ld a, $02
+	ld [wca93], a
+	ld a, $01
+	ld [wca92], a
+	ld a, $01
+	ld [wca94], a
+
+	ld a, ST_HANGING_RAIL
+	ld [wWarioState], a
+
+	ld a, -1
+	ld [wca70], a
+	ld a, -27
+	ld [wca6f], a
+	ld a, -9
+	ld [wca71], a
+	ld a, 9
+	ld [wca72], a
+
+	xor a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
+	ld [wIsCrouching], a
+	ld [wIsRolling], a
+	ld [wIsSmashAttacking], a
+	ld [wJumpVelTable], a
+	ld [wJumpVelIndex], a
+
+	inc a
+	ld [wca9b], a
+
+	call UpdateLevelMusic
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wAnimationFrame], a
+
+	load_gfx WarioHangGfx
+	call LoadWarioGfx
+	load_oam OAM_1fee05
+
+	ld a, [wEnemyDirection]
+	ld [wDirection], a
+	load_frameset Frameset_1feec4
+	update_anim_2
+	ret
+; 0x21a47
+
+Func_21a47: ; 21a47 (8:5a47)
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
+	jp nz, Func_20447
+;	fallthrough
+
+Func_21a4f: ; 21a4f (8:5a4f)
+	jp Func_2126a
+; 0x21a52
+
+Func_21a52: ; 21a52 (8:5a52)
+	ld a, [wInvincibleCounter]
+	and a
+	jp nz, Func_20a69
+	ld a, [wTransformation]
+	bit 6, a
+	jp nz, Func_20a69
+	call Func_20a63
+
+	ld a, (1 << 6) | TRANSFORMATION_SNOWMAN_WARIO
+	ld [wTransformation], a
+
+	xor a
+	ld [wca8f], a
+	ld a, $03
+	ld [wca93], a
+	ld a, $03
+	ld [wca92], a
+	ld a, $02
+	ld [wca94], a
+	farcall SetState_UnknownC4
+	ret
+; 0x21a8c
+
+Func_21a8c: ; 21a8c (8:5a8c)
+	ld a, [wTransformation]
+	cp (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
+	ret nz
+	ld b, $0e
+	jp SetObjUnk1C
+; 0x21a97
+
+Func_21a97: ; 21a97 (8:5a97)
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
+	jr nz, Func_21aac
+	bit INTERACTION_DOWN_F, a
+	jp nz, Func_2168b
+
+	ld a, [wAttackCounter]
+	and a
+	jr nz, Func_21abb
+	jp Func_20a6f
 
 Func_21aac: ; 21aac (8:5aac)
 	ld a, [wIsSmashAttacking]
@@ -2650,7 +2965,404 @@ Func_21aac: ; 21aac (8:5aac)
 	jp SetObjUnk1C
 ; 0x21abb
 
-	INCROM $21abb, $21ddb
+Func_21abb: ; 21abb (8:5abb)
+	ld b, $02
+	call SetObjUnk1C
+	jp Func_20a6f
+; 0x21ac3
+
+Func_21ac3: ; 21ac3 (8:5ac3)
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
+	jr nz, .asm_21ae4
+
+	ld a, [wEnemyDirection]
+	and a
+	jr nz, .asm_21ada
+	ld a, [wInteractionSide]
+	bit INTERACTION_RIGHT_F, a
+	jr nz, .asm_21aee
+	jp Func_20e6a
+.asm_21ada
+	ld a, [wInteractionSide]
+	bit INTERACTION_LEFT_F, a
+	jr nz, .asm_21aee
+	jp Func_20e6a
+
+.asm_21ae4
+	ld a, [wIsSmashAttacking]
+	and a
+	jp nz, Func_20602
+	jp Func_20e6a
+.asm_21aee
+	jp Func_21cfd
+; 0x21af1
+
+Func_21af1: ; 21af1 (8:5af1)
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
+	jp nz, Func_209ca
+	bit INTERACTION_DOWN_F, a
+	jp nz, Func_20447
+	ld a, [wAttackCounter]
+	and a
+	jp nz, Func_217a9
+	jp Func_20a6f
+; 0x21b08
+
+Func_21b08: ; 21b08 (8:5b08)
+	jp Func_2160a
+; 0x21b0b
+
+Func_21b0b: ; 21b0b (8:5b0b)
+	ld b, $06
+	call SetObjUnk1C
+	ld a, [wIsRolling]
+	and a
+	ret nz
+	ld a, [wEnemyDirection]
+	ld [wDirection], a
+	farcall Func_1e174
+	ret
+; 0x21b2b
+
+Func_21b2b: ; 21b2b (8:5b2b)
+	ld a, [wInteractionSide]
+	and INTERACTION_UP | INTERACTION_DOWN
+	jp nz, Func_20447
+	ld a, [wAttackCounter]
+	and a
+	jp nz, Func_20350
+;	fallthrough
+
+Func_21b3a: ; 21b3a (8:5b3a)
+	call Func_20939
+	ld b, $00
+	jp SetObjUnk1C
+; 0x21b42
+
+Func_21b42: ; 21b42 (8:5b42)
+	ld a, [wInvincibleCounter]
+	and a
+	ret nz
+	ld a, [wTransformation]
+	bit 6, a
+	jp nz, Func_2022c
+
+	ld b, $06
+	call SetObjUnk1C
+
+	ld a, (1 << 6) | TRANSFORMATION_SPLIT
+	ld [wTransformation], a
+
+	ld a, $05
+	ld [wca93], a
+	ld a, $05
+	ld [wca92], a
+	ld a, $02
+	ld [wca94], a
+	farcall SetState_SplitHit
+	ret
+; 0x21b78
+
+Func_21b78: ; 21b78 (8:5b78)
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
+	jr z, .asm_21b86
+	ld a, [wIsSmashAttacking]
+	and a
+	jp nz, Func_20602
+.asm_21b86
+	jp Func_20939
+; 0x21b89
+
+Func_21b89: ; 21b89 (8:5b89)
+	ld a, [wInteractionSide]
+	bit INTERACTION_DOWN_F, a
+	jp z, Func_2022c
+	ld a, [wInvincibleCounter]
+	and a
+	ret nz
+	ld a, [wTransformation]
+	bit 6, a
+	jp nz, Func_2022c
+
+	ld b, $06
+	call SetObjUnk1C
+
+	ld a, (1 << 6) | TRANSFORMATION_BLIND
+	ld [wTransformation], a
+
+	ld a, $02
+	ld [wca93], a
+	ld a, $01
+	ld [wca92], a
+	ld a, $01
+	ld [wca94], a
+
+	farcall SetState_BlindIdling
+
+	ld a, 1 << rBGPI_AUTO_INCREMENT
+	ldh [rBGPI], a
+	ld b, 4
+	ld c, LOW(rBGPD)
+.wait_lcd_off_1
+	ldh a, [rSTAT]
+	and STAT_ON_LCD
+	jr z, .wait_lcd_off_1
+.wait_lcd_on_1
+	ldh a, [rSTAT]
+	and STAT_ON_LCD
+	jr nz, .wait_lcd_on_1
+
+	xor a
+rept 2 palettes
+	ld [$ff00+c], a
+endr
+	dec b
+	jr nz, .wait_lcd_off_1
+
+	ld a, (1 << rOBPI_AUTO_INCREMENT) | $18
+	ldh [rOBPI], a
+	ld b, 2
+	ld c, LOW(rOBPD)
+.wait_lcd_off_2
+	ldh a, [rSTAT]
+	and STAT_ON_LCD
+	jr z, .wait_lcd_off_2
+.wait_lcd_on_2
+	ldh a, [rSTAT]
+	and STAT_ON_LCD
+	jr nz, .wait_lcd_on_2
+
+	xor a
+rept 2 palettes
+	ld [$ff00+c], a
+endr
+	dec b
+	jr nz, .wait_lcd_off_2
+	ret
+; 0x21c17
+
+Func_21c17: ; 21c17 (8:5c17)
+	ld b, $06
+	call SetObjUnk1C
+	ld a, [wTransformation]
+	and a
+	jp z, Func_20000.next_obj
+	jp RecoverFromTransformation
+; 0x21c26
+
+Func_21c26: ; 21c26 (8:5c26)
+	ld a, [wEnemyDirection]
+	cp DIRECTION_RIGHT
+	jr z, .asm_21c37
+	ld a, [wInteractionSide]
+	bit INTERACTION_RIGHT_F, a
+	jr nz, .asm_21c41
+	jp Func_207ed
+.asm_21c37
+	ld a, [wInteractionSide]
+	bit INTERACTION_LEFT_F, a
+	jr nz, .asm_21c41
+	jp Func_207ed
+.asm_21c41
+	ld b, $11
+	call SetObjUnk1C
+	farcall SetState_UnknownE0
+	ret
+; 0x21c56
+
+Func_21c56: ; 21c56 (8:5c56)
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
+	jp nz, Func_21aac
+	jp Func_20b6b
+; 0x21c61
+
+Func_21c61: ; 21c61 (8:5c61)
+	ld a, [wInteractionSide]
+	and INTERACTION_UP | INTERACTION_DOWN
+	jp nz, Func_20447
+	ld a, [wEnemyDirection]
+	and a
+	jr nz, .asm_21c7a
+	ld a, [wInteractionSide]
+	bit INTERACTION_RIGHT_F, a
+	jp nz, Func_21b0b
+	jp Func_20e6a
+.asm_21c7a
+	ld a, [wInteractionSide]
+	bit INTERACTION_LEFT_F, a
+	jp nz, Func_21b0b
+	jp Func_20e6a
+; 0x21c85
+
+	ret ; stray ret
+
+Func_21c86: ; 21c86 (8:5c86)
+	ld a, [wInteractionSide]
+	and INTERACTION_UP | INTERACTION_DOWN
+	jp nz, Func_20e6a
+	ld a, [wAttackCounter]
+	and a
+	jp nz, Func_20350
+	jp Func_20e6a
+; 0x21c98
+
+Func_21c98: ; 21c98 (8:5c98)
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
+	jp nz, Func_209ca
+	bit INTERACTION_DOWN_F, a
+	jp nz, Func_2168b
+	jp Func_20b41
+; 0x21ca8
+
+Func_21ca8: ; 21ca8 (8:5ca8)
+	ld a, [wInvincibleCounter]
+	and a
+	ret nz
+	ld a, [wTransformation]
+	and a
+	ret nz
+
+	load_sfx SFX_FAT_WALK
+	farcall SetState_DraggedDown
+;	fallthrough
+
+Func_21cc9: ; 21cc9 (8:5cc9)
+	ld b, $13
+	call SetObjUnk1C
+	ret
+; 0x21ccf
+
+Func_21ccf: ; 21ccf (8:5ccf)
+	ld a, $e7
+	ld [wc0d7], a
+	call Func_2080d
+	stop_sfx
+	ld a, ST_TELEPORTING_WATER
+	ld [wWarioState], a
+	ld b, $10
+	jp SetObjUnk1C
+; 0x21ce9
+
+Func_21ce9: ; 21ce9 (8:5ce9)
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
+	jp nz, Func_20899
+	bit INTERACTION_DOWN_F, a
+	jr nz, Func_21ccf
+	jp Func_208f2
+; 0x21cf8
+
+Func_21cf8: ; 21cf8 (8:5cf8)
+	ld b, $06
+	jp SetObjUnk1C
+; 0x21cfd
+
+Func_21cfd: ; 21cfd (8:5cfd)
+	ld a, $e7
+	ld [wc0d7], a
+	call Func_206eb
+	stop_sfx
+	ld a, ST_TELEPORTING
+	ld [wWarioState], a
+	ld b, $10
+	jp SetObjUnk1C
+; 0x21d17
+
+Func_21d17: ; 21d17 (8:5d17)
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
+	jp nz, Func_209ca
+	ld a, [wTransformation]
+	and a
+	ret nz
+	ld a, [wWaterInteraction]
+	and a
+	jp z, Func_21b3a
+	farcall Func_1cdc4
+	ret
+; 0x21d3b
+
+Func_21d3b: ; 21d3b (8:5d3b)
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
+	jp nz, Func_20e6a
+	bit INTERACTION_DOWN_F, a
+	jp nz, Func_20e6a
+	ld a, [wEnemyDirection]
+	and a
+	jr nz, .asm_21d59
+	ld a, [wInteractionSide]
+	bit INTERACTION_RIGHT_F, a
+	jp nz, Func_20670
+	jp Func_20e6a
+.asm_21d59
+	ld a, [wInteractionSide]
+	bit INTERACTION_LEFT_F, a
+	jp nz, Func_20670
+	jp Func_20e6a
+; 0x21d64
+
+Func_21d64: ; 21d64 (8:5d64)
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
+	jp nz, Func_20670
+	jp Func_20e6a
+; 0x21d6f
+
+Func_21d6f: ; 21d6f (8:5d6f)
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
+	jr nz, .asm_21d7e
+	bit INTERACTION_DOWN_F, a
+	jp nz, Func_20670
+	jp Func_20e6a
+.asm_21d7e
+	ld a, [wIsSmashAttacking]
+	and a
+	jp nz, Func_20602
+	jp Func_20e6a
+; 0x21d88
+
+Func_21d88: ; 21d88 (8:5d88)
+	ld a, [wInteractionSide]
+	and INTERACTION_UP | INTERACTION_DOWN
+	jp nz, Func_20899
+	ld a, [wEnemyDirection]
+	and a
+	jr nz, .asm_21da1
+	ld a, [wInteractionSide]
+	bit INTERACTION_RIGHT_F, a
+	jp nz, Func_21dac
+	jp Func_208f2
+.asm_21da1
+	ld a, [wInteractionSide]
+	bit INTERACTION_LEFT_F, a
+	jp nz, Func_21dac
+	jp Func_208f2
+; 0x21dac
+
+Func_21dac: ; 21dac (8:5dac)
+	ld a, [wInvincibleCounter]
+	and a
+	ret nz
+	ld a, [wTransformation]
+	bit 6, a
+	jp nz, Func_2022c
+	ld a, [wEnemyDirection]
+	ld [wDirection], a
+	farcall SetState_UnknownE1
+	ld b, $06
+	jp SetObjUnk1C
+; 0x21dd3
+
+ObjInteraction_ColourCoin: ; 21dd3 (8:5dd3)
+	load_sfx SFX_COLOUR_COIN
+;	fallthrough
 
 ; adds 10 to coin count
 CollectMusicalCoin: ; 21ddb (8:5ddb)
@@ -2674,7 +3386,160 @@ CollectMusicalCoin: ; 21ddb (8:5ddb)
 	jp Func_20000.next_obj
 ; 0x21df8
 
-	INCROM $21df8, $21f51
+Func_21df8: ; 21df8 (8:5df8)
+	ld a, [wInvincibleCounter]
+	and a
+	ret nz
+	ld a, [wTransformation]
+	bit 6, a
+	jp nz, Func_2022c
+	ld b, $06
+	call SetObjUnk1C
+
+	ld a, (1 << 6) | TRANSFORMATION_MAGIC
+	ld [wTransformation], a
+
+	ld a, $05
+	ld [wca93], a
+	ld a, $05
+	ld [wca92], a
+	ld a, $02
+	ld [wca94], a
+	farcall SetState_MagicRising
+	ret
+; 0x21e2e
+
+Func_21e2e: ; 21e2e (8:5e2e)
+	ld a, [wInteractionSide]
+	bit INTERACTION_DOWN_F, a
+	jp nz, Func_20670
+	bit INTERACTION_UP_F, a
+	jp nz, Func_20447
+	jp Func_2022c
+; 0x21e3e
+
+Func_21e3e: ; 21e3e (8:5e3e)
+	ld a, [wTransformation]
+	cp (1 << 6) | TRANSFORMATION_BALL
+	jr z, Func_21e8a
+	ld a, [wInteractionSide]
+	bit INTERACTION_DOWN_F, a
+	jr nz, .asm_21e54
+	bit INTERACTION_UP_F, a
+	jp nz, Func_20447
+	jp Func_20e63
+
+.asm_21e54
+	ld a, [wInvincibleCounter]
+	and a
+	ret nz
+	ld a, [wTransformation]
+	bit 6, a
+	jp nz, Func_2022c
+	ld b, $06
+	call SetObjUnk1C
+	ld a, (1 << 6) | TRANSFORMATION_BALL
+	ld [wTransformation], a
+
+	ld a, $05
+	ld [wca93], a
+	ld a, $05
+	ld [wca92], a
+	ld a, $02
+	ld [wca94], a
+
+	farcall SetState_BallStart
+	ret
+; 0x21e8a
+
+Func_21e8a: ; 21e8a (8:5e8a)
+	farcall SetState_BallShot
+	jp Func_21cc9
+; 0x21e9c
+
+Func_21e9c: ; 21e9c (8:5e9c)
+	ld a, [wTransformation]
+	cp (1 << 6) | TRANSFORMATION_BALL
+	jr z, Func_21e8a
+	jp Func_20939
+; 0x21ea6
+
+Func_21ea6: ; 21ea6 (8:5ea6)
+	ld a, [wEnemyDirection]
+	ld b, a
+	and a
+	jr nz, .asm_21eb6
+	ld a, [wInteractionSide]
+	bit INTERACTION_RIGHT_F, a
+	jr nz, .asm_21ebf
+	jr .asm_21eca
+.asm_21eb6
+	ld a, [wInteractionSide]
+	bit INTERACTION_LEFT_F, a
+	jr nz, .asm_21ebf
+	jr .asm_21eca
+.asm_21ebf
+	ld a, [wEnemyDirection]
+	xor $1
+	ld [wDirection], a
+	jp Func_20a6f
+.asm_21eca
+	jp Func_21b3a
+; 0x21ecd
+
+Func_21ecd: ; 21ecd (8:5ecd)
+	ld a, [wEnemyDirection]
+	and a
+	jr nz, .asm_21edd
+	ld a, [wInteractionSide]
+	bit INTERACTION_RIGHT_F, a
+	jr nz, .asm_21ee7
+	jp Func_20e6a
+.asm_21edd
+	ld a, [wInteractionSide]
+	bit INTERACTION_LEFT_F, a
+	jr nz, .asm_21ee7
+	jp Func_20e6a
+.asm_21ee7
+	load_sfx SFX_FAT_WALK
+	farcall SetState_DraggedDown
+	jp Func_21cc9
+; 0x21f01
+
+Func_21f01: ; 21f01 (8:5f01)
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
+	jr nz, .asm_21f0b
+	jp Func_20d8c
+.asm_21f0b
+	ld a, [wInteractionSide]
+	or INTERACTION_LEFT
+	ld [wInteractionSide], a
+	ld a, DIRECTION_RIGHT
+	ld [wDirection], a
+	farcall SetState_SwimKnockBack
+	ret
+; 0x21f28
+
+Func_21f28: ; 21f28 (8:5f28)
+	ld a, [wInteractionSide]
+	bit INTERACTION_UP_F, a
+	jp nz, Func_21d6f.asm_21d7e
+	bit INTERACTION_DOWN_F, a
+	jp nz, Func_20e6a
+	ld a, [wEnemyDirection]
+	and a
+	jr nz, .asm_21f46
+	ld a, [wInteractionSide]
+	bit INTERACTION_RIGHT_F, a
+	jp nz, Func_20670
+	jp Func_20e6a
+.asm_21f46
+	ld a, [wInteractionSide]
+	bit INTERACTION_LEFT_F, a
+	jp nz, Func_20670
+	jp Func_20e6a
+; 0x21f51
 
 Func_21f51: ; 21f51 (8:5f51)
 	ld a, [wce00]

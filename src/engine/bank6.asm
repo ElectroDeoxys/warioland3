@@ -807,7 +807,7 @@ Func_19c1b: ; 19c1b (6:5c1b)
 	dw UpdateState_CrouchSlipping        ; ST_CROUCH_SLIPPING
 	dw UpdateState_DraggedDown           ; ST_DRAGGED_DOWN
 	dw UpdateState_Teleporting           ; ST_TELEPORTING
-	dw $60b4                             ; ST_UNKNOWN_34
+	dw $60b4                             ; ST_TELEPORTING_WATER
 	dw UpdateState_SandFalling           ; ST_SAND_FALLING
 	dw UpdateState_SandJumping           ; ST_SAND_JUMPING
 	dw UpdateState_SandIdling            ; ST_SAND_IDLING
@@ -1133,7 +1133,53 @@ UpdateState_CrouchSlipping: ; 19ef1 (6:5ef1)
 	ret
 ; 0x19fb6
 
-	INCROM $19fb6, $1a046
+SetState_DraggedDown: ; 19fb6 (6:5fb6)
+	ld a, ST_DRAGGED_DOWN
+	ld [wWarioState], a
+
+	xor a
+	ld [wSFXLoopCounter], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wAttackCounter], a
+	ld [wGrabState], a
+	ld [wJumpVelTable], a
+	ld [wJumpVelIndex], a
+	ld [wIsSmashAttacking], a
+	ld [wIsCrouching], a
+	ld [wIsRolling], a
+
+	inc a
+	ld [wca9b], a
+
+	ld a, -1
+	ld [wca70], a
+	ld a, -9
+	ld [wca71], a
+	ld a, 9
+	ld [wca72], a
+	ld a, -27
+	ld [wca6f], a
+
+	load_gfx WarioAirborneGfx
+	call LoadWarioGfx
+	load_oam OAM_15955
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wAnimationFrame], a
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1a02c
+	load_frameset Frameset_15f70
+	jr .asm_1a036
+.asm_1a02c
+	load_frameset Frameset_15f7f
+.asm_1a036
+	update_anim_1
+	ret
+; 0x1a046
 
 UpdateState_DraggedDown: ; 1a046 (6:6046)
 	update_anim_1

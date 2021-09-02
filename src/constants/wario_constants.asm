@@ -43,8 +43,7 @@ NUM_WIGGLES_TO_ESCAPE EQU 6
 MAX_PICKED_UP_FRAME_COUNTER EQU 32
 
 ; transformation constants
-	const_def
-	const TRANSFORMATION_UNK_00              ; $00
+	const_def 1
 	const TRANSFORMATION_HOT_WARIO           ; $01
 	const TRANSFORMATION_FLAT_WARIO          ; $02
 	const TRANSFORMATION_BALL_O_STRING_WARIO ; $03
@@ -56,17 +55,17 @@ MAX_PICKED_UP_FRAME_COUNTER EQU 32
 	const TRANSFORMATION_BOUNCY_WARIO        ; $09
 	const TRANSFORMATION_CRAZY_WARIO         ; $0a
 	const TRANSFORMATION_VAMPIRE_WARIO       ; $0b
-	const TRANSFORMATION_UNK_0C              ; $0c
-	const TRANSFORMATION_UNK_0D              ; $0d
+	const TRANSFORMATION_BUBBLE              ; $0c
+	const TRANSFORMATION_ICE_SKATIN          ; $0d
 	const TRANSFORMATION_OWL_WARIO           ; $0e
-	const TRANSFORMATION_UNK_0F              ; $0f
+	const TRANSFORMATION_RAIL                ; $0f
 	const TRANSFORMATION_SNOWMAN_WARIO       ; $10
-	const TRANSFORMATION_UNK_11              ; $11
+	const TRANSFORMATION_SPLIT               ; $11
 	const TRANSFORMATION_UNK_12              ; $12
-	const TRANSFORMATION_UNK_13              ; $13
+	const TRANSFORMATION_BLIND               ; $13
 	const TRANSFORMATION_UNK_14              ; $14
-	const TRANSFORMATION_UNK_15              ; $15
-	const TRANSFORMATION_UNK_16              ; $16
+	const TRANSFORMATION_MAGIC               ; $15
+	const TRANSFORMATION_BALL              ; $16
 	const TRANSFORMATION_UNK_17              ; $17
 	const TRANSFORMATION_UNK_18              ; $18
 	const TRANSFORMATION_UNK_19              ; $19

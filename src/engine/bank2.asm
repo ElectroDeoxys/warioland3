@@ -342,14 +342,14 @@ Func_80aa: ; 80aa (2:40aa)
 	ret z
 
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_UNK_13
+	cp (1 << 6) | TRANSFORMATION_BLIND
 	jr z, .asm_82ff
 	ld a, [wc0e6]
 	and a
 	jr nz, .asm_82ff
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_UNK_13
-	jr nz, .asm_8308
+	cp (1 << 6) | TRANSFORMATION_BLIND
+	jr nz, .asm_8308 ; this jump will always happen
 
 .asm_82ff
 	load_sfx SFX_0E5
@@ -793,7 +793,7 @@ Func_8747: ; 8747 (2:4747)
 	ld [wcac3], a
 	ld [wca6d], a
 	ld [wca6e], a
-	call Func_1079
+	call ClearTransformationValues
 	ld [wInvisibleFrame], a
 	ld [wcac8], a
 	ld [wcac9], a

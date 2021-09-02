@@ -13,7 +13,7 @@ Func_1f400d: ; 1f400d (7d:400d)
 	ld a, [wTransformation]
 	cp TRANSFORMATION_OWL_WARIO
 	jr z, .asm_1f4026
-	cp TRANSFORMATION_UNK_0F
+	cp TRANSFORMATION_RAIL
 	jr z, .asm_1f402b
 	cp (1 << 6) | TRANSFORMATION_VAMPIRE_WARIO
 	jr z, .asm_1f4030

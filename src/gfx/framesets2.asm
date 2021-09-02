@@ -1414,7 +1414,484 @@ Frameset_1fd841: ; 1fd841 (7f:5841)
 	db $ff
 ; 0x1fd848
 
-	INCROM $1fd848, $1fdd94
+	INCROM $1fd848, $1fd87c
+
+OAM_1fd87c: ; 1fd87c (7f:587c)
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
+	dw .frame_7
+	dw .frame_8
+	dw .frame_9
+	dw .frame_10
+	dw .frame_11
+	dw .frame_12
+	dw .frame_13
+	dw .frame_14
+	dw .frame_15
+
+.frame_0
+	frame_oam -27, -11, $90, $0e
+	frame_oam -12,   3, $94, $08
+	frame_oam -32, -16, $00, $01
+	frame_oam -32,  -8, $02, $01
+	frame_oam -16, -16, $04, $01
+	frame_oam -16,  -8, $06, $01
+	frame_oam -32,   8, $00, $21
+	frame_oam -32,   0, $02, $21
+	frame_oam -16,   8, $04, $21
+	frame_oam -16,   0, $06, $21
+	db $80
+
+.frame_1
+	frame_oam -12,   2, $94, $08
+	frame_oam -27, -10, $90, $0e
+	frame_oam -32, -16, $08, $01
+	frame_oam -32,  -8, $0a, $01
+	frame_oam -32,   0, $0c, $01
+	frame_oam -32,   8, $0e, $01
+	frame_oam -16, -16, $28, $01
+	frame_oam -16,  -8, $2a, $01
+	frame_oam -16,   0, $2c, $01
+	frame_oam -16,   8, $2e, $01
+	db $80
+
+.frame_2
+	frame_oam -26, -10, $90, $0e
+	frame_oam -13,   2, $94, $08
+	frame_oam -32, -16, $10, $01
+	frame_oam -32,  -8, $12, $01
+	frame_oam -32,   0, $14, $01
+	frame_oam -32,   8, $16, $01
+	frame_oam -16, -16, $30, $01
+	frame_oam -16,  -8, $32, $01
+	frame_oam -16,   0, $34, $01
+	frame_oam -16,   8, $36, $01
+	db $80
+
+.frame_3
+	frame_oam -13,   3, $94, $08
+	frame_oam -26, -10, $90, $0e
+	frame_oam -32, -16, $18, $01
+	frame_oam -32,  -8, $1a, $01
+	frame_oam -32,   0, $1c, $01
+	frame_oam -32,   8, $1e, $01
+	frame_oam -16, -16, $38, $01
+	frame_oam -16,  -8, $3a, $01
+	frame_oam -16,   0, $3c, $01
+	frame_oam -16,   8, $3e, $01
+	db $80
+
+.frame_4
+	frame_oam -27, -10, $90, $0e
+	frame_oam -12,   3, $94, $08
+	frame_oam -32, -16, $20, $01
+	frame_oam -32,  -8, $22, $01
+	frame_oam -32,   0, $24, $01
+	frame_oam -32,   8, $26, $01
+	frame_oam -16, -16, $20, $41
+	frame_oam -16,  -8, $22, $41
+	frame_oam -16,   0, $24, $41
+	frame_oam -16,   8, $26, $41
+	db $80
+
+.frame_5
+	frame_oam -13,   3, $94, $08
+	frame_oam -26, -10, $90, $0e
+	frame_oam -16, -16, $18, $41
+	frame_oam -16,  -8, $1a, $41
+	frame_oam -16,   0, $1c, $41
+	frame_oam -16,   8, $1e, $41
+	frame_oam -32, -16, $38, $41
+	frame_oam -32,  -8, $3a, $41
+	frame_oam -32,   0, $3c, $41
+	frame_oam -32,   8, $3e, $41
+	db $80
+
+.frame_6
+	frame_oam -26,  -9, $90, $0e
+	frame_oam -13,   2, $94, $08
+	frame_oam -16, -16, $10, $41
+	frame_oam -16,  -8, $12, $41
+	frame_oam -16,   0, $14, $41
+	frame_oam -16,   8, $16, $41
+	frame_oam -32, -16, $30, $41
+	frame_oam -32,  -8, $32, $41
+	frame_oam -32,   0, $34, $41
+	frame_oam -32,   8, $36, $41
+	db $80
+
+.frame_7
+	frame_oam -12,   2, $94, $08
+	frame_oam -27,  -9, $90, $0e
+	frame_oam -16, -16, $08, $41
+	frame_oam -16,  -8, $0a, $41
+	frame_oam -16,   0, $0c, $41
+	frame_oam -16,   8, $0e, $41
+	frame_oam -32, -16, $28, $41
+	frame_oam -32,  -8, $2a, $41
+	frame_oam -32,   0, $2c, $41
+	frame_oam -32,   8, $2e, $41
+	db $80
+
+.frame_8
+	frame_oam -27, -10, $90, $0e
+	frame_oam -12,   3, $94, $08
+	frame_oam -16, -16, $00, $41
+	frame_oam -16,  -8, $02, $41
+	frame_oam -32, -16, $04, $41
+	frame_oam -32,  -8, $06, $41
+	frame_oam -16,   8, $00, $61
+	frame_oam -16,   0, $02, $61
+	frame_oam -32,   8, $04, $61
+	frame_oam -32,   0, $06, $61
+	db $80
+
+.frame_9
+	frame_oam -12,   2, $94, $08
+	frame_oam -27,  -9, $90, $0e
+	frame_oam -16,   8, $08, $61
+	frame_oam -16,   0, $0a, $61
+	frame_oam -16,  -8, $0c, $61
+	frame_oam -16, -16, $0e, $61
+	frame_oam -32,   8, $28, $61
+	frame_oam -32,   0, $2a, $61
+	frame_oam -32,  -8, $2c, $61
+	frame_oam -32, -16, $2e, $61
+	db $80
+
+.frame_10
+	frame_oam -26,  -9, $90, $0e
+	frame_oam -13,   2, $94, $08
+	frame_oam -16,   8, $10, $61
+	frame_oam -16,   0, $12, $61
+	frame_oam -16,  -8, $14, $61
+	frame_oam -16, -16, $16, $61
+	frame_oam -32,   8, $30, $61
+	frame_oam -32,   0, $32, $61
+	frame_oam -32,  -8, $34, $61
+	frame_oam -32, -16, $36, $61
+	db $80
+
+.frame_11
+	frame_oam -13,   3, $94, $08
+	frame_oam -26, -10, $90, $0e
+	frame_oam -16,   8, $18, $61
+	frame_oam -16,   0, $1a, $61
+	frame_oam -16,  -8, $1c, $61
+	frame_oam -16, -16, $1e, $61
+	frame_oam -32,   8, $38, $61
+	frame_oam -32,   0, $3a, $61
+	frame_oam -32,  -8, $3c, $61
+	frame_oam -32, -16, $3e, $61
+	db $80
+
+.frame_12
+	frame_oam -27, -10, $90, $0e
+	frame_oam -12,   3, $94, $08
+	frame_oam -32,   8, $20, $21
+	frame_oam -32,   0, $22, $21
+	frame_oam -32,  -8, $24, $21
+	frame_oam -32, -16, $26, $21
+	frame_oam -16,   8, $20, $61
+	frame_oam -16,   0, $22, $61
+	frame_oam -16,  -8, $24, $61
+	frame_oam -16, -16, $26, $61
+	db $80
+
+.frame_13
+	frame_oam -13,   3, $94, $08
+	frame_oam -26, -10, $90, $0e
+	frame_oam -32,   8, $18, $21
+	frame_oam -32,   0, $1a, $21
+	frame_oam -32,  -8, $1c, $21
+	frame_oam -32, -16, $1e, $21
+	frame_oam -16,   8, $38, $21
+	frame_oam -16,   0, $3a, $21
+	frame_oam -16,  -8, $3c, $21
+	frame_oam -16, -16, $3e, $21
+	db $80
+
+.frame_14
+	frame_oam -26,  -9, $90, $0e
+	frame_oam -13,   2, $94, $08
+	frame_oam -32,   8, $10, $21
+	frame_oam -32,   0, $12, $21
+	frame_oam -32,  -8, $14, $21
+	frame_oam -32, -16, $16, $21
+	frame_oam -16,   8, $30, $21
+	frame_oam -16,   0, $32, $21
+	frame_oam -16,  -8, $34, $21
+	frame_oam -16, -16, $36, $21
+	db $80
+
+.frame_15
+	frame_oam -11,   2, $94, $08
+	frame_oam -27,  -9, $90, $0e
+	frame_oam -32,   8, $08, $21
+	frame_oam -32,   0, $0a, $21
+	frame_oam -32,  -8, $0c, $21
+	frame_oam -32, -16, $0e, $21
+	frame_oam -16,   8, $28, $21
+	frame_oam -16,   0, $2a, $21
+	frame_oam -16,  -8, $2c, $21
+	frame_oam -16, -16, $2e, $21
+	db $80
+; 0x1fdb2c
+
+Frameset_1fdb2c: ; 1fdb2c (7f:5b2c)
+	db $00,  4
+	db $01,  4
+	db $02,  4
+	db $03,  4
+	db $04,  4
+	db $05,  4
+	db $06,  4
+	db $07,  4
+	db $08,  4
+	db $09,  4
+	db $0a,  4
+	db $0b,  4
+	db $0c,  4
+	db $0d,  4
+	db $0e,  4
+	db $0f,  4
+	db $00,  4
+	db $0f,  4
+	db $0e,  4
+	db $0d,  4
+	db $0c,  4
+	db $0b,  4
+	db $0a,  4
+	db $09,  4
+	db $08,  4
+	db $07,  4
+	db $06,  4
+	db $05,  4
+	db $04,  4
+	db $03,  4
+	db $02,  4
+	db $01,  4
+	db $ff
+; 0x1fdb6d
+
+OAM_1fdb6d: ; 1fdb6d (7f:5b6d)
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
+	dw .frame_7
+	dw .frame_8
+	dw .frame_9
+	dw .frame_10
+	dw .frame_11
+	dw .frame_12
+	dw .frame_13
+	dw .frame_14
+	dw .frame_15
+	dw .frame_16
+	dw .frame_17
+	dw .frame_18
+
+.frame_0
+	frame_oam -32, -16, $40, $00
+	frame_oam -32,  -8, $42, $00
+	frame_oam -32,   0, $44, $00
+	frame_oam -32,   8, $46, $00
+	frame_oam -16, -16, $48, $00
+	frame_oam -16,  -8, $4a, $00
+	frame_oam -16,   0, $4c, $00
+	frame_oam -16,   8, $4e, $00
+	db $80
+
+.frame_1
+	frame_oam -33,   0, $44, $00
+	frame_oam -33,   8, $46, $00
+	frame_oam -17, -16, $48, $00
+	frame_oam -17,  -8, $4a, $00
+	frame_oam -17,   0, $4c, $00
+	frame_oam -17,   8, $4e, $00
+	frame_oam -33, -16, $50, $01
+	frame_oam -33,  -8, $58, $01
+	db $80
+
+.frame_2
+	frame_oam -32,   7, $46, $00
+	frame_oam -16,  -1, $4c, $00
+	frame_oam -16,   7, $4e, $00
+	frame_oam -32, -17, $50, $01
+	frame_oam -32,  -9, $58, $01
+	frame_oam -16, -17, $5e, $01
+	frame_oam -16,  -9, $52, $01
+	frame_oam -32,  -1, $5a, $01
+	db $80
+
+.frame_3
+	frame_oam -16,   9, $4e, $00
+	frame_oam -32, -15, $50, $01
+	frame_oam -32,  -7, $58, $01
+	frame_oam -16, -15, $5e, $01
+	frame_oam -16,  -7, $52, $01
+	frame_oam -32,   1, $5a, $01
+	frame_oam -32,   9, $5c, $01
+	frame_oam -16,   1, $54, $01
+	db $80
+
+.frame_4
+	frame_oam -32, -16, $56, $01
+	frame_oam -32,  -8, $58, $01
+	frame_oam -32,   0, $5a, $01
+	frame_oam -32,   8, $5c, $01
+	frame_oam -16, -16, $5e, $01
+	frame_oam -16,  -8, $60, $01
+	frame_oam -16,   0, $62, $01
+	frame_oam -16,   8, $64, $01
+	db $80
+
+.frame_5
+	frame_oam -32,   8, $40, $20
+	frame_oam -32,   0, $42, $20
+	frame_oam -32,  -8, $44, $20
+	frame_oam -32, -16, $46, $20
+	frame_oam -16,   8, $48, $20
+	frame_oam -16,   0, $4a, $20
+	frame_oam -16,  -8, $4c, $20
+	frame_oam -16, -16, $4e, $20
+	db $80
+
+.frame_6
+	frame_oam -33,  -8, $44, $20
+	frame_oam -33, -16, $46, $20
+	frame_oam -17,   8, $48, $20
+	frame_oam -17,   0, $4a, $20
+	frame_oam -17,  -8, $4c, $20
+	frame_oam -17, -16, $4e, $20
+	frame_oam -33,   8, $50, $21
+	frame_oam -33,   0, $58, $21
+	db $80
+
+.frame_7
+	frame_oam -32, -15, $46, $20
+	frame_oam -16,  -7, $4c, $20
+	frame_oam -16, -15, $4e, $20
+	frame_oam -32,   9, $50, $21
+	frame_oam -32,   1, $58, $21
+	frame_oam -16,   9, $5e, $21
+	frame_oam -16,   1, $52, $21
+	frame_oam -32,  -7, $5a, $21
+	db $80
+
+.frame_8
+	frame_oam -16, -17, $4e, $20
+	frame_oam -32,   7, $50, $21
+	frame_oam -32,  -1, $58, $21
+	frame_oam -16,   7, $5e, $21
+	frame_oam -16,  -1, $52, $21
+	frame_oam -32,  -9, $5a, $21
+	frame_oam -32, -17, $5c, $21
+	frame_oam -16,  -9, $54, $21
+	db $80
+
+.frame_9
+	frame_oam -32,   8, $56, $21
+	frame_oam -32,   0, $58, $21
+	frame_oam -32,  -8, $5a, $21
+	frame_oam -32, -16, $5c, $21
+	frame_oam -16,   8, $5e, $21
+	frame_oam -16,   0, $60, $21
+	frame_oam -16,  -8, $62, $21
+	frame_oam -16, -16, $64, $21
+	db $80
+
+.frame_10
+	frame_oam -25,  -8, $78, $02
+	frame_oam -25,   0, $7a, $02
+	db $80
+
+.frame_11
+	frame_oam -32, -16, $66, $02
+	frame_oam -32,  -8, $68, $02
+	frame_oam -32,   0, $6a, $02
+	frame_oam -16, -16, $6c, $02
+	frame_oam -16,  -8, $6e, $02
+	frame_oam -16,   0, $70, $02
+	frame_oam -16,   8, $72, $02
+	db $80
+
+.frame_12
+	frame_oam -40, -16, $76, $02
+	frame_oam -19, -18, $76, $42
+	frame_oam -41,   7, $76, $01
+	frame_oam -18,   0, $76, $22
+	frame_oam -31, -26, $76, $61
+	frame_oam -16, -10, $6a, $41
+	frame_oam -40,  -4, $6a, $62
+	frame_oam -17,   9, $74, $01
+	db $80
+
+.frame_13
+	frame_oam -24,  -7, $7c, $02
+	frame_oam -24,   1, $7c, $22
+	db $80
+
+.frame_14
+	frame_oam -16,  -4, $7e, $02
+	db $80
+
+.frame_15
+	frame_oam -25,   0, $78, $22
+	frame_oam -25,  -8, $7a, $22
+	db $80
+
+.frame_16
+	frame_oam -32,   8, $66, $22
+	frame_oam -32,   0, $68, $22
+	frame_oam -32,  -8, $6a, $22
+	frame_oam -16,   8, $6c, $22
+	frame_oam -16,   0, $6e, $22
+	frame_oam -16,  -8, $70, $22
+	frame_oam -16, -16, $72, $22
+	db $80
+
+.frame_17
+	frame_oam -40,   8, $76, $22
+	frame_oam -19,  10, $76, $62
+	frame_oam -41, -15, $76, $21
+	frame_oam -18,  -8, $76, $02
+	frame_oam -31,  18, $76, $41
+	frame_oam -16,   2, $6a, $61
+	frame_oam -40,  -4, $6a, $42
+	frame_oam -17, -17, $74, $21
+	db $80
+
+.frame_18
+	frame_oam -24,  -1, $7c, $22
+	frame_oam -24,  -9, $7c, $02
+	db $80
+; 0x1fdd82
+
+Frameset_1fdd82: ; 1fdd82 (7f:5d82)
+	db $00,  2
+	db $01,  2
+	db $02,  2
+	db $03,  2
+	db $ff
+; 0x1fdd8b
+
+Frameset_1fdd8b: ; 1fdd8b (7f:5d8b)
+	db $05,  2
+	db $06,  2
+	db $07,  2
+	db $08,  2
+	db $ff
+; 0x1fdd94
 
 Frameset_1fdd94: ; 1fdd94 (7f:5d94)
 	db $04,  4
@@ -1446,7 +1923,1321 @@ Frameset_1fdda7: ; 1fdda7 (7f:5da7)
 	db $ff
 ; 0x1fddb4
 
-	INCROM $1fddb4, $1feeb4
+OAM_1fddb4: ; 1fddb4 (7f:5db4)
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
+	dw .frame_7
+	dw .frame_8
+	dw .frame_9
+	dw .frame_10
+	dw .frame_11
+	dw .frame_12
+	dw .frame_13
+	dw .frame_14
+	dw .frame_15
+	dw .frame_16
+	dw .frame_17
+	dw .frame_18
+	dw .frame_19
+	dw .frame_20
+	dw .frame_21
+	dw .frame_22
+	dw .frame_23
+	dw .frame_24
+	dw .frame_25
+	dw .frame_26
+	dw .frame_27
+	dw .frame_28
+	dw .frame_29
+	dw .frame_30
+	dw .frame_31
+	dw .frame_32
+	dw .frame_33
+	dw .frame_34
+	dw .frame_35
+	dw .frame_36
+	dw .frame_37
+	dw .frame_38
+	dw .frame_39
+	dw .frame_40
+	dw .frame_41
+	dw .frame_42
+	dw .frame_43
+	dw .frame_44
+	dw .frame_45
+	dw .frame_46
+	dw .frame_47
+	dw .frame_48
+	dw .frame_49
+	dw .frame_50
+	dw .frame_51
+	dw .frame_52
+	dw .frame_53
+	dw .frame_54
+	dw .frame_55
+	dw .frame_56
+	dw .frame_57
+	dw .frame_58
+	dw .frame_59
+	dw .frame_60
+	dw .frame_61
+	dw .frame_62
+	dw .frame_63
+	dw .frame_64
+	dw .frame_65
+	dw .frame_66
+	dw .frame_67
+	dw .frame_68
+
+.frame_0
+	frame_oam -33,   5, $04, $00
+	frame_oam -27,  13, $0e, $00
+	frame_oam -17, -11, $14, $00
+	frame_oam -17,  -3, $2a, $00
+	frame_oam -17,   5, $2c, $00
+	frame_oam -33,  -3, $42, $00
+	frame_oam -33, -11, $40, $00
+	frame_oam -60, -11, $12, $2c
+	frame_oam -44, -11, $18, $08
+	frame_oam -44,  -3, $18, $28
+	frame_oam -53, -19, $20, $0c
+	frame_oam -53,   5, $20, $2c
+	frame_oam -60,  -3, $12, $0c
+	frame_oam -11,  13, $58, $00
+	db $80
+
+.frame_1
+	frame_oam -17,  14, $2e, $00
+	frame_oam -33,   6, $04, $00
+	frame_oam -33,  14, $06, $00
+	frame_oam -17, -10, $16, $00
+	frame_oam -17,  -2, $18, $00
+	frame_oam -17,   6, $1a, $00
+	frame_oam -33,  -2, $42, $00
+	frame_oam -33, -10, $40, $00
+	frame_oam -61,  -2, $10, $2c
+	frame_oam -61, -10, $12, $2c
+	frame_oam -45, -10, $18, $08
+	frame_oam -45,  -2, $18, $28
+	frame_oam -54,   6, $22, $2c
+	frame_oam -53, -18, $1e, $0c
+	db $80
+
+.frame_2
+	frame_oam -17,  13, $2e, $00
+	frame_oam -33,   5, $04, $00
+	frame_oam -33,  13, $06, $00
+	frame_oam -17, -11, $16, $00
+	frame_oam -17,  -3, $18, $00
+	frame_oam -17,   5, $1a, $00
+	frame_oam -33,  -3, $42, $00
+	frame_oam -33, -11, $40, $00
+	frame_oam -60, -11, $12, $2c
+	frame_oam -44, -11, $18, $08
+	frame_oam -44,  -3, $18, $28
+	frame_oam -53, -19, $20, $0c
+	frame_oam -53,   5, $20, $2c
+	frame_oam -60,  -3, $12, $0c
+	db $80
+
+.frame_3
+	frame_oam -33,   4, $04, $00
+	frame_oam -27,  12, $0e, $00
+	frame_oam -17, -12, $14, $00
+	frame_oam -17,  -4, $2a, $00
+	frame_oam -17,   4, $2c, $00
+	frame_oam -33,  -4, $42, $00
+	frame_oam -33, -12, $40, $00
+	frame_oam -61, -12, $10, $0c
+	frame_oam -61,  -4, $12, $0c
+	frame_oam -45, -12, $18, $08
+	frame_oam -45,  -4, $18, $28
+	frame_oam -54, -20, $22, $0c
+	frame_oam -53,   4, $1e, $2c
+	frame_oam -11,  12, $58, $00
+	db $80
+
+.frame_4
+	frame_oam -33,   5, $04, $00
+	frame_oam -27,  13, $0e, $00
+	frame_oam -17, -11, $14, $00
+	frame_oam -17,  -3, $2a, $00
+	frame_oam -17,   5, $2c, $00
+	frame_oam -33,  -3, $42, $00
+	frame_oam -33, -11, $40, $00
+	frame_oam -50,   4, $24, $2c
+	frame_oam -59, -11, $28, $0c
+	frame_oam -59,  -3, $2a, $0c
+	frame_oam -43, -11, $2c, $08
+	frame_oam -43,  -3, $2e, $08
+	frame_oam -50, -19, $3e, $0c
+	frame_oam -11,  13, $58, $00
+	db $80
+
+.frame_5
+	frame_oam -34,  -8, $10, $00
+	frame_oam -34,   0, $12, $00
+	frame_oam -18,  -8, $30, $00
+	frame_oam -18,   0, $32, $00
+	frame_oam -34,   8, $04, $00
+	frame_oam -18,   8, $0c, $00
+	frame_oam -28,  16, $0e, $00
+	frame_oam -46,   4, $3a, $0c
+	frame_oam -60, -11, $28, $0c
+	frame_oam -60,  -3, $2a, $0c
+	frame_oam -44, -11, $2c, $08
+	frame_oam -44,  -3, $2e, $08
+	frame_oam -46, -18, $1c, $0c
+	frame_oam -12,  16, $58, $00
+	db $80
+
+.frame_6
+	frame_oam -32,   6, $04, $00
+	frame_oam -26,  14, $0e, $00
+	frame_oam -16, -10, $14, $00
+	frame_oam -16,  -2, $2a, $00
+	frame_oam -16,   6, $2c, $00
+	frame_oam -32,  -2, $42, $00
+	frame_oam -32, -10, $40, $00
+	frame_oam -50,   4, $3c, $0c
+	frame_oam -59, -11, $28, $0c
+	frame_oam -59,  -3, $2a, $0c
+	frame_oam -43, -11, $2c, $08
+	frame_oam -43,  -3, $2e, $08
+	frame_oam -50, -18, $1e, $0c
+	frame_oam -10,  14, $58, $00
+	db $80
+
+.frame_7
+	frame_oam -15,  13, $2e, $00
+	frame_oam -31,   5, $04, $00
+	frame_oam -31,  13, $06, $00
+	frame_oam -15, -11, $16, $00
+	frame_oam -15,  -3, $18, $00
+	frame_oam -15,   5, $1a, $00
+	frame_oam -31,  -3, $42, $00
+	frame_oam -31, -11, $40, $00
+	frame_oam -50,   4, $20, $2c
+	frame_oam -59, -11, $28, $0c
+	frame_oam -59,  -3, $2a, $0c
+	frame_oam -43, -11, $2c, $08
+	frame_oam -43,  -3, $2e, $08
+	frame_oam -50, -18, $20, $0c
+	db $80
+
+.frame_8
+	frame_oam -31, -14, $1c, $00
+	frame_oam -31,  -6, $1e, $00
+	frame_oam -15,   2, $34, $00
+	frame_oam -15,  10, $36, $00
+	frame_oam -15,  -6, $18, $00
+	frame_oam -31,   2, $04, $00
+	frame_oam -31,  10, $06, $00
+	frame_oam -15, -14, $20, $00
+	frame_oam -50,   4, $22, $2c
+	frame_oam -58, -11, $28, $0c
+	frame_oam -58,  -3, $2a, $0c
+	frame_oam -42, -11, $2c, $08
+	frame_oam -42,  -3, $2e, $08
+	frame_oam -50, -18, $22, $0c
+	db $80
+
+.frame_9
+	frame_oam -17,  -7, $3a, $00
+	frame_oam -17,   1, $3c, $00
+	frame_oam -17,   9, $3e, $00
+	frame_oam -17, -15, $38, $00
+	frame_oam -33, -15, $1c, $00
+	frame_oam -33,  -7, $1e, $00
+	frame_oam -33,   1, $04, $00
+	frame_oam -33,   9, $06, $00
+	frame_oam -50,   4, $24, $2c
+	frame_oam -59, -11, $28, $0c
+	frame_oam -59,  -3, $2a, $0c
+	frame_oam -43, -11, $2c, $08
+	frame_oam -43,  -3, $2e, $08
+	frame_oam -50, -19, $3e, $0c
+	db $80
+
+.frame_10
+	frame_oam -18, -15, $38, $00
+	frame_oam -18,  -7, $3a, $00
+	frame_oam -18,   1, $3c, $00
+	frame_oam -34, -15, $1c, $00
+	frame_oam -34,  -7, $1e, $00
+	frame_oam -18,   9, $3e, $00
+	frame_oam -34,   1, $04, $00
+	frame_oam -34,   9, $06, $00
+	frame_oam -46,   4, $3a, $0c
+	frame_oam -60, -11, $28, $0c
+	frame_oam -60,  -3, $2a, $0c
+	frame_oam -44, -11, $2c, $08
+	frame_oam -44,  -3, $2e, $08
+	frame_oam -46, -18, $1c, $0c
+	db $80
+
+.frame_11
+	frame_oam -16,  -7, $3a, $00
+	frame_oam -16,   1, $3c, $00
+	frame_oam -16,   9, $3e, $00
+	frame_oam -16, -15, $38, $00
+	frame_oam -32, -15, $1c, $00
+	frame_oam -32,  -7, $1e, $00
+	frame_oam -32,   1, $04, $00
+	frame_oam -32,   9, $06, $00
+	frame_oam -50,   4, $3c, $0c
+	frame_oam -59, -11, $28, $0c
+	frame_oam -59,  -3, $2a, $0c
+	frame_oam -43, -11, $2c, $08
+	frame_oam -43,  -3, $2e, $08
+	frame_oam -50, -18, $1e, $0c
+	db $80
+
+.frame_12
+	frame_oam -31, -14, $1c, $00
+	frame_oam -31,  -6, $1e, $00
+	frame_oam -15,   2, $34, $00
+	frame_oam -15,  10, $36, $00
+	frame_oam -15,  -6, $18, $00
+	frame_oam -31,   2, $04, $00
+	frame_oam -31,  10, $06, $00
+	frame_oam -15, -14, $20, $00
+	frame_oam -50,   4, $20, $2c
+	frame_oam -59, -11, $28, $0c
+	frame_oam -59,  -3, $2a, $0c
+	frame_oam -43, -11, $2c, $08
+	frame_oam -43,  -3, $2e, $08
+	frame_oam -50, -18, $20, $0c
+	db $80
+
+.frame_13
+	frame_oam -15,  13, $2e, $00
+	frame_oam -31,   5, $04, $00
+	frame_oam -31,  13, $06, $00
+	frame_oam -15, -11, $16, $00
+	frame_oam -15,  -3, $18, $00
+	frame_oam -15,   5, $1a, $00
+	frame_oam -31,  -3, $42, $00
+	frame_oam -31, -11, $40, $00
+	frame_oam -50,   4, $22, $2c
+	frame_oam -58, -11, $28, $0c
+	frame_oam -58,  -3, $2a, $0c
+	frame_oam -42, -11, $2c, $08
+	frame_oam -42,  -3, $2e, $08
+	frame_oam -50, -18, $22, $0c
+	db $80
+
+.frame_14
+	frame_oam -33,   5, $04, $00
+	frame_oam -27,  13, $0e, $00
+	frame_oam -17, -11, $14, $00
+	frame_oam -17,  -3, $2a, $00
+	frame_oam -17,   5, $2c, $00
+	frame_oam -33,  -3, $42, $00
+	frame_oam -33, -11, $40, $00
+	frame_oam -50, -18, $24, $0c
+	frame_oam -59,  -3, $28, $2c
+	frame_oam -59, -11, $2a, $2c
+	frame_oam -43,  -3, $2c, $28
+	frame_oam -43, -11, $2e, $28
+	frame_oam -50,   5, $3e, $2c
+	frame_oam -11,  13, $58, $00
+	db $80
+
+.frame_15
+	frame_oam -34,  -8, $10, $00
+	frame_oam -34,   0, $12, $00
+	frame_oam -18,  -8, $30, $00
+	frame_oam -18,   0, $32, $00
+	frame_oam -34,   8, $04, $00
+	frame_oam -18,   8, $0c, $00
+	frame_oam -28,  16, $0e, $00
+	frame_oam -46, -18, $3a, $2c
+	frame_oam -60,  -3, $28, $2c
+	frame_oam -60, -11, $2a, $2c
+	frame_oam -44,  -3, $2c, $28
+	frame_oam -44, -11, $2e, $28
+	frame_oam -46,   4, $1c, $2c
+	frame_oam -12,  16, $58, $00
+	db $80
+
+.frame_16
+	frame_oam -32,   6, $04, $00
+	frame_oam -26,  14, $0e, $00
+	frame_oam -16, -10, $14, $00
+	frame_oam -16,  -2, $2a, $00
+	frame_oam -16,   6, $2c, $00
+	frame_oam -32,  -2, $42, $00
+	frame_oam -32, -10, $40, $00
+	frame_oam -50, -18, $3c, $2c
+	frame_oam -59,  -3, $28, $2c
+	frame_oam -59, -11, $2a, $2c
+	frame_oam -43,  -3, $2c, $28
+	frame_oam -43, -11, $2e, $28
+	frame_oam -50,   4, $1e, $2c
+	frame_oam -10,  14, $58, $00
+	db $80
+
+.frame_17
+	frame_oam -15,  13, $2e, $00
+	frame_oam -31,   5, $04, $00
+	frame_oam -31,  13, $06, $00
+	frame_oam -15, -11, $16, $00
+	frame_oam -15,  -3, $18, $00
+	frame_oam -15,   5, $1a, $00
+	frame_oam -31,  -3, $42, $00
+	frame_oam -31, -11, $40, $00
+	frame_oam -50, -18, $20, $0c
+	frame_oam -59,  -3, $28, $2c
+	frame_oam -59, -11, $2a, $2c
+	frame_oam -43,  -3, $2c, $28
+	frame_oam -43, -11, $2e, $28
+	frame_oam -50,   4, $20, $2c
+	db $80
+
+.frame_18
+	frame_oam -31, -14, $1c, $00
+	frame_oam -31,  -6, $1e, $00
+	frame_oam -15,   2, $34, $00
+	frame_oam -15,  10, $36, $00
+	frame_oam -15,  -6, $18, $00
+	frame_oam -31,   2, $04, $00
+	frame_oam -31,  10, $06, $00
+	frame_oam -15, -14, $20, $00
+	frame_oam -50, -18, $22, $0c
+	frame_oam -58,  -3, $28, $2c
+	frame_oam -58, -11, $2a, $2c
+	frame_oam -42,  -3, $2c, $28
+	frame_oam -42, -11, $2e, $28
+	frame_oam -50,   4, $22, $2c
+	db $80
+
+.frame_19
+	frame_oam -17,  -7, $3a, $00
+	frame_oam -17,   1, $3c, $00
+	frame_oam -17,   9, $3e, $00
+	frame_oam -17, -15, $38, $00
+	frame_oam -33, -15, $1c, $00
+	frame_oam -33,  -7, $1e, $00
+	frame_oam -33,   1, $04, $00
+	frame_oam -33,   9, $06, $00
+	frame_oam -50, -18, $24, $0c
+	frame_oam -59,  -3, $28, $2c
+	frame_oam -59, -11, $2a, $2c
+	frame_oam -43,  -3, $2c, $28
+	frame_oam -43, -11, $2e, $28
+	frame_oam -50,   5, $3e, $2c
+	db $80
+
+.frame_20
+	frame_oam -18, -15, $38, $00
+	frame_oam -18,  -7, $3a, $00
+	frame_oam -18,   1, $3c, $00
+	frame_oam -34, -15, $1c, $00
+	frame_oam -34,  -7, $1e, $00
+	frame_oam -18,   9, $3e, $00
+	frame_oam -34,   1, $04, $00
+	frame_oam -34,   9, $06, $00
+	frame_oam -46, -18, $3a, $2c
+	frame_oam -60,  -3, $28, $2c
+	frame_oam -60, -11, $2a, $2c
+	frame_oam -44,  -3, $2c, $28
+	frame_oam -44, -11, $2e, $28
+	frame_oam -46,   4, $1c, $2c
+	db $80
+
+.frame_21
+	frame_oam -16,  -7, $3a, $00
+	frame_oam -16,   1, $3c, $00
+	frame_oam -16,   9, $3e, $00
+	frame_oam -16, -15, $38, $00
+	frame_oam -32, -15, $1c, $00
+	frame_oam -32,  -7, $1e, $00
+	frame_oam -32,   1, $04, $00
+	frame_oam -32,   9, $06, $00
+	frame_oam -50, -18, $3c, $2c
+	frame_oam -59,  -3, $28, $2c
+	frame_oam -59, -11, $2a, $2c
+	frame_oam -43,  -3, $2c, $28
+	frame_oam -43, -11, $2e, $28
+	frame_oam -50,   4, $1e, $2c
+	db $80
+
+.frame_22
+	frame_oam -31, -14, $1c, $00
+	frame_oam -31,  -6, $1e, $00
+	frame_oam -15,   2, $34, $00
+	frame_oam -15,  10, $36, $00
+	frame_oam -15,  -6, $18, $00
+	frame_oam -31,   2, $04, $00
+	frame_oam -31,  10, $06, $00
+	frame_oam -15, -14, $20, $00
+	frame_oam -50, -18, $20, $0c
+	frame_oam -59,  -3, $28, $2c
+	frame_oam -59, -11, $2a, $2c
+	frame_oam -43,  -3, $2c, $28
+	frame_oam -43, -11, $2e, $28
+	frame_oam -50,   4, $20, $2c
+	db $80
+
+.frame_23
+	frame_oam -15,  13, $2e, $00
+	frame_oam -31,   5, $04, $00
+	frame_oam -31,  13, $06, $00
+	frame_oam -15, -11, $16, $00
+	frame_oam -15,  -3, $18, $00
+	frame_oam -15,   5, $1a, $00
+	frame_oam -31,  -3, $42, $00
+	frame_oam -31, -11, $40, $00
+	frame_oam -50, -18, $22, $0c
+	frame_oam -58,  -3, $28, $2c
+	frame_oam -58, -11, $2a, $2c
+	frame_oam -42,  -3, $2c, $28
+	frame_oam -42, -11, $2e, $28
+	frame_oam -50,   4, $22, $2c
+	db $80
+
+.frame_24
+	frame_oam -33,   5, $04, $00
+	frame_oam -27,  13, $0e, $00
+	frame_oam -17, -11, $14, $00
+	frame_oam -17,  -3, $2a, $00
+	frame_oam -17,   5, $2c, $00
+	frame_oam -33,  -3, $42, $00
+	frame_oam -33, -11, $40, $00
+	frame_oam -50,   4, $24, $2c
+	frame_oam -59, -11, $28, $0c
+	frame_oam -59,  -3, $2a, $0c
+	frame_oam -43, -11, $2c, $08
+	frame_oam -43,  -3, $2e, $08
+	frame_oam -50, -19, $3e, $0c
+	frame_oam -11,  13, $58, $00
+	db $80
+
+.frame_25
+	frame_oam -34,  -8, $10, $00
+	frame_oam -34,   0, $12, $00
+	frame_oam -18,  -8, $30, $00
+	frame_oam -18,   0, $32, $00
+	frame_oam -34,   8, $04, $00
+	frame_oam -18,   8, $0c, $00
+	frame_oam -28,  16, $0e, $00
+	frame_oam -12,  16, $58, $00
+	frame_oam -46,   4, $3a, $0c
+	frame_oam -59, -11, $16, $0c
+	frame_oam -43, -11, $36, $08
+	frame_oam -59,  -3, $34, $0c
+	frame_oam -43,  -3, $38, $08
+	frame_oam -46, -18, $1c, $0c
+	db $80
+
+.frame_26
+	frame_oam -32,   6, $04, $00
+	frame_oam -26,  14, $0e, $00
+	frame_oam -16, -10, $14, $00
+	frame_oam -16,  -2, $2a, $00
+	frame_oam -16,   6, $2c, $00
+	frame_oam -32,  -2, $42, $00
+	frame_oam -32, -10, $40, $00
+	frame_oam -10,  14, $58, $00
+	frame_oam -50,   4, $3c, $0c
+	frame_oam -59, -11, $28, $0c
+	frame_oam -59,  -3, $2a, $0c
+	frame_oam -43, -11, $30, $08
+	frame_oam -43,  -3, $32, $08
+	frame_oam -50, -18, $1e, $0c
+	db $80
+
+.frame_27
+	frame_oam -15,  13, $2e, $00
+	frame_oam -31,   5, $04, $00
+	frame_oam -31,  13, $06, $00
+	frame_oam -15, -11, $16, $00
+	frame_oam -15,  -3, $18, $00
+	frame_oam -15,   5, $1a, $00
+	frame_oam -31,  -3, $42, $00
+	frame_oam -31, -11, $40, $00
+	frame_oam -50,   4, $20, $2c
+	frame_oam -59, -11, $28, $0c
+	frame_oam -59,  -3, $2a, $0c
+	frame_oam -43, -11, $30, $08
+	frame_oam -43,  -3, $32, $08
+	frame_oam -50, -18, $20, $0c
+	db $80
+
+.frame_28
+	frame_oam -31, -14, $1c, $00
+	frame_oam -31,  -6, $1e, $00
+	frame_oam -15,   2, $34, $00
+	frame_oam -15,  10, $36, $00
+	frame_oam -15,  -6, $18, $00
+	frame_oam -31,   2, $04, $00
+	frame_oam -31,  10, $06, $00
+	frame_oam -15, -14, $20, $00
+	frame_oam -50,   4, $22, $2c
+	frame_oam -58, -11, $28, $0c
+	frame_oam -58,  -3, $2a, $0c
+	frame_oam -42, -11, $2c, $08
+	frame_oam -42,  -3, $2e, $08
+	frame_oam -50, -18, $22, $0c
+	db $80
+
+.frame_29
+	frame_oam -17,  -7, $3a, $00
+	frame_oam -17,   1, $3c, $00
+	frame_oam -17,   9, $3e, $00
+	frame_oam -17, -15, $38, $00
+	frame_oam -33, -15, $1c, $00
+	frame_oam -33,  -7, $1e, $00
+	frame_oam -33,   1, $04, $00
+	frame_oam -33,   9, $06, $00
+	frame_oam -50,   4, $24, $2c
+	frame_oam -58, -11, $16, $0c
+	frame_oam -42, -11, $36, $08
+	frame_oam -58,  -3, $34, $0c
+	frame_oam -42,  -3, $38, $08
+	frame_oam -50, -19, $3e, $0c
+	db $80
+
+.frame_30
+	frame_oam -18, -15, $38, $00
+	frame_oam -18,  -7, $3a, $00
+	frame_oam -18,   1, $3c, $00
+	frame_oam -34, -15, $1c, $00
+	frame_oam -34,  -7, $1e, $00
+	frame_oam -18,   9, $3e, $00
+	frame_oam -34,   1, $04, $00
+	frame_oam -34,   9, $06, $00
+	frame_oam -46,   4, $3a, $0c
+	frame_oam -59, -11, $16, $0c
+	frame_oam -43, -11, $36, $08
+	frame_oam -59,  -3, $34, $0c
+	frame_oam -43,  -3, $38, $08
+	frame_oam -46, -18, $1c, $0c
+	db $80
+
+.frame_31
+	frame_oam -16,  -7, $3a, $00
+	frame_oam -16,   1, $3c, $00
+	frame_oam -16,   9, $3e, $00
+	frame_oam -16, -15, $38, $00
+	frame_oam -32, -15, $1c, $00
+	frame_oam -32,  -7, $1e, $00
+	frame_oam -32,   1, $04, $00
+	frame_oam -32,   9, $06, $00
+	frame_oam -50,   4, $3c, $0c
+	frame_oam -59, -11, $28, $0c
+	frame_oam -59,  -3, $2a, $0c
+	frame_oam -43, -11, $30, $08
+	frame_oam -43,  -3, $32, $08
+	frame_oam -50, -18, $1e, $0c
+	db $80
+
+.frame_32
+	frame_oam -31, -14, $1c, $00
+	frame_oam -31,  -6, $1e, $00
+	frame_oam -15,   2, $34, $00
+	frame_oam -15,  10, $36, $00
+	frame_oam -15,  -6, $18, $00
+	frame_oam -31,   2, $04, $00
+	frame_oam -31,  10, $06, $00
+	frame_oam -15, -14, $20, $00
+	frame_oam -50,   4, $20, $2c
+	frame_oam -59, -11, $28, $0c
+	frame_oam -59,  -3, $2a, $0c
+	frame_oam -43, -11, $30, $08
+	frame_oam -43,  -3, $32, $08
+	frame_oam -50, -18, $20, $0c
+	db $80
+
+.frame_33
+	frame_oam -15,  13, $2e, $00
+	frame_oam -31,   5, $04, $00
+	frame_oam -31,  13, $06, $00
+	frame_oam -15, -11, $16, $00
+	frame_oam -15,  -3, $18, $00
+	frame_oam -15,   5, $1a, $00
+	frame_oam -31,  -3, $42, $00
+	frame_oam -31, -11, $40, $00
+	frame_oam -50,   4, $22, $2c
+	frame_oam -58, -11, $28, $0c
+	frame_oam -58,  -3, $2a, $0c
+	frame_oam -42, -11, $2c, $08
+	frame_oam -42,  -3, $2e, $08
+	frame_oam -50, -18, $22, $0c
+	db $80
+
+.frame_34
+	frame_oam -33,   5, $04, $00
+	frame_oam -27,  13, $0e, $00
+	frame_oam -17, -11, $14, $00
+	frame_oam -17,  -3, $2a, $00
+	frame_oam -17,   5, $2c, $00
+	frame_oam -33,  -3, $42, $00
+	frame_oam -33, -11, $40, $00
+	frame_oam -50, -18, $24, $0c
+	frame_oam -59,  -3, $28, $2c
+	frame_oam -59, -11, $2a, $2c
+	frame_oam -43,  -3, $2c, $28
+	frame_oam -43, -11, $2e, $28
+	frame_oam -50,   5, $3e, $2c
+	frame_oam -11,  13, $58, $00
+	db $80
+
+.frame_35
+	frame_oam -34,  -8, $10, $00
+	frame_oam -34,   0, $12, $00
+	frame_oam -18,  -8, $30, $00
+	frame_oam -18,   0, $32, $00
+	frame_oam -34,   8, $04, $00
+	frame_oam -18,   8, $0c, $00
+	frame_oam -28,  16, $0e, $00
+	frame_oam -12,  16, $58, $00
+	frame_oam -46, -18, $3a, $2c
+	frame_oam -59,  -3, $16, $2c
+	frame_oam -43,  -3, $36, $28
+	frame_oam -59, -11, $34, $2c
+	frame_oam -43, -11, $38, $28
+	frame_oam -46,   4, $1c, $2c
+	db $80
+
+.frame_36
+	frame_oam -32,   6, $04, $00
+	frame_oam -26,  14, $0e, $00
+	frame_oam -16, -10, $14, $00
+	frame_oam -16,  -2, $2a, $00
+	frame_oam -16,   6, $2c, $00
+	frame_oam -32,  -2, $42, $00
+	frame_oam -32, -10, $40, $00
+	frame_oam -10,  14, $58, $00
+	frame_oam -50, -18, $3c, $2c
+	frame_oam -59,  -3, $28, $2c
+	frame_oam -59, -11, $2a, $2c
+	frame_oam -43,  -3, $30, $28
+	frame_oam -43, -11, $32, $28
+	frame_oam -50,   4, $1e, $2c
+	db $80
+
+.frame_37
+	frame_oam -15,  13, $2e, $00
+	frame_oam -31,   5, $04, $00
+	frame_oam -31,  13, $06, $00
+	frame_oam -15, -11, $16, $00
+	frame_oam -15,  -3, $18, $00
+	frame_oam -15,   5, $1a, $00
+	frame_oam -31,  -3, $42, $00
+	frame_oam -31, -11, $40, $00
+	frame_oam -50, -18, $20, $0c
+	frame_oam -59,  -3, $28, $2c
+	frame_oam -59, -11, $2a, $2c
+	frame_oam -43,  -3, $30, $28
+	frame_oam -43, -11, $32, $28
+	frame_oam -50,   4, $20, $2c
+	db $80
+
+.frame_38
+	frame_oam -31, -14, $1c, $00
+	frame_oam -31,  -6, $1e, $00
+	frame_oam -15,   2, $34, $00
+	frame_oam -15,  10, $36, $00
+	frame_oam -15,  -6, $18, $00
+	frame_oam -31,   2, $04, $00
+	frame_oam -31,  10, $06, $00
+	frame_oam -15, -14, $20, $00
+	frame_oam -50, -18, $22, $0c
+	frame_oam -58,  -3, $28, $2c
+	frame_oam -58, -11, $2a, $2c
+	frame_oam -42,  -3, $2c, $28
+	frame_oam -42, -11, $2e, $28
+	frame_oam -50,   4, $22, $2c
+	db $80
+
+.frame_39
+	frame_oam -17,  -7, $3a, $00
+	frame_oam -17,   1, $3c, $00
+	frame_oam -17,   9, $3e, $00
+	frame_oam -17, -15, $38, $00
+	frame_oam -33, -15, $1c, $00
+	frame_oam -33,  -7, $1e, $00
+	frame_oam -33,   1, $04, $00
+	frame_oam -33,   9, $06, $00
+	frame_oam -50, -18, $24, $0c
+	frame_oam -58,  -3, $16, $2c
+	frame_oam -42,  -3, $36, $28
+	frame_oam -58, -11, $34, $2c
+	frame_oam -42, -11, $38, $28
+	frame_oam -50,   5, $3e, $2c
+	db $80
+
+.frame_40
+	frame_oam -18, -15, $38, $00
+	frame_oam -18,  -7, $3a, $00
+	frame_oam -18,   1, $3c, $00
+	frame_oam -34, -15, $1c, $00
+	frame_oam -34,  -7, $1e, $00
+	frame_oam -18,   9, $3e, $00
+	frame_oam -34,   1, $04, $00
+	frame_oam -34,   9, $06, $00
+	frame_oam -46, -18, $3a, $2c
+	frame_oam -59,  -3, $16, $2c
+	frame_oam -43,  -3, $36, $28
+	frame_oam -59, -11, $34, $2c
+	frame_oam -43, -11, $38, $28
+	frame_oam -46,   4, $1c, $2c
+	db $80
+
+.frame_41
+	frame_oam -16,  -7, $3a, $00
+	frame_oam -16,   1, $3c, $00
+	frame_oam -16,   9, $3e, $00
+	frame_oam -16, -15, $38, $00
+	frame_oam -32, -15, $1c, $00
+	frame_oam -32,  -7, $1e, $00
+	frame_oam -32,   1, $04, $00
+	frame_oam -32,   9, $06, $00
+	frame_oam -50, -18, $3c, $2c
+	frame_oam -59,  -3, $28, $2c
+	frame_oam -59, -11, $2a, $2c
+	frame_oam -43,  -3, $30, $28
+	frame_oam -43, -11, $32, $28
+	frame_oam -50,   4, $1e, $2c
+	db $80
+
+.frame_42
+	frame_oam -31, -14, $1c, $00
+	frame_oam -31,  -6, $1e, $00
+	frame_oam -15,   2, $34, $00
+	frame_oam -15,  10, $36, $00
+	frame_oam -15,  -6, $18, $00
+	frame_oam -31,   2, $04, $00
+	frame_oam -31,  10, $06, $00
+	frame_oam -15, -14, $20, $00
+	frame_oam -50, -18, $20, $0c
+	frame_oam -59,  -3, $28, $2c
+	frame_oam -59, -11, $2a, $2c
+	frame_oam -43,  -3, $30, $28
+	frame_oam -43, -11, $32, $28
+	frame_oam -50,   4, $20, $2c
+	db $80
+
+.frame_43
+	frame_oam -15,  13, $2e, $00
+	frame_oam -31,   5, $04, $00
+	frame_oam -31,  13, $06, $00
+	frame_oam -15, -11, $16, $00
+	frame_oam -15,  -3, $18, $00
+	frame_oam -15,   5, $1a, $00
+	frame_oam -31,  -3, $42, $00
+	frame_oam -31, -11, $40, $00
+	frame_oam -50, -18, $22, $0c
+	frame_oam -58,  -3, $28, $2c
+	frame_oam -58, -11, $2a, $2c
+	frame_oam -42,  -3, $2c, $28
+	frame_oam -42, -11, $2e, $28
+	frame_oam -50,   4, $22, $2c
+	db $80
+
+.frame_44
+	frame_oam -33,   5, $04, $00
+	frame_oam -27,  13, $0e, $00
+	frame_oam -17, -11, $14, $00
+	frame_oam -17,  -3, $2a, $00
+	frame_oam -17,   5, $2c, $00
+	frame_oam -33,  -3, $42, $00
+	frame_oam -33, -11, $40, $00
+	frame_oam -11,  13, $58, $00
+	frame_oam -50, -19, $24, $0c
+	frame_oam -50,   5, $24, $2c
+	frame_oam -56, -11, $26, $0c
+	frame_oam -40, -11, $08, $08
+	frame_oam -56,  -3, $26, $2c
+	frame_oam -40,  -3, $08, $28
+	db $80
+
+.frame_45
+	frame_oam -34,  -8, $10, $00
+	frame_oam -34,   0, $12, $00
+	frame_oam -18,  -8, $30, $00
+	frame_oam -18,   0, $32, $00
+	frame_oam -34,   8, $04, $00
+	frame_oam -18,   8, $0c, $00
+	frame_oam -28,  16, $0e, $00
+	frame_oam -12,  16, $58, $00
+	frame_oam -46, -19, $1c, $0c
+	frame_oam -46,   5, $1c, $2c
+	frame_oam -57, -11, $26, $0c
+	frame_oam -41, -11, $08, $08
+	frame_oam -57,  -3, $26, $2c
+	frame_oam -41,  -3, $08, $28
+	db $80
+
+.frame_46
+	frame_oam -32,   6, $04, $00
+	frame_oam -26,  14, $0e, $00
+	frame_oam -16, -10, $14, $00
+	frame_oam -16,  -2, $2a, $00
+	frame_oam -16,   6, $2c, $00
+	frame_oam -32,  -2, $42, $00
+	frame_oam -32, -10, $40, $00
+	frame_oam -10,  14, $58, $00
+	frame_oam -50, -19, $1e, $0c
+	frame_oam -50,   5, $1e, $2c
+	frame_oam -56, -11, $26, $0c
+	frame_oam -40, -11, $08, $08
+	frame_oam -56,  -3, $26, $2c
+	frame_oam -40,  -3, $08, $28
+	db $80
+
+.frame_47
+	frame_oam -15,  13, $2e, $00
+	frame_oam -31,   5, $04, $00
+	frame_oam -31,  13, $06, $00
+	frame_oam -15, -11, $16, $00
+	frame_oam -15,  -3, $18, $00
+	frame_oam -15,   5, $1a, $00
+	frame_oam -31,  -3, $42, $00
+	frame_oam -31, -11, $40, $00
+	frame_oam -50, -19, $20, $0c
+	frame_oam -50,   5, $20, $2c
+	frame_oam -56, -11, $26, $0c
+	frame_oam -40, -11, $08, $08
+	frame_oam -56,  -3, $26, $2c
+	frame_oam -40,  -3, $08, $28
+	db $80
+
+.frame_48
+	frame_oam -31, -14, $1c, $00
+	frame_oam -31,  -6, $1e, $00
+	frame_oam -15,   2, $34, $00
+	frame_oam -15,  10, $36, $00
+	frame_oam -15,  -6, $18, $00
+	frame_oam -31,   2, $04, $00
+	frame_oam -31,  10, $06, $00
+	frame_oam -15, -14, $20, $00
+	frame_oam -50, -19, $22, $0c
+	frame_oam -50,   5, $22, $2c
+	frame_oam -55, -11, $26, $0c
+	frame_oam -39, -11, $08, $08
+	frame_oam -55,  -3, $26, $2c
+	frame_oam -39,  -3, $08, $28
+	db $80
+
+.frame_49
+	frame_oam -17,  -7, $3a, $00
+	frame_oam -17,   1, $3c, $00
+	frame_oam -17,   9, $3e, $00
+	frame_oam -17, -15, $38, $00
+	frame_oam -33, -15, $1c, $00
+	frame_oam -33,  -7, $1e, $00
+	frame_oam -33,   1, $04, $00
+	frame_oam -33,   9, $06, $00
+	frame_oam -50, -19, $24, $0c
+	frame_oam -50,   5, $24, $2c
+	frame_oam -56, -11, $26, $0c
+	frame_oam -40, -11, $08, $08
+	frame_oam -56,  -3, $26, $2c
+	frame_oam -40,  -3, $08, $28
+	db $80
+
+.frame_50
+	frame_oam -18, -15, $38, $00
+	frame_oam -18,  -7, $3a, $00
+	frame_oam -18,   1, $3c, $00
+	frame_oam -34, -15, $1c, $00
+	frame_oam -34,  -7, $1e, $00
+	frame_oam -18,   9, $3e, $00
+	frame_oam -34,   1, $04, $00
+	frame_oam -34,   9, $06, $00
+	frame_oam -46, -19, $1c, $0c
+	frame_oam -46,   5, $1c, $2c
+	frame_oam -57, -11, $26, $0c
+	frame_oam -41, -11, $08, $08
+	frame_oam -57,  -3, $26, $2c
+	frame_oam -41,  -3, $08, $28
+	db $80
+
+.frame_51
+	frame_oam -16,  -7, $3a, $00
+	frame_oam -16,   1, $3c, $00
+	frame_oam -16,   9, $3e, $00
+	frame_oam -16, -15, $38, $00
+	frame_oam -32, -15, $1c, $00
+	frame_oam -32,  -7, $1e, $00
+	frame_oam -32,   1, $04, $00
+	frame_oam -32,   9, $06, $00
+	frame_oam -50, -19, $1e, $0c
+	frame_oam -50,   5, $1e, $2c
+	frame_oam -56, -11, $26, $0c
+	frame_oam -40, -11, $08, $08
+	frame_oam -56,  -3, $26, $2c
+	frame_oam -40,  -3, $08, $28
+	db $80
+
+.frame_52
+	frame_oam -31, -14, $1c, $00
+	frame_oam -31,  -6, $1e, $00
+	frame_oam -15,   2, $34, $00
+	frame_oam -15,  10, $36, $00
+	frame_oam -15,  -6, $18, $00
+	frame_oam -31,   2, $04, $00
+	frame_oam -31,  10, $06, $00
+	frame_oam -15, -14, $20, $00
+	frame_oam -50, -19, $20, $0c
+	frame_oam -50,   5, $20, $2c
+	frame_oam -56, -11, $26, $0c
+	frame_oam -40, -11, $08, $08
+	frame_oam -56,  -3, $26, $2c
+	frame_oam -40,  -3, $08, $28
+	db $80
+
+.frame_53
+	frame_oam -15,  13, $2e, $00
+	frame_oam -31,   5, $04, $00
+	frame_oam -31,  13, $06, $00
+	frame_oam -15, -11, $16, $00
+	frame_oam -15,  -3, $18, $00
+	frame_oam -15,   5, $1a, $00
+	frame_oam -31,  -3, $42, $00
+	frame_oam -31, -11, $40, $00
+	frame_oam -50, -19, $22, $0c
+	frame_oam -50,   5, $22, $2c
+	frame_oam -55, -11, $26, $0c
+	frame_oam -39, -11, $08, $08
+	frame_oam -55,  -3, $26, $2c
+	frame_oam -39,  -3, $08, $28
+	db $80
+
+.frame_54
+	frame_oam -33,   5, $04, $00
+	frame_oam -27,  13, $0e, $00
+	frame_oam -17, -11, $14, $00
+	frame_oam -17,  -3, $2a, $00
+	frame_oam -17,   5, $2c, $00
+	frame_oam -33,  -3, $42, $00
+	frame_oam -33, -11, $40, $00
+	frame_oam -11,  13, $58, $00
+	frame_oam -50, -19, $24, $0c
+	frame_oam -50,   5, $24, $2c
+	frame_oam -56, -11, $26, $0c
+	frame_oam -40, -11, $08, $08
+	frame_oam -56,  -3, $26, $2c
+	frame_oam -40,  -3, $08, $28
+	db $80
+
+.frame_55
+	frame_oam -34,  -8, $10, $00
+	frame_oam -34,   0, $12, $00
+	frame_oam -18,  -8, $30, $00
+	frame_oam -18,   0, $32, $00
+	frame_oam -34,   8, $04, $00
+	frame_oam -18,   8, $0c, $00
+	frame_oam -28,  16, $0e, $00
+	frame_oam -12,  16, $58, $00
+	frame_oam -59, -11, $1a, $0c
+	frame_oam -59,  -3, $1a, $2c
+	frame_oam -46, -19, $1c, $0c
+	frame_oam -46,   5, $1c, $2c
+	frame_oam -43, -11, $14, $08
+	frame_oam -43,  -3, $14, $28
+	db $80
+
+.frame_56
+	frame_oam -32,   6, $04, $00
+	frame_oam -26,  14, $0e, $00
+	frame_oam -16, -10, $14, $00
+	frame_oam -16,  -2, $2a, $00
+	frame_oam -16,   6, $2c, $00
+	frame_oam -32,  -2, $42, $00
+	frame_oam -32, -10, $40, $00
+	frame_oam -10,  14, $58, $00
+	frame_oam -58, -11, $1a, $0c
+	frame_oam -42, -11, $18, $08
+	frame_oam -58,  -3, $1a, $2c
+	frame_oam -42,  -3, $18, $28
+	frame_oam -50, -19, $1e, $0c
+	frame_oam -50,   5, $1e, $2c
+	db $80
+
+.frame_57
+	frame_oam -15,  13, $2e, $00
+	frame_oam -31,   5, $04, $00
+	frame_oam -31,  13, $06, $00
+	frame_oam -15, -11, $16, $00
+	frame_oam -15,  -3, $18, $00
+	frame_oam -15,   5, $1a, $00
+	frame_oam -31,  -3, $42, $00
+	frame_oam -31, -11, $40, $00
+	frame_oam -58, -11, $1a, $0c
+	frame_oam -42, -11, $18, $08
+	frame_oam -58,  -3, $1a, $2c
+	frame_oam -42,  -3, $18, $28
+	frame_oam -50, -19, $20, $0c
+	frame_oam -50,   5, $20, $2c
+	db $80
+
+.frame_58
+	frame_oam -31, -14, $1c, $00
+	frame_oam -31,  -6, $1e, $00
+	frame_oam -15,   2, $34, $00
+	frame_oam -15,  10, $36, $00
+	frame_oam -15,  -6, $18, $00
+	frame_oam -31,   2, $04, $00
+	frame_oam -31,  10, $06, $00
+	frame_oam -15, -14, $20, $00
+	frame_oam -57, -11, $1a, $0c
+	frame_oam -57,  -3, $1a, $2c
+	frame_oam -50, -19, $22, $0c
+	frame_oam -50,   5, $22, $2c
+	frame_oam -41, -11, $14, $08
+	frame_oam -41,  -3, $14, $28
+	db $80
+
+.frame_59
+	frame_oam -17,  -7, $3a, $00
+	frame_oam -17,   1, $3c, $00
+	frame_oam -17,   9, $3e, $00
+	frame_oam -17, -15, $38, $00
+	frame_oam -33, -15, $1c, $00
+	frame_oam -33,  -7, $1e, $00
+	frame_oam -33,   1, $04, $00
+	frame_oam -33,   9, $06, $00
+	frame_oam -50, -19, $24, $0c
+	frame_oam -50,   5, $24, $2c
+	frame_oam -56, -11, $26, $0c
+	frame_oam -40, -11, $08, $08
+	frame_oam -56,  -3, $26, $2c
+	frame_oam -40,  -3, $08, $28
+	db $80
+
+.frame_60
+	frame_oam -18, -15, $38, $00
+	frame_oam -18,  -7, $3a, $00
+	frame_oam -18,   1, $3c, $00
+	frame_oam -34, -15, $1c, $00
+	frame_oam -34,  -7, $1e, $00
+	frame_oam -18,   9, $3e, $00
+	frame_oam -34,   1, $04, $00
+	frame_oam -34,   9, $06, $00
+	frame_oam -59, -11, $1a, $0c
+	frame_oam -59,  -3, $1a, $2c
+	frame_oam -46, -19, $1c, $0c
+	frame_oam -46,   5, $1c, $2c
+	frame_oam -43, -11, $14, $08
+	frame_oam -43,  -3, $14, $28
+	db $80
+
+.frame_61
+	frame_oam -16,  -7, $3a, $00
+	frame_oam -16,   1, $3c, $00
+	frame_oam -16,   9, $3e, $00
+	frame_oam -16, -15, $38, $00
+	frame_oam -32, -15, $1c, $00
+	frame_oam -32,  -7, $1e, $00
+	frame_oam -32,   1, $04, $00
+	frame_oam -32,   9, $06, $00
+	frame_oam -58, -11, $1a, $0c
+	frame_oam -42, -11, $18, $08
+	frame_oam -58,  -3, $1a, $2c
+	frame_oam -42,  -3, $18, $28
+	frame_oam -50, -19, $1e, $0c
+	frame_oam -50,   5, $1e, $2c
+	db $80
+
+.frame_62
+	frame_oam -31, -14, $1c, $00
+	frame_oam -31,  -6, $1e, $00
+	frame_oam -15,   2, $34, $00
+	frame_oam -15,  10, $36, $00
+	frame_oam -15,  -6, $18, $00
+	frame_oam -31,   2, $04, $00
+	frame_oam -31,  10, $06, $00
+	frame_oam -15, -14, $20, $00
+	frame_oam -58, -11, $1a, $0c
+	frame_oam -42, -11, $18, $08
+	frame_oam -58,  -3, $1a, $2c
+	frame_oam -42,  -3, $18, $28
+	frame_oam -50, -19, $20, $0c
+	frame_oam -50,   5, $20, $2c
+	db $80
+
+.frame_63
+	frame_oam -15,  13, $2e, $00
+	frame_oam -31,   5, $04, $00
+	frame_oam -31,  13, $06, $00
+	frame_oam -15, -11, $16, $00
+	frame_oam -15,  -3, $18, $00
+	frame_oam -15,   5, $1a, $00
+	frame_oam -31,  -3, $42, $00
+	frame_oam -31, -11, $40, $00
+	frame_oam -57, -11, $1a, $0c
+	frame_oam -57,  -3, $1a, $2c
+	frame_oam -50, -19, $22, $0c
+	frame_oam -50,   5, $22, $2c
+	frame_oam -41, -11, $14, $08
+	frame_oam -41,  -3, $14, $28
+	db $80
+
+.frame_64
+	frame_oam -34,  -8, $10, $00
+	frame_oam -34,   0, $12, $00
+	frame_oam -18,  -8, $30, $00
+	frame_oam -18,   0, $32, $00
+	frame_oam -34,   8, $04, $00
+	frame_oam -18,   8, $0c, $00
+	frame_oam -28,  16, $0e, $00
+	frame_oam -12,  16, $58, $00
+	frame_oam -46, -19, $1c, $0c
+	frame_oam -46,   5, $1c, $2c
+	frame_oam -57, -11, $26, $0c
+	frame_oam -41, -11, $08, $08
+	frame_oam -57,  -3, $26, $2c
+	frame_oam -41,  -3, $08, $28
+	db $80
+
+.frame_65
+	frame_oam -18, -15, $38, $00
+	frame_oam -18,  -7, $3a, $00
+	frame_oam -18,   1, $3c, $00
+	frame_oam -34, -15, $1c, $00
+	frame_oam -34,  -7, $1e, $00
+	frame_oam -18,   9, $3e, $00
+	frame_oam -34,   1, $04, $00
+	frame_oam -34,   9, $06, $00
+	frame_oam -46, -19, $1c, $0c
+	frame_oam -46,   5, $1c, $2c
+	frame_oam -57, -11, $26, $0c
+	frame_oam -41, -11, $08, $08
+	frame_oam -57,  -3, $26, $2c
+	frame_oam -41,  -3, $08, $28
+	db $80
+
+.frame_66
+	frame_oam -16, -14, $14, $00
+	frame_oam -16,  -6, $2a, $00
+	frame_oam -32, -14, $08, $00
+	frame_oam -32,  -6, $0a, $00
+	frame_oam -16,  10, $2e, $00
+	frame_oam -32,   2, $04, $00
+	frame_oam -32,  10, $06, $00
+	frame_oam -16,   2, $1a, $00
+	db $80
+
+.frame_67
+	frame_oam -16, -15, $16, $00
+	frame_oam -16,  -7, $18, $00
+	frame_oam -32, -15, $44, $00
+	frame_oam -32,  -7, $46, $00
+	frame_oam -32,   1, $04, $00
+	frame_oam -26,   9, $0e, $00
+	frame_oam -16,   1, $2c, $00
+	frame_oam -10,   9, $58, $00
+	db $80
+
+.frame_68
+	frame_oam -32, -15, $48, $00
+	frame_oam -32,  -7, $4a, $00
+	frame_oam -32,   1, $4c, $00
+	frame_oam -32,   9, $4e, $00
+	frame_oam -16, -15, $50, $00
+	frame_oam -16,  -7, $52, $00
+	frame_oam -16,   1, $54, $00
+	frame_oam -16,   9, $56, $00
+	db $80
+; 0x1fed53
+
+Frameset_1fed53: ; 1fed53 (7f:6d53)
+	db $00,  2
+	db $01,  2
+	db $02,  2
+	db $03,  2
+	db $00,  2
+	db $01,  2
+	db $02,  2
+	db $03,  2
+	db $00,  2
+	db $01,  2
+	db $02,  2
+	db $03,  2
+	db $00,  2
+	db $01,  2
+	db $02,  2
+	db $03,  2
+	db $00,  2
+	db $01,  2
+	db $02,  2
+	db $03,  2
+	db $ff
+; 0x1fed7c
+
+	INCROM $1fed7c, $1fee05
+
+OAM_1fee05: ; 1fee05 (7f:6e05)
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+
+.frame_0
+	frame_oam -19,  13, $2e, $00
+	frame_oam -35,   5, $04, $00
+	frame_oam -35,  13, $06, $00
+	frame_oam -35,  -3, $42, $00
+	frame_oam -35, -11, $40, $00
+	frame_oam -19, -11, $38, $00
+	frame_oam -19,  -3, $3a, $00
+	frame_oam -19,   5, $5a, $00
+	db $80
+
+.frame_1
+	frame_oam -18,  12, $2e, $00
+	frame_oam -34,   4, $04, $00
+	frame_oam -34,  12, $06, $00
+	frame_oam -34,  -4, $42, $00
+	frame_oam -34, -12, $40, $00
+	frame_oam -18, -12, $20, $00
+	frame_oam -18,  -4, $2a, $00
+	frame_oam -18,   4, $2c, $00
+	db $80
+
+.frame_2
+	frame_oam -35, -14, $1c, $00
+	frame_oam -35,  -6, $1e, $00
+	frame_oam -19,   2, $34, $00
+	frame_oam -19,  10, $36, $00
+	frame_oam -35,   2, $04, $00
+	frame_oam -35,  10, $06, $00
+	frame_oam -19,  -6, $18, $00
+	frame_oam -19, -14, $20, $00
+	db $80
+
+.frame_3
+	frame_oam -19, -10, $14, $00
+	frame_oam -19,  -2, $2a, $00
+	frame_oam -35, -10, $08, $00
+	frame_oam -35,  -2, $0a, $00
+	frame_oam -19,  14, $2e, $00
+	frame_oam -35,   6, $04, $00
+	frame_oam -35,  14, $06, $00
+	frame_oam -19,   6, $1a, $00
+	db $80
+
+.frame_4
+	frame_oam -17, -11, $16, $00
+	frame_oam -17,  -3, $18, $00
+	frame_oam -33, -11, $44, $00
+	frame_oam -33,  -3, $46, $00
+	frame_oam -33,   5, $04, $00
+	frame_oam -27,  13, $0e, $00
+	frame_oam -17,   5, $2c, $00
+	frame_oam -11,  13, $58, $00
+	db $80
+; 0x1feeb4
 
 Frameset_1feeb4: ; 1feeb4 (7f:6eb4)
 	db $00,  4
@@ -1456,7 +3247,705 @@ Frameset_1feeb4: ; 1feeb4 (7f:6eb4)
 	db $ff
 ; 0x1feebd
 
-	INCROM $1feebd, $1ff628
+	INCROM $1feebd, $1feec4
+
+Frameset_1feec4: ; 1feec4 (7f:6ec4)
+	db $01,  2
+	db $ff
+; 0x1feec7
+
+OAM_1feec7: ; 1feec7 (7f:6ec7)
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
+	dw .frame_7
+	dw .frame_8
+	dw .frame_9
+	dw .frame_10
+	dw .frame_11
+	dw .frame_12
+	dw .frame_13
+	dw .frame_14
+	dw .frame_15
+	dw .frame_16
+	dw .frame_17
+	dw .frame_18
+	dw .frame_19
+	dw .frame_20
+	dw .frame_21
+	dw .frame_22
+	dw .frame_23
+	dw .frame_24
+	dw .frame_25
+	dw .frame_26
+	dw .frame_27
+	dw .frame_28
+	dw .frame_29
+	dw .frame_30
+	dw .frame_31
+	dw .frame_32
+	dw .frame_33
+	dw .frame_34
+	dw .frame_35
+	dw .frame_36
+	dw .frame_37
+	dw .frame_38
+	dw .frame_39
+	dw .frame_40
+	dw .frame_41
+	dw .frame_42
+	dw .frame_43
+	dw .frame_44
+	dw .frame_45
+	dw .frame_46
+	dw .frame_47
+	dw .frame_48
+	dw .frame_49
+	dw .frame_50
+	dw .frame_51
+	dw .frame_52
+	dw .frame_53
+	dw .frame_54
+	dw .frame_55
+	dw .frame_56
+	dw .frame_57
+	dw .frame_58
+
+.frame_0
+	frame_oam -41,  -4, $12, $01
+	frame_oam -41, -11, $10, $01
+	frame_oam -41,   3, $10, $21
+	frame_oam -57,   0, $0e, $01
+	frame_oam -32, -12, $00, $00
+	frame_oam -32,  -4, $02, $00
+	frame_oam -32,   4, $04, $00
+	frame_oam -57,  -8, $0c, $01
+	frame_oam -16, -12, $06, $00
+	frame_oam -16,  -4, $08, $00
+	frame_oam -16,   4, $0a, $00
+	db $80
+
+.frame_1
+	frame_oam -52,   0, $0e, $01
+	frame_oam -36, -12, $10, $01
+	frame_oam -36,  -4, $12, $01
+	frame_oam -36,   4, $10, $21
+	frame_oam -32, -12, $00, $00
+	frame_oam -32,  -4, $02, $00
+	frame_oam -52,  -8, $0c, $01
+	frame_oam -32,   4, $04, $00
+	frame_oam -16, -12, $06, $00
+	frame_oam -16,  -4, $08, $00
+	frame_oam -16,   4, $0a, $00
+	db $80
+
+.frame_2
+	frame_oam -30, -12, $10, $01
+	frame_oam -30,  -4, $12, $01
+	frame_oam -30,   4, $10, $21
+	frame_oam -46,  -8, $0c, $01
+	frame_oam -46,   0, $0e, $01
+	frame_oam -16, -12, $06, $00
+	frame_oam -16,  -4, $08, $00
+	frame_oam -16,   4, $0a, $00
+	db $80
+
+.frame_3
+	frame_oam -49,  -8, $4c, $00
+	frame_oam -49,   0, $4e, $00
+	frame_oam -32, -12, $14, $01
+	frame_oam -32,  -4, $16, $01
+	frame_oam -32,   4, $18, $01
+	frame_oam -16, -12, $1a, $01
+	frame_oam -16,  -4, $1c, $01
+	frame_oam -16,   4, $1e, $01
+	frame_oam -29, -22, $38, $21
+	db $80
+
+.frame_4
+	frame_oam -68,  -8, $4c, $00
+	frame_oam -68,   0, $4e, $00
+	frame_oam -32,  -8, $0c, $01
+	frame_oam -30,   0, $0e, $01
+	frame_oam -16,   4, $22, $01
+	frame_oam -42,  13, $38, $01
+	frame_oam -32, -36, $38, $21
+	frame_oam -16, -12, $10, $01
+	frame_oam -16,  -4, $20, $01
+	db $80
+
+.frame_5
+	frame_oam -62,  -8, $4c, $00
+	frame_oam -63,   0, $4e, $00
+	frame_oam -16,  -4, $28, $01
+	frame_oam -43,  29, $38, $01
+	frame_oam -16, -12, $24, $01
+	frame_oam -16,   4, $24, $21
+	db $80
+
+.frame_6
+	frame_oam -57,   0, $4c, $20
+	frame_oam -57,  -8, $4e, $20
+	frame_oam -16,  -4, $28, $01
+	frame_oam -16, -12, $26, $01
+	frame_oam -16,   4, $26, $21
+	db $80
+
+.frame_7
+	frame_oam -51,  -8, $4c, $00
+	frame_oam -51,   0, $4e, $00
+	frame_oam -16, -12, $2a, $01
+	frame_oam -16,   4, $2a, $21
+	frame_oam -16,  -4, $2c, $01
+	db $80
+
+.frame_8
+	frame_oam -29,  -8, $4e, $20
+	frame_oam -29,   0, $4c, $20
+	frame_oam -16, -12, $2a, $01
+	frame_oam -16,   4, $2a, $21
+	frame_oam -16,  -4, $2c, $01
+	db $80
+
+.frame_9
+	frame_oam -30,   0, $4e, $00
+	frame_oam -29,  -8, $4c, $00
+	frame_oam -16,  -4, $28, $01
+	frame_oam -16, -12, $26, $01
+	frame_oam -16,   4, $26, $21
+	db $80
+
+.frame_10
+	frame_oam -29,   0, $4e, $00
+	frame_oam -29,  -8, $4c, $00
+	frame_oam -16, -12, $2e, $01
+	frame_oam -16,   4, $2e, $21
+	frame_oam -16,  -4, $30, $01
+	db $80
+
+.frame_11
+	frame_oam -30,  -8, $4c, $00
+	frame_oam -30,   0, $4e, $00
+	frame_oam -17, -12, $2e, $01
+	frame_oam -17,   4, $2e, $21
+	frame_oam -17,  -4, $30, $01
+	db $80
+
+.frame_12
+	frame_oam -31,  -8, $4c, $00
+	frame_oam -32,   0, $4e, $00
+	frame_oam -16, -12, $2e, $01
+	frame_oam -16,   4, $2e, $21
+	frame_oam -16,  -4, $30, $01
+	db $80
+
+.frame_13
+	frame_oam -20, -12, $3a, $01
+	frame_oam -20,  -4, $3c, $01
+	frame_oam -20,   4, $3e, $01
+	frame_oam -36, -13, $34, $00
+	frame_oam -36,  -5, $36, $00
+	frame_oam -36,   3, $04, $00
+	db $80
+
+.frame_14
+	frame_oam -38, -13, $34, $00
+	frame_oam -38,  -5, $36, $00
+	frame_oam -22, -12, $3a, $01
+	frame_oam -22,  -4, $3c, $01
+	frame_oam -22,   4, $3e, $01
+	frame_oam -38,   3, $04, $00
+	db $80
+
+.frame_15
+	frame_oam -24,  -4, $48, $01
+	frame_oam -24,   4, $4a, $01
+	frame_oam -24, -12, $46, $01
+	frame_oam -40, -12, $00, $00
+	frame_oam -40,  -4, $02, $00
+	frame_oam -40,   4, $04, $00
+	db $80
+
+.frame_16
+	frame_oam -18,  -4, $48, $01
+	frame_oam -18,   4, $4a, $01
+	frame_oam -18, -12, $46, $01
+	frame_oam -34, -12, $40, $00
+	frame_oam -34,  -4, $42, $00
+	frame_oam -34,   4, $44, $00
+	db $80
+
+.frame_17
+	frame_oam -15,  -4, $48, $01
+	frame_oam -15,   4, $4a, $01
+	frame_oam -15, -12, $46, $01
+	frame_oam -31, -11, $00, $00
+	frame_oam -31,  -3, $02, $00
+	frame_oam -31,   5, $04, $00
+	db $80
+
+.frame_18
+	frame_oam -29, -12, $40, $00
+	frame_oam -29,  -4, $42, $00
+	frame_oam -29,   4, $44, $00
+	frame_oam -13, -12, $50, $01
+	frame_oam -13,  -4, $52, $01
+	frame_oam -13,   4, $54, $01
+	db $80
+
+.frame_19
+	frame_oam -27, -12, $40, $00
+	frame_oam -27,  -4, $42, $00
+	frame_oam -27,   4, $44, $00
+	frame_oam -11, -12, $68, $01
+	frame_oam -11,  -4, $6a, $01
+	frame_oam -11,   4, $6c, $01
+	db $80
+
+.frame_20
+	frame_oam -32, -12, $40, $00
+	frame_oam -32,  -4, $42, $00
+	frame_oam -32,   4, $44, $00
+	frame_oam -16, -12, $46, $01
+	frame_oam -16,  -4, $5c, $01
+	frame_oam -16,   4, $5e, $01
+	db $80
+
+.frame_21
+	frame_oam -17, -12, $60, $01
+	frame_oam -17,  -4, $5c, $01
+	frame_oam -17,   4, $62, $01
+	frame_oam -33, -12, $40, $00
+	frame_oam -33,  -4, $42, $00
+	frame_oam -33,   4, $44, $00
+	db $80
+
+.frame_22
+	frame_oam -32, -12, $40, $00
+	frame_oam -32,  -4, $42, $00
+	frame_oam -32,   4, $44, $00
+	frame_oam -16, -12, $64, $01
+	frame_oam -16,  -4, $58, $01
+	frame_oam -16,   4, $66, $01
+	db $80
+
+.frame_23
+	frame_oam -15, -12, $56, $01
+	frame_oam -15,  -4, $58, $01
+	frame_oam -15,   4, $5a, $01
+	frame_oam -31, -12, $40, $00
+	frame_oam -31,  -4, $42, $00
+	frame_oam -31,   4, $44, $00
+	db $80
+
+.frame_24
+	frame_oam -41,  -4, $12, $21
+	frame_oam -41,   3, $10, $21
+	frame_oam -41, -11, $10, $01
+	frame_oam -57,  -8, $0e, $21
+	frame_oam -32,   4, $00, $20
+	frame_oam -32,  -4, $02, $20
+	frame_oam -32, -12, $04, $20
+	frame_oam -57,   0, $0c, $21
+	frame_oam -16,   4, $06, $20
+	frame_oam -16,  -4, $08, $20
+	frame_oam -16, -12, $0a, $20
+	db $80
+
+.frame_25
+	frame_oam -52,  -8, $0e, $21
+	frame_oam -36,   4, $10, $21
+	frame_oam -36,  -4, $12, $21
+	frame_oam -36, -12, $10, $01
+	frame_oam -32,   4, $00, $20
+	frame_oam -32,  -4, $02, $20
+	frame_oam -52,   0, $0c, $21
+	frame_oam -32, -12, $04, $20
+	frame_oam -16,   4, $06, $20
+	frame_oam -16,  -4, $08, $20
+	frame_oam -16, -12, $0a, $20
+	db $80
+
+.frame_26
+	frame_oam -30,   4, $10, $21
+	frame_oam -30,  -4, $12, $21
+	frame_oam -30, -12, $10, $01
+	frame_oam -46,   0, $0c, $21
+	frame_oam -46,  -8, $0e, $21
+	frame_oam -16,   4, $06, $20
+	frame_oam -16,  -4, $08, $20
+	frame_oam -16, -12, $0a, $20
+	db $80
+
+.frame_27
+	frame_oam -49,   0, $4c, $20
+	frame_oam -49,  -8, $4e, $20
+	frame_oam -32,   4, $14, $21
+	frame_oam -32,  -4, $16, $21
+	frame_oam -32, -12, $18, $21
+	frame_oam -16,   4, $1a, $21
+	frame_oam -16,  -4, $1c, $21
+	frame_oam -16, -12, $1e, $21
+	frame_oam -29,  14, $38, $01
+	db $80
+
+.frame_28
+	frame_oam -68,   0, $4c, $20
+	frame_oam -68,  -8, $4e, $20
+	frame_oam -32,   0, $0c, $21
+	frame_oam -30,  -8, $0e, $21
+	frame_oam -16, -12, $22, $21
+	frame_oam -42, -21, $38, $21
+	frame_oam -32,  28, $38, $01
+	frame_oam -16,   4, $10, $21
+	frame_oam -16,  -4, $20, $21
+	db $80
+
+.frame_29
+	frame_oam -62,   0, $4c, $20
+	frame_oam -63,  -8, $4e, $20
+	frame_oam -16,   4, $26, $21
+	frame_oam -16,  -4, $28, $21
+	frame_oam -16, -12, $26, $01
+	frame_oam -43, -37, $38, $21
+	db $80
+
+.frame_30
+	frame_oam -57,  -8, $4c, $00
+	frame_oam -57,   0, $4e, $00
+	frame_oam -16,  -4, $28, $21
+	frame_oam -16,   4, $26, $21
+	frame_oam -16, -12, $26, $01
+	db $80
+
+.frame_31
+	frame_oam -51,   0, $4c, $20
+	frame_oam -51,  -8, $4e, $20
+	frame_oam -16, -12, $2a, $01
+	frame_oam -16,   4, $2a, $21
+	frame_oam -16,  -4, $2c, $01
+	db $80
+
+.frame_32
+	frame_oam -29,   0, $4e, $00
+	frame_oam -29,  -8, $4c, $00
+	frame_oam -16, -12, $2a, $01
+	frame_oam -16,   4, $2a, $21
+	frame_oam -16,  -4, $2c, $01
+	db $80
+
+.frame_33
+	frame_oam -30,  -8, $4e, $20
+	frame_oam -29,   0, $4c, $20
+	frame_oam -16,  -4, $28, $21
+	frame_oam -16,   4, $26, $21
+	frame_oam -16, -12, $26, $01
+	db $80
+
+.frame_34
+	frame_oam -29,  -8, $4e, $20
+	frame_oam -29,   0, $4c, $20
+	frame_oam -16, -12, $2e, $01
+	frame_oam -16,   4, $2e, $21
+	frame_oam -16,  -4, $30, $01
+	db $80
+
+.frame_35
+	frame_oam -30,   0, $4c, $20
+	frame_oam -30,  -8, $4e, $20
+	frame_oam -17, -12, $2e, $01
+	frame_oam -17,   4, $2e, $21
+	frame_oam -17,  -4, $30, $01
+	db $80
+
+.frame_36
+	frame_oam -31,   0, $4c, $20
+	frame_oam -32,  -8, $4e, $20
+	frame_oam -16, -12, $2e, $01
+	frame_oam -16,   4, $2e, $21
+	frame_oam -16,  -4, $30, $01
+	db $80
+
+.frame_37
+	frame_oam -20,   4, $3a, $21
+	frame_oam -20,  -4, $3c, $21
+	frame_oam -20, -12, $3e, $21
+	frame_oam -36,   5, $34, $20
+	frame_oam -36,  -3, $36, $20
+	frame_oam -36, -11, $04, $20
+	db $80
+
+.frame_38
+	frame_oam -38,   5, $34, $20
+	frame_oam -38,  -3, $36, $20
+	frame_oam -22,   4, $3a, $21
+	frame_oam -22,  -4, $3c, $21
+	frame_oam -22, -12, $3e, $21
+	frame_oam -38, -11, $04, $20
+	db $80
+
+.frame_39
+	frame_oam -24,  -4, $48, $21
+	frame_oam -24, -12, $4a, $21
+	frame_oam -24,   4, $46, $21
+	frame_oam -40,   4, $00, $20
+	frame_oam -40,  -4, $02, $20
+	frame_oam -40, -12, $04, $20
+	db $80
+
+.frame_40
+	frame_oam -18,  -4, $48, $21
+	frame_oam -18, -12, $4a, $21
+	frame_oam -18,   4, $46, $21
+	frame_oam -34,   4, $40, $20
+	frame_oam -34,  -4, $42, $20
+	frame_oam -34, -12, $44, $20
+	db $80
+
+.frame_41
+	frame_oam -15,  -4, $48, $21
+	frame_oam -15, -12, $4a, $21
+	frame_oam -15,   4, $46, $21
+	frame_oam -31,   3, $00, $20
+	frame_oam -31,  -5, $02, $20
+	frame_oam -31, -13, $04, $20
+	db $80
+
+.frame_42
+	frame_oam -29,   4, $40, $20
+	frame_oam -29,  -4, $42, $20
+	frame_oam -29, -12, $44, $20
+	frame_oam -13,   4, $50, $21
+	frame_oam -13,  -4, $52, $21
+	frame_oam -13, -12, $54, $21
+	db $80
+
+.frame_43
+	frame_oam -27,   4, $40, $20
+	frame_oam -27,  -4, $42, $20
+	frame_oam -27, -12, $44, $20
+	frame_oam -11,   4, $68, $21
+	frame_oam -11,  -4, $6a, $21
+	frame_oam -11, -12, $6c, $21
+	db $80
+
+.frame_44
+	frame_oam -32,   4, $40, $20
+	frame_oam -32,  -4, $42, $20
+	frame_oam -32, -12, $44, $20
+	frame_oam -16,   4, $46, $21
+	frame_oam -16,  -4, $5c, $21
+	frame_oam -16, -12, $5e, $21
+	db $80
+
+.frame_45
+	frame_oam -17,   4, $60, $21
+	frame_oam -17,  -4, $5c, $21
+	frame_oam -17, -12, $62, $21
+	frame_oam -33,   4, $40, $20
+	frame_oam -33,  -4, $42, $20
+	frame_oam -33, -12, $44, $20
+	db $80
+
+.frame_46
+	frame_oam -32,   4, $40, $20
+	frame_oam -32,  -4, $42, $20
+	frame_oam -32, -12, $44, $20
+	frame_oam -16,   4, $64, $21
+	frame_oam -16,  -4, $58, $21
+	frame_oam -16, -12, $66, $21
+	db $80
+
+.frame_47
+	frame_oam -15,   4, $56, $21
+	frame_oam -15,  -4, $58, $21
+	frame_oam -15, -12, $5a, $21
+	frame_oam -31,   4, $40, $20
+	frame_oam -31,  -4, $42, $20
+	frame_oam -31, -12, $44, $20
+	db $80
+
+.frame_48
+	frame_oam -32, -12, $6e, $00
+	frame_oam -32,  -4, $70, $00
+	frame_oam -32,   4, $72, $00
+	frame_oam -16, -12, $74, $01
+	frame_oam -16,  -4, $76, $01
+	frame_oam -16,   4, $78, $01
+	db $80
+
+.frame_49
+	frame_oam -32, -16, $7a, $00
+	frame_oam -32,  -8, $7c, $00
+	frame_oam -16, -16, $32, $01
+	frame_oam -16,  -8, $7e, $01
+	frame_oam -32,   8, $7a, $20
+	frame_oam -32,   0, $7c, $20
+	frame_oam -16,   8, $32, $21
+	frame_oam -16,   0, $7e, $21
+	db $80
+
+.frame_50
+	frame_oam -32,   4, $6e, $20
+	frame_oam -32,  -4, $70, $20
+	frame_oam -32, -12, $72, $20
+	frame_oam -16,   4, $74, $21
+	frame_oam -16,  -4, $76, $21
+	frame_oam -16, -12, $78, $21
+	db $80
+
+.frame_51
+	frame_oam -26, -12, $40, $00
+	frame_oam -26,  -4, $42, $00
+	frame_oam -26,   4, $44, $00
+	frame_oam -16, -12, $2e, $01
+	frame_oam -16,   4, $2e, $21
+	frame_oam -16,  -4, $30, $01
+	db $80
+
+.frame_52
+	frame_oam -26,   4, $40, $20
+	frame_oam -26,  -4, $42, $20
+	frame_oam -26, -12, $44, $20
+	frame_oam -16,   4, $2e, $21
+	frame_oam -16, -12, $2e, $01
+	frame_oam -16,  -4, $30, $21
+	db $80
+
+.frame_53
+	frame_oam -15, -13, $46, $01
+	frame_oam -15,  -5, $48, $01
+	frame_oam -15,   3, $4a, $01
+	frame_oam -31, -12, $40, $00
+	frame_oam -31,  -4, $42, $00
+	frame_oam -31,   4, $44, $00
+	db $80
+
+.frame_54
+	frame_oam -15,  -3, $48, $01
+	frame_oam -15,   5, $4a, $01
+	frame_oam -15, -11, $46, $01
+	frame_oam -31, -11, $00, $00
+	frame_oam -31,  -3, $02, $00
+	frame_oam -31,   5, $04, $00
+	db $80
+
+.frame_55
+	frame_oam -15, -11, $46, $01
+	frame_oam -15,  -4, $48, $01
+	frame_oam -15,   4, $4a, $01
+	frame_oam -31, -12, $40, $00
+	frame_oam -31,  -4, $42, $00
+	frame_oam -31,   4, $44, $00
+	db $80
+
+.frame_56
+	frame_oam -15,   5, $46, $21
+	frame_oam -15,  -3, $48, $21
+	frame_oam -15, -11, $4a, $21
+	frame_oam -31,   4, $40, $20
+	frame_oam -31,  -4, $42, $20
+	frame_oam -31, -12, $44, $20
+	db $80
+
+.frame_57
+	frame_oam -15,  -5, $48, $21
+	frame_oam -15, -13, $4a, $21
+	frame_oam -15,   3, $46, $21
+	frame_oam -31,   3, $00, $20
+	frame_oam -31,  -5, $02, $20
+	frame_oam -31, -13, $04, $20
+	db $80
+
+.frame_58
+	frame_oam -15,   3, $46, $21
+	frame_oam -15,  -4, $48, $21
+	frame_oam -15, -12, $4a, $21
+	frame_oam -31,   4, $40, $20
+	frame_oam -31,  -4, $42, $20
+	frame_oam -31, -12, $44, $20
+	db $80
+; 0x1ff560
+
+Frameset_1ff560: ; 1ff560 (7f:7560)
+	db $00,  1
+	db $01,  1
+	db $02,  2
+	db $03,  5
+	db $04,  3
+	db $05,  2
+	db $06,  2
+	db $07,  2
+	db $08,  4
+	db $09,  4
+	db $08,  4
+	db $0a, 16
+	db $0b,  2
+	db $0c,  2
+	db $0a,  2
+	db $0b,  2
+	db $0c,  2
+	db $0a,  2
+	db $0b,  2
+	db $0c,  2
+	db $0a,  2
+	db $0b,  2
+	db $0c,  2
+	db $0d,  4
+	db $0e,  6
+	db $0f,  8
+	db $10,  6
+	db $11,  4
+	db $12,  4
+	db $13,  8
+	db $12,  4
+	db $11,  4
+	db $10,  6
+	db $ff
+; 0x1ff5a3
+
+Frameset_1ff5a3: ; 1ff5a3 (7f:75a3)
+	db $18,  1
+	db $19,  1
+	db $1a,  2
+	db $1b,  5
+	db $1c,  3
+	db $1d,  2
+	db $1e,  2
+	db $1f,  2
+	db $20,  4
+	db $21,  4
+	db $20,  4
+	db $22, 16
+	db $23,  2
+	db $24,  2
+	db $22,  2
+	db $23,  2
+	db $24,  2
+	db $22,  2
+	db $23,  2
+	db $24,  2
+	db $22,  2
+	db $23,  2
+	db $24,  2
+	db $25,  4
+	db $26,  6
+	db $27,  8
+	db $28,  6
+	db $29,  4
+	db $2a,  4
+	db $2b,  8
+	db $2a,  4
+	db $29,  4
+	db $28,  6
+	db $ff
+; 0x1ff5e6
+
+	INCROM $1ff5e6, $1ff628
 
 Frameset_1ff628: ; 1ff628 (7f:7628)
 	db $35,  2
@@ -1482,7 +3971,260 @@ Frameset_1ff639: ; 1ff639 (7f:7639)
 	db $ff
 ; 0x1ff64a
 
-	INCROM $1ff64a, $1ffc8e
+	INCROM $1ff64a, $1ffa12
+
+OAM_1ffa12: ; 1ffa12 (7f:7a12)
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
+	dw .frame_7
+	dw .frame_8
+	dw .frame_9
+	dw .frame_10
+	dw .frame_11
+	dw .frame_12
+	dw .frame_13
+	dw .frame_14
+	dw .frame_15
+	dw .frame_16
+	dw .frame_17
+	dw .frame_18
+	dw .frame_19
+	dw .frame_20
+	dw .frame_21
+	dw .frame_22
+	dw .frame_23
+	dw .frame_24
+	dw .frame_25
+	dw .frame_26
+	dw .frame_27
+
+.frame_0
+	frame_oam -33, -13, $40, $00
+	frame_oam -33,  -5, $42, $00
+	frame_oam -33,   3, $44, $00
+	frame_oam -17,   4, $4a, $00
+	frame_oam -17, -12, $4c, $00
+	frame_oam -17,  -4, $4e, $00
+	db $80
+
+.frame_1
+	frame_oam -34, -13, $40, $00
+	frame_oam -34,  -5, $42, $00
+	frame_oam -34,   3, $44, $00
+	frame_oam -18, -12, $46, $00
+	frame_oam -18,  -4, $48, $00
+	frame_oam -18,   4, $4a, $00
+	db $80
+
+.frame_2
+	frame_oam -32,  -4, $42, $00
+	frame_oam -32,   4, $44, $00
+	frame_oam -16,   4, $4a, $00
+	frame_oam -32, -12, $50, $00
+	frame_oam -16, -12, $52, $00
+	frame_oam -16,  -4, $54, $00
+	db $80
+
+.frame_3
+	frame_oam -32,  -3, $42, $00
+	frame_oam -32,   5, $44, $00
+	frame_oam -16,   5, $4a, $00
+	frame_oam -32, -11, $50, $00
+	frame_oam -16, -11, $52, $00
+	frame_oam -16,  -3, $54, $00
+	db $80
+
+.frame_4
+	frame_oam -32,   3, $44, $00
+	frame_oam -32, -13, $56, $00
+	frame_oam -32,  -5, $58, $00
+	frame_oam -16, -13, $5a, $00
+	frame_oam -16,  -5, $5c, $00
+	frame_oam -16,   3, $5e, $00
+	db $80
+
+.frame_5
+	frame_oam -32,   3, $44, $00
+	frame_oam -16, -13, $5a, $00
+	frame_oam -16,  -5, $5c, $00
+	frame_oam -16,   3, $5e, $00
+	frame_oam -32, -13, $60, $00
+	frame_oam -32,  -5, $62, $00
+	db $80
+
+.frame_6
+	frame_oam -16,  -5, $5c, $00
+	frame_oam -16,   3, $5e, $00
+	frame_oam -32, -13, $64, $00
+	frame_oam -32,  -5, $66, $00
+	frame_oam -32,   3, $68, $00
+	frame_oam -16, -13, $6a, $00
+	db $80
+
+.frame_7
+	frame_oam -16, -13, $6c, $00
+	frame_oam -16,  -5, $6e, $00
+	frame_oam -16,   3, $70, $00
+	db $80
+
+.frame_8
+	frame_oam -16, -12, $78, $00
+	frame_oam -16,  -4, $7a, $00
+	frame_oam -16,   4, $78, $20
+	db $80
+
+.frame_9
+	frame_oam -16, -12, $7c, $00
+	frame_oam -16,  -4, $7e, $00
+	frame_oam -16,   4, $7c, $20
+	db $80
+
+.frame_10
+	frame_oam -17,  -8, $74, $00
+	frame_oam -17,   0, $76, $00
+	frame_oam  -9, -13, $72, $00
+	frame_oam  -9,   5, $72, $20
+	db $80
+
+.frame_11
+	frame_oam  -8, -17, $72, $00
+	frame_oam  -8,  -9, $72, $20
+	frame_oam  -8,   0, $72, $00
+	frame_oam  -8,   8, $72, $20
+	db $80
+
+.frame_12
+	frame_oam  -9, -17, $72, $00
+	frame_oam  -9,  -9, $72, $20
+	frame_oam  -9,   0, $72, $00
+	frame_oam  -9,   8, $72, $20
+	db $80
+
+.frame_13
+	frame_oam -33,   5, $40, $20
+	frame_oam -33,  -3, $42, $20
+	frame_oam -33, -11, $44, $20
+	frame_oam -17, -12, $4a, $20
+	frame_oam -17,   4, $4c, $20
+	frame_oam -17,  -4, $4e, $20
+	db $80
+
+.frame_14
+	frame_oam -34,   5, $40, $20
+	frame_oam -34,  -3, $42, $20
+	frame_oam -34, -11, $44, $20
+	frame_oam -18,   4, $46, $20
+	frame_oam -18,  -4, $48, $20
+	frame_oam -18, -12, $4a, $20
+	db $80
+
+.frame_15
+	frame_oam -32,  -4, $42, $20
+	frame_oam -32, -12, $44, $20
+	frame_oam -16, -12, $4a, $20
+	frame_oam -32,   4, $50, $20
+	frame_oam -16,   4, $52, $20
+	frame_oam -16,  -4, $54, $20
+	db $80
+
+.frame_16
+	frame_oam -32,  -5, $42, $20
+	frame_oam -32, -13, $44, $20
+	frame_oam -16, -13, $4a, $20
+	frame_oam -32,   3, $50, $20
+	frame_oam -16,   3, $52, $20
+	frame_oam -16,  -5, $54, $20
+	db $80
+
+.frame_17
+	frame_oam -32, -11, $44, $20
+	frame_oam -32,   5, $56, $20
+	frame_oam -32,  -3, $58, $20
+	frame_oam -16,   5, $5a, $20
+	frame_oam -16,  -3, $5c, $20
+	frame_oam -16, -11, $5e, $20
+	db $80
+
+.frame_18
+	frame_oam -32, -11, $44, $20
+	frame_oam -16,   5, $5a, $20
+	frame_oam -16,  -3, $5c, $20
+	frame_oam -16, -11, $5e, $20
+	frame_oam -32,   5, $60, $20
+	frame_oam -32,  -3, $62, $20
+	db $80
+
+.frame_19
+	frame_oam -16,  -3, $5c, $20
+	frame_oam -16, -11, $5e, $20
+	frame_oam -32,   5, $64, $20
+	frame_oam -32,  -3, $66, $20
+	frame_oam -32, -11, $68, $20
+	frame_oam -16,   5, $6a, $20
+	db $80
+
+.frame_20
+	frame_oam -16,   5, $6c, $20
+	frame_oam -16,  -3, $6e, $20
+	frame_oam -16, -11, $70, $20
+	db $80
+
+.frame_21
+	frame_oam -16,   4, $78, $20
+	frame_oam -16,  -4, $7a, $20
+	frame_oam -16, -12, $78, $00
+	db $80
+
+.frame_22
+	frame_oam -16,   4, $7c, $20
+	frame_oam -16,  -4, $7e, $20
+	frame_oam -16, -12, $7c, $00
+	db $80
+
+.frame_23
+	frame_oam -17,   0, $74, $20
+	frame_oam -17,  -8, $76, $20
+	frame_oam  -9,   5, $72, $20
+	frame_oam  -9, -13, $72, $00
+	db $80
+
+.frame_24
+	frame_oam  -8,   9, $72, $20
+	frame_oam  -8,   1, $72, $00
+	frame_oam  -8,  -8, $72, $20
+	frame_oam  -8, -16, $72, $00
+	db $80
+
+.frame_25
+	frame_oam  -9,   9, $72, $20
+	frame_oam  -9,   1, $72, $00
+	frame_oam  -9,  -8, $72, $20
+	frame_oam  -9, -16, $72, $00
+	db $80
+
+.frame_26
+	frame_oam -33, -13, $40, $01
+	frame_oam -33,  -5, $42, $01
+	frame_oam -33,   3, $44, $01
+	frame_oam -17,   4, $4a, $01
+	frame_oam -17, -12, $4c, $01
+	frame_oam -17,  -4, $4e, $01
+	db $80
+
+.frame_27
+	frame_oam -33,   5, $40, $21
+	frame_oam -33,  -3, $42, $21
+	frame_oam -33, -11, $44, $21
+	frame_oam -17, -12, $4a, $21
+	frame_oam -17,   4, $4c, $21
+	frame_oam -17,  -4, $4e, $21
+	db $80
+; 0x1ffc8e
 
 Frameset_1ffc8e: ; 1ffc8e (7f:7c8e)
 	db $00,  3
@@ -1556,14 +4298,20 @@ Frameset_1ffccf: ; 1ffccf (7f:7ccf)
 	db $ff
 ; 0x1ffd10
 
-	INCROM $1ffd10, $1ffd13
+Frameset_1ffd10: ; 1ffd10 (7f:7d10)
+	db $1a,  2
+	db $ff
+; 0x1ffd13
 
 Frameset_1ffd13: ; 1ffd13 (7f:7d13)
 	db $00,  4
 	db $ff
 ; 0x1ffd16
 
-	INCROM $1ffd16, $1ffd19
+Frameset_1ffd16: ; 1ffd16 (7f:7d16)
+	db $1b,  2
+	db $ff
+; 0x1ffd19
 
 Frameset_1ffd19: ; 1ffd19 (7f:7d19)
 	db $0d,  4

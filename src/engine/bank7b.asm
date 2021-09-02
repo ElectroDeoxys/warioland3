@@ -59,7 +59,7 @@ Func_1ec000: ; 1ec000 (7b:4000)
 	dw UpdateState_MagicStopping     ; ST_MAGIC_STOPPING
 	dw $5a1e                         ; ST_UNKNOWN_E6
 	dw Func_156d                     ; ST_UNUSED_E7
-	dw $5aaa                         ; ST_UNKNOWN_E8
+	dw $5aaa                         ; ST_BALL_START
 	dw UpdateState_BallBouncing      ; ST_BALL_BOUNCING
 	dw UpdateState_BallAirborne      ; ST_BALL_AIRBORNE
 	dw UpdateState_BallShot          ; ST_BALL_SHOT
@@ -72,7 +72,55 @@ Func_1ec000: ; 1ec000 (7b:4000)
 	dw Func_156d                     ; ST_UNUSED_F2
 ; 0x1ec08c
 
-	INCROM $1ec08c, $1ec124
+SetState_IceSkatinStart: ; 1ec08c (7b:408c)
+	ld a, ST_ICE_SKATIN_START
+	ld [wWarioState], a
+
+	ld a, -1
+	ld [wca70], a
+	ld a, -27
+	ld [wca6f], a
+	ld a, -9
+	ld [wca71], a
+	ld a, 9
+	ld [wca72], a
+
+	xor a
+	ld [wInvisibleFrame], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
+	ld [wIsCrouching], a
+	ld [wIsRolling], a
+	ld [wIsSmashAttacking], a
+	ld [wJumpVelTable], a
+	ld [wJumpVelIndex], a
+
+	call UpdateLevelMusic
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wAnimationFrame], a
+
+	ld hl, Pals_c990
+	call SetWarioPal
+	load_gfx WarioBubbleGfx
+	call LoadWarioGfx
+	load_oam OAM_1fdb6d
+
+	ld a, [wEnemyDirection]
+	ld [wDirection], a
+	and a
+	jr nz, .asm_1ec10a
+	load_frameset Frameset_1fdd8b
+	jr .asm_1ec114
+.asm_1ec10a
+	load_frameset Frameset_1fdd82
+.asm_1ec114
+	update_anim_2
+	ret
+; 0x1ec124
 
 UpdateState_IceSkatinStart: ; 1ec124 (7b:4124)
 	update_anim_2
@@ -249,7 +297,7 @@ UpdateState_IceSkatinCrash: ; 1ec300 (7b:4300)
 	get_pos
 	ld b, $0c
 	farcall Func_c9f3
-	jp Func_1570
+	jp RecoverFromTransformation
 ; 0x1ec339
 
 	INCROM $1ec339, $1ec703
@@ -272,7 +320,7 @@ UpdateState_HangingRail: ; 1ec703 (7b:4703)
 
 	ld a, [wJoypadPressed]
 	bit B_BUTTON_F, a
-	jp nz, Func_1570.asm_157a
+	jp nz, RecoverFromTransformation_WithoutInvincibility
 	bit A_BUTTON_F, a
 	jp nz, Func_1ede4d
 	ld a, [wca9b]
@@ -281,7 +329,63 @@ UpdateState_HangingRail: ; 1ec703 (7b:4703)
 	ret
 ; 0x1ec749
 
-	INCROM $1ec749, $1ecbb2
+SetState_UnknownC4: ; 1ec749 (7b:4749)
+	load_sfx SFX_047
+
+	ld a, ST_UNKNOWN_C4
+	ld [wWarioState], a
+
+	ld a, $ff
+	ld [wca70], a
+	ld a, $e5
+	ld [wca6f], a
+	ld a, $f7
+	ld [wca71], a
+	ld a, $09
+	ld [wca72], a
+
+	xor a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
+	ld [wIsCrouching], a
+	ld [wIsRolling], a
+	ld [wIsSmashAttacking], a
+	ld [wJumpVelIndex], a
+
+	ld a, [wJumpVelTable]
+	and a
+	jr z, .asm_1ec78e
+	ld a, $18
+	ld [wJumpVelIndex], a
+
+.asm_1ec78e
+	call UpdateLevelMusic
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wAnimationFrame], a
+
+	ld hl, Pals_c9a0
+	call SetWarioPal
+	load_gfx WarioSnowmanGfx
+	call LoadWarioGfx
+	load_oam OAM_1feec7
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1ec7d1
+	load_frameset Frameset_1ff560
+	jr .asm_1ec7db
+.asm_1ec7d1
+	load_frameset Frameset_1ff5a3
+.asm_1ec7db
+	update_anim_2
+	ret
+; 0x1ec7eb
+
+	INCROM $1ec7eb, $1ecbb2
 
 SetState_UnknownCA: ; 1ecbb2 (7b:4bb2)
 	ld a, ST_UNKNOWN_CA
@@ -304,7 +408,60 @@ SetState_UnknownCA: ; 1ecbb2 (7b:4bb2)
 	ret
 ; 0x1ecbf1
 
-	INCROM $1ecbf1, $1ecf3a
+	INCROM $1ecbf1, $1ece9e
+
+SetState_SplitHit: ; 1ece9e (7b:4e9e)
+	ld a, ST_SPLIT_HIT
+	ld [wWarioState], a
+
+	ld a, $ff
+	ld [wca70], a
+	ld a, $e5
+	ld [wca6f], a
+	ld a, $f7
+	ld [wca71], a
+	ld a, $09
+	ld [wca72], a
+
+	xor a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
+	ld [wIsCrouching], a
+	ld [wIsRolling], a
+	ld [wIsSmashAttacking], a
+
+	ld a, $01
+	ld [wJumpVelTable], a
+	ld a, $0e
+	ld [wJumpVelIndex], a
+
+	call UpdateLevelMusic
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wAnimationFrame], a
+
+	ld hl, Pals_c9e0
+	call SetWarioPal
+	load_gfx WarioSnowballGfx
+	call LoadWarioGfx
+	load_oam OAM_1ffa12
+
+	ld a, [wEnemyDirection]
+	ld [wDirection], a
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1ecf20
+	load_frameset Frameset_1ffd16
+	jr .asm_1ecf2a
+.asm_1ecf20
+	load_frameset Frameset_1ffd10
+.asm_1ecf2a
+	update_anim_2
+	ret
+; 0x1ecf3a
 
 UpdateState_SplitHit: ; 1ecf3a (7b:4f3a)
 	update_anim_2
@@ -338,7 +495,7 @@ UpdateState_SplitKnockedBack: ; 1ecf86 (7b:4f86)
 	jp nz, Func_11f6
 	ld a, [wWaterInteraction]
 	and a
-	jp nz, Func_1570
+	jp nz, RecoverFromTransformation
 	call Func_1488
 	farcall Func_199e9
 	ld a, b
@@ -402,7 +559,7 @@ UpdateState_Splitting: ; 1ed018 (7b:5018)
 	jp nz, Func_11f6
 	ld a, [wWaterInteraction]
 	and a
-	jp nz, Func_1570
+	jp nz, RecoverFromTransformation
 	update_anim_2
 	ld a, [wAnimationHasFinished]
 	and a
@@ -418,7 +575,7 @@ UpdateState_Splitting: ; 1ed018 (7b:5018)
 	ld a, [wDirection]
 	xor $1 ; switch direction
 	ld [wDirection], a
-	jp Func_1570
+	jp RecoverFromTransformation
 ; 0x1ed0a6
 
 	INCROM $1ed0a6, $1ed331
@@ -449,15 +606,16 @@ SetState_BlindIdling: ; 1ed331 (7b:5331)
 	ld [wca71], a
 	ld a, 9
 	ld [wca72], a
-	xor a
+
+	xor a ; unnecessary
 	call UpdateLevelMusic
+
 	xor a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 
 	ld hl, Pals_c800
 	call SetWarioPal
-
 	load_gfx WarioIdleGfx
 	call LoadWarioGfx
 	load_oam OAM_14000
@@ -537,7 +695,7 @@ UpdateState_BlindWalking: ; 1ed469 (7b:5469)
 
 	ld a, b
 	and a
-	jp nz, Func_1570
+	jp nz, RecoverFromTransformation
 	call Func_1edfa4
 	ld a, [wWarioState]
 	cp ST_BLIND_WALKING
@@ -650,7 +808,7 @@ UpdateState_BlindAirborne: ; 1ed5e2 (7b:55e2)
 	jp nz, Func_11f6
 	ld a, [wWaterInteraction]
 	and a
-	jp nz, Func_1570
+	jp nz, RecoverFromTransformation
 	farcall Func_19734
 	ld a, [wWarioState]
 	cp ST_BLIND_AIRBORNE
@@ -658,7 +816,7 @@ UpdateState_BlindAirborne: ; 1ed5e2 (7b:55e2)
 
 	ld a, b
 	and a
-	jp nz, Func_1570
+	jp nz, RecoverFromTransformation
 	call Func_1ee00f
 	ld a, [wWarioState]
 	cp ST_BLIND_AIRBORNE
@@ -687,7 +845,209 @@ UpdateState_BlindAirborne: ; 1ed5e2 (7b:55e2)
 	jp SetState_BlindIdling
 ; 0x1ed660
 
-	INCROM $1ed660, $1ed972
+SetState_UnknownE0: ; 1ed660 (7b:5660)
+	ld a, ST_UNKNOWN_E0
+	ld [wWarioState], a
+
+	xor a
+	ld [wSFXLoopCounter], a
+	ld [wca86], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
+	ld [wIsCrouching], a
+	ld [wIsRolling], a
+	ld [wIsSmashAttacking], a
+	ld [wJumpVelTable], a
+	ld [wJumpVelIndex], a
+
+	inc a
+	ld [wca8a], a
+	ld [wca9b], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wAnimationFrame], a
+	ld [wIsTurningMidAir], a
+
+	ld hl, Pals_c800
+	call SetWarioPal
+	load_gfx WarioLaunchGfx
+	call LoadWarioGfx
+	load_oam OAM_1dc3cd
+
+	ld a, [wEnemyDirection]
+	ld [wDirection], a
+	and a
+	jr nz, .asm_1ed6d4
+	load_frameset Frameset_1dc40f
+	jr .asm_1ed6de
+.asm_1ed6d4
+	load_frameset Frameset_1dc42c
+.asm_1ed6de
+	ld a, $77
+	ldh [hCallFuncBank], a
+	ld a, $53
+	ldh [hCallFuncPointer], a
+	ld a, $0e
+	ldh [$ff8e], a
+	call hCallFunc
+	ret
+; 0x1ed6ee
+
+	INCROM $1ed6ee, $1ed738
+
+SetState_UnknownE1: ; 1ed738 (7b:5738)
+	xor a
+	ld [wca8a], a
+
+	ld a, (1 << 6) | TRANSFORMATION_UNK_14
+	ld [wTransformation], a
+
+	ld a, $04
+	ld [wca93], a
+	ld a, $04
+	ld [wca92], a
+	ld a, $02
+	ld [wca94], a
+
+	ld a, ST_UNKNOWN_E1
+	ld [wWarioState], a
+
+	xor a
+	ld [wSFXLoopCounter], a
+	ld [wca86], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
+	ld [wIsCrouching], a
+	ld [wIsRolling], a
+	ld [wIsSmashAttacking], a
+	ld [wJumpVelTable], a
+	ld [wJumpVelIndex], a
+
+	ld a, -1
+	ld [wca70], a
+	ld a, -15
+	ld [wca6f], a
+	ld a, -9
+	ld [wca71], a
+	ld a, 9
+	ld [wca72], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wAnimationFrame], a
+
+	ld hl, Pals_c800
+	call SetWarioPal
+	load_gfx WarioLaunchGfx
+	call LoadWarioGfx
+	load_oam OAM_1dc449
+
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1ed7cb
+	load_frameset Frameset_1dc904
+	jr .asm_1ed7d5
+.asm_1ed7cb
+	load_frameset Frameset_1dc8fb
+.asm_1ed7d5
+	ld a, $77
+	ldh [hCallFuncBank], a
+	ld a, $53
+	ldh [hCallFuncPointer], a
+	ld a, $0e
+	ldh [$ff8e], a
+	call hCallFunc
+	ret
+; 0x1ed7e5
+
+	INCROM $1ed7e5, $1ed8aa
+
+SetState_MagicRising: ; 1ed8aa (7b:58aa)
+	ld hl, wPos
+	ld de, hPos
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ld b, $10
+	farcall Func_c9f3
+
+	ld hl, wPos
+	ld de, hPos
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ld b, $11
+	farcall Func_c9f3
+
+	ld a, ST_MAGIC_RISING
+	ld [wWarioState], a
+
+	ld a, -1
+	ld [wca70], a
+	ld a, -27
+	ld [wca6f], a
+	ld a, -9
+	ld [wca71], a
+	ld a, 9
+	ld [wca72], a
+
+	xor a
+	ld [wSFXLoopCounter], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
+	ld [wIsCrouching], a
+	ld [wIsRolling], a
+	ld [wIsSmashAttacking], a
+	ld [wJumpVelIndex], a
+
+	inc a
+	ld [wJumpVelTable], a
+
+	call UpdateLevelMusic
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wAnimationFrame], a
+
+	ld hl, Pals_c9b0
+	call SetWarioPal
+	load_gfx WarioMagicGfx
+	call LoadWarioGfx
+	load_oam OAM_1dcd60
+
+	load_frameset Frameset_1dcfb0
+	ld a, $77
+	ldh [hCallFuncBank], a
+	ld a, $53
+	ldh [hCallFuncPointer], a
+	ld a, $0e
+	ldh [$ff8e], a
+	call hCallFunc
+	ret
+; 0x1ed972
 
 UpdateState_MagicRising: ; 1ed972 (7b:5972)
 	farcall Func_19b25
@@ -747,10 +1107,93 @@ UpdateState_MagicStopping: ; 1eda16 (7b:5a16)
 	ld a, [hl]
 	cp $20
 	ret c
-	jp Func_1570
+	jp RecoverFromTransformation
 ; 0x1eda21
 
-	INCROM $1eda21, $1edaf8
+SetState_BallStart: ; 1eda21 (7b:5a21)
+	call UpdateLevelMusic
+
+	ld a, -1
+	ld [wca70], a
+	ld a, -20
+	ld [wca6f], a
+	ld a, -9
+	ld [wca71], a
+	ld a, 9
+	ld [wca72], a
+
+	xor a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
+	ld [wIsCrouching], a
+	ld [wIsRolling], a
+	ld [wIsSmashAttacking], a
+
+	ld hl, Pals_c9c0
+	call SetWarioPal
+	load_gfx WarioBallGfx
+	call LoadWarioGfx
+	load_oam OAM_1dcff1
+
+	ld a, [wJumpVelTable]
+	and a
+	jr z, .asm_1edaca
+
+	ld a, ST_BALL_START
+	ld [wWarioState], a
+
+	xor a
+	ld [wSFXLoopCounter], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+
+	ld a, $18
+	ld [wJumpVelIndex], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wAnimationFrame], a
+
+	load_frameset Frameset_1dd313
+	ld a, $77
+	ldh [hCallFuncBank], a
+	ld a, $53
+	ldh [hCallFuncPointer], a
+	ld a, $0e
+	ldh [$ff8e], a
+	call hCallFunc
+	ret
+
+	call Func_1488
+	farcall Func_199e9
+	ld a, b
+	and a
+	ret z
+
+	ld hl, hPos
+	ld de, wPos
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+
+.asm_1edaca
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1edae4
+	ld a, [wJoypadDown]
+	bit D_RIGHT_F, a
+	jp nz, SetState_BallTurning
+	load_frameset Frameset_1dd316
+	jr Func_1edd24
+.asm_1edae4
+	ld a, [wJoypadDown]
+	bit D_LEFT_F, a
+	jp nz, SetState_BallTurning
+	load_frameset Frameset_1dd323
+	jr Func_1edd24
+; 0x1edaf8
 
 Func_1edaf8: ; 1edaf8 (7b:5af8)
 	ld a, [wDirection]
@@ -760,14 +1203,15 @@ Func_1edaf8: ; 1edaf8 (7b:5af8)
 	bit D_RIGHT_F, a
 	jp nz, SetState_BallTurning
 	load_frameset Frameset_1dd230
-	jr .asm_1edb24
+	jr Func_1edd24
 .asm_1edb12
 	ld a, [wJoypadDown]
 	bit D_LEFT_F, a
 	jp nz, SetState_BallTurning
 	load_frameset Frameset_1dd295
+;	fallthrough
 
-.asm_1edb24
+Func_1edd24: ; 1edd24 (7b:5d24)
 	xor a
 	ld [wJumpVelTable], a
 	ld [wJumpVelIndex], a
@@ -827,7 +1271,35 @@ UpdateState_BallAirborne: ; 1edba0 (7b:5ba0)
 	jp Func_1edaf8
 ; 0x1edbd8
 
-	INCROM $1edbd8, $1edc15
+SetState_BallShot: ; 1edbd8 (7b:5bd8)
+	ld a, ST_BALL_SHOT
+	ld [wWarioState], a
+
+	xor a
+	ld [wSFXLoopCounter], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wJumpVelTable], a
+	ld [wJumpVelIndex], a
+
+	inc a
+	ld [wca9b], a
+	ld [wca8a], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wAnimationFrame], a
+
+	load_frameset Frameset_1dd26c
+	ld a, $77
+	ldh [hCallFuncBank], a
+	ld a, $53
+	ldh [hCallFuncPointer], a
+	ld a, $0e
+	ldh [$ff8e], a
+	call hCallFunc
+	ret
+; 0x1edc15
 
 UpdateState_BallShot: ; 1edc15 (7b:5c15)
 	ld a, [wca9b]
@@ -1040,7 +1512,7 @@ UpdateState_BallTurning: ; 1ede36 (7b:5e36)
 ; 0x1ede4d
 
 Func_1ede4d: ; 1ede4d (7b:5e4d)
-	call Func_1079
+	call ClearTransformationValues
 	call UpdateLevelMusic
 	ld hl, Pals_c800
 	call SetWarioPal
@@ -1049,7 +1521,7 @@ Func_1ede4d: ; 1ede4d (7b:5e4d)
 ; 0x1ede69
 
 Func_1ede69: ; 1ede69 (7b:5e69)
-	call Func_1079
+	call ClearTransformationValues
 	call UpdateLevelMusic
 	ld hl, Pals_c800
 	call SetWarioPal

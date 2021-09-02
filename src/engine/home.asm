@@ -2412,15 +2412,15 @@ PlayNewMusic_SetNoise: ; 1062 (0:1062)
 	ret
 ; 0x1070
 
-Func_1070: ; 1070 (0:1070)
-	load_sfx SFX_012
+PlayRecoverySFX: ; 1070 (0:1070)
+	load_sfx SFX_RECOVERY
 	ret
 ; 0x1079
 
-Func_1079: ; 1079 (0:1079)
+ClearTransformationValues: ; 1079 (0:1079)
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_UNK_13
-	call z, Func_10a7
+	cp (1 << 6) | TRANSFORMATION_BLIND
+	call z, .RestoreBlindPalettes
 
 	xor a
 	ld [wInvincibleCounter], a
@@ -2436,9 +2436,10 @@ Func_1079: ; 1079 (0:1079)
 	ld [wInvisibleFrame], a
 	ld [wca9c], a
 	ret
-; 0x10a7
 
-Func_10a7: ; 10a7 (0:10a7)
+; restores the palettes after
+; recovering from Blind transformation
+.RestoreBlindPalettes
 	ld hl, wTempPals1
 	ld a, 1 << rBGPI_AUTO_INCREMENT
 	ldh [rBGPI], a
@@ -2999,25 +3000,29 @@ Func_156d: ; 156d (0:156d)
 	jp Init
 ; 0x1570
 
-Func_1570: ; 1570 (0:1570)
-	call Func_1079
+RecoverFromTransformation: ; 1570 (0:1570)
+	call ClearTransformationValues
 	ld a, $10
 	ld [wInvincibleCounter], a
-	jr .asm_157d
-.asm_157a
-	call Func_1079
-.asm_157d
+	jr ResetLevelMusicWarioPalsAndState
+; 0x157a
+
+RecoverFromTransformation_WithoutInvincibility: ; 157a (0:157a)
+	call ClearTransformationValues
+;	fallthrough
+
+ResetLevelMusicWarioPalsAndState: ; 157d (0:157d)
 	call UpdateLevelMusic
 	ld hl, Pals_c800
 	call SetWarioPal
 	ld a, [wJumpVelTable]
 	and a
-	jr nz, .asm_159e
+	jr nz, .fall
 	farcall SetState_Idling
-	jp Func_1070
-.asm_159e
+	jp PlayRecoverySFX
+.fall
 	farcall StartFall
-	jp Func_1070
+	jp PlayRecoverySFX
 ; 0x15b0
 
 LoadWarioGfx: ; 15b0 (0:15b0)

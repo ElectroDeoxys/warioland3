@@ -413,7 +413,7 @@ UpdateState_Burnt: ; 2841e (a:441e)
 	ld a, [wAnimationHasFinished]
 	and a
 	ret z
-	jp Func_1570
+	jp RecoverFromTransformation
 ; 0x28435
 
 SetState_FlatAirborne: ; 28435 (a:4435)
@@ -866,7 +866,7 @@ UpdateState_FlatStretching: ; 288e5 (a:48e5)
 	ret z
 	xor a
 	ld [wca9b], a
-	jp Func_1570
+	jp RecoverFromTransformation
 ; 0x28900
 
 SetState_FlatSinking: ; 28900 (a:4900)
@@ -1184,7 +1184,7 @@ UpdateState_BallOStringAirborne: ; 28c25 (a:4c25)
 	jp nz, Func_11f6
 	ld a, [wWaterInteraction]
 	and a
-	jp nz, Func_1570
+	jp nz, RecoverFromTransformation
 	update_anim_1
 
 	farcall Func_19734
@@ -1246,7 +1246,7 @@ UpdateState_BallOStringKnockBack: ; 28ceb (a:4ceb)
 	jp nz, Func_11f6
 	ld a, [wWaterInteraction]
 	and a
-	jp nz, Func_1570
+	jp nz, RecoverFromTransformation
 	update_anim_1
 	call Func_2b1cc
 	ld a, [wJumpVelIndex]
@@ -1335,7 +1335,7 @@ UpdateState_BallOStringDizzy: ; 28e1a (a:4e1a)
 	ld a, [wAnimationHasFinished]
 	and a
 	ret z
-	jp Func_1570
+	jp RecoverFromTransformation
 ; 0x28e31
 
 SetState_FatBumping: ; 28e31 (a:4e31)
@@ -1844,7 +1844,7 @@ UpdateState_FatRecovering: ; 293b9 (a:53b9)
 	ld a, [wAnimationHasFinished]
 	and a
 	ret z
-	jp Func_1570
+	jp RecoverFromTransformation
 ; 0x293d0
 
 UpdateState_ElectricStart: ; 293d0 (a:53d0)
@@ -1854,7 +1854,7 @@ UpdateState_ElectricStart: ; 293d0 (a:53d0)
 	jp nz, Func_11f6
 	ld a, [wWaterInteraction]
 	and a
-	jp nz, Func_1570
+	jp nz, RecoverFromTransformation
 	update_anim_1
 
 	ld a, [wAnimationHasFinished]
@@ -1948,7 +1948,7 @@ UpdateState_Electric: ; 294bf (a:54bf)
 	jp nz, Func_11f6
 	ld a, [wWaterInteraction]
 	and a
-	jp nz, Func_1570
+	jp nz, RecoverFromTransformation
 	update_anim_1
 
 	farcall Func_19734
@@ -2142,7 +2142,7 @@ UpdateState_ElectricDizzy: ; 29672 (a:5672)
 	ld a, [wAnimationHasFinished]
 	and a
 	ret z
-	jp Func_1570
+	jp RecoverFromTransformation
 ; 0x29689
 
 SetState_TurningInvisible: ; 29689 (a:5689)
@@ -2479,7 +2479,7 @@ UpdateState_PuffyDeflating: ; 29975 (a:5975)
 	ld a, [wAnimationHasFinished]
 	and a
 	ret z
-	jp Func_1570
+	jp RecoverFromTransformation
 ; 0x299d0
 
 SetState_ZombieIdling: ; 299d0 (a:59d0)
@@ -2692,7 +2692,7 @@ UpdateState_ZombieAirborne: ; 29c29 (a:5c29)
 	jp nz, Func_11f6
 	ld a, [wWaterInteraction]
 	and a
-	jp nz, Func_1570
+	jp nz, RecoverFromTransformation
 	ld a, [wWarioState]
 	cp ST_ZOMBIE_AIRBORNE
 	ret nz ; done if not zombie airborne anymore
@@ -2844,7 +2844,7 @@ UpdateState_ZombieSlippingThroughFloor: ; 29dd3 (a:5dd3)
 	jp nz, Func_11f6
 	ld a, [wWaterInteraction]
 	and a
-	jp nz, Func_1570
+	jp nz, RecoverFromTransformation
 	ld a, [wWarioState]
 	cp ST_ZOMBIE_SLIPPING_THROUGH_FLOOR
 	ret nz ; done if not slipping through floor anymore
@@ -2921,7 +2921,7 @@ UpdateState_ZombieRecovering: ; 29e7e (a:5e7e)
 	ret
 
 .asm_29ea5
-	jp Func_1570
+	jp RecoverFromTransformation
 ; 0x29ea8
 
 SetState_ZombieKnockBack: ; 29ea8 (a:5ea8)
@@ -3048,7 +3048,7 @@ UpdateState_BouncyStart: ; 29ffa (a:5ffa)
 	jp nz, Func_11f6
 	ld a, [wWaterInteraction]
 	and a
-	jp nz, Func_1570
+	jp nz, RecoverFromTransformation
 	call Func_1488
 	call Func_2b1a6
 	ld a, [wca86]
@@ -3156,7 +3156,7 @@ UpdateState_BouncyAirborne: ; 2a0f9 (a:60f9)
 	jp nz, Func_11f6
 	ld a, [wWaterInteraction]
 	and a
-	jp nz, Func_1570
+	jp nz, RecoverFromTransformation
 	ld a, [wAnimationHasFinished]
 	and a
 	jr nz, .asm_2a15a
@@ -3290,7 +3290,7 @@ UpdateState_BouncyUpsideDown: ; 2a267 (a:6267)
 	jp nz, Func_11f6
 	ld a, [wWaterInteraction]
 	and a
-	jp nz, Func_1570
+	jp nz, RecoverFromTransformation
 	call Func_1488
 	farcall Func_199e9
 	ld a, b
@@ -3379,7 +3379,7 @@ UpdateState_BouncyLastBounce: ; 2a362 (a:6362)
 	jp nz, Func_11f6
 	ld a, [wWaterInteraction]
 	and a
-	jp nz, Func_1570
+	jp nz, RecoverFromTransformation
 	ld a, [wAnimationHasFinished]
 	and a
 	jr nz, .asm_2a394
@@ -3421,7 +3421,7 @@ UpdateState_BouncyLastBounce: ; 2a362 (a:6362)
 	ld a, [wWarioState]
 	cp ST_BOUNCY_LAST_BOUNCE
 	ret nz ; done if not in last bouncy any more
-	jp Func_1570
+	jp RecoverFromTransformation
 ; 0x2a3ed
 
 SetState_CrazySpinning: ; 2a3ed (a:63ed)
@@ -3483,7 +3483,7 @@ UpdateState_CrazySpinning: ; 2a489 (a:6489)
 	jp nz, Func_11f6
 	ld a, [wWaterInteraction]
 	and a
-	jp nz, Func_1570
+	jp nz, RecoverFromTransformation
 
 	ld a, [wJumpVelTable]
 	and a
@@ -3670,7 +3670,7 @@ UpdateState_CrazyAirborne: ; 2a6c0 (a:66c0)
 	jp nz, Func_11f6
 	ld a, [wWaterInteraction]
 	and a
-	jp nz, Func_1570
+	jp nz, RecoverFromTransformation
 	update_anim_2
 
 	call Func_1488
@@ -3861,7 +3861,7 @@ UpdateState_VampireAirborne: ; 2a8d2 (a:68d2)
 	jp nz, Func_11f6
 	ld a, [wWaterInteraction]
 	and a
-	jp nz, Func_1570
+	jp nz, RecoverFromTransformation
 	ld a, [wWarioState]
 	cp ST_VAMPIRE_AIRBORNE
 	ret nz ; done if not vampire airborne any more
@@ -3996,13 +3996,14 @@ UpdateState_BatIdling: ; 2aa08 (a:6a08)
 
 	ld a, b
 	and a
-	jr z, .asm_2aa81
+	jr z, SetState_VampireTransforming
 	ld a, -15
 	ld [wca6f], a
 	load_sfx SFX_0E5
 	ret
+; 0x2aa81
 
-.asm_2aa81
+SetState_VampireTransforming: ; 2aa81 (a:6a81)
 	load_sfx SFX_045
 
 	ld a, ST_VAMPIRE_TRANSFORMING
@@ -4078,7 +4079,7 @@ UpdateState_BatFlying: ; 2ab42 (a:6b42)
 	jp nz, Func_11f6
 	ld a, [wWaterInteraction]
 	and a
-	jp nz, Func_1570
+	jp nz, RecoverFromTransformation
 	ld a, [wWarioState]
 	cp ST_BAT_FLYING
 	ret nz ; done if not bat flying any more
@@ -4152,7 +4153,7 @@ UpdateState_BatFalling: ; 2ac04 (a:6c04)
 	jp nz, Func_11f6
 	ld a, [wWaterInteraction]
 	and a
-	jp nz, Func_1570
+	jp nz, RecoverFromTransformation
 	ld a, [wWarioState]
 	cp ST_BAT_FALLING
 	ret nz ; done if not bat falling any more
@@ -4185,7 +4186,49 @@ UpdateState_BatFalling: ; 2ac04 (a:6c04)
 	jp SetState_BatIdling
 ; 0x2ac7d
 
-	INCROM $2ac7d, $2ad06
+Func_2ac7d: ; 2ac7d (a:6c7d)
+	ld a, ST_IN_BUBBLE
+	ld [wWarioState], a
+
+	ld a, -1
+	ld [wca70], a
+	ld a, -27
+	ld [wca6f], a
+	ld a, -9
+	ld [wca71], a
+	ld a, 9
+	ld [wca72], a
+
+	xor a
+	ld [wSFXLoopCounter], a
+	ld [wWarioStateCycles], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
+	ld [wIsCrouching], a
+	ld [wIsRolling], a
+	ld [wIsSmashAttacking], a
+	ld [wJumpVelTable], a
+	ld [wJumpVelIndex], a
+
+	call UpdateLevelMusic
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wAnimationFrame], a
+
+	ld hl, Pals_c980
+	call SetWarioPal
+	load_gfx WarioBubbleGfx
+	call LoadWarioGfx
+	load_oam OAM_1fd87c
+
+	ld a, [wEnemyDirection]
+	ld [wDirection], a
+	ld [wWarioStateCounter], a
+	load_frameset Frameset_1fdb2c
+	update_anim_2
+	ret
+; 0x2ad06
 
 UpdateState_InBubble: ; 2ad06 (a:6d06)
 	farcall Func_19b25
@@ -4209,11 +4252,11 @@ UpdateState_InBubble: ; 2ad06 (a:6d06)
 	get_pos
 	ld b, $0b
 	farcall Func_c9f3
-	jp Func_1570
+	jp RecoverFromTransformation
 ; 0x2ad6a
 
 Func_2ad6a: ; 2ad6a (a:6d6a)
-	call Func_1079
+	call ClearTransformationValues
 	ld a, $10
 	ld [wInvincibleCounter], a
 	call UpdateLevelMusic
@@ -4239,11 +4282,11 @@ Func_2ad6a: ; 2ad6a (a:6d6a)
 	load_frameset Frameset_155ab
 .asm_2add2
 	update_anim_1
-	jp Func_1070
+	jp PlayRecoverySFX
 ; 0x2ade4
 
 Func_2ade4: ; 2ade4 (a:6de4)
-	call Func_1079
+	call ClearTransformationValues
 	ld a, $10
 	ld [wInvincibleCounter], a
 	call UpdateLevelMusic
@@ -5095,7 +5138,7 @@ Func_2b56f: ; 2b56f (a:756f)
 	get_pos
 	ld b, $0b
 	farcall Func_c9f3
-	jp Func_1570
+	jp RecoverFromTransformation
 
 .asm_2b5b2
 	ld a, [wJoypadDown]

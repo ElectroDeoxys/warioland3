@@ -51,7 +51,7 @@
 	const ST_CROUCH_SLIPPING               ; 31
 	const ST_DRAGGED_DOWN                  ; 32
 	const ST_TELEPORTING                   ; 33
-	const ST_UNKNOWN_34                    ; 34
+	const ST_TELEPORTING_WATER             ; 34
 	const ST_SAND_FALLING                  ; 35
 	const ST_SAND_JUMPING                  ; 36
 	const ST_SAND_IDLING                   ; 37
@@ -231,7 +231,7 @@
 	const ST_MAGIC_STOPPING                ; e5
 	const ST_UNKNOWN_E6                    ; e6
 	const ST_UNUSED_E7                     ; e7
-	const ST_UNKNOWN_E8                    ; e8
+	const ST_BALL_START                    ; e8
 	const ST_BALL_BOUNCING                 ; e9
 	const ST_BALL_AIRBORNE                 ; ea
 	const ST_BALL_SHOT                     ; eb

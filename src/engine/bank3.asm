@@ -1,4 +1,7 @@
-	INCROM $c9e0, $c9f3
+; unreferenced?
+Func_c9f0: ; c9f0 (3:49f0)
+	call Func_ce3e
+;	fallthrough
 
 Func_c9f3: ; c9f3 (3:49f3)
 	ld a, [wcce1]
@@ -100,7 +103,44 @@ Func_ca54: ; ca54 (3:4a54)
 	dw $4a86
 ; 0xca86
 
-	INCROM $ca86, $d11a
+	INCROM $ca86, $ce3e
+
+Func_ce3e: ; ce3e (3:4e3e)
+	ld a, h
+	sub $a0
+	ld h, a
+	and $f0
+	swap a
+	ld d, a
+	ld a, [wFloorNum]
+	dec a
+	add a
+	add d
+	ldh [hYPosHi], a
+	ld a, h
+	and $0f
+	swap a
+	add $10
+	ldh [hYPosLo], a
+	ldh a, [hYPosHi]
+	adc $00
+	ldh [hYPosHi], a
+	ld a, l
+	and $f0
+	swap a
+	ldh [hXPosHi], a
+	ld a, l
+	and $0f
+	swap a
+	add $08
+	ldh [hXPosLo], a
+	ldh a, [hXPosHi]
+	adc $00
+	ldh [hXPosHi], a
+	ret
+; 0xce75
+
+	INCROM $ce75, $d11a
 
 Func_d11a: ; d11a (3:511a)
 	ld a, [wLevelEndScreen]

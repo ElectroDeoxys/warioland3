@@ -74,12 +74,12 @@
 	const SFX_ROLL                         ; 10a
 	const SFX_ZIP_LINE_SLIDE               ; 10b
 	const SFX_00C                          ; 10c
-	const SFX_SLIDE                          ; 10d
+	const SFX_SLIDE                        ; 10d
 	const SFX_00E                          ; 10e
 	const SFX_00F                          ; 10f
 	const SFX_LAND                         ; 110
 	const SFX_011                          ; 111
-	const SFX_012                          ; 112
+	const SFX_RECOVERY                     ; 112
 	const SFX_STING                        ; 113
 	const SFX_014                          ; 114
 	const SFX_GRAB                         ; 115
@@ -94,7 +94,7 @@
 	const SFX_01E                          ; 11e
 	const SFX_01F                          ; 11f
 	const SFX_020                          ; 120
-	const SFX_021                          ; 121
+	const SFX_HANG_GRAB                    ; 121
 	const SFX_022                          ; 122
 	const SFX_023                          ; 123
 	const SFX_024                          ; 124
@@ -112,7 +112,7 @@
 	const SFX_030                          ; 130
 	const SFX_MUSICAL_COIN                 ; 131
 	const SFX_KEY                          ; 132
-	const SFX_GROUND_POUND                          ; 133
+	const SFX_GROUND_POUND                 ; 133
 	const SFX_034                          ; 134
 	const SFX_035                          ; 135
 	const SFX_036                          ; 136
@@ -136,7 +136,7 @@
 	const SFX_048                          ; 148
 	const SFX_049                          ; 149
 	const SFX_CROUCH_WALK                  ; 14a
-	const SFX_04B                          ; 14b
+	const SFX_COLOUR_COIN                          ; 14b
 	const SFX_04C                          ; 14c
 	const SFX_04D                          ; 14d (unused)
 	const SFX_04E                          ; 14e (unused)

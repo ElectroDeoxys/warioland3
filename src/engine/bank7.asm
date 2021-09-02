@@ -2330,7 +2330,7 @@ UpdateState_PipeGoingDown: ; 1d7c1 (7:57c1)
 	jp SetState_Idling
 
 .asm_1d7f9
-	call Func_1079
+	call ClearTransformationValues
 	ld hl, wc0d7
 	res 7, [hl]
 	jp Func_11f6
@@ -2364,7 +2364,7 @@ UpdateState_PipeGoingUp: ; 1d80d (7:580d)
 	jp SetState_Idling
 
 .asm_1d848
-	call Func_1079
+	call ClearTransformationValues
 	ld hl, wc0d7
 	res 7, [hl]
 	jp Func_11f6
@@ -3217,7 +3217,7 @@ Func_1e174: ; 1e174 (7:6174)
 	ld [wJumpVelIndex], a
 ;	fallthrough
 
-SetState_Unknown29: ; 1e179 (7:6179)
+SetState_RollingAirborne: ; 1e179 (7:6179)
 	xor a
 	ld [wIsStandingOnSlope], a
 	ld [wGrabState], a
@@ -3248,7 +3248,7 @@ SetState_Unknown29: ; 1e179 (7:6179)
 Func_1e1e3: ; 1e1e3 (7:61e3)
 	xor a
 	ld [wJumpVelIndex], a
-	jr SetState_Unknown29
+	jr SetState_RollingAirborne
 ; 0x1e1e9
 
 UpdateState_RollingAirborne: ; 1e1e9 (7:61e9)
