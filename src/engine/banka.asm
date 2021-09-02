@@ -119,16 +119,16 @@ UpdateState_OnFire: ; 280a6 (a:40a6)
 .asm_28100
 	update_anim_1
 
-	call Func_2ae2f
-	ld hl, wca90
+	call DecrementTransformationDuration
+	ld hl, wTransformationDuration
 	ld a, [hli]
-	cp $01
-	jr nz, .asm_28121
+	cp HIGH(HOT_WARIO_TRANSITION_DURATION)
+	jr nz, .continue
 	ld a, [hl]
-	cp $2c
-	jr nz, .asm_28121
+	cp LOW(HOT_WARIO_TRANSITION_DURATION)
+	jr nz, .continue
 	jr SetState_Hot
-.asm_28121
+.continue
 	call Func_2ae8a
 
 	ld a, [wWarioState]
@@ -143,11 +143,11 @@ UpdateState_OnFire: ; 280a6 (a:40a6)
 	ret
 ; 0x2814a
 
-Func_2814a: ; 2814a (a:414a)
-	ld a, $01
-	ld [wca90], a
-	ld a, $2c
-	ld [wca91], a
+SetState_Hot_ResetDuration: ; 2814a (a:414a)
+	ld a, HIGH(HOT_WARIO_TRANSITION_DURATION)
+	ld [wTransformationDuration + 0], a
+	ld a, LOW(HOT_WARIO_TRANSITION_DURATION)
+	ld [wTransformationDuration + 1], a
 ;	fallthrough
 
 SetState_Hot: ; 28154 (a:4154)
@@ -167,7 +167,7 @@ SetState_Hot: ; 28154 (a:4154)
 	ld [wca94], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wJoypadDown]
 	and D_RIGHT | D_LEFT
@@ -274,8 +274,8 @@ UpdateState_Hot: ; 2827a (a:427a)
 .skip_sfx
 	update_anim_1
 
-	call Func_2ae2f
-	ld hl, wca90
+	call DecrementTransformationDuration
+	ld hl, wTransformationDuration
 	ld a, [hli]
 	cp $00
 	jr nz, .asm_282ea
@@ -321,7 +321,7 @@ UpdateState_Hot: ; 2827a (a:427a)
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld hl, Pals_c820
@@ -466,18 +466,21 @@ SetState_FlatAirborne: ; 28435 (a:4435)
 	ld [wca92], a
 	ld a, $02
 	ld [wca94], a
+
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCycles], a
 	ld [wGrabState], a
 	ld [wAttackCounter], a
 	ld [wJumpVelIndex], a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
+
 	inc a
 	ld [wca9b], a
+
 	ld [wJumpVelTable], a
 	ld a, ST_GETTING_FLAT_AIRBORNE
 	ld [wWarioState], a
@@ -522,7 +525,7 @@ UpdateState_GettingFlatAirborne: ; 28511 (a:4511)
 	xor a
 	ld [wca86], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCycles], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
@@ -563,7 +566,7 @@ SetState_FlatIdling: ; 285b8 (a:45b8)
 	xor a
 	ld [wca86], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wJumpVelTable], a
@@ -601,7 +604,7 @@ SetState_FlatWalking: ; 28628 (a:4628)
 	ld [wSFXLoopCounter], a
 	ld [wca86], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wJumpVelTable], a
@@ -657,7 +660,7 @@ SetState_FlatJumping: ; 286d1 (a:46d1)
 	xor a
 	ld [wca86], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wJumpVelIndex], a
@@ -703,7 +706,7 @@ SetState_FlatFalling: ; 28757 (a:4757)
 	xor a
 	ld [wca86], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wIsStandingOnSlope], a
@@ -744,7 +747,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	load_frameset Frameset_17190
 	update_anim_1
@@ -809,7 +812,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 .asm_2886d
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wAnimationHasFinished], a
 
 	ld a, [wDirection]
@@ -888,7 +891,7 @@ SetState_FlatSinking: ; 28900 (a:4900)
 	ld [wca72], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	load_frameset Frameset_1719a
 	update_anim_1
@@ -982,7 +985,7 @@ Func_289c5: ; 289c5 (a:49c5)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	load_frameset Frameset_171a3
 	update_anim_1
@@ -1019,7 +1022,7 @@ SetState_FlatSquishedLifting: ; 28a5b (a:4a5b)
 	ld [wWarioStateCounter], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_1716c
 	update_anim_1
 	ret
@@ -1073,7 +1076,7 @@ SetState_BallOString: ; 28ad5 (a:4ad5)
 	ld [wca72], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -1230,7 +1233,7 @@ SetState_BallOStringKnockBack: ; 28c94 (a:4c94)
 	ld [wWarioStateCycles], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_1742a
 	update_anim_1
 	ret
@@ -1284,7 +1287,7 @@ UpdateState_BallOStringKnockBack: ; 28ceb (a:4ceb)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_17409
 	update_anim_1
 	ret
@@ -1318,7 +1321,7 @@ UpdateState_GettingUnwrappedInString: ; 28d92 (a:4d92)
 	ld [wca8a], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_gfx WarioDizzyGfx
 	call LoadWarioGfx
 	load_oam OAM_17bbc
@@ -1343,7 +1346,7 @@ SetState_FatBumping: ; 28e31 (a:4e31)
 	ld [wJumpVelTable], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_28e64
@@ -1414,7 +1417,7 @@ SetState_FatIdling: ; 28eeb (a:4eeb)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -1465,7 +1468,7 @@ SetState_FatWalking: ; 28f7d (a:4f7d)
 	ld [wJumpVelIndex], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -1495,10 +1498,10 @@ UpdateState_FatWalking: ; 28fc0 (a:4fc0)
 .skip_sfx
 	update_anim_1
 
-	call Func_2ae2f
-	ld hl, wca90
+	call DecrementTransformationDuration
+	ld hl, wTransformationDuration
 	ld a, [hli]
-	cp $02
+	cp HIGH(FAT_WARIO_DURATION) + 1 ; in case it underflowed
 	jp nc, SetState_FatRecovering
 	or [hl]
 	jp z, SetState_FatRecovering
@@ -1520,7 +1523,7 @@ SetState_FatTurning: ; 29035 (a:5035)
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29061
@@ -1588,7 +1591,7 @@ SetState_FatAirborne: ; 29104 (a:5104)
 	xor a
 	ld [wWarioStateCycles], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	update_anim_1
 	ld a, ST_FAT_AIRBORNE
 	ld [wWarioState], a
@@ -1603,8 +1606,8 @@ UpdateState_FatAirborne: ; 29123 (a:5123)
 	ld a, [wWaterInteraction]
 	and a
 	jp nz, Func_2926a
-	call Func_2ae2f
-	ld hl, wca90
+	call DecrementTransformationDuration
+	ld hl, wTransformationDuration
 	ld a, [hli]
 	or [hl]
 	jr nz, .asm_2914b
@@ -1619,7 +1622,7 @@ UpdateState_FatAirborne: ; 29123 (a:5123)
 	jr z, .asm_2919d
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, $01
 	ld [wWarioStateCounter], a
 	ld a, [wDirection]
@@ -1681,7 +1684,7 @@ SetState_FatLanding: ; 291ff (a:51ff)
 	ld [wIsSmashAttacking], a
 	ld [wWarioStateCounter], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -1696,8 +1699,8 @@ SetState_FatLanding: ; 291ff (a:51ff)
 ; 0x29243
 
 UpdateState_FatLanding: ; 29243 (a:5243)
-	call Func_2ae2f
-	ld hl, wca90
+	call DecrementTransformationDuration
+	ld hl, wTransformationDuration
 	ld a, [hli]
 	cp $02
 	jp nc, SetState_FatRecovering
@@ -1728,7 +1731,7 @@ Func_2926a: ; 2926a (a:526a)
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	inc a
 	ld [wca8a], a
 
@@ -1822,7 +1825,7 @@ SetState_FatRecovering: ; 29363 (a:5363)
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -1864,7 +1867,7 @@ UpdateState_ElectricStart: ; 293d0 (a:53d0)
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, $06
 	ld [wJumpVelIndex], a
 	ld a, -1
@@ -1873,7 +1876,7 @@ UpdateState_ElectricStart: ; 293d0 (a:53d0)
 	ld [wca71], a
 	ld a, 9
 	ld [wca72], a
-	ld a, [wca8b]
+	ld a, [wIsCrouching]
 	and a
 	jr z, .asm_2946e
 	ld a, -27
@@ -1893,8 +1896,10 @@ UpdateState_ElectricStart: ; 293d0 (a:53d0)
 	ld a, b
 	and a
 	jr nz, .asm_2947a
+
 	xor a
-	ld [wca8b], a
+	ld [wIsCrouching], a
+
 	ldh a, [hffad]
 	ldh [hYPosHi], a
 	ldh a, [hffae]
@@ -2118,7 +2123,7 @@ UpdateState_Electric: ; 294bf (a:54bf)
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -2142,6 +2147,7 @@ UpdateState_ElectricDizzy: ; 29672 (a:5672)
 
 SetState_TurningInvisible: ; 29689 (a:5689)
 	load_sfx SFX_03F
+
 	xor a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
@@ -2149,9 +2155,10 @@ SetState_TurningInvisible: ; 29689 (a:5689)
 	ld [wAttackCounter], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
+
 	inc a
 	ld [wca8a], a
 
@@ -2172,7 +2179,7 @@ SetState_TurningInvisible: ; 29689 (a:5689)
 	ld [wca94], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld hl, Pals_c800
 	call SetWarioPal
@@ -2239,7 +2246,7 @@ SetState_PuffyInflating: ; 2975e (a:575e)
 	ld [wAttackCounter], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
 	ld [wca6d], a
@@ -2251,7 +2258,7 @@ SetState_PuffyInflating: ; 2975e (a:575e)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	load_gfx WarioPuffyGfx
 	call LoadWarioGfx
@@ -2293,7 +2300,7 @@ SetState_PuffyRising: ; 2982b (a:582b)
 	xor a
 	ld [wSFXLoopCounter], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	inc a
 	ld [wJumpVelTable], a
 
@@ -2353,7 +2360,7 @@ SetState_PuffyTurning: ; 298b2 (a:58b2)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -2409,7 +2416,7 @@ SetState_PuffyDeflating: ; 2992a (a:592a)
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	inc a
 	ld [wca8a], a
 
@@ -2449,7 +2456,7 @@ UpdateState_PuffyDeflating: ; 29975 (a:5975)
 	ld [wWarioStateCounter], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -2502,14 +2509,14 @@ SetState_ZombieIdling: ; 299d0 (a:59d0)
 	ld [wAttackCounter], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
 	call UpdateLevelMusic
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld hl, Pals_c890
 	call SetWarioPal
@@ -2561,7 +2568,7 @@ SetState_ZombieWalking: ; 29ac1 (a:5ac1)
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -2611,7 +2618,7 @@ SetState_ZombieTurning: ; 29b6a (a:5b6a)
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -2673,7 +2680,7 @@ SetState_ZombieAirborne: ; 29c04 (a:5c04)
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	update_anim_2
 	ret
 ; 0x29c29
@@ -2703,7 +2710,7 @@ UpdateState_ZombieAirborne: ; 29c29 (a:5c29)
 	jr z, .asm_29c88
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	inc a
 	ld [wWarioStateCounter], a
 
@@ -2763,7 +2770,7 @@ SetState_ZombieLanding: ; 29cde (a:5cde)
 	xor a
 	ld [wWarioStateCounter], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	farcall Func_19a77
 	ld a, [wc1ca]
 	and a
@@ -2816,7 +2823,7 @@ UpdateState_ZombieLanding: ; 29d6f (a:5d6f)
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -2875,7 +2882,7 @@ UpdateState_ZombieSlippingThroughFloor: ; 29dd3 (a:5dd3)
 .asm_29e52
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wAnimationHasFinished], a
 	ld a, $02
 	ld [wWarioStateCounter], a
@@ -2933,7 +2940,7 @@ SetState_ZombieKnockBack: ; 29ea8 (a:5ea8)
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29ed9
@@ -2960,7 +2967,7 @@ SetState_ZombieWrithing: ; 29f0a (a:5f0a)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -3005,14 +3012,14 @@ SetState_BouncyStart: ; 29f59 (a:5f59)
 	ld [wWarioStateCycles], a
 	ld [wGrabState], a
 	ld [wAttackCounter], a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
 	call UpdateLevelMusic
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld hl, Pals_c910
 	call SetWarioPal
@@ -3082,15 +3089,15 @@ SetState_BouncyFloor: ; 2a054 (a:6054)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_1fcc5f
 	update_anim_2
 	ret
 ; 0x2a087
 
 UpdateState_BouncyFloor: ; 2a087 (a:6087)
-	call Func_2ae2f
-	ld hl, wca90
+	call DecrementTransformationDuration
+	ld hl, wTransformationDuration
 	ld a, [hli]
 	or [hl]
 	jp z, Func_2a2e7
@@ -3136,7 +3143,7 @@ SetState_BouncyAirborne: ; 2a0cb (a:60cb)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_1fcc6c
 	update_anim_2
 	ret
@@ -3167,8 +3174,8 @@ UpdateState_BouncyAirborne: ; 2a0f9 (a:60f9)
 	farcall Func_c9f3
 
 .asm_2a15a
-	call Func_2ae2f
-	ld hl, wca90
+	call DecrementTransformationDuration
+	ld hl, wTransformationDuration
 	ld a, [hli]
 	or [hl]
 	jp z, SetState_BouncyUpsideDown
@@ -3225,15 +3232,15 @@ UpdateState_BouncyAirborne: ; 2a0f9 (a:60f9)
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_1fcc75
 	update_anim_2
 	ret
 ; 0x2a1f5
 
 UpdateState_BouncyCeiling: ; 2a1f5 (a:61f5)
-	call Func_2ae2f
-	ld hl, wca90
+	call DecrementTransformationDuration
+	ld hl, wTransformationDuration
 	ld a, [hli]
 	or [hl]
 	jr z, SetState_BouncyUpsideDown
@@ -3266,7 +3273,7 @@ SetState_BouncyUpsideDown: ; 2a21e (a:621e)
 	ld [wca94], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld hl, Pals_c910
 	call SetWarioPal
@@ -3304,7 +3311,7 @@ UpdateState_BouncyUpsideDown: ; 2a267 (a:6267)
 	ld [wJumpVelTable], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_1fcc85
 	update_anim_2
 	ret
@@ -3338,7 +3345,7 @@ Func_2a2e7: ; 2a2e7 (a:62e7)
 .asm_2a318
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	jr SetState_BouncyLastBounce
 
 	ld a, [wDirection]
@@ -3351,7 +3358,7 @@ Func_2a2e7: ; 2a2e7 (a:62e7)
 .asm_2a33d
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 ;	fallthrough
 
 SetState_BouncyLastBounce: ; 2a344 (a:6344)
@@ -3435,9 +3442,10 @@ SetState_CrazySpinning: ; 2a3ed (a:63ed)
 	ld [wWarioStateCycles], a
 	ld [wGrabState], a
 	ld [wAttackCounter], a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
+
 	ld a, [wJumpVelTable]
 	and a
 	jr z, .asm_2a42f
@@ -3448,7 +3456,7 @@ SetState_CrazySpinning: ; 2a3ed (a:63ed)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	load_gfx WarioIdleGfx
 	call LoadWarioGfx
@@ -3514,7 +3522,7 @@ UpdateState_CrazySpinning: ; 2a489 (a:6489)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_gfx WarioDizzyGfx
 	call LoadWarioGfx
 	load_oam OAM_17bbc
@@ -3552,7 +3560,7 @@ SetState_Crazy: ; 2a558 (a:6558)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_gfx WarioCrazyGfx
 	call LoadWarioGfx
 	
@@ -3595,7 +3603,7 @@ SetState_CrazyTurning: ; 2a61a (a:661a)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	xor $1 ; switch direction
 	ld [wDirection], a
@@ -3641,7 +3649,7 @@ SetState_CrazyAirborne: ; 2a680 (a:6680)
 	xor a
 	ld [wca86], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -3702,7 +3710,7 @@ SetState_VampireIdling: ; 2a739 (a:6739)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_gfx WarioVampireGfx
 	call LoadWarioGfx
 	ld a, $54
@@ -3735,7 +3743,7 @@ SetState_VampireWalking: ; 2a7a8 (a:67a8)
 	xor a
 	ld [wca86], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wJumpVelTable], a
@@ -3797,7 +3805,7 @@ SetState_VampireTurning: ; 2a853 (a:6853)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	xor $1 ; switch direction
@@ -3840,7 +3848,7 @@ SetState_VampireAirborne: ; 2a8ba (a:68ba)
 	ld [wJumpVelTable], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ret
@@ -3900,7 +3908,7 @@ SetState_BatTransforming: ; 2a951 (a:6951)
 	ld [wca6f], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_gfx WarioBatGfx
 	call LoadWarioGfx
 	ld a, $50
@@ -3937,7 +3945,7 @@ SetState_BatIdling: ; 2a9c6 (a:69c6)
 	ld [wJumpVelTable], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -4019,7 +4027,7 @@ UpdateState_BatIdling: ; 2aa08 (a:6a08)
 	ld [wWarioStateCycles], a
 	ld [wGrabState], a
 	ld [wAttackCounter], a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
 	ld [wJumpVelTable], a
@@ -4028,7 +4036,7 @@ UpdateState_BatIdling: ; 2aa08 (a:6a08)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld hl, $4950
 	call SetWarioPal
 	load_gfx WarioBatGfx
@@ -4113,7 +4121,7 @@ UpdateState_BatFlying: ; 2ab42 (a:6b42)
 Func_2abc1: ; 2abc1 (a:6bc1)
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -4213,7 +4221,7 @@ Func_2ad6a: ; 2ad6a (a:6d6a)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	inc a
 	ld [wWarioStateCycles], a
 	ld hl, Pals_c800
@@ -4250,13 +4258,13 @@ Func_2ade4: ; 2ade4 (a:6de4)
 	ret
 ; 0x2ae2f
 
-Func_2ae2f: ; 2ae2f (a:6e2f)
-	ld hl, wca91
+DecrementTransformationDuration: ; 2ae2f (a:6e2f)
+	ld hl, wTransformationDuration + 1
 	ld a, [hl]
-	sub $01
+	sub 1
 	ld [hld], a
 	ld a, [hl]
-	sbc $00
+	sbc 0
 	ld [hl], a
 	ret
 ; 0x2ae3b
@@ -4282,7 +4290,7 @@ Func_2ae3b: ; 2ae3b (a:6e3b)
 ; 0x2ae5c
 
 Func_2ae5c: ; 2ae5c (a:6e5c)
-	ld hl, wca90
+	ld hl, wTransformationDuration
 	ld a, [hli]
 	cp $02
 	jr nc, .no_carry
@@ -4392,7 +4400,7 @@ Func_2ae8a: ; 2ae8a (a:6e8a)
 	farcall Func_19734
 	ld a, b
 	and a
-	jp nz, Func_2814a
+	jp nz, SetState_Hot_ResetDuration
 	ret
 ; 0x2af75
 
@@ -4402,6 +4410,7 @@ Func_2af75: ; 2af75 (a:6f75)
 	ld a, JUMP_VEL_HIGH_JUMP
 	ld [wJumpVelTable], a
 	jr SetState_OnFireAirborne
+; 0x2af81
 
 Func_2af81: ; 2af81 (a:6f81)
 	load_sfx SFX_JUMP
@@ -4492,7 +4501,7 @@ Func_2b027: ; 2b027 (a:7027)
 	ret z
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -4520,7 +4529,7 @@ Func_2b07a: ; 2b07a (a:707a)
 	ld [wDirection], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_16b26
 	update_anim_1
 .asm_2b0af
@@ -4541,7 +4550,7 @@ Func_2b07a: ; 2b07a (a:707a)
 	ld [wDirection], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_16b2f
 	update_anim_1
 

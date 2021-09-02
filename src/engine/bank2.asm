@@ -590,7 +590,7 @@ Func_846e: ; 846e (2:446e)
 	jr nz, .asm_85a7
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	load_frameset Frameset_14d18
 	update_anim_1

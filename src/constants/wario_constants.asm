@@ -77,6 +77,15 @@ MAX_PICKED_UP_FRAME_COUNTER EQU 32
 	const TRANSFORMATION_UNK_1E              ; $1e
 	const TRANSFORMATION_UNK_1F              ; $1f
 
+HOT_WARIO_DURATION    EQU 600
+FAT_WARIO_DURATION    EQU 420
+BOUNCY_WARIO_DURATION EQU 900
+
+; after this value is reached in the
+; Hot Wario transformation duration,
+; switch from OnFire to Hot state
+HOT_WARIO_TRANSITION_DURATION EQU 300
+
 ; grab constants
 	const_def
 	const GRAB_NONE                ; $0

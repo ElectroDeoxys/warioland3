@@ -2124,7 +2124,7 @@ UpdateAnimation: ; e53 (0:e53)
 	ld [hli], a
 	ret nc ; return if duration hasn't elapsed yet
 
-	ld a, [hl] ; wca68
+	ld a, [hl] ; wAnimationFrame
 	add e
 	ld c, a
 	ld a, d
@@ -2136,7 +2136,7 @@ UpdateAnimation: ; e53 (0:e53)
 
 ; next frame
 	ld [wca65], a
-	ld a, [hl] ; wca68
+	ld a, [hl] ; wAnimationFrame
 	add 2
 	ld [hld], a
 	inc bc
@@ -2146,7 +2146,7 @@ UpdateAnimation: ; e53 (0:e53)
 
 .finished
 	xor a
-	ld [hld], a ; wca68
+	ld [hld], a ; wAnimationFrame
 	ld [hl], a ; wFrameDuration
 	ld a, TRUE
 	ld [wAnimationHasFinished], a
@@ -2430,8 +2430,8 @@ Func_1079: ; 1079 (0:1079)
 	ld [wca93], a
 	ld [wca94], a
 	ld [wca8a], a
-	ld [wca90], a
-	ld [wca91], a
+	ld [wTransformationDuration + 0], a
+	ld [wTransformationDuration + 1], a
 	ld [wca9b], a
 	ld [wInvisibleFrame], a
 	ld [wca9c], a

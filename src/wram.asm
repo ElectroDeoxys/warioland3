@@ -428,10 +428,10 @@ wc1bc:: ; c1bc
 wc1bd:: ; c1bd
 	ds $1
 
-wc1be:: ; c1be
+wObjScreenYPos:: ; c1be
 	ds $1
 
-wc1bf:: ; c1bf
+wObjScreenXPos:: ; c1bf
 	ds $1
 
 wInteractionSide:: ; c1c0
@@ -574,7 +574,7 @@ wca66:: ; ca66
 wFrameDuration:: ; ca67
 	ds $1
 
-wca68:: ; ca68
+wAnimationFrame:: ; ca68
 	ds $1
 
 ; which way Wario is facing
@@ -684,7 +684,7 @@ wAttackCounter:: ; ca89
 wca8a:: ; ca8a
 	ds $1
 
-wca8b:: ; ca8b
+wIsCrouching:: ; ca8b
 	ds $1
 
 wInvincibleCounter:: ; ca8c
@@ -700,11 +700,10 @@ wTransformation:: ; ca8e
 wca8f:: ; ca8f
 	ds $1
 
-wca90:: ; ca90
-	ds $1
-
-wca91:: ; ca91
-	ds $1
+; duration left for current transformation
+; big endian
+wTransformationDuration:: ; ca90
+	ds $2
 
 wca92:: ; ca92
 	ds $1

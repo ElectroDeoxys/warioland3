@@ -299,11 +299,12 @@ SetState_Airborne: ; 1c2e2 (7:42e2)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	ld [wAttackCounter], a
+
 	ld a, -1
 	ld [wca70], a
 	ld a, -27
@@ -405,7 +406,7 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 .asm_1c421
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1c48d
@@ -429,7 +430,7 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1c462
@@ -545,7 +546,7 @@ Func_1d58a: ; 1d58a (7:558a)
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wca86], a
 
 	ld a, [wIsSmashAttacking]
@@ -594,7 +595,7 @@ DoGroundShake: ; 1c5fd (7:45fd)
 .asm_1c61b
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_gfx WarioAirborneGfx
 	call LoadWarioGfx
 	ld a, $59
@@ -616,7 +617,7 @@ DoGroundPound: ; 1c66b (7:466b)
 	load_sfx SFX_GROUND_POUND
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_gfx WarioAirborneGfx
 	call LoadWarioGfx
 	ld a, $59
@@ -700,8 +701,8 @@ SetState_CrouchSliding: ; 1c73b (7:473b)
 	load_sfx SFX_00C
 	ld a, ST_CROUCH_SLIDING
 	ld [wWarioState], a
-	ld a, $01
-	ld [wca8b], a
+	ld a, TRUE
+	ld [wIsCrouching], a
 	ld a, -1
 	ld [wca70], a
 	ld a, -15
@@ -712,7 +713,7 @@ SetState_CrouchSliding: ; 1c73b (7:473b)
 	ld [wca72], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	load_gfx WarioWalkGfx
@@ -1037,7 +1038,7 @@ Func_1ca46: ; 1ca46 (7:4a46)
 	ld [wca72], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wAttackCounter], a
@@ -1108,7 +1109,7 @@ SetState_AttackingAirborne: ; 1cb43 (7:4b43)
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_HIGH_JUMP_BOOTS
 	ld a, JUMP_VEL_NORMAL
@@ -1322,7 +1323,7 @@ Func_1cd7c: ; 1cd7c (7:4d7c)
 	load_oam OAM_15254
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -1339,7 +1340,7 @@ Func_1cd7c: ; 1cd7c (7:4d7c)
 Func_1cdc4: ; 1cdc4 (7:4dc4)
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1cddd
@@ -1370,7 +1371,7 @@ SetState_Diving: ; 1cdf6 (7:4df6)
 	ld [wAttackCounter], a
 	ld [wIsRolling], a
 	ld [wca6d], a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	ld [wc0e0], a
 
 	ld hl, Pals_c800
@@ -1443,7 +1444,7 @@ SetState_Submerged: ; 1ce95 (7:4e95)
 	ld [wca72], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -1459,7 +1460,7 @@ SetState_Submerged: ; 1ce95 (7:4e95)
 .asm_1cf20
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1cf39
@@ -1509,7 +1510,7 @@ SetState_WaterSurfaceIdling: ; 1cfa2 (7:4fa2)
 	ld [wca72], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wca6d], a
@@ -1581,7 +1582,7 @@ SetState_WaterSurfaceMoving: ; 1d065 (7:5065)
 	ld [wca72], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wca6d], a
@@ -1637,7 +1638,7 @@ Func_1d107: ; 1d107 (7:5107)
 	ld [wDirection], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_1555b
 	update_anim_1
 	ret
@@ -1671,7 +1672,7 @@ Func_1d107: ; 1d107 (7:5107)
 	ld [wDirection], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_15554
 	update_anim_1
 	ret
@@ -1742,7 +1743,7 @@ SetState_UnderwaterThrusting: ; 1d1ec (7:51ec)
 	ld [wca6d], a
 	ld [wWarioStateCycles], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wca9c]
 	and a
 	jr z, .asm_1d282
@@ -1842,7 +1843,7 @@ SetState_SwimKnockBack: ; 1d2f2 (7:52f2)
 	call LoadWarioGfx
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1d33a
@@ -1950,7 +1951,7 @@ SetState_TryingSubmerge: ; 1d416 (7:5416)
 	ld [wWarioStateCycles], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1d43b
@@ -2077,7 +2078,7 @@ UpdateState_CrouchAirborne: ; 1d522 (7:5522)
 	jr z, .asm_1d5c9
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1d5b0
@@ -2530,7 +2531,7 @@ SetState_ThrowingAirborne: ; 1da07 (7:5a07)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 
@@ -2594,7 +2595,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 .asm_1dac0
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1db2c
@@ -2617,7 +2618,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 .asm_1dae8
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1db01
@@ -2714,7 +2715,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 .asm_1dbf1
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1dc0a
@@ -2730,7 +2731,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 	load_sfx SFX_GROUND_POUND
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1dc46
@@ -2766,7 +2767,7 @@ SetState_ThrowCharging: ; 1dc8b (7:5c8b)
 	load_sfx SFX_02C
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld a, ST_THROW_CHARGING
@@ -2822,7 +2823,7 @@ UpdateState_ThrowCharging: ; 1dcfc (7:5cfc)
 	xor a
 	ld [wSFXLoopCounter], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 
@@ -2879,7 +2880,7 @@ UpdateState_ThrowFullyCharged: ; 1dd7f (7:5d7f)
 	ld [wGrabState], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	inc a
 	ld [wWarioStateCounter], a
 
@@ -2905,7 +2906,7 @@ UpdateState_ThrowFullyCharged: ; 1dd7f (7:5d7f)
 .asm_1de01
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1de1a
@@ -2925,7 +2926,7 @@ UpdateState_ThrowFullyCharged: ; 1dd7f (7:5d7f)
 Func_1de3f: ; 1de3f (7:5e3f)
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1de58
@@ -2995,15 +2996,17 @@ UpdateState_GrabSmashAttacking: ; 1decc (7:5ecc)
 SetState_Sliding: ; 1def1 (7:5ef1)
 	ld a, ST_SLIDING
 	ld [wWarioState], a
+
 	xor a
 	ld [wSFXLoopCounter], a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wca86], a
 	ld [wGrabState], a
+
 	ld a, TRUE
 	ld [wIsRolling], a
 	ld a, -1
@@ -3123,7 +3126,7 @@ SetState_Rolling: ; 1e042 (7:6042)
 	ld [wIsRolling], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1e083
@@ -3229,7 +3232,7 @@ SetState_Unknown29: ; 1e179 (7:6179)
 	load_oam OAM_1644a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1e1c9
@@ -3368,7 +3371,7 @@ UpdateState_PickedUp: ; 1e2c5 (7:62c5)
 .wiggle_left
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	update_anim_1
 
 	ld a, MAX_PICKED_UP_FRAME_COUNTER
@@ -3466,7 +3469,7 @@ UpdateState_EnteringDoor: ; 1e3e8 (7:63e8)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_14d15
 	update_anim_1
 	ld hl, wWarioStateCounter
@@ -3807,7 +3810,7 @@ SetState_Walking: ; 1e6b9 (7:66b9)
 Func_1e6ea: ; 1e6ea (7:66ea)
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_gfx WarioWalkGfx
 	call LoadWarioGfx
 	load_oam OAM_1426c
@@ -3831,7 +3834,7 @@ SetState_Turning: ; 1e73e (7:673e)
 	xor a
 	ld [wAttackCounter], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wJumpVelIndex], a
@@ -3868,14 +3871,16 @@ SetState_Attacking: ; 1e7ab (7:67ab)
 	ld [wca71], a
 	ld a, 9
 	ld [wca72], a
+
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
-	ld [wca8b], a
+	ld [wIsCrouching], a
+
 	load_oam OAM_14d1b
 	load_gfx WarioAttackGfx
 	call LoadWarioGfx
@@ -3916,8 +3921,10 @@ Func_1e855: ; 1e855 (7:6855)
 	ld [wca71], a
 	ld a, 9
 	ld [wca72], a
+
 	ld a, ST_CROUCHING
 	ld [wWarioState], a
+
 	xor a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
@@ -3926,8 +3933,8 @@ Func_1e855: ; 1e855 (7:6855)
 	ld [wca86], a
 	ld [wJumpVelTable], a
 	ld [wJumpVelIndex], a
-	ld a, $01
-	ld [wca8b], a
+	ld a, TRUE
+	ld [wIsCrouching], a
 
 	ld a, [wJoypadDown]
 	and D_RIGHT | D_LEFT
@@ -3938,7 +3945,7 @@ Func_1e855: ; 1e855 (7:6855)
 	load_oam OAM_1426c
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	cp DIRECTION_RIGHT
 	jr z, .asm_1e8d3
@@ -4025,19 +4032,22 @@ HandleInput_Walking: ; 1e8ed (7:68ed)
 SetState_Idling: ; 1e99b (7:699b)
 	xor a
 	ld [wca86], a
+
 	ld a, ST_IDLING
 	ld [wWarioState], a
+
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wIsSmashAttacking], a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	ld [wAttackCounter], a
 	ld [wGrabState], a
+
 	ld a, -1
 	ld [wca70], a
 	ld a, -9
@@ -4235,14 +4245,17 @@ SetState_CrouchWalking: ; 1eb94 (7:6b94)
 	ld [wca71], a
 	ld a, 9
 	ld [wca72], a
+
 	ld a, ST_CROUCH_WALKING
 	ld [wWarioState], a
-	ld a, $01
-	ld [wca8b], a
+
+	ld a, TRUE
+	ld [wIsCrouching], a
+
 	xor a
 	ld [wSFXLoopCounter], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wAttackCounter], a
@@ -4341,7 +4354,7 @@ Func_1ec6c: ; 1ec6c (7:6c6c)
 	ld [wDirection], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_14a2f
 .asm_1eccc
 	farcall Func_19734
@@ -4366,7 +4379,7 @@ Func_1ec6c: ; 1ec6c (7:6c6c)
 	ld [wDirection], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_14a26
 .asm_1ed0e
 	farcall Func_19734
@@ -4401,7 +4414,7 @@ Func_1ed4b: ; 1ed4b (7:6d4b)
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wGrabState], a
@@ -4481,7 +4494,7 @@ SetState_GrabAirborne: ; 1ee0d (7:6e0d)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	load_gfx WarioAirborneGfx
@@ -4522,7 +4535,7 @@ Func_1ee88: ; 1ee88 (7:6e88)
 	xor a
 	ld [wSFXLoopCounter], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, -1
 	ld [wca70], a
 	ld a, -27
@@ -4664,9 +4677,9 @@ SetState_GrabIdling: ; 1efe7 (7:6fe7)
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
 	ld [wIsSmashAttacking], a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 
@@ -4893,7 +4906,7 @@ Func_1f1a9: ; 1f1a9 (7:71a9)
 	jr nz, .asm_1f1f5
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1f1eb
@@ -4948,7 +4961,7 @@ Func_1f24c: ; 1f24c (7:724c)
 	xor a
 	ld [wWarioStateCycles], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1f285
@@ -4994,7 +5007,7 @@ Func_1f24c: ; 1f24c (7:724c)
 	ld [wDirection], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_1558b
 	update_anim_1
 	ret
@@ -5058,7 +5071,7 @@ Func_1f357: ; 1f357 (7:7357)
 	ld [wDirection], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_15576
 	update_anim_1
 	ret
@@ -5491,16 +5504,16 @@ HandleGroundShake: ; 1f6dc (7:76dc)
 	ld [wGrabState], a
 	ld a, -15
 	ld [wca6f], a
-	ld a, [wca8b]
+	ld a, [wIsCrouching]
 	and a
-	jr nz, .asm_1f77d
+	jr nz, .crouching
 	ld a, -27
 	ld [wca6f], a
 	ld a, 10
 	ld [wJumpVelIndex], a
 	ld a, JUMP_VEL_KNOCK_BACK
 	ld [wJumpVelTable], a
-.asm_1f77d
+.crouching
 	ld a, -1
 	ld [wca70], a
 	ld a, -9
@@ -5512,7 +5525,7 @@ HandleGroundShake: ; 1f6dc (7:76dc)
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	load_gfx WarioAirborneGfx
 	call LoadWarioGfx
@@ -5544,7 +5557,7 @@ SetState_LadderShakeStunned: ; 1f7e6 (7:77e6)
 	ld [wJumpVelTable], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_15948
 	update_anim_1
 	ret

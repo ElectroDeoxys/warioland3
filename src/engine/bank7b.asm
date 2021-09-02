@@ -91,7 +91,7 @@ SetState_IceSkatin: ; 1ec13c (7b:413c)
 	xor a
 	ld [wSFXLoopCounter], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -225,7 +225,7 @@ SetState_IceSkatinCrash: ; 1ec2bb (7b:42bb)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	xor $1 ; switch direction
@@ -265,7 +265,7 @@ UpdateState_HangingRail: ; 1ec703 (7b:4703)
 	ld [wWarioStateCounter], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_1feeb4
 .asm_1ec725
 	update_anim_2
@@ -291,7 +291,7 @@ SetState_UnknownCA: ; 1ecbb2 (7b:4bb2)
 	ld [wJumpVelTable], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1ecbd7
@@ -317,7 +317,7 @@ UpdateState_SplitHit: ; 1ecf3a (7b:4f3a)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -353,7 +353,7 @@ UpdateState_SplitKnockedBack: ; 1ecf86 (7b:4f86)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -426,6 +426,7 @@ UpdateState_Splitting: ; 1ed018 (7b:5018)
 SetState_BlindIdling: ; 1ed331 (7b:5331)
 	ld a, ST_BLIND_IDLING
 	ld [wWarioState], a
+
 	xor a
 	ld [wSFXLoopCounter], a
 	ld [wca86], a
@@ -433,12 +434,13 @@ SetState_BlindIdling: ; 1ed331 (7b:5331)
 	ld [wWarioStateCycles], a
 	ld [wGrabState], a
 	ld [wAttackCounter], a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
 	ld [wJumpVelTable], a
 	ld [wJumpVelIndex], a
 	ld [wInvisibleFrame], a
+
 	ld a, -1
 	ld [wca70], a
 	ld a, -27
@@ -451,7 +453,7 @@ SetState_BlindIdling: ; 1ed331 (7b:5331)
 	call UpdateLevelMusic
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld hl, Pals_c800
 	call SetWarioPal
@@ -497,7 +499,7 @@ SetState_BlindWalking: ; 1ed3fa (7b:53fa)
 	ld [wJumpVelIndex], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_gfx WarioWalkGfx
 	call LoadWarioGfx
 	load_oam OAM_1426c
@@ -555,7 +557,7 @@ SetState_BlindTurning: ; 1ed4d1 (7b:54d1)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_gfx WarioIdleGfx
 	call LoadWarioGfx
 	load_oam OAM_14a82
@@ -614,11 +616,12 @@ SetState_BlindAirborne: ; 1ed571 (7b:5571)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	ld [wAttackCounter], a
+
 	load_gfx WarioAirborneGfx
 	call LoadWarioGfx
 	load_oam OAM_15955
@@ -731,7 +734,7 @@ UpdateState_MagicRising: ; 1ed972 (7b:5972)
 	xor a
 	ld [wWarioStateCounter], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, $77
 	ldh [hCallFuncBank], a
 	call_hram UpdateAnimation
@@ -773,7 +776,7 @@ Func_1edaf8: ; 1edaf8 (7b:5af8)
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	update_anim_3
 	ret
 ; 0x1edb47
@@ -795,7 +798,7 @@ SetState_BallAirborne: ; 1edb5b (7b:5b5b)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -845,7 +848,7 @@ UpdateState_BallShot: ; 1edc15 (7b:5c15)
 .asm_1edc2e
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_1dd2d1
 	jr .asm_1edc71
 
@@ -855,7 +858,7 @@ UpdateState_BallShot: ; 1edc15 (7b:5c15)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_1dd27a
 	jr .asm_1edc71
 
@@ -865,7 +868,7 @@ UpdateState_BallShot: ; 1edc15 (7b:5c15)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_1dd26c
 
 .asm_1edc71
@@ -900,7 +903,7 @@ UpdateState_BallShot: ; 1edc15 (7b:5c15)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_1dd2ee
 	update_anim_3
 	ret
@@ -962,7 +965,7 @@ UpdateState_BallThrown: ; 1edcd0 (7b:5cd0)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	load_frameset Frameset_1dd2ee
 	update_anim_3
@@ -1013,7 +1016,7 @@ SetState_BallTurning: ; 1eddf2 (7b:5df2)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	xor $1 ; switch direction
 	ld [wDirection], a

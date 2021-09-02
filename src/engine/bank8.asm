@@ -58,9 +58,9 @@ Func_20000: ; 20000 (8:4000)
 	ld a, [hli] ; OBJ_UNK_0C
 	ld [wc1bd], a
 	ld a, [hli] ; OBJ_UNK_0D
-	ld [wc1be], a
+	ld [wObjScreenYPos], a
 	ld a, [hl] ; OBJ_UNK_0E
-	ld [wc1bf], a
+	ld [wObjScreenXPos], a
 
 	ld e, OBJ_UNK_1A - OBJ_UNK_0E
 	ld d, $00
@@ -85,10 +85,10 @@ Func_20000: ; 20000 (8:4000)
 
 	ld e, $d0
 	ld hl, wc1ba
-	ld a, [wc1be]
+	ld a, [wObjScreenYPos]
 	add [hl]
 	sub e
-	ld b, a ; wc1ba + wc1be - $d0
+	ld b, a ; wc1ba + wObjScreenYPos - $d0
 	ld hl, wca70
 	ld a, [wWarioScreenYPos]
 	add [hl]
@@ -102,7 +102,7 @@ Func_20000: ; 20000 (8:4000)
 	sub e
 	ld b, a
 	ld hl, wc1bb
-	ld a, [wc1be]
+	ld a, [wObjScreenYPos]
 	add [hl]
 	sub e
 	sub b
@@ -125,7 +125,7 @@ Func_20000: ; 20000 (8:4000)
 .asm_200cd
 
 	ld hl, wc1bc
-	ld a, [wc1bf]
+	ld a, [wObjScreenXPos]
 	add [hl]
 	sub e
 	ld b, a
@@ -142,7 +142,7 @@ Func_20000: ; 20000 (8:4000)
 	sub e
 	ld b, a
 	ld hl, wc1bd
-	ld a, [wc1bf]
+	ld a, [wObjScreenXPos]
 	add [hl]
 	sub e
 	sub b
@@ -359,28 +359,31 @@ Func_2023b: ; 2023b (8:423b)
 	ld a, [wAttackCounter]
 	and a
 	jp nz, Func_20350
+
 	ld b, $01
 	call SetObjUnk1C
+
 	ld a, [wInvincibleCounter]
 	cp $01
-	ret z
+	ret z ; is invincible
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
 	jr z, Func_2028a
 	and a
 	ret nz
+
 	ld a, [wWarioScreenXPos]
 	ld b, a
-	ld a, [wc1bf]
+	ld a, [wObjScreenXPos]
 	cp b
 	jr c, .asm_20283
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
-	jr .bump
+	jr .wario_bump
 .asm_20283
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
-.bump
+.wario_bump
 	jr SetState_EnemyBumping
 ; 0x2028a
 
@@ -390,7 +393,7 @@ Func_2028a: ; 2028a (8:428a)
 	ret z
 	ld a, [wWarioScreenXPos]
 	ld b, a
-	ld a, [wc1bf]
+	ld a, [wObjScreenXPos]
 	cp b
 	jr c, .asm_202a0
 	ld a, DIRECTION_LEFT
@@ -410,21 +413,25 @@ SetState_EnemyBumping: ; 202b5 (8:42b5)
 	ld [wJumpVelIndex], a
 	ld a, $01
 	ld [wJumpVelTable], a
+
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wIsSmashAttacking], a
 	ld [wGrabState], a
+
 	ld a, ST_ENEMY_BUMPING
 	ld [wWarioState], a
+
 	load_gfx WarioWalkGfx
 	call LoadWarioGfx
 	load_oam OAM_1426c
-	ld a, [wca8b]
+
+	ld a, [wIsCrouching]
 	and a
-	jr nz, .asm_20332
+	jr nz, .crouching
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_20326
@@ -435,7 +442,8 @@ SetState_EnemyBumping: ; 202b5 (8:42b5)
 .asm_20326
 	load_frameset Frameset_14a6c
 	jr .asm_20316
-.asm_20332
+
+.crouching
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_20344
@@ -450,7 +458,7 @@ Func_20350: ; 20350 (8:4350)
 	load_sfx SFX_017
 	ld a, [wWarioScreenXPos]
 	ld b, a
-	ld a, [wc1bf]
+	ld a, [wObjScreenXPos]
 	cp b
 	jr c, .asm_20382
 
@@ -573,13 +581,14 @@ Func_20447: ; 20447 (8:4447)
 	jp nz, Func_20350
 	ld a, [wWarioScreenXPos]
 	ld b, a
-	ld a, [wc1bf]
+	ld a, [wObjScreenXPos]
 	cp b
 	jr c, .asm_20484
 	ld a, [wInteractionSide]
 	or INTERACTION_RIGHT
 	ld [wInteractionSide], a
 	jr .asm_2048c
+
 .asm_20484
 	ld a, [wInteractionSide]
 	or INTERACTION_LEFT
@@ -590,25 +599,26 @@ Func_20447: ; 20447 (8:4447)
 	jr nz, .asm_20506
 	ld a, [wWarioScreenYPos]
 	ld b, a
-	ld a, [wc1be]
+	ld a, [wObjScreenYPos]
 	cp b
 	jr c, .asm_20506
+
 	ld a, [wGrabState]
 	and $ff ^ (GRAB_FLAGS_MASK)
 	cp GRAB_IDLE
 	jr z, .asm_204d9
 	xor a
-	ld [wGrabState], a
-	ld a, [wca8b]
+	ld [wGrabState], a ; ; reset grab state
+	ld a, [wIsCrouching]
 	and a
-	jr nz, .asm_204c8
+	jr nz, .crouching_1
 	ld a, [wJoypadDown]
 	and a
-	jp z, .asm_20575
+	jp z, .no_input
 	farcall StartJump_FromInput
 	jr .asm_204e8
 
-.asm_204c8
+.crouching_1
 	farcall Func_1ed3f
 	jr .asm_204e8
 
@@ -619,8 +629,9 @@ Func_20447: ; 20447 (8:4447)
 	ld [wca76], a
 	ld a, $0a
 	ld [wJumpVelIndex], a
+
 	ld a, [wJoypadDown]
-	bit 0, a
+	bit A_BUTTON_F, a
 	jr z, .asm_20578
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_HIGH_JUMP_BOOTS
@@ -633,9 +644,9 @@ Func_20447: ; 20447 (8:4447)
 	ld a, [wInvincibleCounter]
 	cp $01
 	ret z
-	ld a, [wca8b]
+	ld a, [wIsCrouching]
 	and a
-	jr nz, .asm_2055e
+	jr nz, .crouching_2
 	ld a, [wGrabState]
 	and $ff ^ (GRAB_FLAGS_MASK)
 	cp GRAB_IDLE
@@ -659,14 +670,14 @@ Func_20447: ; 20447 (8:4447)
 	farcall Func_1edd3
 	jr .asm_20578
 
-.asm_2055e
+.crouching_2
 	ld a, [wJumpVelTable]
 	and a
 	jr z, .asm_20578
 	farcall Func_1ed34
 	jr .asm_20578
 
-.asm_20575
+.no_input
 	call Func_20939
 .asm_20578
 	load_sfx SFX_014
@@ -687,7 +698,7 @@ Func_20585: ; 20585 (8:4585)
 	jp z, Func_20350
 	ld a, [wWarioScreenXPos]
 	ld b, a
-	ld a, [wc1bf]
+	ld a, [wObjScreenXPos]
 	cp b
 	jr c, .asm_205af
 	ld a, [wInteractionSide]
@@ -749,7 +760,7 @@ Func_20602: ; 20602 (8:4602)
 	ld a, $0a
 	ld [wJumpVelIndex], a
 	ld a, [wJoypadDown]
-	bit 0, a
+	bit A_BUTTON_F, a
 	jr z, .asm_20655
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_HIGH_JUMP_BOOTS
@@ -810,7 +821,7 @@ Func_20670: ; 20670 (8:4670)
 .asm_206a8
 	ld a, [wWarioScreenXPos]
 	ld b, a
-	ld a, [wc1bf]
+	ld a, [wObjScreenXPos]
 	cp b
 	jr c, .asm_206bc
 	ld a, [wInteractionSide]
@@ -875,7 +886,7 @@ SetState_Stung: ; 206f9 (8:46f9)
 	ld [wca71], a
 	ld a, 9
 	ld [wca72], a
-	ld a, [wca8b]
+	ld a, [wIsCrouching]
 	and a
 	jr z, .asm_20774
 	ld a, -27
@@ -896,7 +907,7 @@ SetState_Stung: ; 206f9 (8:46f9)
 	jr nz, .asm_20780
 
 	xor a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	ldh a, [hffad]
 	ldh [hYPosHi], a
 	ldh a, [hffae]
@@ -935,7 +946,7 @@ SetState_Stung: ; 206f9 (8:46f9)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_207d3
@@ -992,7 +1003,7 @@ Func_207ed: ; 207ed (8:47ed)
 	load_oam OAM_15955
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_2087f
@@ -1021,7 +1032,7 @@ Func_20899: ; 20899 (8:4899)
 	ret z
 	ld a, [wWarioScreenXPos]
 	ld b, a
-	ld a, [wc1bf]
+	ld a, [wObjScreenXPos]
 	cp b
 	jr c, .asm_208c2
 	ld a, [wInteractionSide]
@@ -1104,13 +1115,13 @@ Func_20939: ; 20939 (8:4939)
 	call LoadWarioGfx
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_oam OAM_1426c
 	xor a
 	ld [wGrabState], a
 	ld a, [wWarioScreenXPos]
 	ld b, a
-	ld a, [wc1bf]
+	ld a, [wObjScreenXPos]
 	cp b
 	jr c, .asm_209b4
 	ld a, INTERACTION_RIGHT
@@ -1177,18 +1188,20 @@ Func_209ca: ; 209ca (8:49ca)
 	ld a, [wGrabState]
 	and a
 	jr nz, .asm_20a51
-	ld a, [wca8b]
+	ld a, [wIsCrouching]
 	and a
-	jr nz, .asm_20a3c
+	jr nz, .crouching
 	xor a
 	ld [wWaterInteraction], a
 	farcall SetState_Idling
 	jr .asm_20a60
-.asm_20a3c
+
+.crouching
 	xor a
 	ld [wWaterInteraction], a
 	farcall Func_1e855
 	jr .asm_20a60
+
 .asm_20a51
 	farcall SetState_GrabIdling
 .asm_20a60
@@ -1210,7 +1223,7 @@ Func_20a69: ; 20a69 (8:4a69)
 Func_20a6f: ; 20a6f (8:4a6f)
 	ld a, [wWarioScreenXPos]
 	ld b, a
-	ld a, [wc1bf]
+	ld a, [wObjScreenXPos]
 	cp b
 	jr c, .asm_20aa5
 .asm_20a79
@@ -1319,7 +1332,7 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	or b
 	jp nz, Func_20350
 
-	ld a, [wca8b]
+	ld a, [wIsCrouching]
 	ld b, a
 	ld a, [wGrabState]
 	or b
@@ -1338,7 +1351,7 @@ Func_20b6b: ; 20b6b (8:4b6b)
 .asm_20bc6
 	ld a, [wWarioScreenXPos]
 	ld b, a
-	ld a, [wc1bf]
+	ld a, [wObjScreenXPos]
 	cp b
 	jr c, .asm_20bdd
 	ld a, INTERACTION_RIGHT
@@ -1405,7 +1418,7 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	jp Func_20447
 	ld a, [wWarioScreenXPos]
 	ld b, a
-	ld a, [wc1bf]
+	ld a, [wObjScreenXPos]
 	cp b
 	jr c, .asm_20c56
 	ld a, INTERACTION_RIGHT
@@ -1421,7 +1434,7 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	load_sfx SFX_GRAB
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld a, ST_PICKING_UP
@@ -1552,7 +1565,7 @@ Func_20d8c: ; 20d8c (8:4d8c)
 	jr nz, .asm_20ddb
 	ld a, [wWarioScreenXPos]
 	ld b, a
-	ld a, [wc1bf]
+	ld a, [wObjScreenXPos]
 	cp b
 	jr c, .asm_20dbe
 	ld a, [wInteractionSide]
@@ -1669,10 +1682,12 @@ Func_20e97: ; 20e97 (8:4e97)
 	ld [wca92], a
 	ld a, $02
 	ld [wca94], a
-	ld a, $02
-	ld [wca90], a
-	ld a, $58
-	ld [wca91], a
+
+	ld a, HIGH(HOT_WARIO_DURATION)
+	ld [wTransformationDuration + 0], a
+	ld a, LOW(HOT_WARIO_DURATION)
+	ld [wTransformationDuration + 1], a
+
 	call UpdateLevelMusic
 	xor a
 	ld [wWarioStateCounter], a
@@ -1690,9 +1705,10 @@ SetState_OnFire: ; 20ed3 (8:4ed3)
 	ld [wAttackCounter], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
+
 	ld a, -1
 	ld [wca70], a
 	ld a, -27
@@ -1714,7 +1730,7 @@ SetState_OnFire: ; 20ed3 (8:4ed3)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -1888,20 +1904,24 @@ GetTreasure: ; 2109a (8:509a)
 	ld [wResetDisabled], a
 	xor a
 	ld [wca86], a
+
 	ld a, ST_UNKNOWN_40
 	ld [wWarioState], a
+
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wJumpVelIndex], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wIsSmashAttacking], a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	ld [wAttackCounter], a
+
 	inc a
 	ld [wca8a], a
 	ld [wca9b], a
+
 	ld a, [wJumpVelTable]
 	and a
 	jr z, .asm_210ea
@@ -1961,15 +1981,17 @@ Func_21156: ; 21156 (8:5156)
 	ld [wca71], a
 	ld a, 9
 	ld [wca72], a
+
 	xor a
 	ld [wIsSmashAttacking], a
 	ld [wAttackCounter], a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	ld [wGrabState], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
+
 	inc a
 	ld [wJumpVelTable], a
 	ld a, NUM_WIGGLES_TO_ESCAPE
@@ -2011,7 +2033,7 @@ SetState_FlatStretching: ; 211fb (8:51fb)
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	load_frameset Frameset_17193
 	update_anim_1
@@ -2040,7 +2062,7 @@ Func_21245: ; 21245 (8:5245)
 	jp Func_20447
 
 .asm_2126a
-	ld a, [wca8b]
+	ld a, [wIsCrouching]
 	and a
 	jr z, .asm_21290
 	ld a, -27
@@ -2065,7 +2087,7 @@ Func_21245: ; 21245 (8:5245)
 	jp nz, Func_2023b
 	ld a, [wWarioScreenXPos]
 	ld b, a
-	ld a, [wc1bf]
+	ld a, [wObjScreenXPos]
 	cp b
 	jr c, .asm_212b3
 
@@ -2092,6 +2114,7 @@ Func_21245: ; 21245 (8:5245)
 
 	ld a, ST_GETTING_WRAPPED_IN_STRING
 	ld [wWarioState], a
+
 	xor a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
@@ -2099,9 +2122,10 @@ Func_21245: ; 21245 (8:5245)
 	ld [wAttackCounter], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
+
 	ld a, -1
 	ld [wca70], a
 	ld a, -27
@@ -2112,7 +2136,7 @@ Func_21245: ; 21245 (8:5245)
 	ld [wca72], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld hl, Pals_c860
 	call SetWarioPal
 
@@ -2127,7 +2151,7 @@ Func_21245: ; 21245 (8:5245)
 ; 0x21358
 
 SetState_FatEating: ; 21358 (8:5358)
-	ld a, [wca8b]
+	ld a, [wIsCrouching]
 	and a
 	jp nz, Func_20a69
 	ld a, [wInvincibleCounter]
@@ -2150,10 +2174,12 @@ SetState_FatEating: ; 21358 (8:5358)
 	ld [wca92], a
 	ld a, $02
 	ld [wca94], a
-	ld a, $01
-	ld [wca90], a
-	ld a, $a4
-	ld [wca91], a
+
+	ld a, HIGH(FAT_WARIO_DURATION)
+	ld [wTransformationDuration + 0], a
+	ld a, LOW(FAT_WARIO_DURATION)
+	ld [wTransformationDuration + 1], a
+
 	xor a
 	ld [wInvisibleFrame], a
 	ld [wSFXLoopCounter], a
@@ -2161,9 +2187,10 @@ SetState_FatEating: ; 21358 (8:5358)
 	ld [wWarioStateCycles], a
 	ld [wGrabState], a
 	ld [wAttackCounter], a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
+
 	ld a, [wJumpVelTable]
 	and a
 	jr z, .asm_213bb
@@ -2185,7 +2212,7 @@ SetState_FatEating: ; 21358 (8:5358)
 	ld [wca72], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	load_gfx WarioFatGfx
 	call LoadWarioGfx
@@ -2228,7 +2255,7 @@ ObjInteraction_RegularCoin: ; 21433 (8:5433)
 SetState_ElectricStart: ; 21455 (8:5455)
 	ld a, [wWarioScreenXPos]
 	ld b, a
-	ld a, [wc1bf]
+	ld a, [wObjScreenXPos]
 	cp b
 	jr c, .asm_21469
 	ld a, [wInteractionSide]
@@ -2264,6 +2291,7 @@ SetState_ElectricStart: ; 21455 (8:5455)
 
 .asm_21497
 	load_sfx SFX_040
+
 	xor a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
@@ -2271,13 +2299,14 @@ SetState_ElectricStart: ; 21455 (8:5455)
 	ld [wAttackCounter], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
 	ld [wInvisibleFrame], a
 
 	ld a, ST_ELECTRIC_START
 	ld [wWarioState], a
+
 	ld a, -1
 	ld [wca70], a
 	ld a, -27
@@ -2299,7 +2328,7 @@ SetState_ElectricStart: ; 21455 (8:5455)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld hl, Pals_c870
 	call SetWarioPal
@@ -2420,10 +2449,12 @@ Func_215e7: ; 215e7 (8:55e7)
 	ld [wca92], a
 	ld a, $01
 	ld [wca94], a
-	ld a, $03
-	ld [wca90], a
-	ld a, $84
-	ld [wca91], a
+
+	ld a, HIGH(BOUNCY_WARIO_DURATION)
+	ld [wTransformationDuration + 0], a
+	ld a, LOW(BOUNCY_WARIO_DURATION)
+	ld [wTransformationDuration + 1], a
+
 	farcall SetState_BouncyStart
 	ret
 ; 0x2164f
@@ -2494,9 +2525,9 @@ Func_21675: ; 21675 (8:5675)
 	jr z, .asm_2173e
 	and a
 	ret nz
-	ld a, [wca8b]
+	ld a, [wIsCrouching]
 	and a
-	jr nz, .asm_2174e
+	jr nz, .crouching
 	xor a
 	ld [wGrabState], a
 	farcall StartFall
@@ -2527,7 +2558,7 @@ Func_21675: ; 21675 (8:5675)
 	farcall SetState_FlatFalling
 	ret
 
-.asm_2174e
+.crouching
 	farcall Func_1ed34
 	ret
 

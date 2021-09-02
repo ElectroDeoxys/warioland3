@@ -203,7 +203,7 @@ Func_19823: ; 19823 (6:5823)
 	ret
 
 Func_19832: ; 19832 (6:5832)
-	ld a, [wca8b]
+	ld a, [wIsCrouching]
 	and a
 	jp nz, .asm_198c1
 	ld a, [wca6f]
@@ -230,7 +230,7 @@ Func_19832: ; 19832 (6:5832)
 	ld a, [wWaterInteraction]
 	and a
 	jr nz, .asm_198c0
-	ld a, [wca8b]
+	ld a, [wIsCrouching]
 	and a
 	jr nz, .asm_198c0
 	ld a, [wcac9]
@@ -866,7 +866,7 @@ SetState_Slipping: ; 19c81 (6:5c81)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	ld [wWarioStateCycles], a
@@ -944,7 +944,7 @@ UpdateState_Slipping: ; 19ce7 (6:5ce7)
 .asm_19daf
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 .asm_19db6
 	update_anim_1
 	ld a, [wJoypadPressed]
@@ -1039,14 +1039,14 @@ Func_19e89: ; 19e89 (6:5e89)
 	ld [wAttackCounter], a
 	ld [wGrabState], a
 	inc a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	load_gfx WarioWalkGfx
 	call LoadWarioGfx
 	load_oam OAM_1426c
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wWarioStateCycles]
 	cp $01
 	jr z, .asm_19ed7
@@ -1203,7 +1203,7 @@ SetState_SandFalling: ; 1a0e8 (6:60e8)
 	ld [wAttackCounter], a
 	ld [wIsRolling], a
 	ld [wca6d], a
-	ld [wca8b], a
+	ld [wIsCrouching], a
 	ld [wc0e0], a
 	ld hl, Pals_c800
 	call SetWarioPal
@@ -1218,7 +1218,7 @@ Func_1a12a: ; 1a12a (6:612a)
 Func_1a14b: ; 1a14b (6:614b)
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1a164
@@ -1311,7 +1311,7 @@ SetState_SandIdling: ; 1a236 (6:6236)
 	load_oam OAM_14000
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1a27c
@@ -1393,7 +1393,7 @@ SetState_SandTurning: ; 1a330 (6:6330)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	load_gfx WarioIdleGfx
@@ -1458,7 +1458,7 @@ SetState_LadderClimbing: ; 1a3bb (6:63bb)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_158d6
 	update_anim_1
 	ret
@@ -1497,7 +1497,7 @@ SetState_LadderIdling: ; 1a49e (6:649e)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
 	ld [wWarioStateCounter], a
@@ -1665,7 +1665,7 @@ SetState_LadderSliding: ; 1a66b (6:666b)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_15945
 	update_anim_1
 	ret
@@ -1739,7 +1739,7 @@ SetState_GrabSlipping: ; 1a773 (6:6773)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -1844,7 +1844,7 @@ SetState_Sleeping: ; 1ac10 (6:6c10)
 	load_oam OAM_14000
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -1872,7 +1872,7 @@ UpdateState_Sleeping: ; 1ac73 (6:6c73)
 	load_sfx SFX_036
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld hl, wWarioStateCounter
 	inc [hl]
 
@@ -1898,7 +1898,7 @@ UpdateState_Sleeping: ; 1ac73 (6:6c73)
 	ret z
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld hl, wWarioStateCounter
 	inc [hl]
 	ld a, [wDirection]
@@ -1938,7 +1938,7 @@ SetState_LadderScratching: ; 1ad21 (6:6d21)
 	ld [wIsGettingOffLadder], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wDirection]
 	and a
@@ -1969,7 +1969,7 @@ SetState_FenceShakeSliding: ; 1ad9a (6:6d9a)
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld a, $03
 	ld [wca9b], a
@@ -2000,7 +2000,7 @@ UpdateState_FenceShakeSliding: ; 1adfb (6:6dfb)
 	jr z, .asm_1ae3a
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_14d15
 	update_anim_1
 
@@ -2049,7 +2049,7 @@ SetState_FenceMovingVertical: ; 1ae68 (6:6e68)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_158d6
 	update_anim_1
 	ret
@@ -2085,7 +2085,7 @@ SetState_FenceIdling: ; 1af22 (6:6f22)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wIsSmashAttacking], a
@@ -2139,7 +2139,7 @@ SetState_FenceMovingHorizontal: ; 1afab (6:6fab)
 
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 
 	ld a, [wJoypadDown]
 	bit D_RIGHT_F, a
@@ -2203,7 +2203,7 @@ SetState_FenceSliding: ; 1b05e (6:705e)
 .asm_1b088
 	xor a
 	ld [wFrameDuration], a
-	ld [wca68], a
+	ld [wAnimationFrame], a
 	load_frameset Frameset_15945
 	update_anim_1
 	ret
