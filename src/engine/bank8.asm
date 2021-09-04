@@ -19,7 +19,7 @@ Func_20000: ; 20000 (8:4000)
 	ld [wObjPtr + 0], a
 	ld a, l
 	ld [wObjPtr + 1], a
-	ld a, [hl]
+	ld a, [hl] ; OBJ_UNK_00
 	and %11
 	cp %11
 	jr z, .asm_20036
@@ -57,12 +57,12 @@ Func_20000: ; 20000 (8:4000)
 	ld [wc1bc], a
 	ld a, [hli] ; OBJ_UNK_0C
 	ld [wc1bd], a
-	ld a, [hli] ; OBJ_UNK_0D
+	ld a, [hli] ; OBJ_SCREEN_Y_POS
 	ld [wObjScreenYPos], a
-	ld a, [hl] ; OBJ_UNK_0E
+	ld a, [hl] ; OBJ_SCREEN_X_POS
 	ld [wObjScreenXPos], a
 
-	ld e, OBJ_UNK_1A - OBJ_UNK_0E
+	ld e, OBJ_UNK_1A - OBJ_SCREEN_X_POS
 	ld d, $00
 	add hl, de
 	ld a, [hl] ; OBJ_UNK_1A
@@ -208,22 +208,22 @@ Func_20000: ; 20000 (8:4000)
 	and $ff ^ (HEAVY_OBJ)
 	jumptable
 
-	dw Func_20b6b ; OBJ_INTERACTION_00
-	dw Func_20d1d ; OBJ_INTERACTION_01
-	dw ObjInteraction_FrontSting ; OBJ_INTERACTION_02
-	dw ObjInteraction_BackSting ; OBJ_INTERACTION_03
-	dw ObjInteraction_TopSting ; OBJ_INTERACTION_04
-	dw ObjInteraction_FullSting ; OBJ_INTERACTION_05
-	dw Func_20d81 ; OBJ_INTERACTION_06
-	dw Func_20d8c ; OBJ_INTERACTION_07
-	dw Func_20deb ; OBJ_INTERACTION_08
-	dw Func_20e39 ; OBJ_INTERACTION_09
-	dw Func_20e60 ; OBJ_INTERACTION_0A
-	dw Func_20e6a ; OBJ_INTERACTION_0B
-	dw Func_20e77 ; OBJ_INTERACTION_0C
-	dw ObjInteraction_MusicalCoin ; OBJ_INTERACTION_0D
-	dw Func_20e97 ; OBJ_INTERACTION_0E
-	dw Func_20f6a ; OBJ_INTERACTION_0F
+	dw Func_20b6b                   ; OBJ_INTERACTION_00
+	dw Func_20d1d                   ; OBJ_INTERACTION_01
+	dw ObjInteraction_FrontSting    ; OBJ_INTERACTION_02
+	dw ObjInteraction_BackSting     ; OBJ_INTERACTION_03
+	dw ObjInteraction_TopSting      ; OBJ_INTERACTION_04
+	dw ObjInteraction_FullSting     ; OBJ_INTERACTION_05
+	dw Func_20d81                   ; OBJ_INTERACTION_06
+	dw Func_20d8c                   ; OBJ_INTERACTION_07
+	dw Func_20deb                   ; OBJ_INTERACTION_08
+	dw Func_20e39                   ; OBJ_INTERACTION_09
+	dw Func_20e60                   ; OBJ_INTERACTION_0A
+	dw Func_20e6a                   ; OBJ_INTERACTION_0B
+	dw Func_20e77                   ; OBJ_INTERACTION_0C
+	dw ObjInteraction_MusicalCoin   ; OBJ_INTERACTION_0D
+	dw Func_20e97                   ; OBJ_INTERACTION_0E
+	dw Func_20f6a                   ; OBJ_INTERACTION_0F
 	dw ObjInteraction_GreyKey       ; OBJ_INTERACTION_10
 	dw ObjInteraction_RedKey        ; OBJ_INTERACTION_11
 	dw ObjInteraction_GreenKey      ; OBJ_INTERACTION_12
@@ -232,71 +232,71 @@ Func_20000: ; 20000 (8:4000)
 	dw ObjInteraction_RedTreasure   ; OBJ_INTERACTION_15
 	dw ObjInteraction_GreenTreasure ; OBJ_INTERACTION_16
 	dw ObjInteraction_BlueTreasure  ; OBJ_INTERACTION_17
-	dw Func_21156 ; OBJ_INTERACTION_18
-	dw Func_21245 ; OBJ_INTERACTION_19
-	dw Func_21358 ; OBJ_INTERACTION_1A
-	dw ObjInteraction_RegularCoin ; OBJ_INTERACTION_1B
-	dw Func_21455 ; OBJ_INTERACTION_1C
-	dw Func_21548 ; OBJ_INTERACTION_1D
-	dw Func_21569 ; OBJ_INTERACTION_1E
-	dw Func_215a2 ; OBJ_INTERACTION_1F
-	dw Func_215e7 ; OBJ_INTERACTION_20
-	dw Func_2164f ; OBJ_INTERACTION_21
-	dw Func_21675 ; OBJ_INTERACTION_22
-	dw Func_21774 ; OBJ_INTERACTION_23
-	dw Func_217b9 ; OBJ_INTERACTION_24
-	dw Func_21819 ; OBJ_INTERACTION_25
-	dw ObjInteraction_Bubble ; OBJ_INTERACTION_26
-	dw Func_21887 ; OBJ_INTERACTION_27
-	dw ObjInteraction_Owl ; OBJ_INTERACTION_28
-	dw ObjInteraction_Rail ; OBJ_INTERACTION_29
-	dw Func_20e0f ; OBJ_INTERACTION_2A
-	dw Func_21a4f ; OBJ_INTERACTION_2B
-	dw Func_21a47 ; OBJ_INTERACTION_2C
-	dw Func_21a52 ; OBJ_INTERACTION_2D
-	dw Func_21a8c ; OBJ_INTERACTION_2E
-	dw Func_21a97 ; OBJ_INTERACTION_2F
-	dw Func_21ac3 ; OBJ_INTERACTION_30
-	dw Func_21af1 ; OBJ_INTERACTION_31
-	dw Func_21b08 ; OBJ_INTERACTION_32
-	dw Func_21b0b ; OBJ_INTERACTION_33
-	dw Func_21b2b ; OBJ_INTERACTION_34
-	dw Func_21b42 ; OBJ_INTERACTION_35
-	dw Func_21b78 ; OBJ_INTERACTION_36
-	dw Func_21573 ; OBJ_INTERACTION_37
-	dw Func_21b89 ; OBJ_INTERACTION_38
-	dw Func_21c17 ; OBJ_INTERACTION_39
-	dw Func_21c26 ; OBJ_INTERACTION_3A
-	dw Func_21c56 ; OBJ_INTERACTION_3B
-	dw Func_21c61 ; OBJ_INTERACTION_3C
-	dw Func_21c86 ; OBJ_INTERACTION_3D
-	dw Func_21c98 ; OBJ_INTERACTION_3E
-	dw Func_21ca8 ; OBJ_INTERACTION_3F
-	dw Func_21ccf ; OBJ_INTERACTION_40
-	dw Func_21ce9 ; OBJ_INTERACTION_41
-	dw Func_21cf8 ; OBJ_INTERACTION_42
-	dw Func_207ed ; OBJ_INTERACTION_43
-	dw Func_21cfd ; OBJ_INTERACTION_44
-	dw Func_21d17 ; OBJ_INTERACTION_45
-	dw Func_21d3b ; OBJ_INTERACTION_46
-	dw Func_21d64 ; OBJ_INTERACTION_47
-	dw Func_21d6f ; OBJ_INTERACTION_48
-	dw Func_21d88 ; OBJ_INTERACTION_49
-	dw ObjInteraction_ColourCoin ; OBJ_INTERACTION_4A
-	dw Func_21df8 ; OBJ_INTERACTION_4B
-	dw Func_21e2e ; OBJ_INTERACTION_4C
-	dw Func_21e3e ; OBJ_INTERACTION_4D
-	dw Func_21e9c ; OBJ_INTERACTION_4E
-	dw Func_21ea6 ; OBJ_INTERACTION_4F
-	dw Func_21ecd ; OBJ_INTERACTION_50
-	dw Func_21f01 ; OBJ_INTERACTION_51
-	dw Func_21f28 ; OBJ_INTERACTION_52
-	dw ObjInteraction_None ; OBJ_INTERACTION_53
-	dw ObjInteraction_None ; OBJ_INTERACTION_54
-	dw ObjInteraction_None ; OBJ_INTERACTION_55
-	dw ObjInteraction_None ; OBJ_INTERACTION_56
-	dw ObjInteraction_None ; OBJ_INTERACTION_57
-	dw ObjInteraction_None ; OBJ_INTERACTION_58
+	dw Func_21156                   ; OBJ_INTERACTION_18
+	dw Func_21245                   ; OBJ_INTERACTION_19
+	dw Func_21358                   ; OBJ_INTERACTION_1A
+	dw ObjInteraction_RegularCoin   ; OBJ_INTERACTION_1B
+	dw Func_21455                   ; OBJ_INTERACTION_1C
+	dw Func_21548                   ; OBJ_INTERACTION_1D
+	dw Func_21569                   ; OBJ_INTERACTION_1E
+	dw Func_215a2                   ; OBJ_INTERACTION_1F
+	dw Func_215e7                   ; OBJ_INTERACTION_20
+	dw Func_2164f                   ; OBJ_INTERACTION_21
+	dw Func_21675                   ; OBJ_INTERACTION_22
+	dw Func_21774                   ; OBJ_INTERACTION_23
+	dw Func_217b9                   ; OBJ_INTERACTION_24
+	dw Func_21819                   ; OBJ_INTERACTION_25
+	dw ObjInteraction_Bubble        ; OBJ_INTERACTION_26
+	dw Func_21887                   ; OBJ_INTERACTION_27
+	dw ObjInteraction_Owl           ; OBJ_INTERACTION_28
+	dw ObjInteraction_Rail          ; OBJ_INTERACTION_29
+	dw Func_20e0f                   ; OBJ_INTERACTION_2A
+	dw Func_21a4f                   ; OBJ_INTERACTION_2B
+	dw Func_21a47                   ; OBJ_INTERACTION_2C
+	dw Func_21a52                   ; OBJ_INTERACTION_2D
+	dw Func_21a8c                   ; OBJ_INTERACTION_2E
+	dw Func_21a97                   ; OBJ_INTERACTION_2F
+	dw Func_21ac3                   ; OBJ_INTERACTION_30
+	dw Func_21af1                   ; OBJ_INTERACTION_31
+	dw Func_21b08                   ; OBJ_INTERACTION_32
+	dw Func_21b0b                   ; OBJ_INTERACTION_33
+	dw Func_21b2b                   ; OBJ_INTERACTION_34
+	dw Func_21b42                   ; OBJ_INTERACTION_35
+	dw Func_21b78                   ; OBJ_INTERACTION_36
+	dw Func_21573                   ; OBJ_INTERACTION_37
+	dw Func_21b89                   ; OBJ_INTERACTION_38
+	dw Func_21c17                   ; OBJ_INTERACTION_39
+	dw Func_21c26                   ; OBJ_INTERACTION_3A
+	dw Func_21c56                   ; OBJ_INTERACTION_3B
+	dw Func_21c61                   ; OBJ_INTERACTION_3C
+	dw Func_21c86                   ; OBJ_INTERACTION_3D
+	dw Func_21c98                   ; OBJ_INTERACTION_3E
+	dw Func_21ca8                   ; OBJ_INTERACTION_3F
+	dw Func_21ccf                   ; OBJ_INTERACTION_40
+	dw Func_21ce9                   ; OBJ_INTERACTION_41
+	dw Func_21cf8                   ; OBJ_INTERACTION_42
+	dw Func_207ed                   ; OBJ_INTERACTION_43
+	dw Func_21cfd                   ; OBJ_INTERACTION_44
+	dw Func_21d17                   ; OBJ_INTERACTION_45
+	dw Func_21d3b                   ; OBJ_INTERACTION_46
+	dw Func_21d64                   ; OBJ_INTERACTION_47
+	dw Func_21d6f                   ; OBJ_INTERACTION_48
+	dw Func_21d88                   ; OBJ_INTERACTION_49
+	dw ObjInteraction_ColourCoin    ; OBJ_INTERACTION_4A
+	dw Func_21df8                   ; OBJ_INTERACTION_4B
+	dw Func_21e2e                   ; OBJ_INTERACTION_4C
+	dw Func_21e3e                   ; OBJ_INTERACTION_4D
+	dw Func_21e9c                   ; OBJ_INTERACTION_4E
+	dw Func_21ea6                   ; OBJ_INTERACTION_4F
+	dw Func_21ecd                   ; OBJ_INTERACTION_50
+	dw Func_21f01                   ; OBJ_INTERACTION_51
+	dw Func_21f28                   ; OBJ_INTERACTION_52
+	dw ObjInteraction_None          ; OBJ_INTERACTION_53
+	dw ObjInteraction_None          ; OBJ_INTERACTION_54
+	dw ObjInteraction_None          ; OBJ_INTERACTION_55
+	dw ObjInteraction_None          ; OBJ_INTERACTION_56
+	dw ObjInteraction_None          ; OBJ_INTERACTION_57
+	dw ObjInteraction_None          ; OBJ_INTERACTION_58
 ; 0x20202
 
 ObjInteraction_None: ; 20202 (8:4202)
@@ -310,7 +310,7 @@ Func_20203: ; 20203 (8:4203)
 	ld a, h
 	cp HIGH(wCurObj)
 	ret z
-	ld a, [hl]
+	ld a, [hl] ; OBJ_UNK_00
 	and $03
 	cp $01
 	jr z, .asm_2021b
@@ -335,30 +335,30 @@ Func_20203: ; 20203 (8:4203)
 Func_2022c: ; 2022c (8:422c)
 	ld a, [wIsRolling]
 	and a
-	jp nz, Func_20350
+	jp nz, AttackObject
 	ld a, [wInteractionSide]
 	and INTERACTION_UP | INTERACTION_DOWN
-	jp nz, Func_20447
+	jp nz, StepOnObject
 ;	fallthrough
 
 Func_2023b: ; 2023b (8:423b)
-	ld a, [wca93]
+	ld a, [wTouchState]
 	and a
 	jr z, .asm_20257
-	cp $02
+	cp TOUCH_BUMP
 	jr z, .asm_20257
-	cp $01
+	cp TOUCH_VULNERABLE
 	jp z, Func_20939
-	cp $03
-	jp z, Func_20350
-	cp $04
+	cp TOUCH_ATTACK
+	jp z, AttackObject
+	cp TOUCH_VANISH
 	jp z, Func_205e7
 	jp Func_20000.next_obj
 
 .asm_20257
 	ld a, [wAttackCounter]
 	and a
-	jp nz, Func_20350
+	jp nz, AttackObject
 
 	ld b, $01
 	call SetObjUnk1C
@@ -454,7 +454,9 @@ SetState_EnemyBumping: ; 202b5 (8:42b5)
 	jr .asm_20316
 ; 0x20350
 
-Func_20350: ; 20350 (8:4350)
+; routine called when an object is attacked
+; whether by Wario's B attack, Fat Wario bump, rolling, etc.
+AttackObject: ; 20350 (8:4350)
 	load_sfx SFX_017
 	ld a, [wWarioScreenXPos]
 	ld b, a
@@ -558,38 +560,47 @@ Func_20350: ; 20350 (8:4350)
 	ret
 ; 0x20447
 
-Func_20447: ; 20447 (8:4447)
+; routine called when Wario steps on an object
+StepOnObject: ; 20447 (8:4447)
+; no stun if Wario is invincible
 	ld a, [wInvincibleCounter]
 	cp $01
 	ret z
+
 	ld a, [wIsSmashAttacking]
 	dec a
-	jr nz, .asm_2045e
+	jr nz, .no_smash_attack
+; Wario is smash attacking
 	ld a, [wTransformation]
 	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
 	jp z, Func_205e7
 	jp Func_20602
 
-.asm_2045e
+.no_smash_attack
 	ld a, [wTransformation]
 	and a
-	jp nz, Func_20585
+	jp nz, .Transformed
+
+; not transformed
 	xor a
 	ld [wAttackCounter], a
+
+; stepping on object while rolling is attacking
 	ld a, [wIsRolling]
 	and a
-	jp nz, Func_20350
+	jp nz, AttackObject
+
 	ld a, [wWarioScreenXPos]
 	ld b, a
 	ld a, [wObjScreenXPos]
 	cp b
-	jr c, .asm_20484
+	jr c, .on_left
+; on right
 	ld a, [wInteractionSide]
 	or INTERACTION_RIGHT
 	ld [wInteractionSide], a
 	jr .asm_2048c
-
-.asm_20484
+.on_left
 	ld a, [wInteractionSide]
 	or INTERACTION_LEFT
 	ld [wInteractionSide], a
@@ -606,9 +617,11 @@ Func_20447: ; 20447 (8:4447)
 	ld a, [wGrabState]
 	and $ff ^ (GRAB_FLAGS_MASK)
 	cp GRAB_IDLE
-	jr z, .asm_204d9
+	jr z, .grabbing
+; clear grab state
 	xor a
-	ld [wGrabState], a ; ; reset grab state
+	ld [wGrabState], a
+
 	ld a, [wIsCrouching]
 	and a
 	jr nz, .crouching_1
@@ -622,8 +635,9 @@ Func_20447: ; 20447 (8:4447)
 	farcall Func_1ed3f
 	jr .asm_204e8
 
-.asm_204d9
+.grabbing
 	farcall Func_1ede9
+
 .asm_204e8
 	ld a, $01
 	ld [wca76], a
@@ -636,7 +650,7 @@ Func_20447: ; 20447 (8:4447)
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_HIGH_JUMP_BOOTS
 	jr c, .asm_20578
-	xor a
+	xor a ; full jump
 	ld [wJumpVelIndex], a
 	jr .asm_20578
 
@@ -647,6 +661,7 @@ Func_20447: ; 20447 (8:4447)
 	ld a, [wIsCrouching]
 	and a
 	jr nz, .crouching_2
+
 	ld a, [wGrabState]
 	and $ff ^ (GRAB_FLAGS_MASK)
 	cp GRAB_IDLE
@@ -683,19 +698,19 @@ Func_20447: ; 20447 (8:4447)
 	load_sfx SFX_014
 	ld b, $04
 	jp SetObjUnk1C
-; 0x20585
 
-Func_20585: ; 20585 (8:4585)
+.Transformed
 	ld a, [wTransformation]
 	cp (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
-	jr nz, .asm_20593
+	jr nz, .not_hot_wario
 	ld a, [wca8f]
 	cp $02
 	jr nc, Func_205e7
-.asm_20593
+.not_hot_wario
+
 	ld a, [wTransformation]
 	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
-	jp z, Func_20350
+	jp z, AttackObject
 	ld a, [wWarioScreenXPos]
 	ld b, a
 	ld a, [wObjScreenXPos]
@@ -720,8 +735,8 @@ Func_20585: ; 20585 (8:4585)
 	jr z, .asm_205d1
 	ret
 .asm_205d1
-	ld a, [wca93]
-	cp $05
+	ld a, [wTouchState]
+	cp TOUCH_PASS_THROUGH
 	ret z
 	farcall Func_2a0b2
 	ret
@@ -794,27 +809,30 @@ Func_20670: ; 20670 (8:4670)
 	ld a, [wInvincibleCounter]
 	and a
 	jp nz, Func_20939
+
+; if Wario is rolling, do attack
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_GARLIC
-	jr nc, .asm_20685
+	jr nc, .check_rolling
 	ld a, [wObjInteractionType]
 	bit HEAVY_OBJ_F, a
 	jr nz, .asm_2068c
-.asm_20685
+.check_rolling
 	ld a, [wIsRolling]
 	and a
-	jp nz, Func_20350
+	jp nz, AttackObject
+
 .asm_2068c
-	ld a, [wca92]
+	ld a, [wStingTouchState]
 	and a
 	jr z, .asm_206a8
-	cp $01
+	cp TOUCH_VULNERABLE
 	jr z, .asm_206a8
-	cp $02
+	cp TOUCH_BUMP
 	jp z, Func_2023b
-	cp $03
-	jp z, Func_20350
-	cp $04
+	cp TOUCH_ATTACK
+	jp z, AttackObject
+	cp TOUCH_VANISH
 	jp z, Func_205e7
 	jp Func_20000.next_obj
 
@@ -848,8 +866,8 @@ Func_20670: ; 20670 (8:4670)
 	ld a, [wInvincibleCounter]
 	cp $01
 	ret z
-	ld a, [wca92]
-	cp $01
+	ld a, [wStingTouchState]
+	cp TOUCH_VULNERABLE
 	jr z, Func_206eb
 	jr SetState_Stung
 ; 0x206eb
@@ -966,12 +984,12 @@ Func_207ed: ; 207ed (8:47ed)
 	ld a, [wWaterInteraction]
 	and a
 	ret z
-	ld a, [wca92]
+	ld a, [wStingTouchState]
 	and a
 	jr z, .asm_20808
-	cp $02
+	cp TOUCH_BUMP
 	jp z, Func_208f2.start
-	cp $04
+	cp TOUCH_VANISH
 	jp z, Func_2092d
 	ret
 
@@ -1020,12 +1038,12 @@ Func_2080d: ; 2080d (8:480d)
 ; 0x20899
 
 Func_20899: ; 20899 (8:4899)
-	ld a, [wca92]
+	ld a, [wStingTouchState]
 	and a
 	jr z, .asm_208a9
-	cp $02
+	cp TOUCH_BUMP
 	jr z, .asm_208a9
-	cp $04
+	cp TOUCH_VANISH
 	jp z, Func_2092d
 	ret
 
@@ -1069,12 +1087,12 @@ Func_208f2: ; 208f2 (8:48f2)
 	ret
 
 .start
-	ld a, [wca92]
+	ld a, [wStingTouchState]
 	and a
 	jr z, .asm_2090a
-	cp $02
+	cp TOUCH_BUMP
 	jr z, .asm_2090a
-	cp $04
+	cp TOUCH_VANISH
 	jp z, Func_2092d
 	ret
 
@@ -1101,11 +1119,11 @@ Func_2092d: ; 2092d (8:492d)
 Func_20932: ; 20932 (8:4932)
 	ld a, [wAttackCounter]
 	and a
-	jp nz, Func_20350
+	jp nz, AttackObject
 ;	fallthrough
 
 Func_20939: ; 20939 (8:4939)
-	ld a, [wca93]
+	ld a, [wTouchState]
 	and a
 	jp nz, Func_2023b
 	ld b, $06
@@ -1305,20 +1323,21 @@ Func_20a6f: ; 20a6f (8:4a6f)
 ; 0x20b41
 
 Func_20b41: ; 20b41 (8:4b41)
-	ld a, [wca93]
+	ld a, [wTouchState]
 	and a
 	jr z, .asm_20b5e
-	cp $02
+	cp TOUCH_BUMP
 	jp z, Func_20a6f
-	cp $01
+	cp TOUCH_VULNERABLE
 	jp z, Func_20a6f
-	cp $03
-	jp z, Func_20350
-	cp $04
+	cp TOUCH_ATTACK
+	jp z, AttackObject
+	cp TOUCH_VANISH
 	jp z, Func_205e7
 	jp Func_20a6f
+
 .asm_20b5e
-	ld a, [wca93]
+	ld a, [wTouchState]
 	and a
 	ret nz
 	call Func_20939
@@ -1329,15 +1348,15 @@ Func_20b41: ; 20b41 (8:4b41)
 Func_20b6b: ; 20b6b (8:4b6b)
 	ld a, [wInteractionSide]
 	bit INTERACTION_UP_F, a
-	jp nz, Func_20447
-	ld a, [wca93]
+	jp nz, StepOnObject
+	ld a, [wTouchState]
 	and a
 	jr z, .check_water
-	cp $03
-	jp z, Func_20350
-	cp $04
+	cp TOUCH_ATTACK
+	jp z, AttackObject
+	cp TOUCH_VANISH
 	jp z, Func_205e7
-	cp $05
+	cp TOUCH_PASS_THROUGH
 	jp z, Func_20000.next_obj
 	jp .asm_20c41
 
@@ -1353,7 +1372,7 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	ld b, a
 	ld a, [wAttackCounter]
 	or b
-	jp nz, Func_20350
+	jp nz, AttackObject
 
 	ld a, [wIsCrouching]
 	ld b, a
@@ -1438,7 +1457,7 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	ret
 
 .asm_20c41
-	jp Func_20447
+	jp StepOnObject
 	ld a, [wWarioScreenXPos]
 	ld b, a
 	ld a, [wObjScreenXPos]
@@ -1455,6 +1474,7 @@ Func_20b6b: ; 20b6b (8:4b6b)
 
 .pick_up
 	load_sfx SFX_GRAB
+
 	xor a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
@@ -1529,7 +1549,7 @@ ObjInteraction_FrontSting: ; 20d20 (8:4d20)
 	jp nz, Func_20670
 	jp Func_2022c
 .asm_20d44
-	jp Func_20447
+	jp StepOnObject
 ; 0x20d47
 
 ObjInteraction_BackSting: ; 20d47 (8:4d47)
@@ -1549,7 +1569,7 @@ ObjInteraction_BackSting: ; 20d47 (8:4d47)
 	jp nz, Func_20670
 	jp Func_2022c
 .asm_20d6b
-	jp Func_20447
+	jp StepOnObject
 ; 0x20d6e
 
 ObjInteraction_TopSting: ; 20d6e (8:4d6e)
@@ -1557,7 +1577,7 @@ ObjInteraction_TopSting: ; 20d6e (8:4d6e)
 	bit INTERACTION_UP_F, a
 	jp nz, Func_20670
 	bit INTERACTION_DOWN_F, a
-	jp nz, Func_20447
+	jp nz, StepOnObject
 	jp Func_2022c
 ; 0x20d7e
 
@@ -1669,7 +1689,7 @@ Func_20e39: ; 20e39 (8:4e39)
 	jp nz, Func_20939
 	jp Func_2022c
 .asm_20e5d
-	jp Func_20447
+	jp StepOnObject
 ; 0x20e60
 
 Func_20e60: ; 20e60 (8:4e60)
@@ -1679,12 +1699,12 @@ Func_20e60: ; 20e60 (8:4e60)
 Func_20e63: ; 20e63 (8:4e63)
 	ld a, [wAttackCounter]
 	and a
-	jp nz, Func_20350
+	jp nz, AttackObject
 ;	fallthrough
 
 Func_20e6a: ; 20e6a (8:4e6a)
 	call Func_20939
-	ld a, [wca93]
+	ld a, [wTouchState]
 	and a
 	ret nz
 	ld b, $0a
@@ -1718,14 +1738,16 @@ Func_20e97: ; 20e97 (8:4e97)
 	ld a, [wTransformation]
 	bit 6, a
 	jp nz, Func_2022c
+
 	ld a, (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
 	ld [wTransformation], a
+
 	ld a, $01
 	ld [wca8f], a
-	ld a, $02
-	ld [wca93], a
-	ld a, $02
-	ld [wca92], a
+	ld a, TOUCH_BUMP
+	ld [wTouchState], a
+	ld a, TOUCH_BUMP
+	ld [wStingTouchState], a
 	ld a, $02
 	ld [wca94], a
 
@@ -1802,7 +1824,7 @@ Func_20f6a: ; 20f6a (8:4f6a)
 	ld a, [wIsSmashAttacking]
 	dec a
 	jp z, Func_20602
-	jp Func_20447
+	jp StepOnObject
 .asm_20f82
 	ld a, [wInvincibleCounter]
 	and a
@@ -1835,10 +1857,14 @@ Func_20f6a: ; 20f6a (8:4f6a)
 	ld [wca71], a
 	ld a, 9
 	ld [wca72], a
-	jp Func_20447
+	jp StepOnObject
 ; 0x20fe8
 
-	INCROM $20fe8, $20fed
+; unreferenced?
+Func_20fe8: ; 20fe8 (8:4fe8)
+	ld b, $06
+	jp SetObjUnk1C
+; 0x20fed
 
 ObjInteraction_GreyKey: ; 20fed (8:4fed)
 	ld hl, wKeys
@@ -2105,7 +2131,7 @@ Func_21245: ; 21245 (8:5245)
 	jp Func_2022c
 
 .asm_21267
-	jp Func_20447
+	jp StepOnObject
 ; 0x2126a
 
 Func_2126a: ; 2126a (8:526a)
@@ -2151,10 +2177,10 @@ Func_2126a: ; 2126a (8:526a)
 	ld [wTransformation], a
 	xor a
 	ld [wca8f], a
-	ld a, $03
-	ld [wca93], a
-	ld a, $03
-	ld [wca92], a
+	ld a, TOUCH_ATTACK
+	ld [wTouchState], a
+	ld a, TOUCH_ATTACK
+	ld [wStingTouchState], a
 	ld a, $01
 	ld [wca94], a
 	call UpdateLevelMusic
@@ -2215,10 +2241,10 @@ Func_21358: ; 21358 (8:5358)
 	call Func_20a63
 	ld a, (1 << 7) | TRANSFORMATION_FAT_WARIO
 	ld [wTransformation], a
-	ld a, $02
-	ld [wca93], a
-	ld a, $02
-	ld [wca92], a
+	ld a, TOUCH_BUMP
+	ld [wTouchState], a
+	ld a, TOUCH_BUMP
+	ld [wStingTouchState], a
 	ld a, $02
 	ld [wca94], a
 
@@ -2365,10 +2391,10 @@ Func_21455: ; 21455 (8:5455)
 
 	ld a, (1 << 7) | TRANSFORMATION_ELECTRIC
 	ld [wTransformation], a
-	ld a, $04
-	ld [wca93], a
-	ld a, $04
-	ld [wca92], a
+	ld a, TOUCH_VANISH
+	ld [wTouchState], a
+	ld a, TOUCH_VANISH
+	ld [wStingTouchState], a
 	ld a, $01
 	ld [wca94], a
 	call UpdateLevelMusic
@@ -2453,10 +2479,10 @@ Func_215a2: ; 215a2 (8:55a2)
 
 	ld a, (1 << 6) | TRANSFORMATION_ZOMBIE_WARIO
 	ld [wTransformation], a
-	ld a, $04
-	ld [wca93], a
-	ld a, $04
-	ld [wca92], a
+	ld a, TOUCH_VANISH
+	ld [wTouchState], a
+	ld a, TOUCH_VANISH
+	ld [wStingTouchState], a
 	ld a, $02
 	ld [wca94], a
 	farcall SetState_ZombieIdling
@@ -2466,7 +2492,7 @@ Func_215a2: ; 215a2 (8:55a2)
 Func_215e7: ; 215e7 (8:55e7)
 	ld a, [wInteractionSide]
 	and INTERACTION_UP | INTERACTION_DOWN
-	jp nz, Func_20447
+	jp nz, StepOnObject
 	ld a, [wEnemyDirection]
 	cp DIRECTION_RIGHT
 	jr z, .asm_21600
@@ -2494,10 +2520,10 @@ Func_2160a: ; 2160a (8:560a)
 	jp z, Func_2022c
 	ld a, TRANSFORMATION_BOUNCY_WARIO
 	ld [wTransformation], a
-	ld a, $02
-	ld [wca93], a
-	ld a, $02
-	ld [wca92], a
+	ld a, TOUCH_BUMP
+	ld [wTouchState], a
+	ld a, TOUCH_BUMP
+	ld [wStingTouchState], a
 	ld a, $01
 	ld [wca94], a
 
@@ -2513,7 +2539,7 @@ Func_2160a: ; 2160a (8:560a)
 Func_2164f: ; 2164f (8:564f)
 	ld a, [wInteractionSide]
 	and INTERACTION_UP | INTERACTION_DOWN
-	jp nz, Func_20447
+	jp nz, StepOnObject
 	ld a, [wEnemyDirection]
 	cp DIRECTION_RIGHT
 	jr z, .asm_21668
@@ -2667,7 +2693,7 @@ Func_217b9: ; 217b9 (8:57b9)
 	jr nz, .asm_217de
 	jp Func_2022c
 .asm_217db
-	jp Func_20447
+	jp StepOnObject
 
 .asm_217de
 	ld a, [wInvincibleCounter]
@@ -2684,10 +2710,10 @@ Func_217b9: ; 217b9 (8:57b9)
 
 	ld a, TRANSFORMATION_CRAZY_WARIO
 	ld [wTransformation], a
-	ld a, $03
-	ld [wca93], a
-	ld a, $03
-	ld [wca92], a
+	ld a, TOUCH_ATTACK
+	ld [wTouchState], a
+	ld a, TOUCH_ATTACK
+	ld [wStingTouchState], a
 	ld a, $01
 	ld [wca94], a
 	farcall SetState_CrazySpinning
@@ -2728,10 +2754,10 @@ ObjInteraction_Bubble: ; 21853 (8:5853)
 
 	ld a, (1 << 6) | TRANSFORMATION_BUBBLE
 	ld [wTransformation], a
-	ld a, $02
-	ld [wca93], a
-	ld a, $02
-	ld [wca92], a
+	ld a, TOUCH_BUMP
+	ld [wTouchState], a
+	ld a, TOUCH_BUMP
+	ld [wStingTouchState], a
 	ld a, $01
 	ld [wca94], a
 	farcall Func_2ac7d
@@ -2765,10 +2791,10 @@ Func_21887: ; 21887 (8:5887)
 	load_sfx SFX_028
 	ld a, (1 << 6) | TRANSFORMATION_ICE_SKATIN
 	ld [wTransformation], a
-	ld a, $03
-	ld [wca93], a
-	ld a, $03
-	ld [wca92], a
+	ld a, TOUCH_ATTACK
+	ld [wTouchState], a
+	ld a, TOUCH_ATTACK
+	ld [wStingTouchState], a
 	ld a, $02
 	ld [wca94], a
 	farcall SetState_IceSkatinStart
@@ -2794,10 +2820,10 @@ ObjInteraction_Owl: ; 218e7 (8:58e7)
 	ld a, TRANSFORMATION_OWL_WARIO
 	ld [wTransformation], a
 
-	ld a, $02
-	ld [wca93], a
-	ld a, $01
-	ld [wca92], a
+	ld a, TOUCH_BUMP
+	ld [wTouchState], a
+	ld a, TOUCH_VULNERABLE
+	ld [wStingTouchState], a
 	ld a, $01
 	ld [wca94], a
 	ld a, $b8
@@ -2852,10 +2878,10 @@ ObjInteraction_Rail: ; 21999 (8:5999)
 	ld a, TRANSFORMATION_RAIL
 	ld [wTransformation], a
 
-	ld a, $02
-	ld [wca93], a
-	ld a, $01
-	ld [wca92], a
+	ld a, TOUCH_BUMP
+	ld [wTouchState], a
+	ld a, TOUCH_VULNERABLE
+	ld [wStingTouchState], a
 	ld a, $01
 	ld [wca94], a
 
@@ -2905,7 +2931,7 @@ ObjInteraction_Rail: ; 21999 (8:5999)
 Func_21a47: ; 21a47 (8:5a47)
 	ld a, [wInteractionSide]
 	bit INTERACTION_UP_F, a
-	jp nz, Func_20447
+	jp nz, StepOnObject
 ;	fallthrough
 
 Func_21a4f: ; 21a4f (8:5a4f)
@@ -2926,10 +2952,10 @@ Func_21a52: ; 21a52 (8:5a52)
 
 	xor a
 	ld [wca8f], a
-	ld a, $03
-	ld [wca93], a
-	ld a, $03
-	ld [wca92], a
+	ld a, TOUCH_ATTACK
+	ld [wTouchState], a
+	ld a, TOUCH_ATTACK
+	ld [wStingTouchState], a
 	ld a, $02
 	ld [wca94], a
 	farcall SetState_UnknownC4
@@ -3003,7 +3029,7 @@ Func_21af1: ; 21af1 (8:5af1)
 	bit INTERACTION_UP_F, a
 	jp nz, Func_209ca
 	bit INTERACTION_DOWN_F, a
-	jp nz, Func_20447
+	jp nz, StepOnObject
 	ld a, [wAttackCounter]
 	and a
 	jp nz, Func_217a9
@@ -3029,10 +3055,10 @@ Func_21b0b: ; 21b0b (8:5b0b)
 Func_21b2b: ; 21b2b (8:5b2b)
 	ld a, [wInteractionSide]
 	and INTERACTION_UP | INTERACTION_DOWN
-	jp nz, Func_20447
+	jp nz, StepOnObject
 	ld a, [wAttackCounter]
 	and a
-	jp nz, Func_20350
+	jp nz, AttackObject
 ;	fallthrough
 
 Func_21b3a: ; 21b3a (8:5b3a)
@@ -3055,10 +3081,10 @@ Func_21b42: ; 21b42 (8:5b42)
 	ld a, (1 << 6) | TRANSFORMATION_SPLIT
 	ld [wTransformation], a
 
-	ld a, $05
-	ld [wca93], a
-	ld a, $05
-	ld [wca92], a
+	ld a, TOUCH_PASS_THROUGH
+	ld [wTouchState], a
+	ld a, TOUCH_PASS_THROUGH
+	ld [wStingTouchState], a
 	ld a, $02
 	ld [wca94], a
 	farcall SetState_SplitHit
@@ -3093,10 +3119,10 @@ Func_21b89: ; 21b89 (8:5b89)
 	ld a, (1 << 6) | TRANSFORMATION_BLIND
 	ld [wTransformation], a
 
-	ld a, $02
-	ld [wca93], a
-	ld a, $01
-	ld [wca92], a
+	ld a, TOUCH_BUMP
+	ld [wTouchState], a
+	ld a, TOUCH_VULNERABLE
+	ld [wStingTouchState], a
 	ld a, $01
 	ld [wca94], a
 
@@ -3183,7 +3209,7 @@ Func_21c56: ; 21c56 (8:5c56)
 Func_21c61: ; 21c61 (8:5c61)
 	ld a, [wInteractionSide]
 	and INTERACTION_UP | INTERACTION_DOWN
-	jp nz, Func_20447
+	jp nz, StepOnObject
 	ld a, [wEnemyDirection]
 	and a
 	jr nz, .asm_21c7a
@@ -3206,7 +3232,7 @@ Func_21c86: ; 21c86 (8:5c86)
 	jp nz, Func_20e6a
 	ld a, [wAttackCounter]
 	and a
-	jp nz, Func_20350
+	jp nz, AttackObject
 	jp Func_20e6a
 ; 0x21c98
 
@@ -3399,10 +3425,10 @@ Func_21df8: ; 21df8 (8:5df8)
 	ld a, (1 << 6) | TRANSFORMATION_MAGIC
 	ld [wTransformation], a
 
-	ld a, $05
-	ld [wca93], a
-	ld a, $05
-	ld [wca92], a
+	ld a, TOUCH_PASS_THROUGH
+	ld [wTouchState], a
+	ld a, TOUCH_PASS_THROUGH
+	ld [wStingTouchState], a
 	ld a, $02
 	ld [wca94], a
 	farcall SetState_MagicRising
@@ -3414,7 +3440,7 @@ Func_21e2e: ; 21e2e (8:5e2e)
 	bit INTERACTION_DOWN_F, a
 	jp nz, Func_20670
 	bit INTERACTION_UP_F, a
-	jp nz, Func_20447
+	jp nz, StepOnObject
 	jp Func_2022c
 ; 0x21e3e
 
@@ -3426,7 +3452,7 @@ Func_21e3e: ; 21e3e (8:5e3e)
 	bit INTERACTION_DOWN_F, a
 	jr nz, .asm_21e54
 	bit INTERACTION_UP_F, a
-	jp nz, Func_20447
+	jp nz, StepOnObject
 	jp Func_20e63
 
 .asm_21e54
@@ -3441,10 +3467,10 @@ Func_21e3e: ; 21e3e (8:5e3e)
 	ld a, (1 << 6) | TRANSFORMATION_BALL
 	ld [wTransformation], a
 
-	ld a, $05
-	ld [wca93], a
-	ld a, $05
-	ld [wca92], a
+	ld a, TOUCH_PASS_THROUGH
+	ld [wTouchState], a
+	ld a, TOUCH_PASS_THROUGH
+	ld [wStingTouchState], a
 	ld a, $02
 	ld [wca94], a
 

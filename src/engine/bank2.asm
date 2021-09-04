@@ -63,7 +63,7 @@ Func_8024: ; 8024 (2:4024)
 	ld hl, wSubSequence
 	inc [hl]
 	ld a, [wLevel]
-	cp LEVEL_HIDDEN_FIGURE_ROOM
+	cp THE_TEMPLE
 	jr z, .final_battle
 	ld a, $87
 	ldh [rLCDC], a
@@ -134,7 +134,7 @@ Func_80aa: ; 80aa (2:40aa)
 
 	call Func_b8d3
 	ld a, [wLevel]
-	cp LEVEL_HIDDEN_FIGURE_ROOM
+	cp THE_TEMPLE
 	jr nz, .asm_814f
 	ld a, [wca9b]
 	cp $02
@@ -259,8 +259,10 @@ Func_80aa: ; 80aa (2:40aa)
 	jr z, .asm_82c6
 	bit 7, a
 	ret nz
+
 	ld a, TRUE
 	ld [wResetDisabled], a
+
 	xor a
 	ld [wGroundShakeCounter], a
 	ld [wc0bc], a
@@ -369,7 +371,6 @@ Func_80aa: ; 80aa (2:40aa)
 	xor a
 	ld [wSubSequence], a
 	ret
-; 0x8331
 
 .asm_8331
 	ld a, $01
@@ -904,8 +905,8 @@ Func_8747: ; 8747 (2:4747)
 
 .asm_88b7
 	ld a, [wLevel]
-	cp LEVEL_HIDDEN_FIGURE_ROOM
-	jr nz, .not_hidden_figure_room
+	cp THE_TEMPLE
+	jr nz, .not_the_temple
 
 	xor a
 	ld a, [wcac5]
@@ -919,7 +920,7 @@ Func_8747: ; 8747 (2:4747)
 	ld [wTempSCX], a
 	ldh [rSCX], a
 
-.not_hidden_figure_room
+.not_the_temple
 	call Func_b8d3
 	xor a
 	ld [wc0da], a

@@ -11,14 +11,12 @@ OBJ_UNK_09 rb ; $09
 OBJ_UNK_0A rb ; $0a
 OBJ_UNK_0B rb ; $0b
 OBJ_UNK_0C rb ; $0c
-OBJ_UNK_0D rb ; $0d
-OBJ_UNK_0E rb ; $0e
+OBJ_SCREEN_Y_POS rb ; $0d
+OBJ_SCREEN_X_POS rb ; $0e
 OBJ_UNK_0F rb ; $0f
 OBJ_UNK_10 rw ; $10
-OBJ_UNK_12 rb ; $12
-OBJ_UNK_13 rb ; $13
-OBJ_UNK_14 rb ; $14
-OBJ_UNK_15 rb ; $15
+OBJ_UNK_12 rw ; $12
+OBJ_UNK_14 rw ; $14
 OBJ_UNK_16 rb ; $16
 OBJ_UNK_17 rb ; $17
 OBJ_UNK_18 rb ; $18
@@ -27,7 +25,7 @@ OBJ_UNK_1A rb ; $1a
 OBJ_UNK_1B rb ; $1b
 OBJ_UNK_1C rb ; $1c
 OBJ_UNK_1D rb ; $1d
-OBJ_UNK_1E rw ; $1e
+OBJ_UPDATE_FUNCTION rw ; $1e
 OBJ_STRUCT_LENGTH EQU _RS
 
 ; enemies with InteractionType with

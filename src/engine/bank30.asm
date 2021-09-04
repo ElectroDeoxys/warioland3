@@ -312,7 +312,7 @@ LevelHeaders: ; c00be (30:40be)
 	dw .forest_of_fear         ; FOREST_OF_FEAR_NIGHT_2
 	dw .forest_of_fear         ; FOREST_OF_FEAR_NIGHT_3
 	dw .forest_of_fear         ; FOREST_OF_FEAR_NIGHT_4
-	dw .hidden_figure_room     ; HIDDEN_FIGURE_ROOM
+	dw .the_temple             ; THE_TEMPLE
 	dw NULL
 	dw NULL
 	dw NULL
@@ -402,7 +402,7 @@ LevelHeaders: ; c00be (30:40be)
 .forest_of_fear
 	dab ForestOfFearLayout
 	dw ForestOfFearObjectsMap
-.hidden_figure_room
+.the_temple
 	dab HiddenFigureRoomLayout
 	dw HiddenFigureRoomObjectsMap
 .the_vast_plain_2
@@ -635,7 +635,7 @@ PointerTable_c0319: ; c0319 (30:4319)
 	dw Data_c68d0 ; FOREST_OF_FEAR_NIGHT_2
 	dw Data_c6964 ; FOREST_OF_FEAR_NIGHT_3
 	dw Data_c69f8 ; FOREST_OF_FEAR_NIGHT_4
-	dw Data_c6a8c ; HIDDEN_FIGURE_ROOM
+	dw Data_c6a8c ; THE_TEMPLE
 	dw NULL
 	dw NULL
 	dw NULL

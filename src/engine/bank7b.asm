@@ -905,10 +905,10 @@ SetState_UnknownE1: ; 1ed738 (7b:5738)
 	ld a, (1 << 6) | TRANSFORMATION_UNK_14
 	ld [wTransformation], a
 
-	ld a, $04
-	ld [wca93], a
-	ld a, $04
-	ld [wca92], a
+	ld a, TOUCH_VANISH
+	ld [wTouchState], a
+	ld a, TOUCH_VANISH
+	ld [wStingTouchState], a
 	ld a, $02
 	ld [wca94], a
 

@@ -157,38 +157,38 @@ Func_640e5: ; 640e5 (19:40e5)
 	ld l, LOW(wObj1)
 	ld a, [hli]
 	rra
-	jr nc, .got_enemy
+	jr nc, .got_obj
 	ld l, LOW(wObj2)
 	ld a, [hli]
 	rra
-	jr nc, .got_enemy
+	jr nc, .got_obj
 	ld l, LOW(wObj3)
 	ld a, [hli]
 	rra
-	jr nc, .got_enemy
+	jr nc, .got_obj
 	ld l, LOW(wObj4)
 	ld a, [hli]
 	rra
-	jr nc, .got_enemy
+	jr nc, .got_obj
 	ld l, LOW(wObj5)
 	ld a, [hli]
 	rra
-	jr nc, .got_enemy
+	jr nc, .got_obj
 	ld l, LOW(wObj6)
 	ld a, [hli]
 	rra
-	jr nc, .got_enemy
+	jr nc, .got_obj
 	ld l, LOW(wObj7)
 	ld a, [hli]
 	rra
-	jr nc, .got_enemy
+	jr nc, .got_obj
 	ld l, LOW(wObj8)
 	ld a, [hli]
 	rra
-	jr nc, .got_enemy
+	jr nc, .got_obj
 	ret
 
-.got_enemy
+.got_obj
 	ld a, [de]
 	rlca
 	ret nc
@@ -270,13 +270,13 @@ Func_640e5: ; 640e5 (19:40e5)
 	inc e
 	inc e
 	ld a, [hli]
-	ld [de], a ; OBJ_UNK_1E
+	ld [de], a ; OBJ_UPDATE_FUNCTION
 	inc e
 	ld a, [hli]
 	ld [de], a
 
 	ld a, e
-	sub (OBJ_UNK_1E + 1) - OBJ_UNK_00
+	sub (OBJ_UPDATE_FUNCTION + 1) - OBJ_UNK_00
 	ld e, a
 	ld a, [hl]
 	or $11
@@ -521,13 +521,13 @@ Data_6440b: ; 6440b (19:440b)
 Data_64413: ; 64413 (19:4413)
 	db $00, $01, $f2
 	dw $407b
-	dw $4040
+	dw Func_40040
 	db $80
 
 Data_6441b: ; 6441b (19:441b)
 	db $01, $8c, $ef
 	dw $4564
-	dw $46c4
+	dw Func_406c4
 	db $80
 
 Data_64423: ; 64423 (19:4423)

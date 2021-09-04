@@ -1187,7 +1187,7 @@ UpdateState_DraggedDown: ; 1a046 (6:6046)
 	and a
 	ret nz
 	ld a, [wLevel]
-	cp LEVEL_HIDDEN_FIGURE_ROOM
+	cp THE_TEMPLE
 	jr z, .set_game_over
 	farcall StartFall
 	ret

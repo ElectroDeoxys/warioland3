@@ -85,7 +85,7 @@ BOUNCY_WARIO_DURATION EQU 900
 ; switch from OnFire to Hot state
 HOT_WARIO_TRANSITION_DURATION EQU 300
 
-; grab constants
+; grab constants used for wGrabState
 	const_def
 	const GRAB_NONE                ; $0
 	const GRAB_PICK_UP             ; $1
@@ -108,3 +108,12 @@ GRAB_FLAGS_MASK EQU (1 << GRAB_UNUSED_0_F) | (1 << GRAB_UNUSED_1_F) | (1 << GRAB
 ; with a light and heavy object
 THROW_CHARGE_FRAMES_LIGHT EQU $1e
 THROW_CHARGE_FRAMES_HEAVY EQU $3c
+
+; touch state constants for wTouchState
+	const_def
+	const TOUCH_NONE         ; $0
+	const TOUCH_VULNERABLE   ; $1
+	const TOUCH_BUMP         ; $2
+	const TOUCH_ATTACK       ; $3
+	const TOUCH_VANISH       ; $4
+	const TOUCH_PASS_THROUGH ; $5

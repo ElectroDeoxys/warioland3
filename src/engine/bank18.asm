@@ -30,9 +30,9 @@ Func_611cb: ; 611cb (18:51cb)
 	ld a, [hli]
 	ld [wCurObjUnk0c], a
 	ld a, [hli]
-	ld [wCurObjUnk0d], a
+	ld [wCurObjScreenYPos], a
 	ld a, [hli]
-	ld [wCurObjUnk0e], a
+	ld [wCurObjScreenXPos], a
 	ld a, [hli]
 	ld [wCurObjUnk0f], a
 	ld a, [hli]
@@ -40,13 +40,13 @@ Func_611cb: ; 611cb (18:51cb)
 	ld a, [hli]
 	ld [wCurObjUnk10 + 1], a
 	ld a, [hli]
-	ld [wCurObjUnk12], a
+	ld [wCurObjUnk12 + 0], a
 	ld a, [hli]
-	ld [wCurObjUnk13], a
+	ld [wCurObjUnk12 + 1], a
 	ld a, [hli]
-	ld [wCurObjUnk14], a
+	ld [wCurObjUnk14 + 0], a
 	ld a, [hli]
-	ld [wCurObjUnk15], a
+	ld [wCurObjUnk14 + 1], a
 	ld a, [hli]
 	ld [wCurObjUnk16], a
 	ld a, [hli]
@@ -64,16 +64,16 @@ Func_611cb: ; 611cb (18:51cb)
 	ld a, [hli]
 	ld [wCurObjUnk1d], a
 	ld a, [hli]
-	ld [wCurObjUnk1e], a
+	ld [wCurObjUpdateFunction], a
 	ld a, [hl]
-	ld [wCurObjUnk1e + 1], a
+	ld [wCurObjUpdateFunction + 1], a
 	call Func_61760
 
-	farcall $13, wCurObjUnk1e
+	farcall $13, wCurObjUpdateFunction
 
 	call Func_312f
 	call Func_6307b
-	ld hl, wCurObjUnk0d
+	ld hl, wCurObjScreenYPos
 	ld a, [wTempSCY]
 	ld b, a
 	ld a, [wCurObjYPos]
@@ -120,9 +120,9 @@ Func_611cb: ; 611cb (18:51cb)
 	ld [hli], a
 	ld a, [wCurObjUnk0c]
 	ld [hli], a
-	ld a, [wCurObjUnk0d]
+	ld a, [wCurObjScreenYPos]
 	ld [hli], a
-	ld a, [wCurObjUnk0e]
+	ld a, [wCurObjScreenXPos]
 	ld [hli], a
 	ld a, [wCurObjUnk0f]
 	ld [hli], a
@@ -130,13 +130,13 @@ Func_611cb: ; 611cb (18:51cb)
 	ld [hli], a
 	ld a, [wCurObjUnk10 + 1]
 	ld [hli], a
-	ld a, [wCurObjUnk12]
+	ld a, [wCurObjUnk12 + 0]
 	ld [hli], a
-	ld a, [wCurObjUnk13]
+	ld a, [wCurObjUnk12 + 1]
 	ld [hli], a
-	ld a, [wCurObjUnk14]
+	ld a, [wCurObjUnk14 + 0]
 	ld [hli], a
-	ld a, [wCurObjUnk15]
+	ld a, [wCurObjUnk14 + 1]
 	ld [hli], a
 	ld a, [wCurObjUnk16]
 	ld [hli], a
@@ -153,9 +153,9 @@ Func_611cb: ; 611cb (18:51cb)
 	ld a, [wCurObjUnk1c]
 	ld [hli], a
 	inc l
-	ld a, [wCurObjUnk1e]
+	ld a, [wCurObjUpdateFunction]
 	ld [hli], a
-	ld a, [wCurObjUnk1e + 1]
+	ld a, [wCurObjUpdateFunction + 1]
 	ld [hl], a
 	ret
 ; 0x6130b
@@ -209,7 +209,7 @@ Func_61348: ; 61348 (18:5348)
 	ld [w1d14a], a
 
 	ld a, [wLevel]
-	cp LEVEL_HIDDEN_FIGURE_ROOM
+	cp THE_TEMPLE
 	jr z, Func_6130b
 
 	ld a, [wIsFloorTransition]
@@ -316,9 +316,9 @@ Func_613dc: ; 613dc (18:53dc)
 	ld a, [hli]
 	ld [wCurObjUnk0c], a
 	ld a, [hli]
-	ld [wCurObjUnk0d], a
+	ld [wCurObjScreenYPos], a
 	ld a, [hli]
-	ld [wCurObjUnk0e], a
+	ld [wCurObjScreenXPos], a
 	ld a, [hli]
 	ld [wCurObjUnk0f], a
 	ld a, [hli]
@@ -326,13 +326,13 @@ Func_613dc: ; 613dc (18:53dc)
 	ld a, [hli]
 	ld [wCurObjUnk10 + 1], a
 	ld a, [hli]
-	ld [wCurObjUnk12], a
+	ld [wCurObjUnk12 + 0], a
 	ld a, [hli]
-	ld [wCurObjUnk13], a
+	ld [wCurObjUnk12 + 1], a
 	ld a, [hli]
-	ld [wCurObjUnk14], a
+	ld [wCurObjUnk14 + 0], a
 	ld a, [hli]
-	ld [wCurObjUnk15], a
+	ld [wCurObjUnk14 + 1], a
 	ld a, [hli]
 	ld [wCurObjUnk16], a
 	ld a, [hli]
@@ -350,9 +350,9 @@ Func_613dc: ; 613dc (18:53dc)
 	ld a, [hli]
 	ld [wCurObjUnk1d], a
 	ld a, [hli]
-	ld [wCurObjUnk1e], a
+	ld [wCurObjUpdateFunction], a
 	ld a, [hl]
-	ld [wCurObjUnk1e + 1], a
+	ld [wCurObjUpdateFunction + 1], a
 
 	call Func_61760
 	ld a, [wCurObjUnk07]
@@ -360,15 +360,15 @@ Func_613dc: ; 613dc (18:53dc)
 	and $0f
 	or $10
 	ldh [hCallFuncBank], a
-	ld a, [wCurObjUnk1e + 0]
+	ld a, [wCurObjUpdateFunction + 0]
 	ldh [hCallFuncPointer], a
-	ld a, [wCurObjUnk1e + 1]
+	ld a, [wCurObjUpdateFunction + 1]
 	ldh [hCallFuncPointer + 1], a
 	call hCallFunc
 
 	call Func_312f
 	call Func_6307b
-	ld hl, wCurObjUnk0d
+	ld hl, wCurObjScreenYPos
 	ld a, [wTempSCY]
 	ld b, a
 	ld a, [wCurObjYPos]
@@ -407,9 +407,9 @@ Func_613dc: ; 613dc (18:53dc)
 	ld [hli], a
 	ld a, [wCurObjUnk0c]
 	ld [hli], a
-	ld a, [wCurObjUnk0d]
+	ld a, [wCurObjScreenYPos]
 	ld [hli], a
-	ld a, [wCurObjUnk0e]
+	ld a, [wCurObjScreenXPos]
 	ld [hli], a
 	ld a, [wCurObjUnk0f]
 	ld [hli], a
@@ -417,13 +417,13 @@ Func_613dc: ; 613dc (18:53dc)
 	ld [hli], a
 	ld a, [wCurObjUnk10 + 1]
 	ld [hli], a
-	ld a, [wCurObjUnk12]
+	ld a, [wCurObjUnk12 + 0]
 	ld [hli], a
-	ld a, [wCurObjUnk13]
+	ld a, [wCurObjUnk12 + 1]
 	ld [hli], a
-	ld a, [wCurObjUnk14]
+	ld a, [wCurObjUnk14 + 0]
 	ld [hli], a
-	ld a, [wCurObjUnk15]
+	ld a, [wCurObjUnk14 + 1]
 	ld [hli], a
 	ld a, [wCurObjUnk16]
 	ld [hli], a
@@ -440,9 +440,9 @@ Func_613dc: ; 613dc (18:53dc)
 	ld a, [wCurObjUnk1c]
 	ld [hli], a
 	inc l
-	ld a, [wCurObjUnk1e]
+	ld a, [wCurObjUpdateFunction]
 	ld [hli], a
-	ld a, [wCurObjUnk1e + 1]
+	ld a, [wCurObjUpdateFunction + 1]
 	ld [hl], a
 	ret
 ; 0x61513
@@ -477,9 +477,9 @@ Func_61513: ; 61513 (18:5513)
 	ld a, [hli]
 	ld [wCurObjUnk0c], a
 	ld a, [hli]
-	ld [wCurObjUnk0d], a
+	ld [wCurObjScreenYPos], a
 	ld a, [hli]
-	ld [wCurObjUnk0e], a
+	ld [wCurObjScreenXPos], a
 	ld a, [hli]
 	ld [wCurObjUnk0f], a
 	ld a, [hli]
@@ -487,13 +487,13 @@ Func_61513: ; 61513 (18:5513)
 	ld a, [hli]
 	ld [wCurObjUnk10 + 1], a
 	ld a, [hli]
-	ld [wCurObjUnk12], a
+	ld [wCurObjUnk12 + 0], a
 	ld a, [hli]
-	ld [wCurObjUnk13], a
+	ld [wCurObjUnk12 + 1], a
 	ld a, [hli]
-	ld [wCurObjUnk14], a
+	ld [wCurObjUnk14 + 0], a
 	ld a, [hli]
-	ld [wCurObjUnk15], a
+	ld [wCurObjUnk14 + 1], a
 	ld a, [hli]
 	ld [wCurObjUnk16], a
 	ld a, [hli]
@@ -511,9 +511,9 @@ Func_61513: ; 61513 (18:5513)
 	ld a, [hli]
 	ld [wCurObjUnk1d], a
 	ld a, [hli]
-	ld [wCurObjUnk1e], a
+	ld [wCurObjUpdateFunction], a
 	ld a, [hl]
-	ld [wCurObjUnk1e + 1], a
+	ld [wCurObjUpdateFunction + 1], a
 	ld hl, wCurObjUnk1a
 	bit 5, [hl]
 	jr z, .asm_615b4
@@ -523,16 +523,16 @@ Func_61513: ; 61513 (18:5513)
 	and $0f
 	or $10
 	ldh [hCallFuncBank], a
-	ld a, [wCurObjUnk1e + 0]
+	ld a, [wCurObjUpdateFunction + 0]
 	ldh [hCallFuncPointer], a
-	ld a, [wCurObjUnk1e + 1]
+	ld a, [wCurObjUpdateFunction + 1]
 	ldh [hCallFuncPointer + 1], a
 	call hCallFunc
 
 .asm_615b4
 	call Func_3104
 	call Func_6307b
-	ld hl, wCurObjUnk0d
+	ld hl, wCurObjScreenYPos
 	ld a, [wTempSCY]
 	ld b, a
 	ld a, [wCurObjYPos]
@@ -571,9 +571,9 @@ Func_61513: ; 61513 (18:5513)
 	ld [hli], a
 	ld a, [wCurObjUnk0c]
 	ld [hli], a
-	ld a, [wCurObjUnk0d]
+	ld a, [wCurObjScreenYPos]
 	ld [hli], a
-	ld a, [wCurObjUnk0e]
+	ld a, [wCurObjScreenXPos]
 	ld [hli], a
 	ld a, [wCurObjUnk0f]
 	ld [hli], a
@@ -581,13 +581,13 @@ Func_61513: ; 61513 (18:5513)
 	ld [hli], a
 	ld a, [wCurObjUnk10 + 1]
 	ld [hli], a
-	ld a, [wCurObjUnk12]
+	ld a, [wCurObjUnk12 + 0]
 	ld [hli], a
-	ld a, [wCurObjUnk13]
+	ld a, [wCurObjUnk12 + 1]
 	ld [hli], a
-	ld a, [wCurObjUnk14]
+	ld a, [wCurObjUnk14 + 0]
 	ld [hli], a
-	ld a, [wCurObjUnk15]
+	ld a, [wCurObjUnk14 + 1]
 	ld [hli], a
 	ld a, [wCurObjUnk16]
 	ld [hli], a
@@ -604,9 +604,9 @@ Func_61513: ; 61513 (18:5513)
 	ld a, [wCurObjUnk1c]
 	ld [hli], a
 	inc l
-	ld a, [wCurObjUnk1e]
+	ld a, [wCurObjUpdateFunction]
 	ld [hli], a
-	ld a, [wCurObjUnk1e + 1]
+	ld a, [wCurObjUpdateFunction + 1]
 	ld [hl], a
 	ret
 ; 0x6164e
@@ -617,7 +617,7 @@ Func_6164e: ; 6164e (18:564e)
 	and $93
 	cp $83
 	jr nz, .obj_2
-	ld e, LOW(wObj1Unk0d)
+	ld e, LOW(wObj1ScreenYPos)
 	ld l, LOW(wObj1Unk07)
 	call UpdateObjSprite
 
@@ -627,7 +627,7 @@ Func_6164e: ; 6164e (18:564e)
 	and $93
 	cp $83
 	jr nz, .obj_3
-	ld e, LOW(wObj2Unk0d)
+	ld e, LOW(wObj2ScreenYPos)
 	ld l, LOW(wObj2Unk07)
 	call UpdateObjSprite
 
@@ -637,7 +637,7 @@ Func_6164e: ; 6164e (18:564e)
 	and $93
 	cp $83
 	jr nz, .obj_4
-	ld e, LOW(wObj3Unk0d)
+	ld e, LOW(wObj3ScreenYPos)
 	ld l, LOW(wObj3Unk07)
 	call UpdateObjSprite
 
@@ -647,7 +647,7 @@ Func_6164e: ; 6164e (18:564e)
 	and $93
 	cp $83
 	jr nz, .obj_5
-	ld e, LOW(wObj4Unk0d)
+	ld e, LOW(wObj4ScreenYPos)
 	ld l, LOW(wObj4Unk07)
 	call UpdateObjSprite
 
@@ -657,7 +657,7 @@ Func_6164e: ; 6164e (18:564e)
 	and $93
 	cp $83
 	jr nz, .obj_6
-	ld e, LOW(wObj5Unk0d)
+	ld e, LOW(wObj5ScreenYPos)
 	ld l, LOW(wObj5Unk07)
 	call UpdateObjSprite
 
@@ -667,7 +667,7 @@ Func_6164e: ; 6164e (18:564e)
 	and $93
 	cp $83
 	jr nz, .obj_7
-	ld e, LOW(wObj6Unk0d)
+	ld e, LOW(wObj6ScreenYPos)
 	ld l, LOW(wObj6Unk07)
 	call UpdateObjSprite
 
@@ -677,7 +677,7 @@ Func_6164e: ; 6164e (18:564e)
 	and $93
 	cp $83
 	jr nz, .obj_8
-	ld e, LOW(wObj7Unk0d)
+	ld e, LOW(wObj7ScreenYPos)
 	ld l, LOW(wObj7Unk07)
 	call UpdateObjSprite
 
@@ -687,7 +687,7 @@ Func_6164e: ; 6164e (18:564e)
 	and $93
 	cp $83
 	jr nz, .done
-	ld e, LOW(wObj8Unk0d)
+	ld e, LOW(wObj8ScreenYPos)
 	ld l, LOW(wObj8Unk07)
 	call UpdateObjSprite
 
@@ -701,7 +701,7 @@ Func_616d7: ; 616d7 (18:56d7)
 	and $93
 	cp $03
 	jr nz, .obj_2
-	ld e, LOW(wObj1Unk0d)
+	ld e, LOW(wObj1ScreenYPos)
 	ld l, LOW(wObj1Unk07)
 	call UpdateObjSprite
 
@@ -711,7 +711,7 @@ Func_616d7: ; 616d7 (18:56d7)
 	and $93
 	cp $03
 	jr nz, .obj_3
-	ld e, LOW(wObj2Unk0d)
+	ld e, LOW(wObj2ScreenYPos)
 	ld l, LOW(wObj2Unk07)
 	call UpdateObjSprite
 
@@ -721,7 +721,7 @@ Func_616d7: ; 616d7 (18:56d7)
 	and $93
 	cp $03
 	jr nz, .obj_4
-	ld e, LOW(wObj3Unk0d)
+	ld e, LOW(wObj3ScreenYPos)
 	ld l, LOW(wObj3Unk07)
 	call UpdateObjSprite
 
@@ -731,7 +731,7 @@ Func_616d7: ; 616d7 (18:56d7)
 	and $93
 	cp $03
 	jr nz, .obj_5
-	ld e, LOW(wObj4Unk0d)
+	ld e, LOW(wObj4ScreenYPos)
 	ld l, LOW(wObj4Unk07)
 	call UpdateObjSprite
 
@@ -741,7 +741,7 @@ Func_616d7: ; 616d7 (18:56d7)
 	and $93
 	cp $03
 	jr nz, .obj_6
-	ld e, LOW(wObj5Unk0d)
+	ld e, LOW(wObj5ScreenYPos)
 	ld l, LOW(wObj5Unk07)
 	call UpdateObjSprite
 
@@ -751,7 +751,7 @@ Func_616d7: ; 616d7 (18:56d7)
 	and $93
 	cp $03
 	jr nz, .obj_7
-	ld e, LOW(wObj6Unk0d)
+	ld e, LOW(wObj6ScreenYPos)
 	ld l, LOW(wObj6Unk07)
 	call UpdateObjSprite
 
@@ -761,7 +761,7 @@ Func_616d7: ; 616d7 (18:56d7)
 	and $93
 	cp $03
 	jr nz, .obj_8
-	ld e, LOW(wObj7Unk0d)
+	ld e, LOW(wObj7ScreenYPos)
 	ld l, LOW(wObj7Unk07)
 	call UpdateObjSprite
 
@@ -771,7 +771,7 @@ Func_616d7: ; 616d7 (18:56d7)
 	and $93
 	cp $03
 	jr nz, .done
-	ld e, LOW(wObj8Unk0d)
+	ld e, LOW(wObj8ScreenYPos)
 	ld l, LOW(wObj8Unk07)
 	call UpdateObjSprite
 
@@ -818,7 +818,52 @@ Func_61760: ; 61760 (18:5760)
 	dw $579c
 ; 0x6179c
 
-	INCROM $6179c, $618e2
+	INCROM $6179c, $6189d
+
+Func_6189d: ; 6189d (18:589d)
+	load_sfx SFX_018
+
+	ld hl, wCurObjUpdateFunction + 1
+	ld a, $48
+	ld [hld], a
+	ld a, $a2
+	ld [hld], a
+	ld l, OBJ_UNK_1A
+	ld a, [hl]
+	and $f0
+	ld [hld], a
+	ld a, $30
+	ld [wCurObjUnk07], a
+
+	ld hl, wCurObjUnk10
+	ld a, $00
+	ld [hli], a ; OBJ_UNK_10
+	ld a, $40
+	ld [hli], a
+	ld a, $c5
+	ld [hli], a ; OBJ_UNK_12
+	ld a, $40
+	ld [hli], a
+	xor a
+	ld [hli], a ; OBJ_UNK_14
+	ld [hli], a
+	ld a, $21
+	ld [hli], a ; OBJ_UNK_16
+
+	ld l, OBJ_UNK_00
+	res 2, [hl]
+	set 3, [hl]
+	ld a, $81
+	ld [wCurObjUnk1c], a
+
+	ld l, OBJ_Y_POS
+	ld a, [hl]
+	sub $08
+	ld [hli], a
+	ret nc
+	dec [hl]
+	ret
+; 0x618e2
 
 Func_618e2: ; 618e2 (18:58e2)
 	ld hl, wObj1
@@ -878,19 +923,19 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld d, a
 	ld a, [hli] ; OBJ_UNK_0C
 	ld e, a
-	ld a, [hl] ; OBJ_UNK_0D
+	ld a, [hl] ; OBJ_SCREEN_Y_POS
 	add $2a
 	add b
 	ld b, a
-	ld a, [hli] ; OBJ_UNK_0D
+	ld a, [hli] ; OBJ_SCREEN_Y_POS
 	add $2a
 	add c
 	ld c, a
-	ld a, [hl] ; OBJ_UNK_0E
+	ld a, [hl] ; OBJ_SCREEN_X_POS
 	add $2a
 	add d
 	ld d, a
-	ld a, [hli] ; OBJ_UNK_0E
+	ld a, [hli] ; OBJ_SCREEN_X_POS
 	add $2a
 	add e
 	ld e, a
@@ -976,10 +1021,10 @@ Func_618e2: ; 618e2 (18:58e2)
 	and $1f
 	cp %11
 	jr nz, .obj_2
-	ld a, [wObj1Unk0d]
+	ld a, [wObj1ScreenYPos]
 	add $2a
 	ld h, a
-	ld a, [wObj1Unk0e]
+	ld a, [wObj1ScreenXPos]
 	add $2a
 	ld l, a
 	ld a, [wObj1Unk0a]
@@ -1037,10 +1082,10 @@ Func_618e2: ; 618e2 (18:58e2)
 	and $1f
 	cp $03
 	jr nz, .obj_3
-	ld a, [wObj2Unk0d]
+	ld a, [wObj2ScreenYPos]
 	add $2a
 	ld h, a
-	ld a, [wObj2Unk0e]
+	ld a, [wObj2ScreenXPos]
 	add $2a
 	ld l, a
 	ld a, [wObj2Unk0a]
@@ -1098,10 +1143,10 @@ Func_618e2: ; 618e2 (18:58e2)
 	and $1f
 	cp $03
 	jr nz, .obj_4
-	ld a, [wObj3Unk0d]
+	ld a, [wObj3ScreenYPos]
 	add $2a
 	ld h, a
-	ld a, [wObj3Unk0e]
+	ld a, [wObj3ScreenXPos]
 	add $2a
 	ld l, a
 	ld a, [wObj3Unk0a]
@@ -1159,10 +1204,10 @@ Func_618e2: ; 618e2 (18:58e2)
 	and $1f
 	cp $03
 	jr nz, .obj_5
-	ld a, [wObj4Unk0d]
+	ld a, [wObj4ScreenYPos]
 	add $2a
 	ld h, a
-	ld a, [wObj4Unk0e]
+	ld a, [wObj4ScreenXPos]
 	add $2a
 	ld l, a
 	ld a, [wObj4Unk0a]
@@ -1220,10 +1265,10 @@ Func_618e2: ; 618e2 (18:58e2)
 	and $1f
 	cp $03
 	jr nz, .obj_6
-	ld a, [wObj5Unk0d]
+	ld a, [wObj5ScreenYPos]
 	add $2a
 	ld h, a
-	ld a, [wObj5Unk0e]
+	ld a, [wObj5ScreenXPos]
 	add $2a
 	ld l, a
 	ld a, [wObj5Unk0a]
@@ -1281,10 +1326,10 @@ Func_618e2: ; 618e2 (18:58e2)
 	and $1f
 	cp $03
 	jr nz, .obj_7
-	ld a, [wObj6Unk0d]
+	ld a, [wObj6ScreenYPos]
 	add $2a
 	ld h, a
-	ld a, [wObj6Unk0e]
+	ld a, [wObj6ScreenXPos]
 	add $2a
 	ld l, a
 	ld a, [wObj6Unk0a]
@@ -1342,10 +1387,10 @@ Func_618e2: ; 618e2 (18:58e2)
 	and $1f
 	cp $03
 	jr nz, .obj_8
-	ld a, [wObj7Unk0d]
+	ld a, [wObj7ScreenYPos]
 	add $2a
 	ld h, a
-	ld a, [wObj7Unk0e]
+	ld a, [wObj7ScreenXPos]
 	add $2a
 	ld l, a
 	ld a, [wObj7Unk0a]
@@ -1403,10 +1448,10 @@ Func_618e2: ; 618e2 (18:58e2)
 	and $1f
 	cp $03
 	jr nz, .done
-	ld a, [wObj8Unk0d]
+	ld a, [wObj8ScreenYPos]
 	add $2a
 	ld h, a
-	ld a, [wObj8Unk0e]
+	ld a, [wObj8ScreenXPos]
 	add $2a
 	ld l, a
 	ld a, [wObj8Unk0a]
@@ -2016,4 +2061,37 @@ Func_6307b: ; 6307b (18:707b)
 	ret
 ; 0x631a1
 
-	INCROM $631a1, $63936
+	INCROM $631a1, $631e8
+
+Func_631e8: ; 631e8 (18:71e8)
+	ld hl, wCurObjUnk19
+	ld a, [hl]
+	add c
+	ld c, a
+	ld a, [bc]
+	cp $80
+	jr nz, .asm_631f7
+	dec c
+	ld a, [bc]
+	jr .asm_631f8
+.asm_631f7
+	inc [hl]
+.asm_631f8
+	ld l, OBJ_Y_POS
+	cp $80
+	ld c, [hl]
+	jr nc, .asm_63204
+	add c
+	ld [hli], a
+	ret nc
+	inc [hl]
+	ret
+.asm_63204
+	add c
+	ld [hli], a
+	ret c
+	dec [hl]
+	ret
+; 0x63209
+
+	INCROM $63209, $63936

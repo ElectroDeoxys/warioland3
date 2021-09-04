@@ -1,5 +1,5 @@
 level: MACRO
-LEVEL_\1 EQU const_value / 8
+LEVEL_\1 EQU (const_value / 8) + 1
 	const \1_DAY_1
 	const \1_DAY_2
 	const \1_DAY_3
@@ -11,38 +11,46 @@ LEVEL_\1 EQU const_value / 8
 ENDM
 
 	const_def
-	; north
-	level OUT_OF_THE_WOODS       ; 00
-	level THE_PEACEFUL_VILLAGE   ; 08
-	level THE_VAST_PLAIN         ; 10
-	level BANK_OF_THE_WILD_RIVER ; 18
-	level THE_TIDAL_COAST        ; 20
-	level SEA_TURTLE_ROCKS       ; 28
-	; west
-	level DESERT_RUINS           ; 30
-	level THE_VOLCANOS_BASE      ; 38
-	level THE_POOL_OF_RAIN       ; 40
-	level A_TOWN_IN_CHAOS        ; 48
-	level BENEATH_THE_WAVES      ; 50
-	level THE_WEST_CRATER        ; 58
-	; south
-	level THE_GRASSLANDS         ; 60
-	level THE_BIG_BRIDGE         ; 68
-	level TOWER_OF_REVIVAL       ; 70
-	level THE_STEEP_CANYON       ; 78
-	level CAVE_OF_FLAMES         ; 80
-	level ABOVE_THE_CLOUDS       ; 88
-	; east
-	level THE_STAGNANT_SWAMP     ; 90
-	level THE_FRIGID_SEA         ; 98
-	level CASTLE_OF_ILLUSIONS    ; a0
-	level THE_COLOSSAL_HOLE      ; a8
-	level THE_WARPED_VOID        ; b0
-	level THE_EAST_CRATER        ; b8
-	level FOREST_OF_FEAR         ; c0
+LEVEL_THE_TEMPLE EQU const_value   ; $00
 
-	; final boss battle
-	const LEVEL_HIDDEN_FIGURE_ROOM ; c8
+	; north
+	level OUT_OF_THE_WOODS         ; $00
+	level THE_PEACEFUL_VILLAGE     ; $08
+	level THE_VAST_PLAIN           ; $10
+	level BANK_OF_THE_WILD_RIVER   ; $18
+	level THE_TIDAL_COAST          ; $20
+	level SEA_TURTLE_ROCKS         ; $28
+	; west
+	level DESERT_RUINS             ; $30
+	level THE_VOLCANOS_BASE        ; $38
+	level THE_POOL_OF_RAIN         ; $40
+	level A_TOWN_IN_CHAOS          ; $48
+	level BENEATH_THE_WAVES        ; $50
+	level THE_WEST_CRATER          ; $58
+	; south
+	level THE_GRASSLANDS           ; $60
+	level THE_BIG_BRIDGE           ; $68
+	level TOWER_OF_REVIVAL         ; $70
+	level THE_STEEP_CANYON         ; $78
+	level CAVE_OF_FLAMES           ; $80
+	level ABOVE_THE_CLOUDS         ; $88
+	; east
+	level THE_STAGNANT_SWAMP       ; $90
+	level THE_FRIGID_SEA           ; $98
+	level CASTLE_OF_ILLUSIONS      ; $a0
+	level THE_COLOSSAL_HOLE        ; $a8
+	level THE_WARPED_VOID          ; $b0
+	level THE_EAST_CRATER          ; $b8
+	level FOREST_OF_FEAR           ; $c0
+
+LEVEL_GOLF_BUILDING EQU (const_value / 8) + 1 ; $1a
+
+NUM_LEVELS EQU (const_value / 8) + 1
+
+	const THE_TEMPLE               ; $c8
+const_value = $ff
+	const GOLF_BUILDING            ; $ff
+
 
 NUM_LEVEL_TREASURES     EQU 4
 NUM_LEVEL_MUSICAL_COINS EQU 8

@@ -159,10 +159,10 @@ SetState_Hot: ; 28154 (a:4154)
 	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld a, $04
-	ld [wca92], a
-	ld a, $04
-	ld [wca93], a
+	ld a, TOUCH_VANISH
+	ld [wStingTouchState], a
+	ld a, TOUCH_VANISH
+	ld [wTouchState], a
 	ld a, $02
 	ld [wca94], a
 	xor a
@@ -460,10 +460,10 @@ SetState_FlatAirborne: ; 28435 (a:4435)
 	load_sfx SFX_01B
 	call UpdateLevelMusic
 
-	ld a, $02
-	ld [wca93], a
-	ld a, $02
-	ld [wca92], a
+	ld a, TOUCH_BUMP
+	ld [wTouchState], a
+	ld a, TOUCH_BUMP
+	ld [wStingTouchState], a
 	ld a, $02
 	ld [wca94], a
 
@@ -1404,10 +1404,10 @@ UpdateState_FatEating: ; 28e87 (a:4e87)
 SetState_FatIdling: ; 28eeb (a:4eeb)
 	ld a, ST_FAT_IDLING
 	ld [wWarioState], a
-	ld a, $03
-	ld [wca93], a
-	ld a, $03
-	ld [wca92], a
+	ld a, TOUCH_ATTACK
+	ld [wTouchState], a
+	ld a, TOUCH_ATTACK
+	ld [wStingTouchState], a
 	ld a, $01
 	ld [wca94], a
 
@@ -1811,10 +1811,10 @@ Func_29317: ; 29317 (a:5317)
 SetState_FatRecovering: ; 29363 (a:5363)
 	ld a, ST_FAT_RECOVERING
 	ld [wWarioState], a
-	ld a, $02
-	ld [wca93], a
-	ld a, $02
-	ld [wca92], a
+	ld a, TOUCH_BUMP
+	ld [wTouchState], a
+	ld a, TOUCH_BUMP
+	ld [wStingTouchState], a
 	ld a, $02
 	ld [wca94], a
 
@@ -2173,10 +2173,12 @@ SetState_TurningInvisible: ; 29689 (a:5689)
 	ld [wca71], a
 	ld a, 9
 	ld [wca72], a
-	xor a
-	ld [wca93], a
-	ld [wca92], a
+
+	xor a ; TOUCH_NONE
+	ld [wTouchState], a
+	ld [wStingTouchState], a
 	ld [wca94], a
+
 	xor a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
@@ -2218,10 +2220,11 @@ UpdateState_TurningInvisible: ; 2972e (a:572e)
 SetState_PuffyInflating: ; 2975e (a:575e)
 	ld a, TRANSFORMATION_PUFFY_WARIO
 	ld [wTransformation], a
-	ld a, $01
-	ld [wca92], a
-	ld a, $02
-	ld [wca93], a
+
+	ld a, TOUCH_VULNERABLE
+	ld [wStingTouchState], a
+	ld a, TOUCH_BUMP
+	ld [wTouchState], a
 	ld a, $01
 	ld [wca94], a
 
@@ -2494,10 +2497,11 @@ SetState_ZombieIdling: ; 299d0 (a:59d0)
 	ld [wca71], a
 	ld a, 9
 	ld [wca72], a
-	ld a, $04
-	ld [wca93], a
-	ld a, $04
-	ld [wca92], a
+
+	ld a, TOUCH_VANISH
+	ld [wTouchState], a
+	ld a, TOUCH_VANISH
+	ld [wStingTouchState], a
 	ld a, $02
 	ld [wca94], a
 
@@ -2754,10 +2758,11 @@ UpdateState_ZombieAirborne: ; 29c29 (a:5c29)
 
 SetState_ZombieLanding: ; 29cde (a:5cde)
 	load_sfx SFX_02A
-	ld a, $02
-	ld [wca93], a
-	ld a, $02
-	ld [wca92], a
+
+	ld a, TOUCH_BUMP
+	ld [wTouchState], a
+	ld a, TOUCH_BUMP
+	ld [wStingTouchState], a
 	ld a, $02
 	ld [wca94], a
 
@@ -3265,10 +3270,11 @@ SetState_BouncyUpsideDown: ; 2a21e (a:621e)
 
 	xor a
 	ld [wWarioStateCycles], a
-	ld a, $05
-	ld [wca93], a
-	ld a, $05
-	ld [wca92], a
+
+	ld a, TOUCH_PASS_THROUGH
+	ld [wTouchState], a
+	ld a, TOUCH_PASS_THROUGH
+	ld [wStingTouchState], a
 	ld a, $02
 	ld [wca94], a
 	xor a
@@ -3325,10 +3331,10 @@ UpdateState_BouncyUpsideLanding: ; 2a2d3 (a:62d3)
 ;	fallthrough
 
 Func_2a2e7: ; 2a2e7 (a:62e7)
-	ld a, $05
-	ld [wca93], a
-	ld a, $05
-	ld [wca92], a
+	ld a, TOUCH_PASS_THROUGH
+	ld [wTouchState], a
+	ld a, TOUCH_PASS_THROUGH
+	ld [wStingTouchState], a
 	ld a, $02
 	ld [wca94], a
 
@@ -3544,10 +3550,10 @@ SetState_Crazy: ; 2a558 (a:6558)
 	ld a, ST_CRAZY
 	ld [wWarioState], a
 
-	ld a, $02
-	ld [wca93], a
-	ld a, $01
-	ld [wca92], a
+	ld a, TOUCH_BUMP
+	ld [wTouchState], a
+	ld a, TOUCH_VULNERABLE
+	ld [wStingTouchState], a
 	ld a, $01
 	ld [wca94], a
 
@@ -4008,10 +4014,11 @@ SetState_VampireTransforming: ; 2aa81 (a:6a81)
 
 	ld a, ST_VAMPIRE_TRANSFORMING
 	ld [wWarioState], a
-	ld a, $04
-	ld [wca93], a
-	ld a, $04
-	ld [wca92], a
+
+	ld a, TOUCH_VANISH
+	ld [wTouchState], a
+	ld a, TOUCH_VANISH
+	ld [wStingTouchState], a
 	ld a, $02
 	ld [wca94], a
 	ld a, -1

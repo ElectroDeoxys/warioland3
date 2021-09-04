@@ -508,6 +508,7 @@ wca39:: ; ca39
 
 	ds $1
 
+; bit 0: unset is day, set is night
 wca3b:: ; ca3b
 	ds $1
 
@@ -705,10 +706,22 @@ wca8f:: ; ca8f
 wTransformationDuration:: ; ca90
 	ds $2
 
-wca92:: ; ca92
+; a TOUCH_* constant that determines
+; how Wario interacts with objects
+; that would normally sting them
+; this is used to override the normal stinging action
+wStingTouchState:: ; ca92
 	ds $1
 
-wca93:: ; ca93
+; a TOUCH_* constant that determines
+; how Wario interacts with objects
+; TOUCH_NONE: normal interaction
+; TOUCH_VULNERABLE: clears current transformation
+; TOUCH_BUMP: makes object bump
+; TOUCH_ATTACK: acts as a regular attack
+; TOUCH_VANISH: vanishes object
+; TOUCH_PASS_THROUGH: does not interact horizontally
+wTouchState:: ; ca93
 	ds $1
 
 wca94:: ; ca94
@@ -1106,7 +1119,7 @@ w1d14a:: ; d14a
 
 SECTION "WRAM2", WRAMX
 
-w2d000:: ; d000
+wTreasuresCollected:: ; d000
 	ds $1
 
 	ds $a
@@ -1120,7 +1133,8 @@ w2d00d:: ; d00d
 w2d00e:: ; d00e
 	ds $1
 
-w2d00f:: ; d00f
+; LEVEL_* constant
+wOWLevel:: ; d00f
 	ds $1
 
 	ds $2
@@ -1333,6 +1347,17 @@ w2db80:: ; db80
 
 wTreasureTiles:: ; dc00
 	ds 16 tiles
+
+	ds $2fd
+
+w2dffd:: ; dffd
+	ds $1
+
+w2dffe:: ; dffe
+	ds $1
+
+w2dfff:: ; dfff
+	ds $1
 
 SECTION "Audio RAM", WRAMX
 

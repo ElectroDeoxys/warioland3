@@ -111,7 +111,7 @@ INCLUDE "engine/bankf.asm"
 
 SECTION "Bank 10", ROMX
 
-	INCROM $40000, $43a48
+INCLUDE "engine/bank10.asm"
 
 
 SECTION "Bank 11", ROMX

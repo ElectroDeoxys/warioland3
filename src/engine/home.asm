@@ -2426,8 +2426,8 @@ ClearTransformationValues: ; 1079 (0:1079)
 	ld [wInvincibleCounter], a
 	ld [wTransformation], a
 	ld [wca8f], a
-	ld [wca92], a
-	ld [wca93], a
+	ld [wStingTouchState], a
+	ld [wTouchState], a
 	ld [wca94], a
 	ld [wca8a], a
 	ld [wTransformationDuration + 0], a
@@ -3605,32 +3605,161 @@ Data_196f: ; 196f (0:196f)
 
 ; treasure IDs of each level
 LevelTreasureIDs: ; 198b (0:198b)
-	db TREASURE_101, TREASURE_101, TREASURE_101, TREASURE_101
-	db TREASURE_027, TREASURE_021, TREASURE_006, TREASURE_005
-	db TREASURE_031, TREASURE_023, TREASURE_087, TREASURE_077
-	db TREASURE_032, TREASURE_099, TREASURE_030, TREASURE_078
-	db TREASURE_026, TREASURE_089, TREASURE_046, TREASURE_055
-	db TREASURE_025, TREASURE_063, TREASURE_044, TREASURE_079
-	db TREASURE_003, TREASURE_064, TREASURE_069, TREASURE_074
-	db TREASURE_034, TREASURE_035, TREASURE_100, TREASURE_070
-	db TREASURE_012, TREASURE_080, TREASURE_076, TREASURE_036
-	db TREASURE_018, TREASURE_029, TREASURE_033, TREASURE_096
-	db TREASURE_019, TREASURE_002, TREASURE_065, TREASURE_042
-	db TREASURE_047, TREASURE_094, TREASURE_040, TREASURE_081
-	db TREASURE_066, TREASURE_086, TREASURE_049, TREASURE_082
-	db TREASURE_001, TREASURE_061, TREASURE_028, TREASURE_060
-	db TREASURE_072, TREASURE_098, TREASURE_056, TREASURE_015
-	db TREASURE_007, TREASURE_010, TREASURE_022, TREASURE_024
-	db TREASURE_011, TREASURE_037, TREASURE_075, TREASURE_039
-	db TREASURE_068, TREASURE_091, TREASURE_073, TREASURE_048
-	db TREASURE_097, TREASURE_093, TREASURE_053, TREASURE_054
-	db TREASURE_062, TREASURE_038, TREASURE_004, TREASURE_071
-	db TREASURE_014, TREASURE_088, TREASURE_016, TREASURE_090
-	db TREASURE_013, TREASURE_017, TREASURE_059, TREASURE_045
-	db TREASURE_067, TREASURE_041, TREASURE_008, TREASURE_092
-	db TREASURE_057, TREASURE_095, TREASURE_058, TREASURE_083
-	db TREASURE_009, TREASURE_084, TREASURE_043, TREASURE_085
-	db TREASURE_020, TREASURE_051, TREASURE_050, TREASURE_052
+	; LEVEL_THE_TEMPLE
+	db TREASURE_DUMMY ; grey
+	db TREASURE_DUMMY ; red
+	db TREASURE_DUMMY ; green
+	db TREASURE_DUMMY ; blue
+
+	; LEVEL_OUT_OF_THE_WOODS
+	db TREASURE_TRIDENT ; grey
+	db TREASURE_JAR ; red
+	db TREASURE_PRINCE_FROGS_GLOVE ; green
+	db TREASURE_GOLD_MUSIC_BOX ; blue
+
+	; LEVEL_THE_PEACEFUL_VILLAGE
+	db TREASURE_BLUE_TABLET ; grey
+	db TREASURE_BLUE_BOOK ; red
+	db TREASURE_GOBLET ; green
+	db TREASURE_DAY_OR_NIGHT_SPELL ; blue
+
+	; LEVEL_THE_VAST_PLAIN
+	db TREASURE_GREEN_TABLET ; grey
+	db TREASURE_CRAYON_BLUE ; red
+	db TREASURE_SKULL_RING_RED ; green
+	db TREASURE_RED_GEM ; blue
+
+	; LEVEL_BANK_OF_THE_WILD_RIVER
+	db TREASURE_YELLOW_BOOK ; grey
+	db TREASURE_MAGNIFYING_GLASS ; red
+	db TREASURE_STATUE ; green
+	db TREASURE_ROCKET ; blue
+
+	; LEVEL_THE_TIDAL_COAST
+	db TREASURE_SKY_KEY ; grey
+	db TREASURE_FOOT_OF_STONE ; red
+	db TREASURE_ELECTRIC_FAN_PROPELLER ; green
+	db TREASURE_GREEN_GEM ; blue
+
+	; LEVEL_SEA_TURTLE_ROCKS
+	db TREASURE_GREEN_MUSIC_BOX ; grey
+	db TREASURE_GOLDEN_RIGHT_EYE ; red
+	db TREASURE_SUN_MEDALLION_TOP ; green
+	db TREASURE_FULL_MOON_GONG ; blue
+
+	; LEVEL_DESERT_RUINS
+	db TREASURE_TOP_HALF_OF_SCROLL ; grey
+	db TREASURE_BOTTOM_HALF_OF_SCROLL ; red
+	db TREASURE_CRAYON_PINK ; green
+	db TREASURE_SUN_MEDALLION_BOTTOM ; blue
+
+	; LEVEL_THE_VOLCANOS_BASE
+	db TREASURE_LEAD_OVERALLS ; grey
+	db TREASURE_BLUE_GEM ; red
+	db TREASURE_CROWN ; green
+	db TREASURE_TUSK_BLUE ; blue
+
+	; LEVEL_THE_POOL_OF_RAIN
+	db TREASURE_GEAR_1 ; grey
+	db TREASURE_SKULL_RING_BLUE ; red
+	db TREASURE_ORNAMENTAL_FAN ; green
+	db TREASURE_CRAYON_YELLOW ; blue
+
+	; LEVEL_A_TOWN_IN_CHAOS
+	db TREASURE_GEAR_2 ; grey
+	db TREASURE_BLUE_MUSIC_BOX ; red
+	db TREASURE_GOLDEN_LEFT_EYE ; green
+	db TREASURE_SAPLING_OF_GROWTH ; blue
+
+	; LEVEL_BENEATH_THE_WAVES
+	db TREASURE_EXPLOSIVE_PLUNGER_BOX ; grey
+	db TREASURE_CRAYON_RED ; red
+	db TREASURE_RED_CHEMICAL ; green
+	db TREASURE_CLUBS_CREST ; blue
+
+	; LEVEL_THE_WEST_CRATER
+	db TREASURE_RIGHT_GLASS_EYE ; grey
+	db TREASURE_SABER ; red
+	db TREASURE_CASTLE_BRICK ; green
+	db TREASURE_SPADES_CREST ; blue
+
+	; LEVEL_THE_GRASSLANDS
+	db TREASURE_YELLOW_MUSIC_BOX ; grey
+	db TREASURE_TRUCK_WHEEL ; red
+	db TREASURE_AXE ; green
+	db TREASURE_FIGHTER_MANNEQUIN ; blue
+
+	; LEVEL_THE_BIG_BRIDGE
+	db TREASURE_POUCH ; grey
+	db TREASURE_CRAYON_CYAN ; red
+	db TREASURE_POCKET_PET ; green
+	db TREASURE_LANTERN ; blue
+
+	; LEVEL_TOWER_OF_REVIVAL
+	db TREASURE_SWIMMING_FLIPPERS ; grey
+	db TREASURE_SUPER_SMASH ; red
+	db TREASURE_TREASURE_MAP ; green
+	db TREASURE_MAGIC_WAND ; blue
+
+	; LEVEL_THE_STEEP_CANYON
+	db TREASURE_GRAB_GLOVE ; grey
+	db TREASURE_TUSK_RED ; red
+	db TREASURE_TELEPHONE ; green
+	db TREASURE_BLUE_CHEMICAL ; blue
+
+	; LEVEL_CAVE_OF_FLAMES
+	db TREASURE_SCEPTER ; grey
+	db TREASURE_MINICAR ; red
+	db TREASURE_MAGIC_SEEDS ; green
+	db TREASURE_SCISSORS ; blue
+
+	; LEVEL_ABOVE_THE_CLOUDS
+	db TREASURE_CRAYON_GREEN ; grey
+	db TREASURE_FIRE_DRENCHER ; red
+	db TREASURE_JACKHAMMER ; green
+	db TREASURE_PICK_AXE ; blue
+
+	; LEVEL_THE_STAGNANT_SWAMP
+	db TREASURE_FLUTE ; grey
+	db TREASURE_GREEN_FLOWER ; red
+	db TREASURE_RED_MUSIC_BOX ; green
+	db TREASURE_EYE_OF_THE_STORM ; blue
+
+	; LEVEL_THE_FRIGID_SEA
+	db TREASURE_HEAD_SMASH_HELMET ; grey
+	db TREASURE_TEAPOT ; red
+	db TREASURE_MAGICAL_FLAME ; green
+	db TREASURE_UFO ; blue
+
+	; LEVEL_CASTLE_OF_ILLUSIONS
+	db TREASURE_SUPER_JUMP_SLAM_OVERALLS ; grey
+	db TREASURE_TORCH ; red
+	db TREASURE_GOLD_MAGIC ; green
+	db TREASURE_RUST_SPRAY ; blue
+
+	; LEVEL_THE_COLOSSAL_HOLE
+	db TREASURE_LEFT_GLASS_EYE ; grey
+	db TREASURE_AIR_PUMP ; red
+	db TREASURE_HIGH_JUMP_BOOTS ; green
+	db TREASURE_LOCOMOTIVE ; blue
+
+	; LEVEL_THE_WARPED_VOID
+	db TREASURE_MYSTERY_HANDLE ; grey
+	db TREASURE_CRAYON_BROWN ; red
+	db TREASURE_DEMONS_BLOOD ; green
+	db TREASURE_HEART_CREST ; blue
+
+	; LEVEL_THE_EAST_CRATER
+	db TREASURE_SUPER_GRAB_GLOVES ; grey
+	db TREASURE_DIAMONDS_CREST ; red
+	db TREASURE_NIGHT_VISION_SCOPE ; green
+	db TREASURE_EARTHEN_FIGURE ; blue
+
+	; LEVEL_FOREST_OF_FEAR 
+	db TREASURE_WARP_COMPACT ; grey
+	db TREASURE_KEY_CARD_RED ; red
+	db TREASURE_WARP_REMOVAL_APPARATUS ; green
+	db TREASURE_KEY_CARD_BLUE ; blue
 ; 0x19f3
 
 LoadBGPalettesFromWRAM: ; 19f3 (0:19f3)
@@ -4392,7 +4521,45 @@ UpdateObjSprite: ; 3000 (0:3000)
 	ret
 ; 0x305c
 
-	INCROM $305c, $3104
+Func_305c: ; 305c (0:305c)
+	ld a, [wCurObjUnk18]
+	ld b, a
+	ld hl, wCurObjXPos
+	ld a, [hl]
+	sub b
+	ld [hli], a
+	ret nc
+	dec [hl]
+	ret
+; 0x3069
+
+	INCROM $3069, $30e6
+
+Func_30e6: ; 30e6 (0:30e6)
+	ld hl, wCurObjYPos
+	ld a, [hl]
+	sub $01
+	ld [hli], a
+	ret nc
+	dec [hl]
+	ret
+; 0x30f0
+
+; input:
+; - de = ???
+Func_30f0: ; 30f0 (0:30f0)
+	ld hl, wCurObjUnk12
+	ld a, e
+	ld [hli], a ; OBJ_UNK_12
+	ld a, d
+	ld [hli], a
+	xor a
+	ld [hli], a ; OBJ_UNK_14
+	ld [hli], a
+	ret
+; 0x30fb
+
+	INCROM $30fb, $3104
 
 Func_3104: ; 3104 (0:3104)
 	ld hl, wCurObjUnk14
@@ -4470,7 +4637,47 @@ Func_312f: ; 312f (0:312f)
 	ret
 ; 0x3173
 
-	INCROM $3173, $3a38
+	INCROM $3173, $34b7
+
+Func_34b7: ; 34b7 (0:34b7)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_631e8)
+	bankswitch
+	call Func_631e8
+	pop af
+	bankswitch
+	ret
+; 0x34ce
+
+	INCROM $34ce, $34e5
+
+Func_34e5: ; 34e5 (0:34e5)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_6189d)
+	bankswitch
+	call Func_6189d
+	pop af
+	bankswitch
+	ret
+; 0x34fc
+
+	INCROM $34fc, $352b
+
+Func_352b: ; 352b (0:352b)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_19b7b)
+	bankswitch
+	call Func_19b7b
+	pop af
+	bankswitch
+	ld a, b
+	ret
+; 0x3543
+
+	INCROM $3543, $3a38
 
 ; hl = OAM data
 ; b = sprite bank
@@ -4556,21 +4763,24 @@ Func_3a66: ; 3a66 (0:3a66)
 	jr .asm_3a89
 ; 0x3aac
 
-Func_3aac: ; 3aac (0:3aac)
-	ld hl, $d000
+; returns TRUE in a and carry set if treasure
+; in input a has already been collected
+; a = TREASURE_* constant
+IsTreasureCollected: ; 3aac (0:3aac)
+	ld hl, wTreasuresCollected
 	ld e, a
 	srl e
 	srl e
-	srl e
+	srl e ; / 8
 	ld d, $00
-	add hl, de ; hl = $d000 + (a / 8)
+	add hl, de ; hl = wTreasuresCollected + (a / 8)
 
 	ld e, $01
 	bit 2, a
 	jr z, .asm_3ac1
-	swap e
+	swap e ; = $10
 .asm_3ac1
-	and $03
+	and %11
 	ld d, a
 	ld a, e
 	jr z, .asm_3ad0
@@ -4584,8 +4794,8 @@ Func_3aac: ; 3aac (0:3aac)
 .asm_3ad0
 	ld d, a
 	and [hl]
-	ret z
-	ld a, $01
+	ret z ; not obtained
+	ld a, TRUE
 	scf
 	ret
 ; 0x3ad7

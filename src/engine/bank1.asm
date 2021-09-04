@@ -1054,7 +1054,7 @@ Func_4686: ; 4686 (1:4686)
 	ld a, [wLevel]
 	cp $ff
 	jr z, .asm_46bd
-	cp LEVEL_HIDDEN_FIGURE_ROOM
+	cp THE_TEMPLE
 	jr z, .final_battle
 	ret
 
@@ -1537,11 +1537,11 @@ Func_4ae7: ; 4ae7 (1:4ae7)
 	push af
 	ld a, 2 ; WRAM2
 	ldh [rSVBK], a
-	ld a, [w2d00f]
+	ld a, [wOWLevel]
 	and a
-	jr z, .asm_4b66
-	cp $1a
-	jr z, .asm_4b6a
+	jr z, .the_temple
+	cp LEVEL_GOLF_BUILDING
+	jr z, .golf_building
 
 	dec a
 	add a
@@ -1550,49 +1550,52 @@ Func_4ae7: ; 4ae7 (1:4ae7)
 	ld [wLevel], a
 	ld e, a
 	ld d, $00
-	ld hl, Data_4eba
+	ld hl, LevelTreasureRequisites
 	add hl, de
 	ld a, [hli]
 
 	push hl
-	call Func_3aac
+	call IsTreasureCollected
 	pop hl
+	ld c, a
+	ld a, [hli]
+	push hl
+	call IsTreasureCollected
+	pop hl
+	and c
+	jr nz, .variant_4
 
-	ld c, a
 	ld a, [hli]
 	push hl
-	call Func_3aac
-	pop hl
-	and c
-	jr nz, .asm_4b49
-	ld a, [hli]
-	push hl
-	call Func_3aac
+	call IsTreasureCollected
 	pop hl
 	ld c, a
 	ld a, [hli]
 	push hl
-	call Func_3aac
+	call IsTreasureCollected
 	pop hl
 	and c
-	jr nz, .asm_4b53
-	ld a, [hli]
-	push hl
-	call Func_3aac
-	pop hl
-	ld c, a
-	ld a, [hli]
-	push hl
-	call Func_3aac
-	pop hl
-	and c
-	jr nz, .asm_4b5d
+	jr nz, .variant_3
 
-.asm_4b36
+	ld a, [hli]
+	push hl
+	call IsTreasureCollected
+	pop hl
+	ld c, a
+	ld a, [hli]
+	push hl
+	call IsTreasureCollected
+	pop hl
+	and c
+	jr nz, .variant_2
+
+.day_night
+; all levels have 4 states for day and night respectively
+; setting bit 2 yields the night time levels
 	ld a, [wca3b]
-	and $01
+	and %1
 	add a
-	add a
+	add a ; << 2
 	ld b, a
 	ld a, [wLevel]
 	or b
@@ -1601,32 +1604,30 @@ Func_4ae7: ; 4ae7 (1:4ae7)
 	ldh [rSVBK], a
 	ret
 
-.asm_4b49
+.variant_4
 	ld a, [wLevel]
-	add $03
+	add 3
 	ld [wLevel], a
-	jr .asm_4b36
+	jr .day_night
 
-.asm_4b53
+.variant_3
 	ld a, [wLevel]
-	add $02
+	add 2
 	ld [wLevel], a
-	jr .asm_4b36
+	jr .day_night
 
-.asm_4b5d
+.variant_2
 	ld a, [wLevel]
-	inc a
+	inc a ; add 1
 	ld [wLevel], a
-	jr .asm_4b36
+	jr .day_night
 
-.asm_4b66
-	ld a, $c8
-	jr .asm_4b6c
-
-.asm_4b6a
-	ld a, $ff
-
-.asm_4b6c
+.the_temple
+	ld a, THE_TEMPLE
+	jr .got_level
+.golf_building
+	ld a, GOLF_BUILDING
+.got_level
 	ld [wLevel], a
 	pop af
 	ldh [rSVBK], a
@@ -2160,32 +2161,158 @@ PlayIntroSFXPlane_Far: ; 4eb1 (1:4eb1)
 	jr PlayIntroSFXPlane2
 ; 0x4eba
 
-Data_4eba: ; 4eba (1:4eba)
-	db $3b, $00, $49, $47, $0c, $00, $00, $00
-	db $0d, $00, $3e, $00, $3e, $00, $00, $00
-	db $27, $28, $48, $00, $0c, $00, $00, $00
-	db $29, $00, $06, $00, $0a, $00, $00, $00
-	db $2a, $00, $2e, $00, $0b, $00, $00, $00
-	db $2b, $00, $0d, $00, $44, $00, $00, $00
-	db $0d, $00, $0e, $00, $1f, $20, $00, $00
-	db $3f, $00, $3e, $00, $3d, $00, $00, $00
-	db $29, $00, $07, $00, $48, $00, $00, $00
-	db $2c, $00, $09, $00, $0e, $00, $00, $00
-	db $27, $28, $2a, $00, $06, $00, $00, $00
-	db $2d, $00, $5d, $00, $0d, $00, $00, $00
-	db $08, $00, $3e, $00, $48, $00, $00, $00
-	db $44, $00, $0b, $00, $07, $00, $00, $00
-	db $41, $40, $2e, $00, $42, $43, $00, $00
-	db $2d, $00, $06, $00, $3f, $00, $00, $00
-	db $2d, $00, $2f, $00, $08, $00, $00, $00
-	db $4a, $00, $30, $00, $18, $00, $00, $00
-	db $2f, $00, $08, $00, $3f, $00, $00, $00
-	db $45, $46, $44, $00, $0b, $00, $00, $00
-	db $31, $00, $09, $00, $45, $46, $00, $00
-	db $2f, $00, $45, $46, $0a, $00, $00, $00
-	db $33, $34, $32, $00, $32, $00, $00, $00
-	db $36, $00, $35, $00, $5d, $00, $00, $00
-	db $3a, $00, $39, $00, $09, $00, $00, $00
+; the treasure requistes for each variant of a level
+; if both treasures are collected, then that variant is unlocked
+LevelTreasureRequisites: ; 4eba (1:4eba)
+	; LEVEL_OUT_OF_THE_WOODS
+	db TREASURE_GOLD_MAGIC,               TREASURE_NONE ; variant 4
+	db TREASURE_MAGIC_SEEDS,              TREASURE_EYE_OF_THE_STORM ; variant 3
+	db TREASURE_LEAD_OVERALLS,            TREASURE_NONE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_THE_PEACEFUL_VILLAGE
+	db TREASURE_SUPER_JUMP_SLAM_OVERALLS, TREASURE_NONE ; variant 4
+	db TREASURE_FLUTE,                    TREASURE_NONE ; variant 3
+	db TREASURE_FLUTE,                    TREASURE_NONE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_THE_VAST_PLAIN
+	db TREASURE_BLUE_CHEMICAL,            TREASURE_RED_CHEMICAL ; variant 4
+	db TREASURE_POUCH,                    TREASURE_NONE ; variant 3
+	db TREASURE_LEAD_OVERALLS,            TREASURE_NONE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_BANK_OF_THE_WILD_RIVER
+	db TREASURE_AIR_PUMP,                 TREASURE_NONE ; variant 4
+	db TREASURE_PRINCE_FROGS_GLOVE,       TREASURE_NONE ; variant 3
+	db TREASURE_SUPER_SMASH,              TREASURE_NONE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_THE_TIDAL_COAST
+	db TREASURE_SAPLING_OF_GROWTH,        TREASURE_NONE ; variant 4
+	db TREASURE_STATUE,                   TREASURE_NONE ; variant 3
+	db TREASURE_GRAB_GLOVE,               TREASURE_NONE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_SEA_TURTLE_ROCKS
+	db TREASURE_NIGHT_VISION_SCOPE,       TREASURE_NONE ; variant 4
+	db TREASURE_SUPER_JUMP_SLAM_OVERALLS, TREASURE_NONE ; variant 3
+	db TREASURE_SCEPTER,                  TREASURE_NONE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_DESERT_RUINS
+	db TREASURE_SUPER_JUMP_SLAM_OVERALLS, TREASURE_NONE ; variant 4
+	db TREASURE_HEAD_SMASH_HELMET,        TREASURE_NONE ; variant 3
+	db TREASURE_BLUE_TABLET,              TREASURE_GREEN_TABLET ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_THE_VOLCANOS_BASE
+	db TREASURE_FOOT_OF_STONE,            TREASURE_NONE ; variant 4
+	db TREASURE_FLUTE,                    TREASURE_NONE ; variant 3
+	db TREASURE_TRUCK_WHEEL,              TREASURE_NONE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_THE_POOL_OF_RAIN
+	db TREASURE_AIR_PUMP,                 TREASURE_NONE ; variant 4
+	db TREASURE_SWIMMING_FLIPPERS,        TREASURE_NONE ; variant 3
+	db TREASURE_POUCH,                    TREASURE_NONE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_A_TOWN_IN_CHAOS
+	db TREASURE_ELECTRIC_FAN_PROPELLER,   TREASURE_NONE ; variant 4
+	db TREASURE_SUPER_GRAB_GLOVES,        TREASURE_NONE ; variant 3
+	db TREASURE_HEAD_SMASH_HELMET,        TREASURE_NONE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_BENEATH_THE_WAVES
+	db TREASURE_BLUE_CHEMICAL,            TREASURE_RED_CHEMICAL ; variant 4
+	db TREASURE_SAPLING_OF_GROWTH,        TREASURE_NONE ; variant 3
+	db TREASURE_PRINCE_FROGS_GLOVE,       TREASURE_NONE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_THE_WEST_CRATER
+	db TREASURE_RUST_SPRAY,               TREASURE_NONE ; variant 4
+	db TREASURE_FIRE_DRENCHER,            TREASURE_NONE ; variant 3
+	db TREASURE_SUPER_JUMP_SLAM_OVERALLS, TREASURE_NONE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_THE_GRASSLANDS
+	db TREASURE_HIGH_JUMP_BOOTS,          TREASURE_NONE ; variant 4
+	db TREASURE_FLUTE,                    TREASURE_NONE ; variant 3
+	db TREASURE_POUCH,                    TREASURE_NONE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_THE_BIG_BRIDGE
+	db TREASURE_SCEPTER,                  TREASURE_NONE ; variant 4
+	db TREASURE_GRAB_GLOVE,               TREASURE_NONE ; variant 3
+	db TREASURE_SWIMMING_FLIPPERS,        TREASURE_NONE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_TOWER_OF_REVIVAL
+	db TREASURE_GOLDEN_LEFT_EYE,          TREASURE_GOLDEN_RIGHT_EYE ; variant 4
+	db TREASURE_STATUE,                   TREASURE_NONE ; variant 3
+	db TREASURE_RIGHT_GLASS_EYE,          TREASURE_LEFT_GLASS_EYE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_THE_STEEP_CANYON
+	db TREASURE_RUST_SPRAY,               TREASURE_NONE ; variant 4
+	db TREASURE_PRINCE_FROGS_GLOVE,       TREASURE_NONE ; variant 3
+	db TREASURE_FOOT_OF_STONE,            TREASURE_NONE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_CAVE_OF_FLAMES
+	db TREASURE_RUST_SPRAY,               TREASURE_NONE ; variant 4
+	db TREASURE_EXPLOSIVE_PLUNGER_BOX,    TREASURE_NONE ; variant 3
+	db TREASURE_HIGH_JUMP_BOOTS,          TREASURE_NONE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_ABOVE_THE_CLOUDS
+	db TREASURE_FULL_MOON_GONG,           TREASURE_NONE ; variant 4
+	db TREASURE_SCISSORS,                 TREASURE_NONE ; variant 3
+	db TREASURE_MAGIC_WAND,               TREASURE_NONE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_THE_STAGNANT_SWAMP
+	db TREASURE_EXPLOSIVE_PLUNGER_BOX,    TREASURE_NONE ; variant 4
+	db TREASURE_HIGH_JUMP_BOOTS,          TREASURE_NONE ; variant 3
+	db TREASURE_FOOT_OF_STONE,            TREASURE_NONE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_THE_FRIGID_SEA
+	db TREASURE_SUN_MEDALLION_TOP,        TREASURE_SUN_MEDALLION_BOTTOM ; variant 4
+	db TREASURE_SCEPTER,                  TREASURE_NONE ; variant 3
+	db TREASURE_GRAB_GLOVE,               TREASURE_NONE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_CASTLE_OF_ILLUSIONS
+	db TREASURE_CASTLE_BRICK,             TREASURE_NONE ; variant 4
+	db TREASURE_SUPER_GRAB_GLOVES,        TREASURE_NONE ; variant 3
+	db TREASURE_SUN_MEDALLION_TOP,        TREASURE_SUN_MEDALLION_BOTTOM ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_THE_COLOSSAL_HOLE
+	db TREASURE_EXPLOSIVE_PLUNGER_BOX,    TREASURE_NONE ; variant 4
+	db TREASURE_SUN_MEDALLION_TOP,        TREASURE_SUN_MEDALLION_BOTTOM ; variant 3
+	db TREASURE_SUPER_SMASH,              TREASURE_NONE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_THE_WARPED_VOID
+	db TREASURE_KEY_CARD_RED,             TREASURE_KEY_CARD_BLUE ; variant 4
+	db TREASURE_WARP_REMOVAL_APPARATUS,   TREASURE_NONE ; variant 3
+	db TREASURE_WARP_REMOVAL_APPARATUS,   TREASURE_NONE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_THE_EAST_CRATER
+	db TREASURE_PICK_AXE,                 TREASURE_NONE ; variant 4
+	db TREASURE_JACKHAMMER,               TREASURE_NONE ; variant 3
+	db TREASURE_FIRE_DRENCHER,            TREASURE_NONE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+
+	; LEVEL_FOREST_OF_FEAR
+	db TREASURE_DEMONS_BLOOD,             TREASURE_NONE ; variant 4
+	db TREASURE_MYSTERY_HANDLE,           TREASURE_NONE ; variant 3
+	db TREASURE_SUPER_GRAB_GLOVES,        TREASURE_NONE ; variant 2
+	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
 ; 0x4f82
 
 Pals_4f82: ; 4f82 (1:4f82)

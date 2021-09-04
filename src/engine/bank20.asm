@@ -92,7 +92,7 @@ Func_803f9: ; 803f9 (20:43f9)
 	inc a
 	jr nz, .asm_8041e
 ; w2d01b == $ff
-	ld hl, w2d000
+	ld hl, wTreasuresCollected
 	set 0, [hl]
 .asm_8041e
 	call Func_80366
@@ -100,8 +100,8 @@ Func_803f9: ; 803f9 (20:43f9)
 	ld a, [w2d050]
 	cp $04
 	jr z, .asm_8043c
-	ld a, [w2d00f]
-	cp $1a
+	ld a, [wOWLevel]
+	cp LEVEL_GOLF_BUILDING
 	jp nc, .asm_804b9
 
 	ld b, a
@@ -261,8 +261,9 @@ Func_8197e: ; 8197e (20:597e)
 	xor a
 	ld c, a
 	ld [w2d025], a
-	ld hl, $59fb
-.asm_8198a
+
+	ld hl, Data_819fb
+.loop
 	ld a, [hli]
 	cp $ed
 	jr z, .asm_819a7
@@ -275,13 +276,15 @@ Func_8197e: ; 8197e (20:597e)
 	cp b
 	jr z, .asm_8199d
 	inc c
-	jr .asm_8198a
+	jr .loop
+
 .asm_8199d
 	ld a, c
 	ld [w2d025], a
 	call .Func_819ac
 	jr z, .asm_819a7
 	ret
+
 .asm_819a7
 	xor a
 	ld [w2d025], a
@@ -290,13 +293,13 @@ Func_8197e: ; 8197e (20:597e)
 .Func_819ac
 	call Func_819e3
 	ld c, $01
-	ld a, [$dffd]
+	ld a, [w2dffd]
 	call Func_819cb
 	ret c
-	ld a, [$dffe]
+	ld a, [w2dffe]
 	call Func_819cb
 	ret c
-	ld a, [$dfff]
+	ld a, [w2dfff]
 	call Func_819cb
 	ret
 ; 0x819c6
@@ -309,7 +312,7 @@ Func_819cb: ; 819cb (20:59cb)
 	ld hl, w2d01b
 	cp [hl]
 	jr z, .asm_819dd
-	call Func_3aac
+	call IsTreasureCollected
 	jr nz, .asm_819df
 	xor a
 	scf
@@ -329,7 +332,7 @@ Func_819e3: ; 819e3 (20:59e3)
 	ld e, a
 	ld d, $00
 	rl d
-	ld hl, .data
+	ld hl, Data_819fb
 	add hl, de
 	ld de, $dfff
 	ld a, [hli]
@@ -341,8 +344,9 @@ Func_819e3: ; 819e3 (20:59e3)
 	dec e
 	ld [de], a
 	ret
+; 0x819fb
 
-.data
+Data_819fb: ; 819fb (20:59fb)
 	db $80, $80, $80
 	db $00, $80, $80
 	db $1b, $80, $80

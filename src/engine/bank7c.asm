@@ -154,6 +154,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	call UpdateObjAnim
 	ld hl, wIntroObj3
 	call Func_1f0940
+
 .asm_1f0168
 	ld a, [wKeys]
 	bit RED_KEY_F, a
@@ -177,6 +178,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	call UpdateObjAnim
 	ld hl, wIntroObj4
 	call Func_1f0940
+
 .asm_1f018f
 	ld a, [wKeys]
 	bit GREEN_KEY_F, a
@@ -200,6 +202,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	call UpdateObjAnim
 	ld hl, $d553
 	call Func_1f0940
+
 .asm_1f01b6
 	ld a, [wKeys]
 	bit BLUE_KEY_F, a
@@ -223,6 +226,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	call UpdateObjAnim
 	ld hl, $d55e
 	call Func_1f0940
+
 .asm_1f01dd
 	ld hl, $d56a
 	ld a, $64
@@ -1590,7 +1594,7 @@ Func_1f13d7: ; 1f13d7 (7c:53d7)
 	push af
 	ld a, 2 ; WRAM2
 	ldh [rSVBK], a
-	ld de, w2d000
+	ld de, wTreasuresCollected
 	ld b, $11
 	call CopyHLToDE
 	pop af
@@ -1606,7 +1610,7 @@ Func_1f13f2: ; 1f13f2 (7c:53f2)
 	push af
 	ld a, 2 ; WRAM2
 	ldh [rSVBK], a
-	ld de, w2d000
+	ld de, wTreasuresCollected
 	ld b, $11
 	call CopyHLToDE
 	pop af

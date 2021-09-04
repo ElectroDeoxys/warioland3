@@ -39,14 +39,12 @@ obj_struct: MACRO
 \1Unk0a::           db
 \1Unk0b::           db
 \1Unk0c::           db
-\1Unk0d::           db
-\1Unk0e::           db
+\1ScreenYPos::      db
+\1ScreenXPos::      db
 \1Unk0f::           db
 \1Unk10::           dw
-\1Unk12::           db
-\1Unk13::           db
-\1Unk14::           db
-\1Unk15::           db
+\1Unk12::           dw
+\1Unk14::           dw
 \1Unk16::           db
 \1Unk17::           db
 \1Unk18::           db
@@ -55,7 +53,7 @@ obj_struct: MACRO
 \1Unk1b::           db
 \1Unk1c::           db
 \1Unk1d::           db
-\1Unk1e::           dw
+\1UpdateFunction::  dw
 ENDM
 
 unk3_struct: MACRO
