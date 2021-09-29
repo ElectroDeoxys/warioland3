@@ -2429,10 +2429,10 @@ ClearTransformationValues: ; 1079 (0:1079)
 	ld [wStingTouchState], a
 	ld [wTouchState], a
 	ld [wca94], a
-	ld [wca8a], a
+	ld [wIsIntangible], a
 	ld [wTransformationDuration + 0], a
 	ld [wTransformationDuration + 1], a
-	ld [wca9b], a
+	ld [wAutoMoveState], a
 	ld [wInvisibleFrame], a
 	ld [wca9c], a
 	ret
@@ -2613,8 +2613,9 @@ Func_11f6: ; 11f6 (0:11f6)
 	ld [wcee2], a
 	ld [wcac3], a
 	ld [wc0e6], a
-	inc a
-	ld [wca8a], a
+	inc a ; TRUE
+	ld [wIsIntangible], a
+
 	ld a, [wc0d7]
 	bit 7, a
 	ret nz
@@ -4637,7 +4638,27 @@ Func_312f: ; 312f (0:312f)
 	ret
 ; 0x3173
 
-	INCROM $3173, $34b7
+	INCROM $3173, $329f
+
+Func_329f: ; 329f (0:329f)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_629d0)
+	bankswitch
+	jp Func_629d0
+; 0x32ae
+
+	INCROM $32ae, $32f9
+
+Func_32f9: ; 32f9 (0:32f9)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_629a6)
+	bankswitch
+	jp Func_629a6
+; 0x3308
+
+	INCROM $3308, $34b7
 
 Func_34b7: ; 34b7 (0:34b7)
 	ld a, [wROMBank]
@@ -4677,7 +4698,19 @@ Func_352b: ; 352b (0:352b)
 	ret
 ; 0x3543
 
-	INCROM $3543, $3a38
+Func_3543: ; 3543 (0:3543)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_19b51)
+	bankswitch
+	call Func_19b51
+	pop af
+	bankswitch
+	ld a, b
+	ret
+; 0x355b
+
+	INCROM $355b, $3a38
 
 ; hl = OAM data
 ; b = sprite bank
@@ -4777,21 +4810,22 @@ IsTreasureCollected: ; 3aac (0:3aac)
 
 	ld e, $01
 	bit 2, a
-	jr z, .asm_3ac1
+	jr z, .low_nybble
 	swap e ; = $10
-.asm_3ac1
+.low_nybble
+
 	and %11
 	ld d, a
 	ld a, e
-	jr z, .asm_3ad0
+	jr z, .check_obtained
 	rla
 	dec d
-	jr z, .asm_3ad0
+	jr z, .check_obtained
 	rla
 	dec d
-	jr z, .asm_3ad0
+	jr z, .check_obtained
 	rla
-.asm_3ad0
+.check_obtained
 	ld d, a
 	and [hl]
 	ret z ; not obtained

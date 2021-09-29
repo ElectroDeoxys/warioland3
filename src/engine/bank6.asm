@@ -233,7 +233,7 @@ Func_19832: ; 19832 (6:5832)
 	ld a, [wIsCrouching]
 	and a
 	jr nz, .asm_198c0
-	ld a, [wcac9]
+	ld a, [wIsOnSteppableObject]
 	and a
 	jr nz, .asm_198c0
 	ld a, [wTransformation]
@@ -336,7 +336,7 @@ Func_198e0: ; 198e0 (6:58e0)
 	call Func_19b8b
 	and a
 	ret nz
-	ld a, [wcac9]
+	ld a, [wIsOnSteppableObject]
 	and a
 	ret z
 	ld b, a
@@ -488,7 +488,7 @@ Func_199e9: ; 199e9 (6:59e9)
 	call Func_19bfb
 	and a
 	ret nz
-	ld a, [wcac9]
+	ld a, [wIsOnSteppableObject]
 	and a
 	jr z, .asm_19a22
 	ld b, a
@@ -521,7 +521,7 @@ Func_199e9: ; 199e9 (6:59e9)
 	call Func_19bfb
 	and a
 	ret nz
-	ld a, [wcac9]
+	ld a, [wIsOnSteppableObject]
 	and a
 	ret z
 	ld b, a
@@ -1150,7 +1150,7 @@ SetState_DraggedDown: ; 19fb6 (6:5fb6)
 	ld [wIsRolling], a
 
 	inc a
-	ld [wca9b], a
+	ld [wAutoMoveState], a
 
 	ld a, -1
 	ld [wca70], a
@@ -1183,7 +1183,7 @@ SetState_DraggedDown: ; 19fb6 (6:5fb6)
 
 UpdateState_DraggedDown: ; 1a046 (6:6046)
 	update_anim_1
-	ld a, [wca9b]
+	ld a, [wAutoMoveState]
 	and a
 	ret nz
 	ld a, [wLevel]
@@ -1199,8 +1199,8 @@ UpdateState_DraggedDown: ; 1a046 (6:6046)
 ; 0x1a077
 
 UpdateState_Teleporting: ; 1a077 (6:6077)
-	ld a, $01
-	ld [wca8a], a
+	ld a, TRUE
+	ld [wIsIntangible], a
 	update_anim_1
 
 	ld hl, wWarioStateCounter
@@ -1643,9 +1643,9 @@ SetState_GettingOffLadder: ; 1a5ee (6:65ee)
 	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	inc a
+	inc a ; TRUE
 	ld [wIsGettingOffLadder], a
-	ld [wca8a], a
+	ld [wIsIntangible], a
 
 	ld a, [wJoypadDown]
 	bit D_RIGHT_F, a
@@ -1686,7 +1686,7 @@ UpdateState_GettingOffLadder: ; 1a617 (6:6617)
 	ret nz
 	xor a
 	ld [wIsGettingOffLadder], a
-	ld [wca8a], a
+	ld [wIsIntangible], a
 	farcall StartFall
 	ret
 ; 0x1a66b
@@ -2018,7 +2018,7 @@ SetState_FenceShakeSliding: ; 1ad9a (6:6d9a)
 	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld a, $03
-	ld [wca9b], a
+	ld [wAutoMoveState], a
 
 	load_gfx WarioIdleGfx
 	call LoadWarioGfx

@@ -479,7 +479,7 @@ SetState_FlatAirborne: ; 28435 (a:4435)
 	ld [wIsSmashAttacking], a
 
 	inc a
-	ld [wca9b], a
+	ld [wAutoMoveState], a
 
 	ld [wJumpVelTable], a
 	ld a, ST_GETTING_FLAT_AIRBORNE
@@ -529,9 +529,10 @@ UpdateState_GettingFlatAirborne: ; 28511 (a:4511)
 	ld [wWarioStateCycles], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
-	ld [wca9b], a
-	inc a
-	ld [wca8a], a
+	ld [wAutoMoveState], a
+	inc a ; TRUE
+	ld [wIsIntangible], a
+
 	ld a, -1
 	ld [wca70], a
 	ld a, -8
@@ -553,7 +554,7 @@ UpdateState_GettingFlat: ; 28599 (a:4599)
 	and a
 	ret z
 	xor a
-	ld [wca8a], a
+	ld [wIsIntangible], a
 	ld a, [wWarioStateCounter]
 	and a
 	jp nz, SetState_FlatSquished
@@ -677,7 +678,7 @@ SetState_FlatJumping: ; 286d1 (a:46d1)
 	load_frameset Frameset_17190
 	update_anim_1
 
-	ld a, [wcac9]
+	ld a, [wIsOnSteppableObject]
 	and a
 	ret z
 ;	fallthrough
@@ -865,7 +866,7 @@ UpdateState_FlatStretching: ; 288e5 (a:48e5)
 	and a
 	ret z
 	xor a
-	ld [wca9b], a
+	ld [wAutoMoveState], a
 	jp RecoverFromTransformation
 ; 0x28900
 
@@ -879,8 +880,9 @@ SetState_FlatSinking: ; 28900 (a:4900)
 	ld [wWarioStateCycles], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
-	inc a
-	ld [wca8a], a
+	inc a ; TRUE
+	ld [wIsIntangible], a
+
 	ld a, -1
 	ld [wca70], a
 	ld a, -8
@@ -1014,8 +1016,8 @@ UpdateState_FlatSquished: ; 28a5a (a:4a5a)
 ; 0x28a5b
 
 SetState_FlatSquishedLifting: ; 28a5b (a:4a5b)
-	ld a, $01
-	ld [wca8a], a
+	ld a, TRUE
+	ld [wIsIntangible], a
 	ld a, ST_FLAT_SQUISHED_LIFTING
 	ld [wWarioState], a
 	xor a
@@ -1039,7 +1041,7 @@ UpdateState_FlatSquishedLifting: ; 28a8a (a:4a8a)
 	cp $32
 	ret c
 	xor a
-	ld [wca8a], a
+	ld [wIsIntangible], a
 	jp SetState_FlatFalling
 ; 0x28aad
 
@@ -1316,9 +1318,9 @@ UpdateState_GettingUnwrappedInString: ; 28d92 (a:4d92)
 	ld [wWarioStateCycles], a
 	ld [wJumpVelTable], a
 	ld [wJumpVelIndex], a
-	inc a
+	inc a ; TRUE
+	ld [wIsIntangible], a
 
-	ld [wca8a], a
 	xor a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
@@ -1732,8 +1734,8 @@ Func_2926a: ; 2926a (a:526a)
 	ld [wWarioStateCycles], a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
-	inc a
-	ld [wca8a], a
+	inc a ; TRUE
+	ld [wIsIntangible], a
 
 	ld a, [wDirection]
 	and a
@@ -2159,8 +2161,8 @@ SetState_TurningInvisible: ; 29689 (a:5689)
 	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
 
-	inc a
-	ld [wca8a], a
+	inc a ; TRUE
+	ld [wIsIntangible], a
 
 	ld a, ST_TURNING_INVISIBLE
 	ld [wWarioState], a
@@ -2209,7 +2211,7 @@ UpdateState_TurningInvisible: ; 2972e (a:572e)
 	and a
 	ret z
 	xor a
-	ld [wca8a], a
+	ld [wIsIntangible], a
 	ld a, TRANSFORMATION_INVISIBLE_WARIO
 	ld [wTransformation], a
 	call UpdateLevelMusic
@@ -2420,8 +2422,8 @@ SetState_PuffyDeflating: ; 2992a (a:592a)
 	ld [wWarioStateCycles], a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
-	inc a
-	ld [wca8a], a
+	inc a ; TRUE
+	ld [wIsIntangible], a
 
 	ld a, [wDirection]
 	and a

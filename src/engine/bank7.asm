@@ -148,9 +148,9 @@ UpdateState_Idling: ; 1c0b6 (7:40b6)
 	ret nz ; not idling
 
 ; still idling, increment idle counter
-	ld a, [wcac9]
+	ld a, [wIsOnSteppableObject]
 	and a
-	ret nz
+	ret nz ; unless Wario is on steppable object
 	ld a, [wWarioStateCounter]
 	add 1
 	ld [wWarioStateCounter], a
@@ -327,7 +327,7 @@ SetState_Airborne: ; 1c2e2 (7:42e2)
 .asm_1c34f
 	update_anim_1
 
-	ld a, [wcac9]
+	ld a, [wIsOnSteppableObject]
 	and a
 	ret z
 	ld b, $02
@@ -1140,7 +1140,7 @@ SetState_AttackingAirborne: ; 1cb43 (7:4b43)
 .asm_1cba1
 	update_anim_1
 
-	ld a, [wcac9]
+	ld a, [wIsOnSteppableObject]
 	and a
 	ret z
 	call UpdateState_AttackingAirborne
@@ -1927,7 +1927,7 @@ UpdateState_WaterStung: ; 1d395 (7:5395)
 	ld [wc0e1], a
 .asm_1d3f8
 	xor a
-	ld [wca8a], a
+	ld [wIsIntangible], a
 	ld a, $10
 	ld [wInvincibleCounter], a
 	jp SetState_Submerged
@@ -1937,7 +1937,7 @@ UpdateState_WaterStung: ; 1d395 (7:5395)
 	cp $78
 	ret c
 	xor a
-	ld [wca8a], a
+	ld [wIsIntangible], a
 	ld a, $10
 	ld [wInvincibleCounter], a
 	jp Func_1cf7a
@@ -2307,8 +2307,8 @@ UpdateState_StungRecovery: ; 1d766 (7:5766)
 ; 0x1d7c1
 
 UpdateState_PipeGoingDown: ; 1d7c1 (7:57c1)
-	ld a, $01
-	ld [wca8a], a
+	ld a, TRUE
+	ld [wIsIntangible], a
 	update_anim_1
 	ld b, $01
 	call AddYOffset
@@ -2326,7 +2326,7 @@ UpdateState_PipeGoingDown: ; 1d7c1 (7:57c1)
 	sub $08
 	ld [wXPosLo], a
 	xor a
-	ld [wca8a], a
+	ld [wIsIntangible], a
 	jp SetState_Idling
 
 .asm_1d7f9
@@ -2340,8 +2340,8 @@ UpdateState_PipeGoingDown: ; 1d7c1 (7:57c1)
 ; 0x1d80d
 
 UpdateState_PipeGoingUp: ; 1d80d (7:580d)
-	ld a, $01
-	ld [wca8a], a
+	ld a, TRUE
+	ld [wIsIntangible], a
 	update_anim_1
 	ld b, $01
 	call SubYOffset
@@ -2359,7 +2359,7 @@ UpdateState_PipeGoingUp: ; 1d80d (7:580d)
 	sub $08
 	ld [wXPosLo], a
 	xor a
-	ld [wca8a], a
+	ld [wIsIntangible], a
 	call Func_1146
 	jp SetState_Idling
 
@@ -3380,7 +3380,7 @@ UpdateState_PickedUp: ; 1e2c5 (7:62c5)
 	dec [hl]
 	ret nz
 	xor a
-	ld [wca9b], a
+	ld [wAutoMoveState], a
 	jp StartFall
 
 .dir_right
@@ -4443,7 +4443,7 @@ Func_1ed4b: ; 1ed4b (7:6d4b)
 .asm_1edb9
 	update_anim_1
 
-	ld a, [wcac9]
+	ld a, [wIsOnSteppableObject]
 	and a
 	ret z
 	ld b, $02
@@ -4509,7 +4509,7 @@ SetState_GrabAirborne: ; 1ee0d (7:6e0d)
 	load_frameset Frameset_15fab
 .asm_1ee70
 	update_anim_1
-	ld a, [wcac9]
+	ld a, [wIsOnSteppableObject]
 	and a
 	ret z
 	call UpdateState_GrabAirborne
@@ -5455,10 +5455,10 @@ HandleGroundShake: ; 1f6dc (7:76dc)
 	ld a, [wc0d7]
 	and a
 	jr nz, .ground_shake
-	ld a, [wca8a]
+	ld a, [wIsIntangible]
 	and a
 	jr nz, .ground_shake
-	ld a, [wcac9]
+	ld a, [wIsOnSteppableObject]
 	and a
 	jr nz, .ground_shake
 	ld a, [wWarioState]

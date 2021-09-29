@@ -28,7 +28,7 @@ wario_plane: MACRO
 ENDM
 
 obj_struct: MACRO
-\1Unk00::           db
+\1Flags::           db
 \1Unk01::           db
 \1Unk02::           db
 \1YPos::            dw
@@ -50,7 +50,7 @@ obj_struct: MACRO
 \1Unk18::           db
 \1Unk19::           db
 \1Unk1a::           db
-\1Unk1b::           db
+\1Action::          db
 \1Unk1c::           db
 \1Unk1d::           db
 \1UpdateFunction::  dw

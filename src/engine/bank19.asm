@@ -262,8 +262,8 @@ Func_640e5: ; 640e5 (19:40e5)
 	ld a, $21
 	ld [de], a ; OBJ_UNK_1A
 	inc e
-	xor a
-	ld [de], a ; OBJ_UNK_1B
+	xor a ; OBJ_ACTION_00
+	ld [de], a ; OBJ_ACTION
 	inc e
 	ld a, $82
 	ld [de], a ; OBJ_UNK_1C
@@ -276,11 +276,11 @@ Func_640e5: ; 640e5 (19:40e5)
 	ld [de], a
 
 	ld a, e
-	sub (OBJ_UPDATE_FUNCTION + 1) - OBJ_UNK_00
+	sub (OBJ_UPDATE_FUNCTION + 1) - OBJ_FLAGS
 	ld e, a
 	ld a, [hl]
-	or $11
-	ld [de], a ; OBJ_UNK_00
+	or OBJFLAG_UNK00 | OBJFLAG_UNK04
+	ld [de], a ; OBJ_FLAGS
 	ret
 ; 0x64187
 

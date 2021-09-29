@@ -136,7 +136,7 @@ Func_80aa: ; 80aa (2:40aa)
 	ld a, [wLevel]
 	cp THE_TEMPLE
 	jr nz, .asm_814f
-	ld a, [wca9b]
+	ld a, [wAutoMoveState]
 	cp $02
 	jr nz, .asm_814f
 	farcall SetState_FenceShakeSliding
@@ -625,7 +625,7 @@ Func_846e: ; 846e (2:446e)
 	pop af
 	ldh [rSVBK], a
 	xor a
-	ld [wca8a], a
+	ld [wIsIntangible], a
 	ld a, $02
 	ld [wSubSequence], a
 	ld a, $87
@@ -781,7 +781,7 @@ Func_8747: ; 8747 (2:4747)
 	ld [wc0c3], a
 	ld [wc0be], a
 	ld [wc0bd], a
-	ld [wca8a], a
+	ld [wIsIntangible], a
 	ld [wInvincibleCounter], a
 	ld [wcac1], a
 	ld [wIsRolling], a
@@ -797,7 +797,7 @@ Func_8747: ; 8747 (2:4747)
 	call ClearTransformationValues
 	ld [wInvisibleFrame], a
 	ld [wcac8], a
-	ld [wcac9], a
+	ld [wIsOnSteppableObject], a
 	ld [wGroundShakeCounter], a
 	ld [wc0bc], a
 	ld [wca9c], a
@@ -1231,7 +1231,7 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 	ld a, [wc0ba]
 	bit 5, a
 	jr z, .asm_8b27
-	ld de, $ffe0
+	ld de, -$20
 	add hl, de
 .asm_8b27
 	ld a, [wc0b8]
@@ -1296,7 +1296,7 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 	ld a, [wc0ba]
 	bit 6, a
 	jr z, .asm_8b99
-	ld de, -32
+	ld de, -$20
 	add hl, de
 
 .asm_8b99

@@ -323,7 +323,7 @@ UpdateState_HangingRail: ; 1ec703 (7b:4703)
 	jp nz, RecoverFromTransformation_WithoutInvincibility
 	bit A_BUTTON_F, a
 	jp nz, Func_1ede4d
-	ld a, [wca9b]
+	ld a, [wAutoMoveState]
 	and a
 	jp z, Func_1ede69
 	ret
@@ -794,7 +794,7 @@ SetState_BlindAirborne: ; 1ed571 (7b:5571)
 .asm_1ed5ca
 	update_anim_1
 
-	ld a, [wcac9]
+	ld a, [wIsOnSteppableObject]
 	and a
 	ret z
 	call UpdateState_BlindAirborne
@@ -862,9 +862,9 @@ SetState_UnknownE0: ; 1ed660 (7b:5660)
 	ld [wJumpVelTable], a
 	ld [wJumpVelIndex], a
 
-	inc a
-	ld [wca8a], a
-	ld [wca9b], a
+	inc a ; TRUE
+	ld [wIsIntangible], a
+	ld [wAutoMoveState], a
 
 	xor a
 	ld [wFrameDuration], a
@@ -900,7 +900,7 @@ SetState_UnknownE0: ; 1ed660 (7b:5660)
 
 SetState_UnknownE1: ; 1ed738 (7b:5738)
 	xor a
-	ld [wca8a], a
+	ld [wIsIntangible], a
 
 	ld a, (1 << 6) | TRANSFORMATION_UNK_14
 	ld [wTransformation], a
@@ -1282,9 +1282,9 @@ SetState_BallShot: ; 1edbd8 (7b:5bd8)
 	ld [wJumpVelTable], a
 	ld [wJumpVelIndex], a
 
-	inc a
-	ld [wca9b], a
-	ld [wca8a], a
+	inc a ; TRUE
+	ld [wAutoMoveState], a
+	ld [wIsIntangible], a
 
 	xor a
 	ld [wFrameDuration], a
@@ -1302,13 +1302,13 @@ SetState_BallShot: ; 1edbd8 (7b:5bd8)
 ; 0x1edc15
 
 UpdateState_BallShot: ; 1edc15 (7b:5c15)
-	ld a, [wca9b]
+	ld a, [wAutoMoveState]
 	and a
 	jr z, .asm_1edc91
 	bit 7, a
 	jr z, .asm_1edc71
 	and $7f
-	ld [wca9b], a
+	ld [wAutoMoveState], a
 	dec a
 	jr z, .asm_1edc5a
 	dec a
@@ -1346,14 +1346,14 @@ UpdateState_BallShot: ; 1edc15 (7b:5c15)
 .asm_1edc71
 	update_anim_3
 
-	ld a, [wca9b]
+	ld a, [wAutoMoveState]
 	cp $02
 	ret nz
 	ld a, [wAnimationHasFinished]
 	and a
 	ret z
-	ld a, $83
-	ld [wca9b], a
+	ld a, (1 << 7) | $03
+	ld [wAutoMoveState], a
 	ret
 
 .asm_1edc91
@@ -1403,7 +1403,7 @@ UpdateState_BallThrown: ; 1edcd0 (7b:5cd0)
 	update_pos_y
 
 	xor a
-	ld [wca8a], a
+	ld [wIsIntangible], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
 
@@ -1432,8 +1432,8 @@ UpdateState_BallThrown: ; 1edcd0 (7b:5cd0)
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wJumpVelIndex], a
-	inc a
-	ld [wca8a], a
+	inc a ; TRUE
+	ld [wIsIntangible], a
 
 	xor a
 	ld [wFrameDuration], a
@@ -1471,7 +1471,7 @@ UpdateState_BallSentUpwards: ; 1edd7e (7b:5d7e)
 	ret z
 	update_pos_y
 	xor a
-	ld [wca8a], a
+	ld [wIsIntangible], a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
 	farcall Func_206eb

@@ -1,32 +1,52 @@
 ; wObjects structs constants
 rsreset
-OBJ_UNK_00 rb ; $00
-OBJ_UNK_01 rb ; $01
-OBJ_UNK_02 rb ; $02
-OBJ_Y_POS  rw ; $03
-OBJ_X_POS  rw ; $05
-OBJ_UNK_07 rb ; $07
+OBJ_FLAGS            rb ; $00
+OBJ_UNK_01           rb ; $01
+OBJ_UNK_02           rb ; $02
+OBJ_Y_POS            rw ; $03
+OBJ_X_POS            rw ; $05
+OBJ_UNK_07           rb ; $07
 OBJ_INTERACTION_TYPE rb ; $08
-OBJ_UNK_09 rb ; $09
-OBJ_UNK_0A rb ; $0a
-OBJ_UNK_0B rb ; $0b
-OBJ_UNK_0C rb ; $0c
-OBJ_SCREEN_Y_POS rb ; $0d
-OBJ_SCREEN_X_POS rb ; $0e
-OBJ_UNK_0F rb ; $0f
-OBJ_UNK_10 rw ; $10
-OBJ_UNK_12 rw ; $12
-OBJ_UNK_14 rw ; $14
-OBJ_UNK_16 rb ; $16
-OBJ_UNK_17 rb ; $17
-OBJ_UNK_18 rb ; $18
-OBJ_UNK_19 rb ; $19
-OBJ_UNK_1A rb ; $1a
-OBJ_UNK_1B rb ; $1b
-OBJ_UNK_1C rb ; $1c
-OBJ_UNK_1D rb ; $1d
-OBJ_UPDATE_FUNCTION rw ; $1e
+OBJ_UNK_09           rb ; $09
+OBJ_UNK_0A           rb ; $0a
+OBJ_UNK_0B           rb ; $0b
+OBJ_UNK_0C           rb ; $0c
+OBJ_SCREEN_Y_POS     rb ; $0d
+OBJ_SCREEN_X_POS     rb ; $0e
+OBJ_UNK_0F           rb ; $0f
+OBJ_UNK_10           rw ; $10
+OBJ_UNK_12           rw ; $12
+OBJ_UNK_14           rw ; $14
+OBJ_UNK_16           rb ; $16
+OBJ_UNK_17           rb ; $17
+OBJ_UNK_18           rb ; $18
+OBJ_UNK_19           rb ; $19
+OBJ_UNK_1A           rb ; $1a
+OBJ_ACTION           rb ; $1b
+OBJ_UNK_1C           rb ; $1c
+OBJ_UNK_1D           rb ; $1d
+OBJ_UPDATE_FUNCTION  rw ; $1e
 OBJ_STRUCT_LENGTH EQU _RS
+
+; OBJ_FLAGS constants
+	const_def
+	const OBJFLAG_UNK00_F ; 0
+	const OBJFLAG_UNK01_F ; 1
+	const OBJFLAG_UNK02_F ; 2
+	const OBJFLAG_UNK03_F ; 3
+	const OBJFLAG_UNK04_F ; 4
+	const OBJFLAG_UNK05_F ; 5
+	const OBJFLAG_UNK06_F ; 6
+	const OBJFLAG_UNK07_F ; 7
+
+OBJFLAG_UNK00 EQU (1 << OBJFLAG_UNK00_F)
+OBJFLAG_UNK01 EQU (1 << OBJFLAG_UNK01_F)
+OBJFLAG_UNK02 EQU (1 << OBJFLAG_UNK02_F)
+OBJFLAG_UNK03 EQU (1 << OBJFLAG_UNK03_F)
+OBJFLAG_UNK04 EQU (1 << OBJFLAG_UNK04_F)
+OBJFLAG_UNK05 EQU (1 << OBJFLAG_UNK05_F)
+OBJFLAG_UNK06 EQU (1 << OBJFLAG_UNK06_F)
+OBJFLAG_UNK07 EQU (1 << OBJFLAG_UNK07_F)
 
 ; enemies with InteractionType with
 ; this flag set are considered heavy
@@ -47,95 +67,198 @@ INTERACTION_DOWN  EQU (1 << INTERACTION_DOWN_F)  ; $80
 
 ; object interaction types
 	const_def
-	const OBJ_INTERACTION_00 ; 00
-	const OBJ_INTERACTION_01 ; 01
-	const OBJ_INTERACTION_02 ; 02
-	const OBJ_INTERACTION_03 ; 03
-	const OBJ_INTERACTION_04 ; 04
-	const OBJ_INTERACTION_05 ; 05
-	const OBJ_INTERACTION_06 ; 06
-	const OBJ_INTERACTION_07 ; 07
-	const OBJ_INTERACTION_08 ; 08
-	const OBJ_INTERACTION_09 ; 09
-	const OBJ_INTERACTION_0A ; 0a
-	const OBJ_INTERACTION_0B ; 0b
-	const OBJ_INTERACTION_0C ; 0c
-	const OBJ_INTERACTION_0D ; 0d
-	const OBJ_INTERACTION_0E ; 0e
-	const OBJ_INTERACTION_0F ; 0f
-	const OBJ_INTERACTION_10 ; 10
-	const OBJ_INTERACTION_11 ; 11
-	const OBJ_INTERACTION_12 ; 12
-	const OBJ_INTERACTION_13 ; 13
-	const OBJ_INTERACTION_14 ; 14
-	const OBJ_INTERACTION_15 ; 15
-	const OBJ_INTERACTION_16 ; 16
-	const OBJ_INTERACTION_17 ; 17
-	const OBJ_INTERACTION_18 ; 18
-	const OBJ_INTERACTION_19 ; 19
-	const OBJ_INTERACTION_1A ; 1a
-	const OBJ_INTERACTION_1B ; 1b
-	const OBJ_INTERACTION_1C ; 1c
-	const OBJ_INTERACTION_1D ; 1d
-	const OBJ_INTERACTION_1E ; 1e
-	const OBJ_INTERACTION_1F ; 1f
-	const OBJ_INTERACTION_20 ; 20
-	const OBJ_INTERACTION_21 ; 21
-	const OBJ_INTERACTION_22 ; 22
-	const OBJ_INTERACTION_23 ; 23
-	const OBJ_INTERACTION_24 ; 24
-	const OBJ_INTERACTION_25 ; 25
-	const OBJ_INTERACTION_26 ; 26
-	const OBJ_INTERACTION_27 ; 27
-	const OBJ_INTERACTION_28 ; 28
-	const OBJ_INTERACTION_29 ; 29
-	const OBJ_INTERACTION_2A ; 2a
-	const OBJ_INTERACTION_2B ; 2b
-	const OBJ_INTERACTION_2C ; 2c
-	const OBJ_INTERACTION_2D ; 2d
-	const OBJ_INTERACTION_2E ; 2e
-	const OBJ_INTERACTION_2F ; 2f
-	const OBJ_INTERACTION_30 ; 30
-	const OBJ_INTERACTION_31 ; 31
-	const OBJ_INTERACTION_32 ; 32
-	const OBJ_INTERACTION_33 ; 33
-	const OBJ_INTERACTION_34 ; 34
-	const OBJ_INTERACTION_35 ; 35
-	const OBJ_INTERACTION_36 ; 36
-	const OBJ_INTERACTION_37 ; 37
-	const OBJ_INTERACTION_38 ; 38
-	const OBJ_INTERACTION_39 ; 39
-	const OBJ_INTERACTION_3A ; 3a
-	const OBJ_INTERACTION_3B ; 3b
-	const OBJ_INTERACTION_3C ; 3c
-	const OBJ_INTERACTION_3D ; 3d
-	const OBJ_INTERACTION_3E ; 3e
-	const OBJ_INTERACTION_3F ; 3f
-	const OBJ_INTERACTION_40 ; 40
-	const OBJ_INTERACTION_41 ; 41
-	const OBJ_INTERACTION_42 ; 42
-	const OBJ_INTERACTION_43 ; 43
-	const OBJ_INTERACTION_44 ; 44
-	const OBJ_INTERACTION_45 ; 45
-	const OBJ_INTERACTION_46 ; 46
-	const OBJ_INTERACTION_47 ; 47
-	const OBJ_INTERACTION_48 ; 48
-	const OBJ_INTERACTION_49 ; 49
-	const OBJ_INTERACTION_4A ; 4a
-	const OBJ_INTERACTION_4B ; 4b
-	const OBJ_INTERACTION_4C ; 4c
-	const OBJ_INTERACTION_4D ; 4d
-	const OBJ_INTERACTION_4E ; 4e
-	const OBJ_INTERACTION_4F ; 4f
-	const OBJ_INTERACTION_50 ; 50
-	const OBJ_INTERACTION_51 ; 51
-	const OBJ_INTERACTION_52 ; 52
-	const OBJ_INTERACTION_53 ; 53
-	const OBJ_INTERACTION_54 ; 54
-	const OBJ_INTERACTION_55 ; 55
-	const OBJ_INTERACTION_56 ; 56
-	const OBJ_INTERACTION_57 ; 57
-	const OBJ_INTERACTION_58 ; 58
+	const OBJ_INTERACTION_00             ; 00
+	const OBJ_INTERACTION_01             ; 01
+	const OBJ_INTERACTION_FRONT_STING    ; 02
+	const OBJ_INTERACTION_BACK_STING     ; 03
+	const OBJ_INTERACTION_TOP_STING      ; 04
+	const OBJ_INTERACTION_FULL_STING     ; 05
+	const OBJ_INTERACTION_06             ; 06
+	const OBJ_INTERACTION_07             ; 07
+	const OBJ_INTERACTION_08             ; 08
+	const OBJ_INTERACTION_09             ; 09
+	const OBJ_INTERACTION_0A             ; 0a
+	const OBJ_INTERACTION_0B             ; 0b
+	const OBJ_INTERACTION_0C             ; 0c
+	const OBJ_INTERACTION_MUSICAL_COIN   ; 0d
+	const OBJ_INTERACTION_0E             ; 0e
+	const OBJ_INTERACTION_0F             ; 0f
+	const OBJ_INTERACTION_GREY_KEY       ; 10
+	const OBJ_INTERACTION_RED_KEY        ; 11
+	const OBJ_INTERACTION_GREEN_KEY      ; 12
+	const OBJ_INTERACTION_BLUE_KEY       ; 13
+	const OBJ_INTERACTION_GREY_TREASURE  ; 14
+	const OBJ_INTERACTION_RED_TREASURE   ; 15
+	const OBJ_INTERACTION_GREEN_TREASURE ; 16
+	const OBJ_INTERACTION_BLUE_TREASURE  ; 17
+	const OBJ_INTERACTION_18             ; 18
+	const OBJ_INTERACTION_19             ; 19
+	const OBJ_INTERACTION_1A             ; 1a
+	const OBJ_INTERACTION_REGULAR_COIN   ; 1b
+	const OBJ_INTERACTION_1C             ; 1c
+	const OBJ_INTERACTION_1D             ; 1d
+	const OBJ_INTERACTION_1E             ; 1e
+	const OBJ_INTERACTION_1F             ; 1f
+	const OBJ_INTERACTION_20             ; 20
+	const OBJ_INTERACTION_21             ; 21
+	const OBJ_INTERACTION_22             ; 22
+	const OBJ_INTERACTION_23             ; 23
+	const OBJ_INTERACTION_24             ; 24
+	const OBJ_INTERACTION_25             ; 25
+	const OBJ_INTERACTION_BUBBLE         ; 26
+	const OBJ_INTERACTION_27             ; 27
+	const OBJ_INTERACTION_OWL            ; 28
+	const OBJ_INTERACTION_RAIL           ; 29
+	const OBJ_INTERACTION_2A             ; 2a
+	const OBJ_INTERACTION_2B             ; 2b
+	const OBJ_INTERACTION_2C             ; 2c
+	const OBJ_INTERACTION_2D             ; 2d
+	const OBJ_INTERACTION_2E             ; 2e
+	const OBJ_INTERACTION_2F             ; 2f
+	const OBJ_INTERACTION_30             ; 30
+	const OBJ_INTERACTION_31             ; 31
+	const OBJ_INTERACTION_32             ; 32
+	const OBJ_INTERACTION_33             ; 33
+	const OBJ_INTERACTION_34             ; 34
+	const OBJ_INTERACTION_35             ; 35
+	const OBJ_INTERACTION_36             ; 36
+	const OBJ_INTERACTION_37             ; 37
+	const OBJ_INTERACTION_38             ; 38
+	const OBJ_INTERACTION_39             ; 39
+	const OBJ_INTERACTION_3A             ; 3a
+	const OBJ_INTERACTION_3B             ; 3b
+	const OBJ_INTERACTION_3C             ; 3c
+	const OBJ_INTERACTION_3D             ; 3d
+	const OBJ_INTERACTION_3E             ; 3e
+	const OBJ_INTERACTION_3F             ; 3f
+	const OBJ_INTERACTION_40             ; 40
+	const OBJ_INTERACTION_41             ; 41
+	const OBJ_INTERACTION_42             ; 42
+	const OBJ_INTERACTION_43             ; 43
+	const OBJ_INTERACTION_44             ; 44
+	const OBJ_INTERACTION_45             ; 45
+	const OBJ_INTERACTION_46             ; 46
+	const OBJ_INTERACTION_47             ; 47
+	const OBJ_INTERACTION_48             ; 48
+	const OBJ_INTERACTION_49             ; 49
+	const OBJ_INTERACTION_COLOUR_COIN    ; 4a
+	const OBJ_INTERACTION_4B             ; 4b
+	const OBJ_INTERACTION_4C             ; 4c
+	const OBJ_INTERACTION_4D             ; 4d
+	const OBJ_INTERACTION_4E             ; 4e
+	const OBJ_INTERACTION_4F             ; 4f
+	const OBJ_INTERACTION_50             ; 50
+	const OBJ_INTERACTION_51             ; 51
+	const OBJ_INTERACTION_52             ; 52
+	const OBJ_INTERACTION_UNUSED_1       ; 53
+	const OBJ_INTERACTION_UNUSED_2       ; 54
+	const OBJ_INTERACTION_UNUSED_3       ; 55
+	const OBJ_INTERACTION_UNUSED_4       ; 56
+	const OBJ_INTERACTION_UNUSED_5       ; 57
+	const OBJ_INTERACTION_UNUSED_6       ; 58
+
+	const_def
+	const OBJ_ACTION_00 ; $00
+	const OBJ_ACTION_01 ; $01
+	const OBJ_ACTION_02 ; $02
+	const OBJ_ACTION_03 ; $03
+	const OBJ_ACTION_04 ; $04
+	const OBJ_ACTION_05 ; $05
+	const OBJ_ACTION_06 ; $06
+	const OBJ_ACTION_07 ; $07
+	const OBJ_ACTION_08 ; $08
+	const OBJ_ACTION_09 ; $09
+	const OBJ_ACTION_0A ; $0a
+	const OBJ_ACTION_0B ; $0b
+	const OBJ_ACTION_0C ; $0c
+	const OBJ_ACTION_0D ; $0d
+	const OBJ_ACTION_0E ; $0e
+	const OBJ_ACTION_0F ; $0f
+	const OBJ_ACTION_10 ; $10
+	const OBJ_ACTION_11 ; $11
+	const OBJ_ACTION_12 ; $12
+	const OBJ_ACTION_13 ; $13
+	const OBJ_ACTION_14 ; $14
+	const OBJ_ACTION_15 ; $15
+	const OBJ_ACTION_16 ; $16
+	const OBJ_ACTION_17 ; $17
+	const OBJ_ACTION_18 ; $18
+	const OBJ_ACTION_19 ; $19
+	const OBJ_ACTION_1A ; $1a
+	const OBJ_ACTION_1B ; $1b
+	const OBJ_ACTION_1C ; $1c
+	const OBJ_ACTION_1D ; $1d
+	const OBJ_ACTION_1E ; $1e
+	const OBJ_ACTION_1F ; $1f
+	const OBJ_ACTION_20 ; $20
+	const OBJ_ACTION_21 ; $21
+	const OBJ_ACTION_22 ; $22
+	const OBJ_ACTION_23 ; $23
+	const OBJ_ACTION_24 ; $24
+	const OBJ_ACTION_25 ; $25
+	const OBJ_ACTION_26 ; $26
+	const OBJ_ACTION_27 ; $27
+	const OBJ_ACTION_28 ; $28
+	const OBJ_ACTION_29 ; $29
+	const OBJ_ACTION_2A ; $2a
+	const OBJ_ACTION_2B ; $2b
+	const OBJ_ACTION_2C ; $2c
+	const OBJ_ACTION_2D ; $2d
+	const OBJ_ACTION_2E ; $2e
+	const OBJ_ACTION_2F ; $2f
+	const OBJ_ACTION_30 ; $30
+	const OBJ_ACTION_31 ; $31
+	const OBJ_ACTION_32 ; $32
+	const OBJ_ACTION_33 ; $33
+	const OBJ_ACTION_34 ; $34
+	const OBJ_ACTION_35 ; $35
+	const OBJ_ACTION_36 ; $36
+	const OBJ_ACTION_37 ; $37
+	const OBJ_ACTION_38 ; $38
+	const OBJ_ACTION_39 ; $39
+	const OBJ_ACTION_3A ; $3a
+	const OBJ_ACTION_3B ; $3b
+	const OBJ_ACTION_3C ; $3c
+	const OBJ_ACTION_3D ; $3d
+	const OBJ_ACTION_3E ; $3e
+	const OBJ_ACTION_3F ; $3f
+	const OBJ_ACTION_40 ; $40
+	const OBJ_ACTION_41 ; $41
+	const OBJ_ACTION_42 ; $42
+	const OBJ_ACTION_43 ; $43
+	const OBJ_ACTION_44 ; $44
+	const OBJ_ACTION_45 ; $45
+	const OBJ_ACTION_46 ; $46
+	const OBJ_ACTION_47 ; $47
+	const OBJ_ACTION_48 ; $48
+	const OBJ_ACTION_49 ; $49
+	const OBJ_ACTION_4A ; $4a
+	const OBJ_ACTION_4B ; $4b
+	const OBJ_ACTION_4C ; $4c
+	const OBJ_ACTION_4D ; $4d
+	const OBJ_ACTION_4E ; $4e
+	const OBJ_ACTION_4F ; $4f
+	const OBJ_ACTION_50 ; $50
+	const OBJ_ACTION_51 ; $51
+	const OBJ_ACTION_52 ; $52
+	const OBJ_ACTION_53 ; $53
+	const OBJ_ACTION_54 ; $54
+	const OBJ_ACTION_55 ; $55
+	const OBJ_ACTION_56 ; $56
+	const OBJ_ACTION_57 ; $57
+	const OBJ_ACTION_58 ; $58
+	const OBJ_ACTION_59 ; $59
+	const OBJ_ACTION_5A ; $5a
+	const OBJ_ACTION_5B ; $5b
+	const OBJ_ACTION_5C ; $5c
+	const OBJ_ACTION_5D ; $5d
+	const OBJ_ACTION_5E ; $5e
+	const OBJ_ACTION_5F ; $5f
+	const OBJ_ACTION_60 ; $60
+	const OBJ_ACTION_61 ; $61
+	const OBJ_ACTION_62 ; $62
+	const OBJ_ACTION_63 ; $63
+	const OBJ_ACTION_64 ; $64
 
 	const_def
 	const ENEMY_GROUP_000 ; $00

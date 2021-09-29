@@ -1,27 +1,27 @@
 Func_20000: ; 20000 (8:4000)
-	ld a, [wca8a]
+	ld a, [wIsIntangible]
 	and a
-	ret nz
+	ret nz ; quit if Wario is intangible
 	ld a, [wIsFloorTransition]
 	and a
-	ret nz
-	ld a, [wca9b]
+	ret nz ; quit if floor is transitioning
+	ld a, [wAutoMoveState]
 	and a
-	ret nz
+	ret nz ; quit if auto-moving
 	xor a
-	ld [wcac9], a
+	ld [wIsOnSteppableObject], a
 
 	ld hl, wObjects
 .loop_objects
 	ld a, h
-	cp HIGH(wCurObj)
+	cp HIGH(wObjects) + 1
 	ret z
 	ld [wObjPtr + 0], a
 	ld a, l
 	ld [wObjPtr + 1], a
-	ld a, [hl] ; OBJ_UNK_00
-	and %11
-	cp %11
+	ld a, [hl] ; OBJ_FLAGS
+	and OBJFLAG_UNK00 | OBJFLAG_UNK01
+	cp OBJFLAG_UNK00 | OBJFLAG_UNK01
 	jr z, .asm_20036
 .next_obj
 	ld a, [wObjPtr + 0]
@@ -210,10 +210,10 @@ Func_20000: ; 20000 (8:4000)
 
 	dw Func_20b6b                   ; OBJ_INTERACTION_00
 	dw Func_20d1d                   ; OBJ_INTERACTION_01
-	dw ObjInteraction_FrontSting    ; OBJ_INTERACTION_02
-	dw ObjInteraction_BackSting     ; OBJ_INTERACTION_03
-	dw ObjInteraction_TopSting      ; OBJ_INTERACTION_04
-	dw ObjInteraction_FullSting     ; OBJ_INTERACTION_05
+	dw ObjInteraction_FrontSting    ; OBJ_INTERACTION_FRONT_STING
+	dw ObjInteraction_BackSting     ; OBJ_INTERACTION_BACK_STING
+	dw ObjInteraction_TopSting      ; OBJ_INTERACTION_TOP_STING
+	dw ObjInteraction_FullSting     ; OBJ_INTERACTION_FULL_STING
 	dw Func_20d81                   ; OBJ_INTERACTION_06
 	dw Func_20d8c                   ; OBJ_INTERACTION_07
 	dw Func_20deb                   ; OBJ_INTERACTION_08
@@ -221,21 +221,21 @@ Func_20000: ; 20000 (8:4000)
 	dw Func_20e60                   ; OBJ_INTERACTION_0A
 	dw Func_20e6a                   ; OBJ_INTERACTION_0B
 	dw Func_20e77                   ; OBJ_INTERACTION_0C
-	dw ObjInteraction_MusicalCoin   ; OBJ_INTERACTION_0D
+	dw ObjInteraction_MusicalCoin   ; OBJ_INTERACTION_MUSICAL_COIN
 	dw Func_20e97                   ; OBJ_INTERACTION_0E
 	dw Func_20f6a                   ; OBJ_INTERACTION_0F
-	dw ObjInteraction_GreyKey       ; OBJ_INTERACTION_10
-	dw ObjInteraction_RedKey        ; OBJ_INTERACTION_11
-	dw ObjInteraction_GreenKey      ; OBJ_INTERACTION_12
-	dw ObjInteraction_BlueKey       ; OBJ_INTERACTION_13
-	dw ObjInteraction_GreyTreasure  ; OBJ_INTERACTION_14
-	dw ObjInteraction_RedTreasure   ; OBJ_INTERACTION_15
-	dw ObjInteraction_GreenTreasure ; OBJ_INTERACTION_16
-	dw ObjInteraction_BlueTreasure  ; OBJ_INTERACTION_17
+	dw ObjInteraction_GreyKey       ; OBJ_INTERACTION_GREY_KEY
+	dw ObjInteraction_RedKey        ; OBJ_INTERACTION_RED_KEY
+	dw ObjInteraction_GreenKey      ; OBJ_INTERACTION_GREEN_KEY
+	dw ObjInteraction_BlueKey       ; OBJ_INTERACTION_BLUE_KEY
+	dw ObjInteraction_GreyTreasure  ; OBJ_INTERACTION_GREY_TREASURE
+	dw ObjInteraction_RedTreasure   ; OBJ_INTERACTION_RED_TREASURE
+	dw ObjInteraction_GreenTreasure ; OBJ_INTERACTION_GREEN_TREASURE
+	dw ObjInteraction_BlueTreasure  ; OBJ_INTERACTION_BLUE_TREASURE
 	dw Func_21156                   ; OBJ_INTERACTION_18
 	dw Func_21245                   ; OBJ_INTERACTION_19
 	dw Func_21358                   ; OBJ_INTERACTION_1A
-	dw ObjInteraction_RegularCoin   ; OBJ_INTERACTION_1B
+	dw ObjInteraction_RegularCoin   ; OBJ_INTERACTION_REGULAR_COIN
 	dw Func_21455                   ; OBJ_INTERACTION_1C
 	dw Func_21548                   ; OBJ_INTERACTION_1D
 	dw Func_21569                   ; OBJ_INTERACTION_1E
@@ -246,10 +246,10 @@ Func_20000: ; 20000 (8:4000)
 	dw Func_21774                   ; OBJ_INTERACTION_23
 	dw Func_217b9                   ; OBJ_INTERACTION_24
 	dw Func_21819                   ; OBJ_INTERACTION_25
-	dw ObjInteraction_Bubble        ; OBJ_INTERACTION_26
+	dw ObjInteraction_Bubble        ; OBJ_INTERACTION_BUBBLE
 	dw Func_21887                   ; OBJ_INTERACTION_27
-	dw ObjInteraction_Owl           ; OBJ_INTERACTION_28
-	dw ObjInteraction_Rail          ; OBJ_INTERACTION_29
+	dw ObjInteraction_Owl           ; OBJ_INTERACTION_OWL
+	dw ObjInteraction_Rail          ; OBJ_INTERACTION_RAIL
 	dw Func_20e0f                   ; OBJ_INTERACTION_2A
 	dw Func_21a4f                   ; OBJ_INTERACTION_2B
 	dw Func_21a47                   ; OBJ_INTERACTION_2C
@@ -282,7 +282,7 @@ Func_20000: ; 20000 (8:4000)
 	dw Func_21d64                   ; OBJ_INTERACTION_47
 	dw Func_21d6f                   ; OBJ_INTERACTION_48
 	dw Func_21d88                   ; OBJ_INTERACTION_49
-	dw ObjInteraction_ColourCoin    ; OBJ_INTERACTION_4A
+	dw ObjInteraction_ColourCoin    ; OBJ_INTERACTION_COLOUR_COIN
 	dw Func_21df8                   ; OBJ_INTERACTION_4B
 	dw Func_21e2e                   ; OBJ_INTERACTION_4C
 	dw Func_21e3e                   ; OBJ_INTERACTION_4D
@@ -291,12 +291,12 @@ Func_20000: ; 20000 (8:4000)
 	dw Func_21ecd                   ; OBJ_INTERACTION_50
 	dw Func_21f01                   ; OBJ_INTERACTION_51
 	dw Func_21f28                   ; OBJ_INTERACTION_52
-	dw ObjInteraction_None          ; OBJ_INTERACTION_53
-	dw ObjInteraction_None          ; OBJ_INTERACTION_54
-	dw ObjInteraction_None          ; OBJ_INTERACTION_55
-	dw ObjInteraction_None          ; OBJ_INTERACTION_56
-	dw ObjInteraction_None          ; OBJ_INTERACTION_57
-	dw ObjInteraction_None          ; OBJ_INTERACTION_58
+	dw ObjInteraction_None          ; OBJ_INTERACTION_UNUSED_1
+	dw ObjInteraction_None          ; OBJ_INTERACTION_UNUSED_2
+	dw ObjInteraction_None          ; OBJ_INTERACTION_UNUSED_3
+	dw ObjInteraction_None          ; OBJ_INTERACTION_UNUSED_4
+	dw ObjInteraction_None          ; OBJ_INTERACTION_UNUSED_5
+	dw ObjInteraction_None          ; OBJ_INTERACTION_UNUSED_6
 ; 0x20202
 
 ObjInteraction_None: ; 20202 (8:4202)
@@ -310,11 +310,11 @@ Func_20203: ; 20203 (8:4203)
 	ld a, h
 	cp HIGH(wCurObj)
 	ret z
-	ld a, [hl] ; OBJ_UNK_00
-	and $03
-	cp $01
+	ld a, [hl] ; OBJ_FLAGS
+	and OBJFLAG_UNK00 | OBJFLAG_UNK01
+	cp OBJFLAG_UNK00
 	jr z, .asm_2021b
-	cp $03
+	cp OBJFLAG_UNK00 | OBJFLAG_UNK01
 	jr z, .asm_2021b
 .next_obj
 	add hl, de
@@ -1009,8 +1009,8 @@ Func_2080d: ; 2080d (8:480d)
 	ld [wJumpVelTable], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld a, $01
-	ld [wca8a], a
+	ld a, TRUE
+	ld [wIsIntangible], a
 	ld a, -1
 	ld [wca70], a
 	ld a, -15
@@ -1176,8 +1176,8 @@ Func_209ca: ; 209ca (8:49ca)
 	ld a, [wWarioState]
 	cp ST_DIVING
 	ret z
-	ld a, $01
-	ld [wcac9], a
+	ld a, TRUE
+	ld [wIsOnSteppableObject], a
 	ld a, [wc1c1]
 	and a
 	jr z, .asm_209f5
@@ -1192,40 +1192,40 @@ Func_209ca: ; 209ca (8:49ca)
 	call SetObjUnk1C
 	ld a, [wJumpVelTable]
 	and a
-	jr z, .asm_20a60
+	jr z, .done
 	ld a, [wAttackCounter]
 	and a
-	jr nz, .asm_20a60
+	jr nz, .done
 	ld a, [wIsRolling]
 	and a
-	jr nz, .asm_20a60
+	jr nz, .done
 	call Func_1501
 	ld a, [wInvincibleCounter]
 	cp $01
-	jr z, .asm_20a60
+	jr z, .done
 	ld a, [wTransformation]
 	and a
 	ret nz
 	ld a, [wGrabState]
 	and a
-	jr nz, .asm_20a51
+	jr nz, .set_grab_state
 	ld a, [wIsCrouching]
 	and a
 	jr nz, .crouching
 	xor a
 	ld [wWaterInteraction], a
 	farcall SetState_Idling
-	jr .asm_20a60
+	jr .done
 
 .crouching
 	xor a
 	ld [wWaterInteraction], a
 	farcall Func_1e855
-	jr .asm_20a60
+	jr .done
 
-.asm_20a51
+.set_grab_state
 	farcall SetState_GrabIdling
-.asm_20a60
+.done
 	jp Func_20000.next_obj
 ; 0x20a63
 
@@ -1990,9 +1990,9 @@ GetTreasure: ; 2109a (8:509a)
 	ld [wIsCrouching], a
 	ld [wAttackCounter], a
 
-	inc a
-	ld [wca8a], a
-	ld [wca9b], a
+	inc a ; TRUE
+	ld [wIsIntangible], a
+	ld [wAutoMoveState], a
 
 	ld a, [wJumpVelTable]
 	and a
@@ -2042,7 +2042,7 @@ Func_21156: ; 21156 (8:5156)
 	jp nz, Func_2022c
 
 	ld a, $01
-	ld [wca9b], a
+	ld [wAutoMoveState], a
 	ld a, ST_PICKED_UP
 	ld [wWarioState], a
 	ld a, -1
@@ -2088,7 +2088,7 @@ Func_21156: ; 21156 (8:5156)
 
 SetState_FlatStretching: ; 211fb (8:51fb)
 	ld a, $01
-	ld [wca9b], a
+	ld [wAutoMoveState], a
 	ld a, ST_FLAT_STRETCHING
 	ld [wWarioState], a
 	ld a, -1
@@ -2909,7 +2909,7 @@ ObjInteraction_Rail: ; 21999 (8:5999)
 	ld [wJumpVelIndex], a
 
 	inc a
-	ld [wca9b], a
+	ld [wAutoMoveState], a
 
 	call UpdateLevelMusic
 

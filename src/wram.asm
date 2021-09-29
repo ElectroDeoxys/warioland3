@@ -335,7 +335,10 @@ wPalFadeCounter:: ; c187
 wIsStandingOnSlope:: ; c189
 	ds $1
 
-	ds $3
+	ds $2
+
+wc18c:: ; c18c
+	ds $1
 
 wc18d:: ; c18d
 	ds $1
@@ -682,7 +685,8 @@ wWarioScreenXPos:: ; ca88
 wAttackCounter:: ; ca89
 	ds $1
 
-wca8a:: ; ca8a
+; whether objects can interact with Wario
+wIsIntangible:: ; ca8a
 	ds $1
 
 wIsCrouching:: ; ca8b
@@ -749,7 +753,7 @@ wIsGettingOffLadder:: ; ca99
 wGrabState:: ; ca9a
 	ds $1
 
-wca9b:: ; ca9b
+wAutoMoveState:: ; ca9b
 	ds $1
 
 wca9c:: ; ca9c
@@ -801,7 +805,7 @@ wcac7:: ; cac7
 wcac8:: ; cac8
 	ds $1
 
-wcac9:: ; cac9
+wIsOnSteppableObject:: ; cac9
 	ds $1
 
 	ds $136

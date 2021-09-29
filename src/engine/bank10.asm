@@ -12,8 +12,8 @@ Func_40040: ; 40040 (10:4040)
 ; 0x4004e
 
 Func_4004e: ; 4004e (10:404e)
-	ld hl, wCurObjUnk00
-	res 4, [hl]
+	ld hl, wCurObjFlags
+	res OBJFLAG_UNK04_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(Func_40069)
 	ld [hld], a
@@ -23,115 +23,115 @@ Func_4004e: ; 4004e (10:404e)
 	res 5, [hl]
 	ld a, [wca3b]
 	rra
-	jp c, Func_40165
-	jp Func_4021b
+	jp c, Func_40165 ; night
+	jp Func_4021b ; day
 ; 0x40069
 
 Func_40069: ; 40069 (10:4069)
-	ld a, [wCurObjUnk1b]
+	ld a, [wCurObjAction]
 	jumptable
 
-	dw $421b
-	dw $42d8
-	dw $43c2
-	dw $43d6
-	dw $45fc
-	dw $4606
-	dw $4620
-	dw $4633
-	dw $456b
-	dw $4575
-	dw $3182
-	dw $45aa
-	dw $45b1
-	dw $421b
-	dw $421b
-	dw $44a2
-	dw $44cb
-	dw $425d
-	dw $46af
-	dw $44eb
-	dw $446a
-	dw $4472
-	dw $4404
-	dw $4437
-	dw $467a
-	dw $4646
-	dw $3263
-	dw $3272
-	dw $3281
-	dw $421b
-	dw $421b
-	dw $421b
-	dw $3191
-	dw $31af
-	dw $31cd
-	dw $31eb
-	dw $3209
-	dw $3227
-	dw $3245
-	dw $3254
-	dw $45f2
-	dw $45e8
-	dw $421b
-	dw $421b
-	dw $421b
-	dw $4182
-	dw $42aa
-	dw $4213
-	dw $3290
-	dw $430f
-	dw $33da
-	dw $33e9
-	dw $3326
-	dw $3317
-	dw $3335
-	dw $3344
-	dw $31fa
-	dw $31dc
-	dw $421b
-	dw $45c2
-	dw $45d5
-	dw $421b
-	dw $421b
-	dw $44b1
-	dw $44d9
-	dw $329f
-	dw $3371
-	dw $450a
-	dw $32cc
-	dw $32db
-	dw $4429
-	dw $445c
-	dw $469e
-	dw $466a
-	dw $3380
-	dw $338f
-	dw $412d
-	dw $4149
-	dw $339e
-	dw $33ad
-	dw $31a0
-	dw $31be
-	dw $31dc
-	dw $31fa
-	dw $3218
-	dw $3236
-	dw $32cc
-	dw $32db
-	dw $33f8
-	dw $3407
-	dw $421b
-	dw $421b
-	dw $421b
-	dw $421b
-	dw $33bc
-	dw $33cb
-	dw $1b21
-	dw $3ed1
-	dw $325e
-	dw $073a
-	dw $0938
+	dw Func_4021b ; OBJ_ACTION_00
+	dw $42d8 ; OBJ_ACTION_01
+	dw $43c2 ; OBJ_ACTION_02
+	dw $43d6 ; OBJ_ACTION_03
+	dw $45fc ; OBJ_ACTION_04
+	dw $4606 ; OBJ_ACTION_05
+	dw $4620 ; OBJ_ACTION_06
+	dw $4633 ; OBJ_ACTION_07
+	dw $456b ; OBJ_ACTION_08
+	dw $4575 ; OBJ_ACTION_09
+	dw $3182 ; OBJ_ACTION_0A
+	dw $45aa ; OBJ_ACTION_0B
+	dw $45b1 ; OBJ_ACTION_0C
+	dw Func_4021b ; OBJ_ACTION_0D
+	dw Func_4021b ; OBJ_ACTION_0E
+	dw $44a2 ; OBJ_ACTION_0F
+	dw $44cb ; OBJ_ACTION_10
+	dw Func_4025d ; OBJ_ACTION_11
+	dw $46af ; OBJ_ACTION_12
+	dw $44eb ; OBJ_ACTION_13
+	dw $446a ; OBJ_ACTION_14
+	dw $4472 ; OBJ_ACTION_15
+	dw $4404 ; OBJ_ACTION_16
+	dw $4437 ; OBJ_ACTION_17
+	dw $467a ; OBJ_ACTION_18
+	dw $4646 ; OBJ_ACTION_19
+	dw $3263 ; OBJ_ACTION_1A
+	dw $3272 ; OBJ_ACTION_1B
+	dw $3281 ; OBJ_ACTION_1C
+	dw Func_4021b ; OBJ_ACTION_1D
+	dw Func_4021b ; OBJ_ACTION_1E
+	dw Func_4021b ; OBJ_ACTION_1F
+	dw $3191 ; OBJ_ACTION_20
+	dw $31af ; OBJ_ACTION_21
+	dw $31cd ; OBJ_ACTION_22
+	dw $31eb ; OBJ_ACTION_23
+	dw $3209 ; OBJ_ACTION_24
+	dw $3227 ; OBJ_ACTION_25
+	dw $3245 ; OBJ_ACTION_26
+	dw $3254 ; OBJ_ACTION_27
+	dw $45f2 ; OBJ_ACTION_28
+	dw $45e8 ; OBJ_ACTION_29
+	dw Func_4021b ; OBJ_ACTION_2A
+	dw Func_4021b ; OBJ_ACTION_2B
+	dw Func_4021b ; OBJ_ACTION_2C
+	dw Func_40182 ; OBJ_ACTION_2D
+	dw $42aa ; OBJ_ACTION_2E
+	dw $4213 ; OBJ_ACTION_2F
+	dw $3290 ; OBJ_ACTION_30
+	dw $430f ; OBJ_ACTION_31
+	dw $33da ; OBJ_ACTION_32
+	dw $33e9 ; OBJ_ACTION_33
+	dw $3326 ; OBJ_ACTION_34
+	dw $3317 ; OBJ_ACTION_35
+	dw $3335 ; OBJ_ACTION_36
+	dw $3344 ; OBJ_ACTION_37
+	dw $31fa ; OBJ_ACTION_38
+	dw $31dc ; OBJ_ACTION_39
+	dw Func_4021b ; OBJ_ACTION_3A
+	dw $45c2 ; OBJ_ACTION_3B
+	dw $45d5 ; OBJ_ACTION_3C
+	dw Func_4021b ; OBJ_ACTION_3D
+	dw Func_4021b ; OBJ_ACTION_3E
+	dw $44b1 ; OBJ_ACTION_3F
+	dw Func_404d9 ; OBJ_ACTION_40
+	dw Func_329f ; OBJ_ACTION_41
+	dw $3371 ; OBJ_ACTION_42
+	dw $450a ; OBJ_ACTION_43
+	dw $32cc ; OBJ_ACTION_44
+	dw $32db ; OBJ_ACTION_45
+	dw $4429 ; OBJ_ACTION_46
+	dw $445c ; OBJ_ACTION_47
+	dw $469e ; OBJ_ACTION_48
+	dw $466a ; OBJ_ACTION_49
+	dw $3380 ; OBJ_ACTION_4A
+	dw $338f ; OBJ_ACTION_4B
+	dw $412d ; OBJ_ACTION_4C
+	dw $4149 ; OBJ_ACTION_4D
+	dw $339e ; OBJ_ACTION_4E
+	dw $33ad ; OBJ_ACTION_4F
+	dw $31a0 ; OBJ_ACTION_50
+	dw $31be ; OBJ_ACTION_51
+	dw $31dc ; OBJ_ACTION_52
+	dw $31fa ; OBJ_ACTION_53
+	dw $3218 ; OBJ_ACTION_54
+	dw $3236 ; OBJ_ACTION_55
+	dw $32cc ; OBJ_ACTION_56
+	dw $32db ; OBJ_ACTION_57
+	dw $33f8 ; OBJ_ACTION_58
+	dw $3407 ; OBJ_ACTION_59
+	dw Func_4021b ; OBJ_ACTION_5A
+	dw Func_4021b ; OBJ_ACTION_5B
+	dw Func_4021b ; OBJ_ACTION_5C
+	dw Func_4021b ; OBJ_ACTION_5D
+	dw $33bc ; OBJ_ACTION_5E
+	dw $33cb ; OBJ_ACTION_5F
+	dw $1b21 ; OBJ_ACTION_60
+	dw $3ed1 ; OBJ_ACTION_61
+	dw $325e ; OBJ_ACTION_62
+	dw $073a ; OBJ_ACTION_63
+	dw $0938 ; OBJ_ACTION_64
 ; 0x40137
 
 	INCROM $40137, $40165
@@ -143,8 +143,8 @@ Func_40165: ; 40165 (10:4165)
 	or OBJ_INTERACTION_01
 	ld [hld], a
 
-	ld l, OBJ_UNK_1B
-	ld a, $2d
+	ld l, OBJ_ACTION
+	ld a, OBJ_ACTION_2D
 	ld [hld], a
 
 	ld de, $4234
@@ -158,7 +158,104 @@ Func_40165: ; 40165 (10:4165)
 	ret
 ; 0x40182
 
-	INCROM $40182, $4021b
+Func_40182: ; 40182 (10:4182)
+	ld hl, wCurObjUnk1a
+	ld a, [wWarioScreenXPos]
+	add $2a
+	ld b, a
+	ld a, [wCurObjScreenXPos]
+	add $2a
+	cp b
+	jr c, .on_left
+; on right
+	set 7, [hl]
+	jr .asm_40199
+.on_left
+	res 7, [hl]
+
+.asm_40199
+	ld c, $2a
+	ld a, [wWarioScreenYPos]
+	add c
+	ld b, a
+	ld a, [wCurObjScreenYPos]
+	add c
+	sub b
+	cp $20
+	jr c, .asm_401ad
+	cp -$20
+	jr c, .check_shake
+.asm_401ad
+	ld a, [wWarioScreenXPos]
+	add c
+	ld b, a
+	ld a, [wCurObjScreenXPos]
+	add c
+	sub b
+	cp $e0
+	jr nc, .asm_401f5
+	cp $20
+	jr c, .asm_401f5
+
+.check_shake
+	ld a, [wGroundShakeCounter]
+	cp $10
+	jr c, .asm_401d0
+	ldh a, [rDIV]
+	rra
+	ld a, OBJ_ACTION_08 >> 1
+	rla ; either OBJ_ACTION_08 or OBJ_ACTION_09
+	ld [wCurObjAction], a
+	ret
+
+.asm_401d0
+	ld hl, wCurObjYPos
+	ld a, [hli]
+	ldh [hYPosLo], a
+	ld a, [hli]
+	ldh [hYPosHi], a
+	ld a, [hli]
+	ldh [hXPosLo], a
+	ld a, [hl]
+	ldh [hXPosHi], a
+	call Func_3543
+	and a
+	jr nz, .asm_401eb
+	ld a, OBJ_ACTION_11
+	ld [wCurObjAction], a
+	ret
+
+.asm_401eb
+	ld hl, wCurObjYPos
+	ldh a, [hYPosLo]
+	ld [hli], a
+	ldh a, [hYPosHi]
+	ld [hli], a
+	ret
+
+.asm_401f5
+	ld a, [hli] ; OBJ_UNK_1A
+	rlca
+	ld a, OBJ_ACTION_2F
+	ld [hl], a ; OBJ_ACTION
+	jr c, .asm_40201
+	ld de, $427c
+	jr .asm_4020c
+.asm_40201
+	ld l, OBJ_UNK_0C
+	ld a, $09
+	ld [hld], a
+	ld a, $f9
+	ld [hld], a
+	ld de, $4287
+.asm_4020c
+	call Func_30f0
+	ld a, $20
+	ld [hli], a ; OBJ_UNK_16
+	ret
+; 0x40213
+
+	INCROM $40213, $4021b
 
 Func_4021b: ; 4021b (10:421b)
 	ld hl, wCurObjInteractionType
@@ -167,8 +264,8 @@ Func_4021b: ; 4021b (10:421b)
 	or OBJ_INTERACTION_01
 	ld [hld], a
 
-	ld l, OBJ_UNK_1B
-	ld a, $30
+	ld l, OBJ_ACTION
+	ld a, OBJ_ACTION_30
 	ld [hld], a
 
 	ld a, [wWarioScreenXPos]
@@ -209,11 +306,44 @@ Func_4021b: ; 4021b (10:421b)
 	jp Func_30f0
 ; 0x4025d
 
-	INCROM $4025d, $406c4
+Func_4025d: ; 4025d (10:425d)
+	ld hl, wCurObjAction
+	ld a, OBJ_ACTION_41
+	ld [hld], a
+	ld a, [hld] ; OBJ_UNK_1A
+	rlca
+	jr c, .asm_40270
+	xor a
+	ld [hld], a ; OBJ_UNK_19
+	ld de, $41d2
+	call Func_30f0
+	ret
+.asm_40270
+	xor a
+	ld [hld], a ; OBJ_UNK_19
+	ld de, $41db
+	call Func_30f0
+	ret
+; 0x40279
+
+	INCROM $40279, $404d9
+
+Func_404d9: ; 404d9 (10:44d9)
+	ld hl, wCurObjUnk16
+	dec [hl]
+	jp nz, Func_32f9
+	ld a, OBJ_ACTION_00 ; should be xor a
+	ld [wCurObjAction], a
+	ld a, $ff
+	ld [wCurObjUnk17], a
+	ret
+; 0x404eb
+
+	INCROM $404eb, $406c4
 
 Func_406c4: ; 406c4 (10:46c4)
-	ld hl, wCurObjUnk00
-	res 4, [hl]
+	ld hl, wCurObjFlags
+	res OBJFLAG_UNK04_F, [hl]
 
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, $47
@@ -257,10 +387,10 @@ Func_406f0: ; 406f0 (10:46f0)
 	cp b
 	jr z, Func_40734
 .asm_40709
-	ld l, OBJ_UNK_00
-	bit 5, [hl]
+	ld l, OBJ_FLAGS
+	bit OBJFLAG_UNK05_F, [hl]
 	jr z, .asm_40721
-	res 5, [hl]
+	res OBJFLAG_UNK05_F, [hl]
 	ld a, [wGlobalCounter]
 	rra
 	ret nc
@@ -279,40 +409,40 @@ Func_406f0: ; 406f0 (10:46f0)
 ; 0x4072b
 
 Func_4072b: ; 4072b (10:472b)
-	ld l, OBJ_UNK_00
-	bit 5, [hl]
+	ld l, OBJ_FLAGS
+	bit OBJFLAG_UNK05_F, [hl]
 	jr z, Func_40734
-	res 5, [hl]
+	res OBJFLAG_UNK05_F, [hl]
 	ret
 ; 0x40734
 
 Func_40734: ; 40734 (10:4734)
 	ld de, $4319
 	call Func_30f0
-	ld l, OBJ_UNK_00
-	res 3, [hl]
+	ld l, OBJ_FLAGS
+	res OBJFLAG_UNK03_F, [hl]
 	xor a
-	ld [wCurObjUnk1b], a
+	ld [wCurObjAction], a
 	ret
 ; 0x40743
 
 Func_40743: ; 40743 (10:4743)
-	ld hl, wCurObjUnk1b
+	ld hl, wCurObjAction
 	ld a, [hl]
 	and a
 	jr z, .asm_40767
-	cp $2f
+	cp OBJ_ACTION_2F
 	jr z, Func_406f0
-	cp $2e
+	cp OBJ_ACTION_2E
 	jr z, Func_4072b
-	cp $34
+	cp OBJ_ACTION_34
 	jr z, .asm_407b8
-	cp $0a
+	cp OBJ_ACTION_0A
 	jr z, .asm_407bf
-	cp $3a
+	cp OBJ_ACTION_3A
 	jp z, .asm_407d4
 	and $fe
-	cp $04
+	cp OBJ_ACTION_04
 	jr z, .asm_407ab
 	jr Func_40734
 
@@ -322,8 +452,8 @@ Func_40743: ; 40743 (10:4743)
 	jr c, .asm_4077b
 
 .asm_4076e
-	ld a, $34
-	ld [hl], a ; OBJ_UNK_1B
+	ld a, OBJ_ACTION_34
+	ld [hl], a ; OBJ_ACTION
 
 	ld de, $4348
 	call Func_30f0
@@ -343,26 +473,26 @@ Func_40743: ; 40743 (10:4743)
 	cp b
 	jr z, .asm_4079a
 .asm_4078c
-	ld l, OBJ_UNK_1B
-	ld a, $2f
+	ld l, OBJ_ACTION
+	ld a, OBJ_ACTION_2F
 	ld [hld], a
 	res 7, [hl] ; OBJ_UNK_16
 	ld de, $4336
 	call Func_30f0
 	ret
 .asm_4079a
-	ld l, OBJ_UNK_00
-	bit 5, [hl]
+	ld l, OBJ_FLAGS
+	bit OBJFLAG_UNK05_F, [hl]
 	ret z
-	ld a, $2e
-	ld [wCurObjUnk1b], a
+	ld a, OBJ_ACTION_2E
+	ld [wCurObjAction], a
 	ld de, $4343
 	call Func_30f0
 	ret
 
 .asm_407ab
-	ld a, $34
-	ld [hl], a ; OBJ_UNK_1B
+	ld a, OBJ_ACTION_34
+	ld [hl], a ; OBJ_ACTION
 	ld de, $4351
 	call Func_30f0
 	ld a, $10
@@ -380,8 +510,8 @@ Func_40743: ; 40743 (10:4743)
 	ld a, [hli] ; OBJ_UNK_1A
 	rlca
 	jr c, .asm_4081a
-	ld a, $3a
-	ld [hld], a ; OBJ_UNK_1B
+	ld a, OBJ_ACTION_3A
+	ld [hld], a ; OBJ_ACTION
 	dec l
 	xor a
 	ld [hl], a ; OBJ_UNK_19
@@ -443,8 +573,8 @@ Func_40743: ; 40743 (10:4743)
 ; 0x40825
 
 Func_40825: ; 40825 (10:4825)
-	ld hl, wCurObjUnk00
-	res 4, [hl]
+	ld hl, wCurObjFlags
+	res OBJFLAG_UNK04_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, $48
 	ld [hld], a
