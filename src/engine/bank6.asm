@@ -697,12 +697,41 @@ Func_19b51: ; 19b51 (6:5b51)
 	call Func_bdb
 	ld a, 1 << 0
 	ld [wc0d6], a
+;	fallthrough
+
+Func_19b5c: ; 19b5c (6:5b5c)
 	call Func_18000
 	ld b, a
 	ret
 ; 0x19b61
 
-	INCROM $19b61, $19b7b
+Func_19b61: ; 19b61 (6:5b61)
+	call DecrementXCell
+	ld a, [hl]
+	inc a
+	ret z
+	jr Func_19b5c
+; 0x19b69
+
+Func_19b69: ; 19b69 (6:5b69)
+	call IncrementXCell
+	ld a, [hl]
+	and a
+	ret z
+	jr Func_19b5c
+; 0x19b71
+
+DecrementXCell: ; 19b71 (6:5b71)
+	ld hl, wXCell
+	dec [hl]
+	ret
+; 0x19b76
+
+IncrementXCell: ; 19b76 (6:5b76)
+	ld hl, wXCell
+	inc [hl]
+	ret
+; 0x19b7b
 
 Func_19b7b: ; 19b7b (6:5b7b)
 	ld hl, hPos

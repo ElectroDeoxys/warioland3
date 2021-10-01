@@ -218,7 +218,7 @@ Func_640e5: ; 640e5 (19:40e5)
 	push hl
 	ld hl, w1d120
 	dec c
-	sla c
+	sla c ; *2
 	ld b, $00
 	add hl, bc
 	ld a, [hli]
@@ -279,7 +279,7 @@ Func_640e5: ; 640e5 (19:40e5)
 	sub (OBJ_UPDATE_FUNCTION + 1) - OBJ_FLAGS
 	ld e, a
 	ld a, [hl]
-	or OBJFLAG_UNK00 | OBJFLAG_UNK04
+	or OBJFLAG_UNK0 | OBJFLAG_UNK4
 	ld [de], a ; OBJ_FLAGS
 	ret
 ; 0x64187
@@ -425,7 +425,172 @@ Func_64187: ; 64187 (19:4187)
 	ret
 ; 0x6428a
 
-	INCROM $6428a, $643a1
+	INCROM $6428a, $642d9
+
+Func_642d9: ; 642d9 (19:42d9)
+	ld h, HIGH(wObj1Flags)
+	ld l, LOW(wObj1Flags)
+	ld a, [hl]
+	rra
+	jr nc, .asm_6430c
+	ld l, LOW(wObj2Flags)
+	ld a, [hl]
+	rra
+	jr nc, .asm_6430c
+	ld l, LOW(wObj3Flags)
+	ld a, [hl]
+	rra
+	jr nc, .asm_6430c
+	ld l, LOW(wObj4Flags)
+	ld a, [hl]
+	rra
+	jr nc, .asm_6430c
+	ld l, LOW(wObj5Flags)
+	ld a, [hl]
+	rra
+	jr nc, .asm_6430c
+	ld l, LOW(wObj6Flags)
+	ld a, [hl]
+	rra
+	jr nc, .asm_6430c
+	ld l, LOW(wObj7Flags)
+	ld a, [hl]
+	rra
+	jr nc, .asm_6430c
+	ld l, LOW(wObj8Flags)
+	ld a, [hl]
+	rra
+	jr nc, .asm_6430c
+	ret
+
+.asm_6430c
+	ld a, OBJFLAG_UNK0 | OBJFLAG_UNK6
+	ld [hli], a
+	ld a, [wCurObjUnk01]
+	ld [hli], a
+	ld a, [wCurObjUnk02]
+	ld [hli], a
+	ld a, [wCurObjYPos]
+	ld e, a
+	ld a, [bc]
+	rla
+	jr c, .asm_6432a
+	rra
+	add e
+	ld [hli], a
+	ld a, [wCurObjYPos + 1]
+	jr nc, .asm_64333
+	inc a
+	jr .asm_64333
+.asm_6432a
+	rra
+	add e
+	ld [hli], a
+	ld a, [wCurObjYPos + 1]
+	jr c, .asm_64333
+	dec a
+.asm_64333
+	ld [hli], a
+	inc bc
+	ld a, [wCurObjXPos]
+	ld e, a
+	ld a, [bc]
+	rla
+	jr c, .asm_64348
+	rra
+	add e
+	ld [hli], a
+	ld a, [wCurObjXPos + 1]
+	jr nc, .asm_64351
+	inc a
+	jr .asm_64351
+.asm_64348
+	rra
+	add e
+	ld [hli], a
+	ld a, [wCurObjXPos + 1]
+	jr c, .asm_64351
+	dec a
+.asm_64351
+	inc bc
+	ld [hli], a
+	ld e, l
+	ld d, h
+	ld l, c
+	ld h, b
+	ld a, [hli]
+	ld [de], a
+	inc e
+	ld a, [hli]
+	ld [de], a
+	inc e
+	ld a, [hli]
+	ld [de], a
+	inc e
+	ld a, [hli]
+	ld [de], a
+	inc e
+	ld a, [hli]
+	ld [de], a
+	inc e
+	ld a, [hli]
+	ld [de], a
+	inc e
+	inc e
+	inc e
+	inc e
+	ld a, [hli]
+	ld [de], a
+	inc e
+	ld a, [hli]
+	ld [de], a
+	inc e
+	ld a, [hli]
+	ld [de], a
+	inc e
+	ld a, [hli]
+	ld [de], a
+	inc e
+	xor a
+	ld [de], a
+	inc e
+	ld [de], a
+	inc e
+	ld a, [hli]
+	ld [de], a
+	inc e
+	ld a, [hli]
+	ld [de], a
+	inc e
+	ld a, [hli]
+	ld [de], a
+	inc e
+	ld a, [hli]
+	ld [de], a
+	inc e
+	ld a, [hli]
+	ld [de], a
+	inc e
+	ld a, [hli]
+	ld [de], a
+	inc e
+	xor a
+	ld [de], a
+	inc e
+	inc e
+	ld a, [hli]
+	ld [de], a
+	inc e
+	ld a, [hli]
+	ld [de], a
+	ld a, e
+	sub $1f
+	ld e, a
+	ld a, [hl]
+	or $41
+	ld [de], a
+	ret
+; 0x643a1
 
 ; loads a pointer to w1d126
 Func_643a1: ; 643a1 (19:43a1)
@@ -459,730 +624,851 @@ Func_643a1: ; 643a1 (19:43a1)
 ; 0x643c3
 
 Data_643c3: ; 643c3 (19:43c3)
-	db $80, $00, $00
-	dw $407b
-	dw $737e
-	db $00
+	db ($8 << 4) | $0 ; low bank nybble, ??
+	db $00, $00 ; ??, ??
+	dw $407b ; ??
+	dw $737e ; update function
+	db $00 ; ??
 
 Data_643cb: ; 643cb (19:43cb)
-	db $31, $94, $e8
-	dw $4000
-	dw $48b6
-	db $00
+	db ($3 << 4) | $1 ; low bank nybble, ??
+	db $94, $e8 ; ??, ??
+	dw $4000 ; ??
+	dw $48b6 ; update function
+	db $00 ; ??
 
 Data_643d3: ; 643d3 (19:43d3)
-	db $31, $95, $e8
-	dw $4000
-	dw $48bf
-	db $00
+	db ($3 << 4) | $1 ; low bank nybble, ??
+	db $95, $e8 ; ??, ??
+	dw $4000 ; ??
+	dw $48bf ; update function
+	db $00 ; ??
 
 Data_643db: ; 643db (19:43db)
-	db $31, $96, $e8
-	dw $4000
-	dw $48c8
-	db $00
+	db ($3 << 4) | $1 ; low bank nybble, ??
+	db $96, $e8 ; ??, ??
+	dw $4000 ; ??
+	dw $48c8 ; update function
+	db $00 ; ??
 
 Data_643e3: ; 643e3 (19:43e3)
-	db $31, $97, $e8
-	dw $4000
-	dw $48d1
-	db $00
+	db ($3 << 4) | $1 ; low bank nybble, ??
+	db $97, $e8 ; ??, ??
+	dw $4000 ; ??
+	dw $48d1 ; update function
+	db $00 ; ??
 
 Data_643eb: ; 643eb (19:43eb)
-	db $32, $10, $e8
-	dw $4000
-	dw $4992
-	db $00
+	db ($3 << 4) | $2 ; low bank nybble, ??
+	db $10, $e8 ; ??, ??
+	dw $4000 ; ??
+	dw $4992 ; update function
+	db $00 ; ??
 
 Data_643f3: ; 643f3 (19:43f3)
-	db $32, $11, $e8
-	dw $4000
-	dw $4992
-	db $00
+	db ($3 << 4) | $2 ; low bank nybble, ??
+	db $11, $e8 ; ??, ??
+	dw $4000 ; ??
+	dw $4992 ; update function
+	db $00 ; ??
 
 Data_643fb: ; 643fb (19:43fb)
-	db $32, $12, $e8
-	dw $4000
-	dw $4992
-	db $00
+	db ($3 << 4) | $2 ; low bank nybble, ??
+	db $12, $e8 ; ??, ??
+	dw $4000 ; ??
+	dw $4992 ; update function
+	db $00 ; ??
 
 Data_64403: ; 64403 (19:4403)
-	db $32, $13, $e8
-	dw $4000
-	dw $4992
-	db $00
+	db ($3 << 4) | $2 ; low bank nybble, ??
+	db $13, $e8 ; ??, ??
+	dw $4000 ; ??
+	dw $4992 ; update function
+	db $00 ; ??
 
 Data_6440b: ; 6440b (19:440b)
-	db $33, $0d, $e7
-	dw $4000
-	dw $49d4
-	db $00
+	db ($3 << 4) | $3 ; low bank nybble, ??
+	db $0d, $e7 ; ??, ??
+	dw $4000 ; ??
+	dw $49d4 ; update function
+	db $00 ; ??
 
 Data_64413: ; 64413 (19:4413)
-	db $00, $01, $f2
-	dw $407b
-	dw Func_40040
-	db $80
+	db ($0 << 4) | $0 ; low bank nybble, ??
+	db $01, $f2 ; ??, ??
+	dw $407b ; ??
+	dw Func_40040 ; update function
+	db $80 ; ??
 
 Data_6441b: ; 6441b (19:441b)
-	db $01, $8c, $ef
-	dw $4564
-	dw Func_406c4
-	db $80
+	db ($0 << 4) | $1 ; low bank nybble, ??
+	db $8c, $ef ; ??, ??
+	dw $4564 ; ??
+	dw Func_406c4 ; update function
+	db $80 ; ??
 
 Data_64423: ; 64423 (19:4423)
-	db $02, $8c, $f0
-	dw $4242
-	dw $4825
-	db $80
+	db ($0 << 4) | $2 ; low bank nybble, ??
+	db $8c, $f0 ; ??, ??
+	dw $4242 ; ??
+	dw Func_40825 ; update function
+	db $80 ; ??
 
 Data_6442b: ; 6442b (19:442b)
-	db $04, $0e, $f0
-	dw $4838
-	dw $4ba9
-	db $00
+	db ($0 << 4) | $4 ; low bank nybble, ??
+	db $0e, $f0 ; ??, ??
+	dw $4838 ; ??
+	dw Func_40ba9 ; update function
+	db $00 ; ??
 
 Data_64433: ; 64433 (19:4433)
-	db $06, $0e, $f0
-	dw $4838
-	dw $4b9d
-	db $00
+	db ($0 << 4) | $6 ; low bank nybble, ??
+	db $0e, $f0 ; ??, ??
+	dw $4838 ; ??
+	dw Func_40b9d ; update function
+	db $00 ; ??
 
 Data_6443b: ; 6443b (19:443b)
-	db $07, $2e, $f0
-	dw $4838
-	dw $4b8c
-	db $00
+	db ($0 << 4) | $7 ; low bank nybble, ??
+	db $2e, $f0 ; ??, ??
+	dw $4838 ; ??
+	dw Func_40b8c ; update function
+	db $00 ; ??
 
 Data_64443: ; 64443 (19:4443)
-	db $2b, $22, $e2
-	dw $55ec
-	dw $56bd
-	db $00
+	db ($2 << 4) | $b ; low bank nybble, ??
+	db $22, $e2 ; ??, ??
+	dw $55ec ; ??
+	dw $56bd ; update function
+	db $00 ; ??
 
 Data_6444b: ; 6444b (19:444b)
-	db $2c, $af, $e0
-	dw $56e1
-	dw $571c
-	db $00
+	db ($2 << 4) | $c ; low bank nybble, ??
+	db $af, $e0 ; ??, ??
+	dw $56e1 ; ??
+	dw $571c ; update function
+	db $00 ; ??
 
 Data_64453: ; 64453 (19:4453)
-	db $06, $01, $00
-	dw $4916
-	dw $4ca1
-	db $00
+	db ($0 << 4) | $6 ; low bank nybble, ??
+	db $01, $00 ; ??, ??
+	dw $4916 ; ??
+	dw Func_40ca1 ; update function
+	db $00 ; ??
 
 Data_6445b: ; 6445b (19:445b)
-	db $07, $8f, $ee
-	dw $49ff
-	dw $4e12
-	db $80
+	db ($0 << 4) | $7 ; low bank nybble, ??
+	db $8f, $ee ; ??, ??
+	dw $49ff ; ??
+	dw Func_40e12 ; update function
+	db $80 ; ??
 
 Data_64463: ; 64463 (19:4463)
-	db $20, $3d, $f1
-	dw $6703
-	dw $5fc4
-	db $00
+	db ($2 << 4) | $0 ; low bank nybble, ??
+	db $3d, $f1 ; ??, ??
+	dw $6703 ; ??
+	dw $5fc4 ; update function
+	db $00 ; ??
 
 Data_6446b: ; 6446b (19:446b)
-	db $09, $01, $f4
-	dw $4b43
-	dw $5357
-	db $80
+	db ($0 << 4) | $9 ; low bank nybble, ??
+	db $01, $f4 ; ??, ??
+	dw $4b43 ; ??
+	dw Func_41357 ; update function
+	db $80 ; ??
 
 Data_64473: ; 64473 (19:4473)
-	db $0a, $0b, $f2
-	dw $4ea7
-	dw $5a7c
-	db $80
+	db ($0 << 4) | $a ; low bank nybble, ??
+	db $0b, $f2 ; ??, ??
+	dw $4ea7 ; ??
+	dw Func_41a7c ; update function
+	db $80 ; ??
 
 Data_6447b: ; 6447b (19:447b)
-	db $0b, $01, $e7
-	dw $536c
-	dw $6170
-	db $80
+	db ($0 << 4) | $b ; low bank nybble, ??
+	db $01, $e7 ; ??, ??
+	dw $536c ; ??
+	dw Func_42170 ; update function
+	db $80 ; ??
 
 Data_64483: ; 64483 (19:4483)
-	db $0c, $01, $e7
-	dw $5189
-	dw $6478
-	db $80
+	db ($0 << 4) | $c ; low bank nybble, ??
+	db $01, $e7 ; ??, ??
+	dw $5189 ; ??
+	dw Func_42478 ; update function
+	db $80 ; ??
 
 Data_6448b: ; 6448b (19:448b)
-	db $0c, $01, $e7
-	dw $5189
-	dw $64b1
-	db $80
+	db ($0 << 4) | $c ; low bank nybble, ??
+	db $01, $e7 ; ??, ??
+	dw $5189 ; ??
+	dw Func_424b1 ; update function
+	db $80 ; ??
 
 Data_64493: ; 64493 (19:4493)
-	db $0c, $4c, $f3
-	dw $560c
-	dw $69c4
-	db $00
+	db ($0 << 4) | $c ; low bank nybble, ??
+	db $4c, $f3 ; ??, ??
+	dw $560c ; ??
+	dw Func_429c4 ; update function
+	db $00 ; ??
 
 Data_6449b: ; 6449b (19:449b)
-	db $0d, $02, $f4
-	dw $560c
-	dw $6b7d
-	db $00
+	db ($0 << 4) | $d ; low bank nybble, ??
+	db $02, $f4 ; ??, ??
+	dw $560c ; ??
+	dw Func_42b7d ; update function
+	db $00 ; ??
 
 Data_644a3: ; 644a3 (19:44a3)
-	db $24, $0a, $f6
-	dw $4395
-	dw $4730
-	db $00
+	db ($2 << 4) | $4 ; low bank nybble, ??
+	db $0a, $f6 ; ??, ??
+	dw $4395 ; ??
+	dw $4730 ; update function
+	db $00 ; ??
 
 Data_644ab: ; 644ab (19:44ab)
-	db $0b, $0b, $00
-	dw $4000
-	dw $6ba8
-	db $00
+	db ($0 << 4) | $b ; low bank nybble, ??
+	db $0b, $00 ; ??, ??
+	dw $4000 ; ??
+	dw Func_42ba8 ; update function
+	db $00 ; ??
 
 Data_644b3: ; 644b3 (19:44b3)
-	db $08, $0c, $ef
-	dw $5be4
-	dw $76ea
-	db $00
+	db ($0 << 4) | $8 ; low bank nybble, ??
+	db $0c, $ef ; ??, ??
+	dw $5be4 ; ??
+	dw Func_436ea ; update function
+	db $00 ; ??
 
 Data_644bb: ; 644bb (19:44bb)
-	db $0c, $01, $f8
-	dw $581e
-	dw $6d1d
-	db $80
+	db ($0 << 4) | $c ; low bank nybble, ??
+	db $01, $f8 ; ??, ??
+	dw $581e ; ??
+	dw Func_42d1d ; update function
+	db $80 ; ??
 
 Data_644c3: ; 644c3 (19:44c3)
-	db $0f, $24, $f3
-	dw $59e3
-	dw $7278
-	db $80
+	db ($0 << 4) | $f ; low bank nybble, ??
+	db $24, $f3 ; ??, ??
+	dw $59e3 ; ??
+	dw Func_43278 ; update function
+	db $80 ; ??
 
 Data_644cb: ; 644cb (19:44cb)
-	db $0d, $02, $f3
-	dw $59e3
-	dw $7278
-	db $80
+	db ($0 << 4) | $d ; low bank nybble, ??
+	db $02, $f3 ; ??, ??
+	dw $59e3 ; ??
+	dw Func_43278 ; update function
+	db $80 ; ??
 
 Data_644d3: ; 644d3 (19:44d3)
-	db $2d, $8c, $e1
-	dw $5783
-	dw $589e
-	db $00
+	db ($2 << 4) | $d ; low bank nybble, ??
+	db $8c, $e1 ; ??, ??
+	dw $5783 ; ??
+	dw $589e ; update function
+	db $00 ; ??
 
 Data_644db: ; 644db (19:44db)
-	db $1d, $01, $fa
-	dw $5a1c
-	dw $79b8
-	db $00
+	db ($1 << 4) | $d ; low bank nybble, ??
+	db $01, $fa ; ??, ??
+	dw $5a1c ; ??
+	dw $79b8 ; update function
+	db $00 ; ??
 
 Data_644e3: ; 644e3 (19:44e3)
-	db $04, $b1, $f1
-	dw $5b0f
-	dw $7451
-	db $80
+	db ($0 << 4) | $4 ; low bank nybble, ??
+	db $b1, $f1 ; ??, ??
+	dw $5b0f ; ??
+	dw Func_43451 ; update function
+	db $80 ; ??
 
 Data_644eb: ; 644eb (19:44eb)
-	db $05, $3b, $f1
-	dw $5b0f
-	dw $74ba
-	db $00
+	db ($0 << 4) | $5 ; low bank nybble, ??
+	db $3b, $f1 ; ??, ??
+	dw $5b0f ; ??
+	dw Func_434ba ; update function
+	db $00 ; ??
 
 Data_644f3: ; 644f3 (19:44f3)
-	db $23, $3b, $f1
-	dw $6b5c
-	dw $6902
-	db $00
+	db ($2 << 4) | $3 ; low bank nybble, ??
+	db $3b, $f1 ; ??, ??
+	dw $6b5c ; ??
+	dw $6902 ; update function
+	db $00 ; ??
 
 Data_644fb: ; 644fb (19:44fb)
-	db $11, $be, $f0
-	dw $4000
-	dw $40a1
-	db $80
+	db ($1 << 4) | $1 ; low bank nybble, ??
+	db $be, $f0 ; ??, ??
+	dw $4000 ; ??
+	dw $40a1 ; update function
+	db $80 ; ??
 
 Data_64503: ; 64503 (19:4503)
-	db $11, $be, $e6
-	dw $4000
-	dw $4080
-	db $80
+	db ($1 << 4) | $1 ; low bank nybble, ??
+	db $be, $e6 ; ??, ??
+	dw $4000 ; ??
+	dw $4080 ; update function
+	db $80 ; ??
 
 Data_6450b: ; 6450b (19:450b)
-	db $12, $81, $ee
-	dw $422f
-	dw $423b
-	db $80
+	db ($1 << 4) | $2 ; low bank nybble, ??
+	db $81, $ee ; ??, ??
+	dw $422f ; ??
+	dw $423b ; update function
+	db $80 ; ??
 
 Data_64513: ; 64513 (19:4513)
-	db $10, $01, $ec
-	dw $496f
-	dw $48d7
-	db $80
+	db ($1 << 4) | $0 ; low bank nybble, ??
+	db $01, $ec ; ??, ??
+	dw $496f ; ??
+	dw $48d7 ; update function
+	db $80 ; ??
 
 Data_6451b: ; 6451b (19:451b)
-	db $15, $81, $ee
-	dw $4ab2
-	dw $4d3c
-	db $80
+	db ($1 << 4) | $5 ; low bank nybble, ??
+	db $81, $ee ; ??, ??
+	dw $4ab2 ; ??
+	dw $4d3c ; update function
+	db $80 ; ??
 
 Data_64523: ; 64523 (19:4523)
-	db $13, $a2, $e8
-	dw $4ab2
-	dw $54a0
-	db $80
+	db ($1 << 4) | $3 ; low bank nybble, ??
+	db $a2, $e8 ; ??, ??
+	dw $4ab2 ; ??
+	dw $54a0 ; update function
+	db $80 ; ??
 
 Data_6452b: ; 6452b (19:452b)
-	db $16, $1e, $f0
-	dw $4db9
-	dw $564a
-	db $80
+	db ($1 << 4) | $6 ; low bank nybble, ??
+	db $1e, $f0 ; ??, ??
+	dw $4db9 ; ??
+	dw $564a ; update function
+	db $80 ; ??
 
 Data_64533: ; 64533 (19:4533)
-	db $17, $0b, $00
-	dw $4eeb
-	dw $59a9
-	db $00
+	db ($1 << 4) | $7 ; low bank nybble, ??
+	db $0b, $00 ; ??, ??
+	dw $4eeb ; ??
+	dw $59a9 ; update function
+	db $00 ; ??
 
 Data_6453b: ; 6453b (19:453b)
-	db $19, $8b, $fa
-	dw $4ffa
-	dw $5ab4
-	db $80
+	db ($1 << 4) | $9 ; low bank nybble, ??
+	db $8b, $fa ; ??, ??
+	dw $4ffa ; ??
+	dw $5ab4 ; update function
+	db $80 ; ??
 
 Data_64543: ; 64543 (19:4543)
-	db $1c, $0b, $f2
-	dw $4755
-	dw $6b66
-	db $80
+	db ($1 << 4) | $c ; low bank nybble, ??
+	db $0b, $f2 ; ??, ??
+	dw $4755 ; ??
+	dw $6b66 ; update function
+	db $80 ; ??
 
 Data_6454b: ; 6454b (19:454b)
-	db $1b, $01, $f2
-	dw $440a
-	dw $5ee3
-	db $80
+	db ($1 << 4) | $b ; low bank nybble, ??
+	db $01, $f2 ; ??, ??
+	dw $440a ; ??
+	dw $5ee3 ; update function
+	db $80 ; ??
 
 Data_64553: ; 64553 (19:4553)
-	db $14, $01, $f2
-	dw $45aa
-	dw $65b5
-	db $80
+	db ($1 << 4) | $4 ; low bank nybble, ??
+	db $01, $f2 ; ??, ??
+	dw $45aa ; ??
+	dw $65b5 ; update function
+	db $80 ; ??
 
 Data_6455b: ; 6455b (19:455b)
-	db $1a, $0e, $ec
-	dw $51df
-	dw $724e
-	db $00
+	db ($1 << 4) | $a ; low bank nybble, ??
+	db $0e, $ec ; ??, ??
+	dw $51df ; ??
+	dw $724e ; update function
+	db $00 ; ??
 
 Data_64563: ; 64563 (19:4563)
-	db $1a, $1c, $ec
-	dw $54a2
-	dw $756f
-	db $00
+	db ($1 << 4) | $a ; low bank nybble, ??
+	db $1c, $ec ; ??, ??
+	dw $54a2 ; ??
+	dw $756f ; update function
+	db $00 ; ??
 
 Data_6456b: ; 6456b (19:456b)
-	db $10, $25, $f4
-	dw $5788
-	dw $7718
-	db $80
+	db ($1 << 4) | $0 ; low bank nybble, ??
+	db $25, $f4 ; ??, ??
+	dw $5788 ; ??
+	dw $7718 ; update function
+	db $80 ; ??
 
 Data_64573: ; 64573 (19:4573)
-	db $16, $3f, $ec
-	dw $5893
-	dw $774f
-	db $80
+	db ($1 << 4) | $6 ; low bank nybble, ??
+	db $3f, $ec ; ??, ??
+	dw $5893 ; ??
+	dw $774f ; update function
+	db $80 ; ??
 
 Data_6457b: ; 6457b (19:457b)
-	db $1e, $0b, $00
-	dw $5b98
-	dw $7be6
-	db $00
+	db ($1 << 4) | $e ; low bank nybble, ??
+	db $0b, $00 ; ??, ??
+	dw $5b98 ; ??
+	dw $7be6 ; update function
+	db $00 ; ??
 
 Data_64583: ; 64583 (19:4583)
-	db $20, $a7, $ee
-	dw $4000
-	dw $4000
-	db $80
+	db ($2 << 4) | $0 ; low bank nybble, ??
+	db $a7, $ee ; ??, ??
+	dw $4000 ; ??
+	dw $4000 ; update function
+	db $80 ; ??
 
 Data_6458b: ; 6458b (19:458b)
-	db $22, $22, $f0
-	dw $4279
-	dw $453b
-	db $80
+	db ($2 << 4) | $2 ; low bank nybble, ??
+	db $22, $f0 ; ??, ??
+	dw $4279 ; ??
+	dw $453b ; update function
+	db $80 ; ??
 
 Data_64593: ; 64593 (19:4593)
-	db $23, $22, $f0
-	dw $4279
-	dw $453b
-	db $80
+	db ($2 << 4) | $3 ; low bank nybble, ??
+	db $22, $f0 ; ??, ??
+	dw $4279 ; ??
+	dw $453b ; update function
+	db $80 ; ??
 
 Data_6459b: ; 6459b (19:459b)
-	db $22, $22, $f0
-	dw $4279
-	dw $4625
-	db $80
+	db ($2 << 4) | $2 ; low bank nybble, ??
+	db $22, $f0 ; ??, ??
+	dw $4279 ; ??
+	dw $4625 ; update function
+	db $80 ; ??
 
 Data_645a3: ; 645a3 (19:45a3)
-	db $23, $22, $f0
-	dw $4279
-	dw $4625
-	db $80
+	db ($2 << 4) | $3 ; low bank nybble, ??
+	db $22, $f0 ; ??, ??
+	dw $4279 ; ??
+	dw $4625 ; update function
+	db $80 ; ??
 
 Data_645ab: ; 645ab (19:45ab)
-	db $26, $30, $ec
-	dw $4555
-	dw $48dc
-	db $80
+	db ($2 << 4) | $6 ; low bank nybble, ??
+	db $30, $ec ; ??, ??
+	dw $4555 ; ??
+	dw $48dc ; update function
+	db $80 ; ??
 
 Data_645b3: ; 645b3 (19:45b3)
-	db $27, $05, $fa
-	dw $4b56
-	dw $4d8a
-	db $80
+	db ($2 << 4) | $7 ; low bank nybble, ??
+	db $05, $fa ; ??, ??
+	dw $4b56 ; ??
+	dw $4d8a ; update function
+	db $80 ; ??
 
 Data_645bb: ; 645bb (19:45bb)
-	db $28, $06, $f3
-	dw $4c7a
-	dw $4ee2
-	db $80
+	db ($2 << 4) | $8 ; low bank nybble, ??
+	db $06, $f3 ; ??, ??
+	dw $4c7a ; ??
+	dw $4ee2 ; update function
+	db $80 ; ??
 
 Data_645c3: ; 645c3 (19:45c3)
-	db $29, $0a, $ec
-	dw $4e16
-	dw $51d3
-	db $80
+	db ($2 << 4) | $9 ; low bank nybble, ??
+	db $0a, $ec ; ??, ??
+	dw $4e16 ; ??
+	dw $51d3 ; update function
+	db $80 ; ??
 
 Data_645cb: ; 645cb (19:45cb)
-	db $24, $29, $f9
-	dw $434a
-	dw $5326
-	db $80
+	db ($2 << 4) | $4 ; low bank nybble, ??
+	db $29, $f9 ; ??, ??
+	dw $434a ; ??
+	dw $5326 ; update function
+	db $80 ; ??
 
 Data_645d3: ; 645d3 (19:45d3)
-	db $25, $29, $f9
-	dw $434a
-	dw $5326
-	db $80
+	db ($2 << 4) | $5 ; low bank nybble, ??
+	db $29, $f9 ; ??, ??
+	dw $434a ; ??
+	dw $5326 ; update function
+	db $80 ; ??
 
 Data_645db: ; 645db (19:45db)
-	db $26, $29, $f9
-	dw $434a
-	dw $5326
-	db $80
+	db ($2 << 4) | $6 ; low bank nybble, ??
+	db $29, $f9 ; ??, ??
+	dw $434a ; ??
+	dw $5326 ; update function
+	db $80 ; ??
 
 Data_645e3: ; 645e3 (19:45e3)
-	db $27, $29, $f9
-	dw $434a
-	dw $5326
-	db $80
+	db ($2 << 4) | $7 ; low bank nybble, ??
+	db $29, $f9 ; ??, ??
+	dw $434a ; ??
+	dw $5326 ; update function
+	db $80 ; ??
 
 Data_645eb: ; 645eb (19:45eb)
-	db $28, $29, $f9
-	dw $434a
-	dw $5326
-	db $80
+	db ($2 << 4) | $8 ; low bank nybble, ??
+	db $29, $f9 ; ??, ??
+	dw $434a ; ??
+	dw $5326 ; update function
+	db $80 ; ??
 
 Data_645f3: ; 645f3 (19:45f3)
-	db $40, $0b, $e3
-	dw $4000
-	dw $4000
-	db $00
+	db ($4 << 4) | $0 ; low bank nybble, ??
+	db $0b, $e3 ; ??, ??
+	dw $4000 ; ??
+	dw $4000 ; update function
+	db $00 ; ??
 
 Data_645fb: ; 645fb (19:45fb)
-	db $42, $0b, $00
-	dw $4000
-	dw $471a
-	db $00
+	db ($4 << 4) | $2 ; low bank nybble, ??
+	db $0b, $00 ; ??, ??
+	dw $4000 ; ??
+	dw $471a ; update function
+	db $00 ; ??
 
 Data_64603: ; 64603 (19:4603)
-	db $29, $0b, $00
-	dw $53fe
-	dw $552d
-	db $00
+	db ($2 << 4) | $9 ; low bank nybble, ??
+	db $0b, $00 ; ??, ??
+	dw $53fe ; ??
+	dw $552d ; update function
+	db $00 ; ??
 
 Data_6460b: ; 6460b (19:460b)
-	db $48, $8b, $e4
-	dw $505c
-	dw $4ac4
-	db $00
+	db ($4 << 4) | $8 ; low bank nybble, ??
+	db $8b, $e4 ; ??, ??
+	dw $505c ; ??
+	dw $4ac4 ; update function
+	db $00 ; ??
 
 Data_64613: ; 64613 (19:4613)
-	db $45, $0b, $00
-	dw $505c
-	dw $526c
-	db $00
+	db ($4 << 4) | $5 ; low bank nybble, ??
+	db $0b, $00 ; ??, ??
+	dw $505c ; ??
+	dw $526c ; update function
+	db $00 ; ??
 
 Data_6461b: ; 6461b (19:461b)
-	db $41, $af, $e1
-	dw $505c
-	dw $5006
-	db $00
+	db ($4 << 4) | $1 ; low bank nybble, ??
+	db $af, $e1 ; ??, ??
+	dw $505c ; ??
+	dw $5006 ; update function
+	db $00 ; ??
 
 Data_64623: ; 64623 (19:4623)
-	db $42, $af, $e1
-	dw $505c
-	dw $500a
-	db $00
+	db ($4 << 4) | $2 ; low bank nybble, ??
+	db $af, $e1 ; ??, ??
+	dw $505c ; ??
+	dw $500a ; update function
+	db $00 ; ??
 
 Data_6462b: ; 6462b (19:462b)
-	db $44, $af, $e1
-	dw $505c
-	dw $500e
-	db $00
+	db ($4 << 4) | $4 ; low bank nybble, ??
+	db $af, $e1 ; ??, ??
+	dw $505c ; ??
+	dw $500e ; update function
+	db $00 ; ??
 
 Data_64633: ; 64633 (19:4633)
-	db $57, $8b, $e6
-	dw $4000
-	dw $4020
-	db $00
+	db ($5 << 4) | $7 ; low bank nybble, ??
+	db $8b, $e6 ; ??, ??
+	dw $4000 ; ??
+	dw $4020 ; update function
+	db $00 ; ??
 
 Data_6463b: ; 6463b (19:463b)
-	db $59, $0b, $00
-	dw $4000
-	dw $4456
-	db $00
+	db ($5 << 4) | $9 ; low bank nybble, ??
+	db $0b, $00 ; ??, ??
+	dw $4000 ; ??
+	dw $4456 ; update function
+	db $00 ; ??
 
 Data_64643: ; 64643 (19:4643)
-	db $20, $af, $f0
-	dw $65ae
-	dw $5c8c
-	db $00
+	db ($2 << 4) | $0 ; low bank nybble, ??
+	db $af, $f0 ; ??, ??
+	dw $65ae ; ??
+	dw $5c8c ; update function
+	db $00 ; ??
 
 Data_6464b: ; 6464b (19:464b)
-	db $20, $af, $f0
-	dw $65ae
-	dw $5c70
-	db $00
+	db ($2 << 4) | $0 ; low bank nybble, ??
+	db $af, $f0 ; ??, ??
+	dw $65ae ; ??
+	dw $5c70 ; update function
+	db $00 ; ??
 
 Data_64653: ; 64653 (19:4653)
-	db $20, $af, $f0
-	dw $65ae
-	dw $5c7e
-	db $00
+	db ($2 << 4) | $0 ; low bank nybble, ??
+	db $af, $f0 ; ??, ??
+	dw $65ae ; ??
+	dw $5c7e ; update function
+	db $00 ; ??
 
 Data_6465b: ; 6465b (19:465b)
-	db $21, $39, $f8
-	dw $65cc
-	dw $5d64
-	db $80
+	db ($2 << 4) | $1 ; low bank nybble, ??
+	db $39, $f8 ; ??, ??
+	dw $65cc ; ??
+	dw $5d64 ; update function
+	db $80 ; ??
 
 Data_64663: ; 64663 (19:4663)
-	db $4b, $b6, $f0
-	dw $553c
-	dw $5356
-	db $80
+	db ($4 << 4) | $b ; low bank nybble, ??
+	db $b6, $f0 ; ??, ??
+	dw $553c ; ??
+	dw $5356 ; update function
+	db $80 ; ??
 
 Data_6466b: ; 6466b (19:466b)
-	db $4f, $22, $ef
-	dw $66dc
-	dw $5c18
-	db $00
+	db ($4 << 4) | $f ; low bank nybble, ??
+	db $22, $ef ; ??, ??
+	dw $66dc ; ??
+	dw $5c18 ; update function
+	db $00 ; ??
 
 Data_64673: ; 64673 (19:4673)
-	db $0a, $0b, $f4
-	dw $5cd3
-	dw $77d7
-	db $00
+	db ($0 << 4) | $a ; low bank nybble, ??
+	db $0b, $f4 ; ??, ??
+	dw $5cd3 ; ??
+	dw Func_437d7 ; update function
+	db $00 ; ??
 
 Data_6467b: ; 6467b (19:467b)
-	db $0b, $0b, $f4
-	dw $5cd3
-	dw $77d7
-	db $00
+	db ($0 << 4) | $b ; low bank nybble, ??
+	db $0b, $f4 ; ??, ??
+	dw $5cd3 ; ??
+	dw Func_437d7 ; update function
+	db $00 ; ??
 
 Data_64683: ; 64683 (19:4683)
-	db $0e, $22, $e1
-	dw $5c47
-	dw $77a5
-	db $00
+	db ($0 << 4) | $e ; low bank nybble, ??
+	db $22, $e1 ; ??, ??
+	dw $5c47 ; ??
+	dw Func_437a5 ; update function
+	db $00 ; ??
 
 Data_6468b: ; 6468b (19:468b)
-	db $0e, $22, $e1
-	dw $5c47
-	dw $77a0
-	db $00
+	db ($0 << 4) | $e ; low bank nybble, ??
+	db $22, $e1 ; ??, ??
+	dw $5c47 ; ??
+	dw Func_437a0 ; update function
+	db $00 ; ??
 
 Data_64693: ; 64693 (19:4693)
-	db $0e, $22, $e1
-	dw $5c47
-	dw $779b
-	db $00
+	db ($0 << 4) | $e ; low bank nybble, ??
+	db $22, $e1 ; ??, ??
+	dw $5c47 ; ??
+	dw Func_4379b ; update function
+	db $00 ; ??
 
 Data_6469b: ; 6469b (19:469b)
-	db $45, $ba, $f2
-	dw $67d5
-	dw $5d2e
-	db $80
+	db ($4 << 4) | $5 ; low bank nybble, ??
+	db $ba, $f2 ; ??, ??
+	dw $67d5 ; ??
+	dw $5d2e ; update function
+	db $80 ; ??
 
 Data_646a3: ; 646a3 (19:46a3)
-	db $46, $0b, $00
-	dw $4000
-	dw $626b
-	db $00
+	db ($4 << 4) | $6 ; low bank nybble, ??
+	db $0b, $00 ; ??, ??
+	dw $4000 ; ??
+	dw $626b ; update function
+	db $00 ; ??
 
 Data_646ab: ; 646ab (19:46ab)
-	db $47, $0b, $00
-	dw $4000
-	dw $645e
-	db $00
+	db ($4 << 4) | $7 ; low bank nybble, ??
+	db $0b, $00 ; ??, ??
+	dw $4000 ; ??
+	dw $645e ; update function
+	db $00 ; ??
 
 Data_646b3: ; 646b3 (19:46b3)
-	db $40, $d1, $e6
-	dw $67d5
-	dw $5cf9
-	db $80
+	db ($4 << 4) | $0 ; low bank nybble, ??
+	db $d1, $e6 ; ??, ??
+	dw $67d5 ; ??
+	dw $5cf9 ; update function
+	db $80 ; ??
 
 Data_646bb: ; 646bb (19:46bb)
-	db $41, $0c, $f7
-	dw $67d5
-	dw $63c0
-	db $80
+	db ($4 << 4) | $1 ; low bank nybble, ??
+	db $0c, $f7 ; ??, ??
+	dw $67d5 ; ??
+	dw $63c0 ; update function
+	db $80 ; ??
 
 Data_646c3: ; 646c3 (19:46c3)
-	db $22, $0b, $00
-	dw $4000
-	dw $5e34
-	db $00
+	db ($2 << 4) | $2 ; low bank nybble, ??
+	db $0b, $00 ; ??, ??
+	dw $4000 ; ??
+	dw $5e34 ; update function
+	db $00 ; ??
 
 Data_646cb: ; 646cb (19:46cb)
-	db $2d, $37, $f3
-	dw $67fd
-	dw $645d
-	db $00
+	db ($2 << 4) | $d ; low bank nybble, ??
+	db $37, $f3 ; ??, ??
+	dw $67fd ; ??
+	dw $645d ; update function
+	db $00 ; ??
 
 Data_646d3: ; 646d3 (19:46d3)
-	db $20, $06, $00
-	dw $6895
-	dw $64b5
-	db $80
+	db ($2 << 4) | $0 ; low bank nybble, ??
+	db $06, $00 ; ??, ??
+	dw $6895 ; ??
+	dw $64b5 ; update function
+	db $80 ; ??
 
 Data_646db: ; 646db (19:46db)
-	db $21, $06, $f7
-	dw $6895
-	dw $669a
-	db $00
+	db ($2 << 4) | $1 ; low bank nybble, ??
+	db $06, $f7 ; ??, ??
+	dw $6895 ; ??
+	dw $669a ; update function
+	db $00 ; ??
 
 Data_646e3: ; 646e3 (19:46e3)
-	db $22, $05, $f5
-	dw $6b04
-	dw $68a2
-	db $80
+	db ($2 << 4) | $2 ; low bank nybble, ??
+	db $05, $f5 ; ??, ??
+	dw $6b04 ; ??
+	dw $68a2 ; update function
+	db $80 ; ??
 
 Data_646eb: ; 646eb (19:46eb)
-	db $20, $05, $f5
-	dw $6b04
-	dw $68a2
-	db $80
+	db ($2 << 4) | $0 ; low bank nybble, ??
+	db $05, $f5 ; ??, ??
+	dw $6b04 ; ??
+	dw $68a2 ; update function
+	db $80 ; ??
 
 Data_646f3: ; 646f3 (19:46f3)
-	db $50, $c1, $e0
-	dw $4895
-	dw $44e5
-	db $00
+	db ($5 << 4) | $0 ; low bank nybble, ??
+	db $c1, $e0 ; ??, ??
+	dw $4895 ; ??
+	dw $44e5 ; update function
+	db $00 ; ??
 
 Data_646fb: ; 646fb (19:46fb)
-	db $54, $0b, $00
-	dw $4895
-	dw $4981
-	db $00
+	db ($5 << 4) | $4 ; low bank nybble, ??
+	db $0b, $00 ; ??, ??
+	dw $4895 ; ??
+	dw $4981 ; update function
+	db $00 ; ??
 
 Data_64703: ; 64703 (19:4703)
-	db $24, $0e, $e8
-	dw $6ba0
-	dw $6af9
-	db $00
+	db ($2 << 4) | $4 ; low bank nybble, ??
+	db $0e, $e8 ; ??, ??
+	dw $6ba0 ; ??
+	dw $6af9 ; update function
+	db $00 ; ??
 
 Data_6470b: ; 6470b (19:470b)
-	db $56, $44, $f6
-	dw $501c
-	dw $4d37
-	db $00
+	db ($5 << 4) | $6 ; low bank nybble, ??
+	db $44, $f6 ; ??, ??
+	dw $501c ; ??
+	dw $4d37 ; update function
+	db $00 ; ??
 
 Data_64713: ; 64713 (19:4713)
-	db $57, $0b, $f6
-	dw $501c
-	dw $51e5
-	db $00
+	db ($5 << 4) | $7 ; low bank nybble, ??
+	db $0b, $f6 ; ??, ??
+	dw $501c ; ??
+	dw $51e5 ; update function
+	db $00 ; ??
 
 Data_6471b: ; 6471b (19:471b)
-	db $59, $31, $fc
-	dw $501c
-	dw $515b
-	db $80
+	db ($5 << 4) | $9 ; low bank nybble, ??
+	db $31, $fc ; ??, ??
+	dw $501c ; ??
+	dw $515b ; update function
+	db $80 ; ??
 
 Data_64723: ; 64723 (19:4723)
-	db $5a, $0b, $f8
-	dw $5699
-	dw $5611
-	db $00
+	db ($5 << 4) | $a ; low bank nybble, ??
+	db $0b, $f8 ; ??, ??
+	dw $5699 ; ??
+	dw $5611 ; update function
+	db $00 ; ??
 
 Data_6472b: ; 6472b (19:472b)
-	db $5b, $45, $fe
-	dw $5699
-	dw $5c4a
-	db $80
+	db ($5 << 4) | $b ; low bank nybble, ??
+	db $45, $fe ; ??, ??
+	dw $5699 ; ??
+	dw $5c4a ; update function
+	db $80 ; ??
 
 Data_64733: ; 64733 (19:4733)
-	db $5c, $45, $fe
-	dw $5699
-	dw $5de4
-	db $80
+	db ($5 << 4) | $c ; low bank nybble, ??
+	db $45, $fe ; ??, ??
+	dw $5699 ; ??
+	dw $5de4 ; update function
+	db $80 ; ??
 
 Data_6473b: ; 6473b (19:473b)
-	db $5d, $8b, $00
-	dw $5e06
-	dw $5e4e
-	db $00
+	db ($5 << 4) | $d ; low bank nybble, ??
+	db $8b, $00 ; ??, ??
+	dw $5e06 ; ??
+	dw $5e4e ; update function
+	db $00 ; ??
 
 Data_64743: ; 64743 (19:4743)
-	db $5a, $22, $ff
-	dw $5e06
-	dw $62c8
-	db $00
+	db ($5 << 4) | $a ; low bank nybble, ??
+	db $22, $ff ; ??, ??
+	dw $5e06 ; ??
+	dw $62c8 ; update function
+	db $00 ; ??
 
 Data_6474b: ; 6474b (19:474b)
-	db $50, $8b, $e0
-	dw $6583
-	dw $6611
-	db $00
+	db ($5 << 4) | $0 ; low bank nybble, ??
+	db $8b, $e0 ; ??, ??
+	dw $6583 ; ??
+	dw $6611 ; update function
+	db $00 ; ??
 
 Data_64753: ; 64753 (19:4753)
-	db $51, $ce, $ec
-	dw $6583
-	dw $6e6a
-	db $00
+	db ($5 << 4) | $1 ; low bank nybble, ??
+	db $ce, $ec ; ??, ??
+	dw $6583 ; ??
+	dw $6e6a ; update function
+	db $00 ; ??
 
 Data_6475b: ; 6475b (19:475b)
-	db $5a, $0b, $e0
-	dw $6583
-	dw $7264
-	db $00
+	db ($5 << 4) | $a ; low bank nybble, ??
+	db $0b, $e0 ; ??, ??
+	dw $6583 ; ??
+	dw $7264 ; update function
+	db $00 ; ??
 
 Data_64763: ; 64763 (19:4763)
-	db $5b, $0b, $e0
-	dw $6583
-	dw $72b4
-	db $00
+	db ($5 << 4) | $b ; low bank nybble, ??
+	db $0b, $e0 ; ??, ??
+	dw $6583 ; ??
+	dw $72b4 ; update function
+	db $00 ; ??
 
 Data_6476b: ; 6476b (19:476b)
-	db $55, $31, $f6
-	dw $6583
-	dw $6dcc
-	db $00
+	db ($5 << 4) | $5 ; low bank nybble, ??
+	db $31, $f6 ; ??, ??
+	dw $6583 ; ??
+	dw $6dcc ; update function
+	db $00 ; ??
 
 Data_64773: ; 64773 (19:4773)
-	db $36, $0b, $00
-	dw $4806
-	dw $4b2d
-	db $00
+	db ($3 << 4) | $6 ; low bank nybble, ??
+	db $0b, $00 ; ??, ??
+	dw $4806 ; ??
+	dw $4b2d ; update function
+	db $00 ; ??
 
 Data_6477b: ; 6477b (19:477b)
-	db $36, $0b, $00
-	dw $4806
-	dw $4b32
-	db $00
+	db ($3 << 4) | $6 ; low bank nybble, ??
+	db $0b, $00 ; ??, ??
+	dw $4806 ; ??
+	dw $4b32 ; update function
+	db $00 ; ??
 
 Data_64783: ; 64783 (19:4783)
-	db $3a, $0b, $00
-	dw $488a
-	dw $4b51
-	db $00
+	db ($3 << 4) | $a ; low bank nybble, ??
+	db $0b, $00 ; ??, ??
+	dw $488a ; ??
+	dw $4b51 ; update function
+	db $00 ; ??
 
 	INCROM $6478b, $64fc3
 

@@ -20,8 +20,8 @@ Func_20000: ; 20000 (8:4000)
 	ld a, l
 	ld [wObjPtr + 1], a
 	ld a, [hl] ; OBJ_FLAGS
-	and OBJFLAG_UNK00 | OBJFLAG_UNK01
-	cp OBJFLAG_UNK00 | OBJFLAG_UNK01
+	and OBJFLAG_UNK0 | OBJFLAG_UNK1
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
 	jr z, .asm_20036
 .next_obj
 	ld a, [wObjPtr + 0]
@@ -311,10 +311,10 @@ Func_20203: ; 20203 (8:4203)
 	cp HIGH(wCurObj)
 	ret z
 	ld a, [hl] ; OBJ_FLAGS
-	and OBJFLAG_UNK00 | OBJFLAG_UNK01
-	cp OBJFLAG_UNK00
+	and OBJFLAG_UNK0 | OBJFLAG_UNK1
+	cp OBJFLAG_UNK0
 	jr z, .asm_2021b
-	cp OBJFLAG_UNK00 | OBJFLAG_UNK01
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
 	jr z, .asm_2021b
 .next_obj
 	add hl, de

@@ -2897,7 +2897,15 @@ UpdateState_ZombieSlippingThroughFloor: ; 29dd3 (a:5dd3)
 	ret
 ; 0x29e71
 
-	INCROM $29e71, $29e7e
+; unreferenced?
+Func_29e71: ; 29e71 (a:5e71)
+	ld a, ST_ZOMBIE_RECOVERING
+	ld [wWarioState], a
+	xor a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ret
+; 0x29e7e
 
 UpdateState_ZombieRecovering: ; 29e7e (a:5e7e)
 	ld a, [wGlobalCounter]

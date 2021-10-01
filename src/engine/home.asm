@@ -4534,7 +4534,52 @@ Func_305c: ; 305c (0:305c)
 	ret
 ; 0x3069
 
-	INCROM $3069, $30e6
+	INCROM $3069, $3076
+
+Func_3076: ; 3076 (0:3076)
+	ld a, [wCurObjUnk18]
+	ld b, a
+	ld hl, wCurObjYPos
+	ld a, [hl]
+	sub b
+	ld [hli], a
+	ret nc
+	dec [hl]
+	ret
+; 0x3083
+
+	INCROM $3083, $30b8
+
+; moves current object right
+; by 1 every 2 frames
+MoveCurObjRight: ; 30b8 (0:30b8)
+	ld a, [wGlobalCounter]
+	rra
+	ret c
+	ld hl, wCurObjXPos
+	inc [hl]
+	ret nz
+	inc l
+	inc [hl]
+	ret
+; 0x30c5
+
+; moves current object left
+; by 1 every 2 frames
+MoveCurObjLeft: ; 30c5 (0:30c5)
+	ld a, [wGlobalCounter]
+	rra
+	ret nc
+	ld hl, wCurObjXPos
+	ld a, [hl]
+	sub 1
+	ld [hli], a
+	ret nc
+	dec [hl]
+	ret
+; 0x30d4
+
+	INCROM $30d4, $30e6
 
 Func_30e6: ; 30e6 (0:30e6)
 	ld hl, wCurObjYPos
@@ -4602,7 +4647,7 @@ Func_312f: ; 312f (0:312f)
 	ld a, $1a
 	bankswitch
 	dec l
-	ld a, [hli]
+	ld a, [hli] ; OBJ_UNK_12
 	ld e, a
 	ld a, [hli]
 	ld d, a
@@ -4615,7 +4660,7 @@ Func_312f: ; 312f (0:312f)
 	ld b, a
 	ld a, [bc]
 	cp $ff
-	jr z, .asm_3161
+	jr z, .reset
 	ld [wCurObjUnk0f], a
 	ld a, [hl]
 	add $02
@@ -4624,7 +4669,7 @@ Func_312f: ; 312f (0:312f)
 	ld a, [bc]
 	ld [hl], a
 	jr .pop_af
-.asm_3161
+.reset
 	ld a, $02
 	ld [hld], a
 	ld a, [de]
@@ -4638,7 +4683,15 @@ Func_312f: ; 312f (0:312f)
 	ret
 ; 0x3173
 
-	INCROM $3173, $329f
+	INCROM $3173, $3290
+
+Func_3290: ; 3290 (0:3290)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(_ApplyObjectGravity)
+	bankswitch
+	jp _ApplyObjectGravity
+; 0x329f
 
 Func_329f: ; 329f (0:329f)
 	ld a, [wROMBank]
@@ -4658,7 +4711,33 @@ Func_32f9: ; 32f9 (0:32f9)
 	jp Func_629a6
 ; 0x3308
 
-	INCROM $3308, $34b7
+	INCROM $3308, $3416
+
+Func_3416: ; 3416 (0:3416)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_642d9)
+	bankswitch
+	call Func_642d9
+	pop af
+	bankswitch
+	ret
+; 0x342d
+
+	INCROM $342d, $3444
+
+Func_3444: ; 3444 (0:3444)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_632ac)
+	bankswitch
+	call Func_632ac
+	pop af
+	bankswitch
+	ret
+; 0x345b
+
+	INCROM $345b, $34b7
 
 Func_34b7: ; 34b7 (0:34b7)
 	ld a, [wROMBank]
@@ -4684,7 +4763,19 @@ Func_34e5: ; 34e5 (0:34e5)
 	ret
 ; 0x34fc
 
-	INCROM $34fc, $352b
+	INCROM $34fc, $3513
+
+Func_3513: ; 3513 (0:3513)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_19bc3)
+	bankswitch
+	call Func_19bc3
+	pop af
+	bankswitch
+	ld a, b
+	ret
+; 0x352b
 
 Func_352b: ; 352b (0:352b)
 	ld a, [wROMBank]
@@ -4710,7 +4801,31 @@ Func_3543: ; 3543 (0:3543)
 	ret
 ; 0x355b
 
-	INCROM $355b, $3a38
+Func_355b: ; 355b (0:355b)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_19b61)
+	bankswitch
+	call Func_19b61
+	pop af
+	bankswitch
+	ld a, b
+	ret
+; 0x3573
+
+Func_3573: ; 3573 (0:3573)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_19b69)
+	bankswitch
+	call Func_19b69
+	pop af
+	bankswitch
+	ld a, b
+	ret
+; 0x358b
+
+	INCROM $358b, $3a38
 
 ; hl = OAM data
 ; b = sprite bank

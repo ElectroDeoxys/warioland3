@@ -1,4 +1,118 @@
-	INCROM $60000, $611cb
+Data_60000: ; 60000 (18:4000)
+	db  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
+	db  0,  0,  0,  0,  1,  1,  1,  2,  2,  2,  3,  3,  4,  4,  4, $80
+; 0x60020
+
+Data_60020: ; 60020 (18:4020)
+	db  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
+	db  0,  0,  0,  0,  1,  2,  2,  3,  3,  4,  4,  5,  5,  5,  5, $80
+; 0x60040
+
+Data_60040: ; 60040 (18:4040)
+	db -3, -2, -1,  0,  1,  1,  1,  1,  1,  1,  2,  2,  2,  3,  3,  3
+	db  3,  3,  3,  3,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4, $80
+; 0x60060
+
+Data_60060: ; 60060 (18:4060)
+	db -2, -1,  1,  2,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  4,  4
+	db  4,  4,  4,  4,  4,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, $80
+; 0x60080
+
+Data_60080: ; 60080 (18:4080)
+	db  0,  0,  1,  1,  1,  2,  2,  2,  2,  3,  3,  3,  3,  4,  3,  4
+	db  4,  4,  4,  4,  4,  4,  5,  5,  5,  5,  5,  5,  5,  5,  5, $80
+; 0x600a0
+
+Data_600a0: ; 600a0 (18:40a0)
+	db  0,  0,  0,  0,  0,  0,  1,  1,  1,  2,  2,  2,  2,  3,  3,  3
+	db  3,  3,  3,  4,  4,  4,  4,  4,  4,  4,  5,  5,  5,  5,  5, $80
+; 0x600c0
+
+Data_600c0: ; 600c0 (18:40c0)
+	db  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
+	db  0,  0,  0,  1,  0,  1,  1,  1,  1,  2,  2,  2,  3,  3,  4, $80
+; 0x600e0
+
+Data_600e0: ; 600e0 (18:40e0)
+	db  0,  0,  0,  0,  0,  0,  1,  0,  1,  1,  1,  1,  2,  2,  2,  2
+	db  3,  3,  3,  3,  3,  3,  4,  4,  4,  4,  4,  4,  4,  4,  4, $80
+; 0x60100
+
+Data_60100: ; 60100 (18:4100)
+	db -4, -4, -4, -4, -4, -4, -3, -3, -3, -3, -3, -3, -2, -2, -1, -1
+	db  0,  0,  0,  1,  1,  1,  2,  2,  2,  3,  3,  3,  4,  4,  5, $80
+; 0x60120
+
+Data_60120: ; 60120 (18:4120)
+	db -4, -4, -4, -3, -3, -3, -2, -2, -1, -1,  0,  0,  0,  1,  1,  1
+	db  2,  2,  3,  3,  3,  4,  4,  4,  5,  5,  5,  5,  5,  5,  5, $80
+; 0x60140
+
+Data_60140: ; 60140 (18:4140)
+	db -7, -7, -7, -7, -6, -6, -6, -6, -5, -5, -5, -5, -4, -4, -4, -3
+	db -3, -3, -2, -2, -1,  0,  0,  0,  0,  1,  1,  2,  3,  4,  5, $80
+; 0x60160
+
+Data_60160: ; 60160 (18:4160)
+	db -7, -6, -5, -5, -5, -4, -4, -4, -3, -3, -3, -3, -2, -2, -1, -1
+	db  0,  0,  0,  1,  1,  2,  2,  3,  3,  4,  4,  5,  5,  6,  6, $80
+; 0x60180
+
+Data_60180: ; 60180 (18:4180)
+	db -7, -6, -5, -4, -3, -3, -2, -2, -1, -1,  0,  0,  0,  0,  0,  0
+	db  0,  1,  0,  1,  2,  2,  3,  2,  3,  3,  4,  4,  5,  6,  7, $80
+; 0x601a0
+
+Data_601a0: ; 601a0 (18:41a0)
+	db -4, -3, -3, -3, -2, -2, -1, -1, -1,  0,  0,  1,  0,  1,  0,  1
+	db  1,  2,  1,  2,  2,  3,  3,  3,  4,  5,  6,  7,  8,  9, 10, $80
+; 0x601c0
+
+	INCROM $601c0, $60280
+
+; y-offset values for falling light objects
+Data_60280: ; 60280 (18:4280)
+	db 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4, $80
+; 0x60290
+
+; y-offset values for falling heavy objects
+Data_60290: ; 60290 (18:4290)
+	db 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, $80
+; 0x602a0
+
+Data_602a0: ; 602a0 (18:42a0)
+	db -4, -3, -2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, $80
+; 0x602b0
+
+Data_602b0: ; 602b0 (18:42b0)
+	db -3, -2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, $80
+; 0x602c0
+
+Data_602c0: ; 602c0 (18:42c0)
+	db -2, -1, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, $80
+; 0x602d0
+
+Data_602d0: ; 602d0 (18:42d0)
+	db -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, $80
+; 0x602e0
+
+Data_602e0: ; 602e0 (18:42e0)
+	db -3, -2, -2, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, $80
+; 0x602f0
+
+Data_602f0: ; 602f0 (18:42f0)
+	db -2, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, $80
+; 0x60300
+
+Data_60300: ; 60300 (18:4300)
+	db -4, -3, -3, -2, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, $80
+; 0x60310
+
+Data_60310: ; 60310 (18:4310)
+	db -3, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, $80
+; 0x60320
+
+	INCROM $60320, $611cb
 
 Func_611cb: ; 611cb (18:51cb)
 	push hl
@@ -36,7 +150,7 @@ Func_611cb: ; 611cb (18:51cb)
 	ld a, [hli]
 	ld [wCurObjUnk0f], a
 	ld a, [hli]
-	ld [wCurObjUnk10], a
+	ld [wCurObjUnk10 + 0], a
 	ld a, [hli]
 	ld [wCurObjUnk10 + 1], a
 	ld a, [hli]
@@ -96,7 +210,7 @@ Func_611cb: ; 611cb (18:51cb)
 	pop hl
 
 	ld a, [wCurObjFlags]
-	and $ff ^ (OBJFLAG_UNK05)
+	and $ff ^ (OBJFLAG_UNK5)
 	ld [hli], a
 	inc l
 	inc l
@@ -126,7 +240,7 @@ Func_611cb: ; 611cb (18:51cb)
 	ld [hli], a
 	ld a, [wCurObjUnk0f]
 	ld [hli], a
-	ld a, [wCurObjUnk10]
+	ld a, [wCurObjUnk10 + 0]
 	ld [hli], a
 	ld a, [wCurObjUnk10 + 1]
 	ld [hli], a
@@ -322,7 +436,7 @@ Func_613dc: ; 613dc (18:53dc)
 	ld a, [hli]
 	ld [wCurObjUnk0f], a
 	ld a, [hli]
-	ld [wCurObjUnk10], a
+	ld [wCurObjUnk10 + 0], a
 	ld a, [hli]
 	ld [wCurObjUnk10 + 1], a
 	ld a, [hli]
@@ -383,7 +497,7 @@ Func_613dc: ; 613dc (18:53dc)
 	ld [hli], a
 	pop hl
 	ld a, [wCurObjFlags]
-	and $ff ^ (OBJFLAG_UNK05)
+	and $ff ^ (OBJFLAG_UNK5)
 	ld [hli], a
 	inc l
 	inc l
@@ -413,7 +527,7 @@ Func_613dc: ; 613dc (18:53dc)
 	ld [hli], a
 	ld a, [wCurObjUnk0f]
 	ld [hli], a
-	ld a, [wCurObjUnk10]
+	ld a, [wCurObjUnk10 + 0]
 	ld [hli], a
 	ld a, [wCurObjUnk10 + 1]
 	ld [hli], a
@@ -483,7 +597,7 @@ Func_61513: ; 61513 (18:5513)
 	ld a, [hli]
 	ld [wCurObjUnk0f], a
 	ld a, [hli]
-	ld [wCurObjUnk10], a
+	ld [wCurObjUnk10 + 0], a
 	ld a, [hli]
 	ld [wCurObjUnk10 + 1], a
 	ld a, [hli]
@@ -547,7 +661,7 @@ Func_61513: ; 61513 (18:5513)
 	ld [hli], a
 	pop hl
 	ld a, [wCurObjFlags]
-	and $ff ^ (OBJFLAG_UNK05)
+	and $ff ^ (OBJFLAG_UNK5)
 	ld [hli], a
 	inc l
 	inc l
@@ -577,7 +691,7 @@ Func_61513: ; 61513 (18:5513)
 	ld [hli], a
 	ld a, [wCurObjUnk0f]
 	ld [hli], a
-	ld a, [wCurObjUnk10]
+	ld a, [wCurObjUnk10 + 0]
 	ld [hli], a
 	ld a, [wCurObjUnk10 + 1]
 	ld [hli], a
@@ -612,80 +726,80 @@ Func_61513: ; 61513 (18:5513)
 ; 0x6164e
 
 Func_6164e: ; 6164e (18:564e)
-	ld hl, wObj1
+	ld hl, wObj1Flags
 	ld a, [hl]
-	and $93
-	cp $83
+	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK7
 	jr nz, .obj_2
 	ld e, LOW(wObj1ScreenYPos)
 	ld l, LOW(wObj1Unk07)
 	call UpdateObjSprite
 
 .obj_2
-	ld hl, wObj2
+	ld hl, wObj2Flags
 	ld a, [hl]
-	and $93
-	cp $83
+	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK7
 	jr nz, .obj_3
 	ld e, LOW(wObj2ScreenYPos)
 	ld l, LOW(wObj2Unk07)
 	call UpdateObjSprite
 
 .obj_3
-	ld hl, wObj3
+	ld hl, wObj3Flags
 	ld a, [hl]
-	and $93
-	cp $83
+	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK7
 	jr nz, .obj_4
 	ld e, LOW(wObj3ScreenYPos)
 	ld l, LOW(wObj3Unk07)
 	call UpdateObjSprite
 
 .obj_4
-	ld hl, wObj4
+	ld hl, wObj4Flags
 	ld a, [hl]
-	and $93
-	cp $83
+	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK7
 	jr nz, .obj_5
 	ld e, LOW(wObj4ScreenYPos)
 	ld l, LOW(wObj4Unk07)
 	call UpdateObjSprite
 
 .obj_5
-	ld hl, wObj5
+	ld hl, wObj5Flags
 	ld a, [hl]
-	and $93
-	cp $83
+	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK7
 	jr nz, .obj_6
 	ld e, LOW(wObj5ScreenYPos)
 	ld l, LOW(wObj5Unk07)
 	call UpdateObjSprite
 
 .obj_6
-	ld hl, wObj6
+	ld hl, wObj6Flags
 	ld a, [hl]
-	and $93
-	cp $83
+	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK7
 	jr nz, .obj_7
 	ld e, LOW(wObj6ScreenYPos)
 	ld l, LOW(wObj6Unk07)
 	call UpdateObjSprite
 
 .obj_7
-	ld hl, wObj7
+	ld hl, wObj7Flags
 	ld a, [hl]
-	and $93
-	cp $83
+	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK7
 	jr nz, .obj_8
 	ld e, LOW(wObj7ScreenYPos)
 	ld l, LOW(wObj7Unk07)
 	call UpdateObjSprite
 
 .obj_8
-	ld hl, wObj8
+	ld hl, wObj8Flags
 	ld a, [hl]
-	and $93
-	cp $83
+	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK7
 	jr nz, .done
 	ld e, LOW(wObj8ScreenYPos)
 	ld l, LOW(wObj8Unk07)
@@ -698,8 +812,8 @@ Func_6164e: ; 6164e (18:564e)
 Func_616d7: ; 616d7 (18:56d7)
 	ld hl, wObj1
 	ld a, [hl]
-	and $93
-	cp $03
+	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
 	jr nz, .obj_2
 	ld e, LOW(wObj1ScreenYPos)
 	ld l, LOW(wObj1Unk07)
@@ -708,8 +822,8 @@ Func_616d7: ; 616d7 (18:56d7)
 .obj_2
 	ld hl, wObj2
 	ld a, [hl]
-	and $93
-	cp $03
+	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
 	jr nz, .obj_3
 	ld e, LOW(wObj2ScreenYPos)
 	ld l, LOW(wObj2Unk07)
@@ -718,8 +832,8 @@ Func_616d7: ; 616d7 (18:56d7)
 .obj_3
 	ld hl, wObj3
 	ld a, [hl]
-	and $93
-	cp $03
+	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
 	jr nz, .obj_4
 	ld e, LOW(wObj3ScreenYPos)
 	ld l, LOW(wObj3Unk07)
@@ -728,8 +842,8 @@ Func_616d7: ; 616d7 (18:56d7)
 .obj_4
 	ld hl, wObj4
 	ld a, [hl]
-	and $93
-	cp $03
+	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
 	jr nz, .obj_5
 	ld e, LOW(wObj4ScreenYPos)
 	ld l, LOW(wObj4Unk07)
@@ -738,8 +852,8 @@ Func_616d7: ; 616d7 (18:56d7)
 .obj_5
 	ld hl, wObj5
 	ld a, [hl]
-	and $93
-	cp $03
+	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
 	jr nz, .obj_6
 	ld e, LOW(wObj5ScreenYPos)
 	ld l, LOW(wObj5Unk07)
@@ -748,8 +862,8 @@ Func_616d7: ; 616d7 (18:56d7)
 .obj_6
 	ld hl, wObj6
 	ld a, [hl]
-	and $93
-	cp $03
+	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
 	jr nz, .obj_7
 	ld e, LOW(wObj6ScreenYPos)
 	ld l, LOW(wObj6Unk07)
@@ -758,8 +872,8 @@ Func_616d7: ; 616d7 (18:56d7)
 .obj_7
 	ld hl, wObj7
 	ld a, [hl]
-	and $93
-	cp $03
+	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
 	jr nz, .obj_8
 	ld e, LOW(wObj7ScreenYPos)
 	ld l, LOW(wObj7Unk07)
@@ -768,8 +882,8 @@ Func_616d7: ; 616d7 (18:56d7)
 .obj_8
 	ld hl, wObj8
 	ld a, [hl]
-	and $93
-	cp $03
+	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
 	jr nz, .done
 	ld e, LOW(wObj8ScreenYPos)
 	ld l, LOW(wObj8Unk07)
@@ -851,8 +965,8 @@ Func_6189d: ; 6189d (18:589d)
 	ld [hli], a ; OBJ_UNK_16
 
 	ld l, OBJ_FLAGS
-	res OBJFLAG_UNK02_F, [hl]
-	set OBJFLAG_UNK03_F, [hl]
+	res OBJFLAG_UNK2_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	ld a, $81
 	ld [wCurObjUnk1c], a
 
@@ -1019,7 +1133,7 @@ Func_618e2: ; 618e2 (18:58e2)
 .obj_1
 	ld a, [wObj1Flags]
 	and $1f
-	cp OBJFLAG_UNK00 | OBJFLAG_UNK01
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
 	jr nz, .obj_2
 	ld a, [wObj1ScreenYPos]
 	add $2a
@@ -1073,14 +1187,14 @@ Func_618e2: ; 618e2 (18:58e2)
 	ldh a, [hffa1]
 	ld [hl], a
 	ld l, LOW(wObj1Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 
 .obj_2
 	ld a, [wObj2Flags]
 	and $1f
-	cp OBJFLAG_UNK00 | OBJFLAG_UNK01
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
 	jr nz, .obj_3
 	ld a, [wObj2ScreenYPos]
 	add $2a
@@ -1134,14 +1248,14 @@ Func_618e2: ; 618e2 (18:58e2)
 	ldh a, [hffa1]
 	ld [hl], a
 	ld l, LOW(wObj2Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 
 .obj_3
 	ld a, [wObj3Flags]
 	and $1f
-	cp OBJFLAG_UNK00 | OBJFLAG_UNK01
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
 	jr nz, .obj_4
 	ld a, [wObj3ScreenYPos]
 	add $2a
@@ -1195,14 +1309,14 @@ Func_618e2: ; 618e2 (18:58e2)
 	ldh a, [hffa1]
 	ld [hl], a
 	ld l, LOW(wObj3Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 
 .obj_4
 	ld a, [wObj4Flags]
 	and $1f
-	cp OBJFLAG_UNK00 | OBJFLAG_UNK01
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
 	jr nz, .obj_5
 	ld a, [wObj4ScreenYPos]
 	add $2a
@@ -1256,14 +1370,14 @@ Func_618e2: ; 618e2 (18:58e2)
 	ldh a, [hffa1]
 	ld [hl], a
 	ld l, LOW(wObj4Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 
 .obj_5
 	ld a, [wObj5Flags]
 	and $1f
-	cp OBJFLAG_UNK00 | OBJFLAG_UNK01
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
 	jr nz, .obj_6
 	ld a, [wObj5ScreenYPos]
 	add $2a
@@ -1317,14 +1431,14 @@ Func_618e2: ; 618e2 (18:58e2)
 	ldh a, [hffa1]
 	ld [hl], a
 	ld l, LOW(wObj5Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 
 .obj_6
 	ld a, [wObj6Flags]
 	and $1f
-	cp OBJFLAG_UNK00 | OBJFLAG_UNK01
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
 	jr nz, .obj_7
 	ld a, [wObj6ScreenYPos]
 	add $2a
@@ -1378,14 +1492,14 @@ Func_618e2: ; 618e2 (18:58e2)
 	ldh a, [hffa1]
 	ld [hl], a
 	ld l, LOW(wObj6Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 
 .obj_7
 	ld a, [wObj7Flags]
 	and $1f
-	cp OBJFLAG_UNK00 | OBJFLAG_UNK01
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
 	jr nz, .obj_8
 	ld a, [wObj7ScreenYPos]
 	add $2a
@@ -1439,14 +1553,14 @@ Func_618e2: ; 618e2 (18:58e2)
 	ldh a, [hffa1]
 	ld [hl], a
 	ld l, LOW(wObj7Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 
 .obj_8
 	ld a, [wObj8Flags]
 	and $1f
-	cp OBJFLAG_UNK00 | OBJFLAG_UNK01
+	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
 	jr nz, .done
 	ld a, [wObj8ScreenYPos]
 	add $2a
@@ -1500,7 +1614,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	ldh a, [hffa1]
 	ld [hl], a
 	ld l, LOW(wObj8Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 
@@ -1518,7 +1632,7 @@ Func_61d28: ; 61d28 (18:5d28)
 	ldh a, [hffa1]
 	ld [hl], a
 	ld l, LOW(wObj1Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61d41
@@ -1532,7 +1646,7 @@ Func_61d41: ; 61d41 (18:5d41)
 	ldh a, [hffa1]
 	ld [hl], a
 	ld l, LOW(wObj2Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61d5a
@@ -1546,7 +1660,7 @@ Func_61d5a: ; 61d5a (18:5d5a)
 	ldh a, [hffa1]
 	ld [hl], a
 	ld l, LOW(wObj3Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61d73
@@ -1560,7 +1674,7 @@ Func_61d73: ; 61d73 (18:5d73)
 	ldh a, [hffa1]
 	ld [hl], a
 	ld l, LOW(wObj4Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61d8c
@@ -1574,7 +1688,7 @@ Func_61d8c: ; 61d8c (18:5d8c)
 	ldh a, [hffa1]
 	ld [hl], a
 	ld l, LOW(wObj5Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61da5
@@ -1588,7 +1702,7 @@ Func_61da5: ; 61da5 (18:5da5)
 	ldh a, [hffa1]
 	ld [hl], a
 	ld l, LOW(wObj6Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61dbe
@@ -1602,7 +1716,7 @@ Func_61dbe: ; 61dbe (18:5dbe)
 	ldh a, [hffa1]
 	ld [hl], a
 	ld l, LOW(wObj7Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61dd7
@@ -1616,7 +1730,7 @@ Func_61dd7: ; 61dd7 (18:5dd7)
 	ldh a, [hffa1]
 	ld [hl], a
 	ld l, LOW(wObj8Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61df0
@@ -1638,7 +1752,7 @@ Func_61df0: ; 61df0 (18:5df0)
 	ldh a, [hffa3]
 	ld [hl], a
 	ld l, LOW(wObj1Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61e14
@@ -1660,7 +1774,7 @@ Func_61e14: ; 61e14 (18:5e14)
 	ldh a, [hffa3]
 	ld [hl], a
 	ld l, LOW(wObj2Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61e38
@@ -1682,7 +1796,7 @@ Func_61e38: ; 61e38 (18:5e38)
 	ldh a, [hffa3]
 	ld [hl], a
 	ld l, LOW(wObj3Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61e5c
@@ -1704,7 +1818,7 @@ Func_61e5c: ; 61e5c (18:5e5c)
 	ldh a, [hffa3]
 	ld [hl], a
 	ld l, LOW(wObj4Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61e80
@@ -1726,7 +1840,7 @@ Func_61e80: ; 61e80 (18:5e80)
 	ldh a, [hffa3]
 	ld [hl], a
 	ld l, LOW(wObj5Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61ea4
@@ -1748,7 +1862,7 @@ Func_61ea4: ; 61ea4 (18:5ea4)
 	ldh a, [hffa3]
 	ld [hl], a
 	ld l, LOW(wObj6Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61ec8
@@ -1770,7 +1884,7 @@ Func_61ec8: ; 61ec8 (18:5ec8)
 	ldh a, [hffa3]
 	ld [hl], a
 	ld l, LOW(wObj7Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61eec
@@ -1792,7 +1906,7 @@ Func_61eec: ; 61eec (18:5eec)
 	ldh a, [hffa3]
 	ld [hl], a
 	ld l, LOW(wObj8Flags)
-	set OBJFLAG_UNK03_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
 	ret
 ; 0x61f10
@@ -1847,8 +1961,8 @@ Func_61f4a: ; 61f4a (18:5f4a)
 Func_629a6: ; 629a6 (18:69a6)
 	ld hl, wCurObjUnk19
 	ld a, [hl]
-	ld b, $42
-	add $a0
+	ld b, HIGH(Data_602a0)
+	add LOW(Data_602a0)
 	ld c, a
 	ld a, [wCurObjInteractionType]
 	rla
@@ -1887,8 +2001,8 @@ Func_629d0: ; 629d0 (18:69d0)
 .asm_629db
 	ld hl, wCurObjUnk19
 	ld a, [hl]
-	ld b, $40
-	add $00
+	ld b, HIGH(Data_60000)
+	add LOW(Data_60000)
 	ld c, a
 	ld a, [wCurObjInteractionType]
 	rla
@@ -1967,7 +2081,80 @@ Func_629d0: ; 629d0 (18:69d0)
 	jp Func_62e31
 ; 0x62a5b
 
-	INCROM $62a5b, $62d57
+; handle gravity for falling objects
+_ApplyObjectGravity: ; 62a5b (18:6a5b)
+	ld hl, wCurObjUnk19
+	ld a, [hl]
+	ld b, HIGH(Data_60280)
+	add LOW(Data_60280)
+	ld c, a
+	ld a, [wCurObjInteractionType]
+	rla
+	jr nc, .not_heavy
+	ld a, c
+	add Data_60290 - Data_60280
+	ld c, a
+.not_heavy
+	ld a, [bc]
+	cp $80
+	jr nz, .asm_62a77
+	dec c ; use last entry
+	ld a, [bc]
+	jr .asm_62a78
+.asm_62a77
+	inc [hl]
+.asm_62a78
+	ldh [hffa0], a
+	ld l, OBJ_Y_POS
+	ld c, [hl]
+	add c
+	ld [hli], a
+	jr nc, .asm_62a82
+	inc [hl]
+.asm_62a82
+	ld hl, wCurObjYPos
+	ld a, [hli]
+	ldh [hYPosLo], a
+	ld a, [hli]
+	ldh [hYPosHi], a
+	ld a, [hli]
+	ldh [hXPosLo], a
+	ld a, [hl]
+	ldh [hXPosHi], a
+	xor a
+	ld [wc18c], a
+	call Func_352b
+	and a
+	jr nz, .asm_62aaa
+	ld a, [wc0dd]
+	and a
+	jp z, Func_312f.pop_af
+	ld a, OBJ_ACTION_0A
+	ld [wCurObjAction], a
+	jp Func_312f.pop_af
+.asm_62aaa
+	ld hl, wCurObjYPos
+	ldh a, [hYPosLo]
+	ld [hli], a
+	ldh a, [hYPosHi]
+	ld [hl], a
+	ld l, OBJ_ACTION
+	ld a, [wc18c]
+	and a
+	jr nz, .asm_62ac1
+	ld a, OBJ_ACTION_01
+	ld [hl], a
+	jp Func_312f.pop_af
+.asm_62ac1
+	and $0f
+	cp $01
+	ld a, $02
+	ld [wCurObjUnk18], a
+	jp z, Func_62d57
+	jp Func_62e31
+; 0x62ad0
+
+	INCROM $62ad0, $62d57
 
 ; hl = OBJ_ACTION
 Func_62d57: ; 62d57 (18:6d57)
@@ -2124,7 +2311,7 @@ Func_6307b: ; 6307b (18:707b)
 	jr nc, .asm_63106
 .asm_630f6
 	ld hl, wCurObjFlags
-	set OBJFLAG_UNK01_F, [hl]
+	set OBJFLAG_UNK1_F, [hl]
 	jr .asm_6310b
 .asm_630fd
 	ld a, [wCurObjAction]
@@ -2133,7 +2320,7 @@ Func_6307b: ; 6307b (18:707b)
 	jr z, .asm_6310b
 .asm_63106
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK01_F, [hl]
+	res OBJFLAG_UNK1_F, [hl]
 .asm_6310b
 	pop hl
 	pop de
@@ -2275,4 +2462,121 @@ Func_631e8: ; 631e8 (18:71e8)
 	ret
 ; 0x63209
 
-	INCROM $63209, $63936
+	INCROM $63209, $632ac
+
+Func_632ac: ; 632ac (18:72ac)
+	ld hl, wCurObjUnk01
+	ld a, [hli]
+	ld c, a
+	ld b, [hl]
+	ld e, $00
+	ld d, $41
+	ld h, $d0
+	ld l, $00
+	ld a, [hli]
+	and d
+	cp d
+	jr nz, .asm_632c8
+	ld a, [hli]
+	cp c
+	jr nz, .asm_632c8
+	ld a, [hl]
+	cp b
+	jr nz, .asm_632c8
+	inc e
+.asm_632c8
+	ld l, $20
+	ld a, [hli]
+	and d
+	cp d
+	jr nz, .asm_632d8
+	ld a, [hli]
+	cp c
+	jr nz, .asm_632d8
+	ld a, [hl]
+	cp b
+	jr nz, .asm_632d8
+	inc e
+.asm_632d8
+	ld l, $40
+	ld a, [hli]
+	and d
+	cp d
+	jr nz, .asm_632e8
+	ld a, [hli]
+	cp c
+	jr nz, .asm_632e8
+	ld a, [hl]
+	cp b
+	jr nz, .asm_632e8
+	inc e
+.asm_632e8
+	ld l, $60
+	ld a, [hli]
+	and d
+	cp d
+	jr nz, .asm_632f8
+	ld a, [hli]
+	cp c
+	jr nz, .asm_632f8
+	ld a, [hl]
+	cp b
+	jr nz, .asm_632f8
+	inc e
+.asm_632f8
+	ld l, $80
+	ld a, [hli]
+	and d
+	cp d
+	jr nz, .asm_63308
+	ld a, [hli]
+	cp c
+	jr nz, .asm_63308
+	ld a, [hl]
+	cp b
+	jr nz, .asm_63308
+	inc e
+.asm_63308
+	ld l, $a0
+	ld a, [hli]
+	and d
+	cp d
+	jr nz, .asm_63318
+	ld a, [hli]
+	cp c
+	jr nz, .asm_63318
+	ld a, [hl]
+	cp b
+	jr nz, .asm_63318
+	inc e
+.asm_63318
+	ld l, $c0
+	ld a, [hli]
+	and d
+	cp d
+	jr nz, .asm_63328
+	ld a, [hli]
+	cp c
+	jr nz, .asm_63328
+	ld a, [hl]
+	cp b
+	jr nz, .asm_63328
+	inc e
+.asm_63328
+	ld l, $e0
+	ld a, [hli]
+	and d
+	cp d
+	jr nz, .asm_63338
+	ld a, [hli]
+	cp c
+	jr nz, .asm_63338
+	ld a, [hl]
+	cp b
+	jr nz, .asm_63338
+	inc e
+.asm_63338
+	ret
+; 0x63339
+
+	INCROM $63339, $63936

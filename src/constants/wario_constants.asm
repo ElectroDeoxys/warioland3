@@ -65,7 +65,7 @@ MAX_PICKED_UP_FRAME_COUNTER EQU 32
 	const TRANSFORMATION_BLIND               ; $13
 	const TRANSFORMATION_UNK_14              ; $14
 	const TRANSFORMATION_MAGIC               ; $15
-	const TRANSFORMATION_BALL              ; $16
+	const TRANSFORMATION_BALL                ; $16
 	const TRANSFORMATION_UNK_17              ; $17
 	const TRANSFORMATION_UNK_18              ; $18
 	const TRANSFORMATION_UNK_19              ; $19
