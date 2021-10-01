@@ -41,10 +41,11 @@ obj_struct: MACRO
 \1Unk0c::           db
 \1ScreenYPos::      db
 \1ScreenXPos::      db
-\1Unk0f::           db
+\1Frame::           db
 \1Unk10::           dw
-\1Unk12::           dw
-\1Unk14::           dw
+\1FramesetPtr::     dw
+\1FrameDuration::   db
+\1FramesetOffset::  db
 \1Unk16::           db
 \1Unk17::           db
 \1Unk18::           db

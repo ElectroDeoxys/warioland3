@@ -154,7 +154,7 @@ Func_40165: ; 40165 (10:4165)
 	ld [hld], a
 
 	ld de, $4234
-	call Func_30f0
+	call SetObjectFramesetPtr
 
 	ld l, OBJ_UNK_0C
 	ld a, $05
@@ -255,7 +255,7 @@ Func_40182: ; 40182 (10:4182)
 	ld [hld], a
 	ld de, $4287
 .asm_4020c
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ld a, $20
 	ld [hli], a ; OBJ_UNK_16
 	ret
@@ -294,7 +294,7 @@ Func_4021b: ; 4021b (10:421b)
 	ld [hld], a ; OBJ_UNK_0B
 
 	ld de, $41d2
-	jp Func_30f0
+	jp SetObjectFramesetPtr
 
 .on_left
 	set 7, [hl] ; OBJ_UNK_1A
@@ -309,7 +309,7 @@ Func_4021b: ; 4021b (10:421b)
 	ld [hld], a ; OBJ_UNK_0B
 
 	ld de, $41db
-	jp Func_30f0
+	jp SetObjectFramesetPtr
 ; 0x4025d
 
 Func_4025d: ; 4025d (10:425d)
@@ -322,13 +322,13 @@ Func_4025d: ; 4025d (10:425d)
 	xor a
 	ld [hld], a ; OBJ_UNK_19
 	ld de, $41d2
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ret
 .asm_40270
 	xor a
 	ld [hld], a ; OBJ_UNK_19
 	ld de, $41db
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ret
 ; 0x40279
 
@@ -359,7 +359,7 @@ Func_40279: ; 40279 (10:4279)
 	ld [hld], a
 	ld de, $4213
 .asm_402a3
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ld a, $20
 	ld [hli], a
 	ret
@@ -393,7 +393,7 @@ Func_402aa: ; 402aa (10:42aa)
 .asm_402d1
 	ld de, $41db
 .asm_402d4
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ret
 ; 0x402d8
 
@@ -427,7 +427,7 @@ Func_402d8: ; 402d8 (10:42d8)
 	ld [hld], a
 	ld de, $41db
 .asm_40308
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ld a, $0a
 	ld [hli], a
 	ret
@@ -504,7 +504,7 @@ Func_4030f: ; 4030f (10:430f)
 	ldh [hXPosHi], a
 	call Func_3513
 	and a
-	jp z, MoveCurObjLeft
+	jp z, MoveObjectLeft
 .asm_40388
 	ld a, OBJ_ACTION_13
 	ld [wCurObjAction], a
@@ -534,7 +534,7 @@ Func_4030f: ; 4030f (10:430f)
 	ldh [hXPosHi], a
 	call Func_3513
 	and a
-	jp z, MoveCurObjRight
+	jp z, MoveObjectRight
 .asm_403bc
 	ld a, OBJ_ACTION_13
 	ld [wCurObjAction], a
@@ -570,7 +570,7 @@ Func_406c4: ; 406c4 (10:46c4)
 	res 5, [hl]
 
 	ld de, $4319
-	call Func_30f0
+	call SetObjectFramesetPtr
 	inc l
 	ld a, [wCurObjYPos + 0]
 	ld [hli], a ; OBJ_UNK_17
@@ -614,7 +614,7 @@ Func_406f0: ; 406f0 (10:46f0)
 	call Func_1197
 	jp Func_30e6
 .asm_40721
-	ld l, OBJ_UNK_14
+	ld l, OBJ_FRAME_DURATION
 	ld a, [hl]
 	and a
 	jr z, .asm_40728
@@ -633,7 +633,7 @@ Func_4072b: ; 4072b (10:472b)
 
 Func_40734: ; 40734 (10:4734)
 	ld de, $4319
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ld l, OBJ_FLAGS
 	res OBJFLAG_UNK3_F, [hl]
 	xor a
@@ -671,7 +671,7 @@ Func_40743: ; 40743 (10:4743)
 	ld [hl], a ; OBJ_ACTION
 
 	ld de, $4348
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ld a, $20
 	ld [hli], a ; OBJ_UNK_16
 	ret
@@ -693,7 +693,7 @@ Func_40743: ; 40743 (10:4743)
 	ld [hld], a
 	res 7, [hl] ; OBJ_UNK_16
 	ld de, $4336
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ret
 .asm_4079a
 	ld l, OBJ_FLAGS
@@ -702,14 +702,14 @@ Func_40743: ; 40743 (10:4743)
 	ld a, OBJ_ACTION_2E
 	ld [wCurObjAction], a
 	ld de, $4343
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ret
 
 .asm_407ab
 	ld a, OBJ_ACTION_34
 	ld [hl], a ; OBJ_ACTION
 	ld de, $4351
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ld a, $10
 	ld [hli], a ; OBJ_UNK_16
 	ret
@@ -731,7 +731,7 @@ Func_40743: ; 40743 (10:4743)
 	xor a
 	ld [hl], a ; OBJ_UNK_19
 	ld de, $4348
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ld a, $30
 	ld [hli], a ; OBJ_UNK_16
 	ret
@@ -823,7 +823,7 @@ Func_40a41: ; 40a41 (10:4a41)
 	or $02
 	ld [hld], a
 	ld de, $42b7
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ld a, $40
 	ld [hli], a ; OBJ_UNK_16
 	ret
@@ -838,7 +838,7 @@ Func_40b8c: ; 40b8c (10:4b8c)
 	ld a, $14
 	ld [hld], a
 	ld de, $4369
-	call Func_30f0
+	call SetObjectFramesetPtr
 	jr Func_40bb8
 
 Func_40b9d: ; 40b9d (10:4b9d)
@@ -861,7 +861,7 @@ Func_40ba9: ; 40ba9 (10:4ba9)
 
 Func_40bb2: ; 40bb2 (10:4bb2)
 	ld de, $4360
-	call Func_30f0
+	call SetObjectFramesetPtr
 ;	fallthrough
 
 Func_40bb8: ; 40bb8 (10:4bb8)
@@ -896,7 +896,7 @@ Func_40ca1: ; 40ca1 (10:4ca1)
 	ld a, $c2
 	ld [hld], a
 	ld de, $437a
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ld a, $1e
 	ld [hli], a ; OBJ_UNK_16
 	ld a, [wGlobalCounter]
@@ -941,7 +941,7 @@ Func_40f7e: ; 40f7e (10:4f7e)
 	xor a
 	ld [hld], a ; OBJ_UNK_19
 	ld de, $43e1
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ret
 ; 0x40f96
 
@@ -1005,7 +1005,7 @@ Func_42432: ; 42432 (10:6432)
 	xor a
 	ld [hl], a
 	ld de, $4f0b
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
 	and HEAVY_OBJ
@@ -1040,7 +1040,7 @@ Func_42478: ; 42478 (10:6478)
 	ld bc, $4e1b
 	call Func_3416
 	ld de, $4f14
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ld a, $00
 	ld [hli], a
 	ld [wCurObjUnk19], a
@@ -1071,7 +1071,7 @@ Func_424b1: ; 424b1 (10:64b1)
 	ld bc, $4e06
 	call Func_3416
 	ld de, $4f14
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ld a, $00
 	ld [hli], a
 	ld [wCurObjUnk19], a
@@ -1090,7 +1090,7 @@ Func_42535: ; 42535 (10:6535)
 	or $02
 	ld [hld], a
 	ld de, $4f26
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ld a, $3c
 	ld [hli], a
 	ld l, OBJ_FLAGS
@@ -1107,7 +1107,7 @@ Func_42559: ; 42559 (10:6559)
 	or $03
 	ld [hld], a
 	ld de, $4f2b
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ld a, $28
 	ld [hli], a
 	ret
@@ -1166,7 +1166,7 @@ Func_429c4: ; 429c4 (10:69c4)
 	ld a, $ed
 	ld [hld], a
 	ld de, $461b
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ld a, $60
 	ld [hli], a
 	xor a
@@ -1195,7 +1195,7 @@ Func_42b7d: ; 42b7d (10:6b7d)
 	ld a, $cf
 	ld [hld], a
 	ld de, $4611
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ld a, $60
 	ld [hli], a
 	xor a
@@ -1263,7 +1263,7 @@ Func_43451: ; 43451 (10:7451)
 	ld a, $79
 	ld [hld], a
 	ld de, $4a7b
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ld a, $0a
 	ld [hli], a
 	ld l, OBJ_UNK_1A
@@ -1289,7 +1289,7 @@ Func_434ba: ; 434ba (10:74ba)
 	ld a, $e2
 	ld [hld], a
 	ld de, $4a78
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ld l, OBJ_UNK_1A
 	res 5, [hl]
 	ld l, OBJ_UNK_0C
@@ -1325,7 +1325,7 @@ Func_436ea: ; 436ea (10:76ea)
 	ld a, $1b
 	ld [hld], a
 	ld de, $4a9f
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ret
 ; 0x4370f
 
@@ -1344,7 +1344,7 @@ Func_437a5: ; 437a5 (10:77a5)
 ;	fallthrough
 
 Func_437a8: ; 437a8 (10:77a8)
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ld hl, wCurObjFlags
 	res OBJFLAG_UNK4_F, [hl]
 	set 3, [hl]
@@ -1399,7 +1399,7 @@ Func_437d7: ; 437d7 (10:77d7)
 	ld a, $02
 	ld [hl], a
 	ld de, $58ff
-	call Func_30f0
+	call SetObjectFramesetPtr
 	ld a, $3c
 	ld [hli], a
 	xor a

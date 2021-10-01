@@ -1,3 +1,5 @@
+NUM_OBJECTS EQU 8
+
 ; wObjects structs constants
 rsreset
 OBJ_FLAGS            rb ; $00
@@ -13,10 +15,11 @@ OBJ_UNK_0B           rb ; $0b
 OBJ_UNK_0C           rb ; $0c
 OBJ_SCREEN_Y_POS     rb ; $0d
 OBJ_SCREEN_X_POS     rb ; $0e
-OBJ_UNK_0F           rb ; $0f
+OBJ_FRAME            rb ; $0f
 OBJ_UNK_10           rw ; $10
-OBJ_UNK_12           rw ; $12
-OBJ_UNK_14           rw ; $14
+OBJ_FRAMESET_PTR     rw ; $12
+OBJ_FRAME_DURATION   rb ; $14
+OBJ_FRAMESET_OFFSET  rb ; $15
 OBJ_UNK_16           rb ; $16
 OBJ_UNK_17           rb ; $17
 OBJ_UNK_18           rb ; $18

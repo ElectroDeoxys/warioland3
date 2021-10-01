@@ -239,10 +239,10 @@ Func_640e5: ; 640e5 (19:40e5)
 	ld [de], a ; OBJ_UNK_0A
 
 	ld a, e
-	add OBJ_UNK_0F - OBJ_UNK_0A
+	add OBJ_FRAME - OBJ_UNK_0A
 	ld e, a
 	xor a
-	ld [de], a ; OBJ_UNK_0F
+	ld [de], a ; OBJ_FRAME
 	inc e
 	ld a, [hli] ; OBJ_UNK_10
 	ld [de], a
@@ -251,13 +251,13 @@ Func_640e5: ; 640e5 (19:40e5)
 	ld [de], a
 
 	ld a, e
-	add OBJ_UNK_14 - (OBJ_UNK_10 + 1)
+	add OBJ_FRAME_DURATION - (OBJ_UNK_10 + 1)
 	ld e, a
 	ld a, $7f
-	ld [de], a ; OBJ_UNK_14
+	ld [de], a ; OBJ_FRAME_DURATION
 
 	ld a, e
-	add OBJ_UNK_1A - OBJ_UNK_14
+	add OBJ_UNK_1A - OBJ_FRAME_DURATION
 	ld e, a
 	ld a, $21
 	ld [de], a ; OBJ_UNK_1A

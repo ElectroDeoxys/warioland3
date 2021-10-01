@@ -148,19 +148,19 @@ Func_611cb: ; 611cb (18:51cb)
 	ld a, [hli]
 	ld [wCurObjScreenXPos], a
 	ld a, [hli]
-	ld [wCurObjUnk0f], a
+	ld [wCurObjFrame], a
 	ld a, [hli]
 	ld [wCurObjUnk10 + 0], a
 	ld a, [hli]
 	ld [wCurObjUnk10 + 1], a
 	ld a, [hli]
-	ld [wCurObjUnk12 + 0], a
+	ld [wCurObjFramesetPtr + 0], a
 	ld a, [hli]
-	ld [wCurObjUnk12 + 1], a
+	ld [wCurObjFramesetPtr + 1], a
 	ld a, [hli]
-	ld [wCurObjUnk14 + 0], a
+	ld [wCurObjFrameDuration + 0], a
 	ld a, [hli]
-	ld [wCurObjUnk14 + 1], a
+	ld [wCurObjFrameDuration + 1], a
 	ld a, [hli]
 	ld [wCurObjUnk16], a
 	ld a, [hli]
@@ -185,7 +185,7 @@ Func_611cb: ; 611cb (18:51cb)
 
 	farcall $13, wCurObjUpdateFunction
 
-	call Func_312f
+	call UpdateObjectAnimation
 	call Func_6307b
 	ld hl, wCurObjScreenYPos
 	ld a, [wTempSCY]
@@ -238,19 +238,19 @@ Func_611cb: ; 611cb (18:51cb)
 	ld [hli], a
 	ld a, [wCurObjScreenXPos]
 	ld [hli], a
-	ld a, [wCurObjUnk0f]
+	ld a, [wCurObjFrame]
 	ld [hli], a
 	ld a, [wCurObjUnk10 + 0]
 	ld [hli], a
 	ld a, [wCurObjUnk10 + 1]
 	ld [hli], a
-	ld a, [wCurObjUnk12 + 0]
+	ld a, [wCurObjFramesetPtr + 0]
 	ld [hli], a
-	ld a, [wCurObjUnk12 + 1]
+	ld a, [wCurObjFramesetPtr + 1]
 	ld [hli], a
-	ld a, [wCurObjUnk14 + 0]
+	ld a, [wCurObjFrameDuration + 0]
 	ld [hli], a
-	ld a, [wCurObjUnk14 + 1]
+	ld a, [wCurObjFrameDuration + 1]
 	ld [hli], a
 	ld a, [wCurObjUnk16]
 	ld [hli], a
@@ -328,7 +328,7 @@ Func_61348: ; 61348 (18:5348)
 
 	ld a, [wIsFloorTransition]
 	and a
-	jr nz, .asm_613a2
+	jr nz, .floor_transition
 	call Func_618e2
 	ld hl, wObj1Flags
 	ld a, [hl]
@@ -364,7 +364,7 @@ Func_61348: ; 61348 (18:5348)
 	call c, Func_613dc
 	ret
 
-.asm_613a2
+.floor_transition
 	ld hl, wObj1Flags
 	ld a, [hl]
 	rra
@@ -434,19 +434,19 @@ Func_613dc: ; 613dc (18:53dc)
 	ld a, [hli]
 	ld [wCurObjScreenXPos], a
 	ld a, [hli]
-	ld [wCurObjUnk0f], a
+	ld [wCurObjFrame], a
 	ld a, [hli]
 	ld [wCurObjUnk10 + 0], a
 	ld a, [hli]
 	ld [wCurObjUnk10 + 1], a
 	ld a, [hli]
-	ld [wCurObjUnk12 + 0], a
+	ld [wCurObjFramesetPtr + 0], a
 	ld a, [hli]
-	ld [wCurObjUnk12 + 1], a
+	ld [wCurObjFramesetPtr + 1], a
 	ld a, [hli]
-	ld [wCurObjUnk14 + 0], a
+	ld [wCurObjFrameDuration + 0], a
 	ld a, [hli]
-	ld [wCurObjUnk14 + 1], a
+	ld [wCurObjFrameDuration + 1], a
 	ld a, [hli]
 	ld [wCurObjUnk16], a
 	ld a, [hli]
@@ -480,7 +480,7 @@ Func_613dc: ; 613dc (18:53dc)
 	ldh [hCallFuncPointer + 1], a
 	call hCallFunc
 
-	call Func_312f
+	call UpdateObjectAnimation
 	call Func_6307b
 	ld hl, wCurObjScreenYPos
 	ld a, [wTempSCY]
@@ -525,19 +525,19 @@ Func_613dc: ; 613dc (18:53dc)
 	ld [hli], a
 	ld a, [wCurObjScreenXPos]
 	ld [hli], a
-	ld a, [wCurObjUnk0f]
+	ld a, [wCurObjFrame]
 	ld [hli], a
 	ld a, [wCurObjUnk10 + 0]
 	ld [hli], a
 	ld a, [wCurObjUnk10 + 1]
 	ld [hli], a
-	ld a, [wCurObjUnk12 + 0]
+	ld a, [wCurObjFramesetPtr + 0]
 	ld [hli], a
-	ld a, [wCurObjUnk12 + 1]
+	ld a, [wCurObjFramesetPtr + 1]
 	ld [hli], a
-	ld a, [wCurObjUnk14 + 0]
+	ld a, [wCurObjFrameDuration + 0]
 	ld [hli], a
-	ld a, [wCurObjUnk14 + 1]
+	ld a, [wCurObjFrameDuration + 1]
 	ld [hli], a
 	ld a, [wCurObjUnk16]
 	ld [hli], a
@@ -595,19 +595,19 @@ Func_61513: ; 61513 (18:5513)
 	ld a, [hli]
 	ld [wCurObjScreenXPos], a
 	ld a, [hli]
-	ld [wCurObjUnk0f], a
+	ld [wCurObjFrame], a
 	ld a, [hli]
 	ld [wCurObjUnk10 + 0], a
 	ld a, [hli]
 	ld [wCurObjUnk10 + 1], a
 	ld a, [hli]
-	ld [wCurObjUnk12 + 0], a
+	ld [wCurObjFramesetPtr + 0], a
 	ld a, [hli]
-	ld [wCurObjUnk12 + 1], a
+	ld [wCurObjFramesetPtr + 1], a
 	ld a, [hli]
-	ld [wCurObjUnk14 + 0], a
+	ld [wCurObjFrameDuration + 0], a
 	ld a, [hli]
-	ld [wCurObjUnk14 + 1], a
+	ld [wCurObjFrameDuration + 1], a
 	ld a, [hli]
 	ld [wCurObjUnk16], a
 	ld a, [hli]
@@ -630,7 +630,7 @@ Func_61513: ; 61513 (18:5513)
 	ld [wCurObjUpdateFunction + 1], a
 	ld hl, wCurObjUnk1a
 	bit 5, [hl]
-	jr z, .asm_615b4
+	jr z, .skip_update_function
 
 	ld a, [wCurObjUnk07]
 	swap a
@@ -643,7 +643,7 @@ Func_61513: ; 61513 (18:5513)
 	ldh [hCallFuncPointer + 1], a
 	call hCallFunc
 
-.asm_615b4
+.skip_update_function
 	call Func_3104
 	call Func_6307b
 	ld hl, wCurObjScreenYPos
@@ -689,19 +689,19 @@ Func_61513: ; 61513 (18:5513)
 	ld [hli], a
 	ld a, [wCurObjScreenXPos]
 	ld [hli], a
-	ld a, [wCurObjUnk0f]
+	ld a, [wCurObjFrame]
 	ld [hli], a
 	ld a, [wCurObjUnk10 + 0]
 	ld [hli], a
 	ld a, [wCurObjUnk10 + 1]
 	ld [hli], a
-	ld a, [wCurObjUnk12 + 0]
+	ld a, [wCurObjFramesetPtr + 0]
 	ld [hli], a
-	ld a, [wCurObjUnk12 + 1]
+	ld a, [wCurObjFramesetPtr + 1]
 	ld [hli], a
-	ld a, [wCurObjUnk14 + 0]
+	ld a, [wCurObjFrameDuration + 0]
 	ld [hli], a
-	ld a, [wCurObjUnk14 + 1]
+	ld a, [wCurObjFrameDuration + 1]
 	ld [hli], a
 	ld a, [wCurObjUnk16]
 	ld [hli], a
@@ -955,12 +955,12 @@ Func_6189d: ; 6189d (18:589d)
 	ld a, $40
 	ld [hli], a
 	ld a, $c5
-	ld [hli], a ; OBJ_UNK_12
+	ld [hli], a ; OBJ_FRAMESET_PTR
 	ld a, $40
 	ld [hli], a
 	xor a
-	ld [hli], a ; OBJ_UNK_14
-	ld [hli], a
+	ld [hli], a ; OBJ_FRAME_DURATION
+	ld [hli], a ; OBJ_FRAMESET_OFFSET
 	ld a, $21
 	ld [hli], a ; OBJ_UNK_16
 
@@ -980,43 +980,43 @@ Func_6189d: ; 6189d (18:589d)
 ; 0x618e2
 
 Func_618e2: ; 618e2 (18:58e2)
-	ld hl, wObj1
-	ld e, %101
+	ld hl, wObj1Flags
+	ld e, OBJFLAG_UNK0 | OBJFLAG_UNK2
 	ld a, [hl]
 	and e
 	cp e
 	jr z, .asm_6191c
-	ld l, LOW(wObj2)
+	ld l, LOW(wObj2Flags)
 	ld a, [hl]
 	and e
 	cp e
 	jr z, .asm_6191c
-	ld l, LOW(wObj3)
+	ld l, LOW(wObj3Flags)
 	ld a, [hl]
 	and e
 	cp e
 	jr z, .asm_6191c
-	ld l, LOW(wObj4)
+	ld l, LOW(wObj4Flags)
 	ld a, [hl]
 	and e
 	cp e
 	jr z, .asm_6191c
-	ld l, LOW(wObj5)
+	ld l, LOW(wObj5Flags)
 	ld a, [hl]
 	and e
 	cp e
 	jr z, .asm_6191c
-	ld l, LOW(wObj6)
+	ld l, LOW(wObj6Flags)
 	ld a, [hl]
 	and e
 	cp e
 	jr z, .asm_6191c
-	ld l, LOW(wObj7)
+	ld l, LOW(wObj7Flags)
 	ld a, [hl]
 	and e
 	cp e
 	jr z, .asm_6191c
-	ld l, LOW(wObj8)
+	ld l, LOW(wObj8Flags)
 	ld a, [hl]
 	and e
 	cp e
@@ -1025,7 +1025,7 @@ Func_618e2: ; 618e2 (18:58e2)
 .asm_6191c
 	push hl
 	ld a, l
-	add OBJ_INTERACTION_TYPE
+	add OBJ_INTERACTION_TYPE - OBJ_FLAGS
 	ld l, a
 	ld a, [hli] ; OBJ_INTERACTION_TYPE
 	ldh [hffa0], a
@@ -1054,7 +1054,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	add e
 	ld e, a
 	ld a, l
-	add OBJ_ACTION - OBJ_UNK_0F
+	add OBJ_ACTION - (OBJ_SCREEN_X_POS + 1)
 	ld l, a
 	ld a, [hl] ; OBJ_ACTION
 	cp OBJ_ACTION_4C
@@ -1071,7 +1071,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	jr c, .asm_61965
 	ld a, $28
 	ld [hli], a ; hffa1
-	ld a, $29
+	ld a, OBJ_ACTION_29
 	ld [hli], a ; hffa2
 	ld a, $09
 	ld [hli], a ; hffa3
@@ -1082,7 +1082,7 @@ Func_618e2: ; 618e2 (18:58e2)
 .asm_61965
 	ld a, $28
 	ld [hli], a ; hffa1
-	ld a, $08
+	ld a, OBJ_ACTION_08
 	ld [hli], a ; hffa2
 	ld a, $28
 	ld [hli], a ; hffa3
@@ -1095,7 +1095,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	jr c, .asm_61984
 	ld a, $29
 	ld [hli], a ; ; hffa1
-	ld a, $28
+	ld a, OBJ_ACTION_28
 	ld [hli], a ; ; hffa2
 	ld a, $08
 	ld [hli], a ; ; hffa3
@@ -1106,7 +1106,7 @@ Func_618e2: ; 618e2 (18:58e2)
 .asm_61984
 	ld a, $29
 	ld [hli], a ; hffa1
-	ld a, $09
+	ld a, OBJ_ACTION_09
 	ld [hli], a ; hffa2
 	ld a, $29
 	ld [hli], a ; hffa3
@@ -1120,14 +1120,14 @@ Func_618e2: ; 618e2 (18:58e2)
 	jr c, .asm_619a0
 	ld a, $09
 	ld [hli], a ; hffa1
-	ld a, $08
+	ld a, OBJ_ACTION_08
 	ld [hli], a ; hffa2
 	jr .obj_1
 
 .asm_619a0
 	ld a, $08
 	ld [hli], a ; hffa1
-	ld a, $09
+	ld a, OBJ_ACTION_09
 	ld [hli], a ; hffa2
 
 .obj_1
@@ -1158,7 +1158,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	sub e
 	jr nc, .obj_2
 	pop hl
-	res 2, [hl]
+	res OBJFLAG_UNK2_F, [hl]
 	ld a, l
 	add OBJ_ACTION - OBJ_FLAGS
 	ld l, a
@@ -1170,22 +1170,22 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61d28
 	ld a, [wObj1InteractionType]
 	rla
-	jp c, Func_61df0
+	jp c, Func_61df0 ; heavy
 	ldh a, [hffa2]
-	ld [hl], a
+	ld [hl], a ; OBJ_ACTION
 	ld l, LOW(wObj1Action)
 	ld a, [hl]
 	and $fe
 	cp OBJ_ACTION_36
-	jr z, .asm_61a02
+	jr z, .reset_grab_1
 	cp OBJ_ACTION_48
-	jr nz, .asm_61a06
-.asm_61a02
+	jr nz, .skip_reset_grab_1
+.reset_grab_1
 	xor a
 	ld [wGrabState], a
-.asm_61a06
+.skip_reset_grab_1
 	ldh a, [hffa1]
-	ld [hl], a
+	ld [hl], a ; OBJ_ACTION
 	ld l, LOW(wObj1Flags)
 	set OBJFLAG_UNK3_F, [hl]
 	load_sfx SFX_016
@@ -1219,7 +1219,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	sub e
 	jr nc, .obj_3
 	pop hl
-	res 2, [hl]
+	res OBJFLAG_UNK2_F, [hl]
 	ld a, l
 	add OBJ_ACTION - OBJ_FLAGS
 	ld l, a
@@ -1231,9 +1231,9 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61d41
 	ld a, [wObj2InteractionType]
 	rla
-	jp c, Func_61e14
+	jp c, Func_61e14 ; heavy
 	ldh a, [hffa2]
-	ld [hl], a
+	ld [hl], a ; OBJ_ACTION
 	ld l, LOW(wObj2Action)
 	ld a, [hl]
 	and $fe
@@ -1280,7 +1280,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	sub e
 	jr nc, .obj_4
 	pop hl
-	res 2, [hl]
+	res OBJFLAG_UNK2_F, [hl]
 	ld a, l
 	add OBJ_ACTION - OBJ_FLAGS
 	ld l, a
@@ -1292,9 +1292,9 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61d5a
 	ld a, [wObj3InteractionType]
 	rla
-	jp c, Func_61e38
+	jp c, Func_61e38 ; heavy
 	ldh a, [hffa2]
-	ld [hl], a
+	ld [hl], a ; OBJ_ACTION
 	ld l, LOW(wObj3Action)
 	ld a, [hl]
 	and $fe
@@ -1341,7 +1341,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	sub e
 	jr nc, .obj_5
 	pop hl
-	res 2, [hl]
+	res OBJFLAG_UNK2_F, [hl]
 	ld a, l
 	add OBJ_ACTION - OBJ_FLAGS
 	ld l, a
@@ -1353,9 +1353,9 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61d73
 	ld a, [wObj4InteractionType]
 	rla
-	jp c, Func_61e5c
+	jp c, Func_61e5c ; heavy
 	ldh a, [hffa2]
-	ld [hl], a
+	ld [hl], a ; OBJ_ACTION
 	ld l, LOW(wObj4Action)
 	ld a, [hl]
 	and $fe
@@ -1402,7 +1402,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	sub e
 	jr nc, .obj_6
 	pop hl
-	res 2, [hl]
+	res OBJFLAG_UNK2_F, [hl]
 	ld a, l
 	add OBJ_ACTION - OBJ_FLAGS
 	ld l, a
@@ -1414,9 +1414,9 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61d8c
 	ld a, [wObj5InteractionType]
 	rla
-	jp c, Func_61e80
+	jp c, Func_61e80 ; heavy
 	ldh a, [hffa2]
-	ld [hl], a
+	ld [hl], a ; OBJ_ACTION
 	ld l, LOW(wObj5Action)
 	ld a, [hl]
 	and $fe
@@ -1463,7 +1463,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	sub e
 	jr nc, .obj_7
 	pop hl
-	res 2, [hl]
+	res OBJFLAG_UNK2_F, [hl]
 	ld a, l
 	add OBJ_ACTION - OBJ_FLAGS
 	ld l, a
@@ -1475,9 +1475,9 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61da5
 	ld a, [wObj6InteractionType]
 	rla
-	jp c, Func_61ea4
+	jp c, Func_61ea4 ; heavy
 	ldh a, [hffa2]
-	ld [hl], a
+	ld [hl], a ; OBJ_ACTION
 	ld l, LOW(wObj6Action)
 	ld a, [hl]
 	and $fe
@@ -1524,7 +1524,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	sub e
 	jr nc, .obj_8
 	pop hl
-	res 2, [hl]
+	res OBJFLAG_UNK2_F, [hl]
 	ld a, l
 	add OBJ_ACTION - OBJ_FLAGS
 	ld l, a
@@ -1536,9 +1536,9 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61dbe
 	ld a, [wObj7InteractionType]
 	rla
-	jp c, Func_61ec8
+	jp c, Func_61ec8 ; heavy
 	ldh a, [hffa2]
-	ld [hl], a
+	ld [hl], a ; OBJ_ACTION
 	ld l, LOW(wObj7Action)
 	ld a, [hl]
 	and $fe
@@ -1585,7 +1585,7 @@ Func_618e2: ; 618e2 (18:58e2)
 	sub e
 	jr nc, .done
 	pop hl
-	res 2, [hl]
+	res OBJFLAG_UNK2_F, [hl]
 	ld a, l
 	add OBJ_ACTION - OBJ_FLAGS
 	ld l, a
@@ -1597,9 +1597,9 @@ Func_618e2: ; 618e2 (18:58e2)
 	jp z, Func_61dd7
 	ld a, [wObj8InteractionType]
 	rla
-	jp c, Func_61eec
+	jp c, Func_61eec ; heavy
 	ldh a, [hffa2]
-	ld [hl], a
+	ld [hl], a ; OBJ_ACTION
 	ld l, LOW(wObj8Action)
 	ld a, [hl]
 	and $fe
@@ -1988,11 +1988,11 @@ Func_629a6: ; 629a6 (18:69a6)
 	jr c, .asm_629cd
 	dec [hl]
 .asm_629cd
-	jp Func_312f.pop_af
+	jp Func_316b
 ; 0x629d0
 
 Func_629d0: ; 629d0 (18:69d0)
-	ld hl, wCurObjUnk14
+	ld hl, wCurObjFrameDuration
 	ld a, [hl]
 	cp $03
 	jr c, .asm_629db
@@ -2054,10 +2054,10 @@ Func_629d0: ; 629d0 (18:69d0)
 	jr nz, .asm_62a35
 	ld a, [wc0dd]
 	and a
-	jp z, Func_312f.pop_af
+	jp z, Func_316b
 	ld a, OBJ_ACTION_0A
 	ld [wCurObjAction], a
-	jp Func_312f.pop_af
+	jp Func_316b
 
 .asm_62a35
 	ld hl, wCurObjYPos
@@ -2071,7 +2071,7 @@ Func_629d0: ; 629d0 (18:69d0)
 	jr nz, .asm_62a4c
 	ld a, OBJ_ACTION_13
 	ld [hl], a
-	jp Func_312f.pop_af
+	jp Func_316b
 .asm_62a4c
 	and $0f
 	cp $01
@@ -2128,10 +2128,10 @@ _ApplyObjectGravity: ; 62a5b (18:6a5b)
 	jr nz, .asm_62aaa
 	ld a, [wc0dd]
 	and a
-	jp z, Func_312f.pop_af
+	jp z, Func_316b
 	ld a, OBJ_ACTION_0A
 	ld [wCurObjAction], a
-	jp Func_312f.pop_af
+	jp Func_316b
 .asm_62aaa
 	ld hl, wCurObjYPos
 	ldh a, [hYPosLo]
@@ -2144,7 +2144,7 @@ _ApplyObjectGravity: ; 62a5b (18:6a5b)
 	jr nz, .asm_62ac1
 	ld a, OBJ_ACTION_01
 	ld [hl], a
-	jp Func_312f.pop_af
+	jp Func_316b
 .asm_62ac1
 	and $0f
 	cp $01
@@ -2167,19 +2167,19 @@ Func_62d57: ; 62d57 (18:6d57)
 	jr c, .asm_62d77
 	ld a, OBJ_ACTION_24
 	ld [hl], a
-	jp Func_312f.pop_af
+	jp Func_316b
 .asm_62d6b
 	ld a, OBJ_ACTION_16
 	ld [hl], a
-	jp Func_312f.pop_af
+	jp Func_316b
 .asm_62d71
 	ld a, OBJ_ACTION_20
 	ld [hl], a
-	jp Func_312f.pop_af
+	jp Func_316b
 .asm_62d77
 	ld a, OBJ_ACTION_22
 	ld [hl], a
-	jp Func_312f.pop_af
+	jp Func_316b
 ; 0x62d7d
 
 	INCROM $62d7d, $62e31
@@ -2195,19 +2195,19 @@ Func_62e31: ; 62e31 (18:6e31)
 	jr c, .asm_62e51
 	ld a, OBJ_ACTION_25
 	ld [hl], a
-	jp Func_312f.pop_af
+	jp Func_316b
 .asm_62e45
 	ld a, OBJ_ACTION_17
 	ld [hl], a
-	jp Func_312f.pop_af
+	jp Func_316b
 .asm_62e4b
 	ld a, OBJ_ACTION_21
 	ld [hl], a
-	jp Func_312f.pop_af
+	jp Func_316b
 .asm_62e51
 	ld a, OBJ_ACTION_23
 	ld [hl], a
-	jp Func_312f.pop_af
+	jp Func_316b
 ; 0x62e57
 
 	INCROM $62e57, $6307b

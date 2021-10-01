@@ -76,7 +76,7 @@ ROMX $18
 ROMX $19
 	"Bank 19"
 ROMX $1a
-	"Bank 1A"
+	"Object Framesets"
 ROMX $20
 	"Bank 20"
 ROMX $21

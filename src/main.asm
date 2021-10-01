@@ -149,9 +149,9 @@ SECTION "Bank 19", ROMX
 INCLUDE "engine/bank19.asm"
 
 
-SECTION "Bank 1A", ROMX
+SECTION "Object Framesets", ROMX
 
-	INCROM $68000, $6a150
+INCLUDE "engine/bank1a.asm"
 
 
 SECTION "Bank 20", ROMX

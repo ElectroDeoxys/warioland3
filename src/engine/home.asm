@@ -4552,7 +4552,7 @@ Func_3076: ; 3076 (0:3076)
 
 ; moves current object right
 ; by 1 every 2 frames
-MoveCurObjRight: ; 30b8 (0:30b8)
+MoveObjectRight: ; 30b8 (0:30b8)
 	ld a, [wGlobalCounter]
 	rra
 	ret c
@@ -4566,7 +4566,7 @@ MoveCurObjRight: ; 30b8 (0:30b8)
 
 ; moves current object left
 ; by 1 every 2 frames
-MoveCurObjLeft: ; 30c5 (0:30c5)
+MoveObjectLeft: ; 30c5 (0:30c5)
 	ld a, [wGlobalCounter]
 	rra
 	ret nc
@@ -4592,37 +4592,37 @@ Func_30e6: ; 30e6 (0:30e6)
 ; 0x30f0
 
 ; input:
-; - de = ???
-Func_30f0: ; 30f0 (0:30f0)
-	ld hl, wCurObjUnk12
+; - de = frameset pointer
+SetObjectFramesetPtr: ; 30f0 (0:30f0)
+	ld hl, wCurObjFramesetPtr
 	ld a, e
-	ld [hli], a ; OBJ_UNK_12
+	ld [hli], a ; OBJ_FRAMESET_PTR
 	ld a, d
 	ld [hli], a
 	xor a
-	ld [hli], a ; OBJ_UNK_14
-	ld [hli], a
+	ld [hli], a ; OBJ_FRAME_DURATION
+	ld [hli], a ; OBJ_FRAMESET_OFFSET
 	ret
 ; 0x30fb
 
 	INCROM $30fb, $3104
 
 Func_3104: ; 3104 (0:3104)
-	ld hl, wCurObjUnk14
+	ld hl, wCurObjFrameDuration
 	ld a, [hld]
-	sub $01
+	sub 1
 	ret nc
 	ld a, [wROMBank]
 	push af
-	ld a, $1a
+	ld a, BANK("Object Framesets")
 	bankswitch
 	dec l
-	ld a, [hli]
+	ld a, [hli] ; OBJ_FRAMESET_PTR
 	ld e, a
 	ld a, [hli]
 	ld d, a
 	inc l
-	ld a, [hl]
+	ld a, [hl] ; OBJ_FRAMESET_OFFSET
 	add e
 	ld c, a
 	ld a, d
@@ -4631,28 +4631,29 @@ Func_3104: ; 3104 (0:3104)
 	ld a, [bc]
 	cp $ff
 	jr nz, .asm_312a
-	ld a, [de]
+	ld a, [de] ; first frame
 .asm_312a
-	ld [wCurObjUnk0f], a
-	jr Func_312f.pop_af
+	ld [wCurObjFrame], a
+	jr Func_316b
+; 0x312f
 
-Func_312f: ; 312f (0:312f)
-	ld hl, wCurObjUnk14
+UpdateObjectAnimation: ; 312f (0:312f)
+	ld hl, wCurObjFrameDuration
 	ld a, [hl]
-	sub $01
+	sub 1
 	ld [hld], a
 	ret nc
 	ld a, [wROMBank]
 	push af
-	ld a, $1a
+	ld a, BANK("Object Framesets")
 	bankswitch
 	dec l
-	ld a, [hli] ; OBJ_UNK_12
+	ld a, [hli] ; OBJ_FRAMESET_PTR
 	ld e, a
 	ld a, [hli]
 	ld d, a
 	inc l
-	ld a, [hl]
+	ld a, [hl] ; OBJ_FRAMESET_OFFSET
 	add e
 	ld c, a
 	ld a, d
@@ -4661,23 +4662,25 @@ Func_312f: ; 312f (0:312f)
 	ld a, [bc]
 	cp $ff
 	jr z, .reset
-	ld [wCurObjUnk0f], a
+	ld [wCurObjFrame], a
 	ld a, [hl]
-	add $02
+	add $2
 	ld [hld], a
 	inc bc
 	ld a, [bc]
-	ld [hl], a
-	jr .pop_af
+	ld [hl], a ; OBJ_FRAME_DURATION
+	jr Func_316b
 .reset
-	ld a, $02
-	ld [hld], a
-	ld a, [de]
-	ld [wCurObjUnk0f], a
+	ld a, $2
+	ld [hld], a ; OBJ_FRAMESET_OFFSET
+	ld a, [de] ; first frame
+	ld [wCurObjFrame], a
 	inc de
-	ld a, [de]
-	ld [hl], a
-.pop_af
+	ld a, [de] ; first duration
+	ld [hl], a ; OBJ_FRAME_DURATION
+;	fallthrough
+
+Func_316b: ; 316b (0:316b)
 	pop af
 	bankswitch
 	ret
