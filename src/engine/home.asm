@@ -19,7 +19,6 @@ JumpTable:
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
-; SECTION "rst30", ROM0
 	ld l, a
 	jp hl
 	ds 6

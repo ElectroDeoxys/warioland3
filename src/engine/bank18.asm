@@ -541,8 +541,8 @@ Func_61760: ; 61760 (18:5760)
 .jump
 	jumptable
 
-	dw $57a6
-	dw $57a7
+	dw Func_617a6
+	dw Func_617a7
 	dw $57c1
 	dw $57da
 	dw $57f2
@@ -560,10 +560,92 @@ Func_61760: ; 61760 (18:5760)
 	dw $5889
 	dw $5893
 	dw $5819
-	dw $579c
+	dw Func_6179c
 ; 0x6179c
 
-	INCROM $6179c, $6189d
+Func_6179c: ; 6179c (18:579c)
+	ld hl, wCurObjUnk1c
+	ld a, $8f
+	ld [hld], a
+	ld a, OBJ_ACTION_2F
+	ld [hl], a ; OBJ_ACTION
+	ret
+; 0x617a6
+
+Func_617a6: ; 617a6 (18:57a6)
+	ret
+; 0x617a7
+
+Func_617a7: ; 617a7 (18:57a7)
+	ld a, [wCurObjInteractionType]
+	and $ff ^ (HEAVY_OBJ)
+	jr z, .asm_617f2
+	ld hl, wCurObjUnk1d
+	ld a, [hld]
+	and $20
+	ld a, $8f
+	ld [hld], a ; OBJ_UNK_1C
+	jr z, .asm_617bd
+	ld a, OBJ_ACTION_02
+	ld [hl], a ; OBJ_ACTION
+	ret
+.asm_617bd
+	ld a, OBJ_ACTION_03
+	ld [hl], a ; OBJ_ACTION
+	ret
+
+	ld hl, wCurObjFlags
+	res OBJFLAG_UNK2_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
+	ld l, OBJ_UNK_1D
+	ld a, [hld]
+	and $20
+	ld a, $8f
+	ld [hld], a ; OBJ_UNK_1C
+	jr z, .asm_617d6
+	ld a, OBJ_ACTION_04
+	ld [hl], a ; OBJ_ACTION
+	ret
+.asm_617d6
+	ld a, OBJ_ACTION_05
+	ld [hl], a ; OBJ_ACTION
+	ret
+
+	ld hl, wCurObjFlags
+	res OBJFLAG_UNK2_F, [hl]
+	ld a, [wDirection]
+	and a
+	ld l, OBJ_UNK_1C
+	ld a, $8f
+	ld [hld], a ; OBJ_UNK_1C
+	jr z, .asm_617ee
+	ld a, OBJ_ACTION_06
+	ld [hl], a ; OBJ_ACTION
+	ret
+.asm_617ee
+	ld a, OBJ_ACTION_07
+	ld [hl], a ; OBJ_ACTION
+	ret
+
+.asm_617f2
+	ld hl, wCurObjFlags
+	res OBJFLAG_UNK2_F, [hl]
+	ld l, OBJ_UNK_1D
+	ld a, [hld]
+	and $20
+	ld a, $8f
+	ld [hld], a
+	jr z, .asm_61805
+	ld a, $08
+	ld [hl], a
+	ret
+.asm_61805
+	ld a, $09
+	ld [hl], a
+	ret
+; 0x61809
+
+	INCROM $61809, $6189d
 
 Func_6189d: ; 6189d (18:589d)
 	load_sfx SFX_018
