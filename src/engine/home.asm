@@ -136,10 +136,11 @@ Init: ; 15e (0:15e)
 .clear_wram
 	xor a
 	ld hl, w0Start ; start of WRAM0
-	ld bc, $f00
+	ld bc, w0End - w0Start
 	call WriteAToHL_BCTimes
 	call ClearWRAM
 
+	; clear OAM
 	xor a
 	ld hl, $fe00
 	ld bc, $100
@@ -182,7 +183,7 @@ Init: ; 15e (0:15e)
 	ldh [rIF], a
 	ld a, 1 << INT_VBLANK
 	ldh [rIE], a
-	call Func_341
+	call InitLCD
 
 	ld a, SRAM_ENABLE
 	ld [MBC5SRamEnable], a
@@ -191,13 +192,13 @@ Init: ; 15e (0:15e)
 
 	ldh a, [hCGB]
 	and a
-	jr nz, .asm_21a
+	jr nz, .is_cgb
 	ld a, MAIN_SEQTABLE_0b
 	ld [wSequence], a
 	xor a ; MAIN_SEQTABLE_TITLE
 	ld [wSubSequence], a
 	jr .asm_21d
-.asm_21a
+.is_cgb
 	call Func_1690
 .asm_21d
 
@@ -241,8 +242,8 @@ Init: ; 15e (0:15e)
 	and a
 	jr z, .skip_animated_pals
 	call UpdateRoomAnimatedPals
-
 .skip_animated_pals
+
 	ld a, TRUE
 	ld [wEnableVBlankFunc], a
 	halt
@@ -261,7 +262,9 @@ Init: ; 15e (0:15e)
 	jp .GameLoop
 ; 0x28d
 
-Func_28d: ; 28d (0:28d)
+; used as a handler for invalid jumptable entries
+; reset the game
+DebugReset: ; 28d (0:28d)
 	jp Init
 ; 0x290
 
@@ -329,7 +332,7 @@ VBlank_Ret: ; 334 (0:334)
 .func_end
 
 ; store in wLCDFunc a return function
-Func_341: ; 341 (0:341)
+InitLCD: ; 341 (0:341)
 	ld a, $d9 ; reti
 	ld [wLCDFunc], a
 	xor a
@@ -2718,7 +2721,7 @@ Func_12c3: ; 12c3 (0:12c3)
 CopyVRAMToWRAM: ; 12cd (0:12cd)
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("Audio RAM")
+	ld a, BANK("GFX RAM")
 	ldh [rSVBK], a
 	ld a, [wTempSCY]
 	ld [w3d500], a

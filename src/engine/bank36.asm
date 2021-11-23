@@ -96,15 +96,15 @@ Func_db277: ; db277 (36:7277)
 	dw $73e4
 	dw FastFadeToWhite
 	dw $741b
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
 ; 0xdb29b
 
 	INCROM $db29b, $db41e

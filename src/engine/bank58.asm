@@ -12,15 +12,15 @@ Func_160000: ; 160000 (58:4000)
     dw $42ee
     dw $4318
     dw $4365
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
+    dw DebugReset
+    dw DebugReset
+    dw DebugReset
+    dw DebugReset
+    dw DebugReset
+    dw DebugReset
+    dw DebugReset
+    dw DebugReset
+    dw DebugReset
 ; 0x160028
 
 	INCROM $160028, $162f85

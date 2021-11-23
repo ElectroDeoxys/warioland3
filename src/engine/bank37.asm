@@ -6,15 +6,15 @@ Func_dc000: ; dc000 (37:4000)
     dw $401e
     dw DarkenBGToPal_Fast
     dw $4073
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
+    dw DebugReset
+    dw DebugReset
+    dw DebugReset
+    dw DebugReset
+    dw DebugReset
+    dw DebugReset
+    dw DebugReset
+    dw DebugReset
+    dw DebugReset
 ; 0xdc01e
 
 	INCROM $dc01e, $dd858

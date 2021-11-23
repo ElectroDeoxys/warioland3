@@ -8,15 +8,15 @@ Func_1f8000: ; 1f8000 (7e:4000)
     dw $4194
     dw SlowFadeBGToWhite
     dw $1440
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
-    dw Func_28d
+    dw DebugReset
+    dw DebugReset
+    dw DebugReset
+    dw DebugReset
+    dw DebugReset
+    dw DebugReset
+    dw DebugReset
+    dw DebugReset
+    dw DebugReset
 ; 0x1f8022
 
 	INCROM $1f8022, $1fbde3

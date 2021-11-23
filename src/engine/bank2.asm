@@ -10,14 +10,14 @@ Func_8000: ; 8000 (2:4000)
 	dw FastFadeToWhite
 	dw Func_846e
 	dw Func_861c
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
 ; 0x8024
 
 Func_8024: ; 8024 (2:4024)

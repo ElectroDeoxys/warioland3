@@ -19,13 +19,13 @@ Func_1f0000: ; 1f0000 (7c:4000)
 	dw DarkenBGToPal_Fast
 	dw $46e1
 	dw $46fe
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
 	dw SlowFadeBGToWhite
 	dw $4701
 	dw DarkenBGToPal_Fast
@@ -36,12 +36,12 @@ Func_1f0000: ; 1f0000 (7c:4000)
 	dw $46e1
 	dw SlowFadeBGToWhite
 	dw $48af
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
 	dw SlowFadeBGToWhite
 	dw $4701
 	dw DarkenBGToPal_Fast
@@ -52,15 +52,15 @@ Func_1f0000: ; 1f0000 (7c:4000)
 	dw $46e1
 	dw SlowFadeBGToWhite
 	dw $48f4
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
 ; 0x1f007a
 
 	INCROM $1f007a, $1f0087
@@ -69,9 +69,9 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	call DisableLCD
 	call CopyVRAMToWRAM
 	ld a, [wAnimatedTilesFrameDuration]
-	ld [$d50f], a
+	ld [w3d50f], a
 	ld a, [wAnimatedTilesGroup]
-	ld [$d510], a
+	ld [w3d510], a
 	stop_sfx
 	load_music MUSIC_PAUSE_MENU
 	xor a
@@ -430,13 +430,13 @@ Func_1f095b: ; 1f095b (7c:495b)
 Func_1f0b5b: ; 1f0b5b (7c:4b5b)
 	ld de, $0
 	ld b, $ca
-	call SumBytesFromHL
+	call CalculateChecksum
 	ldh a, [rSVBK]
 	push af
 	ld a, $02
 	ldh [rSVBK], a
 	ld b, $11
-	call SumBytesFromHL
+	call CalculateChecksum
 	pop af
 	ldh [rSVBK], a
 	ldh a, [rSVBK]
@@ -444,7 +444,7 @@ Func_1f0b5b: ; 1f0b5b (7c:4b5b)
 	ld a, $01
 	ldh [rSVBK], a
 	ld bc, $14a
-	call Func_1f0b8e
+	call CalculateChecksumLong
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -452,7 +452,8 @@ Func_1f0b5b: ; 1f0b5b (7c:4b5b)
 
 ; sums b bytes starting at hl
 ; result is added in de
-SumBytesFromHL: ; 1f0b83 (7c:4b83)
+CalculateChecksum: ; 1f0b83 (7c:4b83)
+.start
 	ld a, [hli]
 	add e
 	ld e, a
@@ -460,11 +461,15 @@ SumBytesFromHL: ; 1f0b83 (7c:4b83)
 	adc $00
 	ld d, a
 	dec b
-	jr nz, SumBytesFromHL
+	jr nz, .start
 	ret
 ; 0x1f0b8e
 
-Func_1f0b8e: ; 1f0b8e (7c:4b8e)
+; same as CalculateChecksum but
+; does checksum for bc bytes instead
+; buggy, doesn't loop properly
+CalculateChecksumLong: ; 1f0b8e (7c:4b8e)
+.start
 	ld a, [hli]
 	add e
 	ld e, a
@@ -474,21 +479,23 @@ Func_1f0b8e: ; 1f0b8e (7c:4b8e)
 	dec bc
 	ld a, b
 	or c
-	jr nz, SumBytesFromHL ; should be Func_1f0b8e?
+	jr nz, CalculateChecksum ; should be .start
 	ret
 ; 0x1f0b9b
 
 	INCROM $1f0b9b, $1f0bcc
 
-Func_1f0bcc: ; 1f0bcc (7c:4bcc)
+; calculates checksum for SRAM1 and first half of SRAM2
+; outputs result in de
+CalculateBackupSRAMChecksum1: ; 1f0bcc (7c:4bcc)
 	ld a, [wSRAMBank]
 	push af
-	ld a, $01
+	ld a, BANK("SRAM1")
 	sramswitch
-	ld hl, s0a000
+	ld hl, s1a000
 	ld de, $0
 	ld bc, $2000
-.asm_1f0be1
+.loop_sram_1
 	ld a, [hli]
 	add e
 	ld e, a
@@ -496,18 +503,19 @@ Func_1f0bcc: ; 1f0bcc (7c:4bcc)
 	adc $00
 	ld d, a
 	dec c
-	jr nz, .asm_1f0be1
+	jr nz, .loop_sram_1
 	dec b
-	jr nz, .asm_1f0be1
+	jr nz, .loop_sram_1
 	pop af
 	sramswitch
 	ld a, [wSRAMBank]
 	push af
-	ld a, $02
+
+	ld a, BANK("SRAM2")
 	sramswitch
-	ld hl, s0a000
+	ld hl, s2a000
 	ld bc, $1000
-.asm_1f0c07
+.loop_sram_2
 	ld a, [hli]
 	add e
 	ld e, a
@@ -515,23 +523,25 @@ Func_1f0bcc: ; 1f0bcc (7c:4bcc)
 	adc $00
 	ld d, a
 	dec c
-	jr nz, .asm_1f0c07
+	jr nz, .loop_sram_2
 	dec b
-	jr nz, .asm_1f0c07
+	jr nz, .loop_sram_2
 	pop af
 	sramswitch
 	ret
 ; 0x1f0c1c
 
-Func_1f0c1c: ; 1f0c1c (7c:4c1c)
+; calculates checksum for SRAM3 and second half of SRAM2
+; outputs result in de
+CalculateBackupSRAMChecksum2: ; 1f0c1c (7c:4c1c)
 	ld a, [wSRAMBank]
 	push af
-	ld a, $03
+	ld a, BANK("SRAM3")
 	sramswitch
 	ld hl, s0a000
 	ld de, $0
 	ld bc, $2000
-.asm_1f0c31
+.loop_sram_3
 	ld a, [hli]
 	add e
 	ld e, a
@@ -539,18 +549,19 @@ Func_1f0c1c: ; 1f0c1c (7c:4c1c)
 	adc $00
 	ld d, a
 	dec c
-	jr nz, .asm_1f0c31
+	jr nz, .loop_sram_3
 	dec b
-	jr nz, .asm_1f0c31
+	jr nz, .loop_sram_3
 	pop af
 	sramswitch
 	ld a, [wSRAMBank]
 	push af
-	ld a, $02
+
+	ld a, BANK("SRAM2")
 	sramswitch
-	ld hl, $b000
+	ld hl, s2b000
 	ld bc, $1000
-.asm_1f0c57
+.loop_sram_2
 	ld a, [hli]
 	add e
 	ld e, a
@@ -558,9 +569,9 @@ Func_1f0c1c: ; 1f0c1c (7c:4c1c)
 	adc $00
 	ld d, a
 	dec c
-	jr nz, .asm_1f0c57
+	jr nz, .loop_sram_2
 	dec b
-	jr nz, .asm_1f0c57
+	jr nz, .loop_sram_2
 	pop af
 	sramswitch
 	ret
@@ -571,7 +582,7 @@ Func_1f0c1c: ; 1f0c1c (7c:4c1c)
 Func_1f0cad: ; 1f0cad (7c:4cad)
 	ld a, [wSRAMBank]
 	push af
-	ld a, $00
+	ld a, BANK("SRAM0")
 	sramswitch
 
 	ld hl, s0a380
@@ -604,7 +615,7 @@ Func_1f0cad: ; 1f0cad (7c:4cad)
 	cp b
 	jr nz, .asm_1f0d08
 	cp c
-	jr z, .asm_1f0d03
+	jr z, .asm_1f0d03 ; both branches are the same
 	ld [wcef1], a
 	jr .asm_1f0d20
 .asm_1f0d03
@@ -686,20 +697,20 @@ Func_1f0d60: ; 1f0d60 (7c:4d60)
 	call Func_1f0d2e
 	jr c, .asm_1f0dcc
 
-	ld a, [$a791]
+	ld a, [s0a791 + 0]
 	ld b, a
-	ld a, [$a792]
+	ld a, [s0a791 + 1]
 	ld c, a
-	ld a, [$a7e1]
+	ld a, [s0a7e1 + 0]
 	ld d, a
-	ld a, [$a7e2]
+	ld a, [s0a7e1 + 1]
 	ld e, a
-	ld a, [$afa1]
+	ld a, [s0afa1 + 0]
 	ld h, a
-	ld a, [$afa2]
+	ld a, [s0afa1 + 1]
 	ld l, a
 	call Func_1f1153
-	ld hl, $a384
+	ld hl, s0a384
 	call Func_1f1210
 	ld a, [wcee7]
 	cp d
@@ -733,7 +744,7 @@ Func_1f0d60: ; 1f0d60 (7c:4d60)
 	jr nz, .asm_1f0dcc
 
 .asm_1f0dc2
-	ld hl, $a384
+	ld hl, s0a384
 	ld hl, wceee
 	set 0, [hl]
 	jr .asm_1f0de9
@@ -760,20 +771,20 @@ Func_1f0d60: ; 1f0d60 (7c:4d60)
 	ld hl, s0ab80
 	call Func_1f0d2e
 	jr c, .asm_1f0e51
-	ld a, [$a793]
+	ld a, [s0a793 + 0]
 	ld b, a
-	ld a, [$a794]
+	ld a, [s0a793 + 1]
 	ld c, a
-	ld a, [$a7e3]
+	ld a, [s0a7e3 + 0]
 	ld d, a
-	ld a, [$a7e4]
+	ld a, [s0a7e3 + 1]
 	ld e, a
-	ld a, [$afa3]
+	ld a, [s0afa3 + 0]
 	ld h, a
-	ld a, [$afa4]
+	ld a, [s0afa3 + 1]
 	ld l, a
 	call Func_1f1153
-	ld hl, $ab84
+	ld hl, s0ab84
 	call Func_1f1210
 	ld a, [wcee7]
 	cp d
@@ -806,7 +817,7 @@ Func_1f0d60: ; 1f0d60 (7c:4d60)
 	cp e
 	jr nz, .asm_1f0e51
 .asm_1f0e47
-	ld hl, $ab84
+	ld hl, s0ab84
 	ld hl, wceee
 	set 1, [hl]
 	jr .asm_1f0e6e
@@ -830,20 +841,20 @@ Func_1f0d60: ; 1f0d60 (7c:4d60)
 	ld [s0afa0], a
 
 .asm_1f0e6e
-	ld a, [$a79d]
+	ld a, [s0a79d + 0]
 	ld b, a
-	ld a, [$a79e]
+	ld a, [s0a79d + 1]
 	ld c, a
-	ld a, [$a7ed]
+	ld a, [s0a7ed + 0]
 	ld d, a
-	ld a, [$a7ee]
+	ld a, [s0a7ed + 1]
 	ld e, a
-	ld a, [$afad]
+	ld a, [s0afad + 0]
 	ld h, a
-	ld a, [$afae]
+	ld a, [s0afad + 1]
 	ld l, a
 	call Func_1f1153
-	call Func_1f0bcc
+	call CalculateBackupSRAMChecksum1
 	ld a, [wcee7]
 	cp d
 	jr nz, .asm_1f0e9a
@@ -880,20 +891,20 @@ Func_1f0d60: ; 1f0d60 (7c:4d60)
 	ld hl, s0a000
 	call Func_1f0d47
 	jr c, .asm_1f0f2f
-	ld a, [$a795]
+	ld a, [s0a795 + 0]
 	ld b, a
-	ld a, [$a796]
+	ld a, [s0a795 + 1]
 	ld c, a
-	ld a, [$a7e5]
+	ld a, [s0a7e5 + 0]
 	ld d, a
-	ld a, [$a7e6]
+	ld a, [s0a7e5 + 1]
 	ld e, a
-	ld a, [$afa5]
+	ld a, [s0afa5 + 0]
 	ld h, a
-	ld a, [$afa6]
+	ld a, [s0afa5 + 1]
 	ld l, a
 	call Func_1f1153
-	ld hl, $a004
+	ld hl, s0a004
 	call Func_1f0b5b
 	ld a, [wcee7]
 	cp d
@@ -952,20 +963,20 @@ Func_1f0d60: ; 1f0d60 (7c:4d60)
 	ld hl, s0a800
 	call Func_1f0d47
 	jr c, .asm_1f0fb2
-	ld a, [$a797]
+	ld a, [s0a797 + 0]
 	ld b, a
-	ld a, [$a798]
+	ld a, [s0a797 + 1]
 	ld c, a
-	ld a, [$a7e7]
+	ld a, [s0a7e7 + 0]
 	ld d, a
-	ld a, [$a7e8]
+	ld a, [s0a7e7 + 1]
 	ld e, a
-	ld a, [$afa7]
+	ld a, [s0afa7 + 0]
 	ld h, a
-	ld a, [$afa8]
+	ld a, [s0afa7 + 1]
 	ld l, a
 	call Func_1f1153
-	ld hl, $a804
+	ld hl, s0a804
 	call Func_1f0b5b
 	ld a, [wcee7]
 	cp d
@@ -1030,20 +1041,20 @@ Func_1f0d60: ; 1f0d60 (7c:4d60)
 	ld [s0afa0], a
 
 .asm_1f0fe2
-	ld a, [$a79f]
+	ld a, [s0a79f + 0]
 	ld b, a
-	ld a, [$a7a0]
+	ld a, [s0a79f + 1]
 	ld c, a
-	ld a, [$a7ef]
+	ld a, [s0a7ef + 0]
 	ld d, a
-	ld a, [$a7f0]
+	ld a, [s0a7ef + 1]
 	ld e, a
-	ld a, [$afaf]
+	ld a, [s0afaf + 0]
 	ld h, a
-	ld a, [$afb0]
+	ld a, [s0afaf + 1]
 	ld l, a
 	call Func_1f1153
-	call Func_1f0c1c
+	call CalculateBackupSRAMChecksum2
 	ld a, [wcee7]
 	cp d
 	jr nz, .asm_1f100e
@@ -1078,20 +1089,20 @@ Func_1f0d60: ; 1f0d60 (7c:4d60)
 	ld hl, s0a400
 	call Func_1f0d47
 	jr c, .asm_1f10a1
-	ld a, [$a799]
+	ld a, [s0a799 + 0]
 	ld b, a
-	ld a, [$a79a]
+	ld a, [s0a799 + 1]
 	ld c, a
-	ld a, [$a7e9]
+	ld a, [s0a7e9 + 0]
 	ld d, a
-	ld a, [$a7ea]
+	ld a, [s0a7e9 + 1]
 	ld e, a
-	ld a, [$afa9]
+	ld a, [s0afa9 + 0]
 	ld h, a
-	ld a, [$afaa]
+	ld a, [s0afa9 + 1]
 	ld l, a
 	call Func_1f1153
-	ld hl, $a404
+	ld hl, s0a404
 	call Func_1f0b5b
 	ld a, [wcee7]
 	cp d
@@ -1149,20 +1160,20 @@ Func_1f0d60: ; 1f0d60 (7c:4d60)
 	ld hl, s0ac00
 	call Func_1f0d47
 	jr c, .asm_1f1122
-	ld a, [$a79b]
+	ld a, [s0a79b + 0]
 	ld b, a
-	ld a, [$a79c]
+	ld a, [s0a79b + 1]
 	ld c, a
-	ld a, [$a7eb]
+	ld a, [s0a7eb + 0]
 	ld d, a
-	ld a, [$a7ec]
+	ld a, [s0a7eb + 1]
 	ld e, a
-	ld a, [$afab]
+	ld a, [s0afab + 0]
 	ld h, a
-	ld a, [$afac]
+	ld a, [s0afab + 1]
 	ld l, a
 	call Func_1f1153
-	ld hl, $ac04
+	ld hl, s0ac04
 	call Func_1f0b5b
 	ld a, [wcee7]
 	cp d
@@ -1353,13 +1364,13 @@ Func_1f1153: ; 1f1153 (7c:5153)
 Func_1f1210: ; 1f1210 (7c:5210)
 	ld de, $0
 	ld b, $5b
-	call SumBytesFromHL
+	call CalculateChecksum
 	ldh a, [rSVBK]
 	push af
 	ld a, $02
 	ldh [rSVBK], a
 	ld b, $11
-	call SumBytesFromHL
+	call CalculateChecksum
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -1401,32 +1412,32 @@ Func_1f1246: ; 1f1246 (7c:5246)
 	dec a
 	jp z, .asm_1f1389
 
-	ld hl, s0a380 + $4
+	ld hl, s0a384
 	ld de, s0afe0
 	ld b, $4
 	call CopyHLToDE
 
-	ld hl, s0ab80 + $4
+	ld hl, s0ab84
 	ld de, s0afe4
 	ld b, $4
 	call CopyHLToDE
 
-	ld hl, s0a000 + $4
+	ld hl, s0a004
 	ld de, s0afe8
 	ld b, $4
 	call CopyHLToDE
 
-	ld hl, s0a800 + $4
+	ld hl, s0a804
 	ld de, s0afec
 	ld b, $4
 	call CopyHLToDE
 
-	ld hl, s0a400 + $4
+	ld hl, s0a404
 	ld de, s0aff0
 	ld b, $4
 	call CopyHLToDE
 
-	ld hl, s0ac00 + $4
+	ld hl, s0ac04
 	ld de, s0aff4
 	ld b, $4
 	call CopyHLToDE
@@ -1440,7 +1451,7 @@ Func_1f1246: ; 1f1246 (7c:5246)
 	ld a, [wceef]
 	bit 0, a
 	jr z, .asm_1f12e4
-	ld hl, $afe3
+	ld hl, s0afe0 + $3
 	sla [hl]
 	dec l
 	rl [hl]
@@ -1455,7 +1466,7 @@ Func_1f1246: ; 1f1246 (7c:5246)
 	ld a, [wceef]
 	bit 1, a
 	jr z, .asm_1f1300
-	ld hl, $afe7
+	ld hl, s0afe4 + $3
 	sla [hl]
 	dec l
 	rl [hl]
@@ -1470,7 +1481,7 @@ Func_1f1246: ; 1f1246 (7c:5246)
 	ld a, [wceef]
 	bit 2, a
 	jr z, .asm_1f131c
-	ld hl, $afeb
+	ld hl, s0afe8 + $3
 	sla [hl]
 	dec l
 	rl [hl]
@@ -1485,7 +1496,7 @@ Func_1f1246: ; 1f1246 (7c:5246)
 	ld a, [wceef]
 	bit 3, a
 	jr z, .asm_1f1338
-	ld hl, $afef
+	ld hl, s0afec + $3
 	sla [hl]
 	dec l
 	rl [hl]
@@ -1500,7 +1511,7 @@ Func_1f1246: ; 1f1246 (7c:5246)
 	ld a, [wceef]
 	bit 4, a
 	jr z, .asm_1f1354
-	ld hl, $aff3
+	ld hl, s0aff0 + $3
 	sla [hl]
 	dec l
 	rl [hl]
@@ -1515,7 +1526,7 @@ Func_1f1246: ; 1f1246 (7c:5246)
 	ld a, [wceef]
 	bit 5, a
 	jr z, .asm_1f1370
-	ld hl, $aff7
+	ld hl, s0aff4 + $3
 	sla [hl]
 	dec l
 	rl [hl]
@@ -1559,28 +1570,28 @@ Func_1f1246: ; 1f1246 (7c:5246)
 	jr nz, .asm_1f13cd
 	jp .asm_1f1251
 .asm_1f13a7
-	ld hl, s0a380 + $4
+	ld hl, s0a384
 	call Func_1f13d7
 	ret
 .asm_1f13ae
-	ld hl, s0ab80 + $4
+	ld hl, s0ab84
 	call Func_1f13d7
 	ret
 .asm_1f13b5
-	ld hl, s0a000 + $4
+	ld hl, s0a004
 	call Func_1f13f2
 	ret
 .asm_1f13bc
-	ld hl, s0a800 + $4
+	ld hl, s0a804
 	call Func_1f13f2
 	ret
 .asm_1f13c3
-	ld hl, s0a400 + $4
+	ld hl, s0a404
 	call Func_1f13f2
 	call Func_1f1420
 	ret
 .asm_1f13cd
-	ld hl, s0ac00 + $4
+	ld hl, s0ac04
 	call Func_1f13f2
 	call Func_1f1420
 	ret
@@ -1592,7 +1603,7 @@ Func_1f13d7: ; 1f13d7 (7c:53d7)
 	call CopyHLToDE
 	ldh a, [rSVBK]
 	push af
-	ld a, 2 ; WRAM2
+	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
 	ld de, wTreasuresCollected
 	ld b, $11
@@ -1608,7 +1619,7 @@ Func_1f13f2: ; 1f13f2 (7c:53f2)
 	call CopyHLToDE
 	ldh a, [rSVBK]
 	push af
-	ld a, 2 ; WRAM2
+	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
 	ld de, wTreasuresCollected
 	ld b, $11
@@ -1617,7 +1628,7 @@ Func_1f13f2: ; 1f13f2 (7c:53f2)
 	ldh [rSVBK], a
 	ldh a, [rSVBK]
 	push af
-	ld a, 1 ; WRAM1
+	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
 	ld de, wObjects
 	ld bc, $14a
@@ -1635,25 +1646,27 @@ Func_1f1420: ; 1f1420 (7c:5420)
 
 	ld a, [wSRAMBank]
 	push af
-	ld a, $02
+	ld a, BANK("SRAM2")
 	sramswitch
-	ld hl, $b000
-	ld de, s0a000
+	ld hl, s2b000
+	ld de, s2a000
 	ld bc, $1000
 	call CopyHLToDE_BC
 	pop af
 	sramswitch
-	ld hl, s0a000
+
+; copy whole SRAM3 to SRAM1
+	ld hl, s3a000
 	ld bc, $2000
-.asm_1f1450
+.loop
 	ld a, [wSRAMBank]
 	push af
-	ld a, $03
+	ld a, BANK("SRAM3")
 	sramswitch
 	ld d, [hl]
 	ld a, [wSRAMBank]
 	push af
-	ld a, $01
+	ld a, BANK("SRAM1")
 	sramswitch
 	ld a, d
 	ld [hli], a
@@ -1662,20 +1675,20 @@ Func_1f1420: ; 1f1420 (7c:5420)
 	pop af
 	sramswitch
 	dec c
-	jr nz, .asm_1f1450
+	jr nz, .loop
 	dec b
-	jr nz, .asm_1f1450
+	jr nz, .loop
 
 	ld a, $41
 	ld [s0a790], a
 	ld [s0a7e0], a
 	ld [s0afa0], a
 
-	call Func_1f0bcc
+	call CalculateBackupSRAMChecksum1
 	ld a, d
-	ld [$a79d], a
+	ld [s0a79d + 0], a
 	ld a, e
-	ld [$a79e], a
+	ld [s0a79d + 1], a
 
 	ld a, $42
 	ld [s0a790], a
@@ -1683,9 +1696,9 @@ Func_1f1420: ; 1f1420 (7c:5420)
 	ld [s0afa0], a
 
 	ld a, d
-	ld [$a7ed], a
+	ld [s0a7ed + 0], a
 	ld a, e
-	ld [$a7ee], a
+	ld [s0a7ed + 1], a
 
 	ld a, $43
 	ld [s0a790], a
@@ -1693,9 +1706,9 @@ Func_1f1420: ; 1f1420 (7c:5420)
 	ld [s0afa0], a
 
 	ld a, d
-	ld [$afad], a
+	ld [s0afad + 0], a
 	ld a, e
-	ld [$afae], a
+	ld [s0afad + 1], a
 
 	xor a
 	ld [s0a790], a

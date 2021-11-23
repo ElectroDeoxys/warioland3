@@ -1034,6 +1034,10 @@ wcef0:: ; cef0
 wcef1:: ; cef1
 	ds $1
 
+	ds $e
+
+w0End:: ; cf00
+
 SECTION "WRAM1", WRAMX
 
 wObjects::
@@ -1512,6 +1516,8 @@ wTrack2:: track_struct wTrack2 ; d238
 wTrack3:: track_struct wTrack3 ; d250
 wTrack4:: track_struct wTrack4 ; d268
 
+SECTION "GFX RAM", WRAMX
+
 w3d280:: ; d280
 	ds 16 palettes
 
@@ -1534,7 +1540,10 @@ w3d507:: ; d507
 w3d50d:: ; d50d
 	ds $1
 
-	ds $2
+	ds $1
+
+w3d50f:: ; d50f
+	ds $1
 
 w3d510:: ; d510
 	ds $1

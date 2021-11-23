@@ -17,10 +17,10 @@ Func_d4000: ; d4000 (35:4000)
 	dw $4507
 	dw $454c
 	dw $45f0
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
 ; 0xd402a
 
 	INCROM $d402a, $d65f2

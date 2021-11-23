@@ -51,12 +51,12 @@ TitleSequence: ; 402b (1:402b)
 	dw SlowFadeBGToWhite
 	dw InitTimeAttackDescription
 	dw TimeAttackDescription
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
 ; 0x405f
 
 InitIntroSequence: ; 405f (1:405f)
@@ -1181,10 +1181,10 @@ Func_47aa: ; 47aa (1:47aa)
 	dw  SubSeq_GBIncompatibleScreen
 	dw  SlowFadeFromWhite
 	dw  Func_47fc
-	dw  Func_28d
-	dw  Func_28d
-	dw  Func_28d
-	dw  Func_28d
+	dw  DebugReset
+	dw  DebugReset
+	dw  DebugReset
+	dw  DebugReset
 ; 0x47be
 
 SubSeq_GBIncompatibleScreen: ; 47be (1:47be)
@@ -1252,12 +1252,12 @@ LanguageSelectionSequence: ; 4831 (1:4831)
 	dw InitLanguageSelection
 	dw SlowFadeFromWhite
 	dw LanguageSelection
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
-	dw Func_28d
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
+	dw DebugReset
 ; 0x4857
 
 InitLanguageSelection: ; 4857 (1:4857)
@@ -1460,7 +1460,7 @@ VBlank_49db: ; 49db (1:49db)
 .func
 	ld a, [wROMBank]
 	push af
-	ld a, $01
+	ld a, BANK(Data_6b47)
 	bankswitch
 	ld a, [wcee4]
 	bit 7, a
