@@ -1,5 +1,5 @@
 Func_8000: ; 8000 (2:4000)
-	ld a, [wSubSequence]
+	ld a, [wSubState]
 	jumptable
 
 	dw FastFadeToWhite
@@ -60,7 +60,7 @@ Func_8024: ; 8024 (2:4024)
 	pop af
 	sramswitch
 
-	ld hl, wSubSequence
+	ld hl, wSubState
 	inc [hl]
 	ld a, [wLevel]
 	cp THE_TEMPLE
@@ -250,8 +250,8 @@ Func_80aa: ; 80aa (2:40aa)
 	sramswitch
 
 .asm_8247
-	ld a, [wSequence]
-	cp $02
+	ld a, [wState]
+	cp ST_02
 	ret nz
 	ld hl, wLevelEndScreen
 	ld a, [hl]
@@ -282,15 +282,15 @@ Func_80aa: ; 80aa (2:40aa)
 	cp LEVEL_END_EPILOGUE
 	jr z, .epilogue
 
-	ld hl, wSequence
+	ld hl, wState
 	inc [hl]
 	xor a
-	ld [wSubSequence], a
+	ld [wSubState], a
 	ld a, [wca3d]
 	bit 1, a
 	ret z
 	ld a, $04
-	ld [wSubSequence], a
+	ld [wSubState], a
 	ret
 
 .game_over
@@ -314,20 +314,20 @@ Func_80aa: ; 80aa (2:40aa)
 	set 0, [hl]
 .asm_82ba
 	set 2, [hl]
-	ld hl, wSequence
-	ld [hl], $06
+	ld hl, wState
+	ld [hl], ST_06
 	xor a
-	ld [wSubSequence], a
+	ld [wSubState], a
 	ret
 
 .asm_82c6
 	ld a, [wceda]
 	and a
 	jr z, .asm_82d8
-	ld a, [wSubSequence]
+	ld a, [wSubState]
 	ld [wced5], a
 	ld a, $07
-	ld [wSubSequence], a
+	ld [wSubState], a
 	ret
 
 .asm_82d8
@@ -364,12 +364,12 @@ Func_80aa: ; 80aa (2:40aa)
 	ld [wRoomAnimatedPalsEnabled], a
 	ld a, $01
 	ld [wced6], a
-	ld a, [wSubSequence]
+	ld a, [wSubState]
 	ld [wced5], a
-	ld a, $04
-	ld [wSequence], a
+	ld a, ST_04
+	ld [wState], a
 	xor a
-	ld [wSubSequence], a
+	ld [wSubState], a
 	ret
 
 .asm_8331
@@ -492,12 +492,12 @@ Func_846e: ; 846e (2:446e)
 	ld [w3d510], a
 	pop af
 	ldh [rSVBK], a
-	ld a, [wSubSequence]
+	ld a, [wSubState]
 	ld [wced5], a
-	ld hl, wSequence
-	ld [hl], $05
+	ld hl, wState
+	ld [hl], ST_05
 	xor a
-	ld [wSubSequence], a
+	ld [wSubState], a
 	ret
 .asm_849d
 	call DisableLCD
@@ -587,7 +587,7 @@ Func_846e: ; 846e (2:446e)
 	call Func_b8d3
 
 	ld a, [wWarioState]
-	cp ST_ENTERING_DOOR
+	cp WST_ENTERING_DOOR
 	jr nz, .asm_85a7
 	xor a
 	ld [wFrameDuration], a
@@ -627,7 +627,7 @@ Func_846e: ; 846e (2:446e)
 	xor a
 	ld [wIsIntangible], a
 	ld a, $02
-	ld [wSubSequence], a
+	ld [wSubState], a
 	ld a, $87
 	ldh [rLCDC], a
 	ret
@@ -756,7 +756,7 @@ Func_867f: ; 867f (2:467f)
 	ld [wceda], a
 	ld [wIsFloorTransition], a
 	ld a, [wced5]
-	ld [wSubSequence], a
+	ld [wSubState], a
 	ret
 ; 0x8747
 
@@ -8512,11 +8512,11 @@ Func_b915: ; b915 (2:7915)
 	and a
 	ret nz
 	ld a, [wWarioState]
-	cp ST_LADDER_SCRATCHING
+	cp WST_LADDER_SCRATCHING
 	ret z
-	cp ST_LADDER_CLIMBING
+	cp WST_LADDER_CLIMBING
 	jr c, .asm_b97b
-	cp ST_GRAB_SLIPPING
+	cp WST_GRAB_SLIPPING
 	ret c
 
 .asm_b97b

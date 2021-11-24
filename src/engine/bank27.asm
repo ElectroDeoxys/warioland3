@@ -63,7 +63,7 @@ Func_9c021: ; 9c021 (27:4021)
 	xor a
 	ld [w2d800], a
 
-	ld hl, wSubSequence
+	ld hl, wSubState
 	inc [hl]
 	ret
 ; 0x9c072

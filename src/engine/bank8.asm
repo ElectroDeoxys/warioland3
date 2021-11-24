@@ -422,7 +422,7 @@ SetState_EnemyBumping: ; 202b5 (8:42b5)
 	ld [wIsSmashAttacking], a
 	ld [wGrabState], a
 
-	ld a, ST_ENEMY_BUMPING
+	ld a, WST_ENEMY_BUMPING
 	ld [wWarioState], a
 
 	load_gfx WarioWalkGfx
@@ -886,7 +886,7 @@ SetState_Stung: ; 206f9 (8:46f9)
 
 	load_sfx SFX_STING
 
-	ld a, ST_STUNG
+	ld a, WST_STUNG
 	ld [wWarioState], a
 
 	xor a
@@ -1002,7 +1002,7 @@ Func_2080d: ; 2080d (8:480d)
 	load_sfx SFX_STING
 	ld a, $01
 	ld [wInvincibleCounter], a
-	ld a, ST_WATER_STUNG
+	ld a, WST_WATER_STUNG
 	ld [wWarioState], a
 	xor a
 	ld [wca6d], a
@@ -1164,7 +1164,7 @@ Func_20939: ; 20939 (8:4939)
 
 Func_209ca: ; 209ca (8:49ca)
 	ld a, [wWarioState]
-	cp ST_ATTACKING_AIRBORNE
+	cp WST_ATTACKING_AIRBORNE
 	jr nz, .asm_209d5
 	; airborne
 	xor a
@@ -1174,7 +1174,7 @@ Func_209ca: ; 209ca (8:49ca)
 	and a
 	ret nz
 	ld a, [wWarioState]
-	cp ST_DIVING
+	cp WST_DIVING
 	ret z
 	ld a, TRUE
 	ld [wIsOnSteppableObject], a
@@ -1316,7 +1316,7 @@ Func_20a6f: ; 20a6f (8:4a6f)
 
 .asm_20b2b
 	ld a, [wWarioState]
-	cp ST_ICE_SKATIN_CRASH
+	cp WST_ICE_SKATIN_CRASH
 	ret z
 	farcall Func_1ec215
 	ret
@@ -1362,9 +1362,9 @@ Func_20b6b: ; 20b6b (8:4b6b)
 
 .check_water
 	ld a, [wWarioState]
-	cp ST_DIVING
+	cp WST_DIVING
 	jr c, .not_in_water
-	cp ST_TRYING_SUBMERGE + 1
+	cp WST_TRYING_SUBMERGE + 1
 	jp c, Func_20899
 
 .not_in_water
@@ -1384,11 +1384,11 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	cp POWER_UP_GRAB_GLOVE
 	jp c, .asm_20c41
 	ld a, [wWarioState]
-	cp ST_LADDER_SCRATCHING
+	cp WST_LADDER_SCRATCHING
 	jp z, .asm_20c41
-	cp ST_LADDER_CLIMBING
+	cp WST_LADDER_CLIMBING
 	jr c, .asm_20bc6
-	cp ST_LADDER_SLIDING + 1
+	cp WST_LADDER_SLIDING + 1
 	jp c, .asm_20c41
 .asm_20bc6
 	ld a, [wWarioScreenXPos]
@@ -1480,7 +1480,7 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld a, ST_PICKING_UP
+	ld a, WST_PICKING_UP
 	ld [wWarioState], a
 	ld a, -1
 	ld [wca70], a
@@ -1762,7 +1762,7 @@ Func_20e97: ; 20e97 (8:4e97)
 ;	fallthrough
 
 SetState_OnFire: ; 20ed3 (8:4ed3)
-	ld a, ST_ON_FIRE
+	ld a, WST_ON_FIRE
 	ld [wWarioState], a
 
 	xor a
@@ -1892,8 +1892,8 @@ ObjInteraction_BlueKey: ; 21002 (8:5002)
 CollectKey: ; 21007 (8:5007)
 	load_sfx SFX_KEY
 	call Func_20a63
-	ld a, MAIN_SEQTABLE_COLLECT_KEY
-	ld [wSequence], a
+	ld a, ST_COLLECT_KEY
+	ld [wState], a
 	xor a
 	ld [wIntroSeqTimer], a
 	ret
@@ -1977,7 +1977,7 @@ GetTreasure: ; 2109a (8:509a)
 	xor a
 	ld [wca86], a
 
-	ld a, ST_UNKNOWN_40
+	ld a, WST_UNKNOWN_40
 	ld [wWarioState], a
 
 	xor a
@@ -2043,7 +2043,7 @@ Func_21156: ; 21156 (8:5156)
 
 	ld a, $01
 	ld [wAutoMoveState], a
-	ld a, ST_PICKED_UP
+	ld a, WST_PICKED_UP
 	ld [wWarioState], a
 	ld a, -1
 	ld [wca70], a
@@ -2089,7 +2089,7 @@ Func_21156: ; 21156 (8:5156)
 SetState_FlatStretching: ; 211fb (8:51fb)
 	ld a, $01
 	ld [wAutoMoveState], a
-	ld a, ST_FLAT_STRETCHING
+	ld a, WST_FLAT_STRETCHING
 	ld [wWarioState], a
 	ld a, -1
 	ld [wca70], a
@@ -2185,7 +2185,7 @@ Func_2126a: ; 2126a (8:526a)
 	ld [wca94], a
 	call UpdateLevelMusic
 
-	ld a, ST_GETTING_WRAPPED_IN_STRING
+	ld a, WST_GETTING_WRAPPED_IN_STRING
 	ld [wWarioState], a
 
 	xor a
@@ -2273,7 +2273,7 @@ Func_21358: ; 21358 (8:5358)
 	load_sfx SFX_03A
 	call UpdateLevelMusic
 
-	ld a, ST_FAT_EATING
+	ld a, WST_FAT_EATING
 	ld [wWarioState], a
 	ld a, -1
 	ld [wca70], a
@@ -2377,7 +2377,7 @@ Func_21455: ; 21455 (8:5455)
 	ld [wIsSmashAttacking], a
 	ld [wInvisibleFrame], a
 
-	ld a, ST_ELECTRIC_START
+	ld a, WST_ELECTRIC_START
 	ld [wWarioState], a
 
 	ld a, -1
@@ -2570,7 +2570,7 @@ Func_21675: ; 21675 (8:5675)
 
 Func_2168b: ; 2168b (8:568b)
 	ld a, [wWarioState]
-	cp ST_FLAT_SQUISHED
+	cp WST_FLAT_SQUISHED
 	jr nz, .asm_216a2
 	farcall SetState_FlatSquishedLifting
 	ret
@@ -2642,7 +2642,7 @@ Func_2168b: ; 2168b (8:568b)
 
 .asm_2175e
 	ld a, [wWarioState]
-	cp ST_FLAT_SQUISHED
+	cp WST_FLAT_SQUISHED
 	ret z
 	farcall SetState_FlatIdling
 	ret
@@ -2885,7 +2885,7 @@ ObjInteraction_Rail: ; 21999 (8:5999)
 	ld a, $01
 	ld [wca94], a
 
-	ld a, ST_HANGING_RAIL
+	ld a, WST_HANGING_RAIL
 	ld [wWarioState], a
 
 	ld a, -1
@@ -3268,7 +3268,7 @@ Func_21ccf: ; 21ccf (8:5ccf)
 	ld [wc0d7], a
 	call Func_2080d
 	stop_sfx
-	ld a, ST_TELEPORTING_WATER
+	ld a, WST_TELEPORTING_WATER
 	ld [wWarioState], a
 	ld b, $10
 	jp SetObjUnk1C
@@ -3293,7 +3293,7 @@ Func_21cfd: ; 21cfd (8:5cfd)
 	ld [wc0d7], a
 	call Func_206eb
 	stop_sfx
-	ld a, ST_TELEPORTING
+	ld a, WST_TELEPORTING
 	ld [wWarioState], a
 	ld b, $10
 	jp SetObjUnk1C

@@ -94,10 +94,10 @@ wCurSpriteAttributes:: ; c099
 wResetDisabled:: ; c09a
 	ds $1
 
-wSequence:: ; c09b
+wState:: ; c09b
 	ds $1
 
-wSubSequence:: ; c09c
+wSubState:: ; c09c
 	ds $1
 
 	ds $1
@@ -1242,15 +1242,15 @@ w2d0db:: ; d6db
 	ds $14
 
 wLevelTreasureIDs::
-wLevelTreasure0ID:: ds $1 ; d0f0
-wLevelTreasure1ID:: ds $1 ; d0f1
-wLevelTreasure2ID:: ds $1 ; d0f2
-wLevelTreasure3ID:: ds $1 ; d0f3
+wLevelTreasure1ID:: ds $1 ; d0f0
+wLevelTreasure2ID:: ds $1 ; d0f1
+wLevelTreasure3ID:: ds $1 ; d0f2
+wLevelTreasure4ID:: ds $1 ; d0f3
 
-wLevelTreasure0Unk:: ds $1 ; d0f4
-wLevelTreasure1Unk:: ds $1 ; d0f5
-wLevelTreasure2Unk:: ds $1 ; d0f6
-wLevelTreasure3Unk:: ds $1 ; d0f7
+wLevelTreasure1Unk:: ds $1 ; d0f4
+wLevelTreasure2Unk:: ds $1 ; d0f5
+wLevelTreasure3Unk:: ds $1 ; d0f6
+wLevelTreasure4Unk:: ds $1 ; d0f7
 
 	ds $48
 

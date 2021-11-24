@@ -1,6 +1,6 @@
 
 Func_160000: ; 160000 (58:4000)
-	ld a, [wSubSequence]
+	ld a, [wSubState]
 	jumptable
 
     dw FastFadeToWhite

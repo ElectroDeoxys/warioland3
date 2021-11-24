@@ -1,32 +1,32 @@
-MainSequenceTable: ; 4000 (1:4000)
-	ld a, [wSequence]
+StateTable: ; 4000 (1:4000)
+	ld a, [wState]
 	jumptable
 
-	dw TitleSequence             ; MAIN_SEQTABLE_TITLE
-	dw Func_4686                 ; MAIN_SEQTABLE_01
-	dw Func_46cc                 ; MAIN_SEQTABLE_02
-	dw Func_46dc                 ; MAIN_SEQTABLE_03
-	dw Func_46f6                 ; MAIN_SEQTABLE_04
-	dw Func_4710                 ; MAIN_SEQTABLE_05
-	dw Func_472a                 ; MAIN_SEQTABLE_06
-	dw Func_474c                 ; MAIN_SEQTABLE_07
-	dw CollectKeySequence        ; MAIN_SEQTABLE_COLLECT_KEY
-	dw Func_4776                 ; MAIN_SEQTABLE_09
-	dw Func_4790                 ; MAIN_SEQTABLE_0a
-	dw Func_47aa                 ; MAIN_SEQTABLE_0b
-	dw Func_47fd                 ; MAIN_SEQTABLE_0c
-	dw Func_4817                 ; MAIN_SEQTABLE_0d
-	dw LanguageSelectionSequence ; MAIN_SEQTABLE_LANGUAGE_SELECTION
-	dw Func_4028                 ; MAIN_SEQTABLE_0f
-	dw Func_4028                 ; MAIN_SEQTABLE_10
-	dw Func_4028                 ; MAIN_SEQTABLE_11
+	dw TitleStateTable             ; ST_TITLE
+	dw Func_4686                   ; ST_01
+	dw Func_46cc                   ; ST_02
+	dw Func_46dc                   ; ST_03
+	dw Func_46f6                   ; ST_04
+	dw Func_4710                   ; ST_05
+	dw Func_472a                   ; ST_06
+	dw Func_474c                   ; ST_07
+	dw CollectKeyDelay             ; ST_COLLECT_KEY
+	dw Func_4776                   ; ST_09
+	dw Func_4790                   ; ST_0a
+	dw Func_47aa                   ; ST_0b
+	dw Func_47fd                   ; ST_0c
+	dw Func_4817                   ; ST_0d
+	dw LanguageSelectionStateTable ; ST_LANGUAGE_SELECTION
+	dw Func_4028                   ; ST_0f
+	dw Func_4028                   ; ST_10
+	dw Func_4028                   ; ST_11
 ; 0x4028
 
 Func_4028: ; 4028 (1:4028)
 	jp Init
 ; 0x402b
 
-TitleSequence: ; 402b (1:402b)
+TitleStateTable: ; 402b (1:402b)
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -37,7 +37,7 @@ TitleSequence: ; 402b (1:402b)
 	ret
 
 .jump
-	ld a, [wSubSequence]
+	ld a, [wSubState]
 	jumptable
 
 	dw FastFadeToWhite
@@ -173,37 +173,40 @@ InitIntroSequence: ; 405f (1:405f)
 	ld [hld], a
 	ld [wIntroSeqSFXTimer], a
 
+; set priority flag to hide
+; the menu options behind scenery
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, v1BGMap0 + $184
 	ld de, $20
 	ld c, 2
-.asm_4121
+.loop_outer
 	push hl
 	ld b, 11
-.asm_4124
+.loop_inner_1
 	ld a, [hl]
 	or %10000000
 	ld [hli], a
 	dec b
-	jr nz, .asm_4124
+	jr nz, .loop_inner_1
 	pop hl
 	add hl, de
 	push hl
 	ld b, 11
-.asm_4130
+.loop_inner_2
 	ld a, [hl]
 	or %10000000
 	ld [hli], a
 	dec b
-	jr nz, .asm_4130
+	jr nz, .loop_inner_2
 	pop hl
 	add hl, de
 	add hl, de
 	add hl, de
 	dec c
-	jr nz, .asm_4121
+	jr nz, .loop_outer
 
+; get darker tone behind menu options
 	xor a ; VRAM0
 	ldh [rVBK], a
 	ld hl, Data_6b47
@@ -295,7 +298,7 @@ InitIntroSequence: ; 405f (1:405f)
 	xor a
 	ld [wIntroSeqTimer], a
 	ld [wGlobalCounter], a
-	ld hl, wSubSequence
+	ld hl, wSubState
 	inc [hl]
 	ret
 ; 0x41cf
@@ -470,7 +473,7 @@ IntroSequencePhase1: ; 41cf (1:41cf)
 	ld [wIntroSeqSFXTimer], a
 	ld a, 28
 	ld [wIntroSeqTimer], a
-	ld hl, wSubSequence
+	ld hl, wSubState
 	inc [hl]
 	; fallthrough
 
@@ -589,7 +592,7 @@ IntroSequencePhase2: ; 42ed (1:42ed)
 	ld [wIntroSeqSFXTimer], a
 	ld a, 48
 	ld [wIntroSeqTimer], a
-	ld hl, wSubSequence
+	ld hl, wSubState
 	inc [hl]
 
 .continue
@@ -751,7 +754,7 @@ IntroSequencePhase3: ; 43b5 (1:43b5)
 	call LoadPalsToTempPals2
 
 	load_music MUSIC_TITLE_SCREEN
-	ld hl, wSubSequence
+	ld hl, wSubState
 	inc [hl]
 	jr .finish_scroll
 
@@ -798,9 +801,9 @@ EndIntroSequence: ; 44c3 (1:44c3)
 	ld a, [wGlobalCounter]
 	and %11
 	call z, FadeInTitle
-	; continue when subsequence is advanced
+	; continue when substate is advanced
 	; after the title has faded in completely
-	ld a, [wSubSequence]
+	ld a, [wSubState]
 	cp $07
 	ret nz
 ;	fallthrough
@@ -813,7 +816,7 @@ StartTitleScreen: ; 44f0 (1:44f0)
 	ld [wIntroSeqTimer + 1], a
 	ld a, 68
 	ld [wIntroSeqTimer], a
-	ld hl, wSubSequence
+	ld hl, wSubState
 	ld [hl], $07
 	ret
 ; 0x4508
@@ -937,10 +940,10 @@ StartMenu: ; 4508 (1:4508)
 	ret
 
 .NewGame
-	ld a, MAIN_SEQTABLE_LANGUAGE_SELECTION
-	ld [wSequence], a
+	ld a, ST_LANGUAGE_SELECTION
+	ld [wState], a
 	xor a
-	ld [wSubSequence], a
+	ld [wSubState], a
 	ret
 
 	ld a, POWER_UP_SUPER_GRAB_GLOVES
@@ -958,10 +961,10 @@ StartMenu: ; 4508 (1:4508)
 	jr nz, .asm_45fd
 	jr Func_461e
 .asm_45fd
-	ld a, MAIN_SEQTABLE_02
-	ld [wSequence], a
+	ld a, ST_02
+	ld [wState], a
 	xor a
-	ld [wSubSequence], a
+	ld [wSubState], a
 	ret
 
 .TimeAttack
@@ -970,7 +973,7 @@ StartMenu: ; 4508 (1:4508)
 	call FillWhiteOBPal
 	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
 	ldh [rLCDC], a
-	ld hl, wSubSequence
+	ld hl, wSubState
 	inc [hl]
 	ret
 
@@ -980,10 +983,10 @@ Func_4619: ; 4619 (1:4619)
 	; fallthrough
 
 Func_461e: ; 461e (1:461e)
-	ld a, MAIN_SEQTABLE_01
-	ld [wSequence], a
+	ld a, ST_01
+	ld [wState], a
 	xor a
-	ld [wSubSequence], a
+	ld [wSubState], a
 	ret
 ; 0x4628
 
@@ -1019,7 +1022,7 @@ InitTimeAttackDescription: ; 4640 (1:4640)
 	ldh [rLCDC], a
 	xor a
 	ld [wIntroSeqTimer], a
-	ld hl, wSubSequence
+	ld hl, wSubState
 	inc [hl]
 	ret
 ; 0x4670
@@ -1045,9 +1048,9 @@ Func_4686: ; 4686 (1:4686)
 	pop af
 	ldh [rSVBK], a
 
-	ld hl, wSequence
+	ld hl, wState
 	ld a, [hl]
-	cp MAIN_SEQTABLE_02
+	cp ST_02
 	ret nz
 	load_sfx SFX_0E3
 	call Func_4ae7
@@ -1059,8 +1062,8 @@ Func_4686: ; 4686 (1:4686)
 	ret
 
 .asm_46bd
-	ld a, MAIN_SEQTABLE_0a
-	ld [wSequence], a
+	ld a, ST_0a
+	ld [wState], a
 	ret
 
 .final_battle
@@ -1107,7 +1110,7 @@ Func_4710: ; 4710 (1:4710)
 ; 0x472a
 
 Func_472a: ; 472a (1:472a)
-	ld a, [wSubSequence]
+	ld a, [wSubState]
 	jumptable
 
 	dw Func_4732
@@ -1139,15 +1142,15 @@ Func_474c: ; 474c (1:474c)
 ; 0x4766
 
 ; pauses game for 100 ticks
-CollectKeySequence: ; 4766 (1:4766)
+CollectKeyDelay: ; 4766 (1:4766)
 	ld hl, wIntroSeqTimer
 	inc [hl]
 	ld a, [hl]
 	cp 100
 	ret c
 	ld [hl], 0
-	ld a, MAIN_SEQTABLE_02
-	ld [wSequence], a
+	ld a, ST_02
+	ld [wState], a
 	ret
 ; 0x4776
 
@@ -1174,7 +1177,7 @@ Func_4790: ; 4790 (1:4790)
 ; 0x47aa
 
 Func_47aa: ; 47aa (1:47aa)
-	ld a, [wSubSequence]
+	ld a, [wSubState]
 	jumptable
 
 	dw  FastFadeToWhite
@@ -1203,7 +1206,7 @@ SubSeq_GBIncompatibleScreen: ; 47be (1:47be)
 	ldh [rSCY], a
 	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
 	ldh [rLCDC], a
-	ld hl, wSubSequence
+	ld hl, wSubState
 	inc [hl]
 	ret
 ; 0x47fc
@@ -1234,18 +1237,18 @@ Func_4817: ; 4817 (1:4817)
 	ret
 ; 0x4831
 
-LanguageSelectionSequence: ; 4831 (1:4831)
+LanguageSelectionStateTable: ; 4831 (1:4831)
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
 	ldh [rSVBK], a
-	call .asm_483f
+	call .jump
 	pop af
 	ldh [rSVBK], a
 	ret
 
-.asm_483f
-	ld a, [wSubSequence]
+.jump
+	ld a, [wSubState]
 	jumptable
 
 	dw FastFadeToWhite
@@ -1299,7 +1302,7 @@ InitLanguageSelection: ; 4857 (1:4857)
 	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
 	ldh [rLCDC], a
 
-	ld hl, wSubSequence
+	ld hl, wSubState
 	inc [hl]
 	ret
 ; 0x48c9
@@ -1959,7 +1962,7 @@ Func_4d45: ; 4d45 (1:4d45)
 	ld a, [hl]
 	cp 176
 	jr c, .incr_x1
-	ld a, [wSubSequence]
+	ld a, [wSubState]
 	cp $05
 	jr nc, .asm_4d66
 	cp $04
@@ -1975,7 +1978,7 @@ Func_4d45: ; 4d45 (1:4d45)
 	ld a, [hl]
 	cp 176
 	jr c, .incr_x2
-	ld a, [wSubSequence]
+	ld a, [wSubState]
 	cp $05
 	ret nc
 	cp $04

@@ -1,5 +1,5 @@
 Func_1c8000: ; 1c8000 (72:4000)
-	ld a, [wSubSequence]
+	ld a, [wSubState]
 	jumptable
 
 	dw FastFadeToWhite
@@ -21,7 +21,7 @@ Func_1c8000: ; 1c8000 (72:4000)
 	INCROM $1c8020, $1c8570
 
 Func_1c8570: ; 1c8570 (72:4570)
-	ld a, [wSubSequence]
+	ld a, [wSubState]
 	jumptable
 
 	dw FastFadeToWhite

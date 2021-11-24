@@ -1,5 +1,5 @@
 Func_dc000: ; dc000 (37:4000)
-	ld a, [wSubSequence]
+	ld a, [wSubState]
 	jumptable
 
     dw SlowFadeBGToWhite

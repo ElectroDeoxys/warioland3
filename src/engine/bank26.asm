@@ -350,16 +350,16 @@ ClearTreasureData: ; 9ab07 (26:6b07)
 	INCROM $9ab1c, $9ab34
 
 LoadTreasureTiles: ; 9ab34 (26:6b34)
-	ld a, [wLevelTreasure0ID]
-	ld de, wTreasureTiles
-	call .CopyGfx
 	ld a, [wLevelTreasure1ID]
+	ld de, wTreasureTiles
 	call .CopyGfx
 	ld a, [wLevelTreasure2ID]
 	call .CopyGfx
 	ld a, [wLevelTreasure3ID]
 	call .CopyGfx
-    ; bug, fallthrough
+	ld a, [wLevelTreasure4ID]
+	call .CopyGfx
+	; bug, fallthrough
 
 .CopyGfx
 ; this gets right addr given that a < 128
@@ -413,13 +413,6 @@ LoadLevelTreasures: ; 9ab85 (26:6b85)
 
 LoadTreasureInfo: ; 9aba1 (26:6ba1)
 	ld de, Data_9abf7
-	ld a, [wLevelTreasure0ID]
-	ld l, a
-	ld h, $00
-	add hl, de
-	ld a, [hl]
-	ld [wLevelTreasure0Unk], a
-
 	ld a, [wLevelTreasure1ID]
 	ld l, a
 	ld h, $00
@@ -440,6 +433,13 @@ LoadTreasureInfo: ; 9aba1 (26:6ba1)
 	add hl, de
 	ld a, [hl]
 	ld [wLevelTreasure3Unk], a
+
+	ld a, [wLevelTreasure4ID]
+	ld l, a
+	ld h, $00
+	add hl, de
+	ld a, [hl]
+	ld [wLevelTreasure4Unk], a
 	ret
 ; 0x9abd1
 

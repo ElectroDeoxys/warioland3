@@ -3,77 +3,77 @@ Func_1ec000: ; 1ec000 (7b:4000)
 	sub $b0
 	jumptable
 
-	dw UpdateState_IceSkatinStart    ; ST_ICE_SKATIN_START
-	dw UpdateState_IceSkatin         ; ST_ICE_SKATIN
-	dw UpdateState_IceSkatinAirborne ; ST_ICE_SKATIN_AIRBORNE
-	dw UpdateState_IceSkatinCrash    ; ST_ICE_SKATIN_CRASH
-	dw Func_156d                     ; ST_UNUSED_B4
-	dw Func_156d                     ; ST_UNUSED_B5
-	dw Func_156d                     ; ST_UNUSED_B6
-	dw Func_156d                     ; ST_UNUSED_B7
-	dw $4339                         ; ST_UNKNOWN_B8
-	dw $43bc                         ; ST_UNKNOWN_B9
-	dw $4540                         ; ST_UNKNOWN_BA
-	dw $467d                         ; ST_UNKNOWN_BB
-	dw $46a8                         ; ST_UNKNOWN_BC
-	dw Func_156d                     ; ST_UNUSED_BD
-	dw Func_156d                     ; ST_UNUSED_BE
-	dw Func_156d                     ; ST_UNUSED_BF
-	dw UpdateState_HangingRail       ; ST_HANGING_RAIL
-	dw Func_156d                     ; ST_UNUSED_C1
-	dw Func_156d                     ; ST_UNUSED_C2
-	dw Func_156d                     ; ST_UNUSED_C3
-	dw $47eb                         ; ST_UNKNOWN_C4
-	dw $4884                         ; ST_UNKNOWN_C5
-	dw $490d                         ; ST_UNKNOWN_C6
-	dw $49b1                         ; ST_UNKNOWN_C7
-	dw $4a6e                         ; ST_UNKNOWN_C8
-	dw $4b9b                         ; ST_UNKNOWN_C9
-	dw $4bf1                         ; ST_UNKNOWN_CA
-	dw $4c7d                         ; ST_UNKNOWN_CB
-	dw $4d9c                         ; ST_UNKNOWN_CC
-	dw $4e65                         ; ST_UNKNOWN_CD
-	dw Func_156d                     ; ST_UNUSED_CE
-	dw Func_156d                     ; ST_UNUSED_CF
-	dw UpdateState_SplitHit          ; ST_SPLIT_HIT
-	dw UpdateState_SplitKnockedBack  ; ST_SPLIT_KNOCKED_BACK
-	dw UpdateState_Splitting         ; ST_SPLITTING
-	dw $504f                         ; ST_UNKNOWN_D3
-	dw $5136                         ; ST_UNKNOWN_D4
-	dw $51af                         ; ST_UNKNOWN_D5
-	dw $523f                         ; ST_UNKNOWN_D6
-	dw $52a3                         ; ST_UNKNOWN_D7
-	dw $531a                         ; ST_UNKNOWN_D8
-	dw Func_156d                     ; ST_UNUSED_D9
-	dw Func_156d                     ; ST_UNUSED_DA
-	dw Func_156d                     ; ST_UNUSED_DB
-	dw UpdateState_BlindIdling       ; ST_BLIND_IDLING
-	dw UpdateState_BlindWalking      ; ST_BLIND_WALKING
-	dw UpdateState_BlindTurning      ; ST_BLIND_TURNING
-	dw UpdateState_BlindAirborne     ; ST_BLIND_AIRBORNE
-	dw $56ee                         ; ST_UNKNOWN_E0
-	dw $57e5                         ; ST_UNKNOWN_E1
-	dw $5886                         ; ST_UNKNOWN_E2
-	dw Func_156d                     ; ST_UNUSED_E3
-	dw UpdateState_MagicRising       ; ST_MAGIC_RISING
-	dw UpdateState_MagicStopping     ; ST_MAGIC_STOPPING
-	dw $5a1e                         ; ST_UNKNOWN_E6
-	dw Func_156d                     ; ST_UNUSED_E7
-	dw $5aaa                         ; ST_BALL_START
-	dw UpdateState_BallBouncing      ; ST_BALL_BOUNCING
-	dw UpdateState_BallAirborne      ; ST_BALL_AIRBORNE
-	dw UpdateState_BallShot          ; ST_BALL_SHOT
-	dw UpdateState_BallThrown        ; ST_BALL_THROWN
-	dw UpdateState_BallSentUpwards   ; ST_BALL_SENT_UPWARDS
-	dw UpdateState_BallTurning       ; ST_BALL_TURNING
-	dw Func_156d                     ; ST_UNUSED_EF
-	dw Func_156d                     ; ST_UNUSED_F0
-	dw Func_156d                     ; ST_UNUSED_F1
-	dw Func_156d                     ; ST_UNUSED_F2
+	dw UpdateState_IceSkatinStart    ; WST_ICE_SKATIN_START
+	dw UpdateState_IceSkatin         ; WST_ICE_SKATIN
+	dw UpdateState_IceSkatinAirborne ; WST_ICE_SKATIN_AIRBORNE
+	dw UpdateState_IceSkatinCrash    ; WST_ICE_SKATIN_CRASH
+	dw Func_156d                     ; WST_UNUSED_B4
+	dw Func_156d                     ; WST_UNUSED_B5
+	dw Func_156d                     ; WST_UNUSED_B6
+	dw Func_156d                     ; WST_UNUSED_B7
+	dw $4339                         ; WST_UNKNOWN_B8
+	dw $43bc                         ; WST_UNKNOWN_B9
+	dw $4540                         ; WST_UNKNOWN_BA
+	dw $467d                         ; WST_UNKNOWN_BB
+	dw $46a8                         ; WST_UNKNOWN_BC
+	dw Func_156d                     ; WST_UNUSED_BD
+	dw Func_156d                     ; WST_UNUSED_BE
+	dw Func_156d                     ; WST_UNUSED_BF
+	dw UpdateState_HangingRail       ; WST_HANGING_RAIL
+	dw Func_156d                     ; WST_UNUSED_C1
+	dw Func_156d                     ; WST_UNUSED_C2
+	dw Func_156d                     ; WST_UNUSED_C3
+	dw $47eb                         ; WST_UNKNOWN_C4
+	dw $4884                         ; WST_UNKNOWN_C5
+	dw $490d                         ; WST_UNKNOWN_C6
+	dw $49b1                         ; WST_UNKNOWN_C7
+	dw $4a6e                         ; WST_UNKNOWN_C8
+	dw $4b9b                         ; WST_UNKNOWN_C9
+	dw $4bf1                         ; WST_UNKNOWN_CA
+	dw $4c7d                         ; WST_UNKNOWN_CB
+	dw $4d9c                         ; WST_UNKNOWN_CC
+	dw $4e65                         ; WST_UNKNOWN_CD
+	dw Func_156d                     ; WST_UNUSED_CE
+	dw Func_156d                     ; WST_UNUSED_CF
+	dw UpdateState_SplitHit          ; WST_SPLIT_HIT
+	dw UpdateState_SplitKnockedBack  ; WST_SPLIT_KNOCKED_BACK
+	dw UpdateState_Splitting         ; WST_SPLITTING
+	dw $504f                         ; WST_UNKNOWN_D3
+	dw $5136                         ; WST_UNKNOWN_D4
+	dw $51af                         ; WST_UNKNOWN_D5
+	dw $523f                         ; WST_UNKNOWN_D6
+	dw $52a3                         ; WST_UNKNOWN_D7
+	dw $531a                         ; WST_UNKNOWN_D8
+	dw Func_156d                     ; WST_UNUSED_D9
+	dw Func_156d                     ; WST_UNUSED_DA
+	dw Func_156d                     ; WST_UNUSED_DB
+	dw UpdateState_BlindIdling       ; WST_BLIND_IDLING
+	dw UpdateState_BlindWalking      ; WST_BLIND_WALKING
+	dw UpdateState_BlindTurning      ; WST_BLIND_TURNING
+	dw UpdateState_BlindAirborne     ; WST_BLIND_AIRBORNE
+	dw $56ee                         ; WST_UNKNOWN_E0
+	dw $57e5                         ; WST_UNKNOWN_E1
+	dw $5886                         ; WST_UNKNOWN_E2
+	dw Func_156d                     ; WST_UNUSED_E3
+	dw UpdateState_MagicRising       ; WST_MAGIC_RISING
+	dw UpdateState_MagicStopping     ; WST_MAGIC_STOPPING
+	dw $5a1e                         ; WST_UNKNOWN_E6
+	dw Func_156d                     ; WST_UNUSED_E7
+	dw $5aaa                         ; WST_BALL_START
+	dw UpdateState_BallBouncing      ; WST_BALL_BOUNCING
+	dw UpdateState_BallAirborne      ; WST_BALL_AIRBORNE
+	dw UpdateState_BallShot          ; WST_BALL_SHOT
+	dw UpdateState_BallThrown        ; WST_BALL_THROWN
+	dw UpdateState_BallSentUpwards   ; WST_BALL_SENT_UPWARDS
+	dw UpdateState_BallTurning       ; WST_BALL_TURNING
+	dw Func_156d                     ; WST_UNUSED_EF
+	dw Func_156d                     ; WST_UNUSED_F0
+	dw Func_156d                     ; WST_UNUSED_F1
+	dw Func_156d                     ; WST_UNUSED_F2
 ; 0x1ec08c
 
 SetState_IceSkatinStart: ; 1ec08c (7b:408c)
-	ld a, ST_ICE_SKATIN_START
+	ld a, WST_ICE_SKATIN_START
 	ld [wWarioState], a
 
 	ld a, -1
@@ -133,7 +133,7 @@ UpdateState_IceSkatinStart: ; 1ec124 (7b:4124)
 ;	fallthrough
 
 SetState_IceSkatin: ; 1ec13c (7b:413c)
-	ld a, ST_ICE_SKATIN
+	ld a, WST_ICE_SKATIN
 	ld [wWarioState], a
 
 	xor a
@@ -197,7 +197,7 @@ UpdateState_IceSkatin: ; 1ec177 (7b:4177)
 	ret
 
 .asm_1ec205
-	ld a, ST_ICE_SKATIN_AIRBORNE
+	ld a, WST_ICE_SKATIN_AIRBORNE
 	ld [wWarioState], a
 	ld a, FALLING_JUMP_VEL_INDEX
 	ld [wJumpVelIndex], a
@@ -242,7 +242,7 @@ UpdateState_IceSkatinAirborne: ; 1ec22b (7b:422b)
 	ld [wca86], a
 .asm_1ec288
 	ld a, [wWarioState]
-	cp ST_ICE_SKATIN_AIRBORNE
+	cp WST_ICE_SKATIN_AIRBORNE
 	ret nz ; done if not ice skatin airborne any more
 
 	farcall Func_199e9
@@ -250,14 +250,14 @@ UpdateState_IceSkatinAirborne: ; 1ec22b (7b:422b)
 	and a
 	jr nz, .asm_1ec2aa
 	ld a, [wWarioState]
-	cp ST_ICE_SKATIN_AIRBORNE
+	cp WST_ICE_SKATIN_AIRBORNE
 	ret nz ; done if not ice skatin airborne any more
 	jp Func_14de
 
 .asm_1ec2aa
 	call Func_14f6
 	ld a, [wWarioState]
-	cp ST_ICE_SKATIN_AIRBORNE
+	cp WST_ICE_SKATIN_AIRBORNE
 	ret nz ; done if not ice skatin airborne any more
 
 	ld a, $10
@@ -268,7 +268,7 @@ UpdateState_IceSkatinAirborne: ; 1ec22b (7b:422b)
 SetState_IceSkatinCrash: ; 1ec2bb (7b:42bb)
 	load_sfx SFX_02E
 
-	ld a, ST_ICE_SKATIN_CRASH
+	ld a, WST_ICE_SKATIN_CRASH
 	ld [wWarioState], a
 
 	xor a
@@ -332,7 +332,7 @@ UpdateState_HangingRail: ; 1ec703 (7b:4703)
 SetState_UnknownC4: ; 1ec749 (7b:4749)
 	load_sfx SFX_047
 
-	ld a, ST_UNKNOWN_C4
+	ld a, WST_UNKNOWN_C4
 	ld [wWarioState], a
 
 	ld a, $ff
@@ -388,7 +388,7 @@ SetState_UnknownC4: ; 1ec749 (7b:4749)
 	INCROM $1ec7eb, $1ecbb2
 
 SetState_UnknownCA: ; 1ecbb2 (7b:4bb2)
-	ld a, ST_UNKNOWN_CA
+	ld a, WST_UNKNOWN_CA
 	ld [wWarioState], a
 	xor a
 	ld [wJumpVelIndex], a
@@ -411,7 +411,7 @@ SetState_UnknownCA: ; 1ecbb2 (7b:4bb2)
 	INCROM $1ecbf1, $1ece9e
 
 SetState_SplitHit: ; 1ece9e (7b:4e9e)
-	ld a, ST_SPLIT_HIT
+	ld a, WST_SPLIT_HIT
 	ld [wWarioState], a
 
 	ld a, $ff
@@ -469,7 +469,7 @@ UpdateState_SplitHit: ; 1ecf3a (7b:4f3a)
 	and a
 	ret z
 
-	ld a, ST_SPLIT_KNOCKED_BACK
+	ld a, WST_SPLIT_KNOCKED_BACK
 	ld [wWarioState], a
 
 	xor a
@@ -525,7 +525,7 @@ UpdateState_SplitKnockedBack: ; 1ecf86 (7b:4f86)
 
 SetState_Splitting: ; 1ed008 (7b:5008)
 	call Func_14f6
-	ld a, ST_SPLITTING
+	ld a, WST_SPLITTING
 	ld [wWarioState], a
 	xor a
 	ld [wJumpVelTable], a
@@ -544,7 +544,7 @@ UpdateState_Splitting: ; 1ed018 (7b:5018)
 	and a
 	ret nz
 
-	ld a, ST_UNKNOWN_D3
+	ld a, WST_UNKNOWN_D3
 	ld [wWarioState], a
 
 	ld a, JUMP_VEL_NORMAL
@@ -581,7 +581,7 @@ UpdateState_Splitting: ; 1ed018 (7b:5018)
 	INCROM $1ed0a6, $1ed331
 
 SetState_BlindIdling: ; 1ed331 (7b:5331)
-	ld a, ST_BLIND_IDLING
+	ld a, WST_BLIND_IDLING
 	ld [wWarioState], a
 
 	xor a
@@ -636,7 +636,7 @@ UpdateState_BlindIdling: ; 1ed3cd (7b:53cd)
 	update_anim_1
 	call Func_1edf93
 	ld a, [wWarioState]
-	cp ST_BLIND_IDLING
+	cp WST_BLIND_IDLING
 	ret nz ; done if not blind idling any more
 
 	farcall Func_198e0
@@ -649,7 +649,7 @@ UpdateState_BlindIdling: ; 1ed3cd (7b:53cd)
 SetState_BlindWalking: ; 1ed3fa (7b:53fa)
 	xor a
 	ld [wca86], a
-	ld a, ST_BLIND_WALKING
+	ld a, WST_BLIND_WALKING
 	ld [wWarioState], a
 
 	xor a
@@ -690,7 +690,7 @@ UpdateState_BlindWalking: ; 1ed469 (7b:5469)
 
 	farcall Func_19734
 	ld a, [wWarioState]
-	cp ST_BLIND_WALKING
+	cp WST_BLIND_WALKING
 	ret nz ; done if not blind walking any more
 
 	ld a, b
@@ -698,7 +698,7 @@ UpdateState_BlindWalking: ; 1ed469 (7b:5469)
 	jp nz, RecoverFromTransformation
 	call Func_1edfa4
 	ld a, [wWarioState]
-	cp ST_BLIND_WALKING
+	cp WST_BLIND_WALKING
 	ret nz ; done if not blind walking any more
 
 	farcall Func_198e0
@@ -710,7 +710,7 @@ UpdateState_BlindWalking: ; 1ed469 (7b:5469)
 ; 0x1ed4d1
 
 SetState_BlindTurning: ; 1ed4d1 (7b:54d1)
-	ld a, ST_BLIND_TURNING
+	ld a, WST_BLIND_TURNING
 	ld [wWarioState], a
 
 	xor a
@@ -769,7 +769,7 @@ SetState_BlindAirborne: ; 1ed571 (7b:5571)
 	xor a ; FALSE
 	ld [wIsStandingOnSlope], a
 
-	ld a, ST_BLIND_AIRBORNE
+	ld a, WST_BLIND_AIRBORNE
 	ld [wWarioState], a
 
 	xor a
@@ -811,7 +811,7 @@ UpdateState_BlindAirborne: ; 1ed5e2 (7b:55e2)
 	jp nz, RecoverFromTransformation
 	farcall Func_19734
 	ld a, [wWarioState]
-	cp ST_BLIND_AIRBORNE
+	cp WST_BLIND_AIRBORNE
 	ret nz ; done if not blind airborne any more
 
 	ld a, b
@@ -819,7 +819,7 @@ UpdateState_BlindAirborne: ; 1ed5e2 (7b:55e2)
 	jp nz, RecoverFromTransformation
 	call Func_1ee00f
 	ld a, [wWarioState]
-	cp ST_BLIND_AIRBORNE
+	cp WST_BLIND_AIRBORNE
 	ret nz ; done if not blind airborne any more
 
 	ld a, [wJumpVelIndex]
@@ -830,7 +830,7 @@ UpdateState_BlindAirborne: ; 1ed5e2 (7b:55e2)
 	and a
 	ret z
 	ld a, [wWarioState]
-	cp ST_BLIND_AIRBORNE
+	cp WST_BLIND_AIRBORNE
 	ret nz ; done if not blind airborne any more
 	jp Func_1ed548
 
@@ -846,7 +846,7 @@ UpdateState_BlindAirborne: ; 1ed5e2 (7b:55e2)
 ; 0x1ed660
 
 SetState_UnknownE0: ; 1ed660 (7b:5660)
-	ld a, ST_UNKNOWN_E0
+	ld a, WST_UNKNOWN_E0
 	ld [wWarioState], a
 
 	xor a
@@ -912,7 +912,7 @@ SetState_UnknownE1: ; 1ed738 (7b:5738)
 	ld a, $02
 	ld [wca94], a
 
-	ld a, ST_UNKNOWN_E1
+	ld a, WST_UNKNOWN_E1
 	ld [wWarioState], a
 
 	xor a
@@ -1000,7 +1000,7 @@ SetState_MagicRising: ; 1ed8aa (7b:58aa)
 	ld b, $11
 	farcall Func_c9f3
 
-	ld a, ST_MAGIC_RISING
+	ld a, WST_MAGIC_RISING
 	ld [wWarioState], a
 
 	ld a, -1
@@ -1088,7 +1088,7 @@ UpdateState_MagicRising: ; 1ed972 (7b:5972)
 	ld b, $12
 	farcall Func_c9f3
 
-	ld a, ST_MAGIC_STOPPING
+	ld a, WST_MAGIC_STOPPING
 	ld [wWarioState], a
 
 	xor a
@@ -1139,7 +1139,7 @@ SetState_BallStart: ; 1eda21 (7b:5a21)
 	and a
 	jr z, .asm_1edaca
 
-	ld a, ST_BALL_START
+	ld a, WST_BALL_START
 	ld [wWarioState], a
 
 	xor a
@@ -1216,7 +1216,7 @@ Func_1edd24: ; 1edd24 (7b:5d24)
 	ld [wJumpVelTable], a
 	ld [wJumpVelIndex], a
 
-	ld a, ST_BALL_BOUNCING
+	ld a, WST_BALL_BOUNCING
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
@@ -1237,7 +1237,7 @@ SetState_BallAirborne: ; 1edb5b (7b:5b5b)
 	ld a, JUMP_VEL_KNOCK_BACK
 	ld [wJumpVelTable], a
 
-	ld a, ST_BALL_AIRBORNE
+	ld a, WST_BALL_AIRBORNE
 	ld [wWarioState], a
 
 	xor a
@@ -1272,7 +1272,7 @@ UpdateState_BallAirborne: ; 1edba0 (7b:5ba0)
 ; 0x1edbd8
 
 SetState_BallShot: ; 1edbd8 (7b:5bd8)
-	ld a, ST_BALL_SHOT
+	ld a, WST_BALL_SHOT
 	ld [wWarioState], a
 
 	xor a
@@ -1360,7 +1360,7 @@ UpdateState_BallShot: ; 1edc15 (7b:5c15)
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
 
-	ld a, ST_BALL_THROWN
+	ld a, WST_BALL_THROWN
 	ld [wWarioState], a
 
 	xor a
@@ -1423,7 +1423,7 @@ UpdateState_BallThrown: ; 1edcd0 (7b:5cd0)
 	pop af
 	ldh [rSVBK], a
 
-	ld a, ST_BALL_SENT_UPWARDS
+	ld a, WST_BALL_SENT_UPWARDS
 	ld [wWarioState], a
 	load_sfx SFX_066
 
@@ -1483,7 +1483,7 @@ SetState_BallTurning: ; 1eddf2 (7b:5df2)
 	ld [wJumpVelTable], a
 	ld [wJumpVelIndex], a
 
-	ld a, ST_BALL_TURNING
+	ld a, WST_BALL_TURNING
 	ld [wWarioState], a
 
 	xor a

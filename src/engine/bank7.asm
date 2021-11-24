@@ -8,11 +8,11 @@ Func_1c000: ; 1c000 (7:4000)
 	call HandleGroundShake
 	call HandleInvincibility
 	ld a, [wWarioState]
-	cp $30 ; ST_SLIPPING
+	cp $30 ; WST_SLIPPING
 	jr c, .asm_1c04d
-	cp $60 ; ST_ON_FIRE
+	cp $60 ; WST_ON_FIRE
 	jr c, .asm_1c03d
-	cp $b0 ; ST_ICE_SKATIN_START
+	cp $b0 ; WST_ICE_SKATIN_START
 	jr c, .asm_1c02d
 	farcall Func_1ec000
 	ret
@@ -28,54 +28,54 @@ Func_1c000: ; 1c000 (7:4000)
 .asm_1c04d
 	jumptable
 
-	dw UpdateState_Idling              ; ST_IDLING
-	dw UpdateState_Walking             ; ST_WALKING
-	dw UpdateState_Turning             ; ST_TURNING
-	dw Func_156d                       ; ST_UNUSED_03
-	dw UpdateState_Airborne            ; ST_AIRBORNE
-	dw UpdateState_Landing             ; ST_LANDING
-	dw UpdateState_CrouchSliding       ; ST_CROUCH_SLIDING
-	dw UpdateState_Attacking           ; ST_ATTACKING
-	dw UpdateState_AttackingAirborne   ; ST_ATTACKING_AIRBORNE
-	dw UpdateState_Bumping             ; ST_BUMPING
-	dw UpdateState_Diving              ; ST_DIVING
-	dw UpdateState_Submerged           ; ST_SUBMERGED
-	dw UpdateState_WaterSurfaceIdling  ; ST_WATER_SURFACE_IDLING
-	dw UpdateState_WaterSurfaceMoving  ; ST_WATER_SURFACE_MOVING
-	dw UpdateState_UnderwaterThrusting ; ST_UNDERWATER_THRUSTING
-	dw UpdateState_SwimKnockBack       ; ST_SWIM_KNOCK_BACK
-	dw UpdateState_WaterStung          ; ST_WATER_STUNG
-	dw UpdateState_TryingSubmerge      ; ST_TRYING_SUBMERGE
-	dw UpdateState_Crouching           ; ST_CROUCHING
-	dw UpdateState_CrouchWalking       ; ST_CROUCH_WALKING
-	dw UpdateState_CrouchAirborne      ; ST_CROUCH_AIRBORNE
-	dw UpdateState_Stung               ; ST_STUNG
-	dw UpdateState_StungRecovery       ; ST_STUNG_RECOVERY
-	dw UpdateState_PipeGoingDown       ; ST_PIPE_GOING_DOWN
-	dw UpdateState_PipeGoingUp         ; ST_PIPE_GOING_UP
-	dw UpdateState_EnemyBumping        ; ST_ENEMY_BUMPING
-	dw UpdateState_SmashAttacking      ; ST_SMASH_ATTACKING
-	dw Func_156d                       ; ST_UNUSED_1B
-	dw Func_156d                       ; ST_UNUSED_1C
-	dw Func_156d                       ; ST_UNUSED_1D
-	dw UpdateState_PickingUp           ; ST_PICKING_UP
-	dw UpdateState_GrabIdling          ; ST_GRAB_IDLING
-	dw UpdateState_GrabWalking         ; ST_GRAB_WALKING
-	dw UpdateState_GrabAirborne        ; ST_GRAB_AIRBORNE
-	dw UpdateState_ThrowCharging       ; ST_THROW_CHARGING
-	dw UpdateState_ThrowFullyCharged   ; ST_THROW_FULLY_CHARGED
-	dw UpdateState_Throwing            ; ST_THROWING
-	dw UpdateState_ThrowingAirborne    ; ST_THROWING_AIRBORNE
-	dw UpdateState_GrabSmashAttacking  ; ST_GRAB_SMASH_ATTACKING
-	dw UpdateState_Sliding             ; ST_SLIDING
-	dw UpdateState_Rolling             ; ST_ROLLING
-	dw UpdateState_RollingAirborne     ; ST_ROLLING_AIRBORNE
-	dw UpdateState_PickedUp            ; ST_PICKED_UP
-	dw UpdateState_GroundShakeStunned  ; ST_GROUND_SHAKE_STUNNED
-	dw UpdateState_EnteringDoor        ; ST_ENTERING_DOOR
-	dw Func_156d                       ; ST_UNUSED_2D
-	dw Func_156d                       ; ST_UNUSED_2E
-	dw Func_156d                       ; ST_UNUSED_2F
+	dw UpdateState_Idling              ; WST_IDLING
+	dw UpdateState_Walking             ; WST_WALKING
+	dw UpdateState_Turning             ; WST_TURNING
+	dw Func_156d                       ; WST_UNUSED_03
+	dw UpdateState_Airborne            ; WST_AIRBORNE
+	dw UpdateState_Landing             ; WST_LANDING
+	dw UpdateState_CrouchSliding       ; WST_CROUCH_SLIDING
+	dw UpdateState_Attacking           ; WST_ATTACKING
+	dw UpdateState_AttackingAirborne   ; WST_ATTACKING_AIRBORNE
+	dw UpdateState_Bumping             ; WST_BUMPING
+	dw UpdateState_Diving              ; WST_DIVING
+	dw UpdateState_Submerged           ; WST_SUBMERGED
+	dw UpdateState_WaterSurfaceIdling  ; WST_WATER_SURFACE_IDLING
+	dw UpdateState_WaterSurfaceMoving  ; WST_WATER_SURFACE_MOVING
+	dw UpdateState_UnderwaterThrusting ; WST_UNDERWATER_THRUSTING
+	dw UpdateState_SwimKnockBack       ; WST_SWIM_KNOCK_BACK
+	dw UpdateState_WaterStung          ; WST_WATER_STUNG
+	dw UpdateState_TryingSubmerge      ; WST_TRYING_SUBMERGE
+	dw UpdateState_Crouching           ; WST_CROUCHING
+	dw UpdateState_CrouchWalking       ; WST_CROUCH_WALKING
+	dw UpdateState_CrouchAirborne      ; WST_CROUCH_AIRBORNE
+	dw UpdateState_Stung               ; WST_STUNG
+	dw UpdateState_StungRecovery       ; WST_STUNG_RECOVERY
+	dw UpdateState_PipeGoingDown       ; WST_PIPE_GOING_DOWN
+	dw UpdateState_PipeGoingUp         ; WST_PIPE_GOING_UP
+	dw UpdateState_EnemyBumping        ; WST_ENEMY_BUMPING
+	dw UpdateState_SmashAttacking      ; WST_SMASH_ATTACKING
+	dw Func_156d                       ; WST_UNUSED_1B
+	dw Func_156d                       ; WST_UNUSED_1C
+	dw Func_156d                       ; WST_UNUSED_1D
+	dw UpdateState_PickingUp           ; WST_PICKING_UP
+	dw UpdateState_GrabIdling          ; WST_GRAB_IDLING
+	dw UpdateState_GrabWalking         ; WST_GRAB_WALKING
+	dw UpdateState_GrabAirborne        ; WST_GRAB_AIRBORNE
+	dw UpdateState_ThrowCharging       ; WST_THROW_CHARGING
+	dw UpdateState_ThrowFullyCharged   ; WST_THROW_FULLY_CHARGED
+	dw UpdateState_Throwing            ; WST_THROWING
+	dw UpdateState_ThrowingAirborne    ; WST_THROWING_AIRBORNE
+	dw UpdateState_GrabSmashAttacking  ; WST_GRAB_SMASH_ATTACKING
+	dw UpdateState_Sliding             ; WST_SLIDING
+	dw UpdateState_Rolling             ; WST_ROLLING
+	dw UpdateState_RollingAirborne     ; WST_ROLLING_AIRBORNE
+	dw UpdateState_PickedUp            ; WST_PICKED_UP
+	dw UpdateState_GroundShakeStunned  ; WST_GROUND_SHAKE_STUNNED
+	dw UpdateState_EnteringDoor        ; WST_ENTERING_DOOR
+	dw Func_156d                       ; WST_UNUSED_2D
+	dw Func_156d                       ; WST_UNUSED_2E
+	dw Func_156d                       ; WST_UNUSED_2F
 	dw Func_156d
 	dw Func_156d
 	dw Func_156d
@@ -85,7 +85,7 @@ Func_1c000: ; 1c000 (7:4000)
 UpdateState_Idling: ; 1c0b6 (7:40b6)
 	farcall Func_198e0
 	ld a, [wWarioState]
-	cp ST_IDLING
+	cp WST_IDLING
 	ret nz ; not idling
 	ld a, b
 	and a
@@ -93,7 +93,7 @@ UpdateState_Idling: ; 1c0b6 (7:40b6)
 
 	update_pos_y
 	ld a, [wWarioState]
-	cp ST_IDLING
+	cp WST_IDLING
 	ret nz ; not idling
 
 	ld a, [wJoypadDown]
@@ -103,7 +103,7 @@ UpdateState_Idling: ; 1c0b6 (7:40b6)
 ; pressing down, handle what state to change to
 	farcall Func_19b12
 	ld a, [wWarioState]
-	cp ST_IDLING
+	cp WST_IDLING
 	ret nz ; not idling
 
 	ld a, [wLadderInteraction]
@@ -140,11 +140,11 @@ UpdateState_Idling: ; 1c0b6 (7:40b6)
 
 .handle_input
 	ld a, [wWarioState]
-	cp ST_IDLING
+	cp WST_IDLING
 	ret nz ; not idling
 	call HandleInput_Idling
 	ld a, [wWarioState]
-	cp ST_IDLING
+	cp WST_IDLING
 	ret nz ; not idling
 
 ; still idling, increment idle counter
@@ -186,7 +186,7 @@ UpdateState_Walking: ; 1c1ab (7:41ab)
 .handle_input
 	call HandleInput_Walking
 	ld a, [wWarioState]
-	cp ST_WALKING
+	cp WST_WALKING
 	ret nz ; return if not walking anymore
 
 	farcall Func_19b25
@@ -194,12 +194,12 @@ UpdateState_Walking: ; 1c1ab (7:41ab)
 	and a
 	jp nz, Func_11f6
 	ld a, [wWarioState]
-	cp ST_WALKING
+	cp WST_WALKING
 	ret nz ; return if not walking anymore
 
 	farcall Func_198e0
 	ld a, [wWarioState]
-	cp ST_WALKING
+	cp WST_WALKING
 	ret nz ; return if not walking anymore
 	ld a, b
 	and a
@@ -294,7 +294,7 @@ SetState_Airborne: ; 1c2e2 (7:42e2)
 	xor a
 	ld [wIsStandingOnSlope], a
 
-	ld a, ST_AIRBORNE
+	ld a, WST_AIRBORNE
 	ld [wWarioState], a
 
 	xor a
@@ -366,7 +366,7 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 
 .asm_1c3c0
 	ld a, [wWarioState]
-	cp ST_AIRBORNE
+	cp WST_AIRBORNE
 	ret nz ; done if not airborne anymore
 
 	farcall Func_19afb
@@ -381,11 +381,11 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 
 .handle_input
 	ld a, [wWarioState]
-	cp ST_AIRBORNE
+	cp WST_AIRBORNE
 	ret nz ; done if not airborne anymore
 	call HandleInput_Airborne
 	ld a, [wWarioState]
-	cp ST_AIRBORNE
+	cp WST_AIRBORNE
 	ret nz ; done if not airborne anymore
 
 	ld a, [wPowerUpLevel]
@@ -468,7 +468,7 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	and a
 	ret z
 	ld a, [wWarioState]
-	cp ST_AIRBORNE
+	cp WST_AIRBORNE
 	ret nz ; done if not airborne anymore
 
 	ld a, [wced2]
@@ -483,7 +483,7 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 .asm_1c4ea
 	farcall Func_199e9
 	ld a, [wWarioState]
-	cp ST_AIRBORNE
+	cp WST_AIRBORNE
 	ret nz ; done if not airborne anymore
 
 	ld a, b
@@ -563,7 +563,7 @@ Func_1d58a: ; 1d58a (7:558a)
 	jp nz, Func_1e855
 
 	load_sfx SFX_LAND
-	ld a, ST_LANDING
+	ld a, WST_LANDING
 	ld [wWarioState], a
 	load_oam OAM_15955
 
@@ -638,7 +638,7 @@ DoGroundPound: ; 1c66b (7:466b)
 SetState_SmashAttacking: ; 1c6c1 (7:46c1)
 	ld a, $81
 	ld [wIsSmashAttacking], a
-	ld a, ST_SMASH_ATTACKING
+	ld a, WST_SMASH_ATTACKING
 	ld [wWarioState], a
 	xor a
 	ld [wWarioStateCounter], a
@@ -699,7 +699,7 @@ SetState_CrouchSliding: ; 1c73b (7:473b)
 	ld [wSFXLoopCounter], a
 	ld [wAttackCounter], a
 	load_sfx SFX_00C
-	ld a, ST_CROUCH_SLIDING
+	ld a, WST_CROUCH_SLIDING
 	ld [wWarioState], a
 	ld a, TRUE
 	ld [wIsCrouching], a
@@ -740,7 +740,7 @@ UpdateState_CrouchSliding: ; 1c7c3 (7:47c3)
 	and a
 	jp nz, Func_11f6
 	ld a, [wWarioState]
-	cp ST_CROUCH_SLIDING
+	cp WST_CROUCH_SLIDING
 	ret nz ; done if not crouch sliding anymore
 
 	ld a, [wJoypadPressed]
@@ -748,7 +748,7 @@ UpdateState_CrouchSliding: ; 1c7c3 (7:47c3)
 	jp nz, .asm_1c885
 	farcall Func_198e0
 	ld a, [wWarioState]
-	cp ST_CROUCH_SLIDING
+	cp WST_CROUCH_SLIDING
 	ret nz ; done if not crouch sliding anymore
 
 	ld a, b
@@ -763,7 +763,7 @@ UpdateState_CrouchSliding: ; 1c7c3 (7:47c3)
 .asm_1c815
 	farcall Func_19734
 	ld a, [wWarioState]
-	cp ST_CROUCH_SLIDING
+	cp WST_CROUCH_SLIDING
 	ret nz ; done if not crouch sliding anymore
 
 	ld a, b
@@ -829,7 +829,7 @@ UpdateState_CrouchSliding: ; 1c7c3 (7:47c3)
 	ld [wca6f], a
 	farcall Func_1996e
 	ld a, [wWarioState]
-	cp ST_CROUCH_SLIDING
+	cp WST_CROUCH_SLIDING
 	ret nz ; done if not crouch sliding anymore
 
 	ld a, b
@@ -852,7 +852,7 @@ UpdateState_CrouchSliding: ; 1c7c3 (7:47c3)
 	ld [wca6f], a
 	farcall Func_1996e
 	ld a, [wWarioState]
-	cp ST_CROUCH_SLIDING
+	cp WST_CROUCH_SLIDING
 	ret nz ; done if not crouch sliding anymore
 
 	ld a, b
@@ -892,7 +892,7 @@ UpdateState_Attacking: ; 1c8df (7:48df)
 
 	call HandleInput_Attacking
 	ld a, [wWarioState]
-	cp ST_ATTACKING
+	cp WST_ATTACKING
 	ret nz ; done if not attacking anymore
 
 	farcall Func_19b25
@@ -900,12 +900,12 @@ UpdateState_Attacking: ; 1c8df (7:48df)
 	and a
 	jp nz, Func_11f6
 	ld a, [wWarioState]
-	cp ST_ATTACKING
+	cp WST_ATTACKING
 	ret nz ; done if not attacking anymore
 
 	farcall Func_19734
 	ld a, [wWarioState]
-	cp ST_ATTACKING
+	cp WST_ATTACKING
 	ret nz ; done if not attacking anymore
 
 	ld a, b
@@ -916,7 +916,7 @@ UpdateState_Attacking: ; 1c8df (7:48df)
 	and a
 	jp z, Func_1cb33
 	ld a, [wWarioState]
-	cp ST_ATTACKING
+	cp WST_ATTACKING
 	ret nz ; done if not attacking anymore
 
 	ld a, [wAttackCounter]
@@ -949,7 +949,7 @@ UpdateState_Attacking: ; 1c8df (7:48df)
 	farcall Func_198e0
 	update_pos_y
 	ld a, [wWarioState]
-	cp ST_ATTACKING
+	cp WST_ATTACKING
 	ret nz ; done if not attacking anymore
 
 	ld hl, wAttackCounter
@@ -1021,7 +1021,7 @@ Func_1ca41: ; 1ca41 (7:4a41)
 ;	fallthrough
 
 Func_1ca46: ; 1ca46 (7:4a46)
-	ld a, ST_BUMPING
+	ld a, WST_BUMPING
 	ld [wWarioState], a
 	ld a, [wDirection]
 	xor $1 ; switch direction
@@ -1105,7 +1105,7 @@ Func_1cb3a: ; 1cb3a (7:4b3a)
 SetState_AttackingAirborne: ; 1cb43 (7:4b43)
 	xor a
 	ld [wIsStandingOnSlope], a
-	ld a, ST_ATTACKING_AIRBORNE
+	ld a, WST_ATTACKING_AIRBORNE
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
@@ -1163,7 +1163,7 @@ UpdateState_AttackingAirborne: ; 1cbb9 (7:4bb9)
 
 .asm_1cbec
 	ld a, [wWarioState]
-	cp ST_ATTACKING_AIRBORNE
+	cp WST_ATTACKING_AIRBORNE
 	ret nz ; done if nor attacking airborne anymore
 
 	ld a, [wSFXLoopCounter]
@@ -1178,12 +1178,12 @@ UpdateState_AttackingAirborne: ; 1cbb9 (7:4bb9)
 
 	call Func_1ea64
 	ld a, [wWarioState]
-	cp ST_ATTACKING_AIRBORNE
+	cp WST_ATTACKING_AIRBORNE
 	ret nz ; done if nor attacking airborne anymore
 
 	farcall Func_19734
 	ld a, [wWarioState]
-	cp ST_ATTACKING_AIRBORNE
+	cp WST_ATTACKING_AIRBORNE
 	ret nz ; done if nor attacking airborne anymore
 
 	ld a, b
@@ -1218,7 +1218,7 @@ UpdateState_AttackingAirborne: ; 1cbb9 (7:4bb9)
 	and a
 	ret z
 	ld a, [wWarioState]
-	cp ST_ATTACKING_AIRBORNE
+	cp WST_ATTACKING_AIRBORNE
 	ret nz ; done if nor attacking airborne anymore
 
 	ld a, [wJumpVelIndex]
@@ -1238,7 +1238,7 @@ UpdateState_AttackingAirborne: ; 1cbb9 (7:4bb9)
 .asm_1cca0
 	call Func_14f6
 	ld a, [wWarioState]
-	cp ST_ATTACKING_AIRBORNE
+	cp WST_ATTACKING_AIRBORNE
 	ret nz ; done if nor attacking airborne anymore
 
 	jp SetState_Idling
@@ -1263,12 +1263,12 @@ UpdateState_Bumping: ; 1ccaf (7:4caf)
 
 .asm_1cce2
 	ld a, [wWarioState]
-	cp ST_BUMPING
+	cp WST_BUMPING
 	ret nz ; done if not bumping anymore
 
 	call Func_1ea83
 	ld a, [wWarioState]
-	cp ST_BUMPING
+	cp WST_BUMPING
 	ret nz ; done if not bumping anymore
 
 	ld a, [wJumpVelIndex]
@@ -1276,7 +1276,7 @@ UpdateState_Bumping: ; 1ccaf (7:4caf)
 	jr nc, .asm_1cd16
 	farcall Func_1996e
 	ld a, [wWarioState]
-	cp ST_BUMPING
+	cp WST_BUMPING
 	ret nz ; done if not bumping anymore
 
 	ld a, b
@@ -1298,7 +1298,7 @@ UpdateState_Bumping: ; 1ccaf (7:4caf)
 	xor $1 ; switch direction
 	ld [wDirection], a
 	ld a, [wWarioState]
-	cp ST_BUMPING
+	cp WST_BUMPING
 	ret nz ; done if not bumping anymore
 	jp Func_1c541
 ; 0x1cd48
@@ -1353,7 +1353,7 @@ Func_1cdc4: ; 1cdc4 (7:4dc4)
 ;	fallthrough
 
 SetState_Diving: ; 1cdf6 (7:4df6)
-	ld a, ST_DIVING
+	ld a, WST_DIVING
 	ld [wWarioState], a
 	ld a, -1
 	ld [wca70], a
@@ -1384,7 +1384,7 @@ SetState_Diving: ; 1cdf6 (7:4df6)
 UpdateState_Diving: ; 1ce42 (7:4e42)
 	farcall Func_198e0
 	ld a, [wWarioState]
-	cp ST_DIVING
+	cp WST_DIVING
 	ret nz ; done if not diving anymore
 
 	ld a, b
@@ -1417,7 +1417,7 @@ UpdateState_Diving: ; 1ce42 (7:4e42)
 ;	fallthrough
 
 SetState_Submerged: ; 1ce95 (7:4e95)
-	ld a, ST_SUBMERGED
+	ld a, WST_SUBMERGED
 	ld [wWarioState], a
 	xor a
 	ld [wWarioStateCounter], a
@@ -1481,7 +1481,7 @@ UpdateState_Submerged: ; 1cf53 (7:4f53)
 	and a
 	jp nz, Func_11f6
 	ld a, [wWarioState]
-	cp ST_SUBMERGED
+	cp WST_SUBMERGED
 	ret nz
 	call Func_1e46a
 	call Func_1f1a9
@@ -1498,7 +1498,7 @@ Func_1cf7a: ; 1cf7a (7:4f7a)
 ;	fallthrough
 
 SetState_WaterSurfaceIdling: ; 1cfa2 (7:4fa2)
-	ld a, ST_WATER_SURFACE_IDLING
+	ld a, WST_WATER_SURFACE_IDLING
 	ld [wWarioState], a
 	ld a, -1
 	ld [wca70], a
@@ -1540,7 +1540,7 @@ UpdateState_WaterSurfaceIdling: ; 1d008 (7:5008)
 	ld [wc0e1], a
 	farcall Func_19b25
 	ld a, [wWarioState]
-	cp ST_WATER_SURFACE_IDLING
+	cp WST_WATER_SURFACE_IDLING
 	ret nz ; done if not water idling anymore
 
 	ld a, [wc0d7]
@@ -1559,7 +1559,7 @@ UpdateState_WaterSurfaceIdling: ; 1d008 (7:5008)
 	call Func_1d1bc
 	call Func_1f40f
 	ld a, [wWarioState]
-	cp ST_WATER_SURFACE_IDLING
+	cp WST_WATER_SURFACE_IDLING
 	ret nz ; done if not water idling anymore
 
 	ld a, [wJoypadDown]
@@ -1570,7 +1570,7 @@ UpdateState_WaterSurfaceIdling: ; 1d008 (7:5008)
 ; 0x1d065
 
 SetState_WaterSurfaceMoving: ; 1d065 (7:5065)
-	ld a, ST_WATER_SURFACE_MOVING
+	ld a, WST_WATER_SURFACE_MOVING
 	ld [wWarioState], a
 	ld a, -1
 	ld [wca70], a
@@ -1728,7 +1728,7 @@ Func_1d1e4: ; 1d1e4 (7:51e4)
 ;	fallthrough
 
 SetState_UnderwaterThrusting: ; 1d1ec (7:51ec)
-	ld a, ST_UNDERWATER_THRUSTING
+	ld a, WST_UNDERWATER_THRUSTING
 	ld [wWarioState], a
 	ld a, -1
 	ld [wca70], a
@@ -1801,7 +1801,7 @@ UpdateState_UnderwaterThrusting: ; 1d297 (7:5297)
 	and a
 	jp nz, Func_11f6
 	ld a, [wWarioState]
-	cp ST_UNDERWATER_THRUSTING
+	cp WST_UNDERWATER_THRUSTING
 	ret nz ; done if not underwater thrusting anymore
 
 	ld a, [wSFXLoopCounter]
@@ -1816,7 +1816,7 @@ UpdateState_UnderwaterThrusting: ; 1d297 (7:5297)
 
 	call Func_1f470
 	ld a, [wWarioState]
-	cp ST_UNDERWATER_THRUSTING
+	cp WST_UNDERWATER_THRUSTING
 	ret nz ; done if not underwater thrusting anymore
 
 	call Func_1e46a
@@ -1831,7 +1831,7 @@ SetState_SwimKnockBack_SwitchDirection: ; 1d2ea (7:52ea)
 
 SetState_SwimKnockBack: ; 1d2f2 (7:52f2)
 	load_sfx SFX_BUMP
-	ld a, ST_SWIM_KNOCK_BACK
+	ld a, WST_SWIM_KNOCK_BACK
 	ld [wWarioState], a
 	xor a
 	ld [wWarioStateCounter], a
@@ -1944,7 +1944,7 @@ UpdateState_WaterStung: ; 1d395 (7:5395)
 ; 0x1d416
 
 SetState_TryingSubmerge: ; 1d416 (7:5416)
-	ld a, ST_TRYING_SUBMERGE
+	ld a, WST_TRYING_SUBMERGE
 	ld [wWarioState], a
 	xor a
 	ld [wWarioStateCounter], a
@@ -1975,7 +1975,7 @@ UpdateState_TryingSubmerge: ; 1d455 (7:5455)
 UpdateState_Crouching: ; 1d46d (7:546d)
 	farcall Func_19b25
 	ld a, [wWarioState]
-	cp ST_CROUCHING
+	cp WST_CROUCHING
 	ret nz ; done if not crouching anymore
 
 	ld a, [wWaterInteraction]
@@ -1983,7 +1983,7 @@ UpdateState_Crouching: ; 1d46d (7:546d)
 	jp nz, Func_1cd48
 	call Func_1eb46
 	ld a, [wWarioState]
-	cp ST_CROUCHING
+	cp WST_CROUCHING
 	ret nz ; done if not crouching anymore
 
 	farcall Func_198e0
@@ -2009,7 +2009,7 @@ UpdateState_CrouchWalking: ; 1d4a7 (7:54a7)
 	and a
 	jp nz, Func_11f6
 	ld a, [wWarioState]
-	cp ST_CROUCH_WALKING
+	cp WST_CROUCH_WALKING
 	ret nz ; done if not crouch walking anymore
 
 	ld a, [wWaterInteraction]
@@ -2017,7 +2017,7 @@ UpdateState_CrouchWalking: ; 1d4a7 (7:54a7)
 	jp nz, Func_1cd48
 	call Func_1ec6c
 	ld a, [wWarioState]
-	cp ST_CROUCH_WALKING
+	cp WST_CROUCH_WALKING
 	ret nz ; done if not crouch walking anymore
 
 	farcall Func_198e0
@@ -2048,7 +2048,7 @@ UpdateState_CrouchAirborne: ; 1d522 (7:5522)
 	ret
 .asm_1d555
 	ld a, [wWarioState]
-	cp ST_CROUCH_AIRBORNE
+	cp WST_CROUCH_AIRBORNE
 	ret nz ; done if not crouch jumping anymore
 
 	ld a, [wJoypadDown]
@@ -2058,7 +2058,7 @@ UpdateState_CrouchAirborne: ; 1d522 (7:5522)
 	ld [wca6f], a
 	farcall Func_1996e
 	ld a, [wWarioState]
-	cp ST_CROUCH_AIRBORNE
+	cp WST_CROUCH_AIRBORNE
 	ret nz ; done if not crouch jumping anymore
 
 	ld a, b
@@ -2070,7 +2070,7 @@ UpdateState_CrouchAirborne: ; 1d522 (7:5522)
 	ld [wca6f], a
 	call HandleInput_Airborne
 	ld a, [wWarioState]
-	cp ST_CROUCH_AIRBORNE
+	cp WST_CROUCH_AIRBORNE
 	ret nz ; done if not crouch jumping anymore
 
 	ld a, [wIsTurningMidAir]
@@ -2099,7 +2099,7 @@ UpdateState_CrouchAirborne: ; 1d522 (7:5522)
 	and a
 	ret z
 	ld a, [wWarioState]
-	cp ST_CROUCH_AIRBORNE
+	cp WST_CROUCH_AIRBORNE
 	ret nz ; done if not crouch jumping anymore
 
 	ld a, FALLING_JUMP_VEL_INDEX
@@ -2112,14 +2112,14 @@ UpdateState_CrouchAirborne: ; 1d522 (7:5522)
 	and a
 	jr nz, .asm_1d60a
 	ld a, [wWarioState]
-	cp ST_CROUCH_AIRBORNE
+	cp WST_CROUCH_AIRBORNE
 	ret nz ; done if not crouch jumping anymore
 	jp Func_14de
 
 .asm_1d60a
 	update_pos_y
 	ld a, [wWarioState]
-	cp ST_CROUCH_AIRBORNE
+	cp WST_CROUCH_AIRBORNE
 	ret nz ; done if not crouch jumping anymore
 
 	call Func_1c541
@@ -2265,7 +2265,7 @@ UpdateState_Stung: ; 1d627 (7:5627)
 	xor a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld a, ST_STUNG_RECOVERY
+	ld a, WST_STUNG_RECOVERY
 	ld [wWarioState], a
 	ret
 ; 0x1d766
@@ -2291,7 +2291,7 @@ UpdateState_StungRecovery: ; 1d766 (7:5766)
 	ld [wca6f], a
 	farcall Func_1996e
 	ld a, [wWarioState]
-	cp ST_STUNG_RECOVERY
+	cp WST_STUNG_RECOVERY
 	ret nz ; done if not stung recovering anymore
 
 	ld a, b
@@ -2389,12 +2389,12 @@ UpdateState_EnemyBumping: ; 1d85c (7:585c)
 
 .asm_1d88f
 	ld a, [wWarioState]
-	cp ST_ENEMY_BUMPING
+	cp WST_ENEMY_BUMPING
 	ret nz
 	update_anim_1
 	call Func_1ea83
 	ld a, [wWarioState]
-	cp ST_ENEMY_BUMPING
+	cp WST_ENEMY_BUMPING
 	ret nz
 	ld a, [wJumpVelIndex]
 	cp FALLING_JUMP_VEL_INDEX
@@ -2463,7 +2463,7 @@ UpdateState_GrabIdling: ; 1d943 (7:5943)
 	and a
 	jp nz, Func_11f6
 	ld a, [wWarioState]
-	cp ST_GRAB_IDLING
+	cp WST_GRAB_IDLING
 	ret nz ; done not grab idling anymore
 
 	ld a, [wGrabState]
@@ -2471,12 +2471,12 @@ UpdateState_GrabIdling: ; 1d943 (7:5943)
 	jp z, SetState_Idling
 	call Func_1ee88
 	ld a, [wWarioState]
-	cp ST_GRAB_IDLING
+	cp WST_GRAB_IDLING
 	ret nz ; done not grab idling anymore
 
 	farcall Func_198e0
 	ld a, [wWarioState]
-	cp ST_GRAB_IDLING
+	cp WST_GRAB_IDLING
 	ret nz ; done not grab idling anymore
 
 	ld a, b
@@ -2492,7 +2492,7 @@ UpdateState_GrabWalking: ; 1d995 (7:5995)
 	and a
 	jp nz, Func_11f6
 	ld a, [wWarioState]
-	cp ST_GRAB_WALKING
+	cp WST_GRAB_WALKING
 	ret nz ; done if not grab walking anymore
 
 	ld a, [wGrabState]
@@ -2510,7 +2510,7 @@ UpdateState_GrabWalking: ; 1d995 (7:5995)
 
 	call Func_1eefc
 	ld a, [wWarioState]
-	cp ST_GRAB_WALKING
+	cp WST_GRAB_WALKING
 	ret nz ; done if not grab walking anymore
 
 	farcall Func_198e0
@@ -2522,7 +2522,7 @@ UpdateState_GrabWalking: ; 1d995 (7:5995)
 ; 0x1da07
 
 SetState_ThrowingAirborne: ; 1da07 (7:5a07)
-	ld a, ST_THROWING_AIRBORNE
+	ld a, WST_THROWING_AIRBORNE
 	ld [wWarioState], a
 	ld a, [wGrabState]
 	and GRAB_FLAGS_MASK
@@ -2553,7 +2553,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 	and a
 	jp nz, Func_11f6
 	ld a, [wWarioState]
-	cp ST_GRAB_AIRBORNE
+	cp WST_GRAB_AIRBORNE
 	ret nz ; done if not grabbing airborne anymore
 
 	ld a, [wWaterInteraction]
@@ -2574,7 +2574,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 	jp nz, SetState_ThrowingAirborne
 	call HandleInput_Airborne
 	ld a, [wWarioState]
-	cp ST_GRAB_AIRBORNE
+	cp WST_GRAB_AIRBORNE
 	ret nz ; done if not grabbing airborne anymore
 
 	ld a, [wPowerUpLevel]
@@ -2671,7 +2671,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 .asm_1db8a
 	farcall Func_199e9
 	ld a, [wWarioState]
-	cp ST_GRAB_AIRBORNE
+	cp WST_GRAB_AIRBORNE
 	ret nz ; done if not grabbing airborne anymore
 
 	ld a, b
@@ -2745,7 +2745,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 .asm_1dc5f
 	ld a, $81
 	ld [wIsSmashAttacking], a
-	ld a, ST_GRAB_SMASH_ATTACKING
+	ld a, WST_GRAB_SMASH_ATTACKING
 	ld [wWarioState], a
 	xor a
 	ld [wWarioStateCounter], a
@@ -2770,7 +2770,7 @@ SetState_ThrowCharging: ; 1dc8b (7:5c8b)
 	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld a, ST_THROW_CHARGING
+	ld a, WST_THROW_CHARGING
 	ld [wWarioState], a
 	ld a, [wGrabState]
 	and GRAB_FLAGS_MASK
@@ -2827,7 +2827,7 @@ UpdateState_ThrowCharging: ; 1dcfc (7:5cfc)
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 
-	ld a, ST_THROW_FULLY_CHARGED
+	ld a, WST_THROW_FULLY_CHARGED
 	ld [wWarioState], a
 	ld a, [wGrabState]
 	and GRAB_FLAGS_MASK
@@ -2947,7 +2947,7 @@ SetState_Throwing: ; 1de7b (7:5e7b)
 	xor a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld a, ST_THROWING
+	ld a, WST_THROWING
 	ld [wWarioState], a
 	ret
 ; 0x1de88
@@ -2994,7 +2994,7 @@ UpdateState_GrabSmashAttacking: ; 1decc (7:5ecc)
 ; 0x1def1
 
 SetState_Sliding: ; 1def1 (7:5ef1)
-	ld a, ST_SLIDING
+	ld a, WST_SLIDING
 	ld [wWarioState], a
 
 	xor a
@@ -3088,7 +3088,7 @@ UpdateState_Sliding: ; 1dfd4 (7:5fd4)
 
 	call Func_1f825
 	ld a, [wWarioState]
-	cp ST_SLIDING
+	cp WST_SLIDING
 	ret nz ; done if not sliding anymore
 
 	farcall Func_198c7
@@ -3112,7 +3112,7 @@ SetState_Rolling: ; 1e042 (7:6042)
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
 
-	ld a, ST_ROLLING
+	ld a, WST_ROLLING
 	ld [wWarioState], a
 	ld a, -1
 	ld [wca70], a
@@ -3223,7 +3223,7 @@ SetState_RollingAirborne: ; 1e179 (7:6179)
 	ld [wGrabState], a
 	ld a, JUMP_VEL_KNOCK_BACK
 	ld [wJumpVelTable], a
-	ld a, ST_ROLLING_AIRBORNE
+	ld a, WST_ROLLING_AIRBORNE
 	ld [wWarioState], a
 	ld a, $02
 	ld [wIsRolling], a
@@ -3781,7 +3781,7 @@ Func_1e6b5: ; 1e6b5 (7:66b5)
 ;	fallthrough
 
 SetState_Walking: ; 1e6b9 (7:66b9)
-	ld a, ST_WALKING
+	ld a, WST_WALKING
 	ld [wWarioState], a
 	ld a, [wJoypadDown]
 	bit D_RIGHT_F, a
@@ -3829,7 +3829,7 @@ Func_1e6ea: ; 1e6ea (7:66ea)
 ; 0x1e73e
 
 SetState_Turning: ; 1e73e (7:673e)
-	ld a, ST_TURNING
+	ld a, WST_TURNING
 	ld [wWarioState], a
 	xor a
 	ld [wAttackCounter], a
@@ -3861,7 +3861,7 @@ SetState_Attacking: ; 1e7ab (7:67ab)
 	ld [wAttackCounter], a
 	xor a
 	ld [wSFXLoopCounter], a
-	ld a, ST_ATTACKING
+	ld a, WST_ATTACKING
 	ld [wWarioState], a
 	ld a, -1
 	ld [wca70], a
@@ -3922,7 +3922,7 @@ Func_1e855: ; 1e855 (7:6855)
 	ld a, 9
 	ld [wca72], a
 
-	ld a, ST_CROUCHING
+	ld a, WST_CROUCHING
 	ld [wWarioState], a
 
 	xor a
@@ -4033,7 +4033,7 @@ SetState_Idling: ; 1e99b (7:699b)
 	xor a
 	ld [wca86], a
 
-	ld a, ST_IDLING
+	ld a, WST_IDLING
 	ld [wWarioState], a
 
 	xor a
@@ -4059,7 +4059,7 @@ SetState_Idling: ; 1e99b (7:699b)
 
 	farcall Func_1996e
 	ld a, [wWarioState]
-	cp ST_IDLING
+	cp WST_IDLING
 	ret nz
 	ld a, b
 	and a
@@ -4213,7 +4213,7 @@ Func_1eb46: ; 1eb46 (7:6b46)
 	ld [wca6f], a
 	farcall Func_1996e
 	ld a, [wWarioState]
-	cp ST_CROUCHING
+	cp WST_CROUCHING
 	ret nz ; done if not crouching anymore
 
 	ld a, b
@@ -4246,7 +4246,7 @@ SetState_CrouchWalking: ; 1eb94 (7:6b94)
 	ld a, 9
 	ld [wca72], a
 
-	ld a, ST_CROUCH_WALKING
+	ld a, WST_CROUCH_WALKING
 	ld [wWarioState], a
 
 	ld a, TRUE
@@ -4285,9 +4285,9 @@ Func_1ec19: ; 1ec19 (7:6c19)
 	farcall Func_1996e
 
 	ld a, [wWarioState]
-	cp ST_CROUCHING
+	cp WST_CROUCHING
 	jr z, .asm_1ec3c
-	cp ST_CROUCH_WALKING
+	cp WST_CROUCH_WALKING
 	ret nz
 
 .asm_1ec3c
@@ -4329,7 +4329,7 @@ Func_1ec6c: ; 1ec6c (7:6c6c)
 	ld [wca6f], a
 	farcall Func_1996e
 	ld a, [wWarioState]
-	cp ST_CROUCH_WALKING
+	cp WST_CROUCH_WALKING
 	ret nz ; done if not crouch walking anymore
 
 	ld a, b
@@ -4410,7 +4410,7 @@ Func_1ed3f: ; 1ed3f (7:6d3f)
 	ld [wJumpVelIndex], a
 
 Func_1ed4b: ; 1ed4b (7:6d4b)
-	ld a, ST_CROUCH_AIRBORNE
+	ld a, WST_CROUCH_AIRBORNE
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
@@ -4481,7 +4481,7 @@ Func_1ede9: ; 1ede9 (7:6de9)
 ;	fallthrough
 
 SetState_GrabAirborne: ; 1ee0d (7:6e0d)
-	ld a, ST_GRAB_AIRBORNE
+	ld a, WST_GRAB_AIRBORNE
 	ld [wWarioState], a
 	ld a, -1
 	ld [wca70], a
@@ -4530,7 +4530,7 @@ Func_1ee88: ; 1ee88 (7:6e88)
 	ret
 
 .asm_1eea2
-	ld a, ST_GRAB_WALKING
+	ld a, WST_GRAB_WALKING
 	ld [wWarioState], a
 	xor a
 	ld [wSFXLoopCounter], a
@@ -4688,7 +4688,7 @@ SetState_GrabIdling: ; 1efe7 (7:6fe7)
 	add GRAB_IDLE
 	ld [wGrabState], a
 
-	ld a, ST_GRAB_IDLING
+	ld a, WST_GRAB_IDLING
 	ld [wWarioState], a
 	ld a, -1
 	ld [wca70], a
@@ -4998,7 +4998,7 @@ Func_1f24c: ; 1f24c (7:724c)
 	update_pos_y
 .asm_1f2de
 	ld a, [wWarioState]
-	cp ST_WATER_STUNG
+	cp WST_WATER_STUNG
 	ret z
 	ld a, [wDirection]
 	and a
@@ -5062,7 +5062,7 @@ Func_1f357: ; 1f357 (7:7357)
 	update_pos_y
 .asm_1f375
 	ld a, [wWarioState]
-	cp ST_WATER_STUNG
+	cp WST_WATER_STUNG
 	ret z
 	ld a, [wDirection]
 	and a
@@ -5186,7 +5186,7 @@ Func_1f470: ; 1f470 (7:7470)
 	update_pos_y
 .asm_1f4ba
 	ld a, [wWarioState]
-	cp ST_WATER_STUNG
+	cp WST_WATER_STUNG
 	ret z
 
 	farcall Func_19741
@@ -5220,7 +5220,7 @@ Func_1f470: ; 1f470 (7:7470)
 	update_pos_y
 .asm_1f519
 	ld a, [wWarioState]
-	cp ST_WATER_STUNG
+	cp WST_WATER_STUNG
 	ret z
 
 	farcall Func_197b1
@@ -5350,9 +5350,9 @@ HandleInvincibility: ; 1f64a (7:764a)
 
 ; if stung, then skip this
 	ld a, [wWarioState]
-	cp ST_STUNG
+	cp WST_STUNG
 	jr z, .done
-	cp ST_STUNG_RECOVERY
+	cp WST_STUNG_RECOVERY
 	jr z, .done
 
 ; set invicible counter
@@ -5462,7 +5462,7 @@ HandleGroundShake: ; 1f6dc (7:76dc)
 	and a
 	jr nz, .ground_shake
 	ld a, [wWarioState]
-	cp ST_GROUND_SHAKE_STUNNED
+	cp WST_GROUND_SHAKE_STUNNED
 	jr z, .ground_shake
 	jr .asm_1f73c
 	ret ; unnecessary
@@ -5487,14 +5487,14 @@ HandleGroundShake: ; 1f6dc (7:76dc)
 
 .asm_1f73c
 	ld a, [wWarioState]
-	cp ST_LADDER_CLIMBING
+	cp WST_LADDER_CLIMBING
 	jp z, SetState_LadderShakeStunned
-	cp ST_LADDER_IDLING
+	cp WST_LADDER_IDLING
 	jp z, SetState_LadderShakeStunned
-	cp ST_LADDER_SCRATCHING
+	cp WST_LADDER_SCRATCHING
 	jp z, SetState_LadderShakeStunned
 
-	ld a, ST_GROUND_SHAKE_STUNNED
+	ld a, WST_GROUND_SHAKE_STUNNED
 	ld [wWarioState], a
 	xor a
 	ld [wJumpVelIndex], a
@@ -5544,7 +5544,7 @@ HandleGroundShake: ; 1f6dc (7:76dc)
 ; 0x1f7e6
 
 SetState_LadderShakeStunned: ; 1f7e6 (7:77e6)
-	ld a, ST_LADDER_SHAKE_SLIDING
+	ld a, WST_LADDER_SHAKE_SLIDING
 	ld [wWarioState], a
 	load_sfx SFX_00C
 

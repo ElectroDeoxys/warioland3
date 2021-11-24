@@ -3,86 +3,86 @@ Func_28000: ; 28000 (a:4000)
 	sub $60
 	jumptable
 
-	dw UpdateState_OnFire                     ; ST_ON_FIRE
-	dw UpdateState_OnFireAirborne             ; ST_ON_FIRE_AIRBORNE
-	dw UpdateState_Hot                        ; ST_HOT
-	dw UpdateState_HotAirborne                ; ST_HOT_AIRBORNE
-	dw UpdateState_Burnt                      ; ST_BURNT
-	dw UpdateState_GettingFlatAirborne        ; ST_GETTING_FLAT_AIRBORNE
-	dw UpdateState_GettingFlat                ; ST_GETTING_FLAT
-	dw UpdateState_FlatIdling                 ; ST_FLAT_IDLING
-	dw UpdateState_FlatWalking                ; ST_FLAT_WALKING
-	dw UpdateState_FlatJumping                ; ST_FLAT_JUMPING
-	dw UpdateState_FlatFalling                ; ST_FLAT_FALLING
-	dw UpdateState_FlatStretching             ; ST_FLAT_STRETCHING
-	dw UpdateState_FlatSinking                ; ST_FLAT_SINKING
-	dw UpdateState_FlatStretchingUnderwater   ; ST_FLAT_STRETCHING_UNDERWATER
-	dw UpdateState_FlatSquished               ; ST_FLAT_SQUISHED
-	dw UpdateState_FlatSquishedLifting        ; ST_FLAT_SQUISHED_LIFTING
-	dw UpdateState_GettingWrappedInString     ; ST_GETTING_WRAPPED_IN_STRING
-	dw UpdateState_BallOString                ; ST_BALL_O_STRING
-	dw UpdateState_BallOStringAirborne        ; ST_BALL_O_STRING_AIRBORNE
-	dw UpdateState_BallOStringKnockBack       ; ST_BALL_O_STRING_KNOCK_BACK
-	dw UpdateState_GettingUnwrappedInString   ; ST_GETTING_UNWRAPPED_IN_STRING
-	dw UpdateState_BallOStringDizzy           ; ST_BALL_O_STRING_DIZZY
-	dw UpdateState_FatBumping                 ; ST_FAT_BUMPING
-	dw UpdateState_FatEating                  ; ST_FAT_EATING
-	dw UpdateState_FatIdling                  ; ST_FAT_IDLING
-	dw UpdateState_FatWalking                 ; ST_FAT_WALKING
-	dw UpdateState_FatTurning                 ; ST_FAT_TURNING
-	dw UpdateState_FatAirborne                ; ST_FAT_AIRBORNE
-	dw UpdateState_FatLanding                 ; ST_FAT_LANDING
-	dw UpdateState_FatSinking                 ; ST_FAT_SINKING
-	dw UpdateState_FatRecovering              ; ST_FAT_RECOVERING
-	dw UpdateState_ElectricStart              ; ST_ELECTRIC_START
-	dw UpdateState_Electric                   ; ST_ELECTRIC
-	dw UpdateState_ElectricDizzy              ; ST_ELECTRIC_DIZZY
-	dw UpdateState_TurningInvisible           ; ST_TURNING_INVISIBLE
-	dw UpdateState_PuffyInflating             ; ST_PUFFY_INFLATING
-	dw UpdateState_PuffyRising               ; ST_PUFFY_RISING
-	dw UpdateState_PuffyTurning               ; ST_PUFFY_TURNING
-	dw UpdateState_PuffyDeflating             ; ST_PUFFY_DEFLATING
-	dw UpdateState_ZombieIdling               ; ST_ZOMBIE_IDLING
-	dw UpdateState_ZombieWalking              ; ST_ZOMBIE_WALKING
-	dw UpdateState_ZombieTurning              ; ST_ZOMBIE_TURNING
-	dw UpdateState_ZombieAirborne             ; ST_ZOMBIE_AIRBORNE
-	dw UpdateState_ZombieLanding              ; ST_ZOMBIE_LANDING
-	dw UpdateState_ZombieSlippingThroughFloor ; ST_ZOMBIE_SLIPPING_THROUGH_FLOOR
-	dw UpdateState_ZombieRecovering           ; ST_ZOMBIE_RECOVERING
-	dw UpdateState_ZombieKnockBack            ; ST_ZOMBIE_KNOCK_BACK
-	dw UpdateState_ZombieWrithing             ; ST_ZOMBIE_WRITHING
-	dw UpdateState_BouncyStart                ; ST_BOUNCY_START
-	dw UpdateState_BouncyFloor                ; ST_BOUNCY_FLOOR
-	dw UpdateState_BouncyAirborne             ; ST_BOUNCY_AIRBORNE
-	dw UpdateState_BouncyCeiling              ; ST_BOUNCY_CEILING
-	dw UpdateState_BouncyUpsideDown           ; ST_BOUNCY_UPSIDE_DOWN
-	dw UpdateState_BouncyUpsideLanding        ; ST_BOUNCY_UPSIDE_DOWN_LANDING
-	dw UpdateState_BouncyLastBounce           ; ST_BOUNCY_LAST_BOUNCE
-	dw UpdateState_CrazySpinning              ; ST_CRAZY_SPINNING
-	dw UpdateState_CrazyDizzy                 ; ST_CRAZY_DIZZY
-	dw UpdateState_Crazy                      ; ST_CRAZY
-	dw UpdateState_CrazyTurning               ; ST_CRAZY_TURNING
-	dw UpdateState_CrazyAirborne              ; ST_CRAZY_AIRBORNE
-	dw UpdateState_VampireIdling              ; ST_VAMPIRE_IDLING
-	dw UpdateState_VampireWalking             ; ST_VAMPIRE_WALKING
-	dw UpdateState_VampireTurning             ; ST_VAMPIRE_TURNING
-	dw UpdateState_VampireAirborne            ; ST_VAMPIRE_AIRBORNE
-	dw UpdateState_BatTransforming            ; ST_BAT_TRANSFORMING
-	dw UpdateState_BatIdling                  ; ST_BAT_IDLING
-	dw UpdateState_VampireTransforming        ; ST_VAMPIRE_TRANSFORMING
-	dw UpdateState_BatFlying                  ; ST_BAT_FLYING
-	dw UpdateState_BatFalling                 ; ST_BAT_FALLING
-	dw UpdateState_InBubble                   ; ST_IN_BUBBLE
-	dw Func_156d                              ; ST_UNUSED_A6
-	dw Func_156d                              ; ST_UNUSED_A7
-	dw Func_156d                              ; ST_UNUSED_A8
-	dw Func_156d                              ; ST_UNUSED_A9
-	dw Func_156d                              ; ST_UNUSED_AA
-	dw Func_156d                              ; ST_UNUSED_AB
-	dw Func_156d                              ; ST_UNUSED_AC
-	dw Func_156d                              ; ST_UNUSED_AD
-	dw Func_156d                              ; ST_UNUSED_AE
-	dw Func_156d                              ; ST_UNUSED_AF
+	dw UpdateState_OnFire                     ; WST_ON_FIRE
+	dw UpdateState_OnFireAirborne             ; WST_ON_FIRE_AIRBORNE
+	dw UpdateState_Hot                        ; WST_HOT
+	dw UpdateState_HotAirborne                ; WST_HOT_AIRBORNE
+	dw UpdateState_Burnt                      ; WST_BURNT
+	dw UpdateState_GettingFlatAirborne        ; WST_GETTING_FLAT_AIRBORNE
+	dw UpdateState_GettingFlat                ; WST_GETTING_FLAT
+	dw UpdateState_FlatIdling                 ; WST_FLAT_IDLING
+	dw UpdateState_FlatWalking                ; WST_FLAT_WALKING
+	dw UpdateState_FlatJumping                ; WST_FLAT_JUMPING
+	dw UpdateState_FlatFalling                ; WST_FLAT_FALLING
+	dw UpdateState_FlatStretching             ; WST_FLAT_STRETCHING
+	dw UpdateState_FlatSinking                ; WST_FLAT_SINKING
+	dw UpdateState_FlatStretchingUnderwater   ; WST_FLAT_STRETCHING_UNDERWATER
+	dw UpdateState_FlatSquished               ; WST_FLAT_SQUISHED
+	dw UpdateState_FlatSquishedLifting        ; WST_FLAT_SQUISHED_LIFTING
+	dw UpdateState_GettingWrappedInString     ; WST_GETTING_WRAPPED_IN_STRING
+	dw UpdateState_BallOString                ; WST_BALL_O_STRING
+	dw UpdateState_BallOStringAirborne        ; WST_BALL_O_STRING_AIRBORNE
+	dw UpdateState_BallOStringKnockBack       ; WST_BALL_O_STRING_KNOCK_BACK
+	dw UpdateState_GettingUnwrappedInString   ; WST_GETTING_UNWRAPPED_IN_STRING
+	dw UpdateState_BallOStringDizzy           ; WST_BALL_O_STRING_DIZZY
+	dw UpdateState_FatBumping                 ; WST_FAT_BUMPING
+	dw UpdateState_FatEating                  ; WST_FAT_EATING
+	dw UpdateState_FatIdling                  ; WST_FAT_IDLING
+	dw UpdateState_FatWalking                 ; WST_FAT_WALKING
+	dw UpdateState_FatTurning                 ; WST_FAT_TURNING
+	dw UpdateState_FatAirborne                ; WST_FAT_AIRBORNE
+	dw UpdateState_FatLanding                 ; WST_FAT_LANDING
+	dw UpdateState_FatSinking                 ; WST_FAT_SINKING
+	dw UpdateState_FatRecovering              ; WST_FAT_RECOVERING
+	dw UpdateState_ElectricStart              ; WST_ELECTRIC_START
+	dw UpdateState_Electric                   ; WST_ELECTRIC
+	dw UpdateState_ElectricDizzy              ; WST_ELECTRIC_DIZZY
+	dw UpdateState_TurningInvisible           ; WST_TURNING_INVISIBLE
+	dw UpdateState_PuffyInflating             ; WST_PUFFY_INFLATING
+	dw UpdateState_PuffyRising               ; WST_PUFFY_RISING
+	dw UpdateState_PuffyTurning               ; WST_PUFFY_TURNING
+	dw UpdateState_PuffyDeflating             ; WST_PUFFY_DEFLATING
+	dw UpdateState_ZombieIdling               ; WST_ZOMBIE_IDLING
+	dw UpdateState_ZombieWalking              ; WST_ZOMBIE_WALKING
+	dw UpdateState_ZombieTurning              ; WST_ZOMBIE_TURNING
+	dw UpdateState_ZombieAirborne             ; WST_ZOMBIE_AIRBORNE
+	dw UpdateState_ZombieLanding              ; WST_ZOMBIE_LANDING
+	dw UpdateState_ZombieSlippingThroughFloor ; WST_ZOMBIE_SLIPPING_THROUGH_FLOOR
+	dw UpdateState_ZombieRecovering           ; WST_ZOMBIE_RECOVERING
+	dw UpdateState_ZombieKnockBack            ; WST_ZOMBIE_KNOCK_BACK
+	dw UpdateState_ZombieWrithing             ; WST_ZOMBIE_WRITHING
+	dw UpdateState_BouncyStart                ; WST_BOUNCY_START
+	dw UpdateState_BouncyFloor                ; WST_BOUNCY_FLOOR
+	dw UpdateState_BouncyAirborne             ; WST_BOUNCY_AIRBORNE
+	dw UpdateState_BouncyCeiling              ; WST_BOUNCY_CEILING
+	dw UpdateState_BouncyUpsideDown           ; WST_BOUNCY_UPSIDE_DOWN
+	dw UpdateState_BouncyUpsideLanding        ; WST_BOUNCY_UPSIDE_DOWN_LANDING
+	dw UpdateState_BouncyLastBounce           ; WST_BOUNCY_LAST_BOUNCE
+	dw UpdateState_CrazySpinning              ; WST_CRAZY_SPINNING
+	dw UpdateState_CrazyDizzy                 ; WST_CRAZY_DIZZY
+	dw UpdateState_Crazy                      ; WST_CRAZY
+	dw UpdateState_CrazyTurning               ; WST_CRAZY_TURNING
+	dw UpdateState_CrazyAirborne              ; WST_CRAZY_AIRBORNE
+	dw UpdateState_VampireIdling              ; WST_VAMPIRE_IDLING
+	dw UpdateState_VampireWalking             ; WST_VAMPIRE_WALKING
+	dw UpdateState_VampireTurning             ; WST_VAMPIRE_TURNING
+	dw UpdateState_VampireAirborne            ; WST_VAMPIRE_AIRBORNE
+	dw UpdateState_BatTransforming            ; WST_BAT_TRANSFORMING
+	dw UpdateState_BatIdling                  ; WST_BAT_IDLING
+	dw UpdateState_VampireTransforming        ; WST_VAMPIRE_TRANSFORMING
+	dw UpdateState_BatFlying                  ; WST_BAT_FLYING
+	dw UpdateState_BatFalling                 ; WST_BAT_FALLING
+	dw UpdateState_InBubble                   ; WST_IN_BUBBLE
+	dw Func_156d                              ; WST_UNUSED_A6
+	dw Func_156d                              ; WST_UNUSED_A7
+	dw Func_156d                              ; WST_UNUSED_A8
+	dw Func_156d                              ; WST_UNUSED_A9
+	dw Func_156d                              ; WST_UNUSED_AA
+	dw Func_156d                              ; WST_UNUSED_AB
+	dw Func_156d                              ; WST_UNUSED_AC
+	dw Func_156d                              ; WST_UNUSED_AD
+	dw Func_156d                              ; WST_UNUSED_AE
+	dw Func_156d                              ; WST_UNUSED_AF
 ; 0x280a6
 
 UpdateState_OnFire: ; 280a6 (a:40a6)
@@ -132,7 +132,7 @@ UpdateState_OnFire: ; 280a6 (a:40a6)
 	call Func_2ae8a
 
 	ld a, [wWarioState]
-	cp ST_ON_FIRE
+	cp WST_ON_FIRE
 	ret nz ; done if not on fire anymore
 
 	farcall Func_198e0
@@ -153,7 +153,7 @@ SetState_Hot_ResetDuration: ; 2814a (a:414a)
 SetState_Hot: ; 28154 (a:4154)
 	ld a, $02
 	ld [wca8f], a
-	ld a, ST_HOT
+	ld a, WST_HOT
 	ld [wWarioState], a
 	xor a
 	ld [wSFXLoopCounter], a
@@ -223,7 +223,7 @@ UpdateState_OnFireAirborne: ; 281c1 (a:41c1)
 
 	call Func_2af9c
 	ld a, [wWarioState]
-	cp ST_ON_FIRE_AIRBORNE
+	cp WST_ON_FIRE_AIRBORNE
 	ret nz ; done if not on fire and airborne
 
 	ld a, [wJumpVelIndex]
@@ -234,7 +234,7 @@ UpdateState_OnFireAirborne: ; 281c1 (a:41c1)
 	and a
 	ret z
 	ld a, [wWarioState]
-	cp ST_ON_FIRE_AIRBORNE
+	cp WST_ON_FIRE_AIRBORNE
 	ret nz ; done if not on fire and airborne
 
 	jp Func_2af75
@@ -244,14 +244,14 @@ UpdateState_OnFireAirborne: ; 281c1 (a:41c1)
 	and a
 	jr nz, .asm_28261
 	ld a, [wWarioState]
-	cp ST_ON_FIRE_AIRBORNE
+	cp WST_ON_FIRE_AIRBORNE
 	ret nz ; done if not on fire and airborne
 
 	jp Func_14de
 .asm_28261
 	call Func_14f6
 	ld a, [wWarioState]
-	cp ST_ON_FIRE_AIRBORNE
+	cp WST_ON_FIRE_AIRBORNE
 	ret nz ; done if not on fire and airborne
 
 	farcall SetState_OnFire
@@ -304,7 +304,7 @@ UpdateState_Hot: ; 2827a (a:427a)
 	call Func_2b07a
 
 	ld a, [wWarioState]
-	cp ST_HOT
+	cp WST_HOT
 	ret nz ; done if not in hot state anymore
 
 	farcall Func_198e0
@@ -317,7 +317,7 @@ UpdateState_Hot: ; 2827a (a:427a)
 .asm_28313
 	load_sfx SFX_022
 
-	ld a, ST_BURNT
+	ld a, WST_BURNT
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
@@ -354,7 +354,7 @@ Func_2838a: ; 2838a (a:438a)
 	ld [wJumpVelIndex], a
 	ld a, JUMP_VEL_NORMAL
 	ld [wJumpVelTable], a
-	ld a, ST_HOT_AIRBORNE
+	ld a, WST_HOT_AIRBORNE
 	ld [wWarioState], a
 	ld a, $08
 	ld [wWarioStateCounter], a
@@ -372,7 +372,7 @@ UpdateState_HotAirborne: ; 2839f (a:439f)
 	update_anim_1
 	call Func_2b027
 	ld a, [wWarioState]
-	cp ST_HOT_AIRBORNE
+	cp WST_HOT_AIRBORNE
 	ret nz ; done if not hot airborne anymore
 
 	ld a, [wJumpVelIndex]
@@ -385,7 +385,7 @@ UpdateState_HotAirborne: ; 2839f (a:439f)
 	and a
 	ret z
 	ld a, [wWarioState]
-	cp ST_HOT_AIRBORNE
+	cp WST_HOT_AIRBORNE
 	ret nz ; done if not hot airborne anymore
 	jp Func_2838a
 
@@ -395,14 +395,14 @@ UpdateState_HotAirborne: ; 2839f (a:439f)
 	and a
 	jr nz, .asm_28412
 	ld a, [wWarioState]
-	cp ST_HOT_AIRBORNE
+	cp WST_HOT_AIRBORNE
 	ret nz ; done if not hot airborne anymore
 
 	jp Func_14de
 .asm_28412
 	call Func_14f6
 	ld a, [wWarioState]
-	cp ST_HOT_AIRBORNE
+	cp WST_HOT_AIRBORNE
 	ret nz ; done if not hot airborne anymore
 
 	jp SetState_Hot
@@ -482,7 +482,7 @@ SetState_FlatAirborne: ; 28435 (a:4435)
 	ld [wAutoMoveState], a
 
 	ld [wJumpVelTable], a
-	ld a, ST_GETTING_FLAT_AIRBORNE
+	ld a, WST_GETTING_FLAT_AIRBORNE
 	ld [wWarioState], a
 	ld a, -1
 	ld [wca70], a
@@ -519,7 +519,7 @@ UpdateState_GettingFlatAirborne: ; 28511 (a:4511)
 .asm_28549
 	call Func_14f6
 
-	ld a, ST_GETTING_FLAT
+	ld a, WST_GETTING_FLAT
 	ld [wWarioState], a
 
 	xor a
@@ -561,7 +561,7 @@ UpdateState_GettingFlat: ; 28599 (a:4599)
 ;	fallthrough
 
 SetState_FlatIdling: ; 285b8 (a:45b8)
-	ld a, ST_FLAT_IDLING
+	ld a, WST_FLAT_IDLING
 	ld [wWarioState], a
 
 	xor a
@@ -598,7 +598,7 @@ UpdateState_FlatIdling: ; 28601 (a:4601)
 ; 0x28628
 
 SetState_FlatWalking: ; 28628 (a:4628)
-	ld a, ST_FLAT_WALKING
+	ld a, WST_FLAT_WALKING
 	ld [wWarioState], a
 
 	xor a
@@ -655,7 +655,7 @@ UpdateState_FlatWalking: ; 28672 (a:4672)
 SetState_FlatJumping: ; 286d1 (a:46d1)
 	load_sfx SFX_01D
 
-	ld a, ST_FLAT_JUMPING
+	ld a, WST_FLAT_JUMPING
 	ld [wWarioState], a
 
 	xor a
@@ -701,7 +701,7 @@ UpdateState_FlatJumping: ; 2871f (a:471f)
 ;	fallthrough
 
 SetState_FlatFalling: ; 28757 (a:4757)
-	ld a, ST_FLAT_FALLING
+	ld a, WST_FLAT_FALLING
 	ld [wWarioState], a
 
 	xor a
@@ -871,7 +871,7 @@ UpdateState_FlatStretching: ; 288e5 (a:48e5)
 ; 0x28900
 
 SetState_FlatSinking: ; 28900 (a:4900)
-	ld a, ST_FLAT_SINKING
+	ld a, WST_FLAT_SINKING
 	ld [wWarioState], a
 
 	xor a
@@ -967,7 +967,7 @@ Func_289c5: ; 289c5 (a:49c5)
 	ld b, $09
 	farcall Func_c9f3
 
-	ld a, ST_FLAT_STRETCHING_UNDERWATER
+	ld a, WST_FLAT_STRETCHING_UNDERWATER
 	ld [wWarioState], a
 
 	xor a
@@ -1004,7 +1004,7 @@ UpdateState_FlatStretchingUnderwater: ; 28a39 (a:4a39)
 ; 0x28a50
 
 SetState_FlatSquished: ; 28a50 (a:4a50)
-	ld a, ST_FLAT_SQUISHED
+	ld a, WST_FLAT_SQUISHED
 	ld [wWarioState], a
 	xor a
 	ld [wWarioStateCounter], a
@@ -1018,7 +1018,7 @@ UpdateState_FlatSquished: ; 28a5a (a:4a5a)
 SetState_FlatSquishedLifting: ; 28a5b (a:4a5b)
 	ld a, TRUE
 	ld [wIsIntangible], a
-	ld a, ST_FLAT_SQUISHED_LIFTING
+	ld a, WST_FLAT_SQUISHED_LIFTING
 	ld [wWarioState], a
 	xor a
 	ld [wWarioStateCounter], a
@@ -1058,7 +1058,7 @@ UpdateState_GettingWrappedInString: ; 28aad (a:4aad)
 ;	fallthrough
 
 SetState_BallOString: ; 28ad5 (a:4ad5)
-	ld a, ST_BALL_O_STRING
+	ld a, WST_BALL_O_STRING
 	ld [wWarioState], a
 	ld a, $01
 	ld [wca8f], a
@@ -1174,7 +1174,7 @@ Func_28c15: ; 28c15 (a:4c15)
 	ld [wJumpVelIndex], a
 	ld a, JUMP_VEL_HIGH_JUMP
 	ld [wJumpVelTable], a
-	ld a, ST_BALL_O_STRING_AIRBORNE
+	ld a, WST_BALL_O_STRING_AIRBORNE
 	ld [wWarioState], a
 	ret
 ; 0x28c25
@@ -1215,7 +1215,7 @@ SetState_BallOStringKnockBack: ; 28c94 (a:4c94)
 	xor a
 	ld [wca8f], a
 	load_sfx SFX_BUMP
-	ld a, ST_BALL_O_STRING_KNOCK_BACK
+	ld a, WST_BALL_O_STRING_KNOCK_BACK
 	ld [wWarioState], a
 	ld a, $0a
 	ld [wJumpVelIndex], a
@@ -1270,7 +1270,7 @@ UpdateState_BallOStringKnockBack: ; 28ceb (a:4ceb)
 	call Func_14f6
 	load_sfx SFX_03C
 
-	ld a, ST_GETTING_UNWRAPPED_IN_STRING
+	ld a, WST_GETTING_UNWRAPPED_IN_STRING
 	ld [wWarioState], a
 	ld a, -1
 	ld [wca70], a
@@ -1302,7 +1302,7 @@ UpdateState_GettingUnwrappedInString: ; 28d92 (a:4d92)
 	ret z
 
 	load_sfx SFX_03D
-	ld a, ST_BALL_O_STRING_DIZZY
+	ld a, WST_BALL_O_STRING_DIZZY
 	ld [wWarioState], a
 	ld a, -1
 	ld [wca70], a
@@ -1341,7 +1341,7 @@ UpdateState_BallOStringDizzy: ; 28e1a (a:4e1a)
 ; 0x28e31
 
 SetState_FatBumping: ; 28e31 (a:4e31)
-	ld a, ST_FAT_BUMPING
+	ld a, WST_FAT_BUMPING
 	ld [wWarioState], a
 	xor a
 	ld [wJumpVelIndex], a
@@ -1404,7 +1404,7 @@ UpdateState_FatEating: ; 28e87 (a:4e87)
 ;	fallthrough
 
 SetState_FatIdling: ; 28eeb (a:4eeb)
-	ld a, ST_FAT_IDLING
+	ld a, WST_FAT_IDLING
 	ld [wWarioState], a
 	ld a, TOUCH_ATTACK
 	ld [wTouchState], a
@@ -1440,7 +1440,7 @@ UpdateState_FatIdling: ; 28f39 (a:4f39)
 	jp nz, Func_11f6
 	call Func_28f6d
 	ld a, [wWarioState]
-	cp ST_FAT_IDLING
+	cp WST_FAT_IDLING
 	ret nz ; done if not fat idling anymore
 
 	farcall Func_198e0
@@ -1463,7 +1463,7 @@ Func_28f6d: ; 28f6d (a:4f6d)
 SetState_FatWalking: ; 28f7d (a:4f7d)
 	xor a
 	ld [wca86], a
-	ld a, ST_FAT_WALKING
+	ld a, WST_FAT_WALKING
 	ld [wWarioState], a
 	xor a
 	ld [wSFXLoopCounter], a
@@ -1509,7 +1509,7 @@ UpdateState_FatWalking: ; 28fc0 (a:4fc0)
 	jp z, SetState_FatRecovering
 	call Func_2b239
 	ld a, [wWarioState]
-	cp ST_FAT_WALKING
+	cp WST_FAT_WALKING
 	ret nz ; done if not fat walking anymore
 	farcall Func_198e0
 
@@ -1521,7 +1521,7 @@ UpdateState_FatWalking: ; 28fc0 (a:4fc0)
 ; 0x29035
 
 SetState_FatTurning: ; 29035 (a:5035)
-	ld a, ST_FAT_TURNING
+	ld a, WST_FAT_TURNING
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
@@ -1595,7 +1595,7 @@ SetState_FatAirborne: ; 29104 (a:5104)
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 	update_anim_1
-	ld a, ST_FAT_AIRBORNE
+	ld a, WST_FAT_AIRBORNE
 	ld [wWarioState], a
 	ret
 ; 0x29123
@@ -1640,7 +1640,7 @@ UpdateState_FatAirborne: ; 29123 (a:5123)
 .asm_2919d
 	call Func_2b2a4
 	ld a, [wWarioState]
-	cp ST_FAT_AIRBORNE
+	cp WST_FAT_AIRBORNE
 	ret nz ; done if not fat airborne anymore
 
 	ld a, [wJumpVelIndex]
@@ -1651,7 +1651,7 @@ UpdateState_FatAirborne: ; 29123 (a:5123)
 	and a
 	ret z
 	ld a, [wWarioState]
-	cp ST_FAT_AIRBORNE
+	cp WST_FAT_AIRBORNE
 	ret nz ; done if not fat airborne anymore
 	jp Func_290d6
 
@@ -1678,7 +1678,7 @@ UpdateState_FatAirborne: ; 29123 (a:5123)
 ;	fallthrough
 
 SetState_FatLanding: ; 291ff (a:51ff)
-	ld a, ST_FAT_LANDING
+	ld a, WST_FAT_LANDING
 	ld [wWarioState], a
 	xor a
 	ld [wJumpVelTable], a
@@ -1724,7 +1724,7 @@ Func_2926a: ; 2926a (a:526a)
 	farcall Func_c9f3
 	load_sfx SFX_SLIDE
 
-	ld a, ST_FAT_SINKING
+	ld a, WST_FAT_SINKING
 	ld [wWarioState], a
 	xor a
 	ld [wJumpVelTable], a
@@ -1811,7 +1811,7 @@ Func_29317: ; 29317 (a:5317)
 ; 0x29363
 
 SetState_FatRecovering: ; 29363 (a:5363)
-	ld a, ST_FAT_RECOVERING
+	ld a, WST_FAT_RECOVERING
 	ld [wWarioState], a
 	ld a, TOUCH_BUMP
 	ld [wTouchState], a
@@ -1865,7 +1865,7 @@ UpdateState_ElectricStart: ; 293d0 (a:53d0)
 
 	ld a, $01
 	ld [wInvincibleCounter], a
-	ld a, ST_ELECTRIC
+	ld a, WST_ELECTRIC
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
@@ -1893,7 +1893,7 @@ UpdateState_ElectricStart: ; 293d0 (a:53d0)
 	ldh [hffb0], a
 	farcall Func_1996e
 	ld a, [wWarioState]
-	cp ST_ELECTRIC
+	cp WST_ELECTRIC
 	ret nz
 	ld a, b
 	and a
@@ -2121,7 +2121,7 @@ UpdateState_Electric: ; 294bf (a:54bf)
 	xor $1 ; switch direction
 	ld [wDirection], a
 
-	ld a, ST_ELECTRIC_DIZZY
+	ld a, WST_ELECTRIC_DIZZY
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
@@ -2164,7 +2164,7 @@ SetState_TurningInvisible: ; 29689 (a:5689)
 	inc a ; TRUE
 	ld [wIsIntangible], a
 
-	ld a, ST_TURNING_INVISIBLE
+	ld a, WST_TURNING_INVISIBLE
 	ld [wWarioState], a
 
 	ld a, -1
@@ -2232,7 +2232,7 @@ SetState_PuffyInflating: ; 2975e (a:575e)
 
 	load_sfx SFX_025
 
-	ld a, ST_PUFFY_INFLATING
+	ld a, WST_PUFFY_INFLATING
 	ld [wWarioState], a
 
 	ld a, -1
@@ -2299,7 +2299,7 @@ UpdateState_PuffyInflating: ; 29816 (a:5816)
 ;	fallthrough
 
 SetState_PuffyRising: ; 2982b (a:582b)
-	ld a, ST_PUFFY_RISING
+	ld a, WST_PUFFY_RISING
 	ld [wWarioState], a
 
 	xor a
@@ -2360,7 +2360,7 @@ SetState_PuffyTurning: ; 298b2 (a:58b2)
 	xor $1 ; switch direction
 	ld [wDirection], a
 
-	ld a, ST_PUFFY_TURNING
+	ld a, WST_PUFFY_TURNING
 	ld [wWarioState], a
 
 	xor a
@@ -2396,7 +2396,7 @@ UpdateState_PuffyTurning: ; 298f3 (a:58f3)
 	farcall Func_1996e
 
 	ld a, [wWarioState]
-	cp ST_PUFFY_TURNING
+	cp WST_PUFFY_TURNING
 	ret nz ; done if not puffy turning any more
 
 	ld a, b
@@ -2414,7 +2414,7 @@ UpdateState_PuffyTurning: ; 298f3 (a:58f3)
 SetState_PuffyDeflating: ; 2992a (a:592a)
 	load_sfx SFX_027
 
-	ld a, ST_PUFFY_DEFLATING
+	ld a, WST_PUFFY_DEFLATING
 	ld [wWarioState], a
 
 	xor a
@@ -2488,7 +2488,7 @@ UpdateState_PuffyDeflating: ; 29975 (a:5975)
 ; 0x299d0
 
 SetState_ZombieIdling: ; 299d0 (a:59d0)
-	ld a, ST_ZOMBIE_IDLING
+	ld a, WST_ZOMBIE_IDLING
 	ld [wWarioState], a
 
 	ld a, -1
@@ -2546,12 +2546,12 @@ SetState_ZombieIdling: ; 299d0 (a:59d0)
 UpdateState_ZombieIdling: ; 29a74 (a:5a74)
 	farcall Func_19b25
 	ld a, [wWarioState]
-	cp ST_ZOMBIE_IDLING
+	cp WST_ZOMBIE_IDLING
 	ret nz ; done if not zombie idling anymore
 
 	farcall Func_198e0
 	ld a, [wWarioState]
-	cp ST_ZOMBIE_IDLING
+	cp WST_ZOMBIE_IDLING
 	ret nz ; done if not zombie idling anymore
 
 	ld a, b
@@ -2570,7 +2570,7 @@ SetState_ZombieWalking: ; 29ac1 (a:5ac1)
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 
-	ld a, ST_ZOMBIE_WALKING
+	ld a, WST_ZOMBIE_WALKING
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
@@ -2607,7 +2607,7 @@ UpdateState_ZombieWalking: ; 29b06 (a:5b06)
 	call Func_2b381
 
 	ld a, [wWarioState]
-	cp ST_ZOMBIE_WALKING
+	cp WST_ZOMBIE_WALKING
 	ret nz ; done if not zombie walking anymore
 
 	farcall Func_198e0
@@ -2620,7 +2620,7 @@ UpdateState_ZombieWalking: ; 29b06 (a:5b06)
 ; 0x29b6a
 
 SetState_ZombieTurning: ; 29b6a (a:5b6a)
-	ld a, ST_ZOMBIE_TURNING
+	ld a, WST_ZOMBIE_TURNING
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
@@ -2682,7 +2682,7 @@ SetState_ZombieAirborne: ; 29c04 (a:5c04)
 	ld [wJumpVelTable], a
 	xor a
 	ld [wWarioStateCycles], a
-	ld a, ST_ZOMBIE_AIRBORNE
+	ld a, WST_ZOMBIE_AIRBORNE
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
@@ -2700,12 +2700,12 @@ UpdateState_ZombieAirborne: ; 29c29 (a:5c29)
 	and a
 	jp nz, RecoverFromTransformation
 	ld a, [wWarioState]
-	cp ST_ZOMBIE_AIRBORNE
+	cp WST_ZOMBIE_AIRBORNE
 	ret nz ; done if not zombie airborne anymore
 
 	call Func_2b3dd
 	ld a, [wWarioState]
-	cp ST_ZOMBIE_AIRBORNE
+	cp WST_ZOMBIE_AIRBORNE
 	ret nz ; done if not zombie airborne anymore
 
 	ld a, [wWarioStateCounter]
@@ -2730,7 +2730,7 @@ UpdateState_ZombieAirborne: ; 29c29 (a:5c29)
 .asm_29c88
 	update_anim_2
 	ld a, [wWarioState]
-	cp ST_ZOMBIE_AIRBORNE
+	cp WST_ZOMBIE_AIRBORNE
 	ret nz ; done if not zombie airborne anymore
 
 	ld a, [wJumpVelIndex]
@@ -2741,7 +2741,7 @@ UpdateState_ZombieAirborne: ; 29c29 (a:5c29)
 	and a
 	ret z
 	ld a, [wWarioState]
-	cp ST_ZOMBIE_AIRBORNE
+	cp WST_ZOMBIE_AIRBORNE
 	ret nz ; done if not zombie airborne anymore
 	jp Func_29bb9
 
@@ -2754,7 +2754,7 @@ UpdateState_ZombieAirborne: ; 29c29 (a:5c29)
 .asm_29cd5
 	call Func_14f6
 	ld a, [wWarioState]
-	cp ST_ZOMBIE_AIRBORNE
+	cp WST_ZOMBIE_AIRBORNE
 	ret nz ; done if not zombie airborne anymore
 ;	fallthrough
 
@@ -2772,7 +2772,7 @@ SetState_ZombieLanding: ; 29cde (a:5cde)
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
 
-	ld a, ST_ZOMBIE_LANDING
+	ld a, WST_ZOMBIE_LANDING
 	ld [wWarioState], a
 	xor a
 	ld [wWarioStateCounter], a
@@ -2826,7 +2826,7 @@ UpdateState_ZombieLanding: ; 29d6f (a:5d6f)
 	ld a, $06
 	ld [wWarioStateCycles], a
 
-	ld a, ST_ZOMBIE_SLIPPING_THROUGH_FLOOR
+	ld a, WST_ZOMBIE_SLIPPING_THROUGH_FLOOR
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
@@ -2853,13 +2853,13 @@ UpdateState_ZombieSlippingThroughFloor: ; 29dd3 (a:5dd3)
 	and a
 	jp nz, RecoverFromTransformation
 	ld a, [wWarioState]
-	cp ST_ZOMBIE_SLIPPING_THROUGH_FLOOR
+	cp WST_ZOMBIE_SLIPPING_THROUGH_FLOOR
 	ret nz ; done if not slipping through floor anymore
 
 	call Func_2b3dd
 	update_anim_2
 	ld a, [wWarioState]
-	cp ST_ZOMBIE_SLIPPING_THROUGH_FLOOR
+	cp WST_ZOMBIE_SLIPPING_THROUGH_FLOOR
 	ret nz ; done if not slipping through floor anymore
 
 	farcall Func_199e9
@@ -2867,14 +2867,14 @@ UpdateState_ZombieSlippingThroughFloor: ; 29dd3 (a:5dd3)
 	and a
 	jr nz, .asm_29e2a
 	ld a, [wWarioState]
-	cp ST_ZOMBIE_SLIPPING_THROUGH_FLOOR
+	cp WST_ZOMBIE_SLIPPING_THROUGH_FLOOR
 	ret nz ; done if not slipping through floor anymore
 	jp Func_14de
 
 .asm_29e2a
 	call Func_14f6
 	ld a, [wWarioState]
-	cp ST_ZOMBIE_SLIPPING_THROUGH_FLOOR
+	cp WST_ZOMBIE_SLIPPING_THROUGH_FLOOR
 	ret nz ; done if not slipping through floor anymore
 
 	call SetState_ZombieLanding
@@ -2899,7 +2899,7 @@ UpdateState_ZombieSlippingThroughFloor: ; 29dd3 (a:5dd3)
 
 ; unreferenced?
 Func_29e71: ; 29e71 (a:5e71)
-	ld a, ST_ZOMBIE_RECOVERING
+	ld a, WST_ZOMBIE_RECOVERING
 	ld [wWarioState], a
 	xor a
 	ld [wWarioStateCounter], a
@@ -2941,17 +2941,17 @@ UpdateState_ZombieRecovering: ; 29e7e (a:5e7e)
 
 SetState_ZombieKnockBack: ; 29ea8 (a:5ea8)
 	ld a, [wWarioState]
-	cp ST_ZOMBIE_KNOCK_BACK
+	cp WST_ZOMBIE_KNOCK_BACK
 	ret z
-	cp ST_ZOMBIE_SLIPPING_THROUGH_FLOOR
+	cp WST_ZOMBIE_SLIPPING_THROUGH_FLOOR
 	ret z
-	cp ST_ZOMBIE_LANDING
+	cp WST_ZOMBIE_LANDING
 	ret z
 
 	xor a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
-	ld a, ST_ZOMBIE_KNOCK_BACK
+	ld a, WST_ZOMBIE_KNOCK_BACK
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
@@ -2977,7 +2977,7 @@ UpdateState_ZombieKnockBack: ; 29ef3 (a:5ef3)
 ; 0x29f0a
 
 SetState_ZombieWrithing: ; 29f0a (a:5f0a)
-	ld a, ST_ZOMBIE_WRITHING
+	ld a, WST_ZOMBIE_WRITHING
 	ld [wWarioState], a
 
 	xor a
@@ -3005,7 +3005,7 @@ UpdateState_ZombieWrithing: ; 29f42 (a:5f42)
 ; 0x29f59
 
 SetState_BouncyStart: ; 29f59 (a:5f59)
-	ld a, ST_BOUNCY_START
+	ld a, WST_BOUNCY_START
 	ld [wWarioState], a
 	ld a, FALLING_JUMP_VEL_INDEX
 	ld [wJumpVelIndex], a
@@ -3074,7 +3074,7 @@ UpdateState_BouncyStart: ; 29ffa (a:5ffa)
 
 .asm_2a029
 	ld a, [wWarioState]
-	cp ST_BOUNCY_START
+	cp WST_BOUNCY_START
 	ret nz ; done if not bouncy start anymore
 
 	farcall Func_199e9
@@ -3082,14 +3082,14 @@ UpdateState_BouncyStart: ; 29ffa (a:5ffa)
 	and a
 	jr nz, .asm_2a04b
 	ld a, [wWarioState]
-	cp ST_BOUNCY_START
+	cp WST_BOUNCY_START
 	ret nz ; done if not bouncy start anymore
 	jp Func_14de
 
 .asm_2a04b
 	call Func_14f6
 	ld a, [wWarioState]
-	cp ST_BOUNCY_START
+	cp WST_BOUNCY_START
 	ret nz ; done if not bouncy start anymore
 ;	fallthrough
 
@@ -3099,7 +3099,7 @@ SetState_BouncyFloor: ; 2a054 (a:6054)
 	ld [wJumpVelTable], a
 	ld [wWarioStateCounter], a
 	ld [wca86], a
-	ld a, ST_BOUNCY_FLOOR
+	ld a, WST_BOUNCY_FLOOR
 	ld [wWarioState], a
 
 	xor a
@@ -3152,7 +3152,7 @@ Func_2a0c7: ; 2a0c7 (a:60c7)
 ;	fallthrough
 
 SetState_BouncyAirborne: ; 2a0cb (a:60cb)
-	ld a, ST_BOUNCY_AIRBORNE
+	ld a, WST_BOUNCY_AIRBORNE
 	ld [wWarioState], a
 	load_sfx SFX_02B
 
@@ -3204,7 +3204,7 @@ UpdateState_BouncyAirborne: ; 2a0f9 (a:60f9)
 	ld [wca86], a
 .asm_2a17a
 	ld a, [wWarioState]
-	cp ST_BOUNCY_AIRBORNE
+	cp WST_BOUNCY_AIRBORNE
 	ret nz ; done if not bouncy airborne any more
 
 	ld a, [wJumpVelIndex]
@@ -3217,7 +3217,7 @@ UpdateState_BouncyAirborne: ; 2a0f9 (a:60f9)
 	and a
 	ret z
 	ld a, [wWarioState]
-	cp ST_BOUNCY_AIRBORNE
+	cp WST_BOUNCY_AIRBORNE
 	ret nz ; done if not bouncy airborne any more
 
 	ld a, FALLING_JUMP_VEL_INDEX
@@ -3230,14 +3230,14 @@ UpdateState_BouncyAirborne: ; 2a0f9 (a:60f9)
 	and a
 	jr nz, .asm_2a1c2
 	ld a, [wWarioState]
-	cp ST_BOUNCY_AIRBORNE
+	cp WST_BOUNCY_AIRBORNE
 	ret nz ; done if not bouncy airborne any more
 	jp Func_14de
 
 .asm_2a1c2
 	call Func_14f6
 	ld a, [wWarioState]
-	cp ST_BOUNCY_AIRBORNE
+	cp WST_BOUNCY_AIRBORNE
 	ret nz ; done if not bouncy airborne any more
 	jp SetState_BouncyFloor
 
@@ -3271,7 +3271,7 @@ UpdateState_BouncyCeiling: ; 2a1f5 (a:61f5)
 ; 0x2a21e
 
 SetState_BouncyUpsideDown: ; 2a21e (a:621e)
-	ld a, ST_BOUNCY_UPSIDE_DOWN
+	ld a, WST_BOUNCY_UPSIDE_DOWN
 	ld [wWarioState], a
 	ld a, FALLING_JUMP_VEL_INDEX
 	ld [wJumpVelIndex], a
@@ -3317,10 +3317,10 @@ UpdateState_BouncyUpsideDown: ; 2a267 (a:6267)
 .asm_2a29d
 	call Func_14f6
 	ld a, [wWarioState]
-	cp ST_BOUNCY_UPSIDE_DOWN
+	cp WST_BOUNCY_UPSIDE_DOWN
 	ret nz ; done if not bouncy upside down
 
-	ld a, ST_BOUNCY_UPSIDE_DOWN_LANDING
+	ld a, WST_BOUNCY_UPSIDE_DOWN_LANDING
 	ld [wWarioState], a
 	xor a
 	ld [wJumpVelIndex], a
@@ -3378,7 +3378,7 @@ Func_2a2e7: ; 2a2e7 (a:62e7)
 ;	fallthrough
 
 SetState_BouncyLastBounce: ; 2a344 (a:6344)
-	ld a, ST_BOUNCY_LAST_BOUNCE
+	ld a, WST_BOUNCY_LAST_BOUNCE
 	ld [wWarioState], a
 	xor a
 	ld [wJumpVelIndex], a
@@ -3418,7 +3418,7 @@ UpdateState_BouncyLastBounce: ; 2a362 (a:6362)
 	and a
 	ret z
 	ld a, [wWarioState]
-	cp ST_BOUNCY_LAST_BOUNCE
+	cp WST_BOUNCY_LAST_BOUNCE
 	ret nz ; done if not in last bouncy any more
 
 	ld a, FALLING_JUMP_VEL_INDEX
@@ -3435,14 +3435,14 @@ UpdateState_BouncyLastBounce: ; 2a362 (a:6362)
 .asm_2a3e1
 	call Func_14f6
 	ld a, [wWarioState]
-	cp ST_BOUNCY_LAST_BOUNCE
+	cp WST_BOUNCY_LAST_BOUNCE
 	ret nz ; done if not in last bouncy any more
 	jp RecoverFromTransformation
 ; 0x2a3ed
 
 SetState_CrazySpinning: ; 2a3ed (a:63ed)
 	load_sfx SFX_042
-	ld a, ST_CRAZY_SPINNING
+	ld a, WST_CRAZY_SPINNING
 	ld [wWarioState], a
 	ld a, -1
 	ld [wca70], a
@@ -3527,7 +3527,7 @@ UpdateState_CrazySpinning: ; 2a489 (a:6489)
 	ld [hl], $00
 
 	load_sfx SFX_043
-	ld a, ST_CRAZY_DIZZY
+	ld a, WST_CRAZY_DIZZY
 	ld [wWarioState], a
 
 	xor a
@@ -3557,7 +3557,7 @@ UpdateState_CrazyDizzy: ; 2a544 (a:6544)
 
 SetState_Crazy: ; 2a558 (a:6558)
 	load_sfx SFX_043
-	ld a, ST_CRAZY
+	ld a, WST_CRAZY
 	ld [wWarioState], a
 
 	ld a, TOUCH_BUMP
@@ -3603,7 +3603,7 @@ UpdateState_Crazy: ; 2a5d8 (a:65d8)
 
 	call Func_2b3f9
 	ld a, [wWarioState]
-	cp ST_CRAZY
+	cp WST_CRAZY
 	ret nz ; done if not crazy any more
 
 	farcall Func_198e0
@@ -3614,7 +3614,7 @@ UpdateState_Crazy: ; 2a5d8 (a:65d8)
 ; 0x2a61a
 
 SetState_CrazyTurning: ; 2a61a (a:661a)
-	ld a, ST_CRAZY_TURNING
+	ld a, WST_CRAZY_TURNING
 	ld [wWarioState], a
 
 	xor a
@@ -3657,7 +3657,7 @@ Func_2a67b: ; 2a67b (a:667b)
 ;	fallthrough
 
 SetState_CrazyAirborne: ; 2a680 (a:6680)
-	ld a, ST_CRAZY_AIRBORNE
+	ld a, WST_CRAZY_AIRBORNE
 	ld [wWarioState], a
 	ld a, JUMP_VEL_NORMAL
 	ld [wJumpVelTable], a
@@ -3721,7 +3721,7 @@ UpdateState_CrazyAirborne: ; 2a6c0 (a:66c0)
 ; 0x2a739
 
 SetState_VampireIdling: ; 2a739 (a:6739)
-	ld a, ST_VAMPIRE_IDLING
+	ld a, WST_VAMPIRE_IDLING
 	ld [wWarioState], a
 
 	xor a
@@ -3741,7 +3741,7 @@ SetState_VampireIdling: ; 2a739 (a:6739)
 UpdateState_VampireIdling: ; 2a77b (a:677b)
 	farcall Func_198e0
 	ld a, [wWarioState]
-	cp ST_VAMPIRE_IDLING
+	cp WST_VAMPIRE_IDLING
 	ret nz ; done if not vampire idling any more
 
 	ld a, b
@@ -3753,7 +3753,7 @@ UpdateState_VampireIdling: ; 2a77b (a:677b)
 ; 0x2a7a8
 
 SetState_VampireWalking: ; 2a7a8 (a:67a8)
-	ld a, ST_VAMPIRE_WALKING
+	ld a, WST_VAMPIRE_WALKING
 	ld [wWarioState], a
 
 	xor a
@@ -3794,19 +3794,19 @@ UpdateState_VampireWalking: ; 2a804 (a:6804)
 	and a
 	jp nz, Func_11f6
 	ld a, [wWarioState]
-	cp ST_VAMPIRE_WALKING
+	cp WST_VAMPIRE_WALKING
 	ret nz ; done if not vampire walking any more
 
 	update_anim_2
 	call Func_2b509
 	ld a, [wWarioState]
-	cp ST_VAMPIRE_WALKING
+	cp WST_VAMPIRE_WALKING
 	ret nz ; done if not vampire walking any more
 
 	farcall Func_198e0
 
 	ld a, [wWarioState]
-	cp ST_VAMPIRE_WALKING
+	cp WST_VAMPIRE_WALKING
 	ret nz ; done if not vampire walking any more
 
 	ld a, b
@@ -3816,7 +3816,7 @@ UpdateState_VampireWalking: ; 2a804 (a:6804)
 ; 0x2a853
 
 SetState_VampireTurning: ; 2a853 (a:6853)
-	ld a, ST_VAMPIRE_TURNING
+	ld a, WST_VAMPIRE_TURNING
 	ld [wWarioState], a
 
 	xor a
@@ -3858,7 +3858,7 @@ Func_2a8ae: ; 2a8ae (a:68ae)
 ;	fallthrough
 
 SetState_VampireAirborne: ; 2a8ba (a:68ba)
-	ld a, ST_VAMPIRE_AIRBORNE
+	ld a, WST_VAMPIRE_AIRBORNE
 	ld [wWarioState], a
 	ld a, JUMP_VEL_KNOCK_BACK
 	ld [wJumpVelTable], a
@@ -3879,13 +3879,13 @@ UpdateState_VampireAirborne: ; 2a8d2 (a:68d2)
 	and a
 	jp nz, RecoverFromTransformation
 	ld a, [wWarioState]
-	cp ST_VAMPIRE_AIRBORNE
+	cp WST_VAMPIRE_AIRBORNE
 	ret nz ; done if not vampire airborne any more
 
 	update_anim_2
 	call Func_2b55c
 	ld a, [wWarioState]
-	cp ST_VAMPIRE_AIRBORNE
+	cp WST_VAMPIRE_AIRBORNE
 	ret nz ; done if not vampire airborne any more
 
 	ld a, [wJumpVelIndex]
@@ -3893,7 +3893,7 @@ UpdateState_VampireAirborne: ; 2a8d2 (a:68d2)
 	jr nc, .asm_2a92f
 	farcall Func_1996e
 	ld a, [wWarioState]
-	cp ST_VAMPIRE_AIRBORNE
+	cp WST_VAMPIRE_AIRBORNE
 	ret nz ; done if not vampire airborne any more
 
 	ld a, b
@@ -3910,14 +3910,14 @@ UpdateState_VampireAirborne: ; 2a8d2 (a:68d2)
 .asm_2a945
 	call Func_14f6
 	ld a, [wWarioState]
-	cp ST_VAMPIRE_AIRBORNE
+	cp WST_VAMPIRE_AIRBORNE
 	ret nz ; done if not vampire airborne any more
 	jp SetState_VampireIdling
 ; 0x2a951
 
 SetState_BatTransforming: ; 2a951 (a:6951)
 	load_sfx SFX_046
-	ld a, ST_BAT_TRANSFORMING
+	ld a, WST_BAT_TRANSFORMING
 	ld [wWarioState], a
 
 	ld a, -15
@@ -3952,7 +3952,7 @@ UpdateState_BatTransforming: ; 2a9b2 (a:69b2)
 ;	fallthrough
 
 SetState_BatIdling: ; 2a9c6 (a:69c6)
-	ld a, ST_BAT_IDLING
+	ld a, WST_BAT_IDLING
 	ld [wWarioState], a
 
 	xor a
@@ -3978,7 +3978,7 @@ SetState_BatIdling: ; 2a9c6 (a:69c6)
 UpdateState_BatIdling: ; 2aa08 (a:6a08)
 	farcall Func_198e0
 	ld a, [wWarioState]
-	cp ST_BAT_IDLING
+	cp WST_BAT_IDLING
 	ret nz ; done if not bat idling any more
 
 	ld a, b
@@ -4007,7 +4007,7 @@ UpdateState_BatIdling: ; 2aa08 (a:6a08)
 	ld [wca6f], a
 	farcall Func_1996e
 	ld a, [wWarioState]
-	cp ST_BAT_IDLING
+	cp WST_BAT_IDLING
 	ret nz ; done if not bat idling any more
 
 	ld a, b
@@ -4022,7 +4022,7 @@ UpdateState_BatIdling: ; 2aa08 (a:6a08)
 SetState_VampireTransforming: ; 2aa81 (a:6a81)
 	load_sfx SFX_045
 
-	ld a, ST_VAMPIRE_TRANSFORMING
+	ld a, WST_VAMPIRE_TRANSFORMING
 	ld [wWarioState], a
 
 	ld a, TOUCH_VANISH
@@ -4079,7 +4079,7 @@ UpdateState_VampireTransforming: ; 2ab18 (a:6b18)
 ; 0x2ab2f
 
 SetState_BatFlying: ; 2ab2f (a:6b2f)
-	ld a, ST_BAT_FLYING
+	ld a, WST_BAT_FLYING
 	ld [wWarioState], a
 	xor a
 	ld [wSFXLoopCounter], a
@@ -4098,7 +4098,7 @@ UpdateState_BatFlying: ; 2ab42 (a:6b42)
 	and a
 	jp nz, RecoverFromTransformation
 	ld a, [wWarioState]
-	cp ST_BAT_FLYING
+	cp WST_BAT_FLYING
 	ret nz ; done if not bat flying any more
 
 	ld a, [wSFXLoopCounter]
@@ -4113,7 +4113,7 @@ UpdateState_BatFlying: ; 2ab42 (a:6b42)
 
 	farcall Func_1996e
 	ld a, [wWarioState]
-	cp ST_BAT_FLYING
+	cp WST_BAT_FLYING
 	ret nz ; done if not bat flying any more
 
 	ld a, b
@@ -4121,7 +4121,7 @@ UpdateState_BatFlying: ; 2ab42 (a:6b42)
 	jr nz, SetState_BatFalling
 	call Func_2b63b
 	ld a, [wWarioState]
-	cp ST_BAT_FLYING
+	cp WST_BAT_FLYING
 	ret nz ; done if not bat flying any more
 
 	call Func_2b17a
@@ -4154,7 +4154,7 @@ Func_2abc1: ; 2abc1 (a:6bc1)
 ; 0x2abf4
 
 SetState_BatFalling: ; 2abf4 (a:6bf4)
-	ld a, ST_BAT_FALLING
+	ld a, WST_BAT_FALLING
 	ld [wWarioState], a
 	ld a, JUMP_VEL_HIGH_JUMP
 	ld [wJumpVelTable], a
@@ -4172,7 +4172,7 @@ UpdateState_BatFalling: ; 2ac04 (a:6c04)
 	and a
 	jp nz, RecoverFromTransformation
 	ld a, [wWarioState]
-	cp ST_BAT_FALLING
+	cp WST_BAT_FALLING
 	ret nz ; done if not bat falling any more
 	update_anim_2
 
@@ -4193,7 +4193,7 @@ UpdateState_BatFalling: ; 2ac04 (a:6c04)
 	call nz, Func_2abc1
 	farcall Func_199e9
 	ld a, [wWarioState]
-	cp ST_BAT_FALLING
+	cp WST_BAT_FALLING
 	ret nz ; done if not bat falling any more
 
 	ld a, b
@@ -4204,7 +4204,7 @@ UpdateState_BatFalling: ; 2ac04 (a:6c04)
 ; 0x2ac7d
 
 Func_2ac7d: ; 2ac7d (a:6c7d)
-	ld a, ST_IN_BUBBLE
+	ld a, WST_IN_BUBBLE
 	ld [wWarioState], a
 
 	ld a, -1
@@ -4484,7 +4484,7 @@ Func_2af81: ; 2af81 (a:6f81)
 SetState_OnFireAirborne: ; 2af92 (a:6f92)
 	xor a
 	ld [wWarioStateCycles], a
-	ld a, ST_ON_FIRE_AIRBORNE
+	ld a, WST_ON_FIRE_AIRBORNE
 	ld [wWarioState], a
 	ret
 ; 0x2af9c
@@ -4826,7 +4826,7 @@ Func_2b2c2: ; 2b2c2 (a:72c2)
 	call Func_2b342
 	farcall Func_1996e
 	ld a, [wWarioState]
-	cp ST_PUFFY_RISING
+	cp WST_PUFFY_RISING
 	ret nz ; done if not puffy rising
 
 	ld a, b
@@ -4978,7 +4978,7 @@ Func_2b3f9: ; 2b3f9 (a:73f9)
 	jp nz, Func_2a675
 	call Func_2b42b
 	ld a, [wWarioState]
-	cp ST_CRAZY
+	cp WST_CRAZY
 	ret nz ; done if not crazy any more
 
 	ld a, [wAnimationHasFinished]

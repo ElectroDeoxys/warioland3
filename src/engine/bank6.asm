@@ -832,58 +832,58 @@ Func_19c1b: ; 19c1b (6:5c1b)
 	sub $30
 	jumptable
 
-	dw UpdateState_Slipping              ; ST_SLIPPING
-	dw UpdateState_CrouchSlipping        ; ST_CROUCH_SLIPPING
-	dw UpdateState_DraggedDown           ; ST_DRAGGED_DOWN
-	dw UpdateState_Teleporting           ; ST_TELEPORTING
-	dw $60b4                             ; ST_TELEPORTING_WATER
-	dw UpdateState_SandFalling           ; ST_SAND_FALLING
-	dw UpdateState_SandJumping           ; ST_SAND_JUMPING
-	dw UpdateState_SandIdling            ; ST_SAND_IDLING
-	dw UpdateState_SandWalking           ; ST_SAND_WALKING
-	dw UpdateState_SandTurning           ; ST_SAND_TURNING
-	dw UpdateState_LadderClimbing        ; ST_LADDER_CLIMBING
-	dw UpdateState_LadderIdling          ; ST_LADDER_IDLING
-	dw UpdateState_LadderShakeSlipping   ; ST_LADDER_SHAKE_SLIDING
-	dw UpdateState_GettingOffLadder      ; ST_GETTING_OFF_LADDER
-	dw UpdateState_LadderSliding         ; ST_LADDER_SLIDING
-	dw UpdateState_GrabSlipping          ; ST_GRAB_SLIPPING
-	dw $689e                             ; ST_UNKNOWN_40
-	dw $68ff                             ; ST_UNKNOWN_41
-	dw $6980                             ; ST_UNKNOWN_42
-	dw $69e9                             ; ST_UNKNOWN_43
-	dw $6a5c                             ; ST_UNKNOWN_44
-	dw $6ac9                             ; ST_UNKNOWN_45
-	dw $6b44                             ; ST_UNKNOWN_46
-	dw $68ff                             ; ST_UNKNOWN_47
-	dw $6980                             ; ST_UNKNOWN_48
-	dw $6bb1                             ; ST_UNKNOWN_49
-	dw $6bf4                             ; ST_UNKNOWN_4A
-	dw UpdateState_Sleeping              ; ST_SLEEPING
-	dw UpdateState_LadderScratching      ; ST_LADDER_SCRATCHING
-	dw UpdateState_FenceShakeSliding     ; ST_FENCE_SHAKE_SLIDING
-	dw UpdateState_FenceMovingVertical   ; ST_FENCE_MOVING_VERTICAL
-	dw UpdateState_FenceIdling           ; ST_FENCE_IDLING
-	dw UpdateState_FenceMovingHorizontal ; ST_FENCE_MOVING_HORIZONTAL
-	dw UpdateState_FenceSliding          ; ST_FENCE_SLIDING
-	dw Func_156d                         ; ST_UNUSED_52
-	dw Func_156d                         ; ST_UNUSED_53
-	dw Func_156d                         ; ST_UNUSED_54
-	dw Func_156d                         ; ST_UNUSED_55
-	dw Func_156d                         ; ST_UNUSED_56
-	dw Func_156d                         ; ST_UNUSED_57
-	dw Func_156d                         ; ST_UNUSED_58
-	dw Func_156d                         ; ST_UNUSED_59
-	dw Func_156d                         ; ST_UNUSED_5A
-	dw Func_156d                         ; ST_UNUSED_5B
-	dw Func_156d                         ; ST_UNUSED_5C
-	dw Func_156d                         ; ST_UNUSED_5D
-	dw Func_156d                         ; ST_UNUSED_5E
-	dw Func_156d                         ; ST_UNUSED_5F
+	dw UpdateState_Slipping              ; WST_SLIPPING
+	dw UpdateState_CrouchSlipping        ; WST_CROUCH_SLIPPING
+	dw UpdateState_DraggedDown           ; WST_DRAGGED_DOWN
+	dw UpdateState_Teleporting           ; WST_TELEPORTING
+	dw $60b4                             ; WST_TELEPORTING_WATER
+	dw UpdateState_SandFalling           ; WST_SAND_FALLING
+	dw UpdateState_SandJumping           ; WST_SAND_JUMPING
+	dw UpdateState_SandIdling            ; WST_SAND_IDLING
+	dw UpdateState_SandWalking           ; WST_SAND_WALKING
+	dw UpdateState_SandTurning           ; WST_SAND_TURNING
+	dw UpdateState_LadderClimbing        ; WST_LADDER_CLIMBING
+	dw UpdateState_LadderIdling          ; WST_LADDER_IDLING
+	dw UpdateState_LadderShakeSlipping   ; WST_LADDER_SHAKE_SLIDING
+	dw UpdateState_GettingOffLadder      ; WST_GETTING_OFF_LADDER
+	dw UpdateState_LadderSliding         ; WST_LADDER_SLIDING
+	dw UpdateState_GrabSlipping          ; WST_GRAB_SLIPPING
+	dw $689e                             ; WST_UNKNOWN_40
+	dw $68ff                             ; WST_UNKNOWN_41
+	dw $6980                             ; WST_UNKNOWN_42
+	dw $69e9                             ; WST_UNKNOWN_43
+	dw $6a5c                             ; WST_UNKNOWN_44
+	dw $6ac9                             ; WST_UNKNOWN_45
+	dw $6b44                             ; WST_UNKNOWN_46
+	dw $68ff                             ; WST_UNKNOWN_47
+	dw $6980                             ; WST_UNKNOWN_48
+	dw $6bb1                             ; WST_UNKNOWN_49
+	dw $6bf4                             ; WST_UNKNOWN_4A
+	dw UpdateState_Sleeping              ; WST_SLEEPING
+	dw UpdateState_LadderScratching      ; WST_LADDER_SCRATCHING
+	dw UpdateState_FenceShakeSliding     ; WST_FENCE_SHAKE_SLIDING
+	dw UpdateState_FenceMovingVertical   ; WST_FENCE_MOVING_VERTICAL
+	dw UpdateState_FenceIdling           ; WST_FENCE_IDLING
+	dw UpdateState_FenceMovingHorizontal ; WST_FENCE_MOVING_HORIZONTAL
+	dw UpdateState_FenceSliding          ; WST_FENCE_SLIDING
+	dw Func_156d                         ; WST_UNUSED_52
+	dw Func_156d                         ; WST_UNUSED_53
+	dw Func_156d                         ; WST_UNUSED_54
+	dw Func_156d                         ; WST_UNUSED_55
+	dw Func_156d                         ; WST_UNUSED_56
+	dw Func_156d                         ; WST_UNUSED_57
+	dw Func_156d                         ; WST_UNUSED_58
+	dw Func_156d                         ; WST_UNUSED_59
+	dw Func_156d                         ; WST_UNUSED_5A
+	dw Func_156d                         ; WST_UNUSED_5B
+	dw Func_156d                         ; WST_UNUSED_5C
+	dw Func_156d                         ; WST_UNUSED_5D
+	dw Func_156d                         ; WST_UNUSED_5E
+	dw Func_156d                         ; WST_UNUSED_5F
 ; 0x19c81
 
 SetState_Slipping: ; 19c81 (6:5c81)
-	ld a, ST_SLIPPING
+	ld a, WST_SLIPPING
 	ld [wWarioState], a
 	xor a
 	ld [wSFXLoopCounter], a
@@ -991,7 +991,7 @@ UpdateState_Slipping: ; 19ce7 (6:5ce7)
 .asm_19de6
 	farcall Func_198e0
 	ld a, [wWarioState]
-	cp ST_SLIPPING
+	cp WST_SLIPPING
 	ret nz ; done if not slipping any more
 
 	ld a, b
@@ -1004,7 +1004,7 @@ UpdateState_Slipping: ; 19ce7 (6:5ce7)
 	update_pos_y
 	farcall Func_19734
 	ld a, [wWarioState]
-	cp ST_SLIPPING
+	cp WST_SLIPPING
 	ret nz ; done if not slipping any more
 
 	ld a, b
@@ -1061,7 +1061,7 @@ SetState_CrouchSlipping: ; 19e7f (6:5e7f)
 ;	fallthrough
 
 Func_19e89: ; 19e89 (6:5e89)
-	ld a, ST_CROUCH_SLIPPING
+	ld a, WST_CROUCH_SLIPPING
 	ld [wWarioState], a
 	xor a
 	ld [wSFXLoopCounter], a
@@ -1102,7 +1102,7 @@ UpdateState_CrouchSlipping: ; 19ef1 (6:5ef1)
 .asm_19f1e
 	farcall Func_198e0
 	ld a, [wWarioState]
-	cp ST_CROUCH_SLIPPING
+	cp WST_CROUCH_SLIPPING
 	ret nz ; done if not crouch slipping any more
 	ld a, b
 	and a
@@ -1114,7 +1114,7 @@ UpdateState_CrouchSlipping: ; 19ef1 (6:5ef1)
 	update_pos_y
 	farcall Func_19734
 	ld a, [wWarioState]
-	cp ST_CROUCH_SLIPPING
+	cp WST_CROUCH_SLIPPING
 	ret nz ; done if not crouch slipping any more
 	ld a, b
 	and a
@@ -1163,7 +1163,7 @@ UpdateState_CrouchSlipping: ; 19ef1 (6:5ef1)
 ; 0x19fb6
 
 SetState_DraggedDown: ; 19fb6 (6:5fb6)
-	ld a, ST_DRAGGED_DOWN
+	ld a, WST_DRAGGED_DOWN
 	ld [wWarioState], a
 
 	xor a
@@ -1240,7 +1240,7 @@ UpdateState_Teleporting: ; 1a077 (6:6077)
 	cp $b4
 	ret c
 	ld [hl], $00
-	ld a, ST_STUNG
+	ld a, WST_STUNG
 	ld [wWarioState], a
 	ld a, $01
 	ld [wInvincibleCounter], a
@@ -1258,7 +1258,7 @@ UpdateState_Teleporting: ; 1a077 (6:6077)
 SetState_SandFalling: ; 1a0e8 (6:60e8)
 	xor a
 	ld [wGrabState], a
-	ld a, ST_SAND_FALLING
+	ld a, WST_SAND_FALLING
 	ld [wWarioState], a
 	ld a, -1
 	ld [wca70], a
@@ -1309,7 +1309,7 @@ Func_1a14b: ; 1a14b (6:614b)
 UpdateState_SandFalling: ; 1a17e (6:617e)
 	call Func_1b2c0
 	ld a, [wWarioState]
-	cp ST_SAND_FALLING
+	cp WST_SAND_FALLING
 	ret nz ; done if not falling in sand any more
 
 	farcall Func_198e0
@@ -1323,7 +1323,7 @@ UpdateState_SandFalling: ; 1a17e (6:617e)
 
 SetState_SandJumping: ; 1a1a7 (6:61a7)
 	load_sfx SFX_JUMP
-	ld a, ST_SAND_JUMPING
+	ld a, WST_SAND_JUMPING
 	ld [wWarioState], a
 	xor a
 	ld [wJumpVelIndex], a
@@ -1375,7 +1375,7 @@ UpdateState_SandJumping: ; 1a1c5 (6:61c5)
 ; 0x1a236
 
 SetState_SandIdling: ; 1a236 (6:6236)
-	ld a, ST_SAND_IDLING
+	ld a, WST_SAND_IDLING
 	ld [wWarioState], a
 
 	xor a
@@ -1408,7 +1408,7 @@ SetState_SandWalking: ; 1a29a (6:629a)
 	xor a
 	ld [wca86], a
 
-	ld a, ST_SAND_WALKING
+	ld a, WST_SAND_WALKING
 	ld [wWarioState], a
 
 	ld a, [wJoypadDown]
@@ -1448,7 +1448,7 @@ UpdateState_SandWalking: ; 1a2d6 (6:62d6)
 	update_anim_1
 	call Func_1b333
 	ld a, [wWarioState]
-	cp ST_SAND_WALKING
+	cp WST_SAND_WALKING
 	ret nz ; done if not walking in sand any more
 
 	farcall Func_19b25
@@ -1463,7 +1463,7 @@ UpdateState_SandWalking: ; 1a2d6 (6:62d6)
 ; 0x1a330
 
 SetState_SandTurning: ; 1a330 (6:6330)
-	ld a, ST_SAND_TURNING
+	ld a, WST_SAND_TURNING
 	ld [wWarioState], a
 
 	xor a
@@ -1504,7 +1504,7 @@ UpdateState_SandTurning: ; 1a394 (6:6394)
 ; 0x1a3bb
 
 SetState_LadderClimbing: ; 1a3bb (6:63bb)
-	ld a, ST_LADDER_CLIMBING
+	ld a, WST_LADDER_CLIMBING
 	ld [wWarioState], a
 	ld a, [wXPosLo]
 	and $f0
@@ -1567,7 +1567,7 @@ UpdateState_LadderClimbing: ; 1a436 (6:6436)
 ; 0x1a49e
 
 SetState_LadderIdling: ; 1a49e (6:649e)
-	ld a, ST_LADDER_IDLING
+	ld a, WST_LADDER_IDLING
 	ld [wWarioState], a
 
 	xor a
@@ -1666,7 +1666,7 @@ UpdateState_LadderShakeSlipping: ; 1a55c (6:655c)
 ; 0x1a5ee
 
 SetState_GettingOffLadder: ; 1a5ee (6:65ee)
-	ld a, ST_GETTING_OFF_LADDER
+	ld a, WST_GETTING_OFF_LADDER
 	ld [wWarioState], a
 	xor a
 	ld [wSFXLoopCounter], a
@@ -1721,7 +1721,7 @@ UpdateState_GettingOffLadder: ; 1a617 (6:6617)
 ; 0x1a66b
 
 SetState_LadderSliding: ; 1a66b (6:666b)
-	ld a, ST_LADDER_SLIDING
+	ld a, WST_LADDER_SLIDING
 	ld [wWarioState], a
 	load_sfx SFX_00C
 	xor a
@@ -1802,7 +1802,7 @@ UpdateState_LadderSliding: ; 1a6b6 (6:66b6)
 ; 0x1a773
 
 SetState_GrabSlipping: ; 1a773 (6:6773)
-	ld a, ST_GRAB_SLIPPING
+	ld a, WST_GRAB_SLIPPING
 	ld [wWarioState], a
 	xor a
 	ld [wSFXLoopCounter], a
@@ -1849,7 +1849,7 @@ UpdateState_GrabSlipping: ; 1a7d6 (6:67d6)
 .asm_1a819
 	farcall Func_198e0
 	ld a, [wWarioState]
-	cp ST_GRAB_SLIPPING
+	cp WST_GRAB_SLIPPING
 	ret nz ; done if not grab slipping any more
 	ld a, b
 	and a
@@ -1860,7 +1860,7 @@ UpdateState_GrabSlipping: ; 1a7d6 (6:67d6)
 .asm_1a842
 	farcall Func_19734
 	ld a, [wWarioState]
-	cp ST_GRAB_SLIPPING
+	cp WST_GRAB_SLIPPING
 	ret nz ; done if not grab slipping any more
 	ld a, b
 	and a
@@ -1908,7 +1908,7 @@ UpdateState_GrabSlipping: ; 1a7d6 (6:67d6)
 	INCROM $1a89e, $1ac10
 
 SetState_Sleeping: ; 1ac10 (6:6c10)
-	ld a, ST_SLEEPING
+	ld a, WST_SLEEPING
 	ld [wWarioState], a
 	xor a
 	ld [wSFXLoopCounter], a
@@ -1994,7 +1994,7 @@ UpdateState_Sleeping: ; 1ac73 (6:6c73)
 ; 0x1ad21
 
 SetState_LadderScratching: ; 1ad21 (6:6d21)
-	ld a, ST_LADDER_SCRATCHING
+	ld a, WST_LADDER_SCRATCHING
 	ld [wWarioState], a
 
 	ld a, -1
@@ -2040,7 +2040,7 @@ UpdateState_LadderScratching: ; 1ad7d (6:6d7d)
 ; 0x1ad9a
 
 SetState_FenceShakeSliding: ; 1ad9a (6:6d9a)
-	ld a, ST_FENCE_SHAKE_SLIDING
+	ld a, WST_FENCE_SHAKE_SLIDING
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
@@ -2102,7 +2102,7 @@ UpdateState_FenceShakeSliding: ; 1adfb (6:6dfb)
 ; 0x1ae68
 
 SetState_FenceMovingVertical: ; 1ae68 (6:6e68)
-	ld a, ST_FENCE_MOVING_VERTICAL
+	ld a, WST_FENCE_MOVING_VERTICAL
 	ld [wWarioState], a
 
 	xor a
@@ -2155,7 +2155,7 @@ UpdateState_FenceMovingVertical:;1aed0 (6:6ed0)
 ; 0x1af22
 
 SetState_FenceIdling: ; 1af22 (6:6f22)
-	ld a, ST_FENCE_IDLING
+	ld a, WST_FENCE_IDLING
 	ld [wWarioState], a
 
 	xor a
@@ -2195,7 +2195,7 @@ UpdateState_FenceIdling: ; 1af98 (6:6f98)
 ; 0x1afab
 
 SetState_FenceMovingHorizontal: ; 1afab (6:6fab)
-	ld a, ST_FENCE_MOVING_HORIZONTAL
+	ld a, WST_FENCE_MOVING_HORIZONTAL
 	ld [wWarioState], a
 
 	xor a
@@ -2258,7 +2258,7 @@ UpdateState_FenceMovingHorizontal: ; 1b00f (6:700f)
 ; 0x1b05e
 
 SetState_FenceSliding: ; 1b05e (6:705e)
-	ld a, ST_FENCE_SLIDING
+	ld a, WST_FENCE_SLIDING
 	ld [wWarioState], a
 	load_sfx SFX_00C
 

@@ -16,7 +16,7 @@ Func_80366: ; 80366 (20:4366)
 	INCROM $80377, $80392
 
 Func_80392: ; 80392 (20:4392)
-	ld a, [wSubSequence]
+	ld a, [wSubState]
 	jumptable
 
 	dw FastFadeToWhite
@@ -150,20 +150,20 @@ Func_803f9: ; 803f9 (20:43f9)
 	xor a
 	ld [w2d025], a
 	ld a, $09
-	ld [wSubSequence], a
+	ld [wSubState], a
 	call Func_803e6
 	ret
 
 .asm_80497
 	call .Func_804d4
 	ld a, $05
-	ld [wSubSequence], a
+	ld [wSubState], a
 	ret
 
 .asm_804a0
 	call .Func_804d4
 	ld a, $11
-	ld [wSubSequence], a
+	ld [wSubState], a
 	ret
 
 .asm_804a9
@@ -181,7 +181,7 @@ Func_803f9: ; 803f9 (20:43f9)
 	ld [w2d012], a
 	ld [w2d01d], a
 	ld a, $20
-	ld [wSubSequence], a
+	ld [wSubState], a
 	call Func_803e6
 	ret
 

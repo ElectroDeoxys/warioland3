@@ -86,7 +86,7 @@ HiddenFigure4Map:: ; db268 (36:7268)
 INCBIN "gfx/bgmaps/hidden_figure4.bin"
 
 Func_db277: ; db277 (36:7277)
-	ld a, [wSubSequence]
+	ld a, [wSubState]
 	jumptable
 
 	dw FastFadeToWhite

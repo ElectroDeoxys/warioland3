@@ -1,5 +1,5 @@
 Func_1f0000: ; 1f0000 (7c:4000)
-	ld a, [wSubSequence]
+	ld a, [wSubState]
 	jumptable
 
 	dw SlowFadeBGToWhite
@@ -346,7 +346,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	call Func_1f0940
 	ld a, $8f
 	ldh [rLCDC], a
-	ld hl, wSubSequence
+	ld hl, wSubState
 	inc [hl]
 	ret
 ; 0x1f02a2

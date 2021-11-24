@@ -193,10 +193,10 @@ Init: ; 15e (0:15e)
 	ldh a, [hCGB]
 	and a
 	jr nz, .is_cgb
-	ld a, MAIN_SEQTABLE_0b
-	ld [wSequence], a
-	xor a ; MAIN_SEQTABLE_TITLE
-	ld [wSubSequence], a
+	ld a, ST_0b
+	ld [wState], a
+	xor a ; ST_TITLE
+	ld [wSubState], a
 	jr .asm_21d
 .is_cgb
 	call Func_1690
@@ -231,7 +231,7 @@ Init: ; 15e (0:15e)
 	jp Init
 
 .no_reset
-	call MainSequenceTable
+	call StateTable
 
 	ld a, [wRoomAnimatedTilesEnabled]
 	and a
@@ -317,7 +317,7 @@ HandleSound: ; 290 (0:290)
 	ret
 ; 0x2cf
 
-	INCROM $02cf, $0334
+	INCROM $2cf, $334
 
 ; store in wVBlankFunc a return function
 VBlank_Ret: ; 334 (0:334)
@@ -735,7 +735,7 @@ FadeBGToWhite: ; 47f (0:47f)
 	ld [wFadeSpeed], a
 	ld [wPalFadeCounter], a
 	ld [wc186], a
-	ld hl, wSubSequence
+	ld hl, wSubState
 	inc [hl]
 	ret
 ; 0x54e
@@ -958,14 +958,14 @@ DarkenBGToPal: ; 5f1 (0:5f1)
 	ld [wFadeSpeed], a
 	ld [wPalFadeCounter], a
 	ld [wc186], a
-	ld hl, wSubSequence
+	ld hl, wSubState
 	inc [hl]
 	ret
 ; 0x6fa
 
 ; fades BG palettes to wTempPals1
 ; gradually lightens up to wTempPals1
-; when fading is complete, advances wSubSequence
+; when fading is complete, advances wSubState
 FadeInTitle: ; 6fa (0:6fa)
 	ld a, [wPalFadeCounter]
 	cp 2
@@ -1134,7 +1134,7 @@ FadeInTitle: ; 6fa (0:6fa)
 	ld [wFadeSpeed], a
 	ld [wPalFadeCounter], a
 	ld [wc186], a
-	ld hl, wSubSequence
+	ld hl, wSubState
 	inc [hl]
 	ret
 ; 0x7cf
@@ -1318,7 +1318,7 @@ Func_928: ; 928 (0:928)
 	ld [$d506], a
 	stop_music
 	stop_sfx
-	ld hl, wSubSequence
+	ld hl, wSubState
 	inc [hl]
 	jr .asm_95a
 ; 0x9a3
@@ -1505,7 +1505,7 @@ InitHRAMCallFunc: ; a92 (0:a92)
 	push af
 	ld a, $0
 	bankswitch
-	call MainSequenceTable
+	call StateTable
 	pop af
 	bankswitch
 	ret
@@ -2621,7 +2621,7 @@ Func_11f6: ; 11f6 (0:11f6)
 	ld a, [wc0d7]
 	bit 7, a
 	ret nz
-	ld hl, wSubSequence
+	ld hl, wSubState
 	ld a, [wc0d7]
 	bit 5, a
 	jr z, .asm_1246
@@ -3067,18 +3067,18 @@ Func_15dc: ; 15dc (0:15dc)
 	dec a
 	jr z, .asm_1610
 .asm_15ff
-	ld a, [wSubSequence]
+	ld a, [wSubState]
 	ld [wced5], a
-	ld a, MAIN_SEQTABLE_04
-	ld [wSequence], a
+	ld a, ST_04
+	ld [wState], a
 	ld a, $18
-	ld [wSubSequence], a
+	ld [wSubState], a
 	ret
 .asm_1610
-	ld hl, wSequence
-	ld [hl], MAIN_SEQTABLE_0d
+	ld hl, wState
+	ld [hl], ST_0d
 	xor a
-	ld [wSubSequence], a
+	ld [wSubState], a
 	ret
 ; 0x161a
 
@@ -3154,11 +3154,11 @@ UpdateLevelMusic: ; 161a (0:161a)
 	dw MUSIC_BOSS_DEFEAT
 ; 0x1690
 
-; clears wSequence and wSubSequence
+; clears wState and wSubState
 Func_1690: ; 1690 (0:1690)
-	xor a ; MAIN_SEQTABLE_TITLE
-	ld [wSequence], a
-	ld [wSubSequence], a
+	xor a ; ST_TITLE
+	ld [wState], a
+	ld [wSubState], a
 	ret
 ; 0x1698
 
@@ -3195,10 +3195,10 @@ Func_1698: ; 1698 (0:1698)
 ; 0x16d0
 
 Func_16d0: ; 16d0 (0:16d0)
-	ld hl, wSequence
-	ld a, MAIN_SEQTABLE_07
+	ld hl, wState
+	ld a, ST_07
 	ld [hli], a
-	ld [hl], $00 ; wSubSequence
+	ld [hl], $00 ; wSubState
 	ret
 ; 0x16d9
 
