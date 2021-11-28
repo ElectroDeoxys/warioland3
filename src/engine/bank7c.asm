@@ -73,7 +73,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld a, [wAnimatedTilesGroup]
 	ld [w3d510], a
 	stop_sfx
-	load_music MUSIC_PAUSE_MENU
+	play_music MUSIC_PAUSE_MENU
 	xor a
 	ld [wStartMenuSelection], a
 	xor a
@@ -344,7 +344,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	call UpdateObjAnim
 	ld hl, $d582
 	call Func_1f0940
-	ld a, $8f
+	ld a, LCDC_ON | LCDC_BG9C00 | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]

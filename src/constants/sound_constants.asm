@@ -136,7 +136,7 @@
 	const SFX_048                          ; 148
 	const SFX_049                          ; 149
 	const SFX_CROUCH_WALK                  ; 14a
-	const SFX_COLOUR_COIN                          ; 14b
+	const SFX_COLOUR_COIN                  ; 14b
 	const SFX_04C                          ; 14c
 	const SFX_04D                          ; 14d (unused)
 	const SFX_04E                          ; 14e (unused)

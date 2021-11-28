@@ -166,22 +166,42 @@ INCLUDE "engine/bank21.asm"
 
 SECTION "Bank 22", ROMX
 
-	INCROM $88000, $8c000
+Overworld1Gfx:: INCBIN "gfx/overworld/overworld1.2bpp.lz"
+Overworld2Gfx:: INCBIN "gfx/overworld/overworld2.2bpp.lz"
+Overworld3Gfx:: INCBIN "gfx/overworld/overworld3.2bpp.lz"
+Overworld4Gfx:: INCBIN "gfx/overworld/overworld4.2bpp.lz"
+	INCROM $8a115, $8a15c
+OverworldCommonGfx:: INCBIN "gfx/overworld/overworld_common.2bpp.lz"
+OverworldArrowsGfx:: INCBIN "gfx/overworld/overworld_arrows.2bpp.lz"
+OverworldGlowGfx:: INCBIN "gfx/overworld/overworld_glow.2bpp.lz"
+OverworldNumbersGfx:: INCBIN "gfx/overworld/overworld_numbers.2bpp.lz"
+	INCROM $8b91e, $8c000
 
 
 SECTION "Bank 23", ROMX
 
-	INCROM $8c000, $8ea1a
+Overworld5Gfx:: INCBIN "gfx/overworld/overworld5.2bpp.lz"
+	INCROM $8ce06, $8d363
+Overworld6Gfx:: INCBIN "gfx/overworld/overworld6.2bpp.lz"
+	INCROM $8e2fb, $8ea1a
 
 
 SECTION "Bank 24", ROMX
 
-	INCROM $90000, $94000
+LevelNamesJPGfx::
+LevelNamesNorthJPGfx:: INCBIN "gfx/gui/level_names_north_jp.2bpp"
+LevelNamesWestJPGfx::  INCBIN "gfx/gui/level_names_west_jp.2bpp"
+LevelNamesSouthJPGfx:: INCBIN "gfx/gui/level_names_south_jp.2bpp"
+LevelNamesEastJPGfx::  INCBIN "gfx/gui/level_names_east_jp.2bpp"
 
 
 SECTION "Bank 25", ROMX
 
-	INCROM $94000, $98000
+LevelNamesENGfx::
+LevelNamesNorthENGfx:: INCBIN "gfx/gui/level_names_north_en.2bpp"
+LevelNamesWestENGfx::  INCBIN "gfx/gui/level_names_west_en.2bpp"
+LevelNamesSouthENGfx:: INCBIN "gfx/gui/level_names_south_en.2bpp"
+LevelNamesEastENGfx::  INCBIN "gfx/gui/level_names_east_en.2bpp"
 
 
 SECTION "Bank 26", ROMX
@@ -233,7 +253,7 @@ INCLUDE "engine/bank2c.asm"
 
 SECTION "Bank 2D", ROMX
 
-	INCROM $b4000, $b7d12
+INCLUDE "engine/bank2d.asm"
 
 
 SECTION "Bank 2E", ROMX
@@ -711,7 +731,7 @@ INCLUDE "engine/bank72.asm"
 
 SECTION "Bank 76", ROMX
 
-	INCROM $1d8000, $1db800
+INCLUDE "engine/bank76.asm"
 
 
 SECTION "Framesets 3", ROMX

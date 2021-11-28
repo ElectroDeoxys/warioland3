@@ -330,7 +330,7 @@ _InitPrologueSequence: ; ade49 (2b:5e49)
 	ld de, v0Tiles1
 	ld b, BANK(MusicBoxGfx)
 	ld c, $3
-	call CopyFarBytes
+	call CopyFarBytes_Long
 
 	ld a, [wLanguage]
 	and a

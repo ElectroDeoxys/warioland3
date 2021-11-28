@@ -408,7 +408,7 @@ Func_2028a: ; 2028a (8:428a)
 ; 0x202b5
 
 SetState_EnemyBumping: ; 202b5 (8:42b5)
-	load_sfx SFX_BUMP
+	play_sfx SFX_BUMP
 	ld a, $0e
 	ld [wJumpVelIndex], a
 	ld a, $01
@@ -457,7 +457,7 @@ SetState_EnemyBumping: ; 202b5 (8:42b5)
 ; routine called when an object is attacked
 ; whether by Wario's B attack, Fat Wario bump, rolling, etc.
 AttackObject: ; 20350 (8:4350)
-	load_sfx SFX_017
+	play_sfx SFX_017
 	ld a, [wWarioScreenXPos]
 	ld b, a
 	ld a, [wObjScreenXPos]
@@ -695,7 +695,7 @@ StepOnObject: ; 20447 (8:4447)
 .no_input
 	call Func_20939
 .asm_20578
-	load_sfx SFX_014
+	play_sfx SFX_014
 	ld b, $04
 	jp SetObjUnk1C
 
@@ -725,7 +725,7 @@ StepOnObject: ; 20447 (8:4447)
 	or INTERACTION_LEFT
 	ld [wInteractionSide], a
 .asm_205b7
-	load_sfx SFX_014
+	play_sfx SFX_014
 	ld b, $04
 	call SetObjUnk1C
 	ld a, [wTransformation]
@@ -884,7 +884,7 @@ SetState_Stung: ; 206f9 (8:46f9)
 	ld a, $01
 	ld [wInvincibleCounter], a
 
-	load_sfx SFX_STING
+	play_sfx SFX_STING
 
 	ld a, WST_STUNG
 	ld [wWarioState], a
@@ -999,7 +999,7 @@ Func_207ed: ; 207ed (8:47ed)
 ;	fallthrough
 
 Func_2080d: ; 2080d (8:480d)
-	load_sfx SFX_STING
+	play_sfx SFX_STING
 	ld a, $01
 	ld [wInvincibleCounter], a
 	ld a, WST_WATER_STUNG
@@ -1065,7 +1065,7 @@ Func_20899: ; 20899 (8:4899)
 	or INTERACTION_LEFT
 	ld [wInteractionSide], a
 .asm_208ca
-	load_sfx SFX_014
+	play_sfx SFX_014
 	ld b, $04
 	call SetObjUnk1C
 	ld a, [wTransformation]
@@ -1473,7 +1473,7 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	jp Func_2023b
 
 .pick_up
-	load_sfx SFX_GRAB
+	play_sfx SFX_GRAB
 
 	xor a
 	ld [wFrameDuration], a
@@ -1724,7 +1724,7 @@ ObjInteraction_MusicalCoin: ; 20e82 (8:4e82)
 	cp NUM_LEVEL_MUSICAL_COINS
 	jp nc, Func_20000.next_obj
 	inc [hl]
-	load_sfx SFX_MUSICAL_COIN
+	play_sfx SFX_MUSICAL_COIN
 	jp CollectMusicalCoin
 ; 0x20e97
 
@@ -1890,7 +1890,7 @@ ObjInteraction_BlueKey: ; 21002 (8:5002)
 ;	fallthrough
 
 CollectKey: ; 21007 (8:5007)
-	load_sfx SFX_KEY
+	play_sfx SFX_KEY
 	call Func_20a63
 	ld a, ST_COLLECT_KEY
 	ld [wState], a
@@ -2171,7 +2171,7 @@ Func_2126a: ; 2126a (8:526a)
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
 .asm_212b8
-	load_sfx SFX_039
+	play_sfx SFX_039
 
 	ld a, (1 << 6) | (1 << 7) | TRANSFORMATION_BALL_O_STRING_WARIO
 	ld [wTransformation], a
@@ -2270,7 +2270,7 @@ Func_21358: ; 21358 (8:5358)
 	ld a, FALLING_JUMP_VEL_INDEX
 	ld [wJumpVelIndex], a
 .asm_213bb
-	load_sfx SFX_03A
+	play_sfx SFX_03A
 	call UpdateLevelMusic
 
 	ld a, WST_FAT_EATING
@@ -2321,7 +2321,7 @@ ObjInteraction_RegularCoin: ; 21433 (8:5433)
 	ld a, LOW(MAX_NUM_COINS)
 	ld [hl], a
 .no_cap
-	load_sfx SFX_REGULAR_COIN
+	play_sfx SFX_REGULAR_COIN
 	jp Func_20a63
 ; 0x21455
 
@@ -2363,7 +2363,7 @@ Func_21455: ; 21455 (8:5455)
 	ld [wDirection], a
 
 .asm_21497
-	load_sfx SFX_040
+	play_sfx SFX_040
 
 	xor a
 	ld [wWarioStateCounter], a
@@ -2475,7 +2475,7 @@ Func_215a2: ; 215a2 (8:55a2)
 	ld b, $06
 	call SetObjUnk1C
 
-	load_sfx SFX_028
+	play_sfx SFX_028
 
 	ld a, (1 << 6) | TRANSFORMATION_ZOMBIE_WARIO
 	ld [wTransformation], a
@@ -2788,7 +2788,7 @@ Func_21887: ; 21887 (8:5887)
 	ld b, $07
 	call SetObjUnk1C
 
-	load_sfx SFX_028
+	play_sfx SFX_028
 	ld a, (1 << 6) | TRANSFORMATION_ICE_SKATIN
 	ld [wTransformation], a
 	ld a, TOUCH_ATTACK
@@ -2816,7 +2816,7 @@ ObjInteraction_Owl: ; 218e7 (8:58e7)
 
 	call Func_20a63
 
-	load_sfx SFX_HANG_GRAB
+	play_sfx SFX_HANG_GRAB
 	ld a, TRANSFORMATION_OWL_WARIO
 	ld [wTransformation], a
 
@@ -2874,7 +2874,7 @@ ObjInteraction_Rail: ; 21999 (8:5999)
 	ld b, $06
 	call SetObjUnk1C
 
-	load_sfx SFX_HANG_GRAB
+	play_sfx SFX_HANG_GRAB
 	ld a, TRANSFORMATION_RAIL
 	ld [wTransformation], a
 
@@ -3253,7 +3253,7 @@ Func_21ca8: ; 21ca8 (8:5ca8)
 	and a
 	ret nz
 
-	load_sfx SFX_FAT_WALK
+	play_sfx SFX_FAT_WALK
 	farcall SetState_DraggedDown
 ;	fallthrough
 
@@ -3387,7 +3387,7 @@ Func_21dac: ; 21dac (8:5dac)
 ; 0x21dd3
 
 ObjInteraction_ColourCoin: ; 21dd3 (8:5dd3)
-	load_sfx SFX_COLOUR_COIN
+	play_sfx SFX_COLOUR_COIN
 ;	fallthrough
 
 ; adds 10 to coin count
@@ -3527,7 +3527,7 @@ Func_21ecd: ; 21ecd (8:5ecd)
 	jr nz, .asm_21ee7
 	jp Func_20e6a
 .asm_21ee7
-	load_sfx SFX_FAT_WALK
+	play_sfx SFX_FAT_WALK
 	farcall SetState_DraggedDown
 	jp Func_21cc9
 ; 0x21f01

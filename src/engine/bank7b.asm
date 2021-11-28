@@ -169,7 +169,7 @@ UpdateState_IceSkatin: ; 1ec177 (7b:4177)
 	jr nc, .skip_sfx
 	ld a, $0c
 	ld [wSFXLoopCounter], a
-	load_sfx SFX_ZIP_LINE_SLIDE
+	play_sfx SFX_ZIP_LINE_SLIDE
 .skip_sfx
 	update_anim_2
 
@@ -266,7 +266,7 @@ UpdateState_IceSkatinAirborne: ; 1ec22b (7b:422b)
 ; 0x1ec2bb
 
 SetState_IceSkatinCrash: ; 1ec2bb (7b:42bb)
-	load_sfx SFX_02E
+	play_sfx SFX_02E
 
 	ld a, WST_ICE_SKATIN_CRASH
 	ld [wWarioState], a
@@ -330,7 +330,7 @@ UpdateState_HangingRail: ; 1ec703 (7b:4703)
 ; 0x1ec749
 
 SetState_UnknownC4: ; 1ec749 (7b:4749)
-	load_sfx SFX_047
+	play_sfx SFX_047
 
 	ld a, WST_UNKNOWN_C4
 	ld [wWarioState], a
@@ -506,7 +506,7 @@ UpdateState_SplitKnockedBack: ; 1ecf86 (7b:4f86)
 	jp Func_14de
 
 .play_sfx
-	load_sfx SFX_044
+	play_sfx SFX_044
 
 	xor a
 	ld [wFrameDuration], a
@@ -754,7 +754,7 @@ Func_1ed548: ; 1ed548 (7b:5548)
 ; 0x1ed558
 
 Func_1ed558: ; 1ed558 (7b:5558)
-	load_sfx SFX_JUMP
+	play_sfx SFX_JUMP
 
 	xor a
 	ld [wJumpVelIndex], a
@@ -1062,7 +1062,7 @@ UpdateState_MagicRising: ; 1ed972 (7b:5972)
 	jr nc, .skip_sfx
 	ld a, $0c
 	ld [wSFXLoopCounter], a
-	load_sfx SFX_07D
+	play_sfx SFX_07D
 .skip_sfx
 
 	ld a, $77
@@ -1233,7 +1233,7 @@ UpdateState_BallBouncing: ; 1edb47 (7b:5b47)
 ;	fallthrough
 
 SetState_BallAirborne: ; 1edb5b (7b:5b5b)
-	load_sfx SFX_066
+	play_sfx SFX_066
 	ld a, JUMP_VEL_KNOCK_BACK
 	ld [wJumpVelTable], a
 
@@ -1425,7 +1425,7 @@ UpdateState_BallThrown: ; 1edcd0 (7b:5cd0)
 
 	ld a, WST_BALL_SENT_UPWARDS
 	ld [wWarioState], a
-	load_sfx SFX_066
+	play_sfx SFX_066
 
 	xor a
 	ld [wSFXLoopCounter], a

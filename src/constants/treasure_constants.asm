@@ -101,4 +101,6 @@
 	const TREASURE_CRAYON_BLUE                  ; $63
 	const TREASURE_CRAYON_PINK                  ; $64
 NUM_TREASURES EQU const_value - 1
-	const TREASURE_DUMMY                          ; $65
+	const TREASURE_DUMMY                        ; $65
+const_value = $80
+	const TREASURE_INVALID                      ; $80

@@ -97,7 +97,7 @@ UpdateState_OnFire: ; 280a6 (a:40a6)
 	jr nc, .skip_sfx
 	ld a, 14
 	ld [wSFXLoopCounter], a
-	load_sfx SFX_01E
+	play_sfx SFX_01E
 .skip_sfx
 
 	ld a, [wWarioStateCounter]
@@ -270,7 +270,7 @@ UpdateState_Hot: ; 2827a (a:427a)
 	jr nc, .skip_sfx
 	ld a, 16
 	ld [wSFXLoopCounter], a
-	load_sfx SFX_01F
+	play_sfx SFX_01F
 .skip_sfx
 	update_anim_1
 
@@ -315,7 +315,7 @@ UpdateState_Hot: ; 2827a (a:427a)
 	ret
 
 .asm_28313
-	load_sfx SFX_022
+	play_sfx SFX_022
 
 	ld a, WST_BURNT
 	ld [wWarioState], a
@@ -457,7 +457,7 @@ SetState_FlatAirborne: ; 28435 (a:4435)
 
 	ld a, (1 << 6) | TRANSFORMATION_FLAT_WARIO
 	ld [wTransformation], a
-	load_sfx SFX_01B
+	play_sfx SFX_01B
 	call UpdateLevelMusic
 
 	ld a, TOUCH_BUMP
@@ -638,7 +638,7 @@ UpdateState_FlatWalking: ; 28672 (a:4672)
 	jr nc, .skip_sfx
 	ld a, 10
 	ld [wSFXLoopCounter], a
-	load_sfx SFX_FLAT_WALK
+	play_sfx SFX_FLAT_WALK
 .skip_sfx
 	update_anim_1
 
@@ -653,7 +653,7 @@ UpdateState_FlatWalking: ; 28672 (a:4672)
 ; 0x286d1
 
 SetState_FlatJumping: ; 286d1 (a:46d1)
-	load_sfx SFX_01D
+	play_sfx SFX_01D
 
 	ld a, WST_FLAT_JUMPING
 	ld [wWarioState], a
@@ -778,7 +778,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 	ld a, b
 	and a
 	jp z, .asm_288b8
-	load_sfx SFX_BUMP
+	play_sfx SFX_BUMP
 
 	ld a, [wDirection]
 	xor $1 ; switch direction
@@ -854,7 +854,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 	jr nz, .asm_288d7
 	jp Func_14de
 .asm_288d7
-	load_sfx SFX_020
+	play_sfx SFX_020
 	call Func_14f6
 	jp SetState_FlatIdling
 ; 0x288e5
@@ -1104,7 +1104,7 @@ UpdateState_BallOString: ; 28b36 (a:4b36)
 	jr nc, .skip_sfx
 	ld a, 12
 	ld [wSFXLoopCounter], a
-	load_sfx SFX_ROLL
+	play_sfx SFX_ROLL
 .skip_sfx
 	update_anim_1
 
@@ -1214,7 +1214,7 @@ UpdateState_BallOStringAirborne: ; 28c25 (a:4c25)
 SetState_BallOStringKnockBack: ; 28c94 (a:4c94)
 	xor a
 	ld [wca8f], a
-	load_sfx SFX_BUMP
+	play_sfx SFX_BUMP
 	ld a, WST_BALL_O_STRING_KNOCK_BACK
 	ld [wWarioState], a
 	ld a, $0a
@@ -1268,7 +1268,7 @@ UpdateState_BallOStringKnockBack: ; 28ceb (a:4ceb)
 	xor $1 ; switch direction
 	ld [wDirection], a
 	call Func_14f6
-	load_sfx SFX_03C
+	play_sfx SFX_03C
 
 	ld a, WST_GETTING_UNWRAPPED_IN_STRING
 	ld [wWarioState], a
@@ -1301,7 +1301,7 @@ UpdateState_GettingUnwrappedInString: ; 28d92 (a:4d92)
 	and a
 	ret z
 
-	load_sfx SFX_03D
+	play_sfx SFX_03D
 	ld a, WST_BALL_O_STRING_DIZZY
 	ld [wWarioState], a
 	ld a, -1
@@ -1496,7 +1496,7 @@ UpdateState_FatWalking: ; 28fc0 (a:4fc0)
 	jr nc, .skip_sfx
 	ld a, 28
 	ld [wSFXLoopCounter], a
-	load_sfx SFX_FAT_WALK
+	play_sfx SFX_FAT_WALK
 .skip_sfx
 	update_anim_1
 
@@ -1553,7 +1553,7 @@ UpdateState_FatTurning: ; 2906d (a:506d)
 	jp SetState_FatWalking
 
 Func_290a1: ; 290a1 (a:50a1)
-	load_sfx SFX_JUMP
+	play_sfx SFX_JUMP
 
 	xor a
 	ld [wJumpVelIndex], a
@@ -1674,7 +1674,7 @@ UpdateState_FatAirborne: ; 29123 (a:5123)
 	ld a, [wc1aa]
 	and a
 	jr nz, SetState_FatLanding
-	load_sfx SFX_024
+	play_sfx SFX_024
 ;	fallthrough
 
 SetState_FatLanding: ; 291ff (a:51ff)
@@ -1722,7 +1722,7 @@ Func_2926a: ; 2926a (a:526a)
 	ldh [hYPosLo], a
 	ld b, $03
 	farcall Func_c9f3
-	load_sfx SFX_SLIDE
+	play_sfx SFX_SLIDE
 
 	ld a, WST_FAT_SINKING
 	ld [wWarioState], a
@@ -2068,7 +2068,7 @@ UpdateState_Electric: ; 294bf (a:54bf)
 	ret
 
 .asm_295d8
-	load_sfx SFX_041
+	play_sfx SFX_041
 
 	ld a, [wDirection]
 	and a
@@ -2148,7 +2148,7 @@ UpdateState_ElectricDizzy: ; 29672 (a:5672)
 ; 0x29689
 
 SetState_TurningInvisible: ; 29689 (a:5689)
-	load_sfx SFX_03F
+	play_sfx SFX_03F
 
 	xor a
 	ld [wWarioStateCounter], a
@@ -2230,7 +2230,7 @@ SetState_PuffyInflating: ; 2975e (a:575e)
 	ld a, $01
 	ld [wca94], a
 
-	load_sfx SFX_025
+	play_sfx SFX_025
 
 	ld a, WST_PUFFY_INFLATING
 	ld [wWarioState], a
@@ -2344,7 +2344,7 @@ UpdateState_PuffyRising: ; 29871 (a:5871)
 	jr nc, .skip_sfx
 	ld a, 32
 	ld [wSFXLoopCounter], a
-	load_sfx SFX_PUFF_RAISE
+	play_sfx SFX_PUFF_RAISE
 .skip_sfx
 
 	ld a, [wOAMBank]
@@ -2412,7 +2412,7 @@ UpdateState_PuffyTurning: ; 298f3 (a:58f3)
 ; 0x2992a
 
 SetState_PuffyDeflating: ; 2992a (a:592a)
-	load_sfx SFX_027
+	play_sfx SFX_027
 
 	ld a, WST_PUFFY_DEFLATING
 	ld [wWarioState], a
@@ -2600,7 +2600,7 @@ UpdateState_ZombieWalking: ; 29b06 (a:5b06)
 	jr nc, .skip_sfx
 	ld a, 36
 	ld [wSFXLoopCounter], a
-	load_sfx SFX_ZOMBIE_WALK
+	play_sfx SFX_ZOMBIE_WALK
 .skip_sfx
 	update_anim_2
 
@@ -2759,7 +2759,7 @@ UpdateState_ZombieAirborne: ; 29c29 (a:5c29)
 ;	fallthrough
 
 SetState_ZombieLanding: ; 29cde (a:5cde)
-	load_sfx SFX_02A
+	play_sfx SFX_02A
 
 	ld a, TOUCH_BUMP
 	ld [wTouchState], a
@@ -3154,7 +3154,7 @@ Func_2a0c7: ; 2a0c7 (a:60c7)
 SetState_BouncyAirborne: ; 2a0cb (a:60cb)
 	ld a, WST_BOUNCY_AIRBORNE
 	ld [wWarioState], a
-	load_sfx SFX_02B
+	play_sfx SFX_02B
 
 	xor a
 	ld [wFrameDuration], a
@@ -3441,7 +3441,7 @@ UpdateState_BouncyLastBounce: ; 2a362 (a:6362)
 ; 0x2a3ed
 
 SetState_CrazySpinning: ; 2a3ed (a:63ed)
-	load_sfx SFX_042
+	play_sfx SFX_042
 	ld a, WST_CRAZY_SPINNING
 	ld [wWarioState], a
 	ld a, -1
@@ -3526,7 +3526,7 @@ UpdateState_CrazySpinning: ; 2a489 (a:6489)
 	ret c
 	ld [hl], $00
 
-	load_sfx SFX_043
+	play_sfx SFX_043
 	ld a, WST_CRAZY_DIZZY
 	ld [wWarioState], a
 
@@ -3556,7 +3556,7 @@ UpdateState_CrazyDizzy: ; 2a544 (a:6544)
 ;	fallthrough
 
 SetState_Crazy: ; 2a558 (a:6558)
-	load_sfx SFX_043
+	play_sfx SFX_043
 	ld a, WST_CRAZY
 	ld [wWarioState], a
 
@@ -3852,7 +3852,7 @@ Func_2a8a7: ; 2a8a7 (a:68a7)
 ; 0x2a8ae
 
 Func_2a8ae: ; 2a8ae (a:68ae)
-	load_sfx SFX_01D
+	play_sfx SFX_01D
 	xor a
 	ld [wJumpVelIndex], a
 ;	fallthrough
@@ -3916,7 +3916,7 @@ UpdateState_VampireAirborne: ; 2a8d2 (a:68d2)
 ; 0x2a951
 
 SetState_BatTransforming: ; 2a951 (a:6951)
-	load_sfx SFX_046
+	play_sfx SFX_046
 	ld a, WST_BAT_TRANSFORMING
 	ld [wWarioState], a
 
@@ -3991,7 +3991,7 @@ UpdateState_BatIdling: ; 2aa08 (a:6a08)
 	jr nc, .skip_sfx
 	ld a, $20
 	ld [wSFXLoopCounter], a
-	load_sfx SFX_071
+	play_sfx SFX_071
 .skip_sfx
 	update_anim_2
 
@@ -4015,12 +4015,12 @@ UpdateState_BatIdling: ; 2aa08 (a:6a08)
 	jr z, SetState_VampireTransforming
 	ld a, -15
 	ld [wca6f], a
-	load_sfx SFX_0E5
+	play_sfx SFX_0E5
 	ret
 ; 0x2aa81
 
 SetState_VampireTransforming: ; 2aa81 (a:6a81)
-	load_sfx SFX_045
+	play_sfx SFX_045
 
 	ld a, WST_VAMPIRE_TRANSFORMING
 	ld [wWarioState], a
@@ -4107,7 +4107,7 @@ UpdateState_BatFlying: ; 2ab42 (a:6b42)
 	jr nc, .skip_sfx
 	ld a, $10
 	ld [wSFXLoopCounter], a
-	load_sfx SFX_071
+	play_sfx SFX_071
 .skip_sfx
 	update_anim_2
 
@@ -4259,7 +4259,7 @@ UpdateState_InBubble: ; 2ad06 (a:6d06)
 	jr nc, .skip_sfx
 	ld a, $0e
 	ld [wSFXLoopCounter], a
-	load_sfx SFX_023
+	play_sfx SFX_023
 .skip_sfx
 	update_anim_2
 	call Func_2b56f
@@ -4313,7 +4313,7 @@ Func_2ade4: ; 2ade4 (a:6de4)
 	ldh [hYPosLo], a
 	ld b, $07
 	farcall Func_c9f3
-	load_sfx SFX_SLIDE
+	play_sfx SFX_SLIDE
 	farcall Func_1cd7c
 	ret
 ; 0x2ae2f
@@ -4473,7 +4473,7 @@ Func_2af75: ; 2af75 (a:6f75)
 ; 0x2af81
 
 Func_2af81: ; 2af81 (a:6f81)
-	load_sfx SFX_JUMP
+	play_sfx SFX_JUMP
 
 	xor a
 	ld [wJumpVelIndex], a

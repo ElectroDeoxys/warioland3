@@ -1128,12 +1128,7 @@ w1d14a:: ; d14a
 SECTION "WRAM2", WRAMX
 
 wTreasuresCollected:: ; d000
-	ds $1
-
-	ds $a
-
-w2d00b:: ; d00b
-	ds $2
+	ds (NUM_TREASURES / 8) + 1
 
 w2d00d:: ; d00d
 	ds $1
@@ -1145,7 +1140,10 @@ w2d00e:: ; d00e
 wOWLevel:: ; d00f
 	ds $1
 
-	ds $2
+	ds $1
+
+w2d011:: ; d011
+	ds $1
 
 w2d012:: ; d012
 	ds $1
@@ -1156,6 +1154,7 @@ w2d013:: ; d013
 w2d014:: ; d014
 	ds $1
 
+w2d015:: ; d015
 	ds $1
 
 w2d016:: ; d016
@@ -1164,7 +1163,15 @@ w2d016:: ; d016
 w2d017:: ; d017
 	ds $1
 
-	ds $3
+w2d018:: ; d018
+	ds $1
+
+w2d019:: ; d019
+	ds $1
+
+; MAP_* constant
+wMapSide:: ; d01a
+	ds $1
 
 w2d01b:: ; d01b
 	ds $1
@@ -1177,7 +1184,13 @@ w2d01d:: ; d01d
 w2d01e:: ; d01e
 	ds $1
 
-	ds $3
+w2d01f:: ; d01f
+	ds $1
+
+w2d020:: ; d020
+	ds $1
+
+	ds $1
 
 w2d022:: ; d022
 	ds $1
@@ -1200,14 +1213,116 @@ w2d027:: ; d027
 w2d028:: ; d028
 	ds $1
 
-	ds $27
+w2d029:: ; d029
+	ds $1
 
-w2d050:: ; d050
+w2d02a:: ; d02a
+	ds $1
+
+w2d02b:: ; d02b
+	ds $1
+
+w2d02c:: ; d02c
+	ds $1
+
+	ds $3
+
+w2d030:: ; d030
+	ds $1
+
+w2d031:: ; d031
+	ds $1
+
+w2d032:: ; d032
+	ds $1
+
+w2d033:: ; d033
+	ds $1
+
+w2d034:: ; d034
+	ds $1
+
+w2d035:: ; d035
+	ds $1
+
+w2d036:: ; d036
+	ds $1
+
+w2d037:: ; d037
+	ds $1
+
+w2d038:: ; d038
+	ds $1
+
+w2d039:: ; d039
+	ds $1
+
+w2d03a:: ; d03a
+	ds $1
+
+w2d03b:: ; d03b
+	ds $1
+
+w2d03c:: ; d03c
+	ds $1
+
+w2d03d:: ; d03d
+	ds $1
+
+w2d03e:: ; d03e
+	ds $1
+
+w2d03f:: ; d03f
+	ds $1
+
+w2d040:: ; d040
+	ds $1
+
+w2d041:: ; d041
+	ds $1
+
+w2d042:: ; d042
+	ds $1
+
+w2d043:: ; d043
+	ds $1
+
+w2d044:: ; d044
+	ds $2
+
+w2d046:: ; d046
+	ds $1
+
+w2d047:: ; d047
+	ds $1
+
+w2d048:: ; d048
+	ds $1
+
+w2d049:: ; d049
 	ds $1
 
 	ds $6
 
-w2d057:: ; d057
+w2d050:: ; d050
+	ds $1
+
+	ds $2
+
+w2d053:: ; d053
+	ds $1
+
+w2d054:: ; d054
+	ds $1
+
+w2d055:: ; d055
+	ds $1
+
+	ds $1
+
+; which crayons have been collected
+; each bit corresponds to CRAYON_*
+wCrayonFlags:: ; d057
 	ds $1
 
 	ds $8
@@ -1215,17 +1330,131 @@ w2d057:: ; d057
 w2d060:: ; d060
 	ds $1
 
-	ds $18
+	ds $2
+
+w2d063:: ; d063
+	ds $2
+
+w2d065:: ; d065
+	ds $1
+
+w2d066:: ; d066
+	ds $1
+
+w2d067:: ; d067
+	ds $1
+
+w2d068:: ; d068
+	ds $1
+
+w2d069:: ; d069
+	ds $1
+
+w2d06a:: ; d06a
+	ds $1
+
+w2d06b:: ; d06b
+	ds $1
+
+w2d06c:: ; d06c
+	ds $1
+
+w2d06d:: ; d06d
+	ds $1
+
+w2d06e:: ; d06e
+	ds $1
+
+	ds $2
+
+w2d071:: ; d071
+	ds $1
+
+w2d072:: ; d072
+	ds $1
+
+w2d073:: ; d073
+	ds $1
+
+w2d074:: ; d074
+	ds $1
+
+w2d075:: ; d075
+	ds $1
+
+w2d076:: ; d076
+	ds $1
+
+w2d077:: ; d077
+	ds $1
+
+w2d078:: ; d078
+	ds $1
 
 w2d079:: ; d079
 	ds $1
 
-	ds $36
+w2d07a:: ; d07a
+	ds $1
+
+	ds $1
+
+w2d07c:: ; d07c
+	ds $1
+
+w2d07d:: ; d07d
+	ds $1
+
+	ds $1
+
+w2d07f:: ; d07f
+	ds $1
+
+w2d080:: ; d080
+	ds $1
+
+w2d081:: ; d081
+	ds $1
+
+w2d082:: ; d082
+	ds $1
+
+w2d083:: ; d083
+	ds $1
+
+	ds $2
+
+w2d086:: ; d086
+	ds $1
+
+w2d087:: ; d087
+	ds $1
+
+	ds $8
+
+wHasMagnifyingGlass:: ; d090
+	ds $1
+
+w2d091:: ; d091
+	ds $1
+
+	ds $2
+
+w2d094:: ; d094
+	ds $1
+
+w2d095:: ; d095
+	ds $1
+
+	ds $1a
 
 wHDMA:: ; d0b0
 	ds $5
 
-	ds $1b
+w2d0b5:: ; d0b5
+	ds $5
+
+	ds $16
 
 w2d0d0:: ; d0d0
 	ds $5
@@ -1239,7 +1468,18 @@ w2d0d6:: ; d6d6
 w2d0db:: ; d6db
 	ds $1
 
-	ds $14
+	ds $4
+
+w2d0e0:: ; d6e0
+	ds $1
+
+	ds $d
+
+w2d0ee:: ; d6ee
+	ds $1
+
+w2d0ef:: ; d6ef
+	ds $1
 
 wLevelTreasureIDs::
 wLevelTreasure1ID:: ds $1 ; d0f0
@@ -1252,12 +1492,66 @@ wLevelTreasure2Unk:: ds $1 ; d0f5
 wLevelTreasure3Unk:: ds $1 ; d0f6
 wLevelTreasure4Unk:: ds $1 ; d0f7
 
-	ds $48
+	ds $2
+
+w2d0fa:: ; d0fa
+	ds $1
+
+	ds $5
+
+w2d100:: ; d100
+	ds $1
+
+w2d101:: ; d101
+	ds $1
+
+	ds $2
+
+w2d104:: ; d104
+	ds $2
+
+w2d106:: ; d106
+	ds $1
+
+w2d107:: ; d107
+	ds $2
+
+w2d109:: ; d109
+	ds $2
+
+	ds $1
+
+w2d10c:: ; d10c
+	ds $1
+
+w2d10d:: ; d10d
+	ds $1
+
+w2d10e:: ; d10e
+	ds $1
+
+	ds $1
+
+w2d110:: ; d110
+	ds $3
+
+	ds $1
+
+w2d114:: ; d114
+	ds $2
+
+w2d116:: ; d116
+	ds $1
+
+	ds $29
 
 w2d140:: ; d140
 	ds $1
 
-	ds $3
+w2d141:: ; d141
+	ds $1
+
+	ds $2
 
 w2d144:: ; d144
 	ds $2
@@ -1282,7 +1576,12 @@ w2d14b:: ; d14b
 w2d14c:: ; d14c
 	ds $1
 
-	ds $b
+	ds $1
+
+w2d14e:: ; d14e
+	ds $1
+
+	ds $9
 
 w2d158:: ; d158
 	ds $1
@@ -1333,7 +1632,13 @@ w2d1a4:: ; d1a4
 w2d1a6:: ; d1a6
 	ds $2
 
-	ds $658
+	ds $58
+
+wBGMap1:: ; d200
+	ds $300
+
+wBGMap2:: ; d500
+	ds $300
 
 w2d800:: ; d800
 	ds $1

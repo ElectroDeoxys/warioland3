@@ -3,7 +3,7 @@ StateTable: ; 4000 (1:4000)
 	jumptable
 
 	dw TitleStateTable             ; ST_TITLE
-	dw Func_4686                   ; ST_01
+	dw Func_4686                   ; ST_OVERWORLD
 	dw Func_46cc                   ; ST_02
 	dw Func_46dc                   ; ST_03
 	dw Func_46f6                   ; ST_04
@@ -13,7 +13,7 @@ StateTable: ; 4000 (1:4000)
 	dw CollectKeyDelay             ; ST_COLLECT_KEY
 	dw Func_4776                   ; ST_09
 	dw Func_4790                   ; ST_0a
-	dw Func_47aa                   ; ST_0b
+	dw GBIncompatibleStateTable    ; ST_GB_INCOMPATIBLE
 	dw Func_47fd                   ; ST_0c
 	dw Func_4817                   ; ST_0d
 	dw LanguageSelectionStateTable ; ST_LANGUAGE_SELECTION
@@ -335,7 +335,7 @@ IntroSequencePhase1: ; 41cf (1:41cf)
 	cp 180
 	jp c, .continue
 	ld [hl], 0 ; reset timer
-	load_music MUSIC_INTRO
+	play_music MUSIC_INTRO
 	ld hl, wWarioPlaneState
 	inc [hl]
 	jp .continue
@@ -571,14 +571,14 @@ IntroSequencePhase2: ; 42ed (1:42ed)
 	ld a, [wWarioPlaneDuration]
 	and a
 	jr nz, .skip_sfx
-	load_sfx SFX_023
+	play_sfx SFX_023
 .skip_sfx
 
 	ld hl, wIntroSeqTimer
 	dec [hl]
 	jr nz, .continue
 
-	load_sfx SFX_PLANE_EXPLOSION
+	play_sfx SFX_PLANE_EXPLOSION
 	ld hl, wWarioPlaneFramesetOffset
 	xor a
 	ld [hli], a
@@ -630,7 +630,7 @@ IntroSequencePhase3: ; 43b5 (1:43b5)
 	ld a, [wPlaneAnimationEnded]
 	and a
 	jp z, .continue
-	load_sfx SFX_119
+	play_sfx SFX_119
 	ld hl, wWarioPlaneFramesetOffset
 	xor a
 	ld [hli], a
@@ -709,7 +709,7 @@ IntroSequencePhase3: ; 43b5 (1:43b5)
 	ld a, [hl]
 	cp 112
 	jr c, .continue
-	load_sfx SFX_061
+	play_sfx SFX_061
 	ld hl, wWarioPlaneFramesetOffset
 	xor a
 	ld [hli], a
@@ -753,7 +753,7 @@ IntroSequencePhase3: ; 43b5 (1:43b5)
 	ld hl, Pals_5042
 	call LoadPalsToTempPals2
 
-	load_music MUSIC_TITLE_SCREEN
+	play_music MUSIC_TITLE_SCREEN
 	ld hl, wSubState
 	inc [hl]
 	jr .finish_scroll
@@ -811,7 +811,7 @@ EndIntroSequence: ; 44c3 (1:44c3)
 ; loads TitleScreen music
 ; then starts demo timer
 StartTitleScreen: ; 44f0 (1:44f0)
-	load_music MUSIC_TITLE_SCREEN
+	play_music MUSIC_TITLE_SCREEN
 	ld a, 8
 	ld [wIntroSeqTimer + 1], a
 	ld a, 68
@@ -983,7 +983,7 @@ Func_4619: ; 4619 (1:4619)
 	; fallthrough
 
 Func_461e: ; 461e (1:461e)
-	ld a, ST_01
+	ld a, ST_OVERWORLD
 	ld [wState], a
 	xor a
 	ld [wSubState], a
@@ -1052,7 +1052,7 @@ Func_4686: ; 4686 (1:4686)
 	ld a, [hl]
 	cp ST_02
 	ret nz
-	load_sfx SFX_0E3
+	play_sfx SFX_0E3
 	call Func_4ae7
 	ld a, [wLevel]
 	cp $ff
@@ -1176,21 +1176,21 @@ Func_4790: ; 4790 (1:4790)
 	ret
 ; 0x47aa
 
-Func_47aa: ; 47aa (1:47aa)
+GBIncompatibleStateTable: ; 47aa (1:47aa)
 	ld a, [wSubState]
 	jumptable
 
 	dw  FastFadeToWhite
-	dw  SubSeq_GBIncompatibleScreen
+	dw  GBIncompatible
 	dw  SlowFadeFromWhite
-	dw  Func_47fc
+	dw  ExitGBIncompatible
 	dw  DebugReset
 	dw  DebugReset
 	dw  DebugReset
 	dw  DebugReset
 ; 0x47be
 
-SubSeq_GBIncompatibleScreen: ; 47be (1:47be)
+GBIncompatible: ; 47be (1:47be)
 	call DisableLCD
 	call ClearBGMap0
 	call ClearWholeVirtualOAM
@@ -1211,7 +1211,7 @@ SubSeq_GBIncompatibleScreen: ; 47be (1:47be)
 	ret
 ; 0x47fc
 
-Func_47fc: ; 47fc (1:47fc)
+ExitGBIncompatible: ; 47fc (1:47fc)
 	ret
 ; 0x47fd
 
@@ -1339,7 +1339,7 @@ LanguageSelection: ; 48c9 (1:48c9)
 	ld [wLanguage], a
 	add $80
 	ld [wcee4], a
-	load_sfx SFX_0E2
+	play_sfx SFX_0E2
 
 .update_anim
 	ld hl, wIntroObj0End - 1
@@ -1533,7 +1533,64 @@ Func_4a33: ; 4a33 (1:4a33)
 	ret
 ; 0x4a63
 
-	INCROM $4a63, $4ae7
+Func_4a63: ; 4a63 (1:4a63)
+	xor a
+	ld [wKeys], a
+	ldh a, [rSVBK]
+	push af
+	ld a, $02
+	ldh [rSVBK], a
+	ld a, [wOWLevel]
+	dec a
+	call Func_4a79
+	pop af
+	ldh [rSVBK], a
+	ret
+; 0x4a79
+
+Func_4a79: ; 4a79 (1:4a79)
+	add a
+	add a ; *4
+	ld e, a
+	ld d, $00
+	ld hl, LevelTreasureIDs + 4
+	add hl, de
+	ld a, [hli]
+	push hl
+	call IsTreasureCollected
+	jr z, .asm_4a8e
+	ld hl, wKeys
+	set 4, [hl]
+.asm_4a8e
+	pop hl
+	ld a, [hli]
+	push hl
+	call IsTreasureCollected
+	jr z, .asm_4a9b
+	ld hl, wKeys
+	set 5, [hl]
+.asm_4a9b
+	pop hl
+	ld a, [hli]
+	push hl
+	call IsTreasureCollected
+	jr z, .asm_4aa8
+	ld hl, wKeys
+	set 6, [hl]
+.asm_4aa8
+	pop hl
+	ld a, [hli]
+	push hl
+	call IsTreasureCollected
+	jr z, .asm_4ab5
+	ld hl, wKeys
+	set 7, [hl]
+.asm_4ab5
+	pop hl
+	ret
+; 0x4ab7
+
+	INCROM $4ab7, $4ae7
 
 Func_4ae7: ; 4ae7 (1:4ae7)
 	ldh a, [rSVBK]
@@ -1706,7 +1763,7 @@ HandleStartMenuSelection: ; 4bb3 (1:4bb3)
 	ret
 
 .a_btn
-	load_sfx SFX_0E3
+	play_sfx SFX_0E3
 	ld hl, wStartMenuSelection
 	ld a, [hl]
 	and $f
@@ -1744,7 +1801,7 @@ HandleStartMenuSelection: ; 4bb3 (1:4bb3)
 	ld [wStartMenuSelection], a
 
 .asm_4c20
-	load_sfx SFX_0E2
+	play_sfx SFX_0E2
 	ret
 
 .d_left
@@ -2130,7 +2187,7 @@ PlayIntroSFXPlane_Close: ; 4e5e (1:4e5e)
 	jr nc, .no_sfx
 	ld a, 12
 	ld [wIntroSeqSFXTimer], a
-	load_sfx SFX_PLANE1
+	play_sfx SFX_PLANE1
 .no_sfx
 	ret
 
@@ -2141,7 +2198,7 @@ PlayIntroSFXPlane2: ; 4e81 (1:4e81)
 	jr nc, .no_sfx
 	ld a, 12
 	ld [wIntroSeqSFXTimer], a
-	load_sfx SFX_PLANE2
+	play_sfx SFX_PLANE2
 .no_sfx
 	ret
 
@@ -2152,7 +2209,7 @@ PlayIntroSFXPlane3: ; 4e99 (1:4e99)
 	jr nc, .no_sfx
 	ld a, 12
 	ld [wIntroSeqSFXTimer], a
-	load_sfx SFX_PLANE3
+	play_sfx SFX_PLANE3
 .no_sfx
 	ret
 ; 0x4eb1

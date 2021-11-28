@@ -648,7 +648,7 @@ Func_617a7: ; 617a7 (18:57a7)
 	INCROM $61809, $6189d
 
 Func_6189d: ; 6189d (18:589d)
-	load_sfx SFX_018
+	play_sfx SFX_018
 
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, $48
@@ -875,7 +875,7 @@ for n, 1, NUM_OBJECTS + 1
 	ld [hl], a ; OBJ_ACTION
 	ld l, LOW(wObj{u:n}Flags)
 	set OBJFLAG_UNK3_F, [hl]
-	load_sfx SFX_016
+	play_sfx SFX_016
 	ret
 .next_obj_{u:n}
 endr
@@ -894,7 +894,7 @@ for n, 1, NUM_OBJECTS + 1
 	ld [hl], a
 	ld l, LOW(wObj{u:n}Flags)
 	set OBJFLAG_UNK3_F, [hl]
-	load_sfx SFX_016
+	play_sfx SFX_016
 	ret
 endr
 
@@ -917,7 +917,7 @@ for n, 1, NUM_OBJECTS + 1
 	ld [hl], a
 	ld l, LOW(wObj{u:n}Flags)
 	set OBJFLAG_UNK3_F, [hl]
-	load_sfx SFX_016
+	play_sfx SFX_016
 	ret
 endr
 ; 0x61f10

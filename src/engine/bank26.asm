@@ -305,7 +305,39 @@ INCBIN "gfx/treasures/treasure_100.2bpp"
 Treasure101Gfx: ; 99940 (26:5940)
 INCBIN "gfx/treasures/treasure_101.2bpp"
 
-	INCROM $99980, $9aa90
+NumbersGfx: ; 99980 (26:5980)
+INCBIN "gfx/gui/numbers.2bpp"
+
+	INCROM $99ae0, $9a3a2
+
+DrawCoinCount: ; 9a3a2 (26:63a2)
+	ld de, v0Tiles1 + $a0
+	ld a, [wNumCoins + 0]
+	call .DrawNumber
+	ld a, [wNumCoins + 1]
+	swap a
+	call .DrawNumber
+	ld a, [wNumCoins + 1]
+	call .DrawNumber
+	ret
+
+.DrawNumber
+	and $0f
+	inc a
+	ld hl, NumbersGfx
+	ld bc, $20
+.loop
+	dec a
+	jr z, .got_number
+	add hl, bc
+	jr .loop
+.got_number
+	ld b, $20
+	call CopyHLToDE
+	ret
+; 0x9a3cf
+
+	INCROM $9a3cf, $9aa90
 
 LoadLevelTreasureData: ; 9aa90 (26:6a90)
 	ldh a, [rSVBK]

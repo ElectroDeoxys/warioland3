@@ -193,13 +193,13 @@ Init: ; 15e (0:15e)
 	ldh a, [hCGB]
 	and a
 	jr nz, .is_cgb
-	ld a, ST_0b
+	ld a, ST_GB_INCOMPATIBLE
 	ld [wState], a
-	xor a ; ST_TITLE
+	xor a
 	ld [wSubState], a
 	jr .asm_21d
 .is_cgb
-	call Func_1690
+	call InitGameState
 .asm_21d
 
 	xor a
@@ -1838,7 +1838,7 @@ Func_c4c: ; c4c (0:c4c)
 ; 0xcab
 
 Func_cab: ; cab (0:cab)
-	ld a, $01
+	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, wce6a
 	ld bc, wce35
@@ -2415,7 +2415,7 @@ PlayNewMusic_SetNoise: ; 1062 (0:1062)
 ; 0x1070
 
 PlayRecoverySFX: ; 1070 (0:1070)
-	load_sfx SFX_RECOVERY
+	play_sfx SFX_RECOVERY
 	ret
 ; 0x1079
 
@@ -2580,7 +2580,7 @@ Func_11ae: ; 11ae (0:11ae)
 	ld a, $68
 .asm_11bc
 	ld [wc1a9], a
-	load_sfx SFX_0E1
+	play_sfx SFX_0E1
 	ld a, $08
 	ld [wc1aa], a
 	ld a, TRUE
@@ -2593,7 +2593,7 @@ Func_11ae: ; 11ae (0:11ae)
 Func_11d6: ; 11d6 (0:11d6)
 	ld a, c
 	ld [wca78], a
-	load_sfx SFX_0E1
+	play_sfx SFX_0E1
 	ld a, $04
 	ld [wc1aa], a
 	ld a, TRUE
@@ -3154,8 +3154,8 @@ UpdateLevelMusic: ; 161a (0:161a)
 	dw MUSIC_BOSS_DEFEAT
 ; 0x1690
 
-; clears wState and wSubState
-Func_1690: ; 1690 (0:1690)
+; set game state to Title
+InitGameState: ; 1690 (0:1690)
 	xor a ; ST_TITLE
 	ld [wState], a
 	ld [wSubState], a
@@ -4830,7 +4830,41 @@ Func_3573: ; 3573 (0:3573)
 	ret
 ; 0x358b
 
-	INCROM $358b, $3a38
+	INCROM $358b, $3a00
+
+Func_3a00: ; 3a00 (0:3a00)
+	ld a, [wTempSCY]
+	ld c, a
+	ld a, [hli]
+	sub c
+	ld c, $10
+	add c
+	ld [wCurSpriteYOffset], a
+	ld a, [wTempSCX]
+	ld c, a
+	ld a, [hli]
+	sub c
+	ld c, $08
+	add c
+	ld [wCurSpriteXOffset], a
+	ld a, [hli]
+	ld [wCurSpriteFrame], a
+	ld a, [hl]
+	ld [wCurSpriteAttributes], a
+	ld h, d
+	ld l, e
+;	fallthrough
+
+Func_3a22: ; 3a22 (0:3a22)
+	ld a, [wROMBank]
+	push af
+	ld a, b
+	bankswitch
+	call TryAddSprite
+	pop af
+	bankswitch
+	ret
+; 0x3a38
 
 ; hl = OAM data
 ; b = sprite bank
@@ -4954,11 +4988,83 @@ IsTreasureCollected: ; 3aac (0:3aac)
 	ret
 ; 0x3ad7
 
-	INCROM $3ad7, $3b42
+Func_3ad7: ; 3ad7 (0:3ad7)
+	ld a, [hli]
+	and $f8
+	rlca
+	rlca
+	ld c, a
+	and $0f
+	ld b, a
+	ld a, c
+	and $f0
+	ld c, a
+	ld a, [hl]
+	and $f8
+	rlca
+	swap a
+	add c
+	ld l, a
+	ld [w2d082], a
+	ld a, b
+	add $d5
+	ld h, a
+	ld [w2d083], a
+	ret
+; 0x3af7
+
+; loads source address of tiles
+; with the given level's name for HDMA transfer
+; writes them to v0Tiles2 + $500
+; b = map side constant (MAP_NORTH, ...)
+; d = level index within that map side
+LoadLevelName: ; 3af7 (0:3af7)
+	ld a, $24
+	ld hl, wLanguage
+	add [hl]
+	ld [w2d079], a
+	xor a
+	ld [wHDMA], a
+	ld hl, LevelNamesJPGfx ; aka LevelNamesENGfx
+	ld c, $00
+	ld a, b
+	swap a ; *$10
+	ld b, a
+	add hl, bc
+	ld a, d
+	add a ; *2
+	ld d, a
+	ld e, $00
+	add hl, de
+	ld a, h
+	ld [w2d0b5 + 0], a
+	ld a, l
+	ld [w2d0b5 + 1], a
+	ld a, $15
+	ld [w2d0b5 + 2], a
+	xor a
+	ld [w2d0b5 + 3], a
+	ld a, $1f
+	ld [w2d0b5 + 4], a
+	ret
+; 0x3b2b
+
+; copies c bytes from b:hl to de
+CopyFarBytes: ; 3b2b (0:3b2b)
+	ld a, [wROMBank]
+	push af
+	ld a, b
+	bankswitch
+	ld b, c
+	call CopyHLToDE
+	pop af
+	bankswitch
+	ret
+; 0x3b42
 
 ; copies c * $100 bytes from bank b
 ; at address hl to de
-CopyFarBytes: ; 3b42 (0:3b42)
+CopyFarBytes_Long: ; 3b42 (0:3b42)
 	ld a, [wROMBank]
 	push af
 	ld a, b
@@ -4994,7 +5100,16 @@ Func_3b93: ; 3b93 (0:3b93)
 	ret
 ; 0x3b98
 
-	INCROM $3b98, $3bb8
+PlayOverworldMusic: ; 3b98 (0:3b98)
+	ld a, [w2d011]
+	and a
+	jr nz, .night
+	play_music2 MUSIC_OVERWORLD_DAY
+	ret
+.night
+	play_music2 MUSIC_OVERWORLD_NIGHT
+	ret
+; 0x3bb8
 
 LoadFarPalsToTempPals1: ; 3bb8 (0:3bb8)
 	ld a, [wROMBank]
@@ -5052,7 +5167,31 @@ Func_3be4: ; 3be4 (0:3be4)
 	ret
 ; 0x3c03
 
-	INCROM $3c03, $3c4f
+Func_3c03: ; 3c03 (0:3c03)
+	ld a, BANK("VRAM1")
+	ldh [rVBK], a
+	ld hl, w2d0b5
+	ld a, [hli]
+	ld c, LOW(rHDMA1)
+	ld [$ff00+c], a
+	ld a, [hli]
+	inc c
+	ld [$ff00+c], a
+	ld a, [hli]
+	inc c
+	ld [$ff00+c], a
+	ld a, [hli]
+	inc c
+	ld [$ff00+c], a
+	ld a, [hli]
+	inc c
+	ld [$ff00+c], a
+	xor a
+	ld [w2d079], a
+	ret
+; 0x3c1f
+
+	INCROM $3c1f, $3c4f
 
 AddOffsetInPointerTable: ; 3c4f (0:3c4f)
 	add a
@@ -5085,7 +5224,28 @@ GetPointerFromTableDE: ; 3c5f (0:3c5f)
 	ret
 ; 0x3c66
 
-	INCROM $3c66, $3f00
+; outputs in hl the cth pointer
+; pointed by the ath entry
+; in the pointer table in hl
+GetCthEntryFromAthTable: ; 3c66 (0:3c66)
+	call AddOffsetInPointerTable
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, c
+	call AddOffsetInPointerTable
+	ret
+; 0x3c71
+
+Func_3c71: ; 3c71 (0:3c71)
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [hl]
+	ret
+; 0x3c76
+
+	INCROM $3c76, $3f00
 
 DoAudioFunc_InitAudio: ; 3f00 (0:3f00)
 	call BackupBankAndSwitchToAudioBank

@@ -9,7 +9,7 @@ Func_9c005: ; 9c005 (27:4005)
 	ld [w2d01e], a
 	ld a, [w2d025]
 	ld b, a
-	ld hl, $40a8
+	ld hl, Func_9c072.table
 	call GetPointerFromTableHL
 	ld a, h
 	cp HIGH(Func_9c000)
@@ -26,12 +26,7 @@ Func_9c005: ; 9c005 (27:4005)
 Func_9c021: ; 9c021 (27:4021)
 	call DisableLCD
 	call ClearWholeVirtualOAM
-	ld a, $ff
-	ldh [hffb3], a
-	ldh [hMusicID + 0], a
-	ld a, $00
-	ldh [hffb4], a
-	ldh [hMusicID + 1], a
+	stop_music2
 
 	xor a
 	ld hl, w2d800
@@ -93,6 +88,7 @@ Func_9c072: ; 9c072 (27:4072)
 	ld [w2d01e], a
 	jumptable
 
+.table
 	dw Func_9c000
 	dw InitPrologueSequence
 	dw LoadPrologueGfx
@@ -578,7 +574,6 @@ VBlank_9cc9c: ; 9cc9c (27:4c9c)
 .asm_9cccf
 	ld b, BANK(Func_854cc)
 	ld a, [wROMBank]
-
 	push af
 	ld a, b
 	bankswitch
@@ -799,7 +794,7 @@ Func_9f174: ; 9f174 (27:7174)
 	ld a, [w2d024]
 	cp $ff
 	ret nz
-	load_sfx SFX_10A
+	play_sfx SFX_10A
 	ret
 ; 0x9f1c4
 
