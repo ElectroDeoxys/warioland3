@@ -74,7 +74,7 @@ LoadEnemyGroupData: ; 64000 (19:4000)
 	ld e, $68
 	add e
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	pop hl
 
 	; enemy slot 2
@@ -89,7 +89,7 @@ LoadEnemyGroupData: ; 64000 (19:4000)
 	ld e, $69
 	add e
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	pop hl
 
 	; enemy slot 3
@@ -104,7 +104,7 @@ LoadEnemyGroupData: ; 64000 (19:4000)
 	ld e, $6a
 	add e
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	pop hl
 
 	; enemy slot 4
@@ -119,7 +119,7 @@ LoadEnemyGroupData: ; 64000 (19:4000)
 	ld e, $6b
 	add e
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	pop hl
 
 	xor a ; VRAM0

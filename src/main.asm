@@ -170,20 +170,28 @@ Overworld1Gfx:: INCBIN "gfx/overworld/overworld1.2bpp.lz"
 Overworld2Gfx:: INCBIN "gfx/overworld/overworld2.2bpp.lz"
 Overworld3Gfx:: INCBIN "gfx/overworld/overworld3.2bpp.lz"
 Overworld4Gfx:: INCBIN "gfx/overworld/overworld4.2bpp.lz"
-	INCROM $8a115, $8a15c
+OverworldRocksGfx:: INCBIN "gfx/overworld/overworld_rocks.2bpp.lz"
 OverworldCommonGfx:: INCBIN "gfx/overworld/overworld_common.2bpp.lz"
 OverworldArrowsGfx:: INCBIN "gfx/overworld/overworld_arrows.2bpp.lz"
 OverworldGlowGfx:: INCBIN "gfx/overworld/overworld_glow.2bpp.lz"
 OverworldNumbersGfx:: INCBIN "gfx/overworld/overworld_numbers.2bpp.lz"
+
 	INCROM $8b91e, $8c000
 
 
 SECTION "Bank 23", ROMX
 
 Overworld5Gfx:: INCBIN "gfx/overworld/overworld5.2bpp.lz"
-	INCROM $8ce06, $8d363
+OverworldThunderGfx:: INCBIN "gfx/overworld/overworld_thunder.2bpp.lz"
+OverworldTowerGfx:: INCBIN "gfx/overworld/overworld_tower.2bpp.lz"
+OverworldFanGfx:: INCBIN "gfx/overworld/overworld_fan.2bpp.lz"
+OverworldExplosion1Gfx:: INCBIN "gfx/overworld/overworld_explosion1.2bpp.lz"
 Overworld6Gfx:: INCBIN "gfx/overworld/overworld6.2bpp.lz"
-	INCROM $8e2fb, $8ea1a
+OverworldExplosion2Gfx:: INCBIN "gfx/overworld/overworld_explosion2.2bpp.lz"
+OverworldFireGfx:: INCBIN "gfx/overworld/overworld_fire.2bpp.lz"
+OverworldTorchGfx:: INCBIN "gfx/overworld/overworld_torch.2bpp.lz"
+OverworldExplosion3Gfx:: INCBIN "gfx/overworld/overworld_explosion3.2bpp.lz"
+OverworldSmokeGfx:: INCBIN "gfx/overworld/overworld_smoke.2bpp.lz"
 
 
 SECTION "Bank 24", ROMX
@@ -238,7 +246,7 @@ Cutscenes5Gfx:: INCBIN "gfx/cutscenes/cutscenes5.2bpp.lz"
 
 SECTION "Bank 2A", ROMX
 
-	INCROM $a8000, $ab16a
+INCLUDE "engine/bank2a.asm"
 
 
 SECTION "Bank 2B", ROMX

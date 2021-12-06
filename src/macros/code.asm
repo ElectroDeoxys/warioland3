@@ -16,7 +16,7 @@ jumptable: MACRO
 	rst JumpTable
 ENDM
 
-call_hram: MACRO
+hcall: MACRO
 	ld a, LOW(\1)
 	ldh [hCallFuncPointer], a
 	ld a, HIGH(\1)
@@ -28,7 +28,7 @@ farcall: MACRO
 if _NARG == 1
 	ld a, BANK(\1)
 	ldh [hCallFuncBank], a
-	call_hram \1
+	hcall \1
 else
 	ld a, \1
 	ldh [hCallFuncBank], a

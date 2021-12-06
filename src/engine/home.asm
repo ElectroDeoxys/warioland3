@@ -2048,11 +2048,11 @@ DrawWario: ; d9e (0:d9e)
 	ld a, [wOAMPtr + 1]
 	ld l, a
 	ld a, [wWarioScreenYPos]
-	ld [wCurSpriteYOffset], a
+	ld [wCurSpriteYCoord], a
 	ld a, [wWarioScreenXPos]
-	ld [wCurSpriteXOffset], a
+	ld [wCurSpriteXCoord], a
 	ld a, [wca65]
-	ld [wCurSpriteFrame], a
+	ld [wCurSpriteTileID], a
 	ld a, [wca66]
 	ld [wCurSpriteAttributes], a
 	call TryAddSprite
@@ -2063,7 +2063,7 @@ DrawWario: ; d9e (0:d9e)
 
 ; hl = sprite pointer
 TryAddSprite: ; df4 (0:df4)
-	ld a, [wCurSpriteFrame]
+	ld a, [wCurSpriteTileID]
 	ld d, $00
 	add a
 	ld e, a
@@ -2072,11 +2072,11 @@ TryAddSprite: ; df4 (0:df4)
 	ld e, a
 	ld d, [hl]
 
-	ld hl, wCurSpriteXOffset
+	ld hl, wCurSpriteXCoord
 	ld a, [hld]
-	ld c, a    ; wCurSpriteXOffset
+	ld c, a    ; wCurSpriteXCoord
 	ld a, [hld]
-	ld b, a    ; wCurSpriteYOffset
+	ld b, a    ; wCurSpriteYCoord
 	ld l, [hl] ; wNumOAMSprites
 	ld h, HIGH(wVirtualOAM)
 .loop
@@ -3615,7 +3615,7 @@ LevelTreasureIDs: ; 198b (0:198b)
 	db TREASURE_DUMMY ; blue
 
 	; LEVEL_OUT_OF_THE_WOODS
-	db TREASURE_TRIDENT ; grey
+	db TREASURE_AXE ; grey
 	db TREASURE_JAR ; red
 	db TREASURE_PRINCE_FROGS_GLOVE ; green
 	db TREASURE_GOLD_MUSIC_BOX ; blue
@@ -3689,7 +3689,7 @@ LevelTreasureIDs: ; 198b (0:198b)
 	; LEVEL_THE_GRASSLANDS
 	db TREASURE_YELLOW_MUSIC_BOX ; grey
 	db TREASURE_TRUCK_WHEEL ; red
-	db TREASURE_AXE ; green
+	db TREASURE_TRIDENT ; green
 	db TREASURE_FIGHTER_MANNEQUIN ; blue
 
 	; LEVEL_THE_BIG_BRIDGE
@@ -3991,7 +3991,7 @@ SetWarioPal: ; 1af6 (0:1af6)
 	ld b, 2 palettes
 	ld a, BANK("Wario Palettes")
 	ldh [hCallFuncBank], a
-	call_hram CopyHLToDE_Short
+	hcall CopyHLToDE_Short
 	pop hl
 
 	ld a, (1 << rOBPI_AUTO_INCREMENT)
@@ -4288,7 +4288,7 @@ LoadRoomTileMap: ; 29bf (0:29bf)
 	ld bc, w3d300
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	ret
 ; 0x29e7
 
@@ -4358,7 +4358,7 @@ LoadRoomPalettes: ; 2a52 (0:2a52)
 	ld [wTempBank], a
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram LoadPalsToTempPals1
+	hcall LoadPalsToTempPals1
 	ret
 ; 0x2a77
 
@@ -4470,15 +4470,15 @@ UpdateObjSprite: ; 3000 (0:3000)
 	bankswitch
 	ld l, e
 	ld a, [hli]
-	ld [wCurSpriteYOffset], a
+	ld [wCurSpriteYCoord], a
 	ld a, [hli]
-	ld [wCurSpriteXOffset], a
+	ld [wCurSpriteXCoord], a
 	ld a, [hli]
-	ld [wCurSpriteFrame], a
+	ld [wCurSpriteTileID], a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [wCurSpriteFrame]
+	ld a, [wCurSpriteTileID]
 	ld d, $00
 	add a ; *2
 	ld e, a
@@ -4487,10 +4487,10 @@ UpdateObjSprite: ; 3000 (0:3000)
 	ld e, a
 	ld d, [hl]
 
-	ld hl, wCurSpriteXOffset
+	ld hl, wCurSpriteXCoord
 	ld a, [hld]
 	ld c, a
-	ld a, [hld] ; wCurSpriteYOffset
+	ld a, [hld] ; wCurSpriteYCoord
 	ld b, a
 	ld l, [hl] ; wNumOAMSprites
 	ld h, HIGH(wVirtualOAM)
@@ -4832,30 +4832,32 @@ Func_3573: ; 3573 (0:3573)
 
 	INCROM $358b, $3a00
 
-Func_3a00: ; 3a00 (0:3a00)
+; b = sprite bank
+; de = pointer to sprite
+AddOWSpriteWithScroll: ; 3a00 (0:3a00)
 	ld a, [wTempSCY]
 	ld c, a
-	ld a, [hli]
+	ld a, [hli] ; y coord
 	sub c
 	ld c, $10
 	add c
-	ld [wCurSpriteYOffset], a
+	ld [wCurSpriteYCoord], a
 	ld a, [wTempSCX]
 	ld c, a
-	ld a, [hli]
+	ld a, [hli] ; x coord
 	sub c
 	ld c, $08
 	add c
-	ld [wCurSpriteXOffset], a
-	ld a, [hli]
-	ld [wCurSpriteFrame], a
-	ld a, [hl]
+	ld [wCurSpriteXCoord], a
+	ld a, [hli] ; tileID
+	ld [wCurSpriteTileID], a
+	ld a, [hl] ; attributes
 	ld [wCurSpriteAttributes], a
 	ld h, d
 	ld l, e
 ;	fallthrough
 
-Func_3a22: ; 3a22 (0:3a22)
+AddOWSpriteWithScroll_GotParams: ; 3a22 (0:3a22)
 	ld a, [wROMBank]
 	push af
 	ld a, b
@@ -4869,17 +4871,17 @@ Func_3a22: ; 3a22 (0:3a22)
 ; hl = OAM data
 ; b = sprite bank
 ; de = pointer to sprite
-Func_3a38: ; 3a38 (0:3a38)
+AddOWSprite: ; 3a38 (0:3a38)
 	ld a, [hli]
 	ld c, $10
 	add c
-	ld [wCurSpriteYOffset], a
+	ld [wCurSpriteYCoord], a
 	ld a, [hli]
 	ld c, $08
 	add c
-	ld [wCurSpriteXOffset], a
+	ld [wCurSpriteXCoord], a
 	ld a, [hli]
-	ld [wCurSpriteFrame], a
+	ld [wCurSpriteTileID], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 
@@ -4895,19 +4897,22 @@ Func_3a38: ; 3a38 (0:3a38)
 	ret
 ; 0x3a66
 
-Func_3a66: ; 3a66 (0:3a66)
+; hl = wOWObjXDuration
+; de = frameset pointer
+; b = bank
+UpdateOWAnimation: ; 3a66 (0:3a66)
 	xor a
-	ld [w2d024], a
+	ld [wOWAnimationFinished], a
 
 	ld a, [wROMBank]
 	push af
 	ld a, b
 	bankswitch
-	ld a, [hl]
-	sub $1
+	ld a, [hl] ; duration
+	sub 1
 	ld [hli], a
-	jr nc, .asm_3a92
-	ld a, [hl]
+	jr nc, .done
+	ld a, [hl] ; frameset offset
 	add e
 	ld c, a
 	ld a, d
@@ -4919,39 +4924,40 @@ Func_3a66: ; 3a66 (0:3a66)
 	ld d, a
 	ld a, [hl]
 
-.asm_3a89
-	add $02
-	ld [hld], a
+.advance_frameset
+	add $2
+	ld [hld], a ; frameset offset
 	inc bc
 	ld a, [bc]
 	dec a
-	ld [hld], a
+	ld [hld], a ; duration
 	dec l
-	ld [hl], d
+	ld [hl], d ; frame
 
-.asm_3a92
+.done
 	ld a, $f8
 	and l
 	ld l, a
 	ld b, h
-	add $06
+	add $6
 	ld c, a
 	pop af
 	bankswitch
 	ret
 
 .asm_3aa2
-	ld [w2d024], a
+	ld [wOWAnimationFinished], a
 	ld b, d
 	ld c, e
 	ld a, [de]
 	ld d, a
 	xor a
-	jr .asm_3a89
+	jr .advance_frameset
 ; 0x3aac
 
 ; returns TRUE in a and carry set if treasure
 ; in input a has already been collected
+; if not collected returns z set
 ; a = TREASURE_* constant
 IsTreasureCollected: ; 3aac (0:3aac)
 	ld hl, wTreasuresCollected
@@ -5191,7 +5197,53 @@ Func_3c03: ; 3c03 (0:3c03)
 	ret
 ; 0x3c1f
 
-	INCROM $3c1f, $3c4f
+	INCROM $3c1f, $3c25
+
+; seems to be a funciton to apply some
+; movement to OW obj
+; hl = OW obj
+; de = movement coordinates
+Func_3c25: ; 3c25 (0:3c25)
+	call .Func_3c35
+	add e
+	ld [bc], a
+
+	ld a, [hl]
+	cp $80
+	ret nz
+
+	ld a, $07
+	or c
+	ld c, a
+	xor a
+	ld [bc], a ; unk7
+	ret
+
+.Func_3c35
+	ld c, l
+	ld b, h
+	ld a, $07
+	or l
+	ld l, a
+	ld a, [hl] ; unk7
+	inc [hl]
+	add a ; *2
+	ld l, a
+	ld a, $00
+	adc $00
+	ld h, a
+	add hl, de
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld e, a
+	ld a, [bc] ; y coord
+	add d
+	ld [bc], a
+	inc c
+	ld a, [bc] ; x coord
+	ret
+; 0x3c4f
 
 AddOffsetInPointerTable: ; 3c4f (0:3c4f)
 	add a
@@ -5237,7 +5289,7 @@ GetCthEntryFromAthTable: ; 3c66 (0:3c66)
 	ret
 ; 0x3c71
 
-Func_3c71: ; 3c71 (0:3c71)
+GetByteFromPointerInHL: ; 3c71 (0:3c71)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a

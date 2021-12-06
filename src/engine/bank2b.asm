@@ -262,7 +262,7 @@ _InitPrologueSequence: ; ade49 (2b:5e49)
 	ld bc, v1BGMap1
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 
 	xor a
 	ldh [rVBK], a
@@ -272,7 +272,7 @@ _InitPrologueSequence: ; ade49 (2b:5e49)
 	ld bc, v0BGMap1
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 
 	ld hl, Tiles_b0f80
 	ld b, BANK(Tiles_b0f80)
@@ -286,7 +286,7 @@ _InitPrologueSequence: ; ade49 (2b:5e49)
 	ld bc, v1Tiles0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 
 	; unnecessary
 	xor a
@@ -300,7 +300,7 @@ _InitPrologueSequence: ; ade49 (2b:5e49)
 	ld bc, v1Tiles0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 
 	; unnecessary
 	xor a
@@ -314,7 +314,7 @@ _InitPrologueSequence: ; ade49 (2b:5e49)
 	ld bc, v1BGMap0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 
 	xor a
 	ldh [rVBK], a
@@ -324,7 +324,7 @@ _InitPrologueSequence: ; ade49 (2b:5e49)
 	ld bc, v0BGMap0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 
 	ld hl, MusicBoxGfx
 	ld de, v0Tiles1
@@ -342,7 +342,7 @@ _InitPrologueSequence: ; ade49 (2b:5e49)
 	ld bc, wTreasureTiles
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	jr .asm_adf63
 .japanese
 	ld a, BANK(Data_b3675)
@@ -351,7 +351,7 @@ _InitPrologueSequence: ; ade49 (2b:5e49)
 	ld bc, wTreasureTiles
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 
 .asm_adf63
 	call Func_ace90

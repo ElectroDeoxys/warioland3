@@ -78,17 +78,7 @@ wJoypadPressed:: ; c094
 wNumOAMSprites:: ; c095
 	ds $1
 
-wCurSpriteYOffset:: ; c096
-	ds $1
-
-wCurSpriteXOffset:: ; c097
-	ds $1
-
-wCurSpriteFrame:: ; c098
-	ds $1
-
-wCurSpriteAttributes:: ; c099
-	ds $1
+wCurSprite:: sprite_oam_struct wCurSprite ; c096
 
 ; if TRUE, hard reset is not possible
 wResetDisabled:: ; c09a
@@ -1198,17 +1188,16 @@ w2d022:: ; d022
 w2d023:: ; d023
 	ds $1
 
-w2d024:: ; d024
+; $00 when OW object animation is ongoing
+; $ff when it reset
+wOWAnimationFinished:: ; d024
 	ds $1
 
 w2d025:: ; d025
 	ds $1
 
 w2d026:: ; d026
-	ds $1
-
-w2d027:: ; d027
-	ds $1
+	ds $2
 
 w2d028:: ; d028
 	ds $1
@@ -1217,10 +1206,7 @@ w2d029:: ; d029
 	ds $1
 
 w2d02a:: ; d02a
-	ds $1
-
-w2d02b:: ; d02b
-	ds $1
+	ds $2
 
 w2d02c:: ; d02c
 	ds $1
@@ -1385,7 +1371,8 @@ w2d075:: ; d075
 w2d076:: ; d076
 	ds $1
 
-w2d077:: ; d077
+; CUTSCENE_* constant
+wCutscene:: ; d077
 	ds $1
 
 w2d078:: ; d078
@@ -1459,26 +1446,26 @@ w2d0b5:: ; d0b5
 w2d0d0:: ; d0d0
 	ds $5
 
-w2d0d5:: ; d5d5
+w2d0d5:: ; d0d5
 	ds $1
 
-w2d0d6:: ; d6d6
+w2d0d6:: ; d0d6
 	ds $5
 
-w2d0db:: ; d6db
+w2d0db:: ; d0db
 	ds $1
 
 	ds $4
 
-w2d0e0:: ; d6e0
+w2d0e0:: ; d0e0
 	ds $1
 
 	ds $d
 
-w2d0ee:: ; d6ee
+w2d0ee:: ; d0ee
 	ds $1
 
-w2d0ef:: ; d6ef
+w2d0ef:: ; d0ef
 	ds $1
 
 wLevelTreasureIDs::
@@ -1513,9 +1500,11 @@ w2d104:: ; d104
 w2d106:: ; d106
 	ds $1
 
+; some sprite pointer
 w2d107:: ; d107
 	ds $2
 
+; some frameset pointer
 w2d109:: ; d109
 	ds $2
 
@@ -1543,7 +1532,39 @@ w2d114:: ; d114
 w2d116:: ; d116
 	ds $1
 
-	ds $29
+	ds $7
+
+wCurOWObj:: ; d11e
+	ds $2
+
+	ds $4
+
+w2d124:: ; d124
+	ds $1
+
+w2d125:: ; d125
+	ds $1
+
+	ds $4
+
+w2d12a:: ; d12a
+	ds $1
+
+w2d12b:: ; d12b
+	ds $1
+
+w2d12c:: ; d12c
+	ds $1
+
+	ds $1
+
+w2d12e:: ; d12e
+	ds $1
+
+w2d12f:: ; d12f
+	ds $1
+
+	ds $10
 
 w2d140:: ; d140
 	ds $1
@@ -1594,45 +1615,21 @@ w2d180:: ; d180
 w2d184:: ; d184
 	ds $4
 
-w2d188:: ; d188
-	ds $1
-
-	ds $7
-
-w2d190:: ; d190
-	ds $2
-
-	ds $2
-
-w2d194:: ; d194
-	ds $2
-
-w2d196:: ; d196
-	ds $2
-
-w2d198:: ; d198
-	ds $2
-
-	ds $2
-
-w2d19c:: ; d19c
-	ds $2
-
-w2d19e:: ; d19e
-	ds $2
-
-w2d1a0:: ; d1a0
-	ds $2
-
-	ds $2
-
-w2d1a4:: ; d1a4
-	ds $2
-
-w2d1a6:: ; d1a6
-	ds $2
-
-	ds $58
+wOWObj1::  ow_obj_struct wOWObj1  ; d188
+wOWObj2::  ow_obj_struct wOWObj2  ; d190
+wOWObj3::  ow_obj_struct wOWObj3  ; d198
+wOWObj4::  ow_obj_struct wOWObj4  ; d1a0
+wOWObj5::  ow_obj_struct wOWObj5  ; d1a8
+wOWObj6::  ow_obj_struct wOWObj6  ; d1b0
+wOWObj7::  ow_obj_struct wOWObj7  ; d1b8
+wOWObj8::  ow_obj_struct wOWObj8  ; d1c0
+wOWObj9::  ow_obj_struct wOWObj9  ; d1c8
+wOWObj10:: ow_obj_struct wOWObj10 ; d1d0
+wOWObj11:: ow_obj_struct wOWObj11 ; d1d8
+wOWObj12:: ow_obj_struct wOWObj12 ; d1e0
+wOWObj13:: ow_obj_struct wOWObj13 ; d1e8
+wOWObj14:: ow_obj_struct wOWObj14 ; d1f0
+wOWObj15:: ow_obj_struct wOWObj15 ; d1f8
 
 wBGMap1:: ; d200
 	ds $300

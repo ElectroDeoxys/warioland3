@@ -177,7 +177,7 @@ InitIntroSequence: ; 405f (1:405f)
 ; the menu options behind scenery
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, v1BGMap0 + $184
+	ld hl, v1BGMap0 tile $18 + $4
 	ld de, $20
 	ld c, 2
 .loop_outer
@@ -210,7 +210,7 @@ InitIntroSequence: ; 405f (1:405f)
 	xor a ; VRAM0
 	ldh [rVBK], a
 	ld hl, Data_6b47
-	ld de, v0BGMap0 + $1c4
+	ld de, v0BGMap0 tile $1c + $4
 	push de
 	ld b, 12
 	call CopyHLToDE
@@ -1416,7 +1416,7 @@ LoadTimeAttackDescriptionTiles: ; 4972 (1:4972)
 	ld bc, $800
 	ld a, BANK(Tiles_b0f80)
 	ldh [hCallFuncBank], a
-	call_hram CopyHLToDE_BC
+	hcall CopyHLToDE_BC
 	ret
 ; 0x49a1
 
@@ -1471,7 +1471,7 @@ VBlank_49db: ; 49db (1:49db)
 	ld hl, Data_6b47
 	xor a ; VRAM0
 	ldh [rVBK], a
-	ld de, v0BGMap0 + $1c4
+	ld de, v0BGMap0 tile $1c + $4
 	push de
 	ld b, $0c
 	call CopyHLToDE
@@ -1701,15 +1701,15 @@ Func_4b73: ; 4b73 (1:4b73)
 	ld a, [hli]
 	add $10
 	sub b
-	ld [wCurSpriteYOffset], a
+	ld [wCurSpriteYCoord], a
 
 	; x coord
 	ld a, [hli]
 	add $08
-	ld [wCurSpriteXOffset], a
+	ld [wCurSpriteXCoord], a
 
 	ld a, [hli]
-	ld [wCurSpriteFrame], a
+	ld [wCurSpriteTileID], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, Data_6b5f
@@ -1724,15 +1724,15 @@ Func_4b93: ; 4b93 (1:4b93)
 	ld a, [hli]
 	add $10
 	sub b
-	ld [wCurSpriteYOffset], a
+	ld [wCurSpriteYCoord], a
 
 	; x coord
 	ld a, [hli]
 	add $08
-	ld [wCurSpriteXOffset], a
+	ld [wCurSpriteXCoord], a
 
 	ld a, [hli]
-	ld [wCurSpriteFrame], a
+	ld [wCurSpriteTileID], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, Data_6d21
@@ -2160,12 +2160,12 @@ Func_4e3e: ; 4e3e (1:4e3e)
 	ld a, [hli]
 	add $10
 	sub b
-	ld [wCurSpriteYOffset], a
+	ld [wCurSpriteYCoord], a
 	ld a, [hli]
 	add $08
-	ld [wCurSpriteXOffset], a
+	ld [wCurSpriteXCoord], a
 	ld a, [hli]
-	ld [wCurSpriteFrame], a
+	ld [wCurSpriteTileID], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, $75c3

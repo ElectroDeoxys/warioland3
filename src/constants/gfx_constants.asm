@@ -9,6 +9,7 @@ PALRGB_WHITE EQUS "palred 31 + palgreen 31 + palblue 31" ; $7fff
 ; tile size
 TILE_SIZE EQU 16 ; bytes
 tiles EQUS "* TILE_SIZE"
+tile  EQUS "+ TILE_SIZE *"
 
 ; fading speed used by wFadeSpeed
 	const_def

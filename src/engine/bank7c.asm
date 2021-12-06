@@ -402,12 +402,12 @@ LoadLanguageSelectionText: ; 1f0926 (7c:4926)
 Func_1f0940: ; 1f0940 (7c:4940)
 	ld a, [hli]
 	add $10
-	ld [wCurSpriteYOffset], a
+	ld [wCurSpriteYCoord], a
 	ld a, [hli]
 	add $08
-	ld [wCurSpriteXOffset], a
+	ld [wCurSpriteXCoord], a
 	ld a, [hli]
-	ld [wCurSpriteFrame], a
+	ld [wCurSpriteTileID], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, $556c

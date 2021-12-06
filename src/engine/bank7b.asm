@@ -1067,7 +1067,7 @@ UpdateState_MagicRising: ; 1ed972 (7b:5972)
 
 	ld a, $77
 	ldh [hCallFuncBank], a
-	call_hram UpdateAnimation
+	hcall UpdateAnimation
 
 	ld b, $01
 	call SubYOffset
@@ -1097,7 +1097,7 @@ UpdateState_MagicRising: ; 1ed972 (7b:5972)
 	ld [wAnimationFrame], a
 	ld a, $77
 	ldh [hCallFuncBank], a
-	call_hram UpdateAnimation
+	hcall UpdateAnimation
 	ret
 ; 0x1eda16
 

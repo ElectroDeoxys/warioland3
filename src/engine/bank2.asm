@@ -852,7 +852,7 @@ Func_8747: ; 8747 (2:4747)
 	ld b, 2 palettes
 	ld a, BANK(Pals_c800)
 	ldh [hCallFuncBank], a
-	call_hram CopyHLToDE_Short
+	hcall CopyHLToDE_Short
 	jr .asm_8861
 
 .asm_883a
@@ -864,7 +864,7 @@ Func_8747: ; 8747 (2:4747)
 	ld b, 2 palettes
 	ld a, BANK(Pals_c800)
 	ldh [hCallFuncBank], a
-	call_hram CopyHLToDE_Short
+	hcall CopyHLToDE_Short
 
 	ld hl, wcaa1
 	ld de, wTempPals2 palette 4
@@ -877,7 +877,7 @@ Func_8747: ; 8747 (2:4747)
 	ld b, 1 palettes
 	ld a, BANK(Pals_d1fe)
 	ldh [hCallFuncBank], a
-	call_hram CopyHLToDE_Short
+	hcall CopyHLToDE_Short
 
 	call Func_8ad9
 	call Func_8c12

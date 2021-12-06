@@ -391,7 +391,7 @@ Func_803f9: ; 803f9 (20:43f9)
 	jr nz, .asm_8045f
 
 ; w2d01b == $ff
-	ld a, $01
+	ld a, CUTSCENE_01
 	ld [w2d025], a
 	jr .asm_80466
 .asm_8045f
@@ -411,7 +411,7 @@ Func_803f9: ; 803f9 (20:43f9)
 	jr z, .asm_8048a
 	jr .asm_80497
 .asm_8048a
-	xor a
+	xor a ; CUTSCENE_00
 	ld [w2d025], a
 	ld a, SST_OVERWORLD_09
 	ld [wSubState], a
@@ -433,7 +433,7 @@ Func_803f9: ; 803f9 (20:43f9)
 .asm_804a9
 	ld a, $f0
 	ld [w2d00d], a
-	ld a, $5a
+	ld a, CUTSCENE_5A
 	ld [w2d025], a
 	jr .asm_80480
 .asm_804b5
@@ -499,10 +499,10 @@ Func_804f7: ; 804f7 (20:44f7)
 	ld [w2d019], a
 	ld a, [w2d028]
 	ld [w2d029], a
-	ld a, [w2d026]
-	ld [w2d02a], a
-	ld a, [w2d027]
-	ld [w2d02b], a
+	ld a, [w2d026 + 0]
+	ld [w2d02a + 0], a
+	ld a, [w2d026 + 1]
+	ld [w2d02a + 1], a
 	ld a, [w2d016]
 	ld [wMapSide], a
 	jumptable
@@ -617,7 +617,7 @@ Func_8060f: ; 8060f (20:460f)
 ; 0x80621
 
 Func_80621: ; 80621 (20:4621)
-	ld a, $1b
+	ld a, CUTSCENE_1B
 	call Func_819c6
 	ld [w2d020], a
 	ld a, [w2d020] ; unnecessary
@@ -661,20 +661,20 @@ Func_8065e: ; 8065e (20:465e)
 	ld a, BANK(BGMap_85b91)
 	ld [wTempBank], a
 	ld hl, BGMap_85b91
-	ld bc, v0BGMap0 + $3a0
+	ld bc, v0BGMap0 tile $3a
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld a, BANK(BGMap_85bc4)
 	ld [wTempBank], a
 	ld hl, BGMap_85bc4
-	ld bc, v1BGMap0 + $3a0
+	ld bc, v1BGMap0 tile $3a
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	xor a
 	ldh [rVBK], a
 
@@ -721,7 +721,7 @@ Func_8065e: ; 8065e (20:465e)
 	ld bc, v0BGMap1
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
@@ -731,7 +731,7 @@ Func_8065e: ; 8065e (20:465e)
 	ld bc, v1BGMap1
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	xor a
 	ldh [rVBK], a
 	jr .asm_80790
@@ -743,7 +743,7 @@ Func_8065e: ; 8065e (20:465e)
 	ld bc, v0BGMap1
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
@@ -753,7 +753,7 @@ Func_8065e: ; 8065e (20:465e)
 	ld bc, v0BGMap1
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	xor a
 	ldh [rVBK], a
 
@@ -780,15 +780,15 @@ Func_8065e: ; 8065e (20:465e)
 	call Func_817d7
 	call Func_8182b
 
-	ld hl, v0BGMap0 + $3c0
-	ld de, wBGMap1 + $2a0
-	ld b, $40
+	ld hl, v0BGMap0 tile $3c
+	ld de, wBGMap1 tile $2a
+	ld b, 4 tiles
 	call CopyHLToDE
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, v1BGMap0 + $3c0
-	ld de, wBGMap1 + $260
-	ld b, $40
+	ld hl, v1BGMap0 tile $3c
+	ld de, wBGMap1 tile $26
+	ld b, 4 tiles
 	call CopyHLToDE
 	xor a
 	ldh [rVBK], a
@@ -797,15 +797,15 @@ Func_8065e: ; 8065e (20:465e)
 	cp $04
 	jr nz, .asm_80809
 	call Func_822b4
-	ld hl, wBGMap1 + $2a0
-	ld de, v0BGMap0 + $3c0
-	ld b, $40
+	ld hl, wBGMap1 tile $2a
+	ld de, v0BGMap0 tile $3c
+	ld b, 4 tiles
 	call CopyHLToDE
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, wBGMap1 + $260
-	ld de, v1BGMap0 + $3c0
-	ld b, $40
+	ld hl, wBGMap1 tile $26
+	ld de, v1BGMap0 tile $3c
+	ld b, 4 tiles
 	call CopyHLToDE
 	xor a
 	ldh [rVBK], a
@@ -821,7 +821,7 @@ Func_8065e: ; 8065e (20:465e)
 	ld b, $01
 	jr c, .asm_80821
 	xor a
-	ld hl, wTempPals1 palette 7 + $2
+	ld hl, wTempPals1 palette 7 color 1
 	ld bc, $6
 	call WriteAToHL_BCTimes
 	ld b, $00
@@ -849,7 +849,7 @@ Func_80851: ; 80851 (20:4851)
 	call LoadOverworldCommonGfx
 	call LoadOverworld1Gfx
 	ld a, [w2d025]
-	cp $35
+	cp CUTSCENE_35
 	call nz, LoadOverworldGlowGfx
 
 	ld bc, BGMap_85bef
@@ -862,7 +862,7 @@ Func_80851: ; 80851 (20:4851)
 Func_8086f: ; 8086f (20:486f)
 	call Func_80b54
 
-	ld a, [wMapSide]
+	ld a, [wMapSide] ; a gets overwritten
 	call Func_81dce
 	call WriteBGMapFromWRAM
 
@@ -880,16 +880,16 @@ Func_8086f: ; 8086f (20:486f)
 	ld [w2d028], a
 	ld a, [wMapSide]
 	ld [w2d016], a
-	ld a, [w2d02a]
-	ld [w2d026], a
-	ld a, [w2d02b]
-	ld [w2d027], a
+	ld a, [w2d02a + 0]
+	ld [w2d026 + 0], a
+	ld a, [w2d02a + 1]
+	ld [w2d026 + 1], a
 
 	farcall Func_b4a37
 	call Func_80bc9
 
 	xor a
-	ld hl, wTempPals1 palette 7 + 2
+	ld hl, wTempPals1 palette 7 color 1
 	ld bc, $6
 	call WriteAToHL_BCTimes
 
@@ -926,7 +926,7 @@ Func_8086f: ; 8086f (20:486f)
 	and a
 	jr nz, .no_window_display
 	ld a, [w2d025]
-	cp $2f
+	cp CUTSCENE_2F
 	jr nz, .no_window_display
 	ld a, LCDC_ON | LCDC_WIN9C00 | LCDC_WINON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
 	jr .apply_lcd
@@ -951,7 +951,7 @@ Func_8091e: ; 8091e (20:491e)
 
 Func_80930: ; 80930 (20:4930)
 	ld a, [w2d025]
-	cp $57
+	cp CUTSCENE_57
 	jr nz, .asm_8093c
 	ld a, $01
 	ld [w2d011], a
@@ -965,10 +965,10 @@ Func_80930: ; 80930 (20:4930)
 ; 0x8094e
 
 Func_8094e: ; 8094e (20:494e)
-	ld a, $1b
+	ld a, CUTSCENE_1B
 	call Func_819c6
 	ld [w2d020], a
-	ld a, [w2d020]
+	ld a, [w2d020] ; unnecessary
 	and a
 	jr nz, .asm_80961
 	ld a, $01
@@ -993,7 +993,7 @@ LoadBGMapsToWRAM: ; 80973 (20:4973)
 	ld bc, wBGMap1
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	xor a
 	ldh [rVBK], a
 	pop hl
@@ -1003,7 +1003,7 @@ LoadBGMapsToWRAM: ; 80973 (20:4973)
 	ld bc, w3d500
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	ret
 ; 0x809b1
 
@@ -1016,7 +1016,7 @@ LoadOverworldCommonGfx: ; 809b1 (20:49b1)
 	ld bc, v1Tiles0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	xor a
 	ldh [rVBK], a
 
@@ -1028,7 +1028,7 @@ LoadOverworldCommonGfx: ; 809b1 (20:49b1)
 	ld bc, v1Tiles0 + $600
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	xor a
 	ldh [rVBK], a
 	ret
@@ -1041,7 +1041,7 @@ LoadOverworld1Gfx: ; 809f6 (20:49f6)
 	ld bc, v0Tiles0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	ret
 ; 0x80a12
 
@@ -1052,7 +1052,7 @@ LoadOverworld2Gfx: ; 80a12 (20:4a12)
 	ld bc, v0Tiles0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	ret
 ; 0x80a2e
 
@@ -1063,7 +1063,7 @@ LoadOverworld5Gfx: ; 80a2e (20:4a2e)
 	ld bc, v0Tiles0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	ret
 ; 0x80a4a
 
@@ -1074,7 +1074,7 @@ LoadOverworld6Gfx: ; 80a4a (20:4a4a)
 	ld bc, v0Tiles0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	ret
 ; 0x80a66
 
@@ -1085,7 +1085,7 @@ LoadOverworldArrowsGfx: ; 80a66 (20:4a66)
 	ld bc, v0Tiles1
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	ret
 ; 0x80a82
 
@@ -1098,7 +1098,7 @@ LoadOverworldGlowGfx: ; 80a82 (20:4a82)
 	ld bc, v1Tiles0 + $200
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	xor a
 	ldh [rVBK], a
 	ret
@@ -1149,7 +1149,7 @@ Func_80af5: ; 80af5 (20:4af5)
 	ld hl, BGMap_86417
 	ld e, BANK(BGMap_86417)
 	call LoadBGMapsToWRAM
-	ld a, $19
+	ld a, CUTSCENE_19
 	call Func_819c6
 	ret z
 	ld hl, Data_8561f
@@ -1256,9 +1256,9 @@ Func_80bc9: ; 80bc9 (20:4bc9)
 ; 0x80bd9
 
 Func_80bd9: ; 80bd9 (20:4bd9)
-	ld hl, wBGMap1 + $1c0
+	ld hl, wBGMap1 tile $1c
 	res 7, [hl]
-	ld de, $1e0
+	ld de, 30 tiles
 	ld c, $04
 .loop_outer
 	ld hl, wBGMap1
@@ -1686,7 +1686,7 @@ Func_817d7: ; 817d7 (20:57d7)
 ; 0x817e3
 
 Func_817e3: ; 817e3 (20:57e3)
-	ld a, $03
+	ld a, CUTSCENE_03
 	call Func_819ac
 	rlca
 	rlca
@@ -1694,20 +1694,20 @@ Func_817e3: ; 817e3 (20:57e3)
 	ld hl, w2d07a
 	or [hl]
 	ld [hl], a
-	ld a, $07
+	ld a, CUTSCENE_07
 	call Func_819ac
 	rlca
 	rlca
 	ld hl, w2d07a
 	or [hl]
 	ld [hl], a
-	ld a, $0c
+	ld a, CUTSCENE_0C
 	call Func_819ac
 	rlca
 	ld hl, w2d07a
 	or [hl]
 	ld [hl], a
-	ld a, $37
+	ld a, CUTSCENE_37
 	call Func_819ac
 	ld hl, w2d07a
 	or [hl]
@@ -1782,7 +1782,7 @@ Func_8184d: ; 8184d (20:584d)
 .collected
 
 	ld b, [hl]
-	call Func_81891
+	call GetCutsceneWithTreasure
 ; loop until a treasure
 ; that hasn't been collected
 ; is found in the table
@@ -1812,11 +1812,10 @@ Func_8184d: ; 8184d (20:584d)
 ; input:
 ; - b = TREASURE_* constant
 ; output:
-; - c = row index found in Data_819fb
-;       zeroth row means not found
-Func_81891: ; 81891 (20:5891)
+; - c = CUTSCENE_* constant
+GetCutsceneWithTreasure: ; 81891 (20:5891)
 	ld c, 0
-	ld hl, Data_819fb
+	ld hl, CutsceneTreasures
 .loop
 	ld a, [hli]
 	cp $ed
@@ -1865,7 +1864,7 @@ Func_81931: ; 81931 (20:5931)
 	ld [w2d025], a
 	ld [w2d028], a
 	ld [w2d029], a
-	ld a, $5a
+	ld a, CUTSCENE_5A
 	cp b
 	jr z, .asm_81957
 	ld hl, wSubState
@@ -1884,26 +1883,26 @@ Func_8197e: ; 8197e (20:597e)
 	ld a, [w2d01b]
 	ld b, a
 	xor a
-	ld c, a
+	ld c, a ; CUTSCENE_00
 	ld [w2d025], a
 
-	ld hl, Data_819fb
+	ld hl, CutsceneTreasures
 .loop
 	ld a, [hli]
 	cp $ed
 	jr z, .asm_819a7
 	cp b
-	jr z, .asm_8199d
+	jr z, .found
 	ld a, [hli]
 	cp b
-	jr z, .asm_8199d
+	jr z, .found
 	ld a, [hli]
 	cp b
-	jr z, .asm_8199d
+	jr z, .found
 	inc c
 	jr .loop
 
-.asm_8199d
+.found
 	ld a, c
 	ld [w2d025], a
 	call Func_819ac
@@ -1911,13 +1910,15 @@ Func_8197e: ; 8197e (20:597e)
 	ret
 
 .asm_819a7
-	xor a
+	xor a ; CUTSCENE_00
 	ld [w2d025], a
 	ret
 ; 0x819ac
 
+; input:
+; - a = CUTSCENE_* constant
 Func_819ac: ; 819ac (20:59ac)
-	call Func_819e3
+	call LoadCutsceneTreasures
 	ld c, TRUE
 	ld a, [w2dffd]
 	call Func_819cb
@@ -1930,6 +1931,8 @@ Func_819ac: ; 819ac (20:59ac)
 	ret
 ; 0x819c6
 
+; input:
+; - a = CUTSCENE_* constant
 Func_819c6: ; 819c6 (20:59c6)
 	call Func_819ac
 	and c
@@ -1959,15 +1962,15 @@ Func_819cb: ; 819cb (20:59cb)
 ; 0x819e3
 
 ; input:
-; - a = ???
-Func_819e3: ; 819e3 (20:59e3)
+; - a = CUTSCENE_* constant
+LoadCutsceneTreasures: ; 819e3 (20:59e3)
 	ld c, a
 	add a
 	add c ; *3
 	ld e, a
 	ld d, $00
 	rl d
-	ld hl, Data_819fb
+	ld hl, CutsceneTreasures
 	add hl, de
 	ld de, w2dfff
 	ld a, [hli]
@@ -1981,101 +1984,467 @@ Func_819e3: ; 819e3 (20:59e3)
 	ret
 ; 0x819fb
 
-Data_819fb: ; 819fb (20:59fb)
-	db TREASURE_INVALID,                  TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_NONE,                     TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_TRIDENT,                  TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_BLUE_TABLET,              TREASURE_GREEN_TABLET,          TREASURE_INVALID
-	db TREASURE_TOP_HALF_OF_SCROLL,       TREASURE_BOTTOM_HALF_OF_SCROLL, TREASURE_INVALID
-	db TREASURE_LEAD_OVERALLS,            TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_JAR,                      TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_GEAR_1,                   TREASURE_GEAR_2,                TREASURE_INVALID
-	db TREASURE_YELLOW_MUSIC_BOX,         TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_POUCH,                    TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_SKULL_RING_RED,           TREASURE_SKULL_RING_BLUE,       TREASURE_INVALID
-	db TREASURE_SWIMMING_FLIPPERS,        TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_ORNAMENTAL_FAN,           TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_FLUTE,                    TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_BLUE_BOOK,                TREASURE_AXE,                   TREASURE_INVALID
-	db TREASURE_HEAD_SMASH_HELMET,        TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_BLUE_MUSIC_BOX,           TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_YELLOW_BOOK,              TREASURE_SKY_KEY,               TREASURE_INVALID
-	db TREASURE_GRAB_GLOVE,               TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_FOOT_OF_STONE,            TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_TUSK_BLUE,                TREASURE_TUSK_RED,              TREASURE_GREEN_FLOWER
-	db TREASURE_RIGHT_GLASS_EYE,          TREASURE_LEFT_GLASS_EYE,        TREASURE_INVALID
-	db TREASURE_SUPER_SMASH,              TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_GREEN_MUSIC_BOX,          TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_SCEPTER,                  TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_LANTERN,                  TREASURE_MAGICAL_FLAME,         TREASURE_INVALID
-	db TREASURE_SUPER_JUMP_SLAM_OVERALLS, TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_SUN_MEDALLION_TOP,        TREASURE_SUN_MEDALLION_BOTTOM,  TREASURE_INVALID
-	db TREASURE_HIGH_JUMP_BOOTS,          TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_RED_MUSIC_BOX,            TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_EXPLOSIVE_PLUNGER_BOX,    TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_MAGIC_SEEDS,              TREASURE_EYE_OF_THE_STORM,      TREASURE_INVALID
-	db TREASURE_PRINCE_FROGS_GLOVE,       TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_STATUE,                   TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_TREASURE_MAP,             TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_SUPER_GRAB_GLOVES,        TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_GOLD_MAGIC,               TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_GOLD_MUSIC_BOX,           TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_CRAYON_BLUE,              TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_TRUCK_WHEEL,              TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_BLUE_GEM,                 TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_CRAYON_CYAN,              TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_GOBLET,                   TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_CROWN,                    TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_CRAYON_PINK,              TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_TEAPOT,                   TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_POCKET_PET,               TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_MAGNIFYING_GLASS,         TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_AIR_PUMP,                 TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_ROCKET,                   TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_CRAYON_YELLOW,            TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_INVALID,                  TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_SABER,                    TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_DAY_OR_NIGHT_SPELL,       TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_UFO,                      TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_TORCH,                    TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_WARP_COMPACT,             TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_MYSTERY_HANDLE,           TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_WARP_REMOVAL_APPARATUS,   TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_CRAYON_BROWN,             TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_DEMONS_BLOOD,             TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_KEY_CARD_RED,             TREASURE_KEY_CARD_BLUE,         TREASURE_INVALID
-	db TREASURE_HEART_CREST,              TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_MINICAR,                  TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_LOCOMOTIVE,               TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_TELEPHONE,                TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_CRAYON_RED,               TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_ELECTRIC_FAN_PROPELLER,   TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_SAPLING_OF_GROWTH,        TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_GREEN_GEM,                TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_INVALID,                  TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_INVALID,                  TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_FIGHTER_MANNEQUIN,        TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_GOLDEN_LEFT_EYE,          TREASURE_GOLDEN_RIGHT_EYE,      TREASURE_INVALID
-	db TREASURE_MAGIC_WAND,               TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_CRAYON_GREEN,             TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_FIRE_DRENCHER,            TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_DIAMONDS_CREST,           TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_CASTLE_BRICK,             TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_RUST_SPRAY,               TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_SPADES_CREST,             TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_RED_CHEMICAL,             TREASURE_BLUE_CHEMICAL,         TREASURE_INVALID
-	db TREASURE_RED_GEM,                  TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_CLUBS_CREST,              TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_SCISSORS,                 TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_JACKHAMMER,               TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_NIGHT_VISION_SCOPE,       TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_FULL_MOON_GONG,           TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_PICK_AXE,                 TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_EARTHEN_FIGURE,           TREASURE_INVALID,               TREASURE_INVALID
-	db TREASURE_INVALID,                  TREASURE_INVALID,               TREASURE_INVALID
+CutsceneTreasures: ; 819fb (20:59fb)
+; CUTSCENE_00
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_01
+	db TREASURE_NONE
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_02
+	db TREASURE_AXE
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_03
+	db TREASURE_BLUE_TABLET
+	db TREASURE_GREEN_TABLET
+	db TREASURE_INVALID
+
+; CUTSCENE_04
+	db TREASURE_TOP_HALF_OF_SCROLL
+	db TREASURE_BOTTOM_HALF_OF_SCROLL
+	db TREASURE_INVALID
+
+; CUTSCENE_05
+	db TREASURE_LEAD_OVERALLS
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_06
+	db TREASURE_JAR
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_07
+	db TREASURE_GEAR_1
+	db TREASURE_GEAR_2
+	db TREASURE_INVALID
+
+; CUTSCENE_08
+	db TREASURE_YELLOW_MUSIC_BOX
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_09
+	db TREASURE_POUCH
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_0A
+	db TREASURE_SKULL_RING_RED
+	db TREASURE_SKULL_RING_BLUE
+	db TREASURE_INVALID
+
+; CUTSCENE_0B
+	db TREASURE_SWIMMING_FLIPPERS
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_0C
+	db TREASURE_ORNAMENTAL_FAN
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_0D
+	db TREASURE_FLUTE
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_0E
+	db TREASURE_BLUE_BOOK
+	db TREASURE_TRIDENT
+	db TREASURE_INVALID
+
+; CUTSCENE_0F
+	db TREASURE_HEAD_SMASH_HELMET
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_10
+	db TREASURE_BLUE_MUSIC_BOX
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_11
+	db TREASURE_YELLOW_BOOK
+	db TREASURE_SKY_KEY
+	db TREASURE_INVALID
+
+; CUTSCENE_12
+	db TREASURE_GRAB_GLOVE
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_13
+	db TREASURE_FOOT_OF_STONE
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_14
+	db TREASURE_TUSK_BLUE
+	db TREASURE_TUSK_RED
+	db TREASURE_GREEN_FLOWER
+
+; CUTSCENE_15
+	db TREASURE_RIGHT_GLASS_EYE
+	db TREASURE_LEFT_GLASS_EYE
+	db TREASURE_INVALID
+
+; CUTSCENE_16
+	db TREASURE_SUPER_SMASH
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_17
+	db TREASURE_GREEN_MUSIC_BOX
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_18
+	db TREASURE_SCEPTER
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_19
+	db TREASURE_LANTERN
+	db TREASURE_MAGICAL_FLAME
+	db TREASURE_INVALID
+
+; CUTSCENE_1A
+	db TREASURE_SUPER_JUMP_SLAM_OVERALLS
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_1B
+	db TREASURE_SUN_MEDALLION_TOP
+	db TREASURE_SUN_MEDALLION_BOTTOM
+	db TREASURE_INVALID
+
+; CUTSCENE_1C
+	db TREASURE_HIGH_JUMP_BOOTS
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_1D
+	db TREASURE_RED_MUSIC_BOX
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_1E
+	db TREASURE_EXPLOSIVE_PLUNGER_BOX
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_1F
+	db TREASURE_MAGIC_SEEDS
+	db TREASURE_EYE_OF_THE_STORM
+	db TREASURE_INVALID
+
+; CUTSCENE_20
+	db TREASURE_PRINCE_FROGS_GLOVE
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_21
+	db TREASURE_STATUE
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_22
+	db TREASURE_TREASURE_MAP
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_23
+	db TREASURE_SUPER_GRAB_GLOVES
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_24
+	db TREASURE_GOLD_MAGIC
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_25
+	db TREASURE_GOLD_MUSIC_BOX
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_26
+	db TREASURE_CRAYON_BLUE
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_27
+	db TREASURE_TRUCK_WHEEL
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_28
+	db TREASURE_BLUE_GEM
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_29
+	db TREASURE_CRAYON_CYAN
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_2A
+	db TREASURE_GOBLET
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_2B
+	db TREASURE_CROWN
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_2C
+	db TREASURE_CRAYON_PINK
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_2D
+	db TREASURE_TEAPOT
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_2E
+	db TREASURE_POCKET_PET
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_2F
+	db TREASURE_MAGNIFYING_GLASS
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_30
+	db TREASURE_AIR_PUMP
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_31
+	db TREASURE_ROCKET
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_32
+	db TREASURE_CRAYON_YELLOW
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_33
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_34
+	db TREASURE_SABER
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_35
+	db TREASURE_DAY_OR_NIGHT_SPELL
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_36
+	db TREASURE_UFO
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_37
+	db TREASURE_TORCH
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_38
+	db TREASURE_WARP_COMPACT
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_39
+	db TREASURE_MYSTERY_HANDLE
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_3A
+	db TREASURE_WARP_REMOVAL_APPARATUS
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_3B
+	db TREASURE_CRAYON_BROWN
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_3C
+	db TREASURE_DEMONS_BLOOD
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_3D
+	db TREASURE_KEY_CARD_RED
+	db TREASURE_KEY_CARD_BLUE
+	db TREASURE_INVALID
+
+; CUTSCENE_3E
+	db TREASURE_HEART_CREST
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_3F
+	db TREASURE_MINICAR
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_40
+	db TREASURE_LOCOMOTIVE
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_41
+	db TREASURE_TELEPHONE
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_42
+	db TREASURE_CRAYON_RED
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_43
+	db TREASURE_ELECTRIC_FAN_PROPELLER
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_44
+	db TREASURE_SAPLING_OF_GROWTH
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_45
+	db TREASURE_GREEN_GEM
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_46
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_47
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_48
+	db TREASURE_FIGHTER_MANNEQUIN
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_49
+	db TREASURE_GOLDEN_LEFT_EYE
+	db TREASURE_GOLDEN_RIGHT_EYE
+	db TREASURE_INVALID
+
+; CUTSCENE_4A
+	db TREASURE_MAGIC_WAND
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_4B
+	db TREASURE_CRAYON_GREEN
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_4C
+	db TREASURE_FIRE_DRENCHER
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_4D
+	db TREASURE_DIAMONDS_CREST
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_4E
+	db TREASURE_CASTLE_BRICK
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_4F
+	db TREASURE_RUST_SPRAY
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_50
+	db TREASURE_SPADES_CREST
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_51
+	db TREASURE_RED_CHEMICAL
+	db TREASURE_BLUE_CHEMICAL
+	db TREASURE_INVALID
+
+; CUTSCENE_52
+	db TREASURE_RED_GEM
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_53
+	db TREASURE_CLUBS_CREST
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_54
+	db TREASURE_SCISSORS
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_55
+	db TREASURE_JACKHAMMER
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_56
+	db TREASURE_NIGHT_VISION_SCOPE
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_57
+	db TREASURE_FULL_MOON_GONG
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_58
+	db TREASURE_PICK_AXE
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_59
+	db TREASURE_EARTHEN_FIGURE
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
+; CUTSCENE_5A
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+	db TREASURE_INVALID
+
 	db $ed
 ; 0x81b0d
 
+; input:
+; - a = CUTSCENE_* constant
 Func_81b0d: ; 81b0d (20:5b0d)
 	ld hl, Data_81b2b
 	call GetPointerFromTableHL
@@ -2085,117 +2454,524 @@ Func_81b13: ; 81b13 (20:5b13)
 	ld a, [hli]
 	ld [w2d028], a
 	cp $80
-	ret z
+	ret z ; finished
 	ld a, [hli]
 	ld [w2d016], a
 	ld a, [hli]
 	ld [w2d017], a
 	ld a, l
-	ld [w2d026], a
+	ld [w2d026 + 0], a
 	ld a, h
-	ld [w2d027], a
+	ld [w2d026 + 1], a
 	ret
 ; 0x81b2b
 
 Data_81b2b: ; 81b2b (20:5b2b)
-	dw $5be1
-	dw $5be2
-	dw $5be6
-	dw $5bf0
-	dw $5bfa
-	dw $5c01
-	dw $5c08
-	dw $5c12
-	dw $5c1c
-	dw $5c23
-	dw $5c30
-	dw $5c37
-	dw $5c3e
-	dw $5c48
-	dw $5c52
-	dw $5c59
-	dw $5c60
-	dw $5c6a
-	dw $5c71
-	dw $5c7b
-	dw $5c85
-	dw $5c92
-	dw $5c96
-	dw $5ca3
-	dw $5caa
-	dw $5cb4
-	dw $5cbb
-	dw $5cc8
-	dw $5cd5
-	dw $5cdf
-	dw $5ce6
-	dw $5ced
-	dw $5cf1
-	dw $5cfb
-	dw $5d02
-	dw $5d06
-	dw $5d10
-	dw $5d14
-	dw $5d1b
-	dw $5d1f
-	dw $5d23
-	dw $5d24
-	dw $5d28
-	dw $5d29
-	dw $5d2a
-	dw $5d2e
-	dw $5d2f
-	dw $5d30
-	dw $5d34
-	dw $5d3b
-	dw $5d3c
-	dw $5d40
-	dw $5d41
-	dw $5d42
-	dw $5d46
-	dw $5d47
-	dw $5d54
-	dw $5d5b
-	dw $5d5f
-	dw $5d63
-	dw $5d67
-	dw $5d6b
-	dw $5d6f
-	dw $5d70
-	dw $5d71
-	dw $5d72
-	dw $5d73
-	dw $5d77
-	dw $5d7b
-	dw $5d82
-	dw $5d83
-	dw $5d84
-	dw $5d85
-	dw $5d86
-	dw $5d8a
-	dw $5d8e
-	dw $5d92
-	dw $5d99
-	dw $5d9a
-	dw $5d9e
-	dw $5da8
-	dw $5da9
-	dw $5db0
-	dw $5db1
-	dw $5db2
-	dw $5db6
-	dw $5dba
-	dw $5dbe
-	dw $5dc5
-	dw $5dc9
-	dw $5dca
+	dw Data_81be1 ; CUTSCENE_00
+	dw Data_81be2 ; CUTSCENE_01
+	dw Data_81be6 ; CUTSCENE_02
+	dw Data_81bf0 ; CUTSCENE_03
+	dw Data_81bfa ; CUTSCENE_04
+	dw Data_81c01 ; CUTSCENE_05
+	dw Data_81c08 ; CUTSCENE_06
+	dw Data_81c12 ; CUTSCENE_07
+	dw Data_81c1c ; CUTSCENE_08
+	dw Data_81c23 ; CUTSCENE_09
+	dw Data_81c30 ; CUTSCENE_0A
+	dw Data_81c37 ; CUTSCENE_0B
+	dw Data_81c3e ; CUTSCENE_0C
+	dw Data_81c48 ; CUTSCENE_0D
+	dw Data_81c52 ; CUTSCENE_0E
+	dw Data_81c59 ; CUTSCENE_0F
+	dw Data_81c60 ; CUTSCENE_10
+	dw Data_81c6a ; CUTSCENE_11
+	dw Data_81c71 ; CUTSCENE_12
+	dw Data_81c7b ; CUTSCENE_13
+	dw Data_81c85 ; CUTSCENE_14
+	dw Data_81c92 ; CUTSCENE_15
+	dw Data_81c96 ; CUTSCENE_16
+	dw Data_81ca3 ; CUTSCENE_17
+	dw Data_81caa ; CUTSCENE_18
+	dw Data_81cb4 ; CUTSCENE_19
+	dw Data_81cbb ; CUTSCENE_1A
+	dw Data_81cc8 ; CUTSCENE_1B
+	dw Data_81cd5 ; CUTSCENE_1C
+	dw Data_81cdf ; CUTSCENE_1D
+	dw Data_81ce6 ; CUTSCENE_1E
+	dw Data_81ced ; CUTSCENE_1F
+	dw Data_81cf1 ; CUTSCENE_20
+	dw Data_81cfb ; CUTSCENE_21
+	dw Data_81d02 ; CUTSCENE_22
+	dw Data_81d06 ; CUTSCENE_23
+	dw Data_81d10 ; CUTSCENE_24
+	dw Data_81d14 ; CUTSCENE_25
+	dw Data_81d1b ; CUTSCENE_26
+	dw Data_81d1f ; CUTSCENE_27
+	dw Data_81d23 ; CUTSCENE_28
+	dw Data_81d24 ; CUTSCENE_29
+	dw Data_81d28 ; CUTSCENE_2A
+	dw Data_81d29 ; CUTSCENE_2B
+	dw Data_81d2a ; CUTSCENE_2C
+	dw Data_81d2e ; CUTSCENE_2D
+	dw Data_81d2f ; CUTSCENE_2E
+	dw Data_81d30 ; CUTSCENE_2F
+	dw Data_81d34 ; CUTSCENE_30
+	dw Data_81d3b ; CUTSCENE_31
+	dw Data_81d3c ; CUTSCENE_32
+	dw Data_81d40 ; CUTSCENE_33
+	dw Data_81d41 ; CUTSCENE_34
+	dw Data_81d42 ; CUTSCENE_35
+	dw Data_81d46 ; CUTSCENE_36
+	dw Data_81d47 ; CUTSCENE_37
+	dw Data_81d54 ; CUTSCENE_38
+	dw Data_81d5b ; CUTSCENE_39
+	dw Data_81d5f ; CUTSCENE_3A
+	dw Data_81d63 ; CUTSCENE_3B
+	dw Data_81d67 ; CUTSCENE_3C
+	dw Data_81d6b ; CUTSCENE_3D
+	dw Data_81d6f ; CUTSCENE_3E
+	dw Data_81d70 ; CUTSCENE_3F
+	dw Data_81d71 ; CUTSCENE_40
+	dw Data_81d72 ; CUTSCENE_41
+	dw Data_81d73 ; CUTSCENE_42
+	dw Data_81d77 ; CUTSCENE_43
+	dw Data_81d7b ; CUTSCENE_44
+	dw Data_81d82 ; CUTSCENE_45
+	dw Data_81d83 ; CUTSCENE_46
+	dw Data_81d84 ; CUTSCENE_47
+	dw Data_81d85 ; CUTSCENE_48
+	dw Data_81d86 ; CUTSCENE_49
+	dw Data_81d8a ; CUTSCENE_4A
+	dw Data_81d8e ; CUTSCENE_4B
+	dw Data_81d92 ; CUTSCENE_4C
+	dw Data_81d99 ; CUTSCENE_4D
+	dw Data_81d9a ; CUTSCENE_4E
+	dw Data_81d9e ; CUTSCENE_4F
+	dw Data_81da8 ; CUTSCENE_50
+	dw Data_81da9 ; CUTSCENE_51
+	dw Data_81db0 ; CUTSCENE_52
+	dw Data_81db1 ; CUTSCENE_53
+	dw Data_81db2 ; CUTSCENE_54
+	dw Data_81db6 ; CUTSCENE_55
+	dw Data_81dba ; CUTSCENE_56
+	dw Data_81dbe ; CUTSCENE_57
+	dw Data_81dc5 ; CUTSCENE_58
+	dw Data_81dc9 ; CUTSCENE_59
+	dw Data_81dca ; CUTSCENE_5A
 ; 0x81be1
 
-	INCROM $81be1, $81dce
+Data_81be1: ; 81be1 (21:5be1)
+	db $80
+
+Data_81be2: ; 81be2 (21:5be2)
+	db $01, MAP_NORTH, $01
+	db $80
+
+Data_81be6: ; 81be6 (21:5be6)
+	db $02, MAP_NORTH, $01
+	db $01, MAP_NORTH, $02
+	db $01, MAP_NORTH, $03
+	db $80
+
+Data_81bf0: ; 81bf0 (21:5bf0)
+	db $02, MAP_NORTH, $02
+	db $01, MAP_NORTH, $07
+	db $01, MAP_WEST, $07
+	db $80
+
+Data_81bfa: ; 81bfa (21:5bfa)
+	db $02, MAP_WEST, $02
+	db $01, MAP_WEST, $01
+	db $80
+
+Data_81c01: ; 81c01 (21:5c01)
+	db $03, MAP_NORTH, $01
+	db $03, MAP_NORTH, $03
+	db $80
+
+Data_81c08: ; 81c08 (21:5c08)
+	db $02, MAP_WEST, $01
+	db $01, MAP_WEST, $02
+	db $01, MAP_WEST, $03
+	db $80
+
+Data_81c12: ; 81c12 (21:5c12)
+	db $02, MAP_WEST, $03
+	db $01, MAP_WEST, $06
+	db $01, MAP_SOUTH, $07
+	db $80
+
+Data_81c1c: ; 81c1c (21:5c1c)
+	db $02, MAP_SOUTH, $03
+	db $01, MAP_SOUTH, $01
+	db $80
+
+Data_81c23: ; 81c23 (21:5c23)
+	db $02, MAP_SOUTH, $01
+	db $02, MAP_NORTH, $04
+	db $02, MAP_WEST, $04
+	db $02, MAP_SOUTH, $02
+	db $80
+
+Data_81c30: ; 81c30 (21:5c30)
+	db $02, MAP_SOUTH, $05
+	db $01, MAP_SOUTH, $02
+	db $80
+
+Data_81c37: ; 81c37 (21:5c37)
+	db $03, MAP_WEST, $03
+	db $03, MAP_SOUTH, $02
+	db $80
+
+Data_81c3e: ; 81c3e (21:5c3e)
+	db $02, MAP_SOUTH, $06
+	db $01, MAP_SOUTH, $06
+	db $01, MAP_EAST, $08
+	db $80
+
+Data_81c48: ; 81c48 (21:5c48)
+	db $02, MAP_SOUTH, $07
+	db $02, MAP_WEST, $05
+	db $02, MAP_NORTH, $05
+	db $80
+
+Data_81c52: ; 81c52 (21:5c52)
+	db $02, MAP_EAST, $01
+	db $01, MAP_EAST, $01
+	db $80
+
+Data_81c59: ; 81c59 (21:5c59)
+	db $03, MAP_WEST, $04
+	db $03, MAP_WEST, $01
+	db $80
+
+Data_81c60: ; 81c60 (21:5c60)
+	db $02, MAP_NORTH, $07
+	db $01, MAP_NORTH, $04
+	db $01, MAP_NORTH, $05
+	db $80
+
+Data_81c6a: ; 81c6a (21:5c6a)
+	db $02, MAP_SOUTH, $04
+	db $01, MAP_SOUTH, $03
+	db $80
+
+Data_81c71: ; 81c71 (21:5c71)
+	db $03, MAP_NORTH, $05
+	db $03, MAP_EAST, $02
+	db $03, MAP_SOUTH, $02
+	db $80
+
+Data_81c7b: ; 81c7b (21:5c7b)
+	db $02, MAP_WEST, $06
+	db $02, MAP_SOUTH, $08
+	db $02, MAP_EAST, $02
+	db $80
+
+Data_81c85: ; 81c85 (21:5c85)
+	db $02, MAP_WEST, $07
+	db $02, MAP_EAST, $05
+	db $01, MAP_WEST, $04
+	db $01, MAP_EAST, $03
+	db $80
+
+Data_81c92: ; 81c92 (21:5c92)
+	db $03, MAP_SOUTH, $03
+	db $80
+
+Data_81c96: ; 81c96 (21:5c96)
+	db $02, MAP_NORTH, $03
+	db $03, MAP_NORTH, $04
+	db $03, MAP_EAST, $04
+	db $01, MAP_NORTH, $06
+	db $80
+
+Data_81ca3: ; 81ca3 (21:5ca3)
+	db $02, MAP_SOUTH, $09
+	db $01, MAP_SOUTH, $04
+	db $80
+
+Data_81caa: ; 81caa (21:5caa)
+	db $03, MAP_SOUTH, $02
+	db $03, MAP_EAST, $02
+	db $03, MAP_NORTH, $06
+	db $80
+
+Data_81cb4: ; 81cb4 (21:5cb4)
+	db $02, MAP_EAST, $03
+	db $01, MAP_EAST, $02
+	db $80
+
+Data_81cbb: ; 81cbb (21:5cbb)
+	db $03, MAP_NORTH, $06
+	db $03, MAP_WEST, $06
+	db $03, MAP_WEST, $01
+	db $03, MAP_NORTH, $02
+	db $80
+
+Data_81cc8: ; 81cc8 (21:5cc8)
+	db $02, MAP_EAST, $09
+	db $03, MAP_EAST, $04
+	db $03, MAP_EAST, $02
+	db $03, MAP_EAST, $03
+	db $80
+
+Data_81cd5: ; 81cd5 (21:5cd5)
+	db $03, MAP_SOUTH, $01
+	db $03, MAP_EAST, $01
+	db $03, MAP_SOUTH, $05
+	db $80
+
+Data_81cdf: ; 81cdf (21:5cdf)
+	db $02, MAP_WEST, $08
+	db $01, MAP_WEST, $05
+	db $80
+
+Data_81ce6: ; 81ce6 (21:5ce6)
+	db $02, MAP_SOUTH, $0a
+	db $02, MAP_EAST, $04
+	db $80
+
+Data_81ced: ; 81ced (21:5ced)
+	db $02, MAP_NORTH, $06
+	db $80
+
+Data_81cf1: ; 81cf1 (21:5cf1)
+	db $03, MAP_NORTH, $04
+	db $03, MAP_SOUTH, $04
+	db $03, MAP_WEST, $05
+	db $80
+
+Data_81cfb: ; 81cfb (21:5cfb)
+	db $03, MAP_SOUTH, $03
+	db $03, MAP_NORTH, $05
+	db $80
+
+Data_81d02: ; 81d02 (21:5d02)
+	db $01, MAP_EAST, $06
+	db $80
+
+Data_81d06: ; 81d06 (21:5d06)
+	db $03, MAP_WEST, $04
+	db $03, MAP_EAST, $03
+	db $03, MAP_EAST, $07
+	db $80
+
+Data_81d10: ; 81d10 (21:5d10)
+	db $03, MAP_NORTH, $01
+	db $80
+
+Data_81d14: ; 81d14 (21:5d14)
+	db $02, MAP_NORTH, $08
+	db $03, MAP_NORTH, $00
+	db $80
+
+Data_81d1b: ; 81d1b (21:5d1b)
+	db $04, MAP_NORTH, $09
+	db $80
+
+Data_81d1f: ; 81d1f (21:5d1f)
+	db $03, MAP_WEST, $02
+	db $80
+
+Data_81d23: ; 81d23 (21:5d23)
+	db $80
+
+Data_81d24: ; 81d24 (21:5d24)
+	db $04, MAP_NORTH, $0a
+	db $80
+
+Data_81d28: ; 81d28 (21:5d28)
+	db $80
+
+Data_81d29: ; 81d29 (21:5d29)
+	db $80
+
+Data_81d2a: ; 81d2a (21:5d2a)
+	db $04, MAP_NORTH, $0b
+	db $80
+
+Data_81d2e: ; 81d2e (21:5d2e)
+	db $80
+
+Data_81d2f: ; 81d2f (21:5d2f)
+	db $80
+
+Data_81d30: ; 81d30 (21:5d30)
+	db $04, MAP_NORTH, $10
+	db $80
+
+Data_81d34: ; 81d34 (21:5d34)
+	db $03, MAP_NORTH, $04
+	db $03, MAP_WEST, $03
+	db $80
+
+Data_81d3b: ; 81d3b (21:5d3b)
+	db $80
+
+Data_81d3c: ; 81d3c (21:5d3c)
+	db $04, MAP_NORTH, $0c
+	db $80
+
+Data_81d40: ; 81d40 (21:5d40)
+	db $80
+
+Data_81d41: ; 81d41 (21:5d41)
+	db $80
+
+Data_81d42: ; 81d42 (21:5d42)
+	db $04, MAP_NORTH, $11
+	db $80
+
+Data_81d46: ; 81d46 (21:5d46)
+	db $80
+
+Data_81d47: ; 81d47 (21:5d47)
+	db $02, MAP_EAST, $06
+	db $01, MAP_EAST, $05
+	db $01, MAP_EAST, $07
+	db $01, MAP_NORTH, $08
+	db $80
+
+Data_81d54: ; 81d54 (21:5d54)
+	db $02, MAP_EAST, $07
+	db $01, MAP_EAST, $04
+	db $80
+
+Data_81d5b: ; 81d5b (21:5d5b)
+	db $02, MAP_EAST, $08
+	db $80
+
+Data_81d5f: ; 81d5f (21:5d5f)
+	db $03, MAP_EAST, $05
+	db $80
+
+Data_81d63: ; 81d63 (21:5d63)
+	db $04, MAP_NORTH, $0d
+	db $80
+
+Data_81d67: ; 81d67 (21:5d67)
+	db $03, MAP_EAST, $07
+	db $80
+
+Data_81d6b: ; 81d6b (21:5d6b)
+	db $03, MAP_EAST, $05
+	db $80
+
+Data_81d6f: ; 81d6f (21:5d6f)
+	db $80
+
+Data_81d70: ; 81d70 (21:5d70)
+	db $80
+
+Data_81d71: ; 81d71 (21:5d71)
+	db $80
+
+Data_81d72: ; 81d72 (21:5d72)
+	db $80
+
+Data_81d73: ; 81d73 (21:5d73)
+	db $04, MAP_NORTH, $0e
+	db $80
+
+Data_81d77: ; 81d77 (21:5d77)
+	db $03, MAP_WEST, $04
+	db $80
+
+Data_81d7b: ; 81d7b (21:5d7b)
+	db $03, MAP_NORTH, $05
+	db $03, MAP_WEST, $05
+	db $80
+
+Data_81d82: ; 81d82 (21:5d82)
+	db $80
+
+Data_81d83: ; 81d83 (21:5d83)
+	db $80
+
+Data_81d84: ; 81d84 (21:5d84)
+	db $80
+
+Data_81d85: ; 81d85 (21:5d85)
+	db $80
+
+Data_81d86: ; 81d86 (21:5d86)
+	db $03, MAP_SOUTH, $03
+	db $80
+
+Data_81d8a: ; 81d8a (21:5d8a)
+	db $01, MAP_SOUTH, $05
+	db $80
+
+Data_81d8e: ; 81d8e (21:5d8e)
+	db $04, MAP_NORTH, $0f
+	db $80
+
+Data_81d92: ; 81d92 (21:5d92)
+	db $03, MAP_WEST, $06
+	db $03, MAP_EAST, $06
+	db $80
+
+Data_81d99: ; 81d99 (21:5d99)
+	db $80
+
+Data_81d9a: ; 81d9a (21:5d9a)
+	db $03, MAP_EAST, $03
+	db $80
+
+Data_81d9e: ; 81d9e (21:5d9e)
+	db $03, MAP_WEST, $06
+	db $03, MAP_SOUTH, $04
+	db $03, MAP_SOUTH, $05
+	db $80
+
+Data_81da8: ; 81da8 (21:5da8)
+	db $80
+
+Data_81da9: ; 81da9 (21:5da9)
+	db $03, MAP_NORTH, $03
+	db $03, MAP_WEST, $05
+	db $80
+
+Data_81db0: ; 81db0 (21:5db0)
+	db $80
+
+Data_81db1: ; 81db1 (21:5db1)
+	db $80
+
+Data_81db2: ; 81db2 (21:5db2)
+	db $03, MAP_SOUTH, $06
+	db $80
+
+Data_81db6: ; 81db6 (21:5db6)
+	db $03, MAP_EAST, $06
+	db $80
+
+Data_81dba: ; 81dba (21:5dba)
+	db $03, MAP_NORTH, $06
+	db $80
+
+Data_81dbe: ; 81dbe (21:5dbe)
+	db $02, MAP_SOUTH, $0b
+	db $03, MAP_SOUTH, $06
+	db $80
+
+Data_81dc5: ; 81dc5 (21:5dc5)
+	db $03, MAP_EAST, $06
+	db $80
+
+Data_81dc9: ; 81dc9 (21:5dc9)
+	db $80
+
+Data_81dca: ; 81dca (21:5dca)
+	db $02, MAP_NORTH, $12
+	db $80
+
+; 0x81dce
 
 Func_81dce: ; 81dce (20:5dce)
-	ld a, $01
-	ld [w2d077], a
+	ld a, CUTSCENE_01
+	ld [wCutscene], a
 	ld a, [w2d01b]
 	ld c, a
 	dec c
@@ -2207,10 +2983,11 @@ Func_81dce: ; 81dce (20:5dce)
 .asm_81de1
 	ld a, c
 	ld [w2d01b], a
+
 .asm_81de5
 	xor a
 	ld [w2d078], a
-	ld a, [w2d077]
+	ld a, [wCutscene]
 	call Func_819ac
 	ld [w2d065], a
 	and a
@@ -2221,11 +2998,11 @@ Func_81dce: ; 81dce (20:5dce)
 	ld [w2d065], a
 .asm_81dfd
 	call Func_81e16
-	ld a, [w2d077]
+	ld a, [wCutscene]
 	inc a
-	cp $5b
+	cp NUM_CUTSCENES + 1
 	jr z, .asm_81e0d
-	ld [w2d077], a
+	ld [wCutscene], a
 	jr .asm_81de5
 .asm_81e0d
 	ld a, [w2d01b]
@@ -2236,7 +3013,7 @@ Func_81dce: ; 81dce (20:5dce)
 ; 0x81e16
 
 Func_81e16: ; 81e16 (20:5e16)
-	ld a, [w2d077]
+	ld a, [wCutscene]
 	call Func_81b0d
 	ret z
 .loop
@@ -2244,11 +3021,11 @@ Func_81e16: ; 81e16 (20:5e16)
 	ld b, a
 	ld a, [wMapSide]
 	cp b
-	jr nz, .asm_81e2a
+	jr nz, .same_side
 	call Func_81e36
-.asm_81e2a
+.same_side
 	ld hl, w2d026
-	call Func_3c71
+	call GetByteFromPointerInHL
 	call Func_81b13
 	ret z
 	jr .loop
@@ -2521,7 +3298,7 @@ Func_8202c: ; 8202c (20:602c)
 	ld hl, w2d110
 	ld de, $6580
 	ld b, $2a
-	call Func_3a00
+	call AddOWSpriteWithScroll
 	ret
 ; 0x82038
 
@@ -2584,14 +3361,14 @@ Func_82041: ; 82041 (20:6041)
 	ld e, a
 	ld hl, w2d104
 	ld b, $2a
-	call Func_3a66
+	call UpdateOWAnimation
 	ld hl, w2d107
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
 	ld hl, w2d100
 	ld b, $2a
-	call Func_3a00
+	call AddOWSpriteWithScroll
 	ret
 ; 0x820af
 
@@ -2608,7 +3385,7 @@ Func_820af: ; 820af (20:60af)
 	add a ; *2
 	ld e, a
 	ld d, $00
-	ld hl, .table
+	ld hl, .framesets
 	add hl, de
 	ld de, w2d109
 	ld a, [hli]
@@ -2626,12 +3403,12 @@ Func_820af: ; 820af (20:60af)
 	ld [hl], a
 	ret
 
-.table
-	dw $6405
-	dw $6416
-	dw $6427
-	dw $6438
-	dw $625e
+.framesets
+	dw Frameset_aa405
+	dw Frameset_aa416
+	dw Frameset_aa427
+	dw Frameset_aa438
+	dw Frameset_aa25e
 ; 0x820e6
 
 	INCROM $820e6, $8212c
@@ -2748,14 +3525,14 @@ Func_824ea: ; 824ea (20:64ea)
 
 Func_824f1: ; 824f1 (20:64f1)
 	xor a
-	ld [w2d024], a
+	ld [wOWAnimationFinished], a
 	ld a, [w2d146]
 	ld hl, w2d144
 	call Func_82521
 	ld b, $2a
 	ld de, $5fe2
 	ld hl, w2d140
-	call Func_3a00
+	call AddOWSpriteWithScroll
 	ret
 ; 0x8250a
 
@@ -2768,7 +3545,7 @@ Func_8250a: ; 8250a (20:650a)
 	ld b, $2a
 	ld de, $5fe2
 	ld hl, w2d148
-	call Func_3a00
+	call AddOWSpriteWithScroll
 	ret
 ; 0x82521
 
@@ -2918,17 +3695,17 @@ Func_8291e: ; 8291e (20:691e)
 Func_82920: ; 82920 (20:6920)
 	ld a, [w2d094]
 	add b
-	ld [wCurSpriteYOffset], a
+	ld [wCurSpriteYCoord], a
 	ld a, [w2d095]
 	add d
-	ld [wCurSpriteXOffset], a
+	ld [wCurSpriteXCoord], a
 	ld a, e
-	ld [wCurSpriteFrame], a
+	ld [wCurSpriteTileID], a
 	ld a, c
 	ld [wCurSpriteAttributes], a
 	ld hl, $60cf
 	ld b, $2a
-	call Func_3a22
+	call AddOWSpriteWithScroll_GotParams
 	ret
 ; 0x8293f
 
@@ -2937,9 +3714,9 @@ Func_8293f: ; 8293f (20:693f)
 	bit 7, a
 	ret z
 	ld hl, w2d116
-	ld de, $62fb
+	ld de, Frameset_aa2fb
 	ld b, $2a
-	call Func_3a66
+	call UpdateOWAnimation
 	ld d, $90
 	ld hl, w2d114
 	ld a, [hli]
@@ -2965,18 +3742,18 @@ Func_8295b: ; 8295b (20:695b)
 	ld b, $05
 .asm_82975
 	ld a, b
-	ld [wCurSpriteFrame], a
+	ld [wCurSpriteTileID], a
 	ld a, [w2d094]
 	add $10
-	ld [wCurSpriteYOffset], a
+	ld [wCurSpriteYCoord], a
 	ld a, [w2d095]
 	add $10
-	ld [wCurSpriteXOffset], a
+	ld [wCurSpriteXCoord], a
 	ld a, $00
 	ld [wCurSpriteAttributes], a
 	ld hl, $6580
 	ld b, $2a
-	call Func_3a22
+	call AddOWSpriteWithScroll_GotParams
 	ret
 ; 0x82997
 
@@ -3085,14 +3862,14 @@ Func_82bb8: ; 82bb8 (20:6bb8)
 	ld a, [w2d184 + $2]
 	and a
 	ret z
-	ld de, $6544
+	ld de, Frameset_aa544
 	ld hl, w2d184
 	ld b, $2a
-	call Func_3a66
+	call UpdateOWAnimation
 	ld hl, w2d180
 	ld de, $6445
 	ld b, $2a
-	call Func_3a00
+	call AddOWSpriteWithScroll
 	ret
 ; 0x82bda
 
@@ -3104,16 +3881,16 @@ Func_82bda: ; 82bda (20:6bda)
 	and a
 	ret z
 	ld hl, w2d184
-	ld de, $6555
+	ld de, Frameset_aa555
 	ld b, $2a
-	call Func_3a66
-	ld a, [w2d024]
+	call UpdateOWAnimation
+	ld a, [wOWAnimationFinished]
 	cp $ff
 	jr z, .asm_82c03
 	ld hl, w2d180
 	ld de, $6445
 	ld b, $2a
-	call Func_3a00
+	call AddOWSpriteWithScroll
 	ret
 .asm_82c03
 	ld hl, w2d184 + $2

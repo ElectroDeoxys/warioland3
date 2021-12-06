@@ -54,7 +54,7 @@ def getCompressedData(offset):
     return bytes(data)
 
 def outputData(offset, filename):
-    with open(filename + '.bin', 'wb') as outFile:
+    with open(filename + '.2bpp.lz', 'wb') as outFile:
         outFile.write(getCompressedData(offset))
 
 n = 1

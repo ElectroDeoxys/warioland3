@@ -14,11 +14,23 @@ ENDM
 intro_obj_struct: MACRO
 \1YCoord::          db
 \1XCoord::          db
-\1Frame::           db
+\1TileID::          db
 \1Attributes::      db
 \1FramesetOffset::  db
 \1Duration::        db
 \1FramesetPtr::     dw
+\1End::
+ENDM
+
+ow_obj_struct: MACRO
+\1YCoord:: db
+\1XCoord:: db
+\1TileID:: db
+\1Attributes:: db
+\1Duration:: db
+\1FramesetOffset:: db
+\1Unk6:: db
+\1Unk7:: db
 \1End::
 ENDM
 

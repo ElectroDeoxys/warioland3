@@ -79,7 +79,7 @@ Func_9c072: ; 9c072 (27:4072)
 	ld bc, v1Tiles0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	xor a
 	ldh [rVBK], a
 
@@ -89,97 +89,97 @@ Func_9c072: ; 9c072 (27:4072)
 	jumptable
 
 .table
-	dw Func_9c000
-	dw InitPrologueSequence
-	dw LoadPrologueGfx
-	dw Func_9c187
-	dw Func_9c19d
-	dw Func_9c000
-	dw Func_9c1b6
-	dw Func_9c209
-	dw Func_9c25c
-	dw Func_9c28e
-	dw Func_9c2a4
-	dw Func_9c000
-	dw Func_9c2bd
-	dw Func_9c2d3
-	dw Func_9c2ec
-	dw Func_9c000
-	dw $427a
-	dw $4305
-	dw Func_9c000
-	dw $431e
-	dw $4339
-	dw $4357
-	dw Func_9c000
-	dw $4284
-	dw $457a
-	dw $4386
-	dw Func_9c000
-	dw $439c
-	dw Func_9c000
-	dw $427f
-	dw $4423
-	dw $45a6
-	dw Func_9c000
-	dw $45c5
-	dw $4476
-	dw Func_9c000
-	dw $44b9
-	dw $4289
-	dw Func_9c000
-	dw $44e1
-	dw Func_9c000
-	dw Func_9c000
-	dw Func_9c000
-	dw Func_9c000
-	dw Func_9c000
-	dw Func_9c000
-	dw Func_9c000
-	dw Func_9c000
-	dw $460f
-	dw Func_9c000
-	dw Func_9c000
-	dw Func_9c000
-	dw Func_9c000
-	dw Func_9c000
-	dw Func_9c000
-	dw $45e3
-	dw $45f9
-	dw $4623
-	dw $4636
-	dw Func_9c000
-	dw $464d
-	dw $469d
-	dw Func_9c000
-	dw Func_9c000
-	dw Func_9c000
-	dw Func_9c000
-	dw Func_9c000
-	dw $466e
-	dw $47e8
-	dw Func_9c000
-	dw Func_9c000
-	dw Func_9c000
-	dw Func_9c000
-	dw $4593
-	dw $46e7
-	dw Func_9c000
-	dw $4700
-	dw Func_9c000
-	dw $4731
-	dw $4742
-	dw Func_9c000
-	dw $4760
-	dw Func_9c000
-	dw Func_9c000
-	dw $4689
-	dw $47d9
-	dw $477f
-	dw $4796
-	dw $47a5
-	dw Func_9c000
-	dw Func_9c000
+	dw Func_9c000 ; CUTSCENE_00
+	dw InitPrologueSequence ; CUTSCENE_01
+	dw LoadPrologueGfx ; CUTSCENE_02
+	dw Func_9c187 ; CUTSCENE_03
+	dw Func_9c19d ; CUTSCENE_04
+	dw Func_9c000 ; CUTSCENE_05
+	dw Func_9c1b6 ; CUTSCENE_06
+	dw Func_9c209 ; CUTSCENE_07
+	dw Func_9c25c ; CUTSCENE_08
+	dw Func_9c28e ; CUTSCENE_09
+	dw Func_9c2a4 ; CUTSCENE_0A
+	dw Func_9c000 ; CUTSCENE_0B
+	dw Func_9c2bd ; CUTSCENE_0C
+	dw Func_9c2d3 ; CUTSCENE_0D
+	dw Func_9c2ec ; CUTSCENE_0E
+	dw Func_9c000 ; CUTSCENE_0F
+	dw $427a ; CUTSCENE_10
+	dw $4305 ; CUTSCENE_11
+	dw Func_9c000 ; CUTSCENE_12
+	dw $431e ; CUTSCENE_13
+	dw $4339 ; CUTSCENE_14
+	dw $4357 ; CUTSCENE_15
+	dw Func_9c000 ; CUTSCENE_16
+	dw $4284 ; CUTSCENE_17
+	dw $457a ; CUTSCENE_18
+	dw $4386 ; CUTSCENE_19
+	dw Func_9c000 ; CUTSCENE_1A
+	dw $439c ; CUTSCENE_1B
+	dw Func_9c000 ; CUTSCENE_1C
+	dw $427f ; CUTSCENE_1D
+	dw $4423 ; CUTSCENE_1E
+	dw $45a6 ; CUTSCENE_1F
+	dw Func_9c000 ; CUTSCENE_20
+	dw $45c5 ; CUTSCENE_21
+	dw $4476 ; CUTSCENE_22
+	dw Func_9c000 ; CUTSCENE_23
+	dw $44b9 ; CUTSCENE_24
+	dw $4289 ; CUTSCENE_25
+	dw Func_9c000 ; CUTSCENE_26
+	dw $44e1 ; CUTSCENE_27
+	dw Func_9c000 ; CUTSCENE_28
+	dw Func_9c000 ; CUTSCENE_29
+	dw Func_9c000 ; CUTSCENE_2A
+	dw Func_9c000 ; CUTSCENE_2B
+	dw Func_9c000 ; CUTSCENE_2C
+	dw Func_9c000 ; CUTSCENE_2D
+	dw Func_9c000 ; CUTSCENE_2E
+	dw Func_9c000 ; CUTSCENE_2F
+	dw $460f ; CUTSCENE_30
+	dw Func_9c000 ; CUTSCENE_31
+	dw Func_9c000 ; CUTSCENE_32
+	dw Func_9c000 ; CUTSCENE_33
+	dw Func_9c000 ; CUTSCENE_34
+	dw Func_9c000 ; CUTSCENE_35
+	dw Func_9c000 ; CUTSCENE_36
+	dw $45e3 ; CUTSCENE_37
+	dw $45f9 ; CUTSCENE_38
+	dw $4623 ; CUTSCENE_39
+	dw $4636 ; CUTSCENE_3A
+	dw Func_9c000 ; CUTSCENE_3B
+	dw $464d ; CUTSCENE_3C
+	dw $469d ; CUTSCENE_3D
+	dw Func_9c000 ; CUTSCENE_3E
+	dw Func_9c000 ; CUTSCENE_3F
+	dw Func_9c000 ; CUTSCENE_40
+	dw Func_9c000 ; CUTSCENE_41
+	dw Func_9c000 ; CUTSCENE_42
+	dw $466e ; CUTSCENE_43
+	dw $47e8 ; CUTSCENE_44
+	dw Func_9c000 ; CUTSCENE_45
+	dw Func_9c000 ; CUTSCENE_46
+	dw Func_9c000 ; CUTSCENE_47
+	dw Func_9c000 ; CUTSCENE_48
+	dw $4593 ; CUTSCENE_49
+	dw $46e7 ; CUTSCENE_4A
+	dw Func_9c000 ; CUTSCENE_4B
+	dw $4700 ; CUTSCENE_4C
+	dw Func_9c000 ; CUTSCENE_4D
+	dw $4731 ; CUTSCENE_4E
+	dw $4742 ; CUTSCENE_4F
+	dw Func_9c000 ; CUTSCENE_50
+	dw $4760 ; CUTSCENE_51
+	dw Func_9c000 ; CUTSCENE_52
+	dw Func_9c000 ; CUTSCENE_53
+	dw $4689 ; CUTSCENE_54
+	dw $47d9 ; CUTSCENE_55
+	dw $477f ; CUTSCENE_56
+	dw $4796 ; CUTSCENE_57
+	dw $47a5 ; CUTSCENE_58
+	dw Func_9c000 ; CUTSCENE_59
+	dw Func_9c000 ; CUTSCENE_5A
 ; 0x9c15e
 
 InitPrologueSequence: ; 9c15e (27:415e)
@@ -233,7 +233,7 @@ Func_9c1b6: ; 9c1b6 (27:41b6)
 	ld bc, v1BGMap0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 
 	xor a
 	ldh [rVBK], a
@@ -243,7 +243,7 @@ Func_9c1b6: ; 9c1b6 (27:41b6)
 	ld bc, v0BGMap0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 
 	ld b, BANK(Pals_b8080)
 	ld hl, Pals_b8080
@@ -264,7 +264,7 @@ Func_9c209: ; 9c209 (27:4209)
 	ld bc, v1BGMap0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 
 	xor a
 	ldh [rVBK], a
@@ -274,7 +274,7 @@ Func_9c209: ; 9c209 (27:4209)
 	ld bc, v0BGMap0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 
 	ld b, BANK(Pals_b8000)
 	ld hl, Pals_b8000
@@ -369,7 +369,7 @@ Func_9c832: ; 9c832 (27:4832)
 	ld bc, v0Tiles0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	jr Func_9c8cd
 
 	ld a, BANK("VRAM1")
@@ -380,7 +380,7 @@ Func_9c832: ; 9c832 (27:4832)
 	ld bc, v1Tiles0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 
 	xor a
 	ldh [rVBK], a
@@ -394,7 +394,7 @@ LoadCutscenes7Gfx: ; 9c873 (27:4873)
 	ld bc, v0Tiles0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	jp Func_9c8cd ; can be jr
 ; 0x9c891
 
@@ -405,7 +405,7 @@ LoadCutscenes8Gfx: ; 9c891 (27:4891)
 	ld bc, v0Tiles0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	jp Func_9c8cd ; can be jr
 ; 0x9c8af
 
@@ -416,7 +416,7 @@ LoadCutscenes9Gfx: ; 9c8af (27:48af)
 	ld bc, v0Tiles0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	jp Func_9c8cd ; unnecessary jump
 ; 0x9c8cd
 
@@ -427,7 +427,7 @@ Func_9c8cd: ; 9c8cd (27:48cd)
 	ld bc, v0Tiles2
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	ret
 ; 0x9c8e9
 
@@ -440,7 +440,7 @@ Func_9c8e9: ; 9c8e9 (27:48e9)
 	ld bc, v1Tiles2
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 
 	xor a
 	ldh [rVBK], a
@@ -456,7 +456,7 @@ Func_9c959: ; 9c959 (27:4959)
 	ld bc, v0Tiles0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	jp Func_9c8cd
 ; 0x9c977
 
@@ -474,7 +474,7 @@ Func_9ca48: ; 9ca48 (27:4a48)
 	ld [wTempBank], a
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	call_hram Decompress
+	hcall Decompress
 	xor a
 	ldh [rVBK], a
 	ret
@@ -596,12 +596,12 @@ VBlank_9cc9c: ; 9cc9c (27:4c9c)
 	INCROM $9ccf9, $9d01a
 
 Func_9d01a: ; 9d01a (27:501a)
-	ld hl, w2d190
+	ld hl, wOWObj2
 	ld a, $48
 	ld [hli], a
 	ld [hl], $50
 	ld a, $01
-	ld hl, w2d196
+	ld hl, wOWObj2Unk6
 	call Func_3b93
 	jp Func_9f11e
 ; 0x9d02d
@@ -610,20 +610,20 @@ Func_9d01a: ; 9d01a (27:501a)
 
 Func_9d0e6: ; 9d0e6 (27:50e6)
 	ld a, $03
-	ld [w2d188], a
-	ld hl, w2d190
+	ld [wOWObj1], a
+	ld hl, wOWObj2
 	ld a, $82
 	ld [hli], a
 	ld [hl], $71
 	ld a, $01
-	ld hl, w2d196
+	ld hl, wOWObj2Unk6
 	call Func_3b93
-	ld hl, w2d198
+	ld hl, wOWObj3
 	ld a, $82
 	ld [hli], a
 	ld [hl], $2f
 	ld a, $02
-	ld hl, w2d19e
+	ld hl, wOWObj3Unk6
 	call Func_3b93
 	jp Func_9f146
 ; 0x9d10e
@@ -631,28 +631,28 @@ Func_9d0e6: ; 9d0e6 (27:50e6)
 	INCROM $9d10e, $9d158
 
 Func_9d158: ; 9d158 (27:5158)
-	ld hl, w2d190
+	ld hl, wOWObj2
 	ld a, $58
 	ld [hli], a
 	ld [hl], $54
 	ld a, $09
-	ld hl, w2d196
+	ld hl, wOWObj2Unk6
 	call Func_3b93
 
-	ld hl, w2d198
+	ld hl, wOWObj3
 	ld a, $43
 	ld [hli], a
 	ld [hl], $40
 	ld a, $03
-	ld hl, w2d19e
+	ld hl, wOWObj3Unk6
 	call Func_3b93
 
-	ld hl, w2d1a0
+	ld hl, wOWObj4
 	ld a, $58
 	ld [hli], a
 	ld [hl], $54
 	ld a, $0a
-	ld hl, w2d1a6
+	ld hl, wOWObj4Unk6
 	call Func_3b93
 	jp Func_9f174
 ; 0x9d18b
@@ -671,7 +671,7 @@ Func_9f0a5: ; 9f0a5 (27:70a5)
 
 Func_9f0ae: ; 9f0ae (27:70ae)
 	ld b, $2f
-	call Func_3a66
+	call UpdateOWAnimation
 	ld a, [bc]
 	ret
 ; 0x9f0b5
@@ -679,14 +679,14 @@ Func_9f0ae: ; 9f0ae (27:70ae)
 	INCROM $9f0b5, $9f0bc
 
 Func_9f0bc: ; 9f0bc (27:70bc)
-	ld b, BANK(Data_bd377)
-	jp Func_3a38
+	ld b, $2f
+	jp AddOWSprite
 ; 0x9f0c1
 
 	INCROM $9f0c1, $9f0d0
 
 Func_9f0d0: ; 9f0d0 (27:70d0)
-	ld a, [w2d024]
+	ld a, [wOWAnimationFinished]
 	cp $ff
 	ret nz
 	set 2, l
@@ -703,7 +703,7 @@ Func_9f0d0: ; 9f0d0 (27:70d0)
 	INCROM $9f0e0, $9f11e
 
 Func_9f11e: ; 9f11e (27:711e)
-	ld bc, w2d196
+	ld bc, wOWObj2Unk6
 .asm_9f121
 	ld a, [bc]
 	and a
@@ -731,13 +731,13 @@ Func_9f11e: ; 9f11e (27:711e)
 ; 0x9f146
 
 Func_9f146: ; 9f146 (27:7146)
-	ld bc, w2d196
+	ld bc, wOWObj2Unk6
 	call .Func_9f15e
-	ld bc, w2d19e
+	ld bc, wOWObj3Unk6
 	call .Func_9f15e
-	ld de, w2d190
+	ld de, wOWObj2
 	call Func_9fb97
-	ld de, w2d198
+	ld de, wOWObj3
 	jp Func_9fba0
 
 .Func_9f15e
@@ -756,14 +756,15 @@ Func_9f146: ; 9f146 (27:7146)
 ; 0x9f174
 
 Func_9f174: ; 9f174 (27:7174)
-	ld bc, w2d1a6
+	ld bc, wOWObj4Unk6
 	call .Func_9f189
-	ld bc, w2d196
+	ld bc, wOWObj2Unk6
 	call .Func_9f189
-	ld bc, w2d19e
+	ld bc, wOWObj3Unk6
 	call .Func_9f189
-	ld bc, $d1ae
+	ld bc, wOWObj5Unk6
 ;	fallthrough
+
 .Func_9f189
 	ld a, [bc]
 	and a
@@ -791,7 +792,7 @@ Func_9f174: ; 9f174 (27:7174)
 	jr .asm_9f1a2
 
 .Func_9f1b5
-	ld a, [w2d024]
+	ld a, [wOWAnimationFinished]
 	cp $ff
 	ret nz
 	play_sfx SFX_10A
@@ -801,7 +802,7 @@ Func_9f174: ; 9f174 (27:7174)
 	INCROM $9f1c4, $9fb53
 
 Func_9fb53: ; 9fb53 (27:7b53)
-	ld a, [w2d188]
+	ld a, [wOWObj1]
 	cp b
 	ret nz
 	ld a, [de]

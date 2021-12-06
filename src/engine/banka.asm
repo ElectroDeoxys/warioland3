@@ -2291,7 +2291,7 @@ SetState_PuffyInflating: ; 2975e (a:575e)
 UpdateState_PuffyInflating: ; 29816 (a:5816)
 	ld a, [wOAMBank]
 	ldh [hCallFuncBank], a
-	call_hram UpdateAnimation
+	hcall UpdateAnimation
 
 	ld a, [wAnimationHasFinished]
 	and a
@@ -2328,7 +2328,7 @@ SetState_PuffyRising: ; 2982b (a:582b)
 .asm_29860
 	ld a, [wOAMBank]
 	ldh [hCallFuncBank], a
-	call_hram UpdateAnimation
+	hcall UpdateAnimation
 	ret
 ; 0x29871
 
@@ -2349,7 +2349,7 @@ UpdateState_PuffyRising: ; 29871 (a:5871)
 
 	ld a, [wOAMBank]
 	ldh [hCallFuncBank], a
-	call_hram UpdateAnimation
+	hcall UpdateAnimation
 
 	call Func_2b2c2
 	ret
@@ -2383,14 +2383,14 @@ SetState_PuffyTurning: ; 298b2 (a:58b2)
 .asm_298e2
 	ld a, [wOAMBank]
 	ldh [hCallFuncBank], a
-	call_hram UpdateAnimation
+	hcall UpdateAnimation
 	ret
 ; 0x298f3
 
 UpdateState_PuffyTurning: ; 298f3 (a:58f3)
 	ld a, [wOAMBank]
 	ldh [hCallFuncBank], a
-	call_hram UpdateAnimation
+	hcall UpdateAnimation
 
 	call Func_2b342
 	farcall Func_1996e
@@ -2441,7 +2441,7 @@ SetState_PuffyDeflating: ; 2992a (a:592a)
 .asm_29964
 	ld a, [wOAMBank]
 	ldh [hCallFuncBank], a
-	call_hram UpdateAnimation
+	hcall UpdateAnimation
 	ret
 ; 0x29975
 
@@ -2452,7 +2452,7 @@ UpdateState_PuffyDeflating: ; 29975 (a:5975)
 
 	ld a, [wOAMBank]
 	ldh [hCallFuncBank], a
-	call_hram UpdateAnimation
+	hcall UpdateAnimation
 
 	ld a, [wAnimationHasFinished]
 	and a
@@ -2479,7 +2479,7 @@ UpdateState_PuffyDeflating: ; 29975 (a:5975)
 .asm_299b8
 	ld a, [wOAMBank]
 	ldh [hCallFuncBank], a
-	call_hram UpdateAnimation
+	hcall UpdateAnimation
 
 	ld a, [wAnimationHasFinished]
 	and a

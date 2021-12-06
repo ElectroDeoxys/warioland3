@@ -710,7 +710,7 @@ Func_85234: ; 85234 (21:5234)
 	add hl, de
 	ld a, MAP_EAST
 	cp b
-	call z, .Func_8525c
+	call z, .GetEastMapNoIcePalette
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -718,19 +718,19 @@ Func_85234: ; 85234 (21:5234)
 	ld b, 8 palettes
 	call CopyHLToDE
 	xor a
-	ld hl, wTempPals1 palette 7 + $2
+	ld hl, wTempPals1 palette 7 color 1
 	ld bc, $6
 	call WriteAToHL_BCTimes
 	ret
 
-; if Blue Book or Axe has not been collected
+; if Blue Book or Trident have not been collected
 ; then advance to the next palette
-.Func_8525c
+.GetEastMapNoIcePalette
 	push hl
 	ld a, TREASURE_BLUE_BOOK
 	call IsTreasureCollected
 	jr z, .next_pal
-	ld a, TREASURE_AXE
+	ld a, TREASURE_TRIDENT
 	call IsTreasureCollected
 	jr z, .next_pal
 	pop hl
@@ -924,7 +924,141 @@ Func_854ee: ; 854ee (21:54ee)
 	jr .loop_2
 ; 0x8550b
 
-	INCROM $8550b, $8561f
+Data_8550b:: ; 8550b (21:550b)
+	dw wBGMap2 + $109
+	db $6d, $6e, $6e, $6e, $79, $70
+	db $00, $00, $00, $20, $00, $70
+
+	dw wBGMap2 + $129
+	db $6c, $7c, $7c, $7c, $6c, $70
+	db $00, $09, $09, $09, $20, $70
+
+	dw wBGMap2 + $149
+	db $7d, $7e, $7e, $7e, $7d, $70
+	db $00, $00, $00, $20, $20, $70
+
+	db $00
+; 0x85536
+
+Data_85536:: ; 85536 (21:5536)
+	dw wBGMap2 + $27
+	db $c4, $75, $76, $75, $7f, $77, $c4, $70
+	db $09, $0d, $0d, $2d, $0d, $0d, $29, $70
+	
+	db $00
+; 0x85549
+
+	INCROM $85549, $85549
+
+Data_85549:: ; 85549 (21:5549)
+	dw wBGMap2 + $88
+	db $56, $57, $45, $46, $70
+	db $01, $01, $01, $01, $70
+
+	dw wBGMap2 + $a8
+	db $58, $59, $5a, $5b, $70
+	db $01, $01, $01, $01, $70
+
+	dw wBGMap2 + $c8
+	db $5c, $5d, $5e, $5f, $70
+	db $01, $01, $01, $01, $70
+
+	db $00
+; 0x8556e
+
+Data_8556e:: ; 8556e (21:556e)
+	dw wBGMap2 + $1c6
+	db $7e, $7e, $7e, $70
+	db $0c, $0c, $0c, $70
+	
+	db $00
+; 0x85579
+
+Data_85579:: ; 85579 (21:5579)
+	dw wBGMap2 + $4e
+	db $20, $21, $70
+	db $01, $01, $70
+
+	dw wBGMap2 + $6e
+	db $30, $31, $70
+	db $01, $01, $70
+
+	dw wBGMap2 + $8e
+	db $22, $23, $70
+	db $05, $05, $70
+
+	dw wBGMap2 + $ae
+	db $32, $33, $70
+	db $05, $05, $70
+
+	dw wBGMap2 + $ce
+	db $24, $25, $70
+	db $05, $05, $70
+
+	dw wBGMap2 + $ee
+	db $34, $35, $70
+	db $05, $05, $70
+
+	dw wBGMap2 + $10e
+	db $26, $27, $70
+	db $05, $05, $70
+
+	db $00
+; 0x855b2
+
+Data_855b2:: ; 855b2 (21:55b2)
+	dw wBGMap2 + $c5
+	db $00, $70
+	db $00, $70
+
+	dw wBGMap2 + $e5
+	db $0d, $0e, $0f, $04, $70
+	db $03, $03, $00, $00, $70
+
+	dw wBGMap2 + $106
+	db $00, $02, $12, $13, $70
+	db $0f, $0f, $03, $03, $70
+
+	dw wBGMap2 + $127
+	db $14, $15, $16, $70
+	db $03, $03, $03, $70
+
+	dw wBGMap2 + $147
+	db $17, $18, $19, $70
+	db $03, $03, $03, $70
+
+	dw wBGMap2 + $167
+	db $1a, $1b, $1c, $70
+	db $03, $03, $03, $70
+
+	dw wBGMap2 + $187
+	db $1d, $1e, $1f, $70
+	db $03, $03, $03, $70
+	
+	db $00
+; 0x855f9
+
+Data_855f9:: ; 855f9 (21:55f9)
+	dw wBGMap2 + $145
+	db $19, $3e, $3f, $70
+	db $0a, $03, $03, $70
+
+	dw wBGMap2 + $165
+	db $3d, $4e, $4f, $70
+	db $03, $03, $03, $70
+
+	db $00
+; 0x8560e
+
+Data_8560e:: ; 8560e (21:560e)
+	dw wBGMap2 + $48
+	db $48, $49, $70, $01, $01, $70
+
+	dw wBGMap2 + $68
+	db $58, $59, $70, $01, $01, $70
+	
+	db $00
+; 0x8561f
 
 Data_8561f:: ; 8561f (21:561f)
 	dw wBGMap2 + $70
@@ -942,7 +1076,94 @@ Data_8561f:: ; 8561f (21:561f)
 	db $00
 ; 0x8563e
 
-	INCROM $8563e, $85b91
+Data_8563e:: ; 8563e (21:563e)
+	dw wBGMap2 + $123
+	db $6c, $6d, $6e, $6f, $70
+	db $00, $00, $00, $00, $70
+
+	dw wBGMap2 + $143
+	db $7c, $7d, $7e, $7f, $70
+	db $00, $00, $00, $00, $70
+
+	db $00
+; 0x85657
+
+	INCROM $85657, $857f7
+
+BGMap_857f7:: ; 857f7 (21:57f7)
+	INCBIN "gfx/bgmaps/map_857f7.bin"
+; 0x85888
+
+	INCROM $85888, $85897
+
+BGMap_85897:: ; 85897 (21:5897)
+	INCBIN "gfx/bgmaps/map_85897.bin"
+; 0x85928
+
+	INCROM $85928, $85af4
+
+Data_85af4: ; 85af4 (21:5af4)
+	dw wBGMap2 + $64
+	db $44, $45, $70
+	db $01, $01, $70
+
+	db $00
+
+Data_85afd: ; 85afd (21:5afd)
+	dw wBGMap2 + $83
+	db $46, $47, $48, $49, $70
+	db $01, $01, $01, $01, $70
+
+	db $00
+
+Data_85b0a: ; 85b0a (21:5b0a)
+	dw wBGMap2 + $a2
+	db $54, $55, $56, $57, $58, $59, $70
+	db $01, $01, $01, $03, $03, $01, $70
+
+	db $00
+
+Data_85b1b: ; 85b1b (21:5b1b)
+	dw wBGMap2 + $c2
+	db $4a, $4b, $4c, $4d, $4e, $4f, $70
+	db $01, $01, $01, $03, $03, $03, $70
+
+	db $00
+
+Data_85b2c: ; 85b2c (21:5b2c)
+	dw wBGMap2 + $e2
+	db $5a, $5b, $5c, $5d, $5e, $5f, $70
+	db $03, $03, $01, $03, $03, $03, $70
+
+	db $00
+
+Data_85b3d: ; 85b3d (21:5b3d)
+	dw wBGMap2 + $104
+	db $3e, $3f, $01, $70
+	db $03, $03, $20, $70
+
+	db $00
+; 0x85b48
+
+Data_85b48: ; 85b48 (21:5b48)
+	dw wBGMap2 + $28
+	db $c4, $75, $76, $75, $7f, $77, $c4, $70
+	db $09, $0d, $0d, $2d, $0d, $0d, $29, $70
+
+	dw wBGMap2 + $e8
+	db $20, $21, $22, $22, $22, $21, $20, $70
+	db $03, $03, $03, $03, $23, $23, $23, $70
+
+	dw wBGMap2 + $108
+	db $23, $24, $25, $25, $25, $24, $23, $70
+	db $03, $03, $03, $03, $23, $23, $23, $70
+
+	dw wBGMap2 + $128
+	db $33, $34, $35, $35, $35, $34, $33, $70
+	db $02, $02, $02, $02, $22, $22, $22, $70
+
+	db $00
+; 0x85b91
 
 BGMap_85b91:: ; 85b91 (21:5b91)
 	INCBIN "gfx/bgmaps/map_85b91.bin"
@@ -958,9 +1179,15 @@ BGMap_85bef:: ; 85bef (21:5bef)
 
 BGMap_85d79:: ; 85d79 (21:5d79)
 	INCBIN "gfx/bgmaps/map_85d79.bin"
-; 0x85f07
+; 0x85ea7
 
-	INCROM $85ea7, $85f07
+BGMap_85ea7:: ; 85ea7 (21:5ea7)
+	INCBIN "gfx/bgmaps/map_85ea7.bin"
+; 0x85eda
+
+BGMap_85eda:: ; 85eda (21:5eda)
+	INCBIN "gfx/bgmaps/map_85eda.bin"
+; 0x85f07
 
 BGMap_85f07:: ; 85f07 (21:5f07)
 	INCBIN "gfx/bgmaps/map_85f07.bin"

@@ -26,8 +26,8 @@
 	const TREASURE_MAGIC_WAND                   ; $18
 	const TREASURE_SKY_KEY                      ; $19
 	const TREASURE_YELLOW_BOOK                  ; $1a
-	const TREASURE_TRIDENT                      ; $1b
-	const TREASURE_AXE                          ; $1c
+	const TREASURE_AXE                          ; $1b
+	const TREASURE_TRIDENT                      ; $1c
 	const TREASURE_SKULL_RING_BLUE              ; $1d
 	const TREASURE_SKULL_RING_RED               ; $1e
 	const TREASURE_BLUE_TABLET                  ; $1f
