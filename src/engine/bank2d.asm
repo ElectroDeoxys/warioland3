@@ -114,11 +114,11 @@ Func_b409c: ; b409c (2d:409c)
 	ld a, [w2d025]
 	and a
 	jr nz, .asm_b40b4
-	ld a, [w2d012]
+	ld a, [wNextMapSide]
 	and a
 	jr nz, .asm_b40b4
-	ld a, [w2d01d]
-	cp $06
+	ld a, [wMapSideLevelIndex]
+	cp OWNORTH_SEA_TURTLE_ROCKS
 	ret z
 .asm_b40b4
 	ld hl, wOWObj3
@@ -322,10 +322,10 @@ Func_b417a: ; b417a (2d:417a)
 	ldh [rVBK], a
 
 	xor a
-	ld [w2d095], a
+	ld [wWX], a
 	ldh [rWX], a
 	ld a, $90
-	ld [w2d094], a
+	ld [wWY], a
 	ldh [rWY], a
 	xor a
 	ld [w2d091], a
@@ -1452,7 +1452,7 @@ Func_b4a37: ; b4a37 (2d:4a37)
 ; 0xb4a3d
 
 Func_b4a3d: ; b4a3d (2d:4a3d)
-	ld a, [wMapSide]
+	ld a, [wCurMapSide]
 	jumptable
 
 	dw .North ; MAP_NORTH
@@ -1502,7 +1502,7 @@ Func_b4a3d: ; b4a3d (2d:4a3d)
 ; 0xb4aa9
 
 Func_b4aa9: ; b4aa9 (2d:4aa9)
-	ld a, [wMapSide]
+	ld a, [wCurMapSide]
 	jumptable
 
 	dw .North ; MAP_NORTH
@@ -2858,7 +2858,7 @@ Func_b791d: ; b791d (2d:791d)
 ; 0xb791e
 
 Func_b791e: ; b791e (2d:791e)
-	ld a, [wMapSide]
+	ld a, [wCurMapSide]
 	jumptable
 
 	dw .North ; MAP_NORTH
@@ -2978,7 +2978,7 @@ Func_b7a5a: ; b7a5a (2d:7a5a)
 	ld a, [w2d124]
 	and a
 	ret nz
-	ld a, [w2d01d]
+	ld a, [wMapSideLevelIndex]
 	cp $02
 	ret z
 	cp $07
@@ -3131,7 +3131,7 @@ Func_b7b4e: ; b7b4e (2d:7b4e)
 	ld a, [w2d12a]
 	and a
 	ret nz
-	ld a, [w2d01d]
+	ld a, [wMapSideLevelIndex]
 	cp $01
 	ret z
 	cp $02
@@ -3323,7 +3323,7 @@ Func_b7c84: ; b7c84 (2d:7c84)
 	ld a, [w2d12e]
 	and a
 	ret nz
-	ld a, [w2d01d]
+	ld a, [wMapSideLevelIndex]
 	cp $00
 	ret z
 	cp $01

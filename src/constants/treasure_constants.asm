@@ -104,3 +104,10 @@ NUM_TREASURES EQU const_value - 1
 	const TREASURE_DUMMY                        ; $65
 const_value = $80
 	const TREASURE_INVALID                      ; $80
+
+; pals
+	const_def $4
+	const OBPAL_TREASURE_YELLOW ; 4
+	const OBPAL_TREASURE_RED    ; 5
+	const OBPAL_TREASURE_GREEN  ; 6
+	const OBPAL_TREASURE_BLUE   ; 7

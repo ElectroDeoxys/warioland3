@@ -194,7 +194,7 @@ VBlank_accb0: ; accb0 (2b:4cb0)
 	bankswitch
 
 .asm_accff
-	ld hl, w2da88
+	ld hl, w2d810 + $4f * $8
 	ld a, [hl]
 	and a
 	jr z, .asm_acd13

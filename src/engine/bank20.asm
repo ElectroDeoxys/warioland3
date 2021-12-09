@@ -107,10 +107,10 @@ Data_80086: ; 80086 (20:4086)
 	INCROM $80098, $80136
 
 Data_80136: ; 80136 (20:4136)
-	dw Data_8013e 
-	dw Data_8017e 
-	dw Data_801be 
-	dw Data_801fe
+	dw Data_8013e ; MAP_NORTH
+	dw Data_8017e ; MAP_WEST
+	dw Data_801be ; MAP_SOUTH
+	dw Data_801fe ; MAP_EAST
 ; 0x8013e
 
 Data_8013e: ; 8013e (20:413e)
@@ -271,11 +271,22 @@ GetCrayonFlags: ; 80366 (20:4366)
 	ret
 ; 0x80377
 
-	INCROM $80377, $8038a
+Func_80377: ; 80377 (20:4377)
+	ld a, [wCurMapSide]
+	cp MAP_EAST
+	jr nz, Func_8038a
+	; east side
+	ld a, [w2d020]
+	and a
+	jr nz, Func_8038a
+	ld hl, wca3b
+	res 4, [hl]
+	ret
 
+; flips bit 4 of wca3b
 Func_8038a: ; 8038a (20:438a)
 	ld hl, wca3b
-	ld a, $10
+	ld a, $1 << 4
 	xor [hl]
 	ld [hl], a
 	ret
@@ -296,8 +307,8 @@ Func_80392: ; 80392 (20:4392)
 	dw FadeBGToWhite_Normal
 	dw Func_8055f           ; SST_OVERWORLD_09
 	dw DarkenBGToPal_Normal
-	dw $45d7
-	dw FadeBGToWhite_Normal
+	dw Func_805d7
+	dw FadeBGToWhite_Normal ; SST_OVERWORLD_0C
 	dw $4dc0
 	dw DarkenBGToPal_Normal
 	dw $4dd0
@@ -334,7 +345,7 @@ Func_803e6: ; 803e6 (20:43e6)
 	ld a, [w2d050]
 	and a
 	ret nz
-	ld a, [w2d01d]
+	ld a, [wMapSideLevelIndex]
 	cp $0e
 	ret nc
 	jp Func_15dc
@@ -370,15 +381,15 @@ Func_803f9: ; 803f9 (20:43f9)
 	ld b, a
 	call Func_81278
 	ld a, b
-	ld [w2d012], a
+	ld [wNextMapSide], a
 	ld a, d
-	ld [w2d01d], a
+	ld [wMapSideLevelIndex], a
 .asm_8043c
 	call Func_80b29
 
 	ld a, [w2d01b]
 	and a
-	jr z, .asm_8048a
+	jr z, .asm_8048a ; == 0
 	cp $f0
 	jr z, .asm_8048a
 	cp $f1
@@ -394,10 +405,12 @@ Func_803f9: ; 803f9 (20:43f9)
 	ld a, CUTSCENE_01
 	ld [w2d025], a
 	jr .asm_80466
+
 .asm_8045f
 	call Func_8197e
 	jr nz, .asm_80466
 	jr .asm_8048a
+
 .asm_80466
 	call .Func_804c9
 	farcall Func_9c005
@@ -405,11 +418,13 @@ Func_803f9: ; 803f9 (20:43f9)
 	and a
 	jr z, .asm_80480
 	jr .asm_804a0
+
 .asm_80480
 	ld a, [w2d025]
 	call Func_81b0d
 	jr z, .asm_8048a
 	jr .asm_80497
+
 .asm_8048a
 	xor a ; CUTSCENE_00
 	ld [w2d025], a
@@ -442,8 +457,8 @@ Func_803f9: ; 803f9 (20:43f9)
 
 .asm_804b9
 	xor a
-	ld [w2d012], a
-	ld [w2d01d], a
+	ld [wNextMapSide], a
+	ld [wMapSideLevelIndex], a
 	ld a, SST_OVERWORLD_20
 	ld [wSubState], a
 	call Func_803e6
@@ -504,7 +519,7 @@ Func_804f7: ; 804f7 (20:44f7)
 	ld a, [w2d026 + 1]
 	ld [w2d02a + 1], a
 	ld a, [w2d016]
-	ld [wMapSide], a
+	ld [wCurMapSide], a
 	jumptable
 
 	dw Func_80851
@@ -573,8 +588,8 @@ Func_8055f: ; 8055f (20:455f)
 	ld [w2d07c], a
 	xor a
 	ld [w2d07d], a
-	ld a, [w2d012]
-	ld [wMapSide], a
+	ld a, [wNextMapSide]
+	ld [wCurMapSide], a
 	jumptable
 
 	dw Func_805e1 ; MAP_NORTH
@@ -583,7 +598,12 @@ Func_8055f: ; 8055f (20:455f)
 	dw Func_80621 ; MAP_EAST
 ; 0x805d7
 
-	INCROM $805d7, $805e1
+Func_805d7: ; 805d7 (20:45d7)
+	call Func_80e89
+	call Func_8202c
+	call ClearVirtualOAM
+	ret
+; 0x805e1
 
 Func_805e1: ; 805e1 (20:45e1)
 	call Func_80aa5
@@ -692,14 +712,14 @@ Func_8065e: ; 8065e (20:465e)
 	xor a
 	ld [wNumOAMSprites], a
 
-	ld a, [wMapSide] ; a gets overwritten
+	ld a, [wCurMapSide] ; a gets overwritten
 	call Func_81dce
 	call Func_812c0
 	call Func_80bd9
 	call WriteBGMapFromWRAM
 
 	call Func_8212c
-	ld a, [w2d01d]
+	ld a, [wMapSideLevelIndex]
 	ld [w2d067], a
 	ld [w2d068], a
 	xor a
@@ -759,10 +779,10 @@ Func_8065e: ; 8065e (20:465e)
 
 .asm_80790
 	xor a
-	ld [w2d095], a
+	ld [wWX], a
 	ldh [rWX], a
 	ld a, $90
-	ld [w2d094], a
+	ld [wWY], a
 	ldh [rWY], a
 	xor a
 	ld [w2d091], a
@@ -816,7 +836,7 @@ Func_8065e: ; 8065e (20:465e)
 
 .asm_80809
 	call LoadLevelNameIfValid
-	ld a, [w2d01d]
+	ld a, [wMapSideLevelIndex]
 	cp $0e
 	ld b, $01
 	jr c, .asm_80821
@@ -862,7 +882,7 @@ Func_80851: ; 80851 (20:4851)
 Func_8086f: ; 8086f (20:486f)
 	call Func_80b54
 
-	ld a, [wMapSide] ; a gets overwritten
+	ld a, [wCurMapSide] ; a gets overwritten
 	call Func_81dce
 	call WriteBGMapFromWRAM
 
@@ -878,7 +898,7 @@ Func_8086f: ; 8086f (20:486f)
 	ld [w2d017], a
 	ld a, [w2d029]
 	ld [w2d028], a
-	ld a, [wMapSide]
+	ld a, [wCurMapSide]
 	ld [w2d016], a
 	ld a, [w2d02a + 0]
 	ld [w2d026 + 0], a
@@ -922,7 +942,7 @@ Func_8086f: ; 8086f (20:486f)
 	ld [w2d055], a
 	ld [w2d013], a
 
-	ld a, [wMapSide]
+	ld a, [wCurMapSide]
 	and a
 	jr nz, .no_window_display
 	ld a, [w2d025]
@@ -1232,7 +1252,7 @@ Func_80b54: ; 80b54 (20:4b54)
 	ld [w2d047], a
 	ld [w2d048], a
 
-	ld a, [wMapSide]
+	ld a, [wCurMapSide]
 	cp MAP_WEST
 	jr z, .asm_80bbd
 	cp MAP_SOUTH
@@ -1292,9 +1312,9 @@ VBlank_80bf9: ; 80bf9 (20:4bf9)
 	ldh [rSCY], a
 	ld a, [wTempSCX]
 	ldh [rSCX], a
-	ld a, [w2d094]
+	ld a, [wWY]
 	ldh [rWY], a
-	ld a, [w2d095]
+	ld a, [wWX]
 	add $07
 	ldh [rWX], a
 
@@ -1513,24 +1533,83 @@ Func_80d6c: ; 80d6c (20:4d6c)
 	ret
 ; 0x80d7c
 
-	INCROM $80d7c, $80fc8
+	INCROM $80d7c, $80e89
+
+Func_80e89: ; 80e89 (20:4e89)
+	call Func_302
+	farcall Func_b791e
+	farcall UpdateCommonOWAnimations
+	call Func_82242
+	ld a, [w2d050]
+	and a
+	jp nz, Func_81055
+	call Func_82761
+	call Func_828b3
+	farcall Func_852e5
+	ld hl, w2d014
+	inc [hl]
+	ld a, [w2d013]
+	jumptable
+
+	dw $4ee7
+	dw $4f0d
+	dw $4f3c
+	dw $4fb8
+	dw $4fd6
+	dw $4ff7
+	dw $50bb
+	dw $515c
+	dw $51cf
+	dw $5200
+	dw $5346
+; 0x80ee7
+
+Func_80ee7: ; 80ee7 (20:4ee7)
+	call Func_8212c
+	call GetOWAllowedDPadInput
+	ld a, [wMapSideLevelIndex]
+	ld [w2d067], a
+	ld [w2d068], a
+	xor a
+	ld [w2d0d5], a
+	ld [w2d0e0], a
+	ld [w2d055], a
+	call Func_81055
+	ld hl, w2d014
+	xor a
+	ld [hl], a
+	ld hl, w2d013
+	inc [hl]
+	ret
+; 0x80f0d
+
+	INCROM $80f0d, $80fc8
 
 LoadLevelNameIfValid: ; 80fc8 (20:4fc8)
-	ld a, [w2d012]
+	ld a, [wNextMapSide]
 	ld b, a
-	ld a, [w2d01d]
+	ld a, [wMapSideLevelIndex]
 	ld d, a
 	cp $08
 	ret nc
 	jp LoadLevelName
 ; 0x80fd6
 
-	INCROM $80fd6, $810f0
+	INCROM $80fd6, $81055
+
+Func_81055: ; 81055 (20:5055)
+	farcall Func_b4a3d
+	call Func_82041
+	farcall Func_b4aa9
+	ret
+; 0x81077
+
+	INCROM $81077, $810f0
 
 Func_810f0: ; 810f0 (20:50f0)
 	add a ; *2
 	ld c, a
-	ld a, [wMapSide]
+	ld a, [wCurMapSide]
 	ld hl, Data_80136
 	call GetCthEntryFromAthTable
 	ret
@@ -1541,12 +1620,12 @@ Func_810f0: ; 810f0 (20:50f0)
 ; input:
 ; - b = ???
 ; output:
-; - d = ???
-; - c = ???
+; - d = map side level index
+; - c = map side
 Func_81278: ; 81278 (20:5278)
 ; loop until a larger value than b is found
 	ld hl, Data_812ac
-	ld c, $ff
+	ld c, -1
 .loop
 	ld e, [hl]
 	inc hl
@@ -1581,7 +1660,7 @@ Func_812c0: ; 812c0 (20:52c0)
 	ret z
 	ld a, [wOWLevel]
 	ld [w2dffd], a
-	ld a, [wMapSide]
+	ld a, [wCurMapSide]
 	ld c, a
 	ld b, $00
 	ld hl, Data_812ac
@@ -1589,31 +1668,32 @@ Func_812c0: ; 812c0 (20:52c0)
 	ld a, [hl]
 	ld [wOWLevel], a
 
-	ld a, [w2d012]
+	ld a, [wNextMapSide]
 	ld b, $06
 	dec a
-	jr z, .asm_812ed
+	jr z, .asm_812ed ; west
 	ld b, $06
 	dec a
-	jr z, .asm_812ed
+	jr z, .asm_812ed ; south
 	ld b, $07
 	dec a
-	jr z, .asm_812ed
+	jr z, .asm_812ed ; east
 	ld b, $07
 .asm_812ed
 	ld a, b
 	ld [w2dfff], a
 	xor a
 	ld [w2dffe], a
+
 	ld a, [wOWLevel]
 	and a
 	jr z, .asm_81314
 .asm_812fb
-	farcall Func_4a63
-	ld a, [wKeys]
-	and $f0
-	xor $f0
-	call nz, Func_8132a
+	farcall GetOWLevelCollectedTreasures
+	ld a, [wKeyAndTreasureFlags]
+	and TREASURES_MASK
+	xor TREASURES_MASK
+	call nz, .Func_8132a ; at least 1 treasure missing
 .asm_81314
 	ld a, [wOWLevel]
 	inc a
@@ -1621,14 +1701,13 @@ Func_812c0: ; 812c0 (20:52c0)
 	ld hl, w2dffe
 	inc [hl]
 	ld a, [hli]
-	cp [hl]
+	cp [hl] ; w2dfff
 	jr nz, .asm_812fb
 	ld a, [w2dffd]
 	ld [wOWLevel], a
 	ret
-; 0x8132a
 
-Func_8132a: ; 8132a (20:532a)
+.Func_8132a
 	ld a, [w2dffe]
 	call Func_810f0
 	ld a, [hli]
@@ -1651,7 +1730,7 @@ Func_8178b: ; 8178b (20:578b)
 	ld a, TREASURE_DAY_OR_NIGHT_SPELL
 	call IsTreasureCollected
 	ret z
-	ld a, [wMapSide]
+	ld a, [wCurMapSide]
 	cp MAP_EAST
 	jr nz, .asm_8179d
 	ld a, [w2d020]
@@ -1722,7 +1801,7 @@ Func_817e3: ; 817e3 (20:57e3)
 Func_81818: ; 81818 (20:5818)
 	ld a, [w2d07a]
 	ld b, a
-	ld a, [wMapSide]
+	ld a, [wCurMapSide]
 .loop
 	sub 1
 	jr c, .done
@@ -2966,7 +3045,6 @@ Data_81dc9: ; 81dc9 (21:5dc9)
 Data_81dca: ; 81dca (21:5dca)
 	db $02, MAP_NORTH, $12
 	db $80
-
 ; 0x81dce
 
 Func_81dce: ; 81dce (20:5dce)
@@ -3019,7 +3097,7 @@ Func_81e16: ; 81e16 (20:5e16)
 .loop
 	ld a, [w2d016]
 	ld b, a
-	ld a, [wMapSide]
+	ld a, [wCurMapSide]
 	cp b
 	jr nz, .same_side
 	call Func_81e36
@@ -3072,8 +3150,8 @@ Func_81e57: ; 81e57 (20:5e57)
 	xor a
 	ld [w2d072], a
 	xor a
-	ld [w2d082], a
-	ld [w2d083], a
+	ld [w2d082 + 0], a
+	ld [w2d082 + 1], a
 	ld [w2d081], a
 	ld [w2d080], a
 	ld [w2d071], a
@@ -3240,10 +3318,10 @@ Func_81fb9: ; 81fb9 (20:5fb9)
 ; 0x81fd8
 
 Func_81fd8: ; 81fd8 (20:5fd8)
-	ld a, [w2d082]
-	ld [w2d086], a
-	ld a, [w2d083]
-	ld [w2d087], a
+	ld a, [w2d082 + 0]
+	ld [w2d086 + 0], a
+	ld a, [w2d082 + 1]
+	ld [w2d086 + 1], a
 	ld hl, w2d06b
 	call Func_3ad7
 	ret
@@ -3253,9 +3331,9 @@ Func_81feb: ; 81feb (20:5feb)
 	ld a, [w2d07f]
 	and a
 	ret z
-	ld a, [w2d083]
+	ld a, [w2d082 + 1]
 	ld h, a
-	ld a, [w2d082]
+	ld a, [w2d082 + 0]
 	ld l, a
 	ld a, [hl]
 	call Func_8200f
@@ -3278,7 +3356,7 @@ Func_8200f: ; 8200f (20:600f)
 ; 0x82012
 
 Func_82012: ; 82012 (20:6012)
-	ld a, [wMapSide]
+	ld a, [wCurMapSide]
 	ld c, a
 	ld hl, .data
 	ld de, w2d110
@@ -3308,7 +3386,7 @@ PlaySFX12A: ; 82038 (20:6038)
 ; 0x82041
 
 Func_82041: ; 82041 (20:6041)
-	ld a, [w2d01d]
+	ld a, [wMapSideLevelIndex]
 	ld c, a
 	ld a, [w2d068]
 	cp c
@@ -3414,7 +3492,7 @@ Func_820af: ; 820af (20:60af)
 	INCROM $820e6, $8212c
 
 Func_8212c: ; 8212c (20:612c)
-	ld a, [w2d01d]
+	ld a, [wMapSideLevelIndex]
 	ld [w2d066], a
 	call Func_810f0
 	ld a, [hli]
@@ -3434,7 +3512,127 @@ Func_8212c: ; 8212c (20:612c)
 	ret
 ; 0x82150
 
-	INCROM $82150, $822b4
+; writes to wOWAllowedDPadInput the allowed
+; d-pad inputs in the current OW position
+GetOWAllowedDPadInput: ; 82150 (20:6150)
+	ld a, [wMapSideLevelIndex]
+	cp $07
+	jr z, .asm_8219b
+	ld hl, w2d069
+	call Func_3ad7
+	ld c, $00
+	inc hl
+	ld b, D_RIGHT
+	call .CheckAllowedDirection
+	dec hl
+	dec hl
+	ld b, D_LEFT
+	call .CheckAllowedDirection
+	inc hl
+	ld de, -$20
+	add hl, de
+	ld b, D_UP
+	call .CheckAllowedDirection
+	ld de, $40
+	add hl, de
+	ld b, D_DOWN
+	call .CheckAllowedDirection
+	ld a, c
+	ld [wOWAllowedDPadInput], a
+	ret
+
+.CheckAllowedDirection
+	ld a, [hl]
+	cp $02
+	jr z, .check
+	cp $01
+	jr z, .check
+	ret
+
+.check
+	ld e, l
+	ld d, h
+	dec d
+	dec d
+	dec d
+	ld a, [de]
+	bit 3, a
+	ret z
+	ld a, c
+	or b
+	ld c, a
+	ret
+
+.asm_8219b
+	ld a, D_RIGHT | D_UP | D_DOWN
+	ld [wOWAllowedDPadInput], a
+	ret
+; 0x821a1
+
+	INCROM $821a1, $82242
+
+Func_82242: ; 82242 (20:6242)
+	ld hl, w2d051
+	inc [hl]
+	ld a, [w2d050]
+	and a
+	ret z
+	dec a
+	jumptable
+
+	dw Func_82263
+	dw Func_82277
+	dw Func_822d7
+	dw Func_822f1
+	dw Func_82311
+	dw Func_8235b
+	dw Func_8237f
+	dw Func_8239e
+	dw Func_82400
+	dw Func_8241b
+	dw Func_8242e
+; 0x82263
+
+Func_82263: ; 82263 (20:6263)
+	call Func_828b3
+	ld a, $02
+	ld [w2d091], a
+	xor a
+	ld [w2d092], a
+	ld [wMagnifyingGlassInputCounter], a
+	ld hl, w2d050
+	inc [hl]
+	ret
+; 0x82277
+
+Func_82277: ; 82277 (20:6277)
+	call Func_82761
+	call Func_828b3
+	ld a, [w2d091]
+	and a
+	ret nz
+
+	play_sfx SFX_0E9
+
+	xor a
+	set 2, a
+	ld [w2d053], a
+	call Func_822b4
+	call Func_826f6
+	ld a, $6a
+	ld [w2d0d0 + $0], a
+	ld a, $c0
+	ld [w2d0d0 + $3], a
+	ld a, $60
+	ld [w2d0d0 + $4], a
+	ld a, $a0
+	ld [w2d0d0 + $1], a
+	ld a, $04
+	ld [w2d0d0 + $2], a
+	ld hl, w2d050
+	inc [hl]
+	ret
+; 0x822b4
 
 Func_822b4: ; 822b4 (20:62b4)
 	call Func_82490
@@ -3453,7 +3651,263 @@ Func_822b4: ; 822b4 (20:62b4)
 	ret
 ; 0x822d7
 
-	INCROM $822d7, $82490
+Func_822d7: ; 822d7 (20:62d7)
+	ld a, [wTempSCY]
+	dec a
+	dec a
+	ld [wTempSCY], a
+	cp $ec
+	jr nz, .asm_822ed
+	ld a, [wcee3]
+	ld [w2d02c], a
+	ld hl, w2d050
+	inc [hl]
+.asm_822ed
+	call Func_824ea
+	ret
+; 0x822f1
+
+Func_822f1: ; 822f1 (20:62f1)
+	call Func_825af
+	jr c, .done
+	call Func_82451
+	jr c, .done
+	ld a, [wJoypadPressed]
+	and B_BUTTON | SELECT
+	jr z, .done
+	play_sfx SFX_0EA
+	ld hl, w2d050
+	inc [hl]
+.done
+	jp Func_824ea
+; 0x82311
+
+Func_82311: ; 82311 (20:6311)
+	ld a, [wTempSCY]
+	inc a
+	inc a
+	ld [wTempSCY], a
+	cp $04
+	jr nz, .asm_82357
+	xor a
+	ld [w2d013], a
+	ld [w2d050], a
+	ld hl, Pals_84900 palette 4
+	ld de, 8 palettes
+	ld a, [wCurMapSide]
+	inc a
+.loop
+	dec a
+	jr z, .got_pal
+	add hl, de
+	jr .loop
+.got_pal
+	ld de, wTempPals2 palette 4
+	ld c, 4 palettes
+	ld b, BANK(Pals_84900)
+	call CopyFarBytes
+	ld a, $6a
+	ld [w2d0d0 + 0], a
+	ld a, $c0
+	ld [w2d0d0 + 3], a
+	ld a, $60
+	ld [w2d0d0 + 4], a
+	ld a, $a0
+	ld [w2d0d0 + 1], a
+	ld a, $04
+	ld [w2d0d0 + 2], a
+.asm_82357
+	call Func_824ea
+	ret
+; 0x8235b
+
+Func_8235b: ; 8235b (20:635b)
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	jr nz, .asm_82369
+	ld a, [w2d051]
+	cp 30
+	jr c, .asm_8237b
+.asm_82369
+	ld a, [w2d00d]
+	ld [wcee3], a
+	xor a
+	ld [wSubState], a
+	xor a
+	ld hl, w2d051
+	ld [hld], a
+	ld a, $04
+	ld [hl], a ; w2d050
+.asm_8237b
+	call Func_824ea
+	ret
+; 0x8237f
+
+Func_8237f: ; 8237f (20:637f)
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	jr nz, .asm_8238d
+	ld a, [w2d051]
+	cp 30
+	jr c, .asm_8239a
+.asm_8238d
+	xor a
+	ld hl, w2d051
+	ld [hld], a
+	ld a, $04
+	ld [hl], a ; w2d050
+	ld a, SST_OVERWORLD_0C
+	ld [wSubState], a
+.asm_8239a
+	call Func_824ea
+	ret
+; 0x8239e
+
+Func_8239e: ; 8239e (20:639e)
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	jr nz, .asm_823ac
+	ld a, [w2d051]
+	cp 30
+	jr c, .asm_823e2
+.asm_823ac
+	xor a
+	ld hl, w2d051
+	ld [hld], a
+	ld a, $04
+	ld [hl], a ; w2d050
+	ld a, [w2d146]
+	ld b, 1
+	cp $0a
+	jr nz, .asm_823bf
+	ld b, -1
+.asm_823bf
+	ld hl, wNextMapSide
+	ld a, b
+	add [hl]
+	and $3 ; wrap around
+	ld [hl], a
+	call .GetNextLevelIndex
+
+	stop_music2
+
+	xor a
+	ld [w2d013], a
+	ld [w2d014], a
+	ld a, SST_OVERWORLD_08
+	ld [wSubState], a
+
+.asm_823e2
+	call Func_824ea
+	ret
+
+.GetNextLevelIndex
+	ld hl, .Indices
+	call AddOffsetInPointerTable
+	dec b
+	jr z, .got_index
+	inc hl
+.got_index
+	ld a, [hl]
+	ld [wMapSideLevelIndex], a
+	ld [w2d068], a
+	ret
+
+.Indices
+	; left, right
+	db OWNORTH_THE_PEACEFUL_VILLAGE, OWNORTH_THE_VAST_PLAIN   ; MAP_NORTH
+	db OWWEST_DESERT_RUINS,          OWWEST_A_TOWN_IN_CHAOS   ; MAP_WEST
+	db OWSOUTH_THE_GRASSLANDS,       OWSOUTH_TOWER_OF_REVIVAL ; MAP_SOUTH
+	db OWEAST_THE_STAGNANT_SWAMP,    OWEAST_FOREST_OF_FEAR    ; MAP_EAST
+; 0x82400
+
+Func_82400: ; 82400 (20:6400)
+	call Func_824ea
+	ld a, [w2d142]
+	cp $04
+	jr z, .asm_8240d
+	cp $06
+	ret nz
+.asm_8240d
+	call Func_80377
+	call Func_82654
+	call Func_826f6
+	ld hl, w2d050
+	inc [hl]
+	ret
+; 0x8241b
+
+Func_8241b: ; 8241b (20:641b)
+	ld a, [w2d146]
+	cp $05
+	jr z, .asm_82426
+	cp $07
+	jr nz, .asm_8242a
+.asm_82426
+	ld hl, w2d050
+	inc [hl]
+.asm_8242a
+	call Func_824ea
+	ret
+; 0x8242e
+
+Func_8242e: ; 8242e (20:642e)
+	farcall Func_84a40
+	ld a, [w2d055]
+	and a
+	jr nz, .asm_8244d
+
+	di
+	call VBlank_80bf9
+	ei
+
+	ld a, $04
+	ld [w2d050], a
+.asm_8244d
+	call Func_824ea
+	ret
+; 0x82451
+
+Func_82451: ; 82451 (20:6451)
+	xor a
+	ld a, [w2d053]
+	ld b, a
+	ld hl, w2d053
+	ld a, [wJoypadPressed]
+	ld c, a
+	ld a, [w2d054]
+	ld d, a
+	bit D_RIGHT_F, c
+	jr nz, .d_right
+	bit D_LEFT_F, c
+	jr nz, .d_left
+	ret
+
+.d_right
+	ld a, d
+	rrc b
+	ret c
+	and b
+	jr z, .d_right
+
+.asm_82471
+	ld [hl], b
+	call Func_82490
+	call Func_82654
+	call Func_826f6
+	play_sfx SFX_0E2
+	scf
+	ret
+
+.d_left
+	ld a, d
+	sla b
+	bit 5, b
+	ret nz
+	and b
+	jr z, .d_left
+	jr .asm_82471
+; 0x82490
 
 Func_82490: ; 82490 (20:6490)
 	ld a, [w2d053]
@@ -3552,9 +4006,217 @@ Func_8250a: ; 8250a (20:650a)
 Func_82521: ; 82521 (20:6521)
 	push hl
 	jumptable
-; 0x82523
 
-	INCROM $82523, $82654
+	dw Func_82541
+	dw Func_82543
+	dw Func_82548
+	dw Func_8254d
+	dw Func_82552
+	dw Func_82557
+	dw Func_8255c
+	dw Func_82567
+	dw Func_8256c
+	dw Func_82577
+	dw Func_8257c
+	dw Func_82581
+	dw Func_82586
+	dw Func_8258b
+	dw Func_82590
+; 0x82541
+
+Func_82541: ; 82541 (20:6541)
+	pop hl
+	ret
+; 0x82543
+
+Func_82543: ; 82543 (2d:6543)
+	ld de, Frameset_aa091
+	jr Func_82593
+
+Func_82548: ; 82548 (2d:6548)
+	ld de, Frameset_aa094
+	jr Func_82593
+
+Func_8254d: ; 8254d (2d:654d)
+	ld de, Frameset_aa097
+	jr Func_82593
+
+Func_82552: ; 82552 (2d:6552)
+	ld de, Frameset_aa09a
+	jr Func_82593
+
+Func_82557: ; 82557 (2d:6557)
+	ld de, Frameset_aa09d
+	jr Func_82593
+
+Func_8255c: ; 8255c (2d:655c)
+	ld de, Frameset_aa0bc
+	pop hl
+	call Func_82594
+	ld b, $07
+	jr Func_8259a
+
+Func_82567: ; 82567 (2d:6567)
+	ld de, Frameset_aa0a3
+	jr Func_82593
+
+Func_8256c: ; 8256c (2d:656c)
+	ld de, Frameset_aa0c1
+	pop hl
+	call Func_82594
+	ld b, $05
+	jr Func_8259a
+
+Func_82577: ; 82577 (2d:6577)
+	ld de, Frameset_aa0a9
+	jr Func_82593
+
+Func_8257c: ; 8257c (2d:657c)
+	ld de, Frameset_aa0ae
+	jr Func_82593
+
+Func_82581: ; 82581 (2d:6581)
+	ld de, Frameset_aa0b1
+	jr Func_82593
+
+Func_82586: ; 82586 (2d:6586)
+	ld de, Frameset_aa0c6
+	jr Func_82593
+
+Func_8258b: ; 8258b (2d:658b)
+	ld de, Frameset_aa0b4
+	jr Func_82593
+
+Func_82590: ; 82590 (2d:6590)
+	ld de, Frameset_aa0b9
+;	fallthrough
+
+Func_82593: ; 82593 (20:6593)
+	pop hl
+;	fallthrough
+
+Func_82594: ; 82594 (20:6594)
+	ld b, $2a
+	call UpdateOWAnimation
+	ret
+
+Func_8259a: ; 8259a (20:659a)
+	ld a, [wOWAnimationFinished]
+	cp $ff
+	ret nz
+	set 2, l
+	ld d, h
+	ld e, l
+	xor a
+	ld [de], a
+	inc e
+	ld [de], a
+	inc e
+	ld a, b
+	ld [de], a
+	call Func_82521
+	ret
+; 0x825af
+
+Func_825af: ; 825af (20:65af)
+	xor a
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	ret z
+	ld a, [w2d053]
+	bit 0, a
+	jr nz, .asm_825cf
+	bit 1, a
+	jr nz, .asm_825e7
+	bit 2, a
+	jr nz, .asm_82600
+	bit 3, a
+	jr nz, .asm_82619
+	bit 4, a
+	jr nz, .asm_8262a
+	xor a
+	ret
+
+.asm_825cf
+	call Func_82640
+	ld de, wBGMap1 tile $26 + $b
+	call Func_8264a
+	ld a, $09
+	ld [w2d050], a
+
+.asm_825dd
+	play_sfx SFX_0E3
+	scf
+	ret
+
+.asm_825e7
+	ld a, [w2d00d]
+	and a
+	ret z
+	call Func_82640
+	ld de, wBGMap1 tile $26 + $9
+	call Func_8264a
+	ld a, $06
+	ld [w2d050], a
+	xor a
+	ld [w2d051], a
+	jr .asm_825dd
+
+.asm_82600
+	call Func_82640
+	ld de, wBGMap1 tile $26 + $7
+	call Func_8264a
+	ld a, $07
+	ld [w2d050], a
+	xor a
+	ld [w2d051], a
+	ld a, $00
+	ld [w2d07b], a
+	jr .asm_825dd
+
+.asm_82619
+	call Func_82640
+	call Func_8263b
+	ld a, $08
+	ld [w2d050], a
+	xor a
+	ld [w2d051], a
+	jr .asm_825dd
+
+.asm_8262a
+	call Func_82640
+	call Func_8263b
+	ld a, $08
+	ld [w2d050], a
+	xor a
+	ld [w2d051], a
+	jr .asm_825dd
+; 0x8263b
+
+Func_8263b: ; 8263b (20:663b)
+	ld hl, w2d14e
+	jr Func_82643
+
+Func_82640: ; 82640 (20:6640)
+	ld hl, w2d146
+;	fallthrough
+
+Func_82643: ; 82643 (20:6643)
+	ld a, [hl]
+	inc a
+	ld [hld], a
+	xor a
+	ld [hld], a
+	ld [hl], a
+	ret
+; 0x8264a
+
+Func_8264a: ; 8264a (20:664a)
+	ld hl, $66ee
+	call Func_8269f
+	call Func_826f6
+	ret
+; 0x82654
 
 Func_82654: ; 82654 (20:6654)
 	ld a, [w2d054]
@@ -3625,14 +4287,267 @@ Func_8269f: ; 8269f (20:669f)
 	jr .loop
 ; 0x826be
 
-	INCROM $826be, $828b3
+	INCROM $826be, $826f6
+
+Func_826f6: ; 826f6 (20:66f6)
+	ld a, HIGH(wBGMap1 tile $2a)
+	ld [wHDMA + 0], a
+	ld a, LOW(wBGMap1 tile $2a)
+	ld [wHDMA + 1], a
+	ld a, $1b
+	ld [wHDMA + 2], a
+	ld a, $c0
+	ld [wHDMA + 3], a
+	ld a, $03
+	ld [wHDMA + 4], a
+
+	ld a, HIGH(wBGMap1 tile $26)
+	ld [w2d0b5 + 0], a
+	ld a, LOW(wBGMap1 tile $26)
+	ld [w2d0b5 + 1], a
+	ld a, $1b
+	ld [w2d0b5 + 2], a
+	ld a, $c0
+	ld [w2d0b5 + 3], a
+	ld a, $03
+	ld [w2d0b5 + 4], a
+	ret
+; 0x82729
+
+	INCROM $82729, $82761
+
+Func_82761: ; 82761 (20:6761)
+	ld a, [wMapSideLevelIndex]
+	ld c, a
+	ld a, [w2d068]
+	cp c
+	jr nz, .asm_82788
+	ld a, [w2d091]
+	cp $02
+	jp z, .Func_8287b
+	cp $03
+	jp z, .asm_827ea
+	call .asm_827a3
+	ret c
+	ld a, [w2d091]
+	cp $01
+	jr z, .asm_827d5
+	cp $00
+	jr z, .asm_827b4
+	ret
+
+.asm_82788
+	xor a
+	ld [w2d096], a
+	ld a, [w2d091]
+	and a
+	ret z
+	cp $02
+	jp z, .Func_8287b
+
+	ld a, $02
+	ld [w2d091], a
+	xor a
+	ld [w2d092], a
+	ld [wMagnifyingGlassInputCounter], a
+	ret
+
+.asm_827a3
+	ld a, [wOWLevel]
+	add a
+	jr z, .asm_827b2
+	ld a, [w2d013]
+	cp $05
+	jr nz, .asm_827b2
+	and a
+	ret
+.asm_827b2
+	scf
+	ret
+
+.asm_827b4
+	ld a, [wHasMagnifyingGlass]
+	and a
+	ret z
+	ld hl, wMagnifyingGlassInputCounter
+	ld a, [wJoypadDown]
+	bit B_BUTTON_F, a
+	jr nz, .b_btn_down
+	xor a
+	ld [hl], a
+	ret
+.b_btn_down
+	inc [hl]
+	ld a, [hl]
+	cp 10
+	ret c
+	ld a, $03
+	ld [w2d091], a
+	xor a
+	ld [w2d092], a
+	ret
+
+.asm_827d5
+	ld a, [wJoypadDown]
+	bit B_BUTTON_F, a
+	ret nz
+	ld hl, w2d0fa
+	res 4, [hl]
+	ld a, $02
+	ld [w2d091], a
+	xor a
+	ld [w2d092], a
+	ret
+
+.asm_827ea
+	ld a, [wJoypadDown]
+	bit B_BUTTON_F, a
+	jr z, .asm_827fd
+	ld a, [w2d092]
+	jumptable
+
+	dw .Func_8280c
+	dw .Func_8281d
+	dw .Func_82837
+	dw .Func_82869
+
+.asm_827fd
+	ld hl, w2d0fa
+	res 4, [hl]
+	ld a, $02
+	ld [w2d091], a
+	xor a
+	ld [w2d092], a
+	ret
+
+.Func_8280c
+	ld hl, w2d0fa
+	set 4, [hl]
+	xor a
+	ld [wHDMA], a
+	ld [w2d0b5], a
+	ld hl, w2d092
+	inc [hl]
+	ret
+
+.Func_8281d
+	ld hl, wWY
+	ld b, [hl]
+	ld a, $78
+	cp b
+	jr nc, .asm_8282d
+	dec [hl]
+	dec [hl]
+	dec [hl]
+	dec [hl]
+	dec [hl]
+	dec [hl]
+	ret
+.asm_8282d
+	ld [hl], a
+	xor a
+	ld [wMagnifyingGlassInputCounter], a
+	ld hl, w2d092
+	inc [hl]
+	ret
+
+.Func_82837
+	ld hl, wMagnifyingGlassInputCounter
+	inc [hl]
+	ld a, [hl]
+	cp $03
+	ret c
+	xor a
+	ld [hl], a
+
+	ld hl, w2d0fa
+.loop_outer
+	ldh a, [rDIV]
+	and $0f
+	inc a
+	ld c, $00
+	scf
+.loop_inner
+	rl c
+	dec a
+	jr nz, .loop_inner
+	ld a, $0f
+	and c
+	jr nz, .asm_82858
+	swap c
+.asm_82858
+	ld a, c
+	and [hl]
+	jr nz, .loop_outer
+
+	ld a, c
+	or [hl]
+	ld [hl], a
+	and $0f
+	cp $0f
+	ret nz
+	ld hl, w2d092
+	inc [hl]
+	ret
+
+.Func_82869
+	ld a, $01
+	ld [w2d091], a
+	xor a
+	ld [w2d092], a
+	ld hl, w2d0fa
+	bit 6, [hl]
+	ret z
+	set 7, [hl]
+	ret
+
+.Func_8287b
+	ld a, [w2d092]
+	jumptable
+
+	dw .Func_82883
+	dw .Func_82899
+
+.Func_82883
+	ld hl, wWY
+	ld a, [hl]
+	cp $90
+	jr nc, .asm_82892
+	inc [hl]
+	inc [hl]
+	inc [hl]
+	inc [hl]
+	inc [hl]
+	inc [hl]
+	ret
+.asm_82892
+	ld [hl], $90
+	ld hl, w2d092
+	inc [hl]
+	ret
+
+.Func_82899
+	ld hl, w2d0fa
+	ld a, $40
+	and [hl]
+	ld [hl], a
+	xor a
+	ld [w2d116], a
+	ld [w2d117], a
+	xor a ; unnecessary
+	ld [w2d091], a
+	xor a ; unnecessary
+	ld [w2d092], a
+	ld [wMagnifyingGlassInputCounter], a
+	ret
+; 0x828b3
 
 Func_828b3: ; 828b3 (20:68b3)
 	ld a, [wca3d]
 	bit 1, a
 	jp nz, Func_82997
 
-	ld a, [wLevelTreasure1Unk]
+	ld a, [wLevelGreyTreasurePal]
 	ld c, a
 	ld e, $00
 	ld a, [w2d0fa]
@@ -3644,7 +4559,7 @@ Func_828b3: ; 828b3 (20:68b3)
 	ld d, $20
 	call Func_8291e
 
-	ld a, [wLevelTreasure2Unk]
+	ld a, [wLevelRedTreasurePal]
 	ld c, a
 	ld e, $01
 	ld a, [w2d0fa]
@@ -3656,7 +4571,7 @@ Func_828b3: ; 828b3 (20:68b3)
 	ld d, $3c
 	call Func_8291e
 
-	ld a, [wLevelTreasure3Unk]
+	ld a, [wLevelGreenTreasurePal]
 	ld c, a
 	ld e, $02
 	ld a, [w2d0fa]
@@ -3668,7 +4583,7 @@ Func_828b3: ; 828b3 (20:68b3)
 	ld d, $58
 	call Func_8291e
 
-	ld a, [wLevelTreasure4Unk]
+	ld a, [wLevelBlueTreasurePal]
 	ld c, a
 	ld e, $03
 	ld a, [w2d0fa]
@@ -3693,10 +4608,10 @@ Func_8291e: ; 8291e (20:691e)
 ;	fallthrough
 
 Func_82920: ; 82920 (20:6920)
-	ld a, [w2d094]
+	ld a, [wWY]
 	add b
 	ld [wCurSpriteYCoord], a
-	ld a, [w2d095]
+	ld a, [wWX]
 	add d
 	ld [wCurSpriteXCoord], a
 	ld a, e
@@ -3743,10 +4658,10 @@ Func_8295b: ; 8295b (20:695b)
 .asm_82975
 	ld a, b
 	ld [wCurSpriteTileID], a
-	ld a, [w2d094]
+	ld a, [wWY]
 	add $10
 	ld [wCurSpriteYCoord], a
-	ld a, [w2d095]
+	ld a, [wWX]
 	add $10
 	ld [wCurSpriteXCoord], a
 	ld a, $00

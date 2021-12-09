@@ -132,7 +132,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld hl, wIntroObj2
 	call Func_1f0940
 
-	ld a, [wKeys]
+	ld a, [wKeyAndTreasureFlags]
 	bit GREY_KEY_F, a
 	jr z, .asm_1f0168
 	ld hl, wIntroObj3
@@ -156,7 +156,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	call Func_1f0940
 
 .asm_1f0168
-	ld a, [wKeys]
+	ld a, [wKeyAndTreasureFlags]
 	bit RED_KEY_F, a
 	jr z, .asm_1f018f
 	ld hl, wIntroObj4
@@ -180,7 +180,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	call Func_1f0940
 
 .asm_1f018f
-	ld a, [wKeys]
+	ld a, [wKeyAndTreasureFlags]
 	bit GREEN_KEY_F, a
 	jr z, .asm_1f01b6
 	ld hl, $d553
@@ -204,7 +204,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	call Func_1f0940
 
 .asm_1f01b6
-	ld a, [wKeys]
+	ld a, [wKeyAndTreasureFlags]
 	bit BLUE_KEY_F, a
 	jr z, .asm_1f01dd
 	ld hl, $d55e
@@ -240,7 +240,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, [wKeys]
+	ld a, [wKeyAndTreasureFlags]
 	bit 4, a
 	jr z, .asm_1f01fd
 	ld a, $5c
@@ -269,7 +269,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, [wKeys]
+	ld a, [wKeyAndTreasureFlags]
 	bit 5, a
 	jr z, .asm_1f022c
 	ld a, $5c
@@ -298,7 +298,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, [wKeys]
+	ld a, [wKeyAndTreasureFlags]
 	bit 6, a
 	jr z, .asm_1f025b
 	ld a, $5c
@@ -327,7 +327,7 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, [wKeys]
+	ld a, [wKeyAndTreasureFlags]
 	bit 7, a
 	jr z, .asm_1f028a
 	ld a, $5c

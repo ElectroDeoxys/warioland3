@@ -277,9 +277,9 @@ Func_80aa: ; 80aa (2:40aa)
 
 	ld hl, wca3d
 	ld a, [wLevelEndScreen]
-	cp LEVEL_END_GAME_OVER
+	cp LVLEND_GAME_OVER
 	jr z, .game_over
-	cp LEVEL_END_EPILOGUE
+	cp LVLEND_EPILOGUE
 	jr z, .epilogue
 
 	ld hl, wState
@@ -325,7 +325,7 @@ Func_80aa: ; 80aa (2:40aa)
 	and a
 	jr z, .asm_82d8
 	ld a, [wSubState]
-	ld [wced5], a
+	ld [wPendingSubState], a
 	ld a, $07
 	ld [wSubState], a
 	ret
@@ -365,7 +365,7 @@ Func_80aa: ; 80aa (2:40aa)
 	ld a, $01
 	ld [wced6], a
 	ld a, [wSubState]
-	ld [wced5], a
+	ld [wPendingSubState], a
 	ld a, ST_04
 	ld [wState], a
 	xor a
@@ -493,7 +493,7 @@ Func_846e: ; 846e (2:446e)
 	pop af
 	ldh [rSVBK], a
 	ld a, [wSubState]
-	ld [wced5], a
+	ld [wPendingSubState], a
 	ld hl, wState
 	ld [hl], ST_05
 	xor a
@@ -755,7 +755,7 @@ Func_867f: ; 867f (2:467f)
 	xor a
 	ld [wceda], a
 	ld [wIsFloorTransition], a
-	ld a, [wced5]
+	ld a, [wPendingSubState]
 	ld [wSubState], a
 	ret
 ; 0x8747

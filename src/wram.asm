@@ -531,7 +531,12 @@ wLanguage:: ; ca46
 ; bit 1: red key
 ; bit 2: green key
 ; bit 3: blue key
-wKeys:: ; ca5b
+; collected treasures in the level
+; bit 4: grey treasure
+; bit 5: red treasure
+; bit 6: green treasure
+; bit 7: blue treasure
+wKeyAndTreasureFlags:: ; ca5b
 	ds $1
 
 wNumMusicalCoins:: ; ca5c
@@ -928,11 +933,11 @@ wced3:: ; ced3
 	ds $1
 
 ; which screen to fade out to for level end
-; LEVEL_END_* constant
+; LVLEND_* constant
 wLevelEndScreen:: ; ced4
 	ds $1
 
-wced5:: ; ced5
+wPendingSubState:: ; ced5
 	ds $1
 
 wced6:: ; ced6
@@ -1135,7 +1140,7 @@ wOWLevel:: ; d00f
 w2d011:: ; d011
 	ds $1
 
-w2d012:: ; d012
+wNextMapSide:: ; d012
 	ds $1
 
 w2d013:: ; d013
@@ -1160,7 +1165,7 @@ w2d019:: ; d019
 	ds $1
 
 ; MAP_* constant
-wMapSide:: ; d01a
+wCurMapSide:: ; d01a
 	ds $1
 
 w2d01b:: ; d01b
@@ -1168,7 +1173,7 @@ w2d01b:: ; d01b
 
 	ds $1
 
-w2d01d:: ; d01d
+wMapSideLevelIndex:: ; d01d
 	ds $1
 
 w2d01e:: ; d01e
@@ -1293,7 +1298,10 @@ w2d049:: ; d049
 w2d050:: ; d050
 	ds $1
 
-	ds $2
+w2d051:: ; d051
+	ds $1
+
+	ds $1
 
 w2d053:: ; d053
 	ds $1
@@ -1304,6 +1312,7 @@ w2d054:: ; d054
 w2d055:: ; d055
 	ds $1
 
+w2d056:: ; d056
 	ds $1
 
 ; which crayons have been collected
@@ -1384,6 +1393,7 @@ w2d079:: ; d079
 w2d07a:: ; d07a
 	ds $1
 
+w2d07b:: ; d07b
 	ds $1
 
 w2d07c:: ; d07c
@@ -1404,18 +1414,12 @@ w2d081:: ; d081
 	ds $1
 
 w2d082:: ; d082
-	ds $1
-
-w2d083:: ; d083
-	ds $1
+	ds $2
 
 	ds $2
 
 w2d086:: ; d086
-	ds $1
-
-w2d087:: ; d087
-	ds $1
+	ds $2
 
 	ds $8
 
@@ -1425,15 +1429,22 @@ wHasMagnifyingGlass:: ; d090
 w2d091:: ; d091
 	ds $1
 
-	ds $2
-
-w2d094:: ; d094
+w2d092:: ; d092
 	ds $1
 
-w2d095:: ; d095
+wMagnifyingGlassInputCounter:: ; d093
 	ds $1
 
-	ds $1a
+wWY:: ; d094
+	ds $1
+
+wWX:: ; d095
+	ds $1
+
+w2d096:: ; d096
+	ds $1
+
+	ds $19
 
 wHDMA:: ; d0b0
 	ds $5
@@ -1455,12 +1466,26 @@ w2d0d6:: ; d0d6
 w2d0db:: ; d0db
 	ds $1
 
-	ds $4
+w2d0dc:: ; d0dc
+	ds $1
+
+w2d0dd:: ; d0dd
+	ds $1
+
+	ds $2
 
 w2d0e0:: ; d0e0
 	ds $1
 
-	ds $d
+w2d0e1:: ; d0e1
+	ds $1
+
+	ds $1
+
+w2d0e3:: ; d0e3
+	ds $1
+
+	ds $a
 
 w2d0ee:: ; d0ee
 	ds $1
@@ -1469,15 +1494,15 @@ w2d0ef:: ; d0ef
 	ds $1
 
 wLevelTreasureIDs::
-wLevelTreasure1ID:: ds $1 ; d0f0
-wLevelTreasure2ID:: ds $1 ; d0f1
-wLevelTreasure3ID:: ds $1 ; d0f2
-wLevelTreasure4ID:: ds $1 ; d0f3
+wLevelGreyTreasureID::  ds $1 ; d0f0
+wLevelRedTreasureID::   ds $1 ; d0f1
+wLevelGreenTreasureID:: ds $1 ; d0f2
+wLevelBlueTreasureID::  ds $1 ; d0f3
 
-wLevelTreasure1Unk:: ds $1 ; d0f4
-wLevelTreasure2Unk:: ds $1 ; d0f5
-wLevelTreasure3Unk:: ds $1 ; d0f6
-wLevelTreasure4Unk:: ds $1 ; d0f7
+wLevelGreyTreasurePal::  ds $1 ; d0f4
+wLevelRedTreasurePal::   ds $1 ; d0f5
+wLevelGreenTreasurePal:: ds $1 ; d0f6
+wLevelBlueTreasurePal::  ds $1 ; d0f7
 
 	ds $2
 
@@ -1508,6 +1533,7 @@ w2d107:: ; d107
 w2d109:: ; d109
 	ds $2
 
+wOWAllowedDPadInput:: ; d10b
 	ds $1
 
 w2d10c:: ; d10c
@@ -1532,7 +1558,10 @@ w2d114:: ; d114
 w2d116:: ; d116
 	ds $1
 
-	ds $7
+w2d117:: ; d117
+	ds $1
+
+	ds $6
 
 wCurOWObj:: ; d11e
 	ds $2
@@ -1572,7 +1601,10 @@ w2d140:: ; d140
 w2d141:: ; d141
 	ds $1
 
-	ds $2
+w2d142:: ; d142
+	ds $1
+
+	ds $1
 
 w2d144:: ; d144
 	ds $2
@@ -1643,12 +1675,32 @@ w2d800:: ; d800
 w2d801:: ; d801
 	ds $1
 
-	ds $286
-
-w2da88:: ; da88
+w2d802:: ; d802
 	ds $1
 
-	ds $f7
+w2d803:: ; d803
+	ds $1
+
+	ds $2
+
+w2d806:: ; d806
+	ds $1
+
+w2d807:: ; d807
+	ds $1
+
+w2d808:: ; d808
+	ds $1
+
+w2d809:: ; d809
+	ds $1
+
+	ds $6
+
+w2d810:: ; d810
+	ds $60 * $8
+
+	ds $70
 
 w2db80:: ; db80
 	ds $1
@@ -1832,7 +1884,10 @@ w3d500:: ; d500
 w3d501:: ; d501
 	ds $1
 
-	ds $5
+w3d502:: ; d502
+	ds $1
+
+	ds $4
 
 w3d507:: ; d507
 	ds $2

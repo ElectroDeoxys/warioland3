@@ -1533,59 +1533,61 @@ Func_4a33: ; 4a33 (1:4a33)
 	ret
 ; 0x4a63
 
-Func_4a63: ; 4a63 (1:4a63)
+; sets flags in wKeyAndTreasureFlags
+; corresponding to the collected treasures
+; in wOWLevel
+GetOWLevelCollectedTreasures: ; 4a63 (1:4a63)
 	xor a
-	ld [wKeys], a
+	ld [wKeyAndTreasureFlags], a
 	ldh a, [rSVBK]
 	push af
-	ld a, $02
+	ld a, BANK(wOWLevel)
 	ldh [rSVBK], a
 	ld a, [wOWLevel]
 	dec a
-	call Func_4a79
+	call .SetFlags
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0x4a79
 
-Func_4a79: ; 4a79 (1:4a79)
+.SetFlags
 	add a
 	add a ; *4
 	ld e, a
 	ld d, $00
-	ld hl, LevelTreasureIDs + 4
+	ld hl, LevelTreasureIDs + NUM_LEVEL_TREASURES
 	add hl, de
 	ld a, [hli]
 	push hl
 	call IsTreasureCollected
-	jr z, .asm_4a8e
-	ld hl, wKeys
-	set 4, [hl]
-.asm_4a8e
+	jr z, .red
+	ld hl, wKeyAndTreasureFlags
+	set GREY_TREASURE_F, [hl]
+.red
 	pop hl
 	ld a, [hli]
 	push hl
 	call IsTreasureCollected
-	jr z, .asm_4a9b
-	ld hl, wKeys
-	set 5, [hl]
-.asm_4a9b
+	jr z, .green
+	ld hl, wKeyAndTreasureFlags
+	set RED_TREASURE_F, [hl]
+.green
 	pop hl
 	ld a, [hli]
 	push hl
 	call IsTreasureCollected
-	jr z, .asm_4aa8
-	ld hl, wKeys
-	set 6, [hl]
-.asm_4aa8
+	jr z, .blue
+	ld hl, wKeyAndTreasureFlags
+	set GREEN_TREASURE_F, [hl]
+.blue
 	pop hl
 	ld a, [hli]
 	push hl
 	call IsTreasureCollected
-	jr z, .asm_4ab5
-	ld hl, wKeys
-	set 7, [hl]
-.asm_4ab5
+	jr z, .done
+	ld hl, wKeyAndTreasureFlags
+	set BLUE_TREASURE_F, [hl]
+.done
 	pop hl
 	ret
 ; 0x4ab7

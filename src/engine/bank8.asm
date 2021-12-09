@@ -1867,25 +1867,25 @@ Func_20fe8: ; 20fe8 (8:4fe8)
 ; 0x20fed
 
 ObjInteraction_GreyKey: ; 20fed (8:4fed)
-	ld hl, wKeys
+	ld hl, wKeyAndTreasureFlags
 	set GREY_KEY_F, [hl]
 	jr CollectKey
 ; 0x20ff4
 
 ObjInteraction_RedKey: ; 20ff4 (8:4ff4)
-	ld hl, wKeys
+	ld hl, wKeyAndTreasureFlags
 	set RED_KEY_F, [hl]
 	jr CollectKey
 ; 0x20ffb
 
 ObjInteraction_GreenKey: ; 20ffb (8:4ffb)
-	ld hl, wKeys
+	ld hl, wKeyAndTreasureFlags
 	set GREEN_KEY_F, [hl]
 	jr CollectKey
 ; 0x21002
 
 ObjInteraction_BlueKey: ; 21002 (8:5002)
-	ld hl, wKeys
+	ld hl, wKeyAndTreasureFlags
 	set BLUE_KEY_F, [hl]
 ;	fallthrough
 
@@ -1906,11 +1906,11 @@ ObjInteraction_GreyTreasure: ; 2101c (8:501c)
 	ld a, [wTransformation]
 	and a
 	jp nz, Func_20a6f
-	ld hl, wKeys
+	ld hl, wKeyAndTreasureFlags
 	bit GREY_KEY_F, [hl]
 	jp z, Func_20a6f
 	set 4, [hl]
-	ld a, LEVEL_END_GREY_TREASURE
+	ld a, LVLEND_GREY_TREASURE
 	ld [wLevelEndScreen], a
 	jr GetTreasure
 ; 0x2103c
@@ -1922,11 +1922,11 @@ ObjInteraction_RedTreasure: ; 2103c (8:503c)
 	ld a, [wTransformation]
 	and a
 	jp nz, Func_20a6f
-	ld hl, wKeys
+	ld hl, wKeyAndTreasureFlags
 	bit RED_KEY_F, [hl]
 	jp z, Func_20a6f
 	set 5, [hl]
-	ld a, LEVEL_END_RED_TREASURE
+	ld a, LVLEND_RED_TREASURE
 	ld [wLevelEndScreen], a
 	jr GetTreasure
 ; 0x2105c
@@ -1938,11 +1938,11 @@ ObjInteraction_GreenTreasure: ; 2105c (8:505c)
 	ld a, [wTransformation]
 	and a
 	jp nz, Func_20a6f
-	ld hl, wKeys
+	ld hl, wKeyAndTreasureFlags
 	bit GREEN_KEY_F, [hl]
 	jp z, Func_20a6f
 	set 6, [hl]
-	ld a, LEVEL_END_GREEN_TREASURE
+	ld a, LVLEND_GREEN_TREASURE
 	ld [wLevelEndScreen], a
 	jr GetTreasure
 ; 0x2107c
@@ -1954,11 +1954,11 @@ ObjInteraction_BlueTreasure: ; 2107c (8:507c)
 	ld a, [wTransformation]
 	and a
 	jp nz, Func_20a6f
-	ld hl, wKeys
+	ld hl, wKeyAndTreasureFlags
 	bit BLUE_KEY_F, [hl]
 	jp z, Func_20a6f
 	set 7, [hl]
-	ld a, LEVEL_END_BLUE_TREASURE
+	ld a, LVLEND_BLUE_TREASURE
 	ld [wLevelEndScreen], a
 ;	fallthrough
 
@@ -1969,7 +1969,7 @@ GetTreasure: ; 2109a (8:509a)
 
 	ld hl, wLevelEndScreen
 	ld a, [hl]
-	cp LEVEL_END_NO_TREASURE
+	cp LVLEND_NO_TREASURE
 	ret z
 	set 7, [hl]
 	ld a, TRUE

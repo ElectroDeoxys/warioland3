@@ -1222,7 +1222,7 @@ UpdateState_DraggedDown: ; 1a046 (6:6046)
 	ret
 
 .set_game_over
-	ld a, LEVEL_END_GAME_OVER
+	ld a, LVLEND_GAME_OVER
 	ld [wLevelEndScreen], a
 	ret
 ; 0x1a077

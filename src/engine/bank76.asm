@@ -214,9 +214,9 @@ Func_1d8c2c: ; 1d8c2c (76:4c2c)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld c, LOW(rHDMA1)
-	ld a, HIGH(wBGMap2 + $240)
+	ld a, HIGH(wBGMap2 tile $24)
 	ld [$ff00+c], a
-	ld a, LOW(wBGMap2 + $240)
+	ld a, LOW(wBGMap2 tile $24)
 	inc c
 	ld [$ff00+c], a
 	ld a, $17

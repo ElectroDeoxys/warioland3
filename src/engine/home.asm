@@ -317,7 +317,45 @@ HandleSound: ; 290 (0:290)
 	ret
 ; 0x2cf
 
-	INCROM $2cf, $334
+	INCROM $2cf, $302
+
+Func_302: ; 302 (0:302)
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK("GFX RAM")
+	ldh [rSVBK], a
+
+	ld hl, w3d502
+	ld a, [hl]
+	and a
+	jr z, .asm_32d
+	ld a, [wJoypadPressed]
+	and D_PAD
+	jr nz, .asm_32d
+	ld a, [wJoypadDown]
+	and D_PAD
+	jr z, .asm_32d
+	dec [hl]
+	jr nz, .done
+
+; add down Joypad buttons
+; to the pressed buttons
+	ld b, a
+	ld a, [wJoypadPressed]
+	or b
+	ld [wJoypadPressed], a
+
+	ld a, $08
+	jr .asm_32f
+.asm_32d
+	ld a, $10
+.asm_32f
+	ld [hl], a
+.done
+	pop af
+	ldh [rSVBK], a
+	ret
+; 0x334
 
 ; store in wVBlankFunc a return function
 VBlank_Ret: ; 334 (0:334)
@@ -3068,12 +3106,13 @@ Func_15dc: ; 15dc (0:15dc)
 	jr z, .asm_1610
 .asm_15ff
 	ld a, [wSubState]
-	ld [wced5], a
+	ld [wPendingSubState], a
 	ld a, ST_04
 	ld [wState], a
 	ld a, $18
 	ld [wSubState], a
 	ret
+
 .asm_1610
 	ld hl, wState
 	ld [hl], ST_0d
@@ -5011,11 +5050,11 @@ Func_3ad7: ; 3ad7 (0:3ad7)
 	swap a
 	add c
 	ld l, a
-	ld [w2d082], a
+	ld [w2d082 + 0], a
 	ld a, b
 	add $d5
 	ld h, a
-	ld [w2d083], a
+	ld [w2d082 + 1], a
 	ret
 ; 0x3af7
 
