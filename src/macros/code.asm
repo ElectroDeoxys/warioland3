@@ -39,3 +39,9 @@ else
 	call hCallFunc
 endc
 ENDM
+
+debug_nop: MACRO
+.loop_debug_nop
+	nop
+	jr .loop_debug_nop
+ENDM

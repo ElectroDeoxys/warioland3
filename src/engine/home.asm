@@ -3340,7 +3340,14 @@ Func_1762: ; 1762 (0:1762)
 	ret
 ; 0x1783
 
-	INCROM $1783, $1827
+Func_1783: ; 1783 (0:1783)
+	farcall Func_d4876
+	ld a, b
+	and a
+	ret
+; 0x1795
+
+	INCROM $1795, $1827
 
 PalsWhite: ; 1827 (0:1827)
 	rgb 31, 31, 31
@@ -5336,7 +5343,15 @@ GetByteFromPointerInHL: ; 3c71 (0:3c71)
 	ret
 ; 0x3c76
 
-	INCROM $3c76, $3f00
+Func_3c76: ; 3c76 (0:3c76)
+	xor a
+	ld hl, w2d0c0
+	ld bc, $10
+	call WriteAToHL_BCTimes
+	ret
+; 0x3c81
+
+	INCROM $3c81, $3f00
 
 DoAudioFunc_InitAudio: ; 3f00 (0:3f00)
 	call BackupBankAndSwitchToAudioBank

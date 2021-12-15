@@ -494,7 +494,7 @@ wLevel:: ; ca06
 	ds $1
 
 wca07:: ; ca07
-	ds $32
+	ds 2 * $19
 
 wca39:: ; ca39
 	ds $1
@@ -514,6 +514,7 @@ wPowerUpLevel:: ; ca3c
 wca3d:: ; ca3d
 	ds $1
 
+wca3e:: ; ca3e
 	ds $4
 
 wca42:: ; ca42
@@ -1295,7 +1296,9 @@ w2d049:: ; d049
 
 	ds $6
 
-w2d050:: ; d050
+; $0 = hidden
+; $1 = turning visible
+wTopBarState:: ; d050
 	ds $1
 
 w2d051:: ; d051
@@ -1360,7 +1363,11 @@ w2d06d:: ; d06d
 w2d06e:: ; d06e
 	ds $1
 
-	ds $2
+w2d06f:: ; d06f
+	ds $1
+
+w2d070:: ; d070
+	ds $1
 
 w2d071:: ; d071
 	ds $1
@@ -1426,13 +1433,14 @@ w2d086:: ; d086
 wHasMagnifyingGlass:: ; d090
 	ds $1
 
-w2d091:: ; d091
+; BOTBAR_* constant
+wBottomBarAction:: ; d091
 	ds $1
 
-w2d092:: ; d092
+wBottomBarState:: ; d092
 	ds $1
 
-wMagnifyingGlassInputCounter:: ; d093
+wMagnifyingGlassCounter:: ; d093
 	ds $1
 
 wWY:: ; d094
@@ -1444,7 +1452,36 @@ wWX:: ; d095
 w2d096:: ; d096
 	ds $1
 
-	ds $19
+	ds $9
+
+w2d0a0:: ; d0a0
+	ds $1
+
+w2d0a1:: ; d0a1
+	ds $1
+
+w2d0a2:: ; d0a2
+	ds $1
+
+w2d0a3:: ; d0a3
+	ds $1
+
+w2d0a4:: ; d0a4
+	ds $1
+
+w2d0a5:: ; d0a5
+	ds $1
+
+w2d0a6:: ; d0a6
+	ds $1
+
+w2d0a7:: ; d0a7
+	ds $1
+
+w2d0a8:: ; d0a8
+	ds $1
+
+	ds $7
 
 wHDMA:: ; d0b0
 	ds $5
@@ -1452,7 +1489,11 @@ wHDMA:: ; d0b0
 w2d0b5:: ; d0b5
 	ds $5
 
-	ds $16
+	ds $6
+
+	
+w2d0c0:: ; d0dc0
+	ds $10
 
 w2d0d0:: ; d0d0
 	ds $5
@@ -1480,12 +1521,19 @@ w2d0e0:: ; d0e0
 w2d0e1:: ; d0e1
 	ds $1
 
+w2d0e2:: ; d0e2
 	ds $1
 
 w2d0e3:: ; d0e3
 	ds $1
 
-	ds $a
+w2d0e4:: ; d0e4
+	ds $1
+
+w2d0e5:: ; d0e5
+	ds $1
+
+	ds $8
 
 w2d0ee:: ; d0ee
 	ds $1
@@ -1509,7 +1557,10 @@ wLevelBlueTreasurePal::  ds $1 ; d0f7
 w2d0fa:: ; d0fa
 	ds $1
 
-	ds $5
+	ds $1
+
+wBottomBarTreasureIDs:: ; d0fc
+	ds NUM_LEVEL_TREASURES
 
 w2d100:: ; d100
 	ds $1
@@ -1639,7 +1690,12 @@ w2d14e:: ; d14e
 w2d158:: ; d158
 	ds $1
 
-	ds $27
+	ds $7
+
+w2d160:: ; d160
+	ds $8
+
+	ds $18
 
 w2d180:: ; d180
 	ds $4

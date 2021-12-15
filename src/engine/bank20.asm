@@ -253,7 +253,415 @@ Data_801fe: ; 801fe (20:41fe)
 	db $08, $00
 ; 0x8023e
 
-	INCROM $8023e, $80366
+Data_8023e: ; 8023e (20:423e)
+	dw .North ; MAP_NORTH
+	dw .West ; MAP_WEST
+	dw .South ; MAP_SOUTH
+	dw .East ; MAP_EAST
+
+.North
+; OWNORTH_THE_TEMPLE
+	db $80 ; right
+	db OWNORTH_OUT_OF_THE_WOODS ; left
+	db $80 ; up
+	db $80 ; down
+
+	db $00 ; right
+	db $01 ; left
+	db $00 ; up
+	db $00 ; down
+
+; OWNORTH_OUT_OF_THE_WOODS
+	db OWNORTH_THE_TEMPLE ; right
+	db $80 ; left
+	db $80 ; up
+	db OWNORTH_JUNCTION ; down
+
+	db $01 ; right
+	db $00 ; left
+	db $00 ; up
+	db $01 ; down
+
+; OWNORTH_THE_PEACEFUL_VILLAGE
+	db $80 ; right
+	db OW_EXIT_LEFT ; left
+	db OWNORTH_JUNCTION ; up
+	db $80 ; down
+
+	db $00 ; right
+	db $01 ; left
+	db $01 ; up
+	db $00 ; down
+
+; OWNORTH_THE_VAST_PLAIN
+	db OW_EXIT_RIGHT ; right
+	db OWNORTH_JUNCTION ; left
+	db $80 ; up
+	db OWNORTH_BANK_OF_THE_WILD_RIVER ; down
+
+	db $04 ; right
+	db $01 ; left
+	db $00 ; up
+	db $02 ; down
+
+; OWNORTH_BANK_OF_THE_WILD_RIVER
+	db OWNORTH_THE_VAST_PLAIN ; right
+	db $80 ; left
+	db $80 ; up
+	db OWNORTH_THE_TIDAL_COAST ; down
+
+	db $03 ; right
+	db $00 ; left
+	db $00 ; up
+	db $02 ; down
+
+; OWNORTH_THE_TIDAL_COAST
+	db OWNORTH_SEA_TURTLE_ROCKS ; right
+	db OWNORTH_BANK_OF_THE_WILD_RIVER ; left
+	db $80 ; up
+	db $80 ; down
+
+	db $01 ; right
+	db $03 ; left
+	db $00 ; up
+	db $00 ; down
+
+; OWNORTH_SEA_TURTLE_ROCKS
+	db $80 ; right
+	db OWNORTH_THE_TIDAL_COAST ; left
+	db $80 ; up
+	db $80 ; down
+
+	db $00 ; right
+	db $01 ; left
+	db $00 ; up
+	db $00 ; down
+
+; OWNORTH_JUNCTION
+	db OWNORTH_THE_VAST_PLAIN ; right
+	db $80 ; left
+	db OWNORTH_OUT_OF_THE_WOODS ; up
+	db OWNORTH_THE_PEACEFUL_VILLAGE ; down
+
+	db $01 ; right
+	db $00 ; left
+	db $01 ; up
+	db $01 ; down
+
+
+.West
+; OWWEST_DESERT_RUINS
+	db $80 ; right
+	db OW_EXIT_LEFT ; left
+	db OWWEST_THE_VOLCANOS_BASE ; up
+	db $80 ; down
+
+	db $00 ; right
+	db $01 ; left
+	db $02 ; up
+	db $00 ; down
+
+; OWWEST_THE_VOLCANOS_BASE
+	db $80 ; right
+	db OWWEST_DESERT_RUINS ; left
+	db OWWEST_THE_WEST_CRATER ; up
+	db OWWEST_THE_POOL_OF_RAIN ; down
+
+	db $00 ; right
+	db $03 ; left
+	db $02 ; up
+	db $02 ; down
+
+; OWWEST_THE_POOL_OF_RAIN
+	db OWWEST_A_TOWN_IN_CHAOS ; right
+	db OWWEST_THE_VOLCANOS_BASE ; left
+	db $80 ; up
+	db OWWEST_BENEATH_THE_WAVES ; down
+
+	db $03 ; right
+	db $03 ; left
+	db $00 ; up
+	db $01 ; down
+
+; OWWEST_A_TOWN_IN_CHAOS
+	db $80 ; right
+	db $80 ; left
+	db OW_EXIT_RIGHT ; up
+	db OWWEST_THE_POOL_OF_RAIN ; down
+
+	db $00 ; right
+	db $00 ; left
+	db $02 ; up
+	db $02 ; down
+
+; OWWEST_BENEATH_THE_WAVES
+	db $80 ; right
+	db $80 ; left
+	db OWWEST_THE_POOL_OF_RAIN ; up
+	db $80 ; down
+
+	db $00 ; right
+	db $00 ; left
+	db $01 ; up
+	db $00 ; down
+
+; OWWEST_THE_WEST_CRATER
+	db $80 ; right
+	db OWWEST_THE_VOLCANOS_BASE ; left
+	db $80 ; up
+	db $80 ; down
+
+	db $00 ; right
+	db $03 ; left
+	db $00 ; up
+	db $00 ; down
+
+
+.South
+; OWSOUTH_THE_GRASSLANDS
+	db OWSOUTH_THE_BIG_BRIDGE ; right
+	db OW_EXIT_LEFT ; left
+	db $80 ; up
+	db $80 ; down
+
+	db $01 ; right
+	db $01 ; left
+	db $00 ; up
+	db $00 ; down
+
+; OWSOUTH_THE_BIG_BRIDGE
+	db OWSOUTH_TOWER_OF_REVIVAL ; right
+	db OWSOUTH_THE_GRASSLANDS ; left
+	db OWSOUTH_CAVE_OF_FLAMES ; up
+	db OWSOUTH_THE_STEEP_CANYON ; down
+
+	db $01 ; right
+	db $01 ; left
+	db $02 ; up
+	db $02 ; down
+
+; OWSOUTH_TOWER_OF_REVIVAL
+	db OW_EXIT_RIGHT ; right
+	db OWSOUTH_THE_BIG_BRIDGE ; left
+	db OWSOUTH_ABOVE_THE_CLOUDS ; up
+	db $80 ; down
+
+	db $01 ; right
+	db $01 ; left
+	db $02 ; up
+	db $00 ; down
+
+; OWSOUTH_THE_STEEP_CANYON
+	db $80 ; right
+	db OWSOUTH_THE_BIG_BRIDGE ; left
+	db $80 ; up
+	db $80 ; down
+
+	db $00 ; right
+	db $03 ; left
+	db $00 ; up
+	db $00 ; down
+
+; OWSOUTH_CAVE_OF_FLAMES
+	db $80 ; right
+	db OWSOUTH_THE_BIG_BRIDGE ; left
+	db $80 ; up
+	db $80 ; down
+
+	db $00 ; right
+	db $03 ; left
+	db $00 ; up
+	db $00 ; down
+
+; OWSOUTH_ABOVE_THE_CLOUDS
+	db $80 ; right
+	db OWSOUTH_TOWER_OF_REVIVAL ; left
+	db $80 ; up
+	db $80 ; down
+
+	db $00 ; right
+	db $03 ; left
+	db $00 ; up
+	db $00 ; down
+
+
+.East
+; OWEAST_THE_STAGNANT_SWAMP
+	db $80 ; right
+	db OW_EXIT_LEFT ; left
+	db OWEAST_CASTLE_OF_ILLUSIONS ; up
+	db OWEAST_THE_FRIGID_SEA ; down
+
+	db $00 ; right
+	db $01 ; left
+	db $02 ; up
+	db $02 ; down
+
+; OWEAST_THE_FRIGID_SEA
+	db $80 ; right
+	db OWEAST_THE_STAGNANT_SWAMP ; left
+	db OWEAST_THE_COLOSSAL_HOLE ; up
+	db $80 ; down
+
+	db $00 ; right
+	db $03 ; left
+	db $01 ; up
+	db $00 ; down
+
+; OWEAST_CASTLE_OF_ILLUSIONS
+	db $80 ; right
+	db OWEAST_THE_STAGNANT_SWAMP ; left
+	db OWEAST_THE_EAST_CRATER ; up
+	db $80 ; down
+
+	db $00 ; right
+	db $03 ; left
+	db $01 ; up
+	db $00 ; down
+
+; OWEAST_THE_COLOSSAL_HOLE
+	db $80 ; right
+	db $80 ; left
+	db OWEAST_FOREST_OF_FEAR ; up
+	db OWEAST_THE_FRIGID_SEA ; down
+
+	db $00 ; right
+	db $00 ; left
+	db $02 ; up
+	db $01 ; down
+
+; OWEAST_THE_WARPED_VOID
+	db $80 ; right
+	db $80 ; left
+	db OWEAST_FOREST_OF_FEAR ; up
+	db $80 ; down
+
+	db $00 ; right
+	db $00 ; left
+	db $01 ; up
+	db $00 ; down
+
+; OWEAST_THE_EAST_CRATER
+	db $80 ; right
+	db $80 ; left
+	db $80 ; up
+	db OWEAST_CASTLE_OF_ILLUSIONS ; down
+
+	db $00 ; right
+	db $00 ; left
+	db $00 ; up
+	db $01 ; down
+
+; OWEAST_FOREST_OF_FEAR
+	db OW_EXIT_RIGHT ; right
+	db OWEAST_THE_COLOSSAL_HOLE ; left
+	db $80 ; up
+	db OWEAST_THE_WARPED_VOID ; down
+
+	db $01 ; right
+	db $03 ; left
+	db $00 ; up
+	db $01 ; down
+; 0x8031e
+
+Data_8031e: ; 8031e (20:431e)
+	dw .North ; MAP_NORTH
+	dw .West ; MAP_WEST
+	dw .South ; MAP_SOUTH
+	dw .East ; MAP_EAST
+
+.North
+; OW_EXIT_RIGHT
+	db $80 ; right
+	db OWNORTH_THE_VAST_PLAIN ; left
+	db $80 ; up
+	db $80 ; down
+
+	db $00 ; right
+	db $04 ; left
+	db $00 ; up
+	db $00 ; down
+
+; OW_EXIT_LEFT
+	db OWNORTH_THE_PEACEFUL_VILLAGE ; right
+	db $80 ; left
+	db $80 ; up
+	db $80 ; down
+
+	db $01 ; right
+	db $00 ; left
+	db $00 ; up
+	db $00 ; down
+
+.West
+; OW_EXIT_RIGHT
+	db $80 ; right
+	db OWWEST_A_TOWN_IN_CHAOS ; left
+	db $80 ; up
+	db $80 ; down
+
+	db $00 ; right
+	db $03 ; left
+	db $00 ; up
+	db $00 ; down
+
+; OW_EXIT_LEFT
+	db OWWEST_DESERT_RUINS ; right
+	db $80 ; left
+	db $80 ; up
+	db $80 ; down
+
+	db $01 ; right
+	db $00 ; left
+	db $00 ; up
+	db $00 ; down
+
+.South
+; OW_EXIT_RIGHT
+	db $80 ; right
+	db OWSOUTH_TOWER_OF_REVIVAL ; left
+	db $80 ; up
+	db $80 ; down
+
+	db $00 ; right
+	db $01 ; left
+	db $00 ; up
+	db $00 ; down
+
+; OW_EXIT_LEFT
+	db OWSOUTH_THE_GRASSLANDS ; right
+	db $80 ; left
+	db $80 ; up
+	db $80 ; down
+
+	db $01 ; right
+	db $00 ; left
+	db $00 ; up
+	db $00 ; down
+
+.East
+; OW_EXIT_RIGHT
+	db $80 ; right
+	db OWEAST_FOREST_OF_FEAR ; left
+	db $80 ; up
+	db $80 ; down
+
+	db $00 ; right
+	db $01 ; left
+	db $00 ; up
+	db $00 ; down
+
+; OW_EXIT_LEFT
+	db OWEAST_THE_STAGNANT_SWAMP ; right
+	db $80 ; left
+	db $80 ; up
+	db $80 ; down
+
+	db $01 ; right
+	db $00 ; left
+	db $00 ; up
+	db $00 ; down
+; 0x80366
 
 ; gets from wTreasuresCollected the flags
 ; related to the crayon treasures
@@ -342,11 +750,11 @@ Func_803e6: ; 803e6 (20:43e6)
 	ld a, [wcee3]
 	and a
 	ret z
-	ld a, [w2d050]
+	ld a, [wTopBarState]
 	and a
 	ret nz
 	ld a, [wMapSideLevelIndex]
-	cp $0e
+	cp OW_EXIT_RIGHT
 	ret nc
 	jp Func_15dc
 ; 0x803f9
@@ -371,7 +779,7 @@ Func_803f9: ; 803f9 (20:43f9)
 
 	call GetCrayonFlags
 
-	ld a, [w2d050]
+	ld a, [wTopBarState]
 	cp $04
 	jr z, .asm_8043c
 	ld a, [wOWLevel]
@@ -379,11 +787,12 @@ Func_803f9: ; 803f9 (20:43f9)
 	jp nc, .asm_804b9
 
 	ld b, a
-	call Func_81278
+	call GetMapSideLevelIndex
 	ld a, b
 	ld [wNextMapSide], a
 	ld a, d
 	ld [wMapSideLevelIndex], a
+
 .asm_8043c
 	call Func_80b29
 
@@ -465,7 +874,7 @@ Func_803f9: ; 803f9 (20:43f9)
 	ret
 
 .Func_804c9
-	ld a, [w2d050]
+	ld a, [wTopBarState]
 	and a
 	ret nz
 	ld a, $f0
@@ -473,7 +882,7 @@ Func_803f9: ; 803f9 (20:43f9)
 	ret
 
 .Func_804d4
-	ld a, [w2d050]
+	ld a, [wTopBarState]
 	and a
 	ret nz
 	ld a, [w2d028]
@@ -698,7 +1107,7 @@ Func_8065e: ; 8065e (20:465e)
 	xor a
 	ldh [rVBK], a
 
-	ld a, [w2d050]
+	ld a, [wTopBarState]
 	and a
 	ld a, $ec
 	jr nz, .asm_806b6
@@ -784,8 +1193,8 @@ Func_8065e: ; 8065e (20:465e)
 	ld a, $90
 	ld [wWY], a
 	ldh [rWY], a
-	xor a
-	ld [w2d091], a
+	xor a ; BOTBAR_CLOSED
+	ld [wBottomBarAction], a
 
 	ld a, TREASURE_MAGNIFYING_GLASS
 	call IsTreasureCollected
@@ -813,7 +1222,7 @@ Func_8065e: ; 8065e (20:465e)
 	xor a
 	ldh [rVBK], a
 
-	ld a, [w2d050]
+	ld a, [wTopBarState]
 	cp $04
 	jr nz, .asm_80809
 	call Func_822b4
@@ -837,7 +1246,7 @@ Func_8065e: ; 8065e (20:465e)
 .asm_80809
 	call LoadLevelNameIfValid
 	ld a, [wMapSideLevelIndex]
-	cp $0e
+	cp OW_EXIT_RIGHT
 	ld b, $01
 	jr c, .asm_80821
 	xor a
@@ -850,7 +1259,7 @@ Func_8065e: ; 8065e (20:465e)
 	ld [w2d0e0], a
 	farcall DrawCoinCount
 	call Func_82012
-	ld a, [w2d050]
+	ld a, [wTopBarState]
 	and a
 	call z, Func_828b3
 	xor a
@@ -1533,17 +1942,32 @@ Func_80d6c: ; 80d6c (20:4d6c)
 	ret
 ; 0x80d7c
 
-	INCROM $80d7c, $80e89
+	INCROM $80d7c, $80de0
+
+Func_80de0: ; 80de0 (20:4de0)
+	xor a
+	ld a, [wca3d]
+	bit 1, a
+	ret z
+	ld a, [wJoypadPressed]
+	bit START_F, a
+	ret z
+	ld a, SST_OVERWORLD_16
+	ld [wSubState], a
+	ret
+; 0x80df3
+
+	INCROM $80df3, $80e89
 
 Func_80e89: ; 80e89 (20:4e89)
 	call Func_302
 	farcall Func_b791e
 	farcall UpdateCommonOWAnimations
 	call Func_82242
-	ld a, [w2d050]
+	ld a, [wTopBarState]
 	and a
 	jp nz, Func_81055
-	call Func_82761
+	call HandleBottomBar
 	call Func_828b3
 	farcall Func_852e5
 	ld hl, w2d014
@@ -1551,17 +1975,17 @@ Func_80e89: ; 80e89 (20:4e89)
 	ld a, [w2d013]
 	jumptable
 
-	dw $4ee7
-	dw $4f0d
-	dw $4f3c
-	dw $4fb8
-	dw $4fd6
-	dw $4ff7
-	dw $50bb
-	dw $515c
-	dw $51cf
-	dw $5200
-	dw $5346
+	dw Func_80ee7
+	dw Func_80f0d
+	dw Func_80f3c
+	dw Func_80fb8
+	dw Func_80fd6
+	dw Func_80ff7
+	dw Func_810bb
+	dw Func_8115c
+	dw Func_811cf
+	dw Func_81200
+	dw Func_81346
 ; 0x80ee7
 
 Func_80ee7: ; 80ee7 (20:4ee7)
@@ -1583,7 +2007,102 @@ Func_80ee7: ; 80ee7 (20:4ee7)
 	ret
 ; 0x80f0d
 
-	INCROM $80f0d, $80fc8
+Func_80f0d: ; 80f0d (20:4f0d)
+	ld a, [wca3b]
+	bit 7, a
+	jr nz, .asm_80f1f
+	call PlayOverworldMusic
+	call Func_81055
+	ld hl, w2d013
+	inc [hl]
+	ret
+.asm_80f1f
+	farcall Func_84a40
+	call Func_81055
+	ld a, [w2d055]
+	and a
+	ret nz
+	di
+	call VBlank_80bf9
+	ei
+	ret
+; 0x80f3c
+
+Func_80f3c: ; 80f3c (20:4f3c)
+	xor a
+	ld [wMagnifyingGlassCounter], a
+	call Func_8212c
+	call GetOWAllowedDPadInput
+	ld c, $00
+	ld b, $00
+	ld a, [wMapSideLevelIndex]
+	set 5, c
+	cp OW_EXIT_RIGHT
+	jr z, .is_exit
+	ld c, b
+	set 4, c
+	cp OW_EXIT_LEFT
+	jr z, .is_exit
+	call Func_8128a
+	farcall Func_9aab5
+	xor a
+	ld [w2d014], a
+	call .GetDirectionalInput
+	ld b, a
+	ld a, [wOWAllowedDPadInput]
+	and b
+	and a
+	jr z, .asm_80f83
+	ld hl, w2d013
+	ld [hl], $05
+	jp Func_81034
+.asm_80f83
+	call Func_81055
+	xor a
+	ld [w2d073], a
+	ld [w2d10e], a
+	ld hl, w2d013
+	inc [hl]
+	ret
+
+.is_exit
+	ld a, c
+	ld [w2d073], a
+	call Func_820e6
+	call Func_81055
+	xor a
+	ld [w2d014], a
+	ld a, $06
+	ld [w2d013], a
+	ret
+
+.GetDirectionalInput
+	ld a, [wJoypadDown]
+	and D_PAD
+	ld b, a
+	rla
+	jr c, .up_down ; down
+	rla
+	jr c, .up_down ; up
+; right/left
+	ld a, b
+	ret
+.up_down
+	ld a, D_UP | D_DOWN
+	and b
+	ret
+; 0x80fb8
+
+Func_80fb8: ; 80fb8 (20:4fb8)
+	call Func_81055
+	ld a, [w2d0e0]
+	and a
+	ret nz
+	call LoadLevelNameIfValid
+	ld hl, w2d013
+	inc [hl]
+	ret
+; 0x80fc8
 
 LoadLevelNameIfValid: ; 80fc8 (20:4fc8)
 	ld a, [wNextMapSide]
@@ -1595,7 +2114,69 @@ LoadLevelNameIfValid: ; 80fc8 (20:4fc8)
 	jp LoadLevelName
 ; 0x80fd6
 
-	INCROM $80fd6, $81055
+Func_80fd6: ; 80fd6 (20:4fd6)
+	call Func_81055
+	ld a, [wMapSideLevelIndex]
+	cp OW_EXIT_RIGHT
+	jr nc, .asm_80ff2
+	farcall Func_85271
+	srl c
+	ret c
+.asm_80ff2
+	ld hl, w2d013
+	inc [hl]
+	ret
+; 0x80ff7
+
+Func_80ff7: ; 80ff7 (20:4ff7)
+	call Func_81240
+	jr c, Func_81055
+	ld a, [w2d055]
+	and a
+	jr nz, Func_81055
+	ld a, [wJoypadDown]
+	bit B_BUTTON_F, a
+	jr nz, .asm_81016
+	ld a, [wJoypadPressed]
+	bit SELECT_F, a
+	jr z, .asm_81016
+	ld hl, wTopBarState
+	inc [hl]
+	jr Func_81055
+
+.asm_81016
+	call Func_81477
+	ld a, [w2d0e3]
+	and a
+	jr nz, Func_81055
+	call Func_81077
+	jr c, Func_81055
+	call Func_80de0
+	jr c, Func_81055
+	call Func_810a9
+	ld b, a
+	ld a, [wOWAllowedDPadInput]
+	and b
+	and a
+	jr z, Func_81055
+;	fallthrough
+
+Func_81034: ; 81034 (20:5034)
+	ld [w2d073], a
+	call Func_820e6
+	ld a, [w2d068]
+	ld [w2d067], a
+	ld a, $03
+	ld [w2d0e0], a
+	xor a
+	ld [w2d0d5], a
+	call Func_81055
+	xor a
+	ld [w2d014], a
+	ld hl, w2d013
+	inc [hl]
+	ret
+; 0x81055
 
 Func_81055: ; 81055 (20:5055)
 	farcall Func_b4a3d
@@ -1604,7 +2185,75 @@ Func_81055: ; 81055 (20:5055)
 	ret
 ; 0x81077
 
-	INCROM $81077, $810f0
+Func_81077: ; 81077 (20:5077)
+	ld hl, wMapSideLevelIndex
+	ld a, [wNextMapSide]
+	or [hl]
+	ret nz
+	; OW position is in The Temple
+	ld a, [wJoypadPressed]
+	bit D_UP_F, a
+	ret z
+	ld a, [w2d00e]
+	cp $ed
+	jr nz, .asm_81092
+	ld a, [wca3d]
+	bit 0, a
+	ret nz
+.asm_81092
+	call Func_3c76
+	ld a, $04
+	call Func_820af
+	play_sfx SFX_113
+	ld a, $0a
+	ld [w2d013], a
+	scf
+	ret
+; 0x810a9
+
+Func_810a9: ; 810a9 (20:50a9)
+	ld a, [wJoypadPressed]
+	and D_PAD
+	ld b, a
+	rla
+	jr c, .up_down
+	rla
+	jr c, .up_down
+	ld a, b
+	ret
+.up_down
+	ld a, D_UP | D_DOWN
+	and b
+	ret
+; 0x810bb
+
+Func_810bb: ; 810bb (20:50bb)
+	ld a, [w2d06b]
+	ld [w2d06d], a
+	ld a, [w2d06c]
+	ld [w2d06e], a
+	ld a, [w2d068]
+	call Func_810f0
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	add b
+	ld [w2d06f], a
+	ld a, [hli]
+	add c
+	ld [w2d070], a
+	ld bc, w2d071
+	call Func_810fc
+	call Func_821a1
+	call Func_81055
+	xor a
+	ld [w2d014], a
+	ld hl, w2d013
+	inc [hl]
+	ret
+; 0x810f0
 
 Func_810f0: ; 810f0 (20:50f0)
 	add a ; *2
@@ -1615,16 +2264,193 @@ Func_810f0: ; 810f0 (20:50f0)
 	ret
 ; 0x810fc
 
-	INCROM $810fc, $81278
+Func_810fc: ; 810fc (20:50fc)
+	ld a, [bc]
+	jumptable
+; 0x810fe
+
+	INCROM $810fe, $81142
+
+Func_81142: ; 81142 (20:5142)
+	ld hl, w2d0a0
+	bit 0, [hl]
+	jr nz, .asm_81151
+	ld a, $40
+	bit 1, [hl]
+	jr z, .asm_81157
+	jr .asm_81158
+.asm_81151
+	ld a, $10
+	bit 2, [hl]
+	jr z, .asm_81158
+.asm_81157
+	rlca
+.asm_81158
+	ld [w2d073], a
+	ret
+; 0x8115c
+
+Func_8115c: ; 8115c (20:515c)
+	call Func_82208
+	ld hl, w2d10e
+	bit 7, [hl]
+	jr nz, .asm_81177
+
+	ld a, [wJoypadDown]
+	and D_PAD
+	jr z, .asm_81175
+	inc [hl]
+	ld a, [hl]
+	cp $06
+	jr c, .asm_81175
+	set 7, [hl]
+.asm_81175
+	bit 7, [hl]
+.asm_81177
+	call nz, Func_82208
+
+	ld a, [w2d06b]
+	ld [w2d100], a
+	ld a, [w2d06c]
+	ld [w2d101], a
+	ld a, [w2d0a1]
+	and a
+	jr nz, .asm_8119c
+	ld bc, w2d071
+	call Func_810fc
+	cp $ff
+	jr z, .asm_811a0
+	call Func_821a1
+	call Func_81142
+.asm_8119c
+	call Func_81055
+	ret
+
+.asm_811a0
+	ld a, [w2d068]
+	ld [wMapSideLevelIndex], a
+	cp OW_EXIT_RIGHT
+	jr nc, .asm_811b1
+	ld a, $02
+	ld [w2d013], a
+	jr .asm_8119c
+
+.asm_811b1
+	stop_music2
+	play_sfx SFX_0EB
+
+	xor a
+	ld [w2d014], a
+	ld hl, w2d013
+	inc [hl]
+	jr .asm_8119c
+; 0x811cf
+
+Func_811cf: ; 811cf (20:51cf)
+	ld a, [w2d014]
+	cp $02
+	jr c, .asm_811fc
+	xor a
+	ld [hl], a
+	ld a, [wMapSideLevelIndex]
+	ld b, $01
+	ld c, $a8
+	cp OW_EXIT_RIGHT
+	jr z, .is_exit
+	ld b, $ff
+	ld c, $f0
+	cp OW_EXIT_LEFT
+	jr z, .is_exit
+	debug_nop
+.is_exit
+	ld a, [w2d101]
+	add b
+	ld [w2d101], a
+	cp c
+	jr nz, .asm_811fc
+	ld hl, w2d013
+	inc [hl]
+.asm_811fc
+	call Func_81055
+	ret
+; 0x81200
+
+Func_81200: ; 81200 (20:5200)
+	call Func_81055
+	ld a, [wMapSideLevelIndex]
+	ld b, 1
+	cp OW_EXIT_RIGHT
+	jr z, .is_exit
+	ld b, -1
+	cp OW_EXIT_LEFT
+	jr z, .is_exit
+	debug_nop
+.is_exit
+	ld a, [wNextMapSide]
+	add b
+	and $3
+	ld [wNextMapSide], a
+	ld a, [wMapSideLevelIndex]
+	add b
+	ld [wMapSideLevelIndex], a
+	ld [w2d068], a
+	ld a, [wNextMapSide]
+	bit 1, a
+	jr nz, .asm_81234 ; south or east?
+	add b
+	bit 1, a
+	jr nz, .asm_8123a
+.asm_81234
+	ld a, SST_OVERWORLD_08
+	ld [wSubState], a
+	ret
+.asm_8123a
+	ld a, SST_OVERWORLD_1E
+	ld [wSubState], a
+	ret
+; 0x81240
+
+Func_81240: ; 81240 (20:5240)
+	ld a, [w2d055]
+	and a
+	jr nz, .no_carry
+	ld a, [wOWLevel]
+	cp $80
+	jr z, .no_carry
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	jr z, .no_carry
+	call Func_8128a
+	ld a, [wOWLevel]
+	and a
+	jr z, .temple
+	xor a
+	ld [wSubState], a
+	ld hl, wState
+	inc [hl] ; ST_02
+	scf
+	ret
+
+.no_carry
+	and a
+	ret
+
+.temple
+	play_sfx SFX_0E3
+	ld a, SST_OVERWORLD_1A
+	ld [wSubState], a
+	scf
+	ret
+; 0x81278
 
 ; input:
-; - b = ???
+; - b = LEVEL_* constant
 ; output:
 ; - d = map side level index
 ; - c = map side
-Func_81278: ; 81278 (20:5278)
+GetMapSideLevelIndex: ; 81278 (20:5278)
 ; loop until a larger value than b is found
-	ld hl, Data_812ac
+	ld hl, MapSideInitialLevels
 	ld c, -1
 .loop
 	ld e, [hl]
@@ -1643,9 +2469,30 @@ Func_81278: ; 81278 (20:5278)
 	ret
 ; 0x8128a
 
-	INCROM $8128a, $812ac
+Func_8128a: ; 8128a (20:528a)
+	ld a, [wNextMapSide]
+	ld c, a
+	and a
+	jr z, .north
+.asm_81291
+	ld b, $00
+	ld hl, MapSideInitialLevels
+	add hl, bc
+	ld a, [wMapSideLevelIndex]
+	add [hl]
+	ld [wOWLevel], a
+	ret
 
-Data_812ac: ; 812ac (20:52ac)
+.north
+	ld a, [wMapSideLevelIndex]
+	cp OWNORTH_JUNCTION
+	jr c, .asm_81291
+	ld a, $80
+	ld [wOWLevel], a
+	ret
+; 0x812ac
+
+MapSideInitialLevels: ; 812ac (20:52ac)
 	db LEVEL_THE_TEMPLE         ; MAP_NORTH
 	db LEVEL_DESERT_RUINS       ; MAP_WEST
 	db LEVEL_THE_GRASSLANDS     ; MAP_SOUTH
@@ -1663,7 +2510,7 @@ Func_812c0: ; 812c0 (20:52c0)
 	ld a, [wCurMapSide]
 	ld c, a
 	ld b, $00
-	ld hl, Data_812ac
+	ld hl, MapSideInitialLevels
 	add hl, bc
 	ld a, [hl]
 	ld [wOWLevel], a
@@ -1724,7 +2571,363 @@ Func_812c0: ; 812c0 (20:52c0)
 	ret
 ; 0x81346
 
-	INCROM $81346, $8178b
+Func_81346: ; 81346 (20:5346)
+	farcall Func_852e5
+	call Func_8137a
+	farcall Func_b4a3d
+	call Func_8208d
+	farcall Func_b4aa9
+	ret
+; 0x8137a
+
+Func_8137a: ; 8137a (20:537a)
+	ld hl, w2d0e5
+	inc [hl]
+	ld a, [w2d0e4]
+	jumptable
+
+	dw Func_81398
+	dw Func_8139f
+	dw Func_813ad
+	dw Func_813b4
+	dw Func_813ef
+	dw Func_813f6
+	dw Func_813ef
+	dw Func_81413
+	dw Func_8139f
+	dw Func_813ad
+	dw Func_8142d
+; 0x81398
+
+Func_81398: ; 81398 (20:5398)
+	xor a
+	ld hl, w2d0e5
+	ld [hld], a
+	inc [hl] ; w2d0e4
+	ret
+; 0x8139f
+
+Func_8139f: ; 8139f (20:539f)
+	ld hl, w2d0e5
+	ld a, [hl]
+	cp $08
+	ret c
+	ld a, $03
+	ld [w2d0e0], a
+	jr Func_81398
+; 0x813ad
+
+Func_813ad: ; 813ad (20:53ad)
+	ld a, [w2d0e0]
+	and a
+	ret nz
+	jr Func_81398
+; 0x813b4
+
+Func_813b4: ; 813b4 (20:53b4)
+	call Func_813bc
+	call LoadLevelName
+	jr Func_81398
+; 0x813bc
+
+Func_813bc: ; 813bc (20:53bc)
+	ld a, [w2d00e]
+	cp $ed
+	jr z, .asm_813d3
+	ld b, a
+	call GetCutsceneWithTreasure
+	ld a, CUTSCENE_25
+	cp c
+	jr nc, .asm_813d8
+	ld a, [wca3d]
+	bit 0, a
+	jr nz, .asm_813d8
+.asm_813d3
+	ld b, $00
+	ld d, $00
+	ret
+.asm_813d8
+	ld a, [w2d00e]
+	ld c, a
+	farcall Func_9aa81
+	call GetMapSideLevelIndex
+	ret
+; 0x813ef
+
+Func_813ef: ; 813ef (20:53ef)
+	xor a
+	ld [w2d0d5], a
+	jp Func_81398
+; 0x813f6
+
+Func_813f6: ; 813f6 (20:53f6)
+	farcall Func_85271
+	srl c
+	ret c
+	ld a, $1c
+	ld hl, wOWObj13Unk6
+	call Func_3b93
+	jp Func_81398
+; 0x81413
+
+Func_81413: ; 81413 (20:5413)
+	ld a, [wJoypadPressed]
+	and B_BUTTON | D_RIGHT | D_LEFT | D_DOWN
+	jr nz, .asm_81423
+	ld hl, wOWObj13Unk6
+	ld a, [hl]
+	and a
+	jp z, Func_81398
+	ret
+.asm_81423
+	xor a
+	ld hl, wOWObj13Unk6
+	call Func_3b93
+	jp Func_81398
+; 0x8142d
+
+Func_8142d: ; 8142d (20:542d)
+	ld a, $01
+	call Func_820af
+	xor a
+	ld [w2d013], a
+	ld [w2d014], a
+	ld [w2d0e4], a
+	ret
+; 0x8143d
+
+	INCROM $8143d, $81477
+
+Func_81477: ; 81477 (20:5477)
+	ld a, [wJoypadDown]
+	bit B_BUTTON_F, a
+	jr z, .asm_8148e
+	ld hl, w2d0e2
+	inc [hl]
+
+	ld a, [w2d0e3]
+	jumptable
+	dw Func_814b2
+	dw Func_814c4
+	dw Func_814ec
+	dw Func_8150c
+
+.asm_8148e
+	ld a, [w2d0e3]
+	and a
+	ret z
+	ld a, $01
+	ld hl, w2d106
+	cp [hl]
+	call nz, Func_820af
+	ld hl, w2d810 + $7e
+	ld a, [hli]
+	ld [w2d06b], a
+	ld [w2d100], a
+	ld a, [hl]
+	ld [w2d06c], a
+	ld [w2d101], a
+	xor a
+	ld [w2d0e3], a
+	ret
+; 0x814b2
+
+Func_814b2: ; 814b2 (20:54b2)
+	ld hl, w2d810 + $7e
+	ld a, [w2d100]
+	ld [hli], a
+	ld a, [w2d101]
+	ld [hl], a
+;	fallthrough
+
+Func_814bd: ; 814bd (20:54bd)
+	xor a
+	ld hl, w2d0e2
+	ld [hli], a
+	inc [hl]
+	ret
+; 0x814c4
+
+Func_814c4: ; 814c4 (20:54c4)
+	ld b, $0a
+	ld a, [w2d0e2]
+	cp b
+	ret c
+	play_sfx SFX_113
+	ld a, [w2d069]
+	ld [w2d06b], a
+	ld [w2d100], a
+	ld a, [w2d06a]
+	ld [w2d06c], a
+	ld [w2d101], a
+	ld a, $05
+	call Func_820af
+	jr Func_814bd
+; 0x814ec
+
+Func_814ec: ; 814ec (20:54ec)
+	xor a
+	ld hl, w2d800
+	ld bc, $8e
+	call WriteAToHL_BCTimes
+	ld hl, w2d140
+	ld bc, $40
+	call WriteAToHL_BCTimes
+	call Func_82111
+	ld a, l
+	ld [w2d810 + $79], a
+	ld a, h
+	ld [w2d810 + $7a], a
+	jr Func_814bd
+; 0x8150c
+
+Func_8150c: ; 8150c (20:550c)
+	ld a, $00
+	call .Func_81576
+	call .Func_81615
+	call .Func_81595
+	ld a, $01
+	call .Func_81576
+	call .Func_81615
+	call .Func_81595
+	ld a, $02
+	call .Func_81576
+	call .Func_81615
+	call .Func_81595
+	ld a, $03
+	call .Func_81576
+	call .Func_81615
+	call .Func_81595
+
+	ld a, [w2d0e2]
+	cp $14
+	call z, .Func_815c1
+	ld a, [w2d0e2]
+	cp $28
+	call z, .Func_815e5
+	ld a, [w2d0e2]
+	cp $2c
+	ld hl, w2d146
+	call z, .Func_81609
+	ld a, [w2d0e2]
+	cp $40
+	ld hl, w2d160 + $6
+	call z, .Func_81609
+	call Func_81714
+
+	ld hl, w2d807
+	ld c, $04
+.loop
+	ld a, [hl]
+	cp $05
+	ret nz
+	ld de, $20
+	add hl, de
+	dec c
+	jr nz, .loop
+
+	ld hl, w2d0e3
+	dec [hl]
+	ret
+
+.Func_81576
+	ld [w2d810 + $7b], a
+	call .Func_815b6
+	ld de, w2d810 + $70
+	ld b, $09
+	call CopyHLToDE
+	ld de, w2d0a0
+	ld b, $07
+	call CopyHLToDE
+	ld de, w2d06b
+	ld b, $08
+	call CopyHLToDE
+	ret
+
+.Func_81595
+	ld a, [w2d810 + $7b]
+	call .Func_815b6
+	ld e, l
+	ld d, h
+	ld hl, w2d810 + $70
+	ld b, $09
+	call CopyHLToDE
+	ld hl, w2d0a0
+	ld b, $07
+	call CopyHLToDE
+	ld hl, w2d06b
+	ld b, $08
+	call CopyHLToDE
+	ret
+
+.Func_815b6
+	rlca
+	swap a
+	ld e, a
+	ld d, $00
+	ld hl, w2d800
+	add hl, de
+	ret
+
+.Func_815c1
+	ld hl, w2d800
+	ld de, w2d140
+	ld b, $08
+	call CopyHLToDE
+	ld hl, w2d810 + $10
+	ld b, $08
+	call CopyHLToDE
+	ld hl, w2d810 + $30
+	ld b, $08
+	call CopyHLToDE
+	ld hl, w2d810 + $50
+	ld b, $08
+	call CopyHLToDE
+	ret
+
+.Func_815e5
+	ld hl, w2d800
+	ld de, w2d160
+	ld b, $08
+	call CopyHLToDE
+	ld hl, w2d810 + $10
+	ld b, $08
+	call CopyHLToDE
+	ld hl, w2d810 + $30
+	ld b, $08
+	call CopyHLToDE
+	ld hl, w2d810 + $50
+	ld b, $08
+	call CopyHLToDE
+	ret
+
+.Func_81609
+	ld de, $8
+	xor a
+	ld [hl], a
+	add hl, de
+	ld [hl], a
+	add hl, de
+	ld [hl], a
+	add hl, de
+	ld [hl], a
+	ret
+
+.Func_81615
+	ld a, [w2d810 + $77]
+	jumptable
+	dw $5625
+	dw $567f
+	dw $56b3
+	dw $56be
+	dw $56ea
+	dw $56f5
+; 0x81625
+
+	INCROM $81625, $81714
+
+Func_81714: ; 81714 (20:5714)
+	INCROM $81714, $8178b
 
 Func_8178b: ; 8178b (20:578b)
 	ld a, TREASURE_DAY_OR_NIGHT_SPELL
@@ -1814,7 +3017,7 @@ Func_81818: ; 81818 (20:5818)
 ; 0x8182b
 
 Func_8182b: ; 8182b (20:582b)
-	ld a, [w2d050]
+	ld a, [wTopBarState]
 	and a
 	ret z
 	ld a, [w2d053]
@@ -1919,7 +3122,7 @@ GetCutsceneWithTreasure: ; 81891 (20:5891)
 Func_818ad: ; 818ad (20:58ad)
 	farcall UpdateCommonOWAnimations
 	farcall Func_b791e
-	ld a, [w2d050]
+	ld a, [wTopBarState]
 	and a
 	jr z, .asm_818d9
 	ld a, [wJoypadPressed]
@@ -3121,9 +4324,7 @@ Func_81e36: ; 81e36 (20:5e36)
 ; 0x81e44
 
 Func_81e44: ; 81e44 (20:5e44)
-.loop
-	nop
-	jr .loop
+	debug_nop
 ; 0x81e47
 
 Func_81e47: ; 81e47 (20:5e47)
@@ -3345,9 +4546,7 @@ Func_81feb: ; 81feb (20:5feb)
 	ld a, [w2d07f]
 	dec a
 	ret z
-.asm_8200c
-	nop
-	jr .asm_8200c
+	debug_nop
 ; 0x8200f
 
 Func_8200f: ; 8200f (20:600f)
@@ -3414,7 +4613,7 @@ Func_82041: ; 82041 (20:6041)
 	ld b, a
 	ld a, [w2d073]
 	cp b
-	jr z, .asm_8208d
+	jr z, Func_8208d
 	ld [w2d10c], a
 	ld c, $04
 	bit 6, a
@@ -3429,7 +4628,8 @@ Func_82041: ; 82041 (20:6041)
 .asm_82089
 	ld a, c
 	call Func_820af
-.asm_8208d
+;	fallthrough
+Func_8208d: ; 8208d (20:608d)
 	ld a, [w2d106]
 	and a
 	ret z
@@ -3489,7 +4689,51 @@ Func_820af: ; 820af (20:60af)
 	dw Frameset_aa25e
 ; 0x820e6
 
-	INCROM $820e6, $8212c
+Func_820e6: ; 820e6 (20:60e6)
+	call Func_82111
+	ld a, [w2d073]
+	swap a
+	rrca
+	jr c, .asm_82100
+	inc hl
+	rrca
+	jr c, .asm_82100
+	inc hl
+	rrca
+	jr c, .asm_82100
+	inc hl
+	rrca
+	jr c, .asm_82100
+	debug_nop
+.asm_82100
+	ld a, [hl]
+	ld [w2d068], a
+	ld de, $4
+	add hl, de
+	ld a, [hl]
+	ld [w2d071], a
+	xor a
+	ld [w2d072], a
+	ret
+; 0x82111
+
+Func_82111: ; 82111 (20:6111)
+	ld a, [wMapSideLevelIndex]
+	cp OW_EXIT_RIGHT
+	jr c, .asm_8211f
+	sub OW_EXIT_RIGHT
+	ld hl, Data_8031e
+	jr .got_table
+.asm_8211f
+	ld hl, Data_8023e
+.got_table
+	add a
+	add a ; *4
+	ld c, a
+	ld a, [wNextMapSide]
+	call GetCthEntryFromAthTable
+	ret
+; 0x8212c
 
 Func_8212c: ; 8212c (20:612c)
 	ld a, [wMapSideLevelIndex]
@@ -3569,12 +4813,117 @@ GetOWAllowedDPadInput: ; 82150 (20:6150)
 	ret
 ; 0x821a1
 
-	INCROM $821a1, $82242
+Func_821a1: ; 821a1 (20:61a1)
+	xor a
+	ld [w2d0a0], a
+	ld c, $02
+	ld hl, w2d06b
+	ld de, w2d06d
+	call Func_821f9
+	ld [w2d0a7], a
+	ld c, $04
+	ld hl, w2d06c
+	ld de, w2d06e
+	call Func_821f9
+	ld [w2d0a8], a
+	ld a, [w2d0a0]
+	ld b, a
+	ld hl, w2d0a7
+	ld a, [hli]
+	cp [hl] ; w2d0a8
+	jr nc, .asm_821cf
+	ld a, [hld]
+	set 0, b
+.asm_821cf
+	ld [w2d0a1], a
+	ld [w2d0a2], a
+	ld a, [hl]
+	ld [w2d0a3], a
+	ld [w2d0a4], a
+	ld a, b
+	ld [w2d0a0], a
+	lb de, $01, $01
+	ld hl, w2d0a0
+	bit 1, [hl]
+	jr z, .asm_821ec
+	ld d, $ff
+.asm_821ec
+	bit 2, [hl]
+	jr z, .asm_821f2
+	ld e, $ff
+.asm_821f2
+	ld hl, w2d0a5
+	ld [hl], d
+	inc l
+	ld [hl], e ; w2d0a6
+	ret
+; 0x821f9
+
+Func_821f9: ; 821f9 (20:61f9)
+	ld b, [hl]
+	ld a, [de]
+	sub b
+	ret nc
+	cpl
+	inc a
+	ld b, a
+	ld a, c
+	ld hl, w2d0a0
+	or [hl]
+	ld [hl], a
+	ld a, b
+	ret
+; 0x82208
+
+Func_82208: ; 82208 (20:6208)
+	ld hl, w2d0a1
+	ld a, [hl]
+	and a
+	ret z
+	dec a
+	ld [hl], a
+	ld a, [w2d0a2]
+	ld d, a
+	ld hl, w2d0a3
+	ld a, [w2d0a4]
+	add [hl]
+	ld [hl], a
+	cp d
+	call nc, Func_82224
+	call Func_8222f
+	ret
+; 0x82224
+
+Func_82224: ; 82224 (20:6224)
+	sub d
+	ld [hl], a
+	ld a, [w2d0a0]
+	and $1
+	xor $1
+	jr Func_82234
+
+Func_8222f: ; 8222f (20:622f)
+	ld a, [w2d0a0]
+	and $1
+;	fallthrough
+
+Func_82234: ; 82234 (20:6234)
+	ld hl, w2d06b
+	ld de, w2d0a5
+	jr z, .asm_8223e
+	inc e
+	inc l
+.asm_8223e
+	ld a, [de]
+	add [hl]
+	ld [hl], a
+	ret
+; 0x82242
 
 Func_82242: ; 82242 (20:6242)
 	ld hl, w2d051
 	inc [hl]
-	ld a, [w2d050]
+	ld a, [wTopBarState]
 	and a
 	ret z
 	dec a
@@ -3595,20 +4944,20 @@ Func_82242: ; 82242 (20:6242)
 
 Func_82263: ; 82263 (20:6263)
 	call Func_828b3
-	ld a, $02
-	ld [w2d091], a
+	ld a, BOTBAR_CLOSING
+	ld [wBottomBarAction], a
 	xor a
-	ld [w2d092], a
-	ld [wMagnifyingGlassInputCounter], a
-	ld hl, w2d050
+	ld [wBottomBarState], a
+	ld [wMagnifyingGlassCounter], a
+	ld hl, wTopBarState
 	inc [hl]
 	ret
 ; 0x82277
 
 Func_82277: ; 82277 (20:6277)
-	call Func_82761
+	call HandleBottomBar
 	call Func_828b3
-	ld a, [w2d091]
+	ld a, [wBottomBarAction]
 	and a
 	ret nz
 
@@ -3629,7 +4978,7 @@ Func_82277: ; 82277 (20:6277)
 	ld [w2d0d0 + $1], a
 	ld a, $04
 	ld [w2d0d0 + $2], a
-	ld hl, w2d050
+	ld hl, wTopBarState
 	inc [hl]
 	ret
 ; 0x822b4
@@ -3660,7 +5009,7 @@ Func_822d7: ; 822d7 (20:62d7)
 	jr nz, .asm_822ed
 	ld a, [wcee3]
 	ld [w2d02c], a
-	ld hl, w2d050
+	ld hl, wTopBarState
 	inc [hl]
 .asm_822ed
 	call Func_824ea
@@ -3676,7 +5025,7 @@ Func_822f1: ; 822f1 (20:62f1)
 	and B_BUTTON | SELECT
 	jr z, .done
 	play_sfx SFX_0EA
-	ld hl, w2d050
+	ld hl, wTopBarState
 	inc [hl]
 .done
 	jp Func_824ea
@@ -3691,7 +5040,7 @@ Func_82311: ; 82311 (20:6311)
 	jr nz, .asm_82357
 	xor a
 	ld [w2d013], a
-	ld [w2d050], a
+	ld [wTopBarState], a
 	ld hl, Pals_84900 palette 4
 	ld de, 8 palettes
 	ld a, [wCurMapSide]
@@ -3737,7 +5086,7 @@ Func_8235b: ; 8235b (20:635b)
 	ld hl, w2d051
 	ld [hld], a
 	ld a, $04
-	ld [hl], a ; w2d050
+	ld [hl], a ; wTopBarState
 .asm_8237b
 	call Func_824ea
 	ret
@@ -3755,7 +5104,7 @@ Func_8237f: ; 8237f (20:637f)
 	ld hl, w2d051
 	ld [hld], a
 	ld a, $04
-	ld [hl], a ; w2d050
+	ld [hl], a ; wTopBarState
 	ld a, SST_OVERWORLD_0C
 	ld [wSubState], a
 .asm_8239a
@@ -3775,7 +5124,7 @@ Func_8239e: ; 8239e (20:639e)
 	ld hl, w2d051
 	ld [hld], a
 	ld a, $04
-	ld [hl], a ; w2d050
+	ld [hl], a ; wTopBarState
 	ld a, [w2d146]
 	ld b, 1
 	cp $0a
@@ -3832,7 +5181,7 @@ Func_82400: ; 82400 (20:6400)
 	call Func_80377
 	call Func_82654
 	call Func_826f6
-	ld hl, w2d050
+	ld hl, wTopBarState
 	inc [hl]
 	ret
 ; 0x8241b
@@ -3844,7 +5193,7 @@ Func_8241b: ; 8241b (20:641b)
 	cp $07
 	jr nz, .asm_8242a
 .asm_82426
-	ld hl, w2d050
+	ld hl, wTopBarState
 	inc [hl]
 .asm_8242a
 	call Func_824ea
@@ -3862,7 +5211,7 @@ Func_8242e: ; 8242e (20:642e)
 	ei
 
 	ld a, $04
-	ld [w2d050], a
+	ld [wTopBarState], a
 .asm_8244d
 	call Func_824ea
 	ret
@@ -4142,7 +5491,7 @@ Func_825af: ; 825af (20:65af)
 	ld de, wBGMap1 tile $26 + $b
 	call Func_8264a
 	ld a, $09
-	ld [w2d050], a
+	ld [wTopBarState], a
 
 .asm_825dd
 	play_sfx SFX_0E3
@@ -4157,7 +5506,7 @@ Func_825af: ; 825af (20:65af)
 	ld de, wBGMap1 tile $26 + $9
 	call Func_8264a
 	ld a, $06
-	ld [w2d050], a
+	ld [wTopBarState], a
 	xor a
 	ld [w2d051], a
 	jr .asm_825dd
@@ -4167,7 +5516,7 @@ Func_825af: ; 825af (20:65af)
 	ld de, wBGMap1 tile $26 + $7
 	call Func_8264a
 	ld a, $07
-	ld [w2d050], a
+	ld [wTopBarState], a
 	xor a
 	ld [w2d051], a
 	ld a, $00
@@ -4178,7 +5527,7 @@ Func_825af: ; 825af (20:65af)
 	call Func_82640
 	call Func_8263b
 	ld a, $08
-	ld [w2d050], a
+	ld [wTopBarState], a
 	xor a
 	ld [w2d051], a
 	jr .asm_825dd
@@ -4187,7 +5536,7 @@ Func_825af: ; 825af (20:65af)
 	call Func_82640
 	call Func_8263b
 	ld a, $08
-	ld [w2d050], a
+	ld [wTopBarState], a
 	xor a
 	ld [w2d051], a
 	jr .asm_825dd
@@ -4316,63 +5665,68 @@ Func_826f6: ; 826f6 (20:66f6)
 
 	INCROM $82729, $82761
 
-Func_82761: ; 82761 (20:6761)
+HandleBottomBar: ; 82761 (20:6761)
 	ld a, [wMapSideLevelIndex]
 	ld c, a
 	ld a, [w2d068]
 	cp c
 	jr nz, .asm_82788
-	ld a, [w2d091]
-	cp $02
-	jp z, .Func_8287b
-	cp $03
-	jp z, .asm_827ea
-	call .asm_827a3
+	ld a, [wBottomBarAction]
+	cp BOTBAR_CLOSING
+	jp z, .CloseBottomBar
+	cp BOTBAR_OPENING
+	jp z, .OpenBottomBar
+	call .CheckBottomBarPossible
 	ret c
-	ld a, [w2d091]
-	cp $01
-	jr z, .asm_827d5
-	cp $00
-	jr z, .asm_827b4
+	ld a, [wBottomBarAction]
+	cp BOTBAR_OPENED
+	jr z, .HandleOpenedBottomBar
+	cp BOTBAR_CLOSED
+	jr z, .HandleClosedBottomBar
 	ret
 
 .asm_82788
 	xor a
 	ld [w2d096], a
-	ld a, [w2d091]
+	ld a, [wBottomBarAction]
 	and a
-	ret z
-	cp $02
-	jp z, .Func_8287b
+	ret z ; is closed already
+	cp BOTBAR_CLOSING
+	jp z, .CloseBottomBar
 
-	ld a, $02
-	ld [w2d091], a
+	ld a, BOTBAR_CLOSING
+	ld [wBottomBarAction], a
 	xor a
-	ld [w2d092], a
-	ld [wMagnifyingGlassInputCounter], a
+	ld [wBottomBarState], a
+	ld [wMagnifyingGlassCounter], a
 	ret
 
-.asm_827a3
+; returns carry if opening
+; the bottom bar is not possible
+.CheckBottomBarPossible
 	ld a, [wOWLevel]
 	add a
-	jr z, .asm_827b2
+	; if it's either $00 (the Temple) or $80 (Junction)
+	; then this will set z flag
+	jr z, .set_carry
 	ld a, [w2d013]
 	cp $05
-	jr nz, .asm_827b2
+	jr nz, .set_carry
 	and a
 	ret
-.asm_827b2
+.set_carry
 	scf
 	ret
 
-.asm_827b4
+.HandleClosedBottomBar
 	ld a, [wHasMagnifyingGlass]
 	and a
-	ret z
-	ld hl, wMagnifyingGlassInputCounter
+	ret z ; no magnifying glass, exit
+	ld hl, wMagnifyingGlassCounter
 	ld a, [wJoypadDown]
 	bit B_BUTTON_F, a
 	jr nz, .b_btn_down
+	; reset counter
 	xor a
 	ld [hl], a
 	ret
@@ -4381,61 +5735,64 @@ Func_82761: ; 82761 (20:6761)
 	ld a, [hl]
 	cp 10
 	ret c
-	ld a, $03
-	ld [w2d091], a
+	ld a, BOTBAR_OPENING
+	ld [wBottomBarAction], a
 	xor a
-	ld [w2d092], a
+	ld [wBottomBarState], a
 	ret
 
-.asm_827d5
+.HandleOpenedBottomBar
 	ld a, [wJoypadDown]
 	bit B_BUTTON_F, a
-	ret nz
+	ret nz ; B button still pressed
+
+	; no longer pressing B,
+	; begin closing bar
 	ld hl, w2d0fa
 	res 4, [hl]
-	ld a, $02
-	ld [w2d091], a
+	ld a, BOTBAR_CLOSING
+	ld [wBottomBarAction], a
 	xor a
-	ld [w2d092], a
+	ld [wBottomBarState], a
 	ret
 
-.asm_827ea
+.OpenBottomBar
 	ld a, [wJoypadDown]
 	bit B_BUTTON_F, a
-	jr z, .asm_827fd
-	ld a, [w2d092]
+	jr z, .no_b_btn
+	ld a, [wBottomBarState]
 	jumptable
 
-	dw .Func_8280c
-	dw .Func_8281d
-	dw .Func_82837
-	dw .Func_82869
+	dw .InitBar
+	dw .OpenWindow
+	dw .SetVisibleTreasures
+	dw .SetBottomBarAsOpen
 
-.asm_827fd
+.no_b_btn
 	ld hl, w2d0fa
 	res 4, [hl]
-	ld a, $02
-	ld [w2d091], a
+	ld a, BOTBAR_CLOSING
+	ld [wBottomBarAction], a
 	xor a
-	ld [w2d092], a
+	ld [wBottomBarState], a
 	ret
 
-.Func_8280c
+.InitBar
 	ld hl, w2d0fa
 	set 4, [hl]
 	xor a
 	ld [wHDMA], a
 	ld [w2d0b5], a
-	ld hl, w2d092
+	ld hl, wBottomBarState
 	inc [hl]
 	ret
 
-.Func_8281d
+.OpenWindow
 	ld hl, wWY
 	ld b, [hl]
 	ld a, $78
 	cp b
-	jr nc, .asm_8282d
+	jr nc, .cap_min_wy
 	dec [hl]
 	dec [hl]
 	dec [hl]
@@ -4443,16 +5800,16 @@ Func_82761: ; 82761 (20:6761)
 	dec [hl]
 	dec [hl]
 	ret
-.asm_8282d
+.cap_min_wy
 	ld [hl], a
 	xor a
-	ld [wMagnifyingGlassInputCounter], a
-	ld hl, w2d092
+	ld [wMagnifyingGlassCounter], a
+	ld hl, wBottomBarState
 	inc [hl]
 	ret
 
-.Func_82837
-	ld hl, wMagnifyingGlassInputCounter
+.SetVisibleTreasures
+	ld hl, wMagnifyingGlassCounter
 	inc [hl]
 	ld a, [hl]
 	cp $03
@@ -4460,8 +5817,11 @@ Func_82761: ; 82761 (20:6761)
 	xor a
 	ld [hl], a
 
+; here, we use the divider register to
+; determine which treasure gfx to load
+; so that they appear in "random" time intervals
 	ld hl, w2d0fa
-.loop_outer
+.loop_outer ; loop until we set a bit that is unset
 	ldh a, [rDIV]
 	and $0f
 	inc a
@@ -4471,48 +5831,51 @@ Func_82761: ; 82761 (20:6761)
 	rl c
 	dec a
 	jr nz, .loop_inner
+	; make it so the set bit is
+	; in the bottom nybble
 	ld a, $0f
 	and c
-	jr nz, .asm_82858
+	jr nz, .bottom_nybble_bit
 	swap c
-.asm_82858
+.bottom_nybble_bit
 	ld a, c
 	and [hl]
-	jr nz, .loop_outer
+	jr nz, .loop_outer ; loop if is already set
 
 	ld a, c
 	or [hl]
 	ld [hl], a
 	and $0f
 	cp $0f
-	ret nz
-	ld hl, w2d092
+	ret nz ; exit if still some unset bits
+	; all set, advance
+	ld hl, wBottomBarState
 	inc [hl]
 	ret
 
-.Func_82869
-	ld a, $01
-	ld [w2d091], a
+.SetBottomBarAsOpen
+	ld a, BOTBAR_OPENED
+	ld [wBottomBarAction], a
 	xor a
-	ld [w2d092], a
+	ld [wBottomBarState], a
 	ld hl, w2d0fa
 	bit 6, [hl]
 	ret z
 	set 7, [hl]
 	ret
 
-.Func_8287b
-	ld a, [w2d092]
+.CloseBottomBar
+	ld a, [wBottomBarState]
 	jumptable
 
-	dw .Func_82883
-	dw .Func_82899
+	dw .CloseWindow
+	dw .DeinitBar
 
-.Func_82883
+.CloseWindow
 	ld hl, wWY
 	ld a, [hl]
 	cp $90
-	jr nc, .asm_82892
+	jr nc, .cap_max_wy
 	inc [hl]
 	inc [hl]
 	inc [hl]
@@ -4520,25 +5883,25 @@ Func_82761: ; 82761 (20:6761)
 	inc [hl]
 	inc [hl]
 	ret
-.asm_82892
+.cap_max_wy
 	ld [hl], $90
-	ld hl, w2d092
+	ld hl, wBottomBarState
 	inc [hl]
 	ret
 
-.Func_82899
+.DeinitBar
 	ld hl, w2d0fa
-	ld a, $40
+	ld a, $1 << 6
 	and [hl]
 	ld [hl], a
 	xor a
 	ld [w2d116], a
 	ld [w2d117], a
 	xor a ; unnecessary
-	ld [w2d091], a
+	ld [wBottomBarAction], a
 	xor a ; unnecessary
-	ld [w2d092], a
-	ld [wMagnifyingGlassInputCounter], a
+	ld [wBottomBarState], a
+	ld [wMagnifyingGlassCounter], a
 	ret
 ; 0x828b3
 
@@ -4594,6 +5957,7 @@ Func_828b3: ; 828b3 (20:68b3)
 .asm_8290e
 	ld d, $74
 	call Func_8291e
+
 	call Func_8295b
 	call Func_8293f
 	ret
@@ -4648,6 +6012,7 @@ Func_8295b: ; 8295b (20:695b)
 	ld a, [wOWLevel]
 	add a ; *2
 	jr nz, .asm_8296c
+	; wOWLevel == $00 or $80
 	ld b, $06
 	jr .asm_82975
 .asm_8296c

@@ -32,6 +32,7 @@ ALL_CRAYONS EQU CRAYON_RED | CRAYON_BROWN | CRAYON_YELLOW | CRAYON_GREEN | CRAYO
 	const OWNORTH_BANK_OF_THE_WILD_RIVER ; $4
 	const OWNORTH_THE_TIDAL_COAST        ; $5
 	const OWNORTH_SEA_TURTLE_ROCKS       ; $6
+	const OWNORTH_JUNCTION               ; $7
 
 ; west side level indices
 	const_def
@@ -60,3 +61,13 @@ ALL_CRAYONS EQU CRAYON_RED | CRAYON_BROWN | CRAYON_YELLOW | CRAYON_GREEN | CRAYO
 	const OWEAST_THE_WARPED_VOID     ; $4
 	const OWEAST_THE_EAST_CRATER     ; $5
 	const OWEAST_FOREST_OF_FEAR      ; $6
+
+OW_EXIT_RIGHT EQU $0e
+OW_EXIT_LEFT  EQU $0f
+
+; OW bottom bar action
+	const_def
+	const BOTBAR_CLOSED          ; $0
+	const BOTBAR_OPENED          ; $1
+	const BOTBAR_CLOSING         ; $2
+	const BOTBAR_OPENING         ; $3

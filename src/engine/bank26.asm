@@ -337,7 +337,20 @@ DrawCoinCount: ; 9a3a2 (26:63a2)
 	ret
 ; 0x9a3cf
 
-	INCROM $9a3cf, $9aa90
+	INCROM $9a3cf, $9aa81
+
+Func_9aa81: ; 9aa81 (26:6a81)
+	ld b, $ff
+	ld hl, LevelTreasureIDs
+.loop
+	inc b
+	ld a, [hli]
+	cp c
+	jr nz, .loop
+	srl b
+	srl b ; /4
+	ret
+; 0x9aa90
 
 LoadLevelTreasureData: ; 9aa90 (26:6a90)
 	ldh a, [rSVBK]
@@ -360,7 +373,46 @@ LoadLevelTreasureData: ; 9aa90 (26:6a90)
 	ret
 ; 0x9aab5
 
-	INCROM $9aab5, $9ab07
+Func_9aab5: ; 9aab5 (26:6ab5)
+	ld a, [wMapSideLevelIndex]
+	cp $0e
+	ret nc
+	call ClearTreasureData
+	call Func_9aaf4
+	call Func_9ab1c
+	ld a, [wca3d]
+	bit 1, a
+	jp nz, Func_9abd1
+	call LoadLevelTreasures
+	call FillBottomBarTreasureIDs
+	call WriteUncollectedBottomBarTreasureIDs
+	call LoadTreasurePals
+	call LoadTreasureTiles
+	ld a, HIGH(wTreasureTiles)
+	ld [wHDMA + 0], a
+	ld a, LOW(wTreasureTiles)
+	ld [wHDMA + 1], a
+	ld a, $09
+	ld [wHDMA + 2], a
+	xor a
+	ld [wHDMA + 3], a
+	ld a, $0f
+	ld [wHDMA + 4], a
+	ret
+; 0x9aaf4
+
+Func_9aaf4: ; 9aaf4 (26:6af4)
+	ld a, [wOWLevel]
+	call Func_1783
+	ret z
+	ld hl, w2d0fa
+	set 6, [hl]
+	ld hl, w2d116
+	xor a
+	ld [hli], a
+	ld [hl], a
+	ret
+; 0x9ab07
 
 ClearTreasureData: ; 9ab07 (26:6b07)
 ; clear the treasure tiles
@@ -377,7 +429,15 @@ ClearTreasureData: ; 9ab07 (26:6b07)
 	ret
 ; 0x9ab1c
 
-	INCROM $9ab1c, $9ab34
+Func_9ab1c: ; 9ab1c (26:6b1c)
+	ld a, [wOWLevel]
+	and a
+	ret z
+	cp $80
+	ret z
+	farcall GetOWLevelCollectedTreasures
+	ret
+; 0x9ab34
 
 LoadTreasureTiles: ; 9ab34 (26:6b34)
 	ld a, [wLevelGreyTreasureID]
@@ -407,7 +467,7 @@ LoadTreasureTiles: ; 9ab34 (26:6b34)
 	and c
 	swap a
 	ld c, a
-    ; bc = a * 4 tiles
+	; bc = a * 4 tiles
 	ld hl, TreasureGfx
 	add hl, bc
 	ld b, 4 tiles
@@ -415,7 +475,27 @@ LoadTreasureTiles: ; 9ab34 (26:6b34)
 	ret
 ; 0x9ab6d
 
-	INCROM $9ab6d, $9ab85
+; for each treasure that hasn't been collected
+; in the current level, write in [de]
+; a value of $00 (TREASURE_NONE)
+WriteUncollectedBottomBarTreasureIDs: ; 9ab6d (26:6b6d)
+	ld a, [wKeyAndTreasureFlags]
+	swap a
+	and $0f
+	ld b, a
+	ld c, NUM_LEVEL_TREASURES
+	ld de, wLevelTreasureIDs
+.loop_level_treasures
+	srl b
+	jr c, .next
+	xor a ; TREASURE_NONE
+	ld [de], a
+.next
+	inc e
+	dec c
+	jr nz, .loop_level_treasures
+	ret
+; 0x9ab85
 
 ; loads in wLevelTreasureIDs the treasure IDs for level in wOWLevel
 LoadLevelTreasures: ; 9ab85 (26:6b85)
@@ -473,7 +553,36 @@ LoadTreasurePals: ; 9aba1 (26:6ba1)
 	ret
 ; 0x9abd1
 
-	INCROM $9abd1, $9abf7
+Func_9abd1: ; 9abd1 (26:6bd1)
+	ld a, [wOWLevel]
+	and a
+	ret z
+	cp $80
+	ret z
+	ld hl, wca07
+	dec a
+	ld de, w2d0ee
+	add a ; *2
+	ld c, a
+	ld b, $00
+	add hl, bc
+	ld a, [hli]
+	ld [de], a ; w2d0ee
+	inc e
+	ld a, [hl]
+	ld [de], a ; w2d0ef
+	ret
+; 0x9abeb
+
+; fills wBottomBarTreasureIDs
+; with treasures in wLevelTreasureIDs
+FillBottomBarTreasureIDs: ; 9abeb (26:6beb)
+	ld de, wBottomBarTreasureIDs
+	ld hl, wLevelTreasureIDs
+	ld b, NUM_LEVEL_TREASURES
+	call CopyHLToDE
+	ret
+; 0x9abf7
 
 TreasureOBPals: ; 9abf7 (26:6bf7)
 	db OBPAL_TREASURE_YELLOW ; TREASURE_NONE

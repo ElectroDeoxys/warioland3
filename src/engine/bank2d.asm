@@ -3,9 +3,7 @@ Func_b4000: ; b4000 (2d:4000)
 ; 0xb4001
 
 Func_b4001: ; b4001 (2d:4001)
-.loop
-	nop
-	jr .loop
+	debug_nop
 ; 0xb4004
 
 Func_b4004: ; b4004 (2d:4004)
@@ -327,8 +325,8 @@ Func_b417a: ; b417a (2d:417a)
 	ld a, $90
 	ld [wWY], a
 	ldh [rWY], a
-	xor a
-	ld [w2d091], a
+	xor a ; BOTBAR_CLOSED
+	ld [wBottomBarAction], a
 
 	ld hl, Treasure000Gfx
 	ld de, v0Tiles1 tile $10
@@ -2678,7 +2676,7 @@ Func_b5b4e: ; b5b4e (2d:5b4e)
 	ld a, [w2d025]
 	and a
 	ret nz
-	ld a, [w2d050]
+	ld a, [wTopBarState]
 	and a
 	ret nz
 	play_sfx SFX_11D

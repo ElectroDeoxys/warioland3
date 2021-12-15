@@ -1774,9 +1774,7 @@ Func_84a97: ; 84a97 (21:4a97)
 	ld b, -1
 	dec a
 	jr z, .asm_84ad3
-.asm_84ad0
-	nop
-	jr .asm_84ad0
+	debug_nop
 .asm_84ad3
 	ld a, b
 	ld [w2d808], a
@@ -2307,13 +2305,73 @@ Func_85234: ; 85234 (21:5234)
 	ret
 ; 0x85271
 
-	INCROM $85271, $852e5
+Func_85271: ; 85271 (21:5271)
+	ld a, [w2d0d5]
+	cp $01
+	jr nc, .asm_852ca
+	ld a, $02
+	ld [w2d0e0], a
+
+	ld hl, $c038
+	ld de, $c138
+	ld b, $08
+	call CopyHLToDE
+
+	ld a, [w2d0e4]
+	and a
+	jr z, .asm_8529b
+
+	ld hl, $52df
+	ld de, $c03a
+	ld b, $06
+	call CopyHLToDE
+	jr .asm_852af
+
+.asm_8529b
+	ld hl, $4038
+	ld a, [w2d011]
+	and a
+	jr z, .asm_852a7
+	ld hl, $40f8
+.asm_852a7
+	ld de, $c038
+	ld b, $08
+	call CopyHLToDE
+
+.asm_852af
+	ld a, $c1
+	ld [w2d0d0 + $3], a
+	ld a, $38
+	ld [w2d0d0 + $4], a
+	ld a, $b8
+	ld [w2d0d0 + $1], a
+	ld a, $01
+	ld [w2d0d0 + $2], a
+	ld hl, w2d0d5
+	inc [hl]
+	scf
+	jr .asm_852d8
+
+.asm_852ca
+	call Func_85331
+	jr c, .asm_852d8
+	ld a, $00
+	ld [w2d0d5], a
+	inc a
+	ld [w2d0e0], a
+.asm_852d8
+	ld c, $00
+	rl c
+	ret
+; 0x852dd
+
+	INCROM $852dd, $852e5
 
 Func_852e5: ; 852e5 (21:52e5)
 	ld a, [w2d0e0]
 	xor $03
 	ret nz
-	ld a, [w2d091]
+	ld a, [wBottomBarAction]
 	and a
 	ret nz
 	ld a, [w2d0d5]
