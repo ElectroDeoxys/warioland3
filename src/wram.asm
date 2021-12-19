@@ -1183,7 +1183,7 @@ w2d01e:: ; d01e
 w2d01f:: ; d01f
 	ds $1
 
-w2d020:: ; d020
+wGotSunMedallion:: ; d020
 	ds $1
 
 	ds $1
@@ -1306,10 +1306,15 @@ w2d051:: ; d051
 
 	ds $1
 
-w2d053:: ; d053
+; 0: Day/Night spell
+; 1: Cutscene
+; 2: Collection
+; 3: Next map
+; 4: Prev map
+wTopBarSelection:: ; d053
 	ds $1
 
-w2d054:: ; d054
+wTopBarSelectableButtons:: ; d054
 	ds $1
 
 w2d055:: ; d055
@@ -1554,7 +1559,7 @@ wLevelBlueTreasurePal::  ds $1 ; d0f7
 
 	ds $2
 
-w2d0fa:: ; d0fa
+wBottomBarFlags:: ; d0fa
 	ds $1
 
 	ds $1
@@ -1598,10 +1603,7 @@ w2d10e:: ; d10e
 
 	ds $1
 
-w2d110:: ; d110
-	ds $3
-
-	ds $1
+wCompassSprite:: sprite_oam_struct wCompassSprite ; d110
 
 w2d114:: ; d114
 	ds $2
@@ -1719,10 +1721,10 @@ wOWObj13:: ow_obj_struct wOWObj13 ; d1e8
 wOWObj14:: ow_obj_struct wOWObj14 ; d1f0
 wOWObj15:: ow_obj_struct wOWObj15 ; d1f8
 
-wBGMap1:: ; d200
+wTilemap:: ; d200
 	ds $300
 
-wBGMap2:: ; d500
+wAttrmap:: ; d500
 	ds $300
 
 w2d800:: ; d800

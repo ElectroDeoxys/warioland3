@@ -684,7 +684,7 @@ Func_80377: ; 80377 (20:4377)
 	cp MAP_EAST
 	jr nz, Func_8038a
 	; east side
-	ld a, [w2d020]
+	ld a, [wGotSunMedallion]
 	and a
 	jr nz, Func_8038a
 	ld hl, wca3b
@@ -781,19 +781,17 @@ Func_803f9: ; 803f9 (20:43f9)
 
 	ld a, [wTopBarState]
 	cp $04
-	jr z, .asm_8043c
+	jr z, .skip_get_level_index
 	ld a, [wOWLevel]
 	cp LEVEL_GOLF_BUILDING
 	jp nc, .asm_804b9
-
 	ld b, a
 	call GetMapSideLevelIndex
 	ld a, b
 	ld [wNextMapSide], a
 	ld a, d
 	ld [wMapSideLevelIndex], a
-
-.asm_8043c
+.skip_get_level_index
 	call Func_80b29
 
 	ld a, [w2d01b]
@@ -942,7 +940,7 @@ Func_80540: ; 80540 (20:4540)
 	call Func_82bb8
 	call Func_82bda
 	farcall Func_b4a37
-	call Func_8202c
+	call AddCompassSprite
 	call ClearVirtualOAM
 	ret
 ; 0x8055f
@@ -1009,7 +1007,7 @@ Func_8055f: ; 8055f (20:455f)
 
 Func_805d7: ; 805d7 (20:45d7)
 	call Func_80e89
-	call Func_8202c
+	call AddCompassSprite
 	call ClearVirtualOAM
 	ret
 ; 0x805e1
@@ -1048,16 +1046,16 @@ Func_8060f: ; 8060f (20:460f)
 Func_80621: ; 80621 (20:4621)
 	ld a, CUTSCENE_1B
 	call Func_819c6
-	ld [w2d020], a
-	ld a, [w2d020] ; unnecessary
+	ld [wGotSunMedallion], a
+	ld a, [wGotSunMedallion] ; unnecessary
 	and a
-	jr nz, .asm_8063b
+	jr nz, .got_medallion
 	ld a, $01
 	ld [w2d011], a
 	ld hl, wca3b
 	set 0, [hl]
 	res 7, [hl]
-.asm_8063b
+.got_medallion
 	ld a, [wcee3]
 	cp $34
 	call z, Func_80655
@@ -1200,23 +1198,25 @@ Func_8065e: ; 8065e (20:465e)
 	call IsTreasureCollected
 	ld [wHasMagnifyingGlass], a
 
+	; collection button is always selectable
 	xor a
-	ld hl, w2d054
+	ld hl, wTopBarSelectableButtons
 	ld [hl], a
-	set 2, [hl]
-	call Func_8178b
-	call Func_817a3
-	call Func_817d7
-	call Func_8182b
+	set TOPBAR_COLLECTION_F, [hl]
+
+	call SetDayNightSpellSelectable
+	call SetCutsceneButtonSelectable
+	call SetNextPrevMapButtonsSelectable
+	call UpdateNextPrevMapButtonsSelectable
 
 	ld hl, v0BGMap0 tile $3c
-	ld de, wBGMap1 tile $2a
+	ld de, wTilemap tile $2a
 	ld b, 4 tiles
 	call CopyHLToDE
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, v1BGMap0 tile $3c
-	ld de, wBGMap1 tile $26
+	ld de, wTilemap tile $26
 	ld b, 4 tiles
 	call CopyHLToDE
 	xor a
@@ -1226,13 +1226,13 @@ Func_8065e: ; 8065e (20:465e)
 	cp $04
 	jr nz, .asm_80809
 	call Func_822b4
-	ld hl, wBGMap1 tile $2a
+	ld hl, wTilemap tile $2a
 	ld de, v0BGMap0 tile $3c
 	ld b, 4 tiles
 	call CopyHLToDE
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, wBGMap1 tile $26
+	ld hl, wTilemap tile $26
 	ld de, v1BGMap0 tile $3c
 	ld b, 4 tiles
 	call CopyHLToDE
@@ -1258,16 +1258,20 @@ Func_8065e: ; 8065e (20:465e)
 	ld a, b
 	ld [w2d0e0], a
 	farcall DrawCoinCount
-	call Func_82012
+	call SetCompassSprite
+
 	ld a, [wTopBarState]
 	and a
-	call z, Func_828b3
+	call z, DrawBottomBar
+
 	xor a
 	ld [w2d073], a
 	ld [w2d055], a
 	ld [w2d013], a
+
 	ld a, LCDC_ON | LCDC_WIN9C00 | LCDC_WINON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
 	ldh [rLCDC], a
+
 	ld hl, wSubState
 	inc [hl]
 	ret
@@ -1345,7 +1349,7 @@ Func_8086f: ; 8086f (20:486f)
 
 	xor a
 	ld [w2d0e0], a
-	call Func_82012
+	call SetCompassSprite
 	xor a
 	ld [w2d073], a
 	ld [w2d055], a
@@ -1396,13 +1400,13 @@ Func_80930: ; 80930 (20:4930)
 Func_8094e: ; 8094e (20:494e)
 	ld a, CUTSCENE_1B
 	call Func_819c6
-	ld [w2d020], a
-	ld a, [w2d020] ; unnecessary
+	ld [wGotSunMedallion], a
+	ld a, [wGotSunMedallion] ; unnecessary
 	and a
-	jr nz, .asm_80961
+	jr nz, .got_medallion
 	ld a, $01
 	ld [w2d011], a
-.asm_80961
+.got_medallion
 	call Func_80ab5
 	call LoadOverworld6Gfx
 	call LoadOverworldCommonGfx
@@ -1419,7 +1423,7 @@ LoadBGMapsToWRAM: ; 80973 (20:4973)
 	ldh [rVBK], a
 	ld a, e
 	ld [wTempBank], a
-	ld bc, wBGMap1
+	ld bc, wTilemap
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	hcall Decompress
@@ -1605,16 +1609,16 @@ Func_80b29: ; 80b29 (20:4b29)
 	ret
 ; 0x80b34
 
-; copies from wBGMap2 to v0BGMap0
-; and from wBGMap1 to v1BGMap0
+; copies from wAttrmap to v0BGMap0
+; and from wTilemap to v1BGMap0
 WriteBGMapFromWRAM: ; 80b34 (20:4b34)
-	ld hl, wBGMap2
+	ld hl, wAttrmap
 	ld de, v0BGMap0
 	ld bc, $260
 	call CopyHLToDE_BC
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, wBGMap1
+	ld hl, wTilemap
 	ld de, v1BGMap0
 	ld bc, $260
 	call CopyHLToDE_BC
@@ -1685,12 +1689,12 @@ Func_80bc9: ; 80bc9 (20:4bc9)
 ; 0x80bd9
 
 Func_80bd9: ; 80bd9 (20:4bd9)
-	ld hl, wBGMap1 tile $1c
+	ld hl, wTilemap tile $1c
 	res 7, [hl]
 	ld de, 30 tiles
 	ld c, $04
 .loop_outer
-	ld hl, wBGMap1
+	ld hl, wTilemap
 	add hl, de
 	ld b, $03
 .loop_inner
@@ -1856,10 +1860,10 @@ VBlank_80cb1: ; 80cb1 (20:4cb1)
 	and a
 	jr z, .asm_80cff
 	ld c, LOW(rHDMA1)
-	ld a, HIGH(wBGMap2)
+	ld a, HIGH(wAttrmap)
 	ld [$ff00+c], a
 	inc c
-	xor a ; LOW(wBGMap2)
+	xor a ; LOW(wAttrmap)
 	ld [$ff00+c], a
 	inc c
 	ld a, $18
@@ -1874,10 +1878,10 @@ VBlank_80cb1: ; 80cb1 (20:4cb1)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld c, LOW(rHDMA1)
-	ld a, HIGH(wBGMap1)
+	ld a, HIGH(wTilemap)
 	ld [$ff00+c], a
 	inc c
-	xor a ; LOW(wBGMap1)
+	xor a ; LOW(wTilemap)
 	ld [$ff00+c], a
 	inc c
 	ld a, $18
@@ -1967,8 +1971,10 @@ Func_80e89: ; 80e89 (20:4e89)
 	ld a, [wTopBarState]
 	and a
 	jp nz, Func_81055
+
 	call HandleBottomBar
-	call Func_828b3
+	call DrawBottomBar
+
 	farcall Func_852e5
 	ld hl, w2d014
 	inc [hl]
@@ -2929,45 +2935,46 @@ Func_8150c: ; 8150c (20:550c)
 Func_81714: ; 81714 (20:5714)
 	INCROM $81714, $8178b
 
-Func_8178b: ; 8178b (20:578b)
+SetDayNightSpellSelectable: ; 8178b (20:578b)
 	ld a, TREASURE_DAY_OR_NIGHT_SPELL
 	call IsTreasureCollected
 	ret z
 	ld a, [wCurMapSide]
 	cp MAP_EAST
-	jr nz, .asm_8179d
-	ld a, [w2d020]
+	jr nz, .set_selectable
+	ld a, [wGotSunMedallion]
 	and a
 	ret z
-.asm_8179d
-	ld hl, w2d054
-	set 0, [hl]
+.set_selectable
+	ld hl, wTopBarSelectableButtons
+	set TOPBAR_DAY_NIGHT_F, [hl]
 	ret
 ; 0x817a3
 
-Func_817a3: ; 817a3 (20:57a3)
+SetCutsceneButtonSelectable: ; 817a3 (20:57a3)
 	ld a, [w2d00d]
 	cp $f0
 	ret z
 	and a
 	ret z
-	ld hl, w2d054
-	set 1, [hl]
+	ld hl, wTopBarSelectableButtons
+	set TOPBAR_CUTSCENE_F, [hl]
 	ret
 ; 0x817b1
 
 	INCROM $817b1, $817d7
 
-Func_817d7: ; 817d7 (20:57d7)
+SetNextPrevMapButtonsSelectable: ; 817d7 (20:57d7)
 	call Func_817e3
-	call Func_81818
-	ld hl, w2d054
+	call GetAccessibleMapFlags
+	ld hl, wTopBarSelectableButtons
 	or [hl]
 	ld [hl], a
 	ret
 ; 0x817e3
 
 Func_817e3: ; 817e3 (20:57e3)
+	; check west side accessible
 	ld a, CUTSCENE_03
 	call Func_819ac
 	rlca
@@ -2976,6 +2983,8 @@ Func_817e3: ; 817e3 (20:57e3)
 	ld hl, w2d07a
 	or [hl]
 	ld [hl], a
+
+	; check south side accessible
 	ld a, CUTSCENE_07
 	call Func_819ac
 	rlca
@@ -2983,25 +2992,29 @@ Func_817e3: ; 817e3 (20:57e3)
 	ld hl, w2d07a
 	or [hl]
 	ld [hl], a
+
+	; check east side accessible
 	ld a, CUTSCENE_0C
 	call Func_819ac
 	rlca
 	ld hl, w2d07a
 	or [hl]
 	ld [hl], a
+
+	; check north side accessible
 	ld a, CUTSCENE_37
 	call Func_819ac
 	ld hl, w2d07a
 	or [hl]
 	ld [hl], a
-	and $01
+	and $1
 	swap a
 	or [hl]
 	ld [hl], a
 	ret
 ; 0x81818
 
-Func_81818: ; 81818 (20:5818)
+GetAccessibleMapFlags: ; 81818 (20:5818)
 	ld a, [w2d07a]
 	ld b, a
 	ld a, [wCurMapSide]
@@ -3012,30 +3025,31 @@ Func_81818: ; 81818 (20:5818)
 	jr .loop
 .done
 	ld a, b
-	and $18
+	and TOPBAR_NEXT_MAP | TOPBAR_PREV_MAP
 	ret
 ; 0x8182b
 
-Func_8182b: ; 8182b (20:582b)
+UpdateNextPrevMapButtonsSelectable: ; 8182b (20:582b)
 	ld a, [wTopBarState]
 	and a
 	ret z
-	ld a, [w2d053]
-	and $18
+	ld a, [wTopBarSelection]
+	and TOPBAR_NEXT_MAP | TOPBAR_PREV_MAP
 	ret z
 	ld c, a
-	call Func_81818
+	call GetAccessibleMapFlags
 	and c
 	ret nz
-	ld hl, w2d053
-	bit 3, [hl]
-	jr nz, .asm_81848
-	res 4, [hl]
-	set 3, [hl]
+	ld hl, wTopBarSelection
+	bit TOPBAR_NEXT_MAP_F, [hl]
+	jr nz, .set_prev
+; set next
+	res TOPBAR_PREV_MAP_F, [hl]
+	set TOPBAR_NEXT_MAP_F, [hl]
 	ret
-.asm_81848
-	res 3, [hl]
-	set 4, [hl]
+.set_prev
+	res TOPBAR_NEXT_MAP_F, [hl]
+	set TOPBAR_PREV_MAP_F, [hl]
 	ret
 ; 0x8184d
 
@@ -4289,7 +4303,7 @@ Func_81dce: ; 81dce (20:5dce)
 	ld a, [w2d01b]
 	inc a
 	ret nz
-	ld [w2d01b], a
+	ld [w2d01b], a ; = 0
 	ret
 ; 0x81e16
 
@@ -4554,25 +4568,26 @@ Func_8200f: ; 8200f (20:600f)
 	ret
 ; 0x82012
 
-Func_82012: ; 82012 (20:6012)
+SetCompassSprite: ; 82012 (20:6012)
 	ld a, [wCurMapSide]
 	ld c, a
-	ld hl, .data
-	ld de, w2d110
+	ld hl, .coords
+	ld de, wCompassSprite
 	ld b, 2
 	call CopyHLToDE
 	ld a, c
 	ld [de], a
 	ret
 
-.data
+.coords
+	; y, x
 	db $14, $14
 ; 0x82026
 
 	INCROM $82026, $8202c
 
-Func_8202c: ; 8202c (20:602c)
-	ld hl, w2d110
+AddCompassSprite: ; 8202c (20:602c)
+	ld hl, wCompassSprite
 	ld de, $6580
 	ld b, $2a
 	call AddOWSpriteWithScroll
@@ -4929,34 +4944,37 @@ Func_82242: ; 82242 (20:6242)
 	dec a
 	jumptable
 
-	dw Func_82263
-	dw Func_82277
-	dw Func_822d7
-	dw Func_822f1
-	dw Func_82311
-	dw Func_8235b
-	dw Func_8237f
-	dw Func_8239e
-	dw Func_82400
-	dw Func_8241b
-	dw Func_8242e
+	dw Func_82263 ; $1
+	dw Func_82277 ; $2
+	dw Func_822d7 ; $3
+	dw Func_822f1 ; $4
+	dw Func_82311 ; $5
+	dw Func_8235b ; $6
+	dw Func_8237f ; $7
+	dw Func_8239e ; $8
+	dw Func_82400 ; $9
+	dw Func_8241b ; $a
+	dw Func_8242e ; $b
 ; 0x82263
 
 Func_82263: ; 82263 (20:6263)
-	call Func_828b3
+	; mark bottom bar as closing
+	call DrawBottomBar
 	ld a, BOTBAR_CLOSING
 	ld [wBottomBarAction], a
 	xor a
 	ld [wBottomBarState], a
 	ld [wMagnifyingGlassCounter], a
+
 	ld hl, wTopBarState
 	inc [hl]
 	ret
 ; 0x82277
 
 Func_82277: ; 82277 (20:6277)
+	; wait until bottom bar is fully closed
 	call HandleBottomBar
-	call Func_828b3
+	call DrawBottomBar
 	ld a, [wBottomBarAction]
 	and a
 	ret nz
@@ -4964,10 +4982,11 @@ Func_82277: ; 82277 (20:6277)
 	play_sfx SFX_0E9
 
 	xor a
-	set 2, a
-	ld [w2d053], a
+	set TOPBAR_COLLECTION_F, a
+	ld [wTopBarSelection], a
 	call Func_822b4
 	call Func_826f6
+
 	ld a, $6a
 	ld [w2d0d0 + $0], a
 	ld a, $c0
@@ -4978,6 +4997,7 @@ Func_82277: ; 82277 (20:6277)
 	ld [w2d0d0 + $1], a
 	ld a, $04
 	ld [w2d0d0 + $2], a
+
 	ld hl, wTopBarState
 	inc [hl]
 	ret
@@ -4986,12 +5006,14 @@ Func_82277: ; 82277 (20:6277)
 Func_822b4: ; 822b4 (20:62b4)
 	call Func_82490
 	call Func_82654
+
 	xor a
 	ld [w2d140], a
 	ld [w2d148], a
 	ld a, $1c
 	ld [w2d149], a
-	call Func_824ea
+	call DrawTopBar
+
 	ld hl, Pals_84a20
 	ld de, wTempPals2 palette 4
 	ld c, 4 palettes
@@ -5006,13 +5028,14 @@ Func_822d7: ; 822d7 (20:62d7)
 	dec a
 	ld [wTempSCY], a
 	cp $ec
-	jr nz, .asm_822ed
+	jr nz, .still_opening
+	; fully open, advance state
 	ld a, [wcee3]
 	ld [w2d02c], a
 	ld hl, wTopBarState
 	inc [hl]
-.asm_822ed
-	call Func_824ea
+.still_opening
+	call DrawTopBar
 	ret
 ; 0x822f1
 
@@ -5028,7 +5051,7 @@ Func_822f1: ; 822f1 (20:62f1)
 	ld hl, wTopBarState
 	inc [hl]
 .done
-	jp Func_824ea
+	jp DrawTopBar
 ; 0x82311
 
 Func_82311: ; 82311 (20:6311)
@@ -5066,7 +5089,7 @@ Func_82311: ; 82311 (20:6311)
 	ld a, $04
 	ld [w2d0d0 + 2], a
 .asm_82357
-	call Func_824ea
+	call DrawTopBar
 	ret
 ; 0x8235b
 
@@ -5076,7 +5099,7 @@ Func_8235b: ; 8235b (20:635b)
 	jr nz, .asm_82369
 	ld a, [w2d051]
 	cp 30
-	jr c, .asm_8237b
+	jr c, .done
 .asm_82369
 	ld a, [w2d00d]
 	ld [wcee3], a
@@ -5087,8 +5110,8 @@ Func_8235b: ; 8235b (20:635b)
 	ld [hld], a
 	ld a, $04
 	ld [hl], a ; wTopBarState
-.asm_8237b
-	call Func_824ea
+.done
+	call DrawTopBar
 	ret
 ; 0x8237f
 
@@ -5108,7 +5131,7 @@ Func_8237f: ; 8237f (20:637f)
 	ld a, SST_OVERWORLD_0C
 	ld [wSubState], a
 .asm_8239a
-	call Func_824ea
+	call DrawTopBar
 	ret
 ; 0x8239e
 
@@ -5147,7 +5170,7 @@ Func_8239e: ; 8239e (20:639e)
 	ld [wSubState], a
 
 .asm_823e2
-	call Func_824ea
+	call DrawTopBar
 	ret
 
 .GetNextLevelIndex
@@ -5171,7 +5194,7 @@ Func_8239e: ; 8239e (20:639e)
 ; 0x82400
 
 Func_82400: ; 82400 (20:6400)
-	call Func_824ea
+	call DrawTopBar
 	ld a, [w2d142]
 	cp $04
 	jr z, .asm_8240d
@@ -5196,7 +5219,7 @@ Func_8241b: ; 8241b (20:641b)
 	ld hl, wTopBarState
 	inc [hl]
 .asm_8242a
-	call Func_824ea
+	call DrawTopBar
 	ret
 ; 0x8242e
 
@@ -5213,18 +5236,18 @@ Func_8242e: ; 8242e (20:642e)
 	ld a, $04
 	ld [wTopBarState], a
 .asm_8244d
-	call Func_824ea
+	call DrawTopBar
 	ret
 ; 0x82451
 
 Func_82451: ; 82451 (20:6451)
 	xor a
-	ld a, [w2d053]
+	ld a, [wTopBarSelection]
 	ld b, a
-	ld hl, w2d053
+	ld hl, wTopBarSelection
 	ld a, [wJoypadPressed]
 	ld c, a
-	ld a, [w2d054]
+	ld a, [wTopBarSelectableButtons]
 	ld d, a
 	bit D_RIGHT_F, c
 	jr nz, .d_right
@@ -5233,13 +5256,15 @@ Func_82451: ; 82451 (20:6451)
 	ret
 
 .d_right
+	; find the first item to the right
+	; that can be selectable
 	ld a, d
 	rrc b
 	ret c
 	and b
 	jr z, .d_right
 
-.asm_82471
+.got_selection
 	ld [hl], b
 	call Func_82490
 	call Func_82654
@@ -5249,31 +5274,33 @@ Func_82451: ; 82451 (20:6451)
 	ret
 
 .d_left
+	; find the first item to the left
+	; that can be selectable
 	ld a, d
 	sla b
-	bit 5, b
+	bit (TOPBAR_PREV_MAP_F + 1), b
 	ret nz
 	and b
 	jr z, .d_left
-	jr .asm_82471
+	jr .got_selection
 ; 0x82490
 
 Func_82490: ; 82490 (20:6490)
-	ld a, [w2d053]
+	ld a, [wTopBarSelection]
 	ld c, $00
-	bit 0, a
+	bit TOPBAR_DAY_NIGHT_F, a
 	jr nz, .asm_824d4
 	inc c
-	bit 1, a
+	bit TOPBAR_CUTSCENE_F, a
 	jr nz, .asm_824ab
 	inc c
-	bit 2, a
+	bit TOPBAR_COLLECTION_F, a
 	jr nz, .asm_824ab
 	inc c
-	bit 3, a
+	bit TOPBAR_NEXT_MAP_F, a
 	jr nz, .asm_824ab
 	inc c
-	bit 4, a
+	bit TOPBAR_PREV_MAP_F, a ; unnecessary
 .asm_824ab
 	ld a, c
 	add a ; *2
@@ -5286,13 +5313,14 @@ Func_82490: ; 82490 (20:6490)
 	ld a, [hl]
 	ld hl, w2d146
 	ld [hld], a
+
 	xor a
 	ld [hld], a
 	ld [hl], a ; w2d144
 
 	ld c, $00
-	ld a, [w2d053]
-	and $18
+	ld a, [wTopBarSelection]
+	and TOPBAR_NEXT_MAP | TOPBAR_PREV_MAP
 	jr z, .asm_824cb
 	ld c, $0b
 .asm_824cb
@@ -5312,15 +5340,15 @@ Func_82490: ; 82490 (20:6490)
 	jr .asm_824ab
 
 .data
-	db $60, $07
-	db $50, $03
-	db $40, $01
-	db $2c, $0d
-	db $0c, $09
-	db $60, $05
+	db $60, $07 ; $0
+	db $50, $03 ; $1
+	db $40, $01 ; $2
+	db $2c, $0d ; $3
+	db $0c, $09 ; $4
+	db $60, $05 ; $5
 ; 0x824ea
 
-Func_824ea: ; 824ea (20:64ea)
+DrawTopBar: ; 824ea (20:64ea)
 	call Func_824f1
 	call Func_8250a
 	ret
@@ -5356,100 +5384,98 @@ Func_82521: ; 82521 (20:6521)
 	push hl
 	jumptable
 
-	dw Func_82541
-	dw Func_82543
-	dw Func_82548
-	dw Func_8254d
-	dw Func_82552
-	dw Func_82557
-	dw Func_8255c
-	dw Func_82567
-	dw Func_8256c
-	dw Func_82577
-	dw Func_8257c
-	dw Func_82581
-	dw Func_82586
-	dw Func_8258b
-	dw Func_82590
+	dw .Func_82541
+	dw .Func_82543
+	dw .Func_82548
+	dw .Func_8254d
+	dw .Func_82552
+	dw .Func_82557
+	dw .Func_8255c
+	dw .Func_82567
+	dw .Func_8256c
+	dw .Func_82577
+	dw .Func_8257c
+	dw .Func_82581
+	dw .Func_82586
+	dw .Func_8258b
+	dw .Func_82590
 ; 0x82541
 
-Func_82541: ; 82541 (20:6541)
+.Func_82541
 	pop hl
 	ret
-; 0x82543
 
-Func_82543: ; 82543 (2d:6543)
+.Func_82543
 	ld de, Frameset_aa091
-	jr Func_82593
+	jr .UpdateAnimation_PopHL
 
-Func_82548: ; 82548 (2d:6548)
+.Func_82548
 	ld de, Frameset_aa094
-	jr Func_82593
+	jr .UpdateAnimation_PopHL
 
-Func_8254d: ; 8254d (2d:654d)
+.Func_8254d
 	ld de, Frameset_aa097
-	jr Func_82593
+	jr .UpdateAnimation_PopHL
 
-Func_82552: ; 82552 (2d:6552)
+.Func_82552
 	ld de, Frameset_aa09a
-	jr Func_82593
+	jr .UpdateAnimation_PopHL
 
-Func_82557: ; 82557 (2d:6557)
+.Func_82557
 	ld de, Frameset_aa09d
-	jr Func_82593
+	jr .UpdateAnimation_PopHL
 
-Func_8255c: ; 8255c (2d:655c)
+.Func_8255c
 	ld de, Frameset_aa0bc
 	pop hl
-	call Func_82594
+	call .UpdateAnimation
 	ld b, $07
-	jr Func_8259a
+	jr .Func_8259a
 
-Func_82567: ; 82567 (2d:6567)
+.Func_82567
 	ld de, Frameset_aa0a3
-	jr Func_82593
+	jr .UpdateAnimation_PopHL
 
-Func_8256c: ; 8256c (2d:656c)
+.Func_8256c
 	ld de, Frameset_aa0c1
 	pop hl
-	call Func_82594
+	call .UpdateAnimation
 	ld b, $05
-	jr Func_8259a
+	jr .Func_8259a
 
-Func_82577: ; 82577 (2d:6577)
+.Func_82577
 	ld de, Frameset_aa0a9
-	jr Func_82593
+	jr .UpdateAnimation_PopHL
 
-Func_8257c: ; 8257c (2d:657c)
+.Func_8257c
 	ld de, Frameset_aa0ae
-	jr Func_82593
+	jr .UpdateAnimation_PopHL
 
-Func_82581: ; 82581 (2d:6581)
+.Func_82581
 	ld de, Frameset_aa0b1
-	jr Func_82593
+	jr .UpdateAnimation_PopHL
 
-Func_82586: ; 82586 (2d:6586)
+.Func_82586
 	ld de, Frameset_aa0c6
-	jr Func_82593
+	jr .UpdateAnimation_PopHL
 
-Func_8258b: ; 8258b (2d:658b)
+.Func_8258b
 	ld de, Frameset_aa0b4
-	jr Func_82593
+	jr .UpdateAnimation_PopHL
 
-Func_82590: ; 82590 (2d:6590)
+.Func_82590
 	ld de, Frameset_aa0b9
 ;	fallthrough
 
-Func_82593: ; 82593 (20:6593)
+.UpdateAnimation_PopHL
 	pop hl
 ;	fallthrough
-
-Func_82594: ; 82594 (20:6594)
+.UpdateAnimation
 	ld b, $2a
 	call UpdateOWAnimation
 	ret
 
-Func_8259a: ; 8259a (20:659a)
+.Func_8259a
 	ld a, [wOWAnimationFinished]
 	cp $ff
 	ret nz
@@ -5472,48 +5498,48 @@ Func_825af: ; 825af (20:65af)
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	ret z
-	ld a, [w2d053]
-	bit 0, a
-	jr nz, .asm_825cf
-	bit 1, a
-	jr nz, .asm_825e7
-	bit 2, a
-	jr nz, .asm_82600
-	bit 3, a
-	jr nz, .asm_82619
-	bit 4, a
-	jr nz, .asm_8262a
+	ld a, [wTopBarSelection]
+	bit TOPBAR_DAY_NIGHT_F, a
+	jr nz, .DayNight
+	bit TOPBAR_CUTSCENE_F, a
+	jr nz, .Cutscene
+	bit TOPBAR_COLLECTION_F, a
+	jr nz, .Collection
+	bit TOPBAR_NEXT_MAP_F, a
+	jr nz, .NextMap
+	bit TOPBAR_PREV_MAP_F, a
+	jr nz, .PrevMap
 	xor a
 	ret
 
-.asm_825cf
+.DayNight
 	call Func_82640
-	ld de, wBGMap1 tile $26 + $b
+	ld de, wTilemap tile $26 + $b
 	call Func_8264a
 	ld a, $09
 	ld [wTopBarState], a
 
-.asm_825dd
+.do_selection
 	play_sfx SFX_0E3
 	scf
 	ret
 
-.asm_825e7
+.Cutscene
 	ld a, [w2d00d]
 	and a
 	ret z
 	call Func_82640
-	ld de, wBGMap1 tile $26 + $9
+	ld de, wTilemap tile $26 + $9
 	call Func_8264a
 	ld a, $06
 	ld [wTopBarState], a
 	xor a
 	ld [w2d051], a
-	jr .asm_825dd
+	jr .do_selection
 
-.asm_82600
+.Collection
 	call Func_82640
-	ld de, wBGMap1 tile $26 + $7
+	ld de, wTilemap tile $26 + $7
 	call Func_8264a
 	ld a, $07
 	ld [wTopBarState], a
@@ -5521,25 +5547,25 @@ Func_825af: ; 825af (20:65af)
 	ld [w2d051], a
 	ld a, $00
 	ld [w2d07b], a
-	jr .asm_825dd
+	jr .do_selection
 
-.asm_82619
+.NextMap
 	call Func_82640
 	call Func_8263b
 	ld a, $08
 	ld [wTopBarState], a
 	xor a
 	ld [w2d051], a
-	jr .asm_825dd
+	jr .do_selection
 
-.asm_8262a
+.PrevMap
 	call Func_82640
 	call Func_8263b
 	ld a, $08
 	ld [wTopBarState], a
 	xor a
 	ld [w2d051], a
-	jr .asm_825dd
+	jr .do_selection
 ; 0x8263b
 
 Func_8263b: ; 8263b (20:663b)
@@ -5561,47 +5587,46 @@ Func_82643: ; 82643 (20:6643)
 ; 0x8264a
 
 Func_8264a: ; 8264a (20:664a)
-	ld hl, $66ee
+	ld hl, Data_826ee
 	call Func_8269f
 	call Func_826f6
 	ret
 ; 0x82654
 
 Func_82654: ; 82654 (20:6654)
-	ld a, [w2d054]
+	ld a, [wTopBarSelectableButtons]
 	ld b, a
-	ld hl, $66c6
-	ld de, wBGMap1 + $26b
-	call Func_82698
-	ld hl, $66ce
-	ld de, wBGMap1 + $269
-	call Func_82698
-	ld hl, $66d6
-	ld de, wBGMap1 + $267
-	call Func_82698
-	ld a, [w2d053]
+	ld hl, Data_826c6
+	ld de, wTilemap + $26b
+	call .Func_82698
+	ld hl, Data_826ce
+	ld de, wTilemap + $269
+	call .Func_82698
+	ld hl, Data_826d6
+	ld de, wTilemap + $267
+	call .Func_82698
+	ld a, [wTopBarSelection]
 	ld b, a
-	ld hl, $66de
-	ld de, wBGMap1 + $26b
-	call Func_82693
-	ld hl, $66de
-	ld de, wBGMap1 + $269
-	call Func_82693
-	ld hl, $66e6
-	ld de, wBGMap1 + $267
-	call Func_82693
+	ld hl, Data_826de
+	ld de, wTilemap + $26b
+	call .Func_82693
+	ld hl, Data_826de
+	ld de, wTilemap + $269
+	call .Func_82693
+	ld hl, Data_826e6
+	ld de, wTilemap + $267
+	call .Func_82693
 	ret
-; 0x82693
 
-Func_82693: ; 82693 (20:6693)
+.Func_82693
 	srl b
 	ret nc
 	jr Func_8269f
 
-Func_82698: ; 82698 (20:6698)
+.Func_82698
 	srl b
 	jr c, Func_8269f
-	ld hl, $66be
+	ld hl, Data_826be
 ;	fallthrough
 
 Func_8269f: ; 8269f (20:669f)
@@ -5636,12 +5661,39 @@ Func_8269f: ; 8269f (20:669f)
 	jr .loop
 ; 0x826be
 
-	INCROM $826be, $826f6
+Data_826be: ; 826be (20:66be)
+	db $3c, $3c, $3d, $3d
+	db $0f, $2f, $0f, $2f
+
+Data_826c6: ; 826c6 (20:66c6)
+	db $3e, $3e, $3f, $3f
+	db $0f, $2f, $0f, $2f
+
+Data_826ce: ; 826ce (20:66ce)
+	db $3a, $3a, $3b, $3b
+	db $0f, $2f, $0f, $2f
+
+Data_826d6: ; 826d6 (20:66d6)
+	db $38, $38, $39, $39
+	db $0f, $2f, $0f, $2f
+
+Data_826de: ; 826de (20:66de)
+	db $34, $35, $36, $37
+	db $0f, $0f, $0f, $0f
+
+Data_826e6: ; 826e6 (20:66e6)
+	db $30, $31, $32, $33
+	db $0f, $0f, $0f, $0f
+
+Data_826ee: ; 826ee (20:66ee)
+	db $48, $49, $4a, $4b
+	db $0f, $0f, $0f, $0f
+; 0x826f6
 
 Func_826f6: ; 826f6 (20:66f6)
-	ld a, HIGH(wBGMap1 tile $2a)
+	ld a, HIGH(wTilemap tile $2a)
 	ld [wHDMA + 0], a
-	ld a, LOW(wBGMap1 tile $2a)
+	ld a, LOW(wTilemap tile $2a)
 	ld [wHDMA + 1], a
 	ld a, $1b
 	ld [wHDMA + 2], a
@@ -5650,9 +5702,9 @@ Func_826f6: ; 826f6 (20:66f6)
 	ld a, $03
 	ld [wHDMA + 4], a
 
-	ld a, HIGH(wBGMap1 tile $26)
+	ld a, HIGH(wTilemap tile $26)
 	ld [w2d0b5 + 0], a
-	ld a, LOW(wBGMap1 tile $26)
+	ld a, LOW(wTilemap tile $26)
 	ld [w2d0b5 + 1], a
 	ld a, $1b
 	ld [w2d0b5 + 2], a
@@ -5748,7 +5800,7 @@ HandleBottomBar: ; 82761 (20:6761)
 
 	; no longer pressing B,
 	; begin closing bar
-	ld hl, w2d0fa
+	ld hl, wBottomBarFlags
 	res 4, [hl]
 	ld a, BOTBAR_CLOSING
 	ld [wBottomBarAction], a
@@ -5769,7 +5821,7 @@ HandleBottomBar: ; 82761 (20:6761)
 	dw .SetBottomBarAsOpen
 
 .no_b_btn
-	ld hl, w2d0fa
+	ld hl, wBottomBarFlags
 	res 4, [hl]
 	ld a, BOTBAR_CLOSING
 	ld [wBottomBarAction], a
@@ -5778,7 +5830,7 @@ HandleBottomBar: ; 82761 (20:6761)
 	ret
 
 .InitBar
-	ld hl, w2d0fa
+	ld hl, wBottomBarFlags
 	set 4, [hl]
 	xor a
 	ld [wHDMA], a
@@ -5820,7 +5872,7 @@ HandleBottomBar: ; 82761 (20:6761)
 ; here, we use the divider register to
 ; determine which treasure gfx to load
 ; so that they appear in "random" time intervals
-	ld hl, w2d0fa
+	ld hl, wBottomBarFlags
 .loop_outer ; loop until we set a bit that is unset
 	ldh a, [rDIV]
 	and $0f
@@ -5858,7 +5910,7 @@ HandleBottomBar: ; 82761 (20:6761)
 	ld [wBottomBarAction], a
 	xor a
 	ld [wBottomBarState], a
-	ld hl, w2d0fa
+	ld hl, wBottomBarFlags
 	bit 6, [hl]
 	ret z
 	set 7, [hl]
@@ -5890,7 +5942,7 @@ HandleBottomBar: ; 82761 (20:6761)
 	ret
 
 .DeinitBar
-	ld hl, w2d0fa
+	ld hl, wBottomBarFlags
 	ld a, $1 << 6
 	and [hl]
 	ld [hl], a
@@ -5905,7 +5957,7 @@ HandleBottomBar: ; 82761 (20:6761)
 	ret
 ; 0x828b3
 
-Func_828b3: ; 828b3 (20:68b3)
+DrawBottomBar: ; 828b3 (20:68b3)
 	ld a, [wca3d]
 	bit 1, a
 	jp nz, Func_82997
@@ -5913,65 +5965,69 @@ Func_828b3: ; 828b3 (20:68b3)
 	ld a, [wLevelGreyTreasurePal]
 	ld c, a
 	ld e, $00
-	ld a, [w2d0fa]
+	ld a, [wBottomBarFlags]
 	bit 0, a
-	jr nz, .asm_828cc
+	jr nz, .has_grey
 	ld e, $09
 	ld c, $00
-.asm_828cc
+.has_grey
 	ld d, $20
-	call Func_8291e
+	call AddSpriteInsideWindow_Low
 
 	ld a, [wLevelRedTreasurePal]
 	ld c, a
 	ld e, $01
-	ld a, [w2d0fa]
+	ld a, [wBottomBarFlags]
 	bit 1, a
-	jr nz, .asm_828e2
+	jr nz, .has_red
 	ld e, $09
 	ld c, $00
-.asm_828e2
+.has_red
 	ld d, $3c
-	call Func_8291e
+	call AddSpriteInsideWindow_Low
 
 	ld a, [wLevelGreenTreasurePal]
 	ld c, a
 	ld e, $02
-	ld a, [w2d0fa]
+	ld a, [wBottomBarFlags]
 	bit 2, a
-	jr nz, .asm_828f8
+	jr nz, .has_green
 	ld e, $09
 	ld c, $00
-.asm_828f8
+.has_green
 	ld d, $58
-	call Func_8291e
+	call AddSpriteInsideWindow_Low
 
 	ld a, [wLevelBlueTreasurePal]
 	ld c, a
 	ld e, $03
-	ld a, [w2d0fa]
+	ld a, [wBottomBarFlags]
 	bit 3, a
-	jr nz, .asm_8290e
+	jr nz, .has_blue
 	ld e, $09
 	ld c, $00
-.asm_8290e
+.has_blue
 	ld d, $74
-	call Func_8291e
+	call AddSpriteInsideWindow_Low
 
-	call Func_8295b
-	call Func_8293f
+	call DrawBottomBarButtonPrompt
+	call DrawBottomBar8Coin
 	ret
 ; 0x8291a
 
-Func_8291a: ; 8291a (20:691a)
+AddSpriteInsideWindow_High: ; 8291a (20:691a)
 	ld b, $20
-	jr Func_82920
+	jr AddSpriteInsideWindow
 
-Func_8291e: ; 8291e (20:691e)
+AddSpriteInsideWindow_Low: ; 8291e (20:691e)
 	ld b, $24
 ;	fallthrough
 
-Func_82920: ; 82920 (20:6920)
+; b = y coord
+; d = x coord
+; e = tile ID
+; c = attributes
+AddSpriteInsideWindow: ; 82920 (20:6920)
 	ld a, [wWY]
 	add b
 	ld [wCurSpriteYCoord], a
@@ -5988,39 +6044,39 @@ Func_82920: ; 82920 (20:6920)
 	ret
 ; 0x8293f
 
-Func_8293f: ; 8293f (20:693f)
-	ld a, [w2d0fa]
+DrawBottomBar8Coin: ; 8293f (20:693f)
+	ld a, [wBottomBarFlags]
 	bit 7, a
 	ret z
 	ld hl, w2d116
 	ld de, Frameset_aa2fb
-	ld b, $2a
+	ld b, BANK(Frameset_aa2fb)
 	call UpdateOWAnimation
 	ld d, $90
 	ld hl, w2d114
 	ld a, [hli]
 	ld e, a
 	ld c, $00
-	jr Func_8291e
+	jr AddSpriteInsideWindow_Low
 ; 0x8295b
 
-Func_8295b: ; 8295b (20:695b)
+DrawBottomBarButtonPrompt: ; 8295b (20:695b)
 	ld a, [wHasMagnifyingGlass]
 	and a
 	ret z
 	ld b, $04
 	ld a, [wOWLevel]
-	add a ; *2
+	add a
 	jr nz, .asm_8296c
 	; wOWLevel == $00 or $80
 	ld b, $06
-	jr .asm_82975
+	jr .got_tile
 .asm_8296c
-	ld a, [w2d0fa]
+	ld a, [wBottomBarFlags]
 	bit 4, a
-	jr z, .asm_82975
+	jr z, .got_tile
 	ld b, $05
-.asm_82975
+.got_tile
 	ld a, b
 	ld [wCurSpriteTileID], a
 	ld a, [wWY]
@@ -6039,42 +6095,42 @@ Func_8295b: ; 8295b (20:695b)
 
 Func_82997: ; 82997 (20:6997)
 	call Func_829a1
-	call Func_8295b
-	call Func_8293f
+	call DrawBottomBarButtonPrompt
+	call DrawBottomBar8Coin
 	ret
 ; 0x829a1
 
 Func_829a1: ; 829a1 (20:69a1)
 	ld a, [w2d0ee]
 	and $f0
-	swap a
+	swap a ; top nybble
 	add $1e
 	ld e, a
 	ld c, $00
 	ld d, $50
-	call Func_8291a
+	call AddSpriteInsideWindow_High
 	ld a, [w2d0ee]
-	and $0f
+	and $0f ; bottom nybble
 	add $1e
 	ld e, a
 	ld c, $00
 	ld d, $58
-	call Func_8291a
+	call AddSpriteInsideWindow_High
 	ld a, [w2d0ef]
 	and $f0
-	swap a
+	swap a ; top nybble
 	add $1e
 	ld e, a
 	ld c, $00
 	ld d, $68
-	call Func_8291a
+	call AddSpriteInsideWindow_High
 	ld a, [w2d0ef]
-	and $0f
+	and $0f ; bottom nybbles
 	add $1e
 	ld e, a
 	ld c, $00
 	ld d, $70
-	call Func_8291a
+	call AddSpriteInsideWindow_High
 	ret
 ; 0x829e2
 

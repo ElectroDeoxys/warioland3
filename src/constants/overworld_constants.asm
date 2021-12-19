@@ -67,7 +67,21 @@ OW_EXIT_LEFT  EQU $0f
 
 ; OW bottom bar action
 	const_def
-	const BOTBAR_CLOSED          ; $0
-	const BOTBAR_OPENED          ; $1
-	const BOTBAR_CLOSING         ; $2
-	const BOTBAR_OPENING         ; $3
+	const BOTBAR_CLOSED  ; $0
+	const BOTBAR_OPENED  ; $1
+	const BOTBAR_CLOSING ; $2
+	const BOTBAR_OPENING ; $3
+
+; OW top bar selection
+	const_def
+	const TOPBAR_DAY_NIGHT_F  ; $0
+	const TOPBAR_CUTSCENE_F   ; $1
+	const TOPBAR_COLLECTION_F ; $2
+	const TOPBAR_NEXT_MAP_F   ; $3
+	const TOPBAR_PREV_MAP_F   ; $4
+
+TOPBAR_DAY_NIGHT  EQU (1 << TOPBAR_DAY_NIGHT_F)
+TOPBAR_CUTSCENE   EQU (1 << TOPBAR_CUTSCENE_F)
+TOPBAR_COLLECTION EQU (1 << TOPBAR_COLLECTION_F)
+TOPBAR_NEXT_MAP   EQU (1 << TOPBAR_NEXT_MAP_F)
+TOPBAR_PREV_MAP   EQU (1 << TOPBAR_PREV_MAP_F)

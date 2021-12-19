@@ -405,7 +405,7 @@ Func_9aaf4: ; 9aaf4 (26:6af4)
 	ld a, [wOWLevel]
 	call Func_1783
 	ret z
-	ld hl, w2d0fa
+	ld hl, wBottomBarFlags
 	set 6, [hl]
 	ld hl, w2d116
 	xor a

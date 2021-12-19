@@ -1657,7 +1657,7 @@ Func_4ae7: ; 4ae7 (1:4ae7)
 	ld a, [wca3b]
 	and %1
 	add a
-	add a ; << 2
+	add a ; *4
 	ld b, a
 	ld a, [wLevel]
 	or b
