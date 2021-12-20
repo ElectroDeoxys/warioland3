@@ -1,8 +1,8 @@
 OverworldClouds1Gfx:: INCBIN "gfx/overworld/overworld_clouds1.2bpp"
 OverworldClouds2Gfx:: INCBIN "gfx/overworld/overworld_clouds2.2bpp"
 OverworldSeaGfx::     INCBIN "gfx/overworld/overworld_sea.2bpp"
-OverworldCliffs1Gfx::  INCBIN "gfx/overworld/overworld_cliffs1.2bpp"
-OverworldCliffs2Gfx::  INCBIN "gfx/overworld/overworld_cliffs2.2bpp"
+OverworldCliffs1Gfx:: INCBIN "gfx/overworld/overworld_cliffs1.2bpp"
+OverworldCliffs2Gfx:: INCBIN "gfx/overworld/overworld_cliffs2.2bpp"
 
 	INCROM $1d8a00, $1d8b00
 
@@ -252,4 +252,9 @@ Func_1d8c2c: ; 1d8c2c (76:4c2c)
 	ret
 ; 0x1d8c62
 
-	INCROM $1d8c62, $1db800
+	INCROM $1d8c62, $1da800
+
+WarioSleepGfx: ; 1da800 (76:6800)
+INCBIN "gfx/wario/sleep.2bpp"
+
+	INCROM $1db000, $1db800

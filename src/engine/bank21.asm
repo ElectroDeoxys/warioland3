@@ -2140,9 +2140,9 @@ VBlank_84d76: ; 84d76 (21:4d76)
 .func
 	ld a, $02
 	ldh [rSVBK], a
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	ldh [rSCY], a
-	ld a, [wTempSCX]
+	ld a, [wSCX]
 	ldh [rSCX], a
 	ld a, [wWY]
 	ldh [rWY], a

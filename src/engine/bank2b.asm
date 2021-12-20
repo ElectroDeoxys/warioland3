@@ -156,9 +156,9 @@ VBlank_accb0: ; accb0 (2b:4cb0)
 .func
 	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	ldh [rSCY], a
-	ld a, [wTempSCX]
+	ld a, [wSCX]
 	ldh [rSCX], a
 
 	ld a, [w2d079]

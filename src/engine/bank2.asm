@@ -28,9 +28,9 @@ Func_8024: ; 8024 (2:4024)
 
 	xor a
 	ldh [rSCY], a
-	ld [wTempSCY], a
+	ld [wSCY], a
 	ldh [rSCX], a
-	ld [wTempSCX], a
+	ld [wSCX], a
 
 	farcall LoadLevelCommonGfxAndTreasures
 
@@ -106,17 +106,17 @@ Func_80aa: ; 80aa (2:40aa)
 	cp $3c
 	jr z, .asm_80fc
 	ld a, [wcac5]
-	ld [wTempSCY], a
+	ld [wSCY], a
 	ld a, [wcac7]
-	ld [wTempSCX], a
+	ld [wSCX], a
 	jr .asm_8112
 .asm_80fc
 	ld hl, wc0bc
 	ld a, [wc089]
 	add [hl]
-	ld [wTempSCY], a
+	ld [wSCY], a
 	ld a, [wc08b]
-	ld [wTempSCX], a
+	ld [wSCX], a
 	ld a, [wc08d]
 	add [hl]
 	ldh [rWY], a
@@ -244,14 +244,14 @@ Func_80aa: ; 80aa (2:40aa)
 	call Func_8ed9
 	call Func_bb85
 	di
-	call VBlank_b672.func_end
+	call Func_b681
 	ei
 	pop af
 	sramswitch
 
 .asm_8247
 	ld a, [wState]
-	cp ST_02
+	cp ST_LEVEL
 	ret nz
 	ld hl, wLevelEndScreen
 	ld a, [hl]
@@ -342,22 +342,20 @@ Func_80aa: ; 80aa (2:40aa)
 	ld a, [wJoypadPressed]
 	and SELECT | START
 	ret z
-
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_BLIND
-	jr z, .asm_82ff
-	ld a, [wc0e6]
+	jr z, .no_pause
+	ld a, [wIsBossBattle]
 	and a
-	jr nz, .asm_82ff
+	jr nz, .no_pause
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_BLIND
-	jr nz, .asm_8308 ; this jump will always happen
-
-.asm_82ff
+	jr nz, .pause ; this jump will always happen
+.no_pause
 	play_sfx SFX_0E5
 	ret
 
-.asm_8308
+.pause
 	play_sfx SFX_0E4
 	stop_music
 	xor a
@@ -366,7 +364,7 @@ Func_80aa: ; 80aa (2:40aa)
 	ld [wced6], a
 	ld a, [wSubState]
 	ld [wPendingSubState], a
-	ld a, ST_04
+	ld a, ST_PAUSE_MENU
 	ld [wState], a
 	xor a
 	ld [wSubState], a
@@ -378,9 +376,9 @@ Func_80aa: ; 80aa (2:40aa)
 	farcall Func_1c000
 
 	ld a, [wcac5]
-	ld [wTempSCY], a
+	ld [wSCY], a
 	ld a, [wcac7]
-	ld [wTempSCX], a
+	ld [wSCX], a
 
 	xor a
 	ld [wc0da], a
@@ -430,9 +428,9 @@ Func_80aa: ; 80aa (2:40aa)
 	farcall Func_1c000
 
 	ld a, [wcac5]
-	ld [wTempSCY], a
+	ld [wSCY], a
 	ld a, [wcac7]
-	ld [wTempSCX], a
+	ld [wSCX], a
 
 	xor a
 	ld [wc0da], a
@@ -489,7 +487,7 @@ Func_846e: ; 846e (2:446e)
 	ld a, [wAnimatedTilesFrameDuration]
 	ld [$d50f], a
 	ld a, [wAnimatedTilesGroup]
-	ld [w3d510], a
+	ld [wTempAnimatedTilesGroup], a
 	pop af
 	ldh [rSVBK], a
 	ld a, [wSubState]
@@ -762,7 +760,7 @@ Func_867f: ; 867f (2:467f)
 
 Func_8747: ; 8747 (2:4747)
 	xor a
-	ld [wc0e6], a
+	ld [wIsBossBattle], a
 	ld a, [wceef]
 	and %00111100
 	jp nz, .asm_87e2
@@ -912,12 +910,12 @@ Func_8747: ; 8747 (2:4747)
 	ld a, [wcac5]
 	ld [wc08a], a
 	ld [wc089], a
-	ld [wTempSCY], a
+	ld [wSCY], a
 	ldh [rSCY], a
 	ld a, [wcac7]
 	ld [wc08c], a
 	ld [wc08b], a
-	ld [wTempSCX], a
+	ld [wSCX], a
 	ldh [rSCX], a
 
 .not_the_temple
@@ -1387,7 +1385,7 @@ Func_8c12: ; 8c12 (2:4c12)
 	jr z, .asm_8c54
 	ld a, l
 	ldh [rSCY], a
-	ld [wTempSCY], a
+	ld [wSCY], a
 	sub $18
 	ld [wc0a4], a
 	ld a, h
@@ -1403,7 +1401,7 @@ Func_8c12: ; 8c12 (2:4c12)
 .asm_8c43
 	ld [wcac5], a
 	ldh [rSCY], a
-	ld [wTempSCY], a
+	ld [wSCY], a
 	ld [wc0a4], a
 	ld a, h
 	ld [wc0a3], a
@@ -1417,7 +1415,7 @@ Func_8c12: ; 8c12 (2:4c12)
 .asm_8c5f
 	ld [wcac5], a
 	ldh [rSCY], a
-	ld [wTempSCY], a
+	ld [wSCY], a
 	sub $20
 	ld [wc0a4], a
 	ld a, h
@@ -1434,7 +1432,7 @@ Func_8c12: ; 8c12 (2:4c12)
 	jr z, .asm_8cba
 	ld a, l
 	ldh [rSCX], a
-	ld [wTempSCX], a
+	ld [wSCX], a
 	sub $10
 	ld [wc0a6], a
 	ld a, h
@@ -1455,7 +1453,7 @@ Func_8c12: ; 8c12 (2:4c12)
 .asm_8caa
 	ld [wcac7], a
 	ldh [rSCX], a
-	ld [wTempSCX], a
+	ld [wSCX], a
 	ld [wc0a6], a
 	ld a, h
 	ld [wc0a5], a
@@ -1469,7 +1467,7 @@ Func_8c12: ; 8c12 (2:4c12)
 .asm_8cc5
 	ld [wcac7], a
 	ldh [rSCX], a
-	ld [wTempSCX], a
+	ld [wSCX], a
 	sub $28
 	ld [wc0a6], a
 	ld a, h
@@ -8423,13 +8421,13 @@ Func_b8d3: ; b8d3 (2:78d3)
 	ld a, [wc0ba]
 	cp $3c
 	jr z, .asm_b8f5
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	ld b, a
 	ld a, [wYPosLo]
 	add $10
 	sub b
 	ld [wWarioScreenYPos], a
-	ld a, [wTempSCX]
+	ld a, [wSCX]
 	ld b, a
 	ld a, [wXPosLo]
 	add $08

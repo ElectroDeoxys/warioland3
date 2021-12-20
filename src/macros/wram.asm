@@ -12,10 +12,7 @@ sprite_oam_struct: MACRO
 ENDM
 
 intro_obj_struct: MACRO
-\1YCoord::          db
-\1XCoord::          db
-\1TileID::          db
-\1Attributes::      db
+	sprite_oam_struct \1
 \1FramesetOffset::  db
 \1Duration::        db
 \1FramesetPtr::     dw
@@ -23,10 +20,7 @@ intro_obj_struct: MACRO
 ENDM
 
 ow_obj_struct: MACRO
-\1YCoord:: db
-\1XCoord:: db
-\1TileID:: db
-\1Attributes:: db
+	sprite_oam_struct \1
 \1Duration:: db
 \1FramesetOffset:: db
 \1Unk6:: db

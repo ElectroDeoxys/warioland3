@@ -1112,10 +1112,10 @@ Func_8065e: ; 8065e (20:465e)
 	ld a, $04
 .asm_806b6
 	ldh [rSCY], a
-	ld [wTempSCY], a
+	ld [wSCY], a
 	xor a
 	ldh [rSCX], a
-	ld [wTempSCX], a
+	ld [wSCX], a
 	xor a
 	ld [wNumOAMSprites], a
 
@@ -1301,10 +1301,10 @@ Func_8086f: ; 8086f (20:486f)
 
 	ld a, $04
 	ldh [rSCY], a
-	ld [wTempSCY], a
+	ld [wSCY], a
 	xor a
 	ldh [rSCX], a
-	ld [wTempSCX], a
+	ld [wSCX], a
 	ld a, [w2d018]
 	ld [w2d015], a
 	ld a, [w2d019]
@@ -1721,9 +1721,9 @@ VBlank_80bf9: ; 80bf9 (20:4bf9)
 .func
 	ld a, $02
 	ldh [rSVBK], a
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	ldh [rSCY], a
-	ld a, [wTempSCX]
+	ld a, [wSCX]
 	ldh [rSCX], a
 	ld a, [wWY]
 	ldh [rWY], a
@@ -1851,9 +1851,9 @@ VBlank_80cb1: ; 80cb1 (20:4cb1)
 .func
 	ld a, $02
 	ldh [rSVBK], a
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	ldh [rSCY], a
-	ld a, [wTempSCX]
+	ld a, [wSCX]
 	ldh [rSCX], a
 
 	ld a, [w2d060]
@@ -2049,7 +2049,7 @@ Func_80f3c: ; 80f3c (20:4f3c)
 	set 4, c
 	cp OW_EXIT_LEFT
 	jr z, .is_exit
-	call Func_8128a
+	call LoadOWLevelFromLevelIndex
 	farcall Func_9aab5
 	xor a
 	ld [w2d014], a
@@ -2426,14 +2426,14 @@ Func_81240: ; 81240 (20:5240)
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jr z, .no_carry
-	call Func_8128a
+	call LoadOWLevelFromLevelIndex
 	ld a, [wOWLevel]
 	and a
 	jr z, .temple
 	xor a
 	ld [wSubState], a
 	ld hl, wState
-	inc [hl] ; ST_02
+	inc [hl] ; ST_LEVEL
 	scf
 	ret
 
@@ -2475,12 +2475,15 @@ GetMapSideLevelIndex: ; 81278 (20:5278)
 	ret
 ; 0x8128a
 
-Func_8128a: ; 8128a (20:528a)
+; converts the level index in wMapSideLevelIndex
+; to a valid OW level value corresponding
+; to the map side in wNextMapSide
+LoadOWLevelFromLevelIndex: ; 8128a (20:528a)
 	ld a, [wNextMapSide]
 	ld c, a
 	and a
 	jr z, .north
-.asm_81291
+.get_ow_level
 	ld b, $00
 	ld hl, MapSideInitialLevels
 	add hl, bc
@@ -2492,7 +2495,7 @@ Func_8128a: ; 8128a (20:528a)
 .north
 	ld a, [wMapSideLevelIndex]
 	cp OWNORTH_JUNCTION
-	jr c, .asm_81291
+	jr c, .get_ow_level
 	ld a, $80
 	ld [wOWLevel], a
 	ret
@@ -5023,10 +5026,10 @@ Func_822b4: ; 822b4 (20:62b4)
 ; 0x822d7
 
 Func_822d7: ; 822d7 (20:62d7)
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	dec a
 	dec a
-	ld [wTempSCY], a
+	ld [wSCY], a
 	cp $ec
 	jr nz, .still_opening
 	; fully open, advance state
@@ -5055,10 +5058,10 @@ Func_822f1: ; 822f1 (20:62f1)
 ; 0x82311
 
 Func_82311: ; 82311 (20:6311)
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	inc a
 	inc a
-	ld [wTempSCY], a
+	ld [wSCY], a
 	cp $04
 	jr nz, .asm_82357
 	xor a

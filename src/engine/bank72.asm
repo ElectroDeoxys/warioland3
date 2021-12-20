@@ -32,7 +32,6 @@ Func_1c8570: ; 1c8570 (72:4570)
 	dw $4965
 	dw SlowFadeFromWhite
 	dw $4ca4
-	dw Func_142b
-; 0x1c8586
+; 0x1c8584
 
-	INCROM $1c8586, $1cb5e4
+	INCROM $1c8584, $1cb5e4

@@ -16,12 +16,12 @@ wTempPals2:: ; c040
 wBackupVBlankFunc:: ; c080
 	ds $3
 
-wTempSCY:: ; c083
+wSCY:: ; c083
 	ds $1
 
 	ds $1
 
-wTempSCX:: ; c085
+wSCX:: ; c085
 	ds $1
 
 ; intro background layers x offsets,
@@ -286,7 +286,7 @@ wc0e4:: ; c0e4
 
 	ds $1
 
-wc0e6:: ; c0e6
+wIsBossBattle:: ; c0e6
 	ds $1
 
 	ds $19
@@ -479,9 +479,7 @@ wc800:: ; c800
 	ds $200
 
 wca00:: ; ca00
-	ds $1
-
-	ds $3
+	ds $4
 
 ; number of coins collected
 ; it's in big endian decimal form
@@ -910,9 +908,9 @@ wce00:: ; ce00
 	ds $1
 
 wce01:: ; ce01
-	ds $1
+	ds $2
 
-	ds $33
+	ds $32
 
 wce35:: ; ce35
 	ds $20
@@ -1957,18 +1955,17 @@ w3d50d:: ; d50d
 
 	ds $1
 
-w3d50f:: ; d50f
+wTempAnimatedTilesFrameDuration:: ; d50f
 	ds $1
 
-w3d510:: ; d510
+wTempAnimatedTilesGroup:: ; d510
 	ds $1
 
 w3d511:: ; d511
-	ds $1
-
-	ds $1
+	ds $2
 
 wStartMenuSelection:: ; d513
+wPauseMenuSelection:: ; d513
 	ds $1
 
 wObjAnimWasReset:: ; d514
@@ -1988,14 +1985,21 @@ wPlaneAnimationEnded:: ; d520
 wIntroSeqSFXTimer:: ; d522
 	ds $1
 
-wIntroObj0:: intro_obj_struct wIntroObj0 ; d523
-wIntroObj1:: intro_obj_struct wIntroObj1 ; d52b
-wIntroObj2:: intro_obj_struct wIntroObj2 ; d533
-wIntroObj3:: intro_obj_struct wIntroObj3 ; d53b
-
+wMenuObj1:: intro_obj_struct wMenuObj1 ; d523
+wMenuObj2:: intro_obj_struct wMenuObj2 ; d52b
+wMenuObj3:: intro_obj_struct wMenuObj3 ; d533
+wMenuObj4:: intro_obj_struct wMenuObj4 ; d53b
 	ds $4
-
-wIntroObj4:: intro_obj_struct wIntroObj4 ; d547
+wMenuObj5:: intro_obj_struct wMenuObj5 ; d547
+	ds $4
+wMenuObj6:: intro_obj_struct wMenuObj6 ; d553
+	ds $3
+wMenuObj7:: intro_obj_struct wMenuObj7 ; d55e
+	ds $4
+wMenuObj8:: intro_obj_struct wMenuObj8 ; d56a
+wMenuObj9:: intro_obj_struct wMenuObj9 ; d572
+wMenuObj10:: intro_obj_struct wMenuObj10 ; d57a
+wMenuObj11:: intro_obj_struct wMenuObj11 ; d582
 
 SECTION "WRAM4", WRAMX
 

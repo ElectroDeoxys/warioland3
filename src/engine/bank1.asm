@@ -4,9 +4,9 @@ StateTable: ; 4000 (1:4000)
 
 	dw TitleStateTable             ; ST_TITLE
 	dw Func_4686                   ; ST_OVERWORLD
-	dw Func_46cc                   ; ST_02
+	dw Func_46cc                   ; ST_LEVEL
 	dw Func_46dc                   ; ST_03
-	dw Func_46f6                   ; ST_04
+	dw PauseMenuStateTable         ; ST_PAUSE_MENU
 	dw Func_4710                   ; ST_05
 	dw Func_472a                   ; ST_06
 	dw Func_474c                   ; ST_07
@@ -69,10 +69,10 @@ InitIntroSequence: ; 405f (1:405f)
 	call VBlank_49db
 
 	ld a, $04
-	ld [wTempSCY], a
+	ld [wSCY], a
 	ldh [rSCY], a
 	xor a
-	ld [wTempSCX], a
+	ld [wSCX], a
 	ldh [rSCX], a
 	ld a, [wceef]
 	and a
@@ -97,7 +97,7 @@ InitIntroSequence: ; 405f (1:405f)
 	ld [wIntroSeqSFXTimer], a
 	call UpdateObjAnim
 
-	ld hl, wIntroObj0
+	ld hl, wMenuObj1
 	ld a, 128
 	ld [hli], a ; y coord
 	ld a, 80
@@ -113,7 +113,7 @@ InitIntroSequence: ; 405f (1:405f)
 	ld [hl], a
 	call UpdateObjAnim
 
-	ld hl, wIntroObj3
+	ld hl, wMenuObj4
 	ld a, 16
 	ld [hli], a ; y coord
 	ld a, 0
@@ -129,7 +129,7 @@ InitIntroSequence: ; 405f (1:405f)
 	ld [hl], a
 	call UpdateObjAnim
 
-	ld hl, wIntroObj4
+	ld hl, wMenuObj5
 	ld a, 8
 	ld [hli], a ; y coord
 	ld a, 32
@@ -145,9 +145,9 @@ InitIntroSequence: ; 405f (1:405f)
 	ld [hl], a
 	call UpdateObjAnim
 
-	ld hl, wIntroObj3
+	ld hl, wMenuObj4
 	call Func_4b93
-	ld hl, wIntroObj4
+	ld hl, wMenuObj5
 	call Func_4b93
 
 	ld a, $00
@@ -224,7 +224,7 @@ InitIntroSequence: ; 405f (1:405f)
 	ld b, 12
 	call CopyHLToDE
 
-	ld hl, wIntroObj0
+	ld hl, wMenuObj1
 	ld a, $82
 	ld [hli], a
 	ld a, $50
@@ -250,7 +250,7 @@ InitIntroSequence: ; 405f (1:405f)
 .asm_417e
 	call UpdateObjAnim
 
-	ld hl, wIntroObj1
+	ld hl, wMenuObj2
 	ld a, $86
 	ld [hli], a
 	ld a, [wca3d]
@@ -277,7 +277,7 @@ InitIntroSequence: ; 405f (1:405f)
 	ld [wStartMenuSelection], a
 
 .asm_41a8
-	ld hl, wIntroObj2
+	ld hl, wMenuObj3
 	ld a, 36
 	ld [hli], a ; y coord
 	ld a, 104
@@ -483,9 +483,9 @@ IntroSequencePhase1: ; 41cf (1:41cf)
 	call UpdateObjAnim
 	ld hl, wWarioPlane
 	call Func_4b93
-	ld hl, wIntroObj3
+	ld hl, wMenuObj4
 	call Func_4b93
-	ld hl, wIntroObj4
+	ld hl, wMenuObj5
 	call Func_4b93
 	call ClearVirtualOAM
 	jp DrawIntroBackgroundLayers
@@ -599,11 +599,11 @@ IntroSequencePhase2: ; 42ed (1:42ed)
 	call ScrollIntroBackgroundLayers
 	ld hl, wWarioPlaneEnd - 1
 	call UpdateObjAnim
-	ld hl, wIntroObj3
+	ld hl, wMenuObj4
 	call Func_4b93
 	ld hl, wWarioPlane
 	call Func_4b93
-	ld hl, wIntroObj4
+	ld hl, wMenuObj5
 	call Func_4b93
 	call ClearVirtualOAM
 	jp DrawIntroBackgroundLayers
@@ -770,11 +770,11 @@ IntroSequencePhase3: ; 43b5 (1:43b5)
 	call UpdateObjAnim
 	ld a, [wObjAnimWasReset]
 	ld [wPlaneAnimationEnded], a
-	ld hl, wIntroObj3
+	ld hl, wMenuObj4
 	call Func_4b93
 	ld hl, wWarioPlane
 	call Func_4b93
-	ld hl, wIntroObj4
+	ld hl, wMenuObj5
 	call Func_4b93
 	call ClearVirtualOAM
 	jp DrawIntroBackgroundLayers
@@ -826,12 +826,12 @@ StartMenu: ; 4508 (1:4508)
 	call UpdateObjAnim
 	ld hl, wWarioPlane
 	call Func_4b93
-	ld hl, wIntroObj2
+	ld hl, wMenuObj3
 	call Func_4b73
 
 	call HandleStartMenuSelection
 
-	ld hl, wIntroObj0
+	ld hl, wMenuObj1
 	call Func_4b73
 
 	ld a, [wceef]
@@ -841,11 +841,11 @@ StartMenu: ; 4508 (1:4508)
 	ld a, [wGlobalCounter]
 	and %111
 	jr nz, .asm_4538
-	ld a, [wIntroObj1Attributes]
+	ld a, [wMenuObj2Attributes]
 	xor %11
-	ld [wIntroObj1Attributes], a
+	ld [wMenuObj2Attributes], a
 .asm_4538
-	ld hl, wIntroObj1
+	ld hl, wMenuObj2
 	call Func_4b73
 
 .asm_453e
@@ -885,7 +885,7 @@ StartMenu: ; 4508 (1:4508)
 	ld a, [wPowerUpLevel]
 	or %1000000
 	ld [wPowerUpLevel], a
-	jp Func_16d0
+	jp OpenActionHelp
 
 .asm_4578
 	ld hl, wStartMenuSelection
@@ -901,9 +901,9 @@ StartMenu: ; 4508 (1:4508)
 	jp z, Func_1698
 
 	ld a, 134
-	ld [wIntroObj1YCoord], a
+	ld [wMenuObj2YCoord], a
 	ld a, 130
-	ld [wIntroObj0YCoord], a
+	ld [wMenuObj1YCoord], a
 
 	ld a, [wca3d]
 	bit 1, a
@@ -921,14 +921,14 @@ StartMenu: ; 4508 (1:4508)
 	ld a, $81
 	ld [wcee4], a
 	ld a, 144
-	ld [wIntroObj1YCoord], a
+	ld [wMenuObj2YCoord], a
 	ld a, 120
-	ld [wIntroObj0YCoord], a
+	ld [wMenuObj1YCoord], a
 	ld bc, Frameset_6cec
 	ld a, $03
 .asm_45c5
 	ld [wStartMenuSelection], a
-	ld hl, wIntroObj0FramesetOffset
+	ld hl, wMenuObj1FramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a ; duration
@@ -959,9 +959,9 @@ StartMenu: ; 4508 (1:4508)
 	ld a, [wceef]
 	and $3c
 	jr nz, .asm_45fd
-	jr Func_461e
+	jr StartOverworldState
 .asm_45fd
-	ld a, ST_02
+	ld a, ST_LEVEL
 	ld [wState], a
 	xor a
 	ld [wSubState], a
@@ -982,7 +982,7 @@ Func_4619: ; 4619 (1:4619)
 	ld [wcee3], a
 	; fallthrough
 
-Func_461e: ; 461e (1:461e)
+StartOverworldState: ; 461e (1:461e)
 	ld a, ST_OVERWORLD
 	ld [wState], a
 	xor a
@@ -1000,7 +1000,7 @@ Func_4628: ; 4628 (1:4628)
 	ld [w3d50d], a
 	ld hl, wca3b
 	set 7, [hl]
-	jr Func_461e
+	jr StartOverworldState
 ; 0x4640
 
 InitTimeAttackDescription: ; 4640 (1:4640)
@@ -1014,9 +1014,9 @@ InitTimeAttackDescription: ; 4640 (1:4640)
 	call VBlank_354
 
 	xor a
-	ld [wTempSCY], a
+	ld [wSCY], a
 	ldh [rSCY], a
-	ld [wTempSCX], a
+	ld [wSCX], a
 	ldh [rSCX], a
 	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
 	ldh [rLCDC], a
@@ -1036,7 +1036,7 @@ TimeAttackDescription: ; 4670 (1:4670)
 	call FillWhiteBGPal
 	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
 	ldh [rLCDC], a
-	jp Func_461e
+	jp StartOverworldState
 ; 0x4686
 
 Func_4686: ; 4686 (1:4686)
@@ -1050,7 +1050,7 @@ Func_4686: ; 4686 (1:4686)
 
 	ld hl, wState
 	ld a, [hl]
-	cp ST_02
+	cp ST_LEVEL
 	ret nz
 	play_sfx SFX_0E3
 	call Func_4ae7
@@ -1087,12 +1087,12 @@ Func_46dc: ; 46dc (1:46dc)
 	ret
 ; 0x46f6
 
-Func_46f6: ; 46f6 (1:46f6)
+PauseMenuStateTable: ; 46f6 (1:46f6)
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
 	ldh [rSVBK], a
-	farcall Func_1f0000
+	farcall _PauseMenuStateTable
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -1149,7 +1149,7 @@ CollectKeyDelay: ; 4766 (1:4766)
 	cp 100
 	ret c
 	ld [hl], 0
-	ld a, ST_02
+	ld a, ST_LEVEL
 	ld [wState], a
 	ret
 ; 0x4776
@@ -1200,9 +1200,9 @@ GBIncompatible: ; 47be (1:47be)
 	call VBlank_354
 
 	xor a
-	ld [wTempSCX], a
+	ld [wSCX], a
 	ldh [rSCX], a
-	ld [wTempSCY], a
+	ld [wSCY], a
 	ldh [rSCY], a
 	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
 	ldh [rLCDC], a
@@ -1274,14 +1274,14 @@ InitLanguageSelection: ; 4857 (1:4857)
 	call VBlank_4ddf
 
 	xor a
-	ld [wTempSCY], a
+	ld [wSCY], a
 	ldh [rSCY], a
-	ld [wTempSCX], a
+	ld [wSCX], a
 	ldh [rSCX], a
 	ld a, $01
 	ld [wLanguage], a
 
-	ld hl, wIntroObj0YCoord
+	ld hl, wMenuObj1YCoord
 	ld a, 70
 	ld [hli], a
 	ld a, 24
@@ -1296,7 +1296,7 @@ InitLanguageSelection: ; 4857 (1:4857)
 	ld a, LOW(Frameset_76b5)
 	ld [hl], a
 	call UpdateObjAnim
-	ld hl, wIntroObj0
+	ld hl, wMenuObj1
 	call Func_4e3e
 	call ClearVirtualOAM
 	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
@@ -1322,7 +1322,7 @@ LanguageSelection: ; 48c9 (1:48c9)
 	and a
 	ret z ; can't go down
 	ld a, 86
-	ld [wIntroObj0YCoord], a
+	ld [wMenuObj1YCoord], a
 	xor a
 	jr .got_language
 
@@ -1330,9 +1330,9 @@ LanguageSelection: ; 48c9 (1:48c9)
 	ld a, [wLanguage]
 	dec a
 	ret z ; can't go up
-	ld hl, wIntroObj0
+	ld hl, wMenuObj1
 	ld a, 70
-	ld [wIntroObj0YCoord], a
+	ld [wMenuObj1YCoord], a
 	ld a, $01
 
 .got_language
@@ -1342,9 +1342,9 @@ LanguageSelection: ; 48c9 (1:48c9)
 	play_sfx SFX_0E2
 
 .update_anim
-	ld hl, wIntroObj0End - 1
+	ld hl, wMenuObj1End - 1
 	call UpdateObjAnim
-	ld hl, wIntroObj0
+	ld hl, wMenuObj1
 	call Func_4e3e
 	call ClearVirtualOAM
 	ret
@@ -1489,9 +1489,9 @@ VBlank_49db: ; 49db (1:49db)
 .skip
 	pop af
 	bankswitch
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	ldh [rSCY], a
-	ld a, [wTempSCX]
+	ld a, [wSCX]
 	ldh [rSCX], a
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
@@ -1499,7 +1499,8 @@ VBlank_49db: ; 49db (1:49db)
 .func_end
 ; 0x4a33
 
-Func_4a33: ; 4a33 (1:4a33)
+; hl = BG map address
+PrintNumberCoins: ; 4a33 (1:4a33)
 	ld bc, -$20
 	ld de, $20
 	ld a, [wNumCoins]
@@ -1698,7 +1699,7 @@ Func_4ae7: ; 4ae7 (1:4ae7)
 
 Func_4b73: ; 4b73 (1:4b73)
 	; y coord
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
 	add $10
@@ -1721,7 +1722,7 @@ Func_4b73: ; 4b73 (1:4b73)
 
 Func_4b93: ; 4b93 (1:4b93)
 	; y coord
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
 	add $10
@@ -1775,7 +1776,7 @@ HandleStartMenuSelection: ; 4bb3 (1:4bb3)
 	jr z, .asm_4c01
 	set 6, [hl]
 	xor a
-	ld [wIntroObj0FramesetOffset], a
+	ld [wMenuObj1FramesetOffset], a
 	ret
 
 .asm_4bfa
@@ -1825,7 +1826,7 @@ HandleStartMenuSelection: ; 4bb3 (1:4bb3)
 
 .update_obj
 	ld [wStartMenuSelection], a
-	ld hl, wIntroObj0FramesetOffset
+	ld hl, wMenuObj1FramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -1842,23 +1843,23 @@ HandleStartMenuSelection: ; 4bb3 (1:4bb3)
 	jr z, .move_up
 
 ; move down
-	ld hl, wIntroObj0YCoord
+	ld hl, wMenuObj1YCoord
 	inc [hl]
 	ld a, [hl]
 	cp 130
 	ret nz
 	ld a, 134
-	ld [wIntroObj1YCoord], a
+	ld [wMenuObj2YCoord], a
 	jr .reset_move_vertical_flag
 
 .move_up
-	ld hl, wIntroObj0YCoord
+	ld hl, wMenuObj1YCoord
 	dec [hl]
 	ld a, [hl]
 	cp 116
 	ret nz
 	ld a, 118
-	ld [wIntroObj1YCoord], a
+	ld [wMenuObj2YCoord], a
 
 .reset_move_vertical_flag
 	ld hl, wStartMenuSelection
@@ -1866,7 +1867,7 @@ HandleStartMenuSelection: ; 4bb3 (1:4bb3)
 	ret
 
 .UpdateAnim
-	ld hl, wIntroObj0End - 1
+	ld hl, wMenuObj1End - 1
 	call UpdateObjAnim
 	ld a, [wObjAnimWasReset]
 	and a
@@ -1876,14 +1877,14 @@ HandleStartMenuSelection: ; 4bb3 (1:4bb3)
 	ld hl, wStartMenuSelection
 	set 7, [hl]
 	xor a
-	ld [wIntroObj0FramesetOffset], a
+	ld [wMenuObj1FramesetOffset], a
 	ret
 
 .asm_4c96
 	ld a, [wGlobalCounter]
 	and %1
 	ret nz
-	ld hl, wIntroObj0FramesetOffset
+	ld hl, wMenuObj1FramesetOffset
 	ld a, [hl]
 	cp $10
 	jr z, .asm_4c8c
@@ -1937,7 +1938,7 @@ FinishIntroBackgroundScroll: ; 4cd0 (1:4cd0)
 	ld a, [hl]
 	and %11111
 	jr nz, .scroll_far
-	ld a, [wTempSCX]
+	ld a, [wSCX]
 	ld [hl], a
 	jr .centre_layer
 .scroll_far
@@ -1948,7 +1949,7 @@ FinishIntroBackgroundScroll: ; 4cd0 (1:4cd0)
 	ld a, [hl]
 	and %11111
 	jr nz, .scroll_centre
-	ld a, [wTempSCX]
+	ld a, [wSCX]
 	ld [hl], a
 	jr .far_layer
 .scroll_centre
@@ -2007,7 +2008,7 @@ DrawIntroBackgroundLayers: ; 4d07 (1:4d07)
 	jr c, .asm_4d36
 	call WaitVBlank
 
-	ld a, [wTempSCX]
+	ld a, [wSCX]
 	ldh [rSCX], a
 	ret
 ; 0x4d45
@@ -2017,7 +2018,7 @@ Func_4d45: ; 4d45 (1:4d45)
 	and %1
 	jr z, .asm_4d66
 
-	ld hl, wIntroObj4XCoord
+	ld hl, wMenuObj5XCoord
 	ld a, [hl]
 	cp 176
 	jr c, .incr_x1
@@ -2033,7 +2034,7 @@ Func_4d45: ; 4d45 (1:4d45)
 	inc [hl]
 
 .asm_4d66
-	ld hl, wIntroObj3XCoord
+	ld hl, wMenuObj4XCoord
 	ld a, [hl]
 	cp 176
 	jr c, .incr_x2
@@ -2146,9 +2147,9 @@ VBlank_4ddf: ; 4ddf (1:4ddf)
 	ld hl, wcee4
 	res 7, [hl]
 .asm_4e2e
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	ldh [rSCY], a
-	ld a, [wTempSCX]
+	ld a, [wSCX]
 	ldh [rSCX], a
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
@@ -2157,7 +2158,7 @@ VBlank_4ddf: ; 4ddf (1:4ddf)
 ; 0x4e3e
 
 Func_4e3e: ; 4e3e (1:4e3e)
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
 	add $10

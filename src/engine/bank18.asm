@@ -132,13 +132,13 @@ endr
 	call UpdateObjectAnimation
 	call Func_6307b
 	ld hl, wCurObjScreenYPos
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	ld b, a
 	ld a, [wCurObjYPos]
 	add $10
 	sub b
 	ld [hli], a
-	ld a, [wTempSCX]
+	ld a, [wSCX]
 	ld b, a
 	ld a, [wCurObjXPos]
 	add $08
@@ -148,9 +148,9 @@ endr
 	ld hl, wc0bc
 	ld a, [wc089]
 	add [hl]
-	ld [wTempSCY], a
+	ld [wSCY], a
 	ld a, [wc08b]
-	ld [wTempSCX], a
+	ld [wSCX], a
 	pop hl
 
 	ld a, [wCurObjFlags]
@@ -305,13 +305,13 @@ endr
 	call UpdateObjectAnimation
 	call Func_6307b
 	ld hl, wCurObjScreenYPos
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	ld b, a
 	ld a, [wCurObjYPos]
 	add $10
 	sub b
 	ld [hli], a
-	ld a, [wTempSCX]
+	ld a, [wSCX]
 	ld b, a
 	ld a, [wCurObjXPos]
 	add $08
@@ -414,13 +414,13 @@ endr
 	call Func_3104
 	call Func_6307b
 	ld hl, wCurObjScreenYPos
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	ld b, a
 	ld a, [wCurObjYPos]
 	add $10
 	sub b
 	ld [hli], a
-	ld a, [wTempSCX]
+	ld a, [wSCX]
 	ld b, a
 	ld a, [wCurObjXPos]
 	add $08
@@ -498,11 +498,11 @@ for n, 1, NUM_OBJECTS + 1
 	ld a, [hl]
 	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
 	cp OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK7
-	jr nz, .next_obj_{u:n}
+	jr nz, .next_{u:n}
 	ld e, LOW(wObj{u:n}ScreenYPos)
 	ld l, LOW(wObj{u:n}Unk07)
 	call UpdateObjSprite
-.next_obj_{u:n}
+.next_{u:n}
 endr
 
 	ret
@@ -514,11 +514,11 @@ for n, 1, NUM_OBJECTS + 1
 	ld a, [hl]
 	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
 	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
-	jr nz, .next_obj_{u:n}
+	jr nz, .next_{u:n}
 	ld e, LOW(wObj{u:n}ScreenYPos)
 	ld l, LOW(wObj{u:n}Unk07)
 	call UpdateObjSprite
-.next_obj_{u:n}
+.next_{u:n}
 endr
 
 	ret

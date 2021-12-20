@@ -38,9 +38,9 @@ Func_9c021: ; 9c021 (27:4021)
 
 	xor a
 	ldh [rSCY], a
-	ld [wTempSCY], a
+	ld [wSCY], a
 	ldh [rSCX], a
-	ld [wTempSCX], a
+	ld [wSCX], a
 	ld [w2d801], a
 	ld [w2d013], a
 	ld [w2d014], a
@@ -553,9 +553,9 @@ VBlank_9cc9c: ; 9cc9c (27:4c9c)
 .func
 	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	ldh [rSCY], a
-	ld a, [wTempSCX]
+	ld a, [wSCX]
 	ldh [rSCX], a
 	ld a, [w2d022]
 	ldh [rWY], a

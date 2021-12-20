@@ -390,9 +390,9 @@ VBlank_354: ; 354 (0:354)
 	ret
 
 .func
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	ldh [rSCY], a
-	ld a, [wTempSCX]
+	ld a, [wSCX]
 	ldh [rSCX], a
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
@@ -591,7 +591,29 @@ CopyHLToDE_BC: ; 434 (0:434)
 	ret
 ; 0x443
 
-	INCROM $443, $466
+; switches bank to wTempBank
+; then copies bc bytes from hl to de
+FarCopyHLToDE_BC: ; 443 (0:443)
+	ld a, [wROMBank]
+	push af
+	ld a, [wTempBank]
+	bankswitch
+	ld a, c
+	and a
+	jr z, .loop
+	inc b
+.loop
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .loop
+	dec b
+	jr nz, .loop
+	pop af
+	bankswitch
+	ret
+; 0x466
 
 ; copies b bytes from hl to de
 CopyHLToDE: ; 466 (0:466)
@@ -1198,9 +1220,9 @@ VBlank_88d: ; 88d (0:88d)
 .func_end
 
 .asm_8a9
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	ldh [rSCY], a
-	ld a, [wTempSCX]
+	ld a, [wSCX]
 	ldh [rSCX], a
 	call StoreBGPals
 	call StoreOBPals
@@ -1223,9 +1245,9 @@ VBlank_8bf: ; 8bf (0:8bf)
 .func_end
 
 .asm_8d0
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	ldh [rSCY], a
-	ld a, [wTempSCX]
+	ld a, [wSCX]
 	ldh [rSCX], a
 	call LoadBGPalettesFromWRAM
 	call LoadOBPalettesFromWRAM
@@ -1410,9 +1432,9 @@ VBlank_9cb: ; 9cb (0:9cb)
 .func_end
 
 .asm_9e7
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	ldh [rSCY], a
-	ld a, [wTempSCX]
+	ld a, [wSCX]
 	ldh [rSCX], a
 	ldh a, [rSVBK]
 	push af
@@ -1823,10 +1845,10 @@ Func_c4c: ; c4c (0:c4c)
 	xor a
 	ld [MBC5SRamBank], a
 	ld hl, wc0bc
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	add [hl]
 	ldh [rSCY], a
-	ld a, [wTempSCX]
+	ld a, [wSCX]
 	ldh [rSCX], a
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
@@ -1861,10 +1883,10 @@ Func_c4c: ; c4c (0:c4c)
 	xor a
 	ld [wIsDMATransferPending], a
 	ld hl, wc0bc
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	add [hl]
 	ldh [rSCY], a
-	ld a, [wTempSCX]
+	ld a, [wSCX]
 	ldh [rSCX], a
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
@@ -2652,7 +2674,7 @@ Func_11f6: ; 11f6 (0:11f6)
 	ld [wcee1], a
 	ld [wcee2], a
 	ld [wcac3], a
-	ld [wc0e6], a
+	ld [wIsBossBattle], a
 	inc a ; TRUE
 	ld [wIsIntangible], a
 
@@ -2756,14 +2778,14 @@ Func_12c3: ; 12c3 (0:12c3)
 	ret
 ; 0x12cd
 
-CopyVRAMToWRAM: ; 12cd (0:12cd)
+SaveBackupVRAM: ; 12cd (0:12cd)
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("GFX RAM")
 	ldh [rSVBK], a
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	ld [w3d500], a
-	ld a, [wTempSCX]
+	ld a, [wSCX]
 	ld [w3d501], a
 	ld hl, wTempPals1
 	ld de, w3d280
@@ -2776,7 +2798,7 @@ CopyVRAMToWRAM: ; 12cd (0:12cd)
 	ldh [rVBK], a
 	ldh a, [rSVBK]
 	push af
-	ld a, 4 ; WRAM4
+	ld a, BANK("WRAM4")
 	ldh [rSVBK], a
 	ld hl, v0Tiles0
 	ld de, w4d000
@@ -2787,7 +2809,7 @@ CopyVRAMToWRAM: ; 12cd (0:12cd)
 
 	ldh a, [rSVBK]
 	push af
-	ld a, 5 ; WRAM5
+	ld a, BANK("WRAM5")
 	ldh [rSVBK], a
 	ld hl, v0Tiles2
 	ld de, w5d000
@@ -2800,7 +2822,7 @@ CopyVRAMToWRAM: ; 12cd (0:12cd)
 	ldh [rVBK], a
 	ldh a, [rSVBK]
 	push af
-	ld a, 6 ; WRAM6
+	ld a, BANK("WRAM6")
 	ldh [rSVBK], a
 	ld hl, v1Tiles0
 	ld de, w6d000
@@ -2811,7 +2833,7 @@ CopyVRAMToWRAM: ; 12cd (0:12cd)
 
 	ldh a, [rSVBK]
 	push af
-	ld a, 7 ; WRAM7
+	ld a, BANK("WRAM7")
 	ldh [rSVBK], a
 	ld hl, v1Tiles2
 	ld de, w7d000
@@ -2825,12 +2847,90 @@ CopyVRAMToWRAM: ; 12cd (0:12cd)
 	ret
 ; 0x1351
 
-	INCROM $1351, $142b
+LoadBackupVRAM: ; 1351 (0:1351)
+	ldh a, [rSVBK]
+	push af
+	ld a, $03
+	ldh [rSVBK], a
+	ld a, [w3d500]
+	ld [wSCY], a
+	ld a, [w3d501]
+	ld [wSCX], a
+	ld hl, w3d280
+	ld de, wTempPals1
+	ld b, 16 palettes
+	call CopyHLToDE
+	pop af
+	ldh [rSVBK], a
+	xor a
+	ldh [rVBK], a
 
-Func_142b: ; 142b (0:142b)
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK("WRAM4")
+	ldh [rSVBK], a
+	ld hl, w4d000
+	ld de, v0Tiles0
+	ld bc, $1000
+	call CopyHLToDE_BC
+	pop af
+	ldh [rSVBK], a
+
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK("WRAM5")
+	ldh [rSVBK], a
+	ld hl, w5d000
+	ld de, v0Tiles2
+	ld bc, $1000
+	call CopyHLToDE_BC
+	pop af
+	ldh [rSVBK], a
+
+	ld a, BANK("VRAM1")
+	ldh [rVBK], a
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK("WRAM6")
+	ldh [rSVBK], a
+	ld hl, w6d000
+	ld de, v1Tiles0
+	ld bc, $1000
+	call CopyHLToDE_BC
+	pop af
+	ldh [rSVBK], a
+
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK("WRAM7")
+	ldh [rSVBK], a
+	ld hl, w7d000
+	ld de, v1Tiles2
+	ld bc, $1000
+	call CopyHLToDE_BC
+	pop af
+	ldh [rSVBK], a
+	xor a
+	ldh [rVBK], a
+	ret
+; 0x13d5
+
+	INCROM $13d5, $141a
+
+ReturnToPendingLevelState: ; 141a (0:141a)
+	ld hl, wState
+	ld [hl], ST_LEVEL
+	ld a, [wPendingSubState]
+	ld [wSubState], a
+	ret
+; 0x1426
+
+ReturnToMap: ; 1426 (0:1426)
+	ld hl, wca3b
+	set 7, [hl]
 	ld a, $f0
 	ld [wcee3], a
-	farcall Func_461e
+	farcall StartOverworldState
 	ret
 ; 0x1440
 
@@ -3107,9 +3207,9 @@ Func_15dc: ; 15dc (0:15dc)
 .asm_15ff
 	ld a, [wSubState]
 	ld [wPendingSubState], a
-	ld a, ST_04
+	ld a, ST_PAUSE_MENU
 	ld [wState], a
-	ld a, $18
+	ld a, SST_PAUSE_18
 	ld [wSubState], a
 	ret
 
@@ -3233,7 +3333,7 @@ Func_1698: ; 1698 (0:1698)
 	jp Init
 ; 0x16d0
 
-Func_16d0: ; 16d0 (0:16d0)
+OpenActionHelp: ; 16d0 (0:16d0)
 	ld hl, wState
 	ld a, ST_07
 	ld [hli], a
@@ -4881,14 +4981,14 @@ Func_3573: ; 3573 (0:3573)
 ; b = sprite bank
 ; de = pointer to sprite
 AddOWSpriteWithScroll: ; 3a00 (0:3a00)
-	ld a, [wTempSCY]
+	ld a, [wSCY]
 	ld c, a
 	ld a, [hli] ; y coord
 	sub c
 	ld c, $10
 	add c
 	ld [wCurSpriteYCoord], a
-	ld a, [wTempSCX]
+	ld a, [wSCX]
 	ld c, a
 	ld a, [hli] ; x coord
 	sub c

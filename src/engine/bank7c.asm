@@ -1,24 +1,26 @@
-Func_1f0000: ; 1f0000 (7c:4000)
+_PauseMenuStateTable: ; 1f0000 (7c:4000)
 	ld a, [wSubState]
 	jumptable
 
 	dw SlowFadeBGToWhite
-	dw Func_1f0087
+	dw InitPauseMenu
 	dw DarkenBGToPal_Fast
-	dw $42a2
+	dw UpdatePauseMenu
+
 	dw SlowFadeBGToWhite
-	dw $433c
+	dw ReturnFromPauseMenu
 	dw DarkenBGToPal_Fast
-	dw $141a
-	dw SlowFadeBGToWhite
-	dw $4370
+	dw ReturnToPendingLevelState
+
+	dw SlowFadeBGToWhite ; SST_PAUSE_MENU_SAVE
+	dw InitSaveScreen
 	dw DarkenBGToPal_Fast
-	dw $43d1
+	dw FillSaveScreenBar
 	dw SlowFadeBGToWhite
-	dw $43fa
+	dw Func_1f03fa
 	dw DarkenBGToPal_Fast
-	dw $46e1
-	dw $46fe
+	dw HandleSaveCompleteBox
+	dw ResetAfterSave
 	dw DebugReset
 	dw DebugReset
 	dw DebugReset
@@ -26,32 +28,34 @@ Func_1f0000: ; 1f0000 (7c:4000)
 	dw DebugReset
 	dw DebugReset
 	dw DebugReset
-	dw SlowFadeBGToWhite
-	dw $4701
+
+	dw SlowFadeBGToWhite ; SST_PAUSE_18
+	dw Func_1f0701
 	dw DarkenBGToPal_Fast
-	dw $43d1
+	dw FillSaveScreenBar
 	dw SlowFadeBGToWhite
-	dw $4768
+	dw Func_1f0768
 	dw DarkenBGToPal_Fast
-	dw $46e1
+	dw HandleSaveCompleteBox
 	dw SlowFadeBGToWhite
-	dw $48af
+	dw Func_1f08af
 	dw DebugReset
 	dw DebugReset
 	dw DebugReset
 	dw DebugReset
 	dw DebugReset
 	dw DebugReset
+
 	dw SlowFadeBGToWhite
-	dw $4701
+	dw Func_1f0701
 	dw DarkenBGToPal_Fast
-	dw $43d1
+	dw FillSaveScreenBar
 	dw SlowFadeBGToWhite
-	dw $4768
+	dw Func_1f0768
 	dw DarkenBGToPal_Fast
-	dw $46e1
+	dw HandleSaveCompleteBox
 	dw SlowFadeBGToWhite
-	dw $48f4
+	dw Func_1f08f4
 	dw DebugReset
 	dw DebugReset
 	dw DebugReset
@@ -65,38 +69,38 @@ Func_1f0000: ; 1f0000 (7c:4000)
 
 	INCROM $1f007a, $1f0087
 
-Func_1f0087: ; 1f0087 (7c:4087)
+InitPauseMenu: ; 1f0087 (7c:4087)
 	call DisableLCD
-	call CopyVRAMToWRAM
+	call SaveBackupVRAM
 	ld a, [wAnimatedTilesFrameDuration]
-	ld [w3d50f], a
+	ld [wTempAnimatedTilesFrameDuration], a
 	ld a, [wAnimatedTilesGroup]
-	ld [w3d510], a
+	ld [wTempAnimatedTilesGroup], a
 	stop_sfx
 	play_music MUSIC_PAUSE_MENU
 	xor a
-	ld [wStartMenuSelection], a
+	ld [wPauseMenuSelection], a
 	xor a
 	ld [wRoomAnimatedTilesEnabled], a
 	call ClearBGMap0
 	call ClearWholeVirtualOAM
 
-	farcall Func_1f4000
-	farcall Func_1f400d
+	farcall LoadPauseMenuPals
+	farcall LoadPauseMenuGfx
 	farcall Func_1f403f
 
-	call Func_1f095b
-	ld hl, $9dee
-	farcall Func_4a33
+	call PrintNumberMusicCoins
+	ld hl, v0BGMap1 + $1ee
+	farcall PrintNumberCoins
 	call VBlank_354
 
 	xor a
 	ldh [rSCY], a
 	ldh [rSCX], a
-	ld [wTempSCY], a
-	ld [wTempSCX], a
+	ld [wSCY], a
+	ld [wSCX], a
 
-	ld hl, wIntroObj1
+	ld hl, wMenuObj2
 	ld a, $38
 	ld [hli], a
 	ld a, $20
@@ -111,10 +115,10 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld a, $b8
 	ld [hl], a
 	call UpdateObjAnim
-	ld hl, wIntroObj1
-	call Func_1f0940
+	ld hl, wMenuObj2
+	call AddPauseMenuSprite
 
-	ld hl, wIntroObj2
+	ld hl, wMenuObj3
 	ld a, $8c
 	ld [hli], a
 	ld a, $20
@@ -129,13 +133,13 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld a, $d4
 	ld [hl], a
 	call UpdateObjAnim
-	ld hl, wIntroObj2
-	call Func_1f0940
+	ld hl, wMenuObj3
+	call AddPauseMenuSprite
 
 	ld a, [wKeyAndTreasureFlags]
 	bit GREY_KEY_F, a
-	jr z, .asm_1f0168
-	ld hl, wIntroObj3
+	jr z, .red_key
+	ld hl, wMenuObj4
 	ld a, $54
 	ld [hli], a
 	ld a, $38
@@ -152,14 +156,14 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld a, $4a
 	ld [hl], a
 	call UpdateObjAnim
-	ld hl, wIntroObj3
-	call Func_1f0940
+	ld hl, wMenuObj4
+	call AddPauseMenuSprite
 
-.asm_1f0168
+.red_key
 	ld a, [wKeyAndTreasureFlags]
 	bit RED_KEY_F, a
-	jr z, .asm_1f018f
-	ld hl, wIntroObj4
+	jr z, .green_key
+	ld hl, wMenuObj5
 	ld a, $54
 	ld [hli], a
 	ld a, $48
@@ -176,14 +180,14 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld a, $4d
 	ld [hl], a
 	call UpdateObjAnim
-	ld hl, wIntroObj4
-	call Func_1f0940
+	ld hl, wMenuObj5
+	call AddPauseMenuSprite
 
-.asm_1f018f
+.green_key
 	ld a, [wKeyAndTreasureFlags]
 	bit GREEN_KEY_F, a
-	jr z, .asm_1f01b6
-	ld hl, $d553
+	jr z, .blue_key
+	ld hl, wMenuObj6
 	ld a, $54
 	ld [hli], a
 	ld a, $58
@@ -200,14 +204,14 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld a, $4a
 	ld [hl], a
 	call UpdateObjAnim
-	ld hl, $d553
-	call Func_1f0940
+	ld hl, wMenuObj6
+	call AddPauseMenuSprite
 
-.asm_1f01b6
+.blue_key
 	ld a, [wKeyAndTreasureFlags]
 	bit BLUE_KEY_F, a
-	jr z, .asm_1f01dd
-	ld hl, $d55e
+	jr z, .collected_treasures
+	ld hl, wMenuObj7
 	ld a, $54
 	ld [hli], a
 	ld a, $68
@@ -224,11 +228,11 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld a, $4d
 	ld [hl], a
 	call UpdateObjAnim
-	ld hl, $d55e
-	call Func_1f0940
+	ld hl, wMenuObj7
+	call AddPauseMenuSprite
 
-.asm_1f01dd
-	ld hl, $d56a
+.collected_treasures
+	ld hl, wMenuObj8
 	ld a, $64
 	ld [hli], a
 	ld a, $38
@@ -241,23 +245,24 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld [hli], a
 	ld [hli], a
 	ld a, [wKeyAndTreasureFlags]
-	bit 4, a
-	jr z, .asm_1f01fd
+	bit GREY_TREASURE_F, a
+	jr z, .no_grey_treasure
 	ld a, $5c
 	ld [hli], a
 	ld a, $f0
 	ld [hl], a
-	jr .asm_1f0203
-.asm_1f01fd
+	jr .set_grey_treasure_sprite
+.no_grey_treasure
 	ld a, $5c
 	ld [hli], a
 	ld a, $ed
 	ld [hl], a
-.asm_1f0203
+.set_grey_treasure_sprite
 	call UpdateObjAnim
-	ld hl, $d56a
-	call Func_1f0940
-	ld hl, $d572
+	ld hl, wMenuObj8
+	call AddPauseMenuSprite
+
+	ld hl, wMenuObj9
 	ld a, $64
 	ld [hli], a
 	ld a, $48
@@ -270,23 +275,24 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld [hli], a
 	ld [hli], a
 	ld a, [wKeyAndTreasureFlags]
-	bit 5, a
-	jr z, .asm_1f022c
+	bit RED_TREASURE_F, a
+	jr z, .no_red_treasure
 	ld a, $5c
 	ld [hli], a
 	ld a, $f6
 	ld [hl], a
-	jr .asm_1f0232
-.asm_1f022c
+	jr .set_red_treasure_sprite
+.no_red_treasure
 	ld a, $5c
 	ld [hli], a
 	ld a, $f3
 	ld [hl], a
-.asm_1f0232
+.set_red_treasure_sprite
 	call UpdateObjAnim
-	ld hl, $d572
-	call Func_1f0940
-	ld hl, $d57a
+	ld hl, wMenuObj9
+	call AddPauseMenuSprite
+
+	ld hl, wMenuObj10
 	ld a, $64
 	ld [hli], a
 	ld a, $58
@@ -299,23 +305,24 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld [hli], a
 	ld [hli], a
 	ld a, [wKeyAndTreasureFlags]
-	bit 6, a
-	jr z, .asm_1f025b
+	bit GREEN_TREASURE_F, a
+	jr z, .no_green_treasure
 	ld a, $5c
 	ld [hli], a
 	ld a, $f0
 	ld [hl], a
-	jr .asm_1f0261
-.asm_1f025b
+	jr .set_green_treasure_sprite
+.no_green_treasure
 	ld a, $5c
 	ld [hli], a
 	ld a, $ed
 	ld [hl], a
-.asm_1f0261
+.set_green_treasure_sprite
 	call UpdateObjAnim
-	ld hl, $d57a
-	call Func_1f0940
-	ld hl, $d582
+	ld hl, wMenuObj10
+	call AddPauseMenuSprite
+
+	ld hl, wMenuObj11
 	ld a, $64
 	ld [hli], a
 	ld a, $68
@@ -328,30 +335,770 @@ Func_1f0087: ; 1f0087 (7c:4087)
 	ld [hli], a
 	ld [hli], a
 	ld a, [wKeyAndTreasureFlags]
-	bit 7, a
-	jr z, .asm_1f028a
+	bit BLUE_TREASURE_F, a
+	jr z, .no_blue_treasure
 	ld a, $5c
 	ld [hli], a
 	ld a, $f6
 	ld [hl], a
-	jr .asm_1f0290
-.asm_1f028a
+	jr .set_blue_treasure_sprite
+.no_blue_treasure
 	ld a, $5c
 	ld [hli], a
 	ld a, $f3
 	ld [hl], a
-.asm_1f0290
+.set_blue_treasure_sprite
 	call UpdateObjAnim
-	ld hl, $d582
-	call Func_1f0940
+	ld hl, wMenuObj11
+	call AddPauseMenuSprite
+
 	ld a, LCDC_ON | LCDC_BG9C00 | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
 	ldh [rLCDC], a
+
 	ld hl, wSubState
 	inc [hl]
 	ret
 ; 0x1f02a2
 
-	INCROM $1f02a2, $1f08f7
+UpdatePauseMenu: ; 1f02a2 (7c:42a2)
+	call HandlePauseMenuInput
+	ld hl, $d53a
+	call UpdateObjAnim
+	ld hl, wMenuObj3
+	call AddPauseMenuSprite
+	ld a, [wKeyAndTreasureFlags]
+	bit GREY_KEY_F, a
+	jr z, .red_key
+	ld hl, wMenuObj4
+	call AddPauseMenuSprite
+.red_key
+	ld a, [wKeyAndTreasureFlags]
+	bit RED_KEY_F, a
+	jr z, .green_key
+	ld hl, wMenuObj5
+	call AddPauseMenuSprite
+.green_key
+	ld a, [wKeyAndTreasureFlags]
+	bit GREEN_KEY_F, a
+	jr z, .blue_key
+	ld hl, wMenuObj6
+	call AddPauseMenuSprite
+.blue_key
+	ld a, [wKeyAndTreasureFlags]
+	bit BLUE_KEY_F, a
+	jr z, .asm_1f02e5
+	ld hl, wMenuObj7
+	call AddPauseMenuSprite
+
+.asm_1f02e5
+	ld hl, wMenuObj8
+	call AddPauseMenuSprite
+	ld hl, wMenuObj8End
+	call AddPauseMenuSprite
+	ld hl, wMenuObj10
+	call AddPauseMenuSprite
+	ld hl, wMenuObj11
+	call AddPauseMenuSprite
+	ld hl, $d532
+	call UpdateObjAnim
+	ld hl, wMenuObj2
+	call AddPauseMenuSprite
+
+	call ClearVirtualOAM
+
+	ld a, [wPauseMenuSelection]
+	bit 7, a
+	ret z
+	ld a, [wObjAnimWasReset]
+	and a
+	ret z
+	ld a, [wPauseMenuSelection]
+	and $0f
+	cp $03
+	jr z, .ToMap
+	cp $01
+	jr z, .Save
+	cp $02
+	jp z, OpenActionHelp
+
+; Return
+	ld hl, wSubState
+	inc [hl]
+	ret
+
+.ToMap
+	jp ReturnToMap
+
+.Save
+	ld a, TRUE
+	ld [wResetDisabled], a
+	ld a, SST_PAUSE_MENU_SAVE
+	ld [wSubState], a
+	ret
+; 0x1f033c
+
+ReturnFromPauseMenu: ; 1f033c (7c:433c)
+	call DisableLCD
+	call ClearWholeVirtualOAM
+	call Func_1f0969
+	call LoadBackupVRAM
+
+	xor a
+	ld [wced6], a
+	ld a, [wTempAnimatedTilesFrameDuration]
+	ld [wAnimatedTilesFrameDuration], a
+	ld a, [wTempAnimatedTilesGroup]
+	ld [wAnimatedTilesGroup], a
+	xor a
+	ld [wAnimatedTilesFrameCount], a
+	ld [wAnimatedTilesFrame], a
+	ld a, TRUE
+	ld [wRoomAnimatedTilesEnabled], a
+
+	call UpdateLevelMusic
+	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
+	ldh [rLCDC], a
+	ld hl, wSubState
+	inc [hl]
+	ret
+; 0x1f0370
+
+InitSaveScreen: ; 1f0370 (7c:4370)
+	ld a, TRUE
+	ld [wResetDisabled], a
+	call DisableLCD
+	call ClearWholeVirtualOAM
+
+	farcall LoadSaveScreenPals
+	farcall LoadSaveScreenGfx
+	farcall PrintNowSavingBox
+	call VBlank_1f0c7e
+
+	xor a
+	ld [wSCY], a
+	ldh [rSCY], a
+	ld [wSCX], a
+	ldh [rSCX], a
+	xor a
+	ld [wPalFadeCounter], a
+	ld [wcee4], a
+	ld [wIntroSeqTimer], a
+
+	ld hl, wce01
+	ld a, HIGH(v0BGMap0 + $164)
+	ld [hli], a
+	ld [hl], LOW(v0BGMap0 + $164)
+	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
+	ldh [rLCDC], a
+	ld hl, wSubState
+	inc [hl]
+	ret
+; 0x1f03d1
+
+; every 4 frames fill another tile
+; in the save screen bar
+; when done, advance to next substate
+FillSaveScreenBar: ; 1f03d1 (7c:43d1)
+	ld a, [wIntroSeqTimer]
+	inc a
+	ld [wIntroSeqTimer], a
+	cp $04
+	ret c
+	xor a
+	ld [wIntroSeqTimer], a
+	ld a, [wcee4]
+	inc a
+	cp $0a
+	jr z, .bar_finished
+	or $1 << 7
+	ld [wcee4], a
+	ld hl, wce01 + 1
+	inc [hl]
+	ret
+.bar_finished
+	xor a
+	ld [wcee4], a
+	ld hl, wSubState
+	inc [hl]
+	ret
+; 0x1f03fa
+
+Func_1f03fa: ; 1f03fa (7c:43fa)
+	call DisableLCD
+	ldh a, [rSVBK]
+	push af
+	ld a, $03
+	ldh [rSVBK], a
+	ld hl, w3d280 palette 12
+	ld de, wcaa1
+	ld b, 4 palettes
+	call CopyHLToDE
+	pop af
+	ldh [rSVBK], a
+
+	call Func_1f0b3a
+
+	ld a, [wSRAMBank]
+	push af
+	ld a, BANK("SRAM0")
+	sramswitch
+	ld a, $30
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld de, s0a000
+	ld a, $57
+	ld [de], a
+	inc e
+	ld a, $41
+	ld [de], a
+	inc e
+	ld a, $52
+	ld [de], a
+	inc e
+	ld a, $33
+	ld [de], a
+	inc e
+	ld hl, wca00
+	ld b, $ca
+	call CopyHLToDE
+
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK("WRAM2")
+	ldh [rSVBK], a
+	ld hl, $d000
+	ld b, $11
+	call CopyHLToDE
+	pop af
+	ldh [rSVBK], a
+
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK("WRAM1")
+	ldh [rSVBK], a
+	ld hl, $d000
+	ld bc, $14a
+	call CopyHLToDE_BC
+	pop af
+	ldh [rSVBK], a
+
+	ld a, $31
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	call Func_1f0b9b
+	ld a, d
+	ld [s0a795 + 0], a
+	ld [wcee7], a
+	ld a, e
+	ld [s0a795 + 1], a
+	ld [wcee8], a
+	ld a, $32
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld a, d
+	ld [s0a7e5 + 0], a
+	ld a, e
+	ld [s0a7e5 + 1], a
+	ld a, $33
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld a, d
+	ld [s0afa5 + 0], a
+	ld a, e
+	ld [s0afa5 + 1], a
+	ld a, $41
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	call CalculateBackupSRAMChecksum1
+	ld a, d
+	ld [s0a79d + 0], a
+	ld [wcee7], a
+	ld a, e
+	ld [s0a79d + 1], a
+	ld [wcee8], a
+	ld a, $42
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld a, d
+	ld [s0a7ed + 0], a
+	ld a, e
+	ld [s0a7ed + 1], a
+	ld a, $43
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld a, d
+	ld [s0afad + 0], a
+	ld a, e
+	ld [s0afad + 1], a
+	ld a, $50
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+
+	ld de, s0a800
+	ld a, $57
+	ld [de], a
+	inc e
+	ld a, $41
+	ld [de], a
+	inc e
+	ld a, $52
+	ld [de], a
+	inc e
+	ld a, $33
+	ld [de], a
+	inc e
+	ld hl, wca00
+	ld b, $ca
+	call CopyHLToDE
+	ldh a, [rSVBK]
+	push af
+	ld a, $02
+	ldh [rSVBK], a
+	ld hl, $d000
+	ld b, $11
+	call CopyHLToDE
+	pop af
+	ldh [rSVBK], a
+	ldh a, [rSVBK]
+	push af
+	ld a, $01
+	ldh [rSVBK], a
+	ld hl, $d000
+	ld bc, $14a
+	call CopyHLToDE_BC
+	pop af
+	ldh [rSVBK], a
+	ld a, $51
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	call Func_1f0b9b
+	ld a, d
+	ld [s0a797 + 0], a
+	ld [wcee7], a
+	ld a, e
+	ld [s0a797 + 1], a
+	ld [wcee8], a
+	ld a, $52
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld a, d
+	ld [s0a7e7 + 0], a
+	ld a, e
+	ld [s0a7e7 + 1], a
+	ld a, $53
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld a, d
+	ld [s0afa7 + 0], a
+	ld a, e
+	ld [s0afa7 + 1], a
+	ld a, $60
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld de, s0a400
+	ld a, $57
+	ld [de], a
+	inc e
+	ld a, $41
+	ld [de], a
+	inc e
+	ld a, $52
+	ld [de], a
+	inc e
+	ld a, $33
+	ld [de], a
+	inc e
+	ld hl, wca00
+	ld b, $ca
+	call CopyHLToDE
+	ldh a, [rSVBK]
+	push af
+	ld a, $02
+	ldh [rSVBK], a
+	ld hl, $d000
+	ld b, $11
+	call CopyHLToDE
+	pop af
+	ldh [rSVBK], a
+	ldh a, [rSVBK]
+	push af
+	ld a, $01
+	ldh [rSVBK], a
+	ld hl, $d000
+	ld bc, $14a
+	call CopyHLToDE_BC
+	pop af
+	ldh [rSVBK], a
+	ld a, $61
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	call Func_1f0b9b
+	ld a, d
+	ld [s0a799 + 0], a
+	ld [wcee7], a
+	ld a, e
+	ld [s0a799 + 1], a
+	ld [wcee8], a
+	ld a, $62
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld a, d
+	ld [s0a7e9 + 0], a
+	ld a, e
+	ld [s0a7e9 + 1], a
+	ld a, $63
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld a, d
+	ld [s0afa9 + 0], a
+	ld a, e
+	ld [s0afa9 + 1], a
+
+	call Func_1f14c6
+	ld a, $80
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld de, s0ac00
+	ld a, $57
+	ld [de], a
+	inc e
+	ld a, $41
+	ld [de], a
+	inc e
+	ld a, $52
+	ld [de], a
+	inc e
+	ld a, $33
+	ld [de], a
+	inc e
+	ld hl, wca00
+	ld b, $ca
+	call CopyHLToDE
+	ldh a, [rSVBK]
+	push af
+	ld a, $02
+	ldh [rSVBK], a
+	ld hl, $d000
+	ld b, $11
+	call CopyHLToDE
+	pop af
+	ldh [rSVBK], a
+	ldh a, [rSVBK]
+	push af
+	ld a, $01
+	ldh [rSVBK], a
+	ld hl, $d000
+	ld bc, $14a
+	call CopyHLToDE_BC
+	pop af
+	ldh [rSVBK], a
+	ld a, $81
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	call Func_1f0b9b
+	ld a, d
+	ld [s0a79b + 0], a
+	ld [wcee7], a
+	ld a, e
+	ld [s0a79b + 1], a
+	ld [wcee8], a
+	ld a, $82
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld a, d
+	ld [s0a7eb + 0], a
+	ld a, e
+	ld [s0a7eb + 1], a
+	ld a, $83
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld a, d
+	ld [s0afab + 0], a
+	ld a, e
+	ld [s0afab + 1], a
+
+	xor a
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld [wResetDisabled], a
+	pop af
+	sramswitch
+
+	call VBlank_1f0c6c
+	farcall LoadSaveScreenPals
+	farcall PrintSaveCompleteBox
+	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
+	ldh [rLCDC], a
+	xor a
+	ld [wIntroSeqTimer + 0], a
+	ld a, $02
+	ld [wIntroSeqTimer + 1], a
+	ld hl, wSubState
+	inc [hl]
+	ret
+; 0x1f06e1
+
+; advances substate if A button is pressed
+; or when wIntroSeqTimer has elapsed
+HandleSaveCompleteBox: ; 1f06e1 (7c:46e1)
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	jr nz, .close
+	ld hl, wIntroSeqTimer
+	dec [hl]
+	ret nz
+	ld hl, wIntroSeqTimer + 1
+	dec [hl]
+	ret nz
+.close
+	xor a
+	ld [wIntroSeqTimer + 0], a
+	ld [wIntroSeqTimer + 1], a
+	ld hl, wSubState
+	inc [hl]
+	ret
+; 0x1f06fe
+
+ResetAfterSave: ; 1f06fe (7c:46fe)
+	jp Init
+; 0x1f0701
+
+Func_1f0701: ; 1f0701 (7c:4701)
+	ld a, TRUE
+	ld [wResetDisabled], a
+	call DisableLCD
+	call SaveBackupVRAM
+	call ClearBGMap1
+	call ClearWholeVirtualOAM
+
+	farcall LoadSaveScreenPals
+	farcall LoadSaveScreenGfx
+	farcall PrintNowSavingBox
+	call VBlank_1f0c7e
+
+	xor a
+	ld [wSCY], a
+	ldh [rSCY], a
+	ld [wSCX], a
+	ldh [rSCX], a
+	xor a
+	ld [wPalFadeCounter], a
+	ld [wIntroSeqTimer], a
+	ld [wcee4], a
+
+	ld hl, wce01
+	ld a, HIGH(v0BGMap0 + $164)
+	ld [hli], a
+	ld [hl], LOW(v0BGMap0 + $164)
+	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
+	ldh [rLCDC], a
+	ld hl, wSubState
+	inc [hl]
+	ret
+; 0x1f0768
+
+Func_1f0768: ; 1f0768 (7c:4768)
+	call DisableLCD
+	call Func_1f0b3a
+	ld a, [wSRAMBank]
+	push af
+	ld a, $00
+	sramswitch
+	ld a, $10
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld de, s0a380
+	ld a, $77
+	ld [de], a
+	inc e
+	ld a, $61
+	ld [de], a
+	inc e
+	ld a, $72
+	ld [de], a
+	inc e
+	ld a, $33
+	ld [de], a
+	inc e
+	ld hl, wca00
+	ld b, $5b
+	call CopyHLToDE
+	ldh a, [rSVBK]
+	push af
+	ld a, $02
+	ldh [rSVBK], a
+	ld hl, $d000
+	ld b, $11
+	call CopyHLToDE
+	pop af
+	ldh [rSVBK], a
+	ld a, $11
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	call Func_1f1228
+	ld a, d
+	ld [s0a791], a
+	ld [wcee7], a
+	ld a, e
+	ld [$a792], a
+	ld [wcee8], a
+	ld a, $12
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld a, d
+	ld [s0a7e1], a
+	ld a, e
+	ld [$a7e2], a
+	ld a, $13
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld a, d
+	ld [s0afa1], a
+	ld a, e
+	ld [$afa2], a
+	ld a, $20
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld de, s0ab80
+	ld a, $77
+	ld [de], a
+	inc e
+	ld a, $61
+	ld [de], a
+	inc e
+	ld a, $72
+	ld [de], a
+	inc e
+	ld a, $33
+	ld [de], a
+	inc e
+	ld hl, wca00
+	ld b, $5b
+	call CopyHLToDE
+	ldh a, [rSVBK]
+	push af
+	ld a, $02
+	ldh [rSVBK], a
+	ld hl, $d000
+	ld b, $11
+	call CopyHLToDE
+	pop af
+	ldh [rSVBK], a
+	ld a, $21
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld a, [wcee7]
+	ld d, a
+	ld [s0a793], a
+	ld a, [wcee8]
+	ld e, a
+	ld [$a794], a
+	ld a, $22
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld a, d
+	ld [s0a7e3], a
+	ld a, e
+	ld [$a7e4], a
+	ld a, $23
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld a, d
+	ld [s0afa3], a
+	ld a, e
+	ld [$afa4], a
+	xor a
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	pop af
+	sramswitch
+
+	call VBlank_1f0c6c
+	farcall LoadSaveScreenPals
+	farcall PrintSaveCompleteBox
+
+	xor a
+	ld [wIntroSeqTimer + 0], a
+	ld a, $02
+	ld [wIntroSeqTimer + 1], a
+	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
+	ldh [rLCDC], a
+	ld hl, wSubState
+	inc [hl]
+	ret
+; 0x1f08af
+
+Func_1f08af: ; 1f08af (7c:48af)
+	ld a, [wcee3]
+	cp $f1
+	jr z, .asm_1f08d8
+	cp $f2
+	jr z, .asm_1f08d8
+	cp $f3
+	jr z, .asm_1f08e6
+	call DisableLCD
+	call LoadBackupVRAM
+	xor a
+	ld [wResetDisabled], a
+	ld a, $e7
+	ldh [rLCDC], a
+	ld a, ST_OVERWORLD
+	ld [wState], a
+	ld a, [wPendingSubState]
+	ld [wSubState], a
+	ret
+
+.asm_1f08d8
+	xor a
+	ld [wResetDisabled], a
+	ld hl, wState
+	ld [hl], ST_09
+	xor a
+	ld [wSubState], a
+	ret
+
+.asm_1f08e6
+	xor a
+	ld [wResetDisabled], a
+	ld hl, wState
+	ld [hl], ST_0c
+	xor a
+	ld [wSubState], a
+	ret
+; 0x1f08f4
+
+Func_1f08f4: ; 1f08f4 (7c:48f4)
+	jp Init
+; 0x1f08f7
 
 LoadFontTiles: ; 1f08f7 (7c:48f7)
 	ld hl, FontGFX
@@ -399,7 +1146,7 @@ LoadLanguageSelectionText: ; 1f0926 (7c:4926)
 	ret
 ; 0x1f0940
 
-Func_1f0940: ; 1f0940 (7c:4940)
+AddPauseMenuSprite: ; 1f0940 (7c:4940)
 	ld a, [hli]
 	add $10
 	ld [wCurSpriteYCoord], a
@@ -415,17 +1162,291 @@ Func_1f0940: ; 1f0940 (7c:4940)
 	ret
 ; 0x1f095b
 
-Func_1f095b: ; 1f095b (7c:495b)
+PrintNumberMusicCoins: ; 1f095b (7c:495b)
 	ld a, [wNumMusicalCoins]
-	add a
+	add a ; *2
 	add $a0
-	ld [$9de7], a
+	ld [v0BGMap1 + $1e7], a
 	inc a
-	ld [$9e07], a
+	ld [v0BGMap1 + $207], a
 	ret
 ; 0x1f0969
 
-	INCROM $1f0969, $1f0b5b
+Func_1f0969: ; 1f0969 (7c:4969)
+	farcall VBlank_b672
+	farcall Func_b681
+	ldh a, [rSVBK]
+	push af
+	ld a, $01
+	ldh [rSVBK], a
+	farcall Func_6164e
+	pop af
+	ldh [rSVBK], a
+	call DrawWario
+	ldh a, [rSVBK]
+	push af
+	ld a, $01
+	ldh [rSVBK], a
+	farcall Func_616d7
+	pop af
+	ldh [rSVBK], a
+	ret
+; 0x1f09bd
+
+HandlePauseMenuInput: ; 1f09bd (7c:49bd)
+	ld a, [wPauseMenuSelection]
+	bit 7, a
+	ret nz
+	ld a, [wJoypadPressed]
+	bit B_BUTTON_F, a
+	jp nz, .Return
+
+	ld a, [wPauseMenuSelection]
+	cp $01
+	jr z, .asm_1f09f0
+	cp $02
+	jr z, .asm_1f0a02
+	cp $03
+	jr z, .asm_1f0a1d
+
+	ld a, [wJoypadPressed]
+	bit D_RIGHT_F, a
+	jr nz, .asm_1f09e7
+	bit A_BUTTON_F, a
+	ret z
+	jp .Return
+.asm_1f09e7
+	ld a, [wca3d]
+	bit 1, a
+	jr nz, .asm_1f0a45
+	jr .asm_1f0a2a
+
+.asm_1f09f0
+	ld a, [wJoypadPressed]
+	bit D_LEFT_F, a
+	jp nz, .asm_1f0aa1
+	bit D_RIGHT_F, a
+	jr nz, .asm_1f0a45
+	bit A_BUTTON_F, a
+	ret z
+	jp .Save
+
+.asm_1f0a02
+	ld a, [wJoypadPressed]
+	bit D_LEFT_F, a
+	jr nz, .asm_1f0a13
+	bit D_RIGHT_F, a
+	jr nz, .asm_1f0a7f
+	bit A_BUTTON_F, a
+	ret z
+	jp .ActionHelp
+.asm_1f0a13
+	ld a, [wca3d]
+	bit 1, a
+	jp nz, .asm_1f0aa1
+	jr .asm_1f0a2a
+
+.asm_1f0a1d
+	ld a, [wJoypadPressed]
+	bit D_LEFT_F, a
+	jr nz, .asm_1f0a45
+	bit A_BUTTON_F, a
+	ret z
+	jp .ToMap
+
+.asm_1f0a2a
+	ld a, $01
+	ld [wPauseMenuSelection], a
+	ld hl, wMenuObj2
+	ld a, $40
+	ld [hli], a
+	ld a, $40
+	ld [hli], a
+	xor a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld a, $5c
+	ld [hli], a
+	ld a, $9c
+	ld [hl], a
+	jr .play_sfx
+
+.asm_1f0a45
+	ld a, $02
+	ld [wPauseMenuSelection], a
+	ld hl, wMenuObj2
+	ld a, $38
+	ld [hli], a
+	ld a, $60
+	ld [hli], a
+	xor a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld a, [wTransformation]
+	cp TRANSFORMATION_OWL_WARIO
+	jr z, .owl_1
+	cp TRANSFORMATION_RAIL
+	jr z, .rail_1
+	cp (1 << 6) | TRANSFORMATION_VAMPIRE_WARIO
+	jr z, .vampire_1
+	ld bc, $5c50
+	jr .asm_1f0a79
+.owl_1
+	ld bc, $5cf9
+	jr .asm_1f0a79
+.rail_1
+	ld bc, $5d1b
+	jr .asm_1f0a79
+.vampire_1
+	ld bc, $5d41
+.asm_1f0a79
+	ld a, b
+	ld [hli], a
+	ld a, c
+	ld [hl], a
+	jr .play_sfx
+
+.asm_1f0a7f
+	ld a, $03
+	ld [wPauseMenuSelection], a
+	ld hl, wMenuObj2
+	ld a, $40
+	ld [hli], a
+	ld a, $80
+	ld [hli], a
+	xor a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld a, $5c
+	ld [hli], a
+	ld a, $74
+	ld [hl], a
+
+.play_sfx
+	play_sfx SFX_0E2
+	ret
+
+.asm_1f0aa1
+	ld a, $00
+	ld [wPauseMenuSelection], a
+	ld hl, wMenuObj2
+	ld a, $38
+	ld [hli], a
+	ld a, $20
+	ld [hli], a
+	xor a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld a, $5c
+	ld [hli], a
+	ld a, $b8
+	ld [hl], a
+	jr .play_sfx
+
+.Return
+	ld a, $00
+	ld [wPauseMenuSelection], a
+	ld hl, wMenuObj2
+	ld a, $38
+	ld [hli], a
+	ld a, $20
+	ld [hli], a
+	xor a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld a, $5c
+	ld [hli], a
+	ld a, $bb
+	ld [hl], a
+
+	ld hl, wPauseMenuSelection
+	set 7, [hl]
+	play_sfx SFX_0E7
+	ret
+
+.Save
+	ld hl, wMenuObj2FramesetOffset
+	xor a
+	ld [hli], a
+	ld [hli], a
+	ld a, $5c
+	ld [hli], a
+	ld a, $9f
+	ld [hl], a
+	jr .do_selection
+
+.ActionHelp
+	ld hl, wMenuObj2FramesetOffset
+	xor a
+	ld [hli], a
+	ld [hli], a
+	ld a, [wTransformation]
+	cp TRANSFORMATION_OWL_WARIO
+	jr z, .owl_2
+	cp TRANSFORMATION_RAIL
+	jr z, .rail_2
+	cp (1 << 6) | TRANSFORMATION_VAMPIRE_WARIO
+	jr z, .vampire_2
+	ld bc, $5c69
+	jr .asm_1f0b18
+.owl_2
+	ld bc, $5d0a
+	jr .asm_1f0b18
+.rail_2
+	ld bc, $5d20
+	jr .asm_1f0b18
+.vampire_2
+	ld bc, $5d4c
+.asm_1f0b18
+	ld a, b
+	ld [hli], a
+	ld a, c
+	ld [hl], a
+	jr .do_selection
+
+.ToMap
+	ld hl, wMenuObj2FramesetOffset
+	xor a
+	ld [hli], a
+	ld [hli], a
+	ld a, $5c
+	ld [hli], a
+	ld a, $77
+	ld [hl], a
+	jr .do_selection
+.do_selection
+	ld hl, wPauseMenuSelection
+	set 7, [hl]
+	play_sfx SFX_0E3
+	ret
+; 0x1f0b3a
+
+; increments counter in wca00
+Func_1f0b3a: ; 1f0b3a (7c:4b3a)
+	ld a, [wca00 + 3]
+	add 1
+	ld [wca00 + 3], a
+	ld a, [wca00 + 2]
+	adc $00
+	ld [wca00 + 2], a
+	ld a, [wca00 + 1]
+	adc $00
+	ld [wca00 + 1], a
+	ld a, [wca00 + 0]
+	adc $00
+	ld [wca00 + 0], a
+	ret
+; 0x1f0b5b
 
 Func_1f0b5b: ; 1f0b5b (7c:4b5b)
 	ld de, $0
@@ -483,7 +1504,31 @@ CalculateChecksumLong: ; 1f0b8e (7c:4b8e)
 	ret
 ; 0x1f0b9b
 
-	INCROM $1f0b9b, $1f0bcc
+Func_1f0b9b: ; 1f0b9b (7c:4b9b)
+	ld de, $0
+	ld hl, wca00
+	ld b, $ca
+	call CalculateChecksum
+	ldh a, [rSVBK]
+	push af
+	ld a, $02
+	ldh [rSVBK], a
+	ld hl, $d000
+	ld b, $11
+	call CalculateChecksum
+	pop af
+	ldh [rSVBK], a
+	ldh a, [rSVBK]
+	push af
+	ld a, $01
+	ldh [rSVBK], a
+	ld hl, $d000
+	ld bc, $14a
+	call CalculateChecksumLong
+	pop af
+	ldh [rSVBK], a
+	ret
+; 0x1f0bcc
 
 ; calculates checksum for SRAM1 and first half of SRAM2
 ; outputs result in de
@@ -577,7 +1622,49 @@ CalculateBackupSRAMChecksum2: ; 1f0c1c (7c:4c1c)
 	ret
 ; 0x1f0c6c
 
-	INCROM $1f0c6c, $1f0cad
+VBlank_1f0c6c: ; 1f0c6c (7c:4c6c)
+	ld hl, .func
+	ld de, wVBlankFunc
+	ld b, .func_end - .func
+	call CopyHLToDE
+	ret
+
+.func
+	ld a, HIGH(wVirtualOAM)
+	call hTransferVirtualOAM
+	ret
+.func_end
+; 0x1f0c7e
+
+VBlank_1f0c7e: ; 1f0c7e (7c:4c7e)
+	ld hl, .func
+	ld de, wVBlankFunc
+	ld b, .func_end - .func
+	call CopyHLToDE
+	ret
+
+.func
+	ld a, [wcee4]
+	bit 7, a
+	jr z, .transfer
+	ld hl, wce01
+	ld a, [hli]
+	ld l, [hl]
+	ld h, a
+	ld a, BANK("VRAM1")
+	ldh [rVBK], a
+	ld [hl], $05
+	xor a
+	ldh [rVBK], a
+	ld [hl], $02
+	ld hl, wcee4
+	res 7, [hl]
+.transfer
+	ld a, HIGH(wVirtualOAM)
+	call hTransferVirtualOAM
+	ret
+.func_end
+; 0x1f0cad
 
 Func_1f0cad: ; 1f0cad (7c:4cad)
 	ld a, [wSRAMBank]
@@ -1376,7 +2463,22 @@ Func_1f1210: ; 1f1210 (7c:5210)
 	ret
 ; 0x1f1228
 
-	INCROM $1f1228, $1f1246
+Func_1f1228: ; 1f1228 (7c:5228)
+	ld de, $0
+	ld hl, wca00
+	ld b, $5b
+	call CalculateChecksum
+	ldh a, [rSVBK]
+	push af
+	ld a, $02
+	ldh [rSVBK], a
+	ld hl, $d000
+	ld b, $11
+	call CalculateChecksum
+	pop af
+	ldh [rSVBK], a
+	ret
+; 0x1f1246
 
 Func_1f1246: ; 1f1246 (7c:5246)
 	xor a
@@ -1605,7 +2707,7 @@ Func_1f13d7: ; 1f13d7 (7c:53d7)
 	push af
 	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
-	ld de, wTreasuresCollected
+	ld de, $d000
 	ld b, $11
 	call CopyHLToDE
 	pop af
@@ -1621,7 +2723,7 @@ Func_1f13f2: ; 1f13f2 (7c:53f2)
 	push af
 	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
-	ld de, wTreasuresCollected
+	ld de, $d000
 	ld b, $11
 	call CopyHLToDE
 	pop af
@@ -1630,7 +2732,7 @@ Func_1f13f2: ; 1f13f2 (7c:53f2)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	ld de, wObjects
+	ld de, $d000
 	ld bc, $14a
 	call CopyHLToDE_BC
 	pop af
@@ -1717,7 +2819,79 @@ Func_1f1420: ; 1f1420 (7c:5420)
 	ret
 ; 0x1f14c6
 
-	INCROM $1f14c6, $1f1d5d
+Func_1f14c6: ; 1f14c6 (7c:54c6)
+	ld a, $70
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld a, [wSRAMBank]
+	push af
+	ld a, $02
+	sramswitch
+	ld hl, s2a000
+	ld de, s2b000
+	ld bc, $1000
+	call CopyHLToDE_BC
+	pop af
+	sramswitch
+
+	ld hl, s0a000
+	ld bc, $2000
+.asm_1f14f6
+	ld a, [wSRAMBank]
+	push af
+	ld a, $01
+	sramswitch
+	ld d, [hl]
+	ld a, [wSRAMBank]
+	push af
+	ld a, $03
+	sramswitch
+	ld a, d
+	ld [hli], a
+	pop af
+	sramswitch
+	pop af
+	sramswitch
+	dec c
+	jr nz, .asm_1f14f6
+	dec b
+	jr nz, .asm_1f14f6
+
+	ld a, $71
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	call CalculateBackupSRAMChecksum2
+	ld a, d
+	ld [s0a79f + 0], a
+	ld a, e
+	ld [s0a79f + 1], a
+	ld a, $72
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld a, d
+	ld [s0a7ef + 0], a
+	ld a, e
+	ld [s0a7ef + 1], a
+	ld a, $73
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ld a, d
+	ld [s0afaf + 0], a
+	ld a, e
+	ld [s0afaf + 1], a
+
+	xor a
+	ld [s0a790], a
+	ld [s0a7e0], a
+	ld [s0afa0], a
+	ret
+; 0x1f156c
+
+	INCROM $1f156c, $1f1d5d
 
 FontGFX: ; 1f1d5d (2c:5d5d)
 INCBIN "gfx/font.2bpp.lz"

@@ -2,9 +2,9 @@
 	const_def
 	const ST_TITLE              ; $00
 	const ST_OVERWORLD          ; $01
-	const ST_02                 ; $02
+	const ST_LEVEL              ; $02
 	const ST_03                 ; $03
-	const ST_04                 ; $04
+	const ST_PAUSE_MENU         ; $04
 	const ST_05                 ; $05
 	const ST_06                 ; $06
 	const ST_07                 ; $07
@@ -31,3 +31,7 @@ SST_OVERWORLD_1A EQU $1a
 SST_OVERWORLD_1E EQU $1e
 SST_OVERWORLD_20 EQU $20
 SST_OVERWORLD_23 EQU $23
+
+; ST_PAUSE_MENU substates
+SST_PAUSE_MENU_SAVE EQU $08
+SST_PAUSE_18 EQU $18
