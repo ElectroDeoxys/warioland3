@@ -372,14 +372,14 @@ Func_b4247: ; b4247 (2d:4247)
 	hcall Decompress
 
 	ld hl, v0BGMap0 tile $3c
-	ld de, wTilemap tile $2a
+	ld de, wAttrmap tile $2a
 	ld b, 4 tiles
 	call CopyHLToDE
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, v1BGMap0 tile $3c
-	ld de, wTilemap tile $26
+	ld de, wAttrmap tile $26
 	ld b, 4 tiles
 	call CopyHLToDE
 	xor a
@@ -533,11 +533,11 @@ Func_b43a8: ; b43a8 (2d:43a8)
 	call .asm_b43ce
 	xor a
 	ld [wOWObj5Unk6], a
-	ld hl, wTilemap + $b0
+	ld hl, wAttrmap + $b0
 	res 7, [hl]
-	ld hl, wTilemap + $d0
+	ld hl, wAttrmap + $d0
 	res 7, [hl]
-	ld hl, wTilemap + $e0
+	ld hl, wAttrmap + $e0
 	res 7, [hl]
 	ret
 .asm_b43ce
@@ -787,7 +787,7 @@ Func_b4567: ; b4567 (2d:4567)
 
 	ld b, 3
 	ld de, $1f
-	ld hl, wTilemap + $12e
+	ld hl, wAttrmap + $12e
 .loop
 	set 7, [hl]
 	inc hl
@@ -974,12 +974,12 @@ Func_b46a0: ; b46a0 (2d:46a0)
 	ld [w2d046], a
 
 	ld hl, BGMap_857f7
-	ld de, wAttrmap + $14f
+	ld de, wTilemap + $14f
 	ld c, $91
 	ld b, BANK(BGMap_857f7)
 	call CopyFarBytes
 	ld hl, BGMap_85897
-	ld de, wTilemap + $14f
+	ld de, wAttrmap + $14f
 	ld c, $91
 	ld b, BANK(BGMap_85897)
 	jp CopyFarBytes
@@ -1012,10 +1012,10 @@ Func_b46d9: ; b46d9 (2d:46d9)
 	ld de, .data_2
 	call InitOWObjParams
 
-	ld hl, wTilemap + $143
+	ld hl, wAttrmap + $143
 	ld b, $4
 	call SetBGMapBytesPriority
-	ld hl, wTilemap + $163
+	ld hl, wAttrmap + $163
 	ld b, $4
 	jp SetBGMapBytesPriority
 
@@ -1199,13 +1199,13 @@ Func_b4832: ; b4832 (2d:4832)
 	ld hl, wOWObj2
 	ld de, .data_2
 	call InitOWObjParams
-	ld hl, wTilemap + $ee
+	ld hl, wAttrmap + $ee
 	ld b, $3
 	call SetBGMapBytesPriority
-	ld hl, wTilemap + $10e
+	ld hl, wAttrmap + $10e
 	ld b, $3
 	call SetBGMapBytesPriority
-	ld hl, wTilemap + $12e
+	ld hl, wAttrmap + $12e
 	ld b, $2
 	jp SetBGMapBytesPriority
 

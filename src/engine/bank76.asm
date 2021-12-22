@@ -86,7 +86,7 @@ UpdateCommonOWAnimations: ; 1d8b00 (76:4b00)
 	ld b, $00
 	add hl, bc
 
-	ld d, HIGH(wAttrmap + $240)
+	ld d, HIGH(wTilemap + $240)
 	ld a, LOW($240)
 	add c
 	ld e, a
@@ -123,7 +123,7 @@ UpdateCommonOWAnimations: ; 1d8b00 (76:4b00)
 	ld b, $00
 	add hl, bc
 
-	ld d, HIGH(wAttrmap + $2c0)
+	ld d, HIGH(wTilemap + $2c0)
 	ld a, LOW($2c0)
 	add c
 	ld e, a
@@ -170,7 +170,7 @@ UpdateCommonOWAnimations: ; 1d8b00 (76:4b00)
 	add hl, de
 	ld b, $00
 	add hl, bc
-	ld d, HIGH(wAttrmap + $2c0)
+	ld d, HIGH(wTilemap + $2c0)
 	ld a, LOW($2c0)
 	add c
 	ld e, a
@@ -199,7 +199,7 @@ Func_1d8bf7: ; 1d8bf7 (76:4bf7)
 	ld b, $40
 	call CopyHLToDE
 	pop hl
-	ld de, wAttrmap + $240
+	ld de, wTilemap + $240
 	ld b, $80
 	call CopyHLToDE
 	ld hl, OverworldSeaGfx
@@ -214,9 +214,9 @@ Func_1d8c2c: ; 1d8c2c (76:4c2c)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld c, LOW(rHDMA1)
-	ld a, HIGH(wAttrmap tile $24)
+	ld a, HIGH(wTilemap tile $24)
 	ld [$ff00+c], a
-	ld a, LOW(wAttrmap tile $24)
+	ld a, LOW(wTilemap tile $24)
 	inc c
 	ld [$ff00+c], a
 	ld a, $17

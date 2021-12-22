@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-const char WRAM_NUM = '3';
+const char WRAM_NUM = '2';
 
 int main()
 {

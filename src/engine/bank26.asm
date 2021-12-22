@@ -308,7 +308,17 @@ INCBIN "gfx/treasures/treasure_101.2bpp"
 NumbersGfx: ; 99980 (26:5980)
 INCBIN "gfx/gui/numbers.2bpp"
 
-	INCROM $99ae0, $9a3a2
+TreasureCollectionGfx: ; 99ae0 (26:5ae0)
+INCBIN "gfx/gui/treasure_collection.2bpp.lz"
+
+TreasureCollectionCursorGfx: ; 9a05c (26:605c)
+INCBIN "gfx/gui/treasure_collection_cursor.2bpp.lz"
+
+BGMap_9a129: ; 9a129 (26:6129)
+INCBIN "gfx/bgmaps/map_9a129.bin"
+
+BGMap_9a2ac: ; 9a2ac (26:62ac)
+INCBIN "gfx/bgmaps/map_9a2ac.bin"
 
 DrawCoinCount: ; 9a3a2 (26:63a2)
 	ld de, v0Tiles1 + $a0
@@ -337,10 +347,991 @@ DrawCoinCount: ; 9a3a2 (26:63a2)
 	ret
 ; 0x9a3cf
 
-	INCROM $9a3cf, $9aa81
+_InitTreasureCollection: ; 9a3cf (26:63cf)
+	call DisableLCD
+	call FillBGMap0_With7f
+	call ClearWholeVirtualOAM
+
+	play_music2 MUSIC_TREASURE_COLLECTION
+
+	xor a
+	ldh [rSCX], a
+	ld [wSCX], a
+	ldh [rSCY], a
+	ld [wSCY], a
+
+	ld a, $02
+	ldh [rSVBK], a
+	call VBlank_9a564
+	call Func_9a54e
+	call Func_9a559
+	xor a
+	ld [wHDMA], a
+
+	; if collection is already open,
+	; then we don't need to search for
+	; the right page
+	ld a, [wIsCollectionOpen]
+	and a
+	jr nz, .skip_jump_page
+
+	lb bc, 0, 0
+	ld a, [wcee3]
+	and a
+	jr z, .got_page
+	cp NUM_TREASURES + 1
+	jr nc, .got_page
+.loop_find_page
+	cp NUM_COLLECTION_CELLS + 1
+	jr c, .found_page
+	inc b
+	sub NUM_COLLECTION_CELLS
+	jr .loop_find_page
+.found_page
+	dec a
+	ld c, a
+.got_page
+	ld a, b
+	ld [wCollectionPage], a
+	ld a, c
+	ld [wCollectionCell], a
+	ld a, TRUE
+	ld [wIsCollectionOpen], a
+
+.skip_jump_page
+	call GetCurrentCollectionCellRowAndColumn
+	call GetCollectionCellCoords
+
+	ld hl, Pals_9ad45
+	call LoadPalsToTempPals1
+	ld hl, Pals_9ad05
+	call LoadPalsToTempPals2
+
+	ld a, BANK(TreasureCollectionCursorGfx)
+	ld [wTempBank], a
+	ld hl, TreasureCollectionCursorGfx
+	ld bc, v0Tiles0
+	ld a, [wTempBank]
+	ldh [hCallFuncBank], a
+	hcall Decompress
+
+	ld a, BANK(TreasureCollectionGfx)
+	ld [wTempBank], a
+	ld hl, TreasureCollectionGfx
+	ld bc, v0Tiles2
+	ld a, [wTempBank]
+	ldh [hCallFuncBank], a
+	hcall Decompress
+
+	call LoadCollectionPageTreasureGfx
+
+	ld a, BANK("VRAM1")
+	ldh [rVBK], a
+	ld hl, NumbersGfx
+	ld de, v1Tiles1 tile $20
+	ld bc, $14 tiles
+	call CopyHLToDE_BC
+
+	xor a
+	ldh [rVBK], a
+	ld a, BANK(BGMap_9a2ac)
+	ld [wTempBank], a
+	ld hl, BGMap_9a2ac
+	ld bc, wAttrmap
+	ld a, [wTempBank]
+	ldh [hCallFuncBank], a
+	hcall Decompress
+
+	ld a, BANK(BGMap_9a129)
+	ld [wTempBank], a
+	ld hl, BGMap_9a129
+	ld bc, wTilemap
+	ld a, [wTempBank]
+	ldh [hCallFuncBank], a
+	hcall Decompress
+
+	call ApplyPageTreasuresPals
+
+	ld hl, wAttrmap + $22
+	ld a, $09
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ld hl, wAttrmap + $42
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+
+	ld a, [wCollectionPage]
+	inc a
+	add $20
+	ld [wTilemap + $30], a
+
+	ld hl, wTilemap
+	ld de, v0BGMap1
+	ld bc, $24 tiles
+	call CopyHLToDE_BC
+	ld a, BANK("VRAM1")
+	ldh [rVBK], a
+	ld hl, wAttrmap
+	ld de, v0BGMap1
+	ld bc, $24 tiles
+	call CopyHLToDE_BC
+
+	xor a
+	ldh [rVBK], a
+	ld hl, v0BGMap1 + $22
+	farcall PrintNumberCollectedTreasures
+
+	ld hl, wOWObj1Unk6
+	ld a, $01
+	call Func_3b93
+	ld b, $10
+	ld a, $08
+	ld hl, wOWObj9XCoord
+	ld [hld], a
+	ld [hl], b
+	ld hl, wOWObj10XCoord
+	ld a, $98
+	ld [hld], a
+	ld [hl], b
+	ld a, $8f
+	ldh [rLCDC], a
+	ld hl, wSubState
+	inc [hl]
+	ret
+; 0x9a52b
+
+LoadCollectionPageTreasureGfx: ; 9a52b (26:652b)
+	ld hl, Treasure001Gfx - (NUM_TREASURE_TILES * NUM_COLLECTION_CELLS) tiles
+	ld de, (NUM_TREASURE_TILES * NUM_COLLECTION_CELLS) tiles
+	ld a, [wCollectionPage]
+	inc a
+.loop
+	add hl, de
+	dec a
+	jr nz, .loop
+	ld de, v0Tiles1 tile $20
+	ld bc, (NUM_TREASURE_TILES * NUM_COLLECTION_CELLS) tiles
+	call CopyHLToDE_BC
+
+	ld hl, Treasure101Gfx
+	ld de, v0Tiles1 tile $7c
+	ld b, NUM_TREASURE_TILES tiles
+	call CopyHLToDE
+	ret
+; 0x9a54e
+
+Func_9a54e: ; 9a54e (26:654e)
+	ld hl, wCollectionRow
+	ld bc, $800
+	xor a
+	call WriteAToHL_BCTimes
+	ret
+; 0x9a559
+
+Func_9a559: ; 9a559 (26:6559)
+	ld hl, w2d180
+	ld bc, $200
+	xor a
+	call WriteAToHL_BCTimes
+	ret
+; 0x9a564
+
+VBlank_9a564: ; 9a564 (26:6564)
+	ld hl, .func
+	ld de, wVBlankFunc
+	ld b, .func_end - .func
+	call CopyHLToDE
+	ret
+
+.func
+	ld a, $02
+	ldh [rSVBK], a
+	ld a, [wSCY]
+	ldh [rSCY], a
+	ld a, [wSCX]
+	ldh [rSCX], a
+	xor a
+	ldh [rVBK], a
+	ld a, HIGH(wVirtualOAM)
+	jp hTransferVirtualOAM
+.func_end
+; 0x9a586
+
+; iterates all treasures in the current page
+; and applies the corresponding palette
+ApplyPageTreasuresPals: ; 9a586 (26:6586)
+	xor a
+	ld [w2dffe], a
+	ld a, [wCollectionPage]
+	ld c, a
+	inc c
+	ld a, -NUM_COLLECTION_CELLS
+.loop
+	add NUM_COLLECTION_CELLS
+	dec c
+	jr nz, .loop
+	inc a
+	ld [w2dfff], a
+.loop_treasures
+	ld a, [w2dfff]
+	call IsTreasureCollected
+	jr z, .not_collected
+	jr .collected
+
+.next_treasure
+	ld hl, w2dffe
+	inc [hl]
+	ld a, [hli]
+	inc [hl] ; w2dfff
+	cp NUM_COLLECTION_CELLS
+	jr nz, .loop_treasures
+	ret
+
+.not_collected
+	call .GetAttrmapAddress
+	push de
+	ld a, $fc
+	ld [de], a
+	inc a
+	ld [hli], a
+	inc a
+	inc e
+	ld [de], a
+	inc a
+	ld [hl], a
+	pop hl
+	dec h
+	dec h
+	dec h
+	ld a, $04
+	ld [hli], a
+	ld [hl], a
+	ld de, BG_MAP_WIDTH
+	add hl, de
+	ld [hld], a
+	ld [hl], a
+	jr .next_treasure
+
+.collected
+	ld a, [w2dfff]
+	ld e, a
+	ld d, $00
+	ld hl, TreasureOBPals
+	add hl, de
+	ld a, [hl]
+	push af
+	call .GetAttrmapAddress
+	pop af
+	dec h
+	dec h
+	dec h
+	ld [hli], a
+	ld [hl], a
+	dec d
+	dec d
+	dec d
+	ld [de], a
+	inc de
+	ld [de], a
+	jr .next_treasure
+
+; outputs in hl and de the addresses in wTilemap
+; for the treasure in Cell w2dffe
+; hl = de + BG_MAP_WIDTH
+.GetAttrmapAddress
+	ld a, [w2dffe]
+	ld d, HIGH(wTilemap) + $1
+	cp NUM_COLLECTION_COLS
+	jr nc, .got_hi
+	ld d, HIGH(wTilemap)
+.got_hi
+	ld hl, .lo_map_addresses
+	ld b, $00
+	ld c, a
+	add hl, bc
+	ld l, [hl]
+	ld h, d
+	ld e, l
+	ld a, BG_MAP_WIDTH
+	add l
+	ld l, a
+	ret
+
+.lo_map_addresses
+	db $a3 ; 00
+	db $a6 ; 01
+	db $a9 ; 02
+	db $ac ; 03
+	db $af ; 04
+	db $03 ; 05
+	db $06 ; 06
+	db $09 ; 07
+	db $0c ; 08
+	db $0f ; 09
+	db $63 ; 10
+	db $66 ; 11
+	db $69 ; 12
+	db $6c ; 13
+	db $6f ; 14
+	db $c3 ; 15
+	db $c6 ; 16
+	db $c9 ; 17
+	db $cc ; 18
+	db $cf ; 19
+; 0x9a618
+
+_TreasureCollection: ; 9a618 (26:6618)
+	call ProcessDPadRepeat
+	call HandleTreasureCollectionInput
+	call AnimateTreasureCollection
+	call ClearVirtualOAM
+	ret
+; 0x9a625
+
+HandleTreasureCollectionInput: ; 9a625 (26:6625)
+	ld a, [wJoypadPressed]
+	bit B_BUTTON_F, a
+	jr z, .asm_9a646
+
+; b btn
+	stop_music2
+	stop_sfx
+	ld a, $08
+	ld [wSubState], a
+	ret
+
+.asm_9a646
+	ld hl, wCollectionPage
+	ld a, [wJoypadDown]
+	ld b, a
+	bit A_BUTTON_F, b
+	jr z, .no_a_btn
+	ld a, [wCollectionScrollMode]
+	and a
+	call z, .SetScrollMode
+	ld hl, wCollectionPage
+	bit D_RIGHT_F, b
+	jr nz, .a_right
+	bit D_LEFT_F, b
+	jr nz, .a_left
+	ret
+
+.SetScrollMode
+	ld a, TRUE
+	ld [wCollectionScrollMode], a
+	ld hl, wOWObj9Unk6
+	ld a, $03
+	call Func_3b93
+	ld hl, wOWObj10Unk6
+	ld a, $04
+	call Func_3b93
+	ret
+
+.a_right
+	ld a, $04
+	cp [hl]
+	jr z, .asm_9a682
+	inc [hl]
+	jr .asm_9a68f
+.asm_9a682
+	ld [hl], $00
+	jr .asm_9a68f
+.a_left
+	ld a, [hl]
+	and a
+	jr z, .asm_9a68d
+	dec [hl]
+	jr .asm_9a68f
+.asm_9a68d
+	ld [hl], $04
+.asm_9a68f
+	play_sfx SFX_0EB
+	stop_music2
+	ld a, $0c
+	ld [wSubState], a
+	ret
+
+.no_a_btn
+	xor a
+	ld [wCollectionScrollMode], a
+	ld [wOWObj9Unk6], a
+	ld [wOWObj10Unk6], a
+
+	ld a, [wJoypadPressed]
+	ld b, a
+	ld hl, wCollectionCol
+	ld a, [hl]
+	bit D_RIGHT_F, b
+	jr nz, .right
+	bit D_LEFT_F, b
+	jr nz, .left
+	ld hl, wCollectionRow
+	ld a, [hl]
+	bit D_UP_F, b
+	jr nz, .up
+	bit D_DOWN_F, b
+	jr nz, .down
+	call ProcessCollectionLinkState
+	ret
+
+.right
+	cp NUM_COLLECTION_COLS - 1
+	jr z, .page_right
+	inc [hl]
+	ld a, [wCollectionCell]
+	inc a
+	jr .got_target_cell
+.left
+	and a
+	jr z, .page_left
+	dec [hl]
+	ld a, [wCollectionCell]
+	dec a
+	jr .got_target_cell
+.down
+	cp NUM_COLLECTION_ROWS - 1
+	jr nc, .cant_scroll
+	inc [hl]
+	ld a, [wCollectionCell]
+	add NUM_COLLECTION_COLS
+	jr .got_target_cell
+.up
+	and a
+	jr z, .cant_scroll
+	dec [hl]
+	ld a, [wCollectionCell]
+	sub NUM_COLLECTION_COLS
+.got_target_cell
+	ld [wCollectionCell], a
+	play_sfx SFX_0E2
+
+	xor a
+	ld [wOWObj2Unk6], a
+	ld [wOWObj3Unk6], a
+	ld [wOWObj4Unk6], a
+	ld [wOWObj5Unk6], a
+	ld [wOWObj6Unk6], a
+	ld [wOWObj7Unk6], a
+	ld [wOWObj8Unk6], a
+
+	ld de, wCollectionLinkState
+	xor a
+	ld [de], a ; wCollectionLinkState
+	inc e
+	ld [de], a ; wCollectionLinkStateCounter
+	jr GetCollectionCellCoords
+
+.cant_scroll
+	play_sfx SFX_0E5
+	ret
+
+.page_right
+	ld [hl], $00
+	ld a, [wCollectionCell]
+	sub NUM_COLLECTION_ROWS
+	ld [wCollectionCell], a
+	ld hl, wCollectionPage
+	inc [hl]
+	ld a, [hl]
+	cp NUM_COLLECTION_PAGES
+	jr nz, .change_page
+	ld [hl], $00
+	jr .change_page
+
+.page_left
+	ld [hl], NUM_COLLECTION_ROWS
+	ld a, [wCollectionCell]
+	add NUM_COLLECTION_ROWS
+	ld [wCollectionCell], a
+	ld hl, wCollectionPage
+	dec [hl]
+	ld a, [hl]
+	cp -1
+	jr nz, .change_page
+	ld [hl], NUM_COLLECTION_PAGES - 1
+
+.change_page
+	play_sfx SFX_0EB
+	ld a, $0c
+	ld [wSubState], a
+	ret
+; 0x9a76a
+
+GetCollectionCellCoords: ; 9a76a (26:676a)
+	ld a, [wCollectionRow]
+	ld hl, .y_coords
+	ld c, a
+	ld b, $00
+	add hl, bc
+	ld a, [hl]
+	ld [wOWObj1YCoord], a
+	ld a, [wCollectionCol]
+	ld hl, .x_coords
+	ld c, a
+	add hl, bc
+	ld a, [hl]
+	ld [wOWObj1XCoord], a
+	ret
+
+.y_coords
+	db $30 ; row 0
+	db $48 ; row 1
+	db $60 ; row 2
+	db $78 ; row 3
+
+.x_coords
+	db $20 ; col 0
+	db $38 ; col 1
+	db $50 ; col 2
+	db $68 ; col 3
+	db $80 ; col 4
+; 0x9a78e
+
+Func_9a78e: ; 9a78e (26:678e)
+	ld a, [de]
+	ld hl, .table_1
+	ld c, a
+	ld b, $00
+	add hl, bc
+	ld a, [hl]
+	ld [de], a
+	inc e
+	ld a, [de]
+	ld hl, .table_2
+	ld c, a
+	add hl, bc
+	ld a, [hl]
+	ld [de], a
+	ret
+
+.table_1
+	db $30 ; row 0
+	db $48 ; row 1
+	db $60 ; row 2
+	db $78 ; row 3
+
+.table_2
+	db $20 ; col 0
+	db $38 ; col 1
+	db $50 ; col 2
+	db $68 ; col 3
+	db $80 ; col 4
+; 0x9a7ab
+
+GetCurrentCollectionCellRowAndColumn: ; 9a7ab (26:67ab)
+	ld a, [wCollectionCell]
+	ld hl, wCollectionRow
+;	fallthrough
+
+GetCollectionCellRowAndColumn: ; 9a7b1 (26:67b1)
+	ld b, 0
+.loop_find_row
+	cp NUM_COLLECTION_COLS
+	jr c, .found_row
+	sub NUM_COLLECTION_COLS
+	inc b
+	jr .loop_find_row
+.found_row
+	ld [hl], b ; row
+	inc l
+	ld [hli], a ; col
+	ret
+; 0x9a7c0
+
+ProcessCollectionLinkState: ; 9a7c0 (26:67c0)
+	ld hl, wCollectionLinkStateCounter
+	inc [hl]
+	ld b, h
+	ld c, l
+
+	ld a, [wCollectionLinkState]
+	jumptable
+	dw .AdvanceState
+	dw .WaitDelay
+	dw .GetLinkedCells
+	dw .Return
+	dw .Func_9a806
+	dw .Return
+
+.AdvanceState
+	ld hl, wCollectionLinkStateCounter
+	xor a
+	ld [hld], a
+	inc [hl] ; wCollectionLinkState
+	ret
+
+.WaitDelay
+	ld a, [bc]
+	cp $14
+	ret c
+	jr .AdvanceState
+
+.GetLinkedCells
+	ld hl, CollectionLinkTable
+	ld a, [wCollectionPage]
+	call GetPointerFromTableHL
+	ld a, [wCollectionCell]
+	call GetPointerFromTableHL
+	ld a, [hl]
+	cp $80
+	jr z, .AdvanceState
+	ld b, 7
+	ld de, wCollectionLinkedCells
+	call CopyHLToDE
+	call .AdvanceState
+	jp .AdvanceState
+
+.Return
+	ret
+
+.Func_9a806
+	ld a, [wCollectionLinkedCells + 0]
+	cp $80
+	jr z, .AdvanceState
+	dec a
+	ld hl, wCollectionCell
+	cp [hl]
+	jr z, .asm_9a823
+	ld hl, wOWObj2YCoord
+	call GetCollectionCellRowAndColumn
+	call .Func_9a8d8
+	ld de, wOWObj2YCoord
+	call Func_9a78e
+.asm_9a823
+	ld a, [wCollectionLinkedCells + 1]
+	cp $80
+	jr z, .AdvanceState
+	dec a
+	ld hl, wCollectionCell
+	cp [hl]
+	jr z, .asm_9a840
+	ld hl, wOWObj3YCoord
+	call GetCollectionCellRowAndColumn
+	call .Func_9a8d8
+	ld de, wOWObj3YCoord
+	call Func_9a78e
+.asm_9a840
+	ld a, [wCollectionLinkedCells + 2]
+	cp $80
+	jr z, .AdvanceState
+	dec a
+	ld hl, wCollectionCell
+	cp [hl]
+	jr z, .asm_9a85d
+	ld hl, wOWObj3End
+	call GetCollectionCellRowAndColumn
+	call .Func_9a8d8
+	ld de, wOWObj3End
+	call Func_9a78e
+.asm_9a85d
+	ld a, [wCollectionLinkedCells + 3]
+	cp $80
+	jp z, .AdvanceState
+	dec a
+	ld hl, wCollectionCell
+	cp [hl]
+	jr z, .asm_9a87b
+	ld hl, wOWObj4End
+	call GetCollectionCellRowAndColumn
+	call .Func_9a8d8
+	ld de, wOWObj4End
+	call Func_9a78e
+.asm_9a87b
+	ld a, [wCollectionLinkedCells + 4]
+	cp $80
+	jp z, .AdvanceState
+	dec a
+	ld hl, wCollectionCell
+	cp [hl]
+	jr z, .asm_9a899
+	ld hl, wOWObj5End
+	call GetCollectionCellRowAndColumn
+	call .Func_9a8d8
+	ld de, wOWObj5End
+	call Func_9a78e
+.asm_9a899
+	ld a, [wCollectionLinkedCells + 5]
+	cp $80
+	jp z, .AdvanceState
+	dec a
+	ld hl, wCollectionCell
+	cp [hl]
+	jr z, .asm_9a8b7
+	ld hl, wOWObj6End
+	call GetCollectionCellRowAndColumn
+	call .Func_9a8d8
+	ld de, wOWObj6End
+	call Func_9a78e
+.asm_9a8b7
+	ld a, [wCollectionLinkedCells + 6]
+	cp $80
+	jp z, .AdvanceState
+	dec a
+	ld hl, wCollectionCell
+	cp [hl]
+	jr z, .asm_9a8d5
+	ld hl, wOWObj7End
+	call GetCollectionCellRowAndColumn
+	call .Func_9a8d8
+	ld de, wOWObj7End
+	call Func_9a78e
+.asm_9a8d5
+	jp .AdvanceState
+
+.Func_9a8d8
+	set 2, l
+	ld a, $02
+	call Func_3b93
+	ret
+; 0x9a8e0
+
+CollectionLinkTable: ; 9a8e0 (26:68e0)
+	dw .Page0
+	dw .Page1
+	dw .Page2
+	dw .Page3
+	dw .Page4
+
+.none
+	db $80
+
+.Page0
+	dw .music_boxes ; TREASURE_YELLOW_MUSIC_BOX
+	dw .music_boxes ; TREASURE_BLUE_MUSIC_BOX
+	dw .music_boxes ; TREASURE_GREEN_MUSIC_BOX
+	dw .music_boxes ; TREASURE_RED_MUSIC_BOX
+	dw .music_boxes ; TREASURE_GOLD_MUSIC_BOX
+	dw .none ; TREASURE_PRINCE_FROGS_GLOVE
+	dw .none ; TREASURE_SWIMMING_FLIPPERS
+	dw .none ; TREASURE_HIGH_JUMP_BOOTS
+	dw .none ; TREASURE_SUPER_GRAB_GLOVES
+	dw .none ; TREASURE_SUPER_SMASH
+	dw .none ; TREASURE_GRAB_GLOVE
+	dw .none ; TREASURE_LEAD_OVERALLS
+	dw .none ; TREASURE_SUPER_JUMP_SLAM_OVERALLS
+	dw .none ; TREASURE_HEAD_SMASH_HELMET
+	dw .lantern_and_flame ; TREASURE_LANTERN
+	dw .lantern_and_flame ; TREASURE_MAGICAL_FLAME
+	dw .none ; TREASURE_TORCH
+	dw .gears ; TREASURE_GEAR_1
+	dw .gears ; TREASURE_GEAR_2
+	dw .none ; TREASURE_WARP_COMPACT
+
+.music_boxes
+	db $01, $02, $03, $04, $05, $80
+.lantern_and_flame
+	db $0f, $10, $80
+.gears
+	db $12, $13, $80
+
+.Page1
+	dw .none ; TREASURE_JAR
+	dw .none ; TREASURE_TREASURE_MAP
+	dw .book_and_trident ; TREASURE_BLUE_BOOK
+	dw .none ; TREASURE_MAGIC_WAND
+	dw .book_and_sky_key ; TREASURE_SKY_KEY
+	dw .book_and_sky_key ; TREASURE_YELLOW_BOOK
+	dw .none ; TREASURE_AXE
+	dw .book_and_trident ; TREASURE_TRIDENT
+	dw .skull_rings ; TREASURE_SKULL_RING_BLUE
+	dw .skull_rings ; TREASURE_SKULL_RING_RED
+	dw .tablets ; TREASURE_BLUE_TABLET
+	dw .tablets ; TREASURE_GREEN_TABLET
+	dw .none ; TREASURE_ORNAMENTAL_FAN
+	dw .scroll ; TREASURE_TOP_HALF_OF_SCROLL
+	dw .scroll ; TREASURE_BOTTOM_HALF_OF_SCROLL
+	dw .tusks_and_flower ; TREASURE_TUSK_BLUE
+	dw .tusks_and_flower ; TREASURE_TUSK_RED
+	dw .tusks_and_flower ; TREASURE_GREEN_FLOWER
+	dw .chemicals ; TREASURE_BLUE_CHEMICAL
+	dw .chemicals ; TREASURE_RED_CHEMICAL
+
+.book_and_trident
+	db $03, $08, $80
+.book_and_sky_key
+	db $05, $06, $80
+.skull_rings
+	db $09, $0a, $80
+.tablets
+	db $0b, $0c, $80
+.scroll
+	db $0e, $0f, $80
+.tusks_and_flower
+	db $10, $11, $12, $80
+.chemicals
+	db $13, $14, $80
+
+.Page2
+	dw .none ; TREASURE_AIR_PUMP
+	dw .none ; TREASURE_SAPLING_OF_GROWTH
+	dw .none ; TREASURE_NIGHT_VISION_SCOPE
+	dw .none ; TREASURE_ELECTRIC_FAN_PROPELLER
+	dw .none ; TREASURE_RUST_SPRAY
+	dw .none ; TREASURE_STATUE
+	dw .none ; TREASURE_EXPLOSIVE_PLUNGER_BOX
+	dw .none ; TREASURE_SCISSORS
+	dw .none ; TREASURE_CASTLE_BRICK
+	dw .none ; TREASURE_WARP_REMOVAL_APPARATUS
+	dw .key_cards ; TREASURE_KEY_CARD_RED
+	dw .key_cards ; TREASURE_KEY_CARD_BLUE
+	dw .none ; TREASURE_JACKHAMMER
+	dw .none ; TREASURE_PICK_AXE
+	dw .none ; TREASURE_ROCKET
+	dw .none ; TREASURE_POCKET_PET
+	dw .none ; TREASURE_MYSTERY_HANDLE
+	dw .none ; TREASURE_DEMONS_BLOOD
+	dw .none ; TREASURE_GOLD_MAGIC
+	dw .none ; TREASURE_FIGHTER_MANNEQUIN
+
+.key_cards
+	db $0b, $0c, $80
+
+.Page3
+	dw .none ; TREASURE_TRUCK_WHEEL
+	dw .none ; TREASURE_FLUTE
+	dw .none ; TREASURE_FOOT_OF_STONE
+	dw .golden_eyes ; TREASURE_GOLDEN_RIGHT_EYE
+	dw .golden_eyes ; TREASURE_GOLDEN_LEFT_EYE
+	dw .glass_eyes ; TREASURE_RIGHT_GLASS_EYE
+	dw .glass_eyes ; TREASURE_LEFT_GLASS_EYE
+	dw .none ; TREASURE_SCEPTER
+	dw .sun_medallion ; TREASURE_SUN_MEDALLION_TOP
+	dw .sun_medallion ; TREASURE_SUN_MEDALLION_BOTTOM
+	dw .storm_and_magic_seeds ; TREASURE_EYE_OF_THE_STORM
+	dw .none ; TREASURE_POUCH
+	dw .storm_and_magic_seeds ; TREASURE_MAGIC_SEEDS
+	dw .none ; TREASURE_FULL_MOON_GONG
+	dw .none ; TREASURE_TELEPHONE
+	dw .none ; TREASURE_CROWN
+	dw .none ; TREASURE_DAY_OR_NIGHT_SPELL
+	dw .none ; TREASURE_RED_GEM
+	dw .none ; TREASURE_GREEN_GEM
+	dw .none ; TREASURE_BLUE_GEM
+
+.golden_eyes
+	db $04, $05, $80
+.glass_eyes
+	db $06, $07, $80
+.sun_medallion
+	db $09, $0a, $80
+.storm_and_magic_seeds
+	db $0b, $0d, $80
+
+.Page4
+	dw .none ; TREASURE_CLUBS_CREST
+	dw .none ; TREASURE_SPADES_CREST
+	dw .none ; TREASURE_HEART_CREST
+	dw .none ; TREASURE_DIAMONDS_CREST
+	dw .none ; TREASURE_EARTHEN_FIGURE
+	dw .none ; TREASURE_SABER
+	dw .none ; TREASURE_GOBLET
+	dw .none ; TREASURE_TEAPOT
+	dw .none ; TREASURE_MAGNIFYING_GLASS
+	dw .none ; TREASURE_UFO
+	dw .none ; TREASURE_MINICAR
+	dw .none ; TREASURE_LOCOMOTIVE
+	dw .none ; TREASURE_FIRE_DRENCHER
+	dw .crayons ; TREASURE_CRAYON_RED
+	dw .crayons ; TREASURE_CRAYON_BROWN
+	dw .crayons ; TREASURE_CRAYON_YELLOW
+	dw .crayons ; TREASURE_CRAYON_GREEN
+	dw .crayons ; TREASURE_CRAYON_CYAN
+	dw .crayons ; TREASURE_CRAYON_BLUE
+	dw .crayons ; TREASURE_CRAYON_PINK
+
+.crayons
+	db $0e, $0f, $10, $11, $12, $13, $14, $80
+; 0x9a9ec
+
+Func_9a9ec: ; 9a9ec (26:69ec)
+	ld h, b
+	ld l, c
+	res 1, l
+	ld b, $26
+	call UpdateOWAnimation
+	ld a, [bc]
+	ret
+; 0x9a9f7
+
+Func_9a9f7: ; 9a9f7 (26:69f7)
+	ld b, $26
+	call AddOWSpriteWithScroll
+	ret
+; 0x9a9fd
+
+	INCROM $9a9fd, $9aa0d
+
+AnimateTreasureCollection: ; 9aa0d (26:6a0d)
+	ld bc, wOWObj1Unk6
+	call .Func_9aa4a
+	ld bc, wOWObj2Unk6
+	call .Func_9aa4a
+	ld bc, wOWObj3Unk6
+	call .Func_9aa4a
+	ld bc, wOWObj4Unk6
+	call .Func_9aa4a
+	ld bc, wOWObj5Unk6
+	call .Func_9aa4a
+	ld bc, wOWObj6Unk6
+	call .Func_9aa4a
+	ld bc, wOWObj7Unk6
+	call .Func_9aa4a
+	ld bc, wOWObj8Unk6
+	call .Func_9aa4a
+	ld bc, wOWObj9Unk6
+	call .Func_9aa4a
+	ld bc, wOWObj10Unk6
+	call .Func_9aa4a
+	ret
+
+.Func_9aa4a
+	ld a, [bc]
+	jumptable
+
+	dw Func_9aa6c
+	dw Func_9aa6d
+	dw Func_9aa72
+	dw Func_9aa77
+	dw Func_9aa7c
+; 0x9aa56
+
+Func_9aa56: ; 9aa56 (26:6a56)
+	call Func_9a9ec
+	ld de, $6c5d
+	call Func_9a9f7
+	ret
+; 0x9aa60
+
+	INCROM $9aa60, $9aa6c
+
+Func_9aa6c: ; 9aa6c (26:6a6c)
+	ret
+; 0x9aa6d
+
+Func_9aa6d: ; 9aa6d (26:6a6d)
+	ld de, $6ce1
+	jr Func_9aa56
+; 0x9aa72
+
+Func_9aa72: ; 9aa72 (26:6a72)
+	ld de, $6cea
+	jr Func_9aa56
+; 0x9aa77
+
+Func_9aa77: ; 9aa77 (26:6a77)
+	ld de, $6cf3
+	jr Func_9aa56
+; 0x9aa7c
+
+Func_9aa7c: ; 9aa7c (26:6a7c)
+	ld de, $6cfc
+	jr Func_9aa56
+; 0x9aa81
 
 Func_9aa81: ; 9aa81 (26:6a81)
-	ld b, $ff
+	ld b, -1
 	ld hl, LevelTreasureIDs
 .loop
 	inc b
@@ -689,4 +1680,88 @@ TreasureOBPals: ; 9abf7 (26:6bf7)
 	db $03 ; TREASURE_101
 ; 0x9ac5d
 
-	INCROM $9ac5d, $9ad86
+	INCROM $9ac5d, $9ad05
+
+Pals_9ad05: ; 9ad05 (26:6d05)
+	rgb 31, 31, 31
+	rgb 10, 31, 10
+	rgb  0, 20,  0
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb 10, 31, 10
+	rgb 20, 31, 20
+	rgb  0,  0,  7
+
+	rgb 31, 31, 31
+	rgb 15, 25, 31
+	rgb  0, 15, 31
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb 25, 25, 25
+	rgb 15, 15, 15
+	rgb  0,  0,  7
+
+	rgb 31, 31, 31
+	rgb 25, 25, 25
+	rgb 15, 15, 15
+	rgb  0,  0,  7
+
+	rgb 31, 31, 31
+	rgb 25, 25, 25
+	rgb 15, 15, 15
+	rgb  0,  0,  7
+
+	rgb 31, 31, 31
+	rgb 25, 25, 25
+	rgb 15, 15, 15
+	rgb  0,  0,  7
+
+	rgb 31, 31, 31
+	rgb 25, 25, 25
+	rgb 15, 15, 15
+	rgb  0,  0,  7
+; 0x9ad45
+
+Pals_9ad45: ; 9ad45 (26:6d45)
+	rgb 31, 31, 31
+	rgb 20, 31, 31
+	rgb 10, 20, 31
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb 31, 31, 31
+	rgb 31, 10,  0
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb 20,  0,  0
+	rgb 31, 15,  0
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb 31, 31,  0
+	rgb 31,  4, 13
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb 31, 31,  0
+	rgb 19, 16,  0
+	rgb  5,  4,  0
+
+	rgb 31, 31, 31
+	rgb 31, 19, 23
+	rgb 27,  0,  6
+	rgb  7,  0,  0
+
+	rgb 31, 31, 31
+	rgb 22, 31, 20
+	rgb  0, 21,  0
+	rgb  0,  2,  0
+
+	rgb 31, 31, 31
+	rgb  2, 31, 31
+	rgb  6,  6, 31
+	rgb  0,  0,  7
+; 0x9ad85

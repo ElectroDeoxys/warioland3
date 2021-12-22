@@ -319,22 +319,23 @@ HandleSound: ; 290 (0:290)
 
 	INCROM $2cf, $302
 
-Func_302: ; 302 (0:302)
+; adds a Repeat Delay and Rate to any DPad key
+ProcessDPadRepeat: ; 302 (0:302)
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("GFX RAM")
 	ldh [rSVBK], a
 
-	ld hl, w3d502
+	ld hl, wDPadRepeatCounter
 	ld a, [hl]
 	and a
-	jr z, .asm_32d
+	jr z, .reset_counter
 	ld a, [wJoypadPressed]
 	and D_PAD
-	jr nz, .asm_32d
+	jr nz, .reset_counter
 	ld a, [wJoypadDown]
 	and D_PAD
-	jr z, .asm_32d
+	jr z, .reset_counter
 	dec [hl]
 	jr nz, .done
 
@@ -346,10 +347,10 @@ Func_302: ; 302 (0:302)
 	ld [wJoypadPressed], a
 
 	ld a, $08
-	jr .asm_32f
-.asm_32d
+	jr .set_counter
+.reset_counter
 	ld a, $10
-.asm_32f
+.set_counter
 	ld [hl], a
 .done
 	pop af
@@ -3201,7 +3202,7 @@ Func_15dc: ; 15dc (0:15dc)
 	ld a, [wca3d]
 	and $01
 	jr z, .asm_15ff
-	ld a, [wca39]
+	ld a, [wNumberCollectedTreasures]
 	dec a
 	jr z, .asm_1610
 .asm_15ff

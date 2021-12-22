@@ -187,9 +187,9 @@ Func_40182: ; 40182 (10:4182)
 	ld a, [wCurObjScreenYPos]
 	add c
 	sub b
-	cp $20
+	cp BG_MAP_WIDTH
 	jr c, .asm_401ad
-	cp -$20
+	cp -BG_MAP_WIDTH
 	jr c, .check_shake
 .asm_401ad
 	ld a, [wWarioScreenXPos]

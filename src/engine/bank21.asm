@@ -2756,15 +2756,15 @@ Func_854ee: ; 854ee (21:54ee)
 ; 0x8550b
 
 Data_8550b:: ; 8550b (21:550b)
-	dw wAttrmap + $109
+	dw wTilemap + $109
 	db $6d, $6e, $6e, $6e, $79, $70
 	db $00, $00, $00, $20, $00, $70
 
-	dw wAttrmap + $129
+	dw wTilemap + $129
 	db $6c, $7c, $7c, $7c, $6c, $70
 	db $00, $09, $09, $09, $20, $70
 
-	dw wAttrmap + $149
+	dw wTilemap + $149
 	db $7d, $7e, $7e, $7e, $7d, $70
 	db $00, $00, $00, $20, $20, $70
 
@@ -2772,7 +2772,7 @@ Data_8550b:: ; 8550b (21:550b)
 ; 0x85536
 
 Data_85536:: ; 85536 (21:5536)
-	dw wAttrmap + $27
+	dw wTilemap + $27
 	db $c4, $75, $76, $75, $7f, $77, $c4, $70
 	db $09, $0d, $0d, $2d, $0d, $0d, $29, $70
 	
@@ -2782,15 +2782,15 @@ Data_85536:: ; 85536 (21:5536)
 	INCROM $85549, $85549
 
 Data_85549:: ; 85549 (21:5549)
-	dw wAttrmap + $88
+	dw wTilemap + $88
 	db $56, $57, $45, $46, $70
 	db $01, $01, $01, $01, $70
 
-	dw wAttrmap + $a8
+	dw wTilemap + $a8
 	db $58, $59, $5a, $5b, $70
 	db $01, $01, $01, $01, $70
 
-	dw wAttrmap + $c8
+	dw wTilemap + $c8
 	db $5c, $5d, $5e, $5f, $70
 	db $01, $01, $01, $01, $70
 
@@ -2798,7 +2798,7 @@ Data_85549:: ; 85549 (21:5549)
 ; 0x8556e
 
 Data_8556e:: ; 8556e (21:556e)
-	dw wAttrmap + $1c6
+	dw wTilemap + $1c6
 	db $7e, $7e, $7e, $70
 	db $0c, $0c, $0c, $70
 	
@@ -2806,31 +2806,31 @@ Data_8556e:: ; 8556e (21:556e)
 ; 0x85579
 
 Data_85579:: ; 85579 (21:5579)
-	dw wAttrmap + $4e
+	dw wTilemap + $4e
 	db $20, $21, $70
 	db $01, $01, $70
 
-	dw wAttrmap + $6e
+	dw wTilemap + $6e
 	db $30, $31, $70
 	db $01, $01, $70
 
-	dw wAttrmap + $8e
+	dw wTilemap + $8e
 	db $22, $23, $70
 	db $05, $05, $70
 
-	dw wAttrmap + $ae
+	dw wTilemap + $ae
 	db $32, $33, $70
 	db $05, $05, $70
 
-	dw wAttrmap + $ce
+	dw wTilemap + $ce
 	db $24, $25, $70
 	db $05, $05, $70
 
-	dw wAttrmap + $ee
+	dw wTilemap + $ee
 	db $34, $35, $70
 	db $05, $05, $70
 
-	dw wAttrmap + $10e
+	dw wTilemap + $10e
 	db $26, $27, $70
 	db $05, $05, $70
 
@@ -2838,31 +2838,31 @@ Data_85579:: ; 85579 (21:5579)
 ; 0x855b2
 
 Data_855b2:: ; 855b2 (21:55b2)
-	dw wAttrmap + $c5
+	dw wTilemap + $c5
 	db $00, $70
 	db $00, $70
 
-	dw wAttrmap + $e5
+	dw wTilemap + $e5
 	db $0d, $0e, $0f, $04, $70
 	db $03, $03, $00, $00, $70
 
-	dw wAttrmap + $106
+	dw wTilemap + $106
 	db $00, $02, $12, $13, $70
 	db $0f, $0f, $03, $03, $70
 
-	dw wAttrmap + $127
+	dw wTilemap + $127
 	db $14, $15, $16, $70
 	db $03, $03, $03, $70
 
-	dw wAttrmap + $147
+	dw wTilemap + $147
 	db $17, $18, $19, $70
 	db $03, $03, $03, $70
 
-	dw wAttrmap + $167
+	dw wTilemap + $167
 	db $1a, $1b, $1c, $70
 	db $03, $03, $03, $70
 
-	dw wAttrmap + $187
+	dw wTilemap + $187
 	db $1d, $1e, $1f, $70
 	db $03, $03, $03, $70
 	
@@ -2870,11 +2870,11 @@ Data_855b2:: ; 855b2 (21:55b2)
 ; 0x855f9
 
 Data_855f9:: ; 855f9 (21:55f9)
-	dw wAttrmap + $145
+	dw wTilemap + $145
 	db $19, $3e, $3f, $70
 	db $0a, $03, $03, $70
 
-	dw wAttrmap + $165
+	dw wTilemap + $165
 	db $3d, $4e, $4f, $70
 	db $03, $03, $03, $70
 
@@ -2882,25 +2882,25 @@ Data_855f9:: ; 855f9 (21:55f9)
 ; 0x8560e
 
 Data_8560e:: ; 8560e (21:560e)
-	dw wAttrmap + $48
+	dw wTilemap + $48
 	db $48, $49, $70, $01, $01, $70
 
-	dw wAttrmap + $68
+	dw wTilemap + $68
 	db $58, $59, $70, $01, $01, $70
 	
 	db $00
 ; 0x8561f
 
 Data_8561f:: ; 8561f (21:561f)
-	dw wAttrmap + $70
+	dw wTilemap + $70
 	db $51, $5f, $53, $70
 	db $01, $01, $01, $70
 
-	dw wAttrmap + $90
+	dw wTilemap + $90
 	db $5c, $5d, $5e, $70
 	db $01, $00, $00, $70
 
-	dw wAttrmap + $b0
+	dw wTilemap + $b0
 	db $d9, $79, $7a, $70
 	db $29, $00, $00, $70
 
@@ -2908,11 +2908,11 @@ Data_8561f:: ; 8561f (21:561f)
 ; 0x8563e
 
 Data_8563e:: ; 8563e (21:563e)
-	dw wAttrmap + $123
+	dw wTilemap + $123
 	db $6c, $6d, $6e, $6f, $70
 	db $00, $00, $00, $00, $70
 
-	dw wAttrmap + $143
+	dw wTilemap + $143
 	db $7c, $7d, $7e, $7f, $70
 	db $00, $00, $00, $00, $70
 
@@ -2934,42 +2934,42 @@ BGMap_85897:: ; 85897 (21:5897)
 	INCROM $85928, $85af4
 
 Data_85af4: ; 85af4 (21:5af4)
-	dw wAttrmap + $64
+	dw wTilemap + $64
 	db $44, $45, $70
 	db $01, $01, $70
 
 	db $00
 
 Data_85afd: ; 85afd (21:5afd)
-	dw wAttrmap + $83
+	dw wTilemap + $83
 	db $46, $47, $48, $49, $70
 	db $01, $01, $01, $01, $70
 
 	db $00
 
 Data_85b0a: ; 85b0a (21:5b0a)
-	dw wAttrmap + $a2
+	dw wTilemap + $a2
 	db $54, $55, $56, $57, $58, $59, $70
 	db $01, $01, $01, $03, $03, $01, $70
 
 	db $00
 
 Data_85b1b: ; 85b1b (21:5b1b)
-	dw wAttrmap + $c2
+	dw wTilemap + $c2
 	db $4a, $4b, $4c, $4d, $4e, $4f, $70
 	db $01, $01, $01, $03, $03, $03, $70
 
 	db $00
 
 Data_85b2c: ; 85b2c (21:5b2c)
-	dw wAttrmap + $e2
+	dw wTilemap + $e2
 	db $5a, $5b, $5c, $5d, $5e, $5f, $70
 	db $03, $03, $01, $03, $03, $03, $70
 
 	db $00
 
 Data_85b3d: ; 85b3d (21:5b3d)
-	dw wAttrmap + $104
+	dw wTilemap + $104
 	db $3e, $3f, $01, $70
 	db $03, $03, $20, $70
 
@@ -2977,19 +2977,19 @@ Data_85b3d: ; 85b3d (21:5b3d)
 ; 0x85b48
 
 Data_85b48: ; 85b48 (21:5b48)
-	dw wAttrmap + $28
+	dw wTilemap + $28
 	db $c4, $75, $76, $75, $7f, $77, $c4, $70
 	db $09, $0d, $0d, $2d, $0d, $0d, $29, $70
 
-	dw wAttrmap + $e8
+	dw wTilemap + $e8
 	db $20, $21, $22, $22, $22, $21, $20, $70
 	db $03, $03, $03, $03, $23, $23, $23, $70
 
-	dw wAttrmap + $108
+	dw wTilemap + $108
 	db $23, $24, $25, $25, $25, $24, $23, $70
 	db $03, $03, $03, $03, $23, $23, $23, $70
 
-	dw wAttrmap + $128
+	dw wTilemap + $128
 	db $33, $34, $35, $35, $35, $34, $33, $70
 	db $02, $02, $02, $02, $22, $22, $22, $70
 

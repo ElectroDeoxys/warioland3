@@ -709,18 +709,22 @@ Func_80392: ; 80392 (20:4392)
 	dw SlowFadeFromWhite
 	dw Func_804ec
 	dw FastFadeToWhite
+
 	dw Func_804f7           ; SST_OVERWORLD_05
 	dw SlowFadeFromWhite
 	dw Func_80540
 	dw FadeBGToWhite_Normal
+
 	dw Func_8055f           ; SST_OVERWORLD_09
 	dw DarkenBGToPal_Normal
 	dw Func_805d7
+
 	dw FadeBGToWhite_Normal ; SST_OVERWORLD_0C
-	dw $4dc0
+	dw InitTreasureCollection
 	dw DarkenBGToPal_Normal
-	dw $4dd0
+	dw TreasureCollection
 	dw FadeBGToWhite_Normal
+
 	dw Func_80d6c           ; SST_OVERWORLD_11
 	dw DarkenBGToPal_Normal
 	dw $4d7c
@@ -1210,13 +1214,13 @@ Func_8065e: ; 8065e (20:465e)
 	call UpdateNextPrevMapButtonsSelectable
 
 	ld hl, v0BGMap0 tile $3c
-	ld de, wTilemap tile $2a
+	ld de, wAttrmap tile $2a
 	ld b, 4 tiles
 	call CopyHLToDE
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, v1BGMap0 tile $3c
-	ld de, wTilemap tile $26
+	ld de, wAttrmap tile $26
 	ld b, 4 tiles
 	call CopyHLToDE
 	xor a
@@ -1226,13 +1230,13 @@ Func_8065e: ; 8065e (20:465e)
 	cp $04
 	jr nz, .asm_80809
 	call Func_822b4
-	ld hl, wTilemap tile $2a
+	ld hl, wAttrmap tile $2a
 	ld de, v0BGMap0 tile $3c
 	ld b, 4 tiles
 	call CopyHLToDE
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, wTilemap tile $26
+	ld hl, wAttrmap tile $26
 	ld de, v1BGMap0 tile $3c
 	ld b, 4 tiles
 	call CopyHLToDE
@@ -1423,7 +1427,7 @@ LoadBGMapsToWRAM: ; 80973 (20:4973)
 	ldh [rVBK], a
 	ld a, e
 	ld [wTempBank], a
-	ld bc, wTilemap
+	ld bc, wAttrmap
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	hcall Decompress
@@ -1609,16 +1613,16 @@ Func_80b29: ; 80b29 (20:4b29)
 	ret
 ; 0x80b34
 
-; copies from wAttrmap to v0BGMap0
-; and from wTilemap to v1BGMap0
+; copies from wTilemap to v0BGMap0
+; and from wAttrmap to v1BGMap0
 WriteBGMapFromWRAM: ; 80b34 (20:4b34)
-	ld hl, wAttrmap
+	ld hl, wTilemap
 	ld de, v0BGMap0
 	ld bc, $260
 	call CopyHLToDE_BC
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, wTilemap
+	ld hl, wAttrmap
 	ld de, v1BGMap0
 	ld bc, $260
 	call CopyHLToDE_BC
@@ -1689,12 +1693,12 @@ Func_80bc9: ; 80bc9 (20:4bc9)
 ; 0x80bd9
 
 Func_80bd9: ; 80bd9 (20:4bd9)
-	ld hl, wTilemap tile $1c
+	ld hl, wAttrmap tile $1c
 	res 7, [hl]
 	ld de, 30 tiles
 	ld c, $04
 .loop_outer
-	ld hl, wTilemap
+	ld hl, wAttrmap
 	add hl, de
 	ld b, $03
 .loop_inner
@@ -1704,7 +1708,7 @@ Func_80bd9: ; 80bd9 (20:4bd9)
 	jr nz, .loop_inner
 	dec c
 	ret z
-	ld hl, $20
+	ld hl, BG_MAP_WIDTH
 	add hl, de
 	ld e, l
 	ld d, h
@@ -1860,10 +1864,10 @@ VBlank_80cb1: ; 80cb1 (20:4cb1)
 	and a
 	jr z, .asm_80cff
 	ld c, LOW(rHDMA1)
-	ld a, HIGH(wAttrmap)
+	ld a, HIGH(wTilemap)
 	ld [$ff00+c], a
 	inc c
-	xor a ; LOW(wAttrmap)
+	xor a ; LOW(wTilemap)
 	ld [$ff00+c], a
 	inc c
 	ld a, $18
@@ -1878,10 +1882,10 @@ VBlank_80cb1: ; 80cb1 (20:4cb1)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld c, LOW(rHDMA1)
-	ld a, HIGH(wTilemap)
+	ld a, HIGH(wAttrmap)
 	ld [$ff00+c], a
 	inc c
-	xor a ; LOW(wTilemap)
+	xor a ; LOW(wAttrmap)
 	ld [$ff00+c], a
 	inc c
 	ld a, $18
@@ -1946,7 +1950,17 @@ Func_80d6c: ; 80d6c (20:4d6c)
 	ret
 ; 0x80d7c
 
-	INCROM $80d7c, $80de0
+	INCROM $80d7c, $80dc0
+
+InitTreasureCollection: ; 80dc0 (20:4dc0)
+	farcall _InitTreasureCollection
+	ret
+; 0x80dd0
+
+TreasureCollection: ; 80dd0 (20:4dd0)
+	farcall _TreasureCollection
+	ret
+; 0x80de0
 
 Func_80de0: ; 80de0 (20:4de0)
 	xor a
@@ -1964,7 +1978,7 @@ Func_80de0: ; 80de0 (20:4de0)
 	INCROM $80df3, $80e89
 
 Func_80e89: ; 80e89 (20:4e89)
-	call Func_302
+	call ProcessDPadRepeat
 	farcall Func_b791e
 	farcall UpdateCommonOWAnimations
 	call Func_82242
@@ -5517,7 +5531,7 @@ Func_825af: ; 825af (20:65af)
 
 .DayNight
 	call Func_82640
-	ld de, wTilemap tile $26 + $b
+	ld de, wAttrmap tile $26 + $b
 	call Func_8264a
 	ld a, $09
 	ld [wTopBarState], a
@@ -5532,7 +5546,7 @@ Func_825af: ; 825af (20:65af)
 	and a
 	ret z
 	call Func_82640
-	ld de, wTilemap tile $26 + $9
+	ld de, wAttrmap tile $26 + $9
 	call Func_8264a
 	ld a, $06
 	ld [wTopBarState], a
@@ -5542,14 +5556,14 @@ Func_825af: ; 825af (20:65af)
 
 .Collection
 	call Func_82640
-	ld de, wTilemap tile $26 + $7
+	ld de, wAttrmap tile $26 + $7
 	call Func_8264a
 	ld a, $07
 	ld [wTopBarState], a
 	xor a
 	ld [w2d051], a
-	ld a, $00
-	ld [w2d07b], a
+	ld a, FALSE
+	ld [wIsCollectionOpen], a
 	jr .do_selection
 
 .NextMap
@@ -5600,24 +5614,24 @@ Func_82654: ; 82654 (20:6654)
 	ld a, [wTopBarSelectableButtons]
 	ld b, a
 	ld hl, Data_826c6
-	ld de, wTilemap + $26b
+	ld de, wAttrmap + $26b
 	call .Func_82698
 	ld hl, Data_826ce
-	ld de, wTilemap + $269
+	ld de, wAttrmap + $269
 	call .Func_82698
 	ld hl, Data_826d6
-	ld de, wTilemap + $267
+	ld de, wAttrmap + $267
 	call .Func_82698
 	ld a, [wTopBarSelection]
 	ld b, a
 	ld hl, Data_826de
-	ld de, wTilemap + $26b
+	ld de, wAttrmap + $26b
 	call .Func_82693
 	ld hl, Data_826de
-	ld de, wTilemap + $269
+	ld de, wAttrmap + $269
 	call .Func_82693
 	ld hl, Data_826e6
-	ld de, wTilemap + $267
+	ld de, wAttrmap + $267
 	call .Func_82693
 	ret
 
@@ -5694,9 +5708,9 @@ Data_826ee: ; 826ee (20:66ee)
 ; 0x826f6
 
 Func_826f6: ; 826f6 (20:66f6)
-	ld a, HIGH(wTilemap tile $2a)
+	ld a, HIGH(wAttrmap tile $2a)
 	ld [wHDMA + 0], a
-	ld a, LOW(wTilemap tile $2a)
+	ld a, LOW(wAttrmap tile $2a)
 	ld [wHDMA + 1], a
 	ld a, $1b
 	ld [wHDMA + 2], a
@@ -5705,9 +5719,9 @@ Func_826f6: ; 826f6 (20:66f6)
 	ld a, $03
 	ld [wHDMA + 4], a
 
-	ld a, HIGH(wTilemap tile $26)
+	ld a, HIGH(wAttrmap tile $26)
 	ld [w2d0b5 + 0], a
-	ld a, LOW(wTilemap tile $26)
+	ld a, LOW(wAttrmap tile $26)
 	ld [w2d0b5 + 1], a
 	ld a, $1b
 	ld [w2d0b5 + 2], a

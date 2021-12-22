@@ -494,10 +494,12 @@ wLevel:: ; ca06
 wca07:: ; ca07
 	ds 2 * $19
 
-wca39:: ; ca39
-	ds $1
-
-	ds $1
+; stores total number of treasures collected
+; byte 1 lo nybble = hundreds
+; byte 2 hi nybble = tens
+; byte 2 lo nybble = ones
+wNumberCollectedTreasures:: ; ca39
+	ds $2
 
 ; bit 0: unset is day, set is night
 wca3b:: ; ca3b
@@ -1326,7 +1328,13 @@ w2d056:: ; d056
 wCrayonFlags:: ; d057
 	ds $1
 
-	ds $8
+wCollectionPage:: ; d058
+	ds $1
+
+wCollectionCell:: ; d059
+	ds $1
+
+	ds $6
 
 w2d060:: ; d060
 	ds $1
@@ -1403,7 +1411,7 @@ w2d079:: ; d079
 w2d07a:: ; d07a
 	ds $1
 
-w2d07b:: ; d07b
+wIsCollectionOpen:: ; d07b
 	ds $1
 
 w2d07c:: ; d07c
@@ -1719,11 +1727,13 @@ wOWObj13:: ow_obj_struct wOWObj13 ; d1e8
 wOWObj14:: ow_obj_struct wOWObj14 ; d1f0
 wOWObj15:: ow_obj_struct wOWObj15 ; d1f8
 
-wTilemap:: ; d200
+wAttrmap:: ; d200
 	ds $300
 
-wAttrmap:: ; d500
+wTilemap:: ; d500
 	ds $300
+
+UNION
 
 w2d800:: ; d800
 	ds $1
@@ -1737,7 +1747,10 @@ w2d802:: ; d802
 w2d803:: ; d803
 	ds $1
 
-	ds $2
+w2d804:: ; d804
+	ds $1
+
+	ds $1
 
 w2d806:: ; d806
 	ds $1
@@ -1776,6 +1789,32 @@ w2dffe:: ; dffe
 
 w2dfff:: ; dfff
 	ds $1
+
+NEXTU
+
+wCollectionRow:: ; d800
+	ds $1
+
+wCollectionCol:: ; d801
+	ds $1
+
+wCollectionLinkState:: ; d802
+	ds $1
+
+wCollectionLinkStateCounter:: ; d803
+	ds $1
+
+wCollectionScrollMode:: ; d804
+	ds $1
+
+	ds $b
+
+; set of treasures that are
+; linked together
+wCollectionLinkedCells:: ; d810
+	ds $7
+
+ENDU
 
 SECTION "Audio RAM", WRAMX
 
@@ -1940,7 +1979,7 @@ w3d500:: ; d500
 w3d501:: ; d501
 	ds $1
 
-w3d502:: ; d502
+wDPadRepeatCounter:: ; d502
 	ds $1
 
 	ds $4

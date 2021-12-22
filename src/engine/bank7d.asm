@@ -77,8 +77,8 @@ Func_1f403f: ; 1f403f (7d:403f)
 	ld a, [hl]
 	ld [w3d511 + 1], a
 	ld hl, v1BGMap1 + $44
-	ld bc, -$20
-	ld de, $20
+	ld bc, -BG_MAP_WIDTH
+	ld de, BG_MAP_WIDTH
 	ld a, [w3d511 + 0]
 	swap a
 	and $0f
@@ -120,8 +120,8 @@ Func_1f403f: ; 1f403f (7d:403f)
 	add hl, bc
 
 	ld hl, v1BGMap1 + $4b
-	ld bc, -$20
-	ld de, $20
+	ld bc, -BG_MAP_WIDTH
+	ld de, BG_MAP_WIDTH
 	ld a, [wc0e2]
 	swap a
 	and $0f

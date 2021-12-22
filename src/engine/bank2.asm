@@ -299,13 +299,12 @@ Func_80aa: ; 80aa (2:40aa)
 	jr .asm_82ba
 
 .epilogue
-	ld a, [wca39]
+	ld a, [wNumberCollectedTreasures]
 	dec a
 	jr z, .asm_82b1
 	ld a, $f1
 	ld [wcee3], a
 	jr .asm_82b8
-
 .asm_82b1
 	ld a, $f2
 	ld [wcee3], a
@@ -314,6 +313,7 @@ Func_80aa: ; 80aa (2:40aa)
 	set 0, [hl]
 .asm_82ba
 	set 2, [hl]
+
 	ld hl, wState
 	ld [hl], ST_06
 	xor a

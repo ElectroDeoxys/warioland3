@@ -178,7 +178,7 @@ InitIntroSequence: ; 405f (1:405f)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, v1BGMap0 tile $18 + $4
-	ld de, $20
+	ld de, BG_MAP_WIDTH
 	ld c, 2
 .loop_outer
 	push hl
@@ -1055,18 +1055,18 @@ Func_4686: ; 4686 (1:4686)
 	play_sfx SFX_0E3
 	call Func_4ae7
 	ld a, [wLevel]
-	cp $ff
-	jr z, .asm_46bd
+	cp GOLF_BUILDING
+	jr z, .golf_building
 	cp THE_TEMPLE
-	jr z, .final_battle
+	jr z, .the_temple
 	ret
 
-.asm_46bd
+.golf_building
 	ld a, ST_0a
 	ld [wState], a
 	ret
 
-.final_battle
+.the_temple
 	stop_sfx
 	ret
 ; 0x46cc
@@ -1501,8 +1501,8 @@ VBlank_49db: ; 49db (1:49db)
 
 ; hl = BG map address
 PrintNumberCoins: ; 4a33 (1:4a33)
-	ld bc, -$20
-	ld de, $20
+	ld bc, -BG_MAP_WIDTH
+	ld de, BG_MAP_WIDTH
 	ld a, [wNumCoins]
 	and $0f ; hundreds
 	add a
@@ -1593,7 +1593,45 @@ GetOWLevelCollectedTreasures: ; 4a63 (1:4a63)
 	ret
 ; 0x4ab7
 
-	INCROM $4ab7, $4ae7
+PrintNumberCollectedTreasures: ; 4ab7 (1:4ab7)
+	ld bc, -BG_MAP_WIDTH
+	ld de, BG_MAP_WIDTH
+
+	; hundreds
+	ld a, [wNumberCollectedTreasures + 0]
+	and $0f
+	add a ; *2
+	add $a0
+	ld [hl], a
+	add hl, de
+	inc a
+	ld [hli], a
+	add hl, bc
+
+	; tens
+	ld a, [wNumberCollectedTreasures + 1]
+	swap a
+	and $0f
+	add a ; *2
+	add $a0
+	ld [hl], a
+	add hl, de
+	inc a
+	ld [hli], a
+	add hl, bc
+
+	; ones
+	ld a, [wNumberCollectedTreasures + 1]
+	and $0f
+	add a ; *2
+	add $a0
+	ld [hl], a
+	add hl, de
+	inc a
+	ld [hli], a
+	add hl, bc
+	ret
+; 0x4ae7
 
 Func_4ae7: ; 4ae7 (1:4ae7)
 	ldh a, [rSVBK]
