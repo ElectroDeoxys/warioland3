@@ -24,6 +24,11 @@ dab: MACRO
 	db BANK(\1)
 ENDM
 
+dba: MACRO
+	db BANK(\1)
+	dw \1
+ENDM
+
 dx: MACRO
 x = 8 * ((\1) - 1)
 	rept \1

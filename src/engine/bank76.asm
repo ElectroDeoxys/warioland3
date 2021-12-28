@@ -252,9 +252,21 @@ Func_1d8c2c: ; 1d8c2c (76:4c2c)
 	ret
 ; 0x1d8c62
 
-	INCROM $1d8c62, $1da800
+rept $39e
+	db $00
+endr
+
+WarioUnk2Gfx: ; 1d9000 (76:5000)
+INCBIN "gfx/wario/unk2.2bpp"
+
+WarioUnk3Gfx: ; 1d9800 (76:5800)
+INCBIN "gfx/wario/unk3.2bpp"
+
+WarioUnk4Gfx: ; 1da000 (76:6000)
+INCBIN "gfx/wario/unk4.2bpp"
 
 WarioSleepGfx: ; 1da800 (76:6800)
 INCBIN "gfx/wario/sleep.2bpp"
 
-	INCROM $1db000, $1db800
+WarioUnk5Gfx: ; 1db000 (76:7000)
+INCBIN "gfx/wario/unk5.2bpp"

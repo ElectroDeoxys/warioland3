@@ -2,7 +2,17 @@ MusicBoxGfx: ; b0000 (2c:4000)
 INCBIN "gfx/music_box.2bpp"
 ; 0xb0300
 
-	INCROM $b0300, $b0f80
+BGMap_b0300: ; b0300 (2c:4300)
+INCBIN "gfx/bgmaps/map_b0300.bin"
+; 0xb0540
+
+BGMap_b0540: ; b0540 (2c:4540)
+INCBIN "gfx/bgmaps/map_b0540.bin"
+; 0xb0780
+
+BGMap_b0780: ; b0780 (2c:4780)
+INCBIN "gfx/bgmaps/map_b0780.bin"
+; 0xb0f80
 
 Tiles_b0f80: ; b0f80 (2c:4f80)
 INCBIN "gfx/tiles_b0f80.2bpp"

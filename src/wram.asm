@@ -1405,7 +1405,7 @@ wCutscene:: ; d077
 w2d078:: ; d078
 	ds $1
 
-w2d079:: ; d079
+wHDMABank:: ; d079
 	ds $1
 
 w2d07a:: ; d07a
@@ -1506,14 +1506,12 @@ w2d0b5:: ; d0b5
 w2d0c0:: ; d0dc0
 	ds $10
 
-w2d0d0:: ; d0d0
-	ds $5
+wPalConfig1:: pal_config_struct wPalConfig1 ; d0d0
 
 w2d0d5:: ; d0d5
 	ds $1
 
-w2d0d6:: ; d0d6
-	ds $5
+wPalConfig2:: pal_config_struct wPalConfig2 ; d0d6
 
 w2d0db:: ; d0db
 	ds $1
@@ -1663,6 +1661,7 @@ w2d141:: ; d141
 w2d142:: ; d142
 	ds $1
 
+w2d143:: ; d143
 	ds $1
 
 w2d144:: ; d144
@@ -1671,16 +1670,14 @@ w2d144:: ; d144
 w2d146:: ; d146
 	ds $1
 
+w2d147:: ; d147
 	ds $1
 
 w2d148:: ; d148
 	ds $1
 
 w2d149:: ; d149
-	ds $1
-
-w2d14a:: ; d14a
-	ds $1
+	ds $2
 
 w2d14b:: ; d14b
 	ds $1
@@ -1688,12 +1685,24 @@ w2d14b:: ; d14b
 w2d14c:: ; d14c
 	ds $1
 
+w2d14d:: ; d14d
 	ds $1
 
 w2d14e:: ; d14e
 	ds $1
 
-	ds $9
+	ds $1
+
+w2d150:: ; d150
+	ds $1
+
+w2d151:: ; d151
+	ds $1
+
+w2d152:: ; d152
+	ds $1
+
+	ds $5
 
 w2d158:: ; d158
 	ds $1
@@ -1705,11 +1714,7 @@ w2d160:: ; d160
 
 	ds $18
 
-w2d180:: ; d180
-	ds $4
-
-w2d184:: ; d184
-	ds $4
+w2d180:: ow_obj_struct w2d180 ; d180
 
 wOWObj1::  ow_obj_struct wOWObj1  ; d188
 wOWObj2::  ow_obj_struct wOWObj2  ; d190
@@ -1767,14 +1772,120 @@ w2d809:: ; d809
 	ds $6
 
 w2d810:: ; d810
-	ds $60 * $8
-
 	ds $70
 
-w2db80:: ; db80
+w2d880:: ; d880
+	ds $9
+
+w2d889:: ; d889
+	ds $2
+
+w2d88b:: ; d88b
 	ds $1
 
-	ds $7f
+	ds $2
+
+w2d88e:: ; d88e
+	ds $1
+
+w2d88f:: ; d88f
+	ds $1
+
+w2d890:: ; d890
+	ds $1
+
+w2d891:: ; d891
+	ds $1
+
+w2d892:: ; d892
+	ds $1
+
+w2d893:: ; d893
+	ds $1
+
+w2d894:: ; d894
+	ds $1
+
+	ds $b
+
+w2d8a0:: ; d8a0
+	ds $1
+
+w2d8a1:: ; d8a1
+	ds $1
+
+w2d8a2:: ; d8a2
+	ds $1
+
+w2d8a3:: ; d8a3
+	ds $1
+
+w2d8a4:: ; d8a4
+	ds $1
+
+w2d8a5:: ; d8a5
+	ds $1
+
+w2d8a6:: ; d8a6
+	ds $1
+
+w2d8a7:: ; d8a7
+	ds $1
+
+w2d8a8:: ; d8a8
+	ds $1
+
+w2d8a9:: ; d8a9
+	ds $1
+
+	ds $6
+
+w2d8b0:: ; d8b0
+	ds $1
+
+w2d8b1:: ; d8b1
+	ds $1
+
+	ds $1ce
+
+w2da80:: ; da80
+	ds $1
+
+w2da81:: ; da81
+	ds $1
+
+w2da82:: ; da82
+	ds $1
+
+w2da83:: ; da83
+	ds $1
+
+w2da84:: ; da84
+	ds $1
+
+w2da85:: ; da85
+	ds $1
+
+	ds $2
+
+w2da88:: ; da88
+	ds $2
+
+w2da8a:: ; da8a
+	ds $1
+
+w2da8b:: ; da8b
+	ds $1
+
+	ds $74
+
+w2db00:: ; db00
+	ds 4 tiles
+
+	ds $40
+
+w2db80:: ; db80
+	ds 8 tiles
 
 wTreasureTiles:: ; dc00
 	ds 16 tiles

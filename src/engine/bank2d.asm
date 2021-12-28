@@ -2322,8 +2322,8 @@ Func_b4f58: ; b4f58 (2d:4f58)
 	ld de, wTempBGPals palette 5
 	ld b, 1 palettes
 	call CopyHLToDE
-	ld hl, w2d0d0
-	ld a, $68
+	ld hl, wPalConfig1
+	ld a, LOW(rBGPI)
 	ld [hl], a
 	ret
 

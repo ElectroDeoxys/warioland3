@@ -293,7 +293,7 @@ Func_9c25c: ; 9c25c (27:425c)
 	ld b, BANK(Pals_b8200)
 	call LoadFarPalsToTempPals1
 
-	ld a, $08
+	ld a, LCDC_BG9C00
 	ld [w2d800], a
 	call LoadCutscenes7Gfx
 	call Func_9ca6a
@@ -572,17 +572,17 @@ VBlank_9cc9c: ; 9cc9c (27:4c9c)
 	ld [w2d800], a
 
 .asm_9cccf
-	ld b, BANK(Func_854cc)
+	ld b, BANK(ApplyPalConfig1)
 	ld a, [wROMBank]
 	push af
 	ld a, b
 	bankswitch
-	ld a, [w2d0d0]
+	ld a, [wPalConfig1]
 	and a
-	call nz, Func_854cc
-	ld a, [w2d0d6]
+	call nz, ApplyPalConfig1
+	ld a, [wPalConfig2]
 	and a
-	call nz, Func_854c7
+	call nz, ApplyPalConfig2
 	pop af
 	bankswitch
 
@@ -593,7 +593,123 @@ VBlank_9cc9c: ; 9cc9c (27:4c9c)
 .func_end
 ; 0x9ccf9
 
-	INCROM $9ccf9, $9d01a
+	INCROM $9ccf9, $9ce28
+
+Func_9ce28: ; 9ce28 (27:4e28)
+	call ProcessDPadRepeat
+	ld hl, w2d014
+	inc [hl]
+	ld b, h
+	ld c, l
+
+	ld a, [w2d01e]
+	cp NUM_CUTSCENES + 1
+	jp nc, .OutOfBoundsCutscene
+	jumptable
+	dw .InvalidCutscene ; CUTSCENE_00
+	dw .Func_9cef6 ; CUTSCENE_01
+	dw $5797 ; CUTSCENE_02
+	dw $4f06 ; CUTSCENE_03
+	dw $5b03 ; CUTSCENE_04
+	dw .InvalidCutscene ; CUTSCENE_05
+	dw $502d ; CUTSCENE_06
+	dw $518b ; CUTSCENE_07
+	dw $56de ; CUTSCENE_08
+	dw $56a4 ; CUTSCENE_09
+	dw $510e ; CUTSCENE_0A
+	dw .InvalidCutscene ; CUTSCENE_0B
+	dw $582e ; CUTSCENE_0C
+	dw $58b5 ; CUTSCENE_0D
+	dw $533a ; CUTSCENE_0E
+	dw .InvalidCutscene ; CUTSCENE_0F
+	dw $56e2 ; CUTSCENE_10
+	dw $533a ; CUTSCENE_11
+	dw .InvalidCutscene ; CUTSCENE_12
+	dw $5985 ; CUTSCENE_13
+	dw $6c6c ; CUTSCENE_14
+	dw $5a31 ; CUTSCENE_15
+	dw .InvalidCutscene ; CUTSCENE_16
+	dw $56e6 ; CUTSCENE_17
+	dw $5869 ; CUTSCENE_18
+	dw $527f ; CUTSCENE_19
+	dw .InvalidCutscene ; CUTSCENE_1A
+	dw $5441 ; CUTSCENE_1B
+	dw .InvalidCutscene ; CUTSCENE_1C
+	dw $56ea ; CUTSCENE_1D
+	dw $5569 ; CUTSCENE_1E
+	dw $5c7d ; CUTSCENE_1F
+	dw .InvalidCutscene ; CUTSCENE_20
+	dw $5d03 ; CUTSCENE_21
+	dw $55d7 ; CUTSCENE_22
+	dw .InvalidCutscene ; CUTSCENE_23
+	dw $5b98 ; CUTSCENE_24
+	dw $56ee ; CUTSCENE_25
+	dw .InvalidCutscene ; CUTSCENE_26
+	dw $565e ; CUTSCENE_27
+	dw .InvalidCutscene ; CUTSCENE_28
+	dw .InvalidCutscene ; CUTSCENE_29
+	dw .InvalidCutscene ; CUTSCENE_2A
+	dw .InvalidCutscene ; CUTSCENE_2B
+	dw .InvalidCutscene ; CUTSCENE_2C
+	dw .InvalidCutscene ; CUTSCENE_2D
+	dw .InvalidCutscene ; CUTSCENE_2E
+	dw .InvalidCutscene ; CUTSCENE_2F
+	dw $5f0f ; CUTSCENE_30
+	dw .InvalidCutscene ; CUTSCENE_31
+	dw .InvalidCutscene ; CUTSCENE_32
+	dw .InvalidCutscene ; CUTSCENE_33
+	dw .InvalidCutscene ; CUTSCENE_34
+	dw .InvalidCutscene ; CUTSCENE_35
+	dw .InvalidCutscene ; CUTSCENE_36
+	dw $5e07 ; CUTSCENE_37
+	dw $5e48 ; CUTSCENE_38
+	dw $5fcd ; CUTSCENE_39
+	dw $6046 ; CUTSCENE_3A
+	dw .InvalidCutscene ; CUTSCENE_3B
+	dw $6171 ; CUTSCENE_3C
+	dw $6347 ; CUTSCENE_3D
+	dw .InvalidCutscene ; CUTSCENE_3E
+	dw .InvalidCutscene ; CUTSCENE_3F
+	dw .InvalidCutscene ; CUTSCENE_40
+	dw .InvalidCutscene ; CUTSCENE_41
+	dw .InvalidCutscene ; CUTSCENE_42
+	dw $625c ; CUTSCENE_43
+	dw $6aca ; CUTSCENE_44
+	dw .InvalidCutscene ; CUTSCENE_45
+	dw .InvalidCutscene ; CUTSCENE_46
+	dw .InvalidCutscene ; CUTSCENE_47
+	dw .InvalidCutscene ; CUTSCENE_48
+	dw $5a31 ; CUTSCENE_49
+	dw $6451 ; CUTSCENE_4A
+	dw .InvalidCutscene ; CUTSCENE_4B
+	dw $64cf ; CUTSCENE_4C
+	dw .InvalidCutscene ; CUTSCENE_4D
+	dw $654c ; CUTSCENE_4E
+	dw $65ba ; CUTSCENE_4F
+	dw .InvalidCutscene ; CUTSCENE_50
+	dw $666e ; CUTSCENE_51
+	dw .InvalidCutscene ; CUTSCENE_52
+	dw .InvalidCutscene ; CUTSCENE_53
+	dw $62d1 ; CUTSCENE_54
+	dw $695f ; CUTSCENE_55
+	dw $66fd ; CUTSCENE_56
+	dw $67b3 ; CUTSCENE_57
+	dw $6871 ; CUTSCENE_58
+	dw .InvalidCutscene ; CUTSCENE_59
+	dw .InvalidCutscene ; CUTSCENE_5A
+
+.OutOfBoundsCutscene
+	debug_nop
+
+.InvalidCutscene
+	debug_nop
+
+.Func_9cef6
+	farcall Func_adfa3
+	ret
+; 0x9cf06
+
+	INCROM $9cf06, $9d01a
 
 Func_9d01a: ; 9d01a (27:501a)
 	ld hl, wOWObj2
@@ -832,7 +948,7 @@ Func_9fb97: ; 9fb97 (27:7b97)
 ; 0x9fba0
 
 Func_9fba0: ; 9fba0 (27:7ba0)
-	ld hl, w2d184
+	ld hl, w2d180Duration
 	ld c, $06
 	ld b, $03
 	jr Func_9fb53

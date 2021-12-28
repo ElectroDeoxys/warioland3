@@ -2261,7 +2261,206 @@ Data_84e39: ; 84e39 (21:4e39)
 	dw Pals_84880
 ; 0x84e43
 
-	INCROM $84e43, $85234
+	INCROM $84e43, $84e86
+
+Func_84e86: ; 84e86 (21:4e86)
+	ld a, [w2d0d5]
+	cp $01
+	jp nc, .asm_84ed8
+	ld a, [w2d880]
+	and a
+	jr z, .asm_84eec
+	dec a
+	jr z, .asm_84ef4
+	dec a
+	jp z, .asm_84f36
+	dec a
+	jp z, .asm_84f5d
+	dec a
+	jp z, .asm_84f77
+	dec a
+	jp z, .asm_84f97
+	dec a
+	jp z, .asm_84f0f
+.asm_84eab
+	ld a, HIGH(wTempBGPals)
+	ld [wPalConfig1SourceHi], a
+	ld a, LOW(wTempBGPals)
+	ld [wPalConfig1SourceLo], a
+	ld a, (1 << rBGPI_AUTO_INCREMENT)
+	ld [wPalConfig1Index], a
+	ld a, 8 ; number of pals
+	ld [wPalConfig1Number], a
+
+	ld a, HIGH(wTempOBPals)
+	ld [wPalConfig2SourceHi], a
+	ld a, LOW(wTempOBPals)
+	ld [wPalConfig2SourceLo], a
+	ld a, (1 << rOBPI_AUTO_INCREMENT)
+	ld [wPalConfig2Index], a
+	ld a, 8 ; number of pals
+	ld [wPalConfig2Number], a
+
+	ld hl, w2d0d5
+	inc [hl]
+	ret
+
+.asm_84ed8
+	call Func_851d1
+	call Func_851bc
+	ret c
+	xor a
+	ld [w2d0d5], a
+	ld [w2d0db], a
+	ld hl, w2d014
+	ld [hld], a
+	inc [hl]
+	ret
+
+.asm_84eec
+	call .CopyPalsToBGAndOBPals
+	call Func_84fea
+	jr .asm_84eab
+
+.asm_84ef4
+	call .CopyPalsToBGAndOBPals
+	ld hl, Pals_869cd
+	ld de, wTempPals1
+	ld b, 8 palettes
+	call CopyHLToDE
+	ld hl, Pals_86a8d
+	ld de, wTempPals2
+	ld b, 8 palettes
+	call CopyHLToDE
+	jr .asm_84eab
+
+.asm_84f0f
+	call .CopyPalsToBGAndOBPals
+	ld hl, Pals_869cd
+	ld de, wTempPals1
+	ld b, 8 palettes
+	call CopyHLToDE
+	ld hl, Pals_86a8d
+	ld de, wTempPals2
+	ld b, 8 palettes
+	call CopyHLToDE
+	ld hl, Pals_86acd
+	ld de, wTempPals2
+	ld b, 1 palettes
+	call CopyHLToDE
+	jp .asm_84eab
+
+.asm_84f36
+	call .CopyPalsToBGAndOBPals
+	ld hl, Pals_86a4d
+	ld de, wTempPals1
+	ld b, 8 palettes
+	call CopyHLToDE
+	ld hl, Pals_86a8d
+	ld de, wTempPals2
+	ld b, 8 palettes
+	call CopyHLToDE
+	ld hl, Pals_86ad5
+	ld de, wTempPals2
+	ld b, 1 palettes
+	call CopyHLToDE
+	jp .asm_84eab
+
+.asm_84f5d
+	call .CopyPalsToBGAndOBPals
+	xor a
+	ld hl, wTempPals1
+	ld bc, 6 palettes
+	call WriteAToHL_BCTimes
+	xor a
+	ld hl, wTempPals2 palette 1
+	ld bc, 7 palettes
+	call WriteAToHL_BCTimes
+	jp .asm_84eab
+
+.asm_84f77
+	call .CopyPalsToBGAndOBPals
+	ld hl, Pals_db000
+	ld de, wTempPals1
+	ld c, 8 palettes
+	ld b, BANK(Pals_db000)
+	call CopyFarBytes
+	ld hl, Pals_db040
+	ld de, wTempPals2 palette 3
+	ld c, 5 palettes
+	ld b, BANK(Pals_db040)
+	call CopyFarBytes
+	jp .asm_84eab
+
+.asm_84f97
+	call .CopyPalsToBGAndOBPals
+	ld hl, Pals_86a4d palette 6
+	ld de, wTempPals1 palette 6
+	ld b, 2 palettes
+	call CopyHLToDE
+	ld hl, Pals_86a8d
+	ld de, wTempPals2
+	ld b, 8 palettes
+	call CopyHLToDE
+	ld hl, Pals_86ad5
+	ld de, wTempPals2
+	ld b, 1 palettes
+	call CopyHLToDE
+	jp .asm_84eab
+
+.CopyPalsToBGAndOBPals
+	ld hl, wTempPals1
+	ld de, wTempBGPals
+	ld b, 8 palettes
+	call CopyHLToDE
+	ld hl, wTempPals2
+	ld de, wTempOBPals
+	ld b, 8 palettes
+	call CopyHLToDE
+	ret
+; 0x84fd5
+
+	INCROM $84fd5, $84fea
+
+Func_84fea: ; 84fea (21:4fea)
+	xor a
+	ld hl, wTempPals1
+	ld bc, 8 palettes
+	call WriteAToHL_BCTimes
+	xor a
+	ld hl, wTempPals2
+	ld bc, 8 palettes
+	call WriteAToHL_BCTimes
+	ret
+; 0x84fff
+
+	INCROM $84fff, $851bc
+
+Func_851bc: ; 851bc (21:51bc)
+	ld a, LOW(rBGPI)
+	ld [wPalConfig1], a
+	xor a
+	ld [w2d0dc], a
+	ld a, $01
+	ld [w2d0dd], a
+	ld hl, w2d0d5
+	call Func_8534f
+	ret
+; 0x851d1
+
+Func_851d1: ; 851d1 (21:51d1)
+	ld a, LOW(rOBPI)
+	ld [wPalConfig2], a
+	ld a, $01
+	ld [w2d0dc], a
+	ld a, $01
+	ld [w2d0dd], a
+	ld hl, w2d0db
+	call Func_8534f
+	ret
+; 0x851e7
+
+	INCROM $851e7, $85234
 
 Func_85234: ; 85234 (21:5234)
 	ld a, [wCurMapSide]
@@ -2312,41 +2511,40 @@ Func_85271: ; 85271 (21:5271)
 	ld a, $02
 	ld [w2d0e0], a
 
-	ld hl, $c038
-	ld de, $c138
-	ld b, $08
+	ld hl, wTempPals1 palette 7
+	ld de, wTempBGPals palette 7
+	ld b, 1 palettes
 	call CopyHLToDE
 
 	ld a, [w2d0e4]
 	and a
 	jr z, .asm_8529b
-
-	ld hl, $52df
-	ld de, $c03a
-	ld b, $06
+	ld hl, Pals_852dd color 1
+	ld de, wTempPals1 palette 7 color 1
+	ld b, $6
 	call CopyHLToDE
 	jr .asm_852af
 
 .asm_8529b
-	ld hl, $4038
+	ld hl, Pals_84000 palette 7
 	ld a, [w2d011]
 	and a
-	jr z, .asm_852a7
-	ld hl, $40f8
-.asm_852a7
-	ld de, $c038
-	ld b, $08
+	jr z, .got_pal
+	ld hl, Pals_840c0 palette 7
+.got_pal
+	ld de, wTempPals1 palette 7
+	ld b, 1 palettes
 	call CopyHLToDE
 
 .asm_852af
-	ld a, $c1
-	ld [w2d0d0 + $3], a
-	ld a, $38
-	ld [w2d0d0 + $4], a
-	ld a, $b8
-	ld [w2d0d0 + $1], a
-	ld a, $01
-	ld [w2d0d0 + $2], a
+	ld a, HIGH(wTempBGPals palette 7)
+	ld [wPalConfig1SourceHi], a
+	ld a, LOW(wTempBGPals palette 7)
+	ld [wPalConfig1SourceLo], a
+	ld a, (1 << rOBPI_AUTO_INCREMENT) | (7 << 3)
+	ld [wPalConfig1Index], a
+	ld a, 1
+	ld [wPalConfig1Number], a
 	ld hl, w2d0d5
 	inc [hl]
 	scf
@@ -2365,7 +2563,12 @@ Func_85271: ; 85271 (21:5271)
 	ret
 ; 0x852dd
 
-	INCROM $852dd, $852e5
+Pals_852dd: ; 852dd (21:52dd)
+	rgb 31, 31, 31
+	rgb  8, 31, 31
+	rgb 14, 14, 14
+	rgb  0,  0,  0
+; 0x852e5
 
 Func_852e5: ; 852e5 (21:52e5)
 	ld a, [w2d0e0]
@@ -2390,14 +2593,14 @@ Func_852e5: ; 852e5 (21:52e5)
 
 	ld hl, w2d0d5
 	inc [hl]
-	ld a, $c1
-	ld [w2d0d0 + $3], a
-	ld a, $38
-	ld [w2d0d0 + $4], a
-	ld a, $b8
-	ld [w2d0d0 + $1], a
-	ld a, $01
-	ld [w2d0d0 + $2], a
+	ld a, HIGH(wTempBGPals palette 7)
+	ld [wPalConfig1SourceHi], a
+	ld a, LOW(wTempBGPals palette 7)
+	ld [wPalConfig1SourceLo], a
+	ld a, (1 << rOBPI_AUTO_INCREMENT) | (7 << 3)
+	ld [wPalConfig1Index], a
+	ld a, 1
+	ld [wPalConfig1Number], a
 	ret
 
 .asm_85325
@@ -2410,8 +2613,8 @@ Func_852e5: ; 852e5 (21:52e5)
 ; 0x85331
 
 Func_85331: ; 85331 (21:5331)
-	ld a, $68
-	ld [w2d0d0], a
+	ld a, LOW(rBGPI)
+	ld [wPalConfig1], a
 	xor a
 	ld [w2d0dc], a
 	ld b, $04
@@ -2433,10 +2636,10 @@ Func_8534f: ; 8534f (21:534f)
 	ld [w2d0e1], a
 .asm_85354
 	ld a, [w2d0dc]
-	ld hl, w2d0d0 + $2
+	ld hl, wPalConfig1Number
 	and a
 	jr z, .asm_85360
-	ld hl, w2d0d6 + $2
+	ld hl, wPalConfig2Number
 .asm_85360
 	ld a, [hli]
 	rlca
@@ -2683,15 +2886,15 @@ Func_854b8: ; 854b8 (21:54b8)
 	jr .loop
 ; 0x854c7
 
-Func_854c7: ; 854c7 (21:54c7)
-	ld hl, w2d0d6
-	jr Func_854cf
+ApplyPalConfig2: ; 854c7 (21:54c7)
+	ld hl, wPalConfig2
+	jr ApplyPalConfig_Bank21
 
-Func_854cc: ; 854cc (21:54cc)
-	ld hl, w2d0d0
+ApplyPalConfig1: ; 854cc (21:54cc)
+	ld hl, wPalConfig1
 ;	fallthrough
 
-Func_854cf: ; 854cf (21:54cf)
+ApplyPalConfig_Bank21: ; 854cf (21:54cf)
 	ld c, [hl]
 	xor a
 	ld [hli], a
@@ -3062,4 +3265,188 @@ BGMap_86929:: ; 86929 (21:6929)
 
 	db $ff
 
-	INCROM $8694e, $86b5d
+	INCROM $8694e, $869cd
+
+Pals_869cd: ; 869cd (21:69cd)
+	rgb 31, 31, 31
+	rgb  9,  4,  0
+	rgb  8, 23, 31
+	rgb  0,  3,  0
+
+	rgb 12,  6,  0
+	rgb 26, 28, 16
+	rgb  0, 16,  6
+	rgb  0,  5,  0
+
+	rgb 12,  6,  0
+	rgb 25, 14,  0
+	rgb  0,  3,  0
+	rgb  0,  5,  6
+
+	rgb 13, 25, 31
+	rgb  9,  4,  0
+	rgb  0, 13, 18
+	rgb  0,  5,  6
+
+	rgb  8, 23, 31
+	rgb 23,  3, 27
+	rgb 12,  1, 14
+	rgb  0,  0,  0
+
+	rgb  3, 20, 30
+	rgb  0, 21, 10
+	rgb  0,  9,  4
+	rgb  0,  3,  0
+
+	rgb  0,  0,  0
+	rgb 15,  5,  0
+	rgb  0,  0,  0
+	rgb  7,  3,  0
+
+	rgb  9, 19,  9
+	rgb  5, 10,  5
+	rgb  2,  4,  2
+	rgb  0,  0,  0
+; 0x86a0d
+
+Pals_86a0d: ; 86a0d (21:6a0d)
+	rgb  0,  0,  0
+	rgb 31, 31, 31
+	rgb  2, 31, 31
+	rgb 31,  0,  0
+
+	rgb  0,  0,  0
+	rgb 31, 31, 31
+	rgb 31, 26,  2
+	rgb 31,  0,  0
+
+	rgb  0,  0,  0
+	rgb 31, 31, 31
+	rgb 31,  0,  0
+	rgb 14,  0,  0
+
+	rgb  0,  0,  0
+	rgb 31, 31, 31
+	rgb  2, 31, 31
+	rgb 25,  8, 31
+
+	rgb  0,  0,  0
+	rgb 31, 31, 31
+	rgb 12, 29,  0
+	rgb  0,  9,  3
+
+	rgb  0,  5, 31
+	rgb 31, 31, 31
+	rgb 12, 29,  0
+	rgb 17,  3,  0
+
+	rgb  0,  0,  0
+	rgb 31,  0,  0
+	rgb 12, 29,  0
+	rgb  0,  9,  3
+
+	rgb  0,  0,  0
+	rgb 31, 31, 31
+	rgb  2, 31, 31
+	rgb 31,  0,  0
+; 0x86a4d
+
+Pals_86a4d: ; 86a4d (21:6a4d)
+	rgb 11, 12,  7
+	rgb  5,  6,  3
+	rgb  2,  3,  1
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb  0,  3,  1
+	rgb  0,  2,  1
+	rgb  0,  0,  0
+
+	rgb  0, 12, 12
+	rgb  0,  7,  7
+	rgb  0,  4,  4
+	rgb  0,  0,  0
+
+	rgb 16, 13, 22
+	rgb 12,  6, 16
+	rgb  4,  0, 12
+	rgb  0,  0,  0
+
+	rgb 15, 12, 20
+	rgb  9,  6, 16
+	rgb  0,  0, 12
+	rgb  0,  0,  0
+
+	rgb 10, 13, 21
+	rgb  4,  6, 16
+	rgb  0,  0, 12
+	rgb  0,  0,  0
+
+	rgb 31, 19, 23
+	rgb 21,  8, 17
+	rgb 12,  2,  6
+	rgb  0,  0,  0
+
+	rgb 27, 23, 11
+	rgb 22, 13,  2
+	rgb 13,  6,  1
+	rgb  5,  2,  0
+; 0x86a8d
+
+Pals_86a8d: ; 86a8d (21:6a8d)
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 31, 15, 10
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 13, 18, 30
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 27,  2
+	rgb 27,  0,  2
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 27,  0,  2
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb  2, 12, 31
+	rgb  0, 21,  0
+
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 31, 27,  1
+	rgb 18,  8,  0
+
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 31, 27,  2
+	rgb  0, 15, 21
+
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 20,  2, 31
+	rgb  0,  0,  0
+; 0x86acd
+
+Pals_86acd: ; 86acd (21:6acd)
+	rgb  0,  0,  0
+	rgb 28, 31, 26
+	rgb 31, 11,  8
+	rgb  7,  2, 20
+; 0x86ad5
+
+Pals_86ad5: ; 86ad5 (21:6ad5)
+	rgb  0,  0,  0
+	rgb 31, 31, 31
+	rgb 31, 15, 10
+	rgb  3,  3,  3
+; 0x86add
+
+	INCROM $86add, $86b5d

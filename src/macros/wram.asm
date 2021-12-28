@@ -63,6 +63,14 @@ obj_struct: MACRO
 \1UpdateFunction::  dw
 ENDM
 
+pal_config_struct: MACRO
+\1Register:: db
+\1Index::    db
+\1Number::   db
+\1SourceHi:: db
+\1SourceLo:: db
+ENDM
+
 unk3_struct: MACRO
 \1Unk00:: db
 \1Unk01:: db

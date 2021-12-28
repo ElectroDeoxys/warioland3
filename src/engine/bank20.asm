@@ -1744,7 +1744,7 @@ VBlank_80bf9: ; 80bf9 (20:4bf9)
 	pop af
 	bankswitch
 
-	ld hl, w2d0d0
+	ld hl, wPalConfig1
 	ld a, [hl]
 	and a
 	jr z, .asm_80c5b
@@ -1780,7 +1780,7 @@ VBlank_80bf9: ; 80bf9 (20:4bf9)
 	jr nz, .asm_80c48
 
 .asm_80c5b
-	ld a, [w2d079]
+	ld a, [wHDMABank]
 	ld b, a
 	ld a, [wROMBank]
 	push af
@@ -1900,7 +1900,7 @@ VBlank_80cb1: ; 80cb1 (20:4cb1)
 	ld [w2d060], a
 
 .asm_80cff
-	ld a, [w2d079]
+	ld a, [wHDMABank]
 	and a
 	jr z, .asm_80d1b
 	ld b, a
@@ -1924,17 +1924,17 @@ VBlank_80cb1: ; 80cb1 (20:4cb1)
 	pop af
 	bankswitch
 
-	ld b, BANK(Func_854cc)
+	ld b, BANK(ApplyPalConfig1)
 	ld a, [wROMBank]
 	push af
 	ld a, b
 	bankswitch
-	ld a, [w2d0d0]
+	ld a, [wPalConfig1]
 	and a
-	call nz, Func_854cc
-	ld a, [w2d0d6]
+	call nz, ApplyPalConfig1
+	ld a, [wPalConfig2]
 	and a
-	call nz, Func_854c7
+	call nz, ApplyPalConfig2
 	pop af
 	bankswitch
 
@@ -1950,7 +1950,31 @@ Func_80d6c: ; 80d6c (20:4d6c)
 	ret
 ; 0x80d7c
 
-	INCROM $80d7c, $80dc0
+Func_80d7c: ; 80d7c (20:4d7c)
+	call Func_80d92
+	farcall Func_9ce28
+	call ClearVirtualOAM
+	ret
+; 0x80d92
+
+Func_80d92: ; 80d92 (20:4d92)
+	ld a, [wTopBarState]
+	and a
+	ret z
+	ld a, [w2d013]
+	cp $01
+	ret c
+	ld a, [wJoypadPressed]
+	bit B_BUTTON_F, a
+	ret z
+	pop hl
+	ld hl, wSubState
+	inc [hl]
+	stop_sfx
+	ret
+; 0x80db1
+
+	INCROM $80db1, $80dc0
 
 InitTreasureCollection: ; 80dc0 (20:4dc0)
 	farcall _InitTreasureCollection
@@ -2743,11 +2767,11 @@ Func_81477: ; 81477 (20:5477)
 	ld hl, w2d106
 	cp [hl]
 	call nz, Func_820af
-	ld hl, w2d810 + $7e
-	ld a, [hli]
+	ld hl, w2d88e
+	ld a, [hli] ; w2d88e
 	ld [w2d06b], a
 	ld [w2d100], a
-	ld a, [hl]
+	ld a, [hl] ; w2d88f
 	ld [w2d06c], a
 	ld [w2d101], a
 	xor a
@@ -2756,18 +2780,18 @@ Func_81477: ; 81477 (20:5477)
 ; 0x814b2
 
 Func_814b2: ; 814b2 (20:54b2)
-	ld hl, w2d810 + $7e
+	ld hl, w2d88e
 	ld a, [w2d100]
-	ld [hli], a
+	ld [hli], a ; w2d88e
 	ld a, [w2d101]
-	ld [hl], a
+	ld [hl], a ; w2d88f
 ;	fallthrough
 
 Func_814bd: ; 814bd (20:54bd)
 	xor a
 	ld hl, w2d0e2
 	ld [hli], a
-	inc [hl]
+	inc [hl] ; w2d0e3
 	ret
 ; 0x814c4
 
@@ -2798,9 +2822,9 @@ Func_814ec: ; 814ec (20:54ec)
 	call WriteAToHL_BCTimes
 	call Func_82111
 	ld a, l
-	ld [w2d810 + $79], a
+	ld [w2d889 + 0], a
 	ld a, h
-	ld [w2d810 + $7a], a
+	ld [w2d889 + 1], a
 	jr Func_814bd
 ; 0x8150c
 
@@ -2854,10 +2878,10 @@ Func_8150c: ; 8150c (20:550c)
 	ret
 
 .Func_81576
-	ld [w2d810 + $7b], a
+	ld [w2d88b], a
 	call .Func_815b6
-	ld de, w2d810 + $70
-	ld b, $09
+	ld de, w2d880
+	ld b, $9
 	call CopyHLToDE
 	ld de, w2d0a0
 	ld b, $07
@@ -2868,12 +2892,12 @@ Func_8150c: ; 8150c (20:550c)
 	ret
 
 .Func_81595
-	ld a, [w2d810 + $7b]
+	ld a, [w2d88b]
 	call .Func_815b6
 	ld e, l
 	ld d, h
-	ld hl, w2d810 + $70
-	ld b, $09
+	ld hl, w2d880
+	ld b, $9
 	call CopyHLToDE
 	ld hl, w2d0a0
 	ld b, $07
@@ -2937,7 +2961,7 @@ Func_8150c: ; 8150c (20:550c)
 	ret
 
 .Func_81615
-	ld a, [w2d810 + $77]
+	ld a, [w2d880 + $7]
 	jumptable
 	dw $5625
 	dw $567f
@@ -5004,16 +5028,16 @@ Func_82277: ; 82277 (20:6277)
 	call Func_822b4
 	call Func_826f6
 
-	ld a, $6a
-	ld [w2d0d0 + $0], a
-	ld a, $c0
-	ld [w2d0d0 + $3], a
-	ld a, $60
-	ld [w2d0d0 + $4], a
-	ld a, $a0
-	ld [w2d0d0 + $1], a
-	ld a, $04
-	ld [w2d0d0 + $2], a
+	ld a, LOW(rOBPI)
+	ld [wPalConfig1Register], a
+	ld a, HIGH(wTempPals2 palette 4)
+	ld [wPalConfig1SourceHi], a
+	ld a, LOW(wTempPals2 palette 4)
+	ld [wPalConfig1SourceLo], a
+	ld a, (1 << rOBPI_AUTO_INCREMENT) | (4 << 3)
+	ld [wPalConfig1Index], a
+	ld a, 4 ; number of pals
+	ld [wPalConfig1Number], a
 
 	ld hl, wTopBarState
 	inc [hl]
@@ -5095,16 +5119,16 @@ Func_82311: ; 82311 (20:6311)
 	ld c, 4 palettes
 	ld b, BANK(Pals_84900)
 	call CopyFarBytes
-	ld a, $6a
-	ld [w2d0d0 + 0], a
-	ld a, $c0
-	ld [w2d0d0 + 3], a
-	ld a, $60
-	ld [w2d0d0 + 4], a
-	ld a, $a0
-	ld [w2d0d0 + 1], a
-	ld a, $04
-	ld [w2d0d0 + 2], a
+	ld a, LOW(rOBPI)
+	ld [wPalConfig1Register], a
+	ld a, HIGH(wTempPals2 palette 4)
+	ld [wPalConfig1SourceHi], a
+	ld a, LOW(wTempPals2 palette 4)
+	ld [wPalConfig1SourceLo], a
+	ld a, (1 << rOBPI_AUTO_INCREMENT) | (4 << 3)
+	ld [wPalConfig1Index], a
+	ld a, 4 ; number of pals
+	ld [wPalConfig1Number], a
 .asm_82357
 	call DrawTopBar
 	ret
@@ -6212,11 +6236,11 @@ Func_82bb8: ; 82bb8 (20:6bb8)
 	ld a, [w2d028]
 	cp $01
 	ret nz
-	ld a, [w2d184 + $2]
+	ld a, [w2d180Unk6]
 	and a
 	ret z
 	ld de, Frameset_aa544
-	ld hl, w2d184
+	ld hl, w2d180Duration
 	ld b, $2a
 	call UpdateOWAnimation
 	ld hl, w2d180
@@ -6230,10 +6254,10 @@ Func_82bda: ; 82bda (20:6bda)
 	ld a, [w2d028]
 	cp $03
 	ret nz
-	ld a, [w2d184 + $2]
+	ld a, [w2d180Unk6]
 	and a
 	ret z
-	ld hl, w2d184
+	ld hl, w2d180Duration
 	ld de, Frameset_aa555
 	ld b, $2a
 	call UpdateOWAnimation
@@ -6246,7 +6270,7 @@ Func_82bda: ; 82bda (20:6bda)
 	call AddOWSpriteWithScroll
 	ret
 .asm_82c03
-	ld hl, w2d184 + $2
+	ld hl, w2d180Unk6
 	xor a
 	ld [hl], a
 	ret

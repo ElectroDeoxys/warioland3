@@ -5067,7 +5067,7 @@ UpdateOWAnimation: ; 3a66 (0:3a66)
 	ld b, a
 	ld a, [bc]
 	cp $ff
-	jr z, .asm_3aa2
+	jr z, .frameset_end
 	ld d, a
 	ld a, [hl]
 
@@ -5092,7 +5092,7 @@ UpdateOWAnimation: ; 3a66 (0:3a66)
 	bankswitch
 	ret
 
-.asm_3aa2
+.frameset_end
 	ld [wOWAnimationFinished], a
 	ld b, d
 	ld c, e
@@ -5172,10 +5172,10 @@ Func_3ad7: ; 3ad7 (0:3ad7)
 ; b = map side constant (MAP_NORTH, ...)
 ; d = level index within that map side
 LoadLevelName: ; 3af7 (0:3af7)
-	ld a, $24
+	ld a, BANK(LevelNamesJPGfx)
 	ld hl, wLanguage
 	add [hl]
-	ld [w2d079], a
+	ld [wHDMABank], a
 	xor a
 	ld [wHDMA], a
 	ld hl, LevelNamesJPGfx ; aka LevelNamesENGfx
@@ -5286,7 +5286,7 @@ LoadFarPalsToTempPals2: ; 3bce (0:3bce)
 	ret
 ; 0x3be4
 
-Func_3be4: ; 3be4 (0:3be4)
+ApplyPalConfig: ; 3be4 (0:3be4)
 	ld c, [hl]
 	xor a
 	ld [hli], a
@@ -5340,7 +5340,7 @@ Func_3c03: ; 3c03 (0:3c03)
 	inc c
 	ld [$ff00+c], a
 	xor a
-	ld [w2d079], a
+	ld [wHDMABank], a
 	ret
 ; 0x3c1f
 

@@ -41,7 +41,7 @@ endc
 ENDM
 
 debug_nop: MACRO
-.loop_debug_nop
+.loop_debug_nop_\@
 	nop
-	jr .loop_debug_nop
+	jr .loop_debug_nop_\@
 ENDM
