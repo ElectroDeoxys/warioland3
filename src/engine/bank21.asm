@@ -2434,29 +2434,85 @@ Func_84fea: ; 84fea (21:4fea)
 	ret
 ; 0x84fff
 
-	INCROM $84fff, $851bc
+	INCROM $84fff, $85046
+
+Func_85046: ; 85046 (21:5046)
+	ld a, [w2d0d5]
+	cp $01
+	jr nc, .asm_850a6
+
+	ld hl, wTempPals1 palette 1
+	ld de, wTempBGPals palette 1
+	ld b, 7 palettes
+	call CopyHLToDE
+	ld a, $ff
+	ld hl, wTempPals1 palette 1
+	ld bc, 7 palettes
+	call WriteAToHL_BCTimes
+	ld hl, wTempPals2
+	ld de, wTempOBPals
+	ld b, 8 palettes
+	call CopyHLToDE
+	ld a, $ff
+	ld hl, wTempPals2
+	ld bc, 8 palettes
+	call WriteAToHL_BCTimes
+
+	ld hl, w2d0d5
+	inc [hl]
+	ld a, HIGH(wTempBGPals palette 1)
+	ld [wPalConfig1SourceHi], a
+	ld a, LOW(wTempBGPals palette 1)
+	ld [wPalConfig1SourceLo], a
+	ld a, (1 << rBGPI_AUTO_INCREMENT) | (1 << 3)
+	ld [wPalConfig1Index], a
+	ld a, 7
+	ld [wPalConfig1Number], a
+	ld a, HIGH(wTempOBPals)
+	ld [wPalConfig2SourceHi], a
+	ld a, LOW(wTempOBPals)
+	ld [wPalConfig2SourceLo], a
+	ld a, (1 << rOBPI_AUTO_INCREMENT)
+	ld [wPalConfig2Index], a
+	ld a, 8
+	ld [wPalConfig2Number], a
+	ret
+
+.asm_850a6
+	call Func_851d1
+	call Func_851bc
+	ret c
+	xor a
+	ld [w2d0d5], a
+	ld [w2d014], a
+	ld hl, w2d013
+	inc [hl]
+	ret
+; 0x850b9
+
+	INCROM $850b9, $851bc
 
 Func_851bc: ; 851bc (21:51bc)
 	ld a, LOW(rBGPI)
-	ld [wPalConfig1], a
+	ld [wPalConfig1Register], a
 	xor a
 	ld [w2d0dc], a
 	ld a, $01
 	ld [w2d0dd], a
 	ld hl, w2d0d5
-	call Func_8534f
+	call FadePalConfig
 	ret
 ; 0x851d1
 
 Func_851d1: ; 851d1 (21:51d1)
 	ld a, LOW(rOBPI)
-	ld [wPalConfig2], a
+	ld [wPalConfig2Register], a
 	ld a, $01
 	ld [w2d0dc], a
 	ld a, $01
 	ld [w2d0dd], a
 	ld hl, w2d0db
-	call Func_8534f
+	call FadePalConfig
 	ret
 ; 0x851e7
 
@@ -2614,43 +2670,43 @@ Func_852e5: ; 852e5 (21:52e5)
 
 Func_85331: ; 85331 (21:5331)
 	ld a, LOW(rBGPI)
-	ld [wPalConfig1], a
+	ld [wPalConfig1Register], a
 	xor a
 	ld [w2d0dc], a
-	ld b, $04
+	ld b, 4
 	ld a, [w2d025]
 	and a
 	jr z, .asm_85344
-	ld b, $01
+	ld b, 1
 .asm_85344
 	ld a, b
 	ld [w2d0dd], a
 	ld hl, w2d0d5
-	call Func_8534f
+	call FadePalConfig
 	ret
 ; 0x8534f
 
-Func_8534f: ; 8534f (21:534f)
+FadePalConfig: ; 8534f (21:534f)
 	push hl
 	ld a, [hl]
 	ld [w2d0e1], a
-.asm_85354
+.loop
 	ld a, [w2d0dc]
 	ld hl, wPalConfig1Number
 	and a
-	jr z, .asm_85360
+	jr z, .got_number_pals
 	ld hl, wPalConfig2Number
-.asm_85360
+.got_number_pals
 	ld a, [hli]
 	rlca
-	rlca
+	rlca ; *4
 	ld b, a
-	ld a, [hli]
+	ld a, [hli] ; source hi
 	dec a
 	ld d, a
-	ld e, [hl]
+	ld e, [hl] ; source lo
 	ld hl, wTargetRed
-.asm_8536b
+.loop_colours
 	ld a, [de]
 	and $1f
 	ld [hli], a
@@ -2705,37 +2761,37 @@ Func_8534f: ; 8534f (21:534f)
 	ld c, a
 	ld a, [hl]
 	cp c
-	jr z, .asm_853b4
-	jr nc, .asm_853b3
+	jr z, .got_blue
+	jr nc, .dec_blue
 	inc [hl]
-	jr .asm_853b4
-.asm_853b3
+	jr .got_blue
+.dec_blue
 	dec [hl]
-.asm_853b4
+.got_blue
 	dec l
 	ld a, [wTargetGreen]
 	ld c, a
 	ld a, [hl]
 	cp c
-	jr z, .asm_853c3
-	jr nc, .asm_853c2
+	jr z, .got_green
+	jr nc, .dec_green
 	inc [hl]
-	jr .asm_853c3
-.asm_853c2
+	jr .got_green
+.dec_green
 	dec [hl]
-.asm_853c3
+.got_green
 	dec l
 	ld a, [wTargetRed]
 	ld c, a
 	ld a, [hl]
 	cp c
-	jr z, .asm_853d2
-	jr nc, .asm_853d1
+	jr z, .got_red
+	jr nc, .dec_red
 	inc [hl]
-	jr .asm_853d2
-.asm_853d1
+	jr .got_red
+.dec_red
 	dec [hl]
-.asm_853d2
+.got_red
 	ld a, [hli]
 	ld c, a
 	ld a, [hl]
@@ -2761,16 +2817,16 @@ Func_8534f: ; 8534f (21:534f)
 	inc e
 	ld [de], a
 	inc e
-	ld d, $c0
+	ld d, HIGH(wTempPals1)
 	ld hl, wTargetRed
 	dec b
-	jp nz, .asm_8536b
+	jp nz, .loop_colours
 	ld hl, w2d0e1
 	inc [hl]
 	ld a, [w2d0dd]
 	dec a
 	ld [w2d0dd], a
-	jp nz, .asm_85354
+	jp nz, .loop
 	ld a, [hl]
 	pop hl
 	ld [hl], a

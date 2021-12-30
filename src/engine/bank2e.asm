@@ -124,7 +124,49 @@ Pals_b8080: ; b8080 (2e:4080)
 	rgb  0,  0,  0
 ; 0xb80c0
 
-	INCROM $b80c0, $b8200
+	INCROM $b80c0, $b81c0
+
+Pals_b81c0: ; b81c0 (2e:41c0)
+	rgb 31, 31, 23
+	rgb  0,  0,  0
+	rgb  0,  0,  0
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb  0,  0,  0
+	rgb  0,  0,  0
+	rgb  0,  0,  0
+
+	rgb  0,  2,  8
+	rgb 10, 18, 20
+	rgb  7,  9, 14
+	rgb  0,  0,  0
+
+	rgb 23, 25, 31
+	rgb 10, 18, 20
+	rgb  7,  9, 14
+	rgb  0,  0,  0
+
+	rgb  0,  0, 26
+	rgb 31, 31, 31
+	rgb 23, 25, 31
+	rgb  0,  0,  0
+
+	rgb  0,  0, 26
+	rgb 10, 18, 20
+	rgb  7,  9, 14
+	rgb  0,  0,  0
+
+	rgb  0,  0, 26
+	rgb 23, 25, 31
+	rgb 10, 18, 20
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb  0,  0,  0
+	rgb  0,  0,  0
+	rgb  0,  0,  0
+; 0xb8200
 
 Pals_b8200: ; b8200 (2e:4200)
 	rgb 31, 31, 27
@@ -424,7 +466,47 @@ Pals_b8a00: ; b8a00 (2e:4a00)
 	rgb  0,  0,  0
 ; 0xb8a40
 
-	INCROM $b8a40, $b8a80
+Pals_b8a40: ; b8a40 (2e:4a40)
+	rgb  0, 14, 28
+	rgb 31, 31, 15
+	rgb 17, 17, 11
+	rgb  6,  6, 11
+
+	rgb  0, 14, 28
+	rgb 26, 19,  0
+	rgb 19,  0,  0
+	rgb  0,  0,  0
+
+	rgb  0, 14, 28
+	rgb 31, 31, 31
+	rgb 13, 24, 31
+	rgb  0,  0,  0
+
+	rgb  0, 14, 28
+	rgb 31, 27, 11
+	rgb 31, 14,  1
+	rgb  0,  0,  0
+
+	rgb  0, 14, 28
+	rgb 31, 31, 31
+	rgb  9, 16, 31
+	rgb  0,  0,  0
+
+	rgb  0, 14, 28
+	rgb 31, 31, 23
+	rgb  0, 22,  0
+	rgb  0,  0,  0
+
+	rgb  0, 14, 28
+	rgb 31, 31, 31
+	rgb 22,  4, 11
+	rgb  0,  0,  0
+
+	rgb  0, 14, 28
+	rgb 21, 21, 19
+	rgb 10, 10,  8
+	rgb  0,  0,  0
+; 0xb8a80
 
 Pals_b8a80: ; b8a80 (2e:4a80)
 	rgb  0, 14, 28
@@ -510,7 +592,173 @@ Pals_b8ac0: ; b8ac0 (2e:4ac0)
 	rgb  0,  0,  0
 ; 0xb8b00
 
-	INCROM $b8b00, $b8c00
+Pals_b8b00: ; b8b00 (2e:4b00)
+	rgb  0, 22, 16
+	rgb 30, 31, 14
+	rgb 26,  7, 30
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb  0,  8, 31
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 13, 24, 31
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 27, 11
+	rgb 31, 14,  1
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31,  3,  2
+	rgb 12,  0,  0
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 30, 26, 31
+	rgb 30,  5, 18
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb  9, 24, 17
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb  9, 24, 17
+	rgb  5, 14,  8
+	rgb  0,  0,  0
+; 0xb8b40
+
+Pals_b8b40: ; b8b40 (2e:4b40)
+	rgb  0, 22, 16
+	rgb 31, 11, 23
+	rgb 13,  2,  7
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 13, 24, 31
+	rgb  0,  8, 31
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 13, 24, 31
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 27, 11
+	rgb 31, 14,  1
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 24,  2
+	rgb 31,  3,  2
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb  0, 15, 30
+	rgb 14,  0,  0
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb  8, 26, 30
+	rgb 30,  0,  5
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 24, 31, 22
+	rgb  6, 17,  5
+	rgb  0,  0,  0
+; 0xb8b80
+
+Pals_b8b80: ; b8b80 (2e:4b80)
+	rgb  0, 22, 16
+	rgb 31, 11, 23
+	rgb 13,  2,  7
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 13, 24, 31
+	rgb  0,  8, 31
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 13, 24, 31
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 27, 11
+	rgb 31, 14,  1
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 24,  2
+	rgb 31,  3,  2
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31,  3,  2
+	rgb 14,  0,  0
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 28, 23, 24
+	rgb 16,  5,  9
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 24, 31, 22
+	rgb 31,  8,  5
+	rgb  0,  0,  0
+; 0xb8bc0
+
+Pals_b8bc0: ; b8bc0 (2e:4bc0)
+	rgb  0, 22, 16
+	rgb 31, 11, 23
+	rgb 13,  2,  7
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 24, 24
+	rgb 31,  0,  0
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 13, 24, 31
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 27, 11
+	rgb 31, 14,  1
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 24,  2
+	rgb 31,  3,  2
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb  0, 15, 30
+	rgb 14,  0,  0
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 21,  5
+	rgb 28,  8,  1
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 30, 31, 14
+	rgb 15, 18,  2
+	rgb  0,  0,  0
+; 0xb8c00
 
 Pals_b8c00: ; b8c00 (2e:4c00)
 	rgb  0, 14, 28
@@ -554,7 +802,49 @@ Pals_b8c00: ; b8c00 (2e:4c00)
 	rgb  0,  0,  0
 ; 0xb8c40
 
-	INCROM $b8c40, $b8d40
+Pals_b8c40: ; b8c40 (2e:4c40)
+	rgb  0, 14, 28
+	rgb  0,  5, 19
+	rgb  6, 17, 31
+	rgb  0,  0,  0
+
+	rgb  0, 14, 28
+	rgb 31, 29, 18
+	rgb 29, 14,  3
+	rgb  0,  0,  0
+
+	rgb  0, 14, 28
+	rgb 31, 31, 31
+	rgb 13, 24, 31
+	rgb  0,  0,  0
+
+	rgb  0, 14, 28
+	rgb 31, 27, 11
+	rgb 31, 14,  1
+	rgb  0,  0,  0
+
+	rgb  0, 14, 28
+	rgb 29, 14,  3
+	rgb 16,  2,  0
+	rgb  0,  0,  0
+
+	rgb  0, 14, 28
+	rgb 31, 28,  0
+	rgb 31,  0,  0
+	rgb  0,  0,  0
+
+	rgb  0, 14, 28
+	rgb 27, 31, 17
+	rgb  3, 20,  3
+	rgb  0,  3,  0
+
+	rgb  0, 14, 28
+	rgb 23, 31, 31
+	rgb  6, 17, 31
+	rgb  0,  0,  0
+; 0xb8c80
+
+	INCROM $b8c80, $b8d40
 
 Pals_b8d40: ; b8d40 (2e:4d40)
 	rgb  0, 22, 16
@@ -642,7 +932,91 @@ Pals_b8dc0: ; b8dc0 (2e:4dc0)
 	rgb  0,  0,  0
 ; 0xb8e00
 
-	INCROM $b8e00, $b8ec0
+Pals_b8e00: ; b8e00 (2e:4e00)
+	rgb  0, 22, 16
+	rgb 10, 10, 10
+	rgb 21, 21, 21
+	rgb 31, 31, 31
+
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb  2,  1, 18
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 13, 24, 31
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 27, 11
+	rgb 31, 14,  1
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 24, 28, 31
+	rgb 12, 13, 23
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 12, 13, 23
+	rgb  2,  1, 20
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 21, 21, 21
+	rgb 10, 10, 10
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 19, 20, 27
+	rgb  2,  1, 18
+	rgb  0,  0,  0
+; 0xb8e40
+
+	INCROM $b8e40, $b8e80
+
+Pals_b8e80: ; b8e80 (2e:4e80)
+	rgb  0, 22, 16
+	rgb 10, 10, 10
+	rgb 21, 21, 21
+	rgb 31, 31, 31
+
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 31, 31, 31
+	rgb 31, 31, 31
+
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 23, 22, 23
+	rgb 20, 20, 20
+
+	rgb  0, 22, 16
+	rgb 28, 28, 31
+	rgb 25, 27, 27
+	rgb 20, 20, 20
+
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 11, 11, 16
+	rgb 10, 10, 10
+
+	rgb  0, 22, 16
+	rgb 26, 27, 31
+	rgb 18, 22, 26
+	rgb 10, 10, 10
+
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb  0,  2,  9
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 23, 25, 31
+	rgb 11, 18, 24
+	rgb  0,  0,  0
+; 0xb8ec0
 
 Pals_b8ec0: ; b8ec0 (2e:4ec0)
 	rgb  0, 22, 16
@@ -720,7 +1094,13 @@ BGMap_b92c2:: ; b92c2 (2e:52c2)
 	INCBIN "gfx/bgmaps/map_b92c2.bin"
 ; 0xb9310
 
-	INCROM $b9310, $b93c8
+BGMap_b9310:: ; b9310 (2e:5310)
+	INCBIN "gfx/bgmaps/map_b9310.bin"
+; 0xb936c
+
+BGMap_b936c:: ; b936c (2e:536c)
+	INCBIN "gfx/bgmaps/map_b936c.bin"
+; 0xb93c8
 
 BGMap_b93c8:: ; b93c8 (2e:53c8)
 	INCBIN "gfx/bgmaps/map_b93c8.bin"
@@ -746,7 +1126,25 @@ BGMap_b956d:: ; b956d (2e:556d)
 	INCBIN "gfx/bgmaps/map_b956d.bin"
 ; 0xb9635
 
-	INCROM $b9635, $b9dea
+	INCROM $b9635, $b9920
+
+BGMap_b9920:: ; b9920 (2e:5920)
+	INCBIN "gfx/bgmaps/map_b9920.bin"
+; 0xb996e
+
+BGMap_b996e:: ; b996e (2e:596e)
+	INCBIN "gfx/bgmaps/map_b996e.bin"
+; 0xb99aa
+
+BGMap_b99aa:: ; b99aa (2e:59aa)
+	INCBIN "gfx/bgmaps/map_b99aa.bin"
+; 0xb99e8
+
+BGMap_b99e8:: ; b99e8 (2e:59e8)
+	INCBIN "gfx/bgmaps/map_b99e8.bin"
+; 0xb9a22
+
+	INCROM $b9a22, $b9dea
 
 BGMap_b9dea:: ; b9dea (2e:5dea)
 	INCBIN "gfx/bgmaps/map_b9dea.bin"

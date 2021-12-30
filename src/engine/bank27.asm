@@ -73,9 +73,9 @@ Func_9c072: ; 9c072 (27:4072)
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld a, BANK(Cutscenes1Gfx)
+	ld a, BANK(Cutscenes6Gfx)
 	ld [wTempBank], a
-	ld hl, Cutscenes1Gfx
+	ld hl, Cutscenes6Gfx
 	ld bc, v1Tiles0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
@@ -91,7 +91,7 @@ Func_9c072: ; 9c072 (27:4072)
 .table
 	dw Func_9c000 ; CUTSCENE_00
 	dw InitPrologueSequence ; CUTSCENE_01
-	dw LoadPrologueGfx ; CUTSCENE_02
+	dw Func_9c16e ; CUTSCENE_02
 	dw Func_9c187 ; CUTSCENE_03
 	dw Func_9c19d ; CUTSCENE_04
 	dw Func_9c000 ; CUTSCENE_05
@@ -105,20 +105,20 @@ Func_9c072: ; 9c072 (27:4072)
 	dw Func_9c2d3 ; CUTSCENE_0D
 	dw Func_9c2ec ; CUTSCENE_0E
 	dw Func_9c000 ; CUTSCENE_0F
-	dw $427a ; CUTSCENE_10
-	dw $4305 ; CUTSCENE_11
+	dw Func_9c27a ; CUTSCENE_10
+	dw Func_9c305 ; CUTSCENE_11
 	dw Func_9c000 ; CUTSCENE_12
-	dw $431e ; CUTSCENE_13
-	dw $4339 ; CUTSCENE_14
-	dw $4357 ; CUTSCENE_15
+	dw Func_9c31e ; CUTSCENE_13
+	dw Func_9c339 ; CUTSCENE_14
+	dw Func_9c357 ; CUTSCENE_15
 	dw Func_9c000 ; CUTSCENE_16
-	dw $4284 ; CUTSCENE_17
+	dw Func_9c284 ; CUTSCENE_17
 	dw $457a ; CUTSCENE_18
 	dw $4386 ; CUTSCENE_19
 	dw Func_9c000 ; CUTSCENE_1A
 	dw $439c ; CUTSCENE_1B
 	dw Func_9c000 ; CUTSCENE_1C
-	dw $427f ; CUTSCENE_1D
+	dw Func_9c27f ; CUTSCENE_1D
 	dw $4423 ; CUTSCENE_1E
 	dw $45a6 ; CUTSCENE_1F
 	dw Func_9c000 ; CUTSCENE_20
@@ -126,7 +126,7 @@ Func_9c072: ; 9c072 (27:4072)
 	dw $4476 ; CUTSCENE_22
 	dw Func_9c000 ; CUTSCENE_23
 	dw $44b9 ; CUTSCENE_24
-	dw $4289 ; CUTSCENE_25
+	dw Func_9c289 ; CUTSCENE_25
 	dw Func_9c000 ; CUTSCENE_26
 	dw $44e1 ; CUTSCENE_27
 	dw Func_9c000 ; CUTSCENE_28
@@ -187,15 +187,14 @@ InitPrologueSequence: ; 9c15e (27:415e)
 	ret
 ; 0x9c16e
 
-LoadPrologueGfx: ; 9c16e (27:416e)
+Func_9c16e: ; 9c16e (27:416e)
 	ld b, BANK(Pals_b8200)
 	ld hl, Pals_b8200
 	call LoadFarPalsToTempPals1
 	ld b, BANK(Pals_b8c00)
 	ld hl, Pals_b8c00
 	call LoadFarPalsToTempPals2
-
-	call Func_9c832
+	call LoadCutscenes1Gfx
 	call Func_9ca6a
 	jp Func_9cba2
 ; 0x9c187
@@ -207,7 +206,7 @@ Func_9c187: ; 9c187 (27:4187)
 	ld b, BANK(Pals_b88c0)
 	ld hl, Pals_b88c0
 	call LoadFarPalsToTempPals2
-	call LoadCutscenes8Gfx
+	call LoadCutscenes3Gfx
 	jp Func_9ca84
 ; 0x9c19d
 
@@ -218,13 +217,13 @@ Func_9c19d: ; 9c19d (27:419d)
 	ld b, BANK(Pals_b8ec0)
 	ld hl, Pals_b8ec0
 	call LoadFarPalsToTempPals2
-	call Func_9c959
+	call LoadCutscenes8Gfx
 	call Func_9ca6a
 	jp Func_9cba2
 ; 0x9c1b6
 
 Func_9c1b6: ; 9c1b6 (27:41b6)
-	call LoadCutscenes8Gfx
+	call LoadCutscenes3Gfx
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld a, BANK(BGMap_b956d)
@@ -255,7 +254,7 @@ Func_9c1b6: ; 9c1b6 (27:41b6)
 ; 0x9c209
 
 Func_9c209: ; 9c209 (27:4209)
-	call Func_9c832
+	call LoadCutscenes1Gfx
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld a, BANK(BGMap_b9424)
@@ -287,6 +286,9 @@ Func_9c209: ; 9c209 (27:4209)
 
 Func_9c25c: ; 9c25c (27:425c)
 	ld hl, Pals_b8ac0
+;	fallthrough
+
+Func_9c25f: ; 9c25f (27:425f)
 	ld b, BANK(Pals_b8ac0)
 	call LoadFarPalsToTempPals2
 	ld hl, Pals_b8200
@@ -295,12 +297,30 @@ Func_9c25c: ; 9c25c (27:425c)
 
 	ld a, LCDC_BG9C00
 	ld [w2d800], a
-	call LoadCutscenes7Gfx
+	call LoadCutscenes2Gfx
 	call Func_9ca6a
 	jp Func_9cbaf
 ; 0x9c27a
 
-	INCROM $9c27a, $9c28e
+Func_9c27a: ; 9c27a (27:427a)
+	ld hl, Pals_b8b00
+	jr Func_9c25f
+; 0x9c27f
+
+Func_9c27f: ; 9c27f (27:427f)
+	ld hl, Pals_b8b80
+	jr Func_9c25f
+; 0x9c284
+
+Func_9c284: ; 9c284 (27:4284)
+	ld hl, Pals_b8b40
+	jr Func_9c25f
+; 0x9c289
+
+Func_9c289: ; 9c289 (27:4289)
+	ld hl, Pals_b8bc0
+	jr Func_9c25f
+; 0x9c28e
 
 Func_9c28e: ; 9c28e (27:428e)
 	ld b, BANK(Pals_b8200)
@@ -309,7 +329,7 @@ Func_9c28e: ; 9c28e (27:428e)
 	ld b, BANK(Pals_b8a80)
 	ld hl, Pals_b8a80
 	call LoadFarPalsToTempPals2
-	call LoadCutscenes7Gfx
+	call LoadCutscenes2Gfx
 	jp Func_9ca77
 ; 0x9c2a4
 
@@ -320,7 +340,7 @@ Func_9c2a4: ; 9c2a4 (27:42a4)
 	ld b, BANK(Pals_b8a00)
 	ld hl, Pals_b8a00
 	call LoadFarPalsToTempPals2
-	call Func_9c832
+	call LoadCutscenes1Gfx
 	call Func_9ca77
 	jp Func_9d0e6
 ; 0x9c2bd
@@ -332,7 +352,7 @@ Func_9c2bd: ; 9c2bd (27:42bd)
 	ld b, BANK(Pals_b8d40)
 	ld hl, Pals_b8d40
 	call LoadFarPalsToTempPals2
-	call LoadCutscenes9Gfx
+	call LoadCutscenes4Gfx
 	jp Func_9ca77
 ; 0x9c2d3
 
@@ -343,7 +363,7 @@ Func_9c2d3: ; 9c2d3 (27:42d3)
 	ld b, BANK(Pals_b8dc0)
 	ld hl, Pals_b8dc0
 	call LoadFarPalsToTempPals2
-	call LoadCutscenes9Gfx
+	call LoadCutscenes4Gfx
 	call Func_9ca6a
 	jp Func_9cba2
 ; 0x9c2ec
@@ -355,28 +375,88 @@ Func_9c2ec: ; 9c2ec (27:42ec)
 	ld b, BANK(Pals_b8980)
 	ld hl, Pals_b8980
 	call LoadFarPalsToTempPals2
-	call Func_9c832
+	call LoadCutscenes1Gfx
 	call Func_9ca77
 	jp Func_9cbe3
 ; 0x9c305
 
-	INCROM $9c305, $9c832
+Func_9c305: ; 9c305 (27:4305)
+	ld b, BANK(Pals_b8040)
+	ld hl, Pals_b8040
+	call LoadFarPalsToTempPals1
+	ld b, BANK(Pals_b8c40)
+	ld hl, Pals_b8c40
+	call LoadFarPalsToTempPals2
+	call LoadCutscenes1Gfx
+	call Func_9ca77
+	jp Func_9cbe3
+; 0x9c31e
 
-Func_9c832: ; 9c832 (27:4832)
-	ld a, BANK(Cutscenes6Gfx)
+Func_9c31e: ; 9c31e (27:431e)
+	ld b, BANK(Pals_b8040)
+	ld hl, Pals_b8040
+	call LoadFarPalsToTempPals1
+	ld b, BANK(Pals_b8e00)
+	ld hl, Pals_b8e00
+	call LoadFarPalsToTempPals2
+	ld a, LCDC_BG9C00
+	ld [w2d800], a
+	call LoadCutscenes4Gfx
+	jp Func_9cbbc
+; 0x9c339
+
+Func_9c339: ; 9c339 (27:4339)
+	ld b, BANK(Pals_b8200)
+	ld hl, Pals_b8200
+	call LoadFarPalsToTempPals1
+	ld b, BANK(Pals_b8a40)
+	ld hl, Pals_b8a40
+	call LoadFarPalsToTempPals2
+	ld a, LCDC_BG9C00
+	ld [w2d800], a
+	call LoadCutscenes2Gfx
+	call Func_9ca6a
+	jp Func_9cbbc
+; 0x9c357
+
+Func_9c357: ; 9c357 (27:4357)
+	ld b, BANK(Pals_b81c0)
+	ld hl, Pals_b81c0
+	call LoadFarPalsToTempPals1
+	ld b, BANK(Pals_b8e80)
+	ld hl, Pals_b8e80
+	call LoadFarPalsToTempPals2
+	ld a, LCDC_WINON
+	ld [w2d800], a
+	ld a, $28
+	ldh [rWY], a
+	ld [w2d022], a
+	ld a, $57
+	ldh [rWX], a
+	ld [w2d023], a
+	call LoadCutscenes2Gfx
+	call Func_9cbc9
+	call Func_9ca9e
+	jp Func_9da0e
+; 0x9c386
+
+	INCROM $9c386, $9c832
+
+LoadCutscenes1Gfx: ; 9c832 (27:4832)
+	ld a, BANK(Cutscenes1Gfx)
 	ld [wTempBank], a
-	ld hl, Cutscenes6Gfx
+	ld hl, Cutscenes1Gfx
 	ld bc, v0Tiles0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	hcall Decompress
-	jr Func_9c8cd
+	jr LoadCutscenes5Gfx
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld a, BANK(Cutscenes6Gfx)
+	ld a, BANK(Cutscenes1Gfx)
 	ld [wTempBank], a
-	ld hl, Cutscenes6Gfx
+	ld hl, Cutscenes1Gfx
 	ld bc, v1Tiles0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
@@ -387,43 +467,43 @@ Func_9c832: ; 9c832 (27:4832)
 	jr Func_9c8e9
 ; 0x9c873
 
-LoadCutscenes7Gfx: ; 9c873 (27:4873)
-	ld a, BANK(Cutscenes7Gfx)
+LoadCutscenes2Gfx: ; 9c873 (27:4873)
+	ld a, BANK(Cutscenes2Gfx)
 	ld [wTempBank], a
-	ld hl, Cutscenes7Gfx
+	ld hl, Cutscenes2Gfx
 	ld bc, v0Tiles0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	hcall Decompress
-	jp Func_9c8cd ; can be jr
+	jp LoadCutscenes5Gfx ; can be jr
 ; 0x9c891
 
-LoadCutscenes8Gfx: ; 9c891 (27:4891)
-	ld a, BANK(Cutscenes8Gfx)
+LoadCutscenes3Gfx: ; 9c891 (27:4891)
+	ld a, BANK(Cutscenes3Gfx)
 	ld [wTempBank], a
-	ld hl, Cutscenes8Gfx
+	ld hl, Cutscenes3Gfx
 	ld bc, v0Tiles0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	hcall Decompress
-	jp Func_9c8cd ; can be jr
+	jp LoadCutscenes5Gfx ; can be jr
 ; 0x9c8af
 
-LoadCutscenes9Gfx: ; 9c8af (27:48af)
-	ld a, BANK(Cutscenes9Gfx)
+LoadCutscenes4Gfx: ; 9c8af (27:48af)
+	ld a, BANK(Cutscenes4Gfx)
 	ld [wTempBank], a
-	ld hl, Cutscenes9Gfx
+	ld hl, Cutscenes4Gfx
 	ld bc, v0Tiles0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	hcall Decompress
-	jp Func_9c8cd ; unnecessary jump
+	jp LoadCutscenes5Gfx ; unnecessary jump
 ; 0x9c8cd
 
-Func_9c8cd: ; 9c8cd (27:48cd)
-	ld a, BANK(Cutscenes10Gfx)
+LoadCutscenes5Gfx: ; 9c8cd (27:48cd)
+	ld a, BANK(Cutscenes5Gfx)
 	ld [wTempBank], a
-	ld hl, Cutscenes10Gfx
+	ld hl, Cutscenes5Gfx
 	ld bc, v0Tiles2
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
@@ -434,9 +514,9 @@ Func_9c8cd: ; 9c8cd (27:48cd)
 Func_9c8e9: ; 9c8e9 (27:48e9)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld a, BANK(Cutscenes10Gfx)
+	ld a, BANK(Cutscenes5Gfx)
 	ld [wTempBank], a
-	ld hl, Cutscenes10Gfx
+	ld hl, Cutscenes5Gfx
 	ld bc, v1Tiles2
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
@@ -449,27 +529,28 @@ Func_9c8e9: ; 9c8e9 (27:48e9)
 
 	INCROM $9c90c, $9c959
 
-Func_9c959: ; 9c959 (27:4959)
-	ld a, BANK(Cutscenes3Gfx)
+LoadCutscenes8Gfx: ; 9c959 (27:4959)
+	ld a, BANK(Cutscenes8Gfx)
 	ld [wTempBank], a
-	ld hl, Cutscenes3Gfx
+	ld hl, Cutscenes8Gfx
 	ld bc, v0Tiles0
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	hcall Decompress
-	jp Func_9c8cd
+	jp LoadCutscenes5Gfx
 ; 0x9c977
 
 	INCROM $9c977, $9ca41
 
-Func_9ca41: ; 9ca41 (27:4a41)
+LoadCutsceneAttrmap0: ; 9ca41 (27:4a41)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 ;	fallthrough
-Func_9ca45: ; 9ca45 (27:4a45)
+LoadCutsceneTilemap0: ; 9ca45 (27:4a45)
 	ld bc, v0BGMap0
 ;	fallthrough
-Func_9ca48: ; 9ca48 (27:4a48)
+
+LoadCutsceneBGMap: ; 9ca48 (27:4a48)
 	ld a, $2e
 	ld [wTempBank], a
 	ld a, [wTempBank]
@@ -480,64 +561,90 @@ Func_9ca48: ; 9ca48 (27:4a48)
 	ret
 ; 0x9ca61
 
-Func_9ca61: ; 9ca61 (27:4a61)
+LoadCutsceneAttrmap1: ; 9ca61 (27:4a61)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 ;	fallthrough
-Func_9ca65: ; 9ca65 (27:4a65)
+LoadCutsceneTilemap1: ; 9ca65 (27:4a65)
 	ld bc, v0BGMap1
-	jr Func_9ca48
+	jr LoadCutsceneBGMap
 ; 0x9ca6a
 
 Func_9ca6a: ; 9ca6a (27:4a6a)
 	ld hl, BGMap_b9113
-	call Func_9ca41
+	call LoadCutsceneAttrmap0
 	ld hl, BGMap_b9100
-	call Func_9ca45
+	call LoadCutsceneTilemap0
 	ret
 ; 0x9ca77
 
 Func_9ca77: ; 9ca77 (27:4a77)
 	ld hl, BGMap_b9235
-	call Func_9ca41
+	call LoadCutsceneAttrmap0
 	ld hl, BGMap_b91e7
-	call Func_9ca45
+	call LoadCutsceneTilemap0
 	ret
 ; 0x9ca84
 
 Func_9ca84: ; 9ca84 (27:4a84)
 	ld hl, BGMap_b94d1
-	call Func_9ca41
+	call LoadCutsceneAttrmap0
 	ld hl, BGMap_b9475
-	call Func_9ca45
+	call LoadCutsceneTilemap0
 	ret
 ; 0x9ca91
 
-	INCROM $9ca91, $9cba2
+	INCROM $9ca91, $9ca9e
+
+Func_9ca9e: ; 9ca9e (27:4a9e)
+	ld hl, BGMap_b996e
+	call LoadCutsceneAttrmap0
+	ld hl, BGMap_b9920
+	call LoadCutsceneTilemap0
+	ret
+; 0x9caab
+
+	INCROM $9caab, $9cba2
 
 Func_9cba2: ; 9cba2 (27:4ba2)
 	ld hl, BGMap_b919b
-	call Func_9ca61
+	call LoadCutsceneAttrmap1
 	ld hl, BGMap_b914a
-	call Func_9ca65
+	call LoadCutsceneTilemap1
 	ret
 ; 0x9cbaf
 
 Func_9cbaf: ; 9cbaf (27:4baf)
 	ld hl, BGMap_b92c2
-	call Func_9ca61
+	call LoadCutsceneAttrmap1
 	ld hl, BGMap_b926d
-	call Func_9ca65
+	call LoadCutsceneTilemap1
 	ret
 ; 0x9cbbc
 
-	INCROM $9cbbc, $9cbe3
+Func_9cbbc: ; 9cbbc (27:4bbc)
+	ld hl, BGMap_b936c
+	call LoadCutsceneAttrmap1
+	ld hl, BGMap_b9310
+	call LoadCutsceneTilemap1
+	ret
+; 0x9cbc9
+
+Func_9cbc9: ; 9cbc9 (27:4bc9)
+	ld hl, BGMap_b99e8
+	call LoadCutsceneAttrmap1
+	ld hl, BGMap_b99aa
+	call LoadCutsceneTilemap1
+	ret
+; 0x9cbd6
+
+	INCROM $9cbd6, $9cbe3
 
 Func_9cbe3: ; 9cbe3 (27:4be3)
 	ld hl, BGMap_b9e3b
-	call Func_9ca61
+	call LoadCutsceneAttrmap1
 	ld hl, BGMap_b9dea
-	call Func_9ca65
+	call LoadCutsceneTilemap1
 	ret
 ; 0x9cbf0
 
@@ -593,7 +700,62 @@ VBlank_9cc9c: ; 9cc9c (27:4c9c)
 .func_end
 ; 0x9ccf9
 
-	INCROM $9ccf9, $9ce28
+	INCROM $9ccf9, $9cd03
+
+Func_9cd03: ; 9cd03 (27:4d03)
+	ld hl, w2d014
+	xor a
+	ld [hld], a
+	inc [hl]
+	ret
+; 0x9cd0a
+
+Func_9cd0a: ; 9cd0a (27:4d0a)
+	ld a, [w2d014]
+	cp c
+	ret c
+	jr Func_9cd03
+; 0x9cd11
+
+Func_9cd11: ; 9cd11 (27:4d11)
+	ld c, $1e
+	jp Func_9cd0a
+; 0x9cd16
+
+Func_9cd16: ; 9cd16 (27:4d16)
+	ld hl, wSubState
+	inc [hl]
+	stop_sfx
+	ret
+; 0x9cd23
+
+	INCROM $9cd23, $9cd25
+
+Func_9cd25: ; 9cd25 (27:4d25)
+	ld a, [w2d014]
+	cp e
+	ret c
+	jr Func_9cd16
+; 0x9cd2c
+
+Func_9cd2c: ; 9cd2c (27:4d2c)
+	ld e, $28
+	jr Func_9cd25
+; 0x9cd30
+
+	INCROM $9cd30, $9cd8d
+
+Func_9cd8d: ; 9cd8d (27:4d8d)
+	farcall Func_85046
+	ret
+; 0x9cd9d
+
+	INCROM $9cd9d, $9ce1f
+
+Func_9ce1f: ; 9ce1f (27:4e1f)
+	play_sfx SFX_112
+	ret
+; 0x9ce28
 
 Func_9ce28: ; 9ce28 (27:4e28)
 	call ProcessDPadRepeat
@@ -607,9 +769,9 @@ Func_9ce28: ; 9ce28 (27:4e28)
 	jp nc, .OutOfBoundsCutscene
 	jumptable
 	dw .InvalidCutscene ; CUTSCENE_00
-	dw .Func_9cef6 ; CUTSCENE_01
-	dw $5797 ; CUTSCENE_02
-	dw $4f06 ; CUTSCENE_03
+	dw Func_9cef6 ; CUTSCENE_01
+	dw Func_9d797 ; CUTSCENE_02
+	dw Func_9cf06 ; CUTSCENE_03
 	dw $5b03 ; CUTSCENE_04
 	dw .InvalidCutscene ; CUTSCENE_05
 	dw $502d ; CUTSCENE_06
@@ -704,21 +866,170 @@ Func_9ce28: ; 9ce28 (27:4e28)
 .InvalidCutscene
 	debug_nop
 
-.Func_9cef6
+Func_9cef6: ; 9cef6 (27:4ef6)
 	farcall Func_adfa3
 	ret
 ; 0x9cf06
 
-	INCROM $9cf06, $9d01a
+Func_9cf06: ; 9cf06 (27:4f06)
+	call Func_9cf0c
+	jp Func_9f0e0
+; 0x9cf0c
+
+Func_9cf0c: ; 9cf0c (27:4f0c)
+	ld a, [w2d013]
+	jumptable
+	dw Func_9cd11
+	dw .Func_9cf36
+	dw .Func_9cf59
+	dw .Func_9cf6c
+	dw .Func_9cf71
+	dw .Func_9cf8d
+	dw .Func_9cf92
+	dw .Func_9cfad
+	dw .Func_9cfb5
+	dw .Func_9cfba
+	dw .Func_9cfc9
+	dw .Func_9cfce
+	dw .Func_9cfe5
+	dw .Func_9cfea
+	dw .Func_9d001
+	dw .Func_9d00a
+	dw .Func_9d015
+	dw Func_9cd8d
+	dw Func_9cd2c
+
+.Func_9cf36
+	ld hl, wSceneObj2
+	ld a, $3b
+	ld [hli], a
+	ld [hl], $28
+	ld a, $01
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld hl, wSceneObj3
+	ld a, $3b
+	ld [hli], a
+	ld [hl], $78
+	ld a, $02
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	jp Func_9cd03
+
+.Func_9cf59
+	ld a, [bc]
+	bit 0, a
+	ret nz
+	ld hl, wSceneObj3XCoord
+	dec [hl]
+	ld hl, wSceneObj2XCoord
+	inc [hl]
+	ld a, [hl]
+	cp $4f
+	ret nz
+	jp Func_9cd03
+
+.Func_9cf6c
+	ld c, $1e
+	jp Func_9cd0a
+
+.Func_9cf71
+	ld a, $03
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld a, $50
+	ld [wSceneObj2XCoord], a
+	xor a
+	ld [wSceneObj3State], a
+	play_sfx SFX_062
+	jp Func_9cd03
+
+.Func_9cf8d
+	ld c, $1e
+	jp Func_9cd0a
+
+.Func_9cf92
+	ld hl, wSceneObj3YCoord
+	ld a, $3b
+	ld [hli], a
+	ld [hl], $50
+	ld a, $05
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	play_sfx SFX_106
+	jp Func_9cd03
+
+.Func_9cfad
+	ld a, [wSceneObj3State]
+	and a
+	ret nz
+	jp Func_9cd03
+
+.Func_9cfb5
+	ld c, $3c
+	jp Func_9cd0a
+
+.Func_9cfba
+	ld a, [bc]
+	bit 0, a
+	ret z
+	ld hl, wSceneObj2YCoord
+	inc [hl]
+	ld a, [hl]
+	cp $54
+	ret nz
+	jp Func_9cd03
+
+.Func_9cfc9
+	ld c, $3c
+	jp Func_9cd0a
+
+.Func_9cfce
+	ld a, $04
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld hl, wSceneObj2XCoord
+	inc [hl]
+	play_sfx SFX_062
+	jp Func_9cd03
+
+.Func_9cfe5
+	ld c, $1e
+	jp Func_9cd0a
+
+.Func_9cfea
+	ld a, [wSceneObj2YCoord]
+	ld [wSceneObj3YCoord], a
+	ld a, [wSceneObj2XCoord]
+	ld [wSceneObj3XCoord], a
+	ld a, $06
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	jp Func_9cd03
+
+.Func_9d001
+	ld a, [wSceneObj3State]
+	cp $07
+	ret nz
+	jp Func_9cd03
+
+.Func_9d00a
+	play_sfx SFX_10C
+	jp Func_9cd03
+
+.Func_9d015
+	ld c, $1e
+	jp Func_9cd0a
+; 0x9d01a
 
 Func_9d01a: ; 9d01a (27:501a)
-	ld hl, wOWObj2
+	ld hl, wSceneObj2
 	ld a, $48
 	ld [hli], a
 	ld [hl], $50
 	ld a, $01
-	ld hl, wOWObj2Unk6
-	call Func_3b93
+	ld hl, wSceneObj2State
+	call SetSceneObjState
 	jp Func_9f11e
 ; 0x9d02d
 
@@ -726,54 +1037,165 @@ Func_9d01a: ; 9d01a (27:501a)
 
 Func_9d0e6: ; 9d0e6 (27:50e6)
 	ld a, $03
-	ld [wOWObj1], a
-	ld hl, wOWObj2
+	ld [wSceneObj1], a
+	ld hl, wSceneObj2
 	ld a, $82
 	ld [hli], a
 	ld [hl], $71
 	ld a, $01
-	ld hl, wOWObj2Unk6
-	call Func_3b93
-	ld hl, wOWObj3
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld hl, wSceneObj3
 	ld a, $82
 	ld [hli], a
 	ld [hl], $2f
 	ld a, $02
-	ld hl, wOWObj3Unk6
-	call Func_3b93
+	ld hl, wSceneObj3State
+	call SetSceneObjState
 	jp Func_9f146
 ; 0x9d10e
 
 	INCROM $9d10e, $9d158
 
 Func_9d158: ; 9d158 (27:5158)
-	ld hl, wOWObj2
+	ld hl, wSceneObj2
 	ld a, $58
 	ld [hli], a
 	ld [hl], $54
 	ld a, $09
-	ld hl, wOWObj2Unk6
-	call Func_3b93
+	ld hl, wSceneObj2State
+	call SetSceneObjState
 
-	ld hl, wOWObj3
+	ld hl, wSceneObj3
 	ld a, $43
 	ld [hli], a
 	ld [hl], $40
 	ld a, $03
-	ld hl, wOWObj3Unk6
-	call Func_3b93
+	ld hl, wSceneObj3State
+	call SetSceneObjState
 
-	ld hl, wOWObj4
+	ld hl, wSceneObj4
 	ld a, $58
 	ld [hli], a
 	ld [hl], $54
 	ld a, $0a
-	ld hl, wOWObj4Unk6
-	call Func_3b93
+	ld hl, wSceneObj4State
+	call SetSceneObjState
 	jp Func_9f174
 ; 0x9d18b
 
-	INCROM $9d18b, $9f0a5
+	INCROM $9d18b, $9d797
+
+Func_9d797: ; 9d797 (27:5797)
+	call Func_9d79d
+	jp Func_9fc58
+; 0x9d79d
+
+Func_9d79d: ; 9d79d (27:579d)
+	ld a, [w2d013]
+	jumptable
+	dw Func_9cd11
+	dw .Func_9d7b7
+	dw .Func_9d7cf
+	dw .Func_9d7e1
+	dw .Func_9d7e6
+	dw .Func_9d7ee
+	dw .Func_9d7f3
+	dw .Func_9d806
+	dw .Func_9d80b
+	dw .Func_9d826
+	dw Func_9cd2c
+
+.Func_9d7b7
+	ld hl, wSceneObj2
+	ld a, $90
+	ld [hli], a
+	ld [hl], $6c
+	ld a, $01
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld a, $03
+	ld [wSceneObj1YCoord], a
+	jp Func_9cd03
+
+.Func_9d7cf
+	ld hl, wSceneObj2
+	dec [hl]
+	ld a, [hl]
+	inc l
+	dec [hl]
+	cp $86
+	jp z, Func_9ce1f
+	cp $60
+	ret nz
+	jp Func_9cd03
+
+.Func_9d7e1
+	ld c, $1e
+	jp Func_9cd0a
+
+.Func_9d7e6
+	ld a, LCDC_BG9C00
+	ld [w2d800], a
+	jp Func_9cd03
+
+.Func_9d7ee
+	ld c, $3c
+	jp Func_9cd0a
+
+.Func_9d7f3
+	ld a, LCDC_BG9C00
+	ld [w2d800], a
+	xor a
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	xor a
+	ld [wSceneObj1YCoord], a
+	jp Func_9cd03
+
+.Func_9d806
+	ld c, $10
+	jp Func_9cd0a
+
+.Func_9d80b
+	ld hl, wSceneObj2
+	ld a, $60
+	ld [hli], a
+	ld [hl], $42
+	ld a, $02
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	play_sfx SFX_101
+	jp Func_9cd03
+
+.Func_9d826
+	ld a, [wSceneObj2State]
+	and a
+	ret nz
+	jp Func_9cd03
+; 0x9d82e
+
+	INCROM $9d82e, $9da0e
+
+Func_9da0e: ; 9da0e (27:5a0e)
+	ld a, $05
+	ld hl, wSceneObj4State
+	call SetSceneObjState
+	ld hl, wSceneObj4
+	ld a, $60
+	ld [hli], a
+	ld [hl], $50
+	ld a, $06
+	ld hl, wSceneObj5State
+	call SetSceneObjState
+	ld hl, wSceneObj5
+	ld a, $60
+	ld [hli], a
+	ld [hl], $50
+	jp Func_9f38d
+; 0x9da31
+
+	INCROM $9da31, $9f0a5
 
 Func_9f0a5: ; 9f0a5 (27:70a5)
 	dec a
@@ -816,10 +1238,46 @@ Func_9f0d0: ; 9f0d0 (27:70d0)
 	ret
 ; 0x9f0e0
 
-	INCROM $9f0e0, $9f11e
+Func_9f0e0: ; 9f0e0 (27:70e0)
+	ld bc, wSceneObj3State
+	call .asm_9f0e9
+	ld bc, wSceneObj2State
+.asm_9f0e9
+	ld a, [bc]
+	and a
+	ret z
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0ae
+	cp $05
+	jr z, .asm_9f103
+	cp $06
+	jr z, .asm_9f107
+.asm_9f0fd
+	ld de, $51fd
+	jp Func_9f0bc
+.asm_9f103
+	ld b, $00
+	jr .asm_9f109
+.asm_9f107
+	ld b, $07
+.asm_9f109
+	call Func_9f0d0
+	jr z, .asm_9f0e9
+	jr .asm_9f0fd
+
+.framesets
+	dw $5348
+	dw $534b
+	dw $534e
+	dw $5351
+	dw $5354
+	dw $5363
+	dw $5372
+; 0x9f11e
 
 Func_9f11e: ; 9f11e (27:711e)
-	ld bc, wOWObj2Unk6
+	ld bc, wSceneObj2State
 .asm_9f121
 	ld a, [bc]
 	and a
@@ -847,13 +1305,13 @@ Func_9f11e: ; 9f11e (27:711e)
 ; 0x9f146
 
 Func_9f146: ; 9f146 (27:7146)
-	ld bc, wOWObj2Unk6
+	ld bc, wSceneObj2State
 	call .Func_9f15e
-	ld bc, wOWObj3Unk6
+	ld bc, wSceneObj3State
 	call .Func_9f15e
-	ld de, wOWObj2
+	ld de, wSceneObj2
 	call Func_9fb97
-	ld de, wOWObj3
+	ld de, wSceneObj3
 	jp Func_9fba0
 
 .Func_9f15e
@@ -872,20 +1330,20 @@ Func_9f146: ; 9f146 (27:7146)
 ; 0x9f174
 
 Func_9f174: ; 9f174 (27:7174)
-	ld bc, wOWObj4Unk6
+	ld bc, wSceneObj4State
 	call .Func_9f189
-	ld bc, wOWObj2Unk6
+	ld bc, wSceneObj2State
 	call .Func_9f189
-	ld bc, wOWObj3Unk6
+	ld bc, wSceneObj3State
 	call .Func_9f189
-	ld bc, wOWObj5Unk6
+	ld bc, wSceneObj5State
 ;	fallthrough
 
 .Func_9f189
 	ld a, [bc]
 	and a
 	ret z
-	ld hl, $71c4
+	ld hl, .framesets
 	call Func_9f0a5
 	call Func_9f0ae
 	cp $06
@@ -913,12 +1371,61 @@ Func_9f174: ; 9f174 (27:7174)
 	ret nz
 	play_sfx SFX_10A
 	ret
-; 0x9f1c4
 
-	INCROM $9f1c4, $9fb53
+.framesets
+	dw $55c3
+	dw $55cc
+	dw $55d5
+	dw $55d8
+	dw $55dd
+	dw $55e6
+	dw $5605
+	dw $5608
+	dw $560f
+	dw $5612
+; 0x9f1d8
+
+	INCROM $9f1d8, $9f38d
+
+Func_9f38d: ; 9f38d (27:738d)
+	ld bc, wSceneObj2State
+	call .asm_9f3a2
+	ld bc, wSceneObj3State
+	call .asm_9f3a2
+	ld bc, wSceneObj4State
+	call .asm_9f3a2
+	ld bc, wSceneObj5State
+.asm_9f3a2
+	ld a, [bc]
+	and a
+	ret z
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0ae
+	cp $04
+	jr z, .asm_9f3b8
+.asm_9f3b2
+	ld de, $5ce6
+	jp Func_9f0bc
+.asm_9f3b8
+	ld b, $01
+	call Func_9f0d0
+	jr z, .asm_9f3a2
+	jr .asm_9f3b2
+
+.framesets
+	dw $5dcc
+	dw $5dc3
+	dw $5dc6
+	dw $5da9
+	dw $5dc0
+	dw $5dc9
+; 0x9f3cd
+
+	INCROM $9f3cd, $9fb53
 
 Func_9fb53: ; 9fb53 (27:7b53)
-	ld a, [wOWObj1]
+	ld a, [wSceneObj1YCoord]
 	cp b
 	ret nz
 	ld a, [de]
@@ -954,4 +1461,37 @@ Func_9fba0: ; 9fba0 (27:7ba0)
 	jr Func_9fb53
 ; 0x9fba9
 
-	INCROM $9fba9, $a0000
+	INCROM $9fba9, $9fc58
+
+Func_9fc58: ; 9fc58 (27:7c58)
+.start
+	ld de, wSceneObj2
+	call Func_9fb97
+	ld hl, wSceneObj2State
+	ld a, [hld]
+	and a
+	ret z
+	dec l
+	ld b, $2f
+	dec a
+	jr z, .one
+	dec a
+	jr z, .two
+	; invalid value
+	debug_nop
+.one
+	ld de, $41f3
+	call UpdateOWAnimation
+	jr .asm_9fc85
+.two
+	ld de, $41e8
+	call UpdateOWAnimation
+	ld b, $00
+	call Func_9f0d0
+	jr z, .start
+.asm_9fc85
+	ld de, $4122
+	jp Func_9f0bc
+; 0x9fc8b
+
+	INCROM $9fc8b, $a0000

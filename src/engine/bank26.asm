@@ -483,15 +483,15 @@ _InitTreasureCollection: ; 9a3cf (26:63cf)
 	ld hl, v0BGMap1 + $22
 	farcall PrintNumberCollectedTreasures
 
-	ld hl, wOWObj1Unk6
+	ld hl, wSceneObj1State
 	ld a, $01
-	call Func_3b93
+	call SetSceneObjState
 	ld b, $10
 	ld a, $08
-	ld hl, wOWObj9XCoord
+	ld hl, wSceneObj9XCoord
 	ld [hld], a
 	ld [hl], b
-	ld hl, wOWObj10XCoord
+	ld hl, wSceneObj10XCoord
 	ld a, $98
 	ld [hld], a
 	ld [hl], b
@@ -721,12 +721,12 @@ HandleTreasureCollectionInput: ; 9a625 (26:6625)
 .SetScrollMode
 	ld a, TRUE
 	ld [wCollectionScrollMode], a
-	ld hl, wOWObj9Unk6
+	ld hl, wSceneObj9State
 	ld a, $03
-	call Func_3b93
-	ld hl, wOWObj10Unk6
+	call SetSceneObjState
+	ld hl, wSceneObj10State
 	ld a, $04
-	call Func_3b93
+	call SetSceneObjState
 	ret
 
 .a_right
@@ -756,8 +756,8 @@ HandleTreasureCollectionInput: ; 9a625 (26:6625)
 .no_a_btn
 	xor a
 	ld [wCollectionScrollMode], a
-	ld [wOWObj9Unk6], a
-	ld [wOWObj10Unk6], a
+	ld [wSceneObj9State], a
+	ld [wSceneObj10State], a
 
 	ld a, [wJoypadPressed]
 	ld b, a
@@ -808,13 +808,13 @@ HandleTreasureCollectionInput: ; 9a625 (26:6625)
 	play_sfx SFX_0E2
 
 	xor a
-	ld [wOWObj2Unk6], a
-	ld [wOWObj3Unk6], a
-	ld [wOWObj4Unk6], a
-	ld [wOWObj5Unk6], a
-	ld [wOWObj6Unk6], a
-	ld [wOWObj7Unk6], a
-	ld [wOWObj8Unk6], a
+	ld [wSceneObj2State], a
+	ld [wSceneObj3State], a
+	ld [wSceneObj4State], a
+	ld [wSceneObj5State], a
+	ld [wSceneObj6State], a
+	ld [wSceneObj7State], a
+	ld [wSceneObj8State], a
 
 	ld de, wCollectionLinkState
 	xor a
@@ -866,13 +866,13 @@ GetCollectionCellCoords: ; 9a76a (26:676a)
 	ld b, $00
 	add hl, bc
 	ld a, [hl]
-	ld [wOWObj1YCoord], a
+	ld [wSceneObj1YCoord], a
 	ld a, [wCollectionCol]
 	ld hl, .x_coords
 	ld c, a
 	add hl, bc
 	ld a, [hl]
-	ld [wOWObj1XCoord], a
+	ld [wSceneObj1XCoord], a
 	ret
 
 .y_coords
@@ -994,10 +994,10 @@ ProcessCollectionLinkState: ; 9a7c0 (26:67c0)
 	ld hl, wCollectionCell
 	cp [hl]
 	jr z, .asm_9a823
-	ld hl, wOWObj2YCoord
+	ld hl, wSceneObj2YCoord
 	call GetCollectionCellRowAndColumn
 	call .Func_9a8d8
-	ld de, wOWObj2YCoord
+	ld de, wSceneObj2YCoord
 	call Func_9a78e
 .asm_9a823
 	ld a, [wCollectionLinkedCells + 1]
@@ -1007,10 +1007,10 @@ ProcessCollectionLinkState: ; 9a7c0 (26:67c0)
 	ld hl, wCollectionCell
 	cp [hl]
 	jr z, .asm_9a840
-	ld hl, wOWObj3YCoord
+	ld hl, wSceneObj3YCoord
 	call GetCollectionCellRowAndColumn
 	call .Func_9a8d8
-	ld de, wOWObj3YCoord
+	ld de, wSceneObj3YCoord
 	call Func_9a78e
 .asm_9a840
 	ld a, [wCollectionLinkedCells + 2]
@@ -1020,10 +1020,10 @@ ProcessCollectionLinkState: ; 9a7c0 (26:67c0)
 	ld hl, wCollectionCell
 	cp [hl]
 	jr z, .asm_9a85d
-	ld hl, wOWObj3End
+	ld hl, wSceneObj3End
 	call GetCollectionCellRowAndColumn
 	call .Func_9a8d8
-	ld de, wOWObj3End
+	ld de, wSceneObj3End
 	call Func_9a78e
 .asm_9a85d
 	ld a, [wCollectionLinkedCells + 3]
@@ -1033,10 +1033,10 @@ ProcessCollectionLinkState: ; 9a7c0 (26:67c0)
 	ld hl, wCollectionCell
 	cp [hl]
 	jr z, .asm_9a87b
-	ld hl, wOWObj4End
+	ld hl, wSceneObj4End
 	call GetCollectionCellRowAndColumn
 	call .Func_9a8d8
-	ld de, wOWObj4End
+	ld de, wSceneObj4End
 	call Func_9a78e
 .asm_9a87b
 	ld a, [wCollectionLinkedCells + 4]
@@ -1046,10 +1046,10 @@ ProcessCollectionLinkState: ; 9a7c0 (26:67c0)
 	ld hl, wCollectionCell
 	cp [hl]
 	jr z, .asm_9a899
-	ld hl, wOWObj5End
+	ld hl, wSceneObj5End
 	call GetCollectionCellRowAndColumn
 	call .Func_9a8d8
-	ld de, wOWObj5End
+	ld de, wSceneObj5End
 	call Func_9a78e
 .asm_9a899
 	ld a, [wCollectionLinkedCells + 5]
@@ -1059,10 +1059,10 @@ ProcessCollectionLinkState: ; 9a7c0 (26:67c0)
 	ld hl, wCollectionCell
 	cp [hl]
 	jr z, .asm_9a8b7
-	ld hl, wOWObj6End
+	ld hl, wSceneObj6End
 	call GetCollectionCellRowAndColumn
 	call .Func_9a8d8
-	ld de, wOWObj6End
+	ld de, wSceneObj6End
 	call Func_9a78e
 .asm_9a8b7
 	ld a, [wCollectionLinkedCells + 6]
@@ -1072,10 +1072,10 @@ ProcessCollectionLinkState: ; 9a7c0 (26:67c0)
 	ld hl, wCollectionCell
 	cp [hl]
 	jr z, .asm_9a8d5
-	ld hl, wOWObj7End
+	ld hl, wSceneObj7End
 	call GetCollectionCellRowAndColumn
 	call .Func_9a8d8
-	ld de, wOWObj7End
+	ld de, wSceneObj7End
 	call Func_9a78e
 .asm_9a8d5
 	jp .AdvanceState
@@ -1083,7 +1083,7 @@ ProcessCollectionLinkState: ; 9a7c0 (26:67c0)
 .Func_9a8d8
 	set 2, l
 	ld a, $02
-	call Func_3b93
+	call SetSceneObjState
 	ret
 ; 0x9a8e0
 
@@ -1264,25 +1264,25 @@ Func_9a9f7: ; 9a9f7 (26:69f7)
 	INCROM $9a9fd, $9aa0d
 
 AnimateTreasureCollection: ; 9aa0d (26:6a0d)
-	ld bc, wOWObj1Unk6
+	ld bc, wSceneObj1State
 	call .Func_9aa4a
-	ld bc, wOWObj2Unk6
+	ld bc, wSceneObj2State
 	call .Func_9aa4a
-	ld bc, wOWObj3Unk6
+	ld bc, wSceneObj3State
 	call .Func_9aa4a
-	ld bc, wOWObj4Unk6
+	ld bc, wSceneObj4State
 	call .Func_9aa4a
-	ld bc, wOWObj5Unk6
+	ld bc, wSceneObj5State
 	call .Func_9aa4a
-	ld bc, wOWObj6Unk6
+	ld bc, wSceneObj6State
 	call .Func_9aa4a
-	ld bc, wOWObj7Unk6
+	ld bc, wSceneObj7State
 	call .Func_9aa4a
-	ld bc, wOWObj8Unk6
+	ld bc, wSceneObj8State
 	call .Func_9aa4a
-	ld bc, wOWObj9Unk6
+	ld bc, wSceneObj9State
 	call .Func_9aa4a
-	ld bc, wOWObj10Unk6
+	ld bc, wSceneObj10State
 	call .Func_9aa4a
 	ret
 

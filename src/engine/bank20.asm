@@ -2712,8 +2712,8 @@ Func_813f6: ; 813f6 (20:53f6)
 	srl c
 	ret c
 	ld a, $1c
-	ld hl, wOWObj13Unk6
-	call Func_3b93
+	ld hl, wSceneObj13State
+	call SetSceneObjState
 	jp Func_81398
 ; 0x81413
 
@@ -2721,15 +2721,15 @@ Func_81413: ; 81413 (20:5413)
 	ld a, [wJoypadPressed]
 	and B_BUTTON | D_RIGHT | D_LEFT | D_DOWN
 	jr nz, .asm_81423
-	ld hl, wOWObj13Unk6
+	ld hl, wSceneObj13State
 	ld a, [hl]
 	and a
 	jp z, Func_81398
 	ret
 .asm_81423
 	xor a
-	ld hl, wOWObj13Unk6
-	call Func_3b93
+	ld hl, wSceneObj13State
+	call SetSceneObjState
 	jp Func_81398
 ; 0x8142d
 
@@ -6236,7 +6236,7 @@ Func_82bb8: ; 82bb8 (20:6bb8)
 	ld a, [w2d028]
 	cp $01
 	ret nz
-	ld a, [w2d180Unk6]
+	ld a, [w2d180State]
 	and a
 	ret z
 	ld de, Frameset_aa544
@@ -6254,7 +6254,7 @@ Func_82bda: ; 82bda (20:6bda)
 	ld a, [w2d028]
 	cp $03
 	ret nz
-	ld a, [w2d180Unk6]
+	ld a, [w2d180State]
 	and a
 	ret z
 	ld hl, w2d180Duration
@@ -6270,7 +6270,7 @@ Func_82bda: ; 82bda (20:6bda)
 	call AddOWSpriteWithScroll
 	ret
 .asm_82c03
-	ld hl, w2d180Unk6
+	ld hl, w2d180State
 	xor a
 	ld [hl], a
 	ret

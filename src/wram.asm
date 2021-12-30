@@ -1620,7 +1620,7 @@ w2d117:: ; d117
 
 	ds $6
 
-wCurOWObj:: ; d11e
+wCurSceneObj:: ; d11e
 	ds $2
 
 	ds $4
@@ -1714,23 +1714,23 @@ w2d160:: ; d160
 
 	ds $18
 
-w2d180:: ow_obj_struct w2d180 ; d180
+w2d180:: scene_obj_struct w2d180 ; d180
 
-wOWObj1::  ow_obj_struct wOWObj1  ; d188
-wOWObj2::  ow_obj_struct wOWObj2  ; d190
-wOWObj3::  ow_obj_struct wOWObj3  ; d198
-wOWObj4::  ow_obj_struct wOWObj4  ; d1a0
-wOWObj5::  ow_obj_struct wOWObj5  ; d1a8
-wOWObj6::  ow_obj_struct wOWObj6  ; d1b0
-wOWObj7::  ow_obj_struct wOWObj7  ; d1b8
-wOWObj8::  ow_obj_struct wOWObj8  ; d1c0
-wOWObj9::  ow_obj_struct wOWObj9  ; d1c8
-wOWObj10:: ow_obj_struct wOWObj10 ; d1d0
-wOWObj11:: ow_obj_struct wOWObj11 ; d1d8
-wOWObj12:: ow_obj_struct wOWObj12 ; d1e0
-wOWObj13:: ow_obj_struct wOWObj13 ; d1e8
-wOWObj14:: ow_obj_struct wOWObj14 ; d1f0
-wOWObj15:: ow_obj_struct wOWObj15 ; d1f8
+wSceneObj1::  scene_obj_struct wSceneObj1  ; d188
+wSceneObj2::  scene_obj_struct wSceneObj2  ; d190
+wSceneObj3::  scene_obj_struct wSceneObj3  ; d198
+wSceneObj4::  scene_obj_struct wSceneObj4  ; d1a0
+wSceneObj5::  scene_obj_struct wSceneObj5  ; d1a8
+wSceneObj6::  scene_obj_struct wSceneObj6  ; d1b0
+wSceneObj7::  scene_obj_struct wSceneObj7  ; d1b8
+wSceneObj8::  scene_obj_struct wSceneObj8  ; d1c0
+wSceneObj9::  scene_obj_struct wSceneObj9  ; d1c8
+wSceneObj10:: scene_obj_struct wSceneObj10 ; d1d0
+wSceneObj11:: scene_obj_struct wSceneObj11 ; d1d8
+wSceneObj12:: scene_obj_struct wSceneObj12 ; d1e0
+wSceneObj13:: scene_obj_struct wSceneObj13 ; d1e8
+wSceneObj14:: scene_obj_struct wSceneObj14 ; d1f0
+wSceneObj15:: scene_obj_struct wSceneObj15 ; d1f8
 
 wAttrmap:: ; d200
 	ds $300

@@ -46,9 +46,9 @@ Func_b4014: ; b4014 (2d:4014)
 Func_b403e: ; b403e (2d:403e)
 	dec c
 	jr z, .asm_b404f
-	ld hl, wOWObj8
+	ld hl, wSceneObj8
 	ld de, .data
-	call InitOWObjParams
+	call InitSceneObjParams
 	jr .asm_b404f
 
 .data
@@ -63,20 +63,20 @@ Func_b4055: ; b4055 (2d:4055)
 	ld a, [w2d025]
 	and a
 	ret nz
-	ld hl, wOWObj15
+	ld hl, wSceneObj15
 	ld de, .data_1
-	call InitOWObjParams
-	ld hl, wOWObj14
+	call InitSceneObjParams
+	ld hl, wSceneObj14
 	ld de, .data_2
-	call InitOWObjParams
+	call InitSceneObjParams
 
 	ld a, [w2d011]
 	and a
 	ret z
 	ld a, $18
-	ld [wOWObj15Unk6], a
+	ld [wSceneObj15State], a
 	ld a, $1a
-	ld [wOWObj14Unk6], a
+	ld [wSceneObj14State], a
 	ret
 
 .data_1
@@ -86,9 +86,9 @@ Func_b4055: ; b4055 (2d:4055)
 ; 0xb4082
 
 Func_b4082: ; b4082 (2d:4082)
-	ld hl, wOWObj13
+	ld hl, wSceneObj13
 	ld de, .data
-	jp InitOWObjParams
+	jp InitSceneObjParams
 
 .data
 	db $84, $82, $00
@@ -97,9 +97,9 @@ Func_b4082: ; b4082 (2d:4082)
 Func_b408e: ; b408e (2d:408e)
 	dec c
 	ret z
-	ld hl, wOWObj10
+	ld hl, wSceneObj10
 	ld de, .data
-	jp InitOWObjParams
+	jp InitSceneObjParams
 
 .data
 	db $40, $80, $03
@@ -119,9 +119,9 @@ Func_b409c: ; b409c (2d:409c)
 	cp OWNORTH_SEA_TURTLE_ROCKS
 	ret z
 .asm_b40b4
-	ld hl, wOWObj3
+	ld hl, wSceneObj3
 	ld de, .data
-	jp InitOWObjParams
+	jp InitSceneObjParams
 
 .data
 	db $66, $74, $05
@@ -131,13 +131,13 @@ Func_b40c0: ; b40c0 (2d:40c0)
 	ld a, c
 	and a
 	ret z
-	ld hl, wOWObj4
+	ld hl, wSceneObj4
 	ld de, .data_2
 	cp $80
 	jr nz, .asm_b40d0
 	ld de, .data_1
 .asm_b40d0
-	jp InitOWObjParams
+	jp InitSceneObjParams
 
 .data_1
 	db $00, $68, $07
@@ -151,18 +151,18 @@ Func_b40d9: ; b40d9 (2d:40d9)
 	ret z
 	dec c
 	jr z, .asm_b40f0
-	ld hl, wOWObj1
+	ld hl, wSceneObj1
 	ld de, .data_1
-	call InitOWObjParams
+	call InitSceneObjParams
 	call .asm_b40f0
 	xor a
-	ld [wOWObj2Unk6], a
+	ld [wSceneObj2State], a
 	ret
 
 .asm_b40f0
-	ld hl, wOWObj2
+	ld hl, wSceneObj2
 	ld de, .data_2
-	jp InitOWObjParams
+	jp InitSceneObjParams
 
 .data_1
 	db $51, $a0, $0f
@@ -178,14 +178,14 @@ Func_b40ff: ; b40ff (2d:40ff)
 	jr c, .asm_b4128
 	ld a, $01
 	ld [w2d12c], a
-	ld hl, wOWObj6
+	ld hl, wSceneObj6
 	ld de, .data_1
-	call InitOWObjParams
+	call InitSceneObjParams
 	ld a, $04
 	ld [w2d12e], a
-	ld hl, wOWObj7
+	ld hl, wSceneObj7
 	ld de, .data_2
-	jp InitOWObjParams
+	jp InitSceneObjParams
 
 .data_1
 	db $48, $14, $11
@@ -193,12 +193,12 @@ Func_b40ff: ; b40ff (2d:40ff)
 	db $38, $0f, $10
 
 .asm_b4128
-	ld hl, wOWObj6
+	ld hl, wSceneObj6
 	ld de, .data_3
-	call InitOWObjParams
-	ld hl, wOWObj7
+	call InitSceneObjParams
+	ld hl, wSceneObj7
 	ld de, .data_4
-	jp InitOWObjParams
+	jp InitSceneObjParams
 
 .data_3
 	db $38, $15, $14
@@ -217,14 +217,14 @@ Func_b4141: ; b4141 (2d:4141)
 Func_b4143: ; b4143 (2d:4143)
 	sla c
 	ret nc
-	ld hl, wOWObj5
+	ld hl, wSceneObj5
 	ld de, .data_1
-	call InitOWObjParams
-	ld hl, wOWObj5Attributes
+	call InitSceneObjParams
+	ld hl, wSceneObj5Attributes
 	ld [hl], b
-	ld hl, wOWObj1
+	ld hl, wSceneObj1
 	ld de, .data_2
-	jp InitOWObjParams
+	jp InitSceneObjParams
 
 .data_1
 	db $00, $70, $1f
@@ -267,33 +267,33 @@ Func_b417a: ; b417a (2d:417a)
 	cp c
 	ret nz
 
-	ld hl, wOWObj1
+	ld hl, wSceneObj1
 	ld de, .data_1
-	call InitOWObjParams
+	call InitSceneObjParams
 
-	ld hl, wOWObj5
+	ld hl, wSceneObj5
 	ld de, .data_2
-	call InitOWObjParams
+	call InitSceneObjParams
 
-	ld hl, wOWObj8
+	ld hl, wSceneObj8
 	ld de, .data_3
-	call InitOWObjParams
+	call InitSceneObjParams
 
-	ld hl, wOWObj9
+	ld hl, wSceneObj9
 	ld de, .data_4
-	call InitOWObjParams
+	call InitSceneObjParams
 
-	ld hl, wOWObj10
+	ld hl, wSceneObj10
 	ld de, .data_5
-	call InitOWObjParams
+	call InitSceneObjParams
 
-	ld hl, wOWObj5Attributes
+	ld hl, wSceneObj5Attributes
 	set 2, [hl]
-	ld hl, wOWObj8Attributes
+	ld hl, wSceneObj8Attributes
 	set 2, [hl]
-	ld hl, wOWObj9Attributes
+	ld hl, wSceneObj9Attributes
 	set 2, [hl]
-	ld hl, wOWObj10Attributes
+	ld hl, wSceneObj10Attributes
 	set 2, [hl]
 
 	farcall Func_80bd9
@@ -391,17 +391,17 @@ Func_b4247: ; b4247 (2d:4247)
 	ld b, BANK(Pals_84a20)
 	call CopyFarBytes
 
-	ld hl, wOWObj5
+	ld hl, wSceneObj5
 	ld de, .data
-	call InitOWObjParams
+	call InitSceneObjParams
 
 	farcall VBlank_80bf9
 	farcall DrawCoinCount
 
 	xor a
-	ld [wOWObj6Unk6], a
-	ld [wOWObj7Unk6], a
-	ld [wOWObj2Unk6], a
+	ld [wSceneObj6State], a
+	ld [wSceneObj7State], a
+	ld [wSceneObj2State], a
 	ret
 
 .data
@@ -417,12 +417,12 @@ Func_b42e7: ; b42e7 (2d:42e7)
 	ret
 .continue
 	xor a
-	ld hl, wOWObj1
+	ld hl, wSceneObj1
 	ld bc, 15 * 8
 	call WriteAToHL_BCTimes
-	ld hl, wOWObj1
+	ld hl, wSceneObj1
 	ld de, .data
-	jp InitOWObjParams
+	jp InitSceneObjParams
 .data
 	db $28, $50, 00
 ; 0xb4309
@@ -452,12 +452,12 @@ Func_b431f: ; b431f (2d:431f)
 	farcall Func_854ee
 	ret
 .asm_b4339
-	ld hl, wOWObj15
+	ld hl, wSceneObj15
 	ld de, .data_1
-	call InitOWObjParams
-	ld hl, wOWObj14
+	call InitSceneObjParams
+	ld hl, wSceneObj14
 	ld de, .data_2
-	jp InitOWObjParams
+	jp InitSceneObjParams
 
 .data_1
 	db $56, $5c, $00
@@ -468,33 +468,33 @@ Func_b431f: ; b431f (2d:431f)
 Func_b4351: ; b4351 (2d:4351)
 	dec c
 	ret z
-	ld hl, wOWObj1
+	ld hl, wSceneObj1
 	ld de, .data
-	jp InitOWObjParams
+	jp InitSceneObjParams
 .data
 	db $44, $28, $02
 ; 0xb435f
 
 Func_b435f: ; b435f (2d:435f)
-	ld hl, wOWObj8
+	ld hl, wSceneObj8
 	ld de, .data_1
-	call InitOWObjParams
+	call InitSceneObjParams
 	ld a, [w2d065]
 	add a
 	ret z
 	ld a, [w2d025]
 	and a
 	ret nz
-	ld hl, wOWObj7
+	ld hl, wSceneObj7
 	ld de, .data_2
-	call InitOWObjParams
+	call InitSceneObjParams
 	ld a, [w2d011]
 	and a
 	ld a, $06
 	jr z, .asm_b4385
 	ld a, $08
 .asm_b4385
-	ld [wOWObj8Unk6], a
+	ld [wSceneObj8State], a
 	ret
 
 .data_1
@@ -507,13 +507,13 @@ Func_b438f: ; b438f (2d:438f)
 	ld a, c
 	and a
 	ret z
-	ld hl, wOWObj4
+	ld hl, wSceneObj4
 	ld de, .data_2
 	cp $80
 	jr nz, .asm_b439f
 	ld de, .data_1
 .asm_b439f
-	jp InitOWObjParams
+	jp InitSceneObjParams
 
 .data_1
 	db $00, $68, $0a
@@ -527,12 +527,12 @@ Func_b43a8: ; b43a8 (2d:43a8)
 	ret z
 	dec c
 	jr z, .asm_b43ce
-	ld hl, wOWObj1
+	ld hl, wSceneObj1
 	ld de, .data_1
-	call InitOWObjParams
+	call InitSceneObjParams
 	call .asm_b43ce
 	xor a
-	ld [wOWObj5Unk6], a
+	ld [wSceneObj5State], a
 	ld hl, wAttrmap + $b0
 	res 7, [hl]
 	ld hl, wAttrmap + $d0
@@ -541,9 +541,9 @@ Func_b43a8: ; b43a8 (2d:43a8)
 	res 7, [hl]
 	ret
 .asm_b43ce
-	ld hl, wOWObj5
+	ld hl, wSceneObj5
 	ld de, .data_2
-	jp InitOWObjParams
+	jp InitSceneObjParams
 
 .data_1
 	db $32, $a0, $12
@@ -560,24 +560,24 @@ Func_b43dd: ; b43dd (2d:43dd)
 	ld hl, Data_85549
 	jp Func_b586d
 .asm_b43e9
-	ld hl, wOWObj11
+	ld hl, wSceneObj11
 	ld de, .data_1
-	call InitOWObjParams
-	ld hl, wOWObj12
+	call InitSceneObjParams
+	ld hl, wSceneObj12
 	ld de, .data_2
-	call InitOWObjParams
-	ld hl, wOWObj13
+	call InitSceneObjParams
+	ld hl, wSceneObj13
 	ld de, .data_3
-	call InitOWObjParams
-	ld hl, wOWObj14
+	call InitSceneObjParams
+	ld hl, wSceneObj14
 	ld de, .data_4
-	call InitOWObjParams
-	ld hl, wOWObj15
+	call InitSceneObjParams
+	ld hl, wSceneObj15
 	ld de, .data_5
-	call InitOWObjParams
-	ld hl, wOWObj10
+	call InitSceneObjParams
+	ld hl, wSceneObj10
 	ld de, .data_6
-	call InitOWObjParams
+	call InitSceneObjParams
 
 	ld hl, .pal
 	ld de, wTempPals2 palette 2
@@ -623,12 +623,12 @@ Func_b4448: ; b4448 (2d:4448)
 	ld a, [w2d019]
 	cp b
 	jr nz, .asm_b444f
-	ld hl, wOWObj11
+	ld hl, wSceneObj11
 	ld de, Func_b43dd.data_1
-	call InitOWObjParams
-	ld hl, wOWObj10
+	call InitSceneObjParams
+	ld hl, wSceneObj10
 	ld de, Func_b43dd.data_6
-	call InitOWObjParams
+	call InitSceneObjParams
 	jp LoadOverworld4Gfx
 ; 0xb4474
 
@@ -637,9 +637,9 @@ Func_b4474: ; b4474 (2d:4474)
 	and a
 	ret z
 	call LoadOverworld3Gfx
-	ld hl, wOWObj6
+	ld hl, wSceneObj6
 	ld de, .data
-	call InitOWObjParams
+	call InitSceneObjParams
 	ld a, [w2d065]
 	add a
 	jr z, .asm_b448f
@@ -647,8 +647,8 @@ Func_b4474: ; b4474 (2d:4474)
 	jp Func_b586d
 .asm_b448f
 	xor a
-	ld [wOWObj6Unk6], a
-	ld hl, wOWObj6
+	ld [wSceneObj6State], a
+	ld hl, wSceneObj6
 	inc [hl]
 	ret
 
@@ -682,15 +682,15 @@ Func_b44b7: ; b44b7 (2d:44b7)
 	ld hl, w2d019
 	cp [hl]
 	ret nz
-	ld hl, wOWObj2
+	ld hl, wSceneObj2
 	ld de, .data_2
-	call InitOWObjParams
-	ld hl, wOWObj3
+	call InitSceneObjParams
+	ld hl, wSceneObj3
 	ld de, .data_3
-	call InitOWObjParams
-	ld hl, wOWObj4
+	call InitSceneObjParams
+	ld hl, wSceneObj4
 	ld de, .data_1
-	jp InitOWObjParams
+	jp InitSceneObjParams
 
 .data_1
 	db $38, $4c, $00
@@ -704,7 +704,7 @@ Func_b44e7: ; b44e7 (2d:44e7)
 	ld a, c
 	and a
 	ret z
-	ld hl, wOWObj4
+	ld hl, wSceneObj4
 	ld de, .data_2
 	cp $80
 	jr nz, .asm_b4500
@@ -715,7 +715,7 @@ Func_b44e7: ; b44e7 (2d:44e7)
 	ret nz
 	ld de, .data_1
 .asm_b4500
-	jp InitOWObjParams
+	jp InitSceneObjParams
 
 .data_1
 	db $00, $16, $05
@@ -724,13 +724,13 @@ Func_b44e7: ; b44e7 (2d:44e7)
 ; 0xb4509
 
 Func_b4509: ; b4509 (2d:4509)
-	ld hl, wOWObj6
+	ld hl, wSceneObj6
 	ld de, .data
-	call InitOWObjParams
+	call InitSceneObjParams
 	ld a, [w2d065]
 	dec a
 	ret nz
-	ld hl, wOWObj6Unk6
+	ld hl, wSceneObj6State
 	inc [hl]
 	inc [hl]
 	ret
@@ -748,19 +748,19 @@ Func_b4520: ; b4520 (2d:4520)
 	ld hl, Data_855b2
 	farcall Func_854ee
 .asm_b4539
-	ld hl, wOWObj5
+	ld hl, wSceneObj5
 	ld de, .data_3
-	jp InitOWObjParams
+	jp InitSceneObjParams
 .asm_b4542
-	ld hl, wOWObj2
+	ld hl, wSceneObj2
 	ld de, .data_1
-	call InitOWObjParams
-	ld hl, wOWObj10
+	call InitSceneObjParams
+	ld hl, wSceneObj10
 	ld de, .data_2
-	call InitOWObjParams
+	call InitSceneObjParams
 	call .asm_b4539
 	xor a
-	ld [wOWObj5Unk6], a
+	ld [wSceneObj5State], a
 	jp LoadOverworldThunderGfx
 
 .data_1
@@ -778,12 +778,12 @@ Func_b4567: ; b4567 (2d:4567)
 	sla c
 	ret nc
 
-	ld hl, wOWObj2
+	ld hl, wSceneObj2
 	ld de, .data_1
-	call InitOWObjParams
-	ld hl, wOWObj3
+	call InitSceneObjParams
+	ld hl, wSceneObj3
 	ld de, .data_2
-	call InitOWObjParams
+	call InitSceneObjParams
 
 	ld b, 3
 	ld de, $1f
@@ -808,14 +808,14 @@ Func_b4567: ; b4567 (2d:4567)
 	ld a, [w2d025]
 	and a
 	ret nz
-	ld hl, wOWObj15
+	ld hl, wSceneObj15
 	ld de, .data_3
-	call InitOWObjParams
+	call InitSceneObjParams
 	ld a, [w2d011]
 	and a
 	ret z
 	ld a, $1e
-	ld [wOWObj15Unk6], a
+	ld [wSceneObj15State], a
 	ret
 
 .data_3
@@ -828,17 +828,17 @@ Func_b45c8: ; b45c8 (2d:45c8)
 	jr z, .asm_b45e3
 	dec a
 	ret z
-	ld hl, wOWObj1
+	ld hl, wSceneObj1
 	ld de, .data_2
-	call InitOWObjParams
-	ld hl, wOWObj8
+	call InitSceneObjParams
+	ld hl, wSceneObj8
 	ld de, .data_3
-	call InitOWObjParams
+	call InitSceneObjParams
 	call LoadOverworldFanGfx
 .asm_b45e3
-	ld hl, wOWObj9
+	ld hl, wSceneObj9
 	ld de, .data_1
-	jp InitOWObjParams
+	jp InitSceneObjParams
 
 .data_1
 	db $4d, $8a, $10
@@ -854,17 +854,17 @@ Func_b45f5: ; b45f5 (2d:45f5)
 	ret z
 	dec c
 	jr z, .asm_b460c
-	ld hl, wOWObj1
+	ld hl, wSceneObj1
 	ld de, .data_1
-	call InitOWObjParams
+	call InitSceneObjParams
 	call .asm_b460c
 	xor a
-	ld [wOWObj7Unk6], a
+	ld [wSceneObj7State], a
 	ret
 .asm_b460c
-	ld hl, wOWObj7
+	ld hl, wSceneObj7
 	ld de, .data_2
-	jp InitOWObjParams
+	jp InitSceneObjParams
 
 .data_1
 	db $37, $a0, $16
@@ -881,9 +881,9 @@ Func_b461b: ; b461b (2d:461b)
 	ld hl, Data_855f9
 	jp Func_b586d
 .asm_b4628
-	ld hl, wOWObj2
+	ld hl, wSceneObj2
 	ld de, .data
-	call InitOWObjParams
+	call InitSceneObjParams
 	jp LoadOverworldThunderGfx
 
 .data
@@ -899,9 +899,9 @@ Func_b4637: ; b4637 (2d:4637)
 	ld hl, Data_8560e
 	jp Func_b586d
 .asm_b4644
-	ld hl, wOWObj2
+	ld hl, wSceneObj2
 	ld de, .data
-	call InitOWObjParams
+	call InitSceneObjParams
 	jp LoadOverworldThunderGfx
 
 .data
@@ -911,9 +911,9 @@ Func_b4637: ; b4637 (2d:4637)
 Func_b4653: ; b4653 (2d:4653)
 	sla c
 	ret nc
-	ld hl, wOWObj2
+	ld hl, wSceneObj2
 	ld de, .data
-	call InitOWObjParams
+	call InitSceneObjParams
 	jp LoadOverworldExplosion1Gfx
 
 .data
@@ -924,9 +924,9 @@ Func_b4665: ; b4665 (2d:4665)
 	xor a
 	cp c
 	ret z
-	ld hl, wOWObj14
+	ld hl, wSceneObj14
 	ld de, .data
-	call InitOWObjParams
+	call InitSceneObjParams
 	ld a, $80
 	cp c
 	ret z
@@ -934,9 +934,9 @@ Func_b4665: ; b4665 (2d:4665)
 	and a
 	ret z
 	ld a, $80
-	ld [wOWObj14XCoord], a
+	ld [wSceneObj14XCoord], a
 	ld a, $15
-	ld [wOWObj14YCoord], a
+	ld [wSceneObj14YCoord], a
 	ret
 
 .data
@@ -985,9 +985,9 @@ Func_b46a0: ; b46a0 (2d:46a0)
 	jp CopyFarBytes
 
 .asm_b46cd
-	ld hl, wOWObj1
+	ld hl, wSceneObj1
 	ld de, .data
-	jp InitOWObjParams
+	jp InitSceneObjParams
 
 .data
 	db $64, $e8, $01
@@ -1002,15 +1002,15 @@ Func_b46d9: ; b46d9 (2d:46d9)
 	ld hl, Data_8563e
 	jp Func_b586d
 .asm_b46e7
-	ld hl, wOWObj6
+	ld hl, wSceneObj6
 	ld de, .data_1
-	jp InitOWObjParams
+	jp InitSceneObjParams
 
 .asm_b46f0
 	call .asm_b46e7
-	ld hl, wOWObj15
+	ld hl, wSceneObj15
 	ld de, .data_2
-	call InitOWObjParams
+	call InitSceneObjParams
 
 	ld hl, wAttrmap + $143
 	ld b, $4
@@ -1048,11 +1048,11 @@ Func_b4712: ; b4712 (2d:4712)
 	jp Func_b586d
 
 .asm_b4741
-	ld hl, wOWObj1
+	ld hl, wSceneObj1
 	ld de, .data_1
-	call InitOWObjParams
+	call InitSceneObjParams
 	xor a
-	ld [wOWObj7Unk6], a
+	ld [wSceneObj7State], a
 	jp LoadOverworldExplosion2Gfx
 
 .data_1
@@ -1065,26 +1065,26 @@ Func_b4712: ; b4712 (2d:4712)
 	ld a, [w2d029]
 	cp $01
 	ret z
-	ld hl, wOWObj7
+	ld hl, wSceneObj7
 	ld de, .data_2
-	call InitOWObjParams
+	call InitSceneObjParams
 	ld a, [w2d011]
 	and a
 	ret nz
 	ld a, $13
-	ld [wOWObj7Unk6], a
+	ld [wSceneObj7State], a
 	ret
 ; 0xb4771
 
 Func_b4771: ; b4771 (2d:4771)
 	sla c
 	ret nc
-	ld hl, wOWObj2
+	ld hl, wSceneObj2
 	ld de, .data_1
-	call InitOWObjParams
-	ld hl, wOWObj1
+	call InitSceneObjParams
+	ld hl, wSceneObj1
 	ld de, .data_2
-	call InitOWObjParams
+	call InitSceneObjParams
 	call LoadOverworldExplosion3Gfx
 	jp LoadOverworldSmokeGfx
 
@@ -1106,24 +1106,24 @@ Func_b4792: ; b4792 (2d:4792)
 	cp b
 	jr nz, .asm_b47dc
 
-	ld hl, wOWObj10
+	ld hl, wSceneObj10
 	ld de, .data_1
-	call InitOWObjParams
-	ld hl, wOWObj12
+	call InitSceneObjParams
+	ld hl, wSceneObj12
 	ld de, .data_3
-	call InitOWObjParams
-	ld hl, wOWObj13
+	call InitSceneObjParams
+	ld hl, wSceneObj13
 	ld de, .data_4
-	call InitOWObjParams
-	ld hl, wOWObj14
+	call InitSceneObjParams
+	ld hl, wSceneObj14
 	ld de, .data_5
-	call InitOWObjParams
-	ld hl, wOWObj15
+	call InitSceneObjParams
+	ld hl, wSceneObj15
 	ld de, .data_6
-	call InitOWObjParams
-	ld hl, wOWObj11
+	call InitSceneObjParams
+	ld hl, wSceneObj11
 	ld de, .data_7
-	call InitOWObjParams
+	call InitSceneObjParams
 
 	call LoadOverworldFireGfx
 
@@ -1154,14 +1154,14 @@ Func_b47f7: ; b47f7 (2d:47f7)
 	and a
 	jr z, .asm_b480c
 	call .asm_b480c
-	ld hl, wOWObj1
+	ld hl, wSceneObj1
 	ld de, .data_2
-	call InitOWObjParams
+	call InitSceneObjParams
 	jp LoadOverworldTorchGfx
 .asm_b480c
-	ld hl, wOWObj9
+	ld hl, wSceneObj9
 	ld de, .data_1
-	jp InitOWObjParams
+	jp InitSceneObjParams
 
 .data_1
 	db $45, $87, $17
@@ -1173,13 +1173,13 @@ Func_b481b: ; b481b (2d:481b)
 	ld a, c
 	and a
 	ret z
-	ld hl, wOWObj5
+	ld hl, wSceneObj5
 	ld de, .data
-	call InitOWObjParams
+	call InitSceneObjParams
 	sla c
 	ret nc
 	xor a
-	ld [wOWObj5Unk6], a
+	ld [wSceneObj5State], a
 	ret
 
 .data
@@ -1193,12 +1193,12 @@ Func_b4832: ; b4832 (2d:4832)
 	dec c
 	jr z, .asm_b4864
 	call .asm_b4864
-	ld a, [wOWObj8]
+	ld a, [wSceneObj8]
 	add $08
-	ld [wOWObj8], a
-	ld hl, wOWObj2
+	ld [wSceneObj8], a
+	ld hl, wSceneObj2
 	ld de, .data_2
-	call InitOWObjParams
+	call InitSceneObjParams
 	ld hl, wAttrmap + $ee
 	ld b, $3
 	call SetBGMapBytesPriority
@@ -1210,9 +1210,9 @@ Func_b4832: ; b4832 (2d:4832)
 	jp SetBGMapBytesPriority
 
 .asm_b4864
-	ld hl, wOWObj8
+	ld hl, wSceneObj8
 	ld de, .data_1
-	jp InitOWObjParams
+	jp InitSceneObjParams
 
 .data_1
 	db $37, $7c, $1c
@@ -1238,8 +1238,8 @@ Func_b4874: ; b4874 (2d:4874)
 ; 0xb4887
 
 ; sets the ???
-; of OWObj in hl, with params in de
-InitOWObjParams: ; b4887 (2d:4887)
+; of SceneObj in hl, with params in de
+InitSceneObjParams: ; b4887 (2d:4887)
 	ld a, [de]
 	ld [hli], a
 	inc de
@@ -1403,10 +1403,10 @@ LoadOverworldSmokeGfx: ; b49e2 (2d:49e2)
 
 UpdateCurOWOjAnimation: ; b49fe (2d:49fe)
 	ld b, $2a
-	ld a, [wCurOWObj + 0]
+	ld a, [wCurSceneObj + 0]
 	ld l, a
 	set 2, l
-	ld a, [wCurOWObj + 1]
+	ld a, [wCurSceneObj + 1]
 	ld h, a
 	jp UpdateOWAnimation
 ; 0xb4a0d
@@ -1426,20 +1426,20 @@ Func_b4a0d: ; b4a0d (2d:4a0d)
 	ret
 ; 0xb4a1d
 
-AddCurOWObjSpriteWithScroll: ; b4a1d (2d:4a1d)
+AddCurSceneObjSpriteWithScroll: ; b4a1d (2d:4a1d)
 	ld b, $2a
-	ld a, [wCurOWObj + 0]
+	ld a, [wCurSceneObj + 0]
 	ld l, a
-	ld a, [wCurOWObj + 1]
+	ld a, [wCurSceneObj + 1]
 	ld h, a
 	jp AddOWSpriteWithScroll
 ; 0xb4a2a
 
-AddCurOWObjSprite: ; b4a2a (2d:4a2a)
+AddCurSceneObjSprite: ; b4a2a (2d:4a2a)
 	ld b, $2a
-	ld a, [wCurOWObj + 0]
+	ld a, [wCurSceneObj + 0]
 	ld l, a
-	ld a, [wCurOWObj + 1]
+	ld a, [wCurSceneObj + 1]
 	ld h, a
 	jp AddOWSprite
 ; 0xb4a37
@@ -1459,43 +1459,43 @@ Func_b4a3d: ; b4a3d (2d:4a3d)
 	dw .East  ; MAP_EAST
 
 .North
-	ld bc, wOWObj1Unk6
+	ld bc, wSceneObj1State
 	call Func_b4fa2
-	ld bc, wOWObj2Unk6
+	ld bc, wSceneObj2State
 	call Func_b4fa2
-	ld bc, wOWObj3Unk6
+	ld bc, wSceneObj3State
 	call Func_b4fa2
-	ld bc, wOWObj4Unk6
+	ld bc, wSceneObj4State
 	jp Func_b4fa2
 
 .West
-	ld bc, wOWObj1Unk6
+	ld bc, wSceneObj1State
 	call Func_b4dfb
-	ld bc, wOWObj2Unk6
+	ld bc, wSceneObj2State
 	call Func_b4dfb
-	ld bc, wOWObj3Unk6
+	ld bc, wSceneObj3State
 	call Func_b4dfb
-	ld bc, wOWObj4Unk6
+	ld bc, wSceneObj4State
 	jp Func_b4dfb
 
 .South
-	ld bc, wOWObj1Unk6
+	ld bc, wSceneObj1State
 	call Func_b4cc2
-	ld bc, wOWObj2Unk6
+	ld bc, wSceneObj2State
 	call Func_b4cc2
-	ld bc, wOWObj3Unk6
+	ld bc, wSceneObj3State
 	call Func_b4cc2
-	ld bc, wOWObj4Unk6
+	ld bc, wSceneObj4State
 	jp Func_b4cc2
 
 .East
-	ld bc, wOWObj1Unk6
+	ld bc, wSceneObj1State
 	call Func_b4b99
-	ld bc, wOWObj2Unk6
+	ld bc, wSceneObj2State
 	call Func_b4b99
-	ld bc, wOWObj3Unk6
+	ld bc, wSceneObj3State
 	call Func_b4b99
-	ld bc, wOWObj4Unk6
+	ld bc, wSceneObj4State
 	jp Func_b4b99
 ; 0xb4aa9
 
@@ -1509,94 +1509,94 @@ Func_b4aa9: ; b4aa9 (2d:4aa9)
 	dw .East  ; MAP_EAST
 
 .North
-	ld bc, wOWObj5Unk6
+	ld bc, wSceneObj5State
 	call Func_b4fa2
-	ld bc, wOWObj6Unk6
+	ld bc, wSceneObj6State
 	call Func_b4fa2
-	ld bc, wOWObj7Unk6
+	ld bc, wSceneObj7State
 	call Func_b4fa2
-	ld bc, wOWObj8Unk6
+	ld bc, wSceneObj8State
 	call Func_b4fa2
-	ld bc, wOWObj9Unk6
+	ld bc, wSceneObj9State
 	call Func_b4fa2
-	ld bc, wOWObj10Unk6
+	ld bc, wSceneObj10State
 	call Func_b4fa2
-	ld bc, wOWObj13Unk6
+	ld bc, wSceneObj13State
 	call Func_b4fa2
-	ld bc, wOWObj14Unk6
+	ld bc, wSceneObj14State
 	call Func_b4fa2
-	ld bc, wOWObj15Unk6
+	ld bc, wSceneObj15State
 	jp Func_b4fa2
 
 .West
-	ld bc, wOWObj5Unk6
+	ld bc, wSceneObj5State
 	call Func_b4dfb
-	ld bc, wOWObj6Unk6
+	ld bc, wSceneObj6State
 	call Func_b4dfb
-	ld bc, wOWObj7Unk6
+	ld bc, wSceneObj7State
 	call Func_b4dfb
-	ld bc, wOWObj8Unk6
+	ld bc, wSceneObj8State
 	call Func_b4dfb
-	ld bc, wOWObj10Unk6
+	ld bc, wSceneObj10State
 	call Func_b4dfb
-	ld bc, wOWObj11Unk6
+	ld bc, wSceneObj11State
 	call Func_b4dfb
-	ld bc, wOWObj12Unk6
+	ld bc, wSceneObj12State
 	call Func_b4dfb
-	ld bc, wOWObj13Unk6
+	ld bc, wSceneObj13State
 	call Func_b4dfb
-	ld bc, wOWObj14Unk6
+	ld bc, wSceneObj14State
 	call Func_b4dfb
-	ld bc, wOWObj15Unk6
+	ld bc, wSceneObj15State
 	jp Func_b4dfb
 
 .South
-	ld bc, wOWObj5Unk6
+	ld bc, wSceneObj5State
 	call Func_b4cc2
-	ld bc, wOWObj6Unk6
+	ld bc, wSceneObj6State
 	call Func_b4cc2
-	ld bc, wOWObj7Unk6
+	ld bc, wSceneObj7State
 	call Func_b4cc2
-	ld bc, wOWObj8Unk6
+	ld bc, wSceneObj8State
 	call Func_b4cc2
-	ld bc, wOWObj9Unk6
+	ld bc, wSceneObj9State
 	call Func_b4cc2
-	ld bc, wOWObj10Unk6
+	ld bc, wSceneObj10State
 	call Func_b4cc2
-	ld bc, wOWObj14Unk6
+	ld bc, wSceneObj14State
 	call Func_b4cc2
-	ld bc, wOWObj15Unk6
+	ld bc, wSceneObj15State
 	jp Func_b4cc2
 
 .East
-	ld bc, wOWObj5Unk6
+	ld bc, wSceneObj5State
 	call Func_b4b99
-	ld bc, wOWObj6Unk6
+	ld bc, wSceneObj6State
 	call Func_b4b99
-	ld bc, wOWObj7Unk6
+	ld bc, wSceneObj7State
 	call Func_b4b99
-	ld bc, wOWObj8Unk6
+	ld bc, wSceneObj8State
 	call Func_b4b99
-	ld bc, wOWObj9Unk6
+	ld bc, wSceneObj9State
 	call Func_b4b99
-	ld bc, wOWObj10Unk6
+	ld bc, wSceneObj10State
 	call Func_b4b99
-	ld bc, wOWObj11Unk6
+	ld bc, wSceneObj11State
 	call Func_b4b99
-	ld bc, wOWObj12Unk6
+	ld bc, wSceneObj12State
 	call Func_b4b99
-	ld bc, wOWObj13Unk6
+	ld bc, wSceneObj13State
 	call Func_b4b99
-	ld bc, wOWObj14Unk6
+	ld bc, wSceneObj14State
 	call Func_b4b99
-	ld bc, wOWObj15Unk6
+	ld bc, wSceneObj15State
 	jp Func_b4b99
 ; 0xb4b99
 
 Func_b4b99: ; b4b99 (2d:4b99)
 	ld a, c
 	and $f8
-	ld hl, wCurOWObj
+	ld hl, wCurSceneObj
 	ld [hli], a
 	ld [hl], b
 	ld a, [bc]
@@ -1732,7 +1732,7 @@ Func_b4c57: ; b4c57 (2d:4c57)
 
 Func_b4c5a: ; b4c5a (2d:4c5a)
 	ld de, $580c
-	jp AddCurOWObjSpriteWithScroll
+	jp AddCurSceneObjSpriteWithScroll
 
 Func_b4c60: ; b4c60 (2d:4c60)
 	call UpdateCurOWOjAnimation
@@ -1824,7 +1824,7 @@ Func_b4cbd: ; b4cbd (2d:4cbd)
 Func_b4cc2: ; b4cc2 (2d:4cc2)
 	ld a, c
 	and $f8
-	ld hl, wCurOWObj
+	ld hl, wCurSceneObj
 	ld [hli], a
 	ld [hl], b
 	ld a, [bc]
@@ -1982,7 +1982,7 @@ Func_b4da0: ; b4da0 (2d:4da0)
 
 Func_b4da3: ; b4da3 (2d:4da3)
 	ld de, $5161
-	jp AddCurOWObjSpriteWithScroll
+	jp AddCurSceneObjSpriteWithScroll
 ;	fallthrough
 
 Func_b4da9: ; b4da9 (2d:4da9)
@@ -2013,7 +2013,7 @@ Func_b4dc0: ; b4dc0 (2d:4dc0)
 	cp $ff
 	call z, Func_b4dd4
 	ld de, $5161
-	jp AddCurOWObjSpriteWithScroll
+	jp AddCurSceneObjSpriteWithScroll
 ; 0xb4dd4
 
 Func_b4dd4: ; b4dd4 (2d:4dd4)
@@ -2051,7 +2051,7 @@ Func_b4df6: ; b4df6 (2d:4df6)
 Func_b4dfb: ; b4dfb (2d:4dfb)
 	ld a, c
 	and $f8
-	ld hl, wCurOWObj
+	ld hl, wCurSceneObj
 	ld [hli], a
 	ld [hl], b
 	ld a, [bc]
@@ -2104,7 +2104,7 @@ Func_b4e4d: ; b4e4d (2d:4e4d)
 
 Func_b4e50: ; b4e50 (2d:4e50)
 	ld de, $484a
-	jp AddCurOWObjSpriteWithScroll
+	jp AddCurSceneObjSpriteWithScroll
 ; 0xb4e56
 
 Func_b4e56: ; b4e56 (2d:4e56)
@@ -2124,7 +2124,7 @@ Func_b4e62: ; b4e62 (2d:4e62)
 
 Func_b4e65: ; b4e65 (2d:4e65)
 	ld de, $4f57
-	jp AddCurOWObjSpriteWithScroll
+	jp AddCurSceneObjSpriteWithScroll
 ; 0xb4e6b
 
 	INCROM $b4e6b, $b4e70
@@ -2180,12 +2180,12 @@ Func_b4ea4: ; b4ea4 (2d:4ea4)
 Func_b4ea9: ; b4ea9 (2d:4ea9)
 	ld de, Frameset_a8e5d
 	call Func_b4e56
-	ld a, [wOWObj7Unk6]
+	ld a, [wSceneObj7State]
 	and a
 	ret nz
-	ld [wOWObj8Duration], a
+	ld [wSceneObj8Duration], a
 	ld a, $08
-	ld [wOWObj8Unk6], a
+	ld [wSceneObj8State], a
 	ret
 ; 0xb4ebd
 
@@ -2311,10 +2311,10 @@ Func_b4f52: ; b4f52 (2d:4f52)
 
 Func_b4f58: ; b4f58 (2d:4f58)
 	ld hl, wTempPals1 palette 5
-	ld a, [wOWObj11TileID]
+	ld a, [wSceneObj11TileID]
 	cp $57
 	jr z, .asm_b4f6b
-	ld a, [wOWObj11Unk6]
+	ld a, [wSceneObj11State]
 	and a
 	jr z, .asm_b4f6b
 	ld hl, .pal
@@ -2363,7 +2363,7 @@ Func_b4f9c: ; b4f9c (2d:4f9c)
 Func_b4fa2: ; b4fa2 (2d:4fa2)
 	ld a, c
 	and $f8
-	ld hl, wCurOWObj
+	ld hl, wCurSceneObj
 	ld [hli], a
 	ld [hl], b
 	ld a, [bc]
@@ -2513,7 +2513,7 @@ Func_b507c: ; b507c (2d:507c)
 
 Func_b507f: ; b507f (2d:507f)
 	ld de, $4000
-	jp AddCurOWObjSpriteWithScroll
+	jp AddCurSceneObjSpriteWithScroll
 ; 0xb5085
 
 Func_b5085: ; b5085 (2d:5085)
@@ -2596,14 +2596,14 @@ Func_b50de: ; b50de (2d:50de)
 Func_b50e1: ; b50e1 (2d:50e1)
 	call UpdateCurOWOjAnimation
 	ld de, $6580
-	jp AddCurOWObjSpriteWithScroll
+	jp AddCurSceneObjSpriteWithScroll
 ; 0xb50ea
 
 Func_b50ea: ; b50ea (2d:50ea)
 	ld de, Frameset_aa252
 	call UpdateCurOWOjAnimation
 	ld de, $60cf
-	jp AddCurOWObjSpriteWithScroll
+	jp AddCurSceneObjSpriteWithScroll
 ; 0xb50f6
 
 Func_b50f6: ; b50f6 (2d:50f6)
@@ -2630,7 +2630,7 @@ Func_b5114: ; b5114 (2d:5114)
 	call UpdateCurOWOjAnimation
 .asm_b5117
 	ld de, $5fe2
-	jp AddCurOWObjSpriteWithScroll
+	jp AddCurSceneObjSpriteWithScroll
 	call UpdateCurOWOjAnimation
 	ld b, $00
 .asm_b5122
@@ -2656,7 +2656,7 @@ Func_b5136: ; b5136 (2d:5136)
 	call Func_b4a0d
 	jp z, Func_b4fab
 	ld de, $47fa
-	jp AddCurOWObjSprite
+	jp AddCurSceneObjSprite
 ; 0xb514a
 
 	INCROM $b514a, $b586d
@@ -2670,7 +2670,7 @@ Func_b586d: ; b586d (2d:586d)
 
 Func_b5b4e: ; b5b4e (2d:5b4e)
 	ld de, Data_b6337
-	ld hl, wOWObj1
+	ld hl, wSceneObj1
 	call Func_3c25
 	ret nz
 	ld a, [w2d025]
@@ -2865,41 +2865,41 @@ Func_b791e: ; b791e (2d:791e)
 	dw .East  ; MAP_EAST
 
 .North
-	ld bc, wOWObj2Unk6
+	ld bc, wSceneObj2State
 	call Func_b7984
-	ld bc, wOWObj3Unk6
+	ld bc, wSceneObj3State
 	call Func_b7984
-	ld bc, wOWObj6Unk6
+	ld bc, wSceneObj6State
 	call Func_b7984
-	ld bc, wOWObj7Unk6
+	ld bc, wSceneObj7State
 	call Func_b7984
-	ld bc, wOWObj14Unk6
+	ld bc, wSceneObj14State
 	call Func_b7984
-	ld bc, wOWObj15Unk6
+	ld bc, wSceneObj15State
 	jp Func_b7984
 
 .West
-	ld bc, wOWObj1Unk6
+	ld bc, wSceneObj1State
 	call Func_b7a6d
-	ld bc, wOWObj7Unk6
+	ld bc, wSceneObj7State
 	call Func_b7a6d
-	ld bc, wOWObj8Unk6
+	ld bc, wSceneObj8State
 	call Func_b7a6d
-	ld bc, wOWObj5Unk6
+	ld bc, wSceneObj5State
 	jp Func_b7a6d
 
 .South
-	ld bc, wOWObj7Unk6
+	ld bc, wSceneObj7State
 	call Func_b7c18
-	ld bc, wOWObj14Unk6
+	ld bc, wSceneObj14State
 	call Func_b7c18
-	ld bc, wOWObj15Unk6
+	ld bc, wSceneObj15State
 	jp Func_b7c18
 
 .East
-	ld bc, wOWObj5Unk6
+	ld bc, wSceneObj5State
 	call Func_b7b61
-	ld bc, wOWObj7Unk6
+	ld bc, wSceneObj7State
 	jp Func_b7b61
 ; 0xb7984
 
@@ -2935,8 +2935,8 @@ Func_b79de: ; b79de (2d:79de)
 	cp $06
 	ret nz
 	ld a, $06
-	ld hl, wOWObj3Unk6
-	call Func_3b93
+	ld hl, wSceneObj3State
+	call SetSceneObjState
 	play_sfx SFX_005
 	ret
 ; 0xb79fa
@@ -2964,8 +2964,8 @@ Func_b7a32: ; b7a32 (2d:7a32)
 	ld b, $0d
 .asm_b7a52
 	ld a, b
-	ld hl, wOWObj2Unk6
-	call Func_3b93
+	ld hl, wSceneObj2State
+	call SetSceneObjState
 	ret
 ; 0xb7a5a
 
@@ -3036,11 +3036,11 @@ Func_b7ac0: ; b7ac0 (2d:7ac0)
 	ld a, [w2d025]
 	and a
 	ret nz
-	ld hl, wOWObj8Unk7
+	ld hl, wSceneObj8Unk7
 	ld a, [hl]
 	and a
 	jr nz, .asm_b7ad7
-	ld a, [wOWObj7Unk6]
+	ld a, [wSceneObj7State]
 	and a
 	ret nz
 	ld a, [w2d055]
@@ -3056,16 +3056,16 @@ Func_b7ac0: ; b7ac0 (2d:7ac0)
 	ret nz
 	ld a, $07
 .asm_b7ae5
-	ld hl, wOWObj7Unk6
-	call Func_3b93
+	ld hl, wSceneObj7State
+	call SetSceneObjState
 	xor a
-	ld [wOWObj8Unk7], a
+	ld [wSceneObj8Unk7], a
 	ret
 .asm_b7af0
 	ld a, $08
-	ld [wOWObj8Unk6], a
+	ld [wSceneObj8State], a
 	xor a
-	ld [wOWObj8Duration], a
+	ld [wSceneObj8Duration], a
 	jr .asm_b7ae5
 ; 0xb7afb
 
@@ -3073,7 +3073,7 @@ Func_b7afb: ; b7afb (2d:7afb)
 	ld a, [w2d025]
 	and a
 	ret nz
-	ld hl, wOWObj8Unk7
+	ld hl, wSceneObj8Unk7
 	ld a, [hl]
 	and a
 	jr nz, .asm_b7b0d
@@ -3090,10 +3090,10 @@ Func_b7afb: ; b7afb (2d:7afb)
 	ret nz
 .asm_b7b19
 	ld a, $06
-	ld [wOWObj8Unk6], a
+	ld [wSceneObj8State], a
 	xor a
-	ld [wOWObj8Duration], a
-	ld [wOWObj8Unk7], a
+	ld [wSceneObj8Duration], a
+	ld [wSceneObj8Unk7], a
 	ret
 ; 0xb7b26
 
@@ -3117,8 +3117,8 @@ Func_b7b26: ; b7b26 (2d:7b26)
 	ld b, $10
 .asm_b7b46
 	ld a, b
-	ld hl, wOWObj5Unk6
-	call Func_3b93
+	ld hl, wSceneObj5State
+	call SetSceneObjState
 	ret
 ; 0xb7b4e
 
@@ -3188,8 +3188,8 @@ Func_b7ba9: ; b7ba9 (2d:7ba9)
 	ret nz
 .asm_b7bb9
 	ld a, $13
-	ld hl, wOWObj7Unk6
-	call Func_3b93
+	ld hl, wSceneObj7State
+	call SetSceneObjState
 	ret
 .asm_b7bc2
 	ld a, [w2d055]
@@ -3209,8 +3209,8 @@ Func_b7bc9: ; b7bc9 (2d:7bc9)
 	ret nz
 .asm_b7bd9
 	ld a, $12
-	ld hl, wOWObj7Unk6
-	call Func_3b93
+	ld hl, wSceneObj7State
+	call SetSceneObjState
 	ret
 .asm_b7be2
 	ld a, [w2d055]
@@ -3230,8 +3230,8 @@ Func_b7be9: ; b7be9 (2d:7be9)
 	ret
 .asm_b7bf9
 	ld a, $00
-	ld hl, wOWObj7Unk6
-	call Func_3b93
+	ld hl, wSceneObj7State
+	call SetSceneObjState
 	ld a, $01
 	and a
 	ret
@@ -3245,8 +3245,8 @@ Func_b7c05: ; b7c05 (2d:7c05)
 	inc [hl]
 	ret nz
 	ld a, $1a
-	ld hl, wOWObj5Unk6
-	call Func_3b93
+	ld hl, wSceneObj5State
+	call SetSceneObjState
 	ret
 ; 0xb7c18
 
@@ -3309,8 +3309,8 @@ Func_b7c5c: ; b7c5c (2d:7c5c)
 	ld b, $14
 .asm_b7c7c
 	ld a, b
-	ld hl, wOWObj7Unk6
-	call Func_3b93
+	ld hl, wSceneObj7State
+	call SetSceneObjState
 	ret
 ; 0xb7c84
 
@@ -3333,8 +3333,8 @@ Func_b7c97: ; b7c97 (2d:7c97)
 	and a
 	ret nz
 	ld a, $1f
-	ld hl, wOWObj15Unk6
-	call Func_3b93
+	ld hl, wSceneObj15State
+	call SetSceneObjState
 	ret
 ; 0xb7ca5
 
@@ -3343,8 +3343,8 @@ Func_b7ca5: ; b7ca5 (2d:7ca5)
 	and a
 	ret z
 	ld a, $1e
-	ld hl, wOWObj15Unk6
-	call Func_3b93
+	ld hl, wSceneObj15State
+	call SetSceneObjState
 	ret
 ; 0xb7cb3
 
@@ -3357,7 +3357,7 @@ Func_b7cb3: ; b7cb3 (2d:7cb3)
 	jr z, .asm_b7ce7
 	jr .asm_b7cc0 ; unnecessary jump
 .asm_b7cc0
-	ld a, [wOWObj14XCoord]
+	ld a, [wSceneObj14XCoord]
 	cp $80
 	ret z
 	ld a, [w2d07d]
@@ -3366,7 +3366,7 @@ Func_b7cb3: ; b7cb3 (2d:7cb3)
 	ld a, [wGlobalCounter]
 	and %11
 	ret nz
-	ld hl, wOWObj14YCoord
+	ld hl, wSceneObj14YCoord
 	dec [hl]
 	inc l
 	inc [hl]
@@ -3375,14 +3375,14 @@ Func_b7cb3: ; b7cb3 (2d:7cb3)
 .Func_b7cda
 	ld hl, w2d07d
 	inc [hl]
-	ld hl, wOWObj14YCoord
+	ld hl, wSceneObj14YCoord
 	ld [hl], $25
 	inc l
 	ld [hl], $70
 	ret
 
 .asm_b7ce7
-	ld a, [wOWObj14XCoord]
+	ld a, [wSceneObj14XCoord]
 	cp $70
 	ret z
 	ld a, [w2d07d]
@@ -3391,14 +3391,14 @@ Func_b7cb3: ; b7cb3 (2d:7cb3)
 	ld a, [wGlobalCounter]
 	and %11
 	ret nz
-	ld hl, wOWObj14YCoord
+	ld hl, wSceneObj14YCoord
 	dec [hl]
 	inc l
 	inc [hl]
 	ld a, [hl]
 	cp $88
 	ret nz
-	ld hl, wOWObj14YCoord
+	ld hl, wSceneObj14YCoord
 	ld [hl], $25
 	inc l
 	ld [hl], $70

@@ -5044,7 +5044,7 @@ AddOWSprite: ; 3a38 (0:3a38)
 	ret
 ; 0x3a66
 
-; hl = wOWObjXDuration
+; hl = wSceneObjXDuration
 ; de = frameset pointer
 ; b = bank
 UpdateOWAnimation: ; 3a66 (0:3a66)
@@ -5245,7 +5245,10 @@ LoadFarTiles: ; 3b5b (0:3b5b)
 
 	INCROM $3b77, $3b93
 
-Func_3b93: ; 3b93 (0:3b93)
+; sets scene obj's state and
+; resets its animation data
+; a = state
+SetSceneObjState: ; 3b93 (0:3b93)
 	ld [hld], a
 	xor a
 	ld [hld], a

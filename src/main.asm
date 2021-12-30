@@ -224,11 +224,11 @@ INCLUDE "engine/bank27.asm"
 
 SECTION "Cutscenes Gfx 1", ROMX
 
-Cutscenes6Gfx:: INCBIN "gfx/cutscenes/cutscenes6.2bpp.lz"
-Cutscenes7Gfx:: INCBIN "gfx/cutscenes/cutscenes7.2bpp.lz"
-Cutscenes8Gfx:: INCBIN "gfx/cutscenes/cutscenes8.2bpp.lz"
-Cutscenes9Gfx:: INCBIN "gfx/cutscenes/cutscenes9.2bpp.lz"
-Cutscenes10Gfx:: INCBIN "gfx/cutscenes/cutscenes10.2bpp.lz"
+Cutscenes1Gfx:: INCBIN "gfx/cutscenes/cutscenes1.2bpp.lz"
+Cutscenes2Gfx:: INCBIN "gfx/cutscenes/cutscenes2.2bpp.lz"
+Cutscenes3Gfx:: INCBIN "gfx/cutscenes/cutscenes3.2bpp.lz"
+Cutscenes4Gfx:: INCBIN "gfx/cutscenes/cutscenes4.2bpp.lz"
+Cutscenes5Gfx:: INCBIN "gfx/cutscenes/cutscenes5.2bpp.lz"
 
 rept $932
 	db $00
@@ -237,11 +237,11 @@ endr
 
 SECTION "Cutscenes Gfx 2", ROMX
 
-Cutscenes1Gfx:: INCBIN "gfx/cutscenes/cutscenes1.2bpp.lz"
-Cutscenes2Gfx:: INCBIN "gfx/cutscenes/cutscenes2.2bpp.lz"
-Cutscenes3Gfx:: INCBIN "gfx/cutscenes/cutscenes3.2bpp.lz"
-Cutscenes4Gfx:: INCBIN "gfx/cutscenes/cutscenes4.2bpp.lz"
-Cutscenes5Gfx:: INCBIN "gfx/cutscenes/cutscenes5.2bpp.lz"
+Cutscenes6Gfx:: INCBIN "gfx/cutscenes/cutscenes6.2bpp.lz"
+Cutscenes7Gfx:: INCBIN "gfx/cutscenes/cutscenes7.2bpp.lz"
+Cutscenes8Gfx:: INCBIN "gfx/cutscenes/cutscenes8.2bpp.lz"
+Cutscenes9Gfx:: INCBIN "gfx/cutscenes/cutscenes9.2bpp.lz"
+Cutscenes10Gfx:: INCBIN "gfx/cutscenes/cutscenes10.2bpp.lz"
 
 
 SECTION "Bank 2A", ROMX

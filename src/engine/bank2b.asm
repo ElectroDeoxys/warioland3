@@ -64,24 +64,24 @@ Func_ac064: ; ac064 (2b:4064)
 	INCROM $ac074, $ac3d9
 
 Func_ac3d9: ; ac3d9 (2b:43d9)
-	ld bc, w2d180Unk6
+	ld bc, w2d180State
 	call Func_ac409
-	ld bc, wOWObj1Unk6
+	ld bc, wSceneObj1State
 	call Func_ac409
-	ld bc, wOWObj2Unk6
+	ld bc, wSceneObj2State
 	call Func_ac409
-	ld bc, wOWObj3Unk6
+	ld bc, wSceneObj3State
 	call Func_ac409
-	ld bc, wOWObj4Unk6
+	ld bc, wSceneObj4State
 	call Func_ac409
-	ld bc, wOWObj5Unk6
+	ld bc, wSceneObj5State
 	jp Func_ac409
 ; 0xac3fd
 
 Func_ac3fd: ; ac3fd (2b:43fd)
-	ld bc, wOWObj8Unk6
+	ld bc, wSceneObj8State
 	call Func_ac409
-	ld bc, wOWObj9Unk6
+	ld bc, wSceneObj9State
 	jp Func_ac409
 ; 0xac409
 
@@ -1017,14 +1017,14 @@ Func_aca74: ; aca74 (2b:4a74)
 	ld hl, w2da80
 	ld bc, $10
 	call WriteAToHL_BCTimes
-	ld hl, wOWObj1
+	ld hl, wSceneObj1
 	ld a, $8e
 	ld [hli], a
 	ld a, $98
 	ld [hli], a
 	xor a
-	ld hl, wOWObj1Unk6
-	call Func_3b93
+	ld hl, wSceneObj1State
+	call SetSceneObjState
 	jr Func_aca6d
 ; 0xaca9e
 
@@ -1066,8 +1066,8 @@ Func_acacd: ; acacd (2b:4acd)
 	bit A_BUTTON_F, a
 	ret z
 	xor a
-	ld hl, wOWObj1Unk6
-	call Func_3b93
+	ld hl, wSceneObj1State
+	call SetSceneObjState
 .asm_acae2
 	call Func_ace66
 	jr Func_aca6d
@@ -1097,9 +1097,9 @@ Func_acaf3: ; acaf3 (2b:4af3)
 	ld a, [hl]
 	cp $5d
 	jp z, .asm_acb20 ; can be jr
-	ld hl, wOWObj1Unk6
+	ld hl, wSceneObj1State
 	ld a, $01
-	call Func_3b93
+	call SetSceneObjState
 	ld hl, w2d013
 	dec [hl]
 	dec [hl]
@@ -1665,31 +1665,31 @@ Func_ae025: ; ae025 (2b:6025)
 	xor a
 	call Func_ac8d4
 	call Func_ae067
-	ld hl, wOWObj1
+	ld hl, wSceneObj1
 	ld a, $bb
 	ld [hli], a
-	ld [wOWObj2YCoord], a
+	ld [wSceneObj2YCoord], a
 	ld a, $78
 	ld [hl], a
-	ld [wOWObj2XCoord], a
+	ld [wSceneObj2XCoord], a
 	xor a
 	ld [w2d8b0], a
-	ld hl, wOWObj1Unk6
-	call Func_3b93
+	ld hl, wSceneObj1State
+	call SetSceneObjState
 	play_music2 MUSIC_49
 	ld a, $06
 	jr Func_ae009
 ; 0xae067
 
 Func_ae067: ; ae067 (2b:6067)
-	ld hl, wOWObj3YCoord
+	ld hl, wSceneObj3YCoord
 	ld a, $c3
 	ld [hli], a
 	ld a, $78
 	ld [hl], a
-	ld hl, wOWObj3Unk6
+	ld hl, wSceneObj3State
 	ld a, $09
-	call Func_3b93
+	call SetSceneObjState
 	ret
 ; 0xae079
 
@@ -1700,15 +1700,15 @@ Func_ae079: ; ae079 (2b:6079)
 	ld a, $08
 	ld [w2d800], a
 	ld a, $50
-	ld hl, wOWObj7End
+	ld hl, wSceneObj7End
 	ld [hli], a
 	ld [hl], a
 	ld a, $0d
-	ld hl, wOWObj8Unk6
-	call Func_3b93
+	ld hl, wSceneObj8State
+	call SetSceneObjState
 	xor a
-	ld hl, wOWObj3Unk6
-	call Func_3b93
+	ld hl, wSceneObj3State
+	call SetSceneObjState
 
 	ld hl, Pals_86a8d
 	ld de, wTempOBPals
@@ -1742,11 +1742,11 @@ Func_ae0c4: ; ae0c4 (2b:60c4)
 	call Func_ac8d4
 	call Func_ae067
 	ld a, $0e
-	ld hl, wOWObj1Unk6
-	call Func_3b93
+	ld hl, wSceneObj1State
+	call SetSceneObjState
 	xor a
-	ld hl, wOWObj8Unk6
-	call Func_3b93
+	ld hl, wSceneObj8State
+	call SetSceneObjState
 	ld hl, wTempPals2
 	ld de, wTempOBPals
 	ld b, $08
@@ -1873,9 +1873,9 @@ Func_ae19e: ; ae19e (2b:619e)
 	ld a, [w2d146]
 	cp $02
 	ret nz
-	ld hl, wOWObj1Unk6
+	ld hl, wSceneObj1State
 	ld a, $01
-	call Func_3b93
+	call SetSceneObjState
 	jp Func_adf97
 ; 0xae1af
 
@@ -1883,9 +1883,9 @@ Func_ae1af: ; ae1af (2b:61af)
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	ret z
-	ld hl, wOWObj1Unk6
+	ld hl, wSceneObj1State
 	xor a
-	call Func_3b93
+	call SetSceneObjState
 	call Func_ace60
 	jp Func_adf97
 ; 0xae1c2
@@ -1937,14 +1937,14 @@ Func_ae1f1: ; ae1f1 (2b:61f1)
 ; 0xae1f5
 
 Func_ae1f5: ; ae1f5 (2b:61f5)
-	ld hl, wOWObj4
+	ld hl, wSceneObj4
 	ld a, $38
 	ld [hli], a
 	ld a, $38
 	ld [hl], a
 	ld a, $0e
-	ld hl, wOWObj4Unk6
-	call Func_3b93
+	ld hl, wSceneObj4State
+	call SetSceneObjState
 	play_sfx SFX_104
 	jp Func_ae1ce
 ; 0xae211
@@ -1955,14 +1955,14 @@ Func_ae211: ; ae211 (2b:6211)
 ; 0xae215
 
 Func_ae215: ; ae215 (2b:6215)
-	ld hl, wOWObj5
+	ld hl, wSceneObj5
 	ld a, $30
 	ld [hli], a
 	ld a, $78
 	ld [hl], a
 	ld a, $0e
-	ld hl, wOWObj5Unk6
-	call Func_3b93
+	ld hl, wSceneObj5State
+	call SetSceneObjState
 	jp Func_ae1ce
 ; 0xae229
 
@@ -2037,14 +2037,14 @@ Func_ae27a: ; ae27a (2b:627a)
 	add $10
 	ld [hl], a
 	ld a, $11
-	ld hl, w2d180Unk6
-	call Func_3b93
+	ld hl, w2d180State
+	call SetSceneObjState
 	play_sfx SFX_106
 	jp Func_ae1ce
 ; 0xae2a2
 
 Func_ae2a2: ; ae2a2 (2b:62a2)
-	ld a, [w2d180Unk6]
+	ld a, [w2d180State]
 	and a
 	ret nz
 	jp Func_ae1ce
@@ -2107,8 +2107,8 @@ Func_ae2dd: ; ae2dd (2b:62dd)
 
 Func_ae2ed: ; ae2ed (2b:62ed)
 	ld a, $0e
-	ld hl, wOWObj1Unk6
-	call Func_3b93
+	ld hl, wSceneObj1State
+	call SetSceneObjState
 Func_ae2f5: ; ae2f5 (2b:62f5)
 	ld hl, w2d8b1
 	xor a
@@ -2119,14 +2119,14 @@ Func_ae2fb: ; ae2fb (2b:62fb)
 ; 0xae2fc
 
 Func_ae2fc: ; ae2fc (2b:62fc)
-	ld a, [wOWObj1Unk6]
+	ld a, [wSceneObj1State]
 	and a
 	ret nz
 	jr Func_ae2f5
 ; 0xae303
 
 Func_ae303: ; ae303 (2b:6303)
-	ld a, [wOWObj1Unk6]
+	ld a, [wSceneObj1State]
 	and a
 	ret nz
 	ld hl, w2d8b0
@@ -2179,7 +2179,7 @@ Func_ae31c: ; ae31c (2b:631c)
 ; 0xae352
 
 Func_ae352: ; ae352 (2b:6352)
-	ld a, [wOWObj1Unk6]
+	ld a, [wSceneObj1State]
 	and a
 	ret nz
 	jp Func_ae1ce
@@ -2208,9 +2208,9 @@ Func_ae37c: ; ae37c (2b:637c)
 	ld a, [w2d891]
 	cp $08
 	ret nc
-	ld hl, wOWObj3Unk6
+	ld hl, wSceneObj3State
 	ld a, $0a
-	call Func_3b93
+	call SetSceneObjState
 	jp Func_ae1ce
 ; 0xae38d
 
@@ -2240,12 +2240,12 @@ Func_ae3a9: ; ae3a9 (2b:63a9)
 	ld a, [w2d891]
 	and $07
 	ret nz
-	ld hl, wOWObj3YCoord
+	ld hl, wSceneObj3YCoord
 	dec [hl]
 	ld a, [hl]
 	ld b, a
 	sub $08
-	ld [wOWObj2YCoord], a
+	ld [wSceneObj2YCoord], a
 	ld a, b
 	cp $b4
 	jr z, .asm_ae3c5
@@ -2253,9 +2253,9 @@ Func_ae3a9: ; ae3a9 (2b:63a9)
 	ret nz
 	jp Func_ae1ce
 .asm_ae3c5
-	ld hl, wOWObj2Unk6
+	ld hl, wSceneObj2State
 	ld a, $0c
-	call Func_3b93
+	call SetSceneObjState
 	ld a, $01
 	ld [w2d150], a
 	ret
@@ -2268,8 +2268,8 @@ Func_ae3d3: ; ae3d3 (2b:63d3)
 
 Func_ae3d8: ; ae3d8 (2b:63d8)
 	xor a
-	ld hl, wOWObj2Unk6
-	call Func_3b93
+	ld hl, wSceneObj2State
+	call SetSceneObjState
 	jp Func_ae1ce
 ; 0xae3e2
 
@@ -2281,13 +2281,13 @@ Func_ae3e2: ; ae3e2 (2b:63e2)
 	ld a, [w2d141]
 	ld [hl], a
 	ld a, $0e
-	ld hl, w2d180Unk6
-	call Func_3b93
+	ld hl, w2d180State
+	call SetSceneObjState
 	jp Func_ae1ce
 ; 0xae3fa
 
 Func_ae3fa: ; ae3fa (2b:63fa)
-	ld a, [w2d180Unk6]
+	ld a, [w2d180State]
 	and a
 	ret nz
 	ld a, $80
@@ -2304,8 +2304,8 @@ Func_ae407: ; ae407 (2b:6407)
 	add $02
 	ld [hl], a
 	ld a, $15
-	ld hl, w2d180Unk6
-	call Func_3b93
+	ld hl, w2d180State
+	call SetSceneObjState
 
 	ld hl, wTempOBPals
 	ld b, $04
@@ -2322,7 +2322,7 @@ Func_ae407: ; ae407 (2b:6407)
 ; 0xae435
 
 Func_ae435: ; ae435 (2b:6435)
-	ld a, [w2d180Unk6]
+	ld a, [w2d180State]
 	cp $16
 	ret nz
 	xor a
@@ -2365,18 +2365,18 @@ Func_ae447: ; ae447 (2b:6447)
 	jp Func_ae1ce
 .asm_ae46d
 	ld a, $17
-	ld hl, w2d180Unk6
-	call Func_3b93
+	ld hl, w2d180State
+	call SetSceneObjState
 	ret
 ; 0xae476
 
 Func_ae476: ; ae476 (2b:6476)
 	ld a, $09
-	ld hl, wOWObj3Unk6
-	call Func_3b93
+	ld hl, wSceneObj3State
+	call SetSceneObjState
 	xor a
-	ld hl, w2d180Unk6
-	call Func_3b93
+	ld hl, w2d180State
+	call SetSceneObjState
 	jp Func_ae1ce
 ; 0xae488
 
@@ -2384,7 +2384,7 @@ Func_ae488: ; ae488 (2b:6488)
 	ld a, [w2d891]
 	srl a
 	ret c
-	ld hl, wOWObj3XCoord
+	ld hl, wSceneObj3XCoord
 	cp $01
 	jr z, .asm_ae49f
 	cp $02
@@ -2408,7 +2408,7 @@ Func_ae4a4: ; ae4a4 (2b:64a4)
 Func_ae4a9: ; ae4a9 (2b:64a9)
 	ld hl, w2d891
 	call Func_ae4c0
-	ld hl, wOWObj3YCoord
+	ld hl, wSceneObj3YCoord
 	add [hl]
 	ld [hl], a
 	cp $c3
@@ -2442,7 +2442,7 @@ Func_ae4e5: ; ae4e5 (2b:64e5)
 	call Func_ae4fe
 	and a
 	ret z
-	ld hl, wOWObj3YCoord
+	ld hl, wSceneObj3YCoord
 	add [hl]
 	ld [hl], a
 	cp $c3
@@ -2582,8 +2582,8 @@ Func_ae5b1: ; ae5b1 (2b:65b1)
 	add $09
 	ld [w2d180XCoord], a
 	ld a, $14
-	ld hl, w2d180Unk6
-	call Func_3b93
+	ld hl, w2d180State
+	call SetSceneObjState
 	jp Func_ae1ce
 ; 0xae5d0
 
@@ -2880,8 +2880,8 @@ Func_ae724: ; ae724 (2b:6724)
 	ld a, [w2d141]
 	ld [hl], a
 	ld a, $10
-	ld hl, w2d180Unk6
-	call Func_3b93
+	ld hl, w2d180State
+	call SetSceneObjState
 	jr .asm_ae768
 .asm_ae794
 	ld hl, w2d893
@@ -3045,14 +3045,14 @@ Func_ae871: ; ae871 (2b:6871)
 	add $10
 	ld [hl], a
 	ld a, $11
-	ld hl, w2d180Unk6
-	call Func_3b93
+	ld hl, w2d180State
+	call SetSceneObjState
 	play_sfx SFX_106
 	jp Func_ae1ce
 ; 0xae893
 
 Func_ae893: ; ae893 (2b:6893)
-	ld a, [w2d180Unk6]
+	ld a, [w2d180State]
 	and a
 	ret nz
 	jp Func_ae1ce
@@ -3152,7 +3152,7 @@ Func_ae919: ; ae919 (2b:6919)
 	ld [hli], a
 	set 2, l
 	ld a, c
-	call Func_3b93
+	call SetSceneObjState
 	ret
 ; 0xae924
 
@@ -3189,7 +3189,7 @@ Func_ae950: ; ae950 (2b:6950)
 ; 0xae956
 
 Func_ae956: ; ae956 (2b:6956)
-	ld a, [wOWObj3YCoord]
+	ld a, [wSceneObj3YCoord]
 	cp $62
 	ret nz
 	play_sfx SFX_006
@@ -3207,7 +3207,7 @@ Func_ae969: ; ae969 (2b:6969)
 ; 0xae971
 
 Func_ae971: ; ae971 (2b:6971)
-	ld hl, wOWObj3
+	ld hl, wSceneObj3
 	lb de, $2e, $f0
 	ld c, $06
 	call Func_ae919
@@ -3231,7 +3231,7 @@ Func_ae989: ; ae989 (2b:6989)
 ; 0xae98d
 
 Func_ae98d: ; ae98d (2b:698d)
-	ld hl, wOWObj3
+	ld hl, wSceneObj3
 	lb de, $4d, $e0
 	ld c, $05
 	call Func_ae919
@@ -3255,7 +3255,7 @@ Func_ae9a5: ; ae9a5 (2b:69a5)
 ; 0xae9a9
 
 Func_ae9a9: ; ae9a9 (2b:69a9)
-	ld hl, wOWObj3
+	ld hl, wSceneObj3
 	lb de, $3e, $f0
 	ld c, $04
 	call Func_ae919
@@ -3281,28 +3281,28 @@ Func_ae9c1: ; ae9c1 (2b:69c1)
 Func_ae9c5: ; ae9c5 (2b:69c5)
 	xor a
 	ld [w2d8a2], a
-	ld hl, wOWObj3Unk6
-	call Func_3b93
+	ld hl, wSceneObj3State
+	call SetSceneObjState
 	ret
 ; 0xae9d0
 
 Func_ae9d0: ; ae9d0 (2b:69d0)
 	ld de, Data_aee09
-	ld hl, wOWObj3
+	ld hl, wSceneObj3
 	call Func_3c25
 	ret
 ; 0xae9da
 
 Func_ae9da: ; ae9da (2b:69da)
 	ld de, Data_aedba
-	ld hl, wOWObj3
+	ld hl, wSceneObj3
 	call Func_3c25
 	ret
 ; 0xae9e4
 
 Func_ae9e4: ; ae9e4 (2b:69e4)
 	ld de, Data_aed6d
-	ld hl, wOWObj3
+	ld hl, wSceneObj3
 	call Func_3c25
 	ret
 ; 0xae9ee
@@ -3339,7 +3339,7 @@ Func_ae9ee: ; ae9ee (2b:69ee)
 	jp Func_ae915
 
 .Func_aea24
-	ld a, [wOWObj4YCoord]
+	ld a, [wSceneObj4YCoord]
 	cp $62
 	ret nz
 	play_sfx SFX_006
@@ -3355,13 +3355,13 @@ Func_ae9ee: ; ae9ee (2b:69ee)
 	jp Func_ae915
 
 .Func_aea40
-	ld hl, wOWObj4
+	ld hl, wSceneObj4
 	lb de, $3e, $f0
 	ld c, $02
 	call Func_ae919
 	xor a
-	ld hl, wOWObj1Unk6
-	call Func_3b93
+	ld hl, wSceneObj1State
+	call SetSceneObjState
 	jr .Func_aea1e
 
 .Func_aea54
@@ -3379,8 +3379,8 @@ Func_ae9ee: ; ae9ee (2b:69ee)
 
 .Func_aea63
 	ld a, $12
-	ld hl, wOWObj4Unk6
-	call Func_3b93
+	ld hl, wSceneObj4State
+	call SetSceneObjState
 	jr .Func_aea1e
 
 .Func_aea6d
@@ -3388,34 +3388,34 @@ Func_ae9ee: ; ae9ee (2b:69ee)
 	jr .Func_aea37
 
 .Func_aea71
-	ld hl, wOWObj4
+	ld hl, wSceneObj4
 	lb de, $2e, $e0
 	ld c, $08
 	call Func_ae919
 
 .Func_aea7c
-	ld a, [wOWObj4YCoord]
-	ld [wOWObj1YCoord], a
-	ld a, [wOWObj4XCoord]
-	ld [wOWObj1XCoord], a
+	ld a, [wSceneObj4YCoord]
+	ld [wSceneObj1YCoord], a
+	ld a, [wSceneObj4XCoord]
+	ld [wSceneObj1XCoord], a
 	ld a, $0f
-	ld hl, wOWObj1Unk6
-	call Func_3b93
+	ld hl, wSceneObj1State
+	call SetSceneObjState
 	jr .Func_aea1e
 
 .Func_aea92
 	call .Func_aeaf9
 
 .asm_aea95
-	ld a, [wOWObj4XCoord]
-	ld [wOWObj1XCoord], a
-	ld a, [wOWObj4YCoord]
-	ld [wOWObj1YCoord], a
+	ld a, [wSceneObj4XCoord]
+	ld [wSceneObj1XCoord], a
+	ld a, [wSceneObj4YCoord]
+	ld [wSceneObj1YCoord], a
 	cp $62
 	ret nz
 	ld a, $10
-	ld hl, wOWObj1Unk6
-	call Func_3b93
+	ld hl, wSceneObj1State
+	call SetSceneObjState
 	play_sfx SFX_006
 	ld hl, w2d8a4
 	inc [hl]
@@ -3431,7 +3431,7 @@ Func_ae9ee: ; ae9ee (2b:69ee)
 	jp .Func_aea37
 
 .Func_aeac5
-	ld hl, wOWObj4
+	ld hl, wSceneObj4
 	lb de, $2e, $f4
 	ld c, $04
 	call Func_ae919
@@ -3453,25 +3453,25 @@ Func_ae9ee: ; ae9ee (2b:69ee)
 .Func_aeae4
 	xor a
 	ld [w2d8a4], a
-	ld hl, wOWObj4Unk6
-	call Func_3b93
+	ld hl, wSceneObj4State
+	call SetSceneObjState
 	ret
 
 .Func_aeaef
 	ld de, Data_aed6d
-	ld hl, wOWObj4
+	ld hl, wSceneObj4
 	call Func_3c25
 	ret
 
 .Func_aeaf9
 	ld de, Data_aee09
-	ld hl, wOWObj4
+	ld hl, wSceneObj4
 	call Func_3c25
 	ret
 
 .Func_aeb03
 	ld de, Data_aee09
-	ld hl, wOWObj4
+	ld hl, wSceneObj4
 	call Func_3c25
 	ret
 ; 0xaeb0d
@@ -3508,7 +3508,7 @@ Func_aeb0d: ; aeb0d (2b:6b0d)
 	jp Func_ae915
 
 .Func_aeb43
-	ld a, [wOWObj5YCoord]
+	ld a, [wSceneObj5YCoord]
 	cp $62
 	ret nz
 	play_sfx SFX_006
@@ -3524,30 +3524,30 @@ Func_aeb0d: ; aeb0d (2b:6b0d)
 	jp Func_ae915
 
 .Func_aeb5f
-	ld hl, wOWObj5
+	ld hl, wSceneObj5
 	lb de, $3e, $e0
 	ld c, $03
 	call Func_ae919
-	ld a, [wOWObj5YCoord]
-	ld [wOWObj2YCoord], a
-	ld a, [wOWObj5XCoord]
-	ld [wOWObj2XCoord], a
+	ld a, [wSceneObj5YCoord]
+	ld [wSceneObj2YCoord], a
+	ld a, [wSceneObj5XCoord]
+	ld [wSceneObj2XCoord], a
 	ld a, $0f
-	ld hl, wOWObj2Unk6
-	call Func_3b93
+	ld hl, wSceneObj2State
+	call SetSceneObjState
 	jr .Func_aeb3d
 
 .Func_aeb80
 	call .Func_aec0b
-	ld a, [wOWObj5XCoord]
-	ld [wOWObj2XCoord], a
-	ld a, [wOWObj5YCoord]
-	ld [wOWObj2YCoord], a
+	ld a, [wSceneObj5XCoord]
+	ld [wSceneObj2XCoord], a
+	ld a, [wSceneObj5YCoord]
+	ld [wSceneObj2YCoord], a
 	cp $62
 	ret nz
 	ld a, $10
-	ld hl, wOWObj2Unk6
-	call Func_3b93
+	ld hl, wSceneObj2State
+	call SetSceneObjState
 	play_sfx SFX_006
 	ld hl, w2d8a6
 	inc [hl]
@@ -3563,7 +3563,7 @@ Func_aeb0d: ; aeb0d (2b:6b0d)
 	jr .Func_aeb56
 
 .Func_aebb1
-	ld hl, wOWObj5
+	ld hl, wSceneObj5
 	lb de, $2e, $f0
 	ld c, $07
 	call Func_ae919
@@ -3584,8 +3584,8 @@ Func_aeb0d: ; aeb0d (2b:6b0d)
 
 .Func_aebd0
 	ld a, $13
-	ld hl, wOWObj5Unk6
-	call Func_3b93
+	ld hl, wSceneObj5State
+	call SetSceneObjState
 	jp .Func_aeb3d
 
 .Func_aebdb
@@ -3593,7 +3593,7 @@ Func_aeb0d: ; aeb0d (2b:6b0d)
 	jp .Func_aeb56
 
 .Func_aebe0
-	ld hl, wOWObj5
+	ld hl, wSceneObj5
 	lb de, $4d, $f8
 	ld c, $05
 	call Func_ae919
@@ -3615,14 +3615,14 @@ Func_aeb0d: ; aeb0d (2b:6b0d)
 .Func_aec00
 	xor a
 	ld [w2d8a6], a
-	ld hl, wOWObj5Unk6
-	call Func_3b93
+	ld hl, wSceneObj5State
+	call SetSceneObjState
 	ret
 
 .Func_aec0b
 	ld de, Data_aed6d
 .Func_aec0e
-	ld hl, wOWObj5
+	ld hl, wSceneObj5
 	call Func_3c25
 	ret
 
@@ -3663,7 +3663,7 @@ Func_aec1f: ; aec1f (2b:6c1f)
 	jp Func_ae915
 
 .Func_aec4d
-	ld a, [wOWObj9YCoord]
+	ld a, [wSceneObj9YCoord]
 	cp $62
 	ret nz
 	play_sfx SFX_006
@@ -3679,7 +3679,7 @@ Func_aec1f: ; aec1f (2b:6c1f)
 	jp Func_ae915
 
 .Func_aec69
-	ld hl, wOWObj9
+	ld hl, wSceneObj9
 	lb de, $4d, $f0
 	ld c, $07
 	call Func_ae919
@@ -3700,8 +3700,8 @@ Func_aec1f: ; aec1f (2b:6c1f)
 
 .Func_aec85
 	ld a, $13
-	ld hl, wOWObj9Unk6
-	call Func_3b93
+	ld hl, wSceneObj9State
+	call SetSceneObjState
 	jr .Func_aec47
 
 .Func_aec8f
@@ -3709,30 +3709,30 @@ Func_aec1f: ; aec1f (2b:6c1f)
 	jr .Func_aec60
 
 .Func_aec93
-	ld hl, wOWObj9
+	ld hl, wSceneObj9
 	lb de, $3e, $f0
 	ld c, $08
 	call Func_ae919
-	ld a, [wOWObj9YCoord]
-	ld [wOWObj8YCoord], a
-	ld a, [wOWObj9XCoord]
-	ld [wOWObj8XCoord], a
+	ld a, [wSceneObj9YCoord]
+	ld [wSceneObj8YCoord], a
+	ld a, [wSceneObj9XCoord]
+	ld [wSceneObj8XCoord], a
 	ld a, $0f
-	ld hl, wOWObj8Unk6
-	call Func_3b93
+	ld hl, wSceneObj8State
+	call SetSceneObjState
 	jr .Func_aec47
 
 .Func_aecb4
 	call .Func_aecfc
-	ld a, [wOWObj9XCoord]
-	ld [wOWObj8XCoord], a
-	ld a, [wOWObj9YCoord]
-	ld [wOWObj8YCoord], a
+	ld a, [wSceneObj9XCoord]
+	ld [wSceneObj8XCoord], a
+	ld a, [wSceneObj9YCoord]
+	ld [wSceneObj8YCoord], a
 	cp $62
 	ret nz
 	ld a, $10
-	ld hl, wOWObj8Unk6
-	call Func_3b93
+	ld hl, wSceneObj8State
+	call SetSceneObjState
 	play_sfx SFX_006
 	ld hl, w2d8a8
 	inc [hl]
@@ -3750,14 +3750,14 @@ Func_aec1f: ; aec1f (2b:6c1f)
 .Func_aece7
 	xor a
 	ld [w2d8a8], a
-	ld hl, wOWObj9Unk6
-	call Func_3b93
+	ld hl, wSceneObj9State
+	call SetSceneObjState
 	ret
 
 .Func_aecf2
 	ld de, Data_aedba
 .Func_aecf5
-	ld hl, wOWObj9
+	ld hl, wSceneObj9
 	call Func_3c25
 	ret
 
