@@ -275,7 +275,7 @@ Func_80aa: ; 80aa (2:40aa)
 	ld [wcee2], a
 	ld [wca9c], a
 
-	ld hl, wca3d
+	ld hl, wGameModeFlags
 	ld a, [wLevelEndScreen]
 	cp LVLEND_GAME_OVER
 	jr z, .game_over
@@ -286,8 +286,8 @@ Func_80aa: ; 80aa (2:40aa)
 	inc [hl]
 	xor a
 	ld [wSubState], a
-	ld a, [wca3d]
-	bit 1, a
+	ld a, [wGameModeFlags]
+	bit MODE_TIME_ATTACK_F, a
 	ret z
 	ld a, $04
 	ld [wSubState], a
@@ -301,18 +301,18 @@ Func_80aa: ; 80aa (2:40aa)
 .epilogue
 	ld a, [wNumberCollectedTreasures]
 	dec a
-	jr z, .asm_82b1
+	jr z, .got_all_treasures
 	ld a, $f1
 	ld [wcee3], a
-	jr .asm_82b8
-.asm_82b1
+	jr .set_night
+.got_all_treasures
 	ld a, $f2
 	ld [wcee3], a
-	set 1, [hl]
-.asm_82b8
-	set 0, [hl]
+	set MODE_TIME_ATTACK_F, [hl]
+.set_night
+	set MODE_DAY_NIGHT_F, [hl]
 .asm_82ba
-	set 2, [hl]
+	set MODE_UNKNOWN_2_F, [hl]
 
 	ld hl, wState
 	ld [hl], ST_06
@@ -8956,8 +8956,8 @@ Func_bc5e: ; bc5e (2:7c5e)
 ; 0xbd3c
 
 Func_bd3c: ; bd3c (2:7d3c)
-	ld a, [wca3d]
-	bit 1, a
+	ld a, [wGameModeFlags]
+	bit MODE_TIME_ATTACK_F, a
 	ret z
 	ld a, [wLevelEndScreen]
 	and a

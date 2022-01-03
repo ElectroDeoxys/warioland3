@@ -491,8 +491,12 @@ wNumCoins:: ; ca04
 wLevel:: ; ca06
 	ds $1
 
-wca07:: ; ca07
-	ds 2 * $19
+; digits are represented in each nybble
+; the first byte holds the tens and ones digits
+; for the minute value, and the second byte
+; holds the tens and ones digits for seconds
+wLevelTimeAttackScores:: ; ca07
+	ds 2 * NUM_LEVELS
 
 ; stores total number of treasures collected
 ; byte 1 lo nybble = hundreds
@@ -502,6 +506,7 @@ wNumberCollectedTreasures:: ; ca39
 	ds $2
 
 ; bit 0: unset is day, set is night
+; bit 1: whether it's Time Attack mode
 wca3b:: ; ca3b
 	ds $1
 
@@ -511,7 +516,7 @@ wca3b:: ; ca3b
 wPowerUpLevel:: ; ca3c
 	ds $1
 
-wca3d:: ; ca3d
+wGameModeFlags:: ; ca3d
 	ds $1
 
 wca3e:: ; ca3e
@@ -1494,11 +1499,8 @@ w2d0a8:: ; d0a8
 
 	ds $7
 
-wHDMA:: ; d0b0
-	ds $5
-
-w2d0b5:: ; d0b5
-	ds $5
+wHDMA:: hdma_config_struct wHDMA ; d0b0
+w2d0b5:: hdma_config_struct w2d0b5 ; d0b5
 
 	ds $6
 
@@ -1704,7 +1706,7 @@ w2d152:: ; d152
 
 	ds $5
 
-w2d158:: ; d158
+wHDMADestVRAMBank:: ; d158
 	ds $1
 
 	ds $7

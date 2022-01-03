@@ -882,7 +882,7 @@ Func_ac8d4: ; ac8d4 (2b:48d4)
 	ld [hl], a
 
 	xor a
-	ld [w2d158], a
+	ld [wHDMADestVRAMBank], a
 	ret
 
 data_ac962: MACRO
@@ -1142,6 +1142,8 @@ VBlank_accb0: ; accb0 (2b:4cb0)
 .func
 	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
+
+	; apply scroll
 	ld a, [wSCY]
 	ldh [rSCY], a
 	ld a, [wSCX]
@@ -1149,16 +1151,15 @@ VBlank_accb0: ; accb0 (2b:4cb0)
 
 	ld a, [wHDMABank]
 	and a
-	jr z, .asm_accff
+	jr z, .skip_hdma_config
 	ld b, a
 	xor a
 	ld [wHDMABank], a
 	ld a, [wROMBank]
 	push af
 	ld a, b
-
 	bankswitch
-	ld a, [w2d158]
+	ld a, [wHDMADestVRAMBank]
 	ldh [rVBK], a
 	ld hl, wHDMA
 	ld a, [hli]
@@ -1178,9 +1179,9 @@ VBlank_accb0: ; accb0 (2b:4cb0)
 	ld [$ff00+c], a ; rHDMA5
 	pop af
 	bankswitch
+.skip_hdma_config
 
-.asm_accff
-	ld hl, w2da88 + 0
+	ld hl, w2da88
 	ld a, [hl]
 	and a
 	jr z, .asm_acd13
@@ -1190,12 +1191,13 @@ VBlank_accb0: ; accb0 (2b:4cb0)
 	ld a, [hli]
 	ld d, a
 	ld a, [hli]
-	ld [de], a
+	ld [de], a ; w2da8a
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld a, [hl]
+	ld a, [hl] ; w2da8b
 	ld [de], a
 .asm_acd13
+
 	xor a
 	ldh [rVBK], a
 	ld hl, wPalConfig1
@@ -1257,7 +1259,7 @@ Func_ace6a: ; ace6a (2b:4e6a)
 	ld [wHDMABank], a
 
 	xor a
-	ld [w2d158], a
+	ld [wHDMADestVRAMBank], a
 	ld [w2da88 + 0], a
 	ret
 ; 0xace90
@@ -1443,8 +1445,8 @@ _InitPrologueSequence: ; ade49 (2b:5e49)
 	ldh [hCallFuncBank], a
 	hcall Decompress
 
-	ld hl, Tiles_b0f80
-	ld b, BANK(Tiles_b0f80)
+	ld hl, PrologueBackgroundGfx
+	ld b, BANK(PrologueBackgroundGfx)
 	call LoadFarTiles
 
 	ld a, BANK("VRAM1")
@@ -1757,7 +1759,7 @@ Func_ae0c4: ; ae0c4 (2b:60c4)
 
 Func_ae0f9: ; ae0f9 (2b:60f9)
 	xor a
-	ld [w2d158], a
+	ld [wHDMADestVRAMBank], a
 	ld de, BGMap_b0300
 	ld b, $18
 	ld c, $23
@@ -1781,8 +1783,8 @@ Func_ae104: ; ae104 (2b:6104)
 ; 0xae119
 
 Func_ae119: ; ae119 (2b:6119)
-	ld a, $01
-	ld [w2d158], a
+	ld a, BANK("VRAM1")
+	ld [wHDMADestVRAMBank], a
 	ld de, BGMap_b0540
 	ld b, $18
 	ld c, $23
@@ -1791,7 +1793,7 @@ Func_ae119: ; ae119 (2b:6119)
 
 Func_ae127: ; ae127 (2b:6127)
 	xor a
-	ld [w2d158], a
+	ld [wHDMADestVRAMBank], a
 	ld de, BGMap_b0780
 	ld b, $10
 	ld c, $7f

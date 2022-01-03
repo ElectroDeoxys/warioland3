@@ -36,8 +36,8 @@ LoadPauseMenuGfx: ; 1f400d (7d:400d)
 ; 0x1f403f
 
 Func_1f403f: ; 1f403f (7d:403f)
-	ld a, [wca3d]
-	bit 1, a
+	ld a, [wGameModeFlags]
+	bit MODE_TIME_ATTACK_F, a
 	jr nz, .asm_1f4060
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
@@ -70,7 +70,7 @@ Func_1f403f: ; 1f403f (7d:403f)
 	add a
 	ld e, a
 	ld d, $00
-	ld hl, wca07
+	ld hl, wLevelTimeAttackScores
 	add hl, de
 	ld a, [hli]
 	ld [w3d511 + 0], a

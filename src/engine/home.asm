@@ -3189,8 +3189,8 @@ LoadWarioGfx: ; 15b0 (0:15b0)
 ; 0x15dc
 
 Func_15dc: ; 15dc (0:15dc)
-	ld a, [wca3d]
-	bit 1, a
+	ld a, [wGameModeFlags]
+	bit MODE_TIME_ATTACK_F, a
 	jr nz, .asm_15ff
 	ld a, [wcee3]
 	cp $f1
@@ -3199,8 +3199,8 @@ Func_15dc: ; 15dc (0:15dc)
 	jr z, .asm_15ff
 	cp $f3
 	jr z, .asm_15ff
-	ld a, [wca3d]
-	and $01
+	ld a, [wGameModeFlags]
+	and ($1 << MODE_DAY_NIGHT_F)
 	jr z, .asm_15ff
 	ld a, [wNumberCollectedTreasures]
 	dec a

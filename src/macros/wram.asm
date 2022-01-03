@@ -71,6 +71,14 @@ pal_config_struct: MACRO
 \1SourceLo:: db
 ENDM
 
+hdma_config_struct: MACRO
+\1SourceHi:: db
+\1SourceLo:: db
+\1DestHi::   db
+\1DestLo::   db
+\1Mode::     db
+ENDM
+
 unk3_struct: MACRO
 \1Unk00:: db
 \1Unk01:: db

@@ -1079,10 +1079,10 @@ Func_80655: ; 80655 (20:4655)
 ; 0x8065e
 
 Func_8065e: ; 8065e (20:465e)
-	ld a, [wca3d]
+	ld a, [wGameModeFlags]
 	ld c, a
-	and $1
-	bit 1, c
+	and ($1 << MODE_DAY_NIGHT_F)
+	bit MODE_TIME_ATTACK_F, c
 	jr z, .asm_80669
 	xor a
 .asm_80669
@@ -1143,8 +1143,8 @@ Func_8065e: ; 8065e (20:465e)
 	farcall Func_b4aa9
 	call Func_80bc9
 
-	ld a, [wca3d]
-	bit 1, a
+	ld a, [wGameModeFlags]
+	bit MODE_TIME_ATTACK_F, a
 	jr nz, .asm_80753
 	ld a, BANK(BGMap_86868)
 	ld [wTempBank], a
@@ -1988,8 +1988,8 @@ TreasureCollection: ; 80dd0 (20:4dd0)
 
 Func_80de0: ; 80de0 (20:4de0)
 	xor a
-	ld a, [wca3d]
-	bit 1, a
+	ld a, [wGameModeFlags]
+	bit MODE_TIME_ATTACK_F, a
 	ret z
 	ld a, [wJoypadPressed]
 	bit START_F, a
@@ -2241,8 +2241,8 @@ Func_81077: ; 81077 (20:5077)
 	ld a, [w2d00e]
 	cp $ed
 	jr nz, .asm_81092
-	ld a, [wca3d]
-	bit 0, a
+	ld a, [wGameModeFlags]
+	bit MODE_DAY_NIGHT_F, a
 	ret nz
 .asm_81092
 	call Func_3c76
@@ -2686,8 +2686,8 @@ Func_813bc: ; 813bc (20:53bc)
 	ld a, CUTSCENE_25
 	cp c
 	jr nc, .asm_813d8
-	ld a, [wca3d]
-	bit 0, a
+	ld a, [wGameModeFlags]
+	bit MODE_DAY_NIGHT_F, a
 	jr nz, .asm_813d8
 .asm_813d3
 	ld b, $00
@@ -5733,15 +5733,15 @@ Data_826ee: ; 826ee (20:66ee)
 
 Func_826f6: ; 826f6 (20:66f6)
 	ld a, HIGH(wAttrmap tile $2a)
-	ld [wHDMA + 0], a
+	ld [wHDMASourceHi], a
 	ld a, LOW(wAttrmap tile $2a)
-	ld [wHDMA + 1], a
+	ld [wHDMASourceLo], a
 	ld a, $1b
-	ld [wHDMA + 2], a
+	ld [wHDMADestHi], a
 	ld a, $c0
-	ld [wHDMA + 3], a
+	ld [wHDMADestLo], a
 	ld a, $03
-	ld [wHDMA + 4], a
+	ld [wHDMAMode], a
 
 	ld a, HIGH(wAttrmap tile $26)
 	ld [w2d0b5 + 0], a
@@ -5999,8 +5999,8 @@ HandleBottomBar: ; 82761 (20:6761)
 ; 0x828b3
 
 DrawBottomBar: ; 828b3 (20:68b3)
-	ld a, [wca3d]
-	bit 1, a
+	ld a, [wGameModeFlags]
+	bit MODE_TIME_ATTACK_F, a
 	jp nz, Func_82997
 
 	ld a, [wLevelGreyTreasurePal]

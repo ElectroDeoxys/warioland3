@@ -1216,8 +1216,8 @@ HandlePauseMenuInput: ; 1f09bd (7c:49bd)
 	ret z
 	jp .Return
 .asm_1f09e7
-	ld a, [wca3d]
-	bit 1, a
+	ld a, [wGameModeFlags]
+	bit MODE_TIME_ATTACK_F, a
 	jr nz, .asm_1f0a45
 	jr .asm_1f0a2a
 
@@ -1241,8 +1241,8 @@ HandlePauseMenuInput: ; 1f09bd (7c:49bd)
 	ret z
 	jp .ActionHelp
 .asm_1f0a13
-	ld a, [wca3d]
-	bit 1, a
+	ld a, [wGameModeFlags]
+	bit MODE_TIME_ATTACK_F, a
 	jp nz, .asm_1f0aa1
 	jr .asm_1f0a2a
 
@@ -2487,8 +2487,8 @@ Func_1f1246: ; 1f1246 (7c:5246)
 	and $3f
 	jr nz, .asm_1f1266
 .asm_1f1251
-	ld hl, wca07
-	ld b, $32
+	ld hl, wLevelTimeAttackScores
+	ld b, 2 * NUM_LEVELS
 	ld a, $aa
 	call WriteAToHL_BTimes
 	ld hl, wca42

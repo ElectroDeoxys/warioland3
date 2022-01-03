@@ -234,8 +234,8 @@ InitIntroSequence: ; 405f (1:405f)
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld a, [wca3d]
-	bit 1, a
+	ld a, [wGameModeFlags]
+	bit MODE_TIME_ATTACK_F, a
 	jr nz, .asm_4178
 	ld a, HIGH(Frameset_6ce9)
 	ld [hli], a
@@ -253,8 +253,8 @@ InitIntroSequence: ; 405f (1:405f)
 	ld hl, wMenuObj2
 	ld a, $86
 	ld [hli], a
-	ld a, [wca3d]
-	bit 1, a
+	ld a, [wGameModeFlags]
+	bit MODE_TIME_ATTACK_F, a
 	jr nz, .asm_4192
 	ld a, $44
 	jr .asm_4194
@@ -905,8 +905,8 @@ StartMenu: ; 4508 (1:4508)
 	ld a, 130
 	ld [wMenuObj1YCoord], a
 
-	ld a, [wca3d]
-	bit 1, a
+	ld a, [wGameModeFlags]
+	bit MODE_TIME_ATTACK_F, a
 	jr nz, .asm_45aa
 	ld a, $80
 	ld [wcee4], a
@@ -953,8 +953,8 @@ StartMenu: ; 4508 (1:4508)
 	ld [wceef], a
 
 .asm_45ed
-	ld a, [wca3d]
-	bit 1, a
+	ld a, [wGameModeFlags]
+	bit MODE_TIME_ATTACK_F, a
 	jr nz, .TimeAttack
 	ld a, [wceef]
 	and $3c
@@ -1411,10 +1411,10 @@ LoadTimeAttackDescriptionTiles: ; 4972 (1:4972)
 
 	xor a ; VRAM0
 	ldh [rVBK], a
-	ld hl, Tiles_b0f80
+	ld hl, PrologueBackgroundGfx
 	ld de, v0Tiles2
-	ld bc, $800
-	ld a, BANK(Tiles_b0f80)
+	ld bc, $80 tiles
+	ld a, BANK(PrologueBackgroundGfx)
 	ldh [hCallFuncBank], a
 	hcall CopyHLToDE_BC
 	ret

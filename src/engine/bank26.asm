@@ -1346,7 +1346,7 @@ Func_9aa81: ; 9aa81 (26:6a81)
 LoadLevelTreasureData: ; 9aa90 (26:6a90)
 	ldh a, [rSVBK]
 	push af
-	ld a, 2 ; WRAM2
+	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
 	call ClearTreasureData
 	call LoadLevelTreasures
@@ -1356,7 +1356,7 @@ LoadLevelTreasureData: ; 9aa90 (26:6a90)
 	xor a ; VRAM0
 	ldh [rVBK], a
 	ld hl, wTreasureTiles
-	ld de, v0Tiles1 + $100
+	ld de, v0Tiles1 tile $10
 	ld b, $00 ; $100 bytes = 10 tiles
 	call CopyHLToDE
 	pop af
@@ -1371,24 +1371,27 @@ Func_9aab5: ; 9aab5 (26:6ab5)
 	call ClearTreasureData
 	call Func_9aaf4
 	call Func_9ab1c
-	ld a, [wca3d]
-	bit 1, a
-	jp nz, Func_9abd1
+
+	ld a, [wGameModeFlags]
+	bit MODE_TIME_ATTACK_F, a
+	jp nz, GetLevelTimeAttackScore
+
 	call LoadLevelTreasures
 	call FillBottomBarTreasureIDs
 	call WriteUncollectedBottomBarTreasureIDs
 	call LoadTreasurePals
 	call LoadTreasureTiles
+
 	ld a, HIGH(wTreasureTiles)
-	ld [wHDMA + 0], a
+	ld [wHDMASourceHi], a
 	ld a, LOW(wTreasureTiles)
-	ld [wHDMA + 1], a
+	ld [wHDMASourceLo], a
 	ld a, $09
-	ld [wHDMA + 2], a
+	ld [wHDMADestHi], a
 	xor a
-	ld [wHDMA + 3], a
+	ld [wHDMADestLo], a
 	ld a, $0f
-	ld [wHDMA + 4], a
+	ld [wHDMAMode], a
 	ret
 ; 0x9aaf4
 
@@ -1544,13 +1547,13 @@ LoadTreasurePals: ; 9aba1 (26:6ba1)
 	ret
 ; 0x9abd1
 
-Func_9abd1: ; 9abd1 (26:6bd1)
+GetLevelTimeAttackScore: ; 9abd1 (26:6bd1)
 	ld a, [wOWLevel]
 	and a
 	ret z
 	cp $80
 	ret z
-	ld hl, wca07
+	ld hl, wLevelTimeAttackScores
 	dec a
 	ld de, w2d0ee
 	add a ; *2
