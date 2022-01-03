@@ -263,7 +263,7 @@ Init: ; 15e (0:15e)
 ; 0x28d
 
 ; used as a handler for invalid jumptable entries
-; reset the game
+; resets the game
 DebugReset: ; 28d (0:28d)
 	jp Init
 ; 0x290

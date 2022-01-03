@@ -836,7 +836,7 @@ Func_19c1b: ; 19c1b (6:5c1b)
 	dw UpdateState_CrouchSlipping        ; WST_CROUCH_SLIPPING
 	dw UpdateState_DraggedDown           ; WST_DRAGGED_DOWN
 	dw UpdateState_Teleporting           ; WST_TELEPORTING
-	dw $60b4                             ; WST_TELEPORTING_WATER
+	dw UpdateState_TeleportingWater      ; WST_TELEPORTING_WATER
 	dw UpdateState_SandFalling           ; WST_SAND_FALLING
 	dw UpdateState_SandJumping           ; WST_SAND_JUMPING
 	dw UpdateState_SandIdling            ; WST_SAND_IDLING
@@ -1236,7 +1236,7 @@ UpdateState_Teleporting: ; 1a077 (6:6077)
 	inc [hl]
 	ld a, [hl]
 	cp $01
-	jr z, .play_sfx
+	jr z, PlayTeleportingSFX
 	cp $b4
 	ret c
 	ld [hl], $00
@@ -1248,12 +1248,32 @@ UpdateState_Teleporting: ; 1a077 (6:6077)
 	res 7, [hl]
 	jp Func_11f6
 
-.play_sfx
+PlayTeleportingSFX: ; 1a0ab (6:60ab)
 	play_sfx SFX_082
 	ret
 ; 0x1a0b4
 
-	INCROM $1a0b4, $1a0e8
+UpdateState_TeleportingWater: ; 1a0b4 (6:60b4)
+	ld a, TRUE
+	ld [wIsIntangible], a
+	update_anim_1
+
+	ld hl, wWarioStateCounter
+	inc [hl]
+	ld a, [hl]
+	cp $11
+	jr z, PlayTeleportingSFX
+	cp $b4
+	ret c
+	ld [hl], $00
+	ld a, WST_WATER_STUNG
+	ld [wWarioState], a
+	ld a, $01
+	ld [wInvincibleCounter], a
+	ld hl, wc0d7
+	res 7, [hl]
+	jp Func_11f6
+; 0x1a0e8
 
 SetState_SandFalling: ; 1a0e8 (6:60e8)
 	xor a
