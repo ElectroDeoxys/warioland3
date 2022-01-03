@@ -294,20 +294,20 @@ Func_80aa: ; 80aa (2:40aa)
 	ret
 
 .game_over
-	ld a, $f3
-	ld [wcee3], a
+	ld a, TRANSITION_GAME_OVER
+	ld [wTransitionParam], a
 	jr .asm_82ba
 
 .epilogue
 	ld a, [wNumberCollectedTreasures]
 	dec a
 	jr z, .got_all_treasures
-	ld a, $f1
-	ld [wcee3], a
+	ld a, TRANSITION_EPILOGUE_NOT_PERFECT
+	ld [wTransitionParam], a
 	jr .set_night
 .got_all_treasures
-	ld a, $f2
-	ld [wcee3], a
+	ld a, TRANSITION_EPILOGUE_PERFECT
+	ld [wTransitionParam], a
 	set MODE_TIME_ATTACK_F, [hl]
 .set_night
 	set MODE_DAY_NIGHT_F, [hl]
@@ -1840,7 +1840,7 @@ Func_8f79: ; 8f79 (2:4f79)
 	ld e, a
 	ld h, [hl]
 	ld l, e
-	ld de, $fff0
+	ld de, -$10
 	add hl, de
 	bit 7, h
 	jr z, .asm_8faa
@@ -1860,7 +1860,7 @@ Func_8fb3: ; 8fb3 (2:4fb3)
 	ld e, a
 	ld h, [hl]
 	ld l, e
-	ld de, $fff0
+	ld de, -$10
 	add hl, de
 	bit 7, h
 	jr z, .asm_8fc7
@@ -1876,7 +1876,7 @@ Func_8fb3: ; 8fb3 (2:4fb3)
 	ld e, a
 	ld h, [hl]
 	ld l, e
-	ld de, $fff0
+	ld de, -$10
 	add hl, de
 	bit 7, h
 	jr z, .asm_8fe3
@@ -1896,7 +1896,7 @@ Func_8fec: ; 8fec (2:4fec)
 	ld e, a
 	ld h, [hl]
 	ld l, e
-	ld de, $fff0
+	ld de, -$10
 	add hl, de
 	bit 7, h
 	jr z, .asm_9002
@@ -1946,7 +1946,7 @@ Func_9039: ; 9039 (2:5039)
 	ld e, a
 	ld h, [hl]
 	ld l, e
-	ld de, $fff0
+	ld de, -$10
 	add hl, de
 	bit 7, h
 	jr z, .asm_904f
@@ -1975,7 +1975,7 @@ Func_9039: ; 9039 (2:5039)
 	ld e, a
 	ld h, [hl]
 	ld l, e
-	ld de, $fff0
+	ld de, -$10
 	add hl, de
 	bit 7, h
 	jr z, .asm_907c

@@ -376,7 +376,7 @@ _InitTreasureCollection: ; 9a3cf (26:63cf)
 	jr nz, .skip_jump_page
 
 	lb bc, 0, 0
-	ld a, [wcee3]
+	ld a, [wTransitionParam]
 	and a
 	jr z, .got_page
 	cp NUM_TREASURES + 1

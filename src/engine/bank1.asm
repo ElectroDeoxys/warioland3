@@ -977,9 +977,9 @@ StartMenu: ; 4508 (1:4508)
 	inc [hl]
 	ret
 
-Func_4619: ; 4619 (1:4619)
-	ld a, $ff
-	ld [wcee3], a
+StartOverworldStateAndNewGameParam: ; 4619 (1:4619)
+	ld a, TRANSITION_NEW_GAME
+	ld [wTransitionParam], a
 	; fallthrough
 
 StartOverworldState: ; 461e (1:461e)
@@ -1281,7 +1281,7 @@ InitLanguageSelection: ; 4857 (1:4857)
 	ld a, $01
 	ld [wLanguage], a
 
-	ld hl, wMenuObj1YCoord
+	ld hl, wMenuObj1
 	ld a, 70
 	ld [hli], a
 	ld a, 24
@@ -1310,7 +1310,7 @@ InitLanguageSelection: ; 4857 (1:4857)
 LanguageSelection: ; 48c9 (1:48c9)
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
-	jp nz, Func_4619
+	jp nz, StartOverworldStateAndNewGameParam
 	bit D_DOWN_F, a
 	jr nz, .d_down
 	bit D_UP_F, a
@@ -1371,13 +1371,13 @@ LoadTitleScreenPals: ; 4917 (1:4917)
 LoadTitleScreenTiles: ; 4937 (1:4937)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, Data_635c
+	ld hl, PlaneGfx
 	ld bc, v1Tiles0
 	call Decompress
 
 	xor a ; VRAM0
 	ldh [rVBK], a
-	ld hl, Data_5082
+	ld hl, TitleScreenGfx
 	ld bc, v0Tiles0
 	call Decompress
 	ret
@@ -1386,13 +1386,13 @@ LoadTitleScreenTiles: ; 4937 (1:4937)
 LoadTitleScreenTileMap: ; 4951 (1:4951)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, Data_6ae7
+	ld hl, BGMap_6ae7
 	ld bc, v1BGMap0
 	call Decompress
 
 	xor a ; VRAM0
 	ldh [rVBK], a
-	ld hl, Data_697a
+	ld hl, BGMap_697a
 	ld bc, v0BGMap0
 	call Decompress
 	ret
@@ -2161,11 +2161,11 @@ VBlank_4ddf: ; 4ddf (1:4ddf)
 	jr z, .asm_4e11
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, $98e5
+	ld hl, v1BGMap0 tile $e + $5
 	ld b, $0d
 	ld a, $07
 	call WriteAToHL_BTimes
-	ld hl, $9925
+	ld hl, v1BGMap0 tile $12 + $5
 	ld b, $0d
 	ld a, $06
 	call WriteAToHL_BTimes
@@ -2173,11 +2173,11 @@ VBlank_4ddf: ; 4ddf (1:4ddf)
 .asm_4e11
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, $98e5
+	ld hl, v1BGMap0 tile $e + $5
 	ld b, $0d
 	ld a, $06
 	call WriteAToHL_BTimes
-	ld hl, $9925
+	ld hl, v1BGMap0 tile $12 + $5
 	ld b, $0d
 	ld a, $07
 	call WriteAToHL_BTimes
@@ -2581,17 +2581,17 @@ Pals_5042: ; 5042 (1:5042)
 	rgb 13,  7, 10
 ; 0x5082
 
-Data_5082: ; 5082 (1:5082)
-	INCROM $5082, $635c
+TitleScreenGfx: ; 5082 (1:5082)
+INCBIN "gfx/intro/title_screen.2bpp.lz"
 
-Data_635c: ; 635c (1:635c)
-	INCROM $635c, $697a
+PlaneGfx: ; 635c (1:635c)
+INCBIN "gfx/intro/plane.2bpp.lz"
 
-Data_697a: ; 697a (1:697a)
-	INCROM $697a, $6ae7
+BGMap_697a: ; 697a (1:697a)
+INCBIN "gfx/bgmaps/map_697a.bin"
 
-Data_6ae7: ; 6ae7 (1:6ae7)
-	INCROM $6ae7, $6b47
+BGMap_6ae7: ; 6ae7 (1:6ae7)
+INCBIN "gfx/bgmaps/map_6ae7.bin"
 
 Data_6b47: ; 6b47 (1:6b47)
 	db $7c, $7c, $7c, $7c, $7c, $7c, $7c, $7c, $7c, $7c, $7c, $7c
@@ -3328,7 +3328,7 @@ INCBIN "gfx/bgmaps/text/time_attack1_jp.bin"
 
 TimeAttack2JPTextMap: ; 74e8 (2c:74e8)
 INCBIN "gfx/bgmaps/text/time_attack2_jp.bin"
-; 0x73e7
+; 0x75c3
 
 	INCROM $75c3, $76b5
 

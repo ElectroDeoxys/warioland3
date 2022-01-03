@@ -986,7 +986,7 @@ wcee1:: ; cee1
 wcee2:: ; cee2
 	ds $1
 
-wcee3:: ; cee3
+wTransitionParam:: ; cee3
 	ds $1
 
 wcee4:: ; cee4
@@ -1174,7 +1174,7 @@ w2d019:: ; d019
 wCurMapSide:: ; d01a
 	ds $1
 
-w2d01b:: ; d01b
+wLastTransitionParam:: ; d01b
 	ds $1
 
 	ds $1
@@ -1413,7 +1413,7 @@ w2d078:: ; d078
 wHDMABank:: ; d079
 	ds $1
 
-w2d07a:: ; d07a
+wAccessibleMapSides:: ; d07a
 	ds $1
 
 wIsCollectionOpen:: ; d07b

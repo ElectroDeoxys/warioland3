@@ -1058,18 +1058,19 @@ Func_1f0768: ; 1f0768 (7c:4768)
 ; 0x1f08af
 
 Func_1f08af: ; 1f08af (7c:48af)
-	ld a, [wcee3]
-	cp $f1
-	jr z, .asm_1f08d8
-	cp $f2
-	jr z, .asm_1f08d8
-	cp $f3
-	jr z, .asm_1f08e6
+	ld a, [wTransitionParam]
+	cp TRANSITION_EPILOGUE_NOT_PERFECT
+	jr z, .after_epilogue
+	cp TRANSITION_EPILOGUE_PERFECT
+	jr z, .after_epilogue
+	cp TRANSITION_GAME_OVER
+	jr z, .game_over
+
 	call DisableLCD
 	call LoadBackupVRAM
 	xor a
 	ld [wResetDisabled], a
-	ld a, $e7
+	ld a, LCDC_ON | LCDC_WIN9C00 | LCDC_WINON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
 	ldh [rLCDC], a
 	ld a, ST_OVERWORLD
 	ld [wState], a
@@ -1077,7 +1078,7 @@ Func_1f08af: ; 1f08af (7c:48af)
 	ld [wSubState], a
 	ret
 
-.asm_1f08d8
+.after_epilogue
 	xor a
 	ld [wResetDisabled], a
 	ld hl, wState
@@ -1086,7 +1087,7 @@ Func_1f08af: ; 1f08af (7c:48af)
 	ld [wSubState], a
 	ret
 
-.asm_1f08e6
+.game_over
 	xor a
 	ld [wResetDisabled], a
 	ld hl, wState

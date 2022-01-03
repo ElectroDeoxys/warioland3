@@ -86,11 +86,11 @@ UpdateCommonOWAnimations: ; 1d8b00 (76:4b00)
 	ld b, $00
 	add hl, bc
 
-	ld d, HIGH(wTilemap + $240)
-	ld a, LOW($240)
+	ld d, HIGH(wTilemap tile $24)
+	ld a, LOW(wTilemap tile $24)
 	add c
 	ld e, a
-	ld b, $20
+	ld b, 2 tiles
 	call CopyHLToDE
 
 	ld hl, w2d031
@@ -123,11 +123,11 @@ UpdateCommonOWAnimations: ; 1d8b00 (76:4b00)
 	ld b, $00
 	add hl, bc
 
-	ld d, HIGH(wTilemap + $2c0)
-	ld a, LOW($2c0)
+	ld d, HIGH(wTilemap tile $2c)
+	ld a, LOW(wTilemap tile $2c)
 	add c
 	ld e, a
-	ld b, $20
+	ld b, 2 tiles
 	call CopyHLToDE
 
 	ld hl, w2d031
@@ -170,11 +170,11 @@ UpdateCommonOWAnimations: ; 1d8b00 (76:4b00)
 	add hl, de
 	ld b, $00
 	add hl, bc
-	ld d, HIGH(wTilemap + $2c0)
-	ld a, LOW($2c0)
+	ld d, HIGH(wTilemap tile $2c)
+	ld a, LOW(wTilemap tile $2c)
 	add c
 	ld e, a
-	ld b, $20
+	ld b, 2 tiles
 	call CopyHLToDE
 
 	ld hl, w2d031
@@ -192,18 +192,18 @@ Func_1d8bf7: ; 1d8bf7 (76:4bf7)
 	ld hl, OverworldClouds1Gfx
 	add hl, de
 	push hl
-	ld de, v1Tiles2 + $700
-	ld b, $80
+	ld de, v1Tiles2 tile $70
+	ld b, 8 tiles
 	call CopyHLToDE
 	ld hl, OverworldSeaGfx
-	ld b, $40
+	ld b, 4 tiles
 	call CopyHLToDE
 	pop hl
-	ld de, wTilemap + $240
-	ld b, $80
+	ld de, wTilemap tile $24
+	ld b, 8 tiles
 	call CopyHLToDE
 	ld hl, OverworldSeaGfx
-	ld b, $40
+	ld b, 4 tiles
 	call CopyHLToDE
 	xor a
 	ldh [rVBK], a

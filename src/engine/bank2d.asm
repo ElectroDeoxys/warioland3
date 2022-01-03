@@ -375,10 +375,10 @@ Func_b4247: ; b4247 (2d:4247)
 ; 0xb42e7
 
 Func_b42e7: ; b42e7 (2d:42e7)
-	ld a, [wcee3]
-	cp $f1
+	ld a, [wTransitionParam]
+	cp TRANSITION_EPILOGUE_NOT_PERFECT
 	jr z, .continue
-	cp $f2
+	cp TRANSITION_EPILOGUE_PERFECT
 	jr z, .continue
 	ret
 .continue

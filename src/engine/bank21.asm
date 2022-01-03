@@ -2867,12 +2867,12 @@ Func_8542c: ; 8542c (21:542c)
 	jr z, .asm_8544c
 	ret
 .north
-	ld a, [w2d01b]
+	ld a, [wLastTransitionParam]
 	cp TREASURE_CRAYON_RED
-	jr c, .asm_85448
+	jr c, .not_crayon
 	cp TREASURE_CRAYON_PINK + 1
 	ret c
-.asm_85448
+.not_crayon
 	ld hl, Pals_84500
 	ret
 .asm_8544c

@@ -13,11 +13,11 @@ Func_9c005: ; 9c005 (27:4005)
 	call GetPointerFromTableHL
 	ld a, h
 	cp HIGH(Func_9c000)
-	jr nz, .asm_9c01c
+	jr nz, .valid
 	ld a, l
 	cp LOW(Func_9c000)
 	ret z
-.asm_9c01c
+.valid
 	ld a, b
 	ld [w2d01e], a
 	ret
@@ -70,9 +70,7 @@ Func_9c072: ; 9c072 (27:4072)
 	ld a, [w2d025]
 	dec a
 	jr z, .skip_load_tiles
-
 	decompress_vram1 Cutscenes6Gfx, v1Tiles0
-
 .skip_load_tiles
 	ld a, [w2d025]
 	ld [w2d01e], a

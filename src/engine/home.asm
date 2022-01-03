@@ -2929,8 +2929,8 @@ ReturnToPendingLevelState: ; 141a (0:141a)
 ReturnToMap: ; 1426 (0:1426)
 	ld hl, wca3b
 	set 7, [hl]
-	ld a, $f0
-	ld [wcee3], a
+	ld a, TRANSITION_RETURN_TO_MAP
+	ld [wTransitionParam], a
 	farcall StartOverworldState
 	ret
 ; 0x1440
@@ -3192,12 +3192,12 @@ Func_15dc: ; 15dc (0:15dc)
 	ld a, [wGameModeFlags]
 	bit MODE_TIME_ATTACK_F, a
 	jr nz, .asm_15ff
-	ld a, [wcee3]
-	cp $f1
+	ld a, [wTransitionParam]
+	cp TRANSITION_EPILOGUE_NOT_PERFECT
 	jr z, .asm_15ff
-	cp $f2
+	cp TRANSITION_EPILOGUE_PERFECT
 	jr z, .asm_15ff
-	cp $f3
+	cp TRANSITION_GAME_OVER
 	jr z, .asm_15ff
 	ld a, [wGameModeFlags]
 	and ($1 << MODE_DAY_NIGHT_F)

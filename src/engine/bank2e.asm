@@ -2110,322 +2110,83 @@ Pals_b90c0: ; b90c0 (2e:50c0)
 	rgb  0,  0,  3
 ; 0xb9100
 
-BGMap_b9100:: ; b9100 (2e:5100)
-	INCBIN "gfx/bgmaps/map_b9100.bin"
-; 0xb9113
-
-BGMap_b9113:: ; b9113 (2e:5113)
-	INCBIN "gfx/bgmaps/map_b9113.bin"
-; 0xb914a
-
-BGMap_b914a:: ; b914a (2e:514a)
-	INCBIN "gfx/bgmaps/map_b914a.bin"
-; 0xb919b
-
-BGMap_b919b:: ; b919b (2e:519b)
-	INCBIN "gfx/bgmaps/map_b919b.bin"
-; 0xb91e7
-
-BGMap_b91e7:: ; b91e7 (2e:51e7)
-	INCBIN "gfx/bgmaps/map_b91e7.bin"
-; 0xb9235
-
-BGMap_b9235:: ; b9235 (2e:5235)
-	INCBIN "gfx/bgmaps/map_b9235.bin"
-; 0xb926d
-
-BGMap_b926d:: ; b926d (2e:526d)
-	INCBIN "gfx/bgmaps/map_b926d.bin"
-; 0xb92c2
-
-BGMap_b92c2:: ; b92c2 (2e:52c2)
-	INCBIN "gfx/bgmaps/map_b92c2.bin"
-; 0xb9310
-
-BGMap_b9310:: ; b9310 (2e:5310)
-	INCBIN "gfx/bgmaps/map_b9310.bin"
-; 0xb936c
-
-BGMap_b936c:: ; b936c (2e:536c)
-	INCBIN "gfx/bgmaps/map_b936c.bin"
-; 0xb93c8
-
-BGMap_b93c8:: ; b93c8 (2e:53c8)
-	INCBIN "gfx/bgmaps/map_b93c8.bin"
-; 0xb9424
-
-BGMap_b9424:: ; b9424 (2e:5424)
-	INCBIN "gfx/bgmaps/map_b9424.bin"
-; 0xb9475
-
-BGMap_b9475:: ; b9475 (2e:5475)
-	INCBIN "gfx/bgmaps/map_b9475.bin"
-; 0xb94d1
-
-BGMap_b94d1:: ; b94d1 (2e:54d1)
-	INCBIN "gfx/bgmaps/map_b94d1.bin"
-; 0xb951f
-
-BGMap_b951f:: ; b951f (2e:551f)
-	INCBIN "gfx/bgmaps/map_b951f.bin"
-; 0xb956d
-
-BGMap_b956d:: ; b956d (2e:556d)
-	INCBIN "gfx/bgmaps/map_b956d.bin"
-; 0xb9635
-
-BGMap_b9635:: ; b9635 (2e:5635)
-	INCBIN "gfx/bgmaps/map_b9635.bin"
-; 0xb9691
-
-BGMap_b9691:: ; b9691 (2e:5691)
-	INCBIN "gfx/bgmaps/map_b9691.bin"
-; 0xb9768
-
-BGMap_b9768:: ; b9768 (2e:5768)
-	INCBIN "gfx/bgmaps/map_b9768.bin"
-; 0xb97c4
-
-BGMap_b97c4:: ; b97c4 (2e:57c4)
-	INCBIN "gfx/bgmaps/map_b97c4.bin"
-; 0xb9816
-
-BGMap_b9816:: ; b9816 (2e:5816)
-	INCBIN "gfx/bgmaps/map_b9816.bin"
-; 0xb9859
-
-BGMap_b9859:: ; b9859 (2e:5859)
-	INCBIN "gfx/bgmaps/map_b9859.bin"
-; 0xb989c
-
-BGMap_b989c:: ; b989c (2e:589c)
-	INCBIN "gfx/bgmaps/map_b989c.bin"
-; 0xb98d7
-
-BGMap_b98d7:: ; b98d7 (2e:58d7)
-	INCBIN "gfx/bgmaps/map_b98d7.bin"
-; 0xb9920
-
-BGMap_b9920:: ; b9920 (2e:5920)
-	INCBIN "gfx/bgmaps/map_b9920.bin"
-; 0xb996e
-
-BGMap_b996e:: ; b996e (2e:596e)
-	INCBIN "gfx/bgmaps/map_b996e.bin"
-; 0xb99aa
-
-BGMap_b99aa:: ; b99aa (2e:59aa)
-	INCBIN "gfx/bgmaps/map_b99aa.bin"
-; 0xb99e8
-
-BGMap_b99e8:: ; b99e8 (2e:59e8)
-	INCBIN "gfx/bgmaps/map_b99e8.bin"
-; 0xb9a22
-
-BGMap_b9a22:: ; b9a22 (2e:5a22)
-	INCBIN "gfx/bgmaps/map_b9a22.bin"
-; 0xb9a8c
-
-BGMap_b9a8c:: ; b9a8c (2e:5a8c)
-	INCBIN "gfx/bgmaps/map_b9a8c.bin"
-; 0xb9ae0
-
-BGMap_b9ae0:: ; b9ae0 (2e:5ae0)
-	INCBIN "gfx/bgmaps/map_b9ae0.bin"
-; 0xb9b2d
-
-BGMap_b9b2d:: ; b9b2d (2e:5b2d)
-	INCBIN "gfx/bgmaps/map_b9b2d.bin"
-; 0xb9b84
-
-BGMap_b9b84:: ; b9b84 (2e:5b84)
-	INCBIN "gfx/bgmaps/map_b9b84.bin"
-; 0xb9be0
-
-BGMap_b9be0:: ; b9be0 (2e:5be0)
-	INCBIN "gfx/bgmaps/map_b9be0.bin"
-; 0xb9c2c
-
-BGMap_b9c2c:: ; b9c2c (2e:5c2c)
-	INCBIN "gfx/bgmaps/map_b9c2c.bin"
-; 0xb9c75
-
-BGMap_b9c75:: ; b9c75 (2e:5c75)
-	INCBIN "gfx/bgmaps/map_b9c75.bin"
-; 0xb9cb8
-
-BGMap_b9cb8:: ; b9cb8 (2e:5cb8)
-	INCBIN "gfx/bgmaps/map_b9cb8.bin"
-; 0xb9d01
-
-BGMap_b9d01:: ; b9d01 (2e:5d01)
-	INCBIN "gfx/bgmaps/map_b9d01.bin"
-; 0xb9d48
-
-BGMap_b9d48:: ; b9d48 (2e:5d48)
-	INCBIN "gfx/bgmaps/map_b9d48.bin"
-; 0xb9da3
-
-BGMap_b9da3:: ; b9da3 (2e:5da3)
-	INCBIN "gfx/bgmaps/map_b9da3.bin"
-; 0xb9dea
-
-BGMap_b9dea:: ; b9dea (2e:5dea)
-	INCBIN "gfx/bgmaps/map_b9dea.bin"
-; 0xb9e3b
-
-BGMap_b9e3b:: ; b9e3b (2e:5e3b)
-	INCBIN "gfx/bgmaps/map_b9e3b.bin"
-; 0xb9e7b
-
-BGMap_b9e7b:: ; b9e7b (2e:5e7b)
-	INCBIN "gfx/bgmaps/map_b9e7b.bin"
-; 0xb9ed5
-
-BGMap_b9ed5:: ; b9ed5 (2e:5ed5)
-	INCBIN "gfx/bgmaps/map_b9ed5.bin"
-; 0xb9f1e
-
-BGMap_b9f1e:: ; b9f1e (2e:5f1e)
-	INCBIN "gfx/bgmaps/map_b9f1e.bin"
-; 0xb9f73
-
-BGMap_b9f73:: ; b9f73 (2e:5f73)
-	INCBIN "gfx/bgmaps/map_b9f73.bin"
-; 0xb9fb1
-
-BGMap_b9fb1:: ; b9fb1 (2e:5fb1)
-	INCBIN "gfx/bgmaps/map_b9fb1.bin"
-; 0xb9fe6
-
-BGMap_b9fe6:: ; b9fe6 (2e:5fe6)
-	INCBIN "gfx/bgmaps/map_b9fe6.bin"
-; 0xba02a
-
-BGMap_ba02a:: ; ba02a (2e:602a)
-	INCBIN "gfx/bgmaps/map_ba02a.bin"
-; 0xba07d
-
-BGMap_ba07d:: ; ba07d (2e:607d)
-	INCBIN "gfx/bgmaps/map_ba07d.bin"
-; 0xba0b4
-
-BGMap_ba0b4:: ; ba0b4 (2e:60b4)
-	INCBIN "gfx/bgmaps/map_ba0b4.bin"
-; 0xba0e6
-
-BGMap_ba0e6:: ; ba0e6 (2e:60e6)
-	INCBIN "gfx/bgmaps/map_ba0e6.bin"
-; 0xba143
-
-BGMap_ba143:: ; ba143 (2e:6143)
-	INCBIN "gfx/bgmaps/map_ba143.bin"
-; 0xba19c
-
-BGMap_ba19c:: ; ba19c (2e:619c)
-	INCBIN "gfx/bgmaps/map_ba19c.bin"
-; 0xba221
-
-BGMap_ba221:: ; ba221 (2e:6221)
-	INCBIN "gfx/bgmaps/map_ba221.bin"
-; 0xba286
-
-BGMap_ba286:: ; ba286 (2e:6286)
-	INCBIN "gfx/bgmaps/map_ba286.bin"
-; 0xba31f
-
-BGMap_ba31f:: ; ba31f (2e:631f)
-	INCBIN "gfx/bgmaps/map_ba31f.bin"
-; 0xba37b
-
-BGMap_ba37b:: ; ba37b (2e:637b)
-	INCBIN "gfx/bgmaps/map_ba37b.bin"
-; 0xba3d3
-
-BGMap_ba3d3:: ; ba3d3 (2e:63d3)
-	INCBIN "gfx/bgmaps/map_ba3d3.bin"
-; 0xba425
-
-BGMap_ba425:: ; ba425 (2e:6425)
-	INCBIN "gfx/bgmaps/map_ba425.bin"
-; 0xba46a
-
-BGMap_ba46a:: ; ba46a (2e:646a)
-	INCBIN "gfx/bgmaps/map_ba46a.bin"
-; 0xba4c4
-
-BGMap_ba4c4:: ; ba4c4 (2e:64c4)
-	INCBIN "gfx/bgmaps/map_ba4c4.bin"
-; 0xba544
-
-BGMap_ba544:: ; ba544 (2e:6544)
-	INCBIN "gfx/bgmaps/map_ba544.bin"
-; 0xba5a0
-
-BGMap_ba5a0:: ; ba5a0 (2e:65a0)
-	INCBIN "gfx/bgmaps/map_ba5a0.bin"
-; 0xba5fd
-
-BGMap_ba5fd:: ; ba5fd (2e:65fd)
-	INCBIN "gfx/bgmaps/map_ba5fd.bin"
-; 0xba64e
-
-BGMap_ba64e:: ; ba64e (2e:664e)
-	INCBIN "gfx/bgmaps/map_ba64e.bin"
-; 0xba685
-
-BGMap_ba685:: ; ba685 (2e:6685)
-	INCBIN "gfx/bgmaps/map_ba685.bin"
-; 0xba6e1
-
-BGMap_ba6e1:: ; ba6e1 (2e:66e1)
-	INCBIN "gfx/bgmaps/map_ba6e1.bin"
-; 0xba740
-
-BGMap_ba740:: ; ba740 (2e:6740)
-	INCBIN "gfx/bgmaps/map_ba740.bin"
-; 0xba79c
-
-BGMap_ba79c:: ; ba79c (2e:679c)
-	INCBIN "gfx/bgmaps/map_ba79c.bin"
-; 0xba7f9
-
-BGMap_ba7f9:: ; ba7f9 (2e:67f9)
-	INCBIN "gfx/bgmaps/map_ba7f9.bin"
-; 0xba82d
-
-BGMap_ba82d:: ; ba82d (2e:682d)
-	INCBIN "gfx/bgmaps/map_ba82d.bin"
-; 0xba865
-
-BGMap_ba865:: ; ba865 (2e:6865)
-	INCBIN "gfx/bgmaps/map_ba865.bin"
-; 0xba8a6
-
-BGMap_ba8a6:: ; ba8a6 (2e:68a6)
-	INCBIN "gfx/bgmaps/map_ba8a6.bin"
-; 0xba8d2
-
-BGMap_ba8d2:: ; ba8d2 (2e:68d2)
-	INCBIN "gfx/bgmaps/map_ba8d2.bin"
-; 0xba925
-
-BGMap_ba925:: ; ba925 (2e:6925)
-	INCBIN "gfx/bgmaps/map_ba925.bin"
-; 0xba958
-
-BGMap_ba958:: ; ba958 (2e:6958)
-	INCBIN "gfx/bgmaps/map_ba958.bin"
-; 0xba9b4
-
-BGMap_ba9b4:: ; ba9b4 (2e:69b4)
-	INCBIN "gfx/bgmaps/map_ba9b4.bin"
-; 0xbaa12
-
-BGMap_baa12:: ; baa12 (2e:6a12)
-	INCBIN "gfx/bgmaps/map_baa12.bin"
-; 0xbaa6e
-
-BGMap_baa6e:: ; baa6e (2e:6a6e)
-	INCBIN "gfx/bgmaps/map_baa6e.bin"
-; 0xbaade
+BGMap_b9100:: INCBIN "gfx/bgmaps/map_b9100.bin"
+BGMap_b9113:: INCBIN "gfx/bgmaps/map_b9113.bin"
+BGMap_b914a:: INCBIN "gfx/bgmaps/map_b914a.bin"
+BGMap_b919b:: INCBIN "gfx/bgmaps/map_b919b.bin"
+BGMap_b91e7:: INCBIN "gfx/bgmaps/map_b91e7.bin"
+BGMap_b9235:: INCBIN "gfx/bgmaps/map_b9235.bin"
+BGMap_b926d:: INCBIN "gfx/bgmaps/map_b926d.bin"
+BGMap_b92c2:: INCBIN "gfx/bgmaps/map_b92c2.bin"
+BGMap_b9310:: INCBIN "gfx/bgmaps/map_b9310.bin"
+BGMap_b936c:: INCBIN "gfx/bgmaps/map_b936c.bin"
+BGMap_b93c8:: INCBIN "gfx/bgmaps/map_b93c8.bin"
+BGMap_b9424:: INCBIN "gfx/bgmaps/map_b9424.bin"
+BGMap_b9475:: INCBIN "gfx/bgmaps/map_b9475.bin"
+BGMap_b94d1:: INCBIN "gfx/bgmaps/map_b94d1.bin"
+BGMap_b951f:: INCBIN "gfx/bgmaps/map_b951f.bin"
+BGMap_b956d:: INCBIN "gfx/bgmaps/map_b956d.bin"
+BGMap_b9635:: INCBIN "gfx/bgmaps/map_b9635.bin"
+BGMap_b9691:: INCBIN "gfx/bgmaps/map_b9691.bin"
+BGMap_b9768:: INCBIN "gfx/bgmaps/map_b9768.bin"
+BGMap_b97c4:: INCBIN "gfx/bgmaps/map_b97c4.bin"
+BGMap_b9816:: INCBIN "gfx/bgmaps/map_b9816.bin"
+BGMap_b9859:: INCBIN "gfx/bgmaps/map_b9859.bin"
+BGMap_b989c:: INCBIN "gfx/bgmaps/map_b989c.bin"
+BGMap_b98d7:: INCBIN "gfx/bgmaps/map_b98d7.bin"
+BGMap_b9920:: INCBIN "gfx/bgmaps/map_b9920.bin"
+BGMap_b996e:: INCBIN "gfx/bgmaps/map_b996e.bin"
+BGMap_b99aa:: INCBIN "gfx/bgmaps/map_b99aa.bin"
+BGMap_b99e8:: INCBIN "gfx/bgmaps/map_b99e8.bin"
+BGMap_b9a22:: INCBIN "gfx/bgmaps/map_b9a22.bin"
+BGMap_b9a8c:: INCBIN "gfx/bgmaps/map_b9a8c.bin"
+BGMap_b9ae0:: INCBIN "gfx/bgmaps/map_b9ae0.bin"
+BGMap_b9b2d:: INCBIN "gfx/bgmaps/map_b9b2d.bin"
+BGMap_b9b84:: INCBIN "gfx/bgmaps/map_b9b84.bin"
+BGMap_b9be0:: INCBIN "gfx/bgmaps/map_b9be0.bin"
+BGMap_b9c2c:: INCBIN "gfx/bgmaps/map_b9c2c.bin"
+BGMap_b9c75:: INCBIN "gfx/bgmaps/map_b9c75.bin"
+BGMap_b9cb8:: INCBIN "gfx/bgmaps/map_b9cb8.bin"
+BGMap_b9d01:: INCBIN "gfx/bgmaps/map_b9d01.bin"
+BGMap_b9d48:: INCBIN "gfx/bgmaps/map_b9d48.bin"
+BGMap_b9da3:: INCBIN "gfx/bgmaps/map_b9da3.bin"
+BGMap_b9dea:: INCBIN "gfx/bgmaps/map_b9dea.bin"
+BGMap_b9e3b:: INCBIN "gfx/bgmaps/map_b9e3b.bin"
+BGMap_b9e7b:: INCBIN "gfx/bgmaps/map_b9e7b.bin"
+BGMap_b9ed5:: INCBIN "gfx/bgmaps/map_b9ed5.bin"
+BGMap_b9f1e:: INCBIN "gfx/bgmaps/map_b9f1e.bin"
+BGMap_b9f73:: INCBIN "gfx/bgmaps/map_b9f73.bin"
+BGMap_b9fb1:: INCBIN "gfx/bgmaps/map_b9fb1.bin"
+BGMap_b9fe6:: INCBIN "gfx/bgmaps/map_b9fe6.bin"
+BGMap_ba02a:: INCBIN "gfx/bgmaps/map_ba02a.bin"
+BGMap_ba07d:: INCBIN "gfx/bgmaps/map_ba07d.bin"
+BGMap_ba0b4:: INCBIN "gfx/bgmaps/map_ba0b4.bin"
+BGMap_ba0e6:: INCBIN "gfx/bgmaps/map_ba0e6.bin"
+BGMap_ba143:: INCBIN "gfx/bgmaps/map_ba143.bin"
+BGMap_ba19c:: INCBIN "gfx/bgmaps/map_ba19c.bin"
+BGMap_ba221:: INCBIN "gfx/bgmaps/map_ba221.bin"
+BGMap_ba286:: INCBIN "gfx/bgmaps/map_ba286.bin"
+BGMap_ba31f:: INCBIN "gfx/bgmaps/map_ba31f.bin"
+BGMap_ba37b:: INCBIN "gfx/bgmaps/map_ba37b.bin"
+BGMap_ba3d3:: INCBIN "gfx/bgmaps/map_ba3d3.bin"
+BGMap_ba425:: INCBIN "gfx/bgmaps/map_ba425.bin"
+BGMap_ba46a:: INCBIN "gfx/bgmaps/map_ba46a.bin"
+BGMap_ba4c4:: INCBIN "gfx/bgmaps/map_ba4c4.bin"
+BGMap_ba544:: INCBIN "gfx/bgmaps/map_ba544.bin"
+BGMap_ba5a0:: INCBIN "gfx/bgmaps/map_ba5a0.bin"
+BGMap_ba5fd:: INCBIN "gfx/bgmaps/map_ba5fd.bin"
+BGMap_ba64e:: INCBIN "gfx/bgmaps/map_ba64e.bin"
+BGMap_ba685:: INCBIN "gfx/bgmaps/map_ba685.bin"
+BGMap_ba6e1:: INCBIN "gfx/bgmaps/map_ba6e1.bin"
+BGMap_ba740:: INCBIN "gfx/bgmaps/map_ba740.bin"
+BGMap_ba79c:: INCBIN "gfx/bgmaps/map_ba79c.bin"
+BGMap_ba7f9:: INCBIN "gfx/bgmaps/map_ba7f9.bin"
+BGMap_ba82d:: INCBIN "gfx/bgmaps/map_ba82d.bin"
+BGMap_ba865:: INCBIN "gfx/bgmaps/map_ba865.bin"
+BGMap_ba8a6:: INCBIN "gfx/bgmaps/map_ba8a6.bin"
+BGMap_ba8d2:: INCBIN "gfx/bgmaps/map_ba8d2.bin"
+BGMap_ba925:: INCBIN "gfx/bgmaps/map_ba925.bin"
+BGMap_ba958:: INCBIN "gfx/bgmaps/map_ba958.bin"
+BGMap_ba9b4:: INCBIN "gfx/bgmaps/map_ba9b4.bin"
+BGMap_baa12:: INCBIN "gfx/bgmaps/map_baa12.bin"
+BGMap_baa6e:: INCBIN "gfx/bgmaps/map_baa6e.bin"

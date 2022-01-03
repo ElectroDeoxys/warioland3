@@ -751,7 +751,7 @@ Func_80392: ; 80392 (20:4392)
 ; 0x803e6
 
 Func_803e6: ; 803e6 (20:43e6)
-	ld a, [wcee3]
+	ld a, [wTransitionParam]
 	and a
 	ret z
 	ld a, [wTopBarState]
@@ -768,15 +768,15 @@ Func_803f9: ; 803f9 (20:43f9)
 	ldh [rSVBK], a
 	stop_music2
 
-	ld a, [wcee3]
-	ld [w2d01b], a
+	ld a, [wTransitionParam]
+	ld [wLastTransitionParam], a
 	xor a
 	ld [wRoomAnimatedTilesEnabled], a
 
-	ld a, [w2d01b]
+	ld a, [wLastTransitionParam]
 	inc a
 	jr nz, .skip_set_first_treasure_flag
-; w2d01b == $ff
+	; TRANSITION_NEW_GAME
 	ld hl, wTreasuresCollected
 	set 0, [hl]
 .skip_set_first_treasure_flag
@@ -784,7 +784,7 @@ Func_803f9: ; 803f9 (20:43f9)
 	call GetCrayonFlags
 
 	ld a, [wTopBarState]
-	cp $04
+	cp $4
 	jr z, .skip_get_level_index
 	ld a, [wOWLevel]
 	cp LEVEL_GOLF_BUILDING
@@ -798,25 +798,24 @@ Func_803f9: ; 803f9 (20:43f9)
 .skip_get_level_index
 	call Func_80b29
 
-	ld a, [w2d01b]
+	ld a, [wLastTransitionParam]
 	and a
 	jr z, .asm_8048a ; == 0
-	cp $f0
+	cp TRANSITION_RETURN_TO_MAP
 	jr z, .asm_8048a
-	cp $f1
+	cp TRANSITION_EPILOGUE_NOT_PERFECT
 	jr z, .asm_804a9
-	cp $f2
+	cp TRANSITION_EPILOGUE_PERFECT
 	jr z, .asm_804a9
-	cp $f3
+	cp TRANSITION_GAME_OVER
 	jr z, .asm_804b5
 	inc a
 	jr nz, .asm_8045f
 
-; w2d01b == $ff
+	; TRANSITION_NEW_GAME
 	ld a, CUTSCENE_01
 	ld [w2d025], a
 	jr .asm_80466
-
 .asm_8045f
 	call Func_8197e
 	jr nz, .asm_80466
@@ -857,11 +856,12 @@ Func_803f9: ; 803f9 (20:43f9)
 	ret
 
 .asm_804a9
-	ld a, $f0
+	ld a, TRANSITION_RETURN_TO_MAP
 	ld [w2d00d], a
 	ld a, CUTSCENE_5A
 	ld [w2d025], a
 	jr .asm_80480
+
 .asm_804b5
 	call Func_803e6
 	ret
@@ -879,7 +879,7 @@ Func_803f9: ; 803f9 (20:43f9)
 	ld a, [wTopBarState]
 	and a
 	ret nz
-	ld a, $f0
+	ld a, TRANSITION_RETURN_TO_MAP
 	ld [w2d00d], a
 	ret
 
@@ -890,10 +890,10 @@ Func_803f9: ; 803f9 (20:43f9)
 	ld a, [w2d028]
 	cp $04
 	ret z
-	ld a, [w2d01b]
-	cp $f1
+	ld a, [wLastTransitionParam]
+	cp TRANSITION_EPILOGUE_NOT_PERFECT
 	ret z
-	cp $f2
+	cp TRANSITION_EPILOGUE_PERFECT
 	ret z
 	ld [w2d00d], a
 	ret
@@ -983,7 +983,7 @@ Func_8055f: ; 8055f (20:455f)
 	res 4, a
 	ld [w2d011], a
 
-	ld a, [wcee3]
+	ld a, [wTransitionParam]
 	and a
 	jr nz, .asm_805be
 	ld a, [w2d011]
@@ -1060,18 +1060,17 @@ Func_80621: ; 80621 (20:4621)
 	set 0, [hl]
 	res 7, [hl]
 .got_medallion
-	ld a, [wcee3]
-	cp $34
-	call z, Func_80655
+	ld a, [wTransitionParam]
+	cp TREASURE_KEY_CARD_BLUE
+	call z, .Func_80655
 	call Func_80aa5
 	call LoadOverworld6Gfx
 	call LoadOverworldCommonGfx
 	call LoadOverworldArrowsGfx
 	call Func_80b1b
 	jp Func_8065e
-; 0x80655
 
-Func_80655: ; 80655 (20:4655)
+.Func_80655
 	ld a, TREASURE_KEY_CARD_RED
 	call IsTreasureCollected
 	jp z, Func_803f9.Func_804c9
@@ -1191,7 +1190,7 @@ Func_8065e: ; 8065e (20:465e)
 	ldh [rVBK], a
 
 	ld a, [w2d02c]
-	ld [wcee3], a
+	ld [wTransitionParam], a
 	call PlayOverworldMusic
 
 .asm_80809
@@ -2880,7 +2879,7 @@ SetDayNightSpellSelectable: ; 8178b (20:578b)
 
 SetCutsceneButtonSelectable: ; 817a3 (20:57a3)
 	ld a, [w2d00d]
-	cp $f0
+	cp TRANSITION_RETURN_TO_MAP
 	ret z
 	and a
 	ret z
@@ -2892,46 +2891,45 @@ SetCutsceneButtonSelectable: ; 817a3 (20:57a3)
 	INCROM $817b1, $817d7
 
 SetNextPrevMapButtonsSelectable: ; 817d7 (20:57d7)
-	call Func_817e3
+	call .CheckAccessibleMapSides
 	call GetAccessibleMapFlags
 	ld hl, wTopBarSelectableButtons
 	or [hl]
 	ld [hl], a
 	ret
-; 0x817e3
 
-Func_817e3: ; 817e3 (20:57e3)
+.CheckAccessibleMapSides
 	; check west side accessible
 	ld a, CUTSCENE_03
-	call Func_819ac
+	call CheckAllCutsceneTreasures
 	rlca
 	rlca
 	rlca
-	ld hl, w2d07a
+	ld hl, wAccessibleMapSides
 	or [hl]
 	ld [hl], a
 
 	; check south side accessible
 	ld a, CUTSCENE_07
-	call Func_819ac
+	call CheckAllCutsceneTreasures
 	rlca
 	rlca
-	ld hl, w2d07a
+	ld hl, wAccessibleMapSides
 	or [hl]
 	ld [hl], a
 
 	; check east side accessible
 	ld a, CUTSCENE_0C
-	call Func_819ac
+	call CheckAllCutsceneTreasures
 	rlca
-	ld hl, w2d07a
+	ld hl, wAccessibleMapSides
 	or [hl]
 	ld [hl], a
 
 	; check north side accessible
 	ld a, CUTSCENE_37
-	call Func_819ac
-	ld hl, w2d07a
+	call CheckAllCutsceneTreasures
+	ld hl, wAccessibleMapSides
 	or [hl]
 	ld [hl], a
 	and $1
@@ -2942,7 +2940,7 @@ Func_817e3: ; 817e3 (20:57e3)
 ; 0x81818
 
 GetAccessibleMapFlags: ; 81818 (20:5818)
-	ld a, [w2d07a]
+	ld a, [wAccessibleMapSides]
 	ld b, a
 	ld a, [wCurMapSide]
 .loop
@@ -2985,19 +2983,19 @@ Func_8184d: ; 8184d (20:584d)
 	call IsTreasureCollected
 	ld hl, w2d00e
 	jr nz, .collected
-	ld a, [wcee3]
+	ld a, [wTransitionParam]
 	and a
 	ret z
-	cp $f0
+	cp TRANSITION_RETURN_TO_MAP
 	ret z
-	cp $f1
+	cp TRANSITION_EPILOGUE_NOT_PERFECT
 	ret z
-	cp $f2
+	cp TRANSITION_EPILOGUE_PERFECT
 	ret z
-	cp $f3
+	cp TRANSITION_GAME_OVER
 	ret z
 	inc a
-	jr z, .asm_8186d
+	jr z, .asm_8186d ; == TRANSITION_NEW_GAME
 	dec a
 .asm_8186d
 	cp [hl]
@@ -3083,7 +3081,7 @@ Func_81931: ; 81931 (20:5931)
 	ld a, [w2d025]
 	ld b, a
 	xor a
-	ld [w2d01b], a
+	ld [wLastTransitionParam], a
 	ld [w2d025], a
 	ld [w2d028], a
 	ld [w2d029], a
@@ -3103,7 +3101,7 @@ Func_81931: ; 81931 (20:5931)
 	INCROM $8195d, $8197e
 
 Func_8197e: ; 8197e (20:597e)
-	ld a, [w2d01b]
+	ld a, [wLastTransitionParam]
 	ld b, a
 	xor a
 	ld c, a ; CUTSCENE_00
@@ -3128,9 +3126,9 @@ Func_8197e: ; 8197e (20:597e)
 .found
 	ld a, c
 	ld [w2d025], a
-	call Func_819ac
+	call CheckAllCutsceneTreasures
 	jr z, .asm_819a7
-	ret
+	ret ; collected all treasures
 
 .asm_819a7
 	xor a ; CUTSCENE_00
@@ -3140,35 +3138,35 @@ Func_8197e: ; 8197e (20:597e)
 
 ; input:
 ; - a = CUTSCENE_* constant
-Func_819ac: ; 819ac (20:59ac)
+CheckAllCutsceneTreasures: ; 819ac (20:59ac)
 	call LoadCutsceneTreasures
 	ld c, TRUE
 	ld a, [w2dffd]
-	call Func_819cb
+	call CheckCutsceneTreasure
 	ret c
 	ld a, [w2dffe]
-	call Func_819cb
+	call CheckCutsceneTreasure
 	ret c
 	ld a, [w2dfff]
-	call Func_819cb
+	call CheckCutsceneTreasure
 	ret
 ; 0x819c6
 
 ; input:
 ; - a = CUTSCENE_* constant
 Func_819c6: ; 819c6 (20:59c6)
-	call Func_819ac
+	call CheckAllCutsceneTreasures
 	and c
 	ret
 ; 0x819cb
 
 ; returns carry if treasure in a
-; is different from w2d01b
-; and has been collected
-Func_819cb: ; 819cb (20:59cb)
+; is different from wLastTransitionParam
+; and has not been collected
+CheckCutsceneTreasure: ; 819cb (20:59cb)
 	cp TREASURE_INVALID
 	jr z, .no_carry
-	ld hl, w2d01b
+	ld hl, wLastTransitionParam
 	cp [hl]
 	jr z, .equal
 	call IsTreasureCollected
@@ -4194,23 +4192,23 @@ Data_81dca: ; 81dca (21:5dca)
 Func_81dce: ; 81dce (20:5dce)
 	ld a, CUTSCENE_01
 	ld [wCutscene], a
-	ld a, [w2d01b]
+	ld a, [wLastTransitionParam]
 	ld c, a
 	dec c
 	and a
 	jr z, .asm_81de1
-	cp $ff
+	cp TRANSITION_NEW_GAME
 	jr nz, .asm_81de5
 	ld c, $00
 .asm_81de1
 	ld a, c
-	ld [w2d01b], a
+	ld [wLastTransitionParam], a
 
 .asm_81de5
 	xor a
 	ld [w2d078], a
 	ld a, [wCutscene]
-	call Func_819ac
+	call CheckAllCutsceneTreasures
 	ld [w2d065], a
 	and a
 	jr z, .asm_81dfd
@@ -4227,10 +4225,11 @@ Func_81dce: ; 81dce (20:5dce)
 	ld [wCutscene], a
 	jr .asm_81de5
 .asm_81e0d
-	ld a, [w2d01b]
+	ld a, [wLastTransitionParam]
 	inc a
 	ret nz
-	ld [w2d01b], a ; = 0
+	; TRANSITION_NEW_GAME
+	ld [wLastTransitionParam], a ; = 0
 	ret
 ; 0x81e16
 
@@ -4957,7 +4956,7 @@ Func_822d7: ; 822d7 (20:62d7)
 	cp $ec
 	jr nz, .still_opening
 	; fully open, advance state
-	ld a, [wcee3]
+	ld a, [wTransitionParam]
 	ld [w2d02c], a
 	ld hl, wTopBarState
 	inc [hl]
@@ -5029,7 +5028,7 @@ Func_8235b: ; 8235b (20:635b)
 	jr c, .done
 .asm_82369
 	ld a, [w2d00d]
-	ld [wcee3], a
+	ld [wTransitionParam], a
 	xor a
 	ld [wSubState], a
 	xor a
