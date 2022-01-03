@@ -1089,25 +1089,8 @@ Func_8065e: ; 8065e (20:465e)
 	ld [w2d01f], a
 	call Func_80b54
 
-	ld a, BANK(BGMap_85b91)
-	ld [wTempBank], a
-	ld hl, BGMap_85b91
-	ld bc, v0BGMap0 tile $3a
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(BGMap_85bc4)
-	ld [wTempBank], a
-	ld hl, BGMap_85bc4
-	ld bc, v1BGMap0 tile $3a
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-	xor a
-	ldh [rVBK], a
+	decompress BGMap_85b91, v0BGMap0 tile $3a
+	decompress_vram1 BGMap_85bc4, v1BGMap0 tile $3a
 
 	ld a, [wTopBarState]
 	and a
@@ -1146,48 +1129,12 @@ Func_8065e: ; 8065e (20:465e)
 	ld a, [wGameModeFlags]
 	bit MODE_TIME_ATTACK_F, a
 	jr nz, .asm_80753
-	ld a, BANK(BGMap_86868)
-	ld [wTempBank], a
-	ld hl, BGMap_86868
-	ld bc, v0BGMap1
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(BGMap_868b2)
-	ld [wTempBank], a
-	ld hl, BGMap_868b2
-	ld bc, v1BGMap1
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-	xor a
-	ldh [rVBK], a
+	decompress BGMap_86868, v0BGMap1
+	decompress_vram1 BGMap_868b2, v1BGMap1
 	jr .asm_80790
-
 .asm_80753
-	ld a, BANK(BGMap_868f5)
-	ld [wTempBank], a
-	ld hl, BGMap_868f5
-	ld bc, v0BGMap1
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(BGMap_86929)
-	ld [wTempBank], a
-	ld hl, BGMap_86929
-	ld bc, v0BGMap1
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-	xor a
-	ldh [rVBK], a
-
+	decompress BGMap_868f5, v0BGMap1
+	decompress_vram1 BGMap_86929, v1BGMap1
 .asm_80790
 	xor a
 	ld [wWX], a
@@ -1445,99 +1392,38 @@ LoadBGMapsToWRAM: ; 80973 (20:4973)
 ; 0x809b1
 
 LoadOverworldCommonGfx: ; 809b1 (20:49b1)
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(OverworldCommonGfx)
-	ld [wTempBank], a
-	ld hl, OverworldCommonGfx
-	ld bc, v1Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-	xor a
-	ldh [rVBK], a
-
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(OverworldNumbersGfx)
-	ld [wTempBank], a
-	ld hl, OverworldNumbersGfx
-	ld bc, v1Tiles0 + $600
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-	xor a
-	ldh [rVBK], a
+	decompress_vram1 OverworldCommonGfx, v1Tiles0
+	decompress_vram1 OverworldNumbersGfx, v1Tiles0 tile $60
 	ret
 ; 0x809f6
 
 LoadOverworld1Gfx: ; 809f6 (20:49f6)
-	ld a, BANK(Overworld1Gfx)
-	ld [wTempBank], a
-	ld hl, Overworld1Gfx
-	ld bc, v0Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress Overworld1Gfx, v0Tiles0
 	ret
 ; 0x80a12
 
 LoadOverworld2Gfx: ; 80a12 (20:4a12)
-	ld a, BANK(Overworld2Gfx)
-	ld [wTempBank], a
-	ld hl, Overworld2Gfx
-	ld bc, v0Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress Overworld2Gfx, v0Tiles0
 	ret
 ; 0x80a2e
 
 LoadOverworld5Gfx: ; 80a2e (20:4a2e)
-	ld a, BANK(Overworld5Gfx)
-	ld [wTempBank], a
-	ld hl, Overworld5Gfx
-	ld bc, v0Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress Overworld5Gfx, v0Tiles0
 	ret
 ; 0x80a4a
 
 LoadOverworld6Gfx: ; 80a4a (20:4a4a)
-	ld a, BANK(Overworld6Gfx)
-	ld [wTempBank], a
-	ld hl, Overworld6Gfx
-	ld bc, v0Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress Overworld6Gfx, v0Tiles0
 	ret
 ; 0x80a66
 
 LoadOverworldArrowsGfx: ; 80a66 (20:4a66)
-	ld a, BANK(OverworldArrowsGfx)
-	ld [wTempBank], a
-	ld hl, OverworldArrowsGfx
-	ld bc, v0Tiles1
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress OverworldArrowsGfx, v0Tiles1
 	ret
 ; 0x80a82
 
 LoadOverworldGlowGfx: ; 80a82 (20:4a82)
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a,BANK(OverworldGlowGfx)
-	ld [wTempBank], a
-	ld hl, OverworldGlowGfx
-	ld bc, v1Tiles0 + $200
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-	xor a
-	ldh [rVBK], a
+	decompress_vram1 OverworldGlowGfx, v1Tiles0 tile $20
 	ret
 ; 0x80aa5
 

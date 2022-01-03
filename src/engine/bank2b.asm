@@ -1425,77 +1425,17 @@ _InitPrologueSequence: ; ade49 (2b:5e49)
 	call Func_acca5
 	call VBlank_accb0
 
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(BGMap_b34c3)
-	ld [wTempBank], a
-	ld hl, BGMap_b34c3
-	ld bc, v1BGMap1
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-
-	xor a
-	ldh [rVBK], a
-	ld a, BANK(BGMap_b330c)
-	ld [wTempBank], a
-	ld hl, BGMap_b330c
-	ld bc, v0BGMap1
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress_vram1 BGMap_b34c3, v1BGMap1
+	decompress BGMap_b330c, v0BGMap1
 
 	ld hl, PrologueBackgroundGfx
 	ld b, BANK(PrologueBackgroundGfx)
 	call LoadFarTiles
 
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(FontGFX)
-	ld [wTempBank], a
-	ld hl, FontGFX
-	ld bc, v1Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-
-	; unnecessary
-	xor a
-	ldh [rVBK], a
-
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(PrologueGfx)
-	ld [wTempBank], a
-	ld hl, PrologueGfx
-	ld bc, v1Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-
-	; unnecessary
-	xor a
-	ldh [rVBK], a
-
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(BGMap_b3a5b)
-	ld [wTempBank], a
-	ld hl, BGMap_b3a5b
-	ld bc, v1BGMap0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-
-	xor a
-	ldh [rVBK], a
-	ld a, BANK(BGMap_b3a03)
-	ld [wTempBank], a
-	ld hl, BGMap_b3a03
-	ld bc, v0BGMap0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress_vram1 FontGFX, v1Tiles0
+	decompress_vram1 PrologueGfx, v1Tiles0
+	decompress_vram1 BGMap_b3a5b, v1BGMap0
+	decompress BGMap_b3a03, v0BGMap0
 
 	ld hl, MusicBoxGfx
 	ld de, v0Tiles1
@@ -1507,23 +1447,10 @@ _InitPrologueSequence: ; ade49 (2b:5e49)
 	and a
 	jr z, .japanese
 ; english
-	ld a, BANK(Data_b37f9)
-	ld [wTempBank], a
-	ld hl, Data_b37f9
-	ld bc, wTreasureTiles
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress Data_b37f9, wTreasureTiles
 	jr .asm_adf63
 .japanese
-	ld a, BANK(Data_b3675)
-	ld [wTempBank], a
-	ld hl, Data_b3675
-	ld bc, wTreasureTiles
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-
+	decompress Data_b3675, wTreasureTiles
 .asm_adf63
 	call Func_ace90
 

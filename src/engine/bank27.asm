@@ -71,17 +71,7 @@ Func_9c072: ; 9c072 (27:4072)
 	dec a
 	jr z, .skip_load_tiles
 
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(Cutscenes6Gfx)
-	ld [wTempBank], a
-	ld hl, Cutscenes6Gfx
-	ld bc, v1Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-	xor a
-	ldh [rVBK], a
+	decompress_vram1 Cutscenes6Gfx, v1Tiles0
 
 .skip_load_tiles
 	ld a, [w2d025]
@@ -224,25 +214,9 @@ Func_9c072: ; 9c072 (27:4072)
 
 .Func_9c1b6: ; 9c1b6 (27:41b6)
 	call LoadCutscenes3Gfx
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(BGMap_b956d)
-	ld [wTempBank], a
-	ld hl, BGMap_b956d
-	ld bc, v1BGMap0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
 
-	xor a
-	ldh [rVBK], a
-	ld a, BANK(BGMap_b951f)
-	ld [wTempBank], a
-	ld hl, BGMap_b951f
-	ld bc, v0BGMap0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress_vram1 BGMap_b956d, v1BGMap0
+	decompress BGMap_b951f, v0BGMap0
 
 	ld b, BANK(Pals_b8080)
 	ld hl, Pals_b8080
@@ -255,25 +229,9 @@ Func_9c072: ; 9c072 (27:4072)
 
 .Func_9c209: ; 9c209 (27:4209)
 	call LoadCutscenes1Gfx
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(BGMap_b9424)
-	ld [wTempBank], a
-	ld hl, BGMap_b9424
-	ld bc, v1BGMap0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
 
-	xor a
-	ldh [rVBK], a
-	ld a, BANK(BGMap_b93c8)
-	ld [wTempBank], a
-	ld hl, BGMap_b93c8
-	ld bc, v0BGMap0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress_vram1 BGMap_b9424, v1BGMap0
+	decompress BGMap_b93c8, v0BGMap0
 
 	ld b, BANK(Pals_b8000)
 	ld hl, Pals_b8000
@@ -456,18 +414,9 @@ Func_9c072: ; 9c072 (27:4072)
 
 .Func_9c39c: ; 9c39c (27:439c)
 	call LoadCutscenes4Gfx
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(OwlGfx)
-	ld [wTempBank], a
-	ld hl, OwlGfx
-	ld bc, v1Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
 
-	xor a
-	ldh [rVBK], a
+	decompress_vram1 OwlGfx, v1Tiles0
+
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld b, BANK(ForegroundTiles28)
@@ -475,27 +424,11 @@ Func_9c072: ; 9c072 (27:4072)
 	call LoadFarTiles
 	xor a
 	ldh [rVBK], a
+
 	call Func_9ca77
 
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(BGMap_ba64e)
-	ld [wTempBank], a
-	ld hl, BGMap_ba64e
-	ld bc, v0BGMap1
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-
-	xor a
-	ldh [rVBK], a
-	ld a, BANK(BGMap_ba5fd)
-	ld [wTempBank], a
-	ld hl, BGMap_ba5fd
-	ld bc, v0BGMap1
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress_vram1 BGMap_ba64e, v1BGMap1
+	decompress BGMap_ba5fd, v0BGMap1
 
 	ld b, BANK(Pals_b8040)
 	ld hl, Pals_b8040
@@ -515,50 +448,18 @@ Func_9c072: ; 9c072 (27:4072)
 	call LoadFarPalsToTempPals2
 
 	call LoadCutscenes3Gfx
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(BGMap_b9691)
-	ld [wTempBank], a
-	ld hl, BGMap_b9691
-	ld bc, v0BGMap0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
 
-	xor a
-	ldh [rVBK], a
-	ld a, BANK(BGMap_b9635)
-	ld [wTempBank], a
-	ld hl, BGMap_b9635
-	ld bc, v0BGMap0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress_vram1 BGMap_b9691, v1BGMap0
+	decompress BGMap_b9635, v0BGMap0
 
 	jp Func_9d536
 ; 0x9c476
 
 .Func_9c476: ; 9c476 (27:4476)
 	call LoadCutscenes3Gfx
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(BGMap_b97c4)
-	ld [wTempBank], a
-	ld hl, BGMap_b97c4
-	ld bc, v0BGMap0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
 
-	xor a
-	ldh [rVBK], a
-	ld a, BANK(BGMap_b9768)
-	ld [wTempBank], a
-	ld hl, BGMap_b9768
-	ld bc, v0BGMap0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress_vram1 BGMap_b97c4, v1BGMap0
+	decompress BGMap_b9768, v0BGMap0
 
 	jp ClearTempPals
 ; 0x9c4b9
@@ -591,28 +492,11 @@ Func_9c072: ; 9c072 (27:4072)
 	ld b, BANK(BackgroundTiles1)
 	ld hl, BackgroundTiles1
 	call LoadFarTiles
-
 	xor a
 	ldh [rVBK], a
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(BGMap_b9859)
-	ld [wTempBank], a
-	ld hl, BGMap_b9859
-	ld bc, v0BGMap0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
 
-	xor a
-	ldh [rVBK], a
-	ld a, BANK(BGMap_b9816)
-	ld [wTempBank], a
-	ld hl, BGMap_b9816
-	ld bc, v0BGMap0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress_vram1 BGMap_b9859, v1BGMap0
+	decompress BGMap_b9816, v0BGMap0
 
 	ld hl, Pals_cc5c0
 	ld de, wTempPals1
@@ -620,18 +504,8 @@ Func_9c072: ; 9c072 (27:4072)
 	ld b, BANK(Pals_cc5c0)
 	call CopyFarBytes
 
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(CartGfx)
-	ld [wTempBank], a
-	ld hl, CartGfx
-	ld bc, v0Tiles1
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress_vram1 CartGfx, v0Tiles1
 
-	xor a
-	ldh [rVBK], a
 	ld hl, .palette
 	ld de, wTempPals2 palette 6
 	ld b, 1 palettes
@@ -795,18 +669,9 @@ Func_9c072: ; 9c072 (27:4072)
 	ld hl, Pals_b9000
 	call LoadFarPalsToTempPals2
 	call Func_9c9cb
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(ParaGoomGfx)
-	ld [wTempBank], a
-	ld hl, ParaGoomGfx
-	ld bc, v1Tiles0 tile $40
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
 
-	xor a
-	ldh [rVBK], a
+	decompress_vram1 ParaGoomGfx, v1Tiles0 tile $40
+
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld b, BANK(ForegroundTiles30)
@@ -833,18 +698,9 @@ Func_9c072: ; 9c072 (27:4072)
 .Func_9c700: ; 9c700 (27:4700)
 	call ClearTempPals
 	call LoadCutscenes8Gfx
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(FireGfx)
-	ld [wTempBank], a
-	ld hl, FireGfx
-	ld bc, v0Tiles1
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
 
-	xor a
-	ldh [rVBK], a
+	decompress_vram1 FireGfx, v1Tiles1
+
 	call Func_9ca28
 	call Func_9cb61
 	jp Func_9e4ae
@@ -909,18 +765,9 @@ Func_9c072: ; 9c072 (27:4072)
 .Func_9c7a5: ; 9c7a5 (27:47a5)
 	call ClearTempPals
 	call Func_9c9cb
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(WallCrackGfx)
-	ld [wTempBank], a
-	ld hl, WallCrackGfx
-	ld bc, v0Tiles1
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
 
-	xor a
-	ldh [rVBK], a
+	decompress_vram1 WallCrackGfx, v1Tiles1
+
 	call Func_9ca28
 	call Func_9cb95
 	call Func_9cc17
@@ -945,18 +792,9 @@ Func_9c072: ; 9c072 (27:4072)
 	ld hl, Pals_b90c0
 	call LoadFarPalsToTempPals2
 	call Func_9c931
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, $6b
-	ld [wTempBank], a
-	ld hl, $6041
-	ld bc, $8c00
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
 
-	xor a
-	ldh [rVBK], a
+	decompress_vram1 OctohonGfx, v1Tiles1 tile $40
+
 	call Func_9ca6a
 	call Func_9cbaf
 	call Func_9cc3c
@@ -966,101 +804,41 @@ Func_9c072: ; 9c072 (27:4072)
 ; 0x9c832
 
 LoadCutscenes1Gfx: ; 9c832 (27:4832)
-	ld a, BANK(Cutscenes1Gfx)
-	ld [wTempBank], a
-	ld hl, Cutscenes1Gfx
-	ld bc, v0Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress Cutscenes1Gfx, v0Tiles0
 	jr LoadCutscenes5Gfx
 
 Func_9c84f: ; 9c84f (27:484f)
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(Cutscenes1Gfx)
-	ld [wTempBank], a
-	ld hl, Cutscenes1Gfx
-	ld bc, v1Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-	xor a
-	ldh [rVBK], a
+	decompress_vram1 Cutscenes1Gfx, v1Tiles0
 	jr Func_9c8e9
 ; 0x9c873
 
 LoadCutscenes2Gfx: ; 9c873 (27:4873)
-	ld a, BANK(Cutscenes2Gfx)
-	ld [wTempBank], a
-	ld hl, Cutscenes2Gfx
-	ld bc, v0Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress Cutscenes2Gfx, v0Tiles0
 	jp LoadCutscenes5Gfx ; can be jr
 ; 0x9c891
 
 LoadCutscenes3Gfx: ; 9c891 (27:4891)
-	ld a, BANK(Cutscenes3Gfx)
-	ld [wTempBank], a
-	ld hl, Cutscenes3Gfx
-	ld bc, v0Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress Cutscenes3Gfx, v0Tiles0
 	jp LoadCutscenes5Gfx ; can be jr
 ; 0x9c8af
 
 LoadCutscenes4Gfx: ; 9c8af (27:48af)
-	ld a, BANK(Cutscenes4Gfx)
-	ld [wTempBank], a
-	ld hl, Cutscenes4Gfx
-	ld bc, v0Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress Cutscenes4Gfx, v0Tiles0
 	jp LoadCutscenes5Gfx ; unnecessary jump
 ; 0x9c8cd
 
 LoadCutscenes5Gfx: ; 9c8cd (27:48cd)
-	ld a, BANK(Cutscenes5Gfx)
-	ld [wTempBank], a
-	ld hl, Cutscenes5Gfx
-	ld bc, v0Tiles2
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress Cutscenes5Gfx, v0Tiles2
 	ret
 ; 0x9c8e9
 
 Func_9c8e9: ; 9c8e9 (27:48e9)
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(Cutscenes5Gfx)
-	ld [wTempBank], a
-	ld hl, Cutscenes5Gfx
-	ld bc, v1Tiles2
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-	xor a
-	ldh [rVBK], a
+	decompress_vram1 Cutscenes5Gfx, v1Tiles2
 	ret
 ; 0x9c90c
 
 Func_9c90c: ; 9c90c (27:490c)
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(Cutscenes7Gfx)
-	ld [wTempBank], a
-	ld hl, Cutscenes7Gfx
-	ld bc, v0Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-	xor a
-	ldh [rVBK], a
+	decompress_vram1 Cutscenes7Gfx, v1Tiles0
 	jp Func_9c8e9
 ; 0x9c931
 
@@ -1075,24 +853,12 @@ Func_9c937: ; 9c937 (27:4937)
 ; 0x9c93d
 
 Func_9c93d: ; 9c93d (27:493d)
-	ld a, BANK(Cutscenes7Gfx)
-	ld [wTempBank], a
-	ld hl, Cutscenes7Gfx
-	ld bc, v0Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress Cutscenes7Gfx, v0Tiles0
 	ret
 ; 0x9c959
 
 LoadCutscenes8Gfx: ; 9c959 (27:4959)
-	ld a, BANK(Cutscenes8Gfx)
-	ld [wTempBank], a
-	ld hl, Cutscenes8Gfx
-	ld bc, v0Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress Cutscenes8Gfx, v0Tiles0
 	jp LoadCutscenes5Gfx
 ; 0x9c977
 
@@ -1107,69 +873,27 @@ Func_9c97d: ; 9c97d (27:497d)
 ; 0x9c983
 
 Func_9c983: ; 9c983 (27:4983)
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(Cutscenes8Gfx)
-	ld [wTempBank], a
-	ld hl, Cutscenes8Gfx
-	ld bc, v0Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-	xor a
-	ldh [rVBK], a
+	decompress_vram1 Cutscenes8Gfx, v1Tiles0
 	ret
 ; 0x9c9a6
 
 Func_9c9a6: ; 9c9a6 (27:49a6)
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(Cutscenes9Gfx)
-	ld [wTempBank], a
-	ld hl, Cutscenes9Gfx
-	ld bc, v0Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-	xor a
-	ldh [rVBK], a
+	decompress_vram1 Cutscenes9Gfx, v1Tiles0
 	jp Func_9c9e9
 ; 0x9c9cb
 
 Func_9c9cb: ; 9c9cb (27:49cb)
-	ld a, BANK(Cutscenes9Gfx)
-	ld [wTempBank], a
-	ld hl, Cutscenes9Gfx
-	ld bc, v0Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress Cutscenes9Gfx, v0Tiles0
 	jp Func_9ca0c
 ; 0x9c9e9
 
 Func_9c9e9: ; 9c9e9 (27:49e9)
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(Cutscenes10Gfx)
-	ld [wTempBank], a
-	ld hl, Cutscenes10Gfx
-	ld bc, v0Tiles2
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-	xor a
-	ldh [rVBK], a
+	decompress_vram1 Cutscenes10Gfx, v1Tiles2
 	ret
 ; 0x9ca0c
 
 Func_9ca0c: ; 9ca0c (27:4a0c)
-	ld a, BANK(Cutscenes10Gfx)
-	ld [wTempBank], a
-	ld hl, Cutscenes10Gfx
-	ld bc, v0Tiles2
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress Cutscenes10Gfx, v0Tiles2
 	ret
 ; 0x9ca28
 

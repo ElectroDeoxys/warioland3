@@ -407,21 +407,8 @@ _InitTreasureCollection: ; 9a3cf (26:63cf)
 	ld hl, Pals_9ad05
 	call LoadPalsToTempPals2
 
-	ld a, BANK(TreasureCollectionCursorGfx)
-	ld [wTempBank], a
-	ld hl, TreasureCollectionCursorGfx
-	ld bc, v0Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-
-	ld a, BANK(TreasureCollectionGfx)
-	ld [wTempBank], a
-	ld hl, TreasureCollectionGfx
-	ld bc, v0Tiles2
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress TreasureCollectionCursorGfx, v0Tiles0
+	decompress TreasureCollectionGfx, v0Tiles2
 
 	call LoadCollectionPageTreasureGfx
 
@@ -431,24 +418,11 @@ _InitTreasureCollection: ; 9a3cf (26:63cf)
 	ld de, v1Tiles1 tile $20
 	ld bc, $14 tiles
 	call CopyHLToDE_BC
-
 	xor a
 	ldh [rVBK], a
-	ld a, BANK(BGMap_9a2ac)
-	ld [wTempBank], a
-	ld hl, BGMap_9a2ac
-	ld bc, wAttrmap
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
 
-	ld a, BANK(BGMap_9a129)
-	ld [wTempBank], a
-	ld hl, BGMap_9a129
-	ld bc, wTilemap
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress BGMap_9a2ac, wAttrmap
+	decompress BGMap_9a129, wTilemap
 
 	call ApplyPageTreasuresPals
 

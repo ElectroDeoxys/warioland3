@@ -299,25 +299,8 @@ Func_b417a: ; b417a (2d:417a)
 	farcall Func_80bd9
 	farcall VBlank_80bf9
 
-	ld a, BANK(BGMap_86868)
-	ld [wTempBank], a
-	ld hl, BGMap_86868
-	ld bc, v0BGMap1
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(BGMap_868b2)
-	ld [wTempBank], a
-	ld hl, BGMap_868b2
-	ld bc, v1BGMap1
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-	xor a
-	ldh [rVBK], a
+	decompress BGMap_86868, v0BGMap1
+	decompress_vram1 BGMap_868b2, v1BGMap1
 
 	xor a
 	ld [wWX], a
@@ -351,25 +334,8 @@ Func_b4247: ; b4247 (2d:4247)
 	cp c
 	ret nz
 
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld a, BANK(BGMap_85eda)
-	ld [wTempBank], a
-	ld hl, BGMap_85eda
-	ld bc, v1BGMap0 tile $3a
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
-	xor a
-	ldh [rVBK], a
-
-	ld a, BANK(BGMap_85ea7)
-	ld [wTempBank], a
-	ld hl, BGMap_85ea7
-	ld bc, v0BGMap0 tile $3a
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress_vram1 BGMap_85eda, v1BGMap0 tile $3a
+	decompress BGMap_85ea7, v0BGMap0 tile $3a
 
 	ld hl, v0BGMap0 tile $3c
 	ld de, wAttrmap tile $2a
@@ -1270,134 +1236,62 @@ SetBGMapBytesPriority: ; b48a7 (2d:48a7)
 ; 0xb48ae
 
 LoadOverworld3Gfx: ; b48ae (2d:48ae)
-	ld a, BANK(Overworld3Gfx)
-	ld [wTempBank], a
-	ld hl, Overworld3Gfx
-	ld bc, v0Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress Overworld3Gfx, v0Tiles0
 	ret
 ; 0xb48ca
 
 LoadOverworld4Gfx: ; b48ca (2d:48ca)
-	ld a, BANK(Overworld4Gfx)
-	ld [wTempBank], a
-	ld hl, Overworld4Gfx
-	ld bc, v0Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress Overworld4Gfx, v0Tiles0
 	ret
 ; 0xb48e6
 
 LoadOverworldRocksGfx: ; b48e6 (2d:48e6)
-	ld a, BANK(OverworldRocksGfx)
-	ld [wTempBank], a
-	ld hl, OverworldRocksGfx
-	ld bc, v0Tiles0 tile $58
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress OverworldRocksGfx, v0Tiles0 tile $58
 	ret
 ; 0xb4902
 
 LoadOverworldTowerGfx: ; b4902 (2d:4902)
-	ld a, BANK(OverworldTowerGfx)
-	ld [wTempBank], a
-	ld hl, OverworldTowerGfx
-	ld bc, v0Tiles0 tile $60
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress OverworldTowerGfx, v0Tiles0 tile $60
 	ret
 ; 0xb491e
 
 LoadOverworldFanGfx: ; b491e (2d:491e)
-	ld a, BANK(OverworldFanGfx)
-	ld [wTempBank], a
-	ld hl, OverworldFanGfx
-	ld bc, v0Tiles0 tile $60
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress OverworldFanGfx, v0Tiles0 tile $60
 	ret
 ; 0xb493a
 
 LoadOverworldExplosion1Gfx: ; b493a (2d:493a)
-	ld a, BANK(OverworldExplosion1Gfx)
-	ld [wTempBank], a
-	ld hl, OverworldExplosion1Gfx
-	ld bc, v0Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress OverworldExplosion1Gfx, v0Tiles0
 	ret
 ; 0xb4956
 
 LoadOverworldThunderGfx: ; b4956 (2d:4956)
-	ld a, BANK(OverworldThunderGfx)
-	ld [wTempBank], a
-	ld hl, OverworldThunderGfx
-	ld bc, v0Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress OverworldThunderGfx, v0Tiles0
 	ret
 ; 0xb4972
 
 LoadOverworldExplosion2Gfx: ; b4972 (2d:4972)
-	ld a, BANK(OverworldExplosion2Gfx)
-	ld [wTempBank], a
-	ld hl, OverworldExplosion2Gfx
-	ld bc, v0Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress OverworldExplosion2Gfx, v0Tiles0
 	ret
 ; 0xb498e
 
 LoadOverworldTorchGfx: ; b498e (2d:498e)
-	ld a, BANK(OverworldTorchGfx)
-	ld [wTempBank], a
-	ld hl, OverworldTorchGfx
-	ld bc, v0Tiles0 tile $40
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress OverworldTorchGfx, v0Tiles0 tile $40
 	ret
 ; 0xb49aa
 
 LoadOverworldFireGfx: ; b49aa (2d:49aa)
-	ld a, BANK(OverworldFireGfx)
-	ld [wTempBank], a
-	ld hl, OverworldFireGfx
-	ld bc, v0Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress OverworldFireGfx, v0Tiles0
 	ret
 ; 0xb49c6
 
 LoadOverworldExplosion3Gfx: ; b49c6 (2d:49c6)
-	ld a, BANK(OverworldExplosion3Gfx)
-	ld [wTempBank], a
-	ld hl, OverworldExplosion3Gfx
-	ld bc, v0Tiles0
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress OverworldExplosion3Gfx, v0Tiles0
 	ret
 ; 0xb49e2
 
 LoadOverworldSmokeGfx: ; b49e2 (2d:49e2)
-	ld a, BANK(OverworldSmokeGfx)
-	ld [wTempBank], a
-	ld hl, OverworldSmokeGfx
-	ld bc, v0Tiles0 tile $32
-	ld a, [wTempBank]
-	ldh [hCallFuncBank], a
-	hcall Decompress
+	decompress OverworldSmokeGfx, v0Tiles0 tile $32
 	ret
 ; 0xb49fe
 

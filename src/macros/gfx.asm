@@ -53,3 +53,27 @@ load_gfx: MACRO
 	ld a, LOW(\1)
 	ld [wDMASourcePtr + 1], a
 ENDM
+
+decompress: MACRO
+	ld a, BANK(\1)
+	ld [wTempBank], a
+	ld hl, \1
+	ld bc, \2
+	ld a, [wTempBank]
+	ldh [hCallFuncBank], a
+	hcall Decompress
+ENDM
+
+decompress_vram1: MACRO
+	ld a, BANK("VRAM1")
+	ldh [rVBK], a
+	ld a, BANK(\1)
+	ld [wTempBank], a
+	ld hl, \1
+	ld bc, \2
+	ld a, [wTempBank]
+	ldh [hCallFuncBank], a
+	hcall Decompress
+	xor a
+	ldh [rVBK], a
+ENDM
