@@ -1,4 +1,4 @@
-_InitAudio: ; 30000 (c:4000)
+_InitAudio:: ; 30000 (c:4000)
 	ld a, $ff
 	ld [wAudioEngineFlags], a
 
@@ -73,7 +73,7 @@ _InitAudio: ; 30000 (c:4000)
 	jp SwitchBackFromAudioBank
 ; 0x3007a
 
-Func_3007a: ; 3007a (c:407a)
+Func_3007a:: ; 3007a (c:407a)
 	push bc
 	push de
 	call Func_30527
@@ -313,7 +313,7 @@ NextTrack: ; 301a4 (c:41a4)
 ; 0x301b8
 
 ; bc = sound ID
-_PlaySFX: ; 301b8 (c:41b8)
+_PlaySFX:: ; 301b8 (c:41b8)
 	ld a, b
 	or c
 	jp z, TurnSFXOff
@@ -472,7 +472,7 @@ PlayMusic: ; 3027f (c:427f)
 ; 0x302b8
 
 ; bc = sound ID
-Func_302b8: ; 302b8 (c:42b8)
+Func_302b8:: ; 302b8 (c:42b8)
 	ld a, [wLoadedMusic + 0]
 	cp c
 	jr nz, PlayMusic
@@ -488,7 +488,7 @@ Func_302b8: ; 302b8 (c:42b8)
 ; plays music if different from the one currently playing
 ; if the ID is the same, then set flag in noise channels
 ; bc = sound ID
-_PlayNewMusic_SetNoise: ; 302ce (c:42ce)
+_PlayNewMusic_SetNoise:: ; 302ce (c:42ce)
 ; only start playing music if it's not
 ; the same as the loaded one
 	ld a, [wLoadedMusic + 0]
@@ -685,7 +685,7 @@ InitChannel: ; 30378 (c:4378)
 ; 0x303c9
 
 ; bc = sound ID
-Func_303c9: ; 303c9 (c:43c9)
+Func_303c9:: ; 303c9 (c:43c9)
 	ld a, b
 	or c
 	jp z, TurnSFXOff
@@ -734,7 +734,7 @@ TurnSFXOff: ; 30401 (c:4401)
 	jp Func_3f8d
 ; 0x30416
 
-Func_30416: ; 30416 (c:4416)
+Func_30416:: ; 30416 (c:4416)
 	call TurnMusicOff
 	jp Func_3f8d
 ; 0x3041c

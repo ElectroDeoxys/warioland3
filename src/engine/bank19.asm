@@ -1,4 +1,4 @@
-LoadEnemyGroupData: ; 64000 (19:4000)
+LoadEnemyGroupData:: ; 64000 (19:4000)
 ; fills w1d120 with $43c3
 	ld hl, w1d120
 	ld bc, Data_643c3
@@ -427,7 +427,7 @@ Func_64187: ; 64187 (19:4187)
 
 	INCROM $6428a, $642d9
 
-Func_642d9: ; 642d9 (19:42d9)
+Func_642d9:: ; 642d9 (19:42d9)
 	ld h, HIGH(wObj1Flags)
 	ld l, LOW(wObj1Flags)
 	ld a, [hl]

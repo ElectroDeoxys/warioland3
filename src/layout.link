@@ -36,7 +36,7 @@ ROMX $03
 	"Wario Palettes"
 	"Bank 3"
 ROMX $04
-	"Bank 4"
+	"Wario Gfx 1"
 ROMX $05
 	"Framesets 1"
 ROMX $06
@@ -46,11 +46,11 @@ ROMX $07
 ROMX $08
 	"Bank 8"
 ROMX $09
-	"Bank 9"
+	"Wario Gfx 2"
 ROMX $0a
 	"Bank A"
 ROMX $0b
-	"Bank B"
+	"Wario Gfx 3"
 ROMX $0c
 	"Audio Engine"
 ROMX $0d
@@ -226,7 +226,7 @@ ROMX $78
 ROMX $79
 	"Bank 79"
 ROMX $7a
-	"Bank 7A"
+	"Wario Gfx 4"
 ROMX $7b
 	"Bank 7B"
 ROMX $7c

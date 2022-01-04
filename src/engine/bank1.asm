@@ -1,4 +1,4 @@
-StateTable: ; 4000 (1:4000)
+StateTable:: ; 4000 (1:4000)
 	ld a, [wState]
 	jumptable
 
@@ -982,7 +982,7 @@ StartOverworldStateAndNewGameParam: ; 4619 (1:4619)
 	ld [wTransitionParam], a
 	; fallthrough
 
-StartOverworldState: ; 461e (1:461e)
+StartOverworldState:: ; 461e (1:461e)
 	ld a, ST_OVERWORLD
 	ld [wState], a
 	xor a

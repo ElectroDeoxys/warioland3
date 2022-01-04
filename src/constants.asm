@@ -1,3 +1,5 @@
+INCLUDE "macros.asm"
+
 INCLUDE "constants/audio_constants.asm"
 INCLUDE "constants/cutscene_constants.asm"
 INCLUDE "constants/gfx_constants.asm"

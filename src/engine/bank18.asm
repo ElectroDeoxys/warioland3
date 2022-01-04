@@ -647,7 +647,7 @@ Func_617a7: ; 617a7 (18:57a7)
 
 	INCROM $61809, $6189d
 
-Func_6189d: ; 6189d (18:589d)
+Func_6189d:: ; 6189d (18:589d)
 	play_sfx SFX_018
 
 	ld hl, wCurObjUpdateFunction + 1
@@ -969,7 +969,7 @@ Func_61f4a: ; 61f4a (18:5f4a)
 
 	INCROM $61f54, $629a6
 
-Func_629a6: ; 629a6 (18:69a6)
+Func_629a6:: ; 629a6 (18:69a6)
 	ld hl, wCurObjUnk19
 	ld a, [hl]
 	ld b, HIGH(Data_602a0)
@@ -1002,7 +1002,7 @@ Func_629a6: ; 629a6 (18:69a6)
 	jp Func_316b
 ; 0x629d0
 
-Func_629d0: ; 629d0 (18:69d0)
+Func_629d0:: ; 629d0 (18:69d0)
 	ld hl, wCurObjFrameDuration
 	ld a, [hl]
 	cp $03
@@ -1093,7 +1093,7 @@ Func_629d0: ; 629d0 (18:69d0)
 ; 0x62a5b
 
 ; handle gravity for falling objects
-_ApplyObjectGravity: ; 62a5b (18:6a5b)
+_ApplyObjectGravity:: ; 62a5b (18:6a5b)
 	ld hl, wCurObjUnk19
 	ld a, [hl]
 	ld b, HIGH(Data_60280)
@@ -1442,7 +1442,7 @@ Func_6307b: ; 6307b (18:707b)
 
 	INCROM $631a1, $631e8
 
-Func_631e8: ; 631e8 (18:71e8)
+Func_631e8:: ; 631e8 (18:71e8)
 	ld hl, wCurObjUnk19
 	ld a, [hl]
 	add c
@@ -1475,7 +1475,7 @@ Func_631e8: ; 631e8 (18:71e8)
 
 	INCROM $63209, $632ac
 
-Func_632ac: ; 632ac (18:72ac)
+Func_632ac:: ; 632ac (18:72ac)
 	ld hl, wCurObjUnk01
 	ld a, [hli]
 	ld c, a

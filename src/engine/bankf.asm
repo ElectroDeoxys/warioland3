@@ -1,6 +1,6 @@
 	INCROM $3c000, $3fe00
 
-TransformationMusicIDs: ; 3fe00 (f:7e00)
+TransformationMusicIDs:: ; 3fe00 (f:7e00)
 	dw NULL
 	dw MUSIC_HOT_WARIO
 	dw MUSIC_FLAT_WARIO
@@ -44,7 +44,7 @@ rept 4
 endr
 ENDM
 
-LevelMusic: ; 3fe40 (f:7e40)
+LevelMusic:: ; 3fe40 (f:7e40)
 ;               day                             night
 	level_music MUSIC_OUT_OF_THE_WOODS_DAY,     MUSIC_OUT_OF_THE_WOODS_NIGHT     ; OUT_OF_THE_WOODS
 	level_music MUSIC_THE_PEACEFUL_VILLAGE_DAY, MUSIC_THE_PEACEFUL_VILLAGE_NIGHT ; THE_PEACEFUL_VILLAGE

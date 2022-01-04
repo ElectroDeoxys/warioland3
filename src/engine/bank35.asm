@@ -27,7 +27,7 @@ Func_d4000: ; d4000 (35:4000)
 
 ; check if a bit is set in wca3e
 ; for the level in wOWLevel
-Func_d4876: ; d4876 (35:4876)
+Func_d4876:: ; d4876 (35:4876)
 	ld hl, wca3e
 	ld a, [wOWLevel]
 	dec a

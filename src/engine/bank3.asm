@@ -3,7 +3,7 @@ Func_c9f0: ; c9f0 (3:49f0)
 	call Func_ce3e
 ;	fallthrough
 
-Func_c9f3: ; c9f3 (3:49f3)
+Func_c9f3:: ; c9f3 (3:49f3)
 	ld a, [wcce1]
 	add a
 	add a

@@ -30,7 +30,7 @@ LoadPauseMenuGfx: ; 1f400d (7d:400d)
 	jr .got_tiles ; unnecessary
 .got_tiles
 	ld de, v0Tiles0
-	ld bc, $200
+	ld bc, $20 tiles
 	call CopyHLToDE_BC
 	ret
 ; 0x1f403f

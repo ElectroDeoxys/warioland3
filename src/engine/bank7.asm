@@ -257,7 +257,7 @@ Func_1c289: ; 1c289 (7:4289)
 	jr SetState_Airborne
 ; 0x1c2ae
 
-StartFall: ; 1c2ae (7:42ae)
+StartFall:: ; 1c2ae (7:42ae)
 	xor a ; FALSE
 	ld [wJumpingUpwards], a
 ;	fallthrough
@@ -4029,7 +4029,7 @@ HandleInput_Walking: ; 1e8ed (7:68ed)
 	farcall SetState_CrouchSlipping
 	ret
 
-SetState_Idling: ; 1e99b (7:699b)
+SetState_Idling:: ; 1e99b (7:699b)
 	xor a
 	ld [wca86], a
 

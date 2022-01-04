@@ -692,7 +692,7 @@ Func_19b3a: ; 19b3a (6:5b3a)
 	ret
 ; 0x19b51
 
-Func_19b51: ; 19b51 (6:5b51)
+Func_19b51:: ; 19b51 (6:5b51)
 	ld hl, hPos
 	call Func_bdb
 	ld a, 1 << 0
@@ -705,7 +705,7 @@ Func_19b5c: ; 19b5c (6:5b5c)
 	ret
 ; 0x19b61
 
-Func_19b61: ; 19b61 (6:5b61)
+Func_19b61:: ; 19b61 (6:5b61)
 	call DecrementXCell
 	ld a, [hl]
 	inc a
@@ -713,7 +713,7 @@ Func_19b61: ; 19b61 (6:5b61)
 	jr Func_19b5c
 ; 0x19b69
 
-Func_19b69: ; 19b69 (6:5b69)
+Func_19b69:: ; 19b69 (6:5b69)
 	call IncrementXCell
 	ld a, [hl]
 	and a
@@ -733,7 +733,7 @@ IncrementXCell: ; 19b76 (6:5b76)
 	ret
 ; 0x19b7b
 
-Func_19b7b: ; 19b7b (6:5b7b)
+Func_19b7b:: ; 19b7b (6:5b7b)
 	ld hl, hPos
 	call Func_bdb
 	ld a, 1 << 1
@@ -765,7 +765,7 @@ Func_19b9b: ; 19b9b (6:5b9b)
 
 	INCROM $19bab, $19bc3
 
-Func_19bc3: ; 19bc3 (6:5bc3)
+Func_19bc3:: ; 19bc3 (6:5bc3)
 	ld hl, hPos
 	call Func_bdb
 	ld a, 1 << 4

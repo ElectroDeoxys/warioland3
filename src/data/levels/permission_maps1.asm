@@ -1,4 +1,4 @@
-PermissionMapPointers: ; c8000 (32:4000)
+PermissionMapPointers:: ; c8000 (32:4000)
 	dw PermissionMap0
 	dw PermissionMap1
 	dw PermissionMap2

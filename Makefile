@@ -1,9 +1,12 @@
 rom := wl3.gbc
 
 rom_obj := \
+src/audio.o \
+src/home.o \
 src/main.o \
 src/wram.o \
-src/hram.o
+src/hram.o \
+src/gfx/gfx.o
 
 
 ### Build tools

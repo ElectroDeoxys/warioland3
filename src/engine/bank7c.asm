@@ -1667,7 +1667,7 @@ VBlank_1f0c7e: ; 1f0c7e (7c:4c7e)
 .func_end
 ; 0x1f0cad
 
-Func_1f0cad: ; 1f0cad (7c:4cad)
+Func_1f0cad:: ; 1f0cad (7c:4cad)
 	ld a, [wSRAMBank]
 	push af
 	ld a, BANK("SRAM0")

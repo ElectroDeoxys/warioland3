@@ -1,6 +1,6 @@
 ; loads a room's permission map, tilemap
 ; foreground and background tiles and its palettes
-LoadRoom: ; c0000 (30:4000)
+LoadRoom:: ; c0000 (30:4000)
 	ld d, $00
 	ld a, [wCurRoom]
 	add a
@@ -68,7 +68,7 @@ LoadRoom: ; c0000 (30:4000)
 	ret
 ; 0xc0078
 
-InitRoomAnimatedTiles: ; c0078 (30:4078)
+InitRoomAnimatedTiles:: ; c0078 (30:4078)
 	ld hl, Data_c0ce5
 	ld d, $00
 	ld a, [wc1ab]
@@ -86,7 +86,7 @@ InitRoomAnimatedTiles: ; c0078 (30:4078)
 	ret
 ; 0xc0095
 
-InitRoomAnimatedPals: ; c0095 (30:4095)
+InitRoomAnimatedPals:: ; c0095 (30:4095)
 	ld hl, RoomAnimatedPals
 	ld d, $00
 	ld a, [wc1b0]
@@ -111,7 +111,7 @@ InitRoomAnimatedPals: ; c0095 (30:4095)
 	ret
 ; 0xc00be
 
-LevelHeaders: ; c00be (30:40be)
+LevelHeaders:: ; c00be (30:40be)
 	dw .out_of_the_woods       ; OUT_OF_THE_WOODS_DAY_1
 	dw .out_of_the_woods       ; OUT_OF_THE_WOODS_DAY_2
 	dw .out_of_the_woods       ; OUT_OF_THE_WOODS_DAY_3
@@ -434,7 +434,7 @@ LevelHeaders: ; c00be (30:40be)
 	dw ThePeacefulVillage2ObjectsMap
 ; 0xc0319
 
-PointerTable_c0319: ; c0319 (30:4319)
+PointerTable_c0319:: ; c0319 (30:4319)
 	dw Data_c0d1f ; OUT_OF_THE_WOODS_DAY_1
 	dw Data_c0d1f ; OUT_OF_THE_WOODS_DAY_2
 	dw Data_c0e03 ; OUT_OF_THE_WOODS_DAY_3
@@ -1132,7 +1132,7 @@ PointerTable_c04c5: ; c04c5 (30:44c5)
 .room_154
 	room TILE_MAP_19, $0e, $01, $75
 
-PointerTable_c090d: ; c090d (30:490d)
+PointerTable_c090d:: ; c090d (30:490d)
 	dw $6c0b ; TILE_MAP_00
 	dw $6eef ; TILE_MAP_01
 	dw $71cc ; TILE_MAP_02
@@ -1232,7 +1232,7 @@ PointerTable_c090d: ; c090d (30:490d)
 	dw NULL
 	dw NULL
 
-TileMapsPointers: ; c09d1 (30:49d1)
+TileMapsPointers:: ; c09d1 (30:49d1)
 	dw $6e0b ; TILE_MAP_00
 	dw $70ef ; TILE_MAP_01
 	dw $73cc ; TILE_MAP_02
@@ -1332,7 +1332,7 @@ TileMapsPointers: ; c09d1 (30:49d1)
 	dw NULL
 	dw NULL
 
-ForegroundTilesPointers: ; c0a95 (30:4a95)
+ForegroundTilesPointers:: ; c0a95 (30:4a95)
 	dw ForegroundTiles0
 	dw ForegroundTiles1
 	dw ForegroundTiles2
@@ -1383,7 +1383,7 @@ ForegroundTilesPointers: ; c0a95 (30:4a95)
 	dw NULL
 	dw NULL
 
-BackgroundTilesPointers: ; c0af7 (30:4af7)
+BackgroundTilesPointers:: ; c0af7 (30:4af7)
 	dw BackgroundTiles0
 	dw BackgroundTiles1
 	dw BackgroundTiles2
@@ -1403,7 +1403,7 @@ BackgroundTilesPointers: ; c0af7 (30:4af7)
 	dw NULL
 	dw NULL
 
-LevelPals: ; c0b1b (30:4b1b)
+LevelPals:: ; c0b1b (30:4b1b)
 	dw Pals_cc000
 	dw Pals_cc040
 	dw Pals_cc080
@@ -1556,7 +1556,7 @@ rept $12
 	db $ff
 endr
 
-RoomAnimatedPals: ; c0c51 (30:4c51)
+RoomAnimatedPals:: ; c0c51 (30:4c51)
 	dw .data_c0c79
 	dw .data_c0c82
 	dw .data_c0c8b

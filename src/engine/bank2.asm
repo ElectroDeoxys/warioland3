@@ -1630,7 +1630,7 @@ Func_8d69: ; 8d69 (2:4d69)
 	ret
 ; 0x8e06
 
-Func_8e06: ; 8e06 (2:4e06)
+Func_8e06:: ; 8e06 (2:4e06)
 	ld a, [wYPosLo]
 	sub $18
 	ld l, a

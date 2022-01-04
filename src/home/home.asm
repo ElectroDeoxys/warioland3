@@ -1,89 +1,5 @@
-; rst vectors
-SECTION "rst00", ROM0
-	jp Init
-	ds 5
-SECTION "rst08", ROM0
-	ds 8
-SECTION "rst10", ROM0
-	ds 8
-SECTION "rst18", ROM0
-	ds 8
-SECTION "rst20", ROM0
-	ds 8
-SECTION "rst28", ROM0
-JumpTable:
-	add a
-	pop hl
-	ld e, a
-	ld d, $00
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	jp hl
-	ds 6
-SECTION "rst38", ROM0
-	ds 8
-
-; interrupts
-SECTION "vblank", ROM0
-	jp VBlank
-	ds 5
-SECTION "lcd", ROM0
-	jp wLCDFunc
-	ds 5
-SECTION "timer", ROM0
-	reti
-	ds 7
-SECTION "serial", ROM0
-	reti
-	ds 7
-SECTION "joypad", ROM0
-	reti
-
-VBlank: ; 61 (0:61)
-	push af
-	push bc
-	push de
-	push hl
-	ld a, [wEnableVBlankFunc]
-	and a
-	jr z, .skip
-	ld a, [wROMBank]
-	push af
-	ld a, [wSRAMBank]
-	push af
-	ldh a, [rSVBK]
-	push af
-	ldh a, [rVBK]
-	push af
-	call wVBlankFunc
-	pop af
-	ldh [rVBK], a
-	pop af
-	ldh [rSVBK], a
-	pop af
-	sramswitch
-	pop af
-	bankswitch
-	ld a, TRUE
-	ld [wVBlankFuncExecuted], a
-.skip
-	pop hl
-	pop de
-	pop bc
-	pop af
-	reti
-; 0x9a
-	ds $66
-
-SECTION "romheader", ROM0
-	nop
-	jp Start
-	ds $4c
-
 SECTION "start", ROM0
-Start: ; 0150 (0:0150)
+Start:: ; 0150 (0:0150)
 	and a
 	cp $11
 	ld a, FALSE
@@ -95,7 +11,7 @@ Start: ; 0150 (0:0150)
 	ldh [hfffd], a
 	; fallthrough
 
-Init: ; 15e (0:15e)
+Init:: ; 15e (0:15e)
 	xor a
 	ldh [hfffc], a
 	di
@@ -264,12 +180,12 @@ Init: ; 15e (0:15e)
 
 ; used as a handler for invalid jumptable entries
 ; resets the game
-DebugReset: ; 28d (0:28d)
+DebugReset:: ; 28d (0:28d)
 	jp Init
 ; 0x290
 
 ; handle playing SFX and music
-HandleSound: ; 290 (0:290)
+HandleSound:: ; 290 (0:290)
 	ld a, [wc090]
 	and a
 	ret nz
@@ -320,7 +236,7 @@ HandleSound: ; 290 (0:290)
 	INCROM $2cf, $302
 
 ; adds a Repeat Delay and Rate to any DPad key
-ProcessDPadRepeat: ; 302 (0:302)
+ProcessDPadRepeat:: ; 302 (0:302)
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("GFX RAM")
@@ -359,7 +275,7 @@ ProcessDPadRepeat: ; 302 (0:302)
 ; 0x334
 
 ; store in wVBlankFunc a return function
-VBlank_Ret: ; 334 (0:334)
+VBlank_Ret:: ; 334 (0:334)
 	ld hl, .func
 	ld de, wVBlankFunc
 	ld b, .func_end - .func
@@ -371,7 +287,7 @@ VBlank_Ret: ; 334 (0:334)
 .func_end
 
 ; store in wLCDFunc a return function
-InitLCD: ; 341 (0:341)
+InitLCD:: ; 341 (0:341)
 	ld a, $d9 ; reti
 	ld [wLCDFunc], a
 	xor a
@@ -383,7 +299,7 @@ InitLCD: ; 341 (0:341)
 	ret
 ; 0x354
 
-VBlank_354: ; 354 (0:354)
+VBlank_354:: ; 354 (0:354)
 	ld hl, .func
 	ld de, wVBlankFunc
 	ld b, .func_end - .func
@@ -401,7 +317,7 @@ VBlank_354: ; 354 (0:354)
 .func_end
 ; 0x370
 
-WaitVBlank: ; 370 (0:370)
+WaitVBlank:: ; 370 (0:370)
 	ldh a, [rSTAT]
 	and STAT_ON_LCD
 	jr z, WaitVBlank
@@ -413,7 +329,7 @@ WaitVBlank: ; 370 (0:370)
 ; 0x37d
 
 ; clears whole wVirtualOAM regardless of filled elements
-ClearWholeVirtualOAM: ; 37d (0:37d)
+ClearWholeVirtualOAM:: ; 37d (0:37d)
 	ld hl, wVirtualOAM
 	ld b, NUM_SPRITE_OAM_STRUCTS * SPRITEOAMSTRUCT_LENGTH
 	xor a
@@ -423,17 +339,17 @@ ClearWholeVirtualOAM: ; 37d (0:37d)
 	ret
 ; 0x38b
 
-ClearBGMap0: ; 38b (0:38b)
+ClearBGMap0:: ; 38b (0:38b)
 	ld a, $ff
 	jr FillBGMap0
 
 ; fills v0BGMap0 and v1BGMap0 with $7f
-FillBGMap0_With7f: ; 38f (0:38f)
+FillBGMap0_With7f:: ; 38f (0:38f)
 	ld a, $7f
 	; fallthrough
 
 ; fills v0BGMap0 and v1BGMap0 with byte in a
-FillBGMap0: ; 391 (0:391)
+FillBGMap0:: ; 391 (0:391)
 	ld d, a
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
@@ -450,7 +366,7 @@ FillBGMap0: ; 391 (0:391)
 	ret
 ; 0x3ad
 
-ClearBGMap1: ; 3ad (0:3ad)
+ClearBGMap1:: ; 3ad (0:3ad)
 	ld a, $ff
 	ld hl, v0BGMap1
 	ld bc, v0End - v0BGMap1
@@ -459,7 +375,7 @@ ClearBGMap1: ; 3ad (0:3ad)
 ; 0x3b9
 
 ; clears wVirtualOAM, only up to the filled number of elements
-ClearVirtualOAM: ; 3b9 (0:3b9)
+ClearVirtualOAM:: ; 3b9 (0:3b9)
 	ld a, [wNumOAMSprites]
 	ld l, a
 	ld h, HIGH(wVirtualOAM)
@@ -485,7 +401,7 @@ ClearVirtualOAM: ; 3b9 (0:3b9)
 	ret
 ; 0x3d8
 
-UpdateJoypad: ; 3d8 (0:3d8)
+UpdateJoypad:: ; 3d8 (0:3d8)
 ; read the joypad register and translate it to something more
 ; workable for use in-game. There are 8 buttons, so we can use
 ; one byte to contain all player input.
@@ -539,7 +455,7 @@ endr
 	ret
 ; 0x418
 
-PushOAM: ; 418 (0:418)
+PushOAM:: ; 418 (0:418)
 	ldh [rDMA], a
 	ld a, NUM_SPRITE_OAM_STRUCTS
 .loop
@@ -550,7 +466,7 @@ PushOAM: ; 418 (0:418)
 ; 0x420
 
 ; writes a to address in hl, b times
-WriteAToHL_BTimes: ; 420 (0:420)
+WriteAToHL_BTimes:: ; 420 (0:420)
 	ld [hli], a
 	dec b
 	jr nz, WriteAToHL_BTimes
@@ -558,7 +474,7 @@ WriteAToHL_BTimes: ; 420 (0:420)
 ; 0x425
 
 ; write a to hl, bc times
-WriteAToHL_BCTimes: ; 425 (0:425)
+WriteAToHL_BCTimes:: ; 425 (0:425)
 	push af
 	ld a, c
 	and a
@@ -576,7 +492,7 @@ WriteAToHL_BCTimes: ; 425 (0:425)
 ; 0x434
 
 ; copies bc bytes from hl to de
-CopyHLToDE_BC: ; 434 (0:434)
+CopyHLToDE_BC:: ; 434 (0:434)
 	ld a, c
 	and a
 	jr z, .loop
@@ -594,7 +510,7 @@ CopyHLToDE_BC: ; 434 (0:434)
 
 ; switches bank to wTempBank
 ; then copies bc bytes from hl to de
-FarCopyHLToDE_BC: ; 443 (0:443)
+FarCopyHLToDE_BC:: ; 443 (0:443)
 	ld a, [wROMBank]
 	push af
 	ld a, [wTempBank]
@@ -617,7 +533,7 @@ FarCopyHLToDE_BC: ; 443 (0:443)
 ; 0x466
 
 ; copies b bytes from hl to de
-CopyHLToDE: ; 466 (0:466)
+CopyHLToDE:: ; 466 (0:466)
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -626,22 +542,22 @@ CopyHLToDE: ; 466 (0:466)
 	ret
 ; 0x46d
 
-FadeBGToWhite_Normal: ; 46d (0:46d)
+FadeBGToWhite_Normal:: ; 46d (0:46d)
 	ld a, FADE_SPEED_NORMAL
 	ld [wFadeSpeed], a
 	jr FadeBGToWhite
 
-SlowFadeBGToWhite: ; 474 (0:474)
+SlowFadeBGToWhite:: ; 474 (0:474)
 	ld a, FADE_SPEED_FAST
 	ld [wFadeSpeed], a
 	jr FadeBGToWhite
 
-FastFadeToWhite: ; 47b (0:47b)
+FastFadeToWhite:: ; 47b (0:47b)
 	xor a ; FADE_SPEED_SLOW
 	ld [wFadeSpeed], a
 	; fallthrough
 
-FadeBGToWhite: ; 47f (0:47f)
+FadeBGToWhite:: ; 47f (0:47f)
 	ld a, [wPalFadeCounter]
 	cp 2
 	jr nc, .lighten
@@ -803,24 +719,24 @@ FadeBGToWhite: ; 47f (0:47f)
 
 	INCROM $54e, $5df
 
-DarkenBGToPal_Normal: ; 5df (0:5df)
+DarkenBGToPal_Normal:: ; 5df (0:5df)
 	ld a, FADE_SPEED_NORMAL
 	ld [wFadeSpeed], a
 	jr DarkenBGToPal
 
-DarkenBGToPal_Fast: ; 5e6 (0:5e6)
+DarkenBGToPal_Fast:: ; 5e6 (0:5e6)
 	ld a, FADE_SPEED_FAST
 	ld [wFadeSpeed], a
 	jr DarkenBGToPal
 
-SlowFadeFromWhite: ; 5ed (0:5ed)
+SlowFadeFromWhite:: ; 5ed (0:5ed)
 	xor a ; FADE_SPEED_SLOW
 	ld [wFadeSpeed], a
 	; fallthrough
 
 ; fades BG palettes to wTempPals1
 ; gradually darkens up to wTempPals1
-DarkenBGToPal: ; 5f1 (0:5f1)
+DarkenBGToPal:: ; 5f1 (0:5f1)
 	ld a, [wPalFadeCounter]
 	cp 2
 	jr nc, .asm_60b
@@ -1027,7 +943,7 @@ DarkenBGToPal: ; 5f1 (0:5f1)
 ; fades BG palettes to wTempPals1
 ; gradually lightens up to wTempPals1
 ; when fading is complete, advances wSubState
-FadeInTitle: ; 6fa (0:6fa)
+FadeInTitle:: ; 6fa (0:6fa)
 	ld a, [wPalFadeCounter]
 	cp 2
 	jr nc, .fade ; jump if in middle of fade
@@ -1202,7 +1118,7 @@ FadeInTitle: ; 6fa (0:6fa)
 
 	INCROM $7cf, $88d
 
-VBlank_88d: ; 88d (0:88d)
+VBlank_88d:: ; 88d (0:88d)
 	di
 	ld hl, wVBlankFunc
 	ld de, wBackupVBlankFunc
@@ -1232,7 +1148,7 @@ VBlank_88d: ; 88d (0:88d)
 	ret
 ; 0x8bf
 
-VBlank_8bf: ; 8bf (0:8bf)
+VBlank_8bf:: ; 8bf (0:8bf)
 	di
 	ld hl, .func
 	ld de, wVBlankFunc
@@ -1257,7 +1173,7 @@ VBlank_8bf: ; 8bf (0:8bf)
 	ret
 ; 0x8e6
 
-DisableLCD: ; 8e6 (0:8e6)
+DisableLCD:: ; 8e6 (0:8e6)
 	ldh a, [rLCDC]
 	bit LCDC_ENABLE_F, a
 	ret z ; already disabled
@@ -1291,7 +1207,7 @@ DisableLCD: ; 8e6 (0:8e6)
 ; - if bit 7 is not set, repeat the following byte that amount of times
 ; - if bit 7 is set, copy the next amount of bytes literally
 ; the result is written to bc
-Decompress: ; 909 (0:909)
+Decompress:: ; 909 (0:909)
 	ld a, [hli]
 	and a
 	jr z, .done
@@ -1325,7 +1241,7 @@ Decompress: ; 909 (0:909)
 	ret
 ; 0x928
 
-Func_928: ; 928 (0:928)
+Func_928:: ; 928 (0:928)
 	ldh a, [rSVBK]
 	push af
 	ld a, $03
@@ -1384,7 +1300,7 @@ Func_928: ; 928 (0:928)
 	jr .asm_95a
 ; 0x9a3
 
-Func_9a3: ; 9a3 (0:9a3)
+Func_9a3:: ; 9a3 (0:9a3)
 	ld a, [wPalFadeCounter]
 	cp $10
 	ret nc
@@ -1414,7 +1330,7 @@ Func_9a3: ; 9a3 (0:9a3)
 	ret
 ; 0x9cb
 
-VBlank_9cb: ; 9cb (0:9cb)
+VBlank_9cb:: ; 9cb (0:9cb)
 	di
 	ld hl, wVBlankFunc
 	ld de, wBackupVBlankFunc
@@ -1554,7 +1470,7 @@ VBlank_9cb: ; 9cb (0:9cb)
 	ret
 ; 0xa92
 
-InitHRAMCallFunc: ; a92 (0:a92)
+InitHRAMCallFunc:: ; a92 (0:a92)
 	ld hl, .func
 	ld de, hCallFunc
 	ld b, .func_end - .func
@@ -1575,7 +1491,7 @@ InitHRAMCallFunc: ; a92 (0:a92)
 
 ; decompresses level layout data pointed
 ; by wCompressedLevelLayoutPtr to SRAM
-DecompressLevelLayout: ; ab5 (0:ab5)
+DecompressLevelLayout:: ; ab5 (0:ab5)
 	ld a, [wceef]
 	and $3c
 	ret nz
@@ -1604,7 +1520,7 @@ DecompressLevelLayout: ; ab5 (0:ab5)
 ; - if bit 7 is not set, repeat the following byte that amount of times
 ; - if bit 7 is set, copy the next amount of bytes literally
 ; each row is 160 blocks wide
-.Decompress: ; aee (0:aee)
+.Decompress:: ; aee (0:aee)
 	ld c, LEVEL_WIDTH
 	ld de, s1a000
 .loop_data
@@ -1669,7 +1585,7 @@ DecompressLevelLayout: ; ab5 (0:ab5)
 	jr .next_copy
 ; 0xb48
 
-DecompressLevelObjectsMap: ; b48 (0:b48)
+DecompressLevelObjectsMap:: ; b48 (0:b48)
 	ld a, [wSRAMBank]
 	push af
 	ld a, BANK("SRAM1")
@@ -1690,7 +1606,7 @@ DecompressLevelObjectsMap: ; b48 (0:b48)
 	ret
 ; 0xb7b
 
-.Decompress: ; b7b (0:b7b)
+.Decompress:: ; b7b (0:b7b)
 	ld a, LEVEL_WIDTH
 	srl a ; /2
 	add $b0
@@ -1758,7 +1674,7 @@ DecompressLevelObjectsMap: ; b48 (0:b48)
 	jr .next_copy
 ; 0xbdb
 
-Func_bdb: ; bdb (0:bdb)
+Func_bdb:: ; bdb (0:bdb)
 ; y position
 	ld a, [hli] ; hi
 	ld d, a
@@ -1805,7 +1721,7 @@ Func_bdb: ; bdb (0:bdb)
 	ret
 ; 0xc19
 
-Func_c19: ; c19 (0:c19)
+Func_c19:: ; c19 (0:c19)
 	ld a, h
 	sub $a0
 	ld e, a
@@ -1838,7 +1754,7 @@ Func_c19: ; c19 (0:c19)
 	ret
 ; 0xc4c
 
-Func_c4c: ; c4c (0:c4c)
+Func_c4c:: ; c4c (0:c4c)
 	ld a, [wIsDMATransferPending]
 	and a
 	jr nz, .dma_transfer
@@ -1898,7 +1814,7 @@ Func_c4c: ; c4c (0:c4c)
 	ret
 ; 0xcab
 
-Func_cab: ; cab (0:cab)
+Func_cab:: ; cab (0:cab)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, wce6a
@@ -1906,7 +1822,7 @@ Func_cab: ; cab (0:cab)
 	jp wc800
 ; 0xcb8
 
-Func_cb8: ; cb8 (0:cb8)
+Func_cb8:: ; cb8 (0:cb8)
 	xor a
 	ld [wce00], a
 	ld [wce69], a
@@ -1918,7 +1834,7 @@ Func_cb8: ; cb8 (0:cb8)
 ; output:
 ; - h = y cell
 ; - l = x cell
-Func_cc0: ; cc0 (0:cc0)
+Func_cc0:: ; cc0 (0:cc0)
 	ld a, [hli]
 	ld d, a
 	ld a, [hli]
@@ -1959,7 +1875,7 @@ Func_cc0: ; cc0 (0:cc0)
 	ret
 ; 0xcf8
 
-Func_cf8: ; cf8 (0:cf8)
+Func_cf8:: ; cf8 (0:cf8)
 	push hl
 	ld a, h
 	sub $a0
@@ -2008,7 +1924,7 @@ Func_cf8: ; cf8 (0:cf8)
 	ret
 ; 0xd3e
 
-Func_d3e: ; d3e (0:d3e)
+Func_d3e:: ; d3e (0:d3e)
 	ld a, h
 	sub $a0
 	ld d, a
@@ -2050,7 +1966,7 @@ Func_d3e: ; d3e (0:d3e)
 	ret
 ; 0xd81
 
-Func_d81: ; d81 (0:d81)
+Func_d81:: ; d81 (0:d81)
 	ld a, l
 	sub $b0
 	add a
@@ -2062,7 +1978,7 @@ Func_d81: ; d81 (0:d81)
 	ret
 ; 0xd8c
 
-Func_d8c: ; d8c (0:d8c)
+Func_d8c:: ; d8c (0:d8c)
 	ld a, [wFloorNum]
 	ld [wccec], a
 	ld b, $01
@@ -2077,7 +1993,7 @@ Func_d8c: ; d8c (0:d8c)
 ; 0xd9e
 
 ; draws Wario on screen unless he's invisible
-DrawWario: ; d9e (0:d9e)
+DrawWario:: ; d9e (0:d9e)
 	ld a, [wTransformation]
 	cp TRANSFORMATION_INVISIBLE_WARIO
 	jr nz, .invincible
@@ -2123,7 +2039,7 @@ DrawWario: ; d9e (0:d9e)
 ; 0xdf4
 
 ; hl = sprite pointer
-TryAddSprite: ; df4 (0:df4)
+TryAddSprite:: ; df4 (0:df4)
 	ld a, [wCurSpriteTileID]
 	ld d, $00
 	add a
@@ -2173,7 +2089,7 @@ TryAddSprite: ; df4 (0:df4)
 
 	INCROM $e2b, $e53
 
-UpdateAnimation: ; e53 (0:e53)
+UpdateAnimation:: ; e53 (0:e53)
 	ld a, [wFramesetPtr + 0]
 	ld d, a
 	ld a, [wFramesetPtr + 1]
@@ -2216,11 +2132,11 @@ UpdateAnimation: ; e53 (0:e53)
 	ret
 ; 0xe87
 
-Func_e87: ; e87 (0:e87)
+Func_e87:: ; e87 (0:e87)
 	jp Init
 ; 0xe8a
 
-LoadLevelLayoutAndObjects: ; e8a (0:e8a)
+LoadLevelLayoutAndObjects:: ; e8a (0:e8a)
 	ld d, $00
 	ld a, [wLevel]
 	add a ; *2
@@ -2267,7 +2183,7 @@ LoadLevelLayoutAndObjects: ; e8a (0:e8a)
 	ret
 ; 0xedb
 
-Func_edb: ; edb (0:edb)
+Func_edb:: ; edb (0:edb)
 	ld d, $00
 	ld a, [wLevel]
 	add a ; *2
@@ -2298,7 +2214,7 @@ Func_edb: ; edb (0:edb)
 	ret
 ; 0xf13
 
-Func_f13: ; f13 (0:f13)
+Func_f13:: ; f13 (0:f13)
 	ld a, [wceef]
 	and $3c
 	ret nz
@@ -2322,7 +2238,7 @@ Func_f13: ; f13 (0:f13)
 	ret
 ; 0xf4c
 
-Func_f4c: ; f4c (0:f4c)
+Func_f4c:: ; f4c (0:f4c)
 	ld c, $a0
 	ld hl, s0a000
 .asm_f51
@@ -2390,7 +2306,7 @@ Func_f4c: ; f4c (0:f4c)
 	jr .asm_f93
 ; 0xfae
 
-InitAudio: ; fae (0:fae)
+InitAudio:: ; fae (0:fae)
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -2402,7 +2318,7 @@ InitAudio: ; fae (0:fae)
 ; 0xfbc
 
 ; bc = sound ID
-Func_fbc: ; fbc (0:fbc)
+Func_fbc:: ; fbc (0:fbc)
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -2414,7 +2330,7 @@ Func_fbc: ; fbc (0:fbc)
 ; 0xfca
 
 ; bc = sound ID
-PlaySFX: ; fca (0:fca)
+PlaySFX:: ; fca (0:fca)
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -2427,7 +2343,7 @@ PlaySFX: ; fca (0:fca)
 
 	INCROM $fd8, $0fe6
 
-Func_fe6: ; fe6 (0:fe6)
+Func_fe6:: ; fe6 (0:fe6)
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -2439,7 +2355,7 @@ Func_fe6: ; fe6 (0:fe6)
 ; 0xff4
 
 ; bc = sound ID
-Func_ff4: ; ff4 (0:ff4)
+Func_ff4:: ; ff4 (0:ff4)
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -2450,7 +2366,7 @@ Func_ff4: ; ff4 (0:ff4)
 	ret
 ; 0x1002
 
-Func_1002: ; 1002 (0:1002)
+Func_1002:: ; 1002 (0:1002)
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -2464,7 +2380,7 @@ Func_1002: ; 1002 (0:1002)
 	INCROM $1010, $1062
 
 ; bc = sound ID
-PlayNewMusic_SetNoise: ; 1062 (0:1062)
+PlayNewMusic_SetNoise:: ; 1062 (0:1062)
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -2475,12 +2391,12 @@ PlayNewMusic_SetNoise: ; 1062 (0:1062)
 	ret
 ; 0x1070
 
-PlayRecoverySFX: ; 1070 (0:1070)
+PlayRecoverySFX:: ; 1070 (0:1070)
 	play_sfx SFX_RECOVERY
 	ret
 ; 0x1079
 
-ClearTransformationValues: ; 1079 (0:1079)
+ClearTransformationValues:: ; 1079 (0:1079)
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_BLIND
 	call z, .RestoreBlindPalettes
@@ -2575,7 +2491,7 @@ ClearTransformationValues: ; 1079 (0:1079)
 
 	INCROM $10fc, $1146
 
-Func_1146: ; 1146 (0:1146)
+Func_1146:: ; 1146 (0:1146)
 	call Func_114e
 	ld a, c
 	ld [wca78], a
@@ -2589,7 +2505,7 @@ Func_1146: ; 1146 (0:1146)
 ; 3 if $180 <= ypos < $200
 ; 2 if $200 <= ypos < $280
 ; 1 if $280 <= ypos < $300
-Func_114e: ; 114e (0:114e)
+Func_114e:: ; 114e (0:114e)
 	ld a, [wYPosHi]
 	dec a
 	jr z, .asm_115b ; 1
@@ -2614,7 +2530,7 @@ Func_114e: ; 114e (0:114e)
 
 	INCROM $1169, $1197
 
-Func_1197: ; 1197 (0:1197)
+Func_1197:: ; 1197 (0:1197)
 	ld a, [wc0ba]
 	and $0f
 	cp $08
@@ -2630,7 +2546,7 @@ Func_1197: ; 1197 (0:1197)
 	ret
 ; 0x11ae
 
-Func_11ae: ; 11ae (0:11ae)
+Func_11ae:: ; 11ae (0:11ae)
 	ld a, c
 	ld [wca78], a
 	cp $05
@@ -2651,7 +2567,7 @@ Func_11ae: ; 11ae (0:11ae)
 	ret
 ; 0x11d6
 
-Func_11d6: ; 11d6 (0:11d6)
+Func_11d6:: ; 11d6 (0:11d6)
 	ld a, c
 	ld [wca78], a
 	play_sfx SFX_0E1
@@ -2666,7 +2582,7 @@ Func_11d6: ; 11d6 (0:11d6)
 	ret
 ; 0x11f6
 
-Func_11f6: ; 11f6 (0:11f6)
+Func_11f6:: ; 11f6 (0:11f6)
 	xor a
 	ld [wGrabState], a
 	ld [wc1b1], a
@@ -2708,7 +2624,7 @@ Func_11f6: ; 11f6 (0:11f6)
 	ret
 ; 0x1259
 
-AddXOffset: ; 1259 (0:1259)
+AddXOffset:: ; 1259 (0:1259)
 	ld a, [wc0c3]
 	add b
 	ld [wc0c3], a
@@ -2721,7 +2637,7 @@ AddXOffset: ; 1259 (0:1259)
 	ret
 ; 0x1270
 
-SubXOffset: ; 1270 (0:1270)
+SubXOffset:: ; 1270 (0:1270)
 	ld a, [wc0c3]
 	sub b
 	ld [wc0c3], a
@@ -2735,13 +2651,13 @@ SubXOffset: ; 1270 (0:1270)
 ; 0x1287
 
 ; b = y offset
-AddYOffset: ; 1287 (0:1287)
+AddYOffset:: ; 1287 (0:1287)
 	ld a, [wc0c2]
 	add b
 	ld [wc0c2], a
 ;	fallthrough
 
-Func_128e: ; 128e (0:128e)
+Func_128e:: ; 128e (0:128e)
 	ld a, [wYPosLo]
 	add b
 	ld [wYPosLo], a
@@ -2752,13 +2668,13 @@ Func_128e: ; 128e (0:128e)
 ; 0x129e
 
 ; b = y offset
-SubYOffset: ; 129e (0:129e)
+SubYOffset:: ; 129e (0:129e)
 	ld a, [wc0c2]
 	sub b
 	ld [wc0c2], a
 ;	fallthrough
 
-Func_12a5: ; 12a5 (0:12a5)
+Func_12a5:: ; 12a5 (0:12a5)
 	ld a, [wYPosLo]
 	sub b
 	ld [wYPosLo], a
@@ -2771,7 +2687,7 @@ Func_12a5: ; 12a5 (0:12a5)
 	INCROM $12b5, $12c3
 
 ; clears wcca0
-Func_12c3: ; 12c3 (0:12c3)
+Func_12c3:: ; 12c3 (0:12c3)
 	ld hl, wcca0
 	ld b, $42
 	xor a
@@ -2779,7 +2695,7 @@ Func_12c3: ; 12c3 (0:12c3)
 	ret
 ; 0x12cd
 
-SaveBackupVRAM: ; 12cd (0:12cd)
+SaveBackupVRAM:: ; 12cd (0:12cd)
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("GFX RAM")
@@ -2848,7 +2764,7 @@ SaveBackupVRAM: ; 12cd (0:12cd)
 	ret
 ; 0x1351
 
-LoadBackupVRAM: ; 1351 (0:1351)
+LoadBackupVRAM:: ; 1351 (0:1351)
 	ldh a, [rSVBK]
 	push af
 	ld a, $03
@@ -2918,7 +2834,7 @@ LoadBackupVRAM: ; 1351 (0:1351)
 
 	INCROM $13d5, $141a
 
-ReturnToPendingLevelState: ; 141a (0:141a)
+ReturnToPendingLevelState:: ; 141a (0:141a)
 	ld hl, wState
 	ld [hl], ST_LEVEL
 	ld a, [wPendingSubState]
@@ -2926,7 +2842,7 @@ ReturnToPendingLevelState: ; 141a (0:141a)
 	ret
 ; 0x1426
 
-ReturnToMap: ; 1426 (0:1426)
+ReturnToMap:: ; 1426 (0:1426)
 	ld hl, wca3b
 	set 7, [hl]
 	ld a, TRANSITION_RETURN_TO_MAP
@@ -2937,7 +2853,7 @@ ReturnToMap: ; 1426 (0:1426)
 
 	INCROM $1440, $145a
 
-UpdateObjAnim: ; 145a (0:145a)
+UpdateObjAnim:: ; 145a (0:145a)
 	xor a
 	ld [wObjAnimWasReset], a
 	ld a, [hld] ;
@@ -2980,7 +2896,7 @@ UpdateObjAnim: ; 145a (0:145a)
 	ret
 ; 0x1488
 
-Func_1488: ; 1488 (0:1488)
+Func_1488:: ; 1488 (0:1488)
 	ld a, [wJumpVelTable]
 	dec a
 	jr z, .knock_back
@@ -3043,7 +2959,7 @@ Func_1488: ; 1488 (0:1488)
 	ret
 ; 0x14de
 
-Func_14de: ; 14de (0:14de)
+Func_14de:: ; 14de (0:14de)
 	ld a, [wc0ba]
 	and $0f
 	cp $08
@@ -3058,11 +2974,11 @@ Func_14de: ; 14de (0:14de)
 	ret
 ; 0x14f6
 
-Func_14f6: ; 14f6 (0:14f6)
+Func_14f6:: ; 14f6 (0:14f6)
 	update_pos_y
 ;	fallthrough
 
-Func_1501: ; 1501 (0:1501)
+Func_1501:: ; 1501 (0:1501)
 	ld a, [wc0ba]
 	and $0f
 	cp $08
@@ -3080,7 +2996,7 @@ Func_1501: ; 1501 (0:1501)
 	ret
 ; 0x151e
 
-Func_151e: ; 151e (0:151e)
+Func_151e:: ; 151e (0:151e)
 	ld a, [wDirection]
 	and a
 	jr nz, .dir_right
@@ -3095,7 +3011,7 @@ Func_151e: ; 151e (0:151e)
 	jr z, Func_1554
 ;	fallthrough
 
-Func_1531: ; 1531 (0:1531)
+Func_1531:: ; 1531 (0:1531)
 	ld a, [wca86]
 	cp $08
 	jr c, Func_1554
@@ -3104,7 +3020,7 @@ Func_1531: ; 1531 (0:1531)
 	jr Func_1554
 ; 0x153f
 
-Func_153f: ; 153f (0:153f)
+Func_153f:: ; 153f (0:153f)
 	ld a, [wDirection]
 	and a
 	jr z, .dir_left
@@ -3118,7 +3034,7 @@ Func_153f: ; 153f (0:153f)
 	jr Func_1531
 ; 0x1554
 
-Func_1554: ; 1554 (0:1554)
+Func_1554:: ; 1554 (0:1554)
 	ld a, [wca86]
 	ld e, a
 	ld d, $00
@@ -3138,22 +3054,22 @@ Func_1554: ; 1554 (0:1554)
 	ret
 ; 0x156d
 
-Func_156d: ; 156d (0:156d)
+Func_156d:: ; 156d (0:156d)
 	jp Init
 ; 0x1570
 
-RecoverFromTransformation: ; 1570 (0:1570)
+RecoverFromTransformation:: ; 1570 (0:1570)
 	call ClearTransformationValues
 	ld a, $10
 	ld [wInvincibleCounter], a
 	jr ResetLevelMusicWarioPalsAndState
 ; 0x157a
 
-RecoverFromTransformation_WithoutInvincibility: ; 157a (0:157a)
+RecoverFromTransformation_WithoutInvincibility:: ; 157a (0:157a)
 	call ClearTransformationValues
 ;	fallthrough
 
-ResetLevelMusicWarioPalsAndState: ; 157d (0:157d)
+ResetLevelMusicWarioPalsAndState:: ; 157d (0:157d)
 	call UpdateLevelMusic
 	ld hl, Pals_c800
 	call SetWarioPal
@@ -3167,7 +3083,7 @@ ResetLevelMusicWarioPalsAndState: ; 157d (0:157d)
 	jp PlayRecoverySFX
 ; 0x15b0
 
-LoadWarioGfx: ; 15b0 (0:15b0)
+LoadWarioGfx:: ; 15b0 (0:15b0)
 	ld a, [wDMASourceBank]
 	ld [wPendingDMASourceBank], a
 	ld a, [wDMASourcePtr + 0]
@@ -3188,7 +3104,7 @@ LoadWarioGfx: ; 15b0 (0:15b0)
 	ret
 ; 0x15dc
 
-Func_15dc: ; 15dc (0:15dc)
+Func_15dc:: ; 15dc (0:15dc)
 	ld a, [wGameModeFlags]
 	bit MODE_TIME_ATTACK_F, a
 	jr nz, .asm_15ff
@@ -3224,7 +3140,7 @@ Func_15dc: ; 15dc (0:15dc)
 
 ; loads a music ID to hMusicID, depending on wLevel
 ; and whether there's a new transformation music
-UpdateLevelMusic: ; 161a (0:161a)
+UpdateLevelMusic:: ; 161a (0:161a)
 	ld a, [wcac3]
 	and a
 	jr nz, .boss_music
@@ -3295,7 +3211,7 @@ UpdateLevelMusic: ; 161a (0:161a)
 ; 0x1690
 
 ; set game state to Title
-InitGameState: ; 1690 (0:1690)
+InitGameState:: ; 1690 (0:1690)
 	xor a ; ST_TITLE
 	ld [wState], a
 	ld [wSubState], a
@@ -3303,7 +3219,7 @@ InitGameState: ; 1690 (0:1690)
 ; 0x1698
 
 ; clears some SRAM stuff
-Func_1698: ; 1698 (0:1698)
+Func_1698:: ; 1698 (0:1698)
 	xor a
 	ld hl, s0a380
 	ld b, $8
@@ -3334,7 +3250,7 @@ Func_1698: ; 1698 (0:1698)
 	jp Init
 ; 0x16d0
 
-OpenActionHelp: ; 16d0 (0:16d0)
+OpenActionHelp:: ; 16d0 (0:16d0)
 	ld hl, wState
 	ld a, ST_07
 	ld [hli], a
@@ -3342,7 +3258,7 @@ OpenActionHelp: ; 16d0 (0:16d0)
 	ret
 ; 0x16d9
 
-Func_16d9: ; 16d9 (0:16d9)
+Func_16d9:: ; 16d9 (0:16d9)
 	ld hl, wXPosLo
 	ld de, hXPosLo
 	ld a, [hld]
@@ -3364,7 +3280,7 @@ Func_16d9: ; 16d9 (0:16d9)
 ; 0x1700
 
 ; returns nz if standing on slippery ground
-IsOnSlipperyGround: ; 1700 (0:1700)
+IsOnSlipperyGround:: ; 1700 (0:1700)
 	xor a
 	ld [wIsOnSlipperyGround], a
 
@@ -3419,7 +3335,7 @@ IsOnSlipperyGround: ; 1700 (0:1700)
 	ret
 ; 0x1762
 
-Func_1762: ; 1762 (0:1762)
+Func_1762:: ; 1762 (0:1762)
 	ld a, [wJumpVelIndex]
 	cp FALLING_JUMP_VEL_INDEX
 	jr nc, .asm_1776
@@ -3441,7 +3357,7 @@ Func_1762: ; 1762 (0:1762)
 	ret
 ; 0x1783
 
-Func_1783: ; 1783 (0:1783)
+Func_1783:: ; 1783 (0:1783)
 	farcall Func_d4876
 	ld a, b
 	and a
@@ -3450,7 +3366,7 @@ Func_1783: ; 1783 (0:1783)
 
 	INCROM $1795, $1827
 
-PalsWhite: ; 1827 (0:1827)
+PalsWhite:: ; 1827 (0:1827)
 	rgb 31, 31, 31
 	rgb 31, 31, 31
 	rgb 31, 31, 31
@@ -3492,7 +3408,7 @@ PalsWhite: ; 1827 (0:1827)
 	rgb 31, 31, 31
 ; 0x1867
 
-PalsBlack: ; 1867 (0:1867)
+PalsBlack:: ; 1867 (0:1867)
 	rgb 0, 0, 0
 	rgb 0, 0, 0
 	rgb 0, 0, 0
@@ -3534,7 +3450,7 @@ PalsBlack: ; 1867 (0:1867)
 	rgb 0, 0, 0
 ; 0x18a7
 
-JumpVelTable_Normal: ; 18a7 (0:18a7)
+JumpVelTable_Normal:: ; 18a7 (0:18a7)
 	db -4 ; $00
 	db -4 ; $01
 	db -3 ; $02
@@ -3577,7 +3493,7 @@ JumpVelTable_Normal: ; 18a7 (0:18a7)
 	db  4 ; $27
 ; 0x18cf
 
-JumpVelTable_HighJump: ; 18cf (0:18cf)
+JumpVelTable_HighJump:: ; 18cf (0:18cf)
 	db -4 ; $00
 	db -4 ; $01
 	db -4 ; $02
@@ -3620,7 +3536,7 @@ JumpVelTable_HighJump: ; 18cf (0:18cf)
 	db  4 ; $27
 ; 0x18f7
 
-JumpVelTable_KnockBack: ; 18f7 (0:18f7)
+JumpVelTable_KnockBack:: ; 18f7 (0:18f7)
 	db -2 ; $00
 	db -2 ; $01
 	db -2 ; $02
@@ -3663,7 +3579,7 @@ JumpVelTable_KnockBack: ; 18f7 (0:18f7)
 	db  4 ; $27
 ; 0x191f
 
-JumpVelTable_BouncyJump: ; 191f (0:191f)
+JumpVelTable_BouncyJump:: ; 191f (0:191f)
 	db -2 ; $00
 	db -2 ; $01
 	db -3 ; $02
@@ -3706,7 +3622,7 @@ JumpVelTable_BouncyJump: ; 191f (0:191f)
 	db  4 ; $27
 ; 0x1947
 
-JumpVelTable_BouncyHighJump: ; 1947 (0:1947)
+JumpVelTable_BouncyHighJump:: ; 1947 (0:1947)
 	db -2 ; $00
 	db -3 ; $01
 	db -4 ; $02
@@ -3749,12 +3665,12 @@ JumpVelTable_BouncyHighJump: ; 1947 (0:1947)
 	db  4 ; $27
 ; 0x196f
 
-Data_196f: ; 196f (0:196f)
+Data_196f:: ; 196f (0:196f)
 	db $00, $01, $00, $01, $01, $01, $01, $01, $01, $01, $02, $02, $02, $02, $02, $02, $02, $02, $03, $03, $03, $03, $03, $03, $04, $04, $04, $04
 ; 0x198b
 
 ; treasure IDs of each level
-LevelTreasureIDs: ; 198b (0:198b)
+LevelTreasureIDs:: ; 198b (0:198b)
 	; LEVEL_THE_TEMPLE
 	db TREASURE_DUMMY ; grey
 	db TREASURE_DUMMY ; red
@@ -3912,7 +3828,7 @@ LevelTreasureIDs: ; 198b (0:198b)
 	db TREASURE_KEY_CARD_BLUE ; blue
 ; 0x19f3
 
-LoadBGPalettesFromWRAM: ; 19f3 (0:19f3)
+LoadBGPalettesFromWRAM:: ; 19f3 (0:19f3)
 	ld hl, wTempBGPals
 	ld a, 1 << rBGPI_AUTO_INCREMENT
 	ldh [rBGPI], a
@@ -3926,7 +3842,7 @@ LoadBGPalettesFromWRAM: ; 19f3 (0:19f3)
 	ret
 ; 0x1a04
 
-LoadOBPalettesFromWRAM: ; 1a04 (0:1a04)
+LoadOBPalettesFromWRAM:: ; 1a04 (0:1a04)
 	ld hl, wTempOBPals
 	ld a, 1 << rOBPI_AUTO_INCREMENT
 	ldh [rOBPI], a
@@ -3941,7 +3857,7 @@ LoadOBPalettesFromWRAM: ; 1a04 (0:1a04)
 ; 0x1a15
 
 ; copies hl to wTempPals1
-LoadPalsToTempPals1: ; 1a15 (0:1a15)
+LoadPalsToTempPals1:: ; 1a15 (0:1a15)
 	ld de, wTempPals1
 	ld b, 8 palettes
 .loop
@@ -3954,7 +3870,7 @@ LoadPalsToTempPals1: ; 1a15 (0:1a15)
 ; 0x1a21
 
 ; copies hl to wTempPals2
-LoadPalsToTempPals2: ; 1a21 (0:1a21)
+LoadPalsToTempPals2:: ; 1a21 (0:1a21)
 	ld de, wTempPals2
 	ld b, 8 palettes
 .loop
@@ -3968,7 +3884,7 @@ LoadPalsToTempPals2: ; 1a21 (0:1a21)
 
 ; copies b bytes from hl to de
 ; given that e doesn't overflow
-CopyHLToDE_Short: ; 1a2d (0:1a2d)
+CopyHLToDE_Short:: ; 1a2d (0:1a2d)
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3978,7 +3894,7 @@ CopyHLToDE_Short: ; 1a2d (0:1a2d)
 ; 0x1a34
 
 ; copies hl to wTempPals2
-Func_1a34: ; 1a34 (0:1a34)
+Func_1a34:: ; 1a34 (0:1a34)
 	ld de, wTempPals2 palette 4
 	ld b, 4 palettes
 .loop
@@ -3990,7 +3906,7 @@ Func_1a34: ; 1a34 (0:1a34)
 	ret
 ; 0x1a40
 
-EnableDoubleSpeed: ; 1a40 (0:1a40)
+EnableDoubleSpeed:: ; 1a40 (0:1a40)
 	ldh a, [rKEY1]
 	bit 7, a
 	ret nz ; already in double speed
@@ -4019,7 +3935,7 @@ EnableDoubleSpeed: ; 1a40 (0:1a40)
 ; 0x1a64
 
 ; clear VRAM if hCGB != 0
-ClearVRAM: ; 1a64 (0:1a64)
+ClearVRAM:: ; 1a64 (0:1a64)
 	ldh a, [hCGB]
 	and a
 	ret z
@@ -4038,7 +3954,7 @@ ClearVRAM: ; 1a64 (0:1a64)
 	jp WriteAToHL_BCTimes
 ; 0x1a82
 
-ClearWRAM: ; 1a82 (0:1a82)
+ClearWRAM:: ; 1a82 (0:1a82)
 	ld e, 1 ; WRAM1
 .loop
 	ld a, e
@@ -4056,7 +3972,7 @@ ClearWRAM: ; 1a82 (0:1a82)
 ; 0x1a9a
 
 ; copies all BG pals to wTempBGPals
-StoreBGPals: ; 1a9a (0:1a9a)
+StoreBGPals:: ; 1a9a (0:1a9a)
 	xor a
 	ld e, a
 	ld hl, wTempBGPals
@@ -4074,7 +3990,7 @@ StoreBGPals: ; 1a9a (0:1a9a)
 ; 0x1aad
 
 ; copies all OB pals to wTempOBPals
-StoreOBPals: ; 1aad (0:1aad)
+StoreOBPals:: ; 1aad (0:1aad)
 	xor a
 	ld e, a
 	ld hl, wTempOBPals
@@ -4092,7 +4008,7 @@ StoreOBPals: ; 1aad (0:1aad)
 ; 0x1ac0
 
 ; fills BG palette with just white
-FillWhiteBGPal: ; 1ac0 (0:1ac0)
+FillWhiteBGPal:: ; 1ac0 (0:1ac0)
 	ld hl, PalsWhite
 	ld a, 1 << rBGPI_AUTO_INCREMENT
 	ldh [rBGPI], a
@@ -4107,7 +4023,7 @@ FillWhiteBGPal: ; 1ac0 (0:1ac0)
 ; 0x1ad1
 
 ; fills OB palette with just white
-FillWhiteOBPal: ; 1ad1 (0:1ad1)
+FillWhiteOBPal:: ; 1ad1 (0:1ad1)
 	ld hl, PalsWhite
 	ld a, 1 << rOBPI_AUTO_INCREMENT
 	ldh [rOBPI], a
@@ -4124,7 +4040,7 @@ FillWhiteOBPal: ; 1ad1 (0:1ad1)
 	INCROM $1ae2, $1af6
 
 ; hl = palette to copy from Wario Palettes
-SetWarioPal: ; 1af6 (0:1af6)
+SetWarioPal:: ; 1af6 (0:1af6)
 	ld a, h
 	ld [wWarioPalsPtr + 0], a
 	ld a, l
@@ -4181,7 +4097,7 @@ SetWarioPal: ; 1af6 (0:1af6)
 
 	INCROM $1b4f, $1c4a
 
-Func_1c4a: ; 1c4a (0:1c4a)
+Func_1c4a:: ; 1c4a (0:1c4a)
 	ld hl, wTempPals1
 	ld a, 1 << rBGPI_AUTO_INCREMENT
 	ldh [rBGPI], a
@@ -4197,7 +4113,7 @@ Func_1c4a: ; 1c4a (0:1c4a)
 
 	INCROM $1c5b, $2800
 
-LoadPermissionMap: ; 2800 (0:2800)
+LoadPermissionMap:: ; 2800 (0:2800)
 	ld a, [wRoomPermissionMap]
 	add a
 	ld e, a
@@ -4244,7 +4160,7 @@ LoadPermissionMap: ; 2800 (0:2800)
 	jp Init
 ; 0x285c
 
-Func_285c: ; 285c (0:285c)
+Func_285c:: ; 285c (0:285c)
 	ld a, $70
 	ld [wca5e], a
 	ld a, $58
@@ -4396,7 +4312,7 @@ Func_285c: ; 285c (0:285c)
 	ret
 ; 0x298d
 
-Func_298d: ; 298d (0:298d)
+Func_298d:: ; 298d (0:298d)
 	ld a, [wRoomPermissionMap]
 	add a
 	ld e, a
@@ -4420,7 +4336,7 @@ Func_298d: ; 298d (0:298d)
 	ret
 ; 0x29bf
 
-LoadRoomTileMap: ; 29bf (0:29bf)
+LoadRoomTileMap:: ; 29bf (0:29bf)
 	ld a, [wRoomTileMap]
 	add a
 	ld e, a
@@ -4439,7 +4355,7 @@ LoadRoomTileMap: ; 29bf (0:29bf)
 	ret
 ; 0x29e7
 
-LoadRoomMainTiles: ; 29e7 (0:29e7)
+LoadRoomMainTiles:: ; 29e7 (0:29e7)
 	ld a, [wRoomMainTiles]
 	add a
 	ld e, a
@@ -4463,7 +4379,7 @@ LoadRoomMainTiles: ; 29e7 (0:29e7)
 	ret
 ; 0x2a19
 
-LoadRoomSpecialTiles: ; 2a19 (0:2a19)
+LoadRoomSpecialTiles:: ; 2a19 (0:2a19)
 	ld a, $1 ; VRAM1
 	ldh [rVBK], a
 	ld a, [wRoomSpecialTiles]
@@ -4491,7 +4407,7 @@ LoadRoomSpecialTiles: ; 2a19 (0:2a19)
 	ret
 ; 0x2a52
 
-LoadRoomPalettes: ; 2a52 (0:2a52)
+LoadRoomPalettes:: ; 2a52 (0:2a52)
 	ld a, [wRoomPalettes]
 	add a ; *2
 	ld e, a
@@ -4509,7 +4425,7 @@ LoadRoomPalettes: ; 2a52 (0:2a52)
 	ret
 ; 0x2a77
 
-UpdateRoomAnimatedPals: ; 2a77 (0:2a77)
+UpdateRoomAnimatedPals:: ; 2a77 (0:2a77)
 	ldh a, [rLY]
 	cp $88
 	jp nc, .done
@@ -4560,7 +4476,7 @@ UpdateRoomAnimatedPals: ; 2a77 (0:2a77)
 
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(Pals_cc000)
+	ld a, BANK("Palettes")
 	bankswitch
 	ld a, 1 << rBGPI_AUTO_INCREMENT
 	ldh [rBGPI], a
@@ -4607,7 +4523,7 @@ endr
 
 ; given the obj struct in hl
 ; update its sprite with its current position
-UpdateObjSprite: ; 3000 (0:3000)
+UpdateObjSprite:: ; 3000 (0:3000)
 	ld a, [wROMBank]
 	push af
 	ld a, [hl]
@@ -4671,7 +4587,7 @@ UpdateObjSprite: ; 3000 (0:3000)
 	ret
 ; 0x305c
 
-Func_305c: ; 305c (0:305c)
+Func_305c:: ; 305c (0:305c)
 	ld a, [wCurObjUnk18]
 	ld b, a
 	ld hl, wCurObjXPos
@@ -4685,7 +4601,7 @@ Func_305c: ; 305c (0:305c)
 
 	INCROM $3069, $3076
 
-Func_3076: ; 3076 (0:3076)
+Func_3076:: ; 3076 (0:3076)
 	ld a, [wCurObjUnk18]
 	ld b, a
 	ld hl, wCurObjYPos
@@ -4701,7 +4617,7 @@ Func_3076: ; 3076 (0:3076)
 
 ; moves current object right
 ; by 1 every 2 frames
-MoveObjectRight: ; 30b8 (0:30b8)
+MoveObjectRight:: ; 30b8 (0:30b8)
 	ld a, [wGlobalCounter]
 	rra
 	ret c
@@ -4715,7 +4631,7 @@ MoveObjectRight: ; 30b8 (0:30b8)
 
 ; moves current object left
 ; by 1 every 2 frames
-MoveObjectLeft: ; 30c5 (0:30c5)
+MoveObjectLeft:: ; 30c5 (0:30c5)
 	ld a, [wGlobalCounter]
 	rra
 	ret nc
@@ -4730,7 +4646,7 @@ MoveObjectLeft: ; 30c5 (0:30c5)
 
 	INCROM $30d4, $30e6
 
-Func_30e6: ; 30e6 (0:30e6)
+Func_30e6:: ; 30e6 (0:30e6)
 	ld hl, wCurObjYPos
 	ld a, [hl]
 	sub $01
@@ -4742,7 +4658,7 @@ Func_30e6: ; 30e6 (0:30e6)
 
 ; input:
 ; - de = frameset pointer
-SetObjectFramesetPtr: ; 30f0 (0:30f0)
+SetObjectFramesetPtr:: ; 30f0 (0:30f0)
 	ld hl, wCurObjFramesetPtr
 	ld a, e
 	ld [hli], a ; OBJ_FRAMESET_PTR
@@ -4756,7 +4672,7 @@ SetObjectFramesetPtr: ; 30f0 (0:30f0)
 
 	INCROM $30fb, $3104
 
-Func_3104: ; 3104 (0:3104)
+Func_3104:: ; 3104 (0:3104)
 	ld hl, wCurObjFrameDuration
 	ld a, [hld]
 	sub 1
@@ -4786,7 +4702,7 @@ Func_3104: ; 3104 (0:3104)
 	jr Func_316b
 ; 0x312f
 
-UpdateObjectAnimation: ; 312f (0:312f)
+UpdateObjectAnimation:: ; 312f (0:312f)
 	ld hl, wCurObjFrameDuration
 	ld a, [hl]
 	sub 1
@@ -4829,7 +4745,7 @@ UpdateObjectAnimation: ; 312f (0:312f)
 	ld [hl], a ; OBJ_FRAME_DURATION
 ;	fallthrough
 
-Func_316b: ; 316b (0:316b)
+Func_316b:: ; 316b (0:316b)
 	pop af
 	bankswitch
 	ret
@@ -4837,7 +4753,7 @@ Func_316b: ; 316b (0:316b)
 
 	INCROM $3173, $3290
 
-Func_3290: ; 3290 (0:3290)
+Func_3290:: ; 3290 (0:3290)
 	ld a, [wROMBank]
 	push af
 	ld a, BANK(_ApplyObjectGravity)
@@ -4845,7 +4761,7 @@ Func_3290: ; 3290 (0:3290)
 	jp _ApplyObjectGravity
 ; 0x329f
 
-Func_329f: ; 329f (0:329f)
+Func_329f:: ; 329f (0:329f)
 	ld a, [wROMBank]
 	push af
 	ld a, BANK(Func_629d0)
@@ -4855,7 +4771,7 @@ Func_329f: ; 329f (0:329f)
 
 	INCROM $32ae, $32f9
 
-Func_32f9: ; 32f9 (0:32f9)
+Func_32f9:: ; 32f9 (0:32f9)
 	ld a, [wROMBank]
 	push af
 	ld a, BANK(Func_629a6)
@@ -4865,7 +4781,7 @@ Func_32f9: ; 32f9 (0:32f9)
 
 	INCROM $3308, $3416
 
-Func_3416: ; 3416 (0:3416)
+Func_3416:: ; 3416 (0:3416)
 	ld a, [wROMBank]
 	push af
 	ld a, BANK(Func_642d9)
@@ -4878,7 +4794,7 @@ Func_3416: ; 3416 (0:3416)
 
 	INCROM $342d, $3444
 
-Func_3444: ; 3444 (0:3444)
+Func_3444:: ; 3444 (0:3444)
 	ld a, [wROMBank]
 	push af
 	ld a, BANK(Func_632ac)
@@ -4891,7 +4807,7 @@ Func_3444: ; 3444 (0:3444)
 
 	INCROM $345b, $34b7
 
-Func_34b7: ; 34b7 (0:34b7)
+Func_34b7:: ; 34b7 (0:34b7)
 	ld a, [wROMBank]
 	push af
 	ld a, BANK(Func_631e8)
@@ -4904,7 +4820,7 @@ Func_34b7: ; 34b7 (0:34b7)
 
 	INCROM $34ce, $34e5
 
-Func_34e5: ; 34e5 (0:34e5)
+Func_34e5:: ; 34e5 (0:34e5)
 	ld a, [wROMBank]
 	push af
 	ld a, BANK(Func_6189d)
@@ -4917,7 +4833,7 @@ Func_34e5: ; 34e5 (0:34e5)
 
 	INCROM $34fc, $3513
 
-Func_3513: ; 3513 (0:3513)
+Func_3513:: ; 3513 (0:3513)
 	ld a, [wROMBank]
 	push af
 	ld a, BANK(Func_19bc3)
@@ -4929,7 +4845,7 @@ Func_3513: ; 3513 (0:3513)
 	ret
 ; 0x352b
 
-Func_352b: ; 352b (0:352b)
+Func_352b:: ; 352b (0:352b)
 	ld a, [wROMBank]
 	push af
 	ld a, BANK(Func_19b7b)
@@ -4941,7 +4857,7 @@ Func_352b: ; 352b (0:352b)
 	ret
 ; 0x3543
 
-Func_3543: ; 3543 (0:3543)
+Func_3543:: ; 3543 (0:3543)
 	ld a, [wROMBank]
 	push af
 	ld a, BANK(Func_19b51)
@@ -4953,7 +4869,7 @@ Func_3543: ; 3543 (0:3543)
 	ret
 ; 0x355b
 
-Func_355b: ; 355b (0:355b)
+Func_355b:: ; 355b (0:355b)
 	ld a, [wROMBank]
 	push af
 	ld a, BANK(Func_19b61)
@@ -4965,7 +4881,7 @@ Func_355b: ; 355b (0:355b)
 	ret
 ; 0x3573
 
-Func_3573: ; 3573 (0:3573)
+Func_3573:: ; 3573 (0:3573)
 	ld a, [wROMBank]
 	push af
 	ld a, BANK(Func_19b69)
@@ -4981,7 +4897,7 @@ Func_3573: ; 3573 (0:3573)
 
 ; b = sprite bank
 ; de = pointer to sprite
-AddOWSpriteWithScroll: ; 3a00 (0:3a00)
+AddOWSpriteWithScroll:: ; 3a00 (0:3a00)
 	ld a, [wSCY]
 	ld c, a
 	ld a, [hli] ; y coord
@@ -5004,7 +4920,7 @@ AddOWSpriteWithScroll: ; 3a00 (0:3a00)
 	ld l, e
 ;	fallthrough
 
-AddOWSpriteWithScroll_GotParams: ; 3a22 (0:3a22)
+AddOWSpriteWithScroll_GotParams:: ; 3a22 (0:3a22)
 	ld a, [wROMBank]
 	push af
 	ld a, b
@@ -5018,7 +4934,7 @@ AddOWSpriteWithScroll_GotParams: ; 3a22 (0:3a22)
 ; hl = OAM data
 ; b = sprite bank
 ; de = pointer to sprite
-AddOWSprite: ; 3a38 (0:3a38)
+AddOWSprite:: ; 3a38 (0:3a38)
 	ld a, [hli]
 	ld c, $10
 	add c
@@ -5047,7 +4963,7 @@ AddOWSprite: ; 3a38 (0:3a38)
 ; hl = wSceneObjXDuration
 ; de = frameset pointer
 ; b = bank
-UpdateOWAnimation: ; 3a66 (0:3a66)
+UpdateOWAnimation:: ; 3a66 (0:3a66)
 	xor a
 	ld [wOWAnimationFinished], a
 
@@ -5106,7 +5022,7 @@ UpdateOWAnimation: ; 3a66 (0:3a66)
 ; in input a has already been collected
 ; if not collected returns z set
 ; a = TREASURE_* constant
-IsTreasureCollected: ; 3aac (0:3aac)
+IsTreasureCollected:: ; 3aac (0:3aac)
 	ld hl, wTreasuresCollected
 	ld e, a
 	srl e
@@ -5141,7 +5057,7 @@ IsTreasureCollected: ; 3aac (0:3aac)
 	ret
 ; 0x3ad7
 
-Func_3ad7: ; 3ad7 (0:3ad7)
+Func_3ad7:: ; 3ad7 (0:3ad7)
 	ld a, [hli]
 	and $f8
 	rlca
@@ -5171,7 +5087,7 @@ Func_3ad7: ; 3ad7 (0:3ad7)
 ; writes them to v0Tiles2 + $500
 ; b = map side constant (MAP_NORTH, ...)
 ; d = level index within that map side
-LoadLevelName: ; 3af7 (0:3af7)
+LoadLevelName:: ; 3af7 (0:3af7)
 	ld a, BANK(LevelNamesJPGfx)
 	ld hl, wLanguage
 	add [hl]
@@ -5203,7 +5119,7 @@ LoadLevelName: ; 3af7 (0:3af7)
 ; 0x3b2b
 
 ; copies c bytes from b:hl to de
-CopyFarBytes: ; 3b2b (0:3b2b)
+CopyFarBytes:: ; 3b2b (0:3b2b)
 	ld a, [wROMBank]
 	push af
 	ld a, b
@@ -5217,7 +5133,7 @@ CopyFarBytes: ; 3b2b (0:3b2b)
 
 ; copies c * $100 bytes from bank b
 ; at address hl to de
-CopyFarBytes_Long: ; 3b42 (0:3b42)
+CopyFarBytes_Long:: ; 3b42 (0:3b42)
 	ld a, [wROMBank]
 	push af
 	ld a, b
@@ -5230,7 +5146,7 @@ CopyFarBytes_Long: ; 3b42 (0:3b42)
 	ret
 ; 0x3b5b
 
-LoadFarTiles: ; 3b5b (0:3b5b)
+LoadFarTiles:: ; 3b5b (0:3b5b)
 	ld a, [wROMBank]
 	push af
 	ld a, b
@@ -5248,7 +5164,7 @@ LoadFarTiles: ; 3b5b (0:3b5b)
 ; sets scene obj's state and
 ; resets its animation data
 ; a = state
-SetSceneObjState: ; 3b93 (0:3b93)
+SetSceneObjState:: ; 3b93 (0:3b93)
 	ld [hld], a
 	xor a
 	ld [hld], a
@@ -5256,7 +5172,7 @@ SetSceneObjState: ; 3b93 (0:3b93)
 	ret
 ; 0x3b98
 
-PlayOverworldMusic: ; 3b98 (0:3b98)
+PlayOverworldMusic:: ; 3b98 (0:3b98)
 	ld a, [w2d011]
 	and a
 	jr nz, .night
@@ -5267,7 +5183,7 @@ PlayOverworldMusic: ; 3b98 (0:3b98)
 	ret
 ; 0x3bb8
 
-LoadFarPalsToTempPals1: ; 3bb8 (0:3bb8)
+LoadFarPalsToTempPals1:: ; 3bb8 (0:3bb8)
 	ld a, [wROMBank]
 	push af
 	ld a, b
@@ -5278,7 +5194,7 @@ LoadFarPalsToTempPals1: ; 3bb8 (0:3bb8)
 	ret
 ; 0x3bce
 
-LoadFarPalsToTempPals2: ; 3bce (0:3bce)
+LoadFarPalsToTempPals2:: ; 3bce (0:3bce)
 	ld a, [wROMBank]
 	push af
 	ld a, b
@@ -5289,7 +5205,7 @@ LoadFarPalsToTempPals2: ; 3bce (0:3bce)
 	ret
 ; 0x3be4
 
-ApplyPalConfig: ; 3be4 (0:3be4)
+ApplyPalConfig:: ; 3be4 (0:3be4)
 	ld c, [hl]
 	xor a
 	ld [hli], a
@@ -5323,7 +5239,7 @@ ApplyPalConfig: ; 3be4 (0:3be4)
 	ret
 ; 0x3c03
 
-Func_3c03: ; 3c03 (0:3c03)
+Func_3c03:: ; 3c03 (0:3c03)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, w2d0b5
@@ -5353,7 +5269,7 @@ Func_3c03: ; 3c03 (0:3c03)
 ; movement to OW obj
 ; hl = OW obj
 ; de = movement coordinates
-Func_3c25: ; 3c25 (0:3c25)
+Func_3c25:: ; 3c25 (0:3c25)
 	call .Func_3c35
 	add e
 	ld [bc], a
@@ -5395,7 +5311,7 @@ Func_3c25: ; 3c25 (0:3c25)
 	ret
 ; 0x3c4f
 
-AddOffsetInPointerTable: ; 3c4f (0:3c4f)
+AddOffsetInPointerTable:: ; 3c4f (0:3c4f)
 	add a
 	ld e, a
 	ld a, $00
@@ -5408,7 +5324,7 @@ AddOffsetInPointerTable: ; 3c4f (0:3c4f)
 ; outputs in hl the pointer corresponding
 ; to the index given in register a
 ; from the pointer table given in hl
-GetPointerFromTableHL: ; 3c58 (0:3c58)
+GetPointerFromTableHL:: ; 3c58 (0:3c58)
 	call AddOffsetInPointerTable
 	ld a, [hli]
 	ld h, [hl]
@@ -5418,7 +5334,7 @@ GetPointerFromTableHL: ; 3c58 (0:3c58)
 
 ; same as GetPointerFromTableHL
 ; but outputs pointer to de
-GetPointerFromTableDE: ; 3c5f (0:3c5f)
+GetPointerFromTableDE:: ; 3c5f (0:3c5f)
 	call AddOffsetInPointerTable
 	ld a, [hli]
 	ld d, [hl]
@@ -5429,7 +5345,7 @@ GetPointerFromTableDE: ; 3c5f (0:3c5f)
 ; outputs in hl the cth pointer
 ; pointed by the ath entry
 ; in the pointer table in hl
-GetCthEntryFromAthTable: ; 3c66 (0:3c66)
+GetCthEntryFromAthTable:: ; 3c66 (0:3c66)
 	call AddOffsetInPointerTable
 	ld a, [hli]
 	ld h, [hl]
@@ -5439,7 +5355,7 @@ GetCthEntryFromAthTable: ; 3c66 (0:3c66)
 	ret
 ; 0x3c71
 
-GetByteFromPointerInHL: ; 3c71 (0:3c71)
+GetByteFromPointerInHL:: ; 3c71 (0:3c71)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -5447,7 +5363,7 @@ GetByteFromPointerInHL: ; 3c71 (0:3c71)
 	ret
 ; 0x3c76
 
-Func_3c76: ; 3c76 (0:3c76)
+Func_3c76:: ; 3c76 (0:3c76)
 	xor a
 	ld hl, w2d0c0
 	ld bc, $10
@@ -5457,51 +5373,51 @@ Func_3c76: ; 3c76 (0:3c76)
 
 	INCROM $3c81, $3f00
 
-DoAudioFunc_InitAudio: ; 3f00 (0:3f00)
+DoAudioFunc_InitAudio:: ; 3f00 (0:3f00)
 	call BackupBankAndSwitchToAudioBank
 	jp _InitAudio
 ; 0x3f06
 
-Func_3f06: ; 3f06 (0:3f06)
+Func_3f06:: ; 3f06 (0:3f06)
 	call Func_3f75
 	jp Func_3007a
 ; 0x3f0c
 
-DoAudioFunc_PlaySFX: ; 3f0c (0:3f0c)
+DoAudioFunc_PlaySFX:: ; 3f0c (0:3f0c)
 	call Func_3f62
 	jp _PlaySFX
 ; 0x3f12
 
 	INCROM $3f12, $3f18
 
-Func_3f18: ; 3f18 (0:3f18)
+Func_3f18:: ; 3f18 (0:3f18)
 	call Func_3f62
 	jp Func_302b8
 ; 0x3f1e
 
-Func_3f1e: ; 3f1e (0:3f1e)
+Func_3f1e:: ; 3f1e (0:3f1e)
 	call Func_3f62
 	jp Func_303c9
 ; 0x3f24
 
-Func_3f24: ; 3f24 (0:3f24)
+Func_3f24:: ; 3f24 (0:3f24)
 	call Func_3f62
 	jp Func_30416
 ; 0x3f2a
 
 	INCROM $3f2a, $3f48
 
-DoAudioFunc_PlayNewMusic_SetNoise: ; 3f48 (0:3f48)
+DoAudioFunc_PlayNewMusic_SetNoise:: ; 3f48 (0:3f48)
 	call Func_3f62
 	jp _PlayNewMusic_SetNoise
 ; 0x3f4e
 
-BackupBankAndSwitchToAudioBank: ; 3f4e (0:3f4e)
+BackupBankAndSwitchToAudioBank:: ; 3f4e (0:3f4e)
 	ld a, [wROMBank]
 	ld [wAudioBankBackup], a
 ;	fallthrough
 
-SwitchToAudioBank: ; 3f54 (0:3f54)
+SwitchToAudioBank:: ; 3f54 (0:3f54)
 	ld a, BANK("Audio Engine")
 
 .switch_bank
@@ -5509,12 +5425,12 @@ SwitchToAudioBank: ; 3f54 (0:3f54)
 	ld [MBC5RomBank - $100], a
 	ret
 
-SwitchBackFromAudioBank: ; 3f5d (0:3f5d)
+SwitchBackFromAudioBank:: ; 3f5d (0:3f5d)
 	ld a, [wAudioBankBackup]
 	jr SwitchToAudioBank.switch_bank
 ; 0x3f62
 
-Func_3f62: ; 3f62 (0:3f62)
+Func_3f62:: ; 3f62 (0:3f62)
 	ld hl, wAudioEngineFlags
 	bit 7, [hl]
 	jr nz, .pop_hl
@@ -5530,7 +5446,7 @@ Func_3f62: ; 3f62 (0:3f62)
 	ret
 ; 0x3f75
 
-Func_3f75: ; 3f75 (0:3f75)
+Func_3f75:: ; 3f75 (0:3f75)
 	ld hl, wAudioEngineFlags
 	bit 7, [hl]
 	jr z, Func_3f62.asm_3f69
@@ -5549,7 +5465,7 @@ Func_3f75: ; 3f75 (0:3f75)
 	ret
 ; 0x3f8d
 
-Func_3f8d: ; 3f8d (0:3f8d)
+Func_3f8d:: ; 3f8d (0:3f8d)
 	ld hl, wAudioEngineFlags
 	bit 6, [hl]
 	jr nz, .push_callback
@@ -5570,7 +5486,7 @@ Func_3f8d: ; 3f8d (0:3f8d)
 	ret
 ; 0x3faa
 
-ReadAudioCommands_1Byte: ; 3faa (0:3faa)
+ReadAudioCommands_1Byte:: ; 3faa (0:3faa)
 	ld a, [wSoundBank]
 	call SwitchToAudioBank.switch_bank
 	ld a, [de]
@@ -5578,7 +5494,7 @@ ReadAudioCommands_1Byte: ; 3faa (0:3faa)
 	jp SwitchToAudioBank
 ; 0x3fb5
 
-ReadAudioCommands_2Bytes: ; 3fb5 (0:3fb5)
+ReadAudioCommands_2Bytes:: ; 3fb5 (0:3fb5)
 	ld a, [wSoundBank]
 	call SwitchToAudioBank.switch_bank
 	ld a, [de]

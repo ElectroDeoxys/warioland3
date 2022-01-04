@@ -1,4 +1,3 @@
-INCLUDE "macros.asm"
 INCLUDE "constants.asm"
 
 INCLUDE "vram.asm"
