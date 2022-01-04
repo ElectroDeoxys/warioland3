@@ -51,6 +51,24 @@ def getOAMBytes(offset):
 
     return byteArray
 
+def getAttributesString(attr):
+    outStr = ("{0:01x} | ".format(attr & 0b111))
+
+    if ((attr & 0x08) != 0):
+        outStr += ("TILE_BANK | ")
+    if ((attr & 0x10) != 0):
+        outStr += ("OBP_NUM | ")
+    if ((attr & 0x20) != 0):
+        outStr += ("X_FLIP | ")
+    if ((attr & 0x40) != 0):
+        outStr += ("Y_FLIP | ")
+    if ((attr & 0x80) != 0):
+        outStr += ("PRIORITY | ")
+
+    outStr = outStr[:-3]
+    return outStr
+
+
 for offsetStr in reader.standardiseList(args.offsets):
     offset = int(offsetStr, 16)
     outStr = ''
@@ -69,7 +87,7 @@ for offsetStr in reader.standardiseList(args.offsets):
         outStr += '\n.frame_{}\n'.format(i)
 
         for j in range(len(yCoords)):
-            outStr += '\tframe_oam ' + '{0:3}, '.format(yCoords[j]) + '{0:3}, '.format(xCoords[j]) + '${0:02x}, '.format(tileIDs[j]) + '${0:02x}\n'.format(attrs[j])
+            outStr += '\tframe_oam ' + '{0:3}, '.format(yCoords[j]) + '{0:3}, '.format(xCoords[j]) + '${0:02x}, '.format(tileIDs[j]) + getAttributesString(attrs[j]) + '\n'
         
         outStr += '\tdb $80\n'
 

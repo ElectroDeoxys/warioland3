@@ -9,11 +9,11 @@
 	const ST_06                 ; $06
 	const ST_07                 ; $07
 	const ST_COLLECT_KEY        ; $08
-	const ST_CREDITS                 ; $09
+	const ST_CREDITS            ; $09
 	const ST_0a                 ; $0a
 	const ST_GB_INCOMPATIBLE    ; $0b
 	const ST_0c                 ; $0c
-	const ST_0d                 ; $0d
+	const ST_PERFECT            ; $0d
 	const ST_LANGUAGE_SELECTION ; $0e
 	const ST_0f                 ; $0f
 	const ST_10                 ; $10
@@ -35,3 +35,4 @@ SST_OVERWORLD_23 EQU $23
 ; ST_PAUSE_MENU substates
 SST_PAUSE_MENU_SAVE EQU $08
 SST_PAUSE_18 EQU $18
+SST_PAUSE_28 EQU $28

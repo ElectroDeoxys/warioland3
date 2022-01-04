@@ -15,7 +15,7 @@ StateTable:: ; 4000 (1:4000)
 	dw Func_4790                   ; ST_0a
 	dw GBIncompatibleStateTable    ; ST_GB_INCOMPATIBLE
 	dw Func_47fd                   ; ST_0c
-	dw Func_4817                   ; ST_0d
+	dw PerfectStateTable           ; ST_PERFECT
 	dw LanguageSelectionStateTable ; ST_LANGUAGE_SELECTION
 	dw Func_4028                   ; ST_0f
 	dw Func_4028                   ; ST_10
@@ -1228,12 +1228,12 @@ Func_47fd: ; 47fd (1:47fd)
 	ret
 ; 0x4817
 
-Func_4817: ; 4817 (1:4817)
+PerfectStateTable: ; 4817 (1:4817)
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
 	ldh [rSVBK], a
-	farcall Func_dc000
+	farcall _PerfectStateTable
 	pop af
 	ldh [rSVBK], a
 	ret

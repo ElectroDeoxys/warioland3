@@ -3120,7 +3120,7 @@ Func_15dc:: ; 15dc (0:15dc)
 	jr z, .asm_15ff
 	ld a, [wNumberCollectedTreasures]
 	dec a
-	jr z, Func_1610
+	jr z, SetPerfectState
 .asm_15ff
 	ld a, [wSubState]
 	ld [wPendingSubState], a
@@ -3131,9 +3131,9 @@ Func_15dc:: ; 15dc (0:15dc)
 	ret
 ; 0x1610
 
-Func_1610:: ; 1610 (0:1610)
+SetPerfectState:: ; 1610 (0:1610)
 	ld hl, wState
-	ld [hl], ST_0d
+	ld [hl], ST_PERFECT
 	xor a
 	ld [wSubState], a
 	ret

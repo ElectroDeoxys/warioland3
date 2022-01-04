@@ -483,11 +483,11 @@ Func_160365: ; 160365 (58:4365)
 	ret nz
 	ld a, [wJoypadPressed]
 	and a
-	jp nz, Func_1610
+	jp nz, SetPerfectState
 	ld hl, wTimer
 	dec [hl]
 	ret nz
-	jp Func_1610
+	jp SetPerfectState
 ; 0x1603b1
 
 LoadCreditsPals: ; 1603b1 (58:43b1)
