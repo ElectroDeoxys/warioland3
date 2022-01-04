@@ -9,7 +9,7 @@
 	const ST_06                 ; $06
 	const ST_07                 ; $07
 	const ST_COLLECT_KEY        ; $08
-	const ST_09                 ; $09
+	const ST_CREDITS                 ; $09
 	const ST_0a                 ; $0a
 	const ST_GB_INCOMPATIBLE    ; $0b
 	const ST_0c                 ; $0c

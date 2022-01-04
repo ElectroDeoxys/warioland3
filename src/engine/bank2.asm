@@ -1493,9 +1493,9 @@ Func_8cd7: ; 8cd7 (2:4cd7)
 	ld [wc0a2], a
 .asm_8ced
 	call Func_8d69
-	ld a, [wccf0]
+	ld a, [wccf0 + 0]
 	ld d, a
-	ld a, [wccf1]
+	ld a, [wccf0 + 1]
 	ld e, a
 	ld hl, wce01
 	ld b, $20
@@ -1517,9 +1517,9 @@ Func_8cd7: ; 8cd7 (2:4cd7)
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld a, [wccf0]
+	ld a, [wccf0 + 0]
 	ld d, a
-	ld a, [wccf1]
+	ld a, [wccf0 + 1]
 	ld e, a
 	ld hl, wce35
 	ld b, $20
@@ -1673,12 +1673,12 @@ Func_8e06:: ; 8e06 (2:4e06)
 	ld a, l
 	and $1f
 	ld l, a
-	ld h, $98
+	ld h, HIGH(v0BGMap0)
 	add hl, de
 	ld a, h
-	ld [wccf0], a
+	ld [wccf0 + 0], a
 	ld a, l
-	ld [wccf1], a
+	ld [wccf0 + 1], a
 	ret
 ; 0x8e5b
 
@@ -1720,12 +1720,12 @@ Func_8e5b: ; 8e5b (2:4e5b)
 	ld a, l
 	and $1f
 	ld l, a
-	ld h, $98
+	ld h, HIGH(v0BGMap0)
 	add hl, de
 	ld a, h
-	ld [wccf0], a
+	ld [wccf0 + 0], a
 	ld a, l
-	ld [wccf1], a
+	ld [wccf0 + 1], a
 	ret
 ; 0x8eac
 

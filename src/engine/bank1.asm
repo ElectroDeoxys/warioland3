@@ -3,7 +3,7 @@ StateTable:: ; 4000 (1:4000)
 	jumptable
 
 	dw TitleStateTable             ; ST_TITLE
-	dw Func_4686                   ; ST_OVERWORLD
+	dw HandleOverworld             ; ST_OVERWORLD
 	dw Func_46cc                   ; ST_LEVEL
 	dw Func_46dc                   ; ST_03
 	dw PauseMenuStateTable         ; ST_PAUSE_MENU
@@ -11,7 +11,7 @@ StateTable:: ; 4000 (1:4000)
 	dw Func_472a                   ; ST_06
 	dw Func_474c                   ; ST_07
 	dw CollectKeyDelay             ; ST_COLLECT_KEY
-	dw Func_4776                   ; ST_09
+	dw CreditsStateTable           ; ST_CREDITS
 	dw Func_4790                   ; ST_0a
 	dw GBIncompatibleStateTable    ; ST_GB_INCOMPATIBLE
 	dw Func_47fd                   ; ST_0c
@@ -296,7 +296,7 @@ InitIntroSequence: ; 405f (1:405f)
 	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
 	ldh [rLCDC], a
 	xor a
-	ld [wIntroSeqTimer], a
+	ld [wTimer], a
 	ld [wGlobalCounter], a
 	ld hl, wSubState
 	inc [hl]
@@ -329,7 +329,7 @@ IntroSequencePhase1: ; 41cf (1:41cf)
 ; start playing Intro music
 ; when timer reaches 180
 ; then advance to next state
-	ld hl, wIntroSeqTimer
+	ld hl, wTimer
 	inc [hl]
 	ld a, [hl]
 	cp 180
@@ -364,14 +364,14 @@ IntroSequencePhase1: ; 41cf (1:41cf)
 
 .go_to_state2
 	ld a, 48
-	ld [wIntroSeqTimer], a
+	ld [wTimer], a
 	ld hl, wWarioPlaneState
 	inc [hl]
 	jp .continue
 
 .State2
 ; wait for timer then change frameset and advance state
-	ld hl, wIntroSeqTimer
+	ld hl, wTimer
 	dec [hl]
 	jp nz, .continue
 	ld [hl], 3
@@ -414,7 +414,7 @@ IntroSequencePhase1: ; 41cf (1:41cf)
 	ld a, [hl]
 	cp 64
 	jr nz, .continue
-	ld hl, wIntroSeqTimer
+	ld hl, wTimer
 	dec [hl]
 	jr z, .go_to_state5
 	ld hl, wWarioPlaneState
@@ -472,7 +472,7 @@ IntroSequencePhase1: ; 41cf (1:41cf)
 	ld [hl], a ; state
 	ld [wIntroSeqSFXTimer], a
 	ld a, 28
-	ld [wIntroSeqTimer], a
+	ld [wTimer], a
 	ld hl, wSubState
 	inc [hl]
 	; fallthrough
@@ -506,7 +506,7 @@ IntroSequencePhase2: ; 42ed (1:42ed)
 ; State0
 ; wait for timer, then slowly move plane towards centre
 ; when reaches the centre, advance to next state
-	ld hl, wIntroSeqTimer
+	ld hl, wTimer
 	ld a, [hl]
 	and a
 	jr z, .move_to_centre
@@ -537,14 +537,14 @@ IntroSequencePhase2: ; 42ed (1:42ed)
 
 .go_to_state1
 	ld a, 48
-	ld [wIntroSeqTimer], a
+	ld [wTimer], a
 	ld hl, wWarioPlaneState
 	inc [hl]
 	jr .continue
 
 .State1
 ; wait for timer, then change frameset and advance state
-	ld hl, wIntroSeqTimer
+	ld hl, wTimer
 	dec [hl]
 	jr nz, .continue
 	ld hl, wWarioPlaneFramesetOffset
@@ -558,7 +558,7 @@ IntroSequencePhase2: ; 42ed (1:42ed)
 	xor a
 	ld [wIntroSeqSFXTimer], a
 	ld a, 224
-	ld [wIntroSeqTimer], a
+	ld [wTimer], a
 	ld hl, wWarioPlaneState
 	inc [hl]
 	jr .continue
@@ -574,7 +574,7 @@ IntroSequencePhase2: ; 42ed (1:42ed)
 	play_sfx SFX_023
 .skip_sfx
 
-	ld hl, wIntroSeqTimer
+	ld hl, wTimer
 	dec [hl]
 	jr nz, .continue
 
@@ -591,7 +591,7 @@ IntroSequencePhase2: ; 42ed (1:42ed)
 	ld [hl], a ; state
 	ld [wIntroSeqSFXTimer], a
 	ld a, 48
-	ld [wIntroSeqTimer], a
+	ld [wTimer], a
 	ld hl, wSubState
 	inc [hl]
 
@@ -746,7 +746,7 @@ IntroSequencePhase3: ; 43b5 (1:43b5)
 	ld [hli], a
 	xor a
 	ld [hld], a ; state
-	ld [wIntroSeqTimer], a
+	ld [wTimer], a
 
 	ld hl, Pals_5002
 	call LoadPalsToTempPals1
@@ -790,7 +790,7 @@ EndIntroSequence: ; 44c3 (1:44c3)
 	ld a, [wceef]
 	and a
 	jr nz, StartTitleScreen
-	ld hl, wIntroSeqTimer
+	ld hl, wTimer
 	ld a, [hl]
 	cp 120
 	jr nc, .asm_44e2
@@ -800,7 +800,7 @@ EndIntroSequence: ; 44c3 (1:44c3)
 .asm_44e2
 	ld a, [wGlobalCounter]
 	and %11
-	call z, FadeInTitle
+	call z, SlowFadeInScreen
 	; continue when substate is advanced
 	; after the title has faded in completely
 	ld a, [wSubState]
@@ -813,9 +813,9 @@ EndIntroSequence: ; 44c3 (1:44c3)
 StartTitleScreen: ; 44f0 (1:44f0)
 	play_music MUSIC_TITLE_SCREEN
 	ld a, 8
-	ld [wIntroSeqTimer + 1], a
+	ld [wTimer + 1], a
 	ld a, 68
-	ld [wIntroSeqTimer], a
+	ld [wTimer], a
 	ld hl, wSubState
 	ld [hl], $07
 	ret
@@ -860,14 +860,14 @@ StartMenu: ; 4508 (1:4508)
 	jr z, .demo_timer
 	; start demo timer
 	ld a, 8
-	ld [wIntroSeqTimer + 1], a
+	ld [wTimer + 1], a
 	ld a, 68
-	ld [wIntroSeqTimer], a
+	ld [wTimer], a
 	ret
 
 .demo_timer
 	; decrement timer
-	ld hl, wIntroSeqTimer
+	ld hl, wTimer
 	ld a, [hl]
 	sub 1
 	ld [hli], a
@@ -1008,7 +1008,7 @@ InitTimeAttackDescription: ; 4640 (1:4640)
 	call FillBGMap0_With7f
 	call ClearWholeVirtualOAM
 	call LoadTimeAttackDescriptionPals
-	call Func_1c4a
+	call ApplyTempPals1ToBGPals
 	call LoadTimeAttackDescriptionTiles
 	call LoadTimeAttackText
 	call VBlank_354
@@ -1021,7 +1021,7 @@ InitTimeAttackDescription: ; 4640 (1:4640)
 	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
 	ldh [rLCDC], a
 	xor a
-	ld [wIntroSeqTimer], a
+	ld [wTimer], a
 	ld hl, wSubState
 	inc [hl]
 	ret
@@ -1039,21 +1039,23 @@ TimeAttackDescription: ; 4670 (1:4670)
 	jp StartOverworldState
 ; 0x4686
 
-Func_4686: ; 4686 (1:4686)
+HandleOverworld: ; 4686 (1:4686)
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
-	farcall Func_80392
+	farcall OverworldStateTable
 	pop af
 	ldh [rSVBK], a
 
+	; if a level has been selected
+	; handle the transition
 	ld hl, wState
 	ld a, [hl]
 	cp ST_LEVEL
 	ret nz
 	play_sfx SFX_0E3
-	call Func_4ae7
+	call SelectLevel
 	ld a, [wLevel]
 	cp GOLF_BUILDING
 	jr z, .golf_building
@@ -1143,7 +1145,7 @@ Func_474c: ; 474c (1:474c)
 
 ; pauses game for 100 ticks
 CollectKeyDelay: ; 4766 (1:4766)
-	ld hl, wIntroSeqTimer
+	ld hl, wTimer
 	inc [hl]
 	ld a, [hl]
 	cp 100
@@ -1154,12 +1156,12 @@ CollectKeyDelay: ; 4766 (1:4766)
 	ret
 ; 0x4776
 
-Func_4776: ; 4776 (1:4776)
+CreditsStateTable: ; 4776 (1:4776)
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
 	ldh [rSVBK], a
-	farcall Func_160000
+	farcall _CreditsStateTable
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -1633,7 +1635,7 @@ PrintNumberCollectedTreasures: ; 4ab7 (1:4ab7)
 	ret
 ; 0x4ae7
 
-Func_4ae7: ; 4ae7 (1:4ae7)
+SelectLevel: ; 4ae7 (1:4ae7)
 	ldh a, [rSVBK]
 	push af
 	ld a, 2 ; WRAM2

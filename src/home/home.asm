@@ -943,7 +943,7 @@ DarkenBGToPal:: ; 5f1 (0:5f1)
 ; fades BG palettes to wTempPals1
 ; gradually lightens up to wTempPals1
 ; when fading is complete, advances wSubState
-FadeInTitle:: ; 6fa (0:6fa)
+SlowFadeInScreen:: ; 6fa (0:6fa)
 	ld a, [wPalFadeCounter]
 	cp 2
 	jr nc, .fade ; jump if in middle of fade
@@ -1482,7 +1482,7 @@ InitHRAMCallFunc:: ; a92 (0:a92)
 	push af
 	ld a, $0
 	bankswitch
-	call StateTable
+	call $4000
 	pop af
 	bankswitch
 	ret
@@ -1748,9 +1748,9 @@ Func_c19:: ; c19 (0:c19)
 	ld h, $98
 	add hl, de
 	ld a, h
-	ld [wccf0], a
+	ld [wccf0 + 0], a
 	ld a, l
-	ld [wccf1], a
+	ld [wccf0 + 1], a
 	ret
 ; 0xc4c
 
@@ -3120,7 +3120,7 @@ Func_15dc:: ; 15dc (0:15dc)
 	jr z, .asm_15ff
 	ld a, [wNumberCollectedTreasures]
 	dec a
-	jr z, .asm_1610
+	jr z, Func_1610
 .asm_15ff
 	ld a, [wSubState]
 	ld [wPendingSubState], a
@@ -3129,8 +3129,9 @@ Func_15dc:: ; 15dc (0:15dc)
 	ld a, SST_PAUSE_18
 	ld [wSubState], a
 	ret
+; 0x1610
 
-.asm_1610
+Func_1610:: ; 1610 (0:1610)
 	ld hl, wState
 	ld [hl], ST_0d
 	xor a
@@ -3364,7 +3365,36 @@ Func_1783:: ; 1783 (0:1783)
 	ret
 ; 0x1795
 
-	INCROM $1795, $1827
+	INCROM $1795, $17ec
+
+Func_17ec:: ; 17ec (0:17ec)
+	ld a, [hli]
+	add $10
+	ld [wCurSprite], a
+	ld a, [hli]
+	add $08
+	ld [wCurSpriteXCoord], a
+	ld a, [hli]
+	ld [wCurSpriteTileID], a
+	ld a, [hl]
+	ld [wCurSpriteAttributes], a
+	ld a, [$d521]
+	ld [wTempBank], a
+	ld a, [wROMBank]
+	push af
+	ld a, [wTempBank]
+	bankswitch
+	ld a, [$d51e]
+	ld h, a
+	ld a, [$d51f]
+	ld l, a
+	call TryAddSprite
+	pop af
+	bankswitch
+	ret
+; 0x1826
+
+	db $80 ; ??
 
 PalsWhite:: ; 1827 (0:1827)
 	rgb 31, 31, 31
@@ -4097,7 +4127,7 @@ SetWarioPal:: ; 1af6 (0:1af6)
 
 	INCROM $1b4f, $1c4a
 
-Func_1c4a:: ; 1c4a (0:1c4a)
+ApplyTempPals1ToBGPals:: ; 1c4a (0:1c4a)
 	ld hl, wTempPals1
 	ld a, 1 << rBGPI_AUTO_INCREMENT
 	ldh [rBGPI], a
@@ -4111,7 +4141,21 @@ Func_1c4a:: ; 1c4a (0:1c4a)
 	ret
 ; 0x1c5b
 
-	INCROM $1c5b, $2800
+ApplyTempPals2ToOBPals:: ; 1c5b (0:1c5b)
+	ld hl, wTempPals2
+	ld a, 1 << rOBPI_AUTO_INCREMENT
+	ldh [rOBPI], a
+	ld b, 8 palettes
+	ld c, LOW(rOBPD)
+.loop
+	ld a, [hli]
+	ld [$ff00+c], a
+	dec b
+	jr nz, .loop
+	ret
+; 0x1c6c
+
+	INCROM $1c6c, $2800
 
 LoadPermissionMap:: ; 2800 (0:2800)
 	ld a, [wRoomPermissionMap]

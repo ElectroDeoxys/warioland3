@@ -18,6 +18,7 @@ wBackupVBlankFunc:: ; c080
 wSCY:: ; c083
 	ds $1
 
+wc084:: ; c084
 	ds $1
 
 wSCX:: ; c085
@@ -898,10 +899,7 @@ wccef:: ; ccef
 	ds $1
 
 wccf0:: ; ccf0
-	ds $1
-
-wccf1:: ; ccf1
-	ds $1
+	ds $2
 
 	ds $e
 
@@ -927,9 +925,12 @@ wce69:: ; ce69
 	ds $1
 
 wce6a:: ; ce6a
-	ds $1
+	ds $2
 
-	ds $67
+wce6c:: ; ce6c
+	ds $2
+
+	ds $64
 
 wced2:: ; ced2
 	ds $1
@@ -991,10 +992,9 @@ wTransitionParam:: ; cee3
 wcee4:: ; cee4
 	ds $1
 
-; used in the Intro Sequence
-; to time various events such as
-; when the intro music starts playing, etc
-wIntroSeqTimer:: ; cee5
+; used to time various events in
+; Intro/Credits/other sequences
+wTimer:: ; cee5
 	ds $2
 
 wcee7:: ; cee7

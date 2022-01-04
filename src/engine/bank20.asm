@@ -700,12 +700,12 @@ Func_8038a: ; 8038a (20:438a)
 	ret
 ; 0x80392
 
-Func_80392: ; 80392 (20:4392)
+OverworldStateTable: ; 80392 (20:4392)
 	ld a, [wSubState]
 	jumptable
 
 	dw FastFadeToWhite
-	dw Func_803f9
+	dw InitOverworld
 	dw SlowFadeFromWhite
 	dw Func_804ec
 	dw FastFadeToWhite
@@ -763,7 +763,7 @@ Func_803e6: ; 803e6 (20:43e6)
 	jp Func_15dc
 ; 0x803f9
 
-Func_803f9: ; 803f9 (20:43f9)
+InitOverworld: ; 803f9 (20:43f9)
 	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
 	stop_music2
@@ -788,7 +788,7 @@ Func_803f9: ; 803f9 (20:43f9)
 	jr z, .skip_get_level_index
 	ld a, [wOWLevel]
 	cp LEVEL_GOLF_BUILDING
-	jp nc, .asm_804b9
+	jp nc, .GolfBuilding
 	ld b, a
 	call GetMapSideLevelIndex
 	ld a, b
@@ -866,7 +866,7 @@ Func_803f9: ; 803f9 (20:43f9)
 	call Func_803e6
 	ret
 
-.asm_804b9
+.GolfBuilding
 	xor a
 	ld [wNextMapSide], a
 	ld [wMapSideLevelIndex], a
@@ -1073,7 +1073,7 @@ Func_80621: ; 80621 (20:4621)
 .Func_80655
 	ld a, TREASURE_KEY_CARD_RED
 	call IsTreasureCollected
-	jp z, Func_803f9.Func_804c9
+	jp z, InitOverworld.Func_804c9
 	ret
 ; 0x8065e
 

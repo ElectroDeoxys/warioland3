@@ -127,7 +127,13 @@ endr
 	ld [wCurObj + OBJ_STRUCT_LENGTH - 1], a
 
 	call Func_61760
-	farcall $13, wCurObjUpdateFunction
+	ld a, $13
+	ldh [hCallFuncBank], a
+	ld a, [wCurObjUpdateFunction + 0]
+	ldh [hCallFuncPointer + 0], a
+	ld a, [wCurObjUpdateFunction + 1]
+	ldh [hCallFuncPointer + 1], a
+	call hCallFunc
 
 	call UpdateObjectAnimation
 	call Func_6307b

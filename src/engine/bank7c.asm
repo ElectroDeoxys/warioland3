@@ -30,7 +30,7 @@ _PauseMenuStateTable: ; 1f0000 (7c:4000)
 	dw DebugReset
 
 	dw SlowFadeBGToWhite ; SST_PAUSE_18
-	dw Func_1f0701
+	dw InitSaveScreenAndBackupVRAM
 	dw DarkenBGToPal_Fast
 	dw FillSaveScreenBar
 	dw SlowFadeBGToWhite
@@ -47,7 +47,7 @@ _PauseMenuStateTable: ; 1f0000 (7c:4000)
 	dw DebugReset
 
 	dw SlowFadeBGToWhite
-	dw Func_1f0701
+	dw InitSaveScreenAndBackupVRAM
 	dw DarkenBGToPal_Fast
 	dw FillSaveScreenBar
 	dw SlowFadeBGToWhite
@@ -482,7 +482,7 @@ InitSaveScreen: ; 1f0370 (7c:4370)
 	xor a
 	ld [wPalFadeCounter], a
 	ld [wcee4], a
-	ld [wIntroSeqTimer], a
+	ld [wTimer], a
 
 	ld hl, wce01
 	ld a, HIGH(v0BGMap0 + $164)
@@ -499,13 +499,13 @@ InitSaveScreen: ; 1f0370 (7c:4370)
 ; in the save screen bar
 ; when done, advance to next substate
 FillSaveScreenBar: ; 1f03d1 (7c:43d1)
-	ld a, [wIntroSeqTimer]
+	ld a, [wTimer]
 	inc a
-	ld [wIntroSeqTimer], a
+	ld [wTimer], a
 	cp $04
 	ret c
 	xor a
-	ld [wIntroSeqTimer], a
+	ld [wTimer], a
 	ld a, [wcee4]
 	inc a
 	cp $0a
@@ -850,30 +850,30 @@ Func_1f03fa: ; 1f03fa (7c:43fa)
 	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
 	ldh [rLCDC], a
 	xor a
-	ld [wIntroSeqTimer + 0], a
+	ld [wTimer + 0], a
 	ld a, $02
-	ld [wIntroSeqTimer + 1], a
+	ld [wTimer + 1], a
 	ld hl, wSubState
 	inc [hl]
 	ret
 ; 0x1f06e1
 
 ; advances substate if A button is pressed
-; or when wIntroSeqTimer has elapsed
+; or when wTimer has elapsed
 HandleSaveCompleteBox: ; 1f06e1 (7c:46e1)
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jr nz, .close
-	ld hl, wIntroSeqTimer
+	ld hl, wTimer
 	dec [hl]
 	ret nz
-	ld hl, wIntroSeqTimer + 1
+	ld hl, wTimer + 1
 	dec [hl]
 	ret nz
 .close
 	xor a
-	ld [wIntroSeqTimer + 0], a
-	ld [wIntroSeqTimer + 1], a
+	ld [wTimer + 0], a
+	ld [wTimer + 1], a
 	ld hl, wSubState
 	inc [hl]
 	ret
@@ -883,7 +883,7 @@ ResetAfterSave: ; 1f06fe (7c:46fe)
 	jp Init
 ; 0x1f0701
 
-Func_1f0701: ; 1f0701 (7c:4701)
+InitSaveScreenAndBackupVRAM: ; 1f0701 (7c:4701)
 	ld a, TRUE
 	ld [wResetDisabled], a
 	call DisableLCD
@@ -903,7 +903,7 @@ Func_1f0701: ; 1f0701 (7c:4701)
 	ldh [rSCX], a
 	xor a
 	ld [wPalFadeCounter], a
-	ld [wIntroSeqTimer], a
+	ld [wTimer], a
 	ld [wcee4], a
 
 	ld hl, wce01
@@ -1047,9 +1047,9 @@ Func_1f0768: ; 1f0768 (7c:4768)
 	farcall PrintSaveCompleteBox
 
 	xor a
-	ld [wIntroSeqTimer + 0], a
+	ld [wTimer + 0], a
 	ld a, $02
-	ld [wIntroSeqTimer + 1], a
+	ld [wTimer + 1], a
 	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
 	ldh [rLCDC], a
 	ld hl, wSubState
@@ -1082,7 +1082,7 @@ Func_1f08af: ; 1f08af (7c:48af)
 	xor a
 	ld [wResetDisabled], a
 	ld hl, wState
-	ld [hl], ST_09
+	ld [hl], ST_CREDITS
 	xor a
 	ld [wSubState], a
 	ret

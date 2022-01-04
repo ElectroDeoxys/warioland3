@@ -1895,7 +1895,7 @@ CollectKey: ; 21007 (8:5007)
 	ld a, ST_COLLECT_KEY
 	ld [wState], a
 	xor a
-	ld [wIntroSeqTimer], a
+	ld [wTimer], a
 	ret
 ; 0x2101c
 

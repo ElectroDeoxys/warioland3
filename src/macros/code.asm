@@ -18,7 +18,7 @@ ENDM
 
 hcall: MACRO
 	ld a, LOW(\1)
-	ldh [hCallFuncPointer], a
+	ldh [hCallFuncPointer + 0], a
 	ld a, HIGH(\1)
 	ldh [hCallFuncPointer + 1], a
 	call hCallFunc
@@ -32,11 +32,7 @@ if _NARG == 1
 else
 	ld a, \1
 	ldh [hCallFuncBank], a
-	ld a, [\2]
-	ldh [hCallFuncPointer], a
-	ld a, [\2 + 1]
-	ldh [hCallFuncPointer + 1], a
-	call hCallFunc
+	hcall \2
 endc
 ENDM
 
