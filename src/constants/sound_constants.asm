@@ -43,7 +43,7 @@
 	const MUSIC_BOSS_BATTLE                ; 027
 	const MUSIC_LEVEL_CLEAR_GOT_TREASURE   ; 028
 	const MUSIC_BOSS_DEFEAT                ; 029
-	const MUSIC_GOLF_GAME_OVER             ; 02a
+	const MUSIC_GAME_OVER                  ; 02a
 	const MUSIC_GOLF_CLEARED               ; 02b
 	const MUSIC_MUSIC_BOXES                ; 02c
 	const MUSIC_45                         ; 02d

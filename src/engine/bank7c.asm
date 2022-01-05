@@ -1091,7 +1091,7 @@ Func_1f08af: ; 1f08af (7c:48af)
 	xor a
 	ld [wResetDisabled], a
 	ld hl, wState
-	ld [hl], ST_0c
+	ld [hl], ST_GAME_OVER
 	xor a
 	ld [wSubState], a
 	ret

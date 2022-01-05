@@ -5809,7 +5809,7 @@ OAM_aa934: ; aa934 (2a:6934)
 
 	INCROM $aab27, $aab5c
 
-OAM_aab5c: ; aab5c (2a:6b5c)
+OAM_aab5c:: ; aab5c (2a:6b5c)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2

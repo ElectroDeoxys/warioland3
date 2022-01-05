@@ -3365,7 +3365,29 @@ Func_1783:: ; 1783 (0:1783)
 	ret
 ; 0x1795
 
-	INCROM $1795, $17ec
+	INCROM $1795, $17be
+
+Func_17be:: ; 17be (0:17be)
+	ld a, [hli]
+	add $10
+	ld [wCurSprite], a
+	ld a, [hli]
+	add $08
+	ld [wCurSpriteXCoord], a
+	ld a, [hli]
+	ld [wCurSpriteTileID], a
+	ld a, [hl]
+	ld [wCurSpriteAttributes], a
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(OAM_aab5c)
+	bankswitch
+	ld hl, OAM_aab5c
+	call TryAddSprite
+	pop af
+	bankswitch
+	ret
+; 0x17ec
 
 Func_17ec:: ; 17ec (0:17ec)
 	ld a, [hli]

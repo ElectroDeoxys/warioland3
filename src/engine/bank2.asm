@@ -1,4 +1,4 @@
-Func_8000: ; 8000 (2:4000)
+_LevelStateTable: ; 8000 (2:4000)
 	ld a, [wSubState]
 	jumptable
 
@@ -485,7 +485,7 @@ Func_846e: ; 846e (2:446e)
 	ld a, $03
 	ldh [rSVBK], a
 	ld a, [wAnimatedTilesFrameDuration]
-	ld [$d50f], a
+	ld [wTempAnimatedTilesFrameDuration], a
 	ld a, [wAnimatedTilesGroup]
 	ld [wTempAnimatedTilesGroup], a
 	pop af
@@ -497,6 +497,7 @@ Func_846e: ; 846e (2:446e)
 	xor a
 	ld [wSubState], a
 	ret
+
 .asm_849d
 	call DisableLCD
 	farcall Func_64187

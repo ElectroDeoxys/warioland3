@@ -12,7 +12,7 @@
 	const ST_CREDITS            ; $09
 	const ST_0a                 ; $0a
 	const ST_GB_INCOMPATIBLE    ; $0b
-	const ST_0c                 ; $0c
+	const ST_GAME_OVER          ; $0c
 	const ST_PERFECT            ; $0d
 	const ST_LANGUAGE_SELECTION ; $0e
 	const ST_0f                 ; $0f

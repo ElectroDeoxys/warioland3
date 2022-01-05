@@ -3357,7 +3357,7 @@ SoundHeaders: ; 3155e (c:555e)
 	music $5308, $0e, $00, 100, CHAN1, 4 ; MUSIC_BOSS_BATTLE
 	music $54cc, $0e, $00, 100, CHAN1, 4 ; MUSIC_LEVEL_CLEAR_GOT_TREASURE
 	music $55e1, $0e, $00, 100, CHAN1, 2 ; MUSIC_BOSS_DEFEAT
-	music $5641, $0e, $00, 100, CHAN1, 3 ; MUSIC_GOLF_GAME_OVER
+	music $5641, $0e, $00, 100, CHAN1, 3 ; MUSIC_GAME_OVER
 	music $56bc, $0e, $00, 100, CHAN1, 4 ; MUSIC_GOLF_CLEARED
 	music $57f2, $0e, $00, 100, CHAN1, 3 ; MUSIC_MUSIC_BOXES
 	music $58b4, $0e, $00, 100, CHAN1, 2 ; MUSIC_45

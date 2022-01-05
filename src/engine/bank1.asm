@@ -4,7 +4,7 @@ StateTable:: ; 4000 (1:4000)
 
 	dw TitleStateTable             ; ST_TITLE
 	dw HandleOverworld             ; ST_OVERWORLD
-	dw Func_46cc                   ; ST_LEVEL
+	dw LevelStateTable             ; ST_LEVEL
 	dw Func_46dc                   ; ST_03
 	dw PauseMenuStateTable         ; ST_PAUSE_MENU
 	dw Func_4710                   ; ST_05
@@ -14,7 +14,7 @@ StateTable:: ; 4000 (1:4000)
 	dw CreditsStateTable           ; ST_CREDITS
 	dw Func_4790                   ; ST_0a
 	dw GBIncompatibleStateTable    ; ST_GB_INCOMPATIBLE
-	dw Func_47fd                   ; ST_0c
+	dw GameOverStateTable          ; ST_GAME_OVER
 	dw PerfectStateTable           ; ST_PERFECT
 	dw LanguageSelectionStateTable ; ST_LANGUAGE_SELECTION
 	dw Func_4028                   ; ST_0f
@@ -1073,8 +1073,8 @@ HandleOverworld: ; 4686 (1:4686)
 	ret
 ; 0x46cc
 
-Func_46cc: ; 46cc (1:46cc)
-	farcall Func_8000
+LevelStateTable: ; 46cc (1:46cc)
+	farcall _LevelStateTable
 	ret
 ; 0x46dc
 
@@ -1217,12 +1217,12 @@ ExitGBIncompatible: ; 47fc (1:47fc)
 	ret
 ; 0x47fd
 
-Func_47fd: ; 47fd (1:47fd)
+GameOverStateTable: ; 47fd (1:47fd)
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
 	ldh [rSVBK], a
-	farcall Func_db277
+	farcall _GameOverStateTable
 	pop af
 	ldh [rSVBK], a
 	ret
