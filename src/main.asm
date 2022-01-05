@@ -508,7 +508,7 @@ SECTION "Bank 56", ROMX
 
 SECTION "Bank 57", ROMX
 
-	INCROM $15c000, $15ee8d
+INCLUDE "engine/bank57.asm"
 
 
 SECTION "Bank 58", ROMX
@@ -528,12 +528,12 @@ SECTION "Bank 61", ROMX
 
 SECTION "Bank 62", ROMX
 
-	INCROM $188000, $18ac38
+INCLUDE "engine/bank62.asm"
 
 
 SECTION "Bank 63", ROMX
 
-	INCROM $18c000, $18d07c
+INCLUDE "engine/bank63.asm"
 
 
 SECTION "Bank 64", ROMX

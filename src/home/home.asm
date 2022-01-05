@@ -3394,6 +3394,7 @@ Func_17ec:: ; 17ec (0:17ec)
 	ret
 ; 0x1826
 
+EmptyOAMFrame:: ; 1826 (0:1826)
 	db $80 ; ??
 
 PalsWhite:: ; 1827 (0:1827)

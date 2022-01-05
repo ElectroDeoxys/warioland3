@@ -34,7 +34,10 @@ def getPointers(offset):
 
     while True:
         hiPtr = int.from_bytes(reader.getROMByte(curOffset + 1), 'little')
-        if  hiPtr < 0x40 or hiPtr >= 0x80:
+        loPtr = int.from_bytes(reader.getROMByte(curOffset + 0), 'little')
+
+        # empty frame is given in offset 0x1826, it's not an invalid pointer
+        if  (hiPtr < 0x40 or hiPtr >= 0x80) and not (hiPtr == 0x18 and loPtr == 0x26):
             break # exit condition
 
         ptrs.append(reader.getPointerAt(curOffset, curBank))
@@ -80,18 +83,21 @@ for offsetStr in reader.standardiseList(args.offsets):
     prevOffset = offset + 2 * len(ptrs)
 
     for ptrOffset in ptrs:
-        ptrTableStr += '\tdw .frame_{}\n'.format(i)
+        if ptrOffset == 0x1826:
+            ptrTableStr += '\tdw EmptyOAMFrame\n'
+        else:
+            ptrTableStr += '\tdw .frame_{}\n'.format(i)
 
-        yCoords, xCoords, tileIDs, attrs = getOAM(getOAMBytes(ptrOffset))
+            yCoords, xCoords, tileIDs, attrs = getOAM(getOAMBytes(ptrOffset))
 
-        outStr += '\n.frame_{}\n'.format(i)
+            outStr += '\n.frame_{}\n'.format(i)
 
-        for j in range(len(yCoords)):
-            outStr += '\tframe_oam ' + '{0:3}, '.format(yCoords[j]) + '{0:3}, '.format(xCoords[j]) + '${0:02x}, '.format(tileIDs[j]) + getAttributesString(attrs[j]) + '\n'
-        
-        outStr += '\tdb $80\n'
+            for j in range(len(yCoords)):
+                outStr += '\tframe_oam ' + '{0:3}, '.format(yCoords[j]) + '{0:3}, '.format(xCoords[j]) + '${0:02x}, '.format(tileIDs[j]) + getAttributesString(attrs[j]) + '\n'
+            
+            outStr += '\tdb $80\n'
 
-        prevOffset = ptrOffset + 4 * len(yCoords) + 1
+            prevOffset = ptrOffset + 4 * len(yCoords) + 1
         i += 1
 
     print(reader.getDataString(offset, prevOffset - offset, 'OAM_').format(ptrTableStr + outStr))

@@ -1625,7 +1625,7 @@ Func_b4c57: ; b4c57 (2d:4c57)
 ;	fallthrough
 
 Func_b4c5a: ; b4c5a (2d:4c5a)
-	ld de, $580c
+	ld de, OAM_a980c
 	jp AddCurSceneObjSpriteWithScroll
 
 Func_b4c60: ; b4c60 (2d:4c60)
@@ -1875,7 +1875,7 @@ Func_b4da0: ; b4da0 (2d:4da0)
 ;	fallthrough
 
 Func_b4da3: ; b4da3 (2d:4da3)
-	ld de, $5161
+	ld de, OAM_a9161
 	jp AddCurSceneObjSpriteWithScroll
 ;	fallthrough
 
@@ -1906,7 +1906,7 @@ Func_b4dc0: ; b4dc0 (2d:4dc0)
 	ld a, [wOWAnimationFinished]
 	cp $ff
 	call z, Func_b4dd4
-	ld de, $5161
+	ld de, OAM_a9161
 	jp AddCurSceneObjSpriteWithScroll
 ; 0xb4dd4
 
@@ -1997,7 +1997,7 @@ Func_b4e4d: ; b4e4d (2d:4e4d)
 ;	fallthrough
 
 Func_b4e50: ; b4e50 (2d:4e50)
-	ld de, $484a
+	ld de, OAM_a884a
 	jp AddCurSceneObjSpriteWithScroll
 ; 0xb4e56
 
@@ -2017,7 +2017,7 @@ Func_b4e62: ; b4e62 (2d:4e62)
 ;	fallthrough
 
 Func_b4e65: ; b4e65 (2d:4e65)
-	ld de, $4f57
+	ld de, OAM_a8f57
 	jp AddCurSceneObjSpriteWithScroll
 ; 0xb4e6b
 
@@ -2406,7 +2406,7 @@ Func_b507c: ; b507c (2d:507c)
 ;	fallthrough
 
 Func_b507f: ; b507f (2d:507f)
-	ld de, $4000
+	ld de, OAM_a8000
 	jp AddCurSceneObjSpriteWithScroll
 ; 0xb5085
 
@@ -2489,14 +2489,14 @@ Func_b50de: ; b50de (2d:50de)
 
 Func_b50e1: ; b50e1 (2d:50e1)
 	call UpdateCurOWOjAnimation
-	ld de, $6580
+	ld de, OAM_aa580
 	jp AddCurSceneObjSpriteWithScroll
 ; 0xb50ea
 
 Func_b50ea: ; b50ea (2d:50ea)
 	ld de, Frameset_aa252
 	call UpdateCurOWOjAnimation
-	ld de, $60cf
+	ld de, OAM_aa0cf
 	jp AddCurSceneObjSpriteWithScroll
 ; 0xb50f6
 
@@ -2523,8 +2523,9 @@ Func_b510a: ; b510a (2d:510a)
 Func_b5114: ; b5114 (2d:5114)
 	call UpdateCurOWOjAnimation
 .asm_b5117
-	ld de, $5fe2
+	ld de, OAM_a9fe2
 	jp AddCurSceneObjSpriteWithScroll
+
 	call UpdateCurOWOjAnimation
 	ld b, $00
 .asm_b5122
@@ -2549,7 +2550,7 @@ Func_b5136: ; b5136 (2d:5136)
 	ld b, $00
 	call Func_b4a0d
 	jp z, Func_b4fab
-	ld de, $47fa
+	ld de, OAM_a87fa
 	jp AddCurSceneObjSprite
 ; 0xb514a
 

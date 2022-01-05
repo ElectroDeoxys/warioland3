@@ -2183,7 +2183,7 @@ Func_9f0e0: ; 9f0e0 (27:70e0)
 	cp $06
 	jr z, .asm_9f107
 .asm_9f0fd
-	ld de, $51fd
+	ld de, OAM_bd1fd
 	jp Func_9f0bc
 .asm_9f103
 	ld b, $00
@@ -2218,7 +2218,7 @@ Func_9f11e: ; 9f11e (27:711e)
 	jr z, .asm_9f137
 
 .asm_9f131
-	ld de, Data_bd377
+	ld de, OAM_bd377
 	jp Func_9f0bc
 
 .asm_9f137
@@ -2250,7 +2250,7 @@ Func_9f146: ; 9f146 (27:7146)
 	ld hl, .PointerTable
 	call Func_9f0a5
 	call Func_9f0ae
-	ld de, $5453
+	ld de, OAM_bd453
 	jp Func_9f0bc
 
 .PointerTable
@@ -2282,7 +2282,7 @@ Func_9f174: ; 9f174 (27:7174)
 	cp $05
 	call z, .Func_9f1b5
 .asm_9f1a2
-	ld de, $546f
+	ld de, OAM_bd46f
 	jp Func_9f0bc
 .asm_9f1a8
 	ld b, $07
@@ -2329,7 +2329,7 @@ Func_9f2a2: ; 9f2a2 (27:72a2)
 	ld hl, .framesets
 	call Func_9f0a5
 	call Func_9f0ae
-	ld de, $5971
+	ld de, OAM_bd971
 	jp Func_9f0bc
 
 .framesets
@@ -2352,7 +2352,7 @@ Func_9f2f3: ; 9f2f3 (27:72f3)
 	call Func_9f0b5
 	cp $03
 	call z, .Func_9f30e
-	ld de, $4279
+	ld de, OAM_188279
 	call Func_9f0c1
 	ret
 
@@ -2389,7 +2389,7 @@ Func_9f38d: ; 9f38d (27:738d)
 	cp $04
 	jr z, .asm_9f3b8
 .asm_9f3b2
-	ld de, $5ce6
+	ld de, OAM_bdce6
 	jp Func_9f0bc
 .asm_9f3b8
 	ld b, $01
@@ -2421,7 +2421,7 @@ Func_9f3ee: ; 9f3ee (27:73ee)
 	call Func_9f0ae
 	cp $03
 	call z, .Func_9f414
-	ld de, $5e69
+	ld de, OAM_bde69
 	jp Func_9f0bc
 
 .framesets
@@ -2453,7 +2453,7 @@ Func_9f423: ; 9f423 (27:7423)
 	cp $03
 	jr z, .asm_9f47e
 .asm_9f440
-	ld de, $5fa5
+	ld de, OAM_bdfa5
 	jp Func_9f0bc
 .asm_9f446
 	call .Func_9f45a
@@ -2532,7 +2532,7 @@ Func_9f5a0: ; 9f5a0 (27:75a0)
 	cp $02
 	jr z, .asm_9f5d1
 .asm_9f5cb
-	ld de, $6807
+	ld de, OAM_be807
 	jp Func_9f0bc
 .asm_9f5d1
 	call .Func_9f5e5
@@ -2595,7 +2595,7 @@ Func_9f638: ; 9f638 (27:7638)
 	cp $02
 	jr z, .asm_9f684
 .asm_9f66d
-	ld de, $6a06
+	ld de, OAM_bea06
 	jp Func_9f0bc
 .asm_9f673
 	ld b, $00
@@ -2643,7 +2643,7 @@ Func_9f73b: ; 9f73b (27:773b)
 	ld hl, .framesets
 	call Func_9f0a5
 	call Func_9f0ae
-	ld de, $6cdc
+	ld de, OAM_becdc
 	jp Func_9f0bc
 
 .framesets
@@ -2665,7 +2665,7 @@ Func_9f7bb: ; 9f7bb (27:77bb)
 	ld hl, .framesets
 	call Func_9f0a5
 	call Func_9f0ae
-	ld de, $6e6e
+	ld de, OAM_bee6e
 	jp Func_9f0bc
 
 .framesets
@@ -2688,7 +2688,7 @@ Func_9f7dc: ; 9f7dc (27:77dc)
 	cp $03
 	jr z, .asm_9f808
 .asm_9f7f3
-	ld de, $6fd5
+	ld de, OAM_befd5
 	jp Func_9f0bc
 .asm_9f7f9
 	ld b, $03
@@ -2729,7 +2729,7 @@ Func_9f821: ; 9f821 (27:7821)
 	cp $01
 	jr z, .asm_9f83e
 .asm_9f834
-	ld de, $6ba0
+	ld de, OAM_18aba0
 	jp Func_9f0c1
 
 .framesets
@@ -2771,7 +2771,7 @@ Func_9f86a: ; 9f86a (27:786a)
 	cp $03
 	jr z, .asm_9f88d
 .asm_9f887
-	ld de, $7157
+	ld de, OAM_bf157
 	jp Func_9f0bc
 .asm_9f88d
 	call .Func_9f8c1
@@ -2838,7 +2838,7 @@ Func_9f8da: ; 9f8da (27:78da)
 	cp $03
 	jr z, .asm_9f8f9
 	.asm_9f8f3
-	ld de, $72ab
+	ld de, OAM_bf2ab
 	jp Func_9f0bc
 .asm_9f8f9
 	ld b, $00
@@ -2880,7 +2880,7 @@ Func_9f91f: ; 9f91f (27:791f)
 	cp $02
 	jr z, .asm_9f943
 .asm_9f936
-	ld de, $7460
+	ld de, OAM_bf460
 	jp Func_9f0bc
 .asm_9f93c
 	call .Func_9f953
@@ -2948,7 +2948,7 @@ Func_9f991: ; 9f991 (27:7991)
 	cp $04
 	jr z, .asm_9f9b0
 .asm_9f9aa
-	ld de, $7611
+	ld de, OAM_bf611
 	jp Func_9f0bc
 .asm_9f9b0
 	ld b, $03
@@ -2979,7 +2979,7 @@ Func_9f9c1: ; 9f9c1 (27:79c1)
 	cp $02
 	jr z, .asm_9f9e6
 .asm_9f9e0
-	ld de, $766d
+	ld de, OAM_bf66d
 	jp Func_9f0bc
 .asm_9f9e6
 	ld b, $01
@@ -3006,7 +3006,7 @@ Func_9f9f5: ; 9f9f5 (27:79f5)
 	cp $02
 	jr z, .asm_9fa2f
 .asm_9fa0c
-	ld de, $4806
+	ld de, OAM_18c806
 	jp Func_9f0cb
 
 .framesets
@@ -3073,7 +3073,7 @@ Func_9fa48: ; 9fa48 (27:7a48)
 	cp $02
 	jr z, .asm_9fa9b
 .asm_9fa8b
-	ld de, $76f0
+	ld de, OAM_bf6f0
 	jp Func_9f0bc
 
 .framesets
@@ -3115,7 +3115,7 @@ Func_9fb53: ; 9fb53 (27:7b53)
 	ld [hli], a
 	xor a
 	ld [hl], a
-	ld de, $4000
+	ld de, OAM_bc000
 	ld a, $fc
 	and l
 	ld l, a
@@ -3168,7 +3168,7 @@ Func_9fc58: ; 9fc58 (27:7c58)
 	call Func_9f0d0
 	jr z, .start
 .asm_9fc85
-	ld de, $4122
+	ld de, OAM_bc122
 	jp Func_9f0bc
 ; 0x9fc8b
 

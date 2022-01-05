@@ -639,7 +639,7 @@ Func_1604b1: ; 1604b1 (58:44b1)
 	ld [wCurSpriteTileID], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
-	ld hl, $57e8
+	ld hl, OAM_1617e8
 	call TryAddSprite
 	ret
 ; 0x1604cc
@@ -902,4 +902,407 @@ CreditsMusicBoxGfx: INCBIN "gfx/credits_music_box.2bpp.lz"
 BGMap_161744: INCBIN "gfx/bgmaps/map_161744.bin"
 BGMap_16179c: INCBIN "gfx/bgmaps/map_16179c.bin"
 
-	INCROM $1617e8, $162f85
+OAM_1617e8: ; 1617e8 (58:57e8)
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
+	dw .frame_7
+	dw .frame_8
+	dw .frame_9
+	dw .frame_10
+	dw .frame_11
+	dw .frame_12
+	dw .frame_13
+	dw .frame_14
+	dw .frame_15
+	dw .frame_16
+	dw .frame_17
+	dw .frame_18
+	dw .frame_19
+	dw .frame_20
+	dw .frame_21
+	dw .frame_22
+	dw .frame_23
+	dw .frame_24
+	dw .frame_25
+	dw .frame_26
+	dw .frame_27
+	dw .frame_28
+
+.frame_0
+	frame_oam -38, -12, $02, 0
+	frame_oam -48,  -4, $04, 1
+	frame_oam -48,   4, $06, 0
+	frame_oam -34, -20, $00, 1
+	frame_oam -34,  12, $08, 1
+	frame_oam -18, -20, $0a, 1
+	frame_oam -16, -12, $0c, 0
+	frame_oam -16,  -4, $0e, 0
+	frame_oam -17,   4, $10, 0
+	frame_oam -18,  12, $12, 1
+	frame_oam -32, -16, $20, 2
+	frame_oam -32,  -8, $22, 2
+	frame_oam -32,   0, $24, 2
+	frame_oam -32,   8, $26, 2
+	db $80
+
+.frame_1
+	frame_oam -38, -12, $02, 0
+	frame_oam -48,  -4, $04, 1
+	frame_oam -48,   4, $06, 0
+	frame_oam -34, -20, $00, 1
+	frame_oam -34,  12, $08, 1
+	frame_oam -18, -20, $0a, 1
+	frame_oam -16, -12, $0c, 0
+	frame_oam -16,  -4, $0e, 0
+	frame_oam -17,   4, $10, 0
+	frame_oam -18,  12, $12, 1
+	frame_oam -32, -16, $28, 2
+	frame_oam -32,  -8, $2a, 2
+	frame_oam -32,   0, $2c, 2
+	frame_oam -32,   8, $2e, 2
+	db $80
+
+.frame_2
+	frame_oam -38, -12, $02, 0
+	frame_oam -48,  -4, $04, 1
+	frame_oam -48,   4, $06, 0
+	frame_oam -34, -20, $00, 1
+	frame_oam -34,  12, $08, 1
+	frame_oam -18, -20, $0a, 1
+	frame_oam -16, -12, $0c, 0
+	frame_oam -16,  -4, $0e, 0
+	frame_oam -17,   4, $10, 0
+	frame_oam -18,  12, $12, 1
+	frame_oam -32, -16, $30, 2
+	frame_oam -32,  -8, $32, 2
+	frame_oam -32,   0, $34, 2
+	frame_oam -32,   8, $36, 2
+	db $80
+
+.frame_3
+	frame_oam -38, -12, $02, 0
+	frame_oam -48,  -4, $04, 1
+	frame_oam -48,   4, $06, 0
+	frame_oam -34, -20, $00, 1
+	frame_oam -34,  12, $08, 1
+	frame_oam -18, -20, $0a, 1
+	frame_oam -16, -12, $0c, 0
+	frame_oam -16,  -4, $0e, 0
+	frame_oam -17,   4, $10, 0
+	frame_oam -18,  12, $12, 1
+	frame_oam -32, -16, $38, 2
+	frame_oam -32,  -8, $3a, 2
+	frame_oam -32,   0, $3c, 2
+	frame_oam -32,   8, $3e, 2
+	db $80
+
+.frame_4
+	frame_oam -38, -12, $02, 0
+	frame_oam -48,  -4, $04, 1
+	frame_oam -48,   4, $06, 0
+	frame_oam -34, -20, $00, 1
+	frame_oam -34,  12, $08, 1
+	frame_oam -18, -20, $0a, 1
+	frame_oam -16, -12, $0c, 0
+	frame_oam -16,  -4, $0e, 0
+	frame_oam -17,   4, $10, 0
+	frame_oam -18,  12, $12, 1
+	frame_oam -32, -16, $40, 2
+	frame_oam -32,  -8, $42, 2
+	frame_oam -32,   0, $44, 2
+	frame_oam -32,   8, $46, 2
+	db $80
+
+.frame_5
+	frame_oam -38, -12, $02, 0
+	frame_oam -48,  -4, $04, 1
+	frame_oam -48,   4, $06, 0
+	frame_oam -34, -20, $00, 1
+	frame_oam -34,  12, $08, 1
+	frame_oam -18, -20, $0a, 1
+	frame_oam -16, -12, $0c, 0
+	frame_oam -16,  -4, $0e, 0
+	frame_oam -17,   4, $10, 0
+	frame_oam -18,  12, $12, 1
+	frame_oam -32, -16, $48, 2
+	frame_oam -32,  -8, $4a, 2
+	frame_oam -32,   0, $4c, 2
+	frame_oam -33,   8, $4e, 2
+	db $80
+
+.frame_6
+	frame_oam -38, -12, $02, 0
+	frame_oam -48,  -4, $04, 1
+	frame_oam -48,   4, $06, 0
+	frame_oam -34, -20, $00, 1
+	frame_oam -34,  12, $08, 1
+	frame_oam -18, -20, $0a, 1
+	frame_oam -16, -12, $0c, 0
+	frame_oam -16,  -4, $0e, 0
+	frame_oam -17,   4, $10, 0
+	frame_oam -18,  12, $12, 1
+	frame_oam -32, -16, $50, 2
+	frame_oam -32,  -8, $52, 2
+	frame_oam -32,   0, $54, 2
+	frame_oam -32,   8, $56, 2
+	db $80
+
+.frame_7
+	frame_oam -38, -12, $02, 0
+	frame_oam -48,  -4, $04, 1
+	frame_oam -48,   4, $06, 0
+	frame_oam -34, -20, $00, 1
+	frame_oam -34,  12, $08, 1
+	frame_oam -18, -20, $0a, 1
+	frame_oam -16, -12, $0c, 0
+	frame_oam -16,  -4, $0e, 0
+	frame_oam -17,   4, $10, 0
+	frame_oam -18,  12, $12, 1
+	frame_oam -32, -16, $58, 2
+	frame_oam -32,  -8, $5a, 2
+	frame_oam -32,   0, $5c, 2
+	frame_oam -32,   8, $5e, 2
+	db $80
+
+.frame_8
+	frame_oam -38, -12, $02, 0
+	frame_oam -48,  -4, $04, 1
+	frame_oam -48,   4, $06, 0
+	frame_oam -34, -20, $00, 1
+	frame_oam -34,  12, $08, 1
+	frame_oam -18, -20, $0a, 1
+	frame_oam -16, -12, $0c, 0
+	frame_oam -16,  -4, $0e, 0
+	frame_oam -17,   4, $10, 0
+	frame_oam -18,  12, $12, 1
+	frame_oam -32, -16, $60, 2
+	frame_oam -32,  -8, $62, 2
+	frame_oam -32,   0, $64, 2
+	frame_oam -32,   8, $66, 2
+	db $80
+
+.frame_9
+	frame_oam -38, -12, $02, 0
+	frame_oam -48,  -4, $04, 1
+	frame_oam -48,   4, $06, 0
+	frame_oam -34, -20, $00, 1
+	frame_oam -34,  12, $08, 1
+	frame_oam -18, -20, $0a, 1
+	frame_oam -16, -12, $0c, 0
+	frame_oam -16,  -4, $0e, 0
+	frame_oam -17,   4, $10, 0
+	frame_oam -18,  12, $12, 1
+	frame_oam -32, -16, $68, 2
+	frame_oam -32,  -8, $6a, 2
+	frame_oam -32,   0, $6c, 2
+	frame_oam -32,   8, $6e, 2
+	db $80
+
+.frame_10
+	frame_oam -38, -12, $02, 0
+	frame_oam -48,  -4, $04, 1
+	frame_oam -48,   4, $06, 0
+	frame_oam -34, -20, $00, 1
+	frame_oam -34,  12, $08, 1
+	frame_oam -18, -20, $0a, 1
+	frame_oam -16, -12, $0c, 0
+	frame_oam -16,  -4, $0e, 0
+	frame_oam -17,   4, $10, 0
+	frame_oam -18,  12, $12, 1
+	frame_oam -32, -16, $70, 2
+	frame_oam -32,  -8, $72, 2
+	frame_oam -32,   0, $74, 2
+	frame_oam -32,   8, $76, 2
+	db $80
+
+.frame_11
+	frame_oam -38, -12, $02, 0
+	frame_oam -48,  -4, $04, 1
+	frame_oam -48,   4, $06, 0
+	frame_oam -34, -20, $00, 1
+	frame_oam -34,  12, $08, 1
+	frame_oam -18, -20, $0a, 1
+	frame_oam -16, -12, $0c, 0
+	frame_oam -16,  -4, $0e, 0
+	frame_oam -17,   4, $10, 0
+	frame_oam -18,  12, $12, 1
+	frame_oam -32, -16, $78, 2
+	frame_oam -32,  -8, $7a, 2
+	frame_oam -32,   0, $7c, 2
+	frame_oam -32,   8, $7e, 2
+	db $80
+
+.frame_12
+	frame_oam -38, -12, $02, 0
+	frame_oam -48,  -4, $04, 1
+	frame_oam -48,   4, $06, 0
+	frame_oam -34, -20, $00, 1
+	frame_oam -34,  12, $08, 1
+	frame_oam -18, -20, $0a, 1
+	frame_oam -16, -12, $0c, 0
+	frame_oam -16,  -4, $0e, 0
+	frame_oam -17,   4, $10, 0
+	frame_oam -18,  12, $12, 1
+	frame_oam -32, -16, $80, 2
+	frame_oam -32,  -8, $82, 2
+	frame_oam -32,   0, $84, 2
+	frame_oam -32,   8, $86, 2
+	db $80
+
+.frame_13
+	frame_oam -38, -12, $02, 0
+	frame_oam -48,  -4, $04, 1
+	frame_oam -48,   4, $06, 0
+	frame_oam -34, -20, $00, 1
+	frame_oam -34,  12, $08, 1
+	frame_oam -18, -20, $0a, 1
+	frame_oam -16, -12, $0c, 0
+	frame_oam -16,  -4, $0e, 0
+	frame_oam -17,   4, $10, 0
+	frame_oam -18,  12, $12, 1
+	frame_oam -32, -16, $88, 2
+	frame_oam -32,  -8, $8a, 2
+	frame_oam -32,   0, $8c, 2
+	frame_oam -32,   8, $8e, 2
+	db $80
+
+.frame_14
+	frame_oam -38, -12, $02, 0
+	frame_oam -48,  -4, $04, 1
+	frame_oam -48,   4, $06, 0
+	frame_oam -34, -20, $00, 1
+	frame_oam -34,  12, $08, 1
+	frame_oam -18, -20, $0a, 1
+	frame_oam -16, -12, $0c, 0
+	frame_oam -16,  -4, $0e, 0
+	frame_oam -17,   4, $10, 0
+	frame_oam -18,  12, $12, 1
+	frame_oam -32, -16, $90, 2
+	frame_oam -32,  -8, $92, 2
+	frame_oam -32,   0, $94, 2
+	frame_oam -32,   8, $96, 2
+	db $80
+
+.frame_15
+	frame_oam -38, -12, $02, 0
+	frame_oam -48,  -4, $04, 1
+	frame_oam -48,   4, $06, 0
+	frame_oam -34, -20, $00, 1
+	frame_oam -34,  12, $08, 1
+	frame_oam -18, -20, $0a, 1
+	frame_oam -16, -12, $0c, 0
+	frame_oam -16,  -4, $0e, 0
+	frame_oam -17,   4, $10, 0
+	frame_oam -18,  12, $12, 1
+	frame_oam -32, -16, $98, 2
+	frame_oam -32,  -8, $9a, 2
+	frame_oam -32,   0, $9c, 2
+	frame_oam -32,   8, $9e, 2
+	db $80
+
+.frame_16
+	frame_oam -24,  20, $14, 1
+	db $80
+
+.frame_17
+	frame_oam -24,  20, $16, 1
+	db $80
+
+.frame_18
+	frame_oam -24,  20, $18, 1
+	db $80
+
+.frame_19
+	frame_oam -24,  20, $1a, 1
+	db $80
+
+.frame_20
+	frame_oam -24,  20, $1c, 1
+	db $80
+
+.frame_21
+	frame_oam -24,  20, $1e, 1
+	db $80
+
+.frame_22
+	frame_oam -24,  20, $1c, 1 | Y_FLIP
+	db $80
+
+.frame_23
+	frame_oam -24,  20, $1a, 1 | Y_FLIP
+	db $80
+
+.frame_24
+	frame_oam -24,  20, $18, 1 | Y_FLIP
+	db $80
+
+.frame_25
+	frame_oam -24,  20, $16, 1 | Y_FLIP
+	db $80
+
+.frame_26
+	frame_oam -21, -25, $a0, 0
+	frame_oam -21, -17, $a2, 0
+	frame_oam -21,  -9, $a4, 0
+	frame_oam -21,  -1, $a6, 0
+	frame_oam -21,   7, $a8, 0
+	frame_oam -21,  15, $aa, 0
+	frame_oam -21,  23, $ac, 0
+	frame_oam  -5, -25, $ae, 0
+	frame_oam  -5, -17, $b0, 0
+	frame_oam  -5,  -9, $b2, 0
+	frame_oam  -5,  -1, $b4, 0
+	frame_oam  -5,   7, $b6, 0
+	frame_oam  -5,  15, $b8, 0
+	frame_oam  -5,  23, $ba, 0
+	db $80
+
+.frame_27
+	frame_oam -34, -24, $bc, 0
+	frame_oam -18, -24, $be, 1
+	frame_oam -39, -16, $c0, 0
+	frame_oam -41,  -8, $c2, 0
+	frame_oam -41,   0, $c4, 0
+	frame_oam -41,   8, $c6, 0
+	frame_oam -33,  16, $c8, 0
+	frame_oam -15, -16, $ca, 0
+	frame_oam -15,  -8, $cc, 0
+	frame_oam -15,   0, $cc, 0 | X_FLIP
+	frame_oam -25,   8, $ce, 0
+	frame_oam  -9,   8, $d0, 0
+	frame_oam -18,  16, $be, 1 | X_FLIP
+	frame_oam -32, -20, $d4, 2
+	frame_oam -32, -12, $d6, 2
+	frame_oam -32,  -4, $d8, 2
+	frame_oam -32,   4, $da, 2
+	frame_oam -32,  12, $dc, 2
+	frame_oam -48,  -8, $d2, 1
+	frame_oam -48,   0, $d2, 1 | X_FLIP
+	frame_oam -24,  22, $de, 1
+	db $80
+
+.frame_28
+	frame_oam -38, -12, $02, 0
+	frame_oam -48,  -4, $04, 1
+	frame_oam -48,   4, $06, 0
+	frame_oam -34, -20, $00, 1
+	frame_oam -34,  12, $08, 1
+	frame_oam -18, -20, $0a, 1
+	frame_oam -16, -12, $0c, 0
+	frame_oam -16,  -4, $0e, 0
+	frame_oam -17,   4, $10, 0
+	frame_oam -18,  12, $12, 1
+	frame_oam -32, -16, $20, 2
+	frame_oam -32,  -8, $22, 2
+	frame_oam -32,   0, $24, 2
+	frame_oam -32,   8, $26, 2
+	frame_oam -24,  20, $14, 1
+	db $80
+; 0x161caf
+
+	INCROM $161caf, $162f85

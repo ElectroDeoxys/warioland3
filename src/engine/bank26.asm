@@ -1273,7 +1273,7 @@ AnimateTreasureCollection: ; 9aa0d (26:6a0d)
 
 Func_9aa56: ; 9aa56 (26:6a56)
 	call Func_9a9ec
-	ld de, $6c5d
+	ld de, OAM_9ac5d
 	call Func_9a9f7
 	ret
 ; 0x9aa60
@@ -1657,7 +1657,82 @@ TreasureOBPals: ; 9abf7 (26:6bf7)
 	db $03 ; TREASURE_101
 ; 0x9ac5d
 
-	INCROM $9ac5d, $9ad05
+OAM_9ac5d: ; 9ac5d (26:6c5d)
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
+	dw .frame_7
+	dw .frame_8
+	dw .frame_9
+	dw .frame_10
+	dw .frame_11
+
+.frame_0
+	frame_oam -23, -11, $00, 0
+	frame_oam  -7, -11, $02, 0
+	frame_oam -23,   3, $00, 0 | X_FLIP
+	frame_oam  -7,   3, $02, 0 | X_FLIP
+	db $80
+
+.frame_1
+	frame_oam -22, -11, $04, 0
+	frame_oam  -6, -11, $06, 0
+	frame_oam -22,   3, $04, 0 | X_FLIP
+	frame_oam  -6,   3, $06, 0 | X_FLIP
+	db $80
+
+.frame_2
+	frame_oam -21, -11, $08, 0
+	frame_oam  -5, -11, $0a, 0
+	frame_oam -21,   3, $08, 0 | X_FLIP
+	frame_oam  -5,   3, $0a, 0 | X_FLIP
+	db $80
+
+.frame_3
+	frame_oam  -8, -11, $0c, 0
+	frame_oam  -8,   3, $0c, 0 | X_FLIP
+	db $80
+
+.frame_4
+	frame_oam  -8, -11, $0e, 0
+	frame_oam  -8,   3, $0e, 0 | X_FLIP
+	db $80
+
+.frame_5
+	frame_oam  -8, -11, $10, 1
+	frame_oam  -8,   3, $10, 1 | X_FLIP
+	db $80
+
+.frame_6
+	frame_oam  -8,  -4, $12, 2
+	db $80
+
+.frame_7
+	frame_oam  -8,  -4, $14, 2
+	db $80
+
+.frame_8
+	frame_oam  -8,  -4, $16, 2
+	db $80
+
+.frame_9
+	frame_oam  -8,  -4, $12, 2 | X_FLIP
+	db $80
+
+.frame_10
+	frame_oam  -8,  -4, $14, 2 | X_FLIP
+	db $80
+
+.frame_11
+	frame_oam  -8,  -4, $16, 2 | X_FLIP
+	db $80
+; 0x9ace1
+
+	INCROM $9ace1, $9ad05
 
 Pals_9ad05: ; 9ad05 (26:6d05)
 	rgb 31, 31, 31

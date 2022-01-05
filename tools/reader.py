@@ -27,7 +27,7 @@ def pointerBytesToOffset(ptrBytes):
 
 def pointerBytesToBankOffset(ptrBytes, bank):
     assert(len(ptrBytes) == 2)
-    if bank == 0:
+    if bank == 0 or ptrBytes[1] < 0x40:
         return ptrBytes[0] + ptrBytes[1] * 0x100
     else:
         return (bank * 0x4000) + (ptrBytes[0] + ptrBytes[1] * 0x100) - 0x4000

@@ -40,8 +40,8 @@ Func_ac042: ; ac042 (2b:4042)
 Func_ac056: ; ac056 (2b:4056)
 	ld de, $76ca
 	call Func_ac02c
-	ld de, $75c3
-	ld b, $01
+	ld de, OAM_75c3
+	ld b, BANK(OAM_75c3)
 	jp AddOWSprite
 ; 0xac064
 
@@ -116,7 +116,7 @@ Func_ac409: ; ac409 (2b:4409)
 .Func_ac43b
 	call Func_ac000
 .Func_ac43e
-	ld de, $644a
+	ld de, OAM_15e44a
 	jp Func_ac042
 
 .Func_ac444
@@ -218,8 +218,8 @@ Func_ac409: ; ac409 (2b:4409)
 	ld e, $00
 	call Func_ac064
 	jp z, Func_ac409
-	ld de, $6b5c
-	ld b, $2a
+	ld de, OAM_aab5c
+	ld b, BANK(OAM_aab5c)
 	jp AddOWSpriteWithScroll
 
 .Func_ac4e3
@@ -886,26 +886,25 @@ Func_ac8d4: ; ac8d4 (2b:48d4)
 	ret
 
 data_ac962: MACRO
-	dw \1 ; sprite ptr
-	db \2 ; sprite bank
-	dba \3 ; tiles
+	dab \1 ; sprite
+	dba \2 ; tiles
 ENDM
 
 .data
-	data_ac962 $4a82, $05, WarioIdleGfx
-	data_ac962 $426c, $05, WarioWalkGfx
-	data_ac962 $606a, $05, WarioThrowGfx
-	data_ac962 $4000, $05, WarioIdleGfx
-	data_ac962 $49cc, $35, WarioUnk1Gfx
-	data_ac962 $65fe, $2a, WarioUnk1Gfx
-	data_ac962 $66e7, $2a, WarioUnk2Gfx
-	data_ac962 $6934, $2a, WarioUnk3Gfx
-	data_ac962 $6b5c, $2a, WarioSleepGfx
-	data_ac962 $6d1e, $2a, WarioUnk4Gfx
-	data_ac962 $70c5, $2a, WarioUnk5Gfx
-	data_ac962 $431b, $7f, WarioIdleGfx
-	data_ac962 $673c, $05, WarioHotGfx
-	data_ac962 $4000, $7f, WarioUnk1Gfx
+	data_ac962 OAM_14a82,  WarioIdleGfx
+	data_ac962 OAM_1426c,  WarioWalkGfx
+	data_ac962 OAM_1606a,  WarioThrowGfx
+	data_ac962 OAM_14000,  WarioIdleGfx
+	data_ac962 OAM_d49cc,  WarioUnk1Gfx
+	data_ac962 OAM_aa5fe,  WarioUnk1Gfx
+	data_ac962 OAM_aa6e7,  WarioUnk2Gfx
+	data_ac962 OAM_aa934,  WarioUnk3Gfx
+	data_ac962 OAM_aab5c,  WarioSleepGfx
+	data_ac962 OAM_aad1e,  WarioUnk4Gfx
+	data_ac962 OAM_ab0c5,  WarioUnk5Gfx
+	data_ac962 OAM_1fc31b, WarioIdleGfx
+	data_ac962 OAM_1673c,  WarioHotGfx
+	data_ac962 OAM_1fc000, WarioUnk1Gfx
 ; 0xac9b6
 
 	ret ; stray ret

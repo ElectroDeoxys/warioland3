@@ -4514,8 +4514,8 @@ SetCompassSprite: ; 82012 (20:6012)
 
 AddCompassSprite: ; 8202c (20:602c)
 	ld hl, wCompassSprite
-	ld de, $6580
-	ld b, $2a
+	ld de, OAM_aa580
+	ld b, BANK(OAM_aa580)
 	call AddOWSpriteWithScroll
 	ret
 ; 0x82038
@@ -4595,11 +4595,11 @@ Func_820af: ; 820af (20:60af)
 	ld [w2d106], a
 	and a
 	ret z
-	ld bc, $6329
+	ld bc, OAM_aa329
 	cp $05
-	jr c, .ok
-	ld bc, $60cf
-.ok
+	jr c, .got_oam
+	ld bc, OAM_aa0cf
+.got_oam
 	dec a
 	add a ; *2
 	ld e, a
@@ -5286,8 +5286,8 @@ Func_824f1: ; 824f1 (20:64f1)
 	ld a, [w2d146]
 	ld hl, w2d144
 	call Func_82521
-	ld b, $2a
-	ld de, $5fe2
+	ld b, BANK(OAM_a9fe2)
+	ld de, OAM_a9fe2
 	ld hl, w2d140
 	call AddOWSpriteWithScroll
 	ret
@@ -5299,8 +5299,8 @@ Func_8250a: ; 8250a (20:650a)
 	ret z
 	ld hl, w2d14c
 	call Func_82521
-	ld b, $2a
-	ld de, $5fe2
+	ld b, BANK(OAM_a9fe2)
+	ld de, OAM_a9fe2
 	ld hl, w2d148
 	call AddOWSpriteWithScroll
 	ret
@@ -5964,8 +5964,8 @@ AddSpriteInsideWindow: ; 82920 (20:6920)
 	ld [wCurSpriteTileID], a
 	ld a, c
 	ld [wCurSpriteAttributes], a
-	ld hl, $60cf
-	ld b, $2a
+	ld hl, OAM_aa0cf
+	ld b, BANK(OAM_aa0cf)
 	call AddOWSpriteWithScroll_GotParams
 	ret
 ; 0x8293f
@@ -6013,8 +6013,8 @@ DrawBottomBarButtonPrompt: ; 8295b (20:695b)
 	ld [wCurSpriteXCoord], a
 	ld a, $00
 	ld [wCurSpriteAttributes], a
-	ld hl, $6580
-	ld b, $2a
+	ld hl, OAM_aa580
+	ld b, BANK(OAM_aa580)
 	call AddOWSpriteWithScroll_GotParams
 	ret
 ; 0x82997
@@ -6126,11 +6126,11 @@ Func_82bb8: ; 82bb8 (20:6bb8)
 	ret z
 	ld de, Frameset_aa544
 	ld hl, w2d180Duration
-	ld b, $2a
+	ld b, BANK(Frameset_aa544)
 	call UpdateOWAnimation
 	ld hl, w2d180
-	ld de, $6445
-	ld b, $2a
+	ld de, OAM_aa445
+	ld b, BANK(OAM_aa445)
 	call AddOWSpriteWithScroll
 	ret
 ; 0x82bda
@@ -6144,14 +6144,14 @@ Func_82bda: ; 82bda (20:6bda)
 	ret z
 	ld hl, w2d180Duration
 	ld de, Frameset_aa555
-	ld b, $2a
+	ld b, BANK(Frameset_aa555)
 	call UpdateOWAnimation
 	ld a, [wOWAnimationFinished]
 	cp $ff
 	jr z, .asm_82c03
 	ld hl, w2d180
-	ld de, $6445
-	ld b, $2a
+	ld de, OAM_aa445
+	ld b, BANK(OAM_aa445)
 	call AddOWSpriteWithScroll
 	ret
 .asm_82c03
