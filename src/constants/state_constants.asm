@@ -5,12 +5,12 @@
 	const ST_LEVEL              ; $02
 	const ST_03                 ; $03
 	const ST_PAUSE_MENU         ; $04
-	const ST_05                 ; $05
+	const ST_GOLF               ; $05
 	const ST_06                 ; $06
 	const ST_07                 ; $07
 	const ST_COLLECT_KEY        ; $08
 	const ST_CREDITS            ; $09
-	const ST_0a                 ; $0a
+	const ST_GOLF_BUILDING      ; $0a
 	const ST_GB_INCOMPATIBLE    ; $0b
 	const ST_GAME_OVER          ; $0c
 	const ST_PERFECT            ; $0d

@@ -519,11 +519,13 @@ wPowerUpLevel:: ; ca3c
 wGameModeFlags:: ; ca3d
 	ds $1
 
-wca3e:: ; ca3e
-	ds $4
+; flag set means that all the Musical Coins
+; in that level have been collected
+wMusicalCoinFlags:: ; ca3e
+	ds (NUM_LEVELS / 8) + 1
 
-wca42:: ; ca42
-	ds $4
+wGolfBestScores:: ; ca42
+	ds NUM_GOLF_COURSES
 
 ; $0 = Japanese
 ; $1 = English
@@ -1123,6 +1125,267 @@ w1d145:: ; d145
 
 w1d14a:: ; d14a
 	ds $1
+
+	ds $6b5
+
+w1d800:: ; d800
+	ds $1
+
+wGolfMenuOption:: ; d801
+	ds $1
+
+wPredeterminedGolfLevel:: ; d802
+	ds $1
+
+w1d803:: ; d803
+	ds $1
+
+; GOLF_COURSE_* constant
+wGolfCourse:: ; d804
+	ds $1
+
+; current score in the gold course being played
+wGolfCourseScore:: ; d805
+	ds $1
+
+	ds $fa
+
+w1d900:: ; d900
+	ds 16 tiles
+
+w1da00:: ; da00
+	ds $100
+
+w1db00:: ; db00
+	ds 8 palettes
+
+w1db40:: ; db40
+	ds $41
+
+; par of current golf hole
+wGolfPar:: ; db81
+	ds $1
+
+w1db82:: ; db82
+	ds $1
+
+w1db83:: ; db83
+	ds $1
+
+w1db84:: ; db84
+	ds $1
+
+w1db85:: ; db85
+	ds $1
+
+	ds $a
+
+w1db90:: ; db90
+	ds 4 tiles
+
+	ds $30
+
+w1dc00:: ; dc00
+	ds $1
+
+w1dc01:: ; dc01
+	ds $1
+
+w1dc02:: ; dc02
+	ds $1
+
+wHasAllMusicalCoinFlags:: ; dc03
+	ds $1
+
+	ds $5
+
+w1dc09:: ; dc09
+	ds $1
+
+w1dc0a:: ; dc0a
+	ds $1
+
+w1dc0b:: ; dc0b
+	ds $1
+
+w1dc0c:: ; dc0c
+	ds $1
+
+w1dc0d:: ; dc0d
+	ds $1
+
+w1dc0e:: ; dc0e
+	ds $1
+
+wGolfPrice:: ; dc0f
+	ds $1
+
+	ds $1
+
+w1dc11:: ; dc11
+	ds $2
+
+w1dc13:: ; dc13
+	ds $1
+
+	ds $3
+
+wGolfOAMPtr:: ; dc17
+	ds $2
+
+; number of coins to be displayed
+; in the Golf Lobby screen
+wGolfNumCoins:: ; dc19
+	ds $2
+
+	ds $5
+
+w1dc20:: ; dc20
+	ds $1
+
+w1dc21:: ; dc21
+	ds $1
+
+; current stroke number
+wGolfStroke:: ; dc22
+	ds $1
+
+wGolfMaxStrokes:: ; dc23
+	ds $1
+
+w1dc24:: ; dc24
+	ds $1
+
+w1dc25:: ; dc25
+	ds $1
+
+; GOLF_DISPLAY_* constant
+wGolfDisplayMode:: ; dc26
+	ds $1
+
+; $0 = right
+; $1 = left
+wGolfMenuScrollingDir:: ; dc27
+	ds $1
+
+w1dc28:: ; dc28
+	ds $1
+
+w1dc29:: ; dc29
+	ds $1
+
+w1dc2a:: ; dc2a
+	ds $1
+
+	ds $1
+
+wGolfXScroll:: ; dc2c
+	ds $2
+
+wGolfMenuTargetSCX:: ; dc2e
+wTempGolfXScroll:: ; dc2e
+	ds $2
+
+w1dc30:: ; dc30
+	ds $1
+
+	ds $1
+
+w1dc32:: ; dc32
+	ds $1
+
+	ds $1
+
+w1dc34:: ; dc34
+	ds $2
+
+w1dc36:: ; dc36
+	ds $2
+
+w1dc38:: ; dc38
+	ds $1
+
+w1dc39:: ; dc39
+	ds $1
+
+w1dc3a:: ; dc3a
+	ds $2
+
+w1dc3c:: ; dc3c
+	ds $2
+
+w1dc3e:: ; dc3e
+	ds $1
+
+w1dc3f:: ; dc3f
+	ds $1
+
+w1dc40:: ; dc40
+	ds $2
+
+w1dc42:: ; dc42
+	ds $1
+
+	ds $1
+
+w1dc44:: ; dc44
+	ds $1
+
+w1dc45:: ; dc45
+	ds $1
+
+w1dc46:: ; dc46
+	ds $1
+
+w1dc47:: ; dc47
+	ds $1
+
+w1dc48:: ; dc48
+	ds $1
+
+w1dc49:: ; dc49
+	ds $1
+
+w1dc4a:: ; dc4a
+	ds $1
+
+w1dc4b:: ; dc4b
+	ds $1
+
+w1dc4c:: ; dc4c
+	ds $1
+
+w1dc4d:: ; dc4d
+	ds $1
+
+w1dc4e:: ; dc4e
+	ds $1
+
+w1dc4f:: ; dc4f
+	ds $1
+
+w1dc50:: ; dc50
+	ds $1
+
+w1dc51:: ; dc51
+	ds $1
+
+	ds $1
+
+w1dc53:: ; dc53
+	ds $1
+
+wGolfObj1:: golf_obj_struct wGolfObj1 ; dc54
+wGolfObj2:: golf_obj_struct wGolfObj2 ; dc5c
+wGolfObj3:: golf_obj_struct wGolfObj3 ; dc64
+wGolfObj4:: golf_obj_struct wGolfObj4 ; dc6c
+wGolfObj5:: golf_obj_struct wGolfObj5 ; dc74
+wGolfObj6:: golf_obj_struct wGolfObj6 ; dc7c
+
+wGolfWario:: golf_obj_struct wGolfWario ; dc84
+
+wGolfObj7:: golf_obj_struct wGolfObj7 ; dc8c
+wGolfObj8:: golf_obj_struct wGolfObj8 ; dc94
 
 
 SECTION "WRAM2", WRAMX

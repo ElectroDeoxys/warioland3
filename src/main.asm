@@ -548,12 +548,31 @@ SECTION "Bank 65", ROMX
 
 SECTION "Bank 70", ROMX
 
-	INCROM $1c0000, $1c37cc
+INCLUDE "engine/bank70.asm"
 
 
 SECTION "Bank 71", ROMX
 
-	INCROM $1c4000, $1c5e07
+WarioGolfMiss:: INCBIN "gfx/wario/golf_miss.2bpp"
+
+BGMaps_1c4800:: INCBIN "gfx/bgmaps/map_1c4800.bin"
+BGMaps_1c48e0:: INCBIN "gfx/bgmaps/map_1c48e0.bin"
+BGMaps_1c49c0:: INCBIN "gfx/bgmaps/map_1c49c0.bin"
+BGMaps_1c4aa0:: INCBIN "gfx/bgmaps/map_1c4aa0.bin"
+BGMaps_1c4b80:: INCBIN "gfx/bgmaps/map_1c4b80.bin"
+
+BGMaps_1c4c60:: INCBIN "gfx/bgmaps/map_1c4c60.bin"
+BGMaps_1c4d83:: INCBIN "gfx/bgmaps/map_1c4d83.bin"
+
+BGMaps_1c4ea8:: INCBIN "gfx/bgmaps/map_1c4ea8.bin"
+
+GolfLobbyGfx:: INCBIN "gfx/golf/golf_lobby.2bpp.lz"
+
+BGMaps_1c5b4e:: INCBIN "gfx/bgmaps/map_1c5b4e.bin"
+BGMaps_1c5cbe:: INCBIN "gfx/bgmaps/map_1c5cbe.bin"
+
+BGMaps_1c5d6c:: INCBIN "gfx/bgmaps/map_1c5d6c.bin"
+BGMaps_1c5dc6:: INCBIN "gfx/bgmaps/map_1c5dc6.bin"
 
 
 SECTION "Bank 72", ROMX

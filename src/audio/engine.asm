@@ -3362,7 +3362,7 @@ SoundHeaders: ; 3155e (c:555e)
 	music $57f2, $0e, $00, 100, CHAN1, 3 ; MUSIC_MUSIC_BOXES
 	music $58b4, $0e, $00, 100, CHAN1, 2 ; MUSIC_45
 	music $5991, $0e, $00, 100, CHAN1, 2 ; MUSIC_POWER_UP_DEMO
-	music $5ba8, $0e, $00, 100, CHAN1, 4 ; MUSIC_GOLF_ROOM
+	music $5ba8, $0e, $00, 100, CHAN1, 4 ; MUSIC_GOLF_MENU
 	music $5d53, $0e, $00, 100, CHAN1, 3 ; MUSIC_48
 	music $5db7, $0e, $00, 100, CHAN1, 3 ; MUSIC_49
 	music $5f11, $0e, $00, 100, CHAN1, 2 ; MUSIC_THE_TEMPLE
@@ -3423,7 +3423,7 @@ SoundHeaders: ; 3155e (c:555e)
 	sfx $7fee, $0e, $00, 220, CHAN5, 1 ; SFX_FULLY_CHARGED_THROW
 	sfx $4015, $0f, $00, 232, CHAN5, 1 ; SFX_02E
 	sfx $402a, $0f, $00, 236, CHAN5, 1 ; SFX_02F
-	sfx $403d, $0f, $00, 220, CHAN5, 1 ; SFX_030
+	sfx $403d, $0f, $00, 220, CHAN5, 1 ; SFX_PIPE
 	sfx $40ae, $0f, $00, 255, CHAN5, 2 ; SFX_MUSICAL_COIN
 	sfx $414f, $0f, $00, 255, CHAN5, 2 ; SFX_KEY
 	sfx $4166, $0f, $00, 237, CHAN5, 1 ; SFX_GROUND_POUND

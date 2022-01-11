@@ -5961,7 +5961,7 @@ AddSpriteInsideWindow: ; 82920 (20:6920)
 	add d
 	ld [wCurSpriteXCoord], a
 	ld a, e
-	ld [wCurSpriteTileID], a
+	ld [wCurSpriteFrame], a
 	ld a, c
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_aa0cf
@@ -6004,7 +6004,7 @@ DrawBottomBarButtonPrompt: ; 8295b (20:695b)
 	ld b, $05
 .got_tile
 	ld a, b
-	ld [wCurSpriteTileID], a
+	ld [wCurSpriteFrame], a
 	ld a, [wWY]
 	add $10
 	ld [wCurSpriteYCoord], a

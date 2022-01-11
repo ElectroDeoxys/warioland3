@@ -7,12 +7,12 @@ StateTable:: ; 4000 (1:4000)
 	dw LevelStateTable             ; ST_LEVEL
 	dw Func_46dc                   ; ST_03
 	dw PauseMenuStateTable         ; ST_PAUSE_MENU
-	dw Func_4710                   ; ST_05
+	dw GolfStateTable              ; ST_GOLF
 	dw Func_472a                   ; ST_06
 	dw Func_474c                   ; ST_07
 	dw CollectKeyDelay             ; ST_COLLECT_KEY
 	dw CreditsStateTable           ; ST_CREDITS
-	dw Func_4790                   ; ST_0a
+	dw GolfBuildingStateTable      ; ST_GOLF_BUILDING
 	dw GBIncompatibleStateTable    ; ST_GB_INCOMPATIBLE
 	dw GameOverStateTable          ; ST_GAME_OVER
 	dw PerfectStateTable           ; ST_PERFECT
@@ -1064,7 +1064,7 @@ HandleOverworld: ; 4686 (1:4686)
 	ret
 
 .golf_building
-	ld a, ST_0a
+	ld a, ST_GOLF_BUILDING
 	ld [wState], a
 	ret
 
@@ -1100,12 +1100,12 @@ PauseMenuStateTable: ; 46f6 (1:46f6)
 	ret
 ; 0x4710
 
-Func_4710: ; 4710 (1:4710)
+GolfStateTable: ; 4710 (1:4710)
 	ldh a, [rSVBK]
 	push af
 	ld a, 1 ; WRAM1
 	ldh [rSVBK], a
-	farcall Func_1c8000
+	farcall _GolfStateTable
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -1167,12 +1167,12 @@ CreditsStateTable: ; 4776 (1:4776)
 	ret
 ; 0x4790
 
-Func_4790: ; 4790 (1:4790)
+GolfBuildingStateTable: ; 4790 (1:4790)
 	ldh a, [rSVBK]
 	push af
 	ld a, 1 ; WRAM1
 	ldh [rSVBK], a
-	farcall Func_1c8570
+	farcall _GolfBuildingStateTable
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -1752,7 +1752,7 @@ Func_4b73: ; 4b73 (1:4b73)
 	ld [wCurSpriteXCoord], a
 
 	ld a, [hli]
-	ld [wCurSpriteTileID], a
+	ld [wCurSpriteFrame], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_6b5f
@@ -1773,7 +1773,7 @@ Func_4b93: ; 4b93 (1:4b93)
 	add $08
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
-	ld [wCurSpriteTileID], a
+	ld [wCurSpriteFrame], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_6d21
@@ -2206,7 +2206,7 @@ Func_4e3e: ; 4e3e (1:4e3e)
 	add $08
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
-	ld [wCurSpriteTileID], a
+	ld [wCurSpriteFrame], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_75c3

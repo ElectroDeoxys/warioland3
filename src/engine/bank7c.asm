@@ -427,7 +427,7 @@ UpdatePauseMenu: ; 1f02a2 (7c:42a2)
 	ret
 
 .ToMap
-	jp ReturnToMap
+	jp ReturnToMapFromLevel
 
 .Save
 	ld a, TRUE
@@ -1155,7 +1155,7 @@ AddPauseMenuSprite: ; 1f0940 (7c:4940)
 	add $08
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
-	ld [wCurSpriteTileID], a
+	ld [wCurSpriteFrame], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_1f156c
@@ -1173,7 +1173,7 @@ PrintNumberMusicCoins: ; 1f095b (7c:495b)
 	ret
 ; 0x1f0969
 
-Func_1f0969: ; 1f0969 (7c:4969)
+Func_1f0969:: ; 1f0969 (7c:4969)
 	farcall VBlank_b672
 	farcall Func_b681
 	ldh a, [rSVBK]
@@ -2490,11 +2490,11 @@ Func_1f1246: ; 1f1246 (7c:5246)
 .asm_1f1251
 	ld hl, wLevelTimeAttackScores
 	ld b, 2 * NUM_LEVELS
-	ld a, $aa
+	ld a, (10 << $4) | 10
 	call WriteAToHL_BTimes
-	ld hl, wca42
+	ld hl, wGolfBestScores
 	ld b, $4
-	ld a, $aa
+	ld a, (10 << $4) | 10
 	call WriteAToHL_BTimes
 	ret
 

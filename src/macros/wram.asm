@@ -1,7 +1,7 @@
 sprite_oam_struct: MACRO
 \1YCoord::     db
 \1XCoord::     db
-\1TileID::     db
+\1Frame::      db
 \1Attributes:: db
 ; bit 7: priority
 ; bit 6: y flip
@@ -26,6 +26,14 @@ scene_obj_struct: MACRO
 \1State:: db
 \1Unk7:: db
 \1End::
+ENDM
+
+golf_obj_struct: MACRO
+\1State::          db
+\1Duration::       db
+\1FramesetOffset:: db
+\1CurrentFrame::   db
+\1Sprite:: sprite_oam_struct \1
 ENDM
 
 wario_plane: MACRO

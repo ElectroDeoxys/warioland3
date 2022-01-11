@@ -493,7 +493,7 @@ Func_846e: ; 846e (2:446e)
 	ld a, [wSubState]
 	ld [wPendingSubState], a
 	ld hl, wState
-	ld [hl], ST_05
+	ld [hl], ST_GOLF
 	xor a
 	ld [wSubState], a
 	ret

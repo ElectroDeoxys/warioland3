@@ -2205,7 +2205,7 @@ Func_b4f52: ; b4f52 (2d:4f52)
 
 Func_b4f58: ; b4f58 (2d:4f58)
 	ld hl, wTempPals1 palette 5
-	ld a, [wSceneObj11TileID]
+	ld a, [wSceneObj11Frame]
 	cp $57
 	jr z, .asm_b4f6b
 	ld a, [wSceneObj11State]

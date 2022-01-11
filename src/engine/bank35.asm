@@ -25,10 +25,10 @@ Func_d4000: ; d4000 (35:4000)
 
 	INCROM $d402a, $d4876
 
-; check if a bit is set in wca3e
+; check if a bit is set in wMusicalCoinFlags
 ; for the level in wOWLevel
-Func_d4876:: ; d4876 (35:4876)
-	ld hl, wca3e
+_CheckLevelMusicalCoinFlag:: ; d4876 (35:4876)
+	ld hl, wMusicalCoinFlags
 	ld a, [wOWLevel]
 	dec a
 	ld c, a
@@ -41,20 +41,20 @@ Func_d4876:: ; d4876 (35:4876)
 	ld a, c
 	and %111
 	ld c, a
-	jr z, .asm_d4893
+	jr z, .check_flag
 .loop_1
 	rrc [hl]
 	dec c
 	jr nz, .loop_1
-.asm_d4893
+.check_flag
 	ld c, a
 	bit 0, [hl]
-	jr nz, .asm_d489c
+	jr nz, .flag_set
 	ld b, FALSE
-	jr .asm_d489e
-.asm_d489c
+	jr .got_result
+.flag_set
 	ld b, TRUE
-.asm_d489e
+.got_result
 	ld a, c
 	and a
 	ret z
@@ -67,7 +67,7 @@ Func_d4876:: ; d4876 (35:4876)
 
 	INCROM $d48a7, $d49cc
 
-OAM_d49cc: ; d49cc (35:49cc)
+OAM_d49cc:: ; d49cc (35:49cc)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -372,4 +372,8 @@ OAM_d49cc: ; d49cc (35:49cc)
 	db $80
 ; 0xd4d18
 
-	INCROM $d4d18, $d65f2
+	INCROM $d4d18, $d5124
+
+GolfMenuGfx: INCBIN "gfx/golf/golf_menu.2bpp.lz"
+
+	INCROM $d63fd, $d65f2

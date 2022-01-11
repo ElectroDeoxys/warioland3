@@ -43,9 +43,10 @@ LEVEL_THE_TEMPLE EQU const_value   ; $00
 	level THE_EAST_CRATER          ; $b8
 	level FOREST_OF_FEAR           ; $c0
 
+NUM_LEVELS EQU (const_value / 8)
+
 LEVEL_GOLF_BUILDING EQU (const_value / 8) + 1 ; $1a
 
-NUM_LEVELS EQU (const_value / 8)
 
 	const THE_TEMPLE               ; $c8
 const_value = $ff

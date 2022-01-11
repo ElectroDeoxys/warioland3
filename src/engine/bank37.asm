@@ -205,7 +205,7 @@ Func_dc158: ; dc158 (37:4158)
 	add $08
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
-	ld [wCurSpriteTileID], a
+	ld [wCurSpriteFrame], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_dd710

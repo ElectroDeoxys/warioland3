@@ -1,4 +1,4 @@
-OAM_14000: ; 14000 (05:4000)
+OAM_14000:: ; 14000 (05:4000)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -262,7 +262,7 @@ Frameset_1425f: ; 1425f (5:425f)
 	db $ff
 ; 0x1426c
 
-OAM_1426c: ; 1426c (05:426c)
+OAM_1426c:: ; 1426c (05:426c)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1108,7 +1108,7 @@ Frameset_14a7f: ; 14a7f (5:4a7f)
 	db $ff
 ; 0x14a82
 
-OAM_14a82: ; 14a82 (05:4a82)
+OAM_14a82:: ; 14a82 (05:4a82)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1389,7 +1389,7 @@ Frameset_14d18: ; 14d18 (5:4d18)
 	db $ff
 ; 0x14d1b
 
-OAM_14d1b: ; 14d1b (05:4d1b)
+OAM_14d1b:: ; 14d1b (05:4d1b)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2

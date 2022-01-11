@@ -48,7 +48,7 @@
 	const MUSIC_MUSIC_BOXES                ; 02c
 	const MUSIC_45                         ; 02d
 	const MUSIC_POWER_UP_DEMO              ; 02e
-	const MUSIC_GOLF_ROOM                  ; 02f
+	const MUSIC_GOLF_MENU                  ; 02f
 	const MUSIC_48                         ; 030
 	const MUSIC_49                         ; 031
 	const MUSIC_THE_TEMPLE                 ; 032
@@ -109,7 +109,7 @@
 	const SFX_FULLY_CHARGED_THROW          ; 12d
 	const SFX_02E                          ; 12e
 	const SFX_02F                          ; 12f
-	const SFX_030                          ; 130
+	const SFX_PIPE                         ; 130
 	const SFX_MUSICAL_COIN                 ; 131
 	const SFX_KEY                          ; 132
 	const SFX_GROUND_POUND                 ; 133

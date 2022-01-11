@@ -636,7 +636,7 @@ Func_1604b1: ; 1604b1 (58:44b1)
 	add $08
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
-	ld [wCurSpriteTileID], a
+	ld [wCurSpriteFrame], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_1617e8

@@ -242,7 +242,7 @@ OAM_1fc000: ; 1fc000 (7f:4000)
 
 	INCROM $1fc2ab, $1fc31b
 
-OAM_1fc31b: ; 1fc31b (7f:431b)
+OAM_1fc31b:: ; 1fc31b (7f:431b)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2

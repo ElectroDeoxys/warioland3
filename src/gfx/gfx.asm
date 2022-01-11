@@ -29,7 +29,7 @@ WarioCrazyGfx::   INCBIN "gfx/wario/crazy.2bpp"
 WarioBatGfx::     INCBIN "gfx/wario/bat.2bpp"
 WarioVampireGfx:: INCBIN "gfx/wario/vampire.2bpp"
 WarioBubbleGfx::  INCBIN "gfx/wario/bubble.2bpp"
-WarioUnk1Gfx::    INCBIN "gfx/wario/unk1.2bpp"
+WarioClearGfx::   INCBIN "gfx/wario/clear.2bpp"
 WarioHangGfx::    INCBIN "gfx/wario/hang.2bpp"
 
 

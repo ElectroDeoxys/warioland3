@@ -895,8 +895,8 @@ ENDM
 	data_ac962 OAM_1426c,  WarioWalkGfx
 	data_ac962 OAM_1606a,  WarioThrowGfx
 	data_ac962 OAM_14000,  WarioIdleGfx
-	data_ac962 OAM_d49cc,  WarioUnk1Gfx
-	data_ac962 OAM_aa5fe,  WarioUnk1Gfx
+	data_ac962 OAM_d49cc,  WarioClearGfx
+	data_ac962 OAM_aa5fe,  WarioClearGfx
 	data_ac962 OAM_aa6e7,  WarioUnk2Gfx
 	data_ac962 OAM_aa934,  WarioUnk3Gfx
 	data_ac962 OAM_aab5c,  WarioSleepGfx
@@ -904,7 +904,7 @@ ENDM
 	data_ac962 OAM_ab0c5,  WarioUnk5Gfx
 	data_ac962 OAM_1fc31b, WarioIdleGfx
 	data_ac962 OAM_1673c,  WarioHotGfx
-	data_ac962 OAM_1fc000, WarioUnk1Gfx
+	data_ac962 OAM_1fc000, WarioClearGfx
 ; 0xac9b6
 
 	ret ; stray ret

@@ -2029,7 +2029,7 @@ DrawWario:: ; d9e (0:d9e)
 	ld a, [wWarioScreenXPos]
 	ld [wCurSpriteXCoord], a
 	ld a, [wca65]
-	ld [wCurSpriteTileID], a
+	ld [wCurSpriteFrame], a
 	ld a, [wca66]
 	ld [wCurSpriteAttributes], a
 	call TryAddSprite
@@ -2040,7 +2040,7 @@ DrawWario:: ; d9e (0:d9e)
 
 ; hl = sprite pointer
 TryAddSprite:: ; df4 (0:df4)
-	ld a, [wCurSpriteTileID]
+	ld a, [wCurSpriteFrame]
 	ld d, $00
 	add a
 	ld e, a
@@ -2343,6 +2343,7 @@ PlaySFX:: ; fca (0:fca)
 
 	INCROM $fd8, $0fe6
 
+; bc = sound ID
 Func_fe6:: ; fe6 (0:fe6)
 	ldh a, [rSVBK]
 	push af
@@ -2832,7 +2833,32 @@ LoadBackupVRAM:: ; 1351 (0:1351)
 	ret
 ; 0x13d5
 
-	INCROM $13d5, $141a
+Func_13d5:: ; 13d5 (0:13d5)
+	call DisableLCD
+	ldh a, [rSVBK]
+	push af
+	ld a, $03
+	ldh [rSVBK], a
+	ld a, [wTempAnimatedTilesFrameDuration]
+	ld [wAnimatedTilesFrameDuration], a
+	ld a, [wTempAnimatedTilesGroup]
+	ld [wAnimatedTilesGroup], a
+	pop af
+	ldh [rSVBK], a
+	xor a
+	ld [wAnimatedTilesFrameCount], a
+	ld [wAnimatedTilesFrame], a
+	ld a, TRUE
+	ld [wRoomAnimatedTilesEnabled], a
+	call LoadBackupVRAM
+	ld a, [wc0d7]
+	and $f0
+	or $02
+	ld [wc0d7], a
+	farcall Func_1f0969
+	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
+	ldh [rLCDC], a
+;	fallthrough
 
 ReturnToPendingLevelState:: ; 141a (0:141a)
 	ld hl, wState
@@ -2842,9 +2868,10 @@ ReturnToPendingLevelState:: ; 141a (0:141a)
 	ret
 ; 0x1426
 
-ReturnToMap:: ; 1426 (0:1426)
+ReturnToMapFromLevel:: ; 1426 (0:1426)
 	ld hl, wca3b
 	set 7, [hl]
+ReturnToMap:: ; 142b (0:142b)
 	ld a, TRANSITION_RETURN_TO_MAP
 	ld [wTransitionParam], a
 	farcall StartOverworldState
@@ -3358,14 +3385,42 @@ Func_1762:: ; 1762 (0:1762)
 	ret
 ; 0x1783
 
-Func_1783:: ; 1783 (0:1783)
-	farcall Func_d4876
+; return nz if level has had all its
+; Musical Coins collected already
+CheckLevelMusicalCoinFlag:: ; 1783 (0:1783)
+	farcall _CheckLevelMusicalCoinFlag
 	ld a, b
 	and a
 	ret
 ; 0x1795
 
-	INCROM $1795, $17be
+	INCROM $1795, $17a4
+
+; returns nz if has all the levels
+; with their corresponding Musical Coin flag set
+CheckHasAllMusicalCoinFlags:: ; 17a4 (0:17a4)
+	ld hl, wMusicalCoinFlags
+	ld c, 3
+.loop_bytes
+	ld b, 8
+	ld a, [hli]
+.loop_flags
+	rrca
+	jr nc, .false
+	dec b
+	jr nz, .loop_flags
+	dec c
+	jr nz, .loop_bytes
+	; 1 bit still missing
+	ld a, [hl]
+	rrca
+	jr nc, .false
+	ld a, TRUE
+	ret
+.false
+	xor a ; FALSE
+	ret
+; 0x17be
 
 Func_17be:: ; 17be (0:17be)
 	ld a, [hli]
@@ -3375,7 +3430,7 @@ Func_17be:: ; 17be (0:17be)
 	add $08
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
-	ld [wCurSpriteTileID], a
+	ld [wCurSpriteFrame], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld a, [wROMBank]
@@ -3397,7 +3452,7 @@ Func_17ec:: ; 17ec (0:17ec)
 	add $08
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
-	ld [wCurSpriteTileID], a
+	ld [wCurSpriteFrame], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld a, [$d521]
@@ -4586,7 +4641,254 @@ endr
 	ret
 ; 0x2b25
 
-	INCROM $2b25, $3000
+	INCROM $2b25, $2c00
+
+FarCopyHLToDE_BC2:: ; 2c00 (0:2c00)
+	ld a, [wROMBank]
+	push af
+	ld a, [wTempBank]
+	bankswitch
+	call CopyHLToDE_BC
+	pop af
+	bankswitch
+	ret
+; 0x2c18
+
+FarDecompress:: ; 2c18 (0:2c18)
+	ld a, [wROMBank]
+	push af
+	ld a, [wTempBank]
+	bankswitch
+	call Decompress
+	pop af
+	bankswitch
+	ret
+; 0x2c30
+
+; hl = source
+; w1dc11 = destination
+Func_2c30:: ; 2c30 (0:2c30)
+	ld a, h
+	ldh [rHDMA1], a
+	ld a, l
+	ldh [rHDMA2], a
+	ld a, [w1dc11 + 0]
+	ldh [rHDMA3], a
+	ld a, [w1dc11 + 1]
+	ldh [rHDMA4], a
+	ld a, [w1dc13]
+	ldh [rHDMA5], a
+	ret
+; 0x2c46
+
+Func_2c46:: ; 2c46 (0:2c46)
+	ld de, rBGPI
+	ld c, 4
+	jr .asm_2c52
+
+	ld de, rOBPI
+	ld c, 4
+
+.asm_2c52
+	ld a, $80
+	ld [de], a
+	inc e
+.loop
+rept $10
+	ld a, [hli]
+	ld [de], a
+endr
+	dec c
+	jr nz, .loop
+	ret
+; 0x2c7a
+
+; hl = golf object duration
+; de = frameset
+UpdateGolfObjectAnimation:: ; 2c7a (0:2c7a)
+	ld c, $00
+	ld a, [hl] ; duration
+	sub $1
+	ld [hli], a
+	ret nc ; not finished yet
+	ld a, [hli] ; frameset offset
+	add e
+	ld c, a
+	ld a, d
+	adc $00
+	ld b, a
+	ld a, [bc]
+	cp $ff
+	jr z, .finished_animation
+	inc bc
+	ld [hld], a ; frame
+	ld a, [hl]
+	add $2
+	ld [hld], a
+	ld a, [bc]
+	ld [hl], a ; duration
+	ld c, FALSE
+	ret
+
+.finished_animation
+	ld a, [hl] ; last frame
+	ld [w1dc09], a
+	ld a, [de]
+	ld [hld], a ; frame
+	inc de
+	ld a, $2
+	ld [hld], a
+	ld a, [de]
+	ld [hl], a
+	ld c, TRUE
+	ret
+; 0x2ca7
+
+; hl = golf object sprite
+; wGolfOAMPtr = oam pointer
+AddGolfSprite:: ; 2ca7 (0:2ca7)
+	ld a, [hli]
+	ld [wCurSpriteYCoord], a
+	ld a, [hli]
+	ld [wCurSpriteXCoord], a
+	ld a, [hli]
+	ld [wCurSpriteFrame], a
+	ld a, [hl]
+	ld [wCurSpriteAttributes], a
+	ld a, [wGolfOAMPtr + 0]
+	ld h, a
+	ld a, [wGolfOAMPtr + 1]
+	ld l, a
+	call TryAddSprite
+	ret
+; 0x2cc3
+
+Func_2cc3:: ; 2cc3 (0:2cc3)
+	ld hl, .oam_banks
+	ld a, [wGolfWarioState]
+	ld b, $00
+	ld c, a
+	add hl, bc
+	ld a, [hl]
+	ld [wTempBank], a
+
+	ld a, [w1dc42]
+	and a
+	jr z, .asm_2cdb
+	ld a, c
+	add $0c
+	ld c, a
+.asm_2cdb
+	ld hl, .oam_table
+	ld b, $00
+	sla c
+	add hl, bc
+	ld a, [hli]
+	ld [wGolfOAMPtr + 1], a
+	ld a, [hl]
+	ld [wGolfOAMPtr + 0], a
+
+	ld hl, .framesets
+	add hl, bc
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
+	ld a, [wROMBank]
+	push af
+	ld a, [wTempBank]
+	bankswitch
+	ld hl, wGolfWarioDuration
+	call UpdateGolfObjectAnimation
+	ld a, c
+	ld [w1dc2a], a
+	pop af
+	bankswitch
+
+	ld a, [w1dc2a]
+	and a
+	call nz, Func_1c8f37
+	ld a, [wGolfWarioCurrentFrame]
+	ld [wGolfWarioFrame], a
+	ld a, [wROMBank]
+	push af
+	ld a, [wTempBank]
+	bankswitch
+	ld hl, wGolfWarioSprite
+	call AddGolfSprite
+	pop af
+	bankswitch
+	ret
+
+.oam_banks
+	db BANK(OAM_14000)
+	db BANK(OAM_1426c)
+	db BANK(OAM_14d1b)
+	db BANK(OAM_14d1b)
+	db BANK(OAM_14d1b)
+	db BANK(OAM_1cb0dd)
+	db BANK(OAM_d49cc)
+	db BANK(OAM_d49cc)
+	db BANK(OAM_d49cc)
+	db BANK(OAM_d49cc)
+	db BANK(OAM_14a82)
+	db BANK(OAM_1fc31b)
+
+.oam_table
+	dw OAM_14000
+	dw OAM_1426c
+	dw OAM_14d1b
+	dw OAM_14d1b
+	dw OAM_14d1b
+	dw OAM_1cb0dd
+	dw OAM_d49cc
+	dw OAM_d49cc
+	dw OAM_d49cc
+	dw OAM_d49cc
+	dw OAM_14a82
+	dw OAM_1fc31b
+
+	dw OAM_14000
+	dw OAM_1426c
+	dw OAM_14d1b
+	dw OAM_14d1b
+	dw OAM_14d1b
+	dw OAM_1cb0dd
+	dw OAM_d49cc
+	dw OAM_d49cc
+	dw OAM_d49cc
+	dw OAM_d49cc
+	dw OAM_14a82
+	dw OAM_1fc31b
+
+.framesets
+	dw $425f
+	dw $49c5
+	dw $51fd
+	dw $2da4
+	dw $2da7
+	dw $7285
+	dw $4d1b
+	dw $4d5f
+	dw $2db0
+	dw $2db5
+	dw $4cf6
+	dw $447c
+
+	dw $4252
+	dw $49b4
+	dw $51e4
+	dw $2daa
+	dw $2dad
+	dw $72ac
+	dw $4d1b
+	dw $4d5f
+	dw $2db0
+	dw $2db5
+	dw $4cf6
+	dw $4473
+; 0x2da4
+
+	INCROM $2da4, $3000
 
 ; given the obj struct in hl
 ; update its sprite with its current position
@@ -4604,11 +4906,11 @@ UpdateObjSprite:: ; 3000 (0:3000)
 	ld a, [hli]
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
-	ld [wCurSpriteTileID], a
+	ld [wCurSpriteFrame], a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [wCurSpriteTileID]
+	ld a, [wCurSpriteFrame]
 	ld d, $00
 	add a ; *2
 	ld e, a
@@ -4980,7 +5282,7 @@ AddOWSpriteWithScroll:: ; 3a00 (0:3a00)
 	add c
 	ld [wCurSpriteXCoord], a
 	ld a, [hli] ; tileID
-	ld [wCurSpriteTileID], a
+	ld [wCurSpriteFrame], a
 	ld a, [hl] ; attributes
 	ld [wCurSpriteAttributes], a
 	ld h, d
@@ -5011,7 +5313,7 @@ AddOWSprite:: ; 3a38 (0:3a38)
 	add c
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
-	ld [wCurSpriteTileID], a
+	ld [wCurSpriteFrame], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 

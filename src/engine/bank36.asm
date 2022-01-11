@@ -392,7 +392,7 @@ Func_db4e9: ; db4e9 (36:74e9)
 	add $08
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
-	ld [wCurSpriteTileID], a
+	ld [wCurSpriteFrame], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_dbbd2

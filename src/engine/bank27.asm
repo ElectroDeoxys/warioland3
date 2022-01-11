@@ -2469,7 +2469,7 @@ Func_9f423: ; 9f423 (27:7423)
 	dw $6203
 
 .Func_9f45a
-	ld a, [wSceneObj3TileID]
+	ld a, [wSceneObj3Frame]
 	ld c, a
 	ld a, [wSceneObj3Unk7]
 	ld b, a
@@ -2548,7 +2548,7 @@ Func_9f5a0: ; 9f5a0 (27:75a0)
 	dw $68ed
 
 .Func_9f5e5
-	ld a, [wSceneObj2TileID]
+	ld a, [wSceneObj2Frame]
 	ld c, a
 	ld a, [wSceneObj2Unk7]
 	ld b, a
@@ -2847,7 +2847,7 @@ Func_9f8da: ; 9f8da (27:78da)
 	ld a, [hl]
 	and a
 	ret nz
-	ld a, [wSceneObj2TileID]
+	ld a, [wSceneObj2Frame]
 	cp $07
 	ret nz
 	ld a, LCDC_BG9C00
@@ -2899,7 +2899,7 @@ Func_9f91f: ; 9f91f (27:791f)
 	dw $75e0
 
 .Func_9f953
-	ld a, [wSceneObj2TileID]
+	ld a, [wSceneObj2Frame]
 	ld c, a
 	ld a, [wSceneObj2Unk7]
 	ld b, a
