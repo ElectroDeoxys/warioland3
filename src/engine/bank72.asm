@@ -188,7 +188,7 @@ Func_1c814f: ; 1c814f (72:414f)
 	ld [wGolfObj1YCoord], a
 	ld a, $24
 	ld [wGolfObj1XCoord], a
-	ld de, $73b3
+	ld de, Frameset_1cb3b3
 	ld hl, wGolfObj1Duration
 	call UpdateGolfObjectAnimation
 	ld a, [wGolfObj1CurrentFrame]
@@ -200,7 +200,7 @@ Func_1c814f: ; 1c814f (72:414f)
 	ld [wGolfObj3YCoord], a
 	ld a, $8c
 	ld [wGolfObj3XCoord], a
-	ld de, $73c4
+	ld de, Frameset_1cb3c4
 	ld hl, wGolfObj3Duration
 	call UpdateGolfObjectAnimation
 	ld a, [wGolfObj3CurrentFrame]
@@ -212,7 +212,7 @@ Func_1c814f: ; 1c814f (72:414f)
 	ld [wGolfObj5YCoord], a
 	ld a, $28
 	ld [wGolfObj5XCoord], a
-	ld de, $73d7
+	ld de, Frameset_1cb3d7
 	ld hl, wGolfObj5Duration
 	call UpdateGolfObjectAnimation
 	ld a, [wGolfObj5CurrentFrame]
@@ -230,10 +230,10 @@ Func_1c814f: ; 1c814f (72:414f)
 	ld a, [wLanguage]
 	and a
 	jr nz, .english
-	ld de, $73d4
+	ld de, Frameset_1cb3d4
 	jr .asm_1c81d4
 .english
-	ld de, $73d1
+	ld de, Frameset_1cb3d1
 .asm_1c81d4
 	ld hl, wGolfObj4Duration
 	call UpdateGolfObjectAnimation
@@ -721,10 +721,10 @@ Func_1c853e: ; 1c853e (72:453e)
 	ld a, [wGolfObj1State]
 	and a
 	jr nz, .asm_1c8553
-	ld de, $75cf
+	ld de, Frameset_1cb5cf
 	jr .asm_1c8556
 .asm_1c8553
-	ld de, $75cc
+	ld de, Frameset_1cb5cc
 .asm_1c8556
 	ld hl, wGolfObj1Duration
 	call UpdateGolfObjectAnimation
@@ -989,7 +989,7 @@ Func_1c86f8: ; 1c86f8 (72:46f8)
 	ld [wGolfObj1YCoord], a
 	ld a, $58
 	ld [wGolfObj1XCoord], a
-	ld de, $759b
+	ld de, Frameset_1cb59b
 	ld hl, wGolfObj1Duration
 	call UpdateGolfObjectAnimation
 	ld a, [wGolfObj1CurrentFrame]
@@ -1001,7 +1001,7 @@ Func_1c86f8: ; 1c86f8 (72:46f8)
 	ld [wGolfObj3YCoord], a
 	ld a, $58
 	ld [wGolfObj3XCoord], a
-	ld de, $7598
+	ld de, Frameset_1cb598
 	ld hl, wGolfObj3Duration
 	call UpdateGolfObjectAnimation
 	ld a, [wGolfObj3CurrentFrame]
@@ -1012,7 +1012,7 @@ Func_1c86f8: ; 1c86f8 (72:46f8)
 	ld [wGolfObj4YCoord], a
 	ld a, $58
 	ld [wGolfObj4XCoord], a
-	ld de, $759e
+	ld de, Frameset_1cb59e
 	ld hl, wGolfObj4Duration
 	call UpdateGolfObjectAnimation
 	ld a, [wGolfObj4CurrentFrame]
@@ -1027,7 +1027,7 @@ Func_1c86f8: ; 1c86f8 (72:46f8)
 	ld [wGolfObj5YCoord], a
 	ld a, $6c
 	ld [wGolfObj5XCoord], a
-	ld de, $75a1
+	ld de, Frameset_1cb5a1
 	ld hl, wGolfObj5Duration
 	call UpdateGolfObjectAnimation
 	ld a, [wGolfObj5CurrentFrame]
@@ -1063,7 +1063,7 @@ Func_1c86f8: ; 1c86f8 (72:46f8)
 	ld [wGolfObj6YCoord], a
 	ld a, $55
 	ld [wGolfObj6XCoord], a
-	ld de, $75c3
+	ld de, Frameset_1cb5c3
 	ld hl, wGolfObj6Duration
 	call UpdateGolfObjectAnimation
 	ld a, [wGolfObj6CurrentFrame]
@@ -1072,10 +1072,10 @@ Func_1c86f8: ; 1c86f8 (72:46f8)
 	jp AddGolfSprite
 
 .framesets
-	dw $75d8
-	dw $75db
-	dw $75de
-	dw $75e1
+	dw Frameset_1cb5d8
+	dw Frameset_1cb5db
+	dw Frameset_1cb5de
+	dw Frameset_1cb5e1
 ; 0x1c87db
 
 ; loads attribute map to w1d900
@@ -1313,7 +1313,16 @@ Func_1c8911: ; 1c8911 (72:4911)
 	db GOLF_LEVEL_15 + $1 ; GOLF_COURSE_4
 ; 0x1c8957
 
-	INCROM $1c8957, $1c8965
+; unreferenced?
+Func_1c8957: ; 1c8957 (72:4957)
+	ld a, [wSubState]
+	jumptable
+	dw FastFadeToWhite
+	dw Func_1c8965
+	dw SlowFadeFromWhite
+	dw Func_1c8ca4
+	dw Func_1c8fb7
+; 0x1c8965
 
 Func_1c8965: ; 1c8965 (72:4965)
 	call DisableLCD
@@ -1707,7 +1716,7 @@ Func_1c8cc3: ; 1c8cc3 (72:4cc3)
 	ld [wGolfObj1YCoord], a
 	ld a, $0c
 	ld [wGolfObj1XCoord], a
-	ld de, $6f6f
+	ld de, Frameset_1caf6f
 	ld hl, wGolfObj1Duration
 	call UpdateGolfObjectAnimation
 	ld a, [wGolfObj1CurrentFrame]
@@ -1719,7 +1728,7 @@ Func_1c8cc3: ; 1c8cc3 (72:4cc3)
 	ld [wGolfObj2YCoord], a
 	ld a, $08
 	ld [wGolfObj2XCoord], a
-	ld de, $6f81
+	ld de, Frameset_1caf81
 	ld hl, wGolfObj2Duration
 	call UpdateGolfObjectAnimation
 	ld a, [wGolfObj2CurrentFrame]
@@ -1734,7 +1743,7 @@ Func_1c8cc3: ; 1c8cc3 (72:4cc3)
 	ld [wGolfObj3YCoord], a
 	ld a, $58
 	ld [wGolfObj3XCoord], a
-	ld de, $6f8a
+	ld de, Frameset_1caf8a
 	ld hl, wGolfObj3Duration
 	call UpdateGolfObjectAnimation
 	ld a, [wGolfObj3CurrentFrame]
@@ -1750,7 +1759,7 @@ Func_1c8cc3: ; 1c8cc3 (72:4cc3)
 	ld a, [w1dc4a]
 	add $32
 	ld [wGolfObj4XCoord], a
-	ld de, $6f84
+	ld de, Frameset_1caf84
 	ld hl, wGolfObj4Duration
 	call UpdateGolfObjectAnimation
 	ld a, [wGolfObj4CurrentFrame]
@@ -1766,7 +1775,7 @@ Func_1c8cc3: ; 1c8cc3 (72:4cc3)
 	ld a, [w1dc4c]
 	add $32
 	ld [wGolfObj5XCoord], a
-	ld de, $6f87
+	ld de, Frameset_1caf87
 	ld hl, wGolfObj5Duration
 	call UpdateGolfObjectAnimation
 	ld a, [wGolfObj5CurrentFrame]
@@ -1861,15 +1870,20 @@ Func_1c8d74: ; 1c8d74 (72:4d74)
 	jp AddGolfSprite
 
 .framesets
-	dw $6fb1
-	dw $6fb6
-	dw $6fc7
-	dw $6fe8
-	dw $7005
-	dw $6fb1
+	dw Frameset_1cafb1
+	dw Frameset_1cafb6
+	dw Frameset_1cafc7
+	dw Frameset_1cafe8
+	dw Frameset_1cb005
+	dw Frameset_1cafb1
 ; 0x1c8e21
 
-	INCROM $1c8e21, $1c8e26
+; unreferenced?
+Frameset_1c8e21: ; 1c8e21 (72:4e21)
+	db $23, 78
+	db $20,  4
+	db $ff
+; 0x1c8e26
 
 Func_1c8e26: ; 1c8e26 (72:4e26)
 	ld a, [wGolfObj6State]
@@ -2130,7 +2144,8 @@ Func_1c8f76: ; 1c8f76 (72:4f76)
 	dw WarioIdleGfx
 ; 0x1c8fb7
 
-	ret ; stray ret
+Func_1c8fb7: ; 1c8fb7 (72:4fb7)
+	ret
 
 Func_1c8fb8: ; 1c8fb8 (72:4fb8)
 	ld a, [w1dc00]
@@ -2284,7 +2299,7 @@ Func_1c905d: ; 1c905d (72:505d)
 	ld a, $72
 	ld [wGolfObj8YCoord], a
 	ld hl, wGolfObj8Duration
-	ld de, $70a4
+	ld de, Frameset_1cb0a4
 	call UpdateGolfObjectAnimation
 	ld a, [wGolfObj8CurrentFrame]
 	ld [wGolfObj8Frame], a
@@ -3130,7 +3145,7 @@ Func_1c9654: ; 1c9654 (72:5654)
 	ld a, [wGolfObj6State]
 	cp $04
 	jp z, .asm_1c9743
-	ld de, $7016
+	ld de, Frameset_1cb016
 	ld hl, wGolfObj7Duration
 	call UpdateGolfObjectAnimation
 	ld a, c
@@ -3168,7 +3183,7 @@ Func_1c9654: ; 1c9654 (72:5654)
 	jp Func_1c8e26.asm_1c8e91
 
 .asm_1c96dd
-	ld de, $7035
+	ld de, Frameset_1cb035
 	ld hl, wGolfObj7Duration
 	call UpdateGolfObjectAnimation
 	ld a, c
@@ -3180,7 +3195,7 @@ Func_1c9654: ; 1c9654 (72:5654)
 	jr .asm_1c9708
 
 .asm_1c96f4
-	ld de, $7068
+	ld de, Frameset_1cb068
 	ld hl, wGolfObj7Duration
 	call UpdateGolfObjectAnimation
 	ld a, c
@@ -3280,7 +3295,7 @@ Func_1c9654: ; 1c9654 (72:5654)
 	ld a, $03
 	ld [wGolfObj6], a
 .asm_1c97b5
-	ld de, $7016
+	ld de, Frameset_1cb016
 	ld hl, wGolfObj7Duration
 	call UpdateGolfObjectAnimation
 	ld a, c
@@ -3702,7 +3717,7 @@ Func_1c9a62: ; 1c9a62 (72:5a62)
 	ld [wGolfObj7YCoord], a
 	ld a, $58
 	ld [wGolfObj7XCoord], a
-	ld de, $6f8d
+	ld de, Frameset_1caf8d
 	ld hl, wGolfObj7Duration
 	call UpdateGolfObjectAnimation
 	ld a, [wGolfObj7CurrentFrame]
@@ -3835,14 +3850,22 @@ Func_1c9b53: ; 1c9b53 (72:5b53)
 	jp AddGolfSprite
 
 .framesets
-	dw $70c2
-	dw $7089
-	dw $70a9
-	dw $5b87
-	dw $5b8a
+	dw Frameset_1cb0c2
+	dw Frameset_1cb089
+	dw Frameset_1cb0a9
+	dw Frameset_1c9b87
+	dw Frameset_1c9b8a
 ; 0x1c9b87
 
-	INCROM $1c9b87, $1c9b8d
+Frameset_1c9b87: ; 1c9b87 (72:5b87)
+	db $73,  4
+	db $ff
+; 0x1c9b8a
+
+Frameset_1c9b8a: ; 1c9b8a (72:5b8a)
+	db $6a,  4
+	db $ff
+; 0x1c9b8d
 
 Func_1c9b8d: ; 1c9b8d (72:5b8d)
 	ld a, [w1dc24]
@@ -3878,7 +3901,7 @@ Func_1c9bbc: ; 1c9bbc (72:5bbc)
 	ld [wGolfObj7YCoord], a
 	ld a, $58
 	ld [wGolfObj7XCoord], a
-	ld de, $6fa0
+	ld de, Frameset_1cafa0
 	ld hl, wGolfObj7Duration
 	call UpdateGolfObjectAnimation
 	ld a, [wGolfObj7CurrentFrame]
@@ -3912,7 +3935,7 @@ Func_1c9bfc: ; 1c9bfc (72:5bfc)
 	ld [wGolfObj3YCoord], a
 	ld a, $58
 	ld [wGolfObj3XCoord], a
-	ld de, $70da
+	ld de, Frameset_1cb0da
 	ld hl, wGolfObj3Duration
 	call UpdateGolfObjectAnimation
 	ld a, [wGolfObj3CurrentFrame]
@@ -3953,7 +3976,7 @@ Func_1c9c53: ; 1c9c53 (72:5c53)
 	ld [wGolfObj8YCoord], a
 	ld a, $50
 	ld [wGolfObj8XCoord], a
-	ld de, $70d7
+	ld de, Frameset_1cb0d7
 	ld hl, wGolfObj8Duration
 	call UpdateGolfObjectAnimation
 	ld a, [wGolfObj8CurrentFrame]
@@ -5911,7 +5934,259 @@ OAM_1ca6cf: ; 1ca6cf (72:66cf)
 	db $80
 ; 0x1caf6f
 
-	INCROM $1caf6f, $1cb0dd
+Frameset_1caf6f: ; 1caf6f (72:6f6f)
+	db $00,  5
+	db $01,  5
+	db $02,  5
+	db $03,  5
+	db $ff
+; 0x1caf78
+
+	INCROM $1caf78, $1caf81
+
+Frameset_1caf81: ; 1caf81 (72:6f81)
+	db $08,  4
+	db $ff
+; 0x1caf84
+
+Frameset_1caf84: ; 1caf84 (72:6f84)
+	db $09,  4
+	db $ff
+; 0x1caf87
+
+Frameset_1caf87: ; 1caf87 (72:6f87)
+	db $0a,  4
+	db $ff
+; 0x1caf8a
+
+Frameset_1caf8a: ; 1caf8a (72:6f8a)
+	db $0b,  4
+	db $ff
+; 0x1caf8d
+
+Frameset_1caf8d: ; 1caf8d (72:6f8d)
+	db $0c, 10
+	db $0d,  4
+	db $0e,  4
+	db $0f,  4
+	db $10,  4
+	db $11,  4
+	db $12,  4
+	db $13,  4
+	db $14,  4
+	db $ff
+; 0x1cafa0
+
+Frameset_1cafa0: ; 1cafa0 (72:6fa0)
+	db $15,  8
+	db $16,  4
+	db $17,  8
+	db $16,  4
+	db $15,  8
+	db $18,  4
+	db $19,  8
+	db $18,  4
+	db $ff
+; 0x1cafb1
+
+Frameset_1cafb1: ; 1cafb1 (72:6fb1)
+	db $1a,  8
+	db $1b,  8
+	db $ff
+; 0x1cafb6
+
+Frameset_1cafb6: ; 1cafb6 (72:6fb6)
+	db $1c,  3
+	db $1d,  3
+	db $1e,  3
+	db $1f,  3
+	db $20,  3
+	db $21,  3
+	db $22,  3
+	db $23,  3
+	db $ff
+; 0x1cafc7
+
+Frameset_1cafc7: ; 1cafc7 (72:6fc7)
+	db $24,  6
+	db $25,  6
+	db $26,  6
+	db $27,  6
+	db $28,  6
+	db $29,  6
+	db $2a,  6
+	db $2e,  6
+	db $2b,  6
+	db $2c,  6
+	db $2d,  6
+	db $2e,  6
+	db $2f,  6
+	db $30,  6
+	db $31,  6
+	db $2e, 100
+	db $ff
+; 0x1cafe8
+
+Frameset_1cafe8: ; 1cafe8 (72:6fe8)
+	db $32,  4
+	db $33,  4
+	db $34,  4
+	db $35,  4
+	db $36,  4
+	db $37,  4
+	db $38,  4
+	db $39,  4
+	db $3a,  4
+	db $3b, 20
+	db $3c,  4
+	db $3b,  4
+	db $3c,  4
+	db $3b, 50
+	db $ff
+; 0x1cb005
+
+Frameset_1cb005: ; 1cb005 (72:7005)
+	db $3d,  4
+	db $3e,  6
+	db $3f,  6
+	db $40,  6
+	db $3d,  4
+	db $41,  6
+	db $42,  6
+	db $43,  6
+	db $ff
+; 0x1cb016
+
+Frameset_1cb016: ; 1cb016 (72:7016)
+	db $44, 50
+	db $45,  2
+	db $46,  2
+	db $47,  2
+	db $48,  2
+	db $49,  2
+	db $4a,  2
+	db $4b,  2
+	db $4c,  2
+	db $4d,  2
+	db $4e,  2
+	db $4f,  2
+	db $50,  2
+	db $4f,  2
+	db $4e, 50
+	db $ff
+; 0x1cb035
+
+Frameset_1cb035: ; 1cb035 (72:7035)
+	db $51,  4
+	db $52,  4
+	db $53,  4
+	db $54,  4
+	db $55, 20
+	db $54,  1
+	db $53,  1
+	db $52,  1
+	db $51,  1
+	db $56,  1
+	db $57,  1
+	db $56,  1
+	db $51,  1
+	db $52,  1
+	db $53,  1
+	db $52,  1
+	db $51,  1
+	db $56,  1
+	db $57,  1
+	db $56,  1
+	db $51,  1
+	db $52,  1
+	db $53,  1
+	db $52,  1
+	db $51, 20
+	db $ff
+; 0x1cb068
+
+Frameset_1cb068: ; 1cb068 (72:7068)
+	db $58, 20
+	db $59,  2
+	db $5a,  2
+	db $5b,  2
+	db $5c,  2
+	db $5d,  2
+	db $5e,  2
+	db $5f,  2
+	db $60, 20
+	db $5f,  2
+	db $5e,  2
+	db $5d,  2
+	db $5c,  2
+	db $5b,  2
+	db $5a,  2
+	db $59,  2
+	db $ff
+; 0x1cb089
+
+Frameset_1cb089: ; 1cb089 (72:7089)
+	db $61,  8
+	db $62,  8
+	db $63,  8
+	db $64,  8
+	db $63,  2
+	db $62,  2
+	db $61,  2
+	db $62,  2
+	db $63,  2
+	db $64,  2
+	db $63,  2
+	db $62,  2
+	db $61,  2
+	db $ff
+; 0x1cb0a4
+
+Frameset_1cb0a4: ; 1cb0a4 (72:70a4)
+	db $65,  8
+	db $66,  8
+	db $ff
+; 0x1cb0a9
+
+Frameset_1cb0a9: ; 1cb0a9 (72:70a9)
+	db $67, 20
+	db $6a,  4
+	db $6b,  4
+	db $6c,  4
+	db $6d,  4
+	db $6e,  4
+	db $6d,  4
+	db $6e,  4
+	db $6d,  4
+	db $6e,  4
+	db $6d,  4
+	db $6e, 20
+	db $ff
+; 0x1cb0c2
+
+Frameset_1cb0c2: ; 1cb0c2 (72:70c2)
+	db $68, 20
+	db $6f,  4
+	db $70,  4
+	db $71,  4
+	db $72,  4
+	db $73,  4
+	db $74,  4
+	db $75,  4
+	db $76,  4
+	db $68, 20
+	db $ff
+; 0x1cb0d7
+
+Frameset_1cb0d7: ; 1cb0d7 (72:70d7)
+	db $69,  4
+	db $ff
+; 0x1cb0da
+
+Frameset_1cb0da: ; 1cb0da (72:70da)
+	db $77,  4
+	db $ff
+; 0x1cb0dd
 
 OAM_1cb0dd:: ; 1cb0dd (72:70dd)
 	dw .frame_0
@@ -6074,7 +6349,51 @@ OAM_1cb0dd:: ; 1cb0dd (72:70dd)
 	db $80
 ; 0x1cb285
 
-	INCROM $1cb285, $1cb2d3
+Frameset_1cb285:: ; 1cb285 (72:7285)
+	db $00,  4
+	db $01,  3
+	db $02,  6
+	db $03,  2
+	db $04,  2
+	db $03,  2
+	db $04,  2
+	db $03,  2
+	db $04,  2
+	db $03,  2
+	db $04,  2
+	db $03,  2
+	db $04,  2
+	db $03,  2
+	db $04, 60
+	db $05,  4
+	db $01,  3
+	db $06,  3
+	db $07,  8
+	db $ff
+; 0x1cb2ac
+
+Frameset_1cb2ac:: ; 1cb2ac (72:72ac)
+	db $08,  4
+	db $09,  3
+	db $0a,  6
+	db $0b,  2
+	db $0c,  2
+	db $0b,  2
+	db $0c,  2
+	db $0b,  2
+	db $0c,  2
+	db $0b,  2
+	db $0c,  2
+	db $0b,  2
+	db $0c,  2
+	db $0b,  2
+	db $0c, 60
+	db $0d,  4
+	db $09,  3
+	db $0e,  3
+	db $0f,  8
+	db $ff
+; 0x1cb2d3
 
 OAM_1cb2d3: ; 1cb2d3 (72:72d3)
 	dw .frame_0
@@ -6187,7 +6506,45 @@ OAM_1cb2d3: ; 1cb2d3 (72:72d3)
 	db $80
 ; 0x1cb3b3
 
-	INCROM $1cb3b3, $1cb3e0
+Frameset_1cb3b3: ; 1cb3b3 (72:73b3)
+	db $00, 24
+	db $01,  4
+	db $02,  4
+	db $03,  6
+	db $04,  8
+	db $03,  6
+	db $02,  4
+	db $01,  4
+	db $ff
+; 0x1cb3c4
+
+Frameset_1cb3c4: ; 1cb3c4 (72:73c4)
+	db $05,  8
+	db $06,  6
+	db $07,  4
+	db $08,  2
+	db $07,  4
+	db $09,  6
+	db $ff
+; 0x1cb3d1
+
+Frameset_1cb3d1: ; 1cb3d1 (72:73d1)
+	db $0a, 64
+	db $ff
+; 0x1cb3d4
+
+Frameset_1cb3d4: ; 1cb3d4 (72:73d4)
+	db $0b, 64
+	db $ff
+; 0x1cb3d7
+
+Frameset_1cb3d7: ; 1cb3d7 (72:73d7)
+	db $0c, 12
+	db $0d,  8
+	db $0e, 12
+	db $0f,  8
+	db $ff
+; 0x1cb3e0
 
 OAM_1cb3e0: ; 1cb3e0 (72:73e0)
 	dw .frame_0
@@ -6367,4 +6724,76 @@ OAM_1cb3e0: ; 1cb3e0 (72:73e0)
 	db $80
 ; 0x1cb598
 
-	INCROM $1cb598, $1cb5e4
+Frameset_1cb598: ; 1cb598 (72:7598)
+	db $00,  4
+	db $ff
+; 0x1cb59b
+
+Frameset_1cb59b: ; 1cb59b (72:759b)
+	db $01,  4
+	db $ff
+; 0x1cb59e
+
+Frameset_1cb59e: ; 1cb59e (72:759e)
+	db $02,  4
+	db $ff
+; 0x1cb5a1
+
+Frameset_1cb5a1: ; 1cb5a1 (72:75a1)
+	db $04, 50
+	db $03,  4
+	db $05,  4
+	db $06,  4
+	db $0d,  4
+	db $0e,  4
+	db $0f, 50
+	db $03,  4
+	db $05,  4
+	db $06,  4
+	db $0d,  4
+	db $0e,  4
+	db $ff
+; 0x1cb5ba
+
+	INCROM $1cb5ba, $1cb5c3
+
+Frameset_1cb5c3: ; 1cb5c3 (72:75c3)
+	db $07,  4
+	db $08,  4
+	db $09,  4
+	db $08,  4
+	db $ff
+; 0x1cb5cc
+
+Frameset_1cb5cc: ; 1cb5cc (72:75cc)
+	db $0a,  4
+	db $ff
+; 0x1cb5cf
+
+Frameset_1cb5cf: ; 1cb5cf (72:75cf)
+	db $0a,  2
+	db $0b,  2
+	db $0a,  2
+	db $0c,  2
+	db $ff
+; 0x1cb5d8
+
+Frameset_1cb5d8: ; 1cb5d8 (72:75d8)
+	db $10,  4
+	db $ff
+; 0x1cb5db
+
+Frameset_1cb5db: ; 1cb5db (72:75db)
+	db $11,  4
+	db $ff
+; 0x1cb5de
+
+Frameset_1cb5de: ; 1cb5de (72:75de)
+	db $12,  4
+	db $ff
+; 0x1cb5e1
+
+Frameset_1cb5e1: ; 1cb5e1 (72:75e1)
+	db $13,  4
+	db $ff
+; 0x1cb5e4

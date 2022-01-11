@@ -349,7 +349,25 @@ OAM_1fc31b:: ; 1fc31b (7f:431b)
 	db $80
 ; 0x1fc439
 
-	INCROM $1fc439, $1fc48b
+	INCROM $1fc439, $1fc473
+
+Frameset_1fc473:: ; 1fc473 (7f:4473)
+	db $02,  2
+	db $03,  1
+	db $04,  1
+	db $05,  2
+	db $ff
+; 0x1fc47c
+
+Frameset_1fc47c:: ; 1fc47c (7f:447c)
+	db $02,  2
+	db $01,  1
+	db $00,  1
+	db $09,  2
+	db $ff
+; 0x1fc485
+
+	INCROM $1fc485, $1fc48b
 
 OAM_1fc48b: ; 1fc48b (7f:448b)
 	dw .frame_0

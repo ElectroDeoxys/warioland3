@@ -4055,7 +4055,7 @@ SetState_VampireTransforming: ; 2aa81 (a:6a81)
 	xor a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
-	ld hl, $4950
+	ld hl, Pals_c950
 	call SetWarioPal
 	load_gfx WarioBatGfx
 	call LoadWarioGfx

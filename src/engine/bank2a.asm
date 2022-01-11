@@ -5972,7 +5972,20 @@ OAM_aab5c:: ; aab5c (2a:6b5c)
 	db $80
 ; 0xaaccb
 
-	INCROM $aaccb, $aad1e
+	INCROM $aaccb, $aad0b
+
+Frameset_aad0b: ; aad0b (2a:6d0b)
+	db $0c,  8
+	db $0d,  8
+	db $0e,  8
+	db $0f,  8
+	db $10,  8
+	db $11,  8
+	db $12,  8
+	db $13,  8
+	db $14,  8
+	db $ff
+; 0xaad1e
 
 OAM_aad1e: ; aad1e (2a:6d1e)
 	dw .frame_0

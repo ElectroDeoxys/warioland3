@@ -1109,14 +1109,14 @@ LoadFontTiles: ; 1f08f7 (7c:48f7)
 ; 0x1f0901
 
 LoadGBIncompatibleScreenGfx: ; 1f0901 (7c:4901)
-	ld hl, $6bc2
+	ld hl, GBIncompatibleGfx
 	ld bc, v0Tiles0
 	call Decompress
 	ret
 ; 0x1f090b
 
 LoadGBIncompatibleScreenMap: ; 1f090b (7c:490b)
-	ld hl, $74d6
+	ld hl, BGMap_1f34d6
 	ld bc, v0BGMap0
 	call Decompress
 	ld a, %11100100
@@ -1294,16 +1294,16 @@ HandlePauseMenuInput: ; 1f09bd (7c:49bd)
 	jr z, .rail_1
 	cp (1 << 6) | TRANSFORMATION_VAMPIRE_WARIO
 	jr z, .vampire_1
-	ld bc, $5c50
+	ld bc, Frameset_1f1c50
 	jr .asm_1f0a79
 .owl_1
-	ld bc, $5cf9
+	ld bc, Frameset_1f1cf9
 	jr .asm_1f0a79
 .rail_1
-	ld bc, $5d1b
+	ld bc, Frameset_1f1d1b
 	jr .asm_1f0a79
 .vampire_1
-	ld bc, $5d41
+	ld bc, Frameset_1f1d41
 .asm_1f0a79
 	ld a, b
 	ld [hli], a
@@ -1398,16 +1398,16 @@ HandlePauseMenuInput: ; 1f09bd (7c:49bd)
 	jr z, .rail_2
 	cp (1 << 6) | TRANSFORMATION_VAMPIRE_WARIO
 	jr z, .vampire_2
-	ld bc, $5c69
+	ld bc, Frameset_1f1c69
 	jr .asm_1f0b18
 .owl_2
-	ld bc, $5d0a
+	ld bc, Frameset_1f1d0a
 	jr .asm_1f0b18
 .rail_2
-	ld bc, $5d20
+	ld bc, Frameset_1f1d20
 	jr .asm_1f0b18
 .vampire_2
-	ld bc, $5d4c
+	ld bc, Frameset_1f1d4c
 .asm_1f0b18
 	ld a, b
 	ld [hli], a
@@ -3504,13 +3504,112 @@ OAM_1f156c: ; 1f156c (7c:556c)
 	db $80
 ; 0x1f1c4a
 
-	INCROM $1f1c4a, $1f1d5d
+	INCROM $1f1c4a, $1f1c50
 
-FontGFX: ; 1f1d5d (2c:5d5d)
-INCBIN "gfx/font.2bpp.lz"
-; 0x1f2bc2
+Frameset_1f1c50: ; 1f1c50 (7c:5c50)
+	db $06, 100
+	db $07,  3
+	db $08,  3
+	db $07,  3
+	db $06,  3
+	db $07,  3
+	db $08,  3
+	db $07,  3
+	db $06, 50
+	db $07,  4
+	db $08,  4
+	db $07,  4
+	db $ff
+; 0x1f1c69
 
-	INCROM $1f2bc2, $1f3610
+Frameset_1f1c69: ; 1f1c69 (7c:5c69)
+	db $06,  8
+	db $09,  8
+	db $06,  8
+	db $09,  8
+	db $06, 50
+	db $ff
+; 0x1f1c74
+
+	INCROM $1f1c74, $1f1cf9
+
+Frameset_1f1cf9: ; 1f1cf9 (7c:5cf9)
+	db $27, 17
+	db $28, 20
+	db $29, 20
+	db $28, 16
+	db $27, 15
+	db $28, 18
+	db $29, 18
+	db $28, 14
+	db $ff
+; 0x1f1d0a
+
+Frameset_1f1d0a: ; 1f1d0a (7c:5d0a)
+	db $2a,  4
+	db $2b,  4
+	db $2a,  4
+	db $2b,  4
+	db $2a,  4
+	db $2b,  4
+	db $2a,  4
+	db $2b,  4
+	db $ff
+; 0x1f1d1b
+
+Frameset_1f1d1b: ; 1f1d1b (7c:5d1b)
+	db $2c, 18
+	db $2d, 18
+	db $ff
+; 0x1f1d20
+
+Frameset_1f1d20: ; 1f1d20 (7c:5d20)
+	db $2c,  3
+	db $2e,  3
+	db $2f,  3
+	db $30,  3
+	db $2c,  3
+	db $2e,  3
+	db $2f,  3
+	db $30,  3
+	db $2c,  3
+	db $2e,  3
+	db $2f,  3
+	db $30,  3
+	db $2c,  3
+	db $2e,  3
+	db $2f,  3
+	db $30,  3
+	db $ff
+; 0x1f1d41
+
+Frameset_1f1d41: ; 1f1d41 (7c:5d41)
+	db $31, 30
+	db $32,  4
+	db $31,  4
+	db $32,  4
+	db $31,  4
+	db $ff
+; 0x1f1d4c
+
+Frameset_1f1d4c: ; 1f1d4c (7c:5d4c)
+	db $33,  4
+	db $34,  4
+	db $33,  4
+	db $34,  4
+	db $33,  4
+	db $34,  4
+	db $33,  4
+	db $34,  4
+	db $ff
+; 0x1f1d5d
+
+FontGFX: INCBIN "gfx/font.2bpp.lz"
+
+GBIncompatibleGfx: INCBIN "gfx/gb_incompatible.2bpp.lz"
+BGMap_1f34d6: INCBIN "gfx/bgmaps/map_1f34d6.bin"
+
+	INCROM $1f35e0, $1f3610
 
 Pals_1f3610: ; 1f3610 (2c:7610)
 	rgb  0, 22, 16

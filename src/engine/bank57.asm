@@ -365,4 +365,173 @@ OAM_15e44a: ; 15e44a (57:644a)
 	db $80
 ; 0x15e741
 
-	INCROM $15e741, $15ee8d
+Frameset_15e741: ; 15e741 (57:6741)
+	db $02,  3
+	db $01,  3
+	db $00,  3
+	db $ff
+; 0x15e748
+
+Frameset_15e748: ; 15e748 (57:6748)
+	db $03,  4
+	db $ff
+; 0x15e74b
+
+Frameset_15e74b: ; 15e74b (57:674b)
+	db $04,  5
+	db $05,  5
+	db $06,  5
+	db $05,  5
+	db $04,  5
+	db $05,  5
+	db $06,  5
+	db $05,  5
+	db $04,  2
+	db $05,  2
+	db $06,  2
+	db $05,  2
+	db $04,  2
+	db $05,  2
+	db $06,  2
+	db $05,  2
+	db $04,  2
+	db $05,  2
+	db $06,  2
+	db $05,  2
+	db $ff
+; 0x15e774
+
+Frameset_15e774: ; 15e774 (57:6774)
+	db $07,  3
+	db $08,  3
+	db $09,  3
+	db $0a,  3
+	db $ff
+; 0x15e77d
+
+Frameset_15e77d: ; 15e77d (57:677d)
+	db $0b,  4
+	db $ff
+; 0x15e780
+
+Frameset_15e780: ; 15e780 (57:6780)
+	db $0c,  4
+	db $ff
+; 0x15e783
+
+Frameset_15e783: ; 15e783 (57:6783)
+	db $0e,  3
+	db $0f,  3
+	db $10,  3
+	db $ff
+; 0x15e78a
+
+Frameset_15e78a: ; 15e78a (57:678a)
+	db $11,  9
+	db $12,  8
+	db $13,  7
+	db $14,  7
+	db $ff
+; 0x15e793
+
+Frameset_15e793: ; 15e793 (57:6793)
+	db $0d,  4
+	db $ff
+; 0x15e796
+
+Frameset_15e796: ; 15e796 (57:6796)
+	db $15,  2
+	db $16,  2
+	db $17,  6
+	db $18,  3
+	db $17,  6
+	db $18,  3
+	db $ff
+; 0x15e7a3
+
+Frameset_15e7a3: ; 15e7a3 (57:67a3)
+	db $19,  4
+	db $ff
+; 0x15e7a6
+
+Frameset_15e7a6: ; 15e7a6 (57:67a6)
+	db $19,  1
+	db $1c,  2
+	db $1a,  2
+	db $1b,  2
+	db $1d,  1
+	db $1e,  2
+	db $1f,  2
+	db $20,  2
+	db $ff
+; 0x15e7b7
+
+Frameset_15e7b7: ; 15e7b7 (57:67b7)
+	db $21,  4
+	db $22,  4
+	db $23,  4
+	db $24,  4
+	db $25,  4
+	db $26,  4
+	db $ff
+; 0x15e7c4
+
+Frameset_15e7c4: ; 15e7c4 (57:67c4)
+	db $27,  2
+	db $28,  1
+	db $29,  2
+	db $2a,  1
+	db $2b,  2
+	db $2c,  1
+	db $2d,  2
+	db $2e,  1
+	db $29,  2
+	db $2f,  1
+	db $27,  2
+	db $30,  1
+	db $29,  2
+	db $2e,  1
+	db $2b,  2
+	db $2c,  1
+	db $2d,  1
+	db $2a,  1
+	db $29,  2
+	db $28,  1
+	db $ff
+; 0x15e7ed
+
+Frameset_15e7ed: ; 15e7ed (57:67ed)
+	db $31,  4
+	db $ff
+; 0x15e7f0
+
+Frameset_15e7f0: ; 15e7f0 (57:67f0)
+	db $02,  2
+	db $30,  2
+	db $ff
+; 0x15e7f5
+
+Frameset_15e7f5: ; 15e7f5 (57:67f5)
+	db $0c,  2
+	db $30,  2
+	db $ff
+; 0x15e7fa
+
+Frameset_15e7fa: ; 15e7fa (57:67fa)
+	db $2c,  2
+	db $28,  1
+	db $32,  2
+	db $ff
+; 0x15e801
+
+	INCROM $15e801, $15e80a
+
+Frameset_15e80a: ; 15e80a (57:680a)
+	db $29,  2
+	db $2d,  1
+	db $33,  2
+	db $2d,  1
+	db $ff
+; 0x15e813
+
+	INCROM $15e813, $15ee8d

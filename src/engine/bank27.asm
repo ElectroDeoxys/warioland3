@@ -2196,13 +2196,13 @@ Func_9f0e0: ; 9f0e0 (27:70e0)
 	jr .asm_9f0fd
 
 .framesets
-	dw $5348
-	dw $534b
-	dw $534e
-	dw $5351
-	dw $5354
-	dw $5363
-	dw $5372
+	dw Frameset_bd348
+	dw Frameset_bd34b
+	dw Frameset_bd34e
+	dw Frameset_bd351
+	dw Frameset_bd354
+	dw Frameset_bd363
+	dw Frameset_bd372
 ; 0x9f11e
 
 Func_9f11e: ; 9f11e (27:711e)
@@ -2302,16 +2302,16 @@ Func_9f174: ; 9f174 (27:7174)
 	ret
 
 .framesets
-	dw $55c3
-	dw $55cc
-	dw $55d5
-	dw $55d8
-	dw $55dd
-	dw $55e6
-	dw $5605
-	dw $5608
-	dw $560f
-	dw $5612
+	dw Frameset_bd5c3
+	dw Frameset_bd5cc
+	dw Frameset_bd5d5
+	dw Frameset_bd5d8
+	dw Frameset_bd5dd
+	dw Frameset_bd5e6
+	dw Frameset_bd605
+	dw Frameset_bd608
+	dw Frameset_bd60f
+	dw Frameset_bd612
 ; 0x9f1d8
 
 	INCROM $9f1d8, $9f2a2
@@ -2333,11 +2333,11 @@ Func_9f2a2: ; 9f2a2 (27:72a2)
 	jp Func_9f0bc
 
 .framesets
-	dw $59ec
-	dw $59f5
-	dw $59f8
-	dw $59fb
-	dw $59fe
+	dw Frameset_bd9ec
+	dw Frameset_bd9f5
+	dw Frameset_bd9f8
+	dw Frameset_bd9fb
+	dw Frameset_bd9fe
 ; 0x9f2cd
 
 	INCROM $9f2cd, $9f2f3
@@ -2364,9 +2364,9 @@ Func_9f2f3: ; 9f2f3 (27:72f3)
 	ret
 
 .framesets
-	dw $51a7
-	dw $51bc
-	dw $51bf
+	dw Frameset_691a7
+	dw Frameset_691bc
+	dw Frameset_691bf
 ; 0x9f323
 
 	INCROM $9f323, $9f38d
@@ -2398,12 +2398,12 @@ Func_9f38d: ; 9f38d (27:738d)
 	jr .asm_9f3b2
 
 .framesets
-	dw $5dcc
-	dw $5dc3
-	dw $5dc6
-	dw $5da9
-	dw $5dc0
-	dw $5dc9
+	dw Frameset_bddcc
+	dw Frameset_bddc3
+	dw Frameset_bddc6
+	dw Frameset_bdda9
+	dw Frameset_bddc0
+	dw Frameset_bddc9
 ; 0x9f3cd
 
 	INCROM $9f3cd, $9f3ee
@@ -2425,9 +2425,9 @@ Func_9f3ee: ; 9f3ee (27:73ee)
 	jp Func_9f0bc
 
 .framesets
-	dw $5f92
-	dw $5f95
-	dw $5fa0
+	dw Frameset_bdf92
+	dw Frameset_bdf95
+	dw Frameset_bdfa0
 
 .Func_9f414
 	ld a, [wOWAnimationFinished]
@@ -2463,10 +2463,10 @@ Func_9f423: ; 9f423 (27:7423)
 	jr .asm_9f440
 
 .framesets
-	dw $61b0
-	dw $61c3
-	dw $61fc
-	dw $6203
+	dw Frameset_be1b0
+	dw Frameset_be1c3
+	dw Frameset_be1fc
+	dw Frameset_be203
 
 .Func_9f45a
 	ld a, [wSceneObj3Frame]
@@ -2542,10 +2542,10 @@ Func_9f5a0: ; 9f5a0 (27:75a0)
 	jr .asm_9f5cb
 
 .framesets
-	dw $68de
-	dw $68e1
-	dw $68ea
-	dw $68ed
+	dw Frameset_be8de
+	dw Frameset_be8e1
+	dw Frameset_be8ea
+	dw Frameset_be8ed
 
 .Func_9f5e5
 	ld a, [wSceneObj2Frame]
@@ -2604,10 +2604,10 @@ Func_9f638: ; 9f638 (27:7638)
 	jr .asm_9f66d
 
 .framesets
-	dw $6acc
-	dw $6acf
-	dw $6ae4
-	dw $6aed
+	dw Frameset_beacc
+	dw Frameset_beacf
+	dw Frameset_beae4
+	dw Frameset_beaed
 
 .asm_9f684
 	call .Func_9f689
@@ -2647,9 +2647,9 @@ Func_9f73b: ; 9f73b (27:773b)
 	jp Func_9f0bc
 
 .framesets
-	dw $6d39
-	dw $6d3c
-	dw $6d3f
+	dw Frameset_bed39
+	dw Frameset_bed3c
+	dw Frameset_bed3f
 ; 0x9f75c
 
 	INCROM $9f75c, $9f7bb
@@ -2669,9 +2669,9 @@ Func_9f7bb: ; 9f7bb (27:77bb)
 	jp Func_9f0bc
 
 .framesets
-	dw $6fbe
-	dw $6fc1
-	dw $6fc4
+	dw Frameset_befbe
+	dw Frameset_befc1
+	dw Frameset_befc4
 ; 0x9f7dc
 
 Func_9f7dc: ; 9f7dc (27:77dc)
@@ -2697,9 +2697,9 @@ Func_9f7dc: ; 9f7dc (27:77dc)
 	jr .asm_9f7f3
 
 .framesets
-	dw $7100
-	dw $7103
-	dw $7110
+	dw Frameset_bf100
+	dw Frameset_bf103
+	dw Frameset_bf110
 
 .asm_9f808
 	call .Func_9f80d
@@ -2733,8 +2733,8 @@ Func_9f821: ; 9f821 (27:7821)
 	jp Func_9f0c1
 
 .framesets
-	dw $5c0a
-	dw $5c13
+	dw Frameset_69c0a
+	dw Frameset_69c13
 
 .asm_9f83e
 	call .Func_9f843
@@ -2781,11 +2781,11 @@ Func_9f86a: ; 9f86a (27:786a)
 	jr .asm_9f887
 
 .framesets
-	dw $728c
-	dw $728f
-	dw $7298
-	dw $72a5
-	dw $72a8
+	dw Frameset_bf28c
+	dw Frameset_bf28f
+	dw Frameset_bf298
+	dw Frameset_bf2a5
+	dw Frameset_bf2a8
 
 .asm_9f8a3
 	call .Func_9f8a8
@@ -2861,9 +2861,9 @@ Func_9f8da: ; 9f8da (27:78da)
 	jr .asm_9f8f3
 
 .framesets
-	dw $743b
-	dw $745d
-	dw $743e
+	dw Frameset_bf43b
+	dw Frameset_bf45d
+	dw Frameset_bf43e
 ; 0x9f91f
 
 Func_9f91f: ; 9f91f (27:791f)
@@ -2895,8 +2895,8 @@ Func_9f91f: ; 9f91f (27:791f)
 	jr .asm_9f936
 
 .framesets
-	dw $75e0
-	dw $75e0
+	dw Frameset_bf5e0
+	dw Frameset_bf5e0
 
 .Func_9f953
 	ld a, [wSceneObj2Frame]
@@ -2957,10 +2957,10 @@ Func_9f991: ; 9f991 (27:7991)
 	jr .asm_9f9aa
 
 .framesets
-	dw $765d
-	dw $7660
-	dw $7665
-	dw $7668
+	dw Frameset_bf65d
+	dw Frameset_bf660
+	dw Frameset_bf665
+	dw Frameset_bf668
 ; 0x9f9c1
 
 Func_9f9c1: ; 9f9c1 (27:79c1)
@@ -2988,9 +2988,9 @@ Func_9f9c1: ; 9f9c1 (27:79c1)
 	jr .asm_9f9e0
 
 .framesets
-	dw $76df
-	dw $76e2
-	dw $76ed
+	dw Frameset_bf6df
+	dw Frameset_bf6e2
+	dw Frameset_bf6ed
 ; 0x9f9f5
 
 Func_9f9f5: ; 9f9f5 (27:79f5)
@@ -3010,8 +3010,8 @@ Func_9f9f5: ; 9f9f5 (27:79f5)
 	jp Func_9f0cb
 
 .framesets
-	dw $6052
-	dw $605f
+	dw Frameset_6a052
+	dw Frameset_6a05f
 
 .asm_9fa16
 	call .Func_9fa1b
@@ -3077,11 +3077,11 @@ Func_9fa48: ; 9fa48 (27:7a48)
 	jp Func_9f0bc
 
 .framesets
-	dw $7826
-	dw $7829
-	dw $7832
-	dw $7835
-	dw $783e
+	dw Frameset_bf826
+	dw Frameset_bf829
+	dw Frameset_bf832
+	dw Frameset_bf835
+	dw Frameset_bf83e
 
 .asm_9fa9b
 	call .Func_9faa0

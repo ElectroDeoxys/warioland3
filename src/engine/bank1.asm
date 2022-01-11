@@ -3453,4 +3453,12 @@ Frameset_76b5: ; 76b5 (01:76b5)
 	db $ff
 ; 0x76ca
 
-	INCROM $76ca, $76d6
+Frameset_76ca: ; 76ca (01:76ca)
+	db $01,  4
+	db $02,  4
+	db $03,  4
+	db $04,  4
+	db $03,  4
+	db $02,  4
+	db $ff
+; 0x76d7

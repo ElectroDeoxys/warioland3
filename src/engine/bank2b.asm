@@ -38,7 +38,7 @@ Func_ac042: ; ac042 (2b:4042)
 	INCROM $ac047, $ac056
 
 Func_ac056: ; ac056 (2b:4056)
-	ld de, $76ca
+	ld de, Frameset_76ca
 	call Func_ac02c
 	ld de, OAM_75c3
 	ld b, BANK(OAM_75c3)
@@ -131,39 +131,39 @@ Func_ac409: ; ac409 (2b:4409)
 	ret
 
 .Func_ac451
-	ld de, $6741
+	ld de, Frameset_15e741
 	jr .Func_ac43b
 
 .Func_ac456
-	ld de, $6748
+	ld de, Frameset_15e748
 	jr .Func_ac43b
 
 .Func_ac45b
-	ld de, $674b
+	ld de, Frameset_15e74b
 	jr .Func_ac43b
 
 .Func_ac460
-	ld de, $6774
+	ld de, Frameset_15e774
 	jr .Func_ac43b
 
 .Func_ac465
-	ld de, $677d
+	ld de, Frameset_15e77d
 	jr .Func_ac43b
 
 .Func_ac46a
-	ld de, $6780
+	ld de, Frameset_15e780
 	jr .Func_ac43b
 
 .Func_ac46f
-	ld de, $6793
+	ld de, Frameset_15e793
 	jr .Func_ac43b
 
 .Func_ac474
-	ld de, $67a3
+	ld de, Frameset_15e7a3
 	jr .Func_ac43b
 
 .Func_ac479
-	ld de, $67a6
+	ld de, Frameset_15e7a6
 	call .Func_ac43b
 	ld a, [wOWAnimationFinished]
 	cp $ff
@@ -172,11 +172,11 @@ Func_ac409: ; ac409 (2b:4409)
 	ret
 
 .Func_ac48e
-	ld de, $67b7
+	ld de, Frameset_15e7b7
 	jr .Func_ac43b
 
 .Func_ac493
-	ld de, $67c4
+	ld de, Frameset_15e7c4
 	call .Func_ac43b
 	ld a, [wOWAnimationFinished]
 	cp $ff
@@ -185,35 +185,35 @@ Func_ac409: ; ac409 (2b:4409)
 	ret
 
 .Func_ac4a8
-	ld de, $67ed
+	ld de, Frameset_15e7ed
 	jr .Func_ac43b
 
 .Func_ac4ad
-	ld de, $67b7
+	ld de, Frameset_15e7b7
 	jr .Func_ac444
 
 .Func_ac4b2
-	ld de, $6783
+	ld de, Frameset_15e783
 	jr .Func_ac43b
 
 .Func_ac4b7
-	ld de, $678a
+	ld de, Frameset_15e78a
 	jr .Func_ac444
 
 .Func_ac4bc
-	ld de, $6796
+	ld de, Frameset_15e796
 	jr .Func_ac444
 
 .Func_ac4c1
-	ld de, $67f0
+	ld de, Frameset_15e7f0
 	jp .Func_ac43b
 
 .Func_ac4c7
-	ld de, $67f5
+	ld de, Frameset_15e7f5
 	jp .Func_ac43b
 
 .Func_ac4cd
-	ld de, $6d0b
+	ld de, Frameset_aad0b
 	call Func_ac037
 	ld e, $00
 	call Func_ac064
@@ -223,7 +223,7 @@ Func_ac409: ; ac409 (2b:4409)
 	jp AddOWSpriteWithScroll
 
 .Func_ac4e3
-	ld de, $67fa
+	ld de, Frameset_15e7fa
 	call Func_ac000
 	ld e, $16
 	jp .Func_ac449
@@ -233,7 +233,7 @@ Func_ac409: ; ac409 (2b:4409)
 	jp .Func_ac43b
 
 .Func_ac4f4
-	ld de, $680a
+	ld de, Frameset_15e80a
 	jp .Func_ac43b
 ; 0xac4fa
 
@@ -354,40 +354,42 @@ Func_ac547: ; ac547 (2b:4547)
 
 .Func_ac5c6
 	ld de, $4d18
-	jr .asm_ac5f8
+	jr .UpdateAnimation
 
 .Func_ac5cb
 	ld de, $4d15
-	jr .asm_ac5f8
+	jr .UpdateAnimation
 
 .Func_ac5d0
 	ld de, $4cbe
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $0c
 	jr .asm_ac602
 
 .Func_ac5da
 	ld de, $4cc5
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $0d
 	jr .asm_ac602
 
 .Func_ac5e4
 	ld de, $4d0b
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $02
 	jr .asm_ac602
 
 .Func_ac5ee
 	ld de, $4d10
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $02
 	jr .asm_ac602
-.asm_ac5f8
+
+.UpdateAnimation
 	ld a, [w2d14b]
 	ld b, a
 	ld hl, w2d144
 	jp UpdateOWAnimation
+
 .asm_ac602
 	ld a, [wOWAnimationFinished]
 	cp $ff
@@ -398,50 +400,50 @@ Func_ac547: ; ac547 (2b:4547)
 
 .Func_ac60f
 	ld de, $49b4
-	call .asm_ac5f8
+	call .UpdateAnimation
 	jp Func_ac4fa
 
 .Func_ac618
 	ld de, $49c5
-	call .asm_ac5f8
+	call .UpdateAnimation
 	jp Func_ac4fa
 
 .Func_ac621
 	ld de, $49fe
-	call .asm_ac5f8
+	call .UpdateAnimation
 	jp Func_ac4fa
 
 .Func_ac62a
 	ld de, $4a20
-	jr .asm_ac5f8
+	jr .UpdateAnimation
 
 .Func_ac62f
 	ld de, $63ec
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $0a
 	jp .asm_ac602
 
 .Func_ac63a
 	ld de, $4252
-	jr .asm_ac5f8
+	jr .UpdateAnimation
 
 .Func_ac63f
 	ld de, $425f
-	jr .asm_ac5f8
+	jr .UpdateAnimation
 
 .Func_ac644
 	ld de, $4de4
-	jr .asm_ac5f8
+	jr .UpdateAnimation
 
 .Func_ac649
 	ld de, $4de4
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $02
 	jp .asm_ac602
 
 .Func_ac654
 	ld de, $66a5
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $11
 	call .asm_ac602
 .asm_ac65f
@@ -479,55 +481,55 @@ Func_ac547: ; ac547 (2b:4547)
 
 .Func_ac696
 	ld de, $66c2
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $12
 	jp .asm_ac602
 
 .Func_ac6a1
 	ld de, $66c7
-	jp .asm_ac5f8
+	jp .UpdateAnimation
 
 .Func_ac6a7
 	ld de, $66a5
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $38
 	call .asm_ac602
 	jr .asm_ac65f
 
 .Func_ac6b4
 	ld de, $66ca
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $39
 	call .asm_ac602
 	jr .asm_ac65f
 
 .Func_ac6c1
 	ld de, $68ec
-	jp .asm_ac5f8
+	jp .UpdateAnimation
 
 .Func_ac6c7
 	ld de, $68f5
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $19
 	jp .asm_ac602
 
 .Func_ac6d2
 	ld de, $6902
-	jp .asm_ac5f8
+	jp .UpdateAnimation
 
 .Func_ac6d8
 	ld de, $6902
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $19
 	jp .asm_ac602
 
 .Func_ac6e3
 	ld de, $690d
-	jp .asm_ac5f8
+	jp .UpdateAnimation
 
 .Func_ac6e9
 	ld de, $6913
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $0d
 	call .asm_ac602
 	ld a, [w2d146]
@@ -574,43 +576,43 @@ Func_ac547: ; ac547 (2b:4547)
 
 .Func_ac73c
 	ld de, Func_ae924
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $1c
 	jp .asm_ac602
 
 .Func_ac747
 	ld de, $6931
-	jp .asm_ac5f8
+	jp .UpdateAnimation
 
 .Func_ac74d
 	ld de, $6b27
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $1f
 	jp .asm_ac602
 
 .Func_ac758
 	ld de, $6b32
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $20
 	jp .asm_ac602
 
 .Func_ac763
 	ld de, $6b3f
-	jp .asm_ac5f8
+	jp .UpdateAnimation
 
 .Func_ac769
 	ld de, $6b42
-	jp .asm_ac5f8
+	jp .UpdateAnimation
 
 .Func_ac76f
 	ld de, $6b45
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $0a
 	jp .asm_ac602
 
 .Func_ac77a
 	ld de, $6ccb
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld a, [wOWAnimationFinished]
 	ld [w2d14e], a
 	cp $ff
@@ -620,21 +622,21 @@ Func_ac547: ; ac547 (2b:4547)
 
 .Func_ac792
 	ld de, $6ce2
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $25
 	jp .asm_ac602
 
 .Func_ac79d
 	ld de, $6cf7
-	jp .asm_ac5f8
+	jp .UpdateAnimation
 
 .Func_ac7a3
 	ld de, $6cfa
-	jp .asm_ac5f8
+	jp .UpdateAnimation
 
 .Func_ac7a9
 	ld de, $703c
-	call .asm_ac5f8
+	call .UpdateAnimation
 	call .Func_ac7b7
 	ld b, $02
 	jp .asm_ac602
@@ -653,25 +655,25 @@ Func_ac547: ; ac547 (2b:4547)
 
 .Func_ac7d0
 	ld de, $706b
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $02
 	jp .asm_ac602
 
 .Func_ac7db
 	ld de, $708c
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $2d
 	jp .asm_ac602
 
 .Func_ac7e6
 	ld de, $7098
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $02
 	jp .asm_ac602
 
 .Func_ac7f1
 	ld de, $709d
-	call .asm_ac5f8
+	call .UpdateAnimation
 	call .Func_ac7ff
 	ld b, $02
 	jp .asm_ac602
@@ -685,92 +687,92 @@ Func_ac547: ; ac547 (2b:4547)
 
 .Func_ac80e
 	ld de, $709d
-	jp .asm_ac5f8
+	jp .UpdateAnimation
 
 .Func_ac814
 	ld de, $70ac
-	jp .asm_ac5f8
+	jp .UpdateAnimation
 
 .Func_ac81a
 	ld de, $714d
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $2e
 	jp .asm_ac602
 
 .Func_ac825
 	ld de, $7160
-	jp .asm_ac5f8
+	jp .UpdateAnimation
 
 .Func_ac82b
 	ld de, $7163
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $29
 	jp .asm_ac602
 
 .Func_ac836
 	ld de, $4439
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $02
 	jp .asm_ac602
 
 .Func_ac841
 	ld de, $4446
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $02
 	jp .asm_ac602
 
 .Func_ac84c
 	ld de, $4453
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $0d
 	jp .asm_ac602
 
 .Func_ac857
 	ld de, $445a
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $0c
 	jp .asm_ac602
 
 .Func_ac862
 	ld de, $4461
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $01
 	jp .asm_ac602
 
 .Func_ac86d
 	ld de, $446a
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $01
 	jp .asm_ac602
 
 .Func_ac878
 	ld de, $4473
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $0c
 	jp .asm_ac602
 
 .Func_ac883
 	ld de, $447c
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $0d
 	jp .asm_ac602
 
 .Func_ac88e
 	ld de, $4485
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $0d
 	jp .asm_ac602
 
 .Func_ac899
 	ld de, $4488
-	call .asm_ac5f8
+	call .UpdateAnimation
 	ld b, $0c
 	jp .asm_ac602
 
 .Func_ac8a4
 	ld de, $6b5a
 .asm_ac8a7
-	call .asm_ac5f8
+	call .UpdateAnimation
 	jp Func_ac515
 
 .Func_ac8ad
@@ -779,7 +781,7 @@ Func_ac547: ; ac547 (2b:4547)
 
 .Func_ac8b2
 	ld de, $4316
-	jp .asm_ac5f8
+	jp .UpdateAnimation
 ; 0xac8b8
 
 	INCROM $ac8b8, $ac8d4

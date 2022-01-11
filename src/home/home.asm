@@ -4861,34 +4861,65 @@ Func_2cc3:: ; 2cc3 (0:2cc3)
 	dw OAM_1fc31b
 
 .framesets
-	dw $425f
-	dw $49c5
-	dw $51fd
-	dw $2da4
-	dw $2da7
-	dw $7285
-	dw $4d1b
-	dw $4d5f
-	dw $2db0
-	dw $2db5
-	dw $4cf6
-	dw $447c
+	dw Frameset_1425f
+	dw Frameset_149c5
+	dw Frameset_151fd
+	dw Frameset_2da4
+	dw Frameset_2da7
+	dw Frameset_1cb285
+	dw Frameset_d4d1b
+	dw Frameset_d4d5f
+	dw Frameset_2db0
+	dw Frameset_2db5
+	dw Frameset_14cf6
+	dw Frameset_1fc47c
 
-	dw $4252
-	dw $49b4
-	dw $51e4
-	dw $2daa
-	dw $2dad
-	dw $72ac
-	dw $4d1b
-	dw $4d5f
-	dw $2db0
-	dw $2db5
-	dw $4cf6
-	dw $4473
+	dw Frameset_14252
+	dw Frameset_149b4
+	dw Frameset_151e4
+	dw Frameset_2daa
+	dw Frameset_2dad
+	dw Frameset_1cb2ac
+	dw Frameset_d4d1b
+	dw Frameset_d4d5f
+	dw Frameset_2db0
+	dw Frameset_2db5
+	dw Frameset_14cf6
+	dw Frameset_1fc473
 ; 0x2da4
 
-	INCROM $2da4, $3000
+Frameset_2da4: ; 2da4 (00:2da4)
+	db $08,  1
+	db $ff
+; 0x2da7
+
+Frameset_2da7: ; 2da7 (00:2da7)
+	db $09, 15
+	db $ff
+; 0x2daa
+
+Frameset_2daa: ; 2daa (00:2daa)
+	db $00,  1
+	db $ff
+; 0x2dad
+
+Frameset_2dad: ; 2dad (00:2dad)
+	db $01, 15
+	db $ff
+; 0x2db0
+
+Frameset_2db0: ; 2db0 (00:2db0)
+	db $00, 15
+	db $01, 15
+	db $ff
+; 0x2db5
+
+Frameset_2db5: ; 2db5 (00:2db5)
+	db $09,  8
+	db $ff
+; 0x2db8
+
+	INCROM $2db8, $3000
 
 ; given the obj struct in hl
 ; update its sprite with its current position

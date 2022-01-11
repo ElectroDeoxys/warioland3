@@ -243,7 +243,7 @@ Frameset_14249: ; 14249 (5:4249)
 	db $13,  2
 	db $ff
 
-Frameset_14252: ; 14252 (5:4252)
+Frameset_14252:: ; 14252 (5:4252)
 	db $00, 60
 	db $0e, 20
 	db $0f, 10
@@ -252,7 +252,7 @@ Frameset_14252: ; 14252 (5:4252)
 	db $0e, 60
 	db $ff
 
-Frameset_1425f: ; 1425f (5:425f)
+Frameset_1425f:: ; 1425f (5:425f)
 	db $04, 60
 	db $10, 20
 	db $11, 10
@@ -939,7 +939,7 @@ OAM_1426c:: ; 1426c (05:426c)
 	db $80
 ; 0x149b4
 
-Frameset_149b4: ; 149b4 (5:49b4)
+Frameset_149b4:: ; 149b4 (5:49b4)
 	db $00,  3
 	db $01,  3
 	db $02,  3
@@ -950,7 +950,7 @@ Frameset_149b4: ; 149b4 (5:49b4)
 	db $03,  3
 	db $ff
 
-Frameset_149c5: ; 149c5 (5:49c5)
+Frameset_149c5:: ; 149c5 (5:49c5)
 	db $04,  3
 	db $05,  3
 	db $06,  3
@@ -1357,7 +1357,7 @@ Frameset_14ce1: ; 14ce1 (5:4ce1)
 	db $00,  1
 	db $ff
 
-Frameset_14cf6: ; 14cf6 (5:4cf6)
+Frameset_14cf6:: ; 14cf6 (5:4cf6)
 	db $0a,  2
 	db $0b,  2
 	db $0c,  4
@@ -1812,7 +1812,7 @@ OAM_14d1b:: ; 14d1b (05:4d1b)
 	db $80
 ; 0x151e4
 
-Frameset_151e4: ; 151e4 (5:51e4)
+Frameset_151e4:: ; 151e4 (5:51e4)
 	db $00,  1
 	db $01,  1
 	db $02,  1
@@ -1827,7 +1827,7 @@ Frameset_151e4: ; 151e4 (5:51e4)
 	db $07,  1
 	db $ff
 
-Frameset_151fd: ; 151fd (5:51fd)
+Frameset_151fd:: ; 151fd (5:51fd)
 	db $08,  1
 	db $09,  2
 	db $0a,  1
