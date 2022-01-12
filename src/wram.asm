@@ -362,10 +362,12 @@ wPendingDMALength:: ; c1a6
 wAnimationHasFinished:: ; c1a8
 	ds $1
 
-wc1a9:: ; c1a9
+wFloorTransitionTimer:: ; c1a9
 	ds $1
 
-wc1aa:: ; c1aa
+; bit 2 set = transitioning downwards
+; bit 3 set = transitioning upwards
+wFloorTransitionDir:: ; c1aa
 	ds $1
 
 wc1ab:: ; c1ab
@@ -639,7 +641,9 @@ wca76:: ; ca76
 wJumpingUpwards:: ; ca77
 	ds $1
 
-wca78:: ; ca78
+; each y section is divided in 20-cell high slices
+; this stores the floor number of the current position
+wFloor:: ; ca78
 	ds $1
 
 ; palette pointer
@@ -875,9 +879,7 @@ wcce7:: ; cce7
 wcce8:: ; cce8
 	ds $1
 
-; each y section is divided in 20-cell high slices
-; this stores the floor number of the current position
-wFloorNum:: ; cce9
+wFloorSRAMBank:: ; cce9
 	ds $1
 
 ; the world is divided in a grid,
@@ -2357,7 +2359,14 @@ w3d501:: ; d501
 wDPadRepeatCounter:: ; d502
 	ds $1
 
-	ds $4
+w3d503:: ; d503
+	ds $1
+
+w3d504:: ; d504
+	ds $2
+
+w3d506:: ; d506
+	ds $1
 
 w3d507:: ; d507
 	ds $2

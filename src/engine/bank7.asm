@@ -588,7 +588,7 @@ DoGroundShake: ; 1c5fd (7:45fd)
 	ld a, TRUE
 	ld [wIsWarioGroundShaking], a
 .asm_1c60d
-	ld a, [wc1aa]
+	ld a, [wFloorTransitionDir]
 	and a
 	jr nz, .asm_1c61b
 	play_sfx SFX_002
@@ -2680,7 +2680,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 	jp Func_14de
 .asm_1dba6
 	call Func_14f6
-	ld a, [wc1aa]
+	ld a, [wFloorTransitionDir]
 	and a
 	jr nz, .asm_1dbb7
 	play_sfx SFX_LAND
@@ -2708,7 +2708,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 	ld a, TRUE
 	ld [wIsWarioGroundShaking], a
 .asm_1dbe3
-	ld a, [wc1aa]
+	ld a, [wFloorTransitionDir]
 	and a
 	jr nz, .asm_1dbf1
 	play_sfx SFX_002

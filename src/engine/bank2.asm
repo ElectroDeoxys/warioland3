@@ -6,7 +6,7 @@ _LevelStateTable: ; 8000 (2:4000)
 	dw Func_8024
 	dw SlowFadeFromWhite
 	dw Func_80aa
-	dw Func_928
+	dw DoorTransition
 	dw FastFadeToWhite
 	dw Func_846e
 	dw Func_861c
@@ -93,14 +93,12 @@ Func_80aa: ; 80aa (2:40aa)
 	jp z, .asm_8331
 	cp $00
 	jp z, .asm_83d1
-	ld a, [wc1aa]
+	ld a, [wFloorTransitionDir]
 	and a
 	jr nz, .asm_80e7
-
 	ld a, $01
 	ld [wc0da], a
 	farcall Func_1c000
-
 .asm_80e7
 	ld a, [wc0ba]
 	cp $3c
@@ -171,8 +169,8 @@ Func_80aa: ; 80aa (2:40aa)
 
 	ldh [rSVBK], a
 	call ClearVirtualOAM
-	ld a, [wc1aa]
-	and $0c
+	ld a, [wFloorTransitionDir]
+	and FLOOR_TRANSITION_DOWN | FLOOR_TRANSITION_UP
 	jr z, .asm_8215
 	ld a, [wIsDMATransferPending]
 	and a
@@ -181,19 +179,19 @@ Func_80aa: ; 80aa (2:40aa)
 	ld [wc0c2], a
 	ld a, [wWarioScreenYPos]
 	ld [wca5e], a
-	ld a, [wc1aa]
-	bit 3, a
+	ld a, [wFloorTransitionDir]
+	bit FLOOR_TRANSITION_UP_F, a
 	jr nz, .asm_81e4
 	ld b, $04
 	ld a, [wc0c2]
 	sub b
 	ld [wc0c2], a
-	ld a, [wc1a9]
+	ld a, [wFloorTransitionTimer]
 	sub b
-	ld [wc1a9], a
+	ld [wFloorTransitionTimer], a
 	jr nz, .asm_8209
-	ld hl, wc1aa
-	res 2, [hl]
+	ld hl, wFloorTransitionDir
+	res FLOOR_TRANSITION_DOWN_F, [hl]
 	xor a ; FALSE
 	ld [wIsFloorTransition], a
 	jr .asm_8209
@@ -202,18 +200,18 @@ Func_80aa: ; 80aa (2:40aa)
 	ld a, [wc0c2]
 	add b
 	ld [wc0c2], a
-	ld a, [wc1a9]
+	ld a, [wFloorTransitionTimer]
 	sub b
-	ld [wc1a9], a
+	ld [wFloorTransitionTimer], a
 	jr z, .asm_8200
 	ld a, [wc0bd]
 	dec a
 	jr nz, .asm_8209
 	xor a
-	ld [wc1a9], a
+	ld [wFloorTransitionTimer], a
 .asm_8200
-	ld hl, wc1aa
-	res 3, [hl]
+	ld hl, wFloorTransitionDir
+	res FLOOR_TRANSITION_UP_F, [hl]
 	xor a ; FALSE
 	ld [wIsFloorTransition], a
 .asm_8209
@@ -332,7 +330,7 @@ Func_80aa: ; 80aa (2:40aa)
 
 .asm_82d8
 	call Func_bd3c
-	ld a, [wc1aa]
+	ld a, [wFloorTransitionDir]
 	and a
 	ret nz
 	ld a, [wc0d7]
@@ -536,8 +534,8 @@ Func_846e: ; 846e (2:446e)
 	call Func_8ec2
 
 	xor a
-	ld [wc1aa], a
-	ld [wc1a9], a
+	ld [wFloorTransitionDir], a
+	ld [wFloorTransitionTimer], a
 	ld [wc0c2], a
 	ld [wc0c3], a
 	ld [wc0be], a
@@ -692,14 +690,14 @@ Func_867f: ; 867f (2:467f)
 	ld a, [wcedb]
 	inc a
 .asm_86b5
-	ld [wFloorNum], a
+	ld [wFloorSRAMBank], a
 	ld a, [wcedd]
 	ld l, a
 	ld [wXCell], a
 	jr .asm_8712
 .asm_86c1
 	ld a, [wcedb]
-	ld [wFloorNum], a
+	ld [wFloorSRAMBank], a
 	ld a, [wcedc]
 	ld h, a
 	ld [wYCell], a
@@ -710,7 +708,7 @@ Func_867f: ; 867f (2:467f)
 	jr .asm_8712
 .asm_86d8
 	ld a, [wcedb]
-	ld [wFloorNum], a
+	ld [wFloorSRAMBank], a
 	ld a, [wcedd]
 	dec a
 	ld l, a
@@ -733,7 +731,7 @@ Func_867f: ; 867f (2:467f)
 	ld a, [wcedb]
 	dec a
 .asm_8708
-	ld [wFloorNum], a
+	ld [wFloorSRAMBank], a
 	ld a, [wcedd]
 	ld l, a
 	ld [wXCell], a
@@ -774,8 +772,8 @@ Func_8747: ; 8747 (2:4747)
 	xor a
 	ld [wLevelEndScreen], a
 	ld [wNumMusicalCoins], a
-	ld [wc1aa], a
-	ld [wc1a9], a
+	ld [wFloorTransitionDir], a
+	ld [wFloorTransitionTimer], a
 	ld [wc0c2], a
 	ld [wc0c3], a
 	ld [wc0be], a
@@ -1600,8 +1598,8 @@ Func_8d69: ; 8d69 (2:4d69)
 	add $40
 	ld [wce69], a
 	ld hl, wc0a3
-	call Func_bdb
-	ld a, [wFloorNum]
+	call GetCell
+	ld a, [wFloorSRAMBank]
 	sramswitch
 	ld a, [wc0a6]
 	and $08
@@ -1611,7 +1609,7 @@ Func_8d69: ; 8d69 (2:4d69)
 	farcall Func_21f51
 	pop hl
 
-	ld a, [wFloorNum]
+	ld a, [wFloorSRAMBank]
 	sramswitch
 	farcall Func_22012
 	jr .asm_8dfd
@@ -1621,7 +1619,7 @@ Func_8d69: ; 8d69 (2:4d69)
 	farcall Func_220fc
 	pop hl
 
-	ld a, [wFloorNum]
+	ld a, [wFloorSRAMBank]
 	sramswitch
 	farcall Func_221bb
 .asm_8dfd
@@ -2326,9 +2324,9 @@ Func_9085: ; 9085 (2:5085)
 	add $32
 	ld [wce69], a
 	ld hl, wc0a3
-	call Func_bdb
+	call GetCell
 
-	ld a, [wFloorNum]
+	ld a, [wFloorSRAMBank]
 	sramswitch
 	ld a, [wc0a4]
 	and $08
@@ -2336,7 +2334,7 @@ Func_9085: ; 9085 (2:5085)
 	push hl
 	call Func_9254
 	pop hl
-	ld a, [wFloorNum]
+	ld a, [wFloorSRAMBank]
 	sramswitch
 	call Func_9605
 	jr .asm_924b
@@ -2345,7 +2343,7 @@ Func_9085: ; 9085 (2:5085)
 	push hl
 	call Func_99ca
 	pop hl
-	ld a, [wFloorNum]
+	ld a, [wFloorSRAMBank]
 	sramswitch
 	call Func_9d4c
 .asm_924b
@@ -5018,8 +5016,8 @@ Func_a0e2: ; a0e2 (2:60e2)
 	add $2e
 	ld [wce69], a
 	ld hl, wc0a3
-	call Func_bdb
-	ld a, [wFloorNum]
+	call GetCell
+	ld a, [wFloorSRAMBank]
 	sramswitch
 	ld a, [wc0a6]
 	and $08
@@ -5027,7 +5025,7 @@ Func_a0e2: ; a0e2 (2:60e2)
 	push hl
 	call Func_a2aa
 	pop hl
-	ld a, [wFloorNum]
+	ld a, [wFloorSRAMBank]
 	sramswitch
 	call Func_a79e
 	jr .asm_a2a1
@@ -5035,7 +5033,7 @@ Func_a0e2: ; a0e2 (2:60e2)
 	push hl
 	call Func_aca6
 	pop hl
-	ld a, [wFloorNum]
+	ld a, [wFloorSRAMBank]
 	sramswitch
 	call Func_b182
 .asm_a2a1
@@ -8061,7 +8059,7 @@ VBlank_b672: ; b672 (2:7672)
 	ret
 
 .func
-	jp Func_c4c
+	jp DoPendingDMATransfer
 .func_end
 ; 0xb681
 
@@ -8710,7 +8708,7 @@ Func_bb85: ; bb85 (2:7b85)
 .asm_bba8
 	ld h, a
 	ld a, b
-	ld [wFloorNum], a
+	ld [wFloorSRAMBank], a
 	sramswitch
 	push hl
 	call Func_c19

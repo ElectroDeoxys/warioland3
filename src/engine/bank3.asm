@@ -112,7 +112,7 @@ Func_ce3e: ; ce3e (3:4e3e)
 	and $f0
 	swap a
 	ld d, a
-	ld a, [wFloorNum]
+	ld a, [wFloorSRAMBank]
 	dec a
 	add a
 	add d
@@ -147,8 +147,8 @@ Func_d11a: ; d11a (3:511a)
 	and a
 	ret nz
 	ld hl, wc0a3
-	call Func_bdb
-	ld a, [wFloorNum]
+	call GetCell
+	ld a, [wFloorSRAMBank]
 	sramswitch
 	call Func_d132
 	ret
@@ -192,9 +192,9 @@ Func_d132: ; d132 (3:5132)
 	cp $c0
 	jr nz, .asm_d182
 	ld h, $a0
-	ld a, [wFloorNum]
+	ld a, [wFloorSRAMBank]
 	inc a
-	ld [wFloorNum], a
+	ld [wFloorSRAMBank], a
 	sramswitch
 .asm_d182
 	dec e
@@ -207,8 +207,8 @@ Func_d186: ; d186 (3:5186)
 	and a
 	ret nz
 	ld hl, wc0a3
-	call Func_bdb
-	ld a, [wFloorNum]
+	call GetCell
+	ld a, [wFloorSRAMBank]
 	sramswitch
 	call Func_d19e
 	ret

@@ -1671,7 +1671,7 @@ UpdateState_FatAirborne: ; 29123 (a:5123)
 	ld a, TRUE
 	ld [wIsWarioGroundShaking], a
 .asm_291f1
-	ld a, [wc1aa]
+	ld a, [wFloorTransitionDir]
 	and a
 	jr nz, SetState_FatLanding
 	play_sfx SFX_024
@@ -4840,10 +4840,10 @@ Func_2b2c2: ; 2b2c2 (a:72c2)
 	cp $08
 	jr c, .asm_2b2f6
 	call Func_114e
-	ld a, [wca78]
+	ld a, [wFloor]
 	sub c
 	jr nc, .asm_2b2f6
-	call Func_11d6
+	call StartUpwardsFloorTransition
 
 .asm_2b2f6
 	ld a, [wDirection]

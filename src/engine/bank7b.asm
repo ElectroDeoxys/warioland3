@@ -1076,10 +1076,10 @@ UpdateState_MagicRising: ; 1ed972 (7b:5972)
 	cp $08
 	jr c, .asm_1ed9d4
 	call Func_114e
-	ld a, [wca78]
+	ld a, [wFloor]
 	sub c
 	jr nc, .asm_1ed9d4
-	call Func_11d6
+	call StartUpwardsFloorTransition
 .asm_1ed9d4
 	ret
 

@@ -1,7 +1,7 @@
 Func_18000: ; 18000 (6:4000)
 	xor a
 	ld [wc0dd], a
-	ld a, [wFloorNum]
+	ld a, [wFloorSRAMBank]
 	sramswitch
 	ld hl, wYCell
 	ld a, [hli]
@@ -694,7 +694,7 @@ Func_19b3a: ; 19b3a (6:5b3a)
 
 Func_19b51:: ; 19b51 (6:5b51)
 	ld hl, hPos
-	call Func_bdb
+	call GetCell
 	ld a, 1 << 0
 	ld [wc0d6], a
 ;	fallthrough
@@ -735,7 +735,7 @@ IncrementXCell: ; 19b76 (6:5b76)
 
 Func_19b7b:: ; 19b7b (6:5b7b)
 	ld hl, hPos
-	call Func_bdb
+	call GetCell
 	ld a, 1 << 1
 	ld [wc0d6], a
 	call Func_18000
@@ -745,7 +745,7 @@ Func_19b7b:: ; 19b7b (6:5b7b)
 
 Func_19b8b: ; 19b8b (6:5b8b)
 	ld hl, hPos
-	call Func_bdb
+	call GetCell
 	ld a, 1 << 2
 	ld [wc0d6], a
 	call Func_18000
@@ -755,7 +755,7 @@ Func_19b8b: ; 19b8b (6:5b8b)
 
 Func_19b9b: ; 19b9b (6:5b9b)
 	ld hl, hPos
-	call Func_bdb
+	call GetCell
 	ld a, 1 << 3
 	ld [wc0d6], a
 	call Func_18000
@@ -767,7 +767,7 @@ Func_19b9b: ; 19b9b (6:5b9b)
 
 Func_19bc3:: ; 19bc3 (6:5bc3)
 	ld hl, hPos
-	call Func_bdb
+	call GetCell
 	ld a, 1 << 4
 	ld [wc0d6], a
 ;	fallthrough
@@ -784,9 +784,9 @@ Func_19bd3: ; 19bd3 (6:5bd3)
 	ld a, [hl]
 	cp $a0 - 1
 	jr nz, .asm_19be6
-	ld a, [wFloorNum]
+	ld a, [wFloorSRAMBank]
 	dec a
-	ld [wFloorNum], a
+	ld [wFloorSRAMBank], a
 	ld a, $c0 - 1
 	ld [hl], a
 
@@ -799,7 +799,7 @@ Func_19bd3: ; 19bd3 (6:5bd3)
 
 Func_19beb: ; 19beb (6:5beb)
 	ld hl, hPos
-	call Func_bdb
+	call GetCell
 	ld a, 1 << 5
 	ld [wc0d6], a
 	call Func_18000
@@ -809,7 +809,7 @@ Func_19beb: ; 19beb (6:5beb)
 
 Func_19bfb: ; 19bfb (6:5bfb)
 	ld hl, hPos
-	call Func_bdb
+	call GetCell
 	ld a, 1 << 6
 	ld [wc0d6], a
 	call Func_18000
@@ -819,7 +819,7 @@ Func_19bfb: ; 19bfb (6:5bfb)
 
 Func_19c0b: ; 19c0b (6:5c0b)
 	ld hl, hPos
-	call Func_bdb
+	call GetCell
 	ld a, 1 << 7
 	ld [wc0d6], a
 	call Func_18000
@@ -1661,11 +1661,11 @@ UpdateState_LadderShakeSlipping: ; 1a55c (6:655c)
 	cp $08
 	jr c, .asm_1a5b3
 	call Func_114e
-	ld a, [wca78]
+	ld a, [wFloor]
 	sub c
 	jr z, .asm_1a5b3
 	jr c, .asm_1a5b3
-	call Func_11ae
+	call StartDownwardsFloorTransition
 .asm_1a5b3
 	farcall Func_199e9
 	ld a, b
@@ -1793,11 +1793,11 @@ UpdateState_LadderSliding: ; 1a6b6 (6:66b6)
 	cp $08
 	jr c, .asm_1a719
 	call Func_114e
-	ld a, [wca78]
+	ld a, [wFloor]
 	sub c
 	jr z, .asm_1a719
 	jr c, .asm_1a719
-	call Func_11ae
+	call StartDownwardsFloorTransition
 .asm_1a719
 	farcall Func_199e9
 
@@ -2333,11 +2333,11 @@ UpdateState_FenceSliding: ; 1b0a9 (6:70a9)
 	cp $08
 	jr c, .asm_1b10e
 	call Func_114e
-	ld a, [wca78]
+	ld a, [wFloor]
 	sub c
 	jr z, .asm_1b10e
 	jr c, .asm_1b10e
-	call Func_11ae
+	call StartDownwardsFloorTransition
 .asm_1b10e
 	farcall Func_199e9
 	ld a, b
@@ -2624,10 +2624,10 @@ Func_1b3a0: ; 1b3a0 (6:73a0)
 	cp $08
 	jr c, .asm_1b3e6
 	call Func_114e
-	ld a, [wca78]
+	ld a, [wFloor]
 	sub c
 	jr nc, .asm_1b3e6
-	jp Func_11d6
+	jp StartUpwardsFloorTransition
 
 .asm_1b3e6
 	ld a, [wLadderInteraction]
@@ -2649,11 +2649,11 @@ Func_1b3a0: ; 1b3a0 (6:73a0)
 	cp $08
 	jr c, .asm_1b42b
 	call Func_114e
-	ld a, [wca78]
+	ld a, [wFloor]
 	sub c
 	jr z, .asm_1b42b
 	jr c, .asm_1b42b
-	jp Func_11ae
+	jp StartDownwardsFloorTransition
 
 .asm_1b42b
 	farcall Func_19b12

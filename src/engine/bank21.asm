@@ -2708,10 +2708,10 @@ FadePalConfig: ; 8534f (21:534f)
 	ld hl, wTargetRed
 .loop_colours
 	ld a, [de]
-	and $1f
-	ld [hli], a
+	and %00011111
+	ld [hli], a ; red
 	ld a, [de]
-	and $e0
+	and %11100000
 	rrca
 	rrca
 	rrca
@@ -2720,24 +2720,24 @@ FadePalConfig: ; 8534f (21:534f)
 	ld [hl], a
 	inc e
 	ld a, [de]
-	and $03
+	and %00000011
 	rlca
 	rlca
 	rlca
 	or [hl]
-	ld [hli], a
+	ld [hli], a ; green
 	ld a, [de]
-	and $7c
+	and %01111100
 	rrca
 	rrca
-	ld [hli], a
+	ld [hli], a ; blue
 	dec e
 	ld d, $c1
 	ld a, [de]
-	and $1f
-	ld [hli], a
+	and %00011111
+	ld [hli], a ; red
 	ld a, [de]
-	and $e0
+	and %11100000
 	rrca
 	rrca
 	rrca
@@ -2746,17 +2746,17 @@ FadePalConfig: ; 8534f (21:534f)
 	ld [hl], a
 	inc e
 	ld a, [de]
-	and $03
+	and %00000011
 	rlca
 	rlca
 	rlca
 	or [hl]
-	ld [hli], a
+	ld [hli], a ; green
 	ld a, [de]
-	and $7c
+	and %01111100
 	rrca
 	rrca
-	ld [hl], a
+	ld [hl], a ; blue
 	ld a, [wTargetBlue]
 	ld c, a
 	ld a, [hl]
