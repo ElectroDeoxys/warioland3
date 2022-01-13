@@ -68,8 +68,56 @@ GOLF_LEVEL_UNK03 rw ; $03
 GOLF_LEVEL_UNK04 rw ; $04
 GOLF_LEVEL_STRUCT_LENGTH EQU _RS
 
+; various golf terrains
+	const_def
+	const GFTR_TEE_BOX ; $0
+	const GFTR_PLAIN   ; $1
+	const GFTR_HOLE    ; $2
+	const GFTR_ROUGH   ; $3
+	const GFTR_BUNKER  ; $4
+	const GFTR_WATER   ; $5
+	const GFTR_OB      ; $6
+	const GFTR_UNUSED  ; $7
+	const GFTR_END     ; $8
+
+; golf terrain flags
+	const_def
+GFTR_EDGE_RIGHT EQU 1 << 4
+GFTR_EDGE_LEFT  EQU 1 << 5
+GFTR_UNK_FLAG   EQU 1 << 7
+
+	const_def 3
+	const PAR_3 ; $3
+	const PAR_4 ; $4
+	const PAR_5 ; $5
+
 ; wGolfDisplayMode constants
 	const_def
 	const GOLF_DISPLAY_BGMAP0 ; $0
 	const GOLF_DISPLAY_SPLIT  ; $1
 	const GOLF_DISPLAY_BGMAP1 ; $2
+
+; wGolfWarioState constants
+	const_def
+	const GOLF_WARIO_IDLING        ; $0
+	const GOLF_WARIO_WALKING       ; $1
+	const GOLF_WARIO_2             ; $2
+	const GOLF_WARIO_3             ; $3
+	const GOLF_WARIO_4             ; $4
+	const GOLF_WARIO_MISSING       ; $5
+	const GOLF_WARIO_6             ; $6
+	const GOLF_WARIO_7             ; $7
+	const GOLF_WARIO_WAITING       ; $8
+	const GOLF_WARIO_9             ; $9
+	const GOLF_WARIO_GOING_IN_PIPE ; $a
+	const GOLF_WARIO_TURNING       ; $b
+NUM_GOLF_WARIO_STATES EQU const_value
+
+; WGolfLobbyState consants
+	const_def
+	const GOLFLOBBY_ST_WAIT_INPUT ; $0
+	const GOLFLOBBY_ST_WALK_RIGHT ; $1
+	const GOLFLOBBY_ST_WALK_LEFT  ; $2
+	const GOLFLOBBY_ST_ENTER_PIPE ; $3
+	const GOLFLOBBY_ST_ENTER_DOOR ; $4
+	const GOLFLOBBY_ST_EXIT_PIPE  ; $5

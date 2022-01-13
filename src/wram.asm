@@ -1130,6 +1130,12 @@ w1d14a:: ; d14a
 
 	ds $6b5
 
+
+SECTION "Golf RAM", WRAMX
+
+; start of the whole Golf RAM
+wGolfRAMStart::
+
 w1d800:: ; d800
 	ds $1
 
@@ -1152,6 +1158,9 @@ wGolfCourseScore:: ; d805
 
 	ds $fa
 
+; start of the RAM related to the Golf levels
+wGolfLevelRAMStart::
+
 w1d900:: ; d900
 	ds 16 tiles
 
@@ -1161,7 +1170,7 @@ w1da00:: ; da00
 w1db00:: ; db00
 	ds 8 palettes
 
-w1db40:: ; db40
+wGolfTerrain:: ; db40
 	ds $41
 
 ; par of current golf hole
@@ -1188,12 +1197,13 @@ w1db90:: ; db90
 	ds $30
 
 w1dc00:: ; dc00
+WGolfLobbyState:: ; dc00
 	ds $1
 
 w1dc01:: ; dc01
 	ds $1
 
-w1dc02:: ; dc02
+wGolfVBlankMode:: ; dc02
 	ds $1
 
 wHasAllMusicalCoinFlags:: ; dc03
@@ -1201,10 +1211,11 @@ wHasAllMusicalCoinFlags:: ; dc03
 
 	ds $5
 
-w1dc09:: ; dc09
+wGolfAnimLastFrame:: ; dc09
 	ds $1
 
-w1dc0a:: ; dc0a
+; keeps track of several counters
+wGolfCounter:: ; dc0a
 	ds $1
 
 w1dc0b:: ; dc0b
@@ -1213,7 +1224,7 @@ w1dc0b:: ; dc0b
 w1dc0c:: ; dc0c
 	ds $1
 
-w1dc0d:: ; dc0d
+wGolfWarioTilesBank:: ; dc0d
 	ds $1
 
 w1dc0e:: ; dc0e
@@ -1224,7 +1235,8 @@ wGolfPrice:: ; dc0f
 
 	ds $1
 
-w1dc11:: ; dc11
+wdc11:: ; dc11
+wGolfWarioTilesPtr:: ; dc11
 	ds $2
 
 w1dc13:: ; dc13
@@ -1276,7 +1288,7 @@ w1dc28:: ; dc28
 w1dc29:: ; dc29
 	ds $1
 
-w1dc2a:: ; dc2a
+wHasGolfWarioAnimationFinished:: ; dc2a
 	ds $1
 
 	ds $1
@@ -1288,12 +1300,12 @@ wGolfMenuTargetSCX:: ; dc2e
 wTempGolfXScroll:: ; dc2e
 	ds $2
 
-w1dc30:: ; dc30
+wGolfYPos:: ; dc30
 	ds $1
 
 	ds $1
 
-w1dc32:: ; dc32
+wGolfXPos:: ; dc32
 	ds $1
 
 	ds $1
@@ -1325,7 +1337,7 @@ w1dc3f:: ; dc3f
 w1dc40:: ; dc40
 	ds $2
 
-w1dc42:: ; dc42
+wGolfWarioDir:: ; dc42
 	ds $1
 
 	ds $1
@@ -1360,7 +1372,7 @@ w1dc4c:: ; dc4c
 w1dc4d:: ; dc4d
 	ds $1
 
-w1dc4e:: ; dc4e
+wGolfYVel:: ; dc4e
 	ds $1
 
 w1dc4f:: ; dc4f
@@ -1388,6 +1400,10 @@ wGolfWario:: golf_obj_struct wGolfWario ; dc84
 
 wGolfObj7:: golf_obj_struct wGolfObj7 ; dc8c
 wGolfObj8:: golf_obj_struct wGolfObj8 ; dc94
+
+	ds $364
+
+wGolfRAMEnd::
 
 
 SECTION "WRAM2", WRAMX

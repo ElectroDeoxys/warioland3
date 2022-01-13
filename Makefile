@@ -2,6 +2,7 @@ rom := wl3.gbc
 
 rom_obj := \
 src/audio.o \
+src/golf.o \
 src/home.o \
 src/main.o \
 src/wram.o \

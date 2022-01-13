@@ -1103,7 +1103,7 @@ PauseMenuStateTable: ; 46f6 (1:46f6)
 GolfStateTable: ; 4710 (1:4710)
 	ldh a, [rSVBK]
 	push af
-	ld a, 1 ; WRAM1
+	ld a, BANK("Golf RAM")
 	ldh [rSVBK], a
 	farcall _GolfStateTable
 	pop af
@@ -1170,7 +1170,7 @@ CreditsStateTable: ; 4776 (1:4776)
 GolfBuildingStateTable: ; 4790 (1:4790)
 	ldh a, [rSVBK]
 	push af
-	ld a, 1 ; WRAM1
+	ld a, BANK("Golf RAM")
 	ldh [rSVBK], a
 	farcall _GolfBuildingStateTable
 	pop af

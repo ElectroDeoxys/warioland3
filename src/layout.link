@@ -212,9 +212,10 @@ ROMX $6e
 ROMX $6f
 	"Enemy Gfx 8"
 ROMX $70
-	"Bank 70"
+	"Golf Gfx 1"
+	"Golf Levels"
 ROMX $71
-	"Bank 71"
+	"Golf Gfx 2"
 ROMX $72
 	"Bank 72"
 ROMX $76
@@ -241,6 +242,7 @@ WRAM0
 	"WRAM0"
 WRAMX 1
 	"WRAM1"
+	"Golf RAM"
 WRAMX 2
 	"WRAM2"
 WRAMX 3

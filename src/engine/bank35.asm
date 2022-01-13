@@ -482,6 +482,7 @@ Frameset_d4d5f:: ; d4d5f (35:4d5f)
 
 	INCROM $d4de4, $d5124
 
-GolfMenuGfx: INCBIN "gfx/golf/golf_menu.2bpp.lz"
+; TODO in its own section to be added to golf.o?
+GolfMenuGfx:: INCBIN "gfx/golf/golf_menu.2bpp.lz"
 
 	INCROM $d63fd, $d65f2

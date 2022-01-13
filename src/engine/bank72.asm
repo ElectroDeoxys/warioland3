@@ -1,11 +1,11 @@
-_GolfStateTable: ; 1c8000 (72:4000)
+_GolfStateTable:: ; 1c8000 (72:4000)
 	ld a, [wSubState]
 	jumptable
 
 	dw FastFadeToWhite
-	dw Func_1c8020
+	dw InitGolfLobby
 	dw SlowFadeFromWhite
-	dw Func_1c8140
+	dw HandleGolfLobby
 	dw FastFadeToWhite
 	dw Func_1c8965
 	dw SlowFadeFromWhite
@@ -18,7 +18,7 @@ _GolfStateTable: ; 1c8000 (72:4000)
 	dw Func_1c84f9
 ; 0x1c8020
 
-Func_1c8020: ; 1c8020 (72:4020)
+InitGolfLobby: ; 1c8020 (72:4020)
 	call DisableLCD
 	call ClearWholeVirtualOAM
 	ld a, [w1d800]
@@ -30,7 +30,7 @@ Func_1c8020: ; 1c8020 (72:4020)
 	ld [wRoomAnimatedTilesEnabled], a
 
 	ld hl, wPredeterminedGolfLevel
-	ld bc, $7fe
+	ld bc, wGolfRAMEnd - wPredeterminedGolfLevel
 .loop_clear
 	xor a
 	ld [hli], a
@@ -44,30 +44,30 @@ Func_1c8020: ; 1c8020 (72:4020)
 	ld hl, Pals_1ca20f
 	call LoadPalsToTempPals2
 
-	call LoadGolfLobby
+	call .LoadGolfLobby
 
 	ld a, [wGolfMenuOption]
 	and a
 	jr nz, .asm_1c8069
-	ld a, $08
+	ld a, GOLF_WARIO_WAITING
 	ld [wGolfWarioState], a
 	ld a, $90
-	ld [w1dc30], a
+	ld [wGolfYPos], a
 	ld a, $38
-	ld [w1dc32], a
+	ld [wGolfXPos], a
 	jr .asm_1c807d
 .asm_1c8069
-	ld a, $0a
+	ld a, GOLF_WARIO_GOING_IN_PIPE
 	ld [wGolfWarioState], a
 	ld a, $a0
-	ld [w1dc30], a
+	ld [wGolfYPos], a
 	ld a, $80
-	ld [w1dc32], a
-	ld a, $05
-	ld [w1dc00], a
+	ld [wGolfXPos], a
+	ld a, GOLFLOBBY_ST_EXIT_PIPE
+	ld [WGolfLobbyState], a
 
 .asm_1c807d
-	call Func_1c81f0
+	call HandleGolfLobbyWarioSprite
 
 	xor a
 	ld [wGolfMenuOption], a
@@ -75,20 +75,21 @@ Func_1c8020: ; 1c8020 (72:4020)
 	ld [wGolfNumCoins + 0], a
 	ld a, [wNumCoins + 1]
 	ld [wGolfNumCoins + 1], a
+
 	ld a, [wNumCoins + 0]
 	and a
-	jr nz, .asm_1c80a5
+	jr nz, .enough_coins
 	ld a, [wGolfPrice]
 	ld c, a
 	ld a, [wNumCoins + 1]
 	cp c
-	jr nc, .asm_1c80a5
+	jr nc, .enough_coins
 	ld a, COININFO_NOT_ENOUGH_COINS
 	ld [wGolfObj4State], a
-.asm_1c80a5
+.enough_coins
 	ld a, $01
-	ld [w1dc02], a
-	call Func_1c9f2e
+	ld [wGolfVBlankMode], a
+	call GolfLobbyVBlank
 
 	play_music2 MUSIC_GOLF_MENU
 
@@ -108,8 +109,8 @@ Func_1c8020: ; 1c8020 (72:4020)
 ; loads all the gfx in the Golf Lobby
 ; and determines the price tier,
 ; corresponding to the number of treasures
-LoadGolfLobby: ; 1c80cd (72:40cd)
-	ld a, $71
+.LoadGolfLobby:
+	ld a, BANK("Golf Gfx 2")
 	ld [wTempBank], a
 	ld hl, BGMaps_1c5b4e
 	push hl
@@ -122,7 +123,7 @@ LoadGolfLobby: ; 1c80cd (72:40cd)
 	ldh [rVBK], a
 	call FarDecompress
 
-	ld a, $71
+	ld a, BANK("Golf Gfx 2")
 	ld [wTempBank], a
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
@@ -171,15 +172,15 @@ LoadGolfLobby: ; 1c80cd (72:40cd)
 	ret
 ; 0x1c8140
 
-Func_1c8140: ; 1c8140 (72:4140)
-	call Func_1c821c
-	call Func_1c814f
-	call Func_1c81f0
+HandleGolfLobby: ; 1c8140 (72:4140)
+	call HandleGolfLobbyStates
+	call UpdateGolfLobbyAnimations
+	call HandleGolfLobbyWarioSprite
 	call ClearVirtualOAM
-	jp Func_1c9f2e
+	jp GolfLobbyVBlank
 ; 0x1c814f
 
-Func_1c814f: ; 1c814f (72:414f)
+UpdateGolfLobbyAnimations: ; 1c814f (72:414f)
 	ld a, HIGH(OAM_1cb2d3)
 	ld [wGolfOAMPtr + 0], a
 	ld a, LOW(OAM_1cb2d3)
@@ -250,15 +251,18 @@ Func_1c814f: ; 1c814f (72:414f)
 	jp AddGolfSprite
 ; 0x1c81f0
 
-Func_1c81f0: ; 1c81f0 (72:41f0)
-	ld a, [w1dc30]
+HandleGolfLobbyWarioSprite: ; 1c81f0 (72:41f0)
+	ld a, [wGolfYPos]
 	ld [wGolfWarioYCoord], a
-	ld a, [w1dc32]
+	ld a, [wGolfXPos]
 	ld [wGolfWarioXCoord], a
-	call Func_2cc3
-	call Func_1c8f76
+	call UpdateGolfWarioAnimation
+	call LoadGolfWarioStateGfx
+
+	; if Wario is walking, play walk sfx
+	; if it's the first frame
 	ld a, [wGolfWarioState]
-	cp $01
+	cp GOLF_WARIO_WALKING
 	ret nz
 	ld a, [wGolfWarioFramesetOffset]
 	cp $02
@@ -270,17 +274,17 @@ Func_1c81f0: ; 1c81f0 (72:41f0)
 	ret
 ; 0x1c821c
 
-Func_1c821c: ; 1c821c (72:421c)
-	ld a, [w1dc00]
+HandleGolfLobbyStates: ; 1c821c (72:421c)
+	ld a, [WGolfLobbyState]
 	jumptable
-	dw .Func_1c822c
-	dw .Func_1c8307
-	dw .Func_1c837d
-	dw .Func_1c83da
-	dw .Func_1c83fd
-	dw .Func_1c8439
+	dw .WaitingInput ; GOLFLOBBY_ST_WAIT_INPUT
+	dw .WalkingRight ; GOLFLOBBY_ST_WALK_RIGHT
+	dw .WalkingLeft  ; GOLFLOBBY_ST_WALK_LEFT
+	dw .EnteringPipe ; GOLFLOBBY_ST_ENTER_PIPE
+	dw .EnteringDoor ; GOLFLOBBY_ST_ENTER_DOOR
+	dw .ExitingPipe  ; GOLFLOBBY_ST_EXIT_PIPE
 
-.Func_1c822c
+.WaitingInput
 	ld a, [wJoypadPressed]
 	bit D_DOWN_F, a
 	jr nz, .d_down
@@ -300,15 +304,15 @@ Func_1c821c: ; 1c821c (72:421c)
 	play_sfx SFX_0E6
 
 	xor a
-	ld [w1dc42], a
+	ld [wGolfWarioDir], a
 	ld [wGolfWarioDuration], a
 	ld [wGolfWarioFramesetOffset], a
-	ld a, $0b
+	ld a, GOLF_WARIO_TURNING
 	ld [wGolfWarioState], a
 	ld a, $01
-	ld [w1dc02], a
-	ld a, $04
-	ld [w1dc00], a
+	ld [wGolfVBlankMode], a
+	ld a, GOLFLOBBY_ST_ENTER_DOOR
+	ld [WGolfLobbyState], a
 	ret
 
 .d_right
@@ -316,16 +320,16 @@ Func_1c821c: ; 1c821c (72:421c)
 	cp $78
 	ret nc
 	xor a
-	ld [w1dc42], a
+	ld [wGolfWarioDir], a
 	ld [wGolfWarioDuration], a
 	ld [wGolfWarioFramesetOffset], a
-	ld a, $0b
+	ld a, GOLF_WARIO_TURNING
 	ld [wGolfWarioState], a
 	ld a, $04
-	ld [w1dc4e], a
-	ld a, $01
-	ld [w1dc02], a
-	ld [w1dc00], a
+	ld [wGolfYVel], a
+	ld a, $01 ; aka GOLFLOBBY_ST_WALK_RIGHT
+	ld [wGolfVBlankMode], a
+	ld [WGolfLobbyState], a
 	ret
 
 .d_left
@@ -335,13 +339,13 @@ Func_1c821c: ; 1c821c (72:421c)
 	xor a
 	ld [wGolfWarioDuration], a
 	ld [wGolfWarioFramesetOffset], a
-	ld a, $0b
+	ld a, GOLF_WARIO_TURNING
 	ld [wGolfWarioState], a
 	ld a, $01
-	ld [w1dc02], a
-	ld [w1dc42], a
-	ld a, $02
-	ld [w1dc00], a
+	ld [wGolfVBlankMode], a
+	ld [wGolfWarioDir], a
+	ld a, GOLFLOBBY_ST_WALK_LEFT
+	ld [WGolfLobbyState], a
 	ret
 
 .d_down
@@ -371,82 +375,85 @@ Func_1c821c: ; 1c821c (72:421c)
 	sbc 0
 	ld [wNumCoins + 0], a
 
-	ld a, $0a
+	ld a, GOLF_WARIO_GOING_IN_PIPE
 	ld [wGolfWarioState], a
 	ld a, $01
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ld a, $80
-	ld [w1dc32], a
+	ld [wGolfXPos], a
 	xor a
-	ld [w1dc0a], a
+	ld [wGolfCounter], a
 	ld [wGolfWarioDuration], a
 	ld [wGolfWarioFramesetOffset], a
-	ld a, $03
-	ld [w1dc00], a
+	ld a, GOLFLOBBY_ST_ENTER_PIPE
+	ld [WGolfLobbyState], a
 	ret
 
-.Func_1c8307
-	ld hl, w1dc0a
+.WalkingRight
+	; check if still doing turning animation
+	ld hl, wGolfCounter
 	ld a, [hl]
 	and a
 	ret z
 	cp $02
-	jr nc, .asm_1c8327
+	jr nc, .walk_right
+	; done turning, start walking
 	inc [hl]
 	xor a
-	ld [w1dc42], a
+	ld [wGolfWarioDir], a
 	ld [wGolfWarioDuration], a
 	ld [wGolfWarioFramesetOffset], a
-	ld a, $01
+	ld a, GOLF_WARIO_WALKING
 	ld [wGolfWarioState], a
 	ld a, $01
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ret
 
-.asm_1c8327
-	ld a, [w1dc32]
+.walk_right
+	ld a, [wGolfXPos]
 	cp $58
-	call nc, .Func_1c835b
-	ld hl, w1dc32
+	call nc, .DoJumpRight
+	ld hl, wGolfXPos
 	ld a, [hl]
 	cp $78
-	jr nc, .asm_1c8339
+	jr nc, .reached_pipe
 	inc [hl]
 	ret
-
-.asm_1c8339
+.reached_pipe
 	ld a, $80
-	ld [w1dc30], a
+	ld [wGolfYPos], a
 	ld a, $78
-	ld [w1dc32], a
-	ld a, $08
+	ld [wGolfXPos], a
+	ld a, GOLF_WARIO_WAITING
 	ld [wGolfWarioState], a
 	ld a, $01
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	xor a
-	ld [w1dc0a], a
+	ld [wGolfCounter], a
 	ld [wGolfWarioDuration], a
 	ld [wGolfWarioFramesetOffset], a
-	ld [w1dc00], a
+	ld [WGolfLobbyState], a ; GOLFLOBBY_ST_WAIT_INPUT
 	ret
 
-.Func_1c835b
-	ld hl, w1dc4e
+.DoJumpRight
+	ld hl, wGolfYVel
 	ld c, [hl]
-	ld a, [w1dc0a]
+	ld a, [wGolfCounter]
 	inc a
-	ld [w1dc0a], a
-	and $01
-	jr nz, .asm_1c836b
-	dec [hl]
-.asm_1c836b
-	ld de, w1dc30
+	ld [wGolfCounter], a
+	and $1
+	jr nz, .skip_decr_y_vel
+	dec [hl] ; decrease y vel
+.skip_decr_y_vel
+	; apply y vel to position
+	ld de, wGolfYPos
 	ld a, [de]
 	sub c
 	ld [de], a
 	ld a, c
-	cp $f0
+	cp -16
 	ret c
+	; cap y pos
 	ld a, [de]
 	cp $80
 	ret c
@@ -454,53 +461,54 @@ Func_1c821c: ; 1c821c (72:421c)
 	ld [de], a
 	ret
 
-.Func_1c837d
-	ld hl, w1dc0a
+.WalkingLeft
+	; check if still doing turning animation
+	ld hl, wGolfCounter
 	ld a, [hl]
 	and a
 	ret z
 	cp $02
-	jr nc, .asm_1c839a
+	jr nc, .walk_left
+	; done turning, start walking
 	inc [hl]
 	xor a
 	ld [wGolfWarioDuration], a
 	ld [wGolfWarioFramesetOffset], a
-	ld a, $01
+	ld a, GOLF_WARIO_WALKING
 	ld [wGolfWarioState], a
 	ld a, $01
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ret
 
-.asm_1c839a
-	ld de, w1dc30
+.walk_left
+	ld de, wGolfYPos
 	ld a, [de]
 	cp $90
-	call c, .Func_1c83cf
-	ld hl, w1dc32
+	call c, .DoJumpLeft
+	ld hl, wGolfXPos
 	ld a, [hl]
 	cp $38
-	jr z, .asm_1c83ad
+	jr z, .reached_door
 	dec [hl]
 	ret
-
-.asm_1c83ad
+.reached_door
 	ld a, $90
-	ld [w1dc30], a
+	ld [wGolfYPos], a
 	ld a, $38
-	ld [w1dc32], a
-	ld a, $08
+	ld [wGolfXPos], a
+	ld a, GOLF_WARIO_WAITING
 	ld [wGolfWarioState], a
 	ld a, $01
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	xor a
-	ld [w1dc0a], a
+	ld [wGolfCounter], a
 	ld [wGolfWarioDuration], a
 	ld [wGolfWarioFramesetOffset], a
-	ld [w1dc00], a
+	ld [WGolfLobbyState], a ; GOLFLOBBY_ST_WAIT_INPUT
 	ret
 
-.Func_1c83cf
-	ld a, [w1dc32]
+.DoJumpLeft
+	ld a, [wGolfXPos]
 	cp $64
 	ret nc
 	ld a, [de]
@@ -508,8 +516,8 @@ Func_1c821c: ; 1c821c (72:421c)
 	ld [de], a
 	ret
 
-.Func_1c83da
-	ld hl, w1dc0a
+.EnteringPipe
+	ld hl, wGolfCounter
 	ld a, [hl]
 	and a
 	jr nz, .asm_1c83ed
@@ -520,19 +528,19 @@ Func_1c821c: ; 1c821c (72:421c)
 	ld a, [wNumCoins + 0]
 	ld [hl], a
 .asm_1c83ed
-	ld hl, w1dc30
+	ld hl, wGolfYPos
 	ld a, [hl]
 	cp $b0
 	jr nc, .asm_1c83f7
 	inc [hl]
 	ret
 .asm_1c83f7
-	ld a, $04
+	ld a, SST_GOLF_04
 	ld [wSubState], a
 	ret
 
-.Func_1c83fd
-	ld hl, w1dc0a
+.EnteringDoor
+	ld hl, wGolfCounter
 	ld a, [hl]
 	and a
 	ret z
@@ -547,22 +555,22 @@ Func_1c821c: ; 1c821c (72:421c)
 	xor a
 	ld [wGolfWarioDuration], a
 	ld [wGolfWarioFramesetOffset], a
-	ld a, $09
+	ld a, GOLF_WARIO_9
 	ld [wGolfWarioState], a
 	ld a, $01
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ret
 .asm_1c8420
 	xor a
 	ld [w1d800], a
 	ld [wGolfMenuOption], a
 	stop_music2
-	ld a, $08
+	ld a, SST_GOLF_08
 	ld [wSubState], a
 	ret
 
-.Func_1c8439
-	ld hl, w1dc30
+.ExitingPipe
+	ld hl, wGolfYPos
 	ld a, [hl]
 	cp $80
 	jr z, .asm_1c844f
@@ -573,17 +581,17 @@ Func_1c821c: ; 1c821c (72:421c)
 	dec [hl]
 	ret
 .asm_1c844f
-	ld a, $08
+	ld a, GOLF_WARIO_WAITING
 	ld [wGolfWarioState], a
 	ld a, $78
-	ld [w1dc32], a
+	ld [wGolfXPos], a
 	ld a, $01
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	xor a
-	ld [w1dc0a], a
+	ld [wGolfCounter], a
 	ld [wGolfWarioDuration], a
 	ld [wGolfWarioFramesetOffset], a
-	ld [w1dc00], a
+	ld [WGolfLobbyState], a ; GOLFLOBBY_ST_WAIT_INPUT
 	ret
 ; 0x1c846c
 
@@ -591,8 +599,8 @@ Func_1c846c: ; 1c846c (72:446c)
 	call DisableLCD
 	call ClearWholeVirtualOAM
 
-	ld hl, w1d800
-	ld bc, $800
+	ld hl, wGolfRAMStart
+	ld bc, wGolfRAMEnd - wGolfRAMStart
 .loop
 	xor a
 	ld [hli], a
@@ -639,7 +647,7 @@ LoadGolfMenu: ; 1c84ad (72:44ad)
 	ldh [rVBK], a
 	call FarDecompress
 
-	ld a, $71
+	ld a, BANK("Golf Gfx 2")
 	ld [wTempBank], a
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
@@ -661,7 +669,7 @@ VBlank_1c84e0: ; 1c84e0 (72:44e0)
 	jp CopyHLToDE
 
 .func
-	ld a, $01
+	ld a, BANK("Golf RAM")
 	ldh [rSVBK], a
 	ld a, [wSCX]
 	ldh [rSCX], a
@@ -671,7 +679,7 @@ VBlank_1c84e0: ; 1c84e0 (72:44e0)
 ; 0x1c84f9
 
 Func_1c84f9: ; 1c84f9 (72:44f9)
-	ld hl, w1dc0a
+	ld hl, wGolfCounter
 	ld a, [wGolfObj1State]
 	and a
 	jr nz, .asm_1c8530
@@ -708,7 +716,7 @@ Func_1c84f9: ; 1c84f9 (72:44f9)
 	jr Func_1c853e
 
 .asm_1c8538
-	ld a, $08
+	ld a, SST_GOLF_08
 	ld [wSubState], a
 	ret
 ; 0x1c853e
@@ -737,7 +745,7 @@ Func_1c853e: ; 1c853e (72:453e)
 	jp ClearVirtualOAM
 ; 0x1c8570
 
-_GolfBuildingStateTable: ; 1c8570 (72:4570)
+_GolfBuildingStateTable:: ; 1c8570 (72:4570)
 	ld a, [wSubState]
 	jumptable
 
@@ -826,7 +834,7 @@ Func_1c8604: ; 1c8604 (72:4604)
 	ld bc, v0Tiles0
 	call FarDecompress
 
-	ld a, $71
+	ld a, BANK("Golf Gfx 2")
 	ld [wTempBank], a
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
@@ -1082,7 +1090,7 @@ Func_1c86f8: ; 1c86f8 (72:46f8)
 ; and palettes to w1db00
 ; depending on value in wGolfCourse
 Func_1c87db: ; 1c87db (72:47db)
-	ld a, $71
+	ld a, BANK("Golf Gfx 2")
 	ld [wTempBank], a
 	ld hl, .data
 	ld a, [wGolfCourse]
@@ -1223,7 +1231,7 @@ Func_1c8837: ; 1c8837 (72:4837)
 	play_sfx SFX_0E2
 	ld a, $01
 	ld [w1dc00], a
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ld a, [hl]
 	ld [wGolfCourse], a
 	call Func_1c87db
@@ -1258,7 +1266,7 @@ Func_1c88dc: ; 1c88dc (72:48dc)
 .reached_target_scx
 	ld a, $02
 	ld [w1dc00], a
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ret
 ; 0x1c8907
 
@@ -1266,12 +1274,12 @@ Func_1c8907: ; 1c8907 (72:4907)
 	xor a
 	ld [w1dc00], a
 	ld a, $03
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ret
 ; 0x1c8911
 
 Func_1c8911: ; 1c8911 (72:4911)
-	ld hl, w1dc0a
+	ld hl, wGolfCounter
 	ld a, [hl]
 	cp $32 ; aka GOLF_BUILDING_PRICE in hex
 	jr nc, .done_subtracting
@@ -1330,8 +1338,8 @@ Func_1c8965: ; 1c8965 (72:4965)
 	xor a
 	ld [wRoomAnimatedTilesEnabled], a
 
-	ld hl, w1d900
-	ld bc, $700
+	ld hl, wGolfLevelRAMStart
+	ld bc, wGolfRAMEnd - wGolfLevelRAMStart
 	xor a
 .loop
 	ld [hli], a
@@ -1340,7 +1348,7 @@ Func_1c8965: ; 1c8965 (72:4965)
 	dec b
 	jr nz, .loop
 
-	ld hl, .golf_course_pals
+	ld hl, .GolfCoursePals
 	ld a, [wGolfMenuOption]
 	add a ; *2
 	ld b, $00
@@ -1353,7 +1361,7 @@ Func_1c8965: ; 1c8965 (72:4965)
 	ld hl, Pals_1ca18f
 	call LoadPalsToTempPals2
 
-	ld a, $70
+	ld a, BANK("Golf Gfx 1")
 	ld [wTempBank], a
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
@@ -1393,7 +1401,7 @@ Func_1c8965: ; 1c8965 (72:4965)
 	inc [hl]
 	ret
 
-.golf_course_pals
+.GolfCoursePals
 	dw Pals_1ca08f
 	dw Pals_1ca0cf
 	dw Pals_1ca10f
@@ -1407,7 +1415,7 @@ Func_1c89fa: ; 1c89fa (72:49fa)
 ; 0x1c8a03
 
 Func_1c8a03: ; 1c8a03 (72:4a03)
-	ld a, $70
+	ld a, BANK("Golf Gfx 1")
 	ld [wTempBank], a
 	ld a, [wPredeterminedGolfLevel]
 	and a
@@ -1511,7 +1519,7 @@ Func_1c8a03: ; 1c8a03 (72:4a03)
 	call FarDecompress
 	pop hl
 
-	ld de, w1db40
+	ld de, wGolfTerrain
 	ld bc, $46
 	call FarCopyHLToDE_BC2
 	ld a, [w1db82]
@@ -1631,7 +1639,7 @@ Func_1c8c33: ; 1c8c33 (72:4c33)
 	ld [wGolfOAMPtr + 1], a
 	ld a, $08
 	ld [w1dc4a], a
-	ld hl, w1dc30
+	ld hl, wGolfYPos
 	ld a, $58
 	ld [hli], a
 	xor a
@@ -1707,7 +1715,7 @@ Func_1c8ca4: ; 1c8ca4 (72:4ca4)
 	call Func_1c8d74
 	call Func_1c8ea8
 	call ClearVirtualOAM
-	call Func_1c8f76
+	call LoadGolfWarioStateGfx
 	jp Func_1c9cf9
 ; 0x1c8cc3
 
@@ -1964,7 +1972,7 @@ Func_1c8e26: ; 1c8e26 (72:4e26)
 ; 0x1c8ea8
 
 Func_1c8ea8: ; 1c8ea8 (72:4ea8)
-	ld hl, w1dc32
+	ld hl, wGolfXPos
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
@@ -1983,7 +1991,7 @@ Func_1c8ea8: ; 1c8ea8 (72:4ea8)
 	xor a
 	ld [w1dc21], a
 
-	ld a, [w1dc42]
+	ld a, [wGolfWarioDir]
 	and a
 	jr nz, .asm_1c8ee5
 	ld hl, wGolfXScroll
@@ -2017,7 +2025,7 @@ Func_1c8ea8: ; 1c8ea8 (72:4ea8)
 	adc HIGH(680)
 	ld d, a
 .asm_1c8efb
-	ld hl, w1dc32
+	ld hl, wGolfXPos
 	ld a, e
 	ld [hli], a
 	ld [hl], d
@@ -2033,12 +2041,12 @@ Func_1c8ea8: ; 1c8ea8 (72:4ea8)
 	add $08
 	sub b
 	ld [wGolfWarioXCoord], a
-	ld a, [w1dc30]
+	ld a, [wGolfYPos]
 	add $11
 	ld [wGolfWarioYCoord], a
-	call Func_2cc3
+	call UpdateGolfWarioAnimation
 	ld a, [wGolfWarioState]
-	cp $01
+	cp GOLF_WARIO_WALKING
 	ret nz
 	ld a, [wGolfWarioFramesetOffset]
 	cp $02
@@ -2050,22 +2058,24 @@ Func_1c8ea8: ; 1c8ea8 (72:4ea8)
 	ret
 ; 0x1c8f37
 
-Func_1c8f37:: ; 1c8f37 (72:4f37)
+; holds the last frame in the animation
+; of some states of Golf Wario
+; and increments wGolfCounter
+HoldGolfWarioLastFrame:: ; 1c8f37 (72:4f37)
 	ld a, [wGolfWarioState]
-	cp $02
+	cp GOLF_WARIO_2
 	jr z, .ok
-	cp $03
+	cp GOLF_WARIO_3
 	jr z, .ok
-	cp $05
+	cp GOLF_WARIO_MISSING
 	jr z, .ok
-	cp $0b
+	cp GOLF_WARIO_TURNING
 	jr z, .ok
 	ret
-
 .ok
-	ld hl, w1dc0a
+	ld hl, wGolfCounter
 	inc [hl]
-	ld a, [w1dc09]
+	ld a, [wGolfAnimLastFrame]
 	ld [wGolfWarioCurrentFrame], a
 	ret
 ; 0x1c8f56
@@ -2098,50 +2108,53 @@ Func_1c8f56: ; 1c8f56 (72:4f56)
 	ret
 ; 0x1c8f76
 
-Func_1c8f76: ; 1c8f76 (72:4f76)
-	ld hl, .tile_banks
+; stores the bank and pointer
+; for Golf Wario graphics of his current state
+; the graphics will be loaded during VBlank
+LoadGolfWarioStateGfx: ; 1c8f76 (72:4f76)
+	ld hl, .GfxBanks
 	ld a, [wGolfWarioState]
 	ld b, $00
 	ld c, a
 	add hl, bc
 	ld a, [hl]
-	ld [w1dc0d], a
-	ld hl, .tile_table
+	ld [wGolfWarioTilesBank], a
+	ld hl, .GfxPointers
 	sla c
 	add hl, bc
 	ld a, [hli]
-	ld [w1dc11 + 1], a
+	ld [wGolfWarioTilesPtr + 1], a
 	ld a, [hl]
-	ld [w1dc11 + 0], a
+	ld [wGolfWarioTilesPtr + 0], a
 	ret
 
-.tile_banks
-	db BANK(WarioIdleGfx)
-	db BANK(WarioWalkGfx)
-	db BANK(WarioAttackGfx)
-	db BANK(WarioAttackGfx)
-	db BANK(WarioAttackGfx)
-	db BANK(WarioGolfMiss)
-	db BANK(WarioClearGfx)
-	db BANK(WarioClearGfx)
-	db BANK(WarioClearGfx)
-	db BANK(WarioClearGfx)
-	db BANK(WarioIdleGfx)
-	db BANK(WarioIdleGfx)
+.GfxBanks
+	db BANK(WarioIdleGfx)   ; GOLF_WARIO_IDLING
+	db BANK(WarioWalkGfx)   ; GOLF_WARIO_WALKING
+	db BANK(WarioAttackGfx) ; GOLF_WARIO_2
+	db BANK(WarioAttackGfx) ; GOLF_WARIO_3
+	db BANK(WarioAttackGfx) ; GOLF_WARIO_4
+	db BANK(WarioGolfMiss)  ; GOLF_WARIO_MISSING
+	db BANK(WarioClearGfx)  ; GOLF_WARIO_6
+	db BANK(WarioClearGfx)  ; GOLF_WARIO_7
+	db BANK(WarioClearGfx)  ; GOLF_WARIO_WAITING
+	db BANK(WarioClearGfx)  ; GOLF_WARIO_9
+	db BANK(WarioIdleGfx)   ; GOLF_WARIO_GOING_IN_PIPE
+	db BANK(WarioIdleGfx)   ; GOLF_WARIO_TURNING
 
-.tile_table
-	dw WarioIdleGfx
-	dw WarioWalkGfx
-	dw WarioAttackGfx
-	dw WarioAttackGfx
-	dw WarioAttackGfx
-	dw WarioGolfMiss
-	dw WarioClearGfx
-	dw WarioClearGfx
-	dw WarioClearGfx
-	dw WarioClearGfx
-	dw WarioIdleGfx
-	dw WarioIdleGfx
+.GfxPointers
+	dw WarioIdleGfx   ; GOLF_WARIO_IDLING
+	dw WarioWalkGfx   ; GOLF_WARIO_WALKING
+	dw WarioAttackGfx ; GOLF_WARIO_2
+	dw WarioAttackGfx ; GOLF_WARIO_3
+	dw WarioAttackGfx ; GOLF_WARIO_4
+	dw WarioGolfMiss  ; GOLF_WARIO_MISSING
+	dw WarioClearGfx  ; GOLF_WARIO_6
+	dw WarioClearGfx  ; GOLF_WARIO_7
+	dw WarioClearGfx  ; GOLF_WARIO_WAITING
+	dw WarioClearGfx  ; GOLF_WARIO_9
+	dw WarioIdleGfx   ; GOLF_WARIO_GOING_IN_PIPE
+	dw WarioIdleGfx   ; GOLF_WARIO_TURNING
 ; 0x1c8fb7
 
 Func_1c8fb7: ; 1c8fb7 (72:4fb7)
@@ -2440,7 +2453,7 @@ Func_1c9164: ; 1c9164 (72:5164)
 	ld [w1dc4a], a
 	jr nc, .asm_1c91a3
 	xor a
-	ld [w1dc0a], a
+	ld [wGolfCounter], a
 	ld [w1dc4a], a
 	ld a, $04
 	ld [w1dc00], a
@@ -2457,7 +2470,7 @@ Func_1c9164: ; 1c9164 (72:5164)
 	ld a, $03
 	ld [w1dc00], a
 
-	ld hl, w1dc4e
+	ld hl, wGolfYVel
 	ld a, [w1dc4a]
 	ld [w1dc4c], a
 	cp $10
@@ -2519,14 +2532,14 @@ Func_1c9164: ; 1c9164 (72:5164)
 
 .asm_1c9229
 	ld hl, .data
-	ld de, w1dc4e
+	ld de, wGolfYVel
 	ld a, [w1dc4b]
 	sla a
 	ld b, $00
 	ld c, a
 	add hl, bc
 	ld a, [hli]
-	ld [de], a ; w1dc4e
+	ld [de], a ; wGolfYVel
 	inc de
 	xor a
 	ld [de], a ; w1dc4f
@@ -2543,7 +2556,7 @@ Func_1c9164: ; 1c9164 (72:5164)
 	ld [w1dc46], a
 	ret
 .asm_1c9250
-	ld hl, w1dc4e
+	ld hl, wGolfYVel
 	ld a, [hl]
 	add [hl]
 	add [hl]
@@ -2555,7 +2568,7 @@ Func_1c9164: ; 1c9164 (72:5164)
 	ld [w1dc46], a
 	ret
 .asm_1c9263
-	ld hl, w1dc4e
+	ld hl, wGolfYVel
 	ld a, [hl]
 	inc a
 	srl a
@@ -2611,7 +2624,7 @@ Func_1c9286: ; 1c9286 (72:5286)
 
 .asm_1c92c4
 	xor a
-	ld [w1dc0a], a
+	ld [wGolfCounter], a
 	ld a, $04
 	ld [w1dc00], a
 	ld a, [w1dc4c]
@@ -2642,7 +2655,7 @@ Func_1c9286: ; 1c9286 (72:5286)
 ; 0x1c92f7
 
 Func_1c92f7: ; 1c92f7 (72:52f7)
-	ld hl, w1dc0a
+	ld hl, wGolfCounter
 	ld a, [hl]
 	and a
 	jr z, .asm_1c930b
@@ -2659,7 +2672,7 @@ Func_1c92f7: ; 1c92f7 (72:52f7)
 	ld hl, wGolfStroke
 	inc [hl]
 	ld a, $03
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	jp PrintGolfStrokeNumber
 
 .asm_1c9318
@@ -2668,10 +2681,10 @@ Func_1c92f7: ; 1c92f7 (72:52f7)
 	xor a
 	ld [wGolfWarioDuration], a
 	ld [wGolfWarioFramesetOffset], a
-	ld a, $02
+	ld a, GOLF_WARIO_2
 	ld [wGolfWarioState], a
 	ld a, $02
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ret
 
 .asm_1c9333
@@ -2686,20 +2699,20 @@ Func_1c92f7: ; 1c92f7 (72:52f7)
 	and a
 	jr z, .asm_1c9355
 	play_sfx SFX_017
-	ld a, $03
+	ld a, GOLF_WARIO_3
 	ld [wGolfWarioState], a
 	ret
 .asm_1c9355
 	play_sfx SFX_0E8
-	ld a, $05
+	ld a, GOLF_WARIO_MISSING
 	ld [wGolfWarioState], a
 	ld a, $02
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ret
 
 .asm_1c9368
 	xor a
-	ld [w1dc0a], a
+	ld [wGolfCounter], a
 	ld [wGolfWarioDuration], a
 	ld [wGolfWarioFramesetOffset], a
 	ld a, [wGolfWarioState]
@@ -2711,7 +2724,7 @@ Func_1c92f7: ; 1c92f7 (72:52f7)
 	ld [wGolfObj6FramesetOffset], a
 	inc a
 	ld [wGolfObj6State], a
-	ld a, $04
+	ld a, GOLF_WARIO_4
 	ld [wGolfWarioState], a
 	ld a, $06
 	ld [w1dc01], a
@@ -2720,8 +2733,8 @@ Func_1c92f7: ; 1c92f7 (72:52f7)
 	ret
 .asm_1c9397
 	ld a, $02
-	ld [w1dc02], a
-	ld a, $00
+	ld [wGolfVBlankMode], a
+	ld a, GOLF_WARIO_IDLING
 	ld [wGolfWarioState], a
 	ld a, $09
 	ld [w1dc00], a
@@ -2753,14 +2766,14 @@ Func_1c93a7: ; 1c93a7 (72:53a7)
 .asm_1c93d6
 	ld hl, .data_2
 .asm_1c93d9
-	ld de, w1dc4e
+	ld de, wGolfYVel
 	ld a, [w1dc4b]
 	sla a
 	ld b, $00
 	ld c, a
 	add hl, bc
 	ld a, [hli]
-	ld [de], a ; w1dc4e
+	ld [de], a ; wGolfYVel
 	inc de
 	xor a
 	ld [de], a ; w1dc4f
@@ -2774,7 +2787,7 @@ Func_1c93a7: ; 1c93a7 (72:53a7)
 	jr z, .asm_1c9407
 	ret
 .asm_1c93f9
-	ld hl, w1dc4e
+	ld hl, wGolfYVel
 	ld a, [hl]
 	add [hl]
 	add [hl]
@@ -2784,7 +2797,7 @@ Func_1c93a7: ; 1c93a7 (72:53a7)
 	ld [hli], a ; (a*3 + 3) / 4
 	ret
 .asm_1c9407
-	ld hl, w1dc4e
+	ld hl, wGolfYVel
 	ld a, [hl]
 	inc a
 	srl a
@@ -2871,7 +2884,7 @@ Func_1c9438: ; 1c9438 (72:5438)
 	ld [w1dc3e], a
 	ld a, d
 	ld [w1dc3f], a
-	ld hl, w1db40
+	ld hl, wGolfTerrain
 	add hl, de
 	ld a, [hl]
 	ld [w1dc45], a
@@ -2907,10 +2920,10 @@ Func_1c9438: ; 1c9438 (72:5438)
 	ld [wGolfWarioFramesetOffset], a
 	ld a, $08
 	ld [wGolfObj6State], a
-	ld a, $00
+	ld a, GOLF_WARIO_IDLING
 	ld [wGolfWarioState], a
 	ld a, $02
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ld a, $07
 	ld [w1dc00], a
 
@@ -2920,7 +2933,7 @@ Func_1c9438: ; 1c9438 (72:5438)
 ; 0x1c94e8
 
 Func_1c94e8: ; 1c94e8 (72:54e8)
-	ld hl, w1dc4e
+	ld hl, wGolfYVel
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
@@ -2933,7 +2946,7 @@ Func_1c94e8: ; 1c94e8 (72:54e8)
 	ld d, [hl]
 	ld e, a
 
-	ld hl, w1dc4e
+	ld hl, wGolfYVel
 	call Calculate2ByteSubtraction
 	ld hl, w1dc34 + 1
 	ld a, d
@@ -2976,10 +2989,10 @@ Func_1c94e8: ; 1c94e8 (72:54e8)
 	ld [wGolfObj6FramesetOffset], a
 	ld [wGolfWarioFramesetOffset], a
 	ld [wGolfObj6State], a
-	ld a, $00
+	ld a, GOLF_WARIO_IDLING
 	ld [wGolfWarioState], a
 	ld a, $02
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ret
 
 .asm_1c955e
@@ -2991,10 +3004,10 @@ Func_1c94e8: ; 1c94e8 (72:54e8)
 	ld [wGolfObj6FramesetOffset], a
 	ld [wGolfWarioFramesetOffset], a
 	ld [wGolfObj6State], a
-	ld a, $00
+	ld a, GOLF_WARIO_IDLING
 	ld [wGolfWarioState], a
 	ld a, $02
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 
 	ld a, [w1dc45]
 	ld c, a
@@ -3266,7 +3279,7 @@ Func_1c9654: ; 1c9654 (72:5654)
 	ld [wGolfObj6State], a
 .asm_1c977a
 	xor a
-	ld [w1dc0a], a
+	ld [wGolfCounter], a
 	ld [wGolfObj6Duration], a
 	ld [wGolfWarioDuration], a
 	ld [wGolfObj6FramesetOffset], a
@@ -3321,7 +3334,7 @@ Func_1c9654: ; 1c9654 (72:5654)
 	jp Func_1c99ca
 
 .asm_1c97f2
-	ld hl, w1dc0a
+	ld hl, wGolfCounter
 	ld a, [hl]
 	cp $30
 	jr nc, .asm_1c9838
@@ -3365,7 +3378,7 @@ Func_1c9654: ; 1c9654 (72:5654)
 	ret
 
 .asm_1c9833
-	ld hl, w1dc0a
+	ld hl, wGolfCounter
 	inc [hl]
 	ret
 
@@ -3477,7 +3490,7 @@ Func_1c9654: ; 1c9654 (72:5654)
 ; 0x1c98c7
 
 Func_1c98c7: ; 1c98c7 (72:58c7)
-	ld hl, w1dc0a
+	ld hl, wGolfCounter
 	ld a, [hl]
 	cp $19
 	jr nc, .asm_1c993f
@@ -3487,7 +3500,7 @@ Func_1c98c7: ; 1c98c7 (72:58c7)
 	and a
 	ret nz
 	ld a, $03
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ld [w1dc21], a
 	jp PrintGolfStrokeNumber
 
@@ -3495,7 +3508,7 @@ Func_1c98c7: ; 1c98c7 (72:58c7)
 	ld a, [w1dc47]
 	and a
 	jr z, .asm_1c990f
-	ld a, [w1dc30]
+	ld a, [wGolfYPos]
 	cp $60
 	jr nc, .asm_1c990f
 	ld hl, w1dc34
@@ -3506,7 +3519,7 @@ Func_1c98c7: ; 1c98c7 (72:58c7)
 	rr e
 	srl d
 	rr e
-	ld hl, w1dc30
+	ld hl, wGolfYPos
 	ld a, [hl]
 	sub e
 	jr nc, .asm_1c990f
@@ -3516,11 +3529,11 @@ Func_1c98c7: ; 1c98c7 (72:58c7)
 	cp $60
 	ret c
 	ld a, $01
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ret
 
 .asm_1c990f
-	ld hl, w1dc32
+	ld hl, wGolfXPos
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
@@ -3529,27 +3542,27 @@ Func_1c98c7: ; 1c98c7 (72:58c7)
 	cp $01
 	jr nz, .asm_1c9929
 	xor a
-	ld [w1dc0a], a
+	ld [wGolfCounter], a
 	ld a, $09
 	ld [w1dc00], a
 	ret
 .asm_1c9929
-	ld hl, w1dc0a
+	ld hl, wGolfCounter
 	inc [hl]
 	xor a
 	ld [wGolfWarioDuration], a
 	ld [wGolfWarioFramesetOffset], a
-	ld a, $01
+	ld a, GOLF_WARIO_WALKING
 	ld [wGolfWarioState], a
 	ld a, $02
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ret
 
 .asm_1c993f
-	ld a, [w1dc42]
+	ld a, [wGolfWarioDir]
 	and a
 	jr nz, .asm_1c995d
-	ld hl, w1dc32
+	ld hl, wGolfXPos
 	ld a, [hli]
 	add $04
 	ld e, a
@@ -3564,7 +3577,7 @@ Func_1c98c7: ; 1c98c7 (72:58c7)
 	jr nz, .asm_1c997a
 	jr .asm_1c9974
 .asm_1c995d
-	ld hl, w1dc32
+	ld hl, wGolfXPos
 	ld a, [hli]
 	sub $04
 	ld e, a
@@ -3594,9 +3607,9 @@ Func_1c98c7: ; 1c98c7 (72:58c7)
 	ld a, [de]
 	ld [hl], a
 	ld a, [w1dc28]
-	ld [w1dc42], a
+	ld [wGolfWarioDir], a
 	xor a
-	ld [w1dc0a], a
+	ld [wGolfCounter], a
 	ld [wGolfWarioDuration], a
 	ld [wGolfWarioFramesetOffset], a
 
@@ -3606,22 +3619,22 @@ Func_1c98c7: ; 1c98c7 (72:58c7)
 	jr z, .asm_1c99a4
 	cp $0b
 	jr z, .asm_1c99bb
-	ld a, $00
+	ld a, GOLF_WARIO_IDLING
 	jr .asm_1c99bd
 .asm_1c99a4
 	ld a, [w1dc24]
 	cp $02
 	jr nc, .asm_1c99af
-	ld a, $06
+	ld a, GOLF_WARIO_6
 	jr .asm_1c99bd
 .asm_1c99af
 	play_music2 MUSIC_GAME_OVER
 .asm_1c99bb
-	ld a, $07
+	ld a, GOLF_WARIO_7
 .asm_1c99bd
 	ld [wGolfWarioState], a
 	ld a, $02
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ld a, [hl]
 	ld [w1dc00], a
 	ret
@@ -3665,9 +3678,9 @@ Func_1c99ca: ; 1c99ca (72:59ca)
 ; 0x1c9a01
 
 Func_1c9a01: ; 1c9a01 (72:5a01)
-	ld a, [w1dc0a]
+	ld a, [wGolfCounter]
 	inc a
-	ld [w1dc0a], a
+	ld [wGolfCounter], a
 	cp $08
 	jr z, .asm_1c9a28
 	cp $20
@@ -3675,7 +3688,7 @@ Func_1c9a01: ; 1c9a01 (72:5a01)
 	ld a, $08
 	ld [w1dc4a], a
 	xor a
-	ld [w1dc0a], a
+	ld [wGolfCounter], a
 	ld [w1dc51], a
 	ld [w1dc49], a
 	ld [wGolfObj4State], a
@@ -3693,17 +3706,17 @@ Func_1c9a01: ; 1c9a01 (72:5a01)
 	play_music2 MUSIC_GAME_OVER
 
 	xor a
-	ld [w1dc0a], a
+	ld [wGolfCounter], a
 	ld [wGolfWarioDuration], a
 	ld [wGolfWarioFramesetOffset], a
 	ld [wGolfObj7Duration], a
 	ld [wGolfObj7FramesetOffset], a
 	ld a, $01
 	ld [wGolfObj4State], a
-	ld a, $07
+	ld a, GOLF_WARIO_7
 	ld [wGolfWarioState], a
 	ld a, $02
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ld a, $0b
 	ld [w1dc00], a
 	ret
@@ -3725,7 +3738,7 @@ Func_1c9a62: ; 1c9a62 (72:5a62)
 	ld hl, wGolfObj7Sprite
 	call AddGolfSprite
 
-	ld hl, w1dc0a
+	ld hl, wGolfCounter
 	ld a, [hl]
 	cp $50
 	jr nc, .asm_1c9a92
@@ -3761,7 +3774,7 @@ Func_1c9a62: ; 1c9a62 (72:5a62)
 	jr z, .asm_1c9ad3
 	ld b, $70
 .asm_1c9ad3
-	ld hl, w1dc0a
+	ld hl, wGolfCounter
 	ld a, [hl]
 	cp b
 	jr nc, .asm_1c9adc
@@ -3789,7 +3802,7 @@ Func_1c9a62: ; 1c9a62 (72:5a62)
 
 .asm_1c9b00
 	xor a
-	ld [w1dc0a], a
+	ld [wGolfCounter], a
 	ld [wGolfWarioDuration], a
 	ld [wGolfWarioFramesetOffset], a
 	ld [wGolfObj7Duration], a
@@ -3816,11 +3829,11 @@ Func_1c9a62: ; 1c9a62 (72:5a62)
 	cp [hl]
 	jr nc, .asm_1c9b48
 	play_sfx SFX_0FA
-	ld a, $06
+	ld a, GOLF_WARIO_6
 	ld [wGolfWarioState], a
 	jr .asm_1c9b4d
 .asm_1c9b48
-	ld a, $07
+	ld a, GOLF_WARIO_7
 	ld [wGolfWarioState], a
 .asm_1c9b4d
 	ld a, $0d
@@ -3909,7 +3922,7 @@ Func_1c9bbc: ; 1c9bbc (72:5bbc)
 	ld hl, wGolfObj7Sprite
 	call AddGolfSprite
 
-	ld hl, w1dc0a
+	ld hl, wGolfCounter
 	ld a, [hl]
 	cp $50
 	jr nc, .asm_1c9be5
@@ -3984,7 +3997,7 @@ Func_1c9c53: ; 1c9c53 (72:5c53)
 	ld hl, wGolfObj8Sprite
 	call AddGolfSprite
 
-	ld hl, w1dc0a
+	ld hl, wGolfCounter
 	ld a, [hl]
 	cp $20
 	jr nc, .asm_1c9c82
@@ -4102,7 +4115,7 @@ Func_1c9cf9: ; 1c9cf9 (72:5cf9)
 .got_lcd_config
 	ld [w1dc0c], a
 
-	ld a, [w1dc02]
+	ld a, [wGolfVBlankMode]
 	jumptable
 	dw VBlank_1c9d1d
 	dw VBlank_1c9e8d
@@ -4118,7 +4131,7 @@ VBlank_1c9d1d: ; 1c9d1d (72:5d1d)
 	jp CopyHLToDE
 
 .func
-	ld a, $01
+	ld a, BANK("Golf RAM")
 	ldh [rSVBK], a
 	ldh [rVBK], a
 	ld a, [wSCX]
@@ -4186,7 +4199,7 @@ VBlank_1c9e8d: ; 1c9e8d (72:5e8d)
 	jp CopyHLToDE
 
 .func
-	ld a, $01
+	ld a, BANK("Golf RAM")
 	ldh [rSVBK], a
 	ldh [rVBK], a
 	ld a, $03
@@ -4195,7 +4208,7 @@ VBlank_1c9e8d: ; 1c9e8d (72:5e8d)
 	ldh [rLCDC], a
 	xor a
 	ldh [rVBK], a
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
 .func_end
@@ -4208,22 +4221,22 @@ VBlank_1c9eb3: ; 1c9eb3 (72:5eb3)
 	jp CopyHLToDE
 
 .func
-	ld a, $01
+	ld a, BANK("Golf RAM")
 	ldh [rSVBK], a
 	xor a
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ld a, [wSCX]
 	ldh [rSCX], a
 	ld a, [w1dc25]
 	ldh [rWX], a
 	ld a, [w1dc0c]
 	ldh [rLCDC], a
-	ld a, [w1dc0d]
+	ld a, [wGolfWarioTilesBank]
 	ld [MBC5RomBank - $100], a
 	ld hl, rHDMA1
-	ld a, [w1dc11 + 0]
+	ld a, [wGolfWarioTilesPtr + 0]
 	ld [hli], a
-	ld a, [w1dc11 + 1]
+	ld a, [wGolfWarioTilesPtr + 1]
 	ld [hli], a
 	xor a
 	ld [hli], a
@@ -4242,11 +4255,11 @@ VBlank_1c9ef1: ; 1c9ef1 (72:5ef1)
 	jp CopyHLToDE
 
 .func
-	ld a, $01
+	ld a, BANK("Golf RAM")
 	ldh [rSVBK], a
 	ldh [rVBK], a
 	xor a
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ld a, [wSCX]
 	ldh [rSCX], a
 	ld a, [w1dc25]
@@ -4271,8 +4284,8 @@ VBlank_1c9ef1: ; 1c9ef1 (72:5ef1)
 .func_end
 ; 0x1c9f2e
 
-Func_1c9f2e: ; 1c9f2e (72:5f2e)
-	ld a, [w1dc02]
+GolfLobbyVBlank: ; 1c9f2e (72:5f2e)
+	ld a, [wGolfVBlankMode]
 	jumptable
 	dw VBlank_1c9f36
 	dw VBlank_1c9f7a
@@ -4286,7 +4299,7 @@ VBlank_1c9f36: ; 1c9f36 (72:5f36)
 
 .func
 	; update the coin number in the Golf Lobby
-	ld a, $01
+	ld a, BANK("Golf RAM")
 	ldh [rSVBK], a
 	xor a
 	ldh [rVBK], a
@@ -4323,19 +4336,19 @@ VBlank_1c9f7a: ; 1c9f7a (72:5f7a)
 	jp CopyHLToDE
 
 .func
-	ld a, $01
+	ld a, BANK("Golf RAM")
 	ldh [rSVBK], a
 	xor a
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ld a, [wSCX]
 	ldh [rSCX], a
 
-	ld a, [w1dc0d]
+	ld a, [wGolfWarioTilesBank]
 	ld [MBC5RomBank - $100], a
 	ld hl, rHDMA1
-	ld a, [w1dc11 + 0]
+	ld a, [wGolfWarioTilesPtr + 0]
 	ld [hli], a
-	ld a, [w1dc11 + 1]
+	ld a, [wGolfWarioTilesPtr + 1]
 	ld [hli], a
 	xor a
 	ld [hli], a
@@ -4349,7 +4362,7 @@ VBlank_1c9f7a: ; 1c9f7a (72:5f7a)
 
 Func_1c9fae: ; 1c9fae (72:5fae)
 	call Func_1c9fbd
-	ld a, [w1dc02]
+	ld a, [wGolfVBlankMode]
 	jumptable
 	dw VBlank_1c9fe1
 	dw VBlank_1c9ffa
@@ -4398,9 +4411,9 @@ VBlank_1c9fe1: ; 1c9fe1 (72:5fe1)
 
 VBlank_1c9ffa: ; 1c9ffa (72:5ffa)
 	ld a, $18
-	ld [w1dc11 + 0], a
+	ld [wdc11 + 0], a
 	ld a, $c0
-	ld [w1dc11 + 1], a
+	ld [wdc11 + 1], a
 	ld a, $0d
 	ld [w1dc13], a
 
@@ -4413,7 +4426,7 @@ VBlank_1c9ffa: ; 1c9ffa (72:5ffa)
 	ld a, $1
 	ldh [rSVBK], a
 	xor a
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ld a, [wSCX]
 	ldh [rSCX], a
 	ld a, BANK("VRAM1")
@@ -4434,10 +4447,10 @@ VBlank_1ca033: ; 1ca033 (72:6033)
 	jp CopyHLToDE
 
 .func
-	ld a, $01
+	ld a, BANK("Golf RAM")
 	ldh [rSVBK], a
 	xor a
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ld a, [wSCX]
 	ldh [rSCX], a
 	ld hl, w1db00
@@ -4449,9 +4462,9 @@ VBlank_1ca033: ; 1ca033 (72:6033)
 
 VBlank_1ca056: ; 1ca056 (72:6056)
 	ld a, $18
-	ld [w1dc11 + 0], a
+	ld [wdc11 + 0], a
 	ld a, $c0
-	ld [w1dc11 + 1], a
+	ld [wdc11 + 1], a
 	ld a, $0d
 	ld [w1dc13], a
 
@@ -4461,10 +4474,10 @@ VBlank_1ca056: ; 1ca056 (72:6056)
 	jp CopyHLToDE
 
 .func
-	ld a, $01
+	ld a, BANK("Golf RAM")
 	ldh [rSVBK], a
 	xor a
-	ld [w1dc02], a
+	ld [wGolfVBlankMode], a
 	ld a, [wSCX]
 	ldh [rSCX], a
 	ld a, BANK("VRAM1")

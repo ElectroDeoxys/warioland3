@@ -2992,15 +2992,15 @@ FarDecompress:: ; 2c18 (0:2c18)
 ; 0x2c30
 
 ; hl = source
-; w1dc11 = destination
+; wdc11 = destination
 Func_2c30:: ; 2c30 (0:2c30)
 	ld a, h
 	ldh [rHDMA1], a
 	ld a, l
 	ldh [rHDMA2], a
-	ld a, [w1dc11 + 0]
+	ld a, [wdc11 + 0]
 	ldh [rHDMA3], a
-	ld a, [w1dc11 + 1]
+	ld a, [wdc11 + 1]
 	ldh [rHDMA4], a
 	ld a, [w1dc13]
 	ldh [rHDMA5], a
@@ -3031,6 +3031,7 @@ endr
 
 ; hl = golf object duration
 ; de = frameset
+; outputs in c whether animation finished
 UpdateGolfObjectAnimation:: ; 2c7a (0:2c7a)
 	ld c, $00
 	ld a, [hl] ; duration
@@ -3058,7 +3059,7 @@ UpdateGolfObjectAnimation:: ; 2c7a (0:2c7a)
 
 .finished_animation
 	ld a, [hl] ; last frame
-	ld [w1dc09], a
+	ld [wGolfAnimLastFrame], a
 	ld a, [de]
 	ld [hld], a ; frame
 	inc de
@@ -3089,8 +3090,10 @@ AddGolfSprite:: ; 2ca7 (0:2ca7)
 	ret
 ; 0x2cc3
 
-Func_2cc3:: ; 2cc3 (0:2cc3)
-	ld hl, .oam_banks
+; updates Golf Wario sprite, given its state
+; and which direction it is facing
+UpdateGolfWarioAnimation:: ; 2cc3 (0:2cc3)
+	ld hl, .OAMBanks
 	ld a, [wGolfWarioState]
 	ld b, $00
 	ld c, a
@@ -3098,14 +3101,15 @@ Func_2cc3:: ; 2cc3 (0:2cc3)
 	ld a, [hl]
 	ld [wTempBank], a
 
-	ld a, [w1dc42]
+	ld a, [wGolfWarioDir]
 	and a
-	jr z, .asm_2cdb
+	jr z, .dir_right
+; dir left
 	ld a, c
-	add $0c
+	add NUM_GOLF_WARIO_STATES
 	ld c, a
-.asm_2cdb
-	ld hl, .oam_table
+.dir_right
+	ld hl, .OAMTable
 	ld b, $00
 	sla c
 	add hl, bc
@@ -3114,7 +3118,7 @@ Func_2cc3:: ; 2cc3 (0:2cc3)
 	ld a, [hl]
 	ld [wGolfOAMPtr + 0], a
 
-	ld hl, .framesets
+	ld hl, .Framesets
 	add hl, bc
 	ld a, [hli]
 	ld d, [hl]
@@ -3126,13 +3130,13 @@ Func_2cc3:: ; 2cc3 (0:2cc3)
 	ld hl, wGolfWarioDuration
 	call UpdateGolfObjectAnimation
 	ld a, c
-	ld [w1dc2a], a
+	ld [wHasGolfWarioAnimationFinished], a
 	pop af
 	bankswitch
 
-	ld a, [w1dc2a]
+	ld a, [wHasGolfWarioAnimationFinished]
 	and a
-	call nz, Func_1c8f37
+	call nz, HoldGolfWarioLastFrame
 	ld a, [wGolfWarioCurrentFrame]
 	ld [wGolfWarioFrame], a
 	ld a, [wROMBank]
@@ -3145,7 +3149,7 @@ Func_2cc3:: ; 2cc3 (0:2cc3)
 	bankswitch
 	ret
 
-.oam_banks
+.OAMBanks
 	db BANK(OAM_14000)
 	db BANK(OAM_1426c)
 	db BANK(OAM_14d1b)
@@ -3159,7 +3163,8 @@ Func_2cc3:: ; 2cc3 (0:2cc3)
 	db BANK(OAM_14a82)
 	db BANK(OAM_1fc31b)
 
-.oam_table
+.OAMTable
+	; facing right
 	dw OAM_14000
 	dw OAM_1426c
 	dw OAM_14d1b
@@ -3173,6 +3178,7 @@ Func_2cc3:: ; 2cc3 (0:2cc3)
 	dw OAM_14a82
 	dw OAM_1fc31b
 
+	; facing left
 	dw OAM_14000
 	dw OAM_1426c
 	dw OAM_14d1b
@@ -3186,7 +3192,8 @@ Func_2cc3:: ; 2cc3 (0:2cc3)
 	dw OAM_14a82
 	dw OAM_1fc31b
 
-.framesets
+.Framesets
+	; facing right
 	dw Frameset_1425f
 	dw Frameset_149c5
 	dw Frameset_151fd
@@ -3200,6 +3207,7 @@ Func_2cc3:: ; 2cc3 (0:2cc3)
 	dw Frameset_14cf6
 	dw Frameset_1fc47c
 
+	; facing left
 	dw Frameset_14252
 	dw Frameset_149b4
 	dw Frameset_151e4
