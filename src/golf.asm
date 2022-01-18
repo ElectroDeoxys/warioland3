@@ -37,4 +37,16 @@ BGMaps_1c5dc6: INCBIN "gfx/bgmaps/map_1c5dc6.bin"
 
 SECTION "Bank 72", ROMX
 
-INCLUDE "engine/bank72.asm"
+INCLUDE "engine/golf/lobby.asm"
+INCLUDE "engine/golf/building.asm"
+INCLUDE "engine/golf/level.asm"
+INCLUDE "gfx/pals/golf.asm"
+
+GolfFlagNumbersGfx:   INCBIN "gfx/golf/golf_flag_numbers.2bpp"
+GolfParNumbersGfx:    INCBIN "gfx/golf/golf_par_numbers.2bpp"
+GolfStrokeNumbersGfx: INCBIN "gfx/golf/golf_stroke_numbers.2bpp"
+GolfHoleFlagGfx:      INCBIN "gfx/golf/golf_hole_flag.2bpp"
+
+	INCROM $1ca66f, $1ca6cf
+
+INCLUDE "gfx/golf/oam.asm"

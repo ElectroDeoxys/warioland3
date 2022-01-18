@@ -26,7 +26,7 @@ _CreditsStateTable: ; 160000 (58:4000)
 Func_160028: ; 160028 (58:4028)
 	call DisableLCD
 	call FillBGMap0_With7f
-	call ClearWholeVirtualOAM
+	call ClearVirtualOAM
 
 	call LoadCreditsPals
 	call LoadCreditsGfx
@@ -102,7 +102,7 @@ Func_160028: ; 160028 (58:4028)
 	call UpdateObjAnim
 	ld hl, $d523
 	call Func_1604b1
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	stop_music
 	ld a, 120
 	ld [wTimer], a
@@ -124,7 +124,7 @@ Func_1600d4: ; 1600d4 (58:40d4)
 	call Func_1604b1
 	ld hl, $d523
 	call Func_1604b1
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	ret
 
 .PlayCreditsMusic
@@ -140,7 +140,7 @@ Func_1600d4: ; 1600d4 (58:40d4)
 	call UpdateObjAnim
 	ld hl, $d523
 	call Func_1604b1
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	ld a, [wc084]
 	cp $0a
 	jr z, .asm_160187
@@ -291,7 +291,7 @@ Func_160190: ; 160190 (58:4190)
 	call Func_17ec
 	ld hl, $d523
 	call Func_1604b1
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	ret
 
 .asm_160226
@@ -404,7 +404,7 @@ Func_16026c: ; 16026c (58:426c)
 .asm_1602e4
 	ld hl, $d515
 	call Func_17ec
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	ret
 ; 0x1602ee
 
@@ -417,7 +417,7 @@ Func_1602ee: ; 1602ee (58:42ee)
 	hcall UpdateObjAnim
 	ld hl, $d515
 	call Func_17ec
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	call Func_1603cb
 	ld hl, wSubState
 	inc [hl]
@@ -447,7 +447,7 @@ Func_160318: ; 160318 (58:4318)
 	call UpdateObjAnim
 	ld hl, $d523
 	call Func_1604b1
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	ld a, [wGlobalCounter]
 	and $0f
 	ret nz
@@ -477,7 +477,7 @@ Func_160365: ; 160365 (58:4365)
 	call UpdateObjAnim
 	ld hl, $d523
 	call Func_1604b1
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	ld a, [wTransitionParam]
 	cp TRANSITION_EPILOGUE_PERFECT
 	ret nz

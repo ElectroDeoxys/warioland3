@@ -74,8 +74,8 @@ wJoypadDown:: ; c093
 wJoypadPressed:: ; c094
 	ds $1
 
-; number of elements that wVirtualOAM holds
-wNumOAMSprites:: ; c095
+; size of wVirtualOAM in number of bytes
+wVirtualOAMByteSize:: ; c095
 	ds $1
 
 wCurSprite:: sprite_oam_struct wCurSprite ; c096
@@ -788,7 +788,9 @@ wIsInSand:: ; caa0
 wcaa1:: ; caa1
 	ds 4 palettes
 
-wcac1:: ; cac1
+; whether the level's Mini-Game
+; has already been cleared
+wIsMinigameCleared:: ; cac1
 	ds $1
 
 wcac2:: ; cac2
@@ -1170,24 +1172,13 @@ w1da00:: ; da00
 w1db00:: ; db00
 	ds 8 palettes
 
-wGolfTerrain:: ; db40
-	ds $41
-
-; par of current golf hole
-wGolfPar:: ; db81
-	ds $1
-
-w1db82:: ; db82
-	ds $1
-
-w1db83:: ; db83
-	ds $1
-
-w1db84:: ; db84
-	ds $1
-
-w1db85:: ; db85
-	ds $1
+wGolfLevelData::
+wGolfTerrainBlocks:: ds NUM_GOLF_LEVEL_BLOCKS ; db40
+wGolfPar:: ds $1 ; db81
+w1db82:: ds $2 ; db82
+wGolfWaterSpawn1:: ds $1 ; db84
+wGolfWaterSpawn2:: ds $1 ; db85
+wGolfLevelDataEnd::
 
 	ds $a
 
@@ -1198,6 +1189,7 @@ w1db90:: ; db90
 
 w1dc00:: ; dc00
 WGolfLobbyState:: ; dc00
+WGolfLevelState:: ; dc00
 	ds $1
 
 w1dc01:: ; dc01
@@ -1267,7 +1259,7 @@ wGolfStroke:: ; dc22
 wGolfMaxStrokes:: ; dc23
 	ds $1
 
-w1dc24:: ; dc24
+wGolfResult:: ; dc24
 	ds $1
 
 w1dc25:: ; dc25
@@ -1280,12 +1272,16 @@ wGolfDisplayMode:: ; dc26
 ; $0 = right
 ; $1 = left
 wGolfMenuScrollingDir:: ; dc27
+wGolfLevelScrollingDir:: ; dc27
 	ds $1
 
-w1dc28:: ; dc28
+; which side of the Para-Goomba that the hole is in
+; $0 = to the right
+; $1 = to the left
+wGolfHoleDirection:: ; dc28
 	ds $1
 
-w1dc29:: ; dc29
+wShotDirection:: ; dc29
 	ds $1
 
 wHasGolfWarioAnimationFinished:: ; dc2a
@@ -1300,41 +1296,23 @@ wGolfMenuTargetSCX:: ; dc2e
 wTempGolfXScroll:: ; dc2e
 	ds $2
 
-wGolfYPos:: ; dc30
-	ds $1
+wGolfWarioYPos:: ds $2 ; dc30
+wGolfWarioXPos:: ds $2 ; dc32
 
-	ds $1
+wGolfParaGoomYPos:: ds $2 ; dc34
+wGolfParaGoomXPos:: ds $2 ; dc36
 
-wGolfXPos:: ; dc32
-	ds $1
+wGolfLevelHoleXPos:: ds $2 ; dc38
 
-	ds $1
-
-w1dc34:: ; dc34
-	ds $2
-
-w1dc36:: ; dc36
-	ds $2
-
-w1dc38:: ; dc38
-	ds $1
-
-w1dc39:: ; dc39
-	ds $1
-
-w1dc3a:: ; dc3a
-	ds $2
-
-w1dc3c:: ; dc3c
-	ds $2
+; position of Para-Goom when it was last shot
+; used to reset position when, e.g. going in OB
+wLastGolfParaGoomYPos:: ds $2 ; dc3a
+wLastGolfParaGoomXPos:: ds $2 ; dc3c
 
 w1dc3e:: ; dc3e
-	ds $1
+	ds $2
 
-w1dc3f:: ; dc3f
-	ds $1
-
-w1dc40:: ; dc40
+wGolfWarioTargetXPos:: ; dc40
 	ds $2
 
 wGolfWarioDir:: ; dc42
@@ -1342,43 +1320,54 @@ wGolfWarioDir:: ; dc42
 
 	ds $1
 
-w1dc44:: ; dc44
+; can either be low byte of
+; PARAGOOM_GROUND_LEVEL or PARAGOOM_TEE_BOX_LEVEL
+; the ground level y position proper is considered
+; to be $1xx, where xx is this value
+wGroundLevelYPos:: ; dc44
 	ds $1
 
-w1dc45:: ; dc45
+wGolfTerrain:: ; dc45
 	ds $1
 
-w1dc46:: ; dc46
+wShotTerrainModifier:: ; dc46
 	ds $1
 
+; used to check whether the Para-Goom
+; has already left the Tee Box
 w1dc47:: ; dc47
 	ds $1
 
-w1dc48:: ; dc48
+; golf terrain of where Para-Goom was shot from
+wStrokeGolfTerrain:: ; dc48
 	ds $1
 
-w1dc49:: ; dc49
+; which way the Power Gauge is flowing
+; FALSE = rising
+; TRUE = falling
+wIsPowerGaugeFalling:: ; dc49
 	ds $1
 
-w1dc4a:: ; dc4a
+wShotPowerGaugeCursor:: ; dc4a
 	ds $1
 
-w1dc4b:: ; dc4b
+wShotPowerLevel:: ; dc4b
 	ds $1
 
-w1dc4c:: ; dc4c
+wSelectedShotPowerGauge:: ; dc4c
 	ds $1
 
-w1dc4d:: ; dc4d
+wShotSpin:: ; dc4d
 	ds $1
 
-wGolfYVel:: ; dc4e
+wGolfWarioYVel:: ; dc4e
+wShotYVel:: ; dc4e
 	ds $1
 
 w1dc4f:: ; dc4f
 	ds $1
 
-w1dc50:: ; dc50
+wShotXVel:: ; dc50
 	ds $1
 
 w1dc51:: ; dc51
@@ -1394,12 +1383,12 @@ wGolfObj2:: golf_obj_struct wGolfObj2 ; dc5c
 wGolfObj3:: golf_obj_struct wGolfObj3 ; dc64
 wGolfObj4:: golf_obj_struct wGolfObj4 ; dc6c
 wGolfObj5:: golf_obj_struct wGolfObj5 ; dc74
-wGolfObj6:: golf_obj_struct wGolfObj6 ; dc7c
 
+wGolfParaGoom:: golf_obj_struct wGolfParaGoom ; dc7c
 wGolfWario:: golf_obj_struct wGolfWario ; dc84
 
-wGolfObj7:: golf_obj_struct wGolfObj7 ; dc8c
-wGolfObj8:: golf_obj_struct wGolfObj8 ; dc94
+wGolfOverlayText:: golf_obj_struct wGolfOverlayText ; dc8c
+wGolfParaGoomGhost:: golf_obj_struct wGolfParaGoomGhost ; dc94
 
 	ds $364
 

@@ -1362,7 +1362,7 @@ Func_437a8: ; 437a8 (10:77a8)
 	ld [hld], a
 	ld a, $fe
 	ld [hl], a
-	ld a, [wcac1]
+	ld a, [wIsMinigameCleared]
 	and a
 	ret z
 	ld a, $20

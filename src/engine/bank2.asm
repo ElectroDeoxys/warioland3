@@ -23,7 +23,7 @@ _LevelStateTable: ; 8000 (2:4000)
 Func_8024: ; 8024 (2:4024)
 	call DisableLCD
 	call FillBGMap0_With7f
-	call ClearWholeVirtualOAM
+	call ClearVirtualOAM
 	call Func_12c3
 
 	xor a
@@ -168,7 +168,7 @@ Func_80aa: ; 80aa (2:40aa)
 	pop af
 
 	ldh [rSVBK], a
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	ld a, [wFloorTransitionDir]
 	and FLOOR_TRANSITION_DOWN | FLOOR_TRANSITION_UP
 	jr z, .asm_8215
@@ -412,7 +412,7 @@ Func_80aa: ; 80aa (2:40aa)
 	pop af
 	ldh [rSVBK], a
 
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	xor a
 	ld [wc0be], a
 	ld [wc0bd], a
@@ -464,7 +464,7 @@ Func_80aa: ; 80aa (2:40aa)
 	pop af
 	ldh [rSVBK], a
 
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 
 	xor a
 	ld [wc0be], a
@@ -554,7 +554,7 @@ Func_846e: ; 846e (2:446e)
 	ldh [rSVBK], a
 
 	call FillBGMap0_With7f
-	call ClearWholeVirtualOAM
+	call ClearVirtualOAM
 	call Func_12c3
 	call Func_8a41
 	call Func_8ad9
@@ -648,7 +648,7 @@ Func_861c: ; 861c (2:461c)
 	farcall Func_616d7
 	pop af
 	ldh [rSVBK], a
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	ld a, [wSRAMBank]
 	push af
 	ld a, BANK("SRAM1")
@@ -780,7 +780,7 @@ Func_8747: ; 8747 (2:4747)
 	ld [wc0bd], a
 	ld [wIsIntangible], a
 	ld [wInvincibleCounter], a
-	ld [wcac1], a
+	ld [wIsMinigameCleared], a
 	ld [wIsRolling], a
 	ld [wIsGettingOffLadder], a
 	ld [wca66], a

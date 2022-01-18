@@ -68,28 +68,77 @@ GOLF_LEVEL_UNK03 rw ; $03
 GOLF_LEVEL_UNK04 rw ; $04
 GOLF_LEVEL_STRUCT_LENGTH EQU _RS
 
-; various golf terrains
-	const_def
-	const GFTR_TEE_BOX ; $0
-	const GFTR_PLAIN   ; $1
-	const GFTR_HOLE    ; $2
-	const GFTR_ROUGH   ; $3
-	const GFTR_BUNKER  ; $4
-	const GFTR_WATER   ; $5
-	const GFTR_OB      ; $6
-	const GFTR_UNUSED  ; $7
-	const GFTR_END     ; $8
-
-; golf terrain flags
-	const_def
-GFTR_EDGE_RIGHT EQU 1 << 4
-GFTR_EDGE_LEFT  EQU 1 << 5
-GFTR_UNK_FLAG   EQU 1 << 7
-
+; par values of a Golf level
 	const_def 3
 	const PAR_3 ; $3
 	const PAR_4 ; $4
 	const PAR_5 ; $5
+
+; wGolfResult constants
+	const_def
+	const GOLFRESULT_UNDER_PAR        ; $0
+	const GOLFRESULT_PAR              ; $1
+	const GOLFRESULT_OVER_PAR         ; $2
+	const GOLFRESULT_COURSE_UNDER_PAR ; $3
+	const GOLFRESULT_COURSE_OVER_PAR  ; $4
+
+; various golf terrains
+	const_def
+	const GOLF_TERRAIN_TEE_BOX ; $0
+	const GOLF_TERRAIN_PLAIN   ; $1
+SPECIAL_GOLF_TERRAIN EQU const_value
+	const GOLF_TERRAIN_HOLE    ; $2
+	const GOLF_TERRAIN_ROUGH   ; $3
+	const GOLF_TERRAIN_BUNKER  ; $4
+	const GOLF_TERRAIN_WATER   ; $5
+	const GOLF_TERRAIN_OB      ; $6
+	const GOLF_TERRAIN_TEE_OB  ; $7
+	const GOLF_TERRAIN_END     ; $8
+
+; golf terrain flags
+	const_def 4
+	const GOLF_TERRAIN_EDGE_RIGHT_F ; $4
+	const GOLF_TERRAIN_EDGE_LEFT_F  ; $5
+	const_skip
+	const GOLF_TERRAIN_2ND_WATER_F  ; $7
+
+GOLF_TERRAIN_EDGE_RIGHT EQU 1 << GOLF_TERRAIN_EDGE_RIGHT_F
+GOLF_TERRAIN_EDGE_LEFT  EQU 1 << GOLF_TERRAIN_EDGE_LEFT_F
+GOLF_TERRAIN_2ND_WATER  EQU 1 << GOLF_TERRAIN_2ND_WATER_F ; flag for differentiating two sets of water
+
+GOLF_TERRAIN_MASK       EQU $0f
+GOLF_TERRAIN_FLAGS_MASK EQU $f0
+
+NUM_GOLF_LEVEL_BLOCKS EQU 64 + 1 ; $40 plus end block
+
+BASE_SHOT_POWER EQU 8
+MAX_SHOT_POWER EQU 76
+
+; power levels when taking a shot
+	const_def
+	const SHOT_POWER_0 ; $0
+	const SHOT_POWER_1 ; $1
+	const SHOT_POWER_2 ; $2
+	const SHOT_POWER_3 ; $3
+	const SHOT_POWER_4 ; $4
+	const SHOT_POWER_5 ; $5
+	const SHOT_POWER_6 ; $6
+	const SHOT_POWER_7 ; $7
+	const SHOT_POWER_8 ; $8
+	const SHOT_POWER_9 ; $9
+
+; spin type when taking a shot
+	const_def
+	const SHOT_MISS     ; $0
+	const SHOT_BACKSPIN ; $1
+	const SHOT_NORMAL   ; $2
+	const SHOT_TOPSPIN  ; $3
+
+; wShotTerrainModifier constants
+	const_def
+	const SHOT_MODIFIER_NONE   ; $0
+	const SHOT_MODIFIER_ROUGH  ; $1
+	const SHOT_MODIFIER_BUNKER ; $2
 
 ; wGolfDisplayMode constants
 	const_def
@@ -97,27 +146,61 @@ GFTR_UNK_FLAG   EQU 1 << 7
 	const GOLF_DISPLAY_SPLIT  ; $1
 	const GOLF_DISPLAY_BGMAP1 ; $2
 
+; golf level dimensions
+MAX_GOLF_X_SCROLL EQU $160
+PARAGOOM_GROUND_LEVEL  EQU $180 ; Y pos considered to be 'ground level' for ParaGoom
+PARAGOOM_TEE_BOX_LEVEL EQU PARAGOOM_GROUND_LEVEL - $20
+
 ; wGolfWarioState constants
 	const_def
 	const GOLF_WARIO_IDLING        ; $0
 	const GOLF_WARIO_WALKING       ; $1
-	const GOLF_WARIO_2             ; $2
-	const GOLF_WARIO_3             ; $3
-	const GOLF_WARIO_4             ; $4
+	const GOLF_WARIO_CHARGING      ; $2
+	const GOLF_WARIO_ATTACKING_1   ; $3
+	const GOLF_WARIO_ATTACKING_2   ; $4
 	const GOLF_WARIO_MISSING       ; $5
-	const GOLF_WARIO_6             ; $6
-	const GOLF_WARIO_7             ; $7
+	const GOLF_WARIO_CLEARED       ; $6
+	const GOLF_WARIO_LOST          ; $7
 	const GOLF_WARIO_WAITING       ; $8
-	const GOLF_WARIO_9             ; $9
+	const GOLF_WARIO_ENTERING_DOOR ; $9
 	const GOLF_WARIO_GOING_IN_PIPE ; $a
 	const GOLF_WARIO_TURNING       ; $b
 NUM_GOLF_WARIO_STATES EQU const_value
 
+; wGolfParaGoomState constants
+	const_def
+	const GOLF_PARAGOOM_0 ; $0
+	const GOLF_PARAGOOM_1 ; $1
+	const GOLF_PARAGOOM_2 ; $2
+	const GOLF_PARAGOOM_3 ; $3
+	const GOLF_PARAGOOM_4 ; $4
+	const GOLF_PARAGOOM_5 ; $5
+	const GOLF_PARAGOOM_6 ; $6
+	const GOLF_PARAGOOM_7 ; $7
+	const GOLF_PARAGOOM_8 ; $8
+
 ; WGolfLobbyState consants
 	const_def
-	const GOLFLOBBY_ST_WAIT_INPUT ; $0
-	const GOLFLOBBY_ST_WALK_RIGHT ; $1
-	const GOLFLOBBY_ST_WALK_LEFT  ; $2
-	const GOLFLOBBY_ST_ENTER_PIPE ; $3
-	const GOLFLOBBY_ST_ENTER_DOOR ; $4
-	const GOLFLOBBY_ST_EXIT_PIPE  ; $5
+	const GOLFLOBBYSTATE_WAIT_INPUT ; $0
+	const GOLFLOBBYSTATE_WALK_RIGHT ; $1
+	const GOLFLOBBYSTATE_WALK_LEFT  ; $2
+	const GOLFLOBBYSTATE_ENTER_PIPE ; $3
+	const GOLFLOBBYSTATE_ENTER_DOOR ; $4
+	const GOLFLOBBYSTATE_EXIT_PIPE  ; $5
+
+; WGolfLevelState consants
+	const_def
+	const GOLFLEVELSTATE_WAIT_INPUT        ; $0
+	const GOLFLEVELSTATE_SCROLL            ; $1
+	const GOLFLEVELSTATE_SELECT_SHOT_POWER ; $2
+	const GOLFLEVELSTATE_SELECT_SHOT_SPIN  ; $3
+	const GOLFLEVELSTATE_START_SHOT        ; $4
+	const GOLFLEVELSTATE_SHOT              ; $5
+	const GOLFLEVELSTATE_BOUNCE            ; $6
+	const GOLFLEVELSTATE_SPECIAL_TERRAIN   ; $7
+	const GOLFLEVELSTATE_WALK              ; $8
+	const GOLFLEVELSTATE_BETWEEN_SHOTS     ; $9
+	const GOLFLEVELSTATE_CLEARED           ; $a
+	const GOLFLEVELSTATE_GAME_OVER         ; $b
+	const GOLFLEVELSTATE_PAUSE             ; $c
+	const GOLFLEVELSTATE_RESULT            ; $d

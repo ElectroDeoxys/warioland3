@@ -25,7 +25,7 @@ Func_9c005: ; 9c005 (27:4005)
 
 Func_9c021: ; 9c021 (27:4021)
 	call DisableLCD
-	call ClearWholeVirtualOAM
+	call ClearVirtualOAM
 	stop_music2
 
 	xor a
@@ -66,7 +66,7 @@ Func_9c021: ; 9c021 (27:4021)
 Func_9c072: ; 9c072 (27:4072)
 	xor a
 	ld [w2d800], a
-	call ClearWholeVirtualOAM
+	call ClearVirtualOAM
 	ld a, [w2d025]
 	dec a
 	jr z, .skip_load_tiles

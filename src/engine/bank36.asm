@@ -110,7 +110,7 @@ _GameOverStateTable: ; db277 (36:7277)
 Func_db29b: ; db29b (36:729b)
 	call DisableLCD
 	call FillBGMap0_With7f
-	call ClearWholeVirtualOAM
+	call ClearVirtualOAM
 
 	call LoadGameOverPals
 	call LoadGameOverGfx
@@ -256,7 +256,7 @@ Func_db317: ; db317 (36:7317)
 	call UpdateObjAnim
 	ld hl, $d523
 	call Func_db4e9
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	ret
 
 .Func_db3db
@@ -276,7 +276,7 @@ Func_db3e4: ; db3e4 (36:73e4)
 	call UpdateObjAnim
 	ld hl, $d523
 	call Func_db4e9
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	ld a, [$d520]
 	and a
 	ret z

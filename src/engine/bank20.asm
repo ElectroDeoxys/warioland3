@@ -915,7 +915,7 @@ Func_804f7: ; 804f7 (20:44f7)
 
 	call Func_80b29
 	call VBlank_80cb1
-	call ClearWholeVirtualOAM
+	call ClearVirtualOAM
 
 	xor a
 	ld [w2d011], a
@@ -945,7 +945,7 @@ Func_80540: ; 80540 (20:4540)
 	call Func_82bda
 	farcall Func_b4a37
 	call AddCompassSprite
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	ret
 ; 0x8055f
 
@@ -957,7 +957,7 @@ Func_8055f: ; 8055f (20:455f)
 
 	ld a, $02
 	ldh [rSVBK], a
-	call ClearWholeVirtualOAM
+	call ClearVirtualOAM
 	call VBlank_80bf9
 
 	call Func_80b29
@@ -1012,7 +1012,7 @@ Func_8055f: ; 8055f (20:455f)
 Func_805d7: ; 805d7 (20:45d7)
 	call Func_80e89
 	call AddCompassSprite
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	ret
 ; 0x805e1
 
@@ -1103,7 +1103,7 @@ Func_8065e: ; 8065e (20:465e)
 	ldh [rSCX], a
 	ld [wSCX], a
 	xor a
-	ld [wNumOAMSprites], a
+	ld [wVirtualOAMByteSize], a
 
 	ld a, [wCurMapSide] ; a gets overwritten
 	call Func_81dce
@@ -1838,7 +1838,7 @@ Func_80d6c: ; 80d6c (20:4d6c)
 Func_80d7c: ; 80d7c (20:4d7c)
 	call Func_80d92
 	farcall Func_9ce28
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	ret
 ; 0x80d92
 

@@ -350,7 +350,7 @@ DrawCoinCount: ; 9a3a2 (26:63a2)
 _InitTreasureCollection: ; 9a3cf (26:63cf)
 	call DisableLCD
 	call FillBGMap0_With7f
-	call ClearWholeVirtualOAM
+	call ClearVirtualOAM
 
 	play_music2 MUSIC_TREASURE_COLLECTION
 
@@ -660,7 +660,7 @@ _TreasureCollection: ; 9a618 (26:6618)
 	call ProcessDPadRepeat
 	call HandleTreasureCollectionInput
 	call AnimateTreasureCollection
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	ret
 ; 0x9a625
 

@@ -62,7 +62,7 @@ TitleStateTable: ; 402b (1:402b)
 InitIntroSequence: ; 405f (1:405f)
 	call DisableLCD
 	call FillBGMap0_With7f
-	call ClearWholeVirtualOAM
+	call ClearVirtualOAM
 	call LoadTitleScreenPals
 	call LoadTitleScreenTiles
 	call LoadTitleScreenTileMap
@@ -487,7 +487,7 @@ IntroSequencePhase1: ; 41cf (1:41cf)
 	call Func_4b93
 	ld hl, wMenuObj5
 	call Func_4b93
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	jp DrawIntroBackgroundLayers
 ; 0x42ed
 
@@ -605,7 +605,7 @@ IntroSequencePhase2: ; 42ed (1:42ed)
 	call Func_4b93
 	ld hl, wMenuObj5
 	call Func_4b93
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	jp DrawIntroBackgroundLayers
 ; 0x43b5
 
@@ -776,7 +776,7 @@ IntroSequencePhase3: ; 43b5 (1:43b5)
 	call Func_4b93
 	ld hl, wMenuObj5
 	call Func_4b93
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	jp DrawIntroBackgroundLayers
 ; 0x44c3
 
@@ -785,7 +785,7 @@ EndIntroSequence: ; 44c3 (1:44c3)
 	call UpdateObjAnim
 	ld hl, wWarioPlane
 	call Func_4b93
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 
 	ld a, [wceef]
 	and a
@@ -849,7 +849,7 @@ StartMenu: ; 4508 (1:4508)
 	call Func_4b73
 
 .asm_453e
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	ld hl, wStartMenuSelection
 	bit 7, [hl]
 	jr nz, .asm_4578
@@ -1006,7 +1006,7 @@ Func_4628: ; 4628 (1:4628)
 InitTimeAttackDescription: ; 4640 (1:4640)
 	call DisableLCD
 	call FillBGMap0_With7f
-	call ClearWholeVirtualOAM
+	call ClearVirtualOAM
 	call LoadTimeAttackDescriptionPals
 	call ApplyTempPals1ToBGPals
 	call LoadTimeAttackDescriptionTiles
@@ -1195,7 +1195,7 @@ GBIncompatibleStateTable: ; 47aa (1:47aa)
 GBIncompatible: ; 47be (1:47be)
 	call DisableLCD
 	call ClearBGMap0
-	call ClearWholeVirtualOAM
+	call ClearVirtualOAM
 
 	farcall LoadGBIncompatibleScreenGfx
 	farcall LoadGBIncompatibleScreenMap
@@ -1268,7 +1268,7 @@ LanguageSelectionStateTable: ; 4831 (1:4831)
 InitLanguageSelection: ; 4857 (1:4857)
 	call DisableLCD
 	call FillBGMap0_With7f
-	call ClearWholeVirtualOAM
+	call ClearVirtualOAM
 
 	farcall LoadFontPals
 	farcall LoadFontTiles
@@ -1300,7 +1300,7 @@ InitLanguageSelection: ; 4857 (1:4857)
 	call UpdateObjAnim
 	ld hl, wMenuObj1
 	call Func_4e3e
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
 	ldh [rLCDC], a
 
@@ -1348,7 +1348,7 @@ LanguageSelection: ; 48c9 (1:48c9)
 	call UpdateObjAnim
 	ld hl, wMenuObj1
 	call Func_4e3e
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	ret
 ; 0x4917
 

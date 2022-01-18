@@ -1,11 +1,11 @@
-; clears whole wVirtualOAM regardless of filled elements
-ClearWholeVirtualOAM:: ; 37d (0:37d)
+; clears whole wVirtualOAM
+ClearVirtualOAM:: ; 37d (0:37d)
 	ld hl, wVirtualOAM
 	ld b, NUM_SPRITE_OAM_STRUCTS * SPRITEOAMSTRUCT_LENGTH
 	xor a
 	call WriteAToHL_BTimes
 	xor a
-	ld [wNumOAMSprites], a
+	ld [wVirtualOAMByteSize], a
 	ret
 ; 0x38b
 
@@ -44,9 +44,9 @@ ClearBGMap1:: ; 3ad (0:3ad)
 	ret
 ; 0x3b9
 
-; clears wVirtualOAM, only up to the filled number of elements
-ClearVirtualOAM:: ; 3b9 (0:3b9)
-	ld a, [wNumOAMSprites]
+; clears unused sprites that are in wVirtualOAM
+ClearUnusedVirtualOAM:: ; 3b9 (0:3b9)
+	ld a, [wVirtualOAMByteSize]
 	ld l, a
 	ld h, HIGH(wVirtualOAM)
 	ld a, NUM_SPRITE_OAM_STRUCTS * SPRITEOAMSTRUCT_LENGTH
@@ -55,7 +55,7 @@ ClearVirtualOAM:: ; 3b9 (0:3b9)
 	jr c, .done
 	srl a ; a / 2
 	srl a ; a / 4
-	ld b, a
+	ld b, a ; number of OAM structs to clear
 
 	xor a
 .loop
@@ -67,6 +67,6 @@ ClearVirtualOAM:: ; 3b9 (0:3b9)
 	jr nz, .loop
 .done
 	xor a
-	ld [wNumOAMSprites], a
+	ld [wVirtualOAMByteSize], a
 	ret
 ; 0x3d8

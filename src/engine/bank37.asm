@@ -20,7 +20,7 @@ _PerfectStateTable: ; dc000 (37:4000)
 Func_dc01e: ; dc01e (37:401e)
 	call DisableLCD
 	call FillBGMap0_With7f
-	call ClearWholeVirtualOAM
+	call ClearVirtualOAM
 
 	call LoadPerfectPals
 	call LoadPerfectGfx
@@ -69,7 +69,7 @@ Func_dc073: ; dc073 (37:4073)
 	call UpdateObjAnim
 	ld hl, $d523
 	call Func_dc158
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 	ld hl, wTimer
 	ld a, [hl]
 	and a

@@ -83,7 +83,7 @@ InitPauseMenu: ; 1f0087 (7c:4087)
 	xor a
 	ld [wRoomAnimatedTilesEnabled], a
 	call ClearBGMap0
-	call ClearWholeVirtualOAM
+	call ClearVirtualOAM
 
 	farcall LoadPauseMenuPals
 	farcall LoadPauseMenuGfx
@@ -404,7 +404,7 @@ UpdatePauseMenu: ; 1f02a2 (7c:42a2)
 	ld hl, wMenuObj2
 	call AddPauseMenuSprite
 
-	call ClearVirtualOAM
+	call ClearUnusedVirtualOAM
 
 	ld a, [wPauseMenuSelection]
 	bit 7, a
@@ -439,7 +439,7 @@ UpdatePauseMenu: ; 1f02a2 (7c:42a2)
 
 ReturnFromPauseMenu: ; 1f033c (7c:433c)
 	call DisableLCD
-	call ClearWholeVirtualOAM
+	call ClearVirtualOAM
 	call Func_1f0969
 	call LoadBackupVRAM
 
@@ -467,7 +467,7 @@ InitSaveScreen: ; 1f0370 (7c:4370)
 	ld a, TRUE
 	ld [wResetDisabled], a
 	call DisableLCD
-	call ClearWholeVirtualOAM
+	call ClearVirtualOAM
 
 	farcall LoadSaveScreenPals
 	farcall LoadSaveScreenGfx
@@ -889,7 +889,7 @@ InitSaveScreenAndBackupVRAM: ; 1f0701 (7c:4701)
 	call DisableLCD
 	call SaveBackupVRAM
 	call ClearBGMap1
-	call ClearWholeVirtualOAM
+	call ClearVirtualOAM
 
 	farcall LoadSaveScreenPals
 	farcall LoadSaveScreenGfx

@@ -378,7 +378,7 @@ TryAddSprite:: ; df4 (0:df4)
 	ld c, a    ; wCurSpriteXCoord
 	ld a, [hld]
 	ld b, a    ; wCurSpriteYCoord
-	ld l, [hl] ; wNumOAMSprites
+	ld l, [hl] ; wVirtualOAMByteSize
 	ld h, HIGH(wVirtualOAM)
 .loop
 	ld a, l
@@ -406,7 +406,7 @@ TryAddSprite:: ; df4 (0:df4)
 	pop hl
 	ld [hli], a
 	ld a, l
-	ld [wNumOAMSprites], a
+	ld [wVirtualOAMByteSize], a
 	inc de
 	jr .loop
 ; 0xe2b
@@ -1159,7 +1159,7 @@ LoadBackupVRAM:: ; 1351 (0:1351)
 	ret
 ; 0x13d5
 
-Func_13d5:: ; 13d5 (0:13d5)
+ReturnToLevelFromGolf:: ; 13d5 (0:13d5)
 	call DisableLCD
 	ldh a, [rSVBK]
 	push af
@@ -3289,7 +3289,7 @@ UpdateObjSprite:: ; 3000 (0:3000)
 	ld c, a
 	ld a, [hld] ; wCurSpriteYCoord
 	ld b, a
-	ld l, [hl] ; wNumOAMSprites
+	ld l, [hl] ; wVirtualOAMByteSize
 	ld h, HIGH(wVirtualOAM)
 .loop_sprites
 	ld a, l
@@ -3312,7 +3312,7 @@ UpdateObjSprite:: ; 3000 (0:3000)
 	ld a, [de]
 	ld [hli], a ; SPRITEOAMSTRUCT_ATTRIBUTES
 	ld a, l
-	ld [wNumOAMSprites], a
+	ld [wVirtualOAMByteSize], a
 	inc de
 	jr .loop_sprites
 .done
