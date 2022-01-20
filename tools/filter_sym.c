@@ -2,10 +2,14 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-const char WRAM_NUM = '1';
-
-int main()
+int main(int argc, char* argv[])
 {
+    if (argc != 2)
+    {
+        fprintf(stderr, "Invalid number of arguments, expected an int argument");
+        return 1;
+    }
+
     FILE* fileSource;
     FILE* fileDest;
     char* line = NULL;
@@ -23,7 +27,7 @@ int main()
         if (len >= 7)
         {
             if (line[3] == 'd'
-             && (line[0] != '0' || line[1] != WRAM_NUM))
+             && (line[0] != '0' || line[1] != argv[1][0]))
                 continue;
         }
 
