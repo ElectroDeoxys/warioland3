@@ -1613,7 +1613,11 @@ wCollectionCell:: ; d059
 w2d060:: ; d060
 	ds $1
 
-	ds $2
+w2d061:: ; d061
+	ds $1
+
+w2d062:: ; d062
+	ds $1
 
 w2d063:: ; d063
 	ds $2

@@ -2516,7 +2516,14 @@ Func_851d1: ; 851d1 (21:51d1)
 	ret
 ; 0x851e7
 
-	INCROM $851e7, $85234
+Func_851e7: ; 851e7 (21:51e7)
+	ld hl, w2d056
+	inc [hl]
+	ld a, [w2d055]
+	jumptable
+; 0x851ef
+
+	INCROM $851ef, $85234
 
 Func_85234: ; 85234 (21:5234)
 	ld a, [wCurMapSide]

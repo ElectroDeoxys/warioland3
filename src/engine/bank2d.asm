@@ -2554,7 +2554,14 @@ Func_b5136: ; b5136 (2d:5136)
 	jp AddCurSceneObjSprite
 ; 0xb514a
 
-	INCROM $b514a, $b586d
+Func_b514a: ; b514a (2d:514a)
+	ld hl, w2d061
+	inc [hl]
+	ld a, [wCurMapSide]
+	jumptable
+; 0xb5152
+
+	INCROM $b5152, $b586d
 
 Func_b586d: ; b586d (2d:586d)
 	farcall Func_854ee

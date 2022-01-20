@@ -2196,9 +2196,58 @@ Func_810f0: ; 810f0 (20:50f0)
 Func_810fc: ; 810fc (20:50fc)
 	ld a, [bc]
 	jumptable
-; 0x810fe
+	dw Func_81108
+	dw Func_8110d
+	dw Func_8111c
+	dw Func_81126
+	dw Func_81130
+; 0x81108
 
-	INCROM $810fe, $81142
+Func_81108: ; 81108 (20:5108)
+	inc c
+	ld a, $ff
+	ld [bc], a
+	ret
+; 0x8110d
+
+Func_8110d: ; 8110d (20:510d)
+	ld a, [w2d06f]
+	ld [w2d06d], a
+	ld a, [w2d070]
+	ld [w2d06e], a
+	xor a
+	ld [bc], a
+	ret
+; 0x8111c
+
+Func_8111c: ; 8111c (20:511c)
+	ld a, [w2d06f]
+	ld [w2d06d], a
+	ld a, $01
+	ld [bc], a
+	ret
+; 0x81126
+
+Func_81126: ; 81126 (20:5126)
+	ld a, [w2d070]
+	ld [w2d06e], a
+	ld a, $01
+	ld [bc], a
+	ret
+; 0x81130
+
+Func_81130: ; 81130 (20:5130)
+	ld a, [w2d06c]
+	ld e, a
+	ld a, [w2d070]
+	sub e
+	sra a
+	add e
+	ld [w2d06e], a
+	ld a, $02
+	ld [bc], a
+	ret
+; 0x81142
 
 Func_81142: ; 81142 (20:5142)
 	ld hl, w2d0a0
@@ -3072,9 +3121,55 @@ Func_818ad: ; 818ad (20:58ad)
 	inc [hl]
 	ld a, [w2d013]
 	jumptable
-; 0x818e1
+	dw Func_818e7
+	dw Func_818f6
+	dw Func_81900
+; 0x818e7
 
-	INCROM $818e1, $81931
+Func_818e7: ; 818e7 (20:58e7)
+	ld a, [w2d014]
+	cp $04
+	ret c
+
+Func_818ed: ; 818ed (20:58ed)
+	xor a
+	ld [w2d014], a
+	ld hl, w2d013
+	inc [hl]
+	ret
+; 0x818f6
+
+Func_818f6: ; 818f6 (20:58f6)
+	call Func_8195d
+	ld a, [w2d017]
+	and a
+	ret nz
+	jr Func_818ed
+; 0x81900
+
+Func_81900: ; 81900 (20:5900)
+	ld a, [w2d014]
+	cp $04
+	ret c
+	ld hl, w2d026
+	call GetByteFromPointerInHL
+	call Func_81b13
+	jr z, Func_81931
+	ld a, [wCurMapSide]
+	ld b, a
+	ld a, [w2d016]
+	cp b
+	jr nz, .asm_81923
+	xor a
+	ld [w2d014], a
+	ld [w2d013], a
+	ret
+.asm_81923
+	stop_sfx
+	ld a, $04
+	ld [wSubState], a
+	ret
+; 0x81931
 
 Func_81931: ; 81931 (20:5931)
 	stop_sfx
@@ -3098,7 +3193,24 @@ Func_81931: ; 81931 (20:5931)
 	ret
 ; 0x8195d
 
-	INCROM $8195d, $8197e
+Func_8195d: ; 8195d (20:595d)
+	ld a, [w2d028]
+	jumptable
+	dw Func_8196b
+	dw Func_829e2
+	dw Func_8196e
+	dw Func_82c33
+	dw Func_8196e
+; 0x8196b
+
+Func_8196b: ; 8196b (20:596b)
+	debug_nop
+; 0x8196e
+
+Func_8196e: ; 8196e (20:596e)
+	farcall Func_b514a
+	ret
+; 0x8197e
 
 Func_8197e: ; 8197e (20:597e)
 	ld a, [wLastTransitionParam]
@@ -6060,7 +6172,51 @@ Func_829a1: ; 829a1 (20:69a1)
 	ret
 ; 0x829e2
 
-	INCROM $829e2, $82ada
+Func_829e2: ; 829e2 (20:69e2)
+	ld hl, w2d061
+	inc [hl]
+	ld a, [w2d062]
+	jumptable
+	dw $6a79
+	dw Func_82a0a
+	dw $6a26
+	dw $6a2f
+	dw $6a4e
+	dw $6a62
+	dw $6a96
+	dw $6a9b
+	dw $6aae
+	dw $6a9b
+	dw $6aea
+	dw $6a9b
+	dw $6b22
+	dw $6b67
+	dw $6b7b
+	dw $6baa
+; 0x82a0a
+
+Func_82a0a: ; 82a0a (20:6a0a)
+	farcall Func_851e7
+	ld a, [w2d055]
+	and a
+	ret nz
+	di
+	call VBlank_80cb1
+	ei
+	jp Func_82a8d
+; 0x82a26
+
+	INCROM $82a26, $82a8d
+
+Func_82a8d: ; 82a8d (20:6a8d)
+	xor a
+	ld [w2d061], a
+	ld hl, w2d062
+	inc [hl]
+	ret
+; 0x82a96
+
+	INCROM $82a96, $82ada
 
 Func_82ada: ; 82ada (20:6ada)
 	ld a, [w2d066]
@@ -6173,4 +6329,13 @@ Func_82c09: ; 82c09 (20:6c09)
 	ret
 ; 0x82c1d
 
-	INCROM $82c1d, $82cb8
+	INCROM $82c1d, $82c33
+
+Func_82c33: ; 82c33 (20:6c33)
+	ld hl, w2d061
+	inc [hl]
+	ld a, [w2d062]
+	jumptable
+; 0x82c3b
+
+	INCROM $82c3b, $82cb8
