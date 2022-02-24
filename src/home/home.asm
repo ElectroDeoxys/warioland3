@@ -856,9 +856,9 @@ Func_114e:: ; 114e (0:114e)
 	INCROM $1169, $1197
 
 Func_1197:: ; 1197 (0:1197)
-	ld a, [wc0ba]
-	and $0f
-	cp $08
+	ld a, [wCameraConfigFlags]
+	and CAMCONFIG_SCROLLING_MASK
+	cp CAMCONFIG_TRANSITIONS
 	jr c, .asm_11ad
 	call Func_114e
 	ld a, [wFloor]
@@ -1313,9 +1313,9 @@ Func_1488:: ; 1488 (0:1488)
 ; 0x14de
 
 Func_14de:: ; 14de (0:14de)
-	ld a, [wc0ba]
-	and $0f
-	cp $08
+	ld a, [wCameraConfigFlags]
+	and CAMCONFIG_SCROLLING_MASK
+	cp CAMCONFIG_TRANSITIONS
 	jr c, .done
 	call Func_114e
 	ld a, [wFloor]
@@ -1332,9 +1332,9 @@ Func_14f6:: ; 14f6 (0:14f6)
 ;	fallthrough
 
 Func_1501:: ; 1501 (0:1501)
-	ld a, [wc0ba]
-	and $0f
-	cp $08
+	ld a, [wCameraConfigFlags]
+	and CAMCONFIG_SCROLLING_MASK
+	cp CAMCONFIG_TRANSITIONS
 	jr c, .done
 	call Func_114e
 	ld a, [wFloor]
@@ -2634,11 +2634,7 @@ Func_285c:: ; 285c (0:285c)
 	ld h, [hl]
 	ld l, a
 	ld a, h
-	cp $ff
-	jr nz, .valid_level
-	jp Init ; null reset
-
-.valid_level
+	debug_assert_not $ff
 	pop af
 	bankswitch
 
@@ -2658,7 +2654,7 @@ Func_285c:: ; 285c (0:285c)
 	bankswitch
 
 .got_bank
-	ld a, [wSpawnPointID]
+	ld a, [wInternalRoomID]
 	add a ; *2
 	ld e, a
 	ld d, $00
@@ -2668,11 +2664,8 @@ Func_285c:: ; 285c (0:285c)
 	ld h, [hl]
 	ld l, e
 	ld a, h
-	cp $ff
-	jr nz, .valid_spawn_point
-	jp Init ; null reset
+	debug_assert_not $ff
 
-.valid_spawn_point
 	ld a, [hli]
 	ld [wSpawnPos], a
 	ld a, [hl]
@@ -2690,10 +2683,10 @@ Func_285c:: ; 285c (0:285c)
 	and $0f
 	ld [wc0b9], a
 	ld a, [hli]
-	ld [wc0ba], a
+	ld [wCameraConfigFlags], a
+
 	ld a, [hli]
 	ld [wEnemyGroup], a
-
 	push hl
 	ldh a, [rSVBK]
 	push af
@@ -2717,7 +2710,7 @@ Func_285c:: ; 285c (0:285c)
 	pop hl
 
 	ld a, [hl]
-	ld [wCurRoom], a
+	ld [wRoom], a
 	farcall LoadRoom
 	pop af
 	bankswitch

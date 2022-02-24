@@ -2,7 +2,7 @@
 ; foreground and background tiles and its palettes
 LoadRoom:: ; c0000 (30:4000)
 	ld d, $00
-	ld a, [wCurRoom]
+	ld a, [wRoom]
 	add a
 	ld e, a
 	rl d
@@ -12,11 +12,8 @@ LoadRoom:: ; c0000 (30:4000)
 	ld h, [hl]
 	ld l, a
 	ld a, h
-	cp $ff
-	jr nz, .ok
-	jp Init
+	debug_assert_not $ff
 
-.ok
 	ld a, [hli]
 	ld [wRoomPermissionMap], a
 	ld a, [hli]

@@ -4835,9 +4835,9 @@ Func_2b2c2: ; 2b2c2 (a:72c2)
 	jp SetState_PuffyDeflating
 
 .asm_2b2e1
-	ld a, [wc0ba]
-	and $0f
-	cp $08
+	ld a, [wCameraConfigFlags]
+	and CAMCONFIG_SCROLLING_MASK
+	cp CAMCONFIG_TRANSITIONS
 	jr c, .asm_2b2f6
 	call Func_114e
 	ld a, [wFloor]

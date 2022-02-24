@@ -1656,9 +1656,9 @@ UpdateState_LadderShakeSlipping: ; 1a55c (6:655c)
 
 	ld b, $02
 	call AddYOffset
-	ld a, [wc0ba]
-	and $0f
-	cp $08
+	ld a, [wCameraConfigFlags]
+	and CAMCONFIG_SCROLLING_MASK
+	cp CAMCONFIG_TRANSITIONS
 	jr c, .asm_1a5b3
 	call Func_114e
 	ld a, [wFloor]
@@ -1788,9 +1788,9 @@ UpdateState_LadderSliding: ; 1a6b6 (6:66b6)
 
 	ld b, $02
 	call AddYOffset
-	ld a, [wc0ba]
-	and $0f
-	cp $08
+	ld a, [wCameraConfigFlags]
+	and CAMCONFIG_SCROLLING_MASK
+	cp CAMCONFIG_TRANSITIONS
 	jr c, .asm_1a719
 	call Func_114e
 	ld a, [wFloor]
@@ -2328,9 +2328,9 @@ UpdateState_FenceSliding: ; 1b0a9 (6:70a9)
 .asm_1b0f2
 	ld b, $02
 	call AddYOffset
-	ld a, [wc0ba]
-	and $0f
-	cp $08
+	ld a, [wCameraConfigFlags]
+	and CAMCONFIG_SCROLLING_MASK
+	cp CAMCONFIG_TRANSITIONS
 	jr c, .asm_1b10e
 	call Func_114e
 	ld a, [wFloor]
@@ -2619,9 +2619,9 @@ Func_1b3a0: ; 1b3a0 (6:73a0)
 	ret nz
 	ld b, $01
 	call SubYOffset
-	ld a, [wc0ba]
-	and $0f
-	cp $08
+	ld a, [wCameraConfigFlags]
+	and CAMCONFIG_SCROLLING_MASK
+	cp CAMCONFIG_TRANSITIONS
 	jr c, .asm_1b3e6
 	call Func_114e
 	ld a, [wFloor]
@@ -2644,9 +2644,9 @@ Func_1b3a0: ; 1b3a0 (6:73a0)
 .d_down
 	ld b, $01
 	call AddYOffset
-	ld a, [wc0ba]
-	and $0f
-	cp $08
+	ld a, [wCameraConfigFlags]
+	and CAMCONFIG_SCROLLING_MASK
+	cp CAMCONFIG_TRANSITIONS
 	jr c, .asm_1b42b
 	call Func_114e
 	ld a, [wFloor]

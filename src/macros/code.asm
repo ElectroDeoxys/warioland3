@@ -41,3 +41,10 @@ debug_nop: MACRO
 	nop
 	jr .loop_debug_nop_\@
 ENDM
+
+debug_assert_not: MACRO
+	cp \1
+	jr nz, :+
+	jp Init
+:
+ENDM

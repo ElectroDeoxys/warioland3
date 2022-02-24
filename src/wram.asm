@@ -98,7 +98,7 @@ wTempIE:: ; c09e
 wc09f:: ; c09f
 	ds $1
 
-wSpawnPointID:: ; c0a0
+wInternalRoomID:: ; c0a0
 	ds $1
 
 wSpawnPos:: ; c0a1
@@ -153,7 +153,7 @@ wc0b8:: ; c0b8
 wc0b9:: ; c0b9
 	ds $1
 
-wc0ba:: ; c0ba
+wCameraConfigFlags:: ; c0ba
 	ds $1
 
 wc0bb:: ; c0bb
@@ -197,7 +197,7 @@ wc0c7:: ; c0c7
 wEnemyGroup:: ; c0c8
 	ds $1
 
-wCurRoom:: ; c0c9
+wRoom:: ; c0c9
 	ds $1
 
 wRoomPermissionMap:: ; c0ca
