@@ -43,9 +43,9 @@ Func_dc01e: ; dc01e (37:401e)
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld a, $58
+	ld a, HIGH(Frameset_dd848)
 	ld [hli], a
-	ld a, $48
+	ld a, LOW(Frameset_dd848)
 	ld [hl], a
 	call UpdateObjAnim
 
@@ -460,4 +460,14 @@ OAM_dd710: ; dd710 (37:5710)
 	db $80
 ; 0xdd848
 
-	INCROM $dd848, $dd858
+Frameset_dd848: ; dd848 (37:5848)
+	db $00,  4
+	db $01,  4
+	db $02,  4
+	db $03,  4
+	db $04,  4
+	db $05,  4
+	db $06,  4
+	db $07,  4
+	db $ff
+; 0xdd859

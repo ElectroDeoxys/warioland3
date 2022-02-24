@@ -504,4 +504,8 @@ OAM_dbbd2: ; dbbd2 (36:7bd2)
 	db $80
 ; 0xdbbf5
 
-	INCROM $dbbf5, $dbbf7
+; unreferenced?
+Frameset_dbbf5: ; dbbf5 (36:7bf5)
+	db $00,  4
+	db $ff
+; 0xdbbf8
