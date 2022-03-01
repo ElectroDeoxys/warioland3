@@ -1,7 +1,7 @@
 ; load 8 animated tiles to v1Tiles2
 ; these are blocks of tiles with 4 subsets, made of 8 tiles each
 ; (8 * $10 * 4 = $200 bytes each block)
-; wAnimatedTilesGroup determines which of these blocks to load (up to 24)
+; wAnimatedTilesGroup determines which of these blocks to load
 ; wAnimatedTilesFrame determines which of the subset (frame) to load
 UpdateRoomAnimatedTiles:: ; d0000 (34:4000)
 	ldh a, [rLY]
@@ -24,7 +24,7 @@ UpdateRoomAnimatedTiles:: ; d0000 (34:4000)
 ; do frame
 	xor a
 	ld [wAnimatedTilesFrameCount], a
-	ld hl, TileData_d0071
+	ld hl, AnimatedTilesGfx
 	ld a, [wAnimatedTilesGroup]
 	add a
 	add h
@@ -74,74 +74,28 @@ endr
 	ret
 ; 0xd0071
 
-TileData_d0071: ; d0071 (34:4071)
-	INCROM $d0071, $d0271
-
-TileData_d0271: ; d0271 (34:4271)
-	INCROM $d0271, $d0471
-
-TileData_d0471: ; d0471 (34:4471)
-	INCROM $d0471, $d0671
-
-TileData_d0671: ; d0671 (34:4671)
-	INCROM $d0671, $d0871
-
-TileData_d0871: ; d0871 (34:4871)
-	INCROM $d0871, $d0a71
-
-TileData_d0a71: ; d0a71 (34:4a71)
-	INCROM $d0a71, $d0c71
-
-TileData_d0c71: ; d0c71 (34:4c71)
-	INCROM $d0c71, $d0e71
-
-TileData_d0e71: ; d0e71 (34:4e71)
-	INCROM $d0e71, $d1071
-
-TileData_d1071: ; d1071 (34:5071)
-	INCROM $d1071, $d1271
-
-TileData_d1271: ; d1271 (34:5271)
-	INCROM $d1271, $d1471
-
-TileData_d1471: ; d1471 (34:5471)
-	INCROM $d1471, $d1671
-
-TileData_d1671: ; d1671 (34:5671)
-	INCROM $d1671, $d1871
-
-TileData_d1871: ; d1871 (34:5871)
-	INCROM $d1871, $d1a71
-
-TileData_d1a71: ; d1a71 (34:5a71)
-	INCROM $d1a71, $d1c71
-
-TileData_d1c71: ; d1c71 (34:5c71)
-	INCROM $d1c71, $d1e71
-
-TileData_d1e71: ; d1e71 (34:5e71)
-	INCROM $d1e71, $d2071
-
-TileData_d2071: ; d2071 (34:6071)
-	INCROM $d2071, $d2271
-
-TileData_d2271: ; d2271 (34:6271)
-	INCROM $d2271, $d2471
-
-TileData_d2471: ; d2471 (34:6471)
-	INCROM $d2471, $d2671
-
-TileData_d2671: ; d2671 (34:6671)
-	INCROM $d2671, $d2871
-
-TileData_d2871: ; d2871 (34:6871)
-	INCROM $d2871, $d2a71
-
-TileData_d2a71: ; d2a71 (34:6a71)
-	INCROM $d2a71, $d2c71
-
-TileData_d2c71: ; d2c71 (34:6c71)
-	INCROM $d2c71, $d2e71
-
-TileData_d2e71: ; d2e71 (34:6e71)
-	INCROM $d2e71, $d3071
+AnimatedTilesGfx:
+AnimatedTiles1Gfx:  INCBIN "gfx/levels/animated/animated_tiles1.2bpp"
+AnimatedTiles2Gfx:  INCBIN "gfx/levels/animated/animated_tiles2.2bpp"
+AnimatedTiles3Gfx:  INCBIN "gfx/levels/animated/animated_tiles3.2bpp"
+AnimatedTiles4Gfx:  INCBIN "gfx/levels/animated/animated_tiles4.2bpp"
+AnimatedTiles5Gfx:  INCBIN "gfx/levels/animated/animated_tiles5.2bpp"
+AnimatedTiles6Gfx:  INCBIN "gfx/levels/animated/animated_tiles6.2bpp"
+AnimatedTiles7Gfx:  INCBIN "gfx/levels/animated/animated_tiles7.2bpp"
+AnimatedTiles8Gfx:  INCBIN "gfx/levels/animated/animated_tiles8.2bpp"
+AnimatedTiles9Gfx:  INCBIN "gfx/levels/animated/animated_tiles9.2bpp"
+AnimatedTiles10Gfx: INCBIN "gfx/levels/animated/animated_tiles10.2bpp"
+AnimatedTiles11Gfx: INCBIN "gfx/levels/animated/animated_tiles11.2bpp"
+AnimatedTiles12Gfx: INCBIN "gfx/levels/animated/animated_tiles12.2bpp"
+AnimatedTiles13Gfx: INCBIN "gfx/levels/animated/animated_tiles13.2bpp"
+AnimatedTiles14Gfx: INCBIN "gfx/levels/animated/animated_tiles14.2bpp"
+AnimatedTiles15Gfx: INCBIN "gfx/levels/animated/animated_tiles15.2bpp"
+AnimatedTiles16Gfx: INCBIN "gfx/levels/animated/animated_tiles16.2bpp"
+AnimatedTiles17Gfx: INCBIN "gfx/levels/animated/animated_tiles17.2bpp"
+AnimatedTiles18Gfx: INCBIN "gfx/levels/animated/animated_tiles18.2bpp"
+AnimatedTiles19Gfx: INCBIN "gfx/levels/animated/animated_tiles19.2bpp"
+AnimatedTiles20Gfx: INCBIN "gfx/levels/animated/animated_tiles20.2bpp"
+AnimatedTiles21Gfx: INCBIN "gfx/levels/animated/animated_tiles21.2bpp"
+AnimatedTiles22Gfx: INCBIN "gfx/levels/animated/animated_tiles22.2bpp"
+AnimatedTiles23Gfx: INCBIN "gfx/levels/animated/animated_tiles23.2bpp"
+AnimatedTiles24Gfx: INCBIN "gfx/levels/animated/animated_tiles24.2bpp"

@@ -1384,6 +1384,7 @@ Func_8c12: ; 8c12 (2:4c12)
 	jr z, .asm_8c38
 	cp $ff
 	jr z, .asm_8c54
+
 	ld a, l
 	ldh [rSCY], a
 	ld [wSCY], a
@@ -1393,6 +1394,7 @@ Func_8c12: ; 8c12 (2:4c12)
 	sbc $00
 	ld [wc0a3], a
 	jr .asm_8c70
+
 .asm_8c38
 	ld a, [wCameraConfigFlags]
 	bit CAMCONFIG_EDGE_UP_F, a
@@ -1407,6 +1409,7 @@ Func_8c12: ; 8c12 (2:4c12)
 	ld a, h
 	ld [wc0a3], a
 	jr .asm_8c70
+
 .asm_8c54
 	ld a, [wCameraConfigFlags]
 	bit CAMCONFIG_EDGE_DOWN_F, a
