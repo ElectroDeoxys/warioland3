@@ -26,12 +26,9 @@ wSCX:: ; c085
 
 ; intro background layers x offsets,
 ; that all scroll at different speeds
-wIntroBGXOffsetFar:: ; c086
-	ds $1
-wIntroBGXOffsetCentre:: ; c087
-	ds $1
-wIntroBGXOffsetNear:: ; c088
-	ds $1
+wIntroBGXOffsetFar::    ds $1 ; c086
+wIntroBGXOffsetCentre:: ds $1 ; c087
+wIntroBGXOffsetNear::   ds $1 ; c088
 
 wc089:: ; c089
 	ds $1
@@ -199,35 +196,16 @@ wc0c7:: ; c0c7
 wEnemyGroup:: ; c0c8
 	ds $1
 
-wRoom:: ; c0c9
-	ds $1
-
-wRoomPermissionMap:: ; c0ca
-	ds $1
-
-wRoomTileMap:: ; c0cb
-	ds $1
-
-wRoomMainTiles:: ; c0cc
-	ds $1
-
-wRoomSpecialTiles:: ; c0cd
-	ds $1
-
-wRoomPalettes:: ; c0ce
-	ds $1
-
-wc0cf:: ; c0cf
-	ds $1
-
-wc0d0:: ; c0d0
-	ds $1
-
-wRoomMainTilesBank:: ; c0d1
-	ds $1
-
-wRoomSpecialTilesBank:: ; c0d2
-	ds $1
+wRoom::                 ds $1 ; c0c9
+wRoomPermissionMap::    ds $1 ; c0ca
+wRoomTileMap::          ds $1 ; c0cb
+wRoomMainTiles::        ds $1 ; c0cc
+wRoomSpecialTiles::     ds $1 ; c0cd
+wRoomPalettes::         ds $1 ; c0ce
+wc0cf::                 ds $1 ; c0cf
+wc0d0::                 ds $1 ; c0d0
+wRoomMainTilesBank::    ds $1 ; c0d1
+wRoomSpecialTilesBank:: ds $1 ; c0d2
 
 wPaletteBank:: ; c0d3
 	ds $1
@@ -300,14 +278,9 @@ wTempOBPals:: ; c140
 	ds 8 palettes
 
 ; target rgb values for fading
-wTargetRed:: ; c180
-	ds $1
-
-wTargetGreen:: ; c181
-	ds $1
-
-wTargetBlue:: ; c182
-	ds $1
+wTargetRed::   ds $1 ; c180
+wTargetGreen:: ds $1 ; c181
+wTargetBlue::  ds $1 ; c182
 
 ; current rgb values for color fade
 wCurRGB:: ; c183
@@ -343,23 +316,12 @@ wc18e:: ; c18e
 wc19f:: ; c19f
 	ds $1
 
-wIsDMATransferPending:: ; c1a0
-	ds $1
-
-wPendingDMASourceBank:: ; c1a1
-	ds $1
-
-wPendingDMASourcePtr:: ; c1a2
-	ds $2
-
-wPendingDMADestinationBank:: ; c1a3
-	ds $1
-
-wPendingDMADestinationPtr:: ; c1a4
-	ds $2
-
-wPendingDMALength:: ; c1a6
-	ds $1
+wIsDMATransferPending::      ds $1 ; c1a0
+wPendingDMASourceBank::      ds $1 ; c1a1
+wPendingDMASourcePtr::       ds $2 ; c1a2
+wPendingDMADestinationBank:: ds $1 ; c1a3
+wPendingDMADestinationPtr::  ds $2 ; c1a4
+wPendingDMALength::          ds $1 ; c1a6
 
 wAnimationHasFinished:: ; c1a8
 	ds $1
@@ -553,14 +515,10 @@ wca60:: ; ca60
 	ds $1
 
 wPos::
-wYPosHi:: ; ca61
-	ds $1
-wYPosLo:: ; ca62
-	ds $1
-wXPosHi:: ; ca63
-	ds $1
-wXPosLo:: ; ca64
-	ds $1
+wYPosHi:: ds $1 ; ca61
+wYPosLo:: ds $1 ; ca62
+wXPosHi:: ds $1 ; ca63
+wXPosLo:: ds $1 ; ca64
 
 wca65:: ; ca65
 	ds $1
@@ -1162,10 +1120,10 @@ w1db00:: ; db00
 
 wGolfLevelData::
 wGolfTerrainBlocks:: ds NUM_GOLF_LEVEL_BLOCKS ; db40
-wGolfPar:: ds $1 ; db81
-w1db82:: ds $2 ; db82
-wGolfWaterSpawn1:: ds $1 ; db84
-wGolfWaterSpawn2:: ds $1 ; db85
+wGolfPar::           ds $1 ; db81
+w1db82::             ds $2 ; db82
+wGolfWaterSpawn1::   ds $1 ; db84
+wGolfWaterSpawn2::   ds $1 ; db85
 wGolfLevelDataEnd::
 
 	ds $a
@@ -1760,7 +1718,7 @@ w2d0a8:: ; d0a8
 
 	ds $7
 
-wHDMA:: hdma_config_struct wHDMA ; d0b0
+wHDMA::  hdma_config_struct wHDMA ; d0b0
 w2d0b5:: hdma_config_struct w2d0b5 ; d0b5
 
 	ds $6
