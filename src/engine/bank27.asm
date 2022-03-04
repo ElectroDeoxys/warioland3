@@ -417,8 +417,8 @@ Func_9c072: ; 9c072 (27:4072)
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld b, BANK(ForegroundTiles28)
-	ld hl, ForegroundTiles28
+	ld b, BANK(LevelMainTiles28)
+	ld hl, LevelMainTiles28
 	call LoadFarTiles
 	xor a
 	ldh [rVBK], a
@@ -473,8 +473,8 @@ Func_9c072: ; 9c072 (27:4072)
 	call Func_9cb2d
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld b, BANK(BackgroundTiles0)
-	ld hl, BackgroundTiles0
+	ld b, BANK(SpecialTiles0)
+	ld hl, SpecialTiles0
 	call LoadFarTiles
 	xor a
 	ldh [rVBK], a
@@ -482,13 +482,13 @@ Func_9c072: ; 9c072 (27:4072)
 ; 0x9c4e1
 
 .Func_9c4e1: ; 9c4e1 (27:44e1)
-	ld b, BANK(ForegroundTiles14)
-	ld hl, ForegroundTiles14
+	ld b, BANK(LevelMainTiles14)
+	ld hl, LevelMainTiles14
 	call LoadFarTiles
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld b, BANK(BackgroundTiles1)
-	ld hl, BackgroundTiles1
+	ld b, BANK(SpecialTiles1)
+	ld hl, SpecialTiles1
 	call LoadFarTiles
 	xor a
 	ldh [rVBK], a
@@ -562,8 +562,8 @@ Func_9c072: ; 9c072 (27:4072)
 	ld hl, Pals_b8300
 	call LoadFarPalsToTempPals2
 	call Func_9c977
-	ld b, BANK(ForegroundTiles22)
-	ld hl, ForegroundTiles22
+	ld b, BANK(LevelMainTiles22)
+	ld hl, LevelMainTiles22
 	call LoadFarTiles
 	jp Func_9cb54
 ; 0x9c5e3
@@ -591,8 +591,8 @@ Func_9c072: ; 9c072 (27:4072)
 ; 0x9c60f
 
 .Func_9c60f: ; 9c60f (27:460f)
-	ld b, BANK(ForegroundTiles7)
-	ld hl, ForegroundTiles7
+	ld b, BANK(LevelMainTiles7)
+	ld hl, LevelMainTiles7
 	call LoadFarTiles
 	call Func_9c977
 	call Func_9cb13
@@ -613,8 +613,8 @@ Func_9c072: ; 9c072 (27:4072)
 .Func_9c636: ; 9c636 (27:4636)
 	call ClearTempPals
 	call Func_9c9a6
-	ld b, BANK(ForegroundTiles30)
-	ld hl, ForegroundTiles30
+	ld b, BANK(LevelMainTiles30)
+	ld hl, LevelMainTiles30
 	call LoadFarTiles
 	call Func_9cb88
 	call Func_9cc0a
@@ -629,8 +629,8 @@ Func_9c072: ; 9c072 (27:4072)
 	ld hl, Pals_b84c0
 	call LoadFarPalsToTempPals2
 	call Func_9c977
-	ld b, BANK(ForegroundTiles31)
-	ld hl, ForegroundTiles31
+	ld b, BANK(LevelMainTiles31)
+	ld hl, LevelMainTiles31
 	call LoadFarTiles
 	call Func_9caf9
 	jp Func_9cc24
@@ -643,16 +643,16 @@ Func_9c072: ; 9c072 (27:4072)
 	ld b, BANK(Pals_b8440)
 	ld hl, Pals_b8440
 	call LoadFarPalsToTempPals2
-	ld b, BANK(ForegroundTiles36)
-	ld hl, ForegroundTiles36
+	ld b, BANK(LevelMainTiles36)
+	ld hl, LevelMainTiles36
 	call LoadFarTiles
 	jp Func_9cadf
 ; 0x9c689
 
 .Func_9c689: ; 9c689 (27:4689)
 	call Func_9c9a6
-	ld b, BANK(ForegroundTiles24)
-	ld hl, ForegroundTiles24
+	ld b, BANK(LevelMainTiles24)
+	ld hl, LevelMainTiles24
 	call LoadFarTiles
 	call Func_9cb7b
 	call ClearTempPals
@@ -672,8 +672,8 @@ Func_9c072: ; 9c072 (27:4072)
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld b, BANK(ForegroundTiles30)
-	ld hl, ForegroundTiles30
+	ld b, BANK(LevelMainTiles30)
+	ld hl, LevelMainTiles30
 	call LoadFarTiles
 	xor a
 	ldh [rVBK], a
@@ -707,8 +707,8 @@ Func_9c072: ; 9c072 (27:4072)
 .Func_9c731: ; 9c731 (27:4731)
 	call ClearTempPals
 	call Func_9c84f
-	ld b, BANK(ForegroundTiles27)
-	ld hl, ForegroundTiles27
+	ld b, BANK(LevelMainTiles27)
+	ld hl, LevelMainTiles27
 	call LoadFarTiles
 	jp Func_9cb47
 ; 0x9c742
@@ -720,8 +720,8 @@ Func_9c072: ; 9c072 (27:4072)
 	ld b, BANK(Pals_b8480)
 	ld hl, Pals_b8480
 	call LoadFarPalsToTempPals2
-	ld b, BANK(ForegroundTiles23)
-	ld hl, ForegroundTiles23
+	ld b, BANK(LevelMainTiles23)
+	ld hl, LevelMainTiles23
 	call LoadFarTiles
 	call Func_9caec
 	jp Func_9e5a1
@@ -743,8 +743,8 @@ Func_9c072: ; 9c072 (27:4072)
 
 .Func_9c77f: ; 9c77f (27:477f)
 	call ClearTempPals
-	ld b, BANK(ForegroundTiles11)
-	ld hl, ForegroundTiles11
+	ld b, BANK(LevelMainTiles11)
+	ld hl, LevelMainTiles11
 	call LoadFarTiles
 	call Func_9c97d
 	call Func_9cb06
@@ -898,8 +898,8 @@ Func_9ca0c: ; 9ca0c (27:4a0c)
 Func_9ca28: ; 9ca28 (27:4a28)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld b, BANK(ForegroundTiles29)
-	ld hl, ForegroundTiles29
+	ld b, BANK(LevelMainTiles29)
+	ld hl, LevelMainTiles29
 	call LoadFarTiles
 	xor a
 	ldh [rVBK], a
@@ -907,8 +907,8 @@ Func_9ca28: ; 9ca28 (27:4a28)
 ; 0x9ca38
 
 Func_9ca38: ; 9ca38 (27:4a38)
-	ld b, BANK(ForegroundTiles29)
-	ld hl, ForegroundTiles29
+	ld b, BANK(LevelMainTiles29)
+	ld hl, LevelMainTiles29
 	call LoadFarTiles
 	ret
 ; 0x9ca41

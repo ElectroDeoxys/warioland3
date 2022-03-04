@@ -101,6 +101,8 @@ wc09f:: ; c09f
 wInternalRoomID:: ; c0a0
 	ds $1
 
+; low nybble = x pos
+; high nybble = y pos
 wSpawnPos:: ; c0a1
 	ds $1
 
@@ -370,35 +372,21 @@ wFloorTransitionTimer:: ; c1a9
 wFloorTransitionDir:: ; c1aa
 	ds $1
 
-wc1ab:: ; c1ab
-	ds $1
+wAnimatedTilesGroup::         ds $1 ; c1ab
+wAnimatedTilesFrameDuration:: ds $1 ; c1ac
+wAnimatedTilesGfx::           ds $1 ; c1ad
+wAnimatedTilesFrame::         ds $1 ; c1ae
+wAnimatedTilesFrameCount::    ds $1 ; c1af
 
-wAnimatedTilesFrameDuration:: ; c1ac
-	ds $1
-
-wAnimatedTilesGroup:: ; c1ad
-	ds $1
-
-wAnimatedTilesFrame:: ; c1ae
-	ds $1
-
-wAnimatedTilesFrameCount:: ; c1af
-	ds $1
-
-wc1b0:: ; c1b0
-	ds $1
-
-wc1b1:: ; c1b1
-	ds $1
-
-wRoomAnimatedPals:: ; c1b2
-	ds $2
-
-wCurRoomAnimatedPal:: ; c1b4
-	ds $1
-
-wc1b5:: ; c1b5
-	ds $1
+; counter is incremented each time the room pals are updated
+; when it reaches wRoomPalCycleDuration, the cycle advances
+; to the next index and counter value is reset
+; see UpdateRoomAnimatedPals
+wRoomPalCycle::         ds $1 ; c1b0
+wRoomPalCycleDuration:: ds $1 ; c1b1
+wRoomPalCyclePtr::      ds $2 ; c1b2
+wRoomPalCycleIndex::    ds $1 ; c1b4
+wRoomPalCycleCounter::  ds $1 ; c1b5
 
 ; pointer to an object struct in wObjects
 wObjPtr:: ; c1b6

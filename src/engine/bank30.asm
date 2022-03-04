@@ -1,19 +1,18 @@
 ; loads a room's permission map, tilemap
-; foreground and background tiles and its palettes
+; main and special tiles and its palettes
 LoadRoom:: ; c0000 (30:4000)
 	ld d, $00
 	ld a, [wRoom]
 	add a
 	ld e, a
 	rl d
-	ld hl, PointerTable_c04c5
+	ld hl, RoomGfxData
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	ld a, h
 	debug_assert_not $ff
-
 	ld a, [hli]
 	ld [wRoomPermissionMap], a
 	ld a, [hli]
@@ -66,9 +65,9 @@ LoadRoom:: ; c0000 (30:4000)
 ; 0xc0078
 
 InitRoomAnimatedTiles:: ; c0078 (30:4078)
-	ld hl, Data_c0ce5
+	ld hl, AnimatedTilesGroups
 	ld d, $00
-	ld a, [wc1ab]
+	ld a, [wAnimatedTilesGroup]
 	add a ; *2
 	ld e, a
 	rl d
@@ -76,7 +75,7 @@ InitRoomAnimatedTiles:: ; c0078 (30:4078)
 	ld a, [hli]
 	ld [wAnimatedTilesFrameDuration], a
 	ld a, [hl]
-	ld [wAnimatedTilesGroup], a
+	ld [wAnimatedTilesGfx], a
 	xor a
 	ld [wAnimatedTilesFrame], a
 	ld [wAnimatedTilesFrameCount], a
@@ -84,27 +83,27 @@ InitRoomAnimatedTiles:: ; c0078 (30:4078)
 ; 0xc0095
 
 InitRoomAnimatedPals:: ; c0095 (30:4095)
-	ld hl, RoomAnimatedPals
+	ld hl, RoomPalCycles
 	ld d, $00
-	ld a, [wc1b0]
+	ld a, [wRoomPalCycle]
 	add a ; *2
 	ld e, a
 	rl d
 	add hl, de
 	ld a, [hli]
-	ld [wRoomAnimatedPals + 1], a
+	ld [wRoomPalCyclePtr + 1], a
 	ld a, [hld]
-	ld [wRoomAnimatedPals + 0], a
+	ld [wRoomPalCyclePtr + 0], a
 	ld l, [hl]
 	ld h, a
-	ld de, $8
+	ld de, ROOM_PAL_CYCLE_LENGTH
 	add hl, de
 	ld a, [hl]
-	ld [wc1b1], a
-	srl a
-	ld [wc1b5], a
+	ld [wRoomPalCycleDuration], a
+	srl a ; /2
+	ld [wRoomPalCycleCounter], a
 	xor a
-	ld [wCurRoomAnimatedPal], a
+	ld [wRoomPalCycleIndex], a
 	ret
 ; 0xc00be
 
@@ -650,12 +649,12 @@ PointerTable_c0319:: ; c0319 (30:4319)
 
 room: MACRO
 	db \1, \1 ; permission and tile maps coincide
-	db \2
-	db \3
+	db \2 ; main tiles
+	db \3 ; special tiles
 	db \4
 ENDM
 
-PointerTable_c04c5: ; c04c5 (30:44c5)
+RoomGfxData: ; c04c5 (30:44c5)
 	dw NULL      ; ROOM_000
 	dw .room_001 ; ROOM_001
 	dw .room_002 ; ROOM_002
@@ -821,313 +820,313 @@ PointerTable_c04c5: ; c04c5 (30:44c5)
 	dw NULL
 
 .room_001
-	room TILE_MAP_00, $00, $00, $00
+	room TILE_MAP_00, MAIN_TILES_00, SPECIAL_TILES_0, ROOM_PAL_000
 .room_002
-	room TILE_MAP_00, $00, $00, $01
+	room TILE_MAP_00, MAIN_TILES_00, SPECIAL_TILES_0, ROOM_PAL_001
 .room_003
-	room TILE_MAP_01, $00, $00, $00
+	room TILE_MAP_01, MAIN_TILES_00, SPECIAL_TILES_0, ROOM_PAL_000
 .room_004
-	room TILE_MAP_01, $00, $00, $01
+	room TILE_MAP_01, MAIN_TILES_00, SPECIAL_TILES_0, ROOM_PAL_001
 .room_005
-	room TILE_MAP_02, $01, $01, $02
+	room TILE_MAP_02, MAIN_TILES_01, SPECIAL_TILES_1, ROOM_PAL_002
 .room_006
-	room TILE_MAP_03, $02, $02, $04
+	room TILE_MAP_03, MAIN_TILES_02, SPECIAL_TILES_2, ROOM_PAL_004
 .room_007
-	room TILE_MAP_03, $02, $02, $05
+	room TILE_MAP_03, MAIN_TILES_02, SPECIAL_TILES_2, ROOM_PAL_005
 .room_008
-	room TILE_MAP_04, $02, $02, $04
+	room TILE_MAP_04, MAIN_TILES_02, SPECIAL_TILES_2, ROOM_PAL_004
 .room_009
-	room TILE_MAP_04, $02, $02, $05
+	room TILE_MAP_04, MAIN_TILES_02, SPECIAL_TILES_2, ROOM_PAL_005
 .room_010
-	room TILE_MAP_05, $03, $03, $06
+	room TILE_MAP_05, MAIN_TILES_03, SPECIAL_TILES_3, ROOM_PAL_006
 .room_011
-	room TILE_MAP_05, $03, $03, $07
+	room TILE_MAP_05, MAIN_TILES_03, SPECIAL_TILES_3, ROOM_PAL_007
 .room_012
-	room TILE_MAP_06, $04, $03, $08
+	room TILE_MAP_06, MAIN_TILES_04, SPECIAL_TILES_3, ROOM_PAL_008
 .room_013
-	room TILE_MAP_10, $04, $03, $0d
+	room TILE_MAP_10, MAIN_TILES_04, SPECIAL_TILES_3, ROOM_PAL_013
 .room_014
-	room TILE_MAP_09, $26, $03, $09
+	room TILE_MAP_09, MAIN_TILES_38, SPECIAL_TILES_3, ROOM_PAL_009
 .room_015
-	room TILE_MAP_07, $05, $03, $0b
+	room TILE_MAP_07, MAIN_TILES_05, SPECIAL_TILES_3, ROOM_PAL_011
 .room_016
-	room TILE_MAP_08, $06, $03, $0c
+	room TILE_MAP_08, MAIN_TILES_06, SPECIAL_TILES_3, ROOM_PAL_012
 .room_017
-	room TILE_MAP_09, $26, $03, $0a
+	room TILE_MAP_09, MAIN_TILES_38, SPECIAL_TILES_3, ROOM_PAL_010
 .room_018
-	room TILE_MAP_59, $07, $03, $0e
+	room TILE_MAP_59, MAIN_TILES_07, SPECIAL_TILES_3, ROOM_PAL_014
 .room_019
-	room TILE_MAP_12, $08, $03, $0f
+	room TILE_MAP_12, MAIN_TILES_08, SPECIAL_TILES_3, ROOM_PAL_015
 .room_020
-	room TILE_MAP_13, $09, $01, $10
+	room TILE_MAP_13, MAIN_TILES_09, SPECIAL_TILES_1, ROOM_PAL_016
 .room_021
-	room TILE_MAP_66, $0a, $01, $11
+	room TILE_MAP_66, MAIN_TILES_10, SPECIAL_TILES_1, ROOM_PAL_017
 .room_022
-	room TILE_MAP_61, $0b, $01, $12
+	room TILE_MAP_61, MAIN_TILES_11, SPECIAL_TILES_1, ROOM_PAL_018
 .room_023
-	room TILE_MAP_16, $0c, $04, $13
+	room TILE_MAP_16, MAIN_TILES_12, SPECIAL_TILES_4, ROOM_PAL_019
 .room_024
-	room TILE_MAP_17, $0c, $04, $14
+	room TILE_MAP_17, MAIN_TILES_12, SPECIAL_TILES_4, ROOM_PAL_020
 .room_025
-	room TILE_MAP_18, $0d, $01, $15
+	room TILE_MAP_18, MAIN_TILES_13, SPECIAL_TILES_1, ROOM_PAL_021
 .room_026
-	room TILE_MAP_09, $26, $03, $16
+	room TILE_MAP_09, MAIN_TILES_38, SPECIAL_TILES_3, ROOM_PAL_022
 .room_027
-	room TILE_MAP_19, $0e, $01, $17
+	room TILE_MAP_19, MAIN_TILES_14, SPECIAL_TILES_1, ROOM_PAL_023
 .room_028
-	room TILE_MAP_19, $0e, $01, $18
+	room TILE_MAP_19, MAIN_TILES_14, SPECIAL_TILES_1, ROOM_PAL_024
 .room_029
-	room TILE_MAP_52, $0f, $05, $19
+	room TILE_MAP_52, MAIN_TILES_15, SPECIAL_TILES_5, ROOM_PAL_025
 .room_030
-	room TILE_MAP_50, $0f, $05, $1a
+	room TILE_MAP_50, MAIN_TILES_15, SPECIAL_TILES_5, ROOM_PAL_026
 .room_031
-	room TILE_MAP_21, $10, $08, $1b
+	room TILE_MAP_21, MAIN_TILES_16, SPECIAL_TILES_8, ROOM_PAL_027
 .room_032
-	room TILE_MAP_22, $11, $01, $1c
+	room TILE_MAP_22, MAIN_TILES_17, SPECIAL_TILES_1, ROOM_PAL_028
 .room_033
-	room TILE_MAP_22, $11, $01, $1d
+	room TILE_MAP_22, MAIN_TILES_17, SPECIAL_TILES_1, ROOM_PAL_029
 .room_034
-	room TILE_MAP_23, $12, $01, $1e
+	room TILE_MAP_23, MAIN_TILES_18, SPECIAL_TILES_1, ROOM_PAL_030
 .room_035
-	room TILE_MAP_54, $13, $01, $1f
+	room TILE_MAP_54, MAIN_TILES_19, SPECIAL_TILES_1, ROOM_PAL_031
 .room_036
-	room TILE_MAP_55, $14, $01, $4a
+	room TILE_MAP_55, MAIN_TILES_20, SPECIAL_TILES_1, ROOM_PAL_074
 .room_037
-	room TILE_MAP_26, $15, $01, $21
+	room TILE_MAP_26, MAIN_TILES_21, SPECIAL_TILES_1, ROOM_PAL_033
 .room_038
-	room TILE_MAP_56, $16, $01, $22
+	room TILE_MAP_56, MAIN_TILES_22, SPECIAL_TILES_1, ROOM_PAL_034
 .room_039
-	room TILE_MAP_28, $17, $01, $23
+	room TILE_MAP_28, MAIN_TILES_23, SPECIAL_TILES_1, ROOM_PAL_035
 .room_040
-	room TILE_MAP_29, $18, $01, $24
+	room TILE_MAP_29, MAIN_TILES_24, SPECIAL_TILES_1, ROOM_PAL_036
 .room_041
-	room TILE_MAP_30, $19, $07, $25
+	room TILE_MAP_30, MAIN_TILES_25, SPECIAL_TILES_7, ROOM_PAL_037
 .room_042
-	room TILE_MAP_31, $0c, $04, $26
+	room TILE_MAP_31, MAIN_TILES_12, SPECIAL_TILES_4, ROOM_PAL_038
 .room_043
-	room TILE_MAP_63, $1a, $01, $27
+	room TILE_MAP_63, MAIN_TILES_26, SPECIAL_TILES_1, ROOM_PAL_039
 .room_044
-	room TILE_MAP_33, $1b, $01, $28
+	room TILE_MAP_33, MAIN_TILES_27, SPECIAL_TILES_1, ROOM_PAL_040
 .room_045
-	room TILE_MAP_34, $1c, $01, $29
+	room TILE_MAP_34, MAIN_TILES_28, SPECIAL_TILES_1, ROOM_PAL_041
 .room_046
-	room TILE_MAP_68, $19, $07, $2a
+	room TILE_MAP_68, MAIN_TILES_25, SPECIAL_TILES_7, ROOM_PAL_042
 .room_047
-	room TILE_MAP_36, $1d, $01, $2b
+	room TILE_MAP_36, MAIN_TILES_29, SPECIAL_TILES_1, ROOM_PAL_043
 .room_048
-	room TILE_MAP_81, $1d, $01, $2c
+	room TILE_MAP_81, MAIN_TILES_29, SPECIAL_TILES_1, ROOM_PAL_044
 .room_049
-	room TILE_MAP_27, $16, $01, $2d
+	room TILE_MAP_27, MAIN_TILES_22, SPECIAL_TILES_1, ROOM_PAL_045
 .room_050
-	room TILE_MAP_15, $0b, $01, $2e
+	room TILE_MAP_15, MAIN_TILES_11, SPECIAL_TILES_1, ROOM_PAL_046
 .room_051
-	room TILE_MAP_37, $1e, $01, $2f
+	room TILE_MAP_37, MAIN_TILES_30, SPECIAL_TILES_1, ROOM_PAL_047
 .room_052
-	room TILE_MAP_38, $1f, $01, $30
+	room TILE_MAP_38, MAIN_TILES_31, SPECIAL_TILES_1, ROOM_PAL_048
 .room_053
-	room TILE_MAP_39, $20, $01, $31
+	room TILE_MAP_39, MAIN_TILES_32, SPECIAL_TILES_1, ROOM_PAL_049
 .room_054
-	room TILE_MAP_40, $21, $01, $32
+	room TILE_MAP_40, MAIN_TILES_33, SPECIAL_TILES_1, ROOM_PAL_050
 .room_055
-	room TILE_MAP_23, $12, $01, $33
+	room TILE_MAP_23, MAIN_TILES_18, SPECIAL_TILES_1, ROOM_PAL_051
 .room_056
-	room TILE_MAP_41, $22, $01, $34
+	room TILE_MAP_41, MAIN_TILES_34, SPECIAL_TILES_1, ROOM_PAL_052
 .room_057
-	room TILE_MAP_42, $23, $01, $35
+	room TILE_MAP_42, MAIN_TILES_35, SPECIAL_TILES_1, ROOM_PAL_053
 .room_058
-	room TILE_MAP_53, $24, $01, $36
+	room TILE_MAP_53, MAIN_TILES_36, SPECIAL_TILES_1, ROOM_PAL_054
 .room_059
-	room TILE_MAP_44, $25, $01, $37
+	room TILE_MAP_44, MAIN_TILES_37, SPECIAL_TILES_1, ROOM_PAL_055
 .room_060
-	room TILE_MAP_08, $06, $03, $38
+	room TILE_MAP_08, MAIN_TILES_06, SPECIAL_TILES_3, ROOM_PAL_056
 .room_061
-	room TILE_MAP_08, $06, $03, $39
+	room TILE_MAP_08, MAIN_TILES_06, SPECIAL_TILES_3, ROOM_PAL_057
 .room_062
-	room TILE_MAP_45, $0c, $04, $3a
+	room TILE_MAP_45, MAIN_TILES_12, SPECIAL_TILES_4, ROOM_PAL_058
 .room_063
-	room TILE_MAP_21, $10, $08, $3b
+	room TILE_MAP_21, MAIN_TILES_16, SPECIAL_TILES_8, ROOM_PAL_059
 .room_064
-	room TILE_MAP_22, $11, $01, $3c
+	room TILE_MAP_22, MAIN_TILES_17, SPECIAL_TILES_1, ROOM_PAL_060
 .room_065
-	room TILE_MAP_22, $11, $01, $3d
+	room TILE_MAP_22, MAIN_TILES_17, SPECIAL_TILES_1, ROOM_PAL_061
 .room_066
-	room TILE_MAP_62, $0b, $01, $51
+	room TILE_MAP_62, MAIN_TILES_11, SPECIAL_TILES_1, ROOM_PAL_081
 .room_067
-	room TILE_MAP_46, $06, $03, $0c
+	room TILE_MAP_46, MAIN_TILES_06, SPECIAL_TILES_3, ROOM_PAL_012
 .room_068
-	room TILE_MAP_46, $06, $03, $38
+	room TILE_MAP_46, MAIN_TILES_06, SPECIAL_TILES_3, ROOM_PAL_056
 .room_069
-	room TILE_MAP_36, $1d, $01, $3f
+	room TILE_MAP_36, MAIN_TILES_29, SPECIAL_TILES_1, ROOM_PAL_063
 .room_070
-	room TILE_MAP_36, $1d, $01, $40
+	room TILE_MAP_36, MAIN_TILES_29, SPECIAL_TILES_1, ROOM_PAL_064
 .room_071
-	room TILE_MAP_51, $16, $01, $41
+	room TILE_MAP_51, MAIN_TILES_22, SPECIAL_TILES_1, ROOM_PAL_065
 .room_072
-	room TILE_MAP_47, $1a, $06, $27
+	room TILE_MAP_47, MAIN_TILES_26, SPECIAL_TILES_6, ROOM_PAL_039
 .room_073
-	room TILE_MAP_24, $13, $01, $42
+	room TILE_MAP_24, MAIN_TILES_19, SPECIAL_TILES_1, ROOM_PAL_066
 .room_074
-	room TILE_MAP_48, $06, $03, $0c
+	room TILE_MAP_48, MAIN_TILES_06, SPECIAL_TILES_3, ROOM_PAL_012
 .room_075
-	room TILE_MAP_88, $06, $03, $38
+	room TILE_MAP_88, MAIN_TILES_06, SPECIAL_TILES_3, ROOM_PAL_056
 .room_076
-	room TILE_MAP_49, $19, $07, $43
+	room TILE_MAP_49, MAIN_TILES_25, SPECIAL_TILES_7, ROOM_PAL_067
 .room_077
-	room TILE_MAP_37, $1e, $01, $44
+	room TILE_MAP_37, MAIN_TILES_30, SPECIAL_TILES_1, ROOM_PAL_068
 .room_078
-	room TILE_MAP_37, $1e, $01, $45
+	room TILE_MAP_37, MAIN_TILES_30, SPECIAL_TILES_1, ROOM_PAL_069
 .room_079
-	room TILE_MAP_37, $1e, $01, $46
+	room TILE_MAP_37, MAIN_TILES_30, SPECIAL_TILES_1, ROOM_PAL_070
 .room_080
-	room TILE_MAP_85, $0e, $01, $47
+	room TILE_MAP_85, MAIN_TILES_14, SPECIAL_TILES_1, ROOM_PAL_071
 .room_081
-	room TILE_MAP_52, $0f, $05, $48
+	room TILE_MAP_52, MAIN_TILES_15, SPECIAL_TILES_5, ROOM_PAL_072
 .room_082
-	room TILE_MAP_20, $0f, $05, $19
+	room TILE_MAP_20, MAIN_TILES_15, SPECIAL_TILES_5, ROOM_PAL_025
 .room_083
-	room TILE_MAP_20, $0f, $05, $48
+	room TILE_MAP_20, MAIN_TILES_15, SPECIAL_TILES_5, ROOM_PAL_072
 .room_084
-	room TILE_MAP_21, $10, $08, $3b
+	room TILE_MAP_21, MAIN_TILES_16, SPECIAL_TILES_8, ROOM_PAL_059
 .room_085
-	room TILE_MAP_22, $11, $01, $3c
+	room TILE_MAP_22, MAIN_TILES_17, SPECIAL_TILES_1, ROOM_PAL_060
 .room_086
-	room TILE_MAP_22, $11, $01, $3d
+	room TILE_MAP_22, MAIN_TILES_17, SPECIAL_TILES_1, ROOM_PAL_061
 .room_087
-	room TILE_MAP_43, $24, $01, $36
+	room TILE_MAP_43, MAIN_TILES_36, SPECIAL_TILES_1, ROOM_PAL_054
 .room_088
-	room TILE_MAP_24, $13, $01, $1f
+	room TILE_MAP_24, MAIN_TILES_19, SPECIAL_TILES_1, ROOM_PAL_031
 .room_089
-	room TILE_MAP_54, $13, $01, $49
+	room TILE_MAP_54, MAIN_TILES_19, SPECIAL_TILES_1, ROOM_PAL_073
 .room_090
-	room TILE_MAP_24, $13, $01, $49
+	room TILE_MAP_24, MAIN_TILES_19, SPECIAL_TILES_1, ROOM_PAL_073
 .room_091
-	room TILE_MAP_25, $14, $01, $20
+	room TILE_MAP_25, MAIN_TILES_20, SPECIAL_TILES_1, ROOM_PAL_032
 .room_092
-	room TILE_MAP_55, $14, $01, $4b
+	room TILE_MAP_55, MAIN_TILES_20, SPECIAL_TILES_1, ROOM_PAL_075
 .room_093
-	room TILE_MAP_25, $14, $01, $4c
+	room TILE_MAP_25, MAIN_TILES_20, SPECIAL_TILES_1, ROOM_PAL_076
 .room_094
-	room TILE_MAP_27, $16, $01, $22
+	room TILE_MAP_27, MAIN_TILES_22, SPECIAL_TILES_1, ROOM_PAL_034
 .room_095
-	room TILE_MAP_57, $16, $01, $41
+	room TILE_MAP_57, MAIN_TILES_22, SPECIAL_TILES_1, ROOM_PAL_065
 .room_096
-	room TILE_MAP_58, $16, $01, $41
+	room TILE_MAP_58, MAIN_TILES_22, SPECIAL_TILES_1, ROOM_PAL_065
 .room_097
-	room TILE_MAP_56, $16, $01, $4d
+	room TILE_MAP_56, MAIN_TILES_22, SPECIAL_TILES_1, ROOM_PAL_077
 .room_098
-	room TILE_MAP_27, $16, $01, $4d
+	room TILE_MAP_27, MAIN_TILES_22, SPECIAL_TILES_1, ROOM_PAL_077
 .room_099
-	room TILE_MAP_51, $16, $01, $4e
+	room TILE_MAP_51, MAIN_TILES_22, SPECIAL_TILES_1, ROOM_PAL_078
 .room_100
-	room TILE_MAP_57, $16, $01, $4e
+	room TILE_MAP_57, MAIN_TILES_22, SPECIAL_TILES_1, ROOM_PAL_078
 .room_101
-	room TILE_MAP_58, $16, $01, $4e
+	room TILE_MAP_58, MAIN_TILES_22, SPECIAL_TILES_1, ROOM_PAL_078
 .room_102
-	room TILE_MAP_11, $07, $03, $0e
+	room TILE_MAP_11, MAIN_TILES_07, SPECIAL_TILES_3, ROOM_PAL_014
 .room_103
-	room TILE_MAP_59, $07, $03, $4f
+	room TILE_MAP_59, MAIN_TILES_07, SPECIAL_TILES_3, ROOM_PAL_079
 .room_104
-	room TILE_MAP_11, $07, $03, $4f
+	room TILE_MAP_11, MAIN_TILES_07, SPECIAL_TILES_3, ROOM_PAL_079
 .room_105
-	room TILE_MAP_60, $0b, $01, $2e
+	room TILE_MAP_60, MAIN_TILES_11, SPECIAL_TILES_1, ROOM_PAL_046
 .room_106
-	room TILE_MAP_15, $0b, $01, $12
+	room TILE_MAP_15, MAIN_TILES_11, SPECIAL_TILES_1, ROOM_PAL_018
 .room_107
-	room TILE_MAP_15, $0b, $01, $3e
+	room TILE_MAP_15, MAIN_TILES_11, SPECIAL_TILES_1, ROOM_PAL_062
 .room_108
-	room TILE_MAP_61, $0b, $01, $50
+	room TILE_MAP_61, MAIN_TILES_11, SPECIAL_TILES_1, ROOM_PAL_080
 .room_109
-	room TILE_MAP_15, $0b, $01, $50
+	room TILE_MAP_15, MAIN_TILES_11, SPECIAL_TILES_1, ROOM_PAL_080
 .room_110
-	room TILE_MAP_32, $1a, $01, $27
+	room TILE_MAP_32, MAIN_TILES_26, SPECIAL_TILES_1, ROOM_PAL_039
 .room_111
-	room TILE_MAP_64, $1a, $01, $52
+	room TILE_MAP_64, MAIN_TILES_26, SPECIAL_TILES_1, ROOM_PAL_082
 .room_112
-	room TILE_MAP_65, $1a, $01, $52
+	room TILE_MAP_65, MAIN_TILES_26, SPECIAL_TILES_1, ROOM_PAL_082
 .room_113
-	room TILE_MAP_67, $0a, $01, $11
+	room TILE_MAP_67, MAIN_TILES_10, SPECIAL_TILES_1, ROOM_PAL_017
 .room_114
-	room TILE_MAP_14, $0a, $01, $11
+	room TILE_MAP_14, MAIN_TILES_10, SPECIAL_TILES_1, ROOM_PAL_017
 .room_115
-	room TILE_MAP_13, $09, $01, $53
+	room TILE_MAP_13, MAIN_TILES_09, SPECIAL_TILES_1, ROOM_PAL_083
 .room_116
-	room TILE_MAP_30, $19, $07, $54
+	room TILE_MAP_30, MAIN_TILES_25, SPECIAL_TILES_7, ROOM_PAL_084
 .room_117
-	room TILE_MAP_35, $19, $07, $2a
+	room TILE_MAP_35, MAIN_TILES_25, SPECIAL_TILES_7, ROOM_PAL_042
 .room_118
-	room TILE_MAP_69, $18, $01, $5a
+	room TILE_MAP_69, MAIN_TILES_24, SPECIAL_TILES_1, ROOM_PAL_090
 .room_119
-	room TILE_MAP_70, $27, $01, $5d
+	room TILE_MAP_70, MAIN_TILES_39, SPECIAL_TILES_1, ROOM_PAL_093
 .room_120
-	room TILE_MAP_39, $20, $01, $5e
+	room TILE_MAP_39, MAIN_TILES_32, SPECIAL_TILES_1, ROOM_PAL_094
 .room_121
-	room TILE_MAP_71, $20, $01, $31
+	room TILE_MAP_71, MAIN_TILES_32, SPECIAL_TILES_1, ROOM_PAL_049
 .room_122
-	room TILE_MAP_72, $20, $01, $31
+	room TILE_MAP_72, MAIN_TILES_32, SPECIAL_TILES_1, ROOM_PAL_049
 .room_123
-	room TILE_MAP_73, $12, $01, $1e
+	room TILE_MAP_73, MAIN_TILES_18, SPECIAL_TILES_1, ROOM_PAL_030
 .room_124
-	room TILE_MAP_74, $12, $01, $1e
+	room TILE_MAP_74, MAIN_TILES_18, SPECIAL_TILES_1, ROOM_PAL_030
 .room_125
-	room TILE_MAP_23, $12, $01, $61
+	room TILE_MAP_23, MAIN_TILES_18, SPECIAL_TILES_1, ROOM_PAL_097
 .room_126
-	room TILE_MAP_73, $12, $01, $61
+	room TILE_MAP_73, MAIN_TILES_18, SPECIAL_TILES_1, ROOM_PAL_097
 .room_127
-	room TILE_MAP_74, $12, $01, $61
+	room TILE_MAP_74, MAIN_TILES_18, SPECIAL_TILES_1, ROOM_PAL_097
 .room_128
-	room TILE_MAP_75, $1c, $01, $29
+	room TILE_MAP_75, MAIN_TILES_28, SPECIAL_TILES_1, ROOM_PAL_041
 .room_129
-	room TILE_MAP_34, $1c, $01, $62
+	room TILE_MAP_34, MAIN_TILES_28, SPECIAL_TILES_1, ROOM_PAL_098
 .room_130
-	room TILE_MAP_75, $1c, $01, $62
+	room TILE_MAP_75, MAIN_TILES_28, SPECIAL_TILES_1, ROOM_PAL_098
 .room_131
-	room TILE_MAP_76, $1b, $01, $28
+	room TILE_MAP_76, MAIN_TILES_27, SPECIAL_TILES_1, ROOM_PAL_040
 .room_132
-	room TILE_MAP_77, $1b, $01, $63
+	room TILE_MAP_77, MAIN_TILES_27, SPECIAL_TILES_1, ROOM_PAL_099
 .room_133
-	room TILE_MAP_78, $1b, $01, $63
+	room TILE_MAP_78, MAIN_TILES_27, SPECIAL_TILES_1, ROOM_PAL_099
 .room_134
-	room TILE_MAP_42, $23, $01, $64
+	room TILE_MAP_42, MAIN_TILES_35, SPECIAL_TILES_1, ROOM_PAL_100
 .room_135
-	room TILE_MAP_79, $18, $01, $24
+	room TILE_MAP_79, MAIN_TILES_24, SPECIAL_TILES_1, ROOM_PAL_036
 .room_136
-	room TILE_MAP_86, $18, $01, $65
+	room TILE_MAP_86, MAIN_TILES_24, SPECIAL_TILES_1, ROOM_PAL_101
 .room_137
-	room TILE_MAP_87, $18, $01, $65
+	room TILE_MAP_87, MAIN_TILES_24, SPECIAL_TILES_1, ROOM_PAL_101
 .room_138
-	room TILE_MAP_69, $18, $01, $68
+	room TILE_MAP_69, MAIN_TILES_24, SPECIAL_TILES_1, ROOM_PAL_104
 .room_139
-	room TILE_MAP_80, $1f, $01, $30
+	room TILE_MAP_80, MAIN_TILES_31, SPECIAL_TILES_1, ROOM_PAL_048
 .room_140
-	room TILE_MAP_38, $1f, $01, $6b
+	room TILE_MAP_38, MAIN_TILES_31, SPECIAL_TILES_1, ROOM_PAL_107
 .room_141
-	room TILE_MAP_80, $1f, $01, $6b
+	room TILE_MAP_80, MAIN_TILES_31, SPECIAL_TILES_1, ROOM_PAL_107
 .room_142
-	room TILE_MAP_81, $1d, $01, $6c
+	room TILE_MAP_81, MAIN_TILES_29, SPECIAL_TILES_1, ROOM_PAL_108
 .room_143
-	room TILE_MAP_36, $1d, $01, $6d
+	room TILE_MAP_36, MAIN_TILES_29, SPECIAL_TILES_1, ROOM_PAL_109
 .room_144
-	room TILE_MAP_81, $1d, $01, $6e
+	room TILE_MAP_81, MAIN_TILES_29, SPECIAL_TILES_1, ROOM_PAL_110
 .room_145
-	room TILE_MAP_81, $1d, $01, $3f
+	room TILE_MAP_81, MAIN_TILES_29, SPECIAL_TILES_1, ROOM_PAL_063
 .room_146
-	room TILE_MAP_36, $1d, $01, $6f
+	room TILE_MAP_36, MAIN_TILES_29, SPECIAL_TILES_1, ROOM_PAL_111
 .room_147
-	room TILE_MAP_81, $1d, $01, $6f
+	room TILE_MAP_81, MAIN_TILES_29, SPECIAL_TILES_1, ROOM_PAL_111
 .room_148
-	room TILE_MAP_81, $1d, $01, $40
+	room TILE_MAP_81, MAIN_TILES_29, SPECIAL_TILES_1, ROOM_PAL_064
 .room_149
-	room TILE_MAP_82, $1e, $01, $2f
+	room TILE_MAP_82, MAIN_TILES_30, SPECIAL_TILES_1, ROOM_PAL_047
 .room_150
-	room TILE_MAP_83, $1e, $01, $2f
+	room TILE_MAP_83, MAIN_TILES_30, SPECIAL_TILES_1, ROOM_PAL_047
 .room_151
-	room TILE_MAP_84, $17, $01, $70
+	room TILE_MAP_84, MAIN_TILES_23, SPECIAL_TILES_1, ROOM_PAL_112
 .room_152
-	room TILE_MAP_28, $17, $01, $71
+	room TILE_MAP_28, MAIN_TILES_23, SPECIAL_TILES_1, ROOM_PAL_113
 .room_153
-	room TILE_MAP_84, $17, $01, $72
+	room TILE_MAP_84, MAIN_TILES_23, SPECIAL_TILES_1, ROOM_PAL_114
 .room_154
-	room TILE_MAP_19, $0e, $01, $75
+	room TILE_MAP_19, MAIN_TILES_14, SPECIAL_TILES_1, ROOM_PAL_117
 
 PointerTable_c090d:: ; c090d (30:490d)
 	dw $6c0b ; TILE_MAP_00
@@ -1329,47 +1328,47 @@ TileMapsPointers:: ; c09d1 (30:49d1)
 	dw NULL
 	dw NULL
 
-ForegroundTilesPointers:: ; c0a95 (30:4a95)
-	dw ForegroundTiles0
-	dw ForegroundTiles1
-	dw ForegroundTiles2
-	dw ForegroundTiles3
-	dw ForegroundTiles4
-	dw ForegroundTiles5
-	dw ForegroundTiles6
-	dw ForegroundTiles7
-	dw ForegroundTiles8
-	dw ForegroundTiles9
-	dw ForegroundTiles10
-	dw ForegroundTiles11
-	dw ForegroundTiles12
-	dw ForegroundTiles13
-	dw ForegroundTiles14
-	dw ForegroundTiles15
-	dw ForegroundTiles16
-	dw ForegroundTiles17
-	dw ForegroundTiles18
-	dw ForegroundTiles19
-	dw ForegroundTiles20
-	dw ForegroundTiles21
-	dw ForegroundTiles22
-	dw ForegroundTiles23
-	dw ForegroundTiles24
-	dw ForegroundTiles25
-	dw ForegroundTiles26
-	dw ForegroundTiles27
-	dw ForegroundTiles28
-	dw ForegroundTiles29
-	dw ForegroundTiles30
-	dw ForegroundTiles31
-	dw ForegroundTiles32
-	dw ForegroundTiles33
-	dw ForegroundTiles34
-	dw ForegroundTiles35
-	dw ForegroundTiles36
-	dw ForegroundTiles37
-	dw ForegroundTiles38
-	dw ForegroundTiles39
+LevelMainTilesPointers:: ; c0a95 (30:4a95)
+	dw LevelMainTiles0  ; MAIN_TILES_00
+	dw LevelMainTiles1  ; MAIN_TILES_01
+	dw LevelMainTiles2  ; MAIN_TILES_02
+	dw LevelMainTiles3  ; MAIN_TILES_03
+	dw LevelMainTiles4  ; MAIN_TILES_04
+	dw LevelMainTiles5  ; MAIN_TILES_05
+	dw LevelMainTiles6  ; MAIN_TILES_06
+	dw LevelMainTiles7  ; MAIN_TILES_07
+	dw LevelMainTiles8  ; MAIN_TILES_08
+	dw LevelMainTiles9  ; MAIN_TILES_09
+	dw LevelMainTiles10 ; MAIN_TILES_10
+	dw LevelMainTiles11 ; MAIN_TILES_11
+	dw LevelMainTiles12 ; MAIN_TILES_12
+	dw LevelMainTiles13 ; MAIN_TILES_13
+	dw LevelMainTiles14 ; MAIN_TILES_14
+	dw LevelMainTiles15 ; MAIN_TILES_15
+	dw LevelMainTiles16 ; MAIN_TILES_16
+	dw LevelMainTiles17 ; MAIN_TILES_17
+	dw LevelMainTiles18 ; MAIN_TILES_18
+	dw LevelMainTiles19 ; MAIN_TILES_19
+	dw LevelMainTiles20 ; MAIN_TILES_20
+	dw LevelMainTiles21 ; MAIN_TILES_21
+	dw LevelMainTiles22 ; MAIN_TILES_22
+	dw LevelMainTiles23 ; MAIN_TILES_23
+	dw LevelMainTiles24 ; MAIN_TILES_24
+	dw LevelMainTiles25 ; MAIN_TILES_25
+	dw LevelMainTiles26 ; MAIN_TILES_26
+	dw LevelMainTiles27 ; MAIN_TILES_27
+	dw LevelMainTiles28 ; MAIN_TILES_28
+	dw LevelMainTiles29 ; MAIN_TILES_29
+	dw LevelMainTiles30 ; MAIN_TILES_30
+	dw LevelMainTiles31 ; MAIN_TILES_31
+	dw LevelMainTiles32 ; MAIN_TILES_32
+	dw LevelMainTiles33 ; MAIN_TILES_33
+	dw LevelMainTiles34 ; MAIN_TILES_34
+	dw LevelMainTiles35 ; MAIN_TILES_35
+	dw LevelMainTiles36 ; MAIN_TILES_36
+	dw LevelMainTiles37 ; MAIN_TILES_37
+	dw LevelMainTiles38 ; MAIN_TILES_38
+	dw LevelMainTiles39 ; MAIN_TILES_39
 	dw NULL
 	dw NULL
 	dw NULL
@@ -1380,16 +1379,16 @@ ForegroundTilesPointers:: ; c0a95 (30:4a95)
 	dw NULL
 	dw NULL
 
-BackgroundTilesPointers:: ; c0af7 (30:4af7)
-	dw BackgroundTiles0
-	dw BackgroundTiles1
-	dw BackgroundTiles2
-	dw BackgroundTiles3
-	dw BackgroundTiles4
-	dw BackgroundTiles5
-	dw BackgroundTiles6
-	dw BackgroundTiles7
-	dw BackgroundTiles8
+SpecialTilesPointers:: ; c0af7 (30:4af7)
+	dw SpecialTiles0 ; SPECIAL_TILES_0
+	dw SpecialTiles1 ; SPECIAL_TILES_1
+	dw SpecialTiles2 ; SPECIAL_TILES_2
+	dw SpecialTiles3 ; SPECIAL_TILES_3
+	dw SpecialTiles4 ; SPECIAL_TILES_4
+	dw SpecialTiles5 ; SPECIAL_TILES_5
+	dw SpecialTiles6 ; SPECIAL_TILES_6
+	dw SpecialTiles7 ; SPECIAL_TILES_7
+	dw SpecialTiles8 ; SPECIAL_TILES_8
 	dw NULL
 	dw NULL
 	dw NULL
@@ -1400,248 +1399,344 @@ BackgroundTilesPointers:: ; c0af7 (30:4af7)
 	dw NULL
 	dw NULL
 
-LevelPals:: ; c0b1b (30:4b1b)
-	dw Pals_cc000
-	dw Pals_cc040
-	dw Pals_cc080
-	dw Pals_cc0c0
-	dw Pals_cc100
-	dw Pals_cc140
-	dw Pals_cc180
-	dw Pals_cc1c0
-	dw Pals_cc200
-	dw Pals_cc240
-	dw Pals_cc280
-	dw Pals_cc2c0
-	dw Pals_cc300
-	dw Pals_cc340
-	dw Pals_cc380
-	dw Pals_cc3c0
-	dw Pals_cc400
-	dw Pals_cc440
-	dw Pals_cc480
-	dw Pals_cc4c0
-	dw Pals_cc500
-	dw Pals_cc540
-	dw Pals_cc580
-	dw Pals_cc5c0
-	dw Pals_cc600
-	dw Pals_cc640
-	dw Pals_cc680
-	dw Pals_cc6c0
-	dw Pals_cc700
-	dw Pals_cc740
-	dw Pals_cc780
-	dw Pals_cc7c0
-	dw Pals_cc800
-	dw Pals_cc840
-	dw Pals_cc880
-	dw Pals_cc8c0
-	dw Pals_cc900
-	dw Pals_cc940
-	dw Pals_cc980
-	dw Pals_cc9c0
-	dw Pals_cca00
-	dw Pals_cca40
-	dw Pals_cca80
-	dw Pals_ccac0
-	dw Pals_ccb00
-	dw Pals_ccb40
-	dw Pals_ccb80
-	dw Pals_ccbc0
-	dw Pals_ccc00
-	dw Pals_ccc40
-	dw Pals_ccc80
-	dw Pals_cccc0
-	dw Pals_ccd00
-	dw Pals_ccd40
-	dw Pals_ccd80
-	dw Pals_ccdc0
-	dw Pals_cce00
-	dw Pals_cce40
-	dw Pals_cce80
-	dw Pals_ccec0
-	dw Pals_ccf00
-	dw Pals_ccf40
-	dw Pals_ccf80
-	dw Pals_ccfc0
-	dw Pals_cd000
-	dw Pals_cd040
-	dw Pals_cd080
-	dw Pals_cd0c0
-	dw Pals_cd100
-	dw Pals_cd140
-	dw Pals_cd180
-	dw Pals_cd1c0
-	dw Pals_cd200
-	dw Pals_cd240
-	dw Pals_cd280
-	dw Pals_cd2c0
-	dw Pals_cd300
-	dw Pals_cd340
-	dw Pals_cd380
-	dw Pals_cd3c0
-	dw Pals_cd400
-	dw Pals_cd440
-	dw Pals_cd480
-	dw Pals_cd4c0
-	dw Pals_cd500
-	dw Pals_cd540
-	dw Pals_cd580
-	dw Pals_cd5c0
-	dw Pals_cd600
-	dw Pals_cd640
-	dw Pals_cd680
-	dw Pals_cd6c0
-	dw Pals_cd700
-	dw Pals_cd740
-	dw Pals_cd780
-	dw Pals_cd7c0
-	dw Pals_cd800
-	dw Pals_cd840
-	dw Pals_cd880
-	dw Pals_cd8c0
-	dw Pals_cd900
-	dw Pals_cd940
-	dw Pals_cd980
-	dw Pals_cd9c0
-	dw Pals_cda00
-	dw Pals_cda40
-	dw Pals_cda80
-	dw Pals_cdac0
-	dw Pals_cdb00
-	dw Pals_cdb40
-	dw Pals_cdb80
-	dw Pals_cdbc0
-	dw Pals_cdc00
-	dw Pals_cdc40
-	dw Pals_cdc80
-	dw Pals_cdcc0
-	dw Pals_cdd00
-	dw Pals_cdd40
-	dw Pals_cdd80
-	dw Pals_cddc0
-	dw Pals_cde00
-	dw Pals_cde40
-	dw Pals_cde80
-	dw Pals_cdec0
-	dw Pals_cdf00
-	dw Pals_cdf40
-	dw Pals_cdf80
-	dw Pals_cdfc0
-	dw Pals_ce000
-	dw Pals_ce040
-	dw Pals_ce080
-	dw Pals_ce0c0
-	dw Pals_ce100
-	dw Pals_ce140
-	dw Pals_ce180
-	dw Pals_ce1c0
-	dw Pals_ce200
-	dw Pals_ce240
-	dw Pals_ce280
-	dw Pals_ce2c0
-	dw Pals_ce300
-	dw Pals_ce340
-	dw Pals_ce380
-	dw Pals_ce3c0
-	dw Pals_ce400
-	dw Pals_ce440
+RoomPals:: ; c0b1b (30:4b1b)
+	dw Pals_cc000 ; ROOM_PAL_000
+	dw Pals_cc040 ; ROOM_PAL_001
+	dw Pals_cc080 ; ROOM_PAL_002
+	dw Pals_cc0c0 ; ROOM_PAL_003
+	dw Pals_cc100 ; ROOM_PAL_004
+	dw Pals_cc140 ; ROOM_PAL_005
+	dw Pals_cc180 ; ROOM_PAL_006
+	dw Pals_cc1c0 ; ROOM_PAL_007
+	dw Pals_cc200 ; ROOM_PAL_008
+	dw Pals_cc240 ; ROOM_PAL_009
+	dw Pals_cc280 ; ROOM_PAL_010
+	dw Pals_cc2c0 ; ROOM_PAL_011
+	dw Pals_cc300 ; ROOM_PAL_012
+	dw Pals_cc340 ; ROOM_PAL_013
+	dw Pals_cc380 ; ROOM_PAL_014
+	dw Pals_cc3c0 ; ROOM_PAL_015
+	dw Pals_cc400 ; ROOM_PAL_016
+	dw Pals_cc440 ; ROOM_PAL_017
+	dw Pals_cc480 ; ROOM_PAL_018
+	dw Pals_cc4c0 ; ROOM_PAL_019
+	dw Pals_cc500 ; ROOM_PAL_020
+	dw Pals_cc540 ; ROOM_PAL_021
+	dw Pals_cc580 ; ROOM_PAL_022
+	dw Pals_cc5c0 ; ROOM_PAL_023
+	dw Pals_cc600 ; ROOM_PAL_024
+	dw Pals_cc640 ; ROOM_PAL_025
+	dw Pals_cc680 ; ROOM_PAL_026
+	dw Pals_cc6c0 ; ROOM_PAL_027
+	dw Pals_cc700 ; ROOM_PAL_028
+	dw Pals_cc740 ; ROOM_PAL_029
+	dw Pals_cc780 ; ROOM_PAL_030
+	dw Pals_cc7c0 ; ROOM_PAL_031
+	dw Pals_cc800 ; ROOM_PAL_032
+	dw Pals_cc840 ; ROOM_PAL_033
+	dw Pals_cc880 ; ROOM_PAL_034
+	dw Pals_cc8c0 ; ROOM_PAL_035
+	dw Pals_cc900 ; ROOM_PAL_036
+	dw Pals_cc940 ; ROOM_PAL_037
+	dw Pals_cc980 ; ROOM_PAL_038
+	dw Pals_cc9c0 ; ROOM_PAL_039
+	dw Pals_cca00 ; ROOM_PAL_040
+	dw Pals_cca40 ; ROOM_PAL_041
+	dw Pals_cca80 ; ROOM_PAL_042
+	dw Pals_ccac0 ; ROOM_PAL_043
+	dw Pals_ccb00 ; ROOM_PAL_044
+	dw Pals_ccb40 ; ROOM_PAL_045
+	dw Pals_ccb80 ; ROOM_PAL_046
+	dw Pals_ccbc0 ; ROOM_PAL_047
+	dw Pals_ccc00 ; ROOM_PAL_048
+	dw Pals_ccc40 ; ROOM_PAL_049
+	dw Pals_ccc80 ; ROOM_PAL_050
+	dw Pals_cccc0 ; ROOM_PAL_051
+	dw Pals_ccd00 ; ROOM_PAL_052
+	dw Pals_ccd40 ; ROOM_PAL_053
+	dw Pals_ccd80 ; ROOM_PAL_054
+	dw Pals_ccdc0 ; ROOM_PAL_055
+	dw Pals_cce00 ; ROOM_PAL_056
+	dw Pals_cce40 ; ROOM_PAL_057
+	dw Pals_cce80 ; ROOM_PAL_058
+	dw Pals_ccec0 ; ROOM_PAL_059
+	dw Pals_ccf00 ; ROOM_PAL_060
+	dw Pals_ccf40 ; ROOM_PAL_061
+	dw Pals_ccf80 ; ROOM_PAL_062
+	dw Pals_ccfc0 ; ROOM_PAL_063
+	dw Pals_cd000 ; ROOM_PAL_064
+	dw Pals_cd040 ; ROOM_PAL_065
+	dw Pals_cd080 ; ROOM_PAL_066
+	dw Pals_cd0c0 ; ROOM_PAL_067
+	dw Pals_cd100 ; ROOM_PAL_068
+	dw Pals_cd140 ; ROOM_PAL_069
+	dw Pals_cd180 ; ROOM_PAL_070
+	dw Pals_cd1c0 ; ROOM_PAL_071
+	dw Pals_cd200 ; ROOM_PAL_072
+	dw Pals_cd240 ; ROOM_PAL_073
+	dw Pals_cd280 ; ROOM_PAL_074
+	dw Pals_cd2c0 ; ROOM_PAL_075
+	dw Pals_cd300 ; ROOM_PAL_076
+	dw Pals_cd340 ; ROOM_PAL_077
+	dw Pals_cd380 ; ROOM_PAL_078
+	dw Pals_cd3c0 ; ROOM_PAL_079
+	dw Pals_cd400 ; ROOM_PAL_080
+	dw Pals_cd440 ; ROOM_PAL_081
+	dw Pals_cd480 ; ROOM_PAL_082
+	dw Pals_cd4c0 ; ROOM_PAL_083
+	dw Pals_cd500 ; ROOM_PAL_084
+	dw Pals_cd540 ; ROOM_PAL_085
+	dw Pals_cd580 ; ROOM_PAL_086
+	dw Pals_cd5c0 ; ROOM_PAL_087
+	dw Pals_cd600 ; ROOM_PAL_088
+	dw Pals_cd640 ; ROOM_PAL_089
+	dw Pals_cd680 ; ROOM_PAL_090
+	dw Pals_cd6c0 ; ROOM_PAL_091
+	dw Pals_cd700 ; ROOM_PAL_092
+	dw Pals_cd740 ; ROOM_PAL_093
+	dw Pals_cd780 ; ROOM_PAL_094
+	dw Pals_cd7c0 ; ROOM_PAL_095
+	dw Pals_cd800 ; ROOM_PAL_096
+	dw Pals_cd840 ; ROOM_PAL_097
+	dw Pals_cd880 ; ROOM_PAL_098
+	dw Pals_cd8c0 ; ROOM_PAL_099
+	dw Pals_cd900 ; ROOM_PAL_100
+	dw Pals_cd940 ; ROOM_PAL_101
+	dw Pals_cd980 ; ROOM_PAL_102
+	dw Pals_cd9c0 ; ROOM_PAL_103
+	dw Pals_cda00 ; ROOM_PAL_104
+	dw Pals_cda40 ; ROOM_PAL_105
+	dw Pals_cda80 ; ROOM_PAL_106
+	dw Pals_cdac0 ; ROOM_PAL_107
+	dw Pals_cdb00 ; ROOM_PAL_108
+	dw Pals_cdb40 ; ROOM_PAL_109
+	dw Pals_cdb80 ; ROOM_PAL_110
+	dw Pals_cdbc0 ; ROOM_PAL_111
+	dw Pals_cdc00 ; ROOM_PAL_112
+	dw Pals_cdc40 ; ROOM_PAL_113
+	dw Pals_cdc80 ; ROOM_PAL_114
+	dw Pals_cdcc0 ; ROOM_PAL_115
+	dw Pals_cdd00 ; ROOM_PAL_116
+	dw Pals_cdd40 ; ROOM_PAL_117
+	dw Pals_cdd80 ; ROOM_PAL_118
+	dw Pals_cddc0 ; ROOM_PAL_119
+	dw Pals_cde00 ; ROOM_PAL_120
+	dw Pals_cde40 ; ROOM_PAL_121
+	dw Pals_cde80 ; ROOM_PAL_122
+	dw Pals_cdec0 ; ROOM_PAL_123
+	dw Pals_cdf00 ; ROOM_PAL_124
+	dw Pals_cdf40 ; ROOM_PAL_125
+	dw Pals_cdf80 ; ROOM_PAL_126
+	dw Pals_cdfc0 ; ROOM_PAL_127
+	dw Pals_ce000 ; ROOM_PAL_128
+	dw Pals_ce040 ; ROOM_PAL_129
+	dw Pals_ce080 ; ROOM_PAL_130
+	dw Pals_ce0c0 ; ROOM_PAL_131
+	dw Pals_ce100 ; ROOM_PAL_132
+	dw Pals_ce140 ; ROOM_PAL_133
+	dw Pals_ce180 ; ROOM_PAL_134
+	dw Pals_ce1c0 ; ROOM_PAL_135
+	dw Pals_ce200 ; ROOM_PAL_136
+	dw Pals_ce240 ; ROOM_PAL_137
+	dw Pals_ce280 ; ROOM_PAL_138
+	dw Pals_ce2c0 ; ROOM_PAL_139
+	dw Pals_ce300 ; ROOM_PAL_140
+	dw Pals_ce340 ; ROOM_PAL_141
+	dw Pals_ce380 ; ROOM_PAL_142
+	dw Pals_ce3c0 ; ROOM_PAL_143
+	dw Pals_ce400 ; ROOM_PAL_144
+	dw Pals_ce440 ; ROOM_PAL_145
 ; 0xc0c3f
 
 rept $12
 	db $ff
 endr
 
-RoomAnimatedPals:: ; c0c51 (30:4c51)
-	dw .data_c0c79
-	dw .data_c0c82
-	dw .data_c0c8b
-	dw .data_c0c94
-	dw .data_c0c9d
-	dw .data_c0ca6
-	dw .data_c0caf
-	dw .data_c0cb8
-	dw .data_c0cc1
-	dw .data_c0cca
-	dw .data_c0cd3
-	dw .data_c0cdc
-	dw .data_c0c79
-	dw .data_c0c79
-	dw .data_c0c79
-	dw .data_c0c79
-	dw .data_c0c79
-	dw .data_c0c79
-	dw .data_c0c79
-	dw .data_c0c79
+RoomPalCycles:: ; c0c51 (30:4c51)
+	dw .PalCycle0  ; ROOM_PAL_CYCLE_00
+	dw .PalCycle1  ; ROOM_PAL_CYCLE_01
+	dw .PalCycle2  ; ROOM_PAL_CYCLE_02
+	dw .PalCycle3  ; ROOM_PAL_CYCLE_03
+	dw .PalCycle4  ; ROOM_PAL_CYCLE_04
+	dw .PalCycle5  ; ROOM_PAL_CYCLE_05
+	dw .PalCycle6  ; ROOM_PAL_CYCLE_06
+	dw .PalCycle7  ; ROOM_PAL_CYCLE_07
+	dw .PalCycle8  ; ROOM_PAL_CYCLE_08
+	dw .PalCycle9  ; ROOM_PAL_CYCLE_09
+	dw .PalCycle10 ; ROOM_PAL_CYCLE_10
+	dw .PalCycle11 ; ROOM_PAL_CYCLE_11
+	dw .PalCycle0  ; ROOM_PAL_CYCLE_12
+	dw .PalCycle0  ; ROOM_PAL_CYCLE_13
+	dw .PalCycle0  ; ROOM_PAL_CYCLE_14
+	dw .PalCycle0  ; ROOM_PAL_CYCLE_15
+	dw .PalCycle0  ; ROOM_PAL_CYCLE_16
+	dw .PalCycle0  ; ROOM_PAL_CYCLE_17
+	dw .PalCycle0  ; ROOM_PAL_CYCLE_18
+	dw .PalCycle0  ; ROOM_PAL_CYCLE_19
 
-.data_c0c79
-	db $00, $00, $00, $00, $00, $00, $00, $00, $00
+.PalCycle0
+	db ROOM_PAL_000
+	db ROOM_PAL_000
+	db ROOM_PAL_000
+	db ROOM_PAL_000
+	db ROOM_PAL_000
+	db ROOM_PAL_000
+	db ROOM_PAL_000
+	db ROOM_PAL_000
+	db 0 ; duration
 
-.data_c0c82
-	db $02, $02, $02, $03, $73, $74, $73, $03, $0b
+.PalCycle1
+	db ROOM_PAL_002
+	db ROOM_PAL_002
+	db ROOM_PAL_002
+	db ROOM_PAL_003
+	db ROOM_PAL_115
+	db ROOM_PAL_116
+	db ROOM_PAL_115
+	db ROOM_PAL_003
+	db 11 ; duration
 
-.data_c0c8b
-	db $31, $31, $55, $56, $57, $57, $56, $55, $0d
+.PalCycle2
+	db ROOM_PAL_049
+	db ROOM_PAL_049
+	db ROOM_PAL_085
+	db ROOM_PAL_086
+	db ROOM_PAL_087
+	db ROOM_PAL_087
+	db ROOM_PAL_086
+	db ROOM_PAL_085
+	db 13 ; duration
 
-.data_c0c94
-	db $24, $24, $24, $58, $59, $59, $59, $58, $16
+.PalCycle3
+	db ROOM_PAL_036
+	db ROOM_PAL_036
+	db ROOM_PAL_036
+	db ROOM_PAL_088
+	db ROOM_PAL_089
+	db ROOM_PAL_089
+	db ROOM_PAL_089
+	db ROOM_PAL_088
+	db 22 ; duration
 
-.data_c0c9d
-	db $5a, $5a, $5a, $5b, $5c, $5c, $5c, $5b, $16
+.PalCycle4
+	db ROOM_PAL_090
+	db ROOM_PAL_090
+	db ROOM_PAL_090
+	db ROOM_PAL_091
+	db ROOM_PAL_092
+	db ROOM_PAL_092
+	db ROOM_PAL_092
+	db ROOM_PAL_091
+	db 22 ; duration
 
-.data_c0ca6
-	db $57, $57, $5e, $5f, $60, $60, $5f, $5e, $0d
+.PalCycle5
+	db ROOM_PAL_087
+	db ROOM_PAL_087
+	db ROOM_PAL_094
+	db ROOM_PAL_095
+	db ROOM_PAL_096
+	db ROOM_PAL_096
+	db ROOM_PAL_095
+	db ROOM_PAL_094
+	db 13 ; duration
 
-.data_c0caf
-	db $65, $65, $65, $66, $67, $67, $67, $66, $16
+.PalCycle6
+	db ROOM_PAL_101
+	db ROOM_PAL_101
+	db ROOM_PAL_101
+	db ROOM_PAL_102
+	db ROOM_PAL_103
+	db ROOM_PAL_103
+	db ROOM_PAL_103
+	db ROOM_PAL_102
+	db 22 ; duration
 
-.data_c0cb8
-	db $68, $68, $68, $69, $6a, $6a, $6a, $69, $16
+.PalCycle7
+	db ROOM_PAL_104
+	db ROOM_PAL_104
+	db ROOM_PAL_104
+	db ROOM_PAL_105
+	db ROOM_PAL_106
+	db ROOM_PAL_106
+	db ROOM_PAL_106
+	db ROOM_PAL_105
+	db 22 ; duration
 
-.data_c0cc1
-	db $2f, $76, $77, $78, $79, $7a, $7b, $7c, $10
+.PalCycle8
+	db ROOM_PAL_047
+	db ROOM_PAL_118
+	db ROOM_PAL_119
+	db ROOM_PAL_120
+	db ROOM_PAL_121
+	db ROOM_PAL_122
+	db ROOM_PAL_123
+	db ROOM_PAL_124
+	db 16 ; duration
 
-.data_c0cca
-	db $44, $7d, $7e, $7f, $80, $81, $82, $83, $10
+.PalCycle9
+	db ROOM_PAL_068
+	db ROOM_PAL_125
+	db ROOM_PAL_126
+	db ROOM_PAL_127
+	db ROOM_PAL_128
+	db ROOM_PAL_129
+	db ROOM_PAL_130
+	db ROOM_PAL_131
+	db 16 ; duration
 
-.data_c0cd3
-	db $45, $84, $85, $86, $87, $88, $89, $8a, $10
+.PalCycle10
+	db ROOM_PAL_069
+	db ROOM_PAL_132
+	db ROOM_PAL_133
+	db ROOM_PAL_134
+	db ROOM_PAL_135
+	db ROOM_PAL_136
+	db ROOM_PAL_137
+	db ROOM_PAL_138
+	db 16 ; duration
 
-.data_c0cdc
-	db $46, $8b, $8c, $8d, $8e, $8f, $90, $91, $10
+.PalCycle11
+	db ROOM_PAL_070
+	db ROOM_PAL_139
+	db ROOM_PAL_140
+	db ROOM_PAL_141
+	db ROOM_PAL_142
+	db ROOM_PAL_143
+	db ROOM_PAL_144
+	db ROOM_PAL_145
+	db 16 ; duration
 
-Data_c0ce5: ; c0ce5 (30:4ce5)
-; frame duration, group
-	db  0, $00
-	db  2, $00
-	db 11, $01
-	db  6, $02
-	db  5, $03
-	db 11, $04
-	db  6, $05
-	db  6, $06
-	db  9, $07
-	db  6, $08
-	db  6, $09
-	db  6, $0a
-	db  3, $0b
-	db  2, $0c
-	db 11, $0d
-	db  8, $0e
-	db  6, $0f
-	db  6, $10
-	db  6, $11
-	db  5, $12
-	db  9, $13
-	db  0, $00
-	db  0, $00
-	db  0, $00
-	db  0, $00
-	db  0, $00
-	db  0, $00
-	db  0, $00
-	db  0, $00
+AnimatedTilesGroups: ; c0ce5 (30:4ce5)
+	; frame duration, group
+	db  0, ANIMATED_TILES_GFX_00 ; ANIMATED_TILES_GROUP_00
+	db  2, ANIMATED_TILES_GFX_00 ; ANIMATED_TILES_GROUP_01
+	db 11, ANIMATED_TILES_GFX_01 ; ANIMATED_TILES_GROUP_02
+	db  6, ANIMATED_TILES_GFX_02 ; ANIMATED_TILES_GROUP_03
+	db  5, ANIMATED_TILES_GFX_03 ; ANIMATED_TILES_GROUP_04
+	db 11, ANIMATED_TILES_GFX_04 ; ANIMATED_TILES_GROUP_05
+	db  6, ANIMATED_TILES_GFX_05 ; ANIMATED_TILES_GROUP_06
+	db  6, ANIMATED_TILES_GFX_06 ; ANIMATED_TILES_GROUP_07
+	db  9, ANIMATED_TILES_GFX_07 ; ANIMATED_TILES_GROUP_08
+	db  6, ANIMATED_TILES_GFX_08 ; ANIMATED_TILES_GROUP_09
+	db  6, ANIMATED_TILES_GFX_09 ; ANIMATED_TILES_GROUP_10
+	db  6, ANIMATED_TILES_GFX_10 ; ANIMATED_TILES_GROUP_11
+	db  3, ANIMATED_TILES_GFX_11 ; ANIMATED_TILES_GROUP_12
+	db  2, ANIMATED_TILES_GFX_12 ; ANIMATED_TILES_GROUP_13
+	db 11, ANIMATED_TILES_GFX_13 ; ANIMATED_TILES_GROUP_14
+	db  8, ANIMATED_TILES_GFX_14 ; ANIMATED_TILES_GROUP_15
+	db  6, ANIMATED_TILES_GFX_15 ; ANIMATED_TILES_GROUP_16
+	db  6, ANIMATED_TILES_GFX_16 ; ANIMATED_TILES_GROUP_17
+	db  6, ANIMATED_TILES_GFX_17 ; ANIMATED_TILES_GROUP_18
+	db  5, ANIMATED_TILES_GFX_18 ; ANIMATED_TILES_GROUP_19
+	db  9, ANIMATED_TILES_GFX_19 ; ANIMATED_TILES_GROUP_20
+	db  0, ANIMATED_TILES_GFX_00 ; ANIMATED_TILES_GROUP_21
+	db  0, ANIMATED_TILES_GFX_00 ; ANIMATED_TILES_GROUP_22
+	db  0, ANIMATED_TILES_GFX_00 ; ANIMATED_TILES_GROUP_23
+	db  0, ANIMATED_TILES_GFX_00 ; ANIMATED_TILES_GROUP_24
+	db  0, ANIMATED_TILES_GFX_00 ; ANIMATED_TILES_GROUP_25
+	db  0, ANIMATED_TILES_GFX_00 ; ANIMATED_TILES_GROUP_26
+	db  0, ANIMATED_TILES_GFX_00 ; ANIMATED_TILES_GROUP_27
+	db  0, ANIMATED_TILES_GFX_00 ; ANIMATED_TILES_GROUP_28
 
 Data_c0d1f: ; c0d1f (30:4d1f)
 	dw .data_c0d5b

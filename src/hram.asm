@@ -31,14 +31,10 @@ hffa4:: ; ffa4
 	ds $3
 
 hPos::
-hYPosHi:: ; ffa8
-	ds $1
-hYPosLo:: ; ffa9
-	ds $1
-hXPosHi:: ; ffaa
-	ds $1
-hXPosLo:: ; ffab
-	ds $1
+hYPosHi:: ds $1 ; ffa8
+hYPosLo:: ds $1 ; ffa9
+hXPosHi:: ds $1 ; ffaa
+hXPosLo:: ds $1 ; ffab
 
 hffac:: ; ffac
 	ds $1

@@ -267,7 +267,7 @@ Func_80aa: ; 80aa (2:40aa)
 	ld [wGroundShakeCounter], a
 	ld [wc0bc], a
 	ld [wAnimatedTilesFrameDuration], a
-	ld [wc1b1], a
+	ld [wRoomPalCycleDuration], a
 	ld [wRoomAnimatedTilesEnabled], a
 	ld [wRoomAnimatedPalsEnabled], a
 	ld [wcee0], a
@@ -486,7 +486,7 @@ Func_846e: ; 846e (2:446e)
 	ldh [rSVBK], a
 	ld a, [wAnimatedTilesFrameDuration]
 	ld [wTempAnimatedTilesFrameDuration], a
-	ld a, [wAnimatedTilesGroup]
+	ld a, [wAnimatedTilesGfx]
 	ld [wTempAnimatedTilesGroup], a
 	pop af
 	ldh [rSVBK], a
@@ -801,7 +801,7 @@ Func_8747: ; 8747 (2:4747)
 	ld [wc0bc], a
 	ld [wca9c], a
 	ld [wAnimatedTilesFrameDuration], a
-	ld [wc1b1], a
+	ld [wRoomPalCycleDuration], a
 	ld [wRoomAnimatedTilesEnabled], a
 	ld [wRoomAnimatedPalsEnabled], a
 	ld [wcee0], a
@@ -1109,16 +1109,16 @@ Func_89e2: ; 89e2 (2:49e2)
 Func_8a41: ; 8a41 (2:4a41)
 	ld hl, hXPosLo
 	xor a
-	ld [hld], a
+	ld [hld], a ; hXPosLo
 	ld a, [wSpawnPos]
 	and $0f
-	ld [hld], a
+	ld [hld], a ; hXPosHi
 	xor a
-	ld [hld], a
+	ld [hld], a ; hYPosLo
 	ld a, [wSpawnPos]
 	and $f0
 	swap a
-	ld [hl], a
+	ld [hl], a ; hYPosHi
 	call Func_cc0
 
 	ld c, $01

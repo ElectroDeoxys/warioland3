@@ -74,7 +74,7 @@ InitPauseMenu: ; 1f0087 (7c:4087)
 	call SaveBackupVRAM
 	ld a, [wAnimatedTilesFrameDuration]
 	ld [wTempAnimatedTilesFrameDuration], a
-	ld a, [wAnimatedTilesGroup]
+	ld a, [wAnimatedTilesGfx]
 	ld [wTempAnimatedTilesGroup], a
 	stop_sfx
 	play_music MUSIC_PAUSE_MENU
@@ -448,7 +448,7 @@ ReturnFromPauseMenu: ; 1f033c (7c:433c)
 	ld a, [wTempAnimatedTilesFrameDuration]
 	ld [wAnimatedTilesFrameDuration], a
 	ld a, [wTempAnimatedTilesGroup]
-	ld [wAnimatedTilesGroup], a
+	ld [wAnimatedTilesGfx], a
 	xor a
 	ld [wAnimatedTilesFrameCount], a
 	ld [wAnimatedTilesFrame], a

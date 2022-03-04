@@ -912,7 +912,7 @@ StartUpwardsFloorTransition:: ; 11d6 (0:11d6)
 Func_11f6:: ; 11f6 (0:11f6)
 	xor a
 	ld [wGrabState], a
-	ld [wc1b1], a
+	ld [wRoomPalCycleDuration], a
 	ld [wRoomAnimatedPalsEnabled], a
 	ld [wcee0], a
 	ld [wcee1], a
@@ -1168,7 +1168,7 @@ ReturnToLevelFromGolf:: ; 13d5 (0:13d5)
 	ld a, [wTempAnimatedTilesFrameDuration]
 	ld [wAnimatedTilesFrameDuration], a
 	ld a, [wTempAnimatedTilesGroup]
-	ld [wAnimatedTilesGroup], a
+	ld [wAnimatedTilesGfx], a
 	pop af
 	ldh [rSVBK], a
 	xor a
@@ -2698,13 +2698,13 @@ Func_285c:: ; 285c (0:285c)
 	pop hl
 
 	ld a, [hli]
-	ld [wc1ab], a
+	ld [wAnimatedTilesGroup], a
 	push hl
 	farcall InitRoomAnimatedTiles
 	pop hl
 
 	ld a, [hli]
-	ld [wc1b0], a
+	ld [wRoomPalCycle], a
 	push hl
 	farcall InitRoomAnimatedPals
 	pop hl
@@ -2801,7 +2801,7 @@ LoadRoomMainTiles:: ; 29e7 (0:29e7)
 	add a
 	ld e, a
 	ld d, $00
-	ld hl, ForegroundTilesPointers
+	ld hl, LevelMainTilesPointers
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
@@ -2827,7 +2827,7 @@ LoadRoomSpecialTiles:: ; 2a19 (0:2a19)
 	add a
 	ld e, a
 	ld d, $00
-	ld hl, BackgroundTilesPointers
+	ld hl, SpecialTilesPointers
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
@@ -2853,7 +2853,7 @@ LoadRoomPalettes:: ; 2a52 (0:2a52)
 	add a ; *2
 	ld e, a
 	ld d, $00
-	ld hl, LevelPals
+	ld hl, RoomPals
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
@@ -2870,44 +2870,44 @@ UpdateRoomAnimatedPals:: ; 2a77 (0:2a77)
 	ldh a, [rLY]
 	cp $88
 	jp nc, .done
-	ld a, [wc1b1]
+	ld a, [wRoomPalCycleDuration]
 	and a
 	jp z, .done
 	ld b, a
-	ld a, [wc1b5]
+	ld a, [wRoomPalCycleCounter]
 	inc a
-	ld [wc1b5], a
+	ld [wRoomPalCycleCounter], a
 	cp b
 	jp c, .done
 
 	xor a
-	ld [wc1b5], a
-	ld a, [wRoomAnimatedPals + 0]
+	ld [wRoomPalCycleCounter], a
+	ld a, [wRoomPalCyclePtr + 0]
 	ld h, a
-	ld a, [wRoomAnimatedPals + 1]
+	ld a, [wRoomPalCyclePtr + 1]
 	ld l, a
 
-	ld a, [wCurRoomAnimatedPal]
+	ld a, [wRoomPalCycleIndex]
 	inc a
-	cp $08
+	cp ROOM_PAL_CYCLE_LENGTH
 	jr c, .ok
 	xor a ; reset to 0
 .ok
-	ld [wCurRoomAnimatedPal], a
+	ld [wRoomPalCycleIndex], a
 
 	ld e, a
 	ld d, $00
 	add hl, de
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(RoomAnimatedPals)
+	ld a, BANK(RoomPalCycles)
 	bankswitch
 	ld d, $00
 	ld a, [hl]
 	add a ; *2
 	ld e, a
 	rl d
-	ld hl, LevelPals
+	ld hl, RoomPals
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]

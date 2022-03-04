@@ -993,7 +993,7 @@ StartOverworldState:: ; 461e (1:461e)
 Func_4628: ; 4628 (1:4628)
 	xor a
 	ld [wAnimatedTilesFrameDuration], a
-	ld [wAnimatedTilesGroup], a
+	ld [wAnimatedTilesGfx], a
 	ld [wAnimatedTilesFrameCount], a
 	ld [wAnimatedTilesFrame], a
 	xor a

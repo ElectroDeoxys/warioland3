@@ -19,7 +19,7 @@ Func_1c8586: ; 1c8586 (72:4586)
 	ld a, $08
 	ld [wAnimatedTilesFrameDuration], a
 	ld a, $0f
-	ld [wAnimatedTilesGroup], a
+	ld [wAnimatedTilesGfx], a
 	xor a
 	ld [wAnimatedTilesFrameCount], a
 	ld [wAnimatedTilesFrame], a
