@@ -2577,7 +2577,7 @@ LoadPermissionMap:: ; 2800 (0:2800)
 	ld l, a
 	ld a, h
 	cp $ff
-	jr z, .asm_2859
+	jr z, .reset
 	ld a, [wRoomPermissionMap]
 	cp NUM_TILE_MAPS_GROUP_1 - 1
 	jr nc, .group_2
@@ -2604,7 +2604,7 @@ LoadPermissionMap:: ; 2800 (0:2800)
 	bankswitch
 	ret
 
-.asm_2859
+.reset
 	jp Init
 ; 0x285c
 
@@ -2763,7 +2763,7 @@ Func_298d:: ; 298d (0:298d)
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [wc0cf]
+	ld a, [wRoomPermissionMapBank]
 	ld [wTempBank], a
 	ld a, [wROMBank]
 	push af

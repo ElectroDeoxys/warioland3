@@ -202,7 +202,7 @@ wRoomTileMap::          ds $1 ; c0cb
 wRoomMainTiles::        ds $1 ; c0cc
 wRoomSpecialTiles::     ds $1 ; c0cd
 wRoomPalettes::         ds $1 ; c0ce
-wc0cf::                 ds $1 ; c0cf
+wRoomPermissionMapBank::                 ds $1 ; c0cf
 wc0d0::                 ds $1 ; c0d0
 wRoomMainTilesBank::    ds $1 ; c0d1
 wRoomSpecialTilesBank:: ds $1 ; c0d2

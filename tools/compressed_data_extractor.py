@@ -60,7 +60,7 @@ def outputData(offset, filename):
 n = 1
 for offsetStr in args.offsets:
     offset = int(offsetStr, 16)
-    filename = 'map_' + getFormattedOffset(offset)
+    filename = 'data_' + getFormattedOffset(offset)
     if (args.suffix):
         filename = args.suffix[0]
         if (len(args.offsets) > 1):
