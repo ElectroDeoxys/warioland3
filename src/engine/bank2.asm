@@ -24,7 +24,7 @@ Func_8024: ; 8024 (2:4024)
 	call DisableLCD
 	call FillBGMap0_With7f
 	call ClearVirtualOAM
-	call Func_12c3
+	call ClearParticles
 
 	xor a
 	ldh [rSCY], a
@@ -85,7 +85,7 @@ Func_8024: ; 8024 (2:4024)
 Func_80aa: ; 80aa (2:40aa)
 	ld a, TRUE
 	ld [wRoomAnimatedPalsEnabled], a
-	farcall Func_ca26
+	farcall UpdateParticles
 
 	ld a, [wCameraConfigFlags]
 	and CAMCONFIG_SCROLLING_MASK
@@ -557,7 +557,7 @@ Func_846e: ; 846e (2:446e)
 
 	call FillBGMap0_With7f
 	call ClearVirtualOAM
-	call Func_12c3
+	call ClearParticles
 	call Func_8a41
 	call Func_8ad9
 	call Func_8c12
@@ -634,7 +634,7 @@ Func_846e: ; 846e (2:446e)
 
 Func_861c: ; 861c (2:461c)
 	call Func_867f
-	farcall Func_ca26
+	farcall UpdateParticles
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")

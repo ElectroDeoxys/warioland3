@@ -507,8 +507,8 @@ AttackObject: ; 20350 (8:4350)
 	ld [de], a
 
 .asm_203a0
-	ld b, $02
-	farcall Func_c9f3
+	ld b, PARTICLE_STARS
+	farcall CreateParticle
 	ld b, $02
 	call SetObjUnk1C
 	ld a, [wTransformation]

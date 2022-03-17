@@ -355,7 +355,7 @@ AddActionHelpWarioSprite: ; 1e4aac (79:4aac)
 	ld a, [hli]
 	sub b
 	add $10
-	ld [wCurSprite], a
+	ld [wCurSpriteYCoord], a
 	ld a, [hli]
 	add $08
 	ld [wCurSpriteXCoord], a
@@ -377,7 +377,7 @@ AddActionHelpWarioSprite_FromBank: ; 1e4add (79:4add)
 	ld a, [hli]
 	sub b
 	add $10
-	ld [wCurSprite], a
+	ld [wCurSpriteYCoord], a
 	ld a, [hli]
 	add $08
 	ld [wCurSpriteXCoord], a
@@ -403,7 +403,7 @@ AddActionHelpSprite_Far: ; 1e4b15 (79:4b15)
 	ld a, [hli]
 	sub b
 	add $10
-	ld [wCurSprite], a
+	ld [wCurSpriteYCoord], a
 	ld a, [hli]
 	add $08
 	ld [wCurSpriteXCoord], a
@@ -435,7 +435,7 @@ AddActionHelpSprite: ; 1e4b4d (79:4b4d)
 	ld a, [hli]
 	sub b
 	add $10
-	ld [wCurSprite], a
+	ld [wCurSpriteYCoord], a
 	ld a, [hli]
 	add $08
 	ld [wCurSpriteXCoord], a
@@ -455,7 +455,7 @@ Func_1e4b6d: ; 1e4b6d (79:4b6d)
 	ld a, [hli]
 	sub b
 	add $10
-	ld [wCurSprite], a
+	ld [wCurSpriteYCoord], a
 	ld a, [hli]
 	add $08
 	ld [wCurSpriteXCoord], a

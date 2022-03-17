@@ -66,7 +66,7 @@
 	const SFX_002                          ; 102
 	const SFX_BUMP                         ; 103
 	const SFX_WALK                         ; 104
-	const SFX_005                          ; 105
+	const SFX_BLOCK_BREAK                  ; 105
 	const SFX_006                          ; 106
 	const SFX_ATTACK                       ; 107
 	const SFX_ATTACK_POWERED_UP            ; 108

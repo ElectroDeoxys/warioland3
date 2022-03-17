@@ -1028,10 +1028,9 @@ Func_12a5:: ; 12a5 (0:12a5)
 
 	INCROM $12b5, $12c3
 
-; clears wcca0
-Func_12c3:: ; 12c3 (0:12c3)
-	ld hl, wcca0
-	ld b, $42
+ClearParticles:: ; 12c3 (0:12c3)
+	ld hl, wParticles
+	ld b, PARTICLE_STRUCT_LENGTH * NUM_PARTICLES + 2
 	xor a
 	call WriteAToHL_BTimes
 	ret
@@ -1652,8 +1651,8 @@ Func_16d9:: ; 16d9 (0:16d9)
 	ld a, [hl]
 	sbc $00
 	ld [de], a
-	ld b, $0e
-	farcall Func_c9f3
+	ld b, PARTICLE_OWL
+	farcall CreateParticle
 	ret
 ; 0x1700
 
@@ -1783,7 +1782,7 @@ CheckHasAllMusicalCoinFlags:: ; 17a4 (0:17a4)
 Func_17be:: ; 17be (0:17be)
 	ld a, [hli]
 	add $10
-	ld [wCurSprite], a
+	ld [wCurSpriteYCoord], a
 	ld a, [hli]
 	add $08
 	ld [wCurSpriteXCoord], a
@@ -1805,7 +1804,7 @@ Func_17be:: ; 17be (0:17be)
 Func_17ec:: ; 17ec (0:17ec)
 	ld a, [hli]
 	add $10
-	ld [wCurSprite], a
+	ld [wCurSpriteYCoord], a
 	ld a, [hli]
 	add $08
 	ld [wCurSpriteXCoord], a

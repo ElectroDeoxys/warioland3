@@ -295,8 +295,8 @@ UpdateState_IceSkatinCrash: ; 1ec300 (7b:4300)
 	and a
 	ret z
 	get_pos
-	ld b, $0c
-	farcall Func_c9f3
+	ld b, PARTICLE_ICE
+	farcall CreateParticle
 	jp RecoverFromTransformation
 ; 0x1ec339
 
@@ -981,8 +981,8 @@ SetState_MagicRising: ; 1ed8aa (7b:58aa)
 	inc de
 	ld a, [hl]
 	ld [de], a
-	ld b, $10
-	farcall Func_c9f3
+	ld b, PARTICLE_MAGIC_1
+	farcall CreateParticle
 
 	ld hl, wPos
 	ld de, hPos
@@ -997,8 +997,8 @@ SetState_MagicRising: ; 1ed8aa (7b:58aa)
 	inc de
 	ld a, [hl]
 	ld [de], a
-	ld b, $11
-	farcall Func_c9f3
+	ld b, PARTICLE_MAGIC_2
+	farcall CreateParticle
 
 	ld a, WST_MAGIC_RISING
 	ld [wWarioState], a
@@ -1085,8 +1085,8 @@ UpdateState_MagicRising: ; 1ed972 (7b:5972)
 
 .asm_1ed9d5
 	get_pos
-	ld b, $12
-	farcall Func_c9f3
+	ld b, PARTICLE_MAGIC_STOP
+	farcall CreateParticle
 
 	ld a, WST_MAGIC_STOPPING
 	ld [wWarioState], a

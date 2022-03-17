@@ -180,8 +180,8 @@ UpdateState_Walking: ; 1c1ab (7:41ab)
 	and a
 	jr z, .handle_input
 	get_pos
-	ld b, $04
-	farcall Func_c9f3
+	ld b, PARTICLE_DUST
+	farcall CreateParticle
 
 .handle_input
 	call HandleInput_Walking
@@ -494,8 +494,8 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 
 	update_pos_y
 	get_pos
-	ld b, $04
-	farcall Func_c9f3
+	ld b, PARTICLE_DUST
+	farcall CreateParticle
 
 	ld a, [wJumpVelIndex]
 	cp MAX_JUMP_VEL_INDEX
@@ -1312,8 +1312,8 @@ Func_1cd48: ; 1cd48 (7:4d48)
 	and $f0
 	ldh [hYPosLo], a
 
-	ld b, $03
-	farcall Func_c9f3
+	ld b, PARTICLE_SPLASH
+	farcall CreateParticle
 	play_sfx SFX_SLIDE
 ;	fallthrough
 
@@ -3040,8 +3040,9 @@ SetState_Sliding: ; 1def1 (7:5ef1)
 	ld a, [hl]
 	sbc $00
 	ld [de], a
-	ld b, $06
-	farcall Func_c9f3
+
+	ld b, PARTICLE_SLIDE_DUST_LEFT
+	farcall CreateParticle
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
 	load_frameset Frameset_16708
@@ -3065,8 +3066,9 @@ SetState_Sliding: ; 1def1 (7:5ef1)
 	ld a, [hl]
 	sbc $00
 	ld [de], a
-	ld b, $05
-	farcall Func_c9f3
+
+	ld b, PARTICLE_SLIDE_DUST_RIGHT
+	farcall CreateParticle
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
 	load_frameset Frameset_1671d

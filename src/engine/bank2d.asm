@@ -2839,7 +2839,7 @@ Func_b79de: ; b79de (2d:79de)
 	ld a, $06
 	ld hl, wSceneObj3State
 	call SetSceneObjState
-	play_sfx SFX_005
+	play_sfx SFX_BLOCK_BREAK
 	ret
 ; 0xb79fa
 

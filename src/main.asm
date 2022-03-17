@@ -23,6 +23,7 @@ INCLUDE "gfx/pals/wario.asm"
 
 SECTION "Bank 3", ROMX
 
+INCLUDE "engine/level/particles.asm"
 INCLUDE "engine/bank3.asm"
 
 

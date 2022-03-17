@@ -1579,8 +1579,8 @@ UpdateState_LadderClimbing: ; 1a436 (6:6436)
 	and a
 	jr z, .asm_1a49a
 	get_pos
-	ld b, $04
-	farcall Func_c9f3
+	ld b, PARTICLE_DUST
+	farcall CreateParticle
 .asm_1a49a
 	call Func_1b3a0
 	ret
@@ -2167,8 +2167,8 @@ UpdateState_FenceMovingVertical:;1aed0 (6:6ed0)
 
 	get_pos
 
-	ld b, $04
-	farcall Func_c9f3
+	ld b, PARTICLE_DUST
+	farcall CreateParticle
 .asm_1af1e
 	call Func_1b168
 	ret

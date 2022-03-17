@@ -941,8 +941,8 @@ UpdateState_FlatSinking: ; 2894e (a:494e)
 	ld a, [hl]
 	sbc $00
 	ld [de], a
-	ld b, $09
-	farcall Func_c9f3
+	ld b, PARTICLE_BUBBLES
+	farcall CreateParticle
 	ret
 ; 0x289c5
 
@@ -964,8 +964,8 @@ Func_289c5: ; 289c5 (a:49c5)
 	ld a, [hl]
 	sbc $00
 	ld [de], a
-	ld b, $09
-	farcall Func_c9f3
+	ld b, PARTICLE_BUBBLES
+	farcall CreateParticle
 
 	ld a, WST_FLAT_STRETCHING_UNDERWATER
 	ld [wWarioState], a
@@ -1720,8 +1720,8 @@ Func_2926a: ; 2926a (a:526a)
 	ldh a, [hYPosLo]
 	and $f0
 	ldh [hYPosLo], a
-	ld b, $03
-	farcall Func_c9f3
+	ld b, PARTICLE_SPLASH
+	farcall CreateParticle
 	play_sfx SFX_SLIDE
 
 	ld a, WST_FAT_SINKING
@@ -1805,8 +1805,8 @@ Func_29317: ; 29317 (a:5317)
 	sbc $00
 	ld [de], a
 .asm_29351
-	ld b, $09
-	farcall Func_c9f3
+	ld b, PARTICLE_BUBBLES
+	farcall CreateParticle
 	ret
 ; 0x29363
 
@@ -2111,8 +2111,8 @@ UpdateState_Electric: ; 294bf (a:54bf)
 	sbc $00
 	ld [de], a
 .asm_2961a
-	ld b, $08
-	farcall Func_c9f3
+	ld b, PARTICLE_SMOKE_SMALL
+	farcall CreateParticle
 
 	xor a
 	ld [wWarioStateCounter], a
@@ -3185,8 +3185,8 @@ UpdateState_BouncyAirborne: ; 2a0f9 (a:60f9)
 	jr z, .asm_2a15a
 
 	get_pos
-	ld b, $0a
-	farcall Func_c9f3
+	ld b, PARTICLE_BOUNCY_JUMP
+	farcall CreateParticle
 
 .asm_2a15a
 	call DecrementTransformationDuration
@@ -4267,8 +4267,8 @@ UpdateState_InBubble: ; 2ad06 (a:6d06)
 
 .asm_2ad45
 	get_pos
-	ld b, $0b
-	farcall Func_c9f3
+	ld b, PARTICLE_BUBBLE_BURST
+	farcall CreateParticle
 	jp RecoverFromTransformation
 ; 0x2ad6a
 
@@ -4311,8 +4311,8 @@ Func_2ade4: ; 2ade4 (a:6de4)
 	ldh a, [hYPosLo]
 	and $f0
 	ldh [hYPosLo], a
-	ld b, $07
-	farcall Func_c9f3
+	ld b, PARTICLE_SMOKE_LARGE
+	farcall CreateParticle
 	play_sfx SFX_SLIDE
 	farcall Func_1cd7c
 	ret
@@ -5079,8 +5079,8 @@ Func_2b42b: ; 2b42b (a:742b)
 
 Func_2b4d0: ; 2b4d0 (a:74d0)
 	get_pos
-	ld b, $04
-	farcall Func_c9f3
+	ld b, PARTICLE_DUST
+	farcall CreateParticle
 	ret
 ; 0x2b4f3
 
@@ -5153,8 +5153,8 @@ Func_2b56f: ; 2b56f (a:756f)
 	ret z
 
 	get_pos
-	ld b, $0b
-	farcall Func_c9f3
+	ld b, PARTICLE_BUBBLE_BURST
+	farcall CreateParticle
 	jp RecoverFromTransformation
 
 .asm_2b5b2

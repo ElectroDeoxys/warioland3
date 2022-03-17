@@ -387,7 +387,7 @@ Func_db4e9: ; db4e9 (36:74e9)
 	ld a, [hli]
 	add $10
 	sub b
-	ld [wCurSprite], a
+	ld [wCurSpriteYCoord], a
 	ld a, [hli]
 	add $08
 	ld [wCurSpriteXCoord], a

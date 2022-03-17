@@ -808,18 +808,23 @@ wVirtualOAMSprite38:: sprite_oam_struct wVirtualOAMSprite38
 wVirtualOAMSprite39:: sprite_oam_struct wVirtualOAMSprite39
 wVirtualOAMEnd::
 
-wcca0:: unk3_struct wcca0 ; cca0
-wccb0:: unk3_struct wccb0 ; ccb0
-wccc0:: unk3_struct wccc0 ; ccc0
-wccd0:: unk3_struct wccd0 ; ccd0
+wParticles::
+wParticle1:: particle_struct wParticle1 ; cca0
+wParticle2:: particle_struct wParticle2 ; ccb0
+wParticle3:: particle_struct wParticle3 ; ccc0
+wParticle4:: particle_struct wParticle4 ; ccd0
 
-wcce0:: ; cce0
+; how many particles are active now
+wNumParticles:: ; cce0
 	ds $1
 
-wcce1:: ; cce1
+; this particle will be overwritten
+; when the next one is created
+wCurParticleIndex:: ; cce1
 	ds $1
 
-	ds $5
+wCurParticle:: sprite_oam_struct wCurParticle ; cce2
+wCurParticleAnimFinished:: ds $1 ; cce6
 
 wcce7:: ; cce7
 	ds $1

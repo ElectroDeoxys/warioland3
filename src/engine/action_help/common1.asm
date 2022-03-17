@@ -426,7 +426,7 @@ ActionHelp_ShowBlockDebrisWithYOffset: ; 1fb81f (7e:781f)
 ; b = y offset of debris
 ; c = x offset of debris
 ActionHelp_ShowBlockDebris: ; 1fb824 (7e:7824)
-	play_sfx SFX_005
+	play_sfx SFX_BLOCK_BREAK
 
 	ld a, [wMenuObj4YCoord]
 	sub b

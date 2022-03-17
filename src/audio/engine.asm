@@ -3383,7 +3383,7 @@ SoundHeaders: ; 3155e (c:555e)
 	sfx $792e, $0e, $00, 237, CHAN8, 1 ; SFX_002
 	sfx $793f, $0e, $00, 236, CHAN5, 1 ; SFX_BUMP
 	sfx $7958, $0e, $00, 226, CHAN8, 1 ; SFX_WALK
-	sfx $7981, $0e, $00, 236, CHAN8, 1 ; SFX_005
+	sfx $7981, $0e, $00, 236, CHAN8, 1 ; SFX_BLOCK_BREAK
 	sfx $79bc, $0e, $00, 236, CHAN8, 1 ; SFX_006
 	sfx $79d3, $0e, $00, 235, CHAN8, 1 ; SFX_ATTACK
 	sfx $79f7, $0e, $00, 235, CHAN5, 2 ; SFX_ATTACK_POWERED_UP

@@ -200,7 +200,7 @@ Func_dc13e: ; dc13e (37:413e)
 Func_dc158: ; dc158 (37:4158)
 	ld a, [hli]
 	add $10
-	ld [wCurSprite], a
+	ld [wCurSpriteYCoord], a
 	ld a, [hli]
 	add $08
 	ld [wCurSpriteXCoord], a

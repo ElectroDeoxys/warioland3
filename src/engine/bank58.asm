@@ -631,7 +631,7 @@ VBlank_160439: ; 160439 (58:4439)
 Func_1604b1: ; 1604b1 (58:44b1)
 	ld a, [hli]
 	add $10
-	ld [wCurSprite], a
+	ld [wCurSpriteYCoord], a
 	ld a, [hli]
 	add $08
 	ld [wCurSpriteXCoord], a

@@ -82,23 +82,21 @@ hdma_config_struct: MACRO
 \1Mode::     db
 ENDM
 
-unk3_struct: MACRO
-\1Unk00:: db
-\1Unk01:: db
-\1Unk02:: db
-\1Unk03:: db
-\1Unk04:: db
-\1Unk05:: db
-\1Unk06:: db
-\1Unk07:: db
-\1Unk08:: db
-\1Unk09:: db
-\1Unk0a:: db
-\1Unk0b:: db
-\1Unk0c:: db
-\1Unk0d:: db
-\1Unk0e:: db
-\1Unk0f:: db
+particle_struct: MACRO
+\1ID::             db ; PARTICLE_* constant
+\1Initialised::    db
+\1YPos::           dw
+\1XPos::           dw
+\1Duration::       db
+\1FramesetOffset:: db
+\1Frame::          db
+\1Unused09::       db
+\1Unused0a::       db
+\1Unused0b::       db
+\1Unused0c::       db
+\1Unused0d::       db
+\1Unused0e::       db
+\1Unused0f::       db
 ENDM
 
 channel_struct: MACRO
