@@ -2326,11 +2326,27 @@ w3d506:: ; d506
 w3d507:: ; d507
 	ds $2
 
-	ds $4
+; if TRUE, Action Help is in
+; the initial blacked out state
+wActionHelpBlackedOut:: ; d509
+	ds $1
+
+; counts up for each frame in Action Help
+wActionHelpCounter:: ; d50a
+	ds $1
+
+wActionHelpPowerUp:: ; d50b
+	ds $1
+
+wActionHelpState:: ; d50c
+	ds $1
 
 w3d50d:: ; d50d
 	ds $1
 
+; if TRUE, don't update the animations
+; in the Action Help
+wActionHelpFrozen:: ; d50e
 	ds $1
 
 wTempAnimatedTilesFrameDuration:: ; d50f
@@ -2349,7 +2365,26 @@ wPauseMenuSelection:: ; d513
 wObjAnimWasReset:: ; d514
 	ds $1
 
-wWarioPlane:: wario_plane wWarioPlane ; d515
+UNION
+
+wActionHelpWarioObj:: menu_obj_struct wActionHelpWarioObj ; d515
+
+wActionHelpWarioJumpVelIndex:: ; d51d
+	ds $1
+
+wActionHelpWarioOAMPtr:: ; d51e
+	ds $2
+
+wActionHelpWarioAnimationEnded:: ; d520
+	ds $1
+
+wActionHelpWarioOAMBank:: ; d521
+	ds $1
+
+NEXTU
+
+wWarioPlaneObj:: menu_obj_struct wWarioPlaneObj ; d515
+wWarioPlaneState:: ds $1 ; d51d
 
 	ds $2
 
@@ -2357,27 +2392,38 @@ wWarioPlane:: wario_plane wWarioPlane ; d515
 ; in the Intro sequence has ended
 wPlaneAnimationEnded:: ; d520
 	ds $1
+ENDU
 
+wSFXTimer:: ; d522
 	ds $1
 
-wIntroSeqSFXTimer:: ; d522
-	ds $1
+wMenuObj1:: menu_obj_struct wMenuObj1 ; d523
+wMenuObj2:: menu_obj_struct wMenuObj2 ; d52b
+wMenuObj3:: menu_obj_struct wMenuObj3 ; d533
 
-wMenuObj1:: intro_obj_struct wMenuObj1 ; d523
-wMenuObj2:: intro_obj_struct wMenuObj2 ; d52b
-wMenuObj3:: intro_obj_struct wMenuObj3 ; d533
-wMenuObj4:: intro_obj_struct wMenuObj4 ; d53b
-	ds $4
-wMenuObj5:: intro_obj_struct wMenuObj5 ; d547
-	ds $4
-wMenuObj6:: intro_obj_struct wMenuObj6 ; d553
-	ds $3
-wMenuObj7:: intro_obj_struct wMenuObj7 ; d55e
-	ds $4
-wMenuObj8:: intro_obj_struct wMenuObj8 ; d56a
-wMenuObj9:: intro_obj_struct wMenuObj9 ; d572
-wMenuObj10:: intro_obj_struct wMenuObj10 ; d57a
-wMenuObj11:: intro_obj_struct wMenuObj11 ; d582
+wMenuObj4:: menu_obj_struct wMenuObj4 ; d53b
+wMenuObj4OAMPtr::               ds $2 ; d543
+wMenuObj4FramesetBank::         ds $1 ; d545
+wMenuObj4AnimationHasFinished:: ds $1 ; d546
+
+wMenuObj5:: menu_obj_struct wMenuObj5 ; d547
+wMenuObj5OAMPtr::               ds $2 ; d54f
+wMenuObj5FramesetBank::         ds $1 ; d551
+wMenuObj5AnimationHasFinished:: ds $1 ; d552
+
+wMenuObj6:: menu_obj_struct wMenuObj6 ; d553
+wMenuObj6OAMPtr::               ds $2 ; d55b
+wMenuObj6FramesetBank::         ds $1 ; d55d
+
+wMenuObj7:: menu_obj_struct wMenuObj7 ; d55e
+wMenuObj7OAMPtr::               ds $2 ; d566
+wMenuObj7FramesetBank::         ds $1 ; d568
+wMenuObj7AnimationHasFinished:: ds $1 ; d569
+
+wMenuObj8::  menu_obj_struct wMenuObj8  ; d56a
+wMenuObj9::  menu_obj_struct wMenuObj9  ; d572
+wMenuObj10:: menu_obj_struct wMenuObj10 ; d57a
+wMenuObj11:: menu_obj_struct wMenuObj11 ; d582
 
 SECTION "WRAM4", WRAMX
 

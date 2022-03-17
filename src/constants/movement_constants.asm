@@ -1,3 +1,21 @@
+; jump vel constants
+MAX_JUMP_VEL_INDEX     EQU $27
+FALLING_JUMP_VEL_INDEX EQU $18
+
+	const_def
+	const JUMP_VEL_NONE             ; 0
+	const JUMP_VEL_KNOCK_BACK       ; 1
+	const JUMP_VEL_NORMAL           ; 2
+	const JUMP_VEL_HIGH_JUMP        ; 3
+	const JUMP_VEL_BOUNCY_JUMP      ; 4
+	const JUMP_VEL_BOUNCY_HIGH_JUMP ; 5
+
+; number of times Wario has to wiggle
+; to escape being picked up in the duration window
+NUM_WIGGLES_TO_ESCAPE EQU 6
+; duration window that Wario can decrement
+MAX_PICKED_UP_FRAME_COUNTER EQU 32
+
 ; wFloorTransitionDir flags
 FLOOR_TRANSITION_DOWN_F EQU 2
 FLOOR_TRANSITION_UP_F   EQU 3

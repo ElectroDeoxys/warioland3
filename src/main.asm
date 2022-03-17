@@ -26,11 +26,6 @@ SECTION "Bank 3", ROMX
 INCLUDE "engine/bank3.asm"
 
 
-SECTION "Framesets 1", ROMX
-
-INCLUDE "gfx/framesets1.asm"
-
-
 SECTION "Bank 6", ROMX
 
 INCLUDE "engine/bank6.asm"
@@ -714,19 +709,9 @@ SECTION "Bank 76", ROMX
 INCLUDE "engine/bank76.asm"
 
 
-SECTION "Framesets 3", ROMX
-
-INCLUDE "gfx/framesets3.asm"
-
-
 SECTION "Bank 78", ROMX
 
 	INCROM $1e0000, $1e1dd1
-
-
-SECTION "Bank 79", ROMX
-
-	INCROM $1e4000, $1e6fd3
 
 
 SECTION "Bank 7B", ROMX
@@ -742,13 +727,3 @@ INCLUDE "engine/bank7c.asm"
 SECTION "Bank 7D", ROMX
 
 INCLUDE "engine/bank7d.asm"
-
-
-SECTION "Bank 7E", ROMX
-
-INCLUDE "engine/bank7e.asm"
-
-
-SECTION "Framesets 2", ROMX
-
-INCLUDE "gfx/framesets2.asm"

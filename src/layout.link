@@ -225,7 +225,7 @@ ROMX $77
 ROMX $78
 	"Bank 78"
 ROMX $79
-	"Bank 79"
+	"Action Help 2"
 ROMX $7a
 	"Wario Gfx 4"
 ROMX $7b
@@ -235,7 +235,7 @@ ROMX $7c
 ROMX $7d
 	"Bank 7D"
 ROMX $7e
-	"Bank 7E"
+	"Action Help 1"
 ROMX $7f
 	"Framesets 2"
 WRAM0

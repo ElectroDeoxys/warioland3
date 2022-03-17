@@ -11,7 +11,7 @@ sprite_oam_struct: MACRO
 ; bit 2-0: pal # (cgb only)
 ENDM
 
-intro_obj_struct: MACRO
+menu_obj_struct: MACRO
 	sprite_oam_struct \1
 \1FramesetOffset::  db
 \1Duration::        db
@@ -34,11 +34,6 @@ golf_obj_struct: MACRO
 \1FramesetOffset:: db
 \1CurrentFrame::   db
 \1Sprite:: sprite_oam_struct \1
-ENDM
-
-wario_plane: MACRO
-\1Obj::   intro_obj_struct \1
-\1State:: db
 ENDM
 
 obj_struct: MACRO

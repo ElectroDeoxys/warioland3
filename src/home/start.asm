@@ -13,7 +13,8 @@ Start:: ; 0150 (0:0150)
 
 Init:: ; 15e (0:15e)
 	xor a
-	ldh [hfffc], a
+	ldh [hDemoPowerUp], a
+InitWithoutDemoPowerUpReset:: ; 161 (0:161)
 	di
 	ld sp, $cfff
 	ld hl, sp+$00
@@ -63,7 +64,7 @@ Init:: ; 15e (0:15e)
 	call WriteAToHL_BCTimes
 
 	ld hl, hCallFunc
-	ld b, hfffc - hCallFunc
+	ld b, hDemoPowerUp - hCallFunc
 	call WriteAToHL_BTimes
 	call FillBGMap0_With7f
 	call ClearBGMap1

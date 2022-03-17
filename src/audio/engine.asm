@@ -771,7 +771,10 @@ PointerTable_30490: ; 30490 (c:4490)
 	dw Func_309b6
 ; 0x3049e
 
-	INCROM $3049e, $304a4
+Func_3049e:: ; 3049e (c:449e)
+	call Func_304a4
+	jp Func_3f8d
+; 0x304a4
 
 Func_304a4: ; 304a4 (c:44a4)
 	; return if a >= $7
@@ -3361,7 +3364,7 @@ SoundHeaders: ; 3155e (c:555e)
 	music $56bc, $0e, $00, 100, CHAN1, 4 ; MUSIC_GOLF_CLEARED
 	music $57f2, $0e, $00, 100, CHAN1, 3 ; MUSIC_MUSIC_BOXES
 	music $58b4, $0e, $00, 100, CHAN1, 2 ; MUSIC_45
-	music $5991, $0e, $00, 100, CHAN1, 2 ; MUSIC_POWER_UP_DEMO
+	music $5991, $0e, $00, 100, CHAN1, 2 ; MUSIC_ACTION_HELP
 	music $5ba8, $0e, $00, 100, CHAN1, 4 ; MUSIC_GOLF_MENU
 	music $5d53, $0e, $00, 100, CHAN1, 3 ; MUSIC_48
 	music $5db7, $0e, $00, 100, CHAN1, 3 ; MUSIC_49

@@ -67,7 +67,14 @@ _PauseMenuStateTable: ; 1f0000 (7c:4000)
 	dw DebugReset
 ; 0x1f007a
 
-	INCROM $1f007a, $1f0087
+_ReturnToPauseMenuFromActionHelp:: ; 1f007a (7c:407a)
+	call DisableLCD
+	ld hl, wState
+	ld a, ST_PAUSE_MENU
+	ld [hli], a
+	ld [hl], SST_PAUSE_INIT_MENU
+	jr InitPauseMenu_SkipBackupVRAM
+; 0x1f0087
 
 InitPauseMenu: ; 1f0087 (7c:4087)
 	call DisableLCD
@@ -76,6 +83,9 @@ InitPauseMenu: ; 1f0087 (7c:4087)
 	ld [wTempAnimatedTilesFrameDuration], a
 	ld a, [wAnimatedTilesGfx]
 	ld [wTempAnimatedTilesGroup], a
+;	fallthrough
+
+InitPauseMenu_SkipBackupVRAM: ; 1f0099 (7c:4099)
 	stop_sfx
 	play_music MUSIC_PAUSE_MENU
 	xor a

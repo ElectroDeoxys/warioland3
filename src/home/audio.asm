@@ -1,14 +1,14 @@
-DoAudioFunc_InitAudio:: ; 3f00 (0:3f00)
+DoAudioFunc_InitAudio: ; 3f00 (0:3f00)
 	call BackupBankAndSwitchToAudioBank
 	jp _InitAudio
 ; 0x3f06
 
-Func_3f06:: ; 3f06 (0:3f06)
+Func_3f06: ; 3f06 (0:3f06)
 	call Func_3f75
 	jp Func_3007a
 ; 0x3f0c
 
-DoAudioFunc_PlaySFX:: ; 3f0c (0:3f0c)
+DoAudioFunc_PlaySFX: ; 3f0c (0:3f0c)
 	call Func_3f62
 	jp _PlaySFX
 ; 0x3f12
@@ -20,17 +20,24 @@ Func_3f18:: ; 3f18 (0:3f18)
 	jp Func_302b8
 ; 0x3f1e
 
-Func_3f1e:: ; 3f1e (0:3f1e)
+Func_3f1e: ; 3f1e (0:3f1e)
 	call Func_3f62
 	jp Func_303c9
 ; 0x3f24
 
-Func_3f24:: ; 3f24 (0:3f24)
+Func_3f24: ; 3f24 (0:3f24)
 	call Func_3f62
 	jp Func_30416
 ; 0x3f2a
 
-	INCROM $3f2a, $3f48
+	INCROM $3f2a, $3f36
+
+Func_3f36: ; 3f36 (0:3f36)
+	call Func_3f62
+	jp Func_3049e
+; 0x3f3c
+
+	INCROM $3f3c, $3f48
 
 DoAudioFunc_PlayNewMusic_SetNoise:: ; 3f48 (0:3f48)
 	call Func_3f62
@@ -44,7 +51,6 @@ BackupBankAndSwitchToAudioBank:: ; 3f4e (0:3f4e)
 
 SwitchToAudioBank:: ; 3f54 (0:3f54)
 	ld a, BANK("Audio Engine")
-
 .switch_bank
 	ld [wROMBank], a
 	ld [MBC5RomBank - $100], a
@@ -55,7 +61,7 @@ SwitchBackFromAudioBank:: ; 3f5d (0:3f5d)
 	jr SwitchToAudioBank.switch_bank
 ; 0x3f62
 
-Func_3f62:: ; 3f62 (0:3f62)
+Func_3f62: ; 3f62 (0:3f62)
 	ld hl, wAudioEngineFlags
 	bit 7, [hl]
 	jr nz, .pop_hl

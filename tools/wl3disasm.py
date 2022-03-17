@@ -411,7 +411,7 @@ def load_symbols(path):
 
 			sram_sym[bank][address] = label
 
-		elif 0xc000 <= address < 0xe000:
+		elif 0xc000 <= address <= 0xe000:
 			if not wram_sym.has_key(bank):
 				wram_sym[bank] = {}
 

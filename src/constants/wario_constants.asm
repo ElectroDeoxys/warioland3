@@ -23,24 +23,31 @@ CHARGE_ATTACK_COUNTER EQU $2b
 	const POWER_UP_HIGH_JUMP_BOOTS          ; 7
 	const POWER_UP_PRINCE_FROGS_GLOVES      ; 8
 	const POWER_UP_SUPER_GRAB_GLOVES        ; 9
+NUM_MAIN_POWER_UPS EQU const_value
 
-; jump vel constants
-MAX_JUMP_VEL_INDEX     EQU $27
-FALLING_JUMP_VEL_INDEX EQU $18
+	; special power-ups for Action Help
+	const POWER_UP_OWL                      ; a
+	const POWER_UP_RAIL                     ; b
+	const POWER_UP_VAMPIRE                  ; c
+NUM_TOTAL_POWER_UPS EQU const_value
 
-	const_def
-	const JUMP_VEL_NONE             ; 0
-	const JUMP_VEL_KNOCK_BACK       ; 1
-	const JUMP_VEL_NORMAL           ; 2
-	const JUMP_VEL_HIGH_JUMP        ; 3
-	const JUMP_VEL_BOUNCY_JUMP      ; 4
-	const JUMP_VEL_BOUNCY_HIGH_JUMP ; 5
+POWER_UP_MASK EQU %111111
 
-; number of times Wario has to wiggle
-; to escape being picked up in the duration window
-NUM_WIGGLES_TO_ESCAPE EQU 6
-; duration window that Wario can decrement
-MAX_PICKED_UP_FRAME_COUNTER EQU 32
+; flags in wPowerUpLevel for Action Help stuff
+	const_def 6
+	const ACTION_HELP_TITLE_SCREEN_F ; 6
+	const ACTION_HELP_UNK_F          ; 7
+
+ACTION_HELP_TITLE_SCREEN EQU (1 << ACTION_HELP_TITLE_SCREEN_F)
+ACTION_HELP_UNK          EQU (1 << ACTION_HELP_UNK_F)
+
+
+; pals for Power Up icons in Action Help screen
+	const_def $4
+	const OBPAL_POWER_UP_YELLOW ; 4
+	const OBPAL_POWER_UP_RED    ; 5
+	const OBPAL_POWER_UP_GREEN  ; 6
+	const OBPAL_POWER_UP_BLUE   ; 7
 
 ; transformation constants
 	const_def 1

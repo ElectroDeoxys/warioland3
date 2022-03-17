@@ -70,7 +70,9 @@ hTransferVirtualOAM:: ; ffe8
 
 	ds $6
 
-hfffc:: ; fffc
+; which Power Up to show in the next
+; Action Help demo in the Title Screen
+hDemoPowerUp:: ; fffc
 	ds $1
 
 hfffd:: ; fffd

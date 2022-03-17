@@ -702,7 +702,22 @@ Func_1002:: ; 1002 (0:1002)
 	ret
 ; 0x1010
 
-	INCROM $1010, $1062
+	INCROM $1010, $102c
+
+Func_102c:: ; 102c (0:102c)
+	ldh [hffac], a
+	ldh a, [rSVBK]
+	push af
+	ld a, $03
+	ldh [rSVBK], a
+	ldh a, [hffac]
+	call Func_3f36
+	pop af
+	ldh [rSVBK], a
+	ret
+; 0x103e
+
+	INCROM $103e, $1062
 
 ; bc = sound ID
 PlayNewMusic_SetNoise:: ; 1062 (0:1062)
@@ -1204,7 +1219,16 @@ ReturnToMap:: ; 142b (0:142b)
 	ret
 ; 0x1440
 
-	INCROM $1440, $145a
+ReturnToPauseMenuFromActionHelp:: ; 1440 (0:1440)
+	ldh a, [rSVBK]
+	push af
+	ld a, $03
+	ldh [rSVBK], a
+	farcall _ReturnToPauseMenuFromActionHelp
+	pop af
+	ldh [rSVBK], a
+	ret
+; 0x145a
 
 UpdateObjAnim:: ; 145a (0:145a)
 	xor a
@@ -1720,7 +1744,15 @@ CheckLevelMusicalCoinFlag:: ; 1783 (0:1783)
 	ret
 ; 0x1795
 
-	INCROM $1795, $17a4
+Func_1795:: ; 1795 (0:1795)
+	ld a, $02
+	ld b, $40
+	ld d, $0f
+	ld e, $0f
+	call Func_102c
+	call Func_fbc
+	ret
+; 0x17a4
 
 ; returns nz if has all the levels
 ; with their corresponding Musical Coin flag set

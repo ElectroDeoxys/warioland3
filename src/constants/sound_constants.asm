@@ -47,7 +47,7 @@
 	const MUSIC_GOLF_CLEARED               ; 02b
 	const MUSIC_MUSIC_BOXES                ; 02c
 	const MUSIC_45                         ; 02d
-	const MUSIC_POWER_UP_DEMO              ; 02e
+	const MUSIC_ACTION_HELP                ; 02e
 	const MUSIC_GOLF_MENU                  ; 02f
 	const MUSIC_48                         ; 030
 	const MUSIC_49                         ; 031
