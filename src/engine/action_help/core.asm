@@ -218,11 +218,11 @@ UpdateActionHelp: ; 1f8194 (7e:4194)
 	ld a, [wActionHelpPowerUp]
 	and POWER_UP_MASK
 	cp NUM_MAIN_POWER_UPS
-	jr c, .asm_1f81cc
+	jr c, .main_power_up
 	farcall ExecuteSpecialPowerUpActionHelp
-	jr .asm_1f8200
+	jr .update_input_anim
 
-.asm_1f81cc
+.main_power_up
 	call ProcessDPadRepeat
 	ld a, [wPowerUpLevel]
 	and ACTION_HELP_TITLE_SCREEN | ACTION_HELP_UNK
@@ -231,17 +231,20 @@ UpdateActionHelp: ; 1f8194 (7e:4194)
 .asm_1f81d9
 	call ExecuteMainPowerUpActionHelp
 
+	; bottom cursor
 	ld hl, wMenuObj1FramesetPtr + 1
 	farcall $79, UpdateObjAnim
 	ld hl, wMenuObj1
 	farcall AddActionHelpSprite
 
-.asm_1f8200
+.update_input_anim
+	; d-pad animation
 	ld hl, wMenuObj2FramesetPtr + 1
 	farcall $79, UpdateObjAnim
 	ld hl, wMenuObj2
 	farcall AddActionHelpSprite
 
+	; buttons animation
 	ld hl, wMenuObj3FramesetPtr + 1
 	farcall $79, UpdateObjAnim
 	ld hl, wMenuObj3

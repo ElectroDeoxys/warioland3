@@ -10,6 +10,7 @@ src/wram.o \
 src/hram.o \
 src/gfx.o
 
+wl3_obj := $(rom_obj:.o=.o)
 
 ### Build tools
 

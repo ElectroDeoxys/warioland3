@@ -7,9 +7,9 @@ UpdateRoomAnimatedTiles:: ; d0000 (34:4000)
 	ldh a, [rLY]
 	cp $7c
 	jr nc, .done
-	jr .asm_d0008 ; can be fallthrough
+	jr .useless_jump ; can be fallthrough
 
-.asm_d0008
+.useless_jump
 ; check whether to advance frame
 	ld a, [wAnimatedTilesFrameDuration]
 	and a
