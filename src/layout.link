@@ -38,7 +38,7 @@ ROMX $03
 ROMX $04
 	"Wario Gfx 1"
 ROMX $05
-	"Framesets 1"
+	"Wario OAM 1"
 ROMX $06
 	"Bank 6"
 ROMX $07
@@ -221,7 +221,7 @@ ROMX $72
 ROMX $76
 	"Bank 76"
 ROMX $77
-	"Framesets 3"
+	"Wario OAM 3"
 ROMX $78
 	"Bank 78"
 ROMX $79
@@ -237,7 +237,7 @@ ROMX $7d
 ROMX $7e
 	"Action Help 1"
 ROMX $7f
-	"Framesets 2"
+	"Wario OAM 2"
 WRAM0
 	"WRAM0"
 WRAMX 1

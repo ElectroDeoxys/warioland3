@@ -178,16 +178,16 @@ Wolfenboss4Gfx::  INCBIN "gfx/enemies/wolfenboss4.2bpp.lz"
 Shoot4Gfx::       INCBIN "gfx/enemies/shoot4.2bpp.lz"
 
 
-SECTION "Framesets 1", ROMX
+SECTION "Wario OAM 1", ROMX
 
-INCLUDE "gfx/framesets1.asm"
-
-
-SECTION "Framesets 2", ROMX
-
-INCLUDE "gfx/framesets2.asm"
+INCLUDE "gfx/oam/wario1.asm"
 
 
-SECTION "Framesets 3", ROMX
+SECTION "Wario OAM 2", ROMX
 
-INCLUDE "gfx/framesets3.asm"
+INCLUDE "gfx/oam/wario2.asm"
+
+
+SECTION "Wario OAM 3", ROMX
+
+INCLUDE "gfx/oam/wario3.asm"
