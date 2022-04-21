@@ -425,7 +425,58 @@ Func_64187: ; 64187 (19:4187)
 	ret
 ; 0x6428a
 
-	INCROM $6428a, $642d9
+Func_6428a: ; 6428a (19:428a)
+	ld h, HIGH(wObj1Flags)
+	ld l, LOW(wObj1Flags)
+	ld a, [hl]
+	rra
+	jr nc, .asm_642bd
+	ld l, LOW(wObj2Flags)
+	ld a, [hl]
+	rra
+	jr nc, .asm_642bd
+	ld l, LOW(wObj3Flags)
+	ld a, [hl]
+	rra
+	jr nc, .asm_642bd
+	ld l, LOW(wObj4Flags)
+	ld a, [hl]
+	rra
+	jr nc, .asm_642bd
+	ld l, LOW(wObj5Flags)
+	ld a, [hl]
+	rra
+	jr nc, .asm_642bd
+	ld l, LOW(wObj6Flags)
+	ld a, [hl]
+	rra
+	jr nc, .asm_642bd
+	ld l, LOW(wObj7Flags)
+	ld a, [hl]
+	rra
+	jr nc, .asm_642bd
+	ld l, LOW(wObj8Flags)
+	ld a, [hl]
+	rra
+	jr nc, .asm_642bd
+	ret
+
+.asm_642bd
+	ld a, OBJFLAG_UNK0 | OBJFLAG_UNK6
+	ld [hli], a
+	ld a, [wCurObjUnk01]
+	ld [hli], a
+	ld a, [wCurObjUnk02]
+	ld [hli], a
+	ld a, [wCurObjYPos + 0]
+	ld [hli], a
+	ld a, [wCurObjYPos + 1]
+	ld [hli], a
+	ld a, [wCurObjXPos + 0]
+	ld [hli], a
+	ld a, [wCurObjXPos + 1]
+	jr Func_642d9.asm_64352
+; 0x642d9
 
 Func_642d9:: ; 642d9 (19:42d9)
 	ld h, HIGH(wObj1Flags)
@@ -513,6 +564,7 @@ Func_642d9:: ; 642d9 (19:42d9)
 	dec a
 .asm_64351
 	inc bc
+.asm_64352
 	ld [hli], a
 	ld e, l
 	ld d, h

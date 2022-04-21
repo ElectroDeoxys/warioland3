@@ -311,7 +311,10 @@ wc18d:: ; c18d
 wc18e:: ; c18e
 	ds $1
 
-	ds $10
+	ds $f
+
+wc19e:: ; c19e
+	ds $1
 
 wc19f:: ; c19f
 	ds $1
@@ -502,7 +505,7 @@ wKeyAndTreasureFlags:: ; ca5b
 wNumMusicalCoins:: ; ca5c
 	ds $1
 
-wca5d:: ; ca5d
+wTempInternalRoomID:: ; ca5d
 	ds $1
 
 wca5e:: ; ca5e
@@ -861,9 +864,7 @@ wccf0:: ; ccf0
 	ds $e
 
 wPermissionMap:: ; cd00
-	ds $42
-
-	ds $be
+	ds $100
 
 wce00:: ; ce00
 	ds $1
@@ -932,6 +933,7 @@ wcedd:: ; cedd
 wcede:: ; cede
 	ds $1
 
+wcedf:: ; cedf
 	ds $1
 
 wcee0:: ; cee0

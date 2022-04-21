@@ -1,6 +1,3 @@
-DIRECTION_LEFT  EQU 0
-DIRECTION_RIGHT EQU 1
-
 ; number of cycles before Wario falls asleep
 ; while in the idle state
 NUM_SLEEPING_IDLE_CYCLES EQU 7
@@ -68,7 +65,7 @@ ACTION_HELP_UNK          EQU (1 << ACTION_HELP_UNK_F)
 	const TRANSFORMATION_RAIL                ; $0f
 	const TRANSFORMATION_SNOWMAN_WARIO       ; $10
 	const TRANSFORMATION_SPLIT               ; $11
-	const TRANSFORMATION_UNK_12              ; $12
+	const TRANSFORMATION_FAN                 ; $12
 	const TRANSFORMATION_BLIND               ; $13
 	const TRANSFORMATION_UNK_14              ; $14
 	const TRANSFORMATION_MAGIC               ; $15
@@ -179,7 +176,7 @@ THROW_CHARGE_FRAMES_HEAVY EQU $3c
 	const WST_CROUCH_SLIPPING               ; $31
 	const WST_DRAGGED_DOWN                  ; $32
 	const WST_TELEPORTING                   ; $33
-	const WST_TELEPORTING_WATER             ; $34
+	const WST_WATER_TELEPORTING             ; $34
 	const WST_SAND_FALLING                  ; $35
 	const WST_SAND_JUMPING                  ; $36
 	const WST_SAND_IDLING                   ; $37
@@ -339,7 +336,7 @@ THROW_CHARGE_FRAMES_HEAVY EQU $3c
 	const WST_SPLIT_KNOCKED_BACK            ; $d1
 	const WST_SPLITTING                     ; $d2
 	const WST_UNKNOWN_D3                    ; $d3
-	const WST_UNKNOWN_D4                    ; $d4
+	const WST_FAN                    ; $d4
 	const WST_UNKNOWN_D5                    ; $d5
 	const WST_UNKNOWN_D6                    ; $d6
 	const WST_UNKNOWN_D7                    ; $d7

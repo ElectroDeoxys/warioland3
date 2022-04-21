@@ -272,7 +272,7 @@ Func_20000: ; 20000 (8:4000)
 	dw Func_21c86                   ; OBJ_INTERACTION_3D
 	dw Func_21c98                   ; OBJ_INTERACTION_3E
 	dw Func_21ca8                   ; OBJ_INTERACTION_3F
-	dw Func_21ccf                   ; OBJ_INTERACTION_40
+	dw ObjInteraction_WaterTeleporting ; OBJ_INTERACTION_WATER_TELEPORTING
 	dw Func_21ce9                   ; OBJ_INTERACTION_41
 	dw Func_21cf8                   ; OBJ_INTERACTION_42
 	dw Func_207ed                   ; OBJ_INTERACTION_43
@@ -875,7 +875,7 @@ Func_20670: ; 20670 (8:4670)
 Func_206eb: ; 206eb (8:46eb)
 	ld a, [wTransformation]
 	cp TRANSFORMATION_OWL_WARIO
-	call z, Func_16d9
+	call z, ReleaseOwl
 	call ClearTransformationValues
 	call UpdateLevelMusic
 ;	fallthrough
@@ -998,7 +998,7 @@ Func_207ed: ; 207ed (8:47ed)
 	call SetObjUnk1C
 ;	fallthrough
 
-Func_2080d: ; 2080d (8:480d)
+SetState_WaterStung: ; 2080d (8:480d)
 	play_sfx SFX_STING
 	ld a, $01
 	ld [wInvincibleCounter], a
@@ -1757,6 +1757,9 @@ Func_20e97: ; 20e97 (8:4e97)
 	ld [wTransformationDuration + 1], a
 
 	call UpdateLevelMusic
+;	fallthrough
+
+SetState_OnFire_ResetStateCounter: ; 20ecf (8:4ecf)
 	xor a
 	ld [wWarioStateCounter], a
 ;	fallthrough
@@ -2455,7 +2458,7 @@ Func_21573: ; 21573 (8:5573)
 	jp z, Func_2022c
 	ld a, [wTransformation]
 	cp TRANSFORMATION_OWL_WARIO
-	call z, Func_16d9
+	call z, ReleaseOwl
 	ld b, $06
 	call SetObjUnk1C
 	farcall SetState_PuffyInflating
@@ -3263,12 +3266,12 @@ Func_21cc9: ; 21cc9 (8:5cc9)
 	ret
 ; 0x21ccf
 
-Func_21ccf: ; 21ccf (8:5ccf)
+ObjInteraction_WaterTeleporting: ; 21ccf (8:5ccf)
 	ld a, $e7
 	ld [wc0d7], a
-	call Func_2080d
+	call SetState_WaterStung
 	stop_sfx
-	ld a, WST_TELEPORTING_WATER
+	ld a, WST_WATER_TELEPORTING
 	ld [wWarioState], a
 	ld b, $10
 	jp SetObjUnk1C
@@ -3279,7 +3282,7 @@ Func_21ce9: ; 21ce9 (8:5ce9)
 	bit INTERACTION_UP_F, a
 	jp nz, Func_20899
 	bit INTERACTION_DOWN_F, a
-	jr nz, Func_21ccf
+	jr nz, ObjInteraction_WaterTeleporting
 	jp Func_208f2
 ; 0x21cf8
 

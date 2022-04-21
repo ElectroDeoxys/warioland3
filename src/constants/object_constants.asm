@@ -134,7 +134,7 @@ INTERACTION_DOWN  EQU (1 << INTERACTION_DOWN_F)  ; $80
 	const OBJ_INTERACTION_3D             ; 3d
 	const OBJ_INTERACTION_3E             ; 3e
 	const OBJ_INTERACTION_3F             ; 3f
-	const OBJ_INTERACTION_40             ; 40
+	const OBJ_INTERACTION_WATER_TELEPORTING             ; 40
 	const OBJ_INTERACTION_41             ; 41
 	const OBJ_INTERACTION_42             ; 42
 	const OBJ_INTERACTION_43             ; 43

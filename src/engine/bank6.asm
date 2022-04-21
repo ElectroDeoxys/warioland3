@@ -29,7 +29,1458 @@ Func_18020: ; 18020 (6:4020)
 	ret
 ; 0x18032
 
-	INCROM $18032, $19734
+Func_18032: ; 18032 (6:4032)
+	xor a
+	sramswitch
+	xor a
+	ld [wc0d8], a
+	ld [wc0d9], a
+	ld a, [wc0da]
+	and a
+	jr z, .asm_18058
+	ld a, [wIsStandingOnSlope]
+	and a
+	jr z, .asm_18058
+	ld a, [wc0d6]
+	bit 4, a
+	jr z, .asm_18058
+	xor a
+	ld [wc18d], a
+	ret
+.asm_18058
+	ldh a, [hYPosLo]
+	and $f0
+	ldh [hYPosLo], a
+	ld a, $01
+	ld [wc18d], a
+	ret
+; 0x18064
+
+Func_18064: ; 18064 (6:4064)
+	xor a
+	sramswitch
+	xor a
+	ld [wc0d8], a
+	ld [wc0d9], a
+	ld a, $10
+	ld [wc18d], a
+	ret
+; 0x18078
+
+Func_18078: ; 18078 (6:4078)
+	xor a
+	sramswitch
+	xor a
+	ld [wc0d8], a
+	ld [wc0d9], a
+	ld a, $01
+	ld [wc18d], a
+	ret
+; 0x1808c
+
+Func_1808c: ; 1808c (6:408c)
+	xor a
+	sramswitch
+	xor a
+	ld [wc0d8], a
+	ld [wc0d9], a
+	xor a
+	ld [wc18d], a
+	ret
+; 0x1809f
+
+Func_1809f: ; 1809f (6:409f)
+	ld a, [wc0d6]
+	bit 0, a
+	jp z, Func_18020
+	ldh a, [hYPosLo]
+	add $10
+	ldh [hYPosLo], a
+	ldh a, [hYPosHi]
+	adc $00
+	ldh [hYPosHi], a
+	jr .asm_180f7
+	ld a, [wc0da]
+	and a
+	jr z, .asm_180c3
+	ld a, [wWarioState]
+	cp WST_ATTACKING_AIRBORNE
+	jp z, Func_18032
+.asm_180c3
+	ld a, [wc0d6]
+	and $03
+	jp z, Func_18020
+	ldh a, [hYPosLo]
+	sub $10
+	ldh [hYPosLo], a
+	ldh a, [hYPosHi]
+	sbc $00
+	ldh [hYPosHi], a
+	jr .asm_180f7
+	ld a, [wc0d6]
+	and $03
+	jp z, Func_18020
+	ld a, [wc0d6]
+	bit 1, a
+	jr z, .asm_180f7
+	ldh a, [hYPosLo]
+	and $0f
+	ld b, a
+	ldh a, [hXPosLo]
+	and $0f
+	add b
+	cp $10
+	jp c, Func_18020
+.asm_180f7
+	ldh a, [hXPosLo]
+	and $0f
+	ld c, a
+	ld a, $10
+	sub c
+	ld c, a
+	ldh a, [hYPosLo]
+	and $f0
+	add c
+	ldh [hYPosLo], a
+	ldh a, [hYPosHi]
+	adc $00
+	ldh [hYPosHi], a
+	ld a, [wc0d6]
+	and $03
+	jr z, .asm_18126
+	ld a, [wc0da]
+	and a
+	jr nz, .asm_18121
+	ld a, $11
+	ld [wc18c], a
+	jr .asm_18126
+.asm_18121
+	ld a, $11
+	ld [wIsStandingOnSlope], a
+.asm_18126
+	jp Func_18064
+; 0x18129
+
+Func_18129: ; 18129 (6:4129)
+	ld a, [wc0d6]
+	bit 0, a
+	jp z, Func_18020
+	ldh a, [hYPosLo]
+	add $10
+	ldh [hYPosLo], a
+	ldh a, [hYPosHi]
+	adc $00
+	ldh [hYPosHi], a
+	jr .asm_1817c
+	ld a, [wc0da]
+	and a
+	jr z, .asm_1814d
+	ld a, [wWarioState]
+	cp WST_ATTACKING_AIRBORNE
+	jp z, Func_18032
+.asm_1814d
+	ld a, [wc0d6]
+	and $03
+	jp z, Func_18020
+	ldh a, [hYPosLo]
+	sub $10
+	ldh [hYPosLo], a
+	ldh a, [hYPosHi]
+	sbc $00
+	ldh [hYPosHi], a
+	jr .asm_1817c
+	ld a, [wc0d6]
+	and $03
+	jp z, Func_18020
+	bit 1, a
+	jr z, .asm_1817c
+	ldh a, [hYPosLo]
+	and $0f
+	ld b, a
+	ldh a, [hXPosLo]
+	and $0f
+	cp b
+	jp nc, Func_18020
+.asm_1817c
+	ld a, [wc0d6]
+	and $03
+	jr z, .asm_181a9
+	ldh a, [hXPosLo]
+	and $0f
+	inc a
+	inc a
+	ld c, a
+	ldh a, [hYPosLo]
+	and $f0
+	add c
+	ldh [hYPosLo], a
+	ldh a, [hYPosHi]
+	adc $00
+	ldh [hYPosHi], a
+	ld a, [wc0da]
+	and a
+	jr nz, .asm_181a4
+	ld a, $12
+	ld [wc18c], a
+	jr .asm_181a9
+.asm_181a4
+	ld a, $12
+	ld [wIsStandingOnSlope], a
+.asm_181a9
+	jp Func_18064
+; 0x181ac
+
+Func_181ac: ; 181ac (6:41ac)
+	ld a, $01
+	ld [wc0dd], a
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	ld a, [wc0d6]
+	bit 7, a
+	jp z, Func_18020
+	ld a, $01
+	ld [wWaterInteraction], a
+	jp Func_18020
+; 0x181c8
+
+Func_181c8: ; 181c8 (6:41c8)
+	ld a, [wc0d6]
+	bit 7, a
+	jp z, Func_181ac
+	ld a, $01
+	ld [wcee0], a
+	jp Func_181ac
+; 0x181d8
+
+Func_181d8: ; 181d8 (6:41d8)
+	ld a, [wc0d6]
+	bit 7, a
+	jp z, Func_181ac
+	ld a, $04
+	ld [wcee0], a
+	jp Func_181ac
+; 0x181e8
+
+Func_181e8: ; 181e8 (6:41e8)
+	ld a, [wc0d6]
+	bit 7, a
+	jp z, Func_181ac
+	ld a, $02
+	ld [wcee0], a
+	jp Func_181ac
+; 0x181f8
+
+Func_181f8: ; 181f8 (6:41f8)
+	ld a, [wc0d6]
+	bit 7, a
+	jp z, Func_181ac
+	ld a, $08
+	ld [wcee0], a
+	jp Func_181ac
+; 0x18208
+
+Func_18208: ; 18208 (6:4208)
+	ld a, $01
+	ld [wc1ca], a
+	ld a, [wc0d6]
+	bit 0, a
+	jr nz, .asm_18228
+	bit 2, a
+	jr nz, .asm_18228
+	and $b8
+	jp nz, Func_18020
+	ldh a, [hYPosLo]
+	and $0f
+	cp $05
+	jr c, .asm_18228
+	jp Func_18020
+.asm_18228
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+	ld a, [wWarioState]
+	cp WST_ZOMBIE_LANDING
+	jp z, Func_18020
+	cp WST_ZOMBIE_SLIPPING_THROUGH_FLOOR
+	jp z, Func_18020
+	jp Func_18032
+; 0x1823f
+
+Func_1823f: ; 1823f (6:423f)
+	ld a, [wc0d6]
+	bit 1, a
+	jr nz, .asm_18257
+	ldh a, [hYPosLo]
+	and $0e
+	jp nz, Func_181ac
+	ld a, [wc0d6]
+	and $05
+	jr nz, .asm_1825a
+	jp Func_181ac
+.asm_18257
+	jp Func_18208
+.asm_1825a
+	ld a, $01
+	ld [wc0dd], a
+	jp Func_18032
+; 0x18262
+
+Func_18262: ; 18262 (6:4262)
+	ld a, [wc0da]
+	and a
+	jp nz, Func_18020
+	ld a, $01
+	ld [wc1ca], a
+	ld a, [wc0d6]
+	bit 0, a
+	jp nz, Func_18032
+	bit 2, a
+	jp nz, Func_18032
+	and $b8
+	jp nz, Func_18020
+	ldh a, [hYPosLo]
+	and $0f
+	cp $05
+	jp c, Func_18032
+	jp Func_18020
+; 0x1828c
+
+Func_1828c: ; 1828c (6:428c)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+	ld a, [wc0d6]
+	and $28
+	jp z, Func_18032
+	ld hl, wYCell
+	ld a, [hli]
+	ld l, [hl]
+	ld h, a
+	ld a, [hl]
+	ld [wca6b], a
+	xor $08
+	ld [hl], a
+	call Func_e31
+	ld a, [wca6a]
+	xor $01
+	ld [wca6a], a
+	play_sfx SFX_02F
+	ld b, $10
+	call Func_12b5
+	jp Func_18032
+; 0x182c3
+
+Func_182c3: ; 182c3 (6:42c3)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	ld a, [wc0d6]
+	bit 7, a
+	jr nz, .asm_182d4
+	jp Func_18020
+.asm_182d4
+	ld a, $01
+	ld [wLadderInteraction], a
+	jp Func_1808c
+; 0x182dc
+
+Func_182dc: ; 182dc (6:42dc)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+	jr .asm_182ec
+	ld a, [wc0da]
+	and a
+	jp z, Func_18208
+.asm_182ec
+	ld a, [wc0d6]
+	bit 7, a
+	jr nz, .asm_182f6
+	jp Func_18208
+.asm_182f6
+	ld a, $02
+	ld [wLadderInteraction], a
+	jp Func_1808c
+; 0x182fe
+
+Func_182fe: ; 182fe (6:42fe)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	ld a, [wc0d6]
+	bit 7, a
+	jp z, Func_18020
+	ld a, $01
+	ld [wLadderInteraction], a
+	ld a, $45
+	ld [wc0d7], a
+	jp Func_18020
+; 0x1831a
+
+Func_1831a: ; 1831a (6:431a)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	ld a, [wc0d6]
+	bit 7, a
+	jp z, Func_18020
+	ld a, $01
+	ld [wLadderInteraction], a
+	ld a, $05
+	ld [wc0d7], a
+	jp Func_18020
+; 0x18336
+
+Func_18336: ; 18336 (6:4336)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	ld a, [wInvincibleCounter]
+	and a
+	jp nz, Func_18020
+	ld a, [wca94]
+	cp $02
+	jp z, Func_18020
+	ld a, [wWarioState]
+	cp WST_STUNG
+	jp z, Func_18020
+	cp WST_STUNG_RECOVERY
+	jp z, Func_18020
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_18366
+	ld a, DIRECTION_RIGHT
+	ld [wDirection], a
+	jr .asm_1836b
+.asm_18366
+	ld a, DIRECTION_LEFT
+	ld [wDirection], a
+.asm_1836b
+	ld a, [wca94]
+	and a
+	jr nz, .asm_18383
+	farcall SetState_Stung
+	jp Func_18020
+.asm_18383
+	cp $01
+	jr z, .asm_1838a
+	jp Func_18020
+.asm_1838a
+	farcall Func_206eb
+	jp Func_18020
+; 0x1839c
+
+Func_1839c: ; 1839c (6:439c)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+	ld a, [wInvincibleCounter]
+	and a
+	jp nz, Func_18032
+	ld a, [wca94]
+	cp $02
+	jp z, Func_18032
+	ld a, [wWarioState]
+	cp WST_STUNG
+	jp z, Func_18032
+	cp WST_STUNG_RECOVERY
+	jp z, Func_18032
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_183cc
+	ld a, DIRECTION_RIGHT
+	ld [wDirection], a
+	jr .asm_183d1
+.asm_183cc
+	ld a, DIRECTION_LEFT
+	ld [wDirection], a
+.asm_183d1
+	ld a, [wca94]
+	and a
+	jr nz, .asm_183e9
+	farcall SetState_Stung
+	jp Func_18032
+.asm_183e9
+	cp $01
+	jr z, .asm_183f0
+	jp Func_18032
+.asm_183f0
+	farcall Func_206eb
+	jp Func_18032
+; 0x18402
+
+Func_18402: ; 18402 (6:4402)
+	ld a, [wc0da]
+	and a
+	jp z, Func_181ac
+	ld a, [wInvincibleCounter]
+	and a
+	jp nz, Func_181ac
+	ld a, [wWarioState]
+	cp WST_WATER_STUNG
+	jp z, Func_181ac
+	farcall SetState_WaterStung
+	jp Func_181ac
+; 0x1842a
+
+Func_1842a: ; 1842a (6:442a)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+
+	ld a, [wWarioState]
+	cp WST_IDLING
+	jr z, .asm_1843d
+	cp WST_GRAB_IDLING
+	jp nz, Func_18032
+.asm_1843d
+	ld a, [wc0d6]
+	and $01
+	jp z, Func_18032
+	ld a, [wJoypadDown]
+	bit D_DOWN_F, a
+	jp z, Func_18032
+	ld a, [wXPosLo]
+	and $f0
+	add $18
+	ld [wXPosLo], a
+	ld a, [wXPosHi]
+	adc $00
+	ld [wXPosHi], a
+	jr .asm_1848e
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+
+	ld a, [wWarioState]
+	cp WST_IDLING
+	jr z, .asm_18474
+	cp WST_GRAB_IDLING
+	jp nz, Func_18032
+.asm_18474
+	ld a, [wc0d6]
+	and $01
+	jp z, Func_18032
+	ld a, [wJoypadDown]
+	bit D_DOWN_F, a
+	jp z, Func_18032
+	ld a, [wXPosLo]
+	and $f0
+	add $08
+	ld [wXPosLo], a
+.asm_1848e
+	ld a, $c1
+	ld [wc0d7], a
+	play_sfx SFX_PIPE
+	ld a, WST_PIPE_GOING_DOWN
+	ld [wWarioState], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wAnimationFrame], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	ld [wIsCrouching], a
+	ld [wIsSmashAttacking], a
+
+	load_gfx WarioIdleGfx
+	call LoadWarioGfx
+	load_oam OAM_14a82
+	load_frameset Frameset_14cf6
+	update_anim_1
+	jp Func_18032
+; 0x184fc
+
+Func_184fc: ; 184fc (6:44fc)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+
+	ld a, [wWarioState]
+	cp WST_AIRBORNE
+	jr z, .asm_1850f
+	cp WST_GRAB_AIRBORNE
+	jp nz, Func_18032
+.asm_1850f
+	ld a, [wc0d6]
+	and $20
+	jp z, Func_18032
+	ld a, [wJoypadDown]
+	bit D_UP_F, a
+	jp z, Func_18032
+	ld a, [wXPosLo]
+	and $f0
+	add $18
+	ld [wXPosLo], a
+	ld a, [wXPosHi]
+	adc $00
+	ld [wXPosHi], a
+	jr .asm_18560
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+
+	ld a, [wWarioState]
+	cp WST_AIRBORNE
+	jr z, .asm_18546
+	cp WST_GRAB_AIRBORNE
+	jp nz, Func_18032
+.asm_18546
+	ld a, [wc0d6]
+	and $20
+	jp z, Func_18032
+	ld a, [wJoypadDown]
+	bit D_UP_F, a
+	jp z, Func_18032
+	ld a, [wXPosLo]
+	and $f0
+	add $08
+	ld [wXPosLo], a
+.asm_18560
+	ld a, $c1
+	ld [wc0d7], a
+	play_sfx SFX_PIPE
+	ld a, WST_PIPE_GOING_UP
+	ld [wWarioState], a
+
+	xor a
+	ld [wFrameDuration], a
+	ld [wAnimationFrame], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	ld [wIsCrouching], a
+
+	load_gfx WarioIdleGfx
+	call LoadWarioGfx
+	load_oam OAM_14a82
+	load_frameset Frameset_14cf6
+	update_anim_1
+	jp Func_18032
+; 0x185cb
+
+Func_185cb: ; 185cb (6:45cb)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	ld a, [wc0d6]
+	bit 7, a
+	jp z, Func_18020
+	ld a, [wJoypadPressed]
+	bit D_UP_F, a
+	jp z, Func_18020
+	ld a, [wWarioState]
+	cp WST_IDLING
+	jr z, .asm_185f2
+	cp WST_SLIPPING
+	jr z, .asm_185f2
+	cp WST_GRAB_IDLING
+	jp nz, Func_18020
+.asm_185f2
+	ld a, $e2
+	ld [wc0d7], a
+	jp Func_18676
+; 0x185fa
+
+Func_185fa: ; 185fa (6:45fa)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	ld a, [wc0d6]
+	bit 7, a
+	jp z, Func_18020
+	ld a, [wJoypadPressed]
+	bit D_UP_F, a
+	jp z, Func_18020
+	ld a, [wWarioState]
+	cp WST_IDLING
+	jr z, .asm_1861d
+	cp WST_GRAB_IDLING
+	jp nz, Func_18020
+.asm_1861d
+	ld a, $e3
+	ld [wc0d7], a
+	jr Func_18676
+
+Func_18624: ; 18624 (6:4624)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	ld a, [wc0d6]
+	bit 7, a
+	jp z, Func_18020
+	ld a, [wJoypadPressed]
+	bit D_UP_F, a
+	jp z, Func_18020
+	ld a, [wWarioState]
+	cp WST_IDLING
+	jr z, .asm_18647
+	cp WST_GRAB_IDLING
+	jp nz, Func_18020
+.asm_18647
+	ld a, $a2
+	ld [wc0d7], a
+	jr Func_18676
+
+Func_1864e: ; 1864e (6:464e)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	ld a, [wc0d6]
+	bit 7, a
+	jp z, Func_18020
+	ld a, [wJoypadPressed]
+	bit D_UP_F, a
+	jp z, Func_18020
+	ld a, [wWarioState]
+	cp WST_IDLING
+	jr z, .asm_18671
+	cp WST_GRAB_IDLING
+	jp nz, Func_18020
+.asm_18671
+	ld a, $a3
+	ld [wc0d7], a
+;	fallthrough
+
+Func_18676: 
+	ld a, [wXPosLo]
+	and $f0
+	add $08
+	ld [wXPosLo], a
+	play_sfx SFX_0E6
+
+	ld a, WST_ENTERING_DOOR
+	ld [wWarioState], a
+
+	xor a
+	ld [wSFXLoopCounter], a
+	ld [wWarioStateCounter], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
+	ld [wJumpVelIndex], a
+	ld [wJumpVelTable], a
+	ld [wIsCrouching], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wAnimationFrame], a
+
+	load_gfx WarioIdleGfx
+	call LoadWarioGfx
+	load_oam OAM_14a82
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_186dd
+	load_frameset Frameset_14d0b
+	jr .asm_186e7
+.asm_186dd
+	load_frameset Frameset_14d10
+.asm_186e7
+	update_anim_1
+	jp Func_18020
+; 0x186f9
+
+Func_186f9: ; 186f9 (6:46f9)
+	ld a, [wc0da]
+	and a
+	jp z, Func_181ac
+	ld a, [wTransformation]
+	cp TRANSFORMATION_INVISIBLE_WARIO
+	jr z, .asm_1870b
+	and a
+	jp nz, Func_181ac
+.asm_1870b
+	ld a, [wc0d6]
+	bit 7, a
+	jp z, Func_181ac
+	ld a, $01
+	ld [wWaterInteraction], a
+	ld a, [wJoypadPressed]
+	bit D_UP_F, a
+	jr z, .asm_18724
+	ld a, $66
+	ld [wc0d7], a
+.asm_18724
+	jp Func_18020
+; 0x18727
+
+Func_18727: ; 18727 (6:4727)
+	ld a, [wc0da]
+	and a
+	jp z, Func_181ac
+	ld a, [wTransformation]
+	cp TRANSFORMATION_INVISIBLE_WARIO
+	jr z, .asm_18739
+	and a
+	jp nz, Func_181ac
+.asm_18739
+	ld a, [wc0d6]
+	bit 7, a
+	jp z, Func_181ac
+	ld a, $01
+	ld [wWaterInteraction], a
+	ld a, [wJoypadPressed]
+	bit D_UP_F, a
+	jr z, .asm_18752
+	ld a, $26
+	ld [wc0d7], a
+.asm_18752
+	jp Func_18020
+; 0x18755
+
+Func_18755: ; 18755 (6:4755)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	ld a, [wTransformation]
+	cp TRANSFORMATION_INVISIBLE_WARIO
+	jr z, .asm_18767
+	and a
+	jp nz, Func_18020
+.asm_18767
+	ld a, [wc0d6]
+	bit 7, a
+	jp z, Func_18020
+	ld a, [wJoypadPressed]
+	bit D_UP_F, a
+	jr z, .asm_1877b
+	ld a, $e8
+	ld [wc0d7], a
+.asm_1877b
+	jp Func_18020
+; 0x1877e
+
+Func_1877e: ; 1877e (6:477e)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	ld a, [wJoypadPressed]
+	bit D_UP_F, a
+	jp z, Func_18020
+	ld a, [wTransformation]
+	and a
+	jp nz, Func_18020
+	ld a, [wWarioState]
+	cp WST_IDLING
+	jr z, .asm_187a4
+	cp WST_SLIPPING
+	jr z, .asm_187a4
+	cp WST_GRAB_IDLING
+	jp nz, Func_18020
+.asm_187a4
+	xor a
+	ld [wGrabState], a
+	ld a, LVLEND_NO_TREASURE
+	ld [wLevelEndScreen], a
+	jp Func_18020
+; 0x187b0
+
+Func_187b0: ; 187b0 (6:47b0)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	ld a, [wc0d6]
+	bit 7, a
+	jp z, Func_18020
+	ld a, $44
+	ld [wc0d7], a
+	jp Func_18020
+; 0x187c7
+
+Func_187c7: ; 187c7 (6:47c7)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	ld a, [wc0d6]
+	bit 7, a
+	jp z, Func_18020
+	ld a, $04
+	ld [wc0d7], a
+	jp Func_18020
+; 0x187de
+
+Func_187de: ; 187de (6:47de)
+	ld a, [wc0da]
+	and a
+	jp z, Func_181ac
+	ld a, [wc0d6]
+	bit 7, a
+	jp z, Func_181ac
+	ld a, $44
+	ld [wc0d7], a
+	jp Func_181ac
+; 0x187f5
+
+Func_187f5: ; 187f5 (6:47f5)
+	ld a, [wc0da]
+	and a
+	jp z, Func_181ac
+	ld a, [wc0d6]
+	bit 7, a
+	jp z, Func_181ac
+	ld a, $04
+	ld [wc0d7], a
+	jp Func_181ac
+; 0x1880c
+
+Func_1880c: ; 1880c (6:480c)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	ld a, [wTransformation]
+	cp TRANSFORMATION_INVISIBLE_WARIO
+	jp nz, Func_18020
+	call RecoverFromTransformation_WithoutInvincibility
+	jp Func_18020
+; 0x18821
+
+Func_18821: ; 18821 (6:4821)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	ld a, [wTransformation]
+	cp (1 << 6) | TRANSFORMATION_ZOMBIE_WARIO
+	jr z, .asm_1883a
+	cp (1 << 6) | TRANSFORMATION_VAMPIRE_WARIO
+	jp nz, Func_18020
+	call RecoverFromTransformation_WithoutInvincibility
+	jp Func_18020
+.asm_1883a
+	farcall SetState_ZombieRecovering
+	jp Func_18020
+; 0x1884c
+
+Func_1884c: ; 1884c (6:484c)
+	ld a, $01
+	ld [wc0dd], a
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	ld a, [wc0d6]
+	bit 7, a
+	jp z, Func_18020
+	ld a, TRUE
+	ld [wIsInSand], a
+	jp Func_18020
+; 0x18868
+
+Func_18868: ; 18868 (6:4868)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	ld a, [wTransformation]
+	cp (1 << 6) | TRANSFORMATION_VAMPIRE_WARIO
+	jp nz, Func_18020
+	ld a, [wc0d6]
+	bit 7, a
+	jp z, Func_18032
+	ld a, [wXPosLo]
+	and $08
+	jr nz, .asm_1889e
+	ld a, [wca72]
+	ld b, a
+	ld a, [wXPosLo]
+	and $f0
+	sub b
+	ld [wXPosLo], a
+	ld a, [wXPosHi]
+	sbc $00
+	ld [wXPosHi], a
+	jp Func_18032
+.asm_1889e
+	ld a, [wca71]
+	ld b, a
+	ld a, $10
+	sub b
+	ld b, a
+	ld a, [wXPosLo]
+	and $f0
+	add b
+	ld [wXPosLo], a
+	ld a, [wXPosHi]
+	adc $00
+	ld [wXPosHi], a
+	jp Func_18032
+; 0x188ba
+
+Func_188ba: ; 188ba (6:48ba)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+	jp Func_18020
+; 0x188c4
+
+Func_188c4: ; 188c4 (6:48c4)
+	ld a, $01
+	ld [wc0dd], a
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	ld a, [wc0d6]
+	bit 7, a
+	jp z, Func_18020
+	ld a, $02
+	ld [wWaterInteraction], a
+	jp Func_18020
+; 0x188e0
+
+Func_188e0: ; 188e0 (6:48e0)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	ld a, [wc0d6]
+	and $47
+	jp nz, Func_18020
+	ld a, [wInvincibleCounter]
+	and a
+	jp nz, Func_18020
+	ld a, [wTransformation]
+	bit 6, a
+	jp nz, Func_18020
+	ld a, (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
+	ld [wTransformation], a
+	ld a, $01
+	ld [wca8f], a
+	ld a, TOUCH_BUMP
+	ld [wTouchState], a
+	ld a, TOUCH_BUMP
+	ld [wStingTouchState], a
+	ld a, $02
+	ld [wca94], a
+	ld a, $02
+	ld [wTransformationDuration + 0], a
+	ld a, $58
+	ld [wTransformationDuration + 1], a
+	call UpdateLevelMusic
+	farcall SetState_OnFire_ResetStateCounter
+	ret
+; 0x18934
+
+Func_18934: ; 18934 (6:4934)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	ld a, [wc0d6]
+	bit 7, a
+	jr nz, .asm_18945
+	jp Func_18020
+.asm_18945
+	ld a, TRUE
+	ld [wIsNearFence], a
+	jp Func_1808c
+; 0x1894d
+
+Func_1894d: ; 1894d (6:494d)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	ld a, [wc0d6]
+	bit 7, a
+	jr nz, .asm_1895e
+	jp Func_18020
+.asm_1895e
+	ld a, [wInvincibleCounter]
+	and a
+	jp nz, Func_18020
+	ld a, $01
+	ld [wc1c9], a
+	ld a, [wTransformation]
+	and a
+	jp nz, Func_18020
+	ld a, TRANSFORMATION_FAN
+	ld [wTransformation], a
+	ld a, TOUCH_BUMP
+	ld [wTouchState], a
+	ld a, TOUCH_VULNERABLE
+	ld [wStingTouchState], a
+	ld a, $01
+	ld [wca94], a
+	farcall SetState_Fan
+	jp Func_18020
+; 0x18997
+
+Func_18997: ; 18997 (6:4997)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+	ld a, [wc0d6]
+	and $01
+	jp z, Func_18032
+	ld a, TRUE
+	ld [wIsOnSlipperyGround], a
+	jp Func_18032
+; 0x189ae
+
+Func_189ae: ; 189ae (6:49ae)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18208
+	ld a, [wc0d6]
+	and $01
+	jp z, Func_18208
+	ld a, TRUE
+	ld [wIsOnSlipperyGround], a
+	jp Func_18208
+; 0x189c5
+
+Func_189c5: ; 189c5 (6:49c5)
+	ld a, [wRoomPalCycleIndex]
+	cp $07
+	jr z, .asm_189d1
+	cp $04
+	jp nc, Func_18020
+.asm_189d1
+	jp Func_18208
+; 0x189d4
+
+Func_189d4: ; 189d4 (6:49d4)
+	ld a, [wRoomPalCycleIndex]
+	cp $03
+	jp c, Func_18020
+	jp Func_18208
+; 0x189df
+
+Func_189df: ; 189df (6:49df)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	ld a, [wTransformation]
+	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
+	jp z, Func_18020
+	jp Func_18032
+; 0x189f1
+
+Func_189f1: ; 189f1 (6:49f1)
+	ld a, [wc0da]
+	and a
+	jp z, Func_18020
+	jp Func_18208
+; 0x189fb
+
+Func_189fb: ; 189fb (6:49fb)
+	ld b, $78
+	jr Func_18a19
+Func_189ff: ; 189ff (6:49ff)
+	ld b, $79
+	jr Func_18a19
+Func_18a03: ; 18a03 (6:4a03)
+	ld b, $7a
+	jr Func_18a19
+Func_18a07: ; 18a07 (6:4a07)
+	ld b, $7b
+	jr Func_18a19
+Func_18a0b: ; 18a0b (6:4a0b)
+	ld b, $7c
+	jr Func_18a19
+Func_18a0f: ; 18a0f (6:4a0f)
+	ld b, $7d
+	jr Func_18a19
+Func_18a13: ; 18a13 (6:4a13)
+	ld b, $7e
+	jr Func_18a19
+Func_18a17: ; 18a17 (6:4a17)
+	ld b, $7f
+;	fallthrough
+Func_18a19: ; 18a19 (6:4a19)
+	ld a, [wc0d8]
+	and a
+	jp z, Func_18032
+	ld a, [wc0d6]
+	bit 4, a
+	jr nz, .asm_18a36
+	bit 5, a
+	jr nz, .asm_18a45
+	bit 3, a
+	jr nz, .asm_18a45
+	and $42
+	jr nz, .asm_18a5c
+	jp Func_18032
+.asm_18a36
+	ld a, [wAttackCounter]
+	and a
+	jr nz, .asm_18a5c
+	ld a, [wIsRolling]
+	and a
+	jr nz, .asm_18a5c
+	jp Func_18032
+.asm_18a45
+	ld a, [wPowerUpLevel]
+	cp POWER_UP_HEAD_SMASH_HELMET
+	jp c, Func_18032
+	ld a, [wJumpVelTable]
+	and a
+	jr nz, .asm_18a5c
+	ld a, [wca6d]
+	and a
+	jr nz, .asm_18a5c
+	jp Func_18032
+.asm_18a5c
+	ld hl, wYCell
+	ld a, [hli]
+	ld l, [hl]
+	ld h, a
+	ld a, [hl]
+	and $80
+	or b
+	ld [hl], a
+	push hl
+	call Func_e31
+	pop hl
+	call Func_19690
+	ld a, [wIsRolling]
+	and a
+	jp nz, Func_18020
+	ld a, [wTransformation]
+	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
+	jp z, Func_18020
+	ld a, [wIsSmashAttacking]
+	and a
+	jr nz, .asm_18a8f
+	ld a, [wPowerUpLevel]
+	cp POWER_UP_GARLIC
+	jp c, Func_18032
+	jp Func_18020
+.asm_18a8f
+	ld a, [wPowerUpLevel]
+	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
+	jp c, Func_18032
+	jp Func_18020
+; 0x18a9a
+
+Func_18a9a: ; 18a9a (6:4a9a)
+	ld b, $79
+	jr Func_18aa8
+Func_18a9e: ; 18a9e (6:4a9e)
+	ld b, $7a
+	jr Func_18aa8
+Func_18aa2: ; 18aa2 (6:4aa2)
+	ld b, $7b
+	jr Func_18aa8
+Func_18aa6: ; 18aa6 (6:4aa6)
+	ld b, $78
+;	fallthrough
+
+Func_18aa8: ; 18aa8 (6:4aa8)
+	ld a, [wceda]
+	and $07
+	jp nz, Func_18020
+	ld a, [wceda]
+	and $f8
+	jr nz, .asm_18ad6
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+	ld a, [wTransformation]
+	cp (1 << 4) | (1 << 6)
+	jp nz, Func_18032
+	ld a, [wca8f]
+	cp $01
+	jp c, Func_18032
+	ld a, $01
+	ld [wceda], a
+	jp Func_18f32
+.asm_18ad6
+	or $01
+	ld [wceda], a
+	jp Func_18f32
+; 0x18ade
+
+Func_18ade: ; 18ade (6:4ade)
+	ld b, $79
+	jr Func_18aec
+Func_18ae2: ; 18ae2 (6:4ae2)
+	ld b, $7a
+	jr Func_18aec
+Func_18ae6: ; 18ae6 (6:4ae6)
+	ld b, $7b
+	jr Func_18aec
+Func_18aea: ; 18aea (6:4aea)
+	ld b, $78
+;	fallthrough
+Func_18aec: ; 18aec (6:4aec)
+	ld a, [wceda]
+	and $07
+	jp nz, Func_18020
+	ld a, [wceda]
+	and $f8
+	jr nz, .asm_18b17
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+	ld a, [wTransformation]
+	cp (1 << 4) | (1 << 6)
+	jp nz, Func_18032
+	ld a, [wca8f]
+	cp $01
+	jp c, Func_18032
+	ld a, $03
+	ld [wceda], a
+.asm_18b17
+	or $03
+	ld [wceda], a
+	jp Func_18f32
+; 0x18b1f
+
+	INCROM $18b1f, $18f32
+
+Func_18f32: ; 18f32 (6:4f32)
+	ld a, [wSRAMBank]
+	ld [wcedb], a
+	ld hl, wYCell
+	ld a, [hli]
+	ld [wcedc], a
+	ld d, a
+	ld a, [hl]
+	ld [wcedd], a
+	ld e, a
+	ld a, [de]
+	ld [wcedf], a
+	ld hl, wYCell
+	ld a, [hli]
+	ld l, [hl]
+	ld h, a
+	ld a, [hl]
+	and $80
+	or b
+	ld [hl], a
+	push hl
+	call Func_e31
+	pop hl
+	call Func_19609
+	jp Func_18020
+; 0x18f5f
+
+	INCROM $18f5f, $19609
+
+Func_19609: ; 19609 (6:5609)
+	ldh a, [hYPosHi]
+	ldh [hffad], a
+	ldh a, [hYPosLo]
+	ldh [hffae], a
+	ldh a, [hXPosHi]
+	ldh [hffaf], a
+	ldh a, [hXPosLo]
+	ldh [hffb0], a
+	ld b, $01
+	farcall Func_c9f0
+	ldh a, [rDIV]
+	and %11
+	jr nz, .asm_1967f
+	ld a, [wcac2]
+	and a
+	jr nz, .asm_1967f
+	ldh a, [rSVBK]
+	push af
+	ld a, $01
+	ldh [rSVBK], a
+	ld a, $64
+	ld [wcac2], a
+	ld hl, wCurObjUnk01
+	ld de, hffa0
+	ld b, OBJ_UNK_07 - OBJ_UNK_01
+	call CopyHLToDE
+
+	ld hl, wCurObjUnk01
+	xor a
+	ld [hli], a
+	ld [hli], a
+	ldh a, [hYPosLo]
+	ld [hli], a
+	ldh a, [hYPosHi]
+	ld [hli], a
+	ldh a, [hXPosLo]
+	ld [hli], a
+	ldh a, [hXPosHi]
+	ld [hli], a
+	ld bc, $4e5a
+	farcall Func_6428a
+	ld hl, hffa0
+	ld de, wCurObjUnk01
+	ld b, OBJ_UNK_07 - OBJ_UNK_01
+	call CopyHLToDE
+	pop af
+	ldh [rSVBK], a
+.asm_1967f
+	ldh a, [hffad]
+	ldh [hYPosHi], a
+	ldh a, [hffae]
+	ldh [hYPosLo], a
+	ldh a, [hffaf]
+	ldh [hXPosHi], a
+	ldh a, [hffb0]
+	ldh [hXPosLo], a
+	ret
+; 0x19690
+
+Func_19690: ; 19690 (6:5690)
+	ldh a, [hYPosHi]
+	ldh [hffad], a
+	ldh a, [hYPosLo]
+	ldh [hffae], a
+	ldh a, [hXPosHi]
+	ldh [hffaf], a
+	ldh a, [hXPosLo]
+	ldh [hffb0], a
+	ld b, PARTICLE_DEBRIS
+	farcall Func_c9f0
+
+	ldh a, [rSVBK]
+	push af
+	ld a, $01
+	ldh [rSVBK], a
+	ld hl, wCurObjUnk01
+	ld de, hffa0
+	ld b, OBJ_UNK_07 - OBJ_UNK_01
+	call CopyHLToDE
+	ld hl, wCurObjUnk01
+	xor a
+	ld [hli], a
+	ld [hli], a
+	ldh a, [hYPosLo]
+	ld [hli], a
+	ldh a, [hYPosHi]
+	ld [hli], a
+	ldh a, [hXPosLo]
+	ld [hli], a
+	ldh a, [hXPosHi]
+	ld [hli], a
+	ld bc, $4e6d
+	farcall Func_6428a
+	ld hl, hffa0
+	ld de, wCurObjUnk01
+	ld b, OBJ_UNK_07 - OBJ_UNK_01
+	call CopyHLToDE
+	pop af
+	ldh [rSVBK], a
+	ldh a, [hffad]
+	ldh [hYPosHi], a
+	ldh a, [hffae]
+	ldh [hYPosLo], a
+	ldh a, [hffaf]
+	ldh [hXPosHi], a
+	ldh a, [hffb0]
+	ldh [hXPosLo], a
+	ret
+; 0x19706
+
+; unreferenced?
+Func_19706: ; 19706 (6:5706)
+	ld a, $01
+	ld [wc0da], a
+	call Func_19741
+	xor a
+	ld [wc0da], a
+	ret
+; 0x19713
+
+	INCROM $19713, $19734
 
 Func_19734: ; 19734 (6:5734)
 	ld a, $01
@@ -836,7 +2287,7 @@ Func_19c1b: ; 19c1b (6:5c1b)
 	dw UpdateState_CrouchSlipping        ; WST_CROUCH_SLIPPING
 	dw UpdateState_DraggedDown           ; WST_DRAGGED_DOWN
 	dw UpdateState_Teleporting           ; WST_TELEPORTING
-	dw UpdateState_TeleportingWater      ; WST_TELEPORTING_WATER
+	dw UpdateState_WaterTeleporting      ; WST_WATER_TELEPORTING
 	dw UpdateState_SandFalling           ; WST_SAND_FALLING
 	dw UpdateState_SandJumping           ; WST_SAND_JUMPING
 	dw UpdateState_SandIdling            ; WST_SAND_IDLING
@@ -1253,7 +2704,7 @@ PlayTeleportingSFX: ; 1a0ab (6:60ab)
 	ret
 ; 0x1a0b4
 
-UpdateState_TeleportingWater: ; 1a0b4 (6:60b4)
+UpdateState_WaterTeleporting: ; 1a0b4 (6:60b4)
 	ld a, TRUE
 	ld [wIsIntangible], a
 	update_anim_1

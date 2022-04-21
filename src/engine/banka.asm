@@ -422,7 +422,7 @@ SetState_FlatAirborne: ; 28435 (a:4435)
 	ret nz
 	ld a, [wTransformation]
 	cp TRANSFORMATION_OWL_WARIO
-	call z, Func_16d9
+	call z, ReleaseOwl
 
 	ldh a, [rSVBK]
 	push af
@@ -2897,8 +2897,7 @@ UpdateState_ZombieSlippingThroughFloor: ; 29dd3 (a:5dd3)
 	ret
 ; 0x29e71
 
-; unreferenced?
-Func_29e71: ; 29e71 (a:5e71)
+SetState_ZombieRecovering: ; 29e71 (a:5e71)
 	ld a, WST_ZOMBIE_RECOVERING
 	ld [wWarioState], a
 	xor a

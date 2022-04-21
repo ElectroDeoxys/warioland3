@@ -39,7 +39,7 @@ Func_1ec000: ; 1ec000 (7b:4000)
 	dw UpdateState_SplitKnockedBack  ; WST_SPLIT_KNOCKED_BACK
 	dw UpdateState_Splitting         ; WST_SPLITTING
 	dw $504f                         ; WST_UNKNOWN_D3
-	dw $5136                         ; WST_UNKNOWN_D4
+	dw $5136                         ; WST_FAN
 	dw $51af                         ; WST_UNKNOWN_D5
 	dw $523f                         ; WST_UNKNOWN_D6
 	dw $52a3                         ; WST_UNKNOWN_D7
@@ -578,7 +578,51 @@ UpdateState_Splitting: ; 1ed018 (7b:5018)
 	jp RecoverFromTransformation
 ; 0x1ed0a6
 
-	INCROM $1ed0a6, $1ed331
+SetState_Fan: ; 1ed0a6 (7b:50a6)
+	ld a, WST_FAN
+	ld [wWarioState], a
+	ld a, -1
+	ld [wca70], a
+	ld a, -27
+	ld [wca6f], a
+	ld a, -9
+	ld [wca71], a
+	ld a, 9
+	ld [wca72], a
+
+	xor a
+	ld [wSFXLoopCounter], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ld [wGrabState], a
+	ld [wAttackCounter], a
+	ld [wIsCrouching], a
+	ld [wIsRolling], a
+	ld [wIsSmashAttacking], a
+	ld [wJumpVelIndex], a
+	inc a
+	ld [wJumpVelTable], a
+	call UpdateLevelMusic
+	xor a
+	ld [wFrameDuration], a
+	ld [wAnimationFrame], a
+
+	load_gfx WarioFanGfx
+	call LoadWarioGfx
+	load_oam OAM_1dc000
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1ed11c
+	load_frameset Frameset_1dc37f
+	jr .asm_1ed126
+.asm_1ed11c
+	load_frameset Frameset_1dc3c3
+.asm_1ed126
+	update_anim_3
+	ret
+; 0x1ed136
+
+	INCROM $1ed136, $1ed331
 
 SetState_BlindIdling: ; 1ed331 (7b:5331)
 	ld a, WST_BLIND_IDLING

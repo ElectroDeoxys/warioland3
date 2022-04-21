@@ -545,7 +545,7 @@ Func_846e: ; 846e (2:446e)
 	ld [wGroundShakeCounter], a
 	ld [wc0bc], a
 	ld a, [wInternalRoomID]
-	ld [wca5d], a
+	ld [wTempInternalRoomID], a
 
 	ldh a, [rSVBK]
 	push af
@@ -769,7 +769,7 @@ Func_8747: ; 8747 (2:4747)
 	xor a
 	ld [wInternalRoomID], a
 	ld [wca6c], a
-	ld [wca5d], a
+	ld [wTempInternalRoomID], a
 
 	xor a
 	ld [wLevelEndScreen], a
@@ -818,7 +818,7 @@ Func_8747: ; 8747 (2:4747)
 	jr .load_layout
 
 .asm_87e2
-	ld a, [wca5d]
+	ld a, [wTempInternalRoomID]
 	ld [wInternalRoomID], a
 	call LoadWarioGfx
 

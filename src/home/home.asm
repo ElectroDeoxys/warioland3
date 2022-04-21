@@ -411,7 +411,33 @@ TryAddSprite:: ; df4 (0:df4)
 	jr .loop
 ; 0xe2b
 
-	INCROM $e2b, $e53
+	INCROM $e2b, $e31
+
+Func_e31:: ; e31 (0:e31)
+	ld a, [wFloorSRAMBank]
+	dec a
+	add a
+	add a
+	add a
+	add a
+	add a ; *$20
+	add h
+	ld b, a
+	ld c, l
+	ld hl, wc18e
+	ld a, [wc19e]
+	ld e, a
+	ld d, $00
+	add hl, de
+	ld a, b
+	ld [hli], a
+	ld [hl], c
+	ld a, e
+	add $02
+	and $0f
+	ld [wc19e], a
+	ret
+; 0xe53
 
 UpdateAnimation:: ; e53 (0:e53)
 	ld a, [wFramesetPtr + 0]
@@ -1026,7 +1052,17 @@ Func_12a5:: ; 12a5 (0:12a5)
 	ret
 ; 0x12b5
 
-	INCROM $12b5, $12c3
+; b = ground shake counter
+Func_12b5:: ; 12b5 (0:12b5)
+	ld a, [wGroundShakeCounter]
+	and a
+	ret nz
+	ld a, b
+	ld [wGroundShakeCounter], a
+	xor a
+	ld [wIsWarioGroundShaking], a
+	ret
+; 0x12c3
 
 ClearParticles:: ; 12c3 (0:12c3)
 	ld hl, wParticles
@@ -1635,7 +1671,7 @@ OpenActionHelp:: ; 16d0 (0:16d0)
 	ret
 ; 0x16d9
 
-Func_16d9:: ; 16d9 (0:16d9)
+ReleaseOwl:: ; 16d9 (0:16d9)
 	ld hl, wXPosLo
 	ld de, hXPosLo
 	ld a, [hld]
