@@ -1795,7 +1795,7 @@ UpdateGolfParaGoomYPos: ; 1c94e8 (72:54e8)
 	ret
 
 .water
-	play_sfx SFX_SLIDE
+	play_sfx SFX_SPLASH
 	jr .golf_stroke_penalty
 .ob
 	play_sfx SFX_073

@@ -248,8 +248,8 @@ Func_181c8: ; 181c8 (6:41c8)
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_181ac
-	ld a, $01
-	ld [wcee0], a
+	ld a, 1 << WATER_CURRENT_RIGHT_F
+	ld [wWaterCurrent], a
 	jp Func_181ac
 ; 0x181d8
 
@@ -257,8 +257,8 @@ Func_181d8: ; 181d8 (6:41d8)
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_181ac
-	ld a, $04
-	ld [wcee0], a
+	ld a, 1 << WATER_CURRENT_UP_F
+	ld [wWaterCurrent], a
 	jp Func_181ac
 ; 0x181e8
 
@@ -266,8 +266,8 @@ Func_181e8: ; 181e8 (6:41e8)
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_181ac
-	ld a, $02
-	ld [wcee0], a
+	ld a, 1 << WATER_CURRENT_LEFT_F
+	ld [wWaterCurrent], a
 	jp Func_181ac
 ; 0x181f8
 
@@ -275,8 +275,8 @@ Func_181f8: ; 181f8 (6:41f8)
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_181ac
-	ld a, $08
-	ld [wcee0], a
+	ld a, 1 << WATER_CURRENT_DOWN_F
+	ld [wWaterCurrent], a
 	jp Func_181ac
 ; 0x18208
 
@@ -984,7 +984,7 @@ Func_18868: ; 18868 (6:4868)
 	ld a, [wXPosLo]
 	and $08
 	jr nz, .asm_1889e
-	ld a, [wca72]
+	ld a, [wCollisionBoxRight]
 	ld b, a
 	ld a, [wXPosLo]
 	and $f0
@@ -995,7 +995,7 @@ Func_18868: ; 18868 (6:4868)
 	ld [wXPosHi], a
 	jp Func_18032
 .asm_1889e
-	ld a, [wca71]
+	ld a, [wCollisionBoxLeft]
 	ld b, a
 	ld a, $10
 	sub b
@@ -1202,6 +1202,7 @@ Func_18a19: ; 18a19 (6:4a19)
 	and $42
 	jr nz, .asm_18a5c
 	jp Func_18032
+
 .asm_18a36
 	ld a, [wAttackCounter]
 	and a
@@ -1210,6 +1211,7 @@ Func_18a19: ; 18a19 (6:4a19)
 	and a
 	jr nz, .asm_18a5c
 	jp Func_18032
+
 .asm_18a45
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_HEAD_SMASH_HELMET
@@ -1217,7 +1219,7 @@ Func_18a19: ; 18a19 (6:4a19)
 	ld a, [wJumpVelTable]
 	and a
 	jr nz, .asm_18a5c
-	ld a, [wca6d]
+	ld a, [wSwimVelIndex]
 	and a
 	jr nz, .asm_18a5c
 	jp Func_18032
@@ -1482,25 +1484,26 @@ Func_19706: ; 19706 (6:5706)
 
 	INCROM $19713, $19734
 
-Func_19734: ; 19734 (6:5734)
+; checks collision in side that Wario is facing
+CheckFrontCollision: ; 19734 (6:5734)
 	ld a, $01
 	ld [wc0d8], a
 	ld a, [wDirection]
 	and a
-	jr z, Func_197b6
-	jr Func_19746
+	jr z, CheckBottomLeftCollision
+	jr CheckBottomRightCollision
 
 Func_19741: ; 19741 (6:5741)
 	ld a, $01
 	ld [wc0d8], a
 ;	fallthrough
 
-Func_19746: ; 19746 (6:5746)
+CheckBottomRightCollision: ; 19746 (6:5746)
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
-	jr z, .asm_19774
-	ld a, [wca72]
-	sub $01
+	jr z, .flat
+	ld a, [wCollisionBoxRight]
+	sub 1
 	ld c, a
 	ld hl, wXPosLo
 	ld de, hXPosLo
@@ -1512,10 +1515,10 @@ Func_19746: ; 19746 (6:5746)
 	adc $00
 	ld [de], a
 	dec de
-	ld a, [wca70]
+	ld a, [wCollisionBoxBottom]
 	cpl
 	inc a
-	add $07
+	add 7
 	ld c, a
 	ld a, [hld]
 	sub c
@@ -1524,11 +1527,11 @@ Func_19746: ; 19746 (6:5746)
 	ld a, [hl]
 	sbc $00
 	ld [de], a
-	jr .asm_19799
+	jr .got_collision_coords
 
-.asm_19774
-	ld a, [wca72]
-	sub $01
+.flat
+	ld a, [wCollisionBoxRight]
+	sub 1
 	ld c, a
 	ld hl, wXPosLo
 	ld de, hXPosLo
@@ -1540,10 +1543,10 @@ Func_19746: ; 19746 (6:5746)
 	adc $00
 	ld [de], a
 	dec de
-	ld a, [wca70]
+	ld a, [wCollisionBoxBottom]
 	cpl
 	inc a
-	add $01
+	add 1
 	ld c, a
 	ld a, [hld]
 	sub c
@@ -1552,7 +1555,8 @@ Func_19746: ; 19746 (6:5746)
 	ld a, [hl]
 	sbc $00
 	ld [de], a
-.asm_19799
+
+.got_collision_coords
 	ldh a, [hYPosLo]
 	and $f0
 	ld [wc0dc], a
@@ -1570,14 +1574,14 @@ Func_197b1: ; 197b1 (6:57b1)
 	ld [wc0d8], a
 ;	fallthrough
 
-Func_197b6: ; 197b6 (6:57b6)
+CheckBottomLeftCollision: ; 197b6 (6:57b6)
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
-	jr z, .asm_197e6
-	ld a, [wca71]
+	jr z, .flat
+	ld a, [wCollisionBoxLeft]
 	cpl
 	inc a
-	sub $01
+	sub 1
 	ld c, a
 	ld hl, wXPosLo
 	ld de, hXPosLo
@@ -1589,10 +1593,10 @@ Func_197b6: ; 197b6 (6:57b6)
 	sbc $00
 	ld [de], a
 	dec de
-	ld a, [wca70]
+	ld a, [wCollisionBoxBottom]
 	cpl
 	inc a
-	add $07
+	add 7
 	ld c, a
 	ld a, [hld]
 	sub c
@@ -1601,13 +1605,13 @@ Func_197b6: ; 197b6 (6:57b6)
 	ld a, [hl]
 	sbc $00
 	ld [de], a
-	jr .asm_1980d
+	jr .got_collision_coords
 
-.asm_197e6
-	ld a, [wca71]
+.flat
+	ld a, [wCollisionBoxLeft]
 	cpl
 	inc a
-	sub $01
+	sub 1
 	ld c, a
 	ld hl, wXPosLo
 	ld de, hXPosLo
@@ -1619,10 +1623,10 @@ Func_197b6: ; 197b6 (6:57b6)
 	sbc $00
 	ld [de], a
 	dec de
-	ld a, [wca70]
+	ld a, [wCollisionBoxBottom]
 	cpl
 	inc a
-	add $01
+	add 1
 	ld c, a
 	ld a, [hld]
 	sub c
@@ -1631,7 +1635,8 @@ Func_197b6: ; 197b6 (6:57b6)
 	ld a, [hl]
 	sbc $00
 	ld [de], a
-.asm_1980d
+
+.got_collision_coords
 	ldh a, [hYPosLo]
 	and $f0
 	ld [wc0dc], a
@@ -1657,11 +1662,11 @@ Func_19832: ; 19832 (6:5832)
 	ld a, [wIsCrouching]
 	and a
 	jp nz, .asm_198c1
-	ld a, [wca6f]
+	ld a, [wCollisionBoxTop]
 	ld b, a
 	ld a, [wYPosLo]
 	add b
-	add $02
+	add 2
 	and $f0
 	ld b, a
 	ld a, [wc0dc]
@@ -1674,46 +1679,46 @@ Func_19832: ; 19832 (6:5832)
 	ret z
 	ld a, [wJumpVelTable]
 	and a
-	jp nz, .asm_198c0
+	jp nz, .done
 	ld a, [wAttackCounter]
 	and a
-	jr nz, .asm_198c0
+	jr nz, .done
 	ld a, [wWaterInteraction]
 	and a
-	jr nz, .asm_198c0
+	jr nz, .done
 	ld a, [wIsCrouching]
 	and a
-	jr nz, .asm_198c0
+	jr nz, .done
 	ld a, [wIsOnSteppableObject]
 	and a
-	jr nz, .asm_198c0
+	jr nz, .done
 	ld a, [wTransformation]
 	and a
-	jr nz, .asm_198c0
+	jr nz, .done
 	ld a, [wIsInSand]
 	and a
-	jr nz, .asm_198c0
+	jr nz, .done
 
 	ld a, [wJoypadDown]
 	bit D_RIGHT_F, a
-	jr nz, .asm_198aa
+	jr nz, .add_offset
 	bit D_LEFT_F, a
-	jr nz, .asm_19894
+	jr nz, .sub_offset
 	ld a, [wDirection]
 	and a
-	jr nz, .asm_198aa
-.asm_19894
-	ld b, $02
+	jr nz, .add_offset
+.sub_offset
+	ld b, 2
 	call SubXOffset
-	farcall Func_1e855
+	farcall CrouchOrSlideIfOnSlope
 	jr .asm_198c1
-.asm_198aa
-	ld b, $02
+.add_offset
+	ld b, 2
 	call AddXOffset
-	farcall Func_1e855
+	farcall CrouchOrSlideIfOnSlope
 	jr .asm_198c1
 
-.asm_198c0
+.done
 	ret
 
 .asm_198c1
@@ -1724,7 +1729,6 @@ Func_19832: ; 19832 (6:5832)
 ; 0x198c7
 
 ; resets wIsStandingOnSlope
-; copies wYPosHi to hYPosHi
 Func_198c7: ; 198c7 (6:58c7)
 	xor a
 	ld [wIsStandingOnSlope], a
@@ -1733,21 +1737,22 @@ Func_198c7: ; 198c7 (6:58c7)
 	ret
 ; 0x198e0
 
-Func_198e0: ; 198e0 (6:58e0)
+CheckCentreCollision: ; 198e0 (6:58e0)
+; collision in centre
 	ld a, $01
 	ld [wced3], a
 	call Func_198c7
 	and a
 	ret nz
-
 	xor a
 	ld [wced3], a
 
-	ld a, [wca71]
+; collision on left
+	ld a, [wCollisionBoxLeft]
 	cpl
 	inc a
-	sub $03
-	ld c, a
+	sub 3
+	ld c, a ; -wCollisionBoxLeft - 3
 	ld hl, wXPosLo
 	ld de, hXPosLo
 	ld a, [hld]
@@ -1766,9 +1771,11 @@ Func_198e0: ; 198e0 (6:58e0)
 	call Func_19b8b
 	and a
 	ret nz
-	ld a, [wca72]
-	sub $03
-	ld c, a
+
+; collision on right
+	ld a, [wCollisionBoxRight]
+	sub 3
+	ld c, a ; wCollisionBoxRight - 3
 	ld hl, wXPosLo
 	ld de, hXPosLo
 	ld a, [hld]
@@ -1787,6 +1794,7 @@ Func_198e0: ; 198e0 (6:58e0)
 	call Func_19b8b
 	and a
 	ret nz
+
 	ld a, [wIsOnSteppableObject]
 	and a
 	ret z
@@ -1803,10 +1811,10 @@ Func_19942: ; 19942 (6:5942)
 	ld a, $01
 	ld [wc0d8], a
 .asm_1994e
-	ld a, [wca6f]
+	ld a, [wCollisionBoxTop]
 	cpl
 	inc a
-	add $02
+	add 2
 	ld c, a
 	ld hl, wXPosLo
 	ld de, hXPosLo
@@ -1827,7 +1835,7 @@ Func_19942: ; 19942 (6:5942)
 	ret
 ; 0x1996e
 
-Func_1996e: ; 1996e (6:596e)
+CheckUpCollision: ; 1996e (6:596e)
 	ld a, $01
 	ld [wced2], a
 	call Func_19942
@@ -1841,10 +1849,10 @@ Func_1996e: ; 1996e (6:596e)
 	ld a, $01
 	ld [wc0d8], a
 .asm_19988
-	ld a, [wca71]
+	ld a, [wCollisionBoxLeft]
 	cpl
 	inc a
-	sub $03
+	sub 3
 	ld c, a
 	ld hl, wXPosLo
 	ld de, hXPosLo
@@ -1856,10 +1864,10 @@ Func_1996e: ; 1996e (6:596e)
 	sbc $00
 	ld [de], a
 	dec de
-	ld a, [wca6f]
+	ld a, [wCollisionBoxTop]
 	cpl
 	inc a
-	add $02
+	add 2
 	ld c, a
 	ld a, [hld]
 	sub c
@@ -1871,14 +1879,15 @@ Func_1996e: ; 1996e (6:596e)
 	call Func_19b9b
 	and a
 	ret nz
+
 	ld a, [wTransformation]
 	cp TRANSFORMATION_PUFFY_WARIO
 	jr z, .asm_199c0
 	ld a, $01
 	ld [wc0d8], a
 .asm_199c0
-	ld a, [wca72]
-	sub $03
+	ld a, [wCollisionBoxRight]
+	sub 3
 	ld c, a
 	ld hl, wXPosLo
 	ld de, hXPosLo
@@ -1890,10 +1899,10 @@ Func_1996e: ; 1996e (6:596e)
 	adc $00
 	ld [de], a
 	dec de
-	ld a, [wca6f]
+	ld a, [wCollisionBoxTop]
 	cpl
 	inc a
-	add $02
+	add 2
 	ld c, a
 	ld a, [hld]
 	sub c
@@ -1906,20 +1915,21 @@ Func_1996e: ; 1996e (6:596e)
 	ret
 ; 0x199e9
 
-Func_199e9: ; 199e9 (6:59e9)
-	call Func_19a53
+CheckAirborneCollision: ; 199e9 (6:59e9)
+	call .Func_19a53
 	and a
 	ret nz
+
 	ld a, [wIsSmashAttacking]
 	and a
-	jr z, .asm_199f9
+	jr z, .no_smash_attack_1
 	ld a, $01
 	ld [wc0d8], a
-.asm_199f9
-	ld a, [wca71]
+.no_smash_attack_1
+	ld a, [wCollisionBoxLeft]
 	cpl
 	inc a
-	sub $03
+	sub 3
 	ld c, a
 	ld hl, wXPosLo
 	ld de, hXPosLo
@@ -1944,15 +1954,16 @@ Func_199e9: ; 199e9 (6:59e9)
 	jr z, .asm_19a22
 	ld b, a
 	ret
+
 .asm_19a22
 	ld a, [wIsSmashAttacking]
 	and a
-	jr z, .asm_19a2d
+	jr z, .no_smash_attack_2
 	ld a, $01
 	ld [wc0d8], a
-.asm_19a2d
-	ld a, [wca72]
-	sub $03
+.no_smash_attack_2
+	ld a, [wCollisionBoxRight]
+	sub 3
 	ld c, a
 	ld hl, wXPosLo
 	ld de, hXPosLo
@@ -1977,17 +1988,16 @@ Func_199e9: ; 199e9 (6:59e9)
 	ret z
 	ld b, a
 	ret
-; 0x19a53
 
-Func_19a53: ; 19a53 (6:5a53)
+.Func_19a53
 	xor a
 	ld [wIsStandingOnSlope], a
 	ld a, [wIsSmashAttacking]
 	and a
-	jr z, .asm_19a62
+	jr z, .no_smash_attack_3
 	ld a, $01
 	ld [wc0d8], a
-.asm_19a62
+.no_smash_attack_3
 	get_pos
 	call Func_19b7b
 	ret
@@ -1996,7 +2006,7 @@ Func_19a53: ; 19a53 (6:5a53)
 Func_19a77: ; 19a77 (6:5a77)
 	xor a
 	ld [wc1ca], a
-	ld a, [wca71]
+	ld a, [wCollisionBoxLeft]
 	cpl
 	inc a
 	sub $03
@@ -2026,7 +2036,7 @@ Func_19a77: ; 19a77 (6:5a77)
 .asm_19aa2
 	xor a
 	ld [wc1ca], a
-	ld a, [wca72]
+	ld a, [wCollisionBoxRight]
 	sub $03
 	ld c, a
 	ld hl, wXPosLo
@@ -2109,10 +2119,12 @@ Func_19afb: ; 19afb (6:5afb)
 	ld [de], a
 	jr Func_19b3a
 
+; collision on centre
 Func_19b12: ; 19b12 (6:5b12)
 	get_pos
 	jr Func_19b3a
 
+; collision on top
 Func_19b25: ; 19b25 (6:5b25)
 	ld hl, wXPosLo
 	ld de, hXPosLo
@@ -2123,7 +2135,7 @@ Func_19b25: ; 19b25 (6:5b25)
 	ld [de], a
 	dec de
 	ld a, [hld]
-	sub $04
+	sub 4
 	ld [de], a
 	dec de
 	ld a, [hl]
@@ -2221,8 +2233,6 @@ Func_19bc3:: ; 19bc3 (6:5bc3)
 	call GetCell
 	ld a, 1 << 4
 	ld [wc0d6], a
-;	fallthrough
-
 Func_19bce: ; 19bce (6:5bce)
 	call Func_18000
 	ld b, a
@@ -2365,7 +2375,7 @@ UpdateState_Slipping: ; 19ce7 (6:5ce7)
 	farcall Func_19b25
 	ld a, [wc0d7]
 	and a
-	jp nz, Func_11f6
+	jp nz, TriggerRoomTransition
 
 	ld a, [wWarioStateCycles]
 	cp $04
@@ -2440,7 +2450,7 @@ UpdateState_Slipping: ; 19ce7 (6:5ce7)
 	jp Func_19e89
 
 .asm_19de6
-	farcall Func_198e0
+	farcall CheckCentreCollision
 	ld a, [wWarioState]
 	cp WST_SLIPPING
 	ret nz ; done if not slipping any more
@@ -2453,7 +2463,7 @@ UpdateState_Slipping: ; 19ce7 (6:5ce7)
 
 .asm_19e0f
 	update_pos_y
-	farcall Func_19734
+	farcall CheckFrontCollision
 	ld a, [wWarioState]
 	cp WST_SLIPPING
 	ret nz ; done if not slipping any more
@@ -2543,27 +2553,27 @@ UpdateState_CrouchSlipping: ; 19ef1 (6:5ef1)
 	farcall Func_19b25
 	ld a, [wc0d7]
 	and a
-	jp nz, Func_11f6
+	jp nz, TriggerRoomTransition
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jr z, .asm_19f1e
-	farcall Func_1ed3f
+	farcall StartCrouchJump
 	ret
 
 .asm_19f1e
-	farcall Func_198e0
+	farcall CheckCentreCollision
 	ld a, [wWarioState]
 	cp WST_CROUCH_SLIPPING
 	ret nz ; done if not crouch slipping any more
 	ld a, b
 	and a
 	jr nz, .asm_19f47
-	farcall Func_1ed34
+	farcall StartCrouchFall
 	ret
 
 .asm_19f47
 	update_pos_y
-	farcall Func_19734
+	farcall CheckFrontCollision
 	ld a, [wWarioState]
 	cp WST_CROUCH_SLIPPING
 	ret nz ; done if not crouch slipping any more
@@ -2609,7 +2619,7 @@ UpdateState_CrouchSlipping: ; 19ef1 (6:5ef1)
 	ld a, [wWarioStateCycles]
 	and $01
 	ld [wDirection], a
-	farcall Func_1e855
+	farcall CrouchOrSlideIfOnSlope
 	ret
 ; 0x19fb6
 
@@ -2633,13 +2643,13 @@ SetState_DraggedDown: ; 19fb6 (6:5fb6)
 	ld [wAutoMoveState], a
 
 	ld a, -1
-	ld [wca70], a
+	ld [wCollisionBoxBottom], a
 	ld a, -9
-	ld [wca71], a
+	ld [wCollisionBoxLeft], a
 	ld a, 9
-	ld [wca72], a
+	ld [wCollisionBoxRight], a
 	ld a, -27
-	ld [wca6f], a
+	ld [wCollisionBoxTop], a
 
 	load_gfx WarioAirborneGfx
 	call LoadWarioGfx
@@ -2697,7 +2707,7 @@ UpdateState_Teleporting: ; 1a077 (6:6077)
 	ld [wInvincibleCounter], a
 	ld hl, wc0d7
 	res 7, [hl]
-	jp Func_11f6
+	jp TriggerRoomTransition
 
 PlayTeleportingSFX: ; 1a0ab (6:60ab)
 	play_sfx SFX_082
@@ -2723,7 +2733,7 @@ UpdateState_WaterTeleporting: ; 1a0b4 (6:60b4)
 	ld [wInvincibleCounter], a
 	ld hl, wc0d7
 	res 7, [hl]
-	jp Func_11f6
+	jp TriggerRoomTransition
 ; 0x1a0e8
 
 SetState_SandFalling: ; 1a0e8 (6:60e8)
@@ -2732,13 +2742,13 @@ SetState_SandFalling: ; 1a0e8 (6:60e8)
 	ld a, WST_SAND_FALLING
 	ld [wWarioState], a
 	ld a, -1
-	ld [wca70], a
+	ld [wCollisionBoxBottom], a
 	ld a, -27
-	ld [wca6f], a
+	ld [wCollisionBoxTop], a
 	ld a, -9
-	ld [wca71], a
+	ld [wCollisionBoxLeft], a
 	ld a, 9
-	ld [wca72], a
+	ld [wCollisionBoxRight], a
 
 	xor a
 	ld [wJumpVelIndex], a
@@ -2748,7 +2758,7 @@ SetState_SandFalling: ; 1a0e8 (6:60e8)
 	ld [wIsSmashAttacking], a
 	ld [wAttackCounter], a
 	ld [wIsRolling], a
-	ld [wca6d], a
+	ld [wSwimVelIndex], a
 	ld [wIsCrouching], a
 	ld [wc0e0], a
 	ld hl, Pals_c800
@@ -2783,11 +2793,10 @@ UpdateState_SandFalling: ; 1a17e (6:617e)
 	cp WST_SAND_FALLING
 	ret nz ; done if not falling in sand any more
 
-	farcall Func_198e0
+	farcall CheckCentreCollision
 	ld a, b
 	and a
 	ret z
-
 	update_pos_y
 	jp SetState_SandIdling
 ; 0x1a1a7
@@ -2811,19 +2820,19 @@ UpdateState_SandJumping: ; 1a1c5 (6:61c5)
 	and a
 	jr nz, .in_sand
 ; not in sand
-	farcall Func_1c289
+	farcall StartJump_FromSand
 	ret
 
 .in_sand
-	call Func_1488
+	call ApplyJumpVelocity
 	farcall Func_2b17a
-	ld a, [wca86]
+	ld a, [wWalkVelIndex]
 	cp $04
 	jr c, .asm_1a208
 	ld a, $00
-	ld [wca86], a
+	ld [wWalkVelIndex], a
 .asm_1a208
-	ld a, [wIsTurningMidAir]
+	ld a, [wIsTurning]
 	and a
 	jr z, .asm_1a211
 	call Func_1a14b
@@ -2838,7 +2847,7 @@ UpdateState_SandJumping: ; 1a1c5 (6:61c5)
 	jp nc, SetState_SandFalling
 
 ; rising
-	farcall Func_1996e
+	farcall CheckUpCollision
 	ld a, b
 	and a
 	ret z
@@ -2877,7 +2886,7 @@ UpdateState_SandIdling: ; 1a296 (6:6296)
 
 SetState_SandWalking: ; 1a29a (6:629a)
 	xor a
-	ld [wca86], a
+	ld [wWalkVelIndex], a
 
 	ld a, WST_SAND_WALKING
 	ld [wWarioState], a
@@ -2925,8 +2934,8 @@ UpdateState_SandWalking: ; 1a2d6 (6:62d6)
 	farcall Func_19b25
 	ld a, [wc0d7]
 	and a
-	jp nz, Func_11f6
-	farcall Func_198e0
+	jp nz, TriggerRoomTransition
+	farcall CheckCentreCollision
 	ld a, b
 	and a
 	jp z, SetState_SandFalling
@@ -2991,13 +3000,13 @@ SetState_LadderClimbing: ; 1a3bb (6:63bb)
 	ld [wJumpVelTable], a
 	ld [wIsGettingOffLadder], a
 	ld a, -1
-	ld [wca70], a
+	ld [wCollisionBoxBottom], a
 	ld a, -9
-	ld [wca71], a
+	ld [wCollisionBoxLeft], a
 	ld a, 9
-	ld [wca72], a
+	ld [wCollisionBoxRight], a
 	ld a, -27
-	ld [wca6f], a
+	ld [wCollisionBoxTop], a
 	load_gfx WarioLadderGfx
 	call LoadWarioGfx
 	load_oam OAM_155cc
@@ -3014,7 +3023,7 @@ UpdateState_LadderClimbing: ; 1a436 (6:6436)
 	farcall Func_19b25
 	ld a, [wc0d7]
 	and a
-	jp nz, Func_11f6
+	jp nz, TriggerRoomTransition
 
 	ld a, [wSFXLoopCounter]
 	sub 1
@@ -3033,7 +3042,7 @@ UpdateState_LadderClimbing: ; 1a436 (6:6436)
 	ld b, PARTICLE_DUST
 	farcall CreateParticle
 .asm_1a49a
-	call Func_1b3a0
+	call HandleLadderInput
 	ret
 ; 0x1a49e
 
@@ -3051,13 +3060,13 @@ SetState_LadderIdling: ; 1a49e (6:649e)
 	ld [wIsSmashAttacking], a
 	ld [wIsGettingOffLadder], a
 	ld a, -1
-	ld [wca70], a
+	ld [wCollisionBoxBottom], a
 	ld a, -9
-	ld [wca71], a
+	ld [wCollisionBoxLeft], a
 	ld a, 9
-	ld [wca72], a
+	ld [wCollisionBoxRight], a
 	ld a, -27
-	ld [wca6f], a
+	ld [wCollisionBoxTop], a
 	load_gfx WarioLadderGfx
 	call LoadWarioGfx
 	load_oam OAM_155cc
@@ -3079,7 +3088,7 @@ UpdateState_LadderIdling: ; 1a51d (6:651d)
 	farcall Func_19b25
 	ld a, [wc0d7]
 	and a
-	jp nz, Func_11f6
+	jp nz, TriggerRoomTransition
 	ld a, [wLadderInteraction]
 	and a
 	jr nz, .asm_1a549
@@ -3096,7 +3105,7 @@ UpdateState_LadderShakeSlipping: ; 1a55c (6:655c)
 	farcall Func_19b25
 	ld a, [wc0d7]
 	and a
-	jp nz, Func_11f6
+	jp nz, TriggerRoomTransition
 	ld a, [wLadderInteraction]
 	and a
 	jr nz, .asm_1a588
@@ -3111,14 +3120,14 @@ UpdateState_LadderShakeSlipping: ; 1a55c (6:655c)
 	and CAMCONFIG_SCROLLING_MASK
 	cp CAMCONFIG_TRANSITIONS
 	jr c, .asm_1a5b3
-	call Func_114e
+	call GetFloorForYPos
 	ld a, [wFloor]
 	sub c
 	jr z, .asm_1a5b3
 	jr c, .asm_1a5b3
 	call StartDownwardsFloorTransition
 .asm_1a5b3
-	farcall Func_199e9
+	farcall CheckAirborneCollision
 	ld a, b
 	and a
 	jr z, .asm_1a5e1
@@ -3194,7 +3203,7 @@ UpdateState_GettingOffLadder: ; 1a617 (6:6617)
 SetState_LadderSliding: ; 1a66b (6:666b)
 	ld a, WST_LADDER_SLIDING
 	ld [wWarioState], a
-	play_sfx SFX_00C
+	play_sfx SFX_SLIDE
 	xor a
 	ld [wSFXLoopCounter], a
 	ld [wWarioStateCounter], a
@@ -3221,7 +3230,7 @@ UpdateState_LadderSliding: ; 1a6b6 (6:66b6)
 	farcall Func_19b25
 	ld a, [wc0d7]
 	and a
-	jp nz, Func_11f6
+	jp nz, TriggerRoomTransition
 	ld a, [wLadderInteraction]
 	and a
 	jr nz, .asm_1a6e6
@@ -3243,14 +3252,14 @@ UpdateState_LadderSliding: ; 1a6b6 (6:66b6)
 	and CAMCONFIG_SCROLLING_MASK
 	cp CAMCONFIG_TRANSITIONS
 	jr c, .asm_1a719
-	call Func_114e
+	call GetFloorForYPos
 	ld a, [wFloor]
 	sub c
 	jr z, .asm_1a719
 	jr c, .asm_1a719
 	call StartDownwardsFloorTransition
 .asm_1a719
-	farcall Func_199e9
+	farcall CheckAirborneCollision
 
 	ld a, b
 	and a
@@ -3303,7 +3312,7 @@ UpdateState_GrabSlipping: ; 1a7d6 (6:67d6)
 	farcall Func_19b25
 	ld a, [wc0d7]
 	and a
-	jp nz, Func_11f6
+	jp nz, TriggerRoomTransition
 	ld a, [wGrabState]
 	and a
 	jr nz, .asm_1a802
@@ -3318,7 +3327,7 @@ UpdateState_GrabSlipping: ; 1a7d6 (6:67d6)
 	ret
 
 .asm_1a819
-	farcall Func_198e0
+	farcall CheckCentreCollision
 	ld a, [wWarioState]
 	cp WST_GRAB_SLIPPING
 	ret nz ; done if not grab slipping any more
@@ -3329,7 +3338,7 @@ UpdateState_GrabSlipping: ; 1a7d6 (6:67d6)
 	ret
 
 .asm_1a842
-	farcall Func_19734
+	farcall CheckFrontCollision
 	ld a, [wWarioState]
 	cp WST_GRAB_SLIPPING
 	ret nz ; done if not grab slipping any more
@@ -3469,13 +3478,13 @@ SetState_LadderScratching: ; 1ad21 (6:6d21)
 	ld [wWarioState], a
 
 	ld a, -1
-	ld [wca70], a
+	ld [wCollisionBoxBottom], a
 	ld a, -27
-	ld [wca6f], a
+	ld [wCollisionBoxTop], a
 	ld a, -9
-	ld [wca71], a
+	ld [wCollisionBoxLeft], a
 	ld a, 9
-	ld [wca72], a
+	ld [wCollisionBoxRight], a
 	xor a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
@@ -3556,8 +3565,8 @@ UpdateState_FenceShakeSliding: ; 1adfb (6:6dfb)
 	ld a, [wJumpVelTable]
 	and a
 	jr z, .asm_1ae67
-	call Func_1488
-	farcall Func_199e9
+	call ApplyJumpVelocity
+	farcall CheckAirborneCollision
 	ld a, b
 	and a
 	ret z
@@ -3582,13 +3591,13 @@ SetState_FenceMovingVertical: ; 1ae68 (6:6e68)
 	ld [wWarioStateCycles], a
 	ld [wIsSmashAttacking], a
 	ld a, -1
-	ld [wca70], a
+	ld [wCollisionBoxBottom], a
 	ld a, -9
-	ld [wca71], a
+	ld [wCollisionBoxLeft], a
 	ld a, 9
-	ld [wca72], a
+	ld [wCollisionBoxRight], a
 	ld a, -27
-	ld [wca6f], a
+	ld [wCollisionBoxTop], a
 	load_gfx WarioLadderGfx
 	call LoadWarioGfx
 	load_oam OAM_155cc
@@ -3636,13 +3645,13 @@ SetState_FenceIdling: ; 1af22 (6:6f22)
 	ld [wWarioStateCycles], a
 	ld [wIsSmashAttacking], a
 	ld a, -1
-	ld [wca70], a
+	ld [wCollisionBoxBottom], a
 	ld a, -9
-	ld [wca71], a
+	ld [wCollisionBoxLeft], a
 	ld a, 9
-	ld [wca72], a
+	ld [wCollisionBoxRight], a
 	ld a, -27
-	ld [wca6f], a
+	ld [wCollisionBoxTop], a
 	load_gfx WarioLadderGfx
 	call LoadWarioGfx
 	load_oam OAM_155cc
@@ -3675,13 +3684,13 @@ SetState_FenceMovingHorizontal: ; 1afab (6:6fab)
 	ld [wWarioStateCycles], a
 	ld [wIsSmashAttacking], a
 	ld a, -1
-	ld [wca70], a
+	ld [wCollisionBoxBottom], a
 	ld a, -9
-	ld [wca71], a
+	ld [wCollisionBoxLeft], a
 	ld a, 9
-	ld [wca72], a
+	ld [wCollisionBoxRight], a
 	ld a, -27
-	ld [wca6f], a
+	ld [wCollisionBoxTop], a
 
 	xor a
 	ld [wFrameDuration], a
@@ -3731,7 +3740,7 @@ UpdateState_FenceMovingHorizontal: ; 1b00f (6:700f)
 SetState_FenceSliding: ; 1b05e (6:705e)
 	ld a, WST_FENCE_SLIDING
 	ld [wWarioState], a
-	play_sfx SFX_00C
+	play_sfx SFX_SLIDE
 
 	xor a
 	ld [wSFXLoopCounter], a
@@ -3759,7 +3768,7 @@ UpdateState_FenceSliding: ; 1b0a9 (6:70a9)
 	farcall Func_19b25
 	ld a, [wc0d7]
 	and a
-	jp nz, Func_11f6
+	jp nz, TriggerRoomTransition
 	ld a, [wIsNearFence]
 	and a
 	jr nz, .asm_1b0d9
@@ -3783,14 +3792,14 @@ UpdateState_FenceSliding: ; 1b0a9 (6:70a9)
 	and CAMCONFIG_SCROLLING_MASK
 	cp CAMCONFIG_TRANSITIONS
 	jr c, .asm_1b10e
-	call Func_114e
+	call GetFloorForYPos
 	ld a, [wFloor]
 	sub c
 	jr z, .asm_1b10e
 	jr c, .asm_1b10e
 	call StartDownwardsFloorTransition
 .asm_1b10e
-	farcall Func_199e9
+	farcall CheckAirborneCollision
 	ld a, b
 	and a
 	ret z
@@ -3855,7 +3864,7 @@ Func_1b168: ; 1b168 (6:7168)
 .d_down
 	ld b, $01
 	call AddYOffset
-	farcall Func_198e0
+	farcall CheckCentreCollision
 	ld a, b
 	and a
 	jr nz, .asm_1b1ff
@@ -3923,7 +3932,7 @@ Func_1b24f: ; 1b24f (6:724f)
 .d_right
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
-	farcall Func_19734
+	farcall CheckFrontCollision
 	ld a, b
 	and a
 	ret nz
@@ -3934,7 +3943,7 @@ Func_1b24f: ; 1b24f (6:724f)
 .d_left
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
-	farcall Func_19734
+	farcall CheckFrontCollision
 	ld a, b
 	and a
 	ret nz
@@ -3949,19 +3958,19 @@ Func_1b2c0: ; 1b2c0 (6:72c0)
 	jp nz, SetState_SandJumping
 	call Func_1b302
 
-	farcall Func_19734
+	farcall CheckFrontCollision
 	ld a, b
 	and a
 	ret nz
 	farcall Func_2b17a
 
-	ld a, [wca86]
+	ld a, [wWalkVelIndex]
 	cp $04
 	jr c, .asm_1b2f8
 	ld a, $00
-	ld [wca86], a
+	ld [wWalkVelIndex], a
 .asm_1b2f8
-	ld a, [wIsTurningMidAir]
+	ld a, [wIsTurning]
 	and a
 	jr z, .asm_1b301
 	call Func_1a14b
@@ -3970,7 +3979,7 @@ Func_1b2c0: ; 1b2c0 (6:72c0)
 ; 0x1b302
 
 Func_1b302: ; 1b302 (6:7302)
-	farcall Func_198e0
+	farcall CheckCentreCollision
 	ld a, b
 	and a
 	ret nz
@@ -4016,18 +4025,18 @@ Func_1b333: ; 1b333 (6:7333)
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
 
-	farcall Func_19734
+	farcall CheckFrontCollision
 	ld a, b
 	and a
 	ret nz
-	call Func_151e
+	call ApplyWalkVelocity_Right
 	call AddXOffset
 .asm_1b36d
-	ld a, [wca86]
+	ld a, [wWalkVelIndex]
 	cp $04
 	jr c, .asm_1b379
 	ld a, $00
-	ld [wca86], a
+	ld [wWalkVelIndex], a
 .asm_1b379
 	ret
 
@@ -4041,16 +4050,16 @@ Func_1b333: ; 1b333 (6:7333)
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
 
-	farcall Func_19734
+	farcall CheckFrontCollision
 	ld a, b
 	and a
 	ret nz
-	call Func_153f
+	call ApplyWalkVelocity_Left
 	call SubXOffset
 	jr .asm_1b36d
 ; 0x1b3a0
 
-Func_1b3a0: ; 1b3a0 (6:73a0)
+HandleLadderInput: ; 1b3a0 (6:73a0)
 	ld a, [wJoypadDown]
 	and B_BUTTON | D_DOWN
 	cp B_BUTTON | D_DOWN
@@ -4064,7 +4073,7 @@ Func_1b3a0: ; 1b3a0 (6:73a0)
 	jp SetState_LadderIdling
 
 .d_up
-	farcall Func_1996e
+	farcall CheckUpCollision
 	ld a, [wced2]
 	and a
 	ret nz
@@ -4074,7 +4083,7 @@ Func_1b3a0: ; 1b3a0 (6:73a0)
 	and CAMCONFIG_SCROLLING_MASK
 	cp CAMCONFIG_TRANSITIONS
 	jr c, .asm_1b3e6
-	call Func_114e
+	call GetFloorForYPos
 	ld a, [wFloor]
 	sub c
 	jr nc, .asm_1b3e6
@@ -4099,7 +4108,7 @@ Func_1b3a0: ; 1b3a0 (6:73a0)
 	and CAMCONFIG_SCROLLING_MASK
 	cp CAMCONFIG_TRANSITIONS
 	jr c, .asm_1b42b
-	call Func_114e
+	call GetFloorForYPos
 	ld a, [wFloor]
 	sub c
 	jr z, .asm_1b42b
@@ -4111,7 +4120,7 @@ Func_1b3a0: ; 1b3a0 (6:73a0)
 	ld a, [wLadderInteraction]
 	and a
 	jr z, .asm_1b45d
-	farcall Func_198e0
+	farcall CheckCentreCollision
 	ld a, b
 	and a
 	ret z
@@ -4122,7 +4131,7 @@ Func_1b3a0: ; 1b3a0 (6:73a0)
 	ret
 
 .asm_1b45d
-	farcall Func_198e0
+	farcall CheckCentreCollision
 	ld a, b
 	and a
 	jr nz, .asm_1b3ff
@@ -4158,29 +4167,29 @@ Func_1b480: ; 1b480 (6:7480)
 	bit D_RIGHT_F, a
 	jr nz, .asm_1b4d3
 	ld a, -16
-	ld [wca71], a
+	ld [wCollisionBoxLeft], a
 	farcall Func_197b1
 	ld a, b
 	and a
 	jr nz, .asm_1b4eb
 .asm_1b4c6
 	ld a, -9
-	ld [wca71], a
+	ld [wCollisionBoxLeft], a
 	ld a, 9
-	ld [wca72], a
+	ld [wCollisionBoxRight], a
 	jp SetState_GettingOffLadder
 
 .asm_1b4d3
 	ld a, 16
-	ld [wca72], a
+	ld [wCollisionBoxRight], a
 	farcall Func_19741
 	ld a, b
 	and a
 	jr z, .asm_1b4c6
 .asm_1b4eb
 	ld a, -9
-	ld [wca71], a
+	ld [wCollisionBoxLeft], a
 	ld a, 9
-	ld [wca72], a
+	ld [wCollisionBoxRight], a
 	ret
 ; 0x1b4f6

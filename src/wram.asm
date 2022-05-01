@@ -297,6 +297,8 @@ wPalFadeCounter:: ; c187
 
 	ds $1
 
+; bit 0: slope right
+; bit 1: slope left
 wIsStandingOnSlope:: ; c189
 	ds $1
 
@@ -550,23 +552,18 @@ wca6b:: ; ca6b
 wca6c:: ; ca6c
 	ds $1
 
-wca6d:: ; ca6d
+wSwimVelIndex:: ; ca6d
 	ds $1
 
-wca6e:: ; ca6e
+; counter to keep track of
+; Wario's water surface floating movement
+wWaterSurfaceFloatingCounter:: ; ca6e
 	ds $1
 
-wca6f:: ; ca6f
-	ds $1
-
-wca70:: ; ca70
-	ds $1
-
-wca71:: ; ca71
-	ds $1
-
-wca72:: ; ca72
-	ds $1
+wCollisionBoxTop::    ds $1 ; ca6f
+wCollisionBoxBottom:: ds $1 ; ca70
+wCollisionBoxLeft::   ds $1 ; ca71
+wCollisionBoxRight::  ds $1 ; ca72
 
 wIsFloorTransition:: ; ca73
 	ds $1
@@ -581,7 +578,9 @@ wJumpVelTable:: ; ca74
 wJumpVelIndex:: ; ca75
 	ds $1
 
-wca76:: ; ca76
+; if TRUE, then execute the full jump
+; independently of pressing A or not
+wDoFullJump:: ; ca76
 	ds $1
 
 ; whether Wario is jumping upwards or not
@@ -629,7 +628,7 @@ wWarioStateCounter:: ; ca84
 wWarioStateCycles:: ; ca85
 	ds $1
 
-wca86:: ; ca86
+wWalkVelIndex:: ; ca86
 	ds $1
 
 wWarioScreenYPos:: ; ca87
@@ -687,7 +686,7 @@ wTouchState:: ; ca93
 wca94:: ; ca94
 	ds $1
 
-wIsTurningMidAir:: ; ca95
+wIsTurning:: ; ca95
 	ds $1
 
 wIsSmashAttacking:: ; ca96
@@ -712,7 +711,7 @@ wGrabState:: ; ca9a
 wAutoMoveState:: ; ca9b
 	ds $1
 
-wca9c:: ; ca9c
+wSwimmingDirectionInput:: ; ca9c
 	ds $1
 
 wIsRolling:: ; ca9d
@@ -936,14 +935,12 @@ wcede:: ; cede
 wcedf:: ; cedf
 	ds $1
 
-wcee0:: ; cee0
-	ds $1
-
-wcee1:: ; cee1
-	ds $1
-
-wcee2:: ; cee2
-	ds $1
+; uses WATER_CURRENT_* as flags
+; to indicate what direction the
+; current is pulling
+wWaterCurrent::     ds $1 ; cee0
+wLastWaterCurrent:: ds $1 ; cee1
+wCurWaterCurrent::  ds $1 ; cee2
 
 wTransitionParam:: ; cee3
 	ds $1

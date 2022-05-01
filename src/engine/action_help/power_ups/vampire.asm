@@ -31,7 +31,7 @@ VampireActionHelp: ; 1e4580 (79:4580)
 	dw Func_1e465e
 	dw Func_1e4684
 	dw ActionHelp2_FlashAInput
-	dw Func_1e46ab
+	dw ApplyWaterCurrentMovementb
 	dw Func_1e46e8
 	dw Func_1e471c
 	dw Func_1e4759
@@ -166,7 +166,7 @@ Func_1e4684: ; 1e4684 (79:4684)
 	inc [hl]
 	ret
 
-Func_1e46ab: ; 1e46ab (79:46ab)
+ApplyWaterCurrentMovementb: ; 1e46ab (79:46ab)
 	ld a, [wSFXTimer]
 	sub $1
 	ld [wSFXTimer], a

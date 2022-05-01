@@ -29,10 +29,12 @@ if _NARG == 1
 	ld a, BANK(\1)
 	ldh [hCallFuncBank], a
 	hcall \1
+;assert warn, BANK(\1) != BANK(@), "farcall can be call"
 else
 	ld a, \1
 	ldh [hCallFuncBank], a
 	hcall \2
+;assert warn, \1 != BANK(@), "farcall can be call"
 endc
 ENDM
 

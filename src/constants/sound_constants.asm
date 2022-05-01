@@ -63,7 +63,7 @@
 
 	const_def $101
 	const SFX_JUMP                         ; 101
-	const SFX_002                          ; 102
+	const SFX_GROUND_SHAKE                 ; 102
 	const SFX_BUMP                         ; 103
 	const SFX_WALK                         ; 104
 	const SFX_BLOCK_BREAK                  ; 105
@@ -73,8 +73,8 @@
 	const SFX_REGULAR_COIN                 ; 109
 	const SFX_ROLL                         ; 10a
 	const SFX_ZIP_LINE_SLIDE               ; 10b
-	const SFX_00C                          ; 10c
-	const SFX_SLIDE                        ; 10d
+	const SFX_SLIDE                        ; 10c
+	const SFX_SPLASH                       ; 10d
 	const SFX_00E                          ; 10e
 	const SFX_00F                          ; 10f
 	const SFX_LAND                         ; 110

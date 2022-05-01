@@ -779,7 +779,7 @@ ClearTransformationValues:: ; 1079 (0:1079)
 	ld [wTransformationDuration + 1], a
 	ld [wAutoMoveState], a
 	ld [wInvisibleFrame], a
-	ld [wca9c], a
+	ld [wSwimmingDirectionInput], a
 	ret
 
 ; restores the palettes after
@@ -858,7 +858,7 @@ ClearTransformationValues:: ; 1079 (0:1079)
 	INCROM $10fc, $1146
 
 Func_1146:: ; 1146 (0:1146)
-	call Func_114e
+	call GetFloorForYPos
 	ld a, c
 	ld [wFloor], a
 	ret
@@ -871,7 +871,7 @@ Func_1146:: ; 1146 (0:1146)
 ; 3 if $180 <= ypos < $200
 ; 2 if $200 <= ypos < $280
 ; 1 if $280 <= ypos < $300
-Func_114e:: ; 114e (0:114e)
+GetFloorForYPos:: ; 114e (0:114e)
 	ld a, [wYPosHi]
 	dec a
 	jr z, .asm_115b ; == 1
@@ -901,7 +901,7 @@ Func_1197:: ; 1197 (0:1197)
 	and CAMCONFIG_SCROLLING_MASK
 	cp CAMCONFIG_TRANSITIONS
 	jr c, .asm_11ad
-	call Func_114e
+	call GetFloorForYPos
 	ld a, [wFloor]
 	sub c
 	jr c, .asm_11ab
@@ -950,14 +950,14 @@ StartUpwardsFloorTransition:: ; 11d6 (0:11d6)
 	ret
 ; 0x11f6
 
-Func_11f6:: ; 11f6 (0:11f6)
+TriggerRoomTransition:: ; 11f6 (0:11f6)
 	xor a
 	ld [wGrabState], a
 	ld [wRoomPalCycleDuration], a
 	ld [wRoomAnimatedPalsEnabled], a
-	ld [wcee0], a
-	ld [wcee1], a
-	ld [wcee2], a
+	ld [wWaterCurrent], a
+	ld [wLastWaterCurrent], a
+	ld [wCurWaterCurrent], a
 	ld [wcac3], a
 	ld [wIsBossBattle], a
 	inc a ; TRUE
@@ -1025,7 +1025,7 @@ AddYOffset:: ; 1287 (0:1287)
 	ld [wc0c2], a
 ;	fallthrough
 
-Func_128e:: ; 128e (0:128e)
+AddYOffset_Sprite:: ; 128e (0:128e)
 	ld a, [wYPosLo]
 	add b
 	ld [wYPosLo], a
@@ -1042,7 +1042,7 @@ SubYOffset:: ; 129e (0:129e)
 	ld [wc0c2], a
 ;	fallthrough
 
-Func_12a5:: ; 12a5 (0:12a5)
+SubYOffset_Sprite:: ; 12a5 (0:12a5)
 	ld a, [wYPosLo]
 	sub b
 	ld [wYPosLo], a
@@ -1308,36 +1308,36 @@ UpdateObjAnim:: ; 145a (0:145a)
 	ret
 ; 0x1488
 
-Func_1488:: ; 1488 (0:1488)
+ApplyJumpVelocity:: ; 1488 (0:1488)
 	ld a, [wJumpVelTable]
 	dec a
-	jr z, .knock_back
+	jr z, .knock_back ; JUMP_VEL_KNOCK_BACK
 	dec a
-	jr z, .normal_jump
+	jr z, .normal_jump ; JUMP_VEL_NORMAL
 	dec a
-	jr z, .high_jump
+	jr z, .high_jump ; JUMP_VEL_HIGH_JUMP
 	dec a
-	jr z, .asm_14a0
+	jr z, .bouncy_jump ; JUMP_VEL_BOUNCY_JUMP
 	dec a
-	jr z, .asm_149b
+	jr z, .bouncy_high_jump ; JUMP_VEL_BOUNCY_HIGH_JUMP
 	ret
 
-.asm_149b
+.bouncy_high_jump
 	ld hl, JumpVelTable_BouncyHighJump
-	jr .asm_14b2
-.asm_14a0
+	jr .got_jump_table
+.bouncy_jump
 	ld hl, JumpVelTable_BouncyJump
-	jr .asm_14b2
+	jr .got_jump_table
 .high_jump
 	ld hl, JumpVelTable_HighJump
-	jr .asm_14b2
+	jr .got_jump_table
 .normal_jump
 	ld hl, JumpVelTable_Normal
-	jr .asm_14b2
+	jr .got_jump_table
 .knock_back
 	ld hl, JumpVelTable_KnockBack
-.asm_14b2
 
+.got_jump_table
 	ld a, [wJumpVelIndex]
 	ld e, a
 	ld d, $00
@@ -1357,7 +1357,7 @@ Func_1488:: ; 1488 (0:1488)
 
 .falling
 	xor a
-	ld [wca76], a
+	ld [wDoFullJump], a
 	ld b, [hl]
 	call AddYOffset
 	ld hl, wJumpVelIndex
@@ -1366,17 +1366,16 @@ Func_1488:: ; 1488 (0:1488)
 	cp MAX_JUMP_VEL_INDEX
 	jr c, .done
 	ld [hl], MAX_JUMP_VEL_INDEX
-
 .done
 	ret
 ; 0x14de
 
-Func_14de:: ; 14de (0:14de)
+TriggerDownwardsFloorTransition:: ; 14de (0:14de)
 	ld a, [wCameraConfigFlags]
 	and CAMCONFIG_SCROLLING_MASK
 	cp CAMCONFIG_TRANSITIONS
 	jr c, .done
-	call Func_114e
+	call GetFloorForYPos
 	ld a, [wFloor]
 	sub c
 	jr z, .done
@@ -1386,81 +1385,80 @@ Func_14de:: ; 14de (0:14de)
 	ret
 ; 0x14f6
 
-Func_14f6:: ; 14f6 (0:14f6)
+TriggerFloorTransition:: ; 14f6 (0:14f6)
 	update_pos_y
-;	fallthrough
-
-Func_1501:: ; 1501 (0:1501)
+TriggerFloorTransition_SkipUpdateYPos:: ; 1501 (0:1501)
 	ld a, [wCameraConfigFlags]
 	and CAMCONFIG_SCROLLING_MASK
 	cp CAMCONFIG_TRANSITIONS
 	jr c, .done
-	call Func_114e
+	call GetFloorForYPos
 	ld a, [wFloor]
 	sub c
 	jr z, .done
-	jr c, .asm_151a
+	jr c, .upwards
 	call StartDownwardsFloorTransition
 	jr .done
-.asm_151a
+.upwards
 	call StartUpwardsFloorTransition
 .done
 	ret
 ; 0x151e
 
-Func_151e:: ; 151e (0:151e)
+ApplyWalkVelocity_Right:: ; 151e (0:151e)
 	ld a, [wDirection]
 	and a
 	jr nz, .dir_right
 ; dir left
 	xor a
-	ld [wca86], a
-	jr Func_1554
+	ld [wWalkVelIndex], a
+	jr ApplyWalkVelocity
 
 .dir_right
 	ld a, [wIsStandingOnSlope]
 	bit 0, a
-	jr z, Func_1554
+	jr z, ApplyWalkVelocity
 ;	fallthrough
 
-Func_1531:: ; 1531 (0:1531)
-	ld a, [wca86]
+ApplySlopedWalkVelocity:: ; 1531 (0:1531)
+	ld a, [wWalkVelIndex]
 	cp $08
-	jr c, Func_1554
+	jr c, ApplyWalkVelocity
 	ld a, $04
-	ld [wca86], a
-	jr Func_1554
+	ld [wWalkVelIndex], a
+	jr ApplyWalkVelocity
 ; 0x153f
 
-Func_153f:: ; 153f (0:153f)
+ApplyWalkVelocity_Left:: ; 153f (0:153f)
 	ld a, [wDirection]
 	and a
 	jr z, .dir_left
+; dir right
 	xor a
-	ld [wca86], a
-	jr Func_1554
+	ld [wWalkVelIndex], a
+	jr ApplyWalkVelocity
+
 .dir_left
 	ld a, [wIsStandingOnSlope]
 	bit 1, a
-	jr z, Func_1554
-	jr Func_1531
+	jr z, ApplyWalkVelocity
+	jr ApplySlopedWalkVelocity
 ; 0x1554
 
-Func_1554:: ; 1554 (0:1554)
-	ld a, [wca86]
+ApplyWalkVelocity:: ; 1554 (0:1554)
+	ld a, [wWalkVelIndex]
 	ld e, a
 	ld d, $00
-	ld hl, Data_196f
+	ld hl, WalkVelTable
 	add hl, de
 	ld b, [hl]
-	ld hl, wca86
+	ld hl, wWalkVelIndex
 	ld a, [hl]
 	cp $1b
-	jr z, .asm_1569
+	jr z, .cap
 	inc [hl]
 	ret
-
-.asm_1569
+.cap
 	and $fc
 	ld [hl], a
 	ret
@@ -1697,12 +1695,11 @@ IsOnSlipperyGround:: ; 1700 (0:1700)
 	xor a
 	ld [wIsOnSlipperyGround], a
 
-	ld a, [wca71]
+	ld a, [wCollisionBoxLeft]
 	cpl
 	inc a
-	sub $03
-	ld c, a ; - wca71 - 3
-
+	sub 3
+	ld c, a ; - wCollisionBoxLeft - 3
 	ld hl, wXPosLo
 	ld de, hXPosLo
 	ld a, [hld]
@@ -1723,10 +1720,9 @@ IsOnSlipperyGround:: ; 1700 (0:1700)
 	and a
 	ret nz
 
-	ld a, [wca72]
-	sub $03
-	ld c, a ; wca72 - 3
-
+	ld a, [wCollisionBoxRight]
+	sub 3
+	ld c, a ; wCollisionBoxRight - 3
 	ld hl, wXPosLo
 	ld de, hXPosLo
 	ld a, [hld]
@@ -1752,20 +1748,20 @@ Func_1762:: ; 1762 (0:1762)
 	ld a, [wJumpVelIndex]
 	cp FALLING_JUMP_VEL_INDEX
 	jr nc, .asm_1776
-	ld a, [wca86]
+	ld a, [wWalkVelIndex]
 	cp $10
 	jr c, .asm_1775
 	ld a, $0c
-	ld [wca86], a
+	ld [wWalkVelIndex], a
 .asm_1775
 	ret
 
 .asm_1776
-	ld a, [wca86]
+	ld a, [wWalkVelIndex]
 	cp $08
 	jr c, .asm_1782
 	ld a, $04
-	ld [wca86], a
+	ld [wWalkVelIndex], a
 .asm_1782
 	ret
 ; 0x1783
@@ -2166,8 +2162,35 @@ JumpVelTable_BouncyHighJump:: ; 1947 (0:1947)
 	db  4 ; $27
 ; 0x196f
 
-Data_196f:: ; 196f (0:196f)
-	db $00, $01, $00, $01, $01, $01, $01, $01, $01, $01, $02, $02, $02, $02, $02, $02, $02, $02, $03, $03, $03, $03, $03, $03, $04, $04, $04, $04
+WalkVelTable:: ; 196f (0:196f)
+	db 0
+	db 1
+	db 0
+	db 1
+	db 1
+	db 1
+	db 1
+	db 1
+	db 1
+	db 1
+	db 2
+	db 2
+	db 2
+	db 2
+	db 2
+	db 2
+	db 2
+	db 2
+	db 3
+	db 3
+	db 3
+	db 3
+	db 3
+	db 3
+	db 4
+	db 4
+	db 4
+	db 4
 ; 0x198b
 
 ; treasure IDs of each level

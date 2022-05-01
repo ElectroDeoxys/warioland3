@@ -304,7 +304,7 @@ InitIntroSequence: ; 405f (1:405f)
 ; 0x41cf
 
 ; phase 1 of Intro sequence has Wario's plane
-; fly to the center of the screen from the right
+; fly to the centre of the screen from the right
 ; then exiting after hovering for a while
 IntroSequencePhase1: ; 41cf (1:41cf)
 	ld a, [wceef]

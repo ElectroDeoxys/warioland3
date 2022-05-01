@@ -270,10 +270,10 @@ Func_80aa: ; 80aa (2:40aa)
 	ld [wRoomPalCycleDuration], a
 	ld [wRoomAnimatedTilesEnabled], a
 	ld [wRoomAnimatedPalsEnabled], a
-	ld [wcee0], a
-	ld [wcee1], a
-	ld [wcee2], a
-	ld [wca9c], a
+	ld [wWaterCurrent], a
+	ld [wLastWaterCurrent], a
+	ld [wCurWaterCurrent], a
+	ld [wSwimmingDirectionInput], a
 
 	ld hl, wGameModeFlags
 	ld a, [wLevelEndScreen]
@@ -791,22 +791,22 @@ Func_8747: ; 8747 (2:4747)
 	ld [wc0e3], a
 	ld [wc0e4], a
 	ld [wcac3], a
-	ld [wca6d], a
-	ld [wca6e], a
+	ld [wSwimVelIndex], a
+	ld [wWaterSurfaceFloatingCounter], a
 	call ClearTransformationValues
 	ld [wInvisibleFrame], a
 	ld [wcac8], a
 	ld [wIsOnSteppableObject], a
 	ld [wGroundShakeCounter], a
 	ld [wc0bc], a
-	ld [wca9c], a
+	ld [wSwimmingDirectionInput], a
 	ld [wAnimatedTilesFrameDuration], a
 	ld [wRoomPalCycleDuration], a
 	ld [wRoomAnimatedTilesEnabled], a
 	ld [wRoomAnimatedPalsEnabled], a
-	ld [wcee0], a
-	ld [wcee1], a
-	ld [wcee2], a
+	ld [wWaterCurrent], a
+	ld [wLastWaterCurrent], a
+	ld [wCurWaterCurrent], a
 
 	ldh a, [rSVBK]
 	push af

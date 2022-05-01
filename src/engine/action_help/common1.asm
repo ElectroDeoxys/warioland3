@@ -610,7 +610,7 @@ ActionHelp_ShowWarioGroundPound: ; 1fb94c (7e:794c)
 ; 0x1fb961
 
 ActionHelp_ShowWarioGroundShake: ; 1fb961 (7e:7961)
-	play_sfx SFX_002
+	play_sfx SFX_GROUND_SHAKE
 
 	ld hl, wActionHelpWarioObjFramesetOffset
 	xor a
@@ -704,7 +704,7 @@ ActionHelp_ShowWarioWalk: ; 1fb9ca (7e:79ca)
 ; 0x1fba09
 
 ActionHelp_ShowWarioSwim: ; 1fba09 (7e:7a09)
-	play_sfx SFX_SLIDE
+	play_sfx SFX_SPLASH
 
 	ld a, BANK(WarioSwimGfx)
 	ld [wPendingDMASourceBank], a

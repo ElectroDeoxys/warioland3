@@ -77,13 +77,13 @@ SetState_IceSkatinStart: ; 1ec08c (7b:408c)
 	ld [wWarioState], a
 
 	ld a, -1
-	ld [wca70], a
+	ld [wCollisionBoxBottom], a
 	ld a, -27
-	ld [wca6f], a
+	ld [wCollisionBoxTop], a
 	ld a, -9
-	ld [wca71], a
+	ld [wCollisionBoxLeft], a
 	ld a, 9
-	ld [wca72], a
+	ld [wCollisionBoxRight], a
 
 	xor a
 	ld [wInvisibleFrame], a
@@ -129,7 +129,7 @@ UpdateState_IceSkatinStart: ; 1ec124 (7b:4124)
 	ret z
 
 	xor a
-	ld [wca86], a
+	ld [wWalkVelIndex], a
 ;	fallthrough
 
 SetState_IceSkatin: ; 1ec13c (7b:413c)
@@ -157,8 +157,8 @@ UpdateState_IceSkatin: ; 1ec177 (7b:4177)
 	farcall Func_19b25
 	ld a, [wc0d7]
 	and a
-	jp nz, Func_11f6
-	farcall Func_19734
+	jp nz, TriggerRoomTransition
+	farcall CheckFrontCollision
 	ld a, b
 	and a
 	jr nz, Func_1ec215
@@ -176,20 +176,20 @@ UpdateState_IceSkatin: ; 1ec177 (7b:4177)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1ec1d4
-	call Func_153f
+	call ApplyWalkVelocity_Left
 	call SubXOffset
 	jr .asm_1ec1da
 .asm_1ec1d4
-	call Func_151e
+	call ApplyWalkVelocity_Right
 	call AddXOffset
 .asm_1ec1da
-	ld a, [wca86]
+	ld a, [wWalkVelIndex]
 	cp $14
 	jr c, .asm_1ec1e6
 	ld a, $10
-	ld [wca86], a
+	ld [wWalkVelIndex], a
 .asm_1ec1e6
-	farcall Func_198e0
+	farcall CheckCentreCollision
 	ld a, b
 	and a
 	jr z, .asm_1ec205
@@ -223,45 +223,45 @@ UpdateState_IceSkatinAirborne: ; 1ec22b (7b:422b)
 	farcall Func_19b25
 	ld a, [wc0d7]
 	and a
-	jp nz, Func_11f6
+	jp nz, TriggerRoomTransition
 	ld a, [wWaterInteraction]
 	and a
 	jp nz, SetState_IceSkatinCrash
 
-	farcall Func_19734
+	farcall CheckFrontCollision
 	ld a, b
 	and a
 	jr nz, Func_1ec215
 	update_anim_2
-	call Func_1488
-	farcall Func_2b1a6
-	ld a, [wca86]
+	call ApplyJumpVelocity
+	farcall HandleWalk
+	ld a, [wWalkVelIndex]
 	cp $14
 	jr c, .asm_1ec288
 	ld a, $10
-	ld [wca86], a
+	ld [wWalkVelIndex], a
 .asm_1ec288
 	ld a, [wWarioState]
 	cp WST_ICE_SKATIN_AIRBORNE
 	ret nz ; done if not ice skatin airborne any more
 
-	farcall Func_199e9
+	farcall CheckAirborneCollision
 	ld a, b
 	and a
 	jr nz, .asm_1ec2aa
 	ld a, [wWarioState]
 	cp WST_ICE_SKATIN_AIRBORNE
 	ret nz ; done if not ice skatin airborne any more
-	jp Func_14de
+	jp TriggerDownwardsFloorTransition
 
 .asm_1ec2aa
-	call Func_14f6
+	call TriggerFloorTransition
 	ld a, [wWarioState]
 	cp WST_ICE_SKATIN_AIRBORNE
 	ret nz ; done if not ice skatin airborne any more
 
 	ld a, $10
-	ld [wca86], a
+	ld [wWalkVelIndex], a
 	jp SetState_IceSkatin
 ; 0x1ec2bb
 
@@ -336,13 +336,13 @@ SetState_UnknownC4: ; 1ec749 (7b:4749)
 	ld [wWarioState], a
 
 	ld a, $ff
-	ld [wca70], a
+	ld [wCollisionBoxBottom], a
 	ld a, $e5
-	ld [wca6f], a
+	ld [wCollisionBoxTop], a
 	ld a, $f7
-	ld [wca71], a
+	ld [wCollisionBoxLeft], a
 	ld a, $09
-	ld [wca72], a
+	ld [wCollisionBoxRight], a
 
 	xor a
 	ld [wWarioStateCounter], a
@@ -415,13 +415,13 @@ SetState_SplitHit: ; 1ece9e (7b:4e9e)
 	ld [wWarioState], a
 
 	ld a, $ff
-	ld [wca70], a
+	ld [wCollisionBoxBottom], a
 	ld a, $e5
-	ld [wca6f], a
+	ld [wCollisionBoxTop], a
 	ld a, $f7
-	ld [wca71], a
+	ld [wCollisionBoxLeft], a
 	ld a, $09
-	ld [wca72], a
+	ld [wCollisionBoxRight], a
 
 	xor a
 	ld [wWarioStateCounter], a
@@ -492,18 +492,18 @@ UpdateState_SplitKnockedBack: ; 1ecf86 (7b:4f86)
 	farcall Func_19b25
 	ld a, [wc0d7]
 	and a
-	jp nz, Func_11f6
+	jp nz, TriggerRoomTransition
 	ld a, [wWaterInteraction]
 	and a
 	jp nz, RecoverFromTransformation
-	call Func_1488
-	farcall Func_199e9
+	call ApplyJumpVelocity
+	farcall CheckAirborneCollision
 	ld a, b
 	and a
 	jr nz, .play_sfx
-	farcall Func_2b1a6
+	farcall HandleWalk
 	call Func_1762
-	jp Func_14de
+	jp TriggerDownwardsFloorTransition
 
 .play_sfx
 	play_sfx SFX_044
@@ -524,7 +524,7 @@ UpdateState_SplitKnockedBack: ; 1ecf86 (7b:4f86)
 ;	fallthrough
 
 SetState_Splitting: ; 1ed008 (7b:5008)
-	call Func_14f6
+	call TriggerFloorTransition
 	ld a, WST_SPLITTING
 	ld [wWarioState], a
 	xor a
@@ -539,7 +539,7 @@ UpdateState_Splitting: ; 1ed018 (7b:5018)
 	and a
 	jr nz, .asm_1ed09b
 
-	farcall Func_198e0
+	farcall CheckCentreCollision
 	ld a, b
 	and a
 	ret nz
@@ -556,7 +556,7 @@ UpdateState_Splitting: ; 1ed018 (7b:5018)
 	farcall Func_19b25
 	ld a, [wc0d7]
 	and a
-	jp nz, Func_11f6
+	jp nz, TriggerRoomTransition
 	ld a, [wWaterInteraction]
 	and a
 	jp nz, RecoverFromTransformation
@@ -564,12 +564,12 @@ UpdateState_Splitting: ; 1ed018 (7b:5018)
 	ld a, [wAnimationHasFinished]
 	and a
 	jr nz, .asm_1ed09b
-	call Func_1488
-	farcall Func_199e9
+	call ApplyJumpVelocity
+	farcall CheckAirborneCollision
 	ld a, b
 	and a
 	jp nz, SetState_Splitting
-	jp Func_14de
+	jp TriggerDownwardsFloorTransition
 
 .asm_1ed09b
 	ld a, [wDirection]
@@ -582,13 +582,13 @@ SetState_Fan: ; 1ed0a6 (7b:50a6)
 	ld a, WST_FAN
 	ld [wWarioState], a
 	ld a, -1
-	ld [wca70], a
+	ld [wCollisionBoxBottom], a
 	ld a, -27
-	ld [wca6f], a
+	ld [wCollisionBoxTop], a
 	ld a, -9
-	ld [wca71], a
+	ld [wCollisionBoxLeft], a
 	ld a, 9
-	ld [wca72], a
+	ld [wCollisionBoxRight], a
 
 	xor a
 	ld [wSFXLoopCounter], a
@@ -630,7 +630,7 @@ SetState_BlindIdling: ; 1ed331 (7b:5331)
 
 	xor a
 	ld [wSFXLoopCounter], a
-	ld [wca86], a
+	ld [wWalkVelIndex], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wGrabState], a
@@ -643,13 +643,13 @@ SetState_BlindIdling: ; 1ed331 (7b:5331)
 	ld [wInvisibleFrame], a
 
 	ld a, -1
-	ld [wca70], a
+	ld [wCollisionBoxBottom], a
 	ld a, -27
-	ld [wca6f], a
+	ld [wCollisionBoxTop], a
 	ld a, -9
-	ld [wca71], a
+	ld [wCollisionBoxLeft], a
 	ld a, 9
-	ld [wca72], a
+	ld [wCollisionBoxRight], a
 
 	xor a ; unnecessary
 	call UpdateLevelMusic
@@ -683,7 +683,7 @@ UpdateState_BlindIdling: ; 1ed3cd (7b:53cd)
 	cp WST_BLIND_IDLING
 	ret nz ; done if not blind idling any more
 
-	farcall Func_198e0
+	farcall CheckCentreCollision
 	ld a, b
 	and a
 	jp z, Func_1ed548
@@ -692,7 +692,7 @@ UpdateState_BlindIdling: ; 1ed3cd (7b:53cd)
 
 SetState_BlindWalking: ; 1ed3fa (7b:53fa)
 	xor a
-	ld [wca86], a
+	ld [wWalkVelIndex], a
 	ld a, WST_BLIND_WALKING
 	ld [wWarioState], a
 
@@ -729,10 +729,10 @@ UpdateState_BlindWalking: ; 1ed469 (7b:5469)
 	farcall Func_19b25
 	ld a, [wc0d7]
 	and a
-	jp nz, Func_11f6
+	jp nz, TriggerRoomTransition
 	update_anim_1
 
-	farcall Func_19734
+	farcall CheckFrontCollision
 	ld a, [wWarioState]
 	cp WST_BLIND_WALKING
 	ret nz ; done if not blind walking any more
@@ -745,7 +745,7 @@ UpdateState_BlindWalking: ; 1ed469 (7b:5469)
 	cp WST_BLIND_WALKING
 	ret nz ; done if not blind walking any more
 
-	farcall Func_198e0
+	farcall CheckCentreCollision
 	ld a, b
 	and a
 	jp z, Func_1ed548
@@ -849,11 +849,11 @@ UpdateState_BlindAirborne: ; 1ed5e2 (7b:55e2)
 	farcall Func_19b25
 	ld a, [wc0d7]
 	and a
-	jp nz, Func_11f6
+	jp nz, TriggerRoomTransition
 	ld a, [wWaterInteraction]
 	and a
 	jp nz, RecoverFromTransformation
-	farcall Func_19734
+	farcall CheckFrontCollision
 	ld a, [wWarioState]
 	cp WST_BLIND_AIRBORNE
 	ret nz ; done if not blind airborne any more
@@ -869,7 +869,7 @@ UpdateState_BlindAirborne: ; 1ed5e2 (7b:55e2)
 	ld a, [wJumpVelIndex]
 	cp FALLING_JUMP_VEL_INDEX
 	jr nc, .asm_1ed644
-	farcall Func_1996e
+	farcall CheckUpCollision
 	ld a, b
 	and a
 	ret z
@@ -879,13 +879,13 @@ UpdateState_BlindAirborne: ; 1ed5e2 (7b:55e2)
 	jp Func_1ed548
 
 .asm_1ed644
-	farcall Func_199e9
+	farcall CheckAirborneCollision
 	ld a, b
 	and a
 	jr nz, .asm_1ed65a
-	jp Func_14de
+	jp TriggerDownwardsFloorTransition
 .asm_1ed65a
-	call Func_14f6
+	call TriggerFloorTransition
 	jp SetState_BlindIdling
 ; 0x1ed660
 
@@ -895,7 +895,7 @@ SetState_UnknownE0: ; 1ed660 (7b:5660)
 
 	xor a
 	ld [wSFXLoopCounter], a
-	ld [wca86], a
+	ld [wWalkVelIndex], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wGrabState], a
@@ -913,7 +913,7 @@ SetState_UnknownE0: ; 1ed660 (7b:5660)
 	xor a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
-	ld [wIsTurningMidAir], a
+	ld [wIsTurning], a
 
 	ld hl, Pals_c800
 	call SetWarioPal
@@ -961,7 +961,7 @@ SetState_UnknownE1: ; 1ed738 (7b:5738)
 
 	xor a
 	ld [wSFXLoopCounter], a
-	ld [wca86], a
+	ld [wWalkVelIndex], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld [wGrabState], a
@@ -973,13 +973,13 @@ SetState_UnknownE1: ; 1ed738 (7b:5738)
 	ld [wJumpVelIndex], a
 
 	ld a, -1
-	ld [wca70], a
+	ld [wCollisionBoxBottom], a
 	ld a, -15
-	ld [wca6f], a
+	ld [wCollisionBoxTop], a
 	ld a, -9
-	ld [wca71], a
+	ld [wCollisionBoxLeft], a
 	ld a, 9
-	ld [wca72], a
+	ld [wCollisionBoxRight], a
 
 	xor a
 	ld [wFrameDuration], a
@@ -1048,13 +1048,13 @@ SetState_MagicRising: ; 1ed8aa (7b:58aa)
 	ld [wWarioState], a
 
 	ld a, -1
-	ld [wca70], a
+	ld [wCollisionBoxBottom], a
 	ld a, -27
-	ld [wca6f], a
+	ld [wCollisionBoxTop], a
 	ld a, -9
-	ld [wca71], a
+	ld [wCollisionBoxLeft], a
 	ld a, 9
-	ld [wca72], a
+	ld [wCollisionBoxRight], a
 
 	xor a
 	ld [wSFXLoopCounter], a
@@ -1095,7 +1095,7 @@ SetState_MagicRising: ; 1ed8aa (7b:58aa)
 
 UpdateState_MagicRising: ; 1ed972 (7b:5972)
 	farcall Func_19b25
-	farcall Func_1996e
+	farcall CheckUpCollision
 	ld a, b
 	and a
 	jr nz, .asm_1ed9d5
@@ -1119,7 +1119,7 @@ UpdateState_MagicRising: ; 1ed972 (7b:5972)
 	and CAMCONFIG_SCROLLING_MASK
 	cp CAMCONFIG_TRANSITIONS
 	jr c, .asm_1ed9d4
-	call Func_114e
+	call GetFloorForYPos
 	ld a, [wFloor]
 	sub c
 	jr nc, .asm_1ed9d4
@@ -1158,13 +1158,13 @@ SetState_BallStart: ; 1eda21 (7b:5a21)
 	call UpdateLevelMusic
 
 	ld a, -1
-	ld [wca70], a
+	ld [wCollisionBoxBottom], a
 	ld a, -20
-	ld [wca6f], a
+	ld [wCollisionBoxTop], a
 	ld a, -9
-	ld [wca71], a
+	ld [wCollisionBoxLeft], a
 	ld a, 9
-	ld [wca72], a
+	ld [wCollisionBoxRight], a
 
 	xor a
 	ld [wGrabState], a
@@ -1208,8 +1208,8 @@ SetState_BallStart: ; 1eda21 (7b:5a21)
 	call hCallFunc
 	ret
 
-	call Func_1488
-	farcall Func_199e9
+	call ApplyJumpVelocity
+	farcall CheckAirborneCollision
 	ld a, b
 	and a
 	ret z
@@ -1307,7 +1307,7 @@ UpdateState_BallAirborne: ; 1edba0 (7b:5ba0)
 	ld a, [wJumpVelIndex]
 	cp FALLING_JUMP_VEL_INDEX
 	ret c
-	farcall Func_199e9
+	farcall CheckAirborneCollision
 	ld a, b
 	and a
 	ret z
@@ -1428,7 +1428,7 @@ UpdateState_BallShot: ; 1edc15 (7b:5c15)
 UpdateState_BallThrown: ; 1edcd0 (7b:5cd0)
 	update_anim_3
 
-	call Func_1488
+	call ApplyJumpVelocity
 	ld a, [wJumpVelIndex]
 	cp FALLING_JUMP_VEL_INDEX
 	jr nc, .falling
@@ -1440,7 +1440,7 @@ UpdateState_BallThrown: ; 1edcd0 (7b:5cd0)
 .falling
 	ld b, $02
 	call SubXOffset
-	farcall Func_199e9
+	farcall CheckAirborneCollision
 	ld a, b
 	and a
 	ret z
@@ -1497,7 +1497,7 @@ UpdateState_BallSentUpwards: ; 1edd7e (7b:5d7e)
 ; rising
 	ld b, $03
 	call SubYOffset
-	farcall Func_1996e
+	farcall CheckUpCollision
 	ld a, b
 	and a
 	jp z, Func_1197
@@ -1508,8 +1508,8 @@ UpdateState_BallSentUpwards: ; 1edd7e (7b:5d7e)
 	ret
 
 .falling
-	call Func_1488
-	farcall Func_199e9
+	call ApplyJumpVelocity
+	farcall CheckAirborneCollision
 	ld a, b
 	and a
 	ret z
@@ -1600,12 +1600,12 @@ Func_1edfa4: ; 1edfa4 (7b:5fa4)
 	ld a, [wDirection]
 	and a
 	jr z, .asm_1edfdc
-	farcall Func_1f11b
-	ld a, [wca86]
+	farcall WalkIfPossible_Right
+	ld a, [wWalkVelIndex]
 	cp $10
 	jr c, .asm_1edfdb
 	ld a, $0c
-	ld [wca86], a
+	ld [wWalkVelIndex], a
 .asm_1edfdb
 	ret
 
@@ -1618,12 +1618,12 @@ Func_1edfa4: ; 1edfa4 (7b:5fa4)
 	ld a, [wDirection]
 	cp DIRECTION_LEFT
 	jr nz, .asm_1ee007
-	farcall Func_1f135
-	ld a, [wca86]
+	farcall WalkIfPossible_Left
+	ld a, [wWalkVelIndex]
 	cp $10
 	jr c, .asm_1ee006
 	ld a, $0c
-	ld [wca86], a
+	ld [wWalkVelIndex], a
 .asm_1ee006
 	ret
 
@@ -1634,25 +1634,25 @@ Func_1edfa4: ; 1edfa4 (7b:5fa4)
 ; 0x1ee00f
 
 Func_1ee00f: ; 1ee00f (7b:600f)
-	call Func_1488
+	call ApplyJumpVelocity
 	farcall Func_2b17a
-	ld a, [wca86]
+	ld a, [wWalkVelIndex]
 	cp $10
 	jr c, .asm_1ee02d
 	ld a, $0c
-	ld [wca86], a
+	ld [wWalkVelIndex], a
 .asm_1ee02d
 	ret
 ; 0x1ee02e
 
 Func_1ee02e: ; 1ee02e (7b:602e)
-	call Func_1488
-	farcall Func_2b1a6
-	ld a, [wca86]
+	call ApplyJumpVelocity
+	farcall HandleWalk
+	ld a, [wWalkVelIndex]
 	cp $08
 	jr c, .asm_1ee04c
 	ld a, $04
-	ld [wca86], a
+	ld [wWalkVelIndex], a
 .asm_1ee04c
 	ret
 ; 0x1ee04d

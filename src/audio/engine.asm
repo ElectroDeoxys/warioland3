@@ -3380,7 +3380,7 @@ SoundHeaders: ; 3155e (c:555e)
 	filler_sounds 198
 
 	sfx $785b, $0e, $00, 220, CHAN5, 1 ; SFX_JUMP
-	sfx $792e, $0e, $00, 237, CHAN8, 1 ; SFX_002
+	sfx $792e, $0e, $00, 237, CHAN8, 1 ; SFX_GROUND_SHAKE
 	sfx $793f, $0e, $00, 236, CHAN5, 1 ; SFX_BUMP
 	sfx $7958, $0e, $00, 226, CHAN8, 1 ; SFX_WALK
 	sfx $7981, $0e, $00, 236, CHAN8, 1 ; SFX_BLOCK_BREAK
@@ -3390,8 +3390,8 @@ SoundHeaders: ; 3155e (c:555e)
 	sfx $7a24, $0e, $00, 235, CHAN5, 1 ; SFX_REGULAR_COIN
 	sfx $7a44, $0e, $00, 230, CHAN5, 1 ; SFX_ROLL
 	sfx $7a55, $0e, $00, 230, CHAN8, 1 ; SFX_ZIP_LINE_SLIDE
-	sfx $7a68, $0e, $00, 237, CHAN5, 1 ; SFX_00C
-	sfx $7aa6, $0e, $00, 235, CHAN5, 2 ; SFX_SLIDE
+	sfx $7a68, $0e, $00, 237, CHAN5, 1 ; SFX_SLIDE
+	sfx $7aa6, $0e, $00, 235, CHAN5, 2 ; SFX_SPLASH
 	sfx $7ac7, $0e, $00, 228, CHAN5, 1 ; SFX_00E
 	sfx $7add, $0e, $00, 210, CHAN5, 1 ; SFX_00F
 	sfx $7af2, $0e, $00, 228, CHAN8, 1 ; SFX_LAND
