@@ -85,6 +85,7 @@ Func_8024: ; 8024 (2:4024)
 Func_80aa: ; 80aa (2:40aa)
 	ld a, TRUE
 	ld [wRoomAnimatedPalsEnabled], a
+
 	farcall UpdateParticles
 
 	ld a, [wCameraConfigFlags]

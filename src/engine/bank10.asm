@@ -37,107 +37,107 @@ Func_40069: ; 40069 (10:4069)
 	ld a, [wCurObjAction]
 	jumptable
 
-	dw Func_4021b ; OBJ_ACTION_00
-	dw Func_402d8 ; OBJ_ACTION_01
-	dw $43c2 ; OBJ_ACTION_02
-	dw $43d6 ; OBJ_ACTION_03
-	dw $45fc ; OBJ_ACTION_04
-	dw $4606 ; OBJ_ACTION_05
-	dw $4620 ; OBJ_ACTION_06
-	dw $4633 ; OBJ_ACTION_07
-	dw $456b ; OBJ_ACTION_08
-	dw $4575 ; OBJ_ACTION_09
-	dw $3182 ; OBJ_ACTION_0A
-	dw $45aa ; OBJ_ACTION_0B
-	dw $45b1 ; OBJ_ACTION_0C
-	dw Func_4021b ; OBJ_ACTION_0D
-	dw Func_4021b ; OBJ_ACTION_0E
-	dw $44a2 ; OBJ_ACTION_0F
-	dw $44cb ; OBJ_ACTION_10
-	dw Func_4025d ; OBJ_ACTION_11
-	dw $46af ; OBJ_ACTION_12
-	dw $44eb ; OBJ_ACTION_13
-	dw $446a ; OBJ_ACTION_14
-	dw $4472 ; OBJ_ACTION_15
-	dw $4404 ; OBJ_ACTION_16
-	dw $4437 ; OBJ_ACTION_17
-	dw $467a ; OBJ_ACTION_18
-	dw $4646 ; OBJ_ACTION_19
-	dw $3263 ; OBJ_ACTION_1A
-	dw $3272 ; OBJ_ACTION_1B
-	dw $3281 ; OBJ_ACTION_1C
-	dw Func_4021b ; OBJ_ACTION_1D
-	dw Func_4021b ; OBJ_ACTION_1E
-	dw Func_4021b ; OBJ_ACTION_1F
-	dw $3191 ; OBJ_ACTION_20
-	dw $31af ; OBJ_ACTION_21
-	dw $31cd ; OBJ_ACTION_22
-	dw $31eb ; OBJ_ACTION_23
-	dw $3209 ; OBJ_ACTION_24
-	dw $3227 ; OBJ_ACTION_25
-	dw $3245 ; OBJ_ACTION_26
-	dw $3254 ; OBJ_ACTION_27
-	dw $45f2 ; OBJ_ACTION_28
-	dw $45e8 ; OBJ_ACTION_29
-	dw Func_4021b ; OBJ_ACTION_2A
-	dw Func_4021b ; OBJ_ACTION_2B
-	dw Func_4021b ; OBJ_ACTION_2C
-	dw Func_40182 ; OBJ_ACTION_2D
-	dw Func_402aa ; OBJ_ACTION_2E
-	dw $4213 ; OBJ_ACTION_2F
-	dw Func_3290 ; OBJ_ACTION_30
-	dw Func_4030f ; OBJ_ACTION_31
-	dw $33da ; OBJ_ACTION_32
-	dw $33e9 ; OBJ_ACTION_33
-	dw $3326 ; OBJ_ACTION_34
-	dw $3317 ; OBJ_ACTION_35
-	dw $3335 ; OBJ_ACTION_36
-	dw $3344 ; OBJ_ACTION_37
-	dw $31fa ; OBJ_ACTION_38
-	dw $31dc ; OBJ_ACTION_39
-	dw Func_4021b ; OBJ_ACTION_3A
-	dw $45c2 ; OBJ_ACTION_3B
-	dw $45d5 ; OBJ_ACTION_3C
-	dw Func_4021b ; OBJ_ACTION_3D
-	dw Func_4021b ; OBJ_ACTION_3E
-	dw $44b1 ; OBJ_ACTION_3F
-	dw Func_404d9 ; OBJ_ACTION_40
-	dw Func_329f ; OBJ_ACTION_41
-	dw $3371 ; OBJ_ACTION_42
-	dw $450a ; OBJ_ACTION_43
-	dw $32cc ; OBJ_ACTION_44
-	dw $32db ; OBJ_ACTION_45
-	dw $4429 ; OBJ_ACTION_46
-	dw $445c ; OBJ_ACTION_47
-	dw $469e ; OBJ_ACTION_48
-	dw $466a ; OBJ_ACTION_49
-	dw $3380 ; OBJ_ACTION_4A
-	dw $338f ; OBJ_ACTION_4B
-	dw $412d ; OBJ_ACTION_4C
-	dw $4149 ; OBJ_ACTION_4D
-	dw $339e ; OBJ_ACTION_4E
-	dw $33ad ; OBJ_ACTION_4F
-	dw $31a0 ; OBJ_ACTION_50
-	dw $31be ; OBJ_ACTION_51
-	dw $31dc ; OBJ_ACTION_52
-	dw $31fa ; OBJ_ACTION_53
-	dw $3218 ; OBJ_ACTION_54
-	dw $3236 ; OBJ_ACTION_55
-	dw $32cc ; OBJ_ACTION_56
-	dw $32db ; OBJ_ACTION_57
-	dw $33f8 ; OBJ_ACTION_58
-	dw $3407 ; OBJ_ACTION_59
-	dw Func_4021b ; OBJ_ACTION_5A
-	dw Func_4021b ; OBJ_ACTION_5B
-	dw Func_4021b ; OBJ_ACTION_5C
-	dw Func_4021b ; OBJ_ACTION_5D
-	dw $33bc ; OBJ_ACTION_5E
-	dw $33cb ; OBJ_ACTION_5F
-	dw $1b21 ; OBJ_ACTION_60
-	dw $3ed1 ; OBJ_ACTION_61
-	dw $325e ; OBJ_ACTION_62
-	dw $073a ; OBJ_ACTION_63
-	dw $0938 ; OBJ_ACTION_64
+	dw Func_4021b ; OBJACTION_00
+	dw Func_402d8 ; OBJACTION_01
+	dw $43c2 ; OBJACTION_02
+	dw $43d6 ; OBJACTION_03
+	dw $45fc ; OBJACTION_04
+	dw $4606 ; OBJACTION_05
+	dw $4620 ; OBJACTION_06
+	dw $4633 ; OBJACTION_07
+	dw $456b ; OBJACTION_08
+	dw $4575 ; OBJACTION_09
+	dw $3182 ; OBJACTION_0A
+	dw $45aa ; OBJACTION_0B
+	dw $45b1 ; OBJACTION_0C
+	dw Func_4021b ; OBJACTION_0D
+	dw Func_4021b ; OBJACTION_0E
+	dw $44a2 ; OBJACTION_0F
+	dw $44cb ; OBJACTION_10
+	dw Func_4025d ; OBJACTION_11
+	dw $46af ; OBJACTION_12
+	dw $44eb ; OBJACTION_13
+	dw $446a ; OBJACTION_14
+	dw $4472 ; OBJACTION_15
+	dw $4404 ; OBJACTION_16
+	dw $4437 ; OBJACTION_17
+	dw $467a ; OBJACTION_18
+	dw $4646 ; OBJACTION_19
+	dw $3263 ; OBJACTION_1A
+	dw $3272 ; OBJACTION_1B
+	dw $3281 ; OBJACTION_1C
+	dw Func_4021b ; OBJACTION_1D
+	dw Func_4021b ; OBJACTION_1E
+	dw Func_4021b ; OBJACTION_1F
+	dw $3191 ; OBJACTION_20
+	dw $31af ; OBJACTION_21
+	dw $31cd ; OBJACTION_22
+	dw $31eb ; OBJACTION_23
+	dw $3209 ; OBJACTION_24
+	dw $3227 ; OBJACTION_25
+	dw $3245 ; OBJACTION_26
+	dw $3254 ; OBJACTION_27
+	dw $45f2 ; OBJACTION_28
+	dw $45e8 ; OBJACTION_29
+	dw Func_4021b ; OBJACTION_2A
+	dw Func_4021b ; OBJACTION_2B
+	dw Func_4021b ; OBJACTION_2C
+	dw Func_40182 ; OBJACTION_2D
+	dw Func_402aa ; OBJACTION_2E
+	dw $4213 ; OBJACTION_2F
+	dw Func_3290 ; OBJACTION_30
+	dw Func_4030f ; OBJACTION_31
+	dw $33da ; OBJACTION_32
+	dw $33e9 ; OBJACTION_33
+	dw $3326 ; OBJACTION_34
+	dw $3317 ; OBJACTION_35
+	dw $3335 ; OBJACTION_36
+	dw $3344 ; OBJACTION_37
+	dw $31fa ; OBJACTION_38
+	dw $31dc ; OBJACTION_39
+	dw Func_4021b ; OBJACTION_3A
+	dw $45c2 ; OBJACTION_3B
+	dw $45d5 ; OBJACTION_3C
+	dw Func_4021b ; OBJACTION_3D
+	dw Func_4021b ; OBJACTION_3E
+	dw $44b1 ; OBJACTION_3F
+	dw Func_404d9 ; OBJACTION_40
+	dw Func_329f ; OBJACTION_41
+	dw $3371 ; OBJACTION_42
+	dw $450a ; OBJACTION_43
+	dw $32cc ; OBJACTION_44
+	dw $32db ; OBJACTION_45
+	dw $4429 ; OBJACTION_46
+	dw $445c ; OBJACTION_47
+	dw $469e ; OBJACTION_48
+	dw $466a ; OBJACTION_49
+	dw $3380 ; OBJACTION_4A
+	dw $338f ; OBJACTION_4B
+	dw $412d ; OBJACTION_4C
+	dw $4149 ; OBJACTION_4D
+	dw $339e ; OBJACTION_4E
+	dw $33ad ; OBJACTION_4F
+	dw $31a0 ; OBJACTION_50
+	dw $31be ; OBJACTION_51
+	dw $31dc ; OBJACTION_52
+	dw $31fa ; OBJACTION_53
+	dw $3218 ; OBJACTION_54
+	dw $3236 ; OBJACTION_55
+	dw $32cc ; OBJACTION_56
+	dw $32db ; OBJACTION_57
+	dw $33f8 ; OBJACTION_58
+	dw $3407 ; OBJACTION_59
+	dw Func_4021b ; OBJACTION_5A
+	dw Func_4021b ; OBJACTION_5B
+	dw Func_4021b ; OBJACTION_5C
+	dw Func_4021b ; OBJACTION_5D
+	dw $33bc ; OBJACTION_5E
+	dw $33cb ; OBJACTION_5F
+	dw $1b21 ; OBJACTION_60
+	dw $3ed1 ; OBJACTION_61
+	dw $325e ; OBJACTION_62
+	dw $073a ; OBJACTION_63
+	dw $0938 ; OBJACTION_64
 ; 0x40137
 
 	INCROM $40137, $40165
@@ -150,7 +150,7 @@ Func_40165: ; 40165 (10:4165)
 	ld [hld], a
 
 	ld l, OBJ_ACTION
-	ld a, OBJ_ACTION_2D
+	ld a, OBJACTION_2D
 	ld [hld], a
 
 	ld de, $4234
@@ -209,8 +209,8 @@ Func_40182: ; 40182 (10:4182)
 	jr c, .asm_401d0
 	ldh a, [rDIV]
 	rra
-	ld a, OBJ_ACTION_08 >> 1
-	rla ; either OBJ_ACTION_08 or OBJ_ACTION_09
+	ld a, OBJACTION_08 >> 1
+	rla ; either OBJACTION_08 or OBJACTION_09
 	ld [wCurObjAction], a
 	ret
 
@@ -227,7 +227,7 @@ Func_40182: ; 40182 (10:4182)
 	call Func_3543
 	and a
 	jr nz, .asm_401eb
-	ld a, OBJ_ACTION_11
+	ld a, OBJACTION_11
 	ld [wCurObjAction], a
 	ret
 
@@ -242,7 +242,7 @@ Func_40182: ; 40182 (10:4182)
 .asm_401f5
 	ld a, [hli] ; OBJ_UNK_1A
 	rlca
-	ld a, OBJ_ACTION_2F
+	ld a, OBJACTION_2F
 	ld [hl], a ; OBJ_ACTION
 	jr c, .asm_40201
 	ld de, $427c
@@ -271,7 +271,7 @@ Func_4021b: ; 4021b (10:421b)
 	ld [hld], a
 
 	ld l, OBJ_ACTION
-	ld a, OBJ_ACTION_30
+	ld a, OBJACTION_30
 	ld [hld], a
 
 	ld a, [wWarioScreenXPos]
@@ -314,7 +314,7 @@ Func_4021b: ; 4021b (10:421b)
 
 Func_4025d: ; 4025d (10:425d)
 	ld hl, wCurObjAction
-	ld a, OBJ_ACTION_41
+	ld a, OBJACTION_41
 	ld [hld], a
 	ld a, [hld] ; OBJ_UNK_1A
 	rlca
@@ -339,7 +339,7 @@ Func_40279: ; 40279 (10:4279)
 	or OBJ_INTERACTION_FRONT_STING
 	ld [hld], a
 	ld l, OBJ_ACTION
-	ld a, OBJ_ACTION_2E
+	ld a, OBJACTION_2E
 	ld [hld], a
 	ld a, [hld] ; OBJ_UNK_1A
 	rlca
@@ -371,8 +371,8 @@ Func_402aa: ; 402aa (10:42aa)
 	jr c, .asm_402bb
 	ldh a, [rDIV]
 	rra
-	ld a, OBJ_ACTION_08 >> 1
-	rla ; either OBJ_ACTION_08 or OBJ_ACTION_09
+	ld a, OBJACTION_08 >> 1
+	rla ; either OBJACTION_08 or OBJACTION_09
 	ld [wCurObjAction], a
 	ret
 .asm_402bb
@@ -383,7 +383,7 @@ Func_402aa: ; 402aa (10:42aa)
 	xor a
 	ld [hl], a ; OBJ_UNK_17
 	ld l, OBJ_ACTION
-	ld a, OBJ_ACTION_31
+	ld a, OBJACTION_31
 	ld [hld], a
 	ld a, [hld] ; OBJ_UNK_1A
 	rlca
@@ -407,7 +407,7 @@ Func_402d8: ; 402d8 (10:42d8)
 	or OBJ_INTERACTION_01
 	ld [hld], a
 	ld l, OBJ_ACTION
-	ld a, OBJ_ACTION_31
+	ld a, OBJACTION_31
 	ld [hld], a
 	ld a, [hld] ; OBJ_UNK_1A
 	rlca
@@ -439,8 +439,8 @@ Func_4030f: ; 4030f (10:430f)
 	jr c, .asm_40320
 	ldh a, [rDIV]
 	rra
-	ld a, OBJ_ACTION_08 >> 1
-	rla ; either OBJ_ACTION_08 or OBJ_ACTION_09
+	ld a, OBJACTION_08 >> 1
+	rla ; either OBJACTION_08 or OBJACTION_09
 	ld [wCurObjAction], a
 	ret
 .asm_40320
@@ -469,7 +469,7 @@ Func_4030f: ; 4030f (10:430f)
 	call Func_3543
 	and a
 	jr nz, .asm_4034d
-	ld a, OBJ_ACTION_11
+	ld a, OBJACTION_11
 	ld [wCurObjAction], a
 	ret
 .asm_4034d
@@ -506,7 +506,7 @@ Func_4030f: ; 4030f (10:430f)
 	and a
 	jp z, MoveObjectLeft
 .asm_40388
-	ld a, OBJ_ACTION_13
+	ld a, OBJACTION_13
 	ld [wCurObjAction], a
 	ret
 .asm_4038e
@@ -536,7 +536,7 @@ Func_4030f: ; 4030f (10:430f)
 	and a
 	jp z, MoveObjectRight
 .asm_403bc
-	ld a, OBJ_ACTION_13
+	ld a, OBJACTION_13
 	ld [wCurObjAction], a
 	ret
 ; 0x403c2
@@ -547,7 +547,7 @@ Func_404d9: ; 404d9 (10:44d9)
 	ld hl, wCurObjUnk16
 	dec [hl]
 	jp nz, Func_32f9
-	ld a, OBJ_ACTION_00 ; should be xor a
+	ld a, OBJACTION_00
 	ld [wCurObjAction], a
 	ld a, $ff
 	ld [wCurObjUnk17], a
@@ -646,18 +646,18 @@ Func_40743: ; 40743 (10:4743)
 	ld a, [hl]
 	and a
 	jr z, .asm_40767
-	cp OBJ_ACTION_2F
+	cp OBJACTION_2F
 	jr z, Func_406f0
-	cp OBJ_ACTION_2E
+	cp OBJACTION_2E
 	jr z, Func_4072b
-	cp OBJ_ACTION_34
+	cp OBJACTION_34
 	jr z, .asm_407b8
-	cp OBJ_ACTION_0A
+	cp OBJACTION_0A
 	jr z, .asm_407bf
-	cp OBJ_ACTION_3A
+	cp OBJACTION_3A
 	jp z, .asm_407d4
 	and $fe
-	cp OBJ_ACTION_04
+	cp OBJACTION_04
 	jr z, .asm_407ab
 	jr Func_40734
 
@@ -667,7 +667,7 @@ Func_40743: ; 40743 (10:4743)
 	jr c, .asm_4077b
 
 .asm_4076e
-	ld a, OBJ_ACTION_34
+	ld a, OBJACTION_34
 	ld [hl], a ; OBJ_ACTION
 
 	ld de, $4348
@@ -689,7 +689,7 @@ Func_40743: ; 40743 (10:4743)
 	jr z, .asm_4079a
 .asm_4078c
 	ld l, OBJ_ACTION
-	ld a, OBJ_ACTION_2F
+	ld a, OBJACTION_2F
 	ld [hld], a
 	res 7, [hl] ; OBJ_UNK_16
 	ld de, $4336
@@ -699,14 +699,14 @@ Func_40743: ; 40743 (10:4743)
 	ld l, OBJ_FLAGS
 	bit OBJFLAG_UNK5_F, [hl]
 	ret z
-	ld a, OBJ_ACTION_2E
+	ld a, OBJACTION_2E
 	ld [wCurObjAction], a
 	ld de, $4343
 	call SetObjectFramesetPtr
 	ret
 
 .asm_407ab
-	ld a, OBJ_ACTION_34
+	ld a, OBJACTION_34
 	ld [hl], a ; OBJ_ACTION
 	ld de, $4351
 	call SetObjectFramesetPtr
@@ -725,7 +725,7 @@ Func_40743: ; 40743 (10:4743)
 	ld a, [hli] ; OBJ_UNK_1A
 	rlca
 	jr c, .asm_4081a
-	ld a, OBJ_ACTION_3A
+	ld a, OBJACTION_3A
 	ld [hld], a ; OBJ_ACTION
 	dec l
 	xor a
@@ -935,7 +935,7 @@ Func_40f7e: ; 40f7e (10:4f7e)
 	or OBJ_INTERACTION_0F
 	ld [hld], a
 	ld l, OBJ_ACTION
-	ld a, OBJ_ACTION_30
+	ld a, OBJACTION_30
 	ld [hld], a
 	dec l
 	xor a

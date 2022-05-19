@@ -38,7 +38,6 @@ POWER_UP_MASK EQU %111111
 ACTION_HELP_TITLE_SCREEN EQU (1 << ACTION_HELP_TITLE_SCREEN_F)
 ACTION_HELP_UNK          EQU (1 << ACTION_HELP_UNK_F)
 
-
 ; pals for Power Up icons in Action Help screen
 	const_def $4
 	const OBPAL_POWER_UP_YELLOW ; 4

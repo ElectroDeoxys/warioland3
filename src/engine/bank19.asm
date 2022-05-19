@@ -262,7 +262,7 @@ Func_640e5: ; 640e5 (19:40e5)
 	ld a, $21
 	ld [de], a ; OBJ_UNK_1A
 	inc e
-	xor a ; OBJ_ACTION_00
+	xor a ; OBJACTION_00
 	ld [de], a ; OBJ_ACTION
 	inc e
 	ld a, $82
