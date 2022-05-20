@@ -647,7 +647,7 @@ PointerTable_c0319:: ; c0319 (30:4319)
 	dw NULL
 ; 0xc04c5
 
-room: MACRO
+MACRO room
 	db \1, \1 ; permission and tile maps coincide
 	db \2 ; main tiles
 	db \3 ; special tiles
@@ -1548,9 +1548,9 @@ RoomPals:: ; c0b1b (30:4b1b)
 	dw Pals_ce440 ; ROOM_PAL_145
 ; 0xc0c3f
 
-rept $12
+REPT $12
 	db $ff
-endr
+ENDR
 
 RoomPalCycles:: ; c0c51 (30:4c51)
 	dw .PalCycle0  ; ROOM_PAL_CYCLE_00

@@ -220,7 +220,7 @@
 	const TILE_MAP_61 ; $3d
 	const TILE_MAP_62 ; $3e
 	const TILE_MAP_63 ; $3f
-NUM_TILE_MAPS_GROUP_1 EQU const_value
+DEF NUM_TILE_MAPS_GROUP_1 EQU const_value
 	const TILE_MAP_64 ; $40
 	const TILE_MAP_65 ; $41
 	const TILE_MAP_66 ; $42
@@ -386,7 +386,7 @@ NUM_TILE_MAPS_GROUP_1 EQU const_value
 	const ROOM_PAL_CYCLE_19 ; $13
 
 ; how many pals are in each cycle
-ROOM_PAL_CYCLE_LENGTH EQU 8
+DEF ROOM_PAL_CYCLE_LENGTH EQU 8
 
 	const_def
 	const ROOM_PAL_000 ; $00

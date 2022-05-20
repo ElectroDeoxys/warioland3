@@ -1,4 +1,4 @@
-sprite_oam_struct: MACRO
+MACRO sprite_oam_struct
 \1YCoord::     db
 \1XCoord::     db
 \1Frame::      db
@@ -11,7 +11,7 @@ sprite_oam_struct: MACRO
 ; bit 2-0: pal # (cgb only)
 ENDM
 
-menu_obj_struct: MACRO
+MACRO menu_obj_struct
 	sprite_oam_struct \1
 \1FramesetOffset::  db
 \1Duration::        db
@@ -19,7 +19,7 @@ menu_obj_struct: MACRO
 \1End::
 ENDM
 
-scene_obj_struct: MACRO
+MACRO scene_obj_struct
 	sprite_oam_struct \1
 \1Duration:: db
 \1FramesetOffset:: db
@@ -28,7 +28,7 @@ scene_obj_struct: MACRO
 \1End::
 ENDM
 
-golf_obj_struct: MACRO
+MACRO golf_obj_struct
 \1State::          db
 \1Duration::       db
 \1FramesetOffset:: db
@@ -36,7 +36,7 @@ golf_obj_struct: MACRO
 \1Sprite:: sprite_oam_struct \1
 ENDM
 
-obj_struct: MACRO
+MACRO obj_struct
 \1Flags::           db
 \1Unk01::           db
 \1Unk02::           db
@@ -66,7 +66,7 @@ obj_struct: MACRO
 \1UpdateFunction::  dw
 ENDM
 
-pal_config_struct: MACRO
+MACRO pal_config_struct
 \1Register:: db
 \1Index::    db
 \1Number::   db
@@ -74,7 +74,7 @@ pal_config_struct: MACRO
 \1SourceLo:: db
 ENDM
 
-hdma_config_struct: MACRO
+MACRO hdma_config_struct
 \1SourceHi:: db
 \1SourceLo:: db
 \1DestHi::   db
@@ -82,7 +82,7 @@ hdma_config_struct: MACRO
 \1Mode::     db
 ENDM
 
-particle_struct: MACRO
+MACRO particle_struct
 \1ID::             db ; PARTICLE_* constant
 \1Initialised::    db
 \1YPos::           dw
@@ -99,7 +99,7 @@ particle_struct: MACRO
 \1Unused0f::       db
 ENDM
 
-channel_struct: MACRO
+MACRO channel_struct
 \1Flags::            db
 \1Duration::         db
 \1Unk02::            dw
@@ -164,7 +164,7 @@ channel_struct: MACRO
 \1Unk3b::            db
 ENDM
 
-track_struct: MACRO
+MACRO track_struct
 \1Unk00::          db
 \1Unk01::          db
 \1Unk02::          db

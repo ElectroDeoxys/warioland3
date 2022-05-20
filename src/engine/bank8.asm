@@ -3145,9 +3145,9 @@ Func_21b89: ; 21b89 (8:5b89)
 	jr nz, .wait_lcd_on_1
 
 	xor a
-rept 2 palettes
+REPT 2 palettes
 	ld [$ff00+c], a
-endr
+ENDR
 	dec b
 	jr nz, .wait_lcd_off_1
 
@@ -3165,9 +3165,9 @@ endr
 	jr nz, .wait_lcd_on_2
 
 	xor a
-rept 2 palettes
+REPT 2 palettes
 	ld [$ff00+c], a
-endr
+ENDR
 	dec b
 	jr nz, .wait_lcd_off_2
 	ret

@@ -6,37 +6,37 @@ palettes EQUS "* PALETTE_SIZE"
 palette  EQUS "+ PALETTE_SIZE *"
 color    EQUS "+ PAL_COLOR_SIZE *"
 
-update_anim_1: MACRO
+MACRO update_anim_1
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
 ENDM
 
-update_anim_2: MACRO
+MACRO update_anim_2
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
 ENDM
 
-update_anim_3: MACRO
+MACRO update_anim_3
 	ld a, BANK("Wario OAM 3")
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
 ENDM
 
-load_frameset: MACRO
+MACRO load_frameset
 	ld a, HIGH(\1)
 	ld [wFramesetPtr + 0], a
 	ld a, LOW(\1)
 	ld [wFramesetPtr + 1], a
 ENDM
 
-frame_oam: MACRO
+MACRO frame_oam
 ; ycoord, xcoord, tile ID, attributes
 	db \1, \2, \3, \4
 ENDM
 
-load_oam: MACRO
+MACRO load_oam
 	ld a, BANK(\1)
 	ld [wOAMBank], a
 	ld a, HIGH(\1)
@@ -45,7 +45,7 @@ load_oam: MACRO
 	ld [wOAMPtr + 1], a
 ENDM
 
-load_gfx: MACRO
+MACRO load_gfx
 	ld a, BANK(\1)
 	ld [wDMASourceBank], a
 	ld a, HIGH(\1)
@@ -54,7 +54,7 @@ load_gfx: MACRO
 	ld [wDMASourcePtr + 1], a
 ENDM
 
-decompress: MACRO
+MACRO decompress
 	ld a, BANK(\1)
 	ld [wTempBank], a
 	ld hl, \1
@@ -64,7 +64,7 @@ decompress: MACRO
 	hcall Decompress
 ENDM
 
-decompress_vram1: MACRO
+MACRO decompress_vram1
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld a, BANK(\1)

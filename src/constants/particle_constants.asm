@@ -25,7 +25,7 @@
 	const PARTICLE_16               ; $16 (unused)
 
 ; the maximum number of active particles
-NUM_PARTICLES EQU 4
+DEF NUM_PARTICLES EQU 4
 
 ; wObjects structs constants
 rsreset
@@ -43,4 +43,4 @@ PARTICLE_STRUCT_UNUSED_0C       rb ; $0c
 PARTICLE_STRUCT_UNUSED_0D       rb ; $0d
 PARTICLE_STRUCT_UNUSED_0E       rb ; $0e
 PARTICLE_STRUCT_UNUSED_0F       rb ; $0f
-PARTICLE_STRUCT_LENGTH EQU _RS
+DEF PARTICLE_STRUCT_LENGTH EQU _RS

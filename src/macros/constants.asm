@@ -1,32 +1,32 @@
 ; Enumerate constants
 
-const_def: MACRO
-if _NARG >= 1
+MACRO const_def
+IF _NARG >= 1
 const_value = \1
-else
+ELSE
 const_value = 0
 endc
-if _NARG >= 2
+IF _NARG >= 2
 const_inc = \2
-else
+ELSE
 const_inc = 1
-endc
+ENDC
 ENDM
 
-const: MACRO
-\1 EQU const_value
+MACRO const
+DEF \1 EQU const_value
 const_value = const_value + const_inc
 ENDM
 
-shift_const: MACRO
-\1 EQU (1 << const_value)
+MACRO shift_const
+DEF \1 EQU (1 << const_value)
 const_value = const_value + const_inc
 ENDM
 
-const_skip: MACRO
-if _NARG >= 1
+MACRO const_skip
+IF _NARG >= 1
 const_value = const_value + const_inc * (\1)
-else
+ELSE
 const_value = const_value + const_inc
-endc
+ENDC
 ENDM

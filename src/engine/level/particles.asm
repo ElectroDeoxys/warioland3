@@ -45,14 +45,14 @@ UpdateParticles: ; ca26 (3:4a26)
 	and a
 	ret z
 
-for n, 1, NUM_PARTICLES + 1
+FOR n, 1, NUM_PARTICLES + 1
 	ld hl, wParticle{u:n}
 	ld a, [hl]
 	and a
 	jr z, :+
 	call .DoParticleFunc
 :
-endr
+ENDR
 	ret
 
 .DoParticleFunc:

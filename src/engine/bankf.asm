@@ -35,13 +35,13 @@ TransformationMusicIDs:: ; 3fe00 (f:7e00)
 	dw NULL
 ; 0x3fe40
 
-level_music: MACRO
-rept 4
+MACRO level_music
+REPT 4
 	dw \1
-endr
-rept 4
+ENDR
+REPT 4
 	dw \2
-endr
+ENDR
 ENDM
 
 LevelMusic:: ; 3fe40 (f:7e40)

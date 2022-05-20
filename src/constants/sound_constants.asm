@@ -375,4 +375,4 @@
 	const SFX_136                          ; 236
 	const SFX_137                          ; 237
 	const SFX_138                          ; 238
-NUM_SOUNDS EQU const_value
+DEF NUM_SOUNDS EQU const_value

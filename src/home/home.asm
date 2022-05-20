@@ -3022,10 +3022,10 @@ UpdateRoomAnimatedPals:: ; 2a77 (0:2a77)
 	and STAT_ON_LCD
 	jr nz, .wait_lcd_2
 
-rept 12
+REPT 12
 	ld a, [hli]
 	ld [$ff00+c], a
-endr
+ENDR
 	dec b
 	jr nz, .wait_lcd_1
 
@@ -3038,10 +3038,10 @@ endr
 	and STAT_ON_LCD
 	jr nz, .wait_lcd_4
 
-rept 3
+REPT 3
 	ld a, [hli]
 	ld [$ff00+c], a
-endr
+ENDR
 	ld a, [hl]
 	ld [$ff00+c], a
 	pop af
@@ -3103,10 +3103,10 @@ Func_2c46:: ; 2c46 (0:2c46)
 	ld [de], a
 	inc e
 .loop
-rept $10
+REPT $10
 	ld a, [hli]
 	ld [de], a
-endr
+ENDR
 	dec c
 	jr nz, .loop
 	ret

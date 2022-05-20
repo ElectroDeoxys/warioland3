@@ -3288,7 +3288,7 @@ WaveSamples: ; 314a6 (c:54a6)
 	dn  7, 10, 12, 14, 15, 15, 15,  8,  7,  9,  9,  7,  7,  7,  7,  5,  5,  6,  6,  4,  4,  4,  4,  3,  3,  2,  2,  2,  2,  1,  1,  0 ; WAVEFORM_SQUISHED_SINE
 ; 0x31566
 
-music: MACRO
+MACRO music
 	assert \5 < CHAN5, "Invalid channel for music"
 
 	dw \1 ; sound ptr
@@ -3300,7 +3300,7 @@ music: MACRO
 	db $00 ; padding
 ENDM
 
-sfx: MACRO
+MACRO sfx
 	assert \5 >= CHAN5, "Invalid channel for SFX"
 
 	dw \1 ; sound ptr
@@ -3312,10 +3312,10 @@ sfx: MACRO
 	db $00 ; padding
 ENDM
 
-filler_sounds: MACRO
-rept \1
+MACRO filler_sounds
+REPT \1
 	music $6a98, $0c, $00, 100, CHAN1, 4
-endr
+ENDR
 ENDM
 
 SoundHeaders: ; 3155e (c:555e)
@@ -3672,6 +3672,6 @@ Music_OutOfTheWoodsDay: ; 32a98 (c:6a98)
 
 	INCROM $32aa2, $33de9
 
-rept $217
+REPT $217
 	db $00
-endr
+ENDR

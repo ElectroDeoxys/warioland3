@@ -887,7 +887,7 @@ Func_ac8d4: ; ac8d4 (2b:48d4)
 	ld [wHDMADestVRAMBank], a
 	ret
 
-data_ac962: MACRO
+MACRO data_ac962
 	dab \1 ; sprite
 	dba \2 ; tiles
 ENDM

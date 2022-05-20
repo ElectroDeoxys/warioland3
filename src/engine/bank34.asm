@@ -60,11 +60,11 @@ UpdateRoomAnimatedTiles:: ; d0000 (34:4000)
 	and STAT_ON_LCD
 	jr nz, .wait_ld_off
 
-rept 8
+REPT 8
 	ld a, [hli]
 	ld [de], a
 	inc e
-endr
+ENDR
 
 	dec b
 	jr nz, .wait_lcd_on

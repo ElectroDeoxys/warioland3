@@ -90,4 +90,4 @@
 	const CUTSCENE_58 ; $58
 	const CUTSCENE_59 ; $59
 	const CUTSCENE_5A ; $5a
-NUM_CUTSCENES EQU const_value - 1
+DEF NUM_CUTSCENES EQU const_value - 1

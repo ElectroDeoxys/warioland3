@@ -98,10 +98,10 @@ for objfile in objects:
             if node_type:
                 node_filenames.append(read_string(f))
             else:
-                node_filenames.append("rept")
+                node_filenames.append("REPT")
                 depth = unpack_file("<I", f)[0]
                 for i in range(depth):
-                    unpack_file("<I", f) # rept iterations
+                    unpack_file("<I", f) # REPT iterations
         node_filenames.reverse()
 
     for x in range(num_symbols):

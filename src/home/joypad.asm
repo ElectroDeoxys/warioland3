@@ -9,9 +9,9 @@ UpdateJoypad:: ; 3d8 (0:3d8)
 	ldh [rJOYP], a
 
 ; read a couple of times to give some time
-rept 4
+REPT 4
 	ldh a, [rJOYP]
-endr
+ENDR
 
 ; the Joypad register output is in the lo nybble (inverted)
 ; make the hi nybble of our new container d-pad input
@@ -26,9 +26,9 @@ endr
 	ldh [rJOYP], a
 
 ; read a couple of times to give some time
-rept 10
+REPT 10
 	ldh a, [rJOYP]
-endr
+ENDR
 
 ; input is in the lo nybble
 	cpl

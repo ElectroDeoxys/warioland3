@@ -1,22 +1,22 @@
-lb: MACRO ; r, hi, lo
+MACRO lb ; r, hi, lo
 	ld \1, (\2) << 8 + ((\3) & $ff)
 ENDM
 
-bankswitch: MACRO
+MACRO bankswitch
 	ld [wROMBank], a
 	ld [MBC5RomBank], a
 ENDM
 
-sramswitch: MACRO
+MACRO sramswitch
 	ld [wSRAMBank], a
 	ld [MBC5SRamBank], a
 ENDM
 
-jumptable: MACRO
+MACRO jumptable
 	rst JumpTable
 ENDM
 
-hcall: MACRO
+MACRO hcall
 	ld a, LOW(\1)
 	ldh [hCallFuncPointer + 0], a
 	ld a, HIGH(\1)
@@ -24,27 +24,27 @@ hcall: MACRO
 	call hCallFunc
 ENDM
 
-farcall: MACRO
-if _NARG == 1
+MACRO farcall
+IF _NARG == 1
 	ld a, BANK(\1)
 	ldh [hCallFuncBank], a
 	hcall \1
 ;assert warn, BANK(\1) != BANK(@), "farcall can be call"
-else
+ELSE
 	ld a, \1
 	ldh [hCallFuncBank], a
 	hcall \2
 ;assert warn, \1 != BANK(@), "farcall can be call"
-endc
+ENDC
 ENDM
 
-debug_nop: MACRO
+MACRO debug_nop
 .loop_debug_nop_\@
 	nop
 	jr .loop_debug_nop_\@
 ENDM
 
-debug_assert_not: MACRO
+MACRO debug_assert_not
 	cp \1
 	jr nz, :+
 	jp Init

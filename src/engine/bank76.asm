@@ -252,9 +252,9 @@ Func_1d8c2c: ; 1d8c2c (76:4c2c)
 	ret
 ; 0x1d8c62
 
-rept $39e
+REPT $39e
 	db $00
-endr
+ENDR
 
 WarioUnk2Gfx: ; 1d9000 (76:5000)
 INCBIN "gfx/wario/unk2.2bpp"

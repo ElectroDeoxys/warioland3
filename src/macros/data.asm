@@ -1,58 +1,58 @@
-INCROM: MACRO
+MACRO INCROM
 INCBIN "baserom.gbc", \1, \2 - \1
 ENDM
 
-dn: MACRO ; nybbles
-rept _NARG / 2
+MACRO dn ; nybbles
+REPT _NARG / 2
 	db ((\1) << 4) | (\2)
 	shift 2
-endr
+ENDR
 ENDM
 
-dbw: MACRO
+MACRO dbw
 	db \1
 	dw \2
 ENDM
 
-dwb: MACRO
+MACRO dwb
 	dw \1
 	db \2
 ENDM
 
-dab: MACRO
+MACRO dab
 	dw \1
 	db BANK(\1)
 ENDM
 
-dba: MACRO
+MACRO dba
 	db BANK(\1)
 	dw \1
 ENDM
 
-dx: MACRO
+MACRO dx
 x = 8 * ((\1) - 1)
-	rept \1
+	REPT \1
 	db ((\2) >> x) & $ff
 x = x - 8
-	endr
+	ENDR
 	ENDM
 
-dt: MACRO ; three-byte (big-endian)
+MACRO dt ; three-byte (big-endian)
 	dx 3, \1
 	ENDM
 
-dd: MACRO ; four-byte (big-endian)
+MACRO dd ; four-byte (big-endian)
 	dx 4, \1
 	ENDM
 
-bigdw: MACRO ; big-endian word
+MACRO bigdw ; big-endian word
 	dx 2, \1
 	ENDM
 
-sgb: MACRO
+MACRO sgb
 	db \1 << 3 + \2 ; sgb_command * 8 + length
 ENDM
 
-rgb: MACRO
+MACRO rgb
 	dw (\3 << 10 | \2 << 5 | \1)
 ENDM

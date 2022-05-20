@@ -1,4 +1,4 @@
-update_pos_y: MACRO
+MACRO update_pos_y
 	ld hl, hYPosHi
 	ld de, wYPosHi
 	ld a, [hli]
@@ -8,7 +8,7 @@ update_pos_y: MACRO
 	ld [de], a
 ENDM
 
-get_pos_y: MACRO
+MACRO get_pos_y
 	ld hl, wYPosHi
 	ld de, hYPosHi
 	ld a, [hli]
@@ -18,7 +18,7 @@ get_pos_y: MACRO
 	ld [de], a
 ENDM
 
-update_pos_x: MACRO
+MACRO update_pos_x
 	ld hl, hXPosHi
 	ld de, wXPosHi
 	ld a, [hli]
@@ -28,7 +28,7 @@ update_pos_x: MACRO
 	ld [de], a
 ENDM
 
-get_pos_x: MACRO
+MACRO get_pos_x
 	ld hl, wXPosHi
 	ld de, hXPosHi
 	ld a, [hli]
@@ -38,26 +38,26 @@ get_pos_x: MACRO
 	ld [de], a
 ENDM
 
-update_pos: MACRO
+MACRO update_pos
 	ld hl, hPos
 	ld de, wPos
-rept 3
+REPT 3
 	ld a, [hli]
 	ld [de], a
 	inc de
-endr
+ENDR
 	ld a, [hl]
 	ld [de], a
 ENDM
 
-get_pos: MACRO
+MACRO get_pos
 	ld hl, wPos
 	ld de, hPos
-rept 3
+REPT 3
 	ld a, [hli]
 	ld [de], a
 	inc de
-endr
+ENDR
 	ld a, [hl]
 	ld [de], a
 ENDM

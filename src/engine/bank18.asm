@@ -119,10 +119,10 @@ Func_611cb: ; 611cb (18:51cb)
 	inc l
 	rla
 	ld [wCurObjFlags], a
-for n, 1, OBJ_STRUCT_LENGTH - 1
+FOR n, 1, OBJ_STRUCT_LENGTH - 1
 	ld a, [hli]
 	ld [wCurObj + n], a
-endr
+ENDR
 	ld a, [hl]
 	ld [wCurObj + OBJ_STRUCT_LENGTH - 1], a
 
@@ -230,12 +230,12 @@ Func_6130b: ; 6130b (18:530b)
 	ld a, [hl]
 	rra
 	call c, Func_611cb
-for n, 2, NUM_OBJECTS + 1
+FOR n, 2, NUM_OBJECTS + 1
 	ld l, LOW(wObj{u:n}Flags)
 	ld a, [hl]
 	rra
 	call c, Func_611cb
-endr
+ENDR
 	ret
 ; 0x61348
 
@@ -262,12 +262,12 @@ Func_61348: ; 61348 (18:5348)
 	ld a, [hl]
 	rra
 	call c, Func_613dc
-for n, 2, NUM_OBJECTS + 1
+FOR n, 2, NUM_OBJECTS + 1
 	ld l, LOW(wObj{u:n}Flags)
 	ld a, [hl]
 	rra
 	call c, Func_613dc
-endr
+ENDR
 	ret
 
 .floor_transition
@@ -275,12 +275,12 @@ endr
 	ld a, [hl]
 	rra
 	call c, Func_61513
-for n, 2, NUM_OBJECTS + 1
+FOR n, 2, NUM_OBJECTS + 1
 	ld l, LOW(wObj{u:n}Flags)
 	ld a, [hl]
 	rra
 	call c, Func_61513
-endr
+ENDR
 	ret
 ; 0x613dc
 
@@ -289,10 +289,10 @@ Func_613dc: ; 613dc (18:53dc)
 	inc l
 	rla
 	ld [wCurObjFlags], a
-for n, 1, OBJ_STRUCT_LENGTH - 1
+FOR n, 1, OBJ_STRUCT_LENGTH - 1
 	ld a, [hli]
 	ld [wCurObj + n], a
-endr
+ENDR
 	ld a, [hl]
 	ld [wCurObj + OBJ_STRUCT_LENGTH - 1], a
 
@@ -394,10 +394,10 @@ Func_61513: ; 61513 (18:5513)
 	inc l
 	rla
 	ld [wCurObjFlags], a
-for n, 1, OBJ_STRUCT_LENGTH - 1
+FOR n, 1, OBJ_STRUCT_LENGTH - 1
 	ld a, [hli]
 	ld [wCurObj + n], a
-endr
+ENDR
 	ld a, [hl]
 	ld [wCurObj + OBJ_STRUCT_LENGTH - 1], a
 
@@ -499,7 +499,7 @@ endr
 ; 0x6164e
 
 Func_6164e: ; 6164e (18:564e)
-for n, 1, NUM_OBJECTS + 1
+FOR n, 1, NUM_OBJECTS + 1
 	ld hl, wObj{u:n}Flags
 	ld a, [hl]
 	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
@@ -509,13 +509,13 @@ for n, 1, NUM_OBJECTS + 1
 	ld l, LOW(wObj{u:n}Unk07)
 	call UpdateObjSprite
 .next_{u:n}
-endr
+ENDR
 
 	ret
 ; 0x616d7
 
 Func_616d7: ; 616d7 (18:56d7)
-for n, 1, NUM_OBJECTS + 1
+FOR n, 1, NUM_OBJECTS + 1
 	ld hl, wObj{u:n}Flags
 	ld a, [hl]
 	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
@@ -525,7 +525,7 @@ for n, 1, NUM_OBJECTS + 1
 	ld l, LOW(wObj{u:n}Unk07)
 	call UpdateObjSprite
 .next_{u:n}
-endr
+ENDR
 
 	ret
 ; 0x61760
@@ -704,13 +704,13 @@ Func_618e2: ; 618e2 (18:58e2)
 	ld a, [hl]
 	and e
 	cp e
-for n, 2, NUM_OBJECTS + 1
+FOR n, 2, NUM_OBJECTS + 1
 	jr z, .asm_6191c
 	ld l, LOW(wObj{u:n}Flags)
 	ld a, [hl]
 	and e
 	cp e
-endr
+ENDR
 	ret nz
 
 .asm_6191c
@@ -825,7 +825,7 @@ endr
 
 .check_objs
 
-for n, 1, NUM_OBJECTS + 1
+FOR n, 1, NUM_OBJECTS + 1
 	ld a, [wObj{u:n}Flags]
 	and $1f
 	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
@@ -886,12 +886,12 @@ for n, 1, NUM_OBJECTS + 1
 	play_sfx SFX_016
 	ret
 .next_obj_{u:n}
-endr
+ENDR
 
 	pop hl
 	ret
 
-for n, 1, NUM_OBJECTS + 1
+FOR n, 1, NUM_OBJECTS + 1
 .Func_61d28_{u:n}
 	xor a
 	ld [wGrabState], a
@@ -904,9 +904,9 @@ for n, 1, NUM_OBJECTS + 1
 	set OBJFLAG_UNK3_F, [hl]
 	play_sfx SFX_016
 	ret
-endr
+ENDR
 
-for n, 1, NUM_OBJECTS + 1
+FOR n, 1, NUM_OBJECTS + 1
 .Func_61df0_{u:n}
 	ldh a, [hffa4]
 	ld [hl], a
@@ -927,7 +927,7 @@ for n, 1, NUM_OBJECTS + 1
 	set OBJFLAG_UNK3_F, [hl]
 	play_sfx SFX_016
 	ret
-endr
+ENDR
 ; 0x61f10
 
 Func_61f10: ; 61f10 (18:5f10)

@@ -19,6 +19,6 @@ INCLUDE "home/load_level.asm"
 INCLUDE "home/home.asm"
 INCLUDE "home/audio.asm"
 
-rept $3d
+REPT $3d
 	db $00
-endr
+ENDR

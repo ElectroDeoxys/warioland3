@@ -183,9 +183,9 @@ Cutscenes3Gfx:: INCBIN "gfx/cutscenes/cutscenes3.2bpp.lz"
 Cutscenes4Gfx:: INCBIN "gfx/cutscenes/cutscenes4.2bpp.lz"
 Cutscenes5Gfx:: INCBIN "gfx/cutscenes/cutscenes5.2bpp.lz"
 
-rept $932
+REPT $932
 	db $00
-endr
+ENDR
 
 
 SECTION "Cutscenes Gfx 2", ROMX

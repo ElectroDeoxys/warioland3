@@ -1,12 +1,12 @@
 ; number of cycles before Wario falls asleep
 ; while in the idle state
-NUM_SLEEPING_IDLE_CYCLES EQU 7
+DEF NUM_SLEEPING_IDLE_CYCLES EQU 7
 
 ; number of attack frames on the ground
-MAX_ATTACK_COUNTER EQU $30
+DEF MAX_ATTACK_COUNTER EQU $30
 ; after wAttackCounter reaches this value
 ; Wario will start to charge 
-CHARGE_ATTACK_COUNTER EQU $2b
+DEF CHARGE_ATTACK_COUNTER EQU $2b
 
 ; power up level constants
 	const_def
@@ -20,23 +20,23 @@ CHARGE_ATTACK_COUNTER EQU $2b
 	const POWER_UP_HIGH_JUMP_BOOTS          ; 7
 	const POWER_UP_PRINCE_FROGS_GLOVES      ; 8
 	const POWER_UP_SUPER_GRAB_GLOVES        ; 9
-NUM_MAIN_POWER_UPS EQU const_value
+DEF NUM_MAIN_POWER_UPS EQU const_value
 
 	; special power-ups for Action Help
 	const POWER_UP_OWL                      ; a
 	const POWER_UP_RAIL                     ; b
 	const POWER_UP_VAMPIRE                  ; c
-NUM_TOTAL_POWER_UPS EQU const_value
+DEF NUM_TOTAL_POWER_UPS EQU const_value
 
-POWER_UP_MASK EQU %111111
+DEF POWER_UP_MASK EQU %111111
 
 ; flags in wPowerUpLevel for Action Help stuff
 	const_def 6
 	const ACTION_HELP_TITLE_SCREEN_F ; 6
 	const ACTION_HELP_UNK_F          ; 7
 
-ACTION_HELP_TITLE_SCREEN EQU (1 << ACTION_HELP_TITLE_SCREEN_F)
-ACTION_HELP_UNK          EQU (1 << ACTION_HELP_UNK_F)
+DEF ACTION_HELP_TITLE_SCREEN EQU (1 << ACTION_HELP_TITLE_SCREEN_F)
+DEF ACTION_HELP_UNK          EQU (1 << ACTION_HELP_UNK_F)
 
 ; pals for Power Up icons in Action Help screen
 	const_def $4
@@ -79,14 +79,14 @@ ACTION_HELP_UNK          EQU (1 << ACTION_HELP_UNK_F)
 	const TRANSFORMATION_UNK_1E              ; $1e
 	const TRANSFORMATION_UNK_1F              ; $1f
 
-HOT_WARIO_DURATION    EQU 600
-FAT_WARIO_DURATION    EQU 420
-BOUNCY_WARIO_DURATION EQU 900
+DEF HOT_WARIO_DURATION    EQU 600
+DEF FAT_WARIO_DURATION    EQU 420
+DEF BOUNCY_WARIO_DURATION EQU 900
 
 ; after this value is reached in the
 ; Hot Wario transformation duration,
 ; switch from OnFire to Hot state
-HOT_WARIO_TRANSITION_DURATION EQU 300
+DEF HOT_WARIO_TRANSITION_DURATION EQU 300
 
 ; grab constants used for wGrabState
 	const_def
@@ -105,12 +105,12 @@ HOT_WARIO_TRANSITION_DURATION EQU 300
 	const GRAB_FULL_CHARGE_F ; 6
 	const GRAB_HEAVY_F       ; 7
 
-GRAB_FLAGS_MASK EQU (1 << GRAB_UNUSED_0_F) | (1 << GRAB_UNUSED_1_F) | (1 << GRAB_FULL_CHARGE_F) | (1 << GRAB_HEAVY_F)
+DEF GRAB_FLAGS_MASK EQU (1 << GRAB_UNUSED_0_F) | (1 << GRAB_UNUSED_1_F) | (1 << GRAB_FULL_CHARGE_F) | (1 << GRAB_HEAVY_F)
 
 ; number of frames to reach fully charged throw
 ; with a light and heavy object
-THROW_CHARGE_FRAMES_LIGHT EQU $1e
-THROW_CHARGE_FRAMES_HEAVY EQU $3c
+DEF THROW_CHARGE_FRAMES_LIGHT EQU $1e
+DEF THROW_CHARGE_FRAMES_HEAVY EQU $3c
 
 ; touch state constants for wTouchState
 	const_def
