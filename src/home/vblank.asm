@@ -17,9 +17,9 @@ InitLCD:: ; 341 (0:341)
 	xor a
 	ldh [rIF], a
 	ld hl, rIE
-	res INT_LCD_STAT, [hl]
+	res IEB_STAT, [hl]
 	ld hl, rSTAT
-	res STAT_LYC, [hl]
+	res STATB_LYC, [hl]
 	ret
 ; 0x354
 
@@ -43,11 +43,11 @@ VBlank_354:: ; 354 (0:354)
 
 WaitVBlank:: ; 370 (0:370)
 	ldh a, [rSTAT]
-	and STAT_ON_LCD
+	and STATF_LCD
 	jr z, WaitVBlank
 .is_on
 	ldh a, [rSTAT]
-	and STAT_ON_LCD
+	and STATF_LCD
 	jr nz, .is_on
 	ret
 ; 0x37d

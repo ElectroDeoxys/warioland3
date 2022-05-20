@@ -941,22 +941,22 @@ Func_ac9ec: ; ac9ec (2b:49ec)
 ; 0xac9f5
 
 Data_ac9f5: ; ac9f5 (2b:49f5)
-	db LOW(rBGPI), (1 << rBGPI_AUTO_INCREMENT)
+	db LOW(rBCPS), BCPSF_AUTOINC
 	db 8 ; number of pals
 	db HIGH(wTempPals1), LOW(wTempPals1) ; source pals
 
 Data_ac9fa: ; ac9fa (2b:49fa)
-	db LOW(rBGPI), (1 << rBGPI_AUTO_INCREMENT)
+	db LOW(rBCPS), BCPSF_AUTOINC
 	db 8 ; number of pals
 	db HIGH(wTempBGPals), LOW(wTempBGPals) ; source pals
 
 Data_ac9ff: ; ac9ff (2b:49ff)
-	db LOW(rOBPI), (1 << rBGPI_AUTO_INCREMENT)
+	db LOW(rOCPS), OCPSF_AUTOINC
 	db 1 ; number of pals
 	db HIGH(wTempOBPals), LOW(wTempOBPals) ; source pals
 
 Data_aca04: ; aca04 (2b:4a04)
-	db LOW(rOBPI), (1 << rBGPI_AUTO_INCREMENT)
+	db LOW(rOCPS), OCPSF_AUTOINC
 	db 8 ; number of pals
 	db HIGH(wTempPals2), LOW(wTempPals2) ; source pals
 ; 0xaca09

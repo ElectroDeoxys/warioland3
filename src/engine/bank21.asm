@@ -2160,8 +2160,8 @@ VBlank_84d76: ; 84d76 (21:4d76)
 	bankswitch
 
 	ld hl, wTempBGPals
-	ld c, LOW(rBGPI)
-	ld a, 1 << rBGPI_AUTO_INCREMENT
+	ld c, LOW(rBCPS)
+	ld a, BCPSF_AUTOINC
 	ld [$ff00+c], a
 	inc c
 	ld b, 8 ; num pals
@@ -2287,7 +2287,7 @@ Func_84e86: ; 84e86 (21:4e86)
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals)
 	ld [wPalConfig1SourceLo], a
-	ld a, (1 << rBGPI_AUTO_INCREMENT)
+	ld a, OCPSF_AUTOINC
 	ld [wPalConfig1Index], a
 	ld a, 8 ; number of pals
 	ld [wPalConfig1Number], a
@@ -2296,7 +2296,7 @@ Func_84e86: ; 84e86 (21:4e86)
 	ld [wPalConfig2SourceHi], a
 	ld a, LOW(wTempOBPals)
 	ld [wPalConfig2SourceLo], a
-	ld a, (1 << rOBPI_AUTO_INCREMENT)
+	ld a, OCPSF_AUTOINC
 	ld [wPalConfig2Index], a
 	ld a, 8 ; number of pals
 	ld [wPalConfig2Number], a
@@ -2464,7 +2464,7 @@ Func_85046: ; 85046 (21:5046)
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals palette 1)
 	ld [wPalConfig1SourceLo], a
-	ld a, (1 << rBGPI_AUTO_INCREMENT) | (1 << 3)
+	ld a, OCPSF_AUTOINC | (1 << 3)
 	ld [wPalConfig1Index], a
 	ld a, 7
 	ld [wPalConfig1Number], a
@@ -2472,7 +2472,7 @@ Func_85046: ; 85046 (21:5046)
 	ld [wPalConfig2SourceHi], a
 	ld a, LOW(wTempOBPals)
 	ld [wPalConfig2SourceLo], a
-	ld a, (1 << rOBPI_AUTO_INCREMENT)
+	ld a, OCPSF_AUTOINC
 	ld [wPalConfig2Index], a
 	ld a, 8
 	ld [wPalConfig2Number], a
@@ -2493,7 +2493,7 @@ Func_85046: ; 85046 (21:5046)
 	INCROM $850b9, $851bc
 
 Func_851bc: ; 851bc (21:51bc)
-	ld a, LOW(rBGPI)
+	ld a, LOW(rBCPS)
 	ld [wPalConfig1Register], a
 	xor a
 	ld [w2d0dc], a
@@ -2505,7 +2505,7 @@ Func_851bc: ; 851bc (21:51bc)
 ; 0x851d1
 
 Func_851d1: ; 851d1 (21:51d1)
-	ld a, LOW(rOBPI)
+	ld a, LOW(rOCPS)
 	ld [wPalConfig2Register], a
 	ld a, $01
 	ld [w2d0dc], a
@@ -2604,7 +2604,7 @@ Func_85271: ; 85271 (21:5271)
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals palette 7)
 	ld [wPalConfig1SourceLo], a
-	ld a, (1 << rOBPI_AUTO_INCREMENT) | (7 << 3)
+	ld a, OCPSF_AUTOINC | (7 << 3)
 	ld [wPalConfig1Index], a
 	ld a, 1
 	ld [wPalConfig1Number], a
@@ -2660,7 +2660,7 @@ Func_852e5: ; 852e5 (21:52e5)
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals palette 7)
 	ld [wPalConfig1SourceLo], a
-	ld a, (1 << rOBPI_AUTO_INCREMENT) | (7 << 3)
+	ld a, OCPSF_AUTOINC | (7 << 3)
 	ld [wPalConfig1Index], a
 	ld a, 1
 	ld [wPalConfig1Number], a
@@ -2676,7 +2676,7 @@ Func_852e5: ; 852e5 (21:52e5)
 ; 0x85331
 
 Func_85331: ; 85331 (21:5331)
-	ld a, LOW(rBGPI)
+	ld a, LOW(rBCPS)
 	ld [wPalConfig1Register], a
 	xor a
 	ld [w2d0dc], a

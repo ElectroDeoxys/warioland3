@@ -163,7 +163,7 @@ Func_db29b: ; db29b (36:729b)
 	ld hl, $d523
 	call Func_db4e9
 
-	ld a, LCDC_BGON | LCDC_OBJON | LCDC_OBJ16 | LCDC_ON
+	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
 	ldh [rLCDC], a
 	ld a, 64
 	ld [wTimer], a

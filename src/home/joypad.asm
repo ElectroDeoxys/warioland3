@@ -5,34 +5,34 @@ UpdateJoypad:: ; 3d8 (0:3d8)
 
 ; can only get four inputs at a time
 ; take d-pad first
-	ld a, R_DPAD
-	ldh [rJOYP], a
+	ld a, P1F_GET_DPAD
+	ldh [rP1], a
 
 ; read a couple of times to give some time
 REPT 4
-	ldh a, [rJOYP]
+	ldh a, [rP1]
 ENDR
 
 ; the Joypad register output is in the lo nybble (inverted)
 ; make the hi nybble of our new container d-pad input
 	cpl
-	and JOY_INPUT_MASK
+	and %00001111
 	swap a
 	ld b, a
 
 ; buttons make 8 total inputs (A, B, Select, Start)
 ; we can fit this into one byte
-	ld a, R_BUTTONS
-	ldh [rJOYP], a
+	ld a, P1F_GET_BTN
+	ldh [rP1], a
 
 ; read a couple of times to give some time
 REPT 10
-	ldh a, [rJOYP]
+	ldh a, [rP1]
 ENDR
 
 ; input is in the lo nybble
 	cpl
-	and JOY_INPUT_MASK
+	and %00001111
 	or b
 	ld c, a
 
@@ -47,8 +47,8 @@ ENDR
 	ld [wJoypadDown], a
 
 ; reset joypad
-	ld a, $30
-	ldh [rJOYP], a
+	ld a, P1F_GET_NONE
+	ldh [rP1], a
 	ret
 ; 0x418
 

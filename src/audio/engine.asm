@@ -2639,7 +2639,7 @@ SetTimbre: ; 30e32 (c:4e32)
 	ld bc, WaveSamples
 	add hl, bc
 
-	ld c, LOW(rWave_0)
+	ld c, LOW(_AUD3WAVERAM)
 	ld b, $10
 .loop_wave_sample
 	ld a, [hli]

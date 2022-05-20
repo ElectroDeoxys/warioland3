@@ -54,7 +54,7 @@ Func_dc01e: ; dc01e (37:401e)
 
 	play_music MUSIC_PERFECT
 
-	ld a, LCDC_BGON | LCDC_OBJON | LCDC_OBJ16 | LCDC_ON
+	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
 	ldh [rLCDC], a
 	xor a
 	ld [wTimer], a

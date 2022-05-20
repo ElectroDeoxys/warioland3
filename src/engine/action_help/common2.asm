@@ -185,18 +185,18 @@ LoadActionHelpBGPals: ; 1e49bb (79:49bb)
 	call CopyHLToDE_Short
 	pop hl
 
-	ld a, 1 << rBGPI_AUTO_INCREMENT
-	ldh [rBGPI], a
+	ld a, BCPSF_AUTOINC
+	ldh [rBCPS], a
 	ld b, 8
-	ld c, LOW(rBGPD)
+	ld c, LOW(rBCPD)
 
 .wait_lcd_off
 	ldh a, [rSTAT]
-	and STAT_ON_LCD
+	and STATF_LCD
 	jr z, .wait_lcd_off
 .wait_lcd_on
 	ldh a, [rSTAT]
-	and STAT_ON_LCD
+	and STATF_LCD
 	jr nz, .wait_lcd_on
 
 	ld a, [hli]
@@ -249,17 +249,17 @@ LoadActionHelpOBPals: ; 1e49ed (79:49ed)
 	pop hl
 
 .apply_palettes
-	ld a, (1 << rOBPI_AUTO_INCREMENT)
-	ldh [rOBPI], a
+	ld a, OCPSF_AUTOINC
+	ldh [rOCPS], a
 	ld b, 8
-	ld c, LOW(rOBPD)
+	ld c, LOW(rOCPD)
 .wait_lcd_off
 	ldh a, [rSTAT]
-	and STAT_ON_LCD
+	and STATF_LCD
 	jr z, .wait_lcd_off
 .wait_lcd_on
 	ldh a, [rSTAT]
-	and STAT_ON_LCD
+	and STATF_LCD
 	jr nz, .wait_lcd_on
 
 	ld a, [hli]
@@ -315,17 +315,17 @@ Func_1e4a47: ; 1e4a47 (79:4a47)
 	pop hl
 
 .asm_1e4a84
-	ld a, (1 << rOBPI_AUTO_INCREMENT) | $20
-	ldh [rOBPI], a
-	ld c, LOW(rOBPD)
+	ld a, OCPSF_AUTOINC | $20
+	ldh [rOCPS], a
+	ld c, LOW(rOCPD)
 	ld b, 4
 .wait_lcd_off
 	ldh a, [rSTAT]
-	and STAT_ON_LCD
+	and STATF_LCD
 	jr z, .wait_lcd_off
 .wait_lcd_on
 	ldh a, [rSTAT]
-	and STAT_ON_LCD
+	and STATF_LCD
 	jr nz, .wait_lcd_on
 
 	ld a, [hli]

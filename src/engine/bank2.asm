@@ -65,7 +65,7 @@ Func_8024: ; 8024 (2:4024)
 	ld a, [wLevel]
 	cp THE_TEMPLE
 	jr z, .final_battle
-	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
+	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 	ldh [rLCDC], a
 	ret
 
@@ -77,7 +77,7 @@ Func_8024: ; 8024 (2:4024)
 	ldh [rWY], a
 	ld a, $07
 	ldh [rWX], a
-	ld a, LCDC_ON | LCDC_WIN9C00 | LCDC_WINON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
+	ld a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 	ldh [rLCDC], a
 	ret
 ; 0x80aa
@@ -628,7 +628,7 @@ Func_846e: ; 846e (2:446e)
 	ld [wIsIntangible], a
 	ld a, $02
 	ld [wSubState], a
-	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
+	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 	ldh [rLCDC], a
 	ret
 ; 0x861c

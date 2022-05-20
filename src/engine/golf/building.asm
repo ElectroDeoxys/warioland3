@@ -71,7 +71,7 @@ Func_1c8586: ; 1c8586 (72:4586)
 	ld a, [wGolfMenuTargetSCX]
 	ldh [rSCX], a
 	ld [wSCX], a
-	ld a, LCDC_BGON | LCDC_OBJON | LCDC_OBJ16 | LCDC_ON
+	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]

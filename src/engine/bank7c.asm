@@ -362,7 +362,7 @@ InitPauseMenu_SkipBackupVRAM: ; 1f0099 (7c:4099)
 	ld hl, wMenuObj11
 	call AddPauseMenuSprite
 
-	ld a, LCDC_ON | LCDC_BG9C00 | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
+	ld a, LCDCF_ON | LCDCF_BG9C00 | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 	ldh [rLCDC], a
 
 	ld hl, wSubState
@@ -466,7 +466,7 @@ ReturnFromPauseMenu: ; 1f033c (7c:433c)
 	ld [wRoomAnimatedTilesEnabled], a
 
 	call UpdateLevelMusic
-	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
+	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]
@@ -498,7 +498,7 @@ InitSaveScreen: ; 1f0370 (7c:4370)
 	ld a, HIGH(v0BGMap0 + $164)
 	ld [hli], a
 	ld [hl], LOW(v0BGMap0 + $164)
-	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
+	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]
@@ -857,7 +857,7 @@ Func_1f03fa: ; 1f03fa (7c:43fa)
 	call VBlank_1f0c6c
 	farcall LoadSaveScreenPals
 	farcall PrintSaveCompleteBox
-	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
+	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 	ldh [rLCDC], a
 	xor a
 	ld [wTimer + 0], a
@@ -920,7 +920,7 @@ InitSaveScreenAndBackupVRAM: ; 1f0701 (7c:4701)
 	ld a, HIGH(v0BGMap0 + $164)
 	ld [hli], a
 	ld [hl], LOW(v0BGMap0 + $164)
-	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
+	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]
@@ -1060,7 +1060,7 @@ Func_1f0768: ; 1f0768 (7c:4768)
 	ld [wTimer + 0], a
 	ld a, $02
 	ld [wTimer + 1], a
-	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
+	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]
@@ -1080,7 +1080,7 @@ Func_1f08af: ; 1f08af (7c:48af)
 	call LoadBackupVRAM
 	xor a
 	ld [wResetDisabled], a
-	ld a, LCDC_ON | LCDC_WIN9C00 | LCDC_WINON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
+	ld a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 	ldh [rLCDC], a
 	ld a, ST_OVERWORLD
 	ld [wState], a
@@ -2969,28 +2969,28 @@ OAM_1f156c: ; 1f156c (7c:556c)
 
 .frame_2
 	frame_oam -16,  -8, $d6, 0
-	frame_oam -16,   0, $d6, 0 | X_FLIP
+	frame_oam -16,   0, $d6, 0 | OAMF_XFLIP
 	db $80
 
 .frame_3
 	frame_oam -16,  -8, $d8, 0
-	frame_oam -16,   0, $d8, 0 | X_FLIP
+	frame_oam -16,   0, $d8, 0 | OAMF_XFLIP
 	db $80
 
 .frame_4
 	frame_oam -16,  -8, $da, 0
-	frame_oam -16,   0, $da, 0 | X_FLIP
+	frame_oam -16,   0, $da, 0 | OAMF_XFLIP
 	db $80
 
 .frame_5
 	frame_oam -16,  -8, $dc, 0
-	frame_oam -16,   0, $dc, 0 | X_FLIP
+	frame_oam -16,   0, $dc, 0 | OAMF_XFLIP
 	db $80
 
 .frame_6
 	frame_oam -27,  -8, $10, 7
 	frame_oam -11,  -4, $12, 1
-	frame_oam -27,   0, $10, 7 | X_FLIP
+	frame_oam -27,   0, $10, 7 | OAMF_XFLIP
 	frame_oam -16, -20, $20, 6
 	frame_oam -16, -12, $00, 5
 	frame_oam -16,  -4, $02, 5
@@ -2999,13 +2999,13 @@ OAM_1f156c: ; 1f156c (7c:556c)
 	frame_oam -32,  11, $3a, 5
 	frame_oam -32,  19, $3c, 5
 	frame_oam -32,  27, $3e, 5
-	frame_oam -16,   4, $00, 5 | X_FLIP
+	frame_oam -16,   4, $00, 5 | OAMF_XFLIP
 	db $80
 
 .frame_7
 	frame_oam -27,  -8, $10, 7
 	frame_oam -11,  -4, $12, 1
-	frame_oam -27,   0, $10, 7 | X_FLIP
+	frame_oam -27,   0, $10, 7 | OAMF_XFLIP
 	frame_oam -16, -20, $20, 6
 	frame_oam -16,  12, $22, 6
 	frame_oam -32,   3, $38, 5
@@ -3013,14 +3013,14 @@ OAM_1f156c: ; 1f156c (7c:556c)
 	frame_oam -32,  19, $3c, 5
 	frame_oam -32,  27, $3e, 5
 	frame_oam -16, -12, $04, 5
-	frame_oam -16,   4, $04, 5 | X_FLIP
+	frame_oam -16,   4, $04, 5 | OAMF_XFLIP
 	frame_oam -16,  -4, $06, 5
 	db $80
 
 .frame_8
 	frame_oam -27,  -8, $10, 7
 	frame_oam -11,  -4, $12, 1
-	frame_oam -27,   0, $10, 7 | X_FLIP
+	frame_oam -27,   0, $10, 7 | OAMF_XFLIP
 	frame_oam -16, -20, $20, 6
 	frame_oam -16,  12, $22, 6
 	frame_oam -32,   3, $38, 5
@@ -3029,13 +3029,13 @@ OAM_1f156c: ; 1f156c (7c:556c)
 	frame_oam -32,  27, $3e, 5
 	frame_oam -16, -12, $08, 5
 	frame_oam -16,  -4, $0a, 5
-	frame_oam -16,   4, $08, 5 | X_FLIP
+	frame_oam -16,   4, $08, 5 | OAMF_XFLIP
 	db $80
 
 .frame_9
 	frame_oam -27,  -8, $10, 7
 	frame_oam -11,  -4, $12, 1
-	frame_oam -27,   0, $10, 7 | X_FLIP
+	frame_oam -27,   0, $10, 7 | OAMF_XFLIP
 	frame_oam -16, -20, $20, 6
 	frame_oam -16,  12, $22, 6
 	frame_oam -32,   3, $38, 5
@@ -3044,7 +3044,7 @@ OAM_1f156c: ; 1f156c (7c:556c)
 	frame_oam -32,  27, $3e, 5
 	frame_oam -16, -12, $0c, 5
 	frame_oam -16,  -4, $0e, 5
-	frame_oam -16,   4, $0c, 5 | X_FLIP
+	frame_oam -16,   4, $0c, 5 | OAMF_XFLIP
 	frame_oam -14,  -4, $3c, 5
 	db $80
 
@@ -3196,68 +3196,68 @@ OAM_1f156c: ; 1f156c (7c:556c)
 	frame_oam -32,   0, $e4, 2
 	frame_oam -16,  -8, $e6, 2
 	frame_oam -16,   0, $e8, 2
-	frame_oam -32,   8, $e0, 2 | X_FLIP
-	frame_oam -16, -16, $e0, 2 | Y_FLIP
-	frame_oam -16,   8, $e0, 2 | X_FLIP | Y_FLIP
+	frame_oam -32,   8, $e0, 2 | OAMF_XFLIP
+	frame_oam -16, -16, $e0, 2 | OAMF_YFLIP
+	frame_oam -16,   8, $e0, 2 | OAMF_XFLIP | OAMF_YFLIP
 	frame_oam -48,   8, $c4, 2
 	db $80
 
 .frame_30
 	frame_oam -32, -12, $ea, 2
-	frame_oam -16, -12, $ea, 2 | Y_FLIP
+	frame_oam -16, -12, $ea, 2 | OAMF_YFLIP
 	frame_oam -40,  -4, $ec, 2
 	frame_oam -24,  -4, $ee, 2
-	frame_oam  -8,  -4, $ec, 2 | Y_FLIP
-	frame_oam -32,   4, $ea, 2 | X_FLIP
-	frame_oam -16,   4, $ea, 2 | X_FLIP | Y_FLIP
+	frame_oam  -8,  -4, $ec, 2 | OAMF_YFLIP
+	frame_oam -32,   4, $ea, 2 | OAMF_XFLIP
+	frame_oam -16,   4, $ea, 2 | OAMF_XFLIP | OAMF_YFLIP
 	frame_oam -48,   8, $cc, 2
 	db $80
 
 .frame_31
 	frame_oam -32, -12, $f0, 2
-	frame_oam -16, -12, $f0, 2 | Y_FLIP
+	frame_oam -16, -12, $f0, 2 | OAMF_YFLIP
 	frame_oam -40,  -4, $f2, 2
-	frame_oam  -8,  -4, $f2, 2 | Y_FLIP
+	frame_oam  -8,  -4, $f2, 2 | OAMF_YFLIP
 	frame_oam -24,  -4, $f4, 2
-	frame_oam -32,   4, $f0, 2 | X_FLIP
-	frame_oam -16,   4, $f0, 2 | X_FLIP | Y_FLIP
+	frame_oam -32,   4, $f0, 2 | OAMF_XFLIP
+	frame_oam -16,   4, $f0, 2 | OAMF_XFLIP | OAMF_YFLIP
 	db $80
 
 .frame_32
 	frame_oam -32,  -4, $f6, 2
-	frame_oam -16,  -4, $f6, 2 | Y_FLIP
+	frame_oam -16,  -4, $f6, 2 | OAMF_YFLIP
 	db $80
 
 .frame_33
 	frame_oam -32, -12, $f0, 2
-	frame_oam -16, -12, $f0, 2 | Y_FLIP
+	frame_oam -16, -12, $f0, 2 | OAMF_YFLIP
 	frame_oam -40,  -4, $f2, 2
-	frame_oam  -8,  -4, $f2, 2 | Y_FLIP
-	frame_oam -24,  -4, $f4, 2 | X_FLIP
-	frame_oam -32,   4, $f0, 2 | X_FLIP
-	frame_oam -16,   4, $f0, 2 | X_FLIP | Y_FLIP
+	frame_oam  -8,  -4, $f2, 2 | OAMF_YFLIP
+	frame_oam -24,  -4, $f4, 2 | OAMF_XFLIP
+	frame_oam -32,   4, $f0, 2 | OAMF_XFLIP
+	frame_oam -16,   4, $f0, 2 | OAMF_XFLIP | OAMF_YFLIP
 	db $80
 
 .frame_34
 	frame_oam -32, -12, $ea, 2
-	frame_oam -16, -12, $ea, 2 | Y_FLIP
+	frame_oam -16, -12, $ea, 2 | OAMF_YFLIP
 	frame_oam -40,  -4, $ec, 2
-	frame_oam -24,  -4, $ee, 2 | X_FLIP
-	frame_oam  -8,  -4, $ec, 2 | Y_FLIP
-	frame_oam -32,   4, $ea, 2 | X_FLIP
-	frame_oam -16,   4, $ea, 2 | X_FLIP | Y_FLIP
+	frame_oam -24,  -4, $ee, 2 | OAMF_XFLIP
+	frame_oam  -8,  -4, $ec, 2 | OAMF_YFLIP
+	frame_oam -32,   4, $ea, 2 | OAMF_XFLIP
+	frame_oam -16,   4, $ea, 2 | OAMF_XFLIP | OAMF_YFLIP
 	frame_oam -48, -16, $cc, 2
 	db $80
 
 .frame_35
 	frame_oam -32, -16, $e0, 2
-	frame_oam -32,   0, $e2, 2 | X_FLIP
-	frame_oam -32,  -8, $e4, 2 | X_FLIP
-	frame_oam -16,   0, $e6, 2 | X_FLIP
-	frame_oam -16,  -8, $e8, 2 | X_FLIP
-	frame_oam -32,   8, $e0, 2 | X_FLIP
-	frame_oam -16, -16, $e0, 2 | Y_FLIP
-	frame_oam -16,   8, $e0, 2 | X_FLIP | Y_FLIP
+	frame_oam -32,   0, $e2, 2 | OAMF_XFLIP
+	frame_oam -32,  -8, $e4, 2 | OAMF_XFLIP
+	frame_oam -16,   0, $e6, 2 | OAMF_XFLIP
+	frame_oam -16,  -8, $e8, 2 | OAMF_XFLIP
+	frame_oam -32,   8, $e0, 2 | OAMF_XFLIP
+	frame_oam -16, -16, $e0, 2 | OAMF_YFLIP
+	frame_oam -16,   8, $e0, 2 | OAMF_XFLIP | OAMF_YFLIP
 	frame_oam -48, -16, $c4, 2
 	db $80
 
@@ -3266,7 +3266,7 @@ OAM_1f156c: ; 1f156c (7c:556c)
 	frame_oam -16, -16, $24, 6
 	frame_oam -16,   8, $26, 6
 	frame_oam -16,  -8, $58, 5
-	frame_oam -16,   0, $58, 5 | X_FLIP
+	frame_oam -16,   0, $58, 5 | OAMF_XFLIP
 	db $80
 
 .frame_37
@@ -3274,7 +3274,7 @@ OAM_1f156c: ; 1f156c (7c:556c)
 	frame_oam -16, -16, $24, 6
 	frame_oam -16,   8, $26, 6
 	frame_oam -16,  -8, $58, 5
-	frame_oam -16,   0, $58, 5 | X_FLIP
+	frame_oam -16,   0, $58, 5 | OAMF_XFLIP
 	db $80
 
 .frame_38
@@ -3282,7 +3282,7 @@ OAM_1f156c: ; 1f156c (7c:556c)
 	frame_oam -16, -16, $24, 6
 	frame_oam -16,   8, $26, 6
 	frame_oam -16,  -8, $58, 5
-	frame_oam -16,   0, $58, 5 | X_FLIP
+	frame_oam -16,   0, $58, 5 | OAMF_XFLIP
 	db $80
 
 .frame_39
@@ -3295,7 +3295,7 @@ OAM_1f156c: ; 1f156c (7c:556c)
 	frame_oam  -5,  -4, $04, 7
 	frame_oam -16, -12, $00, 5
 	frame_oam -16,  -4, $02, 5
-	frame_oam -16,   4, $00, 5 | X_FLIP
+	frame_oam -16,   4, $00, 5 | OAMF_XFLIP
 	frame_oam -16, -12, $1c, 6
 	frame_oam -16,  -4, $1c, 6
 	frame_oam -16,   4, $1c, 6
@@ -3311,7 +3311,7 @@ OAM_1f156c: ; 1f156c (7c:556c)
 	frame_oam  -6,  -4, $0a, 7
 	frame_oam -16, -12, $06, 5
 	frame_oam -16,  -4, $08, 5
-	frame_oam -16,   4, $06, 5 | X_FLIP
+	frame_oam -16,   4, $06, 5 | OAMF_XFLIP
 	frame_oam -16, -12, $1c, 6
 	frame_oam -16,  -4, $1c, 6
 	frame_oam -16,   4, $1c, 6
@@ -3321,7 +3321,7 @@ OAM_1f156c: ; 1f156c (7c:556c)
 	frame_oam -16, -20, $20, 6
 	frame_oam -16,  12, $22, 6
 	frame_oam -32, -12, $12, 0
-	frame_oam -32,   4, $12, 0 | X_FLIP
+	frame_oam -32,   4, $12, 0 | OAMF_XFLIP
 	frame_oam -32,   3, $38, 5
 	frame_oam -32,  11, $3a, 5
 	frame_oam -32,  19, $3c, 5
@@ -3329,7 +3329,7 @@ OAM_1f156c: ; 1f156c (7c:556c)
 	frame_oam  -7,  -4, $10, 7
 	frame_oam -16, -12, $0c, 5
 	frame_oam -16,  -4, $0e, 5
-	frame_oam -16,   4, $0c, 5 | X_FLIP
+	frame_oam -16,   4, $0c, 5 | OAMF_XFLIP
 	frame_oam -16, -12, $1c, 6
 	frame_oam -16,  -4, $1c, 6
 	frame_oam -16,   4, $1c, 6
@@ -3339,7 +3339,7 @@ OAM_1f156c: ; 1f156c (7c:556c)
 	frame_oam -16, -20, $20, 6
 	frame_oam -16,  12, $22, 6
 	frame_oam -32, -12, $12, 0
-	frame_oam -32,   4, $12, 0 | X_FLIP
+	frame_oam -32,   4, $12, 0 | OAMF_XFLIP
 	frame_oam -32,   3, $38, 5
 	frame_oam -32,  11, $3a, 5
 	frame_oam -32,  19, $3c, 5
@@ -3357,15 +3357,15 @@ OAM_1f156c: ; 1f156c (7c:556c)
 	frame_oam -16, -20, $20, 6
 	frame_oam -16,  12, $22, 6
 	frame_oam -32, -12, $12, 0
-	frame_oam -32,   4, $12, 0 | X_FLIP
+	frame_oam -32,   4, $12, 0 | OAMF_XFLIP
 	frame_oam -32,   3, $38, 5
 	frame_oam -32,  11, $3a, 5
 	frame_oam -32,  19, $3c, 5
 	frame_oam -32,  27, $3e, 5
 	frame_oam  -7,  -4, $1a, 7
-	frame_oam -16,   4, $14, 5 | X_FLIP
-	frame_oam -16,  -4, $16, 5 | X_FLIP
-	frame_oam -16, -12, $18, 5 | X_FLIP
+	frame_oam -16,   4, $14, 5 | OAMF_XFLIP
+	frame_oam -16,  -4, $16, 5 | OAMF_XFLIP
+	frame_oam -16, -12, $18, 5 | OAMF_XFLIP
 	frame_oam -16, -12, $1c, 6
 	frame_oam -16,  -4, $1c, 6
 	frame_oam -16,   4, $1c, 6
@@ -3379,10 +3379,10 @@ OAM_1f156c: ; 1f156c (7c:556c)
 	frame_oam -32,  19, $3c, 5
 	frame_oam -32,  27, $3e, 5
 	frame_oam -16,  -8, $0e, 3
-	frame_oam -16,   0, $0e, 3 | X_FLIP
+	frame_oam -16,   0, $0e, 3 | OAMF_XFLIP
 	frame_oam -16, -12, $02, 5
 	frame_oam -16,  -4, $04, 5
-	frame_oam -16,   4, $02, 5 | X_FLIP
+	frame_oam -16,   4, $02, 5 | OAMF_XFLIP
 	frame_oam -32,  -4, $00, 5
 	frame_oam   0,  -4, $06, 5
 	db $80
@@ -3397,10 +3397,10 @@ OAM_1f156c: ; 1f156c (7c:556c)
 	frame_oam -32,  -4, $00, 5
 	frame_oam   0,  -4, $06, 5
 	frame_oam -16,  -8, $0c, 3
-	frame_oam -16,   0, $0c, 3 | X_FLIP
+	frame_oam -16,   0, $0c, 3 | OAMF_XFLIP
 	frame_oam -16, -12, $08, 5
 	frame_oam -16,  -4, $0a, 5
-	frame_oam -16,   4, $08, 5 | X_FLIP
+	frame_oam -16,   4, $08, 5 | OAMF_XFLIP
 	db $80
 
 .frame_46
@@ -3414,7 +3414,7 @@ OAM_1f156c: ; 1f156c (7c:556c)
 	frame_oam -16,   0, $12, 3
 	frame_oam -16, -12, $02, 5
 	frame_oam -16,  -4, $04, 5
-	frame_oam -16,   4, $02, 5 | X_FLIP
+	frame_oam -16,   4, $02, 5 | OAMF_XFLIP
 	frame_oam -32,  -4, $00, 5
 	frame_oam   0,  -4, $06, 5
 	db $80
@@ -3427,10 +3427,10 @@ OAM_1f156c: ; 1f156c (7c:556c)
 	frame_oam -32,  19, $3c, 5
 	frame_oam -32,  27, $3e, 5
 	frame_oam -16,  -8, $14, 3
-	frame_oam -16,   0, $14, 3 | X_FLIP
+	frame_oam -16,   0, $14, 3 | OAMF_XFLIP
 	frame_oam -16, -12, $02, 5
 	frame_oam -16,  -4, $04, 5
-	frame_oam -16,   4, $02, 5 | X_FLIP
+	frame_oam -16,   4, $02, 5 | OAMF_XFLIP
 	frame_oam -32,  -4, $00, 5
 	frame_oam   0,  -4, $06, 5
 	db $80
@@ -3442,11 +3442,11 @@ OAM_1f156c: ; 1f156c (7c:556c)
 	frame_oam -32,  11, $3a, 5
 	frame_oam -32,  19, $3c, 5
 	frame_oam -32,  27, $3e, 5
-	frame_oam -16,   0, $10, 3 | X_FLIP
-	frame_oam -16,  -8, $12, 3 | X_FLIP
+	frame_oam -16,   0, $10, 3 | OAMF_XFLIP
+	frame_oam -16,  -8, $12, 3 | OAMF_XFLIP
 	frame_oam -16, -12, $02, 5
 	frame_oam -16,  -4, $04, 5
-	frame_oam -16,   4, $02, 5 | X_FLIP
+	frame_oam -16,   4, $02, 5 | OAMF_XFLIP
 	frame_oam -32,  -4, $00, 5
 	frame_oam   0,  -4, $06, 5
 	db $80

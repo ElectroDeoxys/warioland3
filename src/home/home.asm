@@ -84,7 +84,7 @@ DoPendingDMATransfer:: ; c4c (0:c4c)
 	jr nz, .dma_transfer
 
 	xor a
-	ld [MBC5SRamBank], a
+	ld [rRAMB + $100], a
 	ld hl, wc0bc
 	ld a, [wSCY]
 	add [hl]
@@ -102,7 +102,7 @@ DoPendingDMATransfer:: ; c4c (0:c4c)
 .dma_transfer
 	ld hl, wPendingDMASourceBank
 	ld a, [hli]
-	ld [MBC5RomBank], a
+	ld [rROMB0 + $100], a
 	ld c, LOW(rHDMA1)
 	ld a, [hli] ; wPendingDMASourcePtr
 	ld [$ff00+c], a ; rHDMA1
@@ -786,18 +786,18 @@ ClearTransformationValues:: ; 1079 (0:1079)
 ; recovering from Blind transformation
 .RestoreBlindPalettes
 	ld hl, wTempPals1
-	ld a, 1 << rBGPI_AUTO_INCREMENT
-	ldh [rBGPI], a
+	ld a, BCPSF_AUTOINC
+	ldh [rBCPS], a
 	ld b, 8
-	ld c, LOW(rBGPD)
+	ld c, LOW(rBCPD)
 
 .wait_lcd_on_bg
 	ldh a, [rSTAT]
-	and STAT_ON_LCD
+	and STATF_LCD
 	jr z, .wait_lcd_on_bg
 .wait_lcd_off_bg
 	ldh a, [rSTAT]
-	and STAT_ON_LCD
+	and STATF_LCD
 	jr nz, .wait_lcd_off_bg
 
 	ld a, [hli]
@@ -820,18 +820,18 @@ ClearTransformationValues:: ; 1079 (0:1079)
 	jr nz, .wait_lcd_on_bg
 
 	ld hl, wTempPals2 palette 3
-	ld a, (1 << rOBPI_AUTO_INCREMENT) | $18
-	ldh [rOBPI], a
+	ld a, OCPSF_AUTOINC | $18
+	ldh [rOCPS], a
 	ld b, 4
-	ld c, LOW(rOBPD)
+	ld c, LOW(rOCPD)
 
 .wait_lcd_on_ob
 	ldh a, [rSTAT]
-	and STAT_ON_LCD
+	and STATF_LCD
 	jr z, .wait_lcd_on_ob
 .wait_lcd_off_ob
 	ldh a, [rSTAT]
-	and STAT_ON_LCD
+	and STATF_LCD
 	jr nz, .wait_lcd_off_ob
 
 	ld a, [hli]
@@ -1232,7 +1232,7 @@ ReturnToLevelFromGolf:: ; 13d5 (0:13d5)
 	or $02
 	ld [wc0d7], a
 	farcall Func_1f0969
-	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
+	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 	ldh [rLCDC], a
 ;	fallthrough
 
@@ -2354,10 +2354,10 @@ LevelTreasureIDs:: ; 198b (0:198b)
 
 LoadBGPalettesFromWRAM:: ; 19f3 (0:19f3)
 	ld hl, wTempBGPals
-	ld a, 1 << rBGPI_AUTO_INCREMENT
-	ldh [rBGPI], a
+	ld a, BCPSF_AUTOINC
+	ldh [rBCPS], a
 	ld b, 8 palettes
-	ld c, LOW(rBGPD)
+	ld c, LOW(rBCPD)
 .loop
 	ld a, [hli]
 	ld [$ff00+c], a
@@ -2368,10 +2368,10 @@ LoadBGPalettesFromWRAM:: ; 19f3 (0:19f3)
 
 LoadOBPalettesFromWRAM:: ; 1a04 (0:1a04)
 	ld hl, wTempOBPals
-	ld a, 1 << rOBPI_AUTO_INCREMENT
-	ldh [rOBPI], a
+	ld a, OCPSF_AUTOINC
+	ldh [rOCPS], a
 	ld b, 8 palettes
-	ld c, LOW(rOBPD)
+	ld c, LOW(rOCPD)
 .loop
 	ld a, [hli]
 	ld [$ff00+c], a
@@ -2441,8 +2441,8 @@ EnableDoubleSpeed:: ; 1a40 (0:1a40)
 	push af
 	xor a
 	ldh [rIE], a
-	ld a, JOY_BTNS_SELECT | JOY_DPAD_SELECT
-	ldh [rJOYP], a
+	ld a, P1F_GET_NONE
+	ldh [rP1], a
 	stop
 
 .wait
@@ -2451,7 +2451,7 @@ EnableDoubleSpeed:: ; 1a40 (0:1a40)
 	jr z, .wait
 
 	xor a
-	ldh [rJOYP], a
+	ldh [rP1], a
 	ldh [rIF], a
 	pop af
 	ldh [rIE], a
@@ -2501,10 +2501,10 @@ StoreBGPals:: ; 1a9a (0:1a9a)
 	ld e, a
 	ld hl, wTempBGPals
 	ld b, 8 palettes
-	ld c, LOW(rBGPD)
+	ld c, LOW(rBCPD)
 .loop
 	ld a, e
-	ldh [rBGPI], a
+	ldh [rBCPS], a
 	ld a, [$ff00+c]
 	ld [hli], a
 	inc e
@@ -2519,10 +2519,10 @@ StoreOBPals:: ; 1aad (0:1aad)
 	ld e, a
 	ld hl, wTempOBPals
 	ld b, 8 palettes
-	ld c, LOW(rOBPD)
+	ld c, LOW(rOCPD)
 .loop
 	ld a, e
-	ldh [rOBPI], a
+	ldh [rOCPS], a
 	ld a, [$ff00+c]
 	ld [hli], a
 	inc e
@@ -2534,10 +2534,10 @@ StoreOBPals:: ; 1aad (0:1aad)
 ; fills BG palette with just white
 FillWhiteBGPal:: ; 1ac0 (0:1ac0)
 	ld hl, PalsWhite
-	ld a, 1 << rBGPI_AUTO_INCREMENT
-	ldh [rBGPI], a
+	ld a, BCPSF_AUTOINC
+	ldh [rBCPS], a
 	ld b, 8 palettes
-	ld c, LOW(rBGPD)
+	ld c, LOW(rBCPD)
 .loop
 	ld a, [hli]
 	ld [$ff00+c], a
@@ -2549,10 +2549,10 @@ FillWhiteBGPal:: ; 1ac0 (0:1ac0)
 ; fills OB palette with just white
 FillWhiteOBPal:: ; 1ad1 (0:1ad1)
 	ld hl, PalsWhite
-	ld a, 1 << rOBPI_AUTO_INCREMENT
-	ldh [rOBPI], a
+	ld a, OCPSF_AUTOINC
+	ldh [rOCPS], a
 	ld b, 8 palettes
-	ld c, LOW(rOBPD)
+	ld c, LOW(rOCPD)
 .loop
 	ld a, [hli]
 	ld [$ff00+c], a
@@ -2581,18 +2581,18 @@ SetWarioPal:: ; 1af6 (0:1af6)
 	hcall CopyHLToDE_Short
 	pop hl
 
-	ld a, (1 << rOBPI_AUTO_INCREMENT)
-	ldh [rOBPI], a
+	ld a, OCPSF_AUTOINC
+	ldh [rOCPS], a
 	ld b, 2
-	ld c, LOW(rOBPD)
+	ld c, LOW(rOCPD)
 
 .wait_lcd_on
 	ldh a, [rSTAT]
-	and STAT_ON_LCD
+	and STATF_LCD
 	jr z, .wait_lcd_on
 .wait_lcd_off
 	ldh a, [rSTAT]
-	and STAT_ON_LCD
+	and STATF_LCD
 	jr nz, .wait_lcd_off
 
 ; apply OBJ palette
@@ -2623,10 +2623,10 @@ SetWarioPal:: ; 1af6 (0:1af6)
 
 ApplyTempPals1ToBGPals:: ; 1c4a (0:1c4a)
 	ld hl, wTempPals1
-	ld a, 1 << rBGPI_AUTO_INCREMENT
-	ldh [rBGPI], a
+	ld a, BCPSF_AUTOINC
+	ldh [rBCPS], a
 	ld b, 8 palettes
-	ld c, LOW(rBGPD)
+	ld c, LOW(rBCPD)
 .loop
 	ld a, [hli]
 	ld [$ff00+c], a
@@ -2637,10 +2637,10 @@ ApplyTempPals1ToBGPals:: ; 1c4a (0:1c4a)
 
 ApplyTempPals2ToOBPals:: ; 1c5b (0:1c5b)
 	ld hl, wTempPals2
-	ld a, 1 << rOBPI_AUTO_INCREMENT
-	ldh [rOBPI], a
+	ld a, OCPSF_AUTOINC
+	ldh [rOCPS], a
 	ld b, 8 palettes
-	ld c, LOW(rOBPD)
+	ld c, LOW(rOCPD)
 .loop
 	ld a, [hli]
 	ld [$ff00+c], a
@@ -3009,17 +3009,17 @@ UpdateRoomAnimatedPals:: ; 2a77 (0:2a77)
 	push af
 	ld a, BANK("Palettes")
 	bankswitch
-	ld a, 1 << rBGPI_AUTO_INCREMENT
-	ldh [rBGPI], a
+	ld a, BCPSF_AUTOINC
+	ldh [rBCPS], a
 	ld b, 5
-	ld c, LOW(rBGPD)
+	ld c, LOW(rBCPD)
 .wait_lcd_1
 	ldh a, [rSTAT]
-	and STAT_ON_LCD
+	and STATF_LCD
 	jr z, .wait_lcd_1
 .wait_lcd_2
 	ldh a, [rSTAT]
-	and STAT_ON_LCD
+	and STATF_LCD
 	jr nz, .wait_lcd_2
 
 REPT 12
@@ -3031,11 +3031,11 @@ ENDR
 
 .wait_lcd_3
 	ldh a, [rSTAT]
-	and STAT_ON_LCD
+	and STATF_LCD
 	jr z, .wait_lcd_3
 .wait_lcd_4
 	ldh a, [rSTAT]
-	and STAT_ON_LCD
+	and STATF_LCD
 	jr nz, .wait_lcd_4
 
 REPT 3
@@ -3091,11 +3091,11 @@ Func_2c30:: ; 2c30 (0:2c30)
 ; 0x2c46
 
 Func_2c46:: ; 2c46 (0:2c46)
-	ld de, rBGPI
+	ld de, rBCPS
 	ld c, 4
 	jr .asm_2c52
 
-	ld de, rOBPI
+	ld de, rOCPS
 	ld c, 4
 
 .asm_2c52

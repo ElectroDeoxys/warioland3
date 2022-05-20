@@ -190,7 +190,7 @@ InitActionHelp: ; 1f8022 (7e:4022)
 	xor a
 	ldh [rVBK], a
 	call ClearUnusedVirtualOAM
-	ld a, LCDC_ON | LCDC_BG9C00 | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
+	ld a, LCDCF_ON | LCDCF_BG9C00 | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]

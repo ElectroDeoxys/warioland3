@@ -102,7 +102,7 @@ InitGolfLobby: ; 1c8020 (72:4020)
 	ld [wSCY], a
 	ld [wSCX], a
 
-	ld a, LCDC_BGON | LCDC_OBJON | LCDC_OBJ16 | LCDC_ON
+	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]
@@ -629,7 +629,7 @@ InitGolfClearCutscene: ; 1c846c (72:446c)
 	ld [wSCY], a
 	ld [wSCX], a
 
-	ld a, LCDC_BGON | LCDC_OBJON | LCDC_OBJ16 | LCDC_ON
+	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]

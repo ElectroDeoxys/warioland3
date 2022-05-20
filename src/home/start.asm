@@ -30,14 +30,14 @@ InitWithoutDemoPowerUpReset:: ; 161 (0:161)
 	ldh [rSVBK], a
 	ldh [rRP], a
 
-	ld a, LCDC_ON
+	ld a, LCDCF_ON
 	ldh [rLCDC], a
 .wait_lcd_y
 	ldh a, [rLY]
 	cp $94
 	jr nz, .wait_lcd_y
 
-	ld a, LCDC_OBJON | LCDC_BGON
+	ld a, LCDCF_OBJON | LCDCF_BGON
 	ldh [rLCDC], a
 	call ClearVRAM
 	call EnableDoubleSpeed
@@ -72,7 +72,7 @@ InitWithoutDemoPowerUpReset:: ; 161 (0:161)
 	ld a, BANK("Bank 1")
 	bankswitch
 	xor a
-	ld [MBC5HighRomBank], a
+	ld [rROMB1 + $100], a
 	xor a ; SRAM0
 	sramswitch
 
@@ -98,12 +98,12 @@ InitWithoutDemoPowerUpReset:: ; 161 (0:161)
 
 	xor a
 	ldh [rIF], a
-	ld a, 1 << INT_VBLANK
+	ld a, 1 << IEB_VBLANK
 	ldh [rIE], a
 	call InitLCD
 
-	ld a, SRAM_ENABLE
-	ld [MBC5SRamEnable], a
+	ld a, CART_SRAM_ENABLE
+	ld [rRAMG], a
 	farcall Func_1f0cad
 	ei
 
@@ -122,7 +122,7 @@ InitWithoutDemoPowerUpReset:: ; 161 (0:161)
 	xor a
 	ld [wJoypadPressed], a
 	call FillWhiteBGPal
-	ld a, LCDC_ON
+	ld a, LCDCF_ON
 	ldh [rLCDC], a
 	di
 	call InitAudio

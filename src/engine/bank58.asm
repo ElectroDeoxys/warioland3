@@ -106,7 +106,7 @@ Func_160028: ; 160028 (58:4028)
 	stop_music
 	ld a, 120
 	ld [wTimer], a
-	ld a, LCDC_BGON | LCDC_OBJON | LCDC_OBJ16 | LCDC_ON
+	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]
@@ -616,7 +616,7 @@ VBlank_160439: ; 160439 (58:4439)
 	call ApplyTempPals2ToOBPals
 	ld hl, rLCDC
 	ld a, [hl]
-	or LCDC_WINON | LCDC_WIN9C00
+	or LCDCF_WINON | LCDCF_WIN9C00
 	ld [hl], a
 .asm_1604a6
 	ld hl, wcee4
@@ -1230,19 +1230,19 @@ OAM_1617e8: ; 1617e8 (58:57e8)
 	db $80
 
 .frame_22
-	frame_oam -24,  20, $1c, 1 | Y_FLIP
+	frame_oam -24,  20, $1c, 1 | OAMF_YFLIP
 	db $80
 
 .frame_23
-	frame_oam -24,  20, $1a, 1 | Y_FLIP
+	frame_oam -24,  20, $1a, 1 | OAMF_YFLIP
 	db $80
 
 .frame_24
-	frame_oam -24,  20, $18, 1 | Y_FLIP
+	frame_oam -24,  20, $18, 1 | OAMF_YFLIP
 	db $80
 
 .frame_25
-	frame_oam -24,  20, $16, 1 | Y_FLIP
+	frame_oam -24,  20, $16, 1 | OAMF_YFLIP
 	db $80
 
 .frame_26
@@ -1272,17 +1272,17 @@ OAM_1617e8: ; 1617e8 (58:57e8)
 	frame_oam -33,  16, $c8, 0
 	frame_oam -15, -16, $ca, 0
 	frame_oam -15,  -8, $cc, 0
-	frame_oam -15,   0, $cc, 0 | X_FLIP
+	frame_oam -15,   0, $cc, 0 | OAMF_XFLIP
 	frame_oam -25,   8, $ce, 0
 	frame_oam  -9,   8, $d0, 0
-	frame_oam -18,  16, $be, 1 | X_FLIP
+	frame_oam -18,  16, $be, 1 | OAMF_XFLIP
 	frame_oam -32, -20, $d4, 2
 	frame_oam -32, -12, $d6, 2
 	frame_oam -32,  -4, $d8, 2
 	frame_oam -32,   4, $da, 2
 	frame_oam -32,  12, $dc, 2
 	frame_oam -48,  -8, $d2, 1
-	frame_oam -48,   0, $d2, 1 | X_FLIP
+	frame_oam -48,   0, $d2, 1 | OAMF_XFLIP
 	frame_oam -24,  22, $de, 1
 	db $80
 

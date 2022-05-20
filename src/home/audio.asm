@@ -53,7 +53,7 @@ SwitchToAudioBank:: ; 3f54 (0:3f54)
 	ld a, BANK("Audio Engine")
 .switch_bank
 	ld [wROMBank], a
-	ld [MBC5RomBank - $100], a
+	ld [rROMB0], a
 	ret
 
 SwitchBackFromAudioBank:: ; 3f5d (0:3f5d)

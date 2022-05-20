@@ -75,7 +75,7 @@ InitGolfLevel: ; 1c8965 (72:4965)
 
 	; setting the LCDC here is unnecessary since we
 	; already set the correct configuration in Func_1c9cf9
-	ld a, LCDC_BGON | LCDC_OBJON | LCDC_OBJ16 | LCDC_ON
+	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
 	ldh [rLCDC], a
 
 	ld hl, wSubState
@@ -2899,13 +2899,13 @@ Func_1c9cf9: ; 1c9cf9 (72:5cf9)
 	cp GOLF_DISPLAY_BGMAP1
 	jr z, .bgmap1
 ; bgmap0
-	ld a, LCDC_BGON | LCDC_OBJON | LCDC_OBJ16 | LCDC_ON
+	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
 	jr .got_lcd_config
 .split
-	ld a, LCDC_BGON | LCDC_OBJON | LCDC_OBJ16 | LCDC_WINON | LCDC_WIN9C00 | LCDC_ON
+	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_WINON | LCDCF_WIN9C00 | LCDCF_ON
 	jr .got_lcd_config
 .bgmap1
-	ld a, LCDC_BGON | LCDC_OBJON | LCDC_OBJ16 | LCDC_BG9C00 | LCDC_ON
+	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_BG9C00 | LCDCF_ON
 .got_lcd_config
 	ld [w1dc0c], a
 
@@ -3026,7 +3026,7 @@ VBlank_1c9eb3: ; 1c9eb3 (72:5eb3)
 	ld a, [w1dc0c]
 	ldh [rLCDC], a
 	ld a, [wGolfWarioTilesBank]
-	ld [MBC5RomBank - $100], a
+	ld [rROMB0], a
 	ld hl, rHDMA1
 	ld a, [wGolfWarioTilesPtr + 0]
 	ld [hli], a
@@ -3138,7 +3138,7 @@ VBlank_1c9f7a: ; 1c9f7a (72:5f7a)
 	ldh [rSCX], a
 
 	ld a, [wGolfWarioTilesBank]
-	ld [MBC5RomBank - $100], a
+	ld [rROMB0], a
 	ld hl, rHDMA1
 	ld a, [wGolfWarioTilesPtr + 0]
 	ld [hli], a

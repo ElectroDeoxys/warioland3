@@ -58,15 +58,15 @@ def getAttributesString(attr):
     outStr = ("{0:01x} | ".format(attr & 0b111))
 
     if ((attr & 0x08) != 0):
-        outStr += ("TILE_BANK | ")
+        outStr += ("OAMF_BANK1 | ")
     if ((attr & 0x10) != 0):
         outStr += ("OBP_NUM | ")
     if ((attr & 0x20) != 0):
-        outStr += ("X_FLIP | ")
+        outStr += ("OAMF_XFLIP | ")
     if ((attr & 0x40) != 0):
-        outStr += ("Y_FLIP | ")
+        outStr += ("OAMF_YFLIP | ")
     if ((attr & 0x80) != 0):
-        outStr += ("PRIORITY | ")
+        outStr += ("OAMF_PRI | ")
 
     outStr = outStr[:-3]
     return outStr

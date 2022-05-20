@@ -3131,17 +3131,17 @@ Func_21b89: ; 21b89 (8:5b89)
 
 	farcall SetState_BlindIdling
 
-	ld a, 1 << rBGPI_AUTO_INCREMENT
-	ldh [rBGPI], a
+	ld a, BCPSF_AUTOINC
+	ldh [rBCPS], a
 	ld b, 4
-	ld c, LOW(rBGPD)
+	ld c, LOW(rBCPD)
 .wait_lcd_off_1
 	ldh a, [rSTAT]
-	and STAT_ON_LCD
+	and STATF_LCD
 	jr z, .wait_lcd_off_1
 .wait_lcd_on_1
 	ldh a, [rSTAT]
-	and STAT_ON_LCD
+	and STATF_LCD
 	jr nz, .wait_lcd_on_1
 
 	xor a
@@ -3151,17 +3151,17 @@ ENDR
 	dec b
 	jr nz, .wait_lcd_off_1
 
-	ld a, (1 << rOBPI_AUTO_INCREMENT) | $18
-	ldh [rOBPI], a
+	ld a, OCPSF_AUTOINC | $18
+	ldh [rOCPS], a
 	ld b, 2
-	ld c, LOW(rOBPD)
+	ld c, LOW(rOCPD)
 .wait_lcd_off_2
 	ldh a, [rSTAT]
-	and STAT_ON_LCD
+	and STATF_LCD
 	jr z, .wait_lcd_off_2
 .wait_lcd_on_2
 	ldh a, [rSTAT]
-	and STAT_ON_LCD
+	and STATF_LCD
 	jr nz, .wait_lcd_on_2
 
 	xor a

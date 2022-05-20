@@ -2217,7 +2217,7 @@ Func_b4f58: ; b4f58 (2d:4f58)
 	ld b, 1 palettes
 	call CopyHLToDE
 	ld hl, wPalConfig1
-	ld a, LOW(rBGPI)
+	ld a, LOW(rBCPS)
 	ld [hl], a
 	ret
 

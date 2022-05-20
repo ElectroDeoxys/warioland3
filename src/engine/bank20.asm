@@ -1219,7 +1219,7 @@ Func_8065e: ; 8065e (20:465e)
 	ld [w2d055], a
 	ld [w2d013], a
 
-	ld a, LCDC_ON | LCDC_WIN9C00 | LCDC_WINON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
+	ld a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 	ldh [rLCDC], a
 
 	ld hl, wSubState
@@ -1311,10 +1311,10 @@ Func_8086f: ; 8086f (20:486f)
 	ld a, [w2d025]
 	cp CUTSCENE_2F
 	jr nz, .no_window_display
-	ld a, LCDC_ON | LCDC_WIN9C00 | LCDC_WINON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
+	ld a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 	jr .apply_lcd
 .no_window_display
-	ld a, LCDC_ON | LCDC_OBJ16 | LCDC_OBJON | LCDC_BGON
+	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 .apply_lcd
 	ldh [rLCDC], a
 
@@ -5025,13 +5025,13 @@ Func_82277: ; 82277 (20:6277)
 	call Func_822b4
 	call Func_826f6
 
-	ld a, LOW(rOBPI)
+	ld a, LOW(rOCPS)
 	ld [wPalConfig1Register], a
 	ld a, HIGH(wTempPals2 palette 4)
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempPals2 palette 4)
 	ld [wPalConfig1SourceLo], a
-	ld a, (1 << rOBPI_AUTO_INCREMENT) | (4 << 3)
+	ld a, OCPSF_AUTOINC | (4 << 3)
 	ld [wPalConfig1Index], a
 	ld a, 4 ; number of pals
 	ld [wPalConfig1Number], a
@@ -5116,13 +5116,13 @@ Func_82311: ; 82311 (20:6311)
 	ld c, 4 palettes
 	ld b, BANK(Pals_84900)
 	call CopyFarBytes
-	ld a, LOW(rOBPI)
+	ld a, LOW(rOCPS)
 	ld [wPalConfig1Register], a
 	ld a, HIGH(wTempPals2 palette 4)
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempPals2 palette 4)
 	ld [wPalConfig1SourceLo], a
-	ld a, (1 << rOBPI_AUTO_INCREMENT) | (4 << 3)
+	ld a, OCPSF_AUTOINC | (4 << 3)
 	ld [wPalConfig1Index], a
 	ld a, 4 ; number of pals
 	ld [wPalConfig1Number], a

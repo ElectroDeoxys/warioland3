@@ -151,7 +151,7 @@ VBlank_1fb6b7: ; 1fb6b7 (7e:76b7)
 	jr z, .not_pending
 	ld hl, wPendingDMASourceBank
 	ld a, [hli]
-	ld [MBC5RomBank], a
+	ld [rROMB0 + $100], a
 	ld c, LOW(rHDMA1)
 	ld a, [hli]
 	ld [$ff00+c], a

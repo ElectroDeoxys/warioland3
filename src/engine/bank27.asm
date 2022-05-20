@@ -50,7 +50,7 @@ Func_9c021: ; 9c021 (27:4021)
 	ld a, [w2d800]
 	ld b, a
 	and a
-	ld a, LCDC_BGON | LCDC_OBJON | LCDC_OBJ16 | LCDC_WIN9C00 | LCDC_ON
+	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_WIN9C00 | LCDCF_ON
 	jr z, .asm_9c067
 	xor b
 .asm_9c067
@@ -251,7 +251,7 @@ Func_9c072: ; 9c072 (27:4072)
 	ld b, BANK(Pals_b8200)
 	call LoadFarPalsToTempPals1
 
-	ld a, LCDC_BG9C00
+	ld a, LCDCF_BG9C00
 	ld [w2d800], a
 	call LoadCutscenes2Gfx
 	call Func_9ca6a
@@ -355,7 +355,7 @@ Func_9c072: ; 9c072 (27:4072)
 	ld b, BANK(Pals_b8e00)
 	ld hl, Pals_b8e00
 	call LoadFarPalsToTempPals2
-	ld a, LCDC_BG9C00
+	ld a, LCDCF_BG9C00
 	ld [w2d800], a
 	call LoadCutscenes4Gfx
 	jp Func_9cbbc
@@ -368,7 +368,7 @@ Func_9c072: ; 9c072 (27:4072)
 	ld b, BANK(Pals_b8a40)
 	ld hl, Pals_b8a40
 	call LoadFarPalsToTempPals2
-	ld a, LCDC_BG9C00
+	ld a, LCDCF_BG9C00
 	ld [w2d800], a
 	call LoadCutscenes2Gfx
 	call Func_9ca6a
@@ -385,7 +385,7 @@ Func_9c072: ; 9c072 (27:4072)
 ;	fallthrough
 
 .Func_9c367: ; 9c367 (27:4367)
-	ld a, LCDC_WINON
+	ld a, LCDCF_WINON
 	ld [w2d800], a
 	ld a, $28
 	ldh [rWY], a
@@ -781,7 +781,7 @@ Func_9c072: ; 9c072 (27:4072)
 ; 0x9c7e8
 
 .Func_9c7e8: ; 9c7e8 (27:47e8)
-	ld a, LCDC_BG9C00
+	ld a, LCDCF_BG9C00
 	ld [w2d800], a
 	ld b, BANK(Pals_b8200)
 	ld hl, Pals_b8200
@@ -1819,7 +1819,7 @@ Func_9d79d: ; 9d79d (27:579d)
 	jp Func_9cd0a
 
 .Func_9d7e6
-	ld a, LCDC_BG9C00
+	ld a, LCDCF_BG9C00
 	ld [w2d800], a
 	jp Func_9cd03
 
@@ -1828,7 +1828,7 @@ Func_9d79d: ; 9d79d (27:579d)
 	jp Func_9cd0a
 
 .Func_9d7f3
-	ld a, LCDC_BG9C00
+	ld a, LCDCF_BG9C00
 	ld [w2d800], a
 	xor a
 	ld hl, wSceneObj2State
@@ -2850,7 +2850,7 @@ Func_9f8da: ; 9f8da (27:78da)
 	ld a, [wSceneObj2Frame]
 	cp $07
 	ret nz
-	ld a, LCDC_BG9C00
+	ld a, LCDCF_BG9C00
 	ld [w2d800], a
 	ld [hl], $01
 	ret

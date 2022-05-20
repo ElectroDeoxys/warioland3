@@ -4,12 +4,12 @@ ENDM
 
 MACRO bankswitch
 	ld [wROMBank], a
-	ld [MBC5RomBank], a
+	ld [rROMB0 + $100], a
 ENDM
 
 MACRO sramswitch
 	ld [wSRAMBank], a
-	ld [MBC5SRamBank], a
+	ld [rRAMB + $100], a
 ENDM
 
 MACRO jumptable
