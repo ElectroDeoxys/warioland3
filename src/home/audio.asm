@@ -63,10 +63,10 @@ SwitchBackFromAudioBank:: ; 3f5d (0:3f5d)
 
 Func_3f62: ; 3f62 (0:3f62)
 	ld hl, wAudioEngineFlags
-	bit 7, [hl]
+	bit AUDIOENG_UNK7_F, [hl]
 	jr nz, .pop_hl
 .asm_3f69
-	set 7, [hl]
+	set AUDIOENG_UNK7_F, [hl]
 	push af
 	call BackupBankAndSwitchToAudioBank
 	pop af
@@ -79,11 +79,11 @@ Func_3f62: ; 3f62 (0:3f62)
 
 Func_3f75:: ; 3f75 (0:3f75)
 	ld hl, wAudioEngineFlags
-	bit 7, [hl]
+	bit AUDIOENG_UNK7_F, [hl]
 	jr z, Func_3f62.asm_3f69
-	bit 6, [hl]
+	bit AUDIOENG_HAS_CALLBACK_F, [hl]
 	jr nz, Func_3f62.pop_hl
-	set 6, [hl]
+	set AUDIOENG_HAS_CALLBACK_F, [hl]
 
 	; pop calling function from the stack
 	; and store the it in WRAM
@@ -98,10 +98,10 @@ Func_3f75:: ; 3f75 (0:3f75)
 
 Func_3f8d:: ; 3f8d (0:3f8d)
 	ld hl, wAudioEngineFlags
-	bit 6, [hl]
+	bit AUDIOENG_HAS_CALLBACK_F, [hl]
 	jr nz, .push_callback
 	call SwitchBackFromAudioBank
-	res 7, [hl]
+	res AUDIOENG_UNK7_F, [hl]
 	xor a
 	ret
 
@@ -113,7 +113,7 @@ Func_3f8d:: ; 3f8d (0:3f8d)
 	ld l, a
 	push hl
 	ld hl, wAudioEngineFlags
-	res 6, [hl]
+	res AUDIOENG_HAS_CALLBACK_F, [hl]
 	ret
 ; 0x3faa
 

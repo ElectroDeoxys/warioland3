@@ -3424,7 +3424,7 @@ UpdateState_Sleeping: ; 1ac73 (6:6c73)
 	ld a, [wAnimationHasFinished]
 	and a
 	ret z
-	play_sfx SFX_036
+	play_sfx SFX_SLEEP
 	xor a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
@@ -3446,7 +3446,7 @@ UpdateState_Sleeping: ; 1ac73 (6:6c73)
 	ld a, [wAnimationHasFinished]
 	and a
 	jr z, .asm_1acde
-	play_sfx SFX_036
+	play_sfx SFX_SLEEP
 .asm_1acde
 	ld a, [wJoypadDown]
 	and a

@@ -2907,7 +2907,7 @@ Func_1c9cf9: ; 1c9cf9 (72:5cf9)
 .bgmap1
 	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_BG9C00 | LCDCF_ON
 .got_lcd_config
-	ld [w1dc0c], a
+	ld [wGolfLCDConfig], a
 
 	ld a, [wGolfVBlankMode]
 	jumptable
@@ -2932,7 +2932,7 @@ VBlank_1c9d1d: ; 1c9d1d (72:5d1d)
 	ldh [rSCX], a
 	ld a, [w1dc25]
 	ldh [rWX], a
-	ld a, [w1dc0c]
+	ld a, [wGolfLCDConfig]
 	ldh [rLCDC], a
 	ld hl, rHDMA1
 	ld a, HIGH(w1d900)
@@ -2998,7 +2998,7 @@ VBlank_1c9e8d: ; 1c9e8d (72:5e8d)
 	ldh [rVBK], a
 	ld a, $03
 	ld [v1BGMap0 + $145], a
-	ld a, [w1dc0c]
+	ld a, [wGolfLCDConfig]
 	ldh [rLCDC], a
 	xor a
 	ldh [rVBK], a
@@ -3023,7 +3023,7 @@ VBlank_1c9eb3: ; 1c9eb3 (72:5eb3)
 	ldh [rSCX], a
 	ld a, [w1dc25]
 	ldh [rWX], a
-	ld a, [w1dc0c]
+	ld a, [wGolfLCDConfig]
 	ldh [rLCDC], a
 	ld a, [wGolfWarioTilesBank]
 	ld [rROMB0], a
@@ -3058,7 +3058,7 @@ VBlank_1c9ef1: ; 1c9ef1 (72:5ef1)
 	ldh [rSCX], a
 	ld a, [w1dc25]
 	ldh [rWX], a
-	ld a, [w1dc0c]
+	ld a, [wGolfLCDConfig]
 	ldh [rLCDC], a
 	ld hl, rHDMA1
 	ld a, HIGH(w1db90)

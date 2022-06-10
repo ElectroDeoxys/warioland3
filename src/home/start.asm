@@ -1,7 +1,7 @@
 SECTION "start", ROM0
 Start:: ; 0150 (0:0150)
 	and a
-	cp $11
+	cp BOOTUP_A_CGB
 	ld a, FALSE
 	jr nz, .not_cgb
 	inc a ; TRUE
@@ -98,7 +98,7 @@ InitWithoutDemoPowerUpReset:: ; 161 (0:161)
 
 	xor a
 	ldh [rIF], a
-	ld a, 1 << IEB_VBLANK
+	ld a, IEF_VBLANK
 	ldh [rIE], a
 	call InitLCD
 

@@ -2431,12 +2431,12 @@ Func_1a34:: ; 1a34 (0:1a34)
 ; 0x1a40
 
 EnableDoubleSpeed:: ; 1a40 (0:1a40)
-	ldh a, [rKEY1]
+	ldh a, [rSPD]
 	bit 7, a
 	ret nz ; already in double speed
 
-	ld a, $01
-	ldh [rKEY1], a
+	ld a, KEY1F_PREPARE
+	ldh [rSPD], a
 	ldh a, [rIE]
 	push af
 	xor a
@@ -2446,7 +2446,7 @@ EnableDoubleSpeed:: ; 1a40 (0:1a40)
 	stop
 
 .wait
-	ldh a, [rKEY1]
+	ldh a, [rSPD]
 	bit 7, a
 	jr z, .wait
 

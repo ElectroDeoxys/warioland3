@@ -469,7 +469,7 @@ _InitTreasureCollection: ; 9a3cf (26:63cf)
 	ld a, $98
 	ld [hld], a
 	ld [hl], b
-	ld a, $8f
+	ld a, LCDCF_ON | LCDCF_BG9C00 | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]

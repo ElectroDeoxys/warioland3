@@ -1163,7 +1163,7 @@ wGolfCounter:: ; dc0a
 w1dc0b:: ; dc0b
 	ds $1
 
-w1dc0c:: ; dc0c
+wGolfLCDConfig:: ; dc0c
 	ds $1
 
 wGolfWarioTilesBank:: ; dc0d
@@ -2206,10 +2206,10 @@ wCurTrackPtr:: ; d013
 	ds $2
 
 ; low byte of a sound register:
-; sound1 = rNR12
-; sound2 = rNR22
-; sound3 = rNR32
-; sound4 = rNR42
+; sound1 = rAUD1ENV
+; sound2 = rAUD2ENV
+; sound3 = rAUD3LEVEL
+; sound4 = rAUD4ENV
 wCurSoundRegister:: ; d015
 	ds $1
 
@@ -2219,7 +2219,7 @@ wAudioCmdPtr:: ; d017
 	ds $2
 
 ; channel Flags1
-w3d019:: ; d019
+wCurChannelFlags:: ; d019
 	ds $1
 
 w3d01a:: ; d01a

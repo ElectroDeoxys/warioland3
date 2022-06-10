@@ -115,7 +115,7 @@
 	const SFX_GROUND_POUND                 ; 133
 	const SFX_034                          ; 134
 	const SFX_035                          ; 135
-	const SFX_036                          ; 136
+	const SFX_SLEEP                        ; 136
 	const SFX_WATER_SURFACE                ; 137
 	const SFX_CLIMB                        ; 138
 	const SFX_039                          ; 139
