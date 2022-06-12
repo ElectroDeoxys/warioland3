@@ -2414,7 +2414,7 @@ Func_81240: ; 81240 (20:5240)
 	ret
 
 .temple
-	play_sfx SFX_0E3
+	play_sfx SFX_SELECTION
 	ld a, SST_OVERWORLD_1A
 	ld [wSubState], a
 	scf
@@ -5558,7 +5558,7 @@ Func_825af: ; 825af (20:65af)
 	ld [wTopBarState], a
 
 .do_selection
-	play_sfx SFX_0E3
+	play_sfx SFX_SELECTION
 	scf
 	ret
 

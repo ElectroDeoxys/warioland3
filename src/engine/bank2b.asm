@@ -1606,7 +1606,7 @@ Func_ae025: ; ae025 (2b:6025)
 	ld [w2d8b0], a
 	ld hl, wSceneObj1State
 	call SetSceneObjState
-	play_music2 MUSIC_49
+	play_music2 MUSIC_MUSIC_BOX_CAVE
 	ld a, $06
 	jr Func_ae009
 ; 0xae067

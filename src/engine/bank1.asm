@@ -1054,7 +1054,7 @@ HandleOverworld: ; 4686 (1:4686)
 	ld a, [hl]
 	cp ST_LEVEL
 	ret nz
-	play_sfx SFX_0E3
+	play_sfx SFX_SELECTION
 	call SelectLevel
 	ld a, [wLevel]
 	cp GOLF_BUILDING
@@ -1804,7 +1804,7 @@ HandleStartMenuSelection: ; 4bb3 (1:4bb3)
 	ret
 
 .a_btn
-	play_sfx SFX_0E3
+	play_sfx SFX_SELECTION
 	ld hl, wStartMenuSelection
 	ld a, [hl]
 	and $f

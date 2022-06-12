@@ -2159,10 +2159,10 @@ GolfLevelState_SpecialTerrain: ; 1c9654 (72:5654)
 	jr z, .par
 	jr nc, .over_par
 ; under par
-	play_music2 MUSIC_GOLF_CLEARED
+	play_music2 MUSIC_GOLF_CLEAR
 	jr .asm_1c9863
 .par
-	play_music2 MUSIC_GOLF_CLEARED
+	play_music2 MUSIC_GOLF_CLEAR
 	ld a, GOLFRESULT_PAR
 	ld [wGolfResult], a
 .asm_1c9863
@@ -2402,7 +2402,7 @@ GolfLevelState_Walk: ; 1c98c7 (72:58c7)
 	ld a, GOLF_WARIO_CLEARED
 	jr .asm_1c99bd
 .asm_1c99af
-	play_music2 MUSIC_GAME_OVER
+	play_music2 MUSIC_GOLF_GAME_OVER
 .asm_1c99bb
 	ld a, GOLF_WARIO_LOST
 .asm_1c99bd
@@ -2488,7 +2488,7 @@ GolfLevelState_BetweenShots: ; 1c9a01 (72:5a01)
 	cp c
 	ret c
 
-	play_music2 MUSIC_GAME_OVER
+	play_music2 MUSIC_GOLF_GAME_OVER
 
 	xor a
 	ld [wGolfCounter], a
@@ -2756,7 +2756,7 @@ GolfLevelState_Pause: ; 1c9bfc (72:5bfc)
 	ld a, $01
 	ld [wGolfMenuOption], a
 .asm_1c9c33
-	play_sfx SFX_0E3
+	play_sfx SFX_SELECTION
 	xor a
 	ld [wSubState], a
 	ret

@@ -62,7 +62,7 @@ Func_1c8586: ; 1c8586 (72:4586)
 	call Func_1c86f8
 	call Func_1c9fae
 
-	ld bc, MUSIC_GOLF_MENU
+	ld bc, MUSIC_GOLF_LOBBY
 	call Func_fe6
 
 	xor a
@@ -551,7 +551,7 @@ Func_1c8911: ; 1c8911 (72:4911)
 	ld [hl], a
 	ret
 .done_subtracting
-	play_sfx SFX_0E3
+	play_sfx SFX_SELECTION
 	call .Func_1c8944
 	ld a, $04
 	ld [wSubState], a

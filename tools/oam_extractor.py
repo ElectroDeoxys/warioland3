@@ -28,8 +28,6 @@ def getOAM(data):
 
 def getPointers(offset):
     curOffset = offset
-    curBank = int(offset / 0x4000) # round down
-
     ptrs = []
 
     while True:
@@ -40,7 +38,7 @@ def getPointers(offset):
         if  (hiPtr < 0x40 or hiPtr >= 0x80) and not (hiPtr == 0x18 and loPtr == 0x26):
             break # exit condition
 
-        ptrs.append(reader.getPointerAt(curOffset, curBank))
+        ptrs.append(reader.getPointerAt(curOffset))
         curOffset += 2
 
     return ptrs

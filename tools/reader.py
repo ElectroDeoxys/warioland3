@@ -11,8 +11,9 @@ def getROMByte(offset):
 # get one byte from offset
     return getROMBytes(offset, 1)
 
-def getPointerAt(offset, bank):
+def getPointerAt(offset):
 # returns the abs offset of pointer at offset
+    bank = int(offset / 0x4000) # round down
     return pointerBytesToBankOffset(getROMBytes(offset, 2), bank)
 
 def absOffsetToRel(offset):
@@ -38,11 +39,11 @@ def standardiseList(ls):
     return list(dict.fromkeys(listSorted))
 
 def offsetHeaderStr(offset):
-    return '; {:0x} ('.format(offset) + '{:02x}:'.format(floor(offset / 0x4000)) + '{:0x}'.format(absOffsetToRel(offset)) + ')\n'
+    return '; {:0x} ('.format(offset) + '{:02x}:'.format(floor(offset / 0x4000)) + '{:0x}'.format(absOffsetToRel(offset)) + ')'
 
 def getDataString(offset, len, suffix = 'Data_'):
     outStr = suffix + '{:0x}'.format(offset)
-    outStr += ': ' + offsetHeaderStr(offset)
+    outStr += ': ' + offsetHeaderStr(offset) + '\n'
     outStr += '{}' # for inserting the content
     outStr += '; 0x{:0x}\n'.format(offset + len)
     return outStr

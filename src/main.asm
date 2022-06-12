@@ -47,21 +47,6 @@ SECTION "Bank A", ROMX
 INCLUDE "engine/banka.asm"
 
 
-SECTION "Bank D", ROMX
-
-	INCROM $34000, $38000
-
-
-SECTION "Bank E", ROMX
-
-	INCROM $38000, $3c000
-
-
-SECTION "Bank F", ROMX
-
-INCLUDE "engine/bankf.asm"
-
-
 SECTION "Bank 10", ROMX
 
 INCLUDE "engine/bank10.asm"

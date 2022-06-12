@@ -43,14 +43,14 @@
 	const MUSIC_BOSS_BATTLE                ; 027
 	const MUSIC_LEVEL_CLEAR_GOT_TREASURE   ; 028
 	const MUSIC_BOSS_DEFEAT                ; 029
-	const MUSIC_GAME_OVER                  ; 02a
-	const MUSIC_GOLF_CLEARED               ; 02b
+	const MUSIC_GOLF_GAME_OVER             ; 02a
+	const MUSIC_GOLF_CLEAR                 ; 02b
 	const MUSIC_MUSIC_BOXES                ; 02c
-	const MUSIC_45                         ; 02d
+	const MUSIC_BOSS_REVEAL                ; 02d
 	const MUSIC_ACTION_HELP                ; 02e
-	const MUSIC_GOLF_MENU                  ; 02f
-	const MUSIC_48                         ; 030
-	const MUSIC_49                         ; 031
+	const MUSIC_GOLF_LOBBY                 ; 02f
+	const MUSIC_GAME_OVER                  ; 030
+	const MUSIC_MUSIC_BOX_CAVE             ; 031
 	const MUSIC_THE_TEMPLE                 ; 032
 	const MUSIC_TITLE_SCREEN               ; 033
 	const MUSIC_INTRO                      ; 034
@@ -288,7 +288,7 @@
 	const SFX_0E0                          ; 1e0 (unused)
 	const SFX_0E1                          ; 1e1
 	const SFX_0E2                          ; 1e2
-	const SFX_0E3                          ; 1e3
+	const SFX_SELECTION                    ; 1e3
 	const SFX_0E4                          ; 1e4
 	const SFX_0E5                          ; 1e5
 	const SFX_0E6                          ; 1e6

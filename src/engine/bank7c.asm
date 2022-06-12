@@ -1438,7 +1438,7 @@ HandlePauseMenuInput: ; 1f09bd (7c:49bd)
 .do_selection
 	ld hl, wPauseMenuSelection
 	set 7, [hl]
-	play_sfx SFX_0E3
+	play_sfx SFX_SELECTION
 	ret
 ; 0x1f0b3a
 

@@ -53,12 +53,15 @@ ROMX $0b
 	"Wario Gfx 3"
 ROMX $0c
 	"Audio Engine"
+	"Music 1"
 ROMX $0d
-	"Bank D"
+	"Music 2"
 ROMX $0e
-	"Bank E"
+	"Music 3"
+	"SFX 1"
 ROMX $0f
-	"Bank F"
+	"SFX 2"
+	"Audio Miscellaneous"
 ROMX $10
 	"Bank 10"
 ROMX $11

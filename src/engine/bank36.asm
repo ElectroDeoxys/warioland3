@@ -196,7 +196,7 @@ Func_db317: ; db317 (36:7317)
 	dec [hl]
 	jr nz, .asm_db3a9
 	play_sfx SFX_061
-	play_music MUSIC_GAME_OVER
+	play_music MUSIC_GOLF_GAME_OVER
 	ld a, 6
 	ld [wTimer], a
 	ld hl, $d51d
@@ -223,7 +223,7 @@ Func_db317: ; db317 (36:7317)
 	ld a, [wTimer]
 	and a
 	jr nz, .asm_db3a9
-	play_music MUSIC_48
+	play_music MUSIC_GAME_OVER
 	ld hl, $d51d
 	inc [hl]
 	jr .asm_db3a9
@@ -232,7 +232,7 @@ Func_db317: ; db317 (36:7317)
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jr z, .asm_db3a9
-	play_sfx SFX_0E3
+	play_sfx SFX_SELECTION
 	ld hl, $d519
 	xor a
 	ld [hli], a

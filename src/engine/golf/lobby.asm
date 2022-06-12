@@ -94,7 +94,7 @@ InitGolfLobby: ; 1c8020 (72:4020)
 	ld [wGolfVBlankMode], a
 	call GolfLobbyVBlank
 
-	play_music2 MUSIC_GOLF_MENU
+	play_music2 MUSIC_GOLF_LOBBY
 
 	xor a
 	ldh [rSCY], a

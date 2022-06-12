@@ -102,31 +102,29 @@ ENDM
 MACRO channel_struct
 \1Flags::            db
 \1Duration::         db
-\1Unk02::            dw
+\1CmdPtr::           dw
 \1SoundBank::        db
-\1Unk05::            db
+\1Unused05::         db
 \1SoundID::          dw
-\1Unk08::            db
-\1Unk09::            db
+\1Priority::         db
+\1Pitch::            db
 \1Unk0a::            db
 \1Unk0b::            db
 \1Timbre::           db
 \1Length::           db
 \1Sweep::            db
-\1FadeInSpeed::      db
-\1FadeOutSpeed::     db
+\1FadeInEnvelope::   db
+\1FadeOutEnvelope::  db
 \1ActiveCommand::    db
-\1Unk12::            db
-\1Unk13::            db
-\1Unk14::            db
-\1Unk15::            db
+\1SemitoneOffset::   db
+\1Unk13::            dw
+\1Volume::           db
 \1Unk16::            db
-\1Unk17::            db
 \1SO1::              db
 \1SO2::              db
+\1Unk19::            db
 \1Unk1a::            db
-\1Unk1b::            db
-\1Unk1c::            db
+\1Unk1b::            dw
 \1Unk1d::            db
 \1Unk1e::            db
 \1VibratoSpeed::     db
@@ -134,16 +132,14 @@ MACRO channel_struct
 \1VibratoAmplitude:: db
 \1Unk22::            db
 \1VibratoDisabled::  db
-\1Unk24::            db
-\1Unk25::            db
+\1Unk24::            dw
 \1Unk26::            db
 \1Unk27::            db
 \1Unk28::            db
 \1Unk29::            db
 \1VibratoDelay::     db
 \1VibratoCounter::   db
-\1Unk2c::            db
-\1Unk2d::            db
+\1Frequency::        dw
 \1SOFlags::          db
 ; bits 7 and 6 determine sound ouput
 ; %01 -> only SO1
@@ -165,25 +161,25 @@ MACRO channel_struct
 ENDM
 
 MACRO track_struct
-\1Unk00::          db
-\1Unk01::          db
+\1Flags::          db
+\1Priority::       db
 \1Unk02::          db
 \1Unk03::          db
-\1Channel::        dw ; pointer to a channel_struct
+\1ChannelPtr::     dw ; pointer to a channel_struct
 \1Unk06::          db
-\1Unk07::          db
+\1Duration::       db
 \1Timbre::         db
 ; in case of sound1 and sound2, duty cycle
 ; bits 6-7 (0:12.5% 1:25% 2:50% 3:75%)
 ; in case of sound3, a WAVEFORM_* constant
 \1Length::         db
 \1Sweep::          db
-\1FadeInSpeed::    db
-\1FadeOutSpeed::   db
+\1FadeInEnvelope::  db
+\1FadeOutEnvelope:: db
 \1Unk0d::          db
 \1Unk0e::          db
 \1Unk0f::          db
-\1Unk10::          db
+\1Volume::         db
 \1VolumeEnvelope:: db
 \1Frequency::      dw
 \1Unk14::          db
