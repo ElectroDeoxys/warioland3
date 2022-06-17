@@ -39,9 +39,9 @@ ENDC
 ENDM
 
 MACRO debug_nop
-.loop_debug_nop_\@
+:
 	nop
-	jr .loop_debug_nop_\@
+	jr :-
 ENDM
 
 MACRO debug_assert_not

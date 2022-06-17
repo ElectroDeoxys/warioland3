@@ -42,7 +42,7 @@ MACRO obj_struct
 \1Unk02::           db
 \1YPos::            dw
 \1XPos::            dw
-\1Unk07::           db
+\1Unk07::           db ; high nybble = OAM bank
 \1InteractionType:: db
 \1Unk09::           db
 \1Unk0a::           db
@@ -51,7 +51,7 @@ MACRO obj_struct
 \1ScreenYPos::      db
 \1ScreenXPos::      db
 \1Frame::           db
-\1Unk10::           dw
+\1OAMPtr::          dw
 \1FramesetPtr::     dw
 \1FrameDuration::   db
 \1FramesetOffset::  db

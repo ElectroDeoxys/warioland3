@@ -22,7 +22,33 @@ PrologueGfx: ; b1780 (2c:5780)
 INCBIN "gfx/cutscenes/prologue.2bpp.lz"
 ; 0xb1d0b
 
-	INCROM $b1d0b, $b330c
+TempleMusicBoxSceneGfx: ; b1d0b (2c:5d0b)
+INCBIN "gfx/temple_music_box_scene.2bpp.lz"
+; 0xb1fd6
+
+BGMap_b1fd7: ; b1fd7 (2c:5fd7)
+INCBIN "gfx/bgmaps/map_b1fd7.bin"
+; 0xb2107
+
+	INCROM $b2107, $b211a
+
+BGMap_b211a: ; b211a (2c:611a)
+INCBIN "gfx/bgmaps/map_b211a.bin"
+; 0xb231c
+
+	INCROM $b231c, $b232f
+
+BGMap_b232f: ; b232f (2c:632f)
+INCBIN "gfx/bgmaps/map_b232f.bin"
+; 0xb2411
+
+	INCROM $b2411, $b2424
+
+BGMap_b2424: ; b2424 (2c:6424)
+INCBIN "gfx/bgmaps/map_b2424.bin"
+; 0xb2533
+
+	INCROM $b2533, $b330c
 
 BGMap_b330c: ; b330c (2c:730c)
 INCBIN "gfx/bgmaps/map_b330c.bin"
@@ -52,4 +78,12 @@ BGMap_b3a5b: ; b3a5b (2c:7a5b)
 INCBIN "gfx/bgmaps/map_b3a5b.bin"
 ; 0xb3aaa
 
-	INCROM $b3aaa, $b3c47
+BGMap_b3aaa: ; b3aaa (2c:7aaa)
+INCBIN "gfx/bgmaps/map_b3aaa.bin"
+; 0xb3ba5
+
+BGMap_b3ba5: ; b3ba5 (2c:7ba5)
+INCBIN "gfx/bgmaps/map_b3ba5.bin"
+; 0xb3c47
+
+	;INCROM $b3aaa, $b3c47

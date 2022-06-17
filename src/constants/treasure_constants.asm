@@ -104,6 +104,8 @@ DEF NUM_TREASURES EQU const_value - 1
 	const TREASURE_DUMMY                        ; $65
 const_value = $80
 	const TREASURE_INVALID                      ; $80
+const_value = $ed
+DEF TREASURES_END EQU const_value
 
 ; pals
 	const_def $4

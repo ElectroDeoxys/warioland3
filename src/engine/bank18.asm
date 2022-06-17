@@ -190,9 +190,9 @@ ENDR
 	ld [hli], a
 	ld a, [wCurObjFrame]
 	ld [hli], a
-	ld a, [wCurObjUnk10 + 0]
+	ld a, [wCurObjOAMPtr + 0]
 	ld [hli], a
-	ld a, [wCurObjUnk10 + 1]
+	ld a, [wCurObjOAMPtr + 1]
 	ld [hli], a
 	ld a, [wCurObjFramesetPtr + 0]
 	ld [hli], a
@@ -355,9 +355,9 @@ ENDR
 	ld [hli], a
 	ld a, [wCurObjFrame]
 	ld [hli], a
-	ld a, [wCurObjUnk10 + 0]
+	ld a, [wCurObjOAMPtr + 0]
 	ld [hli], a
-	ld a, [wCurObjUnk10 + 1]
+	ld a, [wCurObjOAMPtr + 1]
 	ld [hli], a
 	ld a, [wCurObjFramesetPtr + 0]
 	ld [hli], a
@@ -464,9 +464,9 @@ ENDR
 	ld [hli], a
 	ld a, [wCurObjFrame]
 	ld [hli], a
-	ld a, [wCurObjUnk10 + 0]
+	ld a, [wCurObjOAMPtr + 0]
 	ld [hli], a
-	ld a, [wCurObjUnk10 + 1]
+	ld a, [wCurObjOAMPtr + 1]
 	ld [hli], a
 	ld a, [wCurObjFramesetPtr + 0]
 	ld [hli], a
@@ -504,11 +504,11 @@ FOR n, 1, NUM_OBJECTS + 1
 	ld a, [hl]
 	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
 	cp OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK7
-	jr nz, .next_{u:n}
+	jr nz, :+
 	ld e, LOW(wObj{u:n}ScreenYPos)
 	ld l, LOW(wObj{u:n}Unk07)
 	call UpdateObjSprite
-.next_{u:n}
+:
 ENDR
 
 	ret
@@ -520,11 +520,11 @@ FOR n, 1, NUM_OBJECTS + 1
 	ld a, [hl]
 	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
 	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
-	jr nz, .next_{u:n}
+	jr nz, :+
 	ld e, LOW(wObj{u:n}ScreenYPos)
 	ld l, LOW(wObj{u:n}Unk07)
 	call UpdateObjSprite
-.next_{u:n}
+:
 ENDR
 
 	ret
@@ -668,7 +668,7 @@ Func_6189d:: ; 6189d (18:589d)
 	ld a, $30
 	ld [wCurObjUnk07], a
 
-	ld hl, wCurObjUnk10
+	ld hl, wCurObjOAMPtr
 	ld a, $00
 	ld [hli], a ; OBJ_UNK_10
 	ld a, $40

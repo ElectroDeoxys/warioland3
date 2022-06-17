@@ -1304,7 +1304,9 @@ Func_9aa7c: ; 9aa7c (26:6a7c)
 	jr Func_9aa56
 ; 0x9aa81
 
-Func_9aa81: ; 9aa81 (26:6a81)
+; input:
+; c = TREASURE_* constant
+GetLevelThatContainsTreasure: ; 9aa81 (26:6a81)
 	ld b, -1
 	ld hl, LevelTreasureIDs
 .loop
@@ -1329,7 +1331,7 @@ LoadLevelTreasureData: ; 9aa90 (26:6a90)
 
 	xor a ; VRAM0
 	ldh [rVBK], a
-	ld hl, wTreasureTiles
+	ld hl, wTileBuffer
 	ld de, v0Tiles1 tile $10
 	ld b, $00 ; $100 bytes = 10 tiles
 	call CopyHLToDE
@@ -1356,9 +1358,9 @@ Func_9aab5: ; 9aab5 (26:6ab5)
 	call LoadTreasurePals
 	call LoadTreasureTiles
 
-	ld a, HIGH(wTreasureTiles)
+	ld a, HIGH(wTileBuffer)
 	ld [wHDMASourceHi], a
-	ld a, LOW(wTreasureTiles)
+	ld a, LOW(wTileBuffer)
 	ld [wHDMASourceLo], a
 	ld a, $09
 	ld [wHDMADestHi], a
@@ -1385,7 +1387,7 @@ Func_9aaf4: ; 9aaf4 (26:6af4)
 ClearTreasureData: ; 9ab07 (26:6b07)
 ; clear the treasure tiles
 	xor a
-	ld hl, wTreasureTiles
+	ld hl, wTileBuffer
 	ld bc, 16 tiles
 	call WriteAToHL_BCTimes
 
@@ -1409,7 +1411,7 @@ Func_9ab1c: ; 9ab1c (26:6b1c)
 
 LoadTreasureTiles: ; 9ab34 (26:6b34)
 	ld a, [wLevelGreyTreasureID]
-	ld de, wTreasureTiles
+	ld de, wTileBuffer
 	call .CopyGfx
 	ld a, [wLevelRedTreasureID]
 	call .CopyGfx

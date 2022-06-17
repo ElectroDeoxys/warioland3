@@ -173,8 +173,8 @@ class BSSReader:
                 for x in ['EQU', '=', 'SET']:
                     if x in split_line_upper:
                         index = split_line_upper.index(x)
-                        real = split_line[index]
                         name, value = map(' '.join, [split_line[:index], split_line[index+1:]])
+                        name = name.split(' ')[-1] # in case there's a DEF
                         value = rgbasm_to_py(value)
                         self.constants[name] = eval(value, self.constants.copy())
 

@@ -67,7 +67,7 @@ InitGolfLobby: ; 1c8020 (72:4020)
 	ld a, $80
 	ld [wGolfWarioXPos], a
 	ld a, GOLFLOBBYSTATE_EXIT_PIPE
-	ld [WGolfLobbyState], a
+	ld [wGolfLobbyState], a
 
 .asm_1c807d
 	call HandleGolfLobbyWarioSprite
@@ -278,7 +278,7 @@ HandleGolfLobbyWarioSprite: ; 1c81f0 (72:41f0)
 ; 0x1c821c
 
 HandleGolfLobbyStates: ; 1c821c (72:421c)
-	ld a, [WGolfLobbyState]
+	ld a, [wGolfLobbyState]
 	jumptable
 	dw .WaitingInput ; GOLFLOBBYSTATE_WAIT_INPUT
 	dw .WalkingRight ; GOLFLOBBYSTATE_WALK_RIGHT
@@ -315,7 +315,7 @@ HandleGolfLobbyStates: ; 1c821c (72:421c)
 	ld a, $01
 	ld [wGolfVBlankMode], a
 	ld a, GOLFLOBBYSTATE_ENTER_DOOR
-	ld [WGolfLobbyState], a
+	ld [wGolfLobbyState], a
 	ret
 
 .d_right
@@ -332,7 +332,7 @@ HandleGolfLobbyStates: ; 1c821c (72:421c)
 	ld [wGolfWarioYVel], a
 	ld a, $01 ; aka GOLFLOBBYSTATE_WALK_RIGHT
 	ld [wGolfVBlankMode], a
-	ld [WGolfLobbyState], a
+	ld [wGolfLobbyState], a
 	ret
 
 .d_left
@@ -348,7 +348,7 @@ HandleGolfLobbyStates: ; 1c821c (72:421c)
 	ld [wGolfVBlankMode], a
 	ld [wGolfWarioDir], a
 	ld a, GOLFLOBBYSTATE_WALK_LEFT
-	ld [WGolfLobbyState], a
+	ld [wGolfLobbyState], a
 	ret
 
 .d_down
@@ -389,7 +389,7 @@ HandleGolfLobbyStates: ; 1c821c (72:421c)
 	ld [wGolfWarioDuration], a
 	ld [wGolfWarioFramesetOffset], a
 	ld a, GOLFLOBBYSTATE_ENTER_PIPE
-	ld [WGolfLobbyState], a
+	ld [wGolfLobbyState], a
 	ret
 
 .WalkingRight
@@ -435,7 +435,7 @@ HandleGolfLobbyStates: ; 1c821c (72:421c)
 	ld [wGolfCounter], a
 	ld [wGolfWarioDuration], a
 	ld [wGolfWarioFramesetOffset], a
-	ld [WGolfLobbyState], a ; GOLFLOBBYSTATE_WAIT_INPUT
+	ld [wGolfLobbyState], a ; GOLFLOBBYSTATE_WAIT_INPUT
 	ret
 
 .DoJumpRight
@@ -507,7 +507,7 @@ HandleGolfLobbyStates: ; 1c821c (72:421c)
 	ld [wGolfCounter], a
 	ld [wGolfWarioDuration], a
 	ld [wGolfWarioFramesetOffset], a
-	ld [WGolfLobbyState], a ; GOLFLOBBYSTATE_WAIT_INPUT
+	ld [wGolfLobbyState], a ; GOLFLOBBYSTATE_WAIT_INPUT
 	ret
 
 .DoJumpLeft
@@ -594,7 +594,7 @@ HandleGolfLobbyStates: ; 1c821c (72:421c)
 	ld [wGolfCounter], a
 	ld [wGolfWarioDuration], a
 	ld [wGolfWarioFramesetOffset], a
-	ld [WGolfLobbyState], a ; GOLFLOBBYSTATE_WAIT_INPUT
+	ld [wGolfLobbyState], a ; GOLFLOBBYSTATE_WAIT_INPUT
 	ret
 ; 0x1c846c
 

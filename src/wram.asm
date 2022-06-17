@@ -462,8 +462,7 @@ wLevelTimeAttackScores:: ; ca07
 wNumberCollectedTreasures:: ; ca39
 	ds $2
 
-; bit 0: unset is day, set is night
-; bit 1: whether it's Time Attack mode
+; MODE_* constant
 wca3b:: ; ca3b
 	ds $1
 
@@ -473,6 +472,7 @@ wca3b:: ; ca3b
 wPowerUpLevel:: ; ca3c
 	ds $1
 
+; MODE_* constant
 wGameModeFlags:: ; ca3d
 	ds $1
 
@@ -1138,8 +1138,8 @@ w1db90:: ; db90
 	ds $30
 
 w1dc00:: ; dc00
-WGolfLobbyState:: ; dc00
-WGolfLevelState:: ; dc00
+wGolfLobbyState:: ; dc00
+wGolfLevelState:: ; dc00
 	ds $1
 
 w1dc01:: ; dc01
@@ -1353,7 +1353,8 @@ wTreasuresCollected:: ; d000
 w2d00d:: ; d00d
 	ds $1
 
-w2d00e:: ; d00e
+; next treasure in the list to collect
+wNextTreasure:: ; d00e
 	ds $1
 
 ; LEVEL_* constant
@@ -1877,34 +1878,15 @@ w2d12f:: ; d12f
 
 	ds $10
 
-w2d140:: ; d140
+wSceneWario:: scene_obj_struct wSceneWario ; d140
+
+wSceneWarioStateGroup:: ; d148
 	ds $1
 
-w2d141:: ; d141
-	ds $1
-
-w2d142:: ; d142
-	ds $1
-
-w2d143:: ; d143
-	ds $1
-
-w2d144:: ; d144
+wSceneWarioOAMPtr:: ; d149
 	ds $2
 
-w2d146:: ; d146
-	ds $1
-
-w2d147:: ; d147
-	ds $1
-
-w2d148:: ; d148
-	ds $1
-
-w2d149:: ; d149
-	ds $2
-
-w2d14b:: ; d14b
+wSceneWarioOAMBank:: ; d14b
 	ds $1
 
 w2d14c:: ; d14c
@@ -1966,6 +1948,7 @@ wTilemap:: ; d500
 UNION
 
 w2d800:: ; d800
+wLCDCFlagsToFlip::
 	ds $1
 
 w2d801:: ; d801
@@ -2031,7 +2014,12 @@ w2d893:: ; d893
 w2d894:: ; d894
 	ds $1
 
-	ds $b
+	ds $1
+
+w2d896:: ; d896
+	ds $1
+
+	ds $9
 
 w2d8a0:: ; d8a0
 	ds $1
@@ -2063,7 +2051,10 @@ w2d8a8:: ; d8a8
 w2d8a9:: ; d8a9
 	ds $1
 
-	ds $6
+w2d8aa:: ; d8aa
+	ds $1
+
+	ds $5
 
 w2d8b0:: ; d8b0
 	ds $1
@@ -2071,51 +2062,177 @@ w2d8b0:: ; d8b0
 w2d8b1:: ; d8b1
 	ds $1
 
-	ds $1ce
-
-w2da80:: ; da80
+w2d8b2:: ; d8b2
 	ds $1
 
-w2da81:: ; da81
 	ds $1
 
-w2da82:: ; da82
+w2d8b4:: ; d8b4
 	ds $1
 
-w2da83:: ; da83
+	ds $1
+
+w2d8b6:: ; d8b6
+	ds $1
+
+	ds $1
+
+w2d8b8:: ; d8b8
+	ds $1
+
+	ds $1
+
+w2d8ba:: ; d8ba
+	ds $1
+
+	ds $1
+
+w2d8bc:: ; d8bc
+	ds $1
+
+	ds $1
+
+w2d8be:: ; d8be
+	ds $1
+
+	ds $1
+
+w2d8c0:: ; d8c0
+	ds $1
+
+	ds $1
+
+w2d8c2:: ; d8c2
+	ds $1
+
+	ds $1
+
+w2d8c4:: ; d8c4
+	ds $1
+
+	ds $1
+
+w2d8c6:: ; d8c6
+	ds $1
+
+	ds $1
+
+w2d8c8:: ; d8c8
+	ds $1
+
+	ds $1
+
+w2d8ca:: ; d8ca
+	ds $1
+
+	ds $1
+
+w2d8cc:: ; d8cc
+	ds $1
+
+	ds $1
+
+w2d8ce:: ; d8ce
+	ds $1
+
+	ds $1
+
+w2d8d0:: ; d8d0
+	ds $1
+
+	ds $1
+
+w2d8d2:: ; d8d2
+	ds $1
+
+	ds $1
+
+w2d8d4:: ; d8d4
+	ds $1
+
+	ds $1
+
+w2d8d6:: ; d8d6
+	ds $1
+
+	ds $3
+
+w2d8da:: ; d8da
+	ds $1
+
+	ds $1
+
+w2d8dc:: ; d8dc
+	ds $1
+
+	ds $123
+
+w2da00:: ; da00
+	ds $1
+
+	ds $1
+
+wTempleMusicIsPlaying::    ds $1 ; da02
+wTempleMusicDelayCounter:: ds $1 ; da03
+
+w2da04:: ; da04
+	ds $1
+
+w2da05:: ; da05
+	ds $1
+
+	ds $7a
+
+wTextDelayCounter:: ; da80
+	ds $1
+
+wCurTextLine:: ; da81
+	ds $1
+
+wCurTextBufferPos:: ; da82
+	ds $1
+
+wCurTextLinePos:: ; da83
 	ds $1
 
 w2da84:: ; da84
 	ds $1
 
-w2da85:: ; da85
+wBGMapToPrintText:: ; da85
 	ds $1
 
 	ds $2
 
-w2da88:: ; da88
-	ds $2
+; pending character to write to BGMap
+wPendingCharDest:: ds $2 ; da88
+wPendingCharTile:: ds $1 ; da8a
+wPendingCharAttr:: ds $1 ; da8b
 
-w2da8a:: ; da8a
+	ds $24
+
+; true if the next objective is to
+; go to The Temple to fight A Hidden Figure
+wIsNextObjectiveTheTemple:: ; dab0
 	ds $1
 
-w2da8b:: ; da8b
-	ds $1
+	ds $4f
 
-	ds $74
-
-w2db00:: ; db00
-	ds 4 tiles
+wText::
+wTextLine1:: ds TEXT_LINE_LENGTH ; db00
+wTextLine2:: ds TEXT_LINE_LENGTH ; db10
+wTextLine3:: ds TEXT_LINE_LENGTH ; db20
+wTextLine4:: ds TEXT_LINE_LENGTH ; db30
 
 	ds $40
 
-w2db80:: ; db80
-	ds 8 tiles
+wClearedTextBuffer:: ; db80
+	ds 8 * TEXT_LINE_LENGTH
 
-wTreasureTiles:: ; dc00
-	ds 16 tiles
+wTextBuffer::
+wTileBuffer:: ; dc00
+	ds $20 tiles
 
-	ds $2fd
+	ds $1fd
 
 w2dffd:: ; dffd
 	ds $1

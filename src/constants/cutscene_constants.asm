@@ -91,3 +91,96 @@
 	const CUTSCENE_59 ; $59
 	const CUTSCENE_5A ; $5a
 DEF NUM_CUTSCENES EQU const_value - 1
+
+	const_def
+; WarioIdleGfx
+	const SCENEWARIO_NONE                    ; $00
+	const SCENEWARIO_LOOK_FRONT              ; $01
+	const SCENEWARIO_LOOK_BACK               ; $02
+	const SCENEWARIO_TURN_FRONT_RIGHT        ; $03
+	const SCENEWARIO_TURN_FRONT_LEFT         ; $04
+	const SCENEWARIO_TURN_BACK_LEFT          ; $05
+	const SCENEWARIO_TURN_BACK_RIGHT         ; $06
+DEF SCENEWARIO_GROUP_00 EQU const_value
+; WarioWalkGfx
+	const SCENEWARIO_WALK_LEFT               ; $07
+	const SCENEWARIO_WALK_RIGHT              ; $08
+	const SCENEWARIO_CARRY_WALK              ; $09
+	const SCENEWARIO_CARRY_IDLE              ; $0a
+DEF SCENEWARIO_GROUP_01 EQU const_value
+; WarioThrowGfx
+	const SCENEWARIO_PICKUP                  ; $0b
+DEF SCENEWARIO_GROUP_02 EQU const_value
+; WarioIdleGfx
+	const SCENEWARIO_IDLE_LEFT               ; $0c
+	const SCENEWARIO_IDLE_RIGHT              ; $0d
+DEF SCENEWARIO_GROUP_03 EQU const_value
+; WarioClearGfx
+	const SCENEWARIO_NOD                     ; $0e
+	const SCENEWARIO_NOD_ONCE                ; $0f
+DEF SCENEWARIO_GROUP_04 EQU const_value
+; WarioClearGfx
+	const SCENEWARIO_LOOK_AROUND             ; $10
+	const SCENEWARIO_LOOK_TURN_FORWARD       ; $11
+	const SCENEWARIO_LOOK_FORWARD            ; $12
+	const SCENEWARIO_LOOK_AROUND_THEN_TURN   ; $13
+	const SCENEWARIO_LOOK_TURN_RIGHT         ; $14
+DEF SCENEWARIO_GROUP_05 EQU const_value
+; WarioUnk2Gfx
+	const SCENEWARIO_ON_FIRE                 ; $15
+	const SCENEWARIO_CRASH_LAND_RIGHT        ; $16
+	const SCENEWARIO_CRASH_TUMBLE            ; $17
+	const SCENEWARIO_CRASH_TUMBLE_END        ; $18
+	const SCENEWARIO_STUNNED_RIGHT           ; $19
+	const SCENEWARIO_LOOK_UP                 ; $1a
+	const SCENEWARIO_CRASH_LAND_LEFT         ; $1b
+	const SCENEWARIO_STUNNED_LEFT            ; $1c
+DEF SCENEWARIO_GROUP_06 EQU const_value
+; WarioUnk3Gfx
+	const SCENEWARIO_LOOK_MUSIC_BOX          ; $1d
+	const SCENEWARIO_PICKUP_MUSIC_BOX        ; $1e
+	const SCENEWARIO_HOLD_MUSIC_BOX          ; $1f
+	const SCENEWARIO_LOOK_UP_SURPRISED       ; $20
+	const SCENEWARIO_CARRY_SNAP_FINGERS      ; $21
+DEF SCENEWARIO_GROUP_07 EQU const_value
+; WarioSleepGfx
+	const SCENEWARIO_SLEEP                   ; $22
+	const SCENEWARIO_WAKE_UP                 ; $23
+	const SCENEWARIO_SIT_STILL               ; $24
+	const SCENEWARIO_SIT_IDLE                ; $25
+DEF SCENEWARIO_GROUP_08 EQU const_value
+; WarioUnk4Gfx
+	const SCENEWARIO_JUMP_AND_BOW            ; $26
+	const SCENEWARIO_SNAP_FINGERS            ; $27
+	const SCENEWARIO_SHOW_MUSIC_BOXES_1      ; $28
+	const SCENEWARIO_SHOW_MUSIC_BOXES_5      ; $29
+	const SCENEWARIO_PANIC_JUMP              ; $2a
+	const SCENEWARIO_PANIC                   ; $2b
+	const SCENEWARIO_BOW                     ; $2c
+DEF SCENEWARIO_GROUP_19 EQU const_value
+; WarioUnk5Gfx
+	const SCENEWARIO_SHOW_MUSIC_BOXES_2      ; $2d
+	const SCENEWARIO_SHOW_MUSIC_BOXES_3      ; $2e
+	const SCENEWARIO_SHOW_MUSIC_BOXES_4      ; $2f
+DEF SCENEWARIO_GROUP_10 EQU const_value
+; WarioIdleGfx
+	const SCENEWARIO_TURN_FRONT_TO_BACK_RIGHT; $30
+	const SCENEWARIO_TURN_FRONT_TO_BACK_LEFT ; $31
+	const SCENEWARIO_TURN_BACK_TO_RIGHT       ; $32
+	const SCENEWARIO_TURN_BACK_TO_LEFT      ; $33
+	const SCENEWARIO_TURN_RIGHT_TO_FRONT     ; $34
+	const SCENEWARIO_TURN_LEFT_TO_FRONT      ; $35
+	const SCENEWARIO_TURN_FRONT_TO_LEFT      ; $36
+	const SCENEWARIO_TURN_FRONT_TO_RIGHT     ; $37
+	const SCENEWARIO_TURN_LEFT_END           ; $38
+	const SCENEWARIO_TURN_RIGHT_END          ; $39
+DEF SCENEWARIO_GROUP_11 EQU const_value
+; WarioHotGfx
+	const SCENEWARIO_PANIC_RUN_LEFT          ; $3a
+	const SCENEWARIO_PANIC_RUN_RIGHT         ; $3b
+DEF SCENEWARIO_GROUP_12 EQU const_value
+; WarioClearGfx
+	const SCENEWARIO_IDLE_FRONT              ; $3c
+DEF SCENEWARIO_GROUP_13 EQU const_value
+
+DEF SCENEWARIO_GROUP_NONE EQU $ff

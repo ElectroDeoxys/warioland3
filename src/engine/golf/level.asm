@@ -430,7 +430,7 @@ UpdateGolfLevelUI: ; 1c8cc3 (72:4cc3)
 	ld hl, wGolfObj2Sprite
 	call AddGolfSprite
 
-	ld a, [WGolfLevelState]
+	ld a, [wGolfLevelState]
 	cp GOLFLEVELSTATE_PAUSE
 	ret z
 	ld a, $90
@@ -859,7 +859,7 @@ Func_1c8fb7: ; 1c8fb7 (72:4fb7)
 	ret
 
 GolfLevelStateTable: ; 1c8fb8 (72:4fb8)
-	ld a, [WGolfLevelState]
+	ld a, [wGolfLevelState]
 	jumptable
 	dw GolfLevelState_WaitInput       ; GOLFLEVELSTATE_WAIT_INPUT
 	dw GolfLevelState_Scroll          ; GOLFLEVELSTATE_SCROLL
@@ -900,7 +900,7 @@ GolfLevelState_WaitInput: ; 1c8fd8 (72:4fd8)
 	ld [wGolfObj3Duration], a
 	ld [wGolfObj3FramesetOffset], a
 	ld a, GOLFLEVELSTATE_PAUSE
-	ld [WGolfLevelState], a
+	ld [wGolfLevelState], a
 	ret
 
 .a_btn
@@ -917,7 +917,7 @@ GolfLevelState_WaitInput: ; 1c8fd8 (72:4fd8)
 	xor a
 	ld [wGolfResult], a
 	ld a, GOLFLEVELSTATE_SELECT_SHOT_POWER
-	ld [WGolfLevelState], a
+	ld [wGolfLevelState], a
 	ld a, [wGolfTerrain]
 	ld [wStrokeGolfTerrain], a
 	ld a, [w1dc47]
@@ -955,7 +955,7 @@ GolfLevelState_WaitInput: ; 1c8fd8 (72:4fd8)
 	ld a, [hl]
 	ld [wTempGolfXScroll + 1], a
 	ld a, GOLFLEVELSTATE_SCROLL
-	ld [WGolfLevelState], a
+	ld [wGolfLevelState], a
 	ret
 ; 0x1c905d
 
@@ -1099,7 +1099,7 @@ GolfLevelState_Scroll: ; 1c905d (72:505d)
 	jr nz, UpdateGolfDisplayMode
 	; done auto-scrolling
 	ld a, GOLFLEVELSTATE_WAIT_INPUT
-	ld [WGolfLevelState], a
+	ld [wGolfLevelState], a
 	jr UpdateGolfDisplayMode
 
 .restore_scroll
@@ -1108,7 +1108,7 @@ GolfLevelState_Scroll: ; 1c905d (72:505d)
 	ld a, [wTempGolfXScroll + 1]
 	ld [wGolfXScroll + 1], a
 	ld a, GOLFLEVELSTATE_WAIT_INPUT
-	ld [WGolfLevelState], a
+	ld [wGolfLevelState], a
 ;	fallthrough
 
 UpdateGolfDisplayMode: ; 1c9138 (72:5138)
@@ -1172,7 +1172,7 @@ GolfLevelState_SelectShotPower: ; 1c9164 (72:5164)
 	ld [wGolfCounter], a
 	ld [wShotPowerGaugeCursor], a
 	ld a, GOLFLEVELSTATE_START_SHOT
-	ld [WGolfLevelState], a
+	ld [wGolfLevelState], a
 	ret
 
 .check_a_btn
@@ -1185,7 +1185,7 @@ GolfLevelState_SelectShotPower: ; 1c9164 (72:5164)
 	inc a ; $1
 	ld [wGolfObj5State], a
 	ld a, GOLFLEVELSTATE_SELECT_SHOT_SPIN
-	ld [WGolfLevelState], a
+	ld [wGolfLevelState], a
 
 	; translate selected power gauge
 	; into shot power level
@@ -1350,7 +1350,7 @@ GolfLevelState_SelectShotSpin: ; 1c9286 (72:5286)
 	xor a
 	ld [wGolfCounter], a
 	ld a, GOLFLEVELSTATE_START_SHOT
-	ld [WGolfLevelState], a
+	ld [wGolfLevelState], a
 	ld a, [wSelectedShotPowerGauge]
 	cp 2
 	jr c, .missed
@@ -1455,7 +1455,7 @@ GolfLevelState_StartShot: ; 1c92f7 (72:52f7)
 	ld a, GOLFLEVELSTATE_BOUNCE
 	ld [w1dc01], a
 	ld a, GOLFLEVELSTATE_SHOT
-	ld [WGolfLevelState], a
+	ld [wGolfLevelState], a
 	ret
 
 .missed_2
@@ -1464,7 +1464,7 @@ GolfLevelState_StartShot: ; 1c92f7 (72:52f7)
 	ld a, GOLF_WARIO_IDLING
 	ld [wGolfWarioState], a
 	ld a, GOLFLEVELSTATE_BETWEEN_SHOTS
-	ld [WGolfLevelState], a
+	ld [wGolfLevelState], a
 	ret
 ; 0x1c93a7
 
@@ -1474,7 +1474,7 @@ GolfLevelState_Shot: ; 1c93a7 (72:53a7)
 	call AlignGolfXScrollWithParaGoom
 	call UpdateGolfDisplayMode
 
-	ld a, [WGolfLevelState]
+	ld a, [wGolfLevelState]
 	cp GOLFLEVELSTATE_SHOT
 	ret z
 
@@ -1668,7 +1668,7 @@ UpdateGolfParaGoomXPos: ; 1c9438 (72:5438)
 	ld a, $02
 	ld [wGolfVBlankMode], a
 	ld a, GOLFLEVELSTATE_SPECIAL_TERRAIN
-	ld [WGolfLevelState], a
+	ld [wGolfLevelState], a
 
 	ld hl, wGolfStroke
 	inc [hl]
@@ -1729,7 +1729,7 @@ UpdateGolfParaGoomYPos: ; 1c94e8 (72:54e8)
 	; is either GOLF_TERRAIN_TEE_BOX or GOLF_TERRAIN_PLAIN
 	play_sfx SFX_BUMP
 	ld a, [w1dc01]
-	ld [WGolfLevelState], a
+	ld [wGolfLevelState], a
 	cp GOLFLEVELSTATE_BOUNCE
 	ret z
 	ld a, GOLFLEVELSTATE_BETWEEN_SHOTS
@@ -1749,7 +1749,7 @@ UpdateGolfParaGoomYPos: ; 1c94e8 (72:54e8)
 
 .no_bounce
 	ld a, GOLFLEVELSTATE_SPECIAL_TERRAIN
-	ld [WGolfLevelState], a
+	ld [wGolfLevelState], a
 	xor a
 	ld [wGolfParaGoomDuration], a
 	ld [wGolfWarioDuration], a
@@ -2054,7 +2054,7 @@ GolfLevelState_SpecialTerrain: ; 1c9654 (72:5654)
 	ld [wGolfOverlayText], a
 	call UpdateGolfHoleDirection
 	ld a, GOLFLEVELSTATE_WALK
-	ld [WGolfLevelState], a
+	ld [wGolfLevelState], a
 	ret
 
 .Ob:
@@ -2316,7 +2316,7 @@ GolfLevelState_Walk: ; 1c98c7 (72:58c7)
 	xor a
 	ld [wGolfCounter], a
 	ld a, GOLFLEVELSTATE_BETWEEN_SHOTS
-	ld [WGolfLevelState], a
+	ld [wGolfLevelState], a
 	ret
 .start_walking
 	ld hl, wGolfCounter
@@ -2410,7 +2410,7 @@ GolfLevelState_Walk: ; 1c98c7 (72:58c7)
 	ld a, $02
 	ld [wGolfVBlankMode], a
 	ld a, [hl]
-	ld [WGolfLevelState], a
+	ld [wGolfLevelState], a
 	ret
 ; 0x1c99ca
 
@@ -2478,7 +2478,7 @@ GolfLevelState_BetweenShots: ; 1c9a01 (72:5a01)
 	ld [wIsPowerGaugeFalling], a
 	ld [wGolfObj4State], a
 	ld [wGolfObj5], a
-	ld [WGolfLevelState], a ; GOLFLEVELSTATE_WAIT_INPUT
+	ld [wGolfLevelState], a ; GOLFLEVELSTATE_WAIT_INPUT
 	ret
 
 .check_exceeded_strokes
@@ -2503,7 +2503,7 @@ GolfLevelState_BetweenShots: ; 1c9a01 (72:5a01)
 	ld a, $02
 	ld [wGolfVBlankMode], a
 	ld a, GOLFLEVELSTATE_GAME_OVER
-	ld [WGolfLevelState], a
+	ld [wGolfLevelState], a
 	ret
 ; 0x1c9a62
 
@@ -2624,7 +2624,7 @@ GolfLevelState_Cleared: ; 1c9a62 (72:5a62)
 	ld [wGolfWarioState], a
 .asm_1c9b4d
 	ld a, GOLFLEVELSTATE_RESULT
-	ld [WGolfLevelState], a
+	ld [wGolfLevelState], a
 	ret
 ; 0x1c9b53
 
@@ -2765,7 +2765,7 @@ GolfLevelState_Pause: ; 1c9bfc (72:5bfc)
 	xor a
 	ld [wGolfObj3Duration], a
 	ld [wGolfObj3FramesetOffset], a
-	ld [WGolfLevelState], a ; GOLFLEVELSTATE_WAIT_INPUT
+	ld [wGolfLevelState], a ; GOLFLEVELSTATE_WAIT_INPUT
 	ret
 ; 0x1c9c53
 

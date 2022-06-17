@@ -29,7 +29,7 @@ Func_9c021: ; 9c021 (27:4021)
 	stop_music2
 
 	xor a
-	ld hl, w2d800
+	ld hl, wLCDCFlagsToFlip
 	ld bc, $30
 	call WriteAToHL_BCTimes
 
@@ -47,7 +47,7 @@ Func_9c021: ; 9c021 (27:4021)
 	ld [w2d0d5], a
 	ld [w2d0db], a
 
-	ld a, [w2d800]
+	ld a, [wLCDCFlagsToFlip]
 	ld b, a
 	and a
 	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_WIN9C00 | LCDCF_ON
@@ -56,7 +56,7 @@ Func_9c021: ; 9c021 (27:4021)
 .asm_9c067
 	ldh [rLCDC], a
 	xor a
-	ld [w2d800], a
+	ld [wLCDCFlagsToFlip], a
 
 	ld hl, wSubState
 	inc [hl]
@@ -65,7 +65,7 @@ Func_9c021: ; 9c021 (27:4021)
 
 Func_9c072: ; 9c072 (27:4072)
 	xor a
-	ld [w2d800], a
+	ld [wLCDCFlagsToFlip], a
 	call ClearVirtualOAM
 	ld a, [w2d025]
 	dec a
@@ -252,7 +252,7 @@ Func_9c072: ; 9c072 (27:4072)
 	call LoadFarPalsToTempPals1
 
 	ld a, LCDCF_BG9C00
-	ld [w2d800], a
+	ld [wLCDCFlagsToFlip], a
 	call LoadCutscenes2Gfx
 	call Func_9ca6a
 	jp Func_9cbaf
@@ -356,7 +356,7 @@ Func_9c072: ; 9c072 (27:4072)
 	ld hl, Pals_b8e00
 	call LoadFarPalsToTempPals2
 	ld a, LCDCF_BG9C00
-	ld [w2d800], a
+	ld [wLCDCFlagsToFlip], a
 	call LoadCutscenes4Gfx
 	jp Func_9cbbc
 ; 0x9c339
@@ -369,7 +369,7 @@ Func_9c072: ; 9c072 (27:4072)
 	ld hl, Pals_b8a40
 	call LoadFarPalsToTempPals2
 	ld a, LCDCF_BG9C00
-	ld [w2d800], a
+	ld [wLCDCFlagsToFlip], a
 	call LoadCutscenes2Gfx
 	call Func_9ca6a
 	jp Func_9cbbc
@@ -386,7 +386,7 @@ Func_9c072: ; 9c072 (27:4072)
 
 .Func_9c367: ; 9c367 (27:4367)
 	ld a, LCDCF_WINON
-	ld [w2d800], a
+	ld [wLCDCFlagsToFlip], a
 	ld a, $28
 	ldh [rWY], a
 	ld [w2d022], a
@@ -782,7 +782,7 @@ Func_9c072: ; 9c072 (27:4072)
 
 .Func_9c7e8: ; 9c7e8 (27:47e8)
 	ld a, LCDCF_BG9C00
-	ld [w2d800], a
+	ld [wLCDCFlagsToFlip], a
 	ld b, BANK(Pals_b8200)
 	ld hl, Pals_b8200
 	call LoadFarPalsToTempPals1
@@ -1305,14 +1305,14 @@ VBlank_9cc9c: ; 9cc9c (27:4c9c)
 	ld a, [w2d023]
 	ldh [rWX], a
 
-	ld a, [w2d800]
+	ld a, [wLCDCFlagsToFlip]
 	and a
 	jr z, .asm_9cccf
 	ld hl, rLCDC
 	xor [hl]
 	ld [hl], a
 	xor a
-	ld [w2d800], a
+	ld [wLCDCFlagsToFlip], a
 
 .asm_9cccf
 	ld b, BANK(ApplyPalConfig1)
@@ -1820,7 +1820,7 @@ Func_9d79d: ; 9d79d (27:579d)
 
 .Func_9d7e6
 	ld a, LCDCF_BG9C00
-	ld [w2d800], a
+	ld [wLCDCFlagsToFlip], a
 	jp Func_9cd03
 
 .Func_9d7ee
@@ -1829,7 +1829,7 @@ Func_9d79d: ; 9d79d (27:579d)
 
 .Func_9d7f3
 	ld a, LCDCF_BG9C00
-	ld [w2d800], a
+	ld [wLCDCFlagsToFlip], a
 	xor a
 	ld hl, wSceneObj2State
 	call SetSceneObjState
@@ -2851,7 +2851,7 @@ Func_9f8da: ; 9f8da (27:78da)
 	cp $07
 	ret nz
 	ld a, LCDCF_BG9C00
-	ld [w2d800], a
+	ld [wLCDCFlagsToFlip], a
 	ld [hl], $01
 	ret
 

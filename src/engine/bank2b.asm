@@ -8,7 +8,17 @@ Func_ac000: ; ac000 (2b:4000)
 	ret
 ; 0xac00b
 
-	INCROM $ac00b, $ac02c
+Func_ac00b: ; ac00b (2b:400b)
+	ld h, b
+	ld l, c
+	res 1, l
+	ld b, $57
+	call UpdateOWAnimation
+	ld a, [bc]
+	ret
+; 0xac016
+
+	INCROM $ac016, $ac02c
 
 Func_ac02c: ; ac02c (2b:402c)
 	ld h, b
@@ -35,7 +45,12 @@ Func_ac042: ; ac042 (2b:4042)
 	jp AddOWSpriteWithScroll
 ; 0xac047
 
-	INCROM $ac047, $ac056
+Func_ac047: ; ac047 (2b:4047)
+	ld b, $57
+	jp AddOWSpriteWithScroll
+; 0xac04c
+
+	INCROM $ac04c, $ac056
 
 Func_ac056: ; ac056 (2b:4056)
 	ld de, Frameset_76ca
@@ -52,16 +67,200 @@ Func_ac064: ; ac064 (2b:4064)
 	ret nz
 	set 2, l
 	xor a
-	ld [hli], a
-	ld [hli], a
+	ld [hli], a ; duration
+	ld [hli], a ; frameset offset
 	ld a, e
-	ld [hl], a
+	ld [hl], a ; state
 	ld b, h
 	ld c, l
 	ret
 ; 0xac074
 
-	INCROM $ac074, $ac3d9
+	INCROM $ac074, $ac2b2
+
+Func_ac2b2: ; ac2b2 (2b:42b2)
+	ld bc, w2d180State
+	call Func_ac306
+	ld bc, wSceneObj1State
+	call Func_ac306
+	ld bc, wSceneObj2State
+	jp Func_ac306
+; 0xac2c4
+
+Func_ac2c4: ; ac2c4 (2b:42c4)
+	ld bc, wSceneObj3State
+	call Func_ac306
+	ld bc, wSceneObj4State
+	call Func_ac306
+	ld bc, wSceneObj7State
+	call Func_ac306
+	ld bc, wSceneObj8State
+	call Func_ac306
+	ld bc, wSceneObj9State
+	call Func_ac306
+	ld bc, wSceneObj10State
+	call Func_ac306
+	ld bc, wSceneObj11State
+	call Func_ac306
+	ld bc, wSceneObj12State
+	call Func_ac306
+	ld bc, wSceneObj13State
+	call Func_ac306
+	ld bc, wSceneObj14State
+	call Func_ac306
+	ld bc, wSceneObj15State
+	jp Func_ac306 ; unnecessary jump
+; 0xac306
+
+Func_ac306: ; ac306 (2b:4306)
+	ld a, [bc]
+	jumptable
+
+	dw .Func_ac358
+	dw Func_ac056
+	dw .Func_ac359
+	dw .Func_ac35e
+	dw .Func_ac363
+	dw .Func_ac368
+	dw .Func_ac36d
+	dw .Func_ac372
+	dw .Func_ac377
+	dw .Func_ac37c
+	dw .Func_ac381
+	dw .Func_ac38b
+	dw .Func_ac386
+	dw .Func_ac399
+	dw .Func_ac39e
+	dw .Func_ac3a3
+	dw .Func_ac3ad
+	dw .Func_ac3b7
+	dw .Func_ac3bc
+
+; unreferenced
+.Func_ac32e
+	call Func_ac000
+
+.Func_ac331
+	ld de, OAM_1644a
+	jp Func_ac042
+
+.Func_ac337
+	call Func_ac000
+	ld e, $00
+	call Func_ac064
+	jr nz, .Func_ac331
+	jr Func_ac306
+
+.Func_ac343
+	call Func_ac00b
+.Func_ac346
+	ld de, OAM_15e813
+	jp Func_ac047
+
+; unreferenced
+.Func_ac34c
+	call Func_ac00b
+	ld e, $00
+	call Func_ac064
+	jr nz, .Func_ac346
+	jr Func_ac306
+
+.Func_ac358
+	ret
+
+.Func_ac359
+	ld de, Frameset_15e796
+	jr .Func_ac337
+
+.Func_ac35e
+	ld de, Frameset_15e89c
+	jr .Func_ac343
+
+.Func_ac363
+	ld de, Frameset_15e89f
+	jr .Func_ac343
+
+.Func_ac368
+	ld de, Frameset_15e8a2
+	jr .Func_ac343
+
+.Func_ac36d
+	ld de, Frameset_15e8a5
+	jr .Func_ac343
+
+.Func_ac372
+	ld de, Frameset_15e8a8
+	jr .Func_ac343
+
+.Func_ac377
+	ld de, Frameset_15e88d
+	jr .Func_ac343
+
+.Func_ac37c
+	ld de, Frameset_15e896
+	jr .Func_ac38e
+
+.Func_ac381
+	ld de, Frameset_15e893
+	jr .Func_ac38e
+
+.Func_ac386
+	ld de, Frameset_15e899
+	jr .Func_ac38e
+
+.Func_ac38b
+	ld de, Frameset_15e890
+
+.Func_ac38e
+	call Func_ac00b
+	ld de, OAM_15e813
+	ld b, BANK(OAM_15e813)
+	jp AddOWSprite
+
+.Func_ac399
+	ld de, Frameset_15e8ab
+	jr .Func_ac3c1
+
+.Func_ac39e
+	ld de, Frameset_15e8b0
+	jr .Func_ac3c1
+
+.Func_ac3a3
+	ld de, Frameset_15e8b0
+	call Func_ac00b
+	ld e, $0d
+	jr .Func_ac3d1
+
+.Func_ac3ad
+	ld de, Frameset_15e8ab
+	call Func_ac00b
+	ld e, $0e
+	jr .Func_ac3d1
+
+.Func_ac3b7
+	ld de, Frameset_15e932
+	jr .Func_ac3c1
+
+.Func_ac3bc
+	ld de, Frameset_15e95c
+	jr .Func_ac3c1
+
+.Func_ac3c1
+	call Func_ac00b
+.asm_ac3c4
+	ld de, OAM_18c88a
+	ld b, BANK(OAM_18c88a)
+	jp AddOWSpriteWithScroll
+
+; unreferenced
+	call Func_ac00b
+	ld e, $00
+
+.Func_ac3d1
+	call Func_ac064
+	jr nz, .asm_ac3c4
+	jp Func_ac306
+; 0xac3d9
 
 Func_ac3d9: ; ac3d9 (2b:43d9)
 	ld bc, w2d180State
@@ -229,7 +428,7 @@ Func_ac409: ; ac409 (2b:4409)
 	jp .Func_ac449
 
 .Func_ac4ee
-	ld de, Func_ae801
+	ld de, $6801
 	jp .Func_ac43b
 
 .Func_ac4f4
@@ -267,190 +466,194 @@ Func_ac515: ; ac515 (2b:4515)
 	ret
 ; 0xac528
 
-Func_ac528: ; ac528 (2b:4528)
-	call Func_ac547
-	ld a, [w2d146]
+UpdateSceneWarioAnimation: ; ac528 (2b:4528)
+	call .DoAnimation
+	ld a, [wSceneWarioState]
 	and a
 	ret z
-	ld hl, w2d149
+	ld hl, wSceneWarioOAMPtr
 	ld e, [hl]
 	inc l
 	ld d, [hl]
-	ld a, [w2d14b]
+	ld a, [wSceneWarioOAMBank]
 	ld b, a
-	ld hl, w2d140
+	ld hl, wSceneWario
 	ld a, [w2d14d]
 	and a
 	jp z, AddOWSpriteWithScroll
 	jp AddOWSprite
 
-Func_ac547: ; ac547 (2b:4547)
-	ld a, [w2d146]
+.DoAnimation: ; ac547 (2b:4547)
+	ld a, [wSceneWarioState]
 	jumptable
-	dw .Func_ac5c5
-	dw .Func_ac5c6
-	dw .Func_ac5cb
-	dw .Func_ac5d0
-	dw .Func_ac5da
-	dw .Func_ac5e4
-	dw .Func_ac5ee
-	dw .Func_ac60f
-	dw .Func_ac618
-	dw .Func_ac621
-	dw .Func_ac62a
-	dw .Func_ac62f
-	dw .Func_ac63a
-	dw .Func_ac63f
-	dw .Func_ac644
-	dw .Func_ac649
-	dw .Func_ac654
-	dw .Func_ac696
-	dw .Func_ac6a1
-	dw .Func_ac6a7
-	dw .Func_ac6b4
-	dw .Func_ac6c1
-	dw .Func_ac6c7
-	dw .Func_ac6d2
-	dw .Func_ac6d8
-	dw .Func_ac6e3
-	dw .Func_ac6e9
-	dw .Func_ac73c
-	dw .Func_ac747
-	dw .Func_ac74d
-	dw .Func_ac758
-	dw .Func_ac763
-	dw .Func_ac769
-	dw .Func_ac76f
-	dw .Func_ac77a
-	dw .Func_ac792
-	dw .Func_ac79d
-	dw .Func_ac7a3
-	dw .Func_ac7a9
-	dw .Func_ac7d0
-	dw .Func_ac7db
-	dw .Func_ac7e6
-	dw .Func_ac7f1
-	dw .Func_ac80e
-	dw .Func_ac814
-	dw .Func_ac81a
-	dw .Func_ac825
-	dw .Func_ac82b
-	dw .Func_ac836
-	dw .Func_ac841
-	dw .Func_ac84c
-	dw .Func_ac857
-	dw .Func_ac862
-	dw .Func_ac86d
-	dw .Func_ac878
-	dw .Func_ac883
-	dw .Func_ac88e
-	dw .Func_ac899
-	dw .Func_ac8a4
-	dw .Func_ac8ad
-	dw .Func_ac8b2
 
-.Func_ac5c5
+	dw .None                 ; SCENEWARIO_NONE
+	dw .LookFront            ; SCENEWARIO_LOOK_FRONT
+	dw .LookBack             ; SCENEWARIO_LOOK_BACK
+	dw .TurnFrontLeft        ; SCENEWARIO_TURN_FRONT_RIGHT
+	dw .TurnFrontRight       ; SCENEWARIO_TURN_FRONT_LEFT
+	dw .TurnBackLeft         ; SCENEWARIO_TURN_BACK_LEFT
+	dw .TurnBackRight        ; SCENEWARIO_TURN_BACK_RIGHT
+	dw .WalkLeft             ; SCENEWARIO_WALK_LEFT
+	dw .WalkRight            ; SCENEWARIO_WALK_RIGHT
+	dw .CarryWalk            ; SCENEWARIO_CARRY_WALK
+	dw .CarryIdle            ; SCENEWARIO_CARRY_IDLE
+	dw .PickUp               ; SCENEWARIO_PICKUP
+	dw .IdleLeft             ; SCENEWARIO_IDLE_LEFT
+	dw .IdleRight            ; SCENEWARIO_IDLE_RIGHT
+	dw .Nod                  ; SCENEWARIO_NOD
+	dw .NodOnce              ; SCENEWARIO_NOD_ONCE
+	dw .LookAround           ; SCENEWARIO_LOOK_AROUND
+	dw .LookTurnForward      ; SCENEWARIO_LOOK_TURN_FORWARD
+	dw .LookForward          ; SCENEWARIO_LOOK_FORWARD
+	dw .LookAroundThenTurn   ; SCENEWARIO_LOOK_AROUND_THEN_TURN
+	dw .LookTurnRight        ; SCENEWARIO_LOOK_TURN_RIGHT
+	dw .OnFire               ; SCENEWARIO_ON_FIRE
+	dw .CrashLandRight       ; SCENEWARIO_CRASH_LAND_RIGHT
+	dw .CrashTumble          ; SCENEWARIO_CRASH_TUMBLE
+	dw .CrashTumbleEnd       ; SCENEWARIO_CRASH_TUMBLE_END
+	dw .StunnedRight         ; SCENEWARIO_STUNNED_RIGHT
+	dw .LookUp               ; SCENEWARIO_LOOK_UP
+	dw .CrashLandLeft        ; SCENEWARIO_CRASH_LAND_LEFT
+	dw .StunnedLeft          ; SCENEWARIO_STUNNED_LEFT
+	dw .LookMusicBox         ; SCENEWARIO_LOOK_MUSIC_BOX
+	dw .PickUpMusicBox       ; SCENEWARIO_PICKUP_MUSIC_BOX
+	dw .HoldMusicBox         ; SCENEWARIO_HOLD_MUSIC_BOX
+	dw .LookUpSurprised      ; SCENEWARIO_LOOK_UP_SURPRISED
+	dw .CarrySnapFingers     ; SCENEWARIO_CARRY_SNAP_FINGERS
+	dw .Sleep                ; SCENEWARIO_SLEEP
+	dw .WakeUp               ; SCENEWARIO_WAKE_UP
+	dw .SitStill             ; SCENEWARIO_SIT_STILL
+	dw .SitIdle              ; SCENEWARIO_SIT_IDLE
+	dw .JumpAndBow           ; SCENEWARIO_JUMP_AND_BOW
+	dw .SnapFingers          ; SCENEWARIO_SNAP_FINGERS
+	dw .ShowMusicBoxes1      ; SCENEWARIO_SHOW_MUSIC_BOXES_1
+	dw .ShowMusicBoxes5      ; SCENEWARIO_SHOW_MUSIC_BOXES_5
+	dw .PanicJump            ; SCENEWARIO_PANIC_JUMP
+	dw .Panic                ; SCENEWARIO_PANIC
+	dw .Bow                  ; SCENEWARIO_BOW
+	dw .ShowMusicBoxes2      ; SCENEWARIO_SHOW_MUSIC_BOXES_2
+	dw .ShowMusicBoxes3      ; SCENEWARIO_SHOW_MUSIC_BOXES_3
+	dw .ShowMusicBoxes4      ; SCENEWARIO_SHOW_MUSIC_BOXES_4
+	dw .TurnFrontToBackRight ; SCENEWARIO_TURN_FRONT_TO_BACK_RIGHT
+	dw .TurnFrontToBackLeft  ; SCENEWARIO_TURN_FRONT_TO_BACK_LEFT
+	dw .TurnBackToRight      ; SCENEWARIO_TURN_BACK_TO_RIGHT
+	dw .TurnBackToLeft       ; SCENEWARIO_TURN_BACK_TO_LEFT
+	dw .TurnRightToFront     ; SCENEWARIO_TURN_RIGHT_TO_FRONT
+	dw .TurnLeftToFront      ; SCENEWARIO_TURN_LEFT_TO_FRONT
+	dw .TurnFrontToLeft      ; SCENEWARIO_TURN_FRONT_TO_LEFT
+	dw .TurnFrontToRight     ; SCENEWARIO_TURN_FRONT_TO_RIGHT
+	dw .TurnLeftEnd          ; SCENEWARIO_TURN_LEFT_END
+	dw .TurnRightEnd         ; SCENEWARIO_TURN_RIGHT_END
+	dw .PanicRunLeft         ; SCENEWARIO_PANIC_RUN_LEFT
+	dw .PanicRunRight        ; SCENEWARIO_PANIC_RUN_RIGHT
+	dw .IdleFront            ; SCENEWARIO_IDLE_FRONT
+
+.None
 	ret
 
-.Func_ac5c6
-	ld de, $4d18
+.LookFront
+	ld de, Frameset_14d18
 	jr .UpdateAnimation
 
-.Func_ac5cb
-	ld de, $4d15
+.LookBack
+	ld de, Frameset_14d15
 	jr .UpdateAnimation
 
-.Func_ac5d0
-	ld de, $4cbe
+.TurnFrontLeft
+	ld de, Frameset_14cbe
 	call .UpdateAnimation
-	ld b, $0c
-	jr .asm_ac602
+	ld b, SCENEWARIO_IDLE_LEFT
+	jr .SetStateIfFinished
 
-.Func_ac5da
-	ld de, $4cc5
+.TurnFrontRight
+	ld de, Frameset_14cc5
 	call .UpdateAnimation
-	ld b, $0d
-	jr .asm_ac602
+	ld b, SCENEWARIO_IDLE_RIGHT
+	jr .SetStateIfFinished
 
-.Func_ac5e4
-	ld de, $4d0b
+.TurnBackLeft
+	ld de, Frameset_14d0b
 	call .UpdateAnimation
-	ld b, $02
-	jr .asm_ac602
+	ld b, SCENEWARIO_LOOK_BACK
+	jr .SetStateIfFinished
 
-.Func_ac5ee
-	ld de, $4d10
+.TurnBackRight
+	ld de, Frameset_14d10
 	call .UpdateAnimation
-	ld b, $02
-	jr .asm_ac602
+	ld b, SCENEWARIO_LOOK_BACK
+	jr .SetStateIfFinished
 
 .UpdateAnimation
-	ld a, [w2d14b]
+	ld a, [wSceneWarioOAMBank]
 	ld b, a
-	ld hl, w2d144
+	ld hl, wSceneWarioDuration
 	jp UpdateOWAnimation
 
-.asm_ac602
+; sets Scene Wario' state to b
+; if the animation was finished
+.SetStateIfFinished
 	ld a, [wOWAnimationFinished]
 	cp $ff
 	ret nz
 	ld a, b
-	call Func_ac8d4
-	jp Func_ac547
+	call SetSceneWarioState
+	jp .DoAnimation
 
-.Func_ac60f
-	ld de, $49b4
+.WalkLeft
+	ld de, Frameset_149b4
 	call .UpdateAnimation
 	jp Func_ac4fa
 
-.Func_ac618
-	ld de, $49c5
+.WalkRight
+	ld de, Frameset_149c5
 	call .UpdateAnimation
 	jp Func_ac4fa
 
-.Func_ac621
-	ld de, $49fe
+.CarryWalk
+	ld de, Frameset_149fe
 	call .UpdateAnimation
 	jp Func_ac4fa
 
-.Func_ac62a
-	ld de, $4a20
+.CarryIdle
+	ld de, Frameset_14a20
 	jr .UpdateAnimation
 
-.Func_ac62f
-	ld de, $63ec
+.PickUp
+	ld de, Frameset_163ec
 	call .UpdateAnimation
-	ld b, $0a
-	jp .asm_ac602
+	ld b, SCENEWARIO_CARRY_IDLE
+	jp .SetStateIfFinished
 
-.Func_ac63a
-	ld de, $4252
+.IdleLeft
+	ld de, Frameset_14252
 	jr .UpdateAnimation
 
-.Func_ac63f
-	ld de, $425f
+.IdleRight
+	ld de, Frameset_1425f
 	jr .UpdateAnimation
 
-.Func_ac644
-	ld de, $4de4
+.Nod
+	ld de, Frameset_d4de4
 	jr .UpdateAnimation
 
-.Func_ac649
-	ld de, $4de4
+.NodOnce
+	ld de, Frameset_d4de4
 	call .UpdateAnimation
-	ld b, $02
-	jp .asm_ac602
+	ld b, SCENEWARIO_LOOK_BACK
+	jp .SetStateIfFinished
 
-.Func_ac654
-	ld de, $66a5
+.LookAround
+	ld de, Frameset_aa6a5
 	call .UpdateAnimation
-	ld b, $11
-	call .asm_ac602
+	ld b, SCENEWARIO_LOOK_TURN_FORWARD
+	call .SetStateIfFinished
+
 .asm_ac65f
-	ld a, [w2d146]
-	cp $02
+	ld a, [wSceneWarioState]
+	cp SCENEWARIO_LOOK_BACK
 	ret z
-	ld hl, w2d142
+	ld hl, wSceneWarioFrame
 	ld a, [w2d14c]
 	and a
 	jr z, .asm_ac67e
@@ -479,63 +682,63 @@ Func_ac547: ; ac547 (2b:4547)
 	ld [w2d14c], a
 	ret
 
-.Func_ac696
-	ld de, $66c2
+.LookTurnForward
+	ld de, Frameset_aa6c2
 	call .UpdateAnimation
-	ld b, $12
-	jp .asm_ac602
+	ld b, SCENEWARIO_LOOK_FORWARD
+	jp .SetStateIfFinished
 
-.Func_ac6a1
-	ld de, $66c7
+.LookForward
+	ld de, Frameset_aa6c7
 	jp .UpdateAnimation
 
-.Func_ac6a7
-	ld de, $66a5
+.LookAroundThenTurn
+	ld de, Frameset_aa6a5
 	call .UpdateAnimation
-	ld b, $38
-	call .asm_ac602
+	ld b, SCENEWARIO_TURN_LEFT_END
+	call .SetStateIfFinished
 	jr .asm_ac65f
 
-.Func_ac6b4
-	ld de, $66ca
+.LookTurnRight
+	ld de, Frameset_aa6ca
 	call .UpdateAnimation
-	ld b, $39
-	call .asm_ac602
+	ld b, SCENEWARIO_TURN_RIGHT_END
+	call .SetStateIfFinished
 	jr .asm_ac65f
 
-.Func_ac6c1
-	ld de, $68ec
+.OnFire
+	ld de, Frameset_aa8ec
 	jp .UpdateAnimation
 
-.Func_ac6c7
-	ld de, $68f5
+.CrashLandRight
+	ld de, Frameset_aa8f5
 	call .UpdateAnimation
-	ld b, $19
-	jp .asm_ac602
+	ld b, SCENEWARIO_STUNNED_RIGHT
+	jp .SetStateIfFinished
 
-.Func_ac6d2
-	ld de, $6902
+.CrashTumble
+	ld de, Frameset_aa902
 	jp .UpdateAnimation
 
-.Func_ac6d8
-	ld de, $6902
+.CrashTumbleEnd
+	ld de, Frameset_aa902
 	call .UpdateAnimation
-	ld b, $19
-	jp .asm_ac602
+	ld b, SCENEWARIO_STUNNED_RIGHT
+	jp .SetStateIfFinished
 
-.Func_ac6e3
-	ld de, $690d
+.StunnedRight
+	ld de, Frameset_aa90d
 	jp .UpdateAnimation
 
-.Func_ac6e9
-	ld de, $6913
+.LookUp
+	ld de, Frameset_aa913
 	call .UpdateAnimation
-	ld b, $0d
-	call .asm_ac602
-	ld a, [w2d146]
-	cp $0d
+	ld b, SCENEWARIO_IDLE_RIGHT
+	call .SetStateIfFinished
+	ld a, [wSceneWarioState]
+	cp SCENEWARIO_IDLE_RIGHT
 	ret z
-	ld hl, w2d142
+	ld hl, wSceneWarioFrame
 	ld a, [w2d14c]
 	and a
 	jr z, .asm_ac718
@@ -574,44 +777,44 @@ Func_ac547: ; ac547 (2b:4547)
 	ld a, $02
 	jr .asm_ac72c
 
-.Func_ac73c
-	ld de, Func_ae924
+.CrashLandLeft
+	ld de, Frameset_aa924
 	call .UpdateAnimation
-	ld b, $1c
-	jp .asm_ac602
+	ld b, SCENEWARIO_STUNNED_LEFT
+	jp .SetStateIfFinished
 
-.Func_ac747
-	ld de, $6931
+.StunnedLeft
+	ld de, Frameset_aa931
 	jp .UpdateAnimation
 
-.Func_ac74d
-	ld de, $6b27
+.LookMusicBox
+	ld de, Frameset_aab27
 	call .UpdateAnimation
-	ld b, $1f
-	jp .asm_ac602
+	ld b, SCENEWARIO_HOLD_MUSIC_BOX
+	jp .SetStateIfFinished
 
-.Func_ac758
-	ld de, $6b32
+.PickUpMusicBox
+	ld de, Frameset_aab32
 	call .UpdateAnimation
-	ld b, $20
-	jp .asm_ac602
+	ld b, SCENEWARIO_LOOK_UP_SURPRISED
+	jp .SetStateIfFinished
 
-.Func_ac763
-	ld de, $6b3f
+.HoldMusicBox
+	ld de, Frameset_aab3f
 	jp .UpdateAnimation
 
-.Func_ac769
-	ld de, $6b42
+.LookUpSurprised
+	ld de, Frameset_aab42
 	jp .UpdateAnimation
 
-.Func_ac76f
-	ld de, $6b45
+.CarrySnapFingers
+	ld de, Frameset_aab45
 	call .UpdateAnimation
-	ld b, $0a
-	jp .asm_ac602
+	ld b, SCENEWARIO_CARRY_IDLE
+	jp .SetStateIfFinished
 
-.Func_ac77a
-	ld de, $6ccb
+.Sleep
+	ld de, Frameset_aaccb
 	call .UpdateAnimation
 	ld a, [wOWAnimationFinished]
 	ld [w2d14e], a
@@ -620,64 +823,62 @@ Func_ac547: ; ac547 (2b:4547)
 	play_sfx SFX_0F5
 	ret
 
-.Func_ac792
-	ld de, $6ce2
+.WakeUp
+	ld de, Frameset_aace2
 	call .UpdateAnimation
-	ld b, $25
-	jp .asm_ac602
+	ld b, SCENEWARIO_SIT_IDLE
+	jp .SetStateIfFinished
 
-.Func_ac79d
-	ld de, $6cf7
+.SitStill
+	ld de, Frameset_aacf7
 	jp .UpdateAnimation
 
-.Func_ac7a3
-	ld de, $6cfa
+.SitIdle
+	ld de, Frameset_aacfa
 	jp .UpdateAnimation
 
-.Func_ac7a9
-	ld de, $703c
+.JumpAndBow
+	ld de, Frameset_ab03c
 	call .UpdateAnimation
 	call .Func_ac7b7
-	ld b, $02
-	jp .asm_ac602
-
+	ld b, SCENEWARIO_LOOK_BACK
+	jp .SetStateIfFinished
 .Func_ac7b7
-	ld a, [w2d142]
+	ld a, [wSceneWarioFrame]
 	cp $07
 	ret nz
-	ld a, [w2d147]
+	ld a, [wSceneWarioUnk7]
 	and a
 	ret nz
-	xor $01
-	ld [w2d147], a
+	xor $1
+	ld [wSceneWarioUnk7], a
 	play_sfx SFX_LAND
 	ret
 
-.Func_ac7d0
-	ld de, $706b
+.SnapFingers
+	ld de, Frameset_ab06b
 	call .UpdateAnimation
-	ld b, $02
-	jp .asm_ac602
+	ld b, SCENEWARIO_LOOK_BACK
+	jp .SetStateIfFinished
 
-.Func_ac7db
-	ld de, $708c
+.ShowMusicBoxes1
+	ld de, Frameset_ab08c
 	call .UpdateAnimation
-	ld b, $2d
-	jp .asm_ac602
+	ld b, SCENEWARIO_SHOW_MUSIC_BOXES_2
+	jp .SetStateIfFinished
 
-.Func_ac7e6
-	ld de, $7098
+.ShowMusicBoxes5
+	ld de, Frameset_ab098
 	call .UpdateAnimation
-	ld b, $02
-	jp .asm_ac602
+	ld b, SCENEWARIO_LOOK_BACK
+	jp .SetStateIfFinished
 
-.Func_ac7f1
-	ld de, $709d
+.PanicJump
+	ld de, Frameset_ab09d
 	call .UpdateAnimation
 	call .Func_ac7ff
-	ld b, $02
-	jp .asm_ac602
-
+	ld b, SCENEWARIO_LOOK_BACK
+	jp .SetStateIfFinished
 .Func_ac7ff
 	ld a, [wOWAnimationFinished]
 	cp $ff
@@ -685,185 +886,185 @@ Func_ac547: ; ac547 (2b:4547)
 	play_sfx SFX_LAND
 	ret
 
-.Func_ac80e
-	ld de, $709d
+.Panic
+	ld de, Frameset_ab09d
 	jp .UpdateAnimation
 
-.Func_ac814
-	ld de, $70ac
+.Bow
+	ld de, Frameset_ab0ac
 	jp .UpdateAnimation
 
-.Func_ac81a
-	ld de, $714d
+.ShowMusicBoxes2
+	ld de, Frameset_ab14d
 	call .UpdateAnimation
-	ld b, $2e
-	jp .asm_ac602
+	ld b, SCENEWARIO_SHOW_MUSIC_BOXES_3
+	jp .SetStateIfFinished
 
-.Func_ac825
-	ld de, $7160
+.ShowMusicBoxes3
+	ld de, Frameset_ab160
 	jp .UpdateAnimation
 
-.Func_ac82b
-	ld de, $7163
+.ShowMusicBoxes4
+	ld de, Frameset_ab163
 	call .UpdateAnimation
-	ld b, $29
-	jp .asm_ac602
+	ld b, SCENEWARIO_SHOW_MUSIC_BOXES_5
+	jp .SetStateIfFinished
 
-.Func_ac836
-	ld de, $4439
+.TurnFrontToBackRight
+	ld de, Frameset_1fc439
 	call .UpdateAnimation
-	ld b, $02
-	jp .asm_ac602
+	ld b, SCENEWARIO_LOOK_BACK
+	jp .SetStateIfFinished
 
-.Func_ac841
-	ld de, $4446
+.TurnFrontToBackLeft
+	ld de, Frameset_1fc446
 	call .UpdateAnimation
-	ld b, $02
-	jp .asm_ac602
+	ld b, SCENEWARIO_LOOK_BACK
+	jp .SetStateIfFinished
 
-.Func_ac84c
-	ld de, $4453
+.TurnBackToRight
+	ld de, Frameset_1fc453
 	call .UpdateAnimation
-	ld b, $0d
-	jp .asm_ac602
+	ld b, SCENEWARIO_IDLE_RIGHT
+	jp .SetStateIfFinished
 
-.Func_ac857
-	ld de, $445a
+.TurnBackToLeft
+	ld de, Frameset_1fc45a
 	call .UpdateAnimation
-	ld b, $0c
-	jp .asm_ac602
+	ld b, SCENEWARIO_IDLE_LEFT
+	jp .SetStateIfFinished
 
-.Func_ac862
-	ld de, $4461
+.TurnRightToFront
+	ld de, Frameset_1fc461
 	call .UpdateAnimation
-	ld b, $01
-	jp .asm_ac602
+	ld b, SCENEWARIO_LOOK_FRONT
+	jp .SetStateIfFinished
 
-.Func_ac86d
-	ld de, $446a
+.TurnLeftToFront
+	ld de, Frameset_1fc46a
 	call .UpdateAnimation
-	ld b, $01
-	jp .asm_ac602
+	ld b, SCENEWARIO_LOOK_FRONT
+	jp .SetStateIfFinished
 
-.Func_ac878
-	ld de, $4473
+.TurnFrontToLeft
+	ld de, Frameset_1fc473
 	call .UpdateAnimation
-	ld b, $0c
-	jp .asm_ac602
+	ld b, SCENEWARIO_IDLE_LEFT
+	jp .SetStateIfFinished
 
-.Func_ac883
-	ld de, $447c
+.TurnFrontToRight
+	ld de, Frameset_1fc47c
 	call .UpdateAnimation
-	ld b, $0d
-	jp .asm_ac602
+	ld b, SCENEWARIO_IDLE_RIGHT
+	jp .SetStateIfFinished
 
-.Func_ac88e
-	ld de, $4485
+.TurnLeftEnd
+	ld de, Frameset_1fc485
 	call .UpdateAnimation
-	ld b, $0d
-	jp .asm_ac602
+	ld b, SCENEWARIO_IDLE_RIGHT
+	jp .SetStateIfFinished
 
-.Func_ac899
-	ld de, $4488
+.TurnRightEnd
+	ld de, Frameset_1fc488
 	call .UpdateAnimation
-	ld b, $0c
-	jp .asm_ac602
+	ld b, SCENEWARIO_IDLE_LEFT
+	jp .SetStateIfFinished
 
-.Func_ac8a4
-	ld de, $6b5a
+.PanicRunLeft
+	ld de, Frameset_16b5a
 .asm_ac8a7
 	call .UpdateAnimation
 	jp Func_ac515
 
-.Func_ac8ad
-	ld de, $6b63
+.PanicRunRight
+	ld de, Frameset_16b63
 	jr .asm_ac8a7
 
-.Func_ac8b2
-	ld de, $4316
+.IdleFront
+	ld de, Frameset_1fc316
 	jp .UpdateAnimation
 ; 0xac8b8
 
 	INCROM $ac8b8, $ac8d4
 
-Func_ac8d4: ; ac8d4 (2b:48d4)
-	ld [w2d146], a
-	ld b, $00
-	cp $07
-	jr c, .asm_ac91e
+SetSceneWarioState: ; ac8d4 (2b:48d4)
+	ld [wSceneWarioState], a
+	ld b, 0
+	cp SCENEWARIO_GROUP_00
+	jr c, .update_state_group
 	inc b
-	cp $0b
-	jr c, .asm_ac91e
+	cp SCENEWARIO_GROUP_01
+	jr c, .update_state_group
 	inc b
-	cp $0c
-	jr c, .asm_ac91e
+	cp SCENEWARIO_GROUP_02
+	jr c, .update_state_group
 	inc b
-	cp $0e
-	jr c, .asm_ac91e
+	cp SCENEWARIO_GROUP_03
+	jr c, .update_state_group
 	inc b
-	cp $10
-	jr c, .asm_ac91e
+	cp SCENEWARIO_GROUP_04
+	jr c, .update_state_group
 	inc b
-	cp $15
-	jr c, .asm_ac91e
+	cp SCENEWARIO_GROUP_05
+	jr c, .update_state_group
 	inc b
-	cp $1d
-	jr c, .asm_ac91e
+	cp SCENEWARIO_GROUP_06
+	jr c, .update_state_group
 	inc b
-	cp $22
-	jr c, .asm_ac91e
+	cp SCENEWARIO_GROUP_07
+	jr c, .update_state_group
 	inc b
-	cp $26
-	jr c, .asm_ac91e
+	cp SCENEWARIO_GROUP_08
+	jr c, .update_state_group
 	inc b
-	cp $2d
-	jr c, .asm_ac91e
+	cp SCENEWARIO_GROUP_19
+	jr c, .update_state_group
 	inc b
-	cp $30
-	jr c, .asm_ac91e
+	cp SCENEWARIO_GROUP_10
+	jr c, .update_state_group
 	inc b
-	cp $3a
-	jr c, .asm_ac91e
+	cp SCENEWARIO_GROUP_11
+	jr c, .update_state_group
 	inc b
-	cp $3c
-	jr c, .asm_ac91e
+	cp SCENEWARIO_GROUP_12
+	jr c, .update_state_group
 	inc b
-	cp $3d
-	jr c, .asm_ac91e ; unnecessary jump
+	cp SCENEWARIO_GROUP_13
+	jr c, .update_state_group ; unnecessary jump
 
-.asm_ac91e
-	ld hl, w2d148
+.update_state_group
+	ld hl, wSceneWarioStateGroup
 	ld a, [hl]
 	cp b
-	call nz, .Func_ac930
-	ld hl, w2d144
+	call nz, .LoadGfx
+	ld hl, wSceneWarioDuration
 	xor a
 	ld [hli], a
 	ld [hl], a
 	ld [w2d14c], a
 	ret
 
-.Func_ac930
+.LoadGfx
 	ld a, b
-	ld [hli], a ; w2d148
+	ld [hli], a ; wSceneWarioStateGroup
 	add a ; *2
 	ld c, a
 	add a ; *4
 	add c ; *6
-	ld de, .data
+	ld de, .WarioSpritePointers
 	add e
 	ld e, a
 	ld a, d
 	adc 0
 	ld d, a
 	ld a, [de]
-	ld [hli], a ; w2d149
+	ld [hli], a ; wSceneWarioOAMPtr
 	inc de
 	ld a, [de]
 	ld [hli], a
 	inc de
 	ld a, [de]
-	ld [hl], a ; w2d14b
+	ld [hl], a ; wSceneWarioOAMBank
 	inc de
 	ld a, [de]
 	ld [wHDMABank], a
@@ -887,26 +1088,26 @@ Func_ac8d4: ; ac8d4 (2b:48d4)
 	ld [wHDMADestVRAMBank], a
 	ret
 
-MACRO data_ac962
+MACRO scene_wario_gfx
 	dab \1 ; sprite
 	dba \2 ; tiles
 ENDM
 
-.data
-	data_ac962 OAM_14a82,  WarioIdleGfx
-	data_ac962 OAM_1426c,  WarioWalkGfx
-	data_ac962 OAM_1606a,  WarioThrowGfx
-	data_ac962 OAM_14000,  WarioIdleGfx
-	data_ac962 OAM_d49cc,  WarioClearGfx
-	data_ac962 OAM_aa5fe,  WarioClearGfx
-	data_ac962 OAM_aa6e7,  WarioUnk2Gfx
-	data_ac962 OAM_aa934,  WarioUnk3Gfx
-	data_ac962 OAM_aab5c,  WarioSleepGfx
-	data_ac962 OAM_aad1e,  WarioUnk4Gfx
-	data_ac962 OAM_ab0c5,  WarioUnk5Gfx
-	data_ac962 OAM_1fc31b, WarioIdleGfx
-	data_ac962 OAM_1673c,  WarioHotGfx
-	data_ac962 OAM_1fc000, WarioClearGfx
+.WarioSpritePointers
+	scene_wario_gfx OAM_14a82,  WarioIdleGfx  ; SCENEWARIO_GROUP_00
+	scene_wario_gfx OAM_1426c,  WarioWalkGfx  ; SCENEWARIO_GROUP_01
+	scene_wario_gfx OAM_1606a,  WarioThrowGfx ; SCENEWARIO_GROUP_02
+	scene_wario_gfx OAM_14000,  WarioIdleGfx  ; SCENEWARIO_GROUP_03
+	scene_wario_gfx OAM_d49cc,  WarioClearGfx ; SCENEWARIO_GROUP_04
+	scene_wario_gfx OAM_aa5fe,  WarioClearGfx ; SCENEWARIO_GROUP_05
+	scene_wario_gfx OAM_aa6e7,  WarioUnk2Gfx  ; SCENEWARIO_GROUP_06
+	scene_wario_gfx OAM_aa934,  WarioUnk3Gfx  ; SCENEWARIO_GROUP_07
+	scene_wario_gfx OAM_aab5c,  WarioSleepGfx ; SCENEWARIO_GROUP_08
+	scene_wario_gfx OAM_aad1e,  WarioUnk4Gfx  ; SCENEWARIO_GROUP_19
+	scene_wario_gfx OAM_ab0c5,  WarioUnk5Gfx  ; SCENEWARIO_GROUP_10
+	scene_wario_gfx OAM_1fc31b, WarioIdleGfx  ; SCENEWARIO_GROUP_11
+	scene_wario_gfx OAM_1673c,  WarioHotGfx   ; SCENEWARIO_GROUP_12
+	scene_wario_gfx OAM_1fc000, WarioClearGfx ; SCENEWARIO_GROUP_13
 ; 0xac9b6
 
 	ret ; stray ret
@@ -963,36 +1164,40 @@ Data_aca04: ; aca04 (2b:4a04)
 
 	INCROM $aca09, $aca34
 
-Func_aca34: ; aca34 (2b:4a34)
+; moves scene Wario 1.5 pixels to left
+; if d-left is pressed, moves 2 pixels
+ApplySceneWarioMovementLeft: ; aca34 (2b:4a34)
 	ld a, [wJoypadDown]
 	swap a
 	rra
 	ld b, a
 	ld a, [wGlobalCounter]
 	or b
-	ld hl, w2d141
+	ld hl, wSceneWarioXCoord
 	dec [hl]
-	bit 0, a
-	jr z, .asm_aca48
+	bit 0, a ; check if d-left is down OR wGlobalCounter is odd
+	jr z, .done
 	dec [hl]
-.asm_aca48
+.done
 	ld a, [hl]
 	and $fe
 	ret
 ; 0xaca4c
 
-Func_aca4c: ; aca4c (2b:4a4c)
+; moves scene Wario 1.5 pixels to right
+; if d-right is pressed, moves 2 pixels
+ApplySceneWarioMovementRight: ; aca4c (2b:4a4c)
 	ld a, [wJoypadDown]
 	swap a
 	ld b, a
 	ld a, [wGlobalCounter]
 	or b
-	ld hl, w2d141
+	ld hl, wSceneWarioXCoord
 	inc [hl]
-	bit 0, a
-	jr z, .asm_aca5f
+	bit 0, a ; check if d-right is down OR wGlobalCounter is odd
+	jr z, .done
 	inc [hl]
-.asm_aca5f
+.done
 	ld a, [hl]
 	and $fe
 	ret
@@ -1009,20 +1214,22 @@ Func_aca6d: ; aca6d (2b:4a6d)
 ; 0xaca74
 
 Func_aca74: ; aca74 (2b:4a74)
-	call Func_ace9c
-	ld de, w2db00
-	ld hl, wTreasureTiles
-	ld b, 1 tiles
+	call ClearText
+
+	ld de, wTextLine1
+	ld hl, wTextBuffer
+	ld b, TEXT_LINE_LENGTH
 	call CopyHLToDE
+
 	xor a
-	ld hl, w2da80
+	ld hl, wTextDelayCounter
 	ld bc, $10
 	call WriteAToHL_BCTimes
 	ld hl, wSceneObj1
 	ld a, $8e
-	ld [hli], a
+	ld [hli], a ; y
 	ld a, $98
-	ld [hli], a
+	ld [hli], a ; x
 	xor a
 	ld hl, wSceneObj1State
 	call SetSceneObjState
@@ -1031,7 +1238,7 @@ Func_aca74: ; aca74 (2b:4a74)
 
 Func_aca9e: ; aca9e (2b:4a9e)
 	call Func_acea8
-	ld a, [w2da81]
+	ld a, [wCurTextLine]
 	cp $80
 	ret nz
 	ld hl, w2da84
@@ -1047,14 +1254,14 @@ Func_acaad: ; acaad (2b:4aad)
 	rl b
 	add a
 	rl b
-	ld c, a
-	ld hl, wTreasureTiles
+	ld c, a ; *$40
+	ld hl, wTextBuffer
 	add hl, bc
-	ld de, w2db00 tile 1
-	ld b, 3 tiles
+	ld de, wTextLine2
+	ld b, 3 * TEXT_LINE_LENGTH
 	call CopyHLToDE
 	xor a
-	ld [w2da81], a
+	ld [wCurTextLine], a
 	jr Func_aca6d
 ; 0xacacd
 
@@ -1076,7 +1283,7 @@ Func_acacd: ; acacd (2b:4acd)
 
 Func_acae7: ; acae7 (2b:4ae7)
 	call Func_acec4
-	ld a, [w2da81]
+	ld a, [wCurTextLine]
 	cp $80
 	ret nz
 	jp Func_aca6d
@@ -1093,7 +1300,7 @@ Func_acaf3: ; acaf3 (2b:4af3)
 	add a
 	rl b
 	ld c, a
-	ld hl, wTreasureTiles
+	ld hl, wTextBuffer
 	add hl, bc
 	ld a, [hl]
 	cp $5d
@@ -1115,10 +1322,125 @@ Func_acaf3: ; acaf3 (2b:4af3)
 	ret
 ; 0xacb25
 
-	INCROM $acb25, $acc9a
+Func_acb25: ; acb25 (2b:4b25)
+	call DisableLCD
+	call FillBGMap0_With7f
+	call ClearVirtualOAM
+	stop_music2
+
+	ld a, $02
+	ldh [rSMBK], a
+
+	xor a
+	ldh [rSCX], a
+	ld [wSCX], a
+	ldh [rSCY], a
+	ld [wSCY], a
+
+	call VBlank_accb0
+	call Func_acc9a
+	call Func_acca5
+
+	ld hl, Pals_86a4d
+	ld b, BANK(Pals_86a4d)
+	call LoadFarPalsToTempPals1
+	decompress_vram1 FontGFX, v1Tiles0
+	ld hl, BGMap_b0780
+	ld b, BANK(BGMap_b0780)
+	call LoadFarTiles
+	ld hl, BGMap_b0300
+	ld b, BANK(BGMap_b0300)
+	call LoadFarBGMap
+	ld a, BANK("VRAM1")
+	ldh [rVBK], a
+	ld hl, BGMap_b0540
+	ld b, BANK(BGMap_b0540)
+	call LoadFarBGMap
+	xor a
+	ldh [rVBK], a
+	call FillClearedTextBuffer
+
+	ld a, TREASURE_GOLD_MUSIC_BOX
+	call IsTreasureCollected
+	ld a, $00
+	jp z, .asm_acc3e ; not collected
+	ld hl, wGameModeFlags
+	bit MODE_UNK0_F, [hl]
+	jr z, .asm_acbb4
+	bit MODE_TIME_ATTACK_F, [hl]
+	jp z, .asm_acc3e
+.asm_acbb4
+	ld a, $03
+	ld [w1da00], a
+
+	decompress_vram1 TempleMusicBoxSceneGfx, v1Tiles0
+	decompress BGMap_b3aaa, v0BGMap1
+	decompress_vram1 BGMap_b3ba5, v1BGMap1
+
+	ld a, [wLanguage]
+	and a
+	ld hl, BGMap_b232f
+	jr z, .japanese1
+	ld hl, BGMap_b2424
+.japanese1
+	ld a, BANK(BGMap_b232f) ; aka BGMap_b2424
+	ld [wTempBank], a
+	ld bc, wTextBuffer
+	ld a, [wTempBank]
+	ldh [hCallFuncBank], a
+	hcall Decompress
+	jr .asm_acc68
+
+.asm_acc3e
+	ld [w1da00], a
+	ld a, [wLanguage]
+	and a
+	ld hl, BGMap_b1fd7
+	jr z, .japanese2
+	ld hl, BGMap_b211a
+.japanese2
+	ld a, BANK(BGMap_b1fd7) ; aka BGMap_b211a
+	ld [wTempBank], a
+	ld bc, wTextBuffer
+	ld a, [wTempBank]
+	ldh [hCallFuncBank], a
+	hcall Decompress
+	call Func_acf89
+
+.asm_acc68
+	ld a, $60
+	ld [w1d140], a
+	ld a, $e8
+	ld [w1d141], a
+	ld a, SCENEWARIO_GROUP_NONE
+	ld [wSceneWarioStateGroup], a
+
+	xor a ; SCENEWARIO_NONE
+	call SetSceneWarioState
+	call UpdateSceneWarioAnimation
+
+	xor a
+	ld [w2d013], a
+	ld [wObj1FrameDuration], a
+	ld a, [w1d800]
+	ld b, a
+	and a
+	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_WIN9C00 | LCDCF_ON
+	jr z, .got_lcdc_config
+	xor b
+.got_lcdc_config
+	ldh [rLCDC], a
+
+	xor a
+	ld [w1d800], a
+
+	ld hl, wSubState
+	inc [hl]
+	ret
+; 0xacc9a
 
 Func_acc9a: ; acc9a (2b:4c9a)
-	ld hl, w2d800
+	ld hl, wLCDCFlagsToFlip
 	ld bc, $800
 	xor a
 	call WriteAToHL_BCTimes
@@ -1126,7 +1448,7 @@ Func_acc9a: ; acc9a (2b:4c9a)
 ; 0xacca5
 
 Func_acca5: ; acca5 (2b:4ca5)
-	ld hl, w2d140
+	ld hl, wSceneWario
 	ld bc, $c0
 	xor a
 	call WriteAToHL_BCTimes
@@ -1182,22 +1504,22 @@ VBlank_accb0: ; accb0 (2b:4cb0)
 	bankswitch
 .skip_hdma_config
 
-	ld hl, w2da88
+	ld hl, wPendingCharDest
 	ld a, [hl]
 	and a
-	jr z, .asm_acd13
+	jr z, .skip_char
 	ld e, a
 	xor a
 	ld [hli], a
 	ld a, [hli]
 	ld d, a
 	ld a, [hli]
-	ld [de], a ; w2da8a
+	ld [de], a ; wPendingCharTile
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld a, [hl] ; w2da8b
+	ld a, [hl] ; wPendingCharAttr
 	ld [de], a
-.asm_acd13
+.skip_char
 
 	xor a
 	ldh [rVBK], a
@@ -1211,14 +1533,14 @@ VBlank_accb0: ; accb0 (2b:4cb0)
 	and a
 	call nz, ApplyPalConfig
 
-	ld a, [w2d800]
+	ld a, [wLCDCFlagsToFlip]
 	and a
 	jr z, .dma_transfer
 	ld hl, rLCDC
 	xor [hl]
 	ld [hl], a
 	xor a
-	ld [w2d800], a
+	ld [wLCDCFlagsToFlip], a
 
 .dma_transfer
 	ld a, HIGH(wVirtualOAM)
@@ -1226,29 +1548,207 @@ VBlank_accb0: ; accb0 (2b:4cb0)
 .func_end
 ; 0xacd3a
 
-	INCROM $acd3a, $ace60
+Func_acd3a: ; acd3a (2b:4d3a)
+	call .Func_acd51
+	call Func_ac2b2
+	call UpdateSceneWarioAnimation
+	call Func_ac2c4
+	call ClearUnusedVirtualOAM
+	ret
+
+.NextState
+	ld hl, w2da05
+	xor a
+	ld [hld], a
+	inc [hl] ; w2da04
+	ret
+
+.Func_acd51
+	ld hl, w2da05
+	inc [hl]
+	ld c, l
+	ld b, h
+	ld a, [w1da00]
+	jumptable
+
+	dw .GoIn
+	dw .Func_acdbe
+	dw .GoOut
+	dw Func_ad03b
+
+.GoIn
+	ld a, [w2da04]
+	and a
+	jr z, .start
+	dec a
+	jr z, .walk_right
+	dec a
+	jr z, .turn
+	dec a
+	jr z, .look_back
+	dec a
+	jr z, .nod
+	ret
+
+.start
+	ld a, SCENEWARIO_WALK_RIGHT
+	call SetSceneWarioState
+	jr .NextState
+
+.walk_right
+	call ApplySceneWarioMovementRight
+	cp $50
+	ret nz
+	ld [hl], a
+	ld a, SCENEWARIO_IDLE_RIGHT
+	call SetSceneWarioState
+	jr .NextState
+
+.turn
+	ld a, [w2da05]
+	cp $08
+	ret c
+	ld a, SCENEWARIO_TURN_BACK_RIGHT
+	call SetSceneWarioState
+	jr .NextState
+
+.look_back
+	ld a, [wSceneWarioState]
+	cp SCENEWARIO_LOOK_BACK
+	ret nz
+	jr .NextState
+
+.nod
+	ld a, [w2da05]
+	cp $32
+	ret c
+	ld a, SCENEWARIO_NOD
+	call SetSceneWarioState
+	ld hl, w2da05
+	xor a
+	ld [hld], a
+	ld [hl], a ; w2da04
+	xor a
+	ld [wCurTextLine], a
+	ld [wTextDelayCounter], a
+	ld hl, w1da00
+	ld [hl], $01
+	ret
+
+.Func_acdbe
+	call .DelayAndPlayTempleMusic
+	ld a, [wIsNextObjectiveTheTemple]
+	and a
+	call z, Func_acea8
+	ld a, [wJoypadPressed]
+	and B_BUTTON | D_LEFT
+	jr nz, .asm_acdd0
+	ret
+.asm_acdd0
+	ld hl, w2da05
+	xor a
+	ld [hld], a
+	ld [hl], a ; w2da04
+	call Func_ace60
+	ld hl, w1da00
+	ld [hl], $02
+	ret
+
+.GoOut
+	ld a, [w2da04]
+	and a
+	jr z, .turn_left
+	dec a
+	jr z, .idle_left
+	dec a
+	jr z, .start_walk
+	dec a
+	jr z, .walk_left
+	dec a
+	jr z, .outside
+	ret
+
+.turn_left
+	ld a, SCENEWARIO_TURN_BACK_TO_LEFT
+	call SetSceneWarioState
+	jp .NextState
+
+.idle_left
+	ld a, [wSceneWarioState]
+	cp SCENEWARIO_IDLE_LEFT
+	ret nz
+	jp .NextState
+
+.start_walk
+	ld a, [w2da05]
+	cp $04
+	ret c
+	ld a, SCENEWARIO_WALK_LEFT
+	call SetSceneWarioState
+	jp .NextState
+
+.walk_left
+	ld a, [wJoypadPressed]
+	bit B_BUTTON_F, a
+	jr nz, .exit
+	call ApplySceneWarioMovementLeft
+	cp $f0
+	ret nz
+	xor a ; SCENEWARIO_NONE
+	call SetSceneWarioState
+	jp .NextState
+
+.outside
+	ld a, [w2da05]
+	cp $0a
+	ret c
+.exit
+	stop_sfx
+	ld a, $01
+	ld [w2d14c], a
+	ld a, $08
+	ld [wSubState], a
+	scf
+	ret
+
+.DelayAndPlayTempleMusic
+	ld a, [wTempleMusicIsPlaying]
+	and a
+	ret nz ; already playing
+	ld hl, wTempleMusicDelayCounter
+	inc [hl]
+	ld a, [hl]
+	cp 90
+	ret c
+	xor a
+	ld [hl], a
+	play_music2 MUSIC_THE_TEMPLE
+	ld a, TRUE
+	ld [wTempleMusicIsPlaying], a
+	ret
+; 0xace60
 
 Func_ace60: ; ace60 (2b:4e60)
-	ld d, $c0
+	ld d, $c0 ; dest lo
 	ld e, $07
 	jr Func_ace6a
 
 Func_ace66: ; ace66 (2b:4e66)
-	ld d, $e0
+	ld d, $e0 ; dest lo
 	ld e, $05
 ;	fallthrough
 
 Func_ace6a: ; ace6a (2b:4e6a)
-	ld b, $19
-	ld a, [w2da85]
+	ld b, HIGH(v0BGMap0 + $100) - $80 ; dest hi
+	ld a, [wBGMapToPrintText]
 	and a
-	jr z, .asm_ace74
-	ld b, $1d
-.asm_ace74
+	jr z, .got_dest
+	ld b, HIGH(v0BGMap1 + $100) - $80 ; dest hi
+.got_dest
 	ld hl, wHDMA
-	ld a, HIGH(w2db80)
+	ld a, HIGH(wClearedTextBuffer)
 	ld [hli], a
-	ld a, LOW(w2db80)
+	ld a, LOW(wClearedTextBuffer)
 	ld [hli], a
 	ld a, b
 	ld [hli], a
@@ -1256,170 +1756,945 @@ Func_ace6a: ; ace6a (2b:4e6a)
 	ld [hli], a
 	ld a, e
 	ld [hl], a
-	ld a, $2b
+	ld a, BANK(Func_ace6a)
 	ld [wHDMABank], a
-
 	xor a
 	ld [wHDMADestVRAMBank], a
-	ld [w2da88 + 0], a
+	ld [wPendingCharDest + 0], a
 	ret
 ; 0xace90
 
-Func_ace90: ; ace90 (2b:4e90)
-	ld hl, w2db80
-	ld a, $7f
-	ld bc, 8 tiles
+FillClearedTextBuffer: ; ace90 (2b:4e90)
+	ld hl, wClearedTextBuffer
+	ld a, "@"
+	ld bc, 8 * TEXT_LINE_LENGTH
 	call WriteAToHL_BCTimes
 	ret
 ; 0xace9c
 
-Func_ace9c: ; ace9c (2b:4e9c)
-	ld a, $7f
-	ld hl, w2db00
-	ld bc, 4 tiles
+ClearText: ; ace9c (2b:4e9c)
+	ld a, "@"
+	ld hl, wText
+	ld bc, 4 * TEXT_LINE_LENGTH
 	call WriteAToHL_BCTimes
 	ret
 ; 0xacea8
 
 Func_acea8: ; acea8 (2b:4ea8)
-	ld hl, w2da80
+	ld hl, wTextDelayCounter
 	inc [hl]
-	ld a, [w2da81]
+	ld a, [wCurTextLine]
 	and a
-	jr z, Func_acedd.asm_acedd
+	jr z, DelayTextThenGoToNextLine ; line 0
 	dec a
-	jr z, Func_acedd.asm_aceef
+	jr z, PrintText_FromStart ; line 1
 	dec a
-	jr z, Func_acedd.asm_acef3
+	jr z, PrintText_FromOffset1 ; line 2
 	dec a
-	jr z, Func_acedd.asm_acef7
+	jr z, PrintText_FromOffset2 ; line 3
 	dec a
-	jr z, Func_acedd.asm_acefb
+	jr z, PrintText_FromOffset3 ; line 4
 	ld a, $80
-	ld [w2da81], a
+	ld [wCurTextLine], a
 	ret
 
 Func_acec4: ; acec4 (2b:4ec4)
-	ld hl, w2da80
+	ld hl, wTextDelayCounter
 	inc [hl]
-	ld a, [w2da81]
+	ld a, [wCurTextLine]
 	and a
-	jr z, Func_acedd.asm_acedd
+	jr z, DelayTextThenGoToNextLine ; line 0
 	dec a
-	jr z, Func_acedd.asm_acef3
+	jr z, PrintText_FromOffset1 ; line 1
 	dec a
-	jr z, Func_acedd.asm_acef7
+	jr z, PrintText_FromOffset2 ; line 2
 	dec a
-	jr z, Func_acedd.asm_acefb
+	jr z, PrintText_FromOffset3 ; line 3
 	ld a, $80
-	ld [w2da81], a
+	ld [wCurTextLine], a
 	ret
 
-Func_acedd: ; acedd (2b:4edd)
-.asm_acedd
-	ld a, [w2da80]
-	cp $0a
+DelayTextThenGoToNextLine: ; acedd (2b:4edd)
+	ld a, [wTextDelayCounter]
+	cp 10
 	ret c
-
-.asm_acee3
+GoToNextLine: ; acee3 (2b:4ee3)
 	xor a
-	ld [w2da83], a
-	ld [w2da80], a
-	ld hl, w2da81
+	ld [wCurTextLinePos], a
+	ld [wTextDelayCounter], a
+	ld hl, wCurTextLine
 	inc [hl]
 	ret
 
-.asm_aceef
-	ld c, $00
-	jr .asm_aceff
-.asm_acef3
-	ld c, $01
-	jr .asm_aceff
-.asm_acef7
-	ld c, $02
-	jr .asm_aceff
-.asm_acefb
-	ld c, $03
-	jr .asm_aceff ; unnecessary jump
-.asm_aceff
-	ld a, [w2da88 + 0]
+PrintText_FromStart: ; aceef (2b:4eef)
+	ld c, 0
+	jr PrintText
+
+PrintText_FromOffset1: ; acef3 (2b:4ef3)
+	ld c, 1
+	jr PrintText
+
+PrintText_FromOffset2: ; acef7 (2b:4ef7)
+	ld c, 2
+	jr PrintText
+
+PrintText_FromOffset3: ; acefb (2b:4efb)
+	ld c, 3
+	jr PrintText ; unnecessary jump
+
+; prints text given in wTextBuffer
+PrintText: ; aceff (2b:4eff)
+	ld a, [wPendingCharDest + 0]
 	and a
 	ret nz
-	ld b, $04
+
+	; if A button or down is pressed,
+	; then text delay is halved
+	ld b, 4
 	ld a, [wJoypadDown]
 	and A_BUTTON | D_DOWN
-	jr z, .asm_acf0f
-	srl b
-.asm_acf0f
-	ld a, [w2da80]
+	jr z, .got_delay
+	srl b ; $2
+.got_delay
+	ld a, [wTextDelayCounter]
 	cp b
-	ret c
+	ret c ; still delaying
 	xor a
-	ld [w2da80], a
+	ld [wTextDelayCounter], a
+
+; get next character
 	ld a, c
-	ld [w2da82], a
-.asm_acf1c
+	ld [wCurTextBufferPos], a
+.got_buffer_pos
 	swap c
-	ld e, c
-	ld a, [w2da83]
+	ld e, c ; *$10
+	ld a, [wCurTextLinePos]
 	ld d, a
 	add c
-	ld c, a
+	ld c, a ; *$20
 	ld b, $00
 	rl b
-	ld hl, w2db00
+	ld hl, wText
 	add hl, bc
 	ld a, [hl]
-	cp $7f
-	jr z, .asm_acf79
-	ld [w2da8a], a
+	cp "@"
+	jr z, .no_char
+	ld [wPendingCharTile], a
 	ld a, $09
-	ld [w2da8b], a
+	ld [wPendingCharAttr], a
 	ld hl, v0BGMap0 + $1c2
-	ld a, [w2da85]
+	ld a, [wBGMapToPrintText]
 	and a
-	jr z, .asm_acf46
+	jr z, .got_bgmap_pos
 	ld hl, v0BGMap1 + $1c2
-.asm_acf46
+.got_bgmap_pos
 	sla e
 	ld a, d
 	add e
 	ld e, a
 	ld d, $00
 	rl d
-	ld a, [w2da82]
+
+	; first character always starts 1 tile to the left
+	ld a, [wCurTextBufferPos]
 	and a
-	jr nz, .asm_acf56
+	jr nz, .not_first_pos
 	dec l
-.asm_acf56
+.not_first_pos
 	add hl, de
 	ld a, l
-	ld [w2da88 + 0], a
+	ld [wPendingCharDest + 0], a
 	ld a, h
-	ld [w2da88 + 1], a
-	ld a, [w2da8a]
-	cp $7e
+	ld [wPendingCharDest + 1], a
+	ld a, [wPendingCharTile]
+	cp " "
 	jr z, .asm_acf6e
 	play_sfx SFX_130
 .asm_acf6e
-	ld hl, w2da83
+	ld hl, wCurTextLinePos
 	inc [hl]
 	ld a, [hl]
-	cp $10
+	cp TEXT_LINE_LENGTH
 	ret nz
-	jp .asm_acee3
-.asm_acf79
-	ld hl, w2da83
+	jp GoToNextLine
+
+.no_char
+	; for empty chars, skip characters
+	; until a character is found or the
+	; end of the line is reached
+	ld hl, wCurTextLinePos
 	inc [hl]
 	ld a, [hl]
-	cp $10
-	jp z, .asm_acee3
-	ld a, [w2da82]
+	cp TEXT_LINE_LENGTH
+	jp z, GoToNextLine
+	ld a, [wCurTextBufferPos]
 	ld c, a
-	jr .asm_acf1c
+	jr .got_buffer_pos
 ; 0xacf89
 
-	INCROM $acf89, $ade49
+Func_acf89: ; acf89 (2b:4f89)
+	ld de, wTextLine1
+	ld hl, wTextBuffer
+	ld b, TEXT_LINE_LENGTH
+	call CopyHLToDE
+
+	xor a
+	ld [wIsNextObjectiveTheTemple], a
+	farcall GetMapSideAndLevelForNextTreasure
+	ld a, b
+	ld hl, $20
+	and a
+	jr z, .check_the_temple ; north
+	ld hl, $120
+	dec a
+	jr z, .not_temple ; west
+	ld hl, $200
+	dec a
+	jr z, .not_temple ; south
+	ld hl, $2e0
+	dec a
+	jr z, .not_temple ; east
+	debug_nop
+.check_the_temple
+	ld a, d
+	and a
+	jr nz, .not_temple
+	; the temple
+	ld a, TRUE
+	ld [wIsNextObjectiveTheTemple], a
+.not_temple
+	ld bc, wTextBuffer
+	add hl, bc
+	ld a, d
+	swap a
+	rlca
+	ld c, a ; = d * $20
+	ld b, $00
+	add hl, bc
+
+	ld a, [wLanguage]
+	and a
+	jr nz, .english
+; japanese
+	ld de, wTextLine2
+	ld b, TEXT_LINE_LENGTH
+	call CopyHLToDE
+	ld de, wTextLine3
+	ld hl, wTextBuffer + TEXT_LINE_LENGTH
+	ld b, TEXT_LINE_LENGTH
+	call CopyHLToDE
+	ld a, "@"
+	ld hl, wTextLine4
+	ld bc, TEXT_LINE_LENGTH
+	call WriteAToHL_BCTimes
+	ret
+
+.english
+	ld de, wTextLine3
+	ld b, 2 * TEXT_LINE_LENGTH
+	call CopyHLToDE
+	ld de, wTextLine2
+	ld hl, wTextBuffer + TEXT_LINE_LENGTH
+	ld b, TEXT_LINE_LENGTH
+	call CopyHLToDE
+	ret
+; 0xad011
+
+Func_ad011: ; ad011 (2b:5011)
+	ld a, [wObj1FrameDuration]
+	cp c
+	ret c
+Func_ad016: ; ad016 (2b:5016)
+	ld hl, wObj1FrameDuration
+	xor a
+	ld [hld], a
+	inc [hl]
+	ret
+; 0xad01d
+
+Func_ad01d: ; ad01d (2b:501d)
+	stop_music2
+	stop_sfx
+	xor a
+	ld [wSubState], a
+	ld hl, wState
+	inc [hl]
+	scf
+	ret
+; 0xad03b
+
+Func_ad03b: ; ad03b (2b:503b)
+	ld a, [w2d013]
+	cp $02
+	jr c, .asm_ad051
+	ld a, [wGameModeFlags]
+	bit MODE_UNK2_F, a
+	jr z, .asm_ad051
+	ld a, [wJoypadPressed]
+	bit B_BUTTON_F, a
+	jp nz, Func_ad01d
+.asm_ad051
+	call Func_ad91b
+	call Func_ad92a
+	ld hl, wObj1FrameDuration
+	inc [hl]
+	ld a, [w2d013]
+	jumptable
+
+	dw Func_ad016
+	dw Func_ad3af
+	dw Func_ad0b3
+	dw Func_aca74
+	dw Func_aca9e
+	dw Func_ad0b8
+	dw Func_acaad
+	dw Func_acacd
+	dw Func_acae7
+	dw Func_ad0bd
+	dw Func_ad0c0
+	dw Func_ad0d1
+	dw Func_ad445
+	dw Func_ad6f5
+	dw Func_ad0e4
+	dw Func_ad0f6
+	dw Func_ad105
+	dw Func_ad12f
+	dw Func_ad14d
+	dw Func_ad170
+	dw Func_ad182
+	dw Func_ad195
+	dw Func_ad1e3
+	dw Func_ad355
+	dw Func_ad1f9
+	dw Func_ad1fe
+	dw Func_aca9e
+	dw Func_ad207
+	dw Func_acaad
+	dw Func_ad215
+	dw Func_ad21d
+	dw Func_ad22e
+	dw Func_ad23a
+	dw Func_acaad
+	dw Func_ad259
+	dw Func_ad271
+	dw Func_ad27a
+	dw Func_ad2f4
+	dw Func_ad300
+	dw Func_ad308
+	dw Func_ad319
+	dw Func_ad01d
+; 0xad0b3
+
+Func_ad0b3: ; ad0b3 (2b:50b3)
+	ld c, $28
+	jp Func_ad011
+; 0xad0b8
+
+Func_ad0b8: ; ad0b8 (2b:50b8)
+	ld c, $1e
+	jp Func_ad011
+; 0xad0bd
+
+Func_ad0bd: ; ad0bd (2b:50bd)
+	jp Func_acaf3
+; 0xad0c0
+
+Func_ad0c0: ; ad0c0 (2b:50c0)
+	ld a, [wObj1FrameDuration]
+	cp $1e
+	ret c
+	ld a, $01
+	ld hl, wSceneObj1State
+	call SetSceneObjState
+	jp Func_ad016
+; 0xad0d1
+
+Func_ad0d1: ; ad0d1 (2b:50d1)
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	ret z
+	xor a
+	ld hl, wSceneObj1State
+	call SetSceneObjState
+	call Func_ace60
+	jp Func_ad016
+; 0xad0e4
+
+Func_ad0e4: ; ad0e4 (2b:50e4)
+	call Func_ad345
+	ld a, $03
+	ld [w2d880], a
+	xor a
+	ld [wObj7FramesetOffset], a
+	ld [wObj7Action], a
+	jp Func_ad16a
+; 0xad0f6
+
+Func_ad0f6: ; ad0f6 (2b:50f6)
+	call Func_ad889
+	call Func_ad345
+	ld a, [wObj1FrameDuration]
+	and $0f
+	ret nz
+	jp Func_ac9ba
+; 0xad105
+
+Func_ad105: ; ad105 (2b:5105)
+	ld a, $01
+	ld [w2d896], a
+	call Func_ad345
+	ld a, $00 ; xor a
+	ld [w2d8b2], a
+	ld [w2d8b6], a
+	ld [w2d8ba], a
+	ld [w2d8be], a
+	ld [w2d8c2], a
+	ld [w2d8c6], a
+	ld [w2d8ca], a
+	ld [w2d8ce], a
+	ld [w2d8d2], a
+	ld [w2d8d6], a
+	jr Func_ad16a
+; 0xad12f
+
+Func_ad12f: ; ad12f (2b:512f)
+	call Func_ad889
+	call Func_ad345
+	xor a
+	ld de, $4
+	ld hl, w2d8b0
+	ld b, $0a
+.asm_ad13e
+	add [hl]
+	add hl, de
+	dec b
+	jr nz, .asm_ad13e
+	and a
+	ret nz
+	ld a, $08
+	ld [w1d800], a
+	jp Func_ad016
+; 0xad14d
+
+Func_ad14d: ; ad14d (2b:514d)
+	xor a ; BANK(VRAM0)
+	ld [wHDMADestVRAMBank], a
+	ld de, $4800
+	ld b, $08
+	ld c, $7f
+	ld a, $36
+	ld [wObj4Unk19], a
+Func_ad15d: ; ad15d (2b:515d)
+	ld hl, wObj6OAMPtr
+	ld a, d
+	ld [hli], a
+	ld a, e
+	ld [hli], a
+	ld a, b
+	ld [hli], a
+	xor a
+	ld [hli], a
+	ld a, c
+	ld [hl], a
+;	fallthrough
+
+Func_ad16a: ; ad16a (2b:516a)
+	call Func_ad889
+	jp Func_ad016
+; 0xad170
+
+Func_ad170: ; ad170 (2b:5170)
+	xor a
+	ld [wHDMADestVRAMBank], a
+	ld de, $5000
+	ld b, $10
+	ld c, $7f
+	ld a, $36
+	ld [wObj4Unk19], a
+	jr Func_ad15d
+; 0xad182
+
+Func_ad182: ; ad182 (2b:5182)
+	ld a, $01
+	ld [wHDMADestVRAMBank], a
+	ld de, $5800
+	ld b, $00
+	ld c, $7f
+	ld a, $36
+	ld [wObj4Unk19], a
+	jr Func_ad15d
+; 0xad195
+
+Func_ad195: ; ad195 (2b:5195)
+	call Func_ad889
+	ld a, [wObj1FrameDuration]
+	cp $1e
+	ret c
+	ld a, $0d
+	ld hl, wSceneObj7State
+	call SetSceneObjState
+	ld a, $11
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	ld a, $12
+	ld hl, wSceneObj4State
+	call SetSceneObjState
+	ld hl, wSceneObj6End
+	ld a, $38
+	ld [hli], a
+	ld [hl], $50
+	ld hl, wSceneObj3YCoord
+	ld a, $58
+	ld [hli], a
+	ld [hl], $20
+	ld hl, wSceneObj4YCoord
+	ld [hli], a
+	ld [hl], $80
+	ld a, $01
+	ld [w2d8da], a
+	ld [w2d8dc], a
+	ld a, $04
+	ld [w2d880], a
+	xor a
+	ld [wObj7FramesetOffset], a
+	ld [wObj7Action], a
+	jp Func_ad016
+; 0xad1e3
+
+Func_ad1e3: ; ad1e3 (2b:51e3)
+	call Func_ad889
+	ld c, $07
+	ld a, [wObj7FramesetOffset]
+	cp $14
+	jr c, .asm_ad1f1
+	ld c, $03
+.asm_ad1f1
+	ld a, [wObj1FrameDuration]
+	and c
+	ret nz
+	jp Func_ac9ba
+; 0xad1f9
+
+Func_ad1f9: ; ad1f9 (2b:51f9)
+	ld c, $28
+	jp Func_ad011
+; 0xad1fe
+
+Func_ad1fe: ; ad1fe (2b:51fe)
+	call Func_aca74
+	ld a, $01
+	ld [wBGMapToPrintText], a
+	ret
+; 0xad207
+
+Func_ad207: ; ad207 (2b:5207)
+	ld a, [wObj1FrameDuration]
+	cp $1e
+	ret c
+	ld a, $04
+	ld [w2da84], a
+	jp Func_ad016
+; 0xad215
+
+Func_ad215: ; ad215 (2b:5215)
+	ld a, $10
+	ld [wSceneObj7State], a
+	jp Func_ad016
+; 0xad21d
+
+Func_ad21d: ; ad21d (2b:521d)
+	ld a, [wSceneObj7State]
+	cp $0e
+	ret nz
+	play_sfx SFX_0CC
+	jp Func_ad016
+; 0xad22e
+
+Func_ad22e: ; ad22e (2b:522e)
+	call Func_acec4
+	ld a, [wCurTextLine]
+	cp $80
+	ret nz
+	jp Func_ad016
+; 0xad23a
+
+Func_ad23a: ; ad23a (2b:523a)
+	ld a, [wObj1FrameDuration]
+	cp $28
+	jr z, .asm_ad253
+	cp $46
+	ret c
+	ld hl, w2da84
+	inc [hl]
+	ld hl, wSceneObj1State
+	ld a, $01
+	call SetSceneObjState
+	jp Func_ad016
+.asm_ad253
+	ld a, $0f
+	ld [wSceneObj7State], a
+	ret
+; 0xad259
+
+Func_ad259: ; ad259 (2b:5259)
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	ret z
+	xor a
+	ld hl, wSceneObj1State
+	call SetSceneObjState
+	call Func_ace66
+	ld a, $10
+	ld [wSceneObj7State], a
+	jp Func_aca6d
+; 0xad271
+
+Func_ad271: ; ad271 (2b:5271)
+	ld a, [wSceneObj7State]
+	cp $0e
+	ret nz
+	jp Func_aca6d
+; 0xad27a
+
+Func_ad27a: ; ad27a (2b:527a)
+	call Func_acec4
+	call .Func_ad289
+	ld a, [wCurTextLine]
+	cp $80
+	ret nz
+	jp Func_af135
+
+.Func_ad289
+	ld a, [wPendingCharDest]
+	and a
+	ret z
+	ld a, [wCurTextBufferPos]
+	cp $01
+	ret z
+	ld a, [wLanguage]
+	and a
+	jr nz, .asm_ad2b2
+	ld a, [w2da84]
+	cp $05
+	jr z, .asm_ad2ca
+	cp $06
+	jr z, .asm_ad2e0
+	cp $07
+	jr z, .asm_ad2e0
+	cp $08
+	jr z, .asm_ad2e4
+	cp $09
+	jr z, .asm_ad2ca
+	ret
+
+.asm_ad2b2
+	ld a, [w2da84]
+	cp $05
+	jr z, .asm_ad2e8
+	cp $06
+	jr z, .asm_ad2e4
+	cp $07
+	jr z, .asm_ad2f0
+	cp $08
+	jr z, .asm_ad2ec
+	cp $09
+	jr z, .asm_ad2e4
+	ret
+
+.asm_ad2ca
+	ld b, $01
+.asm_ad2cc
+	ld a, [wCurTextLinePos]
+	cp b
+	ret nz
+	ld a, [wCurTextBufferPos]
+	cp $02
+	ret nz
+	ld a, $0f
+	ld [wSceneObj7State], a
+	ld hl, wSceneObj9State
+	ret
+
+.asm_ad2e0
+	ld b, $08
+	jr .asm_ad2cc
+.asm_ad2e4
+	ld b, $0c
+	jr .asm_ad2cc
+.asm_ad2e8
+	ld b, $0a
+	jr .asm_ad2cc
+.asm_ad2ec
+	ld b, $0b
+	jr .asm_ad2cc
+.asm_ad2f0
+	ld b, $05
+	jr .asm_ad2cc
+; 0xad2f4
+
+Func_ad2f4: ; ad2f4 (2b:52f4)
+	ld a, [wSceneObj7State]
+	cp $0d
+	ret nz
+	call Func_acaf3
+	ret c
+	dec [hl]
+	ret
+; 0xad300
+
+Func_ad300: ; ad300 (2b:5300)
+	ld a, $2a
+	call SetSceneWarioState
+	jp Func_ad016
+; 0xad308
+
+Func_ad308: ; ad308 (2b:5308)
+	ld a, [wObj1FrameDuration]
+	cp $1e
+	ret c
+	ld hl, wSceneObj1State
+	ld a, $01
+	call SetSceneObjState
+	jp Func_ad016
+; 0xad319
+
+Func_ad319: ; ad319 (2b:5319)
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	ret z
+	xor a
+	ld [wSceneObj1State], a
+	call Func_ace60
+	jp Func_ad016
+; 0xad329
+
+	INCROM $ad329, $ad345
+
+Func_ad345: ; ad345 (2b:5345)
+	farcall Func_158000
+	ret
+; 0xad355
+
+Func_ad355: ; ad355 (2b:5355)
+	call Func_ad889
+	ld hl, w2d891
+	inc [hl]
+	ld c, l
+	ld b, h
+	dec l
+	ld a, [hl]
+	jumptable
+; 0xad361
+
+	INCROM $ad361, $ad3af
+
+Func_ad3af: ; ad3af (2b:53af)
+	ld hl, w2d891
+	inc [hl]
+	ld c, l
+	ld b, h
+	dec l
+	ld a, [hl] ; w2d890
+	jumptable
+; 0xad3b8
+
+	INCROM $ad3b8, $ad445
+
+Func_ad445: ; ad445 (2b:5445)
+	call Func_ad4b1
+	ld hl, w2d891
+	inc [hl]
+	ld c, l
+	ld b, h
+	dec l
+	ld a, [hl]
+	jumptable
+; 0xad451
+
+	INCROM $ad451, $ad4b1
+
+Func_ad4b1: ; ad4b1 (2b:54b1)
+	call Func_ad55b
+	call Func_ad58a
+	call Func_ad5b9
+	call Func_ad5e8
+	call Func_ad618
+	ld hl, w2d8a0
+	ld a, [hli]
+	inc [hl]
+	and a
+	ret z
+	ld b, h
+	ld c, l
+	jumptable
+; 0xad4ca
+
+	INCROM $ad4ca, $ad55b
+
+Func_ad55b: ; ad55b (2b:555b)
+	ld hl, w2d8a2
+	ld a, [hli]
+	and a
+	ret z
+	jumptable
+; 0xad562
+
+	INCROM $ad562, $ad58a
+
+Func_ad58a: ; ad58a (2b:558a)
+	ld hl, w2d8a4
+	ld a, [hli]
+	and a
+	ret z
+	jumptable
+; 0xad591
+
+	INCROM $ad591, $ad5b9
+
+Func_ad5b9: ; ad5b9 (2b:55b9)
+	ld hl, w2d8a6
+	ld a, [hli]
+	and a
+	ret z
+	jumptable
+; 0xad5c0
+
+	INCROM $ad5c0, $ad5e8
+
+Func_ad5e8: ; ad5e8 (2b:55e8)
+	ld hl, w2d8a8
+	ld a, [hli]
+	and a
+	ret z
+	jumptable
+; 0xad5ef
+
+	INCROM $ad5ef, $ad618
+
+Func_ad618: ; ad618 (2b:5618)
+	ld hl, w2d8aa
+	ld a, [hli]
+	and a
+	ret z
+	jumptable
+; 0xad61f
+
+	INCROM $ad61f, $ad6f5
+
+Func_ad6f5: ; ad6f5 (2b:56f5)
+	call Func_ad889
+	call Func_ad345
+	ld hl, w2d891
+	inc [hl]
+	ld c, l
+	ld b, h
+	dec l
+	ld a, [hl]
+	jumptable
+; 0xad704
+
+	INCROM $ad704, $ad889
+
+Func_ad889: ; ad889 (2b:5889)
+	ld a, [w2d894]
+	cp $01
+	ret nz
+	ld hl, w2d893
+	inc [hl]
+	ld c, l
+	ld b, h
+	dec l
+	ld a, [hl]
+	jumptable
+; 0xad898
+
+	INCROM $ad898, $ad91b
+
+Func_ad91b: ; ad91b (2b:591b)
+	ld a, [w2d8da]
+	and a
+	ret z
+	ld hl, wSceneObj3
+	ld de, Data_ad939
+	call ApplyMovement
+	ret
+; 0xad92a
+
+Func_ad92a: ; ad92a (2b:592a)
+	ld a, [w2d8dc]
+	and a
+	ret z
+	ld hl, wSceneObj4
+	ld de, Data_ad939
+	call ApplyMovement_Mirrored
+	ret
+; 0xad939
+
+Data_ad939: ; ad939 (2b:5939)
+	db  0,  0
+	db -1,  0
+	db  0,  0
+	db  0,  0
+	db -1,  0
+	db  0,  0
+	db  0,  0
+	db  0, -1
+	db  0,  0
+	db  0,  0
+	db  0,  0
+	db  0,  0
+	db  0, -1
+	db  0,  0
+	db  0,  0
+	db  0,  0
+	db  0,  0
+	db  1,  0
+	db  0,  0
+	db  0,  0
+	db  0,  0
+	db  0,  1
+	db  0,  0
+	db  0,  0
+	db  0,  0
+	db  0,  1
+	db  0,  0
+	db  0,  0
+	db  1,  0
+	db  0,  0
+	db  0,  0
+	db  1,  0
+	db  0,  0
+	db  0,  0
+	db  1,  0
+	db  0,  0
+	db  0,  0
+	db  0,  1
+	db  0,  0
+	db  0,  0
+	db  0,  0
+	db  0,  0
+	db  0,  1
+	db  0,  0
+	db  0,  0
+	db  0,  0
+	db  0,  0
+	db -1,  0
+	db  0,  0
+	db  0,  0
+	db  0,  0
+	db  0, -1
+	db  0,  0
+	db  0,  0
+	db  0,  0
+	db  0, -1
+	db  0,  0
+	db  0,  0
+	db -1,  0
+	db  0,  0
+	db $80
+; 0xad9b2
+
+	INCROM $ad9b2, $ade49
 
 _InitPrologueSequence: ; ade49 (2b:5e49)
 	call Func_acc9a
@@ -1448,12 +2723,12 @@ _InitPrologueSequence: ; ade49 (2b:5e49)
 	and a
 	jr z, .japanese
 ; english
-	decompress Data_b37f9, wTreasureTiles
+	decompress Data_b37f9, wTileBuffer
 	jr .asm_adf63
 .japanese
-	decompress Data_b3675, wTreasureTiles
+	decompress Data_b3675, wTileBuffer
 .asm_adf63
-	call Func_ace90
+	call FillClearedTextBuffer
 
 	; clear temp pals
 	xor a
@@ -1465,17 +2740,17 @@ _InitPrologueSequence: ; ade49 (2b:5e49)
 	ld bc, 8 palettes
 	call WriteAToHL_BCTimes
 
-	ld hl, w2d140
+	ld hl, wSceneWarioYCoord
 	ld a, $60
 	ld [hli], a
 	ld a, $60
 	ld [hli], a
-	ld a, $ff
-	ld [w2d148], a
-	xor a
-	call Func_ac8d4
-	ld a, $08
-	ld [w2d800], a
+	ld a, SCENEWARIO_GROUP_NONE
+	ld [wSceneWarioStateGroup], a
+	xor a ; SCENEWARIO_NONE
+	call SetSceneWarioState
+	ld a, LCDCF_BG9C00
+	ld [wLCDCFlagsToFlip], a
 	ret
 ; 0xadf92
 
@@ -1502,7 +2777,7 @@ Func_adf9e: ; adf9e (2b:5f9e)
 Func_adfa3: ; adfa3 (2b:5fa3)
 	call Func_adfb0
 	call Func_ac3d9
-	call Func_ac528
+	call UpdateSceneWarioAnimation
 	call Func_ac3fd
 	ret
 ; 0xadfb0
@@ -1587,13 +2862,13 @@ Func_ae025: ; ae025 (2b:6025)
 	ld [wSCY], a
 	xor a
 	ld [wSCX], a
-	ld hl, w2d140
+	ld hl, wSceneWarioYCoord
 	ld a, $d0
 	ld [hli], a
 	ld a, $f0
 	ld [hl], a
-	xor a
-	call Func_ac8d4
+	xor a ; SCENEWARIO_NONE
+	call SetSceneWarioState
 	call Func_ae067
 	ld hl, wSceneObj1
 	ld a, $bb
@@ -1627,8 +2902,8 @@ Func_ae079: ; ae079 (2b:6079)
 	xor a
 	ld [wSCY], a
 	ld [wSCX], a
-	ld a, $08
-	ld [w2d800], a
+	ld a, LCDCF_BG9C00
+	ld [wLCDCFlagsToFlip], a
 	ld a, $50
 	ld hl, wSceneObj7End
 	ld [hli], a
@@ -1666,10 +2941,10 @@ Func_ae0c4: ; ae0c4 (2b:60c4)
 	ld [wSCY], a
 	xor a
 	ld [wSCX], a
-	ld a, $08
-	ld [w2d800], a
-	ld a, $1f
-	call Func_ac8d4
+	ld a, LCDCF_BG9C00
+	ld [wLCDCFlagsToFlip], a
+	ld a, SCENEWARIO_HOLD_MUSIC_BOX
+	call SetSceneWarioState
 	call Func_ae067
 	ld a, $0e
 	ld hl, wSceneObj1State
@@ -1732,15 +3007,15 @@ Func_ae134: ; ae134 (2b:6134)
 	xor a
 	ld [wSCY], a
 	ld [wSCX], a
-	ld a, $08
-	ld [w2d800], a
-	ld hl, w2d140
+	ld a, LCDCF_BG9C00
+	ld [wLCDCFlagsToFlip], a
+	ld hl, wSceneWarioYCoord
 	ld a, $60
 	ld [hli], a
 	ld a, $40
 	ld [hl], a
-	ld a, $22
-	call Func_ac8d4
+	ld a, SCENEWARIO_SLEEP
+	call SetSceneWarioState
 	play_sfx SFX_0F5
 	ld a, $05
 	jp Func_ae009
@@ -1788,20 +3063,20 @@ Func_ae188: ; ae188 (2b:6188)
 	jr z, .asm_ae190
 	ret
 .asm_ae190
-	ld a, $10
-	call Func_ac8d4
+	ld a, SCENEWARIO_LOOK_AROUND
+	call SetSceneWarioState
 	ret
 ; 0xae196
 
 Func_ae196: ; ae196 (2b:6196)
-	ld a, $0f
-	call Func_ac8d4
+	ld a, SCENEWARIO_NOD_ONCE
+	call SetSceneWarioState
 	jp Func_adf97
 ; 0xae19e
 
 Func_ae19e: ; ae19e (2b:619e)
-	ld a, [w2d146]
-	cp $02
+	ld a, [wSceneWarioState]
+	cp SCENEWARIO_LOOK_BACK
 	ret nz
 	ld hl, wSceneObj1State
 	ld a, $01
@@ -1821,7 +3096,7 @@ Func_ae1af: ; ae1af (2b:61af)
 ; 0xae1c2
 
 Func_ae1c2: ; ae1c2 (2b:61c2)
-	ld a, [w2d146]
+	ld a, [wSceneWarioState]
 	cp b
 	ret nz
 	jr Func_ae1ce
@@ -1830,6 +3105,7 @@ Func_ae1c9: ; ae1c9 (2b:61c9)
 	ld a, [w2d891]
 	cp c
 	ret c
+;	fallthrough
 
 Func_ae1ce: ; ae1ce (2b:61ce)
 	ld hl, w2d891
@@ -1924,13 +3200,13 @@ Func_ae22d: ; ae22d (2b:622d)
 ; 0xae251
 
 Func_ae251: ; ae251 (2b:6251)
-	ld a, $08
-	call Func_ac8d4
+	ld a, SCENEWARIO_WALK_RIGHT
+	call SetSceneWarioState
 	jp Func_ae1ce
 ; 0xae259
 
 Func_ae259: ; ae259 (2b:6259)
-	call Func_aca4c
+	call ApplySceneWarioMovementRight
 	cp $32
 	jr z, Func_ae26c
 	cp $40
@@ -1938,8 +3214,8 @@ Func_ae259: ; ae259 (2b:6259)
 	ld [hl], a
 
 Func_ae264: ; ae264 (2b:6264)
-	ld a, $0d
-	call Func_ac8d4
+	ld a, SCENEWARIO_IDLE_RIGHT
+	call SetSceneWarioState
 	jp Func_ae1ce
 
 Func_ae26c: ; ae26c (2b:626c)
@@ -1960,10 +3236,10 @@ Func_ae27a: ; ae27a (2b:627a)
 	cp $16
 	ret c
 	ld hl, w2d180
-	ld a, [w2d140]
+	ld a, [wSceneWarioYCoord]
 	sub $18
 	ld [hli], a
-	ld a, [w2d141]
+	ld a, [wSceneWarioXCoord]
 	add $10
 	ld [hl], a
 	ld a, $11
@@ -1986,7 +3262,7 @@ Func_ae2aa: ; ae2aa (2b:62aa)
 ; 0xae2af
 
 Func_ae2af: ; ae2af (2b:62af)
-	call Func_aca4c
+	call ApplySceneWarioMovementRight
 	cp $66
 	ret nz
 	ld [hl], a
@@ -2007,15 +3283,13 @@ Func_ae2b8: ; ae2b8 (2b:62b8)
 ; 0xae2cb
 
 Func_ae2cb: ; ae2cb (2b:62cb)
-	ld a, $1d
-	call Func_ac8d4
+	ld a, SCENEWARIO_LOOK_MUSIC_BOX
+	call SetSceneWarioState
 	jp Func_ae1ce
 ; 0xae2d3
 
 Func_ae2d3: ; ae2d3 (2b:62d3)
-	ld b, $1f
-
-Func_ae2d5: ; ae2d5 (2b:62d5)
+	ld b, SCENEWARIO_HOLD_MUSIC_BOX
 	jp Func_ae1c2
 ; 0xae2d8
 
@@ -2129,8 +3403,8 @@ Func_ae36f: ; ae36f (2b:636f)
 ; 0xae374
 
 Func_ae374: ; ae374 (2b:6374)
-	ld a, $1e
-	call Func_ac8d4
+	ld a, SCENEWARIO_PICKUP_MUSIC_BOX
+	call SetSceneWarioState
 	jp Func_ae1ce
 ; 0xae37c
 
@@ -2145,7 +3419,7 @@ Func_ae37c: ; ae37c (2b:637c)
 ; 0xae38d
 
 Func_ae38d: ; ae38d (2b:638d)
-	ld hl, w2d140
+	ld hl, wSceneWario
 	ld a, [w2d891]
 	cp $01
 	jr z, .asm_ae3a1
@@ -2155,14 +3429,14 @@ Func_ae38d: ; ae38d (2b:638d)
 	ret c
 	jp Func_ae1ce
 .asm_ae3a1
-	dec [hl] ; w2d140
+	dec [hl] ; y
 	inc l
-	dec [hl] ; w2d141
+	dec [hl] ; x
 	ret
 .asm_ae3a5
-	inc [hl] ; w2d140
+	inc [hl] ; y
 	inc l
-	dec [hl] ; w2d141
+	dec [hl] ; x
 	ret
 ; 0xae3a9
 
@@ -2205,10 +3479,10 @@ Func_ae3d8: ; ae3d8 (2b:63d8)
 
 Func_ae3e2: ; ae3e2 (2b:63e2)
 	ld hl, w2d180
-	ld a, [w2d140]
+	ld a, [wSceneWarioYCoord]
 	sub $08
 	ld [hli], a
-	ld a, [w2d141]
+	ld a, [wSceneWarioXCoord]
 	ld [hl], a
 	ld a, $0e
 	ld hl, w2d180State
@@ -2227,10 +3501,10 @@ Func_ae3fa: ; ae3fa (2b:63fa)
 
 Func_ae407: ; ae407 (2b:6407)
 	ld hl, w2d180
-	ld a, [w2d140]
+	ld a, [wSceneWarioYCoord]
 	sub $10
 	ld [hli], a
-	ld a, [w2d141]
+	ld a, [wSceneWarioXCoord]
 	add $02
 	ld [hl], a
 	ld a, $15
@@ -2255,8 +3529,8 @@ Func_ae435: ; ae435 (2b:6435)
 	ld a, [w2d180State]
 	cp $16
 	ret nz
-	xor a
-	call Func_ac8d4
+	xor a ; SCENEWARIO_NONE
+	call SetSceneWarioState
 	jp Func_ae1ce
 ; 0xae442
 
@@ -2431,15 +3705,23 @@ Func_ae523: ; ae523 (2b:6523)
 	ld b, $00
 	add hl, bc
 	ld a, [hl]
-	ld [w2d143], a
+	ld [wSceneWarioAttributes], a
 	ret
 
 .data_ae54b
-	db $00, $00, $01, $02, $03, $04, $05, $06, $07
+	db $0
+	db $0
+	db $1
+	db $2
+	db $3
+	db $4
+	db $5
+	db $6
+	db $7
 
 .asm_ae554
 	xor a
-	ld [w2d143], a
+	ld [wSceneWarioAttributes], a
 	ld [w2d150], a
 	ret
 ; 0xae55c
@@ -2481,8 +3763,8 @@ Func_ae58d: ; ae58d (2b:658d)
 	ld a, [bc]
 	cp $4b
 	ret c
-	ld a, $23
-	call Func_ac8d4
+	ld a, SCENEWARIO_WAKE_UP
+	call SetSceneWarioState
 	jp Func_ae1ce
 ; 0xae599
 
@@ -2495,8 +3777,8 @@ Func_ae599: ; ae599 (2b:6599)
 ; 0xae5a8
 
 Func_ae5a8: ; ae5a8 (2b:65a8)
-	ld a, [w2d146]
-	cp $25
+	ld a, [wSceneWarioState]
+	cp SCENEWARIO_SIT_IDLE
 	ret nz
 	jp Func_ae1ce
 ; 0xae5b1
@@ -2505,10 +3787,10 @@ Func_ae5b1: ; ae5b1 (2b:65b1)
 	ld a, [bc]
 	cp $05
 	ret c
-	ld a, [w2d140]
+	ld a, [wSceneWarioYCoord]
 	sub $01
 	ld [w2d180YCoord], a
-	ld a, [w2d141]
+	ld a, [wSceneWarioXCoord]
 	add $09
 	ld [w2d180XCoord], a
 	ld a, $14
@@ -2521,8 +3803,8 @@ Func_ae5d0: ; ae5d0 (2b:65d0)
 	ld a, [bc]
 	cp $8c
 	ret c
-	ld a, $24
-	call Func_ac8d4
+	ld a, SCENEWARIO_SIT_STILL
+	call SetSceneWarioState
 	jp Func_ae1ce
 ; 0xae5dc
 
@@ -2530,8 +3812,8 @@ Func_ae5dc: ; ae5dc (2b:65dc)
 	ld a, [bc]
 	cp $10
 	ret c
-	ld a, $0d
-	call Func_ac8d4
+	ld a, SCENEWARIO_IDLE_RIGHT
+	call SetSceneWarioState
 	play_sfx SFX_12A
 	jp Func_ae1ce
 ; 0xae5f0
@@ -2542,18 +3824,18 @@ Func_ae5f0: ; ae5f0 (2b:65f0)
 ; 0xae5f5
 
 Func_ae5f5: ; ae5f5 (2b:65f5)
-	ld a, $08
-	call Func_ac8d4
+	ld a, SCENEWARIO_WALK_RIGHT
+	call SetSceneWarioState
 	jp Func_ae1ce
 ; 0xae5fd
 
 Func_ae5fd: ; ae5fd (2b:65fd)
-	call Func_aca4c
+	call ApplySceneWarioMovementRight
 	cp $50
 	ret nz
 	ld [hl], a
-	ld a, $0d
-	call Func_ac8d4
+	ld a, SCENEWARIO_IDLE_RIGHT
+	call SetSceneWarioState
 	jp Func_ae1ce
 ; 0xae60c
 
@@ -2561,13 +3843,13 @@ Func_ae60c: ; ae60c (2b:660c)
 	ld a, [bc]
 	cp $1e
 	ret c
-	ld a, $06
-	call Func_ac8d4
+	ld a, SCENEWARIO_TURN_BACK_RIGHT
+	call SetSceneWarioState
 	jp Func_ae1ce
 ; 0xae618
 
 Func_ae618: ; ae618 (2b:6618)
-	ld b, $02
+	ld b, SCENEWARIO_LOOK_BACK
 	jp Func_ae1c2
 ; 0xae61d
 
@@ -2583,8 +3865,8 @@ Func_ae630: ; ae630 (2b:6630)
 	ld a, [bc]
 	cp $1e
 	ret c
-	ld a, $10
-	call Func_ac8d4
+	ld a, SCENEWARIO_LOOK_AROUND
+	call SetSceneWarioState
 	jp Func_ae1ce
 ; 0xae63c
 
@@ -2608,20 +3890,20 @@ Func_ae641: ; ae641 (2b:6641)
 ; 0xae652
 
 Func_ae652: ; ae652 (2b:6652)
-	ld b, $12
+	ld b, SCENEWARIO_LOOK_FORWARD
 	jp Func_ae1c2
 ; 0xae657
 
 Func_ae657: ; ae657 (2b:6657)
-	ld a, $26
-	call Func_ac8d4
+	ld a, SCENEWARIO_JUMP_AND_BOW
+	call SetSceneWarioState
 	xor a
-	ld [w2d147], a
+	ld [wSceneWarioUnk7], a
 	jp Func_ae1ce
 ; 0xae663
 
 Func_ae663: ; ae663 (2b:6663)
-	ld b, $02
+	ld b, SCENEWARIO_LOOK_BACK
 	jp Func_ae1c2
 ; 0xae668
 
@@ -2644,13 +3926,13 @@ Func_ae668: ; ae668 (2b:6668)
 ; 0xae683
 
 Func_ae683: ; ae683 (2b:6683)
-	ld a, $27
-	call Func_ac8d4
+	ld a, SCENEWARIO_SNAP_FINGERS
+	call SetSceneWarioState
 	jp Func_ae1ce
 ; 0xae68b
 
 Func_ae68b: ; ae68b (2b:668b)
-	ld a, [w2d142]
+	ld a, [wSceneWarioFrame]
 	cp $0f
 	ret nz
 	play_sfx SFX_106
@@ -2658,7 +3940,7 @@ Func_ae68b: ; ae68b (2b:668b)
 ; 0xae69c
 
 Func_ae69c: ; ae69c (2b:669c)
-	ld b, $02
+	ld b, SCENEWARIO_LOOK_BACK
 	jp Func_ae1c2
 ; 0xae6a1
 
@@ -2668,13 +3950,13 @@ Func_ae6a1: ; ae6a1 (2b:66a1)
 ; 0xae6a6
 
 Func_ae6a6: ; ae6a6 (2b:66a6)
-	ld a, $33
-	call Func_ac8d4
+	ld a, SCENEWARIO_TURN_BACK_TO_LEFT
+	call SetSceneWarioState
 	jp Func_ae1ce
 ; 0xae6ae
 
 Func_ae6ae: ; ae6ae (2b:66ae)
-	ld b, $0c
+	ld b, SCENEWARIO_IDLE_LEFT
 	jp Func_ae1c2
 ; 0xae6b3
 
@@ -2682,17 +3964,17 @@ Func_ae6b3: ; ae6b3 (2b:66b3)
 	ld a, [w2d891]
 	cp $04
 	ret c
-	ld a, $07
-	call Func_ac8d4
+	ld a, SCENEWARIO_WALK_LEFT
+	call SetSceneWarioState
 	jp Func_ae1ce
 ; 0xae6c1
 
 Func_ae6c1: ; ae6c1 (2b:66c1)
-	call Func_aca34
+	call ApplySceneWarioMovementLeft
 	cp $f0
 	ret nz
-	xor a
-	call Func_ac8d4
+	xor a ; SCENEWARIO_NONE
+	call SetSceneWarioState
 	jp Func_ae1ce
 ; 0xae6ce
 
@@ -2727,13 +4009,13 @@ Func_ae6f3: ; ae6f3 (2b:66f3)
 ; 0xae6f8
 
 Func_ae6f8: ; ae6f8 (2b:66f8)
-	ld hl, w2d140
+	ld hl, wSceneWarioYCoord
 	ld a, $3c
 	ld [hli], a
 	ld a, $f0
 	ld [hl], a
-	ld a, $15
-	call Func_ac8d4
+	ld a, SCENEWARIO_ON_FIRE
+	call SetSceneWarioState
 	play_sfx SFX_019
 	xor a
 	ld [w2d894], a
@@ -2757,8 +4039,8 @@ Func_ae724: ; ae724 (2b:6724)
 	and $03
 	jr z, .asm_ae740
 	ld de, Data_aed06
-	ld hl, w2d140
-	call Func_3c25
+	ld hl, wSceneWario
+	call ApplyMovement
 	jr nz, .asm_ae740
 	xor a
 	ld [w2d894], a
@@ -2797,17 +4079,17 @@ Func_ae724: ; ae724 (2b:6724)
 	ret
 
 .asm_ae771
-	ld a, [w2d140]
+	ld a, [wSceneWarioYCoord]
 	cp $60
 	ret nz
-	ld a, $19
-	call Func_ac8d4
+	ld a, SCENEWARIO_STUNNED_RIGHT
+	call SetSceneWarioState
 	call Func_ae7f8
 .asm_ae77f
 	ld hl, w2d180
-	ld a, [w2d140]
+	ld a, [wSceneWarioYCoord]
 	ld [hli], a
-	ld a, [w2d141]
+	ld a, [wSceneWarioXCoord]
 	ld [hl], a
 	ld a, $10
 	ld hl, w2d180State
@@ -2821,28 +4103,28 @@ Func_ae724: ; ae724 (2b:6724)
 	ret c
 	jr .asm_ae768
 .asm_ae79e
-	ld a, $18
-	call Func_ac8d4
+	ld a, SCENEWARIO_CRASH_TUMBLE_END
+	call SetSceneWarioState
 	jr .asm_ae768
 .asm_ae7a5
-	ld a, [w2d140]
+	ld a, [wSceneWarioYCoord]
 	cp $60
 	ret nz
-	ld a, $16
-	call Func_ac8d4
+	ld a, SCENEWARIO_CRASH_LAND_RIGHT
+	call SetSceneWarioState
 	call Func_ae7f8
 	jr .asm_ae77f
 .asm_ae7b5
-	ld a, [w2d140]
+	ld a, [wSceneWarioYCoord]
 	cp $60
 	ret nz
-	ld a, $16
-	call Func_ac8d4
+	ld a, SCENEWARIO_CRASH_LAND_RIGHT
+	call SetSceneWarioState
 	call Func_ae7f8
 	jr .asm_ae768
 .asm_ae7c5
-	ld a, [w2d146]
-	cp $19
+	ld a, [wSceneWarioState]
+	cp SCENEWARIO_STUNNED_RIGHT
 	ret nz
 	ld hl, w2d892
 	inc [hl]
@@ -2856,8 +4138,8 @@ Func_ae724: ; ae724 (2b:6724)
 	ld a, [hl]
 	cp $3e
 	ret c
-	ld a, $0d
-	call Func_ac8d4
+	ld a, SCENEWARIO_IDLE_RIGHT
+	call SetSceneWarioState
 	play_sfx SFX_12A
 	ld hl, w2d892
 	inc [hl]
@@ -2883,13 +4165,13 @@ Func_ae801: ; ae801 (2b:6801)
 ; 0xae806
 
 Func_ae806: ; ae806 (2b:6806)
-	ld a, $06
-	call Func_ac8d4
+	ld a, SCENEWARIO_TURN_BACK_RIGHT
+	call SetSceneWarioState
 	jp Func_ae1ce
 ; 0xae80e
 
 Func_ae80e: ; ae80e (2b:680e)
-	ld b, $02
+	ld b, SCENEWARIO_LOOK_BACK
 	jp Func_ae1c2
 ; 0xae813
 
@@ -2899,13 +4181,13 @@ Func_ae813: ; ae813 (2b:6813)
 ; 0xae818
 
 Func_ae818: ; ae818 (2b:6818)
-	ld a, $13
-	call Func_ac8d4
+	ld a, SCENEWARIO_LOOK_AROUND_THEN_TURN
+	call SetSceneWarioState
 	jp Func_ae1ce
 ; 0xae820
 
 Func_ae820: ; ae820 (2b:6820)
-	ld b, $0d
+	ld b, SCENEWARIO_IDLE_RIGHT
 	jp Func_ae1c2
 ; 0xae825
 
@@ -2941,12 +4223,12 @@ Func_ae84b: ; ae84b (2b:684b)
 ; 0xae850
 
 Func_ae850: ; ae850 (2b:6850)
-	call Func_aca4c
+	call ApplySceneWarioMovementRight
 	cp $78
 	ret nz
 	ld [hl], a
-	ld a, $0d
-	call Func_ac8d4
+	ld a, SCENEWARIO_IDLE_RIGHT
+	call SetSceneWarioState
 	jp Func_ae1ce
 ; 0xae85f
 
@@ -2956,22 +4238,22 @@ Func_ae85f: ; ae85f (2b:685f)
 ; 0xae864
 
 Func_ae864: ; ae864 (2b:6864)
-	ld a, $1a
-	call Func_ac8d4
+	ld a, SCENEWARIO_LOOK_UP
+	call SetSceneWarioState
 	jp Func_ae1ce
 ; 0xae86c
 
 Func_ae86c: ; ae86c (2b:686c)
-	ld b, $0d
+	ld b, SCENEWARIO_IDLE_RIGHT
 	jp Func_ae1c2
 ; 0xae871
 
 Func_ae871: ; ae871 (2b:6871)
 	ld hl, w2d180
-	ld a, [w2d140]
+	ld a, [wSceneWarioYCoord]
 	sub $18
 	ld [hli], a
-	ld a, [w2d141]
+	ld a, [wSceneWarioXCoord]
 	add $10
 	ld [hl], a
 	ld a, $11
@@ -2994,18 +4276,18 @@ Func_ae89b: ; ae89b (2b:689b)
 ; 0xae8a0
 
 Func_ae8a0: ; ae8a0 (2b:68a0)
-	ld a, $08
-	call Func_ac8d4
+	ld a, SCENEWARIO_WALK_RIGHT
+	call SetSceneWarioState
 	jp Func_ae1ce
 ; 0xae8a8
 
 Func_ae8a8: ; ae8a8 (2b:68a8)
-	call Func_aca4c
+	call ApplySceneWarioMovementRight
 	cp $d0
 	ret nz
 	ld [hl], a
-	xor a
-	call Func_ac8d4
+	xor a ; SCENEWARIO_NONE
+	call SetSceneWarioState
 	jp Func_ae1ce
 ; 0xae8b6
 
@@ -3219,21 +4501,21 @@ Func_ae9c5: ; ae9c5 (2b:69c5)
 Func_ae9d0: ; ae9d0 (2b:69d0)
 	ld de, Data_aee09
 	ld hl, wSceneObj3
-	call Func_3c25
+	call ApplyMovement
 	ret
 ; 0xae9da
 
 Func_ae9da: ; ae9da (2b:69da)
 	ld de, Data_aedba
 	ld hl, wSceneObj3
-	call Func_3c25
+	call ApplyMovement
 	ret
 ; 0xae9e4
 
 Func_ae9e4: ; ae9e4 (2b:69e4)
 	ld de, Data_aed6d
 	ld hl, wSceneObj3
-	call Func_3c25
+	call ApplyMovement
 	ret
 ; 0xae9ee
 
@@ -3390,19 +4672,19 @@ Func_ae9ee: ; ae9ee (2b:69ee)
 .Func_aeaef
 	ld de, Data_aed6d
 	ld hl, wSceneObj4
-	call Func_3c25
+	call ApplyMovement
 	ret
 
 .Func_aeaf9
 	ld de, Data_aee09
 	ld hl, wSceneObj4
-	call Func_3c25
+	call ApplyMovement
 	ret
 
 .Func_aeb03
 	ld de, Data_aee09
 	ld hl, wSceneObj4
-	call Func_3c25
+	call ApplyMovement
 	ret
 ; 0xaeb0d
 
@@ -3553,7 +4835,7 @@ Func_aeb0d: ; aeb0d (2b:6b0d)
 	ld de, Data_aed6d
 .Func_aec0e
 	ld hl, wSceneObj5
-	call Func_3c25
+	call ApplyMovement
 	ret
 
 .Func_aec15
@@ -3688,7 +4970,7 @@ Func_aec1f: ; aec1f (2b:6c1f)
 	ld de, Data_aedba
 .Func_aecf5
 	ld hl, wSceneObj9
-	call Func_3c25
+	call ApplyMovement
 	ret
 
 .Func_aecfc
@@ -3883,5 +5165,15 @@ Data_aee09: ; aee09 (2b:6e09)
 	db $80
 ; 0xaee58
 
-	INCROM $aee58, $b0000
+	INCROM $aee58, $af135
+
+Func_af135: ; af135 (2b:7135)
+	ld hl, wObj1FrameDuration
+	xor a
+	ld [hld], a
+	inc [hl]
+	ret
+; 0xaf13c
+
+	INCROM $af13c, $b0000
 

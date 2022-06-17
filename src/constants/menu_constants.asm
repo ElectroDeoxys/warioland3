@@ -1,8 +1,8 @@
 ; flags for wca3b
 	const_def
-	const MODE_DAY_NIGHT_F   ; 0
-	const MODE_TIME_ATTACK_F ; 1
-	const MODE_UNKNOWN_2_F   ; 2
+	const MODE_UNK0_F ; 0
+	const MODE_TIME_ATTACK_F  ; 1
+	const MODE_UNK2_F    ; 2
 
 ; special wTransitionParam values
 DEF TRANSITION_RETURN_TO_MAP        EQU $f0

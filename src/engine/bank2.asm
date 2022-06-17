@@ -305,15 +305,15 @@ Func_80aa: ; 80aa (2:40aa)
 	jr z, .got_all_treasures
 	ld a, TRANSITION_EPILOGUE_NOT_PERFECT
 	ld [wTransitionParam], a
-	jr .set_night
+	jr .set_game_cleared
 .got_all_treasures
 	ld a, TRANSITION_EPILOGUE_PERFECT
 	ld [wTransitionParam], a
 	set MODE_TIME_ATTACK_F, [hl]
-.set_night
-	set MODE_DAY_NIGHT_F, [hl]
+.set_game_cleared
+	set MODE_UNK0_F, [hl]
 .asm_82ba
-	set MODE_UNKNOWN_2_F, [hl]
+	set MODE_UNK2_F, [hl]
 
 	ld hl, wState
 	ld [hl], ST_06

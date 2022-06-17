@@ -647,7 +647,7 @@ INCLUDE "data/levels/main_tiles5.asm"
 
 SECTION "Bank 56", ROMX
 
-	INCROM $158000, $158ba3
+INCLUDE "engine/bank56.asm"
 
 
 SECTION "Bank 57", ROMX

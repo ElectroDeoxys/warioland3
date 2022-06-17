@@ -2573,7 +2573,7 @@ Func_b586d: ; b586d (2d:586d)
 Func_b5b4e: ; b5b4e (2d:5b4e)
 	ld de, Data_b6337
 	ld hl, wSceneObj1
-	call Func_3c25
+	call ApplyMovement
 	ret nz
 	ld a, [w2d025]
 	and a

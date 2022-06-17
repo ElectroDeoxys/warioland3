@@ -532,7 +532,7 @@ class Disassembler(object):
 			self.sym, self.rsym, self.wram, self.sram, self.vram, self.hram = load_symbols(path)
 
 		# load hardware constants
-		path = os.path.join(self.config.path, 'src/constants/hardware_constants.asm')
+		path = os.path.join(self.config.path, 'src/constants/hardware.inc')
 		if os.path.exists(path):
 			self.gbhw = read_constants(path)
 

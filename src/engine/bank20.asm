@@ -734,12 +734,14 @@ OverworldStateTable: ; 80392 (20:4392)
 	dw $4df3
 	dw DarkenBGToPal_Normal
 	dw $4e03
-	dw FadeBGToWhite_Normal
-	dw $4e13
+
+	dw FadeBGToWhite_Normal ; SST_OVERWORLD_1A
+	dw Func_80e13
 	dw DarkenBGToPal_Normal
-	dw $4e23
+	dw Func_80e23
 	dw $4e33
 	dw FadeBGToWhite_Normal
+
 	dw $4e45                ; SST_OVERWORLD_20
 	dw DarkenBGToPal_Normal
 	dw $4e55
@@ -961,7 +963,7 @@ Func_8055f: ; 8055f (20:455f)
 	call VBlank_80bf9
 
 	call Func_80b29
-	call Func_8184d
+	call GetNextTreasureToCollect
 
 	ld a, [wca3b]
 	ld b, a
@@ -1080,7 +1082,7 @@ Func_80621: ; 80621 (20:4621)
 Func_8065e: ; 8065e (20:465e)
 	ld a, [wGameModeFlags]
 	ld c, a
-	and ($1 << MODE_DAY_NIGHT_F)
+	and ($1 << MODE_UNK0_F)
 	bit MODE_TIME_ATTACK_F, c
 	jr z, .asm_80669
 	xor a
@@ -1884,7 +1886,19 @@ Func_80de0: ; 80de0 (20:4de0)
 	ret
 ; 0x80df3
 
-	INCROM $80df3, $80e89
+	INCROM $80df3, $80e13
+
+Func_80e13: ; 80e13 (20:4e13)
+	farcall Func_acb25
+	ret
+; 0x80e23
+
+Func_80e23: ; 80e23 (20:4e23)
+	farcall Func_acd3a
+	ret
+; 0x80e33
+
+	INCROM $80e33, $80e89
 
 Func_80e89: ; 80e89 (20:4e89)
 	call ProcessDPadRepeat
@@ -2123,11 +2137,11 @@ Func_81077: ; 81077 (20:5077)
 	ld a, [wJoypadPressed]
 	bit D_UP_F, a
 	ret z
-	ld a, [w2d00e]
-	cp $ed
+	ld a, [wNextTreasure]
+	cp TREASURES_END
 	jr nz, .asm_81092
 	ld a, [wGameModeFlags]
-	bit MODE_DAY_NIGHT_F, a
+	bit MODE_UNK0_F, a
 	ret nz
 .asm_81092
 	call Func_3c76
@@ -2425,7 +2439,7 @@ Func_81240: ; 81240 (20:5240)
 ; - b = LEVEL_* constant
 ; output:
 ; - d = map side level index
-; - c = map side
+; - b and c = map side
 GetMapSideLevelIndex: ; 81278 (20:5278)
 ; loop until a larger value than b is found
 	ld hl, MapSideInitialLevels
@@ -2606,31 +2620,31 @@ Func_813ad: ; 813ad (20:53ad)
 ; 0x813b4
 
 Func_813b4: ; 813b4 (20:53b4)
-	call Func_813bc
+	call GetMapSideAndLevelForNextTreasure
 	call LoadLevelName
 	jr Func_81398
 ; 0x813bc
 
-Func_813bc: ; 813bc (20:53bc)
-	ld a, [w2d00e]
-	cp $ed
-	jr z, .asm_813d3
+GetMapSideAndLevelForNextTreasure: ; 813bc (20:53bc)
+	ld a, [wNextTreasure]
+	cp TREASURES_END
+	jr z, .no_more_treasures
 	ld b, a
 	call GetCutsceneWithTreasure
 	ld a, CUTSCENE_25
 	cp c
-	jr nc, .asm_813d8
+	jr nc, .get_level
 	ld a, [wGameModeFlags]
-	bit MODE_DAY_NIGHT_F, a
-	jr nz, .asm_813d8
-.asm_813d3
-	ld b, $00
-	ld d, $00
+	bit MODE_UNK0_F, a
+	jr nz, .get_level
+.no_more_treasures
+	ld b, MAP_NORTH
+	ld d, OWNORTH_THE_TEMPLE
 	ret
-.asm_813d8
-	ld a, [w2d00e]
+.get_level
+	ld a, [wNextTreasure]
 	ld c, a
-	farcall Func_9aa81
+	farcall GetLevelThatContainsTreasure
 	call GetMapSideLevelIndex
 	ret
 ; 0x813ef
@@ -2751,7 +2765,7 @@ Func_814ec: ; 814ec (20:54ec)
 	ld hl, w2d800
 	ld bc, $8e
 	call WriteAToHL_BCTimes
-	ld hl, w2d140
+	ld hl, wSceneWario
 	ld bc, $40
 	call WriteAToHL_BCTimes
 	call Func_82111
@@ -2788,7 +2802,7 @@ Func_8150c: ; 8150c (20:550c)
 	call z, .Func_815e5
 	ld a, [w2d0e2]
 	cp $2c
-	ld hl, w2d146
+	ld hl, wSceneWarioState
 	call z, .Func_81609
 	ld a, [w2d0e2]
 	cp $40
@@ -2852,7 +2866,7 @@ Func_8150c: ; 8150c (20:550c)
 
 .Func_815c1
 	ld hl, w2d800
-	ld de, w2d140
+	ld de, wSceneWario
 	ld b, $08
 	call CopyHLToDE
 	ld hl, w2d810 + $10
@@ -3027,10 +3041,10 @@ UpdateNextPrevMapButtonsSelectable: ; 8182b (20:582b)
 	ret
 ; 0x8184d
 
-Func_8184d: ; 8184d (20:584d)
-	ld a, [w2d00e]
+GetNextTreasureToCollect: ; 8184d (20:584d)
+	ld a, [wNextTreasure]
 	call IsTreasureCollected
-	ld hl, w2d00e
+	ld hl, wNextTreasure
 	jr nz, .collected
 	ld a, [wTransitionParam]
 	and a
@@ -3066,16 +3080,16 @@ Func_8184d: ; 8184d (20:584d)
 	jr z, .not_collected
 .check_end
 	ld a, [hli]
-	cp $ed
+	cp TREASURES_END
 	jr z, .all_collected
 	jr .next_treasure
 .not_collected
 	ld a, [hl]
-	ld [w2d00e], a
+	ld [wNextTreasure], a
 	ret
 .all_collected
-	ld a, $ed
-	ld [w2d00e], a
+	ld a, TREASURES_END
+	ld [wNextTreasure], a
 	ret
 ; 0x81891
 
@@ -3084,11 +3098,11 @@ Func_8184d: ; 8184d (20:584d)
 ; output:
 ; - c = CUTSCENE_* constant
 GetCutsceneWithTreasure: ; 81891 (20:5891)
-	ld c, 0
+	ld c, CUTSCENE_00
 	ld hl, CutsceneTreasures
 .loop
 	ld a, [hli]
-	cp $ed
+	cp TREASURES_END
 	jr z, .not_found
 	cp b
 	jr z, .found
@@ -3103,7 +3117,7 @@ GetCutsceneWithTreasure: ; 81891 (20:5891)
 .found
 	ret
 .not_found
-	ld c, 0
+	ld c, CUTSCENE_00
 	ret
 ; 0x818ad
 
@@ -3222,7 +3236,7 @@ Func_8197e: ; 8197e (20:597e)
 	ld hl, CutsceneTreasures
 .loop
 	ld a, [hli]
-	cp $ed
+	cp TREASURES_END
 	jr z, .asm_819a7
 	cp b
 	jr z, .found
@@ -3773,7 +3787,7 @@ CutsceneTreasures: ; 819fb (20:59fb)
 	db TREASURE_INVALID
 	db TREASURE_INVALID
 
-	db $ed
+	db TREASURES_END
 ; 0x81b0d
 
 ; input:
@@ -5046,10 +5060,10 @@ Func_822b4: ; 822b4 (20:62b4)
 	call Func_82654
 
 	xor a
-	ld [w2d140], a
-	ld [w2d148], a
+	ld [wSceneWarioYCoord], a
+	ld [wSceneWarioStateGroup], a
 	ld a, $1c
-	ld [w2d149], a
+	ld [wSceneWarioOAMPtr], a
 	call DrawTopBar
 
 	ld hl, Pals_84a20
@@ -5186,7 +5200,7 @@ Func_8239e: ; 8239e (20:639e)
 	ld [hld], a
 	ld a, $04
 	ld [hl], a ; wTopBarState
-	ld a, [w2d146]
+	ld a, [wSceneWarioState]
 	ld b, 1
 	cp $0a
 	jr nz, .asm_823bf
@@ -5233,7 +5247,7 @@ Func_8239e: ; 8239e (20:639e)
 
 Func_82400: ; 82400 (20:6400)
 	call DrawTopBar
-	ld a, [w2d142]
+	ld a, [wSceneWarioFrame]
 	cp $04
 	jr z, .asm_8240d
 	cp $06
@@ -5248,7 +5262,7 @@ Func_82400: ; 82400 (20:6400)
 ; 0x8241b
 
 Func_8241b: ; 8241b (20:641b)
-	ld a, [w2d146]
+	ld a, [wSceneWarioState]
 	cp $05
 	jr z, .asm_82426
 	cp $07
@@ -5347,14 +5361,14 @@ Func_82490: ; 82490 (20:6490)
 	ld hl, .data
 	add hl, de
 	ld a, [hli]
-	ld [w2d141], a
+	ld [wSceneWarioXCoord], a
 	ld a, [hl]
-	ld hl, w2d146
+	ld hl, wSceneWarioState
 	ld [hld], a
 
 	xor a
 	ld [hld], a
-	ld [hl], a ; w2d144
+	ld [hl], a ; FramesetOffset
 
 	ld c, $00
 	ld a, [wTopBarSelection]
@@ -5395,12 +5409,12 @@ DrawTopBar: ; 824ea (20:64ea)
 Func_824f1: ; 824f1 (20:64f1)
 	xor a
 	ld [wOWAnimationFinished], a
-	ld a, [w2d146]
-	ld hl, w2d144
+	ld a, [wSceneWarioState]
+	ld hl, wSceneWarioDuration
 	call Func_82521
 	ld b, BANK(OAM_a9fe2)
 	ld de, OAM_a9fe2
-	ld hl, w2d140
+	ld hl, wSceneWario
 	call AddOWSpriteWithScroll
 	ret
 ; 0x8250a
@@ -5413,7 +5427,7 @@ Func_8250a: ; 8250a (20:650a)
 	call Func_82521
 	ld b, BANK(OAM_a9fe2)
 	ld de, OAM_a9fe2
-	ld hl, w2d148
+	ld hl, wSceneWarioStateGroup
 	call AddOWSpriteWithScroll
 	ret
 ; 0x82521
@@ -5611,7 +5625,7 @@ Func_8263b: ; 8263b (20:663b)
 	jr Func_82643
 
 Func_82640: ; 82640 (20:6640)
-	ld hl, w2d146
+	ld hl, wSceneWarioState
 ;	fallthrough
 
 Func_82643: ; 82643 (20:6643)

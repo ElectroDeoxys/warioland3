@@ -1,3 +1,5 @@
+INCLUDE "charmap.asm"
+
 INCLUDE "macros.asm"
 
 INCLUDE "constants/audio_constants.asm"
@@ -15,6 +17,7 @@ INCLUDE "constants/particle_constants.asm"
 INCLUDE "constants/room_constants.asm"
 INCLUDE "constants/sound_constants.asm"
 INCLUDE "constants/state_constants.asm"
+INCLUDE "constants/text_constants.asm"
 INCLUDE "constants/treasure_constants.asm"
 INCLUDE "constants/overworld_constants.asm"
 INCLUDE "constants/wario_constants.asm"

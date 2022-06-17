@@ -179,7 +179,7 @@ DEF NUM_GOLF_WARIO_STATES EQU const_value
 	const GOLF_PARAGOOM_7 ; $7
 	const GOLF_PARAGOOM_8 ; $8
 
-; WGolfLobbyState consants
+; wGolfLobbyState consants
 	const_def
 	const GOLFLOBBYSTATE_WAIT_INPUT ; $0
 	const GOLFLOBBYSTATE_WALK_RIGHT ; $1
@@ -188,7 +188,7 @@ DEF NUM_GOLF_WARIO_STATES EQU const_value
 	const GOLFLOBBYSTATE_ENTER_DOOR ; $4
 	const GOLFLOBBYSTATE_EXIT_PIPE  ; $5
 
-; WGolfLevelState consants
+; wGolfLevelState consants
 	const_def
 	const GOLFLEVELSTATE_WAIT_INPUT        ; $0
 	const GOLFLEVELSTATE_SCROLL            ; $1

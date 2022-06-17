@@ -1526,7 +1526,7 @@ Func_15dc:: ; 15dc (0:15dc)
 	cp TRANSITION_GAME_OVER
 	jr z, .asm_15ff
 	ld a, [wGameModeFlags]
-	and ($1 << MODE_DAY_NIGHT_F)
+	and ($1 << MODE_UNK0_F)
 	jr z, .asm_15ff
 	ld a, [wNumberCollectedTreasures]
 	dec a
@@ -3343,19 +3343,19 @@ Frameset_2db5: ; 2db5 (00:2db5)
 UpdateObjSprite:: ; 3000 (0:3000)
 	ld a, [wROMBank]
 	push af
-	ld a, [hl]
+	ld a, [hl] ; unk7
 	swap a
 	and %111
 	or $60
 	bankswitch
 	ld l, e
-	ld a, [hli]
+	ld a, [hli] ; screen y pos
 	ld [wCurSpriteYCoord], a
-	ld a, [hli]
+	ld a, [hli] ; screen x pos
 	ld [wCurSpriteXCoord], a
-	ld a, [hli]
+	ld a, [hli] ; frame
 	ld [wCurSpriteFrame], a
-	ld a, [hli]
+	ld a, [hli] ; OAM ptr
 	ld h, [hl]
 	ld l, a
 	ld a, [wCurSpriteFrame]
@@ -3968,7 +3968,7 @@ LoadFarTiles:: ; 3b5b (0:3b5b)
 	push af
 	ld a, b
 	bankswitch
-	ld bc, $800
+	ld bc, $80 tiles
 	ld de, v0Tiles2
 	call CopyHLToDE_BC
 	pop af
@@ -3976,7 +3976,18 @@ LoadFarTiles:: ; 3b5b (0:3b5b)
 	ret
 ; 0x3b77
 
-	INCROM $3b77, $3b93
+LoadFarBGMap:: ; 3b77 (0:3b77)
+	ld a, [wROMBank]
+	push af
+	ld a, b
+	bankswitch
+	ld bc, $240
+	ld de, v0BGMap0
+	call CopyHLToDE_BC
+	pop af
+	bankswitch
+	ret
+; 0x3b93
 
 ; sets scene obj's state and
 ; resets its animation data
@@ -4080,17 +4091,26 @@ Func_3c03:: ; 3c03 (0:3c03)
 	ret
 ; 0x3c1f
 
-	INCROM $3c1f, $3c25
-
-; seems to be a function to apply some
-; movement to OW obj
+; same as ApplyMovement but the x offsets are mirrored
 ; hl = OW obj
-; de = movement coordinates
-Func_3c25:: ; 3c25 (0:3c25)
-	call .Func_3c35
+; de = relative positions
+ApplyMovement_Mirrored:: ; 3c1f (0:3c1f)
+	call Func_3c35
+	sub e
+	jr Func_3c29
+; 0x3c25
+
+; hl = OW obj
+; de = relative positions
+ApplyMovement:: ; 3c25 (0:3c25)
+	call Func_3c35
 	add e
+;	fallthrough
+
+Func_3c29:: ; 3c29 (0:3c29)
 	ld [bc], a
 
+	; reset if reached the end
 	ld a, [hl]
 	cp $80
 	ret nz
@@ -4101,8 +4121,9 @@ Func_3c25:: ; 3c25 (0:3c25)
 	xor a
 	ld [bc], a ; unk7
 	ret
+; 0x3c35
 
-.Func_3c35
+Func_3c35: ; 3c35 (0:3c35)
 	ld c, l
 	ld b, h
 	ld a, $07
