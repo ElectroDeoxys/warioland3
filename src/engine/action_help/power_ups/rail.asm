@@ -144,14 +144,8 @@ Func_1e4329: ; 1e4329 (79:4329)
 	ret
 
 Func_1e43a0: ; 1e43a0 (79:43a0)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $1e
-	ld [wSFXTimer], a
-	play_sfx SFX_08C
-.skip_sfx
+	play_sfx_rept 30, SFX_08C
+
 	ld hl, wActionHelpWarioObjXCoord
 	dec [hl]
 	ld hl, wMenuObj4XCoord
@@ -167,14 +161,8 @@ Func_1e43a0: ; 1e43a0 (79:43a0)
 	ret
 
 Func_1e43cb: ; 1e43cb (79:43cb)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $1e
-	ld [wSFXTimer], a
-	play_sfx SFX_08C
-.skip_sfx
+	play_sfx_rept 30, SFX_08C
+
 	ld hl, wActionHelpWarioObjXCoord
 	inc [hl]
 	ld hl, wMenuObj4XCoord
@@ -286,14 +274,8 @@ Func_1e4483: ; 1e4483 (79:4483)
 	ret
 
 Func_1e4490: ; 1e4490 (79:4490)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $1e
-	ld [wSFXTimer], a
-	play_sfx SFX_08C
-.skip_sfx
+	play_sfx_rept 30, SFX_08C
+
 	ld hl, wActionHelpWarioObjXCoord
 	dec [hl]
 	ld hl, wMenuObj4XCoord
@@ -309,14 +291,8 @@ Func_1e4490: ; 1e4490 (79:4490)
 	ret
 
 Func_1e44bb: ; 1e44bb (79:44bb)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $1e
-	ld [wSFXTimer], a
-	play_sfx SFX_08C
-.skip_sfx
+	play_sfx_rept 30, SFX_08C
+
 	ld hl, wActionHelpWarioObjXCoord
 	inc [hl]
 	ld hl, wMenuObj4XCoord

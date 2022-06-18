@@ -680,14 +680,8 @@ Func_1fb4ed: ; 1fb4ed (7e:74ed)
 	ret
 
 Func_1fb4fa: ; 1fb4fa (7e:74fa)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $1e
-	ld [wSFXTimer], a
-	play_sfx SFX_FULLY_CHARGED_THROW
-.skip_sfx
+	play_sfx_rept 30, SFX_FULLY_CHARGED_THROW
+
 	ld a, [wActionHelpWarioAnimationEnded]
 	and a
 	ret z
@@ -704,14 +698,8 @@ Func_1fb4fa: ; 1fb4fa (7e:74fa)
 	ret
 
 Func_1fb52b: ; 1fb52b (7e:752b)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $1e
-	ld [wSFXTimer], a
-	play_sfx SFX_FULLY_CHARGED_THROW
-.skip_sfx
+	play_sfx_rept 30, SFX_FULLY_CHARGED_THROW
+
 	ld hl, wTimer
 	dec [hl]
 	ret nz

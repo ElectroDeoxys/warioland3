@@ -1933,8 +1933,7 @@ GolfLevelState_SpecialTerrain: ; 1c9654 (72:5654)
 	jr nz, .asm_1c96ae
 	ld a, [wGolfOverlayTextDuration]
 	cp 1
-	jr nz, .asm_1c96ae
-	play_sfx SFX_0E5
+	play_sfx z, SFX_0E5
 .asm_1c96ae
 	ld a, [wGolfOverlayTextCurrentFrame]
 	ld [wGolfOverlayTextFrame], a
@@ -1985,8 +1984,7 @@ GolfLevelState_SpecialTerrain: ; 1c9654 (72:5654)
 .asm_1c9708
 	ld a, [wGolfOverlayTextDuration]
 	and a
-	jr nz, .asm_1c9716
-	play_sfx SFX_0F0
+	play_sfx z, SFX_0F0
 .asm_1c9716
 	ld a, [wGolfOverlayTextCurrentFrame]
 	ld [wGolfOverlayTextFrame], a
@@ -2017,9 +2015,8 @@ GolfLevelState_SpecialTerrain: ; 1c9654 (72:5654)
 	ld hl, wGolfParaGoomYPos
 	ld a, [hli]
 	or [hl]
-	jr nz, .asm_1c9752
-	play_sfx SFX_0EE
-.asm_1c9752
+	play_sfx z, SFX_0EE
+
 	ld hl, wLastGolfParaGoomYPos
 	ld a, [hli]
 	ld d, [hl]
@@ -2085,8 +2082,7 @@ GolfLevelState_SpecialTerrain: ; 1c9654 (72:5654)
 	jr nz, .asm_1c97d8
 	ld a, [wGolfOverlayTextDuration]
 	cp 1
-	jr nz, .asm_1c97d8
-	play_sfx SFX_0E5
+	play_sfx z, SFX_0E5
 .asm_1c97d8
 	ld a, [wGolfOverlayTextCurrentFrame]
 	ld [wGolfOverlayTextFrame], a

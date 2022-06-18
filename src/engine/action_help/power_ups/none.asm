@@ -252,14 +252,8 @@ Func_1f847a: ; 1f847a (7e:447a)
 ; 0x1f848c
 
 Func_1f848c: ; 1f848c (7e:448c)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $06
-	ld [wSFXTimer], a
-	play_sfx SFX_ATTACK
-.skip_sfx
+	play_sfx_rept 6, SFX_ATTACK
+
 	ld hl, wActionHelpWarioJumpVelIndex
 	dec [hl]
 	ld a, [hl]
@@ -360,14 +354,8 @@ Func_1f8522: ; 1f8522 (7e:4522)
 ; 0x1f853a
 
 Func_1f853a: ; 1f853a (7e:453a)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $06
-	ld [wSFXTimer], a
-	play_sfx SFX_ATTACK
-.skip_sfx
+	play_sfx_rept 6, SFX_ATTACK
+
 	ld hl, wActionHelpWarioJumpVelIndex
 	dec [hl]
 	ld a, [hl]
@@ -465,14 +453,8 @@ Func_1f85d3: ; 1f85d3 (7e:45d3)
 ; 0x1f85eb
 
 Func_1f85eb: ; 1f85eb (7e:45eb)
-	ld a, [wSFXTimer]
-	sub $01
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $06
-	ld [wSFXTimer], a
-	play_sfx SFX_ATTACK
-.skip_sfx
+	play_sfx_rept 6, SFX_ATTACK
+
 	ld hl, wActionHelpWarioJumpVelIndex
 	dec [hl]
 	ld a, [hl]

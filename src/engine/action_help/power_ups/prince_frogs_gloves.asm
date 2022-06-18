@@ -186,14 +186,8 @@ Func_1fae3d: ; 1fae3d (7e:6e3d)
 	ret
 
 Func_1fae4d: ; 1fae4d (7e:6e4d)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $25
-	ld [wSFXTimer], a
-	play_sfx SFX_00E
-.skip_sfx
+	play_sfx_rept 37, SFX_00E
+
 	ld a, [wActionHelpCounter]
 	and %11
 	ret nz
@@ -212,14 +206,8 @@ Func_1fae4d: ; 1fae4d (7e:6e4d)
 	ret
 
 Func_1fae7f: ; 1fae7f (7e:6e7f)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $25
-	ld [wSFXTimer], a
-	play_sfx SFX_00E
-.skip_sfx
+	play_sfx_rept 37, SFX_00E
+
 	ld hl, wTimer
 	ld a, [hl]
 	and a
@@ -245,14 +233,8 @@ Func_1fae7f: ; 1fae7f (7e:6e7f)
 	ret
 
 Func_1faeba: ; 1faeba (7e:6eba)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $25
-	ld [wSFXTimer], a
-	play_sfx SFX_00E
-.skip_sfx
+	play_sfx_rept 37, SFX_00E
+
 	ld hl, wTimer
 	ld a, [hl]
 	and a
@@ -276,14 +258,8 @@ Func_1faeba: ; 1faeba (7e:6eba)
 	ret
 
 Func_1faef0: ; 1faef0 (7e:6ef0)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $25
-	ld [wSFXTimer], a
-	play_sfx SFX_00E
-.skip_sfx
+	play_sfx_rept 37, SFX_00E
+
 	ld hl, wActionHelpWarioObjXCoord
 	dec [hl]
 	ld a, [hl]
@@ -298,14 +274,8 @@ Func_1faef0: ; 1faef0 (7e:6ef0)
 	ret
 
 Func_1faf19: ; 1faf19 (7e:6f19)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $0f
-	ld [wSFXTimer], a
-	play_sfx SFX_00F
-.skip_sfx
+	play_sfx_rept 15, SFX_00F
+
 	ld hl, wActionHelpWarioObjXCoord
 	ld a, [hl]
 	cp $58
@@ -327,14 +297,8 @@ Func_1faf19: ; 1faf19 (7e:6f19)
 	ret
 
 Func_1faf4e: ; 1faf4e (7e:6f4e)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $25
-	ld [wSFXTimer], a
-	play_sfx SFX_00E
-.skip_sfx
+	play_sfx_rept 37, SFX_00E
+
 	ld hl, wActionHelpWarioObjXCoord
 	dec [hl]
 	ld a, [hl]
@@ -350,14 +314,8 @@ Func_1faf4e: ; 1faf4e (7e:6f4e)
 	ret
 
 Func_1faf7a: ; 1faf7a (7e:6f7a)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $0f
-	ld [wSFXTimer], a
-	play_sfx SFX_00F
-.skip_sfx
+	play_sfx_rept 15, SFX_00F
+
 	ld hl, wActionHelpWarioObjXCoord
 	ld a, [hl]
 	cp $3c
@@ -380,14 +338,8 @@ Func_1faf7a: ; 1faf7a (7e:6f7a)
 	ret
 
 Func_1fafb1: ; 1fafb1 (7e:6fb1)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $0f
-	ld [wSFXTimer], a
-	play_sfx SFX_00F
-.skip_sfx
+	play_sfx_rept 15, SFX_00F
+
 	ld hl, wTimer
 	ld a, [hl]
 	and a
@@ -418,14 +370,8 @@ Func_1fafb1: ; 1fafb1 (7e:6fb1)
 	ret
 
 Func_1faff5: ; 1faff5 (7e:6ff5)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $25
-	ld [wSFXTimer], a
-	play_sfx SFX_00E
-.skip_sfx
+	play_sfx_rept 37, SFX_00E
+
 	ld hl, wActionHelpWarioObjXCoord
 	dec [hl]
 	ld a, [hl]
@@ -442,14 +388,8 @@ Func_1faff5: ; 1faff5 (7e:6ff5)
 	ret
 
 Func_1fb023: ; 1fb023 (7e:7023)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $25
-	ld [wSFXTimer], a
-	play_sfx SFX_00E
-.skip_sfx
+	play_sfx_rept 37, SFX_00E
+
 	ld hl, wTimer
 	ld a, [hl]
 	and a

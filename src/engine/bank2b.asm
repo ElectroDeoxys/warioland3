@@ -440,9 +440,8 @@ Func_ac4fa: ; ac4fa (2b:44fa)
 	ld hl, w2d14c
 	ld a, [hl]
 	and a
-	jr nz, .asm_ac509
-	play_sfx SFX_12A
-.asm_ac509
+	play_sfx z, SFX_12A
+
 	inc [hl]
 	ld c, $24
 	ld a, [hl]
@@ -1854,7 +1853,7 @@ PrintText: ; aceff (2b:4eff)
 	ld a, [wJoypadDown]
 	and A_BUTTON | D_DOWN
 	jr z, .got_delay
-	srl b ; $2
+	srl b ; 2
 .got_delay
 	ld a, [wTextDelayCounter]
 	cp b
@@ -1908,9 +1907,7 @@ PrintText: ; aceff (2b:4eff)
 	ld [wPendingCharDest + 1], a
 	ld a, [wPendingCharTile]
 	cp " "
-	jr z, .asm_acf6e
-	play_sfx SFX_130
-.asm_acf6e
+	play_sfx nz, SFX_130
 	ld hl, wCurTextLinePos
 	inc [hl]
 	ld a, [hl]

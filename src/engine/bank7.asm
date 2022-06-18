@@ -583,9 +583,8 @@ DoGroundShake: ; 1c5fd (7:45fd)
 .asm_1c60d
 	ld a, [wFloorTransitionDir]
 	and a
-	jr nz, .skip_sfx
-	play_sfx SFX_GROUND_SHAKE
-.skip_sfx
+	play_sfx z, SFX_GROUND_SHAKE
+
 	xor a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
@@ -2678,9 +2677,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 	call TriggerFloorTransition
 	ld a, [wFloorTransitionDir]
 	and a
-	jr nz, .asm_1dbb7
-	play_sfx SFX_LAND
-.asm_1dbb7
+	play_sfx z, SFX_LAND
 	xor a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
@@ -2706,9 +2703,8 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 .asm_1dbe3
 	ld a, [wFloorTransitionDir]
 	and a
-	jr nz, .asm_1dbf1
-	play_sfx SFX_GROUND_SHAKE
-.asm_1dbf1
+	play_sfx z, SFX_GROUND_SHAKE
+
 	xor a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a

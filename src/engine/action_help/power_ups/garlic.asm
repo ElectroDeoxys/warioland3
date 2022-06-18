@@ -208,14 +208,8 @@ Func_1f9d7e: ; 1f9d7e (7e:5d7e)
 	ret
 
 Func_1f9d97: ; 1f9d97 (7e:5d97)
-	ld a, [wSFXTimer]
-	sub $01
-	ld [wSFXTimer], a
-	jr nc, .asm_1f9dae
-	ld a, $06
-	ld [wSFXTimer], a
-	play_sfx SFX_ATTACK_POWERED_UP
-.asm_1f9dae
+	play_sfx_rept 6, SFX_ATTACK_POWERED_UP
+
 	ld hl, wActionHelpWarioJumpVelIndex
 	dec [hl]
 	ld a, [hl]
@@ -270,14 +264,8 @@ Func_1f9d97: ; 1f9d97 (7e:5d97)
 	ret
 
 Func_1f9e07: ; 1f9e07 (7e:5e07)
-	ld a, [wSFXTimer]
-	sub $01
-	ld [wSFXTimer], a
-	jr nc, .asm_1f9e1e
-	ld a, $06
-	ld [wSFXTimer], a
-	play_sfx SFX_ATTACK_POWERED_UP
-.asm_1f9e1e
+	play_sfx_rept 6, SFX_ATTACK_POWERED_UP
+
 	ld hl, wActionHelpWarioJumpVelIndex
 	dec [hl]
 	ld hl, wMenuObj4XCoord
@@ -323,14 +311,8 @@ Func_1f9e07: ; 1f9e07 (7e:5e07)
 	ret
 
 Func_1f9e62: ; 1f9e62 (7e:5e62)
-	ld a, [wSFXTimer]
-	sub $01
-	ld [wSFXTimer], a
-	jr nc, .asm_1f9e79
-	ld a, $06
-	ld [wSFXTimer], a
-	play_sfx SFX_ATTACK_POWERED_UP
-.asm_1f9e79
+	play_sfx_rept 6, SFX_ATTACK_POWERED_UP
+
 	ld a, [wMenuObj5AnimationHasFinished]
 	and a
 	jr z, .asm_1f9e88
@@ -369,14 +351,8 @@ Func_1f9e9b: ; 1f9e9b (7e:5e9b)
 	ret
 
 Func_1f9eb7: ; 1f9eb7 (7e:5eb7)
-	ld a, [wSFXTimer]
-	sub $01
-	ld [wSFXTimer], a
-	jr nc, .asm_1f9ece
-	ld a, $06
-	ld [wSFXTimer], a
-	play_sfx SFX_ATTACK_POWERED_UP
-.asm_1f9ece
+	play_sfx_rept 6, SFX_ATTACK_POWERED_UP
+
 	ld hl, wActionHelpWarioJumpVelIndex
 	dec [hl]
 	ld a, [hl]
@@ -502,14 +478,8 @@ Func_1f9f86: ; 1f9f86 (7e:5f86)
 	ret
 
 Func_1f9f9e: ; 1f9f9e (7e:5f9e)
-	ld a, [wSFXTimer]
-	sub $01
-	ld [wSFXTimer], a
-	jr nc, .asm_1f9fb5
-	ld a, $06
-	ld [wSFXTimer], a
-	play_sfx SFX_ATTACK_POWERED_UP
-.asm_1f9fb5
+	play_sfx_rept 6, SFX_ATTACK_POWERED_UP
+
 	ld hl, wActionHelpWarioJumpVelIndex
 	dec [hl]
 	ld a, [hl]
@@ -622,14 +592,8 @@ Func_1fa045: ; 1fa045 (7e:6045)
 	ret
 
 Func_1fa072: ; 1fa072 (7e:6072)
-	ld a, [wSFXTimer]
-	sub $01
-	ld [wSFXTimer], a
-	jr nc, .asm_1fa089
-	ld a, $06
-	ld [wSFXTimer], a
-	play_sfx SFX_ATTACK_POWERED_UP
-.asm_1fa089
+	play_sfx_rept 6, SFX_ATTACK_POWERED_UP
+
 	ld hl, wActionHelpWarioJumpVelIndex
 	dec [hl]
 	ld a, [hl]

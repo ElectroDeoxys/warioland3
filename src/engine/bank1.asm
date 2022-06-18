@@ -570,8 +570,7 @@ IntroSequencePhase2: ; 42ed (1:42ed)
 	jr nz, .skip_sfx
 	ld a, [wWarioPlaneObjDuration]
 	and a
-	jr nz, .skip_sfx
-	play_sfx SFX_023
+	play_sfx z, SFX_023
 .skip_sfx
 
 	ld hl, wTimer
@@ -2220,38 +2219,15 @@ PlayIntroSFXPlane_Close: ; 4e5e (1:4e5e)
 	jr nc, PlayIntroSFXPlane3
 	cp 112
 	jr nc, PlayIntroSFXPlane2
-
-; play plane1
-	ld a, [wSFXTimer]
-	sub 1
-	ld [wSFXTimer], a
-	jr nc, .no_sfx
-	ld a, 12
-	ld [wSFXTimer], a
-	play_sfx SFX_PLANE1
-.no_sfx
+	play_sfx_rept 12, SFX_PLANE1
 	ret
 
 PlayIntroSFXPlane2: ; 4e81 (1:4e81)
-	ld a, [wSFXTimer]
-	sub 1
-	ld [wSFXTimer], a
-	jr nc, .no_sfx
-	ld a, 12
-	ld [wSFXTimer], a
-	play_sfx SFX_PLANE2
-.no_sfx
+	play_sfx_rept 12, SFX_PLANE2
 	ret
 
 PlayIntroSFXPlane3: ; 4e99 (1:4e99)
-	ld a, [wSFXTimer]
-	sub 1
-	ld [wSFXTimer], a
-	jr nc, .no_sfx
-	ld a, 12
-	ld [wSFXTimer], a
-	play_sfx SFX_PLANE3
-.no_sfx
+	play_sfx_rept 12, SFX_PLANE3
 	ret
 ; 0x4eb1
 

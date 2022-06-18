@@ -578,9 +578,7 @@ HandleGolfLobbyStates: ; 1c821c (72:421c)
 	cp $80
 	jr z, .asm_1c844f
 	cp $a0
-	jr nz, .asm_1c844d
-	play_sfx SFX_PIPE
-.asm_1c844d
+	play_sfx z, SFX_PIPE
 	dec [hl]
 	ret
 .asm_1c844f
@@ -690,9 +688,7 @@ UpdateGolfClearCutscene: ; 1c84f9 (72:44f9)
 	jr z, .asm_1c8525
 	ld a, [hl]
 	and $0f
-	jr nz, .asm_1c8516
-	play_sfx SFX_01F
-.asm_1c8516
+	play_sfx z, SFX_01F
 	inc [hl]
 	ld a, [hl]
 	and $03

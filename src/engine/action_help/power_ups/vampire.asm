@@ -147,14 +147,8 @@ Func_1e465e: ; 1e465e (79:465e)
 	ret
 
 Func_1e4684: ; 1e4684 (79:4684)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $20
-	ld [wSFXTimer], a
-	play_sfx SFX_071
-.skip_sfx
+	play_sfx_rept 32, SFX_071
+
 	ld hl, wTimer
 	dec [hl]
 	ret nz
@@ -167,14 +161,8 @@ Func_1e4684: ; 1e4684 (79:4684)
 	ret
 
 ApplyWaterCurrentMovementb: ; 1e46ab (79:46ab)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $10
-	ld [wSFXTimer], a
-	play_sfx SFX_071
-.skip_sfx
+	play_sfx_rept 16, SFX_071
+
 	ld a, [wActionHelpCounter]
 	and %1
 	jr z, .asm_1e46cd
@@ -232,14 +220,8 @@ Func_1e46e8: ; 1e46e8 (79:46e8)
 	ret
 
 Func_1e471c: ; 1e471c (79:471c)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $10
-	ld [wSFXTimer], a
-	play_sfx SFX_071
-.skip_sfx
+	play_sfx_rept 16, SFX_071
+
 	ld a, [wActionHelpCounter]
 	and %1
 	jr z, .asm_1e473e
@@ -297,14 +279,8 @@ Func_1e4759: ; 1e4759 (79:4759)
 	ret
 
 Func_1e478d: ; 1e478d (79:478d)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $10
-	ld [wSFXTimer], a
-	play_sfx SFX_071
-.skip_sfx
+	play_sfx_rept 16, SFX_071
+
 	ld a, [wActionHelpCounter]
 	and %1
 	jr z, .asm_1e47af
@@ -362,14 +338,8 @@ Func_1e47ca: ; 1e47ca (79:47ca)
 	ret
 
 Func_1e47fe: ; 1e47fe (79:47fe)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $10
-	ld [wSFXTimer], a
-	play_sfx SFX_071
-.skip_sfx
+	play_sfx_rept 16, SFX_071
+
 	ld hl, wActionHelpWarioObj
 	ld a, [hl]
 	cp $20
@@ -427,14 +397,8 @@ Func_1e483d: ; 1e483d (79:483d)
 	ret
 
 Func_1e4871: ; 1e4871 (79:4871)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $20
-	ld [wSFXTimer], a
-	play_sfx SFX_071
-.skip_sfx
+	play_sfx_rept 32, SFX_071
+
 	ld hl, wTimer
 	dec [hl]
 	ret nz

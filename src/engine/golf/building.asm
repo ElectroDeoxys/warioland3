@@ -538,9 +538,8 @@ Func_1c8911: ; 1c8911 (72:4911)
 	jr nc, .done_subtracting
 	inc [hl]
 	and $03
-	jr nz, .skip_sfx
-	play_sfx SFX_12B
-.skip_sfx
+	play_sfx z, SFX_12B
+
 	ld hl, wGolfNumCoins + 1
 	ld a, [hl]
 	sub 1

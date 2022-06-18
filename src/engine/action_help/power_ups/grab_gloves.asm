@@ -1062,14 +1062,8 @@ Func_1f9aee: ; 1f9aee (7e:5aee)
 ; 0x1f9afb
 
 Func_1f9afb: ; 1f9afb (7e:5afb)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .asm_1f9b12
-	ld a, $1e
-	ld [wSFXTimer], a
-	play_sfx SFX_FULLY_CHARGED_THROW
-.asm_1f9b12
+	play_sfx_rept 30, SFX_FULLY_CHARGED_THROW
+
 	ld a, [wActionHelpWarioAnimationEnded]
 	and a
 	ret z
@@ -1087,14 +1081,8 @@ Func_1f9afb: ; 1f9afb (7e:5afb)
 ; 0x1f9b2c
 
 Func_1f9b2c: ; 1f9b2c (7e:5b2c)
-	ld a, [wSFXTimer]
-	sub $01
-	ld [wSFXTimer], a
-	jr nc, .asm_1f9b43
-	ld a, $1e
-	ld [wSFXTimer], a
-	play_sfx SFX_FULLY_CHARGED_THROW
-.asm_1f9b43
+	play_sfx_rept 30, SFX_FULLY_CHARGED_THROW
+
 	ld hl, wTimer
 	dec [hl]
 	ret nz

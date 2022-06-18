@@ -120,14 +120,8 @@ Func_1e409a: ; 1e409a (79:409a)
 	ret
 
 Func_1e4104: ; 1e4104 (79:4104)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $20
-	ld [wSFXTimer], a
-	play_sfx SFX_071
-.skip_sfx
+	play_sfx_rept 32, SFX_071
+
 	ld a, [wActionHelpCounter]
 	and %1
 	ret nz
@@ -145,14 +139,8 @@ Func_1e4104: ; 1e4104 (79:4104)
 	ret
 
 Func_1e4134: ; 1e4134 (79:4134)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $20
-	ld [wSFXTimer], a
-	play_sfx SFX_071
-.skip_sfx
+	play_sfx_rept 32, SFX_071
+
 	ld a, [wActionHelpCounter]
 	and %1
 	ret nz
@@ -173,14 +161,8 @@ Func_1e4134: ; 1e4134 (79:4134)
 	jp ActionHelp2_ClearDPadInput
 
 Func_1e4165: ; 1e4165 (79:4165)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $20
-	ld [wSFXTimer], a
-	play_sfx SFX_071
-.skip_sfx
+	play_sfx_rept 32, SFX_071
+
 	ld a, [wActionHelpCounter]
 	and %1
 	ret nz
@@ -198,14 +180,8 @@ Func_1e4165: ; 1e4165 (79:4165)
 	ret
 
 Func_1e4195: ; 1e4195 (79:4195)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $20
-	ld [wSFXTimer], a
-	play_sfx SFX_071
-.skip_sfx
+	play_sfx_rept 32, SFX_071
+
 	ld a, [wActionHelpCounter]
 	and %1
 	ret nz
@@ -227,14 +203,8 @@ Func_1e4195: ; 1e4195 (79:4195)
 	jp ActionHelp2_ClearDPadInput
 
 Func_1e41c9: ; 1e41c9 (79:41c9)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $20
-	ld [wSFXTimer], a
-	play_sfx SFX_071
-.skip_sfx
+	play_sfx_rept 32, SFX_071
+
 	ld a, [wActionHelpCounter]
 	and %1
 	ret nz
@@ -254,14 +224,8 @@ Func_1e41c9: ; 1e41c9 (79:41c9)
 	ret
 
 Func_1e41fd: ; 1e41fd (79:41fd)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $10
-	ld [wSFXTimer], a
-	play_sfx SFX_071
-.skip_sfx
+	play_sfx_rept 16, SFX_071
+
 	ld hl, wActionHelpWarioObjXCoord
 	dec [hl]
 	ld a, [hl]
@@ -276,14 +240,8 @@ Func_1e41fd: ; 1e41fd (79:41fd)
 	ret
 
 Func_1e4227: ; 1e4227 (79:4227)
-	ld a, [wSFXTimer]
-	sub $1
-	ld [wSFXTimer], a
-	jr nc, .skip_sfx
-	ld a, $10
-	ld [wSFXTimer], a
-	play_sfx SFX_071
-.skip_sfx
+	play_sfx_rept 16, SFX_071
+
 	ld hl, wActionHelpWarioObjXCoord
 	inc [hl]
 	ld a, [hl]

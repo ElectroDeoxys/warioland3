@@ -3445,9 +3445,7 @@ UpdateState_Sleeping: ; 1ac73 (6:6c73)
 .asm_1acd0
 	ld a, [wAnimationHasFinished]
 	and a
-	jr z, .asm_1acde
-	play_sfx SFX_SLEEP
-.asm_1acde
+	play_sfx nz, SFX_SLEEP
 	ld a, [wJoypadDown]
 	and a
 	ret z
