@@ -1,8 +1,8 @@
 ; flags for wca3b
 	const_def
-	const MODE_UNK0_F ; 0
-	const MODE_TIME_ATTACK_F  ; 1
-	const MODE_UNK2_F    ; 2
+	const MODE_GAME_CLEARED_F           ; 0
+	const MODE_TIME_ATTACK_F            ; 1
+	const MODE_FOUGHT_A_HIDDEN_FIGURE_F ; 2
 
 ; special wTransitionParam values
 DEF TRANSITION_RETURN_TO_MAP        EQU $f0

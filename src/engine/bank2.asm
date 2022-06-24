@@ -297,7 +297,7 @@ Func_80aa: ; 80aa (2:40aa)
 .game_over
 	ld a, TRANSITION_GAME_OVER
 	ld [wTransitionParam], a
-	jr .asm_82ba
+	jr .set_fought_a_hidden_figure
 
 .epilogue
 	ld a, [wNumberCollectedTreasures]
@@ -311,9 +311,9 @@ Func_80aa: ; 80aa (2:40aa)
 	ld [wTransitionParam], a
 	set MODE_TIME_ATTACK_F, [hl]
 .set_game_cleared
-	set MODE_UNK0_F, [hl]
-.asm_82ba
-	set MODE_UNK2_F, [hl]
+	set MODE_GAME_CLEARED_F, [hl]
+.set_fought_a_hidden_figure
+	set MODE_FOUGHT_A_HIDDEN_FIGURE_F, [hl]
 
 	ld hl, wState
 	ld [hl], ST_06

@@ -2015,7 +2015,10 @@ w2d894:: ; d894
 w2d896:: ; d896
 	ds $1
 
-	ds $9
+w2d897:: ; d897
+	ds $1
+
+	ds $8
 
 w2d8a0:: ; d8a0
 	ds $1
@@ -2064,71 +2067,85 @@ w2d8b1:: ; d8b1
 w2d8b2:: ; d8b2
 	ds $1
 
+w2d8b3:: ; d8b3
 	ds $1
 
 w2d8b4:: ; d8b4
 	ds $1
 
+w2d8b5:: ; d8b5
 	ds $1
 
 w2d8b6:: ; d8b6
 	ds $1
 
+w2d8b7:: ; d8b7
 	ds $1
 
 w2d8b8:: ; d8b8
 	ds $1
 
+w2d8b9:: ; d8b9
 	ds $1
 
 w2d8ba:: ; d8ba
 	ds $1
 
+w2d8bb:: ; d8bb
 	ds $1
 
 w2d8bc:: ; d8bc
 	ds $1
 
+w2d8bd:: ; d8bd
 	ds $1
 
 w2d8be:: ; d8be
 	ds $1
 
+w2d8bf:: ; d8bf
 	ds $1
 
 w2d8c0:: ; d8c0
 	ds $1
 
+w2d8c1:: ; d8c1
 	ds $1
 
 w2d8c2:: ; d8c2
 	ds $1
 
+w2d8c3:: ; d8c3
 	ds $1
 
 w2d8c4:: ; d8c4
 	ds $1
 
+w2d8c5:: ; d8c5
 	ds $1
 
 w2d8c6:: ; d8c6
 	ds $1
 
+w2d8c7:: ; d8c7
 	ds $1
 
 w2d8c8:: ; d8c8
 	ds $1
 
+w2d8c9:: ; d8c9
 	ds $1
 
 w2d8ca:: ; d8ca
 	ds $1
 
+w2d8cb:: ; d8cb
 	ds $1
 
 w2d8cc:: ; d8cc
 	ds $1
 
+w2d8cd:: ; d8cd
 	ds $1
 
 w2d8ce:: ; d8ce
@@ -2139,6 +2156,7 @@ w2d8ce:: ; d8ce
 w2d8d0:: ; d8d0
 	ds $1
 
+w2d8d1:: ; d8d1
 	ds $1
 
 w2d8d2:: ; d8d2
@@ -2149,6 +2167,7 @@ w2d8d2:: ; d8d2
 w2d8d4:: ; d8d4
 	ds $1
 
+w2d8d5:: ; d8d5
 	ds $1
 
 w2d8d6:: ; d8d6

@@ -1,4 +1,5 @@
 MACRO INCROM
+assert warn, (\1) != (\2), "Redundant INCROM"
 INCBIN "baserom.gbc", \1, \2 - \1
 ENDM
 

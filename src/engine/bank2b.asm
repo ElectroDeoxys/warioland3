@@ -1249,7 +1249,7 @@ Func_aca9e: ; aca9e (2b:4a9e)
 	jr Func_aca6d
 ; 0xacaad
 
-Func_acaad: ; acaad (2b:4aad)
+LoadCurTextPageBufferPage: ; acaad (2b:4aad)
 	ld a, [wCurTextBufferPage]
 	ld b, $00
 	swap a
@@ -1269,18 +1269,18 @@ Func_acaad: ; acaad (2b:4aad)
 ; 0xacacd
 
 Func_acacd: ; acacd (2b:4acd)
-	ld a, $01
+	ld a, 1
 	ld hl, wCurTextBufferPage
 	cp [hl]
-	jr z, .asm_acae2
+	jr z, .clear
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	ret z
 	xor a
 	ld hl, wSceneObj1State
 	call SetSceneObjState
-.asm_acae2
-	call Func_ace66
+.clear
+	call ClearTextboxExceptHeader
 	jr Func_aca6d
 ; 0xacae7
 
@@ -1368,7 +1368,7 @@ Func_acb25: ; acb25 (2b:4b25)
 	ld a, TEMPLE_SCENE_ENTERING
 	jp z, .asm_acc3e ; not collected
 	ld hl, wGameModeFlags
-	bit MODE_UNK0_F, [hl]
+	bit MODE_GAME_CLEARED_F, [hl]
 	jr z, .asm_acbb4
 	bit MODE_TIME_ATTACK_F, [hl]
 	jp z, .asm_acc3e
@@ -1408,7 +1408,7 @@ Func_acb25: ; acb25 (2b:4b25)
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	hcall Decompress
-	call Func_acf89
+	call LoadNextObjectiveText
 
 .asm_acc68
 	ld a, $60
@@ -1424,7 +1424,7 @@ Func_acb25: ; acb25 (2b:4b25)
 
 	xor a
 	ld [w2d013], a
-	ld [wObj1FrameDuration], a
+	ld [w2d014], a
 	ld a, [w1d800]
 	ld b, a
 	and a
@@ -1551,7 +1551,7 @@ VBlank_accb0: ; accb0 (2b:4cb0)
 .func_end
 ; 0xacd3a
 
-Func_acd3a: ; acd3a (2b:4d3a)
+UpdateTempleScene: ; acd3a (2b:4d3a)
 	call .UpdateScene
 	call Func_ac2b2
 	call UpdateSceneWarioAnimation
@@ -1574,10 +1574,10 @@ Func_acd3a: ; acd3a (2b:4d3a)
 	ld a, [wTempleScene]
 	jumptable
 
-	dw .Entering   ; TEMPLE_SCENE_ENTERING
-	dw .Func_acdbe ; TEMPLE_SCENE_01
-	dw .Exiting    ; TEMPLE_SCENE_EXITING
-	dw Func_ad03b  ; TEMPLE_SCENE_03
+	dw .Entering           ; TEMPLE_SCENE_ENTERING
+	dw .TalkToHiddenFigure ; TEMPLE_SCENE_TALKING
+	dw .Exiting            ; TEMPLE_SCENE_EXITING
+	dw Func_ad03b          ; TEMPLE_SCENE_03
 
 .Entering
 	ld a, [w2da04]
@@ -1609,7 +1609,7 @@ Func_acd3a: ; acd3a (2b:4d3a)
 
 .turn
 	ld a, [wTempleSceneCounter]
-	cp $08
+	cp 8
 	ret c
 	ld a, SCENEWARIO_TURN_BACK_RIGHT
 	call SetSceneWarioState
@@ -1623,7 +1623,7 @@ Func_acd3a: ; acd3a (2b:4d3a)
 
 .nod
 	ld a, [wTempleSceneCounter]
-	cp $32
+	cp 50
 	ret c
 	ld a, SCENEWARIO_NOD
 	call SetSceneWarioState
@@ -1635,10 +1635,10 @@ Func_acd3a: ; acd3a (2b:4d3a)
 	ld [wCurTextLine], a
 	ld [wTextDelayCounter], a
 	ld hl, wTempleScene
-	ld [hl], TEMPLE_SCENE_01
+	ld [hl], TEMPLE_SCENE_TALKING
 	ret
 
-.Func_acdbe
+.TalkToHiddenFigure
 	call .DelayAndPlayTempleMusic
 	ld a, [wIsNextObjectiveTheTemple]
 	and a
@@ -1652,7 +1652,7 @@ Func_acd3a: ; acd3a (2b:4d3a)
 	xor a
 	ld [hld], a
 	ld [hl], a ; w2da04
-	call Func_ace60
+	call ClearTextbox
 	ld hl, wTempleScene
 	ld [hl], TEMPLE_SCENE_EXITING
 	ret
@@ -1684,7 +1684,7 @@ Func_acd3a: ; acd3a (2b:4d3a)
 
 .start_walk
 	ld a, [wTempleSceneCounter]
-	cp $04
+	cp 4
 	ret c
 	ld a, SCENEWARIO_WALK_LEFT
 	call SetSceneWarioState
@@ -1731,17 +1731,17 @@ Func_acd3a: ; acd3a (2b:4d3a)
 	ret
 ; 0xace60
 
-Func_ace60: ; ace60 (2b:4e60)
-	ld d, $c0 ; dest lo
+ClearTextbox: ; ace60 (2b:4e60)
+	ld d, 6 * BG_MAP_WIDTH ; dest lo
 	ld e, $07
-	jr Func_ace6a
+	jr ClearTextboxAtCoord
 
-Func_ace66: ; ace66 (2b:4e66)
-	ld d, $e0 ; dest lo
+ClearTextboxExceptHeader: ; ace66 (2b:4e66)
+	ld d, 7 * BG_MAP_WIDTH ; dest lo
 	ld e, $05
 ;	fallthrough
 
-Func_ace6a: ; ace6a (2b:4e6a)
+ClearTextboxAtCoord: ; ace6a (2b:4e6a)
 	ld b, HIGH(v0BGMap0 + $100) - $80 ; dest hi
 	ld a, [wBGMapToPrintText]
 	and a
@@ -1759,7 +1759,7 @@ Func_ace6a: ; ace6a (2b:4e6a)
 	ld [hli], a
 	ld a, e
 	ld [hl], a
-	ld a, BANK(Func_ace6a)
+	ld a, BANK(@)
 	ld [wHDMABank], a
 	xor a
 	ld [wHDMADestVRAMBank], a
@@ -1933,7 +1933,10 @@ PrintText: ; aceff (2b:4eff)
 	jr .got_buffer_pos
 ; 0xacf89
 
-Func_acf89: ; acf89 (2b:4f89)
+; checks which level is the next objective
+; then loads from wTextBuffer the corresponding
+; text for that objective to print
+LoadNextObjectiveText: ; acf89 (2b:4f89)
 	ld de, wTextLine1
 	ld hl, wTextBuffer
 	ld b, TEXT_LINE_LENGTH
@@ -2002,24 +2005,24 @@ Func_acf89: ; acf89 (2b:4f89)
 ; 0xad011
 
 Func_ad011: ; ad011 (2b:5011)
-	ld a, [wObj1FrameDuration]
+	ld a, [w2d014]
 	cp c
 	ret c
 Func_ad016: ; ad016 (2b:5016)
-	ld hl, wObj1FrameDuration
+	ld hl, w2d014
 	xor a
 	ld [hld], a
 	inc [hl]
 	ret
 ; 0xad01d
 
-Func_ad01d: ; ad01d (2b:501d)
+SetFightAgainstAHiddenFigure: ; ad01d (2b:501d)
 	stop_music2
 	stop_sfx
 	xor a
 	ld [wSubState], a
 	ld hl, wState
-	inc [hl]
+	inc [hl] ; ST_LEVEL
 	scf
 	ret
 ; 0xad03b
@@ -2027,28 +2030,28 @@ Func_ad01d: ; ad01d (2b:501d)
 Func_ad03b: ; ad03b (2b:503b)
 	ld a, [w2d013]
 	cp $02
-	jr c, .asm_ad051
+	jr c, .cant_skip
 	ld a, [wGameModeFlags]
-	bit MODE_UNK2_F, a
-	jr z, .asm_ad051
+	bit MODE_FOUGHT_A_HIDDEN_FIGURE_F, a
+	jr z, .cant_skip
 	ld a, [wJoypadPressed]
 	bit B_BUTTON_F, a
-	jp nz, Func_ad01d
-.asm_ad051
-	call Func_ad91b
-	call Func_ad92a
-	ld hl, wObj1FrameDuration
+	jp nz, SetFightAgainstAHiddenFigure
+.cant_skip
+	call DoHiddenFigureLeftHandMovement
+	call DoHiddenFigureRightHandMovement
+	ld hl, w2d014
 	inc [hl]
 	ld a, [w2d013]
 	jumptable
 
 	dw Func_ad016
-	dw Func_ad3af
-	dw Func_ad0b3
+	dw UpdateEnterTempleWithAllMusicBoxesScene
+	dw .Wait1
 	dw InitTextPrinting
 	dw Func_aca9e
-	dw Func_ad0b8
-	dw Func_acaad
+	dw .Wait2
+	dw LoadCurTextPageBufferPage
 	dw Func_acacd
 	dw Func_acae7
 	dw Func_ad0bd
@@ -2070,12 +2073,12 @@ Func_ad03b: ; ad03b (2b:503b)
 	dw Func_ad1fe
 	dw Func_aca9e
 	dw Func_ad207
-	dw Func_acaad
+	dw LoadCurTextPageBufferPage
 	dw Func_ad215
 	dw Func_ad21d
 	dw Func_ad22e
 	dw Func_ad23a
-	dw Func_acaad
+	dw LoadCurTextPageBufferPage
 	dw Func_ad259
 	dw Func_ad271
 	dw Func_ad27a
@@ -2083,26 +2086,23 @@ Func_ad03b: ; ad03b (2b:503b)
 	dw Func_ad300
 	dw Func_ad308
 	dw Func_ad319
-	dw Func_ad01d
-; 0xad0b3
+	dw SetFightAgainstAHiddenFigure
 
-Func_ad0b3: ; ad0b3 (2b:50b3)
-	ld c, $28
+.Wait1
+	ld c, 40
 	jp Func_ad011
-; 0xad0b8
 
-Func_ad0b8: ; ad0b8 (2b:50b8)
-	ld c, $1e
+.Wait2
+	ld c, 30
 	jp Func_ad011
-; 0xad0bd
 
 Func_ad0bd: ; ad0bd (2b:50bd)
 	jp Func_acaf3
 ; 0xad0c0
 
 Func_ad0c0: ; ad0c0 (2b:50c0)
-	ld a, [wObj1FrameDuration]
-	cp $1e
+	ld a, [w2d014]
+	cp 30
 	ret c
 	ld a, $01
 	ld hl, wSceneObj1State
@@ -2117,7 +2117,7 @@ Func_ad0d1: ; ad0d1 (2b:50d1)
 	xor a
 	ld hl, wSceneObj1State
 	call SetSceneObjState
-	call Func_ace60
+	call ClearTextbox
 	jp Func_ad016
 ; 0xad0e4
 
@@ -2134,7 +2134,7 @@ Func_ad0e4: ; ad0e4 (2b:50e4)
 Func_ad0f6: ; ad0f6 (2b:50f6)
 	call Func_ad889
 	call Func_ad345
-	ld a, [wObj1FrameDuration]
+	ld a, [w2d014]
 	and $0f
 	ret nz
 	jp Func_ac9ba
@@ -2228,7 +2228,7 @@ Func_ad182: ; ad182 (2b:5182)
 
 Func_ad195: ; ad195 (2b:5195)
 	call Func_ad889
-	ld a, [wObj1FrameDuration]
+	ld a, [w2d014]
 	cp $1e
 	ret c
 	ld a, $0d
@@ -2270,7 +2270,7 @@ Func_ad1e3: ; ad1e3 (2b:51e3)
 	jr c, .asm_ad1f1
 	ld c, $03
 .asm_ad1f1
-	ld a, [wObj1FrameDuration]
+	ld a, [w2d014]
 	and c
 	ret nz
 	jp Func_ac9ba
@@ -2289,7 +2289,7 @@ Func_ad1fe: ; ad1fe (2b:51fe)
 ; 0xad207
 
 Func_ad207: ; ad207 (2b:5207)
-	ld a, [wObj1FrameDuration]
+	ld a, [w2d014]
 	cp $1e
 	ret c
 	ld a, $04
@@ -2320,7 +2320,7 @@ Func_ad22e: ; ad22e (2b:522e)
 ; 0xad23a
 
 Func_ad23a: ; ad23a (2b:523a)
-	ld a, [wObj1FrameDuration]
+	ld a, [w2d014]
 	cp $28
 	jr z, .asm_ad253
 	cp $46
@@ -2344,7 +2344,7 @@ Func_ad259: ; ad259 (2b:5259)
 	xor a
 	ld hl, wSceneObj1State
 	call SetSceneObjState
-	call Func_ace66
+	call ClearTextboxExceptHeader
 	ld a, $10
 	ld [wSceneObj7State], a
 	jp Func_aca6d
@@ -2450,7 +2450,7 @@ Func_ad300: ; ad300 (2b:5300)
 ; 0xad308
 
 Func_ad308: ; ad308 (2b:5308)
-	ld a, [wObj1FrameDuration]
+	ld a, [w2d014]
 	cp $1e
 	ret c
 	ld hl, wSceneObj1State
@@ -2465,7 +2465,7 @@ Func_ad319: ; ad319 (2b:5319)
 	ret z
 	xor a
 	ld [wSceneObj1State], a
-	call Func_ace60
+	call ClearTextbox
 	jp Func_ad016
 ; 0xad329
 
@@ -2480,8 +2480,6 @@ Func_ad330: ; ad330 (2b:5330)
 	ld a, [w2d891]
 	cp c
 	ret c
-;	fallthrough
-
 Func_ad335: ; ad335 (2b:5335)
 	ld hl, w2d891
 	xor a
@@ -2565,7 +2563,7 @@ Func_ad3a6: ; ad3a6 (2b:53a6)
 	jp Func_ad335
 ; 0xad3af
 
-Func_ad3af: ; ad3af (2b:53af)
+UpdateEnterTempleWithAllMusicBoxesScene: ; ad3af (2b:53af)
 	ld hl, w2d891
 	inc [hl]
 	ld c, l
@@ -2574,29 +2572,26 @@ Func_ad3af: ; ad3af (2b:53af)
 	ld a, [hl] ; w2d890
 	jumptable
 
-	dw Func_ad3ca
-	dw Func_ad3cf
-	dw Func_ad3d7
-	dw Func_ad3e6
-	dw Func_ad3eb
-	dw Func_ad3f3
-	dw Func_ad3f8
-	dw Func_ad403
-	dw Func_ad420
-; 0xad3ca
+	dw .Wait1
+	dw .WalkRight
+	dw .MoveRight
+	dw .Wait2
+	dw .TurnToBack
+	dw .LookBack
+	dw .CheckTimeAttack
+	dw .Bow
+	dw .WaitInput
 
-Func_ad3ca: ; ad3ca (2b:53ca)
-	ld c, $08
+.Wait1
+	ld c, 8
 	jp Func_ad330
-; 0xad3cf
 
-Func_ad3cf: ; ad3cf (2b:53cf)
+.WalkRight
 	ld a, SCENEWARIO_WALK_RIGHT
 	call SetSceneWarioState
 	jp Func_ad335
-; 0xad3d7
 
-Func_ad3d7: ; ad3d7 (2b:53d7)
+.MoveRight
 	call ApplySceneWarioMovementRight
 	cp $50
 	ret nz
@@ -2604,37 +2599,34 @@ Func_ad3d7: ; ad3d7 (2b:53d7)
 	ld a, SCENEWARIO_IDLE_RIGHT
 	call SetSceneWarioState
 	jp Func_ad335
-; 0xad3e6
 
-Func_ad3e6: ; ad3e6 (2b:53e6)
-	ld c, $1e
+.Wait2
+	ld c, 30
 	jp Func_ad330
-; 0xad3eb
 
-Func_ad3eb: ; ad3eb (2b:53eb)
+.TurnToBack
 	ld a, SCENEWARIO_TURN_BACK_RIGHT
 	call SetSceneWarioState
 	jp Func_ad335
-; 0xad3f3
 
-Func_ad3f3: ; ad3f3 (2b:53f3)
+.LookBack
 	ld b, SCENEWARIO_LOOK_BACK
 	jp Func_ad329
-; 0xad3f8
 
-Func_ad3f8: ; ad3f8 (2b:53f8)
+.CheckTimeAttack
 	ld a, [wGameModeFlags]
 	bit MODE_TIME_ATTACK_F, a
-	jp z, Func_ad33c
-	jp Func_ad335
-; 0xad403
+	jp z, Func_ad33c ; skips rest of the sequence
+	jp Func_ad335 ; continues
 
-Func_ad403: ; ad403 (2b:5403)
+.Bow
 	ld a, [bc]
-	cp $14
+	cp 20
 	ret c
 	ld a, SCENEWARIO_BOW
 	call SetSceneWarioState
+
+	; draw text prompt arrow
 	ld hl, wSceneObj1
 	ld a, $8e
 	ld [hli], a ; y
@@ -2644,9 +2636,8 @@ Func_ad403: ; ad403 (2b:5403)
 	ld a, $01
 	call SetSceneObjState
 	jp Func_ad335
-; 0xad420
 
-Func_ad420: ; ad420 (2b:5420)
+.WaitInput
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jp nz, .a_btn ; can be jr
@@ -3556,7 +3547,7 @@ Func_ad90a: ; ad90a (2b:590a)
 	ret
 ; 0xad91b
 
-Func_ad91b: ; ad91b (2b:591b)
+DoHiddenFigureLeftHandMovement: ; ad91b (2b:591b)
 	ld a, [w2d8da]
 	and a
 	ret z
@@ -3566,7 +3557,7 @@ Func_ad91b: ; ad91b (2b:591b)
 	ret
 ; 0xad92a
 
-Func_ad92a: ; ad92a (2b:592a)
+DoHiddenFigureRightHandMovement: ; ad92a (2b:592a)
 	ld a, [w2d8dc]
 	and a
 	ret z
@@ -3762,7 +3753,7 @@ Func_adfb0: ; adfb0 (2b:5fb0)
 	dw InitTextPrinting
 	dw Func_aca9e
 	dw Func_ae17c
-	dw Func_acaad
+	dw LoadCurTextPageBufferPage
 	dw Func_acacd
 	dw Func_acae7
 	dw Func_ae181
@@ -4038,7 +4029,7 @@ Func_ae1af: ; ae1af (2b:61af)
 	ld hl, wSceneObj1State
 	xor a
 	call SetSceneObjState
-	call Func_ace60
+	call ClearTextbox
 	jp Func_adf97
 ; 0xae1c2
 
@@ -6117,7 +6108,7 @@ Data_aee09: ; aee09 (2b:6e09)
 	INCROM $aee58, $af135
 
 Func_af135: ; af135 (2b:7135)
-	ld hl, wObj1FrameDuration
+	ld hl, w2d014
 	xor a
 	ld [hld], a
 	inc [hl]

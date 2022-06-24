@@ -1082,7 +1082,7 @@ Func_80621: ; 80621 (20:4621)
 Func_8065e: ; 8065e (20:465e)
 	ld a, [wGameModeFlags]
 	ld c, a
-	and ($1 << MODE_UNK0_F)
+	and ($1 << MODE_GAME_CLEARED_F)
 	bit MODE_TIME_ATTACK_F, c
 	jr z, .asm_80669
 	xor a
@@ -1894,7 +1894,7 @@ Func_80e13: ; 80e13 (20:4e13)
 ; 0x80e23
 
 Func_80e23: ; 80e23 (20:4e23)
-	farcall Func_acd3a
+	farcall UpdateTempleScene
 	ret
 ; 0x80e33
 
@@ -2141,7 +2141,7 @@ Func_81077: ; 81077 (20:5077)
 	cp TREASURES_END
 	jr nz, .asm_81092
 	ld a, [wGameModeFlags]
-	bit MODE_UNK0_F, a
+	bit MODE_GAME_CLEARED_F, a
 	ret nz
 .asm_81092
 	call Func_3c76
@@ -2635,7 +2635,7 @@ GetMapSideAndLevelForNextTreasure: ; 813bc (20:53bc)
 	cp c
 	jr nc, .get_level
 	ld a, [wGameModeFlags]
-	bit MODE_UNK0_F, a
+	bit MODE_GAME_CLEARED_F, a
 	jr nz, .get_level
 .no_more_treasures
 	ld b, MAP_NORTH

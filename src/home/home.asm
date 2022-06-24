@@ -1526,7 +1526,7 @@ Func_15dc:: ; 15dc (0:15dc)
 	cp TRANSITION_GAME_OVER
 	jr z, .asm_15ff
 	ld a, [wGameModeFlags]
-	and ($1 << MODE_UNK0_F)
+	and ($1 << MODE_GAME_CLEARED_F)
 	jr z, .asm_15ff
 	ld a, [wNumberCollectedTreasures]
 	dec a
