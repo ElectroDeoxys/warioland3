@@ -1879,15 +1879,9 @@ w2d12f:: ; d12f
 	ds $10
 
 wSceneWario:: scene_obj_struct wSceneWario ; d140
-
-wSceneWarioStateGroup:: ; d148
-	ds $1
-
-wSceneWarioOAMPtr:: ; d149
-	ds $2
-
-wSceneWarioOAMBank:: ; d14b
-	ds $1
+wSceneWarioStateGroup:: ds $1 ; d148
+wSceneWarioOAMPtr::     ds $2 ; d149
+wSceneWarioOAMBank::    ds $1 ; d14b
 
 w2d14c:: ; d14c
 	ds $1
@@ -1923,6 +1917,7 @@ w2d160:: ; d160
 
 w2d180:: scene_obj_struct w2d180 ; d180
 
+wSceneObjs::
 wSceneObj1::  scene_obj_struct wSceneObj1  ; d188
 wSceneObj2::  scene_obj_struct wSceneObj2  ; d190
 wSceneObj3::  scene_obj_struct wSceneObj3  ; d198
@@ -1938,6 +1933,7 @@ wSceneObj12:: scene_obj_struct wSceneObj12 ; d1e0
 wSceneObj13:: scene_obj_struct wSceneObj13 ; d1e8
 wSceneObj14:: scene_obj_struct wSceneObj14 ; d1f0
 wSceneObj15:: scene_obj_struct wSceneObj15 ; d1f8
+wSceneObjsEnd::
 
 wAttrmap:: ; d200
 	ds $300
@@ -2054,7 +2050,10 @@ w2d8a9:: ; d8a9
 w2d8aa:: ; d8aa
 	ds $1
 
-	ds $5
+w2d8ab:: ; d8ab
+	ds $1
+
+	ds $4
 
 w2d8b0:: ; d8b0
 	ds $1
@@ -2167,7 +2166,8 @@ w2d8dc:: ; d8dc
 
 	ds $123
 
-w2da00:: ; da00
+; TEMPLE_SCENE_* constant
+wTempleScene:: ; da00
 	ds $1
 
 	ds $1
@@ -2178,28 +2178,18 @@ wTempleMusicDelayCounter:: ds $1 ; da03
 w2da04:: ; da04
 	ds $1
 
-w2da05:: ; da05
+wTempleSceneCounter:: ; da05
 	ds $1
 
 	ds $7a
 
-wTextDelayCounter:: ; da80
-	ds $1
-
-wCurTextLine:: ; da81
-	ds $1
-
-wCurTextBufferPos:: ; da82
-	ds $1
-
-wCurTextLinePos:: ; da83
-	ds $1
-
-w2da84:: ; da84
-	ds $1
-
-wBGMapToPrintText:: ; da85
-	ds $1
+wTextPrintInfo::
+wTextDelayCounter::  ds $1 ; da80
+wCurTextLine::       ds $1 ; da81
+wCurTextBufferLine:: ds $1 ; da82
+wCurTextLinePos::    ds $1 ; da83
+wCurTextBufferPage:: ds $1 ; da84
+wBGMapToPrintText::  ds $1 ; da85
 
 	ds $2
 
@@ -2208,7 +2198,11 @@ wPendingCharDest:: ds $2 ; da88
 wPendingCharTile:: ds $1 ; da8a
 wPendingCharAttr:: ds $1 ; da8b
 
-	ds $24
+	ds $4
+
+wTextPrintInfoEnd::
+
+	ds $20
 
 ; true if the next objective is to
 ; go to The Temple to fight A Hidden Figure
@@ -2268,6 +2262,8 @@ wCollectionLinkedCells:: ; d810
 	ds $7
 
 ENDU
+
+wWRAM2End::
 
 SECTION "Audio RAM", WRAMX
 

@@ -76,7 +76,7 @@ Func_1f403f: ; 1f403f (7d:403f)
 	ld [w3d511 + 0], a
 	ld a, [hl]
 	ld [w3d511 + 1], a
-	ld hl, v1BGMap1 + $44
+	hlbgcoord 4, 2, v1BGMap1
 	ld bc, -BG_MAP_WIDTH
 	ld de, BG_MAP_WIDTH
 	ld a, [w3d511 + 0]
@@ -119,7 +119,7 @@ Func_1f403f: ; 1f403f (7d:403f)
 	ld [hli], a
 	add hl, bc
 
-	ld hl, v1BGMap1 + $4b
+	hlbgcoord 11, 2, v1BGMap1
 	ld bc, -BG_MAP_WIDTH
 	ld de, BG_MAP_WIDTH
 	ld a, [wc0e2]

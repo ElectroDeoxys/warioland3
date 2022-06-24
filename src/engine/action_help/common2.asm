@@ -107,7 +107,7 @@ LoadActionHelpBGMaps: ; 1e4933 (79:4933)
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, v1BGMap1 + $200
+	hlbgcoord 0, 16, v1BGMap1
 	ld de, BG_MAP_WIDTH
 	ld b, $00
 .asm_1e4969
@@ -136,7 +136,7 @@ LoadActionHelpBGMaps: ; 1e4933 (79:4933)
 	sub b
 	ret z
 	ld b, a
-	ld hl, v0BGMap1 + $212
+	hlbgcoord 18, 16, v0BGMap1
 .asm_1e498a
 	push hl
 	call .Func_1e499c
@@ -149,7 +149,7 @@ LoadActionHelpBGMaps: ; 1e4933 (79:4933)
 
 .asm_1e4995
 	ld b, $0a
-	ld hl, v0BGMap1 + $212
+	hlbgcoord 18, 16, v0BGMap1
 	jr .asm_1e498a
 
 .Func_1e499c

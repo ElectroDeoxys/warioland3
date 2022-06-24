@@ -49,6 +49,8 @@
 	charmap "Y",         $58
 	charmap "Z",         $59
 
+	charmap "▼",         $5d
+
 	charmap "a",         $60
 	charmap "b",         $61
 	charmap "c",         $62

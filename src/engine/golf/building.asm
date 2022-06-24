@@ -100,8 +100,8 @@ Func_1c8604: ; 1c8604 (72:4604)
 	call Func_1c87db
 	call GetGolfCourseTargetSCX
 	ld hl, w1d900
-	ld de, v1BGMap0 + $c0
-	ld b, $e0
+	debgcoord 0, 6
+	ld b, 7 * BG_MAP_WIDTH
 	call CopyHLToDE
 
 	xor a
@@ -118,7 +118,7 @@ Func_1c8604: ; 1c8604 (72:4604)
 	call FarDecompress
 
 	ld hl, wGolfBestScores
-	ld de, v0BGMap0 + $1a2
+	debgcoord 2, 13
 .loop_courses
 	ld a, [hl]
 	cp golf_score 100

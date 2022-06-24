@@ -443,18 +443,18 @@ _InitTreasureCollection: ; 9a3cf (26:63cf)
 
 	ld hl, wTilemap
 	ld de, v0BGMap1
-	ld bc, $24 tiles
+	ld bc, 18 * BG_MAP_WIDTH
 	call CopyHLToDE_BC
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, wAttrmap
 	ld de, v0BGMap1
-	ld bc, $24 tiles
+	ld bc, 18 * BG_MAP_WIDTH
 	call CopyHLToDE_BC
 
 	xor a
 	ldh [rVBK], a
-	ld hl, v0BGMap1 + $22
+	hlbgcoord 2, 1, v0BGMap1
 	farcall PrintNumberCollectedTreasures
 
 	ld hl, wSceneObj1State

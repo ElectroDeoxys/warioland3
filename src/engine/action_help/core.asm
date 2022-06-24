@@ -153,7 +153,7 @@ InitActionHelp: ; 1f8022 (7e:4022)
 	ld a, [wPowerUpLevel]
 	and POWER_UP_MASK
 	ld e, a
-	ld hl, v1BGMap1 + $200
+	hlbgcoord 0, 16, v1BGMap1
 	sla e
 	ld d, $00
 	add hl, de
@@ -175,7 +175,7 @@ InitActionHelp: ; 1f8022 (7e:4022)
 	ld d, $00
 	add hl, de
 	ld b, [hl]
-	ld hl, v1BGMap1 + $200
+	hlbgcoord 0, 16, v1BGMap1
 	sla e
 	add hl, de
 	ld e, BG_MAP_WIDTH

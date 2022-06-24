@@ -1090,8 +1090,8 @@ Func_8065e: ; 8065e (20:465e)
 	ld [w2d01f], a
 	call Func_80b54
 
-	decompress BGMap_85b91, v0BGMap0 tile $3a
-	decompress_vram1 BGMap_85bc4, v1BGMap0 tile $3a
+	decompress BGMap_85b91, v0BGMap0 + $3a0
+	decompress_vram1 BGMap_85bc4, v1BGMap0 + $3a0
 
 	ld a, [wTopBarState]
 	and a
@@ -1161,15 +1161,15 @@ Func_8065e: ; 8065e (20:465e)
 	call SetNextPrevMapButtonsSelectable
 	call UpdateNextPrevMapButtonsSelectable
 
-	ld hl, v0BGMap0 tile $3c
-	ld de, wAttrmap tile $2a
-	ld b, 4 tiles
+	hlbgcoord 0, 30
+	debgcoord 0, 21, wAttrmap
+	ld b, 2 * BG_MAP_WIDTH
 	call CopyHLToDE
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, v1BGMap0 tile $3c
-	ld de, wAttrmap tile $26
-	ld b, 4 tiles
+	hlbgcoord 0, 30
+	debgcoord 0, 19, wAttrmap
+	ld b, 2 * BG_MAP_WIDTH
 	call CopyHLToDE
 	xor a
 	ldh [rVBK], a
@@ -1178,15 +1178,15 @@ Func_8065e: ; 8065e (20:465e)
 	cp $04
 	jr nz, .asm_80809
 	call Func_822b4
-	ld hl, wAttrmap tile $2a
-	ld de, v0BGMap0 tile $3c
-	ld b, 4 tiles
+	hlbgcoord 0, 21, wAttrmap
+	debgcoord 0, 30
+	ld b, 2 * BG_MAP_WIDTH
 	call CopyHLToDE
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, wAttrmap tile $26
-	ld de, v1BGMap0 tile $3c
-	ld b, 4 tiles
+	hlbgcoord 0, 19, wAttrmap
+	debgcoord 0, 30
+	ld b, 2 * BG_MAP_WIDTH
 	call CopyHLToDE
 	xor a
 	ldh [rVBK], a
@@ -1505,13 +1505,13 @@ Func_80b29: ; 80b29 (20:4b29)
 WriteBGMapFromWRAM: ; 80b34 (20:4b34)
 	ld hl, wTilemap
 	ld de, v0BGMap0
-	ld bc, $260
+	ld bc, 19 * BG_MAP_WIDTH
 	call CopyHLToDE_BC
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, wAttrmap
 	ld de, v1BGMap0
-	ld bc, $260
+	ld bc, 19 * BG_MAP_WIDTH
 	call CopyHLToDE_BC
 	xor a
 	ldh [rVBK], a

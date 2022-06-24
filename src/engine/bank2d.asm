@@ -334,19 +334,19 @@ Func_b4247: ; b4247 (2d:4247)
 	cp c
 	ret nz
 
-	decompress_vram1 BGMap_85eda, v1BGMap0 tile $3a
-	decompress BGMap_85ea7, v0BGMap0 tile $3a
+	decompress_vram1 BGMap_85eda, v1BGMap0 + $3a0
+	decompress BGMap_85ea7, v0BGMap0 + $3a0
 
-	ld hl, v0BGMap0 tile $3c
-	ld de, wAttrmap tile $2a
-	ld b, 4 tiles
+	hlbgcoord 0, 30
+	debgcoord 0, 21, wAttrmap
+	ld b, 2 * BG_MAP_WIDTH
 	call CopyHLToDE
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, v1BGMap0 tile $3c
-	ld de, wAttrmap tile $26
-	ld b, 4 tiles
+	hlbgcoord 0, 30
+	debgcoord 0, 19, wAttrmap
+	ld b, 2 * BG_MAP_WIDTH
 	call CopyHLToDE
 	xor a
 	ldh [rVBK], a

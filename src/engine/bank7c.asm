@@ -100,7 +100,7 @@ InitPauseMenu_SkipBackupVRAM: ; 1f0099 (7c:4099)
 	farcall Func_1f403f
 
 	call PrintNumberMusicCoins
-	ld hl, v0BGMap1 + $1ee
+	hlbgcoord 14, 15, v0BGMap1
 	farcall PrintNumberCoins
 	call VBlank_354
 
@@ -1177,9 +1177,9 @@ PrintNumberMusicCoins: ; 1f095b (7c:495b)
 	ld a, [wNumMusicalCoins]
 	add a ; *2
 	add $a0
-	ld [v0BGMap1 + $1e7], a
+	ldbgcoord 7, 15, v0BGMap1
 	inc a
-	ld [v0BGMap1 + $207], a
+	ldbgcoord 7, 16, v0BGMap1
 	ret
 ; 0x1f0969
 

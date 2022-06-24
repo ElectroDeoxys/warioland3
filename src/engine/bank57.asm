@@ -524,7 +524,13 @@ Frameset_15e7fa: ; 15e7fa (57:67fa)
 	db $ff
 ; 0x15e801
 
-	INCROM $15e801, $15e80a
+Frameset_15e801: ; 15e801 (57:6801)
+	db $34,  2
+	db $32,  1
+	db $29,  2
+	db $32,  1
+	db $ff
+; 0x15e80a
 
 Frameset_15e80a: ; 15e80a (57:680a)
 	db $29,  2

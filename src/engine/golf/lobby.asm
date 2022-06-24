@@ -165,13 +165,13 @@ InitGolfLobby: ; 1c8020 (72:4020)
 	lb bc, $fe, $ff
 .got_price
 	ld a, d
-	ld [v0BGMap0 + $10b], a
+	ldbgcoord 11, 8
 	ld a, e
-	ld [v0BGMap0 + $12b], a
+	ldbgcoord 11, 9
 	ld a, b
-	ld [v0BGMap0 + $10c], a
+	ldbgcoord 12, 8
 	ld a, c
-	ld [v0BGMap0 + $12c], a
+	ldbgcoord 12, 9
 	ret
 ; 0x1c8140
 

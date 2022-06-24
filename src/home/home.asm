@@ -3981,7 +3981,7 @@ LoadFarBGMap:: ; 3b77 (0:3b77)
 	push af
 	ld a, b
 	bankswitch
-	ld bc, $240
+	ld bc, 18 * BG_MAP_WIDTH
 	ld de, v0BGMap0
 	call CopyHLToDE_BC
 	pop af

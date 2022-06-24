@@ -1224,7 +1224,7 @@ Func_9cc2a: ; 9cc2a (27:4c2a)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, v1BGMap0
-	ld bc, $a0
+	ld bc, 5 * BG_MAP_WIDTH
 	ld a, d
 	call WriteAToHL_BCTimes
 	xor a
@@ -1236,7 +1236,7 @@ Func_9cc3c: ; 9cc3c (27:4c3c)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, v1BGMap1
-	ld bc, $a0
+	ld bc, 5 * BG_MAP_WIDTH
 	ld a, $80
 	call WriteAToHL_BCTimes
 	xor a
@@ -1248,7 +1248,7 @@ Func_9cc4f: ; 9cc4f (27:4c4f)
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld d, $80
-	ld hl, v1BGMap0 + $a0
+	hlbgcoord 0, 5
 	ld e, 7
 .loop_outer
 	ld b, 6
@@ -1259,7 +1259,7 @@ Func_9cc4f: ; 9cc4f (27:4c4f)
 	jr nz, .loop_inner
 	dec e
 	jr z, .done
-	ld a, $1a
+	ld a, BG_MAP_WIDTH - 6
 	add l
 	ld l, a
 	ld a, $00

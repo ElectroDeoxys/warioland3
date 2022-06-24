@@ -171,13 +171,13 @@ PickAndLoadGolfLevel: ; 1c8a03 (72:4a03)
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld bc, v1BGMap0 + $e0
+	bcbgcoord 0, 7
 	call FarDecompress
 	ld hl, BGMap_1c1651
 	ld bc, v1BGMap0
 	call FarDecompress
 	pop hl
-	ld bc, v1BGMap1 + $e0
+	bcbgcoord 0, 7, v1BGMap1
 	call FarDecompress
 	ld hl, BGMap_1c1716
 	ld bc, v1BGMap1
@@ -186,13 +186,13 @@ PickAndLoadGolfLevel: ; 1c8a03 (72:4a03)
 	xor a
 	ldh [rVBK], a
 	pop hl
-	ld bc, v0BGMap0 + $e0
+	bcbgcoord 0, 7
 	call FarDecompress
 	ld hl, BGMap_1c15c5
 	ld bc, v0BGMap0
 	call FarDecompress
 	pop hl
-	ld bc, v0BGMap1 + $e0
+	bcbgcoord 0, 7, v0BGMap1
 	call FarDecompress
 	ld hl, BGMap_1c168a
 	ld bc, v0BGMap1
@@ -2993,7 +2993,7 @@ VBlank_1c9e8d: ; 1c9e8d (72:5e8d)
 	ldh [rSVBK], a
 	ldh [rVBK], a
 	ld a, $03
-	ld [v1BGMap0 + $145], a
+	ldbgcoord 5, 10
 	ld a, [wGolfLCDConfig]
 	ldh [rLCDC], a
 	xor a
@@ -3096,24 +3096,24 @@ VBlank_1c9f36: ; 1c9f36 (72:5f36)
 	ld a, [wGolfNumCoins + 0]
 	add a
 	add $e0
-	ld [v0BGMap0 + $106], a
+	ldbgcoord 6, 8
 	inc a
-	ld [v0BGMap0 + $126], a
+	ldbgcoord 6, 9
 	ld a, [wGolfNumCoins + 1]
 	and $f0
 	swap a
 	add a
 	add $e0
-	ld [v0BGMap0 + $107], a
+	ldbgcoord 7, 8
 	inc a
-	ld [v0BGMap0 + $127], a
+	ldbgcoord 7, 9
 	ld a, [wGolfNumCoins + 1]
 	and $0f
 	add a
 	add $e0
-	ld [v0BGMap0 + $108], a
+	ldbgcoord 8, 8
 	inc a
-	ld [v0BGMap0 + $128], a
+	ldbgcoord 8, 9
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
 .func_end

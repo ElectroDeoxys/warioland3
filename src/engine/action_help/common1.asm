@@ -227,7 +227,7 @@ Func_1fb6f7: ; 1fb6f7 (7e:76f7)
 	and POWER_UP_MASK
 	cp e
 	jr c, .asm_1fb750
-	ld hl, v1BGMap1 + $200
+	hlbgcoord 0, 16, v1BGMap1
 	sla e
 	ld d, $00
 	add hl, de
@@ -250,7 +250,7 @@ Func_1fb6f7: ; 1fb6f7 (7e:76f7)
 	ld d, $00
 	add hl, de
 	ld b, [hl]
-	ld hl, v1BGMap1 + $200
+	hlbgcoord 0, 16, v1BGMap1
 	sla e
 	add hl, de
 	ld e, BG_MAP_WIDTH

@@ -177,7 +177,7 @@ InitIntroSequence: ; 405f (1:405f)
 ; the menu options behind scenery
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, v1BGMap0 tile $18 + $4
+	hlbgcoord 4, 12
 	ld de, BG_MAP_WIDTH
 	ld c, 2
 .loop_outer
@@ -210,16 +210,16 @@ InitIntroSequence: ; 405f (1:405f)
 	xor a ; VRAM0
 	ldh [rVBK], a
 	ld hl, Data_6b47
-	ld de, v0BGMap0 tile $1c + $4
+	debgcoord 4, 14
 	push de
 	ld b, 12
 	call CopyHLToDE
 	pop de
 	ld a, e
-	add $20
+	add BG_MAP_WIDTH
 	ld e, a
 	ld a, d
-	adc $00
+	adc 0
 	ld d, a
 	ld b, 12
 	call CopyHLToDE
@@ -1472,18 +1472,18 @@ VBlank_49db: ; 49db (1:49db)
 	ld hl, Data_6b47
 	xor a ; VRAM0
 	ldh [rVBK], a
-	ld de, v0BGMap0 tile $1c + $4
+	debgcoord 4, 14
 	push de
-	ld b, $0c
+	ld b, 12
 	call CopyHLToDE
 	pop de
 	ld a, e
-	add $20
+	add BG_MAP_WIDTH
 	ld e, a
 	ld a, d
-	adc $00
+	adc 0
 	ld d, a
-	ld b, $0c
+	ld b, 12
 	call CopyHLToDE
 	ld hl, wcee4
 	res 7, [hl]
@@ -2160,24 +2160,24 @@ VBlank_4ddf: ; 4ddf (1:4ddf)
 	jr z, .asm_4e11
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, v1BGMap0 tile $e + $5
-	ld b, $0d
+	hlbgcoord 5, 7
+	ld b, 13
 	ld a, $07
 	call WriteAToHL_BTimes
-	ld hl, v1BGMap0 tile $12 + $5
-	ld b, $0d
+	hlbgcoord 5, 9
+	ld b, 13
 	ld a, $06
 	call WriteAToHL_BTimes
 	jr .asm_4e29
 .asm_4e11
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, v1BGMap0 tile $e + $5
-	ld b, $0d
+	hlbgcoord 5, 7
+	ld b, 13
 	ld a, $06
 	call WriteAToHL_BTimes
-	ld hl, v1BGMap0 tile $12 + $5
-	ld b, $0d
+	hlbgcoord 5, 9
+	ld b, 13
 	ld a, $07
 	call WriteAToHL_BTimes
 .asm_4e29
