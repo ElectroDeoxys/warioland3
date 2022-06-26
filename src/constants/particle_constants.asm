@@ -28,7 +28,7 @@
 DEF NUM_PARTICLES EQU 4
 
 ; wObjects structs constants
-rsreset
+RSRESET
 PARTICLE_STRUCT_ID              rb ; $00
 PARTICLE_STRUCT_INITIALISED     rb ; $01
 PARTICLE_STRUCT_Y_POS           rw ; $02

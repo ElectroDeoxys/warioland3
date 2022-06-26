@@ -1,19 +1,19 @@
-Func_158000: ; 158000 (56:4000)
-	call Func_158022
-	call Func_158111
-	call Func_158216
-	call Func_158168
-	call Func_15826d
-	call Func_1581bf
-	call Func_1582c4
-	call Func_158358
-	call Func_15839f
-	call Func_1583e6
-	call Func_158432
+_HandleTempleShakeAndRocks: ; 158000 (56:4000)
+	call HandleTempleScreenShake
+	call HandleTempleRock1Fall
+	call HandleTempleRock2Fall
+	call HandleTempleRock3Fall
+	call HandleTempleRock4Fall
+	call HandleTempleRock5Fall
+	call HandleTempleRock6Fall
+	call HandleTempleRock7Bounce
+	call HandleTempleRock8Bounce
+	call HandleTempleRock9Bounce
+	call HandleTempleRock10Bounce
 	ret
 ; 0x158022
 
-Func_158022: ; 158022 (56:4022)
+HandleTempleScreenShake: ; 158022 (56:4022)
 	ld hl, w2d896
 	ld a, [hli]
 	and a
@@ -134,43 +134,45 @@ Func_1580c8: ; 1580c8 (56:40c8)
 	cp [hl]
 	ret c
 	dec l
-	ld a, [hld]
+	ld a, [hld] ; size
 	and a
 	jr z, .asm_1580d6
 	dec l
 	ld a, $01
-	ld [hl], a
-	jr Func_1580d8
+	ld [hl], a ; action
+	jr StubTempleRockFunc
 .asm_1580d6
-	ld [hld], a
-	ld [hl], a
-Func_1580d8: ; 1580d8 (56:40d8)
+	ld [hld], a ; counter
+	ld [hl], a  ; action
+StubTempleRockFunc: ; 1580d8 (56:40d8)
 	ret
 ; 0x1580d9
 
-Func_1580d9: ; 1580d9 (56:40d9)
-	cp $02
-	ld a, $09
+SetTempleRockSize_WithLarge: ; 1580d9 (56:40d9)
+	cp TEMPLE_ROCK_SIZE_LARGE
+	ld a, $9
 	jr c, .set_state
 	ld b, a
-	ld a, c
+	ld a, c ; random seed
 	and %11
 	cp %11
-	jr nz, .asm_1580e8
+	jr nz, .ok
 	dec a
-.asm_1580e8
+.ok
+	; either 0, 1 or 2
 	add b
 .set_state
 	jp SetSceneObjState
 ; 0x1580ec
 
-Func_1580ec: ; 1580ec (56:40ec)
-	cp $02
-	ld a, $09
+SetTempleRockSize_WithoutLarge: ; 1580ec (56:40ec)
+	cp TEMPLE_ROCK_SIZE_LARGE
+	ld a, $9
 	jr c, .set_state
 	ld b, a
 	ld a, c
 	and %1
+	; either 0 or 1
 	add b
 .set_state
 	jp SetSceneObjState
@@ -194,341 +196,84 @@ SpawnRock_Bottom: ; 158104 (56:4104)
 	jr SpawnRock
 ; 0x158108
 
-Func_158108: ; 158108 (56:4108)
-	play_sfx SFX_10D
+PlayFallingRockSFX: ; 158108 (56:4108)
+	play_sfx SFX_TEMPLE_ROCK
 	ret
 ; 0x158111
 
-Func_158111: ; 158111 (56:4111)
-	ld hl, w2d8b0
-	ld a, [hli]
-	inc [hl] ; w2d8b1
+; \1 = rock number
+; \2 = scene object to use
+; \3 = whether can be large or not
+; \4 = x coordinate 1
+; \5 = x coordinate 2
+; \6 = max y coordinate
+MACRO temple_rock_fall
+HandleTempleRock\1Fall:
+	ld hl, wTempleRock\1
+	ld a, [hli] ; action
+	inc [hl] ; counter
 	ld b, h
 	ld c, l
 	jumptable
 
-	dw Func_1580d8
-	dw .Func_158121
-	dw .Func_15813d
-	dw .Func_158162
+	dw StubTempleRockFunc
+	dw .Spawn
+	dw .Update
+	dw .Reset
 
-.Func_158121
+.Spawn
 	ldh a, [rDIV]
 	ld c, a
-	ld hl, wSceneObj12
-	lb de, $20, $30
+	ld hl, \2
+	lb de, \4, \5
 	call SpawnRock_Top
-	ld a, [w2d8b2]
-	ld hl, wSceneObj12State
-	call Func_1580d9
-.Func_158136
-	ld hl, w2d8b1
+	ld a, [wTempleRock\1Size]
+	ld hl, \2State
+IF (\3) == TRUE
+	call SetTempleRockSize_WithLarge
+ELSE
+	call SetTempleRockSize_WithoutLarge
+ENDC
+.Next
+	ld hl, wTempleRock\1Counter
 	xor a
 	ld [hld], a
-	inc [hl] ; w2d8b0
+	inc [hl] ; action
 	ret
 
-.Func_15813d
+.Update
 	call GetRockYVel
-	ld hl, wSceneObj12YCoord
+	ld hl, \2YCoord
 	add [hl]
 	ld [hl], a
-	cp $60
+	cp \6
 	ret c
 	xor a
-	ld [wSceneObj12State], a
+	ld [\2State], a
 
 	ld c, %111111
-	ld a, [w2d8b2]
-	cp $02
-	jr nz, .asm_158157
+	ld a, [wTempleRock\1Size]
+	cp TEMPLE_ROCK_SIZE_LARGE
+	jr nz, .not_large
 	ld c, %11111
-.asm_158157
+.not_large
 	ldh a, [rDIV]
 	and c
-	ld [w2d8b3], a
-	call Func_158108
-	jr .Func_158136
+	ld [wTempleRock\1RespawnTime], a
+	call PlayFallingRockSFX
+	jr .Next
 
-.Func_158162
-	ld hl, w2d8b3
+.Reset
+	ld hl, wTempleRock\1RespawnTime
 	jp Func_1580c8
-; 0x158168
+ENDM
 
-Func_158168: ; 158168 (56:4168)
-	ld hl, w2d8b8
-	ld a, [hli]
-	inc [hl] ; w2d8b9
-	ld b, h
-	ld c, l
-	jumptable
-
-	dw Func_1580d8
-	dw .Func_158178
-	dw .Func_158194
-	dw .Func_1581b9
-
-.Func_158178
-	ldh a, [rDIV]
-	ld c, a
-	ld hl, wSceneObj14
-	lb de, $28, $38
-	call SpawnRock_Top
-	ld a, [w2d8ba]
-	ld hl, wSceneObj14State
-	call Func_1580ec
-.Func_15818d
-	ld hl, w2d8b9
-	xor a
-	ld [hld], a
-	inc [hl] ; w2d8b8
-	ret
-
-.Func_158194
-	call GetRockYVel
-	ld hl, wSceneObj14YCoord
-	add [hl]
-	ld [hl], a
-	cp $60
-	ret c
-	xor a
-	ld [wSceneObj14State], a
-	ld c, %111111
-	ld a, [w2d8ba]
-	cp $02
-	jr nz, .asm_1581ae
-	ld c, %11111
-.asm_1581ae
-	ldh a, [rDIV]
-	and c
-	ld [w2d8bb], a
-	call Func_158108
-	jr .Func_15818d
-
-.Func_1581b9
-	ld hl, w2d8bb
-	jp Func_1580c8
-; 0x1581bf
-
-Func_1581bf: ; 1581bf (56:41bf)
-	ld hl, w2d8c0
-	ld a, [hli]
-	inc [hl] ; w2d8c1
-	ld b, h
-	ld c, l
-	jumptable
-
-	dw Func_1580d8
-	dw .Func_1581cf
-	dw .Func_1581eb
-	dw .Func_158210
-
-.Func_1581cf
-	ldh a, [rDIV]
-	ld c, a
-	ld hl, wSceneObj1
-	lb de, $10, $40
-	call SpawnRock_Top
-	ld a, [w2d8c2]
-	ld hl, wSceneObj1State
-	call Func_1580ec
-.Func_1581e4
-	ld hl, w2d8c1
-	xor a
-	ld [hld], a
-	inc [hl] ; w2d8c0
-	ret
-
-.Func_1581eb
-	call GetRockYVel
-	ld hl, wSceneObj1YCoord
-	add [hl]
-	ld [hl], a
-	cp $a0
-	ret c
-	xor a
-	ld [wSceneObj1State], a
-	ld c, %111111
-	ld a, [w2d8c2]
-	cp $02
-	jr nz, .asm_158205
-	ld c, %11111
-.asm_158205
-	ldh a, [rDIV]
-	and c
-	ld [w2d8c3], a
-	call Func_158108
-	jr .Func_1581e4
-
-.Func_158210
-	ld hl, w2d8c3
-	jp Func_1580c8
-; 0x158216
-
-Func_158216: ; 158216 (56:4216)
-	ld hl, w2d8b4
-	ld a, [hli]
-	inc [hl] ; w2d8b5
-	ld b, h
-	ld c, l
-	jumptable
-
-	dw Func_1580d8
-	dw .Func_158226
-	dw .Func_158242
-	dw .Func_158267
-
-.Func_158226
-	ldh a, [rDIV]
-	ld c, a
-	ld hl, wSceneObj13
-	lb de, $70, $80
-	call SpawnRock_Top
-	ld a, [w2d8b6]
-	ld hl, wSceneObj13State
-	call Func_1580d9
-.Func_15823b
-	ld hl, w2d8b5
-	xor a
-	ld [hld], a
-	inc [hl]
-	ret
-
-.Func_158242
-	call GetRockYVel
-	ld hl, wSceneObj13YCoord
-	add [hl]
-	ld [hl], a
-	cp $60
-	ret c
-	xor a
-	ld [wSceneObj13State], a
-	ld c, %111111
-	ld a, [w2d8b6]
-	cp $02
-	jr nz, .asm_15825c
-	ld c, %11111
-.asm_15825c
-	ldh a, [rDIV]
-	and c
-	ld [w2d8b7], a
-	call Func_158108
-	jr .Func_15823b
-
-.Func_158267
-	ld hl, w2d8b7
-	jp Func_1580c8
-; 0x15826d
-
-Func_15826d: ; 15826d (56:426d)
-	ld hl, w2d8bc
-	ld a, [hli]
-	inc [hl] ; w2d8bd
-	ld b, h
-	ld c, l
-	jumptable
-
-	dw Func_1580d8
-	dw .Func_15827d
-	dw .Func_158299
-	dw .Func_1582be
-
-.Func_15827d
-	ldh a, [rDIV]
-	ld c, a
-	ld hl, wSceneObj15
-	lb de, $68, $78
-	call SpawnRock_Top
-	ld a, [w2d8be]
-	ld hl, wSceneObj15State
-	call Func_1580ec
-.Func_158292
-	ld hl, w2d8bd
-	xor a
-	ld [hld], a
-	inc [hl]
-	ret
-
-.Func_158299
-	call GetRockYVel
-	ld hl, wSceneObj15
-	add [hl]
-	ld [hl], a
-	cp $60
-	ret c
-	xor a
-	ld [wSceneObj15State], a
-	ld c, %111111
-	ld a, [w2d8be]
-	cp $02
-	jr nz, .asm_1582b3
-	ld c, %11111
-.asm_1582b3
-	ldh a, [rDIV]
-	and c
-	ld [w2d8bf], a
-	call Func_158108
-	jr .Func_158292
-
-.Func_1582be
-	ld hl, w2d8bf
-	jp Func_1580c8
-; 0x1582c4
-
-Func_1582c4: ; 1582c4 (56:42c4)
-	ld hl, w2d8c4
-	ld a, [hli]
-	inc [hl]
-	ld b, h
-	ld c, l
-	jumptable
-
-	dw Func_1580d8
-	dw .Func_1582d4
-	dw .Func_1582f0
-	dw .Func_158315
-
-.Func_1582d4
-	ldh a, [rDIV]
-	ld c, a
-	ld hl, wSceneObj2
-	lb de, $60, $90
-	call SpawnRock_Top
-	ld a, [w2d8c6]
-	ld hl, wSceneObj2State
-	call Func_1580ec
-.Func_1582e9
-	ld hl, w2d8c5
-	xor a
-	ld [hld], a
-	inc [hl]
-	ret
-
-.Func_1582f0
-	call GetRockYVel
-	ld hl, wSceneObj2YCoord
-	add [hl]
-	ld [hl], a
-	cp $a0
-	ret c
-	xor a
-	ld [wSceneObj2State], a
-	ld c, %111111
-	ld a, [w2d8c6]
-	cp $02
-	jr nz, .asm_15830a
-	ld c, %11111
-.asm_15830a
-	ldh a, [rDIV]
-	and c
-	ld [w2d8c7], a
-	call Func_158108
-	jr .Func_1582e9
-
-.Func_158315
-	ld hl, w2d8c7
-	jp Func_1580c8
-; 0x15831b
+	temple_rock_fall 1, wSceneObj12, TRUE,   32,  48,  96
+	temple_rock_fall 3, wSceneObj14, FALSE,  40,  56,  96
+	temple_rock_fall 5, wSceneObj1,  FALSE,  16,  64, 160
+	temple_rock_fall 2, wSceneObj13, TRUE,  112, 128,  96
+	temple_rock_fall 4, wSceneObj15, FALSE, 104, 120,  96
+	temple_rock_fall 6, wSceneObj2,  FALSE,  96, 144, 160
 
 GetRockYVel: ; 15831b (56:431b)
 	ld a, [bc]
@@ -553,196 +298,96 @@ GetRockYVel: ; 15831b (56:431b)
 	db $03, $03, $03, $03
 ; 0x158358
 
-Func_158358: ; 158358 (56:4358)
-	ld a, [w2d8c8]
+; \1 = rock number
+; \2 = scene object to use
+; \3 = whether a fast bounce or not
+; \4 = which direction to go
+; \5 = x coordinate 1
+; \6 = x coordinate 2
+MACRO temple_rock_bounce
+HandleTempleRock\1Bounce:
+	ld a, [wTempleRock\1Action]
 	jumptable
 	
-	dw Func_1580d8
-	dw .Func_158364
-	dw .Func_158383
-	dw .Func_15838f
+	dw StubTempleRockFunc
+	dw .Spawn
+	dw .Update
+	dw .Reset
 
-.Func_158364
+.Spawn
 	ldh a, [rDIV]
 	ld c, a
-	ld hl, wSceneObj8
-	lb de, $20, $28
+	ld hl, \2
+	lb de, \5, \6
 	call SpawnRock_Bottom
-	ld a, [w2d8ca]
-	ld hl, wSceneObj8State
-	call Func_1580ec
-	call Func_158108
-.Func_15837c
-	ld hl, w2d8c9
+	ld a, [wTempleRock\1Size]
+	ld hl, \2State
+	call SetTempleRockSize_WithoutLarge
+	call PlayFallingRockSFX
+.Next
+	ld hl, wTempleRock\1Counter
 	xor a
 	ld [hld], a
 	inc [hl]
 	ret
 
-.Func_158383
+.Update
+IF (\3) == TRUE
+
+IF (\4) == DIRECTION_LEFT
+REPT 2
+	ld hl, \2
+	call BounceTempleRockLeft
+	jr z, .Next
+ENDR
+ELSE ; (\4) == DIRECTION_RIGHT
+REPT 2
+	ld hl, \2
+	call BounceTempleRockRight
+	jr z, .Next
+ENDR
+ENDC
+	ret
+
+ELSE ; (\3) == FALSE
+
 	ld de, Data_158897
-	ld hl, wSceneObj8
+	ld hl, \2
+
+IF (\4) == DIRECTION_LEFT
 	call ApplyMovement
-	ret nz
-	jr .Func_15837c
-
-.Func_15838f
-	ld a, [w2d8ca]
-	and a
-	jr z, .asm_158397
-	ld a, $01
-.asm_158397
-	ld [w2d8c8], a
-	xor a
-	ld [wSceneObj8State], a
-	ret
-; 0x15839f
-
-Func_15839f: ; 15839f (56:439f)
-	ld a, [w2d8cc]
-	jumptable
-
-	dw Func_1580d8
-	dw .Func_1583ab
-	dw .Func_1583ca
-	dw .Func_1583d6
-
-.Func_1583ab
-	ldh a, [rDIV]
-	ld c, a
-	ld hl, wSceneObj9
-	lb de, $78, $80
-	call SpawnRock_Bottom
-	ld a, [w2d8ce]
-	ld hl, wSceneObj9State
-	call Func_1580ec
-	call Func_158108
-.Func_1583c3
-	ld hl, w2d8cd
-	xor a
-	ld [hld], a
-	inc [hl]
-	ret
-
-.Func_1583ca
-	ld de, Data_158897
-	ld hl, wSceneObj9
+ELSE ; (\4) == DIRECTION_RIGHT
 	call ApplyMovement_Mirrored
+ENDC
+
 	ret nz
-	jr .Func_1583c3
+	jr .Next
 
-.Func_1583d6
-	ld a, [w2d8ce]
+ENDC
+
+.Reset
+	ld a, [wTempleRock\1Size]
 	and a
-	jr z, .asm_1583de
-	ld a, $01
-.asm_1583de
-	ld [w2d8cc], a
+	jr z, .set_action
+	ld a, $1 ; spawn
+.set_action
+	ld [wTempleRock\1Action], a
 	xor a
-	ld [wSceneObj9State], a
+	ld [\2State], a
 	ret
-; 0x1583e6
+ENDM
 
-Func_1583e6: ; 1583e6 (56:43e6)
-	ld a, [w2d8d0]
-	jumptable
+	temple_rock_bounce  7, wSceneObj8,  FALSE, DIRECTION_LEFT,   32,  40
+	temple_rock_bounce  8, wSceneObj9,  FALSE, DIRECTION_RIGHT, 120, 128
+	temple_rock_bounce  9, wSceneObj10, TRUE,  DIRECTION_LEFT,   24,  32
+	temple_rock_bounce 10, wSceneObj11, TRUE,  DIRECTION_RIGHT, 128, 136
 
-	dw Func_1580d8
-	dw .Func_1583f2
-	dw .Func_158411
-	dw .Func_158422
-
-.Func_1583f2
-	ldh a, [rDIV]
-	ld c, a
-	ld hl, wSceneObj10
-	lb de, $18, $20
-	call SpawnRock_Bottom
-	ld a, [w2d8d2]
-	ld hl, wSceneObj10State
-	call Func_1580ec
-	call Func_158108
-.Func_15840a
-	ld hl, w2d8d1
-	xor a
-	ld [hld], a
-	inc [hl]
-	ret
-
-.Func_158411
-	ld hl, wSceneObj10
-	call Func_158484
-	jr z, .Func_15840a
-	ld hl, wSceneObj10
-	call Func_158484
-	jr z, .Func_15840a
-	ret
-
-.Func_158422
-	ld a, [w2d8d2]
-	and a
-	jr z, .asm_15842a
-	ld a, $01
-.asm_15842a
-	ld [w2d8d0], a
-	xor a
-	ld [wSceneObj10State], a
-	ret
-; 0x158432
-
-Func_158432: ; 158432 (56:4432)
-	ld a, [w2d8d4]
-	jumptable
-
-	dw Func_1580d8
-	dw .Func_15843e
-	dw .Func_15845d
-	dw .Func_15846e
-
-.Func_15843e
-	ldh a, [rDIV]
-	ld c, a
-	ld hl, wSceneObj11
-	lb de, $80, $88
-	call SpawnRock_Bottom
-	ld a, [w2d8d6]
-	ld hl, wSceneObj11State
-	call Func_1580ec
-	call Func_158108
-.Func_158456
-	ld hl, w2d8d5
-	xor a
-	ld [hld], a
-	inc [hl]
-	ret
-
-.Func_15845d
-	ld hl, wSceneObj11
-	call Func_15847e
-	jr z, .Func_158456
-	ld hl, wSceneObj11
-	call Func_15847e
-	jr z, .Func_158456
-	ret
-
-.Func_15846e
-	ld a, [w2d8d6]
-	and a
-	jr z, .asm_158476
-	ld a, $01
-.asm_158476
-	ld [w2d8d4], a
-	xor a
-	ld [wSceneObj11State], a
-	ret
-; 0x15847e
-
-Func_15847e: ; 15847e (56:447e)
+BounceTempleRockRight: ; 15847e (56:447e)
 	ld de, Data_1588de
 	jp ApplyMovement_Mirrored
 ; 0x158484
 
-Func_158484: ; 158484 (56:4484)
+BounceTempleRockLeft: ; 158484 (56:4484)
 	ld de, Data_1588de
 	jp ApplyMovement
 ; 0x15848a

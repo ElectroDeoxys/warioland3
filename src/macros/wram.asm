@@ -172,18 +172,29 @@ MACRO track_struct
 ; in case of sound1 and sound2, duty cycle
 ; bits 6-7 (0:12.5% 1:25% 2:50% 3:75%)
 ; in case of sound3, a WAVEFORM_* constant
-\1Length::         db
-\1Sweep::          db
+\1Length::          db
+\1Sweep::           db
 \1FadeInEnvelope::  db
 \1FadeOutEnvelope:: db
-\1Unk0d::          db
-\1Unk0e::          db
-\1Unk0f::          db
-\1Volume::         db
-\1VolumeEnvelope:: db
-\1Frequency::      dw
-\1Unk14::          db
-\1Unk15::          db
-\1Unk16::          db
-\1Unk17::          db
+\1Unk0d::           db
+\1Unk0e::           db
+\1Unk0f::           db
+\1Volume::          db
+\1VolumeEnvelope::  db
+\1Frequency::       dw
+\1Unk14::           db
+\1Unk15::           db
+\1Unk16::           db
+\1Unk17::           db
+ENDM
+
+MACRO temple_rock_struct
+\1Action::      db
+; 0 = ?
+; 1 = Spawn in
+; 2 = Update
+; 3 = Reset
+\1Counter::     db
+\1Size::        db ; medium or large if 2, else it's small
+\1RespawnTime:: db
 ENDM

@@ -2058,122 +2058,31 @@ w2d8ab:: ; d8ab
 
 	ds $4
 
+UNION
+
+wTempleRocks::
+wTempleRock1::  temple_rock_struct wTempleRock1  ; d8b0
+wTempleRock2::  temple_rock_struct wTempleRock2  ; d8b4
+wTempleRock3::  temple_rock_struct wTempleRock3  ; d8b8
+wTempleRock4::  temple_rock_struct wTempleRock4  ; d8bc
+wTempleRock5::  temple_rock_struct wTempleRock5  ; d8c0
+wTempleRock6::  temple_rock_struct wTempleRock6  ; d8c4
+wTempleRock7::  temple_rock_struct wTempleRock7  ; d8c8
+wTempleRock8::  temple_rock_struct wTempleRock8  ; d8cc
+wTempleRock9::  temple_rock_struct wTempleRock9  ; d8d0
+wTempleRock10:: temple_rock_struct wTempleRock10 ; d8d4
+
+NEXTU
+
 w2d8b0:: ; d8b0
 	ds $1
 
 w2d8b1:: ; d8b1
 	ds $1
 
-w2d8b2:: ; d8b2
-	ds $1
+ENDU
 
-w2d8b3:: ; d8b3
-	ds $1
-
-w2d8b4:: ; d8b4
-	ds $1
-
-w2d8b5:: ; d8b5
-	ds $1
-
-w2d8b6:: ; d8b6
-	ds $1
-
-w2d8b7:: ; d8b7
-	ds $1
-
-w2d8b8:: ; d8b8
-	ds $1
-
-w2d8b9:: ; d8b9
-	ds $1
-
-w2d8ba:: ; d8ba
-	ds $1
-
-w2d8bb:: ; d8bb
-	ds $1
-
-w2d8bc:: ; d8bc
-	ds $1
-
-w2d8bd:: ; d8bd
-	ds $1
-
-w2d8be:: ; d8be
-	ds $1
-
-w2d8bf:: ; d8bf
-	ds $1
-
-w2d8c0:: ; d8c0
-	ds $1
-
-w2d8c1:: ; d8c1
-	ds $1
-
-w2d8c2:: ; d8c2
-	ds $1
-
-w2d8c3:: ; d8c3
-	ds $1
-
-w2d8c4:: ; d8c4
-	ds $1
-
-w2d8c5:: ; d8c5
-	ds $1
-
-w2d8c6:: ; d8c6
-	ds $1
-
-w2d8c7:: ; d8c7
-	ds $1
-
-w2d8c8:: ; d8c8
-	ds $1
-
-w2d8c9:: ; d8c9
-	ds $1
-
-w2d8ca:: ; d8ca
-	ds $1
-
-w2d8cb:: ; d8cb
-	ds $1
-
-w2d8cc:: ; d8cc
-	ds $1
-
-w2d8cd:: ; d8cd
-	ds $1
-
-w2d8ce:: ; d8ce
-	ds $1
-
-	ds $1
-
-w2d8d0:: ; d8d0
-	ds $1
-
-w2d8d1:: ; d8d1
-	ds $1
-
-w2d8d2:: ; d8d2
-	ds $1
-
-	ds $1
-
-w2d8d4:: ; d8d4
-	ds $1
-
-w2d8d5:: ; d8d5
-	ds $1
-
-w2d8d6:: ; d8d6
-	ds $1
-
-	ds $3
+	ds $2
 
 w2d8da:: ; d8da
 	ds $1

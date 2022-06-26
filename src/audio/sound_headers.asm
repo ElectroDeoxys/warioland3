@@ -305,7 +305,7 @@ SoundHeaders: ; 3155e (c:555e)
 	sfx Sfx_10a,                         $00, 220, CHAN8, 1 ; SFX_10A
 	sfx Sfx_10b,                         $00, 220, CHAN5, 1 ; SFX_10B
 	sfx Sfx_10c,                         $00, 220, CHAN8, 1 ; SFX_10C
-	sfx Sfx_10d,                         $00, 236, CHAN5, 1 ; SFX_10D
+	sfx Sfx_10d,                         $00, 236, CHAN5, 1 ; SFX_TEMPLE_ROCK
 	sfx Sfx_10e,                         $00, 220, CHAN5, 2 ; SFX_10E
 	sfx Sfx_10f,                         $00, 220, CHAN8, 1 ; SFX_10F
 	sfx Sfx_110,                         $00, 220, CHAN5, 2 ; SFX_110

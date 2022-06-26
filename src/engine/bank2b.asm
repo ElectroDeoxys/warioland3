@@ -2063,9 +2063,9 @@ Func_ad03b: ; ad03b (2b:503b)
 	dw Func_ad0f6
 	dw Func_ad105
 	dw Func_ad12f
-	dw Func_ad14d
-	dw Func_ad170
-	dw Func_ad182
+	dw LoadSceneHiddenFigureGfx1
+	dw LoadSceneHiddenFigureGfx2
+	dw LoadSceneHiddenFigureGfx3
 	dw Func_ad195
 	dw Func_ad1e3
 	dw Func_ad355
@@ -2122,18 +2122,18 @@ Func_ad0d1: ; ad0d1 (2b:50d1)
 ; 0xad0e4
 
 Func_ad0e4: ; ad0e4 (2b:50e4)
-	call Func_ad345
+	call HandleTempleShakeAndRocks
 	ld a, $03
 	ld [w2d880], a
 	xor a
-	ld [wObj7FramesetOffset], a
-	ld [wObj7Action], a
+	ld [w2d0d5], a
+	ld [w2d0db], a
 	jp Func_ad16a
 ; 0xad0f6
 
 Func_ad0f6: ; ad0f6 (2b:50f6)
 	call Func_ad889
-	call Func_ad345
+	call HandleTempleShakeAndRocks
 	ld a, [w2d014]
 	and $0f
 	ret nz
@@ -2143,33 +2143,33 @@ Func_ad0f6: ; ad0f6 (2b:50f6)
 Func_ad105: ; ad105 (2b:5105)
 	ld a, $01
 	ld [w2d896], a
-	call Func_ad345
+	call HandleTempleShakeAndRocks
 	ld a, $00 ; xor a
-	ld [w2d8b2], a
-	ld [w2d8b6], a
-	ld [w2d8ba], a
-	ld [w2d8be], a
-	ld [w2d8c2], a
-	ld [w2d8c6], a
-	ld [w2d8ca], a
-	ld [w2d8ce], a
-	ld [w2d8d2], a
-	ld [w2d8d6], a
+	ld [wTempleRock1Size], a
+	ld [wTempleRock2Size], a
+	ld [wTempleRock3Size], a
+	ld [wTempleRock4Size], a
+	ld [wTempleRock5Size], a
+	ld [wTempleRock6Size], a
+	ld [wTempleRock7Size], a
+	ld [wTempleRock8Size], a
+	ld [wTempleRock9Size], a
+	ld [wTempleRock10Size], a
 	jr Func_ad16a
 ; 0xad12f
 
 Func_ad12f: ; ad12f (2b:512f)
 	call Func_ad889
-	call Func_ad345
+	call HandleTempleShakeAndRocks
 	xor a
-	ld de, $4
-	ld hl, w2d8b0
-	ld b, $0a
-.asm_ad13e
+	ld de, TEMPLE_ROCK_STRUCT_LENGTH
+	ld hl, wTempleRocks
+	ld b, NUM_TEMPLE_ROCKS
+.loop_rocks
 	add [hl]
 	add hl, de
 	dec b
-	jr nz, .asm_ad13e
+	jr nz, .loop_rocks
 	and a
 	ret nz
 	ld a, $08
@@ -2177,26 +2177,26 @@ Func_ad12f: ; ad12f (2b:512f)
 	jp Func_ad016
 ; 0xad14d
 
-Func_ad14d: ; ad14d (2b:514d)
+LoadSceneHiddenFigureGfx1: ; ad14d (2b:514d)
 	xor a ; BANK(VRAM0)
 	ld [wHDMADestVRAMBank], a
-	ld de, $4800
-	ld b, $08
+	ld de, HiddenFigure1Gfx tile $80
+	ld b, HIGH(v0Tiles1) - $80
 	ld c, $7f
-	ld a, $36
-	ld [wObj4Unk19], a
-Func_ad15d: ; ad15d (2b:515d)
-	ld hl, wObj6OAMPtr
+	ld a, BANK(HiddenFigure1Gfx)
+	ld [wHDMABank], a
+SetHDMAForHiddenFigureGfx: ; ad15d (2b:515d)
+	ld hl, wHDMA
 	ld a, d
-	ld [hli], a
+	ld [hli], a ; source ptr
 	ld a, e
 	ld [hli], a
 	ld a, b
-	ld [hli], a
+	ld [hli], a ; dest ptr
 	xor a
 	ld [hli], a
 	ld a, c
-	ld [hl], a
+	ld [hl], a ; mode
 ;	fallthrough
 
 Func_ad16a: ; ad16a (2b:516a)
@@ -2204,26 +2204,26 @@ Func_ad16a: ; ad16a (2b:516a)
 	jp Func_ad016
 ; 0xad170
 
-Func_ad170: ; ad170 (2b:5170)
+LoadSceneHiddenFigureGfx2: ; ad170 (2b:5170)
 	xor a
 	ld [wHDMADestVRAMBank], a
-	ld de, $5000
-	ld b, $10
+	ld de, HiddenFigure1Gfx tile $100
+	ld b, HIGH(v0Tiles2) - $80
 	ld c, $7f
-	ld a, $36
-	ld [wObj4Unk19], a
-	jr Func_ad15d
+	ld a, BANK(HiddenFigure1Gfx)
+	ld [wHDMABank], a
+	jr SetHDMAForHiddenFigureGfx
 ; 0xad182
 
-Func_ad182: ; ad182 (2b:5182)
-	ld a, $01
+LoadSceneHiddenFigureGfx3: ; ad182 (2b:5182)
+	ld a, BANK("VRAM1")
 	ld [wHDMADestVRAMBank], a
-	ld de, $5800
-	ld b, $00
+	ld de, HiddenFigure2Gfx
+	ld b, HIGH(v1Tiles0) - $80
 	ld c, $7f
-	ld a, $36
-	ld [wObj4Unk19], a
-	jr Func_ad15d
+	ld a, BANK(HiddenFigure1Gfx)
+	ld [wHDMABank], a
+	jr SetHDMAForHiddenFigureGfx
 ; 0xad195
 
 Func_ad195: ; ad195 (2b:5195)
@@ -2257,15 +2257,15 @@ Func_ad195: ; ad195 (2b:5195)
 	ld a, $04
 	ld [w2d880], a
 	xor a
-	ld [wObj7FramesetOffset], a
-	ld [wObj7Action], a
+	ld [w2d0d5], a
+	ld [w2d0db], a
 	jp Func_ad016
 ; 0xad1e3
 
 Func_ad1e3: ; ad1e3 (2b:51e3)
 	call Func_ad889
 	ld c, $07
-	ld a, [wObj7FramesetOffset]
+	ld a, [w2d0d5]
 	cp $14
 	jr c, .asm_ad1f1
 	ld c, $03
@@ -2496,8 +2496,8 @@ Func_ad33c: ; ad33c (2b:533c)
 	jp Func_ad016
 ; 0xad345
 
-Func_ad345: ; ad345 (2b:5345)
-	farcall Func_158000
+HandleTempleShakeAndRocks: ; ad345 (2b:5345)
+	farcall _HandleTempleShakeAndRocks
 	ret
 ; 0xad355
 
@@ -3157,7 +3157,7 @@ Data_ad654: ; ad654 (2b:5654)
 
 Func_ad6f5: ; ad6f5 (2b:56f5)
 	call Func_ad889
-	call Func_ad345
+	call HandleTempleShakeAndRocks
 	ld hl, w2d891
 	inc [hl]
 	ld c, l
@@ -3210,42 +3210,42 @@ Func_ad74a:
 	ld a, [bc]
 	cp $10
 	ret c
-	ld hl, w2d8b0
+	ld hl, wTempleRock1
 	jr Func_ad77e
 
 Func_ad753:
 	ld a, [bc]
 	cp $08
 	ret c
-	ld hl, w2d8b4
+	ld hl, wTempleRock2
 	jr Func_ad77e
 
 Func_ad75c:
 	ld a, [bc]
 	cp $14
 	ret c
-	ld hl, w2d8b8
+	ld hl, wTempleRock3
 	jr Func_ad77e
 
 Func_ad765:
 	ld a, [bc]
 	cp $08
 	ret c
-	ld hl, w2d8bc
+	ld hl, wTempleRock4
 	jr Func_ad77e
 
 Func_ad76e:
 	ld a, [bc]
 	cp $10
 	ret c
-	ld hl, w2d8c0
+	ld hl, wTempleRock5
 	jr Func_ad77e
 
 Func_ad777:
 	ld a, [bc]
 	cp $08
 	ret c
-	ld hl, w2d8c4
+	ld hl, wTempleRock6
 
 Func_ad77e:
 	ld b, $01
@@ -3296,25 +3296,25 @@ Func_ad7c1: ; ad7c1 (2b:57c1)
 	ld a, $01
 	ld [w2d896], a
 	ld a, $00
-	ld [w2d8b2], a
-	ld [w2d8b6], a
-	ld [w2d8ba], a
-	ld [w2d8be], a
-	ld [w2d8c2], a
-	ld [w2d8c6], a
+	ld [wTempleRock1Size], a
+	ld [wTempleRock2Size], a
+	ld [wTempleRock3Size], a
+	ld [wTempleRock4Size], a
+	ld [wTempleRock5Size], a
+	ld [wTempleRock6Size], a
 	jp Func_ad335
 ; 0xad7dd
 
 Func_ad7dd: ; ad7dd (2b:57dd)
 	xor a
-	ld de, $4
-	ld hl, w2d8b0
-	ld b, $06
-.asm_ad7e6
+	ld de, TEMPLE_ROCK_STRUCT_LENGTH
+	ld hl, wTempleRocks
+	ld b, NUM_FALLING_TEMPLE_ROCKS
+.loop_rocks
 	add [hl]
 	add hl, de
 	dec b
-	jr nz, .asm_ad7e6
+	jr nz, .loop_rocks
 	and a
 	ret nz
 	jp Func_ad335
@@ -3330,45 +3330,45 @@ Func_ad7f8:
 	ld a, [bc]
 	cp $14
 	ret c
-	ld hl, w2d8b0
+	ld hl, wTempleRock1
 	jr Func_ad823
 
 Func_ad801:
 	ld a, [bc]
 	cp $04
 	ret c
-	ld hl, w2d8b4
+	ld hl, wTempleRock2
 	jr Func_ad823
 
 Func_ad80a:
 	ld a, [bc]
 	cp $0a
 	ret c
-	ld hl, w2d8b8
+	ld hl, wTempleRock3
 	jr Func_ad823
 
 Func_ad813:
 	ld a, [bc]
 	cp $04
 	ret c
-	ld hl, w2d8bc
+	ld hl, wTempleRock4
 	jr Func_ad823
 
 Func_ad81c:
 	ld a, [bc]
 	cp $0a
 	ret c
-	ld hl, w2d8c0
+	ld hl, wTempleRock5
 
 Func_ad823:
 	ld b, $02
 
 Func_ad825: ; ad825 (2b:5825)
 	ld a, $01
-	ld [hli], a
+	ld [hli], a ; action
 	xor a
-	ld [hli], a
-	ld [hl], b
+	ld [hli], a ; counter
+	ld [hl], b  ; size
 	jp Func_ad335
 ; 0xad82e
 
@@ -3376,7 +3376,7 @@ Func_ad82e: ; ad82e (2b:582e)
 	ld a, [bc]
 	cp $0a
 	ret c
-	ld hl, w2d8c4
+	ld hl, wTempleRock6
 	jr Func_ad823
 ; 0xad837
 
@@ -3386,7 +3386,7 @@ Func_ad837: ; ad837 (2b:5837)
 	ret c
 	xor a
 	ld [wSceneObj8Unk7], a
-	ld hl, w2d8c8
+	ld hl, wTempleRock7
 	jr Func_ad823
 ; 0xad844
 
@@ -3396,7 +3396,7 @@ Func_ad844: ; ad844 (2b:5844)
 	ret c
 	xor a
 	ld [wSceneObj9Unk7], a
-	ld hl, w2d8cc
+	ld hl, wTempleRock8
 	jr Func_ad823
 ; 0xad851
 
@@ -3406,7 +3406,7 @@ Func_ad851: ; ad851 (2b:5851)
 	ret c
 	xor a
 	ld [wSceneObj10Unk7], a
-	ld hl, w2d8d0
+	ld hl, wTempleRock9
 	jr Func_ad823
 ; 0xad85e
 
@@ -3416,7 +3416,7 @@ Func_ad85e: ; ad85e (2b:585e)
 	ret c
 	xor a
 	ld [wSceneObj11Unk7], a
-	ld hl, w2d8d4
+	ld hl, wTempleRock10
 	jr Func_ad823
 ; 0xad86b
 

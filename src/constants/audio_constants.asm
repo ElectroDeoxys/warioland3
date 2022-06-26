@@ -23,7 +23,7 @@ DEF AUDIOENG_HAS_CALLBACK EQU (1 << AUDIOENG_HAS_CALLBACK_F)
 DEF AUDIOENG_UNK7         EQU (1 << AUDIOENG_UNK7_F)
 
 ; channel struct members
-rsreset
+RSRESET
 CHANNEL_FLAGS             rb
 CHANNEL_DURATION          rb
 CHANNEL_CMD_PTR           rw
@@ -102,7 +102,7 @@ DEF CHANFLAGS_ACTIVE EQU (1 << CHANFLAGS_ACTIVE_F)
 DEF NUM_TRACKS EQU 4
 
 ; track struct members
-rsreset
+RSRESET
 TRACK_FLAGS           rb
 TRACK_PRIORITY        rb
 TRACK_UNK02           rb

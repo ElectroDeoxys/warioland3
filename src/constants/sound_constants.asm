@@ -331,7 +331,7 @@
 	const SFX_10A                          ; 20a
 	const SFX_10B                          ; 20b
 	const SFX_10C                          ; 20c
-	const SFX_10D                          ; 20d
+	const SFX_TEMPLE_ROCK                          ; 20d
 	const SFX_10E                          ; 20e
 	const SFX_10F                          ; 20f
 	const SFX_110                          ; 210

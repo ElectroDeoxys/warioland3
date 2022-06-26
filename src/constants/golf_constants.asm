@@ -60,7 +60,7 @@ DEF GOLF_LEVEL_TIER_3 EQU const_value - 1
 DEF NUM_GOLF_LEVELS EQU const_value
 
 ; wGolfLevel struct constants
-rsreset
+RSRESET
 GOLF_LEVEL_UNK00 rw ; $00
 GOLF_LEVEL_UNK01 rw ; $01
 GOLF_LEVEL_UNK02 rw ; $02

@@ -1,7 +1,7 @@
 DEF NUM_OBJECTS EQU 8
 
 ; wObjects structs constants
-rsreset
+RSRESET
 OBJ_FLAGS            rb ; $00
 OBJ_UNK_01           rb ; $01
 OBJ_UNK_02           rb ; $02
