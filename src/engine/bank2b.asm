@@ -477,12 +477,12 @@ UpdateSceneWarioAnimation: ; ac528 (2b:4528)
 	ld a, [wSceneWarioOAMBank]
 	ld b, a
 	ld hl, wSceneWario
-	ld a, [w2d14d]
+	ld a, [wSceneWarioIgnoreScroll]
 	and a
 	jp z, AddOWSpriteWithScroll
 	jp AddOWSprite
 
-.DoAnimation: ; ac547 (2b:4547)
+.DoAnimation
 	ld a, [wSceneWarioState]
 	jumptable
 
@@ -984,7 +984,27 @@ UpdateSceneWarioAnimation: ; ac528 (2b:4528)
 	jp .UpdateAnimation
 ; 0xac8b8
 
-	INCROM $ac8b8, $ac8d4
+; unreferenced?
+DebugSceneWario: ; ac8b8 (2b:48b8)
+	ld a, [wJoypadPressed]
+	ld b, a
+	ld a, [wDebugSceneWarioState]
+	bit D_RIGHT_F, b
+	jr nz, .d_right
+	bit D_LEFT_F, b
+	ret z
+; d_left
+	and a
+	jr z, .got_state
+	dec a
+	jr .got_state
+.d_right
+	cp NUM_SCENEWARIO_STATES
+	jr nc, .got_state
+	inc a
+.got_state
+	ld [wDebugSceneWarioState], a
+;	fallthrough
 
 SetSceneWarioState: ; ac8d4 (2b:48d4)
 	ld [wSceneWarioState], a
@@ -1112,7 +1132,7 @@ ENDM
 	ret ; stray ret
 ; 0xac9b7
 
-Func_ac9b7: ; ac9b7 (2b:49b7)
+InvalidMusicBoxAction: ; ac9b7 (2b:49b7)
 	debug_nop
 ; 0xac9ba
 
@@ -1325,7 +1345,7 @@ Func_acaf3: ; acaf3 (2b:4af3)
 	ret
 ; 0xacb25
 
-Func_acb25: ; acb25 (2b:4b25)
+_InitTempleScene: ; acb25 (2b:4b25)
 	call DisableLCD
 	call FillBGMap0_With7f
 	call ClearVirtualOAM
@@ -1366,14 +1386,14 @@ Func_acb25: ; acb25 (2b:4b25)
 	ld a, TREASURE_GOLD_MUSIC_BOX
 	call IsTreasureCollected
 	ld a, TEMPLE_SCENE_ENTERING
-	jp z, .asm_acc3e ; not collected
+	jp z, .set_regular_temple_scene ; not collected
 	ld hl, wGameModeFlags
 	bit MODE_GAME_CLEARED_F, [hl]
-	jr z, .asm_acbb4
+	jr z, .set_hidden_figure_reveal_scene
 	bit MODE_TIME_ATTACK_F, [hl]
-	jp z, .asm_acc3e
-.asm_acbb4
-	ld a, TEMPLE_SCENE_03
+	jp z, .set_regular_temple_scene
+.set_hidden_figure_reveal_scene
+	ld a, TEMPLE_SCENE_HIDDEN_FIGURE_REVEAL
 	ld [wTempleScene], a
 
 	decompress_vram1 TempleMusicBoxSceneGfx, v1Tiles0
@@ -1394,7 +1414,7 @@ Func_acb25: ; acb25 (2b:4b25)
 	hcall Decompress
 	jr .asm_acc68
 
-.asm_acc3e
+.set_regular_temple_scene
 	ld [wTempleScene], a
 	ld a, [wLanguage]
 	and a
@@ -1551,7 +1571,7 @@ VBlank_accb0: ; accb0 (2b:4cb0)
 .func_end
 ; 0xacd3a
 
-UpdateTempleScene: ; acd3a (2b:4d3a)
+_UpdateTempleScene: ; acd3a (2b:4d3a)
 	call .UpdateScene
 	call Func_ac2b2
 	call UpdateSceneWarioAnimation
@@ -1574,10 +1594,10 @@ UpdateTempleScene: ; acd3a (2b:4d3a)
 	ld a, [wTempleScene]
 	jumptable
 
-	dw .Entering           ; TEMPLE_SCENE_ENTERING
-	dw .TalkToHiddenFigure ; TEMPLE_SCENE_TALKING
-	dw .Exiting            ; TEMPLE_SCENE_EXITING
-	dw Func_ad03b          ; TEMPLE_SCENE_03
+	dw .Entering               ; TEMPLE_SCENE_ENTERING
+	dw .TalkToHiddenFigure     ; TEMPLE_SCENE_TALKING
+	dw .Exiting                ; TEMPLE_SCENE_EXITING
+	dw HiddenFigureRevealScene ; TEMPLE_SCENE_HIDDEN_FIGURE_REVEAL
 
 .Entering
 	ld a, [w2da04]
@@ -1709,7 +1729,7 @@ UpdateTempleScene: ; acd3a (2b:4d3a)
 	stop_sfx
 	ld a, $01
 	ld [w2d14c], a
-	ld a, $08
+	ld a, SST_OVERWORLD_08
 	ld [wSubState], a
 	scf
 	ret
@@ -2027,7 +2047,7 @@ SetFightAgainstAHiddenFigure: ; ad01d (2b:501d)
 	ret
 ; 0xad03b
 
-Func_ad03b: ; ad03b (2b:503b)
+HiddenFigureRevealScene: ; ad03b (2b:503b)
 	ld a, [w2d013]
 	cp $02
 	jr c, .cant_skip
@@ -2046,7 +2066,7 @@ Func_ad03b: ; ad03b (2b:503b)
 	jumptable
 
 	dw Func_ad016
-	dw UpdateEnterTempleWithAllMusicBoxesScene
+	dw HandleEnterTempleWithAllMusicBoxesScene
 	dw .Wait1
 	dw InitTextPrinting
 	dw Func_aca9e
@@ -2054,38 +2074,38 @@ Func_ad03b: ; ad03b (2b:503b)
 	dw LoadCurTextPageBufferPage
 	dw Func_acacd
 	dw Func_acae7
-	dw Func_ad0bd
-	dw Func_ad0c0
-	dw Func_ad0d1
+	dw .Func_ad0bd
+	dw .WaitThenShowTextArrow
+	dw .WaitAButtonThenClearTextbox
 	dw Func_ad445
-	dw Func_ad6f5
-	dw Func_ad0e4
-	dw Func_ad0f6
-	dw Func_ad105
-	dw Func_ad12f
-	dw LoadSceneHiddenFigureGfx1
-	dw LoadSceneHiddenFigureGfx2
-	dw LoadSceneHiddenFigureGfx3
-	dw Func_ad195
-	dw Func_ad1e3
-	dw Func_ad355
-	dw Func_ad1f9
-	dw Func_ad1fe
+	dw HandleTempleShakeScene
+	dw .Func_ad0e4
+	dw .Func_ad0f6
+	dw .InitShakeAndRocks
+	dw .Func_ad12f
+	dw .LoadHiddenFigureGfx1
+	dw .LoadHiddenFigureGfx2
+	dw .LoadHiddenFigureGfx3
+	dw .Func_ad195
+	dw .Func_ad1e3
+	dw HandleHiddenFigureReveal
+	dw .Wait3
+	dw .InitTextPrintOnBGMap1
 	dw Func_aca9e
-	dw Func_ad207
+	dw .Func_ad207
 	dw LoadCurTextPageBufferPage
-	dw Func_ad215
-	dw Func_ad21d
-	dw Func_ad22e
-	dw Func_ad23a
+	dw .StartHiddenFigureMouthMovement
+	dw .PlayHiddenFigureLaughSFX
+	dw .PrintTextUntilNextPage
+	dw .Func_ad23a
 	dw LoadCurTextPageBufferPage
-	dw Func_ad259
-	dw Func_ad271
-	dw Func_ad27a
-	dw Func_ad2f4
-	dw Func_ad300
-	dw Func_ad308
-	dw Func_ad319
+	dw .Func_ad259
+	dw .Func_ad271
+	dw .Func_ad27a
+	dw .Func_ad2f4
+	dw .Func_ad300
+	dw .Func_ad308
+	dw .Func_ad319
 	dw SetFightAgainstAHiddenFigure
 
 .Wait1
@@ -2096,11 +2116,10 @@ Func_ad03b: ; ad03b (2b:503b)
 	ld c, 30
 	jp Func_ad011
 
-Func_ad0bd: ; ad0bd (2b:50bd)
+.Func_ad0bd
 	jp Func_acaf3
-; 0xad0c0
 
-Func_ad0c0: ; ad0c0 (2b:50c0)
+.WaitThenShowTextArrow
 	ld a, [w2d014]
 	cp 30
 	ret c
@@ -2108,9 +2127,8 @@ Func_ad0c0: ; ad0c0 (2b:50c0)
 	ld hl, wSceneObj1State
 	call SetSceneObjState
 	jp Func_ad016
-; 0xad0d1
 
-Func_ad0d1: ; ad0d1 (2b:50d1)
+.WaitAButtonThenClearTextbox
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	ret z
@@ -2119,28 +2137,25 @@ Func_ad0d1: ; ad0d1 (2b:50d1)
 	call SetSceneObjState
 	call ClearTextbox
 	jp Func_ad016
-; 0xad0e4
 
-Func_ad0e4: ; ad0e4 (2b:50e4)
+.Func_ad0e4
 	call HandleTempleShakeAndRocks
 	ld a, $03
 	ld [w2d880], a
 	xor a
 	ld [w2d0d5], a
 	ld [w2d0db], a
-	jp Func_ad16a
-; 0xad0f6
+	jp .Func_ad16a
 
-Func_ad0f6: ; ad0f6 (2b:50f6)
-	call Func_ad889
+.Func_ad0f6
+	call HandleTempleWarioPanic
 	call HandleTempleShakeAndRocks
 	ld a, [w2d014]
-	and $0f
-	ret nz
+	and $f
+	ret nz ; only continue when counter reaches 16
 	jp Func_ac9ba
-; 0xad105
 
-Func_ad105: ; ad105 (2b:5105)
+.InitShakeAndRocks
 	ld a, $01
 	ld [w2d896], a
 	call HandleTempleShakeAndRocks
@@ -2155,11 +2170,10 @@ Func_ad105: ; ad105 (2b:5105)
 	ld [wTempleRock8Size], a
 	ld [wTempleRock9Size], a
 	ld [wTempleRock10Size], a
-	jr Func_ad16a
-; 0xad12f
+	jr .Func_ad16a
 
-Func_ad12f: ; ad12f (2b:512f)
-	call Func_ad889
+.Func_ad12f
+	call HandleTempleWarioPanic
 	call HandleTempleShakeAndRocks
 	xor a
 	ld de, TEMPLE_ROCK_STRUCT_LENGTH
@@ -2172,12 +2186,11 @@ Func_ad12f: ; ad12f (2b:512f)
 	jr nz, .loop_rocks
 	and a
 	ret nz
-	ld a, $08
+	ld a, LCDCF_BG9C00
 	ld [w1d800], a
 	jp Func_ad016
-; 0xad14d
 
-LoadSceneHiddenFigureGfx1: ; ad14d (2b:514d)
+.LoadHiddenFigureGfx1
 	xor a ; BANK(VRAM0)
 	ld [wHDMADestVRAMBank], a
 	ld de, HiddenFigure1Gfx tile $80
@@ -2185,7 +2198,8 @@ LoadSceneHiddenFigureGfx1: ; ad14d (2b:514d)
 	ld c, $7f
 	ld a, BANK(HiddenFigure1Gfx)
 	ld [wHDMABank], a
-SetHDMAForHiddenFigureGfx: ; ad15d (2b:515d)
+
+.SetHDMA
 	ld hl, wHDMA
 	ld a, d
 	ld [hli], a ; source ptr
@@ -2197,14 +2211,12 @@ SetHDMAForHiddenFigureGfx: ; ad15d (2b:515d)
 	ld [hli], a
 	ld a, c
 	ld [hl], a ; mode
-;	fallthrough
 
-Func_ad16a: ; ad16a (2b:516a)
-	call Func_ad889
+.Func_ad16a
+	call HandleTempleWarioPanic
 	jp Func_ad016
-; 0xad170
 
-LoadSceneHiddenFigureGfx2: ; ad170 (2b:5170)
+.LoadHiddenFigureGfx2
 	xor a
 	ld [wHDMADestVRAMBank], a
 	ld de, HiddenFigure1Gfx tile $100
@@ -2212,10 +2224,9 @@ LoadSceneHiddenFigureGfx2: ; ad170 (2b:5170)
 	ld c, $7f
 	ld a, BANK(HiddenFigure1Gfx)
 	ld [wHDMABank], a
-	jr SetHDMAForHiddenFigureGfx
-; 0xad182
+	jr .SetHDMA
 
-LoadSceneHiddenFigureGfx3: ; ad182 (2b:5182)
+.LoadHiddenFigureGfx3
 	ld a, BANK("VRAM1")
 	ld [wHDMADestVRAMBank], a
 	ld de, HiddenFigure2Gfx
@@ -2223,13 +2234,12 @@ LoadSceneHiddenFigureGfx3: ; ad182 (2b:5182)
 	ld c, $7f
 	ld a, BANK(HiddenFigure1Gfx)
 	ld [wHDMABank], a
-	jr SetHDMAForHiddenFigureGfx
-; 0xad195
+	jr .SetHDMA
 
-Func_ad195: ; ad195 (2b:5195)
-	call Func_ad889
+.Func_ad195
+	call HandleTempleWarioPanic
 	ld a, [w2d014]
-	cp $1e
+	cp 30
 	ret c
 	ld a, $0d
 	ld hl, wSceneObj7State
@@ -2240,15 +2250,15 @@ Func_ad195: ; ad195 (2b:5195)
 	ld a, $12
 	ld hl, wSceneObj4State
 	call SetSceneObjState
-	ld hl, wSceneObj6End
+	ld hl, wSceneObj7
 	ld a, $38
 	ld [hli], a
 	ld [hl], $50
-	ld hl, wSceneObj3YCoord
+	ld hl, wSceneObj3
 	ld a, $58
 	ld [hli], a
 	ld [hl], $20
-	ld hl, wSceneObj4YCoord
+	ld hl, wSceneObj4
 	ld [hli], a
 	ld [hl], $80
 	ld a, $01
@@ -2260,10 +2270,9 @@ Func_ad195: ; ad195 (2b:5195)
 	ld [w2d0d5], a
 	ld [w2d0db], a
 	jp Func_ad016
-; 0xad1e3
 
-Func_ad1e3: ; ad1e3 (2b:51e3)
-	call Func_ad889
+.Func_ad1e3
+	call HandleTempleWarioPanic
 	ld c, $07
 	ld a, [w2d0d5]
 	cp $14
@@ -2274,56 +2283,49 @@ Func_ad1e3: ; ad1e3 (2b:51e3)
 	and c
 	ret nz
 	jp Func_ac9ba
-; 0xad1f9
 
-Func_ad1f9: ; ad1f9 (2b:51f9)
-	ld c, $28
+.Wait3
+	ld c, 40
 	jp Func_ad011
-; 0xad1fe
 
-Func_ad1fe: ; ad1fe (2b:51fe)
+.InitTextPrintOnBGMap1
 	call InitTextPrinting
 	ld a, $1
 	ld [wBGMapToPrintText], a
 	ret
-; 0xad207
 
-Func_ad207: ; ad207 (2b:5207)
+.Func_ad207
 	ld a, [w2d014]
-	cp $1e
+	cp 30
 	ret c
-	ld a, $04
+	ld a, 4
 	ld [wCurTextBufferPage], a
 	jp Func_ad016
-; 0xad215
 
-Func_ad215: ; ad215 (2b:5215)
+.StartHiddenFigureMouthMovement
 	ld a, $10
 	ld [wSceneObj7State], a
 	jp Func_ad016
-; 0xad21d
 
-Func_ad21d: ; ad21d (2b:521d)
+.PlayHiddenFigureLaughSFX
 	ld a, [wSceneObj7State]
 	cp $0e
-	ret nz
-	play_sfx SFX_0CC
+	ret nz ; wait until mouth is opening
+	play_sfx SFX_HIDDEN_FIGURE_LAUGH
 	jp Func_ad016
-; 0xad22e
 
-Func_ad22e: ; ad22e (2b:522e)
+.PrintTextUntilNextPage
 	call PrintTextWithoutHeader
 	ld a, [wCurTextLine]
 	cp $80
 	ret nz
 	jp Func_ad016
-; 0xad23a
 
-Func_ad23a: ; ad23a (2b:523a)
+.Func_ad23a
 	ld a, [w2d014]
-	cp $28
-	jr z, .asm_ad253
-	cp $46
+	cp 40
+	jr z, .finish_mouth_movement
+	cp 70
 	ret c
 	ld hl, wCurTextBufferPage
 	inc [hl]
@@ -2331,13 +2333,13 @@ Func_ad23a: ; ad23a (2b:523a)
 	ld a, $01
 	call SetSceneObjState
 	jp Func_ad016
-.asm_ad253
+
+.finish_mouth_movement
 	ld a, $0f
 	ld [wSceneObj7State], a
 	ret
-; 0xad259
 
-Func_ad259: ; ad259 (2b:5259)
+.Func_ad259
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	ret z
@@ -2348,24 +2350,22 @@ Func_ad259: ; ad259 (2b:5259)
 	ld a, $10
 	ld [wSceneObj7State], a
 	jp Func_aca6d
-; 0xad271
 
-Func_ad271: ; ad271 (2b:5271)
+.Func_ad271
 	ld a, [wSceneObj7State]
 	cp $0e
 	ret nz
 	jp Func_aca6d
-; 0xad27a
 
-Func_ad27a: ; ad27a (2b:527a)
+.Func_ad27a
 	call PrintTextWithoutHeader
-	call .Func_ad289
+	call .HandleHiddenFigureMouthClosing
 	ld a, [wCurTextLine]
 	cp $80
 	ret nz
 	jp Func_af135
 
-.Func_ad289
+.HandleHiddenFigureMouthClosing
 	ld a, [wPendingCharDest]
 	and a
 	ret z
@@ -2374,66 +2374,69 @@ Func_ad27a: ; ad27a (2b:527a)
 	ret z
 	ld a, [wLanguage]
 	and a
-	jr nz, .asm_ad2b2
+	jr nz, .english
+
+; japanese
 	ld a, [wCurTextBufferPage]
-	cp $05
-	jr z, .asm_ad2ca
-	cp $06
-	jr z, .asm_ad2e0
-	cp $07
-	jr z, .asm_ad2e0
-	cp $08
-	jr z, .asm_ad2e4
-	cp $09
-	jr z, .asm_ad2ca
+	cp 5
+	jr z, .pos1
+	cp 6
+	jr z, .pos8
+	cp 7
+	jr z, .pos8
+	cp 8
+	jr z, .pos12
+	cp 9
+	jr z, .pos1
 	ret
 
-.asm_ad2b2
+.english
 	ld a, [wCurTextBufferPage]
-	cp $05
-	jr z, .asm_ad2e8
-	cp $06
-	jr z, .asm_ad2e4
-	cp $07
-	jr z, .asm_ad2f0
-	cp $08
-	jr z, .asm_ad2ec
-	cp $09
-	jr z, .asm_ad2e4
+	cp 5
+	jr z, .pos10
+	cp 6
+	jr z, .pos12
+	cp 7
+	jr z, .pos5
+	cp 8
+	jr z, .pos11
+	cp 9
+	jr z, .pos12
 	ret
 
-.asm_ad2ca
-	ld b, $01
-.asm_ad2cc
+.pos1
+	ld b, 1
+
+.check_pos
 	ld a, [wCurTextLinePos]
 	cp b
-	ret nz
+	ret nz ; not in target text position
 	ld a, [wCurTextBufferLine]
 	cp 2
 	ret nz
+	; finish Hidden Figure mouth movement
 	ld a, $0f
 	ld [wSceneObj7State], a
-	ld hl, wSceneObj9State
+	ld hl, wSceneObj9State ; useless
 	ret
 
-.asm_ad2e0
-	ld b, $08
-	jr .asm_ad2cc
-.asm_ad2e4
-	ld b, $0c
-	jr .asm_ad2cc
-.asm_ad2e8
-	ld b, $0a
-	jr .asm_ad2cc
-.asm_ad2ec
-	ld b, $0b
-	jr .asm_ad2cc
-.asm_ad2f0
-	ld b, $05
-	jr .asm_ad2cc
-; 0xad2f4
+.pos8
+	ld b, 8
+	jr .check_pos
+.pos12
+	ld b, 12
+	jr .check_pos
+.pos10
+	ld b, 10
+	jr .check_pos
+.pos11
+	ld b, 11
+	jr .check_pos
+.pos5
+	ld b, 5
+	jr .check_pos
 
-Func_ad2f4: ; ad2f4 (2b:52f4)
+.Func_ad2f4
 	ld a, [wSceneObj7State]
 	cp $0d
 	ret nz
@@ -2441,25 +2444,22 @@ Func_ad2f4: ; ad2f4 (2b:52f4)
 	ret c
 	dec [hl]
 	ret
-; 0xad300
 
-Func_ad300: ; ad300 (2b:5300)
-	ld a, $2a
+.Func_ad300
+	ld a, SCENEWARIO_PANIC_JUMP
 	call SetSceneWarioState
 	jp Func_ad016
-; 0xad308
 
-Func_ad308: ; ad308 (2b:5308)
+.Func_ad308
 	ld a, [w2d014]
-	cp $1e
+	cp 30
 	ret c
 	ld hl, wSceneObj1State
 	ld a, $01
 	call SetSceneObjState
 	jp Func_ad016
-; 0xad319
 
-Func_ad319: ; ad319 (2b:5319)
+.Func_ad319
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	ret z
@@ -2501,8 +2501,9 @@ HandleTempleShakeAndRocks: ; ad345 (2b:5345)
 	ret
 ; 0xad355
 
-Func_ad355: ; ad355 (2b:5355)
-	call Func_ad889
+HandleHiddenFigureReveal: ; ad355 (2b:5355)
+	call HandleTempleWarioPanic
+
 	ld hl, w2d891
 	inc [hl]
 	ld c, l
@@ -2511,59 +2512,53 @@ Func_ad355: ; ad355 (2b:5355)
 	ld a, [hl] ; w2d890
 	jumptable
 
-	dw Func_ad36f
-	dw Func_ad37e
-	dw Func_ad386
-	dw Func_ad38e
-	dw Func_ad39a
-	dw Func_ad3a6
+	dw .PlayHiddenFigureRevealMusic
+	dw .StopPanicRun
+	dw .WaitForPanicRunStop
+	dw .SetWarioPanic
+	dw .SetWarioPanicJump
+	dw .WaitUntilLookBack
 	dw Func_ad33c
-; 0xad36f
 
-Func_ad36f: ; ad36f (2b:536f)
+.PlayHiddenFigureRevealMusic
 	play_music2 MUSIC_HIDDEN_FIGURE_REVEAL
 	jp Func_ad335
-; 0xad37e
 
-Func_ad37e: ; ad37e (2b:537e)
+.StopPanicRun
 	ld a, $03
 	ld [w2d892], a
 	jp Func_ad335
-; 0xad386
 
-Func_ad386: ; ad386 (2b:5386)
+.WaitForPanicRunStop
 	ld a, [w2d894]
 	and a
 	ret nz
 	jp Func_ad335
-; 0xad38e
 
-Func_ad38e: ; ad38e (2b:538e)
+.SetWarioPanic
 	ld a, [bc]
-	cp $14
+	cp 20
 	ret c
 	ld a, SCENEWARIO_PANIC
 	call SetSceneWarioState
 	jp Func_ad335
-; 0xad39a
 
-Func_ad39a: ; ad39a (2b:539a)
+.SetWarioPanicJump
 	ld a, [bc]
-	cp $28
+	cp 40
 	ret c
 	ld a, SCENEWARIO_PANIC_JUMP
 	ld [wSceneWarioState], a
 	jp Func_ad335
-; 0xad3a6
 
-Func_ad3a6: ; ad3a6 (2b:53a6)
+.WaitUntilLookBack
 	ld a, [wSceneWarioState]
 	cp SCENEWARIO_LOOK_BACK
 	ret nz
 	jp Func_ad335
 ; 0xad3af
 
-UpdateEnterTempleWithAllMusicBoxesScene: ; ad3af (2b:53af)
+HandleEnterTempleWithAllMusicBoxesScene: ; ad3af (2b:53af)
 	ld hl, w2d891
 	inc [hl]
 	ld c, l
@@ -2660,7 +2655,8 @@ UpdateEnterTempleWithAllMusicBoxesScene: ; ad3af (2b:53af)
 ; 0xad445
 
 Func_ad445: ; ad445 (2b:5445)
-	call Func_ad4b1
+	call HandleTempleMusicBoxes
+
 	ld hl, w2d891
 	inc [hl]
 	ld c, l
@@ -2669,85 +2665,77 @@ Func_ad445: ; ad445 (2b:5445)
 	ld a, [hl] ; w2d890
 	jumptable
 
-	dw Func_ad46d
-	dw Func_ad472
-	dw Func_ad47a
-	dw Func_ad47f
-	dw Func_ad48b
-	dw Func_ad493
-	dw Func_ad49f
-	dw Func_ad4a4
-	dw Func_ad4a4
-	dw Func_ad4a4
-	dw Func_ad4a4
-	dw Func_ad4a9
-	dw Func_ad48b
+	dw .Wait1
+	dw .ShowMusicBoxes
+	dw .WaitUntilRaiseHands
+	dw .SpawnMusicBoxes
+	dw .WaitMusicBoxSequenceFinish
+	dw .LowerHands
+	dw .WaitUntilLookBack
+	dw .Wait2
+	dw .Wait2
+	dw .Wait2
+	dw .Wait2
+	dw .DespawnMusicBoxes
+	dw .WaitMusicBoxSequenceFinish
 	dw Func_ad33c
-; 0xad46d
 
-Func_ad46d: ; ad46d (2b:546d)
-	ld c, $3c
+.Wait1
+	ld c, 60
 	jp Func_ad330
-; 0xad472
 
-Func_ad472: ; ad472 (2b:5472)
+.ShowMusicBoxes
 	ld a, SCENEWARIO_SHOW_MUSIC_BOXES_1
 	call SetSceneWarioState
 	jp Func_ad335
-; 0xad47a
 
-Func_ad47a: ; ad47a (2b:547a)
+.WaitUntilRaiseHands
 	ld b, SCENEWARIO_SHOW_MUSIC_BOXES_3
 	jp Func_ad329
-; 0xad47f
 
-Func_ad47f: ; ad47f (2b:547f)
+.SpawnMusicBoxes
 	ld a, [bc]
-	cp $10
+	cp 16
 	ret c
 	ld a, $01
 	ld [w2d8a0], a
 	jp Func_ad335
-; 0xad48b
 
-Func_ad48b: ; ad48b (2b:548b)
+.WaitMusicBoxSequenceFinish
 	ld a, [w2d8a0]
 	and a
 	ret nz
 	jp Func_ad335
-; 0xad493
 
-Func_ad493: ; ad493 (2b:5493)
+.LowerHands
 	ld a, [bc]
-	cp $3c
+	cp 60
 	ret c
 	ld a, SCENEWARIO_SHOW_MUSIC_BOXES_4
 	call SetSceneWarioState
 	jp Func_ad335
-; 0xad49f
 
-Func_ad49f: ; ad49f (2b:549f)
+.WaitUntilLookBack
 	ld b, SCENEWARIO_LOOK_BACK
 	jp Func_ad329
-; 0xad4a4
 
-Func_ad4a4: ; ad4a4 (2b:54a4)
-	ld c, $f0
+.Wait2
+	ld c, 240
 	jp Func_ad330
-; 0xad4a9
 
-Func_ad4a9: ; ad4a9 (2b:54a9)
+.DespawnMusicBoxes
 	ld a, $08
 	ld [w2d8a0], a
 	jp Func_ad335
 ; 0xad4b1
 
-Func_ad4b1: ; ad4b1 (2b:54b1)
-	call Func_ad55b
-	call Func_ad58a
-	call Func_ad5b9
-	call Func_ad5e8
-	call Func_ad618
+HandleTempleMusicBoxes: ; ad4b1 (2b:54b1)
+	call HandleTempleMusicBox1Hover
+	call HandleTempleMusicBox2Hover
+	call HandleTempleMusicBox3Hover
+	call HandleTempleMusicBox4Hover
+	call HandleTempleMusicBox5Hover
+
 	ld hl, w2d8a0
 	ld a, [hli]
 	inc [hl] ; w2d8a1
@@ -2757,108 +2745,98 @@ Func_ad4b1: ; ad4b1 (2b:54b1)
 	ld c, l
 	jumptable
 
-	dw Func_ad4e6
-	dw Func_ad4ed
-	dw Func_ad4f9
-	dw Func_ad4fe
-	dw Func_ad503
-	dw Func_ad508
-	dw Func_ad50d
-	dw Func_ad4e6
-	dw Func_ad514
-	dw Func_ad523
-	dw Func_ad52b
-	dw Func_ad533
-	dw Func_ad53b
-	dw Func_ad50d
-; 0xad4e6
+	dw .Next
+	dw .InitYellowMusicBox
+	dw .InitBlueMusicBox
+	dw .InitGreenMusicBox
+	dw .InitRedMusicBox
+	dw .InitGoldMusicBox
+	dw .Reset
+	dw .Next
+	dw .DeinitYellowMusicBox
+	dw .DeinitBlueMusicBox
+	dw .DeinitGreenMusicBox
+	dw .DeinitRedMusicBox
+	dw .DeinitGoldMusicBox
+	dw .Reset
 
-Func_ad4e6: ; ad4e6 (2b:54e6)
+.Next
 	ld hl, w2d8a1
 	xor a
 	ld [hld], a
 	inc [hl] ; w2d8a0
 	ret
-; 0xad4ed
 
-Func_ad4ed: ; ad4ed (2b:54ed)
-	ld hl, w2d8a2
-Func_ad4f0: ; ad4f0 (2b:54f0)
+.InitYellowMusicBox
+	ld hl, wTempleMusicBox1
+
+.WaitThenInitMusicBox
 	ld a, [bc]
-	cp $10
+	cp 16
 	ret c
 	ld a, $01
 	ld [hl], a
-	jr Func_ad4e6
-; 0xad4f9
+	jr .Next
 
-Func_ad4f9: ; ad4f9 (2b:54f9)
-	ld hl, w2d8a4
-	jr Func_ad4f0
-; 0xad4fe
+.InitBlueMusicBox
+	ld hl, wTempleMusicBox2
+	jr .WaitThenInitMusicBox
 
-Func_ad4fe: ; ad4fe (2b:54fe)
-	ld hl, w2d8a6
-	jr Func_ad4f0
-; 0xad503
+.InitGreenMusicBox
+	ld hl, wTempleMusicBox3
+	jr .WaitThenInitMusicBox
 
-Func_ad503: ; ad503 (2b:5503)
-	ld hl, w2d8a8
-	jr Func_ad4f0
-; 0xad508
+.InitRedMusicBox
+	ld hl, wTempleMusicBox4
+	jr .WaitThenInitMusicBox
 
-Func_ad508: ; ad508 (2b:5508)
-	ld hl, w2d8aa
-	jr Func_ad4f0
-; 0xad50d
+.InitGoldMusicBox
+	ld hl, wTempleMusicBox5
+	jr .WaitThenInitMusicBox
 
-Func_ad50d: ; ad50d (2b:550d)
+.Reset
 	ld hl, w2d8a0
 	xor a
 	ld [hli], a
 	ld [hl], a ; w2d8a1
 	ret
-; 0xad514
 
-Func_ad514: ; ad514 (2b:5514)
-	ld de, w2d8a2
+.DeinitYellowMusicBox
+	ld de, wTempleMusicBox1
 	ld hl, wSceneObj8Unk7
 
-Func_ad51a:
+.WaitThenDeinitMusicBox
 	ld a, [hld]
-	cp $10
+	cp 16
 	ret nz
 	xor a
 	ld [hl], a
 	ld [de], a
-	jr Func_ad4e6
-; 0xad523
+	jr .Next
 
-Func_ad523: ; ad523 (2b:5523)
-	ld de, w2d8a4
+.DeinitBlueMusicBox
+	ld de, wTempleMusicBox2
 	ld hl, wSceneObj9Unk7
-	jr Func_ad51a
-; 0xad52b
+	jr .WaitThenDeinitMusicBox
 
-Func_ad52b: ; ad52b (2b:552b)
-	ld de, w2d8a6
+.DeinitGreenMusicBox
+	ld de, wTempleMusicBox3
 	ld hl, wSceneObj10Unk7
-	jr Func_ad51a
-; 0xad533
+	jr .WaitThenDeinitMusicBox
 
-Func_ad533: ; ad533 (2b:5533)
-	ld de, w2d8a8
+.DeinitRedMusicBox
+	ld de, wTempleMusicBox4
 	ld hl, wSceneObj11Unk7
-	jr Func_ad51a
-; 0xad53b
+	jr .WaitThenDeinitMusicBox
 
-Func_ad53b: ; ad53b (2b:553b)
-	ld de, w2d8aa
+.DeinitGoldMusicBox
+	ld de, wTempleMusicBox5
 	ld hl, wSceneObj12Unk7
-	jr Func_ad51a
+	jr .WaitThenDeinitMusicBox
 ; 0xad543
 
-Func_ad543: ; ad543 (2b:5543)
+; a = scene obj state
+InitTempleSceneMusicBox: ; ad543 (2b:5543)
 	ld [hl], $50 ; y
 	inc l
 	ld [hl], $4e ; x
@@ -2868,7 +2846,7 @@ Func_ad543: ; ad543 (2b:5543)
 	ret
 ; 0xad54f
 
-Func_ad54f: ; ad54f (2b:554f)
+MoveMusicBoxUpLeft: ; ad54f (2b:554f)
 	dec [hl] ; x
 	dec l
 	dec [hl] ; y
@@ -2885,191 +2863,56 @@ Func_ad557: ; ad557 (2b:5557)
 	ret
 ; 0xad55b
 
-Func_ad55b: ; ad55b (2b:555b)
-	ld hl, w2d8a2
+; \1 = music box number
+; \2 = scene object to use
+; \3 = obj state
+MACRO temple_music_box_hover
+HandleTempleMusicBox\1Hover:
+	ld hl, wTempleMusicBox\1
 	ld a, [hli]
 	and a
 	ret z
 	jumptable
 
-	dw Func_ac9b7
-	dw Func_ad56a
-	dw Func_ad577
-	dw Func_ad580
-; 0xad56a
+	dw InvalidMusicBoxAction
+	dw .Init
+	dw .MoveUpLeft
+	dw .MoveCircle
 
-Func_ad56a: ; ad56a (2b:556a)
-	ld hl, wSceneObj8
-	ld a, $03
-	call Func_ad543
-
-Func_ad572: ; ad572 (2b:5572)
-	ld hl, w2d8a3
-	jr Func_ad557
-; 0xad577
-
-Func_ad577: ; ad577 (2b:5577)
-	ld hl, wSceneObj8XCoord
-	call Func_ad54f
-	ret nz
-	jr Func_ad572
-; 0xad580
-
-Func_ad580: ; ad580 (2b:5580)
-	ld hl, wSceneObj8
-	ld de, Data_ad654
-	call ApplyMovement
-	ret
-; 0xad58a
-
-Func_ad58a: ; ad58a (2b:558a)
-	ld hl, w2d8a4
-	ld a, [hli]
-	and a
-	ret z
-	jumptable
-
-	dw Func_ac9b7
-	dw Func_ad599
-	dw Func_ad5a6
-	dw Func_ad5af
-; 0xad599
-
-Func_ad599: ; ad599 (2b:5599)
-	ld hl, wSceneObj9
-	ld a, $04
-	call Func_ad543
-
-Func_ad5a1:
-	ld hl, w2d8a5
-	jr Func_ad557
-; 0xad5a6
-
-Func_ad5a6: ; ad5a6 (2b:55a6)
-	ld hl, wSceneObj9XCoord
-	call Func_ad54f
-	ret nz
-	jr Func_ad5a1
-; 0xad5af
-
-Func_ad5af: ; ad5af (2b:55af)
-	ld hl, wSceneObj9
-	ld de, Data_ad654
-	call ApplyMovement
-	ret
-; 0xad5b9
-
-Func_ad5b9: ; ad5b9 (2b:55b9)
-	ld hl, w2d8a6
-	ld a, [hli]
-	and a
-	ret z
-	jumptable
-
-	dw Func_ac9b7
-	dw Func_ad5c8
-	dw Func_ad5d5
-	dw Func_ad5de
-; 0xad5c8
-
-Func_ad5c8: ; ad5c8 (2b:55c8)
-	ld hl, wSceneObj10
-	ld a, $05
-	call Func_ad543
-
-Func_ad5d0:
-	ld hl, w2d8a7
-	jr Func_ad557
-; 0xad5d5
-
-Func_ad5d5: ; ad5d5 (2b:55d5)
-	ld hl, wSceneObj10XCoord
-	call Func_ad54f
-	ret nz
-	jr Func_ad5d0
-; 0xad5de
-
-Func_ad5de: ; ad5de (2b:55de)
-	ld hl, wSceneObj10
-	ld de, Data_ad654
-	call ApplyMovement
-	ret
-; 0xad5e8
-
-Func_ad5e8: ; ad5e8 (2b:55e8)
-	ld hl, w2d8a8
-	ld a, [hli]
-	and a
-	ret z
-	jumptable
-
-	dw Func_ac9b7
-	dw Func_ad5f7
-	dw Func_ad605
-	dw Func_ad60e
-; 0xad5f7
-
-Func_ad5f7: ; ad5f7 (2b:55f7)
-	ld hl, wSceneObj11
-	ld a, $06
-	call Func_ad543
-
-Func_ad5ff:
-	ld hl, w2d8a9
+.Init
+	ld hl, \2
+	ld a, \3
+	call InitTempleSceneMusicBox
+.Next
+	ld hl, wTempleMusicBox\1Counter
+IF (Func_ad557) - @ > 127 || (Func_ad557) - @ < -129
 	jp Func_ad557
-; 0xad605
+ELSE
+	jr Func_ad557
+ENDC
 
-Func_ad605: ; ad605 (2b:5605)
-	ld hl, wSceneObj11XCoord
-	call Func_ad54f
+.MoveUpLeft
+	ld hl, \2XCoord
+	call MoveMusicBoxUpLeft
 	ret nz
-	jr Func_ad5ff
-; 0xad60e
-
-Func_ad60e: ; ad60e (2b:560e)
-	ld hl, wSceneObj11
-	ld de, Data_ad654
-	call ApplyMovement
-	ret
-; 0xad618
-
-Func_ad618: ; ad618 (2b:5618)
-	ld hl, w2d8aa
-	ld a, [hli]
-	and a
-	ret z
-	jumptable
-
-	dw Func_ac9b7
-	dw Func_ad627
-	dw Func_ad635
-	dw Func_ad64a
-; 0xad627
-
-Func_ad627: ; ad627 (2b:5627)
-	ld hl, wSceneObj12
-	ld a, $07
-	call Func_ad543
-
-Func_ad62f:
-	ld hl, w2d8ab
-	jp Func_ad557
-; 0xad635
-
-Func_ad635: ; ad635 (2b:5635)
-	ld hl, wSceneObj12XCoord
-	call Func_ad54f
-	ret nz
+IF (\1) == 5
+	; play music if it's the last Music Box
 	play_music2 MUSIC_MUSIC_BOXES
-	jr Func_ad62f
-; 0xad64a
+ENDC
+	jr .Next
 
-Func_ad64a: ; ad64a (2b:564a)
-	ld hl, wSceneObj11End
+.MoveCircle
+	ld hl, \2
 	ld de, Data_ad654
 	call ApplyMovement
 	ret
-; 0xad654
+ENDM
+
+	temple_music_box_hover 1, wSceneObj8,  $3
+	temple_music_box_hover 2, wSceneObj9,  $4
+	temple_music_box_hover 3, wSceneObj10, $5
+	temple_music_box_hover 4, wSceneObj11, $6
+	temple_music_box_hover 5, wSceneObj12, $7
 
 Data_ad654: ; ad654 (2b:5654)
 	db -2,  0
@@ -3155,109 +2998,107 @@ Data_ad654: ; ad654 (2b:5654)
 	db $80
 ; 0xad6f5
 
-Func_ad6f5: ; ad6f5 (2b:56f5)
-	call Func_ad889
+HandleTempleShakeScene: ; ad6f5 (2b:56f5)
+	call HandleTempleWarioPanic
 	call HandleTempleShakeAndRocks
+
 	ld hl, w2d891
 	inc [hl]
 	ld c, l
 	ld b, h
 	dec l
-	ld a, [hl]
+	ld a, [hl] ; w2d890
 	jumptable
 
-	dw Func_ad73e
-	dw Func_ad74a
-	dw Func_ad753
-	dw Func_ad75c
-	dw Func_ad765
-	dw Func_ad76e
-	dw Func_ad777
-	dw Func_ad783
-	dw Func_ad7a7
-	dw Func_ad7af
-	dw Func_ad7b4
-	dw Func_ad7bc
-	dw Func_ad7c1
-	dw Func_ad7dd
-	dw Func_ad7f0
-	dw Func_ad7f8
-	dw Func_ad801
-	dw Func_ad80a
-	dw Func_ad813
-	dw Func_ad81c
-	dw Func_ad82e
-	dw Func_ad837
-	dw Func_ad844
-	dw Func_ad851
-	dw Func_ad85e
-	dw Func_ad86b
-	dw Func_ad878
-	dw Func_ad87d
+	dw .StartShake
+	dw .InitSmallRock1
+	dw .InitSmallRock2
+	dw .InitSmallRock3
+	dw .InitSmallRock4
+	dw .InitSmallRock5
+	dw .InitSmallRock6
+	dw .ShowExclamationMark
+	dw .WaitExclamationMark
+	dw .Wait
+	dw .LookAround
+	dw .WaitUntilLookForward
+	dw .StopShakeAndDeinitRocks
+	dw .WaitUntilRocksDeinit
+	dw .StartBigShake
+	dw .InitLargeRock1
+	dw .InitLargeRock2
+	dw .InitLargeRock3
+	dw .InitLargeRock4
+	dw .InitLargeRock5
+	dw .InitLargeRock6
+	dw .InitLargeRock7
+	dw .InitLargeRock8
+	dw .InitLargeRock9
+	dw .InitLargeRock10
+	dw .PanicJump
+	dw .LookBack
+	dw .StopShake
 	dw Func_ad33c
-; 0xad73e
 
-Func_ad73e: ; ad73e (2b:573e)
+.StartShake
 	ld a, [bc]
-	cp $5a
+	cp 90
 	ret c
 	ld a, $02
 	ld [w2d896], a
 	jp Func_ad335
-; 0xad74a
 
-Func_ad74a:
+.InitSmallRock1
 	ld a, [bc]
-	cp $10
+	cp 16
 	ret c
 	ld hl, wTempleRock1
-	jr Func_ad77e
+	jr .InitSmallTempleRock
 
-Func_ad753:
+.InitSmallRock2
 	ld a, [bc]
-	cp $08
+	cp 8
 	ret c
 	ld hl, wTempleRock2
-	jr Func_ad77e
+	jr .InitSmallTempleRock
 
-Func_ad75c:
+.InitSmallRock3
 	ld a, [bc]
-	cp $14
+	cp 20
 	ret c
 	ld hl, wTempleRock3
-	jr Func_ad77e
+	jr .InitSmallTempleRock
 
-Func_ad765:
+.InitSmallRock4
 	ld a, [bc]
-	cp $08
+	cp 8
 	ret c
 	ld hl, wTempleRock4
-	jr Func_ad77e
+	jr .InitSmallTempleRock
 
-Func_ad76e:
+.InitSmallRock5
 	ld a, [bc]
-	cp $10
+	cp 16
 	ret c
 	ld hl, wTempleRock5
-	jr Func_ad77e
+	jr .InitSmallTempleRock
 
-Func_ad777:
+.InitSmallRock6
 	ld a, [bc]
-	cp $08
+	cp 8
 	ret c
 	ld hl, wTempleRock6
 
-Func_ad77e:
+.InitSmallTempleRock
 	ld b, $01
-	jp Func_ad825
-; 0xad783
+	jp .InitTempleRock
 
-Func_ad783: ; ad783 (2b:5783)
+.ShowExclamationMark
 	ld a, [bc]
-	cp $3c
+	cp 60
 	ret c
 	ld hl, w2d180
-	ld a, [wSceneWario]
+	ld a, [wSceneWarioYCoord]
 	sub $1c
 	ld [hli], a ; y
 	ld a, [wSceneWarioXCoord]
@@ -3267,32 +3108,27 @@ Func_ad783: ; ad783 (2b:5783)
 	call SetSceneObjState
 	play_sfx SFX_106
 	jp Func_ad335
-; 0xad7a7
 
-Func_ad7a7: ; ad7a7 (2b:57a7)
+.WaitExclamationMark
 	ld a, [w2d180State]
 	and a
 	ret nz
 	jp Func_ad335
-; 0xad7af
 
-Func_ad7af: ; ad7af (2b:57af)
-	ld c, $2d
+.Wait
+	ld c, 45
 	jp Func_ad330
-; 0xad7b4
 
-Func_ad7b4: ; ad7b4 (2b:57b4)
+.LookAround
 	ld a, SCENEWARIO_LOOK_AROUND
 	call SetSceneWarioState
 	jp Func_ad335
-; 0xad7bc
 
-Func_ad7bc: ; ad7bc (2b:57bc)
+.WaitUntilLookForward
 	ld b, SCENEWARIO_LOOK_FORWARD
 	jp Func_ad329
-; 0xad7c1
 
-Func_ad7c1: ; ad7c1 (2b:57c1)
+.StopShakeAndDeinitRocks
 	ld a, $01
 	ld [w2d896], a
 	ld a, $00
@@ -3303,9 +3139,8 @@ Func_ad7c1: ; ad7c1 (2b:57c1)
 	ld [wTempleRock5Size], a
 	ld [wTempleRock6Size], a
 	jp Func_ad335
-; 0xad7dd
 
-Func_ad7dd: ; ad7dd (2b:57dd)
+.WaitUntilRocksDeinit
 	xor a
 	ld de, TEMPLE_ROCK_STRUCT_LENGTH
 	ld hl, wTempleRocks
@@ -3318,134 +3153,125 @@ Func_ad7dd: ; ad7dd (2b:57dd)
 	and a
 	ret nz
 	jp Func_ad335
-; 0xad7f0
 
-Func_ad7f0: ; ad7f0 (2b:57f0)
+.StartBigShake
 	ld a, $0b
 	ld [w2d896], a
 	jp Func_ad335
-; 0xad7f8
 
-Func_ad7f8:
+.InitLargeRock1
 	ld a, [bc]
-	cp $14
+	cp 20
 	ret c
 	ld hl, wTempleRock1
-	jr Func_ad823
+	jr .InitLargeTempleRock
 
-Func_ad801:
+.InitLargeRock2
 	ld a, [bc]
-	cp $04
+	cp 4
 	ret c
 	ld hl, wTempleRock2
-	jr Func_ad823
+	jr .InitLargeTempleRock
 
-Func_ad80a:
+.InitLargeRock3
 	ld a, [bc]
-	cp $0a
+	cp 10
 	ret c
 	ld hl, wTempleRock3
-	jr Func_ad823
+	jr .InitLargeTempleRock
 
-Func_ad813:
+.InitLargeRock4
 	ld a, [bc]
-	cp $04
+	cp 4
 	ret c
 	ld hl, wTempleRock4
-	jr Func_ad823
+	jr .InitLargeTempleRock
 
-Func_ad81c:
+.InitLargeRock5
 	ld a, [bc]
-	cp $0a
+	cp 10
 	ret c
 	ld hl, wTempleRock5
 
-Func_ad823:
+.InitLargeTempleRock
 	ld b, $02
-
-Func_ad825: ; ad825 (2b:5825)
+.InitTempleRock
 	ld a, $01
 	ld [hli], a ; action
 	xor a
 	ld [hli], a ; counter
 	ld [hl], b  ; size
 	jp Func_ad335
-; 0xad82e
 
-Func_ad82e: ; ad82e (2b:582e)
+.InitLargeRock6
 	ld a, [bc]
-	cp $0a
+	cp 10
 	ret c
 	ld hl, wTempleRock6
-	jr Func_ad823
+	jr .InitLargeTempleRock
 ; 0xad837
 
-Func_ad837: ; ad837 (2b:5837)
+.InitLargeRock7
 	ld a, [bc]
-	cp $1e
+	cp 30
 	ret c
 	xor a
 	ld [wSceneObj8Unk7], a
 	ld hl, wTempleRock7
-	jr Func_ad823
-; 0xad844
+	jr .InitLargeTempleRock
 
-Func_ad844: ; ad844 (2b:5844)
+.InitLargeRock8
 	ld a, [bc]
-	cp $08
+	cp 8
 	ret c
 	xor a
 	ld [wSceneObj9Unk7], a
 	ld hl, wTempleRock8
-	jr Func_ad823
-; 0xad851
+	jr .InitLargeTempleRock
 
-Func_ad851: ; ad851 (2b:5851)
+.InitLargeRock9
 	ld a, [bc]
-	cp $0a
+	cp 10
 	ret c
 	xor a
 	ld [wSceneObj10Unk7], a
 	ld hl, wTempleRock9
-	jr Func_ad823
-; 0xad85e
+	jr .InitLargeTempleRock
 
-Func_ad85e: ; ad85e (2b:585e)
+.InitLargeRock10
 	ld a, [bc]
-	cp $08
+	cp 8
 	ret c
 	xor a
 	ld [wSceneObj11Unk7], a
 	ld hl, wTempleRock10
-	jr Func_ad823
-; 0xad86b
+	jr .InitLargeTempleRock
 
-Func_ad86b: ; ad86b (2b:586b)
-	ld a, $01
-	ld [w2d14d], a
+.PanicJump
+	ld a, TRUE
+	ld [wSceneWarioIgnoreScroll], a
 	ld a, SCENEWARIO_PANIC_JUMP
 	call SetSceneWarioState
 	jp Func_ad335
-; 0xad878
 
-Func_ad878: ; ad878 (2b:5878)
-	ld b, $02
+.LookBack: ; ad878 (2b:5878)
+	ld b, SCENEWARIO_LOOK_BACK
 	jp Func_ad329
-; 0xad87d
 
-Func_ad87d: ; ad87d (2b:587d)
+.StopShake
 	ld a, [bc]
-	cp $08
+	cp 8
 	ret c
 	ld a, $01
 	ld [w2d894], a
 	jp Func_ad335
 ; 0xad889
 
-Func_ad889: ; ad889 (2b:5889)
+HandleTempleWarioPanic: ; ad889 (2b:5889)
 	ld a, [w2d894]
 	cp $01
 	ret nz
+
 	ld hl, w2d893
 	inc [hl]
 	ld c, l
@@ -3454,89 +3280,86 @@ Func_ad889: ; ad889 (2b:5889)
 	ld a, [hl] ; w2d892
 	jumptable
 
-	dw Func_ad8a8
-	dw Func_ad8b5
-	dw Func_ad8c3
-	dw Func_ad8d7
-	dw Func_ad8b5
-	dw Func_ad8f1
-	dw Func_ad8ff
-	dw Func_ad90a
-; 0xad8a8
+	dw .PanicRunRight
+	dw .MoveRight
+	dw .MoveLeft
+	dw .PanicRunUntilMovingRight
+	dw .MoveRight
+	dw .MoveLeftToCentre
+	dw .TurnBack
+	dw .WaitUntilLookBackThenFinish
 
-Func_ad8a8: ; ad8a8 (2b:58a8)
+.PanicRunRight
 	ld a, SCENEWARIO_PANIC_RUN_RIGHT
 	call SetSceneWarioState
-Func_ad8ad: ; ad8ad (2b:58ad)
+
+.Next
 	ld hl, w2d892
 	inc [hl]
 	xor a
 	inc l
 	ld [hl], a ; w2d893
 	ret
-; 0xad8b5
 
-Func_ad8b5: ; ad8b5 (2b:58b5)
+.MoveRight
 	call ApplySceneWarioMovementRight
 	cp $80
 	ret nz
 	ld [hl], a
 	ld a, SCENEWARIO_PANIC_RUN_LEFT
 	call SetSceneWarioState
-	jr Func_ad8ad
-; 0xad8c3
+	jr .Next
 
-Func_ad8c3: ; ad8c3 (2b:58c3)
+.MoveLeft
 	call ApplySceneWarioMovementLeft
 	cp $20
 	ret nz
 	ld [hl], a
 	ld a, SCENEWARIO_PANIC_RUN_RIGHT
 	call SetSceneWarioState
+
+; Previous
 	ld hl, w2d892
 	dec [hl]
 	xor a
 	inc l
 	ld [hl], a ; w2d893
 	ret
-; 0xad8d7
 
-Func_ad8d7: ; ad8d7 (2b:58d7)
+.PanicRunUntilMovingRight
 	ld a, [wSceneWarioState]
 	cp SCENEWARIO_PANIC_RUN_RIGHT
-	jr z, .asm_ad8ec
+	jr z, .moving_right
 	call ApplySceneWarioMovementLeft
 	cp $20
 	ret nz
 	ld [hl], a
 	ld a, SCENEWARIO_PANIC_RUN_RIGHT
 	call SetSceneWarioState
-	jr Func_ad8ad
-.asm_ad8ec
-	call Func_ad8ad
-	jr Func_ad8b5
-; 0xad8f1
+	jr .Next
 
-Func_ad8f1: ; ad8f1 (2b:58f1)
+.moving_right
+	call .Next
+	jr .MoveRight
+
+.MoveLeftToCentre
 	call ApplySceneWarioMovementLeft
 	cp $50
 	ret nz
 	ld [hl], a
 	ld a, SCENEWARIO_IDLE_LEFT
 	call SetSceneWarioState
-	jr Func_ad8ad
-; 0xad8ff
+	jr .Next
 
-Func_ad8ff: ; ad8ff (2b:58ff)
+.TurnBack
 	ld a, [bc]
-	cp $14
+	cp 20
 	ret c
 	ld a, SCENEWARIO_TURN_BACK_LEFT
 	call SetSceneWarioState
-	jr Func_ad8ad
-; 0xad90a
+	jr .Next
 
-Func_ad90a: ; ad90a (2b:590a)
+.WaitUntilLookBackThenFinish
 	ld a, [wSceneWarioState]
 	cp SCENEWARIO_LOOK_BACK
 	ret nz
@@ -3843,7 +3666,7 @@ Func_ae079: ; ae079 (2b:6079)
 	ld a, LCDCF_BG9C00
 	ld [wLCDCFlagsToFlip], a
 	ld a, $50
-	ld hl, wSceneObj7End
+	ld hl, wSceneObj8
 	ld [hli], a
 	ld [hl], a
 	ld a, $0d
@@ -5260,7 +5083,7 @@ Func_ae8bb: ; ae8bb (2b:68bb)
 	ld a, [w2d8a1]
 	cp $08
 	ret c
-	ld hl, w2d8a3
+	ld hl, wPlanePart1Counter
 	call Func_ae915
 	jp .asm_ae912
 
@@ -5268,7 +5091,7 @@ Func_ae8bb: ; ae8bb (2b:68bb)
 	ld a, [w2d8a1]
 	cp $08
 	ret c
-	ld hl, w2d8a5
+	ld hl, wPlanePart2Counter
 	call Func_ae915
 	jr .asm_ae912
 
@@ -5276,7 +5099,7 @@ Func_ae8bb: ; ae8bb (2b:68bb)
 	ld a, [w2d8a1]
 	cp $08
 	ret c
-	ld hl, w2d8a7
+	ld hl, wPlanePart3Counter
 	call Func_ae915
 	jr .asm_ae912
 
@@ -5284,7 +5107,7 @@ Func_ae8bb: ; ae8bb (2b:68bb)
 	ld a, [w2d8a1]
 	cp $08
 	ret c
-	ld hl, w2d8a9
+	ld hl, wPlanePart4Counter
 	call Func_ae915
 	jr .asm_ae912 ; unnecessary jump
 .asm_ae912
@@ -5309,10 +5132,10 @@ Func_ae919: ; ae919 (2b:6919)
 ; 0xae924
 
 Func_ae924: ; ae924 (2b:6924)
-	ld hl, w2d8a3
+	ld hl, wPlanePart1Counter
 	inc [hl]
 	dec l
-	ld a, [hl] ; w2d8a2
+	ld a, [hl] ; wPlanePart1Action
 	and a
 	ret z
 	dec a
@@ -5336,7 +5159,7 @@ Func_ae948: ; ae948 (2b:6948)
 	play_sfx SFX_006
 
 Func_ae950: ; ae950 (2b:6950)
-	ld hl, w2d8a3
+	ld hl, wPlanePart1Counter
 	jp Func_ae915
 ; 0xae956
 
@@ -5345,13 +5168,13 @@ Func_ae956: ; ae956 (2b:6956)
 	cp $62
 	ret nz
 	play_sfx SFX_006
-	ld hl, w2d8a2
+	ld hl, wPlanePart1Action
 	inc [hl]
 	ret
 ; 0xae969
 
 Func_ae969: ; ae969 (2b:6969)
-	ld hl, w2d8a3
+	ld hl, wPlanePart1Counter
 	ld a, [hl]
 	cp c
 	ret c
@@ -5432,7 +5255,7 @@ Func_ae9c1: ; ae9c1 (2b:69c1)
 
 Func_ae9c5: ; ae9c5 (2b:69c5)
 	xor a
-	ld [w2d8a2], a
+	ld [wPlanePart1Action], a
 	ld hl, wSceneObj3State
 	call SetSceneObjState
 	ret
@@ -5460,10 +5283,10 @@ Func_ae9e4: ; ae9e4 (2b:69e4)
 ; 0xae9ee
 
 Func_ae9ee: ; ae9ee (2b:69ee)
-	ld hl, w2d8a5
+	ld hl, wPlanePart2Counter
 	inc [hl]
 	dec l
-	ld a, [hl] ; w2d8a4
+	ld a, [hl] ; wPlanePart2Action
 	and a
 	ret z
 	dec a
@@ -5487,7 +5310,7 @@ Func_ae9ee: ; ae9ee (2b:69ee)
 .Func_aea16
 	play_sfx SFX_006
 .Func_aea1e
-	ld hl, w2d8a5
+	ld hl, wPlanePart2Counter
 	jp Func_ae915
 
 .Func_aea24
@@ -5495,12 +5318,12 @@ Func_ae9ee: ; ae9ee (2b:69ee)
 	cp $62
 	ret nz
 	play_sfx SFX_006
-	ld hl, w2d8a4
+	ld hl, wPlanePart2Action
 	inc [hl]
 	ret
 
 .Func_aea37
-	ld hl, w2d8a5
+	ld hl, wPlanePart2Counter
 	ld a, [hl]
 	cp c
 	ret c
@@ -5569,7 +5392,7 @@ Func_ae9ee: ; ae9ee (2b:69ee)
 	ld hl, wSceneObj1State
 	call SetSceneObjState
 	play_sfx SFX_006
-	ld hl, w2d8a4
+	ld hl, wPlanePart2Action
 	inc [hl]
 	ret
 
@@ -5604,7 +5427,7 @@ Func_ae9ee: ; ae9ee (2b:69ee)
 
 .Func_aeae4
 	xor a
-	ld [w2d8a4], a
+	ld [wPlanePart2Action], a
 	ld hl, wSceneObj4State
 	call SetSceneObjState
 	ret
@@ -5629,10 +5452,10 @@ Func_ae9ee: ; ae9ee (2b:69ee)
 ; 0xaeb0d
 
 Func_aeb0d: ; aeb0d (2b:6b0d)
-	ld hl, w2d8a7
+	ld hl, wPlanePart3Counter
 	inc [hl]
 	dec l
-	ld a, [hl] ; w2d8a6
+	ld a, [hl] ; wPlanePart3Action
 	and a
 	ret z
 	dec a
@@ -5656,7 +5479,7 @@ Func_aeb0d: ; aeb0d (2b:6b0d)
 .Func_aeb35
 	play_sfx SFX_006
 .Func_aeb3d
-	ld hl, w2d8a7
+	ld hl, wPlanePart3Counter
 	jp Func_ae915
 
 .Func_aeb43
@@ -5664,12 +5487,12 @@ Func_aeb0d: ; aeb0d (2b:6b0d)
 	cp $62
 	ret nz
 	play_sfx SFX_006
-	ld hl, w2d8a6
+	ld hl, wPlanePart3Action
 	inc [hl]
 	ret
 
 .Func_aeb56
-	ld hl, w2d8a7
+	ld hl, wPlanePart3Counter
 	ld a, [hl]
 	cp c
 	ret c
@@ -5701,7 +5524,7 @@ Func_aeb0d: ; aeb0d (2b:6b0d)
 	ld hl, wSceneObj2State
 	call SetSceneObjState
 	play_sfx SFX_006
-	ld hl, w2d8a6
+	ld hl, wPlanePart3Action
 	inc [hl]
 	ret
 
@@ -5766,7 +5589,7 @@ Func_aeb0d: ; aeb0d (2b:6b0d)
 
 .Func_aec00
 	xor a
-	ld [w2d8a6], a
+	ld [wPlanePart3Action], a
 	ld hl, wSceneObj5State
 	call SetSceneObjState
 	ret
@@ -5788,10 +5611,10 @@ Func_aeb0d: ; aeb0d (2b:6b0d)
 ; 0xaec1f
 
 Func_aec1f: ; aec1f (2b:6c1f)
-	ld hl, w2d8a9
+	ld hl, wPlanePart4Counter
 	inc [hl]
 	dec l
-	ld a, [hl] ; w2d8a8
+	ld a, [hl] ; wPlanePart4Action
 	and a
 	ret z
 	dec a
@@ -5811,7 +5634,7 @@ Func_aec1f: ; aec1f (2b:6c1f)
 .Func_aec3f
 	play_sfx SFX_006
 .Func_aec47
-	ld hl, w2d8a9
+	ld hl, wPlanePart4Counter
 	jp Func_ae915
 
 .Func_aec4d
@@ -5819,12 +5642,12 @@ Func_aec1f: ; aec1f (2b:6c1f)
 	cp $62
 	ret nz
 	play_sfx SFX_006
-	ld hl, w2d8a8
+	ld hl, wPlanePart4Action
 	inc [hl]
 	ret
 
 .Func_aec60
-	ld hl, w2d8a9
+	ld hl, wPlanePart4Counter
 	ld a, [hl]
 	cp c
 	ret c
@@ -5886,7 +5709,7 @@ Func_aec1f: ; aec1f (2b:6c1f)
 	ld hl, wSceneObj8State
 	call SetSceneObjState
 	play_sfx SFX_006
-	ld hl, w2d8a8
+	ld hl, wPlanePart4Action
 	inc [hl]
 	ret
 
@@ -5901,7 +5724,7 @@ Func_aec1f: ; aec1f (2b:6c1f)
 
 .Func_aece7
 	xor a
-	ld [w2d8a8], a
+	ld [wPlanePart4Action], a
 	ld hl, wSceneObj9State
 	call SetSceneObjState
 	ret

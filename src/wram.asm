@@ -1886,7 +1886,7 @@ wSceneWarioOAMBank::    ds $1 ; d14b
 w2d14c:: ; d14c
 	ds $1
 
-w2d14d:: ; d14d
+wSceneWarioIgnoreScroll:: ; d14d
 	ds $1
 
 w2d14e:: ; d14e
@@ -1900,7 +1900,7 @@ w2d150:: ; d150
 w2d151:: ; d151
 	ds $1
 
-w2d152:: ; d152
+wDebugSceneWarioState:: ; d152
 	ds $1
 
 	ds $5
@@ -2026,39 +2026,16 @@ w2d8a0:: ; d8a0
 w2d8a1:: ; d8a1
 	ds $1
 
-w2d8a2:: ; d8a2
-	ds $1
+UNION
 
-w2d8a3:: ; d8a3
-	ds $1
-
-w2d8a4:: ; d8a4
-	ds $1
-
-w2d8a5:: ; d8a5
-	ds $1
-
-w2d8a6:: ; d8a6
-	ds $1
-
-w2d8a7:: ; d8a7
-	ds $1
-
-w2d8a8:: ; d8a8
-	ds $1
-
-w2d8a9:: ; d8a9
-	ds $1
-
-w2d8aa:: ; d8aa
-	ds $1
-
-w2d8ab:: ; d8ab
-	ds $1
+wTempleMusicBoxes::
+wTempleMusicBox1::  temple_music_box_struct wTempleMusicBox1  ; d8a2
+wTempleMusicBox2::  temple_music_box_struct wTempleMusicBox2  ; d8a4
+wTempleMusicBox3::  temple_music_box_struct wTempleMusicBox3  ; d8a6
+wTempleMusicBox4::  temple_music_box_struct wTempleMusicBox4  ; d8a8
+wTempleMusicBox5::  temple_music_box_struct wTempleMusicBox5  ; d8aa
 
 	ds $4
-
-UNION
 
 wTempleRocks::
 wTempleRock1::  temple_rock_struct wTempleRock1  ; d8b0
@@ -2073,6 +2050,14 @@ wTempleRock9::  temple_rock_struct wTempleRock9  ; d8d0
 wTempleRock10:: temple_rock_struct wTempleRock10 ; d8d4
 
 NEXTU
+
+wPlaneParts::
+wPlanePart1::  plane_part_struct wPlanePart1  ; d8a2
+wPlanePart2::  plane_part_struct wPlanePart2  ; d8a4
+wPlanePart3::  plane_part_struct wPlanePart3  ; d8a6
+wPlanePart4::  plane_part_struct wPlanePart4  ; d8a8
+
+	ds $6
 
 w2d8b0:: ; d8b0
 	ds $1

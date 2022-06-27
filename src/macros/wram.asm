@@ -198,3 +198,17 @@ MACRO temple_rock_struct
 \1Size::        db ; medium or large if 2, else it's small
 \1RespawnTime:: db
 ENDM
+
+MACRO temple_music_box_struct
+\1Action::      db
+; 0 = ?
+; 1 = Init
+; 2 = Move up left
+; 3 = Move in circle
+\1Counter::     db
+ENDM
+
+MACRO plane_part_struct
+\1Action::      db
+\1Counter::     db
+ENDM

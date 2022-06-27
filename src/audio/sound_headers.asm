@@ -257,7 +257,7 @@ SoundHeaders: ; 3155e (c:555e)
 	sfx Sfx_0c9,                         $00, 220, CHAN5, 1 ; SFX_0C9
 	sfx Sfx_0ca,                         $00, 240, CHAN5, 2 ; SFX_0CA
 	sfx Sfx_0cb,                         $00, 239, CHAN8, 1 ; SFX_0CB
-	sfx Sfx_0cc,                         $00, 220, CHAN5, 2 ; SFX_0CC
+	sfx Sfx_0cc,                         $00, 220, CHAN5, 2 ; SFX_HIDDEN_FIGURE_LAUGH
 	sfx Sfx_0cd,                         $00, 220, CHAN5, 3 ; SFX_0CD
 	sfx Sfx_0ce,                         $00, 240, CHAN5, 2 ; SFX_0CE
 	sfx Sfx_0cf,                         $00, 220, CHAN5, 2 ; SFX_0CF

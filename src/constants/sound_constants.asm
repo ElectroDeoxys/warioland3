@@ -265,7 +265,7 @@
 	const SFX_0C9                          ; 1c9
 	const SFX_0CA                          ; 1ca
 	const SFX_0CB                          ; 1cb
-	const SFX_0CC                          ; 1cc
+	const SFX_HIDDEN_FIGURE_LAUGH          ; 1cc
 	const SFX_0CD                          ; 1cd
 	const SFX_0CE                          ; 1ce
 	const SFX_0CF                          ; 1cf
@@ -331,7 +331,7 @@
 	const SFX_10A                          ; 20a
 	const SFX_10B                          ; 20b
 	const SFX_10C                          ; 20c
-	const SFX_TEMPLE_ROCK                          ; 20d
+	const SFX_TEMPLE_ROCK                  ; 20d
 	const SFX_10E                          ; 20e
 	const SFX_10F                          ; 20f
 	const SFX_110                          ; 210

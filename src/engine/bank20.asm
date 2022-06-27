@@ -713,7 +713,7 @@ OverworldStateTable: ; 80392 (20:4392)
 	dw Func_804f7           ; SST_OVERWORLD_05
 	dw SlowFadeFromWhite
 	dw Func_80540
-	dw FadeBGToWhite_Normal
+	dw FadeBGToWhite_Normal ; SST_OVERWORLD_08
 
 	dw Func_8055f           ; SST_OVERWORLD_09
 	dw DarkenBGToPal_Normal
@@ -736,12 +736,12 @@ OverworldStateTable: ; 80392 (20:4392)
 	dw $4e03
 
 	dw FadeBGToWhite_Normal ; SST_OVERWORLD_1A
-	dw Func_80e13
+	dw InitTempleScene
 	dw DarkenBGToPal_Normal
-	dw Func_80e23
+	dw UpdateTempleScene
+
 	dw $4e33
 	dw FadeBGToWhite_Normal
-
 	dw $4e45                ; SST_OVERWORLD_20
 	dw DarkenBGToPal_Normal
 	dw $4e55
@@ -1888,13 +1888,13 @@ Func_80de0: ; 80de0 (20:4de0)
 
 	INCROM $80df3, $80e13
 
-Func_80e13: ; 80e13 (20:4e13)
-	farcall Func_acb25
+InitTempleScene: ; 80e13 (20:4e13)
+	farcall _InitTempleScene
 	ret
 ; 0x80e23
 
-Func_80e23: ; 80e23 (20:4e23)
-	farcall UpdateTempleScene
+UpdateTempleScene: ; 80e23 (20:4e23)
+	farcall _UpdateTempleScene
 	ret
 ; 0x80e33
 
