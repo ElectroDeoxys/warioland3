@@ -407,10 +407,10 @@ WebberProjectileFunc: ; 40ab1 (10:4ab1)
 	cp b
 	jr c, .right
 ; left
-	call MoveObjectLeft
+	call MoveObjectLeft_Slow
 	jr .move_down
 .right
-	call MoveObjectRight
+	call MoveObjectRight_Slow
 .move_down
 	call MoveObjectDown
 
@@ -448,7 +448,7 @@ WebberProjectileFunc: ; 40ab1 (10:4ab1)
 	ld de, Frameset_682db
 	call SetObjectFramesetPtr
 	ld a, 24
-	ld [hli], a
+	ld [hli], a ; OBJ_ACTION_DURATION
 	ret
 
 .Destroy:

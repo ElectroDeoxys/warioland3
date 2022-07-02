@@ -521,7 +521,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ldh [hXPosHi], a
 	call Func_3513
 	and a
-	jp z, MoveObjectLeft
+	jp z, MoveObjectLeft_Slow
 .turn_around1
 	ld a, OBJACTION_TURN_AROUND_START
 	ld [wCurObjAction], a
@@ -552,7 +552,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ldh [hXPosHi], a
 	call Func_3513
 	and a
-	jp z, MoveObjectRight
+	jp z, MoveObjectRight_Slow
 .turn_around2
 	ld a, OBJACTION_TURN_AROUND_START
 	ld [wCurObjAction], a

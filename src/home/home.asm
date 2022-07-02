@@ -3474,10 +3474,11 @@ Func_3076:: ; 3076 (0:3076)
 
 ; moves current object right
 ; by 1 every 2 frames
-MoveObjectRight:: ; 30b8 (0:30b8)
+MoveObjectRight_Slow:: ; 30b8 (0:30b8)
 	ld a, [wGlobalCounter]
 	rra
 	ret c
+MoveObjectRight:: ; 30bd (0:30bd)
 	ld hl, wCurObjXPos
 	inc [hl]
 	ret nz
@@ -3488,10 +3489,11 @@ MoveObjectRight:: ; 30b8 (0:30b8)
 
 ; moves current object left
 ; by 1 every 2 frames
-MoveObjectLeft:: ; 30c5 (0:30c5)
+MoveObjectLeft_Slow:: ; 30c5 (0:30c5)
 	ld a, [wGlobalCounter]
 	rra
 	ret nc
+MoveObjectLeft:: ; 30ca (0:30ca)
 	ld hl, wCurObjXPos
 	ld a, [hl]
 	sub 1
@@ -3989,7 +3991,17 @@ CreateObjectAtRelativePos:: ; 3416 (0:3416)
 	ret
 ; 0x342d
 
-	INCROM $342d, $3444
+; bc = object creation data
+CreateObjectFromCurObjPos:: ; 342d (0:342d)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(_CreateObjectFromCurObjPos)
+	bankswitch
+	call _CreateObjectFromCurObjPos
+	pop af
+	bankswitch
+	ret
+; 0x3444
 
 Func_3444:: ; 3444 (0:3444)
 	ld a, [wROMBank]
@@ -4002,7 +4014,20 @@ Func_3444:: ; 3444 (0:3444)
 	ret
 ; 0x345b
 
-	INCROM $345b, $34b7
+	INCROM $345b, $3472
+
+Func_3472:: ; 3472 (0:3472)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_631a1)
+	bankswitch
+	call Func_631a1
+	pop af
+	bankswitch
+	ret
+; 0x3489
+
+	INCROM $3489, $34b7
 
 Func_34b7:: ; 34b7 (0:34b7)
 	ld a, [wROMBank]

@@ -132,7 +132,12 @@ Data_60310: ; 60310 (18:4310)
 	db -3, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, $80
 ; 0x60320
 
-	INCROM $60320, $603f0
+Data_60320: ; 60320 (18:4320)
+	db -1, -1, -1, -1,  0, -1,  0, -1,  0, -1,  0,  0,  1,  0,  1,  0
+	db  1,  1,  1,  2,  2,  2,  3,  3,  4,  4,  4,  4,  4,  4,  4, $80
+; 0x60340
+
+	INCROM $60340, $603f0
 
 Data_603f0: ; 603f0 (18:43f0)
 	db 1, 2, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, $80
@@ -973,7 +978,7 @@ Func_61f10: ; 61f10 (18:5f10)
 	ld [w1d140], a
 	ld [w1d141], a
 	ld [w1d142], a
-	ld [w1d143], a
+	ld [wNumLitTorches], a
 	ld [wNumShootGoals], a
 	ld [w1d145], a
 	ret
@@ -985,7 +990,7 @@ Func_61f2a: ; 61f2a (18:5f2a)
 	call Func_61f4a ; clears whole w1d120
 	ld [w1d141], a
 	ld [w1d142], a
-	ld [w1d143], a
+	ld [wNumLitTorches], a
 	ld [wNumShootGoals], a
 	ld [w1d145], a
 	ret
@@ -3944,7 +3949,65 @@ Func_6307b: ; 6307b (18:707b)
 	ret
 ; 0x631a1
 
-	INCROM $631a1, $631e8
+Func_631a1:: ; 631a1 (18:71a1)
+	ld hl, wCurObjUnk17
+	dec [hl]
+	ret nz
+	inc l
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [hli]
+	and a
+	jr nz, .asm_631b1
+	ld h, d
+	ld l, e
+	ld a, [hli]
+.asm_631b1
+	ld [wCurObjUnk17], a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld b, a
+	ld a, l
+	ld [wCurObjUnk18], a
+	ld a, h
+	ld [wCurObjMovementIndex], a
+	ld hl, wCurObjYPos
+	ld a, c
+	cp $80
+	jr nc, .asm_631d0
+	ld a, [hl]
+	add c
+	ld [hli], a
+	jr nc, .asm_631d6
+	inc [hl]
+	jr .asm_631d6
+.asm_631d0
+	ld a, [hl]
+	add c
+	ld [hli], a
+	jr c, .asm_631d6
+	dec [hl]
+.asm_631d6
+	inc l
+	ld a, b
+	cp $80
+	jr nc, .asm_631e2
+	ld a, [hl]
+	add b
+	ld [hli], a
+	ret nc
+	inc [hl]
+	ret
+.asm_631e2
+	ld a, [hl]
+	add b
+	ld [hli], a
+	ret c
+	dec [hl]
+	ret
+; 0x631e8
 
 Func_631e8:: ; 631e8 (18:71e8)
 	ld hl, wCurObjMovementIndex

@@ -1066,7 +1066,8 @@ w1d141:: ; d141
 w1d142:: ; d142
 	ds $1
 
-w1d143:: ; d143
+; number of torches lit for the Flame Block puzzle
+wNumLitTorches:: ; d143
 	ds $1
 
 wNumShootGoals:: ; d144

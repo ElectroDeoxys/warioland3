@@ -813,7 +813,111 @@ OAM_180564:: ; 180564 (60:4564)
 	db $80
 ; 0x180838
 
-	INCROM $180838, $18154f
+OAM_180838:: ; 180838 (60:4838)
+	dw .frame_0
+	dw .frame_1
+	dw .frame_2
+	dw .frame_3
+	dw .frame_4
+	dw .frame_5
+	dw .frame_6
+	dw .frame_7
+	dw .frame_8
+	dw .frame_9
+	dw .frame_10
+	dw .frame_11
+	dw .frame_12
+	dw .frame_13
+
+.frame_0
+	frame_oam -16,  -1, $c0, 7 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam -16,  -8, $c0, 7 | OAMF_BANK1
+	db $80
+
+.frame_1
+	frame_oam -16,  -8, $c2, 7 | OAMF_BANK1
+	frame_oam -16,  -1, $c2, 7 | OAMF_BANK1 | OAMF_XFLIP
+	db $80
+
+.frame_2
+	frame_oam  -8,   0, $c4, 7 | OAMF_BANK1
+	frame_oam  -8,  -8, $c4, 7 | OAMF_BANK1 | OAMF_XFLIP
+	db $80
+
+.frame_3
+	frame_oam  -8,   0, $c6, 7 | OAMF_BANK1
+	frame_oam  -8,  -8, $c6, 7 | OAMF_BANK1 | OAMF_XFLIP
+	db $80
+
+.frame_4
+	frame_oam   0,   8, $c8, 7 | OAMF_BANK1
+	frame_oam -16,   8, $c8, 7 | OAMF_BANK1 | OAMF_YFLIP
+	frame_oam -16, -16, $c8, 7 | OAMF_BANK1 | OAMF_XFLIP | OAMF_YFLIP
+	frame_oam   0, -16, $c8, 7 | OAMF_BANK1 | OAMF_XFLIP
+	db $80
+
+.frame_5
+	frame_oam -16, -12, $ca, 7 | OAMF_BANK1
+	frame_oam -16,  -4, $cc, 7 | OAMF_BANK1
+	frame_oam -16,   3, $ca, 7 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam -32,  -8, $ce, 7 | OAMF_BANK1
+	frame_oam -32,  -1, $ce, 7 | OAMF_BANK1 | OAMF_XFLIP
+	db $80
+
+.frame_6
+	frame_oam -16, -12, $d0, 7 | OAMF_BANK1
+	frame_oam -16,  -4, $d2, 7 | OAMF_BANK1
+	frame_oam -16,   3, $d0, 7 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam -32, -12, $d4, 7 | OAMF_BANK1
+	frame_oam -32,  -4, $d6, 7 | OAMF_BANK1
+	frame_oam -32,   3, $d4, 7 | OAMF_BANK1 | OAMF_XFLIP
+	db $80
+
+.frame_7
+	frame_oam -16, -12, $d8, 7 | OAMF_BANK1
+	frame_oam -16,  -4, $da, 7 | OAMF_BANK1
+	frame_oam -16,   3, $d8, 7 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam -32, -12, $dc, 7 | OAMF_BANK1
+	frame_oam -32,  -4, $de, 7 | OAMF_BANK1
+	frame_oam -32,   3, $dc, 7 | OAMF_BANK1 | OAMF_XFLIP
+	db $80
+
+.frame_8
+	frame_oam -16, -12, $e0, 7 | OAMF_BANK1
+	frame_oam -16,  -4, $e2, 7 | OAMF_BANK1
+	frame_oam -16,   3, $e0, 7 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam -32, -12, $e4, 7 | OAMF_BANK1
+	frame_oam -32,  -4, $e6, 7 | OAMF_BANK1
+	frame_oam -32,   3, $e4, 7 | OAMF_BANK1 | OAMF_XFLIP
+	db $80
+
+.frame_9
+	frame_oam  -8,  -8, $e8, 7 | OAMF_BANK1
+	frame_oam  -8,   0, $e8, 7 | OAMF_BANK1 | OAMF_XFLIP
+	db $80
+
+.frame_10
+	frame_oam  -8,  -8, $ea, 7 | OAMF_BANK1
+	frame_oam  -8,   0, $ea, 7 | OAMF_BANK1 | OAMF_XFLIP
+	db $80
+
+.frame_11
+	frame_oam  -8,  -8, $ec, 7 | OAMF_BANK1
+	frame_oam  -8,   0, $ec, 7 | OAMF_BANK1 | OAMF_XFLIP
+	db $80
+
+.frame_12
+	frame_oam  -8,  -8, $ee, 7 | OAMF_BANK1
+	frame_oam  -8,   0, $ee, 7 | OAMF_BANK1 | OAMF_XFLIP
+	db $80
+
+.frame_13
+	frame_oam  -8,   0, $f0, 7 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam  -8,  -8, $f0, 7 | OAMF_BANK1
+	db $80
+; 0x180916
+
+	INCROM $180916, $18154f
 
 OAM_18154f:: ; 18154f (60:554f)
 	dw .frame_0

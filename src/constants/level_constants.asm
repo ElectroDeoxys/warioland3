@@ -88,3 +88,7 @@ DEF TREASURES_MASK EQU GREY_TREASURE | RED_TREASURE | GREEN_TREASURE | BLUE_TREA
 	const LVLEND_NO_TREASURE    ; 05
 	const LVLEND_GAME_OVER      ; 06
 	const LVLEND_EPILOGUE       ; 07
+
+; number of torches that need to be lit
+; to destroy the Flame Block
+DEF NUM_FLAME_BLOCK_TORCHES EQU 3

@@ -1402,7 +1402,7 @@ Func_19609: ; 19609 (6:5609)
 	ldh a, [hXPosHi]
 	ld [hli], a
 	ld bc, $4e5a
-	farcall CreateObjectFromCurObjPos
+	farcall _CreateObjectFromCurObjPos
 	ld hl, hffa0
 	ld de, wCurObjUnk01
 	ld b, OBJ_UNK_07 - OBJ_UNK_01
@@ -1454,7 +1454,7 @@ Func_19690: ; 19690 (6:5690)
 	ldh a, [hXPosHi]
 	ld [hli], a
 	ld bc, $4e6d
-	farcall CreateObjectFromCurObjPos
+	farcall _CreateObjectFromCurObjPos
 	ld hl, hffa0
 	ld de, wCurObjUnk01
 	ld b, OBJ_UNK_07 - OBJ_UNK_01

@@ -9,61 +9,7 @@ Data_40000: ; 40000 (10:4000)
 INCLUDE "engine/level/objects/spearhead.asm"
 INCLUDE "engine/level/objects/futamogu.asm"
 INCLUDE "engine/level/objects/webber.asm"
-
-	INCROM $40b14, $40b8c
-
-Func_40b8c: ; 40b8c (10:4b8c)
-	ld hl, wCurObjUpdateFunction + 1
-	ld a, $4b
-	ld [hld], a
-	ld a, $14
-	ld [hld], a
-	ld de, $4369
-	call SetObjectFramesetPtr
-	jr Func_40bb8
-
-Func_40b9d: ; 40b9d (10:4b9d)
-	ld hl, wCurObjUpdateFunction + 1
-	ld a, $4b
-	ld [hld], a
-	ld a, $a8
-	ld [hld], a
-	jr Func_40bb2
-
-	ret ; stray ret
-
-Func_40ba9: ; 40ba9 (10:4ba9)
-	ld hl, wCurObjUpdateFunction + 1
-	ld a, $4b
-	ld [hld], a
-	ld a, $d1
-	ld [hld], a
-;	fallthrough
-
-Func_40bb2: ; 40bb2 (10:4bb2)
-	ld de, $4360
-	call SetObjectFramesetPtr
-;	fallthrough
-
-Func_40bb8: ; 40bb8 (10:4bb8)
-	xor a
-	ld [hl], a ; OBJ_ACTION_DURATION
-	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
-	set OBJFLAG_UNK3_F, [hl]
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
-	ld l, OBJ_COLLBOX_RIGHT
-	ld a, $06
-	ld [hld], a
-	ld a, $f9
-	ld [hld], a ; OBJ_COLLBOX_LEFT
-	ld a, $fd
-	ld [hl], a ; OBJ_COLLBOX_BOTTOM
-	ret
-; 0x40bd1
-
-	INCROM $40bd1, $40ca1
+INCLUDE "engine/level/objects/torch.asm"
 
 Func_40ca1: ; 40ca1 (10:4ca1)
 	ld hl, wCurObjFlags
