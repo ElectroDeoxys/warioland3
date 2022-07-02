@@ -98,4 +98,4 @@ for offsetStr in reader.standardiseList(args.offsets):
             prevOffset = ptrOffset + 4 * len(yCoords) + 1
         i += 1
 
-    print(reader.getDataString(offset, prevOffset - offset, 'OAM_').format(ptrTableStr + outStr))
+    print(reader.getDataString(offset, prevOffset - offset, 'OAM_', True).format(ptrTableStr + outStr))

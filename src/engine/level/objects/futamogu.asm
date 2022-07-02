@@ -189,7 +189,7 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	ld a, [hl]
 	rlca
 	ret c ; already as low as possible
-	ld a, [w1d14a]
+	ld a, [wEffectivePowerUp]
 	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
 	jr nc, .has_super_jump_slam
 	ld bc, Data_603f0
@@ -212,7 +212,7 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	and a
 	ret z
 
-	ld a, [w1d14a]
+	ld a, [wEffectivePowerUp]
 	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
 	jr nc, .vanish
 	ld hl, wCurObjYPos

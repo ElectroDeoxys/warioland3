@@ -1077,7 +1077,11 @@ w1d145:: ; d145
 
 	ds $4
 
-w1d14a:: ; d14a
+; some transformations can confer to Wario special power-ups
+; e.g. Fat Wario can effectively have the Super Jump Slam Overalls
+; this stores the Power-Up that is effectively active
+; by taking into account the current transformation
+wEffectivePowerUp:: ; d14a
 	ds $1
 
 	ds $6b5

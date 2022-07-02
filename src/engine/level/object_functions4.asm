@@ -107,16 +107,16 @@ TreasureFunc: ; 4c8da (13:48da)
 	cp OBJ_INTERACTION_GREEN_TREASURE
 	jr z, .green
 ; blue
-	ld bc, $4a7f
+	ld bc, ObjParams_64a7f
 	jr .play_fanfare
 .grey
-	ld bc, $4a40
+	ld bc, ObjParams_64a40
 	jr .play_fanfare
 .red
-	ld bc, $4a55
+	ld bc, ObjParams_64a55
 	jr .play_fanfare
 .green
-	ld bc, $4a6a
+	ld bc, ObjParams_64a6a
 .play_fanfare
 	play_music2 MUSIC_TREASURE_FANFARE
 	jp CreateObjectAtRelativePos

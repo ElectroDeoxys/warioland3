@@ -144,7 +144,11 @@ Data_60490: ; 60490 (18:4490)
 	db  2,  4,  6,  8, 10,  9,  8,  7,  6,  5,  4,  3,  2,  1,  0, $80
 ; 0x604a0
 
-	INCROM $604a0, $611cb
+Data_604a0: ; 604a0 (18:44a0)
+	db 1, 2, 3, 4, 4, 4, 4, 4, 3, 2, 1, 0, 0, 0, 0, $80
+; 0x604b0
+
+	INCROM $604b0, $611cb
 
 Func_611cb: ; 611cb (18:51cb)
 	push hl
@@ -280,7 +284,7 @@ Func_61348: ; 61348 (18:5348)
 	ld e, POWER_UP_SUPER_JUMP_SLAM_OVERALLS
 .asm_61354
 	ld a, e
-	ld [w1d14a], a
+	ld [wEffectivePowerUp], a
 
 	ld a, [wLevel]
 	cp THE_TEMPLE
@@ -2378,8 +2382,8 @@ Func_6283a:: ; 6283a (18:683a)
 Func_62840:: ; 62840 (18:6840)
 	ld a, [wCurObjUnk18]
 	ld b, a
-	ld a, [w1d14a]
-	cp $05
+	ld a, [wEffectivePowerUp]
+	cp POWER_UP_GARLIC
 	jr c, Func_6284f
 	sla b
 	sla b ; *4
@@ -2443,8 +2447,8 @@ Func_62892:: ; 62892 (18:6892)
 Func_62898:: ; 62898 (18:6898)
 	ld a, [wCurObjUnk18]
 	ld b, a
-	ld a, [w1d14a]
-	cp $05
+	ld a, [wEffectivePowerUp]
+	cp POWER_UP_GARLIC
 	jr c, Func_628a7
 	sla b
 	sla b

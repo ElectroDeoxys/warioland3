@@ -8,50 +8,9 @@ Data_40000: ; 40000 (10:4000)
 
 INCLUDE "engine/level/objects/spearhead.asm"
 INCLUDE "engine/level/objects/futamogu.asm"
+INCLUDE "engine/level/objects/webber.asm"
 
-Func_40825: ; 40825 (10:4825)
-	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
-	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, $48
-	ld [hld], a
-	ld a, $95
-	ld [hld], a
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
-	ld l, OBJ_COLLBOX_RIGHT
-	ld a, $fe
-	ld [hld], a
-	ld a, $f0
-	ld [hld], a
-	ld a, $fc
-	ld [hl], a
-	ld l, OBJ_UNK_17
-	ld a, [wCurObjYPos + 0]
-	ld [hli], a
-	ld a, [wCurObjYPos + 1]
-	ld [hli], a
-	ld a, $04
-	ld [hl], a
-	jp Func_40a41
-; 0x40851
-
-	INCROM $40851, $40a41
-
-Func_40a41: ; 40a41 (10:4a41)
-	ld hl, wCurObjUnk1a
-	ld a, [hl]
-	and $f0
-	or $02
-	ld [hld], a
-	ld de, $42b7
-	call SetObjectFramesetPtr
-	ld a, $40
-	ld [hli], a ; OBJ_ACTION_DURATION
-	ret
-; 0x40a54
-
-	INCROM $40a54, $40b8c
+	INCROM $40b14, $40b8c
 
 Func_40b8c: ; 40b8c (10:4b8c)
 	ld hl, wCurObjUpdateFunction + 1
@@ -259,9 +218,9 @@ Func_42478: ; 42478 (10:6478)
 	ld a, e
 	and a
 	jp nz, Func_42559
-	ld bc, $4e1b
+	ld bc, ObjParams_64e1b
 	call CreateObjectAtRelativePos
-	ld de, $4f14
+	ld de, Frameset_68f14
 	call SetObjectFramesetPtr
 	ld a, $00
 	ld [hli], a
@@ -290,7 +249,7 @@ Func_424b1: ; 424b1 (10:64b1)
 	ld a, e
 	and a
 	jp nz, Func_42559
-	ld bc, $4e06
+	ld bc, ObjParams_64e06
 	call CreateObjectAtRelativePos
 	ld de, $4f14
 	call SetObjectFramesetPtr
@@ -446,7 +405,7 @@ Func_42ba8: ; 42ba8 (10:6ba8)
 	res 5, [hl]
 	ld a, $14
 	ld [wCurObjActionDuration], a
-	ld l, $00
+	ld l, OBJ_FLAGS
 	set 3, [hl]
 	ret
 ; 0x42bbf

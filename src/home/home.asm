@@ -894,21 +894,51 @@ GetFloorForYPos:: ; 114e (0:114e)
 	ret
 ; 0x1169
 
-	INCROM $1169, $1197
+HandleDownwardsFloorTransition:: ; 1169 (0:1169)
+	ld a, [wCameraConfigFlags]
+	and CAMCONFIG_SCROLLING_MASK
+	cp CAMCONFIG_TRANSITIONS
+	jr c, .skip
+	call GetFloorForYPos
+	ld a, [wFloor]
+	sub c
+	jr z, .skip
+	jr c, .skip
+	jr StartDownwardsFloorTransition
+.skip
+	ret
+; 0x1180
+
+; unreferenced?
+Func_1180:: ; 1180 (0:1180)
+	ld a, [wCameraConfigFlags]
+	and CAMCONFIG_SCROLLING_MASK
+	cp CAMCONFIG_TRANSITIONS
+	jr c, .skip
+	call GetFloorForYPos
+	ld a, [wFloor]
+	sub c
+	jr z, .skip
+	jr c, StartUpwardsFloorTransition
+	jr StartDownwardsFloorTransition
+.skip
+	ret
+; 0x1197
 
 HandleUpwardsFloorTransition:: ; 1197 (0:1197)
 	ld a, [wCameraConfigFlags]
 	and CAMCONFIG_SCROLLING_MASK
 	cp CAMCONFIG_TRANSITIONS
-	jr c, .asm_11ad
+	jr c, .skip
 	call GetFloorForYPos
 	ld a, [wFloor]
 	sub c
-	jr c, .asm_11ab
-	jr .asm_11ad
-.asm_11ab
+	jr c, .do_transition
+	jr .skip
+.do_transition
 	jr StartUpwardsFloorTransition
-.asm_11ad
+
+.skip
 	ret
 ; 0x11ae
 
@@ -3471,7 +3501,20 @@ MoveObjectLeft:: ; 30c5 (0:30c5)
 	ret
 ; 0x30d4
 
-	INCROM $30d4, $30e6
+	INCROM $30d4, $30d9
+
+; moves current object down
+; at 1 pixel per frame
+MoveObjectDown:: ; 30d9 (0:30d9)
+	ld hl, wCurObjYPos
+	inc [hl]
+	ret nz
+	inc l
+	inc [hl]
+	ret
+; 0x30e1
+
+	INCROM $30e1, $30e6
 
 ; moves current object up
 ; at 1 pixel per frame

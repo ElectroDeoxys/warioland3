@@ -651,7 +651,7 @@ BlueKeyData:       object_data OAM_18c000, $2, OBJ_INTERACTION_BLUE_KEY,        
 MusicaCoinData:    object_data OAM_18c000, $3, OBJ_INTERACTION_MUSICAL_COIN,               -25, MusicalCoinFunc,   $0
 SpearheadData:     object_data OAM_18007b, $0, OBJ_INTERACTION_01,                         -14, SpearheadFunc,     OBJFLAG_UNK7
 FutamoguData:      object_data OAM_180564, $1, OBJ_INTERACTION_0C             | HEAVY_OBJ, -17, FutamoguFunc,      OBJFLAG_UNK7
-Data_64423: object_data OAM_180242, $2, OBJ_INTERACTION_0C | HEAVY_OBJ, -16, Func_40825, OBJFLAG_UNK7
+WebberData:        object_data OAM_180242, $2, OBJ_INTERACTION_0C             | HEAVY_OBJ, -16, WebberFunc,        OBJFLAG_UNK7
 
 Data_6442b: ; 6442b (19:442b)
 	db ($0 << 4) | $4 ; low bank nybble, ??
@@ -1409,7 +1409,139 @@ Data_64783: ; 64783 (19:4783)
 	dw $4b51 ; update function
 	db $00 ; ??
 
-	INCROM $6478b, $64fc3
+	INCROM $6478b, $647a0
+
+ObjParams_WebberProjectile: ; 647a0 (19:47a0)
+	db  5  ; y
+	db -8  ; x
+	dn $0, $3 ; unk7
+	db OBJ_INTERACTION_1C ; interaction type
+	db -7, -3, -4, 3 ; collision
+	dw OAM_180242 ; OAM
+	dw Frameset_682c8 ; frameset
+	db $00 ; action duration
+	db $00 ; unk17
+	db $00 ; unk18
+	db $00 ; movement index
+	db $00 ; unk1a
+	db OBJACTION_00 ; action
+	dw WebberProjectileFunc
+	db OBJFLAG_UNK7 ; obj flags
+; 0x647b5
+
+	INCROM $647b5, $64a40
+
+ObjParams_64a40: ; 64a40 (19:4a40)
+	db -40 ; y
+	db   0 ; x
+	dn $3, $3 ; unk7
+	db OBJ_INTERACTION_01 ; interaction type
+	db 0, 0, 0, 0 ; collision box
+	dw OAM_18c000 ; OAM
+	dw Frameset_680da ; frameset
+	db 87 ; action duration
+	db $00 ; unk17
+	db $00 ; unk18
+	db $00 ; movement index
+	db $00 ; unk1a
+	db OBJACTION_00 ; action
+	dw $4970
+	db OBJFLAG_UNK7 ; obj flags
+; 0x64a55
+
+ObjParams_64a55: ; 64a55 (19:4a55)
+	db -40 ; y
+	db   0 ; x
+	dn $3, $3 ; unk7
+	db OBJ_INTERACTION_01 ; interaction type
+	db 0, 0, 0, 0 ; collision box
+	dw OAM_18c000 ; OAM
+	dw Frameset_68113 ; frameset
+	db 87 ; action duration
+	db $00 ; unk17
+	db $00 ; unk18
+	db $00 ; movement index
+	db $00 ; unk1a
+	db OBJACTION_00 ; action
+	dw $4975
+	db OBJFLAG_UNK7 ; obj flags
+; 0x64a6a
+
+ObjParams_64a6a: ; 64a6a (19:4a6a)
+	db -40 ; y
+	db   0 ; x
+	dn $3, $3 ; unk7
+	db OBJ_INTERACTION_01 ; interaction type
+	db 0, 0, 0, 0 ; collision box
+	dw OAM_18c000 ; OAM
+	dw Frameset_6814c ; frameset
+	db 87 ; action duration
+	db $00 ; unk17
+	db $00 ; unk18
+	db $00 ; movement index
+	db $00 ; unk1a
+	db OBJACTION_00 ; action
+	dw $497A
+	db OBJFLAG_UNK7 ; obj flags
+; 0x64a7f
+
+ObjParams_64a7f: ; 64a7f (19:4a7f)
+	db -40 ; y
+	db   0 ; x
+	dn $3, $3 ; unk7
+	db OBJ_INTERACTION_01 ; interaction type
+	db 0, 0, 0, 0 ; collision box
+	dw OAM_18c000 ; OAM
+	dw Frameset_68185 ; frameset
+	db 87 ; action duration
+	db $00 ; unk17
+	db $00 ; unk18
+	db $00 ; movement index
+	db $00 ; unk1a
+	db OBJACTION_00 ; action
+	dw $497F
+	db OBJFLAG_UNK7 ; obj flags
+; 0x64a94
+
+	INCROM $64a94, $64e06
+
+ObjParams_64e06: ; 64e06 (19:4e06)
+	db 16 ; y
+	db  0 ; x
+	dn $0, $d ; unk7
+	db OBJ_INTERACTION_01 ; interaction type
+	db -16, 11, -17, 0 ; collision box
+	dw OAM_18154f ; OAM
+	dw Frameset_68f50 ; frameset
+	db $00 ; action duration
+	db $00 ; unk17
+	db $00 ; unk18
+	db $00 ; movement index
+	db $00 ; unk1a
+	db OBJACTION_00 ; action
+	dw $679C
+	db $0 ; obj flags
+; 0x64e1b
+
+ObjParams_64e1b: ; 64e1b (19:4e1b)
+	db 16 ; y
+	db  0 ; x
+	dn $0, $d ; unk7
+	db OBJ_INTERACTION_01 ; interaction type
+	db -26, 11, -17, 0 ; collision box
+	dw OAM_18154f ; OAM
+	dw Frameset_68f50 ; frameset
+	db $00 ; action duration
+	db $00 ; unk17
+	db $00 ; unk18
+	db $00 ; movement index
+	db $00 ; unk1a
+	db OBJACTION_00 ; action
+	dw $679C
+	db $0 ; obj flags
+; 0x64e30
+
+	INCROM $64e30, $64fc3
 
 Data_64fc3: ; 64fc3 (19:4fc3)
 	dw GreyTreasureData
@@ -2055,7 +2187,7 @@ EnemyGroupGfx13: ; 654da (19:54da)
 	dw SmallLeafGfx
 
 	dw SpearheadData
-	dw Data_64423
+	dw WebberData
 	dw FutamoguData
 	dw Data_644b3
 	dw NULL
@@ -2837,7 +2969,7 @@ EnemyGroupGfx36: ; 6596f (19:596f)
 	dw NobiiruGfx
 
 	dw Data_645bb
-	dw Data_64423
+	dw WebberData
 	dw Data_6457b
 	dw Data_64673
 	dw Data_6467b
@@ -4977,7 +5109,7 @@ EnemyGroupGfx99: ; 665f8 (19:65f8)
 	dw TorchGfx
 
 	dw SpearheadData
-	dw Data_64423
+	dw WebberData
 	dw NULL
 
 	rgb  0, 25,  0

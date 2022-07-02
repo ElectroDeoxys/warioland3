@@ -41,9 +41,9 @@ def standardiseList(ls):
 def offsetHeaderStr(offset):
     return '; {:0x} ('.format(offset) + '{:02x}:'.format(floor(offset / 0x4000)) + '{:0x}'.format(absOffsetToRel(offset)) + ')'
 
-def getDataString(offset, len, suffix = 'Data_'):
+def getDataString(offset, len, suffix = 'Data_', export = False):
     outStr = suffix + '{:0x}'.format(offset)
-    outStr += ': ' + offsetHeaderStr(offset) + '\n'
+    outStr += (': ', ':: ')[export] + offsetHeaderStr(offset) + '\n'
     outStr += '{}' # for inserting the content
     outStr += '; 0x{:0x}\n'.format(offset + len)
     return outStr

@@ -22,4 +22,4 @@ for offsetStr in reader.standardiseList(args.offsets):
         curOffset += 2
         outStr += '\tdb ${0:02x}'.format(data[0]) + ', {0:2}\n'.format(data[1])
 
-    print(reader.getDataString(offset, curOffset - offset, 'Frameset_').format(outStr))
+    print(reader.getDataString(offset, curOffset - offset, 'Frameset_', True).format(outStr))
