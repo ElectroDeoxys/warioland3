@@ -49,13 +49,13 @@ Func_20000: ; 20000 (8:4000)
 	add hl, de
 	ld a, [hli] ; OBJ_INTERACTION_TYPE
 	ld [wObjInteractionType], a
-	ld a, [hli] ; OBJ_UNK_09
+	ld a, [hli] ; OBJ_COLLBOX_TOP
 	ld [wc1ba], a
-	ld a, [hli] ; OBJ_UNK_0A
+	ld a, [hli] ; OBJ_COLLBOX_BOTTOM
 	ld [wc1bb], a
-	ld a, [hli] ; OBJ_UNK_0B
+	ld a, [hli] ; OBJ_COLLBOX_LEFT
 	ld [wc1bc], a
-	ld a, [hli] ; OBJ_UNK_0C
+	ld a, [hli] ; OBJ_COLLBOX_RIGHT
 	ld [wc1bd], a
 	ld a, [hli] ; OBJ_SCREEN_Y_POS
 	ld [wObjScreenYPos], a
@@ -205,7 +205,7 @@ Func_20000: ; 20000 (8:4000)
 
 .do_interaction
 	ld a, [wObjInteractionType]
-	and $ff ^ (HEAVY_OBJ)
+	and INTERACTION_MASK
 	jumptable
 
 	dw Func_20b6b                   ; OBJ_INTERACTION_00
@@ -1912,7 +1912,7 @@ ObjInteraction_GreyTreasure: ; 2101c (8:501c)
 	ld hl, wKeyAndTreasureFlags
 	bit GREY_KEY_F, [hl]
 	jp z, Func_20a6f
-	set 4, [hl]
+	set GREY_TREASURE_F, [hl]
 	ld a, LVLEND_GREY_TREASURE
 	ld [wLevelEndScreen], a
 	jr GetTreasure
@@ -1928,7 +1928,7 @@ ObjInteraction_RedTreasure: ; 2103c (8:503c)
 	ld hl, wKeyAndTreasureFlags
 	bit RED_KEY_F, [hl]
 	jp z, Func_20a6f
-	set 5, [hl]
+	set RED_TREASURE_F, [hl]
 	ld a, LVLEND_RED_TREASURE
 	ld [wLevelEndScreen], a
 	jr GetTreasure
@@ -1944,7 +1944,7 @@ ObjInteraction_GreenTreasure: ; 2105c (8:505c)
 	ld hl, wKeyAndTreasureFlags
 	bit GREEN_KEY_F, [hl]
 	jp z, Func_20a6f
-	set 6, [hl]
+	set GREEN_TREASURE_F, [hl]
 	ld a, LVLEND_GREEN_TREASURE
 	ld [wLevelEndScreen], a
 	jr GetTreasure
@@ -1960,7 +1960,7 @@ ObjInteraction_BlueTreasure: ; 2107c (8:507c)
 	ld hl, wKeyAndTreasureFlags
 	bit BLUE_KEY_F, [hl]
 	jp z, Func_20a6f
-	set 7, [hl]
+	set BLUE_TREASURE_F, [hl]
 	ld a, LVLEND_BLUE_TREASURE
 	ld [wLevelEndScreen], a
 ;	fallthrough

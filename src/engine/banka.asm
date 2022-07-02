@@ -436,7 +436,7 @@ SetState_FlatAirborne: ; 28435 (a:4435)
 	add hl, de
 	ld b, $0
 	ld a, [wObjInteractionType]
-	and $ff ^ (HEAVY_OBJ)
+	and INTERACTION_MASK
 	sub OBJ_INTERACTION_0F
 	jr z, .asm_2846a
 	ld a, $01

@@ -896,7 +896,7 @@ GetFloorForYPos:: ; 114e (0:114e)
 
 	INCROM $1169, $1197
 
-Func_1197:: ; 1197 (0:1197)
+HandleUpwardsFloorTransition:: ; 1197 (0:1197)
 	ld a, [wCameraConfigFlags]
 	and CAMCONFIG_SCROLLING_MASK
 	cp CAMCONFIG_TRANSITIONS
@@ -3346,7 +3346,7 @@ UpdateObjSprite:: ; 3000 (0:3000)
 	ld a, [hl] ; unk7
 	swap a
 	and %111
-	or $60
+	or BANK("Objects OAM 1")
 	bankswitch
 	ld l, e
 	ld a, [hli] ; screen y pos
@@ -3416,7 +3416,17 @@ Func_305c:: ; 305c (0:305c)
 	ret
 ; 0x3069
 
-	INCROM $3069, $3076
+Func_3069:: ; 3069 (0:3069)
+	ld a, [wCurObjUnk18]
+	ld b, a
+	ld hl, wCurObjXPos
+	ld a, [hl]
+	add b
+	ld [hli], a
+	ret nc
+	inc [hl]
+	ret
+; 0x3076
 
 Func_3076:: ; 3076 (0:3076)
 	ld a, [wCurObjUnk18]
@@ -3463,10 +3473,12 @@ MoveObjectLeft:: ; 30c5 (0:30c5)
 
 	INCROM $30d4, $30e6
 
-Func_30e6:: ; 30e6 (0:30e6)
+; moves current object up
+; at 1 pixel per frame
+MoveObjectUp:: ; 30e6 (0:30e6)
 	ld hl, wCurObjYPos
 	ld a, [hl]
-	sub $01
+	sub 1
 	ld [hli], a
 	ret nc
 	dec [hl]
@@ -3568,25 +3580,207 @@ Func_316b:: ; 316b (0:316b)
 	ret
 ; 0x3173
 
-	INCROM $3173, $3290
+	INCROM $3173, $3182
 
-Func_3290:: ; 3290 (0:3290)
+ObjAction_Vanish2:: ; 3182 (0:3182)
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(_ApplyObjectGravity)
+	ld a, BANK(_ObjAction_Vanish2)
 	bankswitch
-	jp _ApplyObjectGravity
+	jp _ObjAction_Vanish2
+; 0x3191
+
+Func_3191:: ; 3191 (0:3191)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62e8f)
+	bankswitch
+	jp Func_62e8f
+; 0x31a0
+
+Func_31a0:: ; 31a0 (0:31a0)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62ea5)
+	bankswitch
+	jp Func_62ea5
+; 0x31af
+
+Func_31af:: ; 31af (0:31af)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62f76)
+	bankswitch
+	jp Func_62f76
+; 0x31be
+
+Func_31be:: ; 31be (0:31be)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62f8c)
+	bankswitch
+	jp Func_62f8c
+; 0x31cd
+
+Func_31cd:: ; 31cd (0:31cd)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62eaa)
+	bankswitch
+	jp Func_62eaa
+; 0x31dc
+
+Func_31dc:: ; 31dc (0:31dc)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62ec0)
+	bankswitch
+	jp Func_62ec0
+; 0x31eb
+
+Func_31eb:: ; 31eb (0:31eb)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62f91)
+	bankswitch
+	jp Func_62f91
+; 0x31fa
+
+Func_31fa:: ; 31fa (0:31fa)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62fa7)
+	bankswitch
+	jp Func_62fa7
+; 0x3209
+
+Func_3209:: ; 3209 (0:3209)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62e74)
+	bankswitch
+	jp Func_62e74
+; 0x3218
+
+Func_3218:: ; 3218 (0:3218)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62e8a)
+	bankswitch
+	jp Func_62e8a
+; 0x3227
+
+Func_3227:: ; 3227 (0:3227)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62f5b)
+	bankswitch
+	jp Func_62f5b
+; 0x3236
+
+Func_3236:: ; 3236 (0:3236)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62f71)
+	bankswitch
+	jp Func_62f71
+; 0x3245
+
+Func_3245:: ; 3245 (0:3245)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62c9f)
+	bankswitch
+	jp Func_62c9f
+; 0x3254
+
+Func_3254:: ; 3254 (0:3254)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62d7d)
+	bankswitch
+	jp Func_62d7d
+; 0x3263
+
+Func_3263:: ; 3263 (0:3263)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_6303f)
+	bankswitch
+	jp Func_6303f
+; 0x3272
+
+Func_3272:: ; 3272 (0:3272)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_63050)
+	bankswitch
+	jp Func_63050
+; 0x3281
+
+Func_3281:: ; 3281 (0:3281)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_6305f)
+	bankswitch
+	jp Func_6305f
+; 0x3290
+
+ObjAction_Fall:: ; 3290 (0:3290)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(_ObjAction_Fall)
+	bankswitch
+	jp _ObjAction_Fall
 ; 0x329f
 
-Func_329f:: ; 329f (0:329f)
+ObjAction_StandingFall:: ; 329f (0:329f)
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(Func_629d0)
+	ld a, BANK(_ObjAction_StandingFall)
 	bankswitch
-	jp Func_629d0
+	jp _ObjAction_StandingFall
 ; 0x32ae
 
-	INCROM $32ae, $32f9
+Func_32ae:: ; 32ae (0:32ae)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62ae5)
+	bankswitch
+	jp Func_62ae5
+; 0x32bd
+
+Func_32bd:: ; 32bd (0:32bd)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62bce)
+	bankswitch
+	jp Func_62bce
+; 0x32cc
+
+Func_32cc:: ; 32cc (0:32cc)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62ca8)
+	bankswitch
+	jp Func_62ca8
+; 0x32db
+
+Func_32db:: ; 32db (0:32db)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62d86)
+	bankswitch
+	jp Func_62d86
+; 0x32ea
+
+Func_32ea:: ; 32ea (0:32ea)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_628ea)
+	bankswitch
+	jp Func_628ea
+; 0x32f9
 
 Func_32f9:: ; 32f9 (0:32f9)
 	ld a, [wROMBank]
@@ -3596,14 +3790,157 @@ Func_32f9:: ; 32f9 (0:32f9)
 	jp Func_629a6
 ; 0x3308
 
-	INCROM $3308, $3416
-
-Func_3416:: ; 3416 (0:3416)
+Func_3308:: ; 3308 (0:3308)
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(Func_642d9)
+	ld a, BANK(Func_62908)
 	bankswitch
-	call Func_642d9
+	jp Func_62908
+; 0x3317
+
+Func_3317:: ; 3317 (0:3317)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62898)
+	bankswitch
+	jp Func_62898
+; 0x3326
+
+Func_3326:: ; 3326 (0:3326)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62840)
+	bankswitch
+	jp Func_62840
+; 0x3335
+
+Func_3335:: ; 3335 (0:3335)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_61f54)
+	bankswitch
+	jp Func_61f54
+; 0x3344
+
+Func_3344:: ; 3344 (0:3344)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_620a6)
+	bankswitch
+	jp Func_620a6
+; 0x3353
+
+Func_3353:: ; 3353 (0:3353)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_621fb)
+	bankswitch
+	jp Func_621fb
+; 0x3362
+
+Func_3362:: ; 3362 (0:3362)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_622bd)
+	bankswitch
+	jp Func_622bd
+; 0x3371
+
+Func_3371:: ; 3371 (0:3371)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62926)
+	bankswitch
+	jp Func_62926
+; 0x3380
+
+Func_3380:: ; 3380 (0:3380)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62382)
+	bankswitch
+	jp Func_62382
+; 0x338f
+
+Func_338f:: ; 338f (0:338f)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_6247b)
+	bankswitch
+	jp Func_6247b
+; 0x339e
+
+Func_339e:: ; 339e (0:339e)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62574)
+	bankswitch
+	jp Func_62574
+; 0x33ad
+
+Func_33ad:: ; 33ad (0:33ad)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62605)
+	bankswitch
+	jp Func_62605
+; 0x33bc
+
+ObjAction_FullThrowLeft:: ; 33bc (0:33bc)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_626da)
+	bankswitch
+	jp Func_626da
+; 0x33cb
+
+ObjAction_FullThrowRight:: ; 33cb (0:33cb)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62768)
+	bankswitch
+	jp Func_62768
+; 0x33da
+
+ObjAction_BumpLeft:: ; 33da (0:33da)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(_ObjAction_BumpLeft)
+	bankswitch
+	jp _ObjAction_BumpLeft
+; 0x33e9
+
+ObjAction_BumpRight:: ; 33e9 (0:33e9)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(_ObjAction_BumpRight)
+	bankswitch
+	jp _ObjAction_BumpRight
+; 0x33f8
+
+Func_33f8:: ; 33f8 (0:33f8)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62892)
+	bankswitch
+	jp Func_62892
+; 0x3407
+
+Func_3407:: ; 3407 (0:3407)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_6283a)
+	bankswitch
+	jp Func_6283a
+; 0x3416
+
+; bc = object creation data
+CreateObjectAtRelativePos:: ; 3416 (0:3416)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(_CreateObjectAtRelativePos)
+	bankswitch
+	call _CreateObjectAtRelativePos
 	pop af
 	bankswitch
 	ret
@@ -3637,12 +3974,12 @@ Func_34b7:: ; 34b7 (0:34b7)
 
 	INCROM $34ce, $34e5
 
-Func_34e5:: ; 34e5 (0:34e5)
+ObjAction_Vanish:: ; 34e5 (0:34e5)
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(Func_6189d)
+	ld a, BANK(_ObjAction_Vanish)
 	bankswitch
-	call Func_6189d
+	call _ObjAction_Vanish
 	pop af
 	bankswitch
 	ret
@@ -3710,7 +4047,31 @@ Func_3573:: ; 3573 (0:3573)
 	ret
 ; 0x358b
 
-	INCROM $358b, $3a00
+Func_358b:: ; 358b (0:358b)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_19b9b)
+	bankswitch
+	call Func_19b9b
+	pop af
+	bankswitch
+	ld a, b
+	ret
+; 0x35a3
+
+Func_35a3:: ; 35a3 (0:35a3)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_19b8b)
+	bankswitch
+	call Func_19b8b
+	pop af
+	bankswitch
+	ld a, b
+	ret
+; 0x35bb
+
+	INCROM $35bb, $3a00
 
 ; b = sprite bank
 ; de = pointer to sprite

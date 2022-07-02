@@ -44,10 +44,10 @@ MACRO obj_struct
 \1XPos::            dw
 \1Unk07::           db ; high nybble = OAM bank
 \1InteractionType:: db
-\1Unk09::           db
-\1Unk0a::           db
-\1Unk0b::           db
-\1Unk0c::           db
+\1CollBoxTop::      db
+\1CollBoxBottom::   db
+\1CollBoxLeft::     db
+\1CollBoxRight::    db
 \1ScreenYPos::      db
 \1ScreenXPos::      db
 \1Frame::           db
@@ -55,11 +55,12 @@ MACRO obj_struct
 \1FramesetPtr::     dw
 \1FrameDuration::   db
 \1FramesetOffset::  db
-\1Unk16::           db
+\1ActionDuration::  db
 \1Unk17::           db
 \1Unk18::           db
-\1Unk19::           db
+\1MovementIndex::   db
 \1Unk1a::           db
+; bit 7: set if facing right, left otherwise
 \1Action::          db
 \1Unk1c::           db
 \1Unk1d::           db

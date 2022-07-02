@@ -1352,7 +1352,7 @@ _InitTempleScene: ; acb25 (2b:4b25)
 	stop_music2
 
 	ld a, BANK("WRAM2")
-	ldh [rSMBK], a
+	ldh [rSVBK], a
 
 	xor a
 	ldh [rSCX], a
@@ -4779,7 +4779,7 @@ Func_ae6f8: ; ae6f8 (2b:66f8)
 	ld [hl], a
 	ld a, SCENEWARIO_ON_FIRE
 	call SetSceneWarioState
-	play_sfx SFX_019
+	play_sfx SFX_THROW
 	xor a
 	ld [w2d894], a
 	ld [w2d892], a

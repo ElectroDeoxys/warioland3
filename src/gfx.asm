@@ -191,3 +191,28 @@ INCLUDE "gfx/oam/wario2.asm"
 SECTION "Wario OAM 3", ROMX
 
 INCLUDE "gfx/oam/wario3.asm"
+
+
+SECTION "Object Framesets", ROMX
+
+INCLUDE "gfx/oam/object_framesets.asm"
+
+
+SECTION "Objects OAM 1", ROMX
+
+INCLUDE "gfx/oam/objects1.asm"
+
+
+SECTION "Objects OAM 2", ROMX
+
+INCLUDE "gfx/oam/objects2.asm"
+
+
+SECTION "Objects OAM 3", ROMX
+
+INCLUDE "gfx/oam/objects3.asm"
+
+
+SECTION "Objects OAM 4", ROMX
+
+INCLUDE "gfx/oam/objects4.asm"

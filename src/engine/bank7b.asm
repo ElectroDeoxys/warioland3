@@ -1500,7 +1500,7 @@ UpdateState_BallSentUpwards: ; 1edd7e (7b:5d7e)
 	farcall CheckUpCollision
 	ld a, b
 	and a
-	jp z, Func_1197
+	jp z, HandleUpwardsFloorTransition
 	ld a, FALLING_JUMP_VEL_INDEX
 	ld [wJumpVelIndex], a
 	ld a, JUMP_VEL_NORMAL

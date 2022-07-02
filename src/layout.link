@@ -63,13 +63,13 @@ ROMX $0f
 	"SFX 2"
 	"Audio Miscellaneous"
 ROMX $10
-	"Bank 10"
+	"Object Update Functions 1"
 ROMX $11
-	"Bank 11"
+	"Object Update Functions 2"
 ROMX $12
-	"Bank 12"
+	"Object Update Functions 3"
 ROMX $13
-	"Bank 13"
+	"Object Update Functions 4"
 ROMX $14
 	"Bank 14"
 ROMX $15
@@ -187,13 +187,13 @@ ROMX $57
 ROMX $58
 	"Bank 58"
 ROMX $60
-	"Bank 60"
+	"Objects OAM 1"
 ROMX $61
-	"Bank 61"
+	"Objects OAM 2"
 ROMX $62
-	"Bank 62"
+	"Objects OAM 3"
 ROMX $63
-	"Bank 63"
+	"Objects OAM 4"
 ROMX $64
 	"Bank 64"
 ROMX $65

@@ -111,7 +111,7 @@ SoundHeaders: ; 3155e (c:555e)
 	sfx Sfx_016,                         $00, 239, CHAN5, 1 ; SFX_016
 	sfx Sfx_017,                         $00, 238, CHAN5, 2 ; SFX_017
 	sfx Sfx_018,                         $00, 230, CHAN8, 1 ; SFX_018
-	sfx Sfx_019,                         $00, 236, CHAN5, 1 ; SFX_019
+	sfx Sfx_019,                         $00, 236, CHAN5, 1 ; SFX_THROW
 	sfx Sfx_01a,                         $00, 239, CHAN7, 1 ; SFX_01A
 	sfx Sfx_01b,                         $00, 220, CHAN5, 2 ; SFX_01B
 	sfx Sfx_FlatWalk,                    $00, 200, CHAN5, 1 ; SFX_FLAT_WALK

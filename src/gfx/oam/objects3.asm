@@ -1,6 +1,6 @@
 	INCROM $188000, $188279
 
-OAM_188279: ; 188279 (62:4279)
+OAM_188279:: ; 188279 (62:4279)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -93,7 +93,7 @@ OAM_188279: ; 188279 (62:4279)
 
 	INCROM $18834a, $18aba0
 
-OAM_18aba0: ; 18aba0 (62:6ba0)
+OAM_18aba0:: ; 18aba0 (62:6ba0)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2

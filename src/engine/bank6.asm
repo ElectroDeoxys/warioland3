@@ -248,7 +248,7 @@ Func_181c8: ; 181c8 (6:41c8)
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_181ac
-	ld a, 1 << WATER_CURRENT_RIGHT_F
+	ld a, WATER_CURRENT_RIGHT
 	ld [wWaterCurrent], a
 	jp Func_181ac
 ; 0x181d8
@@ -257,7 +257,7 @@ Func_181d8: ; 181d8 (6:41d8)
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_181ac
-	ld a, 1 << WATER_CURRENT_UP_F
+	ld a, WATER_CURRENT_UP
 	ld [wWaterCurrent], a
 	jp Func_181ac
 ; 0x181e8
@@ -266,7 +266,7 @@ Func_181e8: ; 181e8 (6:41e8)
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_181ac
-	ld a, 1 << WATER_CURRENT_LEFT_F
+	ld a, WATER_CURRENT_LEFT
 	ld [wWaterCurrent], a
 	jp Func_181ac
 ; 0x181f8
@@ -275,7 +275,7 @@ Func_181f8: ; 181f8 (6:41f8)
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_181ac
-	ld a, 1 << WATER_CURRENT_DOWN_F
+	ld a, WATER_CURRENT_DOWN
 	ld [wWaterCurrent], a
 	jp Func_181ac
 ; 0x18208
@@ -1402,7 +1402,7 @@ Func_19609: ; 19609 (6:5609)
 	ldh a, [hXPosHi]
 	ld [hli], a
 	ld bc, $4e5a
-	farcall Func_6428a
+	farcall CreateObjectFromCurObjPos
 	ld hl, hffa0
 	ld de, wCurObjUnk01
 	ld b, OBJ_UNK_07 - OBJ_UNK_01
@@ -1454,7 +1454,7 @@ Func_19690: ; 19690 (6:5690)
 	ldh a, [hXPosHi]
 	ld [hli], a
 	ld bc, $4e6d
-	farcall Func_6428a
+	farcall CreateObjectFromCurObjPos
 	ld hl, hffa0
 	ld de, wCurObjUnk01
 	ld b, OBJ_UNK_07 - OBJ_UNK_01
@@ -2206,7 +2206,7 @@ Func_19b7b:: ; 19b7b (6:5b7b)
 	ret
 ; 0x19b8b
 
-Func_19b8b: ; 19b8b (6:5b8b)
+Func_19b8b:: ; 19b8b (6:5b8b)
 	ld hl, hPos
 	call GetCell
 	ld a, 1 << 2
@@ -2216,7 +2216,7 @@ Func_19b8b: ; 19b8b (6:5b8b)
 	ret
 ; 0x19b9b
 
-Func_19b9b: ; 19b9b (6:5b9b)
+Func_19b9b:: ; 19b9b (6:5b9b)
 	ld hl, hPos
 	call GetCell
 	ld a, 1 << 3

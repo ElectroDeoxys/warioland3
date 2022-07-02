@@ -8688,7 +8688,54 @@ Func_baee: ; baee (2:7aee)
 	ret
 ; 0xbb2d
 
-	INCROM $bb2d, $bb85
+Func_bb2d: ; bb2d (2:7b2d)
+	ldh a, [rSVBK]
+	push af
+	ld a, $01
+	ldh [rSVBK], a
+	ld a, [wSRAMBank]
+	push af
+	ld a, $01
+	sramswitch
+	ld c, $01
+	ld a, [hld]
+	cp $c0
+	jr c, .asm_bb51
+	inc c
+	sub $20
+	cp $c0
+	jr c, .asm_bb51
+	inc c
+	sub $20
+.asm_bb51
+	ld l, [hl]
+	ld h, a
+	ld a, c
+	ld [wFloorSRAMBank], a
+	call Func_d8c
+	ld a, [wccec]
+	sramswitch
+	bit 0, b
+	jr z, .asm_bb76
+	ld a, [hl]
+	and $0f
+	ld [hl], a
+	pop af
+	sramswitch
+	pop af
+	ldh [rSVBK], a
+	ret
+
+.asm_bb76
+	ld a, [hl]
+	and $f0
+	ld [hl], a
+	pop af
+	sramswitch
+	pop af
+	ldh [rSVBK], a
+	ret
+; 0xbb85
 
 Func_bb85: ; bb85 (2:7b85)
 	ld a, [wIsDMATransferPending]

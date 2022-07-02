@@ -9,21 +9,21 @@ OBJ_Y_POS            rw ; $03
 OBJ_X_POS            rw ; $05
 OBJ_UNK_07           rb ; $07
 OBJ_INTERACTION_TYPE rb ; $08
-OBJ_UNK_09           rb ; $09
-OBJ_UNK_0A           rb ; $0a
-OBJ_UNK_0B           rb ; $0b
-OBJ_UNK_0C           rb ; $0c
+OBJ_COLLBOX_TOP      rb ; $09
+OBJ_COLLBOX_BOTTOM   rb ; $0a
+OBJ_COLLBOX_LEFT     rb ; $0b
+OBJ_COLLBOX_RIGHT    rb ; $0c
 OBJ_SCREEN_Y_POS     rb ; $0d
 OBJ_SCREEN_X_POS     rb ; $0e
 OBJ_FRAME            rb ; $0f
-OBJ_UNK_10           rw ; $10
+OBJ_OAM_PTR          rw ; $10
 OBJ_FRAMESET_PTR     rw ; $12
 OBJ_FRAME_DURATION   rb ; $14
 OBJ_FRAMESET_OFFSET  rb ; $15
-OBJ_UNK_16           rb ; $16
+OBJ_ACTION_DURATION  rb ; $16
 OBJ_UNK_17           rb ; $17
 OBJ_UNK_18           rb ; $18
-OBJ_UNK_19           rb ; $19
+OBJ_MOVEMENT_INDEX   rb ; $19
 OBJ_UNK_1A           rb ; $1a
 OBJ_ACTION           rb ; $1b
 OBJ_UNK_1C           rb ; $1c
@@ -50,11 +50,6 @@ DEF OBJFLAG_UNK4 EQU (1 << OBJFLAG_UNK4_F)
 DEF OBJFLAG_UNK5 EQU (1 << OBJFLAG_UNK5_F)
 DEF OBJFLAG_UNK6 EQU (1 << OBJFLAG_UNK6_F)
 DEF OBJFLAG_UNK7 EQU (1 << OBJFLAG_UNK7_F)
-
-; enemies with InteractionType with
-; this flag set are considered heavy
-DEF HEAVY_OBJ_F EQU 7
-DEF HEAVY_OBJ EQU (1 << HEAVY_OBJ_F)
 
 ; wInteractionSide flags
 	const_def 4
@@ -160,31 +155,37 @@ DEF INTERACTION_DOWN  EQU (1 << INTERACTION_DOWN_F)  ; $80
 	const OBJ_INTERACTION_UNUSED_5       ; 57
 	const OBJ_INTERACTION_UNUSED_6       ; 58
 
+; enemies with InteractionType with
+; this flag set are considered heavy
+DEF HEAVY_OBJ_F EQU 7
+DEF HEAVY_OBJ EQU (1 << HEAVY_OBJ_F)
+DEF INTERACTION_MASK EQU $ff ^ HEAVY_OBJ
+
 	const_def
 	const OBJACTION_00 ; $00
-	const OBJACTION_01 ; $01
-	const OBJACTION_02 ; $02
-	const OBJACTION_03 ; $03
+	const OBJACTION_LAND ; $01
+	const OBJACTION_BUMP_LEFT_START ; $02
+	const OBJACTION_BUMP_RIGHT_START ; $03
 	const OBJACTION_04 ; $04
 	const OBJACTION_05 ; $05
-	const OBJACTION_06 ; $06
-	const OBJACTION_07 ; $07
+	const OBJACTION_GRAB_LEFT_START ; $06
+	const OBJACTION_GRAB_RIGHT_START ; $07
 	const OBJACTION_08 ; $08
 	const OBJACTION_09 ; $09
-	const OBJACTION_0A ; $0a
+	const OBJACTION_VANISH ; $0a
 	const OBJACTION_0B ; $0b
 	const OBJACTION_0C ; $0c
 	const OBJACTION_0D ; $0d
 	const OBJACTION_0E ; $0e
 	const OBJACTION_0F ; $0f
 	const OBJACTION_10 ; $10
-	const OBJACTION_11 ; $11
+	const OBJACTION_STANDING_FALL_START ; $11
 	const OBJACTION_12 ; $12
-	const OBJACTION_13 ; $13
+	const OBJACTION_TURN_AROUND_START ; $13
 	const OBJACTION_14 ; $14
 	const OBJACTION_15 ; $15
-	const OBJACTION_16 ; $16
-	const OBJACTION_17 ; $17
+	const OBJACTION_STUN_LEFT_START ; $16
+	const OBJACTION_STUN_RIGHT_START ; $17
 	const OBJACTION_18 ; $18
 	const OBJACTION_19 ; $19
 	const OBJACTION_1A ; $1a
@@ -206,13 +207,13 @@ DEF INTERACTION_DOWN  EQU (1 << INTERACTION_DOWN_F)  ; $80
 	const OBJACTION_2A ; $2a
 	const OBJACTION_2B ; $2b
 	const OBJACTION_2C ; $2c
-	const OBJACTION_2D ; $2d
-	const OBJACTION_2E ; $2e
-	const OBJACTION_2F ; $2f
-	const OBJACTION_30 ; $30
-	const OBJACTION_31 ; $31
-	const OBJACTION_32 ; $32
-	const OBJACTION_33 ; $33
+	const OBJACTION_SLEEP ; $2d
+	const OBJACTION_ANGRY ; $2e
+	const OBJACTION_WAKE_UP ; $2f
+	const OBJACTION_FALL ; $30
+	const OBJACTION_WALK ; $31
+	const OBJACTION_BUMP_LEFT ; $32
+	const OBJACTION_BUMP_RIGHT ; $33
 	const OBJACTION_34 ; $34
 	const OBJACTION_35 ; $35
 	const OBJACTION_36 ; $36
@@ -226,19 +227,19 @@ DEF INTERACTION_DOWN  EQU (1 << INTERACTION_DOWN_F)  ; $80
 	const OBJACTION_3E ; $3e
 	const OBJACTION_3F ; $3f
 	const OBJACTION_40 ; $40
-	const OBJACTION_41 ; $41
+	const OBJACTION_STANDING_FALL ; $41
 	const OBJACTION_42 ; $42
-	const OBJACTION_43 ; $43
+	const OBJACTION_TURN_AROUND ; $43
 	const OBJACTION_44 ; $44
 	const OBJACTION_45 ; $45
-	const OBJACTION_46 ; $46
-	const OBJACTION_47 ; $47
+	const OBJACTION_STUN_LEFT ; $46
+	const OBJACTION_STUN_RIGHT ; $47
 	const OBJACTION_48 ; $48
 	const OBJACTION_49 ; $49
 	const OBJACTION_4A ; $4a
 	const OBJACTION_4B ; $4b
-	const OBJACTION_4C ; $4c
-	const OBJACTION_4D ; $4d
+	const OBJACTION_FULL_THROW_LEFT_START ; $4c
+	const OBJACTION_FULL_THROW_RIGHT_START ; $4d
 	const OBJACTION_4E ; $4e
 	const OBJACTION_4F ; $4f
 	const OBJACTION_50 ; $50
@@ -255,13 +256,8 @@ DEF INTERACTION_DOWN  EQU (1 << INTERACTION_DOWN_F)  ; $80
 	const OBJACTION_5B ; $5b
 	const OBJACTION_5C ; $5c
 	const OBJACTION_5D ; $5d
-	const OBJACTION_5E ; $5e
-	const OBJACTION_5F ; $5f
-	const OBJACTION_60 ; $60
-	const OBJACTION_61 ; $61
-	const OBJACTION_62 ; $62
-	const OBJACTION_63 ; $63
-	const OBJACTION_64 ; $64
+	const OBJACTION_FULL_THROW_LEFT ; $5e
+	const OBJACTION_FULL_THROW_RIGHT ; $5f
 
 	const_def
 	const ENEMY_GROUP_000 ; $00

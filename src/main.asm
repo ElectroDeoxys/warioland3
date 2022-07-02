@@ -47,24 +47,24 @@ SECTION "Bank A", ROMX
 INCLUDE "engine/banka.asm"
 
 
-SECTION "Bank 10", ROMX
+SECTION "Object Update Functions 1", ROMX
 
-INCLUDE "engine/bank10.asm"
-
-
-SECTION "Bank 11", ROMX
-
-	INCROM $44000, $47db3
+INCLUDE "engine/level/object_functions1.asm"
 
 
-SECTION "Bank 12", ROMX
+SECTION "Object Update Functions 2", ROMX
 
-	INCROM $48000, $4ab1e
+INCLUDE "engine/level/object_functions2.asm"
 
 
-SECTION "Bank 13", ROMX
+SECTION "Object Update Functions 3", ROMX
 
-	INCROM $4c000, $4d8fa
+INCLUDE "engine/level/object_functions3.asm"
+
+
+SECTION "Object Update Functions 4", ROMX
+
+INCLUDE "engine/level/object_functions4.asm"
 
 
 SECTION "Bank 14", ROMX
@@ -85,11 +85,6 @@ INCLUDE "engine/bank18.asm"
 SECTION "Bank 19", ROMX
 
 INCLUDE "engine/bank19.asm"
-
-
-SECTION "Object Framesets", ROMX
-
-INCLUDE "engine/bank1a.asm"
 
 
 SECTION "Bank 20", ROMX
@@ -658,26 +653,6 @@ INCLUDE "engine/bank57.asm"
 SECTION "Bank 58", ROMX
 
 INCLUDE "engine/bank58.asm"
-
-
-SECTION "Bank 60", ROMX
-
-	INCROM $180000, $181eb6
-
-
-SECTION "Bank 61", ROMX
-
-	INCROM $184000, $185ce5
-
-
-SECTION "Bank 62", ROMX
-
-INCLUDE "engine/bank62.asm"
-
-
-SECTION "Bank 63", ROMX
-
-INCLUDE "engine/bank63.asm"
 
 
 SECTION "Bank 64", ROMX

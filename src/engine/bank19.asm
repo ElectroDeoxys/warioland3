@@ -1,7 +1,7 @@
 LoadEnemyGroupData:: ; 64000 (19:4000)
 ; fills w1d120 with $43c3
 	ld hl, w1d120
-	ld bc, Data_643c3
+	ld bc, DummyObjectData
 	ld e, $10
 .loop_1
 	ld a, c
@@ -124,6 +124,7 @@ LoadEnemyGroupData:: ; 64000 (19:4000)
 
 	xor a ; VRAM0
 	ldh [rVBK], a
+
 	ld a, $d
 	ldh [hffa0], a
 	ld de, w1d126
@@ -233,25 +234,25 @@ Func_640e5: ; 640e5 (19:40e5)
 	ld [de], a ; OBJ_INTERACTION_TYPE
 	inc e
 	ld a, [hli]
-	ld [de], a ; OBJ_UNK_09
+	ld [de], a ; OBJ_COLLBOX_TOP
 	inc e
 	xor a
-	ld [de], a ; OBJ_UNK_0A
+	ld [de], a ; OBJ_COLLBOX_BOTTOM
 
 	ld a, e
-	add OBJ_FRAME - OBJ_UNK_0A
+	add OBJ_FRAME - OBJ_COLLBOX_BOTTOM
 	ld e, a
 	xor a
 	ld [de], a ; OBJ_FRAME
 	inc e
-	ld a, [hli] ; OBJ_UNK_10
+	ld a, [hli] ; OBJ_OAM_PTR
 	ld [de], a
 	inc e
 	ld a, [hli]
 	ld [de], a
 
 	ld a, e
-	add OBJ_FRAME_DURATION - (OBJ_UNK_10 + 1)
+	add OBJ_FRAME_DURATION - (OBJ_OAM_PTR + 1)
 	ld e, a
 	ld a, $7f
 	ld [de], a ; OBJ_FRAME_DURATION
@@ -425,43 +426,18 @@ Func_64187: ; 64187 (19:4187)
 	ret
 ; 0x6428a
 
-Func_6428a: ; 6428a (19:428a)
+; bc = object creation data
+CreateObjectFromCurObjPos: ; 6428a (19:428a)
 	ld h, HIGH(wObj1Flags)
-	ld l, LOW(wObj1Flags)
+FOR n, 1, NUM_OBJECTS + 1
+	ld l, LOW(wObj{u:n}Flags)
 	ld a, [hl]
 	rra
-	jr nc, .asm_642bd
-	ld l, LOW(wObj2Flags)
-	ld a, [hl]
-	rra
-	jr nc, .asm_642bd
-	ld l, LOW(wObj3Flags)
-	ld a, [hl]
-	rra
-	jr nc, .asm_642bd
-	ld l, LOW(wObj4Flags)
-	ld a, [hl]
-	rra
-	jr nc, .asm_642bd
-	ld l, LOW(wObj5Flags)
-	ld a, [hl]
-	rra
-	jr nc, .asm_642bd
-	ld l, LOW(wObj6Flags)
-	ld a, [hl]
-	rra
-	jr nc, .asm_642bd
-	ld l, LOW(wObj7Flags)
-	ld a, [hl]
-	rra
-	jr nc, .asm_642bd
-	ld l, LOW(wObj8Flags)
-	ld a, [hl]
-	rra
-	jr nc, .asm_642bd
+	jr nc, .got_obj_slot
+ENDR
 	ret
 
-.asm_642bd
+.got_obj_slot
 	ld a, OBJFLAG_UNK0 | OBJFLAG_UNK6
 	ld [hli], a
 	ld a, [wCurObjUnk01]
@@ -475,46 +451,20 @@ Func_6428a: ; 6428a (19:428a)
 	ld a, [wCurObjXPos + 0]
 	ld [hli], a
 	ld a, [wCurObjXPos + 1]
-	jr Func_642d9.asm_64352
+	jr CreateObject_GotPos
 ; 0x642d9
 
-Func_642d9:: ; 642d9 (19:42d9)
+_CreateObjectAtRelativePos:: ; 642d9 (19:42d9)
 	ld h, HIGH(wObj1Flags)
-	ld l, LOW(wObj1Flags)
+FOR n, 1, NUM_OBJECTS + 1
+	ld l, LOW(wObj{u:n}Flags)
 	ld a, [hl]
 	rra
-	jr nc, .asm_6430c
-	ld l, LOW(wObj2Flags)
-	ld a, [hl]
-	rra
-	jr nc, .asm_6430c
-	ld l, LOW(wObj3Flags)
-	ld a, [hl]
-	rra
-	jr nc, .asm_6430c
-	ld l, LOW(wObj4Flags)
-	ld a, [hl]
-	rra
-	jr nc, .asm_6430c
-	ld l, LOW(wObj5Flags)
-	ld a, [hl]
-	rra
-	jr nc, .asm_6430c
-	ld l, LOW(wObj6Flags)
-	ld a, [hl]
-	rra
-	jr nc, .asm_6430c
-	ld l, LOW(wObj7Flags)
-	ld a, [hl]
-	rra
-	jr nc, .asm_6430c
-	ld l, LOW(wObj8Flags)
-	ld a, [hl]
-	rra
-	jr nc, .asm_6430c
+	jr nc, .got_obj_slot
+ENDR
 	ret
 
-.asm_6430c
+.got_obj_slot
 	ld a, OBJFLAG_UNK0 | OBJFLAG_UNK6
 	ld [hli], a
 	ld a, [wCurObjUnk01]
@@ -525,121 +475,121 @@ Func_642d9:: ; 642d9 (19:42d9)
 	ld e, a
 	ld a, [bc]
 	rla
-	jr c, .asm_6432a
+	jr c, .negative_y
 	rra
 	add e
 	ld [hli], a
 	ld a, [wCurObjYPos + 1]
-	jr nc, .asm_64333
+	jr nc, .got_hi_y
 	inc a
-	jr .asm_64333
-.asm_6432a
+	jr .got_hi_y
+.negative_y
 	rra
 	add e
 	ld [hli], a
 	ld a, [wCurObjYPos + 1]
-	jr c, .asm_64333
+	jr c, .got_hi_y
 	dec a
-.asm_64333
+.got_hi_y
 	ld [hli], a
 	inc bc
 	ld a, [wCurObjXPos]
 	ld e, a
 	ld a, [bc]
 	rla
-	jr c, .asm_64348
+	jr c, .negative_x
 	rra
 	add e
 	ld [hli], a
 	ld a, [wCurObjXPos + 1]
-	jr nc, .asm_64351
+	jr nc, .got_hi_x
 	inc a
-	jr .asm_64351
-.asm_64348
+	jr .got_hi_x
+.negative_x
 	rra
 	add e
 	ld [hli], a
 	ld a, [wCurObjXPos + 1]
-	jr c, .asm_64351
+	jr c, .got_hi_x
 	dec a
-.asm_64351
+.got_hi_x
 	inc bc
-.asm_64352
+CreateObject_GotPos:: ; 64352 (19:4352)
 	ld [hli], a
 	ld e, l
 	ld d, h
 	ld l, c
 	ld h, b
 	ld a, [hli]
+	ld [de], a ; OBJ_UNK_07
+	inc e
+	ld a, [hli]
+	ld [de], a ; OBJ_INTERACTION_TYPE
+	inc e
+	ld a, [hli]
+	ld [de], a ; OBJ_COLLBOX_TOP
+	inc e
+	ld a, [hli]
+	ld [de], a ; OBJ_COLLBOX_BOTTOM
+	inc e
+	ld a, [hli]
+	ld [de], a ; OBJ_COLLBOX_LEFT
+	inc e
+	ld a, [hli]
+	ld [de], a ; OBJ_COLLBOX_RIGHT
+	inc e
+	inc e
+	inc e
+	inc e
+	ld a, [hli] ; OBJ_OAM_PTR
 	ld [de], a
 	inc e
 	ld a, [hli]
 	ld [de], a
 	inc e
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hli]
-	ld [de], a
-	inc e
-	inc e
-	inc e
-	inc e
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hli]
-	ld [de], a
-	inc e
-	xor a
-	ld [de], a
-	inc e
-	ld [de], a
-	inc e
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hli]
+	ld a, [hli] ; OBJ_FRAMESET_PTR
 	ld [de], a
 	inc e
 	ld a, [hli]
 	ld [de], a
 	inc e
 	xor a
-	ld [de], a
+	ld [de], a ; OBJ_FRAME_DURATION
+	inc e
+	ld [de], a ; OBJ_FRAMESET_OFFSET
+	inc e
+	ld a, [hli]
+	ld [de], a ; OBJ_ACTION_DURATION
+	inc e
+	ld a, [hli]
+	ld [de], a ; OBJ_UNK_17
+	inc e
+	ld a, [hli]
+	ld [de], a ; OBJ_UNK_18
+	inc e
+	ld a, [hli]
+	ld [de], a ; OBJ_MOVEMENT_INDEX
+	inc e
+	ld a, [hli]
+	ld [de], a ; OBJ_UNK_1A
+	inc e
+	ld a, [hli]
+	ld [de], a ; OBJ_ACTION
+	inc e
+	xor a
+	ld [de], a ; OBJ_UNK_1C
 	inc e
 	inc e
 	ld a, [hli]
-	ld [de], a
+	ld [de], a ; OBJ_UPDATE_FUNCTION
 	inc e
 	ld a, [hli]
 	ld [de], a
 	ld a, e
-	sub $1f
+	sub (OBJ_UPDATE_FUNCTION + 1) - OBJ_FLAGS
 	ld e, a
-	ld a, [hl]
-	or $41
+	ld a, [hl] ; OBJ_FLAGS
+	or OBJFLAG_UNK0 | OBJFLAG_UNK6
 	ld [de], a
 	ret
 ; 0x643a1
@@ -672,862 +622,799 @@ Func_643a1: ; 643a1 (19:43a1)
 .data_643bf
 	dw Data_64783
 	dw NULL
-
 ; 0x643c3
 
-Data_643c3: ; 643c3 (19:43c3)
-	db ($8 << 4) | $0 ; low bank nybble, ??
-	db $00, $00 ; ??, ??
-	dw $407b ; ??
-	dw $737e ; update function
-	db $00 ; ??
+; \1 OAM ptr
+; \2 unknown
+; \3 interaction type
+; \4 collision box top
+; \5 update function
+; \6 object flags
+MACRO object_data
+assert (BANK(\1) - BANK("Objects OAM 1")) | (BANK(\5) - BANK("Object Update Functions 1")) == (BANK(\5) - BANK("Object Update Functions 1"))
+	dn (BANK(\5) - BANK("Object Update Functions 1")), \2
+	db \3, \4
+	dw \1
+	dw \5
+	db \6
+ENDM
 
-Data_643cb: ; 643cb (19:43cb)
-	db ($3 << 4) | $1 ; low bank nybble, ??
-	db $94, $e8 ; ??, ??
-	dw $4000 ; ??
-	dw $48b6 ; update function
-	db $00 ; ??
-
-Data_643d3: ; 643d3 (19:43d3)
-	db ($3 << 4) | $1 ; low bank nybble, ??
-	db $95, $e8 ; ??, ??
-	dw $4000 ; ??
-	dw $48bf ; update function
-	db $00 ; ??
-
-Data_643db: ; 643db (19:43db)
-	db ($3 << 4) | $1 ; low bank nybble, ??
-	db $96, $e8 ; ??, ??
-	dw $4000 ; ??
-	dw $48c8 ; update function
-	db $00 ; ??
-
-Data_643e3: ; 643e3 (19:43e3)
-	db ($3 << 4) | $1 ; low bank nybble, ??
-	db $97, $e8 ; ??, ??
-	dw $4000 ; ??
-	dw $48d1 ; update function
-	db $00 ; ??
-
-Data_643eb: ; 643eb (19:43eb)
-	db ($3 << 4) | $2 ; low bank nybble, ??
-	db $10, $e8 ; ??, ??
-	dw $4000 ; ??
-	dw $4992 ; update function
-	db $00 ; ??
-
-Data_643f3: ; 643f3 (19:43f3)
-	db ($3 << 4) | $2 ; low bank nybble, ??
-	db $11, $e8 ; ??, ??
-	dw $4000 ; ??
-	dw $4992 ; update function
-	db $00 ; ??
-
-Data_643fb: ; 643fb (19:43fb)
-	db ($3 << 4) | $2 ; low bank nybble, ??
-	db $12, $e8 ; ??, ??
-	dw $4000 ; ??
-	dw $4992 ; update function
-	db $00 ; ??
-
-Data_64403: ; 64403 (19:4403)
-	db ($3 << 4) | $2 ; low bank nybble, ??
-	db $13, $e8 ; ??, ??
-	dw $4000 ; ??
-	dw $4992 ; update function
-	db $00 ; ??
-
-Data_6440b: ; 6440b (19:440b)
-	db ($3 << 4) | $3 ; low bank nybble, ??
-	db $0d, $e7 ; ??, ??
-	dw $4000 ; ??
-	dw $49d4 ; update function
-	db $00 ; ??
-
-Data_64413: ; 64413 (19:4413)
-	db ($0 << 4) | $0 ; low bank nybble, ??
-	db $01, $f2 ; ??, ??
-	dw $407b ; ??
-	dw Func_40040 ; update function
-	db $80 ; ??
-
-Data_6441b: ; 6441b (19:441b)
-	db ($0 << 4) | $1 ; low bank nybble, ??
-	db $8c, $ef ; ??, ??
-	dw $4564 ; ??
-	dw Func_406c4 ; update function
-	db $80 ; ??
-
-Data_64423: ; 64423 (19:4423)
-	db ($0 << 4) | $2 ; low bank nybble, ??
-	db $8c, $f0 ; ??, ??
-	dw $4242 ; ??
-	dw Func_40825 ; update function
-	db $80 ; ??
+DummyObjectData:   object_data OAM_18007b, $0, OBJ_INTERACTION_00,                           0, DummyObjectFunc,   $0
+GreyTreasureData:  object_data OAM_18c000, $1, OBJ_INTERACTION_GREY_TREASURE  | HEAVY_OBJ, -24, GreyTreasureFunc,  $0
+RedTreasureData:   object_data OAM_18c000, $1, OBJ_INTERACTION_RED_TREASURE   | HEAVY_OBJ, -24, RedTreasureFunc,   $0
+GreenTreasureData: object_data OAM_18c000, $1, OBJ_INTERACTION_GREEN_TREASURE | HEAVY_OBJ, -24, GreenTreasureFunc, $0
+BlueTreasureData:  object_data OAM_18c000, $1, OBJ_INTERACTION_BLUE_TREASURE  | HEAVY_OBJ, -24, BlueTreasureFunc,  $0
+GreyKeyData:       object_data OAM_18c000, $2, OBJ_INTERACTION_GREY_KEY,                   -24, KeyFunc,           $0
+RedKeyData:        object_data OAM_18c000, $2, OBJ_INTERACTION_RED_KEY,                    -24, KeyFunc,           $0
+GreenKeyData:      object_data OAM_18c000, $2, OBJ_INTERACTION_GREEN_KEY,                  -24, KeyFunc,           $0
+BlueKeyData:       object_data OAM_18c000, $2, OBJ_INTERACTION_BLUE_KEY,                   -24, KeyFunc,           $0
+MusicaCoinData:    object_data OAM_18c000, $3, OBJ_INTERACTION_MUSICAL_COIN,               -25, MusicalCoinFunc,   $0
+SpearheadData:     object_data OAM_18007b, $0, OBJ_INTERACTION_01,                         -14, SpearheadFunc,     OBJFLAG_UNK7
+FutamoguData:      object_data OAM_180564, $1, OBJ_INTERACTION_0C             | HEAVY_OBJ, -17, FutamoguFunc,      OBJFLAG_UNK7
+Data_64423: object_data OAM_180242, $2, OBJ_INTERACTION_0C | HEAVY_OBJ, -16, Func_40825, OBJFLAG_UNK7
 
 Data_6442b: ; 6442b (19:442b)
 	db ($0 << 4) | $4 ; low bank nybble, ??
 	db $0e, $f0 ; ??, ??
-	dw $4838 ; ??
+	dw $4838 ; OAM ptr
 	dw Func_40ba9 ; update function
 	db $00 ; ??
 
 Data_64433: ; 64433 (19:4433)
 	db ($0 << 4) | $6 ; low bank nybble, ??
 	db $0e, $f0 ; ??, ??
-	dw $4838 ; ??
+	dw $4838 ; OAM ptr
 	dw Func_40b9d ; update function
 	db $00 ; ??
 
 Data_6443b: ; 6443b (19:443b)
 	db ($0 << 4) | $7 ; low bank nybble, ??
 	db $2e, $f0 ; ??, ??
-	dw $4838 ; ??
+	dw $4838 ; OAM ptr
 	dw Func_40b8c ; update function
 	db $00 ; ??
 
 Data_64443: ; 64443 (19:4443)
 	db ($2 << 4) | $b ; low bank nybble, ??
 	db $22, $e2 ; ??, ??
-	dw $55ec ; ??
+	dw $55ec ; OAM ptr
 	dw $56bd ; update function
 	db $00 ; ??
 
 Data_6444b: ; 6444b (19:444b)
 	db ($2 << 4) | $c ; low bank nybble, ??
 	db $af, $e0 ; ??, ??
-	dw $56e1 ; ??
+	dw $56e1 ; OAM ptr
 	dw $571c ; update function
 	db $00 ; ??
 
 Data_64453: ; 64453 (19:4453)
 	db ($0 << 4) | $6 ; low bank nybble, ??
 	db $01, $00 ; ??, ??
-	dw $4916 ; ??
+	dw $4916 ; OAM ptr
 	dw Func_40ca1 ; update function
 	db $00 ; ??
 
 Data_6445b: ; 6445b (19:445b)
 	db ($0 << 4) | $7 ; low bank nybble, ??
 	db $8f, $ee ; ??, ??
-	dw $49ff ; ??
+	dw $49ff ; OAM ptr
 	dw Func_40e12 ; update function
 	db $80 ; ??
 
 Data_64463: ; 64463 (19:4463)
 	db ($2 << 4) | $0 ; low bank nybble, ??
 	db $3d, $f1 ; ??, ??
-	dw $6703 ; ??
+	dw $6703 ; OAM ptr
 	dw $5fc4 ; update function
 	db $00 ; ??
 
 Data_6446b: ; 6446b (19:446b)
 	db ($0 << 4) | $9 ; low bank nybble, ??
 	db $01, $f4 ; ??, ??
-	dw $4b43 ; ??
+	dw $4b43 ; OAM ptr
 	dw Func_41357 ; update function
 	db $80 ; ??
 
 Data_64473: ; 64473 (19:4473)
 	db ($0 << 4) | $a ; low bank nybble, ??
 	db $0b, $f2 ; ??, ??
-	dw $4ea7 ; ??
+	dw $4ea7 ; OAM ptr
 	dw Func_41a7c ; update function
 	db $80 ; ??
 
 Data_6447b: ; 6447b (19:447b)
 	db ($0 << 4) | $b ; low bank nybble, ??
 	db $01, $e7 ; ??, ??
-	dw $536c ; ??
+	dw $536c ; OAM ptr
 	dw Func_42170 ; update function
 	db $80 ; ??
 
 Data_64483: ; 64483 (19:4483)
 	db ($0 << 4) | $c ; low bank nybble, ??
 	db $01, $e7 ; ??, ??
-	dw $5189 ; ??
+	dw $5189 ; OAM ptr
 	dw Func_42478 ; update function
 	db $80 ; ??
 
 Data_6448b: ; 6448b (19:448b)
 	db ($0 << 4) | $c ; low bank nybble, ??
 	db $01, $e7 ; ??, ??
-	dw $5189 ; ??
+	dw $5189 ; OAM ptr
 	dw Func_424b1 ; update function
 	db $80 ; ??
 
 Data_64493: ; 64493 (19:4493)
 	db ($0 << 4) | $c ; low bank nybble, ??
 	db $4c, $f3 ; ??, ??
-	dw $560c ; ??
+	dw $560c ; OAM ptr
 	dw Func_429c4 ; update function
 	db $00 ; ??
 
 Data_6449b: ; 6449b (19:449b)
 	db ($0 << 4) | $d ; low bank nybble, ??
 	db $02, $f4 ; ??, ??
-	dw $560c ; ??
+	dw $560c ; OAM ptr
 	dw Func_42b7d ; update function
 	db $00 ; ??
 
 Data_644a3: ; 644a3 (19:44a3)
 	db ($2 << 4) | $4 ; low bank nybble, ??
 	db $0a, $f6 ; ??, ??
-	dw $4395 ; ??
+	dw $4395 ; OAM ptr
 	dw $4730 ; update function
 	db $00 ; ??
 
 Data_644ab: ; 644ab (19:44ab)
 	db ($0 << 4) | $b ; low bank nybble, ??
 	db $0b, $00 ; ??, ??
-	dw $4000 ; ??
+	dw $4000 ; OAM ptr
 	dw Func_42ba8 ; update function
 	db $00 ; ??
 
 Data_644b3: ; 644b3 (19:44b3)
 	db ($0 << 4) | $8 ; low bank nybble, ??
 	db $0c, $ef ; ??, ??
-	dw $5be4 ; ??
+	dw $5be4 ; OAM ptr
 	dw Func_436ea ; update function
 	db $00 ; ??
 
 Data_644bb: ; 644bb (19:44bb)
 	db ($0 << 4) | $c ; low bank nybble, ??
 	db $01, $f8 ; ??, ??
-	dw $581e ; ??
+	dw $581e ; OAM ptr
 	dw Func_42d1d ; update function
 	db $80 ; ??
 
 Data_644c3: ; 644c3 (19:44c3)
 	db ($0 << 4) | $f ; low bank nybble, ??
 	db $24, $f3 ; ??, ??
-	dw $59e3 ; ??
+	dw $59e3 ; OAM ptr
 	dw Func_43278 ; update function
 	db $80 ; ??
 
 Data_644cb: ; 644cb (19:44cb)
 	db ($0 << 4) | $d ; low bank nybble, ??
 	db $02, $f3 ; ??, ??
-	dw $59e3 ; ??
+	dw $59e3 ; OAM ptr
 	dw Func_43278 ; update function
 	db $80 ; ??
 
 Data_644d3: ; 644d3 (19:44d3)
 	db ($2 << 4) | $d ; low bank nybble, ??
 	db $8c, $e1 ; ??, ??
-	dw $5783 ; ??
+	dw $5783 ; OAM ptr
 	dw $589e ; update function
 	db $00 ; ??
 
 Data_644db: ; 644db (19:44db)
 	db ($1 << 4) | $d ; low bank nybble, ??
 	db $01, $fa ; ??, ??
-	dw $5a1c ; ??
+	dw $5a1c ; OAM ptr
 	dw $79b8 ; update function
 	db $00 ; ??
 
 Data_644e3: ; 644e3 (19:44e3)
 	db ($0 << 4) | $4 ; low bank nybble, ??
 	db $b1, $f1 ; ??, ??
-	dw $5b0f ; ??
+	dw $5b0f ; OAM ptr
 	dw Func_43451 ; update function
 	db $80 ; ??
 
 Data_644eb: ; 644eb (19:44eb)
 	db ($0 << 4) | $5 ; low bank nybble, ??
 	db $3b, $f1 ; ??, ??
-	dw $5b0f ; ??
+	dw $5b0f ; OAM ptr
 	dw Func_434ba ; update function
 	db $00 ; ??
 
 Data_644f3: ; 644f3 (19:44f3)
 	db ($2 << 4) | $3 ; low bank nybble, ??
 	db $3b, $f1 ; ??, ??
-	dw $6b5c ; ??
+	dw $6b5c ; OAM ptr
 	dw $6902 ; update function
 	db $00 ; ??
 
 Data_644fb: ; 644fb (19:44fb)
 	db ($1 << 4) | $1 ; low bank nybble, ??
 	db $be, $f0 ; ??, ??
-	dw $4000 ; ??
+	dw $4000 ; OAM ptr
 	dw $40a1 ; update function
 	db $80 ; ??
 
 Data_64503: ; 64503 (19:4503)
 	db ($1 << 4) | $1 ; low bank nybble, ??
 	db $be, $e6 ; ??, ??
-	dw $4000 ; ??
+	dw $4000 ; OAM ptr
 	dw $4080 ; update function
 	db $80 ; ??
 
 Data_6450b: ; 6450b (19:450b)
 	db ($1 << 4) | $2 ; low bank nybble, ??
 	db $81, $ee ; ??, ??
-	dw $422f ; ??
+	dw $422f ; OAM ptr
 	dw $423b ; update function
 	db $80 ; ??
 
 Data_64513: ; 64513 (19:4513)
 	db ($1 << 4) | $0 ; low bank nybble, ??
 	db $01, $ec ; ??, ??
-	dw $496f ; ??
+	dw $496f ; OAM ptr
 	dw $48d7 ; update function
 	db $80 ; ??
 
 Data_6451b: ; 6451b (19:451b)
 	db ($1 << 4) | $5 ; low bank nybble, ??
 	db $81, $ee ; ??, ??
-	dw $4ab2 ; ??
+	dw $4ab2 ; OAM ptr
 	dw $4d3c ; update function
 	db $80 ; ??
 
 Data_64523: ; 64523 (19:4523)
 	db ($1 << 4) | $3 ; low bank nybble, ??
 	db $a2, $e8 ; ??, ??
-	dw $4ab2 ; ??
+	dw $4ab2 ; OAM ptr
 	dw $54a0 ; update function
 	db $80 ; ??
 
 Data_6452b: ; 6452b (19:452b)
 	db ($1 << 4) | $6 ; low bank nybble, ??
 	db $1e, $f0 ; ??, ??
-	dw $4db9 ; ??
+	dw $4db9 ; OAM ptr
 	dw $564a ; update function
 	db $80 ; ??
 
 Data_64533: ; 64533 (19:4533)
 	db ($1 << 4) | $7 ; low bank nybble, ??
 	db $0b, $00 ; ??, ??
-	dw $4eeb ; ??
+	dw $4eeb ; OAM ptr
 	dw $59a9 ; update function
 	db $00 ; ??
 
 Data_6453b: ; 6453b (19:453b)
 	db ($1 << 4) | $9 ; low bank nybble, ??
 	db $8b, $fa ; ??, ??
-	dw $4ffa ; ??
+	dw $4ffa ; OAM ptr
 	dw $5ab4 ; update function
 	db $80 ; ??
 
 Data_64543: ; 64543 (19:4543)
 	db ($1 << 4) | $c ; low bank nybble, ??
 	db $0b, $f2 ; ??, ??
-	dw $4755 ; ??
+	dw $4755 ; OAM ptr
 	dw $6b66 ; update function
 	db $80 ; ??
 
 Data_6454b: ; 6454b (19:454b)
 	db ($1 << 4) | $b ; low bank nybble, ??
 	db $01, $f2 ; ??, ??
-	dw $440a ; ??
+	dw $440a ; OAM ptr
 	dw $5ee3 ; update function
 	db $80 ; ??
 
 Data_64553: ; 64553 (19:4553)
 	db ($1 << 4) | $4 ; low bank nybble, ??
 	db $01, $f2 ; ??, ??
-	dw $45aa ; ??
+	dw $45aa ; OAM ptr
 	dw $65b5 ; update function
 	db $80 ; ??
 
 Data_6455b: ; 6455b (19:455b)
 	db ($1 << 4) | $a ; low bank nybble, ??
 	db $0e, $ec ; ??, ??
-	dw $51df ; ??
+	dw $51df ; OAM ptr
 	dw $724e ; update function
 	db $00 ; ??
 
 Data_64563: ; 64563 (19:4563)
 	db ($1 << 4) | $a ; low bank nybble, ??
 	db $1c, $ec ; ??, ??
-	dw $54a2 ; ??
+	dw $54a2 ; OAM ptr
 	dw $756f ; update function
 	db $00 ; ??
 
 Data_6456b: ; 6456b (19:456b)
 	db ($1 << 4) | $0 ; low bank nybble, ??
 	db $25, $f4 ; ??, ??
-	dw $5788 ; ??
+	dw $5788 ; OAM ptr
 	dw $7718 ; update function
 	db $80 ; ??
 
 Data_64573: ; 64573 (19:4573)
 	db ($1 << 4) | $6 ; low bank nybble, ??
 	db $3f, $ec ; ??, ??
-	dw $5893 ; ??
+	dw $5893 ; OAM ptr
 	dw $774f ; update function
 	db $80 ; ??
 
 Data_6457b: ; 6457b (19:457b)
 	db ($1 << 4) | $e ; low bank nybble, ??
 	db $0b, $00 ; ??, ??
-	dw $5b98 ; ??
+	dw $5b98 ; OAM ptr
 	dw $7be6 ; update function
 	db $00 ; ??
 
 Data_64583: ; 64583 (19:4583)
 	db ($2 << 4) | $0 ; low bank nybble, ??
 	db $a7, $ee ; ??, ??
-	dw $4000 ; ??
+	dw $4000 ; OAM ptr
 	dw $4000 ; update function
 	db $80 ; ??
 
 Data_6458b: ; 6458b (19:458b)
 	db ($2 << 4) | $2 ; low bank nybble, ??
 	db $22, $f0 ; ??, ??
-	dw $4279 ; ??
+	dw $4279 ; OAM ptr
 	dw $453b ; update function
 	db $80 ; ??
 
 Data_64593: ; 64593 (19:4593)
 	db ($2 << 4) | $3 ; low bank nybble, ??
 	db $22, $f0 ; ??, ??
-	dw $4279 ; ??
+	dw $4279 ; OAM ptr
 	dw $453b ; update function
 	db $80 ; ??
 
 Data_6459b: ; 6459b (19:459b)
 	db ($2 << 4) | $2 ; low bank nybble, ??
 	db $22, $f0 ; ??, ??
-	dw $4279 ; ??
+	dw $4279 ; OAM ptr
 	dw $4625 ; update function
 	db $80 ; ??
 
 Data_645a3: ; 645a3 (19:45a3)
 	db ($2 << 4) | $3 ; low bank nybble, ??
 	db $22, $f0 ; ??, ??
-	dw $4279 ; ??
+	dw $4279 ; OAM ptr
 	dw $4625 ; update function
 	db $80 ; ??
 
 Data_645ab: ; 645ab (19:45ab)
 	db ($2 << 4) | $6 ; low bank nybble, ??
 	db $30, $ec ; ??, ??
-	dw $4555 ; ??
+	dw $4555 ; OAM ptr
 	dw $48dc ; update function
 	db $80 ; ??
 
 Data_645b3: ; 645b3 (19:45b3)
 	db ($2 << 4) | $7 ; low bank nybble, ??
 	db $05, $fa ; ??, ??
-	dw $4b56 ; ??
+	dw $4b56 ; OAM ptr
 	dw $4d8a ; update function
 	db $80 ; ??
 
 Data_645bb: ; 645bb (19:45bb)
 	db ($2 << 4) | $8 ; low bank nybble, ??
 	db $06, $f3 ; ??, ??
-	dw $4c7a ; ??
+	dw $4c7a ; OAM ptr
 	dw $4ee2 ; update function
 	db $80 ; ??
 
 Data_645c3: ; 645c3 (19:45c3)
 	db ($2 << 4) | $9 ; low bank nybble, ??
 	db $0a, $ec ; ??, ??
-	dw $4e16 ; ??
+	dw $4e16 ; OAM ptr
 	dw $51d3 ; update function
 	db $80 ; ??
 
 Data_645cb: ; 645cb (19:45cb)
 	db ($2 << 4) | $4 ; low bank nybble, ??
 	db $29, $f9 ; ??, ??
-	dw $434a ; ??
+	dw $434a ; OAM ptr
 	dw $5326 ; update function
 	db $80 ; ??
 
 Data_645d3: ; 645d3 (19:45d3)
 	db ($2 << 4) | $5 ; low bank nybble, ??
 	db $29, $f9 ; ??, ??
-	dw $434a ; ??
+	dw $434a ; OAM ptr
 	dw $5326 ; update function
 	db $80 ; ??
 
 Data_645db: ; 645db (19:45db)
 	db ($2 << 4) | $6 ; low bank nybble, ??
 	db $29, $f9 ; ??, ??
-	dw $434a ; ??
+	dw $434a ; OAM ptr
 	dw $5326 ; update function
 	db $80 ; ??
 
 Data_645e3: ; 645e3 (19:45e3)
 	db ($2 << 4) | $7 ; low bank nybble, ??
 	db $29, $f9 ; ??, ??
-	dw $434a ; ??
+	dw $434a ; OAM ptr
 	dw $5326 ; update function
 	db $80 ; ??
 
 Data_645eb: ; 645eb (19:45eb)
 	db ($2 << 4) | $8 ; low bank nybble, ??
 	db $29, $f9 ; ??, ??
-	dw $434a ; ??
+	dw $434a ; OAM ptr
 	dw $5326 ; update function
 	db $80 ; ??
 
 Data_645f3: ; 645f3 (19:45f3)
 	db ($4 << 4) | $0 ; low bank nybble, ??
 	db $0b, $e3 ; ??, ??
-	dw $4000 ; ??
+	dw $4000 ; OAM ptr
 	dw $4000 ; update function
 	db $00 ; ??
 
 Data_645fb: ; 645fb (19:45fb)
 	db ($4 << 4) | $2 ; low bank nybble, ??
 	db $0b, $00 ; ??, ??
-	dw $4000 ; ??
+	dw $4000 ; OAM ptr
 	dw $471a ; update function
 	db $00 ; ??
 
 Data_64603: ; 64603 (19:4603)
 	db ($2 << 4) | $9 ; low bank nybble, ??
 	db $0b, $00 ; ??, ??
-	dw $53fe ; ??
+	dw $53fe ; OAM ptr
 	dw $552d ; update function
 	db $00 ; ??
 
 Data_6460b: ; 6460b (19:460b)
 	db ($4 << 4) | $8 ; low bank nybble, ??
 	db $8b, $e4 ; ??, ??
-	dw $505c ; ??
+	dw $505c ; OAM ptr
 	dw $4ac4 ; update function
 	db $00 ; ??
 
 Data_64613: ; 64613 (19:4613)
 	db ($4 << 4) | $5 ; low bank nybble, ??
 	db $0b, $00 ; ??, ??
-	dw $505c ; ??
+	dw $505c ; OAM ptr
 	dw $526c ; update function
 	db $00 ; ??
 
 Data_6461b: ; 6461b (19:461b)
 	db ($4 << 4) | $1 ; low bank nybble, ??
 	db $af, $e1 ; ??, ??
-	dw $505c ; ??
+	dw $505c ; OAM ptr
 	dw $5006 ; update function
 	db $00 ; ??
 
 Data_64623: ; 64623 (19:4623)
 	db ($4 << 4) | $2 ; low bank nybble, ??
 	db $af, $e1 ; ??, ??
-	dw $505c ; ??
+	dw $505c ; OAM ptr
 	dw $500a ; update function
 	db $00 ; ??
 
 Data_6462b: ; 6462b (19:462b)
 	db ($4 << 4) | $4 ; low bank nybble, ??
 	db $af, $e1 ; ??, ??
-	dw $505c ; ??
+	dw $505c ; OAM ptr
 	dw $500e ; update function
 	db $00 ; ??
 
 Data_64633: ; 64633 (19:4633)
 	db ($5 << 4) | $7 ; low bank nybble, ??
 	db $8b, $e6 ; ??, ??
-	dw $4000 ; ??
+	dw $4000 ; OAM ptr
 	dw $4020 ; update function
 	db $00 ; ??
 
 Data_6463b: ; 6463b (19:463b)
 	db ($5 << 4) | $9 ; low bank nybble, ??
 	db $0b, $00 ; ??, ??
-	dw $4000 ; ??
+	dw $4000 ; OAM ptr
 	dw $4456 ; update function
 	db $00 ; ??
 
 Data_64643: ; 64643 (19:4643)
 	db ($2 << 4) | $0 ; low bank nybble, ??
 	db $af, $f0 ; ??, ??
-	dw $65ae ; ??
+	dw $65ae ; OAM ptr
 	dw $5c8c ; update function
 	db $00 ; ??
 
 Data_6464b: ; 6464b (19:464b)
 	db ($2 << 4) | $0 ; low bank nybble, ??
 	db $af, $f0 ; ??, ??
-	dw $65ae ; ??
+	dw $65ae ; OAM ptr
 	dw $5c70 ; update function
 	db $00 ; ??
 
 Data_64653: ; 64653 (19:4653)
 	db ($2 << 4) | $0 ; low bank nybble, ??
 	db $af, $f0 ; ??, ??
-	dw $65ae ; ??
+	dw $65ae ; OAM ptr
 	dw $5c7e ; update function
 	db $00 ; ??
 
 Data_6465b: ; 6465b (19:465b)
 	db ($2 << 4) | $1 ; low bank nybble, ??
 	db $39, $f8 ; ??, ??
-	dw $65cc ; ??
+	dw $65cc ; OAM ptr
 	dw $5d64 ; update function
 	db $80 ; ??
 
 Data_64663: ; 64663 (19:4663)
 	db ($4 << 4) | $b ; low bank nybble, ??
 	db $b6, $f0 ; ??, ??
-	dw $553c ; ??
+	dw $553c ; OAM ptr
 	dw $5356 ; update function
 	db $80 ; ??
 
 Data_6466b: ; 6466b (19:466b)
 	db ($4 << 4) | $f ; low bank nybble, ??
 	db $22, $ef ; ??, ??
-	dw $66dc ; ??
+	dw $66dc ; OAM ptr
 	dw $5c18 ; update function
 	db $00 ; ??
 
 Data_64673: ; 64673 (19:4673)
 	db ($0 << 4) | $a ; low bank nybble, ??
 	db $0b, $f4 ; ??, ??
-	dw $5cd3 ; ??
+	dw $5cd3 ; OAM ptr
 	dw Func_437d7 ; update function
 	db $00 ; ??
 
 Data_6467b: ; 6467b (19:467b)
 	db ($0 << 4) | $b ; low bank nybble, ??
 	db $0b, $f4 ; ??, ??
-	dw $5cd3 ; ??
+	dw $5cd3 ; OAM ptr
 	dw Func_437d7 ; update function
 	db $00 ; ??
 
 Data_64683: ; 64683 (19:4683)
 	db ($0 << 4) | $e ; low bank nybble, ??
 	db $22, $e1 ; ??, ??
-	dw $5c47 ; ??
+	dw $5c47 ; OAM ptr
 	dw Func_437a5 ; update function
 	db $00 ; ??
 
 Data_6468b: ; 6468b (19:468b)
 	db ($0 << 4) | $e ; low bank nybble, ??
 	db $22, $e1 ; ??, ??
-	dw $5c47 ; ??
+	dw $5c47 ; OAM ptr
 	dw Func_437a0 ; update function
 	db $00 ; ??
 
 Data_64693: ; 64693 (19:4693)
 	db ($0 << 4) | $e ; low bank nybble, ??
 	db $22, $e1 ; ??, ??
-	dw $5c47 ; ??
+	dw $5c47 ; OAM ptr
 	dw Func_4379b ; update function
 	db $00 ; ??
 
 Data_6469b: ; 6469b (19:469b)
 	db ($4 << 4) | $5 ; low bank nybble, ??
 	db $ba, $f2 ; ??, ??
-	dw $67d5 ; ??
+	dw $67d5 ; OAM ptr
 	dw $5d2e ; update function
 	db $80 ; ??
 
 Data_646a3: ; 646a3 (19:46a3)
 	db ($4 << 4) | $6 ; low bank nybble, ??
 	db $0b, $00 ; ??, ??
-	dw $4000 ; ??
+	dw $4000 ; OAM ptr
 	dw $626b ; update function
 	db $00 ; ??
 
 Data_646ab: ; 646ab (19:46ab)
 	db ($4 << 4) | $7 ; low bank nybble, ??
 	db $0b, $00 ; ??, ??
-	dw $4000 ; ??
+	dw $4000 ; OAM ptr
 	dw $645e ; update function
 	db $00 ; ??
 
 Data_646b3: ; 646b3 (19:46b3)
 	db ($4 << 4) | $0 ; low bank nybble, ??
 	db $d1, $e6 ; ??, ??
-	dw $67d5 ; ??
+	dw $67d5 ; OAM ptr
 	dw $5cf9 ; update function
 	db $80 ; ??
 
 Data_646bb: ; 646bb (19:46bb)
 	db ($4 << 4) | $1 ; low bank nybble, ??
 	db $0c, $f7 ; ??, ??
-	dw $67d5 ; ??
+	dw $67d5 ; OAM ptr
 	dw $63c0 ; update function
 	db $80 ; ??
 
 Data_646c3: ; 646c3 (19:46c3)
 	db ($2 << 4) | $2 ; low bank nybble, ??
 	db $0b, $00 ; ??, ??
-	dw $4000 ; ??
+	dw $4000 ; OAM ptr
 	dw $5e34 ; update function
 	db $00 ; ??
 
 Data_646cb: ; 646cb (19:46cb)
 	db ($2 << 4) | $d ; low bank nybble, ??
 	db $37, $f3 ; ??, ??
-	dw $67fd ; ??
+	dw $67fd ; OAM ptr
 	dw $645d ; update function
 	db $00 ; ??
 
 Data_646d3: ; 646d3 (19:46d3)
 	db ($2 << 4) | $0 ; low bank nybble, ??
 	db $06, $00 ; ??, ??
-	dw $6895 ; ??
+	dw $6895 ; OAM ptr
 	dw $64b5 ; update function
 	db $80 ; ??
 
 Data_646db: ; 646db (19:46db)
 	db ($2 << 4) | $1 ; low bank nybble, ??
 	db $06, $f7 ; ??, ??
-	dw $6895 ; ??
+	dw $6895 ; OAM ptr
 	dw $669a ; update function
 	db $00 ; ??
 
 Data_646e3: ; 646e3 (19:46e3)
 	db ($2 << 4) | $2 ; low bank nybble, ??
 	db $05, $f5 ; ??, ??
-	dw $6b04 ; ??
+	dw $6b04 ; OAM ptr
 	dw $68a2 ; update function
 	db $80 ; ??
 
 Data_646eb: ; 646eb (19:46eb)
 	db ($2 << 4) | $0 ; low bank nybble, ??
 	db $05, $f5 ; ??, ??
-	dw $6b04 ; ??
+	dw $6b04 ; OAM ptr
 	dw $68a2 ; update function
 	db $80 ; ??
 
 Data_646f3: ; 646f3 (19:46f3)
 	db ($5 << 4) | $0 ; low bank nybble, ??
 	db $c1, $e0 ; ??, ??
-	dw $4895 ; ??
+	dw $4895 ; OAM ptr
 	dw $44e5 ; update function
 	db $00 ; ??
 
 Data_646fb: ; 646fb (19:46fb)
 	db ($5 << 4) | $4 ; low bank nybble, ??
 	db $0b, $00 ; ??, ??
-	dw $4895 ; ??
+	dw $4895 ; OAM ptr
 	dw $4981 ; update function
 	db $00 ; ??
 
 Data_64703: ; 64703 (19:4703)
 	db ($2 << 4) | $4 ; low bank nybble, ??
 	db $0e, $e8 ; ??, ??
-	dw $6ba0 ; ??
+	dw $6ba0 ; OAM ptr
 	dw $6af9 ; update function
 	db $00 ; ??
 
 Data_6470b: ; 6470b (19:470b)
 	db ($5 << 4) | $6 ; low bank nybble, ??
 	db $44, $f6 ; ??, ??
-	dw $501c ; ??
+	dw $501c ; OAM ptr
 	dw $4d37 ; update function
 	db $00 ; ??
 
 Data_64713: ; 64713 (19:4713)
 	db ($5 << 4) | $7 ; low bank nybble, ??
 	db $0b, $f6 ; ??, ??
-	dw $501c ; ??
+	dw $501c ; OAM ptr
 	dw $51e5 ; update function
 	db $00 ; ??
 
 Data_6471b: ; 6471b (19:471b)
 	db ($5 << 4) | $9 ; low bank nybble, ??
 	db $31, $fc ; ??, ??
-	dw $501c ; ??
+	dw $501c ; OAM ptr
 	dw $515b ; update function
 	db $80 ; ??
 
 Data_64723: ; 64723 (19:4723)
 	db ($5 << 4) | $a ; low bank nybble, ??
 	db $0b, $f8 ; ??, ??
-	dw $5699 ; ??
+	dw $5699 ; OAM ptr
 	dw $5611 ; update function
 	db $00 ; ??
 
 Data_6472b: ; 6472b (19:472b)
 	db ($5 << 4) | $b ; low bank nybble, ??
 	db $45, $fe ; ??, ??
-	dw $5699 ; ??
+	dw $5699 ; OAM ptr
 	dw $5c4a ; update function
 	db $80 ; ??
 
 Data_64733: ; 64733 (19:4733)
 	db ($5 << 4) | $c ; low bank nybble, ??
 	db $45, $fe ; ??, ??
-	dw $5699 ; ??
+	dw $5699 ; OAM ptr
 	dw $5de4 ; update function
 	db $80 ; ??
 
 Data_6473b: ; 6473b (19:473b)
 	db ($5 << 4) | $d ; low bank nybble, ??
 	db $8b, $00 ; ??, ??
-	dw $5e06 ; ??
+	dw $5e06 ; OAM ptr
 	dw $5e4e ; update function
 	db $00 ; ??
 
 Data_64743: ; 64743 (19:4743)
 	db ($5 << 4) | $a ; low bank nybble, ??
 	db $22, $ff ; ??, ??
-	dw $5e06 ; ??
+	dw $5e06 ; OAM ptr
 	dw $62c8 ; update function
 	db $00 ; ??
 
 Data_6474b: ; 6474b (19:474b)
 	db ($5 << 4) | $0 ; low bank nybble, ??
 	db $8b, $e0 ; ??, ??
-	dw $6583 ; ??
+	dw $6583 ; OAM ptr
 	dw $6611 ; update function
 	db $00 ; ??
 
 Data_64753: ; 64753 (19:4753)
 	db ($5 << 4) | $1 ; low bank nybble, ??
 	db $ce, $ec ; ??, ??
-	dw $6583 ; ??
+	dw $6583 ; OAM ptr
 	dw $6e6a ; update function
 	db $00 ; ??
 
 Data_6475b: ; 6475b (19:475b)
 	db ($5 << 4) | $a ; low bank nybble, ??
 	db $0b, $e0 ; ??, ??
-	dw $6583 ; ??
+	dw $6583 ; OAM ptr
 	dw $7264 ; update function
 	db $00 ; ??
 
 Data_64763: ; 64763 (19:4763)
 	db ($5 << 4) | $b ; low bank nybble, ??
 	db $0b, $e0 ; ??, ??
-	dw $6583 ; ??
+	dw $6583 ; OAM ptr
 	dw $72b4 ; update function
 	db $00 ; ??
 
 Data_6476b: ; 6476b (19:476b)
 	db ($5 << 4) | $5 ; low bank nybble, ??
 	db $31, $f6 ; ??, ??
-	dw $6583 ; ??
+	dw $6583 ; OAM ptr
 	dw $6dcc ; update function
 	db $00 ; ??
 
 Data_64773: ; 64773 (19:4773)
 	db ($3 << 4) | $6 ; low bank nybble, ??
 	db $0b, $00 ; ??, ??
-	dw $4806 ; ??
+	dw $4806 ; OAM ptr
 	dw $4b2d ; update function
 	db $00 ; ??
 
 Data_6477b: ; 6477b (19:477b)
 	db ($3 << 4) | $6 ; low bank nybble, ??
 	db $0b, $00 ; ??, ??
-	dw $4806 ; ??
+	dw $4806 ; OAM ptr
 	dw $4b32 ; update function
 	db $00 ; ??
 
 Data_64783: ; 64783 (19:4783)
 	db ($3 << 4) | $a ; low bank nybble, ??
 	db $0b, $00 ; ??, ??
-	dw $488a ; ??
+	dw $488a ; OAM ptr
 	dw $4b51 ; update function
 	db $00 ; ??
 
 	INCROM $6478b, $64fc3
 
 Data_64fc3: ; 64fc3 (19:4fc3)
-	dw Data_643cb
-	dw Data_643eb
-	dw Data_6440b
+	dw GreyTreasureData
+	dw GreyKeyData
+	dw MusicaCoinData
 
 	rgb  0, 22, 16
 	rgb 28, 28, 28
@@ -1535,9 +1422,9 @@ Data_64fc3: ; 64fc3 (19:4fc3)
 	rgb  0,  0,  0
 
 Data_64fd1: ; 64fd1 (19:4fd1)
-	dw Data_643d3
-	dw Data_643f3
-	dw Data_6440b
+	dw RedTreasureData
+	dw RedKeyData
+	dw MusicaCoinData
 
 	rgb  0, 22, 16
 	rgb 31, 24, 24
@@ -1545,9 +1432,9 @@ Data_64fd1: ; 64fd1 (19:4fd1)
 	rgb  7,  0,  0
 
 Data_64fdf: ; 64fdf (19:4fdf)
-	dw Data_643db
-	dw Data_643fb
-	dw Data_6440b
+	dw GreenTreasureData
+	dw GreenKeyData
+	dw MusicaCoinData
 
 	rgb  0, 22, 16
 	rgb 24, 31, 21
@@ -1555,9 +1442,9 @@ Data_64fdf: ; 64fdf (19:4fdf)
 	rgb  0,  2,  0
 
 Data_64fed: ; 64fed (19:4fed)
-	dw Data_643e3
-	dw Data_64403
-	dw Data_6440b
+	dw BlueTreasureData
+	dw BlueKeyData
+	dw MusicaCoinData
 
 	rgb  0, 22, 16
 	rgb 19, 31, 31
@@ -1565,9 +1452,9 @@ Data_64fed: ; 64fed (19:4fed)
 	rgb  0,  0,  7
 
 Data_64ffb: ; 64ffb (19:4ffb)
-	dw Data_643cb
-	dw Data_643eb
-	dw Data_6440b
+	dw GreyTreasureData
+	dw GreyKeyData
+	dw MusicaCoinData
 
 	rgb 31, 31, 31
 	rgb  0, 27, 31
@@ -1762,7 +1649,7 @@ EnemyGroupGfx1: ; 6527c (19:527c)
 	dw DoughnuteerGfx
 	dw BeamBotGfx
 
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_6445b
 	dw Data_64473
 	dw Data_64553
@@ -1796,9 +1683,9 @@ EnemyGroupGfx2: ; 652af (19:52af)
 	dw FutamoguGfx
 	dw TorchGfx
 
-	dw Data_64413
+	dw SpearheadData
 	dw Data_644cb
-	dw Data_6441b
+	dw FutamoguData
 	dw Data_6442b
 	dw NULL
 
@@ -1864,8 +1751,8 @@ EnemyGroupGfx4: ; 65315 (19:5315)
 	dw OmodonGfx
 	dw OmodonmekaGfx
 
-	dw Data_643c3
-	dw Data_643c3
+	dw DummyObjectData
+	dw DummyObjectData
 	dw Data_64483
 	dw Data_6447b
 	dw NULL
@@ -1898,8 +1785,8 @@ EnemyGroupGfx5: ; 65348 (19:5348)
 	dw OmodonGfx
 	dw OmodonmekaGfx
 
-	dw Data_643c3
-	dw Data_643c3
+	dw DummyObjectData
+	dw DummyObjectData
 	dw Data_6448b
 	dw Data_6447b
 	dw NULL
@@ -1932,10 +1819,10 @@ EnemyGroupGfx6: ; 6537b (19:537b)
 	dw FutamoguGfx
 	dw TorchGfx
 
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_64493
-	dw Data_643c3
-	dw Data_643c3
+	dw DummyObjectData
+	dw DummyObjectData
 	dw Data_6449b
 	dw NULL
 
@@ -1998,10 +1885,10 @@ EnemyGroupGfx8: ; 653dd (19:53dd)
 	dw BigLeafGfx
 	dw TorchGfx
 
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_64493
 	dw Data_644ab
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_6449b
 	dw NULL
 
@@ -2034,7 +1921,7 @@ EnemyGroupGfx9: ; 65412 (19:5412)
 	dw TorchGfx
 
 	dw Data_644a3
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_644ab
 	dw NULL
 
@@ -2167,9 +2054,9 @@ EnemyGroupGfx13: ; 654da (19:54da)
 	dw FutamoguGfx
 	dw SmallLeafGfx
 
-	dw Data_64413
+	dw SpearheadData
 	dw Data_64423
-	dw Data_6441b
+	dw FutamoguData
 	dw Data_644b3
 	dw NULL
 
@@ -2201,9 +2088,9 @@ EnemyGroupGfx14: ; 6550d (19:550d)
 	dw FutamoguGfx
 	dw TorchGfx
 
-	dw Data_64413
+	dw SpearheadData
 	dw Data_644db
-	dw Data_6441b
+	dw FutamoguData
 	dw Data_6442b
 	dw NULL
 
@@ -2271,7 +2158,7 @@ EnemyGroupGfx16: ; 65573 (19:5573)
 
 	dw Data_6451b
 	dw Data_6446b
-	dw Data_6441b
+	dw FutamoguData
 	dw Data_64513
 	dw Data_64523
 	dw NULL
@@ -2304,9 +2191,9 @@ EnemyGroupGfx17: ; 655a8 (19:55a8)
 	dw FutamoguGfx
 	dw ClearGate3Gfx
 
-	dw Data_64413
+	dw SpearheadData
 	dw Data_6452b
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_64693
 	dw NULL
 
@@ -2340,7 +2227,7 @@ EnemyGroupGfx18: ; 655db (19:55db)
 
 	dw Data_6451b
 	dw Data_6446b
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_64533
 	dw Data_64523
 	dw NULL
@@ -2374,7 +2261,7 @@ EnemyGroupGfx19: ; 65610 (19:5610)
 	dw TorchGfx
 
 	dw Data_6455b
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_6468b
 	dw NULL
 
@@ -2407,7 +2294,7 @@ EnemyGroupGfx20: ; 65641 (19:5641)
 	dw TorchGfx
 
 	dw Data_64563
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_6468b
 	dw NULL
 
@@ -2473,10 +2360,10 @@ EnemyGroupGfx22: ; 656a5 (19:56a5)
 	dw HandGfx
 	dw TorchGfx
 
-	dw Data_64413
-	dw Data_643c3
+	dw SpearheadData
+	dw DummyObjectData
 	dw Data_64573
-	dw Data_643c3
+	dw DummyObjectData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -2507,7 +2394,7 @@ EnemyGroupGfx23: ; 656d8 (19:56d8)
 	dw FutamoguGfx
 	dw TorchGfx
 
-	dw Data_64413
+	dw SpearheadData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -2539,9 +2426,9 @@ EnemyGroupGfx24: ; 65705 (19:5705)
 	dw TorchGfx
 
 	dw Data_645bb
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_6457b
-	dw Data_643c3
+	dw DummyObjectData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -2572,8 +2459,8 @@ EnemyGroupGfx25: ; 65738 (19:5738)
 	dw KobattoGfx
 	dw WaterDropGfx
 
-	dw Data_64413
-	dw Data_643c3
+	dw SpearheadData
+	dw DummyObjectData
 	dw Data_6456b
 	dw Data_6465b
 	dw NULL
@@ -2641,7 +2528,7 @@ EnemyGroupGfx27: ; 657a0 (19:57a0)
 	dw CartGfx
 	dw FireBotGfx
 
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_64683
 	dw Data_645a3
 	dw Data_6459b
@@ -2711,8 +2598,8 @@ EnemyGroupGfx29: ; 6580a (19:580a)
 	dw CartGfx
 	dw TorchGfx
 
-	dw Data_64413
-	dw Data_643c3
+	dw SpearheadData
+	dw DummyObjectData
 	dw Data_64593
 	dw Data_6458b
 	dw NULL
@@ -2745,9 +2632,9 @@ EnemyGroupGfx30: ; 6583d (19:583d)
 	dw FutamoguGfx
 	dw NobiiruGfx
 
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_6446b
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_64673
 	dw Data_6467b
 	dw NULL
@@ -2814,7 +2701,7 @@ EnemyGroupGfx32: ; 658a5 (19:58a5)
 	dw ClearGate2Gfx
 	dw ElectricLampGfx
 
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_644db
 	dw Data_6468b
 	dw Data_64533
@@ -2849,7 +2736,7 @@ EnemyGroupGfx33: ; 658d8 (19:58d8)
 	dw TorchGfx
 
 	dw Data_645ab
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_6454b
 	dw NULL
 
@@ -2881,9 +2768,9 @@ EnemyGroupGfx34: ; 65909 (19:5909)
 	dw FutamoguGfx
 	dw TogebaGfx
 
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_6446b
-	dw Data_643c3
+	dw DummyObjectData
 	dw DoughnuteerGfx
 	dw NULL
 
@@ -2916,8 +2803,8 @@ EnemyGroupGfx35: ; 6593c (19:593c)
 	dw BrrrBearGfx
 
 	dw Data_645bb
-	dw Data_643c3
-	dw Data_643c3
+	dw DummyObjectData
+	dw DummyObjectData
 	dw Data_64583
 	dw NULL
 
@@ -2985,7 +2872,7 @@ EnemyGroupGfx37: ; 659a4 (19:59a4)
 	dw OmodonmekaGfx
 
 	dw Data_645c3
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_64483
 	dw Data_6447b
 	dw NULL
@@ -3058,7 +2945,7 @@ EnemyGroupGfx39: ; 65a0a (19:5a0a)
 	dw Data_645e3
 	dw Data_645eb
 	dw Data_6446b
-	dw Data_64413
+	dw SpearheadData
 	dw Data_64553
 	dw NULL
 
@@ -3090,7 +2977,7 @@ EnemyGroupGfx40: ; 65a45 (19:5a45)
 	dw SpearBotGfx
 	dw FireBotGfx
 
-	dw Data_64413
+	dw SpearheadData
 	dw Data_6446b
 	dw Data_6454b
 	dw Data_64543
@@ -3191,10 +3078,10 @@ EnemyGroupGfx43: ; 65adc (19:5adc)
 	dw KobattoGfx
 	dw TorchGfx
 
-	dw Data_64413
+	dw SpearheadData
 	dw Data_644cb
 	dw Data_6456b
-	dw Data_643c3
+	dw DummyObjectData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -3225,7 +3112,7 @@ EnemyGroupGfx44: ; 65b0f (19:5b0f)
 	dw ZombieGfx
 	dw TorchGfx
 
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_6450b
 	dw Data_6453b
 	dw NULL
@@ -3296,7 +3183,7 @@ EnemyGroupGfx46: ; 65b75 (19:5b75)
 	dw Data_6451b
 	dw Data_6446b
 	dw Data_6453b
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_64523
 	dw NULL
 
@@ -3394,7 +3281,7 @@ EnemyGroupGfx49: ; 65c08 (19:5c08)
 
 	dw Data_645bb
 	dw Data_6446b
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_64643
 	dw Data_6464b
 	dw Data_64653
@@ -3428,7 +3315,7 @@ EnemyGroupGfx50: ; 65c3f (19:5c3f)
 	dw DoughnuteerGfx
 	dw FireBotGfx
 
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_6446b
 	dw Data_64473
 	dw Data_64543
@@ -3462,7 +3349,7 @@ EnemyGroupGfx51: ; 65c72 (19:5c72)
 	dw ZombieGfx
 	dw FireBotGfx
 
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_6446b
 	dw Data_6453b
 	dw Data_64543
@@ -3528,7 +3415,7 @@ EnemyGroupGfx53: ; 65cd4 (19:5cd4)
 	dw KobattoGfx
 	dw WaterDropGfx
 
-	dw Data_64413
+	dw SpearheadData
 	dw Data_644db
 	dw Data_6456b
 	dw Data_6465b
@@ -3562,10 +3449,10 @@ EnemyGroupGfx54: ; 65d07 (19:5d07)
 	dw DoughnuteerGfx
 	dw TorchGfx
 
-	dw Data_64413
-	dw Data_643c3
+	dw SpearheadData
+	dw DummyObjectData
 	dw Data_64473
-	dw Data_643c3
+	dw DummyObjectData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -3666,7 +3553,7 @@ EnemyGroupGfx57: ; 65da2 (19:5da2)
 	dw TorchGfx
 
 	dw Data_6444b
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_64473
 	dw NULL
 
@@ -3699,7 +3586,7 @@ EnemyGroupGfx58: ; 65dd3 (19:5dd3)
 	dw FireBotGfx
 
 	dw Data_6444b
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_6453b
 	dw Data_64543
 	dw NULL
@@ -3768,7 +3655,7 @@ EnemyGroupGfx60: ; 65e3b (19:5e3b)
 	dw BarrelGfx
 
 	dw Data_645bb
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_646c3
 	dw Data_644eb
 	dw NULL
@@ -3802,7 +3689,7 @@ EnemyGroupGfx61: ; 65e6e (19:5e6e)
 	dw WaterDropGfx
 
 	dw Data_64503
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_6456b
 	dw Data_6465b
 	dw NULL
@@ -3835,7 +3722,7 @@ EnemyGroupGfx62: ; 65ea1 (19:5ea1)
 	dw DoughnuteerGfx
 	dw SparkGfx
 
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_6452b
 	dw Data_64473
 	dw Data_646e3
@@ -3870,9 +3757,9 @@ EnemyGroupGfx63: ; 65ed6 (19:5ed6)
 	dw FutamoguGfx
 	dw BeamBotGfx
 
-	dw Data_64413
+	dw SpearheadData
 	dw Data_6452b
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_64553
 	dw NULL
 
@@ -3905,7 +3792,7 @@ EnemyGroupGfx64: ; 65f09 (19:5f09)
 	dw BrrrBearGfx
 
 	dw Data_6455b
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_6454b
 	dw Data_64583
 	dw NULL
@@ -3938,7 +3825,7 @@ EnemyGroupGfx65: ; 65f3c (19:5f3c)
 	dw BubbleGfx
 	dw BarrelGfx
 
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_644c3
 	dw Data_6457b
 	dw Data_644e3
@@ -4040,8 +3927,8 @@ EnemyGroupGfx68: ; 65fd5 (19:5fd5)
 	dw KobattoGfx
 	dw NobiiruGfx
 
-	dw Data_643c3
-	dw Data_643c3
+	dw DummyObjectData
+	dw DummyObjectData
 	dw Data_6456b
 	dw Data_64673
 	dw Data_6467b
@@ -4142,7 +4029,7 @@ EnemyGroupGfx71: ; 6606c (19:606c)
 	dw FireBotGfx
 
 	dw Data_646cb
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_6454b
 	dw Data_64543
 	dw NULL
@@ -4176,7 +4063,7 @@ EnemyGroupGfx72: ; 6609f (19:609f)
 	dw OctohonGfx
 
 	dw Data_645bb
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_6457b
 	dw Data_646d3
 	dw NULL
@@ -4210,7 +4097,7 @@ EnemyGroupGfx73: ; 660d2 (19:60d2)
 	dw OctohonGfx
 
 	dw Data_645bb
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_6457b
 	dw Data_646db
 	dw NULL
@@ -4244,7 +4131,7 @@ EnemyGroupGfx74: ; 66105 (19:6105)
 	dw FireBotGfx
 
 	dw Data_64503
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_64573
 	dw Data_64543
 	dw NULL
@@ -4278,8 +4165,8 @@ EnemyGroupGfx75: ; 66138 (19:6138)
 	dw SparkGfx
 
 	dw Data_645c3
-	dw Data_643c3
-	dw Data_643c3
+	dw DummyObjectData
+	dw DummyObjectData
 	dw Data_646e3
 	dw Data_646eb
 	dw NULL
@@ -4312,8 +4199,8 @@ EnemyGroupGfx76: ; 6616d (19:616d)
 	dw RockGfx
 	dw BrrrBearGfx
 
-	dw Data_643c3
-	dw Data_643c3
+	dw DummyObjectData
+	dw DummyObjectData
 	dw Data_644f3
 	dw Data_64583
 	dw NULL
@@ -4346,9 +4233,9 @@ EnemyGroupGfx77: ; 661a0 (19:61a0)
 	dw FutamoguGfx
 	dw FallingSnowGfx
 
-	dw Data_64413
-	dw Data_643c3
-	dw Data_643c3
+	dw SpearheadData
+	dw DummyObjectData
+	dw DummyObjectData
 	dw Data_64603
 	dw NULL
 
@@ -4380,7 +4267,7 @@ EnemyGroupGfx78: ; 661d3 (19:61d3)
 	dw ClearGate2Gfx
 	dw BarrelGfx
 
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_644db
 	dw Data_6468b
 	dw Data_644eb
@@ -4416,7 +4303,7 @@ EnemyGroupGfx79: ; 66206 (19:6206)
 
 	dw Data_644bb
 	dw Data_644db
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_644eb
 	dw NULL
 
@@ -4480,7 +4367,7 @@ EnemyGroupGfx81: ; 66268 (19:6268)
 	dw FireGfx
 	dw FireBotGfx
 
-	dw Data_64413
+	dw SpearheadData
 	dw Data_6450b
 	dw Data_64703
 	dw Data_64543
@@ -4547,8 +4434,8 @@ EnemyGroupGfx83: ; 662cc (19:62cc)
 	dw OmodonGfx
 	dw OmodonmekaGfx
 
-	dw Data_64413
-	dw Data_643c3
+	dw SpearheadData
+	dw DummyObjectData
 	dw Data_64483
 	dw Data_6447b
 	dw NULL
@@ -4582,8 +4469,8 @@ EnemyGroupGfx84: ; 662ff (19:62ff)
 	dw FireBotGfx
 
 	dw Data_644d3
-	dw Data_643c3
-	dw Data_643c3
+	dw DummyObjectData
+	dw DummyObjectData
 	dw Data_64543
 	dw NULL
 
@@ -4615,8 +4502,8 @@ EnemyGroupGfx85: ; 66332 (19:6332)
 	dw HebariiGfx
 	dw BarrelGfx
 
-	dw Data_643c3
-	dw Data_643c3
+	dw DummyObjectData
+	dw DummyObjectData
 	dw Data_64463
 	dw Data_644e3
 	dw NULL
@@ -4714,9 +4601,9 @@ EnemyGroupGfx88: ; 663c5 (19:63c5)
 	dw FutamoguGfx
 	dw BarrelGfx
 
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_6445b
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_644eb
 	dw NULL
 
@@ -4748,7 +4635,7 @@ EnemyGroupGfx89: ; 663f8 (19:63f8)
 	dw OmodonGfx
 	dw OmodonmekaGfx
 
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_644db
 	dw Data_64483
 	dw Data_6447b
@@ -4782,7 +4669,7 @@ EnemyGroupGfx90: ; 6642b (19:642b)
 	dw HebariiGfx
 	dw NobiiruGfx
 
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_644c3
 	dw Data_64463
 	dw Data_64673
@@ -4817,7 +4704,7 @@ EnemyGroupGfx91: ; 66460 (19:6460)
 	dw FutamoguGfx
 	dw TorchGfx
 
-	dw Data_64413
+	dw SpearheadData
 	dw Data_644cb
 	dw NULL
 
@@ -4883,8 +4770,8 @@ EnemyGroupGfx93: ; 664c0 (19:64c0)
 	dw BrrrBearGfx
 
 	dw Data_644bb
-	dw Data_643c3
-	dw Data_643c3
+	dw DummyObjectData
+	dw DummyObjectData
 	dw Data_64583
 	dw NULL
 
@@ -4916,8 +4803,8 @@ EnemyGroupGfx94: ; 664f3 (19:64f3)
 	dw ZombieGfx
 	dw BrrrBearGfx
 
-	dw Data_643c3
-	dw Data_643c3
+	dw DummyObjectData
+	dw DummyObjectData
 	dw Data_6453b
 	dw Data_64583
 	dw NULL
@@ -4985,9 +4872,9 @@ EnemyGroupGfx96: ; 6655b (19:655b)
 	dw FutamoguGfx
 	dw SparkGfx
 
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_644db
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_646e3
 	dw Data_646eb
 	dw NULL
@@ -5021,7 +4908,7 @@ EnemyGroupGfx97: ; 66590 (19:6590)
 	dw BrrrBearGfx
 
 	dw Data_6451b
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_646c3
 	dw Data_64583
 	dw Data_64523
@@ -5056,7 +4943,7 @@ EnemyGroupGfx98: ; 665c5 (19:65c5)
 	dw FireBotGfx
 
 	dw Data_644bb
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_64463
 	dw Data_64543
 	dw NULL
@@ -5089,7 +4976,7 @@ EnemyGroupGfx99: ; 665f8 (19:65f8)
 	dw FutamoguGfx
 	dw TorchGfx
 
-	dw Data_64413
+	dw SpearheadData
 	dw Data_64423
 	dw NULL
 
@@ -5121,8 +5008,8 @@ EnemyGroupGfx100: ; 66627 (19:6627)
 	dw ClearGate2Gfx
 	dw BrrrBearGfx
 
-	dw Data_64413
-	dw Data_643c3
+	dw SpearheadData
+	dw DummyObjectData
 	dw Data_6468b
 	dw Data_64583
 	dw NULL
@@ -5155,9 +5042,9 @@ EnemyGroupGfx101: ; 6665a (19:665a)
 	dw FutamoguGfx
 	dw SparkGfx
 
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_644cb
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_646e3
 	dw Data_646eb
 	dw NULL
@@ -5224,8 +5111,8 @@ EnemyGroupGfx103: ; 666c2 (19:66c2)
 	dw RockGfx
 	dw TogebaGfx
 
-	dw Data_643c3
-	dw Data_643c3
+	dw DummyObjectData
+	dw DummyObjectData
 	dw Data_644f3
 	dw DoughnuteerGfx
 	dw NULL
@@ -5258,9 +5145,9 @@ EnemyGroupGfx104: ; 666f5 (19:66f5)
 	dw FutamoguGfx
 	dw BarrelGfx
 
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_644cb
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_644e3
 	dw NULL
 
@@ -5292,9 +5179,9 @@ EnemyGroupGfx105: ; 66728 (19:6728)
 	dw FutamoguGfx
 	dw BeamBotGfx
 
-	dw Data_643c3
-	dw Data_643c3
-	dw Data_643c3
+	dw DummyObjectData
+	dw DummyObjectData
+	dw DummyObjectData
 	dw Data_64553
 	dw NULL
 
@@ -5327,7 +5214,7 @@ EnemyGroupGfx106: ; 6675b (19:675b)
 	dw FireBotGfx
 
 	dw Data_64563
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_6454b
 	dw Data_64543
 	dw NULL
@@ -5360,7 +5247,7 @@ EnemyGroupGfx107: ; 6678e (19:678e)
 	dw HebariiGfx
 	dw BrrrBearGfx
 
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_6446b
 	dw Data_64463
 	dw Data_64583
@@ -5394,7 +5281,7 @@ EnemyGroupGfx108: ; 667c1 (19:67c1)
 	dw DoughnuteerGfx
 	dw TogebaGfx
 
-	dw Data_64413
+	dw SpearheadData
 	dw Data_6446b
 	dw Data_64473
 	dw DoughnuteerGfx
@@ -5428,8 +5315,8 @@ EnemyGroupGfx109: ; 667f4 (19:67f4)
 	dw SpearBotGfx
 	dw OmodonmekaGfx
 
-	dw Data_643c3
-	dw Data_643c3
+	dw DummyObjectData
+	dw DummyObjectData
 	dw Data_6454b
 	dw Data_6447b
 	dw NULL
@@ -5462,9 +5349,9 @@ EnemyGroupGfx110: ; 66827 (19:6827)
 	dw FutamoguGfx
 	dw FireBotGfx
 
-	dw Data_64413
+	dw SpearheadData
 	dw Data_6450b
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_64543
 	dw NULL
 
@@ -5498,7 +5385,7 @@ EnemyGroupGfx111: ; 6685a (19:685a)
 
 	dw Data_644d3
 	dw Data_6446b
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_64543
 	dw NULL
 
@@ -5564,8 +5451,8 @@ EnemyGroupGfx113: ; 668c0 (19:68c0)
 	dw RockGfx
 	dw TorchGfx
 
-	dw Data_643c3
-	dw Data_643c3
+	dw DummyObjectData
+	dw DummyObjectData
 	dw Data_644f3
 	dw Data_6442b
 	dw NULL
@@ -5599,7 +5486,7 @@ EnemyGroupGfx114: ; 668f3 (19:68f3)
 	dw TorchGfx
 
 	dw Data_6444b
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_64463
 	dw NULL
 
@@ -5631,8 +5518,8 @@ EnemyGroupGfx115: ; 66924 (19:6924)
 	dw HebariiGfx
 	dw TorchGfx
 
-	dw Data_64413
-	dw Data_643c3
+	dw SpearheadData
+	dw DummyObjectData
 	dw Data_64463
 	dw NULL
 
@@ -5664,9 +5551,9 @@ EnemyGroupGfx116: ; 66955 (19:6955)
 	dw FutamoguGfx
 	dw TeruteruGfx
 
-	dw Data_643c3
-	dw Data_643c3
-	dw Data_643c3
+	dw DummyObjectData
+	dw DummyObjectData
+	dw DummyObjectData
 	dw Data_64513
 	dw NULL
 
@@ -5698,7 +5585,7 @@ EnemyGroupGfx117: ; 66988 (19:6988)
 	dw FutamoguGfx
 	dw TorchGfx
 
-	dw Data_643c3
+	dw DummyObjectData
 	dw Data_6446b
 	dw NULL
 
