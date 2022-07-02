@@ -77,9 +77,9 @@ DEF INTERACTION_DOWN  EQU (1 << INTERACTION_DOWN_F)  ; $80
 	const OBJ_INTERACTION_09             ; 09
 	const OBJ_INTERACTION_0A             ; 0a
 	const OBJ_INTERACTION_0B             ; 0b
-	const OBJ_INTERACTION_0C             ; 0c
+	const OBJ_INTERACTION_WALKABLE       ; 0c
 	const OBJ_INTERACTION_MUSICAL_COIN   ; 0d
-	const OBJ_INTERACTION_0E             ; 0e
+	const OBJ_INTERACTION_FIRE           ; 0e
 	const OBJ_INTERACTION_0F             ; 0f
 	const OBJ_INTERACTION_GREY_KEY       ; 10
 	const OBJ_INTERACTION_RED_KEY        ; 11
@@ -111,7 +111,7 @@ DEF INTERACTION_DOWN  EQU (1 << INTERACTION_DOWN_F)  ; $80
 	const OBJ_INTERACTION_2B             ; 2b
 	const OBJ_INTERACTION_2C             ; 2c
 	const OBJ_INTERACTION_2D             ; 2d
-	const OBJ_INTERACTION_2E             ; 2e
+	const OBJ_INTERACTION_UNLIT_TORCH             ; 2e
 	const OBJ_INTERACTION_2F             ; 2f
 	const OBJ_INTERACTION_30             ; 30
 	const OBJ_INTERACTION_31             ; 31

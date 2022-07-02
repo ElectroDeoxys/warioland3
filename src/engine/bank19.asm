@@ -650,11 +650,11 @@ GreenKeyData:        object_data OAM_18c000, $2, OBJ_INTERACTION_GREEN_KEY,     
 BlueKeyData:         object_data OAM_18c000, $2, OBJ_INTERACTION_BLUE_KEY,                   -24, KeyFunc,             $0
 MusicaCoinData:      object_data OAM_18c000, $3, OBJ_INTERACTION_MUSICAL_COIN,               -25, MusicalCoinFunc,     $0
 SpearheadData:       object_data OAM_18007b, $0, OBJ_INTERACTION_01,                         -14, SpearheadFunc,       OBJFLAG_UNK7
-FutamoguData:        object_data OAM_180564, $1, OBJ_INTERACTION_0C             | HEAVY_OBJ, -17, FutamoguFunc,        OBJFLAG_UNK7
-WebberData:          object_data OAM_180242, $2, OBJ_INTERACTION_0C             | HEAVY_OBJ, -16, WebberFunc,          OBJFLAG_UNK7
-TorchData:           object_data OAM_180838, $4, OBJ_INTERACTION_0E,                         -16, TorchFunc,           $0
-TorchNoEmbersData:   object_data OAM_180838, $6, OBJ_INTERACTION_0E,                         -16, TorchNoEmbersFunc,   $0
-FlameBlockTorchData: object_data OAM_180838, $7, OBJ_INTERACTION_2E,                         -16, FlameBlockTorchFunc, $0
+FutamoguData:        object_data OAM_180564, $1, OBJ_INTERACTION_WALKABLE       | HEAVY_OBJ, -17, FutamoguFunc,        OBJFLAG_UNK7
+WebberData:          object_data OAM_180242, $2, OBJ_INTERACTION_WALKABLE       | HEAVY_OBJ, -16, WebberFunc,          OBJFLAG_UNK7
+TorchData:           object_data OAM_180838, $4, OBJ_INTERACTION_FIRE,                       -16, TorchFunc,           $0
+TorchNoEmbersData:   object_data OAM_180838, $6, OBJ_INTERACTION_FIRE,                       -16, TorchNoEmbersFunc,   $0
+FlameBlockTorchData: object_data OAM_180838, $7, OBJ_INTERACTION_UNLIT_TORCH,                -16, FlameBlockTorchFunc, $0
 
 Data_64443: ; 64443 (19:4443)
 	db ($2 << 4) | $b ; low bank nybble, ??
@@ -1527,7 +1527,7 @@ ObjParams_64e1b: ; 64e1b (19:4e1b)
 
 ObjParams_TorchEmberLeft1: ; 64e80 (19:4e80)
 	dn $0, $5 ; unk7
-	db OBJ_INTERACTION_0E ; interaction type
+	db OBJ_INTERACTION_FIRE ; interaction type
 	db -12, -3, -5, 3 ; collision box
 	dw OAM_180838 ; OAM
 	dw Frameset_68354 ; frameset
@@ -1542,7 +1542,7 @@ ObjParams_TorchEmberLeft1: ; 64e80 (19:4e80)
 
 ObjParams_TorchEmberRight1: ; 64e93 (19:4e93)
 	dn $0, $5 ; unk7
-	db OBJ_INTERACTION_0E ; interaction type
+	db OBJ_INTERACTION_FIRE ; interaction type
 	db -12, -3, -5, 3 ; collision box
 	dw OAM_180838 ; OAM
 	dw Frameset_68354 ; frameset
@@ -1557,7 +1557,7 @@ ObjParams_TorchEmberRight1: ; 64e93 (19:4e93)
 
 ObjParams_TorchEmberLeft2: ; 64ea6 (19:4ea6)
 	dn $0, $5 ; unk7
-	db OBJ_INTERACTION_0E ; interaction type
+	db OBJ_INTERACTION_FIRE ; interaction type
 	db -12, -3, -5, 3 ; collision box
 	dw OAM_180838 ; OAM
 	dw Frameset_68354 ; frameset
@@ -1572,7 +1572,7 @@ ObjParams_TorchEmberLeft2: ; 64ea6 (19:4ea6)
 
 ObjParams_TorchEmberRight2: ; 64eb9 (19:4eb9)
 	dn $0, $5 ; unk7
-	db OBJ_INTERACTION_0E ; interaction type
+	db OBJ_INTERACTION_FIRE ; interaction type
 	db -12, -3, -5, 3 ; collision box
 	dw OAM_180838 ; OAM
 	dw Frameset_68354 ; frameset

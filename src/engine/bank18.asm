@@ -1909,7 +1909,7 @@ ThrowObject_Right: ; 62522 (18:6522)
 	ld [hl], a
 	rla
 	ld l, OBJ_ACTION_DURATION
-	ld a, $00
+	ld a, 0
 	ld [hli], a
 	inc l
 	bit 6, b

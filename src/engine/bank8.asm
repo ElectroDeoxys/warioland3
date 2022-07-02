@@ -208,95 +208,95 @@ Func_20000: ; 20000 (8:4000)
 	and INTERACTION_MASK
 	jumptable
 
-	dw Func_20b6b                   ; OBJ_INTERACTION_00
-	dw Func_20d1d                   ; OBJ_INTERACTION_01
-	dw ObjInteraction_FrontSting    ; OBJ_INTERACTION_FRONT_STING
-	dw ObjInteraction_BackSting     ; OBJ_INTERACTION_BACK_STING
-	dw ObjInteraction_TopSting      ; OBJ_INTERACTION_TOP_STING
-	dw ObjInteraction_FullSting     ; OBJ_INTERACTION_FULL_STING
-	dw Func_20d81                   ; OBJ_INTERACTION_06
-	dw Func_20d8c                   ; OBJ_INTERACTION_07
-	dw Func_20deb                   ; OBJ_INTERACTION_08
-	dw Func_20e39                   ; OBJ_INTERACTION_09
-	dw Func_20e60                   ; OBJ_INTERACTION_0A
-	dw Func_20e6a                   ; OBJ_INTERACTION_0B
-	dw Func_20e77                   ; OBJ_INTERACTION_0C
-	dw ObjInteraction_MusicalCoin   ; OBJ_INTERACTION_MUSICAL_COIN
-	dw Func_20e97                   ; OBJ_INTERACTION_0E
-	dw Func_20f6a                   ; OBJ_INTERACTION_0F
-	dw ObjInteraction_GreyKey       ; OBJ_INTERACTION_GREY_KEY
-	dw ObjInteraction_RedKey        ; OBJ_INTERACTION_RED_KEY
-	dw ObjInteraction_GreenKey      ; OBJ_INTERACTION_GREEN_KEY
-	dw ObjInteraction_BlueKey       ; OBJ_INTERACTION_BLUE_KEY
-	dw ObjInteraction_GreyTreasure  ; OBJ_INTERACTION_GREY_TREASURE
-	dw ObjInteraction_RedTreasure   ; OBJ_INTERACTION_RED_TREASURE
-	dw ObjInteraction_GreenTreasure ; OBJ_INTERACTION_GREEN_TREASURE
-	dw ObjInteraction_BlueTreasure  ; OBJ_INTERACTION_BLUE_TREASURE
-	dw Func_21156                   ; OBJ_INTERACTION_18
-	dw Func_21245                   ; OBJ_INTERACTION_19
-	dw Func_21358                   ; OBJ_INTERACTION_1A
-	dw ObjInteraction_RegularCoin   ; OBJ_INTERACTION_REGULAR_COIN
-	dw Func_21455                   ; OBJ_INTERACTION_1C
-	dw Func_21548                   ; OBJ_INTERACTION_1D
-	dw Func_21569                   ; OBJ_INTERACTION_1E
-	dw Func_215a2                   ; OBJ_INTERACTION_1F
-	dw Func_215e7                   ; OBJ_INTERACTION_20
-	dw Func_2164f                   ; OBJ_INTERACTION_21
-	dw Func_21675                   ; OBJ_INTERACTION_22
-	dw Func_21774                   ; OBJ_INTERACTION_23
-	dw Func_217b9                   ; OBJ_INTERACTION_24
-	dw Func_21819                   ; OBJ_INTERACTION_25
-	dw ObjInteraction_Bubble        ; OBJ_INTERACTION_BUBBLE
-	dw Func_21887                   ; OBJ_INTERACTION_27
-	dw ObjInteraction_Owl           ; OBJ_INTERACTION_OWL
-	dw ObjInteraction_Rail          ; OBJ_INTERACTION_RAIL
-	dw Func_20e0f                   ; OBJ_INTERACTION_2A
-	dw Func_21a4f                   ; OBJ_INTERACTION_2B
-	dw Func_21a47                   ; OBJ_INTERACTION_2C
-	dw Func_21a52                   ; OBJ_INTERACTION_2D
-	dw Func_21a8c                   ; OBJ_INTERACTION_2E
-	dw Func_21a97                   ; OBJ_INTERACTION_2F
-	dw Func_21ac3                   ; OBJ_INTERACTION_30
-	dw Func_21af1                   ; OBJ_INTERACTION_31
-	dw Func_21b08                   ; OBJ_INTERACTION_32
-	dw Func_21b0b                   ; OBJ_INTERACTION_33
-	dw Func_21b2b                   ; OBJ_INTERACTION_34
-	dw Func_21b42                   ; OBJ_INTERACTION_35
-	dw Func_21b78                   ; OBJ_INTERACTION_36
-	dw Func_21573                   ; OBJ_INTERACTION_37
-	dw Func_21b89                   ; OBJ_INTERACTION_38
-	dw Func_21c17                   ; OBJ_INTERACTION_39
-	dw Func_21c26                   ; OBJ_INTERACTION_3A
-	dw Func_21c56                   ; OBJ_INTERACTION_3B
-	dw Func_21c61                   ; OBJ_INTERACTION_3C
-	dw Func_21c86                   ; OBJ_INTERACTION_3D
-	dw Func_21c98                   ; OBJ_INTERACTION_3E
-	dw Func_21ca8                   ; OBJ_INTERACTION_3F
+	dw Func_20b6b                      ; OBJ_INTERACTION_00
+	dw Func_20d1d                      ; OBJ_INTERACTION_01
+	dw ObjInteraction_FrontSting       ; OBJ_INTERACTION_FRONT_STING
+	dw ObjInteraction_BackSting        ; OBJ_INTERACTION_BACK_STING
+	dw ObjInteraction_TopSting         ; OBJ_INTERACTION_TOP_STING
+	dw ObjInteraction_FullSting        ; OBJ_INTERACTION_FULL_STING
+	dw Func_20d81                      ; OBJ_INTERACTION_06
+	dw Func_20d8c                      ; OBJ_INTERACTION_07
+	dw Func_20deb                      ; OBJ_INTERACTION_08
+	dw Func_20e39                      ; OBJ_INTERACTION_09
+	dw Func_20e60                      ; OBJ_INTERACTION_0A
+	dw Func_20e6a                      ; OBJ_INTERACTION_0B
+	dw ObjInteraction_Walkable         ; OBJ_INTERACTION_WALKABLE
+	dw ObjInteraction_MusicalCoin      ; OBJ_INTERACTION_MUSICAL_COIN
+	dw ObjInteraction_Fire             ; OBJ_INTERACTION_FIRE
+	dw Func_20f6a                      ; OBJ_INTERACTION_0F
+	dw ObjInteraction_GreyKey          ; OBJ_INTERACTION_GREY_KEY
+	dw ObjInteraction_RedKey           ; OBJ_INTERACTION_RED_KEY
+	dw ObjInteraction_GreenKey         ; OBJ_INTERACTION_GREEN_KEY
+	dw ObjInteraction_BlueKey          ; OBJ_INTERACTION_BLUE_KEY
+	dw ObjInteraction_GreyTreasure     ; OBJ_INTERACTION_GREY_TREASURE
+	dw ObjInteraction_RedTreasure      ; OBJ_INTERACTION_RED_TREASURE
+	dw ObjInteraction_GreenTreasure    ; OBJ_INTERACTION_GREEN_TREASURE
+	dw ObjInteraction_BlueTreasure     ; OBJ_INTERACTION_BLUE_TREASURE
+	dw Func_21156                      ; OBJ_INTERACTION_18
+	dw Func_21245                      ; OBJ_INTERACTION_19
+	dw Func_21358                      ; OBJ_INTERACTION_1A
+	dw ObjInteraction_RegularCoin      ; OBJ_INTERACTION_REGULAR_COIN
+	dw Func_21455                      ; OBJ_INTERACTION_1C
+	dw Func_21548                      ; OBJ_INTERACTION_1D
+	dw Func_21569                      ; OBJ_INTERACTION_1E
+	dw Func_215a2                      ; OBJ_INTERACTION_1F
+	dw Func_215e7                      ; OBJ_INTERACTION_20
+	dw Func_2164f                      ; OBJ_INTERACTION_21
+	dw Func_21675                      ; OBJ_INTERACTION_22
+	dw Func_21774                      ; OBJ_INTERACTION_23
+	dw Func_217b9                      ; OBJ_INTERACTION_24
+	dw Func_21819                      ; OBJ_INTERACTION_25
+	dw ObjInteraction_Bubble           ; OBJ_INTERACTION_BUBBLE
+	dw Func_21887                      ; OBJ_INTERACTION_27
+	dw ObjInteraction_Owl              ; OBJ_INTERACTION_OWL
+	dw ObjInteraction_Rail             ; OBJ_INTERACTION_RAIL
+	dw Func_20e0f                      ; OBJ_INTERACTION_2A
+	dw Func_21a4f                      ; OBJ_INTERACTION_2B
+	dw Func_21a47                      ; OBJ_INTERACTION_2C
+	dw Func_21a52                      ; OBJ_INTERACTION_2D
+	dw ObjInteraction_UnlitTorch       ; OBJ_INTERACTION_UNLIT_TORCH
+	dw Func_21a97                      ; OBJ_INTERACTION_2F
+	dw Func_21ac3                      ; OBJ_INTERACTION_30
+	dw Func_21af1                      ; OBJ_INTERACTION_31
+	dw Func_21b08                      ; OBJ_INTERACTION_32
+	dw Func_21b0b                      ; OBJ_INTERACTION_33
+	dw Func_21b2b                      ; OBJ_INTERACTION_34
+	dw Func_21b42                      ; OBJ_INTERACTION_35
+	dw Func_21b78                      ; OBJ_INTERACTION_36
+	dw Func_21573                      ; OBJ_INTERACTION_37
+	dw Func_21b89                      ; OBJ_INTERACTION_38
+	dw Func_21c17                      ; OBJ_INTERACTION_39
+	dw Func_21c26                      ; OBJ_INTERACTION_3A
+	dw Func_21c56                      ; OBJ_INTERACTION_3B
+	dw Func_21c61                      ; OBJ_INTERACTION_3C
+	dw Func_21c86                      ; OBJ_INTERACTION_3D
+	dw Func_21c98                      ; OBJ_INTERACTION_3E
+	dw Func_21ca8                      ; OBJ_INTERACTION_3F
 	dw ObjInteraction_WaterTeleporting ; OBJ_INTERACTION_WATER_TELEPORTING
-	dw Func_21ce9                   ; OBJ_INTERACTION_41
-	dw Func_21cf8                   ; OBJ_INTERACTION_42
-	dw Func_207ed                   ; OBJ_INTERACTION_43
-	dw Func_21cfd                   ; OBJ_INTERACTION_44
-	dw Func_21d17                   ; OBJ_INTERACTION_45
-	dw Func_21d3b                   ; OBJ_INTERACTION_46
-	dw Func_21d64                   ; OBJ_INTERACTION_47
-	dw Func_21d6f                   ; OBJ_INTERACTION_48
-	dw Func_21d88                   ; OBJ_INTERACTION_49
-	dw ObjInteraction_ColourCoin    ; OBJ_INTERACTION_COLOUR_COIN
-	dw Func_21df8                   ; OBJ_INTERACTION_4B
-	dw Func_21e2e                   ; OBJ_INTERACTION_4C
-	dw Func_21e3e                   ; OBJ_INTERACTION_4D
-	dw Func_21e9c                   ; OBJ_INTERACTION_4E
-	dw Func_21ea6                   ; OBJ_INTERACTION_4F
-	dw Func_21ecd                   ; OBJ_INTERACTION_50
-	dw Func_21f01                   ; OBJ_INTERACTION_51
-	dw Func_21f28                   ; OBJ_INTERACTION_52
-	dw ObjInteraction_None          ; OBJ_INTERACTION_UNUSED_1
-	dw ObjInteraction_None          ; OBJ_INTERACTION_UNUSED_2
-	dw ObjInteraction_None          ; OBJ_INTERACTION_UNUSED_3
-	dw ObjInteraction_None          ; OBJ_INTERACTION_UNUSED_4
-	dw ObjInteraction_None          ; OBJ_INTERACTION_UNUSED_5
-	dw ObjInteraction_None          ; OBJ_INTERACTION_UNUSED_6
+	dw Func_21ce9                      ; OBJ_INTERACTION_41
+	dw Func_21cf8                      ; OBJ_INTERACTION_42
+	dw Func_207ed                      ; OBJ_INTERACTION_43
+	dw Func_21cfd                      ; OBJ_INTERACTION_44
+	dw Func_21d17                      ; OBJ_INTERACTION_45
+	dw Func_21d3b                      ; OBJ_INTERACTION_46
+	dw Func_21d64                      ; OBJ_INTERACTION_47
+	dw Func_21d6f                      ; OBJ_INTERACTION_48
+	dw Func_21d88                      ; OBJ_INTERACTION_49
+	dw ObjInteraction_ColourCoin       ; OBJ_INTERACTION_COLOUR_COIN
+	dw Func_21df8                      ; OBJ_INTERACTION_4B
+	dw Func_21e2e                      ; OBJ_INTERACTION_4C
+	dw Func_21e3e                      ; OBJ_INTERACTION_4D
+	dw Func_21e9c                      ; OBJ_INTERACTION_4E
+	dw Func_21ea6                      ; OBJ_INTERACTION_4F
+	dw Func_21ecd                      ; OBJ_INTERACTION_50
+	dw Func_21f01                      ; OBJ_INTERACTION_51
+	dw Func_21f28                      ; OBJ_INTERACTION_52
+	dw ObjInteraction_None             ; OBJ_INTERACTION_UNUSED_1
+	dw ObjInteraction_None             ; OBJ_INTERACTION_UNUSED_2
+	dw ObjInteraction_None             ; OBJ_INTERACTION_UNUSED_3
+	dw ObjInteraction_None             ; OBJ_INTERACTION_UNUSED_4
+	dw ObjInteraction_None             ; OBJ_INTERACTION_UNUSED_5
+	dw ObjInteraction_None             ; OBJ_INTERACTION_UNUSED_6
 ; 0x20202
 
 ObjInteraction_None: ; 20202 (8:4202)
@@ -348,7 +348,7 @@ Func_2023b: ; 2023b (8:423b)
 	cp TOUCH_BUMP
 	jr z, .asm_20257
 	cp TOUCH_VULNERABLE
-	jp z, Func_20939
+	jp z, Func_20939 ; this causes an infinite loop!
 	cp TOUCH_ATTACK
 	jp z, AttackObject
 	cp TOUCH_VANISH
@@ -1458,6 +1458,7 @@ Func_20b6b: ; 20b6b (8:4b6b)
 
 .asm_20c41
 	jp StepOnObject
+
 	ld a, [wWarioScreenXPos]
 	ld b, a
 	ld a, [wObjScreenXPos]
@@ -1711,7 +1712,7 @@ Func_20e6a: ; 20e6a (8:4e6a)
 	jp SetObjUnk1C
 ; 0x20e77
 
-Func_20e77: ; 20e77 (8:4e77)
+ObjInteraction_Walkable: ; 20e77 (8:4e77)
 	ld a, [wInteractionSide]
 	bit INTERACTION_UP_F, a
 	jp nz, Func_21aac
@@ -1728,7 +1729,7 @@ ObjInteraction_MusicalCoin: ; 20e82 (8:4e82)
 	jp CollectMusicalCoin
 ; 0x20e97
 
-Func_20e97: ; 20e97 (8:4e97)
+ObjInteraction_Fire: ; 20e97 (8:4e97)
 	ld b, $06
 	call SetObjUnk1C
 
@@ -1741,7 +1742,6 @@ Func_20e97: ; 20e97 (8:4e97)
 
 	ld a, (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
 	ld [wTransformation], a
-
 	ld a, $01
 	ld [wca8f], a
 	ld a, TOUCH_BUMP
@@ -1750,7 +1750,6 @@ Func_20e97: ; 20e97 (8:4e97)
 	ld [wStingTouchState], a
 	ld a, $02
 	ld [wca94], a
-
 	ld a, HIGH(HOT_WARIO_DURATION)
 	ld [wTransformationDuration + 0], a
 	ld a, LOW(HOT_WARIO_DURATION)
@@ -2556,7 +2555,7 @@ Func_2164f: ; 2164f (8:564f)
 	jr nz, .asm_21672
 	jp Func_2022c
 .asm_21672
-	jp Func_20e97
+	jp ObjInteraction_Fire
 ; 0x21675
 
 Func_21675: ; 21675 (8:5675)
@@ -2965,7 +2964,7 @@ Func_21a52: ; 21a52 (8:5a52)
 	ret
 ; 0x21a8c
 
-Func_21a8c: ; 21a8c (8:5a8c)
+ObjInteraction_UnlitTorch: ; 21a8c (8:5a8c)
 	ld a, [wTransformation]
 	cp (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
 	ret nz

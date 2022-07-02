@@ -828,13 +828,13 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld hl, wCurObjUnk1c
 	ld a, 15 | (1 << 7)
 	ld [hld], a
-	ld a, OBJ_INTERACTION_38
+	ld a, OBJACTION_38
 	jr .Func_4057d
 .Action09:
 	ld hl, wCurObjUnk1c
 	ld a, 15 | (1 << 7)
 	ld [hld], a
-	ld a, OBJ_INTERACTION_39
+	ld a, OBJACTION_39
 .Func_4057d:
 	ld [hld], a ; OBJ_ACTION
 	ld a, [hld] ; OBJ_UNK_1A
@@ -868,11 +868,11 @@ SpearheadFunc: ; 40040 (10:4040)
 	ret
 
 .Action0b:
-	ld a, OBJ_INTERACTION_3B
+	ld a, OBJACTION_3B
 	ld [wCurObjAction], a
 	jr .Func_405b6
 .Action0c:
-	ld a, OBJ_INTERACTION_3C
+	ld a, OBJACTION_3C
 	ld [wCurObjAction], a
 .Func_405b6:
 	ld hl, wCurObjFrameDuration

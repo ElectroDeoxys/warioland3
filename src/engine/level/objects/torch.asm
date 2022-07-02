@@ -15,7 +15,7 @@ FlameBlockTorchUpdate: ; 40b14 (10:4b14)
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
 	and HEAVY_OBJ
-	or OBJ_INTERACTION_0E
+	or OBJ_INTERACTION_FIRE
 	ld [hld], a
 	ld de, Frameset_68360
 	call SetObjectFramesetPtr
