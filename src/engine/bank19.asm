@@ -655,20 +655,8 @@ WebberData:          object_data OAM_180242, $2, OBJ_INTERACTION_WALKABLE       
 TorchData:           object_data OAM_180838, $4, OBJ_INTERACTION_FIRE,                       -16, TorchFunc,           $0
 TorchNoEmbersData:   object_data OAM_180838, $6, OBJ_INTERACTION_FIRE,                       -16, TorchNoEmbersFunc,   $0
 FlameBlockTorchData: object_data OAM_180838, $7, OBJ_INTERACTION_UNLIT_TORCH,                -16, FlameBlockTorchFunc, $0
-
-Data_64443: ; 64443 (19:4443)
-	db ($2 << 4) | $b ; low bank nybble, ??
-	db $22, $e2 ; ??, ??
-	dw $55ec ; OAM ptr
-	dw $56bd ; update function
-	db $00 ; ??
-
-Data_6444b: ; 6444b (19:444b)
-	db ($2 << 4) | $c ; low bank nybble, ??
-	db $af, $e0 ; ??, ??
-	dw $56e1 ; OAM ptr
-	dw $571c ; update function
-	db $00 ; ??
+FlameBlockData:      object_data OAM_1895ec, $b, OBJ_INTERACTION_SOLID,                      -30, FlameBlockFunc,      $0
+StoveData:           object_data OAM_1896e1, $c, OBJ_INTERACTION_STOVE          | HEAVY_OBJ, -32, StoveFunc,           $0
 
 Data_64453: ; 64453 (19:4453)
 	db ($0 << 4) | $6 ; low bank nybble, ??
@@ -3220,9 +3208,9 @@ EnemyGroupGfx42: ; 65aa7 (19:5aa7)
 	dw FlameBlockGfx
 	dw TorchGfx
 
-	dw Data_6444b
+	dw StoveData
 	dw Data_6446b
-	dw Data_64443
+	dw FlameBlockData
 	dw TorchNoEmbersData
 	dw FlameBlockTorchData
 	dw NULL
@@ -3729,7 +3717,7 @@ EnemyGroupGfx57: ; 65da2 (19:5da2)
 	dw DoughnuteerGfx
 	dw TorchGfx
 
-	dw Data_6444b
+	dw StoveData
 	dw DummyObjectData
 	dw Data_64473
 	dw NULL
@@ -3762,7 +3750,7 @@ EnemyGroupGfx58: ; 65dd3 (19:5dd3)
 	dw ZombieGfx
 	dw FireBotGfx
 
-	dw Data_6444b
+	dw StoveData
 	dw DummyObjectData
 	dw Data_6453b
 	dw Data_64543
@@ -4512,7 +4500,7 @@ EnemyGroupGfx80: ; 66239 (19:6239)
 	dw FutamoguGfx
 	dw TorchGfx
 
-	dw Data_6444b
+	dw StoveData
 	dw Data_6450b
 	dw NULL
 
@@ -5662,7 +5650,7 @@ EnemyGroupGfx114: ; 668f3 (19:68f3)
 	dw HebariiGfx
 	dw TorchGfx
 
-	dw Data_6444b
+	dw StoveData
 	dw DummyObjectData
 	dw Data_64463
 	dw NULL

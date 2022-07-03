@@ -1,4 +1,17 @@
-	INCROM $4c000, $4c8a2
+	INCROM $4c000, $4c860
+
+Func_4c860: ; 4c860 (13:4860)
+	ld a, $81
+	ld [wCurObjUnk1c], a
+	ld hl, wCurObjActionDuration
+	dec [hl]
+	ret nz
+	ld l, OBJ_UNK_02
+	farcall Func_baee
+	ret
+; 0x4c87c
+
+	INCROM $4c87c, $4c8a2
 
 Func_4c8a2: ; 4c8a2 (13:48a2)
 	ld a, $81

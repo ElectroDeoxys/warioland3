@@ -512,7 +512,7 @@ DoSoftLand: ; 1c541 (7:5541)
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
 	jp c, DoGroundPound
-	jp DoGroundShake
+	jp DoWarioGroundShake
 
 .not_smash_attacking
 	ld a, [wJoypadDown]
@@ -548,7 +548,7 @@ DoHardLand: ; 1d58a (7:558a)
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
 	jp c, DoGroundPound
-	jr DoGroundShake
+	jr DoWarioGroundShake
 
 .not_smash_attacking
 	ld a, [wJoypadDown]
@@ -572,11 +572,11 @@ DoHardLand: ; 1d58a (7:558a)
 	ret
 ; 0x1c5fd
 
-DoGroundShake: ; 1c5fd (7:45fd)
+DoWarioGroundShake: ; 1c5fd (7:45fd)
 	ld a, [wGroundShakeCounter]
 	and a
 	jr nz, .asm_1c60d
-	ld a, $20
+	ld a, 32
 	ld [wGroundShakeCounter], a
 	ld a, TRUE
 	ld [wIsWarioGroundShaking], a

@@ -1083,7 +1083,7 @@ SubYOffset_Sprite:: ; 12a5 (0:12a5)
 ; 0x12b5
 
 ; b = ground shake counter
-Func_12b5:: ; 12b5 (0:12b5)
+DoGroundShake:: ; 12b5 (0:12b5)
 	ld a, [wGroundShakeCounter]
 	and a
 	ret nz
@@ -3625,7 +3625,13 @@ Func_316b:: ; 316b (0:316b)
 	ret
 ; 0x3173
 
-	INCROM $3173, $3182
+Func_3173:: ; 3173 (0:3173)
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(Func_62e57)
+	bankswitch
+	jp Func_62e57
+; 0x3182
 
 ObjAction_Vanish2:: ; 3182 (0:3182)
 	ld a, [wROMBank]

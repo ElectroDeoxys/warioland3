@@ -153,7 +153,14 @@ Data_604a0: ; 604a0 (18:44a0)
 	db 1, 2, 3, 4, 4, 4, 4, 4, 3, 2, 1, 0, 0, 0, 0, $80
 ; 0x604b0
 
-	INCROM $604b0, $611cb
+	INCROM $604b0, $605e0
+
+Data_605e0: ; 605e0 (18:45e0)
+	db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 3
+	db 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, $80
+; 0x60600
+
+	INCROM $60600, $611cb
 
 Func_611cb: ; 611cb (18:51cb)
 	push hl
@@ -588,9 +595,9 @@ Func_61760: ; 61760 (18:5760)
 .jump
 	jumptable
 
-	dw Func_617a6
-	dw Func_617a7
-	dw $57c1
+	dw .Func_617a6
+	dw .Func_617a7
+	dw .Func_617c1
 	dw $57da
 	dw $57f2
 	dw $5809
@@ -607,23 +614,20 @@ Func_61760: ; 61760 (18:5760)
 	dw $5889
 	dw $5893
 	dw $5819
-	dw Func_6179c
-; 0x6179c
+	dw .Func_6179c
 
-Func_6179c: ; 6179c (18:579c)
+.Func_6179c:
 	ld hl, wCurObjUnk1c
 	ld a, $8f
 	ld [hld], a
 	ld a, OBJACTION_WAKE_UP
 	ld [hl], a ; OBJ_ACTION
 	ret
-; 0x617a6
 
-Func_617a6: ; 617a6 (18:57a6)
+.Func_617a6:
 	ret
-; 0x617a7
 
-Func_617a7: ; 617a7 (18:57a7)
+.Func_617a7:
 	ld a, [wCurObjInteractionType]
 	and INTERACTION_MASK
 	jr z, .no_interaction_type
@@ -641,6 +645,7 @@ Func_617a7: ; 617a7 (18:57a7)
 	ld [hl], a ; OBJ_ACTION
 	ret
 
+.Func_617c1:
 	ld hl, wCurObjFlags
 	res OBJFLAG_UNK2_F, [hl]
 	set OBJFLAG_UNK3_F, [hl]
@@ -706,6 +711,7 @@ _ObjAction_Vanish:: ; 6189d (18:589d)
 	ld a, [hl]
 	and $f0
 	ld [hld], a
+Func_618b4: ; 618b4 (18:58b4)
 	ld a, (BANK(Func_4c8a2) - BANK("Object Update Functions 1")) << 4
 	ld [wCurObjUnk07], a
 
@@ -3378,7 +3384,17 @@ Func_62e31: ; 62e31 (18:6e31)
 	jp Func_316b
 ; 0x62e57
 
-	INCROM $62e57, $62e6e
+Func_62e57:: ; 62e57 (18:6e57)
+	play_sfx SFX_018
+
+	ld hl, wCurObjUpdateFunction + 1
+	ld a, HIGH(Func_4c860)
+	ld [hld], a
+	ld a, LOW(Func_4c860)
+	ld [hld], a
+	call Func_618b4
+	jp Func_316b
+; 0x62e6e
 
 _ObjAction_Vanish2:: ; 62e6e (18:6e6e)
 	call _ObjAction_Vanish

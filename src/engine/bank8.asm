@@ -242,7 +242,7 @@ Func_20000: ; 20000 (8:4000)
 	dw Func_215a2                      ; OBJ_INTERACTION_1F
 	dw Func_215e7                      ; OBJ_INTERACTION_20
 	dw Func_2164f                      ; OBJ_INTERACTION_21
-	dw Func_21675                      ; OBJ_INTERACTION_22
+	dw ObjInteraction_Solid            ; OBJ_INTERACTION_SOLID
 	dw Func_21774                      ; OBJ_INTERACTION_23
 	dw Func_217b9                      ; OBJ_INTERACTION_24
 	dw Func_21819                      ; OBJ_INTERACTION_25
@@ -255,7 +255,7 @@ Func_20000: ; 20000 (8:4000)
 	dw Func_21a47                      ; OBJ_INTERACTION_2C
 	dw Func_21a52                      ; OBJ_INTERACTION_2D
 	dw ObjInteraction_UnlitTorch       ; OBJ_INTERACTION_UNLIT_TORCH
-	dw Func_21a97                      ; OBJ_INTERACTION_2F
+	dw ObjInteraction_Stove            ; OBJ_INTERACTION_STOVE
 	dw Func_21ac3                      ; OBJ_INTERACTION_30
 	dw Func_21af1                      ; OBJ_INTERACTION_31
 	dw Func_21b08                      ; OBJ_INTERACTION_32
@@ -2558,7 +2558,7 @@ Func_2164f: ; 2164f (8:564f)
 	jp ObjInteraction_Fire
 ; 0x21675
 
-Func_21675: ; 21675 (8:5675)
+ObjInteraction_Solid: ; 21675 (8:5675)
 	ld a, [wInteractionSide]
 	bit INTERACTION_UP_F, a
 	jp nz, Func_209ca
@@ -2972,7 +2972,7 @@ ObjInteraction_UnlitTorch: ; 21a8c (8:5a8c)
 	jp SetObjUnk1C
 ; 0x21a97
 
-Func_21a97: ; 21a97 (8:5a97)
+ObjInteraction_Stove: ; 21a97 (8:5a97)
 	ld a, [wInteractionSide]
 	bit INTERACTION_UP_F, a
 	jr nz, Func_21aac

@@ -367,7 +367,7 @@ Func_1828c: ; 1828c (6:428c)
 	ld [wca6a], a
 	play_sfx SFX_02F
 	ld b, $10
-	call Func_12b5
+	call DoGroundShake
 	jp Func_18032
 ; 0x182c3
 
@@ -3271,7 +3271,7 @@ UpdateState_LadderSliding: ; 1a6b6 (6:66b6)
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
 	jr c, .ground_pound
-	farcall DoGroundShake
+	farcall DoWarioGroundShake
 	ret
 .idle
 	farcall SetState_Idling
@@ -3810,7 +3810,7 @@ UpdateState_FenceSliding: ; 1b0a9 (6:70a9)
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
 	jr c, .ground_pound
-	farcall DoGroundShake
+	farcall DoWarioGroundShake
 	ret
 .idle
 	farcall SetState_Idling

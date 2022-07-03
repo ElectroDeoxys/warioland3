@@ -606,7 +606,64 @@ Frameset_691bf:: ; 691bf (1a:51bf)
 	db $ff
 ; 0x691c4
 
-	INCROM $691c4, $69c0a
+	INCROM $691c4, $695de
+
+Frameset_695de:: ; 695de (1a:55de)
+	db $00, 30
+	db $01, 10
+	db $02, 15
+	db $01, 10
+	db $ff
+; 0x695e7
+
+Frameset_695e7:: ; 695e7 (1a:55e7)
+	db $00, 12
+	db $04, 10
+	db $05,  8
+	db $06,  6
+	db $05,  8
+	db $04, 10
+	db $00, 12
+	db $04, 10
+	db $05,  8
+	db $06,  6
+	db $05,  8
+	db $04, 10
+	db $00, 12
+	db $04, 10
+	db $05,  8
+	db $06,  6
+	db $ff
+; 0x69608
+
+	INCROM $69608, $69615
+
+Frameset_69615:: ; 69615 (1a:5615)
+	db $00, 127
+	db $ff
+; 0x69618
+
+Frameset_69618:: ; 69618 (1a:5618)
+	db $01,  2
+	db $02,  4
+	db $03,  8
+	db $02,  4
+	db $01,  2
+	db $00,  1
+	db $ff
+; 0x69625
+
+Frameset_69625:: ; 69625 (1a:5625)
+	db $04,  6
+	db $05, 10
+	db $04,  6
+	db $05, 10
+	db $04,  6
+	db $00,  1
+	db $ff
+; 0x69632
+
+	INCROM $69632, $69c0a
 
 Frameset_69c0a:: ; 69c0a (1a:5c0a)
 	db $00,  6
