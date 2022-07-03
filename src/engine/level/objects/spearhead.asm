@@ -72,8 +72,8 @@ SpearheadFunc: ; 40040 (10:4040)
 	dw .Default ; OBJACTION_2A
 	dw .Default ; OBJACTION_2B
 	dw .Default ; OBJACTION_2C
-	dw .Sleep ; OBJACTION_SLEEP
-	dw .Angry ; OBJACTION_ANGRY
+	dw .Sleep ; OBJACTION_SPECIAL_1
+	dw .Angry ; OBJACTION_SPECIAL_2
 	dw .WakeUp ; OBJACTION_WAKE_UP
 	dw ObjAction_Fall ; OBJACTION_FALL
 	dw .Walk ; OBJACTION_WALK
@@ -162,7 +162,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld [hld], a
 
 	ld l, OBJ_ACTION
-	ld a, OBJACTION_SLEEP
+	ld a, OBJACTION_SPECIAL_1
 	ld [hld], a
 
 	ld de, Frameset_68234
@@ -350,7 +350,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	or OBJ_INTERACTION_FRONT_STING
 	ld [hld], a
 	ld l, OBJ_ACTION
-	ld a, OBJACTION_ANGRY
+	ld a, OBJACTION_SPECIAL_2
 	ld [hld], a
 	ld a, [hld] ; OBJ_UNK_1A
 	rlca

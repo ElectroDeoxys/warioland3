@@ -733,7 +733,7 @@ Func_618b4: ; 618b4 (18:58b4)
 	ld l, OBJ_FLAGS
 	res OBJFLAG_UNK2_F, [hl]
 	set OBJFLAG_UNK3_F, [hl]
-	ld a, $81
+	ld a, 1 | (1 << 7)
 	ld [wCurObjUnk1c], a
 
 	ld l, OBJ_Y_POS
@@ -1023,7 +1023,7 @@ Func_61f4a: ; 61f4a (18:5f4a)
 ; 0x61f54
 
 Func_61f54:: ; 61f54 (18:5f54)
-	ld a, $81
+	ld a, 1 | (1 << 7)
 	ld [wCurObjUnk1c], a
 
 	ld a, [wGrabState]
@@ -1231,7 +1231,7 @@ Func_61f54:: ; 61f54 (18:5f54)
 ; 0x620a6
 
 Func_620a6:: ; 620a6 (18:60a6)
-	ld a, $81
+	ld a, 1 | (1 << 7)
 	ld [wCurObjUnk1c], a
 
 	ld a, [wGrabState]
@@ -1442,7 +1442,7 @@ Func_620a6:: ; 620a6 (18:60a6)
 ; 0x621fb
 
 Func_621fb:: ; 621fb (18:61fb)
-	ld a, $81
+	ld a, 1 | (1 << 7)
 	ld [wCurObjUnk1c], a
 	ld a, [wGrabState]
 	ld b, a
@@ -1552,7 +1552,7 @@ Func_621fb:: ; 621fb (18:61fb)
 ; 0x622bd
 
 Func_622bd:: ; 622bd (18:62bd)
-	ld a, $81
+	ld a, 1 | (1 << 7)
 	ld [wCurObjUnk1c], a
 	ld a, [wGrabState]
 	ld b, a
@@ -1664,7 +1664,7 @@ Func_622bd:: ; 622bd (18:62bd)
 ; 0x62382
 
 Func_62382:: ; 62382 (18:6382)
-	ld a, $81
+	ld a, 1 | (1 << 7)
 	ld [wCurObjUnk1c], a
 	ld a, [wGrabState]
 	ld b, a
@@ -1812,7 +1812,7 @@ ThrowObject_Left: ; 62429 (18:6429)
 ; 0x6247b
 
 Func_6247b:: ; 6247b (18:647b)
-	ld a, $81
+	ld a, 1 | (1 << 7)
 	ld [wCurObjUnk1c], a
 	ld a, [wGrabState]
 	ld b, a

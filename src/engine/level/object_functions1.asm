@@ -10,28 +10,7 @@ INCLUDE "engine/level/objects/spearhead.asm"
 INCLUDE "engine/level/objects/futamogu.asm"
 INCLUDE "engine/level/objects/webber.asm"
 INCLUDE "engine/level/objects/torch.asm"
-
-Func_40ca1: ; 40ca1 (10:4ca1)
-	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
-	set OBJFLAG_UNK3_F, [hl]
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
-	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, $4c
-	ld [hld], a
-	ld a, $c2
-	ld [hld], a
-	ld de, $437a
-	call SetObjectFramesetPtr
-	ld a, $1e
-	ld [hli], a ; OBJ_ACTION_DURATION
-	ld a, [wGlobalCounter]
-	ld [hl], a ; OBJ_UNK_17
-	ret
-; 0x40cc2
-
-	INCROM $40cc2, $40e12
+INCLUDE "engine/level/objects/unused_flower.asm"
 
 Func_40e12: ; 40e12 (10:4e12)
 	ld hl, wCurObjFlags

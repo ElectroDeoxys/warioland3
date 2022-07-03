@@ -1,7 +1,7 @@
 	INCROM $4c000, $4c860
 
 Func_4c860: ; 4c860 (13:4860)
-	ld a, $81
+	ld a, 1 | (1 << 7)
 	ld [wCurObjUnk1c], a
 	ld hl, wCurObjActionDuration
 	dec [hl]
@@ -14,7 +14,7 @@ Func_4c860: ; 4c860 (13:4860)
 	INCROM $4c87c, $4c8a2
 
 Func_4c8a2: ; 4c8a2 (13:48a2)
-	ld a, $81
+	ld a, 1 | (1 << 7)
 	ld [wCurObjUnk1c], a
 	ld hl, wCurObjActionDuration
 	dec [hl]

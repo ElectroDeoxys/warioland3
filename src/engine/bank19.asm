@@ -657,13 +657,7 @@ TorchNoEmbersData:   object_data OAM_180838, $6, OBJ_INTERACTION_FIRE,          
 FlameBlockTorchData: object_data OAM_180838, $7, OBJ_INTERACTION_UNLIT_TORCH,                -16, FlameBlockTorchFunc, $0
 FlameBlockData:      object_data OAM_1895ec, $b, OBJ_INTERACTION_SOLID,                      -30, FlameBlockFunc,      $0
 StoveData:           object_data OAM_1896e1, $c, OBJ_INTERACTION_STOVE          | HEAVY_OBJ, -32, StoveFunc,           $0
-
-Data_64453: ; 64453 (19:4453)
-	db ($0 << 4) | $6 ; low bank nybble, ??
-	db $01, $00 ; ??, ??
-	dw $4916 ; OAM ptr
-	dw Func_40ca1 ; update function
-	db $00 ; ??
+UnusedFlowerData:    object_data OAM_180916, $6, OBJ_INTERACTION_01                        ,   0, UnusedFlowerFunc,    $0
 
 Data_6445b: ; 6445b (19:445b)
 	db ($0 << 4) | $7 ; low bank nybble, ??
@@ -1399,7 +1393,41 @@ ObjParams_WebberProjectile: ; 647a0 (19:47a0)
 	db OBJFLAG_UNK7 ; obj flags
 ; 0x647b5
 
-	INCROM $647b5, $64a40
+ObjParams_UnusedFlowerProjectileLeft: ; 647b5 (19:47b5)
+	db -10 ; y
+	db   0 ; x
+	dn $0, $5 ; unk7
+	db OBJ_INTERACTION_FULL_STING
+	db -13, -3, -6, 5 ; collision box
+	dw OAM_180916 ; OAM
+	dw Frameset_6838c ; frameset
+	db $00 ; action duration
+	db $00 ; unk17
+	db $00 ; unk18
+	db $00 ; movement index
+	db $00 ; unk1a
+	db OBJACTION_00 ; action
+	dw UnusedFlowerProjectileLeftFunc
+	db OBJFLAG_UNK7 ; obj flags
+
+ObjParams_UnusedFlowerProjectileRight: ; 647ca (19:47ca)
+	db -10 ; y
+	db   0 ; x
+	dn $0, $5 ; unk7
+	db OBJ_INTERACTION_FULL_STING
+	db -13, -3, -6, 5 ; collision box
+	dw OAM_180916 ; OAM
+	dw Frameset_68395 ; frameset
+	db $00 ; action duration
+	db $00 ; unk17
+	db $00 ; unk18
+	db $00 ; movement index
+	db $80 ; unk1a
+	db OBJACTION_00 ; action
+	dw UnusedFlowerProjectileRightFunc
+	db OBJFLAG_UNK7 ; obj flags
+
+	INCROM $647df, $64a40
 
 ObjParams_64a40: ; 64a40 (19:4a40)
 	db -40 ; y
@@ -2491,7 +2519,7 @@ EnemyGroupGfx21: ; 65672 (19:5672)
 	dw SpearBotGfx
 	dw TorchGfx
 
-	dw Data_64453
+	dw UnusedFlowerData
 	dw Data_6450b
 	dw Data_6454b
 	dw TorchData

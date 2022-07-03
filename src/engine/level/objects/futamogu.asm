@@ -92,7 +92,7 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	jr z, .Idle
 	cp OBJACTION_WAKE_UP
 	jr z, .Climb
-	cp OBJACTION_ANGRY
+	cp OBJACTION_SPECIAL_2
 	jr z, .Angry
 	cp OBJACTION_34
 	jr z, .Shake
@@ -144,7 +144,7 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	ld l, OBJ_FLAGS
 	bit OBJFLAG_UNK5_F, [hl]
 	ret z
-	ld a, OBJACTION_ANGRY
+	ld a, OBJACTION_SPECIAL_2
 	ld [wCurObjAction], a
 	ld de, Frameset_68343
 	call SetObjectFramesetPtr
