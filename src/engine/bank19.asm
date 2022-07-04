@@ -639,32 +639,26 @@ assert (BANK(\1) - BANK("Objects OAM 1")) | (BANK(\5) - BANK("Object Update Func
 	db \6
 ENDM
 
-DummyObjectData:     object_data OAM_18007b, $0, OBJ_INTERACTION_00,                           0, DummyObjectFunc,     $0
-GreyTreasureData:    object_data OAM_18c000, $1, OBJ_INTERACTION_GREY_TREASURE  | HEAVY_OBJ, -24, GreyTreasureFunc,    $0
-RedTreasureData:     object_data OAM_18c000, $1, OBJ_INTERACTION_RED_TREASURE   | HEAVY_OBJ, -24, RedTreasureFunc,     $0
-GreenTreasureData:   object_data OAM_18c000, $1, OBJ_INTERACTION_GREEN_TREASURE | HEAVY_OBJ, -24, GreenTreasureFunc,   $0
-BlueTreasureData:    object_data OAM_18c000, $1, OBJ_INTERACTION_BLUE_TREASURE  | HEAVY_OBJ, -24, BlueTreasureFunc,    $0
-GreyKeyData:         object_data OAM_18c000, $2, OBJ_INTERACTION_GREY_KEY,                   -24, KeyFunc,             $0
-RedKeyData:          object_data OAM_18c000, $2, OBJ_INTERACTION_RED_KEY,                    -24, KeyFunc,             $0
-GreenKeyData:        object_data OAM_18c000, $2, OBJ_INTERACTION_GREEN_KEY,                  -24, KeyFunc,             $0
-BlueKeyData:         object_data OAM_18c000, $2, OBJ_INTERACTION_BLUE_KEY,                   -24, KeyFunc,             $0
-MusicaCoinData:      object_data OAM_18c000, $3, OBJ_INTERACTION_MUSICAL_COIN,               -25, MusicalCoinFunc,     $0
-SpearheadData:       object_data OAM_18007b, $0, OBJ_INTERACTION_01,                         -14, SpearheadFunc,       OBJFLAG_UNK7
-FutamoguData:        object_data OAM_180564, $1, OBJ_INTERACTION_WALKABLE       | HEAVY_OBJ, -17, FutamoguFunc,        OBJFLAG_UNK7
-WebberData:          object_data OAM_180242, $2, OBJ_INTERACTION_WALKABLE       | HEAVY_OBJ, -16, WebberFunc,          OBJFLAG_UNK7
-TorchData:           object_data OAM_180838, $4, OBJ_INTERACTION_FIRE,                       -16, TorchFunc,           $0
-TorchNoEmbersData:   object_data OAM_180838, $6, OBJ_INTERACTION_FIRE,                       -16, TorchNoEmbersFunc,   $0
-FlameBlockTorchData: object_data OAM_180838, $7, OBJ_INTERACTION_UNLIT_TORCH,                -16, FlameBlockTorchFunc, $0
-FlameBlockData:      object_data OAM_1895ec, $b, OBJ_INTERACTION_SOLID,                      -30, FlameBlockFunc,      $0
-StoveData:           object_data OAM_1896e1, $c, OBJ_INTERACTION_STOVE          | HEAVY_OBJ, -32, StoveFunc,           $0
-UnusedFlowerData:    object_data OAM_180916, $6, OBJ_INTERACTION_01                        ,   0, UnusedFlowerFunc,    $0
-
-Data_6445b: ; 6445b (19:445b)
-	db ($0 << 4) | $7 ; low bank nybble, ??
-	db $8f, $ee ; ??, ??
-	dw $49ff ; OAM ptr
-	dw Func_40e12 ; update function
-	db $80 ; ??
+DummyObjectData:        object_data OAM_18007b, $0, OBJ_INTERACTION_00,                           0, DummyObjectFunc,        $0
+GreyTreasureData:       object_data OAM_18c000, $1, OBJ_INTERACTION_GREY_TREASURE  | HEAVY_OBJ, -24, GreyTreasureFunc,       $0
+RedTreasureData:        object_data OAM_18c000, $1, OBJ_INTERACTION_RED_TREASURE   | HEAVY_OBJ, -24, RedTreasureFunc,        $0
+GreenTreasureData:      object_data OAM_18c000, $1, OBJ_INTERACTION_GREEN_TREASURE | HEAVY_OBJ, -24, GreenTreasureFunc,      $0
+BlueTreasureData:       object_data OAM_18c000, $1, OBJ_INTERACTION_BLUE_TREASURE  | HEAVY_OBJ, -24, BlueTreasureFunc,       $0
+GreyKeyData:            object_data OAM_18c000, $2, OBJ_INTERACTION_GREY_KEY,                   -24, KeyFunc,                $0
+RedKeyData:             object_data OAM_18c000, $2, OBJ_INTERACTION_RED_KEY,                    -24, KeyFunc,                $0
+GreenKeyData:           object_data OAM_18c000, $2, OBJ_INTERACTION_GREEN_KEY,                  -24, KeyFunc,                $0
+BlueKeyData:            object_data OAM_18c000, $2, OBJ_INTERACTION_BLUE_KEY,                   -24, KeyFunc,                $0
+MusicaCoinData:         object_data OAM_18c000, $3, OBJ_INTERACTION_MUSICAL_COIN,               -25, MusicalCoinFunc,        $0
+SpearheadData:          object_data OAM_18007b, $0, OBJ_INTERACTION_01,                         -14, SpearheadFunc,          OBJFLAG_UNK7
+FutamoguData:           object_data OAM_180564, $1, OBJ_INTERACTION_WALKABLE       | HEAVY_OBJ, -17, FutamoguFunc,           OBJFLAG_UNK7
+WebberData:             object_data OAM_180242, $2, OBJ_INTERACTION_WALKABLE       | HEAVY_OBJ, -16, WebberFunc,             OBJFLAG_UNK7
+TorchData:              object_data OAM_180838, $4, OBJ_INTERACTION_FIRE,                       -16, TorchFunc,              $0
+TorchNoEmbersData:      object_data OAM_180838, $6, OBJ_INTERACTION_FIRE,                       -16, TorchNoEmbersFunc,      $0
+FlameBlockTorchData:    object_data OAM_180838, $7, OBJ_INTERACTION_UNLIT_TORCH,                -16, FlameBlockTorchFunc,    $0
+FlameBlockData:         object_data OAM_1895ec, $b, OBJ_INTERACTION_SOLID,                      -30, FlameBlockFunc,         $0
+StoveData:              object_data OAM_1896e1, $c, OBJ_INTERACTION_STOVE          | HEAVY_OBJ, -32, StoveFunc,              $0
+UnusedFlowerData:       object_data OAM_180916, $6, OBJ_INTERACTION_01                        ,   0, UnusedFlowerFunc,       $0
+CountRichtertoffenData: object_data OAM_1809ff, $7, OBJ_INTERACTION_0F             | HEAVY_OBJ, -18, CountRichtertoffenFunc, OBJFLAG_UNK7
 
 Data_64463: ; 64463 (19:4463)
 	db ($2 << 4) | $0 ; low bank nybble, ??
@@ -1843,7 +1837,7 @@ EnemyGroupGfx1: ; 6527c (19:527c)
 	dw BeamBotGfx
 
 	dw DummyObjectData
-	dw Data_6445b
+	dw CountRichtertoffenData
 	dw Data_64473
 	dw Data_64553
 	dw NULL
@@ -1911,7 +1905,7 @@ EnemyGroupGfx3: ; 652e2 (19:52e2)
 	dw OmodonmekaGfx
 
 	dw Data_644bb
-	dw Data_6445b
+	dw CountRichtertoffenData
 	dw Data_6468b
 	dw Data_6447b
 	dw NULL
@@ -4795,7 +4789,7 @@ EnemyGroupGfx88: ; 663c5 (19:63c5)
 	dw BarrelGfx
 
 	dw DummyObjectData
-	dw Data_6445b
+	dw CountRichtertoffenData
 	dw DummyObjectData
 	dw Data_644eb
 	dw NULL

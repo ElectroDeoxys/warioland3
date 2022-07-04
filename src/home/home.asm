@@ -3470,7 +3470,19 @@ Func_3076:: ; 3076 (0:3076)
 	ret
 ; 0x3083
 
-	INCROM $3083, $30b8
+	INCROM $3083, $30a4
+
+MoveObjectDown_Fast:: ; 30a4 (0:30a4)
+	ld hl, wCurObjYPos
+	ld a, [hl]
+	add 2
+	ld [hli], a
+	ret nc
+	inc [hl]
+	ret
+; 0x30ae
+
+	INCROM $30ae, $30b8
 
 ; moves current object right
 ; by 1 every 2 frames

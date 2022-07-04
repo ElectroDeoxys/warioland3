@@ -74,7 +74,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	dw .Default ; OBJACTION_2C
 	dw .Sleep ; OBJACTION_SPECIAL_1
 	dw .Angry ; OBJACTION_SPECIAL_2
-	dw .WakeUp ; OBJACTION_WAKE_UP
+	dw .WakeUp ; OBJACTION_SPECIAL_3
 	dw ObjAction_Fall ; OBJACTION_FALL
 	dw .Walk ; OBJACTION_WALK
 	dw ObjAction_BumpLeft ; OBJACTION_BUMP_LEFT
@@ -252,7 +252,7 @@ SpearheadFunc: ; 40040 (10:4040)
 .wake_up
 	ld a, [hli] ; OBJ_UNK_1A
 	rlca
-	ld a, OBJACTION_WAKE_UP
+	ld a, OBJACTION_SPECIAL_3
 	ld [hl], a ; OBJ_ACTION
 	jr c, .asm_40201
 	ld de, Frameset_6827c

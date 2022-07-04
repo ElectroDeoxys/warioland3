@@ -11,47 +11,7 @@ INCLUDE "engine/level/objects/futamogu.asm"
 INCLUDE "engine/level/objects/webber.asm"
 INCLUDE "engine/level/objects/torch.asm"
 INCLUDE "engine/level/objects/unused_flower.asm"
-
-Func_40e12: ; 40e12 (10:4e12)
-	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
-	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, $4e
-	ld [hld], a
-	ld a, $31
-	ld [hld], a
-	ld l, OBJ_COLLBOX_RIGHT
-	ld a, $07
-	ld [hld], a
-	ld a, $f8
-	ld [hld], a ; OBJ_COLLBOX_LEFT
-	ld a, $fc
-	ld [hl], a ; OBJ_COLLBOX_BOTTOM
-	jp Func_40f7e
-; 0x40e31
-
-	INCROM $40e31, $40f7e
-
-Func_40f7e: ; 40f7e (10:4f7e)
-	ld hl, wCurObjInteractionType
-	ld a, [hl]
-	and HEAVY_OBJ
-	or OBJ_INTERACTION_0F
-	ld [hld], a
-	ld l, OBJ_ACTION
-	ld a, OBJACTION_FALL
-	ld [hld], a
-	dec l
-	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
-	ld de, $43e1
-	call SetObjectFramesetPtr
-	ret
-; 0x40f96
-
-	INCROM $40f96, $41357
+INCLUDE "engine/level/objects/count_richtertoffen.asm"
 
 Func_41357: ; 41357 (10:5357)
 	ld hl, wCurObjUpdateFunction + 1

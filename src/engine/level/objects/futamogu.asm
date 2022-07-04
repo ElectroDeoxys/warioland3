@@ -90,7 +90,7 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	ld a, [hl]
 	and a
 	jr z, .Idle
-	cp OBJACTION_WAKE_UP
+	cp OBJACTION_SPECIAL_3
 	jr z, .Climb
 	cp OBJACTION_SPECIAL_2
 	jr z, .Angry
@@ -133,7 +133,7 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	jr z, .asm_4079a
 .asm_4078c
 	ld l, OBJ_ACTION
-	ld a, OBJACTION_WAKE_UP
+	ld a, OBJACTION_SPECIAL_3
 	ld [hld], a
 	res 7, [hl] ; OBJ_UNK_1A
 	ld de, Frameset_68336

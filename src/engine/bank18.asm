@@ -137,7 +137,15 @@ Data_60320: ; 60320 (18:4320)
 	db  1,  1,  1,  2,  2,  2,  3,  3,  4,  4,  4,  4,  4,  4,  4, $80
 ; 0x60340
 
-	INCROM $60340, $603f0
+	INCROM $60340, $603d0
+
+Data_603d0: ; 603d0 (18:43d0)
+	db -6, -5, -5, -5, -4, -4, -4, -3, -3, -3, -2, -1, -1, -1,  0, $80
+; 0x603e0
+
+Data_603e0: ; 603e0 (18:43e0)
+	db 1, 1, 2, 2, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, $80
+; 0x603f0
 
 Data_603f0: ; 603f0 (18:43f0)
 	db 1, 2, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, $80
@@ -153,7 +161,11 @@ Data_604a0: ; 604a0 (18:44a0)
 	db 1, 2, 3, 4, 4, 4, 4, 4, 3, 2, 1, 0, 0, 0, 0, $80
 ; 0x604b0
 
-	INCROM $604b0, $605e0
+Data_604b0: ; 604b0 (18:44b0)
+	db -3, -2, -1, -1, -1,  0,  0,  0,  0,  1,  1,  1,  2,  3,  0, $80
+; 0x604c0
+
+	INCROM $604c0, $605e0
 
 Data_605e0: ; 605e0 (18:45e0)
 	db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 3
@@ -620,7 +632,7 @@ Func_61760: ; 61760 (18:5760)
 	ld hl, wCurObjUnk1c
 	ld a, $8f
 	ld [hld], a
-	ld a, OBJACTION_WAKE_UP
+	ld a, OBJACTION_SPECIAL_3
 	ld [hl], a ; OBJ_ACTION
 	ret
 
@@ -1489,7 +1501,7 @@ Func_621fb:: ; 621fb (18:61fb)
 	ld a, [wYPosLo]
 	sub e
 	ld [hli], a
-	ld a, [wPos]
+	ld a, [wYPosHi]
 	sbc 0
 	ld [hli], a
 	ld a, [wXPosLo]
@@ -1599,7 +1611,7 @@ Func_622bd:: ; 622bd (18:62bd)
 	ld a, [wYPosLo]
 	sub e
 	ld [hli], a
-	ld a, [wPos]
+	ld a, [wYPosHi]
 	sbc 0
 	ld [hli], a
 	ld a, [wXPosLo]
@@ -1697,7 +1709,7 @@ Func_62382:: ; 62382 (18:6382)
 	ld a, [wYPosLo]
 	sub e
 	ld [hli], a
-	ld a, [wPos]
+	ld a, [wYPosHi]
 	sbc 0
 	ld [hli], a
 	ld a, [wXPosLo]
@@ -1713,7 +1725,7 @@ Func_62382:: ; 62382 (18:6382)
 	ld a, [wYPosLo]
 	sub 30
 	ld [hli], a
-	ld a, [wPos]
+	ld a, [wYPosHi]
 	sbc 0
 	ld [hli], a
 	ld a, [wXPosLo]
@@ -1845,7 +1857,7 @@ Func_6247b:: ; 6247b (18:647b)
 	ld a, [wYPosLo]
 	sub e
 	ld [hli], a
-	ld a, [wPos]
+	ld a, [wYPosHi]
 	sbc 0
 	ld [hli], a
 	ld a, [wXPosLo]
@@ -1861,7 +1873,7 @@ Func_6247b:: ; 6247b (18:647b)
 	ld a, [wYPosLo]
 	sub 30
 	ld [hli], a
-	ld a, [wPos]
+	ld a, [wYPosHi]
 	sbc 0
 	ld [hli], a
 	ld a, [wXPosLo]
