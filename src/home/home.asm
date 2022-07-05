@@ -3485,11 +3485,15 @@ MoveObjectDown_Fast:: ; 30a4 (0:30a4)
 	INCROM $30ae, $30b8
 
 ; moves current object right
-; by 1 every 2 frames
+; by 0.5 pixel per frame
 MoveObjectRight_Slow:: ; 30b8 (0:30b8)
 	ld a, [wGlobalCounter]
 	rra
 	ret c
+;	fallthrough
+
+; moves current object right
+; at 1 pixel per frame
 MoveObjectRight:: ; 30bd (0:30bd)
 	ld hl, wCurObjXPos
 	inc [hl]
@@ -3500,11 +3504,15 @@ MoveObjectRight:: ; 30bd (0:30bd)
 ; 0x30c5
 
 ; moves current object left
-; by 1 every 2 frames
+; by 0.5 pixel per frame
 MoveObjectLeft_Slow:: ; 30c5 (0:30c5)
 	ld a, [wGlobalCounter]
 	rra
 	ret nc
+;	fallthrough
+
+; moves current object left
+; at 1 pixel per frame
 MoveObjectLeft:: ; 30ca (0:30ca)
 	ld hl, wCurObjXPos
 	ld a, [hl]
@@ -3515,7 +3523,13 @@ MoveObjectLeft:: ; 30ca (0:30ca)
 	ret
 ; 0x30d4
 
-	INCROM $30d4, $30d9
+; moves current object down
+; at 0.5 pixel per frame
+MoveObjectDown_Slow:: ; 30d4 (0:30d4)
+	ld a, [wGlobalCounter]
+	rra
+	ret c
+;	fallthrough
 
 ; moves current object down
 ; at 1 pixel per frame

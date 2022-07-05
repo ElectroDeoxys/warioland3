@@ -715,16 +715,16 @@ _ObjAction_Vanish:: ; 6189d (18:589d)
 	play_sfx SFX_018
 
 	ld hl, wCurObjUpdateFunction + 1
-	ld a, HIGH(Func_4c8a2)
+	ld a, HIGH(VanishStarsFunc)
 	ld [hld], a
-	ld a, LOW(Func_4c8a2)
+	ld a, LOW(VanishStarsFunc)
 	ld [hld], a
 	ld l, OBJ_UNK_1A
 	ld a, [hl]
 	and $f0
 	ld [hld], a
 Func_618b4: ; 618b4 (18:58b4)
-	ld a, (BANK(Func_4c8a2) - BANK("Object Update Functions 1")) << 4
+	ld a, (BANK(VanishStarsFunc) - BANK("Object Update Functions 1")) << 4
 	ld [wCurObjUnk07], a
 
 	ld hl, wCurObjOAMPtr

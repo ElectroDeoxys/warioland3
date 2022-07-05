@@ -286,143 +286,25 @@ Func_640e5: ; 640e5 (19:40e5)
 ; 0x64187
 
 Func_64187: ; 64187 (19:4187)
-	ld h, $d0
-	ld l, $00
-	ld a, [hl]
+	ld h, HIGH(wObjects)
+FOR n, 0, NUM_OBJECTS
+	ld l, LOW(wObjects) + OBJ_STRUCT_LENGTH * n
+	ld a, [hl] ; OBJ_FLAGS
 	rra
-	jr nc, .asm_641a9
+	jr nc, .skip{u:n} ; skip if OBJFLAG_UNK0 not set
 	rla
 	rla
 	rla
-	jr nc, .asm_64198
+	jr nc, .reload{u:n} ; jump if OBJFLAG_UNK6 not set
 	xor a
 	ld [hl], a
-	jr .asm_641a9
-.asm_64198
+	jr .skip{u:n}
+.reload{u:n}
 	inc l
 	inc l
 	farcall Func_baee
-
-.asm_641a9
-	ld l, $20
-	ld a, [hl]
-	rra
-	jr nc, .asm_641c9
-	rla
-	rla
-	rla
-	jr nc, .asm_641b8
-	xor a
-	ld [hl], a
-	jr .asm_641c9
-.asm_641b8
-	inc l
-	inc l
-	farcall Func_baee
-
-.asm_641c9
-	ld l, $40
-	ld a, [hl]
-	rra
-	jr nc, .asm_641e9
-	rla
-	rla
-	rla
-	jr nc, .asm_641d8
-	xor a
-	ld [hl], a
-	jr .asm_641e9
-.asm_641d8
-	inc l
-	inc l
-	farcall Func_baee
-
-.asm_641e9
-	ld l, $60
-	ld a, [hl]
-	rra
-	jr nc, .asm_64209
-	rla
-	rla
-	rla
-	jr nc, .asm_641f8
-	xor a
-	ld [hl], a
-	jr .asm_64209
-.asm_641f8
-	inc l
-	inc l
-	farcall Func_baee
-
-.asm_64209
-	ld l, $80
-	ld a, [hl]
-	rra
-	jr nc, .asm_64229
-	rla
-	rla
-	rla
-	jr nc, .asm_64218
-	xor a
-	ld [hl], a
-	jr .asm_64229
-.asm_64218
-	inc l
-	inc l
-	farcall Func_baee
-
-.asm_64229
-	ld l, $a0
-	ld a, [hl]
-	rra
-	jr nc, .asm_64249
-	rla
-	rla
-	rla
-	jr nc, .asm_64238
-	xor a
-	ld [hl], a
-	jr .asm_64249
-.asm_64238
-	inc l
-	inc l
-	farcall Func_baee
-
-.asm_64249
-	ld l, $c0
-	ld a, [hl]
-	rra
-	jr nc, .asm_64269
-	rla
-	rla
-	rla
-	jr nc, .asm_64258
-	xor a
-	ld [hl], a
-	jr .asm_64269
-.asm_64258
-	inc l
-	inc l
-	farcall Func_baee
-
-.asm_64269
-	ld l, $e0
-	ld a, [hl]
-	rra
-	jr nc, .asm_64289
-	rla
-	rla
-	rla
-	jr nc, .asm_64278
-	xor a
-	ld [hl], a
-	jr .asm_64289
-.asm_64278
-	inc l
-	inc l
-	farcall Func_baee
-
-.asm_64289
+.skip{u:n}
+ENDR
 	ret
 ; 0x6428a
 
@@ -659,13 +541,7 @@ FlameBlockData:         object_data OAM_1895ec, $b, OBJ_INTERACTION_SOLID,      
 StoveData:              object_data OAM_1896e1, $c, OBJ_INTERACTION_STOVE          | HEAVY_OBJ, -32, StoveFunc,              $0
 UnusedFlowerData:       object_data OAM_180916, $6, OBJ_INTERACTION_01                        ,   0, UnusedFlowerFunc,       $0
 CountRichtertoffenData: object_data OAM_1809ff, $7, OBJ_INTERACTION_0F             | HEAVY_OBJ, -18, CountRichtertoffenFunc, OBJFLAG_UNK7
-
-Data_64463: ; 64463 (19:4463)
-	db ($2 << 4) | $0 ; low bank nybble, ??
-	db $3d, $f1 ; ??, ??
-	dw $6703 ; OAM ptr
-	dw $5fc4 ; update function
-	db $00 ; ??
+HebariiData:            object_data OAM_18a703, $0, OBJ_INTERACTION_3D                        , -15, HebariiFunc,            $0
 
 Data_6446b: ; 6446b (19:446b)
 	db ($0 << 4) | $9 ; low bank nybble, ??
@@ -1367,7 +1243,23 @@ Data_64783: ; 64783 (19:4783)
 	dw $4b51 ; update function
 	db $00 ; ??
 
-	INCROM $6478b, $647a0
+ObjParams_HebariiProjectile: ; 6478b (19:478b)
+	db -8  ; y
+	db  0  ; x
+	dn $2, $1 ; unk7
+	db OBJ_INTERACTION_FULL_STING ; interaction type
+	db -3,  2, -3,  2 ; collision
+	dw OAM_18a703 ; OAM
+	dw Frameset_68408 ; frameset
+	db  2 ; action duration
+	db $00 ; unk17
+	db $00 ; unk18
+	db $00 ; movement index
+	db $00 ; unk1a
+	db OBJACTION_00 ; action
+	dw HebariiProjectileFunc
+	db OBJFLAG_UNK7 ; obj flags
+; 0x647a0
 
 ObjParams_WebberProjectile: ; 647a0 (19:47a0)
 	db  5  ; y
@@ -3808,7 +3700,7 @@ EnemyGroupGfx59: ; 65e06 (19:5e06)
 
 	dw Data_644d3
 	dw Data_644c3
-	dw Data_64463
+	dw HebariiData
 	dw Data_64673
 	dw Data_6467b
 	dw NULL
@@ -4691,7 +4583,7 @@ EnemyGroupGfx85: ; 66332 (19:6332)
 
 	dw DummyObjectData
 	dw DummyObjectData
-	dw Data_64463
+	dw HebariiData
 	dw Data_644e3
 	dw NULL
 
@@ -4858,7 +4750,7 @@ EnemyGroupGfx90: ; 6642b (19:642b)
 
 	dw DummyObjectData
 	dw Data_644c3
-	dw Data_64463
+	dw HebariiData
 	dw Data_64673
 	dw Data_6467b
 	dw NULL
@@ -5131,7 +5023,7 @@ EnemyGroupGfx98: ; 665c5 (19:65c5)
 
 	dw Data_644bb
 	dw DummyObjectData
-	dw Data_64463
+	dw HebariiData
 	dw Data_64543
 	dw NULL
 
@@ -5436,7 +5328,7 @@ EnemyGroupGfx107: ; 6678e (19:678e)
 
 	dw DummyObjectData
 	dw Data_6446b
-	dw Data_64463
+	dw HebariiData
 	dw Data_64583
 	dw NULL
 
@@ -5674,7 +5566,7 @@ EnemyGroupGfx114: ; 668f3 (19:68f3)
 
 	dw StoveData
 	dw DummyObjectData
-	dw Data_64463
+	dw HebariiData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -5707,7 +5599,7 @@ EnemyGroupGfx115: ; 66924 (19:6924)
 
 	dw SpearheadData
 	dw DummyObjectData
-	dw Data_64463
+	dw HebariiData
 	dw NULL
 
 	rgb  0, 25,  0
