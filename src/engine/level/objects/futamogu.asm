@@ -82,11 +82,11 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	ld l, OBJ_FLAGS
 	res OBJFLAG_UNK3_F, [hl]
 	xor a
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	ret
 
 .Update:
-	ld hl, wCurObjAction
+	ld hl, wCurObjState
 	ld a, [hl]
 	and a
 	jr z, .Idle
@@ -112,12 +112,12 @@ FutamoguFunc: ; 406c4 (10:46c4)
 
 .set_shake
 	ld a, OBJACTION_34
-	ld [hl], a ; OBJ_ACTION
+	ld [hl], a ; OBJ_STATE
 
 	ld de, Frameset_68348
 	call SetObjectFramesetPtr
 	ld a, 32
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	ret
 
 .no_shake
@@ -132,7 +132,7 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	cp b
 	jr z, .asm_4079a
 .asm_4078c
-	ld l, OBJ_ACTION
+	ld l, OBJ_STATE
 	ld a, OBJACTION_SPECIAL_3
 	ld [hld], a
 	res 7, [hl] ; OBJ_UNK_1A
@@ -145,22 +145,22 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	bit OBJFLAG_UNK5_F, [hl]
 	ret z
 	ld a, OBJACTION_SPECIAL_2
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	ld de, Frameset_68343
 	call SetObjectFramesetPtr
 	ret
 
 .asm_407ab
 	ld a, OBJACTION_34
-	ld [hl], a ; OBJ_ACTION
+	ld [hl], a ; OBJ_STATE
 	ld de, Frameset_68351
 	call SetObjectFramesetPtr
 	ld a, $10
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	ret
 
 .Shake
-	ld l, OBJ_ACTION_DURATION
+	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	ret nz
 	jp .set_idle
@@ -171,18 +171,18 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	rlca
 	jr c, .vanish
 	ld a, OBJACTION_3A
-	ld [hld], a ; OBJ_ACTION
+	ld [hld], a ; OBJ_STATE
 	dec l
 	xor a
 	ld [hl], a ; OBJ_MOVEMENT_INDEX
 	ld de, Frameset_68348
 	call SetObjectFramesetPtr
 	ld a, 48
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	ret
 
 .Fall:
-	ld l, OBJ_ACTION_DURATION
+	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	jp z, .set_idle
 	ld l, OBJ_UNK_1A
@@ -228,5 +228,5 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	ld a, $08
 	ld [wCurObjUnk18], a
 	call Func_305c
-	jp ObjAction_Vanish
+	jp ObjState_Vanish
 ; 0x40825

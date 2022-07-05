@@ -62,7 +62,7 @@ WebberFunc: ; 40825 (10:4825)
 	ld [hld], a
 	ld a, [hl] ; OBJ_UNK_1A
 	rlca
-	jp c, ObjAction_Vanish
+	jp c, ObjState_Vanish
 	ld a, [hl]
 	and $f0
 	or $5
@@ -72,11 +72,11 @@ WebberFunc: ; 40825 (10:4825)
 	ld de, Frameset_682a9
 	call SetObjectFramesetPtr
 	ld a, 48
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	ret
 
 .Update:
-	ld hl, wCurObjAction
+	ld hl, wCurObjState
 	ld a, [hl]
 	and a
 	jr z, .Default
@@ -96,7 +96,7 @@ WebberFunc: ; 40825 (10:4825)
 	ld de, Frameset_682d1
 	call SetObjectFramesetPtr
 	ld a, 50
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	ld l, OBJ_FLAGS
 	res OBJFLAG_UNK3_F, [hl]
 
@@ -212,7 +212,7 @@ WebberFunc: ; 40825 (10:4825)
 	ld de, Frameset_682a9
 	call SetObjectFramesetPtr
 	ld a, 48
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	ret
 
 .Shake:
@@ -241,7 +241,7 @@ WebberFunc: ; 40825 (10:4825)
 	ld l, OBJ_UNK_1A
 	set 7, [hl]
 .end_shake
-	ld hl, wCurObjActionDuration
+	ld hl, wCurObjStateDuration
 	dec [hl]
 	jp z, .set_move_to_start_pos
 	ld a, [wGroundShakeCounter]
@@ -279,7 +279,7 @@ WebberFunc: ; 40825 (10:4825)
 	ld de, Frameset_682e2
 	call SetObjectFramesetPtr
 	ld a, 162
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	ret
 
 .SteppedOn:
@@ -294,7 +294,7 @@ WebberFunc: ; 40825 (10:4825)
 	ld a, [wGroundShakeCounter]
 	cp $10
 	jp nc, .set_shake
-	ld hl, wCurObjActionDuration
+	ld hl, wCurObjStateDuration
 	dec [hl]
 	jp z, .set_move_to_start_pos
 	ld l, OBJ_UNK_1A
@@ -325,7 +325,7 @@ WebberFunc: ; 40825 (10:4825)
 	ret z
 	ld a, [wEffectivePowerUp]
 	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
-	jp nc, ObjAction_Vanish
+	jp nc, ObjState_Vanish
 	ld hl, wCurObjYPos
 	ldh a, [hYPosLo]
 	ld [hli], a
@@ -344,14 +344,14 @@ WebberFunc: ; 40825 (10:4825)
 	ld de, Frameset_682b7
 	call SetObjectFramesetPtr
 	ld a, 64
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	ret
 
 .FireProjectile:
 	ld a, [wGroundShakeCounter]
 	cp $10
 	jp nc, .set_shake
-	ld hl, wCurObjActionDuration
+	ld hl, wCurObjStateDuration
 	dec [hl]
 	jp z, .set_idle
 	ld a, [hl]
@@ -366,7 +366,7 @@ WebberFunc: ; 40825 (10:4825)
 	ld a, [wGroundShakeCounter]
 	cp $10
 	jp nc, .set_shake
-	ld hl, wCurObjActionDuration
+	ld hl, wCurObjStateDuration
 	dec [hl]
 	jp z, .set_move_to_start_pos
 	ld a, [hl]
@@ -375,7 +375,7 @@ WebberFunc: ; 40825 (10:4825)
 	ret
 
 .SpecialIdle:
-	ld hl, wCurObjActionDuration
+	ld hl, wCurObjStateDuration
 	dec [hl]
 	jr z, .asm_40aa9
 	ld a, [wGroundShakeCounter]
@@ -417,7 +417,7 @@ WebberProjectileFunc: ; 40ab1 (10:4ab1)
 	ld hl, wCurObjFlags
 	set OBJFLAG_UNK3_F, [hl]
 
-	ld a, [wCurObjAction]
+	ld a, [wCurObjState]
 	and a
 	jr nz, .set_destroy
 
@@ -448,13 +448,13 @@ WebberProjectileFunc: ; 40ab1 (10:4ab1)
 	ld de, Frameset_682db
 	call SetObjectFramesetPtr
 	ld a, 24
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	ret
 
 .Destroy:
 	ld a, 1 | (1 << 7)
 	ld [wCurObjUnk1c], a
-	ld hl, wCurObjActionDuration
+	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
 	xor a

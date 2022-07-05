@@ -3,7 +3,7 @@
 Func_4c860: ; 4c860 (13:4860)
 	ld a, 1 | (1 << 7)
 	ld [wCurObjUnk1c], a
-	ld hl, wCurObjActionDuration
+	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
 	ld l, OBJ_UNK_02
@@ -16,7 +16,7 @@ Func_4c860: ; 4c860 (13:4860)
 VanishStarsFunc: ; 4c8a2 (13:48a2)
 	ld a, 1 | (1 << 7)
 	ld [wCurObjUnk1c], a
-	ld hl, wCurObjActionDuration
+	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
 	xor a
@@ -76,7 +76,7 @@ TreasureFunc: ; 4c8da (13:48da)
 	ret
 
 .Update:
-	ld hl, wCurObjAction
+	ld hl, wCurObjState
 	ld a, [hl]
 	cp OBJACTION_18
 	ret nz
@@ -97,7 +97,7 @@ TreasureFunc: ; 4c8da (13:48da)
 	ret
 
 .Open:
-	ld hl, wCurObjActionDuration
+	ld hl, wCurObjStateDuration
 	ld a, [hl]
 	cp $49
 	play_sfx z, SFX_035
@@ -160,7 +160,7 @@ KeyFunc: ; 4c992 (13:4992)
 	ret
 
 .Update:
-	ld a, [wCurObjAction]
+	ld a, [wCurObjState]
 	cp OBJACTION_18
 	ret nz
 	xor a
@@ -193,7 +193,7 @@ MusicalCoinFunc: ; 4c9d4 (13:49d4)
 	ret
 
 .Update:
-	ld a, [wCurObjAction]
+	ld a, [wCurObjState]
 	cp OBJACTION_18
 	ret nz
 	xor a

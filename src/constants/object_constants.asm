@@ -20,12 +20,12 @@ OBJ_OAM_PTR          rw ; $10
 OBJ_FRAMESET_PTR     rw ; $12
 OBJ_FRAME_DURATION   rb ; $14
 OBJ_FRAMESET_OFFSET  rb ; $15
-OBJ_ACTION_DURATION  rb ; $16
+OBJ_STATE_DURATION   rb ; $16
 OBJ_UNK_17           rb ; $17
 OBJ_UNK_18           rb ; $18
 OBJ_MOVEMENT_INDEX   rb ; $19
 OBJ_UNK_1A           rb ; $1a
-OBJ_ACTION           rb ; $1b
+OBJ_STATE            rb ; $1b
 OBJ_UNK_1C           rb ; $1c
 OBJ_UNK_1D           rb ; $1d
 OBJ_UPDATE_FUNCTION  rw ; $1e

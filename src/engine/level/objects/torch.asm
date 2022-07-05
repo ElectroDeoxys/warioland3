@@ -1,5 +1,5 @@
 FlameBlockTorchUpdate: ; 40b14 (10:4b14)
-	ld hl, wCurObjAction
+	ld hl, wCurObjState
 	ld a, [hl]
 	and a
 	ret z
@@ -20,7 +20,7 @@ FlameBlockTorchUpdate: ; 40b14 (10:4b14)
 	ld de, Frameset_68360
 	call SetObjectFramesetPtr
 	xor a
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	ld a, $02
 	ld [hl], a ; OBJ_UNK_17
 
@@ -36,19 +36,19 @@ FlameBlockTorchUpdate: ; 40b14 (10:4b14)
 	ld a, [wNumLitTorches]
 	cp NUM_FLAME_BLOCK_TORCHES
 	ret z
-	ld hl, wCurObjAction
+	ld hl, wCurObjState
 	ld a, [hl]
 	and a
 	jr z, .asm_40b6f
 	xor a
 	ld [hl], a
-	ld l, OBJ_ACTION_DURATION
+	ld l, OBJ_STATE_DURATION
 	ld [hli], a ; aka $100
 	ld a, $02
 	ld [hl], a ; OBJ_UNK_17
 	play_sfx SFX_073
 .asm_40b6f
-	ld l, OBJ_ACTION_DURATION
+	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	ret nz
 	inc l
@@ -93,7 +93,7 @@ TorchFunc: ; 40ba9 (10:4ba9)
 	call SetObjectFramesetPtr
 .got_frameset
 	xor a
-	ld [hl], a ; OBJ_ACTION_DURATION
+	ld [hl], a ; OBJ_STATE_DURATION
 	ld hl, wCurObjFlags
 	res OBJFLAG_UNK4_F, [hl]
 	set OBJFLAG_UNK3_F, [hl]
@@ -109,7 +109,7 @@ TorchFunc: ; 40ba9 (10:4ba9)
 	ret
 
 .Update:
-	ld a, [wCurObjActionDuration]
+	ld a, [wCurObjStateDuration]
 	and a
 	jr z, .zero
 	cp 1
@@ -142,7 +142,7 @@ TorchFunc: ; 40ba9 (10:4ba9)
 	ld bc, ObjParams_TorchEmberLeft2
 
 .create_ember
-	ld [wCurObjActionDuration], a
+	ld [wCurObjStateDuration], a
 	ld hl, wCurObjFlags
 	bit OBJFLAG_UNK1_F, [hl]
 	play_sfx nz, SFX_073
@@ -193,7 +193,7 @@ TorchEmberCommonFunc: ; 40c51 (10:4c51)
 	call Func_34b7
 	ld hl, wCurObjFlags
 	set OBJFLAG_UNK3_F, [hl]
-	ld a, [wCurObjAction]
+	ld a, [wCurObjState]
 	and a
 	jr nz, .set_destroy
 	ld hl, wCurObjYPos
@@ -223,13 +223,13 @@ TorchEmberCommonFunc: ; 40c51 (10:4c51)
 	ld de, Frameset_68359
 	call SetObjectFramesetPtr
 	ld a, 24
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	ret
 
 .Destroy:
 	ld a, 1 | (1 << 7)
 	ld [wCurObjUnk1c], a
-	ld hl, wCurObjActionDuration
+	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
 	xor a

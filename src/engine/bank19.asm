@@ -264,7 +264,7 @@ Func_640e5: ; 640e5 (19:40e5)
 	ld [de], a ; OBJ_UNK_1A
 	inc e
 	xor a ; OBJACTION_00
-	ld [de], a ; OBJ_ACTION
+	ld [de], a ; OBJ_STATE
 	inc e
 	ld a, $82
 	ld [de], a ; OBJ_UNK_1C
@@ -441,7 +441,7 @@ CreateObject_GotPos:: ; 64352 (19:4352)
 	ld [de], a ; OBJ_FRAMESET_OFFSET
 	inc e
 	ld a, [hli]
-	ld [de], a ; OBJ_ACTION_DURATION
+	ld [de], a ; OBJ_STATE_DURATION
 	inc e
 	ld a, [hli]
 	ld [de], a ; OBJ_UNK_17
@@ -456,7 +456,7 @@ CreateObject_GotPos:: ; 64352 (19:4352)
 	ld [de], a ; OBJ_UNK_1A
 	inc e
 	ld a, [hli]
-	ld [de], a ; OBJ_ACTION
+	ld [de], a ; OBJ_STATE
 	inc e
 	xor a
 	ld [de], a ; OBJ_UNK_1C

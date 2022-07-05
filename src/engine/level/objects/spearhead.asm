@@ -24,35 +24,35 @@ SpearheadFunc: ; 40040 (10:4040)
 	jp .Default ; day
 
 .Update:
-	ld a, [wCurObjAction]
+	ld a, [wCurObjState]
 	jumptable
 
 	dw .Default ; OBJACTION_00
 	dw .Land ; OBJACTION_LAND
 	dw .BumpLeftStart ; OBJACTION_BUMP_LEFT_START
 	dw .BumpRightStart ; OBJACTION_BUMP_RIGHT_START
-	dw .Action04 ; OBJACTION_04
-	dw .Action05 ; OBJACTION_05
+	dw .State04 ; OBJACTION_04
+	dw .State05 ; OBJACTION_05
 	dw .GrabLeftStart ; OBJACTION_GRAB_LEFT_START
 	dw .GrabRightStart ; OBJACTION_GRAB_RIGHT_START
-	dw .Action08 ; OBJACTION_08
-	dw .Action09 ; OBJACTION_09
-	dw ObjAction_Vanish2 ; OBJACTION_VANISH
-	dw .Action0b ; OBJACTION_0B
-	dw .Action0c ; OBJACTION_0C
+	dw .State08 ; OBJACTION_08
+	dw .State09 ; OBJACTION_09
+	dw ObjState_Vanish2 ; OBJACTION_VANISH
+	dw .State0b ; OBJACTION_0B
+	dw .State0c ; OBJACTION_0C
 	dw .Default ; OBJACTION_0D
 	dw .Default ; OBJACTION_0E
-	dw .Action0f ; OBJACTION_0F
-	dw .Action10 ; OBJACTION_10
+	dw .State0f ; OBJACTION_0F
+	dw .State10 ; OBJACTION_10
 	dw .StandingFallStart ; OBJACTION_STANDING_FALL_START
-	dw .Action12 ; OBJACTION_12
+	dw .State12 ; OBJACTION_12
 	dw .TurnAroundStart ; OBJACTION_TURN_AROUND_START
-	dw .Action14 ; OBJACTION_14
-	dw .Action15 ; OBJACTION_15
+	dw .State14 ; OBJACTION_14
+	dw .State15 ; OBJACTION_15
 	dw .StunLeftStart ; OBJACTION_STUN_LEFT_START
 	dw .StunRightStart ; OBJACTION_STUN_RIGHT_START
-	dw .Action18 ; OBJACTION_18
-	dw .Action19 ; OBJACTION_19
+	dw .State18 ; OBJACTION_18
+	dw .State19 ; OBJACTION_19
 	dw Func_3263 ; OBJACTION_1A
 	dw Func_3272 ; OBJACTION_1B
 	dw Func_3281 ; OBJACTION_1C
@@ -67,18 +67,18 @@ SpearheadFunc: ; 40040 (10:4040)
 	dw Func_3227 ; OBJACTION_25
 	dw Func_3245 ; OBJACTION_26
 	dw Func_3254 ; OBJACTION_27
-	dw .Action28 ; OBJACTION_28
-	dw .Action29 ; OBJACTION_29
+	dw .State28 ; OBJACTION_28
+	dw .State29 ; OBJACTION_29
 	dw .Default ; OBJACTION_2A
 	dw .Default ; OBJACTION_2B
 	dw .Default ; OBJACTION_2C
 	dw .Sleep ; OBJACTION_SPECIAL_1
 	dw .Angry ; OBJACTION_SPECIAL_2
 	dw .WakeUp ; OBJACTION_SPECIAL_3
-	dw ObjAction_Fall ; OBJACTION_FALL
+	dw ObjState_Fall ; OBJACTION_FALL
 	dw .Walk ; OBJACTION_WALK
-	dw ObjAction_BumpLeft ; OBJACTION_BUMP_LEFT
-	dw ObjAction_BumpRight ; OBJACTION_BUMP_RIGHT
+	dw ObjState_BumpLeft ; OBJACTION_BUMP_LEFT
+	dw ObjState_BumpRight ; OBJACTION_BUMP_RIGHT
 	dw Func_3326 ; OBJACTION_34
 	dw Func_3317 ; OBJACTION_35
 	dw Func_3335 ; OBJACTION_36
@@ -86,21 +86,21 @@ SpearheadFunc: ; 40040 (10:4040)
 	dw Func_31fa ; OBJACTION_38
 	dw Func_31dc ; OBJACTION_39
 	dw .Default ; OBJACTION_3A
-	dw .Action3b ; OBJACTION_3B
-	dw .Action3c ; OBJACTION_3C
+	dw .State3b ; OBJACTION_3B
+	dw .State3c ; OBJACTION_3C
 	dw .Default ; OBJACTION_3D
 	dw .Default ; OBJACTION_3E
-	dw .Action3f ; OBJACTION_3F
-	dw .Action40 ; OBJACTION_40
-	dw ObjAction_StandingFall ; OBJACTION_STANDING_FALL
+	dw .State3f ; OBJACTION_3F
+	dw .State40 ; OBJACTION_40
+	dw ObjState_StandingFall ; OBJACTION_STANDING_FALL
 	dw Func_3371 ; OBJACTION_42
 	dw .TurnAround ; OBJACTION_TURN_AROUND
 	dw Func_32cc ; OBJACTION_44
 	dw Func_32db ; OBJACTION_45
 	dw .StunLeft ; OBJACTION_STUN_LEFT
 	dw .StunRight ; OBJACTION_STUN_RIGHT
-	dw .Action48 ; OBJACTION_48
-	dw .Action49 ; OBJACTION_49
+	dw .State48 ; OBJACTION_48
+	dw .State49 ; OBJACTION_49
 	dw Func_3380 ; OBJACTION_4A
 	dw Func_338f ; OBJACTION_4B
 	dw .FullThrowLeftStart ; OBJACTION_FULL_THROW_LEFT_START
@@ -121,11 +121,11 @@ SpearheadFunc: ; 40040 (10:4040)
 	dw .Default ; OBJACTION_5B
 	dw .Default ; OBJACTION_5C
 	dw .Default ; OBJACTION_5D
-	dw ObjAction_FullThrowLeft ; OBJACTION_FULL_THROW_LEFT
-	dw ObjAction_FullThrowRight ; OBJACTION_FULL_THROW_RIGHT
+	dw ObjState_FullThrowLeft ; OBJACTION_FULL_THROW_LEFT
+	dw ObjState_FullThrowRight ; OBJACTION_FULL_THROW_RIGHT
 
 .FullThrowLeftStart:
-	ld hl, wCurObjAction
+	ld hl, wCurObjState
 	ld a, OBJACTION_FULL_THROW_LEFT
 	ld [hld], a
 	ld a, [hld] ; OBJ_UNK_1A
@@ -133,14 +133,14 @@ SpearheadFunc: ; 40040 (10:4040)
 	jr c, .asm_40140
 	ld de, Frameset_68292
 	call SetObjectFramesetPtr
-	jp ObjAction_FullThrowLeft
+	jp ObjState_FullThrowLeft
 .asm_40140
 	ld de, Frameset_6829b
 	call SetObjectFramesetPtr
-	jp ObjAction_FullThrowLeft
+	jp ObjState_FullThrowLeft
 
 .FullThrowRightStart:
-	ld hl, wCurObjAction
+	ld hl, wCurObjState
 	ld a, OBJACTION_FULL_THROW_RIGHT
 	ld [hld], a
 	ld a, [hld] ; OBJ_UNK_1A
@@ -148,11 +148,11 @@ SpearheadFunc: ; 40040 (10:4040)
 	jr c, .asm_4015c
 	ld de, Frameset_68292
 	call SetObjectFramesetPtr
-	jp ObjAction_FullThrowRight
+	jp ObjState_FullThrowRight
 .asm_4015c
 	ld de, Frameset_6829b
 	call SetObjectFramesetPtr
-	jp ObjAction_FullThrowRight
+	jp ObjState_FullThrowRight
 
 .SleepStart:
 	ld hl, wCurObjInteractionType
@@ -161,7 +161,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	or OBJ_INTERACTION_01
 	ld [hld], a
 
-	ld l, OBJ_ACTION
+	ld l, OBJ_STATE
 	ld a, OBJACTION_SPECIAL_1
 	ld [hld], a
 
@@ -221,7 +221,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	rra
 	ld a, OBJACTION_08 >> 1
 	rla ; either OBJACTION_08 or OBJACTION_09
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	ret
 
 .no_shake1
@@ -238,7 +238,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	and a
 	jr nz, .has_ground1
 	ld a, OBJACTION_STANDING_FALL_START
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	ret
 
 .has_ground1
@@ -253,7 +253,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld a, [hli] ; OBJ_UNK_1A
 	rlca
 	ld a, OBJACTION_SPECIAL_3
-	ld [hl], a ; OBJ_ACTION
+	ld [hl], a ; OBJ_STATE
 	jr c, .asm_40201
 	ld de, Frameset_6827c
 	jr .asm_4020c
@@ -267,11 +267,11 @@ SpearheadFunc: ; 40040 (10:4040)
 .asm_4020c
 	call SetObjectFramesetPtr
 	ld a, 32
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	ret
 
 .WakeUp:
-	ld hl, wCurObjActionDuration
+	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
 	jp .TurnAroundStart
@@ -283,7 +283,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	or OBJ_INTERACTION_01
 	ld [hld], a
 
-	ld l, OBJ_ACTION
+	ld l, OBJ_STATE
 	ld a, OBJACTION_FALL
 	ld [hld], a
 
@@ -325,7 +325,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	jp SetObjectFramesetPtr
 
 .StandingFallStart:
-	ld hl, wCurObjAction
+	ld hl, wCurObjState
 	ld a, OBJACTION_STANDING_FALL
 	ld [hld], a
 	ld a, [hld] ; OBJ_UNK_1A
@@ -349,7 +349,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	and HEAVY_OBJ
 	or OBJ_INTERACTION_FRONT_STING
 	ld [hld], a
-	ld l, OBJ_ACTION
+	ld l, OBJ_STATE
 	ld a, OBJACTION_SPECIAL_2
 	ld [hld], a
 	ld a, [hld] ; OBJ_UNK_1A
@@ -373,7 +373,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	call SetObjectFramesetPtr
 
 	ld a, 32
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	ret
 
 .Angry:
@@ -384,17 +384,17 @@ SpearheadFunc: ; 40040 (10:4040)
 	rra
 	ld a, OBJACTION_08 >> 1
 	rla ; either OBJACTION_08 or OBJACTION_09
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	ret
 
 .no_shake2
-	ld hl, wCurObjActionDuration
+	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
 	inc l
 	xor a
 	ld [hl], a ; OBJ_UNK_17
-	ld l, OBJ_ACTION
+	ld l, OBJ_STATE
 	ld a, OBJACTION_WALK
 	ld [hld], a
 	ld a, [hld] ; OBJ_UNK_1A
@@ -418,7 +418,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	and HEAVY_OBJ
 	or OBJ_INTERACTION_01
 	ld [hld], a
-	ld l, OBJ_ACTION
+	ld l, OBJ_STATE
 	ld a, OBJACTION_WALK
 	ld [hld], a
 	ld a, [hld] ; OBJ_UNK_1A
@@ -442,7 +442,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	call SetObjectFramesetPtr
 
 	ld a, 10
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	ret
 
 .Walk:
@@ -453,11 +453,11 @@ SpearheadFunc: ; 40040 (10:4040)
 	rra
 	ld a, OBJACTION_08 >> 1
 	rla ; either OBJACTION_08 or OBJACTION_09
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	ret
 
 .no_shake3
-	ld hl, wCurObjActionDuration
+	ld hl, wCurObjStateDuration
 	ld a, [hl]
 	and a
 	jr z, .has_sting
@@ -484,7 +484,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	and a
 	jr nz, .has_ground
 	ld a, OBJACTION_STANDING_FALL_START
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	ret
 
 .has_ground
@@ -524,7 +524,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	jp z, MoveObjectLeft_Slow
 .turn_around1
 	ld a, OBJACTION_TURN_AROUND_START
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	ret
 
 .go_right
@@ -555,11 +555,11 @@ SpearheadFunc: ; 40040 (10:4040)
 	jp z, MoveObjectRight_Slow
 .turn_around2
 	ld a, OBJACTION_TURN_AROUND_START
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	ret
 
 .BumpLeftStart:
-	ld hl, wCurObjAction
+	ld hl, wCurObjState
 	ld a, OBJACTION_BUMP_LEFT
 	ld [hld], a
 	ld a, [hld] ; OBJ_UNK_1A
@@ -572,7 +572,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	jr .asm_403e8
 
 .BumpRightStart:
-	ld hl, wCurObjAction
+	ld hl, wCurObjState
 	ld a, OBJACTION_BUMP_RIGHT
 	ld [hld], a
 	ld a, [hld] ; OBJ_UNK_1A
@@ -602,7 +602,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ret
 
 .StunLeftStart:
-	ld hl, wCurObjAction
+	ld hl, wCurObjState
 	ld a, OBJACTION_STUN_LEFT
 	ld [hld], a
 	ld a, [hld] ; OBJ_UNK_1A
@@ -631,11 +631,11 @@ SpearheadFunc: ; 40040 (10:4040)
 	and a
 	jp nz, Func_32ae
 	ld a, OBJACTION_0F
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	ret
 
 .StunRightStart:
-	ld hl, wCurObjAction
+	ld hl, wCurObjState
 	ld a, OBJACTION_STUN_RIGHT
 	ld [hld], a
 	ld a, [hld] ; OBJ_UNK_1A
@@ -664,16 +664,16 @@ SpearheadFunc: ; 40040 (10:4040)
 	and a
 	jp nz, Func_32bd
 	ld a, OBJACTION_0F
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	ret
 
-.Action14:
-	ld hl, wCurObjAction
+.State14:
+	ld hl, wCurObjState
 	ld a, OBJACTION_44
 	ld [hld], a
 	jr .Func_40478
-.Action15:
-	ld hl, wCurObjAction
+.State15:
+	ld hl, wCurObjState
 	ld a, OBJACTION_45
 	ld [hld], a
 .Func_40478:
@@ -705,49 +705,49 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld [hld], a
 	ret
 
-.Action0f:
+.State0f:
 	ld a, OBJACTION_3F
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	ld a, 100
-	ld [wCurObjActionDuration], a
+	ld [wCurObjStateDuration], a
 	ld hl, wCurObjFlags
 	res OBJFLAG_UNK2_F, [hl]
-.Action3f:
+.State3f:
 	ld a, [wGroundShakeCounter]
 	cp $10
 	jr c, .no_shake4
 	ld a, OBJACTION_1C
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	ret
 .no_shake4
-	ld hl, wCurObjActionDuration
+	ld hl, wCurObjStateDuration
 	dec [hl]
 	jp nz, Func_32ea
 	ld a, OBJACTION_10
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	ret
 
-.Action10:
-	ld hl, wCurObjAction
+.State10:
+	ld hl, wCurObjState
 	ld a, OBJACTION_40
 	ld [hld], a
 	dec l
 	xor a
 	ld [hld], a ; OBJ_MOVEMENT_INDEX
 	ld a, 7
-	ld [wCurObjActionDuration], a
-.Action40:
-	ld hl, wCurObjActionDuration
+	ld [wCurObjStateDuration], a
+.State40:
+	ld hl, wCurObjStateDuration
 	dec [hl]
 	jp nz, Func_32f9
 	ld a, OBJACTION_00
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	ld a, $ff
 	ld [wCurObjUnk17], a
 	ret
 
 .TurnAroundStart:
-	ld hl, wCurObjAction
+	ld hl, wCurObjState
 	ld a, OBJACTION_TURN_AROUND
 	ld [hld], a
 	ld a, [hld] ; OBJ_UNK_1A
@@ -761,7 +761,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	call SetObjectFramesetPtr
 .asm_40503
 	ld a, 48
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	ld a, $1c
 	ld [hl], a ; OBJ_UNK_17
 	ret
@@ -774,11 +774,11 @@ SpearheadFunc: ; 40040 (10:4040)
 	rra
 	ld a, OBJACTION_08 >> 1
 	rla
-	ld [wCurObjAction], a ; either OBJACTION_08 or OBJACTION_09
+	ld [wCurObjState], a ; either OBJACTION_08 or OBJACTION_09
 	ret
 
 .no_shake5
-	ld hl, wCurObjActionDuration
+	ld hl, wCurObjStateDuration
 	ld a, [hl]
 	and a
 	jr z, .asm_4054e
@@ -812,31 +812,31 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld a, [wCurObjUnk1a]
 	rlca
 	jr c, .asm_40562
-	ld hl, wCurObjAction
+	ld hl, wCurObjState
 	ld a, OBJACTION_LAND
 	ld [hld], a
 	set 7, [hl] ; OBJ_UNK_1A
 	ret
 .asm_40562
-	ld hl, wCurObjAction
+	ld hl, wCurObjState
 	ld a, OBJACTION_LAND
 	ld [hld], a
 	res 7, [hl] ; OBJ_UNK_1A
 	ret
 
-.Action08:
+.State08:
 	ld hl, wCurObjUnk1c
 	ld a, 15 | (1 << 7)
 	ld [hld], a
 	ld a, OBJACTION_38
 	jr .Func_4057d
-.Action09:
+.State09:
 	ld hl, wCurObjUnk1c
 	ld a, 15 | (1 << 7)
 	ld [hld], a
 	ld a, OBJACTION_39
 .Func_4057d:
-	ld [hld], a ; OBJ_ACTION
+	ld [hld], a ; OBJ_STATE
 	ld a, [hld] ; OBJ_UNK_1A
 	rlca
 	jr c, .asm_4058a
@@ -849,7 +849,7 @@ SpearheadFunc: ; 40040 (10:4040)
 
 .asm_40590
 	ld a, 4
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	inc l
 	ld a, $02
 	ld [hli], a ; OBJ_UNK_18
@@ -867,13 +867,13 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld [hld], a
 	ret
 
-.Action0b:
+.State0b:
 	ld a, OBJACTION_3B
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	jr .Func_405b6
-.Action0c:
+.State0c:
 	ld a, OBJACTION_3C
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 .Func_405b6:
 	ld hl, wCurObjFrameDuration
 	xor a
@@ -883,7 +883,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld [wCurObjUnk18], a
 	ret
 
-.Action3b:
+.State3b:
 	ld hl, wCurObjFrameDuration
 	xor a
 	ld [hli], a
@@ -893,10 +893,10 @@ SpearheadFunc: ; 40040 (10:4040)
 	and a
 	jp nz, Func_32bd
 	ld a, OBJACTION_TURN_AROUND_START
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	ret
 
-.Action3c:
+.State3c:
 	ld hl, wCurObjFrameDuration
 	xor a
 	ld [hli], a
@@ -906,32 +906,32 @@ SpearheadFunc: ; 40040 (10:4040)
 	and a
 	jp nz, Func_32ae
 	ld a, OBJACTION_TURN_AROUND_START
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	ret
 
-.Action29:
-	ld hl, wCurObjAction
+.State29:
+	ld hl, wCurObjState
 	ld a, OBJACTION_59
 	ld [hld], a
 	ld b, $02
 	jr .asm_4060e
 
-.Action28:
-	ld hl, wCurObjAction
+.State28:
+	ld hl, wCurObjState
 	ld a, OBJACTION_58
 	ld [hld], a
 	ld b, $02
 	jr .asm_4060e
 
-.Action04:
-	ld hl, wCurObjAction
+.State04:
+	ld hl, wCurObjState
 	ld a, OBJACTION_34
 	ld [hld], a
 	ld b, $02
 	jr .asm_4060e
 
-.Action05:
-	ld hl, wCurObjAction
+.State05:
+	ld hl, wCurObjState
 	ld a, OBJACTION_35
 	ld [hld], a
 	ld b, $02
@@ -949,7 +949,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	jp SetObjectFramesetPtr
 
 .GrabLeftStart: ; 40620 (10:4620)
-	ld hl, wCurObjAction
+	ld hl, wCurObjState
 	ld a, OBJACTION_36
 	ld [hld], a
 	dec l
@@ -962,7 +962,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	jp Func_3335
 
 .GrabRightStart:
-	ld hl, wCurObjAction
+	ld hl, wCurObjState
 	ld a, OBJACTION_37
 	ld [hld], a
 	dec l
@@ -974,8 +974,8 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld [hld], a
 	jp Func_3344
 
-.Action19:
-	ld hl, wCurObjAction
+.State19:
+	ld hl, wCurObjState
 	ld a, OBJACTION_49
 	ld [hld], a
 	ld a, [hld] ; OBJ_UNK_1A
@@ -996,7 +996,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld [hld], a ; OBJ_COLLBOX_LEFT
 	ld l, OBJ_FLAGS
 	set OBJFLAG_UNK2_F, [hl]
-.Action49:
+.State49:
 	ld a, [wDirection]
 	and a
 	jp nz, Func_3353
@@ -1004,10 +1004,10 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld a, [hl]
 	xor $80 ; switch direction
 	ld [hl], a
-	jr .Action18 ; unnecessary jump
+	jr .State18 ; unnecessary jump
 
-.Action18:
-	ld hl, wCurObjAction
+.State18:
+	ld hl, wCurObjState
 	ld a, OBJACTION_48
 	ld [hld], a
 	ld a, [hld] ; OBJ_UNK_1A
@@ -1028,7 +1028,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld [hld], a ; OBJ_COLLBOX_LEFT
 	ld l, OBJ_FLAGS
 	set OBJFLAG_UNK2_F, [hl]
-.Action48:
+.State48:
 	ld a, [wDirection]
 	and a
 	jp z, Func_3362
@@ -1036,14 +1036,14 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld a, [hl]
 	xor $80 ; switch direction
 	ld [hl], a
-	jp .Action19
+	jp .State19
 
-.Action12:
+.State12:
 	ld hl, wCurObjUnk1c
 	ld a, 31 | (1 << 7)
 	ld [hld], a
 	ld a, OBJACTION_42
-	ld [hld], a ; OBJ_ACTION
+	ld [hld], a ; OBJ_STATE
 	dec l
 	xor a
 	ld [hld], a ; OBJ_MOVEMENT_INDEX

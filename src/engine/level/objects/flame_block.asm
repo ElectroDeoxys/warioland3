@@ -35,7 +35,7 @@ FlameBlockFunc: ; 496bd (12:56bd)
 	ld de, Frameset_695e7
 	call SetObjectFramesetPtr
 	ld a, 159
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.Detroy)
 	ld [hld], a
@@ -44,7 +44,7 @@ FlameBlockFunc: ; 496bd (12:56bd)
 	ret
 
 .Detroy:
-	ld hl, wCurObjActionDuration
+	ld hl, wCurObjStateDuration
 	ld a, [hl]
 	cp 25
 	jr nc, .asm_49715

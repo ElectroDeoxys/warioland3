@@ -3659,12 +3659,12 @@ Func_3173:: ; 3173 (0:3173)
 	jp Func_62e57
 ; 0x3182
 
-ObjAction_Vanish2:: ; 3182 (0:3182)
+ObjState_Vanish2:: ; 3182 (0:3182)
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(_ObjAction_Vanish2)
+	ld a, BANK(_ObjState_Vanish2)
 	bankswitch
-	jp _ObjAction_Vanish2
+	jp _ObjState_Vanish2
 ; 0x3191
 
 Func_3191:: ; 3191 (0:3191)
@@ -3803,20 +3803,20 @@ Func_3281:: ; 3281 (0:3281)
 	jp Func_6305f
 ; 0x3290
 
-ObjAction_Fall:: ; 3290 (0:3290)
+ObjState_Fall:: ; 3290 (0:3290)
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(_ObjAction_Fall)
+	ld a, BANK(_ObjState_Fall)
 	bankswitch
-	jp _ObjAction_Fall
+	jp _ObjState_Fall
 ; 0x329f
 
-ObjAction_StandingFall:: ; 329f (0:329f)
+ObjState_StandingFall:: ; 329f (0:329f)
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(_ObjAction_StandingFall)
+	ld a, BANK(_ObjState_StandingFall)
 	bankswitch
-	jp _ObjAction_StandingFall
+	jp _ObjState_StandingFall
 ; 0x32ae
 
 Func_32ae:: ; 32ae (0:32ae)
@@ -3963,7 +3963,7 @@ Func_33ad:: ; 33ad (0:33ad)
 	jp Func_62605
 ; 0x33bc
 
-ObjAction_FullThrowLeft:: ; 33bc (0:33bc)
+ObjState_FullThrowLeft:: ; 33bc (0:33bc)
 	ld a, [wROMBank]
 	push af
 	ld a, BANK(Func_626da)
@@ -3971,7 +3971,7 @@ ObjAction_FullThrowLeft:: ; 33bc (0:33bc)
 	jp Func_626da
 ; 0x33cb
 
-ObjAction_FullThrowRight:: ; 33cb (0:33cb)
+ObjState_FullThrowRight:: ; 33cb (0:33cb)
 	ld a, [wROMBank]
 	push af
 	ld a, BANK(Func_62768)
@@ -3979,20 +3979,20 @@ ObjAction_FullThrowRight:: ; 33cb (0:33cb)
 	jp Func_62768
 ; 0x33da
 
-ObjAction_BumpLeft:: ; 33da (0:33da)
+ObjState_BumpLeft:: ; 33da (0:33da)
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(_ObjAction_BumpLeft)
+	ld a, BANK(_ObjState_BumpLeft)
 	bankswitch
-	jp _ObjAction_BumpLeft
+	jp _ObjState_BumpLeft
 ; 0x33e9
 
-ObjAction_BumpRight:: ; 33e9 (0:33e9)
+ObjState_BumpRight:: ; 33e9 (0:33e9)
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(_ObjAction_BumpRight)
+	ld a, BANK(_ObjState_BumpRight)
 	bankswitch
-	jp _ObjAction_BumpRight
+	jp _ObjState_BumpRight
 ; 0x33f8
 
 Func_33f8:: ; 33f8 (0:33f8)
@@ -4074,12 +4074,12 @@ Func_34b7:: ; 34b7 (0:34b7)
 
 	INCROM $34ce, $34e5
 
-ObjAction_Vanish:: ; 34e5 (0:34e5)
+ObjState_Vanish:: ; 34e5 (0:34e5)
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(_ObjAction_Vanish)
+	ld a, BANK(_ObjState_Vanish)
 	bankswitch
-	call _ObjAction_Vanish
+	call _ObjState_Vanish
 	pop af
 	bankswitch
 	ret

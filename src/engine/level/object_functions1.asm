@@ -196,7 +196,7 @@ Func_42725: ; 42725 (10:6725)
 	ld a, [bc]
 	ld c, $01
 	ld [hl], c
-	ld l, OBJ_ACTION_DURATION
+	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	jr .apply_y_offset
 .asm_42740
@@ -289,7 +289,7 @@ Func_42ba8: ; 42ba8 (10:6ba8)
 	ld l, OBJ_UNK_1A
 	res 5, [hl]
 	ld a, $14
-	ld [wCurObjActionDuration], a
+	ld [wCurObjStateDuration], a
 	ld l, OBJ_FLAGS
 	set 3, [hl]
 	ret
@@ -366,7 +366,7 @@ Func_434ba: ; 434ba (10:74ba)
 	ld a, $00
 	ld [hl], a
 	ld a, $31
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	ret
 ; 0x434e2
 

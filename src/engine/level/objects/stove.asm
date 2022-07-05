@@ -24,7 +24,7 @@ StoveFunc: ; 4971c (12:571c)
 
 .set_fall:
 	ld a, OBJACTION_FALL
-	ld [hld], a ; OBJ_ACTION
+	ld [hld], a ; OBJ_STATE
 	dec l
 	xor a
 	ld [hld], a ; OBJ_MOVEMENT_INDEX
@@ -53,7 +53,7 @@ StoveFunc: ; 4971c (12:571c)
 	ldh a, [hYPosHi]
 	ld [hl], a
 	ld a, OBJACTION_LAND
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	ld a, [wCurObjUnk17]
 	and a
 	ret z
@@ -62,7 +62,7 @@ StoveFunc: ; 4971c (12:571c)
 	jp DoGroundShake
 
 .Update:
-	ld hl, wCurObjAction
+	ld hl, wCurObjState
 	ld a, [hl]
 	cp OBJACTION_FALL
 	jr z, .Fall
@@ -71,17 +71,17 @@ StoveFunc: ; 4971c (12:571c)
 	cp OBJACTION_LAND
 	jp z, .Land
 	cp OBJACTION_34
-	jr z, .Action34
+	jr z, .State34
 	cp OBJACTION_04
-	jr z, .Action04
+	jr z, .State04
 	cp OBJACTION_35
-	jr z, .Action35
+	jr z, .State35
 	cp OBJACTION_05
-	jr z, .Action05
+	jr z, .State05
 	cp OBJACTION_VANISH
 	jr z, .asm_497b6
 	cp OBJACTION_3A
-	jr z, .Action3a
+	jr z, .State3a
 	jp .set_fall
 
 .asm_497b6
@@ -93,20 +93,20 @@ StoveFunc: ; 4971c (12:571c)
 	ld de, Frameset_69625
 	call SetObjectFramesetPtr
 	ld a, 44
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	ret
 
-.Action3a:
-	ld l, OBJ_ACTION_DURATION
+.State3a:
+	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	ret nz
 	jr .set_land
 
-.Action04:
+.State04:
 	ld a, OBJACTION_34
 	jr .asm_49813
 
-.Action34:
+.State34:
 	ld l, OBJ_UNK_18
 	ld a, [wGlobalCounter]
 	and %111
@@ -134,20 +134,20 @@ StoveFunc: ; 4971c (12:571c)
 
 .set_land
 	ld a, OBJACTION_LAND
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	ld de, Frameset_69615
 	jp SetObjectFramesetPtr
 
-.Action05:
+.State05:
 	ld a, OBJACTION_35
 .asm_49813
-	ld [hl], a ; OBJ_ACTION
+	ld [hl], a ; OBJ_STATE
 	ld a, $02
 	ld [wCurObjUnk18], a
 	ld de, Frameset_69618
 	jp SetObjectFramesetPtr
 
-.Action35:
+.State35:
 	ld l, OBJ_UNK_18
 	ld a, [wGlobalCounter]
 	and %111
@@ -213,7 +213,7 @@ StoveFunc: ; 4971c (12:571c)
 	and a
 	ret nz
 	ld a, OBJACTION_00
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	inc a ; $1
 	ld [wCurObjUnk17], a
 	ret

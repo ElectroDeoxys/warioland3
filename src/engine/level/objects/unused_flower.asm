@@ -13,7 +13,7 @@ UnusedFlowerFunc: ; 40ca1 (10:4ca1)
 	ld de, Frameset_6837a
 	call SetObjectFramesetPtr
 	ld a, 30
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	ld a, [wGlobalCounter]
 	ld [hl], a ; OBJ_UNK_17
 	ret
@@ -28,7 +28,7 @@ UnusedFlowerFunc: ; 40ca1 (10:4ca1)
 	and OBJFLAG_UNK0 | OBJFLAG_UNK1
 	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
 	ret nz
-	ld l, OBJ_ACTION_DURATION
+	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	ret nz
 	ld hl, wCurObjUpdateFunction + 1
@@ -39,13 +39,13 @@ UnusedFlowerFunc: ; 40ca1 (10:4ca1)
 	ld de, Frameset_6837a
 	call SetObjectFramesetPtr
 	ld a, 49
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	ret
 
 .Idle:
 	ld a, 1 | (1 << 7)
 	ld [wCurObjUnk1c], a
-	ld hl, wCurObjActionDuration
+	ld hl, wCurObjStateDuration
 	ld a, [hl]
 	and a
 	jr z, .next1
@@ -67,13 +67,13 @@ UnusedFlowerFunc: ; 40ca1 (10:4ca1)
 	ld de, Frameset_683ac
 	call SetObjectFramesetPtr
 	ld a, 68
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	ret
 
 .PreparingAttack:
 	ld a, 1 | (1 << 7)
 	ld [wCurObjUnk1c], a
-	ld hl, wCurObjActionDuration
+	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
 	ld hl, wCurObjUpdateFunction + 1
@@ -84,7 +84,7 @@ UnusedFlowerFunc: ; 40ca1 (10:4ca1)
 	ld de, Frameset_683b1
 	call SetObjectFramesetPtr
 	ld a, 35
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	ld a, [wWarioScreenXPos]
 	add $2a
 	ld b, a
@@ -102,7 +102,7 @@ UnusedFlowerFunc: ; 40ca1 (10:4ca1)
 .Attack:
 	ld a, 1 | (1 << 7)
 	ld [wCurObjUnk1c], a
-	ld hl, wCurObjActionDuration
+	ld hl, wCurObjStateDuration
 	ld a, [hl]
 	and a
 	jr z, .next2
@@ -130,7 +130,7 @@ UnusedFlowerProjectileRightFunc: ; 40d76 (10:4d76)
 UnusedFlowerProjectileLeftFunc: ; 40d7b (10:4d7b)
 	call MoveObjectLeft
 UnusedFlowerProjectileCommonFunc: ; 40d7e (10:4d7e)
-	ld a, [wCurObjAction]
+	ld a, [wCurObjState]
 	and a
 	jr z, .Thrown
 	cp OBJACTION_SPECIAL_1
@@ -146,7 +146,7 @@ UnusedFlowerProjectileCommonFunc: ; 40d7e (10:4d7e)
 	ld de, Frameset_68389
 	call SetObjectFramesetPtr
 	ld a, 8
-	ld [hli], a ; OBJ_ACTION_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
 	ret
 
 .Roll
@@ -177,7 +177,7 @@ UnusedFlowerProjectileCommonFunc: ; 40d7e (10:4d7e)
 	and a
 	ret nz
 	ld a, OBJACTION_SPECIAL_2
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	xor a
 	ld [wCurObjMovementIndex], a
 	ret
@@ -208,13 +208,13 @@ UnusedFlowerProjectileCommonFunc: ; 40d7e (10:4d7e)
 	ldh a, [hYPosHi]
 	ld [hl], a
 	ld a, OBJACTION_SPECIAL_1
-	ld [wCurObjAction], a
+	ld [wCurObjState], a
 	ret
 
 .Destroy:
 	ld a, 1 | (1 << 7)
 	ld [wCurObjUnk1c], a
-	ld hl, wCurObjActionDuration
+	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
 	xor a

@@ -55,13 +55,13 @@ MACRO obj_struct
 \1FramesetPtr::     dw
 \1FrameDuration::   db
 \1FramesetOffset::  db
-\1ActionDuration::  db
+\1StateDuration::   db
 \1Unk17::           db
 \1Unk18::           db
 \1MovementIndex::   db
 \1Unk1a::           db
 ; bit 7: set if facing right, left otherwise
-\1Action::          db
+\1State::           db
 \1Unk1c::           db
 \1Unk1d::           db
 \1UpdateFunction::  dw
