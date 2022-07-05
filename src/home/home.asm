@@ -3659,12 +3659,12 @@ Func_3173:: ; 3173 (0:3173)
 	jp Func_62e57
 ; 0x3182
 
-ObjState_Vanish2:: ; 3182 (0:3182)
+VanishObject2:: ; 3182 (0:3182)
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(_ObjState_Vanish2)
+	ld a, BANK(_VanishObject2)
 	bankswitch
-	jp _ObjState_Vanish2
+	jp _VanishObject2
 ; 0x3191
 
 Func_3191:: ; 3191 (0:3191)
@@ -4074,12 +4074,12 @@ Func_34b7:: ; 34b7 (0:34b7)
 
 	INCROM $34ce, $34e5
 
-ObjState_Vanish:: ; 34e5 (0:34e5)
+VanishObject:: ; 34e5 (0:34e5)
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(_ObjState_Vanish)
+	ld a, BANK(_VanishObject)
 	bankswitch
-	call _ObjState_Vanish
+	call _VanishObject
 	pop af
 	bankswitch
 	ret

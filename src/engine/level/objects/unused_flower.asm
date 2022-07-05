@@ -20,7 +20,7 @@ UnusedFlowerFunc: ; 40ca1 (10:4ca1)
 
 .Grow:
 	ld a, 1 | (1 << 7)
-	ld [wCurObjUnk1c], a
+	ld [wCurObjAction], a
 	ld a, 2
 	ld [wCurObjFrameDuration], a
 	ld hl, wCurObjFlags
@@ -44,7 +44,7 @@ UnusedFlowerFunc: ; 40ca1 (10:4ca1)
 
 .Idle:
 	ld a, 1 | (1 << 7)
-	ld [wCurObjUnk1c], a
+	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
 	and a
@@ -72,7 +72,7 @@ UnusedFlowerFunc: ; 40ca1 (10:4ca1)
 
 .PreparingAttack:
 	ld a, 1 | (1 << 7)
-	ld [wCurObjUnk1c], a
+	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
@@ -101,7 +101,7 @@ UnusedFlowerFunc: ; 40ca1 (10:4ca1)
 
 .Attack:
 	ld a, 1 | (1 << 7)
-	ld [wCurObjUnk1c], a
+	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
 	and a
@@ -133,9 +133,9 @@ UnusedFlowerProjectileCommonFunc: ; 40d7e (10:4d7e)
 	ld a, [wCurObjState]
 	and a
 	jr z, .Thrown
-	cp OBJACTION_SPECIAL_1
+	cp OBJSTATE_SPECIAL_1
 	jr z, .Roll
-	cp OBJACTION_SPECIAL_2
+	cp OBJSTATE_SPECIAL_2
 	jr z, .Jump
 .set_destroy
 	ld hl, wCurObjUpdateFunction + 1
@@ -176,7 +176,7 @@ UnusedFlowerProjectileCommonFunc: ; 40d7e (10:4d7e)
 	call Func_3543
 	and a
 	ret nz
-	ld a, OBJACTION_SPECIAL_2
+	ld a, OBJSTATE_SPECIAL_2
 	ld [wCurObjState], a
 	xor a
 	ld [wCurObjMovementIndex], a
@@ -207,13 +207,13 @@ UnusedFlowerProjectileCommonFunc: ; 40d7e (10:4d7e)
 	ld [hli], a
 	ldh a, [hYPosHi]
 	ld [hl], a
-	ld a, OBJACTION_SPECIAL_1
+	ld a, OBJSTATE_SPECIAL_1
 	ld [wCurObjState], a
 	ret
 
 .Destroy:
 	ld a, 1 | (1 << 7)
-	ld [wCurObjUnk1c], a
+	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz

@@ -186,7 +186,8 @@ ENDR
 	ld a, [hl]
 	ld [wCurObj + OBJ_STRUCT_LENGTH - 1], a
 
-	call Func_61760
+	call DoObjectAction
+
 	ld a, BANK("Object Update Functions 4")
 	ldh [hCallFuncBank], a
 	ld a, [wCurObjUpdateFunction + 0]
@@ -220,7 +221,7 @@ ENDR
 	pop hl
 
 	ld a, [wCurObjFlags]
-	and $ff ^ (OBJFLAG_UNK5)
+	and $ff ^ (OBJFLAG_STEPPED)
 	ld [hli], a
 	inc l
 	inc l
@@ -274,7 +275,7 @@ ENDR
 	ld [hli], a
 	ld a, [wCurObjState]
 	ld [hli], a
-	ld a, [wCurObjUnk1c]
+	ld a, [wCurObjAction]
 	ld [hli], a
 	inc l
 	ld a, [wCurObjUpdateFunction + 0]
@@ -286,6 +287,7 @@ ENDR
 
 Func_6130b: ; 6130b (18:530b)
 	call Func_618e2
+
 	ld hl, wObj1Flags
 	ld a, [hl]
 	rra
@@ -356,7 +358,8 @@ ENDR
 	ld a, [hl]
 	ld [wCurObj + OBJ_STRUCT_LENGTH - 1], a
 
-	call Func_61760
+	call DoObjectAction
+
 	ld a, [wCurObjUnk07]
 	swap a
 	and $0f
@@ -385,7 +388,7 @@ ENDR
 	ld [hli], a
 	pop hl
 	ld a, [wCurObjFlags]
-	and $ff ^ (OBJFLAG_UNK5)
+	and $ff ^ (OBJFLAG_STEPPED)
 	ld [hli], a
 	inc l
 	inc l
@@ -439,7 +442,7 @@ ENDR
 	ld [hli], a
 	ld a, [wCurObjState]
 	ld [hli], a
-	ld a, [wCurObjUnk1c]
+	ld a, [wCurObjAction]
 	ld [hli], a
 	inc l
 	ld a, [wCurObjUpdateFunction + 0]
@@ -494,7 +497,7 @@ ENDR
 	ld [hli], a
 	pop hl
 	ld a, [wCurObjFlags]
-	and $ff ^ (OBJFLAG_UNK5)
+	and $ff ^ (OBJFLAG_STEPPED)
 	ld [hli], a
 	inc l
 	inc l
@@ -548,7 +551,7 @@ ENDR
 	ld [hli], a
 	ld a, [wCurObjState]
 	ld [hli], a
-	ld a, [wCurObjUnk1c]
+	ld a, [wCurObjAction]
 	ld [hli], a
 	inc l
 	ld a, [wCurObjUpdateFunction]
@@ -590,8 +593,8 @@ ENDR
 	ret
 ; 0x61760
 
-Func_61760: ; 61760 (18:5760)
-	ld a, [wCurObjUnk1c]
+DoObjectAction: ; 61760 (18:5760)
+	ld a, [wCurObjAction]
 	and a
 	ret z
 	bit 7, a
@@ -601,119 +604,239 @@ Func_61760: ; 61760 (18:5760)
 	jr nz, .asm_6176f
 	xor a
 .asm_6176f
-	ld [wCurObjUnk1c], a
+	ld [wCurObjAction], a
 	ret
 
 .jump
 	jumptable
 
-	dw .Func_617a6
-	dw .Func_617a7
-	dw .Func_617c1
-	dw $57da
-	dw $57f2
-	dw $5809
-	dw $581d
-	dw $583e
-	dw $58a5
-	dw $5847
-	dw $5851
-	dw $5857
-	dw $5861
-	dw $586b
-	dw $5875
-	dw $587f
-	dw $5889
-	dw $5893
-	dw $5819
-	dw .Func_6179c
+	dw .None ; OBJACTION_NONE
+	dw .Bump ; OBJACTION_BUMP
+	dw .Attack ; OBJACTION_ATTACK
+	dw .PickUp ; OBJACTION_PICK_UP
+	dw .Wobble ; OBJACTION_WOBBLE
+	dw .VanishTouch ; OBJACTION_VANISH_TOUCH
+	dw .Action06 ; OBJACTION_06
+	dw .Action07 ; OBJACTION_07
+	dw VanishObject_NoSFX ; OBJACTION_VANISH_TREASURE
+	dw .StepOn ; OBJACTION_STEP_ON
+	dw .Action0a ; OBJACTION_0A
+	dw .Flatten ; OBJACTION_FLATTEN
+	dw .Action0c ; OBJACTION_0C
+	dw .Action0d ; OBJACTION_0D
+	dw .Action0e ; OBJACTION_0E
+	dw .SmashAttackWalkable ; OBJ_ACTION_SMASH_ATTACK_WALKABLE
+	dw .Teleport ; OBJ_ACTION_TELEPORT
+	dw .Action11 ; OBJACTION_11
+	dw .Action12 ; OBJACTION_12
+	dw .Func_6179c ; OBJACTION_13
 
 .Func_6179c:
-	ld hl, wCurObjUnk1c
-	ld a, $8f
+	ld hl, wCurObjAction
+	ld a, 15 | (1 << 7)
 	ld [hld], a
-	ld a, OBJACTION_SPECIAL_3
+	ld a, OBJSTATE_SPECIAL_3
 	ld [hl], a ; OBJ_STATE
 	ret
 
-.Func_617a6:
+.None:
 	ret
 
-.Func_617a7:
+.Bump:
 	ld a, [wCurObjInteractionType]
 	and INTERACTION_MASK
-	jr z, .no_interaction_type
+	jr z, .Wobble
 	ld hl, wCurObjUnk1d
 	ld a, [hld]
-	and $20
-	ld a, $8f
-	ld [hld], a ; OBJ_UNK_1C
-	jr z, .asm_617bd
-	ld a, OBJACTION_BUMP_LEFT_START
+	and INTERACTION_RIGHT
+	ld a, 15 | (1 << 7)
+	ld [hld], a ; OBJ_ACTION
+	jr z, .bump_right
+	ld a, OBJSTATE_BUMP_LEFT_START
 	ld [hl], a ; OBJ_STATE
 	ret
-.asm_617bd
-	ld a, OBJACTION_BUMP_RIGHT_START
+.bump_right
+	ld a, OBJSTATE_BUMP_RIGHT_START
 	ld [hl], a ; OBJ_STATE
 	ret
 
-.Func_617c1:
+.Attack:
 	ld hl, wCurObjFlags
 	res OBJFLAG_UNK2_F, [hl]
 	set OBJFLAG_UNK3_F, [hl]
 	ld l, OBJ_UNK_1D
 	ld a, [hld]
-	and $20
-	ld a, $8f
-	ld [hld], a ; OBJ_UNK_1C
-	jr z, .asm_617d6
-	ld a, OBJACTION_04
+	and INTERACTION_RIGHT
+	ld a, 15 | (1 << 7)
+	ld [hld], a ; OBJ_ACTION
+	jr z, .attack_right
+	ld a, OBJSTATE_ATTACKED_LEFT_START
 	ld [hl], a ; OBJ_STATE
 	ret
-.asm_617d6
-	ld a, OBJACTION_05
+.attack_right
+	ld a, OBJSTATE_ATTACKED_RIGHT_START
 	ld [hl], a ; OBJ_STATE
 	ret
 
+.PickUp:
 	ld hl, wCurObjFlags
 	res OBJFLAG_UNK2_F, [hl]
 	ld a, [wDirection]
 	and a
-	ld l, OBJ_UNK_1C
-	ld a, $8f
-	ld [hld], a ; OBJ_UNK_1C
-	jr z, .asm_617ee
-	ld a, OBJACTION_GRAB_LEFT_START
+	ld l, OBJ_ACTION
+	ld a, 15 | (1 << 7)
+	ld [hld], a ; OBJ_ACTION
+	jr z, .pick_up_right
+	ld a, OBJSTATE_PICKED_UP_LEFT_START
 	ld [hl], a ; OBJ_STATE
 	ret
-.asm_617ee
-	ld a, OBJACTION_GRAB_RIGHT_START
+.pick_up_right
+	ld a, OBJSTATE_PICKED_UP_RIGHT_START
 	ld [hl], a ; OBJ_STATE
 	ret
 
-.no_interaction_type
+.Wobble:
 	ld hl, wCurObjFlags
 	res OBJFLAG_UNK2_F, [hl]
 	ld l, OBJ_UNK_1D
 	ld a, [hld]
-	and $20
-	ld a, $8f
-	ld [hld], a ; OBJ_UNK_1C
-	jr z, .asm_61805
-	ld a, OBJ_INTERACTION_08
+	and INTERACTION_RIGHT
+	ld a, 15 | (1 << 7)
+	ld [hld], a ; OBJ_ACTION
+	jr z, .wobble_right
+	ld a, OBJSTATE_WOBBLE_LEFT_START
 	ld [hl], a ; OBJ_STATE
 	ret
-.asm_61805
-	ld a, OBJ_INTERACTION_09
+.wobble_right
+	ld a, OBJSTATE_WOBBLE_RIGHT_START
 	ld [hl], a ; OBJ_STATE
 	ret
-; 0x61809
 
-	INCROM $61809, $6189d
+.VanishTouch:
+	ld hl, wCurObjFlags
+	res OBJFLAG_UNK2_F, [hl]
+	set OBJFLAG_UNK3_F, [hl]
+	ld l, OBJ_ACTION
+	ld a, 15 | (1 << 7)
+	ld [hld], a
+	ld a, OBJSTATE_VANISH_TOUCH
+	ld [hl], a
+	ret
 
-_ObjState_Vanish:: ; 6189d (18:589d)
-	play_sfx SFX_018
+.Action12:
+	ld b, 7 | (1 << 7)
+	jr .asm_6181f
+.Action06:
+	ld b, 15 | (1 << 7)
+.asm_6181f
+	ld hl, wCurObjUnk1d
+	ld a, [hld]
+	ld [hl], b ; OBJ_ACTION
+	dec l
+	rla
+	jr nc, .check_interaction_up
+; interaction down
+	ld a, OBJSTATE_0E
+	ld [hl], a ; OBJ_STATE
+	ret
+.check_interaction_up
+	rla
+	jr nc, .check_interaction_right
+	ld a, OBJSTATE_0D
+	ld [hl], a ; OBJ_STATE
+	ret
+.check_interaction_right
+	rla
+	jr nc, .interaction_left
+	ld a, OBJSTATE_0B
+	ld [hl], a ; OBJ_STATE
+	ret
+.interaction_left
+	ld a, OBJSTATE_0C
+	ld [hl], a ; OBJ_STATE
+	ret
 
+.Action07:
+	ld hl, wCurObjAction
+	xor a
+	ld [hld], a
+	ld a, OBJSTATE_18
+	ld [hl], a ; OBJ_STATE
+	ret
+
+.StepOn:
+	ld hl, wCurObjAction
+	xor a
+	ld [hl], a
+	ld l, OBJ_FLAGS
+	set OBJFLAG_STEPPED_F, [hl]
+	ret
+
+.Action0a:
+	ld a, 15 | (1 << 7)
+	ld [wCurObjAction], a
+	ret
+
+.Flatten:
+	ld hl, wCurObjAction
+	ld a, 15 | (1 << 7)
+	ld [hld], a
+	ld a, OBJSTATE_ACTIVATE
+	ld [hl], a ; OBJ_STATE
+	ret
+
+.Action0c:
+	ld hl, wCurObjAction
+	ld a, 15 | (1 << 7)
+	ld [hld], a
+	ld a, OBJSTATE_ACTIVATE
+	ld [hl], a
+	ret
+
+.Action0d:
+	ld hl, wCurObjAction
+	ld a, 15 | (1 << 7)
+	ld [hld], a
+	ld a, OBJSTATE_19
+	ld [hl], a
+	ret
+
+.Action0e:
+	ld hl, wCurObjAction
+	ld a, 15 | (1 << 7)
+	ld [hld], a
+	ld a, OBJSTATE_ACTIVATE
+	ld [hl], a
+	ret
+
+.SmashAttackWalkable:
+	ld hl, wCurObjAction
+	ld a, 2 | (1 << 7)
+	ld [hld], a
+	ld a, OBJSTATE_VANISH_TOUCH
+	ld [hl], a
+	ret
+
+.Teleport:
+	ld hl, wCurObjAction
+	ld a, 15 | (1 << 7)
+	ld [hld], a
+	ld a, OBJSTATE_ACTIVATE
+	ld [hl], a
+	ret
+
+.Action11:
+	ld hl, wCurObjAction
+	ld a, 15 | (1 << 7)
+	ld [hld], a
+	ld a, OBJSTATE_ACTIVATE
+	ld [hl], a
+	ret
+; 0x6189d
+
+_VanishObject:: ; 6189d (18:589d)
+	play_sfx SFX_VANISH
+VanishObject_NoSFX: ; 618a5 (18:58a5)
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(VanishStarsFunc)
 	ld [hld], a
@@ -746,7 +869,7 @@ Func_618b4: ; 618b4 (18:58b4)
 	res OBJFLAG_UNK2_F, [hl]
 	set OBJFLAG_UNK3_F, [hl]
 	ld a, 1 | (1 << 7)
-	ld [wCurObjUnk1c], a
+	ld [wCurObjAction], a
 
 	ld l, OBJ_Y_POS
 	ld a, [hl]
@@ -808,9 +931,9 @@ ENDR
 	add OBJ_STATE - (OBJ_SCREEN_X_POS + 1)
 	ld l, a
 	ld a, [hl] ; OBJ_STATE
-	cp OBJACTION_4B + 1
+	cp OBJSTATE_4B + 1
 	jr nc, .asm_6194d
-	cp OBJACTION_48
+	cp OBJSTATE_48
 	jr nc, .asm_61992
 
 .asm_6194d
@@ -820,66 +943,66 @@ ENDR
 	jr c, .asm_61973
 	rla
 	jr c, .asm_61965
-	ld a, OBJACTION_28
+	ld a, OBJSTATE_28
 	ld [hli], a ; hffa1
-	ld a, OBJACTION_29
+	ld a, OBJSTATE_29
 	ld [hli], a ; hffa2
-	ld a, OBJACTION_09
+	ld a, OBJSTATE_WOBBLE_RIGHT_START
 	ld [hli], a ; hffa3
-	ld a, OBJACTION_29
+	ld a, OBJSTATE_29
 	ld [hli], a ; hffa4
 	jr .check_objs
 
 .asm_61965
-	ld a, OBJACTION_28
+	ld a, OBJSTATE_28
 	ld [hli], a ; hffa1
-	ld a, OBJACTION_08
+	ld a, OBJSTATE_WOBBLE_LEFT_START
 	ld [hli], a ; hffa2
-	ld a, OBJACTION_28
+	ld a, OBJSTATE_28
 	ld [hli], a ; hffa3
-	ld a, OBJACTION_29
+	ld a, OBJSTATE_29
 	ld [hli], a ; hffa4
 	jr .check_objs
 
 .asm_61973
 	rla
 	jr c, .asm_61984
-	ld a, OBJACTION_29
+	ld a, OBJSTATE_29
 	ld [hli], a ; ; hffa1
-	ld a, OBJACTION_28
+	ld a, OBJSTATE_28
 	ld [hli], a ; ; hffa2
-	ld a, OBJACTION_08
+	ld a, OBJSTATE_WOBBLE_LEFT_START
 	ld [hli], a ; ; hffa3
-	ld a, OBJACTION_28
+	ld a, OBJSTATE_28
 	ld [hli], a ; ; hffa4
 	jr .check_objs
 
 .asm_61984
-	ld a, OBJACTION_29
+	ld a, OBJSTATE_29
 	ld [hli], a ; hffa1
-	ld a, OBJACTION_09
+	ld a, OBJSTATE_WOBBLE_RIGHT_START
 	ld [hli], a ; hffa2
-	ld a, OBJACTION_29
+	ld a, OBJSTATE_29
 	ld [hli], a ; hffa3
-	ld a, OBJACTION_28
+	ld a, OBJSTATE_28
 	ld [hli], a ; hffa4
 	jr .check_objs
 
 .asm_61992
-	; OBJACTION_48 <= action <= OBJACTION_4B
+	; OBJSTATE_48 <= action <= OBJSTATE_4B
 	rra
 	ld hl, hffa1
 	jr c, .asm_619a0
-	ld a, OBJACTION_09
+	ld a, OBJSTATE_WOBBLE_RIGHT_START
 	ld [hli], a ; hffa1
-	ld a, OBJACTION_08
+	ld a, OBJSTATE_WOBBLE_LEFT_START
 	ld [hli], a ; hffa2
 	jr .check_objs
 
 .asm_619a0
-	ld a, OBJACTION_08
+	ld a, OBJSTATE_WOBBLE_LEFT_START
 	ld [hli], a ; hffa1
-	ld a, OBJACTION_09
+	ld a, OBJSTATE_WOBBLE_RIGHT_START
 	ld [hli], a ; hffa2
 
 .check_objs
@@ -918,9 +1041,9 @@ FOR n, 1, NUM_OBJECTS + 1
 	ld l, a
 	ld a, [hl] ; OBJ_STATE
 	and $fe
-	cp OBJACTION_4A
+	cp OBJSTATE_4A
 	jp z, .Func_61d28_{u:n}
-	cp OBJACTION_48
+	cp OBJSTATE_48
 	jp z, .Func_61d28_{u:n}
 	ld a, [wObj{u:n}InteractionType]
 	rla
@@ -930,9 +1053,9 @@ FOR n, 1, NUM_OBJECTS + 1
 	ld l, LOW(wObj{u:n}State)
 	ld a, [hl]
 	and $fe
-	cp OBJACTION_36
+	cp OBJSTATE_PICKED_UP_LEFT
 	jr z, .reset_grab_{u:n}_1
-	cp OBJACTION_48
+	cp OBJSTATE_48
 	jr nz, .skip_reset_grab_{u:n}_1
 .reset_grab_{u:n}_1
 	xor a
@@ -972,9 +1095,9 @@ FOR n, 1, NUM_OBJECTS + 1
 	ld l, LOW(wObj{u:n}State)
 	ld a, [hl]
 	and $fe
-	cp OBJACTION_36
+	cp OBJSTATE_PICKED_UP_LEFT
 	jr z, .reset_grab_{u:n}_2
-	cp OBJACTION_48
+	cp OBJSTATE_48
 	jr nz, .skip_reset_grab_{u:n}_2
 .reset_grab_{u:n}_2
 	xor a
@@ -1036,15 +1159,15 @@ Func_61f4a: ; 61f4a (18:5f4a)
 
 Func_61f54:: ; 61f54 (18:5f54)
 	ld a, 1 | (1 << 7)
-	ld [wCurObjUnk1c], a
+	ld [wCurObjAction], a
 
 	ld a, [wGrabState]
-	and $0f
+	and GRAB_STATE_MASK
 	cp GRAB_PICK_UP
 	jp z, .PickUp
 	cp GRAB_IDLE
 	jr z, .GrabIdle
-	ld a, OBJACTION_12
+	ld a, OBJSTATE_12
 	ld [wCurObjState], a
 	jp Func_316b
 
@@ -1100,15 +1223,15 @@ Func_61f54:: ; 61f54 (18:5f54)
 	play_sfx SFX_01A
 	ld a, $02
 	ld [wCurObjUnk18], a
-	ld hl, wCurObjUnk1c
-	ld a, $9f
+	ld hl, wCurObjAction
+	ld a, 31 | (1 << 7)
 	ld [hld], a
-	ld a, OBJACTION_14
+	ld a, OBJSTATE_14
 	ld [hld], a ; OBJ_STATE
 	jp Func_316b
 
 .asm_61fd9
-	ld a, OBJACTION_19
+	ld a, OBJSTATE_19
 	ld [wCurObjState], a
 	jp Func_316b
 
@@ -1237,22 +1360,22 @@ Func_61f54:: ; 61f54 (18:5f54)
 	jp nz, .drop_obj
 	or GRAB_UNK_02
 	ld [wGrabState], a
-	ld a, OBJACTION_19
+	ld a, OBJSTATE_19
 	ld [wCurObjState], a
 	jp Func_316b
 ; 0x620a6
 
 Func_620a6:: ; 620a6 (18:60a6)
 	ld a, 1 | (1 << 7)
-	ld [wCurObjUnk1c], a
+	ld [wCurObjAction], a
 
 	ld a, [wGrabState]
-	and $0f
+	and GRAB_STATE_MASK
 	cp GRAB_PICK_UP
 	jp z, .PickUp
 	cp GRAB_IDLE
 	jr z, .GrabIdle
-	ld a, OBJACTION_12
+	ld a, OBJSTATE_12
 	ld [wCurObjState], a
 	jp Func_316b
 
@@ -1308,15 +1431,15 @@ Func_620a6:: ; 620a6 (18:60a6)
 	play_sfx SFX_01A
 	ld a, $02
 	ld [wCurObjUnk18], a
-	ld hl, wCurObjUnk1c
-	ld a, $9f
+	ld hl, wCurObjAction
+	ld a, 31 | (1 << 7)
 	ld [hld], a
-	ld a, OBJACTION_15
+	ld a, OBJSTATE_15
 	ld [hld], a ; OBJ_STATE
 	jp Func_316b
 
 .asm_6212b
-	ld a, OBJACTION_18
+	ld a, OBJSTATE_18
 	ld [wCurObjState], a
 	jp Func_316b
 
@@ -1448,14 +1571,14 @@ Func_620a6:: ; 620a6 (18:60a6)
 	jp nz, .drop_obj
 	or GRAB_UNK_02
 	ld [wGrabState], a
-	ld a, OBJACTION_18
+	ld a, OBJSTATE_18
 	ld [wCurObjState], a
 	jp Func_316b
 ; 0x621fb
 
 Func_621fb:: ; 621fb (18:61fb)
 	ld a, 1 | (1 << 7)
-	ld [wCurObjUnk1c], a
+	ld [wCurObjAction], a
 	ld a, [wGrabState]
 	ld b, a
 	and $0f
@@ -1475,17 +1598,17 @@ Func_621fb:: ; 621fb (18:61fb)
 ; crouching
 	ld a, $01
 	ld [wCurObjUnk18], a
-	ld a, OBJACTION_15
+	ld a, OBJSTATE_15
 	ld [hl], a
 	jp Func_316b
 
 .not_crouching
-	ld a, OBJACTION_12
+	ld a, OBJSTATE_12
 	ld [hl], a
 	jp Func_316b
 
 .GrabChargeThrow
-	ld a, OBJACTION_4B
+	ld a, OBJSTATE_4B
 	ld [wCurObjState], a
 	jp Func_316b
 
@@ -1553,10 +1676,10 @@ Func_621fb:: ; 621fb (18:61fb)
 	play_sfx SFX_01A
 	ld a, $02
 	ld [wCurObjUnk18], a
-	ld hl, wCurObjUnk1c
-	ld a, $9f
+	ld hl, wCurObjAction
+	ld a, 31 | (1 << 7)
 	ld [hld], a
-	ld a, OBJACTION_14
+	ld a, OBJSTATE_14
 	ld [hl], a ; OBJ_STATE
 	ld l, OBJ_FLAGS
 	res OBJFLAG_UNK2_F, [hl]
@@ -1565,7 +1688,7 @@ Func_621fb:: ; 621fb (18:61fb)
 
 Func_622bd:: ; 622bd (18:62bd)
 	ld a, 1 | (1 << 7)
-	ld [wCurObjUnk1c], a
+	ld [wCurObjAction], a
 	ld a, [wGrabState]
 	ld b, a
 	and $0f
@@ -1585,17 +1708,17 @@ Func_622bd:: ; 622bd (18:62bd)
 ; crouching
 	ld a, $01
 	ld [wCurObjUnk18], a
-	ld a, OBJACTION_14
+	ld a, OBJSTATE_14
 	ld [hl], a
 	jp Func_316b
 
 .not_crouching
-	ld a, OBJACTION_12
+	ld a, OBJSTATE_12
 	ld [hl], a
 	jp Func_316b
 
 .GrabChargeThrow
-	ld a, OBJACTION_4A
+	ld a, OBJSTATE_4A
 	ld [wCurObjState], a
 	jp Func_316b
 
@@ -1665,10 +1788,10 @@ Func_622bd:: ; 622bd (18:62bd)
 	play_sfx SFX_01A
 	ld a, $02
 	ld [wCurObjUnk18], a
-	ld hl, wCurObjUnk1c
-	ld a, $9f
+	ld hl, wCurObjAction
+	ld a, 31 | (1 << 7)
 	ld [hld], a
-	ld a, OBJACTION_15
+	ld a, OBJSTATE_15
 	ld [hl], a ; OBJ_STATE
 	ld l, OBJ_FLAGS
 	res OBJFLAG_UNK2_F, [hl]
@@ -1677,7 +1800,7 @@ Func_622bd:: ; 622bd (18:62bd)
 
 Func_62382:: ; 62382 (18:6382)
 	ld a, 1 | (1 << 7)
-	ld [wCurObjUnk1c], a
+	ld [wCurObjAction], a
 	ld a, [wGrabState]
 	ld b, a
 	and $0f
@@ -1693,7 +1816,7 @@ Func_62382:: ; 62382 (18:6382)
 .asm_6239e
 	ld hl, wCurObjFlags
 	res OBJFLAG_UNK2_F, [hl]
-	ld a, OBJACTION_12
+	ld a, OBJSTATE_12
 	ld [wCurObjState], a
 	jp Func_316b
 
@@ -1798,10 +1921,10 @@ ThrowObject_Left: ; 62429 (18:6429)
 	xor a
 	ld [hli], a ; OBJ_MOVEMENT_INDEX
 	inc l
-	ld a, OBJACTION_4E
+	ld a, OBJSTATE_4E
 	ld [hli], a ; OBJ_STATE
-	ld a, $9f
-	ld [hld], a ; OBJ_UNK_1C
+	ld a, 31 | (1 << 7)
+	ld [hld], a ; OBJ_ACTION
 	jp Func_316b
 
 .asm_62462
@@ -1816,16 +1939,16 @@ ThrowObject_Left: ; 62429 (18:6429)
 	xor a
 	ld [hli], a ; OBJ_MOVEMENT_INDEX
 	inc l
-	ld a, OBJACTION_FULL_THROW_LEFT_START
+	ld a, OBJSTATE_FULL_THROW_LEFT_START
 	ld [hli], a ; OBJ_STATE
-	ld a, $9f
-	ld [hld], a ; OBJ_UNK_1C
+	ld a, 31 | (1 << 7)
+	ld [hld], a ; OBJ_ACTION
 	jp Func_316b
 ; 0x6247b
 
 Func_6247b:: ; 6247b (18:647b)
 	ld a, 1 | (1 << 7)
-	ld [wCurObjUnk1c], a
+	ld [wCurObjAction], a
 	ld a, [wGrabState]
 	ld b, a
 	and $0f
@@ -1841,7 +1964,7 @@ Func_6247b:: ; 6247b (18:647b)
 .asm_62497
 	ld hl, wCurObjFlags
 	res OBJFLAG_UNK2_F, [hl]
-	ld a, OBJACTION_12
+	ld a, OBJSTATE_12
 	ld [wCurObjState], a
 	jp Func_316b
 
@@ -1946,10 +2069,10 @@ ThrowObject_Right: ; 62522 (18:6522)
 	xor a
 	ld [hli], a ; OBJ_MOVEMENT_INDEX
 	inc l
-	ld a, OBJACTION_4F
+	ld a, OBJSTATE_4F
 	ld [hli], a ; OBJ_STATE
-	ld a, $9f
-	ld [hld], a ; OBJ_UNK_1C
+	ld a, 31 | (1 << 7)
+	ld [hld], a ; OBJ_ACTION
 	jp Func_316b
 
 .asm_6255b
@@ -1964,10 +2087,10 @@ ThrowObject_Right: ; 62522 (18:6522)
 	xor a
 	ld [hli], a ; OBJ_MOVEMENT_INDEX
 	inc l
-	ld a, OBJACTION_FULL_THROW_RIGHT_START
+	ld a, OBJSTATE_FULL_THROW_RIGHT_START
 	ld [hli], a ; OBJ_STATE
-	ld a, $9f
-	ld [hld], a ; OBJ_UNK_1C
+	ld a, 31 | (1 << 7)
+	ld [hld], a ; OBJ_ACTION
 	jp Func_316b
 ; 0x62574
 
@@ -1996,7 +2119,7 @@ Func_62574:: ; 62574 (18:6574)
 	ld a, [wc0dd]
 	and a
 	jr z, .asm_625aa
-	ld a, OBJACTION_VANISH
+	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
 	jp Func_316b
 
@@ -2039,12 +2162,12 @@ Func_62574:: ; 62574 (18:6574)
 	call Func_3513
 	and $0f
 	jr z, .asm_625ff
-	ld a, OBJACTION_15
+	ld a, OBJSTATE_15
 	ld [wCurObjState], a
 	jp Func_316b
 
 .asm_625f7
-	ld a, OBJACTION_14
+	ld a, OBJSTATE_14
 	ld [wCurObjState], a
 	jp Func_316b
 
@@ -2078,7 +2201,7 @@ Func_62605:: ; 62605 (18:6605)
 	ld a, [wc0dd]
 	and a
 	jr z, .asm_6263b
-	ld a, OBJACTION_VANISH
+	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
 	jp Func_316b
 
@@ -2118,12 +2241,12 @@ Func_62605:: ; 62605 (18:6605)
 	call Func_3513
 	and $0f
 	jr z, .asm_6268d
-	ld a, OBJACTION_14
+	ld a, OBJSTATE_14
 	ld [wCurObjState], a
 	jp Func_316b
 
 .asm_62685
-	ld a, OBJACTION_15
+	ld a, OBJSTATE_15
 	ld [wCurObjState], a
 	jp Func_316b
 
@@ -2213,7 +2336,7 @@ Func_626da:: ; 626da (18:66da)
 	and a
 	jr z, .asm_62710
 .vanish
-	ld a, OBJACTION_VANISH
+	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
 	jp Func_316b
 
@@ -2293,7 +2416,7 @@ Func_62768:: ; 62768 (18:6768)
 	and a
 	jr z, .asm_6279e
 .vanish
-	ld a, OBJACTION_VANISH
+	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
 	jp Func_316b
 
@@ -2458,7 +2581,7 @@ Func_6284f: ; 6284f (18:684f)
 	dec [hl]
 .asm_6288a
 	ld a, 1 | (1 << 7)
-	ld [wCurObjUnk1c], a
+	ld [wCurObjAction], a
 	jp Func_316b
 ; 0x62892
 
@@ -2523,7 +2646,7 @@ Func_628a7: ; 628a7 (18:68a7)
 	dec [hl]
 .asm_628e2
 	ld a, 1 | (1 << 7)
-	ld [wCurObjUnk1c], a
+	ld [wCurObjAction], a
 	jp Func_316b
 ; 0x628ea
 
@@ -2540,7 +2663,7 @@ Func_628ea:: ; 628ea (18:68ea)
 	call Func_3543
 	and a
 	jp nz, Func_316b
-	ld a, OBJACTION_12
+	ld a, OBJSTATE_12
 	ld [wCurObjState], a
 	jp Func_316b
 ; 0x62908
@@ -2558,7 +2681,7 @@ Func_62908:: ; 62908 (18:6908)
 	call Func_3543
 	and a
 	jp nz, Func_316b
-	ld a, OBJACTION_STANDING_FALL_START
+	ld a, OBJSTATE_STANDING_FALL_START
 	ld [wCurObjState], a
 	jp Func_316b
 ; 0x62926
@@ -2618,7 +2741,7 @@ Func_62926:: ; 62926 (18:6926)
 	ld a, [wc0dd]
 	and a
 	jp z, Func_316b
-	ld a, OBJACTION_VANISH
+	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
 	jp Func_316b
 
@@ -2632,7 +2755,7 @@ Func_62926:: ; 62926 (18:6926)
 	ld a, [wc18c]
 	and a
 	jr nz, .asm_62997
-	ld a, OBJACTION_0F
+	ld a, OBJSTATE_0F
 	ld [hl], a
 	jp Func_316b
 
@@ -2744,7 +2867,7 @@ _ObjState_StandingFall:: ; 629d0 (18:69d0)
 	ld a, [wc0dd]
 	and a
 	jp z, Func_316b
-	ld a, OBJACTION_VANISH
+	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
 	jp Func_316b
 
@@ -2758,7 +2881,7 @@ _ObjState_StandingFall:: ; 629d0 (18:69d0)
 	ld a, [wc18c]
 	and a
 	jr nz, .asm_62a4c
-	ld a, OBJACTION_TURN_AROUND_START
+	ld a, OBJSTATE_TURN_AROUND_START
 	ld [hl], a
 	jp Func_316b
 
@@ -2820,7 +2943,7 @@ _ObjState_Fall:: ; 62a5b (18:6a5b)
 	ld a, [wc0dd]
 	and a
 	jp z, Func_316b
-	ld a, OBJACTION_VANISH
+	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
 	jp Func_316b
 
@@ -2834,7 +2957,7 @@ _ObjState_Fall:: ; 62a5b (18:6a5b)
 	ld a, [wc18c]
 	and a
 	jr nz, .asm_62ac1
-	ld a, OBJACTION_LAND
+	ld a, OBJSTATE_LAND
 	ld [hl], a
 	jp Func_316b
 
@@ -2856,7 +2979,7 @@ _ObjState_BumpRight:: ; 62ad0 (18:6ad0)
 	dec l
 	dec [hl] ; OBJ_STATE_DURATION
 	jp nz, Func_316b
-	ld a, OBJACTION_TURN_AROUND_START
+	ld a, OBJSTATE_TURN_AROUND_START
 	ld [wCurObjState], a
 	jp Func_316b
 
@@ -2935,13 +3058,13 @@ Func_62ae5:: ; 62ae5 (18:6ae5)
 	call Func_35a3
 	and a
 	jr nz, .asm_62b7d
-	ld a, OBJACTION_14
+	ld a, OBJSTATE_14
 	ld [wCurObjState], a
 	jr .asm_62b7d
 
 .asm_62b70
 	play_sfx SFX_01A
-	ld a, OBJACTION_STUN_RIGHT_START
+	ld a, OBJSTATE_STUN_RIGHT_START
 	ld [wCurObjState], a
 
 .asm_62b7d
@@ -2968,13 +3091,13 @@ Func_62ae5:: ; 62ae5 (18:6ae5)
 	rra
 	jr nc, .asm_62bb3
 	ld a, [hl]
-	cp OBJACTION_STUN_LEFT
+	cp OBJSTATE_STUN_LEFT
 	jp z, Func_316b
-	ld a, OBJACTION_14
+	ld a, OBJSTATE_14
 	ld [hl], a
 	jp Func_316b
 .asm_62bb3
-	ld a, OBJACTION_STUN_RIGHT_START
+	ld a, OBJSTATE_STUN_RIGHT_START
 	ld [hl], a
 	jp Func_316b
 ; 0x62bb9
@@ -2988,7 +3111,7 @@ _ObjState_BumpLeft:: ; 62bb9 (18:6bb9)
 	dec l
 	dec [hl] ; OBJ_STATE_DURATION
 	jp nz, Func_316b
-	ld a, OBJACTION_TURN_AROUND_START
+	ld a, OBJSTATE_TURN_AROUND_START
 	ld [wCurObjState], a
 	jp Func_316b
 
@@ -3064,13 +3187,13 @@ Func_62bce:: ; 62bce (18:6bce)
 	call Func_35a3
 	and a
 	jr nz, .asm_62c63
-	ld a, OBJACTION_15
+	ld a, OBJSTATE_15
 	ld [wCurObjState], a
 	jr .asm_62c63
 
 .asm_62c56
 	play_sfx SFX_01A
-	ld a, OBJACTION_STUN_LEFT_START
+	ld a, OBJSTATE_STUN_LEFT_START
 	ld [wCurObjState], a
 
 .asm_62c63
@@ -3097,20 +3220,20 @@ Func_62bce:: ; 62bce (18:6bce)
 	rra
 	jr c, .asm_62c99
 	ld a, [hl]
-	cp OBJACTION_STUN_RIGHT
+	cp OBJSTATE_STUN_RIGHT
 	jp z, Func_316b
-	ld a, OBJACTION_15
+	ld a, OBJSTATE_15
 	ld [hl], a
 	jp Func_316b
 .asm_62c99
-	ld a, OBJACTION_STUN_LEFT_START
+	ld a, OBJSTATE_STUN_LEFT_START
 	ld [hl], a
 	jp Func_316b
 ; 0x62c9f
 
 Func_62c9f:: ; 62c9f (18:6c9f)
 	ld hl, wCurObjState
-	ld a, OBJACTION_56
+	ld a, OBJSTATE_56
 	ld [hld], a
 	dec l
 	xor a
@@ -3194,12 +3317,12 @@ Func_62ca8:: ; 62ca8 (18:6ca8)
 	call Func_3513
 	and $0f
 	jp z, Func_316b
-	ld a, OBJACTION_15
+	ld a, OBJSTATE_15
 	ld [wCurObjState], a
 	jp Func_316b
 
 .vanish
-	ld a, OBJACTION_VANISH
+	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
 	jp Func_316b
 
@@ -3237,26 +3360,26 @@ Func_62d57: ; 62d57 (18:6d57)
 	jr c, .asm_62d71
 	cp 4
 	jr c, .asm_62d77
-	ld a, OBJACTION_24
+	ld a, OBJSTATE_24
 	ld [hl], a
 	jp Func_316b
 .asm_62d6b
-	ld a, OBJACTION_STUN_LEFT_START
+	ld a, OBJSTATE_STUN_LEFT_START
 	ld [hl], a
 	jp Func_316b
 .asm_62d71
-	ld a, OBJACTION_20
+	ld a, OBJSTATE_20
 	ld [hl], a
 	jp Func_316b
 .asm_62d77
-	ld a, OBJACTION_22
+	ld a, OBJSTATE_22
 	ld [hl], a
 	jp Func_316b
 ; 0x62d7d
 
 Func_62d7d:: ; 62d7d (18:6d7d)
 	ld hl, wCurObjState
-	ld a, OBJACTION_57
+	ld a, OBJSTATE_57
 	ld [hld], a
 	dec l
 	xor a
@@ -3337,12 +3460,12 @@ Func_62d86:: ; 62d86 (18:6d86)
 	call Func_3513
 	and $0f
 	jp z, Func_316b
-	ld a, OBJACTION_14
+	ld a, OBJSTATE_14
 	ld [wCurObjState], a
 	jp Func_316b
 
 .vanish
-	ld a, OBJACTION_VANISH
+	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
 	jp Func_316b
 
@@ -3379,25 +3502,25 @@ Func_62e31: ; 62e31 (18:6e31)
 	jr c, .asm_62e4b
 	cp 4
 	jr c, .asm_62e51
-	ld a, OBJACTION_25
+	ld a, OBJSTATE_25
 	ld [hl], a
 	jp Func_316b
 .asm_62e45
-	ld a, OBJACTION_STUN_RIGHT_START
+	ld a, OBJSTATE_STUN_RIGHT_START
 	ld [hl], a
 	jp Func_316b
 .asm_62e4b
-	ld a, OBJACTION_21
+	ld a, OBJSTATE_21
 	ld [hl], a
 	jp Func_316b
 .asm_62e51
-	ld a, OBJACTION_23
+	ld a, OBJSTATE_23
 	ld [hl], a
 	jp Func_316b
 ; 0x62e57
 
 Func_62e57:: ; 62e57 (18:6e57)
-	play_sfx SFX_018
+	play_sfx SFX_VANISH
 
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(Func_4c860)
@@ -3408,14 +3531,14 @@ Func_62e57:: ; 62e57 (18:6e57)
 	jp Func_316b
 ; 0x62e6e
 
-_ObjState_Vanish2:: ; 62e6e (18:6e6e)
-	call _ObjState_Vanish
+_VanishObject2:: ; 62e6e (18:6e6e)
+	call _VanishObject
 	jp Func_316b
 ; 0x62e74
 
 Func_62e74:: ; 62e74 (18:6e74)
 	ld hl, wCurObjState
-	ld a, OBJACTION_54
+	ld a, OBJSTATE_54
 	ld [hld], a
 	dec l
 	xor a
@@ -3435,7 +3558,7 @@ Func_62e8a:: ; 62e8a (18:6e8a)
 
 Func_62e8f:: ; 62e8f (18:6e8f)
 	ld hl, wCurObjState
-	ld a, OBJACTION_50
+	ld a, OBJSTATE_50
 	ld [hld], a
 	dec l
 	xor a
@@ -3455,7 +3578,7 @@ Func_62ea5:: ; 62ea5 (18:6ea5)
 
 Func_62eaa:: ; 62eaa (18:6eaa)
 	ld hl, wCurObjState
-	ld a, OBJACTION_52
+	ld a, OBJSTATE_52
 	ld [hld], a
 	dec l
 	xor a
@@ -3553,14 +3676,14 @@ Func_62ec3: ; 62ec3 (18:6ec3)
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	jp nz, Func_316b
-	ld a, OBJACTION_26
+	ld a, OBJSTATE_26
 	ld [wCurObjState], a
 	ld hl, wCurObjFlags
 	res OBJFLAG_UNK3_F, [hl]
 	jp Func_316b
 
 .asm_62f4e
-	ld a, OBJACTION_27
+	ld a, OBJSTATE_27
 	ld [wCurObjState], a
 	ld hl, wCurObjFlags
 	res OBJFLAG_UNK3_F, [hl]
@@ -3569,7 +3692,7 @@ Func_62ec3: ; 62ec3 (18:6ec3)
 
 Func_62f5b:: ; 62f5b (18:6f5b)
 	ld hl, wCurObjState
-	ld a, OBJACTION_55
+	ld a, OBJSTATE_55
 	ld [hld], a
 	dec l
 	xor a
@@ -3589,7 +3712,7 @@ Func_62f71:: ; 62f71 (18:6f71)
 
 Func_62f76:: ; 62f76 (18:6f76)
 	ld hl, wCurObjState
-	ld a, OBJACTION_51
+	ld a, OBJSTATE_51
 	ld [hld], a
 	dec l
 	xor a
@@ -3609,7 +3732,7 @@ Func_62f8c:: ; 62f8c (18:6f8c)
 
 Func_62f91:: ; 62f91 (18:6f91)
 	ld hl, wCurObjState
-	ld a, OBJACTION_53
+	ld a, OBJSTATE_53
 	ld [hld], a
 	dec l
 	xor a
@@ -3703,7 +3826,7 @@ Func_62faa:: ; 62faa (18:6faa)
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	jp nz, Func_316b
-	ld a, OBJACTION_27
+	ld a, OBJSTATE_27
 	ld [wCurObjState], a
 	ld hl, wCurObjFlags
 	res OBJFLAG_UNK3_F, [hl]
@@ -3719,7 +3842,7 @@ Func_62faa:: ; 62faa (18:6faa)
 
 Func_6303f:: ; 6303f (18:703f)
 	ld hl, wCurObjState
-	ld a, OBJACTION_1B
+	ld a, OBJSTATE_1B
 	ld [hld], a
 	dec l
 	xor a
@@ -3733,7 +3856,7 @@ Func_63050:: ; 63050 (18:7050)
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	jp nz, Func_629a6
-	ld a, OBJACTION_STANDING_FALL_START
+	ld a, OBJSTATE_STANDING_FALL_START
 	ld [wCurObjState], a
 	jp Func_316b
 ; 0x6305f
@@ -3742,10 +3865,10 @@ Func_6305f:: ; 6305f (18:705f)
 	ldh a, [rDIV]
 	rra
 	jr c, .asm_63068
-	ld a, OBJACTION_39
+	ld a, OBJSTATE_WOBBLE_RIGHT
 	jr .asm_6306a
 .asm_63068
-	ld a, OBJACTION_38
+	ld a, OBJSTATE_WOBBLE_LEFT
 .asm_6306a
 	ld hl, wCurObjState
 	ld [hld], a
@@ -3864,7 +3987,7 @@ Func_6307b: ; 6307b (18:707b)
 .asm_630fd
 	ld a, [wCurObjState]
 	and $fe
-	cp OBJACTION_48
+	cp OBJSTATE_48
 	jr z, .asm_6310b
 .asm_63106
 	ld hl, wCurObjFlags

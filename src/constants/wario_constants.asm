@@ -106,6 +106,7 @@ DEF HOT_WARIO_TRANSITION_DURATION EQU 300
 	const GRAB_HEAVY_F       ; 7
 
 DEF GRAB_FLAGS_MASK EQU (1 << GRAB_UNUSED_0_F) | (1 << GRAB_UNUSED_1_F) | (1 << GRAB_FULL_CHARGE_F) | (1 << GRAB_HEAVY_F)
+DEF GRAB_STATE_MASK EQU $ff ^ GRAB_FLAGS_MASK
 
 ; number of frames to reach fully charged throw
 ; with a light and heavy object

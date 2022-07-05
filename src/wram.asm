@@ -378,11 +378,8 @@ wc1bc:: ; c1bc
 wc1bd:: ; c1bd
 	ds $1
 
-wObjScreenYPos:: ; c1be
-	ds $1
-
-wObjScreenXPos:: ; c1bf
-	ds $1
+wObjScreenYPos:: ds $1 ; c1be
+wObjScreenXPos:: ds $1 ; c1bf
 
 wInteractionSide:: ; c1c0
 	ds $1

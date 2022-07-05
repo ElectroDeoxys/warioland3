@@ -27,14 +27,14 @@ WebberFunc: ; 40825 (10:4825)
 	ld [hl], a ; OBJ_MOVEMENT_INDEX
 	jp .set_fire_projectile
 
-.Func_40851:
+.AttackedLeftStart:
 	ld a, HIGH(Func_3326)
 	ld c, LOW(Func_3326)
 	ld b, $02
 	ld de, Frameset_682c2
 	jr .asm_40865
 
-.Func_4085c:
+.AttackedRightStart:
 	ld a, HIGH(Func_3317)
 	ld c, LOW(Func_3317)
 	ld b, $02
@@ -54,7 +54,7 @@ WebberFunc: ; 40825 (10:4825)
 	ld a, b
 	ld [hld], a ; OBJ_UNK_18
 	ld a, 1 | (1 << 7)
-	ld [wCurObjUnk1c], a
+	ld [wCurObjAction], a
 	ret
 
 .set_smash_attacked:
@@ -62,7 +62,7 @@ WebberFunc: ; 40825 (10:4825)
 	ld [hld], a
 	ld a, [hl] ; OBJ_UNK_1A
 	rlca
-	jp c, ObjState_Vanish
+	jp c, VanishObject
 	ld a, [hl]
 	and $f0
 	or $5
@@ -80,11 +80,11 @@ WebberFunc: ; 40825 (10:4825)
 	ld a, [hl]
 	and a
 	jr z, .Default
-	cp OBJACTION_04
-	jr z, .Func_40851
-	cp OBJACTION_05
-	jr z, .Func_4085c
-	cp OBJACTION_VANISH
+	cp OBJSTATE_ATTACKED_LEFT_START
+	jr z, .AttackedLeftStart
+	cp OBJSTATE_ATTACKED_RIGHT_START
+	jr z, .AttackedRightStart
+	cp OBJSTATE_VANISH_TOUCH
 	jr z, .set_smash_attacked
 
 	xor a
@@ -159,9 +159,9 @@ WebberFunc: ; 40825 (10:4825)
 
 .move_up
 	ld hl, wCurObjFlags
-	bit OBJFLAG_UNK5_F, [hl]
+	bit OBJFLAG_STEPPED_F, [hl]
 	jr z, .not_stepped1
-	res OBJFLAG_UNK5_F, [hl]
+	res OBJFLAG_STEPPED_F, [hl]
 	ld a, [wGlobalCounter]
 	rra
 	ret nc
@@ -181,9 +181,9 @@ WebberFunc: ; 40825 (10:4825)
 
 .move_down
 	ld hl, wCurObjFlags
-	bit OBJFLAG_UNK5_F, [hl]
+	bit OBJFLAG_STEPPED_F, [hl]
 	jr z, .not_stepped2
-	res OBJFLAG_UNK5_F, [hl]
+	res OBJFLAG_STEPPED_F, [hl]
 	ld a, [wGlobalCounter]
 	rra
 	ret nc
@@ -254,7 +254,7 @@ WebberFunc: ; 40825 (10:4825)
 	cp $10
 	jp nc, .set_shake
 	ld hl, wCurObjFlags
-	bit OBJFLAG_UNK5_F, [hl]
+	bit OBJFLAG_STEPPED_F, [hl]
 	jr z, .not_stepped3
 	ld l, OBJ_UNK_1A
 	ld a, [hl]
@@ -325,7 +325,7 @@ WebberFunc: ; 40825 (10:4825)
 	ret z
 	ld a, [wEffectivePowerUp]
 	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
-	jp nc, ObjState_Vanish
+	jp nc, VanishObject
 	ld hl, wCurObjYPos
 	ldh a, [hYPosLo]
 	ld [hli], a
@@ -362,7 +362,7 @@ WebberFunc: ; 40825 (10:4825)
 
 .Climb:
 	ld a, 1 | (1 << 7)
-	ld [wCurObjUnk1c], a
+	ld [wCurObjAction], a
 	ld a, [wGroundShakeCounter]
 	cp $10
 	jp nc, .set_shake
@@ -382,7 +382,7 @@ WebberFunc: ; 40825 (10:4825)
 	cp $10
 	jp nc, .set_shake
 	ld l, OBJ_FLAGS
-	bit OBJFLAG_UNK5_F, [hl]
+	bit OBJFLAG_STEPPED_F, [hl]
 	ret z
 	ld l, OBJ_UNK_1A
 	ld a, [hl]
@@ -453,7 +453,7 @@ WebberProjectileFunc: ; 40ab1 (10:4ab1)
 
 .Destroy:
 	ld a, 1 | (1 << 7)
-	ld [wCurObjUnk1c], a
+	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz

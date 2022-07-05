@@ -23,7 +23,7 @@ StoveFunc: ; 4971c (12:571c)
 	ret
 
 .set_fall:
-	ld a, OBJACTION_FALL
+	ld a, OBJSTATE_FALL
 	ld [hld], a ; OBJ_STATE
 	dec l
 	xor a
@@ -52,7 +52,7 @@ StoveFunc: ; 4971c (12:571c)
 	ld [hli], a
 	ldh a, [hYPosHi]
 	ld [hl], a
-	ld a, OBJACTION_LAND
+	ld a, OBJSTATE_LAND
 	ld [wCurObjState], a
 	ld a, [wCurObjUnk17]
 	and a
@@ -64,31 +64,31 @@ StoveFunc: ; 4971c (12:571c)
 .Update:
 	ld hl, wCurObjState
 	ld a, [hl]
-	cp OBJACTION_FALL
+	cp OBJSTATE_FALL
 	jr z, .Fall
 	and a
 	jr z, .set_fall
-	cp OBJACTION_LAND
+	cp OBJSTATE_LAND
 	jp z, .Land
-	cp OBJACTION_34
+	cp OBJSTATE_ATTACKED_LEFT
 	jr z, .State34
-	cp OBJACTION_04
-	jr z, .State04
-	cp OBJACTION_35
-	jr z, .State35
-	cp OBJACTION_05
+	cp OBJSTATE_ATTACKED_LEFT_START
+	jr z, .AttackedLeftStart
+	cp OBJSTATE_ATTACKED_RIGHT
+	jr z, .AttackedRightStart
+	cp OBJSTATE_ATTACKED_RIGHT_START
 	jr z, .State05
-	cp OBJACTION_VANISH
-	jr z, .asm_497b6
-	cp OBJACTION_3A
+	cp OBJSTATE_VANISH_TOUCH
+	jr z, .VanishTouch
+	cp OBJSTATE_3A
 	jr z, .State3a
 	jp .set_fall
 
-.asm_497b6
+.VanishTouch
 	ld a, [wTransformation]
 	and a
 	jp nz, Func_3173
-	ld a, OBJACTION_3A
+	ld a, OBJSTATE_3A
 	ld [hl], a
 	ld de, Frameset_69625
 	call SetObjectFramesetPtr
@@ -102,8 +102,8 @@ StoveFunc: ; 4971c (12:571c)
 	ret nz
 	jr .set_land
 
-.State04:
-	ld a, OBJACTION_34
+.AttackedLeftStart:
+	ld a, OBJSTATE_ATTACKED_LEFT
 	jr .asm_49813
 
 .State34:
@@ -133,13 +133,13 @@ StoveFunc: ; 4971c (12:571c)
 	jp z, Func_3069
 
 .set_land
-	ld a, OBJACTION_LAND
+	ld a, OBJSTATE_LAND
 	ld [wCurObjState], a
 	ld de, Frameset_69615
 	jp SetObjectFramesetPtr
 
 .State05:
-	ld a, OBJACTION_35
+	ld a, OBJSTATE_ATTACKED_RIGHT
 .asm_49813
 	ld [hl], a ; OBJ_STATE
 	ld a, $02
@@ -147,7 +147,7 @@ StoveFunc: ; 4971c (12:571c)
 	ld de, Frameset_69618
 	jp SetObjectFramesetPtr
 
-.State35:
+.AttackedRightStart:
 	ld l, OBJ_UNK_18
 	ld a, [wGlobalCounter]
 	and %111
@@ -212,7 +212,7 @@ StoveFunc: ; 4971c (12:571c)
 	call Func_35a3
 	and a
 	ret nz
-	ld a, OBJACTION_00
+	ld a, OBJSTATE_00
 	ld [wCurObjState], a
 	inc a ; $1
 	ld [wCurObjUnk17], a

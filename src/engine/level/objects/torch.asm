@@ -228,7 +228,7 @@ TorchEmberCommonFunc: ; 40c51 (10:4c51)
 
 .Destroy:
 	ld a, 1 | (1 << 7)
-	ld [wCurObjUnk1c], a
+	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz

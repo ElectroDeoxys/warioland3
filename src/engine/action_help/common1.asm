@@ -1187,7 +1187,7 @@ ActionHelp_ShowEnemyVanish: ; 1fbd0f (7e:7d0f)
 	ld a, BANK(OAM_d20e)
 	ld [hl], a
 
-	play_sfx SFX_018
+	play_sfx SFX_VANISH
 	ret
 ; 0x1fbd2a
 

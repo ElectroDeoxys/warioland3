@@ -263,11 +263,11 @@ Func_640e5: ; 640e5 (19:40e5)
 	ld a, $21
 	ld [de], a ; OBJ_UNK_1A
 	inc e
-	xor a ; OBJACTION_00
+	xor a ; OBJSTATE_00
 	ld [de], a ; OBJ_STATE
 	inc e
-	ld a, $82
-	ld [de], a ; OBJ_UNK_1C
+	ld a, 2 | (1 << 7)
+	ld [de], a ; OBJ_ACTION
 	inc e
 	inc e
 	ld a, [hli]
@@ -458,8 +458,8 @@ CreateObject_GotPos:: ; 64352 (19:4352)
 	ld a, [hli]
 	ld [de], a ; OBJ_STATE
 	inc e
-	xor a
-	ld [de], a ; OBJ_UNK_1C
+	xor a ; OBJACTION_NONE
+	ld [de], a ; OBJ_ACTION
 	inc e
 	inc e
 	ld a, [hli]
@@ -540,7 +540,7 @@ FlameBlockTorchData:    object_data OAM_180838, $7, OBJ_INTERACTION_UNLIT_TORCH,
 FlameBlockData:         object_data OAM_1895ec, $b, OBJ_INTERACTION_SOLID,                      -30, FlameBlockFunc,         $0
 StoveData:              object_data OAM_1896e1, $c, OBJ_INTERACTION_STOVE          | HEAVY_OBJ, -32, StoveFunc,              $0
 UnusedFlowerData:       object_data OAM_180916, $6, OBJ_INTERACTION_01                        ,   0, UnusedFlowerFunc,       $0
-CountRichtertoffenData: object_data OAM_1809ff, $7, OBJ_INTERACTION_0F             | HEAVY_OBJ, -18, CountRichtertoffenFunc, OBJFLAG_UNK7
+CountRichtertoffenData: object_data OAM_1809ff, $7, OBJ_INTERACTION_RICHTERTOFFEN             | HEAVY_OBJ, -18, CountRichtertoffenFunc, OBJFLAG_UNK7
 HebariiData:            object_data OAM_18a703, $0, OBJ_INTERACTION_3D                        , -15, HebariiFunc,            $0
 
 Data_6446b: ; 6446b (19:446b)
@@ -1256,7 +1256,7 @@ ObjParams_HebariiProjectile: ; 6478b (19:478b)
 	db $00 ; unk18
 	db $00 ; movement index
 	db $00 ; unk1a
-	db OBJACTION_00 ; action
+	db OBJSTATE_00 ; action
 	dw HebariiProjectileFunc
 	db OBJFLAG_UNK7 ; obj flags
 ; 0x647a0
@@ -1274,7 +1274,7 @@ ObjParams_WebberProjectile: ; 647a0 (19:47a0)
 	db $00 ; unk18
 	db $00 ; movement index
 	db $00 ; unk1a
-	db OBJACTION_00 ; action
+	db OBJSTATE_00 ; action
 	dw WebberProjectileFunc
 	db OBJFLAG_UNK7 ; obj flags
 ; 0x647b5
@@ -1292,7 +1292,7 @@ ObjParams_UnusedFlowerProjectileLeft: ; 647b5 (19:47b5)
 	db $00 ; unk18
 	db $00 ; movement index
 	db $00 ; unk1a
-	db OBJACTION_00 ; action
+	db OBJSTATE_00 ; action
 	dw UnusedFlowerProjectileLeftFunc
 	db OBJFLAG_UNK7 ; obj flags
 
@@ -1309,7 +1309,7 @@ ObjParams_UnusedFlowerProjectileRight: ; 647ca (19:47ca)
 	db $00 ; unk18
 	db $00 ; movement index
 	db $80 ; unk1a
-	db OBJACTION_00 ; action
+	db OBJSTATE_00 ; action
 	dw UnusedFlowerProjectileRightFunc
 	db OBJFLAG_UNK7 ; obj flags
 
@@ -1328,7 +1328,7 @@ ObjParams_64a40: ; 64a40 (19:4a40)
 	db $00 ; unk18
 	db $00 ; movement index
 	db $00 ; unk1a
-	db OBJACTION_00 ; action
+	db OBJSTATE_00 ; action
 	dw $4970
 	db OBJFLAG_UNK7 ; obj flags
 ; 0x64a55
@@ -1346,7 +1346,7 @@ ObjParams_64a55: ; 64a55 (19:4a55)
 	db $00 ; unk18
 	db $00 ; movement index
 	db $00 ; unk1a
-	db OBJACTION_00 ; action
+	db OBJSTATE_00 ; action
 	dw $4975
 	db OBJFLAG_UNK7 ; obj flags
 ; 0x64a6a
@@ -1364,7 +1364,7 @@ ObjParams_64a6a: ; 64a6a (19:4a6a)
 	db $00 ; unk18
 	db $00 ; movement index
 	db $00 ; unk1a
-	db OBJACTION_00 ; action
+	db OBJSTATE_00 ; action
 	dw $497A
 	db OBJFLAG_UNK7 ; obj flags
 ; 0x64a7f
@@ -1382,7 +1382,7 @@ ObjParams_64a7f: ; 64a7f (19:4a7f)
 	db $00 ; unk18
 	db $00 ; movement index
 	db $00 ; unk1a
-	db OBJACTION_00 ; action
+	db OBJSTATE_00 ; action
 	dw $497F
 	db OBJFLAG_UNK7 ; obj flags
 ; 0x64a94
@@ -1402,7 +1402,7 @@ ObjParams_64e06: ; 64e06 (19:4e06)
 	db $00 ; unk18
 	db $00 ; movement index
 	db $00 ; unk1a
-	db OBJACTION_00 ; action
+	db OBJSTATE_00 ; action
 	dw $679C
 	db $0 ; obj flags
 ; 0x64e1b
@@ -1420,7 +1420,7 @@ ObjParams_64e1b: ; 64e1b (19:4e1b)
 	db $00 ; unk18
 	db $00 ; movement index
 	db $00 ; unk1a
-	db OBJACTION_00 ; action
+	db OBJSTATE_00 ; action
 	dw $679C
 	db $0 ; obj flags
 ; 0x64e30
@@ -1438,7 +1438,7 @@ ObjParams_TorchEmberLeft1: ; 64e80 (19:4e80)
 	db $00 ; unk18
 	db $00 ; movement index
 	db $00 ; unk1a
-	db OBJACTION_00 ; action
+	db OBJSTATE_00 ; action
 	dw TorchEmberLeft1Func
 	db OBJFLAG_UNK7 ; obj flags
 
@@ -1453,7 +1453,7 @@ ObjParams_TorchEmberRight1: ; 64e93 (19:4e93)
 	db $00 ; unk18
 	db $00 ; movement index
 	db $80 ; unk1a
-	db OBJACTION_00 ; action
+	db OBJSTATE_00 ; action
 	dw TorchEmberRight1Func
 	db OBJFLAG_UNK7 ; obj flags
 
@@ -1468,7 +1468,7 @@ ObjParams_TorchEmberLeft2: ; 64ea6 (19:4ea6)
 	db $00 ; unk18
 	db $00 ; movement index
 	db $00 ; unk1a
-	db OBJACTION_00 ; action
+	db OBJSTATE_00 ; action
 	dw TorchEmberLeft2Func
 	db OBJFLAG_UNK7 ; obj flags
 
@@ -1483,7 +1483,7 @@ ObjParams_TorchEmberRight2: ; 64eb9 (19:4eb9)
 	db $00 ; unk18
 	db $00 ; movement index
 	db $80 ; unk1a
-	db OBJACTION_00 ; action
+	db OBJSTATE_00 ; action
 	dw TorchEmberRight2Func
 	db OBJFLAG_UNK7 ; obj flags
 ; 0x64ecc

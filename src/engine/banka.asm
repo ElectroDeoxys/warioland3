@@ -437,7 +437,7 @@ SetState_FlatAirborne: ; 28435 (a:4435)
 	ld b, $0
 	ld a, [wObjInteractionType]
 	and INTERACTION_MASK
-	sub OBJ_INTERACTION_0F
+	sub OBJ_INTERACTION_RICHTERTOFFEN
 	jr z, .asm_2846a
 	ld a, $01
 	ld [wWarioStateCounter], a

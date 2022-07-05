@@ -2857,7 +2857,7 @@ UpdateState_ThrowFullyCharged: ; 1dd7f (7:5d7f)
 	ld a, [wGrabState]
 	and a
 	jp z, SetState_Idling
-	and $ff ^ (GRAB_FLAGS_MASK)
+	and GRAB_STATE_MASK
 	cp GRAB_HOLD_FULL_CHARGE
 	jr z, .asm_1dde0
 	ld a, [wWarioStateCounter]

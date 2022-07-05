@@ -160,7 +160,7 @@ Func_42535: ; 42535 (10:6535)
 	ld a, $3c
 	ld [hli], a
 	ld l, OBJ_FLAGS
-	res OBJFLAG_UNK5_F, [hl]
+	res OBJFLAG_STEPPED_F, [hl]
 	ret
 ; 0x42554
 

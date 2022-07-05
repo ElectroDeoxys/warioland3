@@ -39,7 +39,7 @@ Func_20000: ; 20000 (8:4000)
 	add hl, de
 	ld a, [hld]
 	ld [wc1b8], a
-	ld a, [hl] ; OBJ_UNK_1c
+	ld a, [hl] ; OBJ_ACTION
 	pop hl
 	and a
 	jr nz, .next_obj
@@ -223,7 +223,7 @@ Func_20000: ; 20000 (8:4000)
 	dw ObjInteraction_Walkable         ; OBJ_INTERACTION_WALKABLE
 	dw ObjInteraction_MusicalCoin      ; OBJ_INTERACTION_MUSICAL_COIN
 	dw ObjInteraction_Fire             ; OBJ_INTERACTION_FIRE
-	dw Func_20f6a                      ; OBJ_INTERACTION_0F
+	dw ObjInteraction_Richtertoffen    ; OBJ_INTERACTION_RICHTERTOFFEN
 	dw ObjInteraction_GreyKey          ; OBJ_INTERACTION_GREY_KEY
 	dw ObjInteraction_RedKey           ; OBJ_INTERACTION_RED_KEY
 	dw ObjInteraction_GreenKey         ; OBJ_INTERACTION_GREEN_KEY
@@ -303,7 +303,9 @@ ObjInteraction_None: ; 20202 (8:4202)
 	ret
 ; 0x20203
 
-Func_20203: ; 20203 (8:4203)
+; clears the screen from objects
+; when opening a treasure
+TreasureClearObjects: ; 20203 (8:4203)
 	ld hl, wObjects
 	ld de, OBJ_STRUCT_LENGTH
 .loop_objects
@@ -313,21 +315,21 @@ Func_20203: ; 20203 (8:4203)
 	ld a, [hl] ; OBJ_FLAGS
 	and OBJFLAG_UNK0 | OBJFLAG_UNK1
 	cp OBJFLAG_UNK0
-	jr z, .asm_2021b
+	jr z, .vanish_obj
 	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
-	jr z, .asm_2021b
+	jr z, .vanish_obj
 .next_obj
 	add hl, de
 	jr .loop_objects
-.asm_2021b
+.vanish_obj
 	ld a, [wObjPtr + 1]
 	cp l
 	jr z, .next_obj
 	push hl
-	ld c, OBJ_UNK_1C
+	ld c, OBJ_ACTION
 	ld b, $00
 	add hl, bc
-	ld [hl], $08
+	ld [hl], OBJACTION_VANISH_TREASURE
 	pop hl
 	jr .next_obj
 ; 0x2022c
@@ -360,8 +362,8 @@ Func_2023b: ; 2023b (8:423b)
 	and a
 	jp nz, AttackObject
 
-	ld b, $01
-	call SetObjUnk1C
+	ld b, OBJACTION_BUMP
+	call SetObjAction
 
 	ld a, [wInvincibleCounter]
 	cp $01
@@ -509,8 +511,8 @@ AttackObject: ; 20350 (8:4350)
 .asm_203a0
 	ld b, PARTICLE_STARS
 	farcall CreateParticle
-	ld b, $02
-	call SetObjUnk1C
+	ld b, OBJACTION_ATTACK
+	call SetObjAction
 	ld a, [wTransformation]
 	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
 	jr z, .fat
@@ -615,7 +617,7 @@ StepOnObject: ; 20447 (8:4447)
 	jr c, .asm_20506
 
 	ld a, [wGrabState]
-	and $ff ^ (GRAB_FLAGS_MASK)
+	and GRAB_STATE_MASK
 	cp GRAB_IDLE
 	jr z, .grabbing
 ; clear grab state
@@ -663,7 +665,7 @@ StepOnObject: ; 20447 (8:4447)
 	jr nz, .crouching_2
 
 	ld a, [wGrabState]
-	and $ff ^ (GRAB_FLAGS_MASK)
+	and GRAB_STATE_MASK
 	cp GRAB_IDLE
 	jr z, .asm_20547
 	xor a
@@ -696,8 +698,8 @@ StepOnObject: ; 20447 (8:4447)
 	call Func_20939
 .asm_20578
 	play_sfx SFX_014
-	ld b, $04
-	jp SetObjUnk1C
+	ld b, OBJACTION_WOBBLE
+	jp SetObjAction
 
 .Transformed
 	ld a, [wTransformation]
@@ -726,8 +728,8 @@ StepOnObject: ; 20447 (8:4447)
 	ld [wInteractionSide], a
 .asm_205b7
 	play_sfx SFX_014
-	ld b, $04
-	call SetObjUnk1C
+	ld b, OBJACTION_WOBBLE
+	call SetObjAction
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
 	jp z, Func_2028a
@@ -743,8 +745,8 @@ StepOnObject: ; 20447 (8:4447)
 ; 0x205e7
 
 Func_205e7: ; 205e7 (8:45e7)
-	ld b, $05
-	call SetObjUnk1C
+	ld b, OBJACTION_VANISH_TOUCH
+	call SetObjAction
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_ZOMBIE_WARIO
 	ret nz
@@ -760,7 +762,7 @@ Func_20602: ; 20602 (8:4602)
 	jr nz, Func_205e7
 .asm_2060c
 	ld a, [wGrabState]
-	and $ff ^ (GRAB_FLAGS_MASK)
+	and GRAB_STATE_MASK
 	cp GRAB_IDLE
 	jr z, .asm_2062a
 	xor a
@@ -783,15 +785,15 @@ Func_20602: ; 20602 (8:4602)
 	xor a
 	ld [wJumpVelIndex], a
 .asm_20655
-	ld b, $05
+	ld b, OBJACTION_VANISH_TOUCH
 ;	fallthrough
 
-SetObjUnk1C: ; 20657 (8:4657)
+SetObjAction: ; 20657 (8:4657)
 	ld a, [wObjPtr + 0]
 	ld h, a
 	ld a, [wObjPtr + 1]
 	ld l, a
-	ld e, OBJ_UNK_1C
+	ld e, OBJ_ACTION
 	ld d, $00
 	add hl, de
 	ld [hl], b
@@ -861,8 +863,8 @@ Func_20670: ; 20670 (8:4670)
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
 .asm_206d7
-	ld b, $06
-	call SetObjUnk1C
+	ld b, OBJACTION_06
+	call SetObjAction
 	ld a, [wInvincibleCounter]
 	cp $01
 	ret z
@@ -994,8 +996,8 @@ Func_207ed: ; 207ed (8:47ed)
 	ret
 
 .asm_20808
-	ld b, $06
-	call SetObjUnk1C
+	ld b, OBJACTION_06
+	call SetObjAction
 ;	fallthrough
 
 SetState_WaterStung: ; 2080d (8:480d)
@@ -1066,8 +1068,8 @@ Func_20899: ; 20899 (8:4899)
 	ld [wInteractionSide], a
 .asm_208ca
 	play_sfx SFX_014
-	ld b, $04
-	call SetObjUnk1C
+	ld b, OBJACTION_WOBBLE
+	call SetObjAction
 	ld a, [wTransformation]
 	and a
 	ret nz
@@ -1081,9 +1083,9 @@ Func_20899: ; 20899 (8:4899)
 Func_208f2: ; 208f2 (8:48f2)
 	jr .start
 
-.Func_208f4
-	ld b, $01
-	call SetObjUnk1C
+.Bump
+	ld b, OBJACTION_BUMP
+	call SetObjAction
 	ret
 
 .start
@@ -1100,7 +1102,7 @@ Func_208f2: ; 208f2 (8:48f2)
 	ld a, [wWaterInteraction]
 	and a
 	ret z
-	call .Func_208f4
+	call .Bump
 	ld a, [wInvincibleCounter]
 	cp $01
 	ret z
@@ -1112,8 +1114,8 @@ Func_208f2: ; 208f2 (8:48f2)
 ; 0x2092d
 
 Func_2092d: ; 2092d (8:492d)
-	ld b, $05
-	jp SetObjUnk1C
+	ld b, OBJACTION_VANISH_TOUCH
+	jp SetObjAction
 ; 0x20932
 
 Func_20932: ; 20932 (8:4932)
@@ -1126,8 +1128,8 @@ Func_20939: ; 20939 (8:4939)
 	ld a, [wTouchState]
 	and a
 	jp nz, Func_2023b
-	ld b, $06
-	call SetObjUnk1C
+	ld b, OBJACTION_06
+	call SetObjAction
 	ld a, [wInvincibleCounter]
 	cp $01
 	ret z
@@ -1180,16 +1182,16 @@ Func_209ca: ; 209ca (8:49ca)
 	ld [wIsOnSteppableObject], a
 	ld a, [wc1c1]
 	and a
-	jr z, .asm_209f5
+	jr z, .set_stepped_on
 	cp $03
 	jr c, .asm_209f1
 	ld a, $02
 .asm_209f1
 	ld b, a
 	call SubYOffset
-.asm_209f5
-	ld b, $09
-	call SetObjUnk1C
+.set_stepped_on
+	ld b, OBJACTION_STEP_ON
+	call SetObjAction
 	ld a, [wJumpVelTable]
 	and a
 	jr z, .done
@@ -1230,14 +1232,14 @@ Func_209ca: ; 209ca (8:49ca)
 ; 0x20a63
 
 Func_20a63: ; 20a63 (8:4a63)
-	ld b, $07
-	call SetObjUnk1C
+	ld b, OBJACTION_07
+	call SetObjAction
 	ret
 ; 0x20a69
 
 Func_20a69: ; 20a69 (8:4a69)
-	ld b, $0d
-	call SetObjUnk1C
+	ld b, OBJACTION_0D
+	call SetObjAction
 	ret
 ; 0x20a6f
 
@@ -1341,8 +1343,8 @@ Func_20b41: ; 20b41 (8:4b41)
 	and a
 	ret nz
 	call Func_20939
-	ld b, $12
-	jp SetObjUnk1C
+	ld b, OBJACTION_12
+	jp SetObjAction
 ; 0x20b6b
 
 Func_20b6b: ; 20b6b (8:4b6b)
@@ -1433,7 +1435,7 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	jr nz, .heavy_obj
 	ld a, GRAB_PICK_UP
 	ld [wGrabState], a
-	jr .asm_20c1d
+	jr .set_obj_pick_up
 .heavy_obj
 	ld a, [wPowerUpLevel]
 	cp POWER_UP_SUPER_GRAB_GLOVES
@@ -1441,13 +1443,13 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	ld a, GRAB_PICK_UP | (1 << GRAB_HEAVY_F)
 	ld [wGrabState], a
 
-.asm_20c1d
-	ld b, $03
-	call SetObjUnk1C
+.set_obj_pick_up
+	ld b, OBJACTION_PICK_UP
+	call SetObjAction
 
 	ld a, [wJumpVelTable]
 	and a
-	jr z, .pick_up
+	jr z, .set_wario_pick_up
 	ld a, [wObjInteractionType]
 	bit HEAVY_OBJ_F, a
 	jr z, .asm_20c31
@@ -1473,7 +1475,7 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	ld [wInteractionSide], a
 	jp Func_2023b
 
-.pick_up
+.set_wario_pick_up
 	play_sfx SFX_GRAB
 
 	xor a
@@ -1708,8 +1710,8 @@ Func_20e6a: ; 20e6a (8:4e6a)
 	ld a, [wTouchState]
 	and a
 	ret nz
-	ld b, $0a
-	jp SetObjUnk1C
+	ld b, OBJACTION_0A
+	jp SetObjAction
 ; 0x20e77
 
 ObjInteraction_Walkable: ; 20e77 (8:4e77)
@@ -1730,8 +1732,8 @@ ObjInteraction_MusicalCoin: ; 20e82 (8:4e82)
 ; 0x20e97
 
 ObjInteraction_Fire: ; 20e97 (8:4e97)
-	ld b, $06
-	call SetObjUnk1C
+	ld b, OBJACTION_06
+	call SetObjAction
 
 	ld a, [wInvincibleCounter]
 	and a
@@ -1814,12 +1816,12 @@ SetState_OnFire: ; 20ed3 (8:4ed3)
 	ret
 ; 0x20f6a
 
-Func_20f6a: ; 20f6a (8:4f6a)
+ObjInteraction_Richtertoffen: ; 20f6a (8:4f6a)
 	ld a, [wInteractionSide]
 	bit INTERACTION_UP_F, a
 	jr nz, .asm_20f78
 	bit INTERACTION_DOWN_F, a
-	jr nz, .asm_20f82
+	jr nz, .try_flatten_wario
 	jp Func_20932
 
 .asm_20f78
@@ -1827,7 +1829,8 @@ Func_20f6a: ; 20f6a (8:4f6a)
 	dec a
 	jp z, Func_20602
 	jp StepOnObject
-.asm_20f82
+
+.try_flatten_wario
 	ld a, [wInvincibleCounter]
 	and a
 	ret nz
@@ -1849,8 +1852,8 @@ Func_20f6a: ; 20f6a (8:4f6a)
 	ld a, b
 	and a
 	jr nz, .asm_20fdb
-	ld b, $0b
-	call SetObjUnk1C
+	ld b, OBJACTION_FLATTEN
+	call SetObjAction
 	farcall SetState_FlatAirborne
 	ret
 
@@ -1864,8 +1867,8 @@ Func_20f6a: ; 20f6a (8:4f6a)
 
 ; unreferenced?
 Func_20fe8: ; 20fe8 (8:4fe8)
-	ld b, $06
-	jp SetObjUnk1C
+	ld b, OBJACTION_06
+	jp SetObjAction
 ; 0x20fed
 
 ObjInteraction_GreyKey: ; 20fed (8:4fed)
@@ -1967,7 +1970,7 @@ ObjInteraction_BlueTreasure: ; 2107c (8:507c)
 GetTreasure: ; 2109a (8:509a)
 	stop_music
 	call Func_20a63
-	call Func_20203
+	call TreasureClearObjects
 
 	ld hl, wLevelEndScreen
 	ld a, [hl]
@@ -2035,8 +2038,8 @@ Func_21156: ; 21156 (8:5156)
 	ld a, [wJumpVelTable]
 	and a
 	jp nz, Func_2022c
-	ld b, $0c
-	call SetObjUnk1C
+	ld b, OBJACTION_0C
+	call SetObjAction
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
 	jp z, SetState_FlatStretching
@@ -2151,8 +2154,8 @@ Func_2126a: ; 2126a (8:526a)
 	jp Func_2022c
 
 .asm_21290
-	ld b, $06
-	call SetObjUnk1C
+	ld b, OBJACTION_06
+	call SetObjAction
 
 	ld a, [wInvincibleCounter]
 	and a
@@ -2343,8 +2346,8 @@ Func_21455: ; 21455 (8:5455)
 	or INTERACTION_LEFT
 	ld [wInteractionSide], a
 .asm_21471
-	ld b, $06
-	call SetObjUnk1C
+	ld b, OBJACTION_06
+	call SetObjAction
 
 	ld a, [wInvincibleCounter]
 	and a
@@ -2458,8 +2461,8 @@ Func_21573: ; 21573 (8:5573)
 	ld a, [wTransformation]
 	cp TRANSFORMATION_OWL_WARIO
 	call z, ReleaseOwl
-	ld b, $06
-	call SetObjUnk1C
+	ld b, OBJACTION_06
+	call SetObjAction
 	farcall SetState_PuffyInflating
 	ret
 ; 0x215a2
@@ -2474,8 +2477,8 @@ Func_215a2: ; 215a2 (8:55a2)
 	bit 6, a
 	jp nz, Func_20a69
 
-	ld b, $06
-	call SetObjUnk1C
+	ld b, OBJACTION_06
+	call SetObjAction
 
 	play_sfx SFX_028
 
@@ -2513,8 +2516,8 @@ Func_2160a: ; 2160a (8:560a)
 	ld a, [wInvincibleCounter]
 	and a
 	ret nz
-	ld b, $06
-	call SetObjUnk1C
+	ld b, OBJACTION_06
+	call SetObjAction
 	ld a, [wTransformation]
 	bit 6, a
 	jp nz, Func_2022c
@@ -2667,8 +2670,8 @@ Func_21774: ; 21774 (8:5774)
 	ld a, [wTransformation]
 	bit 6, a
 	ret nz
-	ld b, $0b
-	call SetObjUnk1C
+	ld b, OBJACTION_FLATTEN
+	call SetObjAction
 	farcall SetState_FlatAirborne
 	ret
 ; 0x217a9
@@ -2707,8 +2710,8 @@ Func_217b9: ; 217b9 (8:57b9)
 	cp TRANSFORMATION_CRAZY_WARIO
 	jp z, Func_2022c
 
-	ld b, $06
-	call SetObjUnk1C
+	ld b, OBJACTION_06
+	call SetObjAction
 
 	ld a, TRANSFORMATION_CRAZY_WARIO
 	ld [wTransformation], a
@@ -2730,8 +2733,8 @@ Func_21819: ; 21819 (8:5819)
 	bit 6, a
 	ret nz
 
-	ld b, $06
-	call SetObjUnk1C
+	ld b, OBJACTION_06
+	call SetObjAction
 
 	ld a, (1 << 6) | TRANSFORMATION_VAMPIRE_WARIO
 	ld [wTransformation], a
@@ -2751,8 +2754,8 @@ ObjInteraction_Bubble: ; 21853 (8:5853)
 	bit 6, a
 	ret nz
 
-	ld b, $07
-	call SetObjUnk1C
+	ld b, OBJACTION_07
+	call SetObjAction
 
 	ld a, (1 << 6) | TRANSFORMATION_BUBBLE
 	ld [wTransformation], a
@@ -2787,8 +2790,8 @@ Func_21887: ; 21887 (8:5887)
 	ret
 
 .asm_218b6
-	ld b, $07
-	call SetObjUnk1C
+	ld b, OBJACTION_07
+	call SetObjAction
 
 	play_sfx SFX_028
 	ld a, (1 << 6) | TRANSFORMATION_ICE_SKATIN
@@ -2873,8 +2876,8 @@ ObjInteraction_Rail: ; 21999 (8:5999)
 	cp TRANSFORMATION_RAIL
 	ret z
 
-	ld b, $06
-	call SetObjUnk1C
+	ld b, OBJACTION_06
+	call SetObjAction
 
 	play_sfx SFX_HANG_GRAB
 	ld a, TRANSFORMATION_RAIL
@@ -2968,8 +2971,8 @@ ObjInteraction_UnlitTorch: ; 21a8c (8:5a8c)
 	ld a, [wTransformation]
 	cp (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
 	ret nz
-	ld b, $0e
-	jp SetObjUnk1C
+	ld b, OBJACTION_0E
+	jp SetObjAction
 ; 0x21a97
 
 ObjInteraction_Stove: ; 21a97 (8:5a97)
@@ -2988,14 +2991,15 @@ Func_21aac: ; 21aac (8:5aac)
 	ld a, [wIsSmashAttacking]
 	dec a
 	jp nz, Func_209ca
+; smash attack object
 	call Func_20602
-	ld b, $0f
-	jp SetObjUnk1C
+	ld b, OBJ_ACTION_SMASH_ATTACK_WALKABLE
+	jp SetObjAction
 ; 0x21abb
 
 Func_21abb: ; 21abb (8:5abb)
-	ld b, $02
-	call SetObjUnk1C
+	ld b, OBJACTION_ATTACK
+	call SetObjAction
 	jp Func_20a6f
 ; 0x21ac3
 
@@ -3043,8 +3047,8 @@ Func_21b08: ; 21b08 (8:5b08)
 ; 0x21b0b
 
 Func_21b0b: ; 21b0b (8:5b0b)
-	ld b, $06
-	call SetObjUnk1C
+	ld b, OBJACTION_06
+	call SetObjAction
 	ld a, [wIsRolling]
 	and a
 	ret nz
@@ -3065,8 +3069,8 @@ Func_21b2b: ; 21b2b (8:5b2b)
 
 Func_21b3a: ; 21b3a (8:5b3a)
 	call Func_20939
-	ld b, $00
-	jp SetObjUnk1C
+	ld b, OBJACTION_NONE
+	jp SetObjAction
 ; 0x21b42
 
 Func_21b42: ; 21b42 (8:5b42)
@@ -3077,8 +3081,8 @@ Func_21b42: ; 21b42 (8:5b42)
 	bit 6, a
 	jp nz, Func_2022c
 
-	ld b, $06
-	call SetObjUnk1C
+	ld b, OBJACTION_06
+	call SetObjAction
 
 	ld a, (1 << 6) | TRANSFORMATION_SPLIT
 	ld [wTransformation], a
@@ -3115,8 +3119,8 @@ Func_21b89: ; 21b89 (8:5b89)
 	bit 6, a
 	jp nz, Func_2022c
 
-	ld b, $06
-	call SetObjUnk1C
+	ld b, OBJACTION_06
+	call SetObjAction
 
 	ld a, (1 << 6) | TRANSFORMATION_BLIND
 	ld [wTransformation], a
@@ -3173,8 +3177,8 @@ ENDR
 ; 0x21c17
 
 Func_21c17: ; 21c17 (8:5c17)
-	ld b, $06
-	call SetObjUnk1C
+	ld b, OBJACTION_06
+	call SetObjAction
 	ld a, [wTransformation]
 	and a
 	jp z, Func_20000.next_obj
@@ -3195,8 +3199,8 @@ Func_21c26: ; 21c26 (8:5c26)
 	jr nz, .asm_21c41
 	jp Func_207ed
 .asm_21c41
-	ld b, $11
-	call SetObjUnk1C
+	ld b, OBJACTION_11
+	call SetObjAction
 	farcall SetState_UnknownE0
 	ret
 ; 0x21c56
@@ -3260,8 +3264,8 @@ Func_21ca8: ; 21ca8 (8:5ca8)
 ;	fallthrough
 
 Func_21cc9: ; 21cc9 (8:5cc9)
-	ld b, $13
-	call SetObjUnk1C
+	ld b, OBJACTION_13
+	call SetObjAction
 	ret
 ; 0x21ccf
 
@@ -3272,8 +3276,8 @@ ObjInteraction_WaterTeleporting: ; 21ccf (8:5ccf)
 	stop_sfx
 	ld a, WST_WATER_TELEPORTING
 	ld [wWarioState], a
-	ld b, $10
-	jp SetObjUnk1C
+	ld b, OBJ_ACTION_TELEPORT
+	jp SetObjAction
 ; 0x21ce9
 
 Func_21ce9: ; 21ce9 (8:5ce9)
@@ -3286,8 +3290,8 @@ Func_21ce9: ; 21ce9 (8:5ce9)
 ; 0x21cf8
 
 Func_21cf8: ; 21cf8 (8:5cf8)
-	ld b, $06
-	jp SetObjUnk1C
+	ld b, OBJACTION_06
+	jp SetObjAction
 ; 0x21cfd
 
 Func_21cfd: ; 21cfd (8:5cfd)
@@ -3297,8 +3301,8 @@ Func_21cfd: ; 21cfd (8:5cfd)
 	stop_sfx
 	ld a, WST_TELEPORTING
 	ld [wWarioState], a
-	ld b, $10
-	jp SetObjUnk1C
+	ld b, OBJ_ACTION_TELEPORT
+	jp SetObjAction
 ; 0x21d17
 
 Func_21d17: ; 21d17 (8:5d17)
@@ -3384,8 +3388,8 @@ Func_21dac: ; 21dac (8:5dac)
 	ld a, [wEnemyDirection]
 	ld [wDirection], a
 	farcall SetState_UnknownE1
-	ld b, $06
-	jp SetObjUnk1C
+	ld b, OBJACTION_06
+	jp SetObjAction
 ; 0x21dd3
 
 ObjInteraction_ColourCoin: ; 21dd3 (8:5dd3)
@@ -3421,8 +3425,8 @@ Func_21df8: ; 21df8 (8:5df8)
 	ld a, [wTransformation]
 	bit 6, a
 	jp nz, Func_2022c
-	ld b, $06
-	call SetObjUnk1C
+	ld b, OBJACTION_06
+	call SetObjAction
 
 	ld a, (1 << 6) | TRANSFORMATION_MAGIC
 	ld [wTransformation], a
@@ -3464,8 +3468,8 @@ Func_21e3e: ; 21e3e (8:5e3e)
 	ld a, [wTransformation]
 	bit 6, a
 	jp nz, Func_2022c
-	ld b, $06
-	call SetObjUnk1C
+	ld b, OBJACTION_06
+	call SetObjAction
 	ld a, (1 << 6) | TRANSFORMATION_BALL
 	ld [wTransformation], a
 

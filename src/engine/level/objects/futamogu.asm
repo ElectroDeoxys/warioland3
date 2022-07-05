@@ -46,9 +46,9 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	jr z, .set_idle
 .check_stepped_on
 	ld l, OBJ_FLAGS
-	bit OBJFLAG_UNK5_F, [hl]
+	bit OBJFLAG_STEPPED_F, [hl]
 	jr z, .not_stepped_on
-	res OBJFLAG_UNK5_F, [hl]
+	res OBJFLAG_STEPPED_F, [hl]
 
 	; move upwards at 0.5 pixels
 	ld a, [wGlobalCounter]
@@ -71,9 +71,9 @@ FutamoguFunc: ; 406c4 (10:46c4)
 
 .Angry:
 	ld l, OBJ_FLAGS
-	bit OBJFLAG_UNK5_F, [hl]
+	bit OBJFLAG_STEPPED_F, [hl]
 	jr z, .set_idle
-	res OBJFLAG_UNK5_F, [hl]
+	res OBJFLAG_STEPPED_F, [hl]
 	ret
 
 .set_idle
@@ -90,19 +90,19 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	ld a, [hl]
 	and a
 	jr z, .Idle
-	cp OBJACTION_SPECIAL_3
+	cp OBJSTATE_SPECIAL_3
 	jr z, .Climb
-	cp OBJACTION_SPECIAL_2
+	cp OBJSTATE_SPECIAL_2
 	jr z, .Angry
-	cp OBJACTION_34
+	cp OBJSTATE_ATTACKED_LEFT
 	jr z, .Shake
-	cp OBJACTION_VANISH
+	cp OBJSTATE_VANISH_TOUCH
 	jr z, .asm_407bf
-	cp OBJACTION_3A
+	cp OBJSTATE_3A
 	jp z, .Fall
 	and $fe
-	cp OBJACTION_04
-	jr z, .asm_407ab
+	cp OBJSTATE_ATTACKED_LEFT_START
+	jr z, .Attacked
 	jr .set_idle
 
 .Idle
@@ -111,7 +111,7 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	jr c, .no_shake
 
 .set_shake
-	ld a, OBJACTION_34
+	ld a, OBJSTATE_ATTACKED_LEFT
 	ld [hl], a ; OBJ_STATE
 
 	ld de, Frameset_68348
@@ -133,7 +133,7 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	jr z, .asm_4079a
 .asm_4078c
 	ld l, OBJ_STATE
-	ld a, OBJACTION_SPECIAL_3
+	ld a, OBJSTATE_SPECIAL_3
 	ld [hld], a
 	res 7, [hl] ; OBJ_UNK_1A
 	ld de, Frameset_68336
@@ -142,20 +142,20 @@ FutamoguFunc: ; 406c4 (10:46c4)
 
 .asm_4079a
 	ld l, OBJ_FLAGS
-	bit OBJFLAG_UNK5_F, [hl]
+	bit OBJFLAG_STEPPED_F, [hl]
 	ret z
-	ld a, OBJACTION_SPECIAL_2
+	ld a, OBJSTATE_SPECIAL_2
 	ld [wCurObjState], a
 	ld de, Frameset_68343
 	call SetObjectFramesetPtr
 	ret
 
-.asm_407ab
-	ld a, OBJACTION_34
+.Attacked
+	ld a, OBJSTATE_ATTACKED_LEFT
 	ld [hl], a ; OBJ_STATE
 	ld de, Frameset_68351
 	call SetObjectFramesetPtr
-	ld a, $10
+	ld a, 16
 	ld [hli], a ; OBJ_STATE_DURATION
 	ret
 
@@ -170,7 +170,7 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	ld a, [hli] ; OBJ_UNK_1A
 	rlca
 	jr c, .vanish
-	ld a, OBJACTION_3A
+	ld a, OBJSTATE_3A
 	ld [hld], a ; OBJ_STATE
 	dec l
 	xor a
@@ -228,5 +228,5 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	ld a, $08
 	ld [wCurObjUnk18], a
 	call Func_305c
-	jp ObjState_Vanish
+	jp VanishObject
 ; 0x40825

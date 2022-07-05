@@ -62,7 +62,7 @@ MACRO obj_struct
 \1Unk1a::           db
 ; bit 7: set if facing right, left otherwise
 \1State::           db
-\1Unk1c::           db
+\1Action::           db
 \1Unk1d::           db
 \1UpdateFunction::  dw
 ENDM

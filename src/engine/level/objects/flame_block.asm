@@ -49,7 +49,7 @@ FlameBlockFunc: ; 496bd (12:56bd)
 	cp 25
 	jr nc, .asm_49715
 	ld a, 1 | (1 << 7)
-	ld [wCurObjUnk1c], a
+	ld [wCurObjAction], a
 .asm_49715
 	dec [hl]
 	ret nz
