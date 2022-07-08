@@ -106,9 +106,9 @@ Func_80aa: ; 80aa (2:40aa)
 	ld a, [wCameraConfigFlags]
 	cp HIDDEN_FIGURE_CAMCONFIG
 	jr z, .asm_80fc
-	ld a, [wcac5]
+	ld a, [wcac4 + 1]
 	ld [wSCY], a
-	ld a, [wcac7]
+	ld a, [wcac6 + 1]
 	ld [wSCX], a
 	jr .asm_8112
 .asm_80fc
@@ -376,9 +376,9 @@ Func_80aa: ; 80aa (2:40aa)
 	ld [wc0da], a
 	farcall Func_1c000
 
-	ld a, [wcac5]
+	ld a, [wcac4 + 1]
 	ld [wSCY], a
-	ld a, [wcac7]
+	ld a, [wcac6 + 1]
 	ld [wSCX], a
 
 	xor a
@@ -428,9 +428,9 @@ Func_80aa: ; 80aa (2:40aa)
 	ld [wc0da], a
 	farcall Func_1c000
 
-	ld a, [wcac5]
+	ld a, [wcac4 + 1]
 	ld [wSCY], a
-	ld a, [wcac7]
+	ld a, [wcac6 + 1]
 	ld [wSCX], a
 
 	xor a
@@ -909,12 +909,12 @@ Func_8747: ; 8747 (2:4747)
 	jr nz, .not_the_temple
 
 	xor a
-	ld a, [wcac5]
+	ld a, [wcac4 + 1]
 	ld [wc08a], a
 	ld [wc089], a
 	ld [wSCY], a
 	ldh [rSCY], a
-	ld a, [wcac7]
+	ld a, [wcac6 + 1]
 	ld [wc08c], a
 	ld [wc08b], a
 	ld [wSCX], a
@@ -1203,9 +1203,9 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 	jr nz, .asm_8af7
 .asm_8aea
 	ld a, [wXPosHi]
-	ld [wcac6], a
+	ld [wcac6 + 0], a
 	ld a, $30
-	ld [wcac7], a
+	ld [wcac6 + 1], a
 	jr .asm_8b69
 .asm_8af7
 	ld a, [wDirection]
@@ -1222,11 +1222,11 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 .asm_8b0b
 	ld a, [wXPosLo]
 	sub b
-	ld [wcac7], a
+	ld [wcac6 + 1], a
 	ld l, a
 	ld a, [wXPosHi]
 	sbc $00
-	ld [wcac6], a
+	ld [wcac6 + 0], a
 	ld h, a
 	ld a, [wCameraConfigFlags]
 	bit CAMCONFIG_EDGE_LEFT_F, a
@@ -1247,7 +1247,7 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 	jr nz, .asm_8b44
 .asm_8b39
 	ld a, b
-	ld [wcac6], a
+	ld [wcac6 + 0], a
 	ld a, $01
 	ld [wc0b5], a
 	jr .asm_8b69
@@ -1270,7 +1270,7 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 	jr c, .asm_8b69
 	ld a, b
 	dec a
-	ld [wcac6], a
+	ld [wcac6 + 0], a
 	ld a, $ff
 	ld [wc0b5], a
 .asm_8b69
@@ -1287,11 +1287,11 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 
 	ld a, [wYPosLo]
 	sub $60
-	ld [wcac5], a
+	ld [wcac4 + 1], a
 	ld l, a
 	ld a, [wYPosHi]
 	sbc $00
-	ld [wcac4], a
+	ld [wcac4 + 0], a
 	ld h, a
 	ld a, [wCameraConfigFlags]
 	bit CAMCONFIG_EDGE_UP_F, a
@@ -1313,7 +1313,7 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 	jr nz, .asm_8bb5
 .asm_8bab
 	ld a, b
-	ld [wcac4], a
+	ld [wcac4 + 0], a
 	ld a, $01
 	ld [wcac8], a
 	ret
@@ -1336,7 +1336,7 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 	jr c, .asm_8bdb
 	ld a, b
 	dec a
-	ld [wcac4], a
+	ld [wcac4 + 0], a
 	ld a, $ff
 	ld [wcac8], a
 	ret
@@ -1352,33 +1352,33 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 	ld b, a
 	ld a, [wYPosHi]
 	dec a
-	ld [wcac4], a
+	ld [wcac4 + 0], a
 	cp b
 	jr c, .asm_8bab
 	bit 7, a
 	jr z, .asm_8c06
 
 	xor a
-	ld [wcac4], a
+	ld [wcac4 + 0], a
 	ld a, $01
 	ld [wcac8], a
 	ret
 
 .asm_8c06
 	ld a, $e8
-	ld [wcac5], a
+	ld [wcac4 + 1], a
 	ret
 
 .asm_8c0c
 	ld a, $68
-	ld [wcac5], a
+	ld [wcac4 + 1], a
 	ret
 ; 0x8c12
 
 Func_8c12: ; 8c12 (2:4c12)
-	ld a, [wcac4]
+	ld a, [wcac4 + 0]
 	ld h, a
-	ld a, [wcac5]
+	ld a, [wcac4 + 1]
 	ld l, a
 	ld a, [wcac8]
 	cp $01
@@ -1403,7 +1403,7 @@ Func_8c12: ; 8c12 (2:4c12)
 	jr z, .asm_8c43
 	ld a, $20
 .asm_8c43
-	ld [wcac5], a
+	ld [wcac4 + 1], a
 	ldh [rSCY], a
 	ld [wSCY], a
 	ld [wc0a4], a
@@ -1418,7 +1418,7 @@ Func_8c12: ; 8c12 (2:4c12)
 	jr z, .asm_8c5f
 	ld a, $48
 .asm_8c5f
-	ld [wcac5], a
+	ld [wcac4 + 1], a
 	ldh [rSCY], a
 	ld [wSCY], a
 	sub $20
@@ -1426,9 +1426,9 @@ Func_8c12: ; 8c12 (2:4c12)
 	ld a, h
 	ld [wc0a3], a
 .asm_8c70
-	ld a, [wcac6]
+	ld a, [wcac6 + 0]
 	ld h, a
-	ld a, [wcac7]
+	ld a, [wcac6 + 1]
 	ld l, a
 	ld a, [wc0b5]
 	cp $01
@@ -1456,7 +1456,7 @@ Func_8c12: ; 8c12 (2:4c12)
 	jr z, .asm_8caa
 	ld a, $20
 .asm_8caa
-	ld [wcac7], a
+	ld [wcac6 + 1], a
 	ldh [rSCX], a
 	ld [wSCX], a
 	ld [wc0a6], a
@@ -1470,7 +1470,7 @@ Func_8c12: ; 8c12 (2:4c12)
 	jr z, .asm_8cc5
 	ld a, $40
 .asm_8cc5
-	ld [wcac7], a
+	ld [wcac6 + 1], a
 	ldh [rSCX], a
 	ld [wSCX], a
 	sub $28
@@ -1823,7 +1823,7 @@ Func_8ed9: ; 8ed9 (2:4ed9)
 ; 0x8f79
 
 Func_8f79: ; 8f79 (2:4f79)
-	ld hl, wcac5
+	ld hl, wcac4 + 1
 	ld a, [hld]
 	and $f8
 	ld e, a
@@ -1840,7 +1840,7 @@ Func_8f79: ; 8f79 (2:4f79)
 	ld [wc0a3], a
 	ld a, l
 	ld [wc0a4], a
-	ld hl, wcac7
+	ld hl, wcac6 + 1
 	ld a, [hld]
 	and $f8
 	ld e, a
@@ -1860,7 +1860,7 @@ Func_8f79: ; 8f79 (2:4f79)
 ; 0x8fb3
 
 Func_8fb3: ; 8fb3 (2:4fb3)
-	ld hl, wcac5
+	ld hl, wcac4 + 1
 	ld a, [hld]
 	and $f8
 	ld e, a
@@ -1876,7 +1876,7 @@ Func_8fb3: ; 8fb3 (2:4fb3)
 	ld [wc0a3], a
 	ld a, l
 	ld [wc0a4], a
-	ld hl, wcac7
+	ld hl, wcac6 + 1
 	ld a, [hld]
 	and $f8
 	ld e, a
@@ -1896,7 +1896,7 @@ Func_8fb3: ; 8fb3 (2:4fb3)
 ; 0x8fec
 
 Func_8fec: ; 8fec (2:4fec)
-	ld hl, wcac5
+	ld hl, wcac4 + 1
 	ld a, [hld]
 	and $f8
 	ld e, a
@@ -1925,7 +1925,7 @@ Func_8fec: ; 8fec (2:4fec)
 	ld [wc0a3], a
 	ld a, l
 	ld [wc0a4], a
-	ld hl, wcac7
+	ld hl, wcac6 + 1
 	ld a, [hld]
 	and $f8
 	ld e, a
@@ -1946,7 +1946,7 @@ Func_8fec: ; 8fec (2:4fec)
 ; 0x9039
 
 Func_9039: ; 9039 (2:5039)
-	ld hl, wcac5
+	ld hl, wcac4 + 1
 	ld a, [hld]
 	and $f8
 	ld e, a
@@ -1975,7 +1975,7 @@ Func_9039: ; 9039 (2:5039)
 	ld [wc0a3], a
 	ld a, l
 	ld [wc0a4], a
-	ld hl, wcac7
+	ld hl, wcac6 + 1
 	ld a, [hld]
 	and $f8
 	ld e, a
@@ -8139,26 +8139,26 @@ Func_b6d5: ; b6d5 (2:76d5)
 	ld a, [wc0b9]
 	dec a
 	ld c, a
-	ld a, [wcac7]
+	ld a, [wcac6 + 1]
 	add b
-	ld [wcac7], a
-	ld a, [wcac6]
+	ld [wcac6 + 1], a
+	ld a, [wcac6 + 0]
 	adc $00
-	ld [wcac6], a
+	ld [wcac6 + 0], a
 	ld a, [wCameraConfigFlags]
 	bit CAMCONFIG_EDGE_RIGHT_F, a
 	ld b, $60
 	jr z, .asm_b6f8
 	ld b, $40
 .asm_b6f8
-	ld a, [wcac6]
+	ld a, [wcac6 + 0]
 	cp c
 	jr c, .asm_b70e
-	ld a, [wcac7]
+	ld a, [wcac6 + 1]
 	cp b
 	jr c, .asm_b70e
 	ld a, b
-	ld [wcac7], a
+	ld [wcac6 + 1], a
 	ld a, $01
 	ld [wc0c0], a
 	ret
@@ -8194,7 +8194,7 @@ Func_b6d5: ; b6d5 (2:76d5)
 	jr z, .asm_b743
 	ld a, $20
 .asm_b743
-	ld [wcac7], a
+	ld [wcac6 + 1], a
 	ld a, $02
 	ld [wc0c0], a
 	ret
@@ -8205,16 +8205,16 @@ Func_b74c: ; b74c (2:774c)
 	ld [wc0bf], a
 	ld a, [wc0b8]
 	ld c, a
-	ld a, [wcac7]
+	ld a, [wcac6 + 1]
 	sub b
-	ld [wcac7], a
-	ld a, [wcac6]
+	ld [wcac6 + 1], a
+	ld a, [wcac6 + 0]
 	sbc $00
-	ld [wcac6], a
-	ld a, [wcac7]
+	ld [wcac6 + 0], a
+	ld a, [wcac6 + 1]
 	add $10
 	ld l, a
-	ld a, [wcac6]
+	ld a, [wcac6 + 0]
 	adc $00
 	cp c
 	jr nz, .asm_b790
@@ -8228,10 +8228,10 @@ Func_b74c: ; b74c (2:774c)
 	cp b
 	jr nc, .asm_b790
 	ld a, c
-	ld [wcac6], a
+	ld [wcac6 + 0], a
 	ld a, b
 	sub $10
-	ld [wcac7], a
+	ld [wcac6 + 1], a
 	ld a, $01
 	ld [wc0bf], a
 	ret
@@ -8271,14 +8271,14 @@ Func_b74c: ; b74c (2:774c)
 	ld [wc0bf], a
 	ld a, [wc0b9]
 	dec a
-	ld [wcac6], a
+	ld [wcac6 + 0], a
 	ld a, [wCameraConfigFlags]
 	bit CAMCONFIG_EDGE_RIGHT_F, a
 	ld a, $60
 	jr z, .asm_b7d7
 	ld a, $40
 .asm_b7d7
-	ld [wcac7], a
+	ld [wcac6 + 1], a
 	ret
 ; 0xb7db
 
@@ -8286,12 +8286,12 @@ Func_b7db: ; b7db (2:77db)
 	ld a, [wc0b6]
 	dec a
 	ld c, a
-	ld a, [wcac5]
+	ld a, [wcac4 + 1]
 	add b
-	ld [wcac5], a
-	ld a, [wcac4]
+	ld [wcac4 + 1], a
+	ld a, [wcac4 + 0]
 	adc $00
-	ld [wcac4], a
+	ld [wcac4 + 0], a
 	cp c
 	jr c, .asm_b80d
 	ld a, [wCameraConfigFlags]
@@ -8300,11 +8300,11 @@ Func_b7db: ; b7db (2:77db)
 	jr z, .asm_b7fd
 	ld b, $48
 .asm_b7fd
-	ld a, [wcac5]
+	ld a, [wcac4 + 1]
 	cp b
 	jr c, .asm_b80d
 	ld a, b
-	ld [wcac5], a
+	ld [wcac4 + 1], a
 	ld a, $01
 	ld [wc0bd], a
 	ret
@@ -8339,9 +8339,9 @@ Func_b7db: ; b7db (2:77db)
 	jr z, .asm_b841
 	ld a, $20
 .asm_b841
-	ld [wcac5], a
+	ld [wcac4 + 1], a
 	ld a, [wc0b7]
-	ld [wcac4], a
+	ld [wcac4 + 0], a
 	ld a, $02
 	ld [wc0bd], a
 	ret
@@ -8350,22 +8350,22 @@ Func_b7db: ; b7db (2:77db)
 Func_b850: ; b850 (2:7850)
 	ld a, [wc0b7]
 	ld c, a
-	ld a, [wcac5]
+	ld a, [wcac4 + 1]
 	sub b
-	ld [wcac5], a
-	ld a, [wcac4]
+	ld [wcac4 + 1], a
+	ld a, [wcac4 + 0]
 	sbc $00
-	ld [wcac4], a
+	ld [wcac4 + 0], a
 	ld a, [wCameraConfigFlags]
 	bit CAMCONFIG_EDGE_UP_F, a
 	ld b, $10
 	jr z, .asm_b86e
 	ld b, $30
 .asm_b86e
-	ld a, [wcac5]
+	ld a, [wcac4 + 1]
 	add $10
 	ld l, a
-	ld a, [wcac4]
+	ld a, [wcac4 + 0]
 	adc $00
 	cp c
 	jr c, .asm_b882
@@ -8375,10 +8375,10 @@ Func_b850: ; b850 (2:7850)
 	jr nc, .asm_b892
 .asm_b882
 	ld a, c
-	ld [wcac4], a
+	ld [wcac4 + 0], a
 	ld a, b
 	sub $10
-	ld [wcac5], a
+	ld [wcac4 + 1], a
 	ld a, $01
 	ld [wc0be], a
 	ret
@@ -8419,7 +8419,7 @@ Func_b850: ; b850 (2:7850)
 	jr z, .asm_b8cf
 	ld a, $48
 .asm_b8cf
-	ld [wcac5], a
+	ld [wcac4 + 1], a
 	ret
 ; 0xb8d3
 

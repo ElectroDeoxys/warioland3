@@ -744,17 +744,8 @@ wcac2:: ; cac2
 wcac3:: ; cac3
 	ds $1
 
-wcac4:: ; cac4
-	ds $1
-
-wcac5:: ; cac5
-	ds $1
-
-wcac6:: ; cac6
-	ds $1
-
-wcac7:: ; cac7
-	ds $1
+wcac4:: ds $2 ; cac4
+wcac6:: ds $2 ; cac6
 
 wcac8:: ; cac8
 	ds $1

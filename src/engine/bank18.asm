@@ -286,7 +286,7 @@ ENDR
 ; 0x6130b
 
 Func_6130b: ; 6130b (18:530b)
-	call Func_618e2
+	call HandleGrabbedObjectCollisions
 
 	ld hl, wObj1Flags
 	ld a, [hl]
@@ -296,7 +296,7 @@ FOR n, 2, NUM_OBJECTS + 1
 	ld l, LOW(wObj{u:n}Flags)
 	ld a, [hl]
 	rra
-	call c, Func_611cb
+	call c, Func_611cb ; OBJFLAG_UNK0_F set
 ENDR
 	ret
 ; 0x61348
@@ -306,9 +306,9 @@ Func_61348: ; 61348 (18:5348)
 	ld e, a
 	ld a, [wTransformation]
 	rla
-	jr nc, .asm_61354
+	jr nc, .got_effective_power_up
 	ld e, POWER_UP_SUPER_JUMP_SLAM_OVERALLS
-.asm_61354
+.got_effective_power_up
 	ld a, e
 	ld [wEffectivePowerUp], a
 
@@ -319,16 +319,17 @@ Func_61348: ; 61348 (18:5348)
 	ld a, [wIsFloorTransition]
 	and a
 	jr nz, .floor_transition
-	call Func_618e2
+
+	call HandleGrabbedObjectCollisions
 	ld hl, wObj1Flags
 	ld a, [hl]
 	rra
-	call c, Func_613dc
+	call c, Func_613dc ; OBJFLAG_UNK0_F set
 FOR n, 2, NUM_OBJECTS + 1
 	ld l, LOW(wObj{u:n}Flags)
 	ld a, [hl]
 	rra
-	call c, Func_613dc
+	call c, Func_613dc ; OBJFLAG_UNK0_F set
 ENDR
 	ret
 
@@ -341,7 +342,7 @@ FOR n, 2, NUM_OBJECTS + 1
 	ld l, LOW(wObj{u:n}Flags)
 	ld a, [hl]
 	rra
-	call c, Func_61513
+	call c, Func_61513 ; OBJFLAG_UNK0_F set
 ENDR
 	ret
 ; 0x613dc
@@ -360,6 +361,7 @@ ENDR
 
 	call DoObjectAction
 
+; call update function
 	ld a, [wCurObjUnk07]
 	swap a
 	and $0f
@@ -373,6 +375,7 @@ ENDR
 
 	call UpdateObjectAnimation
 	call Func_6307b
+
 	ld hl, wCurObjScreenYPos
 	ld a, [wSCY]
 	ld b, a
@@ -387,6 +390,7 @@ ENDR
 	sub b
 	ld [hli], a
 	pop hl
+
 	ld a, [wCurObjFlags]
 	and $ff ^ (OBJFLAG_STEPPED)
 	ld [hli], a
@@ -480,19 +484,20 @@ ENDR
 	call hCallFunc
 
 .skip_update_function
-	call Func_3104
+	call UpdateObjectFrame
 	call Func_6307b
+
 	ld hl, wCurObjScreenYPos
 	ld a, [wSCY]
 	ld b, a
 	ld a, [wCurObjYPos]
-	add $10
+	add 16
 	sub b
 	ld [hli], a
 	ld a, [wSCX]
 	ld b, a
 	ld a, [wCurObjXPos]
-	add $08
+	add 8
 	sub b
 	ld [hli], a
 	pop hl
@@ -573,7 +578,6 @@ FOR n, 1, NUM_OBJECTS + 1
 	call UpdateObjSprite
 :
 ENDR
-
 	ret
 ; 0x616d7
 
@@ -589,7 +593,6 @@ FOR n, 1, NUM_OBJECTS + 1
 	call UpdateObjSprite
 :
 ENDR
-
 	ret
 ; 0x61760
 
@@ -662,7 +665,7 @@ DoObjectAction: ; 61760 (18:5760)
 
 .Attack:
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 	set OBJFLAG_UNK3_F, [hl]
 	ld l, OBJ_UNK_1D
 	ld a, [hld]
@@ -680,7 +683,7 @@ DoObjectAction: ; 61760 (18:5760)
 
 .PickUp:
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 	ld a, [wDirection]
 	and a
 	ld l, OBJ_ACTION
@@ -697,7 +700,7 @@ DoObjectAction: ; 61760 (18:5760)
 
 .Wobble:
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 	ld l, OBJ_UNK_1D
 	ld a, [hld]
 	and INTERACTION_RIGHT
@@ -714,7 +717,7 @@ DoObjectAction: ; 61760 (18:5760)
 
 .VanishTouch:
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 	set OBJFLAG_UNK3_F, [hl]
 	ld l, OBJ_ACTION
 	ld a, 15 | (1 << 7)
@@ -866,7 +869,7 @@ Func_618b4: ; 618b4 (18:58b4)
 	ld [hli], a ; OBJ_STATE_DURATION
 
 	ld l, OBJ_FLAGS
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 	set OBJFLAG_UNK3_F, [hl]
 	ld a, 1 | (1 << 7)
 	ld [wCurObjAction], a
@@ -880,14 +883,16 @@ Func_618b4: ; 618b4 (18:58b4)
 	ret
 ; 0x618e2
 
-Func_618e2: ; 618e2 (18:58e2)
+; handles the grabbed object collision
+; with other objects
+HandleGrabbedObjectCollisions: ; 618e2 (18:58e2)
 	ld hl, wObj1Flags
-	ld e, OBJFLAG_UNK0 | OBJFLAG_UNK2
+	ld e, OBJFLAG_UNK0 | OBJFLAG_GRABBED
 	ld a, [hl]
 	and e
 	cp e
 FOR n, 2, NUM_OBJECTS + 1
-	jr z, .asm_6191c
+	jr z, .got_grabbed_obj
 	ld l, LOW(wObj{u:n}Flags)
 	ld a, [hl]
 	and e
@@ -895,7 +900,7 @@ FOR n, 2, NUM_OBJECTS + 1
 ENDR
 	ret nz
 
-.asm_6191c
+.got_grabbed_obj
 	push hl
 	ld a, l
 	add OBJ_INTERACTION_TYPE - OBJ_FLAGS
@@ -927,22 +932,30 @@ ENDR
 	add e
 	ld e, a
 
+; b = collision top    + (screen y + $2a)
+; c = collision bottom + (screen y + $2a)
+; d = collision left   + (screen x + $2a)
+; e = collision right  + (screen x + $2a)
+
 	ld a, l
 	add OBJ_STATE - (OBJ_SCREEN_X_POS + 1)
 	ld l, a
 	ld a, [hl] ; OBJ_STATE
-	cp OBJSTATE_4B + 1
-	jr nc, .asm_6194d
+	cp OBJSTATE_FULL_THROW_LEFT_START
+	jr nc, .full_throw
 	cp OBJSTATE_48
 	jr nc, .asm_61992
 
-.asm_6194d
+.full_throw
+	; >= OBJSTATE_FULL_THROW_LEFT_START
 	rra
 	ld hl, hffa0
 	ld a, [hli]
-	jr c, .asm_61973
+	jr c, .thrown_right
+
+; thrown left
 	rla
-	jr c, .asm_61965
+	jr c, .is_heavy1
 	ld a, OBJSTATE_28
 	ld [hli], a ; hffa1
 	ld a, OBJSTATE_29
@@ -953,7 +966,7 @@ ENDR
 	ld [hli], a ; hffa4
 	jr .check_objs
 
-.asm_61965
+.is_heavy1
 	ld a, OBJSTATE_28
 	ld [hli], a ; hffa1
 	ld a, OBJSTATE_WOBBLE_LEFT_START
@@ -964,9 +977,9 @@ ENDR
 	ld [hli], a ; hffa4
 	jr .check_objs
 
-.asm_61973
+.thrown_right
 	rla
-	jr c, .asm_61984
+	jr c, .is_heavy2
 	ld a, OBJSTATE_29
 	ld [hli], a ; ; hffa1
 	ld a, OBJSTATE_28
@@ -977,7 +990,7 @@ ENDR
 	ld [hli], a ; ; hffa4
 	jr .check_objs
 
-.asm_61984
+.is_heavy2
 	ld a, OBJSTATE_29
 	ld [hli], a ; hffa1
 	ld a, OBJSTATE_WOBBLE_RIGHT_START
@@ -1009,7 +1022,7 @@ ENDR
 
 FOR n, 1, NUM_OBJECTS + 1
 	ld a, [wObj{u:n}Flags]
-	and $1f
+	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_GRABBED | OBJFLAG_UNK3 | OBJFLAG_UNK4
 	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
 	jr nz, .next_obj_{u:n}
 	ld a, [wObj{u:n}ScreenYPos]
@@ -1035,19 +1048,22 @@ FOR n, 1, NUM_OBJECTS + 1
 	sub e
 	jr nc, .next_obj_{u:n}
 	pop hl
-	res OBJFLAG_UNK2_F, [hl]
+
+; do collision
+	res OBJFLAG_GRABBED_F, [hl]
 	ld a, l
 	add OBJ_STATE - OBJ_FLAGS
 	ld l, a
 	ld a, [hl] ; OBJ_STATE
 	and $fe
-	cp OBJSTATE_4A
-	jp z, .Func_61d28_{u:n}
-	cp OBJSTATE_48
-	jp z, .Func_61d28_{u:n}
+	cp OBJSTATE_4A ; or OBJSTATE_4B
+	jp z, .CollideWithObject{u:n}
+	cp OBJSTATE_48 ; or OBJSTATE_49
+	jp z, .CollideWithObject{u:n}
 	ld a, [wObj{u:n}InteractionType]
 	rla
-	jp c, .Func_61df0_{u:n} ; heavy
+	jp c, .CollideWithHeavyObject{u:n} ; heavy
+
 	ldh a, [hffa2]
 	ld [hl], a ; OBJ_STATE
 	ld l, LOW(wObj{u:n}State)
@@ -1069,12 +1085,15 @@ FOR n, 1, NUM_OBJECTS + 1
 	ret
 .next_obj_{u:n}
 ENDR
-
 	pop hl
 	ret
 
 FOR n, 1, NUM_OBJECTS + 1
-.Func_61d28_{u:n}
+; hl = state of thrown object
+; hffa2 = new state for thrown object
+; n = index of collided object
+; hffa1 = new state for collided object
+.CollideWithObject{u:n}
 	xor a
 	ld [wGrabState], a
 	ldh a, [hffa2]
@@ -1089,7 +1108,11 @@ FOR n, 1, NUM_OBJECTS + 1
 ENDR
 
 FOR n, 1, NUM_OBJECTS + 1
-.Func_61df0_{u:n}
+; hl = state of thrown object
+; hffa4 = new state for thrown object
+; n = index of collided object
+; hffa3 = new state for collided object
+.CollideWithHeavyObject{u:n}
 	ldh a, [hffa4]
 	ld [hl], a
 	ld l, LOW(wObj{u:n}State)
@@ -1590,7 +1613,7 @@ Func_621fb:: ; 621fb (18:61fb)
 	jp z, ThrowObject_Right
 
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 	ld l, OBJ_STATE
 	ld a, [wIsCrouching]
 	and a
@@ -1682,7 +1705,7 @@ Func_621fb:: ; 621fb (18:61fb)
 	ld a, OBJSTATE_14
 	ld [hl], a ; OBJ_STATE
 	ld l, OBJ_FLAGS
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 	jp Func_316b
 ; 0x622bd
 
@@ -1700,7 +1723,7 @@ Func_622bd:: ; 622bd (18:62bd)
 	jp z, ThrowObject_Left
 
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 	ld l, OBJ_STATE
 	ld a, [wIsCrouching]
 	and a
@@ -1794,7 +1817,7 @@ Func_622bd:: ; 622bd (18:62bd)
 	ld a, OBJSTATE_15
 	ld [hl], a ; OBJ_STATE
 	ld l, OBJ_FLAGS
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 	jp Func_316b
 ; 0x62382
 
@@ -1815,7 +1838,7 @@ Func_62382:: ; 62382 (18:6382)
 
 .asm_6239e
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 	ld a, OBJSTATE_12
 	ld [wCurObjState], a
 	jp Func_316b
@@ -1963,7 +1986,7 @@ Func_6247b:: ; 6247b (18:647b)
 
 .asm_62497
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 	ld a, OBJSTATE_12
 	ld [wCurObjState], a
 	jp Func_316b
@@ -2385,7 +2408,7 @@ Func_626da:: ; 626da (18:66da)
 	cp $f0
 	jr c, .asm_62765
 	ld l, OBJ_FLAGS
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 .asm_62765
 	jp Func_627f0
 ; 0x62768
@@ -2462,7 +2485,7 @@ Func_62768:: ; 62768 (18:6768)
 	cp $10
 	jr nc, Func_627f0
 	ld l, OBJ_FLAGS
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 ;	fallthrough
 
 Func_627f0: ; 627f0 (18:67f0)
@@ -3010,7 +3033,7 @@ Func_62ae5:: ; 62ae5 (18:6ae5)
 	cp $f0
 	jr c, .asm_62b19
 	ld l, OBJ_FLAGS
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 
 .asm_62b19
 	ld hl, wCurObjYPos
@@ -3085,7 +3108,7 @@ Func_62ae5:: ; 62ae5 (18:6ae5)
 
 .asm_62b9b
 	ld l, OBJ_FLAGS
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 	ld l, OBJ_STATE
 	ld a, [wc18c]
 	rra
@@ -3139,7 +3162,7 @@ Func_62bce:: ; 62bce (18:6bce)
 	cp $10
 	jr nc, .asm_62bff
 	ld l, OBJ_FLAGS
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 
 .asm_62bff
 	ld hl, wCurObjYPos
@@ -3214,7 +3237,7 @@ Func_62bce:: ; 62bce (18:6bce)
 
 .asm_62c81
 	ld l, OBJ_FLAGS
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 	ld l, OBJ_STATE
 	ld a, [wc18c]
 	rra
@@ -3247,7 +3270,7 @@ Func_62ca8:: ; 62ca8 (18:6ca8)
 	cp $f0
 	jr c, .asm_62cb8
 	ld l, OBJ_FLAGS
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 .asm_62cb8
 	ld l, OBJ_MOVEMENT_INDEX
 	ld a, [hl]
@@ -3393,7 +3416,7 @@ Func_62d86:: ; 62d86 (18:6d86)
 	cp $10
 	jr nc, .asm_62d96
 	ld l, OBJ_FLAGS
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 .asm_62d96
 	ld l, OBJ_MOVEMENT_INDEX
 	ld a, [hl]
@@ -3633,7 +3656,7 @@ Func_62ec3: ; 62ec3 (18:6ec3)
 	cp $f0
 	jr c, .asm_62ef8
 	ld l, OBJ_FLAGS
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 .asm_62ef8
 	ld a, [wCurObjCollBoxTop]
 	cpl
@@ -3786,7 +3809,7 @@ Func_62faa:: ; 62faa (18:6faa)
 	cp $10
 	jr nc, .asm_62fdf
 	ld l, OBJ_FLAGS
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 .asm_62fdf
 	ld a, [wCurObjCollBoxTop]
 	cpl
@@ -3883,15 +3906,21 @@ Func_6305f:: ; 6305f (18:705f)
 	jp Func_316b
 ; 0x6307b
 
+; seems to be a function to load/unload objects
+; that are inside and outside the screen
 Func_6307b: ; 6307b (18:707b)
 	ld hl, wCurObjYPos
-	ld a, [hli]
+	ld a, [hli] ; y lo
 	ld c, a
-	ld a, [hli]
+	ld a, [hli] ; y hi
 	ld b, a
-	ld a, [hli]
+	ld a, [hli] ; x lo
 	ld e, a
-	ld d, [hl]
+	ld d, [hl]  ; x hi
+
+; bc = y pos
+; de = x pos
+
 	ld hl, wcac4
 	ld a, [hli]
 	ld l, [hl]
@@ -3900,55 +3929,59 @@ Func_6307b: ; 6307b (18:707b)
 	push de
 	push hl
 	ld a, c
-	add $18
+	add 24
 	ld c, a
-	jr nc, .asm_63097
+	jr nc, .no_overflow1
 	inc b
-	jr z, .asm_630a3
-.asm_63097
+	jr z, .skip_y1
+.no_overflow1
 	ld a, b
 	cp h
 	jr c, .asm_630fd
-	jr nz, .asm_630a3
+	jr nz, .skip_y1
+	; b == h
 	ld a, c
 	cp l
 	jr c, .asm_630fd
-	jr z, .asm_630bf
-.asm_630a3
+	jr z, .skip_y2
+	; c > l
+
+.skip_y1
 	ld a, l
-	add $90
+	add 144
 	ld l, a
-	jr nc, .asm_630aa
+	jr nc, .no_overflow2
 	inc h
-.asm_630aa
+.no_overflow2
 	ld a, c
-	sub $38
+	sub 56
 	ld c, a
-	jr nc, .asm_630b5
+	jr nc, .no_underflow1
 	dec b
 	ld a, b
 	inc a
-	jr z, .asm_630bf
-.asm_630b5
+	jr z, .skip_y2
+.no_underflow1
 	ld a, b
 	cp h
-	jr c, .asm_630bf
+	jr c, .skip_y2
 	jr nz, .asm_630fd
 	ld a, c
 	cp l
 	jr nc, .asm_630fd
-.asm_630bf
+
+.skip_y2
 	ld hl, wcac6
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
 	ld a, e
-	add $18
+	add 24
 	ld e, a
-	jr nc, .asm_630ce
+	jr nc, .no_overflow3
 	inc d
 	jr z, .asm_630f6
-.asm_630ce
+.no_overflow3
 	ld a, d
 	cp h
 	jr c, .asm_63106
@@ -3984,6 +4017,7 @@ Func_6307b: ; 6307b (18:707b)
 	ld hl, wCurObjFlags
 	set OBJFLAG_UNK1_F, [hl]
 	jr .asm_6310b
+
 .asm_630fd
 	ld a, [wCurObjState]
 	and $fe
@@ -3996,6 +4030,7 @@ Func_6307b: ; 6307b (18:707b)
 	pop hl
 	pop de
 	pop bc
+
 	ld a, d
 	rla
 	jr c, .asm_6317e
@@ -4003,7 +4038,7 @@ Func_6307b: ; 6307b (18:707b)
 	rla
 	jr c, .asm_6317e
 	ld a, c
-	add $5c
+	add 92
 	ld c, a
 	jr nc, .asm_6311f
 	inc b
@@ -4040,6 +4075,7 @@ Func_6307b: ; 6307b (18:707b)
 	ld a, c
 	cp l
 	jr nc, .asm_6317e
+
 .asm_63147
 	ld hl, wcac6
 	ld a, [hli]
@@ -4050,7 +4086,7 @@ Func_6307b: ; 6307b (18:707b)
 	ld e, a
 	jr nc, .asm_63156
 	inc d
-	jr z, .asm_631a0
+	jr z, .done
 .asm_63156
 	ld a, d
 	cp h
@@ -4059,7 +4095,7 @@ Func_6307b: ; 6307b (18:707b)
 	ld a, e
 	cp l
 	jr c, .asm_6317e
-	jr z, .asm_631a0
+	jr z, .done
 .asm_63162
 	ld a, l
 	add $a0
@@ -4074,15 +4110,15 @@ Func_6307b: ; 6307b (18:707b)
 	dec d
 	ld a, d
 	inc a
-	jr z, .asm_631a0
+	jr z, .done
 .asm_63174
 	ld a, d
 	cp h
-	jr c, .asm_631a0
+	jr c, .done
 	jr nz, .asm_6317e
 	ld a, e
 	cp l
-	jr c, .asm_631a0
+	jr c, .done
 .asm_6317e
 	ld a, [wCurObjUnk1a]
 	and $1f
@@ -4096,7 +4132,7 @@ Func_6307b: ; 6307b (18:707b)
 .asm_6319c
 	xor a
 	ld [wCurObjFlags], a
-.asm_631a0
+.done
 	ret
 ; 0x631a1
 

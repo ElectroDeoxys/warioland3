@@ -567,7 +567,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	ld a, 100
 	ld [wCurObjStateDuration], a
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 .State3f:
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -738,7 +738,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	ld de, Frameset_683d9
 	call SetObjectFramesetPtr
 	ld l, OBJ_FLAGS
-	set OBJFLAG_UNK2_F, [hl]
+	set OBJFLAG_GRABBED_F, [hl]
 .State49:
 	ld a, [wDirection]
 	and a
@@ -755,7 +755,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	ld de, Frameset_683d9
 	call SetObjectFramesetPtr
 	ld l, OBJ_FLAGS
-	set OBJFLAG_UNK2_F, [hl]
+	set OBJFLAG_GRABBED_F, [hl]
 .State48:
 	ld a, [wDirection]
 	and a

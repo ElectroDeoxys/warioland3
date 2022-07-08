@@ -507,7 +507,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	ld de, Frameset_683fb
 	call SetObjectFramesetPtr
 	ld l, OBJ_FLAGS
-	set OBJFLAG_UNK2_F, [hl]
+	set OBJFLAG_GRABBED_F, [hl]
 .State49:
 	ld a, [wDirection]
 	and a
@@ -525,7 +525,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	ld de, Frameset_683fb
 	call SetObjectFramesetPtr
 	ld l, OBJ_FLAGS
-	set OBJFLAG_UNK2_F, [hl]
+	set OBJFLAG_GRABBED_F, [hl]
 .State48:
 	ld a, [wDirection]
 	and a

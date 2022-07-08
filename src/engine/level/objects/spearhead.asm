@@ -711,7 +711,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld a, 100
 	ld [wCurObjStateDuration], a
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK2_F, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 .State3f:
 	ld a, [wGroundShakeCounter]
 	cp $10
@@ -995,7 +995,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld a, -6
 	ld [hld], a ; OBJ_COLLBOX_LEFT
 	ld l, OBJ_FLAGS
-	set OBJFLAG_UNK2_F, [hl]
+	set OBJFLAG_GRABBED_F, [hl]
 .State49:
 	ld a, [wDirection]
 	and a
@@ -1027,7 +1027,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld a, -6
 	ld [hld], a ; OBJ_COLLBOX_LEFT
 	ld l, OBJ_FLAGS
-	set OBJFLAG_UNK2_F, [hl]
+	set OBJFLAG_GRABBED_F, [hl]
 .State48:
 	ld a, [wDirection]
 	and a

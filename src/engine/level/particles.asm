@@ -1384,13 +1384,13 @@ AddParticleSprite: ; d094 (3:5094)
 	ret
 
 .asm_d0c5
-	ld a, [wcac5]
+	ld a, [wcac4 + 1]
 	ld b, a
 	ld a, [wCurParticleYCoord]
 	add $10
 	sub b
 	ld [wCurSpriteYCoord], a
-	ld a, [wcac7]
+	ld a, [wcac6 + 1]
 	ld b, a
 	ld a, [wCurParticleXCoord]
 	add $08

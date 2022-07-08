@@ -3572,7 +3572,7 @@ SetObjectFramesetPtr:: ; 30f0 (0:30f0)
 
 	INCROM $30fb, $3104
 
-Func_3104:: ; 3104 (0:3104)
+UpdateObjectFrame:: ; 3104 (0:3104)
 	ld hl, wCurObjFrameDuration
 	ld a, [hld]
 	sub 1
