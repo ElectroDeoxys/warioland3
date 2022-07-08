@@ -1192,7 +1192,7 @@ Func_61f54:: ; 61f54 (18:5f54)
 	jr z, .GrabIdle
 	ld a, OBJSTATE_12
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .GrabIdle
 	ld a, [wIsSmashAttacking]
@@ -1251,17 +1251,17 @@ Func_61f54:: ; 61f54 (18:5f54)
 	ld [hld], a
 	ld a, OBJSTATE_14
 	ld [hld], a ; OBJ_STATE
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_61fd9
 	ld a, OBJSTATE_19
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .PickUp
 	ld hl, wCurObjUnk17
 	dec [hl]
-	jp nz, Func_316b
+	jp nz, HomeJumpRet
 	inc l
 	ld a, [hli] ; OBJ_UNK_18
 	ld h, [hl] ; OBJ_MOVEMENT_INDEX
@@ -1375,7 +1375,7 @@ Func_61f54:: ; 61f54 (18:5f54)
 	inc e
 	ld a, [hli]
 	ld [de], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_62091
 	ld a, [wCurObjInteractionType]
@@ -1385,7 +1385,7 @@ Func_61f54:: ; 61f54 (18:5f54)
 	ld [wGrabState], a
 	ld a, OBJSTATE_19
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x620a6
 
 Func_620a6:: ; 620a6 (18:60a6)
@@ -1400,7 +1400,7 @@ Func_620a6:: ; 620a6 (18:60a6)
 	jr z, .GrabIdle
 	ld a, OBJSTATE_12
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .GrabIdle
 	ld a, [wIsSmashAttacking]
@@ -1459,17 +1459,17 @@ Func_620a6:: ; 620a6 (18:60a6)
 	ld [hld], a
 	ld a, OBJSTATE_15
 	ld [hld], a ; OBJ_STATE
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_6212b
 	ld a, OBJSTATE_18
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .PickUp
 	ld hl, wCurObjUnk17
 	dec [hl]
-	jp nz, Func_316b
+	jp nz, HomeJumpRet
 	inc l
 	ld a, [hli] ; OBJ_UNK_18
 	ld h, [hl] ; OBJ_MOVEMENT_INDEX
@@ -1586,7 +1586,7 @@ Func_620a6:: ; 620a6 (18:60a6)
 	inc e
 	ld a, [hli]
 	ld [de], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_621e6
 	ld a, [wCurObjInteractionType]
@@ -1596,7 +1596,7 @@ Func_620a6:: ; 620a6 (18:60a6)
 	ld [wGrabState], a
 	ld a, OBJSTATE_18
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x621fb
 
 Func_621fb:: ; 621fb (18:61fb)
@@ -1623,17 +1623,17 @@ Func_621fb:: ; 621fb (18:61fb)
 	ld [wCurObjUnk18], a
 	ld a, OBJSTATE_15
 	ld [hl], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .not_crouching
 	ld a, OBJSTATE_12
 	ld [hl], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .GrabChargeThrow
 	ld a, OBJSTATE_4B
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .GrabIdle
 	ld a, [wIsSmashAttacking]
@@ -1691,7 +1691,7 @@ Func_621fb:: ; 621fb (18:61fb)
 	ldh [hXPosHi], a
 	call Func_3513
 	and a
-	jp z, Func_316b
+	jp z, HomeJumpRet
 
 .asm_6229c
 	xor a
@@ -1706,7 +1706,7 @@ Func_621fb:: ; 621fb (18:61fb)
 	ld [hl], a ; OBJ_STATE
 	ld l, OBJ_FLAGS
 	res OBJFLAG_GRABBED_F, [hl]
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x622bd
 
 Func_622bd:: ; 622bd (18:62bd)
@@ -1733,17 +1733,17 @@ Func_622bd:: ; 622bd (18:62bd)
 	ld [wCurObjUnk18], a
 	ld a, OBJSTATE_14
 	ld [hl], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .not_crouching
 	ld a, OBJSTATE_12
 	ld [hl], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .GrabChargeThrow
 	ld a, OBJSTATE_4A
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .GrabIdle
 	ld a, [wIsSmashAttacking]
@@ -1803,7 +1803,7 @@ Func_622bd:: ; 622bd (18:62bd)
 	ldh [hXPosHi], a
 	call Func_3513
 	and $0f
-	jp z, Func_316b
+	jp z, HomeJumpRet
 
 .asm_62361
 	xor a
@@ -1818,7 +1818,7 @@ Func_622bd:: ; 622bd (18:62bd)
 	ld [hl], a ; OBJ_STATE
 	ld l, OBJ_FLAGS
 	res OBJFLAG_GRABBED_F, [hl]
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x62382
 
 Func_62382:: ; 62382 (18:6382)
@@ -1841,7 +1841,7 @@ Func_62382:: ; 62382 (18:6382)
 	res OBJFLAG_GRABBED_F, [hl]
 	ld a, OBJSTATE_12
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .ChargeThrow
 	ld a, [wIsSmashAttacking]
@@ -1864,7 +1864,7 @@ Func_62382:: ; 62382 (18:6382)
 	ld a, [wXPosHi]
 	sbc 0
 	ld [hl], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .HoldFullCharge
 	ld hl, hffa0
@@ -1913,7 +1913,7 @@ Func_62382:: ; 62382 (18:6382)
 	inc e
 	ld a, [hli]
 	ld [de], a
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x62429
 
 ThrowObject_Left: ; 62429 (18:6429)
@@ -1948,7 +1948,7 @@ ThrowObject_Left: ; 62429 (18:6429)
 	ld [hli], a ; OBJ_STATE
 	ld a, 31 | (1 << 7)
 	ld [hld], a ; OBJ_ACTION
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_62462
 	ld b, $04
@@ -1966,7 +1966,7 @@ ThrowObject_Left: ; 62429 (18:6429)
 	ld [hli], a ; OBJ_STATE
 	ld a, 31 | (1 << 7)
 	ld [hld], a ; OBJ_ACTION
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x6247b
 
 Func_6247b:: ; 6247b (18:647b)
@@ -1989,7 +1989,7 @@ Func_6247b:: ; 6247b (18:647b)
 	res OBJFLAG_GRABBED_F, [hl]
 	ld a, OBJSTATE_12
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .ChargeThrow
 	ld a, [wIsSmashAttacking]
@@ -2012,7 +2012,7 @@ Func_6247b:: ; 6247b (18:647b)
 	ld a, [wXPosHi]
 	adc 0
 	ld [hl], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .HoldFullCharge
 	ld hl, hffa0
@@ -2061,7 +2061,7 @@ Func_6247b:: ; 6247b (18:647b)
 	inc e
 	ld a, [hli]
 	ld [de], a
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x62522
 
 ThrowObject_Right: ; 62522 (18:6522)
@@ -2096,7 +2096,7 @@ ThrowObject_Right: ; 62522 (18:6522)
 	ld [hli], a ; OBJ_STATE
 	ld a, 31 | (1 << 7)
 	ld [hld], a ; OBJ_ACTION
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_6255b
 	ld b, $04
@@ -2114,7 +2114,7 @@ ThrowObject_Right: ; 62522 (18:6522)
 	ld [hli], a ; OBJ_STATE
 	ld a, 31 | (1 << 7)
 	ld [hld], a ; OBJ_ACTION
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x62574
 
 Func_62574:: ; 62574 (18:6574)
@@ -2144,7 +2144,7 @@ Func_62574:: ; 62574 (18:6574)
 	jr z, .asm_625aa
 	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_625aa
 	ld a, [wCurObjCollBoxTop]
@@ -2187,12 +2187,12 @@ Func_62574:: ; 62574 (18:6574)
 	jr z, .asm_625ff
 	ld a, OBJSTATE_15
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_625f7
 	ld a, OBJSTATE_14
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_625ff
 	call Func_305c
@@ -2226,7 +2226,7 @@ Func_62605:: ; 62605 (18:6605)
 	jr z, .asm_6263b
 	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_6263b
 	ld a, [wCurObjCollBoxTop]
@@ -2266,12 +2266,12 @@ Func_62605:: ; 62605 (18:6605)
 	jr z, .asm_6268d
 	ld a, OBJSTATE_14
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_62685
 	ld a, OBJSTATE_15
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_6268d
 	call Func_3069
@@ -2325,7 +2325,7 @@ Func_62690: ; 62690 (18:6690)
 	jr c, .asm_626d1
 	dec [hl]
 .asm_626d1
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_626d4
 	ld b, HIGH(Data_60100)
@@ -2361,7 +2361,7 @@ Func_626da:: ; 626da (18:66da)
 .vanish
 	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_62710
 	ld a, [wCurObjCollBoxTop]
@@ -2441,7 +2441,7 @@ Func_62768:: ; 62768 (18:6768)
 .vanish
 	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_6279e
 	ld a, [wCurObjCollBoxTop]
@@ -2535,7 +2535,7 @@ Func_627f0: ; 627f0 (18:67f0)
 	jr c, .asm_62831
 	dec [hl]
 .asm_62831
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_62834
 	ld b, $41
@@ -2605,7 +2605,7 @@ Func_6284f: ; 6284f (18:684f)
 .asm_6288a
 	ld a, 1 | (1 << 7)
 	ld [wCurObjAction], a
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x62892
 
 Func_62892:: ; 62892 (18:6892)
@@ -2670,7 +2670,7 @@ Func_628a7: ; 628a7 (18:68a7)
 .asm_628e2
 	ld a, 1 | (1 << 7)
 	ld [wCurObjAction], a
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x628ea
 
 Func_628ea:: ; 628ea (18:68ea)
@@ -2685,10 +2685,10 @@ Func_628ea:: ; 628ea (18:68ea)
 	ldh [hXPosHi], a
 	call Func_3543
 	and a
-	jp nz, Func_316b
+	jp nz, HomeJumpRet
 	ld a, OBJSTATE_12
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x62908
 
 Func_62908:: ; 62908 (18:6908)
@@ -2703,10 +2703,10 @@ Func_62908:: ; 62908 (18:6908)
 	ldh [hXPosHi], a
 	call Func_3543
 	and a
-	jp nz, Func_316b
+	jp nz, HomeJumpRet
 	ld a, OBJSTATE_STANDING_FALL_START
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x62926
 
 Func_62926:: ; 62926 (18:6926)
@@ -2763,10 +2763,10 @@ Func_62926:: ; 62926 (18:6926)
 	jr nz, .asm_62980
 	ld a, [wc0dd]
 	and a
-	jp z, Func_316b
+	jp z, HomeJumpRet
 	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_62980
 	ld hl, wCurObjYPos
@@ -2780,7 +2780,7 @@ Func_62926:: ; 62926 (18:6926)
 	jr nz, .asm_62997
 	ld a, OBJSTATE_0F
 	ld [hl], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_62997
 	and $0f
@@ -2821,7 +2821,7 @@ Func_629a6:: ; 629a6 (18:69a6)
 	jr c, .asm_629cd
 	dec [hl]
 .asm_629cd
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x629d0
 
 _ObjState_StandingFall:: ; 629d0 (18:69d0)
@@ -2889,10 +2889,10 @@ _ObjState_StandingFall:: ; 629d0 (18:69d0)
 	jr nz, .asm_62a35
 	ld a, [wc0dd]
 	and a
-	jp z, Func_316b
+	jp z, HomeJumpRet
 	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_62a35
 	ld hl, wCurObjYPos
@@ -2906,7 +2906,7 @@ _ObjState_StandingFall:: ; 629d0 (18:69d0)
 	jr nz, .asm_62a4c
 	ld a, OBJSTATE_TURN_AROUND_START
 	ld [hl], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_62a4c
 	and $0f
@@ -2965,10 +2965,10 @@ _ObjState_Fall:: ; 62a5b (18:6a5b)
 	jr nz, .land
 	ld a, [wc0dd]
 	and a
-	jp z, Func_316b
+	jp z, HomeJumpRet
 	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .land
 	ld hl, wCurObjYPos
@@ -2982,7 +2982,7 @@ _ObjState_Fall:: ; 62a5b (18:6a5b)
 	jr nz, .asm_62ac1
 	ld a, OBJSTATE_LAND
 	ld [hl], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_62ac1
 	and $0f
@@ -3001,10 +3001,10 @@ _ObjState_BumpRight:: ; 62ad0 (18:6ad0)
 	dec l
 	dec l
 	dec [hl] ; OBJ_STATE_DURATION
-	jp nz, Func_316b
+	jp nz, HomeJumpRet
 	ld a, OBJSTATE_TURN_AROUND_START
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 Func_62ae5:: ; 62ae5 (18:6ae5)
 	ld hl, wCurObjYPos
@@ -3097,14 +3097,14 @@ Func_62ae5:: ; 62ae5 (18:6ae5)
 	ld a, [wGlobalCounter]
 	jr c, .heavy
 	and %111
-	jp nz, Func_316b
+	jp nz, HomeJumpRet
 	dec [hl]
-	jp Func_316b
+	jp HomeJumpRet
 .heavy
 	and %11
-	jp nz, Func_316b
+	jp nz, HomeJumpRet
 	dec [hl]
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_62b9b
 	ld l, OBJ_FLAGS
@@ -3115,14 +3115,14 @@ Func_62ae5:: ; 62ae5 (18:6ae5)
 	jr nc, .asm_62bb3
 	ld a, [hl]
 	cp OBJSTATE_STUN_LEFT
-	jp z, Func_316b
+	jp z, HomeJumpRet
 	ld a, OBJSTATE_14
 	ld [hl], a
-	jp Func_316b
+	jp HomeJumpRet
 .asm_62bb3
 	ld a, OBJSTATE_STUN_RIGHT_START
 	ld [hl], a
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x62bb9
 
 _ObjState_BumpLeft:: ; 62bb9 (18:6bb9)
@@ -3133,10 +3133,10 @@ _ObjState_BumpLeft:: ; 62bb9 (18:6bb9)
 	dec l
 	dec l
 	dec [hl] ; OBJ_STATE_DURATION
-	jp nz, Func_316b
+	jp nz, HomeJumpRet
 	ld a, OBJSTATE_TURN_AROUND_START
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 Func_62bce:: ; 62bce (18:6bce)
 	ld hl, wCurObjYPos
@@ -3226,14 +3226,14 @@ Func_62bce:: ; 62bce (18:6bce)
 	ld a, [wGlobalCounter]
 	jr c, .heavy
 	and %111
-	jp nz, Func_316b
+	jp nz, HomeJumpRet
 	dec [hl]
-	jp Func_316b
+	jp HomeJumpRet
 .heavy
 	and %11
-	jp nz, Func_316b
+	jp nz, HomeJumpRet
 	dec [hl]
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_62c81
 	ld l, OBJ_FLAGS
@@ -3244,14 +3244,14 @@ Func_62bce:: ; 62bce (18:6bce)
 	jr c, .asm_62c99
 	ld a, [hl]
 	cp OBJSTATE_STUN_RIGHT
-	jp z, Func_316b
+	jp z, HomeJumpRet
 	ld a, OBJSTATE_15
 	ld [hl], a
-	jp Func_316b
+	jp HomeJumpRet
 .asm_62c99
 	ld a, OBJSTATE_STUN_LEFT_START
 	ld [hl], a
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x62c9f
 
 Func_62c9f:: ; 62c9f (18:6c9f)
@@ -3339,15 +3339,15 @@ Func_62ca8:: ; 62ca8 (18:6ca8)
 	ldh [hXPosHi], a
 	call Func_3513
 	and $0f
-	jp z, Func_316b
+	jp z, HomeJumpRet
 	ld a, OBJSTATE_15
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .vanish
 	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 Func_62d34: ; 62d34 (18:6d34)
 	ld hl, wCurObjYPos
@@ -3385,19 +3385,19 @@ Func_62d57: ; 62d57 (18:6d57)
 	jr c, .asm_62d77
 	ld a, OBJSTATE_24
 	ld [hl], a
-	jp Func_316b
+	jp HomeJumpRet
 .asm_62d6b
 	ld a, OBJSTATE_STUN_LEFT_START
 	ld [hl], a
-	jp Func_316b
+	jp HomeJumpRet
 .asm_62d71
 	ld a, OBJSTATE_20
 	ld [hl], a
-	jp Func_316b
+	jp HomeJumpRet
 .asm_62d77
 	ld a, OBJSTATE_22
 	ld [hl], a
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x62d7d
 
 Func_62d7d:: ; 62d7d (18:6d7d)
@@ -3482,15 +3482,15 @@ Func_62d86:: ; 62d86 (18:6d86)
 	ldh [hXPosHi], a
 	call Func_3513
 	and $0f
-	jp z, Func_316b
+	jp z, HomeJumpRet
 	ld a, OBJSTATE_14
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 .vanish
 	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 
 Func_62e0f: ; 62e0f (18:6e0f)
 	ld hl, wCurObjYPos
@@ -3527,19 +3527,19 @@ Func_62e31: ; 62e31 (18:6e31)
 	jr c, .asm_62e51
 	ld a, OBJSTATE_25
 	ld [hl], a
-	jp Func_316b
+	jp HomeJumpRet
 .asm_62e45
 	ld a, OBJSTATE_STUN_RIGHT_START
 	ld [hl], a
-	jp Func_316b
+	jp HomeJumpRet
 .asm_62e4b
 	ld a, OBJSTATE_21
 	ld [hl], a
-	jp Func_316b
+	jp HomeJumpRet
 .asm_62e51
 	ld a, OBJSTATE_23
 	ld [hl], a
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x62e57
 
 Func_62e57:: ; 62e57 (18:6e57)
@@ -3551,12 +3551,12 @@ Func_62e57:: ; 62e57 (18:6e57)
 	ld a, LOW(Func_4c860)
 	ld [hld], a
 	call Func_618b4
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x62e6e
 
 _VanishObject2:: ; 62e6e (18:6e6e)
 	call _VanishObject
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x62e74
 
 Func_62e74:: ; 62e74 (18:6e74)
@@ -3698,19 +3698,19 @@ Func_62ec3: ; 62ec3 (18:6ec3)
 	jr nz, .asm_62f4e
 	ld hl, wCurObjStateDuration
 	dec [hl]
-	jp nz, Func_316b
+	jp nz, HomeJumpRet
 	ld a, OBJSTATE_26
 	ld [wCurObjState], a
 	ld hl, wCurObjFlags
 	res OBJFLAG_UNK3_F, [hl]
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_62f4e
 	ld a, OBJSTATE_27
 	ld [wCurObjState], a
 	ld hl, wCurObjFlags
 	res OBJFLAG_UNK3_F, [hl]
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x62f5b
 
 Func_62f5b:: ; 62f5b (18:6f5b)
@@ -3848,19 +3848,19 @@ Func_62faa:: ; 62faa (18:6faa)
 	jr nz, .asm_63032
 	ld hl, wCurObjStateDuration
 	dec [hl]
-	jp nz, Func_316b
+	jp nz, HomeJumpRet
 	ld a, OBJSTATE_27
 	ld [wCurObjState], a
 	ld hl, wCurObjFlags
 	res OBJFLAG_UNK3_F, [hl]
-	jp Func_316b
+	jp HomeJumpRet
 
 .asm_63032
 	ld a, $26
 	ld [wCurObjState], a
 	ld hl, wCurObjFlags
 	res OBJFLAG_UNK3_F, [hl]
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x6303f
 
 Func_6303f:: ; 6303f (18:703f)
@@ -3872,7 +3872,7 @@ Func_6303f:: ; 6303f (18:703f)
 	ld [hld], a ; OBJ_MOVEMENT_INDEX
 	ld a, $07
 	ld [wCurObjStateDuration], a
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x63050
 
 Func_63050:: ; 63050 (18:7050)
@@ -3881,7 +3881,7 @@ Func_63050:: ; 63050 (18:7050)
 	jp nz, Func_629a6
 	ld a, OBJSTATE_STANDING_FALL_START
 	ld [wCurObjState], a
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x6305f
 
 Func_6305f:: ; 6305f (18:705f)
@@ -3903,7 +3903,7 @@ Func_6305f:: ; 6305f (18:705f)
 	dec l
 	ld a, $04
 	ld [hli], a ; OBJ_STATE_DURATION
-	jp Func_316b
+	jp HomeJumpRet
 ; 0x6307b
 
 ; seems to be a function to load/unload objects

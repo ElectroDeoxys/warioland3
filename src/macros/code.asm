@@ -38,6 +38,24 @@ ELSE
 ENDC
 ENDM
 
+MACRO homecall
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(\1)
+	bankswitch
+	call \1
+	pop af
+	bankswitch
+ENDM
+
+MACRO homejp
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(\1)
+	bankswitch
+	jp \1
+ENDM
+
 MACRO debug_nop
 :
 	nop
