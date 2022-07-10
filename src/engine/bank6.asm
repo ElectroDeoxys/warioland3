@@ -2412,7 +2412,7 @@ UpdateState_Slipping: ; 19ce7 (6:5ce7)
 
 .asm_19d62
 	ld b, a
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	jr z, .asm_19db6
 	ld a, b
@@ -2974,7 +2974,7 @@ UpdateState_SandTurning: ; 1a394 (6:6394)
 	bit A_BUTTON_F, a
 	jp nz, SetState_SandJumping
 	update_anim_1
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	ld a, [wJoypadDown]
@@ -3035,7 +3035,7 @@ UpdateState_LadderClimbing: ; 1a436 (6:6436)
 .skip_sfx
 	update_anim_1
 
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	jr z, .asm_1a49a
 	get_pos
@@ -3421,7 +3421,7 @@ UpdateState_Sleeping: ; 1ac73 (6:6c73)
 	jr z, .asm_1acd0
 	dec a
 	jp z, .asm_1ad0c
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	play_sfx SFX_SLEEP
@@ -3443,7 +3443,7 @@ UpdateState_Sleeping: ; 1ac73 (6:6c73)
 	ret
 
 .asm_1acd0
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	play_sfx nz, SFX_SLEEP
 	ld a, [wJoypadDown]
@@ -3464,7 +3464,7 @@ UpdateState_Sleeping: ; 1ac73 (6:6c73)
 	jr .asm_1acc0
 
 .asm_1ad0c
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	farcall SetState_Idling
@@ -3510,7 +3510,7 @@ UpdateState_LadderScratching: ; 1ad7d (6:6d7d)
 	ld a, [wJoypadDown]
 	and a
 	jr nz, .asm_1ad97
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 .asm_1ad97
@@ -3548,7 +3548,7 @@ UpdateState_FenceShakeSliding: ; 1adfb (6:6dfb)
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_1ae3a
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	jr z, .asm_1ae3a
 	xor a
@@ -3619,7 +3619,7 @@ UpdateState_FenceMovingVertical:;1aed0 (6:6ed0)
 .skip_sfx
 	update_anim_1
 
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	jr z, .asm_1af1e
 

@@ -568,7 +568,7 @@ ActionHelp2_ShowBInput: ; 1e4c0b (79:4c0b)
 ; 0x1e4c18
 
 ActionHelp_ShowWarioHangVertical: ; 1e4c18 (79:4c18)
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -580,7 +580,7 @@ ActionHelp_ShowWarioHangVertical: ; 1e4c18 (79:4c18)
 ; 0x1e4c25
 
 ActionHelp_ShowWarioHangHorizontal: ; 1e4c25 (79:4c25)
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -592,7 +592,7 @@ ActionHelp_ShowWarioHangHorizontal: ; 1e4c25 (79:4c25)
 ; 0x1e4c32
 
 ActionHelp_ShowWarioHangOwlRight: ; 1e4c32 (79:4c32)
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -604,7 +604,7 @@ ActionHelp_ShowWarioHangOwlRight: ; 1e4c32 (79:4c32)
 ; 0x1e4c3f
 
 ActionHelp_ShowWarioOwlMoveHang: ; 1e4c3f (79:4c3f)
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -616,7 +616,7 @@ ActionHelp_ShowWarioOwlMoveHang: ; 1e4c3f (79:4c3f)
 ; 0x1e4c4c
 
 ActionHelp_ShowWarioOwlMoveHangRight: ; 1e4c4c (79:4c4c)
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -628,7 +628,7 @@ ActionHelp_ShowWarioOwlMoveHangRight: ; 1e4c4c (79:4c4c)
 ; 0x1e4c59
 
 ActionHelp_ShowWarioHangDrop: ; 1e4c59 (79:4c59)
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -657,7 +657,7 @@ ActionHelp2_ShowWarioIdle: ; 1e4c66 (79:4c66)
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
 
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -692,7 +692,7 @@ ActionHelp2_ShowWarioWalk: ; 1e4caa (79:4caa)
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
 
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -725,7 +725,7 @@ ActionHelp2_ShowWarioJump: ; 1e4ce9 (79:4ce9)
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
 
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -762,7 +762,7 @@ ActionHelp_ShowWarioHangStopped: ; 1e4d2f (79:4d2f)
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
 
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -799,7 +799,7 @@ ActionHelp_ShowWarioHangRailRight: ; 1e4d75 (79:4d75)
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
 
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -836,7 +836,7 @@ ActionHelp_ShowWarioBatTransform: ; 1e4dbb (79:4dbb)
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
 
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -852,7 +852,7 @@ ActionHelp_ShowWarioBatTransform: ; 1e4dbb (79:4dbb)
 ; 0x1e4dfa
 
 ActionHelp_ShowWarioBatRight: ; 1e4dfa (79:4dfa)
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -865,7 +865,7 @@ ActionHelp_ShowWarioBatRight: ; 1e4dfa (79:4dfa)
 ; 0x1e4e0a
 
 ActionHelp_ShowWarioBatLeft: ; 1e4e0a (79:4e0a)
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -880,7 +880,7 @@ ActionHelp_ShowWarioBatLeft: ; 1e4e0a (79:4e0a)
 ActionHelp_ShowWarioVampireTransform: ; 1e4e1a (79:4e1a)
 	play_sfx SFX_045
 
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -917,10 +917,10 @@ ActionHelp_ShowRailRotateLeft: ; 1e4e3c (79:4e3c)
 
 ActionHelp_ShowOwlFlyUp: ; 1e4e49 (79:4e49)
 	ld hl, wMenuObj4
-	ld a, [wActionHelpWarioObjYCoord]
+	ld a, [wActionHelpWarioYCoord]
 	sub $20
 	ld [hli], a
-	ld a, [wActionHelpWarioObjXCoord]
+	ld a, [wActionHelpWarioXCoord]
 	sub $08
 	ld [hli], a
 	xor a

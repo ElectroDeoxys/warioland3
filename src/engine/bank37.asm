@@ -33,7 +33,7 @@ Func_dc01e: ; dc01e (37:401e)
 	ldh [rSCY], a
 	ld [wSCY], a
 
-	ld hl, $d523
+	ld hl, wMenuObj1
 	ld a, $23
 	ld [hli], a
 	ld a, $2b
@@ -49,7 +49,7 @@ Func_dc01e: ; dc01e (37:401e)
 	ld [hl], a
 	call UpdateObjAnim
 
-	ld hl, $d523
+	ld hl, wMenuObj1
 	call Func_dc158
 
 	play_music MUSIC_PERFECT
@@ -58,16 +58,16 @@ Func_dc01e: ; dc01e (37:401e)
 	ldh [rLCDC], a
 	xor a
 	ld [wTimer], a
-	ld [$d51d], a
+	ld [wGameOverWarioVar], a
 	ld hl, wSubState
 	inc [hl]
 	ret
 ; 0xdc073
 
 Func_dc073: ; dc073 (37:4073)
-	ld hl, $d52a
+	ld hl, wMenuObj1FramesetPtr + 1
 	call UpdateObjAnim
-	ld hl, $d523
+	ld hl, wMenuObj1
 	call Func_dc158
 	call ClearUnusedVirtualOAM
 	ld hl, wTimer
@@ -86,7 +86,7 @@ Func_dc073: ; dc073 (37:4073)
 	jr z, .asm_dc0cf
 	ld a, $03
 	ld [wSubState], a
-	ld hl, $d51d
+	ld hl, wGameOverWarioVar
 	inc [hl]
 	ld a, [hl]
 	dec a

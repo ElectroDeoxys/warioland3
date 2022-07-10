@@ -12,7 +12,7 @@ GrabGloveActionHelp: ; 1f9453 (7e:5453)
 	ldh [hCallFuncBank], a
 	hcall UpdateObjAnim
 	ld a, [wObjAnimWasReset]
-	ld [wMenuObj5AnimationHasFinished], a
+	ld [wMenuObj5AnimationEnded], a
 	ld hl, wMenuObj5YCoord
 	farcall AddActionHelpSprite_Far
 
@@ -26,9 +26,9 @@ GrabGloveActionHelp: ; 1f9453 (7e:5453)
 	ldh [hCallFuncBank], a
 	hcall UpdateObjAnim
 	ld a, [wObjAnimWasReset]
-	ld [wMenuObj4AnimationHasFinished], a
+	ld [wMenuObj4AnimationEnded], a
 
-	ld hl, wActionHelpWarioObjFramesetPtr + 1
+	ld hl, wActionHelpWarioFramesetPtr + 1
 	farcall $5, UpdateObjAnim
 	ld a, [wObjAnimWasReset]
 	ld [wActionHelpWarioAnimationEnded], a
@@ -36,7 +36,7 @@ GrabGloveActionHelp: ; 1f9453 (7e:5453)
 .action_help_frozen
 	ld hl, wMenuObj4
 	farcall AddActionHelpSprite_Far
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	farcall AddActionHelpWarioSprite
 
 	ld hl, wMenuObj6FramesetPtr + 1
@@ -175,16 +175,16 @@ Func_1f95de: ; 1f95de (7e:55de)
 ; 0x1f95f9
 
 Func_1f95f9: ; 1f95f9 (7e:55f9)
-	ld hl, wActionHelpWarioJumpVelIndex
+	ld hl, wActionHelpWarioVar
 	inc [hl]
 	ld a, [hl]
 	ld e, a
 	ld d, $00
 	ld hl, JumpVelTable_Normal
 	add hl, de
-	ld a, [wActionHelpWarioObjYCoord]
+	ld a, [wActionHelpWarioYCoord]
 	add [hl]
-	ld [wActionHelpWarioObjYCoord], a
+	ld [wActionHelpWarioYCoord], a
 
 	ld hl, wMenuObj4XCoord
 	dec [hl]
@@ -193,10 +193,10 @@ Func_1f95f9: ; 1f95f9 (7e:55f9)
 	jr z, .asm_1f9618
 	dec [hl]
 .asm_1f9618
-	ld a, [wActionHelpWarioJumpVelIndex]
+	ld a, [wActionHelpWarioVar]
 	cp $18
 	ret c
-	ld a, [wActionHelpWarioObjYCoord]
+	ld a, [wActionHelpWarioYCoord]
 	cp $36
 	ret c
 
@@ -204,7 +204,7 @@ Func_1f95f9: ; 1f95f9 (7e:55f9)
 	call ActionHelp_ClearButtonsInput
 	play_sfx SFX_014
 	ld a, $0a
-	ld [wActionHelpWarioJumpVelIndex], a
+	ld [wActionHelpWarioVar], a
 	call ActionHelp_ShowParaGoomStun
 
 	ld hl, wActionHelpState
@@ -220,7 +220,7 @@ Func_1f963f: ; 1f963f (7e:563f)
 	jr z, .asm_1f964b
 	inc [hl]
 .asm_1f964b
-	ld hl, wActionHelpWarioJumpVelIndex
+	ld hl, wActionHelpWarioVar
 	inc [hl]
 	ld a, [hl]
 	ld e, a
@@ -234,16 +234,16 @@ Func_1f963f: ; 1f963f (7e:563f)
 	ld [wMenuObj4YCoord], a
 
 .asm_1f9662
-	ld a, [wActionHelpWarioObjYCoord]
+	ld a, [wActionHelpWarioYCoord]
 	add [hl]
-	ld [wActionHelpWarioObjYCoord], a
+	ld [wActionHelpWarioYCoord], a
 	cp $40
 	ret c
 	ld a, $40
-	ld [wActionHelpWarioObjYCoord], a
+	ld [wActionHelpWarioYCoord], a
 	ld [wMenuObj4YCoord], a
 	xor a
-	ld [wActionHelpWarioJumpVelIndex], a
+	ld [wActionHelpWarioVar], a
 	call ActionHelp_ShowWarioIdle
 	ld a, $20
 	ld [wTimer], a
@@ -278,7 +278,7 @@ Func_1f9695: ; 1f9695 (7e:5695)
 	cp $48
 	ret nc
 
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $05
@@ -314,7 +314,7 @@ Func_1f96bf: ; 1f96bf (7e:56bf)
 	ret
 
 .asm_1f96db
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $0c
@@ -326,7 +326,7 @@ Func_1f96bf: ; 1f96bf (7e:56bf)
 	ret
 
 .asm_1f96eb
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $1c
@@ -479,7 +479,7 @@ Func_1f97b2: ; 1f97b2 (7e:57b2)
 	cp $48
 	ret nc
 
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $05
@@ -506,7 +506,7 @@ Func_1f97dc: ; 1f97dc (7e:57dc)
 	jr z, .asm_1f97fb
 	jr .asm_1f980b
 .asm_1f97eb
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $0c
@@ -518,7 +518,7 @@ Func_1f97dc: ; 1f97dc (7e:57dc)
 	ret
 
 .asm_1f97fb
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $1c
@@ -705,7 +705,7 @@ Func_1f98eb: ; 1f98eb (7e:58eb)
 	cp $48
 	ret nc
 
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $05
@@ -732,7 +732,7 @@ Func_1f9915: ; 1f9915 (7e:5915)
 	jr z, .asm_1f9934
 	jr .asm_1f9944
 .asm_1f9924
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $0c
@@ -744,7 +744,7 @@ Func_1f9915: ; 1f9915 (7e:5915)
 	ret
 
 .asm_1f9934
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $1c
@@ -922,7 +922,7 @@ Func_1f9999: ; 1f9999 (7e:5999)
 ; 0x1f9a3a
 
 Func_1f9a3a: ; 1f9a3a (7e:5a3a)
-	ld a, [wMenuObj5AnimationHasFinished]
+	ld a, [wMenuObj5AnimationEnded]
 	and a
 	jr z, .asm_1f9a43
 	call ActionHelp_HideObj5BlockDebris
@@ -951,7 +951,7 @@ Func_1f9a53: ; 1f9a53 (7e:5a53)
 	cp $48
 	ret nc
 
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $05
@@ -978,7 +978,7 @@ Func_1f9a7d: ; 1f9a7d (7e:5a7d)
 	jr z, .asm_1f9a9c
 	jr .asm_1f9aac
 .asm_1f9a8c
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $0c
@@ -990,7 +990,7 @@ Func_1f9a7d: ; 1f9a7d (7e:5a7d)
 	ret
 
 .asm_1f9a9c
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $1c
@@ -1120,7 +1120,7 @@ Func_1f9b56: ; 1f9b56 (7e:5b56)
 ; 0x1f9b7a
 
 Func_1f9b7a: ; 1f9b7a (7e:5b7a)
-	ld a, [wMenuObj4AnimationHasFinished]
+	ld a, [wMenuObj4AnimationEnded]
 	and a
 	ret z
 	ld a, $e8

@@ -15,9 +15,9 @@ OwlActionHelp: ; 1e400c (79:400c)
 	ldh [hCallFuncBank], a
 	hcall UpdateObjAnim
 	ld a, [wObjAnimWasReset]
-	ld [wMenuObj4AnimationHasFinished], a
+	ld [wMenuObj4AnimationEnded], a
 
-	ld hl, wActionHelpWarioObjFramesetPtr + 1
+	ld hl, wActionHelpWarioFramesetPtr + 1
 	ld a, [wActionHelpWarioOAMBank]
 	ld [wTempBank], a
 	ld a, [wTempBank]
@@ -25,7 +25,7 @@ OwlActionHelp: ; 1e400c (79:400c)
 	hcall UpdateObjAnim
 
 .action_help_frozen
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	call AddActionHelpWarioSprite_FromBank
 	ld hl, wMenuObj4
 	call AddActionHelpSprite_Far
@@ -87,7 +87,7 @@ Func_1e409a: ; 1e409a (79:409a)
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
 
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	ld a, $38
 	ld [hli], a
 	ld a, $c0
@@ -125,7 +125,7 @@ Func_1e4104: ; 1e4104 (79:4104)
 	ld a, [wActionHelpCounter]
 	and %1
 	ret nz
-	ld hl, wActionHelpWarioObjXCoord
+	ld hl, wActionHelpWarioXCoord
 	dec [hl]
 	ld a, [hl]
 	cp $60
@@ -145,7 +145,7 @@ Func_1e4134: ; 1e4134 (79:4134)
 	and %1
 	ret nz
 
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	dec [hl]
 	ld a, [hl]
 	cp $34
@@ -166,7 +166,7 @@ Func_1e4165: ; 1e4165 (79:4165)
 	ld a, [wActionHelpCounter]
 	and %1
 	ret nz
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	inc [hl]
 	ld a, [hl]
 	cp $38
@@ -185,7 +185,7 @@ Func_1e4195: ; 1e4195 (79:4195)
 	ld a, [wActionHelpCounter]
 	and %1
 	ret nz
-	ld hl, wActionHelpWarioObjXCoord
+	ld hl, wActionHelpWarioXCoord
 	dec [hl]
 	ld a, [hl]
 	cp $5c
@@ -208,7 +208,7 @@ Func_1e41c9: ; 1e41c9 (79:41c9)
 	ld a, [wActionHelpCounter]
 	and %1
 	ret nz
-	ld hl, wActionHelpWarioObjXCoord
+	ld hl, wActionHelpWarioXCoord
 	inc [hl]
 	ld a, [hl]
 	cp $60
@@ -226,7 +226,7 @@ Func_1e41c9: ; 1e41c9 (79:41c9)
 Func_1e41fd: ; 1e41fd (79:41fd)
 	play_sfx_rept 16, SFX_071
 
-	ld hl, wActionHelpWarioObjXCoord
+	ld hl, wActionHelpWarioXCoord
 	dec [hl]
 	ld a, [hl]
 	cp $20
@@ -242,7 +242,7 @@ Func_1e41fd: ; 1e41fd (79:41fd)
 Func_1e4227: ; 1e4227 (79:4227)
 	play_sfx_rept 16, SFX_071
 
-	ld hl, wActionHelpWarioObjXCoord
+	ld hl, wActionHelpWarioXCoord
 	inc [hl]
 	ld a, [hl]
 	cp $80
@@ -260,7 +260,7 @@ Func_1e4254: ; 1e4254 (79:4254)
 	ld hl, wMenuObj4YCoord
 	dec [hl]
 	dec [hl]
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	inc [hl]
 	ld a, [hl]
 	cp $40
@@ -291,7 +291,7 @@ Func_1e4271: ; 1e4271 (79:4271)
 	ret
 
 Func_1e4286: ; 1e4286 (79:4286)
-	ld hl, wActionHelpWarioObjXCoord
+	ld hl, wActionHelpWarioXCoord
 	inc [hl]
 	ld a, [hl]
 	cp $b0

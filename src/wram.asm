@@ -328,7 +328,7 @@ wPendingDMADestinationBank:: ds $1 ; c1a3
 wPendingDMADestinationPtr::  ds $2 ; c1a4
 wPendingDMALength::          ds $1 ; c1a6
 
-wAnimationHasFinished:: ; c1a8
+wAnimationEnded:: ; c1a8
 	ds $1
 
 wFloorTransitionTimer:: ; c1a9
@@ -2389,32 +2389,13 @@ wObjAnimWasReset:: ; d514
 	ds $1
 
 UNION
-
-wActionHelpWarioObj:: menu_obj_struct wActionHelpWarioObj ; d515
-
-wActionHelpWarioJumpVelIndex:: ; d51d
-	ds $1
-
-wActionHelpWarioOAMPtr:: ; d51e
-	ds $2
-
-wActionHelpWarioAnimationEnded:: ; d520
-	ds $1
-
-wActionHelpWarioOAMBank:: ; d521
-	ds $1
-
+wActionHelpWario:: menu_obj_ext_struct wActionHelpWario ; d515
 NEXTU
-
-wWarioPlaneObj:: menu_obj_struct wWarioPlaneObj ; d515
-wWarioPlaneState:: ds $1 ; d51d
-
-	ds $2
-
-; whether the animation of the plane
-; in the Intro sequence has ended
-wPlaneAnimationEnded:: ; d520
-	ds $1
+wPlaneWario:: menu_obj_ext_struct wPlaneWario ; d515
+NEXTU
+wGameOverWario:: menu_obj_ext_struct wGameOverWario ; d515
+NEXTU
+wCreditsMusicBox:: menu_obj_ext_struct wCreditsMusicBox ; d515
 ENDU
 
 wSFXTimer:: ; d522
@@ -2427,12 +2408,12 @@ wMenuObj3:: menu_obj_struct wMenuObj3 ; d533
 wMenuObj4:: menu_obj_struct wMenuObj4 ; d53b
 wMenuObj4OAMPtr::               ds $2 ; d543
 wMenuObj4FramesetBank::         ds $1 ; d545
-wMenuObj4AnimationHasFinished:: ds $1 ; d546
+wMenuObj4AnimationEnded::       ds $1 ; d546
 
 wMenuObj5:: menu_obj_struct wMenuObj5 ; d547
 wMenuObj5OAMPtr::               ds $2 ; d54f
 wMenuObj5FramesetBank::         ds $1 ; d551
-wMenuObj5AnimationHasFinished:: ds $1 ; d552
+wMenuObj5AnimationEnded::       ds $1 ; d552
 
 wMenuObj6:: menu_obj_struct wMenuObj6 ; d553
 wMenuObj6OAMPtr::               ds $2 ; d55b
@@ -2441,7 +2422,7 @@ wMenuObj6FramesetBank::         ds $1 ; d55d
 wMenuObj7:: menu_obj_struct wMenuObj7 ; d55e
 wMenuObj7OAMPtr::               ds $2 ; d566
 wMenuObj7FramesetBank::         ds $1 ; d568
-wMenuObj7AnimationHasFinished:: ds $1 ; d569
+wMenuObj7AnimationEnded::       ds $1 ; d569
 
 wMenuObj8::  menu_obj_struct wMenuObj8  ; d56a
 wMenuObj9::  menu_obj_struct wMenuObj9  ; d572

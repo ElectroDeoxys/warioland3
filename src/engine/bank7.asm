@@ -174,7 +174,7 @@ UpdateState_Walking: ; 1c1ab (7:41ab)
 .skip_sfx
 	update_anim_1
 
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	jr z, .handle_input
 	get_pos
@@ -215,7 +215,7 @@ UpdateState_Turning: ; 1c244 (7:4244)
 	jp nz, SetState_Attacking
 	update_anim_1
 
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	ld a, [wJoypadDown]
@@ -653,7 +653,7 @@ UpdateState_Landing: ; 1c6ed (7:46ed)
 	and D_RIGHT | D_LEFT
 	jr nz, .walk
 	update_anim_1
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	jr nz, .end_land
 	ret
@@ -2446,7 +2446,7 @@ UpdateState_PickingUp: ; 1d916 (7:5916)
 	cp $02
 	jp z, SetState_GrabIdling
 	update_anim_1
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	jp SetState_GrabIdling
@@ -2863,7 +2863,7 @@ UpdateState_ThrowFullyCharged: ; 1dd7f (7:5d7f)
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_1dde0
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	jr z, .asm_1dde0
 	ld a, [wGrabState]
@@ -2949,7 +2949,7 @@ UpdateState_Throwing: ; 1de88 (7:5e88)
 	and a
 	jp z, SetState_Idling
 	update_anim_1
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	xor a
@@ -2962,7 +2962,7 @@ UpdateState_ThrowingAirborne: ; 1deaa (7:5eaa)
 	and a
 	jp z, StartFall
 	update_anim_1
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	xor a
@@ -3095,7 +3095,7 @@ UpdateState_Sliding: ; 1dfd4 (7:5fd4)
 	ld a, b
 	and $0f
 	jp nz, DoBumpWithSmallBackOffset
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 ;	fallthrough
@@ -3457,7 +3457,7 @@ UpdateState_EnteringDoor: ; 1e3e8 (7:63e8)
 	jr z, .asm_1e455
 	dec a
 	jr z, .asm_1e45a
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 
@@ -3471,7 +3471,7 @@ UpdateState_EnteringDoor: ; 1e3e8 (7:63e8)
 	ret
 
 .asm_1e444
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	ld hl, wWarioStateCounter
@@ -3486,7 +3486,7 @@ UpdateState_EnteringDoor: ; 1e3e8 (7:63e8)
 	ret
 
 .asm_1e45a
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	ld a, [wJoypadDown]

@@ -103,7 +103,7 @@ UpdateState_OnFire: ; 280a6 (a:40a6)
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_28100
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	jr z, .asm_28100
 	ld a, $01
@@ -205,7 +205,7 @@ UpdateState_OnFireAirborne: ; 281c1 (a:41c1)
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_2820b
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	jr z, .asm_2820b
 	ld a, $01
@@ -410,7 +410,7 @@ UpdateState_HotAirborne: ; 2839f (a:439f)
 
 UpdateState_Burnt: ; 2841e (a:441e)
 	update_anim_1
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	jp RecoverFromTransformation
@@ -550,7 +550,7 @@ UpdateState_GettingFlatAirborne: ; 28511 (a:4511)
 UpdateState_GettingFlat: ; 28599 (a:4599)
 	update_anim_1
 
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	xor a
@@ -737,12 +737,12 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 	and a
 	jp nz, SetState_FlatSinking
 
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	jr nz, .asm_287ff
 	update_anim_1
 
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	jr z, .asm_287ff
 
@@ -754,7 +754,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 	update_anim_1
 
 	ld a, $01
-	ld [wAnimationHasFinished], a
+	ld [wAnimationEnded], a
 .asm_287ff
 	ld hl, wWalkVelIndex
 	ld e, [hl]
@@ -814,7 +814,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 	xor a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
-	ld [wAnimationHasFinished], a
+	ld [wAnimationEnded], a
 
 	ld a, [wDirection]
 	xor $1 ; switch direction
@@ -862,7 +862,7 @@ UpdateState_FlatFalling: ; 287a2 (a:47a2)
 UpdateState_FlatStretching: ; 288e5 (a:48e5)
 	update_anim_1
 
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	xor a
@@ -997,7 +997,7 @@ Func_289c5: ; 289c5 (a:49c5)
 UpdateState_FlatStretchingUnderwater: ; 28a39 (a:4a39)
 	update_anim_1
 
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	jp Func_2ad6a
@@ -1047,7 +1047,7 @@ UpdateState_FlatSquishedLifting: ; 28a8a (a:4a8a)
 
 UpdateState_GettingWrappedInString: ; 28aad (a:4aad)
 	update_anim_1
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	farcall CheckCentreCollision
@@ -1297,7 +1297,7 @@ UpdateState_BallOStringKnockBack: ; 28ceb (a:4ceb)
 
 UpdateState_GettingUnwrappedInString: ; 28d92 (a:4d92)
 	update_anim_1
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 
@@ -1334,7 +1334,7 @@ UpdateState_GettingUnwrappedInString: ; 28d92 (a:4d92)
 
 UpdateState_BallOStringDizzy: ; 28e1a (a:4e1a)
 	update_anim_1
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	jp RecoverFromTransformation
@@ -1363,7 +1363,7 @@ SetState_FatBumping: ; 28e31 (a:4e31)
 
 UpdateState_FatBumping: ; 28e70 (a:4e70)
 	update_anim_1
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	jp SetState_FatIdling
@@ -1394,7 +1394,7 @@ UpdateState_FatEating: ; 28e87 (a:4e87)
 	ld [wJumpVelIndex], a
 .asm_28ecd
 	update_anim_1
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	ld a, -9
@@ -1547,7 +1547,7 @@ UpdateState_FatTurning: ; 2906d (a:506d)
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jr nz, Func_290a1
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	jp SetState_FatWalking
@@ -1619,7 +1619,7 @@ UpdateState_FatAirborne: ; 29123 (a:5123)
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_2919d
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	jr z, .asm_2919d
 	xor a
@@ -1843,7 +1843,7 @@ SetState_FatRecovering: ; 29363 (a:5363)
 
 UpdateState_FatRecovering: ; 293b9 (a:53b9)
 	update_anim_1
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	jp RecoverFromTransformation
@@ -1859,7 +1859,7 @@ UpdateState_ElectricStart: ; 293d0 (a:53d0)
 	jp nz, RecoverFromTransformation
 	update_anim_1
 
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 
@@ -2141,7 +2141,7 @@ UpdateState_Electric: ; 294bf (a:54bf)
 
 UpdateState_ElectricDizzy: ; 29672 (a:5672)
 	update_anim_1
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	jp RecoverFromTransformation
@@ -2207,7 +2207,7 @@ SetState_TurningInvisible: ; 29689 (a:5689)
 
 UpdateState_TurningInvisible: ; 2972e (a:572e)
 	update_anim_1
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	xor a
@@ -2293,7 +2293,7 @@ UpdateState_PuffyInflating: ; 29816 (a:5816)
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
 
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 ;	fallthrough
@@ -2405,7 +2405,7 @@ UpdateState_PuffyTurning: ; 298f3 (a:58f3)
 	jp SetState_PuffyDeflating
 
 .asm_29922
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	jp SetState_PuffyRising
@@ -2454,7 +2454,7 @@ UpdateState_PuffyDeflating: ; 29975 (a:5975)
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
 
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	ld a, $01
@@ -2481,7 +2481,7 @@ UpdateState_PuffyDeflating: ; 29975 (a:5975)
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
 
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	jp RecoverFromTransformation
@@ -2640,7 +2640,7 @@ SetState_ZombieTurning: ; 29b6a (a:5b6a)
 
 UpdateState_ZombieTurning: ; 29ba2 (a:5ba2)
 	update_anim_2
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	jp SetState_ZombieWalking
@@ -2711,7 +2711,7 @@ UpdateState_ZombieAirborne: ; 29c29 (a:5c29)
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_29c88
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	jr z, .asm_29c88
 	xor a
@@ -2810,7 +2810,7 @@ SetState_ZombieLanding: ; 29cde (a:5cde)
 
 UpdateState_ZombieLanding: ; 29d6f (a:5d6f)
 	update_anim_2
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	ld a, [wWarioStateCounter]
@@ -2890,7 +2890,7 @@ UpdateState_ZombieSlippingThroughFloor: ; 29dd3 (a:5dd3)
 	xor a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
-	ld [wAnimationHasFinished], a
+	ld [wAnimationEnded], a
 	ld a, $02
 	ld [wWarioStateCounter], a
 	update_anim_2
@@ -2969,7 +2969,7 @@ SetState_ZombieKnockBack: ; 29ea8 (a:5ea8)
 
 UpdateState_ZombieKnockBack: ; 29ef3 (a:5ef3)
 	update_anim_2
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	jp SetState_ZombieIdling
@@ -3118,7 +3118,7 @@ UpdateState_BouncyFloor: ; 2a087 (a:6087)
 	call Func_2ae3b
 	update_anim_2
 
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 
@@ -3171,7 +3171,7 @@ UpdateState_BouncyAirborne: ; 2a0f9 (a:60f9)
 	ld a, [wWaterInteraction]
 	and a
 	jp nz, RecoverFromTransformation
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	jr nz, .asm_2a15a
 	update_anim_2
@@ -3179,7 +3179,7 @@ UpdateState_BouncyAirborne: ; 2a0f9 (a:60f9)
 	ld a, [wJumpVelTable]
 	cp JUMP_VEL_BOUNCY_HIGH_JUMP
 	jr nz, .asm_2a15a
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	jr z, .asm_2a15a
 
@@ -3261,7 +3261,7 @@ UpdateState_BouncyCeiling: ; 2a1f5 (a:61f5)
 	call Func_2ae3b
 	update_anim_2
 
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	ld a, FALLING_JUMP_VEL_INDEX
@@ -3334,7 +3334,7 @@ UpdateState_BouncyUpsideDown: ; 2a267 (a:6267)
 
 UpdateState_BouncyUpsideLanding: ; 2a2d3 (a:62d3)
 	update_anim_2
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 ;	fallthrough
@@ -3395,7 +3395,7 @@ UpdateState_BouncyLastBounce: ; 2a362 (a:6362)
 	ld a, [wWaterInteraction]
 	and a
 	jp nz, RecoverFromTransformation
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	jr nz, .asm_2a394
 	update_anim_2
@@ -3549,7 +3549,7 @@ UpdateState_CrazySpinning: ; 2a489 (a:6489)
 
 UpdateState_CrazyDizzy: ; 2a544 (a:6544)
 	update_anim_1
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 ;	fallthrough
@@ -3638,7 +3638,7 @@ UpdateState_CrazyTurning: ; 2a657 (a:6657)
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jr nz, Func_2a675
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	jp SetState_Crazy
@@ -3838,7 +3838,7 @@ SetState_VampireTurning: ; 2a853 (a:6853)
 
 UpdateState_VampireTurning: ; 2a890 (a:6890)
 	update_anim_2
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	jp SetState_VampireWalking
@@ -3945,7 +3945,7 @@ SetState_BatTransforming: ; 2a951 (a:6951)
 
 UpdateState_BatTransforming: ; 2a9b2 (a:69b2)
 	update_anim_2
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 ;	fallthrough
@@ -4071,7 +4071,7 @@ SetState_VampireTransforming: ; 2aa81 (a:6a81)
 
 UpdateState_VampireTransforming: ; 2ab18 (a:6b18)
 	update_anim_2
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	jp SetState_VampireIdling
@@ -4979,7 +4979,7 @@ Func_2b3f9: ; 2b3f9 (a:73f9)
 	cp WST_CRAZY
 	ret nz ; done if not crazy any more
 
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 

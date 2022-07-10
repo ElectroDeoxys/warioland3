@@ -78,7 +78,7 @@ InitIntroSequence: ; 405f (1:405f)
 	and a
 	jr nz, .asm_40fc
 
-	ld hl, wWarioPlaneObj
+	ld hl, wPlaneWario
 	ld a, 64
 	ld [hli], a ; y coord
 	ld a, 208
@@ -155,7 +155,7 @@ InitIntroSequence: ; 405f (1:405f)
 	jp .asm_41a8
 
 .asm_40fc
-	ld hl, wWarioPlaneObj
+	ld hl, wPlaneWario
 	ld a, 108
 	ld [hli], a ; y coord
 	ld a, 128
@@ -313,7 +313,7 @@ IntroSequencePhase1: ; 41cf (1:41cf)
 	call PlayIntroSFXPlane_Close
 	call Func_4d45
 
-	ld a, [wWarioPlaneState]
+	ld a, [wPlaneWarioVar]
 	dec a
 	jr z, .State1 ; 1
 	dec a
@@ -336,14 +336,14 @@ IntroSequencePhase1: ; 41cf (1:41cf)
 	jp c, .continue
 	ld [hl], 0 ; reset timer
 	play_music MUSIC_INTRO
-	ld hl, wWarioPlaneState
+	ld hl, wPlaneWarioVar
 	inc [hl]
 	jp .continue
 
 .State1
 ; move left up to 48 units
 ; then set timer to 48 and advance state
-	ld hl, wWarioPlaneObjXCoord
+	ld hl, wPlaneWarioXCoord
 	ld a, [hl]
 	cp 72
 	jr nc, .move_left_quick
@@ -365,7 +365,7 @@ IntroSequencePhase1: ; 41cf (1:41cf)
 .go_to_state2
 	ld a, 48
 	ld [wTimer], a
-	ld hl, wWarioPlaneState
+	ld hl, wPlaneWarioVar
 	inc [hl]
 	jp .continue
 
@@ -375,7 +375,7 @@ IntroSequencePhase1: ; 41cf (1:41cf)
 	dec [hl]
 	jp nz, .continue
 	ld [hl], 3
-	ld hl, wWarioPlaneObjFramesetOffset
+	ld hl, wPlaneWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a ; duration
@@ -383,7 +383,7 @@ IntroSequencePhase1: ; 41cf (1:41cf)
 	ld [hli], a
 	ld a, LOW(Frameset_71a7)
 	ld [hl], a
-	ld hl, wWarioPlaneState
+	ld hl, wPlaneWarioVar
 	inc [hl]
 	jr .continue
 
@@ -393,12 +393,12 @@ IntroSequencePhase1: ; 41cf (1:41cf)
 	ld a, [wGlobalCounter]
 	and %111
 	jr nz, .continue
-	ld hl, wWarioPlaneObjYCoord
+	ld hl, wPlaneWarioYCoord
 	inc [hl]
 	ld a, [hl]
 	cp 70
 	jr nz, .continue
-	ld hl, wWarioPlaneState
+	ld hl, wPlaneWarioVar
 	inc [hl]
 	jr .continue
 
@@ -409,7 +409,7 @@ IntroSequencePhase1: ; 41cf (1:41cf)
 	ld a, [wGlobalCounter]
 	and %111
 	jr nz, .continue
-	ld hl, wWarioPlaneObj
+	ld hl, wPlaneWario
 	dec [hl]
 	ld a, [hl]
 	cp 64
@@ -417,12 +417,12 @@ IntroSequencePhase1: ; 41cf (1:41cf)
 	ld hl, wTimer
 	dec [hl]
 	jr z, .go_to_state5
-	ld hl, wWarioPlaneState
+	ld hl, wPlaneWarioVar
 	dec [hl]
 	jr .continue
 
 .go_to_state5
-	ld hl, wWarioPlaneObjFramesetOffset
+	ld hl, wPlaneWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a ; duration
@@ -430,14 +430,14 @@ IntroSequencePhase1: ; 41cf (1:41cf)
 	ld [hli], a
 	ld a, LOW(Frameset_712c)
 	ld [hl], a
-	ld hl, wWarioPlaneState
+	ld hl, wPlaneWarioVar
 	inc [hl]
 	jr .continue
 
 .State5
 ; move to the right and then
 ; set to new coordinates when off the screen
-	ld hl, wWarioPlaneObjXCoord
+	ld hl, wPlaneWarioXCoord
 	ld a, [hl]
 	cp 192
 	jr z, .skip_move_right
@@ -454,7 +454,7 @@ IntroSequencePhase1: ; 41cf (1:41cf)
 
 .skip_move_right
 	; set plane coordinate on top of screen
-	ld hl, wWarioPlaneObjYCoord
+	ld hl, wPlaneWarioYCoord
 	ld a, 16
 	ld [hli], a
 	ld a, 192
@@ -479,9 +479,9 @@ IntroSequencePhase1: ; 41cf (1:41cf)
 
 .continue
 	call ScrollIntroBackgroundLayers
-	ld hl, wWarioPlaneObjEnd - 1
+	ld hl, wPlaneWarioEnd - 1
 	call UpdateObjAnim
-	ld hl, wWarioPlaneObj
+	ld hl, wPlaneWario
 	call Func_4b93
 	ld hl, wMenuObj4
 	call Func_4b93
@@ -497,7 +497,7 @@ IntroSequencePhase2: ; 42ed (1:42ed)
 	call Func_4d45
 	call PlayIntroSFXPlane_Far
 
-	ld a, [wWarioPlaneState]
+	ld a, [wPlaneWarioVar]
 	dec a
 	jr z, .State1
 	dec a
@@ -514,7 +514,7 @@ IntroSequencePhase2: ; 42ed (1:42ed)
 	jp .continue
 
 .move_to_centre
-	ld hl, wWarioPlaneObjXCoord
+	ld hl, wPlaneWarioXCoord
 	ld a, [hl]
 	cp 64
 	jr z, .go_to_state1
@@ -531,14 +531,14 @@ IntroSequencePhase2: ; 42ed (1:42ed)
 	and %1
 	jp nz, .continue
 .move_left
-	ld hl, wWarioPlaneObjXCoord
+	ld hl, wPlaneWarioXCoord
 	dec [hl]
 	jr .continue
 
 .go_to_state1
 	ld a, 48
 	ld [wTimer], a
-	ld hl, wWarioPlaneState
+	ld hl, wPlaneWarioVar
 	inc [hl]
 	jr .continue
 
@@ -547,7 +547,7 @@ IntroSequencePhase2: ; 42ed (1:42ed)
 	ld hl, wTimer
 	dec [hl]
 	jr nz, .continue
-	ld hl, wWarioPlaneObjFramesetOffset
+	ld hl, wPlaneWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -559,16 +559,16 @@ IntroSequencePhase2: ; 42ed (1:42ed)
 	ld [wSFXTimer], a
 	ld a, 224
 	ld [wTimer], a
-	ld hl, wWarioPlaneState
+	ld hl, wPlaneWarioVar
 	inc [hl]
 	jr .continue
 
 .State2
 ; plays plane exploding animation
-	ld a, [wWarioPlaneObjFramesetOffset]
+	ld a, [wPlaneWarioFramesetOffset]
 	cp $18
 	jr nz, .skip_sfx
-	ld a, [wWarioPlaneObjDuration]
+	ld a, [wPlaneWarioDuration]
 	and a
 	play_sfx z, SFX_023
 .skip_sfx
@@ -578,7 +578,7 @@ IntroSequencePhase2: ; 42ed (1:42ed)
 	jr nz, .continue
 
 	play_sfx SFX_PLANE_EXPLOSION
-	ld hl, wWarioPlaneObjFramesetOffset
+	ld hl, wPlaneWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a ; duration
@@ -596,11 +596,11 @@ IntroSequencePhase2: ; 42ed (1:42ed)
 
 .continue
 	call ScrollIntroBackgroundLayers
-	ld hl, wWarioPlaneObjEnd - 1
+	ld hl, wPlaneWarioEnd - 1
 	call UpdateObjAnim
 	ld hl, wMenuObj4
 	call Func_4b93
-	ld hl, wWarioPlaneObj
+	ld hl, wPlaneWario
 	call Func_4b93
 	ld hl, wMenuObj5
 	call Func_4b93
@@ -613,7 +613,7 @@ IntroSequencePhase2: ; 42ed (1:42ed)
 IntroSequencePhase3: ; 43b5 (1:43b5)
 	call Func_4d45
 
-	ld a, [wWarioPlaneState]
+	ld a, [wPlaneWarioVar]
 	dec a
 	jr z, .State1
 	dec a
@@ -626,11 +626,11 @@ IntroSequencePhase3: ; 43b5 (1:43b5)
 ; State0
 ; waits for the animation of the plane to end
 ; then advances to the next state
-	ld a, [wPlaneAnimationEnded]
+	ld a, [wPlaneWarioAnimationEnded]
 	and a
 	jp z, .continue
 	play_sfx SFX_119
-	ld hl, wWarioPlaneObjFramesetOffset
+	ld hl, wPlaneWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a ; duration
@@ -648,15 +648,15 @@ IntroSequencePhase3: ; 43b5 (1:43b5)
 	ld a, [wGlobalCounter]
 	and %11
 	jr nz, .skip_x1
-	ld hl, wWarioPlaneObjXCoord
+	ld hl, wPlaneWarioXCoord
 	inc [hl]
 .skip_x1
-	ld hl, wWarioPlaneObjYCoord
+	ld hl, wPlaneWarioYCoord
 	inc [hl]
 	ld a, [hl]
 	cp 16
 	jp c, .continue
-	ld hl, wWarioPlaneObjFramesetOffset
+	ld hl, wPlaneWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -674,15 +674,15 @@ IntroSequencePhase3: ; 43b5 (1:43b5)
 	ld a, [wGlobalCounter]
 	and %11
 	jr nz, .skip_x2
-	ld hl, wWarioPlaneObjXCoord
+	ld hl, wPlaneWarioXCoord
 	inc [hl]
 .skip_x2
-	ld hl, wWarioPlaneObjYCoord
+	ld hl, wPlaneWarioYCoord
 	inc [hl]
 	ld a, [hl]
 	cp 48
 	jr c, .continue
-	ld hl, wWarioPlaneObjFramesetOffset
+	ld hl, wPlaneWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -700,16 +700,16 @@ IntroSequencePhase3: ; 43b5 (1:43b5)
 	ld a, [wGlobalCounter]
 	and %11
 	jr nz, .skip_x3
-	ld hl, wWarioPlaneObjXCoord
+	ld hl, wPlaneWarioXCoord
 	inc [hl]
 .skip_x3
-	ld hl, wWarioPlaneObjYCoord
+	ld hl, wPlaneWarioYCoord
 	inc [hl]
 	ld a, [hl]
 	cp 112
 	jr c, .continue
 	play_sfx SFX_061
-	ld hl, wWarioPlaneObjFramesetOffset
+	ld hl, wPlaneWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -725,17 +725,17 @@ IntroSequencePhase3: ; 43b5 (1:43b5)
 	cp 224
 	jr z, .skip_x4
 	; make plane x offset follow the near layer
-	ld hl, wWarioPlaneObjXCoord
+	ld hl, wPlaneWarioXCoord
 	inc [hl]
 	inc [hl]
 .skip_x4
-	ld a, [wPlaneAnimationEnded]
+	ld a, [wPlaneWarioAnimationEnded]
 	and a
 	jr z, .finish_scroll
 
 	; animation ended, load new frameset
 	; and play the Title Screen music
-	ld hl, wWarioPlaneObjFramesetOffset
+	ld hl, wPlaneWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -765,13 +765,13 @@ IntroSequencePhase3: ; 43b5 (1:43b5)
 	call FinishIntroBackgroundScroll
 
 .update_anim
-	ld hl, wWarioPlaneObjEnd - 1
+	ld hl, wPlaneWarioEnd - 1
 	call UpdateObjAnim
 	ld a, [wObjAnimWasReset]
-	ld [wPlaneAnimationEnded], a
+	ld [wPlaneWarioAnimationEnded], a
 	ld hl, wMenuObj4
 	call Func_4b93
-	ld hl, wWarioPlaneObj
+	ld hl, wPlaneWario
 	call Func_4b93
 	ld hl, wMenuObj5
 	call Func_4b93
@@ -780,9 +780,9 @@ IntroSequencePhase3: ; 43b5 (1:43b5)
 ; 0x44c3
 
 EndIntroSequence: ; 44c3 (1:44c3)
-	ld hl, wWarioPlaneObjEnd - 1
+	ld hl, wPlaneWarioEnd - 1
 	call UpdateObjAnim
-	ld hl, wWarioPlaneObj
+	ld hl, wPlaneWario
 	call Func_4b93
 	call ClearUnusedVirtualOAM
 
@@ -821,9 +821,9 @@ StartTitleScreen: ; 44f0 (1:44f0)
 ; 0x4508
 
 StartMenu: ; 4508 (1:4508)
-	ld hl, wWarioPlaneObjEnd - 1
+	ld hl, wPlaneWarioEnd - 1
 	call UpdateObjAnim
-	ld hl, wWarioPlaneObj
+	ld hl, wPlaneWario
 	call Func_4b93
 	ld hl, wMenuObj3
 	call Func_4b73
@@ -2064,7 +2064,7 @@ Func_4d45: ; 4d45 (1:4d45)
 	jr nc, .asm_4d66
 	cp $04
 	jr c, .incr_x1
-	ld a, [wWarioPlaneState]
+	ld a, [wPlaneWarioVar]
 	and a
 	jr nz, .asm_4d66
 .incr_x1
@@ -2080,7 +2080,7 @@ Func_4d45: ; 4d45 (1:4d45)
 	ret nc
 	cp $04
 	jr c, .incr_x2
-	ld a, [wWarioPlaneState]
+	ld a, [wPlaneWarioVar]
 	and a
 	ret nz
 .incr_x2
@@ -2214,7 +2214,7 @@ Func_4e3e: ; 4e3e (1:4e3e)
 ; 0x4e5e
 
 PlayIntroSFXPlane_Close: ; 4e5e (1:4e5e)
-	ld a, [wWarioPlaneObjXCoord]
+	ld a, [wPlaneWarioXCoord]
 	cp 160
 	jr nc, PlayIntroSFXPlane3
 	cp 112
@@ -2232,7 +2232,7 @@ PlayIntroSFXPlane3: ; 4e99 (1:4e99)
 ; 0x4eb1
 
 PlayIntroSFXPlane_Far: ; 4eb1 (1:4eb1)
-	ld a, [wWarioPlaneObjXCoord]
+	ld a, [wPlaneWarioXCoord]
 	cp 160
 	jr nc, PlayIntroSFXPlane3
 	jr PlayIntroSFXPlane2

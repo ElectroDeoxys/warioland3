@@ -124,43 +124,42 @@ Func_db29b: ; db29b (36:729b)
 	ldh [rSCY], a
 	ld [wSCY], a
 
-	ld hl, $d515
+	ld hl, wGameOverWario
 	ld a, $80
-	ld [hli], a
+	ld [hli], a ; y
 	ld a, $50
-	ld [hli], a
+	ld [hli], a ; x
 	xor a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld [$d51d], a
-	ld [$d522], a
-	ld a, $6c
-	ld [hli], a
-	ld a, $cb
+	ld [wGameOverWarioVar], a
+	ld [wSFXTimer], a
+	ld a, HIGH(Frameset_aaccb)
+	ld [hli], a ; frameset pointer
+	ld a, LOW(Frameset_aaccb)
 	ld [hl], a
-
-	farcall $2a, UpdateObjAnim
-
-	ld hl, $d515
+	farcall BANK(Frameset_aaccb), UpdateObjAnim
+	ld hl, wGameOverWario
 	call Func_17be
-	ld hl, $d523
+
+	ld hl, wMenuObj1
 	ld a, $18
-	ld [hli], a
+	ld [hli], a ; y
 	ld a, $18
-	ld [hli], a
+	ld [hli], a ; x
 	xor a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld a, $7b
-	ld [hli], a
-	ld a, $f5
+	ld a, HIGH(Frameset_dbbf5)
+	ld [hli], a ; frameset pointer
+	ld a, LOW(Frameset_dbbf5)
 	ld [hl], a
 	call UpdateObjAnim
-	ld hl, $d523
+	ld hl, wMenuObj1
 	call Func_db4e9
 
 	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
@@ -173,7 +172,7 @@ Func_db29b: ; db29b (36:729b)
 ; 0xdb317
 
 Func_db317: ; db317 (36:7317)
-	ld a, [$d51d]
+	ld a, [wGameOverWarioVar]
 	dec a
 	jr z, .asm_db338
 	dec a
@@ -185,7 +184,7 @@ Func_db317: ; db317 (36:7317)
 	jp nz, .asm_db3a9
 
 	play_sfx SFX_134
-	ld hl, $d51d
+	ld hl, wGameOverWarioVar
 	inc [hl]
 	jr .asm_db3a9
 
@@ -199,7 +198,7 @@ Func_db317: ; db317 (36:7317)
 	play_music MUSIC_GOLF_GAME_OVER
 	ld a, 6
 	ld [wTimer], a
-	ld hl, $d51d
+	ld hl, wGameOverWarioVar
 	inc [hl]
 	jr .asm_db3a9
 
@@ -224,7 +223,7 @@ Func_db317: ; db317 (36:7317)
 	and a
 	jr nz, .asm_db3a9
 	play_music MUSIC_GAME_OVER
-	ld hl, $d51d
+	ld hl, wGameOverWarioVar
 	inc [hl]
 	jr .asm_db3a9
 
@@ -233,28 +232,29 @@ Func_db317: ; db317 (36:7317)
 	bit A_BUTTON_F, a
 	jr z, .asm_db3a9
 	play_sfx SFX_SELECTION
-	ld hl, $d519
+	ld hl, wGameOverWarioFramesetOffset
 	xor a
 	ld [hli], a
-	ld [hli], a
-	ld a, $6c
-	ld [hli], a
-	ld a, $e2
+	ld [hli], a ; duration
+	ld a, HIGH(Frameset_aace2)
+	ld [hli], a ; frameset pointer
+	ld a, LOW(Frameset_aace2)
 	ld [hl], a
 	ld hl, wSubState
 	inc [hl]
 .asm_db3a9
-	ld hl, $d51c
-	farcall $2a, UpdateObjAnim
-	ld a, [$d514]
-	ld [$d520], a
+	ld hl, wGameOverWarioFramesetPtr + 1
+	farcall BANK(Frameset_aace2), UpdateObjAnim
+
+	ld a, [wObjAnimWasReset]
+	ld [wGameOverWarioAnimationEnded], a
 	and a
 	call nz, .Func_db3db
-	ld hl, $d515
+	ld hl, wGameOverWario
 	call Func_17be
-	ld hl, $d52a
+	ld hl, wMenuObj1FramesetPtr + 1
 	call UpdateObjAnim
-	ld hl, $d523
+	ld hl, wMenuObj1
 	call Func_db4e9
 	call ClearUnusedVirtualOAM
 	ret
@@ -265,19 +265,19 @@ Func_db317: ; db317 (36:7317)
 ; 0xdb3e4
 
 Func_db3e4: ; db3e4 (36:73e4)
-	ld hl, $d51c
-	farcall $2a, UpdateObjAnim
+	ld hl, wGameOverWarioFramesetPtr + 1
+	farcall BANK(Frameset_aaccb), UpdateObjAnim
 
-	ld a, [$d514]
-	ld [$d520], a
-	ld hl, $d515
+	ld a, [wObjAnimWasReset]
+	ld [wGameOverWarioAnimationEnded], a
+	ld hl, wGameOverWario
 	call Func_17be
-	ld hl, $d52a
+	ld hl, wMenuObj1FramesetPtr + 1
 	call UpdateObjAnim
-	ld hl, $d523
+	ld hl, wMenuObj1
 	call Func_db4e9
 	call ClearUnusedVirtualOAM
-	ld a, [$d520]
+	ld a, [wGameOverWarioAnimationEnded]
 	and a
 	ret z
 	ld hl, wSubState
@@ -504,7 +504,6 @@ OAM_dbbd2: ; dbbd2 (36:7bd2)
 	db $80
 ; 0xdbbf5
 
-; unreferenced?
 Frameset_dbbf5: ; dbbf5 (36:7bf5)
 	db $00,  4
 	db $ff

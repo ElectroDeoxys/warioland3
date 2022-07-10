@@ -472,7 +472,7 @@ ActionHelp_ShowInitialWarioWalk: ; 1fb84d (7e:784d)
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
 
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	ld a, $40
 	ld [hli], a
 	ld a, $40
@@ -487,7 +487,7 @@ ActionHelp_ShowInitialWarioWalk: ; 1fb84d (7e:784d)
 	ld a, LOW(Frameset_149c5)
 	ld [hli], a
 	xor a
-	ld [hl], a ; wActionHelpWarioJumpVelIndex
+	ld [hl], a ; wActionHelpWarioVar
 	ld [wSFXTimer], a
 	ld a, HIGH(OAM_1426c)
 	ld [wActionHelpWarioOAMPtr + 0], a
@@ -516,7 +516,7 @@ ActionHelp_ShowWarioJump: ; 1fb899 (7e:7899)
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
 
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -553,7 +553,7 @@ ActionHelp_ShowWarioJumpLeft: ; 1fb8e2 (7e:78e2)
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
 
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -571,7 +571,7 @@ ActionHelp_ShowWarioJumpLeft: ; 1fb8e2 (7e:78e2)
 ; 0x1fb92b
 
 ActionHelp_ShowWarioSmashAttack: ; 1fb92b (7e:792b)
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -583,7 +583,7 @@ ActionHelp_ShowWarioSmashAttack: ; 1fb92b (7e:792b)
 	ld a, LOW(Frameset_15f91)
 	ld [hli], a
 	ld a, $18
-	ld [hl], a ; wActionHelpWarioJumpVelIndex
+	ld [hl], a ; wActionHelpWarioVar
 	ret
 
 .got_super_jump_slam
@@ -592,13 +592,13 @@ ActionHelp_ShowWarioSmashAttack: ; 1fb92b (7e:792b)
 	ld a, LOW(Frameset_16055)
 	ld [hli], a
 	ld a, $18
-	ld [hl], a ; wActionHelpWarioJumpVelIndex
+	ld [hl], a ; wActionHelpWarioVar
 	ret
 ; 0x1fb94c
 
 ActionHelp_ShowWarioGroundPound: ; 1fb94c (7e:794c)
 	play_sfx SFX_GROUND_POUND
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -612,7 +612,7 @@ ActionHelp_ShowWarioGroundPound: ; 1fb94c (7e:794c)
 ActionHelp_ShowWarioGroundShake: ; 1fb961 (7e:7961)
 	play_sfx SFX_GROUND_SHAKE
 
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -626,7 +626,7 @@ ActionHelp_ShowWarioGroundShake: ; 1fb961 (7e:7961)
 ActionHelp_ShowWarioLand: ; 1fb976 (7e:7976)
 	play_sfx SFX_LAND
 
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -655,7 +655,7 @@ ActionHelp_ShowWarioIdle: ; 1fb98b (7e:798b)
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
 
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -688,7 +688,7 @@ ActionHelp_ShowWarioWalk: ; 1fb9ca (7e:79ca)
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
 
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -723,7 +723,7 @@ ActionHelp_ShowWarioSwim: ; 1fba09 (7e:7a09)
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
 
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -739,7 +739,7 @@ ActionHelp_ShowWarioSwim: ; 1fba09 (7e:7a09)
 ; 0x1fba50
 
 ActionHelp_ShowWarioSwimLeft: ; 1fba50 (7e:7a50)
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -751,7 +751,7 @@ ActionHelp_ShowWarioSwimLeft: ; 1fba50 (7e:7a50)
 ; 0x1fba5d
 
 ActionHelp_ShowWarioSubmerge: ; 1fba5d (7e:7a5d)
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -766,7 +766,7 @@ ActionHelp_ShowWarioSubmerge: ; 1fba5d (7e:7a5d)
 ; 0x1fba6e
 
 ActionHelp_ShowWarioUnderwaterThrust: ; 1fba6e (7e:7a6e)
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -781,7 +781,7 @@ ActionHelp_ShowWarioUnderwaterThrust: ; 1fba6e (7e:7a6e)
 ; 0x1fba7f
 
 ActionHelp_ShowWarioUnderwaterStopped: ; 1fba7f (7e:7a7f)
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -812,7 +812,7 @@ ActionHelp_ShowWarioGrab: ; 1fba8c (7e:7a8c)
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
 
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -847,7 +847,7 @@ ActionHelp_ShowWarioSlowGrab: ; 1fbad3 (7e:7ad3)
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
 
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -880,7 +880,7 @@ ActionHelp_ShowWarioBeginGrab: ; 1fbb1a (7e:7b1a)
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
 
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -896,7 +896,7 @@ ActionHelp_ShowWarioBeginGrab: ; 1fbb1a (7e:7b1a)
 ; 0x1fbb59
 
 ActionHelp_ShowWarioGrabWalk: ; 1fbb59 (7e:7b59)
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -927,7 +927,7 @@ ActionHelp_ShowWarioBeginThrow: ; 1fbb66 (7e:7b66)
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
 
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -943,7 +943,7 @@ ActionHelp_ShowWarioBeginThrow: ; 1fbb66 (7e:7b66)
 ; 0x1fbbad
 
 ActionHelp_ShowWarioThrow: ; 1fbbad (7e:7bad)
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -955,7 +955,7 @@ ActionHelp_ShowWarioThrow: ; 1fbbad (7e:7bad)
 ; 0x1fbbba
 
 ActionHelp_ShowWarioChargeThrow: ; 1fbbba (7e:7bba)
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -969,7 +969,7 @@ ActionHelp_ShowWarioChargeThrow: ; 1fbbba (7e:7bba)
 ; 0x1fbbcb
 
 ActionHelp_ShowWarioFullyChargedGrab: ; 1fbbcb (7e:7bcb)
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -981,7 +981,7 @@ ActionHelp_ShowWarioFullyChargedGrab: ; 1fbbcb (7e:7bcb)
 ; 0x1fbbd8
 
 ActionHelp_ShowWarioFullyChargedThrow: ; 1fbbd8 (7e:7bd8)
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -1010,7 +1010,7 @@ ActionHelp_ShowWarioAttack: ; 1fbbe5 (7e:7be5)
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
 
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [wSFXTimer], a
 	ld [hli], a
@@ -1041,7 +1041,7 @@ ActionHelp_ShowWarioAttack: ; 1fbbe5 (7e:7be5)
 ; 0x1fbc3f
 
 ActionHelp_ShowWarioRoll: ; 1fbc3f (7e:7c3f)
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -1072,7 +1072,7 @@ ActionHelp_ShowWarioBump: ; 1fbc4c (7e:7c4c)
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
 
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -1105,7 +1105,7 @@ ActionHelp_ShowWarioSlide: ; 1fbc93 (7e:7c93)
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
 
-	ld hl, wActionHelpWarioObjFramesetOffset
+	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a

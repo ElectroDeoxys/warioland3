@@ -15,9 +15,9 @@ SuperGrabGloveActionHelp: ; 1fb0ac (7e:70ac)
 	ldh [hCallFuncBank], a
 	hcall UpdateObjAnim
 	ld a, [wObjAnimWasReset]
-	ld [wMenuObj4AnimationHasFinished], a
+	ld [wMenuObj4AnimationEnded], a
 
-	ld hl, wActionHelpWarioObjFramesetPtr + 1
+	ld hl, wActionHelpWarioFramesetPtr + 1
 	farcall $5, UpdateObjAnim
 	ld a, [wObjAnimWasReset]
 	ld [wActionHelpWarioAnimationEnded], a
@@ -25,7 +25,7 @@ SuperGrabGloveActionHelp: ; 1fb0ac (7e:70ac)
 .action_help_frozen
 	ld hl, wMenuObj4YCoord
 	farcall AddActionHelpSprite_Far
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	farcall AddActionHelpWarioSprite
 
 	ld hl, wMenuObj6FramesetPtr + 1
@@ -116,7 +116,7 @@ Func_1fb1d4: ; 1fb1d4 (7e:71d4)
 	cp $48
 	ret nc
 
-	ld hl, wActionHelpWarioObjYCoord
+	ld hl, wActionHelpWarioYCoord
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $05
@@ -148,7 +148,7 @@ Func_1fb1f6: ; 1fb1f6 (7e:71f6)
 	ret
 
 .asm_1fb20e
-	ld hl, wActionHelpWarioObjYCoord
+	ld hl, wActionHelpWarioYCoord
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $04
@@ -160,7 +160,7 @@ Func_1fb1f6: ; 1fb1f6 (7e:71f6)
 	ret
 
 .asm_1fb21e
-	ld hl, wActionHelpWarioObjYCoord
+	ld hl, wActionHelpWarioYCoord
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $14
@@ -172,7 +172,7 @@ Func_1fb1f6: ; 1fb1f6 (7e:71f6)
 	ret
 
 .asm_1fb22e
-	ld hl, wActionHelpWarioObjYCoord
+	ld hl, wActionHelpWarioYCoord
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $1c
@@ -325,7 +325,7 @@ Func_1fb302: ; 1fb302 (7e:7302)
 	cp $48
 	ret nc
 
-	ld hl, wActionHelpWarioObjYCoord
+	ld hl, wActionHelpWarioYCoord
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $05
@@ -357,7 +357,7 @@ Func_1fb324: ; 1fb324 (7e:7324)
 	ret
 
 .asm_1fb33c
-	ld hl, wActionHelpWarioObjYCoord
+	ld hl, wActionHelpWarioYCoord
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $04
@@ -369,7 +369,7 @@ Func_1fb324: ; 1fb324 (7e:7324)
 	ret
 
 .asm_1fb34c
-	ld hl, wActionHelpWarioObjYCoord
+	ld hl, wActionHelpWarioYCoord
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $14
@@ -381,7 +381,7 @@ Func_1fb324: ; 1fb324 (7e:7324)
 	ret
 
 .asm_1fb35c
-	ld hl, wActionHelpWarioObjYCoord
+	ld hl, wActionHelpWarioYCoord
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $1c
@@ -564,7 +564,7 @@ Func_1fb44e: ; 1fb44e (7e:744e)
 	cp $48
 	ret nc
 
-	ld hl, wActionHelpWarioObjYCoord
+	ld hl, wActionHelpWarioYCoord
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $05
@@ -596,7 +596,7 @@ Func_1fb470: ; 1fb470 (7e:7470)
 	ret
 
 .asm_1fb488
-	ld hl, wActionHelpWarioObjYCoord
+	ld hl, wActionHelpWarioYCoord
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $04
@@ -608,7 +608,7 @@ Func_1fb470: ; 1fb470 (7e:7470)
 	ret
 
 .asm_1fb498
-	ld hl, wActionHelpWarioObjYCoord
+	ld hl, wActionHelpWarioYCoord
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $14
@@ -620,7 +620,7 @@ Func_1fb470: ; 1fb470 (7e:7470)
 	ret
 
 .asm_1fb4a8
-	ld hl, wActionHelpWarioObjYCoord
+	ld hl, wActionHelpWarioYCoord
 	ld de, wMenuObj4YCoord
 	ld a, [hli]
 	sub $1c
@@ -735,7 +735,7 @@ Func_1fb555: ; 1fb555 (7e:7555)
 	ret
 
 Func_1fb579: ; 1fb579 (7e:7579)
-	ld a, [wMenuObj4AnimationHasFinished]
+	ld a, [wMenuObj4AnimationEnded]
 	and a
 	ret z
 	ld a, $e8

@@ -372,7 +372,7 @@ InitPauseMenu_SkipBackupVRAM: ; 1f0099 (7c:4099)
 
 UpdatePauseMenu: ; 1f02a2 (7c:42a2)
 	call HandlePauseMenuInput
-	ld hl, $d53a
+	ld hl, wMenuObj3FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj3
 	call AddPauseMenuSprite
@@ -409,7 +409,7 @@ UpdatePauseMenu: ; 1f02a2 (7c:42a2)
 	call AddPauseMenuSprite
 	ld hl, wMenuObj11
 	call AddPauseMenuSprite
-	ld hl, $d532
+	ld hl, wMenuObj2FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj2
 	call AddPauseMenuSprite

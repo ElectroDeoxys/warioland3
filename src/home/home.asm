@@ -446,7 +446,7 @@ UpdateAnimation:: ; e53 (0:e53)
 	ld e, a
 
 	xor a ; FALSE
-	ld [wAnimationHasFinished], a
+	ld [wAnimationEnded], a
 	ld hl, wFrameDuration
 	ld a, [hl]
 	sub 1
@@ -478,7 +478,7 @@ UpdateAnimation:: ; e53 (0:e53)
 	ld [hld], a ; wAnimationFrame
 	ld [hl], a ; wFrameDuration
 	ld a, TRUE
-	ld [wAnimationHasFinished], a
+	ld [wAnimationEnded], a
 	ret
 ; 0xe87
 
@@ -1874,15 +1874,15 @@ Func_17ec:: ; 17ec (0:17ec)
 	ld [wCurSpriteFrame], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
-	ld a, [$d521]
+	ld a, [wCreditsMusicBoxOAMBank]
 	ld [wTempBank], a
 	ld a, [wROMBank]
 	push af
 	ld a, [wTempBank]
 	bankswitch
-	ld a, [$d51e]
+	ld a, [wCreditsMusicBoxOAMPtr + 0]
 	ld h, a
-	ld a, [$d51f]
+	ld a, [wCreditsMusicBoxOAMPtr + 1]
 	ld l, a
 	call TryAddSprite
 	pop af

@@ -19,6 +19,14 @@ MACRO menu_obj_struct
 \1End::
 ENDM
 
+MACRO menu_obj_ext_struct
+	menu_obj_struct \1
+\1Var::            db
+\1OAMPtr::         dw
+\1AnimationEnded:: db
+\1OAMBank::        db
+ENDM
+
 MACRO scene_obj_struct
 	sprite_oam_struct \1
 \1Duration:: db

@@ -8,13 +8,13 @@ VampireActionHelp: ; 1e4580 (79:4580)
 	and a
 	jr nz, .action_help_frozen
 
-	ld hl, wActionHelpWarioObjFramesetPtr + 1
+	ld hl, wActionHelpWarioFramesetPtr + 1
 	farcall $7f, UpdateObjAnim
 	ld a, [wObjAnimWasReset]
 	ld [wActionHelpWarioAnimationEnded], a
 
 .action_help_frozen
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	call AddActionHelpWarioSprite_FromBank
 	ld hl, wMenuObj4 ; unnecessary
 .done
@@ -81,7 +81,7 @@ Func_1e45f3: ; 1e45f3 (79:45f3)
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
 
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	ld a, $40
 	ld [hli], a
 	ld a, $30
@@ -111,7 +111,7 @@ Func_1e45f3: ; 1e45f3 (79:45f3)
 	ret
 
 Func_1e464b: ; 1e464b (79:464b)
-	ld hl, wActionHelpWarioObjXCoord
+	ld hl, wActionHelpWarioXCoord
 	inc [hl]
 	ld a, [hl]
 	cp $80
@@ -166,10 +166,10 @@ ApplyWaterCurrentMovementb: ; 1e46ab (79:46ab)
 	ld a, [wActionHelpCounter]
 	and %1
 	jr z, .asm_1e46cd
-	ld hl, wActionHelpWarioObjXCoord
+	ld hl, wActionHelpWarioXCoord
 	dec [hl]
 .asm_1e46cd
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	ld a, [hl]
 	cp $30
 	jr c, .asm_1e46d6
@@ -182,7 +182,7 @@ ApplyWaterCurrentMovementb: ; 1e46ab (79:46ab)
 
 	call ActionHelp2_ClearButtonsInput
 	ld a, $18
-	ld [wActionHelpWarioJumpVelIndex], a
+	ld [wActionHelpWarioVar], a
 
 	ld hl, wActionHelpState
 	inc [hl]
@@ -192,26 +192,26 @@ Func_1e46e8: ; 1e46e8 (79:46e8)
 	ld a, [wActionHelpCounter]
 	and %1
 	jr z, .asm_1e46f3
-	ld hl, wActionHelpWarioObjXCoord
+	ld hl, wActionHelpWarioXCoord
 	dec [hl]
 .asm_1e46f3
-	ld hl, wActionHelpWarioJumpVelIndex
+	ld hl, wActionHelpWarioVar
 	ld a, [hl]
 	ld e, a
 	ld d, $00
 	ld hl, JumpVelTable_Normal
 	add hl, de
-	ld a, [wActionHelpWarioObjYCoord]
+	ld a, [wActionHelpWarioYCoord]
 	add [hl]
-	ld [wActionHelpWarioObjYCoord], a
-	ld hl, wActionHelpWarioJumpVelIndex
+	ld [wActionHelpWarioYCoord], a
+	ld hl, wActionHelpWarioVar
 	inc [hl]
 	ld a, [hl]
 	cp $27
 	ret c
 
 	xor a
-	ld [wActionHelpWarioJumpVelIndex], a
+	ld [wActionHelpWarioVar], a
 	ld [wSFXTimer], a
 	call ActionHelp2_ShowAInput
 
@@ -225,10 +225,10 @@ Func_1e471c: ; 1e471c (79:471c)
 	ld a, [wActionHelpCounter]
 	and %1
 	jr z, .asm_1e473e
-	ld hl, wActionHelpWarioObjXCoord
+	ld hl, wActionHelpWarioXCoord
 	dec [hl]
 .asm_1e473e
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	ld a, [hl]
 	cp $2c
 	jr c, .asm_1e4747
@@ -241,7 +241,7 @@ Func_1e471c: ; 1e471c (79:471c)
 
 	call ActionHelp2_ClearButtonsInput
 	ld a, $18
-	ld [wActionHelpWarioJumpVelIndex], a
+	ld [wActionHelpWarioVar], a
 
 	ld hl, wActionHelpState
 	inc [hl]
@@ -251,26 +251,26 @@ Func_1e4759: ; 1e4759 (79:4759)
 	ld a, [wActionHelpCounter]
 	and %1
 	jr z, .asm_1e4764
-	ld hl, wActionHelpWarioObjXCoord
+	ld hl, wActionHelpWarioXCoord
 	dec [hl]
 .asm_1e4764
-	ld hl, wActionHelpWarioJumpVelIndex
+	ld hl, wActionHelpWarioVar
 	ld a, [hl]
 	ld e, a
 	ld d, $00
 	ld hl, JumpVelTable_Normal
 	add hl, de
-	ld a, [wActionHelpWarioObjYCoord]
+	ld a, [wActionHelpWarioYCoord]
 	add [hl]
-	ld [wActionHelpWarioObjYCoord], a
-	ld hl, wActionHelpWarioJumpVelIndex
+	ld [wActionHelpWarioYCoord], a
+	ld hl, wActionHelpWarioVar
 	inc [hl]
 	ld a, [hl]
 	cp $27
 	ret c
 
 	xor a
-	ld [wActionHelpWarioJumpVelIndex], a
+	ld [wActionHelpWarioVar], a
 	ld [wSFXTimer], a
 	call ActionHelp2_ShowAInput
 
@@ -284,10 +284,10 @@ Func_1e478d: ; 1e478d (79:478d)
 	ld a, [wActionHelpCounter]
 	and %1
 	jr z, .asm_1e47af
-	ld hl, wActionHelpWarioObjXCoord
+	ld hl, wActionHelpWarioXCoord
 	dec [hl]
 .asm_1e47af
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	ld a, [hl]
 	cp $28
 	jr c, .asm_1e47b8
@@ -300,7 +300,7 @@ Func_1e478d: ; 1e478d (79:478d)
 
 	call ActionHelp2_ClearButtonsInput
 	ld a, $18
-	ld [wActionHelpWarioJumpVelIndex], a
+	ld [wActionHelpWarioVar], a
 
 	ld hl, wActionHelpState
 	inc [hl]
@@ -310,26 +310,26 @@ Func_1e47ca: ; 1e47ca (79:47ca)
 	ld a, [wActionHelpCounter]
 	and %1
 	jr z, .asm_1e47d5
-	ld hl, wActionHelpWarioObjXCoord
+	ld hl, wActionHelpWarioXCoord
 	dec [hl]
 .asm_1e47d5
-	ld hl, wActionHelpWarioJumpVelIndex
+	ld hl, wActionHelpWarioVar
 	ld a, [hl]
 	ld e, a
 	ld d, $00
 	ld hl, JumpVelTable_Normal
 	add hl, de
-	ld a, [wActionHelpWarioObjYCoord]
+	ld a, [wActionHelpWarioYCoord]
 	add [hl]
-	ld [wActionHelpWarioObjYCoord], a
-	ld hl, wActionHelpWarioJumpVelIndex
+	ld [wActionHelpWarioYCoord], a
+	ld hl, wActionHelpWarioVar
 	inc [hl]
 	ld a, [hl]
 	cp $27
 	ret c
 
 	xor a
-	ld [wActionHelpWarioJumpVelIndex], a
+	ld [wActionHelpWarioVar], a
 	ld [wSFXTimer], a
 	call ActionHelp2_ShowAInput
 
@@ -340,7 +340,7 @@ Func_1e47ca: ; 1e47ca (79:47ca)
 Func_1e47fe: ; 1e47fe (79:47fe)
 	play_sfx_rept 16, SFX_071
 
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	ld a, [hl]
 	cp $20
 	jr c, .asm_1e481e
@@ -350,7 +350,7 @@ Func_1e47fe: ; 1e47fe (79:47fe)
 	ld a, [wActionHelpCounter]
 	and %1
 	ret z
-	ld hl, wActionHelpWarioObjXCoord
+	ld hl, wActionHelpWarioXCoord
 	dec [hl]
 	ld a, [hl]
 	cp $30
@@ -359,14 +359,14 @@ Func_1e47fe: ; 1e47fe (79:47fe)
 	call ActionHelp2_ClearButtonsInput
 	call ActionHelp2_ClearDPadInput
 	ld a, $18
-	ld [wActionHelpWarioJumpVelIndex], a
+	ld [wActionHelpWarioVar], a
 
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
 
 Func_1e483d: ; 1e483d (79:483d)
-	ld hl, wActionHelpWarioJumpVelIndex
+	ld hl, wActionHelpWarioVar
 	ld a, [hl]
 	cp $27
 	jr z, .asm_1e4847
@@ -377,17 +377,17 @@ Func_1e483d: ; 1e483d (79:483d)
 	ld d, $00
 	ld hl, JumpVelTable_Normal
 	add hl, de
-	ld a, [wActionHelpWarioObjYCoord]
+	ld a, [wActionHelpWarioYCoord]
 	add [hl]
-	ld [wActionHelpWarioObjYCoord], a
-	ld a, [wActionHelpWarioObjYCoord]
+	ld [wActionHelpWarioYCoord], a
+	ld a, [wActionHelpWarioYCoord]
 	cp $40
 	ret c
 
 	ld a, $40
-	ld [wActionHelpWarioObjYCoord], a
+	ld [wActionHelpWarioYCoord], a
 	xor a
-	ld [wActionHelpWarioJumpVelIndex], a
+	ld [wActionHelpWarioVar], a
 	call ActionHelp_ShowWarioBatRight
 	ld a, $30
 	ld [wTimer], a

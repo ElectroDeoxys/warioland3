@@ -12,7 +12,7 @@ HeadSmashHelmetActionHelp: ; 1f91c5 (7e:51c5)
 	ldh [hCallFuncBank], a
 	hcall UpdateObjAnim
 	ld a, [wObjAnimWasReset]
-	ld [wMenuObj5AnimationHasFinished], a
+	ld [wMenuObj5AnimationEnded], a
 	ld hl, wMenuObj5YCoord
 	farcall AddActionHelpSprite_Far
 
@@ -26,15 +26,15 @@ HeadSmashHelmetActionHelp: ; 1f91c5 (7e:51c5)
 	ldh [hCallFuncBank], a
 	hcall UpdateObjAnim
 	ld a, [wObjAnimWasReset]
-	ld [wMenuObj4AnimationHasFinished], a
+	ld [wMenuObj4AnimationEnded], a
 
-	ld hl, wActionHelpWarioObjFramesetPtr + 1
+	ld hl, wActionHelpWarioFramesetPtr + 1
 	farcall $05, UpdateObjAnim
 
 .action_help_frozen
 	ld hl, wMenuObj4YCoord
 	farcall AddActionHelpSprite_Far
-	ld hl, wActionHelpWarioObj
+	ld hl, wActionHelpWario
 	farcall AddActionHelpWarioSprite
 .done
 	ret
@@ -150,22 +150,22 @@ Func_1f9306: ; 1f9306 (7e:5306)
 ; 0x1f9313
 
 Func_1f9313: ; 1f9313 (7e:5313)
-	ld hl, wActionHelpWarioJumpVelIndex
+	ld hl, wActionHelpWarioVar
 	inc [hl]
 	ld a, [hl]
 	ld e, a
 	ld d, $00
 	ld hl, JumpVelTable_Normal
 	add hl, de
-	ld a, [wActionHelpWarioObjYCoord]
+	ld a, [wActionHelpWarioYCoord]
 	add [hl]
-	ld [wActionHelpWarioObjYCoord], a
+	ld [wActionHelpWarioYCoord], a
 	sub $18
 	ld hl, wMenuObj4YCoord
 	cp [hl]
 	ret nc
 	ld a, $18
-	ld [wActionHelpWarioJumpVelIndex], a
+	ld [wActionHelpWarioVar], a
 	ld b, $00
 	call ActionHelp_ShowBlockDebrisWithYOffset
 
@@ -198,23 +198,23 @@ Func_1f9313: ; 1f9313 (7e:5313)
 ; 0x1f935b
 
 Func_1f935b: ; 1f935b (7e:535b)
-	ld hl, wActionHelpWarioJumpVelIndex
+	ld hl, wActionHelpWarioVar
 	inc [hl]
 	ld a, [hl]
 	ld e, a
 	ld d, $00
 	ld hl, JumpVelTable_Normal
 	add hl, de
-	ld a, [wActionHelpWarioObjYCoord]
+	ld a, [wActionHelpWarioYCoord]
 	add [hl]
-	ld [wActionHelpWarioObjYCoord], a
+	ld [wActionHelpWarioYCoord], a
 	cp $40
 	ret c
 	ld a, $40
-	ld [wActionHelpWarioObjYCoord], a
+	ld [wActionHelpWarioYCoord], a
 
 	xor a
-	ld [wActionHelpWarioJumpVelIndex], a
+	ld [wActionHelpWarioVar], a
 	call ActionHelp_ClearButtonsInput
 	call ActionHelp_ShowWarioIdle
 	ld a, $20
@@ -226,7 +226,7 @@ Func_1f935b: ; 1f935b (7e:535b)
 ; 0x1f938a
 
 Func_1f938a: ; 1f938a (7e:538a)
-	ld a, [wMenuObj5AnimationHasFinished]
+	ld a, [wMenuObj5AnimationEnded]
 	and a
 	jr z, .skip_hide
 	call ActionHelp_HideObj5BlockDebris
@@ -274,22 +274,22 @@ Func_1f93bb: ; 1f93bb (7e:53bb)
 ; 0x1f93cb
 
 Func_1f93cb: ; 1f93cb (7e:53cb)
-	ld hl, wActionHelpWarioJumpVelIndex
+	ld hl, wActionHelpWarioVar
 	inc [hl]
 	ld a, [hl]
 	ld e, a
 	ld d, $00
 	ld hl, JumpVelTable_Normal
 	add hl, de
-	ld a, [wActionHelpWarioObjYCoord]
+	ld a, [wActionHelpWarioYCoord]
 	add [hl]
-	ld [wActionHelpWarioObjYCoord], a
+	ld [wActionHelpWarioYCoord], a
 	sub $18
 	ld hl, wMenuObj4YCoord
 	cp [hl]
 	ret nc
 	ld a, $18
-	ld [wActionHelpWarioJumpVelIndex], a
+	ld [wActionHelpWarioVar], a
 	ld b, $00
 	call ActionHelp_ShowBlockDebrisWithYOffset
 
@@ -322,23 +322,23 @@ Func_1f93cb: ; 1f93cb (7e:53cb)
 ; 0x1f9413
 
 Func_1f9413: ; 1f9413 (7e:5413)
-	ld hl, wActionHelpWarioJumpVelIndex
+	ld hl, wActionHelpWarioVar
 	inc [hl]
 	ld a, [hl]
 	ld e, a
 	ld d, $00
 	ld hl, JumpVelTable_Normal
 	add hl, de
-	ld a, [wActionHelpWarioObjYCoord]
+	ld a, [wActionHelpWarioYCoord]
 	add [hl]
-	ld [wActionHelpWarioObjYCoord], a
+	ld [wActionHelpWarioYCoord], a
 	cp $40
 	ret c
 	ld a, $40
-	ld [wActionHelpWarioObjYCoord], a
+	ld [wActionHelpWarioYCoord], a
 
 	xor a
-	ld [wActionHelpWarioJumpVelIndex], a
+	ld [wActionHelpWarioVar], a
 	call ActionHelp_ClearButtonsInput
 	call ActionHelp_ShowWarioIdle
 	ld a, $20
@@ -350,7 +350,7 @@ Func_1f9413: ; 1f9413 (7e:5413)
 ; 0x1f9442
 
 Func_1f9442: ; 1f9442 (7e:5442)
-	ld a, [wMenuObj5AnimationHasFinished]
+	ld a, [wMenuObj5AnimationEnded]
 	and a
 	jr z, .skip_hide
 	call ActionHelp_HideObj5BlockDebris

@@ -60,7 +60,7 @@ Func_160028: ; 160028 (58:4028)
 	ld a, $e5
 	ld [hl], a
 
-	ld hl, $d515
+	ld hl, wCreditsMusicBox
 	ld a, $5b
 	ld [hli], a
 	ld a, $18
@@ -70,22 +70,22 @@ Func_160028: ; 160028 (58:4028)
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld [$d51d], a
+	ld [wCreditsMusicBoxVar], a
 	ld a, $5c
 	ld [hli], a
 	ld a, $c4
 	ld [hl], a
 	ld a, $57
-	ld [$d51e], a
+	ld [wCreditsMusicBoxOAMPtr + 0], a
 	ld a, $e8
-	ld [$d51f], a
+	ld [wCreditsMusicBoxOAMPtr + 1], a
 	ld a, $58
-	ld [$d521], a
+	ld [wCreditsMusicBoxOAMBank], a
 	call UpdateObjAnim
-	ld hl, $d515
+	ld hl, wCreditsMusicBox
 	call Func_1604b1
 
-	ld hl, $d523
+	ld hl, wMenuObj1
 	ld a, $5b
 	ld [hli], a
 	ld a, $18
@@ -100,7 +100,7 @@ Func_160028: ; 160028 (58:4028)
 	ld a, $af
 	ld [hl], a
 	call UpdateObjAnim
-	ld hl, $d523
+	ld hl, wMenuObj1
 	call Func_1604b1
 	call ClearUnusedVirtualOAM
 	stop_music
@@ -120,9 +120,9 @@ Func_1600d4: ; 1600d4 (58:40d4)
 	jr z, .asm_1600f8
 	dec [hl]
 	call z, .PlayCreditsMusic
-	ld hl, $d515
+	ld hl, wCreditsMusicBox
 	call Func_1604b1
-	ld hl, $d523
+	ld hl, wMenuObj1
 	call Func_1604b1
 	call ClearUnusedVirtualOAM
 	ret
@@ -132,13 +132,13 @@ Func_1600d4: ; 1600d4 (58:40d4)
 	ret
 
 .asm_1600f8
-	ld hl, $d51c
+	ld hl, wCreditsMusicBoxFramesetPtr + 1
 	call UpdateObjAnim
-	ld hl, $d515
+	ld hl, wCreditsMusicBox
 	call Func_1604b1
-	ld hl, $d52a
+	ld hl, wMenuObj1FramesetPtr + 1
 	call UpdateObjAnim
-	ld hl, $d523
+	ld hl, wMenuObj1
 	call Func_1604b1
 	call ClearUnusedVirtualOAM
 	ld a, [wc084]
@@ -214,24 +214,24 @@ Func_1600d4: ; 1600d4 (58:40d4)
 
 .asm_160187
 	xor a
-	ld [$d51d], a
+	ld [wCreditsMusicBoxVar], a
 	ld hl, wSubState
 	inc [hl]
 	ret
 ; 0x160190
 
 Func_160190: ; 160190 (58:4190)
-	ld a, [$d51d]
+	ld a, [wCreditsMusicBoxVar]
 	and a
 	jr nz, .asm_1601b7
-	ld hl, $d516
+	ld hl, wCreditsMusicBoxXCoord
 	ld a, [hl]
 	cp $38
 	jr c, .asm_1601b0
 	cp $50
 	jr c, .asm_1601a9
 	ld a, $01
-	ld [$d51d], a
+	ld [wCreditsMusicBoxVar], a
 	jr .asm_1601b7
 .asm_1601a9
 	ld a, [wGlobalCounter]
@@ -239,26 +239,26 @@ Func_160190: ; 160190 (58:4190)
 	jr nz, .asm_160216
 .asm_1601b0
 	inc [hl]
-	ld hl, $d524
+	ld hl, wMenuObj1XCoord
 	inc [hl]
 	jr .asm_1601e3
 .asm_1601b7
 	ld a, [wGlobalCounter]
 	and $01
 	jr nz, .asm_160216
-	ld a, [$d520]
+	ld a, [wCreditsMusicBoxAnimationEnded]
 	and a
 	jr z, .asm_1601e3
 	xor a
-	ld [$d520], a
-	ld a, [$d51d]
+	ld [wCreditsMusicBoxAnimationEnded], a
+	ld a, [wCreditsMusicBoxVar]
 	inc a
-	ld [$d51d], a
+	ld [wCreditsMusicBoxVar], a
 	cp $03
 	jr c, .asm_1601e3
 	cp $04
 	jr z, .asm_160226
-	ld hl, $d519
+	ld hl, wCreditsMusicBoxFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -268,34 +268,34 @@ Func_160190: ; 160190 (58:4190)
 	ld [hl], a
 
 .asm_1601e3
-	ld hl, $d51c
-	ld a, [$d521]
+	ld hl, wCreditsMusicBoxFramesetPtr + 1
+	ld a, [wCreditsMusicBoxOAMBank]
 	ld [wTempBank], a
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	hcall UpdateObjAnim
 
-	ld a, [$d514]
-	ld [$d520], a
-	ld a, [$d51d]
+	ld a, [wObjAnimWasReset]
+	ld [wCreditsMusicBoxAnimationEnded], a
+	ld a, [wCreditsMusicBoxVar]
 	cp $03
 	jr nz, .asm_160210
 	ld a, [wGlobalCounter]
 	and $03
 	jr nz, .asm_160216
 .asm_160210
-	ld hl, $d52a
+	ld hl, wMenuObj1FramesetPtr + 1
 	call UpdateObjAnim
 .asm_160216
-	ld hl, $d515
+	ld hl, wCreditsMusicBox
 	call Func_17ec
-	ld hl, $d523
+	ld hl, wMenuObj1
 	call Func_1604b1
 	call ClearUnusedVirtualOAM
 	ret
 
 .asm_160226
-	ld hl, $d515
+	ld hl, wCreditsMusicBox
 	ld a, $5b
 	ld [hli], a
 	ld a, $50
@@ -305,18 +305,18 @@ Func_160190: ; 160190 (58:4190)
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld [$d51d], a
+	ld [wCreditsMusicBoxVar], a
 	ld a, $5c
 	ld [hli], a
 	ld a, $e8
 	ld [hl], a
 	ld a, $57
-	ld [$d51e], a
+	ld [wCreditsMusicBoxOAMPtr + 0], a
 	ld a, $e8
-	ld [$d51f], a
+	ld [wCreditsMusicBoxOAMPtr + 1], a
 	ld a, $58
-	ld [$d521], a
-	ld hl, $d523
+	ld [wCreditsMusicBoxOAMBank], a
+	ld hl, wMenuObj1
 	ld a, $e0
 	ld [hli], a
 	ld a, $4e
@@ -345,7 +345,7 @@ Func_16026c: ; 16026c (58:426c)
 	ld a, [hl]
 	cp $06
 	jr nz, .asm_1602e4
-	ld hl, $d515
+	ld hl, wCreditsMusicBox
 	ld a, $5b
 	ld [hli], a
 	ld a, $50
@@ -360,15 +360,15 @@ Func_16026c: ; 16026c (58:426c)
 	ld a, $eb
 	ld [hl], a
 	ld a, $57
-	ld [$d51e], a
+	ld [wCreditsMusicBoxOAMPtr + 0], a
 	ld a, $e8
-	ld [$d51f], a
+	ld [wCreditsMusicBoxOAMPtr + 1], a
 	ld a, $58
-	ld [$d521], a
+	ld [wCreditsMusicBoxOAMBank], a
 	jr .asm_1602cb
 
 .asm_16029c
-	ld hl, $d515
+	ld hl, wCreditsMusicBox
 	ld a, $50
 	ld [hli], a
 	ld a, $50
@@ -383,11 +383,11 @@ Func_16026c: ; 16026c (58:426c)
 	ld a, $ed
 	ld [hl], a
 	ld a, $64
-	ld [$d51e], a
+	ld [wCreditsMusicBoxOAMPtr + 0], a
 	ld a, $4a
-	ld [$d51f], a
+	ld [wCreditsMusicBoxOAMPtr + 1], a
 	ld a, $57
-	ld [$d521], a
+	ld [wCreditsMusicBoxOAMBank], a
 	call Func_1603be
 	ld a, $82
 	ld [wcee4], a
@@ -395,27 +395,27 @@ Func_16026c: ; 16026c (58:426c)
 	inc [hl]
 
 .asm_1602cb
-	ld hl, $d51c
-	ld a, [$d521]
+	ld hl, wCreditsMusicBoxFramesetPtr + 1
+	ld a, [wCreditsMusicBoxOAMBank]
 	ld [wTempBank], a
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	hcall UpdateObjAnim
 .asm_1602e4
-	ld hl, $d515
+	ld hl, wCreditsMusicBox
 	call Func_17ec
 	call ClearUnusedVirtualOAM
 	ret
 ; 0x1602ee
 
 Func_1602ee: ; 1602ee (58:42ee)
-	ld hl, $d51c
-	ld a, [$d521]
+	ld hl, wCreditsMusicBoxFramesetPtr + 1
+	ld a, [wCreditsMusicBoxOAMBank]
 	ld [wTempBank], a
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	hcall UpdateObjAnim
-	ld hl, $d515
+	ld hl, wCreditsMusicBox
 	call Func_17ec
 	call ClearUnusedVirtualOAM
 	call Func_1603cb
@@ -425,16 +425,16 @@ Func_1602ee: ; 1602ee (58:42ee)
 ; 0x160318
 
 Func_160318: ; 160318 (58:4318)
-	ld hl, $d51c
-	ld a, [$d521]
+	ld hl, wCreditsMusicBoxFramesetPtr + 1
+	ld a, [wCreditsMusicBoxOAMBank]
 	ld [wTempBank], a
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	hcall UpdateObjAnim
 
-	ld hl, $d515
+	ld hl, wCreditsMusicBox
 	call Func_17ec
-	ld hl, $d523
+	ld hl, wMenuObj1
 	ld a, [hl]
 	cp $80
 	jr z, .asm_160347
@@ -443,9 +443,9 @@ Func_160318: ; 160318 (58:4318)
 	jr nz, .asm_160347
 	dec [hl]
 .asm_160347
-	ld hl, $d52a
+	ld hl, wMenuObj1FramesetPtr + 1
 	call UpdateObjAnim
-	ld hl, $d523
+	ld hl, wMenuObj1
 	call Func_1604b1
 	call ClearUnusedVirtualOAM
 	ld a, [wGlobalCounter]
@@ -458,24 +458,24 @@ Func_160318: ; 160318 (58:4318)
 ; 0x160365
 
 Func_160365: ; 160365 (58:4365)
-	ld hl, $d51c
-	ld a, [$d521]
+	ld hl, wCreditsMusicBoxFramesetPtr + 1
+	ld a, [wCreditsMusicBoxOAMBank]
 	ld [wTempBank], a
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	hcall UpdateObjAnim
 
-	ld hl, $d515
+	ld hl, wCreditsMusicBox
 	call Func_17ec
-	ld hl, $d523
+	ld hl, wMenuObj1
 	ld a, [hl]
 	cp $80
 	jr z, .asm_16038d
 	dec [hl]
 .asm_16038d
-	ld hl, $d52a
+	ld hl, wMenuObj1FramesetPtr + 1
 	call UpdateObjAnim
-	ld hl, $d523
+	ld hl, wMenuObj1
 	call Func_1604b1
 	call ClearUnusedVirtualOAM
 	ld a, [wTransitionParam]

@@ -2989,7 +2989,7 @@ Func_9605: ; 9605 (2:5605)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3012,7 +3012,7 @@ Func_9605: ; 9605 (2:5605)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3035,7 +3035,7 @@ Func_9605: ; 9605 (2:5605)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3058,7 +3058,7 @@ Func_9605: ; 9605 (2:5605)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3081,7 +3081,7 @@ Func_9605: ; 9605 (2:5605)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3104,7 +3104,7 @@ Func_9605: ; 9605 (2:5605)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3127,7 +3127,7 @@ Func_9605: ; 9605 (2:5605)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3150,7 +3150,7 @@ Func_9605: ; 9605 (2:5605)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3173,7 +3173,7 @@ Func_9605: ; 9605 (2:5605)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3196,7 +3196,7 @@ Func_9605: ; 9605 (2:5605)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3219,7 +3219,7 @@ Func_9605: ; 9605 (2:5605)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3242,7 +3242,7 @@ Func_9605: ; 9605 (2:5605)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3265,7 +3265,7 @@ Func_9605: ; 9605 (2:5605)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3293,7 +3293,7 @@ Func_97f3: ; 97f3 (2:57f3)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3314,7 +3314,7 @@ Func_97f3: ; 97f3 (2:57f3)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3337,7 +3337,7 @@ Func_97f3: ; 97f3 (2:57f3)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3360,7 +3360,7 @@ Func_97f3: ; 97f3 (2:57f3)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3383,7 +3383,7 @@ Func_97f3: ; 97f3 (2:57f3)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3406,7 +3406,7 @@ Func_97f3: ; 97f3 (2:57f3)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3429,7 +3429,7 @@ Func_97f3: ; 97f3 (2:57f3)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3452,7 +3452,7 @@ Func_97f3: ; 97f3 (2:57f3)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3475,7 +3475,7 @@ Func_97f3: ; 97f3 (2:57f3)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3498,7 +3498,7 @@ Func_97f3: ; 97f3 (2:57f3)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3521,7 +3521,7 @@ Func_97f3: ; 97f3 (2:57f3)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3544,7 +3544,7 @@ Func_97f3: ; 97f3 (2:57f3)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -3567,7 +3567,7 @@ Func_97f3: ; 97f3 (2:57f3)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -4165,7 +4165,7 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4186,7 +4186,7 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4207,7 +4207,7 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4228,7 +4228,7 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4249,7 +4249,7 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4270,7 +4270,7 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4291,7 +4291,7 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4312,7 +4312,7 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4333,7 +4333,7 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4354,7 +4354,7 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4375,7 +4375,7 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4396,7 +4396,7 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4417,7 +4417,7 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4443,7 +4443,7 @@ Func_9f20: ; 9f20 (2:5f20)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -4462,7 +4462,7 @@ Func_9f20: ; 9f20 (2:5f20)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4483,7 +4483,7 @@ Func_9f20: ; 9f20 (2:5f20)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4504,7 +4504,7 @@ Func_9f20: ; 9f20 (2:5f20)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4525,7 +4525,7 @@ Func_9f20: ; 9f20 (2:5f20)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4546,7 +4546,7 @@ Func_9f20: ; 9f20 (2:5f20)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4567,7 +4567,7 @@ Func_9f20: ; 9f20 (2:5f20)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4588,7 +4588,7 @@ Func_9f20: ; 9f20 (2:5f20)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4609,7 +4609,7 @@ Func_9f20: ; 9f20 (2:5f20)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4630,7 +4630,7 @@ Func_9f20: ; 9f20 (2:5f20)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4651,7 +4651,7 @@ Func_9f20: ; 9f20 (2:5f20)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4672,7 +4672,7 @@ Func_9f20: ; 9f20 (2:5f20)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -4693,7 +4693,7 @@ Func_9f20: ; 9f20 (2:5f20)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -5830,7 +5830,7 @@ Func_a79e: ; a79e (2:679e)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -5862,7 +5862,7 @@ Func_a79e: ; a79e (2:679e)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -5894,7 +5894,7 @@ Func_a79e: ; a79e (2:679e)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -5926,7 +5926,7 @@ Func_a79e: ; a79e (2:679e)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -5958,7 +5958,7 @@ Func_a79e: ; a79e (2:679e)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -5990,7 +5990,7 @@ Func_a79e: ; a79e (2:679e)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -6022,7 +6022,7 @@ Func_a79e: ; a79e (2:679e)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -6054,7 +6054,7 @@ Func_a79e: ; a79e (2:679e)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -6086,7 +6086,7 @@ Func_a79e: ; a79e (2:679e)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -6118,7 +6118,7 @@ Func_a79e: ; a79e (2:679e)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -6150,7 +6150,7 @@ Func_a79e: ; a79e (2:679e)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -6182,7 +6182,7 @@ Func_a79e: ; a79e (2:679e)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -6209,7 +6209,7 @@ Func_aa2d: ; aa2d (2:6a2d)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -6239,7 +6239,7 @@ Func_aa2d: ; aa2d (2:6a2d)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -6271,7 +6271,7 @@ Func_aa2d: ; aa2d (2:6a2d)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -6303,7 +6303,7 @@ Func_aa2d: ; aa2d (2:6a2d)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -6335,7 +6335,7 @@ Func_aa2d: ; aa2d (2:6a2d)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -6367,7 +6367,7 @@ Func_aa2d: ; aa2d (2:6a2d)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -6399,7 +6399,7 @@ Func_aa2d: ; aa2d (2:6a2d)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -6431,7 +6431,7 @@ Func_aa2d: ; aa2d (2:6a2d)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -6463,7 +6463,7 @@ Func_aa2d: ; aa2d (2:6a2d)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -6495,7 +6495,7 @@ Func_aa2d: ; aa2d (2:6a2d)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -6527,7 +6527,7 @@ Func_aa2d: ; aa2d (2:6a2d)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -6559,7 +6559,7 @@ Func_aa2d: ; aa2d (2:6a2d)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	ld a, [wc0b3]
@@ -7334,7 +7334,7 @@ Func_b182: ; b182 (2:7182)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -7365,7 +7365,7 @@ Func_b182: ; b182 (2:7182)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -7396,7 +7396,7 @@ Func_b182: ; b182 (2:7182)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -7427,7 +7427,7 @@ Func_b182: ; b182 (2:7182)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -7458,7 +7458,7 @@ Func_b182: ; b182 (2:7182)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -7489,7 +7489,7 @@ Func_b182: ; b182 (2:7182)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -7520,7 +7520,7 @@ Func_b182: ; b182 (2:7182)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -7551,7 +7551,7 @@ Func_b182: ; b182 (2:7182)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -7582,7 +7582,7 @@ Func_b182: ; b182 (2:7182)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -7613,7 +7613,7 @@ Func_b182: ; b182 (2:7182)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -7644,7 +7644,7 @@ Func_b182: ; b182 (2:7182)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -7675,7 +7675,7 @@ Func_b182: ; b182 (2:7182)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -7701,7 +7701,7 @@ Func_b405: ; b405 (2:7405)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	inc l
 	inc l
@@ -7730,7 +7730,7 @@ Func_b405: ; b405 (2:7405)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -7761,7 +7761,7 @@ Func_b405: ; b405 (2:7405)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -7792,7 +7792,7 @@ Func_b405: ; b405 (2:7405)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -7823,7 +7823,7 @@ Func_b405: ; b405 (2:7405)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -7854,7 +7854,7 @@ Func_b405: ; b405 (2:7405)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -7885,7 +7885,7 @@ Func_b405: ; b405 (2:7405)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -7916,7 +7916,7 @@ Func_b405: ; b405 (2:7405)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -7947,7 +7947,7 @@ Func_b405: ; b405 (2:7405)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -7978,7 +7978,7 @@ Func_b405: ; b405 (2:7405)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -8009,7 +8009,7 @@ Func_b405: ; b405 (2:7405)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -8040,7 +8040,7 @@ Func_b405: ; b405 (2:7405)
 	sla e
 	rl d
 	push hl
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wc0b3]
 	ld d, a
@@ -8847,7 +8847,7 @@ Func_bb85: ; bb85 (2:7b85)
 	ld a, [hl]
 	ld [de], a
 	pop de
-	ld hl, $d300
+	ld hl, w3d300
 	add hl, de
 	ld a, [wce00]
 	ld e, a

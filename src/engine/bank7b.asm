@@ -124,7 +124,7 @@ SetState_IceSkatinStart: ; 1ec08c (7b:408c)
 
 UpdateState_IceSkatinStart: ; 1ec124 (7b:4124)
 	update_anim_2
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 
@@ -291,7 +291,7 @@ SetState_IceSkatinCrash: ; 1ec2bb (7b:42bb)
 
 UpdateState_IceSkatinCrash: ; 1ec300 (7b:4300)
 	update_anim_2
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	get_pos
@@ -306,7 +306,7 @@ UpdateState_HangingRail: ; 1ec703 (7b:4703)
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_1ec725
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	jr z, .asm_1ec725
 	ld a, $01
@@ -465,7 +465,7 @@ SetState_SplitHit: ; 1ece9e (7b:4e9e)
 
 UpdateState_SplitHit: ; 1ecf3a (7b:4f3a)
 	update_anim_2
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 
@@ -535,7 +535,7 @@ SetState_Splitting: ; 1ed008 (7b:5008)
 
 UpdateState_Splitting: ; 1ed018 (7b:5018)
 	update_anim_2
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	jr nz, .asm_1ed09b
 
@@ -561,7 +561,7 @@ UpdateState_Splitting: ; 1ed018 (7b:5018)
 	and a
 	jp nz, RecoverFromTransformation
 	update_anim_2
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	jr nz, .asm_1ed09b
 	call ApplyJumpVelocity
@@ -781,7 +781,7 @@ UpdateState_BlindTurning: ; 1ed52a (7b:552a)
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jr nz, Func_1ed558
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	jp SetState_BlindWalking
@@ -1271,7 +1271,7 @@ Func_1edd24: ; 1edd24 (7b:5d24)
 
 UpdateState_BallBouncing: ; 1edb47 (7b:5b47)
 	update_anim_3
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 ;	fallthrough
@@ -1393,7 +1393,7 @@ UpdateState_BallShot: ; 1edc15 (7b:5c15)
 	ld a, [wAutoMoveState]
 	cp $02
 	ret nz
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	ld a, (1 << 7) | $03
@@ -1549,7 +1549,7 @@ SetState_BallTurning: ; 1eddf2 (7b:5df2)
 
 UpdateState_BallTurning: ; 1ede36 (7b:5e36)
 	update_anim_3
-	ld a, [wAnimationHasFinished]
+	ld a, [wAnimationEnded]
 	and a
 	ret z
 	jp SetState_BallAirborne
