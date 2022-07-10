@@ -12,10 +12,10 @@ Func_b4004: ; b4004 (2d:4004)
 	ld a, [w2d016]
 	jumptable
 
-	dw Func_b4014 ; MAP_NORTH
-	dw Func_b4309 ; MAP_WEST
-	dw Func_b449b ; MAP_SOUTH
-	dw Func_b4688 ; MAP_EAST
+	dw Func_b4014 ; NORTH
+	dw Func_b4309 ; WEST
+	dw Func_b449b ; SOUTH
+	dw Func_b4688 ; EAST
 ; 0xb4014
 
 Func_b4014: ; b4014 (2d:4014)
@@ -106,7 +106,7 @@ Func_b408e: ; b408e (2d:408e)
 ; 0xb409c
 
 Func_b409c: ; b409c (2d:409c)
-	ld a, TREASURE_GREEN_MUSIC_BOX
+	ld a, GREEN_MUSIC_BOX
 	call IsTreasureCollected
 	ret nz
 	ld a, [w2d025]
@@ -1347,10 +1347,10 @@ Func_b4a3d: ; b4a3d (2d:4a3d)
 	ld a, [wCurMapSide]
 	jumptable
 
-	dw .North ; MAP_NORTH
-	dw .West  ; MAP_WEST
-	dw .South ; MAP_SOUTH
-	dw .East  ; MAP_EAST
+	dw .North ; NORTH
+	dw .West  ; WEST
+	dw .South ; SOUTH
+	dw .East  ; EAST
 
 .North
 	ld bc, wSceneObj1State
@@ -1397,10 +1397,10 @@ Func_b4aa9: ; b4aa9 (2d:4aa9)
 	ld a, [wCurMapSide]
 	jumptable
 
-	dw .North ; MAP_NORTH
-	dw .West  ; MAP_WEST
-	dw .South ; MAP_SOUTH
-	dw .East  ; MAP_EAST
+	dw .North ; NORTH
+	dw .West  ; WEST
+	dw .South ; SOUTH
+	dw .East  ; EAST
 
 .North
 	ld bc, wSceneObj5State
@@ -2761,10 +2761,10 @@ Func_b791e: ; b791e (2d:791e)
 	ld a, [wCurMapSide]
 	jumptable
 
-	dw .North ; MAP_NORTH
-	dw .West  ; MAP_WEST
-	dw .South ; MAP_SOUTH
-	dw .East  ; MAP_EAST
+	dw .North ; NORTH
+	dw .West  ; WEST
+	dw .South ; SOUTH
+	dw .East  ; EAST
 
 .North
 	ld bc, wSceneObj2State

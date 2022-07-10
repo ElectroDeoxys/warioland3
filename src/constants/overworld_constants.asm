@@ -1,8 +1,8 @@
 	const_def
-	const MAP_NORTH ; $0
-	const MAP_WEST  ; $1
-	const MAP_SOUTH ; $2
-	const MAP_EAST  ; $3
+	const NORTH ; $0
+	const WEST  ; $1
+	const SOUTH ; $2
+	const EAST  ; $3
 
 	const_def
 	const CRAYON_RED_F    ; 0

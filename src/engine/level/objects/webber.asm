@@ -302,7 +302,7 @@ WebberFunc: ; 40825 (10:4825)
 	rlca
 	ret c
 	ld a, [wEffectivePowerUp]
-	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
+	cp SUPER_JUMP_SLAM_OVERALLS
 	jr nc, .has_super_jump_slam
 	ld bc, Data_603f0
 	jr .asm_40a14
@@ -324,7 +324,7 @@ WebberFunc: ; 40825 (10:4825)
 	and a
 	ret z
 	ld a, [wEffectivePowerUp]
-	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
+	cp SUPER_JUMP_SLAM_OVERALLS
 	jp nc, VanishObject
 	ld hl, wCurObjYPos
 	ldh a, [hYPosLo]

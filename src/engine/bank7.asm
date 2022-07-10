@@ -243,7 +243,7 @@ StartJump_FromSand: ; 1c289 (7:4289)
 	ld [wDoFullJump], a
 
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_HIGH_JUMP_BOOTS
+	cp HIGH_JUMP_BOOTS
 	ld a, JUMP_VEL_KNOCK_BACK
 	jr c, .got_jump_vel_table
 	ld hl, wJoypadDown
@@ -275,7 +275,7 @@ StartJump_FromInput: ; 1c2b9 (7:42b9)
 
 StartJump: ; 1c2cd (7:42cd)
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_HIGH_JUMP_BOOTS
+	cp HIGH_JUMP_BOOTS
 	ld a, JUMP_VEL_NORMAL
 	jr c, .got_jump_vel_table
 	ld hl, wJoypadDown
@@ -385,7 +385,7 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	ret nz ; not airborne anymore
 
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_LEAD_OVERALLS
+	cp LEAD_OVERALLS
 	jr c, .continue
 	ld a, [wIsSmashAttacking]
 	and a
@@ -438,7 +438,7 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 
 .smash_attack_left
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
+	cp SUPER_JUMP_SLAM_OVERALLS
 	jr nc, .asm_1c481
 	load_frameset Frameset_15f8e
 	jr .asm_1c4aa
@@ -447,7 +447,7 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	jr .asm_1c4aa
 .smash_attack_right
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
+	cp SUPER_JUMP_SLAM_OVERALLS
 	jr nc, .asm_1c4a0
 	load_frameset Frameset_15f91
 	jr .asm_1c4aa
@@ -510,7 +510,7 @@ DoSoftLand: ; 1c541 (7:5541)
 	and a
 	jr z, .not_smash_attacking
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
+	cp SUPER_JUMP_SLAM_OVERALLS
 	jp c, DoGroundPound
 	jp DoWarioGroundShake
 
@@ -546,7 +546,7 @@ DoHardLand: ; 1d58a (7:558a)
 	and a
 	jr z, .not_smash_attacking
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
+	cp SUPER_JUMP_SLAM_OVERALLS
 	jp c, DoGroundPound
 	jr DoWarioGroundShake
 
@@ -680,7 +680,7 @@ UpdateState_Landing: ; 1c6ed (7:46ed)
 	; do a high jump if have High Jump Boots
 	call StartJump_FromInput
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_HIGH_JUMP_BOOTS
+	cp HIGH_JUMP_BOOTS
 	ret c
 	ld a, JUMP_VEL_HIGH_JUMP
 	ld [wJumpVelTable], a
@@ -767,7 +767,7 @@ UpdateState_CrouchSliding: ; 1c7c3 (7:47c3)
 	ld hl, wWarioStateCounter
 	inc [hl]
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_GARLIC
+	cp GARLIC
 	jr nc, .has_garlic
 	ld a, [hl]
 	cp $14
@@ -856,7 +856,7 @@ UpdateState_CrouchSliding: ; 1c7c3 (7:47c3)
 
 UpdateState_Attacking: ; 1c8df (7:48df)
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_GARLIC
+	cp GARLIC
 	jr nc, .powered_up
 	ld a, [wSFXLoopCounter]
 	sub 1
@@ -1096,7 +1096,7 @@ SetState_AttackingAirborne: ; 1cb43 (7:4b43)
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_HIGH_JUMP_BOOTS
+	cp HIGH_JUMP_BOOTS
 	ld a, JUMP_VEL_NORMAL
 	jr c, .asm_1cb5d
 	inc a ; JUMP_VEL_HIGH_JUMP
@@ -1104,7 +1104,7 @@ SetState_AttackingAirborne: ; 1cb43 (7:4b43)
 	ld [wJumpVelTable], a
 
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_GARLIC
+	cp GARLIC
 	jr nc, .asm_1cb85
 	ld a, [wDirection]
 	and a
@@ -1415,7 +1415,7 @@ SetState_Submerged: ; 1ce95 (7:4e95)
 	load_oam OAM_15254
 
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_SWIMMING_FLIPPERS
+	cp SWIMMING_FLIPPERS
 	jr c, .cannot_swim_underwater
 	ld a, [wWaterInteraction]
 	cp $02
@@ -1640,7 +1640,7 @@ UpdateState_WaterSurfaceMoving: ; 1d0ba (7:50ba)
 	ld hl, wCurWaterCurrent
 	ld a, [hld]
 	or [hl] ; wLastWaterCurrent
-	and WATER_CURRENT_RIGHT | WATER_CURRENT_LEFT
+	and CURRENT_RIGHT | CURRENT_LEFT
 	ret nz
 	; no left/right current
 	call ApplyWalkVelocity_Right
@@ -1676,7 +1676,7 @@ UpdateState_WaterSurfaceMoving: ; 1d0ba (7:50ba)
 	ld hl, wCurWaterCurrent
 	ld a, [hld]
 	or [hl] ; wLastWaterCurrent
-	and WATER_CURRENT_RIGHT | WATER_CURRENT_LEFT
+	and CURRENT_RIGHT | CURRENT_LEFT
 	ret nz
 	; no left/right current
 	call ApplyWalkVelocity_Left
@@ -1754,7 +1754,7 @@ SetState_UnderwaterThrusting: ; 1d1ec (7:51ec)
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_PRINCE_FROGS_GLOVES
+	cp PRINCE_FROGS_GLOVES
 	jr c, .asm_1d244
 	load_frameset Frameset_15562
 	jr .asm_1d272
@@ -1765,7 +1765,7 @@ SetState_UnderwaterThrusting: ; 1d1ec (7:51ec)
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_PRINCE_FROGS_GLOVES
+	cp PRINCE_FROGS_GLOVES
 	jr c, .asm_1d268
 	load_frameset Frameset_1556c
 	jr .asm_1d272
@@ -2573,7 +2573,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 	ret nz ; not grabbing airborne anymore
 
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_LEAD_OVERALLS
+	cp LEAD_OVERALLS
 	jr c, .asm_1dadc
 	ld a, [wIsSmashAttacking]
 	and a
@@ -2625,7 +2625,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 
 .asm_1db0d
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
+	cp SUPER_JUMP_SLAM_OVERALLS
 	jr nc, .asm_1db20
 	load_frameset Frameset_15fec
 	jr .asm_1db49
@@ -2634,7 +2634,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 	jr .asm_1db49
 .asm_1db2c
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
+	cp SUPER_JUMP_SLAM_OVERALLS
 	jr nc, .asm_1db3f
 	load_frameset Frameset_15fef
 	jr .asm_1db49
@@ -2686,7 +2686,7 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 	and a
 	jr z, .asm_1dbd0
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
+	cp SUPER_JUMP_SLAM_OVERALLS
 	jr c, .asm_1dc25
 	jr .continue
 .asm_1dbd0
@@ -3499,13 +3499,13 @@ ApplyWaterCurrentMovement: ; 1e46a (7:646a)
 	call ApplyLastWaterCurrentMovement
 
 	ld a, [wWaterCurrent]
-	bit WATER_CURRENT_RIGHT_F, a
+	bit CURRENT_RIGHT_F, a
 	jr nz, .right_current
-	bit WATER_CURRENT_LEFT_F, a
+	bit CURRENT_LEFT_F, a
 	jr nz, .left_current
-	bit WATER_CURRENT_UP_F, a
+	bit CURRENT_UP_F, a
 	jp nz, .up_current
-	bit WATER_CURRENT_DOWN_F, a
+	bit CURRENT_DOWN_F, a
 	jp nz, .down_current
 
 ; no current
@@ -3518,12 +3518,12 @@ ApplyWaterCurrentMovement: ; 1e46a (7:646a)
 
 .right_current
 	ld a, [wCurWaterCurrent]
-	and WATER_CURRENT_LEFT | WATER_CURRENT_UP | WATER_CURRENT_DOWN
+	and CURRENT_LEFT | CURRENT_UP | CURRENT_DOWN
 	call nz, .ChangeCurrentDirection
 	ld hl, wWaterCurrent
 	ld a, [hl]
 	ld [wCurWaterCurrent], a
-	res WATER_CURRENT_RIGHT_F, [hl]
+	res CURRENT_RIGHT_F, [hl]
 	ld a, [wc0e1]
 	bit D_RIGHT_F, a
 	ret nz
@@ -3537,7 +3537,7 @@ ApplyWaterCurrentMovement: ; 1e46a (7:646a)
 	bit D_LEFT_F, a
 	jr z, .push_right
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_PRINCE_FROGS_GLOVES
+	cp PRINCE_FROGS_GLOVES
 	ret nc
 .push_right
 	ld b, 2
@@ -3546,12 +3546,12 @@ ApplyWaterCurrentMovement: ; 1e46a (7:646a)
 
 .left_current
 	ld a, [wCurWaterCurrent]
-	and WATER_CURRENT_RIGHT | WATER_CURRENT_UP | WATER_CURRENT_DOWN
+	and CURRENT_RIGHT | CURRENT_UP | CURRENT_DOWN
 	call nz, .ChangeCurrentDirection
 	ld hl, wWaterCurrent
 	ld a, [hl]
 	ld [wCurWaterCurrent], a
-	res WATER_CURRENT_LEFT_F, [hl]
+	res CURRENT_LEFT_F, [hl]
 	ld a, [wc0e1]
 	bit D_LEFT_F, a
 	ret nz
@@ -3565,7 +3565,7 @@ ApplyWaterCurrentMovement: ; 1e46a (7:646a)
 	bit D_RIGHT_F, a
 	jr z, .push_left
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_PRINCE_FROGS_GLOVES
+	cp PRINCE_FROGS_GLOVES
 	ret nc
 .push_left
 	ld b, 2
@@ -3574,12 +3574,12 @@ ApplyWaterCurrentMovement: ; 1e46a (7:646a)
 
 .up_current
 	ld a, [wCurWaterCurrent]
-	and WATER_CURRENT_RIGHT | WATER_CURRENT_LEFT | WATER_CURRENT_DOWN
+	and CURRENT_RIGHT | CURRENT_LEFT | CURRENT_DOWN
 	call nz, .ChangeCurrentDirection
 	ld hl, wWaterCurrent
 	ld a, [hl]
 	ld [wCurWaterCurrent], a
-	res WATER_CURRENT_UP_F, [hl]
+	res CURRENT_UP_F, [hl]
 	ld a, [wc0e1]
 	bit D_UP_F, a
 	ret nz
@@ -3593,7 +3593,7 @@ ApplyWaterCurrentMovement: ; 1e46a (7:646a)
 	bit D_DOWN_F, a
 	jr z, .push_up
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_PRINCE_FROGS_GLOVES
+	cp PRINCE_FROGS_GLOVES
 	ret nc
 .push_up
 	ld b, 2
@@ -3602,12 +3602,12 @@ ApplyWaterCurrentMovement: ; 1e46a (7:646a)
 
 .down_current
 	ld a, [wCurWaterCurrent]
-	and WATER_CURRENT_RIGHT | WATER_CURRENT_LEFT | WATER_CURRENT_UP
+	and CURRENT_RIGHT | CURRENT_LEFT | CURRENT_UP
 	call nz, .ChangeCurrentDirection
 	ld hl, wWaterCurrent
 	ld a, [hl]
 	ld [wCurWaterCurrent], a
-	res WATER_CURRENT_DOWN_F, [hl]
+	res CURRENT_DOWN_F, [hl]
 	ld a, [wc0e1]
 	bit D_DOWN_F, a
 	ret nz
@@ -3621,7 +3621,7 @@ ApplyWaterCurrentMovement: ; 1e46a (7:646a)
 	bit D_UP_F, a
 	jr z, .push_down
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_PRINCE_FROGS_GLOVES
+	cp PRINCE_FROGS_GLOVES
 	ret nc
 .push_down
 	ld b, 2
@@ -3645,13 +3645,13 @@ ApplyLastWaterCurrentMovement: ; 1e598 (7:6598)
 	ld a, [wLastWaterCurrent]
 	and a
 	ret z
-	bit WATER_CURRENT_RIGHT_F, a
+	bit CURRENT_RIGHT_F, a
 	jr nz, .right_current
-	bit WATER_CURRENT_LEFT_F, a
+	bit CURRENT_LEFT_F, a
 	jr nz, .left_current
-	bit WATER_CURRENT_UP_F, a
+	bit CURRENT_UP_F, a
 	jp nz, .up_current
-	bit WATER_CURRENT_DOWN_F, a
+	bit CURRENT_DOWN_F, a
 	jp nz, .down_current
 	ret
 
@@ -3669,7 +3669,7 @@ ApplyLastWaterCurrentMovement: ; 1e598 (7:6598)
 	bit D_LEFT_F, a
 	jr z, .push_right
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_PRINCE_FROGS_GLOVES
+	cp PRINCE_FROGS_GLOVES
 	jr nc, .decr_counter
 .push_right
 	ld b, 1
@@ -3690,7 +3690,7 @@ ApplyLastWaterCurrentMovement: ; 1e598 (7:6598)
 	bit D_RIGHT_F, a
 	jr z, .push_left
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_PRINCE_FROGS_GLOVES
+	cp PRINCE_FROGS_GLOVES
 	jr nc, .decr_counter
 .push_left
 	ld b, 1
@@ -3721,7 +3721,7 @@ ApplyLastWaterCurrentMovement: ; 1e598 (7:6598)
 	bit D_DOWN_F, a
 	jr z, .push_up
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_PRINCE_FROGS_GLOVES
+	cp PRINCE_FROGS_GLOVES
 	jr nc, .decr_counter
 .push_up
 	ld b, 1
@@ -3742,7 +3742,7 @@ ApplyLastWaterCurrentMovement: ; 1e598 (7:6598)
 	bit D_UP_F, a
 	jr z, .push_down
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_PRINCE_FROGS_GLOVES
+	cp PRINCE_FROGS_GLOVES
 	jr nc, .decr_counter
 .push_down
 	ld b, 1
@@ -3886,7 +3886,7 @@ SetState_Attacking: ; 1e7ab (7:67ab)
 	call LoadWarioGfx
 
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_GARLIC
+	cp GARLIC
 	jr nc, .asm_1e829
 	ld a, [wDirection]
 	and a
@@ -4474,7 +4474,7 @@ Func_1ede9: ; 1ede9 (7:6de9)
 	ld [wJumpVelIndex], a
 	ld [wIsSmashAttacking], a
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_HIGH_JUMP_BOOTS
+	cp HIGH_JUMP_BOOTS
 	ld a, JUMP_VEL_NORMAL
 	jr c, .asm_1ee0a
 	ld hl, wJoypadDown
@@ -4850,7 +4850,7 @@ WalkIfPossible_Left: ; 1f135 (7:7135)
 
 HandleDivingHorizontalMovement: ; 1f14f (7:714f)
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_SWIMMING_FLIPPERS
+	cp SWIMMING_FLIPPERS
 	ret c
 	ld a, [wJoypadDown]
 	bit D_RIGHT_F, a
@@ -4895,7 +4895,7 @@ Func_1f1a9: ; 1f1a9 (7:71a9)
 	cp $02
 	jr z, .asm_1f1f5
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_SWIMMING_FLIPPERS
+	cp SWIMMING_FLIPPERS
 	jr c, .asm_1f1f5
 	ld a, [wJoypadPressed]
 	bit B_BUTTON_F, a
@@ -4938,7 +4938,7 @@ Func_1f1a9: ; 1f1a9 (7:71a9)
 	ld hl, wCurWaterCurrent
 	ld a, [hld]
 	or [hl] ; wLastWaterCurrent
-	and WATER_CURRENT_UP | WATER_CURRENT_DOWN
+	and CURRENT_UP | CURRENT_DOWN
 	ret nz
 	ld b, $01
 	call SubYOffset
@@ -5029,7 +5029,7 @@ Func_1f310: ; 1f310 (7:7310)
 	ld hl, wCurWaterCurrent
 	ld a, [hld]
 	or [hl] ; wLastWaterCurrent
-	and WATER_CURRENT_RIGHT | WATER_CURRENT_LEFT
+	and CURRENT_RIGHT | CURRENT_LEFT
 	ret nz
 	ld b, $01
 	call AddXOffset
@@ -5039,7 +5039,7 @@ Func_1f310: ; 1f310 (7:7310)
 	ld hl, wCurWaterCurrent
 	ld a, [hld]
 	or [hl] ; wLastWaterCurrent
-	and WATER_CURRENT_RIGHT | WATER_CURRENT_LEFT
+	and CURRENT_RIGHT | CURRENT_LEFT
 	ret nz
 	ld b, $01
 	call SubXOffset
@@ -5096,7 +5096,7 @@ Func_1f3a7: ; 1f3a7 (7:73a7)
 	ld hl, wCurWaterCurrent
 	ld a, [hld]
 	or [hl] ; wLastWaterCurrent
-	and WATER_CURRENT_UP | WATER_CURRENT_DOWN
+	and CURRENT_UP | CURRENT_DOWN
 	ret nz
 	ld b, $01
 	call AddYOffset
@@ -5115,7 +5115,7 @@ Func_1f3d9: ; 1f3d9 (7:73d9)
 	ld hl, wCurWaterCurrent
 	ld a, [hld]
 	or [hl] ; wLastWaterCurrent
-	and WATER_CURRENT_UP | WATER_CURRENT_DOWN
+	and CURRENT_UP | CURRENT_DOWN
 	ret nz
 	ld b, $01
 	call SubYOffset
@@ -5130,7 +5130,7 @@ HandleWaterSurfaceInput: ; 1f40f (7:740f)
 	jr z, .no_thrust
 
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_SWIMMING_FLIPPERS
+	cp SWIMMING_FLIPPERS
 	jp c, .no_thrust ; should be jr
 	ld a, [wJoypadDown]
 	bit D_UP_F, a
@@ -5148,7 +5148,7 @@ HandleWaterSurfaceInput: ; 1f40f (7:740f)
 	bit D_DOWN_F, a
 	ret z
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_SWIMMING_FLIPPERS
+	cp SWIMMING_FLIPPERS
 	jp c, SetState_TryingSubmerge
 	farcall Func_19b12
 	ld a, [wWaterInteraction]

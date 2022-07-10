@@ -1362,7 +1362,7 @@ ParticleAnim_Splash: ; d076 (3:5076)
 
 AddParticleSprite: ; d094 (3:5094)
 	ld a, [wCameraConfigFlags]
-	cp CAMCONFIG_XSCROLL2 | CAMCONFIG_TRANSITIONS | CAMCONFIG_EDGE_RIGHT | CAMCONFIG_EDGE_LEFT
+	cp CAM_XSCROLL2 | CAM_TRANSITIONS | CAM_EDGE_RIGHT | CAM_EDGE_LEFT
 	jr z, .asm_d0c5
 	ld a, [wSCY]
 	ld b, a

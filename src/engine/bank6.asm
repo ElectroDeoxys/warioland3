@@ -248,7 +248,7 @@ Func_181c8: ; 181c8 (6:41c8)
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_181ac
-	ld a, WATER_CURRENT_RIGHT
+	ld a, CURRENT_RIGHT
 	ld [wWaterCurrent], a
 	jp Func_181ac
 ; 0x181d8
@@ -257,7 +257,7 @@ Func_181d8: ; 181d8 (6:41d8)
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_181ac
-	ld a, WATER_CURRENT_UP
+	ld a, CURRENT_UP
 	ld [wWaterCurrent], a
 	jp Func_181ac
 ; 0x181e8
@@ -266,7 +266,7 @@ Func_181e8: ; 181e8 (6:41e8)
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_181ac
-	ld a, WATER_CURRENT_LEFT
+	ld a, CURRENT_LEFT
 	ld [wWaterCurrent], a
 	jp Func_181ac
 ; 0x181f8
@@ -275,7 +275,7 @@ Func_181f8: ; 181f8 (6:41f8)
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_181ac
-	ld a, WATER_CURRENT_DOWN
+	ld a, CURRENT_DOWN
 	ld [wWaterCurrent], a
 	jp Func_181ac
 ; 0x18208
@@ -1214,7 +1214,7 @@ Func_18a19: ; 18a19 (6:4a19)
 
 .asm_18a45
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_HEAD_SMASH_HELMET
+	cp HEAD_SMASH_HELMET
 	jp c, Func_18032
 	ld a, [wJumpVelTable]
 	and a
@@ -1246,12 +1246,12 @@ Func_18a19: ; 18a19 (6:4a19)
 	and a
 	jr nz, .asm_18a8f
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_GARLIC
+	cp GARLIC
 	jp c, Func_18032
 	jp Func_18020
 .asm_18a8f
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
+	cp SUPER_JUMP_SLAM_OVERALLS
 	jp c, Func_18032
 	jp Func_18020
 ; 0x18a9a
@@ -3117,8 +3117,8 @@ UpdateState_LadderShakeSlipping: ; 1a55c (6:655c)
 	ld b, $02
 	call AddYOffset
 	ld a, [wCameraConfigFlags]
-	and CAMCONFIG_SCROLLING_MASK
-	cp CAMCONFIG_TRANSITIONS
+	and CAM_SCROLLING_MASK
+	cp CAM_TRANSITIONS
 	jr c, .asm_1a5b3
 	call GetFloorForYPos
 	ld a, [wFloor]
@@ -3212,7 +3212,7 @@ SetState_LadderSliding: ; 1a66b (6:666b)
 	inc a
 	ld [wJumpVelTable], a
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_LEAD_OVERALLS
+	cp LEAD_OVERALLS
 	jr c, .asm_1a695
 	ld a, TRUE
 	ld [wIsSmashAttacking], a
@@ -3249,8 +3249,8 @@ UpdateState_LadderSliding: ; 1a6b6 (6:66b6)
 	ld b, $02
 	call AddYOffset
 	ld a, [wCameraConfigFlags]
-	and CAMCONFIG_SCROLLING_MASK
-	cp CAMCONFIG_TRANSITIONS
+	and CAM_SCROLLING_MASK
+	cp CAM_TRANSITIONS
 	jr c, .asm_1a719
 	call GetFloorForYPos
 	ld a, [wFloor]
@@ -3269,7 +3269,7 @@ UpdateState_LadderSliding: ; 1a6b6 (6:66b6)
 	and a
 	jr z, .idle
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
+	cp SUPER_JUMP_SLAM_OVERALLS
 	jr c, .ground_pound
 	farcall DoWarioGroundShake
 	ret
@@ -3749,7 +3749,7 @@ SetState_FenceSliding: ; 1b05e (6:705e)
 	ld [wJumpVelTable], a
 
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_LEAD_OVERALLS
+	cp LEAD_OVERALLS
 	jr c, .asm_1b088
 	ld a, TRUE
 	ld [wIsSmashAttacking], a
@@ -3787,8 +3787,8 @@ UpdateState_FenceSliding: ; 1b0a9 (6:70a9)
 	ld b, $02
 	call AddYOffset
 	ld a, [wCameraConfigFlags]
-	and CAMCONFIG_SCROLLING_MASK
-	cp CAMCONFIG_TRANSITIONS
+	and CAM_SCROLLING_MASK
+	cp CAM_TRANSITIONS
 	jr c, .asm_1b10e
 	call GetFloorForYPos
 	ld a, [wFloor]
@@ -3808,7 +3808,7 @@ UpdateState_FenceSliding: ; 1b0a9 (6:70a9)
 	and a
 	jr z, .idle
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
+	cp SUPER_JUMP_SLAM_OVERALLS
 	jr c, .ground_pound
 	farcall DoWarioGroundShake
 	ret
@@ -4078,8 +4078,8 @@ HandleLadderInput: ; 1b3a0 (6:73a0)
 	ld b, $01
 	call SubYOffset
 	ld a, [wCameraConfigFlags]
-	and CAMCONFIG_SCROLLING_MASK
-	cp CAMCONFIG_TRANSITIONS
+	and CAM_SCROLLING_MASK
+	cp CAM_TRANSITIONS
 	jr c, .asm_1b3e6
 	call GetFloorForYPos
 	ld a, [wFloor]
@@ -4103,8 +4103,8 @@ HandleLadderInput: ; 1b3a0 (6:73a0)
 	ld b, $01
 	call AddYOffset
 	ld a, [wCameraConfigFlags]
-	and CAMCONFIG_SCROLLING_MASK
-	cp CAMCONFIG_TRANSITIONS
+	and CAM_SCROLLING_MASK
+	cp CAM_TRANSITIONS
 	jr c, .asm_1b42b
 	call GetFloorForYPos
 	ld a, [wFloor]

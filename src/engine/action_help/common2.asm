@@ -54,7 +54,7 @@ LoadActionHelpPowerUpPals: ; 1e48d4 (79:48d4)
 	ld hl, Pals_1e4f2f
 	call LoadPalsToTempPals2
 	ld a, [wActionHelpPowerUp]
-	cp POWER_UP_GARLIC
+	cp GARLIC
 	ret c
 	ld hl, Pals_1e4f6f
 	ld de, wTempPals2

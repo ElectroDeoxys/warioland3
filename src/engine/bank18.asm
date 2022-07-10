@@ -307,7 +307,7 @@ Func_61348: ; 61348 (18:5348)
 	ld a, [wTransformation]
 	rla
 	jr nc, .got_effective_power_up
-	ld e, POWER_UP_SUPER_JUMP_SLAM_OVERALLS
+	ld e, SUPER_JUMP_SLAM_OVERALLS
 .got_effective_power_up
 	ld a, e
 	ld [wEffectivePowerUp], a
@@ -2552,7 +2552,7 @@ Func_62840:: ; 62840 (18:6840)
 	ld a, [wCurObjUnk18]
 	ld b, a
 	ld a, [wEffectivePowerUp]
-	cp POWER_UP_GARLIC
+	cp GARLIC
 	jr c, Func_6284f
 	sla b
 	sla b ; *4
@@ -2617,7 +2617,7 @@ Func_62898:: ; 62898 (18:6898)
 	ld a, [wCurObjUnk18]
 	ld b, a
 	ld a, [wEffectivePowerUp]
-	cp POWER_UP_GARLIC
+	cp GARLIC
 	jr c, Func_628a7
 	sla b
 	sla b

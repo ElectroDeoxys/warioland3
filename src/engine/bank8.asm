@@ -528,7 +528,7 @@ AttackObject: ; 20350 (8:4350)
 	bit HEAVY_OBJ_F, a
 	ret z
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_GARLIC
+	cp GARLIC
 	ret nc
 	farcall DoJumpingBump_NoSFX
 	ret
@@ -650,7 +650,7 @@ StepOnObject: ; 20447 (8:4447)
 	bit A_BUTTON_F, a
 	jr z, .asm_20578
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_HIGH_JUMP_BOOTS
+	cp HIGH_JUMP_BOOTS
 	jr c, .asm_20578
 	xor a ; full jump
 	ld [wJumpVelIndex], a
@@ -780,7 +780,7 @@ Func_20602: ; 20602 (8:4602)
 	bit A_BUTTON_F, a
 	jr z, .asm_20655
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_HIGH_JUMP_BOOTS
+	cp HIGH_JUMP_BOOTS
 	jr c, .asm_20655
 	xor a
 	ld [wJumpVelIndex], a
@@ -814,7 +814,7 @@ Func_20670: ; 20670 (8:4670)
 
 ; if Wario is rolling, do attack
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_GARLIC
+	cp GARLIC
 	jr nc, .check_rolling
 	ld a, [wObjInteractionType]
 	bit HEAVY_OBJ_F, a
@@ -1383,7 +1383,7 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	jp nz, .asm_20c41
 
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_GRAB_GLOVE
+	cp GRAB_GLOVE
 	jp c, .asm_20c41
 	ld a, [wWarioState]
 	cp WST_LADDER_SCRATCHING
@@ -1438,7 +1438,7 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	jr .set_obj_pick_up
 .heavy_obj
 	ld a, [wPowerUpLevel]
-	cp POWER_UP_SUPER_GRAB_GLOVES
+	cp SUPER_GRAB_GLOVES
 	jr c, .asm_20c41
 	ld a, GRAB_PICK_UP | (1 << GRAB_HEAVY_F)
 	ld [wGrabState], a

@@ -576,7 +576,7 @@ ActionHelp_ShowWarioSmashAttack: ; 1fb92b (7e:792b)
 	ld [hli], a
 	ld [hli], a
 	ld a, [wActionHelpPowerUp]
-	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
+	cp SUPER_JUMP_SLAM_OVERALLS
 	jr nc, .got_super_jump_slam
 	ld a, HIGH(Frameset_15f91)
 	ld [hli], a
@@ -1016,7 +1016,7 @@ ActionHelp_ShowWarioAttack: ; 1fbbe5 (7e:7be5)
 	ld [hli], a
 	ld [hli], a
 	ld a, [wActionHelpPowerUp]
-	cp POWER_UP_GARLIC
+	cp GARLIC
 	jr nc, .has_garlic_power_up
 	ld a, HIGH(Frameset_151fd)
 	ld [hli], a

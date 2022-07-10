@@ -1116,8 +1116,8 @@ UpdateState_MagicRising: ; 1ed972 (7b:5972)
 	ld b, $01
 	call SubYOffset
 	ld a, [wCameraConfigFlags]
-	and CAMCONFIG_SCROLLING_MASK
-	cp CAMCONFIG_TRANSITIONS
+	and CAM_SCROLLING_MASK
+	cp CAM_TRANSITIONS
 	jr c, .asm_1ed9d4
 	call GetFloorForYPos
 	ld a, [wFloor]

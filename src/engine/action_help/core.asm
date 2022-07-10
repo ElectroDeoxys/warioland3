@@ -27,7 +27,7 @@ InitActionHelp: ; 1f8022 (7e:4022)
 	ld [wActionHelpState], a
 	ld [wTimer], a
 
-	ld b, POWER_UP_NONE
+	ld b, NO_POWER_UP
 	ld a, [wPowerUpLevel]
 	and ACTION_HELP_TITLE_SCREEN
 	jr z, .not_title_screen

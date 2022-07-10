@@ -10,22 +10,22 @@ DEF CHARGE_ATTACK_COUNTER EQU $2b
 
 ; power up level constants
 	const_def
-	const POWER_UP_NONE                     ; 0
-	const POWER_UP_LEAD_OVERALLS            ; 1
-	const POWER_UP_SWIMMING_FLIPPERS        ; 2
-	const POWER_UP_HEAD_SMASH_HELMET        ; 3
-	const POWER_UP_GRAB_GLOVE               ; 4
-	const POWER_UP_GARLIC                   ; 5
-	const POWER_UP_SUPER_JUMP_SLAM_OVERALLS ; 6
-	const POWER_UP_HIGH_JUMP_BOOTS          ; 7
-	const POWER_UP_PRINCE_FROGS_GLOVES      ; 8
-	const POWER_UP_SUPER_GRAB_GLOVES        ; 9
+	const NO_POWER_UP              ; 0
+	const LEAD_OVERALLS            ; 1
+	const SWIMMING_FLIPPERS        ; 2
+	const HEAD_SMASH_HELMET        ; 3
+	const GRAB_GLOVE               ; 4
+	const GARLIC                   ; 5
+	const SUPER_JUMP_SLAM_OVERALLS ; 6
+	const HIGH_JUMP_BOOTS          ; 7
+	const PRINCE_FROGS_GLOVES      ; 8
+	const SUPER_GRAB_GLOVES        ; 9
 DEF NUM_MAIN_POWER_UPS EQU const_value
 
 	; special power-ups for Action Help
-	const POWER_UP_OWL                      ; a
-	const POWER_UP_RAIL                     ; b
-	const POWER_UP_VAMPIRE                  ; c
+	const POWER_UP_OWL             ; a
+	const POWER_UP_RAIL            ; b
+	const POWER_UP_VAMPIRE         ; c
 DEF NUM_TOTAL_POWER_UPS EQU const_value
 
 DEF POWER_UP_MASK EQU %111111

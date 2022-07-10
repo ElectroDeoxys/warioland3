@@ -945,7 +945,7 @@ StartMenu: ; 4508 (1:4508)
 	ld [wSubState], a
 	ret
 
-	ld a, POWER_UP_SUPER_GRAB_GLOVES
+	ld a, SUPER_GRAB_GLOVES
 	ld [wPowerUpLevel], a
 	ld a, [wceef]
 	and $03
@@ -2242,154 +2242,154 @@ PlayIntroSFXPlane_Far: ; 4eb1 (1:4eb1)
 ; if both treasures are collected, then that variant is unlocked
 LevelTreasureRequisites: ; 4eba (1:4eba)
 	; LEVEL_OUT_OF_THE_WOODS
-	db TREASURE_GOLD_MAGIC,               TREASURE_NONE ; variant 4
-	db TREASURE_MAGIC_SEEDS,              TREASURE_EYE_OF_THE_STORM ; variant 3
-	db TREASURE_LEAD_OVERALLS,            TREASURE_NONE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db GOLD_MAGIC,               TREASURE_NONE ; variant 4
+	db MAGIC_SEEDS,              EYE_OF_THE_STORM ; variant 3
+	db LEAD_OVERALLS_T,            TREASURE_NONE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_PEACEFUL_VILLAGE
-	db TREASURE_SUPER_JUMP_SLAM_OVERALLS, TREASURE_NONE ; variant 4
-	db TREASURE_FLUTE,                    TREASURE_NONE ; variant 3
-	db TREASURE_FLUTE,                    TREASURE_NONE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db SUPER_JUMP_SLAM_OVERALLS_T, TREASURE_NONE ; variant 4
+	db FLUTE,                    TREASURE_NONE ; variant 3
+	db FLUTE,                    TREASURE_NONE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_VAST_PLAIN
-	db TREASURE_BLUE_CHEMICAL,            TREASURE_RED_CHEMICAL ; variant 4
-	db TREASURE_POUCH,                    TREASURE_NONE ; variant 3
-	db TREASURE_LEAD_OVERALLS,            TREASURE_NONE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db BLUE_CHEMICAL,            RED_CHEMICAL ; variant 4
+	db POUCH,                    TREASURE_NONE ; variant 3
+	db LEAD_OVERALLS_T,            TREASURE_NONE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_BANK_OF_THE_WILD_RIVER
-	db TREASURE_AIR_PUMP,                 TREASURE_NONE ; variant 4
-	db TREASURE_PRINCE_FROGS_GLOVE,       TREASURE_NONE ; variant 3
-	db TREASURE_SUPER_SMASH,              TREASURE_NONE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db AIR_PUMP,                 TREASURE_NONE ; variant 4
+	db PRINCE_FROGS_GLOVES_T,       TREASURE_NONE ; variant 3
+	db GARLIC_T,              TREASURE_NONE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_TIDAL_COAST
-	db TREASURE_SAPLING_OF_GROWTH,        TREASURE_NONE ; variant 4
-	db TREASURE_STATUE,                   TREASURE_NONE ; variant 3
-	db TREASURE_GRAB_GLOVE,               TREASURE_NONE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db SAPLING_OF_GROWTH,        TREASURE_NONE ; variant 4
+	db STATUE,                   TREASURE_NONE ; variant 3
+	db GRAB_GLOVE_T,               TREASURE_NONE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_SEA_TURTLE_ROCKS
-	db TREASURE_NIGHT_VISION_SCOPE,       TREASURE_NONE ; variant 4
-	db TREASURE_SUPER_JUMP_SLAM_OVERALLS, TREASURE_NONE ; variant 3
-	db TREASURE_SCEPTER,                  TREASURE_NONE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db NIGHT_VISION_SCOPE,       TREASURE_NONE ; variant 4
+	db SUPER_JUMP_SLAM_OVERALLS_T, TREASURE_NONE ; variant 3
+	db SCEPTER,                  TREASURE_NONE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_DESERT_RUINS
-	db TREASURE_SUPER_JUMP_SLAM_OVERALLS, TREASURE_NONE ; variant 4
-	db TREASURE_HEAD_SMASH_HELMET,        TREASURE_NONE ; variant 3
-	db TREASURE_BLUE_TABLET,              TREASURE_GREEN_TABLET ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db SUPER_JUMP_SLAM_OVERALLS_T, TREASURE_NONE ; variant 4
+	db HEAD_SMASH_HELMET_T,        TREASURE_NONE ; variant 3
+	db BLUE_TABLET,              GREEN_TABLET ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_VOLCANOS_BASE
-	db TREASURE_FOOT_OF_STONE,            TREASURE_NONE ; variant 4
-	db TREASURE_FLUTE,                    TREASURE_NONE ; variant 3
-	db TREASURE_TRUCK_WHEEL,              TREASURE_NONE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db FOOT_OF_STONE,            TREASURE_NONE ; variant 4
+	db FLUTE,                    TREASURE_NONE ; variant 3
+	db TRUCK_WHEEL,              TREASURE_NONE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_POOL_OF_RAIN
-	db TREASURE_AIR_PUMP,                 TREASURE_NONE ; variant 4
-	db TREASURE_SWIMMING_FLIPPERS,        TREASURE_NONE ; variant 3
-	db TREASURE_POUCH,                    TREASURE_NONE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db AIR_PUMP,                 TREASURE_NONE ; variant 4
+	db SWIMMING_FLIPPERS_T,        TREASURE_NONE ; variant 3
+	db POUCH,                    TREASURE_NONE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_A_TOWN_IN_CHAOS
-	db TREASURE_ELECTRIC_FAN_PROPELLER,   TREASURE_NONE ; variant 4
-	db TREASURE_SUPER_GRAB_GLOVES,        TREASURE_NONE ; variant 3
-	db TREASURE_HEAD_SMASH_HELMET,        TREASURE_NONE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db ELECTRIC_FAN_PROPELLER,   TREASURE_NONE ; variant 4
+	db SUPER_GRAB_GLOVES_T,        TREASURE_NONE ; variant 3
+	db HEAD_SMASH_HELMET_T,        TREASURE_NONE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_BENEATH_THE_WAVES
-	db TREASURE_BLUE_CHEMICAL,            TREASURE_RED_CHEMICAL ; variant 4
-	db TREASURE_SAPLING_OF_GROWTH,        TREASURE_NONE ; variant 3
-	db TREASURE_PRINCE_FROGS_GLOVE,       TREASURE_NONE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db BLUE_CHEMICAL,            RED_CHEMICAL ; variant 4
+	db SAPLING_OF_GROWTH,        TREASURE_NONE ; variant 3
+	db PRINCE_FROGS_GLOVES_T,       TREASURE_NONE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_WEST_CRATER
-	db TREASURE_RUST_SPRAY,               TREASURE_NONE ; variant 4
-	db TREASURE_FIRE_DRENCHER,            TREASURE_NONE ; variant 3
-	db TREASURE_SUPER_JUMP_SLAM_OVERALLS, TREASURE_NONE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db RUST_SPRAY,               TREASURE_NONE ; variant 4
+	db FIRE_DRENCHER,            TREASURE_NONE ; variant 3
+	db SUPER_JUMP_SLAM_OVERALLS_T, TREASURE_NONE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_GRASSLANDS
-	db TREASURE_HIGH_JUMP_BOOTS,          TREASURE_NONE ; variant 4
-	db TREASURE_FLUTE,                    TREASURE_NONE ; variant 3
-	db TREASURE_POUCH,                    TREASURE_NONE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db HIGH_JUMP_BOOTS_T,          TREASURE_NONE ; variant 4
+	db FLUTE,                    TREASURE_NONE ; variant 3
+	db POUCH,                    TREASURE_NONE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_BIG_BRIDGE
-	db TREASURE_SCEPTER,                  TREASURE_NONE ; variant 4
-	db TREASURE_GRAB_GLOVE,               TREASURE_NONE ; variant 3
-	db TREASURE_SWIMMING_FLIPPERS,        TREASURE_NONE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db SCEPTER,                  TREASURE_NONE ; variant 4
+	db GRAB_GLOVE_T,               TREASURE_NONE ; variant 3
+	db SWIMMING_FLIPPERS_T,        TREASURE_NONE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_TOWER_OF_REVIVAL
-	db TREASURE_GOLDEN_LEFT_EYE,          TREASURE_GOLDEN_RIGHT_EYE ; variant 4
-	db TREASURE_STATUE,                   TREASURE_NONE ; variant 3
-	db TREASURE_RIGHT_GLASS_EYE,          TREASURE_LEFT_GLASS_EYE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db GOLDEN_LEFT_EYE,          GOLDEN_RIGHT_EYE ; variant 4
+	db STATUE,                   TREASURE_NONE ; variant 3
+	db RIGHT_GLASS_EYE,          LEFT_GLASS_EYE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_STEEP_CANYON
-	db TREASURE_RUST_SPRAY,               TREASURE_NONE ; variant 4
-	db TREASURE_PRINCE_FROGS_GLOVE,       TREASURE_NONE ; variant 3
-	db TREASURE_FOOT_OF_STONE,            TREASURE_NONE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db RUST_SPRAY,               TREASURE_NONE ; variant 4
+	db PRINCE_FROGS_GLOVES_T,       TREASURE_NONE ; variant 3
+	db FOOT_OF_STONE,            TREASURE_NONE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_CAVE_OF_FLAMES
-	db TREASURE_RUST_SPRAY,               TREASURE_NONE ; variant 4
-	db TREASURE_EXPLOSIVE_PLUNGER_BOX,    TREASURE_NONE ; variant 3
-	db TREASURE_HIGH_JUMP_BOOTS,          TREASURE_NONE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db RUST_SPRAY,               TREASURE_NONE ; variant 4
+	db EXPLOSIVE_PLUNGER_BOX,    TREASURE_NONE ; variant 3
+	db HIGH_JUMP_BOOTS_T,          TREASURE_NONE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_ABOVE_THE_CLOUDS
-	db TREASURE_FULL_MOON_GONG,           TREASURE_NONE ; variant 4
-	db TREASURE_SCISSORS,                 TREASURE_NONE ; variant 3
-	db TREASURE_MAGIC_WAND,               TREASURE_NONE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db FULL_MOON_GONG,           TREASURE_NONE ; variant 4
+	db SCISSORS,                 TREASURE_NONE ; variant 3
+	db MAGIC_WAND,               TREASURE_NONE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_STAGNANT_SWAMP
-	db TREASURE_EXPLOSIVE_PLUNGER_BOX,    TREASURE_NONE ; variant 4
-	db TREASURE_HIGH_JUMP_BOOTS,          TREASURE_NONE ; variant 3
-	db TREASURE_FOOT_OF_STONE,            TREASURE_NONE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db EXPLOSIVE_PLUNGER_BOX,    TREASURE_NONE ; variant 4
+	db HIGH_JUMP_BOOTS_T,          TREASURE_NONE ; variant 3
+	db FOOT_OF_STONE,            TREASURE_NONE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_FRIGID_SEA
-	db TREASURE_SUN_MEDALLION_TOP,        TREASURE_SUN_MEDALLION_BOTTOM ; variant 4
-	db TREASURE_SCEPTER,                  TREASURE_NONE ; variant 3
-	db TREASURE_GRAB_GLOVE,               TREASURE_NONE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db SUN_MEDALLION_TOP,        SUN_MEDALLION_BOTTOM ; variant 4
+	db SCEPTER,                  TREASURE_NONE ; variant 3
+	db GRAB_GLOVE_T,               TREASURE_NONE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_CASTLE_OF_ILLUSIONS
-	db TREASURE_CASTLE_BRICK,             TREASURE_NONE ; variant 4
-	db TREASURE_SUPER_GRAB_GLOVES,        TREASURE_NONE ; variant 3
-	db TREASURE_SUN_MEDALLION_TOP,        TREASURE_SUN_MEDALLION_BOTTOM ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db CASTLE_BRICK,             TREASURE_NONE ; variant 4
+	db SUPER_GRAB_GLOVES_T,        TREASURE_NONE ; variant 3
+	db SUN_MEDALLION_TOP,        SUN_MEDALLION_BOTTOM ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_COLOSSAL_HOLE
-	db TREASURE_EXPLOSIVE_PLUNGER_BOX,    TREASURE_NONE ; variant 4
-	db TREASURE_SUN_MEDALLION_TOP,        TREASURE_SUN_MEDALLION_BOTTOM ; variant 3
-	db TREASURE_SUPER_SMASH,              TREASURE_NONE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db EXPLOSIVE_PLUNGER_BOX,    TREASURE_NONE ; variant 4
+	db SUN_MEDALLION_TOP,        SUN_MEDALLION_BOTTOM ; variant 3
+	db GARLIC_T,              TREASURE_NONE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_WARPED_VOID
-	db TREASURE_KEY_CARD_RED,             TREASURE_KEY_CARD_BLUE ; variant 4
-	db TREASURE_WARP_REMOVAL_APPARATUS,   TREASURE_NONE ; variant 3
-	db TREASURE_WARP_REMOVAL_APPARATUS,   TREASURE_NONE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db KEY_CARD_RED,             KEY_CARD_BLUE ; variant 4
+	db WARP_REMOVAL_APPARATUS,   TREASURE_NONE ; variant 3
+	db WARP_REMOVAL_APPARATUS,   TREASURE_NONE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_EAST_CRATER
-	db TREASURE_PICK_AXE,                 TREASURE_NONE ; variant 4
-	db TREASURE_JACKHAMMER,               TREASURE_NONE ; variant 3
-	db TREASURE_FIRE_DRENCHER,            TREASURE_NONE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db PICK_AXE,                 TREASURE_NONE ; variant 4
+	db JACKHAMMER,               TREASURE_NONE ; variant 3
+	db FIRE_DRENCHER,            TREASURE_NONE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 
 	; LEVEL_FOREST_OF_FEAR
-	db TREASURE_DEMONS_BLOOD,             TREASURE_NONE ; variant 4
-	db TREASURE_MYSTERY_HANDLE,           TREASURE_NONE ; variant 3
-	db TREASURE_SUPER_GRAB_GLOVES,        TREASURE_NONE ; variant 2
-	db TREASURE_NONE,                     TREASURE_NONE ; variant 1
+	db DEMONS_BLOOD,             TREASURE_NONE ; variant 4
+	db MYSTERY_HANDLE,           TREASURE_NONE ; variant 3
+	db SUPER_GRAB_GLOVES_T,        TREASURE_NONE ; variant 2
+	db TREASURE_NONE,            TREASURE_NONE ; variant 1
 ; 0x4f82
 
 Pals_4f82: ; 4f82 (1:4f82)

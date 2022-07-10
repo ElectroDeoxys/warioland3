@@ -89,10 +89,10 @@ Func_80aa: ; 80aa (2:40aa)
 	farcall UpdateParticles
 
 	ld a, [wCameraConfigFlags]
-	and CAMCONFIG_SCROLLING_MASK
-	cp CAMCONFIG_FREE
+	and CAM_SCROLLING_MASK
+	cp CAM_FREE
 	jp z, .free_camera
-	cp CAMCONFIG_YSCROLL
+	cp CAM_YSCROLL
 	jp z, .yscroll_camera
 
 	ld a, [wFloorTransitionDir]
@@ -229,8 +229,8 @@ Func_80aa: ; 80aa (2:40aa)
 	ld a, [wCameraConfigFlags]
 	cp HIDDEN_FIGURE_CAMCONFIG
 	jr z, .asm_8227
-	and CAMCONFIG_SCROLLING_MASK
-	cp CAMCONFIG_XSCROLL2 | CAMCONFIG_TRANSITIONS
+	and CAM_SCROLLING_MASK
+	cp CAM_XSCROLL2 | CAM_TRANSITIONS
 	jr z, .asm_8229
 	call Func_b9a6
 	jr .asm_8229
@@ -1181,8 +1181,8 @@ Func_8a41: ; 8a41 (2:4a41)
 	call Func_cf8
 	update_pos
 	ld a, [wCameraConfigFlags]
-	and CAMCONFIG_SCROLLING_MASK
-	cp CAMCONFIG_TRANSITIONS
+	and CAM_SCROLLING_MASK
+	cp CAM_TRANSITIONS
 	jr c, .asm_8ad8
 	ld a, [wceef]
 	and %00111100
@@ -1196,10 +1196,10 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 	xor a
 	ld [wc0b5], a
 	ld a, [wCameraConfigFlags]
-	and CAMCONFIG_SCROLLING_MASK
-	cp CAMCONFIG_XSCROLL2 | CAMCONFIG_TRANSITIONS
+	and CAM_SCROLLING_MASK
+	cp CAM_XSCROLL2 | CAM_TRANSITIONS
 	jr z, .asm_8aea
-	cp CAMCONFIG_YSCROLL
+	cp CAM_YSCROLL
 	jr nz, .asm_8af7
 .asm_8aea
 	ld a, [wXPosHi]
@@ -1229,7 +1229,7 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 	ld [wcac6 + 0], a
 	ld h, a
 	ld a, [wCameraConfigFlags]
-	bit CAMCONFIG_EDGE_LEFT_F, a
+	bit CAM_EDGE_LEFT_F, a
 	jr z, .asm_8b27
 	ld de, -$20
 	add hl, de
@@ -1258,7 +1258,7 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 	ld h, a
 	ld de, $a0
 	ld a, [wCameraConfigFlags]
-	bit CAMCONFIG_EDGE_RIGHT_F, a
+	bit CAM_EDGE_RIGHT_F, a
 	jr z, .asm_8b56
 	ld e, $c0
 .asm_8b56
@@ -1278,8 +1278,8 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 	and %00111100
 	jr z, .asm_8b78
 	ld a, [wCameraConfigFlags]
-	and CAMCONFIG_SCROLLING_MASK
-	cp CAMCONFIG_TRANSITIONS
+	and CAM_SCROLLING_MASK
+	cp CAM_TRANSITIONS
 	ret nc
 .asm_8b78
 	xor a
@@ -1294,7 +1294,7 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 	ld [wcac4 + 0], a
 	ld h, a
 	ld a, [wCameraConfigFlags]
-	bit CAMCONFIG_EDGE_UP_F, a
+	bit CAM_EDGE_UP_F, a
 	jr z, .asm_8b99
 	ld de, -$20
 	add hl, de
@@ -1324,7 +1324,7 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 	ld h, a
 	ld de, $90
 	ld a, [wCameraConfigFlags]
-	bit CAMCONFIG_EDGE_DOWN_F, a
+	bit CAM_EDGE_DOWN_F, a
 	jr z, .asm_8bc7
 	ld e, $b0
 .asm_8bc7
@@ -1342,8 +1342,8 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 	ret
 .asm_8bdb
 	ld a, [wCameraConfigFlags]
-	and CAMCONFIG_SCROLLING_MASK
-	cp CAMCONFIG_TRANSITIONS
+	and CAM_SCROLLING_MASK
+	cp CAM_TRANSITIONS
 	ret c
 	ld a, [wYPosLo]
 	cp $80
@@ -1398,7 +1398,7 @@ Func_8c12: ; 8c12 (2:4c12)
 
 .asm_8c38
 	ld a, [wCameraConfigFlags]
-	bit CAMCONFIG_EDGE_UP_F, a
+	bit CAM_EDGE_UP_F, a
 	ld a, $00
 	jr z, .asm_8c43
 	ld a, $20
@@ -1413,7 +1413,7 @@ Func_8c12: ; 8c12 (2:4c12)
 
 .asm_8c54
 	ld a, [wCameraConfigFlags]
-	bit CAMCONFIG_EDGE_DOWN_F, a
+	bit CAM_EDGE_DOWN_F, a
 	ld a, $68
 	jr z, .asm_8c5f
 	ld a, $48
@@ -1451,7 +1451,7 @@ Func_8c12: ; 8c12 (2:4c12)
 	ret
 .asm_8c9f
 	ld a, [wCameraConfigFlags]
-	bit CAMCONFIG_EDGE_LEFT_F, a
+	bit CAM_EDGE_LEFT_F, a
 	ld a, $00
 	jr z, .asm_8caa
 	ld a, $20
@@ -1465,7 +1465,7 @@ Func_8c12: ; 8c12 (2:4c12)
 	ret
 .asm_8cba
 	ld a, [wCameraConfigFlags]
-	bit CAMCONFIG_EDGE_RIGHT_F, a
+	bit CAM_EDGE_RIGHT_F, a
 	ld a, $60
 	jr z, .asm_8cc5
 	ld a, $40
@@ -8146,7 +8146,7 @@ Func_b6d5: ; b6d5 (2:76d5)
 	adc $00
 	ld [wcac6 + 0], a
 	ld a, [wCameraConfigFlags]
-	bit CAMCONFIG_EDGE_RIGHT_F, a
+	bit CAM_EDGE_RIGHT_F, a
 	ld b, $60
 	jr z, .asm_b6f8
 	ld b, $40
@@ -8179,7 +8179,7 @@ Func_b6d5: ; b6d5 (2:76d5)
 	sub $08
 	ld c, a
 	ld a, [wCameraConfigFlags]
-	bit CAMCONFIG_EDGE_LEFT_F, a
+	bit CAM_EDGE_LEFT_F, a
 	jr z, .asm_b733
 	ld a, c
 	add $20
@@ -8189,7 +8189,7 @@ Func_b6d5: ; b6d5 (2:76d5)
 	cp c
 	ret nc
 	ld a, [wCameraConfigFlags]
-	bit CAMCONFIG_EDGE_LEFT_F, a
+	bit CAM_EDGE_LEFT_F, a
 	ld a, $00
 	jr z, .asm_b743
 	ld a, $20
@@ -8219,7 +8219,7 @@ Func_b74c: ; b74c (2:774c)
 	cp c
 	jr nz, .asm_b790
 	ld a, [wCameraConfigFlags]
-	bit CAMCONFIG_EDGE_LEFT_F, a
+	bit CAM_EDGE_LEFT_F, a
 	ld b, $10
 	jr z, .asm_b77c
 	ld b, $30
@@ -8258,7 +8258,7 @@ Func_b74c: ; b74c (2:774c)
 	sub c
 	ld c, a
 	ld a, [wCameraConfigFlags]
-	bit CAMCONFIG_EDGE_RIGHT_F, a
+	bit CAM_EDGE_RIGHT_F, a
 	jr z, .asm_b7bb
 	ld a, c
 	sub $20
@@ -8273,7 +8273,7 @@ Func_b74c: ; b74c (2:774c)
 	dec a
 	ld [wcac6 + 0], a
 	ld a, [wCameraConfigFlags]
-	bit CAMCONFIG_EDGE_RIGHT_F, a
+	bit CAM_EDGE_RIGHT_F, a
 	ld a, $60
 	jr z, .asm_b7d7
 	ld a, $40
@@ -8295,7 +8295,7 @@ Func_b7db: ; b7db (2:77db)
 	cp c
 	jr c, .asm_b80d
 	ld a, [wCameraConfigFlags]
-	bit CAMCONFIG_EDGE_DOWN_F, a
+	bit CAM_EDGE_DOWN_F, a
 	ld b, $68
 	jr z, .asm_b7fd
 	ld b, $48
@@ -8310,8 +8310,8 @@ Func_b7db: ; b7db (2:77db)
 	ret
 .asm_b80d
 	ld a, [wCameraConfigFlags]
-	and CAMCONFIG_SCROLLING_MASK
-	cp CAMCONFIG_TRANSITIONS
+	and CAM_SCROLLING_MASK
+	cp CAM_TRANSITIONS
 	ret nc
 	ld a, [wc0b7]
 	ld c, a
@@ -8323,7 +8323,7 @@ Func_b7db: ; b7db (2:77db)
 	sub $10
 	ld c, a
 	ld a, [wCameraConfigFlags]
-	bit CAMCONFIG_EDGE_UP_F, a
+	bit CAM_EDGE_UP_F, a
 	jr z, .asm_b831
 	ld a, c
 	add $20
@@ -8334,7 +8334,7 @@ Func_b7db: ; b7db (2:77db)
 	ret nc
 .asm_b836
 	ld a, [wCameraConfigFlags]
-	bit CAMCONFIG_EDGE_UP_F, a
+	bit CAM_EDGE_UP_F, a
 	ld a, $00
 	jr z, .asm_b841
 	ld a, $20
@@ -8357,7 +8357,7 @@ Func_b850: ; b850 (2:7850)
 	sbc $00
 	ld [wcac4 + 0], a
 	ld a, [wCameraConfigFlags]
-	bit CAMCONFIG_EDGE_UP_F, a
+	bit CAM_EDGE_UP_F, a
 	ld b, $10
 	jr z, .asm_b86e
 	ld b, $30
@@ -8384,8 +8384,8 @@ Func_b850: ; b850 (2:7850)
 	ret
 .asm_b892
 	ld a, [wCameraConfigFlags]
-	and CAMCONFIG_SCROLLING_MASK
-	cp CAMCONFIG_TRANSITIONS
+	and CAM_SCROLLING_MASK
+	cp CAM_TRANSITIONS
 	ret nc
 	ld a, [wc0b6]
 	dec a
@@ -8402,7 +8402,7 @@ Func_b850: ; b850 (2:7850)
 	sub c
 	ld c, a
 	ld a, [wCameraConfigFlags]
-	bit CAMCONFIG_EDGE_DOWN_F, a
+	bit CAM_EDGE_DOWN_F, a
 	jr z, .asm_b8ba
 	ld a, c
 	sub $20
@@ -8414,7 +8414,7 @@ Func_b850: ; b850 (2:7850)
 	ld a, $02
 	ld [wc0be], a
 	ld a, [wCameraConfigFlags]
-	bit CAMCONFIG_EDGE_DOWN_F, a
+	bit CAM_EDGE_DOWN_F, a
 	ld a, $68
 	jr z, .asm_b8cf
 	ld a, $48

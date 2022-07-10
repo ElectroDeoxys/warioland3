@@ -123,7 +123,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	and a
 	jp nz, VanishObject2
 	ld a, [wEffectivePowerUp]
-	cp POWER_UP_SUPER_JUMP_SLAM_OVERALLS
+	cp SUPER_JUMP_SLAM_OVERALLS
 	jp nc, VanishObject2
 	ld a, [wCurObjInteractionType]
 	and INTERACTION_MASK
@@ -658,7 +658,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	and a
 	jr nz, .asm_4129c
 	ld a, [wEffectivePowerUp]
-	cp POWER_UP_GARLIC
+	cp GARLIC
 	jr nc, .asm_4129c
 	ld a, [wCurObjInteractionType]
 	and INTERACTION_MASK
@@ -690,7 +690,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	and a
 	jr nz, .asm_412d1
 	ld a, [wEffectivePowerUp]
-	cp POWER_UP_GARLIC
+	cp GARLIC
 	jr nc, .asm_412d1
 	ld a, [wCurObjInteractionType]
 	and INTERACTION_MASK

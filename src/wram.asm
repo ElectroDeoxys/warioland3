@@ -923,7 +923,7 @@ wcede:: ; cede
 wcedf:: ; cedf
 	ds $1
 
-; uses WATER_CURRENT_* as flags
+; uses CURRENT_* as flags
 ; to indicate what direction the
 ; current is pulling
 wWaterCurrent::     ds $1 ; cee0
@@ -1383,7 +1383,7 @@ w2d018:: ; d018
 w2d019:: ; d019
 	ds $1
 
-; MAP_* constant
+; NORTH, WEST, SOUTH or EAST
 wCurMapSide:: ; d01a
 	ds $1
 

@@ -4834,8 +4834,8 @@ Func_2b2c2: ; 2b2c2 (a:72c2)
 
 .asm_2b2e1
 	ld a, [wCameraConfigFlags]
-	and CAMCONFIG_SCROLLING_MASK
-	cp CAMCONFIG_TRANSITIONS
+	and CAM_SCROLLING_MASK
+	cp CAM_TRANSITIONS
 	jr c, .asm_2b2f6
 	call GetFloorForYPos
 	ld a, [wFloor]

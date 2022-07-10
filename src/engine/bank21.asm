@@ -1964,7 +1964,7 @@ Func_84c92: ; 84c92 (21:4c92)
 	ret nz ; exit if not all crayons
 	and a
 	jr z, .north
-	cp MAP_WEST
+	cp WEST
 	jr z, .west
 	ret
 .north
@@ -2254,10 +2254,10 @@ Data_84dd9: ; 84dd9 (21:4dd9)
 ; 0x84e39
 
 Data_84e39: ; 84e39 (21:4e39)
-	dw Pals_84780 ; MAP_NORTH
-	dw Pals_847c0 ; MAP_WEST
-	dw Pals_84800 ; MAP_SOUTH
-	dw Pals_84840 ; MAP_EAST
+	dw Pals_84780 ; NORTH
+	dw Pals_847c0 ; WEST
+	dw Pals_84800 ; SOUTH
+	dw Pals_84840 ; EAST
 	dw Pals_84880
 ; 0x84e43
 
@@ -2533,7 +2533,7 @@ Func_85234: ; 85234 (21:5234)
 	ld d, $00
 	ld hl, Data_84e39
 	add hl, de
-	ld a, MAP_EAST
+	ld a, EAST
 	cp b
 	call z, .GetEastMapNoIcePalette
 	ld a, [hli]
@@ -2552,10 +2552,10 @@ Func_85234: ; 85234 (21:5234)
 ; then advance to the next palette
 .GetEastMapNoIcePalette
 	push hl
-	ld a, TREASURE_BLUE_BOOK
+	ld a, BLUE_BOOK
 	call IsTreasureCollected
 	jr z, .next_pal
-	ld a, TREASURE_TRIDENT
+	ld a, TRIDENT
 	call IsTreasureCollected
 	jr z, .next_pal
 	pop hl
@@ -2875,9 +2875,9 @@ Func_8542c: ; 8542c (21:542c)
 	ret
 .north
 	ld a, [wLastTransitionParam]
-	cp TREASURE_CRAYON_RED
+	cp CRAYON_RED_T
 	jr c, .not_crayon
-	cp TREASURE_CRAYON_PINK + 1
+	cp CRAYON_PINK_T + 1
 	ret c
 .not_crayon
 	ld hl, Pals_84500

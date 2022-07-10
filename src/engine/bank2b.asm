@@ -1383,7 +1383,7 @@ _InitTempleScene: ; acb25 (2b:4b25)
 	ldh [rVBK], a
 	call FillClearedTextBuffer
 
-	ld a, TREASURE_GOLD_MUSIC_BOX
+	ld a, GOLD_MUSIC_BOX
 	call IsTreasureCollected
 	ld a, TEMPLE_SCENE_ENTERING
 	jp z, .set_regular_temple_scene ; not collected

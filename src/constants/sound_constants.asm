@@ -85,8 +85,8 @@
 	const SFX_GRAB                         ; 115
 	const SFX_016                          ; 116
 	const SFX_017                          ; 117
-	const SFX_VANISH                          ; 118
-	const SFX_THROW                          ; 119
+	const SFX_VANISH                       ; 118
+	const SFX_THROW                        ; 119
 	const SFX_01A                          ; 11a
 	const SFX_01B                          ; 11b
 	const SFX_FLAT_WALK                    ; 11c
