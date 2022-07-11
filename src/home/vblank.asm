@@ -1,14 +1,14 @@
 ; store in wVBlankFunc a return function
 VBlank_Ret:: ; 334 (0:334)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	call CopyHLToDE
 	ret
 
-.func
+.Func:
 	ret
-.func_end
+.end
 
 ; store in wLCDFunc a return function
 InitLCD:: ; 341 (0:341)
@@ -24,13 +24,13 @@ InitLCD:: ; 341 (0:341)
 ; 0x354
 
 VBlank_354:: ; 354 (0:354)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	call CopyHLToDE
 	ret
 
-.func
+.Func:
 	ld a, [wSCY]
 	ldh [rSCY], a
 	ld a, [wSCX]
@@ -38,7 +38,7 @@ VBlank_354:: ; 354 (0:354)
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
 	ret
-.func_end
+.end
 ; 0x370
 
 WaitVBlank:: ; 370 (0:370)

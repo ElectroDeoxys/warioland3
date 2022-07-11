@@ -663,19 +663,19 @@ InitGolfClearCutscene: ; 1c846c (72:446c)
 ; 0x1c84e0
 
 VBlank_1c84e0: ; 1c84e0 (72:44e0)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	jp CopyHLToDE
 
-.func
+.Func:
 	ld a, BANK("Golf RAM")
 	ldh [rSVBK], a
 	ld a, [wSCX]
 	ldh [rSCX], a
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
-.func_end
+.end
 ; 0x1c84f9
 
 UpdateGolfClearCutscene: ; 1c84f9 (72:44f9)

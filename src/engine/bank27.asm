@@ -1287,13 +1287,13 @@ ClearTempPals: ; 9cc72 (27:4c72)
 	INCROM $9cc87, $9cc9c
 
 VBlank_9cc9c: ; 9cc9c (27:4c9c)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	call CopyHLToDE
 	ret
 
-.func
+.Func:
 	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
 	ld a, [wSCY]
@@ -1333,7 +1333,7 @@ VBlank_9cc9c: ; 9cc9c (27:4c9c)
 	ldh [rVBK], a
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
-.func_end
+.end
 ; 0x9ccf9
 
 Func_9ccf9: ; 9ccf9 (27:4cf9)

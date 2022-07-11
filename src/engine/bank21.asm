@@ -2131,13 +2131,13 @@ Func_84d55: ; 84d55 (21:4d55)
 ; 0x84d76
 
 VBlank_84d76: ; 84d76 (21:4d76)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	call CopyHLToDE
 	ret
 
-.func
+.Func:
 	ld a, $02
 	ldh [rSVBK], a
 	ld a, [wSCY]
@@ -2188,7 +2188,7 @@ VBlank_84d76: ; 84d76 (21:4d76)
 	ldh [rVBK], a
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
-.func_end
+.end
 ; 0x84dd9
 
 Data_84dd9: ; 84dd9 (21:4dd9)

@@ -581,16 +581,16 @@ VBlank_88d:: ; 88d (0:88d)
 	ld b, 3
 	call CopyHLToDE
 
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	call CopyHLToDE
 	ei
 	ret
 
-.func
+.Func:
 	jp .asm_8a9
-.func_end
+.end
 
 .asm_8a9
 	ld a, [wSCY]
@@ -606,16 +606,16 @@ VBlank_88d:: ; 88d (0:88d)
 
 VBlank_8bf:: ; 8bf (0:8bf)
 	di
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	call CopyHLToDE
 	ei
 	ret
 
-.func
+.Func:
 	jp .asm_8d0
-.func_end
+.end
 
 .asm_8d0
 	ld a, [wSCY]

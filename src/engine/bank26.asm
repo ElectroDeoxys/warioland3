@@ -513,13 +513,13 @@ Func_9a559: ; 9a559 (26:6559)
 ; 0x9a564
 
 VBlank_9a564: ; 9a564 (26:6564)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	call CopyHLToDE
 	ret
 
-.func
+.Func:
 	ld a, $02
 	ldh [rSVBK], a
 	ld a, [wSCY]
@@ -530,7 +530,7 @@ VBlank_9a564: ; 9a564 (26:6564)
 	ldh [rVBK], a
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
-.func_end
+.end
 ; 0x9a586
 
 ; iterates all treasures in the current page

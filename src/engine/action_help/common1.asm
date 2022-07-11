@@ -139,13 +139,13 @@ ActionHelp_Init: ; 1fb671 (7e:7671)
 ; 0x1fb6b7
 
 VBlank_1fb6b7: ; 1fb6b7 (7e:76b7)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	call CopyHLToDE
 	ret
 
-.func
+.Func:
 	ld a, [wIsDMATransferPending]
 	and a
 	jr z, .not_pending
@@ -180,7 +180,7 @@ VBlank_1fb6b7: ; 1fb6b7 (7e:76b7)
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
 	ret
-.func_end
+.end
 ; 0x1fb6f7
 
 Func_1fb6f7: ; 1fb6f7 (7e:76f7)

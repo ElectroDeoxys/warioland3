@@ -572,13 +572,13 @@ Func_16041f: ; 16041f (58:441f)
 ; 0x160439
 
 VBlank_160439: ; 160439 (58:4439)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	call CopyHLToDE
 	ret
 
-.func
+.Func:
 	ld a, [wSCY]
 	ldh [rSCY], a
 	ld a, [wSCX]
@@ -643,7 +643,7 @@ VBlank_160439: ; 160439 (58:4439)
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
 	ret
-.func_end
+.end
 ; 0x1604b1
 
 AddCreditsSprite: ; 1604b1 (58:44b1)

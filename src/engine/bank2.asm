@@ -8060,15 +8060,15 @@ Func_b405: ; b405 (2:7405)
 ; 0xb672
 
 VBlank_b672: ; b672 (2:7672)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	call CopyHLToDE
 	ret
 
-.func
+.Func:
 	jp DoPendingDMATransfer
-.func_end
+.end
 ; 0xb681
 
 Func_b681: ; b681 (2:7681)

@@ -1481,13 +1481,13 @@ ClearSceneObjsRAM: ; acca5 (2b:4ca5)
 ; 0xaccb0
 
 VBlank_accb0: ; accb0 (2b:4cb0)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	call CopyHLToDE
 	ret
 
-.func
+.Func:
 	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
 
@@ -1570,7 +1570,7 @@ VBlank_accb0: ; accb0 (2b:4cb0)
 .dma_transfer
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
-.func_end
+.end
 ; 0xacd3a
 
 _UpdateTempleScene: ; acd3a (2b:4d3a)

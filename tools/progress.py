@@ -31,7 +31,7 @@ def main():
 		listBankSet = set([])
 		if args.list_funcs != None:
 			listBankSet = parseBankList(args.list_funcs)
-		reportUnnamedSymbols(args.symfile,listBankSet, args.function_source, args.other_unnamed)
+		reportUnnamedSymbols(args.symfile,listBankSet, args.Func:tion_source, args.other_unnamed)
 
 def reportINCROMs(incromDir):
 	grepProc = subprocess.Popen(['grep', '-r', 'INCROM', incromDir], stdout=subprocess.PIPE)

@@ -96,16 +96,16 @@ VBlank_9cb:: ; 9cb (0:9cb)
 	ld b, 3
 	call CopyHLToDE
 
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	call CopyHLToDE
 	ei
 	ret
 
-.func
+.Func:
 	jp .asm_9e7
-.func_end
+.end
 
 .asm_9e7
 	ld a, [wSCY]

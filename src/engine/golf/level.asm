@@ -2915,12 +2915,12 @@ Func_1c9cf9: ; 1c9cf9 (72:5cf9)
 
 VBlank_1c9d1d: ; 1c9d1d (72:5d1d)
 	call .UpdatePinFlagTiles
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	jp CopyHLToDE
 
-.func
+.Func:
 	ld a, BANK("Golf RAM")
 	ldh [rSVBK], a
 	ldh [rVBK], a
@@ -2945,7 +2945,7 @@ VBlank_1c9d1d: ; 1c9d1d (72:5d1d)
 	ldh [rVBK], a
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
-.func_end
+.end
 
 .UpdatePinFlagTiles
 	ld hl, w1dc0b
@@ -2983,12 +2983,12 @@ VBlank_1c9d1d: ; 1c9d1d (72:5d1d)
 GolfPinFlag: INCBIN "gfx/golf/golf_pin_flag.2bpp"
 
 VBlank_1c9e8d: ; 1c9e8d (72:5e8d)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	jp CopyHLToDE
 
-.func
+.Func:
 	ld a, BANK("Golf RAM")
 	ldh [rSVBK], a
 	ldh [rVBK], a
@@ -3001,16 +3001,16 @@ VBlank_1c9e8d: ; 1c9e8d (72:5e8d)
 	ld [wGolfVBlankMode], a
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
-.func_end
+.end
 ; 0x1c9eb3
 
 VBlank_1c9eb3: ; 1c9eb3 (72:5eb3)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	jp CopyHLToDE
 
-.func
+.Func:
 	ld a, BANK("Golf RAM")
 	ldh [rSVBK], a
 	xor a
@@ -3035,16 +3035,16 @@ VBlank_1c9eb3: ; 1c9eb3 (72:5eb3)
 	ld [hl], a
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
-.func_end
+.end
 ; 0x1c9ef1
 
 VBlank_1c9ef1: ; 1c9ef1 (72:5ef1)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	jp CopyHLToDE
 
-.func
+.Func:
 	ld a, BANK("Golf RAM")
 	ldh [rSVBK], a
 	ldh [rVBK], a
@@ -3071,7 +3071,7 @@ VBlank_1c9ef1: ; 1c9ef1 (72:5ef1)
 	ldh [rVBK], a
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
-.func_end
+.end
 ; 0x1c9f2e
 
 GolfLobbyVBlank: ; 1c9f2e (72:5f2e)
@@ -3082,12 +3082,12 @@ GolfLobbyVBlank: ; 1c9f2e (72:5f2e)
 ; 0x1c9f36
 
 VBlank_1c9f36: ; 1c9f36 (72:5f36)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	jp CopyHLToDE
 
-.func
+.Func:
 	; update the coin number in the Golf Lobby
 	ld a, BANK("Golf RAM")
 	ldh [rSVBK], a
@@ -3116,16 +3116,16 @@ VBlank_1c9f36: ; 1c9f36 (72:5f36)
 	ldbgcoord 8, 9
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
-.func_end
+.end
 ; 0x1c9f7a
 
 VBlank_1c9f7a: ; 1c9f7a (72:5f7a)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	jp CopyHLToDE
 
-.func
+.Func:
 	ld a, BANK("Golf RAM")
 	ldh [rSVBK], a
 	xor a
@@ -3147,7 +3147,7 @@ VBlank_1c9f7a: ; 1c9f7a (72:5f7a)
 	ld [hl], a
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
-.func_end
+.end
 ; 0x1c9fae
 
 Func_1c9fae: ; 1c9fae (72:5fae)
@@ -3184,19 +3184,19 @@ Func_1c9fbd: ; 1c9fbd (72:5fbd)
 ; 0x1c9fe1
 
 VBlank_1c9fe1: ; 1c9fe1 (72:5fe1)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	jp CopyHLToDE
 
-.func
+.Func:
 	ld a, $1
 	ldh [rSVBK], a
 	ld a, [wSCX]
 	ldh [rSCX], a
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
-.func_end
+.end
 ; 0x1c9ffa
 
 VBlank_1c9ffa: ; 1c9ffa (72:5ffa)
@@ -3207,12 +3207,12 @@ VBlank_1c9ffa: ; 1c9ffa (72:5ffa)
 	ld a, $0d
 	ld [w1dc13], a
 
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	jp CopyHLToDE
 
-.func
+.Func:
 	ld a, $1
 	ldh [rSVBK], a
 	xor a
@@ -3227,16 +3227,16 @@ VBlank_1c9ffa: ; 1c9ffa (72:5ffa)
 	ldh [rVBK], a
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
-.func_end
+.end
 ; 0x1ca033
 
 VBlank_1ca033: ; 1ca033 (72:6033)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	jp CopyHLToDE
 
-.func
+.Func:
 	ld a, BANK("Golf RAM")
 	ldh [rSVBK], a
 	xor a
@@ -3247,7 +3247,7 @@ VBlank_1ca033: ; 1ca033 (72:6033)
 	call Func_2c46
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
-.func_end
+.end
 ; 0x1ca056
 
 VBlank_1ca056: ; 1ca056 (72:6056)
@@ -3258,12 +3258,12 @@ VBlank_1ca056: ; 1ca056 (72:6056)
 	ld a, $0d
 	ld [w1dc13], a
 
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	jp CopyHLToDE
 
-.func
+.Func:
 	ld a, BANK("Golf RAM")
 	ldh [rSVBK], a
 	xor a
@@ -3278,5 +3278,5 @@ VBlank_1ca056: ; 1ca056 (72:6056)
 	ldh [rVBK], a
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
-.func_end
+.end
 ; 0x1ca08f

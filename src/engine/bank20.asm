@@ -1603,13 +1603,13 @@ Func_80bd9: ; 80bd9 (20:4bd9)
 ; 0x80bf9
 
 VBlank_80bf9: ; 80bf9 (20:4bf9)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	call CopyHLToDE
 	ret
 
-.func
+.Func:
 	ld a, $02
 	ldh [rSVBK], a
 	ld a, [wSCY]
@@ -1729,17 +1729,17 @@ VBlank_80bf9: ; 80bf9 (20:4bf9)
 
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
-.func_end
+.end
 ; 0x80cb1
 
 VBlank_80cb1: ; 80cb1 (20:4cb1)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	call CopyHLToDE
 	ret
 
-.func
+.Func:
 	ld a, $02
 	ldh [rSVBK], a
 	ld a, [wSCY]
@@ -1827,7 +1827,7 @@ VBlank_80cb1: ; 80cb1 (20:4cb1)
 
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
-.func_end
+.end
 ; 0x80d5c
 
 	INCROM $80d5c, $80d6c

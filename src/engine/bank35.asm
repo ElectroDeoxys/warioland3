@@ -924,13 +924,13 @@ UpdateNumCollectedTreasures: ; d4733 (35:4733)
 ; 0xd4764
 
 VBlank_d4764: ; d4764 (35:4764)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	call CopyHLToDE
 	ret
 
-.func
+.Func:
 	ld a, [wSCY]
 	ldh [rSCY], a
 	ld a, [wSCX]
@@ -969,17 +969,17 @@ VBlank_d4764: ; d4764 (35:4764)
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
 	ret
-.func_end
+.end
 ; 0xd47a7
 
 VBlank_d47a7: ; d47a7 (35:47a7)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	call CopyHLToDE
 	ret
 
-.func
+.Func:
 	ld a, [wSCY]
 	ldh [rSCY], a
 	ld a, [wSCX]
@@ -1020,7 +1020,7 @@ VBlank_d47a7: ; d47a7 (35:47a7)
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
 	ret
-.func_end
+.end
 ; 0xd47f1
 
 Func_d47f1: ; d47f1 (35:47f1)

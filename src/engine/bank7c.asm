@@ -1634,27 +1634,27 @@ CalculateBackupSRAMChecksum2: ; 1f0c1c (7c:4c1c)
 ; 0x1f0c6c
 
 VBlank_1f0c6c: ; 1f0c6c (7c:4c6c)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	call CopyHLToDE
 	ret
 
-.func
+.Func:
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
 	ret
-.func_end
+.end
 ; 0x1f0c7e
 
 VBlank_1f0c7e: ; 1f0c7e (7c:4c7e)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	call CopyHLToDE
 	ret
 
-.func
+.Func:
 	ld a, [wcee4]
 	bit 7, a
 	jr z, .transfer
@@ -1674,7 +1674,7 @@ VBlank_1f0c7e: ; 1f0c7e (7c:4c7e)
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
 	ret
-.func_end
+.end
 ; 0x1f0cad
 
 Func_1f0cad:: ; 1f0cad (7c:4cad)

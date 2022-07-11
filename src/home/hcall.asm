@@ -1,11 +1,11 @@
 InitHRAMCallFunc:: ; a92 (0:a92)
-	ld hl, .func
+	ld hl, .Func
 	ld de, hCallFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	call CopyHLToDE
 	ret
 
-.func
+.Func:
 	ld a, [wROMBank]
 	push af
 	ld a, $0 ; placeholder bank
@@ -14,5 +14,5 @@ InitHRAMCallFunc:: ; a92 (0:a92)
 	pop af
 	bankswitch
 	ret
-.func_end
+.end
 ; 0xab5

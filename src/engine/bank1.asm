@@ -1455,13 +1455,13 @@ LoadTimeAttackText: ; 49a1 (1:49a1)
 ; 0x49db
 
 VBlank_49db: ; 49db (1:49db)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	call CopyHLToDE
 	ret
 
-.func
+.Func:
 	ld a, [wROMBank]
 	push af
 	ld a, BANK(Data_6b47)
@@ -1497,7 +1497,7 @@ VBlank_49db: ; 49db (1:49db)
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
 	ret
-.func_end
+.end
 ; 0x4a33
 
 ; hl = BG map address
@@ -2145,13 +2145,13 @@ AdjustJapaneseTimeAttackDescriptionWindow: ; 4d7f (1:4d7f)
 ; 0x4ddf
 
 VBlank_4ddf: ; 4ddf (1:4ddf)
-	ld hl, .func
+	ld hl, .Func
 	ld de, wVBlankFunc
-	ld b, .func_end - .func
+	ld b, .end - .Func
 	call CopyHLToDE
 	ret
 
-.func
+.Func:
 	ld a, [wcee4]
 	bit 7, a
 	jr z, .asm_4e2e
@@ -2191,7 +2191,7 @@ VBlank_4ddf: ; 4ddf (1:4ddf)
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
 	ret
-.func_end
+.end
 ; 0x4e3e
 
 Func_4e3e: ; 4e3e (1:4e3e)
