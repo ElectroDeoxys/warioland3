@@ -522,10 +522,10 @@ assert (BANK(\1) - BANK("Objects OAM 1")) | (BANK(\5) - BANK("Object Update Func
 ENDM
 
 DummyObjectData:        object_data OAM_18007b, $0, OBJ_INTERACTION_00,                           0, DummyObjectFunc,        $0
-GreyTreasureData:       object_data OAM_18c000, $1, OBJ_INTERACTION_GREY_TREASURE  | HEAVY_OBJ, -24, GreyTreasureFunc,       $0
-RedTreasureData:        object_data OAM_18c000, $1, OBJ_INTERACTION_RED_TREASURE   | HEAVY_OBJ, -24, RedTreasureFunc,        $0
-GreenTreasureData:      object_data OAM_18c000, $1, OBJ_INTERACTION_GREEN_TREASURE | HEAVY_OBJ, -24, GreenTreasureFunc,      $0
-BlueTreasureData:       object_data OAM_18c000, $1, OBJ_INTERACTION_BLUE_TREASURE  | HEAVY_OBJ, -24, BlueTreasureFunc,       $0
+GreyChestData:          object_data OAM_18c000, $1, OBJ_INTERACTION_GREY_TREASURE  | HEAVY_OBJ, -24, GreyChestFunc,       $0
+RedChestData:           object_data OAM_18c000, $1, OBJ_INTERACTION_RED_TREASURE   | HEAVY_OBJ, -24, RedChestFunc,        $0
+GreenChestData:         object_data OAM_18c000, $1, OBJ_INTERACTION_GREEN_TREASURE | HEAVY_OBJ, -24, GreenChestFunc,      $0
+BlueChestData:          object_data OAM_18c000, $1, OBJ_INTERACTION_BLUE_TREASURE  | HEAVY_OBJ, -24, BlueChestFunc,       $0
 GreyKeyData:            object_data OAM_18c000, $2, OBJ_INTERACTION_GREY_KEY,                   -24, KeyFunc,                $0
 RedKeyData:             object_data OAM_18c000, $2, OBJ_INTERACTION_RED_KEY,                    -24, KeyFunc,                $0
 GreenKeyData:           object_data OAM_18c000, $2, OBJ_INTERACTION_GREEN_KEY,                  -24, KeyFunc,                $0
@@ -1315,7 +1315,7 @@ ObjParams_UnusedFlowerProjectileRight: ; 647ca (19:47ca)
 
 	INCROM $647df, $64a40
 
-ObjParams_64a40: ; 64a40 (19:4a40)
+ObjParams_GreyTreasure: ; 64a40 (19:4a40)
 	db -40 ; y
 	db   0 ; x
 	dn $3, $3 ; unk7
@@ -1329,11 +1329,11 @@ ObjParams_64a40: ; 64a40 (19:4a40)
 	db $00 ; movement index
 	db $00 ; unk1a
 	db OBJSTATE_00 ; action
-	dw $4970
+	dw GreyTreasureFunc
 	db OBJFLAG_UNK7 ; obj flags
 ; 0x64a55
 
-ObjParams_64a55: ; 64a55 (19:4a55)
+ObjParams_RedTreasure: ; 64a55 (19:4a55)
 	db -40 ; y
 	db   0 ; x
 	dn $3, $3 ; unk7
@@ -1347,11 +1347,11 @@ ObjParams_64a55: ; 64a55 (19:4a55)
 	db $00 ; movement index
 	db $00 ; unk1a
 	db OBJSTATE_00 ; action
-	dw $4975
+	dw RedTreasureFunc
 	db OBJFLAG_UNK7 ; obj flags
 ; 0x64a6a
 
-ObjParams_64a6a: ; 64a6a (19:4a6a)
+ObjParams_GreenTreasure: ; 64a6a (19:4a6a)
 	db -40 ; y
 	db   0 ; x
 	dn $3, $3 ; unk7
@@ -1365,11 +1365,11 @@ ObjParams_64a6a: ; 64a6a (19:4a6a)
 	db $00 ; movement index
 	db $00 ; unk1a
 	db OBJSTATE_00 ; action
-	dw $497A
+	dw GreenTreasureFunc
 	db OBJFLAG_UNK7 ; obj flags
 ; 0x64a7f
 
-ObjParams_64a7f: ; 64a7f (19:4a7f)
+ObjParams_BlueTreasure: ; 64a7f (19:4a7f)
 	db -40 ; y
 	db   0 ; x
 	dn $3, $3 ; unk7
@@ -1383,7 +1383,7 @@ ObjParams_64a7f: ; 64a7f (19:4a7f)
 	db $00 ; movement index
 	db $00 ; unk1a
 	db OBJSTATE_00 ; action
-	dw $497F
+	dw BlueTreasureFunc
 	db OBJFLAG_UNK7 ; obj flags
 ; 0x64a94
 
@@ -1491,7 +1491,7 @@ ObjParams_TorchEmberRight2: ; 64eb9 (19:4eb9)
 	INCROM $64ecc, $64fc3
 
 Data_64fc3: ; 64fc3 (19:4fc3)
-	dw GreyTreasureData
+	dw GreyChestData
 	dw GreyKeyData
 	dw MusicaCoinData
 
@@ -1501,7 +1501,7 @@ Data_64fc3: ; 64fc3 (19:4fc3)
 	rgb  0,  0,  0
 
 Data_64fd1: ; 64fd1 (19:4fd1)
-	dw RedTreasureData
+	dw RedChestData
 	dw RedKeyData
 	dw MusicaCoinData
 
@@ -1511,7 +1511,7 @@ Data_64fd1: ; 64fd1 (19:4fd1)
 	rgb  7,  0,  0
 
 Data_64fdf: ; 64fdf (19:4fdf)
-	dw GreenTreasureData
+	dw GreenChestData
 	dw GreenKeyData
 	dw MusicaCoinData
 
@@ -1521,7 +1521,7 @@ Data_64fdf: ; 64fdf (19:4fdf)
 	rgb  0,  2,  0
 
 Data_64fed: ; 64fed (19:4fed)
-	dw BlueTreasureData
+	dw BlueChestData
 	dw BlueKeyData
 	dw MusicaCoinData
 
@@ -1531,7 +1531,7 @@ Data_64fed: ; 64fed (19:4fed)
 	rgb  0,  0,  7
 
 Data_64ffb: ; 64ffb (19:4ffb)
-	dw GreyTreasureData
+	dw GreyChestData
 	dw GreyKeyData
 	dw MusicaCoinData
 

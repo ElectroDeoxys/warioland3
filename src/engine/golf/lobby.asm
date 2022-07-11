@@ -140,10 +140,10 @@ InitGolfLobby: ; 1c8020 (72:4020)
 	ld bc, v0BGMap0
 	call FarDecompress
 
-	ld a, [wNumberCollectedTreasures + 0]
+	ld a, [wNumCollectedTreasures + 0]
 	and a
 	jr nz, .tier_3
-	ld a, [wNumberCollectedTreasures + 1]
+	ld a, [wNumCollectedTreasures + 1]
 	cp GOLF_TREASURES_TIER_3
 	jr nc, .tier_3
 	cp GOLF_TREASURES_TIER_2

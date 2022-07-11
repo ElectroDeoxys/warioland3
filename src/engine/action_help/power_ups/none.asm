@@ -80,7 +80,7 @@ NoPowerUpActionHelp: ; 1f8285 (7e:4285)
 
 Func_1f8362: ; 1f8362 (7e:4362)
 	ld a, [wPowerUpLevel]
-	bit ACTION_HELP_UNK_F, a
+	bit ACTION_HELP_LEVEL_CLEAR_F, a
 	jr nz, .asm_1f8370
 	bit ACTION_HELP_TITLE_SCREEN_F, a
 	jr z, .restart_action_help

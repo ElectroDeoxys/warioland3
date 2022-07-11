@@ -33,10 +33,10 @@ DEF POWER_UP_MASK EQU %111111
 ; flags in wPowerUpLevel for Action Help stuff
 	const_def 6
 	const ACTION_HELP_TITLE_SCREEN_F ; 6
-	const ACTION_HELP_UNK_F          ; 7
+	const ACTION_HELP_LEVEL_CLEAR_F  ; 7
 
 DEF ACTION_HELP_TITLE_SCREEN EQU (1 << ACTION_HELP_TITLE_SCREEN_F)
-DEF ACTION_HELP_UNK          EQU (1 << ACTION_HELP_UNK_F)
+DEF ACTION_HELP_LEVEL_CLEAR  EQU (1 << ACTION_HELP_LEVEL_CLEAR_F)
 
 ; pals for Power Up icons in Action Help screen
 	const_def $4
@@ -188,17 +188,17 @@ DEF THROW_CHARGE_FRAMES_HEAVY EQU $3c
 	const WST_GETTING_OFF_LADDER            ; $3d
 	const WST_LADDER_SLIDING                ; $3e
 	const WST_GRAB_SLIPPING                 ; $3f
-	const WST_UNKNOWN_40                    ; $40
-	const WST_UNKNOWN_41                    ; $41
-	const WST_UNKNOWN_42                    ; $42
-	const WST_UNKNOWN_43                    ; $43
-	const WST_UNKNOWN_44                    ; $44
-	const WST_UNKNOWN_45                    ; $45
-	const WST_UNKNOWN_46                    ; $46
-	const WST_UNKNOWN_47                    ; $47
-	const WST_UNKNOWN_48                    ; $48
-	const WST_UNKNOWN_49                    ; $49
-	const WST_UNKNOWN_4A                    ; $4a
+	const WST_GET_TREASURE_START            ; $40
+	const WST_GET_TREASURE_WALK_1           ; $41
+	const WST_GET_TREASURE_TURN_FRONT_1     ; $42
+	const WST_GET_TREASURE_LAUGH            ; $43
+	const WST_GET_TREASURE_TURN_BACK        ; $44
+	const WST_GET_TREASURE_OPEN             ; $45
+	const WST_GET_TREASURE_TURN_WALK        ; $46
+	const WST_GET_TREASURE_WALK_2           ; $47
+	const WST_GET_TREASURE_TURN_FRONT_2     ; $48
+	const WST_GET_TREASURE_LOOK_FRONT       ; $49
+	const WST_GET_TREASURE_CLEAR            ; $4a
 	const WST_SLEEPING                      ; $4b
 	const WST_LADDER_SCRATCHING             ; $4c
 	const WST_FENCE_SHAKE_SLIDING           ; $4d
@@ -336,7 +336,7 @@ DEF THROW_CHARGE_FRAMES_HEAVY EQU $3c
 	const WST_SPLIT_KNOCKED_BACK            ; $d1
 	const WST_SPLITTING                     ; $d2
 	const WST_UNKNOWN_D3                    ; $d3
-	const WST_FAN                    ; $d4
+	const WST_FAN                           ; $d4
 	const WST_UNKNOWN_D5                    ; $d5
 	const WST_UNKNOWN_D6                    ; $d6
 	const WST_UNKNOWN_D7                    ; $d7

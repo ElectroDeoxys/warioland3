@@ -106,7 +106,7 @@ GarlicActionHelp: ; 1f9ba2 (7e:5ba2)
 
 Func_1f9ce7: ; 1f9ce7 (7e:5ce7)
 	ld a, [wPowerUpLevel]
-	bit ACTION_HELP_UNK_F, a
+	bit ACTION_HELP_LEVEL_CLEAR_F, a
 	jr nz, .asm_1f9cf5
 	bit ACTION_HELP_TITLE_SCREEN_F, a
 	jr z, .restart_action_help

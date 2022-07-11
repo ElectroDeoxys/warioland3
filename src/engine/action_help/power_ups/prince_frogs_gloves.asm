@@ -41,7 +41,7 @@ PrinceFrogsGlovesActionHelp: ; 1face4 (7e:6ce4)
 
 Func_1fad42: ; 1fad42 (7e:6d42)
 	ld a, [wPowerUpLevel]
-	bit ACTION_HELP_UNK_F, a
+	bit ACTION_HELP_LEVEL_CLEAR_F, a
 	jr nz, .asm_1fad50
 	bit ACTION_HELP_TITLE_SCREEN_F, a
 	jr z, .restart_action_help

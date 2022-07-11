@@ -60,7 +60,7 @@ HeadSmashHelmetActionHelp: ; 1f91c5 (7e:51c5)
 
 Func_1f927a: ; 1f927a (7e:527a)
 	ld a, [wPowerUpLevel]
-	bit ACTION_HELP_UNK_F, a
+	bit ACTION_HELP_LEVEL_CLEAR_F, a
 	jr nz, .asm_1f9288
 	bit ACTION_HELP_TITLE_SCREEN_F, a
 	jr z, .restart_action_help

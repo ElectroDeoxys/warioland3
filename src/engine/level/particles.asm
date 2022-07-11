@@ -74,7 +74,7 @@ ENDR
 	dw ParticleFunc_BouncyJump     ; PARTICLE_BOUNCY_JUMP
 	dw ParticleFunc_BubbleBurst    ; PARTICLE_BUBBLE_BURST
 	dw ParticleFunc_Ice            ; PARTICLE_ICE
-	dw ParticleFunc_OD             ; PARTICLE_0D
+	dw ParticleFunc_TreasureGlow   ; PARTICLE_TREASURE_GLOW
 	dw ParticleFunc_Owl            ; PARTICLE_OWL
 	dw ParticleFunc_OF             ; PARTICLE_0F
 	dw ParticleFunc_Magic1         ; PARTICLE_MAGIC_1
@@ -125,7 +125,7 @@ ParticleFunc_Debris: ; ca87 (3:4a87)
 	call ParticleAnim_Debris
 	pop bc
 
-	ld a, [wCurParticleAnimFinished]
+	ld a, [wCurParticleAnimEnded]
 	and a
 	ret z
 	xor a
@@ -167,7 +167,7 @@ ParticleFunc_Stars: ; cab8 (3:4ab8)
 	call ParticleAnim_Stars
 	pop bc
 
-	ld a, [wCurParticleAnimFinished]
+	ld a, [wCurParticleAnimEnded]
 	and a
 	ret z
 	xor a
@@ -209,7 +209,7 @@ ParticleFunc_Splash: ; cae1 (3:4ae1)
 	call ParticleAnim_Splash
 	pop bc
 
-	ld a, [wCurParticleAnimFinished]
+	ld a, [wCurParticleAnimEnded]
 	and a
 	ret z
 	xor a
@@ -251,7 +251,7 @@ ParticleFunc_Dust: ; cb0a (3:4b0a)
 	call ParticleAnim_Dust
 	pop bc
 
-	ld a, [wCurParticleAnimFinished]
+	ld a, [wCurParticleAnimEnded]
 	and a
 	ret z
 	xor a
@@ -426,7 +426,7 @@ ParticleFunc_SmokeLarge: ; cbd1 (3:4bd1)
 	call ParticleAnim_SmokeLarge
 	pop bc
 
-	ld a, [wCurParticleAnimFinished]
+	ld a, [wCurParticleAnimEnded]
 	and a
 	ret z
 	xor a
@@ -468,7 +468,7 @@ ParticleFunc_SmokeSmall: ; cbfa (3:4bfa)
 	call ParticleAnim_SmokeSmall
 	pop bc
 
-	ld a, [wCurParticleAnimFinished]
+	ld a, [wCurParticleAnimEnded]
 	and a
 	ret z
 	xor a
@@ -510,7 +510,7 @@ ParticleFunc_Bubbles: ; cc23 (3:4c23)
 	call ParticleAnim_Bubbles
 	pop bc
 
-	ld a, [wCurParticleAnimFinished]
+	ld a, [wCurParticleAnimEnded]
 	and a
 	ret z
 	xor a
@@ -574,7 +574,7 @@ ParticleFunc_BouncyJump: ; cc4c (3:4c4c)
 .update_anim
 	call ParticleAnim_BouncyJump
 	pop bc
-	ld a, [wCurParticleAnimFinished]
+	ld a, [wCurParticleAnimEnded]
 	and a
 	ret z
 
@@ -618,7 +618,7 @@ ParticleFunc_BubbleBurst: ; cc99 (3:4c99)
 	call ParticleAnim_BubbleBurst
 	pop bc
 
-	ld a, [wCurParticleAnimFinished]
+	ld a, [wCurParticleAnimEnded]
 	and a
 	ret z
 	xor a
@@ -660,7 +660,7 @@ ParticleFunc_Ice: ; ccc2 (3:4cc2)
 	call ParticleAnim_Ice
 	pop bc
 
-	ld a, [wCurParticleAnimFinished]
+	ld a, [wCurParticleAnimEnded]
 	and a
 	ret z
 	xor a
@@ -670,7 +670,7 @@ ParticleFunc_Ice: ; ccc2 (3:4cc2)
 	ret
 ; 0xcceb
 
-ParticleFunc_OD: ; cceb (3:4ceb)
+ParticleFunc_TreasureGlow: ; cceb (3:4ceb)
 	push bc
 	inc c
 	ld a, [bc]
@@ -699,7 +699,7 @@ ParticleFunc_OD: ; cceb (3:4ceb)
 	inc c
 	inc c
 .update_anim
-	call ParticleAnim_OD
+	call ParticleAnim_TreasureGlow
 	pop bc
 	ret
 ; 0xcd09
@@ -786,7 +786,7 @@ ParticleFunc_OF: ; cd3d (3:4d3d)
 	call ParticleAnim_OF
 	pop bc
 
-	ld a, [wCurParticleAnimFinished]
+	ld a, [wCurParticleAnimEnded]
 	and a
 	ret z
 	xor a
@@ -981,7 +981,7 @@ ParticleFunc_MagicStop: ; cdf8 (3:4df8)
 	call ParticleAnim_MagicStop
 	pop bc
 
-	ld a, [wCurParticleAnimFinished]
+	ld a, [wCurParticleAnimEnded]
 	and a
 	ret z
 	xor a
@@ -1134,7 +1134,7 @@ ParticleAnim_Owl: ; cf04 (3:4f04)
 	jp AddParticleSprite
 ; 0xcf25
 
-ParticleAnim_OD: ; cf25 (3:4f25)
+ParticleAnim_TreasureGlow: ; cf25 (3:4f25)
 	ld h, b
 	ld l, c
 	ld de, Frameset_d75a
@@ -1407,7 +1407,7 @@ AddParticleSprite: ; d094 (3:5094)
 ; de = frameset
 UpdateParticleAnimation: ; d0ef (3:50ef)
 	xor a
-	ld [wCurParticleAnimFinished], a
+	ld [wCurParticleAnimEnded], a
 	ld a, [hl] ; duration
 	sub 1
 	ld [hli], a
@@ -1439,6 +1439,6 @@ UpdateParticleAnimation: ; d0ef (3:50ef)
 	ld [hli], a ; duration
 	inc hl
 	ld a, TRUE
-	ld [wCurParticleAnimFinished], a
+	ld [wCurParticleAnimEnded], a
 	ret
 ; 0xd11a

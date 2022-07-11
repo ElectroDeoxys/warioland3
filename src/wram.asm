@@ -202,7 +202,7 @@ wRoomTileMap::          db ; c0cb
 wRoomMainTiles::        db ; c0cc
 wRoomSpecialTiles::     db ; c0cd
 wRoomPalettes::         db ; c0ce
-wRoomPermissionMapBank::                 db ; c0cf
+wRoomPermissionMapBank:: db ; c0cf
 wc0d0::                 db ; c0d0
 wRoomMainTilesBank::    db ; c0d1
 wRoomSpecialTilesBank:: db ; c0d2
@@ -255,21 +255,25 @@ wc0e0:: ; c0e0
 wc0e1:: ; c0e1
 	db
 
-wc0e2:: ; c0e2
-	db
+; byte 1 = minutes
+; byte 2 = seconds
+; byte 3 = frames (60 fps, so 60 here is 1 second)
+wLevelTime:: ; c0e2
+	ds 3
 
-wc0e3:: ; c0e3
-	db
-
-wc0e4:: ; c0e4
-	db
-
+wTimeAttackResult:: ; c0e5
 	db
 
 wIsBossBattle:: ; c0e6
 	db
 
-	ds $19
+wAllMusicalCoinsLevel:: ; c0e7
+	db
+
+wc0e8:: ; c0e8
+	db
+
+	ds $17
 
 wTempBGPals:: ; c100
 	ds 8 palettes
@@ -456,7 +460,7 @@ wLevelTimeAttackScores:: ; ca07
 ; byte 1 lo nybble = hundreds
 ; byte 2 hi nybble = tens
 ; byte 2 lo nybble = ones
-wNumberCollectedTreasures:: ; ca39
+wNumCollectedTreasures:: ; ca39
 	ds $2
 
 ; MODE_* constant
@@ -814,7 +818,7 @@ wCurParticleIndex:: ; cce1
 	db
 
 wCurParticle:: sprite_oam_struct wCurParticle ; cce2
-wCurParticleAnimFinished:: db ; cce6
+wCurParticleAnimEnded:: db ; cce6
 
 wcce7:: ; cce7
 	db
@@ -978,7 +982,10 @@ wcef0:: ; cef0
 wcef1:: ; cef1
 	db
 
-	ds $e
+wNumMusicBoxes:: ; cef2
+	db
+
+	ds $d
 
 w0End:: ; cf00
 
@@ -1775,6 +1782,7 @@ wLevelRedTreasureID::   db ; d0f1
 wLevelGreenTreasureID:: db ; d0f2
 wLevelBlueTreasureID::  db ; d0f3
 
+wLevelTreasurePals::
 wLevelGreyTreasurePal::  db ; d0f4
 wLevelRedTreasurePal::   db ; d0f5
 wLevelGreenTreasurePal:: db ; d0f6
@@ -2392,6 +2400,8 @@ UNION
 wActionHelpWario:: menu_obj_ext_struct wActionHelpWario ; d515
 NEXTU
 wPlaneWario:: menu_obj_ext_struct wPlaneWario ; d515
+NEXTU
+wClearScreenWario:: menu_obj_ext_struct wClearScreenWario ; d515
 NEXTU
 wGameOverWario:: menu_obj_ext_struct wGameOverWario ; d515
 NEXTU

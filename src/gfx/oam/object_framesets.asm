@@ -210,7 +210,29 @@ Frameset_68185:: ; 68185 (1a:4185)
 	db $ff
 ; 0x681be
 
-	INCROM $681be, $681d2
+Frameset_681be:: ; 681be (1a:41be)
+	db $42,  3
+	db $43,  3
+	db $ff
+; 0x681c3
+
+Frameset_681c3:: ; 681c3 (1a:41c3)
+	db $44,  3
+	db $45,  3
+	db $ff
+; 0x681c8
+
+Frameset_681c8:: ; 681c8 (1a:41c8)
+	db $46,  3
+	db $47,  3
+	db $ff
+; 0x681cd
+
+Frameset_681cd:: ; 681cd (1a:41cd)
+	db $48,  3
+	db $49,  3
+	db $ff
+; 0x681d2
 
 Frameset_681d2:: ; 681d2 (1a:41d2)
 	db $00, 12

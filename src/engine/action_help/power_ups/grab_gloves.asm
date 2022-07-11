@@ -95,7 +95,7 @@ GrabGloveActionHelp: ; 1f9453 (7e:5453)
 
 Func_1f9569: ; 1f9569 (7e:5569)
 	ld a, [wPowerUpLevel]
-	bit ACTION_HELP_UNK_F, a
+	bit ACTION_HELP_LEVEL_CLEAR_F, a
 	jr nz, .asm_1f9577
 	bit ACTION_HELP_TITLE_SCREEN_F, a
 	jr z, .restart_action_help

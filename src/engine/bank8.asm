@@ -1982,7 +1982,7 @@ GetTreasure: ; 2109a (8:509a)
 	xor a
 	ld [wWalkVelIndex], a
 
-	ld a, WST_UNKNOWN_40
+	ld a, WST_GET_TREASURE_START
 	ld [wWarioState], a
 
 	xor a

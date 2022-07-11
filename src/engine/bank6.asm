@@ -2309,17 +2309,17 @@ Func_19c1b: ; 19c1b (6:5c1b)
 	dw UpdateState_GettingOffLadder      ; WST_GETTING_OFF_LADDER
 	dw UpdateState_LadderSliding         ; WST_LADDER_SLIDING
 	dw UpdateState_GrabSlipping          ; WST_GRAB_SLIPPING
-	dw $689e                             ; WST_UNKNOWN_40
-	dw $68ff                             ; WST_UNKNOWN_41
-	dw $6980                             ; WST_UNKNOWN_42
-	dw $69e9                             ; WST_UNKNOWN_43
-	dw $6a5c                             ; WST_UNKNOWN_44
-	dw $6ac9                             ; WST_UNKNOWN_45
-	dw $6b44                             ; WST_UNKNOWN_46
-	dw $68ff                             ; WST_UNKNOWN_47
-	dw $6980                             ; WST_UNKNOWN_48
-	dw $6bb1                             ; WST_UNKNOWN_49
-	dw $6bf4                             ; WST_UNKNOWN_4A
+	dw UpdateState_GetTreasureStart      ; WST_GET_TREASURE_START
+	dw UpdateState_GetTreasureWalk       ; WST_GET_TREASURE_WALK_1
+	dw UpdateState_GetTreasureTurnFront  ; WST_GET_TREASURE_TURN_FRONT_1
+	dw UpdateState_GetTreasureLaugh      ; WST_GET_TREASURE_LAUGH
+	dw UpdateState_GetTreasureTurnBack   ; WST_GET_TREASURE_TURN_BACK
+	dw UpdateState_GetTreasureOpen       ; WST_GET_TREASURE_OPEN
+	dw UpdateState_GetTreasureTurnWalk   ; WST_GET_TREASURE_TURN_WALK
+	dw UpdateState_GetTreasureWalk       ; WST_GET_TREASURE_WALK_2
+	dw UpdateState_GetTreasureTurnFront  ; WST_GET_TREASURE_TURN_FRONT_2
+	dw UpdateState_GetTreasureLookFront  ; WST_GET_TREASURE_LOOK_FRONT
+	dw UpdateState_GetTreasureClear      ; WST_GET_TREASURE_CLEAR
 	dw UpdateState_Sleeping              ; WST_SLEEPING
 	dw UpdateState_LadderScratching      ; WST_LADDER_SCRATCHING
 	dw UpdateState_FenceShakeSliding     ; WST_FENCE_SHAKE_SLIDING
@@ -3385,7 +3385,262 @@ UpdateState_GrabSlipping: ; 1a7d6 (6:67d6)
 	ret
 ; 0x1a89e
 
-	INCROM $1a89e, $1ac10
+UpdateState_GetTreasureStart: ; 1a89e (6:689e)
+	update_anim_1
+	ld a, [wJumpVelTable]
+	and a
+	jr z, .on_ground
+	call ApplyJumpVelocity
+	farcall CheckAirborneCollision
+	ld a, b
+	and a
+	ret z
+	ld hl, hYPosHi
+	ld de, wPos
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	xor a
+	ld [wJumpVelTable], a
+	ld [wJumpVelIndex], a
+.on_ground
+	ld hl, wWarioStateCounter
+	inc [hl]
+	ld a, [hl]
+	cp 48
+	ret c
+	ld a, 24
+	ld [wWarioStateCounter], a
+;	fallthrough
+
+SetNextGetTreasureState: ; 1a8e7 (6:68e7)
+	ld hl, wWarioState
+	inc [hl]
+	xor a
+	ld [wWarioStateCycles], a
+	farcall Func_1e6ea
+	ret
+; 0x1a8ff
+
+UpdateState_GetTreasureWalk: ; 1a8ff (6:68ff)
+	update_anim_1
+	ld a, [wDirection]
+	and a
+	jr nz, .go_right
+; go left
+	ld b, 1
+	call SubXOffset
+	jr .done_moving
+.go_right
+	ld b, 1
+	call AddXOffset
+
+.done_moving
+	ld hl, wWarioStateCounter
+	dec [hl]
+	ret nz
+	ld hl, wWarioState
+	inc [hl] ; WST_GET_TREASURE_TURN_FRONT_1
+	xor a
+	ld [wFrameDuration], a
+	ld [wAnimationFrame], a
+	ld [wWarioStateCycles], a
+	load_gfx WarioIdleGfx
+	call LoadWarioGfx
+	load_oam OAM_1fc31b
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1a966
+	load_frameset Frameset_1fc46a
+	jr .asm_1a970
+.asm_1a966
+	load_frameset Frameset_1fc461
+.asm_1a970
+	update_anim_2
+	ret
+; 0x1a980
+
+UpdateState_GetTreasureTurnFront: ; 1a980 (6:6980)
+	update_anim_2
+	ld a, [wAnimationEnded]
+	and a
+	ret z
+	ld a, [wWarioState]
+	cp WST_GET_TREASURE_TURN_FRONT_2
+	jp z, SetState_GetTreasureLookFront
+	ld a, WST_GET_TREASURE_LAUGH
+	ld [wWarioState], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wAnimationFrame], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	load_gfx WarioClearGfx
+	call LoadWarioGfx
+	load_oam OAM_1fc000
+	load_frameset Frameset_1fc2ab
+	update_anim_2
+	ret
+; 0x1a9e9
+
+UpdateState_GetTreasureLaugh: ; 1a9e9 (6:69e9)
+	update_anim_2
+	ld a, [wAnimationEnded]
+	and a
+	ret z
+	ld a, WST_GET_TREASURE_TURN_BACK
+	ld [wWarioState], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wAnimationFrame], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	load_gfx WarioIdleGfx
+	call LoadWarioGfx
+	load_oam OAM_1fc31b
+	ld a, [wDirection]
+	and a
+	jr nz, .asm_1aa42
+	load_frameset Frameset_1fc446
+	jr .asm_1aa4c
+.asm_1aa42
+	load_frameset Frameset_1fc439
+.asm_1aa4c
+	update_anim_2
+	ret
+; 0x1aa5c
+
+UpdateState_GetTreasureTurnBack: ; 1aa5c (6:6a5c)
+	update_anim_2
+	ld a, [wAnimationEnded]
+	and a
+	ret z
+	ld a, WST_GET_TREASURE_OPEN
+	ld [wWarioState], a
+	play_sfx SFX_03E
+	xor a
+	ld [wSFXLoopCounter], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	load_gfx WarioClearGfx
+	call LoadWarioGfx
+	load_oam OAM_1fc000
+	xor a
+	ld [wFrameDuration], a
+	ld [wAnimationFrame], a
+	load_frameset Frameset_1fc2c4
+	update_anim_2
+	ret
+; 0x1aac9
+
+UpdateState_GetTreasureOpen: ; 1aac9 (6:6ac9)
+	update_anim_2
+	ld a, [wAnimationEnded]
+	and a
+	ret z
+	ld a, WST_GET_TREASURE_TURN_WALK
+	ld [wWarioState], a
+	call LoadCollectedTreasurePal_Level
+	xor a
+	ld [wFrameDuration], a
+	ld [wAnimationFrame], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+
+	load_gfx WarioIdleGfx
+	call LoadWarioGfx
+	load_oam OAM_1fc31b
+
+	ld a, [wDirection]
+	xor $1
+	ld [wDirection], a
+	and a
+	jr nz, .asm_1ab2a
+	load_frameset Frameset_1fc45a
+	jr .asm_1ab34
+.asm_1ab2a
+	load_frameset Frameset_1fc453
+.asm_1ab34
+	update_anim_2
+	ret
+; 0x1ab44
+
+UpdateState_GetTreasureTurnWalk: ; 1ab44 (6:6b44)
+	update_anim_2
+	ld a, [wAnimationEnded]
+	and a
+	ret z
+	ld a, 32
+	ld [wWarioStateCounter], a
+	xor a
+	ld [wAutoMoveState], a
+	jp SetNextGetTreasureState
+; 0x1ab64
+
+SetState_GetTreasureLookFront: ; 1ab64 (6:6b64)
+	ld a, WST_GET_TREASURE_LOOK_FRONT
+	ld [wWarioState], a
+	xor a
+	ld [wFrameDuration], a
+	ld [wAnimationFrame], a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	load_gfx WarioClearGfx
+	call LoadWarioGfx
+	load_oam OAM_1fc000
+	load_frameset Frameset_1fc30d
+	update_anim_2
+	ret
+; 0x1abb1
+
+UpdateState_GetTreasureLookFront: ; 1abb1 (6:6bb1)
+	update_anim_2
+	ld a, [wAnimationEnded]
+	and a
+	ret z
+	ld a, WST_GET_TREASURE_CLEAR
+	ld [wWarioState], a
+	ld hl, wPos
+	ld de, hPos
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
+	ld b, PARTICLE_TREASURE_GLOW
+	farcall CreateParticle
+	xor a
+	ld [wWarioStateCounter], a
+	ld [wWarioStateCycles], a
+	ret
+; 0x1abf4
+
+UpdateState_GetTreasureClear: ; 1abf4 (6:6bf4)
+	ld hl, wWarioStateCounter
+	ld a, [wJoypadDown]
+	bit A_BUTTON_F, a
+	jr nz, .next
+	inc [hl]
+	ld a, [hl]
+	cp 180
+	ret c
+.next
+	ld a, [wCurParticleAnimEnded]
+	and a
+	ret z
+	ld [hl], 0 ; wWarioStateCounter
+	ld hl, wLevelEndScreen
+	res 7, [hl]
+	ret
+; 0x1ac10
 
 SetState_Sleeping: ; 1ac10 (6:6c10)
 	ld a, WST_SLEEPING

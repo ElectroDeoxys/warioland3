@@ -80,7 +80,7 @@ LeadOverallsActionHelp: ; 1f88af (7e:48af)
 
 Func_1f8988: ; 1f8988 (7e:4988)
 	ld a, [wPowerUpLevel]
-	bit ACTION_HELP_UNK_F, a
+	bit ACTION_HELP_LEVEL_CLEAR_F, a
 	jr nz, .asm_1f8996
 	bit ACTION_HELP_TITLE_SCREEN_F, a
 	jr z, .restart_action_help

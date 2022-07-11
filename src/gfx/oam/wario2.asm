@@ -240,7 +240,69 @@ OAM_1fc000:: ; 1fc000 (7f:4000)
 	db $80
 ; 0x1fc2ab
 
-	INCROM $1fc2ab, $1fc316
+Frameset_1fc2ab:: ; 1fc2ab (7f:42ab)
+	db $00, 30
+	db $01, 18
+	db $00,  4
+	db $01,  3
+	db $00,  4
+	db $01,  3
+	db $00,  4
+	db $01,  3
+	db $00,  4
+	db $01,  3
+	db $00,  4
+	db $01,  3
+	db $ff
+; 0x1fc2c4
+
+Frameset_1fc2c4:: ; 1fc2c4 (7f:42c4)
+	db $06, 10
+	db $05,  3
+	db $04,  8
+	db $05,  3
+	db $06,  6
+	db $07,  3
+	db $08,  8
+	db $07,  3
+	db $06, 30
+	db $09, 14
+	db $13,  8
+	db $0d,  8
+	db $0a,  5
+	db $0b,  5
+	db $0a,  5
+	db $0b,  5
+	db $09,  5
+	db $0a,  5
+	db $0b,  5
+	db $0a,  5
+	db $0b,  5
+	db $09,  5
+	db $0a,  5
+	db $0b,  5
+	db $0a,  6
+	db $0b,  8
+	db $0c,  2
+	db $0f,  2
+	db $11,  6
+	db $12,  3
+	db $11,  6
+	db $12,  3
+	db $14, 30
+	db $13, 30
+	db $0e,  8
+	db $06,  1
+	db $ff
+; 0x1fc30d
+
+Frameset_1fc30d:: ; 1fc30d (7f:430d)
+	db $00, 60
+	db $01,  8
+	db $02,  8
+	db $10,  1
+	db $ff
+; 0x1fc316
 
 Frameset_1fc316:: ; 1fc316 (7f:4316)
 	db $00, 20

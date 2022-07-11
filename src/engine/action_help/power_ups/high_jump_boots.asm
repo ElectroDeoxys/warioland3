@@ -73,7 +73,7 @@ HighJumpBootsActionHelp: ; 1fa83f (7e:683f)
 
 Func_1fa912: ; 1fa912 (7e:6912)
 	ld a, [wPowerUpLevel]
-	bit ACTION_HELP_UNK_F, a
+	bit ACTION_HELP_LEVEL_CLEAR_F, a
 	jr nz, .asm_1fa920
 	bit ACTION_HELP_TITLE_SCREEN_F, a
 	jr z, .restart_action_help

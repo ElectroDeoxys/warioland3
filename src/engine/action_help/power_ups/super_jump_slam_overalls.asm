@@ -67,7 +67,7 @@ SuperJumpSlamOverallsActionHelp: ; 1fa3ef (7e:63ef)
 
 Func_1fa4b2: ; 1fa4b2 (7e:64b2)
 	ld a, [wPowerUpLevel]
-	bit ACTION_HELP_UNK_F, a
+	bit ACTION_HELP_LEVEL_CLEAR_F, a
 	jr nz, .asm_1fa4c0
 	bit ACTION_HELP_TITLE_SCREEN_F, a
 	jr z, .restart_action_help

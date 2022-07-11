@@ -1558,7 +1558,7 @@ Func_15dc:: ; 15dc (0:15dc)
 	ld a, [wGameModeFlags]
 	and ($1 << MODE_GAME_CLEARED_F)
 	jr z, .asm_15ff
-	ld a, [wNumberCollectedTreasures]
+	ld a, [wNumCollectedTreasures]
 	dec a
 	jr z, SetPerfectState
 .asm_15ff
@@ -2231,6 +2231,7 @@ LevelTreasureIDs:: ; 198b (0:198b)
 	db TREASURE_DUMMY ; green
 	db TREASURE_DUMMY ; blue
 
+LevelTreasureIDs_WithoutTemple:: ; 198f (0:198f)
 	; LEVEL_OUT_OF_THE_WOODS
 	db AXE ; grey
 	db JAR ; red
@@ -2624,24 +2625,11 @@ SetWarioPal:: ; 1af6 (0:1af6)
 	ldh a, [rSTAT]
 	and STATF_LCD
 	jr nz, .wait_lcd_off
-
 ; apply OBJ palette
+REPT PALETTE_SIZE
 	ld a, [hli]
 	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
+ENDR
 	dec b
 	jr nz, .wait_lcd_on
 	pop af
@@ -2649,7 +2637,107 @@ SetWarioPal:: ; 1af6 (0:1af6)
 	ret
 ; 0x1b4f
 
-	INCROM $1b4f, $1c4a
+; loads the palette for the treasure
+; that was collected in the level
+LoadCollectedTreasurePal_Level:: ; 1b4f (0:1b4f)
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wLevelTreasurePals)
+	ldh [rSVBK], a
+	ld hl, wLevelEndScreen
+	ld a, [hl]
+	and $7f
+	dec a
+	ld c, a
+	ld b, $00
+	ld hl, wLevelTreasurePals
+	add hl, bc
+	ld a, [hl]
+	sub OBPAL_TREASURE_YELLOW
+	add a
+	add a
+	add a ; *8
+	ld e, a
+	ld d, b
+	ld hl, TreasurePals
+	add hl, de
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(TreasurePals)
+	bankswitch
+	push hl
+	ld de, wTempPals2 palette 4
+	ld a, c
+	add a
+	add a
+	add a
+	ld c, a
+	add e
+	ld e, a
+	ld b, 1 palettes
+	farcall BANK(TreasurePals), CopyHLToDE_Short ; unneeded farcall
+	pop hl
+	ld a, $20 | OCPSF_AUTOINC
+	or c
+	ldh [rOCPS], a
+	ld c, LOW(rOCPD)
+.wait_lcd_on
+	ldh a, [rSTAT]
+	and STATF_LCD
+	jr z, .wait_lcd_on
+.wait_lcd_off
+	ldh a, [rSTAT]
+	and STATF_LCD
+	jr nz, .wait_lcd_off
+; apply OBJ palette
+REPT PALETTE_SIZE
+	ld a, [hli]
+	ld [$ff00+c], a
+ENDR
+	pop af
+	bankswitch
+	pop af
+	ldh [rSVBK], a
+	ret
+; 0x1bc7
+
+LoadCollectedTreasurePal_ClearScreen:: ; 1bc7 (0:1bc7)
+	ldh a, [rSMBK]
+	push af
+	ld a, BANK(wLevelTreasurePals)
+	ldh [rSMBK], a
+	ld hl, wLevelEndScreen
+	ld a, [hl]
+	and $7f
+	dec a
+	ld c, a
+	ld b, $00
+	ld hl, wLevelTreasurePals
+	add hl, bc
+	ld a, [hl]
+	sub OBPAL_TREASURE_YELLOW
+	add a
+	add a
+	add a ; *8
+	ld e, a
+	ld d, b ; $00
+	ld hl, TreasurePals
+	add hl, de
+	ld a, [wROMBank]
+	push af
+	ld a, BANK(TreasurePals)
+	bankswitch
+	ld de, wTempPals2 palette 7
+	ld b, 1 palettes
+	farcall BANK(TreasurePals), CopyHLToDE_Short ; unneeded farcall
+	pop af
+	bankswitch
+	pop af
+	ldh [rSMBK], a
+	ret
+; 0x1c13
+
+	INCROM $1c13, $1c4a
 
 ApplyTempPals1ToBGPals:: ; 1c4a (0:1c4a)
 	ld hl, wTempPals1

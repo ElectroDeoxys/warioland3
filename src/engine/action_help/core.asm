@@ -225,7 +225,7 @@ UpdateActionHelp: ; 1f8194 (7e:4194)
 .main_power_up
 	call ProcessDPadRepeat
 	ld a, [wPowerUpLevel]
-	and ACTION_HELP_TITLE_SCREEN | ACTION_HELP_UNK
+	and ACTION_HELP_TITLE_SCREEN | ACTION_HELP_LEVEL_CLEAR
 	jr nz, .asm_1f81d9
 	call Func_1fb6f7
 .asm_1f81d9

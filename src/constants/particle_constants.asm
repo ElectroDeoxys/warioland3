@@ -13,7 +13,7 @@
 	const PARTICLE_BOUNCY_JUMP      ; $0a
 	const PARTICLE_BUBBLE_BURST     ; $0b
 	const PARTICLE_ICE              ; $0c
-	const PARTICLE_0D               ; $0d
+	const PARTICLE_TREASURE_GLOW    ; $0d
 	const PARTICLE_OWL              ; $0e
 	const PARTICLE_0F               ; $0f
 	const PARTICLE_MAGIC_1          ; $10

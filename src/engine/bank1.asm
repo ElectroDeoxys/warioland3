@@ -5,7 +5,7 @@ StateTable:: ; 4000 (1:4000)
 	dw TitleStateTable             ; ST_TITLE
 	dw HandleOverworld             ; ST_OVERWORLD
 	dw LevelStateTable             ; ST_LEVEL
-	dw Func_46dc                   ; ST_03
+	dw ClearScreenStateTable                   ; ST_CLEAR
 	dw PauseMenuStateTable         ; ST_PAUSE_MENU
 	dw GolfStateTable              ; ST_GOLF
 	dw Func_472a                   ; ST_06
@@ -1077,12 +1077,12 @@ LevelStateTable: ; 46cc (1:46cc)
 	ret
 ; 0x46dc
 
-Func_46dc: ; 46dc (1:46dc)
+ClearScreenStateTable: ; 46dc (1:46dc)
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
 	ldh [rSVBK], a
-	farcall Func_d4000
+	farcall _ClearScreenStateTable
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -1594,12 +1594,12 @@ GetOWLevelCollectedTreasures: ; 4a63 (1:4a63)
 	ret
 ; 0x4ab7
 
-PrintNumberCollectedTreasures: ; 4ab7 (1:4ab7)
+PrintNumCollectedTreasures: ; 4ab7 (1:4ab7)
 	ld bc, -BG_MAP_WIDTH
 	ld de, BG_MAP_WIDTH
 
 	; hundreds
-	ld a, [wNumberCollectedTreasures + 0]
+	ld a, [wNumCollectedTreasures + 0]
 	and $0f
 	add a ; *2
 	add $a0
@@ -1610,7 +1610,7 @@ PrintNumberCollectedTreasures: ; 4ab7 (1:4ab7)
 	add hl, bc
 
 	; tens
-	ld a, [wNumberCollectedTreasures + 1]
+	ld a, [wNumCollectedTreasures + 1]
 	swap a
 	and $0f
 	add a ; *2
@@ -1622,7 +1622,7 @@ PrintNumberCollectedTreasures: ; 4ab7 (1:4ab7)
 	add hl, bc
 
 	; ones
-	ld a, [wNumberCollectedTreasures + 1]
+	ld a, [wNumCollectedTreasures + 1]
 	and $0f
 	add a ; *2
 	add $a0

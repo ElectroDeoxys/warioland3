@@ -107,10 +107,10 @@ PickAndLoadGolfLevel: ; 1c8a03 (72:4a03)
 ; tier 3
 	ld a, GOLF_LEVEL_TIER_3
 	ld [w1dc0e], a
-	ld a, [wNumberCollectedTreasures + 0]
+	ld a, [wNumCollectedTreasures + 0]
 	and a
 	jr nz, .got_tier
-	ld a, [wNumberCollectedTreasures + 1]
+	ld a, [wNumCollectedTreasures + 1]
 	cp GOLF_TREASURES_TIER_3
 	jr nc, .got_tier
 	cp GOLF_TREASURES_TIER_2

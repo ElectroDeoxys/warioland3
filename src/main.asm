@@ -675,7 +675,7 @@ INCLUDE "engine/bank76.asm"
 
 SECTION "Bank 78", ROMX
 
-	INCROM $1e0000, $1e1dd1
+INCLUDE "engine/bank78.asm"
 
 
 SECTION "Bank 7B", ROMX

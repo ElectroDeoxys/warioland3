@@ -3541,7 +3541,25 @@ Frameset_1f1c69: ; 1f1c69 (7c:5c69)
 	db $ff
 ; 0x1f1c74
 
-	INCROM $1f1c74, $1f1cf9
+	INCROM $1f1c74, $1f1cd4
+
+Frameset_1f1cd4: ; 1f1cd4 (7c:5cd4)
+	db $1d, 10
+	db $1e,  9
+	db $1f,  8
+	db $20,  7
+	db $21,  8
+	db $22,  9
+	db $23, 10
+	db $22,  9
+	db $21,  8
+	db $20,  7
+	db $1f,  8
+	db $1e,  9
+	db $ff
+; 0x1f1ced
+
+	INCROM $1f1ced, $1f1cf9
 
 Frameset_1f1cf9: ; 1f1cf9 (7c:5cf9)
 	db $27, 17

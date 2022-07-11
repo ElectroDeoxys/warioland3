@@ -72,7 +72,7 @@ SuperGrabGloveActionHelp: ; 1fb0ac (7e:70ac)
 
 Func_1fb179: ; 1fb179 (7e:7179)
 	ld a, [wPowerUpLevel]
-	bit ACTION_HELP_UNK_F, a
+	bit ACTION_HELP_LEVEL_CLEAR_F, a
 	jr nz, .asm_1fb187
 	bit ACTION_HELP_TITLE_SCREEN_F, a
 	jr z, .restart_action_help

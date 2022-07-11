@@ -122,7 +122,7 @@ Func_1f403f: ; 1f403f (7d:403f)
 	hlbgcoord 11, 2, v1BGMap1
 	ld bc, -BG_MAP_WIDTH
 	ld de, BG_MAP_WIDTH
-	ld a, [wc0e2]
+	ld a, [wLevelTime + 0]
 	swap a
 	and $0f
 	add a
@@ -132,7 +132,7 @@ Func_1f403f: ; 1f403f (7d:403f)
 	inc a
 	ld [hli], a
 	add hl, bc
-	ld a, [wc0e2]
+	ld a, [wLevelTime + 0]
 	and $0f
 	add a
 	add $a0
@@ -142,7 +142,7 @@ Func_1f403f: ; 1f403f (7d:403f)
 	ld [hli], a
 	add hl, bc
 	inc l
-	ld a, [wc0e3]
+	ld a, [wLevelTime + 1]
 	swap a
 	and $0f
 	add a
@@ -152,7 +152,7 @@ Func_1f403f: ; 1f403f (7d:403f)
 	inc a
 	ld [hli], a
 	add hl, bc
-	ld a, [wc0e3]
+	ld a, [wLevelTime + 1]
 	and $0f
 	add a
 	add $a0

@@ -284,13 +284,13 @@ Func_80aa: ; 80aa (2:40aa)
 	jr z, .epilogue
 
 	ld hl, wState
-	inc [hl]
+	inc [hl] ; ST_CLEAR
 	xor a
 	ld [wSubState], a
 	ld a, [wGameModeFlags]
 	bit MODE_TIME_ATTACK_F, a
 	ret z
-	ld a, $04
+	ld a, SST_CLEAR_TIME_ATTACK
 	ld [wSubState], a
 	ret
 
@@ -300,7 +300,7 @@ Func_80aa: ; 80aa (2:40aa)
 	jr .set_fought_a_hidden_figure
 
 .epilogue
-	ld a, [wNumberCollectedTreasures]
+	ld a, [wNumCollectedTreasures]
 	dec a
 	jr z, .got_all_treasures
 	ld a, TRANSITION_EPILOGUE_NOT_PERFECT
@@ -332,7 +332,8 @@ Func_80aa: ; 80aa (2:40aa)
 	ret
 
 .asm_82d8
-	call Func_bd3c
+	call TickLevelTime
+
 	ld a, [wFloorTransitionDir]
 	and a
 	ret nz
@@ -788,9 +789,9 @@ Func_8747: ; 8747 (2:4747)
 	ld [wIsGettingOffLadder], a
 	ld [wca66], a
 	ld [wca6a], a
-	ld [wc0e2], a
-	ld [wc0e3], a
-	ld [wc0e4], a
+	ld [wLevelTime + 0], a
+	ld [wLevelTime + 1], a
+	ld [wLevelTime + 2], a
 	ld [wcac3], a
 	ld [wSwimVelIndex], a
 	ld [wWaterSurfaceFloatingCounter], a
@@ -9008,37 +9009,37 @@ Func_bc5e: ; bc5e (2:7c5e)
 	ret
 ; 0xbd3c
 
-Func_bd3c: ; bd3c (2:7d3c)
+TickLevelTime: ; bd3c (2:7d3c)
 	ld a, [wGameModeFlags]
 	bit MODE_TIME_ATTACK_F, a
 	ret z
 	ld a, [wLevelEndScreen]
 	and a
 	ret nz
-	ld a, [wc0e4]
-	add $01
+	ld a, [wLevelTime + 2]
+	add 1
 	daa
-	ld [wc0e4], a
+	ld [wLevelTime + 2], a
 	cp $60
 	ret c
 	xor a
-	ld [wc0e4], a
-	ld a, [wc0e3]
-	add $01
+	ld [wLevelTime + 2], a
+	ld a, [wLevelTime + 1]
+	add 1
 	daa
-	ld [wc0e3], a
+	ld [wLevelTime + 1], a
 	cp $60
 	ret c
 	xor a
-	ld [wc0e3], a
-	ld a, [wc0e2]
-	add $01
+	ld [wLevelTime + 1], a
+	ld a, [wLevelTime + 0]
+	add 1
 	daa
-	ld [wc0e2], a
+	ld [wLevelTime + 0], a
 	cp $60
 	ret c
 	ld a, $59
-	ld [wc0e2], a
-	ld [wc0e3], a
+	ld [wLevelTime + 0], a
+	ld [wLevelTime + 1], a
 	ret
 ; 0xbd7c

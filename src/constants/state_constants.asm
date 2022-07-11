@@ -3,7 +3,7 @@
 	const ST_TITLE              ; $00
 	const ST_OVERWORLD          ; $01
 	const ST_LEVEL              ; $02
-	const ST_03                 ; $03
+	const ST_CLEAR              ; $03
 	const ST_PAUSE_MENU         ; $04
 	const ST_GOLF               ; $05
 	const ST_06                 ; $06
@@ -31,6 +31,11 @@ DEF SST_OVERWORLD_1A EQU $1a
 DEF SST_OVERWORLD_1E EQU $1e
 DEF SST_OVERWORLD_20 EQU $20
 DEF SST_OVERWORLD_23 EQU $23
+
+; ST_CLEAR substates
+DEF SST_CLEAR_TIME_ATTACK   EQU $04
+DEF SST_CLEAR_MUSICAL_COINS EQU $08
+DEF SST_CLEAR_EXIT          EQU $0e
 
 ; ST_PAUSE_MENU substates
 DEF SST_PAUSE_INIT_MENU EQU $01

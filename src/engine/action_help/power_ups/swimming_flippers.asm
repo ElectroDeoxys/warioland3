@@ -44,7 +44,7 @@ SwimmingFlippersActionHelp: ; 1f8dcf (7e:4dcf)
 
 Func_1f8e31: ; 1f8e31 (7e:4e31)
 	ld a, [wPowerUpLevel]
-	bit ACTION_HELP_UNK_F, a
+	bit ACTION_HELP_LEVEL_CLEAR_F, a
 	jr nz, .asm_1f8e3f
 	bit ACTION_HELP_TITLE_SCREEN_F, a
 	jr z, .restart_action_help

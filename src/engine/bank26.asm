@@ -455,7 +455,7 @@ _InitTreasureCollection: ; 9a3cf (26:63cf)
 	xor a
 	ldh [rVBK], a
 	hlbgcoord 2, 1, v0BGMap1
-	farcall PrintNumberCollectedTreasures
+	farcall PrintNumCollectedTreasures
 
 	ld hl, wSceneObj1State
 	ld a, $01
@@ -1798,22 +1798,35 @@ Pals_9ad45: ; 9ad45 (26:6d45)
 	rgb 31, 31,  0
 	rgb 31,  4, 13
 	rgb  0,  0,  0
+; 0x9ad65
 
+TreasurePals::
+TreasureYellowPal: ; 9ad65 (26:6d65)
+; OBPAL_TREASURE_YELLOW
 	rgb 31, 31, 31
 	rgb 31, 31,  0
 	rgb 19, 16,  0
 	rgb  5,  4,  0
+; 0x9ad6d
 
+TreasureRedPal: ; 9ad6d (26:6d6d)
+; OBPAL_TREASURE_RED
 	rgb 31, 31, 31
 	rgb 31, 19, 23
 	rgb 27,  0,  6
 	rgb  7,  0,  0
+; 0x9ad75
 
+TreasureGreenPal: ; 9ad75 (26:6d75)
+; OBPAL_TREASURE_GREEN
 	rgb 31, 31, 31
 	rgb 22, 31, 20
 	rgb  0, 21,  0
 	rgb  0,  2,  0
+; 0x9ad7d
 
+TreasureBluePal: ; 9ad7d (26:6d7d)
+; OBPAL_TREASURE_BLUE
 	rgb 31, 31, 31
 	rgb  2, 31, 31
 	rgb  6,  6, 31

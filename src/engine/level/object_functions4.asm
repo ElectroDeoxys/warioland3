@@ -24,37 +24,37 @@ VanishStarsFunc: ; 4c8a2 (13:48a2)
 	ret
 ; 0x4c8b1
 
-DeinitTreasure: ; 4c8b1 (13:48b1)
+DeinitChest: ; 4c8b1 (13:48b1)
 	xor a
 	ld [wCurObjFlags], a
 	ret
 ; 0x4c8b6
 
-GreyTreasureFunc: ; 4c8b6 (13:48b6)
+GreyChestFunc: ; 4c8b6 (13:48b6)
 	ld a, [wKeyAndTreasureFlags]
 	and GREY_TREASURE
-	jr z, TreasureFunc
-	jr DeinitTreasure
+	jr z, ChestFunc
+	jr DeinitChest
 
-RedTreasureFunc: ; 4c8bf (13:48bf)
+RedChestFunc: ; 4c8bf (13:48bf)
 	ld a, [wKeyAndTreasureFlags]
 	and RED_TREASURE
-	jr z, TreasureFunc
-	jr DeinitTreasure
+	jr z, ChestFunc
+	jr DeinitChest
 
-GreenTreasureFunc: ; 4c8c8 (13:48c8)
+GreenChestFunc: ; 4c8c8 (13:48c8)
 	ld a, [wKeyAndTreasureFlags]
 	and GREEN_TREASURE
-	jr z, TreasureFunc
-	jr DeinitTreasure
+	jr z, ChestFunc
+	jr DeinitChest
 
-BlueTreasureFunc: ; 4c8d1 (13:48d1)
+BlueChestFunc: ; 4c8d1 (13:48d1)
 	ld a, [wKeyAndTreasureFlags]
 	and BLUE_TREASURE
-	jr z, TreasureFunc
-	jr DeinitTreasure
+	jr z, ChestFunc
+	jr DeinitChest
 
-TreasureFunc: ; 4c8da (13:48da)
+ChestFunc: ; 4c8da (13:48da)
 	ld hl, wCurObjFlags
 	res OBJFLAG_UNK4_F, [hl]
 	set OBJFLAG_UNK3_F, [hl]
@@ -120,22 +120,46 @@ TreasureFunc: ; 4c8da (13:48da)
 	cp OBJ_INTERACTION_GREEN_TREASURE
 	jr z, .green
 ; blue
-	ld bc, ObjParams_64a7f
+	ld bc, ObjParams_BlueTreasure
 	jr .play_fanfare
 .grey
-	ld bc, ObjParams_64a40
+	ld bc, ObjParams_GreyTreasure
 	jr .play_fanfare
 .red
-	ld bc, ObjParams_64a55
+	ld bc, ObjParams_RedTreasure
 	jr .play_fanfare
 .green
-	ld bc, ObjParams_64a6a
+	ld bc, ObjParams_GreenTreasure
 .play_fanfare
 	play_music2 MUSIC_TREASURE_FANFARE
 	jp CreateObjectAtRelativePos
 ; 0x4c970
 
-	INCROM $4c970, $4c992
+; these framesets use OAM data that point
+; to addresses in VRAM that are loaded
+; with the treasure tiles
+GreyTreasureFunc: ; 4c970 (13:4970)
+	ld de, Frameset_681be
+	jr TreasureFunc
+RedTreasureFunc: ; 4c975 (13:4975)
+	ld de, Frameset_681c3
+	jr TreasureFunc
+GreenTreasureFunc: ; 4c97a (13:497a)
+	ld de, Frameset_681c8
+	jr TreasureFunc
+BlueTreasureFunc: ; 4c97f (13:497f)
+	ld de, Frameset_681cd
+TreasureFunc: ; 4c982 (13:4982)
+	ld a, 1 | (1 << 7)
+	ld [wCurObjAction], a
+	ld hl, wCurObjStateDuration
+	ld a, [hl]
+	and a
+	ret z
+	dec [hl]
+	ret nz
+	jp SetObjectFramesetPtr
+; 0x4c992
 
 KeyFunc: ; 4c992 (13:4992)
 	ld hl, wCurObjFlags
