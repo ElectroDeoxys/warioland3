@@ -185,7 +185,7 @@ ROMX $56
 ROMX $57
 	"Bank 57"
 ROMX $58
-	"Bank 58"
+	"Credits"
 ROMX $60
 	"Objects OAM 1"
 ROMX $61
