@@ -18,7 +18,7 @@ wBackupVBlankFunc:: ; c080
 wSCY:: ; c083
 	ds $1
 
-wc084:: ; c084
+wCreditsPage:: ; c084
 	ds $1
 
 wSCX:: ; c085
@@ -846,6 +846,7 @@ wccef:: ; ccef
 	ds $1
 
 wccf0:: ; ccf0
+wCreditsBGMapPtr::
 	ds $2
 
 	ds $e
@@ -857,22 +858,21 @@ wce00:: ; ce00
 	ds $1
 
 wce01:: ; ce01
-	ds $2
-
-	ds $32
+wCreditsTextBuffer::
+	ds $34
 
 wce35:: ; ce35
-	ds $20
-
-	ds $14
+wCreditsTextPals::
+	ds $34
 
 wce69:: ; ce69
 	ds $1
 
 wce6a:: ; ce6a
+wCreditsTextPtr::
 	ds $2
 
-wce6c:: ; ce6c
+wCreditsPalsMapPtr:: ; ce6c
 	ds $2
 
 	ds $64

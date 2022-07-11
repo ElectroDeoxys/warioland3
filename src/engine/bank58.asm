@@ -1,12 +1,13 @@
+	SETCHARMAP credits
 
 _CreditsStateTable: ; 160000 (58:4000)
 	ld a, [wSubState]
 	jumptable
 
 	dw FastFadeToWhite
-	dw Func_160028
+	dw InitCredits
 	dw SlowFadeFromWhite
-	dw Func_1600d4
+	dw ShowCredits
 	dw Func_160190
 	dw Func_16026c
 	dw Func_1602ee
@@ -23,7 +24,7 @@ _CreditsStateTable: ; 160000 (58:4000)
 	dw DebugReset
 ; 0x160028
 
-Func_160028: ; 160028 (58:4028)
+InitCredits: ; 160028 (58:4028)
 	call DisableLCD
 	call FillBGMap0_With7f
 	call ClearVirtualOAM
@@ -39,72 +40,74 @@ Func_160028: ; 160028 (58:4028)
 	xor a
 	ldh [rSCY], a
 	ld [wSCY], a
-	ld [wc084], a
+	ld [wCreditsPage], a
 	ldh [rWY], a
 	ld [wcee4], a
 	ld a, $07
 	ldh [rWX], a
 
-	ld a, HIGH(v0BGMap0 + $2e7)
-	ld [wccf0 + 0], a
-	ld a, LOW(v0BGMap0 + $2e7)
-	ld [wccf0 + 1], a
+	ld a, HIGH(v0BGMap0 + $2e7) ; coords 7, 23
+	ld [wCreditsBGMapPtr + 0], a
+	ld a, LOW(v0BGMap0 + $2e7) ; coords 7, 23
+	ld [wCreditsBGMapPtr + 1], a
 
-	ld hl, wce6a
-	ld a, $5d
+	ld hl, wCreditsTextPtr
+	ld a, HIGH(CreditsText)
 	ld [hli], a
-	ld a, $0f
+	ld a, LOW(CreditsText)
 	ld [hli], a
-	ld a, $60
-	ld [hli], a
-	ld a, $e5
+	ld a, HIGH(CreditsPalsMap)
+	ld [hli], a ; wCreditsPalsMapPtr
+	ld a, LOW(CreditsPalsMap)
 	ld [hl], a
 
 	ld hl, wCreditsMusicBox
 	ld a, $5b
-	ld [hli], a
+	ld [hli], a ; y
 	ld a, $18
-	ld [hli], a
+	ld [hli], a ; x
 	xor a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [wCreditsMusicBoxVar], a
-	ld a, $5c
-	ld [hli], a
-	ld a, $c4
+	ld a, HIGH(Frameset_161cc4)
+	ld [hli], a ; frameset ptr
+	ld a, LOW(Frameset_161cc4)
 	ld [hl], a
-	ld a, $57
+	ld a, HIGH(OAM_1617e8)
 	ld [wCreditsMusicBoxOAMPtr + 0], a
-	ld a, $e8
+	ld a, LOW(OAM_1617e8)
 	ld [wCreditsMusicBoxOAMPtr + 1], a
-	ld a, $58
+	ld a, BANK(OAM_1617e8)
 	ld [wCreditsMusicBoxOAMBank], a
 	call UpdateObjAnim
 	ld hl, wCreditsMusicBox
-	call Func_1604b1
+	call AddCreditsSprite
 
 	ld hl, wMenuObj1
 	ld a, $5b
-	ld [hli], a
+	ld [hli], a ; y
 	ld a, $18
-	ld [hli], a
+	ld [hli], a ; x
 	xor a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld a, $5c
+	ld a, HIGH(Frameset_161caf)
 	ld [hli], a
-	ld a, $af
+	ld a, LOW(Frameset_161caf)
 	ld [hl], a
 	call UpdateObjAnim
 	ld hl, wMenuObj1
-	call Func_1604b1
+	call AddCreditsSprite
+
 	call ClearUnusedVirtualOAM
+
 	stop_music
-	ld a, 120
+	ld a, 120 ; timer before starting music
 	ld [wTimer], a
 	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
 	ldh [rLCDC], a
@@ -113,17 +116,19 @@ Func_160028: ; 160028 (58:4028)
 	ret
 ; 0x1600d4
 
-Func_1600d4: ; 1600d4 (58:40d4)
+ShowCredits: ; 1600d4 (58:40d4)
 	ld hl, wTimer
 	ld a, [hl]
 	and a
-	jr z, .asm_1600f8
+	jr z, .continue_credits
+
+; still counting down to play music
 	dec [hl]
 	call z, .PlayCreditsMusic
 	ld hl, wCreditsMusicBox
-	call Func_1604b1
+	call AddCreditsSprite
 	ld hl, wMenuObj1
-	call Func_1604b1
+	call AddCreditsSprite
 	call ClearUnusedVirtualOAM
 	ret
 
@@ -131,88 +136,95 @@ Func_1600d4: ; 1600d4 (58:40d4)
 	play_music MUSIC_CREDITS
 	ret
 
-.asm_1600f8
+.continue_credits
 	ld hl, wCreditsMusicBoxFramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wCreditsMusicBox
-	call Func_1604b1
+	call AddCreditsSprite
 	ld hl, wMenuObj1FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj1
-	call Func_1604b1
+	call AddCreditsSprite
 	call ClearUnusedVirtualOAM
-	ld a, [wc084]
-	cp $0a
-	jr z, .asm_160187
+
+	ld a, [wCreditsPage]
+	cp NUM_CREDITS_PAGES
+	jr z, .done_credits
 	and a
-	jr z, .asm_160127
-	cp $09
-	jr z, .asm_160127
+	jr z, .scroll
+	cp NUM_CREDITS_PAGES - 1
+	jr z, .scroll
 	ld a, [wGlobalCounter]
-	and $01
+	and %1
 	ret nz
-.asm_160127
+.scroll
 	ld hl, wSCY
 	ld a, [hl]
-	add $01
+	add 1
 	ld [hli], a
-	ld a, [hl] ; wc084
-	adc $00
+	ld a, [hl] ; wCreditsPage
+	adc 0
 	ld [hld], a
-	cp $01
+	cp 1
 	ret c
-	cp $0a
+	cp NUM_CREDITS_PAGES
 	ret nc
 	ld a, [hl] ; wSCY
-	and $07
+	and %111
 	ret nz
-	ld hl, wce6a
+
+	; write next credits line to buffer
+	ld hl, wCreditsTextPtr
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
-	ld de, wce01
-.loop
+	ld de, wCreditsTextBuffer
+.loop1
 	ld a, [hli]
 	ld [de], a
 	inc e
-	cp $7f
-	jr nz, .loop
+	cp "\n"
+	jr nz, .loop1
 	ld a, h
-	ld [wce6a + 0], a
+	ld [wCreditsTextPtr + 0], a
 	ld a, l
-	ld [wce6a + 1], a
-	ld hl, wce6c
+	ld [wCreditsTextPtr + 1], a
+
+	; load pals of each letter
+	ld hl, wCreditsPalsMapPtr
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
-	ld de, wce35
-	ld b, $0d
-.asm_16015f
+	ld de, wCreditsTextPals
+	ld b, CREDITS_TEXT_LENGTH
+.loop2
 	ld a, [hli]
 	ld [de], a
 	inc e
 	dec b
-	jr nz, .asm_16015f
+	jr nz, .loop2
 	ld a, h
-	ld [wce6c + 0], a
+	ld [wCreditsPalsMapPtr + 0], a
 	ld a, l
-	ld [wce6c + 1], a
-	ld hl, wccf0
+	ld [wCreditsPalsMapPtr + 1], a
+
+	ld hl, wCreditsBGMapPtr
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
-	ld de, $20
+	ld de, BG_MAP_WIDTH
 	add hl, de
 	ld a, h
-	and $fb
-	ld [wccf0 + 0], a
+	and $fb ; make sure it loops properly
+	ld [wCreditsBGMapPtr + 0], a
 	ld a, l
-	ld [wccf0 + 1], a
-	ld a, $80
+	ld [wCreditsBGMapPtr + 1], a
+
+	ld a, (1 << 7)
 	ld [wcee4], a
 	ret
 
-.asm_160187
+.done_credits
 	xor a
 	ld [wCreditsMusicBoxVar], a
 	ld hl, wSubState
@@ -223,51 +235,54 @@ Func_1600d4: ; 1600d4 (58:40d4)
 Func_160190: ; 160190 (58:4190)
 	ld a, [wCreditsMusicBoxVar]
 	and a
-	jr nz, .asm_1601b7
+	jr nz, .stopped_moving
 	ld hl, wCreditsMusicBoxXCoord
 	ld a, [hl]
 	cp $38
-	jr c, .asm_1601b0
+	jr c, .move_right
 	cp $50
-	jr c, .asm_1601a9
-	ld a, $01
+	jr c, .move_right_slow
+	; stop moving
+	ld a, $1
 	ld [wCreditsMusicBoxVar], a
-	jr .asm_1601b7
-.asm_1601a9
+	jr .stopped_moving
+.move_right_slow
 	ld a, [wGlobalCounter]
-	and $01
-	jr nz, .asm_160216
-.asm_1601b0
+	and %1
+	jr nz, .add_sprites
+.move_right
 	inc [hl]
 	ld hl, wMenuObj1XCoord
 	inc [hl]
-	jr .asm_1601e3
-.asm_1601b7
+	jr .update_anims
+
+.stopped_moving
 	ld a, [wGlobalCounter]
-	and $01
-	jr nz, .asm_160216
+	and %1
+	jr nz, .add_sprites
 	ld a, [wCreditsMusicBoxAnimationEnded]
 	and a
-	jr z, .asm_1601e3
+	jr z, .update_anims
 	xor a
 	ld [wCreditsMusicBoxAnimationEnded], a
 	ld a, [wCreditsMusicBoxVar]
 	inc a
 	ld [wCreditsMusicBoxVar], a
-	cp $03
-	jr c, .asm_1601e3
-	cp $04
-	jr z, .asm_160226
+	cp $3
+	jr c, .update_anims
+	cp $4
+	jr z, .start_close_up
+	; reset animation
 	ld hl, wCreditsMusicBoxFramesetOffset
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, $5c
+	ld a, HIGH(Frameset_161cee)
 	ld [hli], a
-	ld a, $ee
+	ld a, LOW(Frameset_161cee)
 	ld [hl], a
 
-.asm_1601e3
+.update_anims
 	ld hl, wCreditsMusicBoxFramesetPtr + 1
 	ld a, [wCreditsMusicBoxOAMBank]
 	ld [wTempBank], a
@@ -279,129 +294,132 @@ Func_160190: ; 160190 (58:4190)
 	ld [wCreditsMusicBoxAnimationEnded], a
 	ld a, [wCreditsMusicBoxVar]
 	cp $03
-	jr nz, .asm_160210
+	jr nz, .update_winding_key
 	ld a, [wGlobalCounter]
-	and $03
-	jr nz, .asm_160216
-.asm_160210
+	and %11
+	jr nz, .add_sprites
+.update_winding_key
 	ld hl, wMenuObj1FramesetPtr + 1
 	call UpdateObjAnim
-.asm_160216
+.add_sprites
 	ld hl, wCreditsMusicBox
 	call Func_17ec
 	ld hl, wMenuObj1
-	call Func_1604b1
+	call AddCreditsSprite
 	call ClearUnusedVirtualOAM
 	ret
 
-.asm_160226
+.start_close_up
 	ld hl, wCreditsMusicBox
 	ld a, $5b
-	ld [hli], a
+	ld [hli], a ; y
 	ld a, $50
-	ld [hli], a
+	ld [hli], a ; x
 	xor a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [wCreditsMusicBoxVar], a
-	ld a, $5c
+	ld a, HIGH(Frameset_161ce8)
 	ld [hli], a
-	ld a, $e8
+	ld a, LOW(Frameset_161ce8)
 	ld [hl], a
-	ld a, $57
+	ld a, HIGH(OAM_1617e8)
 	ld [wCreditsMusicBoxOAMPtr + 0], a
-	ld a, $e8
+	ld a, LOW(OAM_1617e8)
 	ld [wCreditsMusicBoxOAMPtr + 1], a
-	ld a, $58
+	ld a, BANK(OAM_1617e8)
 	ld [wCreditsMusicBoxOAMBank], a
+
 	ld hl, wMenuObj1
 	ld a, $e0
-	ld [hli], a
+	ld [hli], a ; y
 	ld a, $4e
-	ld [hli], a
+	ld [hli], a ; x
 	xor a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld a, $5c
+	ld a, HIGH(Frameset_161ce5)
 	ld [hli], a
-	ld a, $e5
+	ld a, LOW(Frameset_161ce5)
 	ld [hl], a
 
 	ld a, 16
 	ld [wTimer], a
 	ld hl, wSubState
 	inc [hl]
-	jp .asm_1601e3
+	jp .update_anims
 ; 0x16026c
 
 Func_16026c: ; 16026c (58:426c)
 	ld hl, wTimer
 	dec [hl]
-	jr z, .asm_16029c
+	jr z, .close_up
 	ld a, [hl]
-	cp $06
-	jr nz, .asm_1602e4
+	cp 6
+	jr nz, .add_sprites
+
 	ld hl, wCreditsMusicBox
 	ld a, $5b
-	ld [hli], a
+	ld [hli], a ; y
 	ld a, $50
-	ld [hli], a
+	ld [hli], a ; x
 	xor a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld a, $5c
+	ld a, HIGH(Frameset_161ceb)
 	ld [hli], a
-	ld a, $eb
+	ld a, LOW(Frameset_161ceb)
 	ld [hl], a
-	ld a, $57
+	ld a, HIGH(OAM_1617e8)
 	ld [wCreditsMusicBoxOAMPtr + 0], a
-	ld a, $e8
+	ld a, LOW(OAM_1617e8)
 	ld [wCreditsMusicBoxOAMPtr + 1], a
-	ld a, $58
+	ld a, BANK(OAM_1617e8)
 	ld [wCreditsMusicBoxOAMBank], a
-	jr .asm_1602cb
+	jr .update_anims
 
-.asm_16029c
+.close_up
 	ld hl, wCreditsMusicBox
 	ld a, $50
-	ld [hli], a
+	ld [hli], a ; y
 	ld a, $50
-	ld [hli], a
+	ld [hli], a ; x
 	xor a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld a, $67
+	ld a, HIGH(Frameset_15e7ed)
 	ld [hli], a
-	ld a, $ed
+	ld a, LOW(Frameset_15e7ed)
 	ld [hl], a
-	ld a, $64
+	ld a, HIGH(OAM_15e44a)
 	ld [wCreditsMusicBoxOAMPtr + 0], a
-	ld a, $4a
+	ld a, LOW(OAM_15e44a)
 	ld [wCreditsMusicBoxOAMPtr + 1], a
-	ld a, $57
+	ld a, BANK(OAM_15e44a)
 	ld [wCreditsMusicBoxOAMBank], a
 	call Func_1603be
-	ld a, $82
+
+	ld a, $2 | (1 << 7)
 	ld [wcee4], a
 	ld hl, wSubState
 	inc [hl]
 
-.asm_1602cb
+.update_anims
 	ld hl, wCreditsMusicBoxFramesetPtr + 1
 	ld a, [wCreditsMusicBoxOAMBank]
 	ld [wTempBank], a
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	hcall UpdateObjAnim
-.asm_1602e4
+.add_sprites
 	ld hl, wCreditsMusicBox
 	call Func_17ec
 	call ClearUnusedVirtualOAM
@@ -439,14 +457,14 @@ Func_160318: ; 160318 (58:4318)
 	cp $80
 	jr z, .asm_160347
 	ld a, [wGlobalCounter]
-	and $01
+	and %1
 	jr nz, .asm_160347
 	dec [hl]
 .asm_160347
 	ld hl, wMenuObj1FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj1
-	call Func_1604b1
+	call AddCreditsSprite
 	call ClearUnusedVirtualOAM
 	ld a, [wGlobalCounter]
 	and $0f
@@ -476,7 +494,7 @@ Func_160365: ; 160365 (58:4365)
 	ld hl, wMenuObj1FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj1
-	call Func_1604b1
+	call AddCreditsSprite
 	call ClearUnusedVirtualOAM
 	ld a, [wTransitionParam]
 	cp TRANSITION_EPILOGUE_PERFECT
@@ -556,7 +574,7 @@ Func_16041f: ; 16041f (58:441f)
 VBlank_160439: ; 160439 (58:4439)
 	ld hl, .func
 	ld de, wVBlankFunc
-	ld b, $6c
+	ld b, .func_end - .func
 	call CopyHLToDE
 	ret
 
@@ -570,42 +588,42 @@ VBlank_160439: ; 160439 (58:4439)
 	jr z, .dma_transfer
 	and $7f
 	dec a
-	jr z, .asm_160487 ; $01
+	jr z, .write_text ; $1
 	dec a
-	jr z, .asm_160499 ; $02
+	jr z, .asm_160499 ; $2
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, wccf0
+	ld hl, wCreditsBGMapPtr
 	ld a, [hli]
 	ld e, [hl]
 	ld d, a
-	ld hl, wce35
-	ld b, $0d
+	ld hl, wCreditsTextPals
+	ld b, CREDITS_TEXT_LENGTH
 	call CopyHLToDE
 
 	xor a
 	ldh [rVBK], a
-	ld hl, wccf0
+	ld hl, wCreditsBGMapPtr
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
 	ld a, $7e
-	ld b, $0d
+	ld b, CREDITS_TEXT_LENGTH
 	call WriteAToHL_BTimes
-	ld a, $81
+	ld a, $1 | (1 << 7)
 	ld [wcee4], a
 	jr .dma_transfer
 
-.asm_160487
-	ld hl, wccf0
+.write_text
+	ld hl, wCreditsBGMapPtr
 	ld a, [hli]
 	ld e, [hl]
 	ld d, a
-	ld hl, wce01
+	ld hl, wCreditsTextBuffer
 .loop
 	ld a, [hli]
-	cp $7f
+	cp "\n"
 	jr z, .asm_1604a6
 	ld [de], a
 	inc e
@@ -628,7 +646,7 @@ VBlank_160439: ; 160439 (58:4439)
 .func_end
 ; 0x1604b1
 
-Func_1604b1: ; 1604b1 (58:44b1)
+AddCreditsSprite: ; 1604b1 (58:44b1)
 	ld a, [hli]
 	add $10
 	ld [wCurSpriteYCoord], a
@@ -1305,4 +1323,76 @@ OAM_1617e8: ; 1617e8 (58:57e8)
 	db $80
 ; 0x161caf
 
-	INCROM $161caf, $162f85
+Frameset_161caf: ; 161caf (58:5caf)
+	db $10, 11
+	db $11, 10
+	db $12,  9
+	db $13,  8
+	db $14,  8
+	db $15,  7
+	db $16,  8
+	db $17,  8
+	db $18,  9
+	db $19, 10
+	db $ff
+; 0x161cc4
+
+Frameset_161cc4: ; 161cc4 (58:5cc4)
+	db $00, 12
+	db $01, 12
+	db $02, 12
+	db $03, 12
+	db $04, 12
+	db $05, 12
+	db $06, 12
+	db $07, 12
+	db $08, 12
+	db $09, 12
+	db $0a, 12
+	db $0b, 12
+	db $0c, 12
+	db $0d, 12
+	db $0e, 12
+	db $0f, 12
+	db $ff
+; 0x161ce5
+
+Frameset_161ce5: ; 161ce5 (58:5ce5)
+	db $1a,  4
+	db $ff
+; 0x161ce8
+
+Frameset_161ce8: ; 161ce8 (58:5ce8)
+	db $1c,  4
+	db $ff
+; 0x161ceb
+
+Frameset_161ceb: ; 161ceb (58:5ceb)
+	db $1b,  4
+	db $ff
+; 0x161cee
+
+Frameset_161cee: ; 161cee (58:5cee)
+	db $00, 12
+	db $01, 12
+	db $02, 12
+	db $03, 12
+	db $04, 12
+	db $05, 12
+	db $06, 12
+	db $07, 12
+	db $08, 24
+	db $09, 24
+	db $0a, 24
+	db $0b, 24
+	db $0c, 24
+	db $0d, 24
+	db $0e, 24
+	db $0f, 24
+	db $ff
+; 0x161d0f
+
+INCLUDE "data/credits.asm"
+
+CreditsPalsMap: ; 1620e5 (58:60e5)
+INCBIN "gfx/pals/credits_pals_map.bin"

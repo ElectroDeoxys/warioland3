@@ -1,3 +1,5 @@
+	SETCHARMAP temple
+
 Func_ac000: ; ac000 (2b:4000)
 	ld h, b
 	ld l, c
