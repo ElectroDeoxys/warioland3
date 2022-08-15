@@ -1693,7 +1693,7 @@ Func_1698:: ; 1698 (0:1698)
 
 OpenActionHelp:: ; 16d0 (0:16d0)
 	ld hl, wState
-	ld a, ST_07
+	ld a, ST_ACTION_HELP
 	ld [hli], a
 	ld [hl], $00 ; wSubState
 	ret

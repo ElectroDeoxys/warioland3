@@ -316,7 +316,7 @@ Func_80aa: ; 80aa (2:40aa)
 	set MODE_FOUGHT_A_HIDDEN_FIGURE_F, [hl]
 
 	ld hl, wState
-	ld [hl], ST_06
+	ld [hl], ST_EPILOGUE
 	xor a
 	ld [wSubState], a
 	ret

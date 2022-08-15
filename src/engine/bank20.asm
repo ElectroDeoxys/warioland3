@@ -1861,7 +1861,20 @@ Func_80d92: ; 80d92 (20:4d92)
 	ret
 ; 0x80db1
 
-	INCROM $80db1, $80dc0
+	INCROM $80db1, $80db4
+
+Func_80db4: ; 80db4 (20:4db4)
+	ld a, c
+	push de
+	call Func_810f0
+	pop de
+	ld a, [hli]
+	ld [de], a
+	inc e
+	ld a, [hl]
+	ld [de], a
+	ret
+; 0x80dc0
 
 InitTreasureCollection: ; 80dc0 (20:4dc0)
 	farcall _InitTreasureCollection
@@ -6343,13 +6356,99 @@ Func_82c09: ; 82c09 (20:6c09)
 	ret
 ; 0x82c1d
 
-	INCROM $82c1d, $82c33
+Func_82c1d: ; 82c1d (20:6c1d)
+	ld hl, w2d061
+	cp [hl]
+	ret nc
+Func_82c22: ; 82c22 (20:6c22)
+	xor a
+	ld hl, w2d061
+	ld [hli], a
+	inc [hl] ; w2d062
+	ret
+; 0x82c29
+
+Func_82c29: ; 82c29 (20:6c29)
+	xor a
+	ld [w2d017], a
+	ld hl, w2d061
+	ld [hli], a
+	ld [hl], a ; w2d062
+	ret
+; 0x82c33
 
 Func_82c33: ; 82c33 (20:6c33)
 	ld hl, w2d061
 	inc [hl]
 	ld a, [w2d062]
 	jumptable
-; 0x82c3b
+	dw Func_82c55
+	dw Func_82c8f
+	dw $6a0a
+	dw $6a26
+	dw $6a2f
+	dw $6a4e
+	dw $6a62
+	dw $6c93
+	dw $6cb0
+	dw $6c51
+	dw $6c29
+; 0x82C51
 
-	INCROM $82c3b, $82cb8
+Func_82c51: ; 82c51 (20:6c51)
+	ld a, 30
+	jr Func_82c1d
+; 0x82c55
+
+Func_82c55: ; 82c55 (20:6c55)
+	ld a, [wCurMapSide]
+	sub 1
+	ccf
+	; carry set if not North
+	ld a, [w2d017]
+	sbc 0
+	ld [w2d067], a
+	ld a, [w2d025]
+	cp CUTSCENE_25
+	jr z, .asm_82c71
+	cp CUTSCENE_23
+	jr z, .asm_82c78
+.asm_82c6e
+	jp Func_82c22
+
+.asm_82c71
+	ld a, $07
+	ld [w2d017], a
+	jr .asm_82c6e
+
+.asm_82c78
+	ld a, [wCurMapSide]
+	cp EAST
+	jr nz, .asm_82c6e
+	ld a, [w2d017]
+	cp $07
+	jr nz, .asm_82c6e
+	ld a, MYSTERY_HANDLE
+	call IsTreasureCollected
+	jr nz, .asm_82c6e
+	jr Func_82c29
+; 0x82c8f
+
+Func_82c8f: ; 82c8f (20:6c8f)
+	ld a, 12
+	jr Func_82c1d
+; 0x82c93
+
+Func_82c93: ; 82c93 (20:6c93)
+	ld a, [w2d067]
+	ld c, a
+	ld de, w2d180
+	call Func_80db4
+	ld a, $02
+	ld hl, w2d180State
+	call SetSceneObjState
+	play_sfx SFX_104
+	jp Func_82c22
+; 0x82cb0
+
+	INCROM $82cb0, $82cb8

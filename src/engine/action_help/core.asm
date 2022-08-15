@@ -1,4 +1,4 @@
-ActionHelpStateTable:: ; 1f8000 (7e:4000)
+_ActionHelpStateTable:: ; 1f8000 (7e:4000)
 	ld a, [wSubState]
 	jumptable
 

@@ -5,11 +5,11 @@ StateTable:: ; 4000 (1:4000)
 	dw TitleStateTable             ; ST_TITLE
 	dw HandleOverworld             ; ST_OVERWORLD
 	dw LevelStateTable             ; ST_LEVEL
-	dw ClearScreenStateTable                   ; ST_CLEAR
+	dw ClearScreenStateTable       ; ST_CLEAR
 	dw PauseMenuStateTable         ; ST_PAUSE_MENU
 	dw GolfStateTable              ; ST_GOLF
-	dw Func_472a                   ; ST_06
-	dw Func_474c                   ; ST_07
+	dw EpilogueStateTable          ; ST_EPILOGUE
+	dw ActionHelpStateTable        ; ST_ACTION_HELP
 	dw CollectKeyDelay             ; ST_COLLECT_KEY
 	dw CreditsStateTable           ; ST_CREDITS
 	dw GolfBuildingStateTable      ; ST_GOLF_BUILDING
@@ -1110,33 +1110,31 @@ GolfStateTable: ; 4710 (1:4710)
 	ret
 ; 0x472a
 
-Func_472a: ; 472a (1:472a)
+EpilogueStateTable: ; 472a (1:472a)
 	ld a, [wSubState]
 	jumptable
 
-	dw Func_4732
-	dw Func_473c
-; 0x4732
+	dw .Func_4732
+	dw .Func_473c
 
-Func_4732: ; 4732 (1:4732)
+.Func_4732:
 	ld a, [wGlobalCounter]
 	and %11
 	ret nz
 	call FastFadeToWhite
 	ret
-; 0x473c
 
-Func_473c: ; 473c (1:473c)
+.Func_473c:
 	farcall Func_4628
 	ret
 ; 0x474c
 
-Func_474c: ; 474c (1:474c)
+ActionHelpStateTable: ; 474c (1:474c)
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
 	ldh [rSVBK], a
-	farcall ActionHelpStateTable
+	farcall _ActionHelpStateTable
 	pop af
 	ldh [rSVBK], a
 	ret
