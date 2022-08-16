@@ -1689,21 +1689,22 @@ Func_84a40: ; 84a40 (21:4a40)
 	inc [hl]
 	ld a, [w2d011]
 	and a
-	jp nz, Func_84b5a
+	jp nz, .NightToDayTable
+
+; Day to Night table
 	ld a, [w2d055]
 	jumptable
 
-	dw Func_84a5d
-	dw Func_84a97
-	dw Func_84b18
-	dw Func_84b24
-	dw Func_84b32
-	dw Func_84a97
-	dw Func_84b3a
-; 0x84a5d
+	dw .InitDayToNight
+	dw .FadeColours
+	dw .LoadPal1_Day
+	dw .FadePal1ToPal2_Day
+	dw .LoadPal2
+	dw .FadeColours
+	dw .SwitchDayNight
 
-Func_84a5d: ; 84a5d (21:4a5d)
-	call Func_84a6e
+.InitDayToNight:
+	call .LoadBaseAndTargetPals
 	ld a, $01
 	ld [w2d07c], a
 	xor a
@@ -1711,15 +1712,15 @@ Func_84a5d: ; 84a5d (21:4a5d)
 	xor a
 	ld [w2d809], a
 	ret
-; 0x84a6e
 
-Func_84a6e: ; 84a6e (21:4a6e)
+.LoadBaseAndTargetPals:
 	di
 	call VBlank_84d76
 	ei
 
+	; load the very last pal to buffer
 	ld a, $03
-	call Func_84c7a
+	call GetOWPals
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -1728,23 +1729,29 @@ Func_84a6e: ; 84a6e (21:4a6e)
 	call CopyHLToDE
 
 	xor a
-	call Func_84c4b
-;	fallthrough
+	call LoadBaseAndTargetOWPals
 
-Func_84a87: ; 84a87 (21:4a87)
+.AdvanceTable:
 	xor a
 	ld hl, w2d056
 	ld [hld], a
 	inc [hl] ; w2d055
 	ret
-; 0x84a8e
 
-	INCROM $84a8e, $84a97
+.Func_84a8e: ; unreferenced
+	ld a, [w2d056]
+	cp $04
+	ret c
+	jp .AdvanceTable
 
-Func_84a97: ; 84a97 (21:4a97)
+.FadeColours:
 	ld a, [wSubState]
 	cp SST_OVERWORLD_0B
-	jr nz, .asm_84aae
+	jr nz, .no_skip
+
+	; if B button is pressed
+	; or any of the allowed D-pad directions
+	; then skip the day/night transition
 	ld a, [wJoypadPressed]
 	ld b, a
 	bit B_BUTTON_F, b
@@ -1753,7 +1760,7 @@ Func_84a97: ; 84a97 (21:4a97)
 	and b
 	jp nz, Func_84d55
 
-.asm_84aae
+.no_skip
 	ld hl, w2d809
 	ld a, [w2d056]
 	cp [hl]
@@ -1761,47 +1768,55 @@ Func_84a97: ; 84a97 (21:4a97)
 
 	xor a
 	ld [w2d056], a
-	ld a, $60
+	ld a, 8 * NUM_PAL_COLORS * 3 
 	ld [w2d807], a
-	ld hl, w2d810 + $2
+
+	ld hl, wFadePals + COLOURFADESTRUCT_SIGN
 .loop
-	ld a, [hli]
+	; first we check whether to increase or decrease value
+	; in case it's already at target colour, skip
+	ld a, [hli] ; COLOURFADESTRUCT_SIGN
 	and a
 	jr z, .skip
 	ld b, 1
 	dec a
-	jr z, .asm_84ad3
+	jr z, .got_step
 	ld b, -1
 	dec a
-	jr z, .asm_84ad3
+	jr z, .got_step
 	debug_nop
-.asm_84ad3
+.got_step
+	; add diff to the accumulator, if this value exceeds DAYNIGHT_TRANSITION_STEPS,
+	; we apply the step to the current value
+	; this makes it so that base colour gets to targer colour
+	; at most in DAYNIGHT_TRANSITION_STEPS number of steps
 	ld a, b
-	ld [w2d808], a
-	ld a, [hli]
-	ld [w2d802], a
+	ld [wColourFadeStep], a
+	ld a, [hli] ; COLOURFADESTRUCT_DIFF
+	ld [wColourFadeDiff], a
 	ld b, a
-	ld a, [hl]
-	ld [w2d803], a
+	ld a, [hl] ; COLOURFADESTRUCT_ACCUMULATOR
+	ld [wColourFadeAccumulator], a
 	add b
-	cp $20
-	jr c, .asm_84af4
-	sub $20
-	ld [hl], a
+	cp DAYNIGHT_TRANSITION_STEPS
+	jr c, .dont_apply_step
+	sub DAYNIGHT_TRANSITION_STEPS
+	ld [hl], a ; COLOURFADESTRUCT_ACCUMULATOR
 	inc l
-	ld a, [w2d808]
-	add [hl]
+	ld a, [wColourFadeStep]
+	add [hl] ; COLOURFADESTRUCT_CURRENT
 	ld [hl], a
-	ld bc, $5
+	ld bc, (COLOURFADESTRUCT_LENGTH + COLOURFADESTRUCT_SIGN) - COLOURFADESTRUCT_CURRENT
 	add hl, bc
 	jr .next
-.asm_84af4
-	ld [hl], a
-	ld bc, $6
+.dont_apply_step
+	ld [hl], a ; COLOURFADESTRUCT_ACCUMULATOR
+	ld bc, (COLOURFADESTRUCT_LENGTH + COLOURFADESTRUCT_SIGN) - COLOURFADESTRUCT_ACCUMULATOR
 	add hl, bc
 	jr .next
+
 .skip
-	ld bc, $7
+	ld bc, (COLOURFADESTRUCT_LENGTH + COLOURFADESTRUCT_SIGN) - COLOURFADESTRUCT_DIFF
 	add hl, bc
 .next
 	ld a, [w2d807]
@@ -1809,43 +1824,40 @@ Func_84a97: ; 84a97 (21:4a97)
 	ld [w2d807], a
 	and a
 	jr nz, .loop
-	call Func_84d17
-	ld a, [w2d806]
+
+	call ApplyPalFadeColours
+
+	ld a, [wDayNightTransistionSteps]
 	dec a
-	ld [w2d806], a
+	ld [wDayNightTransistionSteps], a
 	and a
 	ret nz
-	jp Func_84a87
-; 0x84b18
+	jp .AdvanceTable
 
-Func_84b18: ; 84b18 (21:4b18)
-	call Func_84b1c
+.LoadPal1_Day:
+	call .LoadPal1
 	ret
-; 0x84b1c
 
-Func_84b1c: ; 84b1c (21:4b1c)
+.LoadPal1:
 	ld a, $01
-	call Func_84c4b
-	jp Func_84a87
-; 0x84b24
+	call LoadBaseAndTargetOWPals
+	jp .AdvanceTable
 
-Func_84b24: ; 84b24 (21:4b24)
-	call Func_84a97
-	ld a, [w2d806]
-	cp $0c
+.FadePal1ToPal2_Day:
+	call .FadeColours
+	ld a, [wDayNightTransistionSteps]
+	cp 12
 	ret nz
 	xor a
 	ld [w2d809], a
 	ret
-; 0x84b32
 
-Func_84b32: ; 84b32 (21:4b32)
+.LoadPal2:
 	ld a, $02
-	call Func_84c4b
-	jp Func_84a87
-; 0x84b3a
+	call LoadBaseAndTargetOWPals
+	jp .AdvanceTable
 
-Func_84b3a: ; 84b3a (21:4b3a)
+.SwitchDayNight:
 	ld a, [w2d011]
 	xor $1
 	ld [w2d011], a
@@ -1860,47 +1872,42 @@ Func_84b3a: ; 84b3a (21:4b3a)
 	ld [w2d055], a
 	ld [w2d056], a
 	ret
-; 0x84b5a
 
-Func_84b5a: ; 84b5a (21:4b5a)
+.NightToDayTable:
 	ld a, [w2d055]
 	jumptable
 
-	dw Func_84b68
-	dw Func_84b77
-	dw Func_84b85
-	dw Func_84b89
-	dw Func_84b3a
-; 0x84b68
+	dw .InitNightToDay
+	dw .FadeDayToPal1
+	dw .LoadPal1_Night
+	dw .FadePal1ToPal2_Night
+	dw .SwitchDayNight
 
-Func_84b68: ; 84b68 (21:4b68)
-	call Func_84a6e
+.InitNightToDay:
+	call .LoadBaseAndTargetPals
 	xor a
 	ld [w2d07c], a
 	ld [w2d07d], a
 	xor a
 	ld [w2d809], a
 	ret
-; 0x84b77
 
-Func_84b77: ; 84b77 (21:4b77)
-	call Func_84a97
-	ld a, [w2d806]
-	cp $0a
+.FadeDayToPal1:
+	call .FadeColours
+	ld a, [wDayNightTransistionSteps]
+	cp 10
 	ret nz
 	xor a
 	ld [w2d809], a
 	ret
-; 0x84b85
 
-Func_84b85: ; 84b85 (21:4b85)
-	call Func_84b1c
+.LoadPal1_Night:
+	call .LoadPal1
 	ret
-; 0x84b89
 
-Func_84b89: ; 84b89 (21:4b89)
-	call Func_84a97
-	ld a, [w2d806]
+.FadePal1ToPal2_Night:
+	call .FadeColours
+	ld a, [wDayNightTransistionSteps]
 	cp $16
 	ret nz
 	xor a
@@ -1910,53 +1917,58 @@ Func_84b89: ; 84b89 (21:4b89)
 
 	INCROM $84b97, $84c4b
 
-Func_84c4b: ; 84c4b (21:4c4b)
-	call Func_84c7a
+LoadBaseAndTargetOWPals: ; 84c4b (21:4c4b)
+	call GetOWPals
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
 	ld d, a
+
+	; fill in the target colours
 	push de
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
-	ld hl, w2d810 + $1
-	call Func_84ce0
+	ld hl, wFadePals + COLOURFADESTRUCT_TARGET
+	call CopyPalToColourFadeStructs
 	pop de
+
+	; fill in the base colours
 	push de
-	ld hl, w2d810
-	call Func_84ce0
-	call Func_84cab
+	ld hl, wFadePals + COLOURFADESTRUCT_BASE
+	call CopyPalToColourFadeStructs
+	call InitColourFadeStructs
 	pop hl
+
 	ld de, wTempBGPals
 	ld b, 8 palettes
 	call CopyHLToDE
-	ld a, $20
-	ld [w2d806], a
+
+	ld a, DAYNIGHT_TRANSITION_STEPS
+	ld [wDayNightTransistionSteps], a
 	xor a
 	ld [w2d809], a
 	ret
 ; 0x84c7a
 
-Func_84c7a: ; 84c7a (21:4c7a)
+GetOWPals: ; 84c7a (21:4c7a)
 	add a ; *2
 	ld c, a
-	call Func_84c92
+	call .CheckCrayons
 	swap a ; *$10
 	ld e, a
 	ld d, $00
 	ld a, [w2d011]
 	swap a
-	rrca
-	or e
-	or c
+	rrca ; day/night shift
+	or e ; crayon shift
+	or c ; input shift
 	ld e, a
-	ld hl, Data_84dd9
+	ld hl, OWPals
 	add hl, de
 	ret
-; 0x84c92
 
-Func_84c92: ; 84c92 (21:4c92)
+.CheckCrayons:
 	ld a, [wCrayonFlags]
 	and ALL_CRAYONS
 	cp ALL_CRAYONS
@@ -1975,44 +1987,45 @@ Func_84c92: ; 84c92 (21:4c92)
 	ret
 ; 0x84cab
 
-Func_84cab: ; 84cab (21:4cab)
-	ld a, $60
+InitColourFadeStructs: ; 84cab (21:4cab)
+	ld a, 8 * NUM_PAL_COLORS * 3 
 	ld [w2d807], a
-	ld hl, w2d810
+	ld hl, wFadePals
 .loop
-	ld a, [hli]
+	ld a, [hli] ; COLOURFADESTRUCT_BASE
 	ld b, a
 	ld e, a
-	ld a, [hli]
+	ld a, [hli] ; COLOURFADESTRUCT_TARGET
 	cp b
 	jr z, .equal
-	ld d, $01
+	ld d, $01 ; increase
 	jr nc, .larger
 ; smaller
+	; switch a with b
 	ld d, a
 	ld a, b
 	ld b, d
-	ld d, $02
+	ld d, $02 ; decrease
 .larger
 	sub b
-	ld b, a
+	ld b, a ; difference
 	ld a, d
-	ld [hli], a
+	ld [hli], a ; COLOURFADESTRUCT_SIGN
 	ld a, b
-	ld [hli], a
-	ld [hli], a
-	ld [hl], e
+	ld [hli], a ; COLOURFADESTRUCT_DIFF
+	ld [hli], a ; COLOURFADESTRUCT_ACCUMULATOR
+	ld [hl], e ; COLOURFADESTRUCT_CURRENT
 	jr .next
 
 .equal
 	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hl], e
+	ld [hli], a ; COLOURFADESTRUCT_SIGN
+	ld [hli], a ; COLOURFADESTRUCT_DIFF
+	ld [hli], a ; COLOURFADESTRUCT_ACCUMULATOR
+	ld [hl], e  ; COLOURFADESTRUCT_CURRENT
 
 .next
-	ld bc, $3
+	ld bc, (COLOURFADESTRUCT_LENGTH + COLOURFADESTRUCT_BASE) - COLOURFADESTRUCT_CURRENT
 	add hl, bc
 	ld a, [w2d807]
 	dec a
@@ -2024,14 +2037,14 @@ Func_84cab: ; 84cab (21:4cab)
 ; writes red/blue/green colour values
 ; from the pal in de to hl
 ; in intervals of 8 bytes between them
-Func_84ce0: ; 84ce0 (21:4ce0)
-	ld a, $20
+CopyPalToColourFadeStructs: ; 84ce0 (21:4ce0)
+	ld a, 8 * NUM_PAL_COLORS
 	ld [w2d807], a
 .loop
 	ld a, [de]
-	and $1f
+	and %11111
 	ld [hl], a ; red
-	ld bc, $8
+	ld bc, COLOURFADESTRUCT_LENGTH
 	add hl, bc
 	ld a, [de]
 	ld c, a
@@ -2046,15 +2059,15 @@ Func_84ce0: ; 84ce0 (21:4ce0)
 	rra
 	rra
 	rra
-	and $1f
+	and %11111
 	ld [hl], a ; green
 	ld a, b
-	ld bc, $8
+	ld bc, COLOURFADESTRUCT_LENGTH
 	add hl, bc
-	and $1f
+	and %11111
 	ld [hl], a ; blue
 	inc de
-	ld bc, $8
+	ld bc, COLOURFADESTRUCT_LENGTH
 	add hl, bc
 
 	ld a, [w2d807]
@@ -2065,14 +2078,14 @@ Func_84ce0: ; 84ce0 (21:4ce0)
 	ret
 ; 0x84d17
 
-Func_84d17: ; 84d17 (21:4d17)
-	ld hl, $d815
+ApplyPalFadeColours: ; 84d17 (21:4d17)
+	ld hl, wFadePals + COLOURFADESTRUCT_CURRENT
 	ld de, wTempBGPals
-	ld a, $20
+	ld a, 8 * NUM_PAL_COLORS
 	ld [w2d807], a
 .loop
 	ld a, [hl] ; red
-	ld bc, $8
+	ld bc, COLOURFADESTRUCT_LENGTH
 	add hl, bc
 	ld b, a
 	ld a, [hl] ; green
@@ -2080,12 +2093,12 @@ Func_84d17: ; 84d17 (21:4d17)
 	rrca
 	rrca
 	rrca
-	and $e0
+	and %11100000
 	or b
 	ld [de], a
 	inc de
 	ld a, c
-	ld bc, $8
+	ld bc, COLOURFADESTRUCT_LENGTH
 	add hl, bc
 	rlca
 	rlca
@@ -2096,7 +2109,7 @@ Func_84d17: ; 84d17 (21:4d17)
 	rla
 	sla c
 	rla
-	and $7f
+	and %1111111
 	ld [de], a
 
 	ld a, [w2d807]
@@ -2105,19 +2118,20 @@ Func_84d17: ; 84d17 (21:4d17)
 	and a
 	ret z
 	inc de
-	ld bc, $8
+	ld bc, COLOURFADESTRUCT_LENGTH
 	add hl, bc
 	jr .loop
 ; 0x84d55
 
 Func_84d55: ; 84d55 (21:4d55)
+	; apply target pals immediately
 	ld hl, wTempPals1
 	ld de, wTempBGPals
 	ld b, 8 palettes
 	call CopyHLToDE
 
 	xor a
-	ld [w2d806], a
+	ld [wDayNightTransistionSteps], a
 	ld [w2d056], a
 	ld b, $06
 	ld a, [w2d011]
@@ -2150,7 +2164,7 @@ VBlank_84d76: ; 84d76 (21:4d76)
 	add $07
 	ldh [rWX], a
 
-	ld b, $76
+	ld b, BANK(Func_1d8c2c)
 	ld a, [wROMBank]
 	push af
 	ld a, b
@@ -2191,62 +2205,80 @@ VBlank_84d76: ; 84d76 (21:4d76)
 .end
 ; 0x84dd9
 
-Data_84dd9: ; 84dd9 (21:4dd9)
-	; north
+OWPals: ; 84dd9 (21:4dd9)
+; North
+	; day
 	dw Pals_84000
 	dw Pals_84040
 	dw Pals_84080
 	dw Pals_840c0
+
+	; night
 	dw Pals_840c0
 	dw Pals_84100
 	dw Pals_84000
 	dw Pals_84000
 
-	; west
+; West
+	; day
 	dw Pals_84140
 	dw Pals_84180
 	dw Pals_841c0
 	dw Pals_84200
+
+	; night
 	dw Pals_84200
 	dw Pals_84240
 	dw Pals_84140
 	dw Pals_84140
 
-	; south
+; South
+	; day
 	dw Pals_84280
 	dw Pals_842c0
 	dw Pals_84300
 	dw Pals_84340
+
+	; night
 	dw Pals_84340
 	dw Pals_84380
 	dw Pals_84280
 	dw Pals_84280
 
-	; east
+; East
+	; day
 	dw Pals_843c0
 	dw Pals_84400
 	dw Pals_84440
 	dw Pals_84480
+
+	; night
 	dw Pals_84480
 	dw Pals_844c0
 	dw Pals_843c0
 	dw Pals_843c0
 
-	; north (all crayons)
+; North (all crayons)
+	; day
 	dw Pals_84500
 	dw Pals_84540
 	dw Pals_84580
 	dw Pals_845c0
+
+	; night
 	dw Pals_845c0
 	dw Pals_84600
 	dw Pals_84500
 	dw Pals_84500
 
-	; west (all crayons)
+; West (all crayons)
+	; day
 	dw Pals_84640
 	dw Pals_84680
 	dw Pals_846c0
 	dw Pals_84700
+
+	; night
 	dw Pals_84700
 	dw Pals_84740
 	dw Pals_84640

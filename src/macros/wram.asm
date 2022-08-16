@@ -70,7 +70,7 @@ MACRO obj_struct
 \1Unk1a::           db
 ; bit 7: set if facing right, left otherwise
 \1State::           db
-\1Action::           db
+\1Action::          db
 \1Unk1d::           db
 \1UpdateFunction::  dw
 ENDM
@@ -220,4 +220,27 @@ ENDM
 MACRO plane_part_struct
 \1Action::      db
 \1Counter::     db
+ENDM
+
+MACRO colour_part_fade_struct
+\1Current:: db
+\1Target::  db
+\1Sign::    db ; $1 = incr, $2 = decr
+\1Diff::    db
+\1Unk1::    db
+\1Unk2::    db
+\1Unk3::    db
+\1Unk4::    db
+ENDM
+
+MACRO colour_fade_struct
+	colour_part_fade_struct \1Red
+	colour_part_fade_struct \1Green
+	colour_part_fade_struct \1Blue
+ENDM
+
+MACRO pal_fade_struct
+FOR n, 1, NUM_PAL_COLORS + 1
+	colour_fade_struct \1Colour{u:n}
+ENDR
 ENDM

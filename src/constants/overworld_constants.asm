@@ -80,8 +80,25 @@ DEF OW_EXIT_LEFT  EQU $0f
 	const TOPBAR_NEXT_MAP_F   ; $3
 	const TOPBAR_PREV_MAP_F   ; $4
 
+; wTopBarState constants
+	const_def
+	const TOPBARST_NONE                 ; $0
+	const TOPBARST_START_CLOSE_BOT_BAR  ; $1
+	const TOPBARST_HANDLE_CLOSE_BOT_BAR ; $2
+	const TOPBARST_OPEN                 ; $3
+	const TOPBARST_INPUT                ; $4
+	const TOPBARST_CLOSE                ; $5
+	const TOPBARST_CUTSCENE             ; $6
+	const TOPBARST_COLLECTION           ; $7
+	const TOPBARST_NEXT_MAP             ; $8
+	const TOPBARST_DAY_NIGHT            ; $9
+	const TOPBARST_A                    ; $a
+	const TOPBARST_B                    ; $b
+
 DEF TOPBAR_DAY_NIGHT  EQU (1 << TOPBAR_DAY_NIGHT_F)
 DEF TOPBAR_CUTSCENE   EQU (1 << TOPBAR_CUTSCENE_F)
 DEF TOPBAR_COLLECTION EQU (1 << TOPBAR_COLLECTION_F)
 DEF TOPBAR_NEXT_MAP   EQU (1 << TOPBAR_NEXT_MAP_F)
 DEF TOPBAR_PREV_MAP   EQU (1 << TOPBAR_PREV_MAP_F)
+
+DEF DAYNIGHT_TRANSITION_STEPS EQU 32

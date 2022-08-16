@@ -41,3 +41,15 @@ DEF SPRITEOAMSTRUCT_LENGTH EQU const_value
 DEF NUM_SPRITE_OAM_STRUCTS EQU 40 ; see wVirtualOAM
 
 DEF SPRITE_GFX_LIST_CAPACITY EQU 32 ; see wUsedSprites
+
+; colour_part_fade_struct members (see macros/wram.asm)
+	const_def
+	const COLOURFADESTRUCT_BASE        ; 0
+	const COLOURFADESTRUCT_TARGET      ; 1
+	const COLOURFADESTRUCT_SIGN        ; 2
+	const COLOURFADESTRUCT_DIFF        ; 3
+	const COLOURFADESTRUCT_ACCUMULATOR ; 4
+	const COLOURFADESTRUCT_CURRENT     ; 5
+	const COLOURFADESTRUCT_UNK_3       ; 6
+	const COLOURFADESTRUCT_UNK_4       ; 7
+DEF COLOURFADESTRUCT_LENGTH EQU const_value

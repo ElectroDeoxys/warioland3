@@ -1,4 +1,4 @@
-; flags for wca3b
+; flags for wGameModeFlags
 	const_def
 	const MODE_GAME_CLEARED_F           ; 0
 	const MODE_TIME_ATTACK_F            ; 1

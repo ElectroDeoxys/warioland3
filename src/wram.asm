@@ -463,7 +463,6 @@ wLevelTimeAttackScores:: ; ca07
 wNumCollectedTreasures:: ; ca39
 	ds $2
 
-; MODE_* constant
 wca3b:: ; ca3b
 	db
 
@@ -1521,12 +1520,11 @@ w2d049:: ; d049
 
 	ds $6
 
-; $0 = hidden
-; $1 = turning visible
+; TOPBARST_* constant
 wTopBarState:: ; d050
 	db
 
-w2d051:: ; d051
+wTopBarStateCounter:: ; d051
 	db
 
 	db
@@ -1879,6 +1877,8 @@ w2d12f:: ; d12f
 
 	ds $10
 
+UNION
+
 wSceneWario:: scene_obj_struct wSceneWario ; d140
 wSceneWarioStateGroup:: db ; d148
 wSceneWarioOAMPtr::     dw ; d149
@@ -1894,6 +1894,13 @@ w2d14e:: ; d14e
 	db
 
 	db
+
+NEXTU
+
+wOWUIObj1:: scene_obj_struct wOWUIObj1 ; d140
+wOWUIObj2:: scene_obj_struct wOWUIObj2 ; d148
+
+ENDU
 
 w2d150:: ; d150
 	db
@@ -1951,33 +1958,7 @@ wLCDCFlagsToFlip::
 w2d801:: ; d801
 	db
 
-w2d802:: ; d802
-	db
-
-w2d803:: ; d803
-	db
-
-w2d804:: ; d804
-	db
-
-	db
-
-w2d806:: ; d806
-	db
-
-w2d807:: ; d807
-	db
-
-w2d808:: ; d808
-	db
-
-w2d809:: ; d809
-	db
-
-	ds $6
-
-w2d810:: ; d810
-	ds $70
+	ds $7e
 
 w2d880:: ; d880
 	ds $9
@@ -2153,20 +2134,41 @@ w2dfff:: ; dfff
 
 NEXTU
 
-wCollectionRow:: ; d800
+	ds 2
+
+wColourFadeDiff::           db ; d802
+wColourFadeAccumulator::    db ; d803
+	ds 2
+wDayNightTransistionSteps:: db ; d806
+
+w2d807:: ; d807
 	db
 
-wCollectionCol:: ; d801
+wColourFadeStep:: ; d808
 	db
 
-wCollectionLinkState:: ; d802
+w2d809:: ; d809
 	db
 
-wCollectionLinkStateCounter:: ; d803
-	db
+	ds $6
 
-wCollectionScrollMode:: ; d804
-	db
+wFadePals:: ; d810
+wPalFade1:: pal_fade_struct wPalFade1
+wPalFade2:: pal_fade_struct wPalFade2
+wPalFade3:: pal_fade_struct wPalFade3
+wPalFade4:: pal_fade_struct wPalFade4
+wPalFade5:: pal_fade_struct wPalFade5
+wPalFade6:: pal_fade_struct wPalFade6
+wPalFade7:: pal_fade_struct wPalFade7
+wPalFade8:: pal_fade_struct wPalFade8
+
+NEXTU
+
+wCollectionRow::              db ; d800
+wCollectionCol::              db ; d801
+wCollectionLinkState::        db ; d802
+wCollectionLinkStateCounter:: db ; d803
+wCollectionScrollMode::       db ; d804
 
 	ds $b
 

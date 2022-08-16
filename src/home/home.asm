@@ -4214,15 +4214,15 @@ LoadLevelName:: ; 3af7 (0:3af7)
 	ld e, $00
 	add hl, de
 	ld a, h
-	ld [w2d0b5 + 0], a
+	ld [w2d0b5SourceHi], a
 	ld a, l
-	ld [w2d0b5 + 1], a
+	ld [w2d0b5SourceLo], a
 	ld a, $15
-	ld [w2d0b5 + 2], a
+	ld [w2d0b5DestHi], a
 	xor a
-	ld [w2d0b5 + 3], a
+	ld [w2d0b5DestLo], a
 	ld a, $1f
-	ld [w2d0b5 + 4], a
+	ld [w2d0b5Mode], a
 	ret
 ; 0x3b2b
 
