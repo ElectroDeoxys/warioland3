@@ -1380,13 +1380,13 @@ w2d015:: ; d015
 w2d016:: ; d016
 	db
 
-w2d017:: ; d017
+wCutsceneActionParam:: ; d017
 	db
 
 w2d018:: ; d018
 	db
 
-w2d019:: ; d019
+wTempUnlockableConnectionID:: ; d019
 	db
 
 ; NORTH, WEST, SOUTH or EAST
@@ -1398,7 +1398,7 @@ wLastTransitionParam:: ; d01b
 
 	db
 
-wMapSideLevelIndex:: ; d01d
+wMapSideLevelID:: ; d01d
 	db
 
 w2d01e:: ; d01e
@@ -1426,17 +1426,10 @@ wOWAnimationFinished:: ; d024
 w2d025:: ; d025
 	db
 
-w2d026:: ; d026
-	ds $2
-
-w2d028:: ; d028
-	db
-
-w2d029:: ; d029
-	db
-
-w2d02a:: ; d02a
-	ds $2
+wCutsceneOWParamsPtr::     dw ; d026
+wOWCutsceneAction::        db ; d028
+wTempOWCutsceneAction::    db ; d029
+wTempCutsceneOWParamsPtr:: dw ; d02a
 
 w2d02c:: ; d02c
 	db
@@ -1540,11 +1533,8 @@ wTopBarSelection:: ; d053
 wTopBarSelectableButtons:: ; d054
 	db
 
-w2d055:: ; d055
-	db
-
-w2d056:: ; d056
-	db
+wDayNightTransitionState::   db ; d055
+wDayNightTransitionCounter:: db ; d056
 
 ; which crayons have been collected
 ; each bit corresponds to CRAYON_*

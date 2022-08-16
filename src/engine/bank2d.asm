@@ -19,7 +19,7 @@ Func_b4004: ; b4004 (2d:4004)
 ; 0xb4014
 
 Func_b4014: ; b4014 (2d:4014)
-	ld a, [w2d017]
+	ld a, [wCutsceneActionParam]
 	jumptable
 
 	dw Func_b4001
@@ -115,7 +115,7 @@ Func_b409c: ; b409c (2d:409c)
 	ld a, [wNextMapSide]
 	and a
 	jr nz, .asm_b40b4
-	ld a, [wMapSideLevelIndex]
+	ld a, [wMapSideLevelID]
 	cp OWNORTH_SEA_TURTLE_ROCKS
 	ret z
 .asm_b40b4
@@ -394,7 +394,7 @@ Func_b42e7: ; b42e7 (2d:42e7)
 ; 0xb4309
 
 Func_b4309: ; b4309 (2d:4309)
-	ld a, [w2d017]
+	ld a, [wCutsceneActionParam]
 	jumptable
 
 	dw Func_b4001
@@ -584,9 +584,9 @@ Func_b4448: ; b4448 (2d:4448)
 	ld hl, Data_85536
 	jp Func_b586d
 .asm_b4455
-	ld a, [w2d017]
+	ld a, [wCutsceneActionParam]
 	ld b, a
-	ld a, [w2d019]
+	ld a, [wTempUnlockableConnectionID]
 	cp b
 	jr nz, .asm_b444f
 	ld hl, wSceneObj11
@@ -623,7 +623,7 @@ Func_b4474: ; b4474 (2d:4474)
 ; 0xb449b
 
 Func_b449b: ; b449b (2d:449b)
-	ld a, [w2d017]
+	ld a, [wCutsceneActionParam]
 	jumptable
 
 	dw Func_b4001
@@ -644,8 +644,8 @@ Func_b44b7: ; b44b7 (2d:44b7)
 	ld a, $80
 	cp c
 	ret nz
-	ld a, [w2d017]
-	ld hl, w2d019
+	ld a, [wCutsceneActionParam]
+	ld hl, wTempUnlockableConnectionID
 	cp [hl]
 	ret nz
 	ld hl, wSceneObj2
@@ -674,9 +674,9 @@ Func_b44e7: ; b44e7 (2d:44e7)
 	ld de, .data_2
 	cp $80
 	jr nz, .asm_b4500
-	ld a, [w2d017]
+	ld a, [wCutsceneActionParam]
 	ld b, a
-	ld a, [w2d019]
+	ld a, [wTempUnlockableConnectionID]
 	cp b
 	ret nz
 	ld de, .data_1
@@ -910,7 +910,7 @@ Func_b4665: ; b4665 (2d:4665)
 ; 0xb4688
 
 Func_b4688: ; b4688 (2d:4688)
-	ld a, [w2d017]
+	ld a, [wCutsceneActionParam]
 	jumptable
 
 	dw Func_b4001
@@ -1028,8 +1028,8 @@ Func_b4712: ; b4712 (2d:4712)
 	db $28, $28, $12
 
 .Func_b4757
-	ld a, [w2d029]
-	cp $01
+	ld a, [wTempOWCutsceneAction]
+	cp UNLOCK_LEVEL
 	ret z
 	ld hl, wSceneObj7
 	ld de, .data_2
@@ -1066,9 +1066,9 @@ Func_b4792: ; b4792 (2d:4792)
 	ret z
 	sla c
 	jr nc, .asm_b47dc
-	ld a, [w2d017]
+	ld a, [wCutsceneActionParam]
 	ld b, a
-	ld a, [w2d019]
+	ld a, [wTempUnlockableConnectionID]
 	cp b
 	jr nz, .asm_b47dc
 
@@ -2559,16 +2559,155 @@ Func_b514a: ; b514a (2d:514a)
 	inc [hl]
 	ld a, [wCurMapSide]
 	jumptable
-; 0xb5152
 
-	INCROM $b5152, $b586d
+	dw NorthOWFunctions ; NORTH
+	dw Func_b5a02 ; WEST
+	dw Func_b65c2 ; SOUTH
+	dw Func_b6ea8 ; EAST
+; 0xb515a
+
+NorthOWFunctions: ; b515a (2d:515a)
+	ld a, [wCutsceneActionParam]
+	dec a
+	jumptable
+
+	dw NOWFunc_CutTree ; NOWFUNC_CUT_TREE
+	dw NOWFunc_OpenGate ; NOWFUNC_OPEN_GATE
+	dw $51fc
+	dw $51ff
+	dw $5274
+	dw $52e4
+	dw $553f
+	dw $553f
+	dw $5574
+	dw $5574
+	dw $5574
+	dw $5574
+	dw $5574
+	dw $5574
+	dw $5574
+	dw $5645
+	dw $56f9
+	dw $5912
+; 0xb5183
+
+NOWFunc_CutTree: ; b5183 (2d:5183)
+	ld a, [w2d062]
+	jumptable
+
+	dw AdvanceOWFunc
+	dw .Wait1
+	dw .SetTreeFall
+	dw .WaitFall
+	dw .WaitDisappear
+	dw .Wait2
+	dw EndOWFunc
+
+.Wait1:
+	ld a, 4
+	jp Func_b584b
+
+.Wait2:
+	ld a, 4
+	jp Func_b584b
+
+.SetTreeFall:
+	ld a, $02
+	ld hl, wSceneObj8State
+	call SetSceneObjState
+	play_sfx SFX_102
+	jp AdvanceOWFunc
+
+.WaitFall:
+	ld a, [wSceneObj8Frame]
+	cp $07
+	ret nz
+	play_sfx SFX_01A
+	jp AdvanceOWFunc
+
+.WaitDisappear:
+	ld hl, wSceneObj8State
+	jp WaitOWObjDisappear
+; 0xb51c9
+
+NOWFunc_OpenGate: ; b51c9 (2d:51c9)
+	ld a, [w2d062]
+	jumptable
+
+	dw AdvanceOWFunc
+	dw .Wait1
+	dw .OpenDoor
+	dw .WaitAnim
+	dw .Wait2
+	dw EndOWFunc
+
+.Wait1:
+	ld a, $04
+	jp Func_b584b
+
+.Wait2:
+	ld a, $04
+	jp Func_b584b
+
+.OpenDoor:
+	ld a, $04
+	ld hl, wSceneObj10State
+	call SetSceneObjState
+	play_sfx SFX_108
+	jp AdvanceOWFunc
+
+.WaitAnim:
+	ld hl, wSceneObj10State
+	jp WaitOWObjDisappear
+; 0xb51fc
+
+	INCROM $b51fc, $b584b
+
+Func_b584b: ; b584b (2d:584b)
+	ld hl, w2d061
+	cp [hl]
+	ret nc
+AdvanceOWFunc: ; b5850 (2d:5850)
+	xor a
+	ld hl, w2d061
+	ld [hli], a
+	inc [hl]
+	ret
+; 0xb5857
+
+WaitOWObjDisappear: ; b5857 (2d:5857)
+	ld b, $00
+	ld a, [hl]
+	cp b
+	ret nz
+	jr AdvanceOWFunc
+; 0xb585e
+
+EndOWFunc: ; b585e (2d:585e)
+	xor a
+	ld [wCutsceneActionParam], a
+	ld hl, w2d061
+	ld [hli], a
+	ld [hl], a
+	ret
+; 0xb5868
+
+	INCROM $b5868, $b586d
 
 Func_b586d: ; b586d (2d:586d)
 	farcall Func_854ee
 	ret
 ; 0xb587d
 
-	INCROM $b587d, $b5b4e
+	INCROM $b587d, $b5a02
+
+Func_b5a02: ; b5a02 (2d:5a02)
+	ld a, [wCutsceneActionParam]
+	dec a
+	jumptable
+; 0xb5a07
+
+	INCROM $b5a07, $b5b4e
 
 Func_b5b4e: ; b5b4e (2d:5b4e)
 	ld de, Data_b6337
@@ -2751,13 +2890,29 @@ Data_b6337: ; b6337 (2d:6337)
 	db $80
 ; 0xb6478
 
-	INCROM $b6478, $b791d
+	INCROM $b6478, $b65c2
+
+Func_b65c2: ; b65c2 (2d:65c2)
+	ld a, [wCutsceneActionParam]
+	dec a
+	jumptable
+; 0xb65c7
+
+	INCROM $b65c7, $b6ea8
+
+Func_b6ea8: ; b6ea8 (2d:6ea8)
+	ld a, [wCutsceneActionParam]
+	dec a
+	jumptable
+; 0xb6ead
+
+	INCROM $b6ead, $b791d
 
 Func_b791d: ; b791d (2d:791d)
 	ret
 ; 0xb791e
 
-Func_b791e: ; b791e (2d:791e)
+UpdateMapSideOWAnimations: ; b791e (2d:791e)
 	ld a, [wCurMapSide]
 	jumptable
 
@@ -2878,7 +3033,7 @@ Func_b7a5a: ; b7a5a (2d:7a5a)
 	ld a, [w2d124]
 	and a
 	ret nz
-	ld a, [wMapSideLevelIndex]
+	ld a, [wMapSideLevelID]
 	cp $02
 	ret z
 	cp $07
@@ -2945,7 +3100,7 @@ Func_b7ac0: ; b7ac0 (2d:7ac0)
 	ld a, [wSceneObj7State]
 	and a
 	ret nz
-	ld a, [w2d055]
+	ld a, [wDayNightTransitionState]
 	and a
 	ret nz
 	inc [hl]
@@ -2953,7 +3108,7 @@ Func_b7ac0: ; b7ac0 (2d:7ac0)
 	ld a, [w2d011]
 	and a
 	jr nz, .asm_b7af0
-	ld a, [w2d055]
+	ld a, [wDayNightTransitionState]
 	cp $02
 	ret nz
 	ld a, $07
@@ -2979,7 +3134,7 @@ Func_b7afb: ; b7afb (2d:7afb)
 	ld a, [hl]
 	and a
 	jr nz, .asm_b7b0d
-	ld a, [w2d055]
+	ld a, [wDayNightTransitionState]
 	and a
 	ret nz
 	inc [hl]
@@ -2987,7 +3142,7 @@ Func_b7afb: ; b7afb (2d:7afb)
 	ld a, [w2d011]
 	and a
 	jr z, .asm_b7b19
-	ld a, [w2d055]
+	ld a, [wDayNightTransitionState]
 	cp $02
 	ret nz
 .asm_b7b19
@@ -3031,7 +3186,7 @@ Func_b7b4e: ; b7b4e (2d:7b4e)
 	ld a, [w2d12a]
 	and a
 	ret nz
-	ld a, [wMapSideLevelIndex]
+	ld a, [wMapSideLevelID]
 	cp $01
 	ret z
 	cp $02
@@ -3085,7 +3240,7 @@ Func_b7ba9: ; b7ba9 (2d:7ba9)
 	ld a, [w2d011]
 	and a
 	jr z, .asm_b7bc2
-	ld a, [w2d055]
+	ld a, [wDayNightTransitionState]
 	cp $02
 	ret nz
 .asm_b7bb9
@@ -3094,7 +3249,7 @@ Func_b7ba9: ; b7ba9 (2d:7ba9)
 	call SetSceneObjState
 	ret
 .asm_b7bc2
-	ld a, [w2d055]
+	ld a, [wDayNightTransitionState]
 	and a
 	ret nz
 	jr .asm_b7bb9
@@ -3106,7 +3261,7 @@ Func_b7bc9: ; b7bc9 (2d:7bc9)
 	ld a, [w2d011]
 	and a
 	jr nz, .asm_b7be2
-	ld a, [w2d055]
+	ld a, [wDayNightTransitionState]
 	cp $02
 	ret nz
 .asm_b7bd9
@@ -3115,17 +3270,17 @@ Func_b7bc9: ; b7bc9 (2d:7bc9)
 	call SetSceneObjState
 	ret
 .asm_b7be2
-	ld a, [w2d055]
+	ld a, [wDayNightTransitionState]
 	and a
 	ret nz
 	jr .asm_b7bd9
 ; 0xb7be9
 
 Func_b7be9: ; b7be9 (2d:7be9)
-	ld a, [w2d028]
-	cp $01
+	ld a, [wOWCutsceneAction]
+	cp UNLOCK_LEVEL
 	jr z, .asm_b7bf9
-	cp $03
+	cp HIGHLIGHT_LEVEL
 	jr z, .asm_b7bf9
 	ld a, [w2d025]
 	and a
@@ -3223,7 +3378,7 @@ Func_b7c84: ; b7c84 (2d:7c84)
 	ld a, [w2d12e]
 	and a
 	ret nz
-	ld a, [wMapSideLevelIndex]
+	ld a, [wMapSideLevelID]
 	cp $00
 	ret z
 	cp $01

@@ -1,64 +1,59 @@
-Data_80000: ; 80000 (20:4000)
-	dw Data_80008
-	dw Data_8001a
-	dw Data_8002a
-	dw Data_8003a
-; 0x80008
+UnlockableConnections: ; 80000 (20:4000)
+	dw .North
+	dw .West
+	dw .South
+	dw .East
 
-Data_80008: ; 80008 (20:4008)
+.North:
 	db $ff, $ff
-	db $00, $01
-	db $01, $02
-	db $07, $03
-	db $03, $04
-	db $04, $05
-	db $05, $06
-	db $03, $0e
-	db $0f, $02
-; 0x8001a
+	db OWNORTH_THE_TEMPLE,             OWNORTH_OUT_OF_THE_WOODS       ; NORTHCONN_1
+	db OWNORTH_OUT_OF_THE_WOODS,       OWNORTH_THE_PEACEFUL_VILLAGE   ; NORTHCONN_2
+	db OWNORTH_JUNCTION,               OWNORTH_THE_VAST_PLAIN         ; NORTHCONN_3
+	db OWNORTH_THE_VAST_PLAIN,         OWNORTH_BANK_OF_THE_WILD_RIVER ; NORTHCONN_4
+	db OWNORTH_BANK_OF_THE_WILD_RIVER, OWNORTH_THE_TIDAL_COAST        ; NORTHCONN_5
+	db OWNORTH_THE_TIDAL_COAST,        OWNORTH_SEA_TURTLE_ROCKS       ; NORTHCONN_6
+	db OWNORTH_THE_VAST_PLAIN,         OW_EXIT_RIGHT                  ; NORTHCONN_7
+	db OW_EXIT_LEFT,                   OWNORTH_THE_PEACEFUL_VILLAGE   ; NORTHCONN_8
 
-Data_8001a: ; 8001a (20:401a)
+.West:
 	db $ff, $ff
-	db $00, $01
-	db $01, $02
-	db $02, $03
-	db $01, $05
-	db $02, $04
-	db $03, $0e
-	db $0f, $00
-; 0x8002a
+	db OWWEST_DESERT_RUINS,      OWWEST_THE_VOLCANOS_BASE ; WESTCONN_1
+	db OWWEST_THE_VOLCANOS_BASE, OWWEST_THE_POOL_OF_RAIN  ; WESTCONN_2
+	db OWWEST_THE_POOL_OF_RAIN,  OWWEST_A_TOWN_IN_CHAOS   ; WESTCONN_3
+	db OWWEST_THE_VOLCANOS_BASE, OWWEST_THE_WEST_CRATER   ; WESTCONN_4
+	db OWWEST_THE_POOL_OF_RAIN,  OWWEST_BENEATH_THE_WAVES ; WESTCONN_5
+	db OWWEST_A_TOWN_IN_CHAOS,   OW_EXIT_RIGHT            ; WESTCONN_6
+	db OW_EXIT_LEFT,             OWWEST_DESERT_RUINS      ; WESTCONN_7
 
-Data_8002a: ; 8002a (20:402a)
+.South:
 	db $ff, $ff
-	db $00, $01
-	db $01, $02
-	db $01, $03
-	db $01, $04
-	db $02, $05
-	db $02, $0e
-	db $0f, $00
-; 0x8003a
+	db OWSOUTH_THE_GRASSLANDS,   OWSOUTH_THE_BIG_BRIDGE   ; SOUTHCONN_1
+	db OWSOUTH_THE_BIG_BRIDGE,   OWSOUTH_TOWER_OF_REVIVAL ; SOUTHCONN_2
+	db OWSOUTH_THE_BIG_BRIDGE,   OWSOUTH_THE_STEEP_CANYON ; SOUTHCONN_3
+	db OWSOUTH_THE_BIG_BRIDGE,   OWSOUTH_CAVE_OF_FLAMES   ; SOUTHCONN_4
+	db OWSOUTH_TOWER_OF_REVIVAL, OWSOUTH_ABOVE_THE_CLOUDS ; SOUTHCONN_5
+	db OWSOUTH_TOWER_OF_REVIVAL, OW_EXIT_RIGHT            ; SOUTHCONN_6
+	db OW_EXIT_LEFT,             OWSOUTH_THE_GRASSLANDS   ; SOUTHCONN_7
 
-Data_8003a: ; 8003a (20:403a)
+.East:
 	db $ff, $ff
-	db $00, $01
-	db $00, $02
-	db $01, $03
-	db $06, $04
-	db $03, $06
-	db $02, $05
-	db $06, $0e
-	db $0f, $00
+	db OWEAST_THE_STAGNANT_SWAMP,  OWEAST_THE_FRIGID_SEA      ; EASTCONN_1
+	db OWEAST_THE_STAGNANT_SWAMP,  OWEAST_CASTLE_OF_ILLUSIONS ; EASTCONN_2
+	db OWEAST_THE_FRIGID_SEA,      OWEAST_THE_COLOSSAL_HOLE   ; EASTCONN_3
+	db OWEAST_FOREST_OF_FEAR,      OWEAST_THE_WARPED_VOID     ; EASTCONN_4
+	db OWEAST_THE_COLOSSAL_HOLE,   OWEAST_FOREST_OF_FEAR      ; EASTCONN_5
+	db OWEAST_CASTLE_OF_ILLUSIONS, OWEAST_THE_EAST_CRATER     ; EASTCONN_6
+	db OWEAST_FOREST_OF_FEAR,      OW_EXIT_RIGHT              ; EASTCONN_7
+	db OW_EXIT_LEFT,               OWEAST_THE_STAGNANT_SWAMP  ; EASTCONN_8
 ; 0x8004c
 
 Data_8004c: ; 8004c (20:404c)
-	dw Data_80054
-	dw Data_80066
-	dw Data_80076
-	dw Data_80086
-; 0x80054
+	dw .North
+	dw .West
+	dw .South
+	dw .East
 
-Data_80054: ; 80054 (20:4054)
+.North:
 	dw $4098
 	dw $409a
 	dw $409f
@@ -68,9 +63,8 @@ Data_80054: ; 80054 (20:4054)
 	dw $40b3
 	dw $40b8
 	dw $40bd
-; 0x80066
 
-Data_80066: ; 80066 (20:4066)
+.West:
 	dw $40c2
 	dw $40c4
 	dw $40c9
@@ -79,9 +73,8 @@ Data_80066: ; 80066 (20:4066)
 	dw $40d8
 	dw $40dd
 	dw $40e2
-; 0x80076
 
-Data_80076: ; 80076 (20:4076)
+.South:
 	dw $40e7
 	dw $40e9
 	dw $40ee
@@ -90,9 +83,8 @@ Data_80076: ; 80076 (20:4076)
 	dw $40fd
 	dw $4102
 	dw $4107
-; 0x80086
 
-Data_80086: ; 80086 (20:4086)
+.East:
 	dw $410c
 	dw $410e
 	dw $4113
@@ -106,158 +98,106 @@ Data_80086: ; 80086 (20:4086)
 
 	INCROM $80098, $80136
 
-Data_80136: ; 80136 (20:4136)
-	dw Data_8013e ; NORTH
-	dw Data_8017e ; WEST
-	dw Data_801be ; SOUTH
-	dw Data_801fe ; EAST
-; 0x8013e
+; \1 = x coord
+; \2 = y coord
+; \3 = unknown 1
+; \4 = unknown 2
+MACRO ow_coord
+IF (\1) != -1
+x = \1 + (\2 * BG_MAP_WIDTH)
+	db ((x & $1e0) >> 2)
+	db ((x & $01f) << 3)
+ELSE
+	db -1
+	db -1
+ENDC
+	db \3, \4
+ENDM
 
-Data_8013e: ; 8013e (20:413e)
-	db $28, $38
-	db $08, $08
-	db $28, $18
-	db $08, $fc
-	db $50, $18
-	db $04, $fc
-	db $40, $50
-	db $04, $04
-	db $50, $40
-	db $04, $04
-	db $60, $58
-	db $04, $04
-	db $60, $88
-	db $04, $04
-	db $40, $18
-	db $04, $fc
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $38, $98
-	db $00, $00
-	db $50, $00
-	db $04, $00
-; 0x8017e
+MapLevelCoords: ; 80136 (20:4136)
+	dw .North
+	dw .West
+	dw .South
+	dw .East
 
-Data_8017e: ; 8017e (20:417e)
-	db $50, $10
-	db $08, $0c
-	db $38, $38
-	db $08, $0c
-	db $50, $48
-	db $04, $0c
-	db $40, $78
-	db $08, $fc
-	db $70, $48
-	db $04, $0c
-	db $10, $48
-	db $0c, $0c
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $28, $98
-	db $ff, $00
-	db $50, $00
-	db $08, $00
-; 0x801be
+.North:
+	ow_coord  7,  5, 8,  8 ; OWNORTH_THE_TEMPLE
+	ow_coord  3,  5, 8, -4 ; OWNORTH_OUT_OF_THE_WOODS
+	ow_coord  3, 10, 4, -4 ; OWNORTH_THE_PEACEFUL_VILLAGE
+	ow_coord 10,  8, 4,  4 ; OWNORTH_THE_VAST_PLAIN
+	ow_coord  8, 10, 4,  4 ; OWNORTH_BANK_OF_THE_WILD_RIVER
+	ow_coord 11, 12, 4,  4 ; OWNORTH_THE_TIDAL_COAST
+	ow_coord 17, 12, 4,  4 ; OWNORTH_SEA_TURTLE_ROCKS
+	ow_coord  3,  8, 4, -4 ; OWNORTH_JUNCTION
+	ow_coord -1, -1, 0,  0
+	ow_coord -1, -1, 0,  0
+	ow_coord -1, -1, 0,  0
+	ow_coord -1, -1, 0,  0
+	ow_coord -1, -1, 0,  0
+	ow_coord -1, -1, 0,  0
+	ow_coord 19,  7, 0,  0 ; OW_EXIT_RIGHT
+	ow_coord  0, 10, 4,  0 ; OW_EXIT_LEFT
 
-Data_801be: ; 801be (20:41be)
-	db $40, $10
-	db $04, $04
-	db $40, $30
-	db $04, $0c
-	db $40, $68
-	db $04, $0c
-	db $58, $50
-	db $04, $04
-	db $18, $40
-	db $08, $0c
-	db $10, $88
-	db $0c, $04
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $40, $98
-	db $04, $00
-	db $40, $00
-	db $04, $00
-; 0x801fe
+.West:
+	ow_coord  2, 10,  8, 12 ; OWWEST_DESERT_RUINS
+	ow_coord  7,  7,  8, 12 ; OWWEST_THE_VOLCANOS_BASE
+	ow_coord  9, 10,  4, 12 ; OWWEST_THE_POOL_OF_RAIN
+	ow_coord 15,  8,  8, -4 ; OWWEST_A_TOWN_IN_CHAOS
+	ow_coord  9, 14,  4, 12 ; OWWEST_BENEATH_THE_WAVES
+	ow_coord  9,  2, 12, 12 ; OWWEST_THE_WEST_CRATER
+	ow_coord -1, -1,  0,  0
+	ow_coord -1, -1,  0,  0
+	ow_coord -1, -1,  0,  0
+	ow_coord -1, -1,  0,  0
+	ow_coord -1, -1,  0,  0
+	ow_coord -1, -1,  0,  0
+	ow_coord -1, -1,  0,  0
+	ow_coord -1, -1,  0,  0
+	ow_coord 19,  5, -1,  0 ; OW_EXIT_RIGHT
+	ow_coord  0, 10,  8,  0 ; OW_EXIT_LEFT
 
-Data_801fe: ; 801fe (20:41fe)
-	db $50, $10
-	db $08, $0c
-	db $68, $58
-	db $04, $0c
-	db $38, $38
-	db $04, $0c
-	db $48, $58
-	db $08, $0c
-	db $58, $80
-	db $04, $0c
-	db $10, $38
-	db $0c, $0c
-	db $38, $80
-	db $04, $0c
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $ff, $ff
-	db $00, $00
-	db $38, $98
-	db $04, $00
-	db $50, $00
-	db $08, $00
+.South:
+	ow_coord  2,  8,  4,  4 ; OWSOUTH_THE_GRASSLANDS
+	ow_coord  6,  8,  4, 12 ; OWSOUTH_THE_BIG_BRIDGE
+	ow_coord 13,  8,  4, 12 ; OWSOUTH_TOWER_OF_REVIVAL
+	ow_coord 10, 11,  4,  4 ; OWSOUTH_THE_STEEP_CANYON
+	ow_coord  8,  3,  8, 12 ; OWSOUTH_CAVE_OF_FLAMES
+	ow_coord 17,  2, 12,  4 ; OWSOUTH_ABOVE_THE_CLOUDS
+	ow_coord -1, -1,  0,  0
+	ow_coord -1, -1,  0,  0
+	ow_coord -1, -1,  0,  0
+	ow_coord -1, -1,  0,  0
+	ow_coord -1, -1,  0,  0
+	ow_coord -1, -1,  0,  0
+	ow_coord -1, -1,  0,  0
+	ow_coord -1, -1,  0,  0
+	ow_coord 19,  8,  4,  0 ; OW_EXIT_RIGHT
+	ow_coord  0,  8,  4,  0 ; OW_EXIT_LEFT
+
+.East:
+	ow_coord  2, 10,  8, 12 ; OWEAST_THE_STAGNANT_SWAMP
+	ow_coord 11, 13,  4, 12 ; OWEAST_THE_FRIGID_SEA
+	ow_coord  7,  7,  4, 12 ; OWEAST_CASTLE_OF_ILLUSIONS
+	ow_coord 11,  9,  8, 12 ; OWEAST_THE_COLOSSAL_HOLE
+	ow_coord 16, 11,  4, 12 ; OWEAST_THE_WARPED_VOID
+	ow_coord  7,  2, 12, 12 ; OWEAST_THE_EAST_CRATER
+	ow_coord 16,  7,  4, 12 ; OWEAST_FOREST_OF_FEAR
+	ow_coord -1, -1,  0,  0
+	ow_coord -1, -1,  0,  0
+	ow_coord -1, -1,  0,  0
+	ow_coord -1, -1,  0,  0
+	ow_coord -1, -1,  0,  0
+	ow_coord -1, -1,  0,  0
+	ow_coord -1, -1,  0,  0
+	ow_coord 19,  7,  4,  0 ; OW_EXIT_RIGHT
+	ow_coord  0, 10,  8,  0 ; OW_EXIT_LEFT
 ; 0x8023e
 
 Data_8023e: ; 8023e (20:423e)
-	dw .North ; NORTH
-	dw .West ; WEST
-	dw .South ; SOUTH
-	dw .East ; EAST
+	dw .North
+	dw .West
+	dw .South
+	dw .East
 
 .North
 ; OWNORTH_THE_TEMPLE
@@ -762,7 +702,7 @@ Func_803e6: ; 803e6 (20:43e6)
 	ld a, [wTopBarState]
 	and a
 	ret nz
-	ld a, [wMapSideLevelIndex]
+	ld a, [wMapSideLevelID]
 	cp OW_EXIT_RIGHT
 	ret nc
 	jp Func_15dc
@@ -795,11 +735,11 @@ InitOverworld: ; 803f9 (20:43f9)
 	cp LEVEL_GOLF_BUILDING
 	jp nc, .GolfBuilding
 	ld b, a
-	call GetMapSideLevelIndex
+	call GetMapLevelID
 	ld a, b
 	ld [wNextMapSide], a
 	ld a, d
-	ld [wMapSideLevelIndex], a
+	ld [wMapSideLevelID], a
 .skip_get_level_index
 	call Func_80b29
 
@@ -836,7 +776,7 @@ InitOverworld: ; 803f9 (20:43f9)
 
 .asm_80480
 	ld a, [w2d025]
-	call Func_81b0d
+	call GetCutsceneOWParams
 	jr z, .asm_8048a
 	jr .asm_80497
 
@@ -874,7 +814,7 @@ InitOverworld: ; 803f9 (20:43f9)
 .GolfBuilding
 	xor a
 	ld [wNextMapSide], a
-	ld [wMapSideLevelIndex], a
+	ld [wMapSideLevelID], a
 	ld a, SST_OVERWORLD_20
 	ld [wSubState], a
 	call Func_803e6
@@ -892,8 +832,8 @@ InitOverworld: ; 803f9 (20:43f9)
 	ld a, [wTopBarState]
 	and a
 	ret nz
-	ld a, [w2d028]
-	cp $04
+	ld a, [wOWCutsceneAction]
+	cp SPECIAL_ACTION
 	ret z
 	ld a, [wLastTransitionParam]
 	cp TRANSITION_EPILOGUE_NOT_PERFECT
@@ -926,22 +866,23 @@ Func_804f7: ; 804f7 (20:44f7)
 	ld [w2d011], a
 	ld a, [w2d015]
 	ld [w2d018], a
-	ld a, [w2d017]
-	ld [w2d019], a
-	ld a, [w2d028]
-	ld [w2d029], a
-	ld a, [w2d026 + 0]
-	ld [w2d02a + 0], a
-	ld a, [w2d026 + 1]
-	ld [w2d02a + 1], a
+	ld a, [wCutsceneActionParam]
+	ld [wTempUnlockableConnectionID], a
+	ld a, [wOWCutsceneAction]
+	ld [wTempOWCutsceneAction], a
+	ld a, [wCutsceneOWParamsPtr + 0]
+	ld [wTempCutsceneOWParamsPtr + 0], a
+	ld a, [wCutsceneOWParamsPtr + 1]
+	ld [wTempCutsceneOWParamsPtr + 1], a
+
 	ld a, [w2d016]
 	ld [wCurMapSide], a
 	jumptable
 
-	dw Func_80851
-	dw Func_8091e
-	dw Func_80930
-	dw Func_8094e
+	dw Func_80851 ; NORTH
+	dw Func_8091e ; WEST
+	dw Func_80930 ; SOUTH
+	dw Func_8094e ; EAST
 ; 0x80540
 
 Func_80540: ; 80540 (20:4540)
@@ -1117,7 +1058,7 @@ Func_8065e: ; 8065e (20:465e)
 	call WriteBGMapFromWRAM
 
 	call Func_8212c
-	ld a, [wMapSideLevelIndex]
+	ld a, [wMapSideLevelID]
 	ld [w2d067], a
 	ld [w2d068], a
 	xor a
@@ -1180,7 +1121,7 @@ Func_8065e: ; 8065e (20:465e)
 	ld a, [wTopBarState]
 	cp TOPBARST_INPUT
 	jr nz, .asm_80809
-	call Func_82242.InitTopBarButtons
+	call UpdateTopBar.InitTopBarButtons
 	hlbgcoord 0, 21, wAttrmap
 	debgcoord 0, 30
 	ld b, 2 * BG_MAP_WIDTH
@@ -1200,7 +1141,7 @@ Func_8065e: ; 8065e (20:465e)
 
 .asm_80809
 	call LoadLevelNameIfValid
-	ld a, [wMapSideLevelIndex]
+	ld a, [wMapSideLevelID]
 	cp OW_EXIT_RIGHT
 	ld b, $01
 	jr c, .asm_80821
@@ -1221,7 +1162,7 @@ Func_8065e: ; 8065e (20:465e)
 
 	xor a
 	ld [w2d073], a
-	ld [w2d055], a
+	ld [wDayNightTransitionState], a
 	ld [w2d013], a
 
 	ld a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
@@ -1262,16 +1203,16 @@ Func_8086f: ; 8086f (20:486f)
 	ld [wSCX], a
 	ld a, [w2d018]
 	ld [w2d015], a
-	ld a, [w2d019]
-	ld [w2d017], a
-	ld a, [w2d029]
-	ld [w2d028], a
+	ld a, [wTempUnlockableConnectionID]
+	ld [wCutsceneActionParam], a
+	ld a, [wTempOWCutsceneAction]
+	ld [wOWCutsceneAction], a
 	ld a, [wCurMapSide]
 	ld [w2d016], a
-	ld a, [w2d02a + 0]
-	ld [w2d026 + 0], a
-	ld a, [w2d02a + 1]
-	ld [w2d026 + 1], a
+	ld a, [wTempCutsceneOWParamsPtr + 0]
+	ld [wCutsceneOWParamsPtr + 0], a
+	ld a, [wTempCutsceneOWParamsPtr + 1]
+	ld [wCutsceneOWParamsPtr + 1], a
 
 	farcall Func_b4a37
 	call Func_80bc9
@@ -1307,7 +1248,7 @@ Func_8086f: ; 8086f (20:486f)
 	call SetCompassSprite
 	xor a
 	ld [w2d073], a
-	ld [w2d055], a
+	ld [wDayNightTransitionState], a
 	ld [w2d013], a
 
 	ld a, [wCurMapSide]
@@ -1437,25 +1378,25 @@ Func_80aa5: ; 80aa5 (20:4aa5)
 ; 0x80ab5
 
 Func_80ab5: ; 80ab5 (20:4ab5)
-	call Func_80ac8
+	call .Func_80ac8
 	farcall Func_8540a
 	ret
-; 0x80ac8
 
-Func_80ac8: ; 80ac8 (20:4ac8)
-	xor a
+.Func_80ac8:
+	xor a ; FALSE
 	ld [w2dfff], a
-	ld a, [w2d028]
-	cp $01
+	ld a, [wOWCutsceneAction]
+	cp UNLOCK_LEVEL
 	ret nz
 	ld hl, w2d016
 	ld a, [hli]
-	ld c, [hl] ; w2d017
-	ld hl, Data_80000
+	ld c, [hl] ; wCutsceneActionParam
+	ld hl, UnlockableConnections
 	call GetCthEntryFromAthTable
 	ld a, [hl]
-	cp $0e
+	cp OW_EXIT_RIGHT
 	ret c
+	; either OW_EXIT_RIGHT or OW_EXIT_LEFT
 	ld a, TRUE
 	ld [w2dfff], a
 	ret
@@ -1869,7 +1810,7 @@ Func_80d92: ; 80d92 (20:4d92)
 Func_80db4: ; 80db4 (20:4db4)
 	ld a, c
 	push de
-	call Func_810f0
+	call GetMapLevelCoords
 	pop de
 	ld a, [hli]
 	ld [de], a
@@ -1918,9 +1859,10 @@ UpdateTempleScene: ; 80e23 (20:4e23)
 
 Func_80e89: ; 80e89 (20:4e89)
 	call ProcessDPadRepeat
-	farcall Func_b791e
+	farcall UpdateMapSideOWAnimations
 	farcall UpdateCommonOWAnimations
-	call Func_82242
+
+	call UpdateTopBar
 	ld a, [wTopBarState]
 	and a
 	jp nz, Func_81055
@@ -1950,13 +1892,13 @@ Func_80e89: ; 80e89 (20:4e89)
 Func_80ee7: ; 80ee7 (20:4ee7)
 	call Func_8212c
 	call GetOWAllowedDPadInput
-	ld a, [wMapSideLevelIndex]
+	ld a, [wMapSideLevelID]
 	ld [w2d067], a
 	ld [w2d068], a
 	xor a
 	ld [w2d0d5], a
 	ld [w2d0e0], a
-	ld [w2d055], a
+	ld [wDayNightTransitionState], a
 	call Func_81055
 	ld hl, w2d014
 	xor a
@@ -1976,9 +1918,9 @@ Func_80f0d: ; 80f0d (20:4f0d)
 	inc [hl]
 	ret
 .asm_80f1f
-	farcall Func_84a40
+	farcall DayNightTransition
 	call Func_81055
-	ld a, [w2d055]
+	ld a, [wDayNightTransitionState]
 	and a
 	ret nz
 	di
@@ -1994,7 +1936,7 @@ Func_80f3c: ; 80f3c (20:4f3c)
 	call GetOWAllowedDPadInput
 	ld c, $00
 	ld b, $00
-	ld a, [wMapSideLevelIndex]
+	ld a, [wMapSideLevelID]
 	set 5, c
 	cp OW_EXIT_RIGHT
 	jr z, .is_exit
@@ -2002,7 +1944,7 @@ Func_80f3c: ; 80f3c (20:4f3c)
 	set 4, c
 	cp OW_EXIT_LEFT
 	jr z, .is_exit
-	call LoadOWLevelFromLevelIndex
+	call LoadMapLevelFromLevelIndex
 	farcall Func_9aab5
 	xor a
 	ld [w2d014], a
@@ -2066,7 +2008,7 @@ Func_80fb8: ; 80fb8 (20:4fb8)
 LoadLevelNameIfValid: ; 80fc8 (20:4fc8)
 	ld a, [wNextMapSide]
 	ld b, a
-	ld a, [wMapSideLevelIndex]
+	ld a, [wMapSideLevelID]
 	ld d, a
 	cp $08
 	ret nc
@@ -2075,7 +2017,7 @@ LoadLevelNameIfValid: ; 80fc8 (20:4fc8)
 
 Func_80fd6: ; 80fd6 (20:4fd6)
 	call Func_81055
-	ld a, [wMapSideLevelIndex]
+	ld a, [wMapSideLevelID]
 	cp OW_EXIT_RIGHT
 	jr nc, .asm_80ff2
 	farcall Func_85271
@@ -2090,7 +2032,7 @@ Func_80fd6: ; 80fd6 (20:4fd6)
 Func_80ff7: ; 80ff7 (20:4ff7)
 	call Func_81240
 	jr c, Func_81055
-	ld a, [w2d055]
+	ld a, [wDayNightTransitionState]
 	and a
 	jr nz, Func_81055
 	ld a, [wJoypadDown]
@@ -2145,7 +2087,7 @@ Func_81055: ; 81055 (20:5055)
 ; 0x81077
 
 Func_81077: ; 81077 (20:5077)
-	ld hl, wMapSideLevelIndex
+	ld hl, wMapSideLevelID
 	ld a, [wNextMapSide]
 	or [hl]
 	ret nz
@@ -2191,8 +2133,9 @@ Func_810bb: ; 810bb (20:50bb)
 	ld [w2d06d], a
 	ld a, [w2d06c]
 	ld [w2d06e], a
+
 	ld a, [w2d068]
-	call Func_810f0
+	call GetMapLevelCoords
 	ld a, [hli]
 	ld b, a
 	ld a, [hli]
@@ -2203,6 +2146,7 @@ Func_810bb: ; 810bb (20:50bb)
 	ld a, [hli]
 	add c
 	ld [w2d070], a
+
 	ld bc, w2d071
 	call Func_810fc
 	call Func_821a1
@@ -2214,11 +2158,12 @@ Func_810bb: ; 810bb (20:50bb)
 	ret
 ; 0x810f0
 
-Func_810f0: ; 810f0 (20:50f0)
+; a = map side level index
+GetMapLevelCoords: ; 810f0 (20:50f0)
 	add a ; *2
 	ld c, a
 	ld a, [wCurMapSide]
-	ld hl, Data_80136
+	ld hl, MapLevelCoords
 	call GetCthEntryFromAthTable
 	ret
 ; 0x810fc
@@ -2336,7 +2281,7 @@ Func_8115c: ; 8115c (20:515c)
 
 .asm_811a0
 	ld a, [w2d068]
-	ld [wMapSideLevelIndex], a
+	ld [wMapSideLevelID], a
 	cp OW_EXIT_RIGHT
 	jr nc, .asm_811b1
 	ld a, $02
@@ -2360,7 +2305,7 @@ Func_811cf: ; 811cf (20:51cf)
 	jr c, .asm_811fc
 	xor a
 	ld [hl], a
-	ld a, [wMapSideLevelIndex]
+	ld a, [wMapSideLevelID]
 	ld b, $01
 	ld c, $a8
 	cp OW_EXIT_RIGHT
@@ -2385,7 +2330,7 @@ Func_811cf: ; 811cf (20:51cf)
 
 Func_81200: ; 81200 (20:5200)
 	call Func_81055
-	ld a, [wMapSideLevelIndex]
+	ld a, [wMapSideLevelID]
 	ld b, 1
 	cp OW_EXIT_RIGHT
 	jr z, .is_exit
@@ -2398,9 +2343,9 @@ Func_81200: ; 81200 (20:5200)
 	add b
 	and $3
 	ld [wNextMapSide], a
-	ld a, [wMapSideLevelIndex]
+	ld a, [wMapSideLevelID]
 	add b
-	ld [wMapSideLevelIndex], a
+	ld [wMapSideLevelID], a
 	ld [w2d068], a
 	ld a, [wNextMapSide]
 	bit 1, a
@@ -2419,7 +2364,7 @@ Func_81200: ; 81200 (20:5200)
 ; 0x81240
 
 Func_81240: ; 81240 (20:5240)
-	ld a, [w2d055]
+	ld a, [wDayNightTransitionState]
 	and a
 	jr nz, .no_carry
 	ld a, [wOWLevel]
@@ -2428,7 +2373,7 @@ Func_81240: ; 81240 (20:5240)
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jr z, .no_carry
-	call LoadOWLevelFromLevelIndex
+	call LoadMapLevelFromLevelIndex
 	ld a, [wOWLevel]
 	and a
 	jr z, .temple
@@ -2456,7 +2401,7 @@ Func_81240: ; 81240 (20:5240)
 ; output:
 ; - d = map side level index
 ; - b and c = map side
-GetMapSideLevelIndex: ; 81278 (20:5278)
+GetMapLevelID: ; 81278 (20:5278)
 ; loop until a larger value than b is found
 	ld hl, MapSideInitialLevels
 	ld c, -1
@@ -2477,10 +2422,10 @@ GetMapSideLevelIndex: ; 81278 (20:5278)
 	ret
 ; 0x8128a
 
-; converts the level index in wMapSideLevelIndex
+; converts the level index in wMapSideLevelID
 ; to a valid OW level value corresponding
 ; to the map side in wNextMapSide
-LoadOWLevelFromLevelIndex: ; 8128a (20:528a)
+LoadMapLevelFromLevelIndex: ; 8128a (20:528a)
 	ld a, [wNextMapSide]
 	ld c, a
 	and a
@@ -2489,13 +2434,13 @@ LoadOWLevelFromLevelIndex: ; 8128a (20:528a)
 	ld b, $00
 	ld hl, MapSideInitialLevels
 	add hl, bc
-	ld a, [wMapSideLevelIndex]
+	ld a, [wMapSideLevelID]
 	add [hl]
 	ld [wOWLevel], a
 	ret
 
 .north
-	ld a, [wMapSideLevelIndex]
+	ld a, [wMapSideLevelID]
 	cp OWNORTH_JUNCTION
 	jr c, .get_ow_level
 	ld a, $80
@@ -2567,13 +2512,13 @@ Func_812c0: ; 812c0 (20:52c0)
 
 .Func_8132a
 	ld a, [w2dffe]
-	call Func_810f0
+	call GetMapLevelCoords
 	ld a, [hli]
 	ld [w2d06b], a
 	ld a, [hl]
 	ld [w2d06c], a
 	ld hl, w2d06b
-	call Func_3ad7
+	call GetOWCoordInTilemap
 	ld [hl], $7b
 	dec h
 	dec h
@@ -2661,7 +2606,7 @@ GetMapSideAndLevelForNextTreasure: ; 813bc (20:53bc)
 	ld a, [wNextTreasure]
 	ld c, a
 	farcall GetLevelThatContainsTreasure
-	call GetMapSideLevelIndex
+	call GetMapLevelID
 	ret
 ; 0x813ef
 
@@ -3139,14 +3084,15 @@ GetCutsceneWithTreasure: ; 81891 (20:5891)
 
 Func_818ad: ; 818ad (20:58ad)
 	farcall UpdateCommonOWAnimations
-	farcall Func_b791e
+	farcall UpdateMapSideOWAnimations
+
 	ld a, [wTopBarState]
 	and a
-	jr z, .asm_818d9
+	jr z, .no_top_bar
 	ld a, [wJoypadPressed]
 	bit B_BUTTON_F, a
 	jp nz, Func_81931
-.asm_818d9
+.no_top_bar
 	ld hl, w2d014
 	inc [hl]
 	ld a, [w2d013]
@@ -3171,7 +3117,7 @@ Func_818ed: ; 818ed (20:58ed)
 
 Func_818f6: ; 818f6 (20:58f6)
 	call Func_8195d
-	ld a, [w2d017]
+	ld a, [wCutsceneActionParam]
 	and a
 	ret nz
 	jr Func_818ed
@@ -3181,9 +3127,9 @@ Func_81900: ; 81900 (20:5900)
 	ld a, [w2d014]
 	cp $04
 	ret c
-	ld hl, w2d026
+	ld hl, wCutsceneOWParamsPtr
 	call GetByteFromPointerInHL
-	call Func_81b13
+	call GetCutsceneOWParams_GotPtr
 	jr z, Func_81931
 	ld a, [wCurMapSide]
 	ld b, a
@@ -3208,8 +3154,8 @@ Func_81931: ; 81931 (20:5931)
 	xor a
 	ld [wLastTransitionParam], a
 	ld [w2d025], a
-	ld [w2d028], a
-	ld [w2d029], a
+	ld [wOWCutsceneAction], a
+	ld [wTempOWCutsceneAction], a
 	ld a, CUTSCENE_5A
 	cp b
 	jr z, .asm_81957
@@ -3224,18 +3170,17 @@ Func_81931: ; 81931 (20:5931)
 ; 0x8195d
 
 Func_8195d: ; 8195d (20:595d)
-	ld a, [w2d028]
+	ld a, [wOWCutsceneAction]
 	jumptable
-	dw Func_8196b
-	dw Func_829e2
-	dw Func_8196e
-	dw Func_82c33
-	dw Func_8196e
-; 0x8196b
 
-Func_8196b: ; 8196b (20:596b)
+	dw .InvalidAction
+	dw Func_829e2 ; UNLOCK_LEVEL
+	dw Func_8196e ; DO_OW_FUNC
+	dw Func_82c33 ; HIGHLIGHT_LEVEL
+	dw Func_8196e ; SPECIAL_ACTION
+
+.InvalidAction:
 	debug_nop
-; 0x8196e
 
 Func_8196e: ; 8196e (20:596e)
 	farcall Func_b514a
@@ -3808,526 +3753,523 @@ CutsceneTreasures: ; 819fb (20:59fb)
 
 ; input:
 ; - a = CUTSCENE_* constant
-Func_81b0d: ; 81b0d (20:5b0d)
-	ld hl, Data_81b2b
+GetCutsceneOWParams: ; 81b0d (20:5b0d)
+	ld hl, CutsceneOWParams
 	call GetPointerFromTableHL
-;	fallthrough
-
-Func_81b13: ; 81b13 (20:5b13)
+GetCutsceneOWParams_GotPtr: ; 81b13 (20:5b13)
 	ld a, [hli]
-	ld [w2d028], a
+	ld [wOWCutsceneAction], a
 	cp $80
 	ret z ; finished
 	ld a, [hli]
-	ld [w2d016], a
+	ld [w2d016], a ; map side
 	ld a, [hli]
-	ld [w2d017], a
+	ld [wCutsceneActionParam], a
 	ld a, l
-	ld [w2d026 + 0], a
+	ld [wCutsceneOWParamsPtr + 0], a
 	ld a, h
-	ld [w2d026 + 1], a
+	ld [wCutsceneOWParamsPtr + 1], a
 	ret
 ; 0x81b2b
 
-Data_81b2b: ; 81b2b (20:5b2b)
-	dw Data_81be1 ; CUTSCENE_00
-	dw Data_81be2 ; CUTSCENE_01
-	dw Data_81be6 ; CUTSCENE_02
-	dw Data_81bf0 ; CUTSCENE_03
-	dw Data_81bfa ; CUTSCENE_04
-	dw Data_81c01 ; CUTSCENE_05
-	dw Data_81c08 ; CUTSCENE_06
-	dw Data_81c12 ; CUTSCENE_07
-	dw Data_81c1c ; CUTSCENE_08
-	dw Data_81c23 ; CUTSCENE_09
-	dw Data_81c30 ; CUTSCENE_0A
-	dw Data_81c37 ; CUTSCENE_0B
-	dw Data_81c3e ; CUTSCENE_0C
-	dw Data_81c48 ; CUTSCENE_0D
-	dw Data_81c52 ; CUTSCENE_0E
-	dw Data_81c59 ; CUTSCENE_0F
-	dw Data_81c60 ; CUTSCENE_10
-	dw Data_81c6a ; CUTSCENE_11
-	dw Data_81c71 ; CUTSCENE_12
-	dw Data_81c7b ; CUTSCENE_13
-	dw Data_81c85 ; CUTSCENE_14
-	dw Data_81c92 ; CUTSCENE_15
-	dw Data_81c96 ; CUTSCENE_16
-	dw Data_81ca3 ; CUTSCENE_17
-	dw Data_81caa ; CUTSCENE_18
-	dw Data_81cb4 ; CUTSCENE_19
-	dw Data_81cbb ; CUTSCENE_1A
-	dw Data_81cc8 ; CUTSCENE_1B
-	dw Data_81cd5 ; CUTSCENE_1C
-	dw Data_81cdf ; CUTSCENE_1D
-	dw Data_81ce6 ; CUTSCENE_1E
-	dw Data_81ced ; CUTSCENE_1F
-	dw Data_81cf1 ; CUTSCENE_20
-	dw Data_81cfb ; CUTSCENE_21
-	dw Data_81d02 ; CUTSCENE_22
-	dw Data_81d06 ; CUTSCENE_23
-	dw Data_81d10 ; CUTSCENE_24
-	dw Data_81d14 ; CUTSCENE_25
-	dw Data_81d1b ; CUTSCENE_26
-	dw Data_81d1f ; CUTSCENE_27
-	dw Data_81d23 ; CUTSCENE_28
-	dw Data_81d24 ; CUTSCENE_29
-	dw Data_81d28 ; CUTSCENE_2A
-	dw Data_81d29 ; CUTSCENE_2B
-	dw Data_81d2a ; CUTSCENE_2C
-	dw Data_81d2e ; CUTSCENE_2D
-	dw Data_81d2f ; CUTSCENE_2E
-	dw Data_81d30 ; CUTSCENE_2F
-	dw Data_81d34 ; CUTSCENE_30
-	dw Data_81d3b ; CUTSCENE_31
-	dw Data_81d3c ; CUTSCENE_32
-	dw Data_81d40 ; CUTSCENE_33
-	dw Data_81d41 ; CUTSCENE_34
-	dw Data_81d42 ; CUTSCENE_35
-	dw Data_81d46 ; CUTSCENE_36
-	dw Data_81d47 ; CUTSCENE_37
-	dw Data_81d54 ; CUTSCENE_38
-	dw Data_81d5b ; CUTSCENE_39
-	dw Data_81d5f ; CUTSCENE_3A
-	dw Data_81d63 ; CUTSCENE_3B
-	dw Data_81d67 ; CUTSCENE_3C
-	dw Data_81d6b ; CUTSCENE_3D
-	dw Data_81d6f ; CUTSCENE_3E
-	dw Data_81d70 ; CUTSCENE_3F
-	dw Data_81d71 ; CUTSCENE_40
-	dw Data_81d72 ; CUTSCENE_41
-	dw Data_81d73 ; CUTSCENE_42
-	dw Data_81d77 ; CUTSCENE_43
-	dw Data_81d7b ; CUTSCENE_44
-	dw Data_81d82 ; CUTSCENE_45
-	dw Data_81d83 ; CUTSCENE_46
-	dw Data_81d84 ; CUTSCENE_47
-	dw Data_81d85 ; CUTSCENE_48
-	dw Data_81d86 ; CUTSCENE_49
-	dw Data_81d8a ; CUTSCENE_4A
-	dw Data_81d8e ; CUTSCENE_4B
-	dw Data_81d92 ; CUTSCENE_4C
-	dw Data_81d99 ; CUTSCENE_4D
-	dw Data_81d9a ; CUTSCENE_4E
-	dw Data_81d9e ; CUTSCENE_4F
-	dw Data_81da8 ; CUTSCENE_50
-	dw Data_81da9 ; CUTSCENE_51
-	dw Data_81db0 ; CUTSCENE_52
-	dw Data_81db1 ; CUTSCENE_53
-	dw Data_81db2 ; CUTSCENE_54
-	dw Data_81db6 ; CUTSCENE_55
-	dw Data_81dba ; CUTSCENE_56
-	dw Data_81dbe ; CUTSCENE_57
-	dw Data_81dc5 ; CUTSCENE_58
-	dw Data_81dc9 ; CUTSCENE_59
-	dw Data_81dca ; CUTSCENE_5A
-; 0x81be1
-
-Data_81be1: ; 81be1 (21:5be1)
-	db $80
-
-Data_81be2: ; 81be2 (21:5be2)
-	db $01, NORTH, $01
-	db $80
-
-Data_81be6: ; 81be6 (21:5be6)
-	db $02, NORTH, $01
-	db $01, NORTH, $02
-	db $01, NORTH, $03
+CutsceneOWParams: ; 81b2b (20:5b2b)
+	dw .cutscene00
+	dw .cutscene01
+	dw .cutscene02
+	dw .cutscene03
+	dw .cutscene04
+	dw .cutscene05
+	dw .cutscene06
+	dw .cutscene07
+	dw .cutscene08
+	dw .cutscene09
+	dw .cutscene0a
+	dw .cutscene0b
+	dw .cutscene0c
+	dw .cutscene0d
+	dw .cutscene0e
+	dw .cutscene0f
+	dw .cutscene10
+	dw .cutscene11
+	dw .cutscene12
+	dw .cutscene13
+	dw .cutscene14
+	dw .cutscene15
+	dw .cutscene16
+	dw .cutscene17
+	dw .cutscene18
+	dw .cutscene19
+	dw .cutscene1a
+	dw .cutscene1b
+	dw .cutscene1c
+	dw .cutscene1d
+	dw .cutscene1e
+	dw .cutscene1f
+	dw .cutscene20
+	dw .cutscene21
+	dw .cutscene22
+	dw .cutscene23
+	dw .cutscene24
+	dw .cutscene25
+	dw .cutscene26
+	dw .cutscene27
+	dw .cutscene28
+	dw .cutscene29
+	dw .cutscene2a
+	dw .cutscene2b
+	dw .cutscene2c
+	dw .cutscene2d
+	dw .cutscene2e
+	dw .cutscene2f
+	dw .cutscene30
+	dw .cutscene31
+	dw .cutscene32
+	dw .cutscene33
+	dw .cutscene34
+	dw .cutscene35
+	dw .cutscene36
+	dw .cutscene37
+	dw .cutscene38
+	dw .cutscene39
+	dw .cutscene3a
+	dw .cutscene3b
+	dw .cutscene3c
+	dw .cutscene3d
+	dw .cutscene3e
+	dw .cutscene3f
+	dw .cutscene40
+	dw .cutscene41
+	dw .cutscene42
+	dw .cutscene43
+	dw .cutscene44
+	dw .cutscene45
+	dw .cutscene46
+	dw .cutscene47
+	dw .cutscene48
+	dw .cutscene49
+	dw .cutscene4a
+	dw .cutscene4b
+	dw .cutscene4c
+	dw .cutscene4d
+	dw .cutscene4e
+	dw .cutscene4f
+	dw .cutscene50
+	dw .cutscene51
+	dw .cutscene52
+	dw .cutscene53
+	dw .cutscene54
+	dw .cutscene55
+	dw .cutscene56
+	dw .cutscene57
+	dw .cutscene58
+	dw .cutscene59
+	dw .cutscene5a
+
+.cutscene00
+	db $80
+
+.cutscene01
+	db UNLOCK_LEVEL, NORTH, NORTHCONN_1
+	db $80
+
+.cutscene02
+	db DO_OW_FUNC, NORTH, NOWFUNC_CUT_TREE
+	db UNLOCK_LEVEL, NORTH, NORTHCONN_2
+	db UNLOCK_LEVEL, NORTH, NORTHCONN_3
 	db $80
 
-Data_81bf0: ; 81bf0 (21:5bf0)
-	db $02, NORTH, $02
-	db $01, NORTH, $07
-	db $01, WEST, $07
+.cutscene03
+	db DO_OW_FUNC, NORTH, NOWFUNC_OPEN_GATE
+	db UNLOCK_LEVEL, NORTH, NORTHCONN_7
+	db UNLOCK_LEVEL, WEST, WESTCONN_7
 	db $80
 
-Data_81bfa: ; 81bfa (21:5bfa)
-	db $02, WEST, $02
-	db $01, WEST, $01
+.cutscene04
+	db DO_OW_FUNC, WEST, $02
+	db UNLOCK_LEVEL, WEST, WESTCONN_1
 	db $80
 
-Data_81c01: ; 81c01 (21:5c01)
-	db $03, NORTH, $01
-	db $03, NORTH, $03
+.cutscene05
+	db HIGHLIGHT_LEVEL, NORTH, $01
+	db HIGHLIGHT_LEVEL, NORTH, $03
 	db $80
 
-Data_81c08: ; 81c08 (21:5c08)
-	db $02, WEST, $01
-	db $01, WEST, $02
-	db $01, WEST, $03
+.cutscene06
+	db DO_OW_FUNC, WEST, $01
+	db UNLOCK_LEVEL, WEST, WESTCONN_2
+	db UNLOCK_LEVEL, WEST, WESTCONN_3
 	db $80
 
-Data_81c12: ; 81c12 (21:5c12)
-	db $02, WEST, $03
-	db $01, WEST, $06
-	db $01, SOUTH, $07
+.cutscene07
+	db DO_OW_FUNC, WEST, $03
+	db UNLOCK_LEVEL, WEST, WESTCONN_6
+	db UNLOCK_LEVEL, SOUTH, SOUTHCONN_7
 	db $80
 
-Data_81c1c: ; 81c1c (21:5c1c)
-	db $02, SOUTH, $03
-	db $01, SOUTH, $01
+.cutscene08
+	db DO_OW_FUNC, SOUTH, $03
+	db UNLOCK_LEVEL, SOUTH, SOUTHCONN_1
 	db $80
 
-Data_81c23: ; 81c23 (21:5c23)
-	db $02, SOUTH, $01
-	db $02, NORTH, $04
-	db $02, WEST, $04
-	db $02, SOUTH, $02
+.cutscene09
+	db DO_OW_FUNC, SOUTH, $01
+	db DO_OW_FUNC, NORTH, $04
+	db DO_OW_FUNC, WEST, $04
+	db DO_OW_FUNC, SOUTH, $02
 	db $80
 
-Data_81c30: ; 81c30 (21:5c30)
-	db $02, SOUTH, $05
-	db $01, SOUTH, $02
+.cutscene0a
+	db DO_OW_FUNC, SOUTH, $05
+	db UNLOCK_LEVEL, SOUTH, SOUTHCONN_2
 	db $80
 
-Data_81c37: ; 81c37 (21:5c37)
-	db $03, WEST, $03
-	db $03, SOUTH, $02
+.cutscene0b
+	db HIGHLIGHT_LEVEL, WEST, $03
+	db HIGHLIGHT_LEVEL, SOUTH, $02
 	db $80
 
-Data_81c3e: ; 81c3e (21:5c3e)
-	db $02, SOUTH, $06
-	db $01, SOUTH, $06
-	db $01, EAST, $08
+.cutscene0c
+	db DO_OW_FUNC, SOUTH, $06
+	db UNLOCK_LEVEL, SOUTH, SOUTHCONN_6
+	db UNLOCK_LEVEL, EAST, EASTCONN_8
 	db $80
 
-Data_81c48: ; 81c48 (21:5c48)
-	db $02, SOUTH, $07
-	db $02, WEST, $05
-	db $02, NORTH, $05
+.cutscene0d
+	db DO_OW_FUNC, SOUTH, $07
+	db DO_OW_FUNC, WEST, $05
+	db DO_OW_FUNC, NORTH, $05
 	db $80
 
-Data_81c52: ; 81c52 (21:5c52)
-	db $02, EAST, $01
-	db $01, EAST, $01
+.cutscene0e
+	db DO_OW_FUNC, EAST, $01
+	db UNLOCK_LEVEL, EAST, EASTCONN_1
 	db $80
 
-Data_81c59: ; 81c59 (21:5c59)
-	db $03, WEST, $04
-	db $03, WEST, $01
+.cutscene0f
+	db HIGHLIGHT_LEVEL, WEST, $04
+	db HIGHLIGHT_LEVEL, WEST, $01
 	db $80
 
-Data_81c60: ; 81c60 (21:5c60)
-	db $02, NORTH, $07
-	db $01, NORTH, $04
-	db $01, NORTH, $05
+.cutscene10
+	db DO_OW_FUNC, NORTH, $07
+	db UNLOCK_LEVEL, NORTH, NORTHCONN_4
+	db UNLOCK_LEVEL, NORTH, NORTHCONN_5
 	db $80
 
-Data_81c6a: ; 81c6a (21:5c6a)
-	db $02, SOUTH, $04
-	db $01, SOUTH, $03
+.cutscene11
+	db DO_OW_FUNC, SOUTH, $04
+	db UNLOCK_LEVEL, SOUTH, SOUTHCONN_3
 	db $80
 
-Data_81c71: ; 81c71 (21:5c71)
-	db $03, NORTH, $05
-	db $03, EAST, $02
-	db $03, SOUTH, $02
+.cutscene12
+	db HIGHLIGHT_LEVEL, NORTH, $05
+	db HIGHLIGHT_LEVEL, EAST, $02
+	db HIGHLIGHT_LEVEL, SOUTH, $02
 	db $80
 
-Data_81c7b: ; 81c7b (21:5c7b)
-	db $02, WEST, $06
-	db $02, SOUTH, $08
-	db $02, EAST, $02
+.cutscene13
+	db DO_OW_FUNC, WEST, $06
+	db DO_OW_FUNC, SOUTH, $08
+	db DO_OW_FUNC, EAST, $02
 	db $80
 
-Data_81c85: ; 81c85 (21:5c85)
-	db $02, WEST, $07
-	db $02, EAST, $05
-	db $01, WEST, $04
-	db $01, EAST, $03
+.cutscene14
+	db DO_OW_FUNC, WEST, $07
+	db DO_OW_FUNC, EAST, $05
+	db UNLOCK_LEVEL, WEST, WESTCONN_4
+	db UNLOCK_LEVEL, EAST, SOUTHCONN_3
 	db $80
 
-Data_81c92: ; 81c92 (21:5c92)
-	db $03, SOUTH, $03
+.cutscene15
+	db HIGHLIGHT_LEVEL, SOUTH, $03
 	db $80
 
-Data_81c96: ; 81c96 (21:5c96)
-	db $02, NORTH, $03
-	db $03, NORTH, $04
-	db $03, EAST, $04
-	db $01, NORTH, $06
+.cutscene16
+	db DO_OW_FUNC, NORTH, $03
+	db HIGHLIGHT_LEVEL, NORTH, $04
+	db HIGHLIGHT_LEVEL, EAST, $04
+	db UNLOCK_LEVEL, NORTH, NORTHCONN_6
 	db $80
 
-Data_81ca3: ; 81ca3 (21:5ca3)
-	db $02, SOUTH, $09
-	db $01, SOUTH, $04
+.cutscene17
+	db DO_OW_FUNC, SOUTH, $09
+	db UNLOCK_LEVEL, SOUTH, SOUTHCONN_4
 	db $80
 
-Data_81caa: ; 81caa (21:5caa)
-	db $03, SOUTH, $02
-	db $03, EAST, $02
-	db $03, NORTH, $06
+.cutscene18
+	db HIGHLIGHT_LEVEL, SOUTH, $02
+	db HIGHLIGHT_LEVEL, EAST, $02
+	db HIGHLIGHT_LEVEL, NORTH, $06
 	db $80
 
-Data_81cb4: ; 81cb4 (21:5cb4)
-	db $02, EAST, $03
-	db $01, EAST, $02
+.cutscene19
+	db DO_OW_FUNC, EAST, $03
+	db UNLOCK_LEVEL, EAST, EASTCONN_2
 	db $80
 
-Data_81cbb: ; 81cbb (21:5cbb)
-	db $03, NORTH, $06
-	db $03, WEST, $06
-	db $03, WEST, $01
-	db $03, NORTH, $02
+.cutscene1a
+	db HIGHLIGHT_LEVEL, NORTH, $06
+	db HIGHLIGHT_LEVEL, WEST, $06
+	db HIGHLIGHT_LEVEL, WEST, $01
+	db HIGHLIGHT_LEVEL, NORTH, $02
 	db $80
 
-Data_81cc8: ; 81cc8 (21:5cc8)
-	db $02, EAST, $09
-	db $03, EAST, $04
-	db $03, EAST, $02
-	db $03, EAST, $03
+.cutscene1b
+	db DO_OW_FUNC, EAST, $09
+	db HIGHLIGHT_LEVEL, EAST, $04
+	db HIGHLIGHT_LEVEL, EAST, $02
+	db HIGHLIGHT_LEVEL, EAST, $03
 	db $80
 
-Data_81cd5: ; 81cd5 (21:5cd5)
-	db $03, SOUTH, $01
-	db $03, EAST, $01
-	db $03, SOUTH, $05
+.cutscene1c
+	db HIGHLIGHT_LEVEL, SOUTH, $01
+	db HIGHLIGHT_LEVEL, EAST, $01
+	db HIGHLIGHT_LEVEL, SOUTH, $05
 	db $80
 
-Data_81cdf: ; 81cdf (21:5cdf)
-	db $02, WEST, $08
-	db $01, WEST, $05
+.cutscene1d
+	db DO_OW_FUNC, WEST, $08
+	db UNLOCK_LEVEL, WEST, WESTCONN_5
 	db $80
 
-Data_81ce6: ; 81ce6 (21:5ce6)
-	db $02, SOUTH, $0a
-	db $02, EAST, $04
+.cutscene1e
+	db DO_OW_FUNC, SOUTH, $0a
+	db DO_OW_FUNC, EAST, $04
 	db $80
 
-Data_81ced: ; 81ced (21:5ced)
-	db $02, NORTH, $06
+.cutscene1f
+	db DO_OW_FUNC, NORTH, $06
 	db $80
 
-Data_81cf1: ; 81cf1 (21:5cf1)
-	db $03, NORTH, $04
-	db $03, SOUTH, $04
-	db $03, WEST, $05
+.cutscene20
+	db HIGHLIGHT_LEVEL, NORTH, $04
+	db HIGHLIGHT_LEVEL, SOUTH, $04
+	db HIGHLIGHT_LEVEL, WEST, $05
 	db $80
 
-Data_81cfb: ; 81cfb (21:5cfb)
-	db $03, SOUTH, $03
-	db $03, NORTH, $05
+.cutscene21
+	db HIGHLIGHT_LEVEL, SOUTH, $03
+	db HIGHLIGHT_LEVEL, NORTH, $05
 	db $80
 
-Data_81d02: ; 81d02 (21:5d02)
-	db $01, EAST, $06
+.cutscene22
+	db UNLOCK_LEVEL, EAST, EASTCONN_6
 	db $80
 
-Data_81d06: ; 81d06 (21:5d06)
-	db $03, WEST, $04
-	db $03, EAST, $03
-	db $03, EAST, $07
+.cutscene23
+	db HIGHLIGHT_LEVEL, WEST, $04
+	db HIGHLIGHT_LEVEL, EAST, $03
+	db HIGHLIGHT_LEVEL, EAST, $07
 	db $80
 
-Data_81d10: ; 81d10 (21:5d10)
-	db $03, NORTH, $01
+.cutscene24
+	db HIGHLIGHT_LEVEL, NORTH, $01
 	db $80
 
-Data_81d14: ; 81d14 (21:5d14)
-	db $02, NORTH, $08
-	db $03, NORTH, $00
+.cutscene25
+	db DO_OW_FUNC, NORTH, $08
+	db HIGHLIGHT_LEVEL, NORTH, $00
 	db $80
 
-Data_81d1b: ; 81d1b (21:5d1b)
-	db $04, NORTH, $09
+.cutscene26
+	db SPECIAL_ACTION, NORTH, $09
 	db $80
 
-Data_81d1f: ; 81d1f (21:5d1f)
-	db $03, WEST, $02
+.cutscene27
+	db HIGHLIGHT_LEVEL, WEST, $02
 	db $80
 
-Data_81d23: ; 81d23 (21:5d23)
+.cutscene28
 	db $80
 
-Data_81d24: ; 81d24 (21:5d24)
-	db $04, NORTH, $0a
+.cutscene29
+	db SPECIAL_ACTION, NORTH, $0a
 	db $80
 
-Data_81d28: ; 81d28 (21:5d28)
+.cutscene2a
 	db $80
 
-Data_81d29: ; 81d29 (21:5d29)
+.cutscene2b
 	db $80
 
-Data_81d2a: ; 81d2a (21:5d2a)
-	db $04, NORTH, $0b
+.cutscene2c
+	db SPECIAL_ACTION, NORTH, $0b
 	db $80
 
-Data_81d2e: ; 81d2e (21:5d2e)
+.cutscene2d
 	db $80
 
-Data_81d2f: ; 81d2f (21:5d2f)
+.cutscene2e
 	db $80
 
-Data_81d30: ; 81d30 (21:5d30)
-	db $04, NORTH, $10
+.cutscene2f
+	db SPECIAL_ACTION, NORTH, $10
 	db $80
 
-Data_81d34: ; 81d34 (21:5d34)
-	db $03, NORTH, $04
-	db $03, WEST, $03
+.cutscene30
+	db HIGHLIGHT_LEVEL, NORTH, $04
+	db HIGHLIGHT_LEVEL, WEST, $03
 	db $80
 
-Data_81d3b: ; 81d3b (21:5d3b)
+.cutscene31
 	db $80
 
-Data_81d3c: ; 81d3c (21:5d3c)
-	db $04, NORTH, $0c
+.cutscene32
+	db SPECIAL_ACTION, NORTH, $0c
 	db $80
 
-Data_81d40: ; 81d40 (21:5d40)
+.cutscene33
 	db $80
 
-Data_81d41: ; 81d41 (21:5d41)
+.cutscene34
 	db $80
 
-Data_81d42: ; 81d42 (21:5d42)
-	db $04, NORTH, $11
+.cutscene35
+	db SPECIAL_ACTION, NORTH, $11
 	db $80
 
-Data_81d46: ; 81d46 (21:5d46)
+.cutscene36
 	db $80
 
-Data_81d47: ; 81d47 (21:5d47)
-	db $02, EAST, $06
-	db $01, EAST, $05
-	db $01, EAST, $07
-	db $01, NORTH, $08
+.cutscene37
+	db DO_OW_FUNC, EAST, $06
+	db UNLOCK_LEVEL, EAST, EASTCONN_5
+	db UNLOCK_LEVEL, EAST, EASTCONN_7
+	db UNLOCK_LEVEL, NORTH, $08
 	db $80
 
-Data_81d54: ; 81d54 (21:5d54)
-	db $02, EAST, $07
-	db $01, EAST, $04
+.cutscene38
+	db DO_OW_FUNC, EAST, $07
+	db UNLOCK_LEVEL, EAST, SOUTHCONN_4
 	db $80
 
-Data_81d5b: ; 81d5b (21:5d5b)
-	db $02, EAST, $08
+.cutscene39
+	db DO_OW_FUNC, EAST, $08
 	db $80
 
-Data_81d5f: ; 81d5f (21:5d5f)
-	db $03, EAST, $05
+.cutscene3a
+	db HIGHLIGHT_LEVEL, EAST, $05
 	db $80
 
-Data_81d63: ; 81d63 (21:5d63)
-	db $04, NORTH, $0d
+.cutscene3b
+	db SPECIAL_ACTION, NORTH, $0d
 	db $80
 
-Data_81d67: ; 81d67 (21:5d67)
-	db $03, EAST, $07
+.cutscene3c
+	db HIGHLIGHT_LEVEL, EAST, $07
 	db $80
 
-Data_81d6b: ; 81d6b (21:5d6b)
-	db $03, EAST, $05
+.cutscene3d
+	db HIGHLIGHT_LEVEL, EAST, $05
 	db $80
 
-Data_81d6f: ; 81d6f (21:5d6f)
+.cutscene3e
 	db $80
 
-Data_81d70: ; 81d70 (21:5d70)
+.cutscene3f
 	db $80
 
-Data_81d71: ; 81d71 (21:5d71)
+.cutscene40
 	db $80
 
-Data_81d72: ; 81d72 (21:5d72)
+.cutscene41
 	db $80
 
-Data_81d73: ; 81d73 (21:5d73)
-	db $04, NORTH, $0e
+.cutscene42
+	db SPECIAL_ACTION, NORTH, $0e
 	db $80
 
-Data_81d77: ; 81d77 (21:5d77)
-	db $03, WEST, $04
+.cutscene43
+	db HIGHLIGHT_LEVEL, WEST, $04
 	db $80
 
-Data_81d7b: ; 81d7b (21:5d7b)
-	db $03, NORTH, $05
-	db $03, WEST, $05
+.cutscene44
+	db HIGHLIGHT_LEVEL, NORTH, $05
+	db HIGHLIGHT_LEVEL, WEST, $05
 	db $80
 
-Data_81d82: ; 81d82 (21:5d82)
+.cutscene45
 	db $80
 
-Data_81d83: ; 81d83 (21:5d83)
+.cutscene46
 	db $80
 
-Data_81d84: ; 81d84 (21:5d84)
+.cutscene47
 	db $80
 
-Data_81d85: ; 81d85 (21:5d85)
+.cutscene48
 	db $80
 
-Data_81d86: ; 81d86 (21:5d86)
-	db $03, SOUTH, $03
+.cutscene49
+	db HIGHLIGHT_LEVEL, SOUTH, $03
 	db $80
 
-Data_81d8a: ; 81d8a (21:5d8a)
-	db $01, SOUTH, $05
+.cutscene4a
+	db UNLOCK_LEVEL, SOUTH, SOUTHCONN_5
 	db $80
 
-Data_81d8e: ; 81d8e (21:5d8e)
-	db $04, NORTH, $0f
+.cutscene4b
+	db SPECIAL_ACTION, NORTH, $0f
 	db $80
 
-Data_81d92: ; 81d92 (21:5d92)
-	db $03, WEST, $06
-	db $03, EAST, $06
+.cutscene4c
+	db HIGHLIGHT_LEVEL, WEST, $06
+	db HIGHLIGHT_LEVEL, EAST, $06
 	db $80
 
-Data_81d99: ; 81d99 (21:5d99)
+.cutscene4d
 	db $80
 
-Data_81d9a: ; 81d9a (21:5d9a)
-	db $03, EAST, $03
+.cutscene4e
+	db HIGHLIGHT_LEVEL, EAST, $03
 	db $80
 
-Data_81d9e: ; 81d9e (21:5d9e)
-	db $03, WEST, $06
-	db $03, SOUTH, $04
-	db $03, SOUTH, $05
+.cutscene4f
+	db HIGHLIGHT_LEVEL, WEST, $06
+	db HIGHLIGHT_LEVEL, SOUTH, $04
+	db HIGHLIGHT_LEVEL, SOUTH, $05
 	db $80
 
-Data_81da8: ; 81da8 (21:5da8)
+.cutscene50
 	db $80
 
-Data_81da9: ; 81da9 (21:5da9)
-	db $03, NORTH, $03
-	db $03, WEST, $05
+.cutscene51
+	db HIGHLIGHT_LEVEL, NORTH, $03
+	db HIGHLIGHT_LEVEL, WEST, $05
 	db $80
 
-Data_81db0: ; 81db0 (21:5db0)
+.cutscene52
 	db $80
 
-Data_81db1: ; 81db1 (21:5db1)
+.cutscene53
 	db $80
 
-Data_81db2: ; 81db2 (21:5db2)
-	db $03, SOUTH, $06
+.cutscene54
+	db HIGHLIGHT_LEVEL, SOUTH, $06
 	db $80
 
-Data_81db6: ; 81db6 (21:5db6)
-	db $03, EAST, $06
+.cutscene55
+	db HIGHLIGHT_LEVEL, EAST, $06
 	db $80
 
-Data_81dba: ; 81dba (21:5dba)
-	db $03, NORTH, $06
+.cutscene56
+	db HIGHLIGHT_LEVEL, NORTH, $06
 	db $80
 
-Data_81dbe: ; 81dbe (21:5dbe)
-	db $02, SOUTH, $0b
-	db $03, SOUTH, $06
+.cutscene57
+	db DO_OW_FUNC, SOUTH, $0b
+	db HIGHLIGHT_LEVEL, SOUTH, $06
 	db $80
 
-Data_81dc5: ; 81dc5 (21:5dc5)
-	db $03, EAST, $06
+.cutscene58
+	db HIGHLIGHT_LEVEL, EAST, $06
 	db $80
 
-Data_81dc9: ; 81dc9 (21:5dc9)
+.cutscene59
 	db $80
 
-Data_81dca: ; 81dca (21:5dca)
-	db $02, NORTH, $12
+.cutscene5a
+	db DO_OW_FUNC, NORTH, $12
 	db $80
 ; 0x81dce
 
@@ -4377,7 +4319,7 @@ Func_81dce: ; 81dce (20:5dce)
 
 Func_81e16: ; 81e16 (20:5e16)
 	ld a, [wCutscene]
-	call Func_81b0d
+	call GetCutsceneOWParams
 	ret z
 .loop
 	ld a, [w2d016]
@@ -4387,22 +4329,22 @@ Func_81e16: ; 81e16 (20:5e16)
 	jr nz, .same_side
 	call Func_81e36
 .same_side
-	ld hl, w2d026
+	ld hl, wCutsceneOWParamsPtr
 	call GetByteFromPointerInHL
-	call Func_81b13
+	call GetCutsceneOWParams_GotPtr
 	ret z
 	jr .loop
 ; 0x81e36
 
 Func_81e36: ; 81e36 (20:5e36)
-	ld a, [w2d028]
+	ld a, [wOWCutsceneAction]
 	jumptable
 
 	dw Func_81e44
-	dw Func_81e57
-	dw Func_81e47
-	dw Func_82c09
-	dw Func_81e47
+	dw Func_81e57 ; UNLOCK_LEVEL
+	dw Func_81e47 ; DO_OW_FUNC
+	dw Func_82c09 ; HIGHLIGHT_LEVEL
+	dw Func_81e47 ; SPECIAL_ACTION
 ; 0x81e44
 
 Func_81e44: ; 81e44 (20:5e44)
@@ -4497,7 +4439,7 @@ Func_81e88: ; 81e88 (20:5e88)
 	ld hl, w2d081
 	call Func_82b3e
 	ld hl, w2d06d
-	call Func_3ad7
+	call GetOWCoordInTilemap
 	ld a, $01
 	ld [w2d07f], a
 	push hl
@@ -4520,32 +4462,35 @@ Func_81e88: ; 81e88 (20:5e88)
 Func_81f4b: ; 81f4b (20:5f4b)
 	ld hl, w2d016
 	ld a, [hli]
-	ld c, [hl]
-	ld hl, Data_80000
+	ld c, [hl] ; wCutsceneActionParam
+	ld hl, UnlockableConnections
 	call GetCthEntryFromAthTable
 	ld a, [hli]
 	ld [w2d066], a
 	ld a, [hl]
 	ld [w2d067], a
+
 	ld hl, w2d016
 	ld a, [hli]
-	ld c, [hl]
+	ld c, [hl] ; wCutsceneActionParam
 	ld hl, Data_8004c
 	call GetCthEntryFromAthTable
 	ld a, [hli]
 	ld [w2d063 + 0], a
 	ld a, [hl]
 	ld [w2d063 + 1], a
+
 	ld a, [w2d066]
-	call Func_810f0
+	call GetMapLevelCoords
 	ld a, [hli]
 	ld [w2d069], a
 	ld [w2d06b], a
 	ld a, [hl]
 	ld [w2d06a], a
 	ld [w2d06c], a
+
 	ld a, [w2d067]
-	call Func_810f0
+	call GetMapLevelCoords
 	ld a, [hli]
 	ld [w2d06d], a
 	ld a, [hl]
@@ -4606,7 +4551,7 @@ Func_81fd8: ; 81fd8 (20:5fd8)
 	ld a, [w2d082 + 1]
 	ld [w2d086 + 1], a
 	ld hl, w2d06b
-	call Func_3ad7
+	call GetOWCoordInTilemap
 	ret
 ; 0x81feb
 
@@ -4668,7 +4613,7 @@ PlaySFX12A: ; 82038 (20:6038)
 ; 0x82041
 
 Func_82041: ; 82041 (20:6041)
-	ld a, [wMapSideLevelIndex]
+	ld a, [wMapSideLevelID]
 	ld c, a
 	ld a, [w2d068]
 	cp c
@@ -4801,7 +4746,7 @@ Func_820e6: ; 820e6 (20:60e6)
 ; 0x82111
 
 Func_82111: ; 82111 (20:6111)
-	ld a, [wMapSideLevelIndex]
+	ld a, [wMapSideLevelID]
 	cp OW_EXIT_RIGHT
 	jr c, .asm_8211f
 	sub OW_EXIT_RIGHT
@@ -4819,9 +4764,9 @@ Func_82111: ; 82111 (20:6111)
 ; 0x8212c
 
 Func_8212c: ; 8212c (20:612c)
-	ld a, [wMapSideLevelIndex]
+	ld a, [wMapSideLevelID]
 	ld [w2d066], a
-	call Func_810f0
+	call GetMapLevelCoords
 	ld a, [hli]
 	ld [w2d069], a
 	ld b, a
@@ -4842,28 +4787,33 @@ Func_8212c: ; 8212c (20:612c)
 ; writes to wOWAllowedDPadInput the allowed
 ; d-pad inputs in the current OW position
 GetOWAllowedDPadInput: ; 82150 (20:6150)
-	ld a, [wMapSideLevelIndex]
-	cp $07
-	jr z, .asm_8219b
+	ld a, [wMapSideLevelID]
+	cp OWNORTH_JUNCTION
+	jr z, .junction
 	ld hl, w2d069
-	call Func_3ad7
+	call GetOWCoordInTilemap
 	ld c, $00
+
 	inc hl
 	ld b, D_RIGHT
 	call .CheckAllowedDirection
+
 	dec hl
 	dec hl
 	ld b, D_LEFT
 	call .CheckAllowedDirection
+
 	inc hl
-	ld de, -$20
+	ld de, -BG_MAP_WIDTH
 	add hl, de
 	ld b, D_UP
 	call .CheckAllowedDirection
-	ld de, $40
+
+	ld de, 2 * BG_MAP_WIDTH
 	add hl, de
 	ld b, D_DOWN
 	call .CheckAllowedDirection
+
 	ld a, c
 	ld [wOWAllowedDPadInput], a
 	ret
@@ -4882,15 +4832,15 @@ GetOWAllowedDPadInput: ; 82150 (20:6150)
 	dec d
 	dec d
 	dec d
-	ld a, [de]
+	ld a, [de] ; wAttrmap
 	bit 3, a
-	ret z
+	ret z ; not an arrow
 	ld a, c
 	or b
 	ld c, a
 	ret
 
-.asm_8219b
+.junction
 	ld a, D_RIGHT | D_UP | D_DOWN
 	ld [wOWAllowedDPadInput], a
 	ret
@@ -4899,16 +4849,19 @@ GetOWAllowedDPadInput: ; 82150 (20:6150)
 Func_821a1: ; 821a1 (20:61a1)
 	xor a
 	ld [w2d0a0], a
+
 	ld c, $02
 	ld hl, w2d06b
 	ld de, w2d06d
 	call Func_821f9
 	ld [w2d0a7], a
+
 	ld c, $04
 	ld hl, w2d06c
 	ld de, w2d06e
 	call Func_821f9
 	ld [w2d0a8], a
+
 	ld a, [w2d0a0]
 	ld b, a
 	ld hl, w2d0a7
@@ -5003,7 +4956,7 @@ Func_82234: ; 82234 (20:6234)
 	ret
 ; 0x82242
 
-Func_82242: ; 82242 (20:6242)
+UpdateTopBar: ; 82242 (20:6242)
 	ld hl, wTopBarStateCounter
 	inc [hl]
 	ld a, [wTopBarState]
@@ -5012,19 +4965,19 @@ Func_82242: ; 82242 (20:6242)
 	dec a
 	jumptable
 
-	dw .StartCloseBottomBar ; TOPBARST_START_CLOSE_BOT_BAR
-	dw .HandleBottomBarClose ; TOPBARST_HANDLE_CLOSE_BOT_BAR
-	dw .OpenTopBar ; TOPBARST_OPEN
-	dw .HandleInput ; TOPBARST_INPUT
-	dw .CloseTopBar ; TOPBARST_CLOSE
+	dw .StartCloseBottomBar     ; TOPBARST_START_CLOSE_BOT_BAR
+	dw .HandleBottomBarClose    ; TOPBARST_HANDLE_CLOSE_BOT_BAR
+	dw .OpenTopBar              ; TOPBARST_OPEN
+	dw .HandleInput             ; TOPBARST_INPUT
+	dw .CloseTopBar             ; TOPBARST_CLOSE
 
-	dw .Cutscene ; TOPBARST_CUTSCENE
-	dw .Collection ; TOPBARST_COLLECTION
-	dw .NextMap ; TOPBARST_NEXT_MAP
+	dw .Cutscene                ; TOPBARST_CUTSCENE
+	dw .Collection              ; TOPBARST_COLLECTION
+	dw .NextMap                 ; TOPBARST_NEXT_MAP
 
-	dw .DayNight ; TOPBARST_DAY_NIGHT
-	dw .Func_8241b ; TOPBARST_A
-	dw .Func_8242e ; TOPBARST_B
+	dw .DayNight                ; TOPBARST_DAY_NIGHT
+	dw .DelayDayNightTransition ; TOPBARST_DAY_NIGHT_DELAY
+	dw .DoDayNightTransition    ; TOPBARST_DAY_NIGHT_TRANSITION
 
 .StartCloseBottomBar:
 	; mark bottom bar as closing
@@ -5247,7 +5200,7 @@ Func_82242: ; 82242 (20:6242)
 	inc hl
 .got_index
 	ld a, [hl]
-	ld [wMapSideLevelIndex], a
+	ld [wMapSideLevelID], a
 	ld [w2d068], a
 	ret
 
@@ -5273,24 +5226,24 @@ Func_82242: ; 82242 (20:6242)
 	inc [hl]
 	ret
 
-.Func_8241b:
+.DelayDayNightTransition:
 	ld a, [wOWUIObj1State]
 	cp $05
-	jr z, .asm_82426
+	jr z, .start_transition
 	cp $07
-	jr nz, .asm_8242a
-.asm_82426
+	jr nz, .skip_transition
+.start_transition
 	ld hl, wTopBarState
 	inc [hl]
-.asm_8242a
+.skip_transition
 	call DrawTopBar
 	ret
 
-.Func_8242e:
-	farcall Func_84a40
-	ld a, [w2d055]
+.DoDayNightTransition:
+	farcall DayNightTransition
+	ld a, [wDayNightTransitionState]
 	and a
-	jr nz, .asm_8244d
+	jr nz, .still_transitioning
 
 	di
 	call VBlank_80bf9
@@ -5298,7 +5251,7 @@ Func_82242: ; 82242 (20:6242)
 
 	ld a, TOPBARST_INPUT
 	ld [wTopBarState], a
-.asm_8244d
+.still_transitioning
 	call DrawTopBar
 	ret
 ; 0x82451
@@ -5798,7 +5751,7 @@ ApplyTopBarButtonAttributes: ; 826f6 (20:66f6)
 	INCROM $82729, $82761
 
 HandleBottomBar: ; 82761 (20:6761)
-	ld a, [wMapSideLevelIndex]
+	ld a, [wMapSideLevelID]
 	ld c, a
 	ld a, [w2d068]
 	cp c
@@ -6219,6 +6172,7 @@ Func_829e2: ; 829e2 (20:69e2)
 	inc [hl]
 	ld a, [w2d062]
 	jumptable
+
 	dw $6a79
 	dw Func_82a0a
 	dw $6a26
@@ -6239,7 +6193,7 @@ Func_829e2: ; 829e2 (20:69e2)
 
 Func_82a0a: ; 82a0a (20:6a0a)
 	farcall Func_851e7
-	ld a, [w2d055]
+	ld a, [wDayNightTransitionState]
 	and a
 	ret nz
 	di
@@ -6316,8 +6270,8 @@ Func_82b45: ; 82b45 (20:6b45)
 	INCROM $82b67, $82bb8
 
 Func_82bb8: ; 82bb8 (20:6bb8)
-	ld a, [w2d028]
-	cp $01
+	ld a, [wOWCutsceneAction]
+	cp UNLOCK_LEVEL
 	ret nz
 	ld a, [w2d180State]
 	and a
@@ -6334,8 +6288,8 @@ Func_82bb8: ; 82bb8 (20:6bb8)
 ; 0x82bda
 
 Func_82bda: ; 82bda (20:6bda)
-	ld a, [w2d028]
-	cp $03
+	ld a, [wOWCutsceneAction]
+	cp HIGHLIGHT_LEVEL
 	ret nz
 	ld a, [w2d180State]
 	and a
@@ -6385,7 +6339,7 @@ Func_82c22: ; 82c22 (20:6c22)
 
 Func_82c29: ; 82c29 (20:6c29)
 	xor a
-	ld [w2d017], a
+	ld [wCutsceneActionParam], a
 	ld hl, w2d061
 	ld [hli], a
 	ld [hl], a ; w2d062
@@ -6420,7 +6374,7 @@ Func_82c55: ; 82c55 (20:6c55)
 	sub 1
 	ccf
 	; carry set if not North
-	ld a, [w2d017]
+	ld a, [wCutsceneActionParam]
 	sbc 0
 	ld [w2d067], a
 	ld a, [w2d025]
@@ -6433,14 +6387,14 @@ Func_82c55: ; 82c55 (20:6c55)
 
 .asm_82c71
 	ld a, $07
-	ld [w2d017], a
+	ld [wCutsceneActionParam], a
 	jr .asm_82c6e
 
 .asm_82c78
 	ld a, [wCurMapSide]
 	cp EAST
 	jr nz, .asm_82c6e
-	ld a, [w2d017]
+	ld a, [wCutsceneActionParam]
 	cp $07
 	jr nz, .asm_82c6e
 	ld a, MYSTERY_HANDLE

@@ -1684,15 +1684,15 @@ Pals_84a20: ; 84a20 (21:4a20)
 	rgb  0,  0,  7
 ; 0x84a40
 
-Func_84a40: ; 84a40 (21:4a40)
-	ld hl, w2d056
+DayNightTransition: ; 84a40 (21:4a40)
+	ld hl, wDayNightTransitionCounter
 	inc [hl]
 	ld a, [w2d011]
 	and a
 	jp nz, .NightToDayTable
 
 ; Day to Night table
-	ld a, [w2d055]
+	ld a, [wDayNightTransitionState]
 	jumptable
 
 	dw .InitDayToNight
@@ -1733,13 +1733,13 @@ Func_84a40: ; 84a40 (21:4a40)
 
 .AdvanceTable:
 	xor a
-	ld hl, w2d056
+	ld hl, wDayNightTransitionCounter
 	ld [hld], a
-	inc [hl] ; w2d055
+	inc [hl] ; wDayNightTransitionState
 	ret
 
 .Func_84a8e: ; unreferenced
-	ld a, [w2d056]
+	ld a, [wDayNightTransitionCounter]
 	cp $04
 	ret c
 	jp .AdvanceTable
@@ -1755,19 +1755,19 @@ Func_84a40: ; 84a40 (21:4a40)
 	ld a, [wJoypadPressed]
 	ld b, a
 	bit B_BUTTON_F, b
-	jp nz, Func_84d55
+	jp nz, SkipDayNightTransition
 	ld a, [wOWAllowedDPadInput]
 	and b
-	jp nz, Func_84d55
+	jp nz, SkipDayNightTransition
 
 .no_skip
 	ld hl, w2d809
-	ld a, [w2d056]
+	ld a, [wDayNightTransitionCounter]
 	cp [hl]
 	ret c
 
 	xor a
-	ld [w2d056], a
+	ld [wDayNightTransitionCounter], a
 	ld a, 8 * NUM_PAL_COLORS * 3 
 	ld [w2d807], a
 
@@ -1869,12 +1869,12 @@ Func_84a40: ; 84a40 (21:4a40)
 	call PlayOverworldMusic
 	xor a
 	ld [w2d0e3], a
-	ld [w2d055], a
-	ld [w2d056], a
+	ld [wDayNightTransitionState], a
+	ld [wDayNightTransitionCounter], a
 	ret
 
 .NightToDayTable:
-	ld a, [w2d055]
+	ld a, [wDayNightTransitionState]
 	jumptable
 
 	dw .InitNightToDay
@@ -2123,7 +2123,7 @@ ApplyPalFadeColours: ; 84d17 (21:4d17)
 	jr .loop
 ; 0x84d55
 
-Func_84d55: ; 84d55 (21:4d55)
+SkipDayNightTransition: ; 84d55 (21:4d55)
 	; apply target pals immediately
 	ld hl, wTempPals1
 	ld de, wTempBGPals
@@ -2132,15 +2132,15 @@ Func_84d55: ; 84d55 (21:4d55)
 
 	xor a
 	ld [wDayNightTransistionSteps], a
-	ld [w2d056], a
+	ld [wDayNightTransitionCounter], a
 	ld b, $06
 	ld a, [w2d011]
 	and a
-	jr z, .asm_84d71
+	jr z, .day
 	ld b, $04
-.asm_84d71
+.day
 	ld a, b
-	ld [w2d055], a
+	ld [wDayNightTransitionState], a
 	ret
 ; 0x84d76
 
@@ -2290,7 +2290,7 @@ Data_84e39: ; 84e39 (21:4e39)
 	dw Pals_847c0 ; WEST
 	dw Pals_84800 ; SOUTH
 	dw Pals_84840 ; EAST
-	dw Pals_84880
+	dw Pals_84880 ; EAST (no Ice)
 ; 0x84e43
 
 	INCROM $84e43, $84e86
@@ -2549,9 +2549,9 @@ Func_851d1: ; 851d1 (21:51d1)
 ; 0x851e7
 
 Func_851e7: ; 851e7 (21:51e7)
-	ld hl, w2d056
+	ld hl, wDayNightTransitionCounter
 	inc [hl]
-	ld a, [w2d055]
+	ld a, [wDayNightTransitionState]
 	jumptable
 ; 0x851ef
 
@@ -2874,25 +2874,28 @@ FadePalConfig: ; 8534f (21:534f)
 ; 0x8540a
 
 Func_8540a: ; 8540a (21:540a)
-	call Func_854a9
-	call Func_8542c
+	call GetMapSidePalGroup1
+	call .GetCrayonPal
 	ld a, [w2d011]
 	and a
-	jr z, .asm_8541a
+	jr z, .day
 	ld de, 24 palettes
 	add hl, de
-.asm_8541a
+.day
 	call LoadPalsToTempPals1
-	call Func_854b8
+
+	call GetMapSidePalGroup2
 	call LoadPalsToTempPals2
+
 	ld a, [w2dfff]
 	and a
 	ret z
 	call Func_85234
 	ret
-; 0x8542c
 
-Func_8542c: ; 8542c (21:542c)
+; if it's North or West and all crayons have been collected
+; get the correct palette for this map side
+.GetCrayonPal:
 	ld a, [wCrayonFlags]
 	and ALL_CRAYONS
 	cp ALL_CRAYONS
@@ -2903,8 +2906,9 @@ Func_8542c: ; 8542c (21:542c)
 	and a
 	jr z, .north
 	dec a
-	jr z, .asm_8544c
+	jr z, .west
 	ret
+
 .north
 	ld a, [wLastTransitionParam]
 	cp CRAYON_RED_T
@@ -2914,7 +2918,7 @@ Func_8542c: ; 8542c (21:542c)
 .not_crayon
 	ld hl, Pals_84500
 	ret
-.asm_8544c
+.west
 	ld hl, Pals_84640
 	ret
 ; 0x85450
@@ -2922,7 +2926,7 @@ Func_8542c: ; 8542c (21:542c)
 	INCROM $85450, $85475
 
 Func_85475: ; 85475 (21:5475)
-	call Func_854a9
+	call GetMapSidePalGroup1
 	call Func_8548f
 	ld a, [w2d011]
 	and a
@@ -2931,7 +2935,7 @@ Func_85475: ; 85475 (21:5475)
 	add hl, de
 .asm_85485
 	call LoadPalsToTempPals1
-	call Func_854b8
+	call GetMapSidePalGroup2
 	call LoadPalsToTempPals2
 	ret
 ; 0x8548f
@@ -2957,7 +2961,7 @@ Func_8548f: ; 8548f (21:548f)
 	ret
 ; 0x854a9
 
-Func_854a9: ; 854a9 (21:54a9)
+GetMapSidePalGroup1: ; 854a9 (21:54a9)
 	ld hl, Pals_84000
 	ld de, 40 palettes
 	ld a, [wCurMapSide]
@@ -2969,7 +2973,7 @@ Func_854a9: ; 854a9 (21:54a9)
 	jr .loop
 ; 0x854b8
 
-Func_854b8: ; 854b8 (21:54b8)
+GetMapSidePalGroup2: ; 854b8 (21:54b8)
 	ld hl, Pals_84900
 	ld de, 8 palettes
 	ld a, [wCurMapSide]

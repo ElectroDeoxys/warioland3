@@ -80,6 +80,12 @@ DEF OW_EXIT_LEFT  EQU $0f
 	const TOPBAR_NEXT_MAP_F   ; $3
 	const TOPBAR_PREV_MAP_F   ; $4
 
+DEF TOPBAR_DAY_NIGHT  EQU (1 << TOPBAR_DAY_NIGHT_F)
+DEF TOPBAR_CUTSCENE   EQU (1 << TOPBAR_CUTSCENE_F)
+DEF TOPBAR_COLLECTION EQU (1 << TOPBAR_COLLECTION_F)
+DEF TOPBAR_NEXT_MAP   EQU (1 << TOPBAR_NEXT_MAP_F)
+DEF TOPBAR_PREV_MAP   EQU (1 << TOPBAR_PREV_MAP_F)
+
 ; wTopBarState constants
 	const_def
 	const TOPBARST_NONE                 ; $0
@@ -92,13 +98,62 @@ DEF OW_EXIT_LEFT  EQU $0f
 	const TOPBARST_COLLECTION           ; $7
 	const TOPBARST_NEXT_MAP             ; $8
 	const TOPBARST_DAY_NIGHT            ; $9
-	const TOPBARST_A                    ; $a
-	const TOPBARST_B                    ; $b
-
-DEF TOPBAR_DAY_NIGHT  EQU (1 << TOPBAR_DAY_NIGHT_F)
-DEF TOPBAR_CUTSCENE   EQU (1 << TOPBAR_CUTSCENE_F)
-DEF TOPBAR_COLLECTION EQU (1 << TOPBAR_COLLECTION_F)
-DEF TOPBAR_NEXT_MAP   EQU (1 << TOPBAR_NEXT_MAP_F)
-DEF TOPBAR_PREV_MAP   EQU (1 << TOPBAR_PREV_MAP_F)
+	const TOPBARST_DAY_NIGHT_DELAY      ; $a
+	const TOPBARST_DAY_NIGHT_TRANSITION ; $b
 
 DEF DAYNIGHT_TRANSITION_STEPS EQU 32
+
+; wOWCutsceneAction constants
+	const_def 1
+	const UNLOCK_LEVEL    ; $1
+	const DO_OW_FUNC      ; $2
+	const HIGHLIGHT_LEVEL ; $3
+	const SPECIAL_ACTION  ; $4
+
+; OW cutscene functions
+	const_def 1
+	const NOWFUNC_CUT_TREE  ; $1
+	const NOWFUNC_OPEN_GATE ; $2
+
+; north connections
+	const_def 1
+	const NORTHCONN_1 ; $1
+	const NORTHCONN_2 ; $2
+	const NORTHCONN_3 ; $3
+	const NORTHCONN_4 ; $4
+	const NORTHCONN_5 ; $5
+	const NORTHCONN_6 ; $6
+	const NORTHCONN_7 ; $7
+	const NORTHCONN_8 ; $8
+
+; west connections
+	const_def 1
+	const WESTCONN_1 ; $1
+	const WESTCONN_2 ; $2
+	const WESTCONN_3 ; $3
+	const WESTCONN_4 ; $4
+	const WESTCONN_5 ; $5
+	const WESTCONN_6 ; $6
+	const WESTCONN_7 ; $7
+
+; south connections
+	const_def 1
+	const SOUTHCONN_1 ; $1
+	const SOUTHCONN_2 ; $2
+	const SOUTHCONN_3 ; $3
+	const SOUTHCONN_4 ; $4
+	const SOUTHCONN_5 ; $5
+	const SOUTHCONN_6 ; $6
+	const SOUTHCONN_7 ; $7
+	const SOUTHCONN_8 ; $8
+
+; east connections
+	const_def 1
+	const EASTCONN_1 ; $1
+	const EASTCONN_2 ; $2
+	const EASTCONN_3 ; $3
+	const EASTCONN_4 ; $4
+	const EASTCONN_5 ; $5
+	const EASTCONN_6 ; $6
+	const EASTCONN_7 ; $7
+	const EASTCONN_8 ; $8

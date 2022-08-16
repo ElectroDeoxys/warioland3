@@ -1341,7 +1341,7 @@ LoadLevelTreasureData: ; 9aa90 (26:6a90)
 ; 0x9aab5
 
 Func_9aab5: ; 9aab5 (26:6ab5)
-	ld a, [wMapSideLevelIndex]
+	ld a, [wMapSideLevelID]
 	cp $0e
 	ret nc
 	call ClearTreasureData

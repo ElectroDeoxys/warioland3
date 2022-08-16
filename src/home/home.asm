@@ -4165,9 +4165,9 @@ IsTreasureCollected:: ; 3aac (0:3aac)
 	ret
 ; 0x3ad7
 
-Func_3ad7:: ; 3ad7 (0:3ad7)
+GetOWCoordInTilemap:: ; 3ad7 (0:3ad7)
 	ld a, [hli]
-	and $f8
+	and %11111000
 	rlca
 	rlca
 	ld c, a
@@ -4177,14 +4177,14 @@ Func_3ad7:: ; 3ad7 (0:3ad7)
 	and $f0
 	ld c, a
 	ld a, [hl]
-	and $f8
+	and %11111000
 	rlca
 	swap a
 	add c
 	ld l, a
 	ld [w2d082 + 0], a
 	ld a, b
-	add $d5
+	add HIGH(wTilemap)
 	ld h, a
 	ld [w2d082 + 1], a
 	ret
