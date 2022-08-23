@@ -4182,11 +4182,11 @@ GetOWCoordInTilemap:: ; 3ad7 (0:3ad7)
 	swap a
 	add c
 	ld l, a
-	ld [w2d082 + 0], a
+	ld [wOWTilemapPtr + 0], a
 	ld a, b
 	add HIGH(wTilemap)
 	ld h, a
-	ld [w2d082 + 1], a
+	ld [wOWTilemapPtr + 1], a
 	ret
 ; 0x3af7
 
@@ -4441,7 +4441,7 @@ Func_3c35: ; 3c35 (0:3c35)
 ; 0x3c4f
 
 AddOffsetInPointerTable:: ; 3c4f (0:3c4f)
-	add a
+	add a ; *2
 	ld e, a
 	ld a, $00
 	adc 0
@@ -4471,10 +4471,10 @@ GetPointerFromTableDE:: ; 3c5f (0:3c5f)
 	ret
 ; 0x3c66
 
-; outputs in hl the cth pointer
-; pointed by the ath entry
+; outputs in hl the cth word
+; contained in the ath table entry
 ; in the pointer table in hl
-GetCthEntryFromAthTable:: ; 3c66 (0:3c66)
+GetCthWordFromAthTable:: ; 3c66 (0:3c66)
 	call AddOffsetInPointerTable
 	ld a, [hli]
 	ld h, [hl]

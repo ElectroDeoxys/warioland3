@@ -2145,8 +2145,8 @@ HiddenFigureRevealScene: ; ad03b (2b:503b)
 	ld a, $03
 	ld [w2d880], a
 	xor a
-	ld [w2d0d5], a
-	ld [w2d0db], a
+	ld [wPalConfig1TotalSteps], a
+	ld [wPalConfig2TotalSteps], a
 	jp .Func_ad16a
 
 .Func_ad0f6
@@ -2269,14 +2269,14 @@ HiddenFigureRevealScene: ; ad03b (2b:503b)
 	ld a, $04
 	ld [w2d880], a
 	xor a
-	ld [w2d0d5], a
-	ld [w2d0db], a
+	ld [wPalConfig1TotalSteps], a
+	ld [wPalConfig2TotalSteps], a
 	jp Func_ad016
 
 .Func_ad1e3
 	call HandleTempleWarioPanic
 	ld c, $07
-	ld a, [w2d0d5]
+	ld a, [wPalConfig1TotalSteps]
 	cp $14
 	jr c, .asm_ad1f1
 	ld c, $03
@@ -3601,8 +3601,8 @@ Func_ae007: ; ae007 (2b:6007)
 Func_ae009: ; ae009 (2b:6009)
 	ld [w2d880], a
 	xor a
-	ld [w2d0d5], a
-	ld [w2d0db], a
+	ld [wPalConfig1TotalSteps], a
+	ld [wPalConfig2TotalSteps], a
 	jp Func_adf97
 ; 0xae016
 
@@ -3798,7 +3798,7 @@ Func_ae164: ; ae164 (2b:6164)
 
 Func_ae169: ; ae169 (2b:6169)
 	ld c, $07
-	ld a, [w2d0d5]
+	ld a, [wPalConfig1TotalSteps]
 	cp $08
 	jr c, .asm_ae174
 	ld c, $01

@@ -1342,8 +1342,9 @@ LoadLevelTreasureData: ; 9aa90 (26:6a90)
 
 Func_9aab5: ; 9aab5 (26:6ab5)
 	ld a, [wMapSideLevelID]
-	cp $0e
+	cp OW_EXITS
 	ret nc
+
 	call ClearTreasureData
 	call Func_9aaf4
 	call Func_9ab1c
@@ -1374,16 +1375,17 @@ Func_9aab5: ; 9aab5 (26:6ab5)
 Func_9aaf4: ; 9aaf4 (26:6af4)
 	ld a, [wOWLevel]
 	call CheckLevelMusicalCoinFlag
-	ret z
+	ret z ; didn't get all musical coins
 	ld hl, wBottomBarFlags
 	set 6, [hl]
-	ld hl, w2d116
+	ld hl, wCompassObjState
 	xor a
 	ld [hli], a
-	ld [hl], a
+	ld [hl], a ; wCompassObjUnk7
 	ret
 ; 0x9ab07
 
+; clears treasure tiles and info in WRAM
 ClearTreasureData: ; 9ab07 (26:6b07)
 ; clear the treasure tiles
 	xor a

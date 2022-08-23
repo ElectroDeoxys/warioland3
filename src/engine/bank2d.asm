@@ -9,7 +9,7 @@ Func_b4001: ; b4001 (2d:4001)
 Func_b4004: ; b4004 (2d:4004)
 	ld a, [w2d065]
 	ld c, a
-	ld a, [w2d016]
+	ld a, [wCutsceneMapSide]
 	jumptable
 
 	dw Func_b4014 ; NORTH
@@ -2988,7 +2988,7 @@ Func_b79de: ; b79de (2d:79de)
 	ld a, [w2d025]
 	and a
 	ret nz
-	ld a, [w2d067]
+	ld a, [wConnectedLevel2]
 	cp $06
 	ret nz
 	ld a, $06
@@ -3100,7 +3100,7 @@ Func_b7ac0: ; b7ac0 (2d:7ac0)
 	ld a, [wSceneObj7State]
 	and a
 	ret nz
-	ld a, [wDayNightTransitionState]
+	ld a, [wOWPalTransitionState]
 	and a
 	ret nz
 	inc [hl]
@@ -3108,7 +3108,7 @@ Func_b7ac0: ; b7ac0 (2d:7ac0)
 	ld a, [w2d011]
 	and a
 	jr nz, .asm_b7af0
-	ld a, [wDayNightTransitionState]
+	ld a, [wOWPalTransitionState]
 	cp $02
 	ret nz
 	ld a, $07
@@ -3134,7 +3134,7 @@ Func_b7afb: ; b7afb (2d:7afb)
 	ld a, [hl]
 	and a
 	jr nz, .asm_b7b0d
-	ld a, [wDayNightTransitionState]
+	ld a, [wOWPalTransitionState]
 	and a
 	ret nz
 	inc [hl]
@@ -3142,7 +3142,7 @@ Func_b7afb: ; b7afb (2d:7afb)
 	ld a, [w2d011]
 	and a
 	jr z, .asm_b7b19
-	ld a, [wDayNightTransitionState]
+	ld a, [wOWPalTransitionState]
 	cp $02
 	ret nz
 .asm_b7b19
@@ -3240,7 +3240,7 @@ Func_b7ba9: ; b7ba9 (2d:7ba9)
 	ld a, [w2d011]
 	and a
 	jr z, .asm_b7bc2
-	ld a, [wDayNightTransitionState]
+	ld a, [wOWPalTransitionState]
 	cp $02
 	ret nz
 .asm_b7bb9
@@ -3249,7 +3249,7 @@ Func_b7ba9: ; b7ba9 (2d:7ba9)
 	call SetSceneObjState
 	ret
 .asm_b7bc2
-	ld a, [wDayNightTransitionState]
+	ld a, [wOWPalTransitionState]
 	and a
 	ret nz
 	jr .asm_b7bb9
@@ -3261,7 +3261,7 @@ Func_b7bc9: ; b7bc9 (2d:7bc9)
 	ld a, [w2d011]
 	and a
 	jr nz, .asm_b7be2
-	ld a, [wDayNightTransitionState]
+	ld a, [wOWPalTransitionState]
 	cp $02
 	ret nz
 .asm_b7bd9
@@ -3270,7 +3270,7 @@ Func_b7bc9: ; b7bc9 (2d:7bc9)
 	call SetSceneObjState
 	ret
 .asm_b7be2
-	ld a, [wDayNightTransitionState]
+	ld a, [wOWPalTransitionState]
 	and a
 	ret nz
 	jr .asm_b7bd9

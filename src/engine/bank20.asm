@@ -47,56 +47,217 @@ UnlockableConnections: ; 80000 (20:4000)
 	db OW_EXIT_LEFT,               OWEAST_THE_STAGNANT_SWAMP  ; EASTCONN_8
 ; 0x8004c
 
-Data_8004c: ; 8004c (20:404c)
+UnlockableLevelArrows: ; 8004c (20:404c)
 	dw .North
 	dw .West
 	dw .South
 	dw .East
 
 .North:
-	dw $4098
-	dw $409a
-	dw $409f
-	dw $40a4
-	dw $40a9
-	dw $40ae
-	dw $40b3
-	dw $40b8
-	dw $40bd
+	dw .InvalidNorthConnection
+	dw .NorthConnection1 ; NORTHCONN_1
+	dw .NorthConnection2 ; NORTHCONN_2
+	dw .NorthConnection3 ; NORTHCONN_3
+	dw .NorthConnection4 ; NORTHCONN_4
+	dw .NorthConnection5 ; NORTHCONN_5
+	dw .NorthConnection6 ; NORTHCONN_6
+	dw .NorthConnection7 ; NORTHCONN_7
+	dw .NorthConnection8 ; NORTHCONN_8
 
 .West:
-	dw $40c2
-	dw $40c4
-	dw $40c9
-	dw $40ce
-	dw $40d3
-	dw $40d8
-	dw $40dd
-	dw $40e2
+	dw .InvalidWestConnection
+	dw .WestConnection1 ; WESTCONN_1
+	dw .WestConnection2 ; WESTCONN_2
+	dw .WestConnection3 ; WESTCONN_3
+	dw .WestConnection4 ; WESTCONN_4
+	dw .WestConnection5 ; WESTCONN_5
+	dw .WestConnection6 ; WESTCONN_6
+	dw .WestConnection7 ; WESTCONN_7
 
 .South:
-	dw $40e7
-	dw $40e9
-	dw $40ee
-	dw $40f3
-	dw $40f8
-	dw $40fd
-	dw $4102
-	dw $4107
+	dw .InvalidSouthConnection
+	dw .SouthConnection1 ; SOUTHCONN_1
+	dw .SouthConnection2 ; SOUTHCONN_2
+	dw .SouthConnection3 ; SOUTHCONN_3
+	dw .SouthConnection4 ; SOUTHCONN_4
+	dw .SouthConnection5 ; SOUTHCONN_5
+	dw .SouthConnection6 ; SOUTHCONN_6
+	dw .SouthConnection7 ; SOUTHCONN_7
 
 .East:
-	dw $410c
-	dw $410e
-	dw $4113
-	dw $4118
-	dw $411d
-	dw $4122
-	dw $4127
-	dw $412c
-	dw $4131
+	dw .InvalidEastConnection
+	dw .EastConnection1 ; EASTCONN_1
+	dw .EastConnection2 ; EASTCONN_2
+	dw .EastConnection3 ; EASTCONN_3
+	dw .EastConnection4 ; EASTCONN_4
+	dw .EastConnection5 ; EASTCONN_5
+	dw .EastConnection6 ; EASTCONN_6
+	dw .EastConnection7 ; EASTCONN_7
+	dw .EastConnection8 ; EASTCONN_8
 ; 0x80098
 
-	INCROM $80098, $80136
+.InvalidNorthConnection
+	db $ff, $ff
+
+.NorthConnection1:
+	db D_LEFT,  1
+	db D_RIGHT, 1
+	db $ff
+
+.NorthConnection2:
+	db D_DOWN,  1
+	db D_UP,    1
+	db $ff
+
+.NorthConnection3:
+	db D_RIGHT, 1
+	db D_LEFT,  1
+	db $ff
+
+.NorthConnection4:
+	db D_DOWN,  1
+	db D_RIGHT, 1
+	db $ff
+
+.NorthConnection5:
+	db D_DOWN,  1
+	db D_LEFT,  1
+	db $ff
+
+.NorthConnection6:
+	db D_RIGHT, 1
+	db D_LEFT,  1
+	db $ff
+
+.NorthConnection7:
+	db D_RIGHT, 1
+	db D_LEFT,  1
+	db $ff
+
+.NorthConnection8:
+	db D_RIGHT, 1
+	db D_LEFT,  1
+	db $ff
+
+.InvalidWestConnection:
+	db $ff, $ff
+
+.WestConnection1:
+	db D_UP,    1
+	db D_LEFT,  1
+	db $ff
+
+.WestConnection2:
+	db D_DOWN,  1
+	db D_LEFT,  1
+	db $ff
+
+.WestConnection3:
+	db D_RIGHT, 1
+	db D_DOWN,  1
+	db $ff
+
+.WestConnection4:
+	db D_UP,    1
+	db D_LEFT,  1
+	db $ff
+
+.WestConnection5:
+	db D_DOWN,  1
+	db D_UP,    1
+	db $ff
+
+.WestConnection6:
+	db D_UP,    1
+	db D_LEFT,  1
+	db $ff
+
+.WestConnection7:
+	db D_RIGHT, 1
+	db D_LEFT,  1
+	db $ff
+
+.InvalidSouthConnection:
+	db $ff, $ff
+
+.SouthConnection1:
+	db D_RIGHT, 1
+	db D_LEFT,  1
+	db $ff
+
+.SouthConnection2:
+	db D_RIGHT, 1
+	db D_LEFT,  1
+	db $ff
+
+.SouthConnection3:
+	db D_DOWN,  1
+	db D_LEFT,  1
+	db $ff
+
+.SouthConnection4:
+	db D_UP,    1
+	db D_LEFT,  1
+	db $ff
+
+.SouthConnection5:
+	db D_UP,    1
+	db D_LEFT,  1
+	db $ff
+
+.SouthConnection6:
+	db D_RIGHT, 1
+	db D_LEFT,  1
+	db $ff
+
+.SouthConnection7:
+	db D_RIGHT, 1
+	db D_LEFT,  1
+	db $ff
+
+.InvalidEastConnection:
+	db $ff, $ff
+
+.EastConnection1:
+	db D_DOWN,  1
+	db D_LEFT,  1
+	db $ff
+
+.EastConnection2:
+	db D_UP,    1
+	db D_LEFT,  1
+	db $ff
+
+.EastConnection3:
+	db D_UP,    1
+	db D_DOWN,  1
+	db $ff
+
+.EastConnection4:
+	db D_DOWN,  1
+	db D_UP,    1
+	db $ff
+
+.EastConnection5:
+	db D_UP,    1
+	db D_LEFT,  1
+	db $ff
+
+.EastConnection6:
+	db D_UP,    1
+	db D_DOWN,  1
+	db $ff
+
+.EastConnection7:
+	db D_RIGHT, 1
+	db D_LEFT,  1
+	db $ff
+
+.EastConnection8:
+	db D_RIGHT, 1
+	db D_LEFT,  1
+	db $ff
+; 0x80136
 
 ; \1 = x coord
 ; \2 = y coord
@@ -703,7 +864,7 @@ Func_803e6: ; 803e6 (20:43e6)
 	and a
 	ret nz
 	ld a, [wMapSideLevelID]
-	cp OW_EXIT_RIGHT
+	cp OW_EXITS
 	ret nc
 	jp Func_15dc
 ; 0x803f9
@@ -875,7 +1036,7 @@ Func_804f7: ; 804f7 (20:44f7)
 	ld a, [wCutsceneOWParamsPtr + 1]
 	ld [wTempCutsceneOWParamsPtr + 1], a
 
-	ld a, [w2d016]
+	ld a, [wCutsceneMapSide]
 	ld [wCurMapSide], a
 	jumptable
 
@@ -1059,10 +1220,10 @@ Func_8065e: ; 8065e (20:465e)
 
 	call Func_8212c
 	ld a, [wMapSideLevelID]
-	ld [w2d067], a
+	ld [wConnectedLevel2], a
 	ld [w2d068], a
 	xor a
-	ld [w2d073], a
+	ld [wLevelArrowDirections1], a
 
 	ld a, $01
 	call Func_820af
@@ -1142,7 +1303,7 @@ Func_8065e: ; 8065e (20:465e)
 .asm_80809
 	call LoadLevelNameIfValid
 	ld a, [wMapSideLevelID]
-	cp OW_EXIT_RIGHT
+	cp OW_EXITS
 	ld b, $01
 	jr c, .asm_80821
 	xor a
@@ -1161,8 +1322,8 @@ Func_8065e: ; 8065e (20:465e)
 	call z, DrawBottomBar
 
 	xor a
-	ld [w2d073], a
-	ld [wDayNightTransitionState], a
+	ld [wLevelArrowDirections1], a
+	ld [wOWPalTransitionState], a
 	ld [w2d013], a
 
 	ld a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
@@ -1208,7 +1369,7 @@ Func_8086f: ; 8086f (20:486f)
 	ld a, [wTempOWCutsceneAction]
 	ld [wOWCutsceneAction], a
 	ld a, [wCurMapSide]
-	ld [w2d016], a
+	ld [wCutsceneMapSide], a
 	ld a, [wTempCutsceneOWParamsPtr + 0]
 	ld [wCutsceneOWParamsPtr + 0], a
 	ld a, [wTempCutsceneOWParamsPtr + 1]
@@ -1247,8 +1408,8 @@ Func_8086f: ; 8086f (20:486f)
 	ld [w2d0e0], a
 	call SetCompassSprite
 	xor a
-	ld [w2d073], a
-	ld [wDayNightTransitionState], a
+	ld [wLevelArrowDirections1], a
+	ld [wOWPalTransitionState], a
 	ld [w2d013], a
 
 	ld a, [wCurMapSide]
@@ -1388,13 +1549,13 @@ Func_80ab5: ; 80ab5 (20:4ab5)
 	ld a, [wOWCutsceneAction]
 	cp UNLOCK_LEVEL
 	ret nz
-	ld hl, w2d016
+	ld hl, wCutsceneMapSide
 	ld a, [hli]
 	ld c, [hl] ; wCutsceneActionParam
 	ld hl, UnlockableConnections
-	call GetCthEntryFromAthTable
+	call GetCthWordFromAthTable
 	ld a, [hl]
-	cp OW_EXIT_RIGHT
+	cp OW_EXITS
 	ret c
 	; either OW_EXIT_RIGHT or OW_EXIT_LEFT
 	ld a, TRUE
@@ -1893,12 +2054,12 @@ Func_80ee7: ; 80ee7 (20:4ee7)
 	call Func_8212c
 	call GetOWAllowedDPadInput
 	ld a, [wMapSideLevelID]
-	ld [w2d067], a
+	ld [wConnectedLevel2], a
 	ld [w2d068], a
 	xor a
-	ld [w2d0d5], a
+	ld [wPalConfig1TotalSteps], a
 	ld [w2d0e0], a
-	ld [wDayNightTransitionState], a
+	ld [wOWPalTransitionState], a
 	call Func_81055
 	ld hl, w2d014
 	xor a
@@ -1920,7 +2081,7 @@ Func_80f0d: ; 80f0d (20:4f0d)
 .asm_80f1f
 	farcall DayNightTransition
 	call Func_81055
-	ld a, [wDayNightTransitionState]
+	ld a, [wOWPalTransitionState]
 	and a
 	ret nz
 	di
@@ -1937,15 +2098,17 @@ Func_80f3c: ; 80f3c (20:4f3c)
 	ld c, $00
 	ld b, $00
 	ld a, [wMapSideLevelID]
-	set 5, c
+	set D_LEFT_F, c
 	cp OW_EXIT_RIGHT
 	jr z, .is_exit
 	ld c, b
-	set 4, c
+	set D_RIGHT_F, c
 	cp OW_EXIT_LEFT
 	jr z, .is_exit
+
 	call LoadMapLevelFromLevelIndex
 	farcall Func_9aab5
+
 	xor a
 	ld [w2d014], a
 	call .GetDirectionalInput
@@ -1953,14 +2116,15 @@ Func_80f3c: ; 80f3c (20:4f3c)
 	ld a, [wOWAllowedDPadInput]
 	and b
 	and a
-	jr z, .asm_80f83
+	jr z, .not_allowed
 	ld hl, w2d013
 	ld [hl], $05
 	jp Func_81034
-.asm_80f83
+
+.not_allowed
 	call Func_81055
 	xor a
-	ld [w2d073], a
+	ld [wLevelArrowDirections1], a
 	ld [w2d10e], a
 	ld hl, w2d013
 	inc [hl]
@@ -1968,7 +2132,7 @@ Func_80f3c: ; 80f3c (20:4f3c)
 
 .is_exit
 	ld a, c
-	ld [w2d073], a
+	ld [wLevelArrowDirections1], a
 	call Func_820e6
 	call Func_81055
 	xor a
@@ -2018,9 +2182,9 @@ LoadLevelNameIfValid: ; 80fc8 (20:4fc8)
 Func_80fd6: ; 80fd6 (20:4fd6)
 	call Func_81055
 	ld a, [wMapSideLevelID]
-	cp OW_EXIT_RIGHT
+	cp OW_EXITS
 	jr nc, .asm_80ff2
-	farcall Func_85271
+	farcall FadeInLevelName
 	srl c
 	ret c
 .asm_80ff2
@@ -2032,7 +2196,7 @@ Func_80fd6: ; 80fd6 (20:4fd6)
 Func_80ff7: ; 80ff7 (20:4ff7)
 	call Func_81240
 	jr c, Func_81055
-	ld a, [wDayNightTransitionState]
+	ld a, [wOWPalTransitionState]
 	and a
 	jr nz, Func_81055
 	ld a, [wJoypadDown]
@@ -2063,14 +2227,14 @@ Func_80ff7: ; 80ff7 (20:4ff7)
 ;	fallthrough
 
 Func_81034: ; 81034 (20:5034)
-	ld [w2d073], a
+	ld [wLevelArrowDirections1], a
 	call Func_820e6
 	ld a, [w2d068]
-	ld [w2d067], a
+	ld [wConnectedLevel2], a
 	ld a, $03
 	ld [w2d0e0], a
 	xor a
-	ld [w2d0d5], a
+	ld [wPalConfig1TotalSteps], a
 	call Func_81055
 	xor a
 	ld [w2d014], a
@@ -2129,10 +2293,10 @@ Func_810a9: ; 810a9 (20:50a9)
 ; 0x810bb
 
 Func_810bb: ; 810bb (20:50bb)
-	ld a, [w2d06b]
-	ld [w2d06d], a
-	ld a, [w2d06c]
-	ld [w2d06e], a
+	ld a, [wConnectedLevel1YCoord]
+	ld [wConnectedLevel2YCoord], a
+	ld a, [wConnectedLevel1XCoord]
+	ld [wConnectedLevel2XCoord], a
 
 	ld a, [w2d068]
 	call GetMapLevelCoords
@@ -2164,7 +2328,7 @@ GetMapLevelCoords: ; 810f0 (20:50f0)
 	ld c, a
 	ld a, [wCurMapSide]
 	ld hl, MapLevelCoords
-	call GetCthEntryFromAthTable
+	call GetCthWordFromAthTable
 	ret
 ; 0x810fc
 
@@ -2187,9 +2351,9 @@ Func_81108: ; 81108 (20:5108)
 
 Func_8110d: ; 8110d (20:510d)
 	ld a, [w2d06f]
-	ld [w2d06d], a
+	ld [wConnectedLevel2YCoord], a
 	ld a, [w2d070]
-	ld [w2d06e], a
+	ld [wConnectedLevel2XCoord], a
 	xor a
 	ld [bc], a
 	ret
@@ -2197,7 +2361,7 @@ Func_8110d: ; 8110d (20:510d)
 
 Func_8111c: ; 8111c (20:511c)
 	ld a, [w2d06f]
-	ld [w2d06d], a
+	ld [wConnectedLevel2YCoord], a
 	ld a, $01
 	ld [bc], a
 	ret
@@ -2205,20 +2369,20 @@ Func_8111c: ; 8111c (20:511c)
 
 Func_81126: ; 81126 (20:5126)
 	ld a, [w2d070]
-	ld [w2d06e], a
+	ld [wConnectedLevel2XCoord], a
 	ld a, $01
 	ld [bc], a
 	ret
 ; 0x81130
 
 Func_81130: ; 81130 (20:5130)
-	ld a, [w2d06c]
+	ld a, [wConnectedLevel1XCoord]
 	ld e, a
 	ld a, [w2d070]
 	sub e
 	sra a
 	add e
-	ld [w2d06e], a
+	ld [wConnectedLevel2XCoord], a
 	ld a, $02
 	ld [bc], a
 	ret
@@ -2231,15 +2395,15 @@ Func_81142: ; 81142 (20:5142)
 	ld a, $40
 	bit 1, [hl]
 	jr z, .asm_81157
-	jr .asm_81158
+	jr .done
 .asm_81151
 	ld a, $10
 	bit 2, [hl]
-	jr z, .asm_81158
+	jr z, .done
 .asm_81157
 	rlca
-.asm_81158
-	ld [w2d073], a
+.done
+	ld [wLevelArrowDirections1], a
 	ret
 ; 0x8115c
 
@@ -2262,9 +2426,9 @@ Func_8115c: ; 8115c (20:515c)
 .asm_81177
 	call nz, Func_82208
 
-	ld a, [w2d06b]
+	ld a, [wConnectedLevel1YCoord]
 	ld [w2d100], a
-	ld a, [w2d06c]
+	ld a, [wConnectedLevel1XCoord]
 	ld [w2d101], a
 	ld a, [w2d0a1]
 	and a
@@ -2282,7 +2446,7 @@ Func_8115c: ; 8115c (20:515c)
 .asm_811a0
 	ld a, [w2d068]
 	ld [wMapSideLevelID], a
-	cp OW_EXIT_RIGHT
+	cp OW_EXITS
 	jr nc, .asm_811b1
 	ld a, $02
 	ld [w2d013], a
@@ -2364,7 +2528,7 @@ Func_81200: ; 81200 (20:5200)
 ; 0x81240
 
 Func_81240: ; 81240 (20:5240)
-	ld a, [wDayNightTransitionState]
+	ld a, [wOWPalTransitionState]
 	and a
 	jr nz, .no_carry
 	ld a, [wOWLevel]
@@ -2514,10 +2678,10 @@ Func_812c0: ; 812c0 (20:52c0)
 	ld a, [w2dffe]
 	call GetMapLevelCoords
 	ld a, [hli]
-	ld [w2d06b], a
+	ld [wConnectedLevel1YCoord], a
 	ld a, [hl]
-	ld [w2d06c], a
-	ld hl, w2d06b
+	ld [wConnectedLevel1XCoord], a
+	ld hl, wConnectedLevel1Coords
 	call GetOWCoordInTilemap
 	ld [hl], $7b
 	dec h
@@ -2612,12 +2776,12 @@ GetMapSideAndLevelForNextTreasure: ; 813bc (20:53bc)
 
 Func_813ef: ; 813ef (20:53ef)
 	xor a
-	ld [w2d0d5], a
+	ld [wPalConfig1TotalSteps], a
 	jp Func_81398
 ; 0x813f6
 
 Func_813f6: ; 813f6 (20:53f6)
-	farcall Func_85271
+	farcall FadeInLevelName
 	srl c
 	ret c
 	ld a, $1c
@@ -2678,10 +2842,10 @@ Func_81477: ; 81477 (20:5477)
 	call nz, Func_820af
 	ld hl, w2d88e
 	ld a, [hli] ; w2d88e
-	ld [w2d06b], a
+	ld [wConnectedLevel1YCoord], a
 	ld [w2d100], a
 	ld a, [hl] ; w2d88f
-	ld [w2d06c], a
+	ld [wConnectedLevel1XCoord], a
 	ld [w2d101], a
 	xor a
 	ld [w2d0e3], a
@@ -2711,10 +2875,10 @@ Func_814c4: ; 814c4 (20:54c4)
 	ret c
 	play_sfx SFX_113
 	ld a, [w2d069]
-	ld [w2d06b], a
+	ld [wConnectedLevel1YCoord], a
 	ld [w2d100], a
 	ld a, [w2d06a]
-	ld [w2d06c], a
+	ld [wConnectedLevel1XCoord], a
 	ld [w2d101], a
 	ld a, $05
 	call Func_820af
@@ -2793,10 +2957,10 @@ Func_8150c: ; 8150c (20:550c)
 	ld b, $9
 	call CopyHLToDE
 	ld de, w2d0a0
-	ld b, $07
+	ld b, $7
 	call CopyHLToDE
-	ld de, w2d06b
-	ld b, $08
+	ld de, wConnectedLevel1Coords
+	ld b, $8
 	call CopyHLToDE
 	ret
 
@@ -2811,7 +2975,7 @@ Func_8150c: ; 8150c (20:550c)
 	ld hl, w2d0a0
 	ld b, $07
 	call CopyHLToDE
-	ld hl, w2d06b
+	ld hl, wConnectedLevel1Coords
 	ld b, $08
 	call CopyHLToDE
 	ret
@@ -3133,7 +3297,7 @@ Func_81900: ; 81900 (20:5900)
 	jr z, Func_81931
 	ld a, [wCurMapSide]
 	ld b, a
-	ld a, [w2d016]
+	ld a, [wCutsceneMapSide]
 	cp b
 	jr nz, .asm_81923
 	xor a
@@ -3174,7 +3338,7 @@ Func_8195d: ; 8195d (20:595d)
 	jumptable
 
 	dw .InvalidAction
-	dw Func_829e2 ; UNLOCK_LEVEL
+	dw UnlockLevel ; UNLOCK_LEVEL
 	dw Func_8196e ; DO_OW_FUNC
 	dw Func_82c33 ; HIGHLIGHT_LEVEL
 	dw Func_8196e ; SPECIAL_ACTION
@@ -3762,7 +3926,7 @@ GetCutsceneOWParams_GotPtr: ; 81b13 (20:5b13)
 	cp $80
 	ret z ; finished
 	ld a, [hli]
-	ld [w2d016], a ; map side
+	ld [wCutsceneMapSide], a ; map side
 	ld a, [hli]
 	ld [wCutsceneActionParam], a
 	ld a, l
@@ -4322,7 +4486,7 @@ Func_81e16: ; 81e16 (20:5e16)
 	call GetCutsceneOWParams
 	ret z
 .loop
-	ld a, [w2d016]
+	ld a, [wCutsceneMapSide]
 	ld b, a
 	ld a, [wCurMapSide]
 	cp b
@@ -4362,10 +4526,10 @@ Func_81e57: ; 81e57 (20:5e57)
 	ret z
 	xor a
 	ld [w2d072], a
-	call Func_81f4b
+	call GetUnlockedOWLevelData
 	call Func_81f94
 .loop
-	call Func_81e88
+	call .Func_81e88
 	ld hl, w2d072
 	inc [hl]
 	ld a, [w2d074]
@@ -4374,143 +4538,176 @@ Func_81e57: ; 81e57 (20:5e57)
 
 	xor a
 	ld [w2d072], a
-	xor a
-	ld [w2d082 + 0], a
-	ld [w2d082 + 1], a
-	ld [w2d081], a
-	ld [w2d080], a
+	xor a ; unnecessary
+	ld [wOWTilemapPtr + 0], a
+	ld [wOWTilemapPtr + 1], a
+	ld [wAttrToPlaceInOW], a
+	ld [wTileToPlaceInOW], a
 	ld [w2d071], a
 	ret
-; 0x81e88
 
-Func_81e88: ; 81e88 (20:5e88)
-	call Func_82ada
-	jr z, .asm_81ebe
-	ld a, [w2d073]
-	ld hl, w2d081
-	call Func_82b45
-	ld a, [w2d073]
-	call Func_81fb9
-	call Func_81fd8
-	ld a, $01
+.Func_81e88:
+	call IsLeftExitOrJunction
+	jr z, .second_connection
+	ld a, [wLevelArrowDirections1]
+	ld hl, wAttrToPlaceInOW
+	call ShowLevelArrowInOW
+	ld a, [wLevelArrowDirections1]
+	call GetConnectedLevel1ArrowCoord
+	call GetConnectedLevel1CoordsInTilemap
+	ld a, TRUE
 	ld [w2d07f], a
 	push hl
 	call Func_81feb
 	pop hl
-	ld a, [w2d080]
+	ld a, [wTileToPlaceInOW]
 	ld [hl], a
 	dec h
 	dec h
 	dec h
-	ld a, [w2d081]
+	ld a, [wAttrToPlaceInOW]
 	ld [hl], a
-	xor a
+	xor a ; FALSE
 	ld [w2d07f], a
-	ld a, [w2d067]
-	cp $0e
+	ld a, [wConnectedLevel2]
+	cp OW_EXIT_RIGHT
 	ret z
-.asm_81ebe
-	ld a, [w2d06e]
-	ld [w2d06c], a
-	ld a, [w2d06d]
-	ld [w2d06b], a
-	ld a, [w2d075]
-	ld [w2d073], a
-	ld a, [w2d073]
-	ld hl, w2d081
-	call Func_82b45
-	ld a, [w2d073]
-	call Func_81fb9
-	call Func_81fd8
-	ld a, $01
+
+.second_connection
+	ld a, [wConnectedLevel2XCoord]
+	ld [wConnectedLevel1XCoord], a
+	ld a, [wConnectedLevel2YCoord]
+	ld [wConnectedLevel1YCoord], a
+	ld a, [wLevelArrowDirections2]
+	ld [wLevelArrowDirections1], a
+	ld a, [wLevelArrowDirections1]
+	ld hl, wAttrToPlaceInOW
+	call ShowLevelArrowInOW
+	ld a, [wLevelArrowDirections1]
+	call GetConnectedLevel1ArrowCoord
+	call GetConnectedLevel1CoordsInTilemap
+	ld a, TRUE
 	ld [w2d07f], a
 	push hl
 	call Func_81feb
 	pop hl
-	ld a, [w2d080]
+	ld a, [wTileToPlaceInOW]
 	ld [hl], a
 	dec h
 	dec h
 	dec h
-	ld a, [w2d081]
+	ld a, [wAttrToPlaceInOW]
 	ld [hl], a
-	xor a
+	xor a ; FALSE
 	ld [w2d07f], a
-	ld hl, w2d081
-	call Func_82b3e
-	ld hl, w2d06d
+
+	ld hl, wAttrToPlaceInOW
+	call ShowLevelPointInOW
+	ld hl, wConnectedLevel2Coords
 	call GetOWCoordInTilemap
-	ld a, $01
+	ld a, TRUE
 	ld [w2d07f], a
 	push hl
 	call Func_81feb
 	pop hl
-	ld a, [w2d080]
+	ld a, [wTileToPlaceInOW]
 	ld [hl], a
 	dec h
 	dec h
 	dec h
-	ld a, [w2d081]
+	ld a, [wAttrToPlaceInOW]
 	ld [hl], a
-	xor a
+	xor a ; FALSE
 	ld [w2d07f], a
 	ret
 ; 0x81f21
 
-	INCROM $81f21, $81f4b
+Func_81f21: ; 81f21 (20:5f21)
+	ld a, [w2d07f]
+	and a
+	jr z, .skip
+	ld de, wTileToPlaceInOW
+.loop
+	ld a, [de]
+	ld c, a
+	inc e
+	ld a, [de]
+	ld b, a
+	inc e
+	ld a, [de]
+	ld l, a
+	inc e
+	ld a, [de]
+	ld h, a
+	ld [hl], c
+	dec h
+	dec h
+	dec h
+	ld [hl], b
+	inc e
+	ld a, [w2d07f]
+	dec a
+	ld [w2d07f], a
+	and a
+	jr nz, .loop
+	ld a, $01
+	ld [w2d060], a
+.skip
+	ret
+; 0x81f4b
 
-Func_81f4b: ; 81f4b (20:5f4b)
-	ld hl, w2d016
+GetUnlockedOWLevelData: ; 81f4b (20:5f4b)
+	ld hl, wCutsceneMapSide
 	ld a, [hli]
 	ld c, [hl] ; wCutsceneActionParam
 	ld hl, UnlockableConnections
-	call GetCthEntryFromAthTable
+	call GetCthWordFromAthTable
 	ld a, [hli]
-	ld [w2d066], a
+	ld [wConnectedLevel1], a
 	ld a, [hl]
-	ld [w2d067], a
+	ld [wConnectedLevel2], a
 
-	ld hl, w2d016
+	ld hl, wCutsceneMapSide
 	ld a, [hli]
 	ld c, [hl] ; wCutsceneActionParam
-	ld hl, Data_8004c
-	call GetCthEntryFromAthTable
+	ld hl, UnlockableLevelArrows
+	call GetCthWordFromAthTable
 	ld a, [hli]
-	ld [w2d063 + 0], a
+	ld [wUnlockedLevelArrowsPtr + 0], a
 	ld a, [hl]
-	ld [w2d063 + 1], a
+	ld [wUnlockedLevelArrowsPtr + 1], a
 
-	ld a, [w2d066]
+	ld a, [wConnectedLevel1]
 	call GetMapLevelCoords
 	ld a, [hli]
 	ld [w2d069], a
-	ld [w2d06b], a
+	ld [wConnectedLevel1YCoord], a
 	ld a, [hl]
 	ld [w2d06a], a
-	ld [w2d06c], a
+	ld [wConnectedLevel1XCoord], a
 
-	ld a, [w2d067]
+	ld a, [wConnectedLevel2]
 	call GetMapLevelCoords
 	ld a, [hli]
-	ld [w2d06d], a
+	ld [wConnectedLevel2YCoord], a
 	ld a, [hl]
-	ld [w2d06e], a
+	ld [wConnectedLevel2XCoord], a
 	ret
 ; 0x81f94
 
 Func_81f94: ; 81f94 (20:5f94)
-	ld a, [w2d063 + 0]
+	ld a, [wUnlockedLevelArrowsPtr + 0]
 	ld l, a
-	ld a, [w2d063 + 1]
+	ld a, [wUnlockedLevelArrowsPtr + 1]
 	ld h, a
 	ld a, [w2d071]
 	call AddOffsetInPointerTable
 	ld a, [hli]
-	ld [w2d073], a
+	ld [wLevelArrowDirections1], a
 	ld a, [hli]
 	ld [w2d074], a
 	ld a, [hli]
-	ld [w2d075], a
+	ld [wLevelArrowDirections2], a
 	cp $ff
 	ld a, [hl]
 	jr nz, .asm_81fb4
@@ -4522,35 +4719,35 @@ Func_81f94: ; 81f94 (20:5f94)
 	ret ; stray ret
 ; 0x81fb9
 
-Func_81fb9: ; 81fb9 (20:5fb9)
+GetConnectedLevel1ArrowCoord: ; 81fb9 (20:5fb9)
 	ld b, a
-	ld a, $08
-	ld hl, w2d06c
-	bit 4, b
-	jr nz, .asm_81fd5
-	bit 5, b
-	jr nz, .asm_81fd3
-	ld hl, w2d06b
-	bit 6, b
-	jr nz, .asm_81fd3
-	bit 7, b
-	jr nz, .asm_81fd5
+	ld a, $8
+	ld hl, wConnectedLevel1XCoord
+	bit D_RIGHT_F, b
+	jr nz, .right_down
+	bit D_LEFT_F, b
+	jr nz, .left_up
+	ld hl, wConnectedLevel1YCoord
+	bit D_UP_F, b
+	jr nz, .left_up
+	bit D_DOWN_F, b
+	jr nz, .right_down
 	ret
-.asm_81fd3
+.left_up
 	cpl
-	inc a
-.asm_81fd5
+	inc a ; -$8
+.right_down
 	add [hl]
 	ld [hl], a
 	ret
 ; 0x81fd8
 
-Func_81fd8: ; 81fd8 (20:5fd8)
-	ld a, [w2d082 + 0]
-	ld [w2d086 + 0], a
-	ld a, [w2d082 + 1]
-	ld [w2d086 + 1], a
-	ld hl, w2d06b
+GetConnectedLevel1CoordsInTilemap: ; 81fd8 (20:5fd8)
+	ld a, [wOWTilemapPtr + 0]
+	ld [wTempOWTilemapPtr + 0], a
+	ld a, [wOWTilemapPtr + 1]
+	ld [wTempOWTilemapPtr + 1], a
+	ld hl, wConnectedLevel1Coords
 	call GetOWCoordInTilemap
 	ret
 ; 0x81feb
@@ -4559,24 +4756,23 @@ Func_81feb: ; 81feb (20:5feb)
 	ld a, [w2d07f]
 	and a
 	ret z
-	ld a, [w2d082 + 1]
+	ld a, [wOWTilemapPtr + 1]
 	ld h, a
-	ld a, [w2d082 + 0]
+	ld a, [wOWTilemapPtr + 0]
 	ld l, a
 	ld a, [hl]
-	call Func_8200f
-	ld a, [w2d081]
+	call .Func_8200f
+	ld a, [wAttrToPlaceInOW]
 	and $f8
 	or c
 	or $08
-	ld [w2d081], a
+	ld [wAttrToPlaceInOW], a
 	ld a, [w2d07f]
 	dec a
 	ret z
 	debug_nop
-; 0x8200f
 
-Func_8200f: ; 8200f (20:600f)
+.Func_8200f:
 	ld c, $07
 	ret
 ; 0x82012
@@ -4585,7 +4781,7 @@ SetCompassSprite: ; 82012 (20:6012)
 	ld a, [wCurMapSide]
 	ld c, a
 	ld hl, .coords
-	ld de, wCompassSprite
+	ld de, wCompassObj
 	ld b, 2
 	call CopyHLToDE
 	ld a, c
@@ -4600,7 +4796,7 @@ SetCompassSprite: ; 82012 (20:6012)
 	INCROM $82026, $8202c
 
 AddCompassSprite: ; 8202c (20:602c)
-	ld hl, wCompassSprite
+	ld hl, wCompassObj
 	ld de, OAM_aa580
 	ld b, BANK(OAM_aa580)
 	call AddOWSpriteWithScroll
@@ -4639,7 +4835,7 @@ Func_82041: ; 82041 (20:6041)
 .asm_82068
 	ld a, [w2d10c]
 	ld b, a
-	ld a, [w2d073]
+	ld a, [wLevelArrowDirections1]
 	cp b
 	jr z, Func_8208d
 	ld [w2d10c], a
@@ -4719,7 +4915,7 @@ Func_820af: ; 820af (20:60af)
 
 Func_820e6: ; 820e6 (20:60e6)
 	call Func_82111
-	ld a, [w2d073]
+	ld a, [wLevelArrowDirections1]
 	swap a
 	rrca
 	jr c, .asm_82100
@@ -4747,7 +4943,7 @@ Func_820e6: ; 820e6 (20:60e6)
 
 Func_82111: ; 82111 (20:6111)
 	ld a, [wMapSideLevelID]
-	cp OW_EXIT_RIGHT
+	cp OW_EXITS
 	jr c, .asm_8211f
 	sub OW_EXIT_RIGHT
 	ld hl, Data_8031e
@@ -4759,13 +4955,13 @@ Func_82111: ; 82111 (20:6111)
 	add a ; *4
 	ld c, a
 	ld a, [wNextMapSide]
-	call GetCthEntryFromAthTable
+	call GetCthWordFromAthTable
 	ret
 ; 0x8212c
 
 Func_8212c: ; 8212c (20:612c)
 	ld a, [wMapSideLevelID]
-	ld [w2d066], a
+	ld [wConnectedLevel1], a
 	call GetMapLevelCoords
 	ld a, [hli]
 	ld [w2d069], a
@@ -4775,11 +4971,11 @@ Func_8212c: ; 8212c (20:612c)
 	ld c, a
 	ld a, [hli]
 	add b
-	ld [w2d06b], a
+	ld [wConnectedLevel1YCoord], a
 	ld [w2d100], a
 	ld a, [hl]
 	add c
-	ld [w2d06c], a
+	ld [wConnectedLevel1XCoord], a
 	ld [w2d101], a
 	ret
 ; 0x82150
@@ -4851,14 +5047,14 @@ Func_821a1: ; 821a1 (20:61a1)
 	ld [w2d0a0], a
 
 	ld c, $02
-	ld hl, w2d06b
-	ld de, w2d06d
+	ld hl, wConnectedLevel1YCoord
+	ld de, wConnectedLevel2YCoord
 	call Func_821f9
 	ld [w2d0a7], a
 
 	ld c, $04
-	ld hl, w2d06c
-	ld de, w2d06e
+	ld hl, wConnectedLevel1XCoord
+	ld de, wConnectedLevel2XCoord
 	call Func_821f9
 	ld [w2d0a8], a
 
@@ -4944,7 +5140,7 @@ Func_8222f: ; 8222f (20:622f)
 ;	fallthrough
 
 Func_82234: ; 82234 (20:6234)
-	ld hl, w2d06b
+	ld hl, wConnectedLevel1YCoord
 	ld de, w2d0a5
 	jr z, .asm_8223e
 	inc e
@@ -5241,7 +5437,7 @@ UpdateTopBar: ; 82242 (20:6242)
 
 .DoDayNightTransition:
 	farcall DayNightTransition
-	ld a, [wDayNightTransitionState]
+	ld a, [wOWPalTransitionState]
 	and a
 	jr nz, .still_transitioning
 
@@ -5980,8 +6176,8 @@ HandleBottomBar: ; 82761 (20:6761)
 	and [hl]
 	ld [hl], a
 	xor a
-	ld [w2d116], a
-	ld [w2d117], a
+	ld [wCompassObjState], a
+	ld [wCompassObjUnk7], a
 	xor a ; unnecessary
 	ld [wBottomBarAction], a
 	xor a ; unnecessary
@@ -6081,12 +6277,12 @@ DrawBottomBar8Coin: ; 8293f (20:693f)
 	ld a, [wBottomBarFlags]
 	bit 7, a
 	ret z
-	ld hl, w2d116
+	ld hl, wCompassObjState
 	ld de, Frameset_aa2fb
 	ld b, BANK(Frameset_aa2fb)
 	call UpdateOWAnimation
 	ld d, $90
-	ld hl, w2d114
+	ld hl, wCompassObjDuration
 	ld a, [hli]
 	ld e, a
 	ld c, $00
@@ -6167,42 +6363,95 @@ Func_829a1: ; 829a1 (20:69a1)
 	ret
 ; 0x829e2
 
-Func_829e2: ; 829e2 (20:69e2)
+UnlockLevel: ; 829e2 (20:69e2)
 	ld hl, w2d061
 	inc [hl]
 	ld a, [w2d062]
 	jumptable
 
-	dw $6a79
+	dw Func_82a79
 	dw Func_82a0a
-	dw $6a26
-	dw $6a2f
-	dw $6a4e
-	dw $6a62
-	dw $6a96
-	dw $6a9b
-	dw $6aae
-	dw $6a9b
-	dw $6aea
-	dw $6a9b
-	dw $6b22
-	dw $6b67
-	dw $6b7b
-	dw $6baa
+	dw Func_82a26
+	dw Func_82a2f
+	dw Func_82a4e
+	dw Func_82a62
+	dw Func_82a96
+	dw Func_82a9b
+	dw Func_82aae
+	dw Func_82a9b
+	dw Func_82aea
+	dw Func_82a9b
+	dw Func_82b22
+	dw Func_82b67
+	dw Func_82b7b
+	dw Func_82baa
 ; 0x82a0a
 
+; fade to grey
 Func_82a0a: ; 82a0a (20:6a0a)
-	farcall Func_851e7
-	ld a, [wDayNightTransitionState]
+	farcall OWGreyTransition
+	ld a, [wOWPalTransitionState]
 	and a
 	ret nz
+	; done fading
 	di
 	call VBlank_80cb1
 	ei
 	jp Func_82a8d
 ; 0x82a26
 
-	INCROM $82a26, $82a8d
+Func_82a26: ; 82a26 (20:6a26)
+	ld a, 20
+	ld hl, w2d061
+	cp [hl]
+	ret nc
+	jr Func_82a8d
+
+Func_82a2f: ; 82a2f (20:6a2f)
+	ld a, [wCutsceneMapSide]
+	ld b, a ; map side
+	ld a, [wConnectedLevel2]
+	ld d, a ; map side level index
+	cp OW_EXITS
+	jr nc, .is_exit
+	call LoadLevelName
+	xor a
+	ld [wPalConfig1TotalSteps], a
+	jr Func_82a8d
+
+.is_exit
+	; skip name fade in
+	ld a, $2
+	ld hl, w2d062
+	add [hl]
+	ld [hld], a
+	xor a
+	ld [hl], a ; w2d061
+	ret
+
+Func_82a4e: ; 82a4e (20:6a4e)
+	farcall FadeInLevelName
+	srl c
+	ret c
+	jr Func_82a8d
+
+Func_82a62: ; 82a62 (20:6a62)
+	ld a, [w2d061]
+	cp 16
+	ret c
+	farcall LoadOWStarIndicatorPals
+	jr Func_82a8d
+
+Func_82a79: ; 82a79 (20:6a79)
+	call GetUnlockedOWLevelData
+	xor a
+	ld [w2d071], a
+	ld [w2d072], a
+	xor a
+	ld hl, w2d180
+	ld bc, $8
+	call WriteAToHL_BCTimes
+;	fallthrough
 
 Func_82a8d: ; 82a8d (20:6a8d)
 	xor a
@@ -6212,62 +6461,174 @@ Func_82a8d: ; 82a8d (20:6a8d)
 	ret
 ; 0x82a96
 
-	INCROM $82a96, $82ada
+Func_82a96: ; 82a96 (20:6a96)
+	call Func_81f94
+	jr Func_82a8d
+; 0x82a9b
 
-Func_82ada: ; 82ada (20:6ada)
-	ld a, [w2d066]
-	cp $0f
-	ret z
-	ld c, a
-	ld a, [w2d016]
+Func_82a9b: ; 82a9b (20:6a9b)
+	ld a, [w2d07f]
 	and a
-	ret nz
-	ld a, $07
+	jr z, .asm_82aa6
+	xor a
+	ld [w2d061], a
+	ret
+.asm_82aa6
+	ld a, [w2d061]
+	cp 4
+	ret c
+	jr Func_82a8d
+; 0x82aae
+
+Func_82aae: ; 82aae (20:6aae)
+	call IsLeftExitOrJunction
+	jr z, Func_82a8d
+	ld a, [wLevelArrowDirections1]
+	call GetConnectedLevel1ArrowCoord
+	call GetConnectedLevel1CoordsInTilemap
+	ld a, [wLevelArrowDirections1]
+	ld hl, wAttrToPlaceInOW
+	call ShowLevelArrowInOW
+	ld a, TRUE
+	ld [w2d07f], a
+	play_sfx SFX_103
+Func_82ad2: ; 82ad2 (20:6ad2)
+	call Func_81feb
+	call Func_81f21
+	jr Func_82a8d
+; 0x82ada
+
+; return z if 1st connected level is left exit
+; or if it is North's map side junction
+IsLeftExitOrJunction: ; 82ada (20:6ada)
+	ld a, [wConnectedLevel1]
+	cp OW_EXIT_LEFT
+	ret z ; is left exit
+	ld c, a
+	ld a, [wCutsceneMapSide]
+	and a
+	ret nz ; not North
+	ld a, OWNORTH_JUNCTION
 	cp c
 	ret
 ; 0x82aea
 
-	INCROM $82aea, $82b3e
+Func_82aea: ; 82aea (20:6aea)
+	ld a, [wConnectedLevel2]
+	cp OW_EXIT_RIGHT
+	jr z, Func_82a8d
+	ld a, [wConnectedLevel2XCoord]
+	ld [wConnectedLevel1XCoord], a
+	ld a, [wConnectedLevel2YCoord]
+	ld [wConnectedLevel1YCoord], a
+	ld a, [wLevelArrowDirections2]
+	ld [wLevelArrowDirections1], a
+	call GetConnectedLevel1ArrowCoord
+	call GetConnectedLevel1CoordsInTilemap
+	ld a, [wLevelArrowDirections1]
+	ld hl, wAttrToPlaceInOW
+	call ShowLevelArrowInOW
+	ld a, $01
+	ld [w2d07f], a
+	play_sfx SFX_103
+	jp Func_82ad2
+; 0x82b22
 
-Func_82b3e: ; 82b3e (20:6b3e)
+Func_82b22: ; 82b22 (20:6b22)
+	ld a, [wConnectedLevel2]
+	cp OW_EXIT_RIGHT
+	jp z, Func_82a8d
+	ld hl, wConnectedLevel2Coords
+	call GetOWCoordInTilemap
+	ld hl, wAttrToPlaceInOW
+	call ShowLevelPointInOW
+	ld a, $01
+	ld [w2d07f], a
+	jp Func_82ad2
+; 0x82b3e
+
+ShowLevelPointInOW: ; 82b3e (20:6b3e)
 	ld b, a
 	xor a
-	ld [hld], a
-	ld a, $00
-	ld [hl], a
+	ld [hld], a ; attribute
+	ld a, $00 ; unnecessary
+	ld [hl], a ; tile
 	ret
 ; 0x82b45
 
-Func_82b45: ; 82b45 (20:6b45)
+ShowLevelArrowInOW: ; 82b45 (20:6b45)
 	ld b, a
 	xor a
-	ld [hl], a
-	bit 4, b
-	jr nz, .asm_82b5b
-	bit 5, b
-	jr nz, .asm_82b59
-	bit 6, b
-	jr nz, .asm_82b62
-	bit 7, b
-	jr nz, .asm_82b60
+	ld [hl], a ; attribute
+	bit D_RIGHT_F, b
+	jr nz, .right
+	bit D_LEFT_F, b
+	jr nz, .left
+	bit D_UP_F, b
+	jr nz, .up
+	bit D_DOWN_F, b
+	jr nz, .down
 	ret
-.asm_82b59
-	set 5, [hl]
-.asm_82b5b
+.left
+	set 5, [hl] ; x-flip
+.right
 	dec l
-	ld a, $02
-	ld [hl], a
+	ld a, $02 ; horizontal arrow
+	ld [hl], a ; tile
 	ret
-.asm_82b60
-	set 6, [hl]
-.asm_82b62
+.down
+	set 6, [hl] ; y-flip
+.up
 	dec l
-	ld a, $01
-	ld [hl], a
+	ld a, $01 ; vertical arrow
+	ld [hl], a ; tile
 	ret
 ; 0x82b67
 
-	INCROM $82b67, $82bb8
+Func_82b67: ; 82b67 (20:6b67)
+	ld a, [w2d07f]
+	and a
+	jr z, .asm_82b72
+	xor a
+	ld [w2d061], a
+	ret
+.asm_82b72
+	ld a, [w2d061]
+	cp 30
+	ret c
+	jp Func_82a8d
+; 0x82b7b
+
+Func_82b7b: ; 82b7b (20:6b7b)
+	ld a, [w2d061]
+	cp $01
+	jr z, .asm_82b88
+	cp $40
+	ret c
+	jp Func_82a8d
+.asm_82b88
+	ld a, [wConnectedLevel2]
+	cp OW_EXITS
+	jp nc, Func_82a8d
+	ld a, [wConnectedLevel2YCoord]
+	ld [w2d180YCoord], a
+	ld a, [wConnectedLevel2XCoord]
+	ld [w2d180XCoord], a
+	ld a, $01
+	ld [w2d180State], a
+	play_sfx SFX_104
+	ret
+; 0x82baa
+
+Func_82baa: ; 82baa (20:6baa)
+	ld a, [w2d061]
+	cp 30
+	ret c
+	xor a
+	ld [wCutsceneActionParam], a
+	ld [w2d062], a
+	ret
+; 0x82bb8
 
 Func_82bb8: ; 82bb8 (20:6bb8)
 	ld a, [wOWCutsceneAction]
@@ -6376,7 +6737,7 @@ Func_82c55: ; 82c55 (20:6c55)
 	; carry set if not North
 	ld a, [wCutsceneActionParam]
 	sbc 0
-	ld [w2d067], a
+	ld [wConnectedLevel2], a
 	ld a, [w2d025]
 	cp CUTSCENE_25
 	jr z, .asm_82c71
@@ -6409,7 +6770,7 @@ Func_82c8f: ; 82c8f (20:6c8f)
 ; 0x82c93
 
 Func_82c93: ; 82c93 (20:6c93)
-	ld a, [w2d067]
+	ld a, [wConnectedLevel2]
 	ld c, a
 	ld de, w2d180
 	call Func_80db4

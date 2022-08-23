@@ -62,8 +62,10 @@ DEF ALL_CRAYONS EQU CRAYON_RED | CRAYON_BROWN | CRAYON_YELLOW | CRAYON_GREEN | C
 	const OWEAST_THE_EAST_CRATER     ; $5
 	const OWEAST_FOREST_OF_FEAR      ; $6
 
-DEF OW_EXIT_RIGHT EQU $0e
-DEF OW_EXIT_LEFT  EQU $0f
+	const_def $e
+DEF OW_EXITS EQU const_value
+	const OW_EXIT_RIGHT ; $e
+	const OW_EXIT_LEFT  ; $f
 
 ; OW bottom bar action
 	const_def

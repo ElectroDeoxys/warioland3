@@ -37,7 +37,7 @@ FadeBGToWhite:: ; 47f (0:47f)
 .loop_colors
 	ld a, [de]
 	and %00011111
-	ld [hli], a ; red
+	ld [hli], a ; wCurRed
 	ld a, [de]
 	and %11100000
 	rrca
@@ -53,12 +53,12 @@ FadeBGToWhite:: ; 47f (0:47f)
 	rlca
 	rlca
 	or [hl]
-	ld [hli], a ; green
+	ld [hli], a ; wCurGreen
 	ld a, [de]
 	and %01111100
 	rrca
 	rrca
-	ld [hl], a ; blue
+	ld [hl], a ; wCurBlue
 
 ; inc blue
 	inc [hl]
@@ -209,7 +209,7 @@ DarkenBGToPal:: ; 5f1 (0:5f1)
 	call VBlank_8bf
 
 .asm_60b
-	ld hl, wTargetRed
+	ld hl, wTargetRGB
 	ld de, wTempPals1
 	ld b, 8 palettes
 
@@ -361,7 +361,7 @@ DarkenBGToPal:: ; 5f1 (0:5f1)
 
 	inc e
 	ld d, HIGH(wTempPals1)
-	ld hl, wTargetRed
+	ld hl, wTargetRGB
 	dec b
 	jp nz, .loop_colors
 
@@ -417,7 +417,7 @@ SlowFadeInScreen:: ; 6fa (0:6fa)
 	call VBlank_8bf
 
 .fade
-	ld hl, wTargetRed
+	ld hl, wTargetRGB
 	ld de, wTempPals1
 	ld b, 8 palettes
 
@@ -545,7 +545,7 @@ SlowFadeInScreen:: ; 6fa (0:6fa)
 
 	inc e
 	ld d, HIGH(wTempPals1)
-	ld hl, wTargetRed
+	ld hl, wTargetRGB
 	dec b
 	jp nz, .loop_colors
 

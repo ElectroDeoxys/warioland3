@@ -6,11 +6,8 @@ SECTION "WRAM0", WRAM0
 
 w0Start:: ; c000
 
-wTempPals1:: ; c000
-	ds 8 palettes
-
-wTempPals2:: ; c040
-	ds 8 palettes
+wTempPals1:: ds 8 palettes ; c000
+wTempPals2:: ds 8 palettes ; c040
 
 wBackupVBlankFunc:: ; c080
 	ds $3
@@ -196,16 +193,16 @@ wc0c7:: ; c0c7
 wEnemyGroup:: ; c0c8
 	db
 
-wRoom::                 db ; c0c9
-wRoomPermissionMap::    db ; c0ca
-wRoomTileMap::          db ; c0cb
-wRoomMainTiles::        db ; c0cc
-wRoomSpecialTiles::     db ; c0cd
-wRoomPalettes::         db ; c0ce
+wRoom::                  db ; c0c9
+wRoomPermissionMap::     db ; c0ca
+wRoomTileMap::           db ; c0cb
+wRoomMainTiles::         db ; c0cc
+wRoomSpecialTiles::      db ; c0cd
+wRoomPalettes::          db ; c0ce
 wRoomPermissionMapBank:: db ; c0cf
-wc0d0::                 db ; c0d0
-wRoomMainTilesBank::    db ; c0d1
-wRoomSpecialTilesBank:: db ; c0d2
+wc0d0::                  db ; c0d0
+wRoomMainTilesBank::     db ; c0d1
+wRoomSpecialTilesBank::  db ; c0d2
 
 wPaletteBank:: ; c0d3
 	db
@@ -275,20 +272,20 @@ wc0e8:: ; c0e8
 
 	ds $17
 
-wTempBGPals:: ; c100
-	ds 8 palettes
-
-wTempOBPals:: ; c140
-	ds 8 palettes
+wTempBGPals:: ds 8 palettes ; c100
+wTempOBPals:: ds 8 palettes ; c140
 
 ; target rgb values for fading
+wTargetRGB:: ; c180
 wTargetRed::   db ; c180
 wTargetGreen:: db ; c181
 wTargetBlue::  db ; c182
 
 ; current rgb values for color fade
 wCurRGB:: ; c183
-	ds $3
+wCurRed::   db ; c183
+wCurGreen:: db ; c184
+wCurBlue::  db ; c185
 
 wc186:: ; c186
 	db
@@ -1377,7 +1374,7 @@ w2d014:: ; d014
 w2d015:: ; d015
 	db
 
-w2d016:: ; d016
+wCutsceneMapSide:: ; d016
 	db
 
 wCutsceneActionParam:: ; d017
@@ -1533,8 +1530,8 @@ wTopBarSelection:: ; d053
 wTopBarSelectableButtons:: ; d054
 	db
 
-wDayNightTransitionState::   db ; d055
-wDayNightTransitionCounter:: db ; d056
+wOWPalTransitionState::   db ; d055
+wOWPalTransitionCounter:: db ; d056
 
 ; which crayons have been collected
 ; each bit corresponds to CRAYON_*
@@ -1558,17 +1555,14 @@ w2d061:: ; d061
 w2d062:: ; d062
 	db
 
-w2d063:: ; d063
-	ds $2
+wUnlockedLevelArrowsPtr:: ; d063
+	dw
 
 w2d065:: ; d065
 	db
 
-w2d066:: ; d066
-	db
-
-w2d067:: ; d067
-	db
+wConnectedLevel1:: db ; d066
+wConnectedLevel2:: db ; d067
 
 w2d068:: ; d068
 	db
@@ -1579,17 +1573,13 @@ w2d069:: ; d069
 w2d06a:: ; d06a
 	db
 
-w2d06b:: ; d06b
-	db
+wConnectedLevel1Coords:: ; d06b
+wConnectedLevel1YCoord:: db ; d06b
+wConnectedLevel1XCoord:: db ; d06c
 
-w2d06c:: ; d06c
-	db
-
-w2d06d:: ; d06d
-	db
-
-w2d06e:: ; d06e
-	db
+wConnectedLevel2Coords:: ; d06d
+wConnectedLevel2YCoord:: db ; d06d
+wConnectedLevel2XCoord:: db ; d06e
 
 w2d06f:: ; d06f
 	db
@@ -1603,17 +1593,10 @@ w2d071:: ; d071
 w2d072:: ; d072
 	db
 
-w2d073:: ; d073
-	db
-
-w2d074:: ; d074
-	db
-
-w2d075:: ; d075
-	db
-
-w2d076:: ; d076
-	db
+wLevelArrowDirections1:: db ; d073
+w2d074::                 db ; d074
+wLevelArrowDirections2:: db ; d075
+w2d076::                 db ; d076
 
 ; CUTSCENE_* constant
 wCutscene:: ; d077
@@ -1642,19 +1625,19 @@ w2d07d:: ; d07d
 w2d07f:: ; d07f
 	db
 
-w2d080:: ; d080
+wTileToPlaceInOW:: ; d080
 	db
 
-w2d081:: ; d081
+wAttrToPlaceInOW:: ; d081
 	db
 
-w2d082:: ; d082
-	ds $2
+wOWTilemapPtr:: ; d082
+	dw
 
 	ds $2
 
-w2d086:: ; d086
-	ds $2
+wTempOWTilemapPtr:: ; d086
+	dw
 
 	ds $8
 
@@ -1721,19 +1704,17 @@ w2d0c0:: ; d0dc0
 	ds $10
 
 wPalConfig1:: pal_config_struct wPalConfig1 ; d0d0
-
-w2d0d5:: ; d0d5
-	db
-
 wPalConfig2:: pal_config_struct wPalConfig2 ; d0d6
 
-w2d0db:: ; d0db
+; which PalConfig to fade in FadePalConfig
+; 0 = wPalConfig1
+; 1 = wPalConfig2
+wPalConfigToFade:: ; d0dc
 	db
 
-w2d0dc:: ; d0dc
-	db
-
-w2d0dd:: ; d0dd
+; how many times to repeat the fade routine
+; higher values means more fade happens per frame
+wPalFadeRepeat:: ; d0dd
 	db
 
 	ds $2
@@ -1741,7 +1722,7 @@ w2d0dd:: ; d0dd
 w2d0e0:: ; d0e0
 	db
 
-w2d0e1:: ; d0e1
+wCurPalTotalSteps:: ; d0e1
 	db
 
 w2d0e2:: ; d0e2
@@ -1822,16 +1803,7 @@ w2d10e:: ; d10e
 
 	db
 
-wCompassSprite:: sprite_oam_struct wCompassSprite ; d110
-
-w2d114:: ; d114
-	ds $2
-
-w2d116:: ; d116
-	db
-
-w2d117:: ; d117
-	db
+wCompassObj:: scene_obj_struct wCompassObj ; d110
 
 	ds $6
 

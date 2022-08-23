@@ -1685,14 +1685,14 @@ Pals_84a20: ; 84a20 (21:4a20)
 ; 0x84a40
 
 DayNightTransition: ; 84a40 (21:4a40)
-	ld hl, wDayNightTransitionCounter
+	ld hl, wOWPalTransitionCounter
 	inc [hl]
 	ld a, [w2d011]
 	and a
 	jp nz, .NightToDayTable
 
 ; Day to Night table
-	ld a, [wDayNightTransitionState]
+	ld a, [wOWPalTransitionState]
 	jumptable
 
 	dw .InitDayToNight
@@ -1733,13 +1733,13 @@ DayNightTransition: ; 84a40 (21:4a40)
 
 .AdvanceTable:
 	xor a
-	ld hl, wDayNightTransitionCounter
+	ld hl, wOWPalTransitionCounter
 	ld [hld], a
-	inc [hl] ; wDayNightTransitionState
+	inc [hl] ; wOWPalTransitionState
 	ret
 
 .Func_84a8e: ; unreferenced
-	ld a, [wDayNightTransitionCounter]
+	ld a, [wOWPalTransitionCounter]
 	cp $04
 	ret c
 	jp .AdvanceTable
@@ -1762,12 +1762,12 @@ DayNightTransition: ; 84a40 (21:4a40)
 
 .no_skip
 	ld hl, w2d809
-	ld a, [wDayNightTransitionCounter]
+	ld a, [wOWPalTransitionCounter]
 	cp [hl]
 	ret c
 
 	xor a
-	ld [wDayNightTransitionCounter], a
+	ld [wOWPalTransitionCounter], a
 	ld a, 8 * NUM_PAL_COLORS * 3 
 	ld [w2d807], a
 
@@ -1869,12 +1869,12 @@ DayNightTransition: ; 84a40 (21:4a40)
 	call PlayOverworldMusic
 	xor a
 	ld [w2d0e3], a
-	ld [wDayNightTransitionState], a
-	ld [wDayNightTransitionCounter], a
+	ld [wOWPalTransitionState], a
+	ld [wOWPalTransitionCounter], a
 	ret
 
 .NightToDayTable:
-	ld a, [wDayNightTransitionState]
+	ld a, [wOWPalTransitionState]
 	jumptable
 
 	dw .InitNightToDay
@@ -2132,7 +2132,7 @@ SkipDayNightTransition: ; 84d55 (21:4d55)
 
 	xor a
 	ld [wDayNightTransistionSteps], a
-	ld [wDayNightTransitionCounter], a
+	ld [wOWPalTransitionCounter], a
 	ld b, $06
 	ld a, [w2d011]
 	and a
@@ -2140,7 +2140,7 @@ SkipDayNightTransition: ; 84d55 (21:4d55)
 	ld b, $04
 .day
 	ld a, b
-	ld [wDayNightTransitionState], a
+	ld [wOWPalTransitionState], a
 	ret
 ; 0x84d76
 
@@ -2296,9 +2296,10 @@ Data_84e39: ; 84e39 (21:4e39)
 	INCROM $84e43, $84e86
 
 Func_84e86: ; 84e86 (21:4e86)
-	ld a, [w2d0d5]
-	cp $01
-	jp nc, .asm_84ed8
+	ld a, [wPalConfig1TotalSteps]
+	cp 1
+	jp nc, .do_fade
+; init fade
 	ld a, [w2d880]
 	and a
 	jr z, .asm_84eec
@@ -2314,12 +2315,13 @@ Func_84e86: ; 84e86 (21:4e86)
 	jp z, .asm_84f97
 	dec a
 	jp z, .asm_84f0f
+
 .asm_84eab
 	ld a, HIGH(wTempBGPals)
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals)
 	ld [wPalConfig1SourceLo], a
-	ld a, OCPSF_AUTOINC
+	ld a, BCPSF_AUTOINC
 	ld [wPalConfig1Index], a
 	ld a, 8 ; number of pals
 	ld [wPalConfig1Number], a
@@ -2333,17 +2335,17 @@ Func_84e86: ; 84e86 (21:4e86)
 	ld a, 8 ; number of pals
 	ld [wPalConfig2Number], a
 
-	ld hl, w2d0d5
+	ld hl, wPalConfig1TotalSteps
 	inc [hl]
 	ret
 
-.asm_84ed8
+.do_fade
 	call Func_851d1
 	call Func_851bc
 	ret c
 	xor a
-	ld [w2d0d5], a
-	ld [w2d0db], a
+	ld [wPalConfig1TotalSteps], a
+	ld [wPalConfig2TotalSteps], a
 	ld hl, w2d014
 	ld [hld], a
 	inc [hl]
@@ -2351,7 +2353,7 @@ Func_84e86: ; 84e86 (21:4e86)
 
 .asm_84eec
 	call .CopyPalsToBGAndOBPals
-	call Func_84fea
+	call ClearTempPals_Bank21
 	jr .asm_84eab
 
 .asm_84ef4
@@ -2454,7 +2456,7 @@ Func_84e86: ; 84e86 (21:4e86)
 
 	INCROM $84fd5, $84fea
 
-Func_84fea: ; 84fea (21:4fea)
+ClearTempPals_Bank21: ; 84fea (21:4fea)
 	xor a
 	ld hl, wTempPals1
 	ld bc, 8 palettes
@@ -2469,8 +2471,8 @@ Func_84fea: ; 84fea (21:4fea)
 	INCROM $84fff, $85046
 
 Func_85046: ; 85046 (21:5046)
-	ld a, [w2d0d5]
-	cp $01
+	ld a, [wPalConfig1TotalSteps]
+	cp 1
 	jr nc, .asm_850a6
 
 	ld hl, wTempPals1 palette 1
@@ -2490,7 +2492,7 @@ Func_85046: ; 85046 (21:5046)
 	ld bc, 8 palettes
 	call WriteAToHL_BCTimes
 
-	ld hl, w2d0d5
+	ld hl, wPalConfig1TotalSteps
 	inc [hl]
 	ld a, HIGH(wTempBGPals palette 1)
 	ld [wPalConfig1SourceHi], a
@@ -2515,7 +2517,7 @@ Func_85046: ; 85046 (21:5046)
 	call Func_851bc
 	ret c
 	xor a
-	ld [w2d0d5], a
+	ld [wPalConfig1TotalSteps], a
 	ld [w2d014], a
 	ld hl, w2d013
 	inc [hl]
@@ -2528,10 +2530,10 @@ Func_851bc: ; 851bc (21:51bc)
 	ld a, LOW(rBCPS)
 	ld [wPalConfig1Register], a
 	xor a
-	ld [w2d0dc], a
-	ld a, $01
-	ld [w2d0dd], a
-	ld hl, w2d0d5
+	ld [wPalConfigToFade], a
+	ld a, 1 ; slow fade
+	ld [wPalFadeRepeat], a
+	ld hl, wPalConfig1TotalSteps
 	call FadePalConfig
 	ret
 ; 0x851d1
@@ -2539,25 +2541,57 @@ Func_851bc: ; 851bc (21:51bc)
 Func_851d1: ; 851d1 (21:51d1)
 	ld a, LOW(rOCPS)
 	ld [wPalConfig2Register], a
-	ld a, $01
-	ld [w2d0dc], a
-	ld a, $01
-	ld [w2d0dd], a
-	ld hl, w2d0db
+	ld a, 1
+	ld [wPalConfigToFade], a
+	ld a, 1
+	ld [wPalFadeRepeat], a
+	ld hl, wPalConfig2TotalSteps
 	call FadePalConfig
 	ret
 ; 0x851e7
 
-Func_851e7: ; 851e7 (21:51e7)
-	ld hl, wDayNightTransitionCounter
+OWGreyTransition: ; 851e7 (21:51e7)
+	ld hl, wOWPalTransitionCounter
 	inc [hl]
-	ld a, [wDayNightTransitionState]
+	ld a, [wOWPalTransitionState]
 	jumptable
-; 0x851ef
+	dw .Start
+	dw DayNightTransition.FadeColours
+	dw .Finish
 
-	INCROM $851ef, $85234
+.Start:
+	ld de, wTempPals1 + COLOURFADESTRUCT_BASE
+	ld hl, wFadePals
+	call CopyPalToColourFadeStructs
+	ld hl, wTempPals1
+	ld de, wTempBGPals
+	ld b, 8 palettes
+	call CopyHLToDE
 
-Func_85234: ; 85234 (21:5234)
+	call LoadGreyOWPals
+	ld hl, wFadePals + COLOURFADESTRUCT_TARGET
+	ld de, wTempPals1
+	call CopyPalToColourFadeStructs
+	call InitColourFadeStructs
+
+	ld a, DAYNIGHT_TRANSITION_STEPS
+	ld [wDayNightTransistionSteps], a
+	xor a
+	ld [w2d809], a
+	di
+	call VBlank_84d76
+	ei
+	jp DayNightTransition.AdvanceTable
+
+.Finish:
+	xor a
+	ld [w2d0e3], a
+	ld [wOWPalTransitionState], a
+	ld [wOWPalTransitionCounter], a
+	ret
+; 0x85234
+
+LoadGreyOWPals: ; 85234 (21:5234)
 	ld a, [wCurMapSide]
 	ld b, a
 	add a ; *2
@@ -2599,10 +2633,11 @@ Func_85234: ; 85234 (21:5234)
 	ret
 ; 0x85271
 
-Func_85271: ; 85271 (21:5271)
-	ld a, [w2d0d5]
-	cp $01
-	jr nc, .asm_852ca
+FadeInLevelName: ; 85271 (21:5271)
+	ld a, [wPalConfig1TotalSteps]
+	cp 1
+	jr nc, .do_fade
+; init fade
 	ld a, $02
 	ld [w2d0e0], a
 
@@ -2613,25 +2648,29 @@ Func_85271: ; 85271 (21:5271)
 
 	ld a, [w2d0e4]
 	and a
-	jr z, .asm_8529b
+	jr z, .load_day_night_pal
+
+	; make level name blue
 	ld hl, Pals_852dd color 1
 	ld de, wTempPals1 palette 7 color 1
 	ld b, $6
 	call CopyHLToDE
-	jr .asm_852af
+	jr .set_pal_config
 
-.asm_8529b
-	ld hl, Pals_84000 palette 7
+.load_day_night_pal
+; level name pal during the day is white
+; and during the night is yellow
+	ld hl, Pals_84000 palette 7 ; day
 	ld a, [w2d011]
 	and a
 	jr z, .got_pal
-	ld hl, Pals_840c0 palette 7
+	ld hl, Pals_840c0 palette 7 ; night
 .got_pal
 	ld de, wTempPals1 palette 7
 	ld b, 1 palettes
 	call CopyHLToDE
 
-.asm_852af
+.set_pal_config
 	ld a, HIGH(wTempBGPals palette 7)
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals palette 7)
@@ -2640,19 +2679,21 @@ Func_85271: ; 85271 (21:5271)
 	ld [wPalConfig1Index], a
 	ld a, 1
 	ld [wPalConfig1Number], a
-	ld hl, w2d0d5
+	ld hl, wPalConfig1TotalSteps
 	inc [hl]
 	scf
-	jr .asm_852d8
+	jr .return
 
-.asm_852ca
-	call Func_85331
-	jr c, .asm_852d8
-	ld a, $00
-	ld [w2d0d5], a
-	inc a
+.do_fade
+	call FadeBGPalConfig
+	jr c, .return
+	; finished fade
+	ld a, 0
+	ld [wPalConfig1TotalSteps], a
+	inc a ; $1
 	ld [w2d0e0], a
-.asm_852d8
+.return
+	; shift carry flag to c
 	ld c, $00
 	rl c
 	ret
@@ -2672,8 +2713,8 @@ Func_852e5: ; 852e5 (21:52e5)
 	ld a, [wBottomBarAction]
 	and a
 	ret nz
-	ld a, [w2d0d5]
-	cp $01
+	ld a, [wPalConfig1TotalSteps]
+	cp 1
 	jr nc, .asm_85325
 
 	ld hl, wTempPals1 palette 7 color 1
@@ -2686,7 +2727,7 @@ Func_852e5: ; 852e5 (21:52e5)
 	ld bc, $6
 	call WriteAToHL_BCTimes
 
-	ld hl, w2d0d5
+	ld hl, wPalConfig1TotalSteps
 	inc [hl]
 	ld a, HIGH(wTempBGPals palette 7)
 	ld [wPalConfig1SourceHi], a
@@ -2699,44 +2740,47 @@ Func_852e5: ; 852e5 (21:52e5)
 	ret
 
 .asm_85325
-	call Func_85331
+	call FadeBGPalConfig
 	ret c
 	xor a
-	ld [w2d0d5], a
+	ld [wPalConfig1TotalSteps], a
 	ld [w2d0e0], a
 	ret
 ; 0x85331
 
-Func_85331: ; 85331 (21:5331)
+FadeBGPalConfig: ; 85331 (21:5331)
 	ld a, LOW(rBCPS)
 	ld [wPalConfig1Register], a
 	xor a
-	ld [w2d0dc], a
-	ld b, 4
+	ld [wPalConfigToFade], a
+	ld b, 4 ; fast fade
 	ld a, [w2d025]
 	and a
-	jr z, .asm_85344
-	ld b, 1
-.asm_85344
+	jr z, .fast_fade
+	ld b, 1 ; slow fade
+.fast_fade
 	ld a, b
-	ld [w2d0dd], a
-	ld hl, w2d0d5
+	ld [wPalFadeRepeat], a
+	ld hl, wPalConfig1TotalSteps
 	call FadePalConfig
 	ret
 ; 0x8534f
 
+; fades pal in wPalConfig
+; from wTempBGPals/wTempOBPals to wTempPals1/wTempPals2
+; return carry if total steps hasn't reached $20
 FadePalConfig: ; 8534f (21:534f)
 	push hl
 	ld a, [hl]
-	ld [w2d0e1], a
+	ld [wCurPalTotalSteps], a
 .loop
-	ld a, [w2d0dc]
+	ld a, [wPalConfigToFade]
 	ld hl, wPalConfig1Number
 	and a
-	jr z, .got_number_pals
+	jr z, .got_config
 	ld hl, wPalConfig2Number
-.got_number_pals
-	ld a, [hli]
+.got_config
+	ld a, [hli] ; number of pals
 	rlca
 	rlca ; *4
 	ld b, a
@@ -2744,11 +2788,11 @@ FadePalConfig: ; 8534f (21:534f)
 	dec a
 	ld d, a
 	ld e, [hl] ; source lo
-	ld hl, wTargetRed
+	ld hl, wTargetRGB
 .loop_colours
 	ld a, [de]
 	and %00011111
-	ld [hli], a ; red
+	ld [hli], a ; wTargetRed
 	ld a, [de]
 	and %11100000
 	rrca
@@ -2764,17 +2808,18 @@ FadePalConfig: ; 8534f (21:534f)
 	rlca
 	rlca
 	or [hl]
-	ld [hli], a ; green
+	ld [hli], a ; wTargetGreen
 	ld a, [de]
 	and %01111100
 	rrca
 	rrca
-	ld [hli], a ; blue
+	ld [hli], a ; wTargetBlue
 	dec e
-	ld d, $c1
+
+	ld d, HIGH(wTempBGPals) ; aka HIGH(wTempOBPals)
 	ld a, [de]
 	and %00011111
-	ld [hli], a ; red
+	ld [hli], a ; wCurRed
 	ld a, [de]
 	and %11100000
 	rrca
@@ -2790,15 +2835,16 @@ FadePalConfig: ; 8534f (21:534f)
 	rlca
 	rlca
 	or [hl]
-	ld [hli], a ; green
+	ld [hli], a ; wCurGreen
 	ld a, [de]
 	and %01111100
 	rrca
 	rrca
-	ld [hl], a ; blue
+	ld [hl], a ; wCurBlue
+
 	ld a, [wTargetBlue]
 	ld c, a
-	ld a, [hl]
+	ld a, [hl] ; wCurBlue
 	cp c
 	jr z, .got_blue
 	jr nc, .dec_blue
@@ -2810,7 +2856,7 @@ FadePalConfig: ; 8534f (21:534f)
 	dec l
 	ld a, [wTargetGreen]
 	ld c, a
-	ld a, [hl]
+	ld a, [hl] ; wCurGreen
 	cp c
 	jr z, .got_green
 	jr nc, .dec_green
@@ -2822,7 +2868,7 @@ FadePalConfig: ; 8534f (21:534f)
 	dec l
 	ld a, [wTargetRed]
 	ld c, a
-	ld a, [hl]
+	ld a, [hl] ; wCurRed
 	cp c
 	jr z, .got_red
 	jr nc, .dec_red
@@ -2831,10 +2877,10 @@ FadePalConfig: ; 8534f (21:534f)
 .dec_red
 	dec [hl]
 .got_red
-	ld a, [hli]
+	ld a, [hli] ; wCurRed
 	ld c, a
-	ld a, [hl]
-	and $07
+	ld a, [hl] ; wCurGreen
+	and %111
 	rlca
 	rlca
 	rlca
@@ -2844,28 +2890,31 @@ FadePalConfig: ; 8534f (21:534f)
 	dec e
 	ld [de], a
 	ld a, [hli]
-	and $18
+	and %11000
 	rrca
 	rrca
 	rrca
 	ld c, a
-	ld a, [hld]
+	ld a, [hld] ; wCurBlue
 	rlca
 	rlca
 	or c
 	inc e
 	ld [de], a
+
 	inc e
 	ld d, HIGH(wTempPals1)
-	ld hl, wTargetRed
+	ld hl, wTargetRGB
 	dec b
 	jp nz, .loop_colours
-	ld hl, w2d0e1
+
+	ld hl, wCurPalTotalSteps
 	inc [hl]
-	ld a, [w2d0dd]
+	ld a, [wPalFadeRepeat]
 	dec a
-	ld [w2d0dd], a
+	ld [wPalFadeRepeat], a
 	jp nz, .loop
+
 	ld a, [hl]
 	pop hl
 	ld [hl], a
@@ -2890,7 +2939,7 @@ Func_8540a: ; 8540a (21:540a)
 	ld a, [w2dfff]
 	and a
 	ret z
-	call Func_85234
+	call LoadGreyOWPals
 	ret
 
 ; if it's North or West and all crayons have been collected
@@ -2923,7 +2972,23 @@ Func_8540a: ; 8540a (21:540a)
 	ret
 ; 0x85450
 
-	INCROM $85450, $85475
+LoadOWStarIndicatorPals: ; 85450 (21:5450)
+	ld hl, Pals_848e0
+	ld de, wTempPals2 palette 4
+	ld b, 2 palettes
+	call CopyHLToDE
+	ld a, HIGH(wTempPals2 palette 4)
+	ld [wPalConfig1SourceHi], a
+	ld a, LOW(wTempPals2 palette 4)
+	ld [wPalConfig1SourceLo], a
+	ld a, OCPSF_AUTOINC | (4 << 3)
+	ld [wPalConfig1Index], a
+	ld a, 2
+	ld [wPalConfig1Number], a
+	ld a, LOW(rOCPS)
+	ld [wPalConfig1Register], a
+	ret
+; 0x85475
 
 Func_85475: ; 85475 (21:5475)
 	call GetMapSidePalGroup1

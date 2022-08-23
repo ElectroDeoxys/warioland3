@@ -76,11 +76,12 @@ MACRO obj_struct
 ENDM
 
 MACRO pal_config_struct
-\1Register:: db
-\1Index::    db
-\1Number::   db
-\1SourceHi:: db
-\1SourceLo:: db
+\1Register::   db
+\1Index::      db
+\1Number::     db
+\1SourceHi::   db
+\1SourceLo::   db
+\1TotalSteps:: db
 ENDM
 
 MACRO hdma_config_struct

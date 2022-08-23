@@ -44,8 +44,8 @@ Func_9c021: ; 9c021 (27:4021)
 	ld [w2d801], a
 	ld [w2d013], a
 	ld [w2d014], a
-	ld [w2d0d5], a
-	ld [w2d0db], a
+	ld [wPalConfig1TotalSteps], a
+	ld [wPalConfig2TotalSteps], a
 
 	ld a, [wLCDCFlagsToFlip]
 	ld b, a
@@ -459,7 +459,7 @@ Func_9c072: ; 9c072 (27:4072)
 	decompress_vram1 BGMap_b97c4, v1BGMap0
 	decompress BGMap_b9768, v0BGMap0
 
-	jp ClearTempPals
+	jp ClearTempPals_Bank27
 ; 0x9c4b9
 
 .Func_9c4b9: ; 9c4b9 (27:44b9)
@@ -596,7 +596,7 @@ Func_9c072: ; 9c072 (27:4072)
 	call LoadFarTiles
 	call Func_9c977
 	call Func_9cb13
-	call ClearTempPals
+	call ClearTempPals_Bank27
 	jp Func_9ded4
 ; 0x9c623
 
@@ -611,7 +611,7 @@ Func_9c072: ; 9c072 (27:4072)
 ; 0x9c636
 
 .Func_9c636: ; 9c636 (27:4636)
-	call ClearTempPals
+	call ClearTempPals_Bank27
 	call Func_9c9a6
 	ld b, BANK(LevelMainTiles30)
 	ld hl, LevelMainTiles30
@@ -655,7 +655,7 @@ Func_9c072: ; 9c072 (27:4072)
 	ld hl, LevelMainTiles24
 	call LoadFarTiles
 	call Func_9cb7b
-	call ClearTempPals
+	call ClearTempPals_Bank27
 	jp Func_9e2b8
 ; 0x9c69d
 
@@ -694,7 +694,7 @@ Func_9c072: ; 9c072 (27:4072)
 ; 0x9c700
 
 .Func_9c700: ; 9c700 (27:4700)
-	call ClearTempPals
+	call ClearTempPals_Bank27
 	call LoadCutscenes8Gfx
 
 	decompress_vram1 FireGfx, v1Tiles1
@@ -705,7 +705,7 @@ Func_9c072: ; 9c072 (27:4072)
 ; 0x9c731
 
 .Func_9c731: ; 9c731 (27:4731)
-	call ClearTempPals
+	call ClearTempPals_Bank27
 	call Func_9c84f
 	ld b, BANK(LevelMainTiles27)
 	ld hl, LevelMainTiles27
@@ -742,7 +742,7 @@ Func_9c072: ; 9c072 (27:4072)
 ; 0x9c77f
 
 .Func_9c77f: ; 9c77f (27:477f)
-	call ClearTempPals
+	call ClearTempPals_Bank27
 	ld b, BANK(LevelMainTiles11)
 	ld hl, LevelMainTiles11
 	call LoadFarTiles
@@ -753,7 +753,7 @@ Func_9c072: ; 9c072 (27:4072)
 ; 0x9c796
 
 .Func_9c796: ; 9c796 (27:4796)
-	call ClearTempPals
+	call ClearTempPals_Bank27
 	call Func_9c937
 	call Func_9cb3a
 	call Func_9cc28
@@ -761,7 +761,7 @@ Func_9c072: ; 9c072 (27:4072)
 ; 0x9c7a5
 
 .Func_9c7a5: ; 9c7a5 (27:47a5)
-	call ClearTempPals
+	call ClearTempPals_Bank27
 	call Func_9c9cb
 
 	decompress_vram1 WallCrackGfx, v1Tiles1
@@ -773,7 +773,7 @@ Func_9c072: ; 9c072 (27:4072)
 ; 0x9c7d9
 
 .Func_9c7d9: ; 9c7d9 (27:47d9)
-	call ClearTempPals
+	call ClearTempPals_Bank27
 	call Func_9ca38
 	call Func_9c90c
 	call Func_9cb20
@@ -1272,7 +1272,7 @@ Func_9cc4f: ; 9cc4f (27:4c4f)
 	ret
 ; 0x9cc72
 
-ClearTempPals: ; 9cc72 (27:4c72)
+ClearTempPals_Bank27: ; 9cc72 (27:4c72)
 	xor a
 	ld hl, wTempPals1
 	ld bc, 8 palettes
