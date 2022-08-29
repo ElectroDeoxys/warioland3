@@ -1187,7 +1187,7 @@ Func_80621: ; 80621 (20:4621)
 Func_8065e: ; 8065e (20:465e)
 	ld a, [wGameModeFlags]
 	ld c, a
-	and ($1 << MODE_GAME_CLEARED_F)
+	and MODE_GAME_CLEARED
 	bit MODE_TIME_ATTACK_F, c
 	jr z, .asm_80669
 	xor a
