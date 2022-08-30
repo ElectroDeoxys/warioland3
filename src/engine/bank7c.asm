@@ -17,10 +17,11 @@ _PauseMenuStateTable: ; 1f0000 (7c:4000)
 	dw DarkenBGToPal_Fast
 	dw FillSaveScreenBar
 	dw SlowFadeBGToWhite
-	dw Func_1f03fa
+	dw SaveLevel
 	dw DarkenBGToPal_Fast
 	dw HandleSaveCompleteBox
 	dw ResetAfterSave
+
 	dw DebugReset
 	dw DebugReset
 	dw DebugReset
@@ -34,11 +35,12 @@ _PauseMenuStateTable: ; 1f0000 (7c:4000)
 	dw DarkenBGToPal_Fast
 	dw FillSaveScreenBar
 	dw SlowFadeBGToWhite
-	dw Func_1f0768
+	dw Save
 	dw DarkenBGToPal_Fast
 	dw HandleSaveCompleteBox
 	dw SlowFadeBGToWhite
 	dw Func_1f08af
+
 	dw DebugReset
 	dw DebugReset
 	dw DebugReset
@@ -51,11 +53,12 @@ _PauseMenuStateTable: ; 1f0000 (7c:4000)
 	dw DarkenBGToPal_Fast
 	dw FillSaveScreenBar
 	dw SlowFadeBGToWhite
-	dw Func_1f0768
+	dw Save
 	dw DarkenBGToPal_Fast
 	dw HandleSaveCompleteBox
 	dw SlowFadeBGToWhite
 	dw Func_1f08f4
+
 	dw DebugReset
 	dw DebugReset
 	dw DebugReset
@@ -533,7 +536,7 @@ FillSaveScreenBar: ; 1f03d1 (7c:43d1)
 	ret
 ; 0x1f03fa
 
-Func_1f03fa: ; 1f03fa (7c:43fa)
+SaveLevel: ; 1f03fa (7c:43fa)
 	call DisableLCD
 	ldh a, [rSVBK]
 	push af
@@ -546,7 +549,7 @@ Func_1f03fa: ; 1f03fa (7c:43fa)
 	pop af
 	ldh [rSVBK], a
 
-	call Func_1f0b3a
+	call IncrementSaveCounter
 
 	ld a, [wSRAMBank]
 	push af
@@ -569,16 +572,16 @@ Func_1f03fa: ; 1f03fa (7c:43fa)
 	ld a, $33
 	ld [de], a
 	inc e
-	ld hl, wca00
-	ld b, $ca
+	ld hl, wGeneralData
+	ld b, wLevelDataEnd - wGeneralData
 	call CopyHLToDE
 
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
-	ld hl, $d000
-	ld b, $11
+	ld hl, wTreasuresCollected
+	ld b, (wOWLevel - wTreasuresCollected) + 2
 	call CopyHLToDE
 	pop af
 	ldh [rSVBK], a
@@ -587,8 +590,8 @@ Func_1f03fa: ; 1f03fa (7c:43fa)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	ld hl, $d000
-	ld bc, $14a
+	ld hl, wObjects
+	ld bc, (w1d145 - wObjects) + 5
 	call CopyHLToDE_BC
 	pop af
 	ldh [rSVBK], a
@@ -597,13 +600,14 @@ Func_1f03fa: ; 1f03fa (7c:43fa)
 	ld [s0a790], a
 	ld [s0a7e0], a
 	ld [s0afa0], a
-	call Func_1f0b9b
+	call CalculateWRAMDataChecksum
 	ld a, d
-	ld [s0a795 + 0], a
-	ld [wcee7], a
+	ld [sChecksum + 0], a
+	ld [wChecksum + 0], a
 	ld a, e
-	ld [s0a795 + 1], a
-	ld [wcee8], a
+	ld [sChecksum + 1], a
+	ld [wChecksum + 1], a
+
 	ld a, $32
 	ld [s0a790], a
 	ld [s0a7e0], a
@@ -612,6 +616,7 @@ Func_1f03fa: ; 1f03fa (7c:43fa)
 	ld [s0a7e5 + 0], a
 	ld a, e
 	ld [s0a7e5 + 1], a
+
 	ld a, $33
 	ld [s0a790], a
 	ld [s0a7e0], a
@@ -620,6 +625,7 @@ Func_1f03fa: ; 1f03fa (7c:43fa)
 	ld [s0afa5 + 0], a
 	ld a, e
 	ld [s0afa5 + 1], a
+
 	ld a, $41
 	ld [s0a790], a
 	ld [s0a7e0], a
@@ -627,10 +633,11 @@ Func_1f03fa: ; 1f03fa (7c:43fa)
 	call CalculateBackupSRAMChecksum1
 	ld a, d
 	ld [s0a79d + 0], a
-	ld [wcee7], a
+	ld [wChecksum + 0], a
 	ld a, e
 	ld [s0a79d + 1], a
-	ld [wcee8], a
+	ld [wChecksum + 1], a
+
 	ld a, $42
 	ld [s0a790], a
 	ld [s0a7e0], a
@@ -639,6 +646,7 @@ Func_1f03fa: ; 1f03fa (7c:43fa)
 	ld [s0a7ed + 0], a
 	ld a, e
 	ld [s0a7ed + 1], a
+
 	ld a, $43
 	ld [s0a790], a
 	ld [s0a7e0], a
@@ -647,11 +655,11 @@ Func_1f03fa: ; 1f03fa (7c:43fa)
 	ld [s0afad + 0], a
 	ld a, e
 	ld [s0afad + 1], a
+
 	ld a, $50
 	ld [s0a790], a
 	ld [s0a7e0], a
 	ld [s0afa0], a
-
 	ld de, s0a800
 	ld a, $57
 	ld [de], a
@@ -665,24 +673,24 @@ Func_1f03fa: ; 1f03fa (7c:43fa)
 	ld a, $33
 	ld [de], a
 	inc e
-	ld hl, wca00
-	ld b, $ca
+	ld hl, wGeneralData
+	ld b, wLevelDataEnd - wGeneralData
 	call CopyHLToDE
 	ldh a, [rSVBK]
 	push af
-	ld a, $02
+	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
-	ld hl, $d000
-	ld b, $11
+	ld hl, wTreasuresCollected
+	ld b, (wOWLevel - wTreasuresCollected) + 2
 	call CopyHLToDE
 	pop af
 	ldh [rSVBK], a
 	ldh a, [rSVBK]
 	push af
-	ld a, $01
+	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	ld hl, $d000
-	ld bc, $14a
+	ld hl, wObjects
+	ld bc, (w1d145 - wObjects) + 5
 	call CopyHLToDE_BC
 	pop af
 	ldh [rSVBK], a
@@ -690,13 +698,13 @@ Func_1f03fa: ; 1f03fa (7c:43fa)
 	ld [s0a790], a
 	ld [s0a7e0], a
 	ld [s0afa0], a
-	call Func_1f0b9b
+	call CalculateWRAMDataChecksum
 	ld a, d
 	ld [s0a797 + 0], a
-	ld [wcee7], a
+	ld [wChecksum + 0], a
 	ld a, e
 	ld [s0a797 + 1], a
-	ld [wcee8], a
+	ld [wChecksum + 1], a
 	ld a, $52
 	ld [s0a790], a
 	ld [s0a7e0], a
@@ -730,24 +738,24 @@ Func_1f03fa: ; 1f03fa (7c:43fa)
 	ld a, $33
 	ld [de], a
 	inc e
-	ld hl, wca00
-	ld b, $ca
+	ld hl, wGeneralData
+	ld b, wLevelDataEnd - wGeneralData
 	call CopyHLToDE
 	ldh a, [rSVBK]
 	push af
-	ld a, $02
+	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
-	ld hl, $d000
-	ld b, $11
+	ld hl, wTreasuresCollected
+	ld b, (wOWLevel - wTreasuresCollected) + 2
 	call CopyHLToDE
 	pop af
 	ldh [rSVBK], a
 	ldh a, [rSVBK]
 	push af
-	ld a, $01
+	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	ld hl, $d000
-	ld bc, $14a
+	ld hl, wObjects
+	ld bc, (w1d145 - wObjects) + 5
 	call CopyHLToDE_BC
 	pop af
 	ldh [rSVBK], a
@@ -755,13 +763,13 @@ Func_1f03fa: ; 1f03fa (7c:43fa)
 	ld [s0a790], a
 	ld [s0a7e0], a
 	ld [s0afa0], a
-	call Func_1f0b9b
+	call CalculateWRAMDataChecksum
 	ld a, d
 	ld [s0a799 + 0], a
-	ld [wcee7], a
+	ld [wChecksum + 0], a
 	ld a, e
 	ld [s0a799 + 1], a
-	ld [wcee8], a
+	ld [wChecksum + 1], a
 	ld a, $62
 	ld [s0a790], a
 	ld [s0a7e0], a
@@ -797,24 +805,24 @@ Func_1f03fa: ; 1f03fa (7c:43fa)
 	ld a, $33
 	ld [de], a
 	inc e
-	ld hl, wca00
-	ld b, $ca
+	ld hl, wGeneralData
+	ld b, wLevelDataEnd - wGeneralData
 	call CopyHLToDE
 	ldh a, [rSVBK]
 	push af
-	ld a, $02
+	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
-	ld hl, $d000
-	ld b, $11
+	ld hl, wTreasuresCollected
+	ld b, (wOWLevel - wTreasuresCollected) + 2
 	call CopyHLToDE
 	pop af
 	ldh [rSVBK], a
 	ldh a, [rSVBK]
 	push af
-	ld a, $01
+	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	ld hl, $d000
-	ld bc, $14a
+	ld hl, wObjects
+	ld bc, (w1d145 - wObjects) + 5
 	call CopyHLToDE_BC
 	pop af
 	ldh [rSVBK], a
@@ -822,13 +830,13 @@ Func_1f03fa: ; 1f03fa (7c:43fa)
 	ld [s0a790], a
 	ld [s0a7e0], a
 	ld [s0afa0], a
-	call Func_1f0b9b
+	call CalculateWRAMDataChecksum
 	ld a, d
 	ld [s0a79b + 0], a
-	ld [wcee7], a
+	ld [wChecksum + 0], a
 	ld a, e
 	ld [s0a79b + 1], a
-	ld [wcee8], a
+	ld [wChecksum + 1], a
 	ld a, $82
 	ld [s0a790], a
 	ld [s0a7e0], a
@@ -861,7 +869,7 @@ Func_1f03fa: ; 1f03fa (7c:43fa)
 	ldh [rLCDC], a
 	xor a
 	ld [wTimer + 0], a
-	ld a, $02
+	ld a, 2
 	ld [wTimer + 1], a
 	ld hl, wSubState
 	inc [hl]
@@ -927,9 +935,9 @@ InitSaveScreenAndBackupVRAM: ; 1f0701 (7c:4701)
 	ret
 ; 0x1f0768
 
-Func_1f0768: ; 1f0768 (7c:4768)
+Save: ; 1f0768 (7c:4768)
 	call DisableLCD
-	call Func_1f0b3a
+	call IncrementSaveCounter
 	ld a, [wSRAMBank]
 	push af
 	ld a, $00
@@ -951,15 +959,15 @@ Func_1f0768: ; 1f0768 (7c:4768)
 	ld a, $33
 	ld [de], a
 	inc e
-	ld hl, wca00
-	ld b, $5b
+	ld hl, wGeneralData
+	ld b, wGeneralDataEnd - wGeneralData
 	call CopyHLToDE
 	ldh a, [rSVBK]
 	push af
-	ld a, $02
+	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
-	ld hl, $d000
-	ld b, $11
+	ld hl, wTreasuresCollected
+	ld b, (wOWLevel - wTreasuresCollected) + 2
 	call CopyHLToDE
 	pop af
 	ldh [rSVBK], a
@@ -970,10 +978,10 @@ Func_1f0768: ; 1f0768 (7c:4768)
 	call Func_1f1228
 	ld a, d
 	ld [s0a791], a
-	ld [wcee7], a
+	ld [wChecksum + 0], a
 	ld a, e
 	ld [$a792], a
-	ld [wcee8], a
+	ld [wChecksum + 1], a
 	ld a, $12
 	ld [s0a790], a
 	ld [s0a7e0], a
@@ -1007,15 +1015,15 @@ Func_1f0768: ; 1f0768 (7c:4768)
 	ld a, $33
 	ld [de], a
 	inc e
-	ld hl, wca00
-	ld b, $5b
+	ld hl, wGeneralData
+	ld b, wGeneralDataEnd - wGeneralData
 	call CopyHLToDE
 	ldh a, [rSVBK]
 	push af
-	ld a, $02
+	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
-	ld hl, $d000
-	ld b, $11
+	ld hl, wTreasuresCollected
+	ld b, (wOWLevel - wTreasuresCollected) + 2
 	call CopyHLToDE
 	pop af
 	ldh [rSVBK], a
@@ -1023,10 +1031,10 @@ Func_1f0768: ; 1f0768 (7c:4768)
 	ld [s0a790], a
 	ld [s0a7e0], a
 	ld [s0afa0], a
-	ld a, [wcee7]
+	ld a, [wChecksum + 0]
 	ld d, a
 	ld [s0a793], a
-	ld a, [wcee8]
+	ld a, [wChecksum + 1]
 	ld e, a
 	ld [$a794], a
 	ld a, $22
@@ -1442,20 +1450,20 @@ HandlePauseMenuInput: ; 1f09bd (7c:49bd)
 	ret
 ; 0x1f0b3a
 
-; increments counter in wca00
-Func_1f0b3a: ; 1f0b3a (7c:4b3a)
-	ld a, [wca00 + 3]
+; increments counter in wSaveCounter
+IncrementSaveCounter: ; 1f0b3a (7c:4b3a)
+	ld a, [wSaveCounter + 3]
 	add 1
-	ld [wca00 + 3], a
-	ld a, [wca00 + 2]
-	adc $00
-	ld [wca00 + 2], a
-	ld a, [wca00 + 1]
-	adc $00
-	ld [wca00 + 1], a
-	ld a, [wca00 + 0]
-	adc $00
-	ld [wca00 + 0], a
+	ld [wSaveCounter + 3], a
+	ld a, [wSaveCounter + 2]
+	adc 0
+	ld [wSaveCounter + 2], a
+	ld a, [wSaveCounter + 1]
+	adc 0
+	ld [wSaveCounter + 1], a
+	ld a, [wSaveCounter + 0]
+	adc 0
+	ld [wSaveCounter + 0], a
 	ret
 ; 0x1f0b5b
 
@@ -1515,26 +1523,28 @@ CalculateChecksumLong: ; 1f0b8e (7c:4b8e)
 	ret
 ; 0x1f0b9b
 
-Func_1f0b9b: ; 1f0b9b (7c:4b9b)
-	ld de, $0
-	ld hl, wca00
-	ld b, $ca
+CalculateWRAMDataChecksum: ; 1f0b9b (7c:4b9b)
+	ld de, 0
+	ld hl, wGeneralData
+	ld b, wLevelDataEnd - wGeneralData
 	call CalculateChecksum
+
 	ldh a, [rSVBK]
 	push af
-	ld a, $02
+	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
-	ld hl, $d000
-	ld b, $11
+	ld hl, wTreasuresCollected
+	ld b, (wOWLevel - wTreasuresCollected) + 2
 	call CalculateChecksum
 	pop af
+
 	ldh [rSVBK], a
 	ldh a, [rSVBK]
 	push af
-	ld a, $01
+	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	ld hl, $d000
-	ld bc, $14a
+	ld hl, wObjects
+	ld bc, (w1d145 - wObjects) + 5
 	call CalculateChecksumLong
 	pop af
 	ldh [rSVBK], a
@@ -1810,10 +1820,10 @@ Func_1f0d60: ; 1f0d60 (7c:4d60)
 	call Func_1f1153
 	ld hl, s0a384
 	call Func_1f1210
-	ld a, [wcee7]
+	ld a, [wChecksum + 0]
 	cp d
 	jr nz, .asm_1f0d9b
-	ld a, [wcee8]
+	ld a, [wChecksum + 1]
 	cp e
 	jr nz, .asm_1f0d9b
 	jr .asm_1f0dc2
@@ -1884,10 +1894,10 @@ Func_1f0d60: ; 1f0d60 (7c:4d60)
 	call Func_1f1153
 	ld hl, s0ab84
 	call Func_1f1210
-	ld a, [wcee7]
+	ld a, [wChecksum + 0]
 	cp d
 	jr nz, .asm_1f0e20
-	ld a, [wcee8]
+	ld a, [wChecksum + 1]
 	cp e
 	jr nz, .asm_1f0e20
 	jr .asm_1f0e47
@@ -1953,10 +1963,10 @@ Func_1f0d60: ; 1f0d60 (7c:4d60)
 	ld l, a
 	call Func_1f1153
 	call CalculateBackupSRAMChecksum1
-	ld a, [wcee7]
+	ld a, [wChecksum + 0]
 	cp d
 	jr nz, .asm_1f0e9a
-	ld a, [wcee8]
+	ld a, [wChecksum + 1]
 	cp e
 	jr nz, .asm_1f0e9a
 	jr .asm_1f0ec1
@@ -1989,9 +1999,9 @@ Func_1f0d60: ; 1f0d60 (7c:4d60)
 	ld hl, s0a000
 	call Func_1f0d47
 	jr c, .asm_1f0f2f
-	ld a, [s0a795 + 0]
+	ld a, [sChecksum + 0]
 	ld b, a
-	ld a, [s0a795 + 1]
+	ld a, [sChecksum + 1]
 	ld c, a
 	ld a, [s0a7e5 + 0]
 	ld d, a
@@ -2002,12 +2012,12 @@ Func_1f0d60: ; 1f0d60 (7c:4d60)
 	ld a, [s0afa5 + 1]
 	ld l, a
 	call Func_1f1153
-	ld hl, s0a004
+	ld hl, sSaveCounter
 	call Func_1f0b5b
-	ld a, [wcee7]
+	ld a, [wChecksum + 0]
 	cp d
 	jr nz, .asm_1f0f00
-	ld a, [wcee8]
+	ld a, [wChecksum + 1]
 	cp e
 	jr nz, .asm_1f0f00
 	jr .asm_1f0f27
@@ -2076,10 +2086,10 @@ Func_1f0d60: ; 1f0d60 (7c:4d60)
 	call Func_1f1153
 	ld hl, s0a804
 	call Func_1f0b5b
-	ld a, [wcee7]
+	ld a, [wChecksum + 0]
 	cp d
 	jr nz, .asm_1f0f83
-	ld a, [wcee8]
+	ld a, [wChecksum + 1]
 	cp e
 	jr nz, .asm_1f0f83
 	jr .asm_1f0faa
@@ -2153,10 +2163,10 @@ Func_1f0d60: ; 1f0d60 (7c:4d60)
 	ld l, a
 	call Func_1f1153
 	call CalculateBackupSRAMChecksum2
-	ld a, [wcee7]
+	ld a, [wChecksum + 0]
 	cp d
 	jr nz, .asm_1f100e
-	ld a, [wcee8]
+	ld a, [wChecksum + 1]
 	cp e
 	jr nz, .asm_1f100e
 	jr .asm_1f1035
@@ -2202,10 +2212,10 @@ Func_1f0d60: ; 1f0d60 (7c:4d60)
 	call Func_1f1153
 	ld hl, s0a404
 	call Func_1f0b5b
-	ld a, [wcee7]
+	ld a, [wChecksum + 0]
 	cp d
 	jr nz, .asm_1f1074
-	ld a, [wcee8]
+	ld a, [wChecksum + 1]
 	cp e
 	jr nz, .asm_1f1074
 	jr .asm_1f109b
@@ -2273,10 +2283,10 @@ Func_1f0d60: ; 1f0d60 (7c:4d60)
 	call Func_1f1153
 	ld hl, s0ac04
 	call Func_1f0b5b
-	ld a, [wcee7]
+	ld a, [wChecksum + 0]
 	cp d
 	jr nz, .asm_1f10f5
-	ld a, [wcee8]
+	ld a, [wChecksum + 1]
 	cp e
 	jr nz, .asm_1f10f5
 	jr .asm_1f111c
@@ -2387,13 +2397,13 @@ Func_1f1153: ; 1f1153 (7c:5153)
 	ld a, $07
 	ld [wcef0], a
 	ld a, b
-	ld [wcee7], a
+	ld [wChecksum + 0], a
 	ld a, d
 	ld [wcee9], a
 	ld a, h
 	ld [wceeb], a
 	ld a, c
-	ld [wcee8], a
+	ld [wChecksum + 1], a
 	ld a, e
 	ld [wceea], a
 	ld a, l
@@ -2404,12 +2414,12 @@ Func_1f1153: ; 1f1153 (7c:5153)
 	ld a, $04
 	ld [wcef0], a
 	ld a, b
-	ld [wcee7], a
+	ld [wChecksum + 0], a
 	ld [wceeb], a
 	ld a, h
 	ld [wcee9], a
 	ld a, c
-	ld [wcee8], a
+	ld [wChecksum + 1], a
 	ld [wceec], a
 	ld a, l
 	ld [wceea], a
@@ -2419,12 +2429,12 @@ Func_1f1153: ; 1f1153 (7c:5153)
 	ld a, $02
 	ld [wcef0], a
 	ld a, b
-	ld [wcee7], a
+	ld [wChecksum + 0], a
 	ld [wceeb], a
 	ld a, d
 	ld [wcee9], a
 	ld a, c
-	ld [wcee8], a
+	ld [wChecksum + 1], a
 	ld [wceec], a
 	ld a, e
 	ld [wceea], a
@@ -2434,12 +2444,12 @@ Func_1f1153: ; 1f1153 (7c:5153)
 	ld a, $01
 	ld [wcef0], a
 	ld a, d
-	ld [wcee7], a
+	ld [wChecksum + 0], a
 	ld [wceeb], a
 	ld a, b
 	ld [wcee9], a
 	ld a, e
-	ld [wcee8], a
+	ld [wChecksum + 1], a
 	ld [wceec], a
 	ld a, c
 	ld [wceea], a
@@ -2449,11 +2459,11 @@ Func_1f1153: ; 1f1153 (7c:5153)
 	xor a
 	ld [wcef0], a
 	ld a, b
-	ld [wcee7], a
+	ld [wChecksum + 0], a
 	ld [wcee9], a
 	ld [wceeb], a
 	ld a, c
-	ld [wcee8], a
+	ld [wChecksum + 1], a
 	ld [wceea], a
 	ld [wceec], a
 	ret
@@ -2476,15 +2486,15 @@ Func_1f1210: ; 1f1210 (7c:5210)
 
 Func_1f1228: ; 1f1228 (7c:5228)
 	ld de, $0
-	ld hl, wca00
-	ld b, $5b
+	ld hl, wGeneralData
+	ld b, wGeneralDataEnd - wGeneralData
 	call CalculateChecksum
 	ldh a, [rSVBK]
 	push af
-	ld a, $02
+	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
-	ld hl, $d000
-	ld b, $11
+	ld hl, wTreasuresCollected
+	ld b, (wOWLevel - wTreasuresCollected) + 2
 	call CalculateChecksum
 	pop af
 	ldh [rSVBK], a
@@ -2535,7 +2545,7 @@ Func_1f1246: ; 1f1246 (7c:5246)
 	ld b, $4
 	call CopyHLToDE
 
-	ld hl, s0a004
+	ld hl, sSaveCounter
 	ld de, s0afe8
 	ld b, $4
 	call CopyHLToDE
@@ -2691,7 +2701,7 @@ Func_1f1246: ; 1f1246 (7c:5246)
 	call Func_1f13d7
 	ret
 .asm_1f13b5
-	ld hl, s0a004
+	ld hl, sSaveCounter
 	call Func_1f13f2
 	ret
 .asm_1f13bc
@@ -2711,7 +2721,7 @@ Func_1f1246: ; 1f1246 (7c:5246)
 ; 0x1f13d7
 
 Func_1f13d7: ; 1f13d7 (7c:53d7)
-	ld de, wca00
+	ld de, wSaveCounter
 	ld b, $5b
 	call CopyHLToDE
 	ldh a, [rSVBK]
@@ -2727,7 +2737,7 @@ Func_1f13d7: ; 1f13d7 (7c:53d7)
 ; 0x1f13f2
 
 Func_1f13f2: ; 1f13f2 (7c:53f2)
-	ld de, wca00
+	ld de, wSaveCounter
 	ld b, $ca
 	call CopyHLToDE
 	ldh a, [rSVBK]
@@ -2848,7 +2858,7 @@ Func_1f14c6: ; 1f14c6 (7c:54c6)
 
 	ld hl, s0a000
 	ld bc, $2000
-.asm_1f14f6
+.loop
 	ld a, [wSRAMBank]
 	push af
 	ld a, $01
@@ -2865,9 +2875,9 @@ Func_1f14c6: ; 1f14c6 (7c:54c6)
 	pop af
 	sramswitch
 	dec c
-	jr nz, .asm_1f14f6
+	jr nz, .loop
 	dec b
-	jr nz, .asm_1f14f6
+	jr nz, .loop
 
 	ld a, $71
 	ld [s0a790], a

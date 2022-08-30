@@ -3,10 +3,16 @@ SECTION "SRAM0", SRAM
 s0a000:: ; a000
 	ds $4
 
-s0a004:: ; a004
+sSaveCounter:: ; a004
 	ds $4
 
-	ds $378
+sGeneralData:: ; a008
+	ds $57
+
+sLevelData:: ; a05f
+	ds $6f
+
+	ds $2b2
 
 s0a380:: ; a380
 	ds $4
@@ -33,8 +39,8 @@ s0a791:: ; a791
 s0a793:: ; a793
 	ds $2
 
-s0a795:: ; a795
-	ds $2
+sChecksum:: ; a795
+	dw
 
 s0a797:: ; a797
 	ds $2

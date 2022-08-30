@@ -398,7 +398,8 @@ wc600:: ; c600
 wBlankFuncExtended:: ; c800
 	ds $200
 
-wca00:: ; ca00
+wGeneralData::
+wSaveCounter:: ; ca00
 	ds $4
 
 ; number of coins collected
@@ -452,6 +453,9 @@ wLanguage:: ; ca46
 	db
 
 	ds $14
+
+wGeneralDataEnd::
+wLevelData::
 
 ; collected keys in the level
 ; bit 0: grey key
@@ -712,6 +716,8 @@ wcac8:: ; cac8
 wIsOnSteppableObject:: ; cac9
 	db
 
+wLevelDataEnd::
+
 	ds $136
 
 wVirtualOAM:: ; cc00
@@ -889,11 +895,8 @@ wcee4:: ; cee4
 wTimer:: ; cee5
 	ds $2
 
-wcee7:: ; cee7
-	db
-
-wcee8:: ; cee8
-	db
+wChecksum:: ; cee7
+	dw
 
 wcee9:: ; cee9
 	db
