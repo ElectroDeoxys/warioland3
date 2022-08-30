@@ -155,7 +155,7 @@ SetState_IceSkatin: ; 1ec13c (7b:413c)
 
 UpdateState_IceSkatin: ; 1ec177 (7b:4177)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	farcall CheckFrontCollision
@@ -221,7 +221,7 @@ Func_1ec215: ; 1ec215 (7b:4215)
 
 UpdateState_IceSkatinAirborne: ; 1ec22b (7b:422b)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wWaterInteraction]
@@ -490,7 +490,7 @@ UpdateState_SplitHit: ; 1ecf3a (7b:4f3a)
 
 UpdateState_SplitKnockedBack: ; 1ecf86 (7b:4f86)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wWaterInteraction]
@@ -554,7 +554,7 @@ UpdateState_Splitting: ; 1ed018 (7b:5018)
 	ret
 
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wWaterInteraction]
@@ -727,7 +727,7 @@ SetState_BlindWalking: ; 1ed3fa (7b:53fa)
 
 UpdateState_BlindWalking: ; 1ed469 (7b:5469)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	update_anim_1
@@ -847,7 +847,7 @@ SetState_BlindAirborne: ; 1ed571 (7b:5571)
 
 UpdateState_BlindAirborne: ; 1ed5e2 (7b:55e2)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wWaterInteraction]

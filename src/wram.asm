@@ -49,7 +49,9 @@ wSRAMBank:: ; c08e
 wGlobalCounter:: ; c08f
 	db
 
-wc090:: ; c090
+; if not 0, then all sounds are muted
+; is never written, only read
+wSoundMuted:: ; c090
 	db
 
 ; whether VBlank function has been executed or not
@@ -62,11 +64,8 @@ wVBlankFuncExecuted:: ; c091
 wEnableVBlankFunc:: ; c092
 	db
 
-wJoypadDown:: ; c093
-	db
-
-wJoypadPressed:: ; c094
-	db
+wJoypadDown::    db ; c093
+wJoypadPressed:: db ; c094
 
 ; size of wVirtualOAM in number of bytes
 wVirtualOAMByteSize:: ; c095
@@ -78,18 +77,15 @@ wCurSprite:: sprite_oam_struct wCurSprite ; c096
 wResetDisabled:: ; c09a
 	db
 
-wState:: ; c09b
-	db
-
-wSubState:: ; c09c
-	db
+wState::    db ; c09b
+wSubState:: db ; c09c
 
 	db
 
 wTempIE:: ; c09e
 	db
 
-wc09f:: ; c09f
+wRepeatByte:: ; c09f
 	db
 
 wInternalRoomID:: ; c0a0
@@ -129,10 +125,7 @@ wCompressedLevelLayoutPtr:: ; c0ad
 	ds $4
 
 wc0b3:: ; c0b3
-	db
-
-wc0b4:: ; c0b4
-	db
+	dw
 
 wc0b5:: ; c0b5
 	db
@@ -155,20 +148,13 @@ wCameraConfigFlags:: ; c0ba
 wc0bb:: ; c0bb
 	db
 
-wc0bc:: ; c0bc
+wSCYShake:: ; c0bc
 	db
 
-wc0bd:: ; c0bd
-	db
-
-wc0be:: ; c0be
-	db
-
-wc0bf:: ; c0bf
-	db
-
-wc0c0:: ; c0c0
-	db
+wc0bd:: db ; c0bd
+wc0be:: db ; c0be
+wc0bf:: db ; c0bf
+wc0c0:: db ; c0c0
 
 	db
 
@@ -216,7 +202,7 @@ wc0d5:: ; c0d5
 wc0d6:: ; c0d6
 	db
 
-wc0d7:: ; c0d7
+wRoomTransitionParam:: ; c0d7
 	db
 
 wc0d8:: ; c0d8
@@ -311,16 +297,9 @@ wc18c:: ; c18c
 wc18d:: ; c18d
 	db
 
-wc18e:: ; c18e
-	db
-
-	ds $f
-
-wc19e:: ; c19e
-	db
-
-wc19f:: ; c19f
-	db
+wc18e:: ds 8 * 2 ; c18e
+wc19e:: db       ; c19e
+wc19f:: db       ; c19f
 
 wIsDMATransferPending::      db ; c1a0
 wPendingDMASourceBank::      db ; c1a1
@@ -367,17 +346,10 @@ wc1b8:: ; c1b8
 wObjInteractionType:: ; c1b9
 	db
 
-wc1ba:: ; c1ba
-	db
-
-wc1bb:: ; c1bb
-	db
-
-wc1bc:: ; c1bc
-	db
-
-wc1bd:: ; c1bd
-	db
+wObjCollBoxTop::    db ; c1ba
+wObjCollBoxBottom:: db ; c1bb
+wObjCollBoxLeft::   db ; c1bc
+wObjCollBoxRight::  db ; c1bd
 
 wObjScreenYPos:: db ; c1be
 wObjScreenXPos:: db ; c1bf
@@ -385,17 +357,10 @@ wObjScreenXPos:: db ; c1bf
 wInteractionSide:: ; c1c0
 	db
 
-wc1c1:: ; c1c1
-	db
-
-wc1c2:: ; c1c2
-	db
-
-wc1c3:: ; c1c3
-	db
-
-wc1c4:: ; c1c4
-	db
+wc1c1:: db ; c1c1
+wc1c2:: db ; c1c2
+wc1c3:: db ; c1c3
+wc1c4:: db ; c1c4
 
 	db
 
@@ -430,7 +395,7 @@ wROMBank:: ; c5ff
 wc600:: ; c600
 	ds $200
 
-wc800:: ; c800
+wBlankFuncExtended:: ; c800
 	ds $200
 
 wca00:: ; ca00
@@ -595,17 +560,11 @@ wFloor:: ; ca78
 wWarioPalsPtr:: ; ca79
 	dw
 
-wDMASourceBank:: ; ca7b
-	db
+wDMASourceBank:: db ; ca7b
+wDMASourcePtr::  dw ; ca7c
 
-wDMASourcePtr:: ; ca7c
-	dw
-
-wOAMBank:: ; ca7e
-	db
-
-wOAMPtr:: ; ca7f
-	dw
+wOAMBank:: db ; ca7e
+wOAMPtr::  dw ; ca7f
 
 wFramesetPtr:: ; ca81
 	dw
@@ -817,10 +776,7 @@ wCurParticle:: sprite_oam_struct wCurParticle ; cce2
 wCurParticleAnimEnded:: db ; cce6
 
 wcce7:: ; cce7
-	db
-
-wcce8:: ; cce8
-	db
+	dw
 
 wFloorSRAMBank:: ; cce9
 	db
@@ -828,19 +784,14 @@ wFloorSRAMBank:: ; cce9
 ; the world is divided in a grid,
 ; with each cell being 16x16 units in dimension
 ; these store the y and x cells of the current position
-wYCell:: ; ccea
-	db
-wXCell:: ; cceb
-	db
+wYCell:: db ; ccea
+wXCell:: db ; cceb
 
 wccec:: ; ccec
 	db
 
-wSpawnYCell:: ; cced
-	db
-
-wSpawnXCell:: ; ccee
-	db
+wSpawnYCell:: db ; cced
+wSpawnXCell:: db ; ccee
 
 wccef:: ; ccef
 	db
@@ -899,11 +850,8 @@ wced6:: ; ced6
 wFadeSpeed:: ; ced7
 	db
 
-wRoomAnimatedTilesEnabled:: ; ced8
-	db
-
-wRoomAnimatedPalsEnabled:: ; ced9
-	db
+wRoomAnimatedTilesEnabled:: db ; ced8
+wRoomAnimatedPalsEnabled::  db ; ced9
 
 wceda:: ; ceda
 	db

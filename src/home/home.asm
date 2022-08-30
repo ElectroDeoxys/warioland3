@@ -85,7 +85,7 @@ DoPendingDMATransfer:: ; c4c (0:c4c)
 
 	xor a
 	ld [rRAMB + $100], a
-	ld hl, wc0bc
+	ld hl, wSCYShake
 	ld a, [wSCY]
 	add [hl]
 	ldh [rSCY], a
@@ -123,7 +123,7 @@ DoPendingDMATransfer:: ; c4c (0:c4c)
 
 	xor a
 	ld [wIsDMATransferPending], a
-	ld hl, wc0bc
+	ld hl, wSCYShake
 	ld a, [wSCY]
 	add [hl]
 	ldh [rSCY], a
@@ -143,7 +143,7 @@ Func_cab:: ; cab (0:cab)
 	ldh [rVBK], a
 	ld hl, wce6a
 	ld bc, wce35
-	jp wc800
+	jp wBlankFuncExtended
 ; 0xcb8
 
 Func_cb8:: ; cb8 (0:cb8)
@@ -601,10 +601,10 @@ Func_f4c:: ; f4c (0:f4c)
 	inc de
 	ld a, [de]
 	and $80
-	ld [wc09f], a
+	ld [wRepeatByte], a
 	inc de
 .asm_f61
-	ld a, [wc09f]
+	ld a, [wRepeatByte]
 	or [hl]
 	ld [hli], a
 	ld a, l
@@ -993,12 +993,12 @@ TriggerRoomTransition:: ; 11f6 (0:11f6)
 	inc a ; TRUE
 	ld [wIsIntangible], a
 
-	ld a, [wc0d7]
-	bit 7, a
+	ld a, [wRoomTransitionParam]
+	bit ROOMTRANSITIONFLAG_3_F, a
 	ret nz
 	ld hl, wSubState
-	ld a, [wc0d7]
-	bit 5, a
+	ld a, [wRoomTransitionParam]
+	bit ROOMTRANSITIONFLAG_1_F, a
 	jr z, .asm_1246
 	inc [hl]
 	farcall Func_8e06
@@ -1257,10 +1257,10 @@ ReturnToLevelFromGolf:: ; 13d5 (0:13d5)
 	ld a, TRUE
 	ld [wRoomAnimatedTilesEnabled], a
 	call LoadBackupVRAM
-	ld a, [wc0d7]
-	and $f0
-	or $02
-	ld [wc0d7], a
+	ld a, [wRoomTransitionParam]
+	and ROOMTRANSITIONFLAGS_MASK
+	or ROOMTRANSITION_2
+	ld [wRoomTransitionParam], a
 	farcall Func_1f0969
 	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 	ldh [rLCDC], a

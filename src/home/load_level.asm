@@ -41,9 +41,9 @@ DecompressLevelLayout:: ; ab5 (0:ab5)
 	jr nz, .literal_copy
 	ld b, a
 	ld a, [hli]
-	ld [wc09f], a
+	ld [wRepeatByte], a
 .loop_repeat
-	ld a, [wc09f]
+	ld a, [wRepeatByte]
 	ld [de], a
 	inc de
 	ld a, e
@@ -131,9 +131,9 @@ DecompressLevelObjectsMap:: ; b48 (0:b48)
 	jr nz, .literal_copy
 	ld b, a
 	ld a, [hli]
-	ld [wc09f], a
+	ld [wRepeatByte], a
 .loop_repeat
-	ld a, [wc09f]
+	ld a, [wRepeatByte]
 	ld [de], a
 	ld a, e
 	cp c

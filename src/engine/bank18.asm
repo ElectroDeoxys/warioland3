@@ -212,7 +212,7 @@ ENDR
 	sub b
 	ld [hli], a
 
-	ld hl, wc0bc
+	ld hl, wSCYShake
 	ld a, [wc089]
 	add [hl]
 	ld [wSCY], a
@@ -1225,7 +1225,7 @@ Func_61f54:: ; 61f54 (18:5f54)
 	ldh [hXPosLo], a
 	ld a, [hl]
 	ldh [hXPosHi], a
-	xor a
+	xor a ; FALSE
 	ld [wc1ca], a
 	call Func_352b
 	and a
@@ -1433,7 +1433,7 @@ Func_620a6:: ; 620a6 (18:60a6)
 	ldh [hXPosLo], a
 	ld a, [hl]
 	ldh [hXPosHi], a
-	xor a
+	xor a ; FALSE
 	ld [wc1ca], a
 	call Func_352b
 	and a
@@ -2130,7 +2130,7 @@ Func_62574:: ; 62574 (18:6574)
 	ldh [hYPosHi], a
 	ld a, [hl]
 	ldh [hYPosLo], a
-	xor a
+	xor a ; FALSE
 	ld [wc1ca], a
 	inc a
 	ld [wc0d9], a
@@ -2158,7 +2158,7 @@ Func_62574:: ; 62574 (18:6574)
 	ld a, [hli]
 	sbc 0
 	ldh [hYPosHi], a
-	ld a, $01
+	ld a, TRUE
 	ld [wc0d9], a
 	call Func_358b
 	and a
@@ -2180,7 +2180,7 @@ Func_62574:: ; 62574 (18:6574)
 	ld a, [hli]
 	sbc 0
 	ldh [hXPosHi], a
-	ld a, $01
+	ld a, TRUE
 	ld [wc0d9], a
 	call Func_3513
 	and $0f
@@ -2212,7 +2212,7 @@ Func_62605:: ; 62605 (18:6605)
 	ldh [hYPosHi], a
 	ld a, [hl]
 	ldh [hYPosLo], a
-	xor a
+	xor a ; FALSE
 	ld [wc1ca], a
 	inc a
 	ld [wc0d9], a
@@ -2240,7 +2240,7 @@ Func_62605:: ; 62605 (18:6605)
 	ld a, [hli]
 	sbc 0
 	ldh [hYPosHi], a
-	ld a, $01
+	ld a, TRUE
 	ld [wc0d9], a
 	call Func_358b
 	and a
@@ -2259,7 +2259,7 @@ Func_62605:: ; 62605 (18:6605)
 	ld a, [hl]
 	adc 0
 	ldh [hXPosHi], a
-	ld a, $01
+	ld a, TRUE
 	ld [wc0d9], a
 	call Func_3513
 	and $0f
@@ -2346,7 +2346,7 @@ Func_626da:: ; 626da (18:66da)
 	ldh [hYPosHi], a
 	ld a, [hl]
 	ldh [hYPosLo], a
-	xor a
+	xor a ; FALSE
 	ld [wc1ca], a
 	inc a
 	ld [wc0d9], a
@@ -2375,7 +2375,7 @@ Func_626da:: ; 626da (18:66da)
 	ld a, [hli]
 	sbc 0
 	ldh [hYPosHi], a
-	ld a, $01
+	ld a, TRUE
 	ld [wc0d9], a
 	call Func_358b
 	and a
@@ -2397,7 +2397,7 @@ Func_626da:: ; 626da (18:66da)
 	ld a, [hli]
 	sbc 0
 	ldh [hXPosHi], a
-	ld a, $01
+	ld a, TRUE
 	ld [wc0d9], a
 	call Func_3513
 	and $0f
@@ -2426,7 +2426,7 @@ Func_62768:: ; 62768 (18:6768)
 	ldh [hYPosHi], a
 	ld a, [hl]
 	ldh [hYPosLo], a
-	xor a
+	xor a ; FALSE
 	ld [wc1ca], a
 	inc a
 	ld [wc0d9], a
@@ -2455,7 +2455,7 @@ Func_62768:: ; 62768 (18:6768)
 	ld a, [hli]
 	sbc 0
 	ldh [hYPosHi], a
-	ld a, $01
+	ld a, TRUE
 	ld [wc0d9], a
 	call Func_358b
 	and a
@@ -2474,7 +2474,7 @@ Func_62768:: ; 62768 (18:6768)
 	ld a, [hl]
 	adc 0
 	ldh [hXPosHi], a
-	ld a, $01
+	ld a, TRUE
 	ld [wc0d9], a
 	call Func_3513
 	and $0f

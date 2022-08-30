@@ -114,7 +114,7 @@ UpdateState_Idling: ; 1c0b6 (7:40b6)
 	update_anim_1
 
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wLadderInteraction]
@@ -188,7 +188,7 @@ UpdateState_Walking: ; 1c1ab (7:41ab)
 	ret nz ; return if not walking anymore
 
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wWarioState]
@@ -333,7 +333,7 @@ SetState_Airborne: ; 1c2e2 (7:42e2)
 
 UpdateState_Airborne: ; 1c369 (7:4369)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wJumpVelIndex]
@@ -730,7 +730,7 @@ SetState_CrouchSliding: ; 1c73b (7:473b)
 
 UpdateState_CrouchSliding: ; 1c7c3 (7:47c3)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wWarioState]
@@ -885,7 +885,7 @@ UpdateState_Attacking: ; 1c8df (7:48df)
 	cp WST_ATTACKING
 	ret nz ; not attacking anymore
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wWarioState]
@@ -1134,7 +1134,7 @@ SetState_AttackingAirborne: ; 1cb43 (7:4b43)
 
 UpdateState_AttackingAirborne: ; 1cbb9 (7:4bb9)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wWaterInteraction]
@@ -1231,7 +1231,7 @@ UpdateState_AttackingAirborne: ; 1cbb9 (7:4bb9)
 
 UpdateState_Bumping: ; 1ccaf (7:4caf)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wWaterInteraction]
@@ -1465,7 +1465,7 @@ UpdateState_Submerged: ; 1cf53 (7:4f53)
 	xor a
 	ld [wc0e1], a
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wWarioState]
@@ -1531,7 +1531,7 @@ UpdateState_WaterSurfaceIdling: ; 1d008 (7:5008)
 	cp WST_WATER_SURFACE_IDLING
 	ret nz ; not water idling anymore
 
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wSFXLoopCounter]
@@ -1592,7 +1592,7 @@ UpdateState_WaterSurfaceMoving: ; 1d0ba (7:50ba)
 	xor a
 	ld [wc0e1], a
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wSFXLoopCounter]
@@ -1792,7 +1792,7 @@ UpdateState_UnderwaterThrusting: ; 1d297 (7:5297)
 	xor a
 	ld [wc0e1], a
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wWarioState]
@@ -2000,7 +2000,7 @@ UpdateState_CrouchWalking: ; 1d4a7 (7:54a7)
 	update_anim_1
 
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wWarioState]
@@ -2030,7 +2030,7 @@ UpdateState_CrouchWalking: ; 1d4a7 (7:54a7)
 
 UpdateState_CrouchAirborne: ; 1d522 (7:5522)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wWaterInteraction]
@@ -2126,7 +2126,7 @@ UpdateState_CrouchAirborne: ; 1d522 (7:5522)
 
 UpdateState_Stung: ; 1d627 (7:5627)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wWaterInteraction]
@@ -2326,8 +2326,8 @@ UpdateState_PipeGoingDown: ; 1d7c1 (7:57c1)
 
 .asm_1d7f9
 	call ClearTransformationValues
-	ld hl, wc0d7
-	res 7, [hl]
+	ld hl, wRoomTransitionParam
+	res ROOMTRANSITIONFLAG_3_F, [hl]
 	jp TriggerRoomTransition
 .asm_1d804
 	play_sfx SFX_0E1
@@ -2360,8 +2360,8 @@ UpdateState_PipeGoingUp: ; 1d80d (7:580d)
 
 .asm_1d848
 	call ClearTransformationValues
-	ld hl, wc0d7
-	res 7, [hl]
+	ld hl, wRoomTransitionParam
+	res ROOMTRANSITIONFLAG_3_F, [hl]
 	jp TriggerRoomTransition
 .asm_1d853
 	play_sfx SFX_0E1
@@ -2370,7 +2370,7 @@ UpdateState_PipeGoingUp: ; 1d80d (7:580d)
 
 UpdateState_EnemyBumping: ; 1d85c (7:585c)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wWaterInteraction]
@@ -2454,7 +2454,7 @@ UpdateState_PickingUp: ; 1d916 (7:5916)
 
 UpdateState_GrabIdling: ; 1d943 (7:5943)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wWarioState]
@@ -2483,7 +2483,7 @@ UpdateState_GrabIdling: ; 1d943 (7:5943)
 
 UpdateState_GrabWalking: ; 1d995 (7:5995)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wWarioState]
@@ -2544,7 +2544,7 @@ SetState_ThrowingAirborne: ; 1da07 (7:5a07)
 
 UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wWarioState]
@@ -3135,7 +3135,7 @@ SetState_Rolling: ; 1e042 (7:6042)
 
 UpdateState_Rolling: ; 1e09d (7:609d)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 
@@ -3247,7 +3247,7 @@ Func_1e1e3: ; 1e1e3 (7:61e3)
 
 UpdateState_RollingAirborne: ; 1e1e9 (7:61e9)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wWaterInteraction]
@@ -3476,8 +3476,8 @@ UpdateState_EnteringDoor: ; 1e3e8 (7:63e8)
 	ret z
 	ld hl, wWarioStateCounter
 	inc [hl]
-	ld hl, wc0d7
-	res 7, [hl]
+	ld hl, wRoomTransitionParam
+	res ROOMTRANSITIONFLAG_3_F, [hl]
 	jp TriggerRoomTransition
 
 .asm_1e455
@@ -5455,7 +5455,7 @@ HandleGroundShake: ; 1f6dc (7:76dc)
 	ld a, [wTransformation]
 	and a
 	jr nz, .continue
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jr nz, .continue
 	ld a, [wIsIntangible]
@@ -5481,11 +5481,11 @@ HandleGroundShake: ; 1f6dc (7:76dc)
 	and %10
 	jr nz, .asm_1f736
 	xor a
-	ld [wc0bc], a
+	ld [wSCYShake], a
 	ret
 .asm_1f736
-	ld a, $02
-	ld [wc0bc], a
+	ld a, 2
+	ld [wSCYShake], a
 	ret
 
 .asm_1f73c

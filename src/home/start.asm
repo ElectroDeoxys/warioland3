@@ -187,7 +187,7 @@ DebugReset:: ; 28d (0:28d)
 
 ; handle playing SFX and music
 HandleSound:: ; 290 (0:290)
-	ld a, [wc090]
+	ld a, [wSoundMuted]
 	and a
 	ret nz
 	ld hl, hSFXID

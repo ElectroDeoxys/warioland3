@@ -29,10 +29,10 @@ ENDM
 
 MACRO scene_obj_struct
 	sprite_oam_struct \1
-\1Duration:: db
+\1Duration::       db
 \1FramesetOffset:: db
-\1State:: db
-\1Unk7:: db
+\1State::          db
+\1Unk7::           db
 \1End::
 ENDM
 

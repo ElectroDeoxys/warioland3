@@ -98,7 +98,7 @@ Func_80aa: ; 80aa (2:40aa)
 	ld a, [wFloorTransitionDir]
 	and a
 	jr nz, .skip_update_wario_state
-	ld a, $01
+	ld a, TRUE
 	ld [wc0da], a
 	farcall Func_1c000
 
@@ -112,7 +112,7 @@ Func_80aa: ; 80aa (2:40aa)
 	ld [wSCX], a
 	jr .asm_8112
 .asm_80fc
-	ld hl, wc0bc
+	ld hl, wSCYShake
 	ld a, [wc089]
 	add [hl]
 	ld [wSCY], a
@@ -123,7 +123,7 @@ Func_80aa: ; 80aa (2:40aa)
 	ldh [rWY], a
 
 .asm_8112
-	xor a
+	xor a ; FALSE
 	ld [wc0da], a
 
 	ldh a, [rSVBK]
@@ -147,10 +147,10 @@ Func_80aa: ; 80aa (2:40aa)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	ld a, $01
+	ld a, TRUE
 	ld [wc0da], a
 	farcall Func_20000
-	xor a
+	xor a ; FALSE
 	ld [wc0da], a
 	pop af
 
@@ -266,7 +266,7 @@ Func_80aa: ; 80aa (2:40aa)
 
 	xor a
 	ld [wGroundShakeCounter], a
-	ld [wc0bc], a
+	ld [wSCYShake], a
 	ld [wAnimatedTilesFrameDuration], a
 	ld [wRoomPalCycleDuration], a
 	ld [wRoomAnimatedTilesEnabled], a
@@ -337,7 +337,7 @@ Func_80aa: ; 80aa (2:40aa)
 	ld a, [wFloorTransitionDir]
 	and a
 	ret nz
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	ret nz
 
@@ -373,7 +373,7 @@ Func_80aa: ; 80aa (2:40aa)
 	ret
 
 .free_camera
-	ld a, $01
+	ld a, TRUE
 	ld [wc0da], a
 	farcall Func_1c000
 
@@ -382,7 +382,7 @@ Func_80aa: ; 80aa (2:40aa)
 	ld a, [wcac6 + 1]
 	ld [wSCX], a
 
-	xor a
+	xor a ; FALSE
 	ld [wc0da], a
 	ldh a, [rSVBK]
 	push af
@@ -393,11 +393,11 @@ Func_80aa: ; 80aa (2:40aa)
 	ldh [rSVBK], a
 
 	call Func_b8d3
-	ld a, $01
+	ld a, TRUE
 	ld [wc0da], a
 	farcall Func_20000
 
-	xor a
+	xor a ; FALSE
 	ld [wc0da], a
 	ldh a, [rSVBK]
 	push af
@@ -425,7 +425,7 @@ Func_80aa: ; 80aa (2:40aa)
 	jp .asm_8229
 
 .yscroll_camera
-	ld a, $01
+	ld a, TRUE
 	ld [wc0da], a
 	farcall Func_1c000
 
@@ -434,7 +434,7 @@ Func_80aa: ; 80aa (2:40aa)
 	ld a, [wcac6 + 1]
 	ld [wSCX], a
 
-	xor a
+	xor a ; FALSE
 	ld [wc0da], a
 	ldh a, [rSVBK]
 	push af
@@ -445,11 +445,11 @@ Func_80aa: ; 80aa (2:40aa)
 	ldh [rSVBK], a
 
 	call Func_b8d3
-	ld a, $01
+	ld a, TRUE
 	ld [wc0da], a
 	farcall Func_20000
 
-	xor a
+	xor a ; FALSE
 	ld [wc0da], a
 	ldh a, [rSVBK]
 	push af
@@ -478,9 +478,9 @@ Func_80aa: ; 80aa (2:40aa)
 ; 0x846e
 
 Func_846e: ; 846e (2:446e)
-	ld a, [wc0d7]
-	and $0f
-	cp $03
+	ld a, [wRoomTransitionParam]
+	and ROOMTRANSITION_MASK
+	cp ROOMTRANSITION_3
 	jr nz, .asm_849d
 	ldh a, [rSVBK]
 	push af
@@ -512,9 +512,9 @@ Func_846e: ; 846e (2:446e)
 	ldh [rSVBK], a
 	ld a, $00
 	sramswitch
-	ld a, [wc0d7]
-	and $0f
-	cp $07
+	ld a, [wRoomTransitionParam]
+	and ROOMTRANSITION_MASK
+	cp ROOMTRANSITION_7
 	jr nz, .asm_84e2
 
 	ld a, $01
@@ -545,7 +545,7 @@ Func_846e: ; 846e (2:446e)
 	ld [wc0be], a
 	ld [wc0bd], a
 	ld [wGroundShakeCounter], a
-	ld [wc0bc], a
+	ld [wSCYShake], a
 	ld a, [wInternalRoomID]
 	ld [wTempInternalRoomID], a
 
@@ -563,13 +563,13 @@ Func_846e: ; 846e (2:446e)
 	call Func_8a41
 	call Func_8ad9
 	call Func_8c12
-	ld a, [wc0d7]
-	bit 6, a
+	ld a, [wRoomTransitionParam]
+	bit ROOMTRANSITIONFLAG_2_F, a
 	jr z, .asm_854a
 	call Func_edb
 .asm_854a
 	xor a
-	ld [wc0d7], a
+	ld [wRoomTransitionParam], a
 	call Func_bc5e
 	ld a, [wSRAMBank]
 	push af
@@ -599,7 +599,7 @@ Func_846e: ; 846e (2:446e)
 
 .asm_85a7
 	call UpdateLevelMusic
-	xor a
+	xor a ; FALSE
 	ld [wc0da], a
 	ld [wIsFloorTransition], a
 	ldh a, [rSVBK]
@@ -800,7 +800,7 @@ Func_8747: ; 8747 (2:4747)
 	ld [wcac8], a
 	ld [wIsOnSteppableObject], a
 	ld [wGroundShakeCounter], a
-	ld [wc0bc], a
+	ld [wSCYShake], a
 	ld [wSwimmingDirectionInput], a
 	ld [wAnimatedTilesFrameDuration], a
 	ld [wRoomPalCycleDuration], a
@@ -923,7 +923,7 @@ Func_8747: ; 8747 (2:4747)
 
 .not_the_temple
 	call Func_b8d3
-	xor a
+	xor a ; FALSE
 	ld [wc0da], a
 
 	ld a, [wceef]
@@ -1450,6 +1450,7 @@ Func_8c12: ; 8c12 (2:4c12)
 	ld [wc0a6], a
 	ld [wc0a5], a
 	ret
+
 .asm_8c9f
 	ld a, [wCameraConfigFlags]
 	bit CAM_EDGE_LEFT_F, a
@@ -1464,6 +1465,7 @@ Func_8c12: ; 8c12 (2:4c12)
 	ld a, h
 	ld [wc0a5], a
 	ret
+
 .asm_8cba
 	ld a, [wCameraConfigFlags]
 	bit CAM_EDGE_RIGHT_F, a
@@ -2364,11 +2366,11 @@ Func_9085: ; 9085 (2:5085)
 Func_9254: ; 9254 (2:5254)
 	ld a, [wce00]
 	ld b, a
-	ld a, $ce
-	ld [wcce7], a
-	ld a, $01
+	ld a, HIGH(wce01)
+	ld [wcce7 + 0], a
+	ld a, LOW(wce01)
 	add b
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [wc0a6]
 	and $08
 	jp nz, Func_9438
@@ -2383,12 +2385,12 @@ Func_9254: ; 9254 (2:5254)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2406,12 +2408,12 @@ Func_9254: ; 9254 (2:5254)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2429,12 +2431,12 @@ Func_9254: ; 9254 (2:5254)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2452,12 +2454,12 @@ Func_9254: ; 9254 (2:5254)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2475,12 +2477,12 @@ Func_9254: ; 9254 (2:5254)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2498,12 +2500,12 @@ Func_9254: ; 9254 (2:5254)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2521,12 +2523,12 @@ Func_9254: ; 9254 (2:5254)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2544,12 +2546,12 @@ Func_9254: ; 9254 (2:5254)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2567,12 +2569,12 @@ Func_9254: ; 9254 (2:5254)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2590,12 +2592,12 @@ Func_9254: ; 9254 (2:5254)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2613,12 +2615,12 @@ Func_9254: ; 9254 (2:5254)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2636,12 +2638,12 @@ Func_9254: ; 9254 (2:5254)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2659,9 +2661,9 @@ Func_9254: ; 9254 (2:5254)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	ld a, [hl]
 	ld [de], a
@@ -2682,12 +2684,12 @@ Func_9438: ; 9438 (2:5438)
 	inc l
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	inc a
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hl]
 	ld [de], a
 	pop hl
@@ -2702,12 +2704,12 @@ Func_9438: ; 9438 (2:5438)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2725,12 +2727,12 @@ Func_9438: ; 9438 (2:5438)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2748,12 +2750,12 @@ Func_9438: ; 9438 (2:5438)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2771,12 +2773,12 @@ Func_9438: ; 9438 (2:5438)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2794,12 +2796,12 @@ Func_9438: ; 9438 (2:5438)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2817,12 +2819,12 @@ Func_9438: ; 9438 (2:5438)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2840,12 +2842,12 @@ Func_9438: ; 9438 (2:5438)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2863,12 +2865,12 @@ Func_9438: ; 9438 (2:5438)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2886,12 +2888,12 @@ Func_9438: ; 9438 (2:5438)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2909,12 +2911,12 @@ Func_9438: ; 9438 (2:5438)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2932,12 +2934,12 @@ Func_9438: ; 9438 (2:5438)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2955,9 +2957,9 @@ Func_9438: ; 9438 (2:5438)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	ld a, [hli]
 	ld [de], a
@@ -2971,11 +2973,11 @@ Func_9438: ; 9438 (2:5438)
 Func_9605: ; 9605 (2:5605)
 	ld a, [wce00]
 	ld b, a
-	ld a, $ce
-	ld [wc0b3], a
-	ld a, $35
+	ld a, HIGH(wce35)
+	ld [wc0b3 + 0], a
+	ld a, LOW(wce35)
 	add b
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [wc0a6]
 	and $08
 	jp nz, Func_97f3
@@ -2994,12 +2996,12 @@ Func_9605: ; 9605 (2:5605)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3017,12 +3019,12 @@ Func_9605: ; 9605 (2:5605)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3040,12 +3042,12 @@ Func_9605: ; 9605 (2:5605)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3063,12 +3065,12 @@ Func_9605: ; 9605 (2:5605)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3086,12 +3088,12 @@ Func_9605: ; 9605 (2:5605)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3109,12 +3111,12 @@ Func_9605: ; 9605 (2:5605)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3132,12 +3134,12 @@ Func_9605: ; 9605 (2:5605)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3155,12 +3157,12 @@ Func_9605: ; 9605 (2:5605)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3178,12 +3180,12 @@ Func_9605: ; 9605 (2:5605)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3201,12 +3203,12 @@ Func_9605: ; 9605 (2:5605)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3224,12 +3226,12 @@ Func_9605: ; 9605 (2:5605)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3247,12 +3249,12 @@ Func_9605: ; 9605 (2:5605)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3270,9 +3272,9 @@ Func_9605: ; 9605 (2:5605)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	ld a, [hl]
 	ld [de], a
@@ -3299,12 +3301,12 @@ Func_97f3: ; 97f3 (2:57f3)
 	inc l
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	inc a
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hl]
 	ld [de], a
 	pop hl
@@ -3319,12 +3321,12 @@ Func_97f3: ; 97f3 (2:57f3)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3342,12 +3344,12 @@ Func_97f3: ; 97f3 (2:57f3)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3365,12 +3367,12 @@ Func_97f3: ; 97f3 (2:57f3)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3388,12 +3390,12 @@ Func_97f3: ; 97f3 (2:57f3)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3411,12 +3413,12 @@ Func_97f3: ; 97f3 (2:57f3)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3434,12 +3436,12 @@ Func_97f3: ; 97f3 (2:57f3)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3457,12 +3459,12 @@ Func_97f3: ; 97f3 (2:57f3)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3480,12 +3482,12 @@ Func_97f3: ; 97f3 (2:57f3)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3503,12 +3505,12 @@ Func_97f3: ; 97f3 (2:57f3)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3526,12 +3528,12 @@ Func_97f3: ; 97f3 (2:57f3)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3549,12 +3551,12 @@ Func_97f3: ; 97f3 (2:57f3)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3572,9 +3574,9 @@ Func_97f3: ; 97f3 (2:57f3)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	ld a, [hli]
 	ld [de], a
@@ -3590,11 +3592,11 @@ Func_97f3: ; 97f3 (2:57f3)
 Func_99ca: ; 99ca (2:59ca)
 	ld a, [wce00]
 	ld b, a
-	ld a, $ce
-	ld [wcce7], a
-	ld a, $01
+	ld a, HIGH(wce01)
+	ld [wcce7 + 0], a
+	ld a, LOW(wce01)
 	add b
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [wc0a6]
 	and $08
 	jp nz, Func_9b94
@@ -3607,12 +3609,12 @@ Func_99ca: ; 99ca (2:59ca)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3628,12 +3630,12 @@ Func_99ca: ; 99ca (2:59ca)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3649,12 +3651,12 @@ Func_99ca: ; 99ca (2:59ca)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3670,12 +3672,12 @@ Func_99ca: ; 99ca (2:59ca)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3691,12 +3693,12 @@ Func_99ca: ; 99ca (2:59ca)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3712,12 +3714,12 @@ Func_99ca: ; 99ca (2:59ca)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3733,12 +3735,12 @@ Func_99ca: ; 99ca (2:59ca)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3754,12 +3756,12 @@ Func_99ca: ; 99ca (2:59ca)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3775,12 +3777,12 @@ Func_99ca: ; 99ca (2:59ca)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3796,12 +3798,12 @@ Func_99ca: ; 99ca (2:59ca)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3817,12 +3819,12 @@ Func_99ca: ; 99ca (2:59ca)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3838,12 +3840,12 @@ Func_99ca: ; 99ca (2:59ca)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3859,9 +3861,9 @@ Func_99ca: ; 99ca (2:59ca)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	ld a, [hl]
 	ld [de], a
@@ -3880,12 +3882,12 @@ Func_9b94: ; 9b94 (2:5b94)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	inc a
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hl]
 	ld [de], a
 	pop hl
@@ -3898,12 +3900,12 @@ Func_9b94: ; 9b94 (2:5b94)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3919,12 +3921,12 @@ Func_9b94: ; 9b94 (2:5b94)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3940,12 +3942,12 @@ Func_9b94: ; 9b94 (2:5b94)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3961,12 +3963,12 @@ Func_9b94: ; 9b94 (2:5b94)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -3982,12 +3984,12 @@ Func_9b94: ; 9b94 (2:5b94)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4003,12 +4005,12 @@ Func_9b94: ; 9b94 (2:5b94)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4024,12 +4026,12 @@ Func_9b94: ; 9b94 (2:5b94)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4045,12 +4047,12 @@ Func_9b94: ; 9b94 (2:5b94)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4066,12 +4068,12 @@ Func_9b94: ; 9b94 (2:5b94)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4087,12 +4089,12 @@ Func_9b94: ; 9b94 (2:5b94)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4108,12 +4110,12 @@ Func_9b94: ; 9b94 (2:5b94)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4129,12 +4131,12 @@ Func_9b94: ; 9b94 (2:5b94)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4147,11 +4149,11 @@ Func_9b94: ; 9b94 (2:5b94)
 Func_9d4c: ; 9d4c (2:5d4c)
 	ld a, [wce00]
 	ld b, a
-	ld a, $ce
-	ld [wc0b3], a
-	ld a, $35
+	ld a, HIGH(wce35)
+	ld [wc0b3 + 0], a
+	ld a, LOW(wce35)
 	add b
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [wc0a6]
 	and $08
 	jp nz, Func_9f20
@@ -4168,12 +4170,12 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4189,12 +4191,12 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4210,12 +4212,12 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4231,12 +4233,12 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4252,12 +4254,12 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4273,12 +4275,12 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4294,12 +4296,12 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4315,12 +4317,12 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4336,12 +4338,12 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4357,12 +4359,12 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4378,12 +4380,12 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4399,12 +4401,12 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4420,9 +4422,9 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	ld a, [hl]
 	ld [de], a
@@ -4447,12 +4449,12 @@ Func_9f20: ; 9f20 (2:5f20)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	inc a
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hl]
 	ld [de], a
 	pop hl
@@ -4465,12 +4467,12 @@ Func_9f20: ; 9f20 (2:5f20)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4486,12 +4488,12 @@ Func_9f20: ; 9f20 (2:5f20)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4507,12 +4509,12 @@ Func_9f20: ; 9f20 (2:5f20)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4528,12 +4530,12 @@ Func_9f20: ; 9f20 (2:5f20)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4549,12 +4551,12 @@ Func_9f20: ; 9f20 (2:5f20)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4570,12 +4572,12 @@ Func_9f20: ; 9f20 (2:5f20)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4591,12 +4593,12 @@ Func_9f20: ; 9f20 (2:5f20)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4612,12 +4614,12 @@ Func_9f20: ; 9f20 (2:5f20)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4633,12 +4635,12 @@ Func_9f20: ; 9f20 (2:5f20)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4654,12 +4656,12 @@ Func_9f20: ; 9f20 (2:5f20)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4675,12 +4677,12 @@ Func_9f20: ; 9f20 (2:5f20)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -4696,12 +4698,12 @@ Func_9f20: ; 9f20 (2:5f20)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -5054,11 +5056,11 @@ Func_a0e2: ; a0e2 (2:60e2)
 Func_a2aa: ; a2aa (2:62aa)
 	ld a, [wce00]
 	ld b, a
-	ld a, $ce
-	ld [wcce7], a
-	ld a, $01
+	ld a, HIGH(wce01)
+	ld [wcce7 + 0], a
+	ld a, LOW(wce01)
 	add b
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [wc0a4]
 	and $08
 	jp nz, Func_a52f
@@ -5072,12 +5074,12 @@ Func_a2aa: ; a2aa (2:62aa)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5104,12 +5106,12 @@ Func_a2aa: ; a2aa (2:62aa)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5136,12 +5138,12 @@ Func_a2aa: ; a2aa (2:62aa)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5168,12 +5170,12 @@ Func_a2aa: ; a2aa (2:62aa)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5200,12 +5202,12 @@ Func_a2aa: ; a2aa (2:62aa)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5232,12 +5234,12 @@ Func_a2aa: ; a2aa (2:62aa)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5264,12 +5266,12 @@ Func_a2aa: ; a2aa (2:62aa)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5296,12 +5298,12 @@ Func_a2aa: ; a2aa (2:62aa)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5328,12 +5330,12 @@ Func_a2aa: ; a2aa (2:62aa)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5360,12 +5362,12 @@ Func_a2aa: ; a2aa (2:62aa)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5392,12 +5394,12 @@ Func_a2aa: ; a2aa (2:62aa)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5424,9 +5426,9 @@ Func_a2aa: ; a2aa (2:62aa)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	ld a, [hl]
 	ld [de], a
@@ -5447,12 +5449,12 @@ Func_a52f: ; a52f (2:652f)
 	inc l
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	inc a
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hl]
 	ld [de], a
 	pop hl
@@ -5475,12 +5477,12 @@ Func_a52f: ; a52f (2:652f)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5507,12 +5509,12 @@ Func_a52f: ; a52f (2:652f)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5539,12 +5541,12 @@ Func_a52f: ; a52f (2:652f)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5571,12 +5573,12 @@ Func_a52f: ; a52f (2:652f)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5603,12 +5605,12 @@ Func_a52f: ; a52f (2:652f)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5635,12 +5637,12 @@ Func_a52f: ; a52f (2:652f)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5667,12 +5669,12 @@ Func_a52f: ; a52f (2:652f)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5699,12 +5701,12 @@ Func_a52f: ; a52f (2:652f)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5731,12 +5733,12 @@ Func_a52f: ; a52f (2:652f)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5763,12 +5765,12 @@ Func_a52f: ; a52f (2:652f)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5795,9 +5797,9 @@ Func_a52f: ; a52f (2:652f)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	ld a, [hli]
 	ld [de], a
@@ -5812,11 +5814,11 @@ Func_a52f: ; a52f (2:652f)
 Func_a79e: ; a79e (2:679e)
 	ld a, [wce00]
 	ld b, a
-	ld a, $ce
-	ld [wc0b3], a
-	ld a, $35
+	ld a, HIGH(wce35)
+	ld [wc0b3 + 0], a
+	ld a, LOW(wce35)
 	add b
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [wc0a4]
 	and $08
 	jp nz, Func_aa2d
@@ -5834,12 +5836,12 @@ Func_a79e: ; a79e (2:679e)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5866,12 +5868,12 @@ Func_a79e: ; a79e (2:679e)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5898,12 +5900,12 @@ Func_a79e: ; a79e (2:679e)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5930,12 +5932,12 @@ Func_a79e: ; a79e (2:679e)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5962,12 +5964,12 @@ Func_a79e: ; a79e (2:679e)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -5994,12 +5996,12 @@ Func_a79e: ; a79e (2:679e)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6026,12 +6028,12 @@ Func_a79e: ; a79e (2:679e)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6058,12 +6060,12 @@ Func_a79e: ; a79e (2:679e)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6090,12 +6092,12 @@ Func_a79e: ; a79e (2:679e)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6122,12 +6124,12 @@ Func_a79e: ; a79e (2:679e)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6154,12 +6156,12 @@ Func_a79e: ; a79e (2:679e)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6186,9 +6188,9 @@ Func_a79e: ; a79e (2:679e)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	ld a, [hl]
 	ld [de], a
@@ -6215,12 +6217,12 @@ Func_aa2d: ; aa2d (2:6a2d)
 	inc l
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	inc a
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hl]
 	ld [de], a
 	pop hl
@@ -6243,12 +6245,12 @@ Func_aa2d: ; aa2d (2:6a2d)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6275,12 +6277,12 @@ Func_aa2d: ; aa2d (2:6a2d)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6307,12 +6309,12 @@ Func_aa2d: ; aa2d (2:6a2d)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6339,12 +6341,12 @@ Func_aa2d: ; aa2d (2:6a2d)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6371,12 +6373,12 @@ Func_aa2d: ; aa2d (2:6a2d)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6403,12 +6405,12 @@ Func_aa2d: ; aa2d (2:6a2d)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6435,12 +6437,12 @@ Func_aa2d: ; aa2d (2:6a2d)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6467,12 +6469,12 @@ Func_aa2d: ; aa2d (2:6a2d)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6499,12 +6501,12 @@ Func_aa2d: ; aa2d (2:6a2d)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6531,12 +6533,12 @@ Func_aa2d: ; aa2d (2:6a2d)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6563,9 +6565,9 @@ Func_aa2d: ; aa2d (2:6a2d)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	ld a, [hli]
 	ld [de], a
@@ -6582,11 +6584,11 @@ Func_aa2d: ; aa2d (2:6a2d)
 Func_aca6: ; aca6 (2:6ca6)
 	ld a, [wce00]
 	ld b, a
-	ld a, $ce
-	ld [wcce7], a
-	ld a, $01
+	ld a, HIGH(wce01)
+	ld [wcce7 + 0], a
+	ld a, LOW(wce01)
 	add b
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [wc0a4]
 	and $08
 	jp nz, Func_af1f
@@ -6599,12 +6601,12 @@ Func_aca6: ; aca6 (2:6ca6)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6630,12 +6632,12 @@ Func_aca6: ; aca6 (2:6ca6)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6661,12 +6663,12 @@ Func_aca6: ; aca6 (2:6ca6)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6692,12 +6694,12 @@ Func_aca6: ; aca6 (2:6ca6)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6723,12 +6725,12 @@ Func_aca6: ; aca6 (2:6ca6)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6754,12 +6756,12 @@ Func_aca6: ; aca6 (2:6ca6)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6785,12 +6787,12 @@ Func_aca6: ; aca6 (2:6ca6)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6816,12 +6818,12 @@ Func_aca6: ; aca6 (2:6ca6)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6847,12 +6849,12 @@ Func_aca6: ; aca6 (2:6ca6)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6878,12 +6880,12 @@ Func_aca6: ; aca6 (2:6ca6)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6909,12 +6911,12 @@ Func_aca6: ; aca6 (2:6ca6)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -6940,9 +6942,9 @@ Func_aca6: ; aca6 (2:6ca6)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	ld a, [hl]
 	ld [de], a
@@ -6962,12 +6964,12 @@ Func_af1f: ; af1f (2:6f1f)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	inc a
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hl]
 	ld [de], a
 	pop hl
@@ -6989,12 +6991,12 @@ Func_af1f: ; af1f (2:6f1f)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7020,12 +7022,12 @@ Func_af1f: ; af1f (2:6f1f)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7051,12 +7053,12 @@ Func_af1f: ; af1f (2:6f1f)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7082,12 +7084,12 @@ Func_af1f: ; af1f (2:6f1f)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7113,12 +7115,12 @@ Func_af1f: ; af1f (2:6f1f)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7144,12 +7146,12 @@ Func_af1f: ; af1f (2:6f1f)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7175,12 +7177,12 @@ Func_af1f: ; af1f (2:6f1f)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7206,12 +7208,12 @@ Func_af1f: ; af1f (2:6f1f)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7237,12 +7239,12 @@ Func_af1f: ; af1f (2:6f1f)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7268,12 +7270,12 @@ Func_af1f: ; af1f (2:6f1f)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7299,9 +7301,9 @@ Func_af1f: ; af1f (2:6f1f)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	ld a, [hli]
 	ld [de], a
@@ -7316,11 +7318,11 @@ Func_af1f: ; af1f (2:6f1f)
 Func_b182: ; b182 (2:7182)
 	ld a, [wce00]
 	ld b, a
-	ld a, $ce
-	ld [wc0b3], a
-	ld a, $35
+	ld a, HIGH(wce35)
+	ld [wc0b3 + 0], a
+	ld a, LOW(wce35)
 	add b
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [wc0a4]
 	and $08
 	jp nz, Func_b405
@@ -7337,12 +7339,12 @@ Func_b182: ; b182 (2:7182)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7368,12 +7370,12 @@ Func_b182: ; b182 (2:7182)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7399,12 +7401,12 @@ Func_b182: ; b182 (2:7182)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7430,12 +7432,12 @@ Func_b182: ; b182 (2:7182)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7461,12 +7463,12 @@ Func_b182: ; b182 (2:7182)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7492,12 +7494,12 @@ Func_b182: ; b182 (2:7182)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7523,12 +7525,12 @@ Func_b182: ; b182 (2:7182)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7554,12 +7556,12 @@ Func_b182: ; b182 (2:7182)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7585,12 +7587,12 @@ Func_b182: ; b182 (2:7182)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7616,12 +7618,12 @@ Func_b182: ; b182 (2:7182)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7647,12 +7649,12 @@ Func_b182: ; b182 (2:7182)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7678,9 +7680,9 @@ Func_b182: ; b182 (2:7182)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	ld a, [hl]
 	ld [de], a
@@ -7706,12 +7708,12 @@ Func_b405: ; b405 (2:7405)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	inc a
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hl]
 	ld [de], a
 	pop hl
@@ -7733,12 +7735,12 @@ Func_b405: ; b405 (2:7405)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7764,12 +7766,12 @@ Func_b405: ; b405 (2:7405)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7795,12 +7797,12 @@ Func_b405: ; b405 (2:7405)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7826,12 +7828,12 @@ Func_b405: ; b405 (2:7405)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7857,12 +7859,12 @@ Func_b405: ; b405 (2:7405)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7888,12 +7890,12 @@ Func_b405: ; b405 (2:7405)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7919,12 +7921,12 @@ Func_b405: ; b405 (2:7405)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7950,12 +7952,12 @@ Func_b405: ; b405 (2:7405)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -7981,12 +7983,12 @@ Func_b405: ; b405 (2:7405)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -8012,12 +8014,12 @@ Func_b405: ; b405 (2:7405)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -8043,9 +8045,9 @@ Func_b405: ; b405 (2:7405)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	ld a, [hli]
 	ld [de], a
@@ -8105,7 +8107,7 @@ Func_b681: ; b681 (2:7681)
 
 	ld a, [wce00]
 	ld c, a
-	ld hl, wc800
+	ld hl, wBlankFuncExtended
 .loop_2
 	ld a, $2a ; ld a, [hli]
 	ld [hli], a
@@ -8443,7 +8445,7 @@ Func_b8d3: ; b8d3 (2:78d3)
 	ret
 
 .asm_b8f5
-	ld a, [wc0bc]
+	ld a, [wSCYShake]
 	ld c, a
 	ld a, [wc08a]
 	add c

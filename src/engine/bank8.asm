@@ -50,13 +50,13 @@ Func_20000: ; 20000 (8:4000)
 	ld a, [hli] ; OBJ_INTERACTION_TYPE
 	ld [wObjInteractionType], a
 	ld a, [hli] ; OBJ_COLLBOX_TOP
-	ld [wc1ba], a
+	ld [wObjCollBoxTop], a
 	ld a, [hli] ; OBJ_COLLBOX_BOTTOM
-	ld [wc1bb], a
+	ld [wObjCollBoxBottom], a
 	ld a, [hli] ; OBJ_COLLBOX_LEFT
-	ld [wc1bc], a
+	ld [wObjCollBoxLeft], a
 	ld a, [hli] ; OBJ_COLLBOX_RIGHT
-	ld [wc1bd], a
+	ld [wObjCollBoxRight], a
 	ld a, [hli] ; OBJ_SCREEN_Y_POS
 	ld [wObjScreenYPos], a
 	ld a, [hl] ; OBJ_SCREEN_X_POS
@@ -84,11 +84,11 @@ Func_20000: ; 20000 (8:4000)
 	ld [wc1c4], a
 
 	ld e, $d0
-	ld hl, wc1ba
+	ld hl, wObjCollBoxTop
 	ld a, [wObjScreenYPos]
 	add [hl]
 	sub e
-	ld b, a ; wc1ba + wObjScreenYPos - $d0
+	ld b, a
 	ld hl, wCollisionBoxBottom
 	ld a, [wWarioScreenYPos]
 	add [hl]
@@ -96,12 +96,13 @@ Func_20000: ; 20000 (8:4000)
 	sub b
 	jp c, .next_obj
 	ld c, a
+
 	ld hl, wCollisionBoxTop
 	ld a, [wWarioScreenYPos]
 	add [hl]
 	sub e
 	ld b, a
-	ld hl, wc1bb
+	ld hl, wObjCollBoxBottom
 	ld a, [wObjScreenYPos]
 	add [hl]
 	sub e
@@ -124,7 +125,7 @@ Func_20000: ; 20000 (8:4000)
 	ld [wc1c2], a
 .asm_200cd
 
-	ld hl, wc1bc
+	ld hl, wObjCollBoxLeft
 	ld a, [wObjScreenXPos]
 	add [hl]
 	sub e
@@ -141,7 +142,7 @@ Func_20000: ; 20000 (8:4000)
 	add [hl]
 	sub e
 	ld b, a
-	ld hl, wc1bd
+	ld hl, wObjCollBoxRight
 	ld a, [wObjScreenXPos]
 	add [hl]
 	sub e
@@ -3270,8 +3271,8 @@ Func_21cc9: ; 21cc9 (8:5cc9)
 ; 0x21ccf
 
 ObjInteraction_WaterTeleporting: ; 21ccf (8:5ccf)
-	ld a, $e7
-	ld [wc0d7], a
+	ld a, ROOMTRANSITION_7 | ROOMTRANSITIONFLAG_1 | ROOMTRANSITIONFLAG_2 | ROOMTRANSITIONFLAG_3
+	ld [wRoomTransitionParam], a
 	call SetState_WaterStung
 	stop_sfx
 	ld a, WST_WATER_TELEPORTING
@@ -3295,8 +3296,8 @@ Func_21cf8: ; 21cf8 (8:5cf8)
 ; 0x21cfd
 
 Func_21cfd: ; 21cfd (8:5cfd)
-	ld a, $e7
-	ld [wc0d7], a
+	ld a, ROOMTRANSITION_7 | ROOMTRANSITIONFLAG_1 | ROOMTRANSITIONFLAG_2 | ROOMTRANSITIONFLAG_3
+	ld [wRoomTransitionParam], a
 	call Func_206eb
 	stop_sfx
 	ld a, WST_TELEPORTING
@@ -3576,11 +3577,11 @@ Func_21f28: ; 21f28 (8:5f28)
 Func_21f51: ; 21f51 (8:5f51)
 	ld a, [wce00]
 	ld b, a
-	ld a, $ce
-	ld [wcce7], a
-	ld a, $01
+	ld a, HIGH(wce01)
+	ld [wcce7 + 0], a
+	ld a, LOW(wce01)
 	add b
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [wc0a4]
 	and $08
 	jr nz, .asm_21fa3
@@ -3596,12 +3597,12 @@ Func_21f51: ; 21f51 (8:5f51)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -3635,12 +3636,12 @@ Func_21f51: ; 21f51 (8:5f51)
 	inc l
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	inc a
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hl]
 	ld [de], a
 	pop hl
@@ -3665,12 +3666,12 @@ Func_21f51: ; 21f51 (8:5f51)
 	ld hl, wc600
 	add hl, de
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -3699,11 +3700,11 @@ Func_22012: ; 22012 (8:6012)
 	ldh [rSVBK], a
 	ld a, [wce00]
 	ld b, a
-	ld a, $ce
-	ld [wc0b3], a
-	ld a, $35
+	ld a, HIGH(wce35)
+	ld [wc0b3 + 0], a
+	ld a, LOW(wce35)
 	add b
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [wc0a4]
 	and $08
 	jp nz, Func_2208a
@@ -3719,12 +3720,12 @@ Func_22012: ; 22012 (8:6012)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -3753,9 +3754,9 @@ Func_22012: ; 22012 (8:6012)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	ld a, [hl]
 	ld [de], a
@@ -3778,12 +3779,12 @@ Func_2208a: ; 2208a (8:608a)
 	inc l
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	inc a
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hl]
 	ld [de], a
 	pop hl
@@ -3809,12 +3810,12 @@ Func_2208a: ; 2208a (8:608a)
 	ld hl, w3d300
 	add hl, de
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -3841,11 +3842,11 @@ Func_2208a: ; 2208a (8:608a)
 Func_220fc: ; 220fc (8:60fc)
 	ld a, [wce00]
 	ld b, a
-	ld a, $ce
-	ld [wcce7], a
-	ld a, $01
+	ld a, HIGH(wce01)
+	ld [wcce7 + 0], a
+	ld a, LOW(wce01)
 	add b
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [wc0a4]
 	and $08
 	jp nz, Func_2214e
@@ -3860,12 +3861,12 @@ Func_220fc: ; 220fc (8:60fc)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -3899,12 +3900,12 @@ Func_2214e: ; 2214e (8:614e)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	inc a
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hl]
 	ld [de], a
 	pop hl
@@ -3928,12 +3929,12 @@ Func_2214e: ; 2214e (8:614e)
 	push hl
 	ld hl, wc600
 	add hl, de
-	ld a, [wcce7]
+	ld a, [wcce7 + 0]
 	ld d, a
-	ld a, [wcce8]
+	ld a, [wcce7 + 1]
 	ld e, a
 	add $02
-	ld [wcce8], a
+	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -3962,11 +3963,11 @@ Func_221bb: ; 221bb (8:61bb)
 	ldh [rSVBK], a
 	ld a, [wce00]
 	ld b, a
-	ld a, $ce
-	ld [wc0b3], a
-	ld a, $35
+	ld a, HIGH(wce35)
+	ld [wc0b3 + 0], a
+	ld a, LOW(wce35)
 	add b
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [wc0a4]
 	and $08
 	jp nz, Func_22217
@@ -3981,12 +3982,12 @@ Func_221bb: ; 221bb (8:61bb)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l
@@ -4022,12 +4023,12 @@ Func_22217: ; 22217 (8:6217)
 	add hl, de
 	inc l
 	inc l
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	inc a
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hl]
 	ld [de], a
 	pop hl
@@ -4051,12 +4052,12 @@ Func_22217: ; 22217 (8:6217)
 	push hl
 	ld hl, w3d300
 	add hl, de
-	ld a, [wc0b3]
+	ld a, [wc0b3 + 0]
 	ld d, a
-	ld a, [wc0b4]
+	ld a, [wc0b3 + 1]
 	ld e, a
 	add $02
-	ld [wc0b4], a
+	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
 	inc l

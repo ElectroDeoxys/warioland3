@@ -956,7 +956,7 @@ StartMenu: ; 4508 (1:4508)
 	bit MODE_TIME_ATTACK_F, a
 	jr nz, .TimeAttack
 	ld a, [wceef]
-	and $3c
+	and %111100
 	jr nz, .asm_45fd
 	jr StartOverworldState
 .asm_45fd

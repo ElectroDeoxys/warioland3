@@ -1,5 +1,5 @@
 Func_18000: ; 18000 (6:4000)
-	xor a
+	xor a ; FALSE
 	ld [wc0dd], a
 	ld a, [wFloorSRAMBank]
 	sramswitch
@@ -22,7 +22,7 @@ Func_18000: ; 18000 (6:4000)
 Func_18020: ; 18020 (6:4020)
 	xor a ; SRAM0
 	sramswitch
-	xor a
+	xor a ; FALSE
 	ld [wc0d8], a
 	ld [wc0d9], a
 	ld [wc18d], a
@@ -32,7 +32,7 @@ Func_18020: ; 18020 (6:4020)
 Func_18032: ; 18032 (6:4032)
 	xor a
 	sramswitch
-	xor a
+	xor a ; FALSE
 	ld [wc0d8], a
 	ld [wc0d9], a
 	ld a, [wc0da]
@@ -59,7 +59,7 @@ Func_18032: ; 18032 (6:4032)
 Func_18064: ; 18064 (6:4064)
 	xor a
 	sramswitch
-	xor a
+	xor a ; FALSE
 	ld [wc0d8], a
 	ld [wc0d9], a
 	ld a, $10
@@ -70,7 +70,7 @@ Func_18064: ; 18064 (6:4064)
 Func_18078: ; 18078 (6:4078)
 	xor a
 	sramswitch
-	xor a
+	xor a ; FALSE
 	ld [wc0d8], a
 	ld [wc0d9], a
 	ld a, $01
@@ -81,7 +81,7 @@ Func_18078: ; 18078 (6:4078)
 Func_1808c: ; 1808c (6:408c)
 	xor a
 	sramswitch
-	xor a
+	xor a ; FALSE
 	ld [wc0d8], a
 	ld [wc0d9], a
 	xor a
@@ -231,7 +231,7 @@ Func_18129: ; 18129 (6:4129)
 ; 0x181ac
 
 Func_181ac: ; 181ac (6:41ac)
-	ld a, $01
+	ld a, TRUE
 	ld [wc0dd], a
 	ld a, [wc0da]
 	and a
@@ -281,7 +281,7 @@ Func_181f8: ; 181f8 (6:41f8)
 ; 0x18208
 
 Func_18208: ; 18208 (6:4208)
-	ld a, $01
+	ld a, TRUE
 	ld [wc1ca], a
 	ld a, [wc0d6]
 	bit 0, a
@@ -321,7 +321,7 @@ Func_1823f: ; 1823f (6:423f)
 .asm_18257
 	jp Func_18208
 .asm_1825a
-	ld a, $01
+	ld a, TRUE
 	ld [wc0dd], a
 	jp Func_18032
 ; 0x18262
@@ -330,7 +330,7 @@ Func_18262: ; 18262 (6:4262)
 	ld a, [wc0da]
 	and a
 	jp nz, Func_18020
-	ld a, $01
+	ld a, TRUE
 	ld [wc1ca], a
 	ld a, [wc0d6]
 	bit 0, a
@@ -413,8 +413,8 @@ Func_182fe: ; 182fe (6:42fe)
 	jp z, Func_18020
 	ld a, $01
 	ld [wLadderInteraction], a
-	ld a, $45
-	ld [wc0d7], a
+	ld a, ROOMTRANSITION_5 | ROOMTRANSITIONFLAG_2
+	ld [wRoomTransitionParam], a
 	jp Func_18020
 ; 0x1831a
 
@@ -427,8 +427,8 @@ Func_1831a: ; 1831a (6:431a)
 	jp z, Func_18020
 	ld a, $01
 	ld [wLadderInteraction], a
-	ld a, $05
-	ld [wc0d7], a
+	ld a, ROOMTRANSITION_5
+	ld [wRoomTransitionParam], a
 	jp Func_18020
 ; 0x18336
 
@@ -570,8 +570,8 @@ Func_1842a: ; 1842a (6:442a)
 	add $08
 	ld [wXPosLo], a
 .asm_1848e
-	ld a, $c1
-	ld [wc0d7], a
+	ld a, ROOMTRANSITION_1 | ROOMTRANSITIONFLAG_2 | ROOMTRANSITIONFLAG_3
+	ld [wRoomTransitionParam], a
 	play_sfx SFX_PIPE
 	ld a, WST_PIPE_GOING_DOWN
 	ld [wWarioState], a
@@ -642,8 +642,8 @@ Func_184fc: ; 184fc (6:44fc)
 	add $08
 	ld [wXPosLo], a
 .asm_18560
-	ld a, $c1
-	ld [wc0d7], a
+	ld a, ROOMTRANSITION_1 | ROOMTRANSITIONFLAG_2 | ROOMTRANSITIONFLAG_3
+	ld [wRoomTransitionParam], a
 	play_sfx SFX_PIPE
 	ld a, WST_PIPE_GOING_UP
 	ld [wWarioState], a
@@ -685,8 +685,8 @@ Func_185cb: ; 185cb (6:45cb)
 	cp WST_GRAB_IDLING
 	jp nz, Func_18020
 .asm_185f2
-	ld a, $e2
-	ld [wc0d7], a
+	ld a, ROOMTRANSITION_2 | ROOMTRANSITIONFLAG_1 | ROOMTRANSITIONFLAG_2 | ROOMTRANSITIONFLAG_3
+	ld [wRoomTransitionParam], a
 	jp Func_18676
 ; 0x185fa
 
@@ -706,8 +706,8 @@ Func_185fa: ; 185fa (6:45fa)
 	cp WST_GRAB_IDLING
 	jp nz, Func_18020
 .asm_1861d
-	ld a, $e3
-	ld [wc0d7], a
+	ld a, ROOMTRANSITION_3 | ROOMTRANSITIONFLAG_1 | ROOMTRANSITIONFLAG_2 | ROOMTRANSITIONFLAG_3
+	ld [wRoomTransitionParam], a
 	jr Func_18676
 
 Func_18624: ; 18624 (6:4624)
@@ -726,8 +726,8 @@ Func_18624: ; 18624 (6:4624)
 	cp WST_GRAB_IDLING
 	jp nz, Func_18020
 .asm_18647
-	ld a, $a2
-	ld [wc0d7], a
+	ld a, ROOMTRANSITION_2 | ROOMTRANSITIONFLAG_1 | ROOMTRANSITIONFLAG_3
+	ld [wRoomTransitionParam], a
 	jr Func_18676
 
 Func_1864e: ; 1864e (6:464e)
@@ -746,8 +746,8 @@ Func_1864e: ; 1864e (6:464e)
 	cp WST_GRAB_IDLING
 	jp nz, Func_18020
 .asm_18671
-	ld a, $a3
-	ld [wc0d7], a
+	ld a, ROOMTRANSITION_3 | ROOMTRANSITIONFLAG_1 | ROOMTRANSITIONFLAG_3
+	ld [wRoomTransitionParam], a
 ;	fallthrough
 
 Func_18676: 
@@ -805,8 +805,8 @@ Func_186f9: ; 186f9 (6:46f9)
 	ld a, [wJoypadPressed]
 	bit D_UP_F, a
 	jr z, .asm_18724
-	ld a, $66
-	ld [wc0d7], a
+	ld a, ROOMTRANSITION_6 | ROOMTRANSITIONFLAG_1 | ROOMTRANSITIONFLAG_2
+	ld [wRoomTransitionParam], a
 .asm_18724
 	jp Func_18020
 ; 0x18727
@@ -829,8 +829,8 @@ Func_18727: ; 18727 (6:4727)
 	ld a, [wJoypadPressed]
 	bit D_UP_F, a
 	jr z, .asm_18752
-	ld a, $26
-	ld [wc0d7], a
+	ld a, ROOMTRANSITION_6 | ROOMTRANSITIONFLAG_1
+	ld [wRoomTransitionParam], a
 .asm_18752
 	jp Func_18020
 ; 0x18755
@@ -851,8 +851,8 @@ Func_18755: ; 18755 (6:4755)
 	ld a, [wJoypadPressed]
 	bit D_UP_F, a
 	jr z, .asm_1877b
-	ld a, $e8
-	ld [wc0d7], a
+	ld a, ROOMTRANSITION_8 | ROOMTRANSITIONFLAG_1 | ROOMTRANSITIONFLAG_2 | ROOMTRANSITIONFLAG_3
+	ld [wRoomTransitionParam], a
 .asm_1877b
 	jp Func_18020
 ; 0x1877e
@@ -889,8 +889,8 @@ Func_187b0: ; 187b0 (6:47b0)
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_18020
-	ld a, $44
-	ld [wc0d7], a
+	ld a, ROOMTRANSITION_4 | ROOMTRANSITIONFLAG_2
+	ld [wRoomTransitionParam], a
 	jp Func_18020
 ; 0x187c7
 
@@ -901,8 +901,8 @@ Func_187c7: ; 187c7 (6:47c7)
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_18020
-	ld a, $04
-	ld [wc0d7], a
+	ld a, ROOMTRANSITION_4
+	ld [wRoomTransitionParam], a
 	jp Func_18020
 ; 0x187de
 
@@ -913,8 +913,8 @@ Func_187de: ; 187de (6:47de)
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_181ac
-	ld a, $44
-	ld [wc0d7], a
+	ld a, ROOMTRANSITION_4 | ROOMTRANSITIONFLAG_2
+	ld [wRoomTransitionParam], a
 	jp Func_181ac
 ; 0x187f5
 
@@ -925,8 +925,8 @@ Func_187f5: ; 187f5 (6:47f5)
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_181ac
-	ld a, $04
-	ld [wc0d7], a
+	ld a, ROOMTRANSITION_4
+	ld [wRoomTransitionParam], a
 	jp Func_181ac
 ; 0x1880c
 
@@ -958,7 +958,7 @@ Func_18821: ; 18821 (6:4821)
 ; 0x1884c
 
 Func_1884c: ; 1884c (6:484c)
-	ld a, $01
+	ld a, TRUE
 	ld [wc0dd], a
 	ld a, [wc0da]
 	and a
@@ -1018,7 +1018,7 @@ Func_188ba: ; 188ba (6:48ba)
 ; 0x188c4
 
 Func_188c4: ; 188c4 (6:48c4)
-	ld a, $01
+	ld a, TRUE
 	ld [wc0dd], a
 	ld a, [wc0da]
 	and a
@@ -1054,9 +1054,9 @@ Func_188e0: ; 188e0 (6:48e0)
 	ld [wStingTouchState], a
 	ld a, $02
 	ld [wca94], a
-	ld a, $02
+	ld a, HIGH(HOT_WARIO_DURATION)
 	ld [wTransformationDuration + 0], a
-	ld a, $58
+	ld a, LOW(HOT_WARIO_DURATION)
 	ld [wTransformationDuration + 1], a
 	call UpdateLevelMusic
 	farcall SetState_OnFire_ResetStateCounter
@@ -1474,10 +1474,10 @@ Func_19690: ; 19690 (6:5690)
 
 ; unreferenced?
 Func_19706: ; 19706 (6:5706)
-	ld a, $01
+	ld a, TRUE
 	ld [wc0da], a
 	call Func_19741
-	xor a
+	xor a ; FALSE
 	ld [wc0da], a
 	ret
 ; 0x19713
@@ -1486,7 +1486,7 @@ Func_19706: ; 19706 (6:5706)
 
 ; checks collision in side that Wario is facing
 CheckFrontCollision: ; 19734 (6:5734)
-	ld a, $01
+	ld a, TRUE
 	ld [wc0d8], a
 	ld a, [wDirection]
 	and a
@@ -1494,7 +1494,7 @@ CheckFrontCollision: ; 19734 (6:5734)
 	jr CheckBottomRightCollision
 
 Func_19741: ; 19741 (6:5741)
-	ld a, $01
+	ld a, TRUE
 	ld [wc0d8], a
 ;	fallthrough
 
@@ -1570,7 +1570,7 @@ CheckBottomRightCollision: ; 19746 (6:5746)
 	ret
 
 Func_197b1: ; 197b1 (6:57b1)
-	ld a, $01
+	ld a, TRUE
 	ld [wc0d8], a
 ;	fallthrough
 
@@ -1650,7 +1650,7 @@ CheckBottomLeftCollision: ; 197b6 (6:57b6)
 	ret
 
 Func_19823: ; 19823 (6:5823)
-	ld a, $01
+	ld a, TRUE
 	ld [wc0d8], a
 	call Func_19bd3
 	ld a, $01
@@ -1672,7 +1672,7 @@ Func_19832: ; 19832 (6:5832)
 	ld a, [wc0dc]
 	cp b
 	jp z, .asm_198c1
-	ld a, $01
+	ld a, TRUE
 	ld [wc0d8], a
 	call Func_19bd3
 	and $0f
@@ -1808,7 +1808,7 @@ Func_19942: ; 19942 (6:5942)
 	ld a, [wTransformation]
 	cp TRANSFORMATION_PUFFY_WARIO
 	jr z, .asm_1994e
-	ld a, $01
+	ld a, TRUE
 	ld [wc0d8], a
 .asm_1994e
 	ld a, [wCollisionBoxTop]
@@ -1846,7 +1846,7 @@ CheckUpCollision: ; 1996e (6:596e)
 	ld a, [wTransformation]
 	cp TRANSFORMATION_PUFFY_WARIO
 	jr z, .asm_19988
-	ld a, $01
+	ld a, TRUE
 	ld [wc0d8], a
 .asm_19988
 	ld a, [wCollisionBoxLeft]
@@ -1883,7 +1883,7 @@ CheckUpCollision: ; 1996e (6:596e)
 	ld a, [wTransformation]
 	cp TRANSFORMATION_PUFFY_WARIO
 	jr z, .asm_199c0
-	ld a, $01
+	ld a, TRUE
 	ld [wc0d8], a
 .asm_199c0
 	ld a, [wCollisionBoxRight]
@@ -1923,7 +1923,7 @@ CheckAirborneCollision: ; 199e9 (6:59e9)
 	ld a, [wIsSmashAttacking]
 	and a
 	jr z, .no_smash_attack_1
-	ld a, $01
+	ld a, TRUE
 	ld [wc0d8], a
 .no_smash_attack_1
 	ld a, [wCollisionBoxLeft]
@@ -1959,7 +1959,7 @@ CheckAirborneCollision: ; 199e9 (6:59e9)
 	ld a, [wIsSmashAttacking]
 	and a
 	jr z, .no_smash_attack_2
-	ld a, $01
+	ld a, TRUE
 	ld [wc0d8], a
 .no_smash_attack_2
 	ld a, [wCollisionBoxRight]
@@ -1995,7 +1995,7 @@ CheckAirborneCollision: ; 199e9 (6:59e9)
 	ld a, [wIsSmashAttacking]
 	and a
 	jr z, .no_smash_attack_3
-	ld a, $01
+	ld a, TRUE
 	ld [wc0d8], a
 .no_smash_attack_3
 	get_pos
@@ -2004,7 +2004,7 @@ CheckAirborneCollision: ; 199e9 (6:59e9)
 ; 0x19a77
 
 Func_19a77: ; 19a77 (6:5a77)
-	xor a
+	xor a ; FALSE
 	ld [wc1ca], a
 	ld a, [wCollisionBoxLeft]
 	cpl
@@ -2034,7 +2034,7 @@ Func_19a77: ; 19a77 (6:5a77)
 	ret z
 
 .asm_19aa2
-	xor a
+	xor a ; FALSE
 	ld [wc1ca], a
 	ld a, [wCollisionBoxRight]
 	sub $03
@@ -2059,7 +2059,7 @@ Func_19a77: ; 19a77 (6:5a77)
 	jr z, .asm_19ac7
 	ret
 .asm_19ac7
-	ld a, $01
+	ld a, TRUE
 	ld [wc1ca], a
 	ret
 ; 0x19acd
@@ -2147,7 +2147,7 @@ Func_19b3a: ; 19b3a (6:5b3a)
 	xor a
 	ld [wWaterInteraction], a
 	ld [wLadderInteraction], a
-	ld [wc0d7], a
+	ld [wRoomTransitionParam], a
 	ld [wIsInSand], a
 	ld [wIsNearFence], a
 	ld [wc1c9], a
@@ -2373,7 +2373,7 @@ SetState_Slipping: ; 19c81 (6:5c81)
 
 UpdateState_Slipping: ; 19ce7 (6:5ce7)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 
@@ -2551,7 +2551,7 @@ Func_19e89: ; 19e89 (6:5e89)
 
 UpdateState_CrouchSlipping: ; 19ef1 (6:5ef1)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wJoypadPressed]
@@ -2705,8 +2705,8 @@ UpdateState_Teleporting: ; 1a077 (6:6077)
 	ld [wWarioState], a
 	ld a, $01
 	ld [wInvincibleCounter], a
-	ld hl, wc0d7
-	res 7, [hl]
+	ld hl, wRoomTransitionParam
+	res ROOMTRANSITIONFLAG_3_F, [hl]
 	jp TriggerRoomTransition
 
 PlayTeleportingSFX: ; 1a0ab (6:60ab)
@@ -2731,8 +2731,8 @@ UpdateState_WaterTeleporting: ; 1a0b4 (6:60b4)
 	ld [wWarioState], a
 	ld a, $01
 	ld [wInvincibleCounter], a
-	ld hl, wc0d7
-	res 7, [hl]
+	ld hl, wRoomTransitionParam
+	res ROOMTRANSITIONFLAG_3_F, [hl]
 	jp TriggerRoomTransition
 ; 0x1a0e8
 
@@ -2932,7 +2932,7 @@ UpdateState_SandWalking: ; 1a2d6 (6:62d6)
 	ret nz ; done if not walking in sand any more
 
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	farcall CheckCentreCollision
@@ -3021,7 +3021,7 @@ SetState_LadderClimbing: ; 1a3bb (6:63bb)
 
 UpdateState_LadderClimbing: ; 1a436 (6:6436)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 
@@ -3086,7 +3086,7 @@ SetState_LadderIdling: ; 1a49e (6:649e)
 
 UpdateState_LadderIdling: ; 1a51d (6:651d)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wLadderInteraction]
@@ -3103,7 +3103,7 @@ UpdateState_LadderIdling: ; 1a51d (6:651d)
 
 UpdateState_LadderShakeSlipping: ; 1a55c (6:655c)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wLadderInteraction]
@@ -3228,7 +3228,7 @@ SetState_LadderSliding: ; 1a66b (6:666b)
 
 UpdateState_LadderSliding: ; 1a6b6 (6:66b6)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wLadderInteraction]
@@ -3310,7 +3310,7 @@ SetState_GrabSlipping: ; 1a773 (6:6773)
 
 UpdateState_GrabSlipping: ; 1a7d6 (6:67d6)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wGrabState]
@@ -4019,7 +4019,7 @@ SetState_FenceSliding: ; 1b05e (6:705e)
 
 UpdateState_FenceSliding: ; 1b0a9 (6:70a9)
 	farcall Func_19b25
-	ld a, [wc0d7]
+	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wIsNearFence]
@@ -4330,7 +4330,7 @@ HandleLadderInput: ; 1b3a0 (6:73a0)
 	ld a, [wced2]
 	and a
 	ret nz
-	ld b, $01
+	ld b, 1
 	call SubYOffset
 	ld a, [wCameraConfigFlags]
 	and CAM_SCROLLING_MASK
