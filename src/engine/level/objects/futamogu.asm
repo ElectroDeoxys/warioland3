@@ -1,6 +1,6 @@
 FutamoguFunc: ; 406c4 (10:46c4)
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
+	res OBJFLAG_INVISIBLE_F, [hl]
 
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.Update)
@@ -80,7 +80,7 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	ld de, Frameset_68319
 	call SetObjectFramesetPtr
 	ld l, OBJ_FLAGS
-	res OBJFLAG_UNK3_F, [hl]
+	res OBJFLAG_NO_COLLISION_F, [hl]
 	xor a
 	ld [wCurObjState], a
 	ret

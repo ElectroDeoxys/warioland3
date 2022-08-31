@@ -199,21 +199,21 @@ ROMX $64
 ROMX $65
 	"Bank 65"
 ROMX $68
-	"Enemy Gfx 1"
+	"Enemy Gfx 1 Slot 1"
 ROMX $69
-	"Enemy Gfx 2"
+	"Enemy Gfx 1 Slot 2"
 ROMX $6a
-	"Enemy Gfx 3"
+	"Enemy Gfx 1 Slot 3"
 ROMX $6b
-	"Enemy Gfx 4"
+	"Enemy Gfx 1 Slot 4"
 ROMX $6c
-	"Enemy Gfx 5"
+	"Enemy Gfx 2 Slot 1"
 ROMX $6d
-	"Enemy Gfx 6"
+	"Enemy Gfx 2 Slot 2"
 ROMX $6e
-	"Enemy Gfx 7"
+	"Enemy Gfx 2 Slot 3"
 ROMX $6f
-	"Enemy Gfx 8"
+	"Enemy Gfx 2 Slot 4"
 ROMX $70
 	"Golf Gfx 1"
 	"Golf Levels"

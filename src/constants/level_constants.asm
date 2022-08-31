@@ -113,6 +113,10 @@ DEF ROOMTRANSITIONFLAG_3 EQU (1 << ROOMTRANSITIONFLAG_3_F)
 DEF ROOMTRANSITION_MASK EQU $0f
 DEF ROOMTRANSITIONFLAGS_MASK EQU $f0
 
+; number of frames for a new coin to spawn
+; after another coin has spawned
+DEF COIN_COOLDOWN EQU 100
+
 ; number of torches that need to be lit
 ; to destroy the Flame Block
 DEF NUM_FLAME_BLOCK_TORCHES EQU 3

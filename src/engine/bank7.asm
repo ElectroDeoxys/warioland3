@@ -1,12 +1,13 @@
 Func_1c000: ; 1c000 (7:4000)
-	ld hl, wcac2
+	ld hl, wCoinCooldown
 	ld a, [hl]
 	and a
-	jr z, .asm_1c008
+	jr z, .no_coin_cooldown
 	dec [hl]
-.asm_1c008
+.no_coin_cooldown
 	call HandleGroundShake
 	call HandleInvincibility
+
 	ld a, [wWarioState]
 	cp $30 ; WST_SLIPPING
 	jr c, .asm_1c04d

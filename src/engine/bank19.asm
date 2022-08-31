@@ -1,6 +1,6 @@
 LoadEnemyGroupData:: ; 64000 (19:4000)
-; fills w1d120 with $43c3
-	ld hl, w1d120
+; fills wObjDataPointers with $43c3
+	ld hl, wObjDataPointers
 	ld bc, DummyObjectData
 	ld e, $10
 .loop_1
@@ -30,7 +30,7 @@ LoadEnemyGroupData:: ; 64000 (19:4000)
 	push hl
 	ld h, a
 	ld l, c
-	ld de, w1d120
+	ld de, wChestObjDataPtr
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -38,13 +38,13 @@ LoadEnemyGroupData:: ; 64000 (19:4000)
 	ld [de], a
 	inc e
 	ld a, [hli]
-	ld [de], a ; w1d122
+	ld [de], a ; wKeyObjDataPtr
 	inc e
 	ld a, [hli]
 	ld [de], a
 	inc e
 	ld a, [hli]
-	ld [de], a ; w1d124
+	ld [de], a ; wMusicalCoinObjDataPtr
 	inc e
 	ld a, [hli]
 	ld [de], a
@@ -71,7 +71,7 @@ LoadEnemyGroupData:: ; 64000 (19:4000)
 	ld l, c
 	ld bc, v1Tiles0
 	ldh a, [hffa0]
-	ld e, $68
+	ld e, BANK("Enemy Gfx 1 Slot 1")
 	add e
 	ldh [hCallFuncBank], a
 	hcall Decompress
@@ -86,7 +86,7 @@ LoadEnemyGroupData:: ; 64000 (19:4000)
 	ld l, c
 	ld bc, v1Tiles0 + $400
 	ldh a, [hffa0]
-	ld e, $69
+	ld e, BANK("Enemy Gfx 1 Slot 2")
 	add e
 	ldh [hCallFuncBank], a
 	hcall Decompress
@@ -101,7 +101,7 @@ LoadEnemyGroupData:: ; 64000 (19:4000)
 	ld l, c
 	ld bc, v1Tiles1
 	ldh a, [hffa0]
-	ld e, $6a
+	ld e, BANK("Enemy Gfx 1 Slot 3")
 	add e
 	ldh [hCallFuncBank], a
 	hcall Decompress
@@ -116,7 +116,7 @@ LoadEnemyGroupData:: ; 64000 (19:4000)
 	ld l, c
 	ld bc, v1Tiles1 + $400
 	ldh a, [hffa0]
-	ld e, $6b
+	ld e, BANK("Enemy Gfx 1 Slot 4")
 	add e
 	ldh [hCallFuncBank], a
 	hcall Decompress
@@ -125,9 +125,9 @@ LoadEnemyGroupData:: ; 64000 (19:4000)
 	xor a ; VRAM0
 	ldh [rVBK], a
 
-	ld a, $d
+	ld a, 13
 	ldh [hffa0], a
-	ld de, w1d126
+	ld de, wObjDataPtr01
 .loop_2
 	ld a, [hli]
 	ld c, a
@@ -145,8 +145,9 @@ LoadEnemyGroupData:: ; 64000 (19:4000)
 	dec a
 	ldh [hffa0], a
 	jr nz, .loop_2
+
 .copy_pals
-	jp Func_1a34
+	jp LoadObjPals
 ; 0x640e5
 
 Func_640e5: ; 640e5 (19:40e5)
@@ -155,38 +156,12 @@ Func_640e5: ; 640e5 (19:40e5)
 	ret nc
 
 	ld h, HIGH(wObj1)
-	ld l, LOW(wObj1)
+FOR n, 1, NUM_OBJECTS + 1
+	ld l, LOW(wObj{u:n})
 	ld a, [hli]
 	rra
 	jr nc, .got_obj
-	ld l, LOW(wObj2)
-	ld a, [hli]
-	rra
-	jr nc, .got_obj
-	ld l, LOW(wObj3)
-	ld a, [hli]
-	rra
-	jr nc, .got_obj
-	ld l, LOW(wObj4)
-	ld a, [hli]
-	rra
-	jr nc, .got_obj
-	ld l, LOW(wObj5)
-	ld a, [hli]
-	rra
-	jr nc, .got_obj
-	ld l, LOW(wObj6)
-	ld a, [hli]
-	rra
-	jr nc, .got_obj
-	ld l, LOW(wObj7)
-	ld a, [hli]
-	rra
-	jr nc, .got_obj
-	ld l, LOW(wObj8)
-	ld a, [hli]
-	rra
-	jr nc, .got_obj
+ENDR
 	ret
 
 .got_obj
@@ -217,7 +192,7 @@ Func_640e5: ; 640e5 (19:40e5)
 	ld [hli], a
 
 	push hl
-	ld hl, w1d120
+	ld hl, wObjDataPointers
 	dec c
 	sla c ; *2
 	ld b, $00
@@ -280,7 +255,7 @@ Func_640e5: ; 640e5 (19:40e5)
 	sub (OBJ_UPDATE_FUNCTION + 1) - OBJ_FLAGS
 	ld e, a
 	ld a, [hl]
-	or OBJFLAG_UNK0 | OBJFLAG_UNK4
+	or OBJFLAG_ACTIVE | OBJFLAG_INVISIBLE
 	ld [de], a ; OBJ_FLAGS
 	ret
 ; 0x64187
@@ -291,11 +266,11 @@ FOR n, 0, NUM_OBJECTS
 	ld l, LOW(wObjects) + OBJ_STRUCT_LENGTH * n
 	ld a, [hl] ; OBJ_FLAGS
 	rra
-	jr nc, .skip{u:n} ; skip if OBJFLAG_UNK0 not set
+	jr nc, .skip{u:n} ; skip if OBJFLAG_ACTIVE not set
 	rla
 	rla
 	rla
-	jr nc, .reload{u:n} ; jump if OBJFLAG_UNK6 not set
+	jr nc, .reload{u:n} ; jump if OBJFLAG_TRANSIENT not set
 	xor a
 	ld [hl], a
 	jr .skip{u:n}
@@ -315,12 +290,12 @@ FOR n, 1, NUM_OBJECTS + 1
 	ld l, LOW(wObj{u:n}Flags)
 	ld a, [hl]
 	rra
-	jr nc, .got_obj_slot
+	jr nc, .got_obj_slot ; OBJFLAG_ACTIVE not set
 ENDR
 	ret
 
 .got_obj_slot
-	ld a, OBJFLAG_UNK0 | OBJFLAG_UNK6
+	ld a, OBJFLAG_ACTIVE | OBJFLAG_TRANSIENT
 	ld [hli], a
 	ld a, [wCurObjUnk01]
 	ld [hli], a
@@ -342,12 +317,12 @@ FOR n, 1, NUM_OBJECTS + 1
 	ld l, LOW(wObj{u:n}Flags)
 	ld a, [hl]
 	rra
-	jr nc, .got_obj_slot
+	jr nc, .got_obj_slot ; OBJFLAG_ACTIVE not set
 ENDR
 	ret
 
 .got_obj_slot
-	ld a, OBJFLAG_UNK0 | OBJFLAG_UNK6
+	ld a, OBJFLAG_ACTIVE | OBJFLAG_TRANSIENT
 	ld [hli], a
 	ld a, [wCurObjUnk01]
 	ld [hli], a
@@ -471,17 +446,17 @@ CreateObject_GotPos:: ; 64352 (19:4352)
 	sub (OBJ_UPDATE_FUNCTION + 1) - OBJ_FLAGS
 	ld e, a
 	ld a, [hl] ; OBJ_FLAGS
-	or OBJFLAG_UNK0 | OBJFLAG_UNK6
+	or OBJFLAG_ACTIVE | OBJFLAG_TRANSIENT
 	ld [de], a
 	ret
 ; 0x643a1
 
-; loads a pointer to w1d126
+; loads a pointer to wObjDataPtr01
 Func_643a1: ; 643a1 (19:43a1)
 	ld hl, .data_643bf
 	ld a, $d
 	ldh [hffa0], a
-	ld de, w1d126
+	ld de, wObjDataPtr01
 .loop
 	ld a, [hli]
 	ld c, a
@@ -522,25 +497,25 @@ assert (BANK(\1) - BANK("Objects OAM 1")) | (BANK(\5) - BANK("Object Update Func
 ENDM
 
 DummyObjectData:        object_data OAM_18007b, $0, OBJ_INTERACTION_00,                           0, DummyObjectFunc,        $0
-GreyChestData:          object_data OAM_18c000, $1, OBJ_INTERACTION_GREY_TREASURE  | HEAVY_OBJ, -24, GreyChestFunc,       $0
-RedChestData:           object_data OAM_18c000, $1, OBJ_INTERACTION_RED_TREASURE   | HEAVY_OBJ, -24, RedChestFunc,        $0
-GreenChestData:         object_data OAM_18c000, $1, OBJ_INTERACTION_GREEN_TREASURE | HEAVY_OBJ, -24, GreenChestFunc,      $0
-BlueChestData:          object_data OAM_18c000, $1, OBJ_INTERACTION_BLUE_TREASURE  | HEAVY_OBJ, -24, BlueChestFunc,       $0
+GreyChestData:          object_data OAM_18c000, $1, OBJ_INTERACTION_GREY_TREASURE  | HEAVY_OBJ, -24, GreyChestFunc,          $0
+RedChestData:           object_data OAM_18c000, $1, OBJ_INTERACTION_RED_TREASURE   | HEAVY_OBJ, -24, RedChestFunc,           $0
+GreenChestData:         object_data OAM_18c000, $1, OBJ_INTERACTION_GREEN_TREASURE | HEAVY_OBJ, -24, GreenChestFunc,         $0
+BlueChestData:          object_data OAM_18c000, $1, OBJ_INTERACTION_BLUE_TREASURE  | HEAVY_OBJ, -24, BlueChestFunc,          $0
 GreyKeyData:            object_data OAM_18c000, $2, OBJ_INTERACTION_GREY_KEY,                   -24, KeyFunc,                $0
 RedKeyData:             object_data OAM_18c000, $2, OBJ_INTERACTION_RED_KEY,                    -24, KeyFunc,                $0
 GreenKeyData:           object_data OAM_18c000, $2, OBJ_INTERACTION_GREEN_KEY,                  -24, KeyFunc,                $0
 BlueKeyData:            object_data OAM_18c000, $2, OBJ_INTERACTION_BLUE_KEY,                   -24, KeyFunc,                $0
 MusicaCoinData:         object_data OAM_18c000, $3, OBJ_INTERACTION_MUSICAL_COIN,               -25, MusicalCoinFunc,        $0
-SpearheadData:          object_data OAM_18007b, $0, OBJ_INTERACTION_01,                         -14, SpearheadFunc,          OBJFLAG_UNK7
-FutamoguData:           object_data OAM_180564, $1, OBJ_INTERACTION_WALKABLE       | HEAVY_OBJ, -17, FutamoguFunc,           OBJFLAG_UNK7
-WebberData:             object_data OAM_180242, $2, OBJ_INTERACTION_WALKABLE       | HEAVY_OBJ, -16, WebberFunc,             OBJFLAG_UNK7
+SpearheadData:          object_data OAM_18007b, $0, OBJ_INTERACTION_01,                         -14, SpearheadFunc,          OBJFLAG_VRAM1
+FutamoguData:           object_data OAM_180564, $1, OBJ_INTERACTION_WALKABLE       | HEAVY_OBJ, -17, FutamoguFunc,           OBJFLAG_VRAM1
+WebberData:             object_data OAM_180242, $2, OBJ_INTERACTION_WALKABLE       | HEAVY_OBJ, -16, WebberFunc,             OBJFLAG_VRAM1
 TorchData:              object_data OAM_180838, $4, OBJ_INTERACTION_FIRE,                       -16, TorchFunc,              $0
 TorchNoEmbersData:      object_data OAM_180838, $6, OBJ_INTERACTION_FIRE,                       -16, TorchNoEmbersFunc,      $0
 FlameBlockTorchData:    object_data OAM_180838, $7, OBJ_INTERACTION_UNLIT_TORCH,                -16, FlameBlockTorchFunc,    $0
 FlameBlockData:         object_data OAM_1895ec, $b, OBJ_INTERACTION_SOLID,                      -30, FlameBlockFunc,         $0
 StoveData:              object_data OAM_1896e1, $c, OBJ_INTERACTION_STOVE          | HEAVY_OBJ, -32, StoveFunc,              $0
 UnusedFlowerData:       object_data OAM_180916, $6, OBJ_INTERACTION_01                        ,   0, UnusedFlowerFunc,       $0
-CountRichtertoffenData: object_data OAM_1809ff, $7, OBJ_INTERACTION_RICHTERTOFFEN             | HEAVY_OBJ, -18, CountRichtertoffenFunc, OBJFLAG_UNK7
+CountRichtertoffenData: object_data OAM_1809ff, $7, OBJ_INTERACTION_RICHTERTOFFEN  | HEAVY_OBJ, -18, CountRichtertoffenFunc, OBJFLAG_VRAM1
 HebariiData:            object_data OAM_18a703, $0, OBJ_INTERACTION_3D                        , -15, HebariiFunc,            $0
 
 Data_6446b: ; 6446b (19:446b)
@@ -1251,14 +1226,14 @@ ObjParams_HebariiProjectile: ; 6478b (19:478b)
 	db -3,  2, -3,  2 ; collision
 	dw OAM_18a703 ; OAM
 	dw Frameset_68408 ; frameset
-	db  2 ; action duration
+	db 2 ; action duration
 	db $00 ; unk17
 	db $00 ; unk18
 	db $00 ; movement index
 	db $00 ; unk1a
-	db OBJSTATE_00 ; action
+	db OBJSTATE_00 ; state
 	dw HebariiProjectileFunc
-	db OBJFLAG_UNK7 ; obj flags
+	db OBJFLAG_VRAM1 ; obj flags
 ; 0x647a0
 
 ObjParams_WebberProjectile: ; 647a0 (19:47a0)
@@ -1269,14 +1244,14 @@ ObjParams_WebberProjectile: ; 647a0 (19:47a0)
 	db -7, -3, -4, 3 ; collision
 	dw OAM_180242 ; OAM
 	dw Frameset_682c8 ; frameset
-	db $00 ; action duration
+	db 0 ; action duration
 	db $00 ; unk17
 	db $00 ; unk18
 	db $00 ; movement index
 	db $00 ; unk1a
-	db OBJSTATE_00 ; action
+	db OBJSTATE_00 ; state
 	dw WebberProjectileFunc
-	db OBJFLAG_UNK7 ; obj flags
+	db OBJFLAG_VRAM1 ; obj flags
 ; 0x647b5
 
 ObjParams_UnusedFlowerProjectileLeft: ; 647b5 (19:47b5)
@@ -1287,14 +1262,14 @@ ObjParams_UnusedFlowerProjectileLeft: ; 647b5 (19:47b5)
 	db -13, -3, -6, 5 ; collision box
 	dw OAM_180916 ; OAM
 	dw Frameset_6838c ; frameset
-	db $00 ; action duration
+	db 0 ; action duration
 	db $00 ; unk17
 	db $00 ; unk18
 	db $00 ; movement index
 	db $00 ; unk1a
-	db OBJSTATE_00 ; action
+	db OBJSTATE_00 ; state
 	dw UnusedFlowerProjectileLeftFunc
-	db OBJFLAG_UNK7 ; obj flags
+	db OBJFLAG_VRAM1 ; obj flags
 
 ObjParams_UnusedFlowerProjectileRight: ; 647ca (19:47ca)
 	db -10 ; y
@@ -1304,14 +1279,14 @@ ObjParams_UnusedFlowerProjectileRight: ; 647ca (19:47ca)
 	db -13, -3, -6, 5 ; collision box
 	dw OAM_180916 ; OAM
 	dw Frameset_68395 ; frameset
-	db $00 ; action duration
+	db 0 ; action duration
 	db $00 ; unk17
 	db $00 ; unk18
 	db $00 ; movement index
 	db $80 ; unk1a
-	db OBJSTATE_00 ; action
+	db OBJSTATE_00 ; state
 	dw UnusedFlowerProjectileRightFunc
-	db OBJFLAG_UNK7 ; obj flags
+	db OBJFLAG_VRAM1 ; obj flags
 
 	INCROM $647df, $64a40
 
@@ -1328,9 +1303,9 @@ ObjParams_GreyTreasure: ; 64a40 (19:4a40)
 	db $00 ; unk18
 	db $00 ; movement index
 	db $00 ; unk1a
-	db OBJSTATE_00 ; action
+	db OBJSTATE_00 ; state
 	dw GreyTreasureFunc
-	db OBJFLAG_UNK7 ; obj flags
+	db OBJFLAG_VRAM1 ; obj flags
 ; 0x64a55
 
 ObjParams_RedTreasure: ; 64a55 (19:4a55)
@@ -1346,9 +1321,9 @@ ObjParams_RedTreasure: ; 64a55 (19:4a55)
 	db $00 ; unk18
 	db $00 ; movement index
 	db $00 ; unk1a
-	db OBJSTATE_00 ; action
+	db OBJSTATE_00 ; state
 	dw RedTreasureFunc
-	db OBJFLAG_UNK7 ; obj flags
+	db OBJFLAG_VRAM1 ; obj flags
 ; 0x64a6a
 
 ObjParams_GreenTreasure: ; 64a6a (19:4a6a)
@@ -1364,9 +1339,9 @@ ObjParams_GreenTreasure: ; 64a6a (19:4a6a)
 	db $00 ; unk18
 	db $00 ; movement index
 	db $00 ; unk1a
-	db OBJSTATE_00 ; action
+	db OBJSTATE_00 ; state
 	dw GreenTreasureFunc
-	db OBJFLAG_UNK7 ; obj flags
+	db OBJFLAG_VRAM1 ; obj flags
 ; 0x64a7f
 
 ObjParams_BlueTreasure: ; 64a7f (19:4a7f)
@@ -1382,9 +1357,9 @@ ObjParams_BlueTreasure: ; 64a7f (19:4a7f)
 	db $00 ; unk18
 	db $00 ; movement index
 	db $00 ; unk1a
-	db OBJSTATE_00 ; action
+	db OBJSTATE_00 ; state
 	dw BlueTreasureFunc
-	db OBJFLAG_UNK7 ; obj flags
+	db OBJFLAG_VRAM1 ; obj flags
 ; 0x64a94
 
 	INCROM $64a94, $64e06
@@ -1397,13 +1372,13 @@ ObjParams_64e06: ; 64e06 (19:4e06)
 	db -16, 11, -17, 0 ; collision box
 	dw OAM_18154f ; OAM
 	dw Frameset_68f50 ; frameset
-	db $00 ; action duration
+	db 0 ; action duration
 	db $00 ; unk17
 	db $00 ; unk18
 	db $00 ; movement index
 	db $00 ; unk1a
-	db OBJSTATE_00 ; action
-	dw $679C
+	db OBJSTATE_00 ; state
+	dw $679c
 	db $0 ; obj flags
 ; 0x64e1b
 
@@ -1415,17 +1390,49 @@ ObjParams_64e1b: ; 64e1b (19:4e1b)
 	db -26, 11, -17, 0 ; collision box
 	dw OAM_18154f ; OAM
 	dw Frameset_68f50 ; frameset
-	db $00 ; action duration
+	db 0 ; action duration
 	db $00 ; unk17
 	db $00 ; unk18
 	db $00 ; movement index
 	db $00 ; unk1a
-	db OBJSTATE_00 ; action
-	dw $679C
+	db OBJSTATE_00 ; state
+	dw $679c
 	db $0 ; obj flags
 ; 0x64e30
 
-	INCROM $64e30, $64e80
+	INCROM $64e30, $64e5a
+
+ObjParams_Coin: ; 64e5a (19:4e5a)
+	dn $8, $1 ; unk7
+	db OBJ_INTERACTION_REGULAR_COIN
+	db -12, 0, -4, 3
+	dw OAM_180003 ; OAM
+	db 1, 8 ; frameset
+	db 4 ; action duration
+	db $00 ; unk17
+	db $02 ; unk18
+	db $00 ; movement index
+	db $20 ; unk1a
+	db OBJSTATE_19 ; state
+	dw CoinFunc
+	db OBJFLAG_VRAM1 ; obj flags
+; 0x64e6d
+
+ObjParams_ColourCoin: ; 64e6d (19:4e6d)
+	dn $8, $1 ; unk7
+	db OBJ_INTERACTION_COLOUR_COIN
+	db -12, 0, -4, 3
+	dw OAM_180003 ; OAM
+	db 1, 8 ; frameset
+	db 4 ; action duration
+	db $00 ; unk17
+	db $02 ; unk18
+	db $00 ; movement index
+	db $20 ; unk1a
+	db OBJSTATE_19 ; state
+	dw CoinFunc.ColourCoin
+	db OBJFLAG_VRAM1 ; obj flags
+; 0x64e6d
 
 ObjParams_TorchEmberLeft1: ; 64e80 (19:4e80)
 	dn $0, $5 ; unk7
@@ -1433,14 +1440,14 @@ ObjParams_TorchEmberLeft1: ; 64e80 (19:4e80)
 	db -12, -3, -5, 3 ; collision box
 	dw OAM_180838 ; OAM
 	dw Frameset_68354 ; frameset
-	db $00 ; action duration
+	db 0 ; action duration
 	db $00 ; unk17
 	db $00 ; unk18
 	db $00 ; movement index
 	db $00 ; unk1a
-	db OBJSTATE_00 ; action
+	db OBJSTATE_00 ; state
 	dw TorchEmberLeft1Func
-	db OBJFLAG_UNK7 ; obj flags
+	db OBJFLAG_VRAM1 ; obj flags
 
 ObjParams_TorchEmberRight1: ; 64e93 (19:4e93)
 	dn $0, $5 ; unk7
@@ -1448,14 +1455,14 @@ ObjParams_TorchEmberRight1: ; 64e93 (19:4e93)
 	db -12, -3, -5, 3 ; collision box
 	dw OAM_180838 ; OAM
 	dw Frameset_68354 ; frameset
-	db $00 ; action duration
+	db 0 ; action duration
 	db $00 ; unk17
 	db $00 ; unk18
 	db $00 ; movement index
 	db $80 ; unk1a
-	db OBJSTATE_00 ; action
+	db OBJSTATE_00 ; state
 	dw TorchEmberRight1Func
-	db OBJFLAG_UNK7 ; obj flags
+	db OBJFLAG_VRAM1 ; obj flags
 
 ObjParams_TorchEmberLeft2: ; 64ea6 (19:4ea6)
 	dn $0, $5 ; unk7
@@ -1463,14 +1470,14 @@ ObjParams_TorchEmberLeft2: ; 64ea6 (19:4ea6)
 	db -12, -3, -5, 3 ; collision box
 	dw OAM_180838 ; OAM
 	dw Frameset_68354 ; frameset
-	db $00 ; action duration
+	db 0 ; action duration
 	db $00 ; unk17
 	db $00 ; unk18
 	db $00 ; movement index
 	db $00 ; unk1a
-	db OBJSTATE_00 ; action
+	db OBJSTATE_00 ; state
 	dw TorchEmberLeft2Func
-	db OBJFLAG_UNK7 ; obj flags
+	db OBJFLAG_VRAM1 ; obj flags
 
 ObjParams_TorchEmberRight2: ; 64eb9 (19:4eb9)
 	dn $0, $5 ; unk7
@@ -1478,14 +1485,14 @@ ObjParams_TorchEmberRight2: ; 64eb9 (19:4eb9)
 	db -12, -3, -5, 3 ; collision box
 	dw OAM_180838 ; OAM
 	dw Frameset_68354 ; frameset
-	db $00 ; action duration
+	db 0 ; action duration
 	db $00 ; unk17
 	db $00 ; unk18
 	db $00 ; movement index
 	db $80 ; unk1a
-	db OBJSTATE_00 ; action
+	db OBJSTATE_00 ; state
 	dw TorchEmberRight2Func
-	db OBJFLAG_UNK7 ; obj flags
+	db OBJFLAG_VRAM1 ; obj flags
 ; 0x64ecc
 
 	INCROM $64ecc, $64fc3

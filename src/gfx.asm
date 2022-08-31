@@ -45,7 +45,7 @@ WarioMagicGfx::    INCBIN "gfx/wario/magic.2bpp"
 WarioBallGfx::     INCBIN "gfx/wario/ball.2bpp"
 
 
-SECTION "Enemy Gfx 1", ROMX
+SECTION "Enemy Gfx 1 Slot 1", ROMX
 
 SpearheadGfx::     INCBIN "gfx/enemies/spearhead.2bpp.lz"
 UnusedFlowerGfx::  INCBIN "gfx/enemies/unused_flower.2bpp.lz"
@@ -63,7 +63,7 @@ StoveGfx::         INCBIN "gfx/enemies/stove.2bpp.lz"
 WaterSparkGfx::    INCBIN "gfx/enemies/water_spark.2bpp.lz"
 
 
-SECTION "Enemy Gfx 2", ROMX
+SECTION "Enemy Gfx 1 Slot 2", ROMX
 
 WebberGfx::             INCBIN "gfx/enemies/webber.2bpp.lz"
 CountRichtertoffenGfx:: INCBIN "gfx/enemies/count_richtertoffen.2bpp.lz"
@@ -79,7 +79,7 @@ RoboMouse2Gfx::         INCBIN "gfx/enemies/robo_mouse2.2bpp.lz"
 ClearGate1Gfx::         INCBIN "gfx/enemies/clear_gate1.2bpp.lz"
 
 
-SECTION "Enemy Gfx 3", ROMX
+SECTION "Enemy Gfx 1 Slot 3", ROMX
 
 FutamoguGfx::    INCBIN "gfx/enemies/futamogu.2bpp.lz"
 HebariiGfx::     INCBIN "gfx/enemies/hebarii.2bpp.lz"
@@ -101,7 +101,7 @@ FireGfx::        INCBIN "gfx/enemies/fire.2bpp.lz"
 WallCrackGfx::   INCBIN "gfx/enemies/wall_crack.2bpp.lz"
 
 
-SECTION "Enemy Gfx 4", ROMX
+SECTION "Enemy Gfx 1 Slot 4", ROMX
 
 TorchGfx::          INCBIN "gfx/enemies/torch.2bpp.lz"
 FireBotGfx::        INCBIN "gfx/enemies/fire_bot.2bpp.lz"
@@ -122,7 +122,7 @@ OctohonGfx::        INCBIN "gfx/enemies/octohon.2bpp.lz"
 SparkGfx::          INCBIN "gfx/enemies/spark.2bpp.lz"
 
 
-SECTION "Enemy Gfx 5", ROMX
+SECTION "Enemy Gfx 2 Slot 1", ROMX
 
 Anonster1Gfx::    INCBIN "gfx/enemies/anonster1.2bpp.lz"
 DollBoy1Gfx::     INCBIN "gfx/enemies/doll_boy1.2bpp.lz"
@@ -136,7 +136,7 @@ Wolfenboss1Gfx::  INCBIN "gfx/enemies/wolfenboss1.2bpp.lz"
 Shoot1Gfx::       INCBIN "gfx/enemies/shoot1.2bpp.lz"
 
 
-SECTION "Enemy Gfx 6", ROMX
+SECTION "Enemy Gfx 2 Slot 2", ROMX
 
 Anonster2Gfx::    INCBIN "gfx/enemies/anonster2_matching.2bpp.lz"
 DollBoy2Gfx::     INCBIN "gfx/enemies/doll_boy2.2bpp.lz"
@@ -150,7 +150,7 @@ Wolfenboss2Gfx::  INCBIN "gfx/enemies/wolfenboss2.2bpp.lz"
 Shoot2Gfx::       INCBIN "gfx/enemies/shoot2.2bpp.lz"
 
 
-SECTION "Enemy Gfx 7", ROMX
+SECTION "Enemy Gfx 2 Slot 3", ROMX
 
 Anonster3Gfx::    INCBIN "gfx/enemies/anonster3.2bpp.lz"
 DollBoy3Gfx::     INCBIN "gfx/enemies/doll_boy3.2bpp.lz"
@@ -164,7 +164,7 @@ Wolfenboss3Gfx::  INCBIN "gfx/enemies/wolfenboss3.2bpp.lz"
 Shoot3Gfx::       INCBIN "gfx/enemies/shoot3.2bpp.lz"
 
 
-SECTION "Enemy Gfx 8", ROMX
+SECTION "Enemy Gfx 2 Slot 4", ROMX
 
 Anonster4Gfx::    INCBIN "gfx/enemies/anonster4.2bpp.lz"
 DollBoy4Gfx::     INCBIN "gfx/enemies/doll_boy4.2bpp.lz"

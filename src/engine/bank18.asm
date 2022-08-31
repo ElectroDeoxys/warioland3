@@ -296,7 +296,7 @@ FOR n, 2, NUM_OBJECTS + 1
 	ld l, LOW(wObj{u:n}Flags)
 	ld a, [hl]
 	rra
-	call c, Func_611cb ; OBJFLAG_UNK0_F set
+	call c, Func_611cb ; OBJFLAG_ACTIVE_F set
 ENDR
 	ret
 ; 0x61348
@@ -324,12 +324,12 @@ Func_61348: ; 61348 (18:5348)
 	ld hl, wObj1Flags
 	ld a, [hl]
 	rra
-	call c, Func_613dc ; OBJFLAG_UNK0_F set
+	call c, Func_613dc ; OBJFLAG_ACTIVE_F set
 FOR n, 2, NUM_OBJECTS + 1
 	ld l, LOW(wObj{u:n}Flags)
 	ld a, [hl]
 	rra
-	call c, Func_613dc ; OBJFLAG_UNK0_F set
+	call c, Func_613dc ; OBJFLAG_ACTIVE_F set
 ENDR
 	ret
 
@@ -342,7 +342,7 @@ FOR n, 2, NUM_OBJECTS + 1
 	ld l, LOW(wObj{u:n}Flags)
 	ld a, [hl]
 	rra
-	call c, Func_61513 ; OBJFLAG_UNK0_F set
+	call c, Func_61513 ; OBJFLAG_ACTIVE_F set
 ENDR
 	ret
 ; 0x613dc
@@ -570,9 +570,10 @@ Func_6164e: ; 6164e (18:564e)
 FOR n, 1, NUM_OBJECTS + 1
 	ld hl, wObj{u:n}Flags
 	ld a, [hl]
-	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
-	cp OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK7
+	and OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN | OBJFLAG_INVISIBLE | OBJFLAG_VRAM1
+	cp OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN | OBJFLAG_VRAM1
 	jr nz, :+
+	; if (OBJFLAG_ACTIVE && OBJFLAG_ON_SCREEN && !OBJFLAG_INVISIBLE && OBJFLAG_VRAM1)
 	ld e, LOW(wObj{u:n}ScreenYPos)
 	ld l, LOW(wObj{u:n}Unk07)
 	call UpdateObjSprite
@@ -585,9 +586,10 @@ Func_616d7: ; 616d7 (18:56d7)
 FOR n, 1, NUM_OBJECTS + 1
 	ld hl, wObj{u:n}Flags
 	ld a, [hl]
-	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_UNK4 | OBJFLAG_UNK7
-	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
+	and OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN | OBJFLAG_INVISIBLE | OBJFLAG_VRAM1
+	cp OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN
 	jr nz, :+
+	; if (OBJFLAG_ACTIVE && OBJFLAG_ON_SCREEN && !OBJFLAG_INVISIBLE && !OBJFLAG_VRAM1)
 	ld e, LOW(wObj{u:n}ScreenYPos)
 	ld l, LOW(wObj{u:n}Unk07)
 	call UpdateObjSprite
@@ -628,8 +630,8 @@ DoObjectAction: ; 61760 (18:5760)
 	dw .Action0c ; OBJACTION_0C
 	dw .Action0d ; OBJACTION_0D
 	dw .Action0e ; OBJACTION_0E
-	dw .SmashAttackWalkable ; OBJ_ACTION_SMASH_ATTACK_WALKABLE
-	dw .Teleport ; OBJ_ACTION_TELEPORT
+	dw .SmashAttackWalkable ; OBJACTION_SMASH_ATTACK_WALKABLE
+	dw .Teleport ; OBJACTION_TELEPORT
 	dw .Action11 ; OBJACTION_11
 	dw .Action12 ; OBJACTION_12
 	dw .Func_6179c ; OBJACTION_13
@@ -666,7 +668,7 @@ DoObjectAction: ; 61760 (18:5760)
 .Attack:
 	ld hl, wCurObjFlags
 	res OBJFLAG_GRABBED_F, [hl]
-	set OBJFLAG_UNK3_F, [hl]
+	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld l, OBJ_UNK_1D
 	ld a, [hld]
 	and INTERACTION_RIGHT
@@ -718,7 +720,7 @@ DoObjectAction: ; 61760 (18:5760)
 .VanishTouch:
 	ld hl, wCurObjFlags
 	res OBJFLAG_GRABBED_F, [hl]
-	set OBJFLAG_UNK3_F, [hl]
+	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld l, OBJ_ACTION
 	ld a, 15 | (1 << 7)
 	ld [hld], a
@@ -870,7 +872,7 @@ Func_618b4: ; 618b4 (18:58b4)
 
 	ld l, OBJ_FLAGS
 	res OBJFLAG_GRABBED_F, [hl]
-	set OBJFLAG_UNK3_F, [hl]
+	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld a, 1 | (1 << 7)
 	ld [wCurObjAction], a
 
@@ -887,7 +889,7 @@ Func_618b4: ; 618b4 (18:58b4)
 ; with other objects
 HandleGrabbedObjectCollisions: ; 618e2 (18:58e2)
 	ld hl, wObj1Flags
-	ld e, OBJFLAG_UNK0 | OBJFLAG_GRABBED
+	ld e, OBJFLAG_ACTIVE | OBJFLAG_GRABBED
 	ld a, [hl]
 	and e
 	cp e
@@ -1022,8 +1024,8 @@ ENDR
 
 FOR n, 1, NUM_OBJECTS + 1
 	ld a, [wObj{u:n}Flags]
-	and OBJFLAG_UNK0 | OBJFLAG_UNK1 | OBJFLAG_GRABBED | OBJFLAG_UNK3 | OBJFLAG_UNK4
-	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
+	and OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN | OBJFLAG_GRABBED | OBJFLAG_NO_COLLISION | OBJFLAG_INVISIBLE
+	cp OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN
 	jr nz, .next_obj_{u:n}
 	ld a, [wObj{u:n}ScreenYPos]
 	add $2a
@@ -1080,7 +1082,7 @@ FOR n, 1, NUM_OBJECTS + 1
 	ldh a, [hffa1]
 	ld [hl], a ; OBJ_STATE
 	ld l, LOW(wObj{u:n}Flags)
-	set OBJFLAG_UNK3_F, [hl]
+	set OBJFLAG_NO_COLLISION_F, [hl]
 	play_sfx SFX_016
 	ret
 .next_obj_{u:n}
@@ -1102,7 +1104,7 @@ FOR n, 1, NUM_OBJECTS + 1
 	ldh a, [hffa1]
 	ld [hl], a
 	ld l, LOW(wObj{u:n}Flags)
-	set OBJFLAG_UNK3_F, [hl]
+	set OBJFLAG_NO_COLLISION_F, [hl]
 	play_sfx SFX_016
 	ret
 ENDR
@@ -1129,7 +1131,7 @@ FOR n, 1, NUM_OBJECTS + 1
 	ldh a, [hffa3]
 	ld [hl], a
 	ld l, LOW(wObj{u:n}Flags)
-	set OBJFLAG_UNK3_F, [hl]
+	set OBJFLAG_NO_COLLISION_F, [hl]
 	play_sfx SFX_016
 	ret
 ENDR
@@ -1137,8 +1139,8 @@ ENDR
 
 Func_61f10: ; 61f10 (18:5f10)
 	xor a
-	call Func_61f41 ; clears whole wObjects
-	call Func_61f4a ; clears whole w1d120
+	call ClearObjects
+	call ClearObjDataPointers
 	ld [w1d140], a
 	ld [w1d141], a
 	ld [w1d142], a
@@ -1150,8 +1152,8 @@ Func_61f10: ; 61f10 (18:5f10)
 
 Func_61f2a: ; 61f2a (18:5f2a)
 	xor a
-	call Func_61f41 ; clears whole wObjects
-	call Func_61f4a ; clears whole w1d120
+	call ClearObjects
+	call ClearObjDataPointers
 	ld [w1d141], a
 	ld [w1d142], a
 	ld [wNumLitTorches], a
@@ -1160,7 +1162,7 @@ Func_61f2a: ; 61f2a (18:5f2a)
 	ret
 ; 0x61f41
 
-Func_61f41: ; 61f41 (18:5f41)
+ClearObjects: ; 61f41 (18:5f41)
 	ld hl, wObjects
 	ld c, a
 .loop
@@ -1170,8 +1172,8 @@ Func_61f41: ; 61f41 (18:5f41)
 	ret
 ; 0x61f4a
 
-Func_61f4a: ; 61f4a (18:5f4a)
-	ld hl, w1d120
+ClearObjDataPointers: ; 61f4a (18:5f4a)
+	ld hl, wObjDataPointers
 	ld c, $20
 .loop
 	ld [hli], a
@@ -3702,14 +3704,14 @@ Func_62ec3: ; 62ec3 (18:6ec3)
 	ld a, OBJSTATE_26
 	ld [wCurObjState], a
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK3_F, [hl]
+	res OBJFLAG_NO_COLLISION_F, [hl]
 	jp HomeJumpRet
 
 .asm_62f4e
 	ld a, OBJSTATE_27
 	ld [wCurObjState], a
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK3_F, [hl]
+	res OBJFLAG_NO_COLLISION_F, [hl]
 	jp HomeJumpRet
 ; 0x62f5b
 
@@ -3852,14 +3854,14 @@ Func_62faa:: ; 62faa (18:6faa)
 	ld a, OBJSTATE_27
 	ld [wCurObjState], a
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK3_F, [hl]
+	res OBJFLAG_NO_COLLISION_F, [hl]
 	jp HomeJumpRet
 
 .asm_63032
 	ld a, $26
 	ld [wCurObjState], a
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK3_F, [hl]
+	res OBJFLAG_NO_COLLISION_F, [hl]
 	jp HomeJumpRet
 ; 0x6303f
 
@@ -4015,7 +4017,7 @@ Func_6307b: ; 6307b (18:707b)
 	jr nc, .asm_63106
 .asm_630f6
 	ld hl, wCurObjFlags
-	set OBJFLAG_UNK1_F, [hl]
+	set OBJFLAG_ON_SCREEN_F, [hl]
 	jr .asm_6310b
 
 .asm_630fd
@@ -4025,7 +4027,7 @@ Func_6307b: ; 6307b (18:707b)
 	jr z, .asm_6310b
 .asm_63106
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK1_F, [hl]
+	res OBJFLAG_ON_SCREEN_F, [hl]
 .asm_6310b
 	pop hl
 	pop de
@@ -4352,4 +4354,4 @@ DummyObjectFunc: ; 6337e (18:737e)
 	ret
 ; 0x63383
 
-	INCROM $63383, $63936
+INCLUDE "engine/level/objects/coin.asm"

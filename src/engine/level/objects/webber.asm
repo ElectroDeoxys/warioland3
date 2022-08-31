@@ -1,6 +1,6 @@
 WebberFunc: ; 40825 (10:4825)
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
+	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.Update)
 	ld [hld], a
@@ -98,7 +98,7 @@ WebberFunc: ; 40825 (10:4825)
 	ld a, 50
 	ld [hli], a ; OBJ_STATE_DURATION
 	ld l, OBJ_FLAGS
-	res OBJFLAG_UNK3_F, [hl]
+	res OBJFLAG_NO_COLLISION_F, [hl]
 
 .Default:
 	ld l, OBJ_UNK_1A
@@ -415,7 +415,7 @@ WebberProjectileFunc: ; 40ab1 (10:4ab1)
 	call MoveObjectDown
 
 	ld hl, wCurObjFlags
-	set OBJFLAG_UNK3_F, [hl]
+	set OBJFLAG_NO_COLLISION_F, [hl]
 
 	ld a, [wCurObjState]
 	and a

@@ -1,7 +1,7 @@
 StoveFunc: ; 4971c (12:571c)
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
-	set OBJFLAG_UNK3_F, [hl]
+	res OBJFLAG_INVISIBLE_F, [hl]
+	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld l, OBJ_UNK_1A
 	res 5, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1

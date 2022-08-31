@@ -1,4 +1,6 @@
-Func_c9f0: ; c9f0 (3:49f0)
+; b = PARTICLE_* constant
+; hl = cell
+CreateParticleInCell: ; c9f0 (3:49f0)
 	call Func_ce3e
 ;	fallthrough
 

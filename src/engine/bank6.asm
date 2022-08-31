@@ -1362,6 +1362,7 @@ Func_18f32: ; 18f32 (6:4f32)
 	INCROM $18f5f, $19609
 
 Func_19609: ; 19609 (6:5609)
+	; temporarily store hPos
 	ldh a, [hYPosHi]
 	ldh [hffad], a
 	ldh a, [hYPosLo]
@@ -1370,20 +1371,24 @@ Func_19609: ; 19609 (6:5609)
 	ldh [hffaf], a
 	ldh a, [hXPosLo]
 	ldh [hffb0], a
-	ld b, $01
-	farcall Func_c9f0
+
+	ld b, PARTICLE_DEBRIS
+	farcall CreateParticleInCell
 	ldh a, [rDIV]
 	and %11
-	jr nz, .asm_1967f
-	ld a, [wcac2]
+	jr nz, .done
+	ld a, [wCoinCooldown]
 	and a
-	jr nz, .asm_1967f
+	jr nz, .done
+	; everything okay, spawn coin
 	ldh a, [rSVBK]
 	push af
 	ld a, $01
 	ldh [rSVBK], a
-	ld a, $64
-	ld [wcac2], a
+	ld a, COIN_COOLDOWN
+	ld [wCoinCooldown], a
+
+	; backup CurObj
 	ld hl, wCurObjUnk01
 	ld de, hffa0
 	ld b, OBJ_UNK_07 - OBJ_UNK_01
@@ -1391,8 +1396,8 @@ Func_19609: ; 19609 (6:5609)
 
 	ld hl, wCurObjUnk01
 	xor a
-	ld [hli], a
-	ld [hli], a
+	ld [hli], a ; flags
+	ld [hli], a ; unk01
 	ldh a, [hYPosLo]
 	ld [hli], a
 	ldh a, [hYPosHi]
@@ -1401,15 +1406,19 @@ Func_19609: ; 19609 (6:5609)
 	ld [hli], a
 	ldh a, [hXPosHi]
 	ld [hli], a
-	ld bc, $4e5a
+	ld bc, ObjParams_Coin
 	farcall _CreateObjectFromCurObjPos
+
+	; restore CurObj
 	ld hl, hffa0
 	ld de, wCurObjUnk01
 	ld b, OBJ_UNK_07 - OBJ_UNK_01
 	call CopyHLToDE
 	pop af
 	ldh [rSVBK], a
-.asm_1967f
+
+.done
+	; restore hPos
 	ldh a, [hffad]
 	ldh [hYPosHi], a
 	ldh a, [hffae]
@@ -1422,6 +1431,7 @@ Func_19609: ; 19609 (6:5609)
 ; 0x19690
 
 Func_19690: ; 19690 (6:5690)
+	; temporarily store hPos
 	ldh a, [hYPosHi]
 	ldh [hffad], a
 	ldh a, [hYPosLo]
@@ -1430,17 +1440,20 @@ Func_19690: ; 19690 (6:5690)
 	ldh [hffaf], a
 	ldh a, [hXPosLo]
 	ldh [hffb0], a
-	ld b, PARTICLE_DEBRIS
-	farcall Func_c9f0
 
+	ld b, PARTICLE_DEBRIS
+	farcall CreateParticleInCell
 	ldh a, [rSVBK]
 	push af
 	ld a, $01
 	ldh [rSVBK], a
+
+	; backup CurObj
 	ld hl, wCurObjUnk01
 	ld de, hffa0
 	ld b, OBJ_UNK_07 - OBJ_UNK_01
 	call CopyHLToDE
+
 	ld hl, wCurObjUnk01
 	xor a
 	ld [hli], a
@@ -1453,14 +1466,18 @@ Func_19690: ; 19690 (6:5690)
 	ld [hli], a
 	ldh a, [hXPosHi]
 	ld [hli], a
-	ld bc, $4e6d
+	ld bc, ObjParams_ColourCoin
 	farcall _CreateObjectFromCurObjPos
+
+	; restore CurObj
 	ld hl, hffa0
 	ld de, wCurObjUnk01
 	ld b, OBJ_UNK_07 - OBJ_UNK_01
 	call CopyHLToDE
 	pop af
 	ldh [rSVBK], a
+
+	; restore hPos
 	ldh a, [hffad]
 	ldh [hYPosHi], a
 	ldh a, [hffae]

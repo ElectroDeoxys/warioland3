@@ -33,23 +33,23 @@ DEF OBJ_STRUCT_LENGTH EQU _RS
 
 ; OBJ_FLAGS constants
 	const_def
-	const OBJFLAG_UNK0_F ; 0
-	const OBJFLAG_UNK1_F ; 1
-	const OBJFLAG_GRABBED_F ; 2
-	const OBJFLAG_UNK3_F ; 3
-	const OBJFLAG_UNK4_F ; 4
-	const OBJFLAG_STEPPED_F ; 5
-	const OBJFLAG_UNK6_F ; 6
-	const OBJFLAG_UNK7_F ; 7
+	const OBJFLAG_ACTIVE_F       ; 0
+	const OBJFLAG_ON_SCREEN_F    ; 1
+	const OBJFLAG_GRABBED_F      ; 2
+	const OBJFLAG_NO_COLLISION_F ; 3
+	const OBJFLAG_INVISIBLE_F    ; 4
+	const OBJFLAG_STEPPED_F      ; 5
+	const OBJFLAG_TRANSIENT_F    ; 6
+	const OBJFLAG_VRAM1_F        ; 7
 
-DEF OBJFLAG_UNK0    EQU (1 << OBJFLAG_UNK0_F)
-DEF OBJFLAG_UNK1    EQU (1 << OBJFLAG_UNK1_F)
-DEF OBJFLAG_GRABBED EQU (1 << OBJFLAG_GRABBED_F)
-DEF OBJFLAG_UNK3    EQU (1 << OBJFLAG_UNK3_F)
-DEF OBJFLAG_UNK4    EQU (1 << OBJFLAG_UNK4_F)
-DEF OBJFLAG_STEPPED EQU (1 << OBJFLAG_STEPPED_F)
-DEF OBJFLAG_UNK6    EQU (1 << OBJFLAG_UNK6_F)
-DEF OBJFLAG_UNK7    EQU (1 << OBJFLAG_UNK7_F)
+DEF OBJFLAG_ACTIVE       EQU (1 << OBJFLAG_ACTIVE_F)
+DEF OBJFLAG_ON_SCREEN    EQU (1 << OBJFLAG_ON_SCREEN_F)
+DEF OBJFLAG_GRABBED      EQU (1 << OBJFLAG_GRABBED_F)
+DEF OBJFLAG_NO_COLLISION EQU (1 << OBJFLAG_NO_COLLISION_F)
+DEF OBJFLAG_INVISIBLE    EQU (1 << OBJFLAG_INVISIBLE_F)
+DEF OBJFLAG_STEPPED      EQU (1 << OBJFLAG_STEPPED_F)
+DEF OBJFLAG_TRANSIENT    EQU (1 << OBJFLAG_TRANSIENT_F)
+DEF OBJFLAG_VRAM1        EQU (1 << OBJFLAG_VRAM1_F)
 
 ; wInteractionSide flags
 	const_def 4
@@ -80,7 +80,7 @@ DEF INTERACTION_DOWN  EQU (1 << INTERACTION_DOWN_F)  ; $80
 	const OBJ_INTERACTION_WALKABLE       ; 0c
 	const OBJ_INTERACTION_MUSICAL_COIN   ; 0d
 	const OBJ_INTERACTION_FIRE           ; 0e
-	const OBJ_INTERACTION_RICHTERTOFFEN   ; 0f
+	const OBJ_INTERACTION_RICHTERTOFFEN  ; 0f
 	const OBJ_INTERACTION_GREY_KEY       ; 10
 	const OBJ_INTERACTION_RED_KEY        ; 11
 	const OBJ_INTERACTION_GREEN_KEY      ; 12
@@ -260,26 +260,26 @@ DEF INTERACTION_MASK EQU $ff ^ HEAVY_OBJ
 	const OBJSTATE_FULL_THROW_RIGHT ; $5f
 
 	const_def
-	const OBJACTION_NONE ; $00
-	const OBJACTION_BUMP ; $01
-	const OBJACTION_ATTACK ; $02
-	const OBJACTION_PICK_UP ; $03
-	const OBJACTION_WOBBLE ; $04
-	const OBJACTION_VANISH_TOUCH ; $05
-	const OBJACTION_06 ; $06
-	const OBJACTION_07 ; $07
-	const OBJACTION_VANISH_TREASURE ; $08
-	const OBJACTION_STEP_ON ; $09
-	const OBJACTION_0A ; $0a
-	const OBJACTION_FLATTEN ; $0b
-	const OBJACTION_0C ; $0c
-	const OBJACTION_0D ; $0d
-	const OBJACTION_0E ; $0e
-	const OBJ_ACTION_SMASH_ATTACK_WALKABLE ; $0f
-	const OBJ_ACTION_TELEPORT ; $10
-	const OBJACTION_11 ; $11
-	const OBJACTION_12 ; $12
-	const OBJACTION_13 ; $13
+	const OBJACTION_NONE                   ; $00
+	const OBJACTION_BUMP                   ; $01
+	const OBJACTION_ATTACK                 ; $02
+	const OBJACTION_PICK_UP                ; $03
+	const OBJACTION_WOBBLE                 ; $04
+	const OBJACTION_VANISH_TOUCH           ; $05
+	const OBJACTION_06                     ; $06
+	const OBJACTION_07                     ; $07
+	const OBJACTION_VANISH_TREASURE        ; $08
+	const OBJACTION_STEP_ON                ; $09
+	const OBJACTION_0A                     ; $0a
+	const OBJACTION_FLATTEN                ; $0b
+	const OBJACTION_0C                     ; $0c
+	const OBJACTION_0D                     ; $0d
+	const OBJACTION_0E                     ; $0e
+	const OBJACTION_SMASH_ATTACK_WALKABLE  ; $0f
+	const OBJACTION_TELEPORT               ; $10
+	const OBJACTION_11                     ; $11
+	const OBJACTION_12                     ; $12
+	const OBJACTION_13                     ; $13
 
 	const_def
 	const ENEMY_GROUP_000 ; $00

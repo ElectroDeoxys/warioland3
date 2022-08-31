@@ -8,7 +8,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 
 .Init:
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
+	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UNK_1A
 	res 5, [hl]
 
@@ -129,7 +129,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	xor a
 	ld [hl], a
 	ld l, OBJ_FLAGS
-	res OBJFLAG_UNK3_F, [hl]
+	res OBJFLAG_NO_COLLISION_F, [hl]
 .asm_4a08d
 	ld l, OBJ_UNK_17
 	ld a, [hld]
@@ -215,7 +215,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 .asm_4a10f
 	dec [hl]
 	ld l, OBJ_FLAGS
-	bit OBJFLAG_UNK1_F, [hl]
+	bit OBJFLAG_ON_SCREEN_F, [hl]
 	ret z
 	ld bc, ObjParams_HebariiProjectile
 	jp CreateObjectAtRelativePos
@@ -609,7 +609,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 
 HebariiProjectileFunc: ; 4a3c2 (12:63c2)
 	ld hl, wCurObjFlags
-	set OBJFLAG_UNK3_F, [hl]
+	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	ret nz

@@ -37,7 +37,7 @@ Func_41a7c: ; 41a7c (10:5a7c)
 
 Func_42170: ; 42170 (10:6170)
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
+	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, $62
 	ld [hld], a
@@ -84,7 +84,7 @@ Func_42432: ; 42432 (10:6432)
 
 Func_42478: ; 42478 (10:6478)
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
+	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, $64
 	ld [hld], a
@@ -115,7 +115,7 @@ Func_42478: ; 42478 (10:6478)
 
 Func_424b1: ; 424b1 (10:64b1)
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
+	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, $64
 	ld [hld], a
@@ -225,7 +225,7 @@ Func_42725: ; 42725 (10:6725)
 
 Func_429c4: ; 429c4 (10:69c4)
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
+	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, $69
 	ld [hld], a
@@ -254,7 +254,7 @@ Func_429c4: ; 429c4 (10:69c4)
 
 Func_42b7d: ; 42b7d (10:6b7d)
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
+	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, $6a
 	ld [hld], a
@@ -321,7 +321,7 @@ Func_43278: ; 43278 (10:7278)
 
 Func_43451: ; 43451 (10:7451)
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
+	res OBJFLAG_INVISIBLE_F, [hl]
 	set 3, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, $74
@@ -348,7 +348,7 @@ Func_43451: ; 43451 (10:7451)
 
 Func_434ba: ; 434ba (10:74ba)
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
+	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, $74
 	ld [hld], a
@@ -374,7 +374,7 @@ Func_434ba: ; 434ba (10:74ba)
 
 Func_436ea: ; 436ea (10:76ea)
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
+	res OBJFLAG_INVISIBLE_F, [hl]
 	set 3, [hl]
 	ld l, OBJ_UNK_1A
 	res 5, [hl]
@@ -412,7 +412,7 @@ Func_437a5: ; 437a5 (10:77a5)
 Func_437a8: ; 437a8 (10:77a8)
 	call SetObjectFramesetPtr
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
+	res OBJFLAG_INVISIBLE_F, [hl]
 	set 3, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, $77
@@ -440,7 +440,7 @@ Func_437a8: ; 437a8 (10:77a8)
 
 Func_437d7: ; 437d7 (10:77d7)
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
+	res OBJFLAG_INVISIBLE_F, [hl]
 	set 3, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, $78

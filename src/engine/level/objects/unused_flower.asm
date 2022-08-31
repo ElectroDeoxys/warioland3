@@ -1,8 +1,8 @@
 UnusedFlowerFunc: ; 40ca1 (10:4ca1)
 .Init
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
-	set OBJFLAG_UNK3_F, [hl]
+	res OBJFLAG_INVISIBLE_F, [hl]
+	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld l, OBJ_UNK_1A
 	res 5, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -25,8 +25,8 @@ UnusedFlowerFunc: ; 40ca1 (10:4ca1)
 	ld [wCurObjFrameDuration], a
 	ld hl, wCurObjFlags
 	ld a, [hl]
-	and OBJFLAG_UNK0 | OBJFLAG_UNK1
-	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
+	and OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN
+	cp OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN
 	ret nz
 	ld l, OBJ_STATE_DURATION
 	dec [hl]

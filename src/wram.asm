@@ -701,7 +701,7 @@ wcaa1:: ; caa1
 wIsMinigameCleared:: ; cac1
 	db
 
-wcac2:: ; cac2
+wCoinCooldown:: ; cac2
 	db
 
 wcac3:: ; cac3
@@ -950,54 +950,23 @@ wObj8:: obj_struct wObj8 ; d0e0
 
 wCurObj:: obj_struct wCurObj ; d100
 
-; pointers related to LoadEnemyGroupData
-w1d120:: ; d120
-	dw
-
-w1d122:: ; d122
-	dw
-
-w1d124:: ; d124
-	dw
-
-w1d126:: ; d126
-	dw
-
-w1d128:: ; d128
-	dw
-
-w1d12a:: ; d12a
-	dw
-
-w1d12c:: ; d12c
-	dw
-
-w1d12e:: ; d12e
-	dw
-
-w1d130:: ; d130
-	dw
-
-w1d132:: ; d132
-	dw
-
-w1d134:: ; d134
-	dw
-
-w1d136:: ; d136
-	dw
-
-w1d138:: ; d138
-	dw
-
-w1d13a:: ; d13a
-	dw
-
-w1d13c:: ; d13c
-	dw
-
-w1d13e:: ; d13e
-	dw
+wObjDataPointers::
+wChestObjDataPtr::       dw ; d120
+wKeyObjDataPtr::         dw ; d122
+wMusicalCoinObjDataPtr:: dw ; d124
+wObjDataPtr01::          dw ; d126
+wObjDataPtr02::          dw ; d128
+wObjDataPtr03::          dw ; d12a
+wObjDataPtr04::          dw ; d12c
+wObjDataPtr05::          dw ; d12e
+wObjDataPtr06::          dw ; d130
+wObjDataPtr07::          dw ; d132
+wObjDataPtr08::          dw ; d134
+wObjDataPtr09::          dw ; d136
+wObjDataPtr10::          dw ; d138
+wObjDataPtr11::          dw ; d13a
+wObjDataPtr12::          dw ; d13c
+wObjDataPtr13::          dw ; d13e
 
 w1d140:: ; d140
 	db

@@ -1,6 +1,6 @@
 CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
+	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UNK_1A
 	res 5, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -217,8 +217,8 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 
 .Land:
 	ld a, [wCurObjFlags]
-	and OBJFLAG_UNK0 | OBJFLAG_UNK1
-	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
+	and OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN
+	cp OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN
 	ret nz
 	ld hl, wCurObjState
 	ld a, OBJSTATE_WALK

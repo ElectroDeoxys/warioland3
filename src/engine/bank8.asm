@@ -20,8 +20,8 @@ Func_20000: ; 20000 (8:4000)
 	ld a, l
 	ld [wObjPtr + 1], a
 	ld a, [hl] ; OBJ_FLAGS
-	and OBJFLAG_UNK0 | OBJFLAG_UNK1
-	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
+	and OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN
+	cp OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN
 	jr z, .asm_20036
 .next_obj
 	ld a, [wObjPtr + 0]
@@ -314,10 +314,10 @@ TreasureClearObjects: ; 20203 (8:4203)
 	cp HIGH(wCurObj)
 	ret z
 	ld a, [hl] ; OBJ_FLAGS
-	and OBJFLAG_UNK0 | OBJFLAG_UNK1
-	cp OBJFLAG_UNK0
+	and OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN
+	cp OBJFLAG_ACTIVE
 	jr z, .vanish_obj
-	cp OBJFLAG_UNK0 | OBJFLAG_UNK1
+	cp OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN
 	jr z, .vanish_obj
 .next_obj
 	add hl, de
@@ -2994,7 +2994,7 @@ Func_21aac: ; 21aac (8:5aac)
 	jp nz, Func_209ca
 ; smash attack object
 	call Func_20602
-	ld b, OBJ_ACTION_SMASH_ATTACK_WALKABLE
+	ld b, OBJACTION_SMASH_ATTACK_WALKABLE
 	jp SetObjAction
 ; 0x21abb
 
@@ -3277,7 +3277,7 @@ ObjInteraction_WaterTeleporting: ; 21ccf (8:5ccf)
 	stop_sfx
 	ld a, WST_WATER_TELEPORTING
 	ld [wWarioState], a
-	ld b, OBJ_ACTION_TELEPORT
+	ld b, OBJACTION_TELEPORT
 	jp SetObjAction
 ; 0x21ce9
 
@@ -3302,7 +3302,7 @@ Func_21cfd: ; 21cfd (8:5cfd)
 	stop_sfx
 	ld a, WST_TELEPORTING
 	ld [wWarioState], a
-	ld b, OBJ_ACTION_TELEPORT
+	ld b, OBJACTION_TELEPORT
 	jp SetObjAction
 ; 0x21d17
 

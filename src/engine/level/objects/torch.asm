@@ -95,8 +95,8 @@ TorchFunc: ; 40ba9 (10:4ba9)
 	xor a
 	ld [hl], a ; OBJ_STATE_DURATION
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
-	set OBJFLAG_UNK3_F, [hl]
+	res OBJFLAG_INVISIBLE_F, [hl]
+	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld l, OBJ_UNK_1A
 	res 5, [hl]
 	ld l, OBJ_COLLBOX_RIGHT
@@ -144,7 +144,7 @@ TorchFunc: ; 40ba9 (10:4ba9)
 .create_ember
 	ld [wCurObjStateDuration], a
 	ld hl, wCurObjFlags
-	bit OBJFLAG_UNK1_F, [hl]
+	bit OBJFLAG_ON_SCREEN_F, [hl]
 	play_sfx nz, SFX_073
 	jp CreateObjectFromCurObjPos
 ; 0x40c19
@@ -192,7 +192,7 @@ TorchEmberCommonFunc: ; 40c51 (10:4c51)
 	ld bc, Data_60320
 	call Func_34b7
 	ld hl, wCurObjFlags
-	set OBJFLAG_UNK3_F, [hl]
+	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld a, [wCurObjState]
 	and a
 	jr nz, .set_destroy

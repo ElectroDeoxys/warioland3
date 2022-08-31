@@ -2449,7 +2449,7 @@ CopyHLToDE_Short:: ; 1a2d (0:1a2d)
 ; 0x1a34
 
 ; copies hl to wTempPals2
-Func_1a34:: ; 1a34 (0:1a34)
+LoadObjPals:: ; 1a34 (0:1a34)
 	ld de, wTempPals2 palette 4
 	ld b, 4 palettes
 .loop

@@ -56,8 +56,8 @@ BlueChestFunc: ; 4c8d1 (13:48d1)
 
 ChestFunc: ; 4c8da (13:48da)
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
-	set OBJFLAG_UNK3_F, [hl]
+	res OBJFLAG_INVISIBLE_F, [hl]
+	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.Update)
 	ld [hld], a
@@ -163,8 +163,8 @@ TreasureFunc: ; 4c982 (13:4982)
 
 KeyFunc: ; 4c992 (13:4992)
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
-	set OBJFLAG_UNK3_F, [hl]
+	res OBJFLAG_INVISIBLE_F, [hl]
+	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.Update)
 	ld [hld], a
@@ -196,8 +196,8 @@ KeyFunc: ; 4c992 (13:4992)
 
 MusicalCoinFunc: ; 4c9d4 (13:49d4)
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
-	set OBJFLAG_UNK3_F, [hl]
+	res OBJFLAG_INVISIBLE_F, [hl]
+	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.Update)
 	ld [hld], a

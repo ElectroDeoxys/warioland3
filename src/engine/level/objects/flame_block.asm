@@ -7,8 +7,8 @@ FlameBlockFunc: ; 496bd (12:56bd)
 	ret
 .init
 	ld hl, wCurObjFlags
-	res OBJFLAG_UNK4_F, [hl]
-	set OBJFLAG_UNK3_F, [hl]
+	res OBJFLAG_INVISIBLE_F, [hl]
+	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.Update)
 	ld [hld], a
