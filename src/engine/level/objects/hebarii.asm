@@ -9,8 +9,8 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 .Init:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
+	ld l, OBJ_SUBSTATE
+	res OBJSUBFLAG_UNK_5_F, [hl]
 
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, 5
@@ -32,8 +32,8 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	ld a, 20
 	ld [hli], a ; OBJ_STATE_DURATION
 	xor a
-	ld [hl], a ; OBJ_UNK_17
-	ld l, OBJ_UNK_1A
+	ld [hl], a ; OBJ_VAR_1
+	ld l, OBJ_SUBSTATE
 	ld a, [wWarioScreenXPos]
 	add $2a
 	ld b, a
@@ -42,10 +42,10 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	cp b
 	jr c, .set_right
 ; set left
-	res 7, [hl]
+	res OBJSUBFLAG_DIR_F, [hl]
 	ret
 .set_right
-	set 7, [hl]
+	set OBJSUBFLAG_DIR_F, [hl]
 	ret
 
 .StartAttackedLeftStart:
@@ -131,7 +131,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	ld l, OBJ_FLAGS
 	res OBJFLAG_NO_COLLISION_F, [hl]
 .asm_4a08d
-	ld l, OBJ_UNK_17
+	ld l, OBJ_VAR_1
 	ld a, [hld]
 	dec a
 	jr z, .asm_4a0fd
@@ -142,7 +142,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	ld a, 41
 	ld [hli], a ; OBJ_STATE_DURATION
 	ld a, $01
-	ld [hl], a ; OBJ_UNK_17
+	ld [hl], a ; OBJ_VAR_1
 	ret
 
 .asm_4a0a3
@@ -156,7 +156,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	ld a, [hli]
 	sbc 0
 	ldh [hYPosHi], a
-	ld a, [wCurObjUnk1a]
+	ld a, [wCurObjSubState]
 	rlca
 	jr c, .asm_4a0c8
 	ld a, [hli]
@@ -187,13 +187,13 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	call Func_3513
 	and a
 	jr nz, .switch_direction
-	ld a, [wCurObjUnk1a]
+	ld a, [wCurObjSubState]
 	rlca
 	jp c, MoveObjectRight
 	jp MoveObjectLeft
 
 .switch_direction
-	ld hl, wCurObjUnk1a
+	ld hl, wCurObjSubState
 	ld a, [hl]
 	xor $80
 	ld [hl], a
@@ -208,7 +208,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	ld a, 126
 	ld [hli], a
 	xor a
-	ld [hl], a ; OBJ_UNK_17
+	ld [hl], a ; OBJ_VAR_1
 	ld de, Frameset_683e4
 	jp SetObjectFramesetPtr
 
@@ -418,7 +418,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	ld [hli], a ; OBJ_STATE_DURATION
 	inc l
 	ld a, $02
-	ld [hli], a ; OBJ_UNK_18
+	ld [hli], a ; OBJ_VAR_2
 	xor a
 	ld [hli], a ; OBJ_MOVEMENT_INDEX
 	ld l, OBJ_INTERACTION_TYPE
@@ -435,7 +435,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	ld de, Frameset_683fb
 	call SetObjectFramesetPtr
 .StunLeft:
-	ld hl, wCurObjUnk18
+	ld hl, wCurObjVar2
 	ld a, [hl]
 	and a
 	jp nz, Func_32ae
@@ -450,7 +450,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	ld de, Frameset_683fb
 	call SetObjectFramesetPtr
 .StunRight:
-	ld hl, wCurObjUnk18
+	ld hl, wCurObjVar2
 	ld a, [hl]
 	and a
 	jp nz, Func_32bd
@@ -468,7 +468,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	xor a
 	ld [wCurObjMovementIndex], a
 	ld a, $02
-	ld [wCurObjUnk18], a
+	ld [wCurObjVar2], a
 	ret
 
 .PickedUpLeftStart:
@@ -479,9 +479,9 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	ld a, 65
 	ld [hld], a ; OBJ_MOVEMENT_INDEX
 	ld a, $c0
-	ld [hld], a ; OBJ_UNK_18
+	ld [hld], a ; OBJ_VAR_2
 	ld a, $01
-	ld [hld], a ; OBJ_UNK_17
+	ld [hld], a ; OBJ_VAR_1
 	ld de, Frameset_683fb
 	call SetObjectFramesetPtr
 	jp Func_3335
@@ -494,9 +494,9 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	ld a, 65
 	ld [hld], a ; OBJ_MOVEMENT_INDEX
 	ld a, $e0
-	ld [hld], a ; OBJ_UNK_18
+	ld [hld], a ; OBJ_VAR_2
 	ld a, $01
-	ld [hld], a ; OBJ_UNK_17
+	ld [hld], a ; OBJ_VAR_1
 	ld de, Frameset_683fb
 	call SetObjectFramesetPtr
 	jp Func_3344
@@ -513,7 +513,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	and a
 	jp nz, Func_3353
 ; change direction
-	ld hl, wCurObjUnk1a
+	ld hl, wCurObjSubState
 	ld a, [hl]
 	xor $80
 	ld [hl], a
@@ -530,7 +530,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	ld a, [wDirection]
 	and a
 	jp z, Func_3362
-	ld hl, wCurObjUnk1a
+	ld hl, wCurObjSubState
 	ld a, [hl]
 	xor $80
 	ld [hl], a
@@ -595,13 +595,13 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld [hld], a
 	ld [hl], c
-	ld l, OBJ_UNK_1A
+	ld l, OBJ_SUBSTATE
 	ld a, [hl]
-	and $f0
+	and OBJSUBFLAGS_MASK
 	ld [hld], a
 	xor a
 	ld [hld], a ; OBJ_MOVEMENT_INDEX
-	ld [hl], b ; OBJ_UNK_18
+	ld [hl], b ; OBJ_VAR_2
 	ld a, 1 | (1 << 7)
 	ld [wCurObjAction], a
 	ret
@@ -631,13 +631,13 @@ HebariiProjectileFunc: ; 4a3c2 (12:63c2)
 	ld [hld], a
 	ld a, LOW(.MoveWithLateral)
 	ld [hld], a
-	ld l, OBJ_UNK_1A
+	ld l, OBJ_SUBSTATE
 	jr nc, .set_right
 ; set left
-	res 7, [hl]
+	res OBJSUBFLAG_DIR_F, [hl]
 	ret
 .set_right
-	set 7, [hl]
+	set OBJSUBFLAG_DIR_F, [hl]
 	ret
 .straight_down
 	ld hl, wCurObjUpdateFunction + 1
@@ -648,7 +648,7 @@ HebariiProjectileFunc: ; 4a3c2 (12:63c2)
 	ret
 
 .MoveWithLateral:
-	ld a, [wCurObjUnk1a]
+	ld a, [wCurObjSubState]
 	rlca
 	jr c, .move_right
 ; move left

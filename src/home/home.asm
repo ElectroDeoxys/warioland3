@@ -3523,7 +3523,7 @@ UpdateObjSprite:: ; 3000 (0:3000)
 ; 0x305c
 
 Func_305c:: ; 305c (0:305c)
-	ld a, [wCurObjUnk18]
+	ld a, [wCurObjVar2]
 	ld b, a
 	ld hl, wCurObjXPos
 	ld a, [hl]
@@ -3535,7 +3535,7 @@ Func_305c:: ; 305c (0:305c)
 ; 0x3069
 
 Func_3069:: ; 3069 (0:3069)
-	ld a, [wCurObjUnk18]
+	ld a, [wCurObjVar2]
 	ld b, a
 	ld hl, wCurObjXPos
 	ld a, [hl]
@@ -3547,7 +3547,7 @@ Func_3069:: ; 3069 (0:3069)
 ; 0x3076
 
 Func_3076:: ; 3076 (0:3076)
-	ld a, [wCurObjUnk18]
+	ld a, [wCurObjVar2]
 	ld b, a
 	ld hl, wCurObjYPos
 	ld a, [hl]

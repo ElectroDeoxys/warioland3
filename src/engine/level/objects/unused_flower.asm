@@ -3,8 +3,8 @@ UnusedFlowerFunc: ; 40ca1 (10:4ca1)
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
+	ld l, OBJ_SUBSTATE
+	res OBJSUBFLAG_UNK_5_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.Grow)
 	ld [hld], a
@@ -15,7 +15,7 @@ UnusedFlowerFunc: ; 40ca1 (10:4ca1)
 	ld a, 30
 	ld [hli], a ; OBJ_STATE_DURATION
 	ld a, [wGlobalCounter]
-	ld [hl], a ; OBJ_UNK_17
+	ld [hl], a ; OBJ_VAR_1
 	ret
 
 .Grow:
@@ -56,7 +56,7 @@ UnusedFlowerFunc: ; 40ca1 (10:4ca1)
 	ld [wCurObjFrameDuration], a
 	ld a, [wGlobalCounter]
 	ld e, a
-	ld a, [wCurObjUnk17]
+	ld a, [wCurObjVar1]
 	cp e
 	ret nz
 	ld hl, wCurObjUpdateFunction + 1
@@ -113,7 +113,7 @@ UnusedFlowerFunc: ; 40ca1 (10:4ca1)
 	ld [wCurObjFrameDuration], a
 	ld a, [wGlobalCounter]
 	ld e, a
-	ld a, [wCurObjUnk17]
+	ld a, [wCurObjVar1]
 	cp e
 	ret nz
 	ld hl, wCurObjUpdateFunction + 1

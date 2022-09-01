@@ -5,7 +5,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld a, LOW(.Init)
 	ld [hld], a
 	xor a
-	ld [wCurObjUnk17], a
+	ld [wCurObjVar1], a
 	ret
 
 .Init:
@@ -16,8 +16,8 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld [hld], a
 	ld a, LOW(.Update)
 	ld [hld], a
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
+	ld l, OBJ_SUBSTATE
+	res OBJSUBFLAG_UNK_5_F, [hl]
 	ld a, [wca3b]
 	rra
 	jp c, .SleepStart ; night
@@ -128,7 +128,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld hl, wCurObjState
 	ld a, OBJSTATE_FULL_THROW_LEFT
 	ld [hld], a
-	ld a, [hld] ; OBJ_UNK_1A
+	ld a, [hld] ; OBJ_SUBSTATE
 	rlca
 	jr c, .asm_40140
 	ld de, Frameset_68292
@@ -143,7 +143,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld hl, wCurObjState
 	ld a, OBJSTATE_FULL_THROW_RIGHT
 	ld [hld], a
-	ld a, [hld] ; OBJ_UNK_1A
+	ld a, [hld] ; OBJ_SUBSTATE
 	rlca
 	jr c, .asm_4015c
 	ld de, Frameset_68292
@@ -176,7 +176,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ret
 
 .Sleep:
-	ld hl, wCurObjUnk1a
+	ld hl, wCurObjSubState
 	ld a, [wWarioScreenXPos]
 	add $2a
 	ld b, a
@@ -250,7 +250,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ret
 
 .wake_up
-	ld a, [hli] ; OBJ_UNK_1A
+	ld a, [hli] ; OBJ_SUBSTATE
 	rlca
 	ld a, OBJSTATE_SPECIAL_3
 	ld [hl], a ; OBJ_STATE
@@ -295,7 +295,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	cp b
 	jr c, .on_left2
 ; on right
-	res 7, [hl] ; OBJ_UNK_1A
+	res OBJSUBFLAG_DIR_F, [hl] ; OBJ_SUBSTATE
 	dec l
 	xor a
 	ld [hld], a ; OBJ_MOVEMENT_INDEX
@@ -310,7 +310,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	jp SetObjectFramesetPtr
 
 .on_left2
-	set 7, [hl] ; OBJ_UNK_1A
+	set OBJSUBFLAG_DIR_F, [hl] ; OBJ_SUBSTATE
 	dec l
 	xor a
 	ld [hld], a ; OBJ_MOVEMENT_INDEX
@@ -328,7 +328,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld hl, wCurObjState
 	ld a, OBJSTATE_STANDING_FALL
 	ld [hld], a
-	ld a, [hld] ; OBJ_UNK_1A
+	ld a, [hld] ; OBJ_SUBSTATE
 	rlca
 	jr c, .asm_40270
 	xor a
@@ -352,7 +352,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld l, OBJ_STATE
 	ld a, OBJSTATE_SPECIAL_2
 	ld [hld], a
-	ld a, [hld] ; OBJ_UNK_1A
+	ld a, [hld] ; OBJ_SUBSTATE
 	rlca
 	jr c, .asm_40298
 	ld l, OBJ_COLLBOX_RIGHT
@@ -393,11 +393,11 @@ SpearheadFunc: ; 40040 (10:4040)
 	ret nz
 	inc l
 	xor a
-	ld [hl], a ; OBJ_UNK_17
+	ld [hl], a ; OBJ_VAR_1
 	ld l, OBJ_STATE
 	ld a, OBJSTATE_WALK
 	ld [hld], a
-	ld a, [hld] ; OBJ_UNK_1A
+	ld a, [hld] ; OBJ_SUBSTATE
 	rlca
 	jr c, .asm_402d1
 	ld de, Frameset_681d2
@@ -409,7 +409,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ret
 
 .Land:
-	ld a, [wCurObjUnk17]
+	ld a, [wCurObjVar1]
 	inc a
 	jr z, .LandWithSting
 ; without sting
@@ -421,7 +421,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld l, OBJ_STATE
 	ld a, OBJSTATE_WALK
 	ld [hld], a
-	ld a, [hld] ; OBJ_UNK_1A
+	ld a, [hld] ; OBJ_SUBSTATE
 	rlca
 	jr c, .asm_402fd
 	ld l, OBJ_COLLBOX_RIGHT
@@ -493,7 +493,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld [hli], a
 	ldh a, [hYPosHi]
 	ld [hli], a
-	ld a, [wCurObjUnk1a]
+	ld a, [wCurObjSubState]
 	rlca
 	jr c, .go_right
 
@@ -562,7 +562,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld hl, wCurObjState
 	ld a, OBJSTATE_BUMP_LEFT
 	ld [hld], a
-	ld a, [hld] ; OBJ_UNK_1A
+	ld a, [hld] ; OBJ_SUBSTATE
 	rlca
 	jr c, .asm_403d1
 	ld de, Frameset_6826e
@@ -575,7 +575,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld hl, wCurObjState
 	ld a, OBJSTATE_BUMP_RIGHT
 	ld [hld], a
-	ld a, [hld] ; OBJ_UNK_1A
+	ld a, [hld] ; OBJ_SUBSTATE
 	rlca
 	jr c, .asm_403e5
 	ld de, Frameset_681ff
@@ -588,7 +588,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld a, 12
 	ld [hld], a ; OBJ_MOVEMENT_INDEX
 	ld a, $02
-	ld [wCurObjUnk18], a
+	ld [wCurObjVar2], a
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, 5
 	ld [hld], a
@@ -605,7 +605,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld hl, wCurObjState
 	ld a, OBJSTATE_STUN_LEFT
 	ld [hld], a
-	ld a, [hld] ; OBJ_UNK_1A
+	ld a, [hld] ; OBJ_SUBSTATE
 	rlca
 	jr c, .asm_40413
 	ld de, Frameset_681e4
@@ -626,7 +626,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	or OBJ_INTERACTION_00
 	ld [hld], a
 .StunLeft:
-	ld hl, wCurObjUnk18
+	ld hl, wCurObjVar2
 	ld a, [hl]
 	and a
 	jp nz, Func_32ae
@@ -638,7 +638,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld hl, wCurObjState
 	ld a, OBJSTATE_STUN_RIGHT
 	ld [hld], a
-	ld a, [hld] ; OBJ_UNK_1A
+	ld a, [hld] ; OBJ_SUBSTATE
 	rlca
 	jr c, .asm_40446
 	ld de, Frameset_681e4
@@ -659,7 +659,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	or OBJ_INTERACTION_00
 	ld [hld], a
 .StunRight:
-	ld hl, wCurObjUnk18
+	ld hl, wCurObjVar2
 	ld a, [hl]
 	and a
 	jp nz, Func_32bd
@@ -677,7 +677,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld a, OBJSTATE_45
 	ld [hld], a
 .Func_40478:
-	ld a, [hld] ; OBJ_UNK_1A
+	ld a, [hld] ; OBJ_SUBSTATE
 	rlca
 	jr c, .asm_40484
 	ld de, Frameset_681e4
@@ -690,7 +690,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	inc l
 	inc l
 	ld a, $02
-	ld [hli], a ; OBJ_UNK_18
+	ld [hli], a ; OBJ_VAR_2
 	xor a
 	ld [hli], a ; OBJ_MOVEMENT_INDEX
 	ld l, OBJ_COLLBOX_RIGHT
@@ -743,14 +743,14 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld a, OBJSTATE_00
 	ld [wCurObjState], a
 	ld a, $ff
-	ld [wCurObjUnk17], a
+	ld [wCurObjVar1], a
 	ret
 
 .TurnAroundStart:
 	ld hl, wCurObjState
 	ld a, OBJSTATE_TURN_AROUND
 	ld [hld], a
-	ld a, [hld] ; OBJ_UNK_1A
+	ld a, [hld] ; OBJ_SUBSTATE
 	rlca
 	jr c, .asm_404fd
 	ld de, Frameset_6824f
@@ -763,7 +763,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld a, 48
 	ld [hli], a ; OBJ_STATE_DURATION
 	ld a, $1c
-	ld [hl], a ; OBJ_UNK_17
+	ld [hl], a ; OBJ_VAR_1
 	ret
 
 .TurnAround: ; 4050a (10:450a)
@@ -794,7 +794,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	and HEAVY_OBJ
 	or OBJ_INTERACTION_01
 	ld [hld], a
-	ld a, [wCurObjUnk1a]
+	ld a, [wCurObjSubState]
 	rlca
 	jr c, .asm_40545
 	ld de, Frameset_6821e
@@ -807,21 +807,21 @@ SpearheadFunc: ; 40040 (10:4040)
 
 .asm_4054e
 	inc l
-	dec [hl] ; OBJ_UNK_17
+	dec [hl] ; OBJ_VAR_1
 	jp nz, Func_3308
-	ld a, [wCurObjUnk1a]
+	ld a, [wCurObjSubState]
 	rlca
 	jr c, .asm_40562
 	ld hl, wCurObjState
 	ld a, OBJSTATE_LAND
 	ld [hld], a
-	set 7, [hl] ; OBJ_UNK_1A
+	set OBJSUBFLAG_DIR_F, [hl] ; OBJ_SUBSTATE
 	ret
 .asm_40562
 	ld hl, wCurObjState
 	ld a, OBJSTATE_LAND
 	ld [hld], a
-	res 7, [hl] ; OBJ_UNK_1A
+	res OBJSUBFLAG_DIR_F, [hl] ; OBJ_SUBSTATE
 	ret
 
 .WobbleLeftStart:
@@ -837,7 +837,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld a, OBJSTATE_WOBBLE_RIGHT
 .Func_4057d:
 	ld [hld], a ; OBJ_STATE
-	ld a, [hld] ; OBJ_UNK_1A
+	ld a, [hld] ; OBJ_SUBSTATE
 	rlca
 	jr c, .asm_4058a
 	ld de, Frameset_681e4
@@ -852,7 +852,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld [hli], a ; OBJ_STATE_DURATION
 	inc l
 	ld a, $02
-	ld [hli], a ; OBJ_UNK_18
+	ld [hli], a ; OBJ_VAR_2
 	xor a
 	ld [hli], a ; OBJ_MOVEMENT_INDEX
 	ld l, OBJ_COLLBOX_RIGHT
@@ -880,7 +880,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld [hli], a
 	ld [hli], a ; OBJ_FRAMESET_OFFSET
 	ld a, $02
-	ld [wCurObjUnk18], a
+	ld [wCurObjVar2], a
 	ret
 
 .State3b:
@@ -888,7 +888,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld l, OBJ_UNK_18
+	ld l, OBJ_VAR_2
 	ld a, [hl]
 	and a
 	jp nz, Func_32bd
@@ -901,7 +901,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld l, OBJ_UNK_18
+	ld l, OBJ_VAR_2
 	ld a, [hl]
 	and a
 	jp nz, Func_32ae
@@ -937,12 +937,12 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld b, $02
 
 .asm_4060e
-	ld a, [hl] ; OBJ_UNK_1A
-	and $f0
+	ld a, [hl] ; OBJ_SUBSTATE
+	and OBJSUBFLAGS_MASK
 	ld [hld], a
 	xor a
 	ld [hld], a ; OBJ_MOVEMENT_INDEX
-	ld [hl], b ; OBJ_UNK_18
+	ld [hl], b ; OBJ_VAR_2
 	ld a, 1 | (1 << 7)
 	ld [wCurObjAction], a
 	ld de, Frameset_68277
@@ -956,9 +956,9 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld a, HIGH(Data_601c0)
 	ld [hld], a ; OBJ_MOVEMENT_INDEX
 	ld a, LOW(Data_601c0)
-	ld [hld], a ; OBJ_UNK_18
+	ld [hld], a ; OBJ_VAR_2
 	ld a, $01
-	ld [hld], a ; OBJ_UNK_17
+	ld [hld], a ; OBJ_VAR_1
 	jp Func_3335
 
 .PickedUpRightStart:
@@ -978,7 +978,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld hl, wCurObjState
 	ld a, OBJSTATE_49
 	ld [hld], a
-	ld a, [hld] ; OBJ_UNK_1A
+	ld a, [hld] ; OBJ_SUBSTATE
 	rlca
 	jr c, .asm_40658
 	ld de, Frameset_681e4
@@ -1000,7 +1000,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld a, [wDirection]
 	and a
 	jp nz, Func_3353
-	ld hl, wCurObjUnk1a
+	ld hl, wCurObjSubState
 	ld a, [hl]
 	xor $80 ; switch direction
 	ld [hl], a
@@ -1010,7 +1010,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld hl, wCurObjState
 	ld a, OBJSTATE_48
 	ld [hld], a
-	ld a, [hld] ; OBJ_UNK_1A
+	ld a, [hld] ; OBJ_SUBSTATE
 	rlca
 	jr c, .asm_4068c
 	ld de, Frameset_681e4
@@ -1032,7 +1032,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld a, [wDirection]
 	and a
 	jp z, Func_3362
-	ld hl, wCurObjUnk1a
+	ld hl, wCurObjSubState
 	ld a, [hl]
 	xor $80 ; switch direction
 	ld [hl], a

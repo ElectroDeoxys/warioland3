@@ -8,8 +8,8 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	ld a, LOW(.Update)
 	ld [hld], a
 
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
+	ld l, OBJ_SUBSTATE
+	res OBJSUBFLAG_UNK_5_F, [hl]
 
 	ld de, Frameset_68319
 	call SetObjectFramesetPtr
@@ -17,9 +17,9 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	; save starting position
 	inc l
 	ld a, [wCurObjYPos + 0]
-	ld [hli], a ; OBJ_UNK_17
+	ld [hli], a ; OBJ_VAR_1
 	ld a, [wCurObjYPos + 1]
-	ld [hli], a ; OBJ_UNK_18
+	ld [hli], a ; OBJ_VAR_2
 
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, 5
@@ -34,7 +34,7 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	ld a, [wGroundShakeCounter]
 	cp $10
 	jp nc, .set_shake
-	ld l, OBJ_UNK_17
+	ld l, OBJ_VAR_1
 	ld c, [hl]
 	ld a, [wCurObjYPos + 0]
 	cp c
@@ -121,13 +121,13 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	ret
 
 .no_shake
-	ld l, OBJ_UNK_17
+	ld l, OBJ_VAR_1
 	ld c, [hl]
 	ld a, [wCurObjYPos + 0]
 	cp c
 	jr nz, .asm_4078c
 	inc l
-	ld b, [hl] ; OBJ_UNK_18
+	ld b, [hl] ; OBJ_VAR_2
 	ld a, [wCurObjYPos + 1]
 	cp b
 	jr z, .asm_4079a
@@ -135,7 +135,7 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	ld l, OBJ_STATE
 	ld a, OBJSTATE_SPECIAL_3
 	ld [hld], a
-	res 7, [hl] ; OBJ_UNK_1A
+	res OBJSUBFLAG_DIR_F, [hl] ; OBJ_SUBSTATE
 	ld de, Frameset_68336
 	call SetObjectFramesetPtr
 	ret
@@ -167,7 +167,7 @@ FutamoguFunc: ; 406c4 (10:46c4)
 
 .asm_407bf
 	dec l
-	ld a, [hli] ; OBJ_UNK_1A
+	ld a, [hli] ; OBJ_SUBSTATE
 	rlca
 	jr c, .vanish
 	ld a, OBJSTATE_3A
@@ -185,7 +185,7 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	jp z, .set_idle
-	ld l, OBJ_UNK_1A
+	ld l, OBJ_SUBSTATE
 	ld a, [hl]
 	rlca
 	ret c ; already as low as possible
@@ -220,13 +220,13 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	ld [hli], a
 	ldh a, [hYPosHi]
 	ld [hl], a
-	ld l, OBJ_UNK_1A
-	set 7, [hl] ; can't go lower
+	ld l, OBJ_SUBSTATE
+	set OBJSUBFLAG_DIR_F, [hl] ; can't go lower
 	ret
 
 .vanish
 	ld a, $08
-	ld [wCurObjUnk18], a
+	ld [wCurObjVar2], a
 	call Func_305c
 	jp VanishObject
 ; 0x40825

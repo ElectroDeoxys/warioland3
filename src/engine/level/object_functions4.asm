@@ -63,9 +63,9 @@ ChestFunc: ; 4c8da (13:48da)
 	ld [hld], a
 	ld a, LOW(.Update)
 	ld [hld], a
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
-	set 4, [hl]
+	ld l, OBJ_SUBSTATE
+	res OBJSUBFLAG_UNK_5_F, [hl]
+	set OBJSUBFLAG_UNK_4_F, [hl]
 	ld de, Frameset_68000
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
@@ -170,8 +170,8 @@ KeyFunc: ; 4c992 (13:4992)
 	ld [hld], a
 	ld a, LOW(.Update)
 	ld [hld], a
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
+	ld l, OBJ_SUBSTATE
+	res OBJSUBFLAG_UNK_5_F, [hl]
 	ld de, Frameset_6804f
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
@@ -203,8 +203,8 @@ MusicalCoinFunc: ; 4c9d4 (13:49d4)
 	ld [hld], a
 	ld a, LOW(.Update)
 	ld [hld], a
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
+	ld l, OBJ_SUBSTATE
+	res OBJSUBFLAG_UNK_5_F, [hl]
 	ld de, Frameset_68036
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT

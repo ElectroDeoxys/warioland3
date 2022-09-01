@@ -2,8 +2,8 @@ StoveFunc: ; 4971c (12:571c)
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
+	ld l, OBJ_SUBSTATE
+	res OBJSUBFLAG_UNK_5_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.Update)
 	ld [hld], a
@@ -19,7 +19,7 @@ StoveFunc: ; 4971c (12:571c)
 	ld de, Frameset_69615
 	call SetObjectFramesetPtr
 	xor a
-	ld [wCurObjUnk17], a
+	ld [wCurObjVar1], a
 	ret
 
 .set_fall:
@@ -54,7 +54,7 @@ StoveFunc: ; 4971c (12:571c)
 	ld [hl], a
 	ld a, OBJSTATE_LAND
 	ld [wCurObjState], a
-	ld a, [wCurObjUnk17]
+	ld a, [wCurObjVar1]
 	and a
 	ret z
 	play_sfx SFX_063
@@ -107,7 +107,7 @@ StoveFunc: ; 4971c (12:571c)
 	jr .asm_49813
 
 .State34:
-	ld l, OBJ_UNK_18
+	ld l, OBJ_VAR_2
 	ld a, [wGlobalCounter]
 	and %111
 	jr nz, .asm_497e8
@@ -143,12 +143,12 @@ StoveFunc: ; 4971c (12:571c)
 .asm_49813
 	ld [hl], a ; OBJ_STATE
 	ld a, $02
-	ld [wCurObjUnk18], a
+	ld [wCurObjVar2], a
 	ld de, Frameset_69618
 	jp SetObjectFramesetPtr
 
 .AttackedRightStart:
-	ld l, OBJ_UNK_18
+	ld l, OBJ_VAR_2
 	ld a, [wGlobalCounter]
 	and %111
 	jr nz, .asm_49833
@@ -215,6 +215,6 @@ StoveFunc: ; 4971c (12:571c)
 	ld a, OBJSTATE_00
 	ld [wCurObjState], a
 	inc a ; $1
-	ld [wCurObjUnk17], a
+	ld [wCurObjVar1], a
 	ret
 ; 0x4989e

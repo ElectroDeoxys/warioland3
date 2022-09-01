@@ -6,8 +6,8 @@ WebberFunc: ; 40825 (10:4825)
 	ld [hld], a
 	ld a, LOW(.Update)
 	ld [hld], a
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
+	ld l, OBJ_SUBSTATE
+	res OBJSUBFLAG_UNK_5_F, [hl]
 
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, -2
@@ -18,11 +18,11 @@ WebberFunc: ; 40825 (10:4825)
 	ld [hl], a
 
 	; save starting position
-	ld l, OBJ_UNK_17
+	ld l, OBJ_VAR_1
 	ld a, [wCurObjYPos + 0]
 	ld [hli], a
 	ld a, [wCurObjYPos + 1]
-	ld [hli], a ; OBJ_UNK_18
+	ld [hli], a ; OBJ_VAR_2
 	ld a, 4
 	ld [hl], a ; OBJ_MOVEMENT_INDEX
 	jp .set_fire_projectile
@@ -45,14 +45,14 @@ WebberFunc: ; 40825 (10:4825)
 	ld [hld], a
 	ld [hl], c
 	call SetObjectFramesetPtr
-	ld l, OBJ_UNK_1A
+	ld l, OBJ_SUBSTATE
 	ld a, [hl]
-	and $f0
+	and OBJSUBFLAGS_MASK
 	ld [hld], a
 	xor a
 	ld [hld], a ; OBJ_MOVEMENT_INDEX
 	ld a, b
-	ld [hld], a ; OBJ_UNK_18
+	ld [hld], a ; OBJ_VAR_2
 	ld a, 1 | (1 << 7)
 	ld [wCurObjAction], a
 	ret
@@ -60,11 +60,11 @@ WebberFunc: ; 40825 (10:4825)
 .set_smash_attacked:
 	xor a
 	ld [hld], a
-	ld a, [hl] ; OBJ_UNK_1A
+	ld a, [hl] ; OBJ_SUBSTATE
 	rlca
 	jp c, VanishObject
 	ld a, [hl]
-	and $f0
+	and OBJSUBFLAGS_MASK
 	or $5
 	ld [hld], a
 	xor a
@@ -89,8 +89,8 @@ WebberFunc: ; 40825 (10:4825)
 
 	xor a
 	ld [hld], a
-	ld a, [hl] ; OBJ_UNK_1A
-	and $f0
+	ld a, [hl] ; OBJ_SUBSTATE
+	and OBJSUBFLAGS_MASK
 	or $6
 	ld [hld], a
 	ld de, Frameset_682d1
@@ -101,9 +101,9 @@ WebberFunc: ; 40825 (10:4825)
 	res OBJFLAG_NO_COLLISION_F, [hl]
 
 .Default:
-	ld l, OBJ_UNK_1A
+	ld l, OBJ_SUBSTATE
 	ld a, [hl]
-	and $0f
+	and $ff ^ OBJSUBFLAGS_MASK
 	jumptable
 
 	dw .Idle
@@ -117,7 +117,7 @@ WebberFunc: ; 40825 (10:4825)
 	dw .SpecialIdle
 
 .set_move_to_start_pos
-	ld hl, wCurObjUnk1a
+	ld hl, wCurObjSubState
 	ld a, [hl]
 	and $70
 	or $3
@@ -131,7 +131,7 @@ WebberFunc: ; 40825 (10:4825)
 	ld a, [wGroundShakeCounter]
 	cp $10
 	jp nc, .set_shake
-	ld hl, wCurObjUnk17
+	ld hl, wCurObjVar1
 	ld e, [hl]
 	inc l
 	ld d, [hl]
@@ -149,9 +149,9 @@ WebberFunc: ; 40825 (10:4825)
 	jr .move_down
 
 .set_idle
-	ld l, OBJ_UNK_1A
+	ld l, OBJ_SUBSTATE
 	ld a, [hl]
-	and $f0
+	and OBJSUBFLAGS_MASK
 	or $1
 	ld [hld], a
 	ld de, Frameset_682a4
@@ -202,9 +202,9 @@ WebberFunc: ; 40825 (10:4825)
 	jp MoveObjectDown
 
 .set_shake
-	ld hl, wCurObjUnk1a
+	ld hl, wCurObjSubState
 	ld a, [hl]
-	and $f0
+	and OBJSUBFLAGS_MASK
 	or $4
 	ld [hld], a
 	xor a
@@ -238,8 +238,8 @@ WebberFunc: ; 40825 (10:4825)
 	ld [hli], a
 	ldh a, [hYPosHi]
 	ld [hl], a
-	ld l, OBJ_UNK_1A
-	set 7, [hl]
+	ld l, OBJ_SUBSTATE
+	set OBJSUBFLAG_DIR_F, [hl]
 .end_shake
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -256,9 +256,9 @@ WebberFunc: ; 40825 (10:4825)
 	ld hl, wCurObjFlags
 	bit OBJFLAG_STEPPED_F, [hl]
 	jr z, .not_stepped3
-	ld l, OBJ_UNK_1A
+	ld l, OBJ_SUBSTATE
 	ld a, [hl]
-	and $f0
+	and OBJSUBFLAGS_MASK
 	or $7
 	ld [hld], a
 	ld de, Frameset_682d6
@@ -273,9 +273,9 @@ WebberFunc: ; 40825 (10:4825)
 	jp nz, .set_fire_projectile
 	inc l
 	ld a, [hl]
-	and $f0
+	and OBJSUBFLAGS_MASK
 	or $8
-	ld [hld], a ; OBJ_UNK_1A
+	ld [hld], a ; OBJ_SUBSTATE
 	ld de, Frameset_682e2
 	call SetObjectFramesetPtr
 	ld a, 162
@@ -297,7 +297,7 @@ WebberFunc: ; 40825 (10:4825)
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	jp z, .set_move_to_start_pos
-	ld l, OBJ_UNK_1A
+	ld l, OBJ_SUBSTATE
 	ld a, [hl]
 	rlca
 	ret c
@@ -331,14 +331,14 @@ WebberFunc: ; 40825 (10:4825)
 	ld [hli], a
 	ldh a, [hYPosHi]
 	ld [hl], a
-	ld l, OBJ_UNK_1A
-	set 7, [hl]
+	ld l, OBJ_SUBSTATE
+	set OBJSUBFLAG_DIR_F, [hl]
 	ret
 
 .set_fire_projectile
-	ld hl, wCurObjUnk1a
+	ld hl, wCurObjSubState
 	ld a, [hl]
-	and $f0
+	and OBJSUBFLAGS_MASK
 	or $2
 	ld [hld], a
 	ld de, Frameset_682b7
@@ -384,9 +384,9 @@ WebberFunc: ; 40825 (10:4825)
 	ld l, OBJ_FLAGS
 	bit OBJFLAG_STEPPED_F, [hl]
 	ret z
-	ld l, OBJ_UNK_1A
+	ld l, OBJ_SUBSTATE
 	ld a, [hl]
-	and $f0
+	and OBJSUBFLAGS_MASK
 	or $7
 	ld [hld], a
 	ld de, Frameset_682d6

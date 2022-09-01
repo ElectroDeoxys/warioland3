@@ -233,10 +233,10 @@ ENDR
 	ld [de], a ; OBJ_FRAME_DURATION
 
 	ld a, e
-	add OBJ_UNK_1A - OBJ_FRAME_DURATION
+	add OBJ_SUBSTATE - OBJ_FRAME_DURATION
 	ld e, a
-	ld a, $21
-	ld [de], a ; OBJ_UNK_1A
+	ld a, $1 | OBJSUBFLAG_UNK_5
+	ld [de], a ; OBJ_SUBSTATE
 	inc e
 	xor a ; OBJSTATE_00
 	ld [de], a ; OBJ_STATE
@@ -419,16 +419,16 @@ CreateObject_GotPos:: ; 64352 (19:4352)
 	ld [de], a ; OBJ_STATE_DURATION
 	inc e
 	ld a, [hli]
-	ld [de], a ; OBJ_UNK_17
+	ld [de], a ; OBJ_VAR_1
 	inc e
 	ld a, [hli]
-	ld [de], a ; OBJ_UNK_18
+	ld [de], a ; OBJ_VAR_2
 	inc e
 	ld a, [hli]
 	ld [de], a ; OBJ_MOVEMENT_INDEX
 	inc e
 	ld a, [hli]
-	ld [de], a ; OBJ_UNK_1A
+	ld [de], a ; OBJ_SUBSTATE
 	inc e
 	ld a, [hli]
 	ld [de], a ; OBJ_STATE

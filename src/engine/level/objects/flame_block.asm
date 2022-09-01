@@ -16,8 +16,8 @@ FlameBlockFunc: ; 496bd (12:56bd)
 	ld [hld], a
 	ld de, Frameset_695de
 	call SetObjectFramesetPtr
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
+	ld l, OBJ_SUBSTATE
+	res OBJSUBFLAG_UNK_5_F, [hl]
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, 13
 	ld [hld], a

@@ -265,13 +265,13 @@ ENDR
 	ld [hli], a
 	ld a, [wCurObjStateDuration]
 	ld [hli], a
-	ld a, [wCurObjUnk17]
+	ld a, [wCurObjVar1]
 	ld [hli], a
-	ld a, [wCurObjUnk18]
+	ld a, [wCurObjVar2]
 	ld [hli], a
 	ld a, [wCurObjMovementIndex]
 	ld [hli], a
-	ld a, [wCurObjUnk1a]
+	ld a, [wCurObjSubState]
 	ld [hli], a
 	ld a, [wCurObjState]
 	ld [hli], a
@@ -436,13 +436,13 @@ ENDR
 	ld [hli], a
 	ld a, [wCurObjStateDuration]
 	ld [hli], a
-	ld a, [wCurObjUnk17]
+	ld a, [wCurObjVar1]
 	ld [hli], a
-	ld a, [wCurObjUnk18]
+	ld a, [wCurObjVar2]
 	ld [hli], a
 	ld a, [wCurObjMovementIndex]
 	ld [hli], a
-	ld a, [wCurObjUnk1a]
+	ld a, [wCurObjSubState]
 	ld [hli], a
 	ld a, [wCurObjState]
 	ld [hli], a
@@ -468,7 +468,7 @@ ENDR
 	ld a, [hl]
 	ld [wCurObj + OBJ_STRUCT_LENGTH - 1], a
 
-	ld hl, wCurObjUnk1a
+	ld hl, wCurObjSubState
 	bit 5, [hl]
 	jr z, .skip_update_function
 
@@ -546,13 +546,13 @@ ENDR
 	ld [hli], a
 	ld a, [wCurObjStateDuration]
 	ld [hli], a
-	ld a, [wCurObjUnk17]
+	ld a, [wCurObjVar1]
 	ld [hli], a
-	ld a, [wCurObjUnk18]
+	ld a, [wCurObjVar2]
 	ld [hli], a
 	ld a, [wCurObjMovementIndex]
 	ld [hli], a
-	ld a, [wCurObjUnk1a]
+	ld a, [wCurObjSubState]
 	ld [hli], a
 	ld a, [wCurObjState]
 	ld [hli], a
@@ -847,9 +847,9 @@ VanishObject_NoSFX: ; 618a5 (18:58a5)
 	ld [hld], a
 	ld a, LOW(VanishStarsFunc)
 	ld [hld], a
-	ld l, OBJ_UNK_1A
+	ld l, OBJ_SUBSTATE
 	ld a, [hl]
-	and $f0
+	and OBJSUBFLAGS_MASK
 	ld [hld], a
 Func_618b4: ; 618b4 (18:58b4)
 	ld a, (BANK(VanishStarsFunc) - BANK("Object Update Functions 1")) << 4
@@ -1247,7 +1247,7 @@ Func_61f54:: ; 61f54 (18:5f54)
 	ld [wGrabState], a
 	play_sfx SFX_01A
 	ld a, $02
-	ld [wCurObjUnk18], a
+	ld [wCurObjVar2], a
 	ld hl, wCurObjAction
 	ld a, 31 | (1 << 7)
 	ld [hld], a
@@ -1261,11 +1261,11 @@ Func_61f54:: ; 61f54 (18:5f54)
 	jp HomeJumpRet
 
 .PickUp
-	ld hl, wCurObjUnk17
+	ld hl, wCurObjVar1
 	dec [hl]
 	jp nz, HomeJumpRet
 	inc l
-	ld a, [hli] ; OBJ_UNK_18
+	ld a, [hli] ; OBJ_VAR_2
 	ld h, [hl] ; OBJ_MOVEMENT_INDEX
 	ld l, a
 	ld a, [hli]
@@ -1277,13 +1277,13 @@ Func_61f54:: ; 61f54 (18:5f54)
 	dec l
 	ld a, [hli]
 .asm_61ff5
-	ld [wCurObjUnk17], a
+	ld [wCurObjVar1], a
 	ld a, [hli]
 	ld c, a
 	ld a, [hli]
 	ld b, a
 	ld a, l
-	ld [wCurObjUnk18], a
+	ld [wCurObjVar2], a
 	ld a, h
 	ld [wCurObjMovementIndex], a
 
@@ -1455,7 +1455,7 @@ Func_620a6:: ; 620a6 (18:60a6)
 	ld [wGrabState], a
 	play_sfx SFX_01A
 	ld a, $02
-	ld [wCurObjUnk18], a
+	ld [wCurObjVar2], a
 	ld hl, wCurObjAction
 	ld a, 31 | (1 << 7)
 	ld [hld], a
@@ -1469,11 +1469,11 @@ Func_620a6:: ; 620a6 (18:60a6)
 	jp HomeJumpRet
 
 .PickUp
-	ld hl, wCurObjUnk17
+	ld hl, wCurObjVar1
 	dec [hl]
 	jp nz, HomeJumpRet
 	inc l
-	ld a, [hli] ; OBJ_UNK_18
+	ld a, [hli] ; OBJ_VAR_2
 	ld h, [hl] ; OBJ_MOVEMENT_INDEX
 	ld l, a
 	ld a, [hli]
@@ -1485,13 +1485,13 @@ Func_620a6:: ; 620a6 (18:60a6)
 	dec l
 	ld a, [hli]
 .asm_62147
-	ld [wCurObjUnk17], a
+	ld [wCurObjVar1], a
 	ld a, [hli]
 	ld c, a
 	ld a, [hli]
 	ld b, a
 	ld a, l
-	ld [wCurObjUnk18], a
+	ld [wCurObjVar2], a
 	ld a, h
 	ld [wCurObjMovementIndex], a
 
@@ -1622,7 +1622,7 @@ Func_621fb:: ; 621fb (18:61fb)
 	jr z, .not_crouching
 ; crouching
 	ld a, $01
-	ld [wCurObjUnk18], a
+	ld [wCurObjVar2], a
 	ld a, OBJSTATE_15
 	ld [hl], a
 	jp HomeJumpRet
@@ -1700,7 +1700,7 @@ Func_621fb:: ; 621fb (18:61fb)
 	ld [wGrabState], a
 	play_sfx SFX_01A
 	ld a, $02
-	ld [wCurObjUnk18], a
+	ld [wCurObjVar2], a
 	ld hl, wCurObjAction
 	ld a, 31 | (1 << 7)
 	ld [hld], a
@@ -1732,7 +1732,7 @@ Func_622bd:: ; 622bd (18:62bd)
 	jr z, .not_crouching
 ; crouching
 	ld a, $01
-	ld [wCurObjUnk18], a
+	ld [wCurObjVar2], a
 	ld a, OBJSTATE_14
 	ld [hl], a
 	jp HomeJumpRet
@@ -1812,7 +1812,7 @@ Func_622bd:: ; 622bd (18:62bd)
 	ld [wGrabState], a
 	play_sfx SFX_01A
 	ld a, $02
-	ld [wCurObjUnk18], a
+	ld [wCurObjVar2], a
 	ld hl, wCurObjAction
 	ld a, 31 | (1 << 7)
 	ld [hld], a
@@ -1942,7 +1942,7 @@ ThrowObject_Left: ; 62429 (18:6429)
 	ld b, $01
 .asm_62454
 	ld a, b
-	ld [hli], a ; OBJ_UNK_18
+	ld [hli], a ; OBJ_VAR_2
 	xor a
 	ld [hli], a ; OBJ_MOVEMENT_INDEX
 	inc l
@@ -1960,7 +1960,7 @@ ThrowObject_Left: ; 62429 (18:6429)
 	ld b, $01
 .asm_6246d
 	ld a, b
-	ld [hli], a ; OBJ_UNK_18
+	ld [hli], a ; OBJ_VAR_2
 	xor a
 	ld [hli], a ; OBJ_MOVEMENT_INDEX
 	inc l
@@ -2090,7 +2090,7 @@ ThrowObject_Right: ; 62522 (18:6522)
 	ld b, $01
 .asm_6254d
 	ld a, b
-	ld [hli], a ; OBJ_UNK_18
+	ld [hli], a ; OBJ_VAR_2
 	xor a
 	ld [hli], a ; OBJ_MOVEMENT_INDEX
 	inc l
@@ -2108,7 +2108,7 @@ ThrowObject_Right: ; 62522 (18:6522)
 	ld b, $01
 .asm_62566
 	ld a, b
-	ld [hli], a ; OBJ_UNK_18
+	ld [hli], a ; OBJ_VAR_2
 	xor a
 	ld [hli], a ; OBJ_MOVEMENT_INDEX
 	inc l
@@ -2546,12 +2546,12 @@ Func_627f0: ; 627f0 (18:67f0)
 ; 0x6283a
 
 Func_6283a:: ; 6283a (18:683a)
-	ld a, [wCurObjUnk18]
+	ld a, [wCurObjVar2]
 	ld b, a
 	jr Func_6284f
 
 Func_62840:: ; 62840 (18:6840)
-	ld a, [wCurObjUnk18]
+	ld a, [wCurObjVar2]
 	ld b, a
 	ld a, [wEffectivePowerUp]
 	cp GARLIC
@@ -2611,12 +2611,12 @@ Func_6284f: ; 6284f (18:684f)
 ; 0x62892
 
 Func_62892:: ; 62892 (18:6892)
-	ld a, [wCurObjUnk18]
+	ld a, [wCurObjVar2]
 	ld b, a
 	jr Func_628a7
 
 Func_62898:: ; 62898 (18:6898)
-	ld a, [wCurObjUnk18]
+	ld a, [wCurObjVar2]
 	ld b, a
 	ld a, [wEffectivePowerUp]
 	cp GARLIC
@@ -2788,7 +2788,7 @@ Func_62926:: ; 62926 (18:6926)
 	and $0f
 	cp $01
 	ld a, $02
-	ld [wCurObjUnk18], a
+	ld [wCurObjVar2], a
 	jp z, Func_62d57
 	jp Func_62e31
 ; 0x629a6
@@ -2914,7 +2914,7 @@ _ObjState_StandingFall:: ; 629d0 (18:69d0)
 	and $0f
 	cp $01
 	ld a, $02
-	ld [wCurObjUnk18], a
+	ld [wCurObjVar2], a
 	jp z, Func_62d57
 	jp Func_62e31
 ; 0x62a5b
@@ -2990,13 +2990,13 @@ _ObjState_Fall:: ; 62a5b (18:6a5b)
 	and $0f
 	cp $01
 	ld a, $02
-	ld [wCurObjUnk18], a
+	ld [wCurObjVar2], a
 	jp z, Func_62d57
 	jp Func_62e31
 ; 0x62ad0
 
 _ObjState_BumpRight:: ; 62ad0 (18:6ad0)
-	ld hl, wCurObjUnk18
+	ld hl, wCurObjVar2
 	ld a, [hl]
 	and a
 	jr nz, Func_62ae5
@@ -3093,7 +3093,7 @@ Func_62ae5:: ; 62ae5 (18:6ae5)
 	ld [wCurObjState], a
 
 .asm_62b7d
-	ld hl, wCurObjUnk18
+	ld hl, wCurObjVar2
 	ld a, [wCurObjInteractionType]
 	rla
 	ld a, [wGlobalCounter]
@@ -3128,7 +3128,7 @@ Func_62ae5:: ; 62ae5 (18:6ae5)
 ; 0x62bb9
 
 _ObjState_BumpLeft:: ; 62bb9 (18:6bb9)
-	ld hl, wCurObjUnk18
+	ld hl, wCurObjVar2
 	ld a, [hl]
 	and a
 	jr nz, Func_62bce
@@ -3222,7 +3222,7 @@ Func_62bce:: ; 62bce (18:6bce)
 	ld [wCurObjState], a
 
 .asm_62c63
-	ld hl, wCurObjUnk18
+	ld hl, wCurObjVar2
 	ld a, [wCurObjInteractionType]
 	rla
 	ld a, [wGlobalCounter]
@@ -3361,7 +3361,7 @@ Func_62d34: ; 62d34 (18:6d34)
 	and $0f
 	cp $01
 	jr z, .asm_62d55
-	ld l, OBJ_UNK_18
+	ld l, OBJ_VAR_2
 	cp $02
 	jr nz, .asm_62d50
 	dec a
@@ -3504,7 +3504,7 @@ Func_62e0f: ; 62e0f (18:6e0f)
 	and $0f
 	cp $02
 	jr z, .asm_62e2f
-	ld l, OBJ_UNK_18
+	ld l, OBJ_VAR_2
 	cp $01
 	jr nz, .asm_62e2a
 	ld [hl], a
@@ -3901,7 +3901,7 @@ Func_6305f:: ; 6305f (18:705f)
 	xor a
 	ld [hld], a ; OBJ_MOVEMENT_INDEX
 	ld a, $01
-	ld [hld], a ; OBJ_UNK_18
+	ld [hld], a ; OBJ_VAR_2
 	dec l
 	ld a, $04
 	ld [hli], a ; OBJ_STATE_DURATION
@@ -4122,7 +4122,7 @@ Func_6307b: ; 6307b (18:707b)
 	cp l
 	jr c, .done
 .asm_6317e
-	ld a, [wCurObjUnk1a]
+	ld a, [wCurObjSubState]
 	and $1f
 	cp $10
 	ret nc
@@ -4139,7 +4139,7 @@ Func_6307b: ; 6307b (18:707b)
 ; 0x631a1
 
 Func_631a1:: ; 631a1 (18:71a1)
-	ld hl, wCurObjUnk17
+	ld hl, wCurObjVar1
 	dec [hl]
 	ret nz
 	inc l
@@ -4153,13 +4153,13 @@ Func_631a1:: ; 631a1 (18:71a1)
 	ld l, e
 	ld a, [hli]
 .asm_631b1
-	ld [wCurObjUnk17], a
+	ld [wCurObjVar1], a
 	ld a, [hli]
 	ld c, a
 	ld a, [hli]
 	ld b, a
 	ld a, l
-	ld [wCurObjUnk18], a
+	ld [wCurObjVar2], a
 	ld a, h
 	ld [wCurObjMovementIndex], a
 	ld hl, wCurObjYPos

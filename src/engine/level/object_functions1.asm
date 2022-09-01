@@ -43,8 +43,8 @@ Func_42170: ; 42170 (10:6170)
 	ld [hld], a
 	ld a, $18
 	ld [hld], a
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
+	ld l, OBJ_SUBSTATE
+	res OBJSUBFLAG_UNK_5_F, [hl]
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $fd
 	ld [hld], a
@@ -63,7 +63,7 @@ Func_42170: ; 42170 (10:6170)
 	INCROM $42199, $42432
 
 Func_42432: ; 42432 (10:6432)
-	ld hl, wCurObjUnk1a
+	ld hl, wCurObjSubState
 	ld a, [hl]
 	and $f0
 	or $01
@@ -90,8 +90,8 @@ Func_42478: ; 42478 (10:6478)
 	ld [hld], a
 	ld a, $ea
 	ld [hld], a
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
+	ld l, OBJ_SUBSTATE
+	res OBJSUBFLAG_UNK_5_F, [hl]
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $fd
 	ld [hld], a
@@ -121,8 +121,8 @@ Func_424b1: ; 424b1 (10:64b1)
 	ld [hld], a
 	ld a, $ea
 	ld [hld], a
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
+	ld l, OBJ_SUBSTATE
+	res OBJSUBFLAG_UNK_5_F, [hl]
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $fd
 	ld [hld], a
@@ -150,7 +150,7 @@ Func_42535: ; 42535 (10:6535)
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
 	jp z, Func_42725
-	ld hl, wCurObjUnk1a
+	ld hl, wCurObjSubState
 	ld a, [hl]
 	and $f0
 	or $02
@@ -167,7 +167,7 @@ Func_42535: ; 42535 (10:6535)
 	INCROM $42554, $42559
 
 Func_42559: ; 42559 (10:6559)
-	ld hl, wCurObjUnk1a
+	ld hl, wCurObjSubState
 	ld a, [hl]
 	and $f0
 	or $03
@@ -238,8 +238,8 @@ Func_429c4: ; 429c4 (10:69c4)
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
+	ld l, OBJ_SUBSTATE
+	res OBJSUBFLAG_UNK_5_F, [hl]
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $03
 	ld [hld], a
@@ -267,9 +267,9 @@ Func_42b7d: ; 42b7d (10:6b7d)
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
-	set 7, [hl]
+	ld l, OBJ_SUBSTATE
+	res OBJSUBFLAG_UNK_5_F, [hl]
+	set OBJSUBFLAG_DIR_F, [hl]
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $04
 	ld [hld], a
@@ -286,8 +286,8 @@ Func_42ba8: ; 42ba8 (10:6ba8)
 	ld [hld], a
 	ld a, $bf
 	ld [hld], a
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
+	ld l, OBJ_SUBSTATE
+	res OBJSUBFLAG_UNK_5_F, [hl]
 	ld a, $14
 	ld [wCurObjStateDuration], a
 	ld l, OBJ_FLAGS
@@ -332,8 +332,8 @@ Func_43451: ; 43451 (10:7451)
 	call SetObjectFramesetPtr
 	ld a, $0a
 	ld [hli], a
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
+	ld l, OBJ_SUBSTATE
+	res OBJSUBFLAG_UNK_5_F, [hl]
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $06
 	ld [hld], a
@@ -356,8 +356,8 @@ Func_434ba: ; 434ba (10:74ba)
 	ld [hld], a
 	ld de, $4a78
 	call SetObjectFramesetPtr
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
+	ld l, OBJ_SUBSTATE
+	res OBJSUBFLAG_UNK_5_F, [hl]
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $06
 	ld [hld], a
@@ -376,8 +376,8 @@ Func_436ea: ; 436ea (10:76ea)
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set 3, [hl]
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
+	ld l, OBJ_SUBSTATE
+	res OBJSUBFLAG_UNK_5_F, [hl]
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $06
 	ld [hld], a
@@ -419,8 +419,8 @@ Func_437a8: ; 437a8 (10:77a8)
 	ld [hld], a
 	ld a, $d6
 	ld [hld], a
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
+	ld l, OBJ_SUBSTATE
+	res OBJSUBFLAG_UNK_5_F, [hl]
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $05
 	ld [hld], a
@@ -432,7 +432,7 @@ Func_437a8: ; 437a8 (10:77a8)
 	and a
 	ret z
 	ld a, $20
-	ld [wCurObjUnk18], a
+	ld [wCurObjVar2], a
 	jp Func_3076
 ; 0x437d6
 
@@ -447,8 +447,8 @@ Func_437d7: ; 437d7 (10:77d7)
 	ld [hld], a
 	ld a, $0e
 	ld [hld], a
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
+	ld l, OBJ_SUBSTATE
+	res OBJSUBFLAG_UNK_5_F, [hl]
 	ld a, [wCurObjUnk07]
 	cp $0a
 	jr nz, .asm_437f5

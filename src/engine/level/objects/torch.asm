@@ -5,7 +5,7 @@ FlameBlockTorchUpdate: ; 40b14 (10:4b14)
 	ret z
 	xor a
 	ld [hld], a
-	set 4, [hl] ; OBJ_UNK_1A
+	set OBJSUBFLAG_UNK_4_F, [hl] ; OBJ_SUBSTATE
 	play_sfx SFX_073
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.Func_40b52)
@@ -22,7 +22,7 @@ FlameBlockTorchUpdate: ; 40b14 (10:4b14)
 	xor a
 	ld [hli], a ; OBJ_STATE_DURATION
 	ld a, $02
-	ld [hl], a ; OBJ_UNK_17
+	ld [hl], a ; OBJ_VAR_1
 
 	ld hl, wNumLitTorches
 	inc [hl]
@@ -45,14 +45,14 @@ FlameBlockTorchUpdate: ; 40b14 (10:4b14)
 	ld l, OBJ_STATE_DURATION
 	ld [hli], a ; aka $100
 	ld a, $02
-	ld [hl], a ; OBJ_UNK_17
+	ld [hl], a ; OBJ_VAR_1
 	play_sfx SFX_073
 .asm_40b6f
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	ret nz
 	inc l
-	dec [hl] ; OBJ_UNK_17
+	dec [hl] ; OBJ_VAR_1
 	ret nz
 	ld l, OBJ_UNK_02
 	farcall Func_baee
@@ -97,8 +97,8 @@ TorchFunc: ; 40ba9 (10:4ba9)
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
-	ld l, OBJ_UNK_1A
-	res 5, [hl]
+	ld l, OBJ_SUBSTATE
+	res OBJSUBFLAG_UNK_5_F, [hl]
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, 6
 	ld [hld], a

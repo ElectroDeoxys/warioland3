@@ -87,7 +87,7 @@ CoinFunc: ; 63383 (18:7383)
 	rra
 	ret c
 .animate
-	ld hl, wCurObjUnk17
+	ld hl, wCurObjVar1
 	ld a, [hl]
 	cp 150
 	jr c, .not_slow
@@ -340,7 +340,7 @@ CoinFunc: ; 63383 (18:7383)
 	ld [hli], a
 	ldh a, [hYPosHi]
 	ld [hl], a
-	ld l, OBJ_UNK_18
+	ld l, OBJ_VAR_2
 	ld a, [hl]
 	and a
 	jr z, .asm_63690
@@ -450,7 +450,7 @@ CoinFunc: ; 63383 (18:7383)
 	ld [hli], a
 	ldh a, [hYPosHi]
 	ld [hl], a
-	ld l, OBJ_UNK_18
+	ld l, OBJ_VAR_2
 	ld a, [hl]
 	and a
 	jr z, .asm_63739
@@ -480,7 +480,7 @@ CoinFunc: ; 63383 (18:7383)
 	ret
 
 .State10:
-	ld hl, wCurObjUnk18
+	ld hl, wCurObjVar2
 	ld a, [hl]
 	and a
 	jr nz, .asm_6376c
@@ -556,7 +556,7 @@ CoinFunc: ; 63383 (18:7383)
 	ret
 
 .State11:
-	ld hl, wCurObjUnk18
+	ld hl, wCurObjVar2
 	ld a, [hl]
 	and a
 	jr nz, .asm_637f0

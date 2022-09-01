@@ -64,10 +64,10 @@ MACRO obj_struct
 \1FrameDuration::   db
 \1FramesetOffset::  db
 \1StateDuration::   db
-\1Unk17::           db
-\1Unk18::           db
+\1Var1::            db
+\1Var2::            db
 \1MovementIndex::   db
-\1Unk1a::           db
+\1SubState::        db
 ; bit 7: set if facing right, left otherwise
 \1State::           db
 \1Action::          db

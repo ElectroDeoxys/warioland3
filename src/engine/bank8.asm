@@ -62,11 +62,11 @@ Func_20000: ; 20000 (8:4000)
 	ld a, [hl] ; OBJ_SCREEN_X_POS
 	ld [wObjScreenXPos], a
 
-	ld e, OBJ_UNK_1A - OBJ_SCREEN_X_POS
+	ld e, OBJ_SUBSTATE - OBJ_SCREEN_X_POS
 	ld d, $00
 	add hl, de
-	ld a, [hl] ; OBJ_UNK_1A
-	bit 7, a
+	ld a, [hl] ; OBJ_SUBSTATE
+	bit OBJSUBFLAG_DIR_F, a
 	jr nz, .asm_20074
 	ld a, DIRECTION_LEFT
 	jr .asm_20076
