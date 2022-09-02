@@ -4,7 +4,7 @@ UnusedFlowerFunc: ; 40ca1 (10:4ca1)
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld l, OBJ_SUBSTATE
-	res OBJSUBFLAG_UNK_5_F, [hl]
+	res OBJSUBFLAG_UNINITIALISED_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.Grow)
 	ld [hld], a

@@ -11,17 +11,17 @@ GetCell:: ; bdb (0:bdb)
 	swap a
 	add b
 
-	ld b, $01
+	ld b, BANK("SRAM1")
 	add $a0
 	cp $c0
-	jr c, .asm_bfb
+	jr c, .got_sram_bank
 	inc b
 	sub $20
 	cp $c0
-	jr c, .asm_bfb
+	jr c, .got_sram_bank
 	inc b
 	sub $20
-.asm_bfb
+.got_sram_bank
 	ld [wYCell], a
 	ld a, b
 	ld [wFloorSRAMBank], a
@@ -61,7 +61,7 @@ Func_c19:: ; c19 (0:c19)
 	sla e
 	rl d
 	sla e
-	rl d
+	rl d ; *$40
 	ld a, d
 	and $03
 	ld d, a

@@ -7,7 +7,7 @@ WebberFunc: ; 40825 (10:4825)
 	ld a, LOW(.Update)
 	ld [hld], a
 	ld l, OBJ_SUBSTATE
-	res OBJSUBFLAG_UNK_5_F, [hl]
+	res OBJSUBFLAG_UNINITIALISED_F, [hl]
 
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, -2
@@ -119,7 +119,7 @@ WebberFunc: ; 40825 (10:4825)
 .set_move_to_start_pos
 	ld hl, wCurObjSubState
 	ld a, [hl]
-	and $70
+	and OBJSUBFLAGS_MASK ^ OBJSUBFLAG_DIR
 	or $3
 	ld [hld], a
 	ld a, 5
@@ -284,9 +284,9 @@ WebberFunc: ; 40825 (10:4825)
 
 .SteppedOn:
 	ld hl, wCurObjFlags
-	bit 5, [hl]
+	bit OBJFLAG_STEPPED_F, [hl]
 	jp z, .set_move_to_start_pos
-	res 5, [hl]
+	res OBJFLAG_STEPPED_F, [hl]
 	ret
 ; 0x409f1
 

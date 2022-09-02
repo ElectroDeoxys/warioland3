@@ -36,7 +36,7 @@ Func_d132: ; d132 (3:5132)
 	push af
 	ld a, $01
 	ldh [rSVBK], a
-	farcall Func_640e5
+	farcall SpawnObject
 	pop af
 	ldh [rSVBK], a
 	pop hl
@@ -96,7 +96,7 @@ Func_d19e: ; d19e (3:519e)
 	push af
 	ld a, $01
 	ldh [rSVBK], a
-	farcall Func_640e5
+	farcall SpawnObject
 	pop af
 	ldh [rSVBK], a
 	pop hl

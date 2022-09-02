@@ -8,9 +8,9 @@ FlameBlockTorchUpdate: ; 40b14 (10:4b14)
 	set OBJSUBFLAG_UNK_4_F, [hl] ; OBJ_SUBSTATE
 	play_sfx SFX_073
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_40b52)
+	ld a, HIGH(.Update)
 	ld [hld], a
-	ld a, LOW(.Func_40b52)
+	ld a, LOW(.Update)
 	ld [hld], a
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
@@ -32,7 +32,7 @@ FlameBlockTorchUpdate: ; 40b14 (10:4b14)
 	play_sfx SFX_0FA
 	ret
 
-.Func_40b52:
+.Update:
 	ld a, [wNumLitTorches]
 	cp NUM_FLAME_BLOCK_TORCHES
 	ret z
@@ -55,7 +55,7 @@ FlameBlockTorchUpdate: ; 40b14 (10:4b14)
 	dec [hl] ; OBJ_VAR_1
 	ret nz
 	ld l, OBJ_UNK_02
-	farcall Func_baee
+	farcall DespawnObject
 	ld hl, wNumLitTorches
 	dec [hl]
 	ret
@@ -98,7 +98,7 @@ TorchFunc: ; 40ba9 (10:4ba9)
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld l, OBJ_SUBSTATE
-	res OBJSUBFLAG_UNK_5_F, [hl]
+	res OBJSUBFLAG_UNINITIALISED_F, [hl]
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, 6
 	ld [hld], a

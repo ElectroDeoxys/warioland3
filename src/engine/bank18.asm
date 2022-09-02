@@ -174,7 +174,7 @@ Data_605e0: ; 605e0 (18:45e0)
 
 	INCROM $60600, $611cb
 
-Func_611cb: ; 611cb (18:51cb)
+UpdateObject_Temple: ; 611cb (18:51cb)
 	push hl
 	inc l
 	rla
@@ -197,7 +197,8 @@ ENDR
 	call hCallFunc
 
 	call UpdateObjectAnimation
-	call Func_6307b
+	call CheckObjectOnScreen
+
 	ld hl, wCurObjScreenYPos
 	ld a, [wSCY]
 	ld b, a
@@ -285,23 +286,23 @@ ENDR
 	ret
 ; 0x6130b
 
-Func_6130b: ; 6130b (18:530b)
+UpdateObjects_Temple: ; 6130b (18:530b)
 	call HandleGrabbedObjectCollisions
 
 	ld hl, wObj1Flags
 	ld a, [hl]
 	rra
-	call c, Func_611cb
+	call c, UpdateObject_Temple
 FOR n, 2, NUM_OBJECTS + 1
 	ld l, LOW(wObj{u:n}Flags)
 	ld a, [hl]
 	rra
-	call c, Func_611cb ; OBJFLAG_ACTIVE_F set
+	call c, UpdateObject_Temple ; OBJFLAG_ACTIVE_F set
 ENDR
 	ret
 ; 0x61348
 
-Func_61348: ; 61348 (18:5348)
+UpdateObjects: ; 61348 (18:5348)
 	ld a, [wPowerUpLevel]
 	ld e, a
 	ld a, [wTransformation]
@@ -314,8 +315,7 @@ Func_61348: ; 61348 (18:5348)
 
 	ld a, [wLevel]
 	cp THE_TEMPLE
-	jr z, Func_6130b
-
+	jr z, UpdateObjects_Temple
 	ld a, [wIsFloorTransition]
 	and a
 	jr nz, .floor_transition
@@ -324,12 +324,12 @@ Func_61348: ; 61348 (18:5348)
 	ld hl, wObj1Flags
 	ld a, [hl]
 	rra
-	call c, Func_613dc ; OBJFLAG_ACTIVE_F set
+	call c, UpdateObject ; OBJFLAG_ACTIVE_F set
 FOR n, 2, NUM_OBJECTS + 1
 	ld l, LOW(wObj{u:n}Flags)
 	ld a, [hl]
 	rra
-	call c, Func_613dc ; OBJFLAG_ACTIVE_F set
+	call c, UpdateObject ; OBJFLAG_ACTIVE_F set
 ENDR
 	ret
 
@@ -337,17 +337,17 @@ ENDR
 	ld hl, wObj1Flags
 	ld a, [hl]
 	rra
-	call c, Func_61513
+	call c, UpdateObjectDuringFloorTransition
 FOR n, 2, NUM_OBJECTS + 1
 	ld l, LOW(wObj{u:n}Flags)
 	ld a, [hl]
 	rra
-	call c, Func_61513 ; OBJFLAG_ACTIVE_F set
+	call c, UpdateObjectDuringFloorTransition ; OBJFLAG_ACTIVE_F set
 ENDR
 	ret
 ; 0x613dc
 
-Func_613dc: ; 613dc (18:53dc)
+UpdateObject: ; 613dc (18:53dc)
 	push hl
 	inc l
 	rla
@@ -374,7 +374,7 @@ ENDR
 	call hCallFunc
 
 	call UpdateObjectAnimation
-	call Func_6307b
+	call CheckObjectOnScreen
 
 	ld hl, wCurObjScreenYPos
 	ld a, [wSCY]
@@ -456,7 +456,7 @@ ENDR
 	ret
 ; 0x61513
 
-Func_61513: ; 61513 (18:5513)
+UpdateObjectDuringFloorTransition: ; 61513 (18:5513)
 	push hl
 	inc l
 	rla
@@ -468,10 +468,12 @@ ENDR
 	ld a, [hl]
 	ld [wCurObj + OBJ_STRUCT_LENGTH - 1], a
 
+	; only run update function
+	; on uninitialised objects
 	ld hl, wCurObjSubState
-	bit 5, [hl]
+	bit OBJSUBFLAG_UNINITIALISED_F, [hl]
 	jr z, .skip_update_function
-
+	; init object
 	ld a, [wCurObjUnk07]
 	swap a
 	and $0f
@@ -485,7 +487,7 @@ ENDR
 
 .skip_update_function
 	call UpdateObjectFrame
-	call Func_6307b
+	call CheckObjectOnScreen
 
 	ld hl, wCurObjScreenYPos
 	ld a, [wSCY]
@@ -566,14 +568,14 @@ ENDR
 	ret
 ; 0x6164e
 
-Func_6164e: ; 6164e (18:564e)
+DrawObjects_NoPriority: ; 6164e (18:564e)
 FOR n, 1, NUM_OBJECTS + 1
 	ld hl, wObj{u:n}Flags
 	ld a, [hl]
-	and OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN | OBJFLAG_INVISIBLE | OBJFLAG_VRAM1
-	cp OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN | OBJFLAG_VRAM1
+	and OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN | OBJFLAG_INVISIBLE | OBJFLAG_PRIORITY
+	cp OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN | OBJFLAG_PRIORITY
 	jr nz, :+
-	; if (OBJFLAG_ACTIVE && OBJFLAG_ON_SCREEN && !OBJFLAG_INVISIBLE && OBJFLAG_VRAM1)
+	; if (OBJFLAG_ACTIVE && OBJFLAG_ON_SCREEN && !OBJFLAG_INVISIBLE && OBJFLAG_PRIORITY)
 	ld e, LOW(wObj{u:n}ScreenYPos)
 	ld l, LOW(wObj{u:n}Unk07)
 	call UpdateObjSprite
@@ -582,14 +584,14 @@ ENDR
 	ret
 ; 0x616d7
 
-Func_616d7: ; 616d7 (18:56d7)
+DrawObjects_WithPriority: ; 616d7 (18:56d7)
 FOR n, 1, NUM_OBJECTS + 1
 	ld hl, wObj{u:n}Flags
 	ld a, [hl]
-	and OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN | OBJFLAG_INVISIBLE | OBJFLAG_VRAM1
+	and OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN | OBJFLAG_INVISIBLE | OBJFLAG_PRIORITY
 	cp OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN
 	jr nz, :+
-	; if (OBJFLAG_ACTIVE && OBJFLAG_ON_SCREEN && !OBJFLAG_INVISIBLE && !OBJFLAG_VRAM1)
+	; if (OBJFLAG_ACTIVE && OBJFLAG_ON_SCREEN && !OBJFLAG_INVISIBLE && !OBJFLAG_PRIORITY)
 	ld e, LOW(wObj{u:n}ScreenYPos)
 	ld l, LOW(wObj{u:n}Unk07)
 	call UpdateObjSprite
@@ -3910,7 +3912,7 @@ Func_6305f:: ; 6305f (18:705f)
 
 ; seems to be a function to load/unload objects
 ; that are inside and outside the screen
-Func_6307b: ; 6307b (18:707b)
+CheckObjectOnScreen: ; 6307b (18:707b)
 	ld hl, wCurObjYPos
 	ld a, [hli] ; y lo
 	ld c, a
@@ -3982,16 +3984,16 @@ Func_6307b: ; 6307b (18:707b)
 	ld e, a
 	jr nc, .no_overflow3
 	inc d
-	jr z, .asm_630f6
+	jr z, .on_screen
 .no_overflow3
 	ld a, d
 	cp h
-	jr c, .asm_63106
+	jr c, .outside_screen
 	jr nz, .asm_630da
 	ld a, e
 	cp l
-	jr c, .asm_63106
-	jr z, .asm_630f6
+	jr c, .outside_screen
+	jr z, .on_screen
 .asm_630da
 	ld a, l
 	add $a0
@@ -4006,16 +4008,16 @@ Func_6307b: ; 6307b (18:707b)
 	dec d
 	ld a, d
 	inc a
-	jr z, .asm_630f6
+	jr z, .on_screen
 .asm_630ec
 	ld a, d
 	cp h
-	jr c, .asm_630f6
-	jr nz, .asm_63106
+	jr c, .on_screen
+	jr nz, .outside_screen
 	ld a, e
 	cp l
-	jr nc, .asm_63106
-.asm_630f6
+	jr nc, .outside_screen
+.on_screen
 	ld hl, wCurObjFlags
 	set OBJFLAG_ON_SCREEN_F, [hl]
 	jr .asm_6310b
@@ -4025,7 +4027,7 @@ Func_6307b: ; 6307b (18:707b)
 	and $fe
 	cp OBJSTATE_48
 	jr z, .asm_6310b
-.asm_63106
+.outside_screen
 	ld hl, wCurObjFlags
 	res OBJFLAG_ON_SCREEN_F, [hl]
 .asm_6310b
@@ -4123,13 +4125,14 @@ Func_6307b: ; 6307b (18:707b)
 	jr c, .done
 .asm_6317e
 	ld a, [wCurObjSubState]
-	and $1f
-	cp $10
+	and $f | OBJSUBFLAG_UNK_4
+	cp $0 | OBJSUBFLAG_UNK_4
 	ret nc
+	; OBJSUBFLAG_UNK_4 is not set
 	ld hl, wCurObjUnk02
 	and a
 	jr z, .asm_6319c
-	farcall Func_baee
+	farcall DespawnObject
 	ret
 .asm_6319c
 	xor a

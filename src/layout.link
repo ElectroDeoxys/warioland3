@@ -41,14 +41,15 @@ ROMX $05
 	"Wario OAM 1"
 ROMX $06
 	"Bank 6"
+	"Wario States 2"
 ROMX $07
-	"Bank 7"
+	"Wario States 1"
 ROMX $08
 	"Bank 8"
 ROMX $09
 	"Wario Gfx 2"
 ROMX $0a
-	"Bank A"
+	"Wario States 3"
 ROMX $0b
 	"Wario Gfx 3"
 ROMX $0c
@@ -232,7 +233,7 @@ ROMX $79
 ROMX $7a
 	"Wario Gfx 4"
 ROMX $7b
-	"Bank 7B"
+	"Wario States 4"
 ROMX $7c
 	"Bank 7C"
 ROMX $7d

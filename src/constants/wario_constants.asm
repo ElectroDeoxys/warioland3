@@ -172,6 +172,7 @@ DEF THROW_CHARGE_FRAMES_HEAVY EQU $3c
 	const WST_UNUSED_2D                     ; $2d
 	const WST_UNUSED_2E                     ; $2e
 	const WST_UNUSED_2F                     ; $2f
+DEF WARIO_STATES_GROUP_1 EQU const_value
 	const WST_SLIPPING                      ; $30
 	const WST_CROUCH_SLIPPING               ; $31
 	const WST_DRAGGED_DOWN                  ; $32
@@ -220,6 +221,7 @@ DEF THROW_CHARGE_FRAMES_HEAVY EQU $3c
 	const WST_UNUSED_5D                     ; $5d
 	const WST_UNUSED_5E                     ; $5e
 	const WST_UNUSED_5F                     ; $5f
+DEF WARIO_STATES_GROUP_2 EQU const_value
 	const WST_ON_FIRE                       ; $60
 	const WST_ON_FIRE_AIRBORNE              ; $61
 	const WST_HOT                           ; $62
@@ -300,6 +302,7 @@ DEF THROW_CHARGE_FRAMES_HEAVY EQU $3c
 	const WST_UNUSED_AD                     ; $ad
 	const WST_UNUSED_AE                     ; $ae
 	const WST_UNUSED_AF                     ; $af
+DEF WARIO_STATES_GROUP_3 EQU const_value
 	const WST_ICE_SKATIN_START              ; $b0
 	const WST_ICE_SKATIN                    ; $b1
 	const WST_ICE_SKATIN_AIRBORNE           ; $b2

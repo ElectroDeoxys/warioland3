@@ -10,7 +10,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_SUBSTATE
-	res OBJSUBFLAG_UNK_5_F, [hl]
+	res OBJSUBFLAG_UNINITIALISED_F, [hl]
 
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, 5
@@ -195,7 +195,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 .switch_direction
 	ld hl, wCurObjSubState
 	ld a, [hl]
-	xor $80
+	xor OBJSUBFLAG_DIR
 	ld [hl], a
 	ret
 
@@ -396,7 +396,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	dec [hl]
 	ret nz
 	ld l, OBJ_UNK_02
-	farcall Func_baee
+	farcall DespawnObject
 	ret
 
 .Func_4a26d:
@@ -515,7 +515,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 ; change direction
 	ld hl, wCurObjSubState
 	ld a, [hl]
-	xor $80
+	xor OBJSUBFLAG_DIR
 	ld [hl], a
 	jr .State18 ; useless jump
 
@@ -532,7 +532,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	jp z, Func_3362
 	ld hl, wCurObjSubState
 	ld a, [hl]
-	xor $80
+	xor OBJSUBFLAG_DIR
 	ld [hl], a
 	jp .State19
 

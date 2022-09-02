@@ -1,4 +1,4 @@
-Func_20000: ; 20000 (8:4000)
+ProcessInteractions: ; 20000 (8:4000)
 	ld a, [wIsIntangible]
 	and a
 	ret nz ; quit if Wario is intangible
@@ -356,7 +356,7 @@ Func_2023b: ; 2023b (8:423b)
 	jp z, AttackObject
 	cp TOUCH_VANISH
 	jp z, Func_205e7
-	jp Func_20000.next_obj
+	jp ProcessInteractions.next_obj
 
 .asm_20257
 	ld a, [wAttackCounter]
@@ -837,7 +837,7 @@ Func_20670: ; 20670 (8:4670)
 	jp z, AttackObject
 	cp TOUCH_VANISH
 	jp z, Func_205e7
-	jp Func_20000.next_obj
+	jp ProcessInteractions.next_obj
 
 .asm_206a8
 	ld a, [wWarioScreenXPos]
@@ -1229,7 +1229,7 @@ Func_209ca: ; 209ca (8:49ca)
 .set_grab_state
 	farcall SetState_GrabIdling
 .done
-	jp Func_20000.next_obj
+	jp ProcessInteractions.next_obj
 ; 0x20a63
 
 Func_20a63: ; 20a63 (8:4a63)
@@ -1253,7 +1253,7 @@ Func_20a6f: ; 20a6f (8:4a6f)
 .asm_20a79
 	ld a, [wDirection]
 	and a
-	jp z, Func_20000.next_obj
+	jp z, ProcessInteractions.next_obj
 	ld a, INTERACTION_RIGHT
 	ld [wInteractionSide], a
 	farcall Func_197b1
@@ -1270,7 +1270,7 @@ Func_20a6f: ; 20a6f (8:4a6f)
 .asm_20aa5
 	ld a, [wDirection]
 	and a
-	jp nz, Func_20000.next_obj
+	jp nz, ProcessInteractions.next_obj
 	ld a, INTERACTION_LEFT
 	ld [wInteractionSide], a
 	farcall Func_19741
@@ -1297,7 +1297,7 @@ Func_20a6f: ; 20a6f (8:4a6f)
 	jr nz, .asm_20aef
 	ld a, [wAttackCounter]
 	and a
-	jp z, Func_20000.next_obj
+	jp z, ProcessInteractions.next_obj
 
 .asm_20aef
 	farcall DoJumpingBump
@@ -1360,7 +1360,7 @@ Func_20b6b: ; 20b6b (8:4b6b)
 	cp TOUCH_VANISH
 	jp z, Func_205e7
 	cp TOUCH_PASS_THROUGH
-	jp z, Func_20000.next_obj
+	jp z, ProcessInteractions.next_obj
 	jp .asm_20c41
 
 .check_water
@@ -1726,7 +1726,7 @@ ObjInteraction_MusicalCoin: ; 20e82 (8:4e82)
 	ld hl, wNumMusicalCoins
 	ld a, [hl]
 	cp NUM_LEVEL_MUSICAL_COINS
-	jp nc, Func_20000.next_obj
+	jp nc, ProcessInteractions.next_obj
 	inc [hl]
 	play_sfx SFX_MUSICAL_COIN
 	jp CollectMusicalCoin
@@ -3182,7 +3182,7 @@ Func_21c17: ; 21c17 (8:5c17)
 	call SetObjAction
 	ld a, [wTransformation]
 	and a
-	jp z, Func_20000.next_obj
+	jp z, ProcessInteractions.next_obj
 	jp RecoverFromTransformation
 ; 0x21c26
 
@@ -3416,7 +3416,7 @@ CollectMusicalCoin: ; 21ddb (8:5ddb)
 	ld [hl], a
 .no_cap
 	call Func_20a63
-	jp Func_20000.next_obj
+	jp ProcessInteractions.next_obj
 ; 0x21df8
 
 Func_21df8: ; 21df8 (8:5df8)

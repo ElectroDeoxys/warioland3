@@ -1198,7 +1198,7 @@ Func_1f0969:: ; 1f0969 (7c:4969)
 	push af
 	ld a, $01
 	ldh [rSVBK], a
-	farcall Func_6164e
+	farcall DrawObjects_NoPriority
 	pop af
 	ldh [rSVBK], a
 	call DrawWario
@@ -1206,7 +1206,7 @@ Func_1f0969:: ; 1f0969 (7c:4969)
 	push af
 	ld a, $01
 	ldh [rSVBK], a
-	farcall Func_616d7
+	farcall DrawObjects_WithPriority
 	pop af
 	ldh [rSVBK], a
 	ret

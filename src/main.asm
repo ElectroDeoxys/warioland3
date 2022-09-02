@@ -32,9 +32,14 @@ SECTION "Bank 6", ROMX
 INCLUDE "engine/bank6.asm"
 
 
-SECTION "Bank 7", ROMX
+SECTION "Wario States 2", ROMX
 
-INCLUDE "engine/bank7.asm"
+INCLUDE "engine/level/wario_states_2.asm"
+
+
+SECTION "Wario States 1", ROMX
+
+INCLUDE "engine/level/wario_states_1.asm"
 
 
 SECTION "Bank 8", ROMX
@@ -42,9 +47,9 @@ SECTION "Bank 8", ROMX
 INCLUDE "engine/bank8.asm"
 
 
-SECTION "Bank A", ROMX
+SECTION "Wario States 3", ROMX
 
-INCLUDE "engine/banka.asm"
+INCLUDE "engine/level/wario_states_3.asm"
 
 
 SECTION "Object Update Functions 1", ROMX
@@ -678,9 +683,9 @@ SECTION "Bank 78", ROMX
 INCLUDE "engine/bank78.asm"
 
 
-SECTION "Bank 7B", ROMX
+SECTION "Wario States 4", ROMX
 
-INCLUDE "engine/bank7b.asm"
+INCLUDE "engine/level/wario_states_4.asm"
 
 
 SECTION "Bank 7C", ROMX

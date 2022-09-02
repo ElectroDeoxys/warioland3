@@ -2,7 +2,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_SUBSTATE
-	res OBJSUBFLAG_UNK_5_F, [hl]
+	res OBJSUBFLAG_UNINITIALISED_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.Update)
 	ld [hld], a
@@ -140,12 +140,12 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 
 .State0b:
 	ld hl, wCurObjSubState
-	set 7, [hl]
+	set OBJSUBFLAG_DIR_F, [hl]
 	jp .asm_41044
 
 .State0c:
 	ld hl, wCurObjSubState
-	res 7, [hl]
+	res OBJSUBFLAG_DIR_F, [hl]
 	jp .asm_41044
 
 .Flatten:
@@ -745,7 +745,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	jp nz, Func_3353
 	ld hl, wCurObjSubState
 	ld a, [hl]
-	xor $80
+	xor OBJSUBFLAG_DIR
 	ld [hl], a
 	jr .State18 ; unnecessary jump
 .State18:
@@ -762,7 +762,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	jp z, Func_3362
 	ld hl, wCurObjSubState
 	ld a, [hl]
-	xor $80
+	xor OBJSUBFLAG_DIR
 	ld [hl], a
 	jp .State19
 

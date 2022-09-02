@@ -342,7 +342,7 @@ wObjPtr:: ; c1b6
 wc1b8:: ; c1b8
 	db
 
-; OBJ_INTERACTION_* constant for Func_20000
+; OBJ_INTERACTION_* constant for ProcessInteractions
 wObjInteractionType:: ; c1b9
 	db
 

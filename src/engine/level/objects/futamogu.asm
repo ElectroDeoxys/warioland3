@@ -9,7 +9,7 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	ld [hld], a
 
 	ld l, OBJ_SUBSTATE
-	res OBJSUBFLAG_UNK_5_F, [hl]
+	res OBJSUBFLAG_UNINITIALISED_F, [hl]
 
 	ld de, Frameset_68319
 	call SetObjectFramesetPtr

@@ -7,7 +7,7 @@ Func_4c860: ; 4c860 (13:4860)
 	dec [hl]
 	ret nz
 	ld l, OBJ_UNK_02
-	farcall Func_baee
+	farcall DespawnObject
 	ret
 ; 0x4c87c
 
@@ -64,7 +64,7 @@ ChestFunc: ; 4c8da (13:48da)
 	ld a, LOW(.Update)
 	ld [hld], a
 	ld l, OBJ_SUBSTATE
-	res OBJSUBFLAG_UNK_5_F, [hl]
+	res OBJSUBFLAG_UNINITIALISED_F, [hl]
 	set OBJSUBFLAG_UNK_4_F, [hl]
 	ld de, Frameset_68000
 	call SetObjectFramesetPtr
@@ -171,7 +171,7 @@ KeyFunc: ; 4c992 (13:4992)
 	ld a, LOW(.Update)
 	ld [hld], a
 	ld l, OBJ_SUBSTATE
-	res OBJSUBFLAG_UNK_5_F, [hl]
+	res OBJSUBFLAG_UNINITIALISED_F, [hl]
 	ld de, Frameset_6804f
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
@@ -204,7 +204,7 @@ MusicalCoinFunc: ; 4c9d4 (13:49d4)
 	ld a, LOW(.Update)
 	ld [hld], a
 	ld l, OBJ_SUBSTATE
-	res OBJSUBFLAG_UNK_5_F, [hl]
+	res OBJSUBFLAG_UNINITIALISED_F, [hl]
 	ld de, Frameset_68036
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT

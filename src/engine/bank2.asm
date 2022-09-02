@@ -3,13 +3,13 @@ _LevelStateTable: ; 8000 (2:4000)
 	jumptable
 
 	dw FastFadeToWhite
-	dw Func_8024
+	dw InitLevel
 	dw SlowFadeFromWhite
-	dw Func_80aa
+	dw UpdateLevel
 	dw DoorTransition
 	dw FastFadeToWhite
 	dw Func_846e
-	dw Func_861c
+	dw Func_861c ; SST_LEVEL_07
 	dw DebugReset
 	dw DebugReset
 	dw DebugReset
@@ -20,7 +20,7 @@ _LevelStateTable: ; 8000 (2:4000)
 	dw DebugReset
 ; 0x8024
 
-Func_8024: ; 8024 (2:4024)
+InitLevel: ; 8024 (2:4024)
 	call DisableLCD
 	call FillBGMap0_With7f
 	call ClearVirtualOAM
@@ -82,7 +82,7 @@ Func_8024: ; 8024 (2:4024)
 	ret
 ; 0x80aa
 
-Func_80aa: ; 80aa (2:40aa)
+UpdateLevel: ; 80aa (2:40aa)
 	ld a, TRUE
 	ld [wRoomAnimatedPalsEnabled], a
 
@@ -100,7 +100,7 @@ Func_80aa: ; 80aa (2:40aa)
 	jr nz, .skip_update_wario_state
 	ld a, TRUE
 	ld [wc0da], a
-	farcall Func_1c000
+	farcall UpdateWarioStates
 
 .skip_update_wario_state
 	ld a, [wCameraConfigFlags]
@@ -130,11 +130,11 @@ Func_80aa: ; 80aa (2:40aa)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	farcall Func_61348
+	farcall UpdateObjects
 	pop af
 	ldh [rSVBK], a
 
-	call Func_b8d3
+	call SetWarioScreenPos
 	ld a, [wLevel]
 	cp THE_TEMPLE
 	jr nz, .asm_814f
@@ -142,6 +142,7 @@ Func_80aa: ; 80aa (2:40aa)
 	cp $02
 	jr nz, .asm_814f
 	farcall SetState_FenceShakeSliding
+
 .asm_814f
 	ldh a, [rSVBK]
 	push af
@@ -149,44 +150,48 @@ Func_80aa: ; 80aa (2:40aa)
 	ldh [rSVBK], a
 	ld a, TRUE
 	ld [wc0da], a
-	farcall Func_20000
+	farcall ProcessInteractions
 	xor a ; FALSE
 	ld [wc0da], a
 	pop af
-
 	ldh [rSVBK], a
+
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	farcall Func_6164e
+	farcall DrawObjects_NoPriority
 	pop af
 	ldh [rSVBK], a
 
 	call DrawWario
+
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	farcall Func_616d7
+	farcall DrawObjects_WithPriority
 	pop af
-
 	ldh [rSVBK], a
+
 	call ClearUnusedVirtualOAM
+
 	ld a, [wFloorTransitionDir]
 	and FLOOR_TRANSITION_DOWN | FLOOR_TRANSITION_UP
-	jr z, .asm_8215
+	jr z, .no_floor_transition
 	ld a, [wIsDMATransferPending]
 	and a
-	jr nz, .asm_8215
+	jr nz, .no_floor_transition
 	xor a
 	ld [wc0c2], a
 	ld a, [wWarioScreenYPos]
 	ld [wca5e], a
+
 	ld a, [wFloorTransitionDir]
 	bit FLOOR_TRANSITION_UP_F, a
-	jr nz, .asm_81e4
-	ld b, $04
+	jr nz, .transition_up
+; transition down
+	ld b, 4
 	ld a, [wc0c2]
 	sub b
 	ld [wc0c2], a
@@ -199,25 +204,26 @@ Func_80aa: ; 80aa (2:40aa)
 	xor a ; FALSE
 	ld [wIsFloorTransition], a
 	jr .asm_8209
-.asm_81e4
-	ld b, $04
+.transition_up
+	ld b, 4
 	ld a, [wc0c2]
 	add b
 	ld [wc0c2], a
 	ld a, [wFloorTransitionTimer]
 	sub b
 	ld [wFloorTransitionTimer], a
-	jr z, .asm_8200
+	jr z, .end_up_transition
 	ld a, [wc0bd]
 	dec a
 	jr nz, .asm_8209
 	xor a
 	ld [wFloorTransitionTimer], a
-.asm_8200
+.end_up_transition
 	ld hl, wFloorTransitionDir
 	res FLOOR_TRANSITION_UP_F, [hl]
 	xor a ; FALSE
 	ld [wIsFloorTransition], a
+
 .asm_8209
 	xor a
 	ld [wc0be], a
@@ -225,7 +231,7 @@ Func_80aa: ; 80aa (2:40aa)
 	call Func_b915
 	jr .asm_8229
 
-.asm_8215
+.no_floor_transition
 	ld a, [wCameraConfigFlags]
 	cp HIDDEN_FIGURE_CAMCONFIG
 	jr z, .asm_8227
@@ -235,7 +241,7 @@ Func_80aa: ; 80aa (2:40aa)
 	call Func_b9a6
 	jr .asm_8229
 .asm_8227
-	jr .asm_8247
+	jr .check_end_screen
 
 .asm_8229
 	ld a, [wSRAMBank]
@@ -250,14 +256,14 @@ Func_80aa: ; 80aa (2:40aa)
 	pop af
 	sramswitch
 
-.asm_8247
+.check_end_screen
 	ld a, [wState]
 	cp ST_LEVEL
 	ret nz
 	ld hl, wLevelEndScreen
 	ld a, [hl]
 	and a
-	jr z, .asm_82c6
+	jr z, .no_end_screen
 	bit 7, a
 	ret nz
 
@@ -321,17 +327,17 @@ Func_80aa: ; 80aa (2:40aa)
 	ld [wSubState], a
 	ret
 
-.asm_82c6
+.no_end_screen
 	ld a, [wceda]
 	and a
-	jr z, .asm_82d8
+	jr z, .tick_time
 	ld a, [wSubState]
 	ld [wPendingSubState], a
-	ld a, $07
+	ld a, SST_LEVEL_07
 	ld [wSubState], a
 	ret
 
-.asm_82d8
+.tick_time
 	call TickLevelTime
 
 	ld a, [wFloorTransitionDir]
@@ -375,7 +381,7 @@ Func_80aa: ; 80aa (2:40aa)
 .free_camera
 	ld a, TRUE
 	ld [wc0da], a
-	farcall Func_1c000
+	farcall UpdateWarioStates
 
 	ld a, [wcac4 + 1]
 	ld [wSCY], a
@@ -388,14 +394,14 @@ Func_80aa: ; 80aa (2:40aa)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	farcall Func_61348
+	farcall UpdateObjects
 	pop af
 	ldh [rSVBK], a
 
-	call Func_b8d3
+	call SetWarioScreenPos
 	ld a, TRUE
 	ld [wc0da], a
-	farcall Func_20000
+	farcall ProcessInteractions
 
 	xor a ; FALSE
 	ld [wc0da], a
@@ -403,16 +409,17 @@ Func_80aa: ; 80aa (2:40aa)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	farcall Func_6164e
+	farcall DrawObjects_NoPriority
 	pop af
 	ldh [rSVBK], a
 
 	call DrawWario
+
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	farcall Func_616d7
+	farcall DrawObjects_WithPriority
 	pop af
 	ldh [rSVBK], a
 
@@ -427,7 +434,7 @@ Func_80aa: ; 80aa (2:40aa)
 .yscroll_camera
 	ld a, TRUE
 	ld [wc0da], a
-	farcall Func_1c000
+	farcall UpdateWarioStates
 
 	ld a, [wcac4 + 1]
 	ld [wSCY], a
@@ -440,14 +447,14 @@ Func_80aa: ; 80aa (2:40aa)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	farcall Func_61348
+	farcall UpdateObjects
 	pop af
 	ldh [rSVBK], a
 
-	call Func_b8d3
+	call SetWarioScreenPos
 	ld a, TRUE
 	ld [wc0da], a
-	farcall Func_20000
+	farcall ProcessInteractions
 
 	xor a ; FALSE
 	ld [wc0da], a
@@ -455,16 +462,17 @@ Func_80aa: ; 80aa (2:40aa)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	farcall Func_6164e
+	farcall DrawObjects_NoPriority
 	pop af
 	ldh [rSVBK], a
 
 	call DrawWario
+
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	farcall Func_616d7
+	farcall DrawObjects_WithPriority
 	pop af
 	ldh [rSVBK], a
 
@@ -502,7 +510,7 @@ Func_846e: ; 846e (2:446e)
 
 .asm_849d
 	call DisableLCD
-	farcall Func_64187
+	farcall DespawnAllObjects
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
@@ -585,7 +593,7 @@ Func_846e: ; 846e (2:446e)
 	call Func_896f
 	pop af
 	sramswitch
-	call Func_b8d3
+	call SetWarioScreenPos
 
 	ld a, [wWarioState]
 	cp WST_ENTERING_DOOR
@@ -606,15 +614,15 @@ Func_846e: ; 846e (2:446e)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	farcall Func_61348
-	farcall Func_61348
+	farcall UpdateObjects
+	farcall UpdateObjects
 	pop af
 	ldh [rSVBK], a
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	farcall Func_6164e
+	farcall DrawObjects_NoPriority
 	pop af
 	ldh [rSVBK], a
 	call DrawWario
@@ -622,7 +630,7 @@ Func_846e: ; 846e (2:446e)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	farcall Func_616d7
+	farcall DrawObjects_WithPriority
 	pop af
 	ldh [rSVBK], a
 	xor a
@@ -641,7 +649,7 @@ Func_861c: ; 861c (2:461c)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	farcall Func_6164e
+	farcall DrawObjects_NoPriority
 	pop af
 	ldh [rSVBK], a
 	call DrawWario
@@ -649,7 +657,7 @@ Func_861c: ; 861c (2:461c)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	farcall Func_616d7
+	farcall DrawObjects_WithPriority
 	pop af
 	ldh [rSVBK], a
 	call ClearUnusedVirtualOAM
@@ -922,7 +930,7 @@ Func_8747: ; 8747 (2:4747)
 	ldh [rSCX], a
 
 .not_the_temple
-	call Func_b8d3
+	call SetWarioScreenPos
 	xor a ; FALSE
 	ld [wc0da], a
 
@@ -936,8 +944,8 @@ Func_8747: ; 8747 (2:4747)
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
 
-	farcall Func_61348
-	farcall Func_61348
+	farcall UpdateObjects
+	farcall UpdateObjects
 
 	pop af
 	ldh [rSVBK], a
@@ -950,7 +958,7 @@ Func_8747: ; 8747 (2:4747)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	farcall Func_61348
+	farcall UpdateObjects
 	pop af
 	ldh [rSVBK], a
 
@@ -962,7 +970,7 @@ Func_8747: ; 8747 (2:4747)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	farcall Func_6164e
+	farcall DrawObjects_NoPriority
 	pop af
 	ldh [rSVBK], a
 
@@ -971,7 +979,7 @@ Func_8747: ; 8747 (2:4747)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	farcall Func_616d7
+	farcall DrawObjects_WithPriority
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -1099,7 +1107,7 @@ Func_89e2: ; 89e2 (2:49e2)
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	farcall Func_640e5
+	farcall SpawnObject
 	pop af
 	ldh [rSVBK], a
 	pop hl
@@ -8426,15 +8434,15 @@ Func_b850: ; b850 (2:7850)
 	ret
 ; 0xb8d3
 
-Func_b8d3: ; b8d3 (2:78d3)
+SetWarioScreenPos: ; b8d3 (2:78d3)
 	ld a, [wCameraConfigFlags]
 	cp HIDDEN_FIGURE_CAMCONFIG
-	jr z, .asm_b8f5
+	jr z, .hidden_figure_camconfig
 	ld a, [wSCY]
 	ld b, a
 	ld a, [wYPosLo]
 	add $10
-	sub b
+	sub b ; wYPosLo + $10 - wSCY
 	ld [wWarioScreenYPos], a
 	ld a, [wSCX]
 	ld b, a
@@ -8444,7 +8452,7 @@ Func_b8d3: ; b8d3 (2:78d3)
 	ld [wWarioScreenXPos], a
 	ret
 
-.asm_b8f5
+.hidden_figure_camconfig
 	ld a, [wSCYShake]
 	ld c, a
 	ld a, [wc08a]
@@ -8654,7 +8662,8 @@ Func_b9a6: ; b9a6 (2:79a6)
 
 	INCROM $ba42, $baee
 
-Func_baee: ; baee (2:7aee)
+; hl = obj unk02
+DespawnObject: ; baee (2:7aee)
 	ldh a, [rSVBK]
 	push af
 	ld a, $01
@@ -8664,7 +8673,7 @@ Func_baee: ; baee (2:7aee)
 	ld a, BANK("SRAM1")
 	sramswitch
 	ld c, $01
-	ld a, [hld]
+	ld a, [hld] ; OBJ_UNK_02
 	cp $c0
 	jr c, .asm_bb12
 	inc c
@@ -8675,7 +8684,7 @@ Func_baee: ; baee (2:7aee)
 	sub $20
 .asm_bb12
 	ld d, a
-	ld a, [hld]
+	ld a, [hld] ; OBJ_UNK_01
 	ld e, a
 	xor a
 	ld [hl], a

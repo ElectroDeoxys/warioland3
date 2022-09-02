@@ -17,7 +17,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld a, LOW(.Update)
 	ld [hld], a
 	ld l, OBJ_SUBSTATE
-	res OBJSUBFLAG_UNK_5_F, [hl]
+	res OBJSUBFLAG_UNINITIALISED_F, [hl]
 	ld a, [wca3b]
 	rra
 	jp c, .SleepStart ; night
@@ -185,10 +185,10 @@ SpearheadFunc: ; 40040 (10:4040)
 	cp b
 	jr c, .on_left1
 ; on right
-	set 7, [hl]
+	set OBJSUBFLAG_DIR_F, [hl]
 	jr .asm_40199
 .on_left1
-	res 7, [hl]
+	res OBJSUBFLAG_DIR_F, [hl]
 .asm_40199
 	ld c, $2a
 	ld a, [wWarioScreenYPos]
@@ -1002,7 +1002,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	jp nz, Func_3353
 	ld hl, wCurObjSubState
 	ld a, [hl]
-	xor $80 ; switch direction
+	xor OBJSUBFLAG_DIR
 	ld [hl], a
 	jr .State18 ; unnecessary jump
 
@@ -1034,7 +1034,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	jp z, Func_3362
 	ld hl, wCurObjSubState
 	ld a, [hl]
-	xor $80 ; switch direction
+	xor OBJSUBFLAG_DIR
 	ld [hl], a
 	jp .State19
 
