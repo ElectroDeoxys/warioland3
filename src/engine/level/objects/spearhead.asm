@@ -185,10 +185,10 @@ SpearheadFunc: ; 40040 (10:4040)
 	cp b
 	jr c, .on_left1
 ; on right
-	set OBJSUBFLAG_DIR_F, [hl]
+	set OBJSUBFLAG_HDIR_F, [hl]
 	jr .asm_40199
 .on_left1
-	res OBJSUBFLAG_DIR_F, [hl]
+	res OBJSUBFLAG_HDIR_F, [hl]
 .asm_40199
 	ld c, $2a
 	ld a, [wWarioScreenYPos]
@@ -295,10 +295,10 @@ SpearheadFunc: ; 40040 (10:4040)
 	cp b
 	jr c, .on_left2
 ; on right
-	res OBJSUBFLAG_DIR_F, [hl] ; OBJ_SUBSTATE
+	res OBJSUBFLAG_HDIR_F, [hl] ; OBJ_SUBSTATE
 	dec l
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, 6
@@ -310,10 +310,10 @@ SpearheadFunc: ; 40040 (10:4040)
 	jp SetObjectFramesetPtr
 
 .on_left2
-	set OBJSUBFLAG_DIR_F, [hl] ; OBJ_SUBSTATE
+	set OBJSUBFLAG_HDIR_F, [hl] ; OBJ_SUBSTATE
 	dec l
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, 9
@@ -332,13 +332,13 @@ SpearheadFunc: ; 40040 (10:4040)
 	rlca
 	jr c, .asm_40270
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld de, Frameset_681d2
 	call SetObjectFramesetPtr
 	ret
 .asm_40270
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld de, Frameset_681db
 	call SetObjectFramesetPtr
 	ret
@@ -586,7 +586,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	call SetObjectFramesetPtr
 
 	ld a, 12
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld a, $02
 	ld [wCurObjVar2], a
 	ld l, OBJ_COLLBOX_RIGHT
@@ -692,7 +692,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld a, $02
 	ld [hli], a ; OBJ_VAR_2
 	xor a
-	ld [hli], a ; OBJ_MOVEMENT_INDEX
+	ld [hli], a ; OBJ_VAR_3
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, 5
 	ld [hld], a
@@ -733,7 +733,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld [hld], a
 	dec l
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld a, 7
 	ld [wCurObjStateDuration], a
 .State40:
@@ -766,7 +766,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld [hl], a ; OBJ_VAR_1
 	ret
 
-.TurnAround: ; 4050a (10:450a)
+.TurnAround:
 	ld a, [wGroundShakeCounter]
 	cp $10
 	jr c, .no_shake5
@@ -815,13 +815,13 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld hl, wCurObjState
 	ld a, OBJSTATE_LAND
 	ld [hld], a
-	set OBJSUBFLAG_DIR_F, [hl] ; OBJ_SUBSTATE
+	set OBJSUBFLAG_HDIR_F, [hl] ; OBJ_SUBSTATE
 	ret
 .asm_40562
 	ld hl, wCurObjState
 	ld a, OBJSTATE_LAND
 	ld [hld], a
-	res OBJSUBFLAG_DIR_F, [hl] ; OBJ_SUBSTATE
+	res OBJSUBFLAG_HDIR_F, [hl] ; OBJ_SUBSTATE
 	ret
 
 .WobbleLeftStart:
@@ -854,7 +854,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld a, $02
 	ld [hli], a ; OBJ_VAR_2
 	xor a
-	ld [hli], a ; OBJ_MOVEMENT_INDEX
+	ld [hli], a ; OBJ_VAR_3
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, 5
 	ld [hld], a
@@ -941,9 +941,9 @@ SpearheadFunc: ; 40040 (10:4040)
 	and OBJSUBFLAGS_MASK
 	ld [hld], a
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld [hl], b ; OBJ_VAR_2
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld de, Frameset_68277
 	jp SetObjectFramesetPtr
@@ -954,7 +954,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld [hld], a
 	dec l
 	ld a, HIGH(Data_601c0)
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld a, LOW(Data_601c0)
 	ld [hld], a ; OBJ_VAR_2
 	ld a, $01
@@ -1002,7 +1002,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	jp nz, Func_3353
 	ld hl, wCurObjSubState
 	ld a, [hl]
-	xor OBJSUBFLAG_DIR
+	xor OBJSUBFLAG_HDIR
 	ld [hl], a
 	jr .State18 ; unnecessary jump
 
@@ -1034,7 +1034,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	jp z, Func_3362
 	ld hl, wCurObjSubState
 	ld a, [hl]
-	xor OBJSUBFLAG_DIR
+	xor OBJSUBFLAG_HDIR
 	ld [hl], a
 	jp .State19
 
@@ -1046,7 +1046,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld [hld], a ; OBJ_STATE
 	dec l
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
 	and HEAVY_OBJ

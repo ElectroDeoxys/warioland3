@@ -643,8 +643,9 @@ Func_846e: ; 846e (2:446e)
 ; 0x861c
 
 Func_861c: ; 861c (2:461c)
-	call Func_867f
+	call .Func_867f
 	farcall UpdateParticles
+
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
@@ -652,7 +653,9 @@ Func_861c: ; 861c (2:461c)
 	farcall DrawObjects_NoPriority
 	pop af
 	ldh [rSVBK], a
+
 	call DrawWario
+
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
@@ -660,7 +663,9 @@ Func_861c: ; 861c (2:461c)
 	farcall DrawObjects_WithPriority
 	pop af
 	ldh [rSVBK], a
+
 	call ClearUnusedVirtualOAM
+
 	ld a, [wSRAMBank]
 	push af
 	ld a, BANK("SRAM1")
@@ -671,16 +676,15 @@ Func_861c: ; 861c (2:461c)
 	pop af
 	sramswitch
 	ret
-; 0x867f
 
-Func_867f: ; 867f (2:467f)
+.Func_867f:
 	ld a, [wceda]
 	and $0f
 	add $10
 	ld [wceda], a
 	and $08
 	ld [wcede], a
-.asm_868e
+.loop
 	ld a, [wceda]
 	and $07
 	dec a
@@ -758,7 +762,7 @@ Func_867f: ; 867f (2:467f)
 	jp .asm_8739 ; can be jr
 .asm_8733
 	call Func_bb85
-	jp .asm_868e
+	jp .loop
 
 .asm_8739
 	xor a
@@ -8660,7 +8664,97 @@ Func_b9a6: ; b9a6 (2:79a6)
 	jp .asm_ba00
 ; 0xba42
 
-	INCROM $ba42, $baee
+Func_ba42: ; ba42 (2:7a42)
+	ldh a, [rSVBK]
+	push af
+	ld a, $01
+	ldh [rSVBK], a
+	ld a, [wSRAMBank]
+	push af
+	ld a, $01
+	sramswitch
+	push de
+	push hl
+	ld c, $01
+	ld a, [hld]
+	cp $c0
+	jr c, .asm_ba68
+	inc c
+	sub $20
+	cp $c0
+	jr c, .asm_ba68
+	inc c
+	sub $20
+.asm_ba68
+	ld l, [hl]
+	ld h, a
+	ld a, c
+	ld [wFloorSRAMBank], a
+	call Func_d8c
+	ld a, [wccec]
+	sramswitch
+	bit 0, b
+	jr z, .asm_ba85
+	swap e
+	ld a, [hl]
+	and $0f
+	jr .asm_ba88
+.asm_ba85
+	ld a, [hl]
+	and $f0
+.asm_ba88
+	or e
+	ld [hl], a
+	pop hl
+
+	ldh a, [rSVBK]
+	push af
+	ld a, $01
+	ldh [rSVBK], a
+	ld a, [wSRAMBank]
+	push af
+	ld a, $01
+	sramswitch
+	ld c, $01
+	ld a, [hld]
+	cp $c0
+	jr c, .asm_baaf
+	inc c
+	sub $20
+	cp $c0
+	jr c, .asm_baaf
+	inc c
+	sub $20
+.asm_baaf
+	ld d, a
+	ld a, [hld]
+	ld e, a
+	ld a, c
+	sramswitch
+	ld a, [de]
+	or $80
+	ld [de], a
+	pop af
+	sramswitch
+	pop af
+	ldh [rSVBK], a
+	ld a, c
+	ld [wFloorSRAMBank], a
+	ld h, d
+	ld l, e
+	call Func_d3e
+	pop de
+
+	ld c, e
+	ld d, h
+	ld e, l
+	farcall SpawnObject
+	pop af
+	sramswitch
+	pop af
+	ldh [rSVBK], a
+	ret
+; 0xbaee
 
 ; hl = obj unk02
 DespawnObject: ; baee (2:7aee)

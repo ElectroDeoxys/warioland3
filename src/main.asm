@@ -52,34 +52,127 @@ SECTION "Wario States 3", ROMX
 INCLUDE "engine/level/wario_states_3.asm"
 
 
-SECTION "Object Update Functions 1", ROMX
+SECTION "Object Functions 1", ROMX
 
-INCLUDE "engine/level/object_functions1.asm"
+; sequence of y-offsets used in Func_42725
+Data_40000: ; 40000 (10:4000)
+	db  0,  0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1
+	db  0,  0,  0,  0,  0,  0, -1,  0, -1,  0, -1,  0, -1,  0, -1,  0
+	db  0,  0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1
+	db  0,  0,  0,  0,  0,  0, -1,  0, -1,  0, -1,  0, -1,  0, -1, $80
+
+INCLUDE "engine/level/objects/spearhead.asm"
+INCLUDE "engine/level/objects/futamogu.asm"
+INCLUDE "engine/level/objects/webber.asm"
+INCLUDE "engine/level/objects/torch.asm"
+INCLUDE "engine/level/objects/unused_flower.asm"
+INCLUDE "engine/level/objects/count_richtertoffen.asm"
+INCLUDE "engine/level/objects/para_goom.asm"
+INCLUDE "engine/level/objects/doughnuteer.asm"
+INCLUDE "engine/level/objects/omodonmeka.asm"
+INCLUDE "engine/level/objects/kushimushi.asm"
+INCLUDE "engine/level/objects/big_leaf.asm"
+INCLUDE "engine/level/objects/silky.asm"
+INCLUDE "engine/level/objects/bird.asm"
+INCLUDE "engine/level/objects/barrel.asm"
+INCLUDE "engine/level/objects/small_leaf.asm"
+INCLUDE "engine/level/objects/clear_gate.asm"
+INCLUDE "engine/level/objects/nobiiru.asm"
 
 
-SECTION "Object Update Functions 2", ROMX
+SECTION "Object Functions 2", ROMX
 
-INCLUDE "engine/level/object_functions2.asm"
+Data_44000:
+	db  0,  0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1
+	db  0,  0,  0,  0,  0,  0, -1,  0, -1,  0, -1,  0, -1,  0, -1
+	db $80
+
+Data_44020:
+	db  0,  0,  0,  0,  0,  0,  0, -1,  0,  0, -1,  0, -1,  0, -1, -1
+	db -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1
+	db -1, -1, -1, -1,  0, -1,  0, -1,  0, -1,  0,  0, -1,  0,  0
+	db $80
+
+Data_44050:
+	db 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 1, 1
+	db 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+	db 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0
+	db $80
+
+INCLUDE "engine/level/objects/prince_froggy.asm"
+INCLUDE "engine/level/objects/hammer_bot.asm"
+INCLUDE "engine/level/objects/teruteru.asm"
+INCLUDE "engine/level/objects/mad_scienstein.asm"
+INCLUDE "engine/level/objects/seeing_eye_door.asm"
+INCLUDE "engine/level/objects/pneumo.asm"
+INCLUDE "engine/level/objects/electric_lamp.asm"
+INCLUDE "engine/level/objects/zombie.asm"
+INCLUDE "engine/level/objects/spear_bot.asm"
+INCLUDE "engine/level/objects/beam_bot.asm"
+INCLUDE "engine/level/objects/fire_bot.asm"
+INCLUDE "engine/level/objects/sun_moon.asm"
+INCLUDE "engine/level/objects/kobatto.asm"
+INCLUDE "engine/level/objects/hand.asm"
+INCLUDE "engine/level/objects/appleby.asm"
+INCLUDE "engine/level/objects/bubble.asm"
 
 
-SECTION "Object Update Functions 3", ROMX
+SECTION "Object Functions 3", ROMX
 
-INCLUDE "engine/level/object_functions3.asm"
+INCLUDE "engine/level/objects/brrr_bear.asm"
+INCLUDE "engine/level/objects/cart.asm"
+INCLUDE "engine/level/objects/mizuuo.asm"
+INCLUDE "engine/level/objects/robo_mouse.asm"
+INCLUDE "engine/level/objects/togeba.asm"
+INCLUDE "engine/level/objects/haridama.asm"
+INCLUDE "engine/level/objects/owl.asm"
+INCLUDE "engine/level/objects/zip_line.asm"
+INCLUDE "engine/level/objects/falling_snow.asm"
+INCLUDE "engine/level/objects/flame_block.asm"
+INCLUDE "engine/level/objects/stove.asm"
+INCLUDE "engine/level/objects/snake.asm"
+INCLUDE "engine/level/objects/pillar_platform.asm"
+INCLUDE "engine/level/objects/water_drop.asm"
+INCLUDE "engine/level/objects/tadpole.asm"
+INCLUDE "engine/level/objects/hebarii.asm"
+INCLUDE "engine/level/objects/water_spark.asm"
+INCLUDE "engine/level/objects/octohon.asm"
+INCLUDE "engine/level/objects/spark.asm"
+INCLUDE "engine/level/objects/rock.asm"
+INCLUDE "engine/level/objects/fire.asm"
 
 
-SECTION "Object Update Functions 4", ROMX
+SECTION "Object Functions 4", ROMX
 
-INCLUDE "engine/level/object_functions4.asm"
+	INCROM $4c000, $4c860
+
+INCLUDE "engine/level/objects/stars.asm"
+INCLUDE "engine/level/objects/chests.asm"
+INCLUDE "engine/level/objects/key.asm"
+INCLUDE "engine/level/objects/musical_coin.asm"
+INCLUDE "engine/level/objects/muddee_stinger.asm"
+INCLUDE "engine/level/objects/wall_crack.asm"
+INCLUDE "engine/level/objects/hidden_figure.asm"
 
 
-SECTION "Bank 14", ROMX
+SECTION "Object Functions 5", ROMX
 
-	INCROM $50000, $52665
+INCLUDE "engine/level/objects/anonster.asm"
+INCLUDE "engine/level/objects/doll_boy.asm"
+INCLUDE "engine/level/objects/yellow_belly.asm"
+INCLUDE "engine/level/objects/pesce.asm"
 
 
-SECTION "Bank 15", ROMX
+SECTION "Object Functions 6", ROMX
 
-	INCROM $54000, $57300
+	INCROM $54000, $54020
+
+INCLUDE "engine/level/objects/wormwould.asm"
+INCLUDE "engine/level/objects/scowler.asm"
+INCLUDE "engine/level/objects/jamano.asm"
+INCLUDE "engine/level/objects/muddee.asm"
+INCLUDE "engine/level/objects/wolfenboss.asm"
+INCLUDE "engine/level/objects/shoot.asm"
 
 
 SECTION "Bank 18", ROMX
@@ -661,16 +754,6 @@ INCLUDE "engine/credits.asm"
 INCLUDE "data/credits.asm"
 
 CreditsPalsMap: INCBIN "gfx/pals/credits_pals_map.bin"
-
-
-SECTION "Bank 64", ROMX
-
-	INCROM $190000, $193134
-
-
-SECTION "Bank 65", ROMX
-
-	INCROM $194000, $196fa6
 
 
 SECTION "Bank 76", ROMX

@@ -66,7 +66,7 @@ MACRO obj_struct
 \1StateDuration::   db
 \1Var1::            db
 \1Var2::            db
-\1MovementIndex::   db
+\1Var3::            db
 \1SubState::        db
 ; bit 7: set if facing right, left otherwise
 \1State::           db

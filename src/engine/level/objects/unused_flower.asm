@@ -19,7 +19,7 @@ UnusedFlowerFunc: ; 40ca1 (10:4ca1)
 	ret
 
 .Grow:
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld a, 2
 	ld [wCurObjFrameDuration], a
@@ -43,7 +43,7 @@ UnusedFlowerFunc: ; 40ca1 (10:4ca1)
 	ret
 
 .Idle:
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -71,7 +71,7 @@ UnusedFlowerFunc: ; 40ca1 (10:4ca1)
 	ret
 
 .PreparingAttack:
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -100,7 +100,7 @@ UnusedFlowerFunc: ; 40ca1 (10:4ca1)
 	jp CreateObjectAtRelativePos
 
 .Attack:
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -179,7 +179,7 @@ UnusedFlowerProjectileCommonFunc: ; 40d7e (10:4d7e)
 	ld a, OBJSTATE_SPECIAL_2
 	ld [wCurObjState], a
 	xor a
-	ld [wCurObjMovementIndex], a
+	ld [wCurObjVar3], a
 	ret
 
 .Jump
@@ -188,7 +188,7 @@ UnusedFlowerProjectileCommonFunc: ; 40d7e (10:4d7e)
 .Thrown:
 	ld bc, Data_60320
 .asm_40ddd
-	call Func_34b7
+	call ApplyObjYMovement
 
 	ld hl, wCurObjYPos
 	ld a, [hli]
@@ -212,7 +212,7 @@ UnusedFlowerProjectileCommonFunc: ; 40d7e (10:4d7e)
 	ret
 
 .Destroy:
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]

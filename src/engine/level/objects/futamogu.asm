@@ -135,7 +135,7 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	ld l, OBJ_STATE
 	ld a, OBJSTATE_SPECIAL_3
 	ld [hld], a
-	res OBJSUBFLAG_DIR_F, [hl] ; OBJ_SUBSTATE
+	res OBJSUBFLAG_HDIR_F, [hl] ; OBJ_SUBSTATE
 	ld de, Frameset_68336
 	call SetObjectFramesetPtr
 	ret
@@ -174,7 +174,7 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	ld [hld], a ; OBJ_STATE
 	dec l
 	xor a
-	ld [hl], a ; OBJ_MOVEMENT_INDEX
+	ld [hl], a ; OBJ_VAR_3
 	ld de, Frameset_68348
 	call SetObjectFramesetPtr
 	ld a, 48
@@ -197,7 +197,7 @@ FutamoguFunc: ; 406c4 (10:46c4)
 .has_super_jump_slam
 	ld bc, Data_60490
 .asm_407ee
-	call Func_34b7
+	call ApplyObjYMovement
 
 	ld hl, wCurObjYPos
 	ld a, [hli]
@@ -221,12 +221,12 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	ldh a, [hYPosHi]
 	ld [hl], a
 	ld l, OBJ_SUBSTATE
-	set OBJSUBFLAG_DIR_F, [hl] ; can't go lower
+	set OBJSUBFLAG_HDIR_F, [hl] ; can't go lower
 	ret
 
 .vanish
 	ld a, $08
 	ld [wCurObjVar2], a
-	call Func_305c
+	call MoveObjectLeftByVar2
 	jp VanishObject
 ; 0x40825

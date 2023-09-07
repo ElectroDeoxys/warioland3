@@ -23,7 +23,7 @@ OBJ_FRAMESET_OFFSET  rb ; $15
 OBJ_STATE_DURATION   rb ; $16
 OBJ_VAR_1            rb ; $17
 OBJ_VAR_2            rb ; $18
-OBJ_MOVEMENT_INDEX   rb ; $19
+OBJ_VAR_3            rb ; $19
 OBJ_SUBSTATE         rb ; $1a
 OBJ_STATE            rb ; $1b
 OBJ_ACTION           rb ; $1c
@@ -55,15 +55,15 @@ DEF OBJFLAG_PRIORITY     EQU (1 << OBJFLAG_PRIORITY_F)
 	const_def 4
 	const OBJSUBFLAG_UNK_4_F ; 4
 	const OBJSUBFLAG_UNINITIALISED_F ; 5
-	const OBJSUBFLAG_UNK_6_F ; 6
-	const OBJSUBFLAG_DIR_F   ; 7
+	const OBJSUBFLAG_VDIR_F ; 6
+	const OBJSUBFLAG_HDIR_F   ; 7
 
-DEF OBJSUBFLAG_UNK_4 EQU (1 << OBJSUBFLAG_UNK_4_F)
+DEF OBJSUBFLAG_UNK_4         EQU (1 << OBJSUBFLAG_UNK_4_F)
 DEF OBJSUBFLAG_UNINITIALISED EQU (1 << OBJSUBFLAG_UNINITIALISED_F)
-DEF OBJSUBFLAG_UNK_6 EQU (1 << OBJSUBFLAG_UNK_6_F)
-DEF OBJSUBFLAG_DIR   EQU (1 << OBJSUBFLAG_DIR_F)
+DEF OBJSUBFLAG_VDIR          EQU (1 << OBJSUBFLAG_VDIR_F)
+DEF OBJSUBFLAG_HDIR          EQU (1 << OBJSUBFLAG_HDIR_F)
 
-DEF OBJSUBFLAGS_MASK EQU OBJSUBFLAG_UNK_4 | OBJSUBFLAG_UNINITIALISED | OBJSUBFLAG_UNK_6 | OBJSUBFLAG_DIR
+DEF OBJSUBFLAGS_MASK EQU OBJSUBFLAG_UNK_4 | OBJSUBFLAG_UNINITIALISED | OBJSUBFLAG_VDIR | OBJSUBFLAG_HDIR
 
 ; wInteractionSide flags
 	const_def 4
@@ -107,18 +107,18 @@ DEF INTERACTION_DOWN  EQU (1 << INTERACTION_DOWN_F)  ; $80
 	const OBJ_INTERACTION_19             ; 19
 	const OBJ_INTERACTION_1A             ; 1a
 	const OBJ_INTERACTION_REGULAR_COIN   ; 1b
-	const OBJ_INTERACTION_1C             ; 1c
+	const OBJ_INTERACTION_ELECTRIC       ; 1c
 	const OBJ_INTERACTION_1D             ; 1d
 	const OBJ_INTERACTION_1E             ; 1e
 	const OBJ_INTERACTION_1F             ; 1f
-	const OBJ_INTERACTION_20             ; 20
+	const OBJ_INTERACTION_BOUNCY         ; 20
 	const OBJ_INTERACTION_21             ; 21
 	const OBJ_INTERACTION_SOLID          ; 22
 	const OBJ_INTERACTION_23             ; 23
 	const OBJ_INTERACTION_24             ; 24
-	const OBJ_INTERACTION_25             ; 25
+	const OBJ_INTERACTION_VAMPIRE        ; 25
 	const OBJ_INTERACTION_BUBBLE         ; 26
-	const OBJ_INTERACTION_27             ; 27
+	const OBJ_INTERACTION_ICE            ; 27
 	const OBJ_INTERACTION_OWL            ; 28
 	const OBJ_INTERACTION_RAIL           ; 29
 	const OBJ_INTERACTION_2A             ; 2a
@@ -136,12 +136,12 @@ DEF INTERACTION_DOWN  EQU (1 << INTERACTION_DOWN_F)  ; $80
 	const OBJ_INTERACTION_36             ; 36
 	const OBJ_INTERACTION_37             ; 37
 	const OBJ_INTERACTION_38             ; 38
-	const OBJ_INTERACTION_39             ; 39
+	const OBJ_INTERACTION_WATER_DROP     ; 39
 	const OBJ_INTERACTION_3A             ; 3a
 	const OBJ_INTERACTION_3B             ; 3b
 	const OBJ_INTERACTION_3C             ; 3c
 	const OBJ_INTERACTION_3D             ; 3d
-	const OBJ_INTERACTION_3E             ; 3e
+	const OBJ_INTERACTION_PRINCE_FROGGY  ; 3e
 	const OBJ_INTERACTION_3F             ; 3f
 	const OBJ_INTERACTION_WATER_TELEPORTING ; 40
 	const OBJ_INTERACTION_41             ; 41
@@ -155,7 +155,7 @@ DEF INTERACTION_DOWN  EQU (1 << INTERACTION_DOWN_F)  ; $80
 	const OBJ_INTERACTION_49             ; 49
 	const OBJ_INTERACTION_COLOUR_COIN    ; 4a
 	const OBJ_INTERACTION_4B             ; 4b
-	const OBJ_INTERACTION_4C             ; 4c
+	const OBJ_INTERACTION_BOTTOM_STING   ; 4c
 	const OBJ_INTERACTION_4D             ; 4d
 	const OBJ_INTERACTION_4E             ; 4e
 	const OBJ_INTERACTION_4F             ; 4f
@@ -294,6 +294,13 @@ DEF INTERACTION_MASK EQU $ff ^ HEAVY_OBJ
 	const OBJACTION_11                     ; $11
 	const OBJACTION_12                     ; $12
 	const OBJACTION_13                     ; $13
+
+DEF NO_ACTIONS_F EQU 7
+DEF NO_ACTIONS   EQU (1 << NO_ACTIONS_F)
+
+; sets the object to not process actions
+; for a given amount of frames
+DEF NO_ACTIONS_FOR EQUS "(1 << NO_ACTIONS_F) |"
 
 	const_def
 	const ENEMY_GROUP_000 ; $00

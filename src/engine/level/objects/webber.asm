@@ -24,7 +24,7 @@ WebberFunc: ; 40825 (10:4825)
 	ld a, [wCurObjYPos + 1]
 	ld [hli], a ; OBJ_VAR_2
 	ld a, 4
-	ld [hl], a ; OBJ_MOVEMENT_INDEX
+	ld [hl], a ; OBJ_VAR_3
 	jp .set_fire_projectile
 
 .AttackedLeftStart:
@@ -50,10 +50,10 @@ WebberFunc: ; 40825 (10:4825)
 	and OBJSUBFLAGS_MASK
 	ld [hld], a
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld a, b
 	ld [hld], a ; OBJ_VAR_2
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ret
 
@@ -68,7 +68,7 @@ WebberFunc: ; 40825 (10:4825)
 	or $5
 	ld [hld], a
 	xor a
-	ld [hl], a ; OBJ_MOVEMENT_INDEX
+	ld [hl], a ; OBJ_VAR_3
 	ld de, Frameset_682a9
 	call SetObjectFramesetPtr
 	ld a, 48
@@ -119,11 +119,11 @@ WebberFunc: ; 40825 (10:4825)
 .set_move_to_start_pos
 	ld hl, wCurObjSubState
 	ld a, [hl]
-	and OBJSUBFLAGS_MASK ^ OBJSUBFLAG_DIR
+	and OBJSUBFLAGS_MASK ^ OBJSUBFLAG_HDIR
 	or $3
 	ld [hld], a
 	ld a, 5
-	ld [hl], a ; OBJ_MOVEMENT_INDEX
+	ld [hl], a ; OBJ_VAR_3
 	ld de, Frameset_682b2
 	jp SetObjectFramesetPtr
 
@@ -208,7 +208,7 @@ WebberFunc: ; 40825 (10:4825)
 	or $4
 	ld [hld], a
 	xor a
-	ld [hl], a ; OBJ_MOVEMENT_INDEX
+	ld [hl], a ; OBJ_VAR_3
 	ld de, Frameset_682a9
 	call SetObjectFramesetPtr
 	ld a, 48
@@ -216,11 +216,11 @@ WebberFunc: ; 40825 (10:4825)
 	ret
 
 .Shake:
-	ld a, [wCurObjMovementIndex]
+	ld a, [wCurObjVar3]
 	cp 15
 	jr z, .end_shake
 	ld bc, Data_604a0
-	call Func_34b7
+	call ApplyObjYMovement
 	ld hl, wCurObjYPos
 	ld a, [hli]
 	ldh [hYPosLo], a
@@ -239,7 +239,7 @@ WebberFunc: ; 40825 (10:4825)
 	ldh a, [hYPosHi]
 	ld [hl], a
 	ld l, OBJ_SUBSTATE
-	set OBJSUBFLAG_DIR_F, [hl]
+	set OBJSUBFLAG_HDIR_F, [hl]
 .end_shake
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -268,7 +268,7 @@ WebberFunc: ; 40825 (10:4825)
 	ld a, [wGlobalCounter]
 	and %01111111
 	ret nz
-	ld l, OBJ_MOVEMENT_INDEX
+	ld l, OBJ_VAR_3
 	dec [hl]
 	jp nz, .set_fire_projectile
 	inc l
@@ -309,7 +309,7 @@ WebberFunc: ; 40825 (10:4825)
 .has_super_jump_slam
 	ld bc, Data_60490
 .asm_40a14
-	call Func_34b7
+	call ApplyObjYMovement
 
 	ld hl, wCurObjYPos
 	ld a, [hli]
@@ -332,7 +332,7 @@ WebberFunc: ; 40825 (10:4825)
 	ldh a, [hYPosHi]
 	ld [hl], a
 	ld l, OBJ_SUBSTATE
-	set OBJSUBFLAG_DIR_F, [hl]
+	set OBJSUBFLAG_HDIR_F, [hl]
 	ret
 
 .set_fire_projectile
@@ -361,7 +361,7 @@ WebberFunc: ; 40825 (10:4825)
 	jp CreateObjectAtRelativePos
 
 .Climb:
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld a, [wGroundShakeCounter]
 	cp $10
@@ -393,7 +393,7 @@ WebberFunc: ; 40825 (10:4825)
 	jp SetObjectFramesetPtr
 .asm_40aa9
 	ld a, 5
-	ld [wCurObjMovementIndex], a
+	ld [wCurObjVar3], a
 	jp .set_idle
 ; 0x40ab1
 
@@ -452,7 +452,7 @@ WebberProjectileFunc: ; 40ab1 (10:4ab1)
 	ret
 
 .Destroy:
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]

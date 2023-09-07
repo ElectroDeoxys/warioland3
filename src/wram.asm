@@ -627,7 +627,7 @@ wTransformationDuration:: ; ca90
 
 ; a TOUCH_* constant that determines
 ; how Wario interacts with objects
-; that would normally sting them
+; that would normally sting him
 ; this is used to override the normal stinging action
 wStingTouchState:: ; ca92
 	db
@@ -859,23 +859,12 @@ wFadeSpeed:: ; ced7
 wRoomAnimatedTilesEnabled:: db ; ced8
 wRoomAnimatedPalsEnabled::  db ; ced9
 
-wceda:: ; ceda
-	db
-
-wcedb:: ; cedb
-	db
-
-wcedc:: ; cedc
-	db
-
-wcedd:: ; cedd
-	db
-
-wcede:: ; cede
-	db
-
-wcedf:: ; cedf
-	db
+wceda:: db ; ceda
+wcedb:: db ; cedb
+wcedc:: db ; cedc
+wcedd:: db ; cedd
+wcede:: db ; cede
+wcedf:: db ; cedf
 
 ; uses CURRENT_* as flags
 ; to indicate what direction the
@@ -984,10 +973,14 @@ wNumLitTorches:: ; d143
 wNumShootGoals:: ; d144
 	db
 
-w1d145:: ; d145
+wNumWarioGoals:: ; d145
 	db
 
-	ds $4
+wDollBoyActiveBarrels:: db ; d146
+w1d147:: db ; d147
+wDollBoyHammerStage:: db ; d148
+
+	ds $1
 
 ; some transformations can confer to Wario special power-ups
 ; e.g. Fat Wario can effectively have the Super Jump Slam Overalls

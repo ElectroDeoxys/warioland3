@@ -33,9 +33,9 @@ ENDM
 ; plays SFX, optionally pass a condition
 MACRO play_sfx
 IF _NARG == 2
-IF "\1" == "nz"
+IF STRCMP("\1", "nz") == 0
 	jr z, :+
-ELIF "\1" == "z"
+ELIF STRCMP("\1", "z") == 0
 	jr nz, :+
 ENDC
 SHIFT

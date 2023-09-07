@@ -164,12 +164,12 @@ Func_40c19: ; 40c19 (10:4c19)
 	call MoveObjectRight
 .asm_40c2f
 	ld bc, Data_60320
-	call Func_34b7
+	call ApplyObjYMovement
 	jr TorchEmberCommonFunc
 
 ; unreferenced?
-	ld de, $4ec9
-	call Func_3472
+	ld de, Data_60ec9
+	call ApplyObjSetMovement
 	jr TorchEmberCommonFunc
 
 TorchEmberLeft1Func: ; 40c3f (10:4c3f)
@@ -190,7 +190,7 @@ TorchEmberRight2Func: ; 40c4e (10:4c4e)
 
 TorchEmberCommonFunc: ; 40c51 (10:4c51)
 	ld bc, Data_60320
-	call Func_34b7
+	call ApplyObjYMovement
 	ld hl, wCurObjFlags
 	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld a, [wCurObjState]
@@ -227,7 +227,7 @@ TorchEmberCommonFunc: ; 40c51 (10:4c51)
 	ret
 
 .Destroy:
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]

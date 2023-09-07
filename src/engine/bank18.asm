@@ -165,14 +165,220 @@ Data_604b0: ; 604b0 (18:44b0)
 	db -3, -2, -1, -1, -1,  0,  0,  0,  0,  1,  1,  1,  2,  3,  0, $80
 ; 0x604c0
 
-	INCROM $604c0, $605e0
+Data_604c0: ; 604c0 (18:44c0)
+	db  0,  0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,
+	db  0,  0,  0,  0,  0,  0, -1,  0, -1,  0, -1,  0, -1,  0, -1, $80
+
+Data_604e0: ; 604e0 (18:44e0)
+	db -4, -4, -3, -3, -2, -2, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0
+	db  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, -1, -1, -1, -1, $80
+
+Data_60500: ; 60500 (18:4500)
+	db  1,  2,  3,  4,  5,  6,  7,  8,  8,  8,  8,  8,  8,  8,  8, $80
+
+Data_60510: ; 60510 (18:4510)
+	db -1, -1, -1, -1,  0, -1,  0, -1,  0, -1,  0,  0,  1,  0,  1,  0
+	db  1,  1,  1,  2,  2,  2,  3,  3,  4,  4,  4,  4,  4,  4,  4, $80
+
+Data_60530: ; 60530 (18:4530)
+	db -8, -7, -6, -5, -4, -3, -2, -1,  0,  0,  0,  0,  0,  0,  0, $80
+
+Data_60540: ; 60540 (18:4540)
+	db -6, -5, -4, -3, -2, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
+	db  1,  1,  1,  1,  2,  2,  2,  3,  3,  4,  4,  4,  4,  4,  4, $80
+
+Data_60560: ; 60560 (18:4560)
+	db  1,  0,  1,  0,  1,  1,  1,  1,  2,  2,  2,  2,  3,  3,  3,  3
+	db  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  3,  2,  2,  1,  1
+	db  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
+	db -1, -1, -1, -1, -1, -1, -2, -2, -2, -2, -3, -3, -3, -3, -4, $80
+
+Data_605a0: ; 605a0 (18:45a0)
+	db -1,  0, -1,  0, -1, -1, -1, -1, -2, -2, -2, -2, -3, -3, -3, -3
+	db -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -3, -2, -2, -1, -1
+	db  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
+	db  1,  1,  1,  1,  1,  1,  2,  2,  2,  2,  3,  3,  3,  3,  4, $80
 
 Data_605e0: ; 605e0 (18:45e0)
 	db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 3
 	db 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, $80
 ; 0x60600
 
-	INCROM $60600, $611cb
+Data_60600: ; 60600 (18:4600)
+	db  0,  0,  0, -1,  0,  0, -1,  0, -1,  0, -1, -1, -1, -2, -3, $80
+
+Data_60610: ; 60610 (18:4610)
+	db -1, -1, -1,  0,  0,  1,  1,  1,  0,  0, -1, -1, -1, -1, -2, -2
+	db -2, -2, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -4, $80
+
+Data_60630: ; 60630 (18:4630)
+	db  1,  1,  1,  0,  0, -1, -1, -1,  0,  0,  1,  1,  1,  1,  2,  2
+	db  2,  2,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  4, $80
+
+Data_60650: ; 60650 (18:4650)
+	db -1,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0
+	db  1,  0,  0,  0,  0,  0,  0,  0, -1,  0,  0,  0,  0,  0,  0, $80
+
+Data_60670: ; 60670 (18:4670)
+	db  1,  1,  1,  1,  1,  1,  2,  2,  2,  3,  3,  3,  3,  3,  3,  3
+	db  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4, $80
+
+Data_60690: ; 60690 (18:4690)
+	db  0,  0,  0,  0,  0,  0,  0,  0,  0, -1, -1, -2, -1,  1,  1,  1
+	db  1,  1,  1,  1,  1,  1,  1,  1,  2,  2,  2,  2,  3,  3,  3,  2
+	db  1,  1,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
+	db  0,  0,  0,  0, -1, -1, -1, -1, -1, -1, -1, -1, -2, -2, -2, -2
+	db -3, -3, -3, -2, -1, -1, -1, -1, -1, -1,  1,  2,  1,  1,  0, $80
+
+Data_606e0: ; 606e0 (18:46e0)
+	db  0,  0,  0, -1, -1, -1, -1, -1, -1, -2, -1, -2, -2, -2, -3, $80
+
+Data_606f0: ; 606f0 (18:46f0)
+	db  0,  0,  0,  1,  1,  1,  1,  1,  1,  2,  1,  2,  2,  2,  3, $80
+
+Data_60700: ; 60700 (18:4700)
+	db -6, -6, -5, -5, -5, -4, -4, -3, -3, -3, -2, -2, -2, -1, -1, -1
+	db  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, $80
+
+	INCROM $60720, $60a50
+
+Data_60a50: ; 60a50 (18:4a50)
+	db 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, $80
+
+	INCROM $60a60, $60ec9
+
+Data_60ec9: ; 60ec9 (18:4ec9)
+	db  1, -2,  0
+	db  1, -1,  0
+	db  1, -2, -1
+	db  1, -1,  0
+	db  1, -2,  0
+	db  1, -1,  0
+	db  1, -2, -1
+	db  1, -1,  0
+	db  1, -2, -1
+	db  1, -1, -1
+	db  1, -2, -1
+	db  1, -1, -1
+	db  1, -1, -1
+	db  1, -1,  0
+	db  1, -2, -1
+	db  1, -1, -1
+	db  1, -1, -2
+	db  1, -1, -1
+	db  1, -1, -1
+	db  1, -1, -1
+	db  1, -1, -2
+	db  1,  0, -1
+	db  1, -1, -2
+	db  1, -1, -1
+	db  1, -1, -2
+	db  1,  0, -1
+	db  1,  0, -2
+	db  1,  0, -1
+	db  1, -1, -2
+	db  1,  0, -1
+	db  1,  0, -2
+	db  1,  0, -1
+	db  1,  0, -2
+	db  1,  0, -1
+	db  1,  1, -2
+	db  1,  0, -1
+	db  1,  0, -2
+	db  1,  0, -1
+	db  1,  1, -2
+	db  1,  0, -1
+	db  1,  1, -2
+	db  1,  1, -1
+	db  1,  1, -2
+	db  1,  0, -1
+	db  1,  1, -1
+	db  1,  1, -1
+	db  1,  1, -2
+	db  1,  1, -1
+	db  1,  2, -1
+	db  1,  1, -1
+	db  1,  1, -1
+	db  1,  1,  0
+	db  1,  2, -1
+	db  1,  1, -1
+	db  1,  2, -1
+	db  1,  1, -1
+	db  1,  2, -1
+	db  1,  1,  0
+	db  1,  2,  0
+	db  1,  1,  0
+	db  1,  2, -1
+	db  1,  1,  0
+	db  1,  2,  0
+	db  1,  1,  0
+	db  1,  2,  0
+	db  1,  1,  0
+	db  1,  2,  1
+	db  1,  1,  0
+	db  1,  2,  0
+	db  1,  1,  0
+	db  1,  2,  1
+	db  1,  1,  0
+	db  1,  2,  1
+	db  1,  1,  1
+	db  1,  2,  1
+	db  1,  1,  1
+	db  1,  1,  1
+	db  1,  1,  0
+	db  1,  2,  1
+	db  1,  1,  1
+	db  1,  1,  2
+	db  1,  1,  1
+	db  1,  1,  1
+	db  1,  1,  1
+	db  1,  1,  2
+	db  1,  0,  1
+	db  1,  1,  2
+	db  1,  1,  1
+	db  1,  1,  2
+	db  1,  0,  1
+	db  1,  0,  2
+	db  1,  0,  1
+	db  1,  1,  2
+	db  1,  0,  1
+	db  1,  0,  2
+	db  1,  0,  1
+	db  1,  0,  2
+	db  1,  0,  1
+	db  1, -1,  2
+	db  1,  0,  1
+	db  1,  0,  2
+	db  1,  0,  1
+	db  1, -1,  2
+	db  1,  0,  1
+	db  1, -1,  2
+	db  1, -1,  1
+	db  1, -1,  2
+	db  1,  0,  1
+	db  1, -1,  1
+	db  1, -1,  1
+	db  1, -1,  2
+	db  1, -1,  1
+	db  1, -2,  1
+	db  1, -1,  1
+	db  1, -1,  1
+	db  1, -1,  0
+	db  1, -2,  1
+	db  1, -1,  1
+	db  1, -2,  1
+	db  1, -1,  1
+	db  1, -2,  1
+	db  1, -1,  0
+	db  1, -2,  0
+	db  1, -1,  0
+	db  1, -2,  1
+	db  1, -1,  0
+	db  1, -2,  0
+	db  1, -1,  0
+	db  0
+
+	INCROM $6104a, $611cb
 
 UpdateObject_Temple: ; 611cb (18:51cb)
 	push hl
@@ -188,7 +394,7 @@ ENDR
 
 	call DoObjectAction
 
-	ld a, BANK("Object Update Functions 4")
+	ld a, BANK("Object Functions 4")
 	ldh [hCallFuncBank], a
 	ld a, [wCurObjUpdateFunction + 0]
 	ldh [hCallFuncPointer + 0], a
@@ -202,7 +408,7 @@ ENDR
 	ld hl, wCurObjScreenYPos
 	ld a, [wSCY]
 	ld b, a
-	ld a, [wCurObjYPos]
+	ld a, [wCurObjYPos + 0]
 	add $10
 	sub b
 	ld [hli], a
@@ -226,7 +432,7 @@ ENDR
 	ld [hli], a
 	inc l
 	inc l
-	ld a, [wCurObjYPos]
+	ld a, [wCurObjYPos + 0]
 	ld [hli], a
 	ld a, [wCurObjYPos + 1]
 	ld [hli], a
@@ -270,7 +476,7 @@ ENDR
 	ld [hli], a
 	ld a, [wCurObjVar2]
 	ld [hli], a
-	ld a, [wCurObjMovementIndex]
+	ld a, [wCurObjVar3]
 	ld [hli], a
 	ld a, [wCurObjSubState]
 	ld [hli], a
@@ -365,7 +571,7 @@ ENDR
 	ld a, [wCurObjUnk07]
 	swap a
 	and $0f
-	or BANK("Object Update Functions 1")
+	or BANK("Object Functions 1")
 	ldh [hCallFuncBank], a
 	ld a, [wCurObjUpdateFunction + 0]
 	ldh [hCallFuncPointer], a
@@ -379,7 +585,7 @@ ENDR
 	ld hl, wCurObjScreenYPos
 	ld a, [wSCY]
 	ld b, a
-	ld a, [wCurObjYPos]
+	ld a, [wCurObjYPos + 0]
 	add $10
 	sub b
 	ld [hli], a
@@ -396,7 +602,7 @@ ENDR
 	ld [hli], a
 	inc l
 	inc l
-	ld a, [wCurObjYPos]
+	ld a, [wCurObjYPos + 0]
 	ld [hli], a
 	ld a, [wCurObjYPos + 1]
 	ld [hli], a
@@ -440,7 +646,7 @@ ENDR
 	ld [hli], a
 	ld a, [wCurObjVar2]
 	ld [hli], a
-	ld a, [wCurObjMovementIndex]
+	ld a, [wCurObjVar3]
 	ld [hli], a
 	ld a, [wCurObjSubState]
 	ld [hli], a
@@ -469,7 +675,7 @@ ENDR
 	ld [wCurObj + OBJ_STRUCT_LENGTH - 1], a
 
 	; only run update function
-	; on uninitialised objects
+	; on initialised objects
 	ld hl, wCurObjSubState
 	bit OBJSUBFLAG_UNINITIALISED_F, [hl]
 	jr z, .skip_update_function
@@ -477,7 +683,7 @@ ENDR
 	ld a, [wCurObjUnk07]
 	swap a
 	and $0f
-	or BANK("Object Update Functions 1")
+	or BANK("Object Functions 1")
 	ldh [hCallFuncBank], a
 	ld a, [wCurObjUpdateFunction + 0]
 	ldh [hCallFuncPointer], a
@@ -492,7 +698,7 @@ ENDR
 	ld hl, wCurObjScreenYPos
 	ld a, [wSCY]
 	ld b, a
-	ld a, [wCurObjYPos]
+	ld a, [wCurObjYPos + 0]
 	add 16
 	sub b
 	ld [hli], a
@@ -508,7 +714,7 @@ ENDR
 	ld [hli], a
 	inc l
 	inc l
-	ld a, [wCurObjYPos]
+	ld a, [wCurObjYPos + 0]
 	ld [hli], a
 	ld a, [wCurObjYPos + 1]
 	ld [hli], a
@@ -552,7 +758,7 @@ ENDR
 	ld [hli], a
 	ld a, [wCurObjVar2]
 	ld [hli], a
-	ld a, [wCurObjMovementIndex]
+	ld a, [wCurObjVar3]
 	ld [hli], a
 	ld a, [wCurObjSubState]
 	ld [hli], a
@@ -604,10 +810,10 @@ DoObjectAction: ; 61760 (18:5760)
 	ld a, [wCurObjAction]
 	and a
 	ret z
-	bit 7, a
+	bit NO_ACTIONS_F, a
 	jr z, .jump
 	dec a
-	cp $80
+	cp NO_ACTIONS_FOR 0
 	jr nz, .asm_6176f
 	xor a
 .asm_6176f
@@ -780,13 +986,13 @@ DoObjectAction: ; 61760 (18:5760)
 	ret
 
 .Action0a:
-	ld a, 15 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 15
 	ld [wCurObjAction], a
 	ret
 
 .Flatten:
 	ld hl, wCurObjAction
-	ld a, 15 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 15
 	ld [hld], a
 	ld a, OBJSTATE_ACTIVATE
 	ld [hl], a ; OBJ_STATE
@@ -794,7 +1000,7 @@ DoObjectAction: ; 61760 (18:5760)
 
 .Action0c:
 	ld hl, wCurObjAction
-	ld a, 15 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 15
 	ld [hld], a
 	ld a, OBJSTATE_ACTIVATE
 	ld [hl], a
@@ -802,7 +1008,7 @@ DoObjectAction: ; 61760 (18:5760)
 
 .Action0d:
 	ld hl, wCurObjAction
-	ld a, 15 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 15
 	ld [hld], a
 	ld a, OBJSTATE_19
 	ld [hl], a
@@ -810,7 +1016,7 @@ DoObjectAction: ; 61760 (18:5760)
 
 .Action0e:
 	ld hl, wCurObjAction
-	ld a, 15 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 15
 	ld [hld], a
 	ld a, OBJSTATE_ACTIVATE
 	ld [hl], a
@@ -818,7 +1024,7 @@ DoObjectAction: ; 61760 (18:5760)
 
 .SmashAttackWalkable:
 	ld hl, wCurObjAction
-	ld a, 2 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 2
 	ld [hld], a
 	ld a, OBJSTATE_VANISH_TOUCH
 	ld [hl], a
@@ -826,7 +1032,7 @@ DoObjectAction: ; 61760 (18:5760)
 
 .Teleport:
 	ld hl, wCurObjAction
-	ld a, 15 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 15
 	ld [hld], a
 	ld a, OBJSTATE_ACTIVATE
 	ld [hl], a
@@ -834,7 +1040,7 @@ DoObjectAction: ; 61760 (18:5760)
 
 .Action11:
 	ld hl, wCurObjAction
-	ld a, 15 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 15
 	ld [hld], a
 	ld a, OBJSTATE_ACTIVATE
 	ld [hl], a
@@ -845,16 +1051,16 @@ _VanishObject:: ; 6189d (18:589d)
 	play_sfx SFX_VANISH
 VanishObject_NoSFX: ; 618a5 (18:58a5)
 	ld hl, wCurObjUpdateFunction + 1
-	ld a, HIGH(VanishStarsFunc)
+	ld a, HIGH(StarsFunc)
 	ld [hld], a
-	ld a, LOW(VanishStarsFunc)
+	ld a, LOW(StarsFunc)
 	ld [hld], a
 	ld l, OBJ_SUBSTATE
 	ld a, [hl]
 	and OBJSUBFLAGS_MASK
 	ld [hld], a
 Func_618b4: ; 618b4 (18:58b4)
-	ld a, (BANK(VanishStarsFunc) - BANK("Object Update Functions 1")) << 4
+	ld a, (BANK(StarsFunc) - BANK("Object Functions 1")) << 4
 	ld [wCurObjUnk07], a
 
 	ld hl, wCurObjOAMPtr
@@ -875,7 +1081,7 @@ Func_618b4: ; 618b4 (18:58b4)
 	ld l, OBJ_FLAGS
 	res OBJFLAG_GRABBED_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 
 	ld l, OBJ_Y_POS
@@ -1148,7 +1354,7 @@ Func_61f10: ; 61f10 (18:5f10)
 	ld [w1d142], a
 	ld [wNumLitTorches], a
 	ld [wNumShootGoals], a
-	ld [w1d145], a
+	ld [wNumWarioGoals], a
 	ret
 ; 0x61f2a
 
@@ -1160,7 +1366,7 @@ Func_61f2a: ; 61f2a (18:5f2a)
 	ld [w1d142], a
 	ld [wNumLitTorches], a
 	ld [wNumShootGoals], a
-	ld [w1d145], a
+	ld [wNumWarioGoals], a
 	ret
 ; 0x61f41
 
@@ -1185,7 +1391,7 @@ ClearObjDataPointers: ; 61f4a (18:5f4a)
 ; 0x61f54
 
 Func_61f54:: ; 61f54 (18:5f54)
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 
 	ld a, [wGrabState]
@@ -1268,7 +1474,7 @@ Func_61f54:: ; 61f54 (18:5f54)
 	jp nz, HomeJumpRet
 	inc l
 	ld a, [hli] ; OBJ_VAR_2
-	ld h, [hl] ; OBJ_MOVEMENT_INDEX
+	ld h, [hl] ; OBJ_VAR_3
 	ld l, a
 	ld a, [hli]
 	and a
@@ -1287,7 +1493,7 @@ Func_61f54:: ; 61f54 (18:5f54)
 	ld a, l
 	ld [wCurObjVar2], a
 	ld a, h
-	ld [wCurObjMovementIndex], a
+	ld [wCurObjVar3], a
 
 	ld hl, hffa0
 	ld a, c
@@ -1393,7 +1599,7 @@ Func_61f54:: ; 61f54 (18:5f54)
 ; 0x620a6
 
 Func_620a6:: ; 620a6 (18:60a6)
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 
 	ld a, [wGrabState]
@@ -1476,7 +1682,7 @@ Func_620a6:: ; 620a6 (18:60a6)
 	jp nz, HomeJumpRet
 	inc l
 	ld a, [hli] ; OBJ_VAR_2
-	ld h, [hl] ; OBJ_MOVEMENT_INDEX
+	ld h, [hl] ; OBJ_VAR_3
 	ld l, a
 	ld a, [hli]
 	and a
@@ -1495,7 +1701,7 @@ Func_620a6:: ; 620a6 (18:60a6)
 	ld a, l
 	ld [wCurObjVar2], a
 	ld a, h
-	ld [wCurObjMovementIndex], a
+	ld [wCurObjVar3], a
 
 	ld hl, hffa0
 	ld a, c
@@ -1604,7 +1810,7 @@ Func_620a6:: ; 620a6 (18:60a6)
 ; 0x621fb
 
 Func_621fb:: ; 621fb (18:61fb)
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld a, [wGrabState]
 	ld b, a
@@ -1714,7 +1920,7 @@ Func_621fb:: ; 621fb (18:61fb)
 ; 0x622bd
 
 Func_622bd:: ; 622bd (18:62bd)
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld a, [wGrabState]
 	ld b, a
@@ -1826,7 +2032,7 @@ Func_622bd:: ; 622bd (18:62bd)
 ; 0x62382
 
 Func_62382:: ; 62382 (18:6382)
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld a, [wGrabState]
 	ld b, a
@@ -1946,7 +2152,7 @@ ThrowObject_Left: ; 62429 (18:6429)
 	ld a, b
 	ld [hli], a ; OBJ_VAR_2
 	xor a
-	ld [hli], a ; OBJ_MOVEMENT_INDEX
+	ld [hli], a ; OBJ_VAR_3
 	inc l
 	ld a, OBJSTATE_4E
 	ld [hli], a ; OBJ_STATE
@@ -1964,7 +2170,7 @@ ThrowObject_Left: ; 62429 (18:6429)
 	ld a, b
 	ld [hli], a ; OBJ_VAR_2
 	xor a
-	ld [hli], a ; OBJ_MOVEMENT_INDEX
+	ld [hli], a ; OBJ_VAR_3
 	inc l
 	ld a, OBJSTATE_FULL_THROW_LEFT_START
 	ld [hli], a ; OBJ_STATE
@@ -1974,7 +2180,7 @@ ThrowObject_Left: ; 62429 (18:6429)
 ; 0x6247b
 
 Func_6247b:: ; 6247b (18:647b)
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld a, [wGrabState]
 	ld b, a
@@ -2094,7 +2300,7 @@ ThrowObject_Right: ; 62522 (18:6522)
 	ld a, b
 	ld [hli], a ; OBJ_VAR_2
 	xor a
-	ld [hli], a ; OBJ_MOVEMENT_INDEX
+	ld [hli], a ; OBJ_VAR_3
 	inc l
 	ld a, OBJSTATE_4F
 	ld [hli], a ; OBJ_STATE
@@ -2112,7 +2318,7 @@ ThrowObject_Right: ; 62522 (18:6522)
 	ld a, b
 	ld [hli], a ; OBJ_VAR_2
 	xor a
-	ld [hli], a ; OBJ_MOVEMENT_INDEX
+	ld [hli], a ; OBJ_VAR_3
 	inc l
 	ld a, OBJSTATE_FULL_THROW_RIGHT_START
 	ld [hli], a ; OBJ_STATE
@@ -2199,7 +2405,7 @@ Func_62574:: ; 62574 (18:6574)
 	jp HomeJumpRet
 
 .asm_625ff
-	call Func_305c
+	call MoveObjectLeftByVar2
 	jp Func_62690
 ; 0x62605
 
@@ -2278,11 +2484,11 @@ Func_62605:: ; 62605 (18:6605)
 	jp HomeJumpRet
 
 .asm_6268d
-	call Func_3069
+	call MoveObjectRightByVar2
 ;	fallthrough
 
 Func_62690: ; 62690 (18:6690)
-	ld l, OBJ_MOVEMENT_INDEX
+	ld l, OBJ_VAR_3
 	ld a, [hl]
 	dec b
 	jr z, .asm_626d4
@@ -2406,7 +2612,7 @@ Func_626da:: ; 626da (18:66da)
 	call Func_3513
 	and $0f
 	jr nz, .vanish
-	call Func_305c
+	call MoveObjectLeftByVar2
 	ld a, [wCurObjScreenXPos]
 	add $28
 	cp $f0
@@ -2483,7 +2689,7 @@ Func_62768:: ; 62768 (18:6768)
 	call Func_3513
 	and $0f
 	jr nz, .vanish
-	call Func_3069
+	call MoveObjectRightByVar2
 	ld a, [wCurObjScreenXPos]
 	add $28
 	cp $10
@@ -2493,7 +2699,7 @@ Func_62768:: ; 62768 (18:6768)
 ;	fallthrough
 
 Func_627f0: ; 627f0 (18:67f0)
-	ld l, OBJ_MOVEMENT_INDEX
+	ld l, OBJ_VAR_3
 	ld a, [hl]
 	dec b
 	jr z, .asm_62834
@@ -2570,7 +2776,7 @@ Func_6284f: ; 6284f (18:684f)
 	jr nc, .no_overflow
 	inc [hl]
 .no_overflow
-	ld hl, wCurObjMovementIndex
+	ld hl, wCurObjVar3
 	ld a, [hl]
 	ld b, HIGH(Data_60180)
 	add LOW(Data_60180)
@@ -2607,7 +2813,7 @@ Func_6284f: ; 6284f (18:684f)
 	jr c, .asm_6288a
 	dec [hl]
 .asm_6288a
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	jp HomeJumpRet
 ; 0x62892
@@ -2635,7 +2841,7 @@ Func_628a7: ; 628a7 (18:68a7)
 	jr nc, .asm_628b0
 	dec [hl]
 .asm_628b0
-	ld hl, wCurObjMovementIndex
+	ld hl, wCurObjVar3
 	ld a, [hl]
 	ld b, HIGH(Data_60180)
 	add LOW(Data_60180)
@@ -2672,7 +2878,7 @@ Func_628a7: ; 628a7 (18:68a7)
 	jr c, .asm_628e2
 	dec [hl]
 .asm_628e2
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	jp HomeJumpRet
 ; 0x628ea
@@ -2714,7 +2920,7 @@ Func_62908:: ; 62908 (18:6908)
 ; 0x62926
 
 Func_62926:: ; 62926 (18:6926)
-	ld hl, wCurObjMovementIndex
+	ld hl, wCurObjVar3
 	ld a, [hl]
 	ld b, HIGH(Data_60040)
 	add LOW(Data_60040)
@@ -2796,7 +3002,7 @@ Func_62926:: ; 62926 (18:6926)
 ; 0x629a6
 
 Func_629a6:: ; 629a6 (18:69a6)
-	ld hl, wCurObjMovementIndex
+	ld hl, wCurObjVar3
 	ld a, [hl]
 	ld b, HIGH(Data_602a0)
 	add LOW(Data_602a0)
@@ -2815,7 +3021,7 @@ Func_629a6:: ; 629a6 (18:69a6)
 	ld a, [bc]
 	jr .asm_629c3
 .asm_629c2
-	inc [hl] ; OBJ_MOVEMENT_INDEX
+	inc [hl] ; OBJ_VAR_3
 .asm_629c3
 	ldh [hffa0], a
 	ld l, OBJ_Y_POS
@@ -2838,7 +3044,7 @@ _ObjState_StandingFall:: ; 629d0 (18:69d0)
 	ld [hl], a
 
 .done_anim_speedup
-	ld hl, wCurObjMovementIndex
+	ld hl, wCurObjVar3
 	ld a, [hl]
 	ld b, HIGH(StandingFallYVel_Light)
 	add LOW(StandingFallYVel_Light)
@@ -2857,7 +3063,7 @@ _ObjState_StandingFall:: ; 629d0 (18:69d0)
 	ld a, [bc] ; use last entry
 	jr .got_y_vel
 .not_last
-	inc [hl] ; OBJ_MOVEMENT_INDEX
+	inc [hl] ; OBJ_VAR_3
 .got_y_vel
 	ldh [hffa0], a
 	ld l, OBJ_Y_POS
@@ -2923,7 +3129,7 @@ _ObjState_StandingFall:: ; 629d0 (18:69d0)
 
 ; handle gravity for falling objects
 _ObjState_Fall:: ; 62a5b (18:6a5b)
-	ld hl, wCurObjMovementIndex
+	ld hl, wCurObjVar3
 	ld a, [hl]
 	ld b, HIGH(FallingYVel_Light)
 	add LOW(FallingYVel_Light)
@@ -3031,7 +3237,7 @@ Func_62ae5:: ; 62ae5 (18:6ae5)
 	call Func_3513
 	and $0f
 	jp nz, .asm_62b70
-	call Func_305c
+	call MoveObjectLeftByVar2
 	ld a, [wCurObjScreenXPos]
 	add $28
 	cp $f0
@@ -3160,7 +3366,7 @@ Func_62bce:: ; 62bce (18:6bce)
 	call Func_3513
 	and $0f
 	jp nz, .asm_62c56
-	call Func_3069
+	call MoveObjectRightByVar2
 	ld a, [wCurObjScreenXPos]
 	add $28
 	cp $10
@@ -3268,7 +3474,7 @@ Func_62c9f:: ; 62c9f (18:6c9f)
 ;	fallthrough
 
 Func_62ca8:: ; 62ca8 (18:6ca8)
-	call Func_305c
+	call MoveObjectLeftByVar2
 	ld a, [wCurObjScreenXPos]
 	add $28
 	cp $f0
@@ -3276,7 +3482,7 @@ Func_62ca8:: ; 62ca8 (18:6ca8)
 	ld l, OBJ_FLAGS
 	res OBJFLAG_GRABBED_F, [hl]
 .asm_62cb8
-	ld l, OBJ_MOVEMENT_INDEX
+	ld l, OBJ_VAR_3
 	ld a, [hl]
 	ld b, HIGH(FallingYVel_Light)
 	add LOW(FallingYVel_Light)
@@ -3414,7 +3620,7 @@ Func_62d7d:: ; 62d7d (18:6d7d)
 ;	fallthrough
 
 Func_62d86:: ; 62d86 (18:6d86)
-	call Func_3069
+	call MoveObjectRightByVar2
 	ld a, [wCurObjScreenXPos]
 	add $28
 	cp $10
@@ -3422,7 +3628,7 @@ Func_62d86:: ; 62d86 (18:6d86)
 	ld l, OBJ_FLAGS
 	res OBJFLAG_GRABBED_F, [hl]
 .asm_62d96
-	ld l, OBJ_MOVEMENT_INDEX
+	ld l, OBJ_VAR_3
 	ld a, [hl]
 	ld b, HIGH(FallingYVel_Light)
 	add LOW(FallingYVel_Light)
@@ -3569,7 +3775,7 @@ Func_62e74:: ; 62e74 (18:6e74)
 	ld [hld], a
 	dec l
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld a, [wCurObjInteractionType]
 	rla
 	ld a, $06
@@ -3589,7 +3795,7 @@ Func_62e8f:: ; 62e8f (18:6e8f)
 	ld [hld], a
 	dec l
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld a, [wCurObjInteractionType]
 	rla
 	ld a, $04
@@ -3609,7 +3815,7 @@ Func_62eaa:: ; 62eaa (18:6eaa)
 	ld [hld], a
 	dec l
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld a, [wCurObjInteractionType]
 	rla
 	ld a, $05
@@ -3624,7 +3830,7 @@ Func_62ec0:: ; 62ec0 (18:6ec0)
 ;	fallthrough
 
 Func_62ec3: ; 62ec3 (18:6ec3)
-	ld hl, wCurObjMovementIndex
+	ld hl, wCurObjVar3
 	ld a, [hl]
 	add c
 	ld c, a
@@ -3653,7 +3859,7 @@ Func_62ec3: ; 62ec3 (18:6ec3)
 	jr c, .asm_62ee8
 	dec [hl]
 .asm_62ee8
-	call Func_305c
+	call MoveObjectLeftByVar2
 
 	ld a, [wCurObjScreenXPos]
 	add $28
@@ -3743,7 +3949,7 @@ Func_62f76:: ; 62f76 (18:6f76)
 	ld [hld], a
 	dec l
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld a, [wCurObjInteractionType]
 	rla
 	ld a, $04
@@ -3763,7 +3969,7 @@ Func_62f91:: ; 62f91 (18:6f91)
 	ld [hld], a
 	dec l
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld a, [wCurObjInteractionType]
 	rla
 	ld a, $05
@@ -3778,7 +3984,7 @@ Func_62fa7:: ; 62fa7 (18:6fa7)
 ;	fallthrough
 
 Func_62faa:: ; 62faa (18:6faa)
-	ld hl, wCurObjMovementIndex
+	ld hl, wCurObjVar3
 	ld a, [hl]
 	add c
 	ld c, a
@@ -3807,7 +4013,7 @@ Func_62faa:: ; 62faa (18:6faa)
 	jr c, .asm_62fcf
 	dec [hl]
 .asm_62fcf
-	call Func_3069
+	call MoveObjectRightByVar2
 	ld a, [wCurObjScreenXPos]
 	add $28
 	cp $10
@@ -3873,7 +4079,7 @@ Func_6303f:: ; 6303f (18:703f)
 	ld [hld], a
 	dec l
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld a, $07
 	ld [wCurObjStateDuration], a
 	jp HomeJumpRet
@@ -3901,7 +4107,7 @@ Func_6305f:: ; 6305f (18:705f)
 	ld [hld], a
 	dec l
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld a, $01
 	ld [hld], a ; OBJ_VAR_2
 	dec l
@@ -4141,22 +4347,23 @@ CheckObjectOnScreen: ; 6307b (18:707b)
 	ret
 ; 0x631a1
 
-Func_631a1:: ; 631a1 (18:71a1)
+_ApplyObjSetMovement:: ; 631a1 (18:71a1)
 	ld hl, wCurObjVar1
 	dec [hl]
 	ret nz
 	inc l
-	ld a, [hli]
-	ld h, [hl]
+	ld a, [hli] ; var2
+	ld h, [hl]  ; var3
 	ld l, a
 	ld a, [hli]
 	and a
-	jr nz, .asm_631b1
+	jr nz, .no_loop
+; loop
 	ld h, d
 	ld l, e
 	ld a, [hli]
-.asm_631b1
-	ld [wCurObjVar1], a
+.no_loop
+	ld [wCurObjVar1], a ; duration
 	ld a, [hli]
 	ld c, a
 	ld a, [hli]
@@ -4164,35 +4371,37 @@ Func_631a1:: ; 631a1 (18:71a1)
 	ld a, l
 	ld [wCurObjVar2], a
 	ld a, h
-	ld [wCurObjMovementIndex], a
+	ld [wCurObjVar3], a
+
 	ld hl, wCurObjYPos
 	ld a, c
 	cp $80
-	jr nc, .asm_631d0
+	jr nc, .negative_y
 	ld a, [hl]
 	add c
 	ld [hli], a
-	jr nc, .asm_631d6
+	jr nc, .x_pos
 	inc [hl]
-	jr .asm_631d6
-.asm_631d0
+	jr .x_pos
+.negative_y
 	ld a, [hl]
 	add c
 	ld [hli], a
-	jr c, .asm_631d6
+	jr c, .x_pos
 	dec [hl]
-.asm_631d6
+
+.x_pos
 	inc l
 	ld a, b
 	cp $80
-	jr nc, .asm_631e2
+	jr nc, .negative_x
 	ld a, [hl]
 	add b
 	ld [hli], a
 	ret nc
 	inc [hl]
 	ret
-.asm_631e2
+.negative_x
 	ld a, [hl]
 	add b
 	ld [hli], a
@@ -4201,8 +4410,8 @@ Func_631a1:: ; 631a1 (18:71a1)
 	ret
 ; 0x631e8
 
-Func_631e8:: ; 631e8 (18:71e8)
-	ld hl, wCurObjMovementIndex
+_ApplyObjYMovement:: ; 631e8 (18:71e8)
+	ld hl, wCurObjVar3
 	ld a, [hl]
 	add c
 	ld c, a
@@ -4232,7 +4441,139 @@ Func_631e8:: ; 631e8 (18:71e8)
 	ret
 ; 0x63209
 
-	INCROM $63209, $632ac
+Func_63209:: ; 63209 (18:7209)
+	ld hl, wCurObjVar3
+	ld a, [hl]
+	add c
+	ld c, a
+	ld a, [bc]
+	cp $80
+	jr nz, .next
+	dec c
+	ld a, [bc]
+	jr .got_y_offset
+.next
+	inc [hl]
+.got_y_offset
+	ld b, a
+	ld l, OBJ_Y_POS
+	cp $80
+	ld c, [hl]
+	jr nc, .negative
+	add c
+	ld [hli], a
+	jr nc, .check_stepped
+	inc [hl]
+	jr .check_stepped
+.negative
+	add c
+	ld [hli], a
+	jr c, .check_stepped
+	dec [hl]
+.check_stepped
+	ld l, OBJ_FLAGS
+	bit OBJFLAG_STEPPED_F, [hl]
+	ret z
+	res OBJFLAG_STEPPED_F, [hl]
+	call AddYOffset
+	farcall Func_19720
+	ret
+; 0x63247
+
+_ApplyObjXMovement:: ; 63247 (18:7247)
+	ld hl, wCurObjVar2
+	ld a, [hl]
+	add c
+	ld c, a
+	ld a, [bc]
+	cp $80
+	jr nz, .asm_63256
+	dec c
+	ld a, [bc]
+	jr .asm_63257
+.asm_63256
+	inc [hl]
+.asm_63257
+	ld l, OBJ_X_POS
+	cp $80
+	ld c, [hl]
+	jr nc, .asm_63263
+	add c
+	ld [hli], a
+	ret nc
+	inc [hl]
+	ret
+.asm_63263
+	add c
+	ld [hli], a
+	ret c
+	dec [hl]
+	ret
+; 0x63268
+
+_ApplyObjYMovement_Loop:: ; 63268 (18:7268)
+	ld e, c
+	ld hl, wCurObjVar3
+	ld a, [hl]
+	add c
+	ld c, a
+	ld a, [bc]
+	cp $80
+	jr nz, .asm_63278
+	xor a
+	ld [hl], a
+	ld c, e
+	ld a, [bc]
+.asm_63278
+	inc [hl]
+	ld l, OBJ_Y_POS
+	cp $80
+	ld c, [hl]
+	jr nc, .asm_63285
+	add c
+	ld [hli], a
+	ret nc
+	inc [hl]
+	ret
+.asm_63285
+	add c
+	ld [hli], a
+	ret c
+	dec [hl]
+	ret
+; 0x6328a
+
+Func_6328a:: ; 6328a (18:728a)
+	ld e, c
+	ld hl, wCurObjVar2
+	ld a, [hl]
+	add c
+	ld c, a
+	ld a, [bc]
+	cp $80
+	jr nz, .asm_6329a
+	xor a
+	ld [hl], a
+	ld c, e
+	ld a, [bc]
+.asm_6329a
+	inc [hl]
+	ld l, OBJ_X_POS
+	cp $80
+	ld c, [hl]
+	jr nc, .asm_632a7
+	add c
+	ld [hli], a
+	ret nc
+	inc [hl]
+	ret
+.asm_632a7
+	add c
+	ld [hli], a
+	ret c
+	dec [hl]
+	ret
+; 0x632ac
 
 Func_632ac:: ; 632ac (18:72ac)
 	ld hl, wCurObjUnk01
@@ -4240,9 +4581,9 @@ Func_632ac:: ; 632ac (18:72ac)
 	ld c, a
 	ld b, [hl]
 	ld e, $00
-	ld d, $41
-	ld h, $d0
-	ld l, $00
+	ld d, OBJFLAG_ACTIVE | OBJFLAG_TRANSIENT
+	ld h, HIGH(wObj1)
+	ld l, OBJ_FLAGS
 	ld a, [hli]
 	and d
 	cp d
@@ -4349,7 +4690,19 @@ Func_632ac:: ; 632ac (18:72ac)
 	ret
 ; 0x63339
 
-	INCROM $63339, $6337e
+_CountActiveTransientObjects:: ; 63339 (18:7339)
+	ld e, 0
+	ld d, OBJFLAG_ACTIVE | OBJFLAG_TRANSIENT
+FOR n, 1, NUM_OBJECTS + 1
+	ld a, [wObj{u:n}Flags]
+	and d
+	cp d
+	jr nz, :+
+	inc e
+:
+ENDR
+	ret
+; 0x6337e
 
 DummyObjectFunc: ; 6337e (18:737e)
 	xor a

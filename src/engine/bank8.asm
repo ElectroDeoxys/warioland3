@@ -66,7 +66,7 @@ ProcessInteractions: ; 20000 (8:4000)
 	ld d, $00
 	add hl, de
 	ld a, [hl] ; OBJ_SUBSTATE
-	bit OBJSUBFLAG_DIR_F, a
+	bit OBJSUBFLAG_HDIR_F, a
 	jr nz, .asm_20074
 	ld a, DIRECTION_LEFT
 	jr .asm_20076
@@ -237,18 +237,18 @@ ProcessInteractions: ; 20000 (8:4000)
 	dw Func_21245                      ; OBJ_INTERACTION_19
 	dw Func_21358                      ; OBJ_INTERACTION_1A
 	dw ObjInteraction_RegularCoin      ; OBJ_INTERACTION_REGULAR_COIN
-	dw Func_21455                      ; OBJ_INTERACTION_1C
+	dw ObjInteraction_Electric         ; OBJ_INTERACTION_ELECTRIC
 	dw Func_21548                      ; OBJ_INTERACTION_1D
 	dw Func_21569                      ; OBJ_INTERACTION_1E
 	dw Func_215a2                      ; OBJ_INTERACTION_1F
-	dw Func_215e7                      ; OBJ_INTERACTION_20
+	dw ObjInteraction_Bouncy           ; OBJ_INTERACTION_BOUNCY
 	dw Func_2164f                      ; OBJ_INTERACTION_21
 	dw ObjInteraction_Solid            ; OBJ_INTERACTION_SOLID
 	dw Func_21774                      ; OBJ_INTERACTION_23
 	dw Func_217b9                      ; OBJ_INTERACTION_24
-	dw Func_21819                      ; OBJ_INTERACTION_25
+	dw ObjInteraction_Vampire          ; OBJ_INTERACTION_VAMPIRE
 	dw ObjInteraction_Bubble           ; OBJ_INTERACTION_BUBBLE
-	dw Func_21887                      ; OBJ_INTERACTION_27
+	dw ObjInteraction_Ice              ; OBJ_INTERACTION_ICE
 	dw ObjInteraction_Owl              ; OBJ_INTERACTION_OWL
 	dw ObjInteraction_Rail             ; OBJ_INTERACTION_RAIL
 	dw Func_20e0f                      ; OBJ_INTERACTION_2A
@@ -266,12 +266,12 @@ ProcessInteractions: ; 20000 (8:4000)
 	dw Func_21b78                      ; OBJ_INTERACTION_36
 	dw Func_21573                      ; OBJ_INTERACTION_37
 	dw Func_21b89                      ; OBJ_INTERACTION_38
-	dw Func_21c17                      ; OBJ_INTERACTION_39
+	dw ObjInteraction_WaterDrop        ; OBJ_INTERACTION_WATER_DROP
 	dw Func_21c26                      ; OBJ_INTERACTION_3A
 	dw Func_21c56                      ; OBJ_INTERACTION_3B
 	dw Func_21c61                      ; OBJ_INTERACTION_3C
 	dw Func_21c86                      ; OBJ_INTERACTION_3D
-	dw Func_21c98                      ; OBJ_INTERACTION_3E
+	dw ObjInteraction_PrinceFroggy     ; OBJ_INTERACTION_PRINCE_FROGGY
 	dw Func_21ca8                      ; OBJ_INTERACTION_3F
 	dw ObjInteraction_WaterTeleporting ; OBJ_INTERACTION_WATER_TELEPORTING
 	dw Func_21ce9                      ; OBJ_INTERACTION_41
@@ -285,7 +285,7 @@ ProcessInteractions: ; 20000 (8:4000)
 	dw Func_21d88                      ; OBJ_INTERACTION_49
 	dw ObjInteraction_ColourCoin       ; OBJ_INTERACTION_COLOUR_COIN
 	dw Func_21df8                      ; OBJ_INTERACTION_4B
-	dw Func_21e2e                      ; OBJ_INTERACTION_4C
+	dw ObjInteraction_BottomSting      ; OBJ_INTERACTION_BOTTOM_STING
 	dw Func_21e3e                      ; OBJ_INTERACTION_4D
 	dw Func_21e9c                      ; OBJ_INTERACTION_4E
 	dw Func_21ea6                      ; OBJ_INTERACTION_4F
@@ -2331,7 +2331,7 @@ ObjInteraction_RegularCoin: ; 21433 (8:5433)
 	jp Func_20a63
 ; 0x21455
 
-Func_21455: ; 21455 (8:5455)
+ObjInteraction_Electric: ; 21455 (8:5455)
 	ld a, [wWarioScreenXPos]
 	ld b, a
 	ld a, [wObjScreenXPos]
@@ -2495,7 +2495,7 @@ Func_215a2: ; 215a2 (8:55a2)
 	ret
 ; 0x215e7
 
-Func_215e7: ; 215e7 (8:55e7)
+ObjInteraction_Bouncy: ; 215e7 (8:55e7)
 	ld a, [wInteractionSide]
 	and INTERACTION_UP | INTERACTION_DOWN
 	jp nz, StepOnObject
@@ -2726,7 +2726,7 @@ Func_217b9: ; 217b9 (8:57b9)
 	ret
 ; 0x21819
 
-Func_21819: ; 21819 (8:5819)
+ObjInteraction_Vampire: ; 21819 (8:5819)
 	ld a, [wInvincibleCounter]
 	and a
 	ret nz
@@ -2770,7 +2770,7 @@ ObjInteraction_Bubble: ; 21853 (8:5853)
 	ret
 ; 0x21887
 
-Func_21887: ; 21887 (8:5887)
+ObjInteraction_Ice: ; 21887 (8:5887)
 	ld a, [wInvincibleCounter]
 	and a
 	ret nz
@@ -3177,7 +3177,7 @@ ENDR
 	ret
 ; 0x21c17
 
-Func_21c17: ; 21c17 (8:5c17)
+ObjInteraction_WaterDrop: ; 21c17 (8:5c17)
 	ld b, OBJACTION_06
 	call SetObjAction
 	ld a, [wTransformation]
@@ -3243,7 +3243,7 @@ Func_21c86: ; 21c86 (8:5c86)
 	jp Func_20e6a
 ; 0x21c98
 
-Func_21c98: ; 21c98 (8:5c98)
+ObjInteraction_PrinceFroggy: ; 21c98 (8:5c98)
 	ld a, [wInteractionSide]
 	bit INTERACTION_UP_F, a
 	jp nz, Func_209ca
@@ -3442,7 +3442,7 @@ Func_21df8: ; 21df8 (8:5df8)
 	ret
 ; 0x21e2e
 
-Func_21e2e: ; 21e2e (8:5e2e)
+ObjInteraction_BottomSting: ; 21e2e (8:5e2e)
 	ld a, [wInteractionSide]
 	bit INTERACTION_DOWN_F, a
 	jp nz, Func_20670

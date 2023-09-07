@@ -355,9 +355,9 @@ ELSE ; (\3) == FALSE
 	ld hl, \2
 
 IF (\4) == DIRECTION_LEFT
-	call ApplyMovement
+	call ApplyOWMovement
 ELSE ; (\4) == DIRECTION_RIGHT
-	call ApplyMovement_Mirrored
+	call ApplyOWMovement_Mirrored
 ENDC
 
 	ret nz
@@ -384,12 +384,12 @@ ENDM
 
 BounceTempleRockRight: ; 15847e (56:447e)
 	ld de, Data_1588de
-	jp ApplyMovement_Mirrored
+	jp ApplyOWMovement_Mirrored
 ; 0x158484
 
 BounceTempleRockLeft: ; 158484 (56:4484)
 	ld de, Data_1588de
-	jp ApplyMovement
+	jp ApplyOWMovement
 ; 0x15848a
 
 	INCROM $15848a, $158897

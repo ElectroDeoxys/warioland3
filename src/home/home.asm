@@ -2737,7 +2737,56 @@ LoadCollectedTreasurePal_ClearScreen:: ; 1bc7 (0:1bc7)
 	ret
 ; 0x1c13
 
-	INCROM $1c13, $1c4a
+; b = number of pals
+; c = OB palette number
+; hl = palette source
+; de = OB pals dest
+CopyAndApplyOBPals:: ; 1c13 (0:1c13)
+	push bc
+	push hl
+	sla b
+	sla b
+	sla b ; *8
+	call CopyHLToDE_Short
+	pop hl
+	pop bc
+	ld a, c
+	add a
+	add a
+	add a ; *8
+	or OCPSF_AUTOINC
+	ldh [rOCPS], a
+	ld c, LOW(rOCPD)
+
+.wait_lcd_on
+	ldh a, [rSTAT]
+	and STATF_LCD
+	jr z, .wait_lcd_on
+.wait_lcd_off
+	ldh a, [rSTAT]
+	and STATF_LCD
+	jr nz, .wait_lcd_off
+
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	dec b
+	jr nz, .wait_lcd_on
+	ret
+; 0x1c4a
 
 ApplyTempPals1ToBGPals:: ; 1c4a (0:1c4a)
 	ld hl, wTempPals1
@@ -3522,7 +3571,7 @@ UpdateObjSprite:: ; 3000 (0:3000)
 	ret
 ; 0x305c
 
-Func_305c:: ; 305c (0:305c)
+MoveObjectLeftByVar2:: ; 305c (0:305c)
 	ld a, [wCurObjVar2]
 	ld b, a
 	ld hl, wCurObjXPos
@@ -3534,7 +3583,7 @@ Func_305c:: ; 305c (0:305c)
 	ret
 ; 0x3069
 
-Func_3069:: ; 3069 (0:3069)
+MoveObjectRightByVar2:: ; 3069 (0:3069)
 	ld a, [wCurObjVar2]
 	ld b, a
 	ld hl, wCurObjXPos
@@ -3546,7 +3595,7 @@ Func_3069:: ; 3069 (0:3069)
 	ret
 ; 0x3076
 
-Func_3076:: ; 3076 (0:3076)
+MoveObjectUpByVar2:: ; 3076 (0:3076)
 	ld a, [wCurObjVar2]
 	ld b, a
 	ld hl, wCurObjYPos
@@ -3558,7 +3607,37 @@ Func_3076:: ; 3076 (0:3076)
 	ret
 ; 0x3083
 
-	INCROM $3083, $30a4
+MoveObjectDownByVar2:: ; 3083 (0:3083)
+	ld a, [wCurObjVar2]
+	ld b, a
+	ld hl, wCurObjYPos
+	ld a, [hl]
+	add b
+	ld [hli], a
+	ret nc
+	inc [hl]
+	ret
+; 0x3090
+
+MoveObjectLeft_Fast:: ; 3090 (0:3090)
+	ld hl, wCurObjXPos
+	ld a, [hl]
+	sub 2
+	ld [hli], a
+	ret nc
+	dec [hl]
+	ret
+; 0x309a
+
+MoveObjectRight_Fast:: ; 309a (0:309a)
+	ld hl, wCurObjXPos
+	ld a, [hl]
+	add 2
+	ld [hli], a
+	ret nc
+	inc [hl]
+	ret
+; 0x30a4
 
 MoveObjectDown_Fast:: ; 30a4 (0:30a4)
 	ld hl, wCurObjYPos
@@ -3570,7 +3649,15 @@ MoveObjectDown_Fast:: ; 30a4 (0:30a4)
 	ret
 ; 0x30ae
 
-	INCROM $30ae, $30b8
+MoveObjectUp_Fast:: ; 30ae (0:30ae)
+	ld hl, wCurObjYPos
+	ld a, [hl]
+	sub 2
+	ld [hli], a
+	ret nc
+	dec [hl]
+	ret
+; 0x30b8
 
 ; moves current object right
 ; by 0.5 pixel per frame
@@ -3630,7 +3717,11 @@ MoveObjectDown:: ; 30d9 (0:30d9)
 	ret
 ; 0x30e1
 
-	INCROM $30e1, $30e6
+MoveObjectUp_Slow:: ; 30e1 (0:30e1)
+	ld a, [wGlobalCounter]
+	rra
+	ret nc
+;	fallthrough
 
 ; moves current object up
 ; at 1 pixel per frame
@@ -3658,7 +3749,15 @@ SetObjectFramesetPtr:: ; 30f0 (0:30f0)
 	ret
 ; 0x30fb
 
-	INCROM $30fb, $3104
+Func_30fb:: ; 30fb (0:30fb)
+	ld l, OBJ_SUBSTATE
+	ld a, [hl]
+	and $0f
+	dec a
+	ret z
+	dec [hl]
+	ret
+; 0x3104
 
 UpdateObjectFrame:: ; 3104 (0:3104)
 	ld hl, wCurObjFrameDuration
@@ -3936,28 +4035,48 @@ Func_3444:: ; 3444 (0:3444)
 	ret
 ; 0x345b
 
-	INCROM $345b, $3472
+; returns in e how many objects there are
+; that are currently active and transient
+CountActiveTransientObjects:: ; 345b (0:345b)
+	homecall _CountActiveTransientObjects
+	ret
+; 0x3472
 
-Func_3472:: ; 3472 (0:3472)
-	homecall Func_631a1
+; de = start of data
+ApplyObjSetMovement:: ; 3472 (0:3472)
+	homecall _ApplyObjSetMovement
 	ret
 ; 0x3489
 
-	INCROM $3489, $34b7
+ApplyObjYMovement_Loop:: ; 3489 (0:3489)
+	homecall _ApplyObjYMovement_Loop
+	ret
+; 0x34a0
 
-Func_34b7:: ; 34b7 (0:34b7)
-	homecall Func_631e8
+Func_34a0:: ; 34a0 (0:34a0)
+	homecall Func_6328a
+	ret
+; 0x34b7
+
+ApplyObjYMovement:: ; 34b7 (0:34b7)
+	homecall _ApplyObjYMovement
 	ret
 ; 0x34ce
 
-	INCROM $34ce, $34e5
+ApplyObjXMovement:: ; 34ce (0:34ce)
+	homecall _ApplyObjXMovement
+	ret
+; 0x34e5
 
 VanishObject:: ; 34e5 (0:34e5)
 	homecall _VanishObject
 	ret
 ; 0x34fc
 
-	INCROM $34fc, $3513
+Func_34fc:: ; 34fc (0:34fc)
+	homecall Func_63209
+	ret
+; 0x3513
 
 Func_3513:: ; 3513 (0:3513)
 	homecall Func_19bc3
@@ -4001,7 +4120,166 @@ Func_35a3:: ; 35a3 (0:35a3)
 	ret
 ; 0x35bb
 
-	INCROM $35bb, $3a00
+; c = OB pal index
+; b = num of pals
+; hl = pals
+Func_35bb:: ; 35bb (0:35bb)
+	ld a, c
+	add a
+	add a
+	add a ; *8
+	or OCPSF_AUTOINC
+	ldh [rOCPS], a
+	ld c, LOW(rOCPD)
+.wait_lcd_on
+	ldh a, [rSTAT]
+	and STATF_LCD
+	jr z, .wait_lcd_on
+.wait_lcd_off
+	ldh a, [rSTAT]
+	and STATF_LCD
+	jr nz, .wait_lcd_off
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	dec b
+	jr nz, .wait_lcd_on
+	ret
+
+; c = BG pal index
+; b = num of pals
+; hl = pals
+Func_35e5:: ; 35e5 (0:35e5)
+	ld a, c
+	add a
+	add a
+	add a ; *8
+	or BCPSF_AUTOINC
+	ldh [rBCPS], a
+	ld c, LOW(rBCPD)
+.wait_lcd_on
+	ldh a, [rSTAT]
+	and STATF_LCD
+	jr z, .wait_lcd_on
+.wait_lcd_off
+	ldh a, [rSTAT]
+	and STATF_LCD
+	jr nz, .wait_lcd_off
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	ld a, [hli]
+	ld [$ff00+c], a
+	dec b
+	jr nz, .wait_lcd_on
+	ret
+; 0x360f
+
+Func_360f:: ; 360f (0:360f)
+	ld a, c
+	add a
+	add a
+	add a ; *8
+	or OCPSF_AUTOINC
+	ldh [rOCPS], a
+	ld c, LOW(rOCPD)
+.wait_lcd_on
+	ldh a, [rSTAT]
+	and STATF_LCD
+	jr z, .wait_lcd_on
+.wait_lcd_off
+	ldh a, [rSTAT]
+	and STATF_LCD
+	jr nz, .wait_lcd_off
+	xor a ; black
+	ld [$ff00+c], a
+	ld [$ff00+c], a
+	ld [$ff00+c], a
+	ld [$ff00+c], a
+	ld [$ff00+c], a
+	ld [$ff00+c], a
+	ld [$ff00+c], a
+	ld [$ff00+c], a
+	dec b
+	jr nz, .wait_lcd_on
+	ret
+
+Func_3632:: ; 3632 (0:3632)
+	ld a, c
+	add a
+	add a
+	add a ; *8
+	or BCPSF_AUTOINC
+	ldh [rBCPS], a
+	ld c, LOW(rBCPD)
+.wait_lcd_on
+	ldh a, [rSTAT]
+	and STATF_LCD
+	jr z, .wait_lcd_on
+.wait_lcd_off
+	ldh a, [rSTAT]
+	and STATF_LCD
+	jr nz, .wait_lcd_off
+	xor a ; black
+	ld [$ff00+c], a
+	ld [$ff00+c], a
+	ld [$ff00+c], a
+	ld [$ff00+c], a
+	ld [$ff00+c], a
+	ld [$ff00+c], a
+	ld [$ff00+c], a
+	ld [$ff00+c], a
+	dec b
+	jr nz, .wait_lcd_on
+	ret
+; 0x3655
+
+; if Wario is underneath a one-way platform,
+; then don't process any actions for it
+SetOneWayPlatformAction:: ; 3655 (0:3655)
+	ld a, [wCurObjFlags]
+	and OBJFLAG_STEPPED
+	ret nz
+	ld a, [wCurObjCollBoxTop]
+	ld b, a
+	ld a, [wCurObjScreenYPos]
+	add $2a + 3
+	add b
+	ld b, a ; wCurObjCollBoxTop + wCurObjScreenYPos + $2a + 3
+	ld a, [wWarioScreenYPos]
+	add $2a
+	cp b
+	ret c ; return if Wario is over collision box
+	ld a, NO_ACTIONS_FOR 1
+	ld [wCurObjAction], a
+	ret
+; 0x3673
+
+	INCROM $3673, $3a00
 
 ; b = sprite bank
 ; de = pointer to sprite
@@ -4382,10 +4660,10 @@ Func_3c03:: ; 3c03 (0:3c03)
 	ret
 ; 0x3c1f
 
-; same as ApplyMovement but the x offsets are mirrored
+; same as ApplyOWMovement but the x offsets are mirrored
 ; hl = OW obj
 ; de = relative positions
-ApplyMovement_Mirrored:: ; 3c1f (0:3c1f)
+ApplyOWMovement_Mirrored:: ; 3c1f (0:3c1f)
 	call Func_3c35
 	sub e
 	jr Func_3c29
@@ -4393,7 +4671,7 @@ ApplyMovement_Mirrored:: ; 3c1f (0:3c1f)
 
 ; hl = OW obj
 ; de = relative positions
-ApplyMovement:: ; 3c25 (0:3c25)
+ApplyOWMovement:: ; 3c25 (0:3c25)
 	call Func_3c35
 	add e
 ;	fallthrough

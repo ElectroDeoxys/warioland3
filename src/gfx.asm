@@ -76,7 +76,7 @@ PneumoGfx::             INCBIN "gfx/enemies/pneumo.2bpp.lz"
 Sun2Gfx::               INCBIN "gfx/enemies/sun2.2bpp.lz"
 Moon2Gfx::              INCBIN "gfx/enemies/moon2.2bpp.lz"
 RoboMouse2Gfx::         INCBIN "gfx/enemies/robo_mouse2.2bpp.lz"
-ClearGate1Gfx::         INCBIN "gfx/enemies/clear_gate1.2bpp.lz"
+ClearGate1Gfx::         INCBIN "gfx/enemies/clear_gate.2bpp.lz"
 
 
 SECTION "Enemy Gfx 1 Slot 3", ROMX
@@ -94,7 +94,7 @@ BubbleGfx::      INCBIN "gfx/enemies/bubble.2bpp.lz"
 CartGfx::        INCBIN "gfx/enemies/cart.2bpp.lz"
 ZipLineGfx::     INCBIN "gfx/enemies/zip_line.2bpp.lz"
 FlameBlockGfx::  INCBIN "gfx/enemies/flame_block.2bpp.lz"
-ClearGate2Gfx::  INCBIN "gfx/enemies/clear_gate2.2bpp.lz"
+ClearGate2Gfx::  INCBIN "gfx/enemies/clear_gate.2bpp.lz"
 TadpoleGfx::     INCBIN "gfx/enemies/tadpole.2bpp.lz"
 RockGfx::        INCBIN "gfx/enemies/rock.2bpp.lz"
 FireGfx::        INCBIN "gfx/enemies/fire.2bpp.lz"
@@ -117,7 +117,7 @@ FallingSnowGfx::    INCBIN "gfx/enemies/falling_snow.2bpp.lz"
 PillarPlatformGfx:: INCBIN "gfx/enemies/pillar_platform.2bpp.lz"
 WaterDropGfx::      INCBIN "gfx/enemies/water_drop.2bpp.lz"
 NobiiruGfx::        INCBIN "gfx/enemies/nobiiru.2bpp.lz"
-ClearGate3Gfx::     INCBIN "gfx/enemies/clear_gate3.2bpp.lz"
+ClearGate3Gfx::     INCBIN "gfx/enemies/clear_gate.2bpp.lz"
 OctohonGfx::        INCBIN "gfx/enemies/octohon.2bpp.lz"
 SparkGfx::          INCBIN "gfx/enemies/spark.2bpp.lz"
 
@@ -216,3 +216,13 @@ INCLUDE "gfx/oam/objects3.asm"
 SECTION "Objects OAM 4", ROMX
 
 INCLUDE "gfx/oam/objects4.asm"
+
+
+SECTION "Objects OAM 5", ROMX
+
+INCLUDE "gfx/oam/objects5.asm"
+
+
+SECTION "Objects OAM 6", ROMX
+
+INCLUDE "gfx/oam/objects6.asm"

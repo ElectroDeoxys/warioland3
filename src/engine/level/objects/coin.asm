@@ -10,11 +10,11 @@ MACRO move_coin
 	ld [hld], a
 	dec l
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld a, \2
 	ld [wCurObjStateDuration], a
 .Move{u:x}:
-	ld hl, wCurObjMovementIndex
+	ld hl, wCurObjVar3
 	ld a, [hl]
 	ld b, HIGH(\3)
 	add LOW(\3)
@@ -196,7 +196,7 @@ CoinFunc: ; 63383 (18:7383)
 	jr .asm_63502
 	move_coin $06, 5, Data_602e0
 .asm_63502
-	call Func_305c
+	call MoveObjectLeftByVar2
 	ld hl, wCurObjYPos
 	ld a, [hli]
 	sub 8
@@ -231,7 +231,7 @@ CoinFunc: ; 63383 (18:7383)
 	jr .asm_635db
 	move_coin $07, 5, Data_602e0
 .asm_635db
-	call Func_3069
+	call MoveObjectRightByVar2
 	ld hl, wCurObjYPos
 	ld a, [hli]
 	sub 8
@@ -267,8 +267,8 @@ CoinFunc: ; 63383 (18:7383)
 	xor a
 	ld [hld], a
 .FallLeft:
-	call Func_305c
-	ld l, OBJ_MOVEMENT_INDEX
+	call MoveObjectLeftByVar2
+	ld l, OBJ_VAR_3
 	ld a, [hl]
 	ld b, HIGH(FallingYVel_Light)
 	add LOW(FallingYVel_Light)
@@ -377,8 +377,8 @@ CoinFunc: ; 63383 (18:7383)
 	xor a
 	ld [hld], a
 .FallRight:
-	call Func_3069
-	ld l, OBJ_MOVEMENT_INDEX
+	call MoveObjectRightByVar2
+	ld l, OBJ_VAR_3
 	ld a, [hl]
 	ld b, HIGH(FallingYVel_Light)
 	add LOW(FallingYVel_Light)
@@ -509,7 +509,7 @@ CoinFunc: ; 63383 (18:7383)
 	call Func_3513
 	and $0f
 	jr nz, .asm_637dd
-	call Func_305c
+	call MoveObjectLeftByVar2
 	ld hl, wCurObjYPos
 	ld a, [hli]
 	ldh [hYPosLo], a
@@ -585,7 +585,7 @@ CoinFunc: ; 63383 (18:7383)
 	call Func_3513
 	and $0f
 	jr nz, .asm_63861
-	call Func_3069
+	call MoveObjectRightByVar2
 	ld hl, wCurObjYPos
 	ld a, [hli]
 	ldh [hYPosLo], a
@@ -715,7 +715,7 @@ CoinFunc: ; 63383 (18:7383)
 	xor a
 	ld [hld], a
 .State15:
-	ld hl, wCurObjMovementIndex
+	ld hl, wCurObjVar3
 	ld a, [hl]
 	ld b, $40
 	add $40

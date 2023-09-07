@@ -140,12 +140,12 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 
 .State0b:
 	ld hl, wCurObjSubState
-	set OBJSUBFLAG_DIR_F, [hl]
+	set OBJSUBFLAG_HDIR_F, [hl]
 	jp .asm_41044
 
 .State0c:
 	ld hl, wCurObjSubState
-	res OBJSUBFLAG_DIR_F, [hl]
+	res OBJSUBFLAG_HDIR_F, [hl]
 	jp .asm_41044
 
 .Flatten:
@@ -184,7 +184,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	ret nz
-	ld a, 31 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 31
 	ld [wCurObjAction], a
 	jp .asm_40fe9
 
@@ -199,7 +199,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	ld [hld], a
 	dec l
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld de, Frameset_683e1
 	call SetObjectFramesetPtr
 	ret
@@ -210,7 +210,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	ld [hld], a
 	dec l
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld de, Frameset_683de
 	call SetObjectFramesetPtr
 	ret
@@ -278,18 +278,18 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	sub b
 .asm_41006
 	jr c, .asm_41012
-	res OBJSUBFLAG_DIR_F, [hl] ; OBJ_SUBSTATE
+	res OBJSUBFLAG_HDIR_F, [hl] ; OBJ_SUBSTATE
 	ld de, Frameset_683c1
 	call SetObjectFramesetPtr
 	jr .asm_4101a
 .asm_41012
-	set OBJSUBFLAG_DIR_F, [hl] ; OBJ_SUBSTATE
+	set OBJSUBFLAG_HDIR_F, [hl] ; OBJ_SUBSTATE
 	ld de, Frameset_683c4
 	call SetObjectFramesetPtr
 .asm_4101a
 	ld a, 22
 	ld [hli], a ; OBJ_STATE_DURATION
-	ld l, OBJ_MOVEMENT_INDEX
+	ld l, OBJ_VAR_3
 	xor a
 	ld [hld], a
 	play_sfx SFX_066
@@ -321,7 +321,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	ld [hld], a
 	dec l
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ret
 
 .asm_41053
@@ -344,13 +344,13 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	ld [hl], a
 	ld l, OBJ_SUBSTATE
 	ld a, [hl]
-	xor OBJSUBFLAG_DIR
+	xor OBJSUBFLAG_HDIR
 	ld [hl], a
 	jr .asm_41044
 
 .asm_4107a
 	ld bc, Data_603d0
-	call Func_34b7
+	call ApplyObjYMovement
 	ld hl, wCurObjYPos
 	ld a, [hli]
 	sub 10
@@ -374,7 +374,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	ld de, Frameset_683c4
 	call SetObjectFramesetPtr
 	ld l, OBJ_SUBSTATE
-	set OBJSUBFLAG_DIR_F, [hl]
+	set OBJSUBFLAG_HDIR_F, [hl]
 	ret
 .jump_right
 	ld a, [hli]
@@ -389,7 +389,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	ld de, Frameset_683c1
 	call SetObjectFramesetPtr
 	ld l, OBJ_SUBSTATE
-	res OBJSUBFLAG_DIR_F, [hl]
+	res OBJSUBFLAG_HDIR_F, [hl]
 	ret
 
 .JumpFall:
@@ -431,7 +431,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	and a
 	jp nz, VanishObject2
 	ld bc, Data_603e0
-	call Func_34b7
+	call ApplyObjYMovement
 	ld hl, wCurObjYPos
 	ld a, [hli]
 	sub 10
@@ -456,7 +456,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	ld de, Frameset_683c4
 	call SetObjectFramesetPtr
 	ld l, OBJ_SUBSTATE
-	set OBJSUBFLAG_DIR_F, [hl]
+	set OBJSUBFLAG_HDIR_F, [hl]
 	ret
 
 .fall_right
@@ -472,18 +472,18 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	ld de, Frameset_683c1
 	call SetObjectFramesetPtr
 	ld l, OBJ_SUBSTATE
-	res OBJSUBFLAG_DIR_F, [hl]
+	res OBJSUBFLAG_HDIR_F, [hl]
 	ret
 
 .FallBounce:
-	ld a, [wCurObjMovementIndex]
+	ld a, [wCurObjVar3]
 	cp 15
 	jr z, .check_bounce_end
 	cp 14
 	jr z, .reset_bounce_animation
 .do_bounce_movement
 	ld bc, Data_604b0
-	jp Func_34b7
+	jp ApplyObjYMovement
 .reset_bounce_animation
 	ld de, Frameset_683e1
 	call SetObjectFramesetPtr
@@ -553,7 +553,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	ld a, $02
 	ld [hli], a ; OBJ_VAR_2
 	xor a
-	ld [hli], a ; OBJ_MOVEMENT_INDEX
+	ld [hli], a ; OBJ_VAR_3
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
 	and HEAVY_OBJ
@@ -582,7 +582,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	ld [hld], a
 	dec l
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld a, 7
 	ld [wCurObjStateDuration], a
 .State40:
@@ -632,7 +632,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	ld a, $02
 	ld [hli], a ; OBJ_VAR_2
 	xor a
-	ld [hli], a ; OBJ_MOVEMENT_INDEX
+	ld [hli], a ; OBJ_VAR_3
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
 	and HEAVY_OBJ
@@ -673,13 +673,13 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	ld b, $01
 
 .asm_412a4
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld a, [hl] ; OBJ_SUBSTATE
 	and OBJSUBFLAGS_MASK
 	ld [hld], a
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld a, b
 	ld [hld], a ; OBJ_VAR_2
 	ld de, Frameset_683ca
@@ -711,7 +711,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	ld [hld], a
 	dec l
 	ld a, $41
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld a, $d0
 	ld [hld], a ; OBJ_VAR_2
 	ld a, $01
@@ -724,7 +724,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	ld [hld], a
 	dec l
 	ld a, $41
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld a, $f0
 	ld [hld], a ; OBJ_VAR_2
 	ld a, $01
@@ -745,7 +745,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	jp nz, Func_3353
 	ld hl, wCurObjSubState
 	ld a, [hl]
-	xor OBJSUBFLAG_DIR
+	xor OBJSUBFLAG_HDIR
 	ld [hl], a
 	jr .State18 ; unnecessary jump
 .State18:
@@ -762,7 +762,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	jp z, Func_3362
 	ld hl, wCurObjSubState
 	ld a, [hl]
-	xor OBJSUBFLAG_DIR
+	xor OBJSUBFLAG_HDIR
 	ld [hl], a
 	jp .State19
 
@@ -774,7 +774,7 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	ld [hld], a ; OBJ_STATE
 	dec l
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
 	and HEAVY_OBJ

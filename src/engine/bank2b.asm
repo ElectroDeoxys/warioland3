@@ -2906,7 +2906,7 @@ ENDC
 .MoveCircle
 	ld hl, \2
 	ld de, Data_ad654
-	call ApplyMovement
+	call ApplyOWMovement
 	ret
 ENDM
 
@@ -3378,7 +3378,7 @@ DoHiddenFigureLeftHandMovement: ; ad91b (2b:591b)
 	ret z
 	ld hl, wSceneObj3
 	ld de, Data_ad939
-	call ApplyMovement
+	call ApplyOWMovement
 	ret
 ; 0xad92a
 
@@ -3388,7 +3388,7 @@ DoHiddenFigureRightHandMovement: ; ad92a (2b:592a)
 	ret z
 	ld hl, wSceneObj4
 	ld de, Data_ad939
-	call ApplyMovement_Mirrored
+	call ApplyOWMovement_Mirrored
 	ret
 ; 0xad939
 
@@ -4805,7 +4805,7 @@ Func_ae724: ; ae724 (2b:6724)
 	jr z, .asm_ae740
 	ld de, Data_aed06
 	ld hl, wSceneWario
-	call ApplyMovement
+	call ApplyOWMovement
 	jr nz, .asm_ae740
 	xor a
 	ld [w2d894], a
@@ -5266,21 +5266,21 @@ Func_ae9c5: ; ae9c5 (2b:69c5)
 Func_ae9d0: ; ae9d0 (2b:69d0)
 	ld de, Data_aee09
 	ld hl, wSceneObj3
-	call ApplyMovement
+	call ApplyOWMovement
 	ret
 ; 0xae9da
 
 Func_ae9da: ; ae9da (2b:69da)
 	ld de, Data_aedba
 	ld hl, wSceneObj3
-	call ApplyMovement
+	call ApplyOWMovement
 	ret
 ; 0xae9e4
 
 Func_ae9e4: ; ae9e4 (2b:69e4)
 	ld de, Data_aed6d
 	ld hl, wSceneObj3
-	call ApplyMovement
+	call ApplyOWMovement
 	ret
 ; 0xae9ee
 
@@ -5437,19 +5437,19 @@ Func_ae9ee: ; ae9ee (2b:69ee)
 .Func_aeaef
 	ld de, Data_aed6d
 	ld hl, wSceneObj4
-	call ApplyMovement
+	call ApplyOWMovement
 	ret
 
 .Func_aeaf9
 	ld de, Data_aee09
 	ld hl, wSceneObj4
-	call ApplyMovement
+	call ApplyOWMovement
 	ret
 
 .Func_aeb03
 	ld de, Data_aee09
 	ld hl, wSceneObj4
-	call ApplyMovement
+	call ApplyOWMovement
 	ret
 ; 0xaeb0d
 
@@ -5600,7 +5600,7 @@ Func_aeb0d: ; aeb0d (2b:6b0d)
 	ld de, Data_aed6d
 .Func_aec0e
 	ld hl, wSceneObj5
-	call ApplyMovement
+	call ApplyOWMovement
 	ret
 
 .Func_aec15
@@ -5735,7 +5735,7 @@ Func_aec1f: ; aec1f (2b:6c1f)
 	ld de, Data_aedba
 .Func_aecf5
 	ld hl, wSceneObj9
-	call ApplyMovement
+	call ApplyOWMovement
 	ret
 
 .Func_aecfc

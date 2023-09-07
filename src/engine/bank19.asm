@@ -13,7 +13,7 @@ LoadEnemyGroupData:: ; 64000 (19:4000)
 
 	ld a, [wEnemyGroup]
 	cp $f0
-	jp z, Func_643a1
+	jp z, LoadHiddenFigureData
 
 	ld d, $00
 	ld e, a
@@ -333,7 +333,7 @@ ENDR
 	ld [hli], a
 	ld a, [wCurObjUnk02]
 	ld [hli], a
-	ld a, [wCurObjYPos]
+	ld a, [wCurObjYPos + 0]
 	ld e, a
 	ld a, [bc]
 	rla
@@ -430,7 +430,7 @@ CreateObject_GotPos:: ; 64352 (19:4352)
 	ld [de], a ; OBJ_VAR_2
 	inc e
 	ld a, [hli]
-	ld [de], a ; OBJ_MOVEMENT_INDEX
+	ld [de], a ; OBJ_VAR_3
 	inc e
 	ld a, [hli]
 	ld [de], a ; OBJ_SUBSTATE
@@ -456,9 +456,8 @@ CreateObject_GotPos:: ; 64352 (19:4352)
 	ret
 ; 0x643a1
 
-; loads a pointer to wObjDataPtr01
-Func_643a1: ; 643a1 (19:43a1)
-	ld hl, .data_643bf
+LoadHiddenFigureData: ; 643a1 (19:43a1)
+	ld hl, .pointers
 	ld a, $d
 	ldh [hffa0], a
 	ld de, wObjDataPtr01
@@ -481,8 +480,8 @@ Func_643a1: ; 643a1 (19:43a1)
 	jr nz, .loop
 	ret
 
-.data_643bf
-	dw Data_64783
+.pointers
+	dw HiddenFigureData
 	dw NULL
 ; 0x643c3
 
@@ -493,735 +492,135 @@ Func_643a1: ; 643a1 (19:43a1)
 ; \5 update function
 ; \6 object flags
 MACRO object_data
-assert (BANK(\1) - BANK("Objects OAM 1")) | (BANK(\5) - BANK("Object Update Functions 1")) == (BANK(\5) - BANK("Object Update Functions 1"))
-	dn (BANK(\5) - BANK("Object Update Functions 1")), \2
+assert (BANK(\1) - BANK("Objects OAM 1")) | (BANK(\5) - BANK("Object Functions 1")) == (BANK(\5) - BANK("Object Functions 1"))
+	dn (BANK(\5) - BANK("Object Functions 1")), \2
 	db \3, \4
 	dw \1
 	dw \5
 	db \6
 ENDM
 
-DummyObjectData:        object_data OAM_18007b, $0, OBJ_INTERACTION_00,                           0, DummyObjectFunc,        $0
-GreyChestData:          object_data OAM_18c000, $1, OBJ_INTERACTION_GREY_TREASURE  | HEAVY_OBJ, -24, GreyChestFunc,          $0
-RedChestData:           object_data OAM_18c000, $1, OBJ_INTERACTION_RED_TREASURE   | HEAVY_OBJ, -24, RedChestFunc,           $0
-GreenChestData:         object_data OAM_18c000, $1, OBJ_INTERACTION_GREEN_TREASURE | HEAVY_OBJ, -24, GreenChestFunc,         $0
-BlueChestData:          object_data OAM_18c000, $1, OBJ_INTERACTION_BLUE_TREASURE  | HEAVY_OBJ, -24, BlueChestFunc,          $0
-GreyKeyData:            object_data OAM_18c000, $2, OBJ_INTERACTION_GREY_KEY,                   -24, KeyFunc,                $0
-RedKeyData:             object_data OAM_18c000, $2, OBJ_INTERACTION_RED_KEY,                    -24, KeyFunc,                $0
-GreenKeyData:           object_data OAM_18c000, $2, OBJ_INTERACTION_GREEN_KEY,                  -24, KeyFunc,                $0
-BlueKeyData:            object_data OAM_18c000, $2, OBJ_INTERACTION_BLUE_KEY,                   -24, KeyFunc,                $0
-MusicaCoinData:         object_data OAM_18c000, $3, OBJ_INTERACTION_MUSICAL_COIN,               -25, MusicalCoinFunc,        $0
-SpearheadData:          object_data OAM_18007b, $0, OBJ_INTERACTION_01,                         -14, SpearheadFunc,          OBJFLAG_PRIORITY
-FutamoguData:           object_data OAM_180564, $1, OBJ_INTERACTION_WALKABLE       | HEAVY_OBJ, -17, FutamoguFunc,           OBJFLAG_PRIORITY
-WebberData:             object_data OAM_180242, $2, OBJ_INTERACTION_WALKABLE       | HEAVY_OBJ, -16, WebberFunc,             OBJFLAG_PRIORITY
-TorchData:              object_data OAM_180838, $4, OBJ_INTERACTION_FIRE,                       -16, TorchFunc,              $0
-TorchNoEmbersData:      object_data OAM_180838, $6, OBJ_INTERACTION_FIRE,                       -16, TorchNoEmbersFunc,      $0
-FlameBlockTorchData:    object_data OAM_180838, $7, OBJ_INTERACTION_UNLIT_TORCH,                -16, FlameBlockTorchFunc,    $0
-FlameBlockData:         object_data OAM_1895ec, $b, OBJ_INTERACTION_SOLID,                      -30, FlameBlockFunc,         $0
-StoveData:              object_data OAM_1896e1, $c, OBJ_INTERACTION_STOVE          | HEAVY_OBJ, -32, StoveFunc,              $0
-UnusedFlowerData:       object_data OAM_180916, $6, OBJ_INTERACTION_01                        ,   0, UnusedFlowerFunc,       $0
-CountRichtertoffenData: object_data OAM_1809ff, $7, OBJ_INTERACTION_RICHTERTOFFEN  | HEAVY_OBJ, -18, CountRichtertoffenFunc, OBJFLAG_PRIORITY
-HebariiData:            object_data OAM_18a703, $0, OBJ_INTERACTION_3D                        , -15, HebariiFunc,            $0
-
-Data_6446b: ; 6446b (19:446b)
-	db ($0 << 4) | $9 ; low bank nybble, ??
-	db $01, $f4 ; ??, ??
-	dw $4b43 ; OAM ptr
-	dw Func_41357 ; update function
-	db $80 ; ??
-
-Data_64473: ; 64473 (19:4473)
-	db ($0 << 4) | $a ; low bank nybble, ??
-	db $0b, $f2 ; ??, ??
-	dw $4ea7 ; OAM ptr
-	dw Func_41a7c ; update function
-	db $80 ; ??
-
-Data_6447b: ; 6447b (19:447b)
-	db ($0 << 4) | $b ; low bank nybble, ??
-	db $01, $e7 ; ??, ??
-	dw $536c ; OAM ptr
-	dw Func_42170 ; update function
-	db $80 ; ??
-
-Data_64483: ; 64483 (19:4483)
-	db ($0 << 4) | $c ; low bank nybble, ??
-	db $01, $e7 ; ??, ??
-	dw $5189 ; OAM ptr
-	dw Func_42478 ; update function
-	db $80 ; ??
-
-Data_6448b: ; 6448b (19:448b)
-	db ($0 << 4) | $c ; low bank nybble, ??
-	db $01, $e7 ; ??, ??
-	dw $5189 ; OAM ptr
-	dw Func_424b1 ; update function
-	db $80 ; ??
-
-Data_64493: ; 64493 (19:4493)
-	db ($0 << 4) | $c ; low bank nybble, ??
-	db $4c, $f3 ; ??, ??
-	dw $560c ; OAM ptr
-	dw Func_429c4 ; update function
-	db $00 ; ??
-
-Data_6449b: ; 6449b (19:449b)
-	db ($0 << 4) | $d ; low bank nybble, ??
-	db $02, $f4 ; ??, ??
-	dw $560c ; OAM ptr
-	dw Func_42b7d ; update function
-	db $00 ; ??
-
-Data_644a3: ; 644a3 (19:44a3)
-	db ($2 << 4) | $4 ; low bank nybble, ??
-	db $0a, $f6 ; ??, ??
-	dw $4395 ; OAM ptr
-	dw $4730 ; update function
-	db $00 ; ??
-
-Data_644ab: ; 644ab (19:44ab)
-	db ($0 << 4) | $b ; low bank nybble, ??
-	db $0b, $00 ; ??, ??
-	dw $4000 ; OAM ptr
-	dw Func_42ba8 ; update function
-	db $00 ; ??
-
-Data_644b3: ; 644b3 (19:44b3)
-	db ($0 << 4) | $8 ; low bank nybble, ??
-	db $0c, $ef ; ??, ??
-	dw $5be4 ; OAM ptr
-	dw Func_436ea ; update function
-	db $00 ; ??
-
-Data_644bb: ; 644bb (19:44bb)
-	db ($0 << 4) | $c ; low bank nybble, ??
-	db $01, $f8 ; ??, ??
-	dw $581e ; OAM ptr
-	dw Func_42d1d ; update function
-	db $80 ; ??
-
-Data_644c3: ; 644c3 (19:44c3)
-	db ($0 << 4) | $f ; low bank nybble, ??
-	db $24, $f3 ; ??, ??
-	dw $59e3 ; OAM ptr
-	dw Func_43278 ; update function
-	db $80 ; ??
-
-Data_644cb: ; 644cb (19:44cb)
-	db ($0 << 4) | $d ; low bank nybble, ??
-	db $02, $f3 ; ??, ??
-	dw $59e3 ; OAM ptr
-	dw Func_43278 ; update function
-	db $80 ; ??
-
-Data_644d3: ; 644d3 (19:44d3)
-	db ($2 << 4) | $d ; low bank nybble, ??
-	db $8c, $e1 ; ??, ??
-	dw $5783 ; OAM ptr
-	dw $589e ; update function
-	db $00 ; ??
-
-Data_644db: ; 644db (19:44db)
-	db ($1 << 4) | $d ; low bank nybble, ??
-	db $01, $fa ; ??, ??
-	dw $5a1c ; OAM ptr
-	dw $79b8 ; update function
-	db $00 ; ??
-
-Data_644e3: ; 644e3 (19:44e3)
-	db ($0 << 4) | $4 ; low bank nybble, ??
-	db $b1, $f1 ; ??, ??
-	dw $5b0f ; OAM ptr
-	dw Func_43451 ; update function
-	db $80 ; ??
-
-Data_644eb: ; 644eb (19:44eb)
-	db ($0 << 4) | $5 ; low bank nybble, ??
-	db $3b, $f1 ; ??, ??
-	dw $5b0f ; OAM ptr
-	dw Func_434ba ; update function
-	db $00 ; ??
-
-Data_644f3: ; 644f3 (19:44f3)
-	db ($2 << 4) | $3 ; low bank nybble, ??
-	db $3b, $f1 ; ??, ??
-	dw $6b5c ; OAM ptr
-	dw $6902 ; update function
-	db $00 ; ??
-
-Data_644fb: ; 644fb (19:44fb)
-	db ($1 << 4) | $1 ; low bank nybble, ??
-	db $be, $f0 ; ??, ??
-	dw $4000 ; OAM ptr
-	dw $40a1 ; update function
-	db $80 ; ??
-
-Data_64503: ; 64503 (19:4503)
-	db ($1 << 4) | $1 ; low bank nybble, ??
-	db $be, $e6 ; ??, ??
-	dw $4000 ; OAM ptr
-	dw $4080 ; update function
-	db $80 ; ??
-
-Data_6450b: ; 6450b (19:450b)
-	db ($1 << 4) | $2 ; low bank nybble, ??
-	db $81, $ee ; ??, ??
-	dw $422f ; OAM ptr
-	dw $423b ; update function
-	db $80 ; ??
-
-Data_64513: ; 64513 (19:4513)
-	db ($1 << 4) | $0 ; low bank nybble, ??
-	db $01, $ec ; ??, ??
-	dw $496f ; OAM ptr
-	dw $48d7 ; update function
-	db $80 ; ??
-
-Data_6451b: ; 6451b (19:451b)
-	db ($1 << 4) | $5 ; low bank nybble, ??
-	db $81, $ee ; ??, ??
-	dw $4ab2 ; OAM ptr
-	dw $4d3c ; update function
-	db $80 ; ??
-
-Data_64523: ; 64523 (19:4523)
-	db ($1 << 4) | $3 ; low bank nybble, ??
-	db $a2, $e8 ; ??, ??
-	dw $4ab2 ; OAM ptr
-	dw $54a0 ; update function
-	db $80 ; ??
-
-Data_6452b: ; 6452b (19:452b)
-	db ($1 << 4) | $6 ; low bank nybble, ??
-	db $1e, $f0 ; ??, ??
-	dw $4db9 ; OAM ptr
-	dw $564a ; update function
-	db $80 ; ??
-
-Data_64533: ; 64533 (19:4533)
-	db ($1 << 4) | $7 ; low bank nybble, ??
-	db $0b, $00 ; ??, ??
-	dw $4eeb ; OAM ptr
-	dw $59a9 ; update function
-	db $00 ; ??
-
-Data_6453b: ; 6453b (19:453b)
-	db ($1 << 4) | $9 ; low bank nybble, ??
-	db $8b, $fa ; ??, ??
-	dw $4ffa ; OAM ptr
-	dw $5ab4 ; update function
-	db $80 ; ??
-
-Data_64543: ; 64543 (19:4543)
-	db ($1 << 4) | $c ; low bank nybble, ??
-	db $0b, $f2 ; ??, ??
-	dw $4755 ; OAM ptr
-	dw $6b66 ; update function
-	db $80 ; ??
-
-Data_6454b: ; 6454b (19:454b)
-	db ($1 << 4) | $b ; low bank nybble, ??
-	db $01, $f2 ; ??, ??
-	dw $440a ; OAM ptr
-	dw $5ee3 ; update function
-	db $80 ; ??
-
-Data_64553: ; 64553 (19:4553)
-	db ($1 << 4) | $4 ; low bank nybble, ??
-	db $01, $f2 ; ??, ??
-	dw $45aa ; OAM ptr
-	dw $65b5 ; update function
-	db $80 ; ??
-
-Data_6455b: ; 6455b (19:455b)
-	db ($1 << 4) | $a ; low bank nybble, ??
-	db $0e, $ec ; ??, ??
-	dw $51df ; OAM ptr
-	dw $724e ; update function
-	db $00 ; ??
-
-Data_64563: ; 64563 (19:4563)
-	db ($1 << 4) | $a ; low bank nybble, ??
-	db $1c, $ec ; ??, ??
-	dw $54a2 ; OAM ptr
-	dw $756f ; update function
-	db $00 ; ??
-
-Data_6456b: ; 6456b (19:456b)
-	db ($1 << 4) | $0 ; low bank nybble, ??
-	db $25, $f4 ; ??, ??
-	dw $5788 ; OAM ptr
-	dw $7718 ; update function
-	db $80 ; ??
-
-Data_64573: ; 64573 (19:4573)
-	db ($1 << 4) | $6 ; low bank nybble, ??
-	db $3f, $ec ; ??, ??
-	dw $5893 ; OAM ptr
-	dw $774f ; update function
-	db $80 ; ??
-
-Data_6457b: ; 6457b (19:457b)
-	db ($1 << 4) | $e ; low bank nybble, ??
-	db $0b, $00 ; ??, ??
-	dw $5b98 ; OAM ptr
-	dw $7be6 ; update function
-	db $00 ; ??
-
-Data_64583: ; 64583 (19:4583)
-	db ($2 << 4) | $0 ; low bank nybble, ??
-	db $a7, $ee ; ??, ??
-	dw $4000 ; OAM ptr
-	dw $4000 ; update function
-	db $80 ; ??
-
-Data_6458b: ; 6458b (19:458b)
-	db ($2 << 4) | $2 ; low bank nybble, ??
-	db $22, $f0 ; ??, ??
-	dw $4279 ; OAM ptr
-	dw $453b ; update function
-	db $80 ; ??
-
-Data_64593: ; 64593 (19:4593)
-	db ($2 << 4) | $3 ; low bank nybble, ??
-	db $22, $f0 ; ??, ??
-	dw $4279 ; OAM ptr
-	dw $453b ; update function
-	db $80 ; ??
-
-Data_6459b: ; 6459b (19:459b)
-	db ($2 << 4) | $2 ; low bank nybble, ??
-	db $22, $f0 ; ??, ??
-	dw $4279 ; OAM ptr
-	dw $4625 ; update function
-	db $80 ; ??
-
-Data_645a3: ; 645a3 (19:45a3)
-	db ($2 << 4) | $3 ; low bank nybble, ??
-	db $22, $f0 ; ??, ??
-	dw $4279 ; OAM ptr
-	dw $4625 ; update function
-	db $80 ; ??
-
-Data_645ab: ; 645ab (19:45ab)
-	db ($2 << 4) | $6 ; low bank nybble, ??
-	db $30, $ec ; ??, ??
-	dw $4555 ; OAM ptr
-	dw $48dc ; update function
-	db $80 ; ??
-
-Data_645b3: ; 645b3 (19:45b3)
-	db ($2 << 4) | $7 ; low bank nybble, ??
-	db $05, $fa ; ??, ??
-	dw $4b56 ; OAM ptr
-	dw $4d8a ; update function
-	db $80 ; ??
-
-Data_645bb: ; 645bb (19:45bb)
-	db ($2 << 4) | $8 ; low bank nybble, ??
-	db $06, $f3 ; ??, ??
-	dw $4c7a ; OAM ptr
-	dw $4ee2 ; update function
-	db $80 ; ??
-
-Data_645c3: ; 645c3 (19:45c3)
-	db ($2 << 4) | $9 ; low bank nybble, ??
-	db $0a, $ec ; ??, ??
-	dw $4e16 ; OAM ptr
-	dw $51d3 ; update function
-	db $80 ; ??
-
-Data_645cb: ; 645cb (19:45cb)
-	db ($2 << 4) | $4 ; low bank nybble, ??
-	db $29, $f9 ; ??, ??
-	dw $434a ; OAM ptr
-	dw $5326 ; update function
-	db $80 ; ??
-
-Data_645d3: ; 645d3 (19:45d3)
-	db ($2 << 4) | $5 ; low bank nybble, ??
-	db $29, $f9 ; ??, ??
-	dw $434a ; OAM ptr
-	dw $5326 ; update function
-	db $80 ; ??
-
-Data_645db: ; 645db (19:45db)
-	db ($2 << 4) | $6 ; low bank nybble, ??
-	db $29, $f9 ; ??, ??
-	dw $434a ; OAM ptr
-	dw $5326 ; update function
-	db $80 ; ??
-
-Data_645e3: ; 645e3 (19:45e3)
-	db ($2 << 4) | $7 ; low bank nybble, ??
-	db $29, $f9 ; ??, ??
-	dw $434a ; OAM ptr
-	dw $5326 ; update function
-	db $80 ; ??
-
-Data_645eb: ; 645eb (19:45eb)
-	db ($2 << 4) | $8 ; low bank nybble, ??
-	db $29, $f9 ; ??, ??
-	dw $434a ; OAM ptr
-	dw $5326 ; update function
-	db $80 ; ??
-
-Data_645f3: ; 645f3 (19:45f3)
-	db ($4 << 4) | $0 ; low bank nybble, ??
-	db $0b, $e3 ; ??, ??
-	dw $4000 ; OAM ptr
-	dw $4000 ; update function
-	db $00 ; ??
-
-Data_645fb: ; 645fb (19:45fb)
-	db ($4 << 4) | $2 ; low bank nybble, ??
-	db $0b, $00 ; ??, ??
-	dw $4000 ; OAM ptr
-	dw $471a ; update function
-	db $00 ; ??
-
-Data_64603: ; 64603 (19:4603)
-	db ($2 << 4) | $9 ; low bank nybble, ??
-	db $0b, $00 ; ??, ??
-	dw $53fe ; OAM ptr
-	dw $552d ; update function
-	db $00 ; ??
-
-Data_6460b: ; 6460b (19:460b)
-	db ($4 << 4) | $8 ; low bank nybble, ??
-	db $8b, $e4 ; ??, ??
-	dw $505c ; OAM ptr
-	dw $4ac4 ; update function
-	db $00 ; ??
-
-Data_64613: ; 64613 (19:4613)
-	db ($4 << 4) | $5 ; low bank nybble, ??
-	db $0b, $00 ; ??, ??
-	dw $505c ; OAM ptr
-	dw $526c ; update function
-	db $00 ; ??
-
-Data_6461b: ; 6461b (19:461b)
-	db ($4 << 4) | $1 ; low bank nybble, ??
-	db $af, $e1 ; ??, ??
-	dw $505c ; OAM ptr
-	dw $5006 ; update function
-	db $00 ; ??
-
-Data_64623: ; 64623 (19:4623)
-	db ($4 << 4) | $2 ; low bank nybble, ??
-	db $af, $e1 ; ??, ??
-	dw $505c ; OAM ptr
-	dw $500a ; update function
-	db $00 ; ??
-
-Data_6462b: ; 6462b (19:462b)
-	db ($4 << 4) | $4 ; low bank nybble, ??
-	db $af, $e1 ; ??, ??
-	dw $505c ; OAM ptr
-	dw $500e ; update function
-	db $00 ; ??
-
-Data_64633: ; 64633 (19:4633)
-	db ($5 << 4) | $7 ; low bank nybble, ??
-	db $8b, $e6 ; ??, ??
-	dw $4000 ; OAM ptr
-	dw $4020 ; update function
-	db $00 ; ??
-
-Data_6463b: ; 6463b (19:463b)
-	db ($5 << 4) | $9 ; low bank nybble, ??
-	db $0b, $00 ; ??, ??
-	dw $4000 ; OAM ptr
-	dw $4456 ; update function
-	db $00 ; ??
-
-Data_64643: ; 64643 (19:4643)
-	db ($2 << 4) | $0 ; low bank nybble, ??
-	db $af, $f0 ; ??, ??
-	dw $65ae ; OAM ptr
-	dw $5c8c ; update function
-	db $00 ; ??
-
-Data_6464b: ; 6464b (19:464b)
-	db ($2 << 4) | $0 ; low bank nybble, ??
-	db $af, $f0 ; ??, ??
-	dw $65ae ; OAM ptr
-	dw $5c70 ; update function
-	db $00 ; ??
-
-Data_64653: ; 64653 (19:4653)
-	db ($2 << 4) | $0 ; low bank nybble, ??
-	db $af, $f0 ; ??, ??
-	dw $65ae ; OAM ptr
-	dw $5c7e ; update function
-	db $00 ; ??
-
-Data_6465b: ; 6465b (19:465b)
-	db ($2 << 4) | $1 ; low bank nybble, ??
-	db $39, $f8 ; ??, ??
-	dw $65cc ; OAM ptr
-	dw $5d64 ; update function
-	db $80 ; ??
-
-Data_64663: ; 64663 (19:4663)
-	db ($4 << 4) | $b ; low bank nybble, ??
-	db $b6, $f0 ; ??, ??
-	dw $553c ; OAM ptr
-	dw $5356 ; update function
-	db $80 ; ??
-
-Data_6466b: ; 6466b (19:466b)
-	db ($4 << 4) | $f ; low bank nybble, ??
-	db $22, $ef ; ??, ??
-	dw $66dc ; OAM ptr
-	dw $5c18 ; update function
-	db $00 ; ??
-
-Data_64673: ; 64673 (19:4673)
-	db ($0 << 4) | $a ; low bank nybble, ??
-	db $0b, $f4 ; ??, ??
-	dw $5cd3 ; OAM ptr
-	dw Func_437d7 ; update function
-	db $00 ; ??
-
-Data_6467b: ; 6467b (19:467b)
-	db ($0 << 4) | $b ; low bank nybble, ??
-	db $0b, $f4 ; ??, ??
-	dw $5cd3 ; OAM ptr
-	dw Func_437d7 ; update function
-	db $00 ; ??
-
-Data_64683: ; 64683 (19:4683)
-	db ($0 << 4) | $e ; low bank nybble, ??
-	db $22, $e1 ; ??, ??
-	dw $5c47 ; OAM ptr
-	dw Func_437a5 ; update function
-	db $00 ; ??
-
-Data_6468b: ; 6468b (19:468b)
-	db ($0 << 4) | $e ; low bank nybble, ??
-	db $22, $e1 ; ??, ??
-	dw $5c47 ; OAM ptr
-	dw Func_437a0 ; update function
-	db $00 ; ??
-
-Data_64693: ; 64693 (19:4693)
-	db ($0 << 4) | $e ; low bank nybble, ??
-	db $22, $e1 ; ??, ??
-	dw $5c47 ; OAM ptr
-	dw Func_4379b ; update function
-	db $00 ; ??
-
-Data_6469b: ; 6469b (19:469b)
-	db ($4 << 4) | $5 ; low bank nybble, ??
-	db $ba, $f2 ; ??, ??
-	dw $67d5 ; OAM ptr
-	dw $5d2e ; update function
-	db $80 ; ??
-
-Data_646a3: ; 646a3 (19:46a3)
-	db ($4 << 4) | $6 ; low bank nybble, ??
-	db $0b, $00 ; ??, ??
-	dw $4000 ; OAM ptr
-	dw $626b ; update function
-	db $00 ; ??
-
-Data_646ab: ; 646ab (19:46ab)
-	db ($4 << 4) | $7 ; low bank nybble, ??
-	db $0b, $00 ; ??, ??
-	dw $4000 ; OAM ptr
-	dw $645e ; update function
-	db $00 ; ??
-
-Data_646b3: ; 646b3 (19:46b3)
-	db ($4 << 4) | $0 ; low bank nybble, ??
-	db $d1, $e6 ; ??, ??
-	dw $67d5 ; OAM ptr
-	dw $5cf9 ; update function
-	db $80 ; ??
-
-Data_646bb: ; 646bb (19:46bb)
-	db ($4 << 4) | $1 ; low bank nybble, ??
-	db $0c, $f7 ; ??, ??
-	dw $67d5 ; OAM ptr
-	dw $63c0 ; update function
-	db $80 ; ??
-
-Data_646c3: ; 646c3 (19:46c3)
-	db ($2 << 4) | $2 ; low bank nybble, ??
-	db $0b, $00 ; ??, ??
-	dw $4000 ; OAM ptr
-	dw $5e34 ; update function
-	db $00 ; ??
-
-Data_646cb: ; 646cb (19:46cb)
-	db ($2 << 4) | $d ; low bank nybble, ??
-	db $37, $f3 ; ??, ??
-	dw $67fd ; OAM ptr
-	dw $645d ; update function
-	db $00 ; ??
-
-Data_646d3: ; 646d3 (19:46d3)
-	db ($2 << 4) | $0 ; low bank nybble, ??
-	db $06, $00 ; ??, ??
-	dw $6895 ; OAM ptr
-	dw $64b5 ; update function
-	db $80 ; ??
-
-Data_646db: ; 646db (19:46db)
-	db ($2 << 4) | $1 ; low bank nybble, ??
-	db $06, $f7 ; ??, ??
-	dw $6895 ; OAM ptr
-	dw $669a ; update function
-	db $00 ; ??
-
-Data_646e3: ; 646e3 (19:46e3)
-	db ($2 << 4) | $2 ; low bank nybble, ??
-	db $05, $f5 ; ??, ??
-	dw $6b04 ; OAM ptr
-	dw $68a2 ; update function
-	db $80 ; ??
-
-Data_646eb: ; 646eb (19:46eb)
-	db ($2 << 4) | $0 ; low bank nybble, ??
-	db $05, $f5 ; ??, ??
-	dw $6b04 ; OAM ptr
-	dw $68a2 ; update function
-	db $80 ; ??
-
-Data_646f3: ; 646f3 (19:46f3)
-	db ($5 << 4) | $0 ; low bank nybble, ??
-	db $c1, $e0 ; ??, ??
-	dw $4895 ; OAM ptr
-	dw $44e5 ; update function
-	db $00 ; ??
-
-Data_646fb: ; 646fb (19:46fb)
-	db ($5 << 4) | $4 ; low bank nybble, ??
-	db $0b, $00 ; ??, ??
-	dw $4895 ; OAM ptr
-	dw $4981 ; update function
-	db $00 ; ??
-
-Data_64703: ; 64703 (19:4703)
-	db ($2 << 4) | $4 ; low bank nybble, ??
-	db $0e, $e8 ; ??, ??
-	dw $6ba0 ; OAM ptr
-	dw $6af9 ; update function
-	db $00 ; ??
-
-Data_6470b: ; 6470b (19:470b)
-	db ($5 << 4) | $6 ; low bank nybble, ??
-	db $44, $f6 ; ??, ??
-	dw $501c ; OAM ptr
-	dw $4d37 ; update function
-	db $00 ; ??
-
-Data_64713: ; 64713 (19:4713)
-	db ($5 << 4) | $7 ; low bank nybble, ??
-	db $0b, $f6 ; ??, ??
-	dw $501c ; OAM ptr
-	dw $51e5 ; update function
-	db $00 ; ??
-
-Data_6471b: ; 6471b (19:471b)
-	db ($5 << 4) | $9 ; low bank nybble, ??
-	db $31, $fc ; ??, ??
-	dw $501c ; OAM ptr
-	dw $515b ; update function
-	db $80 ; ??
-
-Data_64723: ; 64723 (19:4723)
-	db ($5 << 4) | $a ; low bank nybble, ??
-	db $0b, $f8 ; ??, ??
-	dw $5699 ; OAM ptr
-	dw $5611 ; update function
-	db $00 ; ??
-
-Data_6472b: ; 6472b (19:472b)
-	db ($5 << 4) | $b ; low bank nybble, ??
-	db $45, $fe ; ??, ??
-	dw $5699 ; OAM ptr
-	dw $5c4a ; update function
-	db $80 ; ??
-
-Data_64733: ; 64733 (19:4733)
-	db ($5 << 4) | $c ; low bank nybble, ??
-	db $45, $fe ; ??, ??
-	dw $5699 ; OAM ptr
-	dw $5de4 ; update function
-	db $80 ; ??
-
-Data_6473b: ; 6473b (19:473b)
-	db ($5 << 4) | $d ; low bank nybble, ??
-	db $8b, $00 ; ??, ??
-	dw $5e06 ; OAM ptr
-	dw $5e4e ; update function
-	db $00 ; ??
-
-Data_64743: ; 64743 (19:4743)
-	db ($5 << 4) | $a ; low bank nybble, ??
-	db $22, $ff ; ??, ??
-	dw $5e06 ; OAM ptr
-	dw $62c8 ; update function
-	db $00 ; ??
-
-Data_6474b: ; 6474b (19:474b)
-	db ($5 << 4) | $0 ; low bank nybble, ??
-	db $8b, $e0 ; ??, ??
-	dw $6583 ; OAM ptr
-	dw $6611 ; update function
-	db $00 ; ??
-
-Data_64753: ; 64753 (19:4753)
-	db ($5 << 4) | $1 ; low bank nybble, ??
-	db $ce, $ec ; ??, ??
-	dw $6583 ; OAM ptr
-	dw $6e6a ; update function
-	db $00 ; ??
-
-Data_6475b: ; 6475b (19:475b)
-	db ($5 << 4) | $a ; low bank nybble, ??
-	db $0b, $e0 ; ??, ??
-	dw $6583 ; OAM ptr
-	dw $7264 ; update function
-	db $00 ; ??
-
-Data_64763: ; 64763 (19:4763)
-	db ($5 << 4) | $b ; low bank nybble, ??
-	db $0b, $e0 ; ??, ??
-	dw $6583 ; OAM ptr
-	dw $72b4 ; update function
-	db $00 ; ??
-
-Data_6476b: ; 6476b (19:476b)
-	db ($5 << 4) | $5 ; low bank nybble, ??
-	db $31, $f6 ; ??, ??
-	dw $6583 ; OAM ptr
-	dw $6dcc ; update function
-	db $00 ; ??
-
-Data_64773: ; 64773 (19:4773)
-	db ($3 << 4) | $6 ; low bank nybble, ??
-	db $0b, $00 ; ??, ??
-	dw $4806 ; OAM ptr
-	dw $4b2d ; update function
-	db $00 ; ??
-
-Data_6477b: ; 6477b (19:477b)
-	db ($3 << 4) | $6 ; low bank nybble, ??
-	db $0b, $00 ; ??, ??
-	dw $4806 ; OAM ptr
-	dw $4b32 ; update function
-	db $00 ; ??
-
-Data_64783: ; 64783 (19:4783)
-	db ($3 << 4) | $a ; low bank nybble, ??
-	db $0b, $00 ; ??, ??
-	dw $488a ; OAM ptr
-	dw $4b51 ; update function
-	db $00 ; ??
+DummyObjectData:           object_data OAM_18007b, $0, OBJ_INTERACTION_00,                           0, DummyObjectFunc,           $0
+GreyChestData:             object_data OAM_18c000, $1, OBJ_INTERACTION_GREY_TREASURE  | HEAVY_OBJ, -24, GreyChestFunc,             $0
+RedChestData:              object_data OAM_18c000, $1, OBJ_INTERACTION_RED_TREASURE   | HEAVY_OBJ, -24, RedChestFunc,              $0
+GreenChestData:            object_data OAM_18c000, $1, OBJ_INTERACTION_GREEN_TREASURE | HEAVY_OBJ, -24, GreenChestFunc,            $0
+BlueChestData:             object_data OAM_18c000, $1, OBJ_INTERACTION_BLUE_TREASURE  | HEAVY_OBJ, -24, BlueChestFunc,             $0
+GreyKeyData:               object_data OAM_18c000, $2, OBJ_INTERACTION_GREY_KEY,                   -24, KeyFunc,                   $0
+RedKeyData:                object_data OAM_18c000, $2, OBJ_INTERACTION_RED_KEY,                    -24, KeyFunc,                   $0
+GreenKeyData:              object_data OAM_18c000, $2, OBJ_INTERACTION_GREEN_KEY,                  -24, KeyFunc,                   $0
+BlueKeyData:               object_data OAM_18c000, $2, OBJ_INTERACTION_BLUE_KEY,                   -24, KeyFunc,                   $0
+MusicaCoinData:            object_data OAM_18c000, $3, OBJ_INTERACTION_MUSICAL_COIN,               -25, MusicalCoinFunc,           $0
+SpearheadData:             object_data OAM_18007b, $0, OBJ_INTERACTION_01,                         -14, SpearheadFunc,             OBJFLAG_PRIORITY
+FutamoguData:              object_data OAM_180564, $1, OBJ_INTERACTION_WALKABLE       | HEAVY_OBJ, -17, FutamoguFunc,              OBJFLAG_PRIORITY
+WebberData:                object_data OAM_180242, $2, OBJ_INTERACTION_WALKABLE       | HEAVY_OBJ, -16, WebberFunc,                OBJFLAG_PRIORITY
+TorchData:                 object_data OAM_180838, $4, OBJ_INTERACTION_FIRE,                       -16, TorchFunc,                 $0
+TorchNoEmbersData:         object_data OAM_180838, $6, OBJ_INTERACTION_FIRE,                       -16, TorchNoEmbersFunc,         $0
+FlameBlockTorchData:       object_data OAM_180838, $7, OBJ_INTERACTION_UNLIT_TORCH,                -16, FlameBlockTorchFunc,       $0
+FlameBlockData:            object_data OAM_1895ec, $b, OBJ_INTERACTION_SOLID,                      -30, FlameBlockFunc,            $0
+StoveData:                 object_data OAM_1896e1, $c, OBJ_INTERACTION_STOVE          | HEAVY_OBJ, -32, StoveFunc,                 $0
+UnusedFlowerData:          object_data OAM_180916, $6, OBJ_INTERACTION_01,                           0, UnusedFlowerFunc,          $0
+CountRichtertoffenData:    object_data OAM_1809ff, $7, OBJ_INTERACTION_RICHTERTOFFEN  | HEAVY_OBJ, -18, CountRichtertoffenFunc,    OBJFLAG_PRIORITY
+HebariiData:               object_data OAM_18a703, $0, OBJ_INTERACTION_3D,                         -15, HebariiFunc,               $0
+ParaGoomData:              object_data OAM_180b43, $9, OBJ_INTERACTION_01,                         -12, ParaGoomFunc,              OBJFLAG_PRIORITY
+DoughnuteerData:           object_data OAM_180ea7, $a, OBJ_INTERACTION_0B,                         -14, DoughnuteerFunc,           OBJFLAG_PRIORITY
+OmodonmekaData:            object_data OAM_18136c, $b, OBJ_INTERACTION_01,                         -25, OmodonmekaFunc,            OBJFLAG_PRIORITY
+OmodonmekaWithOmodon1Data: object_data OAM_181189, $c, OBJ_INTERACTION_01,                         -25, OmodonmekaWithOmodon1Func, OBJFLAG_PRIORITY
+OmodonmekaWithOmodon2Data: object_data OAM_181189, $c, OBJ_INTERACTION_01,                         -25, OmodonmekaWithOmodon2Func, OBJFLAG_PRIORITY
+KushimushiVerticalData:    object_data OAM_18160c, $c, OBJ_INTERACTION_BOTTOM_STING,               -13, KushimushiVerticalFunc,    $0
+KushimushiHorizontalData:  object_data OAM_18160c, $d, OBJ_INTERACTION_FRONT_STING,                -12, KushimushiHorizontalFunc,  $0
+MizuuoData:                object_data OAM_188395, $4, OBJ_INTERACTION_0A,                         -10, MizuuoFunc,                $0
+BigLeafSpawnerData:        object_data OAM_180000, $b, OBJ_INTERACTION_0B,                           0, BigLeafSpawnerFunc,        $0
+SmallLeafData:             object_data OAM_181be4, $8, OBJ_INTERACTION_WALKABLE,                   -17, SmallLeafFunc,             $0
+SilkyData:                 object_data OAM_18181e, $c, OBJ_INTERACTION_01,                          -8, SilkyFunc,                 OBJFLAG_PRIORITY
+OrangeBirdData:            object_data OAM_1819e3, $f, OBJ_INTERACTION_24,                         -13, BirdFunc,                  OBJFLAG_PRIORITY
+BlueBirdData:              object_data OAM_1819e3, $d, OBJ_INTERACTION_FRONT_STING,                -13, BirdFunc,                  OBJFLAG_PRIORITY
+SnakeData:                 object_data OAM_189783, $d, OBJ_INTERACTION_WALKABLE       | HEAVY_OBJ, -31, SnakeFunc,                 $0
+ApplebyData:               object_data OAM_185a1c, $d, OBJ_INTERACTION_01,                          -6, ApplebyFunc,               $0
+Barrel1Data:               object_data OAM_181b0f, $4, OBJ_INTERACTION_31             | HEAVY_OBJ, -15, Barrel1Func,               OBJFLAG_PRIORITY
+Barrel2Data:               object_data OAM_181b0f, $5, OBJ_INTERACTION_3B,                         -15, Barrel2Func,               $0
+RockData:                  object_data OAM_18ab5c, $3, OBJ_INTERACTION_3B,                         -15, RockFunc,                  $0
+RedPrinceFroggyData:       object_data OAM_184000, $1, OBJ_INTERACTION_PRINCE_FROGGY  | HEAVY_OBJ, -16, RedPrinceFroggyFunc,       OBJFLAG_PRIORITY
+GreyPrinceFroggyData:      object_data OAM_184000, $1, OBJ_INTERACTION_PRINCE_FROGGY  | HEAVY_OBJ, -26, GreyPrinceFroggyFunc,      OBJFLAG_PRIORITY
+HammerBotData:             object_data OAM_18422f, $2, OBJ_INTERACTION_01             | HEAVY_OBJ, -18, HammerBotFunc,             OBJFLAG_PRIORITY
+TeruteruData:              object_data OAM_18496f, $0, OBJ_INTERACTION_01,                         -20, TeruteruFunc,              OBJFLAG_PRIORITY
+MadSciensteinData:         object_data OAM_184ab2, $5, OBJ_INTERACTION_01             | HEAVY_OBJ, -18, MadSciensteinFunc,         OBJFLAG_PRIORITY
+SeeingEyeDoorData:         object_data OAM_184ab2, $3, OBJ_INTERACTION_SOLID          | HEAVY_OBJ, -24, SeeingEyeDoorFunc,         OBJFLAG_PRIORITY
+PneumoData:                object_data OAM_184db9, $6, OBJ_INTERACTION_1E,                         -16, PneumoFunc,                OBJFLAG_PRIORITY
+ElectricLampData:          object_data OAM_184eeb, $7, OBJ_INTERACTION_0B,                           0, ElectricLampFunc,          $0
+ZombieData:                object_data OAM_184ffa, $9, OBJ_INTERACTION_0B             | HEAVY_OBJ,  -6, ZombieFunc,                OBJFLAG_PRIORITY
+FireBotData:               object_data OAM_184755, $c, OBJ_INTERACTION_0B,                         -14, FireBotFunc,               OBJFLAG_PRIORITY
+SpearBotData:              object_data OAM_18440a, $b, OBJ_INTERACTION_01,                         -14, SpearBotFunc,              OBJFLAG_PRIORITY
+BeamBotData:               object_data OAM_1845aa, $4, OBJ_INTERACTION_01,                         -14, BeamBotFunc,               OBJFLAG_PRIORITY
+SunData:                   object_data OAM_1851df, $a, OBJ_INTERACTION_FIRE,                       -20, SunFunc,                   $0
+MoonData:                  object_data OAM_1854a2, $a, OBJ_INTERACTION_ELECTRIC,                   -20, MoonFunc,                  $0
+KobattoData:               object_data OAM_185788, $0, OBJ_INTERACTION_VAMPIRE,                    -12, KobattoFunc,               OBJFLAG_PRIORITY
+HandData:                  object_data OAM_185893, $6, OBJ_INTERACTION_3F,                         -20, HandFunc,                  OBJFLAG_PRIORITY
+BubbleHoleData:            object_data OAM_185b98, $e, OBJ_INTERACTION_0B,                           0, BubbleHoleFunc,            $0
+BrrrBearData:              object_data OAM_188000, $0, OBJ_INTERACTION_ICE            | HEAVY_OBJ, -18, BrrrBearFunc,              OBJFLAG_PRIORITY
+CartLeftData:              object_data OAM_188279, $2, OBJ_INTERACTION_SOLID,                      -16, CartFunc,                  OBJFLAG_PRIORITY
+CartRightData:             object_data OAM_188279, $3, OBJ_INTERACTION_SOLID,                      -16, CartFunc,                  OBJFLAG_PRIORITY
+CartVariableLeftData:      object_data OAM_188279, $2, OBJ_INTERACTION_SOLID,                      -16, CartVariableFunc,          OBJFLAG_PRIORITY
+CartVariableRightData:     object_data OAM_188279, $3, OBJ_INTERACTION_SOLID,                      -16, CartVariableFunc,          OBJFLAG_PRIORITY
+RoboMouseData:             object_data OAM_188555, $6, OBJ_INTERACTION_30,                         -20, RoboMouseFunc,             OBJFLAG_PRIORITY
+TogebaData:                object_data OAM_188b56, $7, OBJ_INTERACTION_FULL_STING,                  -6, TogebaFunc,                OBJFLAG_PRIORITY
+HaridamaData:              object_data OAM_188c7a, $8, OBJ_INTERACTION_06,                         -13, HaridamaFunc,              OBJFLAG_PRIORITY
+OwlData:                   object_data OAM_188e16, $9, OBJ_INTERACTION_0A,                         -20, OwlFunc,                   OBJFLAG_PRIORITY
+ZipLine1Data:              object_data OAM_18834a, $4, OBJ_INTERACTION_RAIL,                        -7, ZipLineFunc,               OBJFLAG_PRIORITY
+ZipLine2Data:              object_data OAM_18834a, $5, OBJ_INTERACTION_RAIL,                        -7, ZipLineFunc,               OBJFLAG_PRIORITY
+ZipLine3Data:              object_data OAM_18834a, $6, OBJ_INTERACTION_RAIL,                        -7, ZipLineFunc,               OBJFLAG_PRIORITY
+ZipLine4Data:              object_data OAM_18834a, $7, OBJ_INTERACTION_RAIL,                        -7, ZipLineFunc,               OBJFLAG_PRIORITY
+ZipLine5Data:              object_data OAM_18834a, $8, OBJ_INTERACTION_RAIL,                        -7, ZipLineFunc,               OBJFLAG_PRIORITY
+AnonsterData:              object_data OAM_190000, $0, OBJ_INTERACTION_0B,                         -29, AnonsterFunc,              $0
+SilkPlatformsData:         object_data OAM_190000, $2, OBJ_INTERACTION_0B,                           0, SilkPlatformsFunc,         $0
+FallingSnowSpawnerData:    object_data OAM_1893fe, $9, OBJ_INTERACTION_0B,                           0, FallingSnowSpawnerFunc,    $0
+DollBoyData:               object_data OAM_19105c, $8, OBJ_INTERACTION_0B             | HEAVY_OBJ, -28, DollBoyFunc,               $0
+HammerPlatformSpawnerData: object_data OAM_19105c, $5, OBJ_INTERACTION_0B,                           0, HammerPlatformSpawnerFunc, $0
+DollBoyBarrel1Data:        object_data OAM_19105c, $1, OBJ_INTERACTION_STOVE          | HEAVY_OBJ, -31, DollBoyBarrel1Func,        $0
+DollBoyBarrel2Data:        object_data OAM_19105c, $2, OBJ_INTERACTION_STOVE          | HEAVY_OBJ, -31, DollBoyBarrel2Func,        $0
+DollBoyBarrel3Data:        object_data OAM_19105c, $4, OBJ_INTERACTION_STOVE          | HEAVY_OBJ, -31, DollBoyBarrel3Func,        $0
+WormwouldData:             object_data OAM_194000, $7, OBJ_INTERACTION_0B             | HEAVY_OBJ, -26, WormwouldFunc,             $0
+PalmTreeSpawnerData:       object_data OAM_194000, $9, OBJ_INTERACTION_0B,                           0, PalmTreeSpawnerFunc,       $0
+PillarPlatform1Data:       object_data OAM_18a5ae, $0, OBJ_INTERACTION_STOVE          | HEAVY_OBJ, -16, PillarPlatform1Func,       $0
+PillarPlatform2Data:       object_data OAM_18a5ae, $0, OBJ_INTERACTION_STOVE          | HEAVY_OBJ, -16, PillarPlatform2Func,       $0
+PillarPlatform3Data:       object_data OAM_18a5ae, $0, OBJ_INTERACTION_STOVE          | HEAVY_OBJ, -16, PillarPlatform3Func,       $0
+WaterDropData:             object_data OAM_18a5cc, $1, OBJ_INTERACTION_WATER_DROP,                  -8, WaterDropFunc,             OBJFLAG_PRIORITY
+YellowBellyBodyData:       object_data OAM_19153c, $b, OBJ_INTERACTION_36             | HEAVY_OBJ, -16, YellowBellyBodyFunc,       OBJFLAG_PRIORITY
+YellowBellyPlatformData:   object_data OAM_1926dc, $f, OBJ_INTERACTION_SOLID,                      -17, YellowBellyPlatformFunc,   $0
+NobiiruLeftData:           object_data OAM_181cd3, $a, OBJ_INTERACTION_0B,                         -12, NobiiruFunc,               $0
+NobiiruRightData:          object_data OAM_181cd3, $b, OBJ_INTERACTION_0B,                         -12, NobiiruFunc,               $0
+ClearGate1Data:            object_data OAM_181c47, $e, OBJ_INTERACTION_SOLID,                      -31, ClearGate1Func,            $0
+ClearGate2Data:            object_data OAM_181c47, $e, OBJ_INTERACTION_SOLID,                      -31, ClearGate2Func,            $0
+ClearGate3Data:            object_data OAM_181c47, $e, OBJ_INTERACTION_SOLID,                      -31, ClearGate3Func,            $0
+PesceData:                 object_data OAM_1927d5, $5, OBJ_INTERACTION_3A             | HEAVY_OBJ, -14, PesceFunc,                 OBJFLAG_PRIORITY
+DragonflySpawnerData:      object_data OAM_190000, $6, OBJ_INTERACTION_0B,                           0, DragonflySpawnerFunc,      $0
+FlySpawnerData:            object_data OAM_190000, $7, OBJ_INTERACTION_0B,                           0, FlySpawnerFunc,            $0
+StrongWaterCurrentData:    object_data OAM_1927d5, $0, OBJ_INTERACTION_51             | HEAVY_OBJ, -26, StrongWaterCurrentFunc,    OBJFLAG_PRIORITY
+Dragonfly2Data:            object_data OAM_1927d5, $1, OBJ_INTERACTION_WALKABLE,                    -9, Dragonfly2Func,            OBJFLAG_PRIORITY
+TadpoleSpawnerData:        object_data OAM_188000, $2, OBJ_INTERACTION_0B,                           0, TadpoleSpawnerFunc,        $0
+WaterSparkData:            object_data OAM_18a7fd, $d, OBJ_INTERACTION_37,                         -13, WaterSparkFunc,            $0
+SmallOctohonData:          object_data OAM_18a895, $0, OBJ_INTERACTION_06,                           0, SmallOctohonFunc,          OBJFLAG_PRIORITY
+BigOctohonData:            object_data OAM_18a895, $1, OBJ_INTERACTION_06,                          -9, BigOctohonFunc,            $0
+SparkHorizontalData:       object_data OAM_18ab04, $2, OBJ_INTERACTION_FULL_STING,                 -11, SparkFunc,                 OBJFLAG_PRIORITY
+SparkVerticalData:         object_data OAM_18ab04, $0, OBJ_INTERACTION_FULL_STING,                 -11, SparkFunc,                 OBJFLAG_PRIORITY
+ScowlerData:               object_data OAM_194895, $0, OBJ_INTERACTION_41             | HEAVY_OBJ, -32, ScowlerFunc,               $0
+FloatingRingSpawnerData:   object_data OAM_194895, $4, OBJ_INTERACTION_0B,                           0, FloatingRingSpawnerFunc,   $0
+FireData:                  object_data OAM_18aba0, $4, OBJ_INTERACTION_FIRE,                       -24, FireFunc,                  $0
+JamanoData:                object_data OAM_19501c, $6, OBJ_INTERACTION_44,                         -10, JamanoFunc,                $0
+SkullSpawnerData:          object_data OAM_19501c, $7, OBJ_INTERACTION_0B,                         -10, SkullSpawnerFunc,          $0
+HatPlatformData:           object_data OAM_19501c, $9, OBJ_INTERACTION_31,                          -4, HatPlatformFunc,           OBJFLAG_PRIORITY
+MuddeeData:                object_data OAM_195699, $a, OBJ_INTERACTION_0B,                          -8, MuddeeFunc,                $0
+Turtle1Data:               object_data OAM_195699, $b, OBJ_INTERACTION_45,                          -2, Turtle1Func,               OBJFLAG_PRIORITY
+Turtle2Data:               object_data OAM_195699, $c, OBJ_INTERACTION_45,                          -2, Turtle2Func,               OBJFLAG_PRIORITY
+WolfenbossData:            object_data OAM_195e06, $d, OBJ_INTERACTION_0B             | HEAVY_OBJ,   0, WolfenbossFunc,            $0
+WolfenbossPlatformData:    object_data OAM_195e06, $a, OBJ_INTERACTION_SOLID,                       -1, WolfenbossPlatformFunc,    $0
+ShootData:                 object_data OAM_196583, $0, OBJ_INTERACTION_0B             | HEAVY_OBJ, -32, ShootFunc,                 $0
+GKTortoiseData:            object_data OAM_196583, $1, OBJ_INTERACTION_4E             | HEAVY_OBJ, -20, GKTortoiseFunc,            $0
+ShootGoalCounterData:      object_data OAM_196583, $a, OBJ_INTERACTION_0B,                         -32, ShootGoalCounterFunc,      $0
+WarioGoalCounterData:      object_data OAM_196583, $b, OBJ_INTERACTION_0B,                         -32, WarioGoalCounterFunc,      $0
+GKTortoisePlatformData:    object_data OAM_196583, $5, OBJ_INTERACTION_31,                         -10, GKTortoisePlatformFunc,    $0
+WallCrackClosedData:       object_data OAM_18c806, $6, OBJ_INTERACTION_0B,                           0, WallCrackClosedFunc,       $0
+WallCrackOpenData:         object_data OAM_18c806, $6, OBJ_INTERACTION_0B,                           0, WallCrackOpenFunc,         $0
+HiddenFigureData:          object_data OAM_18c88a, $a, OBJ_INTERACTION_0B,                           0, HiddenFigureFunc,          $0
 
 ObjParams_HebariiProjectile: ; 6478b (19:478b)
 	db -8  ; y
@@ -1232,32 +631,30 @@ ObjParams_HebariiProjectile: ; 6478b (19:478b)
 	dw OAM_18a703 ; OAM
 	dw Frameset_68408 ; frameset
 	db 2 ; action duration
-	db $00 ; unk17
-	db $00 ; unk18
-	db $00 ; movement index
-	db $00 ; unk1a
-	db OBJSTATE_00 ; state
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
 	dw HebariiProjectileFunc
 	db OBJFLAG_PRIORITY ; obj flags
-; 0x647a0
 
 ObjParams_WebberProjectile: ; 647a0 (19:47a0)
 	db  5  ; y
 	db -8  ; x
 	dn $0, $3 ; unk7
-	db OBJ_INTERACTION_1C ; interaction type
+	db OBJ_INTERACTION_ELECTRIC ; interaction type
 	db -7, -3, -4, 3 ; collision
 	dw OAM_180242 ; OAM
 	dw Frameset_682c8 ; frameset
 	db 0 ; action duration
-	db $00 ; unk17
-	db $00 ; unk18
-	db $00 ; movement index
-	db $00 ; unk1a
-	db OBJSTATE_00 ; state
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
 	dw WebberProjectileFunc
 	db OBJFLAG_PRIORITY ; obj flags
-; 0x647b5
 
 ObjParams_UnusedFlowerProjectileLeft: ; 647b5 (19:47b5)
 	db -10 ; y
@@ -1268,11 +665,11 @@ ObjParams_UnusedFlowerProjectileLeft: ; 647b5 (19:47b5)
 	dw OAM_180916 ; OAM
 	dw Frameset_6838c ; frameset
 	db 0 ; action duration
-	db $00 ; unk17
-	db $00 ; unk18
-	db $00 ; movement index
-	db $00 ; unk1a
-	db OBJSTATE_00 ; state
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
 	dw UnusedFlowerProjectileLeftFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
@@ -1280,20 +677,511 @@ ObjParams_UnusedFlowerProjectileRight: ; 647ca (19:47ca)
 	db -10 ; y
 	db   0 ; x
 	dn $0, $5 ; unk7
-	db OBJ_INTERACTION_FULL_STING
+	db OBJ_INTERACTION_FULL_STING ; interaction type
 	db -13, -3, -6, 5 ; collision box
 	dw OAM_180916 ; OAM
 	dw Frameset_68395 ; frameset
 	db 0 ; action duration
-	db $00 ; unk17
-	db $00 ; unk18
-	db $00 ; movement index
-	db $80 ; unk1a
-	db OBJSTATE_00 ; state
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
 	dw UnusedFlowerProjectileRightFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-	INCROM $647df, $64a40
+ObjParams_BigLeaf1: ; 647df (19:47df)
+	db -10 ; y
+	db  15 ; x
+	dn $0, $8 ; unk7
+	db OBJ_INTERACTION_WALKABLE ; interaction type
+	db -16, -8, -8, 7 ; collision box
+	dw OAM_1817b4 ; OAM
+	dw Frameset_68732 ; frameset
+	db 80 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw BigLeaf1Func
+	db $0 ; obj flags
+
+ObjParams_BigLeaf2: ; 647df (19:47df)
+	db -10 ; y
+	db -17 ; x
+	dn $0, $8 ; unk7
+	db OBJ_INTERACTION_WALKABLE ; interaction type
+	db -16, -8, -8, 7 ; collision box
+	dw OAM_1817b4 ; OAM
+	dw Frameset_68732 ; frameset
+	db 20 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw BigLeaf2Func
+	db $0 ; obj flags
+
+ObjParams_BigLeaf3: ; 647df (19:47df)
+	db -10 ; y
+	db -48 ; x
+	dn $0, $8 ; unk7
+	db OBJ_INTERACTION_WALKABLE ; interaction type
+	db -16, -8, -8, 7 ; collision box
+	dw OAM_1817b4 ; OAM
+	dw Frameset_68732 ; frameset
+	db 20 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw BigLeaf2Func
+	db $0 ; obj flags
+
+ObjParams_DoughnutLeft: ; 6481e (19:481e)
+	db -18 ; y
+	db  -9 ; x
+	dn $0, $b ; unk7
+	db OBJ_INTERACTION_1A ; interaction type
+	db -12, -4, -4, 3 ; collision box
+	dw OAM_180ea7 ; OAM
+	dw Frameset_685ea ; frameset
+	db $00 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw DoughnutFunc_Left
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_DoughnutRight: ; 64833 (19:4833)
+	db -18 ; y
+	db   8 ; x
+	dn $0, $b ; unk7
+	db OBJ_INTERACTION_1A ; interaction type
+	db -12, -4, -4, 3 ; collision box
+	dw OAM_180ea7 ; OAM
+	dw Frameset_685ed ; frameset
+	db $00 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw DoughnutFunc_Right
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_DoughnutUpLeft: ; 64848 (19:4848)
+	db -16 ; y
+	db  -8 ; x
+	dn $0, $b ; unk7
+	db OBJ_INTERACTION_1A ; interaction type
+	db -12, -4, -4, 3 ; collision box
+	dw OAM_180ea7 ; OAM
+	dw Frameset_685ea ; frameset
+	db $00 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw DoughnutFunc_Up
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_DoughnutUpRight: ; 6485d (19:485d)
+	db -16 ; y
+	db   7 ; x
+	dn $0, $b ; unk7
+	db OBJ_INTERACTION_1A ; interaction type
+	db -12, -4, -4, 3 ; collision box
+	dw OAM_180ea7 ; OAM
+	dw Frameset_685ed ; frameset
+	db $00 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw DoughnutFunc_Up
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_InvisibilityPotionLeft: ; 64872 (19:4872)
+	db  -8 ; y
+	db -16 ; x
+	dn $1, $6 ; unk7
+	db OBJ_INTERACTION_1D ; interaction type
+	db -12, -4, -4, 3 ; collision box
+	dw OAM_184ab2 ; OAM
+	dw Frameset_68c33 ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw InvisibilityPotionFunc_Left
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_InvisibilityPotionRight: ; 64887 (19:4887)
+	db -8 ; y
+	db 15 ; x
+	dn $1, $6 ; unk7
+	db OBJ_INTERACTION_1D ; interaction type
+	db -12, -4, -4, 3 ; collision box
+	dw OAM_184ab2 ; OAM
+	dw Frameset_68c33 ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw InvisibilityPotionFunc_Right
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_InvisibilityPotionDropLeft: ; 6489c (19:489c)
+	db  -8 ; y
+	db -16 ; x
+	dn $1, $6 ; unk7
+	db OBJ_INTERACTION_1D ; interaction type
+	db -12, -4, -4, 3 ; collision box
+	dw OAM_184ab2 ; OAM
+	dw Frameset_68c33 ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw InvisibilityPotionFunc_Drop
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_InvisibilityPotionDropRight: ; 648b1 (19:48b1)
+	db -8 ; y
+	db 15 ; x
+	dn $1, $6 ; unk7
+	db OBJ_INTERACTION_1D ; interaction type
+	db -12, -4, -4, 3 ; collision box
+	dw OAM_184ab2 ; OAM
+	dw Frameset_68c33 ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw InvisibilityPotionFunc_Drop
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_ZombieHeadLeft: ; 648c6 (19:48c6)
+	db -16 ; y
+	db   0 ; x
+	dn $1, $a ; unk7
+	db OBJ_INTERACTION_1F ; interaction type
+	db -12, -4, -4, 3 ; collision box
+	dw OAM_184ffa ; OAM
+	dw Frameset_68db3 ; frameset
+	db 48 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw ZombieHeadFunc_Left
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_ZombieHeadRight: ; 648db (19:48db)
+	db -16 ; y
+	db   0 ; x
+	dn $1, $a ; unk7
+	db OBJ_INTERACTION_1F ; interaction type
+	db -12, -4, -4, 3 ; collision box
+	dw OAM_184ffa ; OAM
+	dw Frameset_68dc4 ; frameset
+	db 48 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw ZombieHeadFunc_Right
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_StarsLeft: ; 648f0 (19:48f0)
+	db -20 ; y
+	db -12 ; x
+	dn $3, $0 ; unk7
+	db OBJ_INTERACTION_01 ; interaction type
+	db 0, 0, 0, 0 ; collision box
+	dw OAM_18c000 ; OAM
+	dw Frameset_680a5 ; frameset
+	db 25 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw StarsFunc_SetFlags
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_StarsRight: ; 64905 (19:4905)
+	db -20 ; y
+	db  11 ; x
+	dn $3, $0 ; unk7
+	db OBJ_INTERACTION_01 ; interaction type
+	db 0, 0, 0, 0 ; collision box
+	dw OAM_18c000 ; OAM
+	dw Frameset_680a5 ; frameset
+	db 25 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw StarsFunc_SetFlags
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_BeamLeft: ; 6491a (19:491a)
+	db  0 ; y
+	db -8 ; x
+	dn $1, $1 ; unk7
+	db OBJ_INTERACTION_35 ; interaction type
+	db -14, -3, -2, 1 ; collision box
+	dw OAM_1845aa ; OAM
+	dw Frameset_68ee1 ; frameset
+	db 18 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw BeamFunc_Left
+	db $0 ; obj flags
+
+ObjParams_BeamRight: ; 6492f (19:492f)
+	db  0 ; y
+	db  8 ; x
+	dn $1, $1 ; unk7
+	db OBJ_INTERACTION_35 ; interaction type
+	db -14, -3, -2, 1 ; collision box
+	dw OAM_1845aa ; OAM
+	dw Frameset_68eea ; frameset
+	db 18 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw BeamFunc_Right
+	db $0 ; obj flags
+
+ObjParams_AppleLeft: ; 64948 (19:4948)
+	db -14 ; y
+	db   7 ; x
+	dn $1, $1 ; unk7
+	db OBJ_INTERACTION_1A ; interaction type
+	db -12, -4, -4, 3 ; collision box
+	dw OAM_185a1c ; OAM
+	dw Frameset_68a60 ; frameset
+	db $00 ; action duration
+	db $00 ; var1
+	db $01 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw AppleFunc_Left
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_AppleRight: ; 64959 (19:4959)
+	db -14 ; y
+	db  -8 ; x
+	dn $1, $1 ; unk7
+	db OBJ_INTERACTION_1A ; interaction type
+	db -12, -4, -4, 3 ; collision box
+	dw OAM_185a1c ; OAM
+	dw Frameset_68a60 ; frameset
+	db $00 ; action duration
+	db $00 ; var1
+	db $01 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw AppleFunc_Right
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_SunFlameLeft: ; 6496e (19:496e)
+	db  4 ; y
+	db -8 ; x
+	dn $1, $b ; unk7
+	db OBJ_INTERACTION_FIRE ; interaction type
+	db -10, -2, -5, 4 ; collision box
+	dw OAM_1851df ; OAM
+	dw Frameset_68fb2 ; frameset
+	db $00 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw SunFlameFunc_Left
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_SunFlameRight: ; 64983 (19:4983)
+	db  4 ; y
+	db  7 ; x
+	dn $1, $b ; unk7
+	db OBJ_INTERACTION_FIRE ; interaction type
+	db -10, -2, -5, 4 ; collision box
+	dw OAM_1851df ; OAM
+	dw Frameset_68fad ; frameset
+	db $00 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw SunFlameFunc_Right
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_MoonStarLeft: ; 64998 (19:4998)
+	db  4 ; y
+	db -8 ; x
+	dn $1, $b ; unk7
+	db OBJ_INTERACTION_ELECTRIC ; interaction type
+	db -10, -3, -5, 4 ; collision box
+	dw OAM_1854a2 ; OAM
+	dw Frameset_6901b ; frameset
+	db $00 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw MoonStarFunc_Left
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_MoonStarRight: ; 649ad (19:49ad)
+	db  4 ; y
+	db  7 ; x
+	dn $1, $b ; unk7
+	db OBJ_INTERACTION_ELECTRIC ; interaction type
+	db -10, -3, -5, 4 ; collision box
+	dw OAM_1854a2 ; OAM
+	dw Frameset_69012 ; frameset
+	db $00 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw MoonStarFunc_Right
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_649c2: ; 649c2 (19:49c2)
+	db -10 ; y
+	db  -7 ; x
+	dn $3, $0 ; unk7
+	db OBJ_INTERACTION_01 ; interaction type
+	db 0, 0, 0, 0 ; collision box
+	dw OAM_18c000 ; OAM
+	dw Frameset_680b6 ; frameset
+	db 17 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw StarsFunc_SetFlags
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_649d7: ; 649d7 (19:49d7)
+	db -10 ; y
+	db   6 ; x
+	dn $3, $0 ; unk7
+	db OBJ_INTERACTION_01 ; interaction type
+	db 0, 0, 0, 0 ; collision box
+	dw OAM_18c000 ; OAM
+	dw Frameset_680b6 ; frameset
+	db 17 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw StarsFunc_SetFlags
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_SnowflakeLeft: ; 649ec (19:49ec)
+	db -8 ; y
+	db -8 ; x
+	dn $2, $1 ; unk7
+	db OBJ_INTERACTION_ICE ; interaction type
+	db -12, -5, -6, 4 ; collision box
+	dw OAM_190000 ; OAM
+	dw Frameset_69169 ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw SnowflakeFunc_Left
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_SnowflakeRight: ; 64a01 (19:4a01)
+	db -8 ; y
+	db  7 ; x
+	dn $2, $1 ; unk7
+	db OBJ_INTERACTION_ICE ; interaction type
+	db -12, -5, -6, 4 ; collision box
+	dw OAM_190000 ; OAM
+	dw Frameset_69169 ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw SnowflakeFunc_Right
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_MizzouProjectileLeft: ; 64a16 (19:4a16)
+	db -10 ; y
+	db -16 ; x
+	dn $2, $5 ; unk7
+	db OBJ_INTERACTION_FULL_STING ; interaction type
+	db -7, 0, -4, 3 ; collision box
+	dw OAM_188395 ; OAM
+	dw Frameset_686ce ; frameset
+	db 28 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw MizzouProjectileFunc_Left
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_MizzouProjectileRight: ; 64a2b (19:4a2b)
+	db -10 ; y
+	db  15 ; x
+	dn $2, $5 ; unk7
+	db OBJ_INTERACTION_FULL_STING ; interaction type
+	db -7, 0, -4, 3 ; collision box
+	dw OAM_188395 ; OAM
+	dw Frameset_686d3 ; frameset
+	db 28 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw MizzouProjectileFunc_Right
+	db OBJFLAG_PRIORITY ; obj flags
 
 ObjParams_GreyTreasure: ; 64a40 (19:4a40)
 	db -40 ; y
@@ -1304,14 +1192,13 @@ ObjParams_GreyTreasure: ; 64a40 (19:4a40)
 	dw OAM_18c000 ; OAM
 	dw Frameset_680da ; frameset
 	db 87 ; action duration
-	db $00 ; unk17
-	db $00 ; unk18
-	db $00 ; movement index
-	db $00 ; unk1a
-	db OBJSTATE_00 ; state
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
 	dw GreyTreasureFunc
 	db OBJFLAG_PRIORITY ; obj flags
-; 0x64a55
 
 ObjParams_RedTreasure: ; 64a55 (19:4a55)
 	db -40 ; y
@@ -1322,14 +1209,13 @@ ObjParams_RedTreasure: ; 64a55 (19:4a55)
 	dw OAM_18c000 ; OAM
 	dw Frameset_68113 ; frameset
 	db 87 ; action duration
-	db $00 ; unk17
-	db $00 ; unk18
-	db $00 ; movement index
-	db $00 ; unk1a
-	db OBJSTATE_00 ; state
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
 	dw RedTreasureFunc
 	db OBJFLAG_PRIORITY ; obj flags
-; 0x64a6a
 
 ObjParams_GreenTreasure: ; 64a6a (19:4a6a)
 	db -40 ; y
@@ -1340,14 +1226,13 @@ ObjParams_GreenTreasure: ; 64a6a (19:4a6a)
 	dw OAM_18c000 ; OAM
 	dw Frameset_6814c ; frameset
 	db 87 ; action duration
-	db $00 ; unk17
-	db $00 ; unk18
-	db $00 ; movement index
-	db $00 ; unk1a
-	db OBJSTATE_00 ; state
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
 	dw GreenTreasureFunc
 	db OBJFLAG_PRIORITY ; obj flags
-; 0x64a7f
 
 ObjParams_BlueTreasure: ; 64a7f (19:4a7f)
 	db -40 ; y
@@ -1358,18 +1243,730 @@ ObjParams_BlueTreasure: ; 64a7f (19:4a7f)
 	dw OAM_18c000 ; OAM
 	dw Frameset_68185 ; frameset
 	db 87 ; action duration
-	db $00 ; unk17
-	db $00 ; unk18
-	db $00 ; movement index
-	db $00 ; unk1a
-	db OBJSTATE_00 ; state
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
 	dw BlueTreasureFunc
 	db OBJFLAG_PRIORITY ; obj flags
-; 0x64a94
 
-	INCROM $64a94, $64e06
+ObjParams_AnonsterSilk1Left: ; 64a94 (19:4a94)
+	db  1 ; y
+	db -4 ; x
+	dn $4, $1 ; unk7
+	db OBJ_INTERACTION_2C ; interaction type
+	db -8, -4, -5, 4 ; collision box
+	dw OAM_190000 ; OAM
+	dw Frameset_694ee ; frameset
+	db 32 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw AnonsterSilkFunc.FloatLeft
+	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_64e06: ; 64e06 (19:4e06)
+ObjParams_AnonsterSilk1Right: ; 64aa9 (19:4aa9)
+	db 1 ; y
+	db 3 ; x
+	dn $4, $1 ; unk7
+	db OBJ_INTERACTION_2C ; interaction type
+	db -8, -4, -5, 4 ; collision box
+	dw OAM_190000 ; OAM
+	dw Frameset_694ee ; frameset
+	db 32 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw AnonsterSilkFunc.FloatRight
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_AnonsterSilk2Left: ; 64abe (19:4abe)
+	db  1 ; y
+	db -4 ; x
+	dn $4, $1 ; unk7
+	db OBJ_INTERACTION_2C ; interaction type
+	db -8, -4, -5, 4 ; collision box
+	dw OAM_190000 ; OAM
+	dw Frameset_694ee ; frameset
+	db 24 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw AnonsterSilkFunc.FloatLeft
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_AnonsterSilk2Right: ; 64ad3 (19:4ad3)
+	db 1 ; y
+	db 3 ; x
+	dn $4, $1 ; unk7
+	db OBJ_INTERACTION_2C ; interaction type
+	db -8, -4, -5, 4 ; collision box
+	dw OAM_190000 ; OAM
+	dw Frameset_694ee ; frameset
+	db 24 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw AnonsterSilkFunc.FloatRight
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_AnonsterSilk3Left: ; 64aae8(19:4aae8)
+	db  1 ; y
+	db -4 ; x
+	dn $4, $1 ; unk7
+	db OBJ_INTERACTION_2C ; interaction type
+	db -8, -4, -5, 4 ; collision box
+	dw OAM_190000 ; OAM
+	dw Frameset_694ee ; frameset
+	db 16 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw AnonsterSilkFunc.FloatLeft
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_AnonsterSilk3Right: ; 64afd (19:4afd)
+	db 1 ; y
+	db 3 ; x
+	dn $4, $1 ; unk7
+	db OBJ_INTERACTION_2C ; interaction type
+	db -8, -4, -5, 4 ; collision box
+	dw OAM_190000 ; OAM
+	dw Frameset_694ee ; frameset
+	db 16 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw AnonsterSilkFunc.FloatRight
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_AnonsteWaveLeft: ; 64b12(19:4ab12)
+	db  4 ; y
+	db -5 ; x
+	dn $4, $1 ; unk7
+	db OBJ_INTERACTION_2B ; interaction type
+	db -8, -4, -5, 4 ; collision box
+	dw OAM_190000 ; OAM
+	dw Frameset_694f8 ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw AnonsteWaveLFunc_Left
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_AnonsterWaveRight: ; 64b27 (19:4b27)
+	db 4 ; y
+	db 4 ; x
+	dn $4, $1 ; unk7
+	db OBJ_INTERACTION_2B ; interaction type
+	db -8, -4, -5, 4 ; collision box
+	dw OAM_190000 ; OAM
+	dw Frameset_69505 ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw AnonsterWaveFunc_Right
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_SilkPlatform1: ; 64b27 (19:4b27)
+	db  -16 ; y
+	db -112 ; x
+	dn $4, $3 ; unk7
+	db OBJ_INTERACTION_SOLID ; interaction type
+	db -8, -2, -5, 5 ; collision box
+	dw OAM_190000 ; OAM
+	dw Frameset_6954a ; frameset
+	db 170 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_UNK_4 ; substate
+	db $00 ; state
+	dw SilkPlatformFunc
+	db $0 ; obj flags
+
+ObjParams_SilkPlatform2: ; 64b51 (19:4b51)
+	db -16 ; y
+	db -80 ; x
+	dn $4, $3 ; unk7
+	db OBJ_INTERACTION_SOLID ; interaction type
+	db -8, -2, -5, 5 ; collision box
+	dw OAM_190000 ; OAM
+	dw Frameset_6954a ; frameset
+	db 120 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_UNK_4 ; substate
+	db $00 ; state
+	dw SilkPlatformFunc
+	db $0 ; obj flags
+
+ObjParams_SilkPlatform3: ; 64b66 (19:4b66)
+	db -16 ; y
+	db -48 ; x
+	dn $4, $3 ; unk7
+	db OBJ_INTERACTION_SOLID ; interaction type
+	db -8, -2, -5, 5 ; collision box
+	dw OAM_190000 ; OAM
+	dw Frameset_6954a ; frameset
+	db 70 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_UNK_4 ; substate
+	db $00 ; state
+	dw SilkPlatformFunc
+	db $0 ; obj flags
+
+ObjParams_SnakeFireLeft: ; 64b7b (19:4b7b)
+	db  16 ; y
+	db -21 ; x
+	dn $2, $e ; unk7
+	db OBJ_INTERACTION_FIRE ; interaction type
+	db -8, 0, -4, 3 ; collision box
+	dw OAM_189783 ; OAM
+	dw Frameset_6893a ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw SnakeFireFunc
+	db $0 ; obj flags
+
+ObjParams_SnakeFireRight: ; 64b90 (19:4b90)
+	db 16 ; y
+	db  6 ; x
+	dn $2, $e ; unk7
+	db OBJ_INTERACTION_FIRE ; interaction type
+	db -8, 0, -4, 3 ; collision box
+	dw OAM_189783 ; OAM
+	dw Frameset_6893a ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw SnakeFireFunc
+	db $0 ; obj flags
+
+ObjParams_DollBoyHammer: ; 64ba5 (19:4ba5)
+	db -18 ; y
+	db -10 ; x
+	dn $4, $9 ; unk7
+	db OBJ_INTERACTION_32 ; interaction type
+	db -12, -4, -4, 3 ; collision box
+	dw OAM_19105c ; OAM
+	dw Frameset_69684 ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw DollBoyHammerFunc
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_HammerPlatform: ; 64bba (19:4bba)
+	db -60 ; y
+	db  64 ; x
+	dn $4, $6 ; unk7
+	db OBJ_INTERACTION_31 ; interaction type
+	db -10, -1, -5, 4 ; collision box
+	dw OAM_19105c ; OAM
+	dw Frameset_696b1 ; frameset
+	db 140 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_UNK_4 ; substate
+	db $00 ; state
+	dw HammerPlatformFunc
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_HighRollingRockLeft: ; 64bcf (19:4bcf)
+	db   4 ; y
+	db -13 ; x
+	dn $5, $8 ; unk7
+	db OBJ_INTERACTION_33 ; interaction type
+	db -10, -4, -4, 3 ; collision box
+	dw OAM_194000 ; OAM
+	dw Frameset_6973d ; frameset
+	db 7 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw RollingRockFunc_Left
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_HighRollingRockRight: ; 64be4 (19:4be4)
+	db   4 ; y
+	db  12 ; x
+	dn $5, $8 ; unk7
+	db OBJ_INTERACTION_33 ; interaction type
+	db -10, -4, -4, 3 ; collision box
+	dw OAM_194000 ; OAM
+	dw Frameset_696f8 ; frameset
+	db 7 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw RollingRockFunc_Right
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_LowRollingRockLeft: ; 64bcf (19:4bcf)
+	db   4 ; y
+	db -13 ; x
+	dn $5, $8 ; unk7
+	db OBJ_INTERACTION_33 ; interaction type
+	db -10, -4, -4, 3 ; collision box
+	dw OAM_194000 ; OAM
+	dw Frameset_6973d ; frameset
+	db 7 ; action duration
+	db $1 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw RollingRockFunc_Left
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_LowRollingRockRight: ; 64be4 (19:4be4)
+	db   4 ; y
+	db  12 ; x
+	dn $5, $8 ; unk7
+	db OBJ_INTERACTION_33 ; interaction type
+	db -10, -4, -4, 3 ; collision box
+	dw OAM_194000 ; OAM
+	dw Frameset_696f8 ; frameset
+	db 7 ; action duration
+	db $1 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw RollingRockFunc_Right
+	db OBJFLAG_PRIORITY ; obj flags
+
+
+ObjParams_PalmTreeShort: ; 64c23 (19:4c23)
+	db 16 ; y
+	db 16 ; x
+	dn $5, $a ; unk7
+	db OBJ_INTERACTION_31 ; interaction type
+	db -6, -2, -7, 6 ; collision box
+	dw OAM_194000 ; OAM
+	dw Frameset_69746 ; frameset
+	db 0 ; action duration
+	db $1a ; var1
+	db $1f ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_UNK_4 ; substate
+	db $00 ; state
+	dw PalmTreeFunc
+	db $0 ; obj flags
+
+ObjParams_PalmTreeMedium: ; 64c38 (19:4c38)
+	db 28 ; y
+	db 72 ; x
+	dn $5, $a ; unk7
+	db OBJ_INTERACTION_31 ; interaction type
+	db -14, -10, -7, 6 ; collision box
+	dw OAM_194000 ; OAM
+	dw Frameset_6974d ; frameset
+	db 0 ; action duration
+	db $30 ; var1
+	db $1f ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_UNK_4 ; substate
+	db $00 ; state
+	dw PalmTreeFunc
+	db $0 ; obj flags
+
+ObjParams_PalmTreeTall: ; 64c4d (19:4c4d)
+	db  39 ; y
+	db 127 ; x
+	dn $5, $a ; unk7
+	db OBJ_INTERACTION_31 ; interaction type
+	db -30, -26, -7, 6 ; collision box
+	dw OAM_194000 ; OAM
+	dw Frameset_69754 ; frameset
+	db 0 ; action duration
+	db $4a ; var1
+	db $1f ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_UNK_4 ; substate
+	db $00 ; state
+	dw PalmTreeFunc
+	db $0 ; obj flags
+
+ObjParams_YellowBellyArrowLeft: ; 64c62 (19:4c62)
+	db  16 ; y
+	db -16 ; x
+	dn $4, $d ; unk7
+	db OBJ_INTERACTION_37 ; interaction type
+	db -10, -4, -3, 2 ; collision box
+	dw OAM_1926dc ; OAM
+	dw Frameset_69870 ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $1 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw YellowBellyArrowFunc.Left
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_YellowBellyArrowRight: ; 64c77 (19:4c77)
+	db 16 ; y
+	db 15 ; x
+	dn $4, $d ; unk7
+	db OBJ_INTERACTION_37 ; interaction type
+	db -10, -4, -3, 2 ; collision box
+	dw OAM_1926dc ; OAM
+	dw Frameset_69875 ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $1 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw YellowBellyArrowFunc.Right
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_Dragonfly1: ; 64c8c (19:4c8c)
+	db -64 ; y
+	db  48 ; x
+	dn $4, $8 ; unk7
+	db OBJ_INTERACTION_WALKABLE ; interaction type
+	db -9, -7, -7, 6 ; collision box
+	dw OAM_1927d5 ; OAM
+	dw Frameset_699d0 ; frameset
+	db 36 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw Dragonfly1Func
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_Fly: ; 64ca1 (19:4ca1)
+	db -48 ; y
+	db  48 ; x
+	dn $4, $9 ; unk7
+	db OBJ_INTERACTION_01 ; interaction type
+	db -12, 12, -6, 5 ; collision box
+	dw OAM_1927d5 ; OAM
+	dw Frameset_699e4 ; frameset
+	db 40 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $5a ; state
+	dw FlyFunc
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_Tadpole: ; 64cb6 (19:4cb6)
+	db -3 ; y
+	db  0 ; x
+	dn $2, $f ; unk7
+	db OBJ_INTERACTION_3C ; interaction type
+	db -12, -4, -5, 4 ; collision box
+	dw OAM_18a642 ; OAM
+	dw Frameset_69a33 ; frameset
+	db 28 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $5a ; state
+	dw TadpoleFunc
+	db $0 ; obj flags
+
+ObjParams_InkLeft: ; 64ccb (19:4ccb)
+	db -12 ; y
+	db  -4 ; x
+	dn $5, $3 ; unk7
+	db OBJ_INTERACTION_42 ; interaction type
+	db -13, -3, -3, 2 ; collision box
+	dw OAM_194895 ; OAM
+	dw Frameset_69ae3 ; frameset
+	db 20 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw InkFunc.Left
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_InkRight: ; 64ce0 (19:4ce0)
+	db -12 ; y
+	db   3 ; x
+	dn $5, $3 ; unk7
+	db OBJ_INTERACTION_42 ; interaction type
+	db -13, -3, -3, 2 ; collision box
+	dw OAM_194895 ; OAM
+	dw Frameset_69ae3 ; frameset
+	db 20 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw InkFunc.Right
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_FloatingRing: ; 64cf5 (19:4cf5)
+	db 64 ; y
+	db  0 ; x
+	dn $5, $5 ; unk7
+	db OBJ_INTERACTION_31 ; interaction type
+	db -1, 4, -5, 4 ; collision box
+	dw OAM_194895 ; OAM
+	dw Frameset_69b0d ; frameset
+	db 140 ; action duration
+	db $00 ; var1
+	db $14 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_UNK_4 ; substate
+	db $00 ; state
+	dw FloatingRingFunc
+	db $0 ; obj flags
+
+ObjParams_Skull1: ; 64d0a (19:4d0a)
+	db -28 ; y
+	db -16 ; x
+	dn $5, $0 ; unk7
+	db OBJ_INTERACTION_STOVE ; interaction type
+	db -8, 7, -4, 3 ; collision box
+	dw OAM_19501c ; OAM
+	dw Frameset_69c69 ; frameset
+	db 60 ; action duration
+	db $64 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw SkullFunc
+	db $0 ; obj flags
+
+ObjParams_Skull2: ; 64d1f (19:4d1f)
+	db 20 ; y
+	db -16 ; x
+	dn $5, $1 ; unk7
+	db OBJ_INTERACTION_STOVE ; interaction type
+	db -8, 7, -4, 3 ; collision box
+	dw OAM_19501c ; OAM
+	dw Frameset_69c69 ; frameset
+	db 60 ; action duration
+	db $78 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw SkullFunc
+	db $0 ; obj flags
+
+ObjParams_Skull3: ; 64d34 (19:4d34)
+	db -28 ; y
+	db  16 ; x
+	dn $5, $2 ; unk7
+	db OBJ_INTERACTION_STOVE ; interaction type
+	db -8, 7, -4, 3 ; collision box
+	dw OAM_19501c ; OAM
+	dw Frameset_69cc5 ; frameset
+	db 60 ; action duration
+	db $8c ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw SkullFunc
+	db $0 ; obj flags
+
+ObjParams_Skull4: ; 64d49 (19:4d49)
+	db 20 ; y
+	db 16 ; x
+	dn $5, $3 ; unk7
+	db OBJ_INTERACTION_STOVE ; interaction type
+	db -8, 7, -4, 3 ; collision box
+	dw OAM_19501c ; OAM
+	dw Frameset_69cc5 ; frameset
+	db 60 ; action duration
+	db $a0 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw SkullFunc
+	db $0 ; obj flags
+
+ObjParams_JamanoHat: ; 64d5e (19:4d5e)
+	db -12 ; y
+	db   0 ; x
+	dn $5, $8 ; unk7
+	db OBJ_INTERACTION_0B ; interaction type
+	db -4, 0, -6, 5 ; collision box
+	dw OAM_19501c ; OAM
+	dw Frameset_69cef ; frameset
+	db 40 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw JamanoHatFunc
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_MagicSpiralLeft: ; 64d73 (19:4d73)
+	db  12 ; y
+	db -12 ; x
+	dn $5, $e ; unk7
+	db OBJ_INTERACTION_4B ; interaction type
+	db -4, 3, -4, 3 ; collision box
+	dw OAM_195e06 ; OAM
+	dw Frameset_69e30 ; frameset
+	db 92 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $5 | OBJSUBFLAG_VDIR ; substate
+	db $00 ; state
+	dw MagicSpiralFunc
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_MagicSpiralRight: ; 64d88 (19:4d88)
+	db 12 ; y
+	db 11 ; x
+	dn $5, $e ; unk7
+	db OBJ_INTERACTION_4B ; interaction type
+	db -4, 3, -4, 3 ; collision box
+	dw OAM_195e06 ; OAM
+	dw Frameset_69e30 ; frameset
+	db 92 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $5 | OBJSUBFLAG_VDIR | OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw MagicSpiralFunc
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_IgaguriLeft: ; 64d9d (19:4d9d)
+	db  21 ; y
+	db -12 ; x
+	dn $5, $f ; unk7
+	db OBJ_INTERACTION_37 ; interaction type
+	db -16, -4, -5, 4 ; collision box
+	dw OAM_195e06 ; OAM
+	dw Frameset_69e7b ; frameset
+	db 62 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw IgaguriFunc
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_IgaguriRight: ; 64db2 (19:4db2)
+	db 21 ; y
+	db 11 ; x
+	dn $5, $f ; unk7
+	db OBJ_INTERACTION_37 ; interaction type
+	db -16, -4, -5, 4 ; collision box
+	dw OAM_195e06 ; OAM
+	dw Frameset_69e7b ; frameset
+	db 62 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw IgaguriFunc
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_HiddenFigureFace: ; 64dc7 (19:4dc7)
+	db -16 ; y
+	db   8 ; x
+	dn $3, $b ; unk7
+	db OBJ_INTERACTION_FULL_STING | HEAVY_OBJ ; interaction type
+	db -24, -19, -4, 3 ; collision box
+	dw OAM_18c88a ; OAM
+	dw Frameset_6a06c ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw HiddenFigureFaceFunc
+	db $0 ; obj flags
+
+ObjParams_HiddenFigureLeftHand: ; 64ddc (19:4ddc)
+	db  18 ; y
+	db -40 ; x
+	dn $3, $c ; unk7
+	db OBJ_INTERACTION_0B | HEAVY_OBJ ; interaction type
+	db -24, -8, -8, 7 ; collision box
+	dw OAM_18c88a ; OAM
+	dw Frameset_6a128 ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw HiddenFigureLeftHandFunc
+	db $0 ; obj flags
+
+ObjParams_HiddenFigureRightHand: ; 64df1 (19:4df1)
+	db 18 ; y
+	db 56 ; x
+	dn $3, $d ; unk7
+	db OBJ_INTERACTION_0B | HEAVY_OBJ ; interaction type
+	db -24, -8, -8, 7 ; collision box
+	dw OAM_18c88a ; OAM
+	dw Frameset_6a131 ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw HiddenFigureRightHandFunc
+	db $0 ; obj flags
+
+ObjParams_Omodon2: ; 64e06 (19:4e06)
 	db 16 ; y
 	db  0 ; x
 	dn $0, $d ; unk7
@@ -1378,16 +1975,15 @@ ObjParams_64e06: ; 64e06 (19:4e06)
 	dw OAM_18154f ; OAM
 	dw Frameset_68f50 ; frameset
 	db 0 ; action duration
-	db $00 ; unk17
-	db $00 ; unk18
-	db $00 ; movement index
-	db $00 ; unk1a
-	db OBJSTATE_00 ; state
-	dw $679c
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw Func_4279c
 	db $0 ; obj flags
-; 0x64e1b
 
-ObjParams_64e1b: ; 64e1b (19:4e1b)
+ObjParams_Omodon1: ; 64e1b (19:4e1b)
 	db 16 ; y
 	db  0 ; x
 	dn $0, $d ; unk7
@@ -1396,16 +1992,47 @@ ObjParams_64e1b: ; 64e1b (19:4e1b)
 	dw OAM_18154f ; OAM
 	dw Frameset_68f50 ; frameset
 	db 0 ; action duration
-	db $00 ; unk17
-	db $00 ; unk18
-	db $00 ; movement index
-	db $00 ; unk1a
-	db OBJSTATE_00 ; state
-	dw $679c
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw Func_4279c
 	db $0 ; obj flags
-; 0x64e30
 
-	INCROM $64e30, $64e5a
+ObjParams_DollBoyUnkObjLeft: ; 64e30 (19:4e30)
+	db -20 ; y
+	db -19 ; x
+	dn $3, $0 ; unk7
+	db OBJ_INTERACTION_01 ; interaction type
+	db 0, 0, 0, 0 ; collision box
+	dw OAM_18c000 ; OAM
+	dw Frameset_680a5 ; frameset
+	db 25 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw StarsFunc_SetFlags
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_DollBoyUnkObjRight: ; 64e45 (19:4e45)
+	db -20 ; y
+	db 18 ; x
+	dn $3, $0 ; unk7
+	db OBJ_INTERACTION_01 ; interaction type
+	db 0, 0, 0, 0 ; collision box
+	dw OAM_18c000 ; OAM
+	dw Frameset_680a5 ; frameset
+	db 25 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
+	dw StarsFunc_SetFlags
+	db OBJFLAG_PRIORITY ; obj flags
 
 ObjParams_Coin: ; 64e5a (19:4e5a)
 	dn $8, $1 ; unk7
@@ -1414,14 +2041,13 @@ ObjParams_Coin: ; 64e5a (19:4e5a)
 	dw OAM_180003 ; OAM
 	db 1, 8 ; frameset
 	db 4 ; action duration
-	db $00 ; unk17
-	db $02 ; unk18
-	db $00 ; movement index
-	db $20 ; unk1a
+	db $00 ; var1
+	db $02 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_UNINITIALISED ; substate
 	db OBJSTATE_19 ; state
 	dw CoinFunc
 	db OBJFLAG_PRIORITY ; obj flags
-; 0x64e6d
 
 ObjParams_ColourCoin: ; 64e6d (19:4e6d)
 	dn $8, $1 ; unk7
@@ -1430,14 +2056,13 @@ ObjParams_ColourCoin: ; 64e6d (19:4e6d)
 	dw OAM_180003 ; OAM
 	db 1, 8 ; frameset
 	db 4 ; action duration
-	db $00 ; unk17
-	db $02 ; unk18
-	db $00 ; movement index
-	db $20 ; unk1a
+	db $00 ; var1
+	db $02 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_UNINITIALISED ; substate
 	db OBJSTATE_19 ; state
 	dw CoinFunc.ColourCoin
 	db OBJFLAG_PRIORITY ; obj flags
-; 0x64e6d
 
 ObjParams_TorchEmberLeft1: ; 64e80 (19:4e80)
 	dn $0, $5 ; unk7
@@ -1446,11 +2071,11 @@ ObjParams_TorchEmberLeft1: ; 64e80 (19:4e80)
 	dw OAM_180838 ; OAM
 	dw Frameset_68354 ; frameset
 	db 0 ; action duration
-	db $00 ; unk17
-	db $00 ; unk18
-	db $00 ; movement index
-	db $00 ; unk1a
-	db OBJSTATE_00 ; state
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
 	dw TorchEmberLeft1Func
 	db OBJFLAG_PRIORITY ; obj flags
 
@@ -1461,11 +2086,11 @@ ObjParams_TorchEmberRight1: ; 64e93 (19:4e93)
 	dw OAM_180838 ; OAM
 	dw Frameset_68354 ; frameset
 	db 0 ; action duration
-	db $00 ; unk17
-	db $00 ; unk18
-	db $00 ; movement index
-	db $80 ; unk1a
-	db OBJSTATE_00 ; state
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
 	dw TorchEmberRight1Func
 	db OBJFLAG_PRIORITY ; obj flags
 
@@ -1476,11 +2101,11 @@ ObjParams_TorchEmberLeft2: ; 64ea6 (19:4ea6)
 	dw OAM_180838 ; OAM
 	dw Frameset_68354 ; frameset
 	db 0 ; action duration
-	db $00 ; unk17
-	db $00 ; unk18
-	db $00 ; movement index
-	db $00 ; unk1a
-	db OBJSTATE_00 ; state
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
 	dw TorchEmberLeft2Func
 	db OBJFLAG_PRIORITY ; obj flags
 
@@ -1491,16 +2116,210 @@ ObjParams_TorchEmberRight2: ; 64eb9 (19:4eb9)
 	dw OAM_180838 ; OAM
 	dw Frameset_68354 ; frameset
 	db 0 ; action duration
-	db $00 ; unk17
-	db $00 ; unk18
-	db $00 ; movement index
-	db $80 ; unk1a
-	db OBJSTATE_00 ; state
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db OBJSUBFLAG_HDIR ; substate
+	db $00 ; state
 	dw TorchEmberRight2Func
 	db OBJFLAG_PRIORITY ; obj flags
-; 0x64ecc
 
-	INCROM $64ecc, $64fc3
+ObjParams_ElectricLampSpark: ; 64ecc (19:4ecc)
+	dn $1, $8 ; unk7
+	db OBJ_INTERACTION_ELECTRIC ; interaction type
+	db -6, -5, -4, 3 ; collision box
+	dw OAM_184eeb ; OAM
+	dw Frameset_68c97 ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw ElectricLampSparkFunc
+	db OBJFLAG_PRIORITY ; obj flags
+; 0x64edf
+
+ObjParams_Bubble: ; 64edf (19:4edf)
+	dn $1, $f ; unk7
+	db OBJ_INTERACTION_BUBBLE ; interaction type
+	db -24, -7, -9, 8 ; collision box
+	dw OAM_185b98 ; OAM
+	dw Frameset_69105 ; frameset
+	db 32 ; action duration
+	db $30 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw BubbleFunc
+	db OBJFLAG_PRIORITY ; obj flags
+; 0x64ef2
+
+ObjParams_FallingSnow: ; 64ef2 (19:4ef2)
+	dn $2, $a ; unk7
+	db OBJ_INTERACTION_2D ; interaction type
+	db -15, -8, -5, 4 ; collision box
+	dw OAM_1893fe ; OAM
+	dw Frameset_6957e ; frameset
+	db 80 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw FallingSnowFunc
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_StarsAbove: ; 64f05 (19:4f05)
+	dn $3, $0 ; unk7
+	db OBJ_INTERACTION_01 ; interaction type
+	db 0, 0, 0, 0 ; collision box
+	dw OAM_18c000 ; OAM
+	dw Frameset_680c5 ; frameset
+	db 33 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw StarsFunc_WithYOffset
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_YellowBellyHead: ; 64f18 (19:4f18)
+	dn $4, $c ; unk7
+	db OBJ_INTERACTION_37 ; interaction type
+	db -10, -6, -4, 3 ; collision box
+	dw OAM_1926dc ; OAM
+	dw Frameset_6987a ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw YellowBellyHeadFunc
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_Pump: ; 64f2b (19:4f2b)
+	dn $4, $e ; unk7
+	db OBJ_INTERACTION_36 ; interaction type
+	db -13, -1, -6, 5 ; collision box
+	dw OAM_1926dc ; OAM
+	dw Frameset_6987a ; frameset
+	db 16 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw PumpFunc
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_Cheese: ; 64f3e (19:4f3e)
+	dn $4, $a ; unk7
+	db OBJ_INTERACTION_0B ; interaction type
+	db -12, -5, -6, 5 ; collision box
+	dw OAM_1927d5 ; OAM
+	dw Frameset_69a00 ; frameset
+	db 48 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw CheeseFunc
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_ScrowlerTentacleRight: ; 64f51 (19:4f51)
+	dn $5, $1 ; unk7
+	db OBJ_INTERACTION_WATER_TELEPORTING ; interaction type
+	db -10, -2, -3, 2 ; collision box
+	dw OAM_194895 ; OAM
+	dw Frameset_69af5 ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw ScrowlerTentacleFunc
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_ScrowlerTentacleLeft: ; 64f64 (19:4f64)
+	dn $5, $2 ; unk7
+	db OBJ_INTERACTION_WATER_TELEPORTING ; interaction type
+	db -10, -2, -3, 2 ; collision box
+	dw OAM_194895 ; OAM
+	dw Frameset_69af5 ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw ScrowlerTentacleFunc
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_MuddeeStinger1: ; 64f77 (19:4f77)
+	dn $3, $4 ; unk7
+	db OBJ_INTERACTION_FULL_STING ; interaction type
+	db -12, 0, -4, 3 ; collision box
+	dw OAM_18c000 ; OAM
+	dw Frameset_68072 ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $1 ; substate
+	db $00 ; state
+	dw MuddeeStingerFunc
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_MuddeeStinger2: ; 64f8a (19:4f8a)
+	dn $3, $5 ; unk7
+	db OBJ_INTERACTION_01 ; interaction type
+	db -12, 0, -4, 3 ; collision box
+	dw OAM_18c000 ; OAM
+	dw Frameset_68072 ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $1 ; substate
+	db $00 ; state
+	dw MuddeeStingerFunc
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_Kuri: ; 64f9d (19:4f9d)
+	dn $5, $e ; unk7
+	db OBJ_INTERACTION_01 ; interaction type
+	db -12, 0, -5, 4 ; collision box
+	dw OAM_195e06 ; OAM
+	dw Frameset_69e50 ; frameset
+	db 0 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw KuriFunc
+	db OBJFLAG_PRIORITY ; obj flags
+
+ObjParams_StarsCentre: ; 64fb0 (19:4fb0)
+	dn $3, $0 ; unk7
+	db OBJ_INTERACTION_01 ; interaction type
+	db 0, 0, 0, 0 ; collision box
+	dw OAM_18c000 ; OAM
+	dw Frameset_680a5 ; frameset
+	db 25 ; action duration
+	db $00 ; var1
+	db $00 ; var2
+	db $00 ; var3
+	db $0 ; substate
+	db $00 ; state
+	dw StarsFunc_SetFlags
+	db OBJFLAG_PRIORITY ; obj flags
 
 Data_64fc3: ; 64fc3 (19:4fc3)
 	dw GreyChestData
@@ -1742,8 +2561,8 @@ EnemyGroupGfx1: ; 6527c (19:527c)
 
 	dw DummyObjectData
 	dw CountRichtertoffenData
-	dw Data_64473
-	dw Data_64553
+	dw DoughnuteerData
+	dw BeamBotData
 	dw NULL
 
 	rgb 31, 31, 31
@@ -1775,7 +2594,7 @@ EnemyGroupGfx2: ; 652af (19:52af)
 	dw TorchGfx
 
 	dw SpearheadData
-	dw Data_644cb
+	dw BlueBirdData
 	dw FutamoguData
 	dw TorchData
 	dw NULL
@@ -1808,10 +2627,10 @@ EnemyGroupGfx3: ; 652e2 (19:52e2)
 	dw ClearGate2Gfx
 	dw OmodonmekaGfx
 
-	dw Data_644bb
+	dw SilkyData
 	dw CountRichtertoffenData
-	dw Data_6468b
-	dw Data_6447b
+	dw ClearGate2Data
+	dw OmodonmekaData
 	dw NULL
 
 	rgb 31, 31, 31
@@ -1844,8 +2663,8 @@ EnemyGroupGfx4: ; 65315 (19:5315)
 
 	dw DummyObjectData
 	dw DummyObjectData
-	dw Data_64483
-	dw Data_6447b
+	dw OmodonmekaWithOmodon1Data
+	dw OmodonmekaData
 	dw NULL
 
 	rgb  0,  0,  0
@@ -1878,8 +2697,8 @@ EnemyGroupGfx5: ; 65348 (19:5348)
 
 	dw DummyObjectData
 	dw DummyObjectData
-	dw Data_6448b
-	dw Data_6447b
+	dw OmodonmekaWithOmodon2Data
+	dw OmodonmekaData
 	dw NULL
 
 	rgb  0,  0,  0
@@ -1911,10 +2730,10 @@ EnemyGroupGfx6: ; 6537b (19:537b)
 	dw TorchGfx
 
 	dw DummyObjectData
-	dw Data_64493
+	dw KushimushiVerticalData
 	dw DummyObjectData
 	dw DummyObjectData
-	dw Data_6449b
+	dw KushimushiHorizontalData
 	dw NULL
 
 	rgb  0,  0,  0
@@ -1945,7 +2764,7 @@ EnemyGroupGfx7: ; 653b0 (19:53b0)
 	dw FutamoguGfx
 	dw TorchGfx
 
-	dw Data_644a3
+	dw MizuuoData
 	dw NULL
 
 	rgb  0, 20,  0
@@ -1977,10 +2796,10 @@ EnemyGroupGfx8: ; 653dd (19:53dd)
 	dw TorchGfx
 
 	dw DummyObjectData
-	dw Data_64493
-	dw Data_644ab
+	dw KushimushiVerticalData
+	dw BigLeafSpawnerData
 	dw DummyObjectData
-	dw Data_6449b
+	dw KushimushiHorizontalData
 	dw NULL
 
 	rgb  0,  0,  0
@@ -2011,9 +2830,9 @@ EnemyGroupGfx9: ; 65412 (19:5412)
 	dw BigLeafGfx
 	dw TorchGfx
 
-	dw Data_644a3
+	dw MizuuoData
 	dw DummyObjectData
-	dw Data_644ab
+	dw BigLeafSpawnerData
 	dw NULL
 
 	rgb  0, 20,  0
@@ -2044,9 +2863,9 @@ EnemyGroupGfx10: ; 65443 (19:5443)
 	dw DoughnuteerGfx
 	dw TorchGfx
 
-	dw Data_644bb
-	dw Data_644c3
-	dw Data_64473
+	dw SilkyData
+	dw OrangeBirdData
+	dw DoughnuteerData
 	dw NULL
 
 	rgb 31, 31, 31
@@ -2077,10 +2896,10 @@ EnemyGroupGfx11: ; 65474 (19:5474)
 	dw DoughnuteerGfx
 	dw FireBotGfx
 
-	dw Data_644d3
-	dw Data_6446b
-	dw Data_64473
-	dw Data_64543
+	dw SnakeData
+	dw ParaGoomData
+	dw DoughnuteerData
+	dw FireBotData
 	dw NULL
 
 	rgb 31, 31, 31
@@ -2111,10 +2930,10 @@ EnemyGroupGfx12: ; 654a7 (19:54a7)
 	dw ZombieGfx
 	dw FireBotGfx
 
-	dw Data_644d3
-	dw Data_6446b
-	dw Data_6453b
-	dw Data_64543
+	dw SnakeData
+	dw ParaGoomData
+	dw ZombieData
+	dw FireBotData
 	dw NULL
 
 	rgb 31, 31, 31
@@ -2148,7 +2967,7 @@ EnemyGroupGfx13: ; 654da (19:54da)
 	dw SpearheadData
 	dw WebberData
 	dw FutamoguData
-	dw Data_644b3
+	dw SmallLeafData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -2180,7 +2999,7 @@ EnemyGroupGfx14: ; 6550d (19:550d)
 	dw TorchGfx
 
 	dw SpearheadData
-	dw Data_644db
+	dw ApplebyData
 	dw FutamoguData
 	dw TorchData
 	dw NULL
@@ -2213,10 +3032,10 @@ EnemyGroupGfx15: ; 65540 (19:5540)
 	dw SpearBotGfx
 	dw BarrelGfx
 
-	dw Data_644fb
-	dw Data_6450b
-	dw Data_6454b
-	dw Data_644eb
+	dw RedPrinceFroggyData
+	dw HammerBotData
+	dw SpearBotData
+	dw Barrel2Data
 	dw NULL
 
 	rgb  0, 25,  0
@@ -2247,11 +3066,11 @@ EnemyGroupGfx16: ; 65573 (19:5573)
 	dw FutamoguGfx
 	dw TeruteruGfx
 
-	dw Data_6451b
-	dw Data_6446b
+	dw MadSciensteinData
+	dw ParaGoomData
 	dw FutamoguData
-	dw Data_64513
-	dw Data_64523
+	dw TeruteruData
+	dw SeeingEyeDoorData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -2283,9 +3102,9 @@ EnemyGroupGfx17: ; 655a8 (19:55a8)
 	dw ClearGate3Gfx
 
 	dw SpearheadData
-	dw Data_6452b
+	dw PneumoData
 	dw DummyObjectData
-	dw Data_64693
+	dw ClearGate3Data
 	dw NULL
 
 	rgb  0, 25,  0
@@ -2316,11 +3135,11 @@ EnemyGroupGfx18: ; 655db (19:55db)
 	dw FutamoguGfx
 	dw ElectricLampGfx
 
-	dw Data_6451b
-	dw Data_6446b
+	dw MadSciensteinData
+	dw ParaGoomData
 	dw DummyObjectData
-	dw Data_64533
-	dw Data_64523
+	dw ElectricLampData
+	dw SeeingEyeDoorData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -2351,9 +3170,9 @@ EnemyGroupGfx19: ; 65610 (19:5610)
 	dw ClearGate2Gfx
 	dw TorchGfx
 
-	dw Data_6455b
+	dw SunData
 	dw DummyObjectData
-	dw Data_6468b
+	dw ClearGate2Data
 	dw NULL
 
 	rgb  0, 20,  0
@@ -2384,9 +3203,9 @@ EnemyGroupGfx20: ; 65641 (19:5641)
 	dw ClearGate2Gfx
 	dw TorchGfx
 
-	dw Data_64563
+	dw MoonData
 	dw DummyObjectData
-	dw Data_6468b
+	dw ClearGate2Data
 	dw NULL
 
 	rgb  0, 20,  0
@@ -2418,8 +3237,8 @@ EnemyGroupGfx21: ; 65672 (19:5672)
 	dw TorchGfx
 
 	dw UnusedFlowerData
-	dw Data_6450b
-	dw Data_6454b
+	dw HammerBotData
+	dw SpearBotData
 	dw TorchData
 	dw NULL
 
@@ -2453,7 +3272,7 @@ EnemyGroupGfx22: ; 656a5 (19:56a5)
 
 	dw SpearheadData
 	dw DummyObjectData
-	dw Data_64573
+	dw HandData
 	dw DummyObjectData
 	dw NULL
 
@@ -2516,9 +3335,9 @@ EnemyGroupGfx24: ; 65705 (19:5705)
 	dw BubbleGfx
 	dw TorchGfx
 
-	dw Data_645bb
+	dw HaridamaData
 	dw DummyObjectData
-	dw Data_6457b
+	dw BubbleHoleData
 	dw DummyObjectData
 	dw NULL
 
@@ -2552,8 +3371,8 @@ EnemyGroupGfx25: ; 65738 (19:5738)
 
 	dw SpearheadData
 	dw DummyObjectData
-	dw Data_6456b
-	dw Data_6465b
+	dw KobattoData
+	dw WaterDropData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -2584,11 +3403,11 @@ EnemyGroupGfx26: ; 6576b (19:576b)
 	dw CartGfx
 	dw FireBotGfx
 
-	dw Data_644d3
-	dw Data_64683
-	dw Data_64593
-	dw Data_6458b
-	dw Data_64543
+	dw SnakeData
+	dw ClearGate1Data
+	dw CartRightData
+	dw CartLeftData
+	dw FireBotData
 	dw NULL
 
 	rgb 31, 31, 31
@@ -2620,10 +3439,10 @@ EnemyGroupGfx27: ; 657a0 (19:57a0)
 	dw FireBotGfx
 
 	dw DummyObjectData
-	dw Data_64683
-	dw Data_645a3
-	dw Data_6459b
-	dw Data_64543
+	dw ClearGate1Data
+	dw CartVariableRightData
+	dw CartVariableLeftData
+	dw FireBotData
 	dw NULL
 
 	rgb 31, 31, 31
@@ -2654,11 +3473,11 @@ EnemyGroupGfx28: ; 657d5 (19:57d5)
 	dw CartGfx
 	dw FireBotGfx
 
-	dw Data_644d3
-	dw Data_64683
-	dw Data_645a3
-	dw Data_6459b
-	dw Data_64543
+	dw SnakeData
+	dw ClearGate1Data
+	dw CartVariableRightData
+	dw CartVariableLeftData
+	dw FireBotData
 	dw NULL
 
 	rgb 31, 31, 31
@@ -2691,8 +3510,8 @@ EnemyGroupGfx29: ; 6580a (19:580a)
 
 	dw SpearheadData
 	dw DummyObjectData
-	dw Data_64593
-	dw Data_6458b
+	dw CartRightData
+	dw CartLeftData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -2724,10 +3543,10 @@ EnemyGroupGfx30: ; 6583d (19:583d)
 	dw NobiiruGfx
 
 	dw DummyObjectData
-	dw Data_6446b
+	dw ParaGoomData
 	dw DummyObjectData
-	dw Data_64673
-	dw Data_6467b
+	dw NobiiruLeftData
+	dw NobiiruRightData
 	dw NULL
 
 	rgb  0,  0,  0
@@ -2758,10 +3577,10 @@ EnemyGroupGfx31: ; 65872 (19:5872)
 	dw ClearGate2Gfx
 	dw BeamBotGfx
 
-	dw Data_644bb
-	dw Data_6446b
-	dw Data_6468b
-	dw Data_64553
+	dw SilkyData
+	dw ParaGoomData
+	dw ClearGate2Data
+	dw BeamBotData
 	dw NULL
 
 	rgb 31, 31, 31
@@ -2793,9 +3612,9 @@ EnemyGroupGfx32: ; 658a5 (19:58a5)
 	dw ElectricLampGfx
 
 	dw DummyObjectData
-	dw Data_644db
-	dw Data_6468b
-	dw Data_64533
+	dw ApplebyData
+	dw ClearGate2Data
+	dw ElectricLampData
 	dw NULL
 
 	rgb  0,  0,  0
@@ -2826,9 +3645,9 @@ EnemyGroupGfx33: ; 658d8 (19:58d8)
 	dw SpearBotGfx
 	dw TorchGfx
 
-	dw Data_645ab
+	dw RoboMouseData
 	dw DummyObjectData
-	dw Data_6454b
+	dw SpearBotData
 	dw NULL
 
 	rgb 25, 25, 25
@@ -2860,9 +3679,9 @@ EnemyGroupGfx34: ; 65909 (19:5909)
 	dw TogebaGfx
 
 	dw DummyObjectData
-	dw Data_6446b
+	dw ParaGoomData
 	dw DummyObjectData
-	dw DoughnuteerGfx
+	dw TogebaData
 	dw NULL
 
 	rgb  0,  0,  0
@@ -2893,10 +3712,10 @@ EnemyGroupGfx35: ; 6593c (19:593c)
 	dw FutamoguGfx
 	dw BrrrBearGfx
 
-	dw Data_645bb
+	dw HaridamaData
 	dw DummyObjectData
 	dw DummyObjectData
-	dw Data_64583
+	dw BrrrBearData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -2927,11 +3746,11 @@ EnemyGroupGfx36: ; 6596f (19:596f)
 	dw BubbleGfx
 	dw NobiiruGfx
 
-	dw Data_645bb
+	dw HaridamaData
 	dw WebberData
-	dw Data_6457b
-	dw Data_64673
-	dw Data_6467b
+	dw BubbleHoleData
+	dw NobiiruLeftData
+	dw NobiiruRightData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -2962,10 +3781,10 @@ EnemyGroupGfx37: ; 659a4 (19:59a4)
 	dw OmodonGfx
 	dw OmodonmekaGfx
 
-	dw Data_645c3
+	dw OwlData
 	dw DummyObjectData
-	dw Data_64483
-	dw Data_6447b
+	dw OmodonmekaWithOmodon1Data
+	dw OmodonmekaData
 	dw NULL
 
 	rgb  0, 22, 16
@@ -2996,10 +3815,10 @@ EnemyGroupGfx38: ; 659d7 (19:59d7)
 	dw ClearGate2Gfx
 	dw OmodonmekaGfx
 
-	dw Data_645c3
-	dw Data_6452b
-	dw Data_6468b
-	dw Data_6447b
+	dw OwlData
+	dw PneumoData
+	dw ClearGate2Data
+	dw OmodonmekaData
 	dw NULL
 
 	rgb  0, 22, 16
@@ -3030,14 +3849,14 @@ EnemyGroupGfx39: ; 65a0a (19:5a0a)
 	dw ZipLineGfx
 	dw BeamBotGfx
 
-	dw Data_645cb
-	dw Data_645d3
-	dw Data_645db
-	dw Data_645e3
-	dw Data_645eb
-	dw Data_6446b
+	dw ZipLine1Data
+	dw ZipLine2Data
+	dw ZipLine3Data
+	dw ZipLine4Data
+	dw ZipLine5Data
+	dw ParaGoomData
 	dw SpearheadData
-	dw Data_64553
+	dw BeamBotData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -3069,9 +3888,9 @@ EnemyGroupGfx40: ; 65a45 (19:5a45)
 	dw FireBotGfx
 
 	dw SpearheadData
-	dw Data_6446b
-	dw Data_6454b
-	dw Data_64543
+	dw ParaGoomData
+	dw SpearBotData
+	dw FireBotData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -3102,8 +3921,8 @@ EnemyGroupGfx41: ; 65a78 (19:5a78)
 	dw Anonster3Gfx
 	dw Anonster4Gfx
 
-	dw Data_645f3
-	dw Data_645fb
+	dw AnonsterData
+	dw SilkPlatformsData
 	dw NULL
 
 	rgb  0, 20, 12
@@ -3135,7 +3954,7 @@ EnemyGroupGfx42: ; 65aa7 (19:5aa7)
 	dw TorchGfx
 
 	dw StoveData
-	dw Data_6446b
+	dw ParaGoomData
 	dw FlameBlockData
 	dw TorchNoEmbersData
 	dw FlameBlockTorchData
@@ -3170,8 +3989,8 @@ EnemyGroupGfx43: ; 65adc (19:5adc)
 	dw TorchGfx
 
 	dw SpearheadData
-	dw Data_644cb
-	dw Data_6456b
+	dw BlueBirdData
+	dw KobattoData
 	dw DummyObjectData
 	dw NULL
 
@@ -3204,8 +4023,8 @@ EnemyGroupGfx44: ; 65b0f (19:5b0f)
 	dw TorchGfx
 
 	dw DummyObjectData
-	dw Data_6450b
-	dw Data_6453b
+	dw HammerBotData
+	dw ZombieData
 	dw NULL
 
 	rgb  0,  0,  0
@@ -3236,11 +4055,11 @@ EnemyGroupGfx45: ; 65b40 (19:5b40)
 	dw DollBoy3Gfx
 	dw DollBoy4Gfx
 
-	dw Data_6460b
-	dw Data_64613
-	dw Data_6461b
-	dw Data_64623
-	dw Data_6462b
+	dw DollBoyData
+	dw HammerPlatformSpawnerData
+	dw DollBoyBarrel1Data
+	dw DollBoyBarrel2Data
+	dw DollBoyBarrel3Data
 	dw NULL
 
 	rgb  0, 25,  1
@@ -3271,11 +4090,11 @@ EnemyGroupGfx46: ; 65b75 (19:5b75)
 	dw ZombieGfx
 	dw TorchGfx
 
-	dw Data_6451b
-	dw Data_6446b
-	dw Data_6453b
+	dw MadSciensteinData
+	dw ParaGoomData
+	dw ZombieData
 	dw DummyObjectData
-	dw Data_64523
+	dw SeeingEyeDoorData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -3306,8 +4125,8 @@ EnemyGroupGfx47: ; 65baa (19:5baa)
 	dw Wormwould3Gfx
 	dw Wormwould4Gfx
 
-	dw Data_64633
-	dw Data_6463b
+	dw WormwouldData
+	dw PalmTreeSpawnerData
 	dw NULL
 
 	rgb 25, 25, 25
@@ -3338,8 +4157,8 @@ EnemyGroupGfx48: ; 65bd9 (19:5bd9)
 	dw FutamoguGfx
 	dw TorchGfx
 
-	dw Data_645c3
-	dw Data_6446b
+	dw OwlData
+	dw ParaGoomData
 	dw NULL
 
 	rgb  0, 22, 16
@@ -3370,12 +4189,12 @@ EnemyGroupGfx49: ; 65c08 (19:5c08)
 	dw FutamoguGfx
 	dw PillarPlatformGfx
 
-	dw Data_645bb
-	dw Data_6446b
+	dw HaridamaData
+	dw ParaGoomData
 	dw DummyObjectData
-	dw Data_64643
-	dw Data_6464b
-	dw Data_64653
+	dw PillarPlatform1Data
+	dw PillarPlatform2Data
+	dw PillarPlatform3Data
 	dw NULL
 
 	rgb  0, 25,  0
@@ -3407,9 +4226,9 @@ EnemyGroupGfx50: ; 65c3f (19:5c3f)
 	dw FireBotGfx
 
 	dw DummyObjectData
-	dw Data_6446b
-	dw Data_64473
-	dw Data_64543
+	dw ParaGoomData
+	dw DoughnuteerData
+	dw FireBotData
 	dw NULL
 
 	rgb  0,  0,  0
@@ -3441,9 +4260,9 @@ EnemyGroupGfx51: ; 65c72 (19:5c72)
 	dw FireBotGfx
 
 	dw DummyObjectData
-	dw Data_6446b
-	dw Data_6453b
-	dw Data_64543
+	dw ParaGoomData
+	dw ZombieData
+	dw FireBotData
 	dw NULL
 
 	rgb  0,  0,  0
@@ -3474,8 +4293,8 @@ EnemyGroupGfx52: ; 65ca5 (19:5ca5)
 	dw YellowBelly3Gfx
 	dw YellowBelly4Gfx
 
-	dw Data_64663
-	dw Data_6466b
+	dw YellowBellyBodyData
+	dw YellowBellyPlatformData
 	dw NULL
 
 	rgb  0, 25,  1
@@ -3507,9 +4326,9 @@ EnemyGroupGfx53: ; 65cd4 (19:5cd4)
 	dw WaterDropGfx
 
 	dw SpearheadData
-	dw Data_644db
-	dw Data_6456b
-	dw Data_6465b
+	dw ApplebyData
+	dw KobattoData
+	dw WaterDropData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -3542,7 +4361,7 @@ EnemyGroupGfx54: ; 65d07 (19:5d07)
 
 	dw SpearheadData
 	dw DummyObjectData
-	dw Data_64473
+	dw DoughnuteerData
 	dw DummyObjectData
 	dw NULL
 
@@ -3574,10 +4393,10 @@ EnemyGroupGfx55: ; 65d3a (19:5d3a)
 	dw ZipLineGfx
 	dw BrrrBearGfx
 
-	dw Data_64503
-	dw Data_6446b
-	dw Data_645e3
-	dw Data_64583
+	dw GreyPrinceFroggyData
+	dw ParaGoomData
+	dw ZipLine4Data
+	dw BrrrBearData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -3608,11 +4427,11 @@ EnemyGroupGfx56: ; 65d6d (19:5d6d)
 	dw Pesce3Gfx
 	dw Pesce4Gfx
 
-	dw Data_6469b
-	dw Data_646a3
-	dw Data_646ab
-	dw Data_646b3
-	dw Data_646bb
+	dw PesceData
+	dw DragonflySpawnerData
+	dw FlySpawnerData
+	dw StrongWaterCurrentData
+	dw Dragonfly2Data
 	dw NULL
 
 	rgb 31, 31, 31
@@ -3645,7 +4464,7 @@ EnemyGroupGfx57: ; 65da2 (19:5da2)
 
 	dw StoveData
 	dw DummyObjectData
-	dw Data_64473
+	dw DoughnuteerData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -3678,8 +4497,8 @@ EnemyGroupGfx58: ; 65dd3 (19:5dd3)
 
 	dw StoveData
 	dw DummyObjectData
-	dw Data_6453b
-	dw Data_64543
+	dw ZombieData
+	dw FireBotData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -3710,11 +4529,11 @@ EnemyGroupGfx59: ; 65e06 (19:5e06)
 	dw HebariiGfx
 	dw NobiiruGfx
 
-	dw Data_644d3
-	dw Data_644c3
+	dw SnakeData
+	dw OrangeBirdData
 	dw HebariiData
-	dw Data_64673
-	dw Data_6467b
+	dw NobiiruLeftData
+	dw NobiiruRightData
 	dw NULL
 
 	rgb 31, 31, 31
@@ -3745,10 +4564,10 @@ EnemyGroupGfx60: ; 65e3b (19:5e3b)
 	dw TadpoleGfx
 	dw BarrelGfx
 
-	dw Data_645bb
+	dw HaridamaData
 	dw DummyObjectData
-	dw Data_646c3
-	dw Data_644eb
+	dw TadpoleSpawnerData
+	dw Barrel2Data
 	dw NULL
 
 	rgb  0, 25,  0
@@ -3779,10 +4598,10 @@ EnemyGroupGfx61: ; 65e6e (19:5e6e)
 	dw KobattoGfx
 	dw WaterDropGfx
 
-	dw Data_64503
+	dw GreyPrinceFroggyData
 	dw DummyObjectData
-	dw Data_6456b
-	dw Data_6465b
+	dw KobattoData
+	dw WaterDropData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -3814,10 +4633,10 @@ EnemyGroupGfx62: ; 65ea1 (19:5ea1)
 	dw SparkGfx
 
 	dw DummyObjectData
-	dw Data_6452b
-	dw Data_64473
-	dw Data_646e3
-	dw Data_646eb
+	dw PneumoData
+	dw DoughnuteerData
+	dw SparkHorizontalData
+	dw SparkVerticalData
 	dw NULL
 
 	rgb  0,  0,  0
@@ -3849,9 +4668,9 @@ EnemyGroupGfx63: ; 65ed6 (19:5ed6)
 	dw BeamBotGfx
 
 	dw SpearheadData
-	dw Data_6452b
+	dw PneumoData
 	dw DummyObjectData
-	dw Data_64553
+	dw BeamBotData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -3882,10 +4701,10 @@ EnemyGroupGfx64: ; 65f09 (19:5f09)
 	dw SpearBotGfx
 	dw BrrrBearGfx
 
-	dw Data_6455b
+	dw SunData
 	dw DummyObjectData
-	dw Data_6454b
-	dw Data_64583
+	dw SpearBotData
+	dw BrrrBearData
 	dw NULL
 
 	rgb  0, 20,  0
@@ -3917,9 +4736,9 @@ EnemyGroupGfx65: ; 65f3c (19:5f3c)
 	dw BarrelGfx
 
 	dw DummyObjectData
-	dw Data_644c3
-	dw Data_6457b
-	dw Data_644e3
+	dw OrangeBirdData
+	dw BubbleHoleData
+	dw Barrel1Data
 	dw NULL
 
 	rgb  0,  0,  0
@@ -3950,10 +4769,10 @@ EnemyGroupGfx66: ; 65f6f (19:5f6f)
 	dw WallCrackGfx
 	dw BarrelGfx
 
-	dw Data_64503
-	dw Data_6452b
-	dw Data_64773
-	dw Data_644eb
+	dw GreyPrinceFroggyData
+	dw PneumoData
+	dw WallCrackClosedData
+	dw Barrel2Data
 	dw NULL
 
 	rgb  0, 25,  0
@@ -3984,10 +4803,10 @@ EnemyGroupGfx67: ; 65fa2 (19:5fa2)
 	dw FireGfx
 	dw FireBotGfx
 
-	dw Data_644d3
-	dw Data_6446b
-	dw Data_64703
-	dw Data_64543
+	dw SnakeData
+	dw ParaGoomData
+	dw FireData
+	dw FireBotData
 	dw NULL
 
 	rgb 31, 31, 31
@@ -4020,9 +4839,9 @@ EnemyGroupGfx68: ; 65fd5 (19:5fd5)
 
 	dw DummyObjectData
 	dw DummyObjectData
-	dw Data_6456b
-	dw Data_64673
-	dw Data_6467b
+	dw KobattoData
+	dw NobiiruLeftData
+	dw NobiiruRightData
 	dw NULL
 
 	rgb  0,  0,  0
@@ -4053,10 +4872,10 @@ EnemyGroupGfx69: ; 6600a (19:600a)
 	dw WallCrackGfx
 	dw BarrelGfx
 
-	dw Data_644d3
-	dw Data_644db
-	dw Data_6477b
-	dw Data_644eb
+	dw SnakeData
+	dw ApplebyData
+	dw WallCrackOpenData
+	dw Barrel2Data
 	dw NULL
 
 	rgb 31, 31, 31
@@ -4087,8 +4906,8 @@ EnemyGroupGfx70: ; 6603d (19:603d)
 	dw Scowler3Gfx
 	dw Scowler4Gfx
 
-	dw Data_646f3
-	dw Data_646fb
+	dw ScowlerData
+	dw FloatingRingSpawnerData
 	dw NULL
 
 	rgb  0, 20,  0
@@ -4119,10 +4938,10 @@ EnemyGroupGfx71: ; 6606c (19:606c)
 	dw SpearBotGfx
 	dw FireBotGfx
 
-	dw Data_646cb
+	dw WaterSparkData
 	dw DummyObjectData
-	dw Data_6454b
-	dw Data_64543
+	dw SpearBotData
+	dw FireBotData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -4153,10 +4972,10 @@ EnemyGroupGfx72: ; 6609f (19:609f)
 	dw BubbleGfx
 	dw OctohonGfx
 
-	dw Data_645bb
+	dw HaridamaData
 	dw DummyObjectData
-	dw Data_6457b
-	dw Data_646d3
+	dw BubbleHoleData
+	dw SmallOctohonData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -4187,10 +5006,10 @@ EnemyGroupGfx73: ; 660d2 (19:60d2)
 	dw BubbleGfx
 	dw OctohonGfx
 
-	dw Data_645bb
+	dw HaridamaData
 	dw DummyObjectData
-	dw Data_6457b
-	dw Data_646db
+	dw BubbleHoleData
+	dw BigOctohonData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -4221,10 +5040,10 @@ EnemyGroupGfx74: ; 66105 (19:6105)
 	dw HandGfx
 	dw FireBotGfx
 
-	dw Data_64503
+	dw GreyPrinceFroggyData
 	dw DummyObjectData
-	dw Data_64573
-	dw Data_64543
+	dw HandData
+	dw FireBotData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -4255,11 +5074,11 @@ EnemyGroupGfx75: ; 66138 (19:6138)
 	dw FutamoguGfx
 	dw SparkGfx
 
-	dw Data_645c3
+	dw OwlData
 	dw DummyObjectData
 	dw DummyObjectData
-	dw Data_646e3
-	dw Data_646eb
+	dw SparkHorizontalData
+	dw SparkVerticalData
 	dw NULL
 
 	rgb  0, 22, 16
@@ -4292,8 +5111,8 @@ EnemyGroupGfx76: ; 6616d (19:616d)
 
 	dw DummyObjectData
 	dw DummyObjectData
-	dw Data_644f3
-	dw Data_64583
+	dw RockData
+	dw BrrrBearData
 	dw NULL
 
 	rgb  0,  0,  0
@@ -4327,7 +5146,7 @@ EnemyGroupGfx77: ; 661a0 (19:61a0)
 	dw SpearheadData
 	dw DummyObjectData
 	dw DummyObjectData
-	dw Data_64603
+	dw FallingSnowSpawnerData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -4359,9 +5178,9 @@ EnemyGroupGfx78: ; 661d3 (19:61d3)
 	dw BarrelGfx
 
 	dw DummyObjectData
-	dw Data_644db
-	dw Data_6468b
-	dw Data_644eb
+	dw ApplebyData
+	dw ClearGate2Data
+	dw Barrel2Data
 	dw NULL
 
 	rgb  0,  0,  0
@@ -4392,10 +5211,10 @@ EnemyGroupGfx79: ; 66206 (19:6206)
 	dw FutamoguGfx
 	dw BarrelGfx
 
-	dw Data_644bb
-	dw Data_644db
+	dw SilkyData
+	dw ApplebyData
 	dw DummyObjectData
-	dw Data_644eb
+	dw Barrel2Data
 	dw NULL
 
 	rgb 31, 31, 31
@@ -4427,7 +5246,7 @@ EnemyGroupGfx80: ; 66239 (19:6239)
 	dw TorchGfx
 
 	dw StoveData
-	dw Data_6450b
+	dw HammerBotData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -4459,9 +5278,9 @@ EnemyGroupGfx81: ; 66268 (19:6268)
 	dw FireBotGfx
 
 	dw SpearheadData
-	dw Data_6450b
-	dw Data_64703
-	dw Data_64543
+	dw HammerBotData
+	dw FireData
+	dw FireBotData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -4492,9 +5311,9 @@ EnemyGroupGfx82: ; 6629b (19:629b)
 	dw Jamano3Gfx
 	dw Jamano4Gfx
 
-	dw Data_6470b
-	dw Data_64713
-	dw Data_6471b
+	dw JamanoData
+	dw SkullSpawnerData
+	dw HatPlatformData
 	dw NULL
 
 	rgb 28, 28, 28
@@ -4527,8 +5346,8 @@ EnemyGroupGfx83: ; 662cc (19:62cc)
 
 	dw SpearheadData
 	dw DummyObjectData
-	dw Data_64483
-	dw Data_6447b
+	dw OmodonmekaWithOmodon1Data
+	dw OmodonmekaData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -4559,10 +5378,10 @@ EnemyGroupGfx84: ; 662ff (19:62ff)
 	dw FutamoguGfx
 	dw FireBotGfx
 
-	dw Data_644d3
+	dw SnakeData
 	dw DummyObjectData
 	dw DummyObjectData
-	dw Data_64543
+	dw FireBotData
 	dw NULL
 
 	rgb 31, 31, 31
@@ -4596,7 +5415,7 @@ EnemyGroupGfx85: ; 66332 (19:6332)
 	dw DummyObjectData
 	dw DummyObjectData
 	dw HebariiData
-	dw Data_644e3
+	dw Barrel1Data
 	dw NULL
 
 	rgb  0,  0,  0
@@ -4627,9 +5446,9 @@ EnemyGroupGfx86: ; 66365 (19:6365)
 	dw Muddee3Gfx
 	dw Muddee4Gfx
 
-	dw Data_64723
-	dw Data_6472b
-	dw Data_64733
+	dw MuddeeData
+	dw Turtle1Data
+	dw Turtle2Data
 	dw NULL
 
 	rgb 28, 28, 28
@@ -4660,8 +5479,8 @@ EnemyGroupGfx87: ; 66396 (19:6396)
 	dw Wolfenboss3Gfx
 	dw Wolfenboss4Gfx
 
-	dw Data_6473b
-	dw Data_64743
+	dw WolfenbossData
+	dw WolfenbossPlatformData
 	dw NULL
 
 	rgb 28, 28, 28
@@ -4695,7 +5514,7 @@ EnemyGroupGfx88: ; 663c5 (19:63c5)
 	dw DummyObjectData
 	dw CountRichtertoffenData
 	dw DummyObjectData
-	dw Data_644eb
+	dw Barrel2Data
 	dw NULL
 
 	rgb  0,  0,  0
@@ -4727,9 +5546,9 @@ EnemyGroupGfx89: ; 663f8 (19:63f8)
 	dw OmodonmekaGfx
 
 	dw DummyObjectData
-	dw Data_644db
-	dw Data_64483
-	dw Data_6447b
+	dw ApplebyData
+	dw OmodonmekaWithOmodon1Data
+	dw OmodonmekaData
 	dw NULL
 
 	rgb  0,  0,  0
@@ -4761,10 +5580,10 @@ EnemyGroupGfx90: ; 6642b (19:642b)
 	dw NobiiruGfx
 
 	dw DummyObjectData
-	dw Data_644c3
+	dw OrangeBirdData
 	dw HebariiData
-	dw Data_64673
-	dw Data_6467b
+	dw NobiiruLeftData
+	dw NobiiruRightData
 	dw NULL
 
 	rgb  0,  0,  0
@@ -4796,7 +5615,7 @@ EnemyGroupGfx91: ; 66460 (19:6460)
 	dw TorchGfx
 
 	dw SpearheadData
-	dw Data_644cb
+	dw BlueBirdData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -4827,9 +5646,9 @@ EnemyGroupGfx92: ; 6648f (19:648f)
 	dw DoughnuteerGfx
 	dw TorchGfx
 
-	dw Data_644bb
-	dw Data_644cb
-	dw Data_64473
+	dw SilkyData
+	dw BlueBirdData
+	dw DoughnuteerData
 	dw NULL
 
 	rgb 31, 31, 31
@@ -4860,10 +5679,10 @@ EnemyGroupGfx93: ; 664c0 (19:64c0)
 	dw FutamoguGfx
 	dw BrrrBearGfx
 
-	dw Data_644bb
+	dw SilkyData
 	dw DummyObjectData
 	dw DummyObjectData
-	dw Data_64583
+	dw BrrrBearData
 	dw NULL
 
 	rgb 31, 31, 31
@@ -4896,8 +5715,8 @@ EnemyGroupGfx94: ; 664f3 (19:64f3)
 
 	dw DummyObjectData
 	dw DummyObjectData
-	dw Data_6453b
-	dw Data_64583
+	dw ZombieData
+	dw BrrrBearData
 	dw NULL
 
 	rgb  0,  0,  0
@@ -4928,11 +5747,11 @@ EnemyGroupGfx95: ; 66526 (19:6526)
 	dw Shoot3Gfx
 	dw Shoot4Gfx
 
-	dw Data_6474b
-	dw Data_64753
-	dw Data_6475b
-	dw Data_64763
-	dw Data_6476b
+	dw ShootData
+	dw GKTortoiseData
+	dw ShootGoalCounterData
+	dw WarioGoalCounterData
+	dw GKTortoisePlatformData
 	dw NULL
 
 	rgb 28, 28, 28
@@ -4964,10 +5783,10 @@ EnemyGroupGfx96: ; 6655b (19:655b)
 	dw SparkGfx
 
 	dw DummyObjectData
-	dw Data_644db
+	dw ApplebyData
 	dw DummyObjectData
-	dw Data_646e3
-	dw Data_646eb
+	dw SparkHorizontalData
+	dw SparkVerticalData
 	dw NULL
 
 	rgb  0,  0,  0
@@ -4998,11 +5817,11 @@ EnemyGroupGfx97: ; 66590 (19:6590)
 	dw TadpoleGfx
 	dw BrrrBearGfx
 
-	dw Data_6451b
+	dw MadSciensteinData
 	dw DummyObjectData
-	dw Data_646c3
-	dw Data_64583
-	dw Data_64523
+	dw TadpoleSpawnerData
+	dw BrrrBearData
+	dw SeeingEyeDoorData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -5033,10 +5852,10 @@ EnemyGroupGfx98: ; 665c5 (19:65c5)
 	dw HebariiGfx
 	dw FireBotGfx
 
-	dw Data_644bb
+	dw SilkyData
 	dw DummyObjectData
 	dw HebariiData
-	dw Data_64543
+	dw FireBotData
 	dw NULL
 
 	rgb 31, 31, 31
@@ -5101,8 +5920,8 @@ EnemyGroupGfx100: ; 66627 (19:6627)
 
 	dw SpearheadData
 	dw DummyObjectData
-	dw Data_6468b
-	dw Data_64583
+	dw ClearGate2Data
+	dw BrrrBearData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -5134,10 +5953,10 @@ EnemyGroupGfx101: ; 6665a (19:665a)
 	dw SparkGfx
 
 	dw DummyObjectData
-	dw Data_644cb
+	dw BlueBirdData
 	dw DummyObjectData
-	dw Data_646e3
-	dw Data_646eb
+	dw SparkHorizontalData
+	dw SparkVerticalData
 	dw NULL
 
 	rgb  0,  0,  0
@@ -5168,10 +5987,10 @@ EnemyGroupGfx102: ; 6668f (19:668f)
 	dw ZombieGfx
 	dw ClearGate3Gfx
 
-	dw Data_64503
-	dw Data_644cb
-	dw Data_6453b
-	dw Data_64693
+	dw GreyPrinceFroggyData
+	dw BlueBirdData
+	dw ZombieData
+	dw ClearGate3Data
 	dw NULL
 
 	rgb  0, 25,  0
@@ -5204,8 +6023,8 @@ EnemyGroupGfx103: ; 666c2 (19:66c2)
 
 	dw DummyObjectData
 	dw DummyObjectData
-	dw Data_644f3
-	dw DoughnuteerGfx
+	dw RockData
+	dw TogebaData
 	dw NULL
 
 	rgb  0,  0,  0
@@ -5237,9 +6056,9 @@ EnemyGroupGfx104: ; 666f5 (19:66f5)
 	dw BarrelGfx
 
 	dw DummyObjectData
-	dw Data_644cb
+	dw BlueBirdData
 	dw DummyObjectData
-	dw Data_644e3
+	dw Barrel1Data
 	dw NULL
 
 	rgb  0,  0,  0
@@ -5273,7 +6092,7 @@ EnemyGroupGfx105: ; 66728 (19:6728)
 	dw DummyObjectData
 	dw DummyObjectData
 	dw DummyObjectData
-	dw Data_64553
+	dw BeamBotData
 	dw NULL
 
 	rgb  0,  0,  0
@@ -5304,10 +6123,10 @@ EnemyGroupGfx106: ; 6675b (19:675b)
 	dw SpearBotGfx
 	dw FireBotGfx
 
-	dw Data_64563
+	dw MoonData
 	dw DummyObjectData
-	dw Data_6454b
-	dw Data_64543
+	dw SpearBotData
+	dw FireBotData
 	dw NULL
 
 	rgb  0, 20,  0
@@ -5339,9 +6158,9 @@ EnemyGroupGfx107: ; 6678e (19:678e)
 	dw BrrrBearGfx
 
 	dw DummyObjectData
-	dw Data_6446b
+	dw ParaGoomData
 	dw HebariiData
-	dw Data_64583
+	dw BrrrBearData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -5373,9 +6192,9 @@ EnemyGroupGfx108: ; 667c1 (19:67c1)
 	dw TogebaGfx
 
 	dw SpearheadData
-	dw Data_6446b
-	dw Data_64473
-	dw DoughnuteerGfx
+	dw ParaGoomData
+	dw DoughnuteerData
+	dw TogebaData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -5408,8 +6227,8 @@ EnemyGroupGfx109: ; 667f4 (19:67f4)
 
 	dw DummyObjectData
 	dw DummyObjectData
-	dw Data_6454b
-	dw Data_6447b
+	dw SpearBotData
+	dw OmodonmekaData
 	dw NULL
 
 	rgb  0,  0,  0
@@ -5441,9 +6260,9 @@ EnemyGroupGfx110: ; 66827 (19:6827)
 	dw FireBotGfx
 
 	dw SpearheadData
-	dw Data_6450b
+	dw HammerBotData
 	dw DummyObjectData
-	dw Data_64543
+	dw FireBotData
 	dw NULL
 
 	rgb  0, 25,  0
@@ -5474,10 +6293,10 @@ EnemyGroupGfx111: ; 6685a (19:685a)
 	dw FutamoguGfx
 	dw FireBotGfx
 
-	dw Data_644d3
-	dw Data_6446b
+	dw SnakeData
+	dw ParaGoomData
 	dw DummyObjectData
-	dw Data_64543
+	dw FireBotData
 	dw NULL
 
 	rgb 31, 31, 31
@@ -5508,10 +6327,10 @@ EnemyGroupGfx112: ; 6688d (19:688d)
 	dw WallCrackGfx
 	dw BarrelGfx
 
-	dw Data_64503
-	dw Data_6452b
-	dw Data_6477b
-	dw Data_644eb
+	dw GreyPrinceFroggyData
+	dw PneumoData
+	dw WallCrackOpenData
+	dw Barrel2Data
 	dw NULL
 
 	rgb  0, 25,  0
@@ -5544,7 +6363,7 @@ EnemyGroupGfx113: ; 668c0 (19:68c0)
 
 	dw DummyObjectData
 	dw DummyObjectData
-	dw Data_644f3
+	dw RockData
 	dw TorchData
 	dw NULL
 
@@ -5645,7 +6464,7 @@ EnemyGroupGfx116: ; 66955 (19:6955)
 	dw DummyObjectData
 	dw DummyObjectData
 	dw DummyObjectData
-	dw Data_64513
+	dw TeruteruData
 	dw NULL
 
 	rgb  0,  0,  0
@@ -5677,7 +6496,7 @@ EnemyGroupGfx117: ; 66988 (19:6988)
 	dw TorchGfx
 
 	dw DummyObjectData
-	dw Data_6446b
+	dw ParaGoomData
 	dw NULL
 
 	rgb  0,  0,  0

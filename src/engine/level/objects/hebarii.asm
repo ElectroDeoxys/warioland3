@@ -42,10 +42,10 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	cp b
 	jr c, .set_right
 ; set left
-	res OBJSUBFLAG_DIR_F, [hl]
+	res OBJSUBFLAG_HDIR_F, [hl]
 	ret
 .set_right
-	set OBJSUBFLAG_DIR_F, [hl]
+	set OBJSUBFLAG_HDIR_F, [hl]
 	ret
 
 .StartAttackedLeftStart:
@@ -108,7 +108,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	ld a, OBJSTATE_SPECIAL_1
 	ld [wCurObjState], a
 	xor a
-	ld [wCurObjMovementIndex], a
+	ld [wCurObjVar3], a
 	ret
 
 .no_shake1
@@ -195,7 +195,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 .switch_direction
 	ld hl, wCurObjSubState
 	ld a, [hl]
-	xor OBJSUBFLAG_DIR
+	xor OBJSUBFLAG_HDIR
 	ld [hl], a
 	ret
 
@@ -342,7 +342,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	and a
 	jp nz, VanishObject2
 	ld bc, FallingYVel_Light
-	jp Func_34b7
+	jp ApplyObjYMovement
 
 .asm_4a204
 	ld hl, wCurObjYPos
@@ -379,7 +379,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	dec [hl]
 	ret nz
 .State0f:
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a ; redundant, already done below
 	ld a, OBJSTATE_3F
 	ld [wCurObjState], a
@@ -388,9 +388,9 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	ld a, 35
 	ld [hli], a
 	ld l, OBJ_FLAGS
-	res 2, [hl]
+	res OBJFLAG_GRABBED_F, [hl]
 .State3f:
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -420,7 +420,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	ld a, $02
 	ld [hli], a ; OBJ_VAR_2
 	xor a
-	ld [hli], a ; OBJ_MOVEMENT_INDEX
+	ld [hli], a ; OBJ_VAR_3
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
 	and HEAVY_OBJ
@@ -466,7 +466,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 .asm_4a2d2
 	ld [wCurObjState], a
 	xor a
-	ld [wCurObjMovementIndex], a
+	ld [wCurObjVar3], a
 	ld a, $02
 	ld [wCurObjVar2], a
 	ret
@@ -477,7 +477,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	ld [hld], a
 	dec l
 	ld a, 65
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld a, $c0
 	ld [hld], a ; OBJ_VAR_2
 	ld a, $01
@@ -492,7 +492,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	ld [hld], a
 	dec l
 	ld a, 65
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld a, $e0
 	ld [hld], a ; OBJ_VAR_2
 	ld a, $01
@@ -515,7 +515,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 ; change direction
 	ld hl, wCurObjSubState
 	ld a, [hl]
-	xor OBJSUBFLAG_DIR
+	xor OBJSUBFLAG_HDIR
 	ld [hl], a
 	jr .State18 ; useless jump
 
@@ -532,7 +532,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	jp z, Func_3362
 	ld hl, wCurObjSubState
 	ld a, [hl]
-	xor OBJSUBFLAG_DIR
+	xor OBJSUBFLAG_HDIR
 	ld [hl], a
 	jp .State19
 
@@ -544,7 +544,7 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	ld [hld], a ; OBJ_STATE
 	dec l
 	xor a
-	ld [hl], a ; OBJ_MOVEMENT_INDEX
+	ld [hl], a ; OBJ_VAR_3
 	ret
 
 .FullThrowLeftStart:
@@ -600,9 +600,9 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	and OBJSUBFLAGS_MASK
 	ld [hld], a
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld [hl], b ; OBJ_VAR_2
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ret
 ; 0x4a3c2
@@ -634,10 +634,10 @@ HebariiProjectileFunc: ; 4a3c2 (12:63c2)
 	ld l, OBJ_SUBSTATE
 	jr nc, .set_right
 ; set left
-	res OBJSUBFLAG_DIR_F, [hl]
+	res OBJSUBFLAG_HDIR_F, [hl]
 	ret
 .set_right
-	set OBJSUBFLAG_DIR_F, [hl]
+	set OBJSUBFLAG_HDIR_F, [hl]
 	ret
 .straight_down
 	ld hl, wCurObjUpdateFunction + 1
@@ -696,7 +696,7 @@ HebariiProjectileFunc: ; 4a3c2 (12:63c2)
 	ret
 
 .Destroy:
-	ld a, 1 | (1 << 7)
+	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]

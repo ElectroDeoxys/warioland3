@@ -27,13 +27,13 @@ StoveFunc: ; 4971c (12:571c)
 	ld [hld], a ; OBJ_STATE
 	dec l
 	xor a
-	ld [hld], a ; OBJ_MOVEMENT_INDEX
+	ld [hld], a ; OBJ_VAR_3
 	ld de, Frameset_69615
 	jp SetObjectFramesetPtr
 
 .Fall:
 	ld bc, Data_605e0
-	call Func_34b7
+	call ApplyObjYMovement
 
 	ld hl, wCurObjYPos
 	ld a, [hli]
@@ -130,7 +130,7 @@ StoveFunc: ; 4971c (12:571c)
 	ldh [hXPosHi], a
 	call Func_3513
 	and $0f
-	jp z, Func_3069
+	jp z, MoveObjectRightByVar2
 
 .set_land
 	ld a, OBJSTATE_LAND
@@ -171,7 +171,7 @@ StoveFunc: ; 4971c (12:571c)
 	ldh [hXPosHi], a
 	call Func_3513
 	and $0f
-	jp z, Func_305c
+	jp z, MoveObjectLeftByVar2
 	jr .set_land
 
 .Land:

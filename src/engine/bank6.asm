@@ -1489,7 +1489,6 @@ Func_19690: ; 19690 (6:5690)
 	ret
 ; 0x19706
 
-; unreferenced?
 Func_19706: ; 19706 (6:5706)
 	ld a, TRUE
 	ld [wc0da], a
@@ -1499,7 +1498,26 @@ Func_19706: ; 19706 (6:5706)
 	ret
 ; 0x19713
 
-	INCROM $19713, $19734
+Func_19713: ; 19713 (6:5713)
+	ld a, TRUE
+	ld [wc0da], a
+	call Func_197b1
+	xor a ; FALSE
+	ld [wc0da], a
+	ret
+; 0x19720
+
+Func_19720: ; 19720 (6:5720)
+	ld a, TRUE
+	ld [wc0da], a
+	call CheckAirborneCollision
+	xor a
+	ld [wc0da], a
+	ld a, b
+	and a
+	jp nz, TriggerFloorTransition
+	jp TriggerDownwardsFloorTransition
+; 0x19734
 
 ; checks collision in side that Wario is facing
 CheckFrontCollision: ; 19734 (6:5734)

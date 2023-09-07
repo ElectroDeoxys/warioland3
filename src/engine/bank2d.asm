@@ -2712,7 +2712,7 @@ Func_b5a02: ; b5a02 (2d:5a02)
 Func_b5b4e: ; b5b4e (2d:5b4e)
 	ld de, Data_b6337
 	ld hl, wSceneObj1
-	call ApplyMovement
+	call ApplyOWMovement
 	ret nz
 	ld a, [w2d025]
 	and a
