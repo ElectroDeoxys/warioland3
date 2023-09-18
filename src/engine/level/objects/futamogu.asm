@@ -229,4 +229,3 @@ FutamoguFunc: ; 406c4 (10:46c4)
 	ld [wCurObjVar2], a
 	call MoveObjectLeftByVar2
 	jp VanishObject
-; 0x40825

@@ -1462,7 +1462,7 @@ wCollectionCell:: ; d059
 w2d060:: ; d060
 	db
 
-w2d061:: ; d061
+wOWFuncCounter:: ; d061
 	db
 
 w2d062:: ; d062
@@ -1750,7 +1750,15 @@ w2d12e:: ; d12e
 w2d12f:: ; d12f
 	db
 
-	ds $10
+w2d130:: ; d130
+	db
+
+	ds $1
+
+w2d132:: ; d132
+	db
+
+	ds $d
 
 UNION
 

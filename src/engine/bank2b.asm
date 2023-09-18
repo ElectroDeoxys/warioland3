@@ -1102,7 +1102,7 @@ SetSceneWarioState: ; ac8d4 (2b:48d4)
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, $7f
+	ld a, hdma 128
 	ld [hl], a
 
 	xor a
@@ -1755,12 +1755,12 @@ _UpdateTempleScene: ; acd3a (2b:4d3a)
 
 ClearTextbox: ; ace60 (2b:4e60)
 	ld d, 6 * BG_MAP_WIDTH ; dest lo
-	ld e, $07
+	ld e, hdma 8
 	jr ClearTextboxAtCoord
 
 ClearTextboxExceptHeader: ; ace66 (2b:4e66)
 	ld d, 7 * BG_MAP_WIDTH ; dest lo
-	ld e, $05
+	ld e, hdma 6
 ;	fallthrough
 
 ClearTextboxAtCoord: ; ace6a (2b:4e6a)
@@ -2197,7 +2197,7 @@ HiddenFigureRevealScene: ; ad03b (2b:503b)
 	ld [wHDMADestVRAMBank], a
 	ld de, HiddenFigure1Gfx tile $80
 	ld b, HIGH(v0Tiles1) - $80
-	ld c, $7f
+	ld c, hdma 128
 	ld a, BANK(HiddenFigure1Gfx)
 	ld [wHDMABank], a
 
@@ -2223,7 +2223,7 @@ HiddenFigureRevealScene: ; ad03b (2b:503b)
 	ld [wHDMADestVRAMBank], a
 	ld de, HiddenFigure1Gfx tile $100
 	ld b, HIGH(v0Tiles2) - $80
-	ld c, $7f
+	ld c, hdma 128
 	ld a, BANK(HiddenFigure1Gfx)
 	ld [wHDMABank], a
 	jr .SetHDMA
@@ -2233,7 +2233,7 @@ HiddenFigureRevealScene: ; ad03b (2b:503b)
 	ld [wHDMADestVRAMBank], a
 	ld de, HiddenFigure2Gfx
 	ld b, HIGH(v1Tiles0) - $80
-	ld c, $7f
+	ld c, hdma 128
 	ld a, BANK(HiddenFigure1Gfx)
 	ld [wHDMABank], a
 	jr .SetHDMA
@@ -3728,7 +3728,7 @@ Func_ae0f9: ; ae0f9 (2b:60f9)
 	ld [wHDMADestVRAMBank], a
 	ld de, BGMap_b0300
 	ld b, $18
-	ld c, $23
+	ld c, hdma 36
 ;	fallthrough
 
 Func_ae104: ; ae104 (2b:6104)
@@ -3753,7 +3753,7 @@ Func_ae119: ; ae119 (2b:6119)
 	ld [wHDMADestVRAMBank], a
 	ld de, BGMap_b0540
 	ld b, $18
-	ld c, $23
+	ld c, hdma 36
 	jr Func_ae104
 ; 0xae127
 
@@ -3762,7 +3762,7 @@ Func_ae127: ; ae127 (2b:6127)
 	ld [wHDMADestVRAMBank], a
 	ld de, BGMap_b0780
 	ld b, $10
-	ld c, $7f
+	ld c, hdma 128
 	jr Func_ae104
 ; 0xae134
 

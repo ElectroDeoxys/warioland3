@@ -114,8 +114,58 @@ DEF DAYNIGHT_TRANSITION_STEPS EQU 32
 
 ; OW cutscene functions
 	const_def 1
-	const NOWFUNC_CUT_TREE  ; $1
-	const NOWFUNC_OPEN_GATE ; $2
+	const NOWFUNC_CUT_TREE         ; $01
+	const NOWFUNC_OPEN_GATE        ; $02
+	const NOWFUNC_GARLIC           ; $03
+	const NOWFUNC_MAGIC_SEED       ; $04
+	const NOWFUNC_SUMMON_SNAKE     ; $05
+	const NOWFUNC_FALL_LEAVES      ; $06
+	const NOWFUNC_BLUE_MUSIC_BOX   ; $07
+	const NOWFUNC_GOLD_MUSIC_BOX   ; $08
+	const NOWFUNC_CRAYON_RED       ; $09
+	const NOWFUNC_CRAYON_BROWN     ; $0a
+	const NOWFUNC_CRAYON_YELLOW    ; $0b
+	const NOWFUNC_CRAYON_GREEN     ; $0c
+	const NOWFUNC_CRAYON_CYAN      ; $0d
+	const NOWFUNC_CRAYON_BLUE      ; $0e
+	const NOWFUNC_CRAYON_PINK      ; $0f
+	const NOWFUNC_BOTTOM_BAR       ; $10
+	const NOWFUNC_DAY_NIGHT_SPELL  ; $11
+	const NOWFUNC_PROLOGUE         ; $12
+
+	const_def 1
+	const WOWFUNC_RAIN             ; $01
+	const WOWFUNC_CLEAR_TORNADO    ; $02
+	const WOWFUNC_ELEVATOR_WORKING ; $03
+	const WOWFUNC_MAGIC_SEED       ; $04
+	const WOWFUNC_SUMMON_SNAKE     ; $05
+	const WOWFUNC_EARTHQUAKE       ; $06
+	const WOWFUNC_VULCANO_ERUPTION ; $07
+	const WOWFUNC_RED_MUSIC_BOX    ; $08
+
+	const_def 1
+	const SOWFUNC_SEND_SEEDS       ; $01
+	const SOWFUNC_MAGIC_SEED       ; $02
+	const SOWFUNC_YELLOW_MUSIC_BOX ; $03
+	const SOWFUNC_CANYON_THUNDER   ; $04
+	const SOWFUNC_RAISE_TOWER      ; $05
+	const SOWFUNC_FAN              ; $06
+	const SOWFUNC_SUMMON_SNAKE     ; $07
+	const SOWFUNC_EARTHQUAKE       ; $08
+	const SOWFUNC_GREEN_MUSIC_BOX  ; $09
+	const SOWFUNC_EXPLOSIVES       ; $0A
+	const SOWFUNC_FULL_MOON        ; $0B
+
+	const_def 1
+	const EOWFUNC_FREEZE_SEA ; $01
+	const EOWFUNC_EARTHQUAKE ; $02
+	const EOWFUNC_FORM_CASTLE ; $03
+	const EOWFUNC_EXPLOSIVES ; $04
+	const EOWFUNC_VULCANO_ERUPTION ; $05
+	const EOWFUNC_BURN_VINES ; $06
+	const EOWFUNC_SHOW_WARPED_VOID ; $07
+	const EOWFUNC_RAISE_PIPE ; $08
+	const EOWFUNC_DAYTIME ; $09
 
 ; north connections
 	const_def 1

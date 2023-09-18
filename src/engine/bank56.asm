@@ -392,7 +392,377 @@ BounceTempleRockLeft: ; 158484 (56:4484)
 	jp ApplyOWMovement
 ; 0x15848a
 
-	INCROM $15848a, $158897
+	INCROM $15848a, $15868e
+
+Func_15868e: ; 15868e (56:468e)
+	call .Func_1586a1
+	call .Func_158785
+	call .Func_1586ed
+	call .Func_1587d1
+	call .Func_158739
+	call .Func_15881d
+	ret
+
+.Func_1586a1:
+	ld a, [w2d150]
+	jumptable
+	dw .Func_1586b5
+	dw .Func_1586c1
+	dw .Func_1586d1
+	dw .Func_1586b6
+	dw .Func_1586dd
+	dw .Func_1586c9
+	dw .Func_1586e2
+	dw .Func_1586e7
+
+.Func_1586b5:
+	ret
+
+.Func_1586b6:
+	ld hl, wSceneObj2
+	call .Func_158869
+.asm_1586bc
+	ld hl, w2d150
+	inc [hl]
+	ret
+
+.Func_1586c1:
+	ld hl, wSceneObj2
+	call .Func_15887b
+	jr .asm_1586bc
+
+.Func_1586c9:
+	ld hl, wSceneObj2
+	call .Func_158889
+	jr .asm_1586bc
+
+.Func_1586d1:
+	ld de, Data_158897
+.asm_1586d4
+	ld hl, wSceneObj2
+	call ApplyOWMovement
+	ret nz
+	jr .asm_1586bc
+
+.Func_1586dd:
+	ld de, Data_1588de
+	jr .asm_1586d4
+
+.Func_1586e2:
+	ld de, Data_158925
+	jr .asm_1586d4
+
+.Func_1586e7:
+	ld a, $01
+	ld [w2d150], a
+	ret
+
+.Func_1586ed:
+	ld a, [wDebugSceneWarioState]
+	jumptable
+	dw .Func_158701
+	dw .Func_158702
+	dw .Func_158729
+	dw .Func_158715
+	dw .Func_15872e
+	dw .Func_15870d
+	dw .Func_15871d
+	dw .Func_158733
+
+.Func_158701:
+	ret
+
+.Func_158702:
+	ld hl, wSceneObj5
+	call .Func_158869
+.asm_158708
+	ld hl, wDebugSceneWarioState
+	inc [hl]
+	ret
+
+.Func_15870d:
+	ld hl, wSceneObj5
+	call .Func_15887b
+	jr .asm_158708
+
+.Func_158715:
+	ld hl, wSceneObj5
+	call .Func_158889
+	jr .asm_158708
+
+.Func_15871d:
+	ld de, Data_158897
+.asm_158720
+	ld hl, wSceneObj5
+	call ApplyOWMovement
+	ret nz
+	jr .asm_158708
+
+.Func_158729:
+	ld de, Data_1588de
+	jr .asm_158720
+
+.Func_15872e:
+	ld de, Data_158925
+	jr .asm_158720
+
+.Func_158733:
+	ld a, $01
+	ld [wDebugSceneWarioState], a
+	ret
+
+.Func_158739:
+	ld a, [$d154]
+	jumptable
+	dw .Func_15874d
+	dw .Func_158761
+	dw .Func_15877a
+	dw .Func_158759
+	dw .Func_158769
+	dw .Func_15874e
+	dw .Func_158775
+	dw .Func_15877f
+
+.Func_15874d:
+	ret
+
+.Func_15874e:
+	ld hl, wSceneObj9
+	call .Func_158869
+.asm_158754
+	ld hl, $d154
+	inc [hl]
+	ret
+
+.Func_158759:
+	ld hl, wSceneObj9
+	call .Func_15887b
+	jr .asm_158754
+
+.Func_158761:
+	ld hl, wSceneObj9
+	call .Func_158889
+	jr .asm_158754
+
+.Func_158769:
+	ld de, Data_158897
+.asm_15876c
+	ld hl, wSceneObj9
+	call ApplyOWMovement
+	ret nz
+	jr .asm_158754
+
+.Func_158775:
+	ld de, Data_1588de
+	jr .asm_15876c
+
+.Func_15877a:
+	ld de, Data_158925
+	jr .asm_15876c
+
+.Func_15877f:
+	ld a, $01
+	ld [$d154], a
+	ret
+
+.Func_158785:
+	ld a, [w2d151]
+	jumptable
+	dw .Func_158799
+	dw .Func_1587a5
+	dw .Func_1587b5
+	dw .Func_15879a
+	dw .Func_1587c1
+	dw .Func_1587ad
+	dw .Func_1587c6
+	dw .Func_1587cb
+
+.Func_158799:
+	ret
+
+.Func_15879a:
+	ld hl, wSceneObj3
+	call .Func_158869
+.asm_1587a0
+	ld hl, w2d151
+	inc [hl]
+	ret
+
+.Func_1587a5:
+	ld hl, wSceneObj3
+	call .Func_158882
+	jr .asm_1587a0
+
+.Func_1587ad:
+	ld hl, wSceneObj3
+	call .Func_158890
+	jr .asm_1587a0
+
+.Func_1587b5:
+	ld de, Data_158897
+.asm_1587b8
+	ld hl, wSceneObj3
+	call ApplyOWMovement_Mirrored
+	ret nz
+	jr .asm_1587a0
+
+.Func_1587c1:
+	ld de, Data_1588de
+	jr .asm_1587b8
+
+.Func_1587c6:
+	ld de, Data_158925
+	jr .asm_1587b8
+
+.Func_1587cb:
+	ld a, $01
+	ld [w2d151], a
+	ret
+
+.Func_1587d1:
+	ld a, [$d153]
+	jumptable
+	dw .Func_1587e5
+	dw .Func_1587e6
+	dw .Func_15880d
+	dw .Func_1587f9
+	dw .Func_158812
+	dw .Func_1587f1
+	dw .Func_158801
+	dw .Func_158817
+
+.Func_1587e5:
+	ret
+
+.Func_1587e6:
+	ld hl, wSceneObj8
+	call .Func_158869
+.asm_1587ec
+	ld hl, $d153
+	inc [hl]
+	ret
+
+.Func_1587f1:
+	ld hl, wSceneObj8
+	call .Func_158882
+	jr .asm_1587ec
+
+.Func_1587f9:
+	ld hl, wSceneObj8
+	call .Func_158890
+	jr .asm_1587ec
+
+.Func_158801:
+	ld de, Data_158897
+.asm_158804
+	ld hl, wSceneObj8
+	call ApplyOWMovement_Mirrored
+	ret nz
+	jr .asm_1587ec
+
+.Func_15880d:
+	ld de, Data_1588de
+	jr .asm_158804
+
+.Func_158812:
+	ld de, Data_158925
+	jr .asm_158804
+
+.Func_158817:
+	ld a, $01
+	ld [$d153], a
+	ret
+
+.Func_15881d:
+	ld a, [$d155]
+	jumptable
+	dw .Func_158831
+	dw .Func_158845
+	dw .Func_15885e
+	dw .Func_158832
+	dw .Func_158859
+	dw .Func_15883d
+	dw .Func_15884d
+	dw .Func_158863
+
+.Func_158831:
+	ret
+
+.Func_158832:
+	ld hl, wSceneObj10
+	call .Func_158869
+.asm_158838
+	ld hl, $d155
+	inc [hl]
+	ret
+
+.Func_15883d:
+	ld hl, wSceneObj10
+	call .Func_158882
+	jr .asm_158838
+
+.Func_158845:
+	ld hl, wSceneObj10
+	call .Func_158890
+	jr .asm_158838
+
+.Func_15884d:
+	ld de, Data_158897
+.asm_158850
+	ld hl, wSceneObj10
+	call ApplyOWMovement_Mirrored
+	ret nz
+	jr .asm_158838
+
+.Func_158859:
+	ld de, Data_1588de
+	jr .asm_158850
+
+.Func_15885e:
+	ld de, Data_158925
+	jr .asm_158850
+
+.Func_158863:
+	ld a, $01
+	ld [$d155], a
+	ret
+
+.Func_158869:
+	ld a, $30
+	ld [hli], a ; y
+	ld a, $50
+.asm_15886e
+	ld [hli], a ; x
+	set 2, l
+	ldh a, [rDIV]
+	and $01
+	ld b, $29
+	add b
+	jp SetSceneObjState
+
+.Func_15887b:
+	ld a, $2e
+	ld [hli], a ; y
+	ld a, $4e
+	jr .asm_15886e
+
+.Func_158882:
+	ld a, $2e
+	ld [hli], a ; y
+	ld a, $52
+	jr .asm_15886e
+
+.Func_158889:
+	ld a, $31
+	ld [hli], a ; y
+	ld a, $4f
+	jr .asm_15886e
+
+.Func_158890:
+	ld a, $31
+	ld [hli], a ; y
+	ld a, $51
+	jr .asm_15886e
 
 Data_158897: ; 158897 (56:4897)
 	db  0,  0

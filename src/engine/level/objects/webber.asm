@@ -288,7 +288,6 @@ WebberFunc: ; 40825 (10:4825)
 	jp z, .set_move_to_start_pos
 	res OBJFLAG_STEPPED_F, [hl]
 	ret
-; 0x409f1
 
 .SmashAttacked:
 	ld a, [wGroundShakeCounter]

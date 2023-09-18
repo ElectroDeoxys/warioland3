@@ -1285,22 +1285,22 @@ Func_9aa6c: ; 9aa6c (26:6a6c)
 ; 0x9aa6d
 
 Func_9aa6d: ; 9aa6d (26:6a6d)
-	ld de, $6ce1
+	ld de, Frameset_9ace1
 	jr Func_9aa56
 ; 0x9aa72
 
 Func_9aa72: ; 9aa72 (26:6a72)
-	ld de, $6cea
+	ld de, Frameset_9acea
 	jr Func_9aa56
 ; 0x9aa77
 
 Func_9aa77: ; 9aa77 (26:6a77)
-	ld de, $6cf3
+	ld de, Frameset_9acf3
 	jr Func_9aa56
 ; 0x9aa7c
 
 Func_9aa7c: ; 9aa7c (26:6a7c)
-	ld de, $6cfc
+	ld de, Frameset_9acfc
 	jr Func_9aa56
 ; 0x9aa81
 
@@ -1367,7 +1367,7 @@ Func_9aab5: ; 9aab5 (26:6ab5)
 	ld [wHDMADestHi], a
 	xor a
 	ld [wHDMADestLo], a
-	ld a, $0f
+	ld a, hdma 16
 	ld [wHDMAMode], a
 	ret
 ; 0x9aaf4
@@ -1736,7 +1736,37 @@ OAM_9ac5d: ; 9ac5d (26:6c5d)
 	db $80
 ; 0x9ace1
 
-	INCROM $9ace1, $9ad05
+Frameset_9ace1:: ; 9ace1 (26:6ce1)
+	db $00,  3
+	db $01,  3
+	db $02,  3
+	db $01,  3
+	db $ff
+; 0x9acea
+
+Frameset_9acea:: ; 9acea (26:6cea)
+	db $03,  6
+	db $04,  6
+	db $05,  6
+	db $04,  6
+	db $ff
+; 0x9acf3
+
+Frameset_9acf3:: ; 9acf3 (26:6cf3)
+	db $06,  8
+	db $07,  4
+	db $08,  8
+	db $07,  4
+	db $ff
+; 0x9acfc
+
+Frameset_9acfc:: ; 9acfc (26:6cfc)
+	db $09,  8
+	db $0a,  4
+	db $0b,  8
+	db $0a,  4
+	db $ff
+; 0x9ad05
 
 Pals_9ad05: ; 9ad05 (26:6d05)
 	rgb 31, 31, 31

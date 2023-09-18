@@ -77,3 +77,5 @@ MACRO decompress_vram1
 	xor a
 	ldh [rVBK], a
 ENDM
+
+DEF hdma EQUS "(-1) + "

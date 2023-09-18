@@ -12,11 +12,11 @@ MusicalCoinFunc: ; 4c9d4 (13:49d4)
 	ld de, Frameset_68036
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
-	ld a, $01
+	ld a, 1
 	ld [hld], a
-	ld a, $ef
+	ld a, -17
 	ld [hld], a ; OBJ_COLLBOX_LEFT
-	ld a, $f9
+	ld a, -7
 	ld [hl], a ; OBJ_COLLBOX_BOTTOM
 	ret
 

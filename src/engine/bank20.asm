@@ -831,7 +831,7 @@ OverworldStateTable: ; 80392 (20:4392)
 
 	dw Func_80d6c           ; SST_OVERWORLD_11
 	dw DarkenBGToPal_Normal
-	dw $4d7c
+	dw Func_80d7c
 	dw FadeBGToWhite_Normal
 	dw $4db1
 	dw FadeBGToWhite_Normal
@@ -3339,15 +3339,15 @@ Func_8195d: ; 8195d (20:595d)
 
 	dw .InvalidAction
 	dw UnlockLevel ; UNLOCK_LEVEL
-	dw Func_8196e ; DO_OW_FUNC
+	dw DoOWFunction ; DO_OW_FUNC
 	dw Func_82c33 ; HIGHLIGHT_LEVEL
-	dw Func_8196e ; SPECIAL_ACTION
+	dw DoOWFunction ; SPECIAL_ACTION
 
 .InvalidAction:
 	debug_nop
 
-Func_8196e: ; 8196e (20:596e)
-	farcall Func_b514a
+DoOWFunction: ; 8196e (20:596e)
+	farcall _DoOWFunction
 	ret
 ; 0x8197e
 
@@ -3936,6 +3936,34 @@ GetCutsceneOWParams_GotPtr: ; 81b13 (20:5b13)
 	ret
 ; 0x81b2b
 
+; \1 = map side
+; \2 = level index
+MACRO ow_highlight_level
+	db HIGHLIGHT_LEVEL
+	db \1
+IF \1 == NORTH
+	db \2
+ELSE
+	db (\2) + 1
+ENDC
+ENDM
+
+; \1 = map side
+; \2 = connection
+MACRO ow_unlock_level
+	db UNLOCK_LEVEL, \1, \2
+ENDM
+
+; \1 = map side
+; \2 = func index
+MACRO ow_func
+	db DO_OW_FUNC, \1, \2
+ENDM
+
+MACRO ow_scene_end
+	db $80
+ENDM
+
 CutsceneOWParams: ; 81b2b (20:5b2b)
 	dw .cutscene00
 	dw .cutscene01
@@ -4030,411 +4058,411 @@ CutsceneOWParams: ; 81b2b (20:5b2b)
 	dw .cutscene5a
 
 .cutscene00
-	db $80
+	ow_scene_end
 
 .cutscene01
-	db UNLOCK_LEVEL, NORTH, NORTHCONN_1
-	db $80
+	ow_unlock_level NORTH, NORTHCONN_1
+	ow_scene_end
 
 .cutscene02
-	db DO_OW_FUNC, NORTH, NOWFUNC_CUT_TREE
-	db UNLOCK_LEVEL, NORTH, NORTHCONN_2
-	db UNLOCK_LEVEL, NORTH, NORTHCONN_3
-	db $80
+	ow_func NORTH, NOWFUNC_CUT_TREE
+	ow_unlock_level NORTH, NORTHCONN_2
+	ow_unlock_level NORTH, NORTHCONN_3
+	ow_scene_end
 
 .cutscene03
-	db DO_OW_FUNC, NORTH, NOWFUNC_OPEN_GATE
-	db UNLOCK_LEVEL, NORTH, NORTHCONN_7
-	db UNLOCK_LEVEL, WEST, WESTCONN_7
-	db $80
+	ow_func NORTH, NOWFUNC_OPEN_GATE
+	ow_unlock_level NORTH, NORTHCONN_7
+	ow_unlock_level WEST, WESTCONN_7
+	ow_scene_end
 
 .cutscene04
-	db DO_OW_FUNC, WEST, $02
-	db UNLOCK_LEVEL, WEST, WESTCONN_1
-	db $80
+	ow_func WEST, WOWFUNC_CLEAR_TORNADO
+	ow_unlock_level WEST, WESTCONN_1
+	ow_scene_end
 
 .cutscene05
-	db HIGHLIGHT_LEVEL, NORTH, $01
-	db HIGHLIGHT_LEVEL, NORTH, $03
-	db $80
+	ow_highlight_level NORTH, OWNORTH_OUT_OF_THE_WOODS
+	ow_highlight_level NORTH, OWNORTH_THE_VAST_PLAIN
+	ow_scene_end
 
 .cutscene06
-	db DO_OW_FUNC, WEST, $01
-	db UNLOCK_LEVEL, WEST, WESTCONN_2
-	db UNLOCK_LEVEL, WEST, WESTCONN_3
-	db $80
+	ow_func WEST, WOWFUNC_RAIN
+	ow_unlock_level WEST, WESTCONN_2
+	ow_unlock_level WEST, WESTCONN_3
+	ow_scene_end
 
 .cutscene07
-	db DO_OW_FUNC, WEST, $03
-	db UNLOCK_LEVEL, WEST, WESTCONN_6
-	db UNLOCK_LEVEL, SOUTH, SOUTHCONN_7
-	db $80
+	ow_func WEST, WOWFUNC_ELEVATOR_WORKING
+	ow_unlock_level WEST, WESTCONN_6
+	ow_unlock_level SOUTH, SOUTHCONN_7
+	ow_scene_end
 
 .cutscene08
-	db DO_OW_FUNC, SOUTH, $03
-	db UNLOCK_LEVEL, SOUTH, SOUTHCONN_1
-	db $80
+	ow_func SOUTH, SOWFUNC_YELLOW_MUSIC_BOX
+	ow_unlock_level SOUTH, SOUTHCONN_1
+	ow_scene_end
 
 .cutscene09
-	db DO_OW_FUNC, SOUTH, $01
-	db DO_OW_FUNC, NORTH, $04
-	db DO_OW_FUNC, WEST, $04
-	db DO_OW_FUNC, SOUTH, $02
-	db $80
+	ow_func SOUTH, SOWFUNC_SEND_SEEDS
+	ow_func NORTH, NOWFUNC_MAGIC_SEED
+	ow_func WEST, WOWFUNC_MAGIC_SEED
+	ow_func SOUTH, SOWFUNC_MAGIC_SEED
+	ow_scene_end
 
 .cutscene0a
-	db DO_OW_FUNC, SOUTH, $05
-	db UNLOCK_LEVEL, SOUTH, SOUTHCONN_2
-	db $80
+	ow_func SOUTH, SOWFUNC_RAISE_TOWER
+	ow_unlock_level SOUTH, SOUTHCONN_2
+	ow_scene_end
 
 .cutscene0b
-	db HIGHLIGHT_LEVEL, WEST, $03
-	db HIGHLIGHT_LEVEL, SOUTH, $02
-	db $80
+	ow_highlight_level WEST, OWWEST_THE_POOL_OF_RAIN
+	ow_highlight_level SOUTH, OWSOUTH_THE_BIG_BRIDGE
+	ow_scene_end
 
 .cutscene0c
-	db DO_OW_FUNC, SOUTH, $06
-	db UNLOCK_LEVEL, SOUTH, SOUTHCONN_6
-	db UNLOCK_LEVEL, EAST, EASTCONN_8
-	db $80
+	ow_func SOUTH, SOWFUNC_FAN
+	ow_unlock_level SOUTH, SOUTHCONN_6
+	ow_unlock_level EAST, EASTCONN_8
+	ow_scene_end
 
 .cutscene0d
-	db DO_OW_FUNC, SOUTH, $07
-	db DO_OW_FUNC, WEST, $05
-	db DO_OW_FUNC, NORTH, $05
-	db $80
+	ow_func SOUTH, SOWFUNC_SUMMON_SNAKE
+	ow_func WEST, WOWFUNC_SUMMON_SNAKE
+	ow_func NORTH, NOWFUNC_SUMMON_SNAKE
+	ow_scene_end
 
 .cutscene0e
-	db DO_OW_FUNC, EAST, $01
-	db UNLOCK_LEVEL, EAST, EASTCONN_1
-	db $80
+	ow_func EAST, EOWFUNC_FREEZE_SEA
+	ow_unlock_level EAST, EASTCONN_1
+	ow_scene_end
 
 .cutscene0f
-	db HIGHLIGHT_LEVEL, WEST, $04
-	db HIGHLIGHT_LEVEL, WEST, $01
-	db $80
+	ow_highlight_level WEST, OWWEST_A_TOWN_IN_CHAOS
+	ow_highlight_level WEST, OWWEST_DESERT_RUINS
+	ow_scene_end
 
 .cutscene10
-	db DO_OW_FUNC, NORTH, $07
-	db UNLOCK_LEVEL, NORTH, NORTHCONN_4
-	db UNLOCK_LEVEL, NORTH, NORTHCONN_5
-	db $80
+	ow_func NORTH, NOWFUNC_BLUE_MUSIC_BOX
+	ow_unlock_level NORTH, NORTHCONN_4
+	ow_unlock_level NORTH, NORTHCONN_5
+	ow_scene_end
 
 .cutscene11
-	db DO_OW_FUNC, SOUTH, $04
-	db UNLOCK_LEVEL, SOUTH, SOUTHCONN_3
-	db $80
+	ow_func SOUTH, SOWFUNC_CANYON_THUNDER
+	ow_unlock_level SOUTH, SOUTHCONN_3
+	ow_scene_end
 
 .cutscene12
-	db HIGHLIGHT_LEVEL, NORTH, $05
-	db HIGHLIGHT_LEVEL, EAST, $02
-	db HIGHLIGHT_LEVEL, SOUTH, $02
-	db $80
+	ow_highlight_level NORTH, OWNORTH_THE_TIDAL_COAST
+	ow_highlight_level EAST, OWEAST_THE_FRIGID_SEA
+	ow_highlight_level SOUTH, OWSOUTH_THE_BIG_BRIDGE
+	ow_scene_end
 
 .cutscene13
-	db DO_OW_FUNC, WEST, $06
-	db DO_OW_FUNC, SOUTH, $08
-	db DO_OW_FUNC, EAST, $02
-	db $80
+	ow_func WEST, WOWFUNC_EARTHQUAKE
+	ow_func SOUTH, SOWFUNC_EARTHQUAKE
+	ow_func EAST, EOWFUNC_EARTHQUAKE
+	ow_scene_end
 
 .cutscene14
-	db DO_OW_FUNC, WEST, $07
-	db DO_OW_FUNC, EAST, $05
-	db UNLOCK_LEVEL, WEST, WESTCONN_4
-	db UNLOCK_LEVEL, EAST, SOUTHCONN_3
-	db $80
+	ow_func WEST, WOWFUNC_VULCANO_ERUPTION
+	ow_func EAST, EOWFUNC_VULCANO_ERUPTION
+	ow_unlock_level WEST, WESTCONN_4
+	ow_unlock_level EAST, SOUTHCONN_3
+	ow_scene_end
 
 .cutscene15
-	db HIGHLIGHT_LEVEL, SOUTH, $03
-	db $80
+	ow_highlight_level SOUTH, OWSOUTH_TOWER_OF_REVIVAL
+	ow_scene_end
 
 .cutscene16
-	db DO_OW_FUNC, NORTH, $03
-	db HIGHLIGHT_LEVEL, NORTH, $04
-	db HIGHLIGHT_LEVEL, EAST, $04
-	db UNLOCK_LEVEL, NORTH, NORTHCONN_6
-	db $80
+	ow_func NORTH, NOWFUNC_GARLIC
+	ow_highlight_level NORTH, OWNORTH_BANK_OF_THE_WILD_RIVER
+	ow_highlight_level EAST, OWEAST_THE_COLOSSAL_HOLE
+	ow_unlock_level NORTH, NORTHCONN_6
+	ow_scene_end
 
 .cutscene17
-	db DO_OW_FUNC, SOUTH, $09
-	db UNLOCK_LEVEL, SOUTH, SOUTHCONN_4
-	db $80
+	ow_func SOUTH, SOWFUNC_GREEN_MUSIC_BOX
+	ow_unlock_level SOUTH, SOUTHCONN_4
+	ow_scene_end
 
 .cutscene18
-	db HIGHLIGHT_LEVEL, SOUTH, $02
-	db HIGHLIGHT_LEVEL, EAST, $02
-	db HIGHLIGHT_LEVEL, NORTH, $06
-	db $80
+	ow_highlight_level SOUTH, OWSOUTH_THE_BIG_BRIDGE
+	ow_highlight_level EAST, OWEAST_THE_FRIGID_SEA
+	ow_highlight_level NORTH, OWNORTH_SEA_TURTLE_ROCKS
+	ow_scene_end
 
 .cutscene19
-	db DO_OW_FUNC, EAST, $03
-	db UNLOCK_LEVEL, EAST, EASTCONN_2
-	db $80
+	ow_func EAST, EOWFUNC_FORM_CASTLE
+	ow_unlock_level EAST, EASTCONN_2
+	ow_scene_end
 
 .cutscene1a
-	db HIGHLIGHT_LEVEL, NORTH, $06
-	db HIGHLIGHT_LEVEL, WEST, $06
-	db HIGHLIGHT_LEVEL, WEST, $01
-	db HIGHLIGHT_LEVEL, NORTH, $02
-	db $80
+	ow_highlight_level NORTH, OWNORTH_SEA_TURTLE_ROCKS
+	ow_highlight_level WEST, OWWEST_THE_WEST_CRATER
+	ow_highlight_level WEST, OWWEST_DESERT_RUINS
+	ow_highlight_level NORTH, OWNORTH_THE_PEACEFUL_VILLAGE
+	ow_scene_end
 
 .cutscene1b
-	db DO_OW_FUNC, EAST, $09
-	db HIGHLIGHT_LEVEL, EAST, $04
-	db HIGHLIGHT_LEVEL, EAST, $02
-	db HIGHLIGHT_LEVEL, EAST, $03
-	db $80
+	ow_func EAST, EOWFUNC_DAYTIME
+	ow_highlight_level EAST, OWEAST_THE_COLOSSAL_HOLE
+	ow_highlight_level EAST, OWEAST_THE_FRIGID_SEA
+	ow_highlight_level EAST, OWEAST_CASTLE_OF_ILLUSIONS
+	ow_scene_end
 
 .cutscene1c
-	db HIGHLIGHT_LEVEL, SOUTH, $01
-	db HIGHLIGHT_LEVEL, EAST, $01
-	db HIGHLIGHT_LEVEL, SOUTH, $05
-	db $80
+	ow_highlight_level SOUTH, OWSOUTH_THE_GRASSLANDS
+	ow_highlight_level EAST, OWEAST_THE_STAGNANT_SWAMP
+	ow_highlight_level SOUTH, OWSOUTH_CAVE_OF_FLAMES
+	ow_scene_end
 
 .cutscene1d
-	db DO_OW_FUNC, WEST, $08
-	db UNLOCK_LEVEL, WEST, WESTCONN_5
-	db $80
+	ow_func WEST, WOWFUNC_RED_MUSIC_BOX
+	ow_unlock_level WEST, WESTCONN_5
+	ow_scene_end
 
 .cutscene1e
-	db DO_OW_FUNC, SOUTH, $0a
-	db DO_OW_FUNC, EAST, $04
-	db $80
+	ow_func SOUTH, SOWFUNC_EXPLOSIVES
+	ow_func EAST, EOWFUNC_EXPLOSIVES
+	ow_scene_end
 
 .cutscene1f
-	db DO_OW_FUNC, NORTH, $06
-	db $80
+	ow_func NORTH, NOWFUNC_FALL_LEAVES
+	ow_scene_end
 
 .cutscene20
-	db HIGHLIGHT_LEVEL, NORTH, $04
-	db HIGHLIGHT_LEVEL, SOUTH, $04
-	db HIGHLIGHT_LEVEL, WEST, $05
-	db $80
+	ow_highlight_level NORTH, OWNORTH_BANK_OF_THE_WILD_RIVER
+	ow_highlight_level SOUTH, OWSOUTH_THE_STEEP_CANYON
+	ow_highlight_level WEST, OWWEST_BENEATH_THE_WAVES
+	ow_scene_end
 
 .cutscene21
-	db HIGHLIGHT_LEVEL, SOUTH, $03
-	db HIGHLIGHT_LEVEL, NORTH, $05
-	db $80
+	ow_highlight_level SOUTH, OWSOUTH_TOWER_OF_REVIVAL
+	ow_highlight_level NORTH, OWNORTH_THE_TIDAL_COAST
+	ow_scene_end
 
 .cutscene22
-	db UNLOCK_LEVEL, EAST, EASTCONN_6
-	db $80
+	ow_unlock_level EAST, EASTCONN_6
+	ow_scene_end
 
 .cutscene23
-	db HIGHLIGHT_LEVEL, WEST, $04
-	db HIGHLIGHT_LEVEL, EAST, $03
-	db HIGHLIGHT_LEVEL, EAST, $07
-	db $80
+	ow_highlight_level WEST, OWWEST_A_TOWN_IN_CHAOS
+	ow_highlight_level EAST, OWEAST_CASTLE_OF_ILLUSIONS
+	ow_highlight_level EAST, OWEAST_FOREST_OF_FEAR
+	ow_scene_end
 
 .cutscene24
-	db HIGHLIGHT_LEVEL, NORTH, $01
-	db $80
+	ow_highlight_level NORTH, OWNORTH_OUT_OF_THE_WOODS
+	ow_scene_end
 
 .cutscene25
-	db DO_OW_FUNC, NORTH, $08
-	db HIGHLIGHT_LEVEL, NORTH, $00
-	db $80
+	ow_func NORTH, NOWFUNC_GOLD_MUSIC_BOX
+	ow_highlight_level NORTH, OWNORTH_THE_TEMPLE
+	ow_scene_end
 
 .cutscene26
 	db SPECIAL_ACTION, NORTH, $09
-	db $80
+	ow_scene_end
 
 .cutscene27
-	db HIGHLIGHT_LEVEL, WEST, $02
-	db $80
+	ow_highlight_level WEST, OWWEST_THE_VOLCANOS_BASE
+	ow_scene_end
 
 .cutscene28
-	db $80
+	ow_scene_end
 
 .cutscene29
 	db SPECIAL_ACTION, NORTH, $0a
-	db $80
+	ow_scene_end
 
 .cutscene2a
-	db $80
+	ow_scene_end
 
 .cutscene2b
-	db $80
+	ow_scene_end
 
 .cutscene2c
 	db SPECIAL_ACTION, NORTH, $0b
-	db $80
+	ow_scene_end
 
 .cutscene2d
-	db $80
+	ow_scene_end
 
 .cutscene2e
-	db $80
+	ow_scene_end
 
 .cutscene2f
 	db SPECIAL_ACTION, NORTH, $10
-	db $80
+	ow_scene_end
 
 .cutscene30
-	db HIGHLIGHT_LEVEL, NORTH, $04
-	db HIGHLIGHT_LEVEL, WEST, $03
-	db $80
+	ow_highlight_level NORTH, OWNORTH_BANK_OF_THE_WILD_RIVER
+	ow_highlight_level WEST, OWWEST_THE_POOL_OF_RAIN
+	ow_scene_end
 
 .cutscene31
-	db $80
+	ow_scene_end
 
 .cutscene32
 	db SPECIAL_ACTION, NORTH, $0c
-	db $80
+	ow_scene_end
 
 .cutscene33
-	db $80
+	ow_scene_end
 
 .cutscene34
-	db $80
+	ow_scene_end
 
 .cutscene35
 	db SPECIAL_ACTION, NORTH, $11
-	db $80
+	ow_scene_end
 
 .cutscene36
-	db $80
+	ow_scene_end
 
 .cutscene37
-	db DO_OW_FUNC, EAST, $06
-	db UNLOCK_LEVEL, EAST, EASTCONN_5
-	db UNLOCK_LEVEL, EAST, EASTCONN_7
-	db UNLOCK_LEVEL, NORTH, $08
-	db $80
+	ow_func EAST, EOWFUNC_BURN_VINES
+	ow_unlock_level EAST, EASTCONN_5
+	ow_unlock_level EAST, EASTCONN_7
+	ow_unlock_level NORTH, $08
+	ow_scene_end
 
 .cutscene38
-	db DO_OW_FUNC, EAST, $07
-	db UNLOCK_LEVEL, EAST, SOUTHCONN_4
-	db $80
+	ow_func EAST, EOWFUNC_SHOW_WARPED_VOID
+	ow_unlock_level EAST, SOUTHCONN_4
+	ow_scene_end
 
 .cutscene39
-	db DO_OW_FUNC, EAST, $08
-	db $80
+	ow_func EAST, EOWFUNC_RAISE_PIPE
+	ow_scene_end
 
 .cutscene3a
-	db HIGHLIGHT_LEVEL, EAST, $05
-	db $80
+	ow_highlight_level EAST, OWEAST_THE_WARPED_VOID
+	ow_scene_end
 
 .cutscene3b
 	db SPECIAL_ACTION, NORTH, $0d
-	db $80
+	ow_scene_end
 
 .cutscene3c
-	db HIGHLIGHT_LEVEL, EAST, $07
-	db $80
+	ow_highlight_level EAST, OWEAST_FOREST_OF_FEAR
+	ow_scene_end
 
 .cutscene3d
-	db HIGHLIGHT_LEVEL, EAST, $05
-	db $80
+	ow_highlight_level EAST, OWEAST_THE_WARPED_VOID
+	ow_scene_end
 
 .cutscene3e
-	db $80
+	ow_scene_end
 
 .cutscene3f
-	db $80
+	ow_scene_end
 
 .cutscene40
-	db $80
+	ow_scene_end
 
 .cutscene41
-	db $80
+	ow_scene_end
 
 .cutscene42
 	db SPECIAL_ACTION, NORTH, $0e
-	db $80
+	ow_scene_end
 
 .cutscene43
-	db HIGHLIGHT_LEVEL, WEST, $04
-	db $80
+	ow_highlight_level WEST, OWWEST_A_TOWN_IN_CHAOS
+	ow_scene_end
 
 .cutscene44
-	db HIGHLIGHT_LEVEL, NORTH, $05
-	db HIGHLIGHT_LEVEL, WEST, $05
-	db $80
+	ow_highlight_level NORTH, OWNORTH_THE_TIDAL_COAST
+	ow_highlight_level WEST, OWWEST_BENEATH_THE_WAVES
+	ow_scene_end
 
 .cutscene45
-	db $80
+	ow_scene_end
 
 .cutscene46
-	db $80
+	ow_scene_end
 
 .cutscene47
-	db $80
+	ow_scene_end
 
 .cutscene48
-	db $80
+	ow_scene_end
 
 .cutscene49
-	db HIGHLIGHT_LEVEL, SOUTH, $03
-	db $80
+	ow_highlight_level SOUTH, OWSOUTH_TOWER_OF_REVIVAL
+	ow_scene_end
 
 .cutscene4a
-	db UNLOCK_LEVEL, SOUTH, SOUTHCONN_5
-	db $80
+	ow_unlock_level SOUTH, SOUTHCONN_5
+	ow_scene_end
 
 .cutscene4b
 	db SPECIAL_ACTION, NORTH, $0f
-	db $80
+	ow_scene_end
 
 .cutscene4c
-	db HIGHLIGHT_LEVEL, WEST, $06
-	db HIGHLIGHT_LEVEL, EAST, $06
-	db $80
+	ow_highlight_level WEST, OWWEST_THE_WEST_CRATER
+	ow_highlight_level EAST, OWEAST_THE_EAST_CRATER
+	ow_scene_end
 
 .cutscene4d
-	db $80
+	ow_scene_end
 
 .cutscene4e
-	db HIGHLIGHT_LEVEL, EAST, $03
-	db $80
+	ow_highlight_level EAST, OWEAST_CASTLE_OF_ILLUSIONS
+	ow_scene_end
 
 .cutscene4f
-	db HIGHLIGHT_LEVEL, WEST, $06
-	db HIGHLIGHT_LEVEL, SOUTH, $04
-	db HIGHLIGHT_LEVEL, SOUTH, $05
-	db $80
+	ow_highlight_level WEST, OWWEST_THE_WEST_CRATER
+	ow_highlight_level SOUTH, OWSOUTH_THE_STEEP_CANYON
+	ow_highlight_level SOUTH, OWSOUTH_CAVE_OF_FLAMES
+	ow_scene_end
 
 .cutscene50
-	db $80
+	ow_scene_end
 
 .cutscene51
-	db HIGHLIGHT_LEVEL, NORTH, $03
-	db HIGHLIGHT_LEVEL, WEST, $05
-	db $80
+	ow_highlight_level NORTH, OWNORTH_THE_VAST_PLAIN
+	ow_highlight_level WEST, OWWEST_BENEATH_THE_WAVES
+	ow_scene_end
 
 .cutscene52
-	db $80
+	ow_scene_end
 
 .cutscene53
-	db $80
+	ow_scene_end
 
 .cutscene54
-	db HIGHLIGHT_LEVEL, SOUTH, $06
-	db $80
+	ow_highlight_level SOUTH, OWSOUTH_ABOVE_THE_CLOUDS
+	ow_scene_end
 
 .cutscene55
-	db HIGHLIGHT_LEVEL, EAST, $06
-	db $80
+	ow_highlight_level EAST, OWEAST_THE_EAST_CRATER
+	ow_scene_end
 
 .cutscene56
-	db HIGHLIGHT_LEVEL, NORTH, $06
-	db $80
+	ow_highlight_level NORTH, OWNORTH_SEA_TURTLE_ROCKS
+	ow_scene_end
 
 .cutscene57
-	db DO_OW_FUNC, SOUTH, $0b
-	db HIGHLIGHT_LEVEL, SOUTH, $06
-	db $80
+	ow_func SOUTH, SOWFUNC_FULL_MOON
+	ow_highlight_level SOUTH, OWSOUTH_ABOVE_THE_CLOUDS
+	ow_scene_end
 
 .cutscene58
-	db HIGHLIGHT_LEVEL, EAST, $06
-	db $80
+	ow_highlight_level EAST, OWEAST_THE_EAST_CRATER
+	ow_scene_end
 
 .cutscene59
-	db $80
+	ow_scene_end
 
 .cutscene5a
-	db DO_OW_FUNC, NORTH, $12
-	db $80
+	ow_func NORTH, NOWFUNC_PROLOGUE
+	ow_scene_end
 ; 0x81dce
 
 Func_81dce: ; 81dce (20:5dce)
@@ -5928,7 +5956,7 @@ ApplyTopBarButtonAttributes: ; 826f6 (20:66f6)
 	ld [wHDMADestHi], a
 	ld a, $c0
 	ld [wHDMADestLo], a
-	ld a, $03
+	ld a, hdma 4
 	ld [wHDMAMode], a
 
 	ld a, HIGH(wAttrmap tile $26)
@@ -5939,7 +5967,7 @@ ApplyTopBarButtonAttributes: ; 826f6 (20:66f6)
 	ld [w2d0b5DestHi], a
 	ld a, $c0
 	ld [w2d0b5DestLo], a
-	ld a, $03
+	ld a, hdma 4
 	ld [w2d0b5Mode], a
 	ret
 ; 0x82729
@@ -6364,7 +6392,7 @@ Func_829a1: ; 829a1 (20:69a1)
 ; 0x829e2
 
 UnlockLevel: ; 829e2 (20:69e2)
-	ld hl, w2d061
+	ld hl, wOWFuncCounter
 	inc [hl]
 	ld a, [w2d062]
 	jumptable
@@ -6402,7 +6430,7 @@ Func_82a0a: ; 82a0a (20:6a0a)
 
 Func_82a26: ; 82a26 (20:6a26)
 	ld a, 20
-	ld hl, w2d061
+	ld hl, wOWFuncCounter
 	cp [hl]
 	ret nc
 	jr Func_82a8d
@@ -6426,7 +6454,7 @@ Func_82a2f: ; 82a2f (20:6a2f)
 	add [hl]
 	ld [hld], a
 	xor a
-	ld [hl], a ; w2d061
+	ld [hl], a ; wOWFuncCounter
 	ret
 
 Func_82a4e: ; 82a4e (20:6a4e)
@@ -6436,7 +6464,7 @@ Func_82a4e: ; 82a4e (20:6a4e)
 	jr Func_82a8d
 
 Func_82a62: ; 82a62 (20:6a62)
-	ld a, [w2d061]
+	ld a, [wOWFuncCounter]
 	cp 16
 	ret c
 	farcall LoadOWStarIndicatorPals
@@ -6455,7 +6483,7 @@ Func_82a79: ; 82a79 (20:6a79)
 
 Func_82a8d: ; 82a8d (20:6a8d)
 	xor a
-	ld [w2d061], a
+	ld [wOWFuncCounter], a
 	ld hl, w2d062
 	inc [hl]
 	ret
@@ -6471,10 +6499,10 @@ Func_82a9b: ; 82a9b (20:6a9b)
 	and a
 	jr z, .asm_82aa6
 	xor a
-	ld [w2d061], a
+	ld [wOWFuncCounter], a
 	ret
 .asm_82aa6
-	ld a, [w2d061]
+	ld a, [wOWFuncCounter]
 	cp 4
 	ret c
 	jr Func_82a8d
@@ -6590,17 +6618,17 @@ Func_82b67: ; 82b67 (20:6b67)
 	and a
 	jr z, .asm_82b72
 	xor a
-	ld [w2d061], a
+	ld [wOWFuncCounter], a
 	ret
 .asm_82b72
-	ld a, [w2d061]
+	ld a, [wOWFuncCounter]
 	cp 30
 	ret c
 	jp Func_82a8d
 ; 0x82b7b
 
 Func_82b7b: ; 82b7b (20:6b7b)
-	ld a, [w2d061]
+	ld a, [wOWFuncCounter]
 	cp $01
 	jr z, .asm_82b88
 	cp $40
@@ -6621,7 +6649,7 @@ Func_82b7b: ; 82b7b (20:6b7b)
 ; 0x82baa
 
 Func_82baa: ; 82baa (20:6baa)
-	ld a, [w2d061]
+	ld a, [wOWFuncCounter]
 	cp 30
 	ret c
 	xor a
@@ -6687,12 +6715,12 @@ Func_82c09: ; 82c09 (20:6c09)
 ; 0x82c1d
 
 Func_82c1d: ; 82c1d (20:6c1d)
-	ld hl, w2d061
+	ld hl, wOWFuncCounter
 	cp [hl]
 	ret nc
 Func_82c22: ; 82c22 (20:6c22)
 	xor a
-	ld hl, w2d061
+	ld hl, wOWFuncCounter
 	ld [hli], a
 	inc [hl] ; w2d062
 	ret
@@ -6701,14 +6729,14 @@ Func_82c22: ; 82c22 (20:6c22)
 Func_82c29: ; 82c29 (20:6c29)
 	xor a
 	ld [wCutsceneActionParam], a
-	ld hl, w2d061
+	ld hl, wOWFuncCounter
 	ld [hli], a
 	ld [hl], a ; w2d062
 	ret
 ; 0x82c33
 
 Func_82c33: ; 82c33 (20:6c33)
-	ld hl, w2d061
+	ld hl, wOWFuncCounter
 	inc [hl]
 	ld a, [w2d062]
 	jumptable

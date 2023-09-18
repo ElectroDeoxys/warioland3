@@ -43,9 +43,9 @@ ChestFunc: ; 4c8da (13:48da)
 	ld de, Frameset_68000
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
-	ld a, $0d
+	ld a, 13
 	ld [hld], a
-	ld a, $f2
+	ld a, -14
 	ld [hld], a ; OBJ_COLLBOX_LEFT
 	ret
 
@@ -59,7 +59,7 @@ ChestFunc: ; 4c8da (13:48da)
 	ret nz
 	ld de, Frameset_68003
 	call SetObjectFramesetPtr
-	ld a, $56
+	ld a, 86
 	ld [hli], a
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Open)
@@ -73,7 +73,7 @@ ChestFunc: ; 4c8da (13:48da)
 .Open:
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
-	cp $49
+	cp 73
 	play_sfx z, SFX_035
 	dec [hl]
 	ret nz
@@ -107,7 +107,6 @@ ChestFunc: ; 4c8da (13:48da)
 .play_fanfare
 	play_music2 MUSIC_TREASURE_FANFARE
 	jp CreateObjectAtRelativePos
-; 0x4c970
 
 ; these framesets use OAM data that point
 ; to addresses in VRAM that are loaded
@@ -133,4 +132,3 @@ TreasureFunc: ; 4c982 (13:4982)
 	dec [hl]
 	ret nz
 	jp SetObjectFramesetPtr
-; 0x4c992

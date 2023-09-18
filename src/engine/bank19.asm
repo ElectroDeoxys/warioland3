@@ -1,5 +1,5 @@
 LoadEnemyGroupData:: ; 64000 (19:4000)
-; fills wObjDataPointers with $43c3
+; fills wObjDataPointers with Dummy Object
 	ld hl, wObjDataPointers
 	ld bc, DummyObjectData
 	ld e, $10

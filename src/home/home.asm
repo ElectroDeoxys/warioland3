@@ -4671,6 +4671,7 @@ ApplyOWMovement_Mirrored:: ; 3c1f (0:3c1f)
 
 ; hl = OW obj
 ; de = relative positions
+; returns z if movement has finished
 ApplyOWMovement:: ; 3c25 (0:3c25)
 	call Func_3c35
 	add e

@@ -1915,7 +1915,117 @@ DayNightTransition: ; 84a40 (21:4a40)
 	ret
 ; 0x84b97
 
-	INCROM $84b97, $84c4b
+Func_84b97: ; 84b97 (21:4b97)
+	ld hl, wOWPalTransitionCounter
+	inc [hl]
+	ld a, [wOWPalTransitionState]
+	jumptable
+	dw .Func_84bad
+	dw .Func_84bb6
+	dw .Func_84bbf
+	dw .Func_84bcd
+	dw .Func_84bd6
+	dw .Func_84be7
+	dw .Func_84bf6
+
+.Func_84bad:
+	call DayNightTransition.LoadBaseAndTargetPals
+	ld a, $03
+	ld [w2d809], a
+	ret
+
+.Func_84bb6:
+	ld a, [wOWPalTransitionCounter]
+	cp $04
+	ret c
+	jp DayNightTransition.AdvanceTable
+
+.Func_84bbf:
+	call DayNightTransition.FadeColours
+	ld a, [wDayNightTransistionSteps]
+	cp $0a
+	ret nz
+	xor a
+	ld [w2d809], a
+	ret
+
+.Func_84bcd:
+	ld a, [wOWPalTransitionCounter]
+	cp $06
+	ret c
+	jp DayNightTransition.AdvanceTable
+
+.Func_84bd6:
+	call DayNightTransition.LoadPal1
+	ld a, $02
+	ld [w2d809], a
+	ld a, $13
+	ld hl, wSceneObj7State
+	call SetSceneObjState
+	ret
+
+.Func_84be7:
+	call DayNightTransition.FadeColours
+	ld a, [wDayNightTransistionSteps]
+	cp $16
+	ret nz
+	ld a, $03
+	ld [w2d809], a
+	ret
+
+.Func_84bf6:
+	ld a, [wTopBarState]
+	and a
+	jr nz, .asm_84bff
+	ld [wca3b], a
+.asm_84bff
+	xor a
+	ld [w2d011], a
+	ld [w2d0e3], a
+	ld [wOWPalTransitionState], a
+	ld [wOWPalTransitionCounter], a
+	ret
+
+Func_84c0d: ; 84c0d (21:4c0d)
+	ld hl, wOWPalTransitionCounter
+	inc [hl]
+	ld a, [wOWPalTransitionState]
+	jumptable
+	dw .Init
+	dw .FadeColours
+	dw .LoadPal1
+	dw .FadeColours
+	dw .LoadPal2
+	dw .FadeColours
+	dw .SwitchDayNight
+
+.Init:
+	di
+	call VBlank_84d76
+	ei
+	xor a
+	call LoadBaseAndTargetOWPals
+	jp DayNightTransition.AdvanceTable
+
+.FadeColours:
+	jp DayNightTransition.FadeColours
+
+.LoadPal1:
+	jp DayNightTransition.LoadPal1
+
+.LoadPal2:
+	jp DayNightTransition.LoadPal2
+
+.SwitchDayNight:
+	ld a, [w2d011]
+	xor $01
+	ld [w2d011], a
+	xor a
+	ld [w2d0e3], a
+	ld [wOWPalTransitionState], a
+	ld [wOWPalTransitionCounter], a
+	ret
+; 0x84c4b
 
 LoadBaseAndTargetOWPals: ; 84c4b (21:4c4b)
 	call GetOWPals
@@ -2498,7 +2608,7 @@ Func_85046: ; 85046 (21:5046)
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals palette 1)
 	ld [wPalConfig1SourceLo], a
-	ld a, OCPSF_AUTOINC | (1 << 3)
+	ld a, BCPSF_AUTOINC | (1 << 3)
 	ld [wPalConfig1Index], a
 	ld a, 7
 	ld [wPalConfig1Number], a
@@ -2524,7 +2634,70 @@ Func_85046: ; 85046 (21:5046)
 	ret
 ; 0x850b9
 
-	INCROM $850b9, $851bc
+	INCROM $850b9, $85145
+
+Func_85145: ; 85145 (21:5145)
+	ld a, [wPalConfig1TotalSteps]
+	cp $01
+	jr nc, .asm_85179
+	ld hl, wPalConfig1TotalSteps
+	inc [hl]
+	ld a, HIGH(wTempBGPals)
+	ld [wPalConfig1SourceHi], a
+	ld a, LOW(wTempBGPals)
+	ld [wPalConfig1SourceLo], a
+	ld a, BCPSF_AUTOINC
+	ld [wPalConfig1Index], a
+	ld a, 8
+	ld [wPalConfig1Number], a
+	ld a, HIGH(wTempOBPals)
+	ld [wPalConfig2SourceHi], a
+	ld a, LOW(wTempOBPals)
+	ld [wPalConfig2SourceLo], a
+	ld a, OCPSF_AUTOINC
+	ld [wPalConfig2Index], a
+	ld a, 8
+	ld [wPalConfig2Number], a
+	ret
+
+.asm_85179
+	call Func_851d1
+	call Func_851bc
+	ret c
+	xor a
+	ld [wPalConfig1TotalSteps], a
+	ld [wOWFuncCounter], a
+	ld hl, w2d062
+	inc [hl]
+	ret
+; 0x8518c
+
+Func_8518c: ; 8518c (21:518c)
+	ld a, [wPalConfig1TotalSteps]
+	cp $01
+	jr nc, .fade
+	ld a, HIGH(wTempBGPals)
+	ld [wPalConfig1SourceHi], a
+	ld a, LOW(wTempBGPals)
+	ld [wPalConfig1SourceLo], a
+	ld a, OCPSF_AUTOINC
+	ld [wPalConfig1Index], a
+	ld a, 8
+	ld [wPalConfig1Number], a
+	ld hl, wPalConfig1TotalSteps
+	inc [hl]
+	ret
+
+.fade
+	call Func_851bc
+	ret c
+	xor a
+	ld [wPalConfig1TotalSteps], a
+	ld [wOWFuncCounter], a
+	ld hl, w2d062
+	inc [hl]
+	ret
+; 0x851bc
 
 Func_851bc: ; 851bc (21:51bc)
 	ld a, LOW(rBCPS)
@@ -3282,9 +3455,20 @@ Data_8563e:: ; 8563e (21:563e)
 	db $00, $00, $00, $00, $70
 
 	db $00
-; 0x85657
 
-	INCROM $85657, $857f7
+Data_85657:: ; 85657 (21:5657)
+	dw wTilemap + $1a1
+	db $f7, $f6, $f9, $f8, $f8, $f8, $f9, $f9, $f9, $40, $41, $42, $43, $2c, $2d, $f8, $f9, $f6, $70
+	db $2a, $2a, $2a, $2a, $0a, $2a, $0a, $2a, $0a, $01, $01, $01, $01, $01, $02, $0a, $0a, $0a, $70
+	
+	dw wTilemap + $1c1
+	db $78, $79, $78, $79, $78, $79, $78, $79, $78, $50, $51, $52, $53, $3c, $3d, $79, $78, $79, $70
+	db $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $02, $02, $02, $02, $02, $02, $0a, $0a, $0a, $70
+
+	db $00
+; 0x856a8
+
+	INCROM $856a8, $857f7
 
 BGMap_857f7:: ; 857f7 (21:57f7)
 	INCBIN "gfx/bgmaps/map_857f7.bin"
@@ -3296,7 +3480,111 @@ BGMap_85897:: ; 85897 (21:5897)
 	INCBIN "gfx/bgmaps/map_85897.bin"
 ; 0x85928
 
-	INCROM $85928, $85af4
+	INCROM $85928, $85a68
+
+Func_85a68: ; 85a68 (21:5a68)
+.asm_85a68
+	ld hl, wSceneWarioDuration
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld b, a
+	ld a, [bc]
+	ld [de], a
+	ld hl, $a0
+	add hl, bc
+	dec d
+	dec d
+	dec d
+	ld a, [hl]
+	ld [de], a
+	ld a, [wOWUIObj1Attributes]
+	dec a
+	ld [wOWUIObj1Attributes], a
+	ret z
+	ld de, wSceneWarioDuration
+	call Func_85a91
+	call Func_85a91
+	jr .asm_85a68
+
+Func_85a91:
+	ld a, [de]
+	ld l, a
+	inc de
+	ld a, [de]
+	ld h, a
+	dec de
+	ld bc, $20
+	add hl, bc
+	ld a, l
+	ld [de], a
+	inc de
+	ld a, h
+	ld [de], a
+	inc de
+	ret
+
+Func_85aa2: ; 85aa2 (21:5aa2)
+.asm_85aa2
+	ld hl, wOWUIObj2Duration
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld b, a
+	ld a, [bc]
+	ld [de], a
+	ld hl, $a0
+	add hl, bc
+	dec d
+	dec d
+	dec d
+	ld a, [hl]
+	ld [de], a
+	ld a, [wOWUIObj2Attributes]
+	dec a
+	ld [wOWUIObj2Attributes], a
+	ret z
+	ld de, wOWUIObj2Duration
+	call Func_85a91
+	call Func_85a91
+	jr .asm_85aa2
+
+Func_85acb: ; 85acb (21:5acb)
+.asm_85acb
+	ld hl, $d154
+	ld a, [hli]
+	ld e, a
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld b, a
+	ld a, [bc]
+	ld [de], a
+	ld hl, $a0
+	add hl, bc
+	dec d
+	dec d
+	dec d
+	ld a, [hl]
+	ld [de], a
+	ld a, [$d153]
+	dec a
+	ld [$d153], a
+	ret z
+	ld de, $d154
+	call Func_85a91
+	call Func_85a91
+	jr .asm_85acb
 
 Data_85af4: ; 85af4 (21:5af4)
 	dw wTilemap + $64
@@ -3423,11 +3711,88 @@ BGMap_868f5:: ; 868f5 (21:68f5)
 
 BGMap_86929:: ; 86929 (21:6929)
 	INCBIN "gfx/bgmaps/map_86929.bin"
-; 0x8694d
 
-	db $ff
+Pals_8694d: ; 8694d (21:694d)
+	rgb 31, 31, 31
+	rgb 12, 29,  0
+	rgb  9, 12, 12
+	rgb  0,  0,  0
 
-	INCROM $8694e, $869cd
+	rgb 31, 31, 31
+	rgb 14, 14, 14
+	rgb 11,  3,  7
+	rgb  0,  0,  0
+
+	rgb 14, 14, 14
+	rgb 12, 29,  0
+	rgb  0,  2,  2
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb 12, 29,  0
+	rgb  8,  3,  2
+	rgb  0,  2,  2
+
+	rgb 31, 31, 31
+	rgb  0,  9,  3
+	rgb  3,  0,  3
+	rgb  0,  0,  0
+
+	rgb 12, 29,  0
+	rgb 14, 14, 14
+	rgb 17,  3, 14
+	rgb  5,  3,  5
+
+	rgb 31, 31, 31
+	rgb 31, 26,  2
+	rgb 27, 12,  0
+	rgb  7,  5,  3
+
+	rgb 31, 31, 31
+	rgb 31, 31, 31
+	rgb 14, 14, 14
+	rgb  0,  0,  0
+
+Pals_8698d: ; 8698d (21:698d)
+	rgb 31, 31, 31
+	rgb 31, 31, 31
+	rgb  0,  0,  0
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb  6,  6,  7
+	rgb  3,  0,  0
+	rgb  0,  0,  0
+
+	rgb  6,  6,  7
+	rgb 31, 31, 31
+	rgb  0,  2,  2
+	rgb  0,  0,  0
+
+	rgb 14, 14, 14
+	rgb 31, 31, 31
+	rgb  4,  0,  1
+	rgb  0,  2,  2
+
+	rgb 14, 14, 14
+	rgb  0,  0,  0
+	rgb  3,  0,  3
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb  6,  6,  7
+	rgb  8,  3,  2
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb 31, 26,  2
+	rgb 27, 12,  0
+	rgb  7,  5,  3
+
+	rgb 31, 31, 31
+	rgb 31, 31, 31
+	rgb 14, 14, 14
+	rgb  0,  0,  0
 
 Pals_869cd: ; 869cd (21:69cd)
 	rgb 31, 31, 31

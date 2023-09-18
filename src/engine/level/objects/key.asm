@@ -12,11 +12,11 @@ KeyFunc: ; 4c992 (13:4992)
 	ld de, Frameset_6804f
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
-	ld a, $04
+	ld a, 4
 	ld [hld], a
-	ld a, $fb
+	ld a, -5
 	ld [hld], a ; OBJ_COLLBOX_LEFT
-	ld a, $fc
+	ld a, -4
 	ld [hl], a ; OBJ_COLLBOX_BOTTOM
 	ret
 
@@ -29,4 +29,3 @@ KeyFunc: ; 4c992 (13:4992)
 	ld hl, wCurObjUnk02
 	farcall Func_bb2d
 	ret
-; 0x4c9d4
