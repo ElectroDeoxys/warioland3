@@ -204,10 +204,10 @@ MizzouProjectileFunc: ; 4885b (12:485b)
 	ld a, [wc0dd]
 	and a
 	jr nz, .asm_488c8
-	ld bc, $4740
+	ld bc, Data_60740
 	jr .asm_4888e
 .asm_4888b
-	ld bc, $4700
+	ld bc, Data_60700
 .asm_4888e
 	call ApplyObjYMovement
 	ld a, [wCurObjState]

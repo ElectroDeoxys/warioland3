@@ -1127,7 +1127,7 @@ FlyFunc: ; 52513 (14:6513)
 	ld [wDollBoyActiveBarrels], a
 	ret
 .asm_5255e
-	ld bc, $44c0
+	ld bc, Data_604c0
 	call ApplyObjYMovement_Loop
 	ld a, [wDollBoyActiveBarrels]
 	and a

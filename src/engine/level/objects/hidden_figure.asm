@@ -212,13 +212,13 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	jr z, .asm_4ccae
 	cp $08
 	jr z, .asm_4ccb3
-	ld bc, $4180
+	ld bc, Data_4c180
 	jr .asm_4ccb6
 .asm_4ccae
-	ld bc, $4580
+	ld bc, Data_4c580
 	jr .asm_4ccb6
 .asm_4ccb3
-	ld bc, $4680
+	ld bc, Data_4c680
 .asm_4ccb6
 	call Func_4cf70
 	ld hl, wCurObjStateDuration
@@ -262,9 +262,9 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	ret
 
 .Func_4ccf6:
-	ld bc, $4000
+	ld bc, Data_4c000
 	call Func_4cf70
-	ld bc, $4080
+	ld bc, Data_4c080
 	call Func_4cf87
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -323,9 +323,9 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	ret
 
 .Func_4cd59:
-	ld bc, $4000
+	ld bc, Data_4c000
 	call Func_4cf70
-	ld bc, $4100
+	ld bc, Data_4c100
 	call Func_4cf87
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -954,7 +954,7 @@ HiddenFigureLeftHandFunc: ; 4d0ab (13:50ab)
 	jr z, .asm_4d197
 	ret
 .asm_4d17a
-	ld bc, $4540
+	ld bc, Data_4c540
 	call Func_4cf9e
 	ld a, [wCurObjVar3]
 	cp $0a
@@ -971,7 +971,7 @@ HiddenFigureLeftHandFunc: ; 4d0ab (13:50ab)
 	jp .asm_4d34c
 
 .Func_4d19e:
-	ld bc, $4500
+	ld bc, Data_4c500
 	call Func_4cf9e
 	ld a, [wCurObjVar3]
 	cp $3a
@@ -1043,15 +1043,15 @@ HiddenFigureLeftHandFunc: ; 4d0ab (13:50ab)
 	ld a, [$d14b]
 	cp $08
 	jr z, .asm_4d280
-	ld bc, $4380
+	ld bc, Data_4c380
 	call Func_4cfbf
 	ld a, [$d14b]
 	cp $07
 	jr z, .asm_4d23e
-	ld bc, $4400
+	ld bc, Data_4c400
 	jr .asm_4d241
 .asm_4d23e
-	ld bc, $4600
+	ld bc, Data_4c600
 .asm_4d241
 	call Func_4cf9e
 	ld a, [wCurObjVar2]
@@ -1084,9 +1084,9 @@ HiddenFigureLeftHandFunc: ; 4d0ab (13:50ab)
 	ret nz
 	jp .asm_4d34c
 .asm_4d280
-	ld bc, $4700
+	ld bc, Data_4c700
 	call Func_4cfbf
-	ld bc, $4800
+	ld bc, Data_4c800
 	call Func_4cf9e
 	ld a, [wCurObjVar2]
 	cp $13
@@ -1161,9 +1161,9 @@ HiddenFigureLeftHandFunc: ; 4d0ab (13:50ab)
 	xor a
 	ld [hl], a
 .asm_4d316
-	ld bc, $4200
+	ld bc, Data_4c200
 	call Func_4cfbf
-	ld bc, $4280
+	ld bc, Data_4c280
 	call Func_4cf9e
 	ld a, [wCurObjVar2]
 	cp $10
@@ -1367,7 +1367,7 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 	jr z, .asm_4d498
 	ret
 .asm_4d47b
-	ld bc, $4540
+	ld bc, Data_4c540
 	call Func_4cf9e
 	ld a, [wCurObjVar3]
 	cp $0a
@@ -1384,7 +1384,7 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 	jp .asm_4d5f5
 
 .Func_4d49f:
-	ld bc, $4500
+	ld bc, Data_4c500
 	call Func_4cf9e
 	ld a, [wCurObjVar3]
 	cp $3a
@@ -1434,15 +1434,15 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 	ld a, [$d14b]
 	cp $08
 	jr z, .asm_4d540
-	ld bc, $4480
+	ld bc, Data_4c480
 	call Func_4cfbf
 	ld a, [$d14b]
 	cp $07
 	jr z, .asm_4d508
-	ld bc, $4400
+	ld bc, Data_4c400
 	jr .asm_4d50b
 .asm_4d508
-	ld bc, $4600
+	ld bc, Data_4c600
 .asm_4d50b
 	call Func_4cf9e
 	ld a, [wCurObjVar2]
@@ -1466,9 +1466,9 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 	ret nz
 	jp .asm_4d5f5
 .asm_4d540
-	ld bc, $4760
+	ld bc, Data_4c760
 	call Func_4cfbf
-	ld bc, $4800
+	ld bc, Data_4c800
 	call Func_4cf9e
 	ld a, [wCurObjVar2]
 	cp $13
@@ -1529,9 +1529,9 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 	xor a
 	ld [hl], a
 .asm_4d5bf
-	ld bc, $4300
+	ld bc, Data_4c300
 	call Func_4cfbf
-	ld bc, $4280
+	ld bc, Data_4c280
 	call Func_4cf9e
 	ld a, [wCurObjVar2]
 	cp $10

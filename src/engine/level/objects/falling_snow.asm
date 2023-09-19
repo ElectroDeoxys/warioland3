@@ -152,7 +152,7 @@ FallingSnowFunc: ; 495c2 (12:55c2)
 	ldh [hXPosHi], a
 	call Func_352b
 	and a
-	ld bc, $43e0
+	ld bc, Data_603e0
 	jp z, ApplyObjYMovement
 	ld hl, wCurObjYPos
 	ldh a, [hYPosLo]
@@ -198,7 +198,7 @@ FallingSnowFunc: ; 495c2 (12:55c2)
 	ldh [hXPosHi], a
 	call Func_352b
 	and a
-	ld bc, $43e0
+	ld bc, Data_603e0
 	jp z, ApplyObjYMovement
 	ld hl, wCurObjYPos
 	ldh a, [hYPosLo]

@@ -128,7 +128,7 @@ DollBoyFunc: ; 50ac4 (14:4ac4)
 	cp $1e
 	jr z, .asm_50be1
 .asm_50b92
-	ld bc, $4b80
+	ld bc, Data_60b80
 	jp ApplyObjYMovement
 .asm_50b98
 	ld a, $01
@@ -148,7 +148,7 @@ DollBoyFunc: ; 50ac4 (14:4ac4)
 	cp $2e
 	jr z, .asm_50be1
 .asm_50bb9
-	ld bc, $4ba0
+	ld bc, Data_60ba0
 	jp ApplyObjYMovement
 .asm_50bbf
 	ld a, [wCurObjVar3]
@@ -166,7 +166,7 @@ DollBoyFunc: ; 50ac4 (14:4ac4)
 	cp $0e
 	jr z, .asm_50be1
 .asm_50bdb
-	ld bc, $4880
+	ld bc, Data_60880
 	jp ApplyObjYMovement
 .asm_50be1
 	ld de, Frameset_69632
@@ -346,7 +346,7 @@ DollBoyFunc: ; 50ac4 (14:4ac4)
 	ldh [hXPosHi], a
 	call Func_352b
 	and a
-	ld bc, $4280
+	ld bc, FallingYVel_Light
 	jp z, ApplyObjYMovement
 	ld hl, wCurObjYPos
 	ldh a, [hYPosLo]
@@ -474,10 +474,10 @@ DollBoyFunc: ; 50ac4 (14:4ac4)
 	jp SetObjectFramesetPtr
 
 .asm_50e26
-	ld bc, $4890
+	ld bc, Data_60890
 	jr .asm_50e2e
 .asm_50e2b
-	ld bc, $48a0
+	ld bc, Data_608a0
 .asm_50e2e
 	ld l, OBJ_STATE_DURATION
 	ld a, [hl]
@@ -516,7 +516,7 @@ DollBoyFunc: ; 50ac4 (14:4ac4)
 	ld [hl], a
 	call DollBoyGroundShake
 .asm_50e66
-	ld bc, $4c00
+	ld bc, Data_60c00
 	jp ApplyObjYMovement
 .asm_50e6c
 	ld a, [wCurObjSubState]
@@ -666,7 +666,7 @@ DollBoyFunc: ; 50ac4 (14:4ac4)
 	ldh [hXPosHi], a
 	call Func_352b
 	and a
-	ld bc, $4280
+	ld bc, FallingYVel_Light
 	jp z, ApplyObjYMovement
 	ld hl, wCurObjYPos
 	ldh a, [hYPosLo]
@@ -729,7 +729,7 @@ DollBoyFunc: ; 50ac4 (14:4ac4)
 	jr nz, .asm_50fed
 	play_sfx SFX_0A3
 .asm_50fed
-	ld bc, $4bd0
+	ld bc, Data_60bd0
 	jp ApplyObjYMovement
 .asm_50ff3
 	xor a
@@ -826,7 +826,7 @@ DollBoyBarrelFunc:
 	cp $0e
 	jr z, .asm_510ac
 .asm_51090
-	ld bc, $4880
+	ld bc, Data_60880
 	jp ApplyObjYMovement
 .asm_51096
 	ld a, [wCurObjVar3]
@@ -838,7 +838,7 @@ DollBoyBarrelFunc:
 	cp $1e
 	jr z, .asm_510ac
 .asm_510a6
-	ld bc, $4b80
+	ld bc, Data_60b80
 	jp ApplyObjYMovement
 .asm_510ac
 	xor a
@@ -1046,28 +1046,28 @@ DollBoyHammerFunc: ; 511c7 (14:51c7)
 	ld a, [wCurObjVar1]
 	and a
 	jp nz, MoveObjectRight_Fast
-	ld bc, $4860
+	ld bc, Data_60860
 	call ApplyObjYMovement
 	ld a, [wDollBoyHammerStage]
 	cp DOLLBOY_HAMMER_MID_SHORT
 	jr nz, .check_mid_long
 ; mid-short
-	ld bc, $4ae0
+	ld bc, Data_60ae0
 	jp ApplyObjXMovement
 .check_mid_long
 	cp DOLLBOY_HAMMER_MID_LONG
 	jr nz, .check_long
 ; mid-long
-	ld bc, $4b00
+	ld bc, Data_60b00
 	jp ApplyObjXMovement
 .check_long
 	cp DOLLBOY_HAMMER_LONG
 	jr nz, .short
 ; long
-	ld bc, $4b30
+	ld bc, Data_60b30
 	jp ApplyObjXMovement
 .short
-	ld bc, $4b60
+	ld bc, Data_60b60
 	jp ApplyObjXMovement
 
 .hit
@@ -1101,7 +1101,7 @@ DollBoyHammerFunc: ; 511c7 (14:51c7)
 .hit_fall
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
-	ld bc, $4040
+	ld bc, Data_60040
 	jp ApplyObjYMovement
 ; 0x5126c
 

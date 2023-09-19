@@ -294,7 +294,7 @@ ScowlerFunc: ; 544e5 (15:44e5)
 	ldh [hXPosHi], a
 	call Func_352b
 	and a
-	ld bc, $4a60
+	ld bc, Data_60a60
 	call z, ApplyObjYMovement
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -509,7 +509,7 @@ ScowlerFunc: ; 544e5 (15:44e5)
 	ld a, [wc0dd]
 	and a
 	ret z
-	ld bc, $4a70
+	ld bc, Data_60a70
 	jp ApplyObjYMovement
 
 .Func_5487d:
@@ -573,7 +573,7 @@ ScowlerFunc: ; 544e5 (15:44e5)
 	call Func_358b
 	ld a, [wc0dd]
 	and a
-	ld bc, $4a70
+	ld bc, Data_60a70
 	jp nz, ApplyObjYMovement
 	ld hl, wCurObjStateDuration
 	ld a, $0f
@@ -596,7 +596,7 @@ ScowlerFunc: ; 544e5 (15:44e5)
 	ld [wCurObjAction], a
 	call Func_54c07
 	call MoveObjectDown_Slow
-	ld bc, $4a80
+	ld bc, Data_60a80
 	call ApplyObjXMovement
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -642,7 +642,7 @@ ScowlerFunc: ; 544e5 (15:44e5)
 	call WriteScowlerBGPals
 .asm_54978
 	call MoveObjectDown_Slow
-	ld bc, $4a90
+	ld bc, Data_60a90
 	jp Func_34a0
 
 FloatingRingSpawnerFunc: ; 54981 (15:4981)

@@ -2211,7 +2211,7 @@ Func_9f11e: ; 9f11e (27:711e)
 	ld a, [bc]
 	and a
 	ret z
-	ld hl, .PointerTable
+	ld hl, .framesets
 	call Func_9f0a5
 	call Func_9f0ae
 	cp $02
@@ -2227,10 +2227,10 @@ Func_9f11e: ; 9f11e (27:711e)
 	jr z, .asm_9f121 ; ?? this will never happen
 	jr .asm_9f131
 
-.PointerTable
-	dw $543a
-	dw $543d
-	dw $544a
+.framesets
+	dw Frameset_bd43a
+	dw Frameset_bd43d
+	dw Frameset_bd44a
 ; 0x9f146
 
 Func_9f146: ; 9f146 (27:7146)
@@ -2247,15 +2247,15 @@ Func_9f146: ; 9f146 (27:7146)
 	ld a, [bc]
 	and a
 	ret z
-	ld hl, .PointerTable
+	ld hl, .framesets
 	call Func_9f0a5
 	call Func_9f0ae
 	ld de, OAM_bd453
 	jp Func_9f0bc
 
-.PointerTable
-	dw $5469 
-	dw $546c
+.framesets
+	dw Frameset_bd469 
+	dw Frameset_bd46c
 ; 0x9f174
 
 Func_9f174: ; 9f174 (27:7174)
@@ -3158,11 +3158,11 @@ Func_9fc58: ; 9fc58 (27:7c58)
 	; invalid value
 	debug_nop
 .one
-	ld de, $41f3
+	ld de, Frameset_bc1f3
 	call UpdateOWAnimation
 	jr .asm_9fc85
 .two
-	ld de, $41e8
+	ld de, Frameset_bc1e8
 	call UpdateOWAnimation
 	ld b, $00
 	call Func_9f0d0

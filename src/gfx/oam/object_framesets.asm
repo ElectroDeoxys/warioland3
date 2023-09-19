@@ -6241,7 +6241,102 @@ Frameset_69ffd:: ; 69ffd (1a:5ffd)
 	db $ff
 ; 0x6a000
 
-	INCROM $6a000, $6a052
+Frameset_6a000:: ; 6a000 (1a:6000)
+	db $19, 16
+	db $18,  8
+	db $19,  5
+	db $1a,  6
+	db $09, 10
+	db $ff
+; 0x6a00b
+
+Frameset_6a00b:: ; 6a00b (1a:600b)
+	db $09, 10
+	db $ff
+; 0x6a00e
+
+Frameset_6a00e:: ; 6a00e (1a:600e)
+	db $3f,  6
+	db $40,  6
+	db $41, 127
+	db $41, 127
+	db $ff
+; 0x6a017
+
+Frameset_6a017:: ; 6a017 (1a:6017)
+	db $3f,  6
+	db $40,  6
+	db $41,  6
+	db $40,  6
+	db $3f,  6
+	db $ff
+; 0x6a022
+
+Frameset_6a022:: ; 6a022 (1a:6022)
+	db $00, 11
+	db $01,  7
+	db $02,  3
+	db $03, 127
+	db $ff
+; 0x6a02b
+
+Frameset_6a02b:: ; 6a02b (1a:602b)
+	db $04, 127
+	db $ff
+; 0x6a02e
+
+Frameset_6a02e:: ; 6a02e (1a:602e)
+	db $05, 127
+	db $ff
+; 0x6a031
+
+Frameset_6a031:: ; 6a031 (1a:6031)
+	db $06, 127
+	db $ff
+; 0x6a034
+
+Frameset_6a034:: ; 6a034 (1a:6034)
+	db $07, 127
+	db $ff
+; 0x6a037
+
+Frameset_6a037:: ; 6a037 (1a:6037)
+	db $08, 127
+	db $ff
+; 0x6a03a
+
+Frameset_6a03a:: ; 6a03a (1a:603a)
+	db $09, 11
+	db $0a,  7
+	db $0b,  3
+	db $0c, 127
+	db $ff
+; 0x6a043
+
+Frameset_6a043:: ; 6a043 (1a:6043)
+	db $0d, 127
+	db $ff
+; 0x6a046
+
+Frameset_6a046:: ; 6a046 (1a:6046)
+	db $0e, 127
+	db $ff
+; 0x6a049
+
+Frameset_6a049:: ; 6a049 (1a:6049)
+	db $0f, 127
+	db $ff
+; 0x6a04c
+
+Frameset_6a04c:: ; 6a04c (1a:604c)
+	db $10, 127
+	db $ff
+; 0x6a04f
+
+Frameset_6a04f:: ; 6a04f (1a:604f)
+	db $11, 127
+	db $ff
+; 0x6a052
 
 Frameset_6a052:: ; 6a052 (1a:6052)
 	db $00,  3

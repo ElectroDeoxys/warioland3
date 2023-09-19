@@ -42,7 +42,7 @@ WolfenbossFunc: ; 55e4e (15:5e4e)
 	ret z
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
-	ld bc, $4650
+	ld bc, Data_60650
 	jp nz, Func_34a0
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.Func_55ec4)
@@ -346,7 +346,7 @@ WolfenbossFunc: ; 55e4e (15:5e4e)
 	ld bc, ObjParams_IgaguriRight
 	jp CreateObjectAtRelativePos
 .asm_560ac
-	ld bc, $44c0
+	ld bc, Data_604c0
 	call ApplyObjYMovement_Loop
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -381,7 +381,7 @@ WolfenbossFunc: ; 55e4e (15:5e4e)
 	jr nz, .asm_560f2
 	play_sfx SFX_0C3
 .asm_560f2
-	ld bc, $44c0
+	ld bc, Data_604c0
 	call ApplyObjYMovement_Loop
 	ld a, [wCurObjSubState]
 	rlca
@@ -492,7 +492,7 @@ WolfenbossFunc: ; 55e4e (15:5e4e)
 	jr nz, .asm_561c4
 	play_sfx SFX_0A3
 .asm_561c4
-	ld bc, $4da0
+	ld bc, Data_60da0
 	jp ApplyObjYMovement
 .asm_561ca
 	ld a, $03
@@ -782,7 +782,7 @@ IgaguriFunc: ; 5633f (15:633f)
 	inc [hl]
 	jr .asm_563cb
 .asm_563c5
-	ld bc, $4d80
+	ld bc, Data_60d80
 	call ApplyObjYMovement
 .asm_563cb
 	ld hl, wCurObjYPos
@@ -852,7 +852,7 @@ IgaguriFunc: ; 5633f (15:633f)
 .asm_5643b
 	ld a, $02
 	ld [wCurObjFrameDuration], a
-	ld bc, $4e00
+	ld bc, Data_60e00
 	call ApplyObjYMovement
 	ld hl, wCurObjYPos
 	ld a, [hli]
@@ -949,7 +949,7 @@ IgaguriFunc: ; 5633f (15:633f)
 KuriFunc: ; 564ea (15:64ea)
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
-	ld bc, $4d60
+	ld bc, Data_60d60
 	call ApplyObjYMovement
 	ld hl, wCurObjYPos
 	ld a, [hli]

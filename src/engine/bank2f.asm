@@ -165,7 +165,21 @@ OAM_bc122: ; bc122 (2f:4122)
 	db $80
 ; 0xbc1e8
 
-	INCROM $bc1e8, $bd1fd
+Frameset_bc1e8:: ; bc1e8 (2f:41e8)
+	db $01,  2
+	db $02,  2
+	db $03,  2
+	db $04,  2
+	db $05,  2
+	db $ff
+; 0xbc1f3
+
+Frameset_bc1f3:: ; bc1f3 (2f:41f3)
+	db $00,  4
+	db $ff
+; 0xbc1f6
+
+	INCROM $bc1f6, $bd1fd
 
 OAM_bd1fd: ; bd1fd (2f:51fd)
 	dw .frame_0
@@ -424,7 +438,28 @@ OAM_bd377: ; bd377 (2f:5377)
 	db $80
 ; 0xbd43a
 
-	INCROM $bd43a, $bd453
+Frameset_bd43a:: ; bd43a (2f:543a)
+	db $00,  4
+	db $ff
+; 0xbd43d
+
+Frameset_bd43d:: ; bd43d (2f:543d)
+	db $01,  4
+	db $02,  4
+	db $03,  4
+	db $04,  4
+	db $05,  4
+	db $06,  4
+	db $ff
+; 0xbd44a
+
+Frameset_bd44a:: ; bd44a (2f:544a)
+	db $06,  8
+	db $07,  8
+	db $06,  8
+	db $08,  8
+	db $ff
+; 0xbd453
 
 OAM_bd453: ; bd453 (2f:5453)
 	dw .frame_0
@@ -441,7 +476,15 @@ OAM_bd453: ; bd453 (2f:5453)
 	db $80
 ; 0xbd469
 
-	INCROM $bd469, $bd46f
+Frameset_bd469:: ; bd469 (2f:5469)
+	db $00,  4
+	db $ff
+; 0xbd46c
+
+Frameset_bd46c:: ; bd46c (2f:546c)
+	db $01,  4
+	db $ff
+; 0xbd46f
 
 OAM_bd46f: ; bd46f (2f:546f)
 	dw .frame_0

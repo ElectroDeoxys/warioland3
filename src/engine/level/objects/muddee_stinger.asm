@@ -61,10 +61,10 @@ MuddeeStingerFunc: ; 4ca16 (13:4a16)
 	ld a, [wCurObjUnk07]
 	cp $35
 	jr z, .asm_4ca7b
-	ld de, $4aed
+	ld de, Data_4caed
 	jr .asm_4ca7e
 .asm_4ca7b
-	ld de, $4b0d
+	ld de, Data_4cb0d
 .asm_4ca7e
 	ld a, c
 	cp $10
@@ -141,4 +141,38 @@ MuddeeStingerFunc: ; 4ca16 (13:4a16)
 	ret
 ; 0x4caed
 
-	INCROM $4caed, $4cb2d
+Data_4caed:
+	db  25,   0
+	db  23,  -5
+	db  23,   5
+	db   8,  18
+	db  14,  18
+	db   2,  18
+	db -13,   0
+	db -11,  -5
+	db -11,   5
+	db   8, -19
+	db  14, -19
+	db   2, -19
+	db  18,   9
+	db  -5,   9
+	db  -5, -10
+	db  18, -10
+
+Data_4cb0d:
+	db  -7,   0
+	db  -6,  -5
+	db  -6,   5
+	db   7, -12
+	db  13, -10
+	db   1, -10
+	db  21,   0
+	db  19,  -5
+	db  19,   5
+	db   7,  11
+	db  13,   9
+	db   1,   9
+	db  -1, -11
+	db  16, -11
+	db  16,  10
+	db  -1,  10

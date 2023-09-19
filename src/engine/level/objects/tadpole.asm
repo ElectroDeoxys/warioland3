@@ -184,7 +184,7 @@ TadpoleFunc: ; 49ea0 (12:5ea0)
 	ld a, [wc0dd]
 	and a
 	jr nz, .asm_49f85
-	ld bc, $4a40
+	ld bc, Data_60a40
 	call ApplyObjYMovement
 	jp MoveObjectLeft_Fast
 
@@ -206,7 +206,7 @@ TadpoleFunc: ; 49ea0 (12:5ea0)
 	and a
 	jr z, .asm_49fa7
 	dec [hl]
-	ld bc, $4a20
+	ld bc, Data_60a20
 	call ApplyObjYMovement
 	jp MoveObjectLeft_Fast
 

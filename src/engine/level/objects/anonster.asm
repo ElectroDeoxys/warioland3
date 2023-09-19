@@ -106,7 +106,7 @@ AnonsterFunc: ; 50000 (14:4000)
 .asm_500a8
 	ld l, OBJ_FLAGS
 	res OBJFLAG_NO_COLLISION_F, [hl]
-	ld bc, $4790
+	ld bc, Data_60790
 	call ApplyObjYMovement_Loop
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -216,7 +216,7 @@ AnonsterFunc: ; 50000 (14:4000)
 	cp $4f
 	jr z, .asm_501a3
 .asm_5017f:
-	ld bc, $4790
+	ld bc, Data_60790
 	jp ApplyObjYMovement_Loop
 .asm_50185
 	ld hl, wCurObjUpdateFunction + 1
@@ -492,7 +492,7 @@ AnonsterFunc: ; 50000 (14:4000)
 	and a
 	jr nz, .asm_5036e
 .asm_50368
-	ld bc, $47f0
+	ld bc, Data_607f0
 	jp ApplyObjYMovement
 .asm_5036e
 	ld hl, wCurObjYPos
@@ -911,7 +911,7 @@ AnonsterFunc: ; 50000 (14:4000)
 	ld a, [wCurObjScreenYPos]
 	cp $10
 	jr c, .asm_50647
-	ld bc, $47e0
+	ld bc, Data_607e0
 	jp ApplyObjYMovement
 .asm_50647
 	ld a, [wTransformation]
@@ -1015,7 +1015,7 @@ AnonsterFunc: ; 50000 (14:4000)
 .Func_50705:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
-	ld bc, $4180
+	ld bc, Data_60180
 	call ApplyObjYMovement
 	ld a, [wCurObjSubState]
 	rlca
@@ -1175,7 +1175,7 @@ AnonsterSilkFunc: ; 50779 (14:4779)
 	ld a, [wCurObjSubState]
 	rlca
 	jr nc, .asm_5082a
-	ld bc, $4800
+	ld bc, Data_60800
 	call Func_34a0
 	ld l, OBJ_X_POS
 	ld a, [hli]
@@ -1186,7 +1186,7 @@ AnonsterSilkFunc: ; 50779 (14:4779)
 	ldh [hXPosHi], a
 	jr .asm_5083c
 .asm_5082a
-	ld bc, $4830
+	ld bc, Data_60830
 	call Func_34a0
 	ld l, OBJ_X_POS
 	ld a, [hli]

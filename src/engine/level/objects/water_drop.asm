@@ -113,7 +113,7 @@ WaterDropFunc: ; 49d64 (12:5d64)
 	ld a, [wc0dd]
 	and a
 	jr nz, .asm_49e26
-	ld bc, $4280
+	ld bc, FallingYVel_Light
 	jp ApplyObjYMovement
 
 .asm_49e26

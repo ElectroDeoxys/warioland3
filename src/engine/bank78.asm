@@ -281,16 +281,16 @@ Func_1e015b: ; 1e015b (78:415b)
 	ld a, [de]
 	ld [hli], a ; x
 	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
+	ld [hli], a ; frame
+	ld [hli], a ; attributes
+	ld [hli], a ; frameset offset
+	ld [hli], a ; duration
 	inc de
 	ld a, [de]
-	ld [hli], a
-	inc de
-	ld a, [de]
-	ld [hl], a
+	ld [hli], a ; frameset pointer
+	inc de      ;
+	ld a, [de]  ;
+	ld [hl], a  ;
 
 	play_music MUSIC_LEVEL_CLEAR_GOT_TREASURE
 

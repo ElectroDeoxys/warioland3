@@ -181,7 +181,7 @@ JamanoFunc: ; 54d37 (15:4d37)
 	ld [wCurObjState], a
 	jr .asm_54efb
 .asm_54ea6
-	ld bc, $4c80
+	ld bc, Data_60c80
 	call Func_34a0
 	jr .asm_54efb
 .asm_54eae
@@ -212,7 +212,7 @@ JamanoFunc: ; 54d37 (15:4d37)
 	ld [wCurObjState], a
 	jr .asm_54efb
 .asm_54edc
-	ld bc, $4c20
+	ld bc, Data_60c20
 	call Func_34a0
 	jr .asm_54efb
 
@@ -248,7 +248,7 @@ JamanoFunc: ; 54d37 (15:4d37)
 	ld [wCurObjVar3], a
 	jr .asm_54f4f
 .asm_54f1a
-	ld bc, $4c80
+	ld bc, Data_60c80
 	jp ApplyObjYMovement_Loop
 .asm_54f20
 	cp $98
@@ -278,7 +278,7 @@ JamanoFunc: ; 54d37 (15:4d37)
 	ld [wCurObjVar3], a
 	jr .asm_54f1a
 .asm_54f4f
-	ld bc, $4c20
+	ld bc, Data_60c20
 	jp ApplyObjYMovement_Loop
 
 .Func_54f55:
@@ -508,7 +508,7 @@ JamanoFunc: ; 54d37 (15:4d37)
 .Func_550ff:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
-	ld bc, $4d20
+	ld bc, Data_60d20
 	jp ApplyObjYMovement
 
 JamanoHatFunc: ; 5510a (15:510a)
@@ -761,7 +761,7 @@ SkullFunc: ; 5528d (15:528d)
 	rra
 	jr c, .asm_55303
 .asm_552f2
-	ld bc, $4ce0
+	ld bc, Data_60ce0
 	jp ApplyObjYMovement
 .asm_552f8
 	cp $a0
@@ -771,7 +771,7 @@ SkullFunc: ; 5528d (15:528d)
 	rra
 	jr nc, .asm_552f2
 .asm_55303
-	ld bc, $4d00
+	ld bc, Data_60d00
 	jp ApplyObjYMovement
 .asm_55309
 	ld hl, wCurObjUpdateFunction + 1

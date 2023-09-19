@@ -92,10 +92,10 @@ ShootFunc: ; 56611 (15:6611)
 	ld a, [hld]
 	rlca
 	jr c, .asm_566ca
-	ld de, $6024
+	ld de, Frameset_6a022 + $2
 	jr .asm_566cd
 .asm_566ca
-	ld de, $603c
+	ld de, Frameset_6a03a + $2
 .asm_566cd
 	ld a, $02
 	ld [wCurObjVar2], a
@@ -178,11 +178,11 @@ ShootFunc: ; 56611 (15:6611)
 	rlca
 	jr c, .asm_56763
 	res 6, [hl]
-	ld de, $6022
+	ld de, Frameset_6a022
 	jr .asm_56768
 .asm_56763
 	set 6, [hl]
-	ld de, $603a
+	ld de, Frameset_6a03a
 .asm_56768
 	call SetObjectFramesetPtr
 	ld a, $1b
@@ -200,10 +200,10 @@ ShootFunc: ; 56611 (15:6611)
 	ld a, [wCurObjSubState]
 	rlca
 	jr c, .asm_56784
-	ld de, $602b
+	ld de, Frameset_6a02b
 	jr .asm_56787
 .asm_56784
-	ld de, $6043
+	ld de, Frameset_6a043
 .asm_56787
 	call SetObjectFramesetPtr
 	ld a, $16
@@ -220,7 +220,7 @@ ShootFunc: ; 56611 (15:6611)
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	jr z, .asm_567ab
-	ld bc, $43d0
+	ld bc, Data_603d0
 	call ApplyObjYMovement
 	jp .Func_569c7
 .asm_567ab
@@ -233,7 +233,7 @@ ShootFunc: ; 56611 (15:6611)
 	ret
 
 .Func_567b3:
-	ld bc, $43e0
+	ld bc, Data_603e0
 	call ApplyObjYMovement
 	call .Func_569c7
 	ld hl, wCurObjYPos
@@ -283,28 +283,28 @@ ShootFunc: ; 56611 (15:6611)
 	ld a, [wCurObjSubState]
 	rlca
 	jr c, .asm_56817
-	ld de, $602e
+	ld de, Frameset_6a02e
 	jp SetObjectFramesetPtr
 .asm_56817
-	ld de, $6046
+	ld de, Frameset_6a046
 	jp SetObjectFramesetPtr
 .asm_5681d
 	ld a, [wCurObjSubState]
 	rlca
 	jr c, .asm_56829
-	ld de, $6031
+	ld de, Frameset_6a031
 	jp SetObjectFramesetPtr
 .asm_56829
-	ld de, $6049
+	ld de, Frameset_6a049
 	jp SetObjectFramesetPtr
 .asm_5682f
 	ld a, [wCurObjSubState]
 	rlca
 	jr c, .asm_5683b
-	ld de, $6034
+	ld de, Frameset_6a034
 	jp SetObjectFramesetPtr
 .asm_5683b
-	ld de, $604c
+	ld de, Frameset_6a04c
 	jp SetObjectFramesetPtr
 .asm_56841
 	ld hl, wCurObjYPos
@@ -333,10 +333,10 @@ ShootFunc: ; 56611 (15:6611)
 	ld a, [hl]
 	rlca
 	jr c, .asm_56872
-	ld de, $6037
+	ld de, Frameset_6a037
 	jr .asm_56875
 .asm_56872
-	ld de, $604f
+	ld de, Frameset_6a04f
 .asm_56875
 	call SetObjectFramesetPtr
 	ld a, [wNumWarioGoals]
@@ -390,14 +390,14 @@ ShootFunc: ; 56611 (15:6611)
 
 .Func_568bd:
 	call .Func_569b0
-	ld bc, $4000
+	ld bc, Data_54000
 	call Func_57213
 	ld hl, wCurObjYPos
 	ld a, [hl]
 	ld b, $e0
 	cp b
 	ret c
-	ld de, $6000
+	ld de, Frameset_6a000
 	call SetObjectFramesetPtr
 	inc l
 	ld a, $06
@@ -454,7 +454,7 @@ ShootFunc: ; 56611 (15:6611)
 	inc l
 	ld a, $08
 	ld [hl], a
-	ld de, $600b
+	ld de, Frameset_6a00b
 	jp SetObjectFramesetPtr
 .asm_5693a
 	ld a, $05
@@ -500,7 +500,7 @@ ShootFunc: ; 56611 (15:6611)
 	ld a, [wXPosLo]
 	cp $ed
 	jr nc, .asm_5699e
-	ld bc, $4010
+	ld bc, Data_54010
 	call Func_57244
 	ld b, $03
 	jp AddXOffset
@@ -766,7 +766,7 @@ ShootFunc: ; 56611 (15:6611)
 	jr nz, .asm_56b90
 	play_sfx SFX_06A
 .asm_56b90
-	ld bc, $4e40
+	ld bc, Data_60e40
 	jp ApplyObjYMovement_Loop
 
 .Func_56b96:
@@ -903,10 +903,10 @@ ShootFunc: ; 56611 (15:6611)
 	ld a, [wCurObjVar2]
 	cp $04
 	jr z, .asm_56c6d
-	ld bc, $4e20
+	ld bc, Data_60e20
 	jr .asm_56c70
 .asm_56c6d
-	ld bc, $4e70
+	ld bc, Data_60e70
 .asm_56c70
 	call ApplyObjYMovement
 	ld hl, wCurObjYPos
@@ -1051,7 +1051,7 @@ ShootFunc: ; 56611 (15:6611)
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	jr z, .asm_56d99
-	ld bc, $4e90
+	ld bc, Data_60e90
 	jp ApplyObjYMovement
 .asm_56d99
 	xor a
@@ -1079,7 +1079,7 @@ ShootFunc: ; 56611 (15:6611)
 	play_sfx SFX_0A3
 	ret
 .asm_56dc6
-	ld bc, $4ea0
+	ld bc, Data_60ea0
 	jp ApplyObjYMovement
 
 GKTortoisePlatformFunc: ; 56dcc (15:6dcc)
@@ -1204,7 +1204,7 @@ GKTortoiseFunc: ; 56e6a (15:6e6a)
 	jp MoveObjectDownByVar2
 
 .asm_56e9c
-	ld de, $6017
+	ld de, Frameset_6a017
 	call SetObjectFramesetPtr
 	inc l
 	ld a, $07
@@ -1489,7 +1489,7 @@ GKTortoiseFunc: ; 56e6a (15:6e6a)
 	ld a, [wNumWarioGoals]
 	cp $03
 	jp nz, .asm_57009
-	ld de, $600e
+	ld de, Frameset_6a00e
 	call SetObjectFramesetPtr
 	ld a, $b4
 	ld [hli], a

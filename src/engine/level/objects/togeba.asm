@@ -75,7 +75,7 @@ TogebaFunc: ; 48d8a (12:4d8a)
 	ret
 
 .Func_48e02:
-	ld bc, $4760
+	ld bc, Data_60760
 	call ApplyObjYMovement
 	ld hl, wCurObjStateDuration
 	dec [hl]

@@ -352,7 +352,7 @@ WormwouldFunc: ; 54020 (15:4020)
 	ret
 
 .asm_54286
-	ld bc, $4dd0
+	ld bc, Data_60dd0
 	call ApplyObjYMovement
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -528,7 +528,7 @@ WormwouldFunc: ; 54020 (15:4020)
 .Func_543d4:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
-	ld bc, $4180
+	ld bc, Data_60180
 	call ApplyObjYMovement
 	ld a, [wCurObjSubState]
 	rlca
@@ -570,10 +570,10 @@ RollingRockFunc: ; 54417 (15:4417)
 	ld a, [wCurObjVar1]
 	and a
 	jr nz, .asm_54422
-	ld bc, $48b0
+	ld bc, Data_608b0
 	jr .asm_54425
 .asm_54422
-	ld bc, $4900
+	ld bc, Data_60900
 .asm_54425
 	ld a, [wCurObjState]
 	and a
@@ -591,7 +591,7 @@ RollingRockFunc: ; 54417 (15:4417)
 .Hit:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
-	ld bc, $4180
+	ld bc, Data_60180
 	call ApplyObjYMovement
 	ld a, [wCurObjSubState]
 	rlca

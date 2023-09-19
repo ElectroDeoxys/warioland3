@@ -117,7 +117,7 @@ MuddeeFunc: ; 55611 (15:5611)
 	ld a, [wCurObjVar3]
 	cp $0e
 	jr z, .asm_55702
-	ld bc, $4d30
+	ld bc, Data_60d30
 	jp ApplyObjYMovement
 .asm_55702
 	ld hl, wCurObjUpdateFunction + 1
@@ -248,7 +248,7 @@ MuddeeFunc: ; 55611 (15:5611)
 	ld a, [wc0dd]
 	and a
 	jr nz, .asm_557ed
-	ld bc, $4d40
+	ld bc, Data_60d40
 	jp ApplyObjYMovement
 .asm_557ed
 	xor a
@@ -605,7 +605,7 @@ MuddeeFunc: ; 55611 (15:5611)
 	ld a, [hli]
 	cp $0e
 	jr z, .asm_55a90
-	ld bc, $4d30
+	ld bc, Data_60d30
 	jp ApplyObjYMovement
 .asm_55a90
 	ld a, [hl]
@@ -795,7 +795,7 @@ MuddeeFunc: ; 55611 (15:5611)
 	play_sfx SFX_0A3
 	ret
 .asm_55bc6
-	ld bc, $4180
+	ld bc, Data_60180
 	call ApplyObjYMovement
 	ld a, [wCurObjSubState]
 	rlca

@@ -328,7 +328,7 @@ BigOctohonFunc: ; 4a69a (12:669a)
 	ld de, Frameset_69b60
 	jp .asm_4a6df
 .asm_4a76c
-	ld bc, $4d50
+	ld bc, Data_60d50
 	call ApplyObjXMovement
 	ld l, OBJ_VAR_1
 .asm_4a774

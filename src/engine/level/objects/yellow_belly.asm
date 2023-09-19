@@ -463,7 +463,7 @@ YellowBellyBodyFunc: ; 51356 (14:5356)
 	ld [hld], a
 	ret
 .asm_51688
-	ld bc, $4950
+	ld bc, Data_60950
 	call ApplyObjYMovement_Loop
 .asm_5168e
 	ld hl, wCurObjState
@@ -794,7 +794,7 @@ PumpFunc: ; 518b7 (14:58b7)
 .Func_518c6:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
-	ld bc, $49e0
+	ld bc, Data_609e0
 	call ApplyObjYMovement
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -930,7 +930,7 @@ PumpFunc: ; 518b7 (14:58b7)
 	and a
 	jr nz, .asm_519bf
 .asm_519b9
-	ld bc, $4a00
+	ld bc, Data_60a00
 	jp ApplyObjXMovement
 .asm_519bf
 	ld hl, wCurObjSubState
@@ -947,7 +947,7 @@ PumpFunc: ; 518b7 (14:58b7)
 	and a
 	jr nz, .asm_519dc
 .asm_519d6
-	ld bc, $4a10
+	ld bc, Data_60a10
 	jp ApplyObjXMovement
 .asm_519dc
 	ld hl, wCurObjSubState
@@ -979,7 +979,7 @@ PumpFunc: ; 518b7 (14:58b7)
 	dec [hl]
 	ret
 .asm_51a10
-	ld bc, $4040
+	ld bc, Data_60040
 	jp ApplyObjYMovement
 
 .asm_51a16
