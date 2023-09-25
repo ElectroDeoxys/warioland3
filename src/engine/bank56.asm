@@ -877,6 +877,312 @@ Data_158925: ; 158925 (56:4925)
 	db -1, -1
 	db  0, -1
 	db $80
-; 0x15896c
 
-	INCROM $15896c, $158ba3
+_InitBestTimeList: ; 15896c (56:496c)
+	call DisableLCD
+	call FillBGMap0_With7f
+	call ClearVirtualOAM
+
+	play_music2 MUSIC_TREASURE_COLLECTION
+
+	xor a
+	ldh [rSCX], a
+	ld [wSCX], a
+	ld a, [wObj1SubState]
+	rra
+	and a
+	jr z, .asm_158990
+	ld a, $70
+.asm_158990
+	ldh [rSCY], a
+	ld [wSCY], a
+
+	ld a, $02
+	ldh [rSVBK], a
+	call .VBlank_158a14
+	call .Func_158a09
+
+	ld hl, Pals_158b63
+	call LoadPalsToTempPals1
+
+	decompress BestTimeListGfx, v0Tiles1 + $200
+	decompress_vram1 BGMap_b3143, v1BGMap0
+	decompress BGMap_b2e72, v0BGMap0
+
+	call PrintBestTimes
+	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_ON
+	ldh [rLCDC], a
+	ld hl, wSubState
+	inc [hl]
+	ret
+
+.Func_158a09:
+	ld hl, wCollectionRow
+	ld bc, $800
+	xor a
+	call WriteAToHL_BCTimes
+	ret
+
+.VBlank_158a14:
+	ld hl, .func
+	ld de, wVBlankFunc
+	ld b, .func_end - .func
+	call CopyHLToDE
+	ret
+
+.func
+	ld a, $02
+	ldh [rSVBK], a
+	ld a, [wSCY]
+	ldh [rSCY], a
+	ld a, [wSCX]
+	ldh [rSCX], a
+	xor a
+	ldh [rVBK], a
+	ld a, HIGH(wVirtualOAM)
+	jp hTransferVirtualOAM
+.func_end
+
+_BestTimeList: ; 158a36 (56:4a36)
+	ld a, [wCollectionRow]
+	and a
+	jr nz, .asm_158a76
+	ld hl, wSCY
+	ld a, [wJoypadDown]
+	bit D_UP_F, a
+	jr nz, .d_up
+	bit D_DOWN_F, a
+	jr nz, .d_down
+
+	; no input
+	ld hl, wCollectionCol
+	inc [hl]
+	ld a, [hl]
+	and a
+	jr nz, .asm_158a5a
+	ld hl, wCollectionRow
+	inc [hl]
+	xor a
+	ld [wColourFadeDiff], a
+.asm_158a5a
+	ld a, [wJoypadPressed]
+	and B_BUTTON | START
+	ret z
+	ld a, $08
+	ld [wSubState], a
+	ret
+.d_up
+	ld a, [hl]
+	and a
+	ret z
+	dec [hl]
+.asm_158a6a
+	xor a
+	ld [wCollectionCol], a
+	ret
+.d_down
+	ld a, [hl]
+	cp $70
+	ret z
+	inc [hl]
+	jr .asm_158a6a
+.asm_158a76
+	call .Func_158ac2
+	ret c
+	ld a, [wColourFadeDiff]
+	and a
+	jr z, .asm_158a8c
+	dec a
+	jr z, .asm_158a9f
+	dec a
+	jr z, .asm_158aa9
+	dec a
+	jr z, .asm_158ab2
+	debug_nop
+
+.asm_158a8c
+	ld hl, wSCY
+	ld a, [hl]
+	cp $70
+	jr nc, .asm_158a96
+	inc [hl]
+	ret
+.asm_158a96
+	xor a
+	ld [wCollectionLinkStateCounter], a
+	ld hl, wColourFadeDiff
+	inc [hl]
+	ret
+
+.asm_158a9f
+	ld hl, wCollectionLinkStateCounter
+	inc [hl]
+	ld a, [hl]
+	cp $b4
+	ret c
+	jr .asm_158a96
+.asm_158aa9
+	ld hl, wSCY
+	ld a, [hl]
+	and a
+	jr z, .asm_158a96
+	dec [hl]
+	ret
+
+.asm_158ab2
+	ld hl, wCollectionLinkStateCounter
+	inc [hl]
+	ld a, [hl]
+	cp $b4
+	ret c
+	xor a
+	ld [wCollectionLinkStateCounter], a
+	ld [wColourFadeDiff], a
+	ret
+
+.Func_158ac2:
+	ld a, [wJoypadPressed]
+	and A_BUTTON | B_BUTTON | START | D_UP | D_DOWN
+	ret z
+	xor a
+	ld [wCollectionRow], a
+	scf
+	ret
+
+PrintBestTimes: ; 158ace (56:4ace)
+	xor a ; LEVEL_OUT_OF_THE_WOODS
+	ld [w2dfff], a
+.loop_levels
+	call .PrintLevelTime
+	ld hl, w2dfff
+	inc [hl]
+	ld a, NUM_LEVELS - 1
+	cp [hl]
+	ret c
+	jr .loop_levels
+
+.PrintLevelTime:
+	ld a, [w2dfff]
+	ld hl, wLevelTimeAttackScores
+	add a
+	ld c, a
+	ld b, $00
+	add hl, bc
+	ld a, [hli]
+	ld d, a    ; minutes
+	ld e, [hl] ; seconds
+	ld b, 2
+	ld hl, w2df00
+.loop_get_tiles
+	and $f0
+	swap a
+	add a
+	add $a0
+	ld [hli], a
+	ld a, d
+	and $0f
+	add a
+	add $a0 ; 0 digit
+	ld [hli], a
+	dec b
+	jr z, .write_tiles
+	ld a, $b6 ; colon
+	ld [hli], a
+	ld d, e
+	ld a, e
+	jr .loop_get_tiles
+
+.write_tiles
+	ld a, [w2dfff]
+	ld hl, .bg_map_address_table
+	call GetPointerFromTableDE
+	ld b, $00
+.loop_write_bg_map
+	ld c, 5 ; num tiles wide
+	ld hl, w2df00
+.loop_write_tiles
+	ld a, [hli]
+	add b
+	ld [de], a
+	inc e
+	dec c
+	jr nz, .loop_write_tiles
+	inc b
+	ld a, b
+	cp 2
+	ret z
+	ld a, BG_MAP_WIDTH - $5
+	add e
+	ld e, a
+	ld a, d
+	adc $00
+	ld d, a
+	jr .loop_write_bg_map
+
+.bg_map_address_table
+	dw v0BGMap0 +  $64 ; LEVEL_OUT_OF_THE_WOODS
+	dw v0BGMap0 +  $a4 ; LEVEL_THE_PEACEFUL_VILLAGE
+	dw v0BGMap0 +  $e4 ; LEVEL_THE_VAST_PLAIN
+	dw v0BGMap0 + $124 ; LEVEL_BANK_OF_THE_WILD_RIVER
+	dw v0BGMap0 + $164 ; LEVEL_THE_TIDAL_COAST
+	dw v0BGMap0 + $1a4 ; LEVEL_SEA_TURTLE_ROCKS
+	dw v0BGMap0 +  $6e ; LEVEL_DESERT_RUINS
+	dw v0BGMap0 +  $ae ; LEVEL_THE_VOLCANOS_BASE
+	dw v0BGMap0 +  $ee ; LEVEL_THE_POOL_OF_RAIN
+	dw v0BGMap0 + $12e ; LEVEL_A_TOWN_IN_CHAOS
+	dw v0BGMap0 + $16e ; LEVEL_BENEATH_THE_WAVES
+	dw v0BGMap0 + $1ae ; LEVEL_THE_WEST_CRATER
+	dw v0BGMap0 + $224 ; LEVEL_THE_GRASSLANDS
+	dw v0BGMap0 + $264 ; LEVEL_THE_BIG_BRIDGE
+	dw v0BGMap0 + $2a4 ; LEVEL_TOWER_OF_REVIVAL
+	dw v0BGMap0 + $2e4 ; LEVEL_THE_STEEP_CANYON
+	dw v0BGMap0 + $324 ; LEVEL_CAVE_OF_FLAMES
+	dw v0BGMap0 + $364 ; LEVEL_ABOVE_THE_CLOUDS
+	dw v0BGMap0 + $22e ; LEVEL_THE_STAGNANT_SWAMP
+	dw v0BGMap0 + $26e ; LEVEL_THE_FRIGID_SEA
+	dw v0BGMap0 + $2ae ; LEVEL_CASTLE_OF_ILLUSIONS
+	dw v0BGMap0 + $2ee ; LEVEL_THE_COLOSSAL_HOLE
+	dw v0BGMap0 + $32e ; LEVEL_THE_WARPED_VOID
+	dw v0BGMap0 + $36e ; LEVEL_THE_EAST_CRATER
+	dw v0BGMap0 + $3ae ; LEVEL_FOREST_OF_FEAR
+
+Pals_158b63: ; 158b63 (56:4b63)
+	rgb 31, 31, 31
+	rgb 31, 20,  0
+	rgb 29,  0,  0
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb 31, 31,  5
+	rgb  0, 10, 25
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb  0, 31, 15
+	rgb 29,  0,  0
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb 31, 31,  5
+	rgb  0,  4, 14
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb 21, 21, 21
+	rgb 10, 10, 10
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb 21, 21, 21
+	rgb 10, 10, 10
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb 21, 21, 21
+	rgb 10, 10, 10
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb 21, 21, 21
+	rgb 10, 10, 10
+	rgb  0,  0,  0

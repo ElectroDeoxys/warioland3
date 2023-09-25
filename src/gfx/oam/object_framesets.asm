@@ -5502,7 +5502,28 @@ Frameset_69b88:: ; 69b88 (1a:5b88)
 	db $ff
 ; 0x69b91
 
-	INCROM $69b91, $69bc3
+	INCROM $69b91, $69ba0
+
+Frameset_69ba0:: ; 69ba0 (1a:5ba0)
+	db $03, 20
+	db $1a,  4
+	db $03,  4
+	db $1a,  4
+	db $03,  4
+	db $1b,  4
+	db $03,  4
+	db $1b,  4
+	db $17,  4
+	db $1b,  4
+	db $17,  4
+	db $1c,  4
+	db $17,  4
+	db $1c,  4
+	db $0c,  4
+	db $1c,  4
+	db $0c, 20
+	db $ff
+; 0x69bc3
 
 Frameset_69bc3:: ; 69bc3 (1a:5bc3)
 	db $09,  4

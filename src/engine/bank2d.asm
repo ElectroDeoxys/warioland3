@@ -1203,22 +1203,22 @@ Func_b4874: ; b4874 (2d:4874)
 	rgb  3,  0,  3
 ; 0xb4887
 
-; sets the ???
+; sets the coords and state
 ; of SceneObj in hl, with params in de
 InitSceneObjParams: ; b4887 (2d:4887)
 	ld a, [de]
-	ld [hli], a
+	ld [hli], a ; y
 	inc de
 	ld a, [de]
-	ld [hli], a
+	ld [hli], a ; x
 	inc l
 	inc l
 	xor a
-	ld [hli], a
-	ld [hli], a
+	ld [hli], a ; duration
+	ld [hli], a ; frameset offset
 	inc de
 	ld a, [de]
-	ld [hl], a
+	ld [hl], a ; state
 	ret
 ; 0xb4895
 
@@ -1297,10 +1297,10 @@ LoadOverworldSmokeGfx: ; b49e2 (2d:49e2)
 
 UpdateCurOWOjAnimation: ; b49fe (2d:49fe)
 	ld b, $2a
-	ld a, [wCurSceneObj + 0]
+	ld a, [wCurSceneObjPtr + 0]
 	ld l, a
 	set 2, l
-	ld a, [wCurSceneObj + 1]
+	ld a, [wCurSceneObjPtr + 1]
 	ld h, a
 	jp UpdateOWAnimation
 ; 0xb4a0d
@@ -1322,18 +1322,18 @@ Func_b4a0d: ; b4a0d (2d:4a0d)
 
 AddCurSceneObjSpriteWithScroll: ; b4a1d (2d:4a1d)
 	ld b, $2a
-	ld a, [wCurSceneObj + 0]
+	ld a, [wCurSceneObjPtr + 0]
 	ld l, a
-	ld a, [wCurSceneObj + 1]
+	ld a, [wCurSceneObjPtr + 1]
 	ld h, a
 	jp AddOWSpriteWithScroll
 ; 0xb4a2a
 
 AddCurSceneObjSprite: ; b4a2a (2d:4a2a)
 	ld b, $2a
-	ld a, [wCurSceneObj + 0]
+	ld a, [wCurSceneObjPtr + 0]
 	ld l, a
-	ld a, [wCurSceneObj + 1]
+	ld a, [wCurSceneObjPtr + 1]
 	ld h, a
 	jp AddOWSprite
 ; 0xb4a37
@@ -1490,7 +1490,7 @@ Func_b4aa9: ; b4aa9 (2d:4aa9)
 Func_b4b99: ; b4b99 (2d:4b99)
 	ld a, c
 	and $f8
-	ld hl, wCurSceneObj
+	ld hl, wCurSceneObjPtr
 	ld [hli], a
 	ld [hl], b
 	ld a, [bc]
@@ -1718,7 +1718,7 @@ Func_b4cbd: ; b4cbd (2d:4cbd)
 Func_b4cc2: ; b4cc2 (2d:4cc2)
 	ld a, c
 	and $f8
-	ld hl, wCurSceneObj
+	ld hl, wCurSceneObjPtr
 	ld [hli], a
 	ld [hl], b
 	ld a, [bc]
@@ -1945,7 +1945,7 @@ Func_b4df6: ; b4df6 (2d:4df6)
 Func_b4dfb: ; b4dfb (2d:4dfb)
 	ld a, c
 	and $f8
-	ld hl, wCurSceneObj
+	ld hl, wCurSceneObjPtr
 	ld [hli], a
 	ld [hl], b
 	ld a, [bc]
@@ -2257,7 +2257,7 @@ Func_b4f9c: ; b4f9c (2d:4f9c)
 Func_b4fa2: ; b4fa2 (2d:4fa2)
 	ld a, c
 	and $f8
-	ld hl, wCurSceneObj
+	ld hl, wCurSceneObjPtr
 	ld [hli], a
 	ld [hl], b
 	ld a, [bc]

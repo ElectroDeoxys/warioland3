@@ -1720,7 +1720,7 @@ wCompassObj:: scene_obj_struct wCompassObj ; d110
 
 	ds $6
 
-wCurSceneObj:: ; d11e
+wCurSceneObjPtr:: ; d11e
 	ds $2
 
 	ds $4
@@ -1806,7 +1806,7 @@ w2d160:: ; d160
 
 	ds $18
 
-w2d180:: scene_obj_struct w2d180 ; d180
+wCurSceneObj:: scene_obj_struct wCurSceneObj ; d180
 
 wSceneObjs::
 wSceneObj1::  scene_obj_struct wSceneObj1  ; d188
@@ -2004,7 +2004,10 @@ wTextBuffer::
 wTileBuffer:: ; dc00
 	ds $20 tiles
 
-	ds $1fd
+	ds $100
+
+w2df00:: ; df00
+	ds $fd
 
 w2dffd:: ; dffd
 	db

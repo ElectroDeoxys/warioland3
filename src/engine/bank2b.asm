@@ -82,7 +82,7 @@ SetObjStateIfAnimationIsFinished: ; ac064 (2b:4064)
 	INCROM $ac074, $ac2b2
 
 Func_ac2b2: ; ac2b2 (2b:42b2)
-	ld bc, w2d180State
+	ld bc, wCurSceneObjState
 	call UpdateTempleSceneObjAnimation
 	ld bc, wSceneObj1State
 	call UpdateTempleSceneObjAnimation
@@ -265,7 +265,7 @@ UpdateTempleSceneObjAnimation: ; ac306 (2b:4306)
 ; 0xac3d9
 
 Func_ac3d9: ; ac3d9 (2b:43d9)
-	ld bc, w2d180State
+	ld bc, wCurSceneObjState
 	call Func_ac409
 	ld bc, wSceneObj1State
 	call Func_ac409
@@ -3099,20 +3099,20 @@ HandleTempleShakeScene: ; ad6f5 (2b:56f5)
 	ld a, [bc]
 	cp 60
 	ret c
-	ld hl, w2d180
+	ld hl, wCurSceneObj
 	ld a, [wSceneWarioYCoord]
 	sub $1c
 	ld [hli], a ; y
 	ld a, [wSceneWarioXCoord]
 	ld [hl], a ; x
 	ld a, $02
-	ld hl, w2d180State
+	ld hl, wCurSceneObjState
 	call SetSceneObjState
 	play_sfx SFX_106
 	jp Func_ad335
 
 .WaitExclamationMark
-	ld a, [w2d180State]
+	ld a, [wCurSceneObjState]
 	and a
 	ret nz
 	jp Func_ad335
@@ -4000,7 +4000,7 @@ Func_ae27a: ; ae27a (2b:627a)
 	ld a, [w2d891]
 	cp $16
 	ret c
-	ld hl, w2d180
+	ld hl, wCurSceneObj
 	ld a, [wSceneWarioYCoord]
 	sub $18
 	ld [hli], a
@@ -4008,14 +4008,14 @@ Func_ae27a: ; ae27a (2b:627a)
 	add $10
 	ld [hl], a
 	ld a, $11
-	ld hl, w2d180State
+	ld hl, wCurSceneObjState
 	call SetSceneObjState
 	play_sfx SFX_106
 	jp Func_ae1ce
 ; 0xae2a2
 
 Func_ae2a2: ; ae2a2 (2b:62a2)
-	ld a, [w2d180State]
+	ld a, [wCurSceneObjState]
 	and a
 	ret nz
 	jp Func_ae1ce
@@ -4243,20 +4243,20 @@ Func_ae3d8: ; ae3d8 (2b:63d8)
 ; 0xae3e2
 
 Func_ae3e2: ; ae3e2 (2b:63e2)
-	ld hl, w2d180
+	ld hl, wCurSceneObj
 	ld a, [wSceneWarioYCoord]
 	sub $08
 	ld [hli], a
 	ld a, [wSceneWarioXCoord]
 	ld [hl], a
 	ld a, $0e
-	ld hl, w2d180State
+	ld hl, wCurSceneObjState
 	call SetSceneObjState
 	jp Func_ae1ce
 ; 0xae3fa
 
 Func_ae3fa: ; ae3fa (2b:63fa)
-	ld a, [w2d180State]
+	ld a, [wCurSceneObjState]
 	and a
 	ret nz
 	ld a, $80
@@ -4265,7 +4265,7 @@ Func_ae3fa: ; ae3fa (2b:63fa)
 ; 0xae407
 
 Func_ae407: ; ae407 (2b:6407)
-	ld hl, w2d180
+	ld hl, wCurSceneObj
 	ld a, [wSceneWarioYCoord]
 	sub $10
 	ld [hli], a
@@ -4273,7 +4273,7 @@ Func_ae407: ; ae407 (2b:6407)
 	add $02
 	ld [hl], a
 	ld a, $15
-	ld hl, w2d180State
+	ld hl, wCurSceneObjState
 	call SetSceneObjState
 
 	ld hl, wTempOBPals
@@ -4291,7 +4291,7 @@ Func_ae407: ; ae407 (2b:6407)
 ; 0xae435
 
 Func_ae435: ; ae435 (2b:6435)
-	ld a, [w2d180State]
+	ld a, [wCurSceneObjState]
 	cp $16
 	ret nz
 	xor a ; SCENEWARIO_NONE
@@ -4305,7 +4305,7 @@ Func_ae442: ; ae442 (2b:6442)
 ; 0xae447
 
 Func_ae447: ; ae447 (2b:6447)
-	ld hl, w2d180
+	ld hl, wCurSceneObj
 	ld a, [hli]
 	cp $b5
 	jr c, .asm_ae45e
@@ -4318,13 +4318,13 @@ Func_ae447: ; ae447 (2b:6447)
 	inc [hl] ; w2d181
 .asm_ae45b
 	dec l
-	dec [hl] ; w2d180
+	dec [hl] ; wCurSceneObj
 	ret
 
 .asm_ae45e
 	inc [hl] ; w2d181
 	dec l
-	dec [hl] ; w2d180
+	dec [hl] ; wCurSceneObj
 	dec [hl]
 	ld a, [hl]
 	cp $a8
@@ -4334,7 +4334,7 @@ Func_ae447: ; ae447 (2b:6447)
 	jp Func_ae1ce
 .asm_ae46d
 	ld a, $17
-	ld hl, w2d180State
+	ld hl, wCurSceneObjState
 	call SetSceneObjState
 	ret
 ; 0xae476
@@ -4344,7 +4344,7 @@ Func_ae476: ; ae476 (2b:6476)
 	ld hl, wSceneObj3State
 	call SetSceneObjState
 	xor a
-	ld hl, w2d180State
+	ld hl, wCurSceneObjState
 	call SetSceneObjState
 	jp Func_ae1ce
 ; 0xae488
@@ -4554,12 +4554,12 @@ Func_ae5b1: ; ae5b1 (2b:65b1)
 	ret c
 	ld a, [wSceneWarioYCoord]
 	sub $01
-	ld [w2d180YCoord], a
+	ld [wCurSceneObjYCoord], a
 	ld a, [wSceneWarioXCoord]
 	add $09
-	ld [w2d180XCoord], a
+	ld [wCurSceneObjXCoord], a
 	ld a, $14
-	ld hl, w2d180State
+	ld hl, wCurSceneObjState
 	call SetSceneObjState
 	jp Func_ae1ce
 ; 0xae5d0
@@ -4851,13 +4851,13 @@ Func_ae724: ; ae724 (2b:6724)
 	call SetSceneWarioState
 	call Func_ae7f8
 .asm_ae77f
-	ld hl, w2d180
+	ld hl, wCurSceneObj
 	ld a, [wSceneWarioYCoord]
 	ld [hli], a
 	ld a, [wSceneWarioXCoord]
 	ld [hl], a
 	ld a, $10
-	ld hl, w2d180State
+	ld hl, wCurSceneObjState
 	call SetSceneObjState
 	jr .asm_ae768
 .asm_ae794
@@ -5014,7 +5014,7 @@ Func_ae86c: ; ae86c (2b:686c)
 ; 0xae871
 
 Func_ae871: ; ae871 (2b:6871)
-	ld hl, w2d180
+	ld hl, wCurSceneObj
 	ld a, [wSceneWarioYCoord]
 	sub $18
 	ld [hli], a
@@ -5022,14 +5022,14 @@ Func_ae871: ; ae871 (2b:6871)
 	add $10
 	ld [hl], a
 	ld a, $11
-	ld hl, w2d180State
+	ld hl, wCurSceneObjState
 	call SetSceneObjState
 	play_sfx SFX_106
 	jp Func_ae1ce
 ; 0xae893
 
 Func_ae893: ; ae893 (2b:6893)
-	ld a, [w2d180State]
+	ld a, [wCurSceneObjState]
 	and a
 	ret nz
 	jp Func_ae1ce

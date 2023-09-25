@@ -2576,9 +2576,42 @@ ClearTempPals_Bank21: ; 84fea (21:4fea)
 	ld bc, 8 palettes
 	call WriteAToHL_BCTimes
 	ret
-; 0x84fff
 
-	INCROM $84fff, $85046
+Func_84fff: ; 84fff (21:4fff)
+	ld a, [wPalConfig1TotalSteps]
+	cp $01
+	jr nc, .asm_85033
+	ld hl, wPalConfig1TotalSteps
+	inc [hl]
+	ld a, HIGH(wTempBGPals)
+	ld [wPalConfig1SourceHi], a
+	ld a, LOW(wTempBGPals)
+	ld [wPalConfig1SourceLo], a
+	ld a, BCPSF_AUTOINC
+	ld [wPalConfig1Index], a
+	ld a, 8
+	ld [wPalConfig1Number], a
+
+	ld a, HIGH(wTempOBPals)
+	ld [wPalConfig2SourceHi], a
+	ld a, LOW(wTempOBPals)
+	ld [wPalConfig2SourceLo], a
+	ld a, OCPSF_AUTOINC
+	ld [wPalConfig2Index], a
+	ld a, 8
+	ld [wPalConfig2Number], a
+	ret
+
+.asm_85033
+	call Func_851d1
+	call Func_851bc
+	ret c
+	xor a
+	ld [wPalConfig1TotalSteps], a
+	ld [w2d014], a
+	ld hl, w2d013
+	inc [hl]
+	ret
 
 Func_85046: ; 85046 (21:5046)
 	ld a, [wPalConfig1TotalSteps]
@@ -2608,7 +2641,7 @@ Func_85046: ; 85046 (21:5046)
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals palette 1)
 	ld [wPalConfig1SourceLo], a
-	ld a, BCPSF_AUTOINC | (1 << 3)
+	ld a, BCPSF_AUTOINC | $8
 	ld [wPalConfig1Index], a
 	ld a, 7
 	ld [wPalConfig1Number], a
@@ -2632,9 +2665,74 @@ Func_85046: ; 85046 (21:5046)
 	ld hl, w2d013
 	inc [hl]
 	ret
-; 0x850b9
 
-	INCROM $850b9, $85145
+Func_850b9: ; 850b9 (21:50b9)
+	ld a, [wPalConfig2TotalSteps]
+	cp $01
+	jr nc, .asm_850ef
+	ld hl, wTempPals2
+	ld de, wTempOBPals
+	ld b, 8 palettes
+	call CopyHLToDE
+	ld a, $ff
+	ld hl, wTempPals2
+	ld bc, 8 palettes
+	call WriteAToHL_BCTimes
+	ld hl, wPalConfig2TotalSteps
+	inc [hl]
+	ld a, HIGH(wTempOBPals)
+	ld [wPalConfig2SourceHi], a
+	ld a, LOW(wTempOBPals)
+	ld [wPalConfig2SourceLo], a
+	ld a, OCPSF_AUTOINC
+	ld [wPalConfig2Index], a
+	ld a, 8
+	ld [wPalConfig2Number], a
+	ret
+
+.asm_850ef
+	call Func_851d1
+	ret c
+	xor a
+	ld [wPalConfig2TotalSteps], a
+	ld [w2d014], a
+	ld hl, w2d013
+	inc [hl]
+	ret
+
+Func_850ff: ; 850ff (21:50ff)
+	ld a, [wPalConfig1TotalSteps]
+	cp $01
+	jr nc, .asm_85135
+	ld hl, wTempPals1 palette 1
+	ld de, wTempBGPals palette 1
+	ld b, 7 palettes
+	call CopyHLToDE
+	ld a, $ff
+	ld hl, wTempPals1 palette 1
+	ld bc, 7 palettes
+	call WriteAToHL_BCTimes
+	ld hl, wPalConfig1TotalSteps
+	inc [hl]
+	ld a, HIGH(wTempBGPals palette 1)
+	ld [wPalConfig1SourceHi], a
+	ld a, LOW(wTempBGPals palette 1)
+	ld [wPalConfig1SourceLo], a
+	ld a, BCPSF_AUTOINC | $8
+	ld [wPalConfig1Index], a
+	ld a, 7
+	ld [wPalConfig1Number], a
+	ret
+
+.asm_85135
+	call Func_851bc
+	ret c
+	xor a
+	ld [wPalConfig1TotalSteps], a
+	ld [w2d014], a
+	ld hl, w2d013
+	inc [hl]
+	ret
 
 Func_85145: ; 85145 (21:5145)
 	ld a, [wPalConfig1TotalSteps]

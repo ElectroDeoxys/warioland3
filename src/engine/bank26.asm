@@ -505,7 +505,7 @@ Func_9a54e: ; 9a54e (26:654e)
 ; 0x9a559
 
 Func_9a559: ; 9a559 (26:6559)
-	ld hl, w2d180
+	ld hl, wCurSceneObj
 	ld bc, $200
 	xor a
 	call WriteAToHL_BCTimes

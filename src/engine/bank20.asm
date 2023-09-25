@@ -833,11 +833,12 @@ OverworldStateTable: ; 80392 (20:4392)
 	dw DarkenBGToPal_Normal
 	dw Func_80d7c
 	dw FadeBGToWhite_Normal
-	dw $4db1
-	dw FadeBGToWhite_Normal
-	dw $4df3
+	dw Func_80db1
+
+	dw FadeBGToWhite_Normal ; SST_OVERWORLD_BEST_TIME_LIST
+	dw InitBestTimeList
 	dw DarkenBGToPal_Normal
-	dw $4e03
+	dw BestTimeList
 
 	dw FadeBGToWhite_Normal ; SST_OVERWORLD_1A
 	dw InitTempleScene
@@ -1921,7 +1922,7 @@ VBlank_80cb1: ; 80cb1 (20:4cb1)
 	push af
 	ld a, b
 	bankswitch
-	ld a, [wPalConfig1]
+	ld a, [wPalConfig1Register]
 	and a
 	call nz, ApplyPalConfig1
 	ld a, [wPalConfig2]
@@ -1964,9 +1965,10 @@ Func_80d92: ; 80d92 (20:4d92)
 	inc [hl]
 	stop_sfx
 	ret
-; 0x80db1
 
-	INCROM $80db1, $80db4
+Func_80db1: ; 80db1 (20:4db1)
+	jp InitOverworld.asm_80480
+; 0x80db4
 
 Func_80db4: ; 80db4 (20:4db4)
 	ld a, c
@@ -1999,12 +2001,19 @@ Func_80de0: ; 80de0 (20:4de0)
 	ld a, [wJoypadPressed]
 	bit START_F, a
 	ret z
-	ld a, SST_OVERWORLD_16
+	ld a, SST_OVERWORLD_BEST_TIME_LIST
 	ld [wSubState], a
 	ret
-; 0x80df3
 
-	INCROM $80df3, $80e13
+InitBestTimeList: ; 80df3 (20:4df3)
+	farcall _InitBestTimeList
+	ret
+; 0x80e03
+
+BestTimeList: ; 80e03 (20:4e03)
+	farcall _BestTimeList
+	ret
+; 0x80e13
 
 InitTempleScene: ; 80e13 (20:4e13)
 	farcall _InitTempleScene
@@ -6476,7 +6485,7 @@ Func_82a79: ; 82a79 (20:6a79)
 	ld [w2d071], a
 	ld [w2d072], a
 	xor a
-	ld hl, w2d180
+	ld hl, wCurSceneObj
 	ld bc, $8
 	call WriteAToHL_BCTimes
 ;	fallthrough
@@ -6639,11 +6648,11 @@ Func_82b7b: ; 82b7b (20:6b7b)
 	cp OW_EXITS
 	jp nc, Func_82a8d
 	ld a, [wConnectedLevel2YCoord]
-	ld [w2d180YCoord], a
+	ld [wCurSceneObjYCoord], a
 	ld a, [wConnectedLevel2XCoord]
-	ld [w2d180XCoord], a
+	ld [wCurSceneObjXCoord], a
 	ld a, $01
-	ld [w2d180State], a
+	ld [wCurSceneObjState], a
 	play_sfx SFX_104
 	ret
 ; 0x82baa
@@ -6662,14 +6671,14 @@ Func_82bb8: ; 82bb8 (20:6bb8)
 	ld a, [wOWCutsceneAction]
 	cp UNLOCK_LEVEL
 	ret nz
-	ld a, [w2d180State]
+	ld a, [wCurSceneObjState]
 	and a
 	ret z
 	ld de, Frameset_aa544
-	ld hl, w2d180Duration
+	ld hl, wCurSceneObjDuration
 	ld b, BANK(Frameset_aa544)
 	call UpdateOWAnimation
-	ld hl, w2d180
+	ld hl, wCurSceneObj
 	ld de, OAM_aa445
 	ld b, BANK(OAM_aa445)
 	call AddOWSpriteWithScroll
@@ -6680,23 +6689,23 @@ Func_82bda: ; 82bda (20:6bda)
 	ld a, [wOWCutsceneAction]
 	cp HIGHLIGHT_LEVEL
 	ret nz
-	ld a, [w2d180State]
+	ld a, [wCurSceneObjState]
 	and a
 	ret z
-	ld hl, w2d180Duration
+	ld hl, wCurSceneObjDuration
 	ld de, Frameset_aa555
 	ld b, BANK(Frameset_aa555)
 	call UpdateOWAnimation
 	ld a, [wOWAnimationFinished]
 	cp $ff
 	jr z, .asm_82c03
-	ld hl, w2d180
+	ld hl, wCurSceneObj
 	ld de, OAM_aa445
 	ld b, BANK(OAM_aa445)
 	call AddOWSpriteWithScroll
 	ret
 .asm_82c03
-	ld hl, w2d180State
+	ld hl, wCurSceneObjState
 	xor a
 	ld [hl], a
 	ret
@@ -6800,10 +6809,10 @@ Func_82c8f: ; 82c8f (20:6c8f)
 Func_82c93: ; 82c93 (20:6c93)
 	ld a, [wConnectedLevel2]
 	ld c, a
-	ld de, w2d180
+	ld de, wCurSceneObj
 	call Func_80db4
 	ld a, $02
-	ld hl, w2d180State
+	ld hl, wCurSceneObjState
 	call SetSceneObjState
 	play_sfx SFX_104
 	jp Func_82c22

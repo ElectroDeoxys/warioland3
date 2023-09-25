@@ -153,19 +153,19 @@ DEF DAYNIGHT_TRANSITION_STEPS EQU 32
 	const SOWFUNC_SUMMON_SNAKE     ; $07
 	const SOWFUNC_EARTHQUAKE       ; $08
 	const SOWFUNC_GREEN_MUSIC_BOX  ; $09
-	const SOWFUNC_EXPLOSIVES       ; $0A
-	const SOWFUNC_FULL_MOON        ; $0B
+	const SOWFUNC_EXPLOSIVES       ; $0a
+	const SOWFUNC_FULL_MOON        ; $0b
 
 	const_def 1
-	const EOWFUNC_FREEZE_SEA ; $01
-	const EOWFUNC_EARTHQUAKE ; $02
-	const EOWFUNC_FORM_CASTLE ; $03
-	const EOWFUNC_EXPLOSIVES ; $04
+	const EOWFUNC_FREEZE_SEA       ; $01
+	const EOWFUNC_EARTHQUAKE       ; $02
+	const EOWFUNC_FORM_CASTLE      ; $03
+	const EOWFUNC_EXPLOSIVES       ; $04
 	const EOWFUNC_VULCANO_ERUPTION ; $05
-	const EOWFUNC_BURN_VINES ; $06
+	const EOWFUNC_BURN_VINES       ; $06
 	const EOWFUNC_SHOW_WARPED_VOID ; $07
-	const EOWFUNC_RAISE_PIPE ; $08
-	const EOWFUNC_DAYTIME ; $09
+	const EOWFUNC_RAISE_PIPE       ; $08
+	const EOWFUNC_DAYTIME          ; $09
 
 ; north connections
 	const_def 1

@@ -79,9 +79,9 @@ Func_9c072: ; 9c072 (27:4072)
 .table
 	dw Func_9c000  ; CUTSCENE_00
 	dw .Func_9c15e ; CUTSCENE_01
-	dw .Func_9c16e ; CUTSCENE_02
-	dw .Func_9c187 ; CUTSCENE_03
-	dw .Func_9c19d ; CUTSCENE_04
+	dw .InitCutscene02 ; CUTSCENE_02
+	dw .InitCutscene03 ; CUTSCENE_03
+	dw .InitCutscene04 ; CUTSCENE_04
 	dw Func_9c000  ; CUTSCENE_05
 	dw .Func_9c1b6 ; CUTSCENE_06
 	dw .Func_9c209 ; CUTSCENE_07
@@ -175,7 +175,7 @@ Func_9c072: ; 9c072 (27:4072)
 	ret
 ; 0x9c16e
 
-.Func_9c16e: ; 9c16e (27:416e)
+.InitCutscene02: ; 9c16e (27:416e)
 	ld b, BANK(Pals_b8200)
 	ld hl, Pals_b8200
 	call LoadFarPalsToTempPals1
@@ -187,7 +187,7 @@ Func_9c072: ; 9c072 (27:4072)
 	jp Func_9cba2
 ; 0x9c187
 
-.Func_9c187: ; 9c187 (27:4187)
+.InitCutscene03: ; 9c187 (27:4187)
 	ld b, BANK(Pals_b8240)
 	ld hl, Pals_b8240
 	call LoadFarPalsToTempPals1
@@ -198,7 +198,7 @@ Func_9c072: ; 9c072 (27:4072)
 	jp Func_9ca84
 ; 0x9c19d
 
-.Func_9c19d: ; 9c19d (27:419d)
+.InitCutscene04: ; 9c19d (27:419d)
 	ld b, BANK(Pals_b8200)
 	ld hl, Pals_b8200
 	call LoadFarPalsToTempPals1
@@ -1282,9 +1282,17 @@ ClearTempPals_Bank27: ; 9cc72 (27:4c72)
 	ld bc, 8 palettes
 	call WriteAToHL_BCTimes
 	ret
-; 0x9cc87
 
-	INCROM $9cc87, $9cc9c
+Func_9cc87: ; 9cc87 (27:4c87)
+	xor a
+	ld hl, wTempBGPals
+	ld bc, 8 palettes
+	call WriteAToHL_BCTimes
+	xor a
+	ld hl, wTempOBPals
+	ld bc, 8 palettes
+	call WriteAToHL_BCTimes
+	ret
 
 VBlank_9cc9c: ; 9cc9c (27:4c9c)
 	ld hl, .Func
@@ -1320,7 +1328,7 @@ VBlank_9cc9c: ; 9cc9c (27:4c9c)
 	push af
 	ld a, b
 	bankswitch
-	ld a, [wPalConfig1]
+	ld a, [wPalConfig1Register]
 	and a
 	call nz, ApplyPalConfig1
 	ld a, [wPalConfig2]
@@ -1336,6 +1344,9 @@ VBlank_9cc9c: ; 9cc9c (27:4c9c)
 .end
 ; 0x9ccf9
 
+; a = state
+; d = y coord
+; e = x coord
 Func_9ccf9: ; 9ccf9 (27:4cf9)
 	ld [hl], d
 	inc l
@@ -1346,7 +1357,7 @@ Func_9ccf9: ; 9ccf9 (27:4cf9)
 	ret
 ; 0x9cd03
 
-Func_9cd03: ; 9cd03 (27:4d03)
+AdvanceCutsceneFunc: ; 9cd03 (27:4d03)
 	ld hl, w2d014
 	xor a
 	ld [hld], a
@@ -1354,16 +1365,16 @@ Func_9cd03: ; 9cd03 (27:4d03)
 	ret
 ; 0x9cd0a
 
-Func_9cd0a: ; 9cd0a (27:4d0a)
+WaitCutsceneFunc: ; 9cd0a (27:4d0a)
 	ld a, [w2d014]
 	cp c
 	ret c
-	jr Func_9cd03
+	jr AdvanceCutsceneFunc
 ; 0x9cd11
 
-Func_9cd11: ; 9cd11 (27:4d11)
-	ld c, $1e
-	jp Func_9cd0a
+StartCutsceneDelay: ; 9cd11 (27:4d11)
+	ld c, 30
+	jp WaitCutsceneFunc
 ; 0x9cd16
 
 Func_9cd16: ; 9cd16 (27:4d16)
@@ -1373,28 +1384,150 @@ Func_9cd16: ; 9cd16 (27:4d16)
 	ret
 ; 0x9cd23
 
-	INCROM $9cd23, $9cd25
-
-Func_9cd25: ; 9cd25 (27:4d25)
+EndCutsceneDelay_20Frames: ; 9cd23 (27:4d23)
+	ld e, 20
+;	fallthrough
+EndCutscene: ; 9cd25 (27:4d25)
 	ld a, [w2d014]
 	cp e
 	ret c
 	jr Func_9cd16
 ; 0x9cd2c
 
-Func_9cd2c: ; 9cd2c (27:4d2c)
-	ld e, $28
-	jr Func_9cd25
-; 0x9cd30
+EndCutsceneDelay_40Frames: ; 9cd2c (27:4d2c)
+	ld e, 40
+	jr EndCutscene
 
-	INCROM $9cd30, $9cd8d
+EndCutsceneDelay_60Frames: ; 9cd30 (27:4d30)
+	ld e, 60
+	jr EndCutscene
+; 0x9cd34
+
+EndCutsceneDelay_80Frames: ; 9cd34 (27:4d34)
+	ld e, 80
+	jr EndCutscene
+; 0x9cd38
+
+EndCutsceneDelay_100Frames: ; 9cd38 (27:4d38)
+	ld e, 100
+	jr EndCutscene
+; 0x9cd3c
+
+EndCutsceneDelay_120Frames: ; 9cd3c (27:4d3c)
+	ld e, 120
+	jr EndCutscene
+; 0x9cd40
+
+Func_9cd40: ; 9cd40 (27:4d40)
+	ld a, HIGH(wTempPals1)
+	ld [wPalConfig1SourceHi], a
+	ld a, LOW(wTempPals1)
+	ld [wPalConfig1SourceLo], a
+	ld a, BCPSF_AUTOINC
+	ld [wPalConfig1Index], a
+	ld a, 8
+	ld [wPalConfig1Number], a
+	ld a, LOW(rBCPS)
+	ld [wPalConfig1Register], a
+	ret
+
+Func_9cd5a: ; 9cd5a (27:4d5a)
+	ld a, HIGH(wTempPals2)
+	ld [wPalConfig2SourceHi], a
+	ld a, LOW(wTempPals2)
+	ld [wPalConfig2SourceLo], a
+	ld a, OCPSF_AUTOINC
+	ld [wPalConfig2Index], a
+	ld a, 8
+	ld [wPalConfig2Number], a
+	ld a, LOW(rOCPS)
+	ld [wPalConfig2Register], a
+	ret
+
+Func_9cd74: ; 9cd74 (27:4d74)
+	push hl
+	ld hl, wTempPals2
+	ld de, wTempOBPals
+	ld b, 8 palettes
+	call CopyHLToDE
+	ld hl, wTempPals1
+	ld de, wTempBGPals
+	ld b, 8 palettes
+	call CopyHLToDE
+	pop hl
+	ret
 
 Func_9cd8d: ; 9cd8d (27:4d8d)
 	farcall Func_85046
 	ret
-; 0x9cd9d
 
-	INCROM $9cd9d, $9ce1f
+Func_9cd9d: ; 9cd9d (27:4d9d)
+	farcall Func_850b9
+	ret
+
+Func_9cdad: ; 9cdad (27:4dad)
+	farcall Func_850ff
+	ret
+
+Func_9cdbd: ; 9cdbd (27:4dbd)
+	farcall Func_84fff
+	ret
+; 0x9cdcd
+
+Func_9cdcd: ; 9cdcd (27:4dcd)
+	ld hl, wCollectionScrollMode
+	inc [hl]
+	ld a, [wCollectionLinkStateCounter]
+	ld c, $fc
+	and a
+	jr z, .asm_9cdfb
+	ld c, $04
+	dec a
+	jr z, .asm_9cdfb
+	ld c, $fd
+	dec a
+	jr z, .asm_9cdfb
+	ld c, $03
+	dec a
+	jr z, .asm_9cdfb
+	ld c, $fe
+	dec a
+	jr z, .asm_9cdfb
+	ld c, $02
+	dec a
+	jr z, .asm_9cdfb
+	ld c, $ff
+	dec a
+	jr z, .asm_9cdfb
+	ld c, $01
+	jr .asm_9ce0c
+.asm_9cdfb
+	ld a, [hl]
+	cp $06
+	ret c
+	ld hl, wSCY
+	ld a, c
+	add [hl]
+	ld [hl], a
+	ld hl, wCollectionScrollMode
+	xor a
+	ld [hld], a
+	inc [hl]
+	ret
+.asm_9ce0c
+	ld a, [hl]
+	cp $06
+	ret c
+	ld hl, wSCY
+	ld a, c
+	add [hl]
+	ld [hl], a
+	ld hl, wCollectionScrollMode
+	xor a
+	ld [hld], a
+	ld [hl], a
+	jp AdvanceCutsceneFunc
+; 0x9ce1f
 
 Func_9ce1f: ; 9ce1f (27:4e1f)
 	play_sfx SFX_112
@@ -1413,45 +1546,45 @@ Func_9ce28: ; 9ce28 (27:4e28)
 	jp nc, .OutOfBoundsCutscene
 	jumptable
 	dw .InvalidCutscene ; CUTSCENE_00
-	dw Func_9cef6 ; CUTSCENE_01
-	dw Func_9d797 ; CUTSCENE_02
-	dw Func_9cf06 ; CUTSCENE_03
-	dw $5b03 ; CUTSCENE_04
+	dw Cutscene01Func ; CUTSCENE_01
+	dw Cutscene02Func ; CUTSCENE_02
+	dw Cutscene03Func ; CUTSCENE_03
+	dw Cutscene04Func ; CUTSCENE_04
 	dw .InvalidCutscene ; CUTSCENE_05
-	dw $502d ; CUTSCENE_06
-	dw $518b ; CUTSCENE_07
-	dw $56de ; CUTSCENE_08
-	dw $56a4 ; CUTSCENE_09
-	dw $510e ; CUTSCENE_0A
+	dw Cutscene06Func ; CUTSCENE_06
+	dw Cutscene07Func ; CUTSCENE_07
+	dw Cutscene08Func ; CUTSCENE_08
+	dw Cutscene09Func ; CUTSCENE_09
+	dw Cutscene0aFunc ; CUTSCENE_0A
 	dw .InvalidCutscene ; CUTSCENE_0B
-	dw $582e ; CUTSCENE_0C
-	dw $58b5 ; CUTSCENE_0D
-	dw $533a ; CUTSCENE_0E
+	dw Cutscene0cFunc ; CUTSCENE_0C
+	dw Cutscene0dFunc ; CUTSCENE_0D
+	dw Cutscene0eFunc ; CUTSCENE_0E
 	dw .InvalidCutscene ; CUTSCENE_0F
-	dw $56e2 ; CUTSCENE_10
-	dw $533a ; CUTSCENE_11
+	dw Cutscene10Func ; CUTSCENE_10
+	dw Cutscene11Func ; CUTSCENE_11
 	dw .InvalidCutscene ; CUTSCENE_12
-	dw $5985 ; CUTSCENE_13
-	dw $6c6c ; CUTSCENE_14
-	dw $5a31 ; CUTSCENE_15
+	dw Cutscene13Func ; CUTSCENE_13
+	dw Cutscene14Func ; CUTSCENE_14
+	dw Cutscene15Func ; CUTSCENE_15
 	dw .InvalidCutscene ; CUTSCENE_16
-	dw $56e6 ; CUTSCENE_17
-	dw $5869 ; CUTSCENE_18
-	dw $527f ; CUTSCENE_19
+	dw Cutscene17Func ; CUTSCENE_17
+	dw Cutscene18Func ; CUTSCENE_18
+	dw Cutscene19Func ; CUTSCENE_19
 	dw .InvalidCutscene ; CUTSCENE_1A
-	dw $5441 ; CUTSCENE_1B
+	dw Cutscene1bFunc ; CUTSCENE_1B
 	dw .InvalidCutscene ; CUTSCENE_1C
-	dw $56ea ; CUTSCENE_1D
-	dw $5569 ; CUTSCENE_1E
-	dw $5c7d ; CUTSCENE_1F
+	dw Cutscene1dFunc ; CUTSCENE_1D
+	dw Cutscene1eFunc ; CUTSCENE_1E
+	dw Cutscene1fFunc ; CUTSCENE_1F
 	dw .InvalidCutscene ; CUTSCENE_20
-	dw $5d03 ; CUTSCENE_21
-	dw $55d7 ; CUTSCENE_22
+	dw Cutscene21Func ; CUTSCENE_21
+	dw Cutscene22Func ; CUTSCENE_22
 	dw .InvalidCutscene ; CUTSCENE_23
-	dw $5b98 ; CUTSCENE_24
-	dw $56ee ; CUTSCENE_25
+	dw Cutscene24Func ; CUTSCENE_24
+	dw Cutscene25Func ; CUTSCENE_25
 	dw .InvalidCutscene ; CUTSCENE_26
-	dw $565e ; CUTSCENE_27
+	dw Cutscene27Func ; CUTSCENE_27
 	dw .InvalidCutscene ; CUTSCENE_28
 	dw .InvalidCutscene ; CUTSCENE_29
 	dw .InvalidCutscene ; CUTSCENE_2A
@@ -1460,47 +1593,47 @@ Func_9ce28: ; 9ce28 (27:4e28)
 	dw .InvalidCutscene ; CUTSCENE_2D
 	dw .InvalidCutscene ; CUTSCENE_2E
 	dw .InvalidCutscene ; CUTSCENE_2F
-	dw $5f0f ; CUTSCENE_30
+	dw Cutscene30Func ; CUTSCENE_30
 	dw .InvalidCutscene ; CUTSCENE_31
 	dw .InvalidCutscene ; CUTSCENE_32
 	dw .InvalidCutscene ; CUTSCENE_33
 	dw .InvalidCutscene ; CUTSCENE_34
 	dw .InvalidCutscene ; CUTSCENE_35
 	dw .InvalidCutscene ; CUTSCENE_36
-	dw $5e07 ; CUTSCENE_37
-	dw $5e48 ; CUTSCENE_38
-	dw $5fcd ; CUTSCENE_39
-	dw $6046 ; CUTSCENE_3A
+	dw Cutscene37Func ; CUTSCENE_37
+	dw Cutscene38Func ; CUTSCENE_38
+	dw Cutscene39Func ; CUTSCENE_39
+	dw Cutscene3aFunc ; CUTSCENE_3A
 	dw .InvalidCutscene ; CUTSCENE_3B
-	dw $6171 ; CUTSCENE_3C
-	dw $6347 ; CUTSCENE_3D
+	dw Cutscene3cFunc ; CUTSCENE_3C
+	dw Cutscene3dFunc ; CUTSCENE_3D
 	dw .InvalidCutscene ; CUTSCENE_3E
 	dw .InvalidCutscene ; CUTSCENE_3F
 	dw .InvalidCutscene ; CUTSCENE_40
 	dw .InvalidCutscene ; CUTSCENE_41
 	dw .InvalidCutscene ; CUTSCENE_42
-	dw $625c ; CUTSCENE_43
-	dw $6aca ; CUTSCENE_44
+	dw Cutscene43Func ; CUTSCENE_43
+	dw Cutscene44Func ; CUTSCENE_44
 	dw .InvalidCutscene ; CUTSCENE_45
 	dw .InvalidCutscene ; CUTSCENE_46
 	dw .InvalidCutscene ; CUTSCENE_47
 	dw .InvalidCutscene ; CUTSCENE_48
-	dw $5a31 ; CUTSCENE_49
-	dw $6451 ; CUTSCENE_4A
+	dw Cutscene49Func ; CUTSCENE_49
+	dw Cutscene4aFunc ; CUTSCENE_4A
 	dw .InvalidCutscene ; CUTSCENE_4B
-	dw $64cf ; CUTSCENE_4C
+	dw Cutscene4cFunc ; CUTSCENE_4C
 	dw .InvalidCutscene ; CUTSCENE_4D
-	dw $654c ; CUTSCENE_4E
-	dw $65ba ; CUTSCENE_4F
+	dw Cutscene4eFunc ; CUTSCENE_4E
+	dw Cutscene4fFunc ; CUTSCENE_4F
 	dw .InvalidCutscene ; CUTSCENE_50
-	dw $666e ; CUTSCENE_51
+	dw Cutscene51Func ; CUTSCENE_51
 	dw .InvalidCutscene ; CUTSCENE_52
 	dw .InvalidCutscene ; CUTSCENE_53
-	dw $62d1 ; CUTSCENE_54
-	dw $695f ; CUTSCENE_55
-	dw $66fd ; CUTSCENE_56
-	dw $67b3 ; CUTSCENE_57
-	dw $6871 ; CUTSCENE_58
+	dw Cutscene54Func ; CUTSCENE_54
+	dw Cutscene55Func ; CUTSCENE_55
+	dw Cutscene56Func ; CUTSCENE_56
+	dw Cutscene57Func ; CUTSCENE_57
+	dw Cutscene58Func ; CUTSCENE_58
 	dw .InvalidCutscene ; CUTSCENE_59
 	dw .InvalidCutscene ; CUTSCENE_5A
 
@@ -1510,20 +1643,19 @@ Func_9ce28: ; 9ce28 (27:4e28)
 .InvalidCutscene
 	debug_nop
 
-Func_9cef6: ; 9cef6 (27:4ef6)
+Cutscene01Func: ; 9cef6 (27:4ef6)
 	farcall Func_adfa3
 	ret
 ; 0x9cf06
 
-Func_9cf06: ; 9cf06 (27:4f06)
-	call Func_9cf0c
+Cutscene03Func: ; 9cf06 (27:4f06)
+	call .Func_9cf0c
 	jp Func_9f0e0
-; 0x9cf0c
 
-Func_9cf0c: ; 9cf0c (27:4f0c)
+.Func_9cf0c:
 	ld a, [w2d013]
 	jumptable
-	dw Func_9cd11
+	dw StartCutsceneDelay
 	dw .Func_9cf36
 	dw .Func_9cf59
 	dw .Func_9cf6c
@@ -1541,7 +1673,7 @@ Func_9cf0c: ; 9cf0c (27:4f0c)
 	dw .Func_9d00a
 	dw .Func_9d015
 	dw Func_9cd8d
-	dw Func_9cd2c
+	dw EndCutsceneDelay_40Frames
 
 .Func_9cf36
 	ld hl, wSceneObj2
@@ -1558,7 +1690,7 @@ Func_9cf0c: ; 9cf0c (27:4f0c)
 	ld a, $02
 	ld hl, wSceneObj3State
 	call SetSceneObjState
-	jp Func_9cd03
+	jp AdvanceCutsceneFunc
 
 .Func_9cf59
 	ld a, [bc]
@@ -1571,11 +1703,11 @@ Func_9cf0c: ; 9cf0c (27:4f0c)
 	ld a, [hl]
 	cp $4f
 	ret nz
-	jp Func_9cd03
+	jp AdvanceCutsceneFunc
 
 .Func_9cf6c
 	ld c, $1e
-	jp Func_9cd0a
+	jp WaitCutsceneFunc
 
 .Func_9cf71
 	ld a, $03
@@ -1586,11 +1718,11 @@ Func_9cf0c: ; 9cf0c (27:4f0c)
 	xor a
 	ld [wSceneObj3State], a
 	play_sfx SFX_062
-	jp Func_9cd03
+	jp AdvanceCutsceneFunc
 
 .Func_9cf8d
 	ld c, $1e
-	jp Func_9cd0a
+	jp WaitCutsceneFunc
 
 .Func_9cf92
 	ld hl, wSceneObj3YCoord
@@ -1601,17 +1733,17 @@ Func_9cf0c: ; 9cf0c (27:4f0c)
 	ld hl, wSceneObj3State
 	call SetSceneObjState
 	play_sfx SFX_106
-	jp Func_9cd03
+	jp AdvanceCutsceneFunc
 
 .Func_9cfad
 	ld a, [wSceneObj3State]
 	and a
 	ret nz
-	jp Func_9cd03
+	jp AdvanceCutsceneFunc
 
 .Func_9cfb5
 	ld c, $3c
-	jp Func_9cd0a
+	jp WaitCutsceneFunc
 
 .Func_9cfba
 	ld a, [bc]
@@ -1622,11 +1754,11 @@ Func_9cf0c: ; 9cf0c (27:4f0c)
 	ld a, [hl]
 	cp $54
 	ret nz
-	jp Func_9cd03
+	jp AdvanceCutsceneFunc
 
 .Func_9cfc9
 	ld c, $3c
-	jp Func_9cd0a
+	jp WaitCutsceneFunc
 
 .Func_9cfce
 	ld a, $04
@@ -1635,11 +1767,11 @@ Func_9cf0c: ; 9cf0c (27:4f0c)
 	ld hl, wSceneObj2XCoord
 	inc [hl]
 	play_sfx SFX_062
-	jp Func_9cd03
+	jp AdvanceCutsceneFunc
 
 .Func_9cfe5
 	ld c, $1e
-	jp Func_9cd0a
+	jp WaitCutsceneFunc
 
 .Func_9cfea
 	ld a, [wSceneObj2YCoord]
@@ -1649,21 +1781,21 @@ Func_9cf0c: ; 9cf0c (27:4f0c)
 	ld a, $06
 	ld hl, wSceneObj3State
 	call SetSceneObjState
-	jp Func_9cd03
+	jp AdvanceCutsceneFunc
 
 .Func_9d001
 	ld a, [wSceneObj3State]
 	cp $07
 	ret nz
-	jp Func_9cd03
+	jp AdvanceCutsceneFunc
 
 .Func_9d00a
 	play_sfx SFX_10C
-	jp Func_9cd03
+	jp AdvanceCutsceneFunc
 
 .Func_9d015
 	ld c, $1e
-	jp Func_9cd0a
+	jp WaitCutsceneFunc
 ; 0x9d01a
 
 Func_9d01a: ; 9d01a (27:501a)
@@ -1675,13 +1807,132 @@ Func_9d01a: ; 9d01a (27:501a)
 	ld hl, wSceneObj2State
 	call SetSceneObjState
 	jp Func_9f11e
-; 0x9d02d
 
-	INCROM $9d02d, $9d0e6
+Cutscene06Func: ; 9d02d (27:502d)
+	call .Func_9d033
+	jp Func_9f11e
+
+.Func_9d033:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9d04b
+	dw .Func_9d071
+	dw .Func_9d076
+	dw .Func_9d071
+	dw .Func_9d09c
+	dw .Func_9d0af
+	dw .Func_9d0bc
+	dw .Func_9d0c1
+	dw EndCutsceneDelay_40Frames
+
+.Func_9d04b:
+	ld a, [bc]
+	cp $01
+	jr z, .asm_9d068
+	ld b, a
+	and $03
+	ret nz
+	ld a, $ff
+	bit 2, b
+	jr nz, .asm_9d05c
+	ld a, $01
+.asm_9d05c
+	ld hl, wSceneObj2YCoord
+	add [hl]
+	ld [hl], a
+	ld a, b
+	cp $20
+	ret c
+	jp AdvanceCutsceneFunc
+.asm_9d068
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $02
+	ldh [$ffb6], a
+	ret
+
+.Func_9d071:
+	ld c, $1e
+	jp WaitCutsceneFunc
+
+.Func_9d076:
+	ld a, [bc]
+	cp $01
+	jr z, .asm_9d093
+	ld b, $ff
+	cp $08
+	jr c, .asm_9d087
+	dec b
+	cp $10
+	jr c, .asm_9d087
+	dec b
+.asm_9d087
+	ld a, b
+	ld hl, wSceneObj2YCoord
+	add [hl]
+	ld [hl], a
+	cp $20
+	ret nc
+	jp AdvanceCutsceneFunc
+.asm_9d093
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $0d
+	ldh [$ffb6], a
+	ret
+
+.Func_9d09c:
+	ld hl, wSceneObj2YCoord
+	ld a, $40
+	ld [hli], a
+	ld [hl], $50
+	ld a, $02
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9d0af:
+	ld a, [wSceneObj2State]
+	cp $03
+	ret nz
+	xor a
+	ld [wColourFadeDiff], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d0bc:
+	ld c, $64
+	jp WaitCutsceneFunc
+
+.Func_9d0c1:
+	call .Func_9d0d3
+	ld a, [bc]
+	and $03
+	ret nz
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	ld a, [hl]
+	cp $28
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9d0d3:
+	ld hl, wColourFadeDiff
+	inc [hl]
+	ld a, [hl]
+	cp $0e
+	ret c
+	xor a
+	ld [hl], a
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $23
+	ldh [$ffb6], a
+	ret
 
 Func_9d0e6: ; 9d0e6 (27:50e6)
 	ld a, $03
-	ld [wSceneObj1], a
+	ld [wSceneObj1YCoord], a
 	ld hl, wSceneObj2
 	ld a, $82
 	ld [hli], a
@@ -1697,9 +1948,56 @@ Func_9d0e6: ; 9d0e6 (27:50e6)
 	ld hl, wSceneObj3State
 	call SetSceneObjState
 	jp Func_9f146
-; 0x9d10e
 
-	INCROM $9d10e, $9d158
+Cutscene0aFunc: ; 9d10e (27:510e)
+	call .Func_9d114
+	jp Func_9f146
+
+.Func_9d114:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9d126
+	dw .Func_9d140
+	dw .Func_9d145
+	dw .Func_9d153
+	dw Func_9cd8d
+	dw EndCutsceneDelay_20Frames
+
+.Func_9d126:
+	ld a, [bc]
+	bit 0, a
+	ret z
+	call .Func_9d133
+	cp $63
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9d133:
+	ld hl, wSceneObj2YCoord
+	ld a, [hl]
+	dec a
+	ld [hli], a
+	dec [hl]
+	ld hl, wSceneObj3YCoord
+	ld [hli], a
+	inc [hl]
+	ret
+
+.Func_9d140:
+	ld c, $32
+	jp WaitCutsceneFunc
+
+.Func_9d145:
+	call .Func_9d133
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $06
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+.Func_9d153:
+	ld c, $1e
+	jp WaitCutsceneFunc
 
 Func_9d158: ; 9d158 (27:5158)
 	ld hl, wSceneObj2
@@ -1726,9 +2024,561 @@ Func_9d158: ; 9d158 (27:5158)
 	ld hl, wSceneObj4State
 	call SetSceneObjState
 	jp Func_9f174
-; 0x9d18b
 
-	INCROM $9d18b, $9d536
+Cutscene07Func: ; 9d18b (27:518b)
+	call .Func_9d191
+	jp Func_9f174
+
+.Func_9d191:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9d1c5
+	dw .Func_9d1e4
+	dw .Func_9d1e9
+	dw .Func_9d1fc
+	dw .Func_9d201
+	dw .Func_9d20c
+	dw .Func_9d211
+	dw .Func_9d21c
+	dw .Func_9d22c
+	dw .Func_9d21c
+	dw .Func_9d22c
+	dw .Func_9d21c
+	dw .Func_9d22c
+	dw .Func_9d21c
+	dw .Func_9d234
+	dw .Func_9d239
+	dw .Func_9d244
+	dw .Func_9d249
+	dw .Func_9d25c
+	dw .Func_9d264
+	dw .Func_9d269
+	dw .Func_9d274
+	dw EndCutsceneDelay_60Frames
+
+.Func_9d1c5:
+	ld a, [bc]
+	cp $14
+	ret c
+	ld hl, wSceneObj5
+	ld a, $5a
+	ld [hli], a
+	ld [hl], $38
+	ld a, $01
+	ld hl, wSceneObj5State
+	call SetSceneObjState
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $62
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d1e4:
+	ld c, $32
+	jp WaitCutsceneFunc
+
+.Func_9d1e9:
+	ld a, $02
+	ld hl, wSceneObj5State
+	call SetSceneObjState
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $62
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d1fc:
+	ld c, $1e
+	jp WaitCutsceneFunc
+
+.Func_9d201:
+	ld a, $04
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9d20c:
+	ld c, $28
+	jp WaitCutsceneFunc
+
+.Func_9d211:
+	ld a, $06
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9d21c:
+	ld a, [wSceneObj2Frame]
+	and a
+	ret nz
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $09
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d22c:
+	ld a, [wSceneObj2Frame]
+	and a
+	ret z
+	jp AdvanceCutsceneFunc
+
+.Func_9d234:
+	ld c, $32
+	jp WaitCutsceneFunc
+
+.Func_9d239:
+	ld a, $05
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9d244:
+	ld c, $28
+	jp WaitCutsceneFunc
+
+.Func_9d249:
+	ld a, $08
+	ld hl, wSceneObj4State
+	call SetSceneObjState
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $35
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d25c:
+	ld a, [wSceneObj4State]
+	and a
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9d264:
+	ld c, $32
+	jp WaitCutsceneFunc
+
+.Func_9d269:
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $0b
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d274:
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	ld a, [hl]
+	cp $18
+	ret nc
+	jp AdvanceCutsceneFunc
+
+Cutscene19Func: ; 9d27f (27:527f)
+	call .Func_9d285
+	jp Func_9f1d8
+
+.Func_9d285: ; 9d285 (27:5285)
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9d2a9
+	dw .Func_9d2bc
+	dw .Func_9d2cc
+	dw .Func_9d2d1
+	dw .Func_9d2e4
+	dw .Func_9d2e9
+	dw .Func_9d2fa
+	dw .Func_9d2ff
+	dw .Func_9d326
+	dw .Func_9d32b
+	dw .Func_9d326
+	dw .Func_9d330
+	dw .Func_9d326
+	dw .Func_9d335
+	dw EndCutsceneDelay_60Frames
+
+.Func_9d2a9:
+	ld hl, wSceneObj2YCoord
+	ld a, $90
+	ld [hli], a
+	ld [hl], $50
+	ld a, $01
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9d2bc:
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	ld a, [hl]
+	cp $86
+	jp z, Func_9ce1f
+	cp $60
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9d2cc:
+	ld c, $5a
+	jp WaitCutsceneFunc
+
+.Func_9d2d1:
+	ld a, $02
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $73
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d2e4:
+	ld c, $1e
+	jp WaitCutsceneFunc
+
+.Func_9d2e9:
+	ld a, [wSceneObj2Frame]
+	cp $04
+	ret nz
+	ld a, $03
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9d2fa:
+	ld c, $3c
+	jp WaitCutsceneFunc
+
+.Func_9d2ff:
+	ld hl, Pals_9fc8b
+.asm_9d302
+	ld de, wTempPals1 palette 2
+	ld b, 1 palettes
+	call CopyHLToDE
+	ld a, HIGH(wTempPals1 palette 2)
+	ld [wPalConfig1SourceHi], a
+	ld a, LOW(wTempPals1 palette 2)
+	ld [wPalConfig1SourceLo], a
+	ld a, BCPSF_AUTOINC | $10
+	ld [wPalConfig1Index], a
+	ld a, 1
+	ld [wPalConfig1Number], a
+	ld a, LOW(rBCPS)
+	ld [wPalConfig1Register], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d326:
+	ld c, $08
+	jp WaitCutsceneFunc
+
+.Func_9d32b:
+	ld hl, Pals_9fc93
+	jr .asm_9d302
+
+.Func_9d330:
+	ld hl, Pals_9fc9b
+	jr .asm_9d302
+
+.Func_9d335:
+	ld hl, Pals_9fca3
+	jr .asm_9d302
+
+Cutscene0eFunc:
+Cutscene11Func:
+	call .Func_9d340
+	jp Func_9f1f3
+
+.Func_9d340:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9d36a
+	dw .Func_9d37a
+	dw .Func_9d392
+	dw .Func_9d3a2
+	dw .Func_9d3a7
+	dw .Func_9d3dc
+	dw .Func_9d3e1
+	dw .Func_9d3f9
+	dw EndCutsceneDelay_60Frames
+
+	dw .Func_9d37a
+	dw .Func_9d392
+	dw .Func_9d3a2
+	dw .Func_9d409
+	dw .Func_9d3dc
+	dw .Func_9d40e
+	dw .Func_9d413
+	dw .Func_9d426
+	dw EndCutsceneDelay_60Frames
+
+.Func_9d36a:
+	ld a, [w2d01e]
+	cp $11
+	jp nz, AdvanceCutsceneFunc
+	ld a, $09
+	ld [w2d013], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d37a:
+	ld hl, wSceneObj2YCoord
+	ld a, $ac
+	ld [hli], a
+	ld [hl], $58
+	ld a, $01
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld a, $01
+	ld [wSceneObj1YCoord], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d392:
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	ld a, [hl]
+	cp $92
+	jp z, Func_9ce1f
+	cp $6c
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9d3a2:
+	ld c, $3c
+	jp WaitCutsceneFunc
+
+.Func_9d3a7:
+	ld hl, Pals_b8040
+.asm_9d3aa
+	ld de, wTempPals1
+	ld c, 8 palettes
+	ld b, BANK(Pals_b8040) ; aka BANK(Pals_b8200)
+	call CopyFarBytes
+	xor a
+	ld [wSceneObj1YCoord], a
+	ld [wSceneObj2State], a
+	ld a, $08
+	ld [wCollectionRow], a
+
+	ld a, HIGH(wTempPals1)
+	ld [wPalConfig1SourceHi], a
+	ld a, LOW(wTempPals1)
+	ld [wPalConfig1SourceLo], a
+	ld a, BCPSF_AUTOINC
+	ld [wPalConfig1Index], a
+	ld a, 8
+	ld [wPalConfig1Number], a
+	ld a, LOW(rBCPS)
+	ld [wPalConfig1Register], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d3dc:
+	ld c, $1e
+	jp WaitCutsceneFunc
+
+.Func_9d3e1:
+	ld hl, wSceneObj2YCoord
+	ld a, $b0
+	ld [hli], a
+	ld [hl], $32
+	ld a, $02
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld a, $03
+	ld [wSceneObj1YCoord], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d3f9:
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	dec [hl]
+	ld a, [hl]
+	cp $74
+	jr z, .asm_9d438
+	cp $68
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9d409:
+	ld hl, Pals_b8200
+	jr .asm_9d3aa
+
+.Func_9d40e:
+	ld c, $1e
+	jp WaitCutsceneFunc
+
+.Func_9d413:
+	ld hl, wSceneObj2YCoord
+	ld a, $a4
+	ld [hli], a
+	ld [hl], $f0
+	ld a, $03
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9d426:
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	dec [hl]
+	ld a, [hli]
+	inc [hl]
+	inc [hl]
+	cp $70
+	jr z, .asm_9d438
+	cp $64
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.asm_9d438
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $13
+	ldh [$ffb6], a
+	ret
+; 0x9d441
+
+Cutscene1bFunc: ; 9d441 (27:5441)
+	call .Func_9d44a
+	call Func_9f225
+	jp Func_9f244
+
+.Func_9d44a:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9d46c
+	dw .Func_9d48f
+	dw .Func_9d4ae
+	dw Func_9cd9d
+	dw .Func_9d4b3
+	dw Func_9cdad
+	dw .Func_9d4b8
+	dw .Func_9d4bd
+	dw .Func_9d4ec
+	dw .Func_9d4ff
+	dw .Func_9d504
+	dw .Func_9d51d
+	dw .Func_9d531
+	dw EndCutsceneDelay_120Frames
+
+.Func_9d46c:
+	ld hl, wSceneObj2YCoord
+	ld a, $32
+	ld [hli], a
+	ld [hl], $50
+	ld a, $01
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld hl, wSceneObj3YCoord
+	ld a, $82
+	ld [hli], a
+	ld [hl], $50
+	ld a, $02
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9d48f:
+	ld a, [bc]
+	bit 0, a
+	ret z
+	call .Func_9d4a4
+	cp $5a
+	ret nz
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $62
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d4a4:
+	ld hl, wSceneObj2YCoord
+	inc [hl]
+	ld a, [hl]
+	ld hl, wSceneObj3YCoord
+	dec [hl]
+	ret
+
+.Func_9d4ae:
+	ld c, $5a
+	jp WaitCutsceneFunc
+
+.Func_9d4b3:
+	ld c, $08
+	jp WaitCutsceneFunc
+
+.Func_9d4b8:
+	ld c, $3c
+	jp WaitCutsceneFunc
+
+.Func_9d4bd:
+	xor a
+	ld [wSceneObj2State], a
+	ld [wSceneObj3State], a
+
+	ld b, BANK(Pals_b8340)
+	ld c, 8 palettes
+	ld hl, Pals_b8340
+	ld de, wTempPals1
+	call CopyFarBytes
+	call Func_9cd40
+
+	ld b, BANK(Pals_b8340)
+	ld c, 8 palettes
+	ld hl, Pals_b8340
+	ld de, wTempPals2
+	call CopyFarBytes
+	call Func_9cd5a
+
+	ld a, $08
+	ld [wCollectionRow], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d4ec:
+	ld hl, wSceneObj5
+	ld a, $20
+	ld [hli], a
+	ld [hl], $50
+	ld a, $02
+	ld hl, wSceneObj5State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9d4ff:
+	ld c, $14
+	jp WaitCutsceneFunc
+
+.Func_9d504:
+	ld b, $03
+	ld hl, wSceneObj5
+	ld a, [hl]
+	cp $44
+	jr c, .asm_9d510
+	ld b, $07
+.asm_9d510
+	ld a, [w2d014]
+	and b
+	ret nz
+	inc [hl]
+	ld a, [hl]
+	cp $4e
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9d51d:
+	ld a, [bc]
+	cp $1e
+	ret c
+	ld a, $01
+	ld hl, wSceneObj5State
+	call SetSceneObjState
+	ld hl, wSceneObj5
+	add [hl]
+	ld [hl], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d531:
+	ld c, $64
+	jp WaitCutsceneFunc
 
 Func_9d536: ; 9d536 (27:5536)
 	ld hl, wSceneObj2
@@ -1753,9 +2603,141 @@ Func_9d536: ; 9d536 (27:5536)
 	ld hl, wSceneObj4State
 	call SetSceneObjState
 	jp Func_9f2a2
-; 0x9d569
 
-	INCROM $9d569, $9d64b
+Cutscene1eFunc: ; 9d569 (27:5569)
+	call .Func_9d56f
+	jp Func_9f2a2
+
+.Func_9d56f:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9d589
+	dw .Func_9d58e
+	dw .Func_9d5a1
+	dw .Func_9d5a6
+	dw .Func_9d5b9
+	dw .Func_9d5be
+	dw .Func_9d5c7
+	dw .Func_9d5d2
+	dw Func_9cd8d
+	dw Func_9cd16
+
+.Func_9d589:
+	ld c, $0f
+	jp WaitCutsceneFunc
+
+.Func_9d58e:
+	ld hl, wSceneObj3YCoord
+	inc [hl]
+	ld a, [hl]
+	cp $3b
+	ret nz
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $2f
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d5a1:
+	ld c, $3c
+	jp WaitCutsceneFunc
+
+.Func_9d5a6:
+	ld a, $01
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $0e
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d5b9:
+	ld c, $46
+	jp WaitCutsceneFunc
+
+.Func_9d5be:
+	ld a, [wSceneObj2Frame]
+	cp $03
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9d5c7:
+	ld a, $05
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9d5d2:
+	ld c, $1e
+	jp WaitCutsceneFunc
+
+Cutscene22Func: ; 9d5d7 (27:55d7)
+	call .Func_9d5dd
+	jp Func_9f2cd
+
+.Func_9d5dd:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9d5f1
+	dw Func_9cdbd
+	dw .Func_9d611
+	dw .Func_9d616
+	dw .Func_9d631
+	dw .Func_9d642
+	dw EndCutsceneDelay_20Frames
+
+.Func_9d5f1:
+	ld hl, Pals_b8100
+	ld de, wTempPals1
+	ld c, 8 palettes
+	ld b, BANK(Pals_b8100)
+	call CopyFarBytes
+
+	ld hl, Pals_b8d00
+	ld de, wTempPals2
+	ld c, 8 palettes
+	ld b, BANK(Pals_b8d00)
+	call CopyFarBytes
+	call Func_9cc87
+	jp AdvanceCutsceneFunc
+
+.Func_9d611:
+	ld c, $2d
+	jp WaitCutsceneFunc
+
+.Func_9d616:
+	ld hl, wSceneObj2YCoord
+	ld a, $4c
+	ld [hli], a
+	ld [hl], $53
+	ld a, $01
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $03
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d631:
+	ld a, [wSceneObj2Frame]
+	cp $05
+	ret nz
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $07
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d642:
+	ld a, [wSceneObj2State]
+	cp $02
+	ret nz
+	jp AdvanceCutsceneFunc
+; 0x9d64b
 
 Func_9d64b: ; 9d64b (27:564b)
 	ld hl, wSceneObj2
@@ -1766,19 +2748,217 @@ Func_9d64b: ; 9d64b (27:564b)
 	ld hl, wSceneObj2State
 	call SetSceneObjState
 	jp Func_9f2f3
-; 0x9d65e
 
-	INCROM $9d65e, $9d797
+Cutscene27Func: ; 9d65e (27:565e)
+	call .Func_9d664
+	jp Func_9f2f3
 
-Func_9d797: ; 9d797 (27:5797)
-	call Func_9d79d
-	jp Func_9fc58
-; 0x9d79d
-
-Func_9d79d: ; 9d79d (27:579d)
+.Func_9d664:
 	ld a, [w2d013]
 	jumptable
-	dw Func_9cd11
+	dw StartCutsceneDelay
+	dw .Func_9d674
+	dw .Func_9d687
+	dw .Func_9d68c
+	dw .Func_9d69f
+	dw Func_9cd16
+
+.Func_9d674:
+	ld a, $02
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $62
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d687:
+	ld c, $32
+	jp WaitCutsceneFunc
+
+.Func_9d68c:
+	ld a, $03
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $62
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d69f:
+	ld c, $b4
+	jp WaitCutsceneFunc
+
+Cutscene09Func: ; 9d6a4 (27:56a4)
+	call .Func_9d6aa
+	jp Func_9fbfa
+
+.Func_9d6aa:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9d6b6
+	dw .Func_9d6ce
+	dw EndCutsceneDelay_60Frames
+
+.Func_9d6b6:
+	ld hl, wSceneObj2YCoord
+	ld a, $b0
+	ld [hli], a
+	ld [hl], $4a
+	ld a, $01
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld a, $01
+	ld [wSceneObj1YCoord], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d6ce:
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	ld a, [hl]
+	cp $88
+	jp z, Func_9ce1f
+	cp $62
+	ret nz
+	jp AdvanceCutsceneFunc
+
+Cutscene08Func: ; 9d6de (27:56de)
+	ld b, $01
+	jr Func_9d6f0
+
+Cutscene10Func: ; 9d6e2 (27:56e2)
+	ld b, $03
+	jr Func_9d6f0
+
+Cutscene17Func: ; 9d6e6 (27:56e6)
+	ld b, $05
+	jr Func_9d6f0
+
+Cutscene1dFunc: ; 9d6ea (27:56ea)
+	ld b, $07
+	jr Func_9d6f0
+
+Cutscene25Func: ; 9d6ee (27:56ee)
+	ld b, $09
+;	fallthrough
+
+Func_9d6f0: ; 9d6f0 (27:56f0)
+	call .Func_9d6f6
+	jp Func_9fc1d
+
+.Func_9d6f6:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9d70c
+	dw .Func_9d723
+	dw .Func_9d733
+	dw .Func_9d738
+	dw .Func_9d744
+	dw .Func_9d749
+	dw .Func_9d792
+	dw EndCutsceneDelay_80Frames
+
+.Func_9d70c:
+	ld hl, wSceneObj2YCoord
+	ld a, $b0
+	ld [hli], a
+	ld [hl], $4a
+	ld a, b
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld a, $01
+	ld [wSceneObj1YCoord], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d723:
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	ld a, [hl]
+	cp $88
+	jp z, Func_9ce1f
+	cp $62
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9d733:
+	ld c, $1e
+	jp WaitCutsceneFunc
+
+.Func_9d738:
+	ld hl, wSceneObj2State
+	ld a, [hl]
+	ld b, a
+	inc a
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9d744:
+	ld c, $32
+	jp WaitCutsceneFunc
+
+.Func_9d749:
+	call AdvanceCutsceneFunc
+	ld a, [wSceneObj2State]
+	dec a
+	cp $01
+	jr z, .asm_9d765
+	cp $03
+	jr z, .asm_9d76e
+	cp $05
+	jr z, .asm_9d777
+	cp $07
+	jr z, .asm_9d780
+	cp $09
+	jr z, .asm_9d789
+	ret
+.asm_9d765
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $1e
+	ldh [$ffb6], a
+	ret
+.asm_9d76e
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $1f
+	ldh [$ffb6], a
+	ret
+.asm_9d777
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $20
+	ldh [$ffb6], a
+	ret
+.asm_9d780
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $21
+	ldh [$ffb6], a
+	ret
+.asm_9d789
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $22
+	ldh [$ffb6], a
+	ret
+
+.Func_9d792:
+	ld c, $fe
+	jp WaitCutsceneFunc
+; 0x9d797
+
+Cutscene02Func: ; 9d797 (27:5797)
+	call .Func_9d79d
+	jp Func_9fc58
+
+.Func_9d79d:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
 	dw .Func_9d7b7
 	dw .Func_9d7cf
 	dw .Func_9d7e1
@@ -1788,7 +2968,7 @@ Func_9d79d: ; 9d79d (27:579d)
 	dw .Func_9d806
 	dw .Func_9d80b
 	dw .Func_9d826
-	dw Func_9cd2c
+	dw EndCutsceneDelay_40Frames
 
 .Func_9d7b7
 	ld hl, wSceneObj2
@@ -1800,7 +2980,7 @@ Func_9d79d: ; 9d79d (27:579d)
 	call SetSceneObjState
 	ld a, $03
 	ld [wSceneObj1YCoord], a
-	jp Func_9cd03
+	jp AdvanceCutsceneFunc
 
 .Func_9d7cf
 	ld hl, wSceneObj2
@@ -1812,20 +2992,20 @@ Func_9d79d: ; 9d79d (27:579d)
 	jp z, Func_9ce1f
 	cp $60
 	ret nz
-	jp Func_9cd03
+	jp AdvanceCutsceneFunc
 
 .Func_9d7e1
 	ld c, $1e
-	jp Func_9cd0a
+	jp WaitCutsceneFunc
 
 .Func_9d7e6
 	ld a, LCDCF_BG9C00
 	ld [wLCDCFlagsToFlip], a
-	jp Func_9cd03
+	jp AdvanceCutsceneFunc
 
 .Func_9d7ee
 	ld c, $3c
-	jp Func_9cd0a
+	jp WaitCutsceneFunc
 
 .Func_9d7f3
 	ld a, LCDCF_BG9C00
@@ -1835,11 +3015,11 @@ Func_9d79d: ; 9d79d (27:579d)
 	call SetSceneObjState
 	xor a
 	ld [wSceneObj1YCoord], a
-	jp Func_9cd03
+	jp AdvanceCutsceneFunc
 
 .Func_9d806
 	ld c, $10
-	jp Func_9cd0a
+	jp WaitCutsceneFunc
 
 .Func_9d80b
 	ld hl, wSceneObj2
@@ -1850,16 +3030,304 @@ Func_9d79d: ; 9d79d (27:579d)
 	ld hl, wSceneObj2State
 	call SetSceneObjState
 	play_sfx SFX_101
-	jp Func_9cd03
+	jp AdvanceCutsceneFunc
 
 .Func_9d826
 	ld a, [wSceneObj2State]
 	and a
 	ret nz
-	jp Func_9cd03
-; 0x9d82e
+	jp AdvanceCutsceneFunc
 
-	INCROM $9d82e, $9da0e
+Cutscene0cFunc: ; 9d82e (27:582e)
+	call .Func_9d834
+	jp Func_9f323
+
+.Func_9d834:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9d840
+	dw .Func_9d858
+	dw EndCutsceneDelay_60Frames
+
+.Func_9d840:
+	ld hl, wSceneObj2YCoord
+	ld a, $a4
+	ld [hli], a
+	ld [hl], $78
+	ld a, $01
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld a, $03
+	ld [wSceneObj1YCoord], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d858:
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	ld a, [hli]
+	dec [hl]
+	cp $8a
+	jp z, Func_9ce1f
+	cp $64
+	ret nz
+	jp AdvanceCutsceneFunc
+; 0x9d869
+
+Cutscene18Func: ; 9d869 (27:5869)
+	call .Func_9d86f
+	jp Func_9f1f3
+
+.Func_9d86f:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9d87f
+	dw .Func_9d897
+	dw .Func_9d8a8
+	dw .Func_9d8ad
+	dw EndCutsceneDelay_60Frames
+
+.Func_9d87f:
+	ld hl, wSceneObj2YCoord
+	ld a, $a4
+	ld [hli], a
+	ld [hl], $70
+	ld a, $04
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld a, $03
+	ld [wSceneObj1YCoord], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d897:
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	ld a, [hli]
+	dec [hl]
+	cp $8a
+	jp z, Func_9ce1f
+	cp $64
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9d8a8:
+	ld c, $14
+	jp WaitCutsceneFunc
+
+.Func_9d8ad:
+	ld a, $08
+	ld [wCollectionRow], a
+	jp AdvanceCutsceneFunc
+; 0x9d8b5
+
+Cutscene0dFunc: ; 9d8b5 (27:58b5)
+	call .Func_9d8bb
+	jp Func_9f340
+
+.Func_9d8bb:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9d8d9
+	dw .Func_9d8ec
+	dw .Func_9d8fc
+	dw .Func_9d901
+	dw .Func_9d909
+	dw .Func_9d90e
+	dw .Func_9d929
+	dw .Func_9d94c
+	dw .Func_9d929
+	dw .Func_9d973
+	dw .Func_9d980
+	dw EndCutsceneDelay_20Frames
+
+.Func_9d8d9:
+	ld hl, wSceneObj2YCoord
+	ld a, $9c
+	ld [hli], a
+	ld [hl], $48
+	ld a, $01
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9d8ec:
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	ld a, [hl]
+	cp $7a
+	jp z, Func_9ce1f
+	cp $54
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9d8fc:
+	ld c, $14
+	jp WaitCutsceneFunc
+
+.Func_9d901:
+	ld a, $08
+	ld [wCollectionRow], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d909:
+	ld c, $3c
+	jp WaitCutsceneFunc
+
+.Func_9d90e:
+	ld hl, wSceneObj3YCoord
+	ld a, $58
+	ld [hli], a
+	ld [hl], $40
+	ld a, $02
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $17
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d929:
+	ld a, [bc]
+	bit 0, a
+	ret z
+	ld hl, wSceneObj3XCoord
+	dec [hl]
+	ld a, [hl]
+	cp $1c
+	ret nz
+	xor a
+	ld [wSceneObj3State], a
+	ld hl, wSceneObj4YCoord
+	ld a, $50
+	ld [hli], a
+	ld [hl], $3c
+	ld a, $03
+	ld hl, wSceneObj4State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9d94c:
+	call .Func_9d967
+	ret nz
+	xor a
+	ld [wSceneObj4State], a
+	ld hl, wSceneObj3YCoord
+	ld a, $58
+	ld [hli], a
+	ld [hl], $40
+	ld a, $02
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9d967:
+	ld a, [bc]
+	bit 0, a
+	ret nz
+	ld hl, wSceneObj4XCoord
+	dec [hl]
+	ld a, [hl]
+	cp $18
+	ret
+
+.Func_9d973:
+	call .Func_9d967
+	cp $18
+	ret nz
+	xor a
+	ld [wSceneObj4State], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d980:
+	ld c, $50
+	jp WaitCutsceneFunc
+; 0x9d985
+
+Cutscene13Func: ; 9d985 (27:5985)
+	call .Func_9d98b
+	jp Func_9f367
+
+.Func_9d98b:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9d9a1
+	dw .Func_9d9c5
+	dw .Func_9d9d8
+	dw .Func_9d9e5
+	dw .Func_9d9f4
+	dw .Func_9d9f9
+	dw Func_9cdcd
+	dw EndCutsceneDelay_40Frames
+
+.Func_9d9a1:
+	ld hl, wSceneObj2YCoord
+	ld a, $b0
+	ld [hli], a
+	ld [hl], $48
+	ld a, $01
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld a, [wSceneObj2YCoord]
+	ld [wSceneObj3YCoord], a
+	ld a, [wSceneObj2XCoord]
+	ld [wSceneObj3XCoord], a
+	ld a, $01
+	ld [wSceneObj1YCoord], a
+	jp AdvanceCutsceneFunc
+
+.Func_9d9c5:
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	ld a, [hl]
+	ld [wSceneObj3YCoord], a
+	cp $86
+	jp z, Func_9ce1f
+	cp $60
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9d9d8:
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	ld a, [hl]
+	cp $40
+	ret nc
+	ld [hl], $40
+	jp AdvanceCutsceneFunc
+
+.Func_9d9e5:
+	ld a, [bc]
+	bit 0, a
+	ret z
+	ld hl, wSceneObj3YCoord
+	inc [hl]
+	ld a, [hl]
+	cp $90
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9d9f4:
+	ld c, $1e
+	jp WaitCutsceneFunc
+
+.Func_9d9f9:
+	ld hl, wSceneObj2YCoord
+	inc [hl]
+	inc [hl]
+	inc [hl]
+	ld a, [hl]
+	cp $b0
+	ret c
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $61
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+; 0x9da0e
 
 Func_9da0e: ; 9da0e (27:5a0e)
 	ld a, $05
@@ -1879,7 +3347,209 @@ Func_9da0e: ; 9da0e (27:5a0e)
 	jp Func_9f38d
 ; 0x9da31
 
-	INCROM $9da31, $9db85
+Cutscene15Func:
+Cutscene49Func:
+	call .Func_9da37
+	jp Func_9f38d
+
+.Func_9da37:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9da4d
+	dw .Func_9da52
+	dw .Func_9da65
+	dw .Func_9da7c
+	dw .Func_9da8b
+	dw .Func_9dac4
+	dw .Func_9dac9
+	dw EndCutsceneDelay_40Frames
+
+.Func_9da4d:
+	ld c, $14
+	jp WaitCutsceneFunc
+
+.Func_9da52:
+	ld a, $01
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld hl, wSceneObj2YCoord
+	ld a, $00
+	ld [hli], a
+	ld [hl], $50
+	jp AdvanceCutsceneFunc
+
+.Func_9da65:
+	ld a, [bc]
+	bit 0, a
+	ret nz
+	ld hl, wSceneObj2YCoord
+	inc [hl]
+	ld a, [hl]
+	cp $45
+	ret nz
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $62
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9da7c:
+	ld a, [bc]
+	cp $14
+	ret c
+	ld a, $04
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9da8b:
+	ld a, [wSceneObj2State]
+	cp $01
+	jr z, .asm_9daa6
+	ld a, [wSceneObj2Frame]
+	cp $03
+	ret nz
+	ld a, [wSceneObj2Duration]
+	and a
+	ret nz
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $2c
+	ldh [$ffb6], a
+	ret
+.asm_9daa6
+	ld a, $02
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld a, $03
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	ld hl, wSceneObj2YCoord
+	ld a, [hli]
+	ld [wSceneObj3YCoord], a
+	ld a, [hl]
+	ld [wSceneObj3XCoord], a
+	jp AdvanceCutsceneFunc
+
+.Func_9dac4:
+	ld c, $28
+	jp WaitCutsceneFunc
+
+.Func_9dac9:
+	call .Func_9daf0
+	ld a, [bc]
+	and $07
+	ret nz
+	ld hl, w2d023
+	inc [hl]
+	ld hl, wSceneObj5XCoord
+	inc [hl]
+	ld hl, wSceneObj3XCoord
+	inc [hl]
+	ld hl, wSCX
+	inc [hl]
+	ld hl, wSceneObj4XCoord
+	dec [hl]
+	ld a, [hl]
+	ld hl, wSceneObj2XCoord
+	dec [hl]
+	ld a, [hl]
+	cp $40
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9daf0:
+	ld hl, wSceneObj4Unk7
+	inc [hl]
+	ld a, [hl]
+	cp $11
+	ret c
+	xor a
+	ld [hl], a
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $1f
+	ldh [$ffb6], a
+	ret
+; 0x9db03
+
+Cutscene04Func: ; 9db03 (27:5b03)
+	call .Func_9db09
+	jp Func_9f3cd
+
+.Func_9db09:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9db1b
+	dw .Func_9db32
+	dw .Func_9db46
+	dw .Func_9db5d
+	dw .Func_9db71
+	dw EndCutsceneDelay_60Frames
+
+.Func_9db1b:
+	ld a, [bc]
+	cp $14
+	ret c
+	ld hl, wSceneObj2YCoord
+	ld a, $80
+	ld [hli], a
+	ld [hl], $50
+	ld a, $02
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9db32:
+	ld hl, wSceneObj2
+	call .Func_9db43
+	cp $70
+	jp z, Func_9ce1f
+	cp $4a
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9db43:
+	dec [hl]
+	ld a, [hl]
+	ret
+
+.Func_9db46:
+	ld a, [bc]
+	cp $32
+	ret c
+	ld hl, wSceneObj3YCoord
+	ld a, $80
+	ld [hli], a
+	ld [hl], $50
+	ld a, $03
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9db5d:
+	ld hl, wSceneObj3
+	call .Func_9db43
+	cp $4a
+	ret nz
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $13
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9db71:
+	ld a, $01
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	xor a
+	ld [wSceneObj3State], a
+	ld a, $08
+	ld [wCollectionRow], a
+	jp AdvanceCutsceneFunc
+; 0x9db85
 
 Func_9db85: ; 9db85 (27:5b85)
 	ld hl, wSceneObj2
@@ -1892,7 +3562,100 @@ Func_9db85: ; 9db85 (27:5b85)
 	jp Func_9f3ee
 ; 0x9db98
 
-	INCROM $9db98, $9dc6a
+Cutscene24Func: ; 9db98 (27:5b98)
+	call .Func_9db9e
+	jp Func_9f3ee
+
+.Func_9db9e:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9dbb2
+	dw .Func_9dbc9
+	dw .Func_9dbe5
+	dw .Func_9dbf8
+	dw .Func_9dbfd
+	dw .Func_9dc63
+	dw EndCutsceneDelay_40Frames
+
+.Func_9dbb2:
+	ld a, [bc]
+	cp $28
+	ret c
+	ld hl, wSceneObj3YCoord
+	ld a, $46
+	ld [hli], a
+	ld [hl], $10
+	ld a, $02
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9dbc9:
+	ld hl, wSceneObj3XCoord
+	inc [hl]
+	ld a, [hl]
+	cp $30
+	jr z, .asm_9dbdc
+	cp $a0
+	ret nz
+	xor a
+	ld [wSceneObj3State], a
+	jp AdvanceCutsceneFunc
+.asm_9dbdc
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $28
+	ldh [$ffb6], a
+	ret
+
+.Func_9dbe5:
+	ld a, [bc]
+	cp $46
+	ret c
+	ld hl, wSceneObj2YCoord
+	inc [hl]
+	ld a, $03
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9dbf8:
+	ld c, $28
+	jp WaitCutsceneFunc
+
+.Func_9dbfd:
+	ld hl, w2d014
+	call .Func_9dc0e
+	ld hl, wSceneObj2YCoord
+	add [hl]
+	ld [hl], a
+	cp $88
+	ret c
+	jp AdvanceCutsceneFunc
+
+.Func_9dc0e:
+	ld a, [hl]
+	cp $44
+	jr c, .asm_9dc16
+	ld a, $40
+	ld [hl], a
+.asm_9dc16
+	ld e, a
+	ld d, $00
+	ld hl, .data_9dc1f
+	add hl, de
+	ld a, [hl]
+	ret
+
+.data_9dc1f
+	db $01, $00, $00, $00, $01, $00, $00, $00, $01, $00, $00, $00, $01, $00, $00, $00, $01, $00, $00, $00, $01, $00, $00, $00, $01, $00, $00, $00, $01, $00, $00, $00, $01, $00, $00, $00, $01, $00, $00, $00, $01, $00, $00, $00, $01, $00, $00, $00, $01, $00, $01, $00, $01, $00, $01, $00, $01, $00, $01, $00, $01, $00, $01, $00, $01, $01, $01, $01
+
+.Func_9dc63:
+	xor a
+	ld [wSceneObj2State], a
+	jp AdvanceCutsceneFunc
+; 0x9dc6a
 
 Func_9dc6a: ; 9dc6a (27:5c6a)
 	ld hl, wSceneObj3
@@ -1903,9 +3666,389 @@ Func_9dc6a: ; 9dc6a (27:5c6a)
 	ld hl, wSceneObj3State
 	call SetSceneObjState
 	jp Func_9f423
-; 0x9dc7d
 
-	INCROM $9dc7d, $9ded4
+Cutscene1fFunc: ; 9dc7d (27:5c7d)
+	call .Func_9dc83
+	jp Func_9f423
+
+.Func_9dc83:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9dc99
+	dw .Func_9dcac
+	dw .Func_9dcca
+	dw .Func_9dcd5
+	dw .Func_9dce4
+	dw .Func_9dcf5
+	dw .Func_9dcfe
+	dw EndCutsceneDelay_120Frames
+
+.Func_9dc99:
+	ld hl, wSceneObj2YCoord
+	ld a, $24
+	ld [hli], a
+	ld [hl], $2a
+	ld a, $01
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9dcac:
+	ld a, [bc]
+	bit 0, a
+	ret z
+	ld hl, wSceneObj2YCoord
+	inc [hl]
+	inc l
+	inc [hl]
+	ld a, [hl]
+	cp $2e
+	jr z, .asm_9dcc1
+	cp $4a
+	ret nz
+	jp AdvanceCutsceneFunc
+.asm_9dcc1
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $1d
+	ldh [$ffb6], a
+	ret
+
+.Func_9dcca:
+	ld a, [bc]
+	cp $46
+	ret c
+	xor a
+	ld [wSceneObj2State], a
+	jp AdvanceCutsceneFunc
+
+.Func_9dcd5:
+	ld a, [bc]
+	cp $1e
+	ret c
+	ld a, $02
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9dce4:
+	ld a, [wSceneObj3Frame]
+	cp $0a
+	ret nz
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $3b
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9dcf5:
+	ld a, [wSceneObj3State]
+	cp $03
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9dcfe:
+	ld c, $28
+	jp WaitCutsceneFunc
+
+Cutscene21Func: ; 9dd03 (27:5d03)
+	call .Func_9dd09
+	jp Func_9f49c
+
+.Func_9dd09:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9dd60
+	dw .Func_9dd8b
+	dw .Func_9dd9c
+	dw .Func_9dda1
+	dw .Func_9dda9
+	dw .Func_9dd9c
+	dw .Func_9ddb3
+	dw .Func_9ddbb
+	dw .Func_9dd9c
+	dw .Func_9ddc2
+	dw .Func_9ddca
+	dw .Func_9ddd8
+	dw .Func_9dd9c
+	dw .Func_9dddf
+	dw .Func_9dde3
+	dw .Func_9dd9c
+	dw .Func_9ddea
+	dw .Func_9ddee
+	dw .Func_9dd9c
+	dw .Func_9ddf5
+	dw .Func_9dd80
+	dw .Func_9ddf9
+	dw .Func_9de00
+	dw EndCutsceneDelay_40Frames
+
+.Func_9dd3f:
+	ld hl, wSceneObj2YCoord
+	ld a, [bc]
+	and $03
+	jr nz, .asm_9dd48
+	dec [hl]
+
+.asm_9dd48
+	ld a, [hl]
+	ret
+
+.Func_9dd4a:
+	ld hl, wSceneObj2XCoord
+	ld a, [bc]
+	bit 0, a
+	jr z, .asm_9dd48
+	inc [hl]
+	jr .asm_9dd48
+
+.Func_9dd55:
+	ld hl, wSceneObj2XCoord
+	ld a, [bc]
+	bit 0, a
+	jr z, .asm_9dd48
+	dec [hl]
+	jr .asm_9dd48
+
+.Func_9dd60:
+	ld hl, wSceneObj3YCoord
+	ld a, $48
+	ld [hli], a
+	ld [hl], $48
+	ld hl, wSceneObj4YCoord
+	ld a, $48
+	ld [hli], a
+	ld [hl], $58
+	ld hl, wSceneObj5YCoord
+	ld a, $48
+	ld [hli], a
+	ld [hl], $68
+	ld hl, wSceneObj2YCoord
+	ld a, $80
+	ld [hli], a
+	ld [hl], $48
+
+.Func_9dd80:
+	ld a, $01
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9dd8b:
+	call .Func_9dd3f
+	cp $48
+	ret nz
+	ld a, $02
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9dd9c:
+	ld c, $3c
+	jp WaitCutsceneFunc
+
+.Func_9dda1:
+	ld a, $03
+.asm_9dda3
+	ld [wSceneObj3State], a
+	jp AdvanceCutsceneFunc
+
+.Func_9dda9:
+	call .Func_9dd4a
+	ld b, $58
+.asm_9ddae
+	cp b
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9ddb3:
+	ld a, $03
+.asm_9ddb5
+	ld [wSceneObj4State], a
+	jp AdvanceCutsceneFunc
+
+.Func_9ddbb:
+	call .Func_9dd4a
+	ld b, $68
+	jr .asm_9ddae
+
+.Func_9ddc2:
+	ld a, $03
+.asm_9ddc4
+	ld [wSceneObj5State], a
+	jp AdvanceCutsceneFunc
+
+.Func_9ddca:
+	call .Func_9dd4a
+	cp $88
+	ret nz
+	ld a, $38
+	ld [wSceneObj2YCoord], a
+	jp AdvanceCutsceneFunc
+
+.Func_9ddd8:
+	call .Func_9dd55
+	ld b, $68
+	jr .asm_9ddae
+
+.Func_9dddf:
+	ld a, $04
+	jr .asm_9ddc4
+
+.Func_9dde3:
+	call .Func_9dd55
+	ld b, $58
+	jr .asm_9ddae
+
+.Func_9ddea:
+	ld a, $04
+	jr .asm_9ddb5
+
+.Func_9ddee:
+	call .Func_9dd55
+	ld b, $48
+	jr .asm_9ddae
+
+.Func_9ddf5:
+	ld a, $04
+	jr .asm_9dda3
+
+.Func_9ddf9:
+	call .Func_9dd3f
+	ld b, $20
+	jr .asm_9ddae
+
+.Func_9de00:
+	xor a
+	ld [wSceneObj2State], a
+	jp AdvanceCutsceneFunc
+
+Cutscene37Func: ; 9de07 (27:5e07)
+	call .Func_9de0d
+	jp Func_9f508
+
+.Func_9de0d:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9de1b
+	dw .Func_9de33
+	dw .Func_9de38
+	dw EndCutsceneDelay_100Frames
+
+.Func_9de1b:
+	ld hl, wSceneObj2YCoord
+	ld a, $c0
+	ld [hli], a
+	ld [hl], $32
+	ld a, $01
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld a, $03
+	ld [wSceneObj1YCoord], a
+	jp AdvanceCutsceneFunc
+
+.Func_9de33:
+	ld c, $28
+	jp WaitCutsceneFunc
+
+.Func_9de38:
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	ld a, [hl]
+	cp $8e
+	jp z, Func_9ce1f
+	cp $68
+	ret nz
+	jp AdvanceCutsceneFunc
+; 0x9de48
+
+Cutscene38Func: ; 9de48 (27:5e48)
+	call .Func_9de4e
+	jp Func_9f547
+
+.Func_9de4e:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9de68
+	dw .Func_9de87
+	dw .Func_9de92
+	dw .Func_9de9d
+	dw .Func_9deae
+	dw .Func_9debf
+	dw .Func_9dec8
+	dw Func_9cd8d
+	dw .Func_9decd
+	dw EndCutsceneDelay_40Frames
+
+.Func_9de68:
+	ld a, [bc]
+	cp $1e
+	ret c
+	ld hl, wSceneObj2YCoord
+	ld a, $98
+	ld [hli], a
+	ld [hl], $48
+	ld a, $01
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld a, $01
+	ld [wSceneObj1YCoord], a
+	call Func_9ce1f
+	jp AdvanceCutsceneFunc
+
+.Func_9de87:
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	ld a, [hl]
+	cp $78
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9de92:
+	ld a, $02
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9de9d:
+	ld a, [wSceneObj2Frame]
+	cp $01
+	ret nz
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $2f
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9deae:
+	ld a, [wSceneObj2Frame]
+	cp $05
+	ret nz
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $06
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9debf:
+	ld a, [wSceneObj2State]
+	cp $03
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9dec8:
+	ld c, $78
+	jp WaitCutsceneFunc
+
+.Func_9decd:
+	xor a
+	ld [wSceneObj2State], a
+	jp AdvanceCutsceneFunc
+; 0x9ded4
 
 Func_9ded4: ; 9ded4 (27:5ed4)
 	ld hl, wSceneObj2
@@ -1938,9 +4081,172 @@ Func_9ded4: ; 9ded4 (27:5ed4)
 	ld [hl], $34
 
 	jp Func_9f5a0
-; 0x9df0f
 
-	INCROM $9df0f, $9e018
+Cutscene30Func: ; 9df0f (27:5f0f)
+	call .Func_9df15
+	jp Func_9f5a0
+
+.Func_9df15:
+	call .Func_9dfb6
+	call .Func_9dfa6
+	call .Func_9dfae
+
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9df3c
+	dw Func_9cdbd
+	dw .Func_9df52
+	dw .Func_9df57
+	dw .Func_9df62
+	dw .Func_9df57
+	dw .Func_9df62
+	dw .Func_9df57
+	dw .Func_9df62
+	dw .Func_9df6b
+	dw .Func_9df70
+	dw EndCutsceneDelay_20Frames
+
+.Func_9df3c:
+	call Func_9cc87
+	ld b, BANK(Pals_b8500)
+	ld hl, Pals_b8500
+	call LoadFarPalsToTempPals1
+	ld b, BANK(Pals_b8500)
+	ld hl, Pals_b8500
+	call LoadFarPalsToTempPals2
+	jp AdvanceCutsceneFunc
+
+.Func_9df52:
+	ld c, $0a
+	jp WaitCutsceneFunc
+
+.Func_9df57:
+	ld a, $02
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9df62:
+	ld a, [wSceneObj2State]
+	cp $03
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9df6b:
+	ld c, $1e
+	jp WaitCutsceneFunc
+
+.Func_9df70:
+	ld a, [w2d014]
+	and $07
+	ret nz
+	ld hl, wSceneObj3YCoord
+	dec [hl]
+	ld a, [hl]
+	cp $48
+	jr z, .asm_9df8d
+	cp $44
+	jr z, .asm_9df9c
+	cp $3c
+	jr z, .asm_9dfa1
+	cp $20
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.asm_9df8d
+	ld hl, wSceneObj4State
+.asm_9df90
+	ld a, $04
+	ld [hl], a
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $0f
+	ldh [$ffb6], a
+	ret
+
+.asm_9df9c
+	ld hl, wSceneObj5State
+	jr .asm_9df90
+
+.asm_9dfa1
+	ld hl, wSceneObj6State
+	jr .asm_9df90
+
+.Func_9dfa6:
+	ld de, wSceneObj5State
+	ld hl, wSceneObj5
+	jr .asm_9dfbc
+
+.Func_9dfae:
+	ld de, wSceneObj6State
+	ld hl, wSceneObj6
+	jr .asm_9dfbc
+
+.Func_9dfb6:
+	ld de, wSceneObj4State
+	ld hl, wSceneObj4
+.asm_9dfbc
+	ld a, [de]
+	and a
+	ret z
+	ld a, [w2d014]
+	and $01
+	ret nz
+	dec [hl]
+	ld a, [hl]
+	cp $20
+	ret nz
+	xor a
+	ld [de], a
+	ret
+
+Cutscene39Func: ; 9dfcd (27:5fcd)
+	call .Func_9dfd3
+	jp Func_9f607
+
+.Func_9dfd3:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9dfe3
+	dw .Func_9dff1
+	dw .Func_9e004
+	dw .Func_9e013
+	dw EndCutsceneDelay_40Frames
+
+.Func_9dfe3:
+	ld hl, wSceneObj2
+	lb de, $18, $54
+	ld a, $01
+	call Func_9ccf9
+	jp AdvanceCutsceneFunc
+
+.Func_9dff1:
+	ld hl, wSceneObj2YCoord
+	inc [hl]
+	ld a, [hl]
+	cp $50
+	ret nz
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $62
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9e004:
+	ld a, [bc]
+	cp $2d
+	ret c
+	ld a, $02
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9e013:
+	ld c, $64
+	jp WaitCutsceneFunc
+; 0x9e018
 
 Func_9e018: ; 9e018 (27:6018)
 	ld hl, wSceneObj2
@@ -1967,7 +4273,366 @@ Func_9e018: ; 9e018 (27:6018)
 	jp Func_9f638
 ; 0x9e046
 
-	INCROM $9e046, $9e2b8
+Cutscene3aFunc: ; 9e046 (27:6046)
+	call .Func_9e04c
+	jp Func_9f638
+
+.Func_9e04c:
+	call .Func_9e153
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9e07d
+	dw Func_9cdbd
+	dw .Func_9e093
+	dw .Func_9e098
+	dw .Func_9e0b6
+	dw .Func_9e0c8
+	dw .Func_9e103
+	dw .Func_9e108
+	dw .Func_9e112
+	dw .Func_9e11d
+	dw .Func_9e126
+	dw .Func_9e12b
+	dw .Func_9e130
+	dw .Func_9e135
+	dw .Func_9e13a
+	dw .Func_9e13f
+	dw .Func_9e144
+	dw .Func_9e149
+	dw .Func_9e14e
+	dw EndCutsceneDelay_60Frames
+
+.Func_9e07d:
+	call Func_9cc87
+	ld b, BANK(Pals_b8780)
+	ld hl, Pals_b8780
+	call LoadFarPalsToTempPals1
+	ld b, BANK(Pals_b8780)
+	ld hl, Pals_b8780
+	call LoadFarPalsToTempPals2
+	jp AdvanceCutsceneFunc
+
+.Func_9e093:
+	ld c, $2d
+	jp WaitCutsceneFunc
+
+.Func_9e098:
+	ld a, [bc]
+	and $01
+	ret nz
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	dec [hl]
+	ld a, [hli]
+	inc [hl]
+	cp $50
+	jr z, .asm_9e0ad
+	cp $4c
+	ret nz
+	jp AdvanceCutsceneFunc
+.asm_9e0ad
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $2f
+	ldh [$ffb6], a
+	ret
+
+.Func_9e0b6:
+	ld a, [bc]
+	cp $2d
+	ret c
+	ld hl, wSceneObj3
+	lb de, $3d, $52
+	ld a, $02
+	call Func_9ccf9
+	jp AdvanceCutsceneFunc
+
+.Func_9e0c8:
+	ld a, [bc]
+	cp $8c
+	ret c
+	ld a, $08
+	ld [wCollectionRow], a
+	xor a
+	ld [wSceneObj3State], a
+	ld [wSceneObj2State], a
+	ld a, $ff
+	ldh [hSFXID], a
+	ld a, $00
+	ldh [$ffb6], a
+	ld a, $03
+	ld hl, wSceneObj4State
+	call SetSceneObjState
+	ld a, $03
+	ld hl, wSceneObj5State
+	call SetSceneObjState
+	ld a, $03
+	ld hl, wSceneObj6State
+	call SetSceneObjState
+	ld a, $03
+	ld hl, wSceneObj7State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9e103:
+	ld c, $50
+	jp WaitCutsceneFunc
+
+.Func_9e108:
+	ld hl, wSceneObj4Frame
+.asm_9e10b
+	ld a, [hl]
+	cp $0a
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9e112:
+	ld hl, wSceneObj4State
+.asm_9e115
+	ld a, $04
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9e11d:
+	ld hl, wSceneObj4State
+.asm_9e120
+	ld a, [hl]
+	and a
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9e126:
+	ld hl, wSceneObj5Frame
+	jr .asm_9e10b
+
+.Func_9e12b:
+	ld hl, wSceneObj5State
+	jr .asm_9e115
+
+.Func_9e130:
+	ld hl, wSceneObj5State
+	jr .asm_9e120
+
+.Func_9e135:
+	ld hl, wSceneObj6Frame
+	jr .asm_9e10b
+
+.Func_9e13a:
+	ld hl, wSceneObj6State
+	jr .asm_9e115
+
+.Func_9e13f:
+	ld hl, wSceneObj6State
+	jr .asm_9e120
+
+.Func_9e144:
+	ld hl, wSceneObj7Frame
+	jr .asm_9e10b
+
+.Func_9e149:
+	ld hl, wSceneObj7State
+	jr .asm_9e115
+
+.Func_9e14e:
+	ld hl, wSceneObj7State
+	jr .asm_9e120
+
+.Func_9e153:
+	ld a, [wSceneObj7State]
+	cp $03
+	ret nz
+	ld hl, wSceneObj7Unk7
+	inc [hl]
+	ld a, [hl]
+	cp $01
+	jr z, .asm_9e168
+	cp $1b
+	ret c
+	xor a
+	ld [hl], a
+	ret
+.asm_9e168
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $80
+	ldh [$ffb6], a
+	ret
+; 0x9e171
+
+Cutscene3cFunc: ; 9e171 (27:6171)
+	call .Func_9e177
+	jp Func_9f6a2
+
+.Func_9e177:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9e18f
+	dw .Func_9e1a8
+	dw .Func_9e1bc
+	dw .Func_9e1cb
+	dw .Func_9e1d4
+	dw .Func_9e231
+	dw .Func_9e239
+	dw .Func_9e253
+	dw EndCutsceneDelay_40Frames
+
+.Func_9e18f:
+	ld hl, wSceneObj2
+	lb de, $20, $42
+	ld a, $01
+	call Func_9ccf9
+	ld hl, wSceneObj3
+	lb de, $3e, $50
+	ld a, $00
+	call Func_9ccf9
+	jp AdvanceCutsceneFunc
+
+.Func_9e1a8:
+	ld a, [bc]
+	and $01
+	ret z
+	ld hl, wSceneObj2YCoord
+	inc [hl]
+	ld a, [hl]
+	cp $27
+	jp z, Func_9ce1f
+	cp $3a
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9e1bc:
+	ld a, [bc]
+	cp $3c
+	ret c
+	ld a, $02
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9e1cb:
+	ld a, [wSceneObj2State]
+	cp $03
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9e1d4:
+	call .Func_9e1f4
+	ld hl, wSceneObj3YCoord
+	add [hl]
+	ld [hl], a
+	cp $58
+	ret c
+	ld [hl], $58
+	ld a, $05
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $a1
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9e1f4:
+	ld a, [bc]
+	cp $2c
+	jr c, .asm_9e1fc
+	ld a, $28
+	ld [bc], a
+.asm_9e1fc
+	ld c, a
+	ld b, $00
+	ld hl, .data_9e205
+	add hl, bc
+	ld a, [hl]
+	ret
+
+.data_9e205
+	db $01, $00, $00, $00, $01, $00, $00, $00, $01, $00, $00, $00, $01, $00, $00, $00, $01, $00, $01, $00, $01, $00, $01, $00, $01, $01, $01, $00, $01, $01, $01, $00, $01, $01, $01, $01, $01, $01, $01, $01, $02, $02, $02, $02
+
+.Func_9e231:
+	ld a, [wSceneObj3State]
+	and a
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9e239:
+	ld a, [bc]
+	cp $3c
+	ret c
+	ld hl, wSceneObj4
+	lb de, $58, $50
+	ld a, $06
+	call Func_9ccf9
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $74
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9e253:
+	ld a, [wSceneObj4State]
+	cp $07
+	ret nz
+	jp AdvanceCutsceneFunc
+; 0x9e25c
+
+Cutscene43Func: ; 9e25c (27:625c)
+	call .Func_9e262
+	jp Func_9f6f8
+
+.Func_9e262:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9e272
+	dw .Func_9e280
+	dw .Func_9e297
+	dw .Func_9e2a6
+	dw EndCutsceneDelay_120Frames
+
+.Func_9e272:
+	ld hl, wSceneObj2
+	lb de, $20, $50
+	ld a, $01
+	call Func_9ccf9
+	jp AdvanceCutsceneFunc
+
+.Func_9e280:
+	ld a, [bc]
+	and $01
+	ret nz
+	ld hl, wSceneObj2YCoord
+	inc [hl]
+	ld a, [hl]
+	cp $50
+	ret nz
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $62
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9e297:
+	ld a, [bc]
+	cp $3c
+	ret c
+	ld a, $02
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9e2a6:
+	ld a, [bc]
+	cp $2d
+	ret c
+	ld hl, wSceneObj3
+	lb de, $48, $50
+	ld a, $03
+	call Func_9ccf9
+	jp AdvanceCutsceneFunc
+; 0x9e2b8
 
 Func_9e2b8: ; 9e2b8 (27:62b8)
 	ld hl, wSceneObj2
@@ -1981,7 +4646,223 @@ Func_9e2b8: ; 9e2b8 (27:62b8)
 	jp Func_9f73b
 ; 0x9e2d1
 
-	INCROM $9e2d1, $9e438
+Cutscene54Func: ; 9e2d1 (27:62d1)
+	call .Func_9e2d7
+	jp Func_9f73b
+
+.Func_9e2d7:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9e2ed
+	dw Func_9cdbd
+	dw .Func_9e303
+	dw .Func_9e308
+	dw .Func_9e31c
+	dw .Func_9e333
+	dw .Func_9e338
+	dw EndCutsceneDelay_20Frames
+
+.Func_9e2ed:
+	call Func_9cc87
+	ld b, BANK(Pals_b8740)
+	ld hl, Pals_b8740
+	call LoadFarPalsToTempPals1
+	ld b, BANK(Pals_b8740)
+	ld hl, Pals_b8740
+	call LoadFarPalsToTempPals2
+	jp AdvanceCutsceneFunc
+
+.Func_9e303:
+	ld c, $28
+	jp WaitCutsceneFunc
+
+.Func_9e308:
+	ld a, [bc]
+	and $01
+	ret nz
+	ld hl, wSceneObj3YCoord
+	dec [hl]
+	ld a, [hl]
+	cp $6b
+	jp z, Func_9ce1f
+	cp $58
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9e31c:
+	ld a, [bc]
+	cp $3c
+	ret c
+	ld a, $03
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $62
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9e333:
+	ld c, $14
+	jp WaitCutsceneFunc
+
+.Func_9e338:
+	ld a, [bc]
+	and $03
+	ret z
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	ld a, [hl]
+	cp $20
+	ret nz
+	jp AdvanceCutsceneFunc
+; 0x9e347
+
+Cutscene3dFunc: ; 9e347 (27:6347)
+	call .Func_9e350
+	call Func_9f7a2
+	jp Func_9f75c
+
+.Func_9e350:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9e376
+	dw .Func_9e384
+	dw .Func_9e391
+	dw .Func_9e3a8
+	dw .Func_9e3b0
+	dw .Func_9e384
+	dw .Func_9e391
+	dw .Func_9e3a8
+	dw .Func_9e3c2
+	dw .Func_9e3e4
+	dw .Func_9e3f3
+	dw .Func_9e402
+	dw .Func_9e40b
+	dw .Func_9e41a
+	dw .Func_9e429
+	dw EndCutsceneDelay_20Frames
+
+.Func_9e376
+	ld hl, wSceneObj2
+	lb de, $6c, $78
+	ld a, $01
+	call Func_9ccf9
+	jp AdvanceCutsceneFunc
+
+.Func_9e384
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	inc l
+	dec [hl]
+	ld a, [hl]
+	cp $44
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9e391
+	ld a, [bc]
+	cp $1e
+	ret c
+	ld hl, wSceneObj2State
+	ld a, [hl]
+	inc a
+	call SetSceneObjState
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $c4
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9e3a8
+	ld a, [wSceneObj2State]
+	and a
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9e3b0
+	ld a, [bc]
+	cp $0a
+	ret c
+	ld hl, wSceneObj2
+	lb de, $84, $78
+	ld a, $03
+	call Func_9ccf9
+	jp AdvanceCutsceneFunc
+
+.Func_9e3c2
+	ld a, [bc]
+	cp $3c
+	ret c
+	ld a, $08
+	ld [wCollectionRow], a
+	ld hl, wSceneObj4
+	lb de, $50, $50
+	ld a, $05
+	call Func_9ccf9
+	ld hl, wSceneObj3
+	lb de, $40, $50
+	ld a, $01
+	call Func_9ccf9
+	jp AdvanceCutsceneFunc
+
+.Func_9e3e4
+	ld a, [bc]
+	cp $5a
+	ret c
+	ld a, $06
+	ld hl, wSceneObj4State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9e3f3
+	ld a, [bc]
+	cp $04
+	ret c
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $7a
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9e402
+	ld a, [wSceneObj4State]
+	cp $07
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9e40b
+	ld a, [bc]
+	cp $08
+	ret c
+	ld a, $02
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9e41a
+	ld a, [bc]
+	cp $14
+	ret c
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $ac
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9e429
+	ld a, [bc]
+	and $03
+	ret nz
+	ld hl, wSceneObj3YCoord
+	inc [hl]
+	ld a, [hl]
+	cp $80
+	ret nz
+	jp AdvanceCutsceneFunc
+; 0x9e438
 
 Func_9e438: ; 9e438 (27:6438)
 	ld hl, wSceneObj2
@@ -1995,7 +4876,64 @@ Func_9e438: ; 9e438 (27:6438)
 	jp Func_9f7bb
 ; 0x9e451
 
-	INCROM $9e451, $9e4ae
+Cutscene4aFunc: ; 9e451 (27:6451)
+	call .Func_9e457
+	jp Func_9f7bb
+
+.Func_9e457:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9e469
+	dw .Func_9e474
+	dw .Func_9e483
+	dw .Func_9e494
+	dw .Func_9e4a5
+	dw EndCutsceneDelay_40Frames
+
+.Func_9e469:
+	ld hl, wSceneObj2XCoord
+	dec [hl]
+	ld a, [hl]
+	cp $56
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9e474:
+	ld a, [bc]
+	cp $3c
+	ret c
+	ld a, $03
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9e483:
+	ld a, [wSceneObj2Frame]
+	cp $04
+	ret nz
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $62
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9e494:
+	ld a, [wSceneObj2Frame]
+	cp $06
+	ret nz
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $32
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9e4a5:
+	ld a, [wSceneObj2Frame]
+	cp $07
+	ret nz
+	jp AdvanceCutsceneFunc
+; 0x9e4ae
 
 Func_9e4ae: ; 9e4ae (27:64ae)
 	ld hl, wSceneObj2
@@ -2012,7 +4950,130 @@ Func_9e4ae: ; 9e4ae (27:64ae)
 	jp Func_9f821
 ; 0x9e4cf
 
-	INCROM $9e4cf, $9e5a1
+Cutscene4cFunc: ; 9e4cf (27:64cf)
+	call .Func_9e4d8
+	call Func_9f7dc
+	jp Func_9f821
+
+.Func_9e4d8:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9e4f0
+	dw Func_9cdbd
+	dw .Func_9e506
+	dw .Func_9e50b
+	dw .Func_9e51b
+	dw .Func_9e52a
+	dw .Func_9e532
+	dw .Func_9e541
+	dw EndCutsceneDelay_60Frames
+
+.Func_9e4f0:
+	call Func_9cc87
+	ld b, BANK(Pals_b86c0)
+	ld hl, Pals_b86c0
+	call LoadFarPalsToTempPals1
+	ld b, BANK(Pals_b86c0)
+	ld hl, Pals_b86c0
+	call LoadFarPalsToTempPals2
+	jp AdvanceCutsceneFunc
+
+.Func_9e506:
+	ld c, $28
+	jp WaitCutsceneFunc
+
+.Func_9e50b:
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	ld a, [hl]
+	cp $7e
+	jp z, Func_9ce1f
+	cp $58
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9e51b:
+	ld a, [bc]
+	cp $3c
+	ret c
+	ld a, $02
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9e52a:
+	ld a, [wSceneObj2State]
+	cp $03
+	jp AdvanceCutsceneFunc
+
+.Func_9e532:
+	ld a, [bc]
+	cp $64
+	ret c
+	ld a, $02
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9e541:
+	ld a, [bc]
+	cp $3c
+	ret c
+	xor a
+	ld [wSceneObj3State], a
+	jp AdvanceCutsceneFunc
+; 0x9e54c
+
+Cutscene4eFunc: ; 9e54c (27:654c)
+	call .Func_9e552
+	jp Func_9f857
+
+.Func_9e552:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9e562
+	dw Func_9cdbd
+	dw .Func_9e578
+	dw .Func_9e58a
+	dw EndCutsceneDelay_80Frames
+
+.Func_9e562:
+	call Func_9cc87
+	ld b, BANK(Pals_b8640)
+	ld hl, Pals_b8640
+	call LoadFarPalsToTempPals1
+	ld b, BANK(Pals_b8640)
+	ld hl, Pals_b8640
+	call LoadFarPalsToTempPals2
+	jp AdvanceCutsceneFunc
+
+.Func_9e578:
+	ld a, [bc]
+	cp $14
+	ret c
+	ld hl, wSceneObj2
+	lb de, $78, $50
+	ld a, $01
+	call Func_9ccf9
+	jp AdvanceCutsceneFunc
+
+.Func_9e58a:
+	ld a, [bc]
+	and $01
+	ret nz
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	ld a, [hl]
+	cp $50
+	ret nz
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $62
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+; 0x9e5a1
 
 Func_9e5a1: ; 9e5a1 (27:65a1)
 	ld hl, wSceneObj2
@@ -2026,7 +5087,106 @@ Func_9e5a1: ; 9e5a1 (27:65a1)
 	jp Func_9f86a
 ; 0x9e5ba
 
-	INCROM $9e5ba, $9e655
+Cutscene4fFunc: ; 9e5ba (27:65ba)
+	call .Func_9e5c0
+	jp Func_9f86a
+
+.Func_9e5c0:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9e5e2
+	dw .Func_9e5f6
+	dw .Func_9e605
+	dw .Func_9e60a
+	dw .Func_9e61a
+	dw .Func_9e61f
+	dw .Func_9e61a
+	dw .Func_9e60a
+	dw .Func_9e61a
+	dw .Func_9e61f
+	dw .Func_9e62e
+	dw .Func_9e63d
+	dw .Func_9e64c
+	dw EndCutsceneDelay_40Frames
+
+.Func_9e5e2:
+	ld a, [bc]
+	and $01
+	ret nz
+	ld hl, wSceneObj2YCoord
+	inc [hl]
+	ld a, [hl]
+	cp $31
+	jp z, Func_9ce1f
+	cp $44
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9e5f6:
+	ld a, [bc]
+	cp $3c
+	ret c
+	ld a, $02
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9e605:
+	ld c, $2d
+	jp WaitCutsceneFunc
+
+.Func_9e60a:
+	ld d, $5c
+	ld a, [bc]
+	and $03
+	ret nz
+	ld hl, wSceneObj2YCoord
+	inc [hl]
+	ld a, [hl]
+	cp d
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9e61a:
+	ld c, $08
+	jp WaitCutsceneFunc
+
+.Func_9e61f:
+	ld a, [bc]
+	and $03
+	ret nz
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	ld a, [hl]
+	cp $44
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9e62e:
+	ld a, [bc]
+	cp $1e
+	ret c
+	ld a, $01
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9e63d:
+	ld a, [bc]
+	cp $3c
+	ret c
+	ld a, $03
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9e64c:
+	ld a, [wSceneObj3State]
+	cp $05
+	ret nz
+	jp AdvanceCutsceneFunc
+; 0x9e655
 
 Func_9e655: ; 9e655 (27:6655)
 	ld hl, wSceneObj2
@@ -2040,7 +5200,91 @@ Func_9e655: ; 9e655 (27:6655)
 	jp Func_9f8da
 ; 0x9e66e
 
-	INCROM $9e66e, $9e6ef
+Cutscene51Func: ; 9e66e (27:666e)
+	call .Func_9e674
+	jp Func_9f8da
+
+.Func_9e674:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9e688
+	dw .Func_9e69c
+	dw .Func_9e6a7
+	dw .Func_9e6b8
+	dw .Func_9e6c0
+	dw .Func_9e6c5
+	dw EndCutsceneDelay_60Frames
+
+.Func_9e688:
+	ld a, [bc]
+	and $01
+	ret nz
+	ld hl, wSceneObj2YCoord
+	inc [hl]
+	ld a, [hl]
+	cp $45
+	jp z, Func_9ce1f
+	cp $58
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9e69c:
+	ld a, $03
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9e6a7:
+	ld a, [wSceneObj2Frame]
+	cp $04
+	ret nz
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $a1
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9e6b8:
+	ld a, [wSceneObj2State]
+	and a
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9e6c0:
+	ld c, $2d
+	jp WaitCutsceneFunc
+
+.Func_9e6c5:
+	call .Func_9e6d7
+	ld a, [bc]
+	and $03
+	ret nz
+	ld hl, wSceneObj3YCoord
+	inc [hl]
+	ld a, [hl]
+	cp $78
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9e6d7:
+	ld hl, wSceneObj3Unk7
+	inc [hl]
+	ld a, [hl]
+	cp $01
+	jr z, .asm_9e6e6
+	cp $10
+	ret c
+	xor a
+	ld [hl], a
+	ret
+.asm_9e6e6
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $1f
+	ldh [$ffb6], a
+	ret
+; 0x9e6ef
 
 Func_9e6ef: ; 9e6ef (27:66ef)
 	ld hl, wSceneObj2
@@ -2050,7 +5294,98 @@ Func_9e6ef: ; 9e6ef (27:66ef)
 	jp Func_9f91f
 ; 0x9e6fd
 
-	INCROM $9e6fd, $9e79a
+Cutscene56Func: ; 9e6fd (27:66fd)
+	call .Func_9e703
+	jp Func_9f91f
+
+.Func_9e703:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9e71f
+	dw Func_9cdbd
+	dw .Func_9e735
+	dw .Func_9e747
+	dw .Func_9e750
+	dw .Func_9e759
+	dw .Func_9e779
+	dw .Func_9e787
+	dw .Func_9e78e
+	dw .Func_9e793
+	dw Func_9cd16
+
+.Func_9e71f:
+	call Func_9cc87
+	ld b, BANK(Pals_b9080)
+	ld hl, Pals_b9080
+	call LoadFarPalsToTempPals1
+	ld b, BANK(Pals_b9080)
+	ld hl, Pals_b9080
+	call LoadFarPalsToTempPals2
+	jp AdvanceCutsceneFunc
+
+.Func_9e735:
+	ld a, [bc]
+	cp $2d
+	ret c
+	ld hl, wSceneObj2
+	lb de, $56, $50
+	ld a, $01
+	call Func_9ccf9
+	jp AdvanceCutsceneFunc
+
+.Func_9e747:
+	ld a, [wSceneObj2State]
+	cp $02
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9e750:
+	ld a, [wSceneObj2State]
+	cp $01
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9e759:
+	ld a, [bc]
+	cp $14
+	ret c
+	xor a
+	ld [wSceneObj2State], a
+	ld a, $08
+	ld [wCollectionRow], a
+	ld b, BANK(Pals_b8800)
+	ld c, $40
+	ld hl, Pals_b8800
+	ld de, wTempPals1
+	call CopyFarBytes
+	call Func_9cd40
+	jp AdvanceCutsceneFunc
+
+.Func_9e779:
+	ld hl, Pals_b8840
+.asm_9e77c
+	call Func_9cd74
+	ld b, BANK(Pals_b8840) ; aka BANK(Pals_b8880)
+	call LoadFarPalsToTempPals1
+	jp AdvanceCutsceneFunc
+
+.Func_9e787:
+	ld a, [bc]
+	and $01
+	ret nz
+	jp Func_9cdbd
+
+.Func_9e78e:
+	ld hl, Pals_b8880
+	jr .asm_9e77c
+
+.Func_9e793:
+	ld a, [bc]
+	and $03
+	ret nz
+	jp Func_9cdbd
+; 0x9e79a
 
 Func_9e79a: ; 9e79a (27:679a)
 	ld hl, wSceneObj3
@@ -2064,7 +5399,101 @@ Func_9e79a: ; 9e79a (27:679a)
 	jp Func_9f991
 ; 0x9e7b3
 
-	INCROM $9e7b3, $9e855
+Cutscene57Func: ; 9e7b3 (27:67b3)
+	call .Func_9e7b9
+	jp Func_9f991
+
+.Func_9e7b9: ; 9e7b9 (27:67b9)
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9e7d9
+	dw Func_9cdbd
+	dw .Func_9e7ef
+	dw .Func_9e7ff
+	dw .Func_9e80e
+	dw .Func_9e827
+	dw .Func_9e836
+	dw .Func_9e844
+	dw .Func_9e84b
+	dw .Func_9e844
+	dw .Func_9e850
+	dw .Func_9e844
+	dw Func_9cd16
+
+.Func_9e7d9:
+	call Func_9cc87
+	ld b, BANK(Pals_b8540)
+	ld hl, Pals_b8540
+	call LoadFarPalsToTempPals1
+	ld b, BANK(Pals_b8540)
+	ld hl, Pals_b8540
+	call LoadFarPalsToTempPals2
+	jp AdvanceCutsceneFunc
+
+.Func_9e7ef:
+	ld hl, wSceneObj2YCoord
+	inc [hl]
+	ld a, [hl]
+	cp $2c
+	jp z, Func_9ce1f
+	cp $52
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9e7ff:
+	ld a, [bc]
+	cp $32
+	ret c
+	ld a, $04
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9e80e:
+	ld a, [wSceneObj2State]
+	cp $03
+	ret nz
+	ld a, $02
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $05
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9e827:
+	ld a, [bc]
+	cp $30
+	ret c
+	ld a, $01
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9e836:
+	ld hl, Pals_b8580
+.asm_9e839
+	call Func_9cd74
+	ld b, BANK(Pals_b8580) ; aka BANK(Pals_b85c0) and BANK(Pals_b8600)
+	call LoadFarPalsToTempPals1
+	jp AdvanceCutsceneFunc
+
+.Func_9e844:
+	ld a, [bc]
+	and $01
+	ret nz
+	jp Func_9cdbd
+
+.Func_9e84b:
+	ld hl, Pals_b85c0
+	jr .asm_9e839
+
+.Func_9e850:
+	ld hl, Pals_b8600
+	jr .asm_9e839
+; 0x9e855
 
 Func_9e855: ; 9e855 (27:6855)
 	ld hl, wSceneObj2
@@ -2079,7 +5508,97 @@ Func_9e855: ; 9e855 (27:6855)
 	jp Func_9f9f5
 ; 0x9e871
 
-	INCROM $9e871, $9e91a
+Cutscene58Func: ; 9e871 (27:6871)
+	call .Func_9e87a
+	call Func_9f9c1
+	jp Func_9f9f5
+
+.Func_9e87a: ; 9e87a (27:687a)
+	push bc
+	call Func_9ea9e
+	call Func_9eab4
+	pop bc
+
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9e89c
+	dw Func_9cdbd
+	dw .Func_9e8b2
+	dw .Func_9e8b7
+	dw .Func_9e8b2
+	dw .Func_9e8c7
+	dw .Func_9e8d6
+	dw .Func_9e8c7
+	dw .Func_9e905
+	dw EndCutsceneDelay_120Frames
+
+.Func_9e89c:
+	call Func_9cc87
+	ld b, BANK(Pals_b87c0)
+	ld hl, Pals_b87c0
+	call LoadFarPalsToTempPals1
+	ld b, BANK(Pals_b87c0)
+	ld hl, Pals_b87c0
+	call LoadFarPalsToTempPals2
+	jp AdvanceCutsceneFunc
+
+.Func_9e8b2:
+	ld c, $1e
+	jp WaitCutsceneFunc
+
+.Func_9e8b7:
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	ld a, [hl]
+	cp $76
+	jp z, Func_9ce1f
+	cp $50
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9e8c7:
+	ld a, [bc]
+	cp $1a
+	ret c
+	ld a, $02
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9e8d6:
+	ld a, [wSceneObj2State]
+	cp $01
+	ret nz
+.asm_9e8dc
+	ld hl, wSceneObj10
+	lb de, $48, $54
+	ld a, $03
+	call Func_9ccf9
+	ld hl, wSceneObj11
+	lb de, $44, $58
+	ld a, $03
+	call Func_9ccf9
+	ld a, $01
+	ld [wSceneObj12YCoord], a
+	ld [wSceneObj12XCoord], a
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $32
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9e905:
+	ld a, [wSceneObj2State]
+	cp $01
+	ret nz
+	ld a, $08
+	ld [wCollectionRow], a
+	ld a, $02
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	jr .asm_9e8dc
+; 0x9e91a
 
 Func_9e91a: ; 9e91a (27:691a)
 	ld hl, wSceneObj3
@@ -2090,15 +5609,15 @@ Func_9e91a: ; 9e91a (27:691a)
 	lb de, $58, $50
 	ld a, $01
 	call Func_9ccf9
-	ld hl, wSceneObj4End
+	ld hl, wSceneObj5
 	lb de, $58, $60
 	ld a, $01
 	call Func_9ccf9
-	ld hl, wSceneObj5End
+	ld hl, wSceneObj6
 	lb de, $58, $40
 	ld a, $04
 	call Func_9ccf9
-	ld hl, wSceneObj6End
+	ld hl, wSceneObj7
 	lb de, $58, $50
 	ld a, $04
 	call Func_9ccf9
@@ -2109,7 +5628,751 @@ Func_9e91a: ; 9e91a (27:691a)
 	jp Func_9fa48
 ; 0x9e95f
 
-	INCROM $9e95f, $9f0a5
+Cutscene55Func: ; 9e95f (27:695f)
+	call .Func_9e965
+	jp Func_9fa48
+
+.Func_9e965: ; 9e965 (27:6965)
+	push bc
+	call Func_9ea9e
+	call Func_9eab4
+	pop bc
+
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9e9a3
+	dw Func_9cdbd
+	dw .Func_9e9b9
+	dw .Func_9e9cb
+	dw .Func_9e9da
+	dw .Func_9e9df
+	dw .Func_9e9f6
+	dw .Func_9ea1b
+	dw .Func_9ea2a
+	dw .Func_9ea39
+	dw .Func_9e9da
+	dw .Func_9e9df
+	dw .Func_9ea49
+	dw .Func_9ea61
+	dw .Func_9ea2a
+	dw .Func_9ea70
+	dw .Func_9e9da
+	dw .Func_9e9df
+	dw .Func_9ea74
+	dw .Func_9ea7f
+	dw .Func_9ea2a
+	dw .Func_9ea8e
+	dw .Func_9ea93
+	dw EndCutsceneDelay_40Frames
+
+.Func_9e9a3:
+	call Func_9cc87
+	ld b, BANK(Pals_b8680)
+	ld hl, Pals_b8680
+	call LoadFarPalsToTempPals1
+	ld b, BANK(Pals_b8680)
+	ld hl, Pals_b8680
+	call LoadFarPalsToTempPals2
+	jp AdvanceCutsceneFunc
+
+.Func_9e9b9:
+	ld a, [bc]
+	cp $28
+	ret c
+	ld hl, wSceneObj2
+	lb de, $46, $90
+	ld a, $02
+	call Func_9ccf9
+	jp AdvanceCutsceneFunc
+
+.Func_9e9cb:
+	ld a, [bc]
+	and $01
+	ret nz
+	ld hl, wSceneObj2XCoord
+	dec [hl]
+	ld a, [hl]
+	cp $44
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9e9da:
+	ld c, $2d
+	jp WaitCutsceneFunc
+
+.Func_9e9df:
+	ld a, [bc]
+	and $03
+	ret nz
+	ld hl, wSceneObj2YCoord
+	inc [hl]
+	ld a, [hl]
+	cp $4e
+	ret nz
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $2f
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9e9f6:
+	xor a
+	ld [wSceneObj3State], a
+.Func_9e9fa:
+	ld hl, wSceneObj10
+	lb de, $4c, $40
+	ld a, $03
+	call Func_9ccf9
+	ld hl, wSceneObj11
+	lb de, $4c, $48
+	ld a, $03
+	call Func_9ccf9
+	ld a, $01
+	ld [wSceneObj12YCoord], a
+	ld [wSceneObj12XCoord], a
+	jp AdvanceCutsceneFunc
+
+.Func_9ea1b:
+	ld a, [bc]
+	cp $14
+	ret c
+	ld a, $05
+	ld hl, wSceneObj6State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9ea2a:
+	ld a, [bc]
+	and $03
+	ret nz
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	ld a, [hl]
+	cp $46
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9ea39:
+	ld e, $54
+.asm_9ea3b
+	ld a, [bc]
+	and $03
+	ret nz
+	ld hl, wSceneObj2XCoord
+	inc [hl]
+	ld a, [hl]
+	cp e
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9ea49:
+	xor a
+	ld [wSceneObj4State], a
+	call .Func_9e9fa
+	ld b, $10
+.asm_9ea52
+	ld a, [wSceneObj10XCoord]
+	add b
+	ld [wSceneObj10XCoord], a
+	ld a, [wSceneObj11XCoord]
+	add b
+	ld [wSceneObj11XCoord], a
+	ret
+
+.Func_9ea61:
+	ld a, [bc]
+	cp $14
+	ret c
+	ld a, $05
+	ld hl, wSceneObj7State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9ea70:
+	ld e, $64
+	jr .asm_9ea3b
+
+.Func_9ea74:
+	xor a
+	ld [wSceneObj5State], a
+	call .Func_9e9fa
+	ld b, $20
+	jr .asm_9ea52
+
+.Func_9ea7f:
+	ld a, [bc]
+	cp $14
+	ret c
+	ld a, $05
+	ld hl, wSceneObj8State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9ea8e:
+	ld c, $1e
+	jp WaitCutsceneFunc
+
+.Func_9ea93:
+	ld hl, wSceneObj2XCoord
+	inc [hl]
+	ld a, [hl]
+	cp $90
+	ret nz
+	jp AdvanceCutsceneFunc
+
+Func_9ea9e:
+	ld a, [wSceneObj12YCoord]
+	and a
+	ret z
+	ld de, Data_9ec16
+	ld hl, wSceneObj10
+	call ApplyOWMovement
+	ret nz
+	ld [wSceneObj12YCoord], a
+	ld [wSceneObj10State], a
+	ret
+
+Func_9eab4:
+	ld a, [wSceneObj12XCoord]
+	and a
+	ret z
+	ld de, Data_9ec41
+	ld hl, wSceneObj11
+	call ApplyOWMovement
+	ret nz
+	ld [wSceneObj12XCoord], a
+	ld [wSceneObj11State], a
+	ret
+; 0x9eaca
+
+Cutscene44Func: ; 9eaca (27:6aca)
+	call .Func_9ead3
+	call Func_9fab4
+	jp Func_9faea
+
+.Func_9ead3:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9eaf7
+	dw .Func_9eb05
+	dw .Func_9eb18
+	dw .Func_9eb24
+	dw .Func_9eb3d
+	dw .Func_9eb47
+	dw .Func_9eb5c
+	dw .Func_9eb68
+	dw .Func_9eb73
+	dw .Func_9eb8a
+	dw .Func_9eb9a
+	dw .Func_9eb9f
+	dw .Func_9ebad
+	dw Func_9cdcd
+	dw EndCutsceneDelay_60Frames
+
+.Func_9eaf7:
+	ld hl, wSceneObj2
+	lb de, $20, $4c
+	ld a, $01
+	call Func_9ccf9
+	jp AdvanceCutsceneFunc
+
+.Func_9eb05:
+	ld a, [bc]
+	and $01
+	ret nz
+	ld hl, wSceneObj2YCoord
+	inc [hl]
+	ld a, [hl]
+	cp $a8
+	ret nz
+	xor a
+	ld [wSceneObj2State], a
+	jp AdvanceCutsceneFunc
+
+.Func_9eb18:
+	ld a, [bc]
+	cp $1e
+	ret c
+	ld a, $08
+	ld [wCollectionRow], a
+	jp AdvanceCutsceneFunc
+
+.Func_9eb24:
+	ld hl, wSceneObj2
+	lb de, $20, $50
+	ld a, $02
+	call Func_9ccf9
+	ld hl, wSceneObj3
+	lb de, $48, $20
+	ld a, $01
+	call Func_9ccf9
+	jp AdvanceCutsceneFunc
+
+.Func_9eb3d:
+	ld a, [bc]
+	cp $50
+	call z, AdvanceCutsceneFunc
+	call .Func_9ebbc
+	ret
+
+.Func_9eb47:
+	call .Func_9ebbc
+	call .Func_9ebc7
+	ld a, [hl]
+	cp $48
+	ret nz
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $3b
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9eb5c:
+	ld a, [bc]
+	cp $02
+	ret c
+	ld hl, wSceneObj3XCoord
+	dec [hl]
+	dec [hl]
+	jp AdvanceCutsceneFunc
+
+.Func_9eb68:
+	ld a, [bc]
+	cp $06
+	ret c
+	xor a
+	ld [wSceneObj2State], a
+	jp AdvanceCutsceneFunc
+
+.Func_9eb73:
+	ld a, [bc]
+	cp $3c
+	ret c
+	ld a, $02
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $1a
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9eb8a:
+	ld a, [wSceneObj3State]
+	cp $03
+	ret nz
+	xor a
+	ld [wSceneObj3Unk7], a
+	ld [wSceneObj4YCoord], a
+	jp AdvanceCutsceneFunc
+
+.Func_9eb9a:
+	ld c, $3c
+	jp WaitCutsceneFunc
+
+.Func_9eb9f:
+	call .Func_9ebc7
+	ld a, [hl]
+	cp $88
+	ret nz
+	xor a
+	ld [wSceneObj3State], a
+	jp AdvanceCutsceneFunc
+
+.Func_9ebad:
+	ld a, [bc]
+	cp $2d
+	ret c
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $8d
+	ldh [$ffb6], a
+	jp AdvanceCutsceneFunc
+
+.Func_9ebbc:
+	ld a, [wGlobalCounter]
+	and $03
+	ret nz
+	ld hl, wSceneObj2YCoord
+	inc [hl]
+	ret
+
+.Func_9ebc7:
+	ld hl, wSceneObj3Unk7
+	call .Func_9ebd3
+	ld hl, wSceneObj3XCoord
+	add [hl]
+	ld [hl], a
+	ret
+
+.Func_9ebd3:
+	ld a, [hl]
+	inc [hl]
+	cp $30
+	jr c, .asm_9ebdd
+	xor a
+	ld [hl], a
+	jr .Func_9ebd3
+.asm_9ebdd
+	ld c, a
+	ld b, $00
+	ld hl, .data_9ebe6
+	add hl, bc
+	ld a, [hl]
+	ret
+
+.data_9ebe6
+	db 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1
+
+Data_9ec16:
+	db  0,  0, -2,  0, -2, -1, -3,  0, -2, -1, -2, -1, -2, -1, -2, -1, -1, -1, -1, -2,  0, -3,  1, -1,  2, -2,  6, -4,  6, -3,  6, -2,  7, -2,  6, -2,  7, -2,  6, -2,  7, -1, $80
+
+Data_9ec41:
+	db  0,  0, -1,  1, -2,  1, -1,  1, -1,  1, -1,  1, -1,  1,  0,  2,  1,  1,  1,  2,  1,  0,  2,  1,  1,  1,  5,  2,  5,  1,  6,  1,  5,  1,  6,  0,  5,  1,  6,  0,  5,  0, $80
+
+Cutscene14Func: ; 9ec6c (27:6c6c)
+	call .Func_9ec73
+	call Func_9fba9
+	ret
+
+.Func_9ec73:
+	ld a, [w2d013]
+	jumptable
+	dw StartCutsceneDelay
+	dw .Func_9ec9b
+	dw .Func_9ecef
+	dw .Func_9ed14
+	dw .Func_9ed1c
+	dw .Func_9ed3c
+	dw .Func_9ed54
+	dw .Func_9ed70
+	dw .Func_9ed77
+	dw .Func_9ed7c
+	dw .Func_9ed9c
+	dw .Func_9edb7
+	dw .Func_9edc2
+	dw .Func_9edf1
+	dw .Func_9edf9
+	dw .Func_9ee17
+	dw .Func_9ee23
+	dw .Func_9ee57
+
+.Func_9ec9b:
+	ld hl, wSceneObj2YCoord
+	ld a, $78
+	ld [hli], a
+	ld [hl], $52
+	ld a, $01
+	ld hl, wSceneObj2State
+	call SetSceneObjState
+	ld hl, wSceneObj3YCoord
+	ld a, $91
+	ld [hli], a
+	ld [hl], $44
+	ld a, $02
+	ld hl, wSceneObj3State
+	call SetSceneObjState
+	ld hl, wSceneObj4YCoord
+	ld a, $91
+	ld [hli], a
+	ld [hl], $60
+	ld a, $03
+	ld hl, wSceneObj4State
+	call SetSceneObjState
+	ld hl, wCurSceneObj
+	ld a, $bc
+	ld [hli], a
+	ld [hl], $50
+	ld a, $02
+	ld [wSceneObj1YCoord], a
+	ld hl, wPalFade1
+	ld [hl], $99
+	inc l
+	ld [hl], $6e
+	inc l
+	ld [hl], $e7
+	inc l
+	ld [hl], $6e
+	inc l
+	ld [hl], $33
+	inc l
+	ld [hl], $6f
+	jp AdvanceCutsceneFunc
+
+.Func_9ecef:
+	call .Func_9ee5b
+	ld a, [wGlobalCounter]
+	and $01
+	ret nz
+	ld hl, wSceneObj2YCoord
+	dec [hl]
+	ld hl, wSceneObj3YCoord
+	dec [hl]
+	ld hl, wSceneObj4YCoord
+	dec [hl]
+	ld hl, wCurSceneObj
+	dec [hl]
+	ld a, [hl]
+	cp $87
+	jp z, Func_9ce1f
+	cp $74
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9ed14:
+	call .Func_9ee5b
+	ld c, $3c
+	jp WaitCutsceneFunc
+
+.Func_9ed1c:
+	call .Func_9ee5b
+	ld a, [wGlobalCounter]
+	and $03
+	ret nz
+	ld hl, wSceneObj2YCoord
+	inc [hl]
+	ld hl, wSceneObj3YCoord
+	inc [hl]
+	ld hl, wSceneObj4YCoord
+	inc [hl]
+	ld hl, wCurSceneObj
+	inc [hl]
+	ld a, [hl]
+	cp $82
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9ed3c:
+	call .Func_9ee5b
+	ld a, [wGlobalCounter]
+	and $03
+	ret nz
+	ld hl, wCurSceneObj
+	inc [hl]
+	ld a, [hl]
+	cp $92
+	ret nz
+	xor a
+	ld [wSceneObj1YCoord], a
+	jp AdvanceCutsceneFunc
+
+.Func_9ed54:
+	call .Func_9ee5b
+	ret nc
+	ld hl, wPalFade1
+	ld a, $82
+	ld [hli], a
+	ld a, $6f
+	ld [hli], a
+	ld a, $e3
+	ld [hli], a
+	ld a, $6f
+	ld [hli], a
+	ld a, $44
+	ld [hli], a
+	ld a, $70
+	ld [hli], a
+	jp AdvanceCutsceneFunc
+
+.Func_9ed70:
+	call .Func_9ee5b
+	ret nc
+	jp AdvanceCutsceneFunc
+
+.Func_9ed77:
+	ld c, $1e
+	jp WaitCutsceneFunc
+
+.Func_9ed7c:
+	ld hl, wSceneObj5
+	ld a, $4c
+	ld [hli], a
+	ld [hl], $50
+	ld a, $04
+	ld hl, wSceneObj5State
+	call SetSceneObjState
+	xor a
+	ld [wSceneObj2State], a
+	ld [wSceneObj3State], a
+	ld [wSceneObj4State], a
+	ld [wColourFadeDiff], a
+	jp AdvanceCutsceneFunc
+
+.Func_9ed9c:
+	call .Func_9eda4
+	ld c, $78
+	jp WaitCutsceneFunc
+
+.Func_9eda4:
+	ld hl, wColourFadeDiff
+	inc [hl]
+	ld a, [hl]
+	cp $0a
+	ret c
+	xor a
+	ld [hl], a
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $0f
+	ldh [$ffb6], a
+	ret
+
+.Func_9edb7:
+	ld a, $05
+	ld hl, wSceneObj5State
+	call SetSceneObjState
+	jp AdvanceCutsceneFunc
+
+.Func_9edc2:
+	call .Func_9edce
+	ld a, [wSceneObj5State]
+	cp $06
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9edce:
+	ld hl, wColourFadeDiff
+	inc [hl]
+	ld a, [hl]
+	cp $0a
+	ret c
+	xor a
+	ld [hl], a
+	ld a, [wSceneObj5Frame]
+	cp $09
+	jr nc, .asm_9ede8
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $10
+	ldh [$ffb6], a
+	ret
+.asm_9ede8
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $11
+	ldh [$ffb6], a
+	ret
+
+.Func_9edf1:
+	call .Func_9edce
+	ld c, $5a
+	jp WaitCutsceneFunc
+
+.Func_9edf9:
+	call .Func_9edce
+	ld a, [w2d014]
+	ld b, $01
+	cp $08
+	jr c, .asm_9ee0b
+	inc b
+	cp $10
+	jr c, .asm_9ee0b
+	inc b
+.asm_9ee0b
+	ld a, b
+	ld hl, wSceneObj5
+	add [hl]
+	ld [hl], a
+	cp $70
+	ret c
+	jp AdvanceCutsceneFunc
+
+.Func_9ee17:
+	call .Func_9edce
+	ld a, [wColourFadeDiff]
+	cp $09
+	ret nz
+	jp AdvanceCutsceneFunc
+
+.Func_9ee23:
+	call .Func_9ee2a
+	call Func_9cd8d
+	ret
+
+.Func_9ee2a:
+	ld hl, wColourFadeDiff
+	inc [hl]
+	ld a, [hl]
+	cp $0a
+	jr z, .asm_9ee3c
+	cp $14
+	jr z, .asm_9ee45
+	cp $1e
+	jr z, .asm_9ee4e
+	ret
+.asm_9ee3c
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $14
+	ldh [$ffb6], a
+	ret
+.asm_9ee45
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $15
+	ldh [$ffb6], a
+	ret
+.asm_9ee4e
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $16
+	ldh [$ffb6], a
+	ret
+
+.Func_9ee57:
+	call Func_9cd16
+	ret
+
+.Func_9ee5b:
+	ld bc, wPalFade1Colour1RedUnk1
+	ld hl, wSceneObj4
+	call .Func_9ee77
+	ld bc, wPalFade1Colour1RedSign
+	ld hl, wSceneObj3
+	call .Func_9ee77
+	ld bc, wPalFade1
+	ld hl, wSceneObj2
+	call .Func_9ee77
+	ret
+
+.Func_9ee77:
+	ld a, [bc]
+	ld e, a
+	inc c
+	ld a, [bc]
+	ld d, a
+	dec c
+	ld a, [de]
+	add [hl]
+	ld [hli], a
+	inc de
+	ld a, [de]
+	add [hl]
+	ld [hl], a
+	inc de
+	ld a, [de]
+	cp $80
+	jr nz, .Func_9ee92
+	ld de, .data_9ee99
+	call .Func_9ee92
+	scf
+	ret
+
+.Func_9ee92
+	ld a, e
+	ld [bc], a
+	inc c
+	ld a, d
+	ld [bc], a
+	and a
+	ret
+
+.data_9ee99
+	db  0, -1,  0, -1,  0, -1,  0, -1,  1, -1,  0, -1,  0, -1,  0,  0,  1, -1,  0, -1,  1,  0,  0, -1,  1,  0,  0, -1,  1, -1,  1,  0,  0, -1,  1,  0,  0, -1,  1,  0,  1, -1,  0,  0,  1,  0,  1,  0,  1, -1,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  1,  1,  0,  1,  0,  0,  0,  1,  1,  1,  0,  0,  1,  1,  0,  0,  1,  1,  0,  1,  1,  0,  1,  1,  0,  0,  1,  1,  0,  0,  1,  1,  1,  0,  0,  0,  1,  0,  1,  1,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1, -1,  1,  0,  1,  0,  1,  0,  0, -1,  1,  0,  1, -1,  0,  0,  1, -1,  0,  0,  1, -1,  1, -1,  0,  0,  1, -1,  0,  0,  1, -1,  0, -1,  1,  0,  0, -1,  0, -1,  0, -1,  1, -1,  0, -1,  0, -1,  0, -1,  0, -1,  0, -1,  0, -1,  0, -1,  0, -1, -1, -1,  0, -1,  0,  0,  0, -1, -1, -1,  0,  0, -1, -1,  0,  0, -1, -1,  0, -1, -1,  0, -1, -1,  0,  0, -1, -1,  0,  0, -1, -1, -1,  0,  0,  0, -1,  0, -1, -1, -1,  0, -1,  0, -1,  0, -1,  0, -1, $80
+
+	INCROM $9ef82, $9f0a5
 
 Func_9f0a5: ; 9f0a5 (27:70a5)
 	dec a
@@ -2135,18 +6398,25 @@ Func_9f0b5: ; 9f0b5 (27:70b5)
 	ret
 ; 0x9f0bc
 
+; de = OAM
 Func_9f0bc: ; 9f0bc (27:70bc)
 	ld b, $2f
 	jp AddOWSprite
 ; 0x9f0c1
 
+; de = OAM
 Func_9f0c1: ; 9f0c1 (27:70c1)
 	ld b, $62
 	jp AddOWSprite
 ; 0x9f0c6
 
-	INCROM $9f0c6, $9f0cb
+; de = OAM
+Func_9f0c6: ; 9f0c6 (27:70c6)
+	ld b, $60
+	jp AddOWSprite
+; 0x9f0cb
 
+; de = OAM
 Func_9f0cb: ; 9f0cb (27:70cb)
 	ld b, $63
 	jp AddOWSprite
@@ -2312,9 +6582,135 @@ Func_9f174: ; 9f174 (27:7174)
 	dw Frameset_bd608
 	dw Frameset_bd60f
 	dw Frameset_bd612
-; 0x9f1d8
 
-	INCROM $9f1d8, $9f2a2
+Func_9f1d8: ; 9f1d8 (27:71d8)
+	ld bc, wSceneObj2State
+	ld a, [bc]
+	and a
+	ret z
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0ae
+	ld de, OAM_bd615
+	jp Func_9f0bc
+
+.framesets
+	dw Frameset_bd790
+	dw Frameset_bd793
+	dw Frameset_bd79c
+; 0x9f1f3
+
+Func_9f1f3: ; 9f1f3 (27:71f3)
+	ld de, wSceneObj2
+	call Func_9fb75
+	ld de, wSceneObj2
+	call Func_9fb97
+	ld bc, wSceneObj2State
+	call .Func_9f20b
+	ld de, wSceneObj2
+	jp Func_9fb7e
+
+.Func_9f20b:
+	ld a, [bc]
+	and a
+	ret z
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0ae
+	ld de, OAM_bd7a1
+	jp Func_9f0bc
+
+.framesets
+	dw Frameset_bd905
+	dw Frameset_bd908
+	dw Frameset_bd90b
+	dw Frameset_bd90e
+
+Func_9f225: ; 9f225 (27:7225)
+	ld bc, wSceneObj2State
+	call .Func_9f22e
+	ld bc, wSceneObj3State
+.Func_9f22e:
+	ld a, [bc]
+	and a
+	ret z
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0ae
+	ld de, OAM_bd911
+	jp Func_9f0bc
+
+.framesets
+	dw Frameset_bd96b
+	dw Frameset_bd96e
+
+Func_9f244: ; 9f244 (27:7244)
+	ld bc, wSceneObj5State
+	ld a, [bc]
+	and a
+	ret z
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0b5
+	cp $02
+	jr z, .asm_9f266
+	cp $01
+	jr z, .asm_9f27a
+.asm_9f25b
+	ld de, OAM_188e16
+	call Func_9f0c1
+	ret
+
+.framesets
+	dw Frameset_692e7
+	dw Frameset_69335
+
+.asm_9f266
+	call .Func_9f26b
+	jr .asm_9f25b
+
+.Func_9f26b:
+	ld a, [wOWAnimationFinished]
+	cp $ff
+	ret nz
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $71
+	ldh [$ffb6], a
+	ret
+
+.asm_9f27a
+	call .Func_9f27f
+	jr .asm_9f25b
+
+.Func_9f27f:
+	ld d, h
+	ld e, l
+	set 1, e
+	ld a, [de]
+	ld c, a
+	set 0, e
+	set 2, e
+	ld a, [de]
+	and a
+	ld a, $01
+	jr nz, .asm_9f295
+	cp c
+	ret z
+	ld a, $01
+	ld [de], a
+	ret
+.asm_9f295
+	cp c
+	ret nz
+	xor a
+	ld [de], a
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $11
+	ldh [$ffb6], a
+	ret
+; 0x9f2a2
 
 Func_9f2a2: ; 9f2a2 (27:72a2)
 	ld bc, wSceneObj2State
@@ -2338,9 +6734,30 @@ Func_9f2a2: ; 9f2a2 (27:72a2)
 	dw Frameset_bd9f8
 	dw Frameset_bd9fb
 	dw Frameset_bd9fe
-; 0x9f2cd
 
-	INCROM $9f2cd, $9f2f3
+Func_9f2cd: ; 9f2cd (27:72cd)
+	ld bc, wSceneObj2State
+.asm_9f2d0
+	ld a, [bc]
+	and a
+	ret z
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0ae
+	cp $01
+	jr z, .asm_9f2e6
+.asm_9f2e0
+	ld de, OAM_bda01
+	jp Func_9f0bc
+.asm_9f2e6
+	ld b, $02
+	call Func_9f0d0
+	jr z, .asm_9f2d0
+	jr .asm_9f2e0
+
+.framesets
+	dw Frameset_bdaa2
+	dw Frameset_bdab9
 
 Func_9f2f3: ; 9f2f3 (27:72f3)
 	ld bc, wSceneObj2State
@@ -2367,9 +6784,64 @@ Func_9f2f3: ; 9f2f3 (27:72f3)
 	dw Frameset_691a7
 	dw Frameset_691bc
 	dw Frameset_691bf
-; 0x9f323
 
-	INCROM $9f323, $9f38d
+Func_9f323: ; 9f323 (27:7323)
+	ld de, wSceneObj2
+	call Func_9fb97
+	ld bc, wSceneObj2State
+	ld a, [bc]
+	and a
+	ret z
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0ae
+	ld de, OAM_bdabc
+	jp Func_9f0bc
+
+.framesets
+	dw Frameset_bdb03
+
+Func_9f340: ; 9f340 (27:7340)
+	ld bc, wSceneObj3State
+	call .Func_9f34f
+	ld bc, wSceneObj4State
+	call .Func_9f34f
+	ld bc, wSceneObj2State
+.Func_9f34f:
+	ld a, [bc]
+	and a
+	ret z
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0ae
+	ld de, OAM_bdb06
+	jp Func_9f0bc
+
+.framesets
+	dw Frameset_bdc5f
+	dw Frameset_bdc62
+	dw Frameset_bdc7f
+
+Func_9f367: ; 9f367 (27:7367)
+	ld de, wSceneObj3
+	call Func_9fb4c
+	ld bc, wSceneObj2State
+	call .Func_9f379
+	ld de, wSceneObj3
+	jp Func_9fb6c
+
+.Func_9f379:
+	ld a, [bc]
+	and a
+	ret z
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0ae
+	ld de, OAM_bdc9c
+	jp Func_9f0bc
+
+.framesets
+	dw Frameset_bdce3
 
 Func_9f38d: ; 9f38d (27:738d)
 	ld bc, wSceneObj2State
@@ -2404,9 +6876,25 @@ Func_9f38d: ; 9f38d (27:738d)
 	dw Frameset_bdda9
 	dw Frameset_bddc0
 	dw Frameset_bddc9
-; 0x9f3cd
 
-	INCROM $9f3cd, $9f3ee
+Func_9f3cd: ; 9f3cd (27:73cd)
+	ld bc, wSceneObj3State
+	call .Func_9f3d6
+	ld bc, wSceneObj2State
+.Func_9f3d6:
+	ld a, [bc]
+	and a
+	ret z
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0ae
+	ld de, OAM_bddcf
+	jp Func_9f0bc
+
+.framesets
+	dw Frameset_bde60
+	dw Frameset_bde63
+	dw Frameset_bde66
 
 Func_9f3ee: ; 9f3ee (27:73ee)
 	ld bc, wSceneObj2State
@@ -2508,9 +6996,175 @@ Func_9f423: ; 9f423 (27:7423)
 .asm_9f493
 	play_sfx SFX_076
 	ret
-; 0x9f49c
 
-	INCROM $9f49c, $9f5a0
+Func_9f49c: ; 9f49c (27:749c)
+	ld bc, wSceneObj2State
+	call .Func_9f4b1
+	ld bc, wSceneObj3State
+	call .Func_9f4b1
+	ld bc, wSceneObj4State
+	call .Func_9f4b1
+	ld bc, wSceneObj5State
+
+.Func_9f4b1:
+	ld a, [bc]
+	and a
+	ret z
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0ae
+	cp $01
+	jr z, .asm_9f4d3
+	cp $02
+	jr z, .asm_9f4ec
+.asm_9f4c5
+	ld de, OAM_be206
+	jp Func_9f0bc
+
+.framesets
+	dw Frameset_be2b9
+	dw Frameset_be2c2
+	dw Frameset_be2d3
+	dw Frameset_be2d6
+
+.asm_9f4d3
+	call .Func_9f4d8
+	jr .asm_9f4c5
+
+.Func_9f4d8:
+	ld de, wSceneObj2Unk7
+	ld a, [de]
+	inc a
+	ld [de], a
+	cp $0c
+	ret c
+	xor a
+	ld [de], a
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $33
+	ldh [$ffb6], a
+	ret
+
+.asm_9f4ec
+	call .Func_9f4d8
+	call .Func_9f4f4
+	jr .asm_9f4c5
+
+.Func_9f4f4:
+	ld de, wSceneObj3Unk7
+	ld a, [de]
+	inc a
+	ld [de], a
+	cp $10
+	ret c
+	xor a
+	ld [de], a
+	ld a, $02
+	ldh [hSFXID], a
+	ld a, $32
+	ldh [$ffb6], a
+	ret
+
+Func_9f508: ; 9f508 (27:7508)
+	ld de, wSceneObj2
+	call Func_9fb97
+	ld bc, wSceneObj2State
+	ld a, [bc]
+	and a
+	ret z
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0ae
+	cp $01
+	jr z, .asm_9f529
+.asm_9f521
+	ld de, OAM_be2d9
+	jp Func_9f0bc
+
+.framesets
+	dw Frameset_be3c5
+
+.asm_9f529
+	call .Func_9f52e
+	jr .asm_9f521
+
+.Func_9f52e:
+	ld de, wSceneObj2Unk7
+	ld a, [de]
+	inc a
+	ld [de], a
+	cp $01
+	jr z, .asm_9f53e
+	cp $0e
+	ret c
+	xor a
+	ld [de], a
+	ret
+.asm_9f53e
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $1e
+	ldh [$ffb6], a
+	ret
+
+Func_9f547: ; 9f547 (27:7547)
+	ld de, wSceneObj2
+	call Func_9fb4c
+	ld bc, wSceneObj2State
+	call .asm_9f559
+	ld de, wSceneObj2
+	jp Func_9fb6c
+
+.asm_9f559
+	ld a, [bc]
+	and a
+	ret z
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0ae
+	cp $02
+	jr z, .asm_9f573
+	cp $03
+	jr z, .asm_9f582
+.asm_9f56d
+	ld de, OAM_be3ce
+	jp Func_9f0bc
+
+.asm_9f573
+	ld b, $03
+	call Func_9f0d0
+	jr z, .asm_9f559
+	jr .asm_9f56d
+
+.framesets
+	dw Frameset_be7e6
+	dw Frameset_be7e9
+	dw Frameset_be802
+
+.asm_9f582
+	call .Func_9f587
+	jr .asm_9f56d
+
+.Func_9f587:
+	ld de, wSceneObj2Unk7
+	ld a, [de]
+	inc a
+	ld [de], a
+	cp $01
+	jr z, .asm_9f597
+	cp $10
+	ret c
+	xor a
+	ld [de], a
+	ret
+.asm_9f597
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $40
+	ldh [$ffb6], a
+	ret
+; 0x9f5a0
 
 Func_9f5a0: ; 9f5a0 (27:75a0)
 	ld bc, wSceneObj4State
@@ -2569,7 +7223,37 @@ Func_9f5a0: ; 9f5a0 (27:75a0)
 	ret
 ; 0x9f607
 
-	INCROM $9f607, $9f638
+Func_9f607: ; 9f607 (27:7607)
+	ld bc, wSceneObj2State
+	ld a, [bc]
+	and a
+	ret z
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0ae
+	cp $02
+	jr z, .asm_9f624
+.asm_9f61a
+	ld de, OAM_be8fe
+	jp Func_9f0bc
+
+.framesets
+	dw Frameset_be9fa
+	dw Frameset_be9fd
+
+.asm_9f624
+	call .Func_9f629
+	jr .asm_9f61a
+
+.Func_9f629:
+	ld a, [wOWAnimationFinished]
+	cp $ff
+	ret nz
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $85
+	ldh [$ffb6], a
+	ret
 
 Func_9f638: ; 9f638 (27:7638)
 	ld bc, wSceneObj2State
@@ -2628,9 +7312,102 @@ Func_9f638: ; 9f638 (27:7638)
 .asm_9f699
 	play_sfx SFX_10E
 	ret
-; 0x9f6a2
 
-	INCROM $9f6a2, $9f73b
+Func_9f6a2: ; 9f6a2 (27:76a2)
+	ld bc, wSceneObj4State
+	call .asm_9f6b1
+	ld bc, wSceneObj2State
+	call .asm_9f6b1
+	ld bc, wSceneObj3State
+.asm_9f6b1
+	ld a, [bc]
+	and a
+	ret z
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0ae
+	cp $02
+	jr z, .asm_9f6cf
+	cp $05
+	jr z, .asm_9f6dd
+	cp $06
+	jr z, .asm_9f6e1
+.asm_9f6c9
+	ld de, OAM_beafc
+	jp Func_9f0bc
+
+.asm_9f6cf
+	ld b, $03
+	call Func_9f0d0
+	jr nz, .asm_9f6c9
+	ld a, $04
+	ld [wSceneObj3State], a
+	jr .asm_9f6b1
+.asm_9f6dd
+	ld b, $00
+	jr .asm_9f6e3
+.asm_9f6e1
+	ld b, $07
+.asm_9f6e3
+	call Func_9f0d0
+	jr z, .asm_9f6b1
+	jr .asm_9f6c9
+
+.framesets
+	dw Frameset_bebda
+	dw Frameset_bebcc
+	dw Frameset_bebdd
+	dw Frameset_bebe0
+	dw Frameset_bebd3
+	dw Frameset_bebe3
+	dw Frameset_bebec
+; 0x9f6f8
+
+Func_9f6f8: ; 9f6f8 (27:76f8)
+	ld bc, wSceneObj2State
+	call .Func_9f701
+	ld bc, wSceneObj3State
+.Func_9f701:
+	ld a, [bc]
+	and a
+	ret z
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0ae
+	cp $02
+	jr z, .asm_9f71d
+.asm_9f711
+	ld de, OAM_bebef
+	jp Func_9f0bc
+
+.framesets
+	dw Frameset_becc7
+	dw Frameset_becca
+	dw Frameset_becd3
+
+.asm_9f71d
+	call .Func_9f722
+	jr .asm_9f711
+
+.Func_9f722:
+	ld de, wSceneObj2Unk7
+	ld a, [de]
+	inc a
+	ld [de], a
+	cp $01
+	jr z, .asm_9f732
+	cp $0c
+	ret c
+	xor a
+	ld [de], a
+	ret
+.asm_9f732
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $7d
+	ldh [$ffb6], a
+	ret
+; 0x9f73b
 
 Func_9f73b: ; 9f73b (27:773b)
 	ld bc, wSceneObj2State
@@ -2652,7 +7429,63 @@ Func_9f73b: ; 9f73b (27:773b)
 	dw Frameset_bed3f
 ; 0x9f75c
 
-	INCROM $9f75c, $9f7bb
+Func_9f75c: ; 9f75c (27:775c)
+	ld bc, wSceneObj2State
+	call .asm_9f765
+	ld bc, wSceneObj4State
+.asm_9f765
+	ld a, [bc]
+	and a
+	ret z
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0ae
+	cp $02
+	jr z, .asm_9f783
+	cp $04
+	jr z, .asm_9f787
+	cp $06
+	jr z, .asm_9f78b
+.asm_9f77d
+	ld de, $6d42
+	jp Func_9f0bc
+.asm_9f783
+	ld b, $00
+	jr .asm_9f78d
+.asm_9f787
+	ld b, $00
+	jr .asm_9f78d
+.asm_9f78b
+	ld b, $07
+.asm_9f78d
+	call Func_9f0d0
+	jr z, .asm_9f765
+	jr .asm_9f77d
+
+.framesets
+	dw Frameset_bee4d
+	dw Frameset_bee50
+	dw Frameset_bee55
+	dw Frameset_bee58
+	dw Frameset_bee5d
+	dw Frameset_bee60
+	dw Frameset_bee6b
+
+Func_9f7a2: ; 9f7a2 (27:77a2)
+	ld bc, wSceneObj3State
+	ld a, [bc]
+	and a
+	ret z
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0b5
+	ld de, OAM_180b43
+	jp Func_9f0c6
+
+.framesets
+	dw Frameset_68439
+	dw Frameset_684ba
+; 0x9f7bb
 
 Func_9f7bb: ; 9f7bb (27:77bb)
 	ld bc, wSceneObj2State
@@ -2753,7 +7586,17 @@ Func_9f821: ; 9f821 (27:7821)
 	ret
 ; 0x9f857
 
-	INCROM $9f857, $9f86a
+Func_9f857: ; 9f857 (27:7857)
+	ld hl, wSceneObj2State
+	ld a, [hld]
+	and a
+	ret z
+	dec l
+	ld de, Frameset_bf154
+	call Func_9f0ae
+	ld de, OAM_bf131
+	jp Func_9f0bc
+; 0x9f86a
 
 Func_9f86a: ; 9f86a (27:786a)
 	ld bc, wSceneObj2State
@@ -3100,21 +7943,135 @@ Func_9fa48: ; 9fa48 (27:7a48)
 	ret
 ; 0x9fab4
 
-	INCROM $9fab4, $9fb53
+Func_9fab4: ; 9fab4 (27:7ab4)
+	ld bc, wSceneObj2State
+	ld a, [bc]
+	and a
+	ret z
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0ae
+	cp $01
+	jr z, .asm_9fad1
+.asm_9fac7
+	ld de, OAM_bf847
+	jp Func_9f0bc
 
+.framesets
+	dw Frameset_bf923
+	dw Frameset_bf92a
+
+.asm_9fad1
+	call .Func_9fad6
+	jr .asm_9fac7
+
+.Func_9fad6:
+	ld de, wSceneObj2Unk7
+	ld a, [de]
+	inc a
+	ld [de], a
+	cp $30
+	ret c
+	xor a
+	ld [de], a
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $8e
+	ldh [$ffb6], a
+	ret
+; 0x9faea
+
+Func_9faea: ; 9faea (27:7aea)
+	ld bc, wSceneObj3State
+.asm_9faed
+	ld a, [bc]
+	and a
+	ret z
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0b5
+	cp $01
+	jr z, .asm_9fb1a
+	cp $03
+	jr z, .asm_9fb33
+	cp $02
+	jr z, .asm_9fb0b
+.asm_9fb05
+	ld de, OAM_18a895
+	jp Func_9f0c1
+.asm_9fb0b
+	ld b, $03
+	call Func_9f0d0
+	jr z, .asm_9faed
+	jr .asm_9fb05
+
+.framesets
+	dw Frameset_69b38
+	dw Frameset_69ba0
+	dw Frameset_69b60
+
+.asm_9fb1a
+	call .Func_9fb1f
+	jr .asm_9fb05
+
+.Func_9fb1f:
+	ld de, wSceneObj4YCoord
+	ld a, [de]
+	inc a
+	ld [de], a
+	cp $28
+	ret c
+	xor a
+	ld [de], a
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $8f
+	ldh [$ffb6], a
+	ret
+
+.asm_9fb33
+	call .Func_9fb38
+	jr .asm_9fb05
+
+.Func_9fb38:
+	ld de, wSceneObj4YCoord
+	ld a, [de]
+	inc a
+	ld [de], a
+	cp $28
+	ret c
+	xor a
+	ld [de], a
+	ld a, $01
+	ldh [hSFXID], a
+	ld a, $83
+	ldh [$ffb6], a
+	ret
+
+Func_9fb4c: ; 9fb4c (27:7b4c)
+	ld c, $00
+	ld hl, wCurSceneObj
+	ld b, $01
+;	fallthrough
+
+; b = y coord
+; c = frame
 Func_9fb53: ; 9fb53 (27:7b53)
 	ld a, [wSceneObj1YCoord]
 	cp b
 	ret nz
 	ld a, [de]
-	ld [hli], a
+	ld [hli], a ; y
 	inc e
 	ld a, [de]
-	ld [hli], a
+	ld [hli], a ; x
 	ld a, c
-	ld [hli], a
+	ld [hli], a ; frame
 	xor a
-	ld [hl], a
+	ld [hl], a ; attributes
+;	fallthrough
+
+Func_9fb61:
 	ld de, OAM_bc000
 	ld a, $fc
 	and l
@@ -3123,23 +8080,145 @@ Func_9fb53: ; 9fb53 (27:7b53)
 	ret
 ; 0x9fb6c
 
-	INCROM $9fb6c, $9fb97
+Func_9fb6c: ; 9fb6c (27:7b6c)
+	ld c, $01
+	ld hl, wCurSceneObjDuration
+	ld b, $01
+	jr Func_9fb53
+; 0x9fb75
 
+Func_9fb75: ; 9fb75 (27:7b75)
+	ld c, 2
+	ld hl, wCurSceneObjDuration
+	ld b, $01
+	jr Func_9fb53
+; 0x9fb7e
+
+Func_9fb7e: ; 9fb7e (27:7b7e)
+	ld c, 3
+	ld hl, wCurSceneObjDuration
+	ld b, $01
+	jr Func_9fb53
+; 0x9fb87
+
+Func_9fb87: ; 9fb87 (27:7b87)
+	ld a, [wSceneObj1YCoord]
+	cp $02
+	ret nz
+	ld hl, wCurSceneObjFrame
+	ld a, $04
+	ld [hli], a
+	xor a
+	ld [hl], a
+	jr Func_9fb61
+; 0x9fb97
+
+; de = scene obj
 Func_9fb97: ; 9fb97 (27:7b97)
-	ld hl, w2d180
-	ld c, $05
+	ld hl, wCurSceneObj
+	ld c, 5
 	ld b, $03
 	jr Func_9fb53
 ; 0x9fba0
 
+; de = scene obj
 Func_9fba0: ; 9fba0 (27:7ba0)
-	ld hl, w2d180Duration
-	ld c, $06
+	ld hl, wCurSceneObjDuration
+	ld c, 6
 	ld b, $03
 	jr Func_9fb53
 ; 0x9fba9
 
-	INCROM $9fba9, $9fc58
+Func_9fba9: ; 9fba9 (27:7ba9)
+	call Func_9fb87
+	ld bc, wSceneObj4State
+	call .Func_9fbc5
+	ld bc, wSceneObj2State
+	call .Func_9fbc5
+	ld bc, wSceneObj3State
+	call .Func_9fbc5
+	ld bc, wSceneObj5State
+	call .Func_9fbc5
+	ret
+
+.Func_9fbc5:
+	ld a, [bc]
+	and a
+	ret z
+	cp $05
+	jr z, .asm_9fbdc
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0ae
+.asm_9fbd5
+	ld de, OAM_bcfb3
+	call Func_9f0bc
+	ret
+.asm_9fbdc
+	ld hl, .framesets
+	call Func_9f0a5
+	call Func_9f0ae
+	ld b, $06
+	call Func_9f0d0
+	jr z, .Func_9fbc5
+	jr .asm_9fbd5
+
+.framesets
+	dw Frameset_bd1b7
+	dw Frameset_bd1ba
+	dw Frameset_bd1bd
+	dw Frameset_bd1c0
+	dw Frameset_bd1c5
+	dw Frameset_bd1f8
+
+Func_9fbfa: ; 9fbfa (27:7bfa)
+	ld de, wSceneObj2
+	call Func_9fb4c
+	call .Func_9fc09
+	ld de, wSceneObj2
+	jp Func_9fb6c
+
+.Func_9fc09:
+	ld a, [wSceneObj2State]
+	and a
+	ret z
+	ld de, Frameset_bd1b4
+	ld hl, wSceneObj2Duration
+	call Func_9f0ae
+	ld de, OAM_bcfb3
+	jp Func_9f0bc
+
+Func_9fc1d: ; 9fc1d (27:7c1d)
+	ld de, wSceneObj2
+	call Func_9fb4c
+	call .Func_9fc2c
+	ld de, wSceneObj2
+	jp Func_9fb6c
+
+.Func_9fc2c:
+	ld a, [wSceneObj2State]
+	and a
+	ret z
+	dec a
+	ld hl, .framesets
+	call GetPointerFromTableDE
+	ld hl, wSceneObj2Duration
+	call Func_9f0ae
+	ld de, OAM_bc1f6
+	jp Func_9f0bc
+
+.framesets
+	dw Frameset_bcf15
+	dw Frameset_bcf18
+	dw Frameset_bcf21
+	dw Frameset_bcf24
+	dw Frameset_bcf35
+	dw Frameset_bcf38
+	dw Frameset_bcf49
+	dw Frameset_bcf4c
+	dw Frameset_bcf6d
+	dw Frameset_bcf70
+; 0x9fc44
 
 Func_9fc58: ; 9fc58 (27:7c58)
 .start
@@ -3170,6 +8249,35 @@ Func_9fc58: ; 9fc58 (27:7c58)
 .asm_9fc85
 	ld de, OAM_bc122
 	jp Func_9f0bc
-; 0x9fc8b
 
-	INCROM $9fc8b, $a0000
+Pals_9fc8b: ; 9fc8b (27:7c8b)
+	rgb  6,  7, 16
+	rgb  2,  5, 17
+	rgb  0,  4, 14
+	rgb  0,  0, 11
+; 0x9fc93
+
+Pals_9fc93: ; 9fc93 (27:7c93)
+	rgb 12, 15, 22
+	rgb  4,  9, 21
+	rgb  0,  5, 18
+	rgb  0,  0, 11
+; 0x9fc9b
+
+Pals_9fc9b: ; 9fc9b (27:7c9b)
+	rgb 16, 21, 26
+	rgb  6, 15, 27
+	rgb  0,  6, 21
+	rgb  0,  0, 11
+; 0x9fca3
+
+Pals_9fca3: ; 9fca3 (27:7ca3)
+	rgb 21, 28, 31
+	rgb  8, 19, 31
+	rgb  0,  7, 23
+	rgb  0,  0, 11
+; 0x9fcab
+
+REPT $355
+	db $00
+ENDR

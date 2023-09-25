@@ -2702,10 +2702,10 @@ ENDR
 ; 0x1bc7
 
 LoadCollectedTreasurePal_ClearScreen:: ; 1bc7 (0:1bc7)
-	ldh a, [rSMBK]
+	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wLevelTreasurePals)
-	ldh [rSMBK], a
+	ldh [rSVBK], a
 	ld hl, wLevelEndScreen
 	ld a, [hl]
 	and $7f
@@ -2733,7 +2733,7 @@ LoadCollectedTreasurePal_ClearScreen:: ; 1bc7 (0:1bc7)
 	pop af
 	bankswitch
 	pop af
-	ldh [rSMBK], a
+	ldh [rSVBK], a
 	ret
 ; 0x1c13
 
