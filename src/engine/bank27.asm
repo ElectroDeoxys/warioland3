@@ -1846,10 +1846,7 @@ Cutscene06Func: ; 9d02d (27:502d)
 	ret c
 	jp AdvanceCutsceneFunc
 .asm_9d068
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $02
-	ldh [$ffb6], a
+	play_sfx SFX_102
 	ret
 
 .Func_9d071:
@@ -1876,10 +1873,7 @@ Cutscene06Func: ; 9d02d (27:502d)
 	ret nc
 	jp AdvanceCutsceneFunc
 .asm_9d093
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $0d
-	ldh [$ffb6], a
+	play_sfx SFX_TEMPLE_ROCK
 	ret
 
 .Func_9d09c:
@@ -1924,10 +1918,7 @@ Cutscene06Func: ; 9d02d (27:502d)
 	ret c
 	xor a
 	ld [hl], a
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $23
-	ldh [$ffb6], a
+	play_sfx SFX_023
 	ret
 
 Func_9d0e6: ; 9d0e6 (27:50e6)
@@ -1990,10 +1981,7 @@ Cutscene0aFunc: ; 9d10e (27:510e)
 
 .Func_9d145:
 	call .Func_9d133
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $06
-	ldh [$ffb6], a
+	play_sfx SFX_106
 	jp AdvanceCutsceneFunc
 .Func_9d153:
 	ld c, $1e
@@ -2068,10 +2056,7 @@ Cutscene07Func: ; 9d18b (27:518b)
 	ld a, $01
 	ld hl, wSceneObj5State
 	call SetSceneObjState
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $62
-	ldh [$ffb6], a
+	play_sfx SFX_062
 	jp AdvanceCutsceneFunc
 
 .Func_9d1e4:
@@ -2082,10 +2067,7 @@ Cutscene07Func: ; 9d18b (27:518b)
 	ld a, $02
 	ld hl, wSceneObj5State
 	call SetSceneObjState
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $62
-	ldh [$ffb6], a
+	play_sfx SFX_062
 	jp AdvanceCutsceneFunc
 
 .Func_9d1fc:
@@ -2112,10 +2094,7 @@ Cutscene07Func: ; 9d18b (27:518b)
 	ld a, [wSceneObj2Frame]
 	and a
 	ret nz
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $09
-	ldh [$ffb6], a
+	play_sfx SFX_109
 	jp AdvanceCutsceneFunc
 
 .Func_9d22c:
@@ -2142,10 +2121,7 @@ Cutscene07Func: ; 9d18b (27:518b)
 	ld a, $08
 	ld hl, wSceneObj4State
 	call SetSceneObjState
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $35
-	ldh [$ffb6], a
+	play_sfx SFX_035
 	jp AdvanceCutsceneFunc
 
 .Func_9d25c:
@@ -2159,10 +2135,7 @@ Cutscene07Func: ; 9d18b (27:518b)
 	jp WaitCutsceneFunc
 
 .Func_9d269:
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $0b
-	ldh [$ffb6], a
+	play_sfx SFX_10B
 	jp AdvanceCutsceneFunc
 
 .Func_9d274:
@@ -2225,10 +2198,7 @@ Cutscene19Func: ; 9d27f (27:527f)
 	ld a, $02
 	ld hl, wSceneObj2State
 	call SetSceneObjState
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $73
-	ldh [$ffb6], a
+	play_sfx SFX_073
 	jp AdvanceCutsceneFunc
 
 .Func_9d2e4:
@@ -2429,10 +2399,7 @@ Cutscene11Func:
 	jp AdvanceCutsceneFunc
 
 .asm_9d438
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $13
-	ldh [$ffb6], a
+	play_sfx SFX_113
 	ret
 ; 0x9d441
 
@@ -2484,10 +2451,7 @@ Cutscene1bFunc: ; 9d441 (27:5441)
 	call .Func_9d4a4
 	cp $5a
 	ret nz
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $62
-	ldh [$ffb6], a
+	play_sfx SFX_062
 	jp AdvanceCutsceneFunc
 
 .Func_9d4a4:
@@ -2633,10 +2597,7 @@ Cutscene1eFunc: ; 9d569 (27:5569)
 	ld a, [hl]
 	cp $3b
 	ret nz
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $2f
-	ldh [$ffb6], a
+	play_sfx SFX_02F
 	jp AdvanceCutsceneFunc
 
 .Func_9d5a1:
@@ -2647,10 +2608,7 @@ Cutscene1eFunc: ; 9d569 (27:5569)
 	ld a, $01
 	ld hl, wSceneObj2State
 	call SetSceneObjState
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $0e
-	ldh [$ffb6], a
+	play_sfx SFX_10E
 	jp AdvanceCutsceneFunc
 
 .Func_9d5b9:
@@ -2716,20 +2674,14 @@ Cutscene22Func: ; 9d5d7 (27:55d7)
 	ld a, $01
 	ld hl, wSceneObj2State
 	call SetSceneObjState
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $03
-	ldh [$ffb6], a
+	play_sfx SFX_103
 	jp AdvanceCutsceneFunc
 
 .Func_9d631:
 	ld a, [wSceneObj2Frame]
 	cp $05
 	ret nz
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $07
-	ldh [$ffb6], a
+	play_sfx SFX_107
 	jp AdvanceCutsceneFunc
 
 .Func_9d642:
@@ -2767,10 +2719,7 @@ Cutscene27Func: ; 9d65e (27:565e)
 	ld a, $02
 	ld hl, wSceneObj2State
 	call SetSceneObjState
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $62
-	ldh [$ffb6], a
+	play_sfx SFX_062
 	jp AdvanceCutsceneFunc
 
 .Func_9d687:
@@ -2781,10 +2730,7 @@ Cutscene27Func: ; 9d65e (27:565e)
 	ld a, $03
 	ld hl, wSceneObj2State
 	call SetSceneObjState
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $62
-	ldh [$ffb6], a
+	play_sfx SFX_062
 	jp AdvanceCutsceneFunc
 
 .Func_9d69f:
@@ -2916,34 +2862,19 @@ Func_9d6f0: ; 9d6f0 (27:56f0)
 	jr z, .asm_9d789
 	ret
 .asm_9d765
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $1e
-	ldh [$ffb6], a
+	play_sfx SFX_11E
 	ret
 .asm_9d76e
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $1f
-	ldh [$ffb6], a
+	play_sfx SFX_11F
 	ret
 .asm_9d777
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $20
-	ldh [$ffb6], a
+	play_sfx SFX_120
 	ret
 .asm_9d780
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $21
-	ldh [$ffb6], a
+	play_sfx SFX_121
 	ret
 .asm_9d789
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $22
-	ldh [$ffb6], a
+	play_sfx SFX_122
 	ret
 
 .Func_9d792:
@@ -3183,10 +3114,7 @@ Cutscene0dFunc: ; 9d8b5 (27:58b5)
 	ld a, $02
 	ld hl, wSceneObj3State
 	call SetSceneObjState
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $17
-	ldh [$ffb6], a
+	play_sfx SFX_117
 	jp AdvanceCutsceneFunc
 
 .Func_9d929:
@@ -3322,10 +3250,7 @@ Cutscene13Func: ; 9d985 (27:5985)
 	ld a, [hl]
 	cp $b0
 	ret c
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $61
-	ldh [$ffb6], a
+	play_sfx SFX_061
 	jp AdvanceCutsceneFunc
 ; 0x9da0e
 
@@ -3388,10 +3313,7 @@ Cutscene49Func:
 	ld a, [hl]
 	cp $45
 	ret nz
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $62
-	ldh [$ffb6], a
+	play_sfx SFX_062
 	jp AdvanceCutsceneFunc
 
 .Func_9da7c:
@@ -3413,10 +3335,7 @@ Cutscene49Func:
 	ld a, [wSceneObj2Duration]
 	and a
 	ret nz
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $2c
-	ldh [$ffb6], a
+	play_sfx SFX_12C
 	ret
 .asm_9daa6
 	ld a, $02
@@ -3467,10 +3386,7 @@ Cutscene49Func:
 	ret c
 	xor a
 	ld [hl], a
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $1f
-	ldh [$ffb6], a
+	play_sfx SFX_01F
 	ret
 ; 0x9db03
 
@@ -3534,10 +3450,7 @@ Cutscene04Func: ; 9db03 (27:5b03)
 	call .Func_9db43
 	cp $4a
 	ret nz
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $13
-	ldh [$ffb6], a
+	play_sfx SFX_113
 	jp AdvanceCutsceneFunc
 
 .Func_9db71:
@@ -3603,10 +3516,7 @@ Cutscene24Func: ; 9db98 (27:5b98)
 	ld [wSceneObj3State], a
 	jp AdvanceCutsceneFunc
 .asm_9dbdc
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $28
-	ldh [$ffb6], a
+	play_sfx SFX_128
 	ret
 
 .Func_9dbe5:
@@ -3709,10 +3619,7 @@ Cutscene1fFunc: ; 9dc7d (27:5c7d)
 	ret nz
 	jp AdvanceCutsceneFunc
 .asm_9dcc1
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $1d
-	ldh [$ffb6], a
+	play_sfx SFX_11D
 	ret
 
 .Func_9dcca:
@@ -3736,10 +3643,7 @@ Cutscene1fFunc: ; 9dc7d (27:5c7d)
 	ld a, [wSceneObj3Frame]
 	cp $0a
 	ret nz
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $3b
-	ldh [$ffb6], a
+	play_sfx SFX_FAT_WALK
 	jp AdvanceCutsceneFunc
 
 .Func_9dcf5:
@@ -4018,20 +3922,14 @@ Cutscene38Func: ; 9de48 (27:5e48)
 	ld a, [wSceneObj2Frame]
 	cp $01
 	ret nz
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $2f
-	ldh [$ffb6], a
+	play_sfx SFX_02F
 	jp AdvanceCutsceneFunc
 
 .Func_9deae:
 	ld a, [wSceneObj2Frame]
 	cp $05
 	ret nz
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $06
-	ldh [$ffb6], a
+	play_sfx SFX_106
 	jp AdvanceCutsceneFunc
 
 .Func_9debf:
@@ -4159,10 +4057,7 @@ Cutscene30Func: ; 9df0f (27:5f0f)
 .asm_9df90
 	ld a, $04
 	ld [hl], a
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $0f
-	ldh [$ffb6], a
+	play_sfx SFX_00F
 	ret
 
 .asm_9df9c
@@ -4228,10 +4123,7 @@ Cutscene39Func: ; 9dfcd (27:5fcd)
 	ld a, [hl]
 	cp $50
 	ret nz
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $62
-	ldh [$ffb6], a
+	play_sfx SFX_062
 	jp AdvanceCutsceneFunc
 
 .Func_9e004:
@@ -4332,10 +4224,7 @@ Cutscene3aFunc: ; 9e046 (27:6046)
 	ret nz
 	jp AdvanceCutsceneFunc
 .asm_9e0ad
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $2f
-	ldh [$ffb6], a
+	play_sfx SFX_02F
 	ret
 
 .Func_9e0b6:
@@ -4357,10 +4246,9 @@ Cutscene3aFunc: ; 9e046 (27:6046)
 	xor a
 	ld [wSceneObj3State], a
 	ld [wSceneObj2State], a
-	ld a, $ff
-	ldh [hSFXID], a
-	ld a, $00
-	ldh [$ffb6], a
+
+	stop_sfx
+
 	ld a, $03
 	ld hl, wSceneObj4State
 	call SetSceneObjState
@@ -4453,10 +4341,7 @@ Cutscene3aFunc: ; 9e046 (27:6046)
 	ld [hl], a
 	ret
 .asm_9e168
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $80
-	ldh [$ffb6], a
+	play_sfx SFX_080
 	ret
 ; 0x9e171
 
@@ -4528,10 +4413,7 @@ Cutscene3cFunc: ; 9e171 (27:6171)
 	ld a, $05
 	ld hl, wSceneObj3State
 	call SetSceneObjState
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $a1
-	ldh [$ffb6], a
+	play_sfx SFX_0A1
 	jp AdvanceCutsceneFunc
 
 .Func_9e1f4:
@@ -4565,10 +4447,7 @@ Cutscene3cFunc: ; 9e171 (27:6171)
 	lb de, $58, $50
 	ld a, $06
 	call Func_9ccf9
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $74
-	ldh [$ffb6], a
+	play_sfx SFX_074
 	jp AdvanceCutsceneFunc
 
 .Func_9e253:
@@ -4608,10 +4487,7 @@ Cutscene43Func: ; 9e25c (27:625c)
 	ld a, [hl]
 	cp $50
 	ret nz
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $62
-	ldh [$ffb6], a
+	play_sfx SFX_062
 	jp AdvanceCutsceneFunc
 
 .Func_9e297:
@@ -4697,10 +4573,7 @@ Cutscene54Func: ; 9e2d1 (27:62d1)
 	ld a, $03
 	ld hl, wSceneObj3State
 	call SetSceneObjState
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $62
-	ldh [$ffb6], a
+	play_sfx SFX_062
 	jp AdvanceCutsceneFunc
 
 .Func_9e333:
@@ -4770,10 +4643,7 @@ Cutscene3dFunc: ; 9e347 (27:6347)
 	ld a, [hl]
 	inc a
 	call SetSceneObjState
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $c4
-	ldh [$ffb6], a
+	play_sfx SFX_0C4
 	jp AdvanceCutsceneFunc
 
 .Func_9e3a8
@@ -4821,10 +4691,7 @@ Cutscene3dFunc: ; 9e347 (27:6347)
 	ld a, [bc]
 	cp $04
 	ret c
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $7a
-	ldh [$ffb6], a
+	play_sfx SFX_07A
 	jp AdvanceCutsceneFunc
 
 .Func_9e402
@@ -4846,10 +4713,7 @@ Cutscene3dFunc: ; 9e347 (27:6347)
 	ld a, [bc]
 	cp $14
 	ret c
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $ac
-	ldh [$ffb6], a
+	play_sfx SFX_0AC
 	jp AdvanceCutsceneFunc
 
 .Func_9e429
@@ -4912,20 +4776,14 @@ Cutscene4aFunc: ; 9e451 (27:6451)
 	ld a, [wSceneObj2Frame]
 	cp $04
 	ret nz
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $62
-	ldh [$ffb6], a
+	play_sfx SFX_062
 	jp AdvanceCutsceneFunc
 
 .Func_9e494:
 	ld a, [wSceneObj2Frame]
 	cp $06
 	ret nz
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $32
-	ldh [$ffb6], a
+	play_sfx SFX_132
 	jp AdvanceCutsceneFunc
 
 .Func_9e4a5:
@@ -5068,10 +4926,7 @@ Cutscene4eFunc: ; 9e54c (27:654c)
 	ld a, [hl]
 	cp $50
 	ret nz
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $62
-	ldh [$ffb6], a
+	play_sfx SFX_062
 	jp AdvanceCutsceneFunc
 ; 0x9e5a1
 
@@ -5239,10 +5094,7 @@ Cutscene51Func: ; 9e66e (27:666e)
 	ld a, [wSceneObj2Frame]
 	cp $04
 	ret nz
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $a1
-	ldh [$ffb6], a
+	play_sfx SFX_0A1
 	jp AdvanceCutsceneFunc
 
 .Func_9e6b8:
@@ -5279,10 +5131,7 @@ Cutscene51Func: ; 9e66e (27:666e)
 	ld [hl], a
 	ret
 .asm_9e6e6
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $1f
-	ldh [$ffb6], a
+	play_sfx SFX_01F
 	ret
 ; 0x9e6ef
 
@@ -5457,10 +5306,7 @@ Cutscene57Func: ; 9e7b3 (27:67b3)
 	ld a, $02
 	ld hl, wSceneObj3State
 	call SetSceneObjState
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $05
-	ldh [$ffb6], a
+	play_sfx SFX_105
 	jp AdvanceCutsceneFunc
 
 .Func_9e827:
@@ -5582,10 +5428,7 @@ Cutscene58Func: ; 9e871 (27:6871)
 	ld a, $01
 	ld [wSceneObj12YCoord], a
 	ld [wSceneObj12XCoord], a
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $32
-	ldh [$ffb6], a
+	play_sfx SFX_132
 	jp AdvanceCutsceneFunc
 
 .Func_9e905:
@@ -5710,10 +5553,7 @@ Cutscene55Func: ; 9e95f (27:695f)
 	ld a, [hl]
 	cp $4e
 	ret nz
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $2f
-	ldh [$ffb6], a
+	play_sfx SFX_02F
 	jp AdvanceCutsceneFunc
 
 .Func_9e9f6:
@@ -5923,10 +5763,7 @@ Cutscene44Func: ; 9eaca (27:6aca)
 	ld a, [hl]
 	cp $48
 	ret nz
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $3b
-	ldh [$ffb6], a
+	play_sfx SFX_FAT_WALK
 	jp AdvanceCutsceneFunc
 
 .Func_9eb5c:
@@ -5953,10 +5790,7 @@ Cutscene44Func: ; 9eaca (27:6aca)
 	ld a, $02
 	ld hl, wSceneObj3State
 	call SetSceneObjState
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $1a
-	ldh [$ffb6], a
+	play_sfx SFX_11A
 	jp AdvanceCutsceneFunc
 
 .Func_9eb8a:
@@ -5985,10 +5819,7 @@ Cutscene44Func: ; 9eaca (27:6aca)
 	ld a, [bc]
 	cp $2d
 	ret c
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $8d
-	ldh [$ffb6], a
+	play_sfx SFX_08D
 	jp AdvanceCutsceneFunc
 
 .Func_9ebbc:
@@ -6213,10 +6044,7 @@ Cutscene14Func: ; 9ec6c (27:6c6c)
 	ret c
 	xor a
 	ld [hl], a
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $0f
-	ldh [$ffb6], a
+	play_sfx SFX_10F
 	ret
 
 .Func_9edb7:
@@ -6243,16 +6071,10 @@ Cutscene14Func: ; 9ec6c (27:6c6c)
 	ld a, [wSceneObj5Frame]
 	cp $09
 	jr nc, .asm_9ede8
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $10
-	ldh [$ffb6], a
+	play_sfx SFX_110
 	ret
 .asm_9ede8
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $11
-	ldh [$ffb6], a
+	play_sfx SFX_111
 	ret
 
 .Func_9edf1:
@@ -6303,22 +6125,13 @@ Cutscene14Func: ; 9ec6c (27:6c6c)
 	jr z, .asm_9ee4e
 	ret
 .asm_9ee3c
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $14
-	ldh [$ffb6], a
+	play_sfx SFX_114
 	ret
 .asm_9ee45
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $15
-	ldh [$ffb6], a
+	play_sfx SFX_115
 	ret
 .asm_9ee4e
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $16
-	ldh [$ffb6], a
+	play_sfx SFX_116
 	ret
 
 .Func_9ee57:
@@ -6673,10 +6486,7 @@ Func_9f244: ; 9f244 (27:7244)
 	ld a, [wOWAnimationFinished]
 	cp $ff
 	ret nz
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $71
-	ldh [$ffb6], a
+	play_sfx SFX_071
 	ret
 
 .asm_9f27a
@@ -6705,10 +6515,7 @@ Func_9f244: ; 9f244 (27:7244)
 	ret nz
 	xor a
 	ld [de], a
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $11
-	ldh [$ffb6], a
+	play_sfx SFX_011
 	ret
 ; 0x9f2a2
 
@@ -7040,10 +6847,7 @@ Func_9f49c: ; 9f49c (27:749c)
 	ret c
 	xor a
 	ld [de], a
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $33
-	ldh [$ffb6], a
+	play_sfx SFX_133
 	ret
 
 .asm_9f4ec
@@ -7060,10 +6864,7 @@ Func_9f49c: ; 9f49c (27:749c)
 	ret c
 	xor a
 	ld [de], a
-	ld a, $02
-	ldh [hSFXID], a
-	ld a, $32
-	ldh [$ffb6], a
+	play_sfx SFX_132
 	ret
 
 Func_9f508: ; 9f508 (27:7508)
@@ -7102,10 +6903,7 @@ Func_9f508: ; 9f508 (27:7508)
 	ld [de], a
 	ret
 .asm_9f53e
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $1e
-	ldh [$ffb6], a
+	play_sfx SFX_01E
 	ret
 
 Func_9f547: ; 9f547 (27:7547)
@@ -7159,10 +6957,7 @@ Func_9f547: ; 9f547 (27:7547)
 	ld [de], a
 	ret
 .asm_9f597
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $40
-	ldh [$ffb6], a
+	play_sfx SFX_040
 	ret
 ; 0x9f5a0
 
@@ -7249,10 +7044,7 @@ Func_9f607: ; 9f607 (27:7607)
 	ld a, [wOWAnimationFinished]
 	cp $ff
 	ret nz
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $85
-	ldh [$ffb6], a
+	play_sfx SFX_085
 	ret
 
 Func_9f638: ; 9f638 (27:7638)
@@ -7402,10 +7194,7 @@ Func_9f6f8: ; 9f6f8 (27:76f8)
 	ld [de], a
 	ret
 .asm_9f732
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $7d
-	ldh [$ffb6], a
+	play_sfx SFX_07D
 	ret
 ; 0x9f73b
 
@@ -7447,7 +7236,7 @@ Func_9f75c: ; 9f75c (27:775c)
 	cp $06
 	jr z, .asm_9f78b
 .asm_9f77d
-	ld de, $6d42
+	ld de, OAM_bed42
 	jp Func_9f0bc
 .asm_9f783
 	ld b, $00
@@ -7974,10 +7763,7 @@ Func_9fab4: ; 9fab4 (27:7ab4)
 	ret c
 	xor a
 	ld [de], a
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $8e
-	ldh [$ffb6], a
+	play_sfx SFX_08E
 	ret
 ; 0x9faea
 
@@ -8023,10 +7809,7 @@ Func_9faea: ; 9faea (27:7aea)
 	ret c
 	xor a
 	ld [de], a
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $8f
-	ldh [$ffb6], a
+	play_sfx SFX_08F
 	ret
 
 .asm_9fb33
@@ -8042,10 +7825,7 @@ Func_9faea: ; 9faea (27:7aea)
 	ret c
 	xor a
 	ld [de], a
-	ld a, $01
-	ldh [hSFXID], a
-	ld a, $83
-	ldh [$ffb6], a
+	play_sfx SFX_083
 	ret
 
 Func_9fb4c: ; 9fb4c (27:7b4c)

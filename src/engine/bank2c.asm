@@ -38,17 +38,25 @@ INCBIN "gfx/bgmaps/map_b211a.bin"
 
 	INCROM $b231c, $b232f
 
-BGMap_b232f: ; b232f (2c:632f)
-INCBIN "gfx/bgmaps/map_b232f.bin"
+Text_b232f: ; b232f (2c:632f)
+INCBIN "text/text_b232f.bin"
 ; 0xb2411
 
 	INCROM $b2411, $b2424
 
-BGMap_b2424: ; b2424 (2c:6424)
-INCBIN "gfx/bgmaps/map_b2424.bin"
+Text_b2424: ; b2424 (2c:6424)
+INCBIN "text/text_b2424.bin"
 ; 0xb2533
 
-	INCROM $b2533, $b26bf
+	INCROM $b2533, $b2546
+
+BGMap_b2546: ; b2546 (2c:6546)
+INCBIN "gfx/bgmaps/map_b2546.bin"
+; 0xb2616
+
+BGMap_b2616: ; b2616 (2c:6616)
+INCBIN "gfx/bgmaps/map_b2616.bin"
+; 0xb26bf
 
 BestTimeListGfx: ; b26bf (2c:66bf)
 INCBIN "gfx/best_time_list.2bpp.lz"

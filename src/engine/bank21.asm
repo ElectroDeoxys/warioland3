@@ -2401,9 +2401,40 @@ Data_84e39: ; 84e39 (21:4e39)
 	dw Pals_84800 ; SOUTH
 	dw Pals_84840 ; EAST
 	dw Pals_84880 ; EAST (no Ice)
-; 0x84e43
 
-	INCROM $84e43, $84e86
+Func_84e43: ; 84e43 (21:4e43)
+	ld a, [wPalConfig1TotalSteps]
+	cp $01
+	jr nc, .asm_84e77
+	ld hl, wPalConfig1TotalSteps
+	inc [hl]
+	ld a, HIGH(wTempBGPals)
+	ld [wPalConfig1SourceHi], a
+	ld a, LOW(wTempBGPals)
+	ld [wPalConfig1SourceLo], a
+	ld a, BCPSF_AUTOINC
+	ld [wPalConfig1Index], a
+	ld a, 8
+	ld [wPalConfig1Number], a
+
+	ld a, HIGH(wTempOBPals)
+	ld [wPalConfig2SourceHi], a
+	ld a, LOW(wTempOBPals)
+	ld [wPalConfig2SourceLo], a
+	ld a, OCPSF_AUTOINC
+	ld [wPalConfig2Index], a
+	ld a, 8
+	ld [wPalConfig2Number], a
+	ret
+
+.asm_84e77
+	call Func_851d1
+	call Func_851bc
+	ret c
+	xor a
+	ld [wPalConfig1TotalSteps], a
+	ld [wPalConfig2TotalSteps], a
+	ret
 
 Func_84e86: ; 84e86 (21:4e86)
 	ld a, [wPalConfig1TotalSteps]
@@ -4074,4 +4105,85 @@ Pals_86ad5: ; 86ad5 (21:6ad5)
 	rgb  3,  3,  3
 ; 0x86add
 
-	INCROM $86add, $86b5d
+Pals_86add: ; 86add (21:6add)
+	rgb 15, 28, 31
+	rgb  5, 27, 19
+	rgb  0, 17, 22
+	rgb  5, 10, 10
+
+	rgb 31, 31, 31
+	rgb 25, 14,  0
+	rgb 12,  6,  0
+	rgb  0,  0,  0
+
+	rgb 12,  6,  0
+	rgb 26, 28, 16
+	rgb  0, 16,  6
+	rgb  0,  4,  0
+
+	rgb  5, 10, 10
+	rgb 31, 29, 12
+	rgb  0, 23, 12
+	rgb  1,  6,  6
+
+	rgb 15, 28, 31
+	rgb 31, 28, 11
+	rgb 23, 14,  0
+	rgb  7,  6,  1
+
+	rgb  5, 10, 10
+	rgb 31, 23, 28
+	rgb 23,  8, 18
+	rgb  9,  2,  1
+
+	rgb 15, 28, 31
+	rgb  3, 22, 31
+	rgb  3,  8,  8
+	rgb  0,  4,  6
+
+	rgb 15, 28, 31
+	rgb 31, 31,  7
+	rgb 31, 17,  9
+	rgb  5,  5,  0
+
+Pals_86b1d: ; 86b1d (21:6b1d)
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 31, 15, 10
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb  8, 23, 31
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 15, 10
+	rgb 30, 31, 16
+	rgb  9,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 31,  7
+	rgb  0, 21, 10
+	rgb  0,  2,  0
+
+	rgb  0, 22, 16
+	rgb 31, 28, 11
+	rgb 24, 14,  0
+	rgb  5,  4,  0
+
+	rgb  0, 22, 16
+	rgb 31, 23, 28
+	rgb 23,  5, 18
+	rgb  7,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 19, 10
+	rgb 16,  5, 23
+	rgb  1,  2,  6
+
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 31, 30,  0
+	rgb  0,  0,  0
+; 0x86b5d

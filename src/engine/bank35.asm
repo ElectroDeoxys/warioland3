@@ -2102,7 +2102,29 @@ OAM_d4e26: ; d4e26 (35:4e26)
 	db $80
 ; 0xd5045
 
-	INCROM $d5045, $d5059
+Frameset_d5045:: ; d5045 (35:5045)
+	db $00,  3
+	db $01,  3
+	db $ff
+; 0xd504a
+
+Frameset_d504a:: ; d504a (35:504a)
+	db $02,  3
+	db $03,  3
+	db $ff
+; 0xd504f
+
+Frameset_d504f:: ; d504f (35:504f)
+	db $04,  3
+	db $05,  3
+	db $ff
+; 0xd5054
+
+Frameset_d5054:: ; d5054 (35:5054)
+	db $06,  3
+	db $07,  3
+	db $ff
+; 0xd5059
 
 Frameset_d5059: ; d5059 (35:5059)
 	db $08,  4

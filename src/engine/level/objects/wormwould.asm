@@ -40,7 +40,7 @@ WormwouldFunc: ; 54020 (15:4020)
 	call UpdateLevelMusic
 	ld a, TRUE
 	ld [wIsBossBattle], a
-.asm_5406d:
+.asm_5406d
 	ld hl, wCurObjSubState
 	ld a, [hl]
 	rlca

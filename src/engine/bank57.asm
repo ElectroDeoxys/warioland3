@@ -1,4 +1,20 @@
-	INCROM $15c000, $15e44a
+OldMan2Gfx: INCBIN "gfx/cutscenes/old_man2.2bpp"
+EpilogueStarGfx: INCBIN "gfx/epilogue_star.2bpp"
+OldMan1Gfx: INCBIN "gfx/cutscenes/old_man1.2bpp"
+
+BGMap_15cd00: INCBIN "gfx/bgmaps/map_15cd00.bin"
+	INCROM $15ce81, $15cf40
+BGMap_15cf40: INCBIN "gfx/bgmaps/map_15cf40.bin"
+	INCROM $15cfe1, $15d180
+EpilogueGfx: INCBIN "gfx/epilogue.2bpp.lz"
+
+BGMap_15df9b: INCBIN "gfx/bgmaps/map_15df9b.bin"
+BGMap_15dff8: INCBIN "gfx/bgmaps/map_15dff8.bin"
+
+Text_15e06b: INCBIN "text/text_15e06b.bin"
+	INCROM $15e212, $15e225
+Text_15e225: INCBIN "text/text_15e225.bin"
+	INCROM $15e437, $15e44a
 
 OAM_15e44a: ; 15e44a (57:644a)
 	dw .frame_0

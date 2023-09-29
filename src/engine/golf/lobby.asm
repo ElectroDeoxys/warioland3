@@ -115,9 +115,9 @@ InitGolfLobby: ; 1c8020 (72:4020)
 .LoadGolfLobby:
 	ld a, BANK("Golf Gfx 2")
 	ld [wTempBank], a
-	ld hl, BGMaps_1c5b4e
+	ld hl, BGMap_1c5b4e
 	push hl
-	ld hl, BGMaps_1c5cbe
+	ld hl, BGMap_1c5cbe
 	push hl
 	ld hl, GolfLobbyGfx
 
@@ -636,9 +636,9 @@ InitGolfClearCutscene: ; 1c846c (72:446c)
 .LoadCutsceneGfx
 	ld a, BANK(GolfMenuGfx)
 	ld [wTempBank], a
-	ld hl, BGMaps_1c5d6c
+	ld hl, BGMap_1c5d6c
 	push hl
-	ld hl, BGMaps_1c5dc6
+	ld hl, BGMap_1c5dc6
 	push hl
 	ld hl, GolfMenuGfx
 

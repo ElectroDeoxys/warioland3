@@ -407,22 +407,22 @@ Func_1e015b: ; 1e015b (78:415b)
 .GreyTreasureParams
 	db $38 ; y
 	db $20 ; x
-	dw $4550 ; frameset
+	db HIGH(Frameset_d5045), LOW(Frameset_d5045) ; frameset
 
 .RedTreasureParams
 	db $38 ; y
 	db $40 ; x
-	dw $4a50 ; frameset
+	db HIGH(Frameset_d504a), LOW(Frameset_d504a) ; frameset
 
 .GreenTreasureParams
 	db $38 ; y
 	db $60 ; x
-	dw $4f50 ; frameset
+	db HIGH(Frameset_d504f), LOW(Frameset_d504f) ; frameset
 
 .BlueTreasureParams
 	db $38 ; y
 	db $80 ; x
-	dw $5450 ; frameset
+	db HIGH(Frameset_d5054), LOW(Frameset_d5054) ; frameset
 ; 0x1e028a
 
 Func_1e028a: ; 1e028a (78:428a)

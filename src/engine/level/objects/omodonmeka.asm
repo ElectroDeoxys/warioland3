@@ -1083,7 +1083,7 @@ Func_4279c: ; 4279c (10:679c)
 	call DoGroundShake
 	ld de, Frameset_68f45
 	call SetObjectFramesetPtr
-.asm_4283c:
+.asm_4283c
 	ld a, $1c
 	ld [hli], a
 	ld l, OBJ_INTERACTION_TYPE

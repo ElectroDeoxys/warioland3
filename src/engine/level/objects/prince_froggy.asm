@@ -237,7 +237,7 @@ PrinceFroggyFunc: ; 440c4 (11:40c4)
 	call SetObjectFramesetPtr
 	jp .asm_44185
 
-.asm_4420a:
+.asm_4420a
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.Func_44220)
 	ld [hld], a

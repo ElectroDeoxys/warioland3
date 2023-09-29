@@ -215,7 +215,7 @@ AnonsterFunc: ; 50000 (14:4000)
 	jr z, .asm_50185
 	cp $4f
 	jr z, .asm_501a3
-.asm_5017f:
+.asm_5017f
 	ld bc, Data_60790
 	jp ApplyObjYMovement_Loop
 .asm_50185

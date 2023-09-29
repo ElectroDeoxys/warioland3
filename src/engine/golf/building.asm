@@ -91,7 +91,7 @@ Func_1c8604: ; 1c8604 (72:4604)
 	ld [wTempBank], a
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, BGMaps_1c4ea8
+	ld hl, BGMap_1c4ea8
 	ld bc, v1BGMap0
 	call FarDecompress
 
@@ -109,10 +109,10 @@ Func_1c8604: ; 1c8604 (72:4604)
 	ld a, [wHasAllMusicalCoinFlags]
 	and a
 	jr nz, .has_all_musical_coins
-	ld hl, BGMaps_1c4c60
+	ld hl, BGMap_1c4c60
 	jr .asm_1c864f
 .has_all_musical_coins
-	ld hl, BGMaps_1c4d83
+	ld hl, BGMap_1c4d83
 .asm_1c864f
 	ld bc, v0BGMap0
 	call FarDecompress
@@ -371,10 +371,10 @@ Func_1c87db: ; 1c87db (72:47db)
 	jp CopyHLToDE
 
 .data
-	dw BGMaps_1c48e0, Pals_1ca24f ; GOLF_COURSE_1
-	dw BGMaps_1c49c0, Pals_1ca28f ; GOLF_COURSE_2
-	dw BGMaps_1c4aa0, Pals_1ca2cf ; GOLF_COURSE_3
-	dw BGMaps_1c4b80, Pals_1ca30f ; GOLF_COURSE_4
+	dw BGMap_1c48e0, Pals_1ca24f ; GOLF_COURSE_1
+	dw BGMap_1c49c0, Pals_1ca28f ; GOLF_COURSE_2
+	dw BGMap_1c4aa0, Pals_1ca2cf ; GOLF_COURSE_3
+	dw BGMap_1c4b80, Pals_1ca30f ; GOLF_COURSE_4
 ; 0x1c8818
 
 ; gets the golf course scroll X value
@@ -488,7 +488,7 @@ Func_1c8837: ; 1c8837 (72:4837)
 	ld a, [hl]
 	ld [wGolfCourse], a
 	call Func_1c87db
-	ld hl, BGMaps_1c4800
+	ld hl, BGMap_1c4800
 	ld de, w1da00
 	ld bc, $e0
 	call FarCopyHLToDE_BC2

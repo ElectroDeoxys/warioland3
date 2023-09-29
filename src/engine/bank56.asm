@@ -392,7 +392,338 @@ BounceTempleRockLeft: ; 158484 (56:4484)
 	jp ApplyOWMovement
 ; 0x15848a
 
-	INCROM $15848a, $15868e
+Func_15848a: ; 15848a (56:448a)
+	call .Func_15849a
+	call .Func_1584da
+	call .Func_158529
+	call .Func_15858c
+	call .Func_1585e1
+	ret
+
+.Func_15849a: ; 15849a (56:449a)
+	ld hl, w2d8a0
+	ld a, [hli]
+	inc [hl]
+	jumptable
+	dw .Func_1584a6
+	dw .Func_1584ab
+	dw .Func_1584c4
+
+.Func_1584a6:
+	xor a
+	ld [w2d8a1], a
+	ret
+
+.Func_1584ab:
+	ld hl, wSceneObj1YCoord
+	ld a, $18
+	ld [hli], a
+	ld a, [wSceneObj9XCoord]
+	ld [hl], a
+	ld a, $16
+	ld hl, wSceneObj1State
+	call SetSceneObjState
+	ld hl, w2d8a1
+	xor a
+	ld [hld], a
+	inc [hl]
+	ret
+
+.Func_1584c4:
+	ld a, [w2d8a1]
+	and $03
+	ret nz
+	ld hl, wSceneObj1YCoord
+	inc [hl]
+	ld a, [hl]
+	cp $58
+	ret nz
+	xor a
+	ld [wSceneObj1State], a
+	ld [w2d8a0], a
+	ret
+
+.Func_1584da: ; 1584da (56:44da)
+	ld hl, wTempleMusicBox1
+	ld a, [hli]
+	inc [hl]
+	ld b, h
+	ld c, l
+	jumptable
+	dw .Func_1584e8
+	dw .Func_1584f4
+	dw .Func_15850d
+
+.Func_1584e8:
+	ld a, [wSceneObj1State]
+	and a
+	ret z
+.asm_1584ed
+	ld hl, wTempleMusicBox1Counter
+	xor a
+	ld [hld], a
+	inc [hl]
+	ret
+
+.Func_1584f4:
+	ld hl, wSceneObj5
+	ld a, [wSceneObj1YCoord]
+	sub $08
+	ld [hli], a
+	ld a, [wSceneObj1XCoord]
+	sub $03
+	ld [hl], a
+	ld a, $15
+	ld hl, wSceneObj5State
+	call SetSceneObjState
+	jr .asm_1584ed
+
+.Func_15850d:
+	call .Func_15864a
+	jr z, .asm_158521
+	ld hl, wSceneObj5
+	add [hl]
+	ld [hl], a
+	ld a, [bc]
+	cp $03
+	ret nz
+	ld a, $14
+	ld [wSceneObj5State], a
+	ret
+.asm_158521
+	xor a
+	ld [wSceneObj5State], a
+	ld [wTempleMusicBox1], a
+	ret
+
+.Func_158529:
+	ld hl, wPlanePart2Counter
+	ld a, [hli]
+	inc [hl]
+	ld b, h
+	ld c, l
+	jumptable
+	dw .Func_15853b
+	dw .Func_158547
+	dw .Func_15854d
+	dw .Func_158566
+	dw .Func_158580
+
+.Func_15853b:
+	ld a, [wSceneObj1State]
+	and a
+	ret z
+.asm_158540
+	ld hl, wTempleMusicBox3
+	xor a
+	ld [hld], a
+	inc [hl]
+	ret
+
+.Func_158547:
+	ld a, [bc]
+	cp $0a
+	ret c
+	jr .asm_158540
+
+.Func_15854d:
+	ld hl, wSceneObj6
+	ld a, [wSceneObj1YCoord]
+	sub $08
+	ld [hli], a
+	ld a, [wSceneObj1XCoord]
+	add $03
+	ld [hl], a
+	ld a, $15
+	ld hl, wSceneObj6State
+	call SetSceneObjState
+	jr .asm_158540
+
+.Func_158566:
+	call .Func_15864a
+	jr z, .asm_15857a
+	ld hl, wSceneObj6
+	add [hl]
+	ld [hl], a
+	ld a, [bc]
+	cp $03
+	ret nz
+	ld a, $14
+	ld [wSceneObj6State], a
+	ret
+.asm_15857a
+	xor a
+	ld [wSceneObj6State], a
+	jr .asm_158540
+
+.Func_158580:
+	ld a, [wSceneObj1State]
+	and a
+	jr z, .asm_158588
+	ld a, $02
+.asm_158588
+	ld [wPlanePart2Counter], a
+	ret
+
+.Func_15858c:
+	ld hl, wTempleMusicBox4
+	ld a, [hli]
+	inc [hl]
+	ld b, h
+	ld c, l
+	jumptable
+	dw .Func_15859a
+	dw .Func_1585a6
+	dw .Func_1585bf
+
+.Func_15859a:
+	ld a, [wSceneObj1State]
+	and a
+	ret z
+.asm_15859f
+	ld hl, wTempleMusicBox4Counter
+	xor a
+	ld [hld], a
+	inc [hl]
+	ret
+
+.Func_1585a6:
+	ld hl, wSceneObj7
+	ld a, [wSceneObj1YCoord]
+	sub $06
+	ld [hli], a
+	ld a, [wSceneObj1XCoord]
+	sub $04
+	ld [hl], a
+	ld a, $15
+	ld hl, wSceneObj7State
+	call SetSceneObjState
+	jr .asm_15859f
+
+.Func_1585bf:
+	call .Func_15866e
+	jr z, .asm_1585d9
+	ld hl, wSceneObj7
+	add [hl]
+	ld [hli], a
+	ld a, [bc]
+	and $01
+	jr z, .asm_1585cf
+	dec [hl]
+.asm_1585cf
+	ld a, [bc]
+	cp $03
+	ret nz
+	ld a, $14
+	ld [wSceneObj7State], a
+	ret
+.asm_1585d9
+	xor a
+	ld [wSceneObj7State], a
+	ld [wTempleMusicBox4], a
+	ret
+
+.Func_1585e1: ; 1585e1 (56:45e1)
+	ld hl, wTempleMusicBox5Counter
+	ld a, [hli]
+	inc [hl]
+	ld b, h
+	ld c, l
+	jumptable
+	dw .Func_1585f3
+	dw .Func_1585ff
+	dw .Func_158605
+	dw .Func_15861e
+	dw .Func_15863e
+
+.Func_1585f3:
+	ld a, [wSceneObj1State]
+	and a
+	ret z
+.asm_1585f8
+	ld hl, wPalFade2Colour3GreenUnk1
+	xor a
+	ld [hld], a
+	inc [hl]
+	ret
+
+.Func_1585ff:
+	ld a, [bc]
+	cp $08
+	ret c
+	jr .asm_1585f8
+
+.Func_158605:
+	ld hl, wSceneObj8
+	ld a, [wSceneObj1YCoord]
+	sub $10
+	ld [hli], a
+	ld a, [wSceneObj1XCoord]
+	add $06
+	ld [hl], a
+	ld a, $15
+	ld hl, wSceneObj8State
+	call SetSceneObjState
+	jr .asm_1585f8
+
+.Func_15861e:
+	call .Func_15866e
+	jr z, .asm_158638
+	ld hl, wSceneObj8
+	add [hl]
+	ld [hli], a
+	ld a, [bc]
+	and $01
+	jr z, .asm_15862e
+	inc [hl]
+.asm_15862e
+	ld a, [bc]
+	cp $03
+	ret nz
+	ld a, $14
+	ld [wSceneObj8State], a
+	ret
+.asm_158638
+	xor a
+	ld [wSceneObj8State], a
+	jr .asm_1585f8
+
+.Func_15863e:
+	ld a, [wSceneObj1State]
+	and a
+	jr z, .asm_158646
+	ld a, $02
+.asm_158646
+	ld [wTempleMusicBox5Counter], a
+	ret
+
+.Func_15864a:
+	ld hl, .data_1
+	ld a, [bc]
+	ld e, a
+	ld d, $00
+	ld hl, .data_1 ; redundant
+	add hl, de
+	ld a, [hl]
+	cp $80
+	ret
+
+.data_1
+	db -1, -1, -1, -1, -2, -1, -2, -1, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, $80
+
+.Func_15866e:
+	ld hl, .data_2
+	ld a, [bc]
+	ld e, a
+	ld d, $00
+	ld hl, .data_2 ; redundant
+	add hl, de
+	ld a, [hl]
+	cp $80
+	ret
+
+.data_2
+	db -1, -1, -1, -1, -2, -1, -2, -1, -2, -2, -2, -2, -2, -2, -2, -2, $80
 
 Func_15868e: ; 15868e (56:468e)
 	call .Func_1586a1

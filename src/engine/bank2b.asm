@@ -77,9 +77,39 @@ SetObjStateIfAnimationIsFinished: ; ac064 (2b:4064)
 	ld b, h
 	ld c, l
 	ret
-; 0xac074
 
-	INCROM $ac074, $ac2b2
+Func_ac074: ; ac074 (2b:4074)
+	ld bc, wCurSceneObjState
+	call Func_ac0b6
+	ld bc, wSceneObj1State
+	jp Func_ac0b6
+
+Func_ac080: ; ac080 (2b:4080)
+	ld bc, wSceneObj5State
+	call Func_ac0b6
+	ld bc, wSceneObj6State
+	call Func_ac0b6
+	ld bc, wSceneObj7State
+	call Func_ac0b6
+	ld bc, wSceneObj8State
+	call Func_ac0b6
+	ld bc, wSceneObj9State
+	call Func_ac0b6
+	ld bc, wSceneObj10State
+	call Func_ac0b6
+	ld bc, wSceneObj11State
+	call Func_ac0b6
+	ld bc, wSceneObj12State
+	call Func_ac0b6
+	ld bc, wSceneObj13State
+	jp Func_ac0b6
+
+Func_ac0b6: ; ac0b6 (2b:40b6)
+	ld a, [bc]
+	jumptable
+; 0xac0b8
+
+	INCROM $ac0b8, $ac2b2
 
 Func_ac2b2: ; ac2b2 (2b:42b2)
 	ld bc, wCurSceneObjState
@@ -1141,9 +1171,16 @@ InvalidMusicBoxAction: ; ac9b7 (2b:49b7)
 Func_ac9ba: ; ac9ba (2b:49ba)
 	farcall Func_84e86
 	ret
-; 0xac9ca
 
-	INCROM $ac9ca, $ac9e4
+Func_ac9ca: ; ac9ca (2b:49ca)
+	farcall Func_84e43
+	ld a, [wPalConfig1TotalSteps]
+	and a
+	ret nz
+	ld hl, w2d014
+	ld [hld], a
+	inc [hl]
+	ret
 
 Func_ac9e4: ; ac9e4 (2b:49e4)
 	ld hl, wPalConfig2
@@ -1185,7 +1222,32 @@ Data_aca04: ; aca04 (2b:4a04)
 	db HIGH(wTempPals2), LOW(wTempPals2) ; source pals
 ; 0xaca09
 
-	INCROM $aca09, $aca34
+Func_aca09: ; aca09 (2b:4a09)
+	ld hl, wTempPals2
+	ld de, wTempOBPals
+	ld b, 8 palettes
+	call CopyHLToDE
+	ld hl, wTempPals1
+	ld de, wTempBGPals
+	ld b, 8 palettes
+	call CopyHLToDE
+	ret
+; 0xaca20
+
+	INCROM $aca20, $aca25
+
+Func_aca25: ; aca25 (2b:4a25)
+	ld hl, wTempPals2
+	ld c, 4 palettes
+.loop
+	ld a, LOW(PALRGB_WHITE)
+	ld [hli], a
+	ld a, HIGH(PALRGB_WHITE)
+	ld [hli], a
+	dec c
+	jr nz, .loop
+	ret
+; 0xaca34
 
 ; moves scene Wario 1.5 pixels to left
 ; if d-left is pressed, moves 2 pixels
@@ -1224,9 +1286,14 @@ ApplySceneWarioMovementRight: ; aca4c (2b:4a4c)
 	ld a, [hl]
 	and $fe
 	ret
-; 0xaca63
 
-	INCROM $aca63, $aca6d
+Func_aca63: ; aca63 (2b:4a63)
+	ld hl, wOWUIObj1XCoord
+	dec [hl]
+	ret
+; 0xaca68
+
+	INCROM $aca68, $aca6d
 
 Func_aca6d: ; aca6d (2b:4a6d)
 	ld hl, w2d014
@@ -1404,11 +1471,11 @@ _InitTempleScene: ; acb25 (2b:4b25)
 
 	ld a, [wLanguage]
 	and a
-	ld hl, BGMap_b232f
+	ld hl, Text_b232f
 	jr z, .japanese1
-	ld hl, BGMap_b2424
+	ld hl, Text_b2424
 .japanese1
-	ld a, BANK(BGMap_b232f) ; aka BGMap_b2424
+	ld a, BANK(Text_b232f) ; aka Text_b2424
 	ld [wTempBank], a
 	ld bc, wTextBuffer
 	ld a, [wTempBank]
@@ -3456,7 +3523,645 @@ Data_ad939: ; ad939 (2b:5939)
 	db $80
 ; 0xad9b2
 
-	INCROM $ad9b2, $ade49
+Func_ad9b2: ; ad9b2 (2b:59b2)
+	call DisableLCD
+	call FillBGMap0_With7f
+	call ClearVirtualOAM
+	stop_music2
+
+	ld a, BANK("WRAM2")
+	ldh [rSVBK], a
+
+	xor a
+	ldh [rSCX], a
+	ld [wSCX], a
+	ldh [rSCY], a
+	ld [wSCY], a
+	call .VBlank_adaac
+
+	call ClearGeneralSceneRAM
+	call ClearSceneObjsRAM
+
+	call .FillBGPalettes
+
+	ld hl, Pals_84900
+	ld de, wTempPals2
+	ld b, BANK(Pals_84900)
+	ld c, 8 palettes
+	call CopyFarBytes
+	ld hl, PrologueBackgroundGfx
+	ld b, BANK(PrologueBackgroundGfx)
+	call LoadFarTiles
+
+	decompress_vram1 BGMap_b2616, v1BGMap0
+	decompress BGMap_b2546, v0BGMap0
+
+	call .Func_ada43
+	call UpdateSceneWarioAnimation
+
+	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
+	ldh [rLCDC], a
+
+	ld hl, wSubState
+	inc [hl]
+	ret
+
+.Func_ada43:
+	ld a, [wCrayonFlags]
+	cp ALL_CRAYONS
+	jr z, .all_crayons
+.Func_ada4a:
+	ld de, wOWUIObj1YCoord
+	ld a, $58
+	ld [de], a
+	inc e
+	ld a, [wNextMapSide]
+	add a
+	add a
+	ld c, a ; *4
+	ld b, $00
+	ld hl, .data
+	add hl, bc
+	ld a, [hli]
+	ld [de], a
+	ld a, [hli] ; useless
+	ld a, [hl]
+	ld [wPalFade6Colour2GreenCurrent], a
+	ld a, $ff
+	ld [wOWUIObj2YCoord], a
+	xor a
+	call SetSceneWarioState
+	ret
+
+.data
+	; x coord, $00, ?, $00
+	db $90, $00, $01, $00 ; NORTH
+	db $10, $00, $00, $00 ; WEST
+
+.all_crayons
+	ld a, [wOWLevel]
+	cp LEVEL_GOLF_BUILDING
+	jr nz, .asm_ada97
+	ld de, wOWUIObj1YCoord
+	ld a, $58
+	ld [de], a
+	inc e
+	ld a, $50
+	ld [de], a
+	ld a, $04
+	ld [wPalFade6Colour2GreenCurrent], a
+	ld a, $ff
+	ld [wOWUIObj2YCoord], a
+	ld a, $01
+	call SetSceneWarioState
+	ret
+
+.asm_ada97
+	call .Func_ada4a
+	ld hl, wPalFade6Colour2GreenCurrent
+	inc [hl]
+	inc [hl]
+	ret
+
+.VBlank_adaac:
+	ld hl, .func
+	ld de, wVBlankFunc
+	ld b, .func_end - .func
+	call CopyHLToDE
+	ret
+
+.func
+	ld a, BANK("WRAM2")
+	ldh [rSVBK], a
+
+	ld a, [wSCY]
+	ldh [rSCY], a
+	ld a, [wSCX]
+	ldh [rSCX], a
+
+	ld a, [wHDMABank]
+	and a
+	jr z, .done
+	ld b, a
+	xor a
+	ld [wHDMABank], a
+	ld a, [wROMBank]
+	push af
+	ld a, b
+	bankswitch
+	ld hl, wHDMA
+	ld a, [hli]
+	ld c, LOW(rHDMA1)
+	ld [$ff00+c], a
+	ld a, [hli]
+	inc c
+	ld [$ff00+c], a
+	ld a, [hli]
+	inc c
+	ld [$ff00+c], a
+	ld a, [hli]
+	inc c
+	ld [$ff00+c], a
+	ld a, [hli]
+	inc c
+	ld [$ff00+c], a
+	pop af
+	bankswitch
+.done
+	xor a
+	ldh [rVBK], a
+	ld a, HIGH(wVirtualOAM)
+	jp hTransferVirtualOAM
+.func_end
+
+.FillBGPalettes:
+	ld hl, Pals_addc9
+	call LoadPalsToTempPals1
+	ld hl, wTempPals1
+	ld de, wTempBGPals
+	ld b, 8 palettes
+	call CopyHLToDE
+
+	ld a, [wCrayonFlags]
+	bit CRAYON_RED_F, a
+	call nz, .FillRed
+	ld a, [wCrayonFlags]
+	bit CRAYON_BROWN_F, a
+	call nz, .FillBrown
+	ld a, [wCrayonFlags]
+	bit CRAYON_YELLOW_F, a
+	call nz, .FillYellow
+	ld a, [wCrayonFlags]
+	bit CRAYON_GREEN_F, a
+	call nz, .FillGreen
+	ld a, [wCrayonFlags]
+	bit CRAYON_CYAN_F, a
+	call nz, .FillCyan
+	ld a, [wCrayonFlags]
+	bit CRAYON_BLUE_F, a
+	call nz, .FillBlue
+	ld a, [wCrayonFlags]
+	bit CRAYON_PINK_F, a
+	call nz, .FillPink
+
+	ld hl, wTempBGPals
+	ld de, wTempPals1
+	ld b, $40
+	call CopyHLToDE
+	ret
+
+.FillRed:
+	ld hl, Pals_ade09 palette 7
+	ld de, wTempBGPals palette 7
+	ld b, 1 palettes
+	call CopyHLToDE
+	ret
+
+.FillBrown:
+	ld hl, Pals_ade09 palette 0 + $2
+	ld de, wTempBGPals palette 0 + $2
+	ld b, $2
+	call CopyHLToDE
+	ld hl, Pals_ade09 palette 1
+	ld de, wTempBGPals palette 1
+	ld b, $2
+	call CopyHLToDE
+	ld hl, Pals_ade09 palette 2
+	ld de, wTempBGPals palette 2
+	ld b, $6
+	call CopyHLToDE
+	ld hl, Pals_ade09 palette 3 + $2
+	ld de, wTempBGPals palette 3 + $2
+	ld b, $2
+	call CopyHLToDE
+	ret
+
+.FillYellow:
+	ld hl, Pals_ade09 palette 4 + $2
+	ld de, wTempBGPals palette 4 + $2
+	ld b, $6
+	call CopyHLToDE
+	ret
+
+.FillGreen:
+	ld hl, Pals_ade09 palette 1 + $2
+	ld de, wTempBGPals palette 1 + $2
+	ld b, $6
+	call CopyHLToDE
+	ld hl, Pals_ade09 palette 5 + $2
+	ld de, wTempBGPals palette 5 + $2
+	ld b, $6
+	call CopyHLToDE
+	ret
+
+.FillCyan:
+	ld hl, Pals_ade09 palette 0 + $4
+	ld de, wTempBGPals palette 0 + $4
+	ld b, $2
+	call CopyHLToDE
+	ld hl, Pals_ade09 palette 3
+	ld de, wTempBGPals palette 3
+	ld b, $2
+	call CopyHLToDE
+	ld hl, Pals_ade09 palette 4
+	ld de, wTempBGPals palette 4
+	ld b, $2
+	call CopyHLToDE
+	ld hl, Pals_ade09 palette 5
+	ld de, wTempBGPals palette 5
+	ld b, $2
+	call CopyHLToDE
+	ret
+
+.FillBlue:
+	ld hl, Pals_ade09 palette 0 + $6
+	ld de, wTempBGPals palette 0 + $6
+	ld b, $2
+	call CopyHLToDE
+	ld hl, Pals_ade09 palette 2 + $6
+	ld de, wTempBGPals palette 2 + $6
+	ld b, $2
+	call CopyHLToDE
+	ld hl, Pals_ade09 palette 3 + $4
+	ld de, wTempBGPals palette 3 + $4
+	ld b, $4
+	call CopyHLToDE
+	ret
+
+.FillPink:
+	ld hl, Pals_ade09 palette 6
+	ld de, wTempBGPals palette 6
+	ld b, 1 palettes
+	call CopyHLToDE
+	ret
+
+Func_adbfe: ; adbfe (2b:5bfe)
+	call .Func_adc0b
+	call nc, .Func_adc2f
+	call UpdateSceneWarioAnimation
+	call ClearUnusedVirtualOAM
+	ret
+
+.Func_adc0b:
+	ld a, [wPalFade6Colour2GreenCurrent]
+	cp $04
+	jr z, .no_carry
+	ld a, [wJoypadPressed]
+	bit B_BUTTON_F, a
+	jr nz, .exit
+.no_carry
+	xor a
+	ret
+.exit
+	stop_sfx
+	ld a, $01
+	ld [wOWUIObj2Duration], a
+	ld a, $08
+	ld [wSubState], a
+	scf
+	ret
+
+.Func_adc2f:
+	ld hl, wPalFade6Colour2GreenSign
+	inc [hl]
+	ld c, l
+	ld b, h
+	ld a, [wPalFade6Colour2GreenCurrent]
+	jumptable
+	dw .Func_adc54 ; $0
+	dw .Func_adc7e ; $1
+	dw .Func_adca9 ; $2
+	dw .Func_adcda ; $3
+	dw .Func_add0b ; $4
+
+.asm_adc43
+	ld hl, wPalFade6Colour2GreenSign
+	xor a
+	ld [hld], a
+	inc [hl]
+	ret
+
+.asm_adc4a
+	ld [wPalFade6Colour2GreenCurrent], a
+	ld hl, wPalFade6Colour2GreenSign
+	xor a
+	ld [hld], a
+	ld [hl], a
+	ret
+
+.Func_adc54:
+	ld a, [wPalFade6Colour2GreenTarget]
+	and a
+	jr z, .asm_adc65
+	dec a
+	jr z, .asm_adc6c
+	dec a
+	jr z, .asm_adc78
+	dec a
+	call z, .exit
+	ret
+
+.asm_adc65
+	ld a, $08
+	call SetSceneWarioState
+	jr .asm_adc43
+.asm_adc6c
+	call ApplySceneWarioMovementRight
+	cp $90
+	ret nz
+	xor a
+	call SetSceneWarioState
+	jr .asm_adc43
+.asm_adc78
+	ld a, [bc]
+	cp $14
+	ret c
+	jr .asm_adc43
+
+.Func_adc7e:
+	ld a, [wPalFade6Colour2GreenTarget]
+	and a
+	jr z, .asm_adc8f
+	dec a
+	jr z, .asm_adc96
+	dec a
+	jr z, .asm_adca2
+	dec a
+	call z, .exit
+	ret
+
+.asm_adc8f
+	ld a, $07
+	call SetSceneWarioState
+	jr .asm_adc43
+.asm_adc96
+	call ApplySceneWarioMovementLeft
+	cp $10
+	ret nz
+	xor a
+	call SetSceneWarioState
+	jr .asm_adc43
+.asm_adca2
+	ld a, [bc]
+	cp $14
+	ret c
+	jp .asm_adc43
+
+.Func_adca9:
+	ld a, [wPalFade6Colour2GreenTarget]
+	and a
+	jr z, .asm_adcb6
+	dec a
+	jr z, .asm_adcbe
+	dec a
+	jr z, .asm_adccc
+	ret
+.asm_adcb6
+	ld a, $08
+	call SetSceneWarioState
+	jp .asm_adc43
+.asm_adcbe
+	call ApplySceneWarioMovementRight
+	cp $50
+	ret nz
+	ld a, $0d
+	call SetSceneWarioState
+	jp .asm_adc43
+.asm_adccc
+	ld a, [bc]
+	cp $08
+	ret c
+	ld a, $34
+	call SetSceneWarioState
+	ld a, $04
+	jp .asm_adc4a
+
+.Func_adcda:
+	ld a, [wPalFade6Colour2GreenTarget]
+	and a
+	jr z, .asm_adce7
+	dec a
+	jr z, .asm_adcef
+	dec a
+	jr z, .asm_adcfd
+	ret
+.asm_adce7
+	ld a, $07
+	call SetSceneWarioState
+	jp .asm_adc43
+.asm_adcef
+	call ApplySceneWarioMovementLeft
+	cp $50
+	ret nz
+	ld a, $0c
+	call SetSceneWarioState
+	jp .asm_adc43
+.asm_adcfd
+	ld a, [bc]
+	cp $08
+	ret c
+	ld a, $35
+	call SetSceneWarioState
+	ld a, $04
+	jp .asm_adc4a
+
+.Func_add0b:
+	ld a, [wPalFade6Colour2GreenTarget]
+	jumptable
+	dw .Func_add21
+	dw .Func_add2a
+	dw .Func_add36
+	dw .Func_add8a
+	dw .Func_add93
+	dw .Func_adda5
+	dw .Func_addae
+	dw .Func_addb7
+	dw .Func_addc0
+
+.Func_add21:
+	ld a, [wOWUIObj1State]
+	cp $01
+	ret nz
+	jp .asm_adc43
+
+.Func_add2a:
+	ld a, [bc]
+	cp $10
+	ret c
+	ld a, $3c
+	call SetSceneWarioState
+	jp .asm_adc43
+
+.Func_add36:
+	ld a, [wJoypadPressed]
+	bit D_RIGHT_F, a
+	jr nz, .d_right
+	bit D_LEFT_F, a
+	jr nz, .d_left
+	and A_BUTTON | D_UP
+	jr nz, .a_btn_or_d_up
+	ret
+
+.d_right
+	ld a, WEST
+	ld [wNextMapSide], a
+	ld a, OW_EXIT_LEFT
+	ld [wMapSideLevelID], a
+	ld [w2d068], a
+	ld a, $37
+	call SetSceneWarioState
+	ld hl, wPalFade6Colour2GreenSign
+	xor a
+	ld [hld], a
+	ld [hl], $07
+	ret
+
+.d_left
+	ld a, NORTH
+	ld [wNextMapSide], a
+	ld a, OW_EXIT_RIGHT
+	ld [wMapSideLevelID], a
+	ld [w2d068], a
+	ld a, $36
+	call SetSceneWarioState
+	ld hl, wPalFade6Colour2GreenSign
+	xor a
+	ld [hld], a
+	ld [hl], $05
+	ret
+
+.a_btn_or_d_up
+	ld a, $30
+	call SetSceneWarioState
+	play_sfx SFX_12A
+	jp .asm_adc43
+
+.Func_add8a:
+	ld a, [wOWUIObj1State]
+	cp $02
+	ret nz
+	jp .asm_adc43
+
+.Func_add93:
+	ld a, [bc]
+	cp $14
+	ret c
+	ld a, LEVEL_GOLF_BUILDING
+	ld [wOWLevel], a
+	xor a
+	ld [wSubState], a
+	ld hl, wState
+	inc [hl]
+	ret
+
+.Func_adda5:
+	ld a, [wOWUIObj1State]
+	cp $0c
+	ret nz
+	jp .asm_adc43
+
+.Func_addae:
+	ld a, [bc]
+	cp $04
+	ret c
+	ld a, $01
+	jp .asm_adc4a
+
+.Func_addb7:
+	ld a, [wOWUIObj1State]
+	cp $0d
+	ret nz
+	jp .asm_adc43
+
+.Func_addc0:
+	ld a, [bc]
+	cp $04
+	ret c
+	ld a, $00
+	jp .asm_adc4a
+; 0xaddc9
+
+Pals_addc9: ; addc9 (2b:5dc9)
+	rgb 31, 31, 31
+	rgb  4,  4,  4
+	rgb 29, 29, 29
+	rgb  0,  0,  0
+
+	rgb  4,  4,  4
+	rgb 29, 29, 29
+	rgb 17, 17, 17
+	rgb  6,  6,  6
+
+	rgb  4,  4,  4
+	rgb 10, 10, 10
+	rgb  4,  4,  4
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb  4,  4,  4
+	rgb 14, 14, 14
+	rgb  6,  6,  6
+
+	rgb 27, 27, 27
+	rgb  6,  6,  6
+	rgb  3,  3,  3
+	rgb  2,  2,  2
+
+	rgb 25, 25, 25
+	rgb 21, 21, 21
+	rgb 10, 10, 10
+	rgb  4,  4,  4
+
+	rgb 31, 31, 31
+	rgb 21, 21, 21
+	rgb 10, 10, 10
+	rgb  2,  2,  2
+
+	rgb 31, 31, 31
+	rgb  6,  6,  6
+	rgb 10, 10, 10
+	rgb  2,  2,  2
+
+Pals_ade09: ; ade09 (2b:5e09)
+	rgb 31, 31, 31
+	rgb  9,  4,  0
+	rgb  8, 23, 31
+	rgb  0,  3,  0
+
+	rgb 12,  6,  0
+	rgb 26, 28, 16
+	rgb  0, 16,  6
+	rgb  0,  5,  0
+
+	rgb 12,  6,  0
+	rgb 25, 14,  0
+	rgb  0,  3,  0
+	rgb  0,  5,  6
+
+	rgb 13, 25, 31
+	rgb  9,  4,  0
+	rgb  0, 13, 18
+	rgb  0,  5,  6
+
+	rgb  8, 23, 31
+	rgb 31, 31,  0
+	rgb 31, 14,  0
+	rgb  0,  0,  0
+
+	rgb  3, 20, 30
+	rgb  0, 21, 10
+	rgb  0,  9,  4
+	rgb  0,  3,  0
+
+	rgb 31, 23, 28
+	rgb 23,  5, 18
+	rgb 10,  4,  9
+	rgb  0,  0,  0
+
+	rgb 31, 18, 11
+	rgb  9,  0,  0
+	rgb 31,  0,  0
+	rgb  0,  3,  0
 
 _InitPrologueSequence: ; ade49 (2b:5e49)
 	call ClearGeneralSceneRAM
@@ -5930,7 +6635,101 @@ Data_aee09: ; aee09 (2b:6e09)
 	db $80
 ; 0xaee58
 
-	INCROM $aee58, $af135
+_InitEpilogue: ; aee58 (2b:6e58)
+	call DisableLCD
+	call FillBGMap0_With7f
+	call ClearVirtualOAM
+	stop_music2
+
+	ld a, $02
+	ldh [rSMBK], a
+	xor a
+	ldh [rSCX], a
+	ld [wSCX], a
+	ldh [rSCY], a
+	ld [wSCY], a
+
+	call VBlank_accb0
+	call ClearGeneralSceneRAM
+	call ClearSceneObjsRAM
+
+	xor a
+	ld hl, wTempPals1
+	ld bc, 8 palettes
+	call WriteAToHL_BCTimes
+	xor a
+	ld hl, wTempPals2
+	ld bc, 8 palettes
+	call WriteAToHL_BCTimes
+
+	decompress EpilogueGfx, v0Tiles0
+	decompress_vram1 FontGFX, v1Tiles0
+
+	ld a, BANK("VRAM1")
+	ldh [rVBK], a
+	ld hl, v0Tiles1
+	ld de, wAttrmap
+	ld bc, $50 tiles
+	call CopyHLToDE_BC
+	ld hl, EpilogueStarGfx
+	ld de, v1Tiles1 + $400
+	ld c, $00 ; aka $100 bytes
+	ld b, BANK(EpilogueStarGfx)
+	call CopyFarBytes
+	xor a
+	ldh [rVBK], a
+
+	decompress_vram1 SpearheadGfx, v1Tiles0
+	decompress_vram1 HammerBotGfx, v1Tiles0 + $400
+	decompress_vram1 DoughnuteerGfx, v1Tiles1
+
+	decompress_vram1 BGMap_15dff8, v1BGMap0
+	decompress BGMap_15df9b, v0BGMap0
+	decompress_vram1 BGMap_b34c3, v1BGMap1
+	decompress BGMap_b330c, v0BGMap1
+
+	call FillClearedTextBuffer
+	ld a, [wLanguage]
+	and a
+	ld hl, Text_15e06b ; japanese
+	jr z, .got_text
+	ld hl, Text_15e225 ; english
+.got_text
+	ld a, BANK(Text_15e06b) ; aka BANK(Text_15e225)
+	ld [wTempBank], a
+	ld bc, wTextBuffer
+	ld a, [wTempBank]
+	ldh [hCallFuncBank], a
+	hcall Decompress
+
+	xor a
+	ld [w2d013], a
+	ld [w2d014], a
+	ld [wPalConfig1TotalSteps], a
+	ld [wPalConfig2TotalSteps], a
+
+	ld a, [wCollectionRow]
+	ld b, a
+	and a
+	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_WIN9C00 | LCDCF_ON
+	jr z, .asm_af014
+	xor b
+.asm_af014
+	ldh [rLCDC], a
+	xor a
+	ld [wCollectionRow], a
+	ld hl, wSubState
+	inc [hl]
+	ret
+; 0xaf01f
+
+	INCROM $af01f, $af130
+
+Func_af130: ; af130 (2b:7130)
+	ld a, [w2d014]
+	cp c
+	ret c
+;	fallthrough
 
 Func_af135: ; af135 (2b:7135)
 	ld hl, w2d014
@@ -5940,5 +6739,1137 @@ Func_af135: ; af135 (2b:7135)
 	ret
 ; 0xaf13c
 
-	INCROM $af13c, $b0000
+Func_af13c: ; af13c (2b:713c)
+	call .Func_af14c
+	call Func_ac074
+	call UpdateSceneWarioAnimation
+	call Func_ac080
+	call ClearUnusedVirtualOAM
+	ret
 
+.Func_af14c:
+	call .Func_af8bc
+
+	ld hl, w2d014
+	inc [hl]
+	ld a, [w2d013]
+	jumptable
+	dw Func_af135
+	dw .Func_af197
+	dw .Func_af19c
+	dw Func_ac9ca
+	dw .Func_af7af
+	dw .Func_af2d0
+	dw Func_ac9ba
+	dw .Func_af1e7
+	dw .Func_af207
+	dw .Func_af215
+	dw .Func_af222
+	dw .Func_af230
+	dw .Func_af23e
+	dw Func_ac9ca
+	dw .Func_af741
+	dw InitTextPrinting
+	dw Func_aca9e
+	dw .Func_af2bc
+	dw LoadCurTextPageBufferPage
+	dw Func_acacd
+	dw .Func_af2c1
+	dw Func_acaf3
+	dw .Func_af670
+	dw .Func_af2d0
+	dw Func_ac9ba
+	dw .Func_af2df
+	dw .Func_af2f2
+	dw Func_ac9ca
+	dw .Func_af436
+	dw .Func_af2d0
+	dw .Func_af34a
+	dw .Func_af353
+
+.Func_af197:
+	ld c, $3c
+	jp Func_af130
+.Func_af19c:
+	ld hl, wSceneObj9
+	ld a, $60
+	ld [hli], a
+	ld a, $50
+	ld [hl], a
+	ld a, $18
+	ld hl, wSceneObj9State
+	call SetSceneObjState
+	call .Func_af1bd
+	call .Func_af1db
+	xor a
+	ld [wPalConfig1TotalSteps], a
+	ld [wPalConfig2TotalSteps], a
+	jp Func_af135
+.Func_af1bd:
+	call Func_aca09
+	ld hl, Pals_86add
+	ld de, wTempPals1
+	ld c, 8 palettes
+	ld b, BANK(Pals_86add)
+	call CopyFarBytes
+	ld hl, Pals_86b1d
+	ld de, wTempPals2
+	ld c, 8 palettes
+	ld b, BANK(Pals_86b1d)
+	call CopyFarBytes
+	ret
+.Func_af1db:
+	ld hl, .Pals_af35e
+	ld de, wTempPals2 palette 4
+	ld b, 3 palettes
+	call CopyHLToDE
+	ret
+.Func_af1e7:
+	xor a
+	ld [wHDMADestVRAMBank], a
+	ld de, OldMan1Gfx
+	ld b, HIGH(v0Tiles1) - $80
+	ld c, hdma 64
+.asm_af1f2
+	ld a, BANK(OldMan1Gfx)
+	ld [wHDMABank], a
+.asm_af1f7
+	ld hl, wHDMA
+	ld a, d
+	ld [hli], a
+	ld a, e
+	ld [hli], a
+	ld a, b
+	ld [hli], a
+	xor a
+	ld [hli], a
+	ld a, c
+	ld [hl], a
+	jp Func_af135
+.Func_af207:
+	ld a, BANK("VRAM1")
+	ld [wHDMADestVRAMBank], a
+	ld de, OldMan2Gfx
+	ld b, HIGH(v1Tiles0) - $80
+	ld c, hdma 128
+	jr .asm_af1f2
+.Func_af215:
+	xor a
+	ld [wHDMADestVRAMBank], a
+	ld de, BGMap_15cd00
+	ld b, HIGH(v0BGMap0) - $80
+	ld c, hdma 36
+	jr .asm_af1f2
+.Func_af222:
+	ld a, BANK("VRAM1")
+	ld [wHDMADestVRAMBank], a
+	ld de, BGMap_15cf40
+	ld b, HIGH(v1BGMap0) - $80
+	ld c, hdma 36
+	jr .asm_af1f2
+.Func_af230:
+	ld a, BANK("VRAM1")
+	ld [wHDMADestVRAMBank], a
+	ld de, wAttrmap
+	ld b, HIGH(v1Tiles1) - $80
+	ld c, hdma 80
+	jr .asm_af1f2
+.Func_af23e:
+	ld a, $a0
+	ldh [rSCX], a
+	ld [wSCX], a
+	xor a
+	ldh [rSCY], a
+	ld [wSCY], a
+	ld hl, wOWUIObj1YCoord
+	ld a, $60
+	ld [hli], a
+	ld [hl], $5c
+	ld a, $ff
+	ld [wOWUIObj2YCoord], a
+	ld a, $0c
+	call SetSceneWarioState
+
+	ld hl, wSceneObj10
+	lb de, $30, $00
+	ld b, $1b
+	call .Func_af2ab
+	ld hl, wSceneObj11
+	lb de, $35, $20
+	ld b, $1c
+	call .Func_af2ab
+	ld hl, wSceneObj12
+	lb de, $32, $70
+	ld b, $1b
+	call .Func_af2ab
+	ld hl, wSceneObj13
+	lb de, $38, $c0
+	ld b, $1c
+	call .Func_af2ab
+
+	ld hl, Pals_86add
+	ld de, wTempPals1
+	call .Func_af2b5
+	ld hl, Pals_86b1d
+	ld de, wTempPals2
+	call .Func_af2b5
+
+	xor a
+	ld [wPalConfig1TotalSteps], a
+	ld [wPalConfig2TotalSteps], a
+	ld [w2d890], a
+	ld [w2d891], a
+	jp Func_af135
+.Func_af2ab:
+	ld a, d
+	ld [hli], a
+	ld a, e
+	ld [hli], a
+	set 2, l
+	ld a, b
+	jp SetSceneObjState
+.Func_af2b5:
+	ld c, 8 palettes
+	ld b, BANK(Pals_86add) ; aka BANK(Pals_86b1d)
+	jp CopyFarBytes
+.Func_af2bc:
+	ld c, $1e
+	jp Func_af130
+.Func_af2c1:
+	call PrintTextWithoutHeader
+	call .Func_af376
+	ld a, [wCurTextLine]
+	cp $80
+	ret nz
+	jp Func_af135
+.Func_af2d0:
+	ld a, $00
+	ld [w2d880], a
+	xor a
+	ld [wPalConfig1TotalSteps], a
+	ld [wPalConfig2TotalSteps], a
+	jp Func_af135
+.Func_af2df:
+	xor a
+	ld [wHDMADestVRAMBank], a
+	ld de, PrologueBackgroundGfx
+	ld b, HIGH(v0Tiles2) - $80
+	ld c, hdma 128
+	ld a, BANK(PrologueBackgroundGfx)
+	ld [wHDMABank], a
+	jp .asm_af1f7
+.Func_af2f2:
+	ld hl, wSceneObj9
+	ld a, $3c
+	ld [hli], a
+	ld a, $b2
+	ld [hl], a
+	ld a, $13
+	ld hl, wSceneObj9State
+	call SetSceneObjState
+	ld hl, wOWUIObj1YCoord
+	ld a, $3c
+	ld [hli], a
+	ld a, $c8
+	ld [hl], a
+	ld a, $1c
+	call SetSceneWarioState
+	xor a
+	ld [wSceneObj10State], a
+	ld [wSceneObj11State], a
+	ld [wSceneObj12State], a
+	ld [wSceneObj13State], a
+	ld a, $08
+	ld [wCollectionRow], a
+	call Func_aca09
+	ld hl, Pals_869cd
+	ld de, wTempPals1
+	ld c, 8 palettes
+	ld b, BANK(Pals_869cd)
+	call CopyFarBytes
+	ld hl, Pals_86b1d
+	ld de, wTempPals2
+	ld c, 8 palettes
+	ld b, BANK(Pals_86b1d)
+	call CopyFarBytes
+	xor a
+	ld [wPalConfig1TotalSteps], a
+	ld [wPalConfig2TotalSteps], a
+	jp Func_af135
+
+.Func_af34a:
+	ld a, [w2d014]
+	and $03
+	ret nz
+	jp Func_ac9ba
+
+.Func_af353:
+	ld a, [w2d014]
+	cp $3c
+	ret c
+	ld hl, wSubState
+	inc [hl]
+	ret
+
+.Pals_af35e:
+	rgb  0, 25,  0
+	rgb 31, 31, 29
+	rgb  5, 26, 26
+	rgb  0,  0,  3
+
+	rgb 31, 31, 31
+	rgb 31, 31, 10
+	rgb  0, 10, 31
+	rgb  0,  0,  3
+
+	rgb 31, 31, 31
+	rgb 31, 31, 26
+	rgb 31,  5,  5
+	rgb  0,  0,  3
+
+.Func_af376:
+	ld a, [wPendingCharDest]
+	and a
+	ret z
+	ld a, [wCurTextLinePos]
+	cp 1
+	ret nz
+	ld a, [wLanguage]
+	and a
+	jr nz, .english
+; japanese
+	ld a, [wPalFade7Colour3RedUnk1]
+	cp $01
+	jr z, .asm_af3ce
+	cp $04
+	jr z, .asm_af3de
+	cp $05
+	jr z, .asm_af3e6
+	cp $07
+	jr z, .asm_af3f2
+	cp $0a
+	jr z, .asm_af3f6
+	cp $0b
+	jr z, .asm_af3fa
+	jr .asm_af3bf
+.english
+	ld a, [wPalFade7Colour3RedUnk1]
+	cp $01
+	jr z, .asm_af3ce
+	cp $04
+	jr z, .asm_af3de
+	cp $05
+	jr z, .asm_af3e2
+	cp $08
+	jr z, .asm_af3f2
+	cp $0b
+	jr z, .asm_af3ce
+	cp $0c
+	jr z, .asm_af3de
+.asm_af3bf
+	ld a, [wPalFade7Colour3RedSign]
+	cp $01
+	ret nz
+	ld a, $0b
+	ld hl, wSceneObj9State
+	call SetSceneObjState
+	ret
+.asm_af3ce
+	ld b, $10
+.asm_af3d0
+	ld a, $01
+	ld hl, wPalFade7Colour3RedSign
+	cp [hl]
+	ret nz
+.asm_af3d7
+	ld a, b
+	ld hl, wSceneObj9State
+	jp SetSceneObjState
+.asm_af3de
+	ld b, $0c
+	jr .asm_af3d0
+.asm_af3e2
+	ld b, $0d
+	jr .asm_af3d0
+.asm_af3e6
+	ld b, $0d
+.asm_af3e8
+	ld a, $02
+.asm_af3ea
+	ld hl, wPalFade7Colour3RedSign
+	cp [hl]
+	jr nz, .asm_af3bf
+	jr .asm_af3d7
+.asm_af3f2
+	ld b, $0e
+	jr .asm_af3e8
+.asm_af3f6
+	ld b, $10
+	jr .asm_af3e8
+.asm_af3fa
+	ld b, $0c
+	ld a, $03
+	jr .asm_af3ea
+
+.asm_af400
+	ld a, [wOWUIObj1State]
+	cp b
+	ret nz
+	jr .asm_af40c
+
+	ld a, [w2d891]
+	cp c
+	ret c
+
+.asm_af40c
+	ld hl, w2d891
+	xor a
+	ld [hld], a
+	inc [hl]
+	ret
+
+.asm_af413
+	xor a
+	ld hl, w2d890
+	ld [hli], a
+	ld [hl], a
+	jp Func_af135
+
+.Func_af41c:
+	farcall Func_84e43
+	ld a, [wPalConfig1TotalSteps]
+	and a
+	ret nz
+	ld hl, w2d891
+	ld [hld], a
+	inc [hl]
+	ret
+
+.Func_af436:
+	call .Func_af60d
+	call .Func_af57b
+	ld hl, w2d890
+	ld a, [hli]
+	inc [hl]
+	ld b, h
+	ld c, l
+	jumptable
+	dw .Func_af466
+	dw .Func_af476
+	dw .Func_af48a
+	dw .Func_af49e
+	dw .Func_af4ad
+	dw .Func_af4b9
+	dw .Func_af4be
+	dw .Func_af4ca
+	dw .Func_af4cf
+	dw .Func_af4e7
+	dw .Func_af4f6
+	dw .Func_af528
+	dw .Func_af534
+	dw .Func_af545
+	dw .Func_af54a
+	dw .Func_af55a
+	dw .Func_af574
+
+.Func_af466:
+	xor a
+	ld [wPalFade2Colour2GreenUnk1], a
+	ld [w2d892], a
+	ld [wTempleRock5Action], a
+	ld [wPalFade2Colour4GreenSign], a
+	jp .asm_af40c
+
+.Func_af476:
+	ld a, [bc]
+	cp $40
+	ret c
+	ld a, $01
+	ld [w2d892], a
+	play_sfx SFX_THROW
+	jp .asm_af40c
+
+.Func_af48a:
+	ld a, [bc]
+	cp $56
+	ret c
+	ld a, $01
+	ld [wTempleRock5Action], a
+	play_sfx SFX_THROW
+	jp .asm_af40c
+
+.Func_af49e:
+	ld a, [w2d892]
+	cp $80
+	ret nz
+	ld a, [wTempleRock5Action]
+	cp $80
+	ret nz
+	jp .asm_af40c
+
+.Func_af4ad:
+	ld a, [bc]
+	cp $3c
+	ret c
+	ld a, $05
+	call SetSceneWarioState
+	jp .asm_af40c
+
+.Func_af4b9:
+	ld b, $02
+	jp .asm_af400
+
+.Func_af4be:
+	ld a, [bc]
+	cp $28
+	ret c
+	ld a, $14
+	call SetSceneWarioState
+	jp .asm_af40c
+
+.Func_af4ca:
+	ld b, $0c
+	jp .asm_af400
+
+.Func_af4cf:
+	ld a, [bc]
+	cp $2d
+	ret c
+	ld a, $0b
+	call SetSceneWarioState
+	xor a
+	ld [wSceneObj9Unk7], a
+	play_sfx SFX_GRAB
+	jp .asm_af40c
+
+.Func_af4e7:
+	ld a, [wSceneObj9Unk7]
+	cp $80
+	ret nz
+	ld a, [wOWUIObj1State]
+	cp $0a
+	ret nz
+	jp .asm_af40c
+
+.Func_af4f6:
+	ld a, [w2d891]
+	cp $04
+	jr z, .asm_af506
+	cp $06
+	jr z, .asm_af518
+	cp $07
+	jr z, .asm_af51e
+	ret
+.asm_af506
+	ld d, $df
+	ld e, $fa
+.asm_af50a
+	ld hl, wSceneObj9
+	ld a, [wOWUIObj1YCoord]
+	add d
+	ld [hli], a
+	ld a, [wOWUIObj1XCoord]
+	add e
+	ld [hl], a
+	ret
+.asm_af518
+	ld d, $e0
+	ld e, $fb
+	jr .asm_af50a
+.asm_af51e
+	ld d, $e2
+	ld e, $fc
+	call .asm_af50a
+	jp .asm_af40c
+
+.Func_af528:
+	ld a, [bc]
+	cp $32
+	ret c
+	ld a, $21
+	call SetSceneWarioState
+	jp .asm_af40c
+
+.Func_af534:
+	ld a, [wOWUIObj1Frame]
+	cp $0b
+	ret nz
+	play_sfx SFX_106
+	jp .asm_af40c
+
+.Func_af545:
+	ld b, $0a
+	jp .asm_af400
+
+.Func_af54a:
+	ld a, [bc]
+	cp $32
+	ret c
+	ld a, $09
+	call SetSceneWarioState
+	xor a
+	ld [wSceneObj9Unk7], a
+	jp .asm_af40c
+
+.Func_af55a:
+	call Func_aca63
+	ld a, [wOWUIObj1XCoord]
+	ld b, a
+	sub $04
+	ld [wSceneObj9XCoord], a
+	ld a, $f0
+	cp b
+	ret nz
+	xor a
+	ld [wOWUIObj1State], a
+	ld [wSceneObj9State], a
+	jp .asm_af40c
+
+.Func_af574:
+	ld a, [bc]
+	cp $3c
+	ret c
+	jp .asm_af413
+
+.Func_af57b:
+	ld a, [wPalFade2Colour2GreenUnk1]
+	and a
+	jr z, .asm_af597
+	ld a, [w2d891]
+	and $03
+	jr z, .asm_af597
+	ld de, Data_aed06
+	ld hl, wOWUIObj1YCoord
+	call ApplyOWMovement_Mirrored
+	jr nz, .asm_af597
+	xor a
+	ld [wPalFade2Colour2GreenUnk1], a
+.asm_af597
+	ld a, [w2d892]
+	cp $80
+	ret z
+	jumptable
+	dw .Func_af5b2
+	dw .Func_af5b3
+	dw .Func_af5c5
+	dw .Func_af5d5
+	dw .Func_af5c5
+	dw .Func_af5d5
+	dw .Func_af5c5
+	dw .Func_af5df
+	dw .Func_af5e7
+	dw .Func_af5fe
+
+.Func_af5b2:
+	ret
+
+.Func_af5b3:
+	ld a, $01
+	ld [wPalFade2Colour2GreenUnk1], a
+	xor a
+	ld [wSceneWarioUnk7], a
+.asm_af5bc
+	ld hl, w2d892
+	inc [hl]
+	xor a
+	ld [w2d893], a
+	ret
+
+.Func_af5c5:
+	ld a, [wOWUIObj1YCoord]
+	cp $60
+	ret nz
+	ld a, $1b
+	call SetSceneWarioState
+	call .Func_af604
+	jr .asm_af5bc
+
+.Func_af5d5:
+	ld hl, w2d893
+	inc [hl]
+	ld a, [hl]
+	cp $04
+	ret c
+	jr .asm_af5bc
+
+.Func_af5df:
+	ld a, [wOWUIObj1State]
+	cp $1c
+	ret nz
+	jr .asm_af5bc
+
+.Func_af5e7:
+	ld hl, w2d893
+	inc [hl]
+	ld a, [hl]
+	cp $42
+	ret c
+	ld a, $0c
+	call SetSceneWarioState
+	play_sfx SFX_12A
+	jr .asm_af5bc
+
+.Func_af5fe:
+	ld a, $80
+	ld [w2d892], a
+	ret
+
+.Func_af604:
+	play_sfx SFX_BUMP
+	ret
+
+.Func_af60d:
+	ld a, [wPalFade2Colour4GreenSign]
+	and a
+	jr z, .asm_af622
+	ld hl, wSceneObj9
+	ld de, Data_aed06
+	call ApplyOWMovement_Mirrored
+	jr nz, .asm_af622
+	xor a
+	ld [wPalFade2Colour4GreenSign], a
+.asm_af622
+	ld a, [wTempleRock5Action]
+	cp $80
+	ret z
+	jumptable
+	dw .Func_af639
+	dw .Func_af63a
+	dw .Func_af64c
+	dw .Func_af657
+	dw .Func_af64c
+	dw .Func_af657
+	dw .Func_af64c
+	dw .Func_af661
+
+.Func_af639:
+	ret
+
+.Func_af63a:
+	ld a, $01
+	ld [wPalFade2Colour4GreenSign], a
+	xor a
+	ld [wSceneObj9Unk7], a
+.asm_af643
+	ld hl, wTempleRock5Action
+	inc [hl]
+	xor a
+	ld [wTempleRock5Counter], a
+	ret
+
+.Func_af64c:
+	ld a, [wSceneObj9YCoord]
+	cp $60
+	ret nz
+	call .Func_af667
+	jr .asm_af643
+
+.Func_af657:
+	ld hl, wTempleRock5Counter
+	inc [hl]
+	ld a, [hl]
+	cp $04
+	ret c
+	jr .asm_af643
+
+.Func_af661:
+	ld a, $80
+	ld [wTempleRock5Action], a
+	ret
+
+.Func_af667:
+	play_sfx SFX_BUMP
+	ret
+
+.Func_af670:
+	call Func_ae523
+	ld hl, w2d890
+	ld a, [hli]
+	inc [hl]
+	ld b, h
+	ld c, l
+	jumptable
+	dw .Func_af68b
+	dw .Func_af69a
+	dw .Func_af6c1
+	dw .Func_af6cd
+	dw .Func_af6ee
+	dw .Func_af6f9
+	dw .Func_af700
+	dw .Func_af73a
+
+.Func_af68b:
+	ld a, [bc]
+	cp $1e
+	ret c
+	ld a, $01
+	ld hl, wSceneObj1State
+	call SetSceneObjState
+	jp .asm_af40c
+
+.Func_af69a:
+	ld a, [wJoypadPressed]
+	bit A_BUTTON_F, a
+	ret z
+	xor a
+	ld hl, wSceneObj1State
+	call SetSceneObjState
+	stop_music2
+	call ClearTextbox
+	ld a, $0f
+	ld hl, wSceneObj9State
+	call SetSceneObjState
+	jp .asm_af40c
+
+.Func_af6c1:
+	ld a, [bc]
+	cp $3c
+	ret c
+	ld a, $01
+	ld [w2d150], a
+	jp .asm_af40c
+
+.Func_af6cd:
+	ld a, [bc]
+	cp $28
+	ret c
+	ld a, $80
+	ld [w2d150], a
+	ld hl, wCurSceneObj
+	ld a, [wOWUIObj1YCoord]
+	sub $04
+	ld [hli], a
+	ld a, [wOWUIObj1XCoord]
+	ld [hl], a
+	ld a, $11
+	ld hl, wCurSceneObjState
+	call SetSceneObjState
+	jp .asm_af40c
+
+.Func_af6ee:
+	ld a, [bc]
+	cp $14
+	ret c
+	xor a
+	call SetSceneWarioState
+	jp .asm_af40c
+
+.Func_af6f9:
+	ld a, [bc]
+	cp $5a
+	ret c
+	jp .asm_af40c
+
+.Func_af700:
+	ld hl, wCurSceneObj
+	ld a, [hl]
+	cp $50
+	jr c, .asm_af711
+	ld a, [w2d891]
+	ld b, a
+	and $03
+	ret nz
+	dec [hl]
+	ret
+.asm_af711
+	dec [hl]
+	dec [hl]
+	dec [hl]
+	ld a, [hl]
+	cp $18
+	jr c, .asm_af733
+	cp $40
+	ret nc
+	ld a, [wCurSceneObjState]
+	cp $12
+	ret z
+	ld a, $12
+	ld hl, wCurSceneObjState
+	call SetSceneObjState
+	ld a, $0a
+	ld hl, wSceneObj9State
+	call SetSceneObjState
+	ret
+.asm_af733
+	xor a
+	ld [wCurSceneObjState], a
+	jp Func_ae1ce
+
+.Func_af73a:
+	ld a, [bc]
+	cp $2d
+	ret c
+	jp .asm_af413
+
+.Func_af741:
+	ld hl, w2d890
+	ld a, [hli]
+	inc [hl]
+	ld b, h
+	ld c, l
+	jumptable
+	dw .Func_af755
+	dw .Func_af76c
+	dw .Func_af775
+	dw .Func_af788
+	dw .Func_af797
+	dw .Func_af7a0
+
+.Func_af755:
+	ld a, [bc]
+	cp $3c
+	ret c
+	ld a, $08
+	ld hl, wSceneObj9State
+	call SetSceneObjState
+	ld hl, wSceneObj9
+	ld a, $60
+	ld [hli], a
+	ld [hl], $80
+	jp .asm_af40c
+
+.Func_af76c:
+	call .Func_af7a7
+	cp $e0
+	ret nz
+	jp .asm_af40c
+
+.Func_af775:
+	call .Func_af7a7
+	ld hl, wSCX
+	inc [hl]
+	ret nz
+	ld a, $09
+	ld hl, wSceneObj9State
+	call SetSceneObjState
+	jp .asm_af40c
+
+.Func_af788:
+	ld a, [bc]
+	cp $1e
+	ret c
+	ld a, $06
+	ld hl, wSceneObj9State
+	call SetSceneObjState
+	jp .asm_af40c
+
+.Func_af797:
+	ld a, [wSceneObj9State]
+	cp $0a
+	ret nz
+	jp .asm_af40c
+
+.Func_af7a0:
+	ld a, [bc]
+	cp $3c
+	ret c
+	jp .asm_af413
+
+.Func_af7a7:
+	ld hl, wSceneObj9XCoord
+	inc [hl]
+	ld a, [hl]
+	and $fe
+	ret
+
+.Func_af7af:
+	farcall Func_15848a
+	ld hl, w2d890
+	ld a, [hli]
+	inc [hl]
+	ld b, h
+	ld c, l
+	jumptable
+	dw .Func_af7ee
+	dw .Func_af7fd
+	dw .Func_af816
+	dw .Func_af41c
+	dw .Func_af82d
+	dw .Func_af41c
+	dw .Func_af843
+	dw .Func_af860
+	dw .Func_af816
+	dw .Func_af41c
+	dw .Func_af863
+	dw .Func_af41c
+	dw .Func_af871
+	dw .Func_af88e
+	dw .Func_af816
+	dw .Func_af41c
+	dw .Func_af893
+	dw .Func_af41c
+	dw .Func_af8a2
+	dw .Func_af8a9
+
+.Func_af7ee:
+	play_music2 MUSIC_EPILOGUE
+	jp .asm_af40c
+
+.Func_af7fd:
+	ld a, $04
+.asm_af7ff
+	ld [wSceneObj5Attributes], a
+	ld [wSceneObj6Attributes], a
+	ld [wSceneObj7Attributes], a
+	ld [wSceneObj8Attributes], a
+	ld [wSceneObj1Attributes], a
+	ld a, $01
+	ld [w2d8a0], a
+	jp .asm_af40c
+
+.Func_af816:
+	ld a, [wSceneObj1YCoord]
+	cp $50
+	ret c
+	play_sfx SFX_0EB
+	call Func_aca09
+	call Func_aca25
+	jp .asm_af40c
+
+.Func_af82d:
+	ld a, $02
+	ld hl, wSceneObj9State
+	call SetSceneObjState
+	ld hl, wSceneObj9XCoord
+	dec [hl]
+.asm_af839
+	xor a
+	ld [wSceneObj1State], a
+	call .Func_af1bd
+	jp .asm_af40c
+
+.Func_af843:
+	ld a, [bc]
+	cp $50
+	ret c
+	ld a, $19
+	ld hl, wSceneObj9State
+	call SetSceneObjState
+	ld a, $48
+	ld [wSceneObj9XCoord], a
+	call .Func_af1db
+	ld de, Data_aca04
+	call Func_ac9e4
+	jp .asm_af40c
+
+.Func_af860:
+	xor a
+	jr .asm_af7ff
+
+.Func_af863:
+	ld a, $03
+	ld hl, wSceneObj9State
+	call SetSceneObjState
+	ld hl, wSceneObj9XCoord
+	dec [hl]
+	jr .asm_af839
+
+.Func_af871:
+	ld a, [bc]
+	cp $50
+	ret c
+	ld a, $1a
+	ld hl, wSceneObj9State
+	call SetSceneObjState
+	ld a, $58
+	ld [wSceneObj9XCoord], a
+	call .Func_af1db
+	ld de, Data_aca04
+	call Func_ac9e4
+	jp .asm_af40c
+
+.Func_af88e:
+	ld a, $03
+	jp .asm_af7ff
+
+.Func_af893:
+	ld a, $04
+	ld hl, wSceneObj9State
+	call SetSceneObjState
+	ld hl, wSceneObj9XCoord
+	dec [hl]
+	dec [hl]
+	jr .asm_af839
+
+.Func_af8a2:
+	ld a, [bc]
+	cp $50
+	ret c
+	jp .asm_af40c
+
+.Func_af8a9:
+	xor a
+	ld [wSceneObj5Attributes], a
+	ld [wSceneObj6Attributes], a
+	ld [wSceneObj7Attributes], a
+	ld [wSceneObj8Attributes], a
+	ld [wSceneObj1Attributes], a
+	jp .asm_af413
+
+.Func_af8bc:
+	ld hl, wSceneObj10State
+	ld a, [hl]
+	cp $1b
+	ret nz
+	call .Func_af8d0
+	call .Func_af8dc
+	call .Func_af8ef
+	call .Func_af902
+	ret
+
+.Func_af8d0:
+	ld a, [wGlobalCounter]
+	and $03
+	ret nz
+	ld a, $07
+	xor l
+	ld l, a
+	inc [hl]
+	ret
+
+.Func_af8dc:
+	ld hl, wSceneObj11State
+	ld a, [hl]
+	cp $1c
+	ret nz
+	ld a, [wGlobalCounter]
+	and $07
+	ret nz
+	ld a, $07
+	xor l
+	ld l, a
+	inc [hl]
+	ret
+
+.Func_af8ef:
+	ld hl, wSceneObj12State
+	ld a, [hl]
+	cp $1b
+	ret nz
+	ld a, [wGlobalCounter]
+	and $03
+	ret nz
+	ld a, $07
+	xor l
+	ld l, a
+	inc [hl]
+	ret
+
+.Func_af902:
+	ld hl, wSceneObj13State
+	ld a, [hl]
+	cp $1c
+	ret nz
+	ld a, [wGlobalCounter]
+	and $07
+	ret nz
+	ld a, $07
+	xor l
+	ld l, a
+	inc [hl]
+	ret
+; 0xaf915
+
+REPT $6eb
+	db $00
+ENDR

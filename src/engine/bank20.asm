@@ -817,8 +817,8 @@ OverworldStateTable: ; 80392 (20:4392)
 	dw Func_804f7           ; SST_OVERWORLD_05
 	dw SlowFadeFromWhite
 	dw Func_80540
-	dw FadeBGToWhite_Normal ; SST_OVERWORLD_08
 
+	dw FadeBGToWhite_Normal ; SST_OVERWORLD_08
 	dw Func_8055f           ; SST_OVERWORLD_09
 	dw DarkenBGToPal_Normal
 	dw Func_805d7           ; SST_OVERWORLD_0B
@@ -844,17 +844,18 @@ OverworldStateTable: ; 80392 (20:4392)
 	dw InitTempleScene
 	dw DarkenBGToPal_Normal
 	dw UpdateTempleScene
+	dw Func_80e33
 
-	dw $4e33
 	dw FadeBGToWhite_Normal
-	dw $4e45                ; SST_OVERWORLD_20
+	dw Func_80e45           ; SST_OVERWORLD_20
 	dw DarkenBGToPal_Normal
-	dw $4e55
+	dw Func_80e55
+
 	dw FastFadeToWhite
-	dw $4e65
+	dw InitEpilogue
 	dw SlowFadeFromWhite
-	dw $4e75
-	dw $4e85
+	dw Func_80e75
+	dw Func_80e85
 ; 0x803e6
 
 Func_803e6: ; 803e6 (20:43e6)
@@ -2025,7 +2026,39 @@ UpdateTempleScene: ; 80e23 (20:4e23)
 	ret
 ; 0x80e33
 
-	INCROM $80e33, $80e89
+Func_80e33: ; 80e33 (20:4e33)
+	ld a, [wJoypadDown]
+	bit B_BUTTON_F, a
+	jr nz, .b_btn
+	ld hl, wSubState
+	inc [hl]
+	ret
+.b_btn
+	ld a, SST_OVERWORLD_08
+	ld [wSubState], a
+	ret
+
+Func_80e45: ; 80e45 (20:4e45)
+	farcall Func_ad9b2
+	ret
+; 0x80e55
+
+Func_80e55: ; 80e55 (20:4e55)
+	farcall Func_adbfe
+	ret
+; 0x80e65
+
+InitEpilogue: ; 80e65 (20:4e65)
+	farcall _InitEpilogue
+	ret
+
+Func_80e75: ; 80e75 (20:4e75)
+	farcall Func_af13c
+	ret
+
+Func_80e85: ; 80e85 (20:4e85)
+	call Func_803e6
+	ret
 
 Func_80e89: ; 80e89 (20:4e89)
 	call ProcessDPadRepeat
