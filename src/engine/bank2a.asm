@@ -4957,7 +4957,27 @@ Frameset_aa25e: ; aa25e (2a:625e)
 	db $ff
 ; 0xaa261
 
-	INCROM $aa261, $aa2fb
+Frameset_aa261:: ; aa261 (2a:6261)
+	db $05,  4
+	db $ff
+; 0xaa264
+
+Frameset_aa264:: ; aa264 (2a:6264)
+	db $06,  4
+	db $ff
+; 0xaa267
+
+Frameset_aa267:: ; aa267 (2a:6267)
+	db $07,  4
+	db $ff
+; 0xaa26a
+
+Frameset_aa26a:: ; aa26a (2a:626a)
+	db $08,  4
+	db $ff
+; 0xaa26d
+
+	INCROM $aa26d, $aa2fb
 
 Frameset_aa2fb: ; aa2fb (2a:62fb)
 	db $18,  9

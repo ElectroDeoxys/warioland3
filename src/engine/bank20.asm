@@ -3078,18 +3078,221 @@ Func_8150c: ; 8150c (20:550c)
 .Func_81615
 	ld a, [w2d880 + $7]
 	jumptable
-	dw $5625
-	dw $567f
-	dw $56b3
-	dw $56be
-	dw $56ea
-	dw $56f5
-; 0x81625
+	dw .Func_81625
+	dw .Func_8167f
+	dw .Func_816b3
+	dw .Func_816be
+	dw .Func_816ea
+	dw .Func_816f5
 
-	INCROM $81625, $81714
+.Func_81625:
+	ld a, [w2d100]
+	ld d, a
+	ld a, [w2d101]
+	ld e, a
+	ld b, $08
+	ld a, [wPalFade2Colour2RedDiff]
+	inc a
+	bit 1, a
+	jr z, .asm_81639
+	ld b, $f8
+.asm_81639
+	cp $03
+	jr nc, .asm_81642
+	ld a, e
+	add b
+	ld e, a
+	jr .asm_81645
+.asm_81642
+	ld a, d
+	add b
+	ld d, a
+.asm_81645
+	ld a, d
+	ld [w2d880], a
+	ld [wConnectedLevel1YCoord], a
+	ld [wConnectedLevel2YCoord], a
+	ld [w2d06f], a
+	ld a, e
+	ld [wPalFade2Colour1BlueTarget], a
+	ld [wConnectedLevel1XCoord], a
+	ld [wConnectedLevel2XCoord], a
+	ld [w2d070], a
+	ld hl, wPalFade2Colour1BlueUnk1
+	xor a
+	ld [hli], a
+	ld [hli], a
+	ld a, [wPalFade2Colour2RedDiff]
+	inc a
+	ld b, a
+	ld c, a
+	ld a, [wOWAllowedDPadInput]
+	swap a
+.asm_81670
+	rrca
+	dec b
+	jr nz, .asm_81670
+	ld a, $00
+	jr nc, .asm_81679
+	ld a, c
+.asm_81679
+	ld [hl], a
+.asm_8167a
+	ld hl, wPalFade2Colour1BlueUnk4
+	inc [hl]
+	ret
+
+.Func_8167f:
+	ld a, [wPalFade2Colour1BlueUnk3]
+	and a
+	jr z, .asm_816ad
+	ld hl, wPalFade2Colour2RedTarget
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [wPalFade2Colour2RedDiff]
+	ld e, a
+	ld d, $00
+	add hl, de
+	ld b, [hl]
+	ld de, $4
+	add hl, de
+	ld a, [hl]
+	ld [w2d071], a
+	ld a, b
+	cp $80
+	jr z, .asm_816ad
+	call GetMapLevelCoords
+	ld a, [hli]
+	ld [w2d06f], a
+	ld a, [hl]
+	ld [w2d070], a
+	jr .asm_8167a
+.asm_816ad
+	ld a, $05
+	ld [wPalFade2Colour1BlueUnk4], a
+	ret
+
+.Func_816b3:
+	ld bc, w2d071
+	call Func_810fc
+	call Func_821a1
+	jr .asm_8167a
+
+.Func_816be:
+	call Func_82208
+	ld a, [wConnectedLevel1YCoord]
+	ld [w2d880], a
+	ld a, [wConnectedLevel1XCoord]
+	ld [wPalFade2Colour1BlueTarget], a
+	ld a, [w2d0a1]
+	and a
+	ret nz
+	ld bc, w2d071
+	call Func_810fc
+	cp $ff
+	jr z, .asm_816e3
+	call Func_821a1
+	call .Func_816f6
+	ret
+.asm_816e3
+	xor a
+	ld [wPalFade2Colour2RedCurrent], a
+	jp .asm_8167a
+
+.Func_816ea:
+	ld hl, wPalFade2Colour2RedCurrent
+	inc [hl]
+	ld a, [hl]
+	cp $08
+	ret c
+	jp .asm_8167a
+
+.Func_816f5:
+	ret
+
+.Func_816f6:
+	ld hl, w2d0a0
+	bit 0, [hl]
+	jr nz, .asm_81705
+	ld a, $03
+	bit 1, [hl]
+	jr z, .asm_8170b
+	jr .asm_8170c
+.asm_81705
+	ld a, $01
+	bit 2, [hl]
+	jr z, .asm_8170c
+.asm_8170b
+	inc a
+.asm_8170c
+	ld hl, wPalFade2Colour1BlueUnk3
+	ld [hld], a
+	xor a
+	ld [hld], a
+	ld [hl], a
+	ret
 
 Func_81714: ; 81714 (20:5714)
-	INCROM $81714, $8178b
+	ld hl, wDayNightTransistionSteps
+	call .Func_8175d
+	ld hl, wPalFade1Colour1BlueUnk3
+	call .Func_8175d
+	ld hl, wPalFade1Colour3RedUnk3
+	call .Func_8175d
+	ld hl, wPalFade1Colour4GreenUnk3
+	call .Func_8175d
+	ld hl, wOWUIObj1State
+	call .Func_8175d
+	ld hl, wOWUIObj2State
+	call .Func_8175d
+	ld hl, $d156
+	call .Func_8175d
+	ld hl, $d15e
+	call .Func_8175d
+	ld hl, $d166
+	call .Func_8175d
+	ld hl, $d16e
+	call .Func_8175d
+	ld hl, $d176
+	call .Func_8175d
+	ld hl, $d17e
+	call .Func_8175d
+	ret
+
+.Func_8175d:
+	ld a, [hld]
+	and a
+	ret z
+	ld bc, .framesets
+	dec a
+	add a
+	add c
+	ld c, a
+	ld a, $00
+	adc b
+	ld b, a
+	ld a, [bc]
+	ld e, a
+	inc bc
+	ld a, [bc]
+	ld d, a
+	dec l
+	ld b, $2a
+	call UpdateOWAnimation
+	ld a, $f8
+	and l
+	ld l, a
+	ld de, OAM_aa0cf
+	ld b, BANK(OAM_aa0cf)
+	call AddOWSpriteWithScroll
+	ret
+
+.framesets
+	dw Frameset_aa26a
+	dw Frameset_aa267
+	dw Frameset_aa261
+	dw Frameset_aa264
 
 SetDayNightSpellSelectable: ; 8178b (20:578b)
 	ld a, DAY_OR_NIGHT_SPELL
@@ -6782,25 +6985,23 @@ Func_82c33: ; 82c33 (20:6c33)
 	inc [hl]
 	ld a, [w2d062]
 	jumptable
-	dw Func_82c55
-	dw Func_82c8f
-	dw $6a0a
-	dw $6a26
-	dw $6a2f
-	dw $6a4e
-	dw $6a62
-	dw $6c93
-	dw $6cb0
-	dw $6c51
-	dw $6c29
-; 0x82C51
+	dw .Func_82c55
+	dw .Func_82c8f
+	dw Func_82a0a
+	dw Func_82a26
+	dw Func_82a2f
+	dw Func_82a4e
+	dw Func_82a62
+	dw .Func_82c93
+	dw .Func_82cb0
+	dw .Func_82c51
+	dw Func_82c29
 
-Func_82c51: ; 82c51 (20:6c51)
+.Func_82c51:
 	ld a, 30
 	jr Func_82c1d
-; 0x82c55
 
-Func_82c55: ; 82c55 (20:6c55)
+.Func_82c55:
 	ld a, [wCurMapSide]
 	sub 1
 	ccf
@@ -6832,14 +7033,12 @@ Func_82c55: ; 82c55 (20:6c55)
 	call IsTreasureCollected
 	jr nz, .asm_82c6e
 	jr Func_82c29
-; 0x82c8f
 
-Func_82c8f: ; 82c8f (20:6c8f)
+.Func_82c8f:
 	ld a, 12
 	jr Func_82c1d
-; 0x82c93
 
-Func_82c93: ; 82c93 (20:6c93)
+.Func_82c93:
 	ld a, [wConnectedLevel2]
 	ld c, a
 	ld de, wCurSceneObj
@@ -6849,6 +7048,10 @@ Func_82c93: ; 82c93 (20:6c93)
 	call SetSceneObjState
 	play_sfx SFX_104
 	jp Func_82c22
-; 0x82cb0
 
-	INCROM $82cb0, $82cb8
+.Func_82cb0:
+	ld a, [wCurSceneObjState]
+	and a
+	ret nz
+	jp Func_82c22
+; 0x82cb8
