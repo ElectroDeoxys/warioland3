@@ -57,3 +57,15 @@ ENDM
 MACRO rgb
 	dw (\3 << 10 | \2 << 5 | \1)
 ENDM
+
+MACRO room_data
+	dn \2, \1 ; y, x
+	dn \4, \3 ; ?
+	dn \6, \5 ; ?
+	db \7 ; cam configuration
+	db \8 ; enemy group
+	db \9 ; animated tiles group
+	SHIFT 9
+	db \1 ; initial pal cycle
+	db \2 ; room ID
+ENDM

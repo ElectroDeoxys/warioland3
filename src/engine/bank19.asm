@@ -12,7 +12,7 @@ LoadEnemyGroupData:: ; 64000 (19:4000)
 	jr nz, .loop_1
 
 	ld a, [wEnemyGroup]
-	cp $f0
+	cp ENEMY_GROUP_HIDDEN_FIGURE
 	jp z, LoadHiddenFigureData
 
 	ld d, $00

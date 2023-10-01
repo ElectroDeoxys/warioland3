@@ -1,1952 +1,3818 @@
-Data_c4000: ; c4000 (31:4000)
-	dw $403c
-	dw $4044
-	dw $404c
+LevelRooms_c4000: ; c4000 (31:4000)
+	dw .room_00
+	dw .room_01
+	dw .room_02
 	dw NULL
-	dw $4054
-	dw $405c
-	dw $4064
+	dw .room_04
+	dw .room_05
+	dw .room_06
 	dw NULL
-	dw $406c
-	dw $4074
+	dw .room_08
+	dw .room_09
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $407c
-	dw $4084
-	dw $408c
-	dw $4094
+	dw .room_13
+	dw .room_14
+	dw .room_15
+	dw .room_16
 	dw NULL
-	dw $409c
-	dw $40a4
-	dw $40ac
-	dw $40b4
+	dw .room_18
+	dw .room_19
+	dw .room_20
+	dw .room_21
 	dw NULL
-	dw $40bc
-	dw $40c4
-	dw $40cc
+	dw .room_23
+	dw .room_24
+	dw .room_25
 	dw NULL
-	dw $40d4
-	dw $40dc
-	dw $40e4
-	db $11, $02, $16, $08, $70, $03, $00, $59, $09, $03, $9a, $01, $50, $03, $00, $0b, $19, $03, $9a, $01, $50, $03, $00, $0b, $06, $02, $68, $08, $31, $03, $00, $59, $23, $23, $35, $01, $0e, $13, $00, $13, $04, $02, $16, $08, $70, $03, $00, $59, $25, $23, $56, $01, $64, $03, $00, $49, $01, $02, $16, $08, $48, $03, $00, $59, $16, $02, $68, $08, $31, $03, $00, $59, $21, $23, $13, $08, $13, $13, $00, $13, $18, $03, $89, $21, $63, $03, $00, $49, $13, $02, $16, $08, $70, $03, $00, $59, $15, $02, $16, $08, $70, $03, $00, $59, $02, $02, $16, $08, $70, $03, $00, $59, $29, $03, $9a, $01, $50, $03, $00, $0b, $14, $02, $16, $08, $70, $03, $00, $59, $05, $02, $16, $08, $70, $03, $00, $59, $24, $23, $35, $01, $0e, $13, $00, $13, $08, $03, $89, $21, $63, $03, $00, $49, $28, $03, $89, $21, $63, $03, $00, $49, $27, $23, $68, $18, $5c, $03, $00, $49, $20, $23, $01, $08, $01, $13, $00, $13
+	dw .room_27
+	dw .room_28
+	dw .room_29
 
-Data_c40ec: ; c40ec (31:40ec)
-	dw $4128
-	dw $4130
-	dw $4138
-	dw NULL
-	dw $4140
-	dw $4148
-	dw $4150
-	dw NULL
-	dw $4158
-	dw $4160
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $4168
-	dw $4170
-	dw $4178
-	dw $4180
-	dw NULL
-	dw $4188
-	dw $4190
-	dw $4198
-	dw $41a0
-	dw NULL
-	dw $41a8
-	dw $41b0
-	dw $41b8
-	dw NULL
-	dw $41c0
-	dw $41c8
-	dw $41d0
-	db $11, $02, $16, $08, $70, $03, $00, $5a, $09, $03, $9a, $01, $50, $03, $00, $0b, $19, $03, $9a, $01, $50, $03, $00, $0b, $06, $02, $68, $08, $31, $03, $00, $5a, $23, $23, $35, $01, $0e, $13, $00, $13, $04, $02, $16, $08, $70, $03, $00, $5a, $25, $23, $56, $01, $64, $03, $00, $49, $01, $02, $16, $08, $48, $03, $00, $5a, $16, $02, $68, $08, $31, $03, $00, $5a, $21, $23, $13, $08, $13, $13, $00, $13, $18, $03, $89, $21, $63, $03, $00, $49, $13, $02, $16, $08, $70, $03, $00, $5a, $15, $02, $16, $08, $70, $03, $00, $5a, $02, $02, $16, $08, $70, $03, $00, $5a, $29, $03, $9a, $01, $50, $03, $00, $0b, $14, $02, $16, $08, $70, $03, $00, $5a, $05, $02, $16, $08, $70, $03, $00, $5a, $24, $23, $35, $01, $0e, $13, $00, $13, $08, $03, $89, $21, $63, $03, $00, $49, $28, $03, $89, $21, $63, $03, $00, $49, $27, $23, $68, $18, $5c, $03, $00, $49, $20, $23, $01, $08, $01, $13, $00, $13
+.room_00
+	room_data  1,  1, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_112, ANIMATED_TILES_GROUP_03,  0, ROOM_089
+.room_01
+	room_data  9,  0, $3, $0, $a, $9, CAM_FREE, ENEMY_GROUP_080, ANIMATED_TILES_GROUP_03,  0, ROOM_011
+.room_02
+	room_data  9,  1, $3, $0, $a, $9, CAM_FREE, ENEMY_GROUP_080, ANIMATED_TILES_GROUP_03,  0, ROOM_011
+.room_04
+	room_data  6,  0, $2, $0, $8, $6, CAM_TRANSITIONS, ENEMY_GROUP_049, ANIMATED_TILES_GROUP_03,  0, ROOM_089
+.room_05
+	room_data  3,  2, $3, $2, $5, $3, CAM_FREE, ENEMY_GROUP_014, ANIMATED_TILES_GROUP_19,  0, ROOM_019
+.room_06
+	room_data  4,  0, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_112, ANIMATED_TILES_GROUP_03,  0, ROOM_089
+.room_08
+	room_data  5,  2, $3, $2, $6, $5, CAM_FREE, ENEMY_GROUP_100, ANIMATED_TILES_GROUP_03,  0, ROOM_073
+.room_09
+	room_data  1,  0, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_072, ANIMATED_TILES_GROUP_03,  0, ROOM_089
+.room_13
+	room_data  6,  1, $2, $0, $8, $6, CAM_TRANSITIONS, ENEMY_GROUP_049, ANIMATED_TILES_GROUP_03,  0, ROOM_089
+.room_14
+	room_data  1,  2, $3, $2, $3, $1, CAM_TRANSITIONS, ENEMY_GROUP_019, ANIMATED_TILES_GROUP_19,  0, ROOM_019
+.room_15
+	room_data  8,  1, $3, $0, $9, $8, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_099, ANIMATED_TILES_GROUP_03,  0, ROOM_073
+.room_16
+	room_data  3,  1, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_112, ANIMATED_TILES_GROUP_03,  0, ROOM_089
+.room_18
+	room_data  5,  1, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_112, ANIMATED_TILES_GROUP_03,  0, ROOM_089
+.room_19
+	room_data  2,  0, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_112, ANIMATED_TILES_GROUP_03,  0, ROOM_089
+.room_20
+	room_data  9,  2, $3, $0, $a, $9, CAM_FREE, ENEMY_GROUP_080, ANIMATED_TILES_GROUP_03,  0, ROOM_011
+.room_21
+	room_data  4,  1, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_112, ANIMATED_TILES_GROUP_03,  0, ROOM_089
+.room_23
+	room_data  5,  0, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_112, ANIMATED_TILES_GROUP_03,  0, ROOM_089
+.room_24
+	room_data  4,  2, $3, $2, $5, $3, CAM_FREE, ENEMY_GROUP_014, ANIMATED_TILES_GROUP_19,  0, ROOM_019
+.room_25
+	room_data  8,  0, $3, $0, $9, $8, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_099, ANIMATED_TILES_GROUP_03,  0, ROOM_073
+.room_27
+	room_data  8,  2, $3, $0, $9, $8, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_099, ANIMATED_TILES_GROUP_03,  0, ROOM_073
+.room_28
+	room_data  7,  2, $3, $2, $8, $6, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_092, ANIMATED_TILES_GROUP_03,  0, ROOM_073
+.room_29
+	room_data  0,  2, $3, $2, $1, $0, CAM_TRANSITIONS, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_19,  0, ROOM_019
 
-Data_c41d8: ; c41d8 (31:41d8)
-	dw $4214
-	dw $421c
-	dw $4224
+LevelRooms_c40ec: ; c40ec (31:40ec)
+	dw .room_00
+	dw .room_01
+	dw .room_02
 	dw NULL
-	dw $422c
-	dw $4234
-	dw $423c
+	dw .room_04
+	dw .room_05
+	dw .room_06
 	dw NULL
-	dw $4244
-	dw $424c
+	dw .room_08
+	dw .room_09
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $4254
-	dw $425c
-	dw $4264
-	dw $426c
+	dw .room_13
+	dw .room_14
+	dw .room_15
+	dw .room_16
 	dw NULL
-	dw $4274
-	dw $427c
-	dw $4284
-	dw $428c
+	dw .room_18
+	dw .room_19
+	dw .room_20
+	dw .room_21
 	dw NULL
-	dw $4294
-	dw $429c
-	dw $42a4
+	dw .room_23
+	dw .room_24
+	dw .room_25
 	dw NULL
-	dw $42ac
-	dw $42b4
-	dw $42bc
-	db $11, $02, $16, $08, $48, $03, $00, $5a, $09, $03, $9a, $01, $50, $03, $00, $0b, $19, $03, $9a, $01, $50, $03, $00, $0b, $06, $02, $68, $08, $31, $03, $00, $5a, $23, $23, $35, $01, $0e, $13, $00, $13, $04, $02, $16, $08, $48, $03, $00, $5a, $25, $23, $56, $01, $64, $03, $00, $49, $01, $02, $16, $08, $48, $03, $00, $5a, $16, $02, $68, $08, $31, $03, $00, $5a, $21, $23, $13, $08, $13, $13, $00, $13, $18, $03, $89, $21, $63, $03, $00, $49, $13, $02, $16, $08, $48, $03, $00, $5a, $15, $02, $16, $08, $48, $03, $00, $5a, $02, $02, $16, $08, $48, $03, $00, $5a, $29, $03, $9a, $01, $50, $03, $00, $0b, $14, $02, $16, $08, $48, $03, $00, $5a, $05, $02, $16, $08, $48, $03, $00, $5a, $24, $23, $35, $01, $0e, $13, $00, $13, $08, $03, $89, $21, $63, $03, $00, $49, $28, $03, $89, $21, $63, $03, $00, $49, $27, $23, $68, $18, $5c, $03, $00, $49, $20, $23, $01, $08, $01, $13, $00, $13
+	dw .room_27
+	dw .room_28
+	dw .room_29
 
-Data_c42c4: ; c42c4 (31:42c4)
-	dw $4300
-	dw $4308
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $4310
-	dw $4318
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $4320
-	dw $4328
-	dw NULL
-	dw $4330
-	dw NULL
-	dw $4338
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $4340
-	dw NULL
-	dw NULL
-	dw $4348
-	dw $4350
-	dw $4358
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	db $02, $02, $16, $01, $49, $03, $00, $24, $25, $23, $56, $01, $3e, $04, $00, $25, $23, $23, $35, $01, $7b, $04, $00, $25, $11, $02, $16, $01, $49, $03, $00, $24, $15, $02, $16, $01, $49, $03, $00, $24, $06, $02, $68, $01, $3e, $04, $00, $25, $20, $23, $03, $01, $51, $04, $00, $25, $10, $12, $01, $01, $7a, $04, $00, $25, $13, $02, $16, $01, $49, $03, $00, $24, $05, $02, $16, $01, $49, $03, $00, $24, $24, $23, $35, $01, $7b, $04, $00, $25, $01, $02, $16, $01, $49, $03, $00, $24
+.room_00
+	room_data  1,  1, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_112, ANIMATED_TILES_GROUP_03,  0, ROOM_090
+.room_01
+	room_data  9,  0, $3, $0, $a, $9, CAM_FREE, ENEMY_GROUP_080, ANIMATED_TILES_GROUP_03,  0, ROOM_011
+.room_02
+	room_data  9,  1, $3, $0, $a, $9, CAM_FREE, ENEMY_GROUP_080, ANIMATED_TILES_GROUP_03,  0, ROOM_011
+.room_04
+	room_data  6,  0, $2, $0, $8, $6, CAM_TRANSITIONS, ENEMY_GROUP_049, ANIMATED_TILES_GROUP_03,  0, ROOM_090
+.room_05
+	room_data  3,  2, $3, $2, $5, $3, CAM_FREE, ENEMY_GROUP_014, ANIMATED_TILES_GROUP_19,  0, ROOM_019
+.room_06
+	room_data  4,  0, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_112, ANIMATED_TILES_GROUP_03,  0, ROOM_090
+.room_08
+	room_data  5,  2, $3, $2, $6, $5, CAM_FREE, ENEMY_GROUP_100, ANIMATED_TILES_GROUP_03,  0, ROOM_073
+.room_09
+	room_data  1,  0, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_072, ANIMATED_TILES_GROUP_03,  0, ROOM_090
+.room_13
+	room_data  6,  1, $2, $0, $8, $6, CAM_TRANSITIONS, ENEMY_GROUP_049, ANIMATED_TILES_GROUP_03,  0, ROOM_090
+.room_14
+	room_data  1,  2, $3, $2, $3, $1, CAM_TRANSITIONS, ENEMY_GROUP_019, ANIMATED_TILES_GROUP_19,  0, ROOM_019
+.room_15
+	room_data  8,  1, $3, $0, $9, $8, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_099, ANIMATED_TILES_GROUP_03,  0, ROOM_073
+.room_16
+	room_data  3,  1, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_112, ANIMATED_TILES_GROUP_03,  0, ROOM_090
+.room_18
+	room_data  5,  1, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_112, ANIMATED_TILES_GROUP_03,  0, ROOM_090
+.room_19
+	room_data  2,  0, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_112, ANIMATED_TILES_GROUP_03,  0, ROOM_090
+.room_20
+	room_data  9,  2, $3, $0, $a, $9, CAM_FREE, ENEMY_GROUP_080, ANIMATED_TILES_GROUP_03,  0, ROOM_011
+.room_21
+	room_data  4,  1, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_112, ANIMATED_TILES_GROUP_03,  0, ROOM_090
+.room_23
+	room_data  5,  0, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_112, ANIMATED_TILES_GROUP_03,  0, ROOM_090
+.room_24
+	room_data  4,  2, $3, $2, $5, $3, CAM_FREE, ENEMY_GROUP_014, ANIMATED_TILES_GROUP_19,  0, ROOM_019
+.room_25
+	room_data  8,  0, $3, $0, $9, $8, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_099, ANIMATED_TILES_GROUP_03,  0, ROOM_073
+.room_27
+	room_data  8,  2, $3, $0, $9, $8, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_099, ANIMATED_TILES_GROUP_03,  0, ROOM_073
+.room_28
+	room_data  7,  2, $3, $2, $8, $6, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_092, ANIMATED_TILES_GROUP_03,  0, ROOM_073
+.room_29
+	room_data  0,  2, $3, $2, $1, $0, CAM_TRANSITIONS, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_19,  0, ROOM_019
 
-Data_c4360: ; c4360 (31:4360)
-	dw $439c
-	dw $43a4
+LevelRooms_c41d8: ; c41d8 (31:41d8)
+	dw .room_00
+	dw .room_01
+	dw .room_02
+	dw NULL
+	dw .room_04
+	dw .room_05
+	dw .room_06
+	dw NULL
+	dw .room_08
+	dw .room_09
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $43ac
-	dw $43b4
+	dw .room_13
+	dw .room_14
+	dw .room_15
+	dw .room_16
 	dw NULL
+	dw .room_18
+	dw .room_19
+	dw .room_20
+	dw .room_21
 	dw NULL
+	dw .room_23
+	dw .room_24
+	dw .room_25
 	dw NULL
-	dw $43bc
-	dw $43c4
-	dw NULL
-	dw $43cc
-	dw NULL
-	dw $43d4
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $43dc
-	dw NULL
-	dw NULL
-	dw $43e4
-	dw $43ec
-	dw $43f4
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	db $02, $02, $16, $01, $49, $03, $00, $5b, $25, $23, $56, $01, $3e, $04, $00, $25, $23, $23, $35, $01, $7b, $04, $00, $25, $11, $02, $16, $01, $49, $03, $00, $5b, $15, $02, $16, $01, $49, $03, $00, $5b, $06, $02, $68, $01, $3e, $04, $00, $25, $20, $23, $03, $01, $51, $04, $00, $25, $10, $12, $01, $01, $7a, $04, $00, $25, $13, $02, $16, $01, $49, $03, $00, $5b, $05, $02, $16, $01, $49, $03, $00, $5b, $24, $23, $35, $01, $7b, $04, $00, $25, $01, $02, $16, $01, $49, $03, $00, $5b
+	dw .room_27
+	dw .room_28
+	dw .room_29
 
-Data_c43fc: ; c43fc (31:43fc)
-	dw $4438
-	dw $4440
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $4448
-	dw $4450
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $4458
-	dw $4460
-	dw NULL
-	dw $4468
-	dw NULL
-	dw $4470
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $4478
-	dw NULL
-	dw NULL
-	dw $4480
-	dw $4488
-	dw $4490
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	db $02, $02, $16, $01, $49, $03, $00, $5c, $25, $23, $56, $01, $3e, $04, $00, $25, $23, $23, $35, $01, $7b, $04, $00, $25, $11, $02, $16, $01, $49, $03, $00, $5c, $15, $02, $16, $01, $49, $03, $00, $5c, $06, $02, $68, $01, $3e, $04, $00, $25, $20, $23, $03, $01, $51, $04, $00, $25, $10, $12, $01, $01, $7a, $04, $00, $25, $13, $02, $16, $01, $49, $03, $00, $5c, $05, $02, $16, $01, $49, $03, $00, $5c, $24, $23, $35, $01, $7b, $04, $00, $25, $01, $02, $16, $01, $49, $03, $00, $5c
+.room_00
+	room_data  1,  1, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_072, ANIMATED_TILES_GROUP_03,  0, ROOM_090
+.room_01
+	room_data  9,  0, $3, $0, $a, $9, CAM_FREE, ENEMY_GROUP_080, ANIMATED_TILES_GROUP_03,  0, ROOM_011
+.room_02
+	room_data  9,  1, $3, $0, $a, $9, CAM_FREE, ENEMY_GROUP_080, ANIMATED_TILES_GROUP_03,  0, ROOM_011
+.room_04
+	room_data  6,  0, $2, $0, $8, $6, CAM_TRANSITIONS, ENEMY_GROUP_049, ANIMATED_TILES_GROUP_03,  0, ROOM_090
+.room_05
+	room_data  3,  2, $3, $2, $5, $3, CAM_FREE, ENEMY_GROUP_014, ANIMATED_TILES_GROUP_19,  0, ROOM_019
+.room_06
+	room_data  4,  0, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_072, ANIMATED_TILES_GROUP_03,  0, ROOM_090
+.room_08
+	room_data  5,  2, $3, $2, $6, $5, CAM_FREE, ENEMY_GROUP_100, ANIMATED_TILES_GROUP_03,  0, ROOM_073
+.room_09
+	room_data  1,  0, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_072, ANIMATED_TILES_GROUP_03,  0, ROOM_090
+.room_13
+	room_data  6,  1, $2, $0, $8, $6, CAM_TRANSITIONS, ENEMY_GROUP_049, ANIMATED_TILES_GROUP_03,  0, ROOM_090
+.room_14
+	room_data  1,  2, $3, $2, $3, $1, CAM_TRANSITIONS, ENEMY_GROUP_019, ANIMATED_TILES_GROUP_19,  0, ROOM_019
+.room_15
+	room_data  8,  1, $3, $0, $9, $8, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_099, ANIMATED_TILES_GROUP_03,  0, ROOM_073
+.room_16
+	room_data  3,  1, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_072, ANIMATED_TILES_GROUP_03,  0, ROOM_090
+.room_18
+	room_data  5,  1, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_072, ANIMATED_TILES_GROUP_03,  0, ROOM_090
+.room_19
+	room_data  2,  0, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_072, ANIMATED_TILES_GROUP_03,  0, ROOM_090
+.room_20
+	room_data  9,  2, $3, $0, $a, $9, CAM_FREE, ENEMY_GROUP_080, ANIMATED_TILES_GROUP_03,  0, ROOM_011
+.room_21
+	room_data  4,  1, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_072, ANIMATED_TILES_GROUP_03,  0, ROOM_090
+.room_23
+	room_data  5,  0, $2, $0, $6, $1, CAM_TRANSITIONS, ENEMY_GROUP_072, ANIMATED_TILES_GROUP_03,  0, ROOM_090
+.room_24
+	room_data  4,  2, $3, $2, $5, $3, CAM_FREE, ENEMY_GROUP_014, ANIMATED_TILES_GROUP_19,  0, ROOM_019
+.room_25
+	room_data  8,  0, $3, $0, $9, $8, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_099, ANIMATED_TILES_GROUP_03,  0, ROOM_073
+.room_27
+	room_data  8,  2, $3, $0, $9, $8, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_099, ANIMATED_TILES_GROUP_03,  0, ROOM_073
+.room_28
+	room_data  7,  2, $3, $2, $8, $6, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_092, ANIMATED_TILES_GROUP_03,  0, ROOM_073
+.room_29
+	room_data  0,  2, $3, $2, $1, $0, CAM_TRANSITIONS, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_19,  0, ROOM_019
 
-Data_c4498: ; c4498 (31:4498)
-	dw $44d4
-	dw $44dc
+LevelRooms_c42c4: ; c42c4 (31:42c4)
+	dw .room_00
+	dw .room_01
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $44e4
-	dw $44ec
+	dw .room_05
+	dw .room_06
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $44f4
-	dw $44fc
+	dw .room_10
+	dw .room_11
 	dw NULL
-	dw $4504
+	dw .room_13
 	dw NULL
-	dw $450c
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $4514
-	dw NULL
-	dw NULL
-	dw $451c
-	dw $4524
-	dw $452c
+	dw .room_15
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
-	db $02, $02, $16, $01, $49, $03, $00, $5d, $25, $23, $56, $01, $3e, $04, $00, $25, $23, $23, $35, $01, $7b, $04, $00, $25, $11, $02, $16, $01, $49, $03, $00, $5d, $15, $02, $16, $01, $49, $03, $00, $5d, $06, $02, $68, $01, $3e, $04, $00, $25, $20, $23, $03, $01, $51, $04, $00, $25, $10, $12, $01, $01, $7a, $04, $00, $25, $13, $02, $16, $01, $49, $03, $00, $5d, $05, $02, $16, $01, $49, $03, $00, $5d, $24, $23, $35, $01, $7b, $04, $00, $25, $01, $02, $16, $01, $49, $03, $00, $5d
+	dw .room_20
+	dw NULL
+	dw NULL
+	dw .room_23
+	dw .room_24
+	dw .room_25
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
 
-Data_c4534: ; c4534 (31:4534)
-	dw $4570
-	dw $4578
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $4580
-	dw $4588
-	dw $4590
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $4598
-	dw NULL
-	dw NULL
-	dw $45a0
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $45a8
-	dw $45b0
-	dw $45b8
-	dw NULL
-	dw $45c0
-	dw $45c8
-	dw $45d0
-	dw $45d8
-	dw NULL
-	dw NULL
-	dw $45e0
-	db $16, $02, $68, $41, $26, $0a, $00, $26, $20, $13, $01, $01, $73, $04, $00, $47, $25, $23, $46, $81, $11, $0a, $00, $31, $15, $02, $46, $01, $25, $0a, $00, $31, $29, $03, $8a, $81, $4d, $03, $00, $26, $21, $03, $12, $01, $68, $04, $00, $47, $06, $02, $68, $41, $26, $0a, $00, $26, $23, $03, $24, $01, $75, $04, $00, $47, $01, $03, $12, $01, $68, $04, $00, $47, $12, $03, $24, $01, $75, $04, $00, $47, $19, $03, $8a, $81, $4d, $03, $00, $26, $04, $02, $46, $01, $25, $0a, $00, $31, $27, $23, $68, $81, $0d, $0a, $00, $31, $24, $23, $46, $81, $11, $0a, $00, $31, $07, $02, $68, $41, $26, $0a, $00, $26
+.room_00
+	room_data  2,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_036
+.room_01
+	room_data  5,  2, $3, $2, $6, $5, CAM_FREE, ENEMY_GROUP_062, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_05
+	room_data  3,  2, $3, $2, $5, $3, CAM_FREE, ENEMY_GROUP_123, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_06
+	room_data  1,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_036
+.room_10
+	room_data  5,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_036
+.room_11
+	room_data  6,  0, $2, $0, $8, $6, CAM_FREE, ENEMY_GROUP_062, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_13
+	room_data  0,  2, $3, $2, $3, $0, CAM_FREE, ENEMY_GROUP_081, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_15
+	room_data  0,  1, $2, $1, $1, $0, CAM_FREE, ENEMY_GROUP_122, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_20
+	room_data  3,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_036
+.room_23
+	room_data  5,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_036
+.room_24
+	room_data  4,  2, $3, $2, $5, $3, CAM_FREE, ENEMY_GROUP_123, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_25
+	room_data  1,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_036
 
-Data_c45e8: ; c45e8 (31:45e8)
-	dw $4624
-	dw $462c
+LevelRooms_c4360: ; c4360 (31:4360)
+	dw .room_00
+	dw .room_01
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $4634
-	dw $463c
-	dw $4644
+	dw .room_05
+	dw .room_06
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_10
+	dw .room_11
+	dw NULL
+	dw .room_13
+	dw NULL
+	dw .room_15
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $464c
+	dw .room_20
 	dw NULL
 	dw NULL
-	dw $4654
+	dw .room_23
+	dw .room_24
+	dw .room_25
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $465c
-	dw $4664
-	dw $466c
 	dw NULL
-	dw $4674
-	dw $467c
-	dw $4684
-	dw $468c
-	dw NULL
-	dw NULL
-	dw $4694
-	db $16, $02, $68, $41, $26, $0a, $00, $5e, $20, $13, $01, $01, $73, $04, $00, $47, $25, $23, $46, $81, $11, $0a, $00, $31, $15, $02, $46, $01, $25, $0a, $00, $31, $29, $03, $8a, $81, $4d, $03, $00, $5e, $21, $03, $12, $01, $68, $04, $00, $47, $06, $02, $68, $41, $26, $0a, $00, $5e, $23, $03, $24, $01, $75, $04, $00, $47, $01, $03, $12, $01, $68, $04, $00, $47, $12, $03, $24, $01, $75, $04, $00, $47, $19, $03, $8a, $81, $4d, $03, $00, $5e, $04, $02, $46, $01, $25, $0a, $00, $31, $27, $23, $68, $81, $0d, $0a, $00, $31, $24, $23, $46, $81, $11, $0a, $00, $31, $07, $02, $68, $41, $26, $0a, $00, $5e
 
-Data_c469c: ; c469c (31:469c)
-	dw $46d8
-	dw $46e0
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $46e8
-	dw $46f0
-	dw $46f8
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $4700
-	dw NULL
-	dw NULL
-	dw $4708
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $4710
-	dw $4718
-	dw $4720
-	dw NULL
-	dw $4728
-	dw $4730
-	dw $4738
-	dw $4740
-	dw NULL
-	dw NULL
-	dw $4748
-	db $16, $02, $68, $41, $26, $0a, $00, $5e, $20, $13, $01, $01, $73, $04, $00, $5f, $25, $23, $46, $81, $11, $0a, $00, $31, $15, $02, $46, $01, $25, $0a, $00, $31, $29, $03, $8a, $81, $4d, $03, $00, $5e, $21, $03, $12, $01, $68, $04, $00, $5f, $06, $02, $68, $41, $26, $0a, $00, $5e, $23, $03, $24, $01, $75, $04, $00, $5f, $01, $03, $12, $01, $68, $04, $00, $5f, $12, $03, $24, $01, $75, $04, $00, $5f, $19, $03, $8a, $81, $4d, $03, $00, $5e, $04, $02, $46, $01, $25, $0a, $00, $31, $27, $23, $68, $81, $0d, $0a, $00, $31, $24, $23, $46, $81, $11, $0a, $00, $31, $07, $02, $68, $41, $26, $0a, $00, $5e
+.room_00
+	room_data  2,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_091
+.room_01
+	room_data  5,  2, $3, $2, $6, $5, CAM_FREE, ENEMY_GROUP_062, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_05
+	room_data  3,  2, $3, $2, $5, $3, CAM_FREE, ENEMY_GROUP_123, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_06
+	room_data  1,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_091
+.room_10
+	room_data  5,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_091
+.room_11
+	room_data  6,  0, $2, $0, $8, $6, CAM_FREE, ENEMY_GROUP_062, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_13
+	room_data  0,  2, $3, $2, $3, $0, CAM_FREE, ENEMY_GROUP_081, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_15
+	room_data  0,  1, $2, $1, $1, $0, CAM_FREE, ENEMY_GROUP_122, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_20
+	room_data  3,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_091
+.room_23
+	room_data  5,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_091
+.room_24
+	room_data  4,  2, $3, $2, $5, $3, CAM_FREE, ENEMY_GROUP_123, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_25
+	room_data  1,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_091
 
-Data_c4750: ; c4750 (31:4750)
-	dw $478c
-	dw $4794
+LevelRooms_c43fc: ; c43fc (31:43fc)
+	dw .room_00
+	dw .room_01
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $479c
-	dw $47a4
-	dw $47ac
+	dw .room_05
+	dw .room_06
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_10
+	dw .room_11
+	dw NULL
+	dw .room_13
+	dw NULL
+	dw .room_15
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $47b4
+	dw .room_20
 	dw NULL
 	dw NULL
-	dw $47bc
+	dw .room_23
+	dw .room_24
+	dw .room_25
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $47c4
-	dw $47cc
-	dw $47d4
 	dw NULL
-	dw $47dc
-	dw $47e4
-	dw $47ec
-	dw $47f4
-	dw NULL
-	dw NULL
-	dw $47fc
-	db $16, $02, $68, $41, $26, $0a, $00, $5e, $20, $13, $01, $01, $73, $04, $00, $60, $25, $23, $46, $81, $11, $0a, $00, $31, $15, $02, $46, $01, $25, $0a, $00, $31, $29, $03, $8a, $81, $4d, $03, $00, $5e, $21, $03, $12, $01, $68, $04, $00, $60, $06, $02, $68, $41, $26, $0a, $00, $5e, $23, $03, $24, $01, $75, $04, $00, $60, $01, $03, $12, $01, $68, $04, $00, $60, $12, $03, $24, $01, $75, $04, $00, $60, $19, $03, $8a, $81, $4d, $03, $00, $5e, $04, $02, $46, $01, $25, $0a, $00, $31, $27, $23, $68, $81, $0d, $0a, $00, $31, $24, $23, $46, $81, $11, $0a, $00, $31, $07, $02, $68, $41, $26, $0a, $00, $5e
 
-Data_c4804: ; c4804 (31:4804)
-	dw $4840
-	dw $4848
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $4850
-	dw $4858
-	dw $4860
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $4868
-	dw NULL
-	dw NULL
-	dw $4870
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $4878
-	dw $4880
-	dw $4888
-	dw NULL
-	dw $4890
-	dw $4898
-	dw $48a0
-	dw $48a8
-	dw NULL
-	dw NULL
-	dw $48b0
-	db $16, $02, $68, $41, $26, $0a, $00, $61, $20, $13, $01, $01, $73, $04, $00, $63, $25, $23, $46, $81, $11, $0a, $00, $62, $15, $02, $46, $01, $25, $0a, $00, $62, $29, $03, $8a, $81, $4d, $03, $00, $61, $21, $03, $12, $01, $68, $04, $00, $63, $06, $02, $68, $41, $26, $0a, $00, $61, $23, $03, $24, $01, $75, $04, $00, $63, $01, $03, $12, $01, $68, $04, $00, $63, $12, $03, $24, $01, $75, $04, $00, $63, $19, $03, $8a, $81, $4d, $03, $00, $61, $04, $02, $46, $01, $25, $0a, $00, $62, $27, $23, $68, $81, $0d, $0a, $00, $62, $24, $23, $46, $81, $11, $0a, $00, $62, $07, $02, $68, $41, $26, $0a, $00, $61
+.room_00
+	room_data  2,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_092
+.room_01
+	room_data  5,  2, $3, $2, $6, $5, CAM_FREE, ENEMY_GROUP_062, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_05
+	room_data  3,  2, $3, $2, $5, $3, CAM_FREE, ENEMY_GROUP_123, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_06
+	room_data  1,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_092
+.room_10
+	room_data  5,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_092
+.room_11
+	room_data  6,  0, $2, $0, $8, $6, CAM_FREE, ENEMY_GROUP_062, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_13
+	room_data  0,  2, $3, $2, $3, $0, CAM_FREE, ENEMY_GROUP_081, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_15
+	room_data  0,  1, $2, $1, $1, $0, CAM_FREE, ENEMY_GROUP_122, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_20
+	room_data  3,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_092
+.room_23
+	room_data  5,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_092
+.room_24
+	room_data  4,  2, $3, $2, $5, $3, CAM_FREE, ENEMY_GROUP_123, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_25
+	room_data  1,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_092
 
-Data_c48b8: ; c48b8 (31:48b8)
-	dw $48f4
-	dw $48fc
+LevelRooms_c4498: ; c4498 (31:4498)
+	dw .room_00
+	dw .room_01
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $4904
-	dw $490c
-	dw $4914
+	dw .room_05
+	dw .room_06
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_10
+	dw .room_11
+	dw NULL
+	dw .room_13
+	dw NULL
+	dw .room_15
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $491c
+	dw .room_20
 	dw NULL
 	dw NULL
-	dw $4924
+	dw .room_23
+	dw .room_24
+	dw .room_25
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $492c
-	dw $4934
-	dw $493c
 	dw NULL
-	dw $4944
-	dw $494c
-	dw $4954
-	dw $495c
-	dw NULL
-	dw NULL
-	dw $4964
-	db $16, $02, $68, $41, $26, $0a, $00, $62, $20, $13, $01, $01, $73, $04, $00, $63, $25, $23, $46, $81, $11, $0a, $00, $62, $15, $02, $46, $01, $25, $0a, $00, $62, $29, $03, $8a, $81, $4d, $03, $00, $62, $21, $03, $12, $01, $68, $04, $00, $63, $06, $02, $68, $41, $26, $0a, $00, $62, $23, $03, $24, $01, $75, $04, $00, $63, $01, $03, $12, $01, $68, $04, $00, $63, $12, $03, $24, $01, $75, $04, $00, $63, $19, $03, $8a, $81, $4d, $03, $00, $62, $04, $02, $46, $01, $25, $0a, $00, $62, $27, $23, $68, $81, $0d, $0a, $00, $62, $24, $23, $46, $81, $11, $0a, $00, $62, $07, $02, $68, $41, $26, $0a, $00, $62
 
-Data_c496c: ; c496c (31:496c)
-	dw $49a8
-	dw $49b0
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $49b8
-	dw $49c0
-	dw $49c8
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $49d0
-	dw NULL
-	dw NULL
-	dw $49d8
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $49e0
-	dw $49e8
-	dw $49f0
-	dw NULL
-	dw $49f8
-	dw $4a00
-	dw $4a08
-	dw $4a10
-	dw NULL
-	dw NULL
-	dw $4a18
-	db $16, $02, $68, $41, $26, $0a, $00, $62, $20, $13, $01, $01, $73, $04, $00, $64, $25, $23, $46, $81, $11, $0a, $00, $62, $15, $02, $46, $01, $25, $0a, $00, $62, $29, $03, $8a, $81, $4d, $03, $00, $62, $21, $03, $12, $01, $68, $04, $00, $64, $06, $02, $68, $41, $26, $0a, $00, $62, $23, $03, $24, $01, $75, $04, $00, $64, $01, $03, $12, $01, $68, $04, $00, $64, $12, $03, $24, $01, $75, $04, $00, $64, $19, $03, $8a, $81, $4d, $03, $00, $62, $04, $02, $46, $01, $25, $0a, $00, $62, $27, $23, $68, $81, $0d, $0a, $00, $62, $24, $23, $46, $81, $11, $0a, $00, $62, $07, $02, $68, $41, $26, $0a, $00, $62
+.room_00
+	room_data  2,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_093
+.room_01
+	room_data  5,  2, $3, $2, $6, $5, CAM_FREE, ENEMY_GROUP_062, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_05
+	room_data  3,  2, $3, $2, $5, $3, CAM_FREE, ENEMY_GROUP_123, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_06
+	room_data  1,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_093
+.room_10
+	room_data  5,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_093
+.room_11
+	room_data  6,  0, $2, $0, $8, $6, CAM_FREE, ENEMY_GROUP_062, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_13
+	room_data  0,  2, $3, $2, $3, $0, CAM_FREE, ENEMY_GROUP_081, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_15
+	room_data  0,  1, $2, $1, $1, $0, CAM_FREE, ENEMY_GROUP_122, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_20
+	room_data  3,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_093
+.room_23
+	room_data  5,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_093
+.room_24
+	room_data  4,  2, $3, $2, $5, $3, CAM_FREE, ENEMY_GROUP_123, ANIMATED_TILES_GROUP_04,  0, ROOM_037
+.room_25
+	room_data  1,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_093
 
-Data_c4a20: ; c4a20 (31:4a20)
-	dw $4a5c
-	dw $4a64
+LevelRooms_c4534: ; c4534 (31:4534)
+	dw .room_00
+	dw .room_01
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $4a6c
-	dw $4a74
-	dw $4a7c
+	dw .room_05
+	dw .room_06
+	dw .room_07
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $4a84
+	dw .room_12
 	dw NULL
 	dw NULL
-	dw $4a8c
+	dw .room_15
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $4a94
-	dw $4a9c
-	dw $4aa4
+	dw .room_19
+	dw .room_20
+	dw .room_21
 	dw NULL
-	dw $4aac
-	dw $4ab4
-	dw $4abc
-	dw $4ac4
+	dw .room_23
+	dw .room_24
+	dw .room_25
+	dw .room_26
 	dw NULL
 	dw NULL
-	dw $4acc
-	db $16, $02, $68, $41, $26, $0a, $00, $62, $20, $13, $01, $01, $73, $04, $00, $65, $25, $23, $46, $81, $11, $0a, $00, $62, $15, $02, $46, $01, $25, $0a, $00, $62, $29, $03, $8a, $81, $4d, $03, $00, $62, $21, $03, $12, $01, $68, $04, $00, $65, $06, $02, $68, $41, $26, $0a, $00, $62, $23, $03, $24, $01, $75, $04, $00, $65, $01, $03, $12, $01, $68, $04, $00, $65, $12, $03, $24, $01, $75, $04, $00, $65, $19, $03, $8a, $81, $4d, $03, $00, $62, $04, $02, $46, $01, $25, $0a, $00, $62, $27, $23, $68, $81, $0d, $0a, $00, $62, $24, $23, $46, $81, $11, $0a, $00, $62, $07, $02, $68, $41, $26, $0a, $00, $62
+	dw .room_29
 
-Data_c4ad4: ; c4ad4 (31:4ad4)
-	dw $4b10
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $4b18
-	dw $4b20
-	dw NULL
-	dw $4b28
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $4b30
-	dw NULL
-	dw $4b38
-	dw $4b40
-	dw $4b48
-	dw NULL
-	dw $4b50
-	dw $4b58
-	dw NULL
-	dw NULL
-	dw $4b60
-	dw $4b68
-	dw NULL
-	dw NULL
-	dw $4b70
-	dw $4b78
-	db $11, $02, $17, $11, $5e, $03, $00, $27, $18, $12, $79, $31, $28, $03, $00, $27, $28, $23, $8a, $31, $3c, $03, $00, $27, $27, $23, $58, $01, $5f, $06, $00, $27, $21, $23, $15, $21, $0e, $03, $00, $27, $17, $12, $79, $31, $28, $03, $00, $27, $16, $02, $17, $11, $5e, $03, $00, $27, $07, $01, $79, $31, $25, $03, $00, $27, $13, $02, $17, $11, $5e, $03, $00, $27, $14, $02, $17, $11, $5e, $03, $00, $27, $20, $13, $01, $00, $1d, $03, $00, $19, $22, $23, $15, $21, $0e, $03, $00, $27, $08, $01, $79, $31, $25, $03, $00, $27, $29, $23, $8a, $31, $3c, $03, $00, $27
+.room_00
+	room_data  6,  1, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_038
+.room_01
+	room_data  0,  2, $3, $1, $1, $0, CAM_FREE, ENEMY_GROUP_115, ANIMATED_TILES_GROUP_04,  0, ROOM_071
+.room_05
+	room_data  5,  2, $3, $2, $6, $4, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_017, ANIMATED_TILES_GROUP_10,  0, ROOM_049
+.room_06
+	room_data  5,  1, $2, $0, $6, $4, CAM_FREE, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_10,  0, ROOM_049
+.room_07
+	room_data  9,  2, $3, $0, $a, $8, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_077, ANIMATED_TILES_GROUP_03,  0, ROOM_038
+.room_12
+	room_data  1,  2, $3, $0, $2, $1, CAM_FREE, ENEMY_GROUP_104, ANIMATED_TILES_GROUP_04,  0, ROOM_071
+.room_15
+	room_data  6,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_038
+.room_19
+	room_data  3,  2, $3, $0, $4, $2, CAM_FREE, ENEMY_GROUP_117, ANIMATED_TILES_GROUP_04,  0, ROOM_071
+.room_20
+	room_data  1,  0, $3, $0, $2, $1, CAM_FREE, ENEMY_GROUP_104, ANIMATED_TILES_GROUP_04,  0, ROOM_071
+.room_21
+	room_data  2,  1, $3, $0, $4, $2, CAM_FREE, ENEMY_GROUP_117, ANIMATED_TILES_GROUP_04,  0, ROOM_071
+.room_23
+	room_data  9,  1, $3, $0, $a, $8, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_077, ANIMATED_TILES_GROUP_03,  0, ROOM_038
+.room_24
+	room_data  4,  0, $2, $0, $6, $4, CAM_FREE, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_10,  0, ROOM_049
+.room_25
+	room_data  7,  2, $3, $2, $8, $6, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_013, ANIMATED_TILES_GROUP_10,  0, ROOM_049
+.room_26
+	room_data  4,  2, $3, $2, $6, $4, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_017, ANIMATED_TILES_GROUP_10,  0, ROOM_049
+.room_29
+	room_data  7,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_038
 
-Data_c4b80: ; c4b80 (31:4b80)
-	dw $4bbc
+LevelRooms_c45e8: ; c45e8 (31:45e8)
+	dw .room_00
+	dw .room_01
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_05
+	dw .room_06
+	dw .room_07
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
+	dw .room_12
 	dw NULL
 	dw NULL
-	dw $4bc4
-	dw $4bcc
-	dw NULL
-	dw $4bd4
+	dw .room_15
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $4bdc
+	dw .room_19
+	dw .room_20
+	dw .room_21
 	dw NULL
-	dw $4be4
-	dw $4bec
-	dw $4bf4
-	dw NULL
-	dw $4bfc
-	dw $4c04
-	dw NULL
-	dw NULL
-	dw $4c0c
-	dw $4c14
+	dw .room_23
+	dw .room_24
+	dw .room_25
+	dw .room_26
 	dw NULL
 	dw NULL
-	dw $4c1c
-	dw $4c24
-	db $11, $02, $17, $11, $5e, $03, $00, $97, $18, $12, $79, $31, $28, $03, $00, $97, $28, $23, $8a, $31, $3c, $03, $00, $97, $27, $23, $58, $01, $5f, $06, $00, $97, $21, $23, $15, $21, $0e, $03, $00, $97, $17, $12, $79, $31, $28, $03, $00, $97, $16, $02, $17, $11, $5e, $03, $00, $97, $07, $01, $79, $31, $25, $03, $00, $97, $13, $02, $17, $11, $5e, $03, $00, $97, $14, $02, $17, $11, $5e, $03, $00, $97, $20, $13, $01, $00, $1d, $03, $00, $19, $22, $23, $15, $21, $0e, $03, $00, $97, $08, $01, $79, $31, $25, $03, $00, $97, $29, $23, $8a, $31, $3c, $03, $00, $97
+	dw .room_29
 
-Data_c4c2c: ; c4c2c (31:4c2c)
-	dw $4c68
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $4c70
-	dw $4c78
-	dw NULL
-	dw $4c80
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $4c88
-	dw NULL
-	dw $4c90
-	dw $4c98
-	dw $4ca0
-	dw NULL
-	dw $4ca8
-	dw $4cb0
-	dw NULL
-	dw NULL
-	dw $4cb8
-	dw $4cc0
-	dw NULL
-	dw NULL
-	dw $4cc8
-	dw $4cd0
-	db $11, $02, $17, $11, $5e, $03, $00, $98, $18, $12, $79, $31, $28, $03, $00, $98, $28, $23, $8a, $31, $3c, $03, $00, $98, $27, $23, $58, $01, $5f, $06, $00, $98, $21, $23, $15, $21, $0e, $03, $00, $98, $17, $12, $79, $31, $28, $03, $00, $98, $16, $02, $17, $11, $5e, $03, $00, $98, $07, $01, $79, $31, $25, $03, $00, $98, $13, $02, $17, $11, $5e, $03, $00, $98, $14, $02, $17, $11, $5e, $03, $00, $98, $20, $13, $01, $00, $1d, $03, $00, $19, $22, $23, $15, $21, $0e, $03, $00, $98, $08, $01, $79, $31, $25, $03, $00, $98, $29, $23, $8a, $31, $3c, $03, $00, $98
+.room_00
+	room_data  6,  1, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_094
+.room_01
+	room_data  0,  2, $3, $1, $1, $0, CAM_FREE, ENEMY_GROUP_115, ANIMATED_TILES_GROUP_04,  0, ROOM_071
+.room_05
+	room_data  5,  2, $3, $2, $6, $4, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_017, ANIMATED_TILES_GROUP_10,  0, ROOM_049
+.room_06
+	room_data  5,  1, $2, $0, $6, $4, CAM_FREE, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_10,  0, ROOM_049
+.room_07
+	room_data  9,  2, $3, $0, $a, $8, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_077, ANIMATED_TILES_GROUP_03,  0, ROOM_094
+.room_12
+	room_data  1,  2, $3, $0, $2, $1, CAM_FREE, ENEMY_GROUP_104, ANIMATED_TILES_GROUP_04,  0, ROOM_071
+.room_15
+	room_data  6,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_094
+.room_19
+	room_data  3,  2, $3, $0, $4, $2, CAM_FREE, ENEMY_GROUP_117, ANIMATED_TILES_GROUP_04,  0, ROOM_071
+.room_20
+	room_data  1,  0, $3, $0, $2, $1, CAM_FREE, ENEMY_GROUP_104, ANIMATED_TILES_GROUP_04,  0, ROOM_071
+.room_21
+	room_data  2,  1, $3, $0, $4, $2, CAM_FREE, ENEMY_GROUP_117, ANIMATED_TILES_GROUP_04,  0, ROOM_071
+.room_23
+	room_data  9,  1, $3, $0, $a, $8, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_077, ANIMATED_TILES_GROUP_03,  0, ROOM_094
+.room_24
+	room_data  4,  0, $2, $0, $6, $4, CAM_FREE, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_10,  0, ROOM_049
+.room_25
+	room_data  7,  2, $3, $2, $8, $6, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_013, ANIMATED_TILES_GROUP_10,  0, ROOM_049
+.room_26
+	room_data  4,  2, $3, $2, $6, $4, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_017, ANIMATED_TILES_GROUP_10,  0, ROOM_049
+.room_29
+	room_data  7,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_094
 
-Data_c4cd8: ; c4cd8 (31:4cd8)
-	dw $4d14
+LevelRooms_c469c: ; c469c (31:469c)
+	dw .room_00
+	dw .room_01
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_05
+	dw .room_06
+	dw .room_07
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
+	dw .room_12
 	dw NULL
 	dw NULL
-	dw $4d1c
-	dw $4d24
-	dw NULL
-	dw $4d2c
+	dw .room_15
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $4d34
+	dw .room_19
+	dw .room_20
+	dw .room_21
 	dw NULL
-	dw $4d3c
-	dw $4d44
-	dw $4d4c
-	dw NULL
-	dw $4d54
-	dw $4d5c
-	dw NULL
-	dw NULL
-	dw $4d64
-	dw $4d6c
+	dw .room_23
+	dw .room_24
+	dw .room_25
+	dw .room_26
 	dw NULL
 	dw NULL
-	dw $4d74
-	dw $4d7c
-	db $11, $02, $17, $11, $5e, $03, $00, $99, $18, $12, $79, $31, $28, $03, $00, $99, $28, $23, $8a, $31, $3c, $03, $00, $99, $27, $23, $58, $01, $5f, $06, $00, $99, $21, $23, $15, $21, $0e, $03, $00, $99, $17, $12, $79, $31, $28, $03, $00, $99, $16, $02, $17, $11, $5e, $03, $00, $99, $07, $01, $79, $31, $25, $03, $00, $99, $13, $02, $17, $11, $5e, $03, $00, $99, $14, $02, $17, $11, $5e, $03, $00, $99, $20, $13, $01, $00, $1d, $03, $00, $19, $22, $23, $15, $21, $0e, $03, $00, $99, $08, $01, $79, $31, $25, $03, $00, $99, $29, $23, $8a, $31, $3c, $03, $00, $99
+	dw .room_29
 
-Data_c4d84: ; c4d84 (31:4d84)
-	dw $4dc0
-	dw NULL
-	dw $4dc8
-	dw NULL
-	dw $4dd0
-	dw NULL
-	dw $4dd8
-	dw $4de0
-	dw $4de8
-	dw $4df0
-	dw NULL
-	dw $4df8
-	dw $4e00
-	dw $4e08
-	dw $4e10
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $4e18
-	dw $4e20
-	dw $4e28
-	dw NULL
-	dw $4e30
-	dw $4e38
-	dw NULL
-	dw $4e40
-	dw $4e48
-	dw $4e50
-	dw NULL
-	db $18, $03, $7a, $01, $71, $0a, $02, $35, $06, $02, $67, $21, $7c, $0a, $05, $78, $26, $23, $47, $18, $0f, $0a, $05, $78, $02, $02, $13, $11, $87, $0a, $05, $78, $21, $23, $14, $18, $02, $0a, $05, $78, $11, $02, $13, $11, $87, $0a, $05, $78, $24, $23, $47, $18, $0f, $0a, $05, $78, $08, $03, $7a, $01, $71, $0a, $02, $35, $13, $02, $34, $00, $28, $0a, $05, $78, $12, $02, $13, $11, $87, $0a, $05, $78, $19, $03, $7a, $01, $71, $0a, $02, $35, $14, $12, $46, $01, $0b, $0a, $05, $78, $23, $23, $14, $18, $02, $0a, $05, $78, $07, $03, $7a, $01, $71, $0a, $02, $35, $20, $13, $01, $21, $86, $0a, $05, $78, $09, $03, $7a, $01, $71, $0a, $02, $35, $04, $01, $46, $21, $77, $0a, $05, $78, $28, $03, $7a, $01, $71, $0a, $02, $35, $27, $03, $7a, $01, $71, $0a, $02, $35
+.room_00
+	room_data  6,  1, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_094
+.room_01
+	room_data  0,  2, $3, $1, $1, $0, CAM_FREE, ENEMY_GROUP_115, ANIMATED_TILES_GROUP_04,  0, ROOM_095
+.room_05
+	room_data  5,  2, $3, $2, $6, $4, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_017, ANIMATED_TILES_GROUP_10,  0, ROOM_049
+.room_06
+	room_data  5,  1, $2, $0, $6, $4, CAM_FREE, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_10,  0, ROOM_049
+.room_07
+	room_data  9,  2, $3, $0, $a, $8, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_077, ANIMATED_TILES_GROUP_03,  0, ROOM_094
+.room_12
+	room_data  1,  2, $3, $0, $2, $1, CAM_FREE, ENEMY_GROUP_104, ANIMATED_TILES_GROUP_04,  0, ROOM_095
+.room_15
+	room_data  6,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_094
+.room_19
+	room_data  3,  2, $3, $0, $4, $2, CAM_FREE, ENEMY_GROUP_117, ANIMATED_TILES_GROUP_04,  0, ROOM_095
+.room_20
+	room_data  1,  0, $3, $0, $2, $1, CAM_FREE, ENEMY_GROUP_104, ANIMATED_TILES_GROUP_04,  0, ROOM_095
+.room_21
+	room_data  2,  1, $3, $0, $4, $2, CAM_FREE, ENEMY_GROUP_117, ANIMATED_TILES_GROUP_04,  0, ROOM_095
+.room_23
+	room_data  9,  1, $3, $0, $a, $8, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_077, ANIMATED_TILES_GROUP_03,  0, ROOM_094
+.room_24
+	room_data  4,  0, $2, $0, $6, $4, CAM_FREE, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_10,  0, ROOM_049
+.room_25
+	room_data  7,  2, $3, $2, $8, $6, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_013, ANIMATED_TILES_GROUP_10,  0, ROOM_049
+.room_26
+	room_data  4,  2, $3, $2, $6, $4, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_017, ANIMATED_TILES_GROUP_10,  0, ROOM_049
+.room_29
+	room_data  7,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_094
 
-Data_c4e58: ; c4e58 (31:4e58)
-	dw $4e94
+LevelRooms_c4750: ; c4750 (31:4750)
+	dw .room_00
+	dw .room_01
 	dw NULL
-	dw $4e9c
 	dw NULL
-	dw $4ea4
 	dw NULL
-	dw $4eac
-	dw $4eb4
-	dw $4ebc
-	dw $4ec4
-	dw NULL
-	dw $4ecc
-	dw $4ed4
-	dw $4edc
-	dw $4ee4
+	dw .room_05
+	dw .room_06
+	dw .room_07
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $4eec
-	dw $4ef4
-	dw $4efc
+	dw .room_12
 	dw NULL
-	dw $4f04
-	dw $4f0c
 	dw NULL
-	dw $4f14
-	dw $4f1c
-	dw $4f24
+	dw .room_15
 	dw NULL
-	db $18, $03, $7a, $01, $71, $0a, $02, $79, $06, $02, $67, $21, $7c, $0a, $05, $78, $26, $23, $47, $18, $0f, $0a, $05, $78, $02, $02, $13, $11, $87, $0a, $05, $78, $21, $23, $14, $18, $02, $0a, $05, $78, $11, $02, $13, $11, $87, $0a, $05, $78, $24, $23, $47, $18, $0f, $0a, $05, $78, $08, $03, $7a, $01, $71, $0a, $02, $79, $13, $02, $34, $00, $28, $0a, $05, $78, $12, $02, $13, $11, $87, $0a, $05, $78, $19, $03, $7a, $01, $71, $0a, $02, $79, $14, $12, $46, $01, $0b, $0a, $05, $78, $23, $23, $14, $18, $02, $0a, $05, $78, $07, $03, $7a, $01, $71, $0a, $02, $79, $20, $13, $01, $21, $86, $0a, $05, $78, $09, $03, $7a, $01, $71, $0a, $02, $79, $04, $01, $46, $21, $77, $0a, $05, $78, $28, $03, $7a, $01, $71, $0a, $02, $79, $27, $03, $7a, $01, $71, $0a, $02, $79
+	dw NULL
+	dw NULL
+	dw .room_19
+	dw .room_20
+	dw .room_21
+	dw NULL
+	dw .room_23
+	dw .room_24
+	dw .room_25
+	dw .room_26
+	dw NULL
+	dw NULL
+	dw .room_29
 
-Data_c4f2c: ; c4f2c (31:4f2c)
-	dw $4f68
-	dw NULL
-	dw $4f70
-	dw NULL
-	dw $4f78
-	dw NULL
-	dw $4f80
-	dw $4f88
-	dw $4f90
-	dw $4f98
-	dw NULL
-	dw $4fa0
-	dw $4fa8
-	dw $4fb0
-	dw $4fb8
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $4fc0
-	dw $4fc8
-	dw $4fd0
-	dw NULL
-	dw $4fd8
-	dw $4fe0
-	dw NULL
-	dw $4fe8
-	dw $4ff0
-	dw $4ff8
-	dw NULL
-	db $18, $03, $7a, $01, $71, $0a, $02, $7a, $06, $02, $67, $21, $7c, $0a, $05, $78, $26, $23, $47, $18, $0f, $0a, $05, $78, $02, $02, $13, $11, $87, $0a, $05, $78, $21, $23, $14, $18, $02, $0a, $05, $78, $11, $02, $13, $11, $87, $0a, $05, $78, $24, $23, $47, $18, $0f, $0a, $05, $78, $08, $03, $7a, $01, $71, $0a, $02, $7a, $13, $02, $34, $00, $28, $0a, $05, $78, $12, $02, $13, $11, $87, $0a, $05, $78, $19, $03, $7a, $01, $71, $0a, $02, $7a, $14, $12, $46, $01, $0b, $0a, $05, $78, $23, $23, $14, $18, $02, $0a, $05, $78, $07, $03, $7a, $01, $71, $0a, $02, $7a, $20, $13, $01, $21, $86, $0a, $05, $78, $09, $03, $7a, $01, $71, $0a, $02, $7a, $04, $01, $46, $21, $77, $0a, $05, $78, $28, $03, $7a, $01, $71, $0a, $02, $7a, $27, $03, $7a, $01, $71, $0a, $02, $7a
+.room_00
+	room_data  6,  1, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_094
+.room_01
+	room_data  0,  2, $3, $1, $1, $0, CAM_FREE, ENEMY_GROUP_115, ANIMATED_TILES_GROUP_04,  0, ROOM_096
+.room_05
+	room_data  5,  2, $3, $2, $6, $4, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_017, ANIMATED_TILES_GROUP_10,  0, ROOM_049
+.room_06
+	room_data  5,  1, $2, $0, $6, $4, CAM_FREE, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_10,  0, ROOM_049
+.room_07
+	room_data  9,  2, $3, $0, $a, $8, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_077, ANIMATED_TILES_GROUP_03,  0, ROOM_094
+.room_12
+	room_data  1,  2, $3, $0, $2, $1, CAM_FREE, ENEMY_GROUP_104, ANIMATED_TILES_GROUP_04,  0, ROOM_096
+.room_15
+	room_data  6,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_094
+.room_19
+	room_data  3,  2, $3, $0, $4, $2, CAM_FREE, ENEMY_GROUP_117, ANIMATED_TILES_GROUP_04,  0, ROOM_096
+.room_20
+	room_data  1,  0, $3, $0, $2, $1, CAM_FREE, ENEMY_GROUP_104, ANIMATED_TILES_GROUP_04,  0, ROOM_096
+.room_21
+	room_data  2,  1, $3, $0, $4, $2, CAM_FREE, ENEMY_GROUP_117, ANIMATED_TILES_GROUP_04,  0, ROOM_096
+.room_23
+	room_data  9,  1, $3, $0, $a, $8, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_077, ANIMATED_TILES_GROUP_03,  0, ROOM_094
+.room_24
+	room_data  4,  0, $2, $0, $6, $4, CAM_FREE, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_10,  0, ROOM_049
+.room_25
+	room_data  7,  2, $3, $2, $8, $6, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_013, ANIMATED_TILES_GROUP_10,  0, ROOM_049
+.room_26
+	room_data  4,  2, $3, $2, $6, $4, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_017, ANIMATED_TILES_GROUP_10,  0, ROOM_049
+.room_29
+	room_data  7,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_094
 
-Data_c5000: ; c5000 (31:5000)
-	dw $503c
-	dw NULL
-	dw $5044
-	dw $504c
-	dw NULL
-	dw $5054
-	dw $505c
-	dw $5064
+LevelRooms_c4804: ; c4804 (31:4804)
+	dw .room_00
+	dw .room_01
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $503c
-	dw $506c
-	dw NULL
-	dw NULL
-	dw $5074
-	dw $507c
+	dw .room_05
+	dw .room_06
+	dw .room_07
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $5084
 	dw NULL
-	dw $508c
-	dw $5094
-	dw $509c
-	dw $50a4
-	dw $50ac
+	dw .room_12
 	dw NULL
-	dw $50b4
-	dw $50bc
-	db $11, $02, $13, $41, $7d, $03, $03, $28, $26, $03, $57, $81, $7e, $03, $03, $28, $12, $02, $13, $41, $7d, $03, $03, $28, $07, $02, $7a, $01, $81, $03, $04, $76, $20, $23, $03, $01, $82, $03, $00, $77, $05, $03, $57, $81, $7e, $03, $03, $28, $03, $02, $35, $01, $7f, $03, $04, $76, $28, $23, $8a, $01, $80, $03, $04, $76, $29, $23, $8a, $01, $80, $03, $04, $76, $06, $03, $57, $81, $7e, $03, $03, $28, $24, $23, $35, $81, $83, $03, $00, $77, $21, $23, $03, $01, $82, $03, $00, $77, $22, $23, $03, $01, $82, $03, $00, $77, $01, $02, $13, $41, $7d, $03, $03, $28, $02, $02, $13, $41, $7d, $03, $03, $28, $15, $03, $57, $81, $7e, $03, $03, $28, $16, $03, $57, $81, $7e, $03, $03, $28
+	dw NULL
+	dw .room_15
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_19
+	dw .room_20
+	dw .room_21
+	dw NULL
+	dw .room_23
+	dw .room_24
+	dw .room_25
+	dw .room_26
+	dw NULL
+	dw NULL
+	dw .room_29
 
-Data_c50c4: ; c50c4 (31:50c4)
-	dw $5100
-	dw NULL
-	dw $5108
-	dw $5110
-	dw NULL
-	dw $5118
-	dw $5120
-	dw $5128
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $5100
-	dw $5130
-	dw NULL
-	dw NULL
-	dw $5138
-	dw $5140
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $5148
-	dw NULL
-	dw $5150
-	dw $5158
-	dw $5160
-	dw $5168
-	dw $5170
-	dw NULL
-	dw $5178
-	dw $5180
-	db $11, $02, $13, $41, $7d, $03, $03, $87, $26, $03, $57, $81, $7e, $03, $03, $87, $12, $02, $13, $41, $7d, $03, $03, $87, $07, $02, $7a, $01, $81, $03, $04, $76, $20, $23, $03, $01, $82, $03, $00, $77, $05, $03, $57, $81, $7e, $03, $03, $87, $03, $02, $35, $01, $7f, $03, $04, $76, $28, $23, $8a, $01, $80, $03, $04, $76, $29, $23, $8a, $01, $80, $03, $04, $76, $06, $03, $57, $81, $7e, $03, $03, $87, $24, $23, $35, $81, $83, $03, $00, $77, $21, $23, $03, $01, $82, $03, $00, $77, $22, $23, $03, $01, $82, $03, $00, $77, $01, $02, $13, $41, $7d, $03, $03, $87, $02, $02, $13, $41, $7d, $03, $03, $87, $15, $03, $57, $81, $7e, $03, $03, $87, $16, $03, $57, $81, $7e, $03, $03, $87
+.room_00
+	room_data  6,  1, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_097
+.room_01
+	room_data  0,  2, $3, $1, $1, $0, CAM_FREE, ENEMY_GROUP_115, ANIMATED_TILES_GROUP_04,  0, ROOM_099
+.room_05
+	room_data  5,  2, $3, $2, $6, $4, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_017, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_06
+	room_data  5,  1, $2, $0, $6, $4, CAM_FREE, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_07
+	room_data  9,  2, $3, $0, $a, $8, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_077, ANIMATED_TILES_GROUP_03,  0, ROOM_097
+.room_12
+	room_data  1,  2, $3, $0, $2, $1, CAM_FREE, ENEMY_GROUP_104, ANIMATED_TILES_GROUP_04,  0, ROOM_099
+.room_15
+	room_data  6,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_097
+.room_19
+	room_data  3,  2, $3, $0, $4, $2, CAM_FREE, ENEMY_GROUP_117, ANIMATED_TILES_GROUP_04,  0, ROOM_099
+.room_20
+	room_data  1,  0, $3, $0, $2, $1, CAM_FREE, ENEMY_GROUP_104, ANIMATED_TILES_GROUP_04,  0, ROOM_099
+.room_21
+	room_data  2,  1, $3, $0, $4, $2, CAM_FREE, ENEMY_GROUP_117, ANIMATED_TILES_GROUP_04,  0, ROOM_099
+.room_23
+	room_data  9,  1, $3, $0, $a, $8, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_077, ANIMATED_TILES_GROUP_03,  0, ROOM_097
+.room_24
+	room_data  4,  0, $2, $0, $6, $4, CAM_FREE, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_25
+	room_data  7,  2, $3, $2, $8, $6, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_013, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_26
+	room_data  4,  2, $3, $2, $6, $4, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_017, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_29
+	room_data  7,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_097
 
-Data_c5188: ; c5188 (31:5188)
-	dw $51c4
-	dw NULL
-	dw $51cc
-	dw $51d4
-	dw NULL
-	dw $51dc
-	dw $51e4
-	dw $51ec
+LevelRooms_c48b8: ; c48b8 (31:48b8)
+	dw .room_00
+	dw .room_01
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $51c4
-	dw $51f4
-	dw NULL
-	dw NULL
-	dw $51fc
-	dw $5204
+	dw .room_05
+	dw .room_06
+	dw .room_07
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $520c
 	dw NULL
-	dw $5214
-	dw $521c
-	dw $5224
-	dw $522c
-	dw $5234
+	dw .room_12
 	dw NULL
-	dw $523c
-	dw $5244
-	db $11, $02, $13, $41, $7d, $03, $06, $88, $26, $03, $57, $81, $7e, $03, $06, $88, $12, $02, $13, $41, $7d, $03, $06, $88, $07, $02, $7a, $01, $81, $03, $07, $8a, $20, $23, $03, $01, $82, $03, $00, $77, $05, $03, $57, $81, $7e, $03, $06, $88, $03, $02, $35, $01, $7f, $03, $07, $8a, $28, $23, $8a, $01, $80, $03, $07, $8a, $29, $23, $8a, $01, $80, $03, $07, $8a, $06, $03, $57, $81, $7e, $03, $06, $88, $24, $23, $35, $81, $83, $03, $00, $77, $21, $23, $03, $01, $82, $03, $00, $77, $22, $23, $03, $01, $82, $03, $00, $77, $01, $02, $13, $41, $7d, $03, $06, $88, $02, $02, $13, $41, $7d, $03, $06, $88, $15, $03, $57, $81, $7e, $03, $06, $88, $16, $03, $57, $81, $7e, $03, $06, $88
+	dw NULL
+	dw .room_15
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_19
+	dw .room_20
+	dw .room_21
+	dw NULL
+	dw .room_23
+	dw .room_24
+	dw .room_25
+	dw .room_26
+	dw NULL
+	dw NULL
+	dw .room_29
 
-Data_c524c: ; c524c (31:524c)
-	dw $5288
-	dw NULL
-	dw $5290
-	dw $5298
-	dw NULL
-	dw $52a0
-	dw $52a8
-	dw $52b0
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $5288
-	dw $52b8
-	dw NULL
-	dw NULL
-	dw $52c0
-	dw $52c8
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $52d0
-	dw NULL
-	dw $52d8
-	dw $52e0
-	dw $52e8
-	dw $52f0
-	dw $52f8
-	dw NULL
-	dw $5300
-	dw $5308
-	db $11, $02, $13, $41, $7d, $03, $06, $89, $26, $03, $57, $81, $7e, $03, $06, $89, $12, $02, $13, $41, $7d, $03, $06, $89, $07, $02, $7a, $01, $81, $03, $07, $8a, $20, $23, $03, $01, $82, $03, $00, $77, $05, $03, $57, $81, $7e, $03, $06, $89, $03, $02, $35, $01, $7f, $03, $07, $8a, $28, $23, $8a, $01, $80, $03, $07, $8a, $29, $23, $8a, $01, $80, $03, $07, $8a, $06, $03, $57, $81, $7e, $03, $06, $89, $24, $23, $35, $81, $83, $03, $00, $77, $21, $23, $03, $01, $82, $03, $00, $77, $22, $23, $03, $01, $82, $03, $00, $77, $01, $02, $13, $41, $7d, $03, $06, $89, $02, $02, $13, $41, $7d, $03, $06, $89, $15, $03, $57, $81, $7e, $03, $06, $89, $16, $03, $57, $81, $7e, $03, $06, $89
+.room_00
+	room_data  6,  1, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_01
+	room_data  0,  2, $3, $1, $1, $0, CAM_FREE, ENEMY_GROUP_115, ANIMATED_TILES_GROUP_04,  0, ROOM_099
+.room_05
+	room_data  5,  2, $3, $2, $6, $4, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_017, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_06
+	room_data  5,  1, $2, $0, $6, $4, CAM_FREE, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_07
+	room_data  9,  2, $3, $0, $a, $8, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_077, ANIMATED_TILES_GROUP_03,  0, ROOM_098
+.room_12
+	room_data  1,  2, $3, $0, $2, $1, CAM_FREE, ENEMY_GROUP_104, ANIMATED_TILES_GROUP_04,  0, ROOM_099
+.room_15
+	room_data  6,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_19
+	room_data  3,  2, $3, $0, $4, $2, CAM_FREE, ENEMY_GROUP_117, ANIMATED_TILES_GROUP_04,  0, ROOM_099
+.room_20
+	room_data  1,  0, $3, $0, $2, $1, CAM_FREE, ENEMY_GROUP_104, ANIMATED_TILES_GROUP_04,  0, ROOM_099
+.room_21
+	room_data  2,  1, $3, $0, $4, $2, CAM_FREE, ENEMY_GROUP_117, ANIMATED_TILES_GROUP_04,  0, ROOM_099
+.room_23
+	room_data  9,  1, $3, $0, $a, $8, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_077, ANIMATED_TILES_GROUP_03,  0, ROOM_098
+.room_24
+	room_data  4,  0, $2, $0, $6, $4, CAM_FREE, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_25
+	room_data  7,  2, $3, $2, $8, $6, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_013, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_26
+	room_data  4,  2, $3, $2, $6, $4, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_017, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_29
+	room_data  7,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_098
 
-Data_c5310: ; c5310 (31:5310)
-	dw $534c
+LevelRooms_c496c: ; c496c (31:496c)
+	dw .room_00
+	dw .room_01
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_05
+	dw .room_06
+	dw .room_07
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
+	dw .room_12
 	dw NULL
 	dw NULL
-	dw $5354
-	dw NULL
-	dw NULL
-	dw $535c
-	dw NULL
-	dw $5364
-	dw $536c
-	dw $5374
-	dw $537c
-	dw $5384
+	dw .room_15
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $538c
-	dw $5394
-	dw $539c
-	dw $53a4
-	dw $53ac
+	dw .room_19
+	dw .room_20
+	dw .room_21
 	dw NULL
-	dw $53b4
-	dw $53bc
+	dw .room_23
+	dw .room_24
+	dw .room_25
+	dw .room_26
 	dw NULL
 	dw NULL
-	db $01, $02, $16, $01, $21, $0e, $00, $29, $15, $02, $16, $01, $21, $0e, $00, $29, $13, $02, $16, $01, $21, $0e, $00, $29, $20, $23, $02, $18, $02, $03, $00, $2e, $22, $23, $26, $01, $22, $03, $00, $2e, $28, $23, $7a, $21, $6b, $03, $00, $2e, $07, $02, $7a, $01, $4e, $03, $00, $2e, $24, $23, $26, $01, $22, $03, $00, $2e, $12, $02, $16, $01, $21, $0e, $00, $29, $27, $23, $7a, $21, $6b, $03, $00, $2e, $04, $02, $16, $01, $21, $0e, $00, $29, $26, $23, $67, $0c, $66, $03, $00, $4c, $16, $02, $67, $08, $23, $03, $00, $2e, $23, $23, $26, $01, $22, $03, $00, $2e, $21, $23, $02, $18, $02, $03, $00, $2e
+	dw .room_29
 
-Data_c53c4: ; c53c4 (31:53c4)
-	dw $5400
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $5408
-	dw NULL
-	dw NULL
-	dw $5410
-	dw NULL
-	dw $5418
-	dw $5420
-	dw $5428
-	dw $5430
-	dw $5438
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $5440
-	dw $5448
-	dw $5450
-	dw $5458
-	dw $5460
-	dw NULL
-	dw $5468
-	dw $5470
-	dw NULL
-	dw NULL
-	db $01, $02, $16, $01, $21, $0e, $00, $29, $15, $02, $16, $01, $21, $0e, $00, $29, $13, $02, $16, $01, $21, $0e, $00, $29, $20, $23, $02, $18, $02, $03, $00, $75, $22, $23, $26, $01, $22, $03, $00, $75, $28, $23, $7a, $21, $6b, $03, $00, $75, $07, $02, $7a, $01, $4e, $03, $00, $75, $24, $23, $26, $01, $22, $03, $00, $75, $12, $02, $16, $01, $21, $0e, $00, $29, $27, $23, $7a, $21, $6b, $03, $00, $75, $04, $02, $16, $01, $21, $0e, $00, $29, $26, $23, $67, $0c, $66, $03, $00, $4c, $16, $02, $67, $08, $23, $03, $00, $75, $23, $23, $26, $01, $22, $03, $00, $75, $21, $23, $02, $18, $02, $03, $00, $75
+.room_00
+	room_data  6,  1, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_01
+	room_data  0,  2, $3, $1, $1, $0, CAM_FREE, ENEMY_GROUP_115, ANIMATED_TILES_GROUP_04,  0, ROOM_100
+.room_05
+	room_data  5,  2, $3, $2, $6, $4, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_017, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_06
+	room_data  5,  1, $2, $0, $6, $4, CAM_FREE, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_07
+	room_data  9,  2, $3, $0, $a, $8, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_077, ANIMATED_TILES_GROUP_03,  0, ROOM_098
+.room_12
+	room_data  1,  2, $3, $0, $2, $1, CAM_FREE, ENEMY_GROUP_104, ANIMATED_TILES_GROUP_04,  0, ROOM_100
+.room_15
+	room_data  6,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_19
+	room_data  3,  2, $3, $0, $4, $2, CAM_FREE, ENEMY_GROUP_117, ANIMATED_TILES_GROUP_04,  0, ROOM_100
+.room_20
+	room_data  1,  0, $3, $0, $2, $1, CAM_FREE, ENEMY_GROUP_104, ANIMATED_TILES_GROUP_04,  0, ROOM_100
+.room_21
+	room_data  2,  1, $3, $0, $4, $2, CAM_FREE, ENEMY_GROUP_117, ANIMATED_TILES_GROUP_04,  0, ROOM_100
+.room_23
+	room_data  9,  1, $3, $0, $a, $8, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_077, ANIMATED_TILES_GROUP_03,  0, ROOM_098
+.room_24
+	room_data  4,  0, $2, $0, $6, $4, CAM_FREE, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_25
+	room_data  7,  2, $3, $2, $8, $6, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_013, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_26
+	room_data  4,  2, $3, $2, $6, $4, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_017, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_29
+	room_data  7,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_098
 
-Data_c5478: ; c5478 (31:5478)
-	dw $54b4
+LevelRooms_c4a20: ; c4a20 (31:4a20)
+	dw .room_00
+	dw .room_01
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_05
+	dw .room_06
+	dw .room_07
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
+	dw .room_12
 	dw NULL
 	dw NULL
-	dw $54bc
-	dw NULL
-	dw NULL
-	dw $54c4
-	dw NULL
-	dw $54cc
-	dw $54d4
-	dw $54dc
-	dw $54e4
-	dw $54ec
+	dw .room_15
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $54f4
-	dw $54fc
-	dw $5504
-	dw $550c
-	dw $5514
+	dw .room_19
+	dw .room_20
+	dw .room_21
 	dw NULL
-	dw $551c
-	dw $5524
+	dw .room_23
+	dw .room_24
+	dw .room_25
+	dw .room_26
 	dw NULL
 	dw NULL
-	db $01, $02, $16, $01, $21, $0e, $00, $74, $15, $02, $16, $01, $21, $0e, $00, $74, $13, $02, $16, $01, $21, $0e, $00, $74, $20, $23, $02, $18, $02, $03, $00, $2e, $22, $23, $26, $01, $22, $03, $00, $2e, $28, $23, $7a, $21, $6b, $03, $00, $2e, $07, $02, $7a, $01, $4e, $03, $00, $2e, $24, $23, $26, $01, $22, $03, $00, $2e, $12, $02, $16, $01, $21, $0e, $00, $74, $27, $23, $7a, $21, $6b, $03, $00, $2e, $04, $02, $16, $01, $21, $0e, $00, $74, $26, $23, $67, $0c, $66, $03, $00, $4c, $16, $02, $67, $08, $23, $03, $00, $2e, $23, $23, $26, $01, $22, $03, $00, $2e, $21, $23, $02, $18, $02, $03, $00, $2e
+	dw .room_29
 
-Data_c552c: ; c552c (31:552c)
-	dw $5568
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $5570
-	dw NULL
-	dw NULL
-	dw $5578
-	dw NULL
-	dw $5580
-	dw $5588
-	dw $5590
-	dw $5598
-	dw $55a0
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $55a8
-	dw $55b0
-	dw $55b8
-	dw $55c0
-	dw $55c8
-	dw NULL
-	dw $55d0
-	dw $55d8
-	dw NULL
-	dw NULL
-	db $01, $02, $16, $01, $21, $0e, $00, $74, $15, $02, $16, $01, $21, $0e, $00, $74, $13, $02, $16, $01, $21, $0e, $00, $74, $20, $23, $02, $18, $02, $03, $00, $75, $22, $23, $26, $01, $22, $03, $00, $75, $28, $23, $7a, $21, $6b, $03, $00, $75, $07, $02, $7a, $01, $4e, $03, $00, $75, $24, $23, $26, $01, $22, $03, $00, $75, $12, $02, $16, $01, $21, $0e, $00, $74, $27, $23, $7a, $21, $6b, $03, $00, $75, $04, $02, $16, $01, $21, $0e, $00, $74, $26, $23, $67, $0c, $66, $03, $00, $4c, $16, $02, $67, $08, $23, $03, $00, $75, $23, $23, $26, $01, $22, $03, $00, $75, $21, $23, $02, $18, $02, $03, $00, $75
+.room_00
+	room_data  6,  1, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_01
+	room_data  0,  2, $3, $1, $1, $0, CAM_FREE, ENEMY_GROUP_115, ANIMATED_TILES_GROUP_04,  0, ROOM_101
+.room_05
+	room_data  5,  2, $3, $2, $6, $4, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_017, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_06
+	room_data  5,  1, $2, $0, $6, $4, CAM_FREE, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_07
+	room_data  9,  2, $3, $0, $a, $8, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_077, ANIMATED_TILES_GROUP_03,  0, ROOM_098
+.room_12
+	room_data  1,  2, $3, $0, $2, $1, CAM_FREE, ENEMY_GROUP_104, ANIMATED_TILES_GROUP_04,  0, ROOM_101
+.room_15
+	room_data  6,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_19
+	room_data  3,  2, $3, $0, $4, $2, CAM_FREE, ENEMY_GROUP_117, ANIMATED_TILES_GROUP_04,  0, ROOM_101
+.room_20
+	room_data  1,  0, $3, $0, $2, $1, CAM_FREE, ENEMY_GROUP_104, ANIMATED_TILES_GROUP_04,  0, ROOM_101
+.room_21
+	room_data  2,  1, $3, $0, $4, $2, CAM_FREE, ENEMY_GROUP_117, ANIMATED_TILES_GROUP_04,  0, ROOM_101
+.room_23
+	room_data  9,  1, $3, $0, $a, $8, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_077, ANIMATED_TILES_GROUP_03,  0, ROOM_098
+.room_24
+	room_data  4,  0, $2, $0, $6, $4, CAM_FREE, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_25
+	room_data  7,  2, $3, $2, $8, $6, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_013, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_26
+	room_data  4,  2, $3, $2, $6, $4, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_017, ANIMATED_TILES_GROUP_10,  0, ROOM_098
+.room_29
+	room_data  7,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_098
 
-Data_c55e0: ; c55e0 (31:55e0)
-	dw $561c
-	dw $5624
-	dw NULL
-	dw $562c
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $5634
-	dw $563c
+LevelRooms_c4ad4: ; c4ad4 (31:4ad4)
+	dw .room_00
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $5644
 	dw NULL
-	dw $564c
-	dw $5654
-	dw $565c
-	dw $5664
-	dw $566c
-	dw $5674
-	dw $567c
-	dw $5684
-	dw $568c
-	dw $5694
-	dw $569c
-	dw $56a4
+	dw NULL
+	dw .room_07
+	dw .room_08
+	dw NULL
+	dw .room_10
 	dw NULL
 	dw NULL
 	dw NULL
-	db $11, $02, $16, $01, $60, $09, $00, $2b, $18, $12, $8a, $11, $78, $09, $00, $48, $20, $23, $01, $01, $76, $09, $00, $2b, $24, $23, $36, $81, $44, $09, $00, $2b, $19, $12, $8a, $11, $78, $09, $00, $48, $16, $02, $68, $01, $01, $09, $00, $2b, $26, $23, $6a, $01, $61, $09, $00, $48, $13, $02, $16, $01, $60, $09, $00, $2b, $21, $23, $13, $01, $46, $09, $00, $2b, $01, $02, $16, $01, $60, $09, $00, $2b, $08, $01, $8a, $21, $78, $09, $00, $48, $03, $02, $16, $01, $60, $09, $00, $2b, $17, $02, $68, $01, $01, $09, $00, $2b, $25, $23, $36, $81, $44, $09, $00, $2b, $06, $02, $68, $01, $01, $09, $00, $2b, $07, $02, $68, $01, $01, $09, $00, $2b, $22, $23, $13, $01, $46, $09, $00, $2b, $15, $02, $16, $01, $60, $09, $00, $2b
+	dw .room_14
+	dw NULL
+	dw .room_16
+	dw .room_17
+	dw .room_18
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw NULL
+	dw NULL
+	dw .room_24
+	dw .room_25
+	dw NULL
+	dw NULL
+	dw .room_28
+	dw .room_29
 
-Data_c56ac: ; c56ac (31:56ac)
-	dw $56e8
-	dw $56f0
-	dw NULL
-	dw $56f8
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $5700
-	dw $5708
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $5710
-	dw NULL
-	dw $5718
-	dw $5720
-	dw $5728
-	dw $5730
-	dw $5738
-	dw $5740
-	dw $5748
-	dw $5750
-	dw $5758
-	dw $5760
-	dw $5768
-	dw $5770
-	dw NULL
-	dw NULL
-	dw NULL
-	db $11, $02, $16, $01, $60, $09, $00, $6e, $18, $12, $8a, $11, $78, $09, $00, $48, $20, $23, $01, $01, $76, $09, $00, $6e, $24, $23, $36, $81, $44, $09, $00, $6e, $19, $12, $8a, $11, $78, $09, $00, $48, $16, $02, $68, $01, $01, $09, $00, $6e, $26, $23, $6a, $01, $61, $09, $00, $48, $13, $02, $16, $01, $60, $09, $00, $6e, $21, $23, $13, $01, $46, $09, $00, $6e, $01, $02, $16, $01, $60, $09, $00, $6e, $08, $01, $8a, $21, $78, $09, $00, $48, $03, $02, $16, $01, $60, $09, $00, $6e, $17, $02, $68, $01, $01, $09, $00, $6e, $25, $23, $36, $81, $44, $09, $00, $6e, $06, $02, $68, $01, $01, $09, $00, $6e, $07, $02, $68, $01, $01, $09, $00, $6e, $22, $23, $13, $01, $46, $09, $00, $6e, $15, $02, $16, $01, $60, $09, $00, $6e
+.room_00
+	room_data  1,  1, $2, $0, $7, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_094, ANIMATED_TILES_GROUP_03,  0, ROOM_039
+.room_07
+	room_data  8,  1, $2, $1, $9, $7, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_040, ANIMATED_TILES_GROUP_03,  0, ROOM_039
+.room_08
+	room_data  8,  2, $3, $2, $a, $8, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_060, ANIMATED_TILES_GROUP_03,  0, ROOM_039
+.room_10
+	room_data  7,  2, $3, $2, $8, $5, CAM_FREE, ENEMY_GROUP_095, ANIMATED_TILES_GROUP_06,  0, ROOM_039
+.room_14
+	room_data  1,  2, $3, $2, $5, $1, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_014, ANIMATED_TILES_GROUP_03,  0, ROOM_039
+.room_16
+	room_data  7,  1, $2, $1, $9, $7, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_040, ANIMATED_TILES_GROUP_03,  0, ROOM_039
+.room_17
+	room_data  6,  1, $2, $0, $7, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_094, ANIMATED_TILES_GROUP_03,  0, ROOM_039
+.room_18
+	room_data  7,  0, $1, $0, $9, $7, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_03,  0, ROOM_039
+.room_20
+	room_data  3,  1, $2, $0, $7, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_094, ANIMATED_TILES_GROUP_03,  0, ROOM_039
+.room_21
+	room_data  4,  1, $2, $0, $7, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_094, ANIMATED_TILES_GROUP_03,  0, ROOM_039
+.room_24
+	room_data  0,  2, $3, $1, $1, $0, CAM_YSCROLL, ENEMY_GROUP_029, ANIMATED_TILES_GROUP_03,  0, ROOM_025
+.room_25
+	room_data  2,  2, $3, $2, $5, $1, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_014, ANIMATED_TILES_GROUP_03,  0, ROOM_039
+.room_28
+	room_data  8,  0, $1, $0, $9, $7, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_03,  0, ROOM_039
+.room_29
+	room_data  9,  2, $3, $2, $a, $8, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_060, ANIMATED_TILES_GROUP_03,  0, ROOM_039
 
-Data_c5778: ; c5778 (31:5778)
-	dw $57b4
-	dw $57bc
-	dw NULL
-	dw $57c4
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $57cc
-	dw $57d4
+LevelRooms_c4b80: ; c4b80 (31:4b80)
+	dw .room_00
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $57dc
 	dw NULL
-	dw $57e4
-	dw $57ec
-	dw $57f4
-	dw $57fc
-	dw $5804
-	dw $580c
-	dw $5814
-	dw $581c
-	dw $5824
-	dw $582c
-	dw $5834
-	dw $583c
+	dw NULL
+	dw .room_07
+	dw .room_08
+	dw NULL
+	dw .room_10
 	dw NULL
 	dw NULL
 	dw NULL
-	db $11, $02, $16, $01, $60, $09, $00, $6f, $18, $12, $8a, $11, $78, $09, $00, $48, $20, $23, $01, $01, $76, $09, $00, $6f, $24, $23, $36, $81, $44, $09, $00, $6f, $19, $12, $8a, $11, $78, $09, $00, $48, $16, $02, $68, $01, $01, $09, $00, $6f, $26, $23, $6a, $01, $61, $09, $00, $48, $13, $02, $16, $01, $60, $09, $00, $6f, $21, $23, $13, $01, $46, $09, $00, $6f, $01, $02, $16, $01, $60, $09, $00, $6f, $08, $01, $8a, $21, $78, $09, $00, $48, $03, $02, $16, $01, $60, $09, $00, $6f, $17, $02, $68, $01, $01, $09, $00, $6f, $25, $23, $36, $81, $44, $09, $00, $6f, $06, $02, $68, $01, $01, $09, $00, $6f, $07, $02, $68, $01, $01, $09, $00, $6f, $22, $23, $13, $01, $46, $09, $00, $6f, $15, $02, $16, $01, $60, $09, $00, $6f
+	dw .room_14
+	dw NULL
+	dw .room_16
+	dw .room_17
+	dw .room_18
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw NULL
+	dw NULL
+	dw .room_24
+	dw .room_25
+	dw NULL
+	dw NULL
+	dw .room_28
+	dw .room_29
 
-Data_c5844: ; c5844 (31:5844)
-	dw $5880
-	dw $5888
-	dw NULL
-	dw $5890
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $5898
-	dw $58a0
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $58a8
-	dw NULL
-	dw $58b0
-	dw $58b8
-	dw $58c0
-	dw $58c8
-	dw $58d0
-	dw $58d8
-	dw $58e0
-	dw $58e8
-	dw $58f0
-	dw $58f8
-	dw $5900
-	dw $5908
-	dw NULL
-	dw NULL
-	dw NULL
-	db $11, $02, $16, $01, $60, $09, $00, $70, $18, $12, $8a, $11, $78, $09, $00, $48, $20, $23, $01, $01, $76, $09, $00, $70, $24, $23, $36, $81, $44, $09, $00, $70, $19, $12, $8a, $11, $78, $09, $00, $48, $16, $02, $68, $01, $01, $09, $00, $70, $26, $23, $6a, $01, $61, $09, $00, $48, $13, $02, $16, $01, $60, $09, $00, $70, $21, $23, $13, $01, $46, $09, $00, $70, $01, $02, $16, $01, $60, $09, $00, $70, $08, $01, $8a, $21, $78, $09, $00, $48, $03, $02, $16, $01, $60, $09, $00, $70, $17, $02, $68, $01, $01, $09, $00, $70, $25, $23, $36, $81, $44, $09, $00, $70, $06, $02, $68, $01, $01, $09, $00, $70, $07, $02, $68, $01, $01, $09, $00, $70, $22, $23, $13, $01, $46, $09, $00, $70, $15, $02, $16, $01, $60, $09, $00, $70
+.room_00
+	room_data  1,  1, $2, $0, $7, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_094, ANIMATED_TILES_GROUP_03,  0, ROOM_151
+.room_07
+	room_data  8,  1, $2, $1, $9, $7, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_040, ANIMATED_TILES_GROUP_03,  0, ROOM_151
+.room_08
+	room_data  8,  2, $3, $2, $a, $8, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_060, ANIMATED_TILES_GROUP_03,  0, ROOM_151
+.room_10
+	room_data  7,  2, $3, $2, $8, $5, CAM_FREE, ENEMY_GROUP_095, ANIMATED_TILES_GROUP_06,  0, ROOM_151
+.room_14
+	room_data  1,  2, $3, $2, $5, $1, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_014, ANIMATED_TILES_GROUP_03,  0, ROOM_151
+.room_16
+	room_data  7,  1, $2, $1, $9, $7, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_040, ANIMATED_TILES_GROUP_03,  0, ROOM_151
+.room_17
+	room_data  6,  1, $2, $0, $7, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_094, ANIMATED_TILES_GROUP_03,  0, ROOM_151
+.room_18
+	room_data  7,  0, $1, $0, $9, $7, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_03,  0, ROOM_151
+.room_20
+	room_data  3,  1, $2, $0, $7, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_094, ANIMATED_TILES_GROUP_03,  0, ROOM_151
+.room_21
+	room_data  4,  1, $2, $0, $7, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_094, ANIMATED_TILES_GROUP_03,  0, ROOM_151
+.room_24
+	room_data  0,  2, $3, $1, $1, $0, CAM_YSCROLL, ENEMY_GROUP_029, ANIMATED_TILES_GROUP_03,  0, ROOM_025
+.room_25
+	room_data  2,  2, $3, $2, $5, $1, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_014, ANIMATED_TILES_GROUP_03,  0, ROOM_151
+.room_28
+	room_data  8,  0, $1, $0, $9, $7, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_03,  0, ROOM_151
+.room_29
+	room_data  9,  2, $3, $2, $a, $8, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_060, ANIMATED_TILES_GROUP_03,  0, ROOM_151
 
-Data_c5910: ; c5910 (31:5910)
-	dw $594c
-	dw $5954
-	dw $595c
-	dw $5964
-	dw NULL
-	dw $596c
+LevelRooms_c4c2c: ; c4c2c (31:4c2c)
+	dw .room_00
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $5974
-	dw $597c
 	dw NULL
-	dw $5984
-	dw $598c
-	dw $5994
 	dw NULL
-	dw $599c
-	dw $59a4
-	dw $59ac
 	dw NULL
-	dw $59b4
-	dw $59bc
-	dw $59c4
-	dw $59cc
-	dw $59d4
-	dw $59dc
-	dw $59e4
+	dw .room_07
+	dw .room_08
 	dw NULL
-	dw $59ec
+	dw .room_10
 	dw NULL
-	db $11, $02, $14, $11, $74, $0b, $00, $2c, $20, $23, $01, $01, $0d, $0b, $00, $38, $21, $23, $13, $08, $2a, $0b, $00, $2c, $24, $23, $35, $08, $33, $0b, $00, $2c, $09, $01, $9a, $81, $2a, $0b, $00, $38, $05, $02, $47, $61, $2a, $0b, $00, $2c, $12, $02, $14, $11, $74, $0b, $00, $2c, $10, $12, $01, $01, $8c, $0b, $00, $38, $26, $23, $69, $31, $32, $0b, $00, $39, $28, $23, $69, $31, $32, $0b, $00, $39, $25, $23, $56, $01, $8d, $0b, $00, $38, $22, $23, $13, $08, $2a, $0b, $00, $2c, $23, $23, $35, $08, $33, $0b, $00, $2c, $01, $02, $14, $11, $74, $0b, $00, $2c, $02, $02, $14, $11, $74, $0b, $00, $2c, $17, $02, $79, $01, $33, $12, $00, $2c, $18, $02, $79, $01, $33, $12, $00, $2c, $03, $02, $14, $11, $74, $0b, $00, $2c, $16, $02, $47, $61, $2a, $0b, $00, $2c, $13, $02, $14, $11, $74, $0b, $00, $2c, $14, $02, $47, $61, $2a, $0b, $00, $2c
+	dw NULL
+	dw NULL
+	dw .room_14
+	dw NULL
+	dw .room_16
+	dw .room_17
+	dw .room_18
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw NULL
+	dw NULL
+	dw .room_24
+	dw .room_25
+	dw NULL
+	dw NULL
+	dw .room_28
+	dw .room_29
 
-Data_c59f4: ; c59f4 (31:59f4)
-	dw $5a30
-	dw $5a38
-	dw $5a40
-	dw $5a48
-	dw NULL
-	dw $5a50
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $5a58
-	dw $5a60
-	dw NULL
-	dw $5a68
-	dw $5a70
-	dw $5a78
-	dw NULL
-	dw $5a80
-	dw $5a88
-	dw $5a90
-	dw NULL
-	dw $5a98
-	dw $5aa0
-	dw $5aa8
-	dw $5ab0
-	dw $5ab8
-	dw $5ac0
-	dw $5ac8
-	dw NULL
-	dw $5ad0
-	dw NULL
-	db $11, $02, $14, $11, $74, $0b, $00, $83, $20, $23, $01, $01, $0d, $0b, $00, $38, $21, $23, $13, $08, $2a, $0b, $00, $83, $24, $23, $35, $08, $33, $0b, $00, $83, $09, $01, $9a, $81, $2a, $0b, $00, $38, $05, $02, $47, $61, $2a, $0b, $00, $83, $12, $02, $14, $11, $74, $0b, $00, $83, $10, $12, $01, $01, $8c, $0b, $00, $38, $26, $23, $69, $31, $32, $0b, $00, $39, $28, $23, $69, $31, $32, $0b, $00, $39, $25, $23, $56, $01, $8d, $0b, $00, $38, $22, $23, $13, $08, $2a, $0b, $00, $83, $23, $23, $35, $08, $33, $0b, $00, $83, $01, $02, $14, $11, $74, $0b, $00, $83, $02, $02, $14, $11, $74, $0b, $00, $83, $17, $02, $79, $01, $33, $12, $00, $83, $18, $02, $79, $01, $33, $12, $00, $83, $03, $02, $14, $11, $74, $0b, $00, $83, $16, $02, $47, $61, $2a, $0b, $00, $83, $13, $02, $14, $11, $74, $0b, $00, $83, $14, $02, $47, $61, $2a, $0b, $00, $83
+.room_00
+	room_data  1,  1, $2, $0, $7, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_094, ANIMATED_TILES_GROUP_03,  0, ROOM_152
+.room_07
+	room_data  8,  1, $2, $1, $9, $7, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_040, ANIMATED_TILES_GROUP_03,  0, ROOM_152
+.room_08
+	room_data  8,  2, $3, $2, $a, $8, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_060, ANIMATED_TILES_GROUP_03,  0, ROOM_152
+.room_10
+	room_data  7,  2, $3, $2, $8, $5, CAM_FREE, ENEMY_GROUP_095, ANIMATED_TILES_GROUP_06,  0, ROOM_152
+.room_14
+	room_data  1,  2, $3, $2, $5, $1, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_014, ANIMATED_TILES_GROUP_03,  0, ROOM_152
+.room_16
+	room_data  7,  1, $2, $1, $9, $7, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_040, ANIMATED_TILES_GROUP_03,  0, ROOM_152
+.room_17
+	room_data  6,  1, $2, $0, $7, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_094, ANIMATED_TILES_GROUP_03,  0, ROOM_152
+.room_18
+	room_data  7,  0, $1, $0, $9, $7, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_03,  0, ROOM_152
+.room_20
+	room_data  3,  1, $2, $0, $7, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_094, ANIMATED_TILES_GROUP_03,  0, ROOM_152
+.room_21
+	room_data  4,  1, $2, $0, $7, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_094, ANIMATED_TILES_GROUP_03,  0, ROOM_152
+.room_24
+	room_data  0,  2, $3, $1, $1, $0, CAM_YSCROLL, ENEMY_GROUP_029, ANIMATED_TILES_GROUP_03,  0, ROOM_025
+.room_25
+	room_data  2,  2, $3, $2, $5, $1, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_014, ANIMATED_TILES_GROUP_03,  0, ROOM_152
+.room_28
+	room_data  8,  0, $1, $0, $9, $7, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_03,  0, ROOM_152
+.room_29
+	room_data  9,  2, $3, $2, $a, $8, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_060, ANIMATED_TILES_GROUP_03,  0, ROOM_152
 
-Data_c5ad8: ; c5ad8 (31:5ad8)
-	dw $5b14
-	dw $5b1c
-	dw $5b24
-	dw $5b2c
-	dw NULL
-	dw $5b34
+LevelRooms_c4cd8: ; c4cd8 (31:4cd8)
+	dw .room_00
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $5b3c
-	dw $5b44
 	dw NULL
-	dw $5b4c
-	dw $5b54
-	dw $5b5c
 	dw NULL
-	dw $5b64
-	dw $5b6c
-	dw $5b74
 	dw NULL
-	dw $5b7c
-	dw $5b84
-	dw $5b8c
-	dw $5b94
-	dw $5b9c
-	dw $5ba4
-	dw $5bac
+	dw .room_07
+	dw .room_08
 	dw NULL
-	dw $5bb4
+	dw .room_10
 	dw NULL
-	db $11, $02, $14, $11, $74, $0b, $00, $84, $20, $23, $01, $01, $0d, $0b, $00, $38, $21, $23, $13, $08, $2a, $0b, $00, $84, $24, $23, $35, $08, $33, $0b, $00, $84, $09, $01, $9a, $81, $2a, $0b, $00, $38, $05, $02, $47, $61, $2a, $0b, $00, $84, $12, $02, $14, $11, $74, $0b, $00, $84, $10, $12, $01, $01, $8c, $0b, $00, $38, $26, $23, $69, $31, $32, $0b, $00, $86, $28, $23, $69, $31, $32, $0b, $00, $86, $25, $23, $56, $01, $8d, $0b, $00, $38, $22, $23, $13, $08, $2a, $0b, $00, $84, $23, $23, $35, $08, $33, $0b, $00, $84, $01, $02, $14, $11, $74, $0b, $00, $84, $02, $02, $14, $11, $74, $0b, $00, $84, $17, $02, $79, $01, $33, $12, $00, $84, $18, $02, $79, $01, $33, $12, $00, $84, $03, $02, $14, $11, $74, $0b, $00, $84, $16, $02, $47, $61, $2a, $0b, $00, $84, $13, $02, $14, $11, $74, $0b, $00, $84, $14, $02, $47, $61, $2a, $0b, $00, $84
+	dw NULL
+	dw NULL
+	dw .room_14
+	dw NULL
+	dw .room_16
+	dw .room_17
+	dw .room_18
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw NULL
+	dw NULL
+	dw .room_24
+	dw .room_25
+	dw NULL
+	dw NULL
+	dw .room_28
+	dw .room_29
 
-Data_c5bbc: ; c5bbc (31:5bbc)
-	dw $5bf8
-	dw $5c00
-	dw $5c08
-	dw $5c10
-	dw NULL
-	dw $5c18
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $5c20
-	dw $5c28
-	dw NULL
-	dw $5c30
-	dw $5c38
-	dw $5c40
-	dw NULL
-	dw $5c48
-	dw $5c50
-	dw $5c58
-	dw NULL
-	dw $5c60
-	dw $5c68
-	dw $5c70
-	dw $5c78
-	dw $5c80
-	dw $5c88
-	dw $5c90
-	dw NULL
-	dw $5c98
-	dw NULL
-	db $11, $02, $14, $11, $74, $0b, $00, $85, $20, $23, $01, $01, $0d, $0b, $00, $38, $21, $23, $13, $08, $2a, $0b, $00, $85, $24, $23, $35, $08, $33, $0b, $00, $85, $09, $01, $9a, $81, $2a, $0b, $00, $38, $05, $02, $47, $61, $2a, $0b, $00, $85, $12, $02, $14, $11, $74, $0b, $00, $85, $10, $12, $01, $01, $8c, $0b, $00, $38, $26, $23, $69, $31, $32, $0b, $00, $86, $28, $23, $69, $31, $32, $0b, $00, $86, $25, $23, $56, $01, $8d, $0b, $00, $38, $22, $23, $13, $08, $2a, $0b, $00, $85, $23, $23, $35, $08, $33, $0b, $00, $85, $01, $02, $14, $11, $74, $0b, $00, $85, $02, $02, $14, $11, $74, $0b, $00, $85, $17, $02, $79, $01, $33, $12, $00, $85, $18, $02, $79, $01, $33, $12, $00, $85, $03, $02, $14, $11, $74, $0b, $00, $85, $16, $02, $47, $61, $2a, $0b, $00, $85, $13, $02, $14, $11, $74, $0b, $00, $85, $14, $02, $47, $61, $2a, $0b, $00, $85
+.room_00
+	room_data  1,  1, $2, $0, $7, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_094, ANIMATED_TILES_GROUP_03,  0, ROOM_153
+.room_07
+	room_data  8,  1, $2, $1, $9, $7, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_040, ANIMATED_TILES_GROUP_03,  0, ROOM_153
+.room_08
+	room_data  8,  2, $3, $2, $a, $8, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_060, ANIMATED_TILES_GROUP_03,  0, ROOM_153
+.room_10
+	room_data  7,  2, $3, $2, $8, $5, CAM_FREE, ENEMY_GROUP_095, ANIMATED_TILES_GROUP_06,  0, ROOM_153
+.room_14
+	room_data  1,  2, $3, $2, $5, $1, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_014, ANIMATED_TILES_GROUP_03,  0, ROOM_153
+.room_16
+	room_data  7,  1, $2, $1, $9, $7, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_040, ANIMATED_TILES_GROUP_03,  0, ROOM_153
+.room_17
+	room_data  6,  1, $2, $0, $7, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_094, ANIMATED_TILES_GROUP_03,  0, ROOM_153
+.room_18
+	room_data  7,  0, $1, $0, $9, $7, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_03,  0, ROOM_153
+.room_20
+	room_data  3,  1, $2, $0, $7, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_094, ANIMATED_TILES_GROUP_03,  0, ROOM_153
+.room_21
+	room_data  4,  1, $2, $0, $7, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_094, ANIMATED_TILES_GROUP_03,  0, ROOM_153
+.room_24
+	room_data  0,  2, $3, $1, $1, $0, CAM_YSCROLL, ENEMY_GROUP_029, ANIMATED_TILES_GROUP_03,  0, ROOM_025
+.room_25
+	room_data  2,  2, $3, $2, $5, $1, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_014, ANIMATED_TILES_GROUP_03,  0, ROOM_153
+.room_28
+	room_data  8,  0, $1, $0, $9, $7, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_037, ANIMATED_TILES_GROUP_03,  0, ROOM_153
+.room_29
+	room_data  9,  2, $3, $2, $a, $8, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_060, ANIMATED_TILES_GROUP_03,  0, ROOM_153
 
-Data_c5ca0: ; c5ca0 (31:5ca0)
-	dw $5cdc
+LevelRooms_c4d84: ; c4d84 (31:4d84)
+	dw .room_00
+	dw NULL
+	dw .room_02
+	dw NULL
+	dw .room_04
+	dw NULL
+	dw .room_06
+	dw .room_07
+	dw .room_08
+	dw .room_09
+	dw NULL
+	dw .room_11
+	dw .room_12
+	dw .room_13
+	dw .room_14
 	dw NULL
 	dw NULL
-	dw $5ce4
-	dw $5cec
-	dw $5cf4
-	dw $5cfc
 	dw NULL
 	dw NULL
+	dw .room_19
+	dw .room_20
+	dw .room_21
 	dw NULL
-	dw $5d04
-	dw $5d0c
+	dw .room_23
+	dw .room_24
 	dw NULL
-	dw $5d14
+	dw .room_26
+	dw .room_27
+	dw .room_28
 	dw NULL
-	dw NULL
-	dw $5d1c
-	dw $5d24
-	dw NULL
-	dw NULL
-	dw $5d2c
-	dw $5d34
-	dw $5d3c
-	dw $5d44
-	dw NULL
-	dw NULL
-	dw $5d4c
-	dw $5d54
-	dw NULL
-	dw NULL
-	db $01, $03, $14, $c1, $1f, $03, $00, $2d, $17, $02, $7a, $31, $69, $03, $00, $2d, $21, $03, $14, $c1, $1f, $03, $00, $2d, $22, $03, $14, $c1, $1f, $03, $00, $2d, $23, $03, $14, $c1, $1f, $03, $00, $2d, $16, $03, $47, $41, $20, $03, $00, $2d, $11, $03, $14, $c1, $1f, $03, $00, $2d, $27, $23, $7a, $01, $4f, $03, $00, $2d, $10, $12, $01, $01, $02, $03, $00, $2d, $03, $03, $14, $c1, $1f, $03, $00, $2d, $26, $03, $47, $41, $20, $03, $00, $2d, $04, $03, $47, $41, $20, $03, $00, $2d, $05, $03, $47, $41, $20, $03, $00, $2d, $06, $03, $47, $41, $20, $03, $00, $2d, $20, $23, $01, $01, $29, $03, $00, $2d, $13, $03, $14, $c1, $1f, $03, $00, $2d
 
-Data_c5d5c: ; c5d5c (31:5d5c)
-	dw $5d98
-	dw NULL
-	dw NULL
-	dw $5da0
-	dw $5da8
-	dw $5db0
-	dw $5db8
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $5dc0
-	dw $5dc8
-	dw NULL
-	dw $5dd0
-	dw NULL
-	dw NULL
-	dw $5dd8
-	dw $5de0
-	dw NULL
-	dw NULL
-	dw $5de8
-	dw $5df0
-	dw $5df8
-	dw $5e00
-	dw NULL
-	dw NULL
-	dw $5e08
-	dw $5e10
-	dw NULL
-	dw NULL
-	db $01, $03, $14, $c1, $1f, $03, $00, $80, $17, $02, $7a, $31, $69, $03, $00, $80, $21, $03, $14, $c1, $1f, $03, $00, $80, $22, $03, $14, $c1, $1f, $03, $00, $80, $23, $03, $14, $c1, $1f, $03, $00, $80, $16, $03, $47, $41, $20, $03, $00, $80, $11, $03, $14, $c1, $1f, $03, $00, $80, $27, $23, $7a, $01, $4f, $03, $00, $80, $10, $12, $01, $01, $02, $03, $00, $80, $03, $03, $14, $c1, $1f, $03, $00, $80, $26, $03, $47, $41, $20, $03, $00, $80, $04, $03, $47, $41, $20, $03, $00, $80, $05, $03, $47, $41, $20, $03, $00, $80, $06, $03, $47, $41, $20, $03, $00, $80, $20, $23, $01, $01, $29, $03, $00, $80, $13, $03, $14, $c1, $1f, $03, $00, $80
+.room_00
+	room_data  8,  1, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_053
+.room_02
+	room_data  6,  0, $2, $0, $7, $6, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_124, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_04
+	room_data  6,  2, $3, $2, $7, $4, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_015, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_06
+	room_data  2,  0, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_135, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_07
+	room_data  1,  2, $3, $2, $4, $1, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_08
+	room_data  1,  1, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_135, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_09
+	room_data  4,  2, $3, $2, $7, $4, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_015, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_11
+	room_data  8,  0, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_053
+.room_12
+	room_data  3,  1, $2, $0, $4, $3, CAM_YSCROLL, ENEMY_GROUP_040, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_13
+	room_data  2,  1, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_135, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_14
+	room_data  9,  1, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_053
+.room_19
+	room_data  4,  1, $2, $1, $6, $4, CAM_FREE, ENEMY_GROUP_011, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_20
+	room_data  3,  2, $3, $2, $4, $1, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_21
+	room_data  7,  0, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_053
+.room_23
+	room_data  0,  2, $3, $1, $1, $0, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_134, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_24
+	room_data  9,  0, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_053
+.room_26
+	room_data  4,  0, $1, $0, $6, $4, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_119, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_27
+	room_data  8,  2, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_053
+.room_28
+	room_data  7,  2, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_053
 
-Data_c5e18: ; c5e18 (31:5e18)
-	dw $5e54
+LevelRooms_c4e58: ; c4e58 (31:4e58)
+	dw .room_00
+	dw NULL
+	dw .room_02
+	dw NULL
+	dw .room_04
+	dw NULL
+	dw .room_06
+	dw .room_07
+	dw .room_08
+	dw .room_09
+	dw NULL
+	dw .room_11
+	dw .room_12
+	dw .room_13
+	dw .room_14
 	dw NULL
 	dw NULL
-	dw $5e5c
-	dw $5e64
-	dw $5e6c
-	dw $5e74
 	dw NULL
 	dw NULL
+	dw .room_19
+	dw .room_20
+	dw .room_21
 	dw NULL
-	dw $5e7c
-	dw $5e84
+	dw .room_23
+	dw .room_24
 	dw NULL
-	dw $5e8c
+	dw .room_26
+	dw .room_27
+	dw .room_28
 	dw NULL
-	dw NULL
-	dw $5e94
-	dw $5e9c
-	dw NULL
-	dw NULL
-	dw $5ea4
-	dw $5eac
-	dw $5eb4
-	dw $5ebc
-	dw NULL
-	dw NULL
-	dw $5ec4
-	dw $5ecc
-	dw NULL
-	dw NULL
-	db $01, $03, $14, $c1, $1f, $03, $00, $81, $17, $02, $7a, $31, $69, $03, $00, $81, $21, $03, $14, $c1, $1f, $03, $00, $81, $22, $03, $14, $c1, $1f, $03, $00, $81, $23, $03, $14, $c1, $1f, $03, $00, $81, $16, $03, $47, $41, $20, $03, $00, $81, $11, $03, $14, $c1, $1f, $03, $00, $81, $27, $23, $7a, $01, $84, $03, $00, $81, $10, $12, $01, $01, $02, $03, $00, $81, $03, $03, $14, $c1, $1f, $03, $00, $81, $26, $03, $47, $41, $20, $03, $00, $81, $04, $03, $47, $41, $20, $03, $00, $81, $05, $03, $47, $41, $20, $03, $00, $81, $06, $03, $47, $41, $20, $03, $00, $81, $20, $23, $01, $01, $29, $03, $00, $81, $13, $03, $14, $c1, $1f, $03, $00, $81
 
-Data_c5ed4: ; c5ed4 (31:5ed4)
-	dw $5f10
-	dw NULL
-	dw NULL
-	dw $5f18
-	dw $5f20
-	dw $5f28
-	dw $5f30
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $5f38
-	dw $5f40
-	dw NULL
-	dw $5f48
-	dw NULL
-	dw NULL
-	dw $5f50
-	dw $5f58
-	dw NULL
-	dw NULL
-	dw $5f60
-	dw $5f68
-	dw $5f70
-	dw $5f78
-	dw NULL
-	dw NULL
-	dw $5f80
-	dw $5f88
-	dw NULL
-	dw NULL
-	db $01, $03, $14, $c1, $1f, $03, $00, $82, $17, $02, $7a, $31, $69, $03, $00, $82, $21, $03, $14, $c1, $1f, $03, $00, $82, $22, $03, $14, $c1, $1f, $03, $00, $82, $23, $03, $14, $c1, $1f, $03, $00, $82, $16, $03, $47, $41, $20, $03, $00, $82, $11, $03, $14, $c1, $1f, $03, $00, $82, $27, $23, $7a, $01, $84, $03, $00, $82, $10, $12, $01, $01, $02, $03, $00, $82, $03, $03, $14, $c1, $1f, $03, $00, $82, $26, $03, $47, $41, $20, $03, $00, $82, $04, $03, $47, $41, $20, $03, $00, $82, $05, $03, $47, $41, $20, $03, $00, $82, $06, $03, $47, $41, $20, $03, $00, $82, $20, $23, $01, $01, $29, $03, $00, $82, $13, $03, $14, $c1, $1f, $03, $00, $82
+.room_00
+	room_data  8,  1, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_121
+.room_02
+	room_data  6,  0, $2, $0, $7, $6, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_124, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_04
+	room_data  6,  2, $3, $2, $7, $4, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_015, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_06
+	room_data  2,  0, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_135, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_07
+	room_data  1,  2, $3, $2, $4, $1, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_08
+	room_data  1,  1, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_135, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_09
+	room_data  4,  2, $3, $2, $7, $4, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_015, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_11
+	room_data  8,  0, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_121
+.room_12
+	room_data  3,  1, $2, $0, $4, $3, CAM_YSCROLL, ENEMY_GROUP_040, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_13
+	room_data  2,  1, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_135, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_14
+	room_data  9,  1, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_121
+.room_19
+	room_data  4,  1, $2, $1, $6, $4, CAM_FREE, ENEMY_GROUP_011, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_20
+	room_data  3,  2, $3, $2, $4, $1, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_21
+	room_data  7,  0, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_121
+.room_23
+	room_data  0,  2, $3, $1, $1, $0, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_134, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_24
+	room_data  9,  0, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_121
+.room_26
+	room_data  4,  0, $1, $0, $6, $4, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_119, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_27
+	room_data  8,  2, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_121
+.room_28
+	room_data  7,  2, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_121
 
-Data_c5f90: ; c5f90 (31:5f90)
-	dw $5fcc
-	dw $5fd4
-	dw $5fdc
-	dw $5fe4
-	dw $5fec
-	dw $5ff4
-	dw $5ffc
-	dw $6004
-	dw $600c
-	dw $6014
-	dw $601c
-	dw $601c
-	dw $6024
-	dw $5fcc
-	dw $601c
-	dw $602c
-	dw $5ffc
-	dw $6024
-	dw $6034
-	dw $6014
+LevelRooms_c4f2c: ; c4f2c (31:4f2c)
+	dw .room_00
+	dw NULL
+	dw .room_02
+	dw NULL
+	dw .room_04
+	dw NULL
+	dw .room_06
+	dw .room_07
+	dw .room_08
+	dw .room_09
+	dw NULL
+	dw .room_11
+	dw .room_12
+	dw .room_13
+	dw .room_14
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $603c
-	dw $6044
-	dw $604c
-	dw $5fcc
-	dw $6054
-	dw $6014
-	db $14, $12, $26, $01, $44, $0f, $08, $33, $10, $12, $02, $01, $6a, $0f, $0b, $4f, $11, $12, $02, $01, $6a, $0f, $0b, $4f, $01, $01, $13, $01, $6e, $0f, $0b, $4f, $02, $01, $13, $01, $6e, $0f, $0b, $4f, $13, $12, $26, $01, $44, $0f, $08, $33, $07, $02, $79, $01, $6d, $0f, $0a, $4e, $06, $02, $67, $01, $6d, $0f, $0a, $4e, $12, $12, $26, $01, $44, $0f, $08, $33, $26, $23, $69, $01, $68, $0f, $08, $33, $05, $01, $36, $08, $01, $0f, $0b, $4f, $18, $02, $79, $01, $6d, $0f, $0a, $4e, $24, $23, $46, $01, $0b, $0f, $08, $33, $17, $02, $79, $01, $6d, $0f, $0a, $4e, $15, $12, $26, $01, $44, $0f, $08, $33, $28, $23, $69, $01, $68, $0f, $08, $33, $09, $03, $9a, $01, $02, $0f, $09, $4d, $25, $23, $46, $01, $0b, $0f, $08, $33
+	dw .room_19
+	dw .room_20
+	dw .room_21
+	dw NULL
+	dw .room_23
+	dw .room_24
+	dw NULL
+	dw .room_26
+	dw .room_27
+	dw .room_28
+	dw NULL
 
-Data_c605c: ; c605c (31:605c)
-	dw $6098
-	dw $60a0
-	dw $60a8
-	dw $60b0
-	dw $60b8
-	dw $60c0
-	dw $60c8
-	dw $60d0
-	dw $60d8
-	dw $60e0
-	dw $60e8
-	dw $60e8
-	dw $60f0
-	dw $6098
-	dw $60e8
-	dw $60f8
-	dw $60c8
-	dw $60f0
-	dw $6100
-	dw $60e0
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $6108
-	dw $6110
-	dw $6118
-	dw $6098
-	dw $6120
-	dw $60e0
-	db $14, $12, $26, $01, $44, $0f, $08, $95, $10, $12, $02, $01, $6a, $0f, $0b, $4f, $11, $12, $02, $01, $6a, $0f, $0b, $4f, $01, $01, $13, $01, $6e, $0f, $0b, $4f, $02, $01, $13, $01, $6e, $0f, $0b, $4f, $13, $12, $26, $01, $44, $0f, $08, $95, $07, $02, $79, $01, $6d, $0f, $0a, $4e, $06, $02, $67, $01, $6d, $0f, $0a, $4e, $12, $12, $26, $01, $44, $0f, $08, $95, $26, $23, $69, $01, $68, $0f, $08, $95, $05, $01, $36, $08, $01, $0f, $0b, $4f, $18, $02, $79, $01, $6d, $0f, $0a, $4e, $24, $23, $46, $01, $0b, $0f, $08, $95, $17, $02, $79, $01, $6d, $0f, $0a, $4e, $15, $12, $26, $01, $44, $0f, $08, $95, $28, $23, $69, $01, $68, $0f, $08, $95, $09, $03, $9a, $01, $02, $0f, $09, $4d, $25, $23, $46, $01, $0b, $0f, $08, $95
+.room_00
+	room_data  8,  1, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_122
+.room_02
+	room_data  6,  0, $2, $0, $7, $6, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_124, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_04
+	room_data  6,  2, $3, $2, $7, $4, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_015, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_06
+	room_data  2,  0, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_135, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_07
+	room_data  1,  2, $3, $2, $4, $1, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_08
+	room_data  1,  1, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_135, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_09
+	room_data  4,  2, $3, $2, $7, $4, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_015, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_11
+	room_data  8,  0, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_122
+.room_12
+	room_data  3,  1, $2, $0, $4, $3, CAM_YSCROLL, ENEMY_GROUP_040, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_13
+	room_data  2,  1, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_135, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_14
+	room_data  9,  1, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_122
+.room_19
+	room_data  4,  1, $2, $1, $6, $4, CAM_FREE, ENEMY_GROUP_011, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_20
+	room_data  3,  2, $3, $2, $4, $1, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_21
+	room_data  7,  0, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_122
+.room_23
+	room_data  0,  2, $3, $1, $1, $0, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_134, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_24
+	room_data  9,  0, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_122
+.room_26
+	room_data  4,  0, $1, $0, $6, $4, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_119, ANIMATED_TILES_GROUP_10,  5, ROOM_120
+.room_27
+	room_data  8,  2, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_122
+.room_28
+	room_data  7,  2, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_122
 
-Data_c6128: ; c6128 (31:6128)
-	dw $6164
-	dw $616c
-	dw $6174
-	dw $617c
-	dw $6184
-	dw $618c
-	dw $6194
-	dw $619c
-	dw $61a4
-	dw $61ac
-	dw $61b4
-	dw $61b4
-	dw $61bc
-	dw $6164
-	dw $61b4
-	dw $61c4
-	dw $6194
-	dw $61bc
-	dw $61cc
-	dw $61ac
+LevelRooms_c5000: ; c5000 (31:5000)
+	dw .room_00
+	dw NULL
+	dw .room_02
+	dw .room_03
+	dw NULL
+	dw .room_05
+	dw .room_06
+	dw .room_07
 	dw NULL
 	dw NULL
 	dw NULL
+	dw .room_11
+	dw .room_12
 	dw NULL
-	dw $61d4
-	dw $61dc
-	dw $61e4
-	dw $6164
-	dw $61ec
-	dw $61ac
-	db $14, $12, $26, $01, $44, $0f, $08, $96, $10, $12, $02, $01, $6a, $0f, $0b, $4f, $11, $12, $02, $01, $6a, $0f, $0b, $4f, $01, $01, $13, $01, $6e, $0f, $0b, $4f, $02, $01, $13, $01, $6e, $0f, $0b, $4f, $13, $12, $26, $01, $44, $0f, $08, $96, $07, $02, $79, $01, $6d, $0f, $0a, $4e, $06, $02, $67, $01, $6d, $0f, $0a, $4e, $12, $12, $26, $01, $44, $0f, $08, $96, $26, $23, $69, $01, $68, $0f, $08, $96, $05, $01, $36, $08, $01, $0f, $0b, $4f, $18, $02, $79, $01, $6d, $0f, $0a, $4e, $24, $23, $46, $01, $0b, $0f, $08, $96, $17, $02, $79, $01, $6d, $0f, $0a, $4e, $15, $12, $26, $01, $44, $0f, $08, $96, $28, $23, $69, $01, $68, $0f, $08, $96, $09, $03, $9a, $01, $02, $0f, $09, $4d, $25, $23, $46, $01, $0b, $0f, $08, $96
+	dw NULL
+	dw .room_15
+	dw .room_16
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_20
+	dw NULL
+	dw .room_22
+	dw .room_23
+	dw .room_24
+	dw .room_25
+	dw .room_26
+	dw NULL
+	dw .room_28
+	dw .room_29
 
-Data_c61f4: ; c61f4 (31:61f4)
-	dw $6230
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $6238
-	dw $6240
-	dw $6248
-	dw NULL
-	dw $6250
-	dw NULL
-	dw $6258
-	dw $6260
-	dw NULL
-	dw NULL
-	dw $6268
-	dw $6270
-	dw NULL
-	dw $6278
-	dw $6280
-	dw NULL
-	dw $6288
-	dw $6290
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	db $02, $03, $14, $71, $52, $0a, $00, $45, $23, $03, $14, $71, $52, $0a, $00, $45, $17, $12, $79, $08, $13, $0a, $00, $46, $18, $12, $79, $08, $13, $0a, $00, $46, $24, $23, $48, $01, $55, $0a, $00, $46, $14, $02, $47, $01, $54, $0c, $00, $46, $13, $03, $14, $71, $52, $0a, $00, $45, $08, $01, $7a, $21, $53, $0a, $00, $46, $09, $01, $7a, $21, $53, $0a, $00, $46, $21, $03, $14, $71, $52, $0a, $00, $45, $20, $23, $01, $11, $52, $0a, $00, $46, $07, $01, $7a, $21, $53, $0a, $00, $46, $11, $03, $14, $71, $52, $0a, $00, $45
+.room_00
+.room_11
+	room_data  1,  1, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_125, ANIMATED_TILES_GROUP_03,  3, ROOM_040
+.room_02
+	room_data  6,  2, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  3, ROOM_040
+.room_03
+	room_data  2,  1, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_125, ANIMATED_TILES_GROUP_03,  3, ROOM_040
+.room_05
+	room_data  7,  0, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_129, ANIMATED_TILES_GROUP_03,  4, ROOM_118
+.room_06
+	room_data  0,  2, $3, $2, $3, $0, CAM_FREE, ENEMY_GROUP_130, ANIMATED_TILES_GROUP_03,  0, ROOM_119
+.room_07
+	room_data  5,  0, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  3, ROOM_040
+.room_12
+	room_data  3,  0, $2, $0, $5, $3, CAM_FREE, ENEMY_GROUP_127, ANIMATED_TILES_GROUP_03,  4, ROOM_118
+.room_15
+	room_data  8,  2, $3, $2, $a, $8, CAM_FREE, ENEMY_GROUP_128, ANIMATED_TILES_GROUP_03,  4, ROOM_118
+.room_16
+	room_data  9,  2, $3, $2, $a, $8, CAM_FREE, ENEMY_GROUP_128, ANIMATED_TILES_GROUP_03,  4, ROOM_118
+.room_20
+	room_data  6,  0, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  3, ROOM_040
+.room_22
+	room_data  4,  2, $3, $2, $5, $3, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_131, ANIMATED_TILES_GROUP_03,  0, ROOM_119
+.room_23
+	room_data  1,  2, $3, $2, $3, $0, CAM_FREE, ENEMY_GROUP_130, ANIMATED_TILES_GROUP_03,  0, ROOM_119
+.room_24
+	room_data  2,  2, $3, $2, $3, $0, CAM_FREE, ENEMY_GROUP_130, ANIMATED_TILES_GROUP_03,  0, ROOM_119
+.room_25
+	room_data  1,  0, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_125, ANIMATED_TILES_GROUP_03,  3, ROOM_040
+.room_26
+	room_data  2,  0, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_125, ANIMATED_TILES_GROUP_03,  3, ROOM_040
+.room_28
+	room_data  5,  1, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  3, ROOM_040
+.room_29
+	room_data  6,  1, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  3, ROOM_040
 
-Data_c6298: ; c6298 (31:6298)
-	dw $62d4
+LevelRooms_c50c4: ; c50c4 (31:50c4)
+	dw .room_00
+	dw NULL
+	dw .room_02
+	dw .room_03
+	dw NULL
+	dw .room_05
+	dw .room_06
+	dw .room_07
 	dw NULL
 	dw NULL
 	dw NULL
+	dw .room_11
+	dw .room_12
+	dw NULL
+	dw NULL
+	dw .room_15
+	dw .room_16
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $62dc
-	dw $62e4
-	dw $62ec
+	dw .room_20
 	dw NULL
-	dw $62f4
+	dw .room_22
+	dw .room_23
+	dw .room_24
+	dw .room_25
+	dw .room_26
 	dw NULL
-	dw $62fc
-	dw $6304
-	dw NULL
-	dw NULL
-	dw $630c
-	dw $6314
-	dw NULL
-	dw $631c
-	dw $6324
-	dw NULL
-	dw $632c
-	dw $6334
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	db $02, $03, $14, $71, $52, $0a, $00, $45, $23, $03, $14, $71, $52, $0a, $00, $45, $17, $12, $79, $08, $13, $0a, $00, $46, $18, $12, $79, $08, $13, $0a, $00, $46, $24, $23, $48, $01, $55, $0a, $00, $46, $14, $02, $47, $01, $54, $0c, $00, $46, $13, $03, $14, $71, $52, $0a, $00, $45, $08, $01, $7a, $21, $89, $0a, $00, $46, $09, $01, $7a, $21, $89, $0a, $00, $46, $21, $03, $14, $71, $52, $0a, $00, $45, $20, $23, $01, $11, $52, $0a, $00, $46, $07, $01, $7a, $21, $89, $0a, $00, $46, $11, $03, $14, $71, $52, $0a, $00, $45
+	dw .room_28
+	dw .room_29
 
-Data_c633c: ; c633c (31:633c)
-	dw $6378
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $6380
-	dw $6388
-	dw $6390
-	dw NULL
-	dw $6398
-	dw NULL
-	dw $63a0
-	dw $63a8
-	dw NULL
-	dw NULL
-	dw $63b0
-	dw $63b8
-	dw NULL
-	dw $63c0
-	dw $63c8
-	dw NULL
-	dw $63d0
-	dw $63d8
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	db $02, $03, $14, $71, $52, $0a, $00, $45, $23, $03, $14, $71, $52, $0a, $00, $45, $17, $12, $79, $08, $13, $0a, $00, $94, $18, $12, $79, $08, $13, $0a, $00, $94, $24, $23, $48, $01, $55, $0a, $00, $94, $14, $02, $47, $01, $54, $0c, $00, $94, $13, $03, $14, $71, $52, $0a, $00, $45, $08, $01, $7a, $21, $89, $0a, $00, $94, $09, $01, $7a, $21, $89, $0a, $00, $94, $21, $03, $14, $71, $52, $0a, $00, $45, $20, $23, $01, $11, $52, $0a, $00, $94, $07, $01, $7a, $21, $89, $0a, $00, $94, $11, $03, $14, $71, $52, $0a, $00, $45
+.room_00
+.room_11
+	room_data  1,  1, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_125, ANIMATED_TILES_GROUP_03,  3, ROOM_135
+.room_02
+	room_data  6,  2, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  3, ROOM_135
+.room_03
+	room_data  2,  1, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_125, ANIMATED_TILES_GROUP_03,  3, ROOM_135
+.room_05
+	room_data  7,  0, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_129, ANIMATED_TILES_GROUP_03,  4, ROOM_118
+.room_06
+	room_data  0,  2, $3, $2, $3, $0, CAM_FREE, ENEMY_GROUP_130, ANIMATED_TILES_GROUP_03,  0, ROOM_119
+.room_07
+	room_data  5,  0, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  3, ROOM_135
+.room_12
+	room_data  3,  0, $2, $0, $5, $3, CAM_FREE, ENEMY_GROUP_127, ANIMATED_TILES_GROUP_03,  4, ROOM_118
+.room_15
+	room_data  8,  2, $3, $2, $a, $8, CAM_FREE, ENEMY_GROUP_128, ANIMATED_TILES_GROUP_03,  4, ROOM_118
+.room_16
+	room_data  9,  2, $3, $2, $a, $8, CAM_FREE, ENEMY_GROUP_128, ANIMATED_TILES_GROUP_03,  4, ROOM_118
+.room_20
+	room_data  6,  0, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  3, ROOM_135
+.room_22
+	room_data  4,  2, $3, $2, $5, $3, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_131, ANIMATED_TILES_GROUP_03,  0, ROOM_119
+.room_23
+	room_data  1,  2, $3, $2, $3, $0, CAM_FREE, ENEMY_GROUP_130, ANIMATED_TILES_GROUP_03,  0, ROOM_119
+.room_24
+	room_data  2,  2, $3, $2, $3, $0, CAM_FREE, ENEMY_GROUP_130, ANIMATED_TILES_GROUP_03,  0, ROOM_119
+.room_25
+	room_data  1,  0, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_125, ANIMATED_TILES_GROUP_03,  3, ROOM_135
+.room_26
+	room_data  2,  0, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_125, ANIMATED_TILES_GROUP_03,  3, ROOM_135
+.room_28
+	room_data  5,  1, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  3, ROOM_135
+.room_29
+	room_data  6,  1, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  3, ROOM_135
 
-Data_c63e0: ; c63e0 (31:63e0)
-	dw $641c
+LevelRooms_c5188: ; c5188 (31:5188)
+	dw .room_00
+	dw NULL
+	dw .room_02
+	dw .room_03
+	dw NULL
+	dw .room_05
+	dw .room_06
+	dw .room_07
 	dw NULL
 	dw NULL
 	dw NULL
+	dw .room_11
+	dw .room_12
+	dw NULL
+	dw NULL
+	dw .room_15
+	dw .room_16
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $6424
-	dw $642c
-	dw $6434
+	dw .room_20
 	dw NULL
-	dw $643c
+	dw .room_22
+	dw .room_23
+	dw .room_24
+	dw .room_25
+	dw .room_26
 	dw NULL
-	dw $6444
-	dw $644c
-	dw NULL
-	dw NULL
-	dw $6454
-	dw $645c
-	dw NULL
-	dw $6464
-	dw $646c
-	dw NULL
-	dw $6474
-	dw $647c
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	db $02, $03, $14, $71, $8a, $0a, $00, $91, $23, $03, $14, $71, $8a, $0a, $00, $91, $17, $12, $79, $08, $13, $0a, $00, $94, $18, $12, $79, $08, $13, $0a, $00, $94, $24, $23, $48, $01, $55, $0a, $00, $94, $14, $02, $47, $01, $54, $0c, $00, $94, $13, $03, $14, $71, $8a, $0a, $00, $91, $08, $01, $7a, $21, $89, $0a, $00, $94, $09, $01, $7a, $21, $89, $0a, $00, $94, $21, $03, $14, $71, $8a, $0a, $00, $91, $20, $23, $01, $11, $8a, $0a, $00, $94, $07, $01, $7a, $21, $89, $0a, $00, $94, $11, $03, $14, $71, $8a, $0a, $00, $91
+	dw .room_28
+	dw .room_29
 
-Data_c6484: ; c6484 (31:6484)
-	dw $64c0
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $64c8
-	dw $64d0
-	dw $64d8
-	dw NULL
-	dw $64e0
-	dw NULL
-	dw $64e8
-	dw $64f0
-	dw NULL
-	dw NULL
-	dw $64f8
-	dw $6500
-	dw NULL
-	dw $6508
-	dw $6510
-	dw NULL
-	dw $6518
-	dw $6520
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	db $02, $03, $14, $71, $52, $0a, $00, $92, $23, $03, $14, $71, $52, $0a, $00, $92, $17, $12, $79, $08, $13, $0a, $00, $46, $18, $12, $79, $08, $13, $0a, $00, $46, $24, $23, $48, $01, $55, $0a, $00, $46, $14, $02, $47, $01, $54, $0c, $00, $46, $13, $03, $14, $71, $52, $0a, $00, $92, $08, $01, $7a, $21, $53, $0a, $00, $46, $09, $01, $7a, $21, $53, $0a, $00, $46, $21, $03, $14, $71, $52, $0a, $00, $92, $20, $23, $01, $11, $52, $0a, $00, $46, $07, $01, $7a, $21, $53, $0a, $00, $46, $11, $03, $14, $71, $52, $0a, $00, $92
+.room_00
+.room_11
+	room_data  1,  1, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_125, ANIMATED_TILES_GROUP_03,  6, ROOM_136
+.room_02
+	room_data  6,  2, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  6, ROOM_136
+.room_03
+	room_data  2,  1, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_125, ANIMATED_TILES_GROUP_03,  6, ROOM_136
+.room_05
+	room_data  7,  0, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_129, ANIMATED_TILES_GROUP_03,  7, ROOM_138
+.room_06
+	room_data  0,  2, $3, $2, $3, $0, CAM_FREE, ENEMY_GROUP_130, ANIMATED_TILES_GROUP_03,  0, ROOM_119
+.room_07
+	room_data  5,  0, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  6, ROOM_136
+.room_12
+	room_data  3,  0, $2, $0, $5, $3, CAM_FREE, ENEMY_GROUP_127, ANIMATED_TILES_GROUP_03,  7, ROOM_138
+.room_15
+	room_data  8,  2, $3, $2, $a, $8, CAM_FREE, ENEMY_GROUP_128, ANIMATED_TILES_GROUP_03,  7, ROOM_138
+.room_16
+	room_data  9,  2, $3, $2, $a, $8, CAM_FREE, ENEMY_GROUP_128, ANIMATED_TILES_GROUP_03,  7, ROOM_138
+.room_20
+	room_data  6,  0, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  6, ROOM_136
+.room_22
+	room_data  4,  2, $3, $2, $5, $3, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_131, ANIMATED_TILES_GROUP_03,  0, ROOM_119
+.room_23
+	room_data  1,  2, $3, $2, $3, $0, CAM_FREE, ENEMY_GROUP_130, ANIMATED_TILES_GROUP_03,  0, ROOM_119
+.room_24
+	room_data  2,  2, $3, $2, $3, $0, CAM_FREE, ENEMY_GROUP_130, ANIMATED_TILES_GROUP_03,  0, ROOM_119
+.room_25
+	room_data  1,  0, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_125, ANIMATED_TILES_GROUP_03,  6, ROOM_136
+.room_26
+	room_data  2,  0, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_125, ANIMATED_TILES_GROUP_03,  6, ROOM_136
+.room_28
+	room_data  5,  1, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  6, ROOM_136
+.room_29
+	room_data  6,  1, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  6, ROOM_136
 
-Data_c6528: ; c6528 (31:6528)
-	dw $6564
+LevelRooms_c524c: ; c524c (31:524c)
+	dw .room_00
+	dw NULL
+	dw .room_02
+	dw .room_03
+	dw NULL
+	dw .room_05
+	dw .room_06
+	dw .room_07
 	dw NULL
 	dw NULL
 	dw NULL
+	dw .room_11
+	dw .room_12
+	dw NULL
+	dw NULL
+	dw .room_15
+	dw .room_16
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $656c
-	dw $6574
-	dw $657c
+	dw .room_20
 	dw NULL
-	dw $6584
+	dw .room_22
+	dw .room_23
+	dw .room_24
+	dw .room_25
+	dw .room_26
 	dw NULL
-	dw $658c
-	dw $6594
-	dw NULL
-	dw NULL
-	dw $659c
-	dw $65a4
-	dw NULL
-	dw $65ac
-	dw $65b4
-	dw NULL
-	dw $65bc
-	dw $65c4
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	db $02, $03, $14, $71, $52, $0a, $00, $92, $23, $03, $14, $71, $52, $0a, $00, $92, $17, $12, $79, $08, $13, $0a, $00, $46, $18, $12, $79, $08, $13, $0a, $00, $46, $24, $23, $48, $01, $55, $0a, $00, $46, $14, $02, $47, $01, $54, $0c, $00, $46, $13, $03, $14, $71, $52, $0a, $00, $92, $08, $01, $7a, $21, $89, $0a, $00, $46, $09, $01, $7a, $21, $89, $0a, $00, $46, $21, $03, $14, $71, $52, $0a, $00, $92, $20, $23, $01, $11, $52, $0a, $00, $46, $07, $01, $7a, $21, $89, $0a, $00, $46, $11, $03, $14, $71, $52, $0a, $00, $92
+	dw .room_28
+	dw .room_29
 
-Data_c65cc: ; c65cc (31:65cc)
-	dw $6608
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $6610
-	dw $6618
-	dw $6620
-	dw NULL
-	dw $6628
-	dw NULL
-	dw $6630
-	dw $6638
-	dw NULL
-	dw NULL
-	dw $6640
-	dw $6648
-	dw NULL
-	dw $6650
-	dw $6658
-	dw NULL
-	dw $6660
-	dw $6668
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	db $02, $03, $14, $71, $52, $0a, $00, $92, $23, $03, $14, $71, $52, $0a, $00, $92, $17, $12, $79, $08, $13, $0a, $00, $94, $18, $12, $79, $08, $13, $0a, $00, $94, $24, $23, $48, $01, $55, $0a, $00, $94, $14, $02, $47, $01, $54, $0c, $00, $94, $13, $03, $14, $71, $52, $0a, $00, $92, $08, $01, $7a, $21, $89, $0a, $00, $94, $09, $01, $7a, $21, $89, $0a, $00, $94, $21, $03, $14, $71, $52, $0a, $00, $92, $20, $23, $01, $11, $52, $0a, $00, $94, $07, $01, $7a, $21, $89, $0a, $00, $94, $11, $03, $14, $71, $52, $0a, $00, $92
+.room_00
+.room_11
+	room_data  1,  1, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_125, ANIMATED_TILES_GROUP_03,  6, ROOM_137
+.room_02
+	room_data  6,  2, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  6, ROOM_137
+.room_03
+	room_data  2,  1, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_125, ANIMATED_TILES_GROUP_03,  6, ROOM_137
+.room_05
+	room_data  7,  0, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_129, ANIMATED_TILES_GROUP_03,  7, ROOM_138
+.room_06
+	room_data  0,  2, $3, $2, $3, $0, CAM_FREE, ENEMY_GROUP_130, ANIMATED_TILES_GROUP_03,  0, ROOM_119
+.room_07
+	room_data  5,  0, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  6, ROOM_137
+.room_12
+	room_data  3,  0, $2, $0, $5, $3, CAM_FREE, ENEMY_GROUP_127, ANIMATED_TILES_GROUP_03,  7, ROOM_138
+.room_15
+	room_data  8,  2, $3, $2, $a, $8, CAM_FREE, ENEMY_GROUP_128, ANIMATED_TILES_GROUP_03,  7, ROOM_138
+.room_16
+	room_data  9,  2, $3, $2, $a, $8, CAM_FREE, ENEMY_GROUP_128, ANIMATED_TILES_GROUP_03,  7, ROOM_138
+.room_20
+	room_data  6,  0, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  6, ROOM_137
+.room_22
+	room_data  4,  2, $3, $2, $5, $3, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_131, ANIMATED_TILES_GROUP_03,  0, ROOM_119
+.room_23
+	room_data  1,  2, $3, $2, $3, $0, CAM_FREE, ENEMY_GROUP_130, ANIMATED_TILES_GROUP_03,  0, ROOM_119
+.room_24
+	room_data  2,  2, $3, $2, $3, $0, CAM_FREE, ENEMY_GROUP_130, ANIMATED_TILES_GROUP_03,  0, ROOM_119
+.room_25
+	room_data  1,  0, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_125, ANIMATED_TILES_GROUP_03,  6, ROOM_137
+.room_26
+	room_data  2,  0, $2, $0, $3, $1, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_125, ANIMATED_TILES_GROUP_03,  6, ROOM_137
+.room_28
+	room_data  5,  1, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  6, ROOM_137
+.room_29
+	room_data  6,  1, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  6, ROOM_137
 
-Data_c6670: ; c6670 (31:6670)
-	dw $66ac
+LevelRooms_c5310: ; c5310 (31:5310)
+	dw .room_00
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
-	dw $66b4
-	dw $66bc
-	dw $66c4
-	dw NULL
-	dw $66cc
-	dw NULL
-	dw $66d4
-	dw $66dc
+	dw .room_07
 	dw NULL
 	dw NULL
-	dw $66e4
-	dw $66ec
+	dw .room_10
 	dw NULL
-	dw $66f4
-	dw $66fc
-	dw NULL
-	dw $6704
-	dw $670c
+	dw .room_12
+	dw .room_13
+	dw .room_14
+	dw .room_15
+	dw .room_16
 	dw NULL
 	dw NULL
 	dw NULL
+	dw .room_20
+	dw .room_21
+	dw .room_22
+	dw .room_23
+	dw .room_24
+	dw NULL
+	dw .room_26
+	dw .room_27
 	dw NULL
 	dw NULL
-	db $02, $03, $14, $71, $8a, $0a, $00, $93, $23, $03, $14, $71, $8a, $0a, $00, $93, $17, $12, $79, $08, $13, $0a, $00, $94, $18, $12, $79, $08, $13, $0a, $00, $94, $24, $23, $48, $01, $55, $0a, $00, $94, $14, $02, $47, $01, $54, $0c, $00, $94, $13, $03, $14, $71, $8a, $0a, $00, $93, $08, $01, $7a, $21, $89, $0a, $00, $94, $09, $01, $7a, $21, $89, $0a, $00, $94, $21, $03, $14, $71, $8a, $0a, $00, $93, $20, $23, $01, $11, $8a, $0a, $00, $94, $07, $01, $7a, $21, $89, $0a, $00, $94, $11, $03, $14, $71, $8a, $0a, $00, $93
 
-Data_c6714: ; c6714 (31:6714)
-	dw $6750
-	dw $6758
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $6760
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $6768
-	dw $6770
-	dw $6778
-	dw NULL
-	dw $6780
-	dw $6788
-	dw NULL
-	dw NULL
-	dw $6790
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $6798
-	dw NULL
-	dw NULL
-	dw $67a0
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	db $12, $02, $14, $81, $71, $0b, $00, $34, $21, $23, $14, $08, $61, $0b, $00, $34, $17, $02, $7a, $01, $90, $0b, $00, $34, $24, $23, $46, $08, $0e, $0b, $00, $34, $11, $02, $14, $81, $71, $0b, $00, $34, $10, $13, $01, $41, $2b, $0b, $00, $34, $14, $02, $47, $01, $8f, $0b, $00, $34, $13, $02, $14, $81, $71, $0b, $00, $34, $05, $02, $47, $01, $8f, $0b, $00, $34, $01, $02, $14, $81, $71, $0b, $00, $34, $09, $02, $7a, $01, $90, $0b, $00, $34
+.room_00
+	room_data  1,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_033, ANIMATED_TILES_GROUP_14,  0, ROOM_041
+.room_07
+	room_data  5,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_033, ANIMATED_TILES_GROUP_14,  0, ROOM_041
+.room_10
+	room_data  3,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_033, ANIMATED_TILES_GROUP_14,  0, ROOM_041
+.room_12
+	room_data  0,  2, $3, $2, $2, $0, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_03,  0, ROOM_046
+.room_13
+	room_data  2,  2, $3, $2, $6, $2, CAM_FREE, ENEMY_GROUP_034, ANIMATED_TILES_GROUP_03,  0, ROOM_046
+.room_14
+	room_data  8,  2, $3, $2, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_107, ANIMATED_TILES_GROUP_03,  0, ROOM_046
+.room_15
+	room_data  7,  0, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_078, ANIMATED_TILES_GROUP_03,  0, ROOM_046
+.room_16
+	room_data  4,  2, $3, $2, $6, $2, CAM_FREE, ENEMY_GROUP_034, ANIMATED_TILES_GROUP_03,  0, ROOM_046
+.room_20
+	room_data  2,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_033, ANIMATED_TILES_GROUP_14,  0, ROOM_041
+.room_21
+	room_data  7,  2, $3, $2, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_107, ANIMATED_TILES_GROUP_03,  0, ROOM_046
+.room_22
+	room_data  4,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_033, ANIMATED_TILES_GROUP_14,  0, ROOM_041
+.room_23
+	room_data  6,  2, $3, $2, $7, $6, CAM_XSCROLL2 | CAM_TRANSITIONS, ENEMY_GROUP_102, ANIMATED_TILES_GROUP_03,  0, ROOM_076
+.room_24
+	room_data  6,  1, $2, $0, $7, $6, CAM_TRANSITIONS, ENEMY_GROUP_035, ANIMATED_TILES_GROUP_03,  0, ROOM_046
+.room_26
+	room_data  3,  2, $3, $2, $6, $2, CAM_FREE, ENEMY_GROUP_034, ANIMATED_TILES_GROUP_03,  0, ROOM_046
+.room_27
+	room_data  1,  2, $3, $2, $2, $0, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_03,  0, ROOM_046
 
-Data_c67a8: ; c67a8 (31:67a8)
-	dw $67e4
-	dw $67ec
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $67f4
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $67fc
-	dw $6804
-	dw $680c
-	dw NULL
-	dw $6814
-	dw $681c
-	dw NULL
-	dw NULL
-	dw $6824
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $682c
-	dw NULL
-	dw NULL
-	dw $6834
+LevelRooms_c53c4: ; c53c4 (31:53c4)
+	dw .room_00
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
-	db $12, $02, $14, $81, $71, $0b, $00, $8b, $21, $23, $14, $08, $61, $0b, $00, $8b, $17, $02, $7a, $01, $90, $0b, $00, $8b, $24, $23, $46, $08, $0e, $0b, $00, $8b, $11, $02, $14, $81, $71, $0b, $00, $8b, $10, $13, $01, $41, $2b, $0b, $00, $8b, $14, $02, $47, $01, $8f, $0b, $00, $8b, $13, $02, $14, $81, $71, $0b, $00, $8b, $05, $02, $47, $01, $8f, $0b, $00, $8b, $01, $02, $14, $81, $71, $0b, $00, $8b, $09, $02, $7a, $01, $90, $0b, $00, $8b
+	dw NULL
+	dw .room_07
+	dw NULL
+	dw NULL
+	dw .room_10
+	dw NULL
+	dw .room_12
+	dw .room_13
+	dw .room_14
+	dw .room_15
+	dw .room_16
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw .room_22
+	dw .room_23
+	dw .room_24
+	dw NULL
+	dw .room_26
+	dw .room_27
+	dw NULL
+	dw NULL
 
-Data_c683c: ; c683c (31:683c)
-	dw $6878
-	dw $6880
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $6888
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $6890
-	dw $6898
-	dw $68a0
-	dw NULL
-	dw $68a8
-	dw $68b0
-	dw NULL
-	dw NULL
-	dw $68b8
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $68c0
-	dw NULL
-	dw NULL
-	dw $68c8
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	db $12, $02, $14, $81, $71, $0b, $00, $8b, $21, $23, $14, $08, $2b, $0b, $00, $8b, $17, $02, $7a, $01, $90, $0b, $00, $8b, $24, $23, $46, $08, $0e, $0b, $00, $8b, $11, $02, $14, $81, $71, $0b, $00, $8b, $10, $13, $01, $41, $2b, $0b, $00, $8b, $14, $02, $47, $01, $8f, $0b, $00, $8b, $13, $02, $14, $81, $71, $0b, $00, $8b, $05, $02, $47, $01, $8f, $0b, $00, $8b, $01, $02, $14, $81, $71, $0b, $00, $8b, $09, $02, $7a, $01, $90, $0b, $00, $8b
+.room_00
+	room_data  1,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_033, ANIMATED_TILES_GROUP_14,  0, ROOM_041
+.room_07
+	room_data  5,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_033, ANIMATED_TILES_GROUP_14,  0, ROOM_041
+.room_10
+	room_data  3,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_033, ANIMATED_TILES_GROUP_14,  0, ROOM_041
+.room_12
+	room_data  0,  2, $3, $2, $2, $0, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_03,  0, ROOM_117
+.room_13
+	room_data  2,  2, $3, $2, $6, $2, CAM_FREE, ENEMY_GROUP_034, ANIMATED_TILES_GROUP_03,  0, ROOM_117
+.room_14
+	room_data  8,  2, $3, $2, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_107, ANIMATED_TILES_GROUP_03,  0, ROOM_117
+.room_15
+	room_data  7,  0, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_078, ANIMATED_TILES_GROUP_03,  0, ROOM_117
+.room_16
+	room_data  4,  2, $3, $2, $6, $2, CAM_FREE, ENEMY_GROUP_034, ANIMATED_TILES_GROUP_03,  0, ROOM_117
+.room_20
+	room_data  2,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_033, ANIMATED_TILES_GROUP_14,  0, ROOM_041
+.room_21
+	room_data  7,  2, $3, $2, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_107, ANIMATED_TILES_GROUP_03,  0, ROOM_117
+.room_22
+	room_data  4,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_033, ANIMATED_TILES_GROUP_14,  0, ROOM_041
+.room_23
+	room_data  6,  2, $3, $2, $7, $6, CAM_XSCROLL2 | CAM_TRANSITIONS, ENEMY_GROUP_102, ANIMATED_TILES_GROUP_03,  0, ROOM_076
+.room_24
+	room_data  6,  1, $2, $0, $7, $6, CAM_TRANSITIONS, ENEMY_GROUP_035, ANIMATED_TILES_GROUP_03,  0, ROOM_117
+.room_26
+	room_data  3,  2, $3, $2, $6, $2, CAM_FREE, ENEMY_GROUP_034, ANIMATED_TILES_GROUP_03,  0, ROOM_117
+.room_27
+	room_data  1,  2, $3, $2, $2, $0, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_03,  0, ROOM_117
 
-Data_c68d0: ; c68d0 (31:68d0)
-	dw $690c
-	dw $6914
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $691c
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $6924
-	dw $692c
-	dw $6934
-	dw NULL
-	dw $693c
-	dw $6944
-	dw NULL
-	dw NULL
-	dw $694c
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $6954
-	dw NULL
-	dw NULL
-	dw $695c
+LevelRooms_c5478: ; c5478 (31:5478)
+	dw .room_00
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
-	db $12, $02, $14, $81, $71, $0b, $00, $8c, $21, $23, $14, $08, $61, $0b, $00, $8c, $17, $02, $7a, $01, $90, $0b, $00, $8c, $24, $23, $46, $08, $0e, $0b, $00, $8c, $11, $02, $14, $81, $71, $0b, $00, $8c, $10, $13, $01, $41, $2b, $0b, $00, $8c, $14, $02, $47, $01, $8f, $0b, $00, $8c, $13, $02, $14, $81, $71, $0b, $00, $8c, $05, $02, $47, $01, $8f, $0b, $00, $8c, $01, $02, $14, $81, $71, $0b, $00, $8c, $09, $02, $7a, $01, $90, $0b, $00, $8c
+	dw NULL
+	dw .room_07
+	dw NULL
+	dw NULL
+	dw .room_10
+	dw NULL
+	dw .room_12
+	dw .room_13
+	dw .room_14
+	dw .room_15
+	dw .room_16
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw .room_22
+	dw .room_23
+	dw .room_24
+	dw NULL
+	dw .room_26
+	dw .room_27
+	dw NULL
+	dw NULL
 
-Data_c6964: ; c6964 (31:6964)
-	dw $69a0
-	dw $69a8
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $69b0
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $69b8
-	dw $69c0
-	dw $69c8
-	dw NULL
-	dw $69d0
-	dw $69d8
-	dw NULL
-	dw NULL
-	dw $69e0
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $69e8
-	dw NULL
-	dw NULL
-	dw $69f0
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	db $12, $02, $14, $81, $71, $0b, $00, $8d, $21, $23, $14, $08, $61, $0b, $00, $8d, $17, $02, $7a, $01, $90, $0b, $00, $8d, $24, $23, $46, $08, $0e, $0b, $00, $8d, $11, $02, $14, $81, $71, $0b, $00, $8d, $10, $13, $01, $41, $2b, $0b, $00, $8d, $14, $02, $47, $01, $8f, $0b, $00, $8d, $13, $02, $14, $81, $71, $0b, $00, $8d, $05, $02, $47, $01, $8f, $0b, $00, $8d, $01, $02, $14, $81, $71, $0b, $00, $8d, $09, $02, $7a, $01, $90, $0b, $00, $8d
+.room_00
+	room_data  1,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_033, ANIMATED_TILES_GROUP_14,  0, ROOM_116
+.room_07
+	room_data  5,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_033, ANIMATED_TILES_GROUP_14,  0, ROOM_116
+.room_10
+	room_data  3,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_033, ANIMATED_TILES_GROUP_14,  0, ROOM_116
+.room_12
+	room_data  0,  2, $3, $2, $2, $0, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_03,  0, ROOM_046
+.room_13
+	room_data  2,  2, $3, $2, $6, $2, CAM_FREE, ENEMY_GROUP_034, ANIMATED_TILES_GROUP_03,  0, ROOM_046
+.room_14
+	room_data  8,  2, $3, $2, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_107, ANIMATED_TILES_GROUP_03,  0, ROOM_046
+.room_15
+	room_data  7,  0, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_078, ANIMATED_TILES_GROUP_03,  0, ROOM_046
+.room_16
+	room_data  4,  2, $3, $2, $6, $2, CAM_FREE, ENEMY_GROUP_034, ANIMATED_TILES_GROUP_03,  0, ROOM_046
+.room_20
+	room_data  2,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_033, ANIMATED_TILES_GROUP_14,  0, ROOM_116
+.room_21
+	room_data  7,  2, $3, $2, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_107, ANIMATED_TILES_GROUP_03,  0, ROOM_046
+.room_22
+	room_data  4,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_033, ANIMATED_TILES_GROUP_14,  0, ROOM_116
+.room_23
+	room_data  6,  2, $3, $2, $7, $6, CAM_XSCROLL2 | CAM_TRANSITIONS, ENEMY_GROUP_102, ANIMATED_TILES_GROUP_03,  0, ROOM_076
+.room_24
+	room_data  6,  1, $2, $0, $7, $6, CAM_TRANSITIONS, ENEMY_GROUP_035, ANIMATED_TILES_GROUP_03,  0, ROOM_046
+.room_26
+	room_data  3,  2, $3, $2, $6, $2, CAM_FREE, ENEMY_GROUP_034, ANIMATED_TILES_GROUP_03,  0, ROOM_046
+.room_27
+	room_data  1,  2, $3, $2, $2, $0, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_03,  0, ROOM_046
 
-Data_c69f8: ; c69f8 (31:69f8)
-	dw $6a34
-	dw $6a3c
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $6a44
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $6a4c
-	dw $6a54
-	dw $6a5c
-	dw NULL
-	dw $6a64
-	dw $6a6c
-	dw NULL
-	dw NULL
-	dw $6a74
-	dw NULL
-	dw NULL
-	dw NULL
-	dw $6a7c
-	dw NULL
-	dw NULL
-	dw $6a84
+LevelRooms_c552c: ; c552c (31:552c)
+	dw .room_00
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
 	dw NULL
-	db $12, $02, $14, $81, $71, $0b, $00, $8d, $21, $23, $14, $08, $2b, $0b, $00, $8d, $17, $02, $7a, $01, $90, $0b, $00, $8d, $24, $23, $46, $08, $0e, $0b, $00, $8d, $11, $02, $14, $81, $71, $0b, $00, $8d, $10, $13, $01, $41, $2b, $0b, $00, $8d, $14, $02, $47, $01, $8f, $0b, $00, $8d, $13, $02, $14, $81, $71, $0b, $00, $8d, $05, $02, $47, $01, $8f, $0b, $00, $8d, $01, $02, $14, $81, $71, $0b, $00, $8d, $09, $02, $7a, $01, $90, $0b, $00, $8d
+	dw NULL
+	dw .room_07
+	dw NULL
+	dw NULL
+	dw .room_10
+	dw NULL
+	dw .room_12
+	dw .room_13
+	dw .room_14
+	dw .room_15
+	dw .room_16
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw .room_22
+	dw .room_23
+	dw .room_24
+	dw NULL
+	dw .room_26
+	dw .room_27
+	dw NULL
+	dw NULL
 
-Data_c6a8c: ; c6a8c (31:6a8c)
-	dw $6ac8
+.room_00
+	room_data  1,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_033, ANIMATED_TILES_GROUP_14,  0, ROOM_116
+.room_07
+	room_data  5,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_033, ANIMATED_TILES_GROUP_14,  0, ROOM_116
+.room_10
+	room_data  3,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_033, ANIMATED_TILES_GROUP_14,  0, ROOM_116
+.room_12
+	room_data  0,  2, $3, $2, $2, $0, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_03,  0, ROOM_117
+.room_13
+	room_data  2,  2, $3, $2, $6, $2, CAM_FREE, ENEMY_GROUP_034, ANIMATED_TILES_GROUP_03,  0, ROOM_117
+.room_14
+	room_data  8,  2, $3, $2, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_107, ANIMATED_TILES_GROUP_03,  0, ROOM_117
+.room_15
+	room_data  7,  0, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_078, ANIMATED_TILES_GROUP_03,  0, ROOM_117
+.room_16
+	room_data  4,  2, $3, $2, $6, $2, CAM_FREE, ENEMY_GROUP_034, ANIMATED_TILES_GROUP_03,  0, ROOM_117
+.room_20
+	room_data  2,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_033, ANIMATED_TILES_GROUP_14,  0, ROOM_116
+.room_21
+	room_data  7,  2, $3, $2, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_107, ANIMATED_TILES_GROUP_03,  0, ROOM_117
+.room_22
+	room_data  4,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_033, ANIMATED_TILES_GROUP_14,  0, ROOM_116
+.room_23
+	room_data  6,  2, $3, $2, $7, $6, CAM_XSCROLL2 | CAM_TRANSITIONS, ENEMY_GROUP_102, ANIMATED_TILES_GROUP_03,  0, ROOM_076
+.room_24
+	room_data  6,  1, $2, $0, $7, $6, CAM_TRANSITIONS, ENEMY_GROUP_035, ANIMATED_TILES_GROUP_03,  0, ROOM_117
+.room_26
+	room_data  3,  2, $3, $2, $6, $2, CAM_FREE, ENEMY_GROUP_034, ANIMATED_TILES_GROUP_03,  0, ROOM_117
+.room_27
+	room_data  1,  2, $3, $2, $2, $0, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_03,  0, ROOM_117
+
+LevelRooms_c55e0: ; c55e0 (31:55e0)
+	dw .room_00
+	dw .room_01
+	dw NULL
+	dw .room_03
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_07
+	dw .room_08
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_13
+	dw NULL
+	dw .room_15
+	dw .room_16
+	dw .room_17
+	dw .room_18
+	dw .room_19
+	dw .room_20
+	dw .room_21
+	dw .room_22
+	dw .room_23
+	dw .room_24
+	dw .room_25
+	dw .room_26
+	dw NULL
+	dw NULL
+	dw NULL
+
+.room_00
+	room_data  1,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_043
+.room_01
+	room_data  8,  1, $2, $1, $a, $8, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_120, ANIMATED_TILES_GROUP_09,  0, ROOM_072
+.room_03
+	room_data  0,  2, $3, $2, $1, $0, CAM_FREE, ENEMY_GROUP_118, ANIMATED_TILES_GROUP_09,  0, ROOM_043
+.room_07
+	room_data  4,  2, $3, $2, $6, $3, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_068, ANIMATED_TILES_GROUP_09,  0, ROOM_043
+.room_08
+	room_data  9,  1, $2, $1, $a, $8, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_120, ANIMATED_TILES_GROUP_09,  0, ROOM_072
+.room_13
+	room_data  6,  1, $2, $0, $8, $6, CAM_FREE, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_09,  0, ROOM_043
+.room_15
+	room_data  6,  2, $3, $2, $a, $6, CAM_FREE, ENEMY_GROUP_097, ANIMATED_TILES_GROUP_09,  0, ROOM_072
+.room_16
+	room_data  3,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_043
+.room_17
+	room_data  1,  2, $3, $2, $3, $1, CAM_FREE, ENEMY_GROUP_070, ANIMATED_TILES_GROUP_09,  0, ROOM_043
+.room_18
+	room_data  1,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_043
+.room_19
+	room_data  8,  0, $1, $0, $a, $8, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_120, ANIMATED_TILES_GROUP_09,  0, ROOM_072
+.room_20
+	room_data  3,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_043
+.room_21
+	room_data  7,  1, $2, $0, $8, $6, CAM_FREE, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_09,  0, ROOM_043
+.room_22
+	room_data  5,  2, $3, $2, $6, $3, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_068, ANIMATED_TILES_GROUP_09,  0, ROOM_043
+.room_23
+	room_data  6,  0, $2, $0, $8, $6, CAM_FREE, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_09,  0, ROOM_043
+.room_24
+	room_data  7,  0, $2, $0, $8, $6, CAM_FREE, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_09,  0, ROOM_043
+.room_25
+	room_data  2,  2, $3, $2, $3, $1, CAM_FREE, ENEMY_GROUP_070, ANIMATED_TILES_GROUP_09,  0, ROOM_043
+.room_26
+	room_data  5,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_043
+
+LevelRooms_c56ac: ; c56ac (31:56ac)
+	dw .room_00
+	dw .room_01
+	dw NULL
+	dw .room_03
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_07
+	dw .room_08
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_13
+	dw NULL
+	dw .room_15
+	dw .room_16
+	dw .room_17
+	dw .room_18
+	dw .room_19
+	dw .room_20
+	dw .room_21
+	dw .room_22
+	dw .room_23
+	dw .room_24
+	dw .room_25
+	dw .room_26
+	dw NULL
+	dw NULL
+	dw NULL
+
+.room_00
+	room_data  1,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_110
+.room_01
+	room_data  8,  1, $2, $1, $a, $8, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_120, ANIMATED_TILES_GROUP_09,  0, ROOM_072
+.room_03
+	room_data  0,  2, $3, $2, $1, $0, CAM_FREE, ENEMY_GROUP_118, ANIMATED_TILES_GROUP_09,  0, ROOM_110
+.room_07
+	room_data  4,  2, $3, $2, $6, $3, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_068, ANIMATED_TILES_GROUP_09,  0, ROOM_110
+.room_08
+	room_data  9,  1, $2, $1, $a, $8, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_120, ANIMATED_TILES_GROUP_09,  0, ROOM_072
+.room_13
+	room_data  6,  1, $2, $0, $8, $6, CAM_FREE, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_09,  0, ROOM_110
+.room_15
+	room_data  6,  2, $3, $2, $a, $6, CAM_FREE, ENEMY_GROUP_097, ANIMATED_TILES_GROUP_09,  0, ROOM_072
+.room_16
+	room_data  3,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_110
+.room_17
+	room_data  1,  2, $3, $2, $3, $1, CAM_FREE, ENEMY_GROUP_070, ANIMATED_TILES_GROUP_09,  0, ROOM_110
+.room_18
+	room_data  1,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_110
+.room_19
+	room_data  8,  0, $1, $0, $a, $8, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_120, ANIMATED_TILES_GROUP_09,  0, ROOM_072
+.room_20
+	room_data  3,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_110
+.room_21
+	room_data  7,  1, $2, $0, $8, $6, CAM_FREE, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_09,  0, ROOM_110
+.room_22
+	room_data  5,  2, $3, $2, $6, $3, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_068, ANIMATED_TILES_GROUP_09,  0, ROOM_110
+.room_23
+	room_data  6,  0, $2, $0, $8, $6, CAM_FREE, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_09,  0, ROOM_110
+.room_24
+	room_data  7,  0, $2, $0, $8, $6, CAM_FREE, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_09,  0, ROOM_110
+.room_25
+	room_data  2,  2, $3, $2, $3, $1, CAM_FREE, ENEMY_GROUP_070, ANIMATED_TILES_GROUP_09,  0, ROOM_110
+.room_26
+	room_data  5,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_110
+
+LevelRooms_c5778: ; c5778 (31:5778)
+	dw .room_00
+	dw .room_01
+	dw NULL
+	dw .room_03
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_07
+	dw .room_08
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_13
+	dw NULL
+	dw .room_15
+	dw .room_16
+	dw .room_17
+	dw .room_18
+	dw .room_19
+	dw .room_20
+	dw .room_21
+	dw .room_22
+	dw .room_23
+	dw .room_24
+	dw .room_25
+	dw .room_26
+	dw NULL
+	dw NULL
+	dw NULL
+
+.room_00
+	room_data  1,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_111
+.room_01
+	room_data  8,  1, $2, $1, $a, $8, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_120, ANIMATED_TILES_GROUP_09,  0, ROOM_072
+.room_03
+	room_data  0,  2, $3, $2, $1, $0, CAM_FREE, ENEMY_GROUP_118, ANIMATED_TILES_GROUP_09,  0, ROOM_111
+.room_07
+	room_data  4,  2, $3, $2, $6, $3, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_068, ANIMATED_TILES_GROUP_09,  0, ROOM_111
+.room_08
+	room_data  9,  1, $2, $1, $a, $8, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_120, ANIMATED_TILES_GROUP_09,  0, ROOM_072
+.room_13
+	room_data  6,  1, $2, $0, $8, $6, CAM_FREE, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_09,  0, ROOM_111
+.room_15
+	room_data  6,  2, $3, $2, $a, $6, CAM_FREE, ENEMY_GROUP_097, ANIMATED_TILES_GROUP_09,  0, ROOM_072
+.room_16
+	room_data  3,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_111
+.room_17
+	room_data  1,  2, $3, $2, $3, $1, CAM_FREE, ENEMY_GROUP_070, ANIMATED_TILES_GROUP_09,  0, ROOM_111
+.room_18
+	room_data  1,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_111
+.room_19
+	room_data  8,  0, $1, $0, $a, $8, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_120, ANIMATED_TILES_GROUP_09,  0, ROOM_072
+.room_20
+	room_data  3,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_111
+.room_21
+	room_data  7,  1, $2, $0, $8, $6, CAM_FREE, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_09,  0, ROOM_111
+.room_22
+	room_data  5,  2, $3, $2, $6, $3, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_068, ANIMATED_TILES_GROUP_09,  0, ROOM_111
+.room_23
+	room_data  6,  0, $2, $0, $8, $6, CAM_FREE, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_09,  0, ROOM_111
+.room_24
+	room_data  7,  0, $2, $0, $8, $6, CAM_FREE, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_09,  0, ROOM_111
+.room_25
+	room_data  2,  2, $3, $2, $3, $1, CAM_FREE, ENEMY_GROUP_070, ANIMATED_TILES_GROUP_09,  0, ROOM_111
+.room_26
+	room_data  5,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_111
+
+LevelRooms_c5844: ; c5844 (31:5844)
+	dw .room_00
+	dw .room_01
+	dw NULL
+	dw .room_03
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_07
+	dw .room_08
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_13
+	dw NULL
+	dw .room_15
+	dw .room_16
+	dw .room_17
+	dw .room_18
+	dw .room_19
+	dw .room_20
+	dw .room_21
+	dw .room_22
+	dw .room_23
+	dw .room_24
+	dw .room_25
+	dw .room_26
+	dw NULL
+	dw NULL
+	dw NULL
+
+.room_00
+	room_data  1,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_112
+.room_01
+	room_data  8,  1, $2, $1, $a, $8, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_120, ANIMATED_TILES_GROUP_09,  0, ROOM_072
+.room_03
+	room_data  0,  2, $3, $2, $1, $0, CAM_FREE, ENEMY_GROUP_118, ANIMATED_TILES_GROUP_09,  0, ROOM_112
+.room_07
+	room_data  4,  2, $3, $2, $6, $3, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_068, ANIMATED_TILES_GROUP_09,  0, ROOM_112
+.room_08
+	room_data  9,  1, $2, $1, $a, $8, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_120, ANIMATED_TILES_GROUP_09,  0, ROOM_072
+.room_13
+	room_data  6,  1, $2, $0, $8, $6, CAM_FREE, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_09,  0, ROOM_112
+.room_15
+	room_data  6,  2, $3, $2, $a, $6, CAM_FREE, ENEMY_GROUP_097, ANIMATED_TILES_GROUP_09,  0, ROOM_072
+.room_16
+	room_data  3,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_112
+.room_17
+	room_data  1,  2, $3, $2, $3, $1, CAM_FREE, ENEMY_GROUP_070, ANIMATED_TILES_GROUP_09,  0, ROOM_112
+.room_18
+	room_data  1,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_112
+.room_19
+	room_data  8,  0, $1, $0, $a, $8, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_120, ANIMATED_TILES_GROUP_09,  0, ROOM_072
+.room_20
+	room_data  3,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_112
+.room_21
+	room_data  7,  1, $2, $0, $8, $6, CAM_FREE, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_09,  0, ROOM_112
+.room_22
+	room_data  5,  2, $3, $2, $6, $3, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_068, ANIMATED_TILES_GROUP_09,  0, ROOM_112
+.room_23
+	room_data  6,  0, $2, $0, $8, $6, CAM_FREE, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_09,  0, ROOM_112
+.room_24
+	room_data  7,  0, $2, $0, $8, $6, CAM_FREE, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_09,  0, ROOM_112
+.room_25
+	room_data  2,  2, $3, $2, $3, $1, CAM_FREE, ENEMY_GROUP_070, ANIMATED_TILES_GROUP_09,  0, ROOM_112
+.room_26
+	room_data  5,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_112
+
+LevelRooms_c5910: ; c5910 (31:5910)
+	dw .room_00
+	dw .room_01
+	dw .room_02
+	dw .room_03
+	dw NULL
+	dw .room_05
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_09
+	dw .room_10
+	dw NULL
+	dw .room_12
+	dw .room_13
+	dw .room_14
+	dw NULL
+	dw .room_16
+	dw .room_17
+	dw .room_18
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw .room_22
+	dw .room_23
+	dw .room_24
+	dw .room_25
+	dw .room_26
+	dw NULL
+	dw .room_28
+	dw NULL
+
+.room_00
+	room_data  1,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_044
+.room_01
+	room_data  0,  2, $3, $2, $1, $0, CAM_FREE, ENEMY_GROUP_013, ANIMATED_TILES_GROUP_11,  0, ROOM_056
+.room_02
+	room_data  1,  2, $3, $2, $3, $1, CAM_TRANSITIONS, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_044
+.room_03
+	room_data  4,  2, $3, $2, $5, $3, CAM_TRANSITIONS, ENEMY_GROUP_051, ANIMATED_TILES_GROUP_11,  0, ROOM_044
+.room_05
+	room_data  9,  0, $1, $0, $a, $9, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_056
+.room_09
+	room_data  5,  0, $2, $0, $7, $4, CAM_FREE | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_044
+.room_10
+	room_data  2,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_044
+.room_12
+	room_data  0,  1, $2, $1, $1, $0, CAM_FREE, ENEMY_GROUP_140, ANIMATED_TILES_GROUP_11,  0, ROOM_056
+.room_13
+	room_data  6,  2, $3, $2, $9, $6, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_050, ANIMATED_TILES_GROUP_11,  0, ROOM_057
+.room_14
+	room_data  8,  2, $3, $2, $9, $6, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_050, ANIMATED_TILES_GROUP_11,  0, ROOM_057
+.room_16
+	room_data  5,  2, $3, $2, $6, $5, CAM_FREE, ENEMY_GROUP_141, ANIMATED_TILES_GROUP_11,  0, ROOM_056
+.room_17
+	room_data  2,  2, $3, $2, $3, $1, CAM_TRANSITIONS, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_044
+.room_18
+	room_data  3,  2, $3, $2, $5, $3, CAM_TRANSITIONS, ENEMY_GROUP_051, ANIMATED_TILES_GROUP_11,  0, ROOM_044
+.room_20
+	room_data  1,  0, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_044
+.room_21
+	room_data  2,  0, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_044
+.room_22
+	room_data  7,  1, $2, $0, $9, $7, CAM_FREE, ENEMY_GROUP_051, ANIMATED_TILES_GROUP_18,  0, ROOM_044
+.room_23
+	room_data  8,  1, $2, $0, $9, $7, CAM_FREE, ENEMY_GROUP_051, ANIMATED_TILES_GROUP_18,  0, ROOM_044
+.room_24
+	room_data  3,  0, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_044
+.room_25
+	room_data  6,  1, $2, $0, $7, $4, CAM_FREE | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_044
+.room_26
+	room_data  3,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_044
+.room_28
+	room_data  4,  1, $2, $0, $7, $4, CAM_FREE | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_044
+
+LevelRooms_c59f4: ; c59f4 (31:59f4)
+	dw .room_00
+	dw .room_01
+	dw .room_02
+	dw .room_03
+	dw NULL
+	dw .room_05
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_09
+	dw .room_10
+	dw NULL
+	dw .room_12
+	dw .room_13
+	dw .room_14
+	dw NULL
+	dw .room_16
+	dw .room_17
+	dw .room_18
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw .room_22
+	dw .room_23
+	dw .room_24
+	dw .room_25
+	dw .room_26
+	dw NULL
+	dw .room_28
+	dw NULL
+
+.room_00
+	room_data  1,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_131
+.room_01
+	room_data  0,  2, $3, $2, $1, $0, CAM_FREE, ENEMY_GROUP_013, ANIMATED_TILES_GROUP_11,  0, ROOM_056
+.room_02
+	room_data  1,  2, $3, $2, $3, $1, CAM_TRANSITIONS, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_131
+.room_03
+	room_data  4,  2, $3, $2, $5, $3, CAM_TRANSITIONS, ENEMY_GROUP_051, ANIMATED_TILES_GROUP_11,  0, ROOM_131
+.room_05
+	room_data  9,  0, $1, $0, $a, $9, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_056
+.room_09
+	room_data  5,  0, $2, $0, $7, $4, CAM_FREE | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_131
+.room_10
+	room_data  2,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_131
+.room_12
+	room_data  0,  1, $2, $1, $1, $0, CAM_FREE, ENEMY_GROUP_140, ANIMATED_TILES_GROUP_11,  0, ROOM_056
+.room_13
+	room_data  6,  2, $3, $2, $9, $6, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_050, ANIMATED_TILES_GROUP_11,  0, ROOM_057
+.room_14
+	room_data  8,  2, $3, $2, $9, $6, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_050, ANIMATED_TILES_GROUP_11,  0, ROOM_057
+.room_16
+	room_data  5,  2, $3, $2, $6, $5, CAM_FREE, ENEMY_GROUP_141, ANIMATED_TILES_GROUP_11,  0, ROOM_056
+.room_17
+	room_data  2,  2, $3, $2, $3, $1, CAM_TRANSITIONS, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_131
+.room_18
+	room_data  3,  2, $3, $2, $5, $3, CAM_TRANSITIONS, ENEMY_GROUP_051, ANIMATED_TILES_GROUP_11,  0, ROOM_131
+.room_20
+	room_data  1,  0, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_131
+.room_21
+	room_data  2,  0, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_131
+.room_22
+	room_data  7,  1, $2, $0, $9, $7, CAM_FREE, ENEMY_GROUP_051, ANIMATED_TILES_GROUP_18,  0, ROOM_131
+.room_23
+	room_data  8,  1, $2, $0, $9, $7, CAM_FREE, ENEMY_GROUP_051, ANIMATED_TILES_GROUP_18,  0, ROOM_131
+.room_24
+	room_data  3,  0, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_131
+.room_25
+	room_data  6,  1, $2, $0, $7, $4, CAM_FREE | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_131
+.room_26
+	room_data  3,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_131
+.room_28
+	room_data  4,  1, $2, $0, $7, $4, CAM_FREE | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_131
+
+LevelRooms_c5ad8: ; c5ad8 (31:5ad8)
+	dw .room_00
+	dw .room_01
+	dw .room_02
+	dw .room_03
+	dw NULL
+	dw .room_05
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_09
+	dw .room_10
+	dw NULL
+	dw .room_12
+	dw .room_13
+	dw .room_14
+	dw NULL
+	dw .room_16
+	dw .room_17
+	dw .room_18
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw .room_22
+	dw .room_23
+	dw .room_24
+	dw .room_25
+	dw .room_26
+	dw NULL
+	dw .room_28
+	dw NULL
+
+.room_00
+	room_data  1,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_132
+.room_01
+	room_data  0,  2, $3, $2, $1, $0, CAM_FREE, ENEMY_GROUP_013, ANIMATED_TILES_GROUP_11,  0, ROOM_056
+.room_02
+	room_data  1,  2, $3, $2, $3, $1, CAM_TRANSITIONS, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_132
+.room_03
+	room_data  4,  2, $3, $2, $5, $3, CAM_TRANSITIONS, ENEMY_GROUP_051, ANIMATED_TILES_GROUP_11,  0, ROOM_132
+.room_05
+	room_data  9,  0, $1, $0, $a, $9, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_056
+.room_09
+	room_data  5,  0, $2, $0, $7, $4, CAM_FREE | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_132
+.room_10
+	room_data  2,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_132
+.room_12
+	room_data  0,  1, $2, $1, $1, $0, CAM_FREE, ENEMY_GROUP_140, ANIMATED_TILES_GROUP_11,  0, ROOM_056
+.room_13
+	room_data  6,  2, $3, $2, $9, $6, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_050, ANIMATED_TILES_GROUP_11,  0, ROOM_134
+.room_14
+	room_data  8,  2, $3, $2, $9, $6, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_050, ANIMATED_TILES_GROUP_11,  0, ROOM_134
+.room_16
+	room_data  5,  2, $3, $2, $6, $5, CAM_FREE, ENEMY_GROUP_141, ANIMATED_TILES_GROUP_11,  0, ROOM_056
+.room_17
+	room_data  2,  2, $3, $2, $3, $1, CAM_TRANSITIONS, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_132
+.room_18
+	room_data  3,  2, $3, $2, $5, $3, CAM_TRANSITIONS, ENEMY_GROUP_051, ANIMATED_TILES_GROUP_11,  0, ROOM_132
+.room_20
+	room_data  1,  0, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_132
+.room_21
+	room_data  2,  0, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_132
+.room_22
+	room_data  7,  1, $2, $0, $9, $7, CAM_FREE, ENEMY_GROUP_051, ANIMATED_TILES_GROUP_18,  0, ROOM_132
+.room_23
+	room_data  8,  1, $2, $0, $9, $7, CAM_FREE, ENEMY_GROUP_051, ANIMATED_TILES_GROUP_18,  0, ROOM_132
+.room_24
+	room_data  3,  0, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_132
+.room_25
+	room_data  6,  1, $2, $0, $7, $4, CAM_FREE | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_132
+.room_26
+	room_data  3,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_132
+.room_28
+	room_data  4,  1, $2, $0, $7, $4, CAM_FREE | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_132
+
+LevelRooms_c5bbc: ; c5bbc (31:5bbc)
+	dw .room_00
+	dw .room_01
+	dw .room_02
+	dw .room_03
+	dw NULL
+	dw .room_05
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_09
+	dw .room_10
+	dw NULL
+	dw .room_12
+	dw .room_13
+	dw .room_14
+	dw NULL
+	dw .room_16
+	dw .room_17
+	dw .room_18
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw .room_22
+	dw .room_23
+	dw .room_24
+	dw .room_25
+	dw .room_26
+	dw NULL
+	dw .room_28
+	dw NULL
+
+.room_00
+	room_data  1,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_133
+.room_01
+	room_data  0,  2, $3, $2, $1, $0, CAM_FREE, ENEMY_GROUP_013, ANIMATED_TILES_GROUP_11,  0, ROOM_056
+.room_02
+	room_data  1,  2, $3, $2, $3, $1, CAM_TRANSITIONS, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_133
+.room_03
+	room_data  4,  2, $3, $2, $5, $3, CAM_TRANSITIONS, ENEMY_GROUP_051, ANIMATED_TILES_GROUP_11,  0, ROOM_133
+.room_05
+	room_data  9,  0, $1, $0, $a, $9, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_056
+.room_09
+	room_data  5,  0, $2, $0, $7, $4, CAM_FREE | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_133
+.room_10
+	room_data  2,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_133
+.room_12
+	room_data  0,  1, $2, $1, $1, $0, CAM_FREE, ENEMY_GROUP_140, ANIMATED_TILES_GROUP_11,  0, ROOM_056
+.room_13
+	room_data  6,  2, $3, $2, $9, $6, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_050, ANIMATED_TILES_GROUP_11,  0, ROOM_134
+.room_14
+	room_data  8,  2, $3, $2, $9, $6, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_050, ANIMATED_TILES_GROUP_11,  0, ROOM_134
+.room_16
+	room_data  5,  2, $3, $2, $6, $5, CAM_FREE, ENEMY_GROUP_141, ANIMATED_TILES_GROUP_11,  0, ROOM_056
+.room_17
+	room_data  2,  2, $3, $2, $3, $1, CAM_TRANSITIONS, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_133
+.room_18
+	room_data  3,  2, $3, $2, $5, $3, CAM_TRANSITIONS, ENEMY_GROUP_051, ANIMATED_TILES_GROUP_11,  0, ROOM_133
+.room_20
+	room_data  1,  0, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_133
+.room_21
+	room_data  2,  0, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_133
+.room_22
+	room_data  7,  1, $2, $0, $9, $7, CAM_FREE, ENEMY_GROUP_051, ANIMATED_TILES_GROUP_18,  0, ROOM_133
+.room_23
+	room_data  8,  1, $2, $0, $9, $7, CAM_FREE, ENEMY_GROUP_051, ANIMATED_TILES_GROUP_18,  0, ROOM_133
+.room_24
+	room_data  3,  0, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_133
+.room_25
+	room_data  6,  1, $2, $0, $7, $4, CAM_FREE | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_133
+.room_26
+	room_data  3,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_116, ANIMATED_TILES_GROUP_11,  0, ROOM_133
+.room_28
+	room_data  4,  1, $2, $0, $7, $4, CAM_FREE | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_133
+
+LevelRooms_c5ca0: ; c5ca0 (31:5ca0)
+	dw .room_00
+	dw NULL
+	dw NULL
+	dw .room_03
+	dw .room_04
+	dw .room_05
+	dw .room_06
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_10
+	dw .room_11
+	dw NULL
+	dw .room_13
+	dw NULL
+	dw NULL
+	dw .room_16
+	dw .room_17
+	dw NULL
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw .room_22
+	dw .room_23
+	dw NULL
+	dw NULL
+	dw .room_26
+	dw .room_27
+	dw NULL
+	dw NULL
+
+.room_00
+	room_data  1,  0, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_045
+.room_03
+	room_data  7,  1, $2, $0, $a, $7, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_105, ANIMATED_TILES_GROUP_03,  0, ROOM_045
+.room_04
+	room_data  1,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_045
+.room_05
+	room_data  2,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_045
+.room_06
+	room_data  3,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_045
+.room_10
+	room_data  6,  1, $3, $0, $7, $4, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_032, ANIMATED_TILES_GROUP_03,  0, ROOM_045
+.room_11
+	room_data  1,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_045
+.room_13
+	room_data  7,  2, $3, $2, $a, $7, CAM_FREE, ENEMY_GROUP_079, ANIMATED_TILES_GROUP_03,  0, ROOM_045
+.room_16
+	room_data  0,  1, $2, $1, $1, $0, CAM_FREE, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_03,  0, ROOM_045
+.room_17
+	room_data  3,  0, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_045
+.room_20
+	room_data  6,  2, $3, $0, $7, $4, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_032, ANIMATED_TILES_GROUP_03,  0, ROOM_045
+.room_21
+	room_data  4,  0, $3, $0, $7, $4, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_032, ANIMATED_TILES_GROUP_03,  0, ROOM_045
+.room_22
+	room_data  5,  0, $3, $0, $7, $4, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_032, ANIMATED_TILES_GROUP_03,  0, ROOM_045
+.room_23
+	room_data  6,  0, $3, $0, $7, $4, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_032, ANIMATED_TILES_GROUP_03,  0, ROOM_045
+.room_26
+	room_data  0,  2, $3, $2, $1, $0, CAM_FREE, ENEMY_GROUP_041, ANIMATED_TILES_GROUP_03,  0, ROOM_045
+.room_27
+	room_data  3,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_045
+
+LevelRooms_c5d5c: ; c5d5c (31:5d5c)
+	dw .room_00
+	dw NULL
+	dw NULL
+	dw .room_03
+	dw .room_04
+	dw .room_05
+	dw .room_06
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_10
+	dw .room_11
+	dw NULL
+	dw .room_13
+	dw NULL
+	dw NULL
+	dw .room_16
+	dw .room_17
+	dw NULL
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw .room_22
+	dw .room_23
+	dw NULL
+	dw NULL
+	dw .room_26
+	dw .room_27
+	dw NULL
+	dw NULL
+
+.room_00
+	room_data  1,  0, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_128
+.room_03
+	room_data  7,  1, $2, $0, $a, $7, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_105, ANIMATED_TILES_GROUP_03,  0, ROOM_128
+.room_04
+	room_data  1,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_128
+.room_05
+	room_data  2,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_128
+.room_06
+	room_data  3,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_128
+.room_10
+	room_data  6,  1, $3, $0, $7, $4, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_032, ANIMATED_TILES_GROUP_03,  0, ROOM_128
+.room_11
+	room_data  1,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_128
+.room_13
+	room_data  7,  2, $3, $2, $a, $7, CAM_FREE, ENEMY_GROUP_079, ANIMATED_TILES_GROUP_03,  0, ROOM_128
+.room_16
+	room_data  0,  1, $2, $1, $1, $0, CAM_FREE, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_03,  0, ROOM_128
+.room_17
+	room_data  3,  0, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_128
+.room_20
+	room_data  6,  2, $3, $0, $7, $4, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_032, ANIMATED_TILES_GROUP_03,  0, ROOM_128
+.room_21
+	room_data  4,  0, $3, $0, $7, $4, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_032, ANIMATED_TILES_GROUP_03,  0, ROOM_128
+.room_22
+	room_data  5,  0, $3, $0, $7, $4, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_032, ANIMATED_TILES_GROUP_03,  0, ROOM_128
+.room_23
+	room_data  6,  0, $3, $0, $7, $4, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_032, ANIMATED_TILES_GROUP_03,  0, ROOM_128
+.room_26
+	room_data  0,  2, $3, $2, $1, $0, CAM_FREE, ENEMY_GROUP_041, ANIMATED_TILES_GROUP_03,  0, ROOM_128
+.room_27
+	room_data  3,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_128
+
+LevelRooms_c5e18: ; c5e18 (31:5e18)
+	dw .room_00
+	dw NULL
+	dw NULL
+	dw .room_03
+	dw .room_04
+	dw .room_05
+	dw .room_06
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_10
+	dw .room_11
+	dw NULL
+	dw .room_13
+	dw NULL
+	dw NULL
+	dw .room_16
+	dw .room_17
+	dw NULL
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw .room_22
+	dw .room_23
+	dw NULL
+	dw NULL
+	dw .room_26
+	dw .room_27
+	dw NULL
+	dw NULL
+
+.room_00
+	room_data  1,  0, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_129
+.room_03
+	room_data  7,  1, $2, $0, $a, $7, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_105, ANIMATED_TILES_GROUP_03,  0, ROOM_129
+.room_04
+	room_data  1,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_129
+.room_05
+	room_data  2,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_129
+.room_06
+	room_data  3,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_129
+.room_10
+	room_data  6,  1, $3, $0, $7, $4, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_032, ANIMATED_TILES_GROUP_03,  0, ROOM_129
+.room_11
+	room_data  1,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_129
+.room_13
+	room_data  7,  2, $3, $2, $a, $7, CAM_FREE, ENEMY_GROUP_132, ANIMATED_TILES_GROUP_03,  0, ROOM_129
+.room_16
+	room_data  0,  1, $2, $1, $1, $0, CAM_FREE, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_03,  0, ROOM_129
+.room_17
+	room_data  3,  0, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_129
+.room_20
+	room_data  6,  2, $3, $0, $7, $4, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_032, ANIMATED_TILES_GROUP_03,  0, ROOM_129
+.room_21
+	room_data  4,  0, $3, $0, $7, $4, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_032, ANIMATED_TILES_GROUP_03,  0, ROOM_129
+.room_22
+	room_data  5,  0, $3, $0, $7, $4, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_032, ANIMATED_TILES_GROUP_03,  0, ROOM_129
+.room_23
+	room_data  6,  0, $3, $0, $7, $4, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_032, ANIMATED_TILES_GROUP_03,  0, ROOM_129
+.room_26
+	room_data  0,  2, $3, $2, $1, $0, CAM_FREE, ENEMY_GROUP_041, ANIMATED_TILES_GROUP_03,  0, ROOM_129
+.room_27
+	room_data  3,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_129
+
+LevelRooms_c5ed4: ; c5ed4 (31:5ed4)
+	dw .room_00
+	dw NULL
+	dw NULL
+	dw .room_03
+	dw .room_04
+	dw .room_05
+	dw .room_06
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_10
+	dw .room_11
+	dw NULL
+	dw .room_13
+	dw NULL
+	dw NULL
+	dw .room_16
+	dw .room_17
+	dw NULL
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw .room_22
+	dw .room_23
+	dw NULL
+	dw NULL
+	dw .room_26
+	dw .room_27
+	dw NULL
+	dw NULL
+
+.room_00
+	room_data  1,  0, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_130
+.room_03
+	room_data  7,  1, $2, $0, $a, $7, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_105, ANIMATED_TILES_GROUP_03,  0, ROOM_130
+.room_04
+	room_data  1,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_130
+.room_05
+	room_data  2,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_130
+.room_06
+	room_data  3,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_130
+.room_10
+	room_data  6,  1, $3, $0, $7, $4, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_032, ANIMATED_TILES_GROUP_03,  0, ROOM_130
+.room_11
+	room_data  1,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_130
+.room_13
+	room_data  7,  2, $3, $2, $a, $7, CAM_FREE, ENEMY_GROUP_132, ANIMATED_TILES_GROUP_03,  0, ROOM_130
+.room_16
+	room_data  0,  1, $2, $1, $1, $0, CAM_FREE, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_03,  0, ROOM_130
+.room_17
+	room_data  3,  0, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_130
+.room_20
+	room_data  6,  2, $3, $0, $7, $4, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_032, ANIMATED_TILES_GROUP_03,  0, ROOM_130
+.room_21
+	room_data  4,  0, $3, $0, $7, $4, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_032, ANIMATED_TILES_GROUP_03,  0, ROOM_130
+.room_22
+	room_data  5,  0, $3, $0, $7, $4, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_032, ANIMATED_TILES_GROUP_03,  0, ROOM_130
+.room_23
+	room_data  6,  0, $3, $0, $7, $4, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_032, ANIMATED_TILES_GROUP_03,  0, ROOM_130
+.room_26
+	room_data  0,  2, $3, $2, $1, $0, CAM_FREE, ENEMY_GROUP_041, ANIMATED_TILES_GROUP_03,  0, ROOM_130
+.room_27
+	room_data  3,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_130
+
+LevelRooms_c5f90: ; c5f90 (31:5f90)
+	dw .room_00
+	dw .room_01
+	dw .room_02
+	dw .room_03
+	dw .room_04
+	dw .room_05
+	dw .room_06
+	dw .room_07
+	dw .room_08
+	dw .room_09
+	dw .room_10
+	dw .room_11
+	dw .room_12
+	dw .room_13
+	dw .room_14
+	dw .room_15
+	dw .room_16
+	dw .room_17
+	dw .room_18
+	dw .room_19
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_24
+	dw .room_25
+	dw .room_26
+	dw .room_27
+	dw .room_28
+	dw .room_29
+
+.room_00
+.room_13
+.room_27
+	room_data  4,  1, $2, $1, $6, $2, CAM_FREE, ENEMY_GROUP_068, ANIMATED_TILES_GROUP_15,  8, ROOM_051
+.room_01
+	room_data  0,  1, $2, $1, $2, $0, CAM_FREE, ENEMY_GROUP_106, ANIMATED_TILES_GROUP_15, 11, ROOM_079
+.room_02
+	room_data  1,  1, $2, $1, $2, $0, CAM_FREE, ENEMY_GROUP_106, ANIMATED_TILES_GROUP_15, 11, ROOM_079
+.room_03
+	room_data  1,  0, $1, $0, $3, $1, CAM_FREE, ENEMY_GROUP_110, ANIMATED_TILES_GROUP_15, 11, ROOM_079
+.room_04
+	room_data  2,  0, $1, $0, $3, $1, CAM_FREE, ENEMY_GROUP_110, ANIMATED_TILES_GROUP_15, 11, ROOM_079
+.room_05
+	room_data  3,  1, $2, $1, $6, $2, CAM_FREE, ENEMY_GROUP_068, ANIMATED_TILES_GROUP_15,  8, ROOM_051
+.room_06
+.room_16
+	room_data  7,  0, $2, $0, $9, $7, CAM_FREE, ENEMY_GROUP_109, ANIMATED_TILES_GROUP_15, 10, ROOM_078
+.room_07
+	room_data  6,  0, $2, $0, $7, $6, CAM_FREE, ENEMY_GROUP_109, ANIMATED_TILES_GROUP_15, 10, ROOM_078
+.room_08
+	room_data  2,  1, $2, $1, $6, $2, CAM_FREE, ENEMY_GROUP_068, ANIMATED_TILES_GROUP_15,  8, ROOM_051
+.room_09
+.room_19
+.room_29
+	room_data  6,  2, $3, $2, $9, $6, CAM_FREE, ENEMY_GROUP_104, ANIMATED_TILES_GROUP_15,  8, ROOM_051
+.room_10
+.room_11
+.room_14
+	room_data  5,  0, $1, $0, $6, $3, CAM_TRANSITIONS, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_15, 11, ROOM_079
+.room_12
+.room_17
+	room_data  8,  1, $2, $0, $9, $7, CAM_FREE, ENEMY_GROUP_109, ANIMATED_TILES_GROUP_15, 10, ROOM_078
+.room_15
+	room_data  4,  2, $3, $2, $6, $4, CAM_FREE, ENEMY_GROUP_011, ANIMATED_TILES_GROUP_15,  8, ROOM_051
+.room_18
+	room_data  7,  1, $2, $0, $9, $7, CAM_FREE, ENEMY_GROUP_109, ANIMATED_TILES_GROUP_15, 10, ROOM_078
+.room_24
+	room_data  5,  1, $2, $1, $6, $2, CAM_FREE, ENEMY_GROUP_068, ANIMATED_TILES_GROUP_15,  8, ROOM_051
+.room_25
+	room_data  8,  2, $3, $2, $9, $6, CAM_FREE, ENEMY_GROUP_104, ANIMATED_TILES_GROUP_15,  8, ROOM_051
+.room_26
+	room_data  9,  0, $3, $0, $a, $9, CAM_FREE, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_15,  9, ROOM_077
+.room_28
+	room_data  5,  2, $3, $2, $6, $4, CAM_FREE, ENEMY_GROUP_011, ANIMATED_TILES_GROUP_15,  8, ROOM_051
+
+LevelRooms_c605c: ; c605c (31:605c)
+	dw .room_00
+	dw .room_01
+	dw .room_02
+	dw .room_03
+	dw .room_04
+	dw .room_05
+	dw .room_06
+	dw .room_07
+	dw .room_08
+	dw .room_09
+	dw .room_10
+	dw .room_11
+	dw .room_12
+	dw .room_13
+	dw .room_14
+	dw .room_15
+	dw .room_16
+	dw .room_17
+	dw .room_18
+	dw .room_19
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_24
+	dw .room_25
+	dw .room_26
+	dw .room_27
+	dw .room_28
+	dw .room_29
+
+.room_00
+.room_13
+.room_27
+	room_data  4,  1, $2, $1, $6, $2, CAM_FREE, ENEMY_GROUP_068, ANIMATED_TILES_GROUP_15,  8, ROOM_149
+.room_01
+	room_data  0,  1, $2, $1, $2, $0, CAM_FREE, ENEMY_GROUP_106, ANIMATED_TILES_GROUP_15, 11, ROOM_079
+.room_02
+	room_data  1,  1, $2, $1, $2, $0, CAM_FREE, ENEMY_GROUP_106, ANIMATED_TILES_GROUP_15, 11, ROOM_079
+.room_03
+	room_data  1,  0, $1, $0, $3, $1, CAM_FREE, ENEMY_GROUP_110, ANIMATED_TILES_GROUP_15, 11, ROOM_079
+.room_04
+	room_data  2,  0, $1, $0, $3, $1, CAM_FREE, ENEMY_GROUP_110, ANIMATED_TILES_GROUP_15, 11, ROOM_079
+.room_05
+	room_data  3,  1, $2, $1, $6, $2, CAM_FREE, ENEMY_GROUP_068, ANIMATED_TILES_GROUP_15,  8, ROOM_149
+.room_06
+.room_16
+	room_data  7,  0, $2, $0, $9, $7, CAM_FREE, ENEMY_GROUP_109, ANIMATED_TILES_GROUP_15, 10, ROOM_078
+.room_07
+	room_data  6,  0, $2, $0, $7, $6, CAM_FREE, ENEMY_GROUP_109, ANIMATED_TILES_GROUP_15, 10, ROOM_078
+.room_08
+	room_data  2,  1, $2, $1, $6, $2, CAM_FREE, ENEMY_GROUP_068, ANIMATED_TILES_GROUP_15,  8, ROOM_149
+.room_09
+.room_19
+.room_29
+	room_data  6,  2, $3, $2, $9, $6, CAM_FREE, ENEMY_GROUP_104, ANIMATED_TILES_GROUP_15,  8, ROOM_149
+.room_10
+.room_11
+.room_14
+	room_data  5,  0, $1, $0, $6, $3, CAM_TRANSITIONS, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_15, 11, ROOM_079
+.room_12
+.room_17
+	room_data  8,  1, $2, $0, $9, $7, CAM_FREE, ENEMY_GROUP_109, ANIMATED_TILES_GROUP_15, 10, ROOM_078
+.room_15
+	room_data  4,  2, $3, $2, $6, $4, CAM_FREE, ENEMY_GROUP_011, ANIMATED_TILES_GROUP_15,  8, ROOM_149
+.room_18
+	room_data  7,  1, $2, $0, $9, $7, CAM_FREE, ENEMY_GROUP_109, ANIMATED_TILES_GROUP_15, 10, ROOM_078
+.room_24
+	room_data  5,  1, $2, $1, $6, $2, CAM_FREE, ENEMY_GROUP_068, ANIMATED_TILES_GROUP_15,  8, ROOM_149
+.room_25
+	room_data  8,  2, $3, $2, $9, $6, CAM_FREE, ENEMY_GROUP_104, ANIMATED_TILES_GROUP_15,  8, ROOM_149
+.room_26
+	room_data  9,  0, $3, $0, $a, $9, CAM_FREE, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_15,  9, ROOM_077
+.room_28
+	room_data  5,  2, $3, $2, $6, $4, CAM_FREE, ENEMY_GROUP_011, ANIMATED_TILES_GROUP_15,  8, ROOM_149
+
+LevelRooms_c6128: ; c6128 (31:6128)
+	dw .room_00
+	dw .room_01
+	dw .room_02
+	dw .room_03
+	dw .room_04
+	dw .room_05
+	dw .room_06
+	dw .room_07
+	dw .room_08
+	dw .room_09
+	dw .room_10
+	dw .room_11
+	dw .room_12
+	dw .room_13
+	dw .room_14
+	dw .room_15
+	dw .room_16
+	dw .room_17
+	dw .room_18
+	dw .room_19
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_24
+	dw .room_25
+	dw .room_26
+	dw .room_27
+	dw .room_28
+	dw .room_29
+
+.room_00
+.room_13
+.room_27
+	room_data  4,  1, $2, $1, $6, $2, CAM_FREE, ENEMY_GROUP_068, ANIMATED_TILES_GROUP_15,  8, ROOM_150
+.room_01
+	room_data  0,  1, $2, $1, $2, $0, CAM_FREE, ENEMY_GROUP_106, ANIMATED_TILES_GROUP_15, 11, ROOM_079
+.room_02
+	room_data  1,  1, $2, $1, $2, $0, CAM_FREE, ENEMY_GROUP_106, ANIMATED_TILES_GROUP_15, 11, ROOM_079
+.room_03
+	room_data  1,  0, $1, $0, $3, $1, CAM_FREE, ENEMY_GROUP_110, ANIMATED_TILES_GROUP_15, 11, ROOM_079
+.room_04
+	room_data  2,  0, $1, $0, $3, $1, CAM_FREE, ENEMY_GROUP_110, ANIMATED_TILES_GROUP_15, 11, ROOM_079
+.room_05
+	room_data  3,  1, $2, $1, $6, $2, CAM_FREE, ENEMY_GROUP_068, ANIMATED_TILES_GROUP_15,  8, ROOM_150
+.room_06
+.room_16
+	room_data  7,  0, $2, $0, $9, $7, CAM_FREE, ENEMY_GROUP_109, ANIMATED_TILES_GROUP_15, 10, ROOM_078
+.room_07
+	room_data  6,  0, $2, $0, $7, $6, CAM_FREE, ENEMY_GROUP_109, ANIMATED_TILES_GROUP_15, 10, ROOM_078
+.room_08
+	room_data  2,  1, $2, $1, $6, $2, CAM_FREE, ENEMY_GROUP_068, ANIMATED_TILES_GROUP_15,  8, ROOM_150
+.room_09
+.room_19
+.room_29
+	room_data  6,  2, $3, $2, $9, $6, CAM_FREE, ENEMY_GROUP_104, ANIMATED_TILES_GROUP_15,  8, ROOM_150
+.room_10
+.room_11
+.room_14
+	room_data  5,  0, $1, $0, $6, $3, CAM_TRANSITIONS, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_15, 11, ROOM_079
+.room_12
+.room_17
+	room_data  8,  1, $2, $0, $9, $7, CAM_FREE, ENEMY_GROUP_109, ANIMATED_TILES_GROUP_15, 10, ROOM_078
+.room_15
+	room_data  4,  2, $3, $2, $6, $4, CAM_FREE, ENEMY_GROUP_011, ANIMATED_TILES_GROUP_15,  8, ROOM_150
+.room_18
+	room_data  7,  1, $2, $0, $9, $7, CAM_FREE, ENEMY_GROUP_109, ANIMATED_TILES_GROUP_15, 10, ROOM_078
+.room_24
+	room_data  5,  1, $2, $1, $6, $2, CAM_FREE, ENEMY_GROUP_068, ANIMATED_TILES_GROUP_15,  8, ROOM_150
+.room_25
+	room_data  8,  2, $3, $2, $9, $6, CAM_FREE, ENEMY_GROUP_104, ANIMATED_TILES_GROUP_15,  8, ROOM_150
+.room_26
+	room_data  9,  0, $3, $0, $a, $9, CAM_FREE, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_15,  9, ROOM_077
+.room_28
+	room_data  5,  2, $3, $2, $6, $4, CAM_FREE, ENEMY_GROUP_011, ANIMATED_TILES_GROUP_15,  8, ROOM_150
+
+LevelRooms_c61f4: ; c61f4 (31:61f4)
+	dw .room_00
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_07
+	dw .room_08
+	dw .room_09
+	dw NULL
+	dw .room_11
+	dw NULL
+	dw .room_13
+	dw .room_14
+	dw NULL
+	dw NULL
+	dw .room_17
+	dw .room_18
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw NULL
+	dw .room_23
+	dw .room_24
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+
+.room_00
+	room_data  2,  0, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_069
+.room_07
+	room_data  3,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_069
+.room_08
+	room_data  7,  1, $2, $1, $9, $7, CAM_TRANSITIONS, ENEMY_GROUP_019, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_09
+	room_data  8,  1, $2, $1, $9, $7, CAM_TRANSITIONS, ENEMY_GROUP_019, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_11
+	room_data  4,  2, $3, $2, $8, $4, CAM_FREE, ENEMY_GROUP_085, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_13
+	room_data  4,  1, $2, $0, $7, $4, CAM_FREE, ENEMY_GROUP_084, ANIMATED_TILES_GROUP_12,  0, ROOM_070
+.room_14
+	room_data  3,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_069
+.room_17
+	room_data  8,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_083, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_18
+	room_data  9,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_083, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_20
+	room_data  1,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_069
+.room_21
+	room_data  0,  2, $3, $2, $1, $0, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_23
+	room_data  7,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_083, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_24
+	room_data  1,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_069
+
+LevelRooms_c6298: ; c6298 (31:6298)
+	dw .room_00
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_07
+	dw .room_08
+	dw .room_09
+	dw NULL
+	dw .room_11
+	dw NULL
+	dw .room_13
+	dw .room_14
+	dw NULL
+	dw NULL
+	dw .room_17
+	dw .room_18
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw NULL
+	dw .room_23
+	dw .room_24
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+
+.room_00
+	room_data  2,  0, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_069
+.room_07
+	room_data  3,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_069
+.room_08
+	room_data  7,  1, $2, $1, $9, $7, CAM_TRANSITIONS, ENEMY_GROUP_019, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_09
+	room_data  8,  1, $2, $1, $9, $7, CAM_TRANSITIONS, ENEMY_GROUP_019, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_11
+	room_data  4,  2, $3, $2, $8, $4, CAM_FREE, ENEMY_GROUP_085, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_13
+	room_data  4,  1, $2, $0, $7, $4, CAM_FREE, ENEMY_GROUP_084, ANIMATED_TILES_GROUP_12,  0, ROOM_070
+.room_14
+	room_data  3,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_069
+.room_17
+	room_data  8,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_137, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_18
+	room_data  9,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_137, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_20
+	room_data  1,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_069
+.room_21
+	room_data  0,  2, $3, $2, $1, $0, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_23
+	room_data  7,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_137, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_24
+	room_data  1,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_069
+
+LevelRooms_c633c: ; c633c (31:633c)
+	dw .room_00
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_07
+	dw .room_08
+	dw .room_09
+	dw NULL
+	dw .room_11
+	dw NULL
+	dw .room_13
+	dw .room_14
+	dw NULL
+	dw NULL
+	dw .room_17
+	dw .room_18
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw NULL
+	dw .room_23
+	dw .room_24
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+
+.room_00
+	room_data  2,  0, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_069
+.room_07
+	room_data  3,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_069
+.room_08
+	room_data  7,  1, $2, $1, $9, $7, CAM_TRANSITIONS, ENEMY_GROUP_019, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_09
+	room_data  8,  1, $2, $1, $9, $7, CAM_TRANSITIONS, ENEMY_GROUP_019, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_11
+	room_data  4,  2, $3, $2, $8, $4, CAM_FREE, ENEMY_GROUP_085, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_13
+	room_data  4,  1, $2, $0, $7, $4, CAM_FREE, ENEMY_GROUP_084, ANIMATED_TILES_GROUP_12,  0, ROOM_148
+.room_14
+	room_data  3,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_069
+.room_17
+	room_data  8,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_137, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_18
+	room_data  9,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_137, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_20
+	room_data  1,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_069
+.room_21
+	room_data  0,  2, $3, $2, $1, $0, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_23
+	room_data  7,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_137, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_24
+	room_data  1,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_069
+
+LevelRooms_c63e0: ; c63e0 (31:63e0)
+	dw .room_00
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_07
+	dw .room_08
+	dw .room_09
+	dw NULL
+	dw .room_11
+	dw NULL
+	dw .room_13
+	dw .room_14
+	dw NULL
+	dw NULL
+	dw .room_17
+	dw .room_18
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw NULL
+	dw .room_23
+	dw .room_24
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+
+.room_00
+	room_data  2,  0, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_138, ANIMATED_TILES_GROUP_10,  0, ROOM_145
+.room_07
+	room_data  3,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_138, ANIMATED_TILES_GROUP_10,  0, ROOM_145
+.room_08
+	room_data  7,  1, $2, $1, $9, $7, CAM_TRANSITIONS, ENEMY_GROUP_019, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_09
+	room_data  8,  1, $2, $1, $9, $7, CAM_TRANSITIONS, ENEMY_GROUP_019, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_11
+	room_data  4,  2, $3, $2, $8, $4, CAM_FREE, ENEMY_GROUP_085, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_13
+	room_data  4,  1, $2, $0, $7, $4, CAM_FREE, ENEMY_GROUP_084, ANIMATED_TILES_GROUP_12,  0, ROOM_148
+.room_14
+	room_data  3,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_138, ANIMATED_TILES_GROUP_10,  0, ROOM_145
+.room_17
+	room_data  8,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_137, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_18
+	room_data  9,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_137, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_20
+	room_data  1,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_138, ANIMATED_TILES_GROUP_10,  0, ROOM_145
+.room_21
+	room_data  0,  2, $3, $2, $1, $0, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_138, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_23
+	room_data  7,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_137, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_24
+	room_data  1,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_138, ANIMATED_TILES_GROUP_10,  0, ROOM_145
+
+LevelRooms_c6484: ; c6484 (31:6484)
+	dw .room_00
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_07
+	dw .room_08
+	dw .room_09
+	dw NULL
+	dw .room_11
+	dw NULL
+	dw .room_13
+	dw .room_14
+	dw NULL
+	dw NULL
+	dw .room_17
+	dw .room_18
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw NULL
+	dw .room_23
+	dw .room_24
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+
+.room_00
+	room_data  2,  0, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_146
+.room_07
+	room_data  3,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_146
+.room_08
+	room_data  7,  1, $2, $1, $9, $7, CAM_TRANSITIONS, ENEMY_GROUP_019, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_09
+	room_data  8,  1, $2, $1, $9, $7, CAM_TRANSITIONS, ENEMY_GROUP_019, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_11
+	room_data  4,  2, $3, $2, $8, $4, CAM_FREE, ENEMY_GROUP_085, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_13
+	room_data  4,  1, $2, $0, $7, $4, CAM_FREE, ENEMY_GROUP_084, ANIMATED_TILES_GROUP_12,  0, ROOM_070
+.room_14
+	room_data  3,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_146
+.room_17
+	room_data  8,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_083, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_18
+	room_data  9,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_083, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_20
+	room_data  1,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_146
+.room_21
+	room_data  0,  2, $3, $2, $1, $0, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_23
+	room_data  7,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_083, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_24
+	room_data  1,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_146
+
+LevelRooms_c6528: ; c6528 (31:6528)
+	dw .room_00
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_07
+	dw .room_08
+	dw .room_09
+	dw NULL
+	dw .room_11
+	dw NULL
+	dw .room_13
+	dw .room_14
+	dw NULL
+	dw NULL
+	dw .room_17
+	dw .room_18
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw NULL
+	dw .room_23
+	dw .room_24
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+
+.room_00
+	room_data  2,  0, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_146
+.room_07
+	room_data  3,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_146
+.room_08
+	room_data  7,  1, $2, $1, $9, $7, CAM_TRANSITIONS, ENEMY_GROUP_019, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_09
+	room_data  8,  1, $2, $1, $9, $7, CAM_TRANSITIONS, ENEMY_GROUP_019, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_11
+	room_data  4,  2, $3, $2, $8, $4, CAM_FREE, ENEMY_GROUP_085, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_13
+	room_data  4,  1, $2, $0, $7, $4, CAM_FREE, ENEMY_GROUP_084, ANIMATED_TILES_GROUP_12,  0, ROOM_070
+.room_14
+	room_data  3,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_146
+.room_17
+	room_data  8,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_137, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_18
+	room_data  9,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_137, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_20
+	room_data  1,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_146
+.room_21
+	room_data  0,  2, $3, $2, $1, $0, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_23
+	room_data  7,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_137, ANIMATED_TILES_GROUP_10,  0, ROOM_070
+.room_24
+	room_data  1,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_146
+
+LevelRooms_c65cc: ; c65cc (31:65cc)
+	dw .room_00
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_07
+	dw .room_08
+	dw .room_09
+	dw NULL
+	dw .room_11
+	dw NULL
+	dw .room_13
+	dw .room_14
+	dw NULL
+	dw NULL
+	dw .room_17
+	dw .room_18
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw NULL
+	dw .room_23
+	dw .room_24
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+
+.room_00
+	room_data  2,  0, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_146
+.room_07
+	room_data  3,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_146
+.room_08
+	room_data  7,  1, $2, $1, $9, $7, CAM_TRANSITIONS, ENEMY_GROUP_019, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_09
+	room_data  8,  1, $2, $1, $9, $7, CAM_TRANSITIONS, ENEMY_GROUP_019, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_11
+	room_data  4,  2, $3, $2, $8, $4, CAM_FREE, ENEMY_GROUP_085, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_13
+	room_data  4,  1, $2, $0, $7, $4, CAM_FREE, ENEMY_GROUP_084, ANIMATED_TILES_GROUP_12,  0, ROOM_148
+.room_14
+	room_data  3,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_146
+.room_17
+	room_data  8,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_137, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_18
+	room_data  9,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_137, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_20
+	room_data  1,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_146
+.room_21
+	room_data  0,  2, $3, $2, $1, $0, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_23
+	room_data  7,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_137, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_24
+	room_data  1,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_146
+
+LevelRooms_c6670: ; c6670 (31:6670)
+	dw .room_00
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_07
+	dw .room_08
+	dw .room_09
+	dw NULL
+	dw .room_11
+	dw NULL
+	dw .room_13
+	dw .room_14
+	dw NULL
+	dw NULL
+	dw .room_17
+	dw .room_18
+	dw NULL
+	dw .room_20
+	dw .room_21
+	dw NULL
+	dw .room_23
+	dw .room_24
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+
+.room_00
+	room_data  2,  0, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_138, ANIMATED_TILES_GROUP_10,  0, ROOM_147
+.room_07
+	room_data  3,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_138, ANIMATED_TILES_GROUP_10,  0, ROOM_147
+.room_08
+	room_data  7,  1, $2, $1, $9, $7, CAM_TRANSITIONS, ENEMY_GROUP_019, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_09
+	room_data  8,  1, $2, $1, $9, $7, CAM_TRANSITIONS, ENEMY_GROUP_019, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_11
+	room_data  4,  2, $3, $2, $8, $4, CAM_FREE, ENEMY_GROUP_085, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_13
+	room_data  4,  1, $2, $0, $7, $4, CAM_FREE, ENEMY_GROUP_084, ANIMATED_TILES_GROUP_12,  0, ROOM_148
+.room_14
+	room_data  3,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_138, ANIMATED_TILES_GROUP_10,  0, ROOM_147
+.room_17
+	room_data  8,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_137, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_18
+	room_data  9,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_137, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_20
+	room_data  1,  2, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_138, ANIMATED_TILES_GROUP_10,  0, ROOM_147
+.room_21
+	room_data  0,  2, $3, $2, $1, $0, CAM_FREE | CAM_EDGE_RIGHT, ENEMY_GROUP_138, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_23
+	room_data  7,  0, $1, $0, $a, $7, CAM_FREE | CAM_EDGE_LEFT, ENEMY_GROUP_137, ANIMATED_TILES_GROUP_10,  0, ROOM_148
+.room_24
+	room_data  1,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_138, ANIMATED_TILES_GROUP_10,  0, ROOM_147
+
+LevelRooms_c6714: ; c6714 (31:6714)
+	dw .room_00
+	dw .room_01
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_05
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_09
+	dw .room_10
+	dw .room_11
+	dw NULL
+	dw .room_13
+	dw .room_14
+	dw NULL
+	dw NULL
+	dw .room_17
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_21
+	dw NULL
+	dw NULL
+	dw .room_24
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+
+.room_00
+	room_data  2,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_052
+.room_01
+	room_data  1,  2, $3, $2, $4, $1, CAM_TRANSITIONS, ENEMY_GROUP_097, ANIMATED_TILES_GROUP_11,  0, ROOM_052
+.room_05
+	room_data  7,  1, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_144, ANIMATED_TILES_GROUP_11,  0, ROOM_052
+.room_09
+	room_data  4,  2, $3, $2, $6, $4, CAM_TRANSITIONS, ENEMY_GROUP_014, ANIMATED_TILES_GROUP_11,  0, ROOM_052
+.room_10
+	room_data  1,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_052
+.room_11
+	room_data  0,  1, $3, $1, $1, $0, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_043, ANIMATED_TILES_GROUP_11,  0, ROOM_052
+.room_13
+	room_data  4,  1, $2, $0, $7, $4, CAM_FREE, ENEMY_GROUP_143, ANIMATED_TILES_GROUP_11,  0, ROOM_052
+.room_14
+	room_data  3,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_052
+.room_17
+	room_data  5,  0, $2, $0, $7, $4, CAM_FREE, ENEMY_GROUP_143, ANIMATED_TILES_GROUP_11,  0, ROOM_052
+.room_21
+	room_data  1,  0, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_052
+.room_24
+	room_data  9,  0, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_144, ANIMATED_TILES_GROUP_11,  0, ROOM_052
+
+LevelRooms_c67a8: ; c67a8 (31:67a8)
+	dw .room_00
+	dw .room_01
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_05
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_09
+	dw .room_10
+	dw .room_11
+	dw NULL
+	dw .room_13
+	dw .room_14
+	dw NULL
+	dw NULL
+	dw .room_17
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_21
+	dw NULL
+	dw NULL
+	dw .room_24
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+
+.room_00
+	room_data  2,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_139
+.room_01
+	room_data  1,  2, $3, $2, $4, $1, CAM_TRANSITIONS, ENEMY_GROUP_097, ANIMATED_TILES_GROUP_11,  0, ROOM_139
+.room_05
+	room_data  7,  1, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_144, ANIMATED_TILES_GROUP_11,  0, ROOM_139
+.room_09
+	room_data  4,  2, $3, $2, $6, $4, CAM_TRANSITIONS, ENEMY_GROUP_014, ANIMATED_TILES_GROUP_11,  0, ROOM_139
+.room_10
+	room_data  1,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_139
+.room_11
+	room_data  0,  1, $3, $1, $1, $0, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_043, ANIMATED_TILES_GROUP_11,  0, ROOM_139
+.room_13
+	room_data  4,  1, $2, $0, $7, $4, CAM_FREE, ENEMY_GROUP_143, ANIMATED_TILES_GROUP_11,  0, ROOM_139
+.room_14
+	room_data  3,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_139
+.room_17
+	room_data  5,  0, $2, $0, $7, $4, CAM_FREE, ENEMY_GROUP_143, ANIMATED_TILES_GROUP_11,  0, ROOM_139
+.room_21
+	room_data  1,  0, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_139
+.room_24
+	room_data  9,  0, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_144, ANIMATED_TILES_GROUP_11,  0, ROOM_139
+
+LevelRooms_c683c: ; c683c (31:683c)
+	dw .room_00
+	dw .room_01
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_05
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_09
+	dw .room_10
+	dw .room_11
+	dw NULL
+	dw .room_13
+	dw .room_14
+	dw NULL
+	dw NULL
+	dw .room_17
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_21
+	dw NULL
+	dw NULL
+	dw .room_24
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+
+.room_00
+	room_data  2,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_139
+.room_01
+	room_data  1,  2, $3, $2, $4, $1, CAM_TRANSITIONS, ENEMY_GROUP_043, ANIMATED_TILES_GROUP_11,  0, ROOM_139
+.room_05
+	room_data  7,  1, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_144, ANIMATED_TILES_GROUP_11,  0, ROOM_139
+.room_09
+	room_data  4,  2, $3, $2, $6, $4, CAM_TRANSITIONS, ENEMY_GROUP_014, ANIMATED_TILES_GROUP_11,  0, ROOM_139
+.room_10
+	room_data  1,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_139
+.room_11
+	room_data  0,  1, $3, $1, $1, $0, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_043, ANIMATED_TILES_GROUP_11,  0, ROOM_139
+.room_13
+	room_data  4,  1, $2, $0, $7, $4, CAM_FREE, ENEMY_GROUP_143, ANIMATED_TILES_GROUP_11,  0, ROOM_139
+.room_14
+	room_data  3,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_139
+.room_17
+	room_data  5,  0, $2, $0, $7, $4, CAM_FREE, ENEMY_GROUP_143, ANIMATED_TILES_GROUP_11,  0, ROOM_139
+.room_21
+	room_data  1,  0, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_139
+.room_24
+	room_data  9,  0, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_144, ANIMATED_TILES_GROUP_11,  0, ROOM_139
+
+LevelRooms_c68d0: ; c68d0 (31:68d0)
+	dw .room_00
+	dw .room_01
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_05
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_09
+	dw .room_10
+	dw .room_11
+	dw NULL
+	dw .room_13
+	dw .room_14
+	dw NULL
+	dw NULL
+	dw .room_17
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_21
+	dw NULL
+	dw NULL
+	dw .room_24
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+
+.room_00
+	room_data  2,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_140
+.room_01
+	room_data  1,  2, $3, $2, $4, $1, CAM_TRANSITIONS, ENEMY_GROUP_097, ANIMATED_TILES_GROUP_11,  0, ROOM_140
+.room_05
+	room_data  7,  1, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_144, ANIMATED_TILES_GROUP_11,  0, ROOM_140
+.room_09
+	room_data  4,  2, $3, $2, $6, $4, CAM_TRANSITIONS, ENEMY_GROUP_014, ANIMATED_TILES_GROUP_11,  0, ROOM_140
+.room_10
+	room_data  1,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_140
+.room_11
+	room_data  0,  1, $3, $1, $1, $0, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_043, ANIMATED_TILES_GROUP_11,  0, ROOM_140
+.room_13
+	room_data  4,  1, $2, $0, $7, $4, CAM_FREE, ENEMY_GROUP_143, ANIMATED_TILES_GROUP_11,  0, ROOM_140
+.room_14
+	room_data  3,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_140
+.room_17
+	room_data  5,  0, $2, $0, $7, $4, CAM_FREE, ENEMY_GROUP_143, ANIMATED_TILES_GROUP_11,  0, ROOM_140
+.room_21
+	room_data  1,  0, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_140
+.room_24
+	room_data  9,  0, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_144, ANIMATED_TILES_GROUP_11,  0, ROOM_140
+
+LevelRooms_c6964: ; c6964 (31:6964)
+	dw .room_00
+	dw .room_01
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_05
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_09
+	dw .room_10
+	dw .room_11
+	dw NULL
+	dw .room_13
+	dw .room_14
+	dw NULL
+	dw NULL
+	dw .room_17
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_21
+	dw NULL
+	dw NULL
+	dw .room_24
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+
+.room_00
+	room_data  2,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_141
+.room_01
+	room_data  1,  2, $3, $2, $4, $1, CAM_TRANSITIONS, ENEMY_GROUP_097, ANIMATED_TILES_GROUP_11,  0, ROOM_141
+.room_05
+	room_data  7,  1, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_144, ANIMATED_TILES_GROUP_11,  0, ROOM_141
+.room_09
+	room_data  4,  2, $3, $2, $6, $4, CAM_TRANSITIONS, ENEMY_GROUP_014, ANIMATED_TILES_GROUP_11,  0, ROOM_141
+.room_10
+	room_data  1,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_141
+.room_11
+	room_data  0,  1, $3, $1, $1, $0, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_043, ANIMATED_TILES_GROUP_11,  0, ROOM_141
+.room_13
+	room_data  4,  1, $2, $0, $7, $4, CAM_FREE, ENEMY_GROUP_143, ANIMATED_TILES_GROUP_11,  0, ROOM_141
+.room_14
+	room_data  3,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_141
+.room_17
+	room_data  5,  0, $2, $0, $7, $4, CAM_FREE, ENEMY_GROUP_143, ANIMATED_TILES_GROUP_11,  0, ROOM_141
+.room_21
+	room_data  1,  0, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_141
+.room_24
+	room_data  9,  0, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_144, ANIMATED_TILES_GROUP_11,  0, ROOM_141
+
+LevelRooms_c69f8: ; c69f8 (31:69f8)
+	dw .room_00
+	dw .room_01
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_05
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_09
+	dw .room_10
+	dw .room_11
+	dw NULL
+	dw .room_13
+	dw .room_14
+	dw NULL
+	dw NULL
+	dw .room_17
+	dw NULL
+	dw NULL
+	dw NULL
+	dw .room_21
+	dw NULL
+	dw NULL
+	dw .room_24
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+	dw NULL
+
+.room_00
+	room_data  2,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_141
+.room_01
+	room_data  1,  2, $3, $2, $4, $1, CAM_TRANSITIONS, ENEMY_GROUP_043, ANIMATED_TILES_GROUP_11,  0, ROOM_141
+.room_05
+	room_data  7,  1, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_144, ANIMATED_TILES_GROUP_11,  0, ROOM_141
+.room_09
+	room_data  4,  2, $3, $2, $6, $4, CAM_TRANSITIONS, ENEMY_GROUP_014, ANIMATED_TILES_GROUP_11,  0, ROOM_141
+.room_10
+	room_data  1,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_141
+.room_11
+	room_data  0,  1, $3, $1, $1, $0, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_043, ANIMATED_TILES_GROUP_11,  0, ROOM_141
+.room_13
+	room_data  4,  1, $2, $0, $7, $4, CAM_FREE, ENEMY_GROUP_143, ANIMATED_TILES_GROUP_11,  0, ROOM_141
+.room_14
+	room_data  3,  1, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_141
+.room_17
+	room_data  5,  0, $2, $0, $7, $4, CAM_FREE, ENEMY_GROUP_143, ANIMATED_TILES_GROUP_11,  0, ROOM_141
+.room_21
+	room_data  1,  0, $2, $0, $4, $1, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_11,  0, ROOM_141
+.room_24
+	room_data  9,  0, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_144, ANIMATED_TILES_GROUP_11,  0, ROOM_141
+
+LevelRooms_c6a8c: ; c6a8c (31:6a8c)
+	dw .room_00
 	dw NULL
 	dw NULL
 	dw NULL
@@ -1976,4 +3842,6 @@ Data_c6a8c: ; c6a8c (31:6a8c)
 	dw NULL
 	dw NULL
 	dw NULL
-	db $01, $01, $12, $3c, $f0, $03, $00, $3b
+
+.room_00
+	room_data  1,  0, $1, $0, $2, $1, CAM_XSCROLL2 | CAM_TRANSITIONS | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_HIDDEN_FIGURE, ANIMATED_TILES_GROUP_03,  0, ROOM_059
