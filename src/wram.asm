@@ -980,6 +980,7 @@ wDollBoyActiveBarrels:: db ; d146
 w1d147:: db ; d147
 wDollBoyHammerStage:: db ; d148
 
+w1d149:: ; d149
 	ds $1
 
 ; some transformations can confer to Wario special power-ups
@@ -989,7 +990,61 @@ wDollBoyHammerStage:: db ; d148
 wEffectivePowerUp:: ; d14a
 	db
 
-	ds $6b5
+w1d14b:: ; d14b
+	db
+
+w1d14c:: ; d14c
+	db
+
+w1d14d:: ; d14d
+	db
+
+w1d14e:: ; d14e
+	db
+
+w1d14f:: ; d14f
+	db
+
+w1d150:: ; d150
+	db
+
+w1d151:: ; d151
+	db
+
+w1d152:: ; d152
+	ds $4
+
+w1d156:: ; d156
+	ds $4
+
+w1d15a:: ; d15a
+	db
+
+w1d15b:: ; d15b
+	db
+
+w1d15c:: ; d15c
+	db
+
+w1d15d:: ; d15d
+	db
+
+w1d15e:: ; d15e
+	db
+
+w1d15f:: ; d15f
+	db
+
+w1d160:: ; d160
+	db
+
+w1d161:: ; d161
+	db
+
+w1d162:: ; d162
+	db
+
+	ds $69d
 
 
 SECTION "Golf RAM", WRAMX
@@ -1723,7 +1778,16 @@ wCompassObj:: scene_obj_struct wCompassObj ; d110
 wCurSceneObjPtr:: ; d11e
 	ds $2
 
-	ds $4
+	ds $1
+
+w2d121:: ; d121
+	db
+
+w2d122:: ; d122
+	db
+
+w2d123:: ; d123
+	ds $1
 
 w2d124:: ; d124
 	db
@@ -1731,7 +1795,16 @@ w2d124:: ; d124
 w2d125:: ; d125
 	db
 
-	ds $4
+w2d126:: ; d126
+	db
+
+w2d127:: ; d127
+	db
+
+	ds $1
+
+w2d129:: ; d129
+	db
 
 w2d12a:: ; d12a
 	db
@@ -1742,6 +1815,7 @@ w2d12b:: ; d12b
 w2d12c:: ; d12c
 	db
 
+w2d12d:: ; d12d
 	db
 
 w2d12e:: ; d12e
@@ -1758,7 +1832,40 @@ w2d130:: ; d130
 w2d132:: ; d132
 	db
 
-	ds $d
+w2d133:: ; d133
+	db
+
+w2d134:: ; d134
+	db
+
+w2d135:: ; d135
+	db
+
+	ds $2
+
+w2d138:: ; d138
+	db
+
+w2d139:: ; d139
+	db
+
+w2d13a:: ; d13a
+	db
+
+w2d13b:: ; d13b
+	db
+
+w2d13c:: ; d13c
+	db
+
+w2d13d:: ; d13d
+	db
+
+w2d13e:: ; d13e
+	db
+
+w2d13f:: ; d13f
+	db
 
 UNION
 
@@ -1791,20 +1898,46 @@ w2d150:: ; d150
 w2d151:: ; d151
 	db
 
+wd152:: ; d152
 wDebugSceneWarioState:: ; d152
 	db
 
-	ds $5
+wd153:: ; d153
+	db
+
+wd154:: ; d154
+	db
+
+wd155:: ; d155
+	db
+
+wd156:: ; d156
+	ds $2
 
 wHDMADestVRAMBank:: ; d158
 	db
 
-	ds $7
+	ds $5
+
+w2d15e:: ; d15e
+	db
+
+	ds $1
 
 w2d160:: ; d160
+	ds $6
+
+w2d166:: ; d166
 	ds $8
 
-	ds $18
+w2d16e:: ; d16e
+	ds $8
+
+w2d176:: ; d176
+	ds $8
+
+w2d17e:: ; d17e
+	ds $2
 
 wCurSceneObj:: scene_obj_struct wCurSceneObj ; d180
 

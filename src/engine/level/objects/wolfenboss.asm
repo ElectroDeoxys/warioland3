@@ -31,7 +31,7 @@ WolfenbossFunc: ; 55e4e (15:5e4e)
 	ld a, $04
 	ld [wDollBoyHammerStage], a
 	ld a, $02
-	ld [$d149], a
+	ld [w1d149], a
 	ret
 
 .Func_55e8d:
@@ -423,11 +423,11 @@ WolfenbossFunc: ; 55e4e (15:5e4e)
 	ld de, Frameset_69df6
 .asm_56141
 	call SetObjectFramesetPtr
-	ld a, [$d149]
+	ld a, [w1d149]
 	and a
 	jr z, .asm_56150
 	dec a
-	ld [$d149], a
+	ld [w1d149], a
 	jr .asm_56156
 .asm_56150
 	ld a, [w1d147]

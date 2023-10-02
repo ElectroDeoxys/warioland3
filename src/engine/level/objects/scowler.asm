@@ -752,12 +752,12 @@ FloatingRingFunc: ; 549b6 (15:49b6)
 	call SetOneWayPlatformAction
 	ld hl, wCurObjVar2
 	ld b, [hl]
-	ld a, [wCurObjYPos]
+	ld a, [wCurObjYPos + 0]
 	cp b
 	jr nz, .asm_54a42
 	inc l
 	ld b, [hl]
-	ld a, [$d104]
+	ld a, [wCurObjYPos + 1]
 	cp b
 	jr z, .asm_54a5b
 .asm_54a42

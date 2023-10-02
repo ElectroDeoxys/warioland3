@@ -789,7 +789,7 @@ Func_15868e: ; 15868e (56:468e)
 	ret
 
 .Func_1586ed:
-	ld a, [wDebugSceneWarioState]
+	ld a, [wd152]
 	jumptable
 	dw .Func_158701
 	dw .Func_158702
@@ -807,7 +807,7 @@ Func_15868e: ; 15868e (56:468e)
 	ld hl, wSceneObj5
 	call .Func_158869
 .asm_158708
-	ld hl, wDebugSceneWarioState
+	ld hl, wd152
 	inc [hl]
 	ret
 
@@ -839,11 +839,11 @@ Func_15868e: ; 15868e (56:468e)
 
 .Func_158733:
 	ld a, $01
-	ld [wDebugSceneWarioState], a
+	ld [wd152], a
 	ret
 
 .Func_158739:
-	ld a, [$d154]
+	ld a, [wd154]
 	jumptable
 	dw .Func_15874d
 	dw .Func_158761
@@ -861,7 +861,7 @@ Func_15868e: ; 15868e (56:468e)
 	ld hl, wSceneObj9
 	call .Func_158869
 .asm_158754
-	ld hl, $d154
+	ld hl, wd154
 	inc [hl]
 	ret
 
@@ -893,7 +893,7 @@ Func_15868e: ; 15868e (56:468e)
 
 .Func_15877f:
 	ld a, $01
-	ld [$d154], a
+	ld [wd154], a
 	ret
 
 .Func_158785:
@@ -951,7 +951,7 @@ Func_15868e: ; 15868e (56:468e)
 	ret
 
 .Func_1587d1:
-	ld a, [$d153]
+	ld a, [wd153]
 	jumptable
 	dw .Func_1587e5
 	dw .Func_1587e6
@@ -969,7 +969,7 @@ Func_15868e: ; 15868e (56:468e)
 	ld hl, wSceneObj8
 	call .Func_158869
 .asm_1587ec
-	ld hl, $d153
+	ld hl, wd153
 	inc [hl]
 	ret
 
@@ -1001,11 +1001,11 @@ Func_15868e: ; 15868e (56:468e)
 
 .Func_158817:
 	ld a, $01
-	ld [$d153], a
+	ld [wd153], a
 	ret
 
 .Func_15881d:
-	ld a, [$d155]
+	ld a, [wd155]
 	jumptable
 	dw .Func_158831
 	dw .Func_158845
@@ -1023,7 +1023,7 @@ Func_15868e: ; 15868e (56:468e)
 	ld hl, wSceneObj10
 	call .Func_158869
 .asm_158838
-	ld hl, $d155
+	ld hl, wd155
 	inc [hl]
 	ret
 
@@ -1055,7 +1055,7 @@ Func_15868e: ; 15868e (56:468e)
 
 .Func_158863:
 	ld a, $01
-	ld [$d155], a
+	ld [wd155], a
 	ret
 
 .Func_158869:

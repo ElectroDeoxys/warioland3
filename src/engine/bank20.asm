@@ -3246,17 +3246,17 @@ Func_81714: ; 81714 (20:5714)
 	call .Func_8175d
 	ld hl, wOWUIObj2State
 	call .Func_8175d
-	ld hl, $d156
+	ld hl, wd156
 	call .Func_8175d
-	ld hl, $d15e
+	ld hl, w2d15e
 	call .Func_8175d
-	ld hl, $d166
+	ld hl, w2d166
 	call .Func_8175d
-	ld hl, $d16e
+	ld hl, w2d16e
 	call .Func_8175d
-	ld hl, $d176
+	ld hl, w2d176
 	call .Func_8175d
-	ld hl, $d17e
+	ld hl, w2d17e
 	call .Func_8175d
 	ret
 

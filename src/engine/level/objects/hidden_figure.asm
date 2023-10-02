@@ -3,7 +3,7 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	ld [wIsBossBattle], a
 
 	xor a
-	ld hl, $d14b
+	ld hl, w1d14b
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
@@ -11,7 +11,7 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld hl, $d15a
+	ld hl, w1d15a
 	ld a, $04
 	ld [hli], a
 	xor a
@@ -99,7 +99,7 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 
 .Func_4cbf5:
 	ld hl, wCurObjStateDuration
-	ld a, [$d15e]
+	ld a, [w1d15e]
 	and a
 	jr nz, .asm_4cc00
 	dec [hl]
@@ -114,17 +114,17 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	ld hl, wCurObjStateDuration
 	ld a, $01
 	ld [hli], a
-	ld a, [$d160]
+	ld a, [w1d160]
 	cp $02
 	jr nc, .asm_4cc19
 	ld e, a
-	ld a, [$d15e]
+	ld a, [w1d15e]
 	and a
 	jr z, .asm_4cc24
 .asm_4cc19
 	xor a
-	ld [$d15e], a
-	ld [$d160], a
+	ld [w1d15e], a
+	ld [w1d160], a
 	ld b, $06
 	jr .asm_4cc36
 .asm_4cc24
@@ -138,18 +138,18 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 .asm_4cc31
 	inc e
 	ld a, e
-	ld [$d160], a
+	ld [w1d160], a
 .asm_4cc36
 	ld [hl], b
-	ld hl, $d161
+	ld hl, w1d161
 	inc [hl]
 	ret
 
 .Func_4cc3c:
-	ld a, [$d15c]
+	ld a, [w1d15c]
 	and a
 	ret nz
-	ld a, [$d15b]
+	ld a, [w1d15b]
 	and a
 	ret nz
 	ld hl, wCurObjStateDuration
@@ -163,7 +163,7 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	ld [hli], a
 	ld [hl], a
 	ld b, $03
-	ld a, [$d15a]
+	ld a, [w1d15a]
 	cp $04
 	jr z, .asm_4cc82
 	cp $03
@@ -173,7 +173,7 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	jr c, .asm_4cc7b
 	cp $80
 	jr nc, .asm_4cc7b
-	ld a, [$d161]
+	ld a, [w1d161]
 	rra
 	jr c, .asm_4cc7b
 	ld a, $60
@@ -187,11 +187,11 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	ld b, $07
 .asm_4cc82
 	ld a, b
-	ld [$d14b], a
+	ld [w1d14b], a
 	ret
 
 .Func_4cc87:
-	ld hl, $d14e
+	ld hl, w1d14e
 	ld a, [hl]
 	and a
 	jr z, .asm_4cc9e
@@ -207,7 +207,7 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	ld [hl], a
 	ret
 .asm_4cc9e
-	ld a, [$d14b]
+	ld a, [w1d14b]
 	cp $07
 	jr z, .asm_4ccae
 	cp $08
@@ -229,16 +229,16 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	ld a, $00
 	ld [hl], a
 	ld a, $00
-	ld [$d14b], a
-	ld a, [$d15a]
+	ld [w1d14b], a
+	ld a, [w1d15a]
 	dec a
 	ret nz
-	ld hl, $d162
+	ld hl, w1d162
 	dec [hl]
 	jr z, .asm_4ccde
 	ld a, $06
 	ld [wCurObjVar1], a
-	ld hl, $d161
+	ld hl, w1d161
 	inc [hl]
 	ret
 .asm_4ccde
@@ -258,7 +258,7 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	ld [hli], a
 	ld [hl], a
 	ld a, $01
-	ld [$d14b], a
+	ld [w1d14b], a
 	ret
 
 .Func_4ccf6:
@@ -270,8 +270,8 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	dec [hl]
 	ret nz
 	ld a, $00
-	ld [$d14b], a
-	ld a, [$d14c]
+	ld [w1d14b], a
+	ld a, [w1d14c]
 	and a
 	jr nz, .asm_4cd19
 	ld a, $1e
@@ -286,14 +286,14 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	ld a, $09
 	ld [hl], a
 	ld a, $04
-	ld [$d14b], a
+	ld [w1d14b], a
 	ret
 
 .Func_4cd28:
-	ld a, [$d15a]
+	ld a, [w1d15a]
 	and a
 	jp z, .asm_4cda8
-	ld a, [$d14c]
+	ld a, [w1d14c]
 	and a
 	ret nz
 	ld hl, wCurObjStateDuration
@@ -304,7 +304,7 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	ld a, $06
 	ld [hl], a
 	ld a, $00
-	ld [$d14b], a
+	ld [w1d14b], a
 	ret
 
 .Func_4cd45:
@@ -319,7 +319,7 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	ld [hli], a
 	ld [hl], a
 	ld a, $02
-	ld [$d14b], a
+	ld [w1d14b], a
 	ret
 
 .Func_4cd59:
@@ -331,8 +331,8 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	dec [hl]
 	ret nz
 	ld a, $00
-	ld [$d14b], a
-	ld a, [$d14d]
+	ld [w1d14b], a
+	ld a, [w1d14d]
 	and a
 	jr nz, .asm_4cd7c
 	ld a, $1e
@@ -347,14 +347,14 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	ld a, $0a
 	ld [hl], a
 	ld a, $05
-	ld [$d14b], a
+	ld [w1d14b], a
 	ret
 
 .Func_4cd8b:
-	ld a, [$d15a]
+	ld a, [w1d15a]
 	and a
 	jp z, .asm_4cda8
-	ld a, [$d14d]
+	ld a, [w1d14d]
 	and a
 	ret nz
 	ld hl, wCurObjStateDuration
@@ -365,7 +365,7 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	ld a, $06
 	ld [hl], a
 	ld a, $00
-	ld [$d14b], a
+	ld [w1d14b], a
 	ret
 
 .asm_4cda8
@@ -377,7 +377,7 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	ld a, $82
 	ld [wCurObjStateDuration], a
 	ld a, $06
-	ld [$d14b], a
+	ld [w1d14b], a
 	ret
 
 .Func_4cdbc:
@@ -386,10 +386,10 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	call Func_4cfe0
-	ld a, [$d14c]
+	ld a, [w1d14c]
 	and a
 	ret nz
-	ld a, [$d14d]
+	ld a, [w1d14d]
 	and a
 	ret nz
 	ld hl, wCurObjStateDuration
@@ -405,7 +405,7 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	ld a, LOW(.Func_4ce01)
 	ld [hld], a
 	ld a, $01
-	ld [$d15f], a
+	ld [w1d15f], a
 	play_sfx SFX_0CF
 	ret
 .asm_4cdf4
@@ -457,7 +457,7 @@ Func_4ce39: ; 4ce39 (13:4e39)
 
 HiddenFigureFaceFunc: ; 4ce47 (13:4e47)
 .Func_4ce47:
-	ld hl, $d14e
+	ld hl, w1d14e
 	ld a, [hl]
 	cp $80
 	jr z, Func_4ce39
@@ -480,13 +480,13 @@ HiddenFigureFaceFunc: ; 4ce47 (13:4e47)
 	ld a, [wCurObjFrameDuration]
 	and a
 	ret nz
-	ld a, [$d14c]
+	ld a, [w1d14c]
 	and a
 	jr nz, .asm_4ce9d
-	ld a, [$d14d]
+	ld a, [w1d14d]
 	and a
 	jr nz, .asm_4ce9d
-	ld a, [$d15a]
+	ld a, [w1d15a]
 	dec a
 	jr z, .asm_4ce9d
 	ld a, [wWarioScreenXPos]
@@ -529,8 +529,8 @@ HiddenFigureFaceFunc: ; 4ce47 (13:4e47)
 	ld a, LOW(.Func_4cf13)
 	ld [hld], a
 	ld a, $01
-	ld [$d151], a
-	ld hl, $d15a
+	ld [w1d151], a
+	ld hl, w1d15a
 	ld a, [hl]
 	and a
 	ret z
@@ -544,7 +544,7 @@ HiddenFigureFaceFunc: ; 4ce47 (13:4e47)
 	ld l, OBJ_FLAGS
 	set 3, [hl]
 	xor a
-	ld [$d151], a
+	ld [w1d151], a
 	stop_music2
 	ld a, $10
 	ld [wCurObjStateDuration], a
@@ -571,7 +571,7 @@ HiddenFigureFaceFunc: ; 4ce47 (13:4e47)
 	jp Func_4cfe0
 .asm_4cf29
 	xor a
-	ld [$d151], a
+	ld [w1d151], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.Func_4ce47)
 	ld [hld], a
@@ -716,7 +716,7 @@ Func_4cfe0: ; 4cfe0 (13:4fe0)
 	ld hl, Pals_4d04b
 	jr .asm_4cffe
 .asm_4cfef
-	ld a, [$d15a]
+	ld a, [w1d15a]
 	cp $02
 	jr c, .asm_4cffb
 	ld hl, Pals_4d07b
@@ -729,7 +729,7 @@ Func_4cfe0: ; 4cfe0 (13:4fe0)
 	jp Func_35e5
 
 Func_4d005: ; 4d005 (13:5005)
-	ld a, [$d15a]
+	ld a, [w1d15a]
 	cp $02
 	jr c, .asm_4d011
 	ld hl, Pals_4d07b
@@ -844,13 +844,13 @@ HiddenFigureLeftHandFunc: ; 4d0ab (13:50ab)
 	ld [hld], a
 	ld l, OBJ_Y_POS
 	ld a, [hli]
-	ld [$d152], a
+	ld [w1d152 + 0], a
 	ld a, [hli]
-	ld [$d153], a
+	ld [w1d152 + 1], a
 	ld a, [hli]
-	ld [$d154], a
+	ld [w1d152 + 2], a
 	ld a, [hli]
-	ld [$d155], a
+	ld [w1d152 + 3], a
 	ret
 
 .Func_4d0c7:
@@ -858,7 +858,7 @@ HiddenFigureLeftHandFunc: ; 4d0ab (13:50ab)
 	ld [wCurObjAction], a
 	ld hl, wCurObjFlags
 	res OBJFLAG_NO_COLLISION_F, [hl]
-	ld a, [$d14b]
+	ld a, [w1d14b]
 	cp $01
 	jr z, .asm_4d0f3
 	cp $03
@@ -871,13 +871,13 @@ HiddenFigureLeftHandFunc: ; 4d0ab (13:50ab)
 	jr z, .asm_4d11d
 	cp $06
 	jr z, .asm_4d142
-	ld a, [$d151]
+	ld a, [w1d151]
 	and a
 	ret z
 	jr .asm_4d14c
 .asm_4d0f3
 	ld a, $01
-	ld [$d151], a
+	ld [w1d151], a
 	ld bc, .Func_4d2c8
 	ld de, Frameset_6a13a
 	jr .asm_4d154
@@ -905,8 +905,8 @@ HiddenFigureLeftHandFunc: ; 4d0ab (13:50ab)
 	or OBJ_INTERACTION_FULL_STING
 	ld [hli], a
 	ld a, $01
-	ld [$d15c], a
-	ld a, [$d15a]
+	ld [w1d15c], a
+	ld a, [w1d15a]
 	dec a
 	jr z, .asm_4d135
 	ld a, $3c
@@ -946,10 +946,10 @@ HiddenFigureLeftHandFunc: ; 4d0ab (13:50ab)
 	and a
 	jr z, .asm_4d17a
 	dec [hl]
-	ld a, [$d15a]
+	ld a, [w1d15a]
 	and a
 	jr z, .asm_4d197
-	ld a, [$d14b]
+	ld a, [w1d14b]
 	cp $00
 	jr z, .asm_4d197
 	ret
@@ -967,7 +967,7 @@ HiddenFigureLeftHandFunc: ; 4d0ab (13:50ab)
 	ret nz
 .asm_4d197
 	xor a
-	ld [$d15c], a
+	ld [w1d15c], a
 	jp .asm_4d34c
 
 .Func_4d19e:
@@ -977,11 +977,11 @@ HiddenFigureLeftHandFunc: ; 4d0ab (13:50ab)
 	cp $3a
 	ret nz
 	xor a
-	ld [$d151], a
+	ld [w1d151], a
 	jp .asm_4d34c
 
 .Func_4d1b1:
-	ld hl, $d14f
+	ld hl, w1d14f
 	ld a, [hl]
 	and a
 	jr z, .asm_4d1f8
@@ -1030,9 +1030,9 @@ HiddenFigureLeftHandFunc: ; 4d0ab (13:50ab)
 	jr nz, .asm_4d223
 	ld a, $0a
 .asm_4d217
-	ld [$d14e], a
-	ld [$d14f], a
-	ld [$d150], a
+	ld [w1d14e], a
+	ld [w1d14f], a
+	ld [w1d150], a
 	xor a
 	ld [hl], a
 	ret
@@ -1040,12 +1040,12 @@ HiddenFigureLeftHandFunc: ; 4d0ab (13:50ab)
 	xor a
 	ld [hl], a
 .asm_4d225
-	ld a, [$d14b]
+	ld a, [w1d14b]
 	cp $08
 	jr z, .asm_4d280
 	ld bc, Data_4c380
 	call Func_4cfbf
-	ld a, [$d14b]
+	ld a, [w1d14b]
 	cp $07
 	jr z, .asm_4d23e
 	ld bc, Data_4c400
@@ -1150,14 +1150,14 @@ HiddenFigureLeftHandFunc: ; 4d0ab (13:50ab)
 	xor a
 	ld [wCurObjVar3], a
 	inc a
-	ld [$d14c], a
+	ld [w1d14c], a
 	ld [wCurObjStateDuration], a
 	stop_sfx
 	ld de, Frameset_6a0b2
 	jp SetObjectFramesetPtr
 .asm_4d30f
 	ld a, $01
-	ld [$d15e], a
+	ld [w1d15e], a
 	xor a
 	ld [hl], a
 .asm_4d316
@@ -1223,7 +1223,7 @@ HiddenFigureLeftHandFunc: ; 4d0ab (13:50ab)
 .Func_4d37f:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
-	ld a, [$d15f]
+	ld a, [w1d15f]
 	and a
 	ret z
 	ld de, Frameset_6a0bc
@@ -1257,13 +1257,13 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 	ld [hld], a
 	ld l, OBJ_Y_POS
 	ld a, [hli]
-	ld [$d156], a
+	ld [w1d156 + 0], a
 	ld a, [hli]
-	ld [$d157], a
+	ld [w1d156 + 1], a
 	ld a, [hli]
-	ld [$d158], a
+	ld [w1d156 + 2], a
 	ld a, [hli]
-	ld [$d159], a
+	ld [w1d156 + 3], a
 	ret
 
 .Func_4d3c8:
@@ -1271,7 +1271,7 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 	ld [wCurObjAction], a
 	ld hl, wCurObjFlags
 	res OBJFLAG_NO_COLLISION_F, [hl]
-	ld a, [$d14b]
+	ld a, [w1d14b]
 	cp $02
 	jr z, .asm_4d3f4
 	cp $03
@@ -1284,13 +1284,13 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 	jr z, .asm_4d41e
 	cp $06
 	jr z, .asm_4d443
-	ld a, [$d151]
+	ld a, [w1d151]
 	and a
 	ret z
 	jr .asm_4d44d
 .asm_4d3f4
 	ld a, $01
-	ld [$d151], a
+	ld [w1d151], a
 	ld bc, .Func_4d571
 	ld de, Frameset_6a145
 	jr .asm_4d455
@@ -1318,8 +1318,8 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 	or OBJ_INTERACTION_FULL_STING
 	ld [hli], a
 	ld a, $01
-	ld [$d15b], a
-	ld a, [$d15a]
+	ld [w1d15b], a
+	ld a, [w1d15a]
 	dec a
 	jr z, .asm_4d436
 	ld a, $3c
@@ -1359,10 +1359,10 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 	and a
 	jr z, .asm_4d47b
 	dec [hl]
-	ld a, [$d15a]
+	ld a, [w1d15a]
 	and a
 	jr z, .asm_4d498
-	ld a, [$d14b]
+	ld a, [w1d14b]
 	cp $00
 	jr z, .asm_4d498
 	ret
@@ -1380,7 +1380,7 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 	ret nz
 .asm_4d498
 	xor a
-	ld [$d15b], a
+	ld [w1d15b], a
 	jp .asm_4d5f5
 
 .Func_4d49f:
@@ -1390,11 +1390,11 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 	cp $3a
 	ret nz
 	xor a
-	ld [$d151], a
+	ld [w1d151], a
 	jp .asm_4d5f5
 
 .Func_4d4b2:
-	ld hl, $d150
+	ld hl, w1d150
 	ld a, [hl]
 	and a
 	jr z, .asm_4d4d2
@@ -1421,9 +1421,9 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 	cp $04
 	jr nz, .asm_4d4ed
 	ld a, $0a
-	ld [$d14e], a
-	ld [$d14f], a
-	ld [$d150], a
+	ld [w1d14e], a
+	ld [w1d14f], a
+	ld [w1d150], a
 	xor a
 	ld [hl], a
 	ret
@@ -1431,12 +1431,12 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 	xor a
 	ld [hl], a
 .asm_4d4ef
-	ld a, [$d14b]
+	ld a, [w1d14b]
 	cp $08
 	jr z, .asm_4d540
 	ld bc, Data_4c480
 	call Func_4cfbf
-	ld a, [$d14b]
+	ld a, [w1d14b]
 	cp $07
 	jr z, .asm_4d508
 	ld bc, Data_4c400
@@ -1518,14 +1518,14 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 	xor a
 	ld [wCurObjVar3], a
 	inc a
-	ld [$d14d], a
+	ld [w1d14d], a
 	ld [wCurObjStateDuration], a
 	stop_sfx
 	ld de, Frameset_6a0b7
 	jp SetObjectFramesetPtr
 .asm_4d5b8
 	ld a, $01
-	ld [$d15e], a
+	ld [w1d15e], a
 	xor a
 	ld [hl], a
 .asm_4d5bf
@@ -1590,7 +1590,7 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 .Func_4d628:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
-	ld a, [$d15f]
+	ld a, [w1d15f]
 	and a
 	ret z
 	ld de, Frameset_6a0c8
@@ -1746,7 +1746,7 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 	ld a, [wCurObjUnk07]
 	cp $3d
 	jr z, .asm_4d780
-	ld hl, $d152
+	ld hl, w1d152
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
@@ -1768,10 +1768,10 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 	cp b
 	jr nz, .asm_4d7a4
 	xor a
-	ld [$d14c], a
+	ld [w1d14c], a
 	jp HiddenFigureLeftHandFunc.asm_4d34c
 .asm_4d780
-	ld hl, $d156
+	ld hl, w1d156
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
@@ -1793,7 +1793,7 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 	cp b
 	jr nz, .asm_4d7a4
 	xor a
-	ld [$d14d], a
+	ld [w1d14d], a
 	jp .asm_4d5f5
 .asm_4d7a4
 	ld l, OBJ_Y_POS
@@ -1849,7 +1849,7 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 	ld hl, wCurObjState
 	ld a, $31
 	ld [hld], a
-	ld a, [$d15d]
+	ld a, [w1d15d]
 	cp $01
 	jr z, .asm_4d7f5
 	ld a, $46
@@ -1866,7 +1866,7 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 	ld l, OBJ_FLAGS
 	res OBJFLAG_PRIORITY_F, [hl]
 	xor a
-	ld [$d15d], a
+	ld [w1d15d], a
 	ld l, OBJ_STATE
 	ld a, $2d
 	ld [hld], a
@@ -1960,7 +1960,7 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 
 .Func_4d899:
 	ld a, $01
-	ld [$d15d], a
+	ld [w1d15d], a
 	ld hl, wCurObjState
 	ld a, $36
 	ld [hld], a
@@ -1975,7 +1975,7 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 
 .Func_4d8b1:
 	ld a, $01
-	ld [$d15d], a
+	ld [w1d15d], a
 	ld hl, wCurObjState
 	ld a, $37
 	ld [hld], a
@@ -1990,7 +1990,7 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 
 .Func_4d8c9:
 	ld a, $01
-	ld [$d15d], a
+	ld [w1d15d], a
 	ld hl, wCurObjState
 	ld a, $49
 	ld [hld], a
@@ -2003,7 +2003,7 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 	jr .Func_4d8e1
 .Func_4d8e1:
 	ld a, $01
-	ld [$d15d], a
+	ld [w1d15d], a
 	ld hl, wCurObjState
 	ld a, $48
 	ld [hld], a

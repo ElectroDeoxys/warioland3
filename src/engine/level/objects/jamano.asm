@@ -78,7 +78,7 @@ JamanoFunc: ; 54d37 (15:4d37)
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld [$d149], a
+	ld [w1d149], a
 	ld a, [wWarioScreenXPos]
 	add $2a
 	ld b, a
@@ -654,7 +654,7 @@ SkullSpawnerFunc: ; 551e5 (15:51e5)
 	ld [w1d147], a
 	ld [wDollBoyHammerStage], a
 	ld a, $01
-	ld [$d149], a
+	ld [w1d149], a
 	ret
 
 .Func_5522c:
@@ -662,7 +662,7 @@ SkullSpawnerFunc: ; 551e5 (15:51e5)
 	ld [wCurObjAction], a
 	ld a, $02
 	ld [wCurObjFrameDuration], a
-	ld a, [$d149]
+	ld a, [w1d149]
 	and a
 	jr nz, .asm_5525b
 	ld a, [wDollBoyHammerStage]
@@ -811,7 +811,7 @@ SkullFunc: ; 5528d (15:528d)
 	jp SetObjectFramesetPtr
 
 .Func_55347:
-	ld a, [$d149]
+	ld a, [w1d149]
 	and a
 	jr z, .asm_55355
 	ld a, NO_ACTIONS_FOR 1
@@ -901,7 +901,7 @@ SkullFunc: ; 5528d (15:528d)
 	ret
 
 .Func_553e8:
-	ld a, [$d149]
+	ld a, [w1d149]
 	and a
 	jr nz, .asm_553f4
 	ld a, [wDollBoyHammerStage]
@@ -1000,7 +1000,7 @@ Func_55407:
 	jp Func_35e5
 
 .Func_5548b:
-	ld a, [$d149]
+	ld a, [w1d149]
 	and a
 	ret nz
 	xor a

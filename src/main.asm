@@ -260,7 +260,11 @@ OverworldArrowsGfx: INCBIN "gfx/overworld/overworld_arrows.2bpp.lz"
 OverworldGlowGfx: INCBIN "gfx/overworld/overworld_glow.2bpp.lz"
 OverworldNumbersGfx: INCBIN "gfx/overworld/overworld_numbers.2bpp.lz"
 
-	INCROM $8b91e, $8c000
+DebugUnknownTextGfx: INCBIN "gfx/debug_unknown_text.2bpp"
+
+REPT $2
+	db $0
+ENDR
 
 
 SECTION "Bank 23", ROMX

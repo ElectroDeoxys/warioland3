@@ -3566,19 +3566,19 @@ NOWFunc_Prologue: ; b5912 (2d:5912)
 	jp AdvanceOWFunc
 
 .Func_b59c5:
-	ld hl, wDebugSceneWarioState
+	ld hl, wd152
 	jr .asm_b59b9
 
 .Func_b59ca:
-	ld hl, $d153
+	ld hl, wd153
 	jr .asm_b59b9
 
 .Func_b59cf:
-	ld hl, $d154
+	ld hl, wd154
 	jr .asm_b59b9
 
 .Func_b59d4:
-	ld hl, $d155
+	ld hl, wd155
 	jr .asm_b59b9
 
 .Func_b59d9:
@@ -3640,7 +3640,7 @@ WOWFunc_Rain:
 	dw EndOWFunc
 
 .PlayThunderSFX:
-	ld hl, $d13f
+	ld hl, w2d13f
 	ld a, [hl]
 	and a
 	ret z
@@ -3661,7 +3661,7 @@ WOWFunc_Rain:
 	ld a, $5a
 	ld [wPalConfig1TotalSteps], a
 	ld a, $01
-	ld [$d13f], a
+	ld [w2d13f], a
 	jp AdvanceOWFunc
 
 .Wait1:
@@ -3699,7 +3699,7 @@ WOWFunc_Rain:
 	ret c
 	xor a
 	ld [hl], a
-	ld [$d13f], a
+	ld [w2d13f], a
 	ld a, $04
 	ld hl, wSceneObj14State
 	call SetSceneObjState
@@ -4301,7 +4301,7 @@ WOWFunc_VulcanoEruption: ; b5d63 (2d:5d63)
 
 .Func_b5eb7:
 	ld a, $03
-	ld [$d126], a
+	ld [w2d126], a
 .asm_b5ebc
 	play_sfx SFX_TEMPLE_ROCK
 	jp AdvanceOWFunc
@@ -4311,7 +4311,7 @@ WOWFunc_VulcanoEruption: ; b5d63 (2d:5d63)
 	cp 12
 	ret c
 	ld a, $03
-	ld [$d122], a
+	ld [w2d122], a
 	jr .asm_b5ebc
 
 .Func_b5ed4:
@@ -4327,7 +4327,7 @@ WOWFunc_VulcanoEruption: ; b5d63 (2d:5d63)
 	cp 12
 	ret c
 	ld a, $03
-	ld [$d126], a
+	ld [w2d126], a
 	jr .asm_b5ebc
 
 .Func_b5eee:
@@ -4335,7 +4335,7 @@ WOWFunc_VulcanoEruption: ; b5d63 (2d:5d63)
 	cp 20
 	ret c
 	ld a, $03
-	ld [$d122], a
+	ld [w2d122], a
 	jr .asm_b5ebc
 
 .Func_b5efb:
@@ -4343,11 +4343,11 @@ WOWFunc_VulcanoEruption: ; b5d63 (2d:5d63)
 	cp 38
 	ret c
 	ld a, $01
-	ld [$d126], a
+	ld [w2d126], a
 	jr .asm_b5ebc
 
 .Func_b5f08:
-	ld a, [$d126]
+	ld a, [w2d126]
 	and a
 	ret nz
 	jp AdvanceOWFunc
@@ -4395,7 +4395,7 @@ WOWFunc_VulcanoEruption: ; b5d63 (2d:5d63)
 	jp AdvanceOWFunc
 
 .Func_b5f58:
-	ld hl, $d122
+	ld hl, w2d122
 	ld a, [hl]
 	and a
 	ret z
@@ -4424,7 +4424,7 @@ WOWFunc_VulcanoEruption: ; b5d63 (2d:5d63)
 	ld a, b
 	call SetSceneObjState
 	xor a
-	ld hl, $d123
+	ld hl, w2d123
 	ld [hld], a
 	inc [hl]
 	ret
@@ -4441,7 +4441,7 @@ WOWFunc_VulcanoEruption: ; b5d63 (2d:5d63)
 	cp $88
 	ret c
 	xor a
-	ld hl, $d123
+	ld hl, w2d123
 	ld [hld], a
 	ld [hl], a
 	ret
@@ -4472,7 +4472,7 @@ WOWFunc_VulcanoEruption: ; b5d63 (2d:5d63)
 	jr .asm_b5fb0
 
 .Func_b5fb9:
-	ld hl, $d126
+	ld hl, w2d126
 	ld a, [hl]
 	and a
 	ret z
@@ -4501,7 +4501,7 @@ WOWFunc_VulcanoEruption: ; b5d63 (2d:5d63)
 	ld a, b
 	call SetSceneObjState
 	xor a
-	ld hl, $d127
+	ld hl, w2d127
 	ld [hld], a
 	inc [hl]
 	ret
@@ -4518,7 +4518,7 @@ WOWFunc_VulcanoEruption: ; b5d63 (2d:5d63)
 	cp $88
 	ret c
 	xor a
-	ld hl, $d127
+	ld hl, w2d127
 	ld [hld], a
 	ld [hl], a
 	ret
@@ -4568,7 +4568,7 @@ WOWFunc_VulcanoEruption: ; b5d63 (2d:5d63)
 	ld hl, wSceneObj6State
 	call SetSceneObjState
 	xor a
-	ld hl, $d12d
+	ld hl, w2d12d
 	ld [hld], a
 	inc [hl]
 	ret
@@ -4584,7 +4584,7 @@ WOWFunc_VulcanoEruption: ; b5d63 (2d:5d63)
 	cp $88
 	ret c
 	xor a
-	ld hl, $d12d
+	ld hl, w2d12d
 	ld [hld], a
 	ld [hl], a
 	ret
@@ -5384,10 +5384,10 @@ SOWFunc_SendSeeds: ; b65dd (2d:65dd)
 	ld a, [w2d125]
 	and a
 	call nz, .MoveSeed2
-	ld a, [$d129]
+	ld a, [w2d129]
 	and a
 	call nz, .MoveSeed1
-	ld a, [$d127]
+	ld a, [w2d127]
 	and a
 	call nz, .MoveSeed3
 	ld hl, wSceneObj3XCoord
@@ -5395,7 +5395,7 @@ SOWFunc_SendSeeds: ; b65dd (2d:65dd)
 	cp $f0
 	ret c
 	xor a
-	ld [$d127], a
+	ld [w2d127], a
 	jp AdvanceOWFunc
 
 .MoveSeed2:
@@ -5419,7 +5419,7 @@ SOWFunc_SendSeeds: ; b65dd (2d:65dd)
 	ret
 .asm_b6675
 	ld a, $01
-	ld [$d129], a
+	ld [w2d129], a
 	play_sfx SFX_07F
 	ret
 
@@ -5434,16 +5434,16 @@ SOWFunc_SendSeeds: ; b65dd (2d:65dd)
 	cp $f0
 	ret c
 	xor a
-	ld [$d129], a
+	ld [w2d129], a
 	ret
 .asm_b6696
 	ld a, $01
-	ld [$d127], a
+	ld [w2d127], a
 	play_sfx SFX_07F
 	ret
 
 .MoveSeed3:
-	ld hl, $d127
+	ld hl, w2d127
 	call .GetXOffset
 	ld hl, wSceneObj3XCoord
 	add [hl]
@@ -6035,7 +6035,7 @@ SOWFunc_Fan: ; b6a64 (2d:6a64)
 
 .Func_b6aa8:
 	ld a, $01
-	ld [$d122], a
+	ld [w2d122], a
 	jp AdvanceOWFunc
 
 .Func_b6ab0:
@@ -6080,7 +6080,7 @@ SOWFunc_Fan: ; b6a64 (2d:6a64)
 	jp AdvanceOWFunc
 
 .Func_b6af2:
-	ld hl, $d122
+	ld hl, w2d122
 	ld a, [hl]
 	and a
 	ret z
@@ -6103,14 +6103,14 @@ SOWFunc_Fan: ; b6a64 (2d:6a64)
 	ld [hli], a
 	ld a, $82
 	ld [hl], a
-	ld hl, $d122
+	ld hl, w2d122
 	inc [hl]
 	xor a
-	ld [$d123], a
+	ld [w2d123], a
 	ret
 
 .Func_b6b22:
-	ld hl, $d123
+	ld hl, w2d123
 	inc [hl]
 	ld a, [hl]
 	cp $02
@@ -6124,7 +6124,7 @@ SOWFunc_Fan: ; b6a64 (2d:6a64)
 	ld a, [hl]
 	cp $8c
 	ret nz
-	ld hl, $d122
+	ld hl, w2d122
 	inc [hl]
 	ret
 
@@ -6133,7 +6133,7 @@ SOWFunc_Fan: ; b6a64 (2d:6a64)
 	ld hl, wSceneObj1State
 	call SetSceneObjState
 	xor a
-	ld [$d122], a
+	ld [w2d122], a
 	ret
 
 .Func_b6b48:
@@ -6805,12 +6805,12 @@ EOWFunc_FreezeSea: ; b6ebf (2d:6ebf)
 	ret
 .asm_b6f83
 	xor a
-	ld [$d122], a
+	ld [w2d122], a
 	ld hl, wSceneObj1Unk7
 	inc [hl]
 	ret
 .asm_b6f8c
-	ld hl, $d122
+	ld hl, w2d122
 	inc [hl]
 	ld c, [hl]
 	ld hl, wSceneObj1XCoord
@@ -6937,11 +6937,11 @@ EOWFunc_FreezeSea: ; b6ebf (2d:6ebf)
 	ld a, [hli]
 	cp $80
 	jr z, .asm_b70a9
-	ld [$d153], a
+	ld [wd153], a
 	ld a, [hli]
-	ld [$d154], a
+	ld [wd154], a
 	ld a, [hli]
-	ld [$d155], a
+	ld [wd155], a
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
@@ -6949,13 +6949,13 @@ EOWFunc_FreezeSea: ; b6ebf (2d:6ebf)
 	ld a, l
 	ld [w2d151], a
 	ld a, h
-	ld [wDebugSceneWarioState], a
+	ld [wd152], a
 	ld hl, $280
 	add hl, de
 	ld a, l
-	ld [$d156], a
+	ld [wd156 + 0], a
 	ld a, h
-	ld [$d157], a
+	ld [wd156 + 1], a
 	farcall Func_85acb
 	ld a, $01
 	ld [w2d060], a
@@ -7017,14 +7017,14 @@ EOWFunc_Earthquake: ; b7109 (2d:7109)
 
 .Func_b7142:
 	ld b, $04
-	ld hl, $d342
+	ld hl, wAttrmap + $142
 .asm_b7147
 	set 7, [hl]
 	inc hl
 	dec b
 	jr nz, .asm_b7147
 	ld b, $04
-	ld hl, $d362
+	ld hl, wAttrmap + $162
 .asm_b7152
 	set 7, [hl]
 	inc hl
@@ -7443,7 +7443,7 @@ EOWFunc_FormCastle: ; b7395 (2d:7395)
 
 .Func_b73e6:
 	ld a, $01
-	ld [$d121], a
+	ld [w2d121], a
 	jp AdvanceOWFunc
 
 .Func_b73ee:
@@ -7745,7 +7745,7 @@ EOWFunc_VulcanoEruption: ; b7580 (2d:7580)
 .Func_b75dd:
 	play_sfx SFX_127
 	ld a, $01
-	ld [$d134], a
+	ld [w2d134], a
 	jp AdvanceOWFunc
 
 .Func_b75ed:
@@ -7753,7 +7753,7 @@ EOWFunc_VulcanoEruption: ; b7580 (2d:7580)
 	cp $08
 	ret c
 	ld a, $01
-	ld [$d13a], a
+	ld [w2d13a], a
 	jp AdvanceOWFunc
 
 .Func_b75fb:
@@ -7761,7 +7761,7 @@ EOWFunc_VulcanoEruption: ; b7580 (2d:7580)
 	cp $3c
 	ret c
 	ld a, $01
-	ld [$d13c], a
+	ld [w2d13c], a
 	jp AdvanceOWFunc
 
 .Func_b7609:
@@ -7769,7 +7769,7 @@ EOWFunc_VulcanoEruption: ; b7580 (2d:7580)
 	cp $08
 	ret c
 	ld a, $01
-	ld [$d138], a
+	ld [w2d138], a
 	jp AdvanceOWFunc
 
 .Func_b7617:
@@ -7777,17 +7777,17 @@ EOWFunc_VulcanoEruption: ; b7580 (2d:7580)
 	cp $08
 	ret c
 	ld a, $01
-	ld [$d13e], a
+	ld [w2d13e], a
 	jp AdvanceOWFunc
 
 .Func_b7625:
-	ld a, [$d13e]
+	ld a, [w2d13e]
 	and a
 	ret nz
 	jp AdvanceOWFunc
 
 .Func_b762d:
-	ld hl, $d134
+	ld hl, w2d134
 	ld a, [hli]
 	and a
 	ret z
@@ -7804,7 +7804,7 @@ EOWFunc_VulcanoEruption: ; b7580 (2d:7580)
 	ld hl, wSceneObj10State
 	call SetSceneObjState
 .asm_b7646
-	ld hl, $d134
+	ld hl, w2d134
 .asm_b7649
 	inc [hl]
 	inc l
@@ -7820,7 +7820,7 @@ EOWFunc_VulcanoEruption: ; b7580 (2d:7580)
 
 .Func_b7656:
 	ld a, $5a
-	ld hl, $d135
+	ld hl, w2d135
 	cp [hl]
 	ret nc
 	jr .asm_b7646
@@ -7830,11 +7830,11 @@ EOWFunc_VulcanoEruption: ; b7580 (2d:7580)
 	ld hl, wSceneObj10State
 	call SetSceneObjState
 	xor a
-	ld [$d134], a
+	ld [w2d134], a
 	ret
 
 .Func_b766c:
-	ld hl, $d138
+	ld hl, w2d138
 	ld a, [hli]
 	and a
 	ret z
@@ -7851,7 +7851,7 @@ EOWFunc_VulcanoEruption: ; b7580 (2d:7580)
 	ld hl, wSceneObj12State
 	call SetSceneObjState
 .asm_b7685
-	ld hl, $d138
+	ld hl, w2d138
 	jp .asm_b7649
 
 .Func_b768b:
@@ -7862,7 +7862,7 @@ EOWFunc_VulcanoEruption: ; b7580 (2d:7580)
 
 .Func_b7693:
 	ld a, $5a
-	ld hl, $d139
+	ld hl, w2d139
 	cp [hl]
 	ret nc
 	jr .asm_b7685
@@ -7872,11 +7872,11 @@ EOWFunc_VulcanoEruption: ; b7580 (2d:7580)
 	ld hl, wSceneObj12State
 	call SetSceneObjState
 	xor a
-	ld [$d138], a
+	ld [w2d138], a
 	ret
 
 .Func_b76a9:
-	ld hl, $d13a
+	ld hl, w2d13a
 	ld a, [hli]
 	and a
 	ret z
@@ -7893,7 +7893,7 @@ EOWFunc_VulcanoEruption: ; b7580 (2d:7580)
 	ld hl, wSceneObj13State
 	call SetSceneObjState
 .asm_b76c2
-	ld hl, $d13a
+	ld hl, w2d13a
 	jp .asm_b7649
 
 .Func_b76c8:
@@ -7904,7 +7904,7 @@ EOWFunc_VulcanoEruption: ; b7580 (2d:7580)
 
 .Func_b76d0:
 	ld a, $5a
-	ld hl, $d13b
+	ld hl, w2d13b
 	cp [hl]
 	ret nc
 	jr .asm_b76c2
@@ -7914,11 +7914,11 @@ EOWFunc_VulcanoEruption: ; b7580 (2d:7580)
 	ld hl, wSceneObj13State
 	call SetSceneObjState
 	xor a
-	ld [$d13a], a
+	ld [w2d13a], a
 	ret
 
 .Func_b76e6:
-	ld hl, $d13c
+	ld hl, w2d13c
 	ld a, [hli]
 	and a
 	ret z
@@ -7934,12 +7934,12 @@ EOWFunc_VulcanoEruption: ; b7580 (2d:7580)
 	ld hl, wSceneObj14State
 	call SetSceneObjState
 .asm_b76fd
-	ld hl, $d13c
+	ld hl, w2d13c
 	jp .asm_b7649
 
 .Func_b7703:
 	ld a, $5a
-	ld hl, $d13d
+	ld hl, w2d13d
 	cp [hl]
 	ret nc
 	jr .asm_b76fd
@@ -7949,11 +7949,11 @@ EOWFunc_VulcanoEruption: ; b7580 (2d:7580)
 	ld hl, wSceneObj14State
 	call SetSceneObjState
 	xor a
-	ld [$d13c], a
+	ld [w2d13c], a
 	ret
 
 .Func_b7719:
-	ld hl, $d13e
+	ld hl, w2d13e
 	ld a, [hli]
 	and a
 	ret z
@@ -7969,12 +7969,12 @@ EOWFunc_VulcanoEruption: ; b7580 (2d:7580)
 	ld hl, wSceneObj15State
 	call SetSceneObjState
 .asm_b7730
-	ld hl, $d13e
+	ld hl, w2d13e
 	jp .asm_b7649
 
 .Func_b7736:
 	ld a, $5a
-	ld hl, $d13f
+	ld hl, w2d13f
 	cp [hl]
 	ret nc
 	jr .asm_b7730
@@ -7984,7 +7984,7 @@ EOWFunc_VulcanoEruption: ; b7580 (2d:7580)
 	ld hl, wSceneObj15State
 	call SetSceneObjState
 	xor a
-	ld [$d13e], a
+	ld [w2d13e], a
 	ret
 
 .Func_b774c:
@@ -8015,7 +8015,7 @@ EOWFunc_VulcanoEruption: ; b7580 (2d:7580)
 	cp $50
 	ret c
 	ld a, $05
-	ld [$d122], a
+	ld [w2d122], a
 	jr .Func_b7763
 
 .Func_b777f:
@@ -8023,7 +8023,7 @@ EOWFunc_VulcanoEruption: ; b7580 (2d:7580)
 	cp $3c
 	ret c
 	ld a, $07
-	ld [$d126], a
+	ld [w2d126], a
 	jr .Func_b7763
 
 .Func_b778c:
@@ -8031,7 +8031,7 @@ EOWFunc_VulcanoEruption: ; b7580 (2d:7580)
 	cp $50
 	ret c
 	ld a, $07
-	ld [$d122], a
+	ld [w2d122], a
 	jr .Func_b7763
 
 ; unreachable
@@ -8039,7 +8039,7 @@ EOWFunc_VulcanoEruption: ; b7580 (2d:7580)
 	cp $3c
 	ret c
 	ld a, $05
-	ld [$d126], a
+	ld [w2d126], a
 	jr .Func_b7763
 .Func_b77a6:
 	xor a
@@ -8066,7 +8066,7 @@ EOWFunc_BurnVines: ; b77ab (2d:77ab)
 	dw EndOWFunc
 
 .Func_b77ce:
-	ld hl, $d123
+	ld hl, w2d123
 	inc [hl]
 	ld a, [hl]
 	cp $0f

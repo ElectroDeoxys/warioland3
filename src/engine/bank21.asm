@@ -3688,7 +3688,7 @@ Func_85aa2: ; 85aa2 (21:5aa2)
 
 Func_85acb: ; 85acb (21:5acb)
 .asm_85acb
-	ld hl, $d154
+	ld hl, wd154
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
@@ -3706,11 +3706,11 @@ Func_85acb: ; 85acb (21:5acb)
 	dec d
 	ld a, [hl]
 	ld [de], a
-	ld a, [$d153]
+	ld a, [wd153]
 	dec a
-	ld [$d153], a
+	ld [wd153], a
 	ret z
-	ld de, $d154
+	ld de, wd154
 	call Func_85a91
 	call Func_85a91
 	jr .asm_85acb
