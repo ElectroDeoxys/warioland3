@@ -3706,7 +3706,7 @@ Func_ad9b2: ; ad9b2 (2b:59b2)
 
 	ld hl, wTempBGPals
 	ld de, wTempPals1
-	ld b, $40
+	ld b, 8 palettes
 	call CopyHLToDE
 	ret
 

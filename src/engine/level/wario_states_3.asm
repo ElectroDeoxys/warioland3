@@ -2281,11 +2281,7 @@ SetState_PuffyInflating: ; 2975e (a:575e)
 .asm_29805
 	ld a, [wOAMBank]
 	ldh [hCallFuncBank], a
-	ld a, $53
-	ldh [hCallFuncPointer], a
-	ld a, $0e
-	ldh [$ff8e], a
-	call hCallFunc
+	hcall UpdateAnimation
 	ret
 ; 0x29816
 
@@ -2316,16 +2312,16 @@ SetState_PuffyRising: ; 2982b (a:582b)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29856
-	ld a, $4d
-	ld [wFramesetPtr], a
-	ld a, $4e
-	ld [$ca82], a
+	ld a, HIGH(Frameset_1dcd4e)
+	ld [wFramesetPtr + 0], a
+	ld a, LOW(Frameset_1dcd4e)
+	ld [wFramesetPtr + 1], a
 	jr .asm_29860
 .asm_29856
-	ld a, $4d
-	ld [wFramesetPtr], a
-	ld a, $57
-	ld [$ca82], a
+	ld a, HIGH(Frameset_1dcd57)
+	ld [wFramesetPtr + 0], a
+	ld a, LOW(Frameset_1dcd57)
+	ld [wFramesetPtr + 1], a
 .asm_29860
 	ld a, [wOAMBank]
 	ldh [hCallFuncBank], a
@@ -2371,16 +2367,16 @@ SetState_PuffyTurning: ; 298b2 (a:58b2)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_298d8
-	ld a, $4c
-	ld [wFramesetPtr], a
-	ld a, $e3
-	ld [$ca82], a
+	ld a, HIGH(Frameset_1dcce3)
+	ld [wFramesetPtr + 0], a
+	ld a, LOW(Frameset_1dcce3)
+	ld [wFramesetPtr + 1], a
 	jr .asm_298e2
 .asm_298d8
-	ld a, $4c
-	ld [wFramesetPtr], a
-	ld a, $d8
-	ld [$ca82], a
+	ld a, HIGH(Frameset_1dccd8)
+	ld [wFramesetPtr + 0], a
+	ld a, LOW(Frameset_1dccd8)
+	ld [wFramesetPtr + 1], a
 .asm_298e2
 	ld a, [wOAMBank]
 	ldh [hCallFuncBank], a
@@ -2429,16 +2425,16 @@ SetState_PuffyDeflating: ; 2992a (a:592a)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_2995a
-	ld a, $4c
-	ld [wFramesetPtr], a
-	ld a, $ee
-	ld [$ca82], a
+	ld a, HIGH(Frameset_1dccee)
+	ld [wFramesetPtr + 0], a
+	ld a, LOW(Frameset_1dccee)
+	ld [wFramesetPtr + 1], a
 	jr .asm_29964
 .asm_2995a
-	ld a, $4d
-	ld [wFramesetPtr], a
-	ld a, $1e
-	ld [$ca82], a
+	ld a, HIGH(Frameset_1dcd1e)
+	ld [wFramesetPtr + 0], a
+	ld a, LOW(Frameset_1dcd1e)
+	ld [wFramesetPtr + 1], a
 .asm_29964
 	ld a, [wOAMBank]
 	ldh [hCallFuncBank], a
@@ -2467,16 +2463,16 @@ UpdateState_PuffyDeflating: ; 29975 (a:5975)
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_299ae
-	ld a, $4d
-	ld [wFramesetPtr], a
-	ld a, $01
-	ld [$ca82], a
+	ld a, HIGH(Frameset_1dcd01)
+	ld [wFramesetPtr + 0], a
+	ld a, LOW(Frameset_1dcd01)
+	ld [wFramesetPtr + 1], a
 	jr .asm_299b8
 .asm_299ae
-	ld a, $4d
-	ld [wFramesetPtr], a
-	ld a, $31
-	ld [$ca82], a
+	ld a, HIGH(Frameset_1dcd31)
+	ld [wFramesetPtr + 0], a
+	ld a, LOW(Frameset_1dcd31)
+	ld [wFramesetPtr + 1], a
 .asm_299b8
 	ld a, [wOAMBank]
 	ldh [hCallFuncBank], a
@@ -3729,9 +3725,9 @@ SetState_VampireIdling: ; 2a739 (a:6739)
 	ld [wAnimationFrame], a
 	load_gfx WarioVampireGfx
 	call LoadWarioGfx
-	ld a, $54
+	ld a, HIGH(OAM_1fd498)
 	ld [wOAMPtr + 0], a
-	ld a, $98
+	ld a, LOW(OAM_1fd498)
 	ld [wOAMPtr + 1], a
 	load_frameset Frameset_1fd81c
 	update_anim_2
@@ -3927,9 +3923,9 @@ SetState_BatTransforming: ; 2a951 (a:6951)
 	ld [wAnimationFrame], a
 	load_gfx WarioBatGfx
 	call LoadWarioGfx
-	ld a, $50
+	ld a, HIGH(OAM_1fd031)
 	ld [wOAMPtr + 0], a
-	ld a, $31
+	ld a, LOW(OAM_1fd031)
 	ld [wOAMPtr + 1], a
 
 	ld a, [wDirection]
@@ -4059,11 +4055,11 @@ SetState_VampireTransforming: ; 2aa81 (a:6a81)
 	call SetWarioPal
 	load_gfx WarioBatGfx
 	call LoadWarioGfx
-	ld a, $7f
+	ld a, BANK(OAM_1fd031)
 	ld [wOAMBank], a
-	ld a, $50
+	ld a, HIGH(OAM_1fd031)
 	ld [wOAMPtr + 0], a
-	ld a, $31
+	ld a, LOW(OAM_1fd031)
 	ld [wOAMPtr + 1], a
 	load_frameset Frameset_1fd439
 	update_anim_2

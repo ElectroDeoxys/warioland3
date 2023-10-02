@@ -123,9 +123,9 @@ InitPauseMenu_SkipBackupVRAM: ; 1f0099 (7c:4099)
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld a, $5c
+	ld a, HIGH(Frameset_1f1cb8)
 	ld [hli], a
-	ld a, $b8
+	ld a, LOW(Frameset_1f1cb8)
 	ld [hl], a
 	call UpdateObjAnim
 	ld hl, wMenuObj2
@@ -141,9 +141,9 @@ InitPauseMenu_SkipBackupVRAM: ; 1f0099 (7c:4099)
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld a, $5c
+	ld a, HIGH(Frameset_1f1cd4)
 	ld [hli], a
-	ld a, $d4
+	ld a, LOW(Frameset_1f1cd4)
 	ld [hl], a
 	call UpdateObjAnim
 	ld hl, wMenuObj3
@@ -164,9 +164,9 @@ InitPauseMenu_SkipBackupVRAM: ; 1f0099 (7c:4099)
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, $5c
+	ld a, HIGH(Frameset_1f1c4a)
 	ld [hli], a
-	ld a, $4a
+	ld a, LOW(Frameset_1f1c4a)
 	ld [hl], a
 	call UpdateObjAnim
 	ld hl, wMenuObj4
@@ -188,9 +188,9 @@ InitPauseMenu_SkipBackupVRAM: ; 1f0099 (7c:4099)
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, $5c
+	ld a, HIGH(Frameset_1f1c4d)
 	ld [hli], a
-	ld a, $4d
+	ld a, LOW(Frameset_1f1c4d)
 	ld [hl], a
 	call UpdateObjAnim
 	ld hl, wMenuObj5
@@ -212,9 +212,9 @@ InitPauseMenu_SkipBackupVRAM: ; 1f0099 (7c:4099)
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, $5c
+	ld a, HIGH(Frameset_1f1c4a)
 	ld [hli], a
-	ld a, $4a
+	ld a, LOW(Frameset_1f1c4a)
 	ld [hl], a
 	call UpdateObjAnim
 	ld hl, wMenuObj6
@@ -236,9 +236,9 @@ InitPauseMenu_SkipBackupVRAM: ; 1f0099 (7c:4099)
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, $5c
+	ld a, HIGH(Frameset_1f1c4d)
 	ld [hli], a
-	ld a, $4d
+	ld a, LOW(Frameset_1f1c4d)
 	ld [hl], a
 	call UpdateObjAnim
 	ld hl, wMenuObj7
@@ -260,15 +260,15 @@ InitPauseMenu_SkipBackupVRAM: ; 1f0099 (7c:4099)
 	ld a, [wKeyAndTreasureFlags]
 	bit GREY_TREASURE_F, a
 	jr z, .no_grey_treasure
-	ld a, $5c
+	ld a, HIGH(Frameset_1f1cf0)
 	ld [hli], a
-	ld a, $f0
+	ld a, LOW(Frameset_1f1cf0)
 	ld [hl], a
 	jr .set_grey_treasure_sprite
 .no_grey_treasure
-	ld a, $5c
+	ld a, HIGH(Frameset_1f1ced)
 	ld [hli], a
-	ld a, $ed
+	ld a, LOW(Frameset_1f1ced)
 	ld [hl], a
 .set_grey_treasure_sprite
 	call UpdateObjAnim
@@ -290,15 +290,15 @@ InitPauseMenu_SkipBackupVRAM: ; 1f0099 (7c:4099)
 	ld a, [wKeyAndTreasureFlags]
 	bit RED_TREASURE_F, a
 	jr z, .no_red_treasure
-	ld a, $5c
+	ld a, HIGH(Frameset_1f1cf6)
 	ld [hli], a
-	ld a, $f6
+	ld a, LOW(Frameset_1f1cf6)
 	ld [hl], a
 	jr .set_red_treasure_sprite
 .no_red_treasure
-	ld a, $5c
+	ld a, HIGH(Frameset_1f1cf3)
 	ld [hli], a
-	ld a, $f3
+	ld a, LOW(Frameset_1f1cf3)
 	ld [hl], a
 .set_red_treasure_sprite
 	call UpdateObjAnim
@@ -320,15 +320,15 @@ InitPauseMenu_SkipBackupVRAM: ; 1f0099 (7c:4099)
 	ld a, [wKeyAndTreasureFlags]
 	bit GREEN_TREASURE_F, a
 	jr z, .no_green_treasure
-	ld a, $5c
+	ld a, HIGH(Frameset_1f1cf0)
 	ld [hli], a
-	ld a, $f0
+	ld a, LOW(Frameset_1f1cf0)
 	ld [hl], a
 	jr .set_green_treasure_sprite
 .no_green_treasure
-	ld a, $5c
+	ld a, HIGH(Frameset_1f1ced)
 	ld [hli], a
-	ld a, $ed
+	ld a, LOW(Frameset_1f1ced)
 	ld [hl], a
 .set_green_treasure_sprite
 	call UpdateObjAnim
@@ -350,15 +350,15 @@ InitPauseMenu_SkipBackupVRAM: ; 1f0099 (7c:4099)
 	ld a, [wKeyAndTreasureFlags]
 	bit BLUE_TREASURE_F, a
 	jr z, .no_blue_treasure
-	ld a, $5c
+	ld a, HIGH(Frameset_1f1cf6)
 	ld [hli], a
-	ld a, $f6
+	ld a, LOW(Frameset_1f1cf6)
 	ld [hl], a
 	jr .set_blue_treasure_sprite
 .no_blue_treasure
-	ld a, $5c
+	ld a, HIGH(Frameset_1f1cf3)
 	ld [hli], a
-	ld a, $f3
+	ld a, LOW(Frameset_1f1cf3)
 	ld [hl], a
 .set_blue_treasure_sprite
 	call UpdateObjAnim
@@ -1286,9 +1286,9 @@ HandlePauseMenuInput: ; 1f09bd (7c:49bd)
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld a, $5c
+	ld a, HIGH(Frameset_1f1c9c)
 	ld [hli], a
-	ld a, $9c
+	ld a, LOW(Frameset_1f1c9c)
 	ld [hl], a
 	jr .play_sfx
 
@@ -1342,9 +1342,9 @@ HandlePauseMenuInput: ; 1f09bd (7c:49bd)
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld a, $5c
+	ld a, HIGH(Frameset_1f1c74)
 	ld [hli], a
-	ld a, $74
+	ld a, LOW(Frameset_1f1c74)
 	ld [hl], a
 
 .play_sfx
@@ -1364,9 +1364,9 @@ HandlePauseMenuInput: ; 1f09bd (7c:49bd)
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld a, $5c
+	ld a, HIGH(Frameset_1f1cb8)
 	ld [hli], a
-	ld a, $b8
+	ld a, LOW(Frameset_1f1cb8)
 	ld [hl], a
 	jr .play_sfx
 
@@ -1383,9 +1383,9 @@ HandlePauseMenuInput: ; 1f09bd (7c:49bd)
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
-	ld a, $5c
+	ld a, HIGH(Frameset_1f1cbb)
 	ld [hli], a
-	ld a, $bb
+	ld a, LOW(Frameset_1f1cbb)
 	ld [hl], a
 
 	ld hl, wPauseMenuSelection
@@ -1398,9 +1398,9 @@ HandlePauseMenuInput: ; 1f09bd (7c:49bd)
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, $5c
+	ld a, HIGH(Frameset_1f1c9f)
 	ld [hli], a
-	ld a, $9f
+	ld a, LOW(Frameset_1f1c9f)
 	ld [hl], a
 	jr .do_selection
 
@@ -1438,9 +1438,9 @@ HandlePauseMenuInput: ; 1f09bd (7c:49bd)
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, $5c
+	ld a, HIGH(Frameset_1f1c77)
 	ld [hli], a
-	ld a, $77
+	ld a, LOW(Frameset_1f1c77)
 	ld [hl], a
 	jr .do_selection
 .do_selection
@@ -3524,7 +3524,15 @@ OAM_1f156c: ; 1f156c (7c:556c)
 	db $80
 ; 0x1f1c4a
 
-	INCROM $1f1c4a, $1f1c50
+Frameset_1f1c4a: ; 1f1c4a (7c:5c4a)
+	db $00,  1
+	db $ff
+; 0x1f1c4d
+
+Frameset_1f1c4d: ; 1f1c4d (7c:5c4d)
+	db $01,  1
+	db $ff
+; 0x1f1c50
 
 Frameset_1f1c50: ; 1f1c50 (7c:5c50)
 	db $06, 100
@@ -3551,7 +3559,74 @@ Frameset_1f1c69: ; 1f1c69 (7c:5c69)
 	db $ff
 ; 0x1f1c74
 
-	INCROM $1f1c74, $1f1cd4
+Frameset_1f1c74: ; 1f1c74 (7c:5c74)
+	db $0a, 50
+	db $ff
+; 0x1f1c77
+
+Frameset_1f1c77: ; 1f1c77 (7c:5c77)
+	db $0b,  4
+	db $0c,  4
+	db $0a,  4
+	db $0d,  4
+	db $0e,  4
+	db $0f,  4
+	db $0b,  4
+	db $0c,  4
+	db $0a,  4
+	db $0d,  4
+	db $0e,  4
+	db $0f,  4
+	db $0b,  4
+	db $0c,  4
+	db $0a,  4
+	db $0d,  4
+	db $0e,  4
+	db $0f,  4
+	db $ff
+; 0x1f1c9c
+
+Frameset_1f1c9c: ; 1f1c9c (7c:5c9c)
+	db $11, 50
+	db $ff
+; 0x1f1c9f
+
+Frameset_1f1c9f: ; 1f1c9f (7c:5c9f)
+	db $12,  4
+	db $13,  4
+	db $14,  4
+	db $15,  4
+	db $12,  4
+	db $13,  4
+	db $14,  4
+	db $15,  4
+	db $12,  4
+	db $13,  4
+	db $14,  4
+	db $15,  4
+	db $ff
+; 0x1f1cb8
+
+Frameset_1f1cb8: ; 1f1cb8 (7c:5cb8)
+	db $16, 50
+	db $ff
+; 0x1f1cbb
+
+Frameset_1f1cbb: ; 1f1cbb (7c:5cbb)
+	db $17,  4
+	db $18,  4
+	db $19,  4
+	db $1a,  4
+	db $1b,  4
+	db $1c,  4
+	db $17,  4
+	db $18,  4
+	db $19,  4
+	db $1a,  4
+	db $1b,  4
+	db $1c,  4
+	db $ff
+; 0x1f1cd4
 
 Frameset_1f1cd4: ; 1f1cd4 (7c:5cd4)
 	db $1d, 10
@@ -3569,7 +3644,25 @@ Frameset_1f1cd4: ; 1f1cd4 (7c:5cd4)
 	db $ff
 ; 0x1f1ced
 
-	INCROM $1f1ced, $1f1cf9
+Frameset_1f1ced: ; 1f1ced (7c:5ced)
+	db $02,  4
+	db $ff
+; 0x1f1cf0
+
+Frameset_1f1cf0: ; 1f1cf0 (7c:5cf0)
+	db $03,  4
+	db $ff
+; 0x1f1cf3
+
+Frameset_1f1cf3: ; 1f1cf3 (7c:5cf3)
+	db $04,  4
+	db $ff
+; 0x1f1cf6
+
+Frameset_1f1cf6: ; 1f1cf6 (7c:5cf6)
+	db $05,  4
+	db $ff
+; 0x1f1cf9
 
 Frameset_1f1cf9: ; 1f1cf9 (7c:5cf9)
 	db $27, 17

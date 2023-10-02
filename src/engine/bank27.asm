@@ -5204,7 +5204,7 @@ Cutscene56Func: ; 9e6fd (27:66fd)
 	ld a, $08
 	ld [wCollectionRow], a
 	ld b, BANK(Pals_b8800)
-	ld c, $40
+	ld c, 8 palettes
 	ld hl, Pals_b8800
 	ld de, wTempPals1
 	call CopyFarBytes
