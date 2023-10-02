@@ -313,7 +313,14 @@ OAM_1dc000:: ; 1dc000 (77:4000)
 	db $80
 ; 0x1dc374
 
-	INCROM $1dc374, $1dc37f
+Frameset_1dc374:: ; 1dc374 (77:4374)
+	db $00,  5
+	db $01,  5
+	db $02,  5
+	db $03,  5
+	db $01,  5
+	db $ff
+; 0x1dc37f
 
 Frameset_1dc37f:: ; 1dc37f (77:437f)
 	db $04,  6
@@ -321,7 +328,54 @@ Frameset_1dc37f:: ; 1dc37f (77:437f)
 	db $ff
 ; 0x1dc384
 
-	INCROM $1dc384, $1dc3c3
+Frameset_1dc384:: ; 1dc384 (77:4384)
+	db $05,  6
+	db $04,  6
+	db $ff
+; 0x1dc389
+
+Frameset_1dc389:: ; 1dc389 (77:4389)
+	db $06,  4
+	db $07,  4
+	db $ff
+; 0x1dc38e
+
+Frameset_1dc38e:: ; 1dc38e (77:438e)
+	db $07,  4
+	db $06,  4
+	db $ff
+; 0x1dc393
+
+Frameset_1dc393:: ; 1dc393 (77:4393)
+	db $00,  3
+	db $06,  3
+	db $07,  3
+	db $0a,  3
+	db $08,  3
+	db $09,  3
+	db $10,  3
+	db $11,  3
+	db $12,  3
+	db $13,  3
+	db $1a,  3
+	db $1b,  3
+	db $16,  3
+	db $17,  3
+	db $18,  3
+	db $19,  3
+	db $14,  3
+	db $15,  3
+	db $ff
+; 0x1dc3b8
+
+Frameset_1dc3b8:: ; 1dc3b8 (77:43b8)
+	db $0a,  5
+	db $0b,  5
+	db $0c,  5
+	db $0d,  5
+	db $0b,  5
+	db $ff
+; 0x1dc3c3
 
 Frameset_1dc3c3:: ; 1dc3c3 (77:43c3)
 	db $0e,  6
@@ -329,7 +383,11 @@ Frameset_1dc3c3:: ; 1dc3c3 (77:43c3)
 	db $ff
 ; 0x1dc3c8
 
-	INCROM $1dc3c8, $1dc3cd
+Frameset_1dc3c8:: ; 1dc3c8 (77:43c8)
+	db $0f,  6
+	db $0e,  6
+	db $ff
+; 0x1dc3cd
 
 OAM_1dc3cd:: ; 1dc3cd (77:43cd)
 	dw .frame_0
@@ -823,9 +881,39 @@ Frameset_1dc904:: ; 1dc904 (77:4904)
 	db $ff
 ; 0x1dc90d
 
-	INCROM $1dc90d, $1dc93f
+Frameset_1dc90d:: ; 1dc90d (77:490d)
+	db $08,  2
+	db $09,  2
+	db $0a,  2
+	db $0b,  2
+	db $0a,  4
+	db $0c,  6
+	db $0d,  6
+	db $0e,  6
+	db $0f,  6
+	db $10,  6
+	db $11,  6
+	db $12,  6
+	db $ff
+; 0x1dc926
 
-	OAM_1dc93f:: ; 1dc93f (77:493f)
+Frameset_1dc926:: ; 1dc926 (77:4926)
+	db $13,  2
+	db $14,  2
+	db $15,  2
+	db $16,  2
+	db $15,  4
+	db $17,  6
+	db $18,  6
+	db $19,  6
+	db $1a,  6
+	db $1b,  6
+	db $1c,  6
+	db $1d,  6
+	db $ff
+; 0x1dc93f
+
+OAM_1dc93f:: ; 1dc93f (77:493f)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1158,7 +1246,7 @@ Frameset_1dccc9:: ; 1dccc9 (77:4cc9)
 
 	INCROM $1dccd2, $1dcd60
 
-	OAM_1dcd60:: ; 1dcd60 (77:4d60)
+OAM_1dcd60:: ; 1dcd60 (77:4d60)
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2

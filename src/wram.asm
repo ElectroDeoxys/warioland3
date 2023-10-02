@@ -373,7 +373,7 @@ wLadderInteraction:: ; c1c7
 wIsNearFence:: ; c1c8
 	db
 
-wc1c9:: ; c1c9
+wIsInAirCurrent:: ; c1c9
 	db
 
 wc1ca:: ; c1ca

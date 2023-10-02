@@ -311,11 +311,11 @@ DEF WARIO_STATES_GROUP_3 EQU const_value
 	const WST_UNUSED_B5                     ; $b5
 	const WST_UNUSED_B6                     ; $b6
 	const WST_UNUSED_B7                     ; $b7
-	const WST_UNKNOWN_B8                    ; $b8
-	const WST_UNKNOWN_B9                    ; $b9
-	const WST_UNKNOWN_BA                    ; $ba
-	const WST_UNKNOWN_BB                    ; $bb
-	const WST_UNKNOWN_BC                    ; $bc
+	const WST_GRABBING_OWL                  ; $b8
+	const WST_OWL_SLOW                      ; $b9
+	const WST_OWL_FAST                      ; $ba
+	const WST_RELEASING_OWL                 ; $bb
+	const WST_FALLING_FROM_OWL              ; $bc
 	const WST_UNUSED_BD                     ; $bd
 	const WST_UNUSED_BE                     ; $be
 	const WST_UNUSED_BF                     ; $bf
@@ -323,27 +323,27 @@ DEF WARIO_STATES_GROUP_3 EQU const_value
 	const WST_UNUSED_C1                     ; $c1
 	const WST_UNUSED_C2                     ; $c2
 	const WST_UNUSED_C3                     ; $c3
-	const WST_UNKNOWN_C4                    ; $c4
-	const WST_UNKNOWN_C5                    ; $c5
-	const WST_UNKNOWN_C6                    ; $c6
-	const WST_UNKNOWN_C7                    ; $c7
-	const WST_UNKNOWN_C8                    ; $c8
-	const WST_UNKNOWN_C9                    ; $c9
-	const WST_UNKNOWN_CA                    ; $ca
-	const WST_UNKNOWN_CB                    ; $cb
-	const WST_UNKNOWN_CC                    ; $cc
-	const WST_UNKNOWN_CD                    ; $cd
+	const WST_SNOWMAN_START                 ; $c4
+	const WST_SNOWMAN_IDLE                  ; $c5
+	const WST_SNOWMAN_WALKING               ; $c6
+	const WST_SNOWMAN_TURNING               ; $c7
+	const WST_SNOWMAN_AIRBORNE              ; $c8
+	const WST_SNOWMAN_LANDING               ; $c9
+	const WST_SNOWMAN_BUMPED                ; $ca
+	const WST_SNOWBALL_ROLLING              ; $cb
+	const WST_SNOWBALL_AIRBORNE             ; $cc
+	const WST_SNOWBALL_CRASH                ; $cd
 	const WST_UNUSED_CE                     ; $ce
 	const WST_UNUSED_CF                     ; $cf
 	const WST_SPLIT_HIT                     ; $d0
 	const WST_SPLIT_KNOCKED_BACK            ; $d1
 	const WST_SPLITTING                     ; $d2
-	const WST_UNKNOWN_D3                    ; $d3
-	const WST_FAN                           ; $d4
-	const WST_UNKNOWN_D5                    ; $d5
-	const WST_UNKNOWN_D6                    ; $d6
-	const WST_UNKNOWN_D7                    ; $d7
-	const WST_UNKNOWN_D8                    ; $d8
+	const WST_SPLITTING_AIRBORNE            ; $d3
+	const WST_FAN_START                     ; $d4
+	const WST_FAN_LIFTING                   ; $d5
+	const WST_FAN_TURNING                   ; $d6
+	const WST_FAN_SPINNING                  ; $d7
+	const WST_FAN_RECOVERING                ; $d8
 	const WST_UNUSED_D9                     ; $d9
 	const WST_UNUSED_DA                     ; $da
 	const WST_UNUSED_DB                     ; $db
@@ -351,13 +351,13 @@ DEF WARIO_STATES_GROUP_3 EQU const_value
 	const WST_BLIND_WALKING                 ; $dd
 	const WST_BLIND_TURNING                 ; $de
 	const WST_BLIND_AIRBORNE                ; $df
-	const WST_UNKNOWN_E0                    ; $e0
-	const WST_UNKNOWN_E1                    ; $e1
-	const WST_UNKNOWN_E2                    ; $e2
+	const WST_SWALLOWED                     ; $e0
+	const WST_LAUNCHED                      ; $e1
+	const WST_LAUCH_CRASH                   ; $e2
 	const WST_UNUSED_E3                     ; $e3
 	const WST_MAGIC_RISING                  ; $e4
 	const WST_MAGIC_STOPPING                ; $e5
-	const WST_UNKNOWN_E6                    ; $e6
+	const WST_MAGIC_RECOVERING              ; $e6
 	const WST_UNUSED_E7                     ; $e7
 	const WST_BALL_START                    ; $e8
 	const WST_BALL_BOUNCING                 ; $e9

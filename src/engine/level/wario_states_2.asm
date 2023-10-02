@@ -37,20 +37,20 @@ UpdateWarioStates_Group2: ; 19c1b (6:5c1b)
 	dw UpdateState_FenceIdling           ; WST_FENCE_IDLING
 	dw UpdateState_FenceMovingHorizontal ; WST_FENCE_MOVING_HORIZONTAL
 	dw UpdateState_FenceSliding          ; WST_FENCE_SLIDING
-	dw Func_156d                         ; WST_UNUSED_52
-	dw Func_156d                         ; WST_UNUSED_53
-	dw Func_156d                         ; WST_UNUSED_54
-	dw Func_156d                         ; WST_UNUSED_55
-	dw Func_156d                         ; WST_UNUSED_56
-	dw Func_156d                         ; WST_UNUSED_57
-	dw Func_156d                         ; WST_UNUSED_58
-	dw Func_156d                         ; WST_UNUSED_59
-	dw Func_156d                         ; WST_UNUSED_5A
-	dw Func_156d                         ; WST_UNUSED_5B
-	dw Func_156d                         ; WST_UNUSED_5C
-	dw Func_156d                         ; WST_UNUSED_5D
-	dw Func_156d                         ; WST_UNUSED_5E
-	dw Func_156d                         ; WST_UNUSED_5F
+	dw InvalidWarioStateReset            ; WST_UNUSED_52
+	dw InvalidWarioStateReset            ; WST_UNUSED_53
+	dw InvalidWarioStateReset            ; WST_UNUSED_54
+	dw InvalidWarioStateReset            ; WST_UNUSED_55
+	dw InvalidWarioStateReset            ; WST_UNUSED_56
+	dw InvalidWarioStateReset            ; WST_UNUSED_57
+	dw InvalidWarioStateReset            ; WST_UNUSED_58
+	dw InvalidWarioStateReset            ; WST_UNUSED_59
+	dw InvalidWarioStateReset            ; WST_UNUSED_5A
+	dw InvalidWarioStateReset            ; WST_UNUSED_5B
+	dw InvalidWarioStateReset            ; WST_UNUSED_5C
+	dw InvalidWarioStateReset            ; WST_UNUSED_5D
+	dw InvalidWarioStateReset            ; WST_UNUSED_5E
+	dw InvalidWarioStateReset            ; WST_UNUSED_5F
 ; 0x19c81
 
 SetState_Slipping: ; 19c81 (6:5c81)

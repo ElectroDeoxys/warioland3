@@ -559,7 +559,7 @@ AttackObject: ; 20350 (8:4350)
 	ld a, [wca8f]
 	and a
 	ret nz
-	farcall SetState_UnknownCA
+	farcall SetState_SnowmanBumped
 	ret
 ; 0x20447
 
@@ -2832,7 +2832,7 @@ ObjInteraction_Owl: ; 218e7 (8:58e7)
 	ld [wStingTouchState], a
 	ld a, $01
 	ld [wca94], a
-	ld a, $b8
+	ld a, WST_GRABBING_OWL
 	ld [wWarioState], a
 	ld a, $ff
 	ld [wCollisionBoxBottom], a
@@ -2964,7 +2964,7 @@ Func_21a52: ; 21a52 (8:5a52)
 	ld [wStingTouchState], a
 	ld a, $02
 	ld [wca94], a
-	farcall SetState_UnknownC4
+	farcall SetState_TurningIntoSnowman
 	ret
 ; 0x21a8c
 
@@ -3202,7 +3202,7 @@ Func_21c26: ; 21c26 (8:5c26)
 .asm_21c41
 	ld b, OBJACTION_11
 	call SetObjAction
-	farcall SetState_UnknownE0
+	farcall SetState_Swallowed
 	ret
 ; 0x21c56
 
@@ -3388,7 +3388,7 @@ Func_21dac: ; 21dac (8:5dac)
 	jp nz, Func_2022c
 	ld a, [wEnemyDirection]
 	ld [wDirection], a
-	farcall SetState_UnknownE1
+	farcall SetState_Launched
 	ld b, OBJACTION_06
 	jp SetObjAction
 ; 0x21dd3

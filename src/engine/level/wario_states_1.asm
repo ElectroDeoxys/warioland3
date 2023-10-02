@@ -30,7 +30,7 @@ UpdateWarioStates_Group1: ; 1c04d (7:404d)
 	dw UpdateState_Idling              ; WST_IDLING
 	dw UpdateState_Walking             ; WST_WALKING
 	dw UpdateState_Turning             ; WST_TURNING
-	dw Func_156d                       ; WST_UNUSED_03
+	dw InvalidWarioStateReset          ; WST_UNUSED_03
 	dw UpdateState_Airborne            ; WST_AIRBORNE
 	dw UpdateState_Landing             ; WST_LANDING
 	dw UpdateState_CrouchSliding       ; WST_CROUCH_SLIDING
@@ -54,9 +54,9 @@ UpdateWarioStates_Group1: ; 1c04d (7:404d)
 	dw UpdateState_PipeGoingUp         ; WST_PIPE_GOING_UP
 	dw UpdateState_EnemyBumping        ; WST_ENEMY_BUMPING
 	dw UpdateState_SmashAttacking      ; WST_SMASH_ATTACKING
-	dw Func_156d                       ; WST_UNUSED_1B
-	dw Func_156d                       ; WST_UNUSED_1C
-	dw Func_156d                       ; WST_UNUSED_1D
+	dw InvalidWarioStateReset          ; WST_UNUSED_1B
+	dw InvalidWarioStateReset          ; WST_UNUSED_1C
+	dw InvalidWarioStateReset          ; WST_UNUSED_1D
 	dw UpdateState_PickingUp           ; WST_PICKING_UP
 	dw UpdateState_GrabIdling          ; WST_GRAB_IDLING
 	dw UpdateState_GrabWalking         ; WST_GRAB_WALKING
@@ -72,13 +72,13 @@ UpdateWarioStates_Group1: ; 1c04d (7:404d)
 	dw UpdateState_PickedUp            ; WST_PICKED_UP
 	dw UpdateState_GroundShakeStunned  ; WST_GROUND_SHAKE_STUNNED
 	dw UpdateState_EnteringDoor        ; WST_ENTERING_DOOR
-	dw Func_156d                       ; WST_UNUSED_2D
-	dw Func_156d                       ; WST_UNUSED_2E
-	dw Func_156d                       ; WST_UNUSED_2F
-	dw Func_156d
-	dw Func_156d
-	dw Func_156d
-	dw Func_156d
+	dw InvalidWarioStateReset          ; WST_UNUSED_2D
+	dw InvalidWarioStateReset          ; WST_UNUSED_2E
+	dw InvalidWarioStateReset          ; WST_UNUSED_2F
+	dw InvalidWarioStateReset
+	dw InvalidWarioStateReset
+	dw InvalidWarioStateReset
+	dw InvalidWarioStateReset
 ; 1c0b6
 
 UpdateState_Idling: ; 1c0b6 (7:40b6)

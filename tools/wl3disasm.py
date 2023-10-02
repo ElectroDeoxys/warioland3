@@ -497,7 +497,7 @@ def check_update_anim(ops):
 		and ops[6] == 0xe0  and ops[7] == 0x8d  and ops[8] == 0x3e \
 		and ops[9] == 0x0e  and ops[10] == 0xe0 and ops[11] == 0x8e \
 		and ops[12] == 0xcd and ops[13] == 0x80 and ops[14] == 0xff \
-		and (ops[1] == 0x05 or ops[1] == 0x7f))
+		and (ops[1] == 0x05 or ops[1] == 0x7f or ops[1] == 0x77))
 
 class Disassembler(object):
 	"""
@@ -713,8 +713,10 @@ class Disassembler(object):
 				if is_update_anim:
 					if opcode_arg_1 == 0x05:
 						opcode_output_str = "update_anim_1"
-					else:
+					if opcode_arg_1 == 0x7f:
 						opcode_output_str = "update_anim_2"
+					else:
+						opcode_output_str = "update_anim_3"
 
 				elif opcode_nargs == 0:
 				# set output string simply as the opcode

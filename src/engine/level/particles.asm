@@ -78,7 +78,7 @@ ENDR
 	dw ParticleFunc_Ice            ; PARTICLE_ICE
 	dw ParticleFunc_TreasureGlow   ; PARTICLE_TREASURE_GLOW
 	dw ParticleFunc_Owl            ; PARTICLE_OWL
-	dw ParticleFunc_OF             ; PARTICLE_0F
+	dw ParticleFunc_Snow            ; PARTICLE_SNOW
 	dw ParticleFunc_Magic1         ; PARTICLE_MAGIC_1
 	dw ParticleFunc_Magic2         ; PARTICLE_MAGIC_2
 	dw ParticleFunc_MagicStop      ; PARTICLE_MAGIC_STOP
@@ -756,7 +756,7 @@ ParticleFunc_Owl: ; cd09 (3:4d09)
 	ret
 ; 0xcd3d
 
-ParticleFunc_OF: ; cd3d (3:4d3d)
+ParticleFunc_Snow: ; cd3d (3:4d3d)
 	push bc
 	inc c
 	ld a, [bc]
@@ -785,7 +785,7 @@ ParticleFunc_OF: ; cd3d (3:4d3d)
 	inc c
 	inc c
 .update_anim
-	call ParticleAnim_OF
+	call ParticleAnim_Snow
 	pop bc
 
 	ld a, [wCurParticleAnimEnded]
@@ -1196,7 +1196,7 @@ ParticleAnim_BouncyJump: ; cf67 (3:4f67)
 	jp AddParticleSprite
 ; 0xcf88
 
-ParticleAnim_OF: ; cf88 (3:4f88)
+ParticleAnim_Snow: ; cf88 (3:4f88)
 	ld h, b
 	ld l, c
 	ld de, Frameset_d806

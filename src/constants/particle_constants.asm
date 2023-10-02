@@ -15,7 +15,7 @@
 	const PARTICLE_ICE              ; $0c
 	const PARTICLE_TREASURE_GLOW    ; $0d
 	const PARTICLE_OWL              ; $0e
-	const PARTICLE_0F               ; $0f
+	const PARTICLE_SNOW             ; $0f
 	const PARTICLE_MAGIC_1          ; $10
 	const PARTICLE_MAGIC_2          ; $11
 	const PARTICLE_MAGIC_STOP       ; $12

@@ -1089,8 +1089,8 @@ Func_1894d: ; 1894d (6:494d)
 	ld a, [wInvincibleCounter]
 	and a
 	jp nz, Func_18020
-	ld a, $01
-	ld [wc1c9], a
+	ld a, TRUE
+	ld [wIsInAirCurrent], a
 	ld a, [wTransformation]
 	and a
 	jp nz, Func_18020
@@ -1102,7 +1102,7 @@ Func_1894d: ; 1894d (6:494d)
 	ld [wStingTouchState], a
 	ld a, $01
 	ld [wca94], a
-	farcall SetState_Fan
+	farcall SetState_FanStart
 	jp Func_18020
 ; 0x18997
 
@@ -2185,7 +2185,7 @@ Func_19b3a: ; 19b3a (6:5b3a)
 	ld [wRoomTransitionParam], a
 	ld [wIsInSand], a
 	ld [wIsNearFence], a
-	ld [wc1c9], a
+	ld [wIsInAirCurrent], a
 	call Func_19c0b
 	ret
 ; 0x19b51

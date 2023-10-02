@@ -1494,7 +1494,7 @@ ApplyWalkVelocity:: ; 1554 (0:1554)
 	ret
 ; 0x156d
 
-Func_156d:: ; 156d (0:156d)
+InvalidWarioStateReset:: ; 156d (0:156d)
 	jp Init
 ; 0x1570
 

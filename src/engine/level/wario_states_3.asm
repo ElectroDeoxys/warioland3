@@ -39,7 +39,7 @@ UpdateWarioStates_Group3: ; 28000 (a:4000)
 	dw UpdateState_ElectricDizzy              ; WST_ELECTRIC_DIZZY
 	dw UpdateState_TurningInvisible           ; WST_TURNING_INVISIBLE
 	dw UpdateState_PuffyInflating             ; WST_PUFFY_INFLATING
-	dw UpdateState_PuffyRising               ; WST_PUFFY_RISING
+	dw UpdateState_PuffyRising                ; WST_PUFFY_RISING
 	dw UpdateState_PuffyTurning               ; WST_PUFFY_TURNING
 	dw UpdateState_PuffyDeflating             ; WST_PUFFY_DEFLATING
 	dw UpdateState_ZombieIdling               ; WST_ZOMBIE_IDLING
@@ -73,16 +73,16 @@ UpdateWarioStates_Group3: ; 28000 (a:4000)
 	dw UpdateState_BatFlying                  ; WST_BAT_FLYING
 	dw UpdateState_BatFalling                 ; WST_BAT_FALLING
 	dw UpdateState_InBubble                   ; WST_IN_BUBBLE
-	dw Func_156d                              ; WST_UNUSED_A6
-	dw Func_156d                              ; WST_UNUSED_A7
-	dw Func_156d                              ; WST_UNUSED_A8
-	dw Func_156d                              ; WST_UNUSED_A9
-	dw Func_156d                              ; WST_UNUSED_AA
-	dw Func_156d                              ; WST_UNUSED_AB
-	dw Func_156d                              ; WST_UNUSED_AC
-	dw Func_156d                              ; WST_UNUSED_AD
-	dw Func_156d                              ; WST_UNUSED_AE
-	dw Func_156d                              ; WST_UNUSED_AF
+	dw InvalidWarioStateReset                 ; WST_UNUSED_A6
+	dw InvalidWarioStateReset                 ; WST_UNUSED_A7
+	dw InvalidWarioStateReset                 ; WST_UNUSED_A8
+	dw InvalidWarioStateReset                 ; WST_UNUSED_A9
+	dw InvalidWarioStateReset                 ; WST_UNUSED_AA
+	dw InvalidWarioStateReset                 ; WST_UNUSED_AB
+	dw InvalidWarioStateReset                 ; WST_UNUSED_AC
+	dw InvalidWarioStateReset                 ; WST_UNUSED_AD
+	dw InvalidWarioStateReset                 ; WST_UNUSED_AE
+	dw InvalidWarioStateReset                 ; WST_UNUSED_AF
 ; 0x280a6
 
 UpdateState_OnFire: ; 280a6 (a:40a6)
@@ -3243,7 +3243,7 @@ UpdateState_BouncyAirborne: ; 2a0f9 (a:60f9)
 
 .asm_2a1ce
 	xor a
-	ld a, $93
+	ld a, WST_BOUNCY_CEILING
 	ld [wWarioState], a
 	xor a
 	ld [wFrameDuration], a
