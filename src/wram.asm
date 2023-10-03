@@ -1,5 +1,3 @@
-INCLUDE "constants.asm"
-
 INCLUDE "vram.asm"
 
 SECTION "WRAM0", WRAM0

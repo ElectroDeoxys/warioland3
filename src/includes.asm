@@ -1,6 +1,15 @@
 INCLUDE "charmaps.asm"
 
-INCLUDE "macros.asm"
+INCLUDE "macros/audio.asm"
+INCLUDE "macros/audio_commands.asm"
+INCLUDE "macros/constants.asm"
+INCLUDE "macros/code.asm"
+INCLUDE "macros/coords.asm"
+INCLUDE "macros/data.asm"
+INCLUDE "macros/gfx.asm"
+INCLUDE "macros/golf.asm"
+INCLUDE "macros/pos.asm"
+INCLUDE "macros/wram.asm"
 
 INCLUDE "constants/audio_constants.asm"
 INCLUDE "constants/cutscene_constants.asm"

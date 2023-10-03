@@ -1,6 +1,3 @@
-INCLUDE "constants.asm"
-
-
 SECTION "Bank 1", ROMX
 
 INCLUDE "engine/bank1.asm"

@@ -1,5 +1,3 @@
-INCLUDE "constants.asm"
-
 INCLUDE "home/header.asm"
 
 SECTION "Home 1", ROM0

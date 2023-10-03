@@ -1,5 +1,3 @@
-INCLUDE "constants.asm"
-
 SECTION "Action Help 1", ROMX
 
 INCLUDE "engine/action_help/core.asm"

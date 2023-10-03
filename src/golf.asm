@@ -1,6 +1,3 @@
-INCLUDE "constants.asm"
-
-
 SECTION "Golf Gfx 1", ROMX
 
 INCLUDE "engine/bank70.asm"

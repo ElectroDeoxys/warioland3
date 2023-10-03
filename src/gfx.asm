@@ -1,5 +1,3 @@
-INCLUDE "constants.asm"
-
 SECTION "Wario Gfx 1", ROMX
 
 WarioIdleGfx::     INCBIN "gfx/wario/idle.2bpp"
