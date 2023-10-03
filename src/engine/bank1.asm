@@ -17,11 +17,11 @@ StateTable::
 	dw GameOverStateTable          ; ST_GAME_OVER
 	dw PerfectStateTable           ; ST_PERFECT
 	dw LanguageSelectionStateTable ; ST_LANGUAGE_SELECTION
-	dw Func_4028                   ; ST_0f
-	dw Func_4028                   ; ST_10
-	dw Func_4028                   ; ST_11
+	dw InvalidState                ; ST_UNUSED_0F
+	dw InvalidState                ; ST_UNUSED_10
+	dw InvalidState                ; ST_UNUSED_11
 
-Func_4028:
+InvalidState:
 	jp Init
 
 TitleStateTable:

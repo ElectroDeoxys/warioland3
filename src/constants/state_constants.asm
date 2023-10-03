@@ -15,9 +15,9 @@
 	const ST_GAME_OVER          ; $0c
 	const ST_PERFECT            ; $0d
 	const ST_LANGUAGE_SELECTION ; $0e
-	const ST_0f                 ; $0f
-	const ST_10                 ; $10
-	const ST_11                 ; $11
+	const ST_UNUSED_0F          ; $0f
+	const ST_UNUSED_10          ; $10
+	const ST_UNUSED_11          ; $11
 
 ; ST_OVERWORLD substates
 DEF SST_OVERWORLD_05 EQU $05
@@ -30,7 +30,7 @@ DEF SST_OVERWORLD_BEST_TIME_LIST EQU $16
 DEF SST_OVERWORLD_1A EQU $1a
 DEF SST_OVERWORLD_1E EQU $1e
 DEF SST_OVERWORLD_20 EQU $20
-DEF SST_OVERWORLD_23 EQU $23
+DEF SST_OVERWORLD_EPILOGUE EQU $23
 
 ; ST_LEVEL substates
 DEF SST_LEVEL_07 EQU $07

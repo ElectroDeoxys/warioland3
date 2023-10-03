@@ -843,7 +843,7 @@ OverworldStateTable:
 	dw DarkenBGToPal_Normal
 	dw Func_80e55
 
-	dw FastFadeToWhite
+	dw FastFadeToWhite ; SST_OVERWORLD_EPILOGUE
 	dw InitEpilogue
 	dw SlowFadeFromWhite
 	dw Func_80e75
@@ -3528,13 +3528,13 @@ Func_81931:
 	ld [wTempOWCutsceneAction], a
 	ld a, CUTSCENE_5A
 	cp b
-	jr z, .asm_81957
+	jr z, .epilogue
 	ld hl, wSubState
 	inc [hl]
 	call Func_803e6
 	ret
-.asm_81957
-	ld a, SST_OVERWORLD_23
+.epilogue
+	ld a, SST_OVERWORLD_EPILOGUE
 	ld [wSubState], a
 	ret
 

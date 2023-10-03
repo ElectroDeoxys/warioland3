@@ -200,7 +200,6 @@ PlayFallingRockSFX:
 ; \5 = x coordinate 2
 ; \6 = max y coordinate
 MACRO temple_rock_fall
-HandleTempleRock\1Fall:
 	ld hl, wTempleRock\1
 	ld a, [hli] ; action
 	inc [hl] ; counter
@@ -260,11 +259,17 @@ ENDC
 	jp Func_1580c8
 ENDM
 
+HandleTempleRock1Fall:
 	temple_rock_fall 1, wSceneObj12, TRUE,   32,  48,  96
+HandleTempleRock3Fall:
 	temple_rock_fall 3, wSceneObj14, FALSE,  40,  56,  96
+HandleTempleRock5Fall:
 	temple_rock_fall 5, wSceneObj1,  FALSE,  16,  64, 160
+HandleTempleRock2Fall:
 	temple_rock_fall 2, wSceneObj13, TRUE,  112, 128,  96
+HandleTempleRock4Fall:
 	temple_rock_fall 4, wSceneObj15, FALSE, 104, 120,  96
+HandleTempleRock6Fall:
 	temple_rock_fall 6, wSceneObj2,  FALSE,  96, 144, 160
 
 GetRockYVel:
@@ -296,7 +301,6 @@ GetRockYVel:
 ; \5 = x coordinate 1
 ; \6 = x coordinate 2
 MACRO temple_rock_bounce
-HandleTempleRock\1Bounce:
 	ld a, [wTempleRock\1Action]
 	jumptable
 	
@@ -368,9 +372,13 @@ ENDC
 	ret
 ENDM
 
+HandleTempleRock7Bounce:
 	temple_rock_bounce  7, wSceneObj8,  FALSE, DIRECTION_LEFT,   32,  40
+HandleTempleRock8Bounce:
 	temple_rock_bounce  8, wSceneObj9,  FALSE, DIRECTION_RIGHT, 120, 128
+HandleTempleRock9Bounce:
 	temple_rock_bounce  9, wSceneObj10, TRUE,  DIRECTION_LEFT,   24,  32
+HandleTempleRock10Bounce:
 	temple_rock_bounce 10, wSceneObj11, TRUE,  DIRECTION_RIGHT, 128, 136
 
 BounceTempleRockRight:
