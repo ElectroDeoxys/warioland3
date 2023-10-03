@@ -1,8 +1,3 @@
-MACRO INCROM
-assert warn, (\1) != (\2), "Redundant INCROM"
-INCBIN "baserom.gbc", \1, \2 - \1
-ENDM
-
 MACRO dn ; nybbles
 REPT _NARG / 2
 	db ((\1) << 4) | (\2)
