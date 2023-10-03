@@ -951,7 +951,14 @@ Frameset_1caf6f: ; 1caf6f (72:6f6f)
 	db $ff
 ; 0x1caf78
 
-	INCROM $1caf78, $1caf81
+; unreferenced
+Frameset_1caf78: ; 1caf78 (72:6f78)
+	db $04,  5
+	db $05,  5
+	db $06,  5
+	db $07,  5
+	db $ff
+; 0x1caf81
 
 Frameset_1caf81: ; 1caf81 (72:6f81)
 	db $08,  4
@@ -1764,7 +1771,23 @@ Frameset_1cb5a1: ; 1cb5a1 (72:75a1)
 	db $ff
 ; 0x1cb5ba
 
-	INCROM $1cb5ba, $1cb5c3
+; unreferenced
+Frameset_1cb5ba: ; 1cb5ba (72:75ba)
+	db $04,  4
+	db $ff
+; 0x1cb5bd
+
+; unreferenced
+Frameset_1cb5bd: ; 1cb5bd (72:75bd)
+	db $05,  4
+	db $ff
+; 0x1cb5c0
+
+; unreferenced
+Frameset_1cb5c0: ; 1cb5c0 (72:75c0)
+	db $06,  4
+	db $ff
+; 0x1cb5c3
 
 Frameset_1cb5c3: ; 1cb5c3 (72:75c3)
 	db $07,  4

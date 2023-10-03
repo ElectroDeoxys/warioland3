@@ -1867,7 +1867,11 @@ Frameset_d4de4:: ; d4de4 (35:4de4)
 	db $ff
 ; 0xd4e23
 
-	INCROM $d4e23, $d4e26
+; unreferenced
+Frameset_d4e23: ; d4e23 (35:4e23)
+	db $09,  4
+	db $ff
+; 0xd4e26
 
 OAM_d4e26: ; d4e26 (35:4e26)
 	dw .frame_0

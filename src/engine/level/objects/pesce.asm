@@ -97,9 +97,9 @@ PesceFunc: ; 51d2e (14:5d2e)
 	ld a, $e6
 	ld [wCurObjCollBoxTop], a
 	ld hl, wCurObjUpdateFunction + 1
-	ld a, $61
+	ld a, HIGH(.Func_521d0)
 	ld [hld], a
-	ld a, $d0
+	ld a, LOW(.Func_521d0)
 	ld [hld], a
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
@@ -689,9 +689,90 @@ PesceFunc: ; 51d2e (14:5d2e)
 	ld d, $d0
 	ld e, d
 	ret
-; 0x521d0
 
-	INCROM $521d0, $5226b
+.Func_521d0:
+	ld hl, wCurObjVar1
+	ld a, [hl]
+	and a
+	jr z, .asm_52239
+	cp $01
+	jr z, .asm_5222b
+	cp $02
+	jr z, .asm_521e9
+	cp $03
+	jr z, .asm_521e4
+	ret
+.asm_521e4
+	xor a
+	ld [wCurObjFlags], a
+	ret
+.asm_521e9
+	ld hl, wCurObjYPos
+	ld a, [hli]
+	sub $30
+	ldh [hYPosLo], a
+	ld a, [hli]
+	sbc $00
+	ldh [hYPosHi], a
+	ld a, [hli]
+	ldh [hXPosLo], a
+	ld a, [hli]
+	ldh [hXPosHi], a
+	call Func_3513
+	and a
+	jp z, MoveObjectLeft_Slow
+	ld hl, wCurObjInteractionType
+	ld a, [hl]
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_51
+	ld [hli], a
+	ld a, $03
+	ld [wCurObjVar1], a
+	ld hl, wCurObjUnk02
+	ld e, $07
+	farcall Func_ba42
+	ld a, $01
+	ld [wDollBoyHammerStage], a
+	ret
+.asm_5222b
+	ld l, OBJ_STATE_DURATION
+	dec [hl]
+	ret nz
+	inc l
+	ld a, $02
+	ld [hl], a
+	ld de, Frameset_6995e
+	jp SetObjectFramesetPtr
+.asm_52239
+	ld l, OBJ_Y_POS
+	ld a, [hli]
+	add $06
+	ldh [hYPosLo], a
+	ld a, [hli]
+	adc $00
+	ldh [hYPosHi], a
+	ld a, [hli]
+	ldh [hXPosLo], a
+	ld a, [hl]
+	ldh [hXPosHi], a
+	call Func_352b
+	and a
+	jp z, MoveObjectDown_Slow
+	ld a, [wCurObjSubState]
+	rlca
+	jr c, .asm_52265
+	ld de, Frameset_699a4
+	call SetObjectFramesetPtr
+	ld a, $25
+	ld [hli], a
+	ld a, $01
+	ld [hl], a
+	ret
+.asm_52265
+	ld a, $02
+	ld [wCurObjVar1], a
+	ret
+; 0x5226b
 
 DragonflySpawnerFunc: ; 5226b (14:626b)
 	ld hl, wCurObjUpdateFunction + 1

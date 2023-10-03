@@ -1749,7 +1749,25 @@ Func_8e5b: ; 8e5b (2:4e5b)
 	ret
 ; 0x8eac
 
-	INCROM $8eac, $8ec2
+; unreferenced
+Func_8eac: ; 8eac (2:4eac)
+	srl l
+	jr c, .asm_8eba
+	ld a, l
+	add $b0
+	ld l, a
+	ld a, [hl]
+	swap a
+	and $0f
+	ret
+.asm_8eba
+	ld a, l
+	add $b0
+	ld l, a
+	ld a, [hl]
+	and $0f
+	ret
+; 0x8ec2
 
 GetNextInternalRoomID: ; 8ec2 (2:4ec2)
 	ld a, [hli] ; hi y

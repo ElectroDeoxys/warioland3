@@ -1937,7 +1937,16 @@ VBlank_80cb1: ; 80cb1 (20:4cb1)
 .end
 ; 0x80d5c
 
-	INCROM $80d5c, $80d6c
+; unreferenced
+UnreferencedOpenTreasureCollection: ; 80d5c (20:4d5c)
+	ld a, [wSubState]
+	jumptable
+	dw FadeBGToWhite_Normal
+	dw InitTreasureCollection
+	dw DarkenBGToPal_Normal
+	dw TreasureCollection
+	dw FadeBGToWhite_Normal
+	dw ReturnToPauseMenuFromActionHelp
 
 Func_80d6c: ; 80d6c (20:4d6c)
 	farcall Func_9c021
@@ -2661,7 +2670,21 @@ MapSideInitialLevels: ; 812ac (20:52ac)
 	db LEVEL_THE_STAGNANT_SWAMP ; EAST
 ; 0x812b0
 
-	INCROM $812b0, $812c0
+; unreferenced
+Func_812b0: ; 812b0 (20:52b0)
+	ld hl, .data
+	ld a, [wNextMapSide]
+	ld b, $00
+	ld c, a
+	add hl, bc
+	ld c, [hl]
+	ret
+
+.data
+	db $06 ; NORTH
+	db $05 ; WEST
+	db $05 ; SOUTH
+	db $06 ; EAST
 
 Func_812c0: ; 812c0 (20:52c0)
 	ld a, [w2d01f]
@@ -2858,7 +2881,34 @@ Func_8142d: ; 8142d (20:542d)
 	ret
 ; 0x8143d
 
-	INCROM $8143d, $81477
+; unreferenced
+Func_8143d: ; 8143d (20:543d)
+	ld hl, wPalFade2Colour2RedUnk3
+	ld a, [w2d100]
+	ld [hli], a
+	ld a, [w2d101]
+	ld [hl], a
+	ld a, [w2d069]
+	ld [wConnectedLevel1YCoord], a
+	ld [w2d100], a
+	ld a, [w2d06a]
+	ld [wConnectedLevel1XCoord], a
+	ld [w2d101], a
+	call .Func_8146f
+	ld hl, wPalFade2Colour2RedUnk3
+	ld a, [hli]
+	ld [wConnectedLevel1YCoord], a
+	ld [w2d100], a
+	ld a, [hl]
+	ld [wConnectedLevel1XCoord], a
+	ld [w2d101], a
+	ret
+
+.Func_8146f:
+	ld a, [w2d0e3]
+	jumptable
+	dw Func_814ec
+	dw Func_8150c
 
 Func_81477: ; 81477 (20:5477)
 	ld a, [wJoypadDown]
@@ -3314,6 +3364,7 @@ SetCutsceneButtonSelectable: ; 817a3 (20:57a3)
 	ld a, [w2d00d]
 	cp TRANSITION_RETURN_TO_MAP
 	ret z
+Func_817a9: ; 817a9 (20:57a9)
 	and a
 	ret z
 	ld hl, wTopBarSelectableButtons
@@ -3321,7 +3372,29 @@ SetCutsceneButtonSelectable: ; 817a3 (20:57a3)
 	ret
 ; 0x817b1
 
-	INCROM $817b1, $817d7
+; unreferenced
+Func_817b1: ; 817b1 (20:57b1)
+	ld a, [wGameModeFlags]
+	bit MODE_GAME_CLEARED_F, a
+	ret nz
+	ld a, CUTSCENE_01
+.loop
+	ld [w2dffc], a
+	call CheckAllCutsceneTreasures
+	ld a, [w2dffc]
+	jr z, .asm_817cb
+	inc a
+	ld b, CUTSCENE_26
+	cp b
+	jr c, .loop
+	ld a, b
+.asm_817cb
+	dec a
+	call LoadCutsceneTreasures
+	ld a, [w2dfff]
+	ld [w2d00d], a
+	jr Func_817a9
+; 0x817d7
 
 SetNextPrevMapButtonsSelectable: ; 817d7 (20:57d7)
 	call .CheckAccessibleMapSides
@@ -5066,7 +5139,9 @@ SetCompassSprite: ; 82012 (20:6012)
 	db $14, $14
 ; 0x82026
 
-	INCROM $82026, $8202c
+; unreferenced
+Data_82026:
+	db $14, $14, $14, $14, $14, $14
 
 AddCompassSprite: ; 8202c (20:602c)
 	ld hl, wCompassObj
@@ -6217,7 +6292,49 @@ ApplyTopBarButtonAttributes: ; 826f6 (20:66f6)
 	ret
 ; 0x82729
 
-	INCROM $82729, $82761
+; unreferenced
+UnreferencedLCD_82729: ; 82729 (20:6729)
+	ld hl, .func
+	ld de, wLCDFunc
+	ld b, .func_end - .func
+	call CopyHLToDE
+	ret
+
+.func
+	push af
+	push bc
+	push de
+	push hl
+	ld a, $02
+	ldh [rSVBK], a
+.loop_wait_lcd
+	ldh a, [rSTAT]
+	and STATF_LCD
+	jr nz, .loop_wait_lcd
+	ld hl, rLCDC
+	set LCDCB_BG9C00, [hl]
+	ldh [rSCY], a
+	ldh [rSCX], a
+	xor a
+	ldh [rSVBK], a
+	pop hl
+	pop de
+	pop bc
+	pop af
+	reti
+.func_end
+
+; unreferenced
+UnreferencedLCD_82754: ; 82754 (20:6754)
+	ld hl, .func
+	ld de, wLCDFunc
+	ld b, .func_end - .func
+	call CopyHLToDE
+	ret
+
+.func
+	reti
+.func_end
 
 HandleBottomBar: ; 82761 (20:6761)
 	ld a, [wMapSideLevelID]

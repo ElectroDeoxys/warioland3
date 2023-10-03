@@ -13,7 +13,10 @@ DoAudioFunc_PlaySFX: ; 3f0c (0:3f0c)
 	jp _PlaySFX
 ; 0x3f12
 
-	INCROM $3f12, $3f18
+Func_3f12: ; 3f12 (0:3f12)
+	call Func_3f62
+	jp PlayMusic
+; 0x3f18
 
 Func_3f18:: ; 3f18 (0:3f18)
 	call Func_3f62
@@ -28,16 +31,26 @@ Func_3f1e: ; 3f1e (0:3f1e)
 Func_3f24: ; 3f24 (0:3f24)
 	call Func_3f62
 	jp Func_30416
-; 0x3f2a
 
-	INCROM $3f2a, $3f36
+Func_3f2a: ; 3f2a (0:3f2a)
+	call Func_3f62
+	jp _PlayNewMusic_SetNoise.asm_302e4
+
+Func_3f30: ; 3f30 (0:3f30)
+	call Func_3f62
+	jp Func_30438
 
 Func_3f36: ; 3f36 (0:3f36)
 	call Func_3f62
 	jp Func_3049e
-; 0x3f3c
 
-	INCROM $3f3c, $3f48
+Func_3f3c: ; 3f3c (0:3f3c)
+	call Func_3f62
+	jp Func_30519
+
+Func_3f42: ; 3f42 (0:3f42)
+	call Func_3f62
+	jp Func_30449
 
 DoAudioFunc_PlayNewMusic_SetNoise:: ; 3f48 (0:3f48)
 	call Func_3f62

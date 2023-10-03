@@ -20,7 +20,25 @@ Func_ac00b: ; ac00b (2b:400b)
 	ret
 ; 0xac016
 
-	INCROM $ac016, $ac02c
+Func_ac016: ; ac016 (2b:4016)
+	ld h, b
+	ld l, c
+	res 1, l
+	ld b, $57
+	call UpdateOWAnimation
+	ld a, [bc]
+	ret
+
+; unreferenced
+Func_ac021: ; ac021 (2b:4021)
+	ld h, b
+	ld l, c
+	res 1, l
+	ld b, $1a
+	call UpdateOWAnimation
+	ld a, [bc]
+	ret
+; 0xac02c
 
 Func_ac02c: ; ac02c (2b:402c)
 	ld h, b
@@ -52,7 +70,15 @@ Func_ac047: ; ac047 (2b:4047)
 	jp AddOWSpriteWithScroll
 ; 0xac04c
 
-	INCROM $ac04c, $ac056
+Func_ac04c: ; ac04c (2b:404c)
+	ld b, $57
+	jp AddOWSpriteWithScroll
+; 0xac051
+
+Func_ac051: ; ac051 (2b:4051)
+	ld b, $57
+	jp AddOWSprite
+; 0xac056
 
 Func_ac056: ; ac056 (2b:4056)
 	ld de, Frameset_76ca
@@ -107,9 +133,327 @@ Func_ac080: ; ac080 (2b:4080)
 Func_ac0b6: ; ac0b6 (2b:40b6)
 	ld a, [bc]
 	jumptable
-; 0xac0b8
+	dw .Func_ac11c
+	dw Func_ac056
+	dw .Func_ac11d
+	dw .Func_ac122
+	dw .Func_ac127
+	dw .Func_ac12c
+	dw .Func_ac131
+	dw .Func_ac13c
+	dw .Func_ac141
+	dw .Func_ac15f
+	dw .Func_ac164
+	dw .Func_ac169
+	dw .Func_ac174
+	dw .Func_ac17f
+	dw .Func_ac18a
+	dw .Func_ac195
+	dw .Func_ac1a0
+	dw .Func_ac1ab
+	dw .Func_ac1b1
+	dw .Func_ac1b7
+	dw .Func_ac1d1
+	dw .Func_ac1d7
+	dw .Func_ac1dd
+	dw .Func_ac1fb
+	dw .Func_ac21e
+	dw .Func_ac22c
+	dw .Func_ac23a
+	dw .Func_ac248
+	dw .Func_ac24e
 
-	INCROM $ac0b8, $ac2b2
+.asm_ac0f2
+	call Func_ac016
+.asm_ac0f5
+	ld de, OAM_15e97d
+	jp Func_ac04c
+
+; unreachable
+	call Func_ac016
+	ld e, $00
+.asm_ac100
+	call SetObjStateIfAnimationIsFinished
+	jr nz, .asm_ac0f5
+	jr Func_ac0b6
+
+; unreachable
+	call Func_ac016
+.asm_ac10a
+	ld de, OAM_15e97d
+	jp Func_ac051
+
+; unreachable
+	call Func_ac016
+	ld e, $00
+	call SetObjStateIfAnimationIsFinished
+	jr nz, .asm_ac10a
+	jr Func_ac0b6
+
+.Func_ac11c:
+	ret
+
+.Func_ac11d:
+	ld de, Frameset_15ed91
+	jr .asm_ac0f2
+
+.Func_ac122:
+	ld de, Frameset_15ed94
+	jr .asm_ac0f2
+
+.Func_ac127:
+	ld de, Frameset_15ed97
+	jr .asm_ac0f2
+
+.Func_ac12c:
+	ld de, Frameset_15ed9a
+	jr .asm_ac0f2
+
+.Func_ac131:
+	ld de, Frameset_15ed9d
+	call Func_ac016
+	ld e, $0a
+	jp .asm_ac100
+
+.Func_ac13c:
+	ld de, Frameset_15edb3
+	jr .asm_ac0f2
+
+.Func_ac141:
+	ld de, Frameset_15eda6
+	call Func_ac016
+	call .Func_ac14d
+	jp .asm_ac0f5
+
+.Func_ac14d:
+	inc c
+	ld a, [bc]
+	inc a
+	ld [bc], a
+	cp $1e
+	ret c
+	xor a
+	ld [bc], a
+	play_sfx SFX_138
+	ret
+
+.Func_ac15f:
+	ld de, Frameset_15edc0
+	jr .asm_ac0f2
+
+.Func_ac164:
+	ld de, Frameset_15edc3
+	jr .asm_ac0f2
+
+.Func_ac169:
+	ld de, Frameset_15edc6
+	call Func_ac016
+	ld e, $0a
+	jp .asm_ac100
+
+.Func_ac174:
+	ld de, Frameset_15ede9
+	call Func_ac016
+	ld e, $0b
+	jp .asm_ac100
+
+.Func_ac17f:
+	ld de, Frameset_15edf2
+	call Func_ac016
+	ld e, $0a
+	jp .asm_ac100
+
+.Func_ac18a:
+	ld de, Frameset_15ee0f
+	call Func_ac016
+	ld e, $0a
+	jp .asm_ac100
+
+.Func_ac195:
+	ld de, Frameset_15ee1e
+	call Func_ac016
+	ld e, $17
+	jp .asm_ac100
+
+.Func_ac1a0:
+	ld de, Frameset_15ee3b
+	call Func_ac016
+	ld e, $0a
+	jp .asm_ac100
+
+.Func_ac1ab:
+	ld de, Frameset_15ee44
+	jp .asm_ac0f2
+
+.Func_ac1b1:
+	ld de, Frameset_15ee57
+	jp .asm_ac0f2
+
+.Func_ac1b7:
+	ld de, Frameset_15ee64
+	call Func_ac016
+	call .Func_ac1c3
+	jp .asm_ac0f5
+
+.Func_ac1c3:
+	ld a, [wOWUIObj1State]
+	cp $09
+	jp z, .asm_ac254
+	cp $0b
+	jp z, .asm_ac275
+	ret
+
+.Func_ac1d1:
+	ld de, Frameset_15ee67
+	jp .asm_ac0f2
+
+.Func_ac1d7:
+	ld de, Frameset_15ee70
+	jp .asm_ac0f2
+
+.Func_ac1dd:
+	ld de, Frameset_15ee79
+	call Func_ac016
+	call .Func_ac1e9
+	jp .asm_ac0f5
+
+.Func_ac1e9:
+	inc c
+	ld a, [bc]
+	inc a
+	ld [bc], a
+	cp $30
+	ret c
+	xor a
+	ld [bc], a
+	play_sfx SFX_08E
+	ret
+
+.Func_ac1fb:
+	ld de, Frameset_15ee82
+	call Func_ac016
+	call .Func_ac207
+	jp .asm_ac0f5
+
+.Func_ac207:
+	inc c
+	ld a, [bc]
+	inc a
+	ld [bc], a
+	cp $01
+	jr z, .asm_ac215
+	cp $28
+	ret c
+	xor a
+	ld [bc], a
+	ret
+.asm_ac215
+	play_sfx SFX_11A
+	ret
+
+.Func_ac21e:
+	ld de, Frameset_681d2
+	call Func_ac021
+	ld de, OAM_18007b
+	ld b, BANK(OAM_18007b)
+	jp AddOWSpriteWithScroll
+
+.Func_ac22c:
+	ld de, Frameset_68b12
+	call Func_ac021
+	ld de, OAM_18422f
+	ld b, BANK(OAM_18422f)
+	jp AddOWSpriteWithScroll
+
+.Func_ac23a:
+	ld de, Frameset_68562
+	call Func_ac021
+	ld de, OAM_180ea7
+	ld b, BANK(OAM_180ea7)
+	jp AddOWSpriteWithScroll
+
+.Func_ac248:
+	ld de, Frameset_15ee87
+	jp .asm_ac0f2
+
+.Func_ac24e:
+	ld de, Frameset_15ee8a
+	jp .asm_ac0f2
+
+.asm_ac254
+	inc c
+	ld a, [wOWUIObj1Frame]
+	ld e, a
+	ld a, [bc]
+	and a
+	jr z, .asm_ac267
+	dec a
+	jr z, .asm_ac261
+	ret
+.asm_ac261
+	ld d, $01
+	ld a, $1a
+	jr .asm_ac26b
+.asm_ac267
+	ld d, $ff
+	ld a, $19
+.asm_ac26b
+	cp e
+	ret nz
+	ld a, [bc]
+	xor $01
+	ld [bc], a
+	ld a, d
+	add [hl]
+	ld [hl], a
+	ret
+
+.asm_ac275
+	inc c
+	ld a, [wOWUIObj1Frame]
+	ld e, a
+	ld a, [bc]
+	cp $80
+	ret z
+	and a
+	jr z, .asm_ac286
+	dec a
+	jr z, .asm_ac29c
+	jr .asm_ac2a6
+.asm_ac286
+	ld a, $00
+	cp e
+	ret nz
+	ld d, $fc
+	ld e, $ea
+.asm_ac28e
+	ld a, [bc]
+	inc a
+.asm_ac290
+	ld [bc], a
+	ld a, [wOWUIObj1YCoord]
+	add d
+	ld [hli], a
+	ld a, [wOWUIObj1XCoord]
+	add e
+	ld [hld], a
+	ret
+.asm_ac29c
+	ld a, $01
+	cp e
+	ret nz
+	ld d, $f0
+	ld e, $ec
+	jr .asm_ac28e
+.asm_ac2a6
+	ld a, $02
+	cp e
+	ret nz
+	ld a, $80
+	ld d, $de
+	ld e, $f9
+	jr .asm_ac290
+; 0xac2b2
 
 Func_ac2b2: ; ac2b2 (2b:42b2)
 	ld bc, wCurSceneObjState
@@ -1234,10 +1578,14 @@ Func_aca09: ; aca09 (2b:4a09)
 	ret
 ; 0xaca20
 
-	INCROM $aca20, $aca25
+; unreferenced
+Func_aca20: ; aca20 (2b:4a20)
+	ld hl, wTempPals1
+	jr Func_aca28
 
 Func_aca25: ; aca25 (2b:4a25)
 	ld hl, wTempPals2
+Func_aca28: ; aca28 (2b:4a28)
 	ld c, 4 palettes
 .loop
 	ld a, LOW(PALRGB_WHITE)
@@ -1293,7 +1641,12 @@ Func_aca63: ; aca63 (2b:4a63)
 	ret
 ; 0xaca68
 
-	INCROM $aca68, $aca6d
+; unreferenced
+Func_aca68: ; aca68 (2b:4a68)
+	ld hl, wOWUIObj1XCoord
+	inc [hl]
+	ret
+; 0xaca6d
 
 Func_aca6d: ; aca6d (2b:4a6d)
 	ld hl, w2d014
@@ -6642,7 +6995,7 @@ _InitEpilogue: ; aee58 (2b:6e58)
 	stop_music2
 
 	ld a, $02
-	ldh [rSMBK], a
+	ldh [rSVBK], a
 	xor a
 	ldh [rSCX], a
 	ld [wSCX], a
@@ -6723,7 +7076,93 @@ _InitEpilogue: ; aee58 (2b:6e58)
 	ret
 ; 0xaf01f
 
-	INCROM $af01f, $af130
+; unreferenced
+Func_af01f: ; af01f (2b:701f)
+	call DisableLCD
+	call FillBGMap0_With7f
+	call ClearVirtualOAM
+
+	play_music2 MUSIC_EPILOGUE
+
+	ld a, $02
+	ldh [rSVBK], a
+	ld a, $a0
+	ldh [rSCX], a
+	ld [wSCX], a
+	xor a
+	ldh [rSCY], a
+	ld [wSCY], a
+
+	ld hl, Pals_86add
+	ld de, wTempPals1
+	ld c, 8 palettes
+	ld b, BANK(Pals_86add)
+	call CopyFarBytes
+	ld hl, Pals_86b1d
+	ld de, wTempPals2
+	ld c, 8 palettes
+	ld b, BANK(Pals_86b1d)
+	call CopyFarBytes
+
+	decompress_vram1 FontGFX, v1Tiles0
+	decompress_vram1 BGMap_15cf40, v1BGMap0
+	decompress BGMap_15cd00, v0BGMap0
+
+	ld hl, wOWUIObj1YCoord
+	ld a, $60
+	ld [hli], a
+	ld [hl], $5c
+	ld a, $ff
+	ld [wOWUIObj2YCoord], a
+
+	ld a, $0c
+	call SetSceneWarioState
+	ld hl, wSceneObj10
+	ld a, $30
+	ld [hli], a
+	ld [hl], $00
+	ld a, $1b
+	ld hl, wSceneObj10State
+	call SetSceneObjState
+	ld hl, wSceneObj11
+	ld a, $35
+	ld [hli], a
+	ld [hl], $20
+	ld a, $1c
+	ld hl, wSceneObj11State
+	call SetSceneObjState
+	ld hl, wSceneObj12
+	ld a, $32
+	ld [hli], a
+	ld [hl], $70
+	ld a, $1b
+	ld hl, wSceneObj12State
+	call SetSceneObjState
+	ld hl, wSceneObj13
+	ld a, $38
+	ld [hli], a
+	ld [hl], $c0
+	ld a, $1c
+	ld hl, wSceneObj13State
+	call SetSceneObjState
+
+	xor a
+	ld [wPalConfig1TotalSteps], a
+	ld [wPalConfig2TotalSteps], a
+	ld [w2d890], a
+	ld [w2d891], a
+	ld a, [wCollectionRow]
+	ld b, a
+	and a
+	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_WIN9C00 | LCDCF_ON
+	jr z, .asm_af127
+	xor b
+.asm_af127
+	ldh [rLCDC], a
+	xor a
+	ld [wCollectionRow], a
+	jp Func_af135
+; 0xaf130
 
 Func_af130: ; af130 (2b:7130)
 	ld a, [w2d014]

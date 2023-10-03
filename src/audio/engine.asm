@@ -433,7 +433,7 @@ _PlaySFX:: ; 301b8 (c:41b8)
 ; 0x3027f
 
 ; bc = sound ID
-PlayMusic: ; 3027f (c:427f)
+PlayMusic:: ; 3027f (c:427f)
 	ld a, b
 	or c
 	jp z, Func_30416
@@ -505,7 +505,7 @@ _PlayNewMusic_SetNoise:: ; 302ce (c:42ce)
 	jr z, .asm_302e4
 	jp Func_3f8d
 
-.asm_302e4
+.asm_302e4::
 	xor a
 	ld [w3d025], a
 	call SetMusicChannels
@@ -758,9 +758,65 @@ TurnMusicOff: ; 30420 (c:4420)
 	call NextChannel
 	jr nz, .loop_chs
 	ret
-; 0x30438
 
-	INCROM $30438, $30490
+Func_30438:: ; 30438 (c:4438)
+	ld a, [wActiveChannels]
+	and $0f
+	ld d, a
+	ld a, [wActiveChannels]
+	and $f0
+	swap a
+	ld e, a
+	jp Func_3f8d
+; 0x30449
+
+Func_30449:: ; 30449 (c:4449)
+	and a
+	jr nz, .asm_3045d
+	ld a, [wActiveChannels]
+	and $f0
+	jr z, .asm_30461
+	ld a, [wLoadedMusic + 0]
+	ld c, a
+	ld a, [wLoadedMusic + 1]
+	ld b, a
+	jr .asm_30485
+.asm_3045d
+	cp $05
+	jr c, .asm_30466
+.asm_30461
+	ld bc, $0
+	jr .asm_30485
+.asm_30466
+	ld bc, .channel_pointers - $2
+	sla a
+	add c
+	ld c, a
+	ld a, $00
+	adc b
+	ld b, a
+	ld a, [bc]
+	ld l, a
+	inc bc
+	ld a, [bc]
+	ld h, a
+	ld bc, $0
+	bit 7, [hl]
+	jr z, .asm_30485
+	ld bc, $6
+	add hl, bc
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld b, a
+.asm_30485
+	jp Func_3f8d
+
+.channel_pointers
+	dw wChannel1
+	dw wChannel2
+	dw wChannel3
+	dw wChannel4
 
 PointerTable_30490: ; 30490 (c:4490)
 	dw Func_30802
@@ -871,9 +927,13 @@ AddChannelStructLengthToHL: ; 3050f (c:450f)
 	ld h, a
 	dec e
 	ret
-; 0x30519
 
-	INCROM $30519, $30527
+Func_30519:: ; 30519 (c:4519)
+	ld [w3d020], a
+	ld [w3d021], a
+	ld a, $40
+	ld [w3d022], a
+	jp Func_3f8d
 
 Func_30527: ; 30527 (c:4527)
 	ld a, [w3d025]

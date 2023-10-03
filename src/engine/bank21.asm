@@ -1468,7 +1468,28 @@ Pals_84880: ; 84880 (21:4880)
 	rgb  0,  0,  0
 ; 0x848c0
 
-	INCROM $848c0, $848e0
+; unreferenced
+Pals_848c0: ; 848c0 (21:48c0)
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 31, 14,  0
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb  0,  0,  0
+	rgb  0,  0,  0
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb  0,  0,  0
+	rgb  0,  0,  0
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb  0,  0,  0
+	rgb  0,  0,  0
+	rgb  0,  0,  0
+; 0x848e0
 
 Pals_848e0: ; 848e0 (21:48e0)
 	rgb  0, 22, 16
@@ -1660,7 +1681,28 @@ Pals_849c0: ; 849c0 (21:49c0)
 	rgb  0,  0,  7
 ; 0x84a00
 
-	INCROM $84a00, $84a20
+; unreferenced
+Pals_84a00: ; 84a00 (21:4a00)
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 31, 15, 10
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb  0,  0,  0
+	rgb  8, 31, 31
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb  0,  0,  0
+	rgb  0,  0,  0
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb  0,  0,  0
+	rgb  0,  0,  0
+	rgb  0,  0,  0
+; 0x84a20
 
 Pals_84a20: ; 84a20 (21:4a20)
 	rgb  0, 22, 16
@@ -2595,7 +2637,18 @@ Func_84e86: ; 84e86 (21:4e86)
 	ret
 ; 0x84fd5
 
-	INCROM $84fd5, $84fea
+; unreferenced
+Func_84fd5: ; 84fd5 (21:4fd5)
+	xor a
+	ld hl, wTempBGPals
+	ld bc, 8 palettes
+	call WriteAToHL_BCTimes
+	xor a
+	ld hl, wTempOBPals
+	ld bc, 8 palettes
+	call WriteAToHL_BCTimes
+	ret
+; 0x84fea
 
 ClearTempPals_Bank21: ; 84fea (21:4fea)
 	xor a
@@ -3597,19 +3650,28 @@ Data_85657:: ; 85657 (21:5657)
 	db $00
 ; 0x856a8
 
-	INCROM $856a8, $857f7
+; unreferenced
+BGMap_856a8:: ; 856a8 (21:56a8)
+	INCBIN "gfx/bgmaps/map_856a8.bin"
+; 0x857f7
 
 BGMap_857f7:: ; 857f7 (21:57f7)
 	INCBIN "gfx/bgmaps/map_857f7.bin"
 ; 0x85888
 
-	INCROM $85888, $85897
+; unreferenced
+BGMap_85888:: ; 85888 (21:5888)
+	INCBIN "gfx/bgmaps/map_85888.bin"
+; 0x85897
 
 BGMap_85897:: ; 85897 (21:5897)
 	INCBIN "gfx/bgmaps/map_85897.bin"
 ; 0x85928
 
-	INCROM $85928, $85a68
+; unreferenced
+BGMap_85928:: ; 85928 (21:5928)
+	INCBIN "gfx/bgmaps/map_85928.bin"
+; 0x85a68
 
 Func_85a68: ; 85a68 (21:5a68)
 .asm_85a68

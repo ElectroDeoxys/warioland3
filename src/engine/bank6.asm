@@ -1328,9 +1328,528 @@ Func_18aec: ; 18aec (6:4aec)
 	or $03
 	ld [wceda], a
 	jp Func_18f32
-; 0x18b1f
 
-	INCROM $18b1f, $18f32
+; unreferenced
+Func_18b1f: ; 18b1f (6:4b1f)
+	ld b, $79
+	jr .asm_18b2d
+	ld b, $7a
+	jr .asm_18b2d
+	ld b, $7b
+	jr .asm_18b2d
+	ld b, $78
+.asm_18b2d
+	ld a, [wceda]
+	and $07
+	jp nz, Func_18020
+	ld a, [wceda]
+	and $f8
+	jr nz, .asm_18b5b
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+	ld a, [wTransformation]
+	cp (1 << 4) | (1 << 6)
+	jp nz, Func_18032
+	ld a, [wca8f]
+	cp $01
+	jp c, Func_18032
+	ld a, $02
+	ld [wceda], a
+	jp Func_18f32
+.asm_18b5b
+	or $02
+	ld [wceda], a
+	jp Func_18f32
+
+; unreferenced
+Func_18b63: ; 18b63 (6:4b63)
+	ld b, $79
+	jr .asm_18b71
+	ld b, $7a
+	jr .asm_18b71
+	ld b, $7b
+	jr .asm_18b71
+	ld b, $78
+.asm_18b71
+	ld a, [wceda]
+	and $07
+	jp nz, Func_18020
+	ld a, [wceda]
+	and $f8
+	jr nz, .asm_18b9f
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+	ld a, [wTransformation]
+	cp (1 << 4) | (1 << 6)
+	jp nz, Func_18032
+	ld a, [wca8f]
+	cp $01
+	jp c, Func_18032
+	ld a, $04
+	ld [wceda], a
+	jp Func_18f32
+.asm_18b9f
+	or $04
+	ld [wceda], a
+	jp Func_18f32
+
+; unreferenced
+Func_18ba7: ; 18ba7 (6:4ba7)
+	ld b, $79
+	jr .asm_18bb5
+	ld b, $7a
+	jr .asm_18bb5
+	ld b, $7b
+	jr .asm_18bb5
+	ld b, $78
+.asm_18bb5
+	ld a, [wceda]
+	and $07
+	jp nz, Func_18020
+	ld a, [wceda]
+	and $f8
+	jr nz, .asm_18be3
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+	ld a, [wTransformation]
+	cp (1 << 4) | (1 << 6)
+	jp nz, Func_18032
+	ld a, [wca8f]
+	cp $03
+	jp nz, Func_18032
+	ld a, $01
+	ld [wceda], a
+	jp Func_18f32
+.asm_18be3
+	or $01
+	ld [wceda], a
+	jp Func_18f32
+
+; unreferenced
+Func_18beb: ; 18beb (6:4beb)
+	ld b, $79
+	jr .asm_18bf9
+	ld b, $7a
+	jr .asm_18bf9
+	ld b, $7b
+	jr .asm_18bf9
+	ld b, $78
+.asm_18bf9
+	ld a, [wceda]
+	and $07
+	jp nz, Func_18020
+	ld a, [wceda]
+	and $f8
+	jr nz, .asm_18c24
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+	ld a, [wTransformation]
+	cp (1 << 4) | (1 << 6)
+	jp nz, Func_18032
+	ld a, [wca8f]
+	cp $03
+	jp nz, Func_18032
+	ld a, $03
+	ld [wceda], a
+.asm_18c24
+	or $03
+	ld [wceda], a
+	jp Func_18f32
+
+; unreferenced
+Func_18c2c: ; 18c2c (6:4c2c)
+	ld b, $79
+	jr .asm_18c3a
+	ld b, $7a
+	jr .asm_18c3a
+	ld b, $7b
+	jr .asm_18c3a
+	ld b, $78
+.asm_18c3a
+	ld a, [wceda]
+	and $07
+	jp nz, Func_18020
+	ld a, [wceda]
+	and $f8
+	jr nz, .asm_18c68
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+	ld a, [wTransformation]
+	cp (1 << 4) | (1 << 6)
+	jp nz, Func_18032
+	ld a, [wca8f]
+	cp $03
+	jp nz, Func_18032
+	ld a, $02
+	ld [wceda], a
+	jp Func_18f32
+.asm_18c68
+	or $02
+	ld [wceda], a
+	jp Func_18f32
+
+; unreferenced
+Func_18c70: ; 18c70 (6:4c70)
+	ld b, $79
+	jr .asm_18c7e
+	ld b, $7a
+	jr .asm_18c7e
+	ld b, $7b
+	jr .asm_18c7e
+	ld b, $78
+.asm_18c7e
+	ld a, [wceda]
+	and $07
+	jp nz, Func_18020
+	ld a, [wceda]
+	and $f8
+	jr nz, .asm_18cac
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+	ld a, [wTransformation]
+	cp (1 << 4) | (1 << 6)
+	jp nz, Func_18032
+	ld a, [wca8f]
+	cp $03
+	jp nz, Func_18032
+	ld a, $04
+	ld [wceda], a
+	jp Func_18f32
+.asm_18cac
+	or $04
+	ld [wceda], a
+	jp Func_18f32
+
+; unreferenced
+Func_18cb4: ; 18cb4 (6:4cb4)
+	ld b, $78
+	jr .asm_18cd2
+	ld b, $79
+	jr .asm_18cd2
+	ld b, $7a
+	jr .asm_18cd2
+	ld b, $7b
+	jr .asm_18cd2
+	ld b, $7c
+	jr .asm_18cd2
+	ld b, $7d
+	jr .asm_18cd2
+	ld b, $7e
+	jr .asm_18cd2
+	ld b, $7f
+.asm_18cd2
+	ld a, [wc0d9]
+	cp $02
+	jp z, Func_19423
+	cp $03
+	jp z, Func_18020
+	ld a, [wc0d8]
+	and a
+	jp z, Func_18032
+	ld a, [wc0d6]
+	bit 4, a
+	jr nz, .asm_18cfc
+	bit 5, a
+	jr nz, .asm_18d0b
+	bit 3, a
+	jr nz, .asm_18d0b
+	and $42
+	jr nz, .asm_18d22
+	jp Func_18032
+.asm_18cfc
+	ld a, [wAttackCounter]
+	and a
+	jr nz, .asm_18d22
+	ld a, [wIsRolling]
+	and a
+	jr nz, .asm_18d22
+	jp Func_18032
+.asm_18d0b
+	ld a, [wPowerUpLevel]
+	cp HEAD_SMASH_HELMET
+	jp c, Func_18032
+	ld a, [wJumpVelTable]
+	and a
+	jr nz, .asm_18d22
+	ld a, [wSwimVelIndex]
+	and a
+	jr nz, .asm_18d22
+	jp Func_18032
+.asm_18d22
+	ld hl, wYCell
+	ld a, [hli]
+	ld l, [hl]
+	ld h, a
+	ld a, [hl]
+	and $80
+	or b
+	ld [hl], a
+	push hl
+	call Func_e31
+	pop hl
+	call Func_19609
+	ld a, [wIsRolling]
+	and a
+	jp nz, Func_18020
+	ld a, [wTransformation]
+	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
+	jp z, Func_18020
+	ld a, [wIsSmashAttacking]
+	and a
+	jr nz, .asm_18d55
+	ld a, [wPowerUpLevel]
+	cp GARLIC
+	jp c, Func_18032
+	jp Func_18020
+.asm_18d55
+	ld a, [wPowerUpLevel]
+	cp SUPER_JUMP_SLAM_OVERALLS
+	jp c, Func_18032
+	jp Func_18020
+
+; unreferenced
+Func_18d60: ; 18d60 (6:4d60)
+	ld b, $78
+	jr .asm_18d7e
+	ld b, $79
+	jr .asm_18d7e
+	ld b, $7a
+	jr .asm_18d7e
+	ld b, $7b
+	jr .asm_18d7e
+	ld b, $7c
+	jr .asm_18d7e
+	ld b, $7d
+	jr .asm_18d7e
+	ld b, $7e
+	jr .asm_18d7e
+	ld b, $7f
+.asm_18d7e
+	ld a, [wc0d9]
+	cp $02
+	jp z, Func_19423
+	cp $03
+	jp z, Func_18020
+	ld a, [wc0d8]
+	and a
+	jp z, Func_18032
+	ld a, [wTransformation]
+	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
+	jr z, .asm_18db7
+	ld a, [wPowerUpLevel]
+	cp GARLIC
+	jp c, Func_18032
+	ld a, [wc0d6]
+	bit 4, a
+	jr nz, .asm_18dcb
+	bit 5, a
+	jr nz, .asm_18dda
+	bit 3, a
+	jr nz, .asm_18dda
+	and $42
+	jr nz, .asm_18dc1
+	jp Func_18032
+.asm_18db7
+	ld a, [wc0d6]
+	and $42
+	jr nz, Func_18df1
+	jp Func_18032
+.asm_18dc1
+	ld a, [wPowerUpLevel]
+	cp SUPER_JUMP_SLAM_OVERALLS
+	jr nc, Func_18df1
+	jp Func_18032
+.asm_18dcb
+	ld a, [wAttackCounter]
+	and a
+	jr nz, Func_18df1
+	ld a, [wIsRolling]
+	and a
+	jr nz, Func_18df1
+	jp Func_18032
+.asm_18dda
+	ld a, [wPowerUpLevel]
+	cp HEAD_SMASH_HELMET
+	jp c, Func_18032
+	ld a, [wJumpVelTable]
+	and a
+	jr nz, Func_18df1
+	ld a, [wSwimVelIndex]
+	and a
+	jr nz, Func_18df1
+	jp Func_18032
+
+Func_18df1:
+	ld hl, wYCell
+	ld a, [hli]
+	ld l, [hl]
+	ld h, a
+	ld a, [hl]
+	and $80
+	or b
+	ld [hl], a
+	push hl
+	call Func_e31
+	pop hl
+	call Func_19609
+	ld a, [wIsRolling]
+	and a
+	jp nz, Func_18020
+	jp Func_18032
+
+; unreferenced
+Func_18e0e: ; 18e0e (6:4e0e)
+	ld b, $79
+	jr .asm_18e2c
+	ld b, $7a
+	jr .asm_18e2c
+	ld b, $7b
+	jr .asm_18e2c
+	ld b, $7c
+	jr .asm_18e2c
+	ld b, $7d
+	jr .asm_18e2c
+	ld b, $7e
+	jr .asm_18e2c
+	ld b, $7f
+	jr .asm_18e2c
+	ld b, $78
+.asm_18e2c
+	ld a, [wceda]
+	and $07
+	jp nz, Func_18020
+	ld a, [wceda]
+	and $f8
+	jr nz, .asm_18e92
+	ld a, [wc0d9]
+	cp $03
+	jp z, Func_18020
+	cp $02
+	jr z, .asm_18e9a
+	ld a, [wc0d8]
+	and a
+	jp z, Func_18032
+	ld a, [wc0d6]
+	bit 4, a
+	jr nz, .asm_18e64
+	bit 5, a
+	jr nz, .asm_18e73
+	bit 3, a
+	jr nz, .asm_18e73
+	and $42
+	jr nz, .asm_18e8a
+	jp Func_18032
+.asm_18e64
+	ld a, [wAttackCounter]
+	and a
+	jr nz, .asm_18e8a
+	ld a, [wIsRolling]
+	and a
+	jr nz, .asm_18e8a
+	jp Func_18032
+.asm_18e73
+	ld a, [wPowerUpLevel]
+	cp HEAD_SMASH_HELMET
+	jp c, Func_18032
+	ld a, [wJumpVelTable]
+	and a
+	jr nz, .asm_18e8a
+	ld a, [wSwimVelIndex]
+	and a
+	jr nz, .asm_18e8a
+	jp Func_18032
+.asm_18e8a
+	ld a, $01
+	ld [wceda], a
+	jp Func_19086
+.asm_18e92
+	or $01
+	ld [wceda], a
+	jp Func_18f32
+.asm_18e9a
+	ld a, $01
+	ld [wceda], a
+	jp Func_18f32
+
+; unreferenced
+Func_18ea2: ; 18ea2 (6:4ea2)
+	ld b, $79
+	jr .asm_18ec0
+	ld b, $7a
+	jr .asm_18ec0
+	ld b, $7b
+	jr .asm_18ec0
+	ld b, $7c
+	jr .asm_18ec0
+	ld b, $7d
+	jr .asm_18ec0
+	ld b, $7e
+	jr .asm_18ec0
+	ld b, $7f
+	jr .asm_18ec0
+	ld b, $78
+.asm_18ec0
+	ld a, [wceda]
+	and $07
+	jp nz, Func_18020
+	ld a, [wceda]
+	and $f8
+	jr nz, .asm_18f26
+	ld a, [wc0d9]
+	cp $03
+	jp z, Func_18020
+	cp $02
+	jr z, .asm_18f2d
+	ld a, [wc0d8]
+	and a
+	jp z, Func_18032
+	ld a, [wc0d6]
+	bit 4, a
+	jr nz, .asm_18ef8
+	bit 5, a
+	jr nz, .asm_18f07
+	bit 3, a
+	jr nz, .asm_18f07
+	and $42
+	jr nz, .asm_18f1e
+	jp Func_18032
+.asm_18ef8
+	ld a, [wAttackCounter]
+	and a
+	jr nz, .asm_18f1e
+	ld a, [wIsRolling]
+	and a
+	jr nz, .asm_18f1e
+	jp Func_18032
+.asm_18f07
+	ld a, [wPowerUpLevel]
+	cp HEAD_SMASH_HELMET
+	jp c, Func_18032
+	ld a, [wJumpVelTable]
+	and a
+	jr nz, .asm_18f1e
+	ld a, [wSwimVelIndex]
+	and a
+	jr nz, .asm_18f1e
+	jp Func_18032
+.asm_18f1e
+	ld a, $03
+	ld [wceda], a
+	jp Func_19086
+.asm_18f26
+	or $03
+	ld [wceda], a
+	jr Func_18f32
+.asm_18f2d
+	ld a, $03
+	ld [wceda], a
+;	fallthrough
 
 Func_18f32: ; 18f32 (6:4f32)
 	ld a, [wSRAMBank]
@@ -1357,9 +1876,883 @@ Func_18f32: ; 18f32 (6:4f32)
 	pop hl
 	call Func_19609
 	jp Func_18020
-; 0x18f5f
 
-	INCROM $18f5f, $19609
+; unreferenced
+Func_18f5f: ; 18f5f (6:4f5f)
+	ld b, $79
+	jr .asm_18f7d
+	ld b, $7a
+	jr .asm_18f7d
+	ld b, $7b
+	jr .asm_18f7d
+	ld b, $7c
+	jr .asm_18f7d
+	ld b, $7d
+	jr .asm_18f7d
+	ld b, $7e
+	jr .asm_18f7d
+	ld b, $7f
+	jr .asm_18f7d
+	ld b, $78
+.asm_18f7d
+	ld a, [wceda]
+	and $07
+	jp nz, Func_18020
+	ld a, [wceda]
+	and $f8
+	jr nz, .asm_18fe3
+	ld a, [wc0d9]
+	cp $03
+	jp z, Func_18020
+	cp $02
+	jr z, .asm_18feb
+	ld a, [wc0d8]
+	and a
+	jp z, Func_18032
+	ld a, [wc0d6]
+	bit 4, a
+	jr nz, .asm_18fb5
+	bit 5, a
+	jr nz, .asm_18fc4
+	bit 3, a
+	jr nz, .asm_18fc4
+	and $42
+	jr nz, .asm_18fdb
+	jp Func_18032
+.asm_18fb5
+	ld a, [wAttackCounter]
+	and a
+	jr nz, .asm_18fdb
+	ld a, [wIsRolling]
+	and a
+	jr nz, .asm_18fdb
+	jp Func_18032
+.asm_18fc4
+	ld a, [wPowerUpLevel]
+	cp HEAD_SMASH_HELMET
+	jp c, Func_18032
+	ld a, [wJumpVelTable]
+	and a
+	jr nz, .asm_18fdb
+	ld a, [wSwimVelIndex]
+	and a
+	jr nz, .asm_18fdb
+	jp Func_18032
+.asm_18fdb
+	ld a, $02
+	ld [wceda], a
+	jp Func_19086
+.asm_18fe3
+	or $02
+	ld [wceda], a
+	jp Func_18f32
+.asm_18feb
+	ld a, $02
+	ld [wceda], a
+	jp Func_18f32
+
+; unreferenced
+Func_18ff3: ; 18ff3 (6:4ff3)
+	ld b, $79
+	jr .asm_19011
+	ld b, $7a
+	jr .asm_19011
+	ld b, $7b
+	jr .asm_19011
+	ld b, $7c
+	jr .asm_19011
+	ld b, $7d
+	jr .asm_19011
+	ld b, $7e
+	jr .asm_19011
+	ld b, $7f
+	jr .asm_19011
+	ld b, $78
+.asm_19011
+	ld a, [wceda]
+	and $07
+	jp nz, Func_18020
+	ld a, [wceda]
+	and $f8
+	jr nz, .asm_19076
+	ld a, [wc0d9]
+	cp $03
+	jp z, Func_18020
+	cp $02
+	jr z, .asm_1907e
+	ld a, [wc0d8]
+	and a
+	jp z, Func_18032
+	ld a, [wc0d6]
+	bit 4, a
+	jr nz, .asm_19049
+	bit 5, a
+	jr nz, .asm_19058
+	bit 3, a
+	jr nz, .asm_19058
+	and $42
+	jr nz, .asm_1906f
+	jp Func_18032
+.asm_19049
+	ld a, [wAttackCounter]
+	and a
+	jr nz, .asm_1906f
+	ld a, [wIsRolling]
+	and a
+	jr nz, .asm_1906f
+	jp Func_18032
+.asm_19058
+	ld a, [wPowerUpLevel]
+	cp HEAD_SMASH_HELMET
+	jp c, Func_18032
+	ld a, [wJumpVelTable]
+	and a
+	jr nz, .asm_1906f
+	ld a, [wSwimVelIndex]
+	and a
+	jr nz, .asm_1906f
+	jp Func_18032
+.asm_1906f
+	ld a, $04
+	ld [wceda], a
+	jr Func_19086
+.asm_19076
+	or $04
+	ld [wceda], a
+	jp Func_18f32
+.asm_1907e
+	ld a, $04
+	ld [wceda], a
+	jp Func_18f32
+
+Func_19086:
+	ld a, [wSRAMBank]
+	ld [wcedb], a
+	ld hl, wYCell
+	ld a, [hli]
+	ld [wcedc], a
+	ld d, a
+	ld a, [hl]
+	ld [wcedd], a
+	ld e, a
+	ld a, [de]
+	ld [wcedf], a
+	ld a, TRUE
+	ld [wIsFloorTransition], a
+	ld hl, wYCell
+	ld a, [hli]
+	ld l, [hl]
+	ld h, a
+	ld a, [hl]
+	and $80
+	or b
+	ld [hl], a
+	push hl
+	call Func_e31
+	pop hl
+	call Func_19609
+	ld a, [wIsRolling]
+	and a
+	jp nz, Func_18020
+	ld a, [wTransformation]
+	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
+	jp z, Func_18020
+	ld a, [wIsSmashAttacking]
+	and a
+	jr nz, .asm_190d5
+	ld a, [wPowerUpLevel]
+	cp GARLIC
+	jp c, Func_18032
+	jp Func_18020
+.asm_190d5
+	ld a, [wPowerUpLevel]
+	cp SUPER_JUMP_SLAM_OVERALLS
+	jp c, Func_18032
+	jp Func_18020
+
+; unreferenced
+Func_190e0: ; 190e0 (6:50e0)
+	ld b, $79
+	jr .asm_190fe
+	ld b, $7a
+	jr .asm_190fe
+	ld b, $7b
+	jr .asm_190fe
+	ld b, $7c
+	jr .asm_190fe
+	ld b, $7d
+	jr .asm_190fe
+	ld b, $7e
+	jr .asm_190fe
+	ld b, $7f
+	jr .asm_190fe
+	ld b, $78
+.asm_190fe
+	ld a, [wceda]
+	and $07
+	jp nz, Func_18032
+	ld a, [wceda]
+	and $f8
+	jr nz, .asm_19185
+	ld a, [wc0d9]
+	cp $03
+	jp z, Func_18020
+	cp $02
+	jr z, .asm_1918d
+	ld a, [wc0d8]
+	and a
+	jp z, Func_18032
+	ld a, [wTransformation]
+	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
+	jr z, .asm_19145
+	ld a, [wPowerUpLevel]
+	cp GARLIC
+	jp c, Func_18032
+	ld a, [wc0d6]
+	bit 4, a
+	jr nz, .asm_1914f
+	bit 5, a
+	jr nz, .asm_1915e
+	bit 3, a
+	jr nz, .asm_1915e
+	and $42
+	jr nz, .asm_19175
+	jp Func_18032
+.asm_19145
+	ld a, [wc0d6]
+	and $42
+	jr nz, .asm_1917d
+	jp Func_18032
+.asm_1914f
+	ld a, [wAttackCounter]
+	and a
+	jr nz, .asm_1917d
+	ld a, [wIsRolling]
+	and a
+	jr nz, .asm_19175
+	jp Func_18032
+.asm_1915e
+	ld a, [wPowerUpLevel]
+	cp HEAD_SMASH_HELMET
+	jp c, Func_18032
+	ld a, [wJumpVelTable]
+	and a
+	jr nz, .asm_1917d
+	ld a, [wSwimVelIndex]
+	and a
+	jr nz, .asm_1917d
+	jp Func_18032
+.asm_19175
+	ld a, [wPowerUpLevel]
+	cp SUPER_JUMP_SLAM_OVERALLS
+	jp c, Func_18032
+.asm_1917d
+	ld a, $01
+	ld [wceda], a
+	jp Func_193dc
+.asm_19185
+	or $01
+	ld [wceda], a
+	jp Func_19246
+.asm_1918d
+	ld a, $01
+	ld [wceda], a
+	jp Func_19246
+
+; unreferenced
+Func_19195: ; 19195 (6:5195)
+	ld b, $79
+	jr .asm_191b3
+	ld b, $7a
+	jr .asm_191b3
+	ld b, $7b
+	jr .asm_191b3
+	ld b, $7c
+	jr .asm_191b3
+	ld b, $7d
+	jr .asm_191b3
+	ld b, $7e
+	jr .asm_191b3
+	ld b, $7f
+	jr .asm_191b3
+	ld b, $78
+.asm_191b3
+	ld a, [wceda]
+	and $07
+	jp nz, Func_18032
+	ld a, [wceda]
+	and $f8
+	jr nz, .asm_1923a
+	ld a, [wc0d9]
+	cp $03
+	jp z, Func_18020
+	cp $02
+	jr z, .asm_19241
+	ld a, [wc0d8]
+	and a
+	jp z, Func_18032
+	ld a, [wTransformation]
+	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
+	jr z, .asm_191fa
+	ld a, [wPowerUpLevel]
+	cp GARLIC
+	jp c, Func_18032
+	ld a, [wc0d6]
+	bit 4, a
+	jr nz, .asm_19204
+	bit 5, a
+	jr nz, .asm_19213
+	bit 3, a
+	jr nz, .asm_19213
+	and $42
+	jr nz, .asm_1922a
+	jp Func_18032
+.asm_191fa
+	ld a, [wc0d6]
+	and $42
+	jr nz, .asm_19232
+	jp Func_18032
+.asm_19204
+	ld a, [wAttackCounter]
+	and a
+	jr nz, .asm_19232
+	ld a, [wIsRolling]
+	and a
+	jr nz, .asm_19232
+	jp Func_18032
+.asm_19213
+	ld a, [wPowerUpLevel]
+	cp HEAD_SMASH_HELMET
+	jp c, Func_18032
+	ld a, [wJumpVelTable]
+	and a
+	jr nz, .asm_19232
+	ld a, [wSwimVelIndex]
+	and a
+	jr nz, .asm_19232
+	jp Func_18032
+.asm_1922a
+	ld a, [wPowerUpLevel]
+	cp SUPER_JUMP_SLAM_OVERALLS
+	jp c, Func_18032
+.asm_19232
+	ld a, $03
+	ld [wceda], a
+	jp Func_193dc
+.asm_1923a
+	or $03
+	ld [wceda], a
+	jr Func_19246
+.asm_19241
+	ld a, $03
+	ld [wceda], a
+;	fallthrough
+
+Func_19246:
+	ld a, [wSRAMBank]
+	ld [wcedb], a
+	ld hl, wYCell
+	ld a, [hli]
+	ld [wcedc], a
+	ld d, a
+	ld a, [hl]
+	ld [wcedd], a
+	ld e, a
+	ld a, [de]
+	ld [wcedf], a
+	ld hl, wYCell
+	ld a, [hli]
+	ld l, [hl]
+	ld h, a
+	ld a, [hl]
+	and $80
+	or b
+	ld [hl], a
+	push hl
+	call Func_e31
+	pop hl
+	call Func_19609
+	jp Func_18020
+
+; unreferenced
+Func_19273: ; 19273 (6:5273)
+	ld b, $79
+	jr .asm_19291
+	ld b, $7a
+	jr .asm_19291
+	ld b, $7b
+	jr .asm_19291
+	ld b, $7c
+	jr .asm_19291
+	ld b, $7d
+	jr .asm_19291
+	ld b, $7e
+	jr .asm_19291
+	ld b, $7f
+	jr .asm_19291
+	ld b, $78
+.asm_19291
+	ld a, [wceda]
+	and $07
+	jp nz, Func_18032
+	ld a, [wceda]
+	and $f8
+	jr nz, .asm_19318
+	ld a, [wc0d9]
+	cp $03
+	jp z, Func_18020
+	cp $02
+	jr z, .asm_19320
+	ld a, [wc0d8]
+	and a
+	jp z, Func_18032
+	ld a, [wTransformation]
+	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
+	jr z, .asm_192d8
+	ld a, [wPowerUpLevel]
+	cp GARLIC
+	jp c, Func_18032
+	ld a, [wc0d6]
+	bit 4, a
+	jr nz, .asm_192e2
+	bit 5, a
+	jr nz, .asm_192f1
+	bit 3, a
+	jr nz, .asm_192f1
+	and $42
+	jr nz, .asm_19308
+	jp Func_18032
+.asm_192d8
+	ld a, [wc0d6]
+	and $42
+	jr nz, .asm_19310
+	jp Func_18032
+.asm_192e2
+	ld a, [wAttackCounter]
+	and a
+	jr nz, .asm_19310
+	ld a, [wIsRolling]
+	and a
+	jr nz, .asm_19310
+	jp Func_18032
+.asm_192f1
+	ld a, [wPowerUpLevel]
+	cp HEAD_SMASH_HELMET
+	jp c, Func_18032
+	ld a, [wJumpVelTable]
+	and a
+	jr nz, .asm_19310
+	ld a, [wSwimVelIndex]
+	and a
+	jr nz, .asm_19310
+	jp Func_18032
+.asm_19308
+	ld a, [wPowerUpLevel]
+	cp SUPER_JUMP_SLAM_OVERALLS
+	jp c, Func_18032
+.asm_19310
+	ld a, $02
+	ld [wceda], a
+	jp Func_193dc
+.asm_19318
+	or $02
+	ld [wceda], a
+	jp Func_19246
+.asm_19320
+	ld a, $02
+	ld [wceda], a
+	jp Func_19246
+
+; unreferenced
+Func_19328: ; 19328 (6:5328)
+	ld b, $79
+	jr .asm_19346
+	ld b, $7a
+	jr .asm_19346
+	ld b, $7b
+	jr .asm_19346
+	ld b, $7c
+	jr .asm_19346
+	ld b, $7d
+	jr .asm_19346
+	ld b, $7e
+	jr .asm_19346
+	ld b, $7f
+	jr .asm_19346
+	ld b, $78
+.asm_19346
+	ld a, [wceda]
+	and $07
+	jp nz, Func_18032
+	ld a, [wceda]
+	and $f8
+	jr nz, .asm_193cc
+	ld a, [wc0d9]
+	cp $03
+	jp z, Func_18020
+	cp $02
+	jr z, .asm_193d4
+	ld a, [wc0d8]
+	and a
+	jp z, Func_18032
+	ld a, [wTransformation]
+	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
+	jr z, .asm_1938d
+	ld a, [wPowerUpLevel]
+	cp GARLIC
+	jp c, Func_18032
+	ld a, [wc0d6]
+	bit 4, a
+	jr nz, .asm_19397
+	bit 5, a
+	jr nz, .asm_193a6
+	bit 3, a
+	jr nz, .asm_193a6
+	and $42
+	jr nz, .asm_193bd
+	jp Func_18032
+.asm_1938d
+	ld a, [wc0d6]
+	and $42
+	jr nz, .asm_193c5
+	jp Func_18032
+.asm_19397
+	ld a, [wAttackCounter]
+	and a
+	jr nz, .asm_193c5
+	ld a, [wIsRolling]
+	and a
+	jr nz, .asm_193c5
+	jp Func_18032
+.asm_193a6
+	ld a, [wPowerUpLevel]
+	cp HEAD_SMASH_HELMET
+	jp c, Func_18032
+	ld a, [wJumpVelTable]
+	and a
+	jr nz, .asm_193c5
+	ld a, [wSwimVelIndex]
+	and a
+	jr nz, .asm_193c5
+	jp Func_18032
+.asm_193bd
+	ld a, [wPowerUpLevel]
+	cp SUPER_JUMP_SLAM_OVERALLS
+	jp c, Func_18032
+.asm_193c5
+	ld a, $04
+	ld [wceda], a
+	jr Func_193dc
+.asm_193cc
+	or $04
+	ld [wceda], a
+	jp Func_19246
+.asm_193d4
+	ld a, $04
+	ld [wceda], a
+	jp Func_19246
+
+Func_193dc:
+	ld a, [wSRAMBank]
+	ld [wcedb], a
+	ld hl, wYCell
+	ld a, [hli]
+	ld [wcedc], a
+	ld d, a
+	ld a, [hl]
+	ld [wcedd], a
+	ld e, a
+	ld a, [de]
+	ld [wcedf], a
+	ld a, TRUE
+	ld [wIsFloorTransition], a
+	jp Func_18df1
+
+; unreferenced
+Func_193fb: ; 193fb (6:53fb)
+	ld b, $78
+	jr .asm_19419
+	ld b, $79
+	jr .asm_19419
+	ld b, $7a
+	jr .asm_19419
+	ld b, $7b
+	jr .asm_19419
+	ld b, $7c
+	jr .asm_19419
+	ld b, $7d
+	jr .asm_19419
+	ld b, $7e
+	jr .asm_19419
+	ld b, $7f
+.asm_19419
+	ld a, [wc0d9]
+	cp $01
+	jr z, Func_19423
+	jp Func_18032
+
+Func_19423:
+	ld hl, wYCell
+	ld a, [hli]
+	ld l, [hl]
+	ld h, a
+	ld a, [hl]
+	and $80
+	or b
+	ld [hl], a
+	push hl
+	call Func_e2b
+	pop hl
+	ld a, [wCurObjFlags]
+	bit OBJFLAG_ON_SCREEN_F, a
+	jr z, .asm_19440
+	call Func_19609
+	jp Func_18020
+.asm_19440
+	play_sfx SFX_BLOCK_BREAK
+	jp Func_18020
+
+; unreferenced
+Func_1944b: ; 1944b (6:544b)
+	ld b, $78
+	jr .asm_19469
+	ld b, $79
+	jr .asm_19469
+	ld b, $7a
+	jr .asm_19469
+	ld b, $7b
+	jr .asm_19469
+	ld b, $7c
+	jr .asm_19469
+	ld b, $7d
+	jr .asm_19469
+	ld b, $7e
+	jr .asm_19469
+	ld b, $7f
+.asm_19469
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+	ld a, [wTransformation]
+	cp (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
+	jr nz, .asm_1947e
+	ld a, [wca8f]
+	cp $02
+	jr nc, Func_19481
+.asm_1947e
+	jp Func_18032
+
+Func_19481:
+	ld hl, wYCell
+	ld a, [hli]
+	ld l, [hl]
+	ld h, a
+	ld a, [hl]
+	and $80
+	or b
+	ld [hl], a
+	push hl
+	call Func_e31
+	pop hl
+	call Func_19609
+	jp Func_18020
+
+; unreferenced
+Func_19497: ; 19497 (6:5497)
+	ld b, $78
+	jr .asm_194b5
+	ld b, $79
+	jr .asm_194b5
+	ld b, $7a
+	jr .asm_194b5
+	ld b, $7b
+	jr .asm_194b5
+	ld b, $7c
+	jr .asm_194b5
+	ld b, $7d
+	jr .asm_194b5
+	ld b, $7e
+	jr .asm_194b5
+	ld b, $7f
+.asm_194b5
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+	ld a, [wTransformation]
+	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
+	jp nz, Func_18032
+	ld a, [wc0d6]
+	and $42
+	jr nz, .asm_194ce
+	jp Func_18032
+.asm_194ce
+	ld hl, wYCell
+	ld a, [hli]
+	ld l, [hl]
+	ld h, a
+	ld a, [hl]
+	and $80
+	or b
+	ld [hl], a
+	push hl
+	call Func_e31
+	pop hl
+	call Func_19609
+	jp Func_18032
+
+; unreferenced
+Func_194e4: ; 194e4 (6:54e4)
+	ld b, $78
+	jr .asm_19502
+	ld b, $79
+	jr .asm_19502
+	ld b, $7a
+	jr .asm_19502
+	ld b, $7b
+	jr .asm_19502
+	ld b, $7c
+	jr .asm_19502
+	ld b, $7d
+	jr .asm_19502
+	ld b, $7e
+	jr .asm_19502
+	ld b, $7f
+.asm_19502
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+	ld a, [wTransformation]
+	cp (1 << 6) | (1 << 7) | TRANSFORMATION_BALL_O_STRING_WARIO
+	jp z, Func_19481
+	jp Func_18032
+
+; unreferenced
+Func_19514: ; 19514 (6:5514)
+	ld b, $79
+	jr .asm_19522
+	ld b, $7a
+	jr .asm_19522
+	ld b, $7b
+	jr .asm_19522
+	ld b, $78
+.asm_19522
+	ld a, [wceda]
+	and $07
+	jp nz, Func_18020
+	ld a, [wceda]
+	and $f8
+	jr nz, .asm_1954a
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+	ld a, [wTransformation]
+	cp (1 << 6) | (1 << 7) | TRANSFORMATION_BALL_O_STRING_WARIO
+	jr z, .asm_19542
+	jp Func_18032
+.asm_19542
+	ld a, $01
+	ld [wceda], a
+	jp Func_18f32
+.asm_1954a
+	or $01
+	ld [wceda], a
+	jp Func_18f32
+
+; unreferenced
+Func_19552: ; 19552 (6:5552)
+	ld b, $79
+	jr .asm_19560
+	ld b, $7a
+	jr .asm_19560
+	ld b, $7b
+	jr .asm_19560
+	ld b, $78
+.asm_19560
+	ld a, [wceda]
+	and $07
+	jp nz, Func_18020
+	ld a, [wceda]
+	and $f8
+	jr nz, .asm_19585
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+	ld a, [wTransformation]
+	cp (1 << 6) | (1 << 7) | TRANSFORMATION_BALL_O_STRING_WARIO
+	jr z, .asm_19580
+	jp Func_18032
+.asm_19580
+	ld a, $03
+	ld [wceda], a
+.asm_19585
+	or $03
+	ld [wceda], a
+	jp Func_18f32
+
+; unreferenced
+Func_1958d: ; 1958d (6:558d)
+	ld b, $79
+	jr .asm_1959b
+	ld b, $7a
+	jr .asm_1959b
+	ld b, $7b
+	jr .asm_1959b
+	ld b, $78
+.asm_1959b
+	ld a, [wceda]
+	and $07
+	jp nz, Func_18020
+	ld a, [wceda]
+	and $f8
+	jr nz, .asm_195c3
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+	ld a, [wTransformation]
+	cp (1 << 6) | (1 << 7) | TRANSFORMATION_BALL_O_STRING_WARIO
+	jr z, .asm_195bb
+	jp Func_18032
+.asm_195bb
+	ld a, $02
+	ld [wceda], a
+	jp Func_18f32
+.asm_195c3
+	or $02
+	ld [wceda], a
+	jp Func_18f32
+
+; unreferenced
+Func_195cb: ; 195cb (6:55cb)
+	ld b, $79
+	jr .asm_195d9
+	ld b, $7a
+	jr .asm_195d9
+	ld b, $7b
+	jr .asm_195d9
+	ld b, $78
+.asm_195d9
+	ld a, [wceda]
+	and $07
+	jp nz, Func_18020
+	ld a, [wceda]
+	and $f8
+	jr nz, .asm_19601
+	ld a, [wc0da]
+	and a
+	jp z, Func_18032
+	ld a, [wTransformation]
+	cp (1 << 6) | (1 << 7) | TRANSFORMATION_BALL_O_STRING_WARIO
+	jr z, .asm_195f9
+	jp Func_18032
+.asm_195f9
+	ld a, $04
+	ld [wceda], a
+	jp Func_18f32
+.asm_19601
+	or $04
+	ld [wceda], a
+	jp Func_18f32
+; 0x19609
 
 Func_19609: ; 19609 (6:5609)
 	; temporarily store hPos
@@ -2261,7 +3654,29 @@ Func_19b9b:: ; 19b9b (6:5b9b)
 	ret
 ; 0x19bab
 
-	INCROM $19bab, $19bc3
+; unreferenced
+Func_19bab: ; 19bab (6:5bab)
+	ld hl, wXCell
+	dec [hl]
+	ld a, [hld]
+	ld h, [hl]
+	ld l, a
+	call Func_18000
+	ld b, a
+	ret
+; 0x19bb7
+
+; unreferenced
+Func_19bb7: ; 19bb7 (6:5bb7)
+	ld hl, wXCell
+	inc [hl]
+	ld a, [hld]
+	ld h, [hl]
+	ld l, a
+	call Func_18000
+	ld b, a
+	ret
+; 0x19bc3
 
 Func_19bc3:: ; 19bc3 (6:5bc3)
 	ld hl, hPos

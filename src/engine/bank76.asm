@@ -3,8 +3,7 @@ OverworldClouds2Gfx:: INCBIN "gfx/overworld/overworld_clouds2.2bpp"
 OverworldSeaGfx::     INCBIN "gfx/overworld/overworld_sea.2bpp"
 OverworldCliffs1Gfx:: INCBIN "gfx/overworld/overworld_cliffs1.2bpp"
 OverworldCliffs2Gfx:: INCBIN "gfx/overworld/overworld_cliffs2.2bpp"
-
-	INCROM $1d8a00, $1d8b00
+UnusedOverworldCliffsGfx:: INCBIN "gfx/overworld/unused_overworld_cliffs.2bpp" ; unreferenced
 
 ; updates animations for clouds, sea and cliffs
 UpdateCommonOWAnimations: ; 1d8b00 (76:4b00)

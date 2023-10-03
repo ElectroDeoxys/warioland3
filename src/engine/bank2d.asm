@@ -1220,9 +1220,26 @@ InitSceneObjParams: ; b4887 (2d:4887)
 	ld a, [de]
 	ld [hl], a ; state
 	ret
-; 0xb4895
 
-	INCROM $b4895, $b48a7
+; unreferenced
+Func_b4895: ; b4895 (2d:4895)
+	ld a, [de]
+	ld [hli], a
+	inc de
+	ld a, [de]
+	ld [hld], a
+	call GetOWCoordInTilemap
+	inc de
+	ld a, [de]
+	ld [hl], a
+	dec h
+	dec h
+	dec h
+	inc de
+	ld a, [de]
+	ld [hl], a
+	ret
+; 0xb48a7
 
 ; sets the priority bit of b bytes
 ; starting from hl in BGMap
@@ -2021,7 +2038,11 @@ Func_b4e65: ; b4e65 (2d:4e65)
 	jp AddCurSceneObjSpriteWithScroll
 ; 0xb4e6b
 
-	INCROM $b4e6b, $b4e70
+; unreferenced
+Func_b4e6b: ; b4e6b (2d:4e6b)
+	call UpdateCurOWOjAnimation
+	ld b, $00
+;	fallthrough
 
 Func_b4e70: ; b4e70 (2d:4e70)
 	call Func_b4a0d
@@ -2966,7 +2987,181 @@ ENDR
 	ret
 ; 0xb542e
 
-	INCROM $b542e, $b553f
+Func_b542e: ; b542e (2d:542e)
+	call .Func_b5435
+	call .Func_b54ba
+	ret
+
+.Func_b5435:
+	ld hl, w2d12c
+	ld a, [hli]
+	and a
+	ret z
+	inc [hl]
+	dec a
+	jumptable
+	dw .Func_b544a
+	dw .Func_b5461
+	dw .Func_b5471
+	dw .Func_b5486
+	dw .Func_b548e
+	dw .Func_b549e
+
+.Func_b544a:
+	ld a, [w2d12d]
+	cp $78
+	ret c
+	ld a, $12
+	ld hl, wSceneObj6State
+	call SetSceneObjState
+.asm_b5458
+	ld hl, w2d12c
+	inc [hl]
+	xor a
+	ld [w2d12d], a
+	ret
+
+.Func_b5461:
+	ld a, [w2d12d]
+	cp $5a
+	ret c
+	ld a, $13
+	ld hl, wSceneObj6State
+	call SetSceneObjState
+	jr .asm_b5458
+
+.Func_b5471:
+	ld a, [w2d12d]
+	cp $28
+	ret c
+	ld a, $10
+	ld hl, wSceneObj6State
+	call SetSceneObjState
+	ld a, $38
+	ld [wSceneObj6YCoord], a
+	jr .asm_b5458
+
+.Func_b5486:
+	ld a, [w2d12d]
+	cp $5a
+	ret c
+	jr .asm_b5458
+
+.Func_b548e:
+	ld a, [w2d12d]
+	and $0f
+	ret nz
+	ld hl, wSceneObj6
+	inc [hl]
+	ld a, [hl]
+	cp $48
+	ret nz
+	jr .asm_b5458
+
+.Func_b549e:
+	ld hl, wSceneObj6Frame
+	ld a, [hld]
+	cp $46
+	ret nz
+	dec l
+	ld a, [hl]
+	and a
+	ret z
+	ld a, $11
+	ld hl, wSceneObj6State
+	call SetSceneObjState
+	ld a, $01
+	ld hl, w2d12c
+	ld [hli], a
+	xor a
+	ld [hl], a
+	ret
+
+.Func_b54ba:
+	ld hl, w2d12e
+	ld a, [hli]
+	and a
+	ret z
+	inc [hl]
+	dec a
+	jumptable
+	dw .Func_b54cf
+	dw .Func_b54e6
+	dw .Func_b54f6
+	dw .Func_b550b
+	dw .Func_b5513
+	dw .Func_b5523
+
+.Func_b54cf:
+	ld a, [w2d12f]
+	cp $78
+	ret c
+	ld a, $12
+	ld hl, wSceneObj7State
+	call SetSceneObjState
+.asm_b54dd
+	ld hl, w2d12e
+	inc [hl]
+	xor a
+	ld [w2d12f], a
+	ret
+
+.Func_b54e6:
+	ld a, [w2d12f]
+	cp $5a
+	ret c
+	ld a, $13
+	ld hl, wSceneObj7State
+	call SetSceneObjState
+	jr .asm_b54dd
+
+.Func_b54f6:
+	ld a, [w2d12f]
+	cp $28
+	ret c
+	ld a, $10
+	ld hl, wSceneObj7State
+	call SetSceneObjState
+	ld a, $38
+	ld [wSceneObj7YCoord], a
+	jr .asm_b54dd
+
+.Func_b550b:
+	ld a, [w2d12f]
+	cp $5a
+	ret c
+	jr .asm_b54dd
+
+.Func_b5513:
+	ld a, [w2d12f]
+	and $0f
+	ret nz
+	ld hl, wSceneObj7
+	inc [hl]
+	ld a, [hl]
+	cp $48
+	ret nz
+	jr .asm_b54dd
+
+.Func_b5523:
+	ld hl, wSceneObj7Frame
+	ld a, [hld]
+	cp $46
+	ret nz
+	dec l
+	ld a, [hl]
+	and a
+	ret z
+	ld a, $11
+	ld hl, wSceneObj7State
+	call SetSceneObjState
+	ld a, $01
+	ld hl, w2d12e
+	ld [hli], a
+	xor a
+	ld [hl], a
+	ret
+; 0xb553f
 
 NOWFunc_PlayMusicBox: ; b553f (2d:553f)
 	ld a, [w2d062]
@@ -3399,7 +3594,10 @@ NOWFunc_DayNightSpell: ; b56f9 (2d:56f9)
 	jr .loop
 ; 0xb5849
 
-	INCROM $b5849, $b584b
+; unreferenced
+Func_b5849: ; b5849 (2d:5849)
+	ld a, 4
+;	fallthrough
 
 WaitOWFunc: ; b584b (2d:584b)
 	ld hl, wOWFuncCounter
@@ -8308,7 +8506,7 @@ Func_b7984: ; b7984 (2d:7984)
 	dw Func_b791d
 	dw Func_b791d
 	dw Func_b791d
-	dw Func_b79de
+	dw .Func_b79de
 	dw Func_b791d
 	dw Func_b791d
 	dw Func_b791d
@@ -8317,13 +8515,38 @@ Func_b7984: ; b7984 (2d:7984)
 	dw Func_b791d
 	dw Func_b791d
 	dw Func_b791d
-	dw Func_b7a32
+	dw .Func_b7a32
 	dw Func_b791d
-; 0xb79a6
+	dw Func_b542e
+	dw Func_b542e
+	dw Func_b542e
+	dw Func_b542e
+	dw Func_b791d
+	dw Func_b791d
+	dw Func_b791d
+	dw Func_b791d
+	dw .Func_b79fa
+	dw .Func_b7a08
+	dw .Func_b7a16
+	dw .Func_b7a24
+	dw Func_b791d
+	dw Func_b791d
+	dw Func_b791d
+	dw Func_b791d
+	dw Func_b791d
+	dw Func_b791d
+	dw Func_b791d
+	dw Func_b791d
+	dw Func_b791d
+	dw Func_b791d
+	dw Func_b791d
+	dw Func_b791d
+	dw Func_b791d
+	dw Func_b791d
+	dw Func_b791d
+	dw Func_b791d
 
-	INCROM $b79a6, $b79de
-
-Func_b79de: ; b79de (2d:79de)
+.Func_b79de:
 	ld a, [w2d025]
 	and a
 	ret nz
@@ -8335,12 +8558,45 @@ Func_b79de: ; b79de (2d:79de)
 	call SetSceneObjState
 	play_sfx SFX_BLOCK_BREAK
 	ret
-; 0xb79fa
 
-	INCROM $b79fa, $b7a32
+.Func_b79fa:
+	ld a, [w2d011]
+	and a
+	ret nz
+	ld a, $17
+	ld hl, wSceneObj15State
+	call SetSceneObjState
+	ret
 
-Func_b7a32: ; b7a32 (2d:7a32)
-	call Func_b7a5a
+.Func_b7a08:
+	ld a, [w2d011]
+	and a
+	ret z
+	ld a, $16
+	ld hl, wSceneObj15State
+	call SetSceneObjState
+	ret
+
+.Func_b7a16:
+	ld a, [w2d011]
+	and a
+	ret nz
+	ld a, $1b
+	ld hl, wSceneObj14State
+	call SetSceneObjState
+	ret
+
+.Func_b7a24:
+	ld a, [w2d011]
+	and a
+	ret z
+	ld a, $1a
+	ld hl, wSceneObj14State
+	call SetSceneObjState
+	ret
+
+.Func_b7a32:
+	call .Func_b7a5a
 	ld hl, w2d125
 	jr z, .asm_b7a3f
 	inc [hl]
@@ -8352,7 +8608,7 @@ Func_b7a32: ; b7a32 (2d:7a32)
 	xor a
 	ld [hl], a
 	ld [w2d124], a
-	call Func_b7a5a
+	call .Func_b7a5a
 	ld b, $1d
 	jr nz, .asm_b7a52
 	ld a, $01
@@ -8363,9 +8619,8 @@ Func_b7a32: ; b7a32 (2d:7a32)
 	ld hl, wSceneObj2State
 	call SetSceneObjState
 	ret
-; 0xb7a5a
 
-Func_b7a5a: ; b7a5a (2d:7a5a)
+.Func_b7a5a:
 	ld a, [w2d025]
 	and a
 	ret nz

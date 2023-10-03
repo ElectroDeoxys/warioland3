@@ -27,6 +27,17 @@ ROM0
 	"romheader"
 	org $0150
 	"start"
+	"Home 1"
+	org $2800
+	"Home 2"
+	org $2c00
+	"Home 3"
+	org $3000
+	"Home 4"
+	org $3a00
+	"Home 5"
+	org $3f00
+	"Audio Home"
 ROMX $01
 	"Bank 1"
 ROMX $02

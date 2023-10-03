@@ -66,7 +66,16 @@ Frameset_68060:: ; 68060 (1a:4060)
 	db $ff
 ; 0x68065
 
-	INCROM $68065, $68072
+; unreferenced
+Frameset_68065:: ; 68065 (1a:4065)
+	db $12,  1
+	db $13,  1
+	db $14,  2
+	db $15,  2
+	db $16,  1
+	db $17,  1
+	db $ff
+; 0x68072
 
 Frameset_68072:: ; 68072 (1a:4072)
 	db $18,  4
@@ -78,7 +87,33 @@ Frameset_68072:: ; 68072 (1a:4072)
 	db $ff
 ; 0x6807f
 
-	INCROM $6807f, $680a5
+; unreferenced
+Frameset_6807f:: ; 6807f (1a:407f)
+	db $1e,  3
+	db $1f,  2
+	db $20,  1
+	db $21,  2
+	db $22,  1
+	db $23,  1
+	db $24,  1
+	db $ff
+; 0x6808e
+
+; unreferenced
+Frameset_6808e:: ; 6808e (1a:408e)
+	db $21,  3
+	db $20,  2
+	db $1f,  2
+	db $1e,  2
+	db $24,  3
+	db $23,  2
+	db $22,  2
+	db $21,  3
+	db $20,  2
+	db $1f,  2
+	db $1e,  2
+	db $ff
+; 0x680a5
 
 Frameset_680a5:: ; 680a5 (1a:40a5)
 	db $1e,  3
@@ -361,7 +396,23 @@ Frameset_68234:: ; 68234 (1a:4234)
 	db $ff
 ; 0x6823d
 
-	INCROM $6823d, $6824f
+; unreferenced
+Frameset_6823d:: ; 6823d (1a:423d)
+	db $00,  2
+	db $01,  2
+	db $00,  2
+	db $02,  2
+	db $ff
+; 0x68246
+
+; unreferenced
+Frameset_68246:: ; 68246 (1a:4246)
+	db $03,  2
+	db $04,  2
+	db $03,  2
+	db $05,  2
+	db $ff
+; 0x6824f
 
 Frameset_6824f:: ; 6824f (1a:424f)
 	db $00,  8
@@ -646,7 +697,21 @@ Frameset_68395:: ; 68395 (1a:4395)
 	db $ff
 ; 0x6839e
 
-	INCROM $6839e, $683ac
+; unreferenced
+Frameset_6839e:: ; 6839e (1a:439e)
+	db $0c, 16
+	db $0d, 16
+	db $ff
+; 0x683a3
+
+; unreferenced
+Frameset_683a3:: ; 683a3 (1a:43a3)
+	db $0c,  8
+	db $0e,  8
+	db $0f,  8
+	db $10,  8
+	db $ff
+; 0x683ac
 
 Frameset_683ac:: ; 683ac (1a:43ac)
 	db $11,  8
@@ -690,7 +755,12 @@ Frameset_683ca:: ; 683ca (1a:43ca)
 	db $ff
 ; 0x683cf
 
-	INCROM $683cf, $683d4
+; unreferenced
+Frameset_683cf:: ; 683cf (1a:43cf)
+	db $05, 10
+	db $0a, 10
+	db $ff
+; 0x683d4
 
 Frameset_683d4:: ; 683d4 (1a:43d4)
 	db $08,  8
@@ -1256,14 +1326,83 @@ Frameset_68655:: ; 68655 (1a:4655)
 	db $ff
 ; 0x68660
 
-	INCROM $68660, $68698
+; unreferenced
+Frameset_68660:: ; 68660 (1a:4660)
+	db $12,  8
+	db $11,  8
+	db $10,  8
+	db $ff
+; 0x68667
+
+; unreferenced
+Frameset_68667:: ; 68667 (1a:4667)
+	db $10,  8
+	db $17,  8
+	db $16,  8
+	db $ff
+; 0x6866e
+
+; unreferenced
+Frameset_6866e:: ; 6866e (1a:466e)
+	db $16,  8
+	db $15,  8
+	db $14,  8
+	db $ff
+; 0x68675
+
+; unreferenced
+Frameset_68675:: ; 68675 (1a:4675)
+	db $14,  8
+	db $13,  8
+	db $12,  8
+	db $ff
+; 0x6867c
+
+; unreferenced
+Frameset_6867c:: ; 6867c (1a:467c)
+	db $12,  8
+	db $13,  8
+	db $14,  8
+	db $ff
+; 0x68683
+
+; unreferenced
+Frameset_68683:: ; 68683 (1a:4683)
+	db $14,  8
+	db $15,  8
+	db $16,  8
+	db $ff
+; 0x6868a
+
+; unreferenced
+Frameset_6868a:: ; 6868a (1a:468a)
+	db $16,  8
+	db $17,  8
+	db $10,  8
+	db $ff
+; 0x68691
+
+; unreferenced
+Frameset_68691:: ; 68691 (1a:4691)
+	db $10,  8
+	db $11,  8
+	db $12,  8
+	db $ff
+; 0x68698
 
 Frameset_68698:: ; 68698 (1a:4698)
 	db $18, 100
 	db $ff
 ; 0x6869b
 
-	INCROM $6869b, $686a4
+; unreferenced
+Frameset_6869b:: ; 6869b (1a:469b)
+	db $19,  4
+	db $1a,  4
+	db $19,  4
+	db $1b,  4
+	db $ff
+; 0x686a4
 
 Frameset_686a4:: ; 686a4 (1a:46a4)
 	db $00,  4
@@ -2021,7 +2160,15 @@ Frameset_68a3a:: ; 68a3a (1a:4a3a)
 	db $ff
 ; 0x68a55
 
-	INCROM $68a55, $68a60
+; unreferenced
+Frameset_68a55:: ; 68a55 (1a:4a55)
+	db $07,  6
+	db $08, 10
+	db $09, 14
+	db $08, 10
+	db $07,  6
+	db $ff
+; 0x68a60
 
 Frameset_68a60:: ; 68a60 (1a:4a60)
 	db $10,  1
@@ -2076,7 +2223,16 @@ Frameset_68a8b:: ; 68a8b (1a:4a8b)
 	db $ff
 ; 0x68a92
 
-	INCROM $68a92, $68a9f
+; unreferenced
+Frameset_68a92:: ; 68a92 (1a:4a92)
+	db $04, 150
+	db $0a,  2
+	db $0b,  4
+	db $0c,  6
+	db $0d,  4
+	db $0e,  2
+	db $ff
+; 0x68a9f
 
 Frameset_68a9f:: ; 68a9f (1a:4a9f)
 	db $00,  8
@@ -2489,14 +2645,22 @@ Frameset_68c4a:: ; 68c4a (1a:4c4a)
 	db $ff
 ; 0x68c4d
 
-	INCROM $68c4d, $68c50
+; unreferenced
+Frameset_68c4d:: ; 68c4d (1a:4c4d)
+	db $25, 100
+	db $ff
+; 0x68c50
 
 Frameset_68c50:: ; 68c50 (1a:4c50)
 	db $26, 100
 	db $ff
 ; 0x68c53
 
-	INCROM $68c53, $68c56
+; unreferenced
+Frameset_68c53:: ; 68c53 (1a:4c53)
+	db $27, 100
+	db $ff
+; 0x68c56
 
 Frameset_68c56:: ; 68c56 (1a:4c56)
 	db $28, 100
@@ -2520,7 +2684,23 @@ Frameset_68c5c:: ; 68c5c (1a:4c5c)
 	db $ff
 ; 0x68c6d
 
-	INCROM $68c6d, $68c7f
+; unreferenced
+Frameset_68c6d:: ; 68c6d (1a:4c6d)
+	db $00,  6
+	db $01,  3
+	db $02,  6
+	db $01,  3
+	db $ff
+; 0x68c76
+
+; unreferenced
+Frameset_68c76:: ; 68c76 (1a:4c76)
+	db $00,  6
+	db $03,  3
+	db $04,  6
+	db $03,  3
+	db $ff
+; 0x68c7f
 
 Frameset_68c7f:: ; 68c7f (1a:4c7f)
 	db $05,  8
@@ -2564,7 +2744,32 @@ Frameset_68ca0:: ; 68ca0 (1a:4ca0)
 	db $ff
 ; 0x68ca9
 
-	INCROM $68ca9, $68cc4
+; unreferenced
+Frameset_68ca9:: ; 68ca9 (1a:4ca9)
+	db $06,  2
+	db $07,  2
+	db $08,  2
+	db $09,  2
+	db $ff
+; 0x68cb2
+
+; unreferenced
+Frameset_68cb2:: ; 68cb2 (1a:4cb2)
+	db $08,  2
+	db $09,  2
+	db $0a,  2
+	db $0b,  2
+	db $ff
+; 0x68cbb
+
+; unreferenced
+Frameset_68cbb:: ; 68cbb (1a:4cbb)
+	db $0c,  3
+	db $0d,  3
+	db $0e,  3
+	db $0f,  3
+	db $ff
+; 0x68cc4
 
 Frameset_68cc4:: ; 68cc4 (1a:4cc4)
 	db $12,  6
@@ -2586,7 +2791,70 @@ Frameset_68ccd:: ; 68ccd (1a:4ccd)
 	db $ff
 ; 0x68cde
 
-	INCROM $68cde, $68d1a
+; unreferenced
+Frameset_68cde:: ; 68cde (1a:4cde)
+	db $00, 20
+	db $01, 20
+	db $00, 20
+	db $02, 20
+	db $ff
+; 0x68ce7
+
+; unreferenced
+Frameset_68ce7:: ; 68ce7 (1a:4ce7)
+	db $04, 20
+	db $05, 20
+	db $04, 20
+	db $06, 16
+	db $ff
+; 0x68cf0
+
+; unreferenced
+Frameset_68cf0:: ; 68cf0 (1a:4cf0)
+	db $00, 24
+	db $03, 24
+	db $13, 64
+	db $ff
+; 0x68cf7
+
+; unreferenced
+Frameset_68cf7:: ; 68cf7 (1a:4cf7)
+	db $04, 24
+	db $07, 24
+	db $14, 64
+	db $ff
+; 0x68cfe
+
+; unreferenced
+Frameset_68cfe:: ; 68cfe (1a:4cfe)
+	db $08, 20
+	db $09,  8
+	db $ff
+; 0x68d03
+
+; unreferenced
+Frameset_68d03:: ; 68d03 (1a:4d03)
+	db $0a, 20
+	db $0b,  8
+	db $ff
+; 0x68d08
+
+Frameset_68d08:: ; 68d08 (1a:4d08)
+	db $17, 24
+	db $0c, 24
+	db $0d, 24
+	db $00, 20
+	db $ff
+; 0x68d11
+
+; unreferenced
+Frameset_68d11:: ; 68d11 (1a:4d11)
+	db $18, 24
+	db $0e, 24
+	db $0f, 24
+	db $04, 20
+	db $ff
+; 0x68d1a
 
 Frameset_68d1a:: ; 68d1a (1a:4d1a)
 	db $10,  8
@@ -2614,7 +2882,76 @@ Frameset_68d2b:: ; 68d2b (1a:4d2b)
 	db $ff
 ; 0x68d32
 
-	INCROM $68d32, $68d81
+; unreferenced
+Frameset_68d32:: ; 68d32 (1a:4d32)
+	db $1e,  6
+	db $19,  6
+	db $1a,  6
+	db $1b,  6
+	db $1c,  6
+	db $1d,  6
+	db $ff
+; 0x68d3f
+
+; unreferenced
+Frameset_68d3f:: ; 68d3f (1a:4d3f)
+	db $00, 20
+	db $0d, 24
+	db $0c, 24
+	db $17, 24
+	db $ff
+; 0x68d48
+
+; unreferenced
+Frameset_68d48:: ; 68d48 (1a:4d48)
+	db $04, 20
+	db $0f, 24
+	db $0e, 24
+	db $18, 24
+	db $ff
+; 0x68d51
+
+; unreferenced
+Frameset_68d51:: ; 68d51 (1a:4d51)
+	db $09,  8
+	db $19,  6
+	db $0b,  8
+	db $ff
+; 0x68d58
+
+; unreferenced
+Frameset_68d58:: ; 68d58 (1a:4d58)
+	db $0b,  8
+	db $19,  6
+	db $09,  8
+	db $ff
+; 0x68d5f
+
+; unreferenced
+Frameset_68d5f:: ; 68d5f (1a:4d5f)
+	db $08, 16
+	db $09,  5
+	db $19,  6
+	db $0b,  5
+	db $0a, 16
+	db $0b,  5
+	db $19,  6
+	db $09,  5
+	db $ff
+; 0x68d70
+
+; unreferenced
+Frameset_68d70:: ; 68d70 (1a:4d70)
+	db $0a, 16
+	db $0b,  5
+	db $19,  6
+	db $09,  5
+	db $08, 16
+	db $09,  5
+	db $19,  6
+	db $0b,  5
+	db $ff
+; 0x68d81
 
 Frameset_68d81:: ; 68d81 (1a:4d81)
 	db $00,  4
@@ -2974,7 +3311,21 @@ Frameset_68ef8:: ; 68ef8 (1a:4ef8)
 	db $ff
 ; 0x68efd
 
-	INCROM $68efd, $68f0b
+; unreferenced
+Frameset_68efd:: ; 68efd (1a:4efd)
+	db $0b,  4
+	db $0a,  4
+	db $00,  4
+	db $ff
+; 0x68f04
+
+; unreferenced
+Frameset_68f04:: ; 68f04 (1a:4f04)
+	db $0d,  4
+	db $0c,  4
+	db $03,  4
+	db $ff
+; 0x68f0b
 
 Frameset_68f0b:: ; 68f0b (1a:4f0b)
 	db $00,  4
@@ -3075,7 +3426,23 @@ Frameset_68f74:: ; 68f74 (1a:4f74)
 	db $ff
 ; 0x68f7d
 
-	INCROM $68f7d, $68f8f
+; unreferenced
+Frameset_68f7d:: ; 68f7d (1a:4f7d)
+	db $00,  8
+	db $0f,  8
+	db $01,  8
+	db $0f,  8
+	db $ff
+; 0x68f86
+
+; unreferenced
+Frameset_68f86:: ; 68f86 (1a:4f86)
+	db $02,  8
+	db $10,  8
+	db $03,  8
+	db $10,  8
+	db $ff
+; 0x68f8f
 
 Frameset_68f8f:: ; 68f8f (1a:4f8f)
 	db $15,  8
@@ -3150,7 +3517,23 @@ Frameset_68fd9:: ; 68fd9 (1a:4fd9)
 	db $ff
 ; 0x68fe2
 
-	INCROM $68fe2, $68ff4
+; unreferenced
+Frameset_68fe2:: ; 68fe2 (1a:4fe2)
+	db $01,  8
+	db $11,  8
+	db $04,  8
+	db $11,  8
+	db $ff
+; 0x68feb
+
+; unreferenced
+Frameset_68feb:: ; 68feb (1a:4feb)
+	db $03,  8
+	db $12,  8
+	db $06,  8
+	db $12,  8
+	db $ff
+; 0x68ff4
 
 Frameset_68ff4:: ; 68ff4 (1a:4ff4)
 	db $19,  8
@@ -3234,7 +3617,47 @@ Frameset_69041:: ; 69041 (1a:5041)
 	db $ff
 ; 0x69060
 
-	INCROM $69060, $690ab
+; unreferenced
+Frameset_69060:: ; 69060 (1a:5060)
+	db $0b,  2
+	db $0c,  2
+	db $0d,  2
+	db $0a,  4
+	db $0b,  2
+	db $0c,  2
+	db $0d,  2
+	db $0a,  4
+	db $0b,  2
+	db $0c,  2
+	db $0d,  2
+	db $0a,  4
+	db $00,  1
+	db $01,  1
+	db $02,  1
+	db $03,  1
+	db $04,  1
+	db $05,  1
+	db $06,  1
+	db $07,  2
+	db $08,  2
+	db $09,  7
+	db $13,  7
+	db $14,  7
+	db $08,  2
+	db $07,  7
+	db $15,  7
+	db $16,  7
+	db $0e,  2
+	db $0f,  2
+	db $10,  2
+	db $11,  2
+	db $12,  2
+	db $0b,  3
+	db $0c,  3
+	db $0d,  3
+	db $0a, 30
+	db $ff
+; 0x690ab
 
 Frameset_690ab:: ; 690ab (1a:50ab)
 	db $0b,  2
@@ -3829,7 +4252,45 @@ Frameset_69335:: ; 69335 (1a:5335)
 	db $ff
 ; 0x69340
 
-	INCROM $69340, $6936c
+; unreferenced
+Frameset_69340:: ; 69340 (1a:5340)
+	db $0d,  5
+	db $0e,  5
+	db $0f,  5
+	db $10,  5
+	db $11,  5
+	db $ff
+; 0x6934b
+
+; unreferenced
+Frameset_6934b:: ; 6934b (1a:534b)
+	db $12,  2
+	db $13,  2
+	db $14,  2
+	db $15,  2
+	db $16,  2
+	db $ff
+; 0x69356
+
+; unreferenced
+Frameset_69356:: ; 69356 (1a:5356)
+	db $12,  2
+	db $08,  3
+	db $0e,  3
+	db $0f,  3
+	db $0b,  3
+	db $16,  1
+	db $ff
+; 0x69363
+
+; unreferenced
+Frameset_69363:: ; 69363 (1a:5363)
+	db $17,  2
+	db $19,  2
+	db $18,  2
+	db $19,  2
+	db $ff
+; 0x6936c
 
 Frameset_6936c:: ; 6936c (1a:536c)
 	db $1a,  5
@@ -3849,7 +4310,65 @@ Frameset_69377:: ; 69377 (1a:5377)
 	db $ff
 ; 0x69382
 
-	INCROM $69382, $693c4
+; unreferenced
+Frameset_69382:: ; 69382 (1a:5382)
+	db $24,  5
+	db $25,  5
+	db $26,  5
+	db $27,  5
+	db $28,  5
+	db $ff
+; 0x6938d
+
+; unreferenced
+Frameset_6938d:: ; 6938d (1a:538d)
+	db $29,  5
+	db $2a,  5
+	db $2b,  5
+	db $2c,  5
+	db $2d,  5
+	db $ff
+; 0x69398
+
+; unreferenced
+Frameset_69398:: ; 69398 (1a:5398)
+	db $2e,  5
+	db $2f,  5
+	db $30,  5
+	db $31,  5
+	db $32,  5
+	db $ff
+; 0x693a3
+
+; unreferenced
+Frameset_693a3:: ; 693a3 (1a:53a3)
+	db $33,  5
+	db $34,  5
+	db $35,  5
+	db $36,  5
+	db $37,  5
+	db $ff
+; 0x693ae
+
+; unreferenced
+Frameset_693ae:: ; 693ae (1a:53ae)
+	db $2e,  3
+	db $25,  3
+	db $26,  3
+	db $1d,  3
+	db $32,  3
+	db $ff
+; 0x693b9
+
+; unreferenced
+Frameset_693b9:: ; 693b9 (1a:53b9)
+	db $33,  3
+	db $2a,  3
+	db $2b,  3
+	db $22,  3
+	db $37,  3
+	db $ff
+; 0x693c4
 
 Frameset_693c4:: ; 693c4 (1a:53c4)
 	db $00,  6
@@ -3973,7 +4492,17 @@ Frameset_69450:: ; 69450 (1a:5450)
 	db $ff
 ; 0x6945d
 
-	INCROM $6945d, $69463
+; unreferenced
+Frameset_6945d:: ; 6945d (1a:545d)
+	db $1a,  1
+	db $ff
+; 0x69460
+
+; unreferenced
+Frameset_69460:: ; 69460 (1a:5460)
+	db $2a,  1
+	db $ff
+; 0x69463
 
 Frameset_69463:: ; 69463 (1a:5463)
 	db $1a, 10
@@ -4144,7 +4673,12 @@ Frameset_6951e:: ; 6951e (1a:551e)
 	db $ff
 ; 0x69537
 
-	INCROM $69537, $6953c
+; unreferenced
+Frameset_69537:: ; 69537 (1a:5537)
+	db $4d,  4
+	db $3a,  4
+	db $ff
+; 0x6953c
 
 Frameset_6953c:: ; 6953c (1a:553c)
 	db $1a,  4
@@ -4311,7 +4845,16 @@ Frameset_695e7:: ; 695e7 (1a:55e7)
 	db $ff
 ; 0x69608
 
-	INCROM $69608, $69615
+; unreferenced
+Frameset_69608:: ; 69608 (1a:5608)
+	db $02,  4
+	db $03,  4
+	db $02,  4
+	db $03,  4
+	db $02,  4
+	db $03,  4
+	db $ff
+; 0x69615
 
 Frameset_69615:: ; 69615 (1a:5615)
 	db $00, 127
@@ -4750,7 +5293,79 @@ Frameset_697eb:: ; 697eb (1a:57eb)
 	db $ff
 ; 0x697f0
 
-	INCROM $697f0, $69845
+; unreferenced
+Frameset_697f0:: ; 697f0 (1a:57f0)
+	db $00, 10
+	db $01, 10
+	db $00, 10
+	db $02, 10
+	db $ff
+; 0x697f9
+
+; unreferenced
+Frameset_697f9:: ; 697f9 (1a:57f9)
+	db $03, 10
+	db $04, 10
+	db $03, 10
+	db $05, 10
+	db $ff
+; 0x69802
+
+; unreferenced
+Frameset_69802:: ; 69802 (1a:5802)
+	db $00, 20
+	db $06,  6
+	db $07, 15
+	db $06,  6
+	db $08, 15
+	db $09, 10
+	db $00, 20
+	db $ff
+; 0x69811
+
+; unreferenced
+Frameset_69811:: ; 69811 (1a:5811)
+	db $03, 20
+	db $0a,  6
+	db $0b, 15
+	db $0a,  6
+	db $0c, 15
+	db $0d, 10
+	db $03, 20
+	db $ff
+; 0x69820
+
+; unreferenced
+Frameset_69820:: ; 69820 (1a:5820)
+	db $00, 20
+	db $0e,  8
+	db $0f,  8
+	db $10,  8
+	db $03, 20
+	db $ff
+; 0x6982b
+
+; unreferenced
+Frameset_6982b:: ; 6982b (1a:582b)
+	db $03, 20
+	db $10,  8
+	db $0f,  8
+	db $0e,  8
+	db $00, 20
+	db $ff
+; 0x69836
+
+; unreferenced
+Frameset_69836:: ; 69836 (1a:5836)
+	db $0f, 10
+	db $11, 100
+	db $0f, 10
+	db $11,  5
+	db $12, 20
+	db $11,  5
+	db $0f, 10
+	db $ff
+; 0x69845
 
 Frameset_69845:: ; 69845 (1a:5845)
 	db $13, 100
@@ -4772,7 +5387,19 @@ Frameset_69845:: ; 69845 (1a:5845)
 	db $ff
 ; 0x69866
 
-	INCROM $69866, $69870
+; unreferenced
+Frameset_69866:: ; 69866 (1a:5866)
+	db $15,  6
+	db $16,  6
+	db $ff
+; 0x6986b
+
+; unreferenced
+Frameset_6986b:: ; 6986b (1a:586b)
+	db $17,  6
+	db $18,  6
+	db $ff
+; 0x69870
 
 Frameset_69870:: ; 69870 (1a:5870)
 	db $00,  3
@@ -4825,7 +5452,11 @@ Frameset_69896:: ; 69896 (1a:5896)
 	db $ff
 ; 0x698a5
 
-	INCROM $698a5, $698a8
+; unreferenced
+Frameset_698a5:: ; 698a5 (1a:58a5)
+	db $00, 100
+	db $ff
+; 0x698a8
 
 Frameset_698a8:: ; 698a8 (1a:58a8)
 	db $01, 100
@@ -5215,14 +5846,71 @@ Frameset_699e4:: ; 699e4 (1a:59e4)
 	db $ff
 ; 0x699e9
 
-	INCROM $699e9, $69a00
+; unreferenced
+Frameset_699e9:: ; 699e9 (1a:59e9)
+	db $3a,  4
+	db $3b,  4
+	db $ff
+; 0x699ee
+
+; unreferenced
+Frameset_699ee:: ; 699ee (1a:59ee)
+	db $38, 10
+	db $3c,  6
+	db $3d,  6
+	db $3b, 10
+	db $ff
+; 0x699f7
+
+; unreferenced
+Frameset_699f7:: ; 699f7 (1a:59f7)
+	db $3a, 10
+	db $3d,  6
+	db $3c,  6
+	db $39, 10
+	db $ff
+; 0x69a00
 
 Frameset_69a00:: ; 69a00 (1a:5a00)
 	db $3e,  4
 	db $ff
 ; 0x69a03
 
-	INCROM $69a03, $69a15
+; unreferenced
+Frameset_69a03:: ; 69a03 (1a:5a03)
+	db $3f,  4
+	db $ff
+; 0x69a06
+
+; unreferenced
+Frameset_69a06:: ; 69a06 (1a:5a06)
+	db $40,  4
+	db $ff
+; 0x69a09
+
+; unreferenced
+Frameset_69a09:: ; 69a09 (1a:5a09)
+	db $41,  4
+	db $ff
+; 0x69a0c
+
+; unreferenced
+Frameset_69a0c:: ; 69a0c (1a:5a0c)
+	db $42,  4
+	db $ff
+; 0x69a0f
+
+; unreferenced
+Frameset_69a0f:: ; 69a0f (1a:5a0f)
+	db $43,  4
+	db $ff
+; 0x69a12
+
+; unreferenced
+Frameset_69a12:: ; 69a12 (1a:5a12)
+	db $44,  4
+	db $ff
+; 0x69a15
 
 Frameset_69a15:: ; 69a15 (1a:5a15)
 	db $15,  6
@@ -5240,7 +5928,17 @@ Frameset_69a1d:: ; 69a1d (1a:5a1d)
 	db $ff
 ; 0x69a20
 
-	INCROM $69a20, $69a26
+; unreferenced
+Frameset_69a20:: ; 69a20 (1a:5a20)
+	db $02, 100
+	db $ff
+; 0x69a23
+
+; unreferenced
+Frameset_69a23:: ; 69a23 (1a:5a23)
+	db $03, 100
+	db $ff
+; 0x69a26
 
 Frameset_69a26:: ; 69a26 (1a:5a26)
 	db $04,  4
@@ -5248,7 +5946,12 @@ Frameset_69a26:: ; 69a26 (1a:5a26)
 	db $ff
 ; 0x69a2b
 
-	INCROM $69a2b, $69a30
+; unreferenced
+Frameset_69a2b:: ; 69a2b (1a:5a2b)
+	db $05,  4
+	db $06,  4
+	db $ff
+; 0x69a30
 
 Frameset_69a30:: ; 69a30 (1a:5a30)
 	db $07, 100
@@ -5261,7 +5964,12 @@ Frameset_69a33:: ; 69a33 (1a:5a33)
 	db $ff
 ; 0x69a38
 
-	INCROM $69a38, $69a3d
+; unreferenced
+Frameset_69a38:: ; 69a38 (1a:5a38)
+	db $0a,  8
+	db $0b,  8
+	db $ff
+; 0x69a3d
 
 Frameset_69a3d:: ; 69a3d (1a:5a3d)
 	db $09, 12
@@ -5269,7 +5977,42 @@ Frameset_69a3d:: ; 69a3d (1a:5a3d)
 	db $ff
 ; 0x69a42
 
-	INCROM $69a42, $69a5f
+; unreferenced
+Frameset_69a42:: ; 69a42 (1a:5a42)
+	db $0b, 12
+	db $0d, 12
+	db $ff
+; 0x69a47
+
+; unreferenced
+Frameset_69a47:: ; 69a47 (1a:5a47)
+	db $09,  6
+	db $08,  6
+	db $ff
+; 0x69a4c
+
+; unreferenced
+Frameset_69a4c:: ; 69a4c (1a:5a4c)
+	db $0b,  6
+	db $0a,  6
+	db $ff
+; 0x69a51
+
+; unreferenced
+Frameset_69a51:: ; 69a51 (1a:5a51)
+	db $09,  6
+	db $0e,  8
+	db $0b,  6
+	db $ff
+; 0x69a58
+
+; unreferenced
+Frameset_69a58:: ; 69a58 (1a:5a58)
+	db $0b,  6
+	db $0e,  8
+	db $09,  6
+	db $ff
+; 0x69a5f
 
 Frameset_69a5f:: ; 69a5f (1a:5a5f)
 	db $00, 10
@@ -5357,7 +6100,21 @@ Frameset_69ac3:: ; 69ac3 (1a:5ac3)
 	db $ff
 ; 0x69acc
 
-	INCROM $69acc, $69ae3
+; unreferenced
+Frameset_69acc:: ; 69acc (1a:5acc)
+	db $1a, 10
+	db $1b, 10
+	db $1c, 10
+	db $1d, 24
+	db $1e, 34
+	db $1d, 24
+	db $1f, 34
+	db $1d, 24
+	db $1c, 10
+	db $1b, 10
+	db $1a, 10
+	db $ff
+; 0x69ae3
 
 Frameset_69ae3:: ; 69ae3 (1a:5ae3)
 	db $23,  6
@@ -5367,7 +6124,14 @@ Frameset_69ae3:: ; 69ae3 (1a:5ae3)
 	db $ff
 ; 0x69aec
 
-	INCROM $69aec, $69af5
+; unreferenced
+Frameset_69aec:: ; 69aec (1a:5aec)
+	db $26,  6
+	db $27,  6
+	db $26,  6
+	db $28,  6
+	db $ff
+; 0x69af5
 
 Frameset_69af5:: ; 69af5 (1a:5af5)
 	db $25,  8
@@ -5376,7 +6140,13 @@ Frameset_69af5:: ; 69af5 (1a:5af5)
 	db $ff
 ; 0x69afc
 
-	INCROM $69afc, $69b03
+; unreferenced
+Frameset_69afc:: ; 69afc (1a:5afc)
+	db $28,  8
+	db $2b,  8
+	db $2c,  8
+	db $ff
+; 0x69b03
 
 Frameset_69b03:: ; 69b03 (1a:5b03)
 	db $2f,  8
@@ -5404,7 +6174,11 @@ Frameset_69b12:: ; 69b12 (1a:5b12)
 	db $ff
 ; 0x69b1b
 
-	INCROM $69b1b, $69b1e
+; unreferenced
+Frameset_69b1b:: ; 69b1b (1a:5b1b)
+	db $03, 100
+	db $ff
+; 0x69b1e
 
 Frameset_69b1e:: ; 69b1e (1a:5b1e)
 	db $04, 10
@@ -5502,7 +6276,17 @@ Frameset_69b88:: ; 69b88 (1a:5b88)
 	db $ff
 ; 0x69b91
 
-	INCROM $69b91, $69ba0
+; unreferenced
+Frameset_69b91:: ; 69b91 (1a:5b91)
+	db $00, 20
+	db $16,  8
+	db $01,  8
+	db $16,  8
+	db $09,  8
+	db $16,  8
+	db $09, 20
+	db $ff
+; 0x69ba0
 
 Frameset_69ba0:: ; 69ba0 (1a:5ba0)
 	db $03, 20
@@ -5551,7 +6335,28 @@ Frameset_69bd9:: ; 69bd9 (1a:5bd9)
 	db $ff
 ; 0x69be2
 
-	INCROM $69be2, $69bfe
+; unreferenced
+Frameset_69be2:: ; 69be2 (1a:5be2)
+	db $00,  4
+	db $03,  4
+	db $04,  6
+	db $05,  8
+	db $04,  6
+	db $05,  8
+	db $04,  6
+	db $03,  4
+	db $00,  4
+	db $ff
+; 0x69bf5
+
+; unreferenced
+Frameset_69bf5:: ; 69bf5 (1a:5bf5)
+	db $00,  3
+	db $06,  6
+	db $00,  3
+	db $07,  6
+	db $ff
+; 0x69bfe
 
 Frameset_69bfe:: ; 69bfe (1a:5bfe)
 	db $00, 100
@@ -5590,7 +6395,32 @@ Frameset_69c1c:: ; 69c1c (1a:5c1c)
 	db $ff
 ; 0x69c25
 
-	INCROM $69c25, $69c40
+; unreferenced
+Frameset_69c25:: ; 69c25 (1a:5c25)
+	db $00, 12
+	db $03, 12
+	db $00, 12
+	db $04, 12
+	db $ff
+; 0x69c2e
+
+; unreferenced
+Frameset_69c2e:: ; 69c2e (1a:5c2e)
+	db $05, 10
+	db $06, 10
+	db $05, 10
+	db $07, 10
+	db $ff
+; 0x69c37
+
+; unreferenced
+Frameset_69c37:: ; 69c37 (1a:5c37)
+	db $08,  6
+	db $09,  6
+	db $08,  6
+	db $0a,  6
+	db $ff
+; 0x69c40
 
 Frameset_69c40:: ; 69c40 (1a:5c40)
 	db $0b,  4
@@ -5618,7 +6448,18 @@ Frameset_69c4f:: ; 69c4f (1a:5c4f)
 	db $ff
 ; 0x69c58
 
-	INCROM $69c58, $69c69
+; unreferenced
+Frameset_69c58:: ; 69c58 (1a:5c58)
+	db $16,  6
+	db $17,  8
+	db $18, 12
+	db $17,  8
+	db $16,  6
+	db $15,  8
+	db $14, 12
+	db $15,  8
+	db $ff
+; 0x69c69
 
 Frameset_69c69:: ; 69c69 (1a:5c69)
 	db $19,  4
@@ -5643,7 +6484,14 @@ Frameset_69c7a:: ; 69c7a (1a:5c7a)
 	db $ff
 ; 0x69c89
 
-	INCROM $69c89, $69c92
+; unreferenced
+Frameset_69c89:: ; 69c89 (1a:5c89)
+	db $21,  8
+	db $28, 10
+	db $21,  8
+	db $29, 10
+	db $ff
+; 0x69c92
 
 Frameset_69c92:: ; 69c92 (1a:5c92)
 	db $00,  5
@@ -5664,7 +6512,32 @@ Frameset_69ca1:: ; 69ca1 (1a:5ca1)
 	db $ff
 ; 0x69caa
 
-	INCROM $69caa, $69cc5
+; unreferenced
+Frameset_69caa:: ; 69caa (1a:5caa)
+	db $22, 12
+	db $2c, 12
+	db $22, 12
+	db $2d, 12
+	db $ff
+; 0x69cb3
+
+; unreferenced
+Frameset_69cb3:: ; 69cb3 (1a:5cb3)
+	db $2e, 10
+	db $2f, 10
+	db $2e, 10
+	db $30, 10
+	db $ff
+; 0x69cbc
+
+; unreferenced
+Frameset_69cbc:: ; 69cbc (1a:5cbc)
+	db $31,  6
+	db $32,  6
+	db $31,  6
+	db $33,  6
+	db $ff
+; 0x69cc5
 
 Frameset_69cc5:: ; 69cc5 (1a:5cc5)
 	db $19,  4
@@ -5831,7 +6704,14 @@ Frameset_69d73:: ; 69d73 (1a:5d73)
 	db $ff
 ; 0x69d7c
 
-	INCROM $69d7c, $69d85
+; unreferenced
+Frameset_69d7c:: ; 69d7c (1a:5d7c)
+	db $23,  7
+	db $24,  7
+	db $23,  7
+	db $25,  7
+	db $ff
+; 0x69d85
 
 Frameset_69d85:: ; 69d85 (1a:5d85)
 	db $26,  7
@@ -5888,7 +6768,12 @@ Frameset_69dcb:: ; 69dcb (1a:5dcb)
 	db $ff
 ; 0x69dd0
 
-	INCROM $69dd0, $69dd5
+; unreferenced
+Frameset_69dd0:: ; 69dd0 (1a:5dd0)
+	db $02, 15
+	db $03, 15
+	db $ff
+; 0x69dd5
 
 Frameset_69dd5:: ; 69dd5 (1a:5dd5)
 	db $00,  8
@@ -6027,7 +6912,14 @@ Frameset_69e60:: ; 69e60 (1a:5e60)
 	db $ff
 ; 0x69e69
 
-	INCROM $69e69, $69e72
+; unreferenced
+Frameset_69e69:: ; 69e69 (1a:5e69)
+	db $26,  4
+	db $2d,  4
+	db $2c,  4
+	db $2b,  4
+	db $ff
+; 0x69e72
 
 Frameset_69e72:: ; 69e72 (1a:5e72)
 	db $2e,  2
@@ -6101,7 +6993,89 @@ Frameset_69eb2:: ; 69eb2 (1a:5eb2)
 	db $ff
 ; 0x69ec3
 
-	INCROM $69ec3, $69f35
+; unreferenced
+Frameset_69ec3:: ; 69ec3 (1a:5ec3)
+	db $00, 11
+	db $01,  7
+	db $02,  3
+	db $03,  3
+	db $04, 13
+	db $05,  3
+	db $06,  3
+	db $07, 10
+	db $08,  6
+	db $ff
+; 0x69ed6
+
+; unreferenced
+Frameset_69ed6:: ; 69ed6 (1a:5ed6)
+	db $09, 11
+	db $0a,  7
+	db $0b,  3
+	db $0c,  3
+	db $0d, 13
+	db $0e,  3
+	db $0f,  3
+	db $10, 10
+	db $11,  6
+	db $ff
+; 0x69ee9
+
+; unreferenced
+Frameset_69ee9:: ; 69ee9 (1a:5ee9)
+	db $00,  6
+	db $01,  5
+	db $02,  2
+	db $03,  2
+	db $04,  8
+	db $05,  2
+	db $06,  2
+	db $07,  6
+	db $08,  4
+	db $ff
+; 0x69efc
+
+; unreferenced
+Frameset_69efc:: ; 69efc (1a:5efc)
+	db $09,  6
+	db $0a,  5
+	db $0b,  2
+	db $0c,  2
+	db $0d,  8
+	db $0e,  2
+	db $0f,  2
+	db $10,  6
+	db $11,  4
+	db $ff
+; 0x69f0f
+
+; unreferenced
+Frameset_69f0f:: ; 69f0f (1a:5f0f)
+	db $00,  6
+	db $01,  5
+	db $02,  2
+	db $03,  2
+	db $04,  5
+	db $05,  2
+	db $06,  2
+	db $07,  3
+	db $08,  3
+	db $ff
+; 0x69f22
+
+; unreferenced
+Frameset_69f22:: ; 69f22 (1a:5f22)
+	db $09,  6
+	db $0a,  5
+	db $0b,  2
+	db $0c,  2
+	db $0d,  5
+	db $0e,  2
+	db $0f,  2
+	db $10,  3
+	db $11,  3
+	db $ff
+; 0x69f35
 
 Frameset_69f35:: ; 69f35 (1a:5f35)
 	db $00, 10
@@ -6121,7 +7095,14 @@ Frameset_69f40:: ; 69f40 (1a:5f40)
 	db $ff
 ; 0x69f4b
 
-	INCROM $69f4b, $69f54
+; unreferenced
+Frameset_69f4b:: ; 69f4b (1a:5f4b)
+	db $00, 15
+	db $12, 10
+	db $13,  5
+	db $14, 12
+	db $ff
+; 0x69f54
 
 Frameset_69f54:: ; 69f54 (1a:5f54)
 	db $09, 15
@@ -6163,7 +7144,14 @@ Frameset_69f7c:: ; 69f7c (1a:5f7c)
 	db $ff
 ; 0x69f81
 
-	INCROM $69f81, $69f8a
+; unreferenced
+Frameset_69f81:: ; 69f81 (1a:5f81)
+	db $1e, 10
+	db $2a, 10
+	db $2b,  9
+	db $2c,  8
+	db $ff
+; 0x69f8a
 
 Frameset_69f8a:: ; 69f8a (1a:5f8a)
 	db $1e,  4
@@ -6204,7 +7192,20 @@ Frameset_69fa9:: ; 69fa9 (1a:5fa9)
 	db $ff
 ; 0x69fae
 
-	INCROM $69fae, $69fba
+; unreferenced
+Frameset_69fae:: ; 69fae (1a:5fae)
+	db $33,  6
+	db $32,  6
+	db $ff
+; 0x69fb3
+
+; unreferenced
+Frameset_69fb3:: ; 69fb3 (1a:5fb3)
+	db $31,  6
+	db $34, 24
+	db $31,  6
+	db $ff
+; 0x69fba
 
 Frameset_69fba:: ; 69fba (1a:5fba)
 	db $31,  8
@@ -6431,7 +7432,25 @@ Frameset_6a097:: ; 6a097 (1a:6097)
 	db $ff
 ; 0x6a09c
 
-	INCROM $6a09c, $6a0b2
+; unreferenced
+Frameset_6a09c:: ; 6a09c (1a:609c)
+	db $15,  7
+	db $16,  7
+	db $17,  7
+	db $18,  7
+	db $19,  7
+	db $ff
+; 0x6a0a7
+
+; unreferenced
+Frameset_6a0a7:: ; 6a0a7 (1a:60a7)
+	db $24,  7
+	db $25,  7
+	db $26,  7
+	db $27,  7
+	db $28,  7
+	db $ff
+; 0x6a0b2
 
 Frameset_6a0b2:: ; 6a0b2 (1a:60b2)
 	db $34,  4
@@ -6476,7 +7495,53 @@ Frameset_6a0d4:: ; 6a0d4 (1a:60d4)
 	db $ff
 ; 0x6a0d7
 
-	INCROM $6a0d7, $6a0ef
+; unreferenced
+Frameset_6a0d7:: ; 6a0d7 (1a:60d7)
+	db $13, 127
+	db $ff
+; 0x6a0da
+
+; unreferenced
+Frameset_6a0da:: ; 6a0da (1a:60da)
+	db $14, 127
+	db $ff
+; 0x6a0dd
+
+; unreferenced
+Frameset_6a0dd:: ; 6a0dd (1a:60dd)
+	db $15, 127
+	db $ff
+; 0x6a0e0
+
+; unreferenced
+Frameset_6a0e0:: ; 6a0e0 (1a:60e0)
+	db $16, 127
+	db $ff
+; 0x6a0e3
+
+; unreferenced
+Frameset_6a0e3:: ; 6a0e3 (1a:60e3)
+	db $17, 127
+	db $ff
+; 0x6a0e6
+
+; unreferenced
+Frameset_6a0e6:: ; 6a0e6 (1a:60e6)
+	db $18, 127
+	db $ff
+; 0x6a0e9
+
+; unreferenced
+Frameset_6a0e9:: ; 6a0e9 (1a:60e9)
+	db $19, 127
+	db $ff
+; 0x6a0ec
+
+; unreferenced
+Frameset_6a0ec:: ; 6a0ec (1a:60ec)
+	db $1a, 127
+	db $ff
+; 0x6a0ef
 
 Frameset_6a0ef:: ; 6a0ef (1a:60ef)
 	db $1b, 127
@@ -6488,14 +7553,76 @@ Frameset_6a0f2:: ; 6a0f2 (1a:60f2)
 	db $ff
 ; 0x6a0f5
 
-	INCROM $6a0f5, $6a0fe
+; unreferenced
+Frameset_6a0f5:: ; 6a0f5 (1a:60f5)
+	db $1d, 127
+	db $ff
+; 0x6a0f8
+
+; unreferenced
+Frameset_6a0f8:: ; 6a0f8 (1a:60f8)
+	db $1e, 127
+	db $ff
+; 0x6a0fb
+
+; unreferenced
+Frameset_6a0fb:: ; 6a0fb (1a:60fb)
+	db $1f, 127
+	db $ff
+; 0x6a0fe
 
 Frameset_6a0fe:: ; 6a0fe (1a:60fe)
 	db $21, 127
 	db $ff
 ; 0x6a101
 
-	INCROM $6a101, $6a119
+; unreferenced
+Frameset_6a101:: ; 6a101 (1a:6101)
+	db $22, 127
+	db $ff
+; 0x6a104
+
+; unreferenced
+Frameset_6a104:: ; 6a104 (1a:6104)
+	db $23, 127
+	db $ff
+; 0x6a107
+
+; unreferenced
+Frameset_6a107:: ; 6a107 (1a:6107)
+	db $24, 127
+	db $ff
+; 0x6a10a
+
+; unreferenced
+Frameset_6a10a:: ; 6a10a (1a:610a)
+	db $25, 127
+	db $ff
+; 0x6a10d
+
+; unreferenced
+Frameset_6a10d:: ; 6a10d (1a:610d)
+	db $26, 127
+	db $ff
+; 0x6a110
+
+; unreferenced
+Frameset_6a110:: ; 6a110 (1a:6110)
+	db $27, 127
+	db $ff
+; 0x6a113
+
+; unreferenced
+Frameset_6a113:: ; 6a113 (1a:6113)
+	db $28, 127
+	db $ff
+; 0x6a116
+
+; unreferenced
+Frameset_6a116:: ; 6a116 (1a:6116)
+	db $29, 127
+	db $ff
+; 0x6a119
 
 Frameset_6a119:: ; 6a119 (1a:6119)
 	db $2a, 127
@@ -6507,7 +7634,23 @@ Frameset_6a11c:: ; 6a11c (1a:611c)
 	db $ff
 ; 0x6a11f
 
-	INCROM $6a11f, $6a128
+; unreferenced
+Frameset_6a11f:: ; 6a11f (1a:611f)
+	db $2c, 127
+	db $ff
+; 0x6a122
+
+; unreferenced
+Frameset_6a122:: ; 6a122 (1a:6122)
+	db $2d, 127
+	db $ff
+; 0x6a125
+
+; unreferenced
+Frameset_6a125:: ; 6a125 (1a:6125)
+	db $2e, 127
+	db $ff
+; 0x6a128
 
 Frameset_6a128:: ; 6a128 (1a:6128)
 	db $30,  6

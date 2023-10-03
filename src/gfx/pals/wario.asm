@@ -94,7 +94,18 @@ Pals_c870: ; c870 (03:4870)
 	rgb  0,  0,  0
 ; 0xc880
 
-	INCROM $c880, $c890
+; unreferenced
+Pals_c880: ; c880 (03:4880)
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 31, 15, 10
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 10, 10, 10
+	rgb 21, 21, 21
+	rgb 31, 31, 31
+; 0xc890
 
 Pals_c890: ; c890 (3:4890)
 	rgb 21, 21, 21
@@ -108,7 +119,96 @@ Pals_c890: ; c890 (3:4890)
 	rgb  0,  0,  0
 ; 0xc8a0
 
-	INCROM $c8a0, $c910
+; unreferenced
+Pals_c8a0: ; c8a0 (03:48a0)
+	rgb 21, 21, 21
+	rgb 31, 31, 26
+	rgb 17, 25, 13
+	rgb  0,  0,  3
+
+	rgb 21, 21, 21
+	rgb 31, 31, 31
+	rgb 21, 21, 21
+	rgb  0,  0,  0
+; 0xc8b0
+
+; unreferenced
+Pals_c8b0: ; c8b0 (03:48b0)
+	rgb 21, 21, 21
+	rgb 31, 31, 27
+	rgb 29, 29, 14
+	rgb  0,  0,  1
+
+	rgb 21, 21, 21
+	rgb 31, 31, 31
+	rgb 21, 21, 21
+	rgb  0,  0,  0
+; 0xc8c0
+
+; unreferenced
+Pals_c8c0: ; c8c0 (03:48c0)
+	rgb 21, 21, 21
+	rgb 31, 31, 29
+	rgb 30, 22, 11
+	rgb  0,  0,  0
+
+	rgb 21, 21, 21
+	rgb 31, 31, 31
+	rgb 21, 21, 21
+	rgb  0,  0,  0
+; 0xc8d0
+
+; unreferenced
+Pals_c8d0: ; c8d0 (03:48d0)
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 31, 15, 10
+	rgb  0,  0,  0
+
+	rgb 21, 21, 21
+	rgb 31, 31, 31
+	rgb 21, 21, 21
+	rgb  0,  0,  0
+; 0xc8e0
+
+; unreferenced
+Pals_c8e0: ; c8e0 (03:48e0)
+	rgb 21, 21, 21
+	rgb 31, 31, 25
+	rgb 31, 18, 14
+	rgb  8,  8,  8
+
+	rgb 21, 21, 21
+	rgb 31, 31, 31
+	rgb 21, 21, 21
+	rgb  0,  0,  0
+; 0xc8f0
+
+; unreferenced
+Pals_c8f0: ; c8f0 (03:48f0)
+	rgb 21, 21, 21
+	rgb 31, 31, 17
+	rgb 31, 22, 19
+	rgb 13, 13, 13
+
+	rgb 21, 21, 21
+	rgb 31, 31, 31
+	rgb 21, 21, 21
+	rgb  0,  0,  0
+; 0xc900
+
+; unreferenced
+Pals_c900: ; c900 (03:4900)
+	rgb 21, 21, 21
+	rgb 31, 31,  9
+	rgb 31, 27, 25
+	rgb 21, 21, 21
+
+	rgb 21, 21, 21
+	rgb 31, 31, 31
+	rgb 21, 21, 21
+	rgb  0,  0,  0
+; 0xc910
 
 Pals_c910: ; c910 (3:4910)
 	rgb  0, 22, 16
@@ -134,7 +234,31 @@ Pals_c920: ; c920 (3:4920)
 	rgb 29,  1, 19
 ; 0xc930
 
-	INCROM $c930, $c950
+; unreferenced
+Pals_c930: ; c930 (03:4930)
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb 31, 15, 10
+	rgb  0,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb  0, 26, 31
+	rgb 29,  1, 19
+; 0xc940
+
+; unreferenced
+Pals_c940: ; c940 (03:4940)
+	rgb  0, 22, 16
+	rgb  0,  0,  0
+	rgb 31, 30,  1
+	rgb 31,  0,  0
+
+	rgb  0, 22, 16
+	rgb 31, 31, 31
+	rgb  0, 26, 31
+	rgb 29,  1, 19
+; 0xc950
 
 Pals_c950: ; c950 (03:4950)
 	rgb 18, 18, 18

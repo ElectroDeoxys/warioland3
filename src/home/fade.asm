@@ -171,9 +171,115 @@ FadeBGToWhite:: ; 47f (0:47f)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0x54e
 
-	INCROM $54e, $5df
+; unreferenced
+Func_54e: ; 54e (0:54e)
+	ld a, [wPalFadeCounter]
+	cp $02
+	jr nc, .asm_568
+	dec a
+	jr z, .asm_565
+	ld a, $01
+	ld [wc186], a
+	call VBlank_88d
+	ld hl, wPalFadeCounter
+	inc [hl]
+	ret
+.asm_565
+	call VBlank_8bf
+.asm_568
+	ld hl, wCurRGB
+	ld de, wTempBGPals
+	ld b, 8 palettes
+.asm_570
+	ld a, [de]
+	and $1f
+	ld [hli], a
+	ld a, [de]
+	and $e0
+	rrca
+	rrca
+	rrca
+	rrca
+	rrca
+	ld [hl], a
+	inc e
+	ld a, [de]
+	and $03
+	rlca
+	rlca
+	rlca
+	or [hl]
+	ld [hli], a
+	ld a, [de]
+	and $7c
+	rrca
+	rrca
+	ld [hl], a
+	ld a, [hl]
+	and a
+	jr z, .asm_591
+	dec [hl]
+.asm_591
+	dec l
+	ld a, [hl]
+	and a
+	jr z, .asm_597
+	dec [hl]
+.asm_597
+	dec l
+	ld a, [hl]
+	and a
+	jr z, .asm_59d
+	dec [hl]
+.asm_59d
+	ld a, [hli]
+	ld c, a
+	ld a, [hl]
+	and $07
+	rlca
+	rlca
+	rlca
+	rlca
+	rlca
+	or c
+	dec e
+	ld [de], a
+	ld a, [hli]
+	and $18
+	rrca
+	rrca
+	rrca
+	ld c, a
+	ld a, [hld]
+	rlca
+	rlca
+	or c
+	inc e
+	ld [de], a
+	inc e
+	dec l
+	dec b
+	jr nz, .asm_570
+	ld hl, wPalFadeCounter
+	inc [hl]
+	ld a, [hl]
+	cp $21
+	ret c
+	di
+	ld hl, wBackupVBlankFunc
+	ld b, $07 ; unused
+	ld de, wVBlankFunc
+	ld b, $03
+	call CopyHLToDE
+	ei
+	xor a
+	ld [wPalFadeCounter], a
+	ld [wc186], a
+	ld hl, wSubState
+	inc [hl]
+	ret
+; 0x5df
 
 DarkenBGToPal_Normal:: ; 5df (0:5df)
 	ld a, FADE_SPEED_NORMAL
@@ -572,7 +678,146 @@ SlowFadeInScreen:: ; 6fa (0:6fa)
 	ret
 ; 0x7cf
 
-	INCROM $7cf, $88d
+; unreferenced
+Func_7cf: ; 7cf (0:7cf)
+	ld a, [wPalFadeCounter]
+	cp $02
+	jr nc, .asm_7e9
+	dec a
+	jr z, .asm_7e6
+	ld a, $01
+	ld [wc186], a
+	call VBlank_88d
+	ld hl, wPalFadeCounter
+	inc [hl]
+	ret
+.asm_7e6
+	call VBlank_8bf
+.asm_7e9
+	ld hl, wTargetRed
+	ld de, wTempPals1
+	ld b, $40
+.asm_7f1
+	ld a, [de]
+	and $1f
+	ld [hli], a
+	ld a, [de]
+	and $e0
+	rrca
+	rrca
+	rrca
+	rrca
+	rrca
+	ld [hl], a
+	inc e
+	ld a, [de]
+	and $03
+	rlca
+	rlca
+	rlca
+	or [hl]
+	ld [hli], a
+	ld a, [de]
+	and $7c
+	rrca
+	rrca
+	ld [hli], a
+	dec e
+	ld d, $c1
+	ld a, [de]
+	and $1f
+	ld [hli], a
+	ld a, [de]
+	and $e0
+	rrca
+	rrca
+	rrca
+	rrca
+	rrca
+	ld [hl], a
+	inc e
+	ld a, [de]
+	and $03
+	rlca
+	rlca
+	rlca
+	or [hl]
+	ld [hli], a
+	ld a, [de]
+	and $7c
+	rrca
+	rrca
+	ld [hl], a
+	ld a, [wTargetBlue]
+	ld c, a
+	ld a, [hl]
+	cp c
+	jr z, .asm_835
+	inc [hl]
+.asm_835
+	dec l
+	ld a, [wTargetGreen]
+	ld c, a
+	ld a, [hl]
+	cp c
+	jr z, .asm_83f
+	inc [hl]
+.asm_83f
+	dec l
+	ld a, [wTargetRed]
+	ld c, a
+	ld a, [hl]
+	cp c
+	jr z, .asm_849
+	inc [hl]
+.asm_849
+	ld a, [hli]
+	ld c, a
+	ld a, [hl]
+	and $07
+	rlca
+	rlca
+	rlca
+	rlca
+	rlca
+	or c
+	dec e
+	ld [de], a
+	ld a, [hli]
+	and $18
+	rrca
+	rrca
+	rrca
+	ld c, a
+	ld a, [hld]
+	rlca
+	rlca
+	or c
+	inc e
+	ld [de], a
+	inc e
+	ld d, $c0
+	ld hl, wTargetRed
+	dec b
+	jr nz, .asm_7f1
+	ld hl, wPalFadeCounter
+	inc [hl]
+	ld a, [hl]
+	cp $21
+	ret c
+	di
+	ld hl, wBackupVBlankFunc
+	ld de, wVBlankFunc
+	ld b, $03
+	call CopyHLToDE
+	ei
+	xor a
+	ld [wPalFadeCounter], a
+	ld [wc186], a
+	ld hl, wSubState
+	inc [hl]
+	ret
+; 0x88d
 
 VBlank_88d:: ; 88d (0:88d)
 	di

@@ -46,7 +46,6 @@ GolfFlagNumbersGfx:   INCBIN "gfx/golf/golf_flag_numbers.2bpp"
 GolfParNumbersGfx:    INCBIN "gfx/golf/golf_par_numbers.2bpp"
 GolfStrokeNumbersGfx: INCBIN "gfx/golf/golf_stroke_numbers.2bpp"
 GolfHoleFlagGfx:      INCBIN "gfx/golf/golf_hole_flag.2bpp"
-
-	INCROM $1ca66f, $1ca6cf
+UnusedGolfFlagGfx:    INCBIN "gfx/golf/unused_golf_flag.2bpp" ; unreferenced
 
 INCLUDE "gfx/golf/oam.asm"

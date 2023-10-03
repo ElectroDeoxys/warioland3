@@ -232,6 +232,36 @@ HandleSound:: ; 290 (0:290)
 .asm_2cb
 	call Func_fbc
 	ret
-; 0x2cf
 
-	INCROM $2cf, $302
+; unreferenced
+UnreferencedMuteSound: ; 2cf (0:2cf)
+	ld a, [wSoundMuted]
+	and a
+	ret nz
+	xor a
+	ldh [hSFXID + 0], a
+	ldh [hSFXID + 1], a
+	call Func_1002
+	ld bc, SOUND_OFF
+	call Func_ff4
+	call Func_fbc
+	ld a, TRUE
+	ld [wSoundMuted], a
+	ret
+
+; unreferenced
+UnreferencedUnmuteSound: ; 2eb (0:2eb)
+	ld a, [wSoundMuted]
+	and a
+	ret z
+	xor a
+	ld [wSoundMuted], a
+	ldh [hSFXID + 0], a
+	ldh [hSFXID + 1], a
+	ldh a, [hffb3]
+	ld b, a
+	ldh a, [hffb4]
+	ld c, a
+	call PlayNewMusic_SetNoise
+	ret
+; 0x302

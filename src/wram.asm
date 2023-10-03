@@ -50,7 +50,7 @@ wGlobalCounter:: ; c08f
 	db
 
 ; if not 0, then all sounds are muted
-; is never written, only read
+; is always set to 0
 wSoundMuted:: ; c090
 	db
 
@@ -2140,7 +2140,10 @@ wTileBuffer:: ; dc00
 	ds $100
 
 w2df00:: ; df00
-	ds $fd
+	ds $fc
+
+w2dffc:: ; dffc
+	db
 
 w2dffd:: ; dffd
 	db

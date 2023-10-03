@@ -30,25 +30,37 @@ BGMap_b1fd7: ; b1fd7 (2c:5fd7)
 INCBIN "gfx/bgmaps/map_b1fd7.bin"
 ; 0xb2107
 
-	INCROM $b2107, $b211a
+; unreferenced
+BGMap_b2107: ; b2107 (2c:6107)
+INCBIN "gfx/bgmaps/map_b2107.bin"
+; 0xb211a
 
 BGMap_b211a: ; b211a (2c:611a)
 INCBIN "gfx/bgmaps/map_b211a.bin"
 ; 0xb231c
 
-	INCROM $b231c, $b232f
+; unreferenced
+BGMap_b231c: ; b231c (2c:631c)
+INCBIN "gfx/bgmaps/map_b231c.bin"
+; 0xb232f
 
 Text_b232f: ; b232f (2c:632f)
 INCBIN "text/text_b232f.bin"
 ; 0xb2411
 
-	INCROM $b2411, $b2424
+; unreferenced
+BGMap_b2411: ; b2411 (2c:6411)
+INCBIN "gfx/bgmaps/map_b2411.bin"
+; 0xb2424
 
 Text_b2424: ; b2424 (2c:6424)
 INCBIN "text/text_b2424.bin"
 ; 0xb2533
 
-	INCROM $b2533, $b2546
+; unreferenced
+BGMap_b2533: ; b2533 (2c:6533)
+INCBIN "gfx/bgmaps/map_b2533.bin"
+; 0xb2546
 
 BGMap_b2546: ; b2546 (2c:6546)
 INCBIN "gfx/bgmaps/map_b2546.bin"
@@ -79,13 +91,19 @@ Data_b3675: ; b3675 (2c:7675)
 INCBIN "data/data_b3675.bin"
 ; 0xb37e6
 
-	INCROM $b37e6, $b37f9
+; unreferenced
+BGMap_b37e6: ; b37e6 (2c:77e6)
+INCBIN "gfx/bgmaps/map_b37e6.bin"
+; 0xb37f9
 
 Data_b37f9: ; b37f9 (2c:77f9)
 INCBIN "data/data_b37f9.bin"
 ; 0xb39f0
 
-	INCROM $b39f0, $b3a03
+; unreferenced
+BGMap_b39f0: ; b39f0 (2c:79f0)
+INCBIN "gfx/bgmaps/map_b39f0.bin"
+; 0xb3a03
 
 BGMap_b3a03: ; b3a03 (2c:7a03)
 INCBIN "gfx/bgmaps/map_b3a03.bin"

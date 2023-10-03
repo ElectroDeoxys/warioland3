@@ -3739,8 +3739,7 @@ FontGFX: INCBIN "gfx/font.2bpp.lz"
 
 GBIncompatibleGfx: INCBIN "gfx/gb_incompatible.2bpp.lz"
 BGMap_1f34d6: INCBIN "gfx/bgmaps/map_1f34d6.bin"
-
-	INCROM $1f35e0, $1f3610
+BGMap_1f35e0: INCBIN "gfx/bgmaps/map_1f35e0.bin" ; unreferenced
 
 Pals_1f3610: ; 1f3610 (2c:7610)
 	rgb  0, 22, 16

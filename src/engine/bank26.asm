@@ -1235,7 +1235,20 @@ Func_9a9f7: ; 9a9f7 (26:69f7)
 	ret
 ; 0x9a9fd
 
-	INCROM $9a9fd, $9aa0d
+Func_9a9fd: ; 9a9fd (26:69fd)
+	ld a, [wOWAnimationFinished]
+	cp $ff
+	ret nz
+	set 2, l
+	xor a
+	ld [hli], a
+	ld [hli], a
+	ld a, e
+	ld [hl], a
+	ld b, h
+	ld c, l
+	ret
+; 0x9aa0d
 
 AnimateTreasureCollection: ; 9aa0d (26:6a0d)
 	ld bc, wSceneObj1State
@@ -1273,12 +1286,20 @@ AnimateTreasureCollection: ; 9aa0d (26:6a0d)
 
 Func_9aa56: ; 9aa56 (26:6a56)
 	call Func_9a9ec
+Func_9aa59: ; 9aa59 (26:6a59)
 	ld de, OAM_9ac5d
 	call Func_9a9f7
 	ret
 ; 0x9aa60
 
-	INCROM $9aa60, $9aa6c
+; unreferenced
+Func_9aa60: ; 9aa60 (26:6a60)
+	call Func_9a9ec
+	ld e, $00
+	call Func_9a9fd
+	jr nz, Func_9aa59
+	jr AnimateTreasureCollection.Func_9aa4a
+; 0x9aa6c
 
 Func_9aa6c: ; 9aa6c (26:6a6c)
 	ret

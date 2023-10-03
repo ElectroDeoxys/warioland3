@@ -1780,7 +1780,14 @@ Func_57244: ; 57244 (15:7244)
 	jp HandleDownwardsFloorTransition
 ; 0x5725b
 
-	INCROM $5725b, $57264
+; unreferenced
+Func_5725b: ; 5725b (15:725b)
+	xor a
+	sub b
+	ld b, a
+	call SubYOffset
+	jp HandleUpwardsFloorTransition
+; 0x57264
 
 ShootGoalCounterFunc: ; 57264 (15:7264)
 	ld hl, wCurObjUpdateFunction + 1

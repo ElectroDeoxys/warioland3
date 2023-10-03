@@ -91,7 +91,47 @@ OAM_bc000: ; bc000 (2f:4000)
 	db $80
 ; 0xbc10d
 
-	INCROM $bc10d, $bc122
+; unreferenced
+Frameset_bc10d: ; bc10d (2f:410d)
+	db $00,  4
+	db $ff
+; 0xbc110
+
+; unreferenced
+Frameset_bc110: ; bc110 (2f:4110)
+	db $01,  4
+	db $ff
+; 0xbc113
+
+; unreferenced
+Frameset_bc113: ; bc113 (2f:4113)
+	db $02,  4
+	db $ff
+; 0xbc116
+
+; unreferenced
+Frameset_bc116: ; bc116 (2f:4116)
+	db $03,  4
+	db $ff
+; 0xbc119
+
+; unreferenced
+Frameset_bc119: ; bc119 (2f:4119)
+	db $04,  4
+	db $ff
+; 0xbc11c
+
+; unreferenced
+Frameset_bc11c: ; bc11c (2f:411c)
+	db $05,  4
+	db $ff
+; 0xbc11f
+
+; unreferenced
+Frameset_bc11f: ; bc11f (2f:411f)
+	db $06,  4
+	db $ff
+; 0xbc122
 
 OAM_bc122: ; bc122 (2f:4122)
 	dw .frame_0

@@ -127,9 +127,14 @@ Pals_d1fe: ; d1fe (3:51fe)
 	rgb 28, 31, 29
 	rgb 30, 23,  0
 	rgb  4,  5,  0
-; 0xd206
 
-	INCROM $d206, $d20e
+; unreferenced
+Pals_d206: ; d206 (03:5206)
+	rgb  0, 22, 16
+	rgb 31, 31,  0
+	rgb 31, 14,  0
+	rgb  5,  2,  0
+; 0xd20e
 
 OAM_d20e:: ; d20e (03:520e)
 	dw .frame_0
@@ -532,7 +537,37 @@ Frameset_d4c5: ; d4c5 (03:54c5)
 	db $ff
 ; 0xd4ce
 
-	INCROM $d4ce, $d4ea
+; unreferenced
+Frameset_d4ce: ; d4ce (03:54ce)
+	db $14,  3
+	db $15,  3
+	db $16,  3
+	db $ff
+; 0xd4d5
+
+; unreferenced
+Frameset_d4d5: ; d4d5 (03:54d5)
+	db $17,  3
+	db $18,  3
+	db $19,  3
+	db $ff
+; 0xd4dc
+
+; unreferenced
+Frameset_d4dc: ; d4dc (03:54dc)
+	db $1a,  3
+	db $1b,  3
+	db $1c,  3
+	db $ff
+; 0xd4e3
+
+; unreferenced
+Frameset_d4e3: ; d4e3 (03:54e3)
+	db $1d,  3
+	db $1e,  3
+	db $1f,  3
+	db $ff
+; 0xd4ea
 
 Frameset_d4ea: ; d4ea (03:54ea)
 	db $20,  9
@@ -569,7 +604,36 @@ Frameset_d50b: ; d50b (03:550b)
 	db $ff
 ; 0xd514
 
-	INCROM $d514, $d525
+; unreferenced
+Frameset_d514: ; d514 (03:5514)
+	db $2f,  3
+	db $30,  3
+	db $ff
+; 0xd519
+
+; unreferenced
+Frameset_d519: ; d519 (03:5519)
+	db $31,  4
+	db $ff
+; 0xd51c
+
+; unreferenced
+Frameset_d51c: ; d51c (03:551c)
+	db $32,  4
+	db $ff
+; 0xd51f
+
+; unreferenced
+Frameset_d51f: ; d51f (03:551f)
+	db $33,  4
+	db $ff
+; 0xd522
+
+; unreferenced
+Frameset_d522: ; d522 (03:5522)
+	db $34,  4
+	db $ff
+; 0xd525
 
 Frameset_d525: ; d525 (03:5525)
 	db $03,  1
