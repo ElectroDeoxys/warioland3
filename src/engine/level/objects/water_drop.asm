@@ -1,4 +1,4 @@
-WaterDropFunc: ; 49d64 (12:5d64)
+WaterDropFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_49d83)
 	ld [hld], a
@@ -124,4 +124,3 @@ WaterDropFunc: ; 49d64 (12:5d64)
 	ld [hl], a
 	ld l, OBJ_STATE
 	jp .asm_49d92
-; 0x49e34

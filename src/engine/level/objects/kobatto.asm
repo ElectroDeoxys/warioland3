@@ -1,4 +1,4 @@
-KobattoFunc: ; 47718 (11:7718)
+KobattoFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -34,4 +34,3 @@ KobattoFunc: ; 47718 (11:7718)
 	ld de, Data_60ec9
 	call ApplyObjSetMovement
 	ret
-; 0x4774f

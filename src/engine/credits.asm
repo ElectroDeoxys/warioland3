@@ -1,6 +1,6 @@
 	SETCHARMAP credits
 
-_CreditsStateTable: ; 160000 (58:4000)
+_CreditsStateTable:
 	ld a, [wSubState]
 	jumptable
 
@@ -22,9 +22,8 @@ _CreditsStateTable: ; 160000 (58:4000)
 	dw DebugReset
 	dw DebugReset
 	dw DebugReset
-; 0x160028
 
-InitCredits: ; 160028 (58:4028)
+InitCredits:
 	call DisableLCD
 	call FillBGMap0_With7f
 	call ClearVirtualOAM
@@ -114,9 +113,8 @@ InitCredits: ; 160028 (58:4028)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0x1600d4
 
-ShowCredits: ; 1600d4 (58:40d4)
+ShowCredits:
 	ld hl, wTimer
 	ld a, [hl]
 	and a
@@ -230,9 +228,8 @@ ShowCredits: ; 1600d4 (58:40d4)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0x160190
 
-Func_160190: ; 160190 (58:4190)
+Func_160190:
 	ld a, [wCreditsMusicBoxVar]
 	and a
 	jr nz, .stopped_moving
@@ -352,9 +349,8 @@ Func_160190: ; 160190 (58:4190)
 	ld hl, wSubState
 	inc [hl]
 	jp .update_anims
-; 0x16026c
 
-Func_16026c: ; 16026c (58:426c)
+Func_16026c:
 	ld hl, wTimer
 	dec [hl]
 	jr z, .close_up
@@ -424,9 +420,8 @@ Func_16026c: ; 16026c (58:426c)
 	call Func_17ec
 	call ClearUnusedVirtualOAM
 	ret
-; 0x1602ee
 
-Func_1602ee: ; 1602ee (58:42ee)
+Func_1602ee:
 	ld hl, wCreditsMusicBoxFramesetPtr + 1
 	ld a, [wCreditsMusicBoxOAMBank]
 	ld [wTempBank], a
@@ -440,9 +435,8 @@ Func_1602ee: ; 1602ee (58:42ee)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0x160318
 
-Func_160318: ; 160318 (58:4318)
+Func_160318:
 	ld hl, wCreditsMusicBoxFramesetPtr + 1
 	ld a, [wCreditsMusicBoxOAMBank]
 	ld [wTempBank], a
@@ -473,9 +467,8 @@ Func_160318: ; 160318 (58:4318)
 	ld a, 180
 	ld [wTimer], a
 	ret
-; 0x160365
 
-Func_160365: ; 160365 (58:4365)
+Func_160365:
 	ld hl, wCreditsMusicBoxFramesetPtr + 1
 	ld a, [wCreditsMusicBoxOAMBank]
 	ld [wTempBank], a
@@ -506,33 +499,29 @@ Func_160365: ; 160365 (58:4365)
 	dec [hl]
 	ret nz
 	jp SetPerfectState
-; 0x1603b1
 
-LoadCreditsPals: ; 1603b1 (58:43b1)
+LoadCreditsPals:
 	ld hl, Pals_1604cc
 	call LoadPalsToTempPals1
 	ld hl, Pals_16050c
 	call LoadPalsToTempPals2
 	ret
-; 0x1603be
 
-Func_1603be: ; 1603be (58:43be)
+Func_1603be:
 	ld hl, Pals_16054c
 	call LoadPalsToTempPals1
 	ld hl, Pals_16058c
 	call LoadPalsToTempPals2
 	ret
-; 0x1603cb
 
-Func_1603cb: ; 1603cb (58:43cb)
+Func_1603cb:
 	ld hl, Pals_1605cc
 	call LoadPalsToTempPals1
 	ld hl, Pals_16060c
 	call LoadPalsToTempPals2
 	ret
-; 0x1603d8
 
-LoadCreditsGfx: ; 1603d8 (58:43d8)
+LoadCreditsGfx:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, PrologueGfx
@@ -555,9 +544,8 @@ LoadCreditsGfx: ; 1603d8 (58:43d8)
 	ld bc, v0Tiles0
 	call Decompress
 	ret
-; 0x16041f
 
-Func_16041f: ; 16041f (58:441f)
+Func_16041f:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, BGMap_16179c
@@ -569,9 +557,8 @@ Func_16041f: ; 16041f (58:441f)
 	ld bc, v0BGMap1
 	call Decompress
 	ret
-; 0x160439
 
-VBlank_160439: ; 160439 (58:4439)
+VBlank_160439:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -644,9 +631,8 @@ VBlank_160439: ; 160439 (58:4439)
 	call hTransferVirtualOAM
 	ret
 .end
-; 0x1604b1
 
-AddCreditsSprite: ; 1604b1 (58:44b1)
+AddCreditsSprite:
 	ld a, [hli]
 	add $10
 	ld [wCurSpriteYCoord], a
@@ -660,9 +646,8 @@ AddCreditsSprite: ; 1604b1 (58:44b1)
 	ld hl, OAM_1617e8
 	call TryAddSprite
 	ret
-; 0x1604cc
 
-Pals_1604cc: ; 1604cc (58:44cc)
+Pals_1604cc:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 10, 10, 10
@@ -702,9 +687,8 @@ Pals_1604cc: ; 1604cc (58:44cc)
 	rgb  2, 31, 31
 	rgb  6,  6, 31
 	rgb  0,  0,  0
-; 0x16050c
 
-Pals_16050c: ; 16050c (58:450c)
+Pals_16050c:
 	rgb  0,  0,  0
 	rgb 31, 31, 31
 	rgb 21, 10,  2
@@ -744,9 +728,8 @@ Pals_16050c: ; 16050c (58:450c)
 	rgb  0,  0,  0
 	rgb  0,  0,  0
 	rgb  0,  0,  0
-; 0x16054c
 
-Pals_16054c: ; 16054c (58:454c)
+Pals_16054c:
 	rgb  0,  0,  0
 	rgb 31, 31, 31
 	rgb 25, 17,  9
@@ -786,9 +769,8 @@ Pals_16054c: ; 16054c (58:454c)
 	rgb 31, 31, 31
 	rgb 28, 23, 14
 	rgb 21, 10,  2
-; 0x16058c
 
-Pals_16058c: ; 16058c (58:458c)
+Pals_16058c:
 	rgb  0, 22, 16
 	rgb  0,  0,  0
 	rgb  0,  0,  0
@@ -828,9 +810,8 @@ Pals_16058c: ; 16058c (58:458c)
 	rgb 31, 31, 31
 	rgb 21, 10,  2
 	rgb  0,  0,  0
-; 0x1605cc
 
-Pals_1605cc: ; 1605cc (58:45cc)
+Pals_1605cc:
 	rgb  0,  0,  0
 	rgb 31, 31, 31
 	rgb  2, 31, 31
@@ -870,9 +851,8 @@ Pals_1605cc: ; 1605cc (58:45cc)
 	rgb 31, 31, 31
 	rgb  2, 31, 31
 	rgb 31,  0,  0
-; 0x16060c
 
-Pals_16060c: ; 16060c (58:460c)
+Pals_16060c:
 	rgb  0,  0,  0
 	rgb 23, 23, 23
 	rgb 15, 15, 15
@@ -912,7 +892,6 @@ Pals_16060c: ; 16060c (58:460c)
 	rgb 31, 31, 31
 	rgb 20,  2, 31
 	rgb  0,  0,  0
-; 0x16064c
 
 CreditsFontGfx:     INCBIN "gfx/credits_font.2bpp.lz"
 CreditsMusicBoxGfx: INCBIN "gfx/credits_music_box.2bpp.lz"
@@ -920,7 +899,7 @@ CreditsMusicBoxGfx: INCBIN "gfx/credits_music_box.2bpp.lz"
 BGMap_161744: INCBIN "gfx/bgmaps/map_161744.bin"
 BGMap_16179c: INCBIN "gfx/bgmaps/map_16179c.bin"
 
-OAM_1617e8: ; 1617e8 (58:57e8)
+OAM_1617e8:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1321,9 +1300,8 @@ OAM_1617e8: ; 1617e8 (58:57e8)
 	frame_oam -32,   8, $26, 2
 	frame_oam -24,  20, $14, 1
 	db $80
-; 0x161caf
 
-Frameset_161caf: ; 161caf (58:5caf)
+Frameset_161caf:
 	db $10, 11
 	db $11, 10
 	db $12,  9
@@ -1335,9 +1313,8 @@ Frameset_161caf: ; 161caf (58:5caf)
 	db $18,  9
 	db $19, 10
 	db $ff
-; 0x161cc4
 
-Frameset_161cc4: ; 161cc4 (58:5cc4)
+Frameset_161cc4:
 	db $00, 12
 	db $01, 12
 	db $02, 12
@@ -1355,24 +1332,20 @@ Frameset_161cc4: ; 161cc4 (58:5cc4)
 	db $0e, 12
 	db $0f, 12
 	db $ff
-; 0x161ce5
 
-Frameset_161ce5: ; 161ce5 (58:5ce5)
+Frameset_161ce5:
 	db $1a,  4
 	db $ff
-; 0x161ce8
 
-Frameset_161ce8: ; 161ce8 (58:5ce8)
+Frameset_161ce8:
 	db $1c,  4
 	db $ff
-; 0x161ceb
 
-Frameset_161ceb: ; 161ceb (58:5ceb)
+Frameset_161ceb:
 	db $1b,  4
 	db $ff
-; 0x161cee
 
-Frameset_161cee: ; 161cee (58:5cee)
+Frameset_161cee:
 	db $00, 12
 	db $01, 12
 	db $02, 12
@@ -1390,4 +1363,3 @@ Frameset_161cee: ; 161cee (58:5cee)
 	db $0e, 24
 	db $0f, 24
 	db $ff
-; 0x161d0f

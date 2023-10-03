@@ -1,4 +1,4 @@
-JamanoFunc: ; 54d37 (15:4d37)
+JamanoFunc:
 	ld a, TRUE
 	ld [wIsBossBattle], a
 	stop_music2
@@ -511,7 +511,7 @@ JamanoFunc: ; 54d37 (15:4d37)
 	ld bc, Data_60d20
 	jp ApplyObjYMovement
 
-JamanoHatFunc: ; 5510a (15:510a)
+JamanoHatFunc:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
@@ -549,7 +549,7 @@ JamanoHatFunc: ; 5510a (15:510a)
 	ld [wIsBossBattle], a
 	ret
 
-HatPlatformFunc: ; 5515b (15:515b)
+HatPlatformFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_SUBSTATE
@@ -626,7 +626,7 @@ HatPlatformFunc: ; 5515b (15:515b)
 	ld [hl], a
 	ret
 
-SkullSpawnerFunc: ; 551e5 (15:51e5)
+SkullSpawnerFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_5522c)
 	ld [hld], a
@@ -702,7 +702,7 @@ SkullSpawnerFunc: ; 551e5 (15:51e5)
 	ld bc, ObjParams_Skull3
 	jp CreateObjectAtRelativePos
 
-SkullFunc: ; 5528d (15:528d)
+SkullFunc:
 	call .Func_553e8
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
@@ -1041,7 +1041,7 @@ Func_55407:
 	ld l, a
 ;	fallthrough
 
-Func_554bc: ; 554bc (15:54bc)
+Func_554bc:
 	ld a, [wDollBoyHammerStage]
 	cp $01
 	jr z, .asm_554de
@@ -1095,9 +1095,8 @@ Func_554bc: ; 554bc (15:54bc)
 	ld [hld], a
 	ld [hl], c
 	ret
-; 0x55511
 
-Pals_55511: ; 55511 (15:5511)
+Pals_55511:
 	rgb 10,  6,  0
 	rgb 31, 31,  8
 	rgb 25, 16,  0
@@ -1137,9 +1136,8 @@ Pals_55511: ; 55511 (15:5511)
 	rgb  8, 13,  4
 	rgb  5,  7,  1
 	rgb  0,  0,  0
-; 0x55551
 
-Pals_55551: ; 55551 (15:5551)
+Pals_55551:
 	rgb  8,  4,  0
 	rgb 31, 31,  8
 	rgb 25, 16,  0
@@ -1179,9 +1177,8 @@ Pals_55551: ; 55551 (15:5551)
 	rgb  8, 13,  4
 	rgb  5,  7,  1
 	rgb  0,  0,  0
-; 0x55591
 
-Pals_55591: ; 55591 (15:5591)
+Pals_55591:
 	rgb  7,  2,  0
 	rgb 31, 31,  8
 	rgb 25, 16,  0
@@ -1221,9 +1218,8 @@ Pals_55591: ; 55591 (15:5591)
 	rgb  8, 13,  4
 	rgb  5,  7,  1
 	rgb  0,  0,  0
-; 0x555d1
 
-Pals_555d1: ; 555d1 (15:55d1)
+Pals_555d1:
 	rgb  3,  0,  0
 	rgb 31, 31,  8
 	rgb 25, 16,  0
@@ -1263,4 +1259,3 @@ Pals_555d1: ; 555d1 (15:55d1)
 	rgb  8, 13,  4
 	rgb  5,  7,  1
 	rgb  0,  0,  0
-; 0x55611

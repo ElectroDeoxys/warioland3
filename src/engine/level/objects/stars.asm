@@ -1,4 +1,4 @@
-Func_4c860: ; 4c860 (13:4860)
+Func_4c860:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
@@ -7,9 +7,8 @@ Func_4c860: ; 4c860 (13:4860)
 	ld l, OBJ_UNK_02
 	farcall DespawnObject
 	ret
-; 0x4c87c
 
-StarsFunc_WithYOffset: ; 4c87c (13:487c)
+StarsFunc_WithYOffset:
 	ld hl, wCurObjYPos
 	ld a, [wYPosLo]
 	add 4
@@ -23,7 +22,7 @@ StarsFunc_WithYOffset: ; 4c87c (13:487c)
 	ld [hli], a
 ;	fallthrough
 
-StarsFunc_SetFlags: ; 4c893 (13:4893)
+StarsFunc_SetFlags:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(StarsFunc)
 	ld [hld], a
@@ -34,7 +33,7 @@ StarsFunc_SetFlags: ; 4c893 (13:4893)
 	set OBJFLAG_NO_COLLISION_F, [hl]
 ;	fallthrough
 
-StarsFunc: ; 4c8a2 (13:48a2)
+StarsFunc:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
@@ -43,4 +42,3 @@ StarsFunc: ; 4c8a2 (13:48a2)
 	xor a
 	ld [wCurObjFlags], a
 	ret
-; 0x4c8b1

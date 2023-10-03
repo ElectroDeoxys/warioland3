@@ -1,4 +1,4 @@
-Music_HiddenFigureBattle2_Ch1: ; 3b4ed (0e:74ed)
+Music_HiddenFigureBattle2_Ch1:
 	semitone_offset 0
 
 .loop
@@ -251,9 +251,8 @@ Music_HiddenFigureBattle2_Ch1: ; 3b4ed (0e:74ed)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3b60a
 
-Music_HiddenFigureBattle2_Ch2: ; 3b60a (0e:760a)
+Music_HiddenFigureBattle2_Ch2:
 	semitone_offset 0
 
 .loop
@@ -505,9 +504,8 @@ Music_HiddenFigureBattle2_Ch2: ; 3b60a (0e:760a)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3b725
 
-Music_HiddenFigureBattle2_Ch3: ; 3b725 (0e:7725)
+Music_HiddenFigureBattle2_Ch3:
 	semitone_offset 0
 
 .loop
@@ -602,9 +600,8 @@ Music_HiddenFigureBattle2_Ch3: ; 3b725 (0e:7725)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3b7ab
 
-Music_HiddenFigureBattle2_Ch4: ; 3b7ab (0e:77ab)
+Music_HiddenFigureBattle2_Ch4:
 	semitone_offset 0
 
 .loop
@@ -694,9 +691,8 @@ Music_HiddenFigureBattle2_Ch4: ; 3b7ab (0e:77ab)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3b834
 
-Music_HiddenFigureBattle2: ; 3b834 (0e:7834)
+Music_HiddenFigureBattle2:
 	db 4, 2
 	dw Music_HiddenFigureBattle2_Ch1
 	dw Music_HiddenFigureBattle2_Ch2
@@ -713,4 +709,3 @@ Music_HiddenFigureBattle2: ; 3b834 (0e:7834)
 	dw Music_HiddenFigureBattle2_Ch2.end
 	dw Music_HiddenFigureBattle2_Ch3.end
 	dw Music_HiddenFigureBattle2_Ch4.end
-; 0x3b84e

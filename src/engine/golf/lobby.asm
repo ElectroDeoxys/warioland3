@@ -1,4 +1,4 @@
-_GolfStateTable:: ; 1c8000 (72:4000)
+_GolfStateTable::
 	ld a, [wSubState]
 	jumptable
 
@@ -19,9 +19,8 @@ _GolfStateTable:: ; 1c8000 (72:4000)
 	dw InitGolfClearCutscene
 	dw SlowFadeFromWhite
 	dw UpdateGolfClearCutscene
-; 0x1c8020
 
-InitGolfLobby: ; 1c8020 (72:4020)
+InitGolfLobby:
 	call DisableLCD
 	call ClearVirtualOAM
 	ld a, [w1d800]
@@ -107,7 +106,6 @@ InitGolfLobby: ; 1c8020 (72:4020)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0x1c80cd
 
 ; loads all the gfx in the Golf Lobby
 ; and determines the price tier,
@@ -173,17 +171,15 @@ InitGolfLobby: ; 1c8020 (72:4020)
 	ld a, c
 	ldbgcoord 12, 9
 	ret
-; 0x1c8140
 
-HandleGolfLobby: ; 1c8140 (72:4140)
+HandleGolfLobby:
 	call HandleGolfLobbyStates
 	call UpdateGolfLobbyAnimations
 	call HandleGolfLobbyWarioSprite
 	call ClearUnusedVirtualOAM
 	jp GolfLobbyVBlank
-; 0x1c814f
 
-UpdateGolfLobbyAnimations: ; 1c814f (72:414f)
+UpdateGolfLobbyAnimations:
 	ld a, HIGH(OAM_1cb2d3)
 	ld [wGolfOAMPtr + 0], a
 	ld a, LOW(OAM_1cb2d3)
@@ -252,9 +248,8 @@ UpdateGolfLobbyAnimations: ; 1c814f (72:414f)
 	ld [wGolfObj4Frame], a
 	ld hl, wGolfObj4Sprite
 	jp AddGolfSprite
-; 0x1c81f0
 
-HandleGolfLobbyWarioSprite: ; 1c81f0 (72:41f0)
+HandleGolfLobbyWarioSprite:
 	ld a, [wGolfWarioYPos]
 	ld [wGolfWarioYCoord], a
 	ld a, [wGolfWarioXPos]
@@ -275,9 +270,8 @@ HandleGolfLobbyWarioSprite: ; 1c81f0 (72:41f0)
 	ret nz
 	play_sfx SFX_WALK
 	ret
-; 0x1c821c
 
-HandleGolfLobbyStates: ; 1c821c (72:421c)
+HandleGolfLobbyStates:
 	ld a, [wGolfLobbyState]
 	jumptable
 	dw .WaitingInput ; GOLFLOBBYSTATE_WAIT_INPUT
@@ -594,9 +588,8 @@ HandleGolfLobbyStates: ; 1c821c (72:421c)
 	ld [wGolfWarioFramesetOffset], a
 	ld [wGolfLobbyState], a ; GOLFLOBBYSTATE_WAIT_INPUT
 	ret
-; 0x1c846c
 
-InitGolfClearCutscene: ; 1c846c (72:446c)
+InitGolfClearCutscene:
 	call DisableLCD
 	call ClearVirtualOAM
 
@@ -660,9 +653,8 @@ InitGolfClearCutscene: ; 1c846c (72:446c)
 	pop hl
 	ld bc, v0BGMap0
 	jp FarDecompress
-; 0x1c84e0
 
-VBlank_1c84e0: ; 1c84e0 (72:44e0)
+VBlank_1c84e0:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -676,9 +668,8 @@ VBlank_1c84e0: ; 1c84e0 (72:44e0)
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
 .end
-; 0x1c84f9
 
-UpdateGolfClearCutscene: ; 1c84f9 (72:44f9)
+UpdateGolfClearCutscene:
 	ld hl, wGolfCounter
 	ld a, [wGolfObj1State]
 	and a
@@ -717,9 +708,8 @@ UpdateGolfClearCutscene: ; 1c84f9 (72:44f9)
 	ld a, SST_GOLF_EXIT
 	ld [wSubState], a
 	ret
-; 0x1c853e
 
-UpdateGolfClearCutsceneAnimation: ; 1c853e (72:453e)
+UpdateGolfClearCutsceneAnimation:
 	ld a, HIGH(OAM_1cb3e0)
 	ld [wGolfOAMPtr + 0], a
 	ld a, LOW(OAM_1cb3e0)
@@ -741,4 +731,3 @@ UpdateGolfClearCutsceneAnimation: ; 1c853e (72:453e)
 	ld hl, wGolfObj1Sprite
 	call AddGolfSprite
 	jp ClearUnusedVirtualOAM
-; 0x1c8570

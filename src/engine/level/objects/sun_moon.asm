@@ -1,4 +1,4 @@
-SunFunc: ; 4724e (11:724e)
+SunFunc:
 	ld de, Frameset_68f6b
 	call SetObjectFramesetPtr
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -460,12 +460,12 @@ SunMoon_MoveUp:
 	ret nz
 	jp MoveObjectUpByVar2
 
-SunFlameFunc_Left: ; 47538 (11:7538)
+SunFlameFunc_Left:
 	ld bc, Data_606e0
 	jr SunFlameFunc
-SunFlameFunc_Right: ; 4753d (11:753d)
+SunFlameFunc_Right:
 	ld bc, Data_606f0
-SunFlameFunc: ; 47540 (11:7540)
+SunFlameFunc:
 	call ApplyObjXMovement
 	ld hl, wCurObjFlags
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -492,9 +492,8 @@ SunFlameFunc: ; 47540 (11:7540)
 	xor a
 	ld [wCurObjFlags], a
 	ret
-; 0x4756f
 
-MoonFunc: ; 4756f (11:756f)
+MoonFunc:
 	ld de, Frameset_68fd0
 	call SetObjectFramesetPtr
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -749,4 +748,3 @@ MoonStarFunc:
 	xor a
 	ld [wCurObjFlags], a
 	ret
-; 0x47718

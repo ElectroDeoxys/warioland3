@@ -1,4 +1,4 @@
-Music_TheTemple_Ch1: ; 39dcb (0e:5dcb)
+Music_TheTemple_Ch1:
 	semitone_offset 0
 
 .loop
@@ -106,9 +106,8 @@ Music_TheTemple_Ch1: ; 39dcb (0e:5dcb)
 	audio_jump .loop
 .end
 	audio_end
-; 0x39e69
 
-Music_TheTemple_Ch2: ; 39e69 (0e:5e69)
+Music_TheTemple_Ch2:
 	semitone_offset 0
 
 .loop
@@ -227,9 +226,8 @@ Music_TheTemple_Ch2: ; 39e69 (0e:5e69)
 	audio_jump .loop
 .end
 	audio_end
-; 0x39f11
 
-Music_TheTemple: ; 39f11 (0e:5f11)
+Music_TheTemple:
 	db 2, 2
 	dw Music_TheTemple_Ch1
 	dw Music_TheTemple_Ch2
@@ -240,4 +238,3 @@ Music_TheTemple: ; 39f11 (0e:5f11)
 
 	dw Music_TheTemple_Ch1.end
 	dw Music_TheTemple_Ch2.end
-; 0x39f1f

@@ -1,4 +1,4 @@
-Music_SnowmanWario_Ch1: ; 37d04 (0d:7d04)
+Music_SnowmanWario_Ch1:
 	semitone_offset 0
 	tempo 82
 	wave WAVE_55
@@ -82,9 +82,8 @@ Music_SnowmanWario_Ch1: ; 37d04 (0d:7d04)
 	audio_jump .loop
 .end
 	audio_end
-; 0x37d63
 
-Music_SnowmanWario_Ch2: ; 37d63 (0d:7d63)
+Music_SnowmanWario_Ch2:
 	semitone_offset 0
 	wave WAVE_4B
 	volume 75
@@ -132,9 +131,8 @@ Music_SnowmanWario_Ch2: ; 37d63 (0d:7d63)
 	audio_jump .loop
 .end
 	audio_end
-; 0x37da2
 
-Music_SnowmanWario_Ch3: ; 37da2 (0d:7da2)
+Music_SnowmanWario_Ch3:
 	semitone_offset 0
 	wave WAVE_61
 	volume 108
@@ -207,9 +205,8 @@ Music_SnowmanWario_Ch3: ; 37da2 (0d:7da2)
 	audio_jump .loop
 .end
 	audio_end
-; 0x37df8
 
-Music_SnowmanWario: ; 37df8 (d:7df8)
+Music_SnowmanWario:
 	db $3, $2
 	dw Music_SnowmanWario_Ch1
 	dw Music_SnowmanWario_Ch2

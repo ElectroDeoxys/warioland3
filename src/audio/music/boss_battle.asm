@@ -1,4 +1,4 @@
-Music_BossBattle_Ch1: ; 38f27 (0e:4f27)
+Music_BossBattle_Ch1:
 	semitone_offset 0
 	tempo 75
 	wave WAVE_17
@@ -257,9 +257,8 @@ Music_BossBattle_Ch1: ; 38f27 (0e:4f27)
 	audio_jump .loop
 .end
 	audio_end
-; 0x39055
 
-Music_BossBattle_Ch2: ; 39055 (0e:5055)
+Music_BossBattle_Ch2:
 	volume 75
 	semitone_offset 0
 	wave WAVE_0D
@@ -408,9 +407,8 @@ Music_BossBattle_Ch2: ; 39055 (0e:5055)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3911e
 
-Music_BossBattle_Ch3: ; 3911e (0e:511e)
+Music_BossBattle_Ch3:
 	volume 108
 	semitone_offset 0
 	wave WAVE_5D
@@ -681,9 +679,8 @@ Music_BossBattle_Ch3: ; 3911e (0e:511e)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3926d
 
-Music_BossBattle_Ch4: ; 3926d (0e:526d)
+Music_BossBattle_Ch4:
 	semitone_offset 0
 	wave WAVE_28
 	volume 75
@@ -786,9 +783,8 @@ Music_BossBattle_Ch4: ; 3926d (0e:526d)
 	audio_jump .loop
 .end
 	audio_end
-; 0x39308
 
-Music_BossBattle: ; 39308 (0e:5308)
+Music_BossBattle:
 	db 4, 2
 	dw Music_BossBattle_Ch1
 	dw Music_BossBattle_Ch2
@@ -805,4 +801,3 @@ Music_BossBattle: ; 39308 (0e:5308)
 	dw Music_BossBattle_Ch2.end
 	dw Music_BossBattle_Ch3.end
 	dw Music_BossBattle_Ch4.end
-; 0x39322

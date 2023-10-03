@@ -1,4 +1,4 @@
-Music_OverworldDay_Ch1: ; 38365 (0e:4365)
+Music_OverworldDay_Ch1:
 	semitone_offset 0
 
 .loop
@@ -228,9 +228,8 @@ Music_OverworldDay_Ch1: ; 38365 (0e:4365)
 	note A_2
 	audio_wait_3
 	audio_end
-; 0x38469
 
-Music_OverworldDay_Ch2: ; 38469 (0e:4469)
+Music_OverworldDay_Ch2:
 	semitone_offset 0
 
 .loop
@@ -441,9 +440,8 @@ Music_OverworldDay_Ch2: ; 38469 (0e:4469)
 	note NOTE_DURATION_3, F_2
 	audio_wait_3
 	audio_end
-; 0x3855b
 
-Music_OverworldDay_Ch3: ; 3855b (0e:455b)
+Music_OverworldDay_Ch3:
 	semitone_offset 0
 
 .loop
@@ -638,9 +636,8 @@ Music_OverworldDay_Ch3: ; 3855b (0e:455b)
 	note NOTE_DURATION_3
 	audio_wait_3
 	audio_end
-; 0x38651
 
-Music_OverworldDay_Ch4: ; 38651 (0e:4651)
+Music_OverworldDay_Ch4:
 	semitone_offset 0
 
 .loop
@@ -732,9 +729,8 @@ Music_OverworldDay_Ch4: ; 38651 (0e:4651)
 	note F#0
 	audio_wait_3
 	audio_end
-; 0x386f6
 
-Music_OverworldDay: ; 386f6 (0e:46f6)
+Music_OverworldDay:
 	db 4, 2
 	dw Music_OverworldDay_Ch1
 	dw Music_OverworldDay_Ch2
@@ -751,4 +747,3 @@ Music_OverworldDay: ; 386f6 (0e:46f6)
 	dw Music_OverworldDay_Ch2.end
 	dw Music_OverworldDay_Ch3.end
 	dw Music_OverworldDay_Ch4.end
-; 0x38710

@@ -1,4 +1,4 @@
-Func_18000: ; 18000 (6:4000)
+Func_18000:
 	xor a ; FALSE
 	ld [wc0dd], a
 	ld a, [wFloorSRAMBank]
@@ -17,9 +17,8 @@ Func_18000: ; 18000 (6:4000)
 	ld h, [hl]
 	ld l, a
 	jp hl
-; 0x18020
 
-Func_18020: ; 18020 (6:4020)
+Func_18020:
 	xor a ; SRAM0
 	sramswitch
 	xor a ; FALSE
@@ -27,9 +26,8 @@ Func_18020: ; 18020 (6:4020)
 	ld [wc0d9], a
 	ld [wc18d], a
 	ret
-; 0x18032
 
-Func_18032: ; 18032 (6:4032)
+Func_18032:
 	xor a
 	sramswitch
 	xor a ; FALSE
@@ -54,9 +52,8 @@ Func_18032: ; 18032 (6:4032)
 	ld a, $01
 	ld [wc18d], a
 	ret
-; 0x18064
 
-Func_18064: ; 18064 (6:4064)
+Func_18064:
 	xor a
 	sramswitch
 	xor a ; FALSE
@@ -65,9 +62,8 @@ Func_18064: ; 18064 (6:4064)
 	ld a, $10
 	ld [wc18d], a
 	ret
-; 0x18078
 
-Func_18078: ; 18078 (6:4078)
+Func_18078:
 	xor a
 	sramswitch
 	xor a ; FALSE
@@ -76,9 +72,8 @@ Func_18078: ; 18078 (6:4078)
 	ld a, $01
 	ld [wc18d], a
 	ret
-; 0x1808c
 
-Func_1808c: ; 1808c (6:408c)
+Func_1808c:
 	xor a
 	sramswitch
 	xor a ; FALSE
@@ -87,9 +82,8 @@ Func_1808c: ; 1808c (6:408c)
 	xor a
 	ld [wc18d], a
 	ret
-; 0x1809f
 
-Func_1809f: ; 1809f (6:409f)
+Func_1809f:
 	ld a, [wc0d6]
 	bit 0, a
 	jp z, Func_18020
@@ -159,9 +153,8 @@ Func_1809f: ; 1809f (6:409f)
 	ld [wIsStandingOnSlope], a
 .asm_18126
 	jp Func_18064
-; 0x18129
 
-Func_18129: ; 18129 (6:4129)
+Func_18129:
 	ld a, [wc0d6]
 	bit 0, a
 	jp z, Func_18020
@@ -228,9 +221,8 @@ Func_18129: ; 18129 (6:4129)
 	ld [wIsStandingOnSlope], a
 .asm_181a9
 	jp Func_18064
-; 0x181ac
 
-Func_181ac: ; 181ac (6:41ac)
+Func_181ac:
 	ld a, TRUE
 	ld [wc0dd], a
 	ld a, [wc0da]
@@ -242,45 +234,40 @@ Func_181ac: ; 181ac (6:41ac)
 	ld a, $01
 	ld [wWaterInteraction], a
 	jp Func_18020
-; 0x181c8
 
-Func_181c8: ; 181c8 (6:41c8)
+Func_181c8:
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_181ac
 	ld a, CURRENT_RIGHT
 	ld [wWaterCurrent], a
 	jp Func_181ac
-; 0x181d8
 
-Func_181d8: ; 181d8 (6:41d8)
+Func_181d8:
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_181ac
 	ld a, CURRENT_UP
 	ld [wWaterCurrent], a
 	jp Func_181ac
-; 0x181e8
 
-Func_181e8: ; 181e8 (6:41e8)
+Func_181e8:
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_181ac
 	ld a, CURRENT_LEFT
 	ld [wWaterCurrent], a
 	jp Func_181ac
-; 0x181f8
 
-Func_181f8: ; 181f8 (6:41f8)
+Func_181f8:
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_181ac
 	ld a, CURRENT_DOWN
 	ld [wWaterCurrent], a
 	jp Func_181ac
-; 0x18208
 
-Func_18208: ; 18208 (6:4208)
+Func_18208:
 	ld a, TRUE
 	ld [wc1ca], a
 	ld a, [wc0d6]
@@ -305,9 +292,8 @@ Func_18208: ; 18208 (6:4208)
 	cp WST_ZOMBIE_SLIPPING_THROUGH_FLOOR
 	jp z, Func_18020
 	jp Func_18032
-; 0x1823f
 
-Func_1823f: ; 1823f (6:423f)
+Func_1823f:
 	ld a, [wc0d6]
 	bit 1, a
 	jr nz, .asm_18257
@@ -324,9 +310,8 @@ Func_1823f: ; 1823f (6:423f)
 	ld a, TRUE
 	ld [wc0dd], a
 	jp Func_18032
-; 0x18262
 
-Func_18262: ; 18262 (6:4262)
+Func_18262:
 	ld a, [wc0da]
 	and a
 	jp nz, Func_18020
@@ -344,9 +329,8 @@ Func_18262: ; 18262 (6:4262)
 	cp $05
 	jp c, Func_18032
 	jp Func_18020
-; 0x1828c
 
-Func_1828c: ; 1828c (6:428c)
+Func_1828c:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18032
@@ -369,9 +353,8 @@ Func_1828c: ; 1828c (6:428c)
 	ld b, $10
 	call DoGroundShake
 	jp Func_18032
-; 0x182c3
 
-Func_182c3: ; 182c3 (6:42c3)
+Func_182c3:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18020
@@ -383,9 +366,8 @@ Func_182c3: ; 182c3 (6:42c3)
 	ld a, $01
 	ld [wLadderInteraction], a
 	jp Func_1808c
-; 0x182dc
 
-Func_182dc: ; 182dc (6:42dc)
+Func_182dc:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18032
@@ -402,9 +384,8 @@ Func_182dc: ; 182dc (6:42dc)
 	ld a, $02
 	ld [wLadderInteraction], a
 	jp Func_1808c
-; 0x182fe
 
-Func_182fe: ; 182fe (6:42fe)
+Func_182fe:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18020
@@ -416,9 +397,8 @@ Func_182fe: ; 182fe (6:42fe)
 	ld a, ROOMTRANSITION_5 | ROOMTRANSITIONFLAG_2
 	ld [wRoomTransitionParam], a
 	jp Func_18020
-; 0x1831a
 
-Func_1831a: ; 1831a (6:431a)
+Func_1831a:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18020
@@ -430,9 +410,8 @@ Func_1831a: ; 1831a (6:431a)
 	ld a, ROOMTRANSITION_5
 	ld [wRoomTransitionParam], a
 	jp Func_18020
-; 0x18336
 
-Func_18336: ; 18336 (6:4336)
+Func_18336:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18020
@@ -469,9 +448,8 @@ Func_18336: ; 18336 (6:4336)
 .asm_1838a
 	farcall Func_206eb
 	jp Func_18020
-; 0x1839c
 
-Func_1839c: ; 1839c (6:439c)
+Func_1839c:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18032
@@ -508,9 +486,8 @@ Func_1839c: ; 1839c (6:439c)
 .asm_183f0
 	farcall Func_206eb
 	jp Func_18032
-; 0x18402
 
-Func_18402: ; 18402 (6:4402)
+Func_18402:
 	ld a, [wc0da]
 	and a
 	jp z, Func_181ac
@@ -522,9 +499,8 @@ Func_18402: ; 18402 (6:4402)
 	jp z, Func_181ac
 	farcall SetState_WaterStung
 	jp Func_181ac
-; 0x1842a
 
-Func_1842a: ; 1842a (6:442a)
+Func_1842a:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18032
@@ -594,9 +570,8 @@ Func_1842a: ; 1842a (6:442a)
 	load_frameset Frameset_14cf6
 	update_anim_1
 	jp Func_18032
-; 0x184fc
 
-Func_184fc: ; 184fc (6:44fc)
+Func_184fc:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18032
@@ -665,9 +640,8 @@ Func_184fc: ; 184fc (6:44fc)
 	load_frameset Frameset_14cf6
 	update_anim_1
 	jp Func_18032
-; 0x185cb
 
-Func_185cb: ; 185cb (6:45cb)
+Func_185cb:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18020
@@ -688,9 +662,8 @@ Func_185cb: ; 185cb (6:45cb)
 	ld a, ROOMTRANSITION_2 | ROOMTRANSITIONFLAG_1 | ROOMTRANSITIONFLAG_2 | ROOMTRANSITIONFLAG_3
 	ld [wRoomTransitionParam], a
 	jp Func_18676
-; 0x185fa
 
-Func_185fa: ; 185fa (6:45fa)
+Func_185fa:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18020
@@ -710,7 +683,7 @@ Func_185fa: ; 185fa (6:45fa)
 	ld [wRoomTransitionParam], a
 	jr Func_18676
 
-Func_18624: ; 18624 (6:4624)
+Func_18624:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18020
@@ -730,7 +703,7 @@ Func_18624: ; 18624 (6:4624)
 	ld [wRoomTransitionParam], a
 	jr Func_18676
 
-Func_1864e: ; 1864e (6:464e)
+Func_1864e:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18020
@@ -785,9 +758,8 @@ Func_18676:
 .asm_186e7
 	update_anim_1
 	jp Func_18020
-; 0x186f9
 
-Func_186f9: ; 186f9 (6:46f9)
+Func_186f9:
 	ld a, [wc0da]
 	and a
 	jp z, Func_181ac
@@ -809,9 +781,8 @@ Func_186f9: ; 186f9 (6:46f9)
 	ld [wRoomTransitionParam], a
 .asm_18724
 	jp Func_18020
-; 0x18727
 
-Func_18727: ; 18727 (6:4727)
+Func_18727:
 	ld a, [wc0da]
 	and a
 	jp z, Func_181ac
@@ -833,9 +804,8 @@ Func_18727: ; 18727 (6:4727)
 	ld [wRoomTransitionParam], a
 .asm_18752
 	jp Func_18020
-; 0x18755
 
-Func_18755: ; 18755 (6:4755)
+Func_18755:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18020
@@ -855,9 +825,8 @@ Func_18755: ; 18755 (6:4755)
 	ld [wRoomTransitionParam], a
 .asm_1877b
 	jp Func_18020
-; 0x1877e
 
-Func_1877e: ; 1877e (6:477e)
+Func_1877e:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18020
@@ -880,9 +849,8 @@ Func_1877e: ; 1877e (6:477e)
 	ld a, LVLEND_NO_TREASURE
 	ld [wLevelEndScreen], a
 	jp Func_18020
-; 0x187b0
 
-Func_187b0: ; 187b0 (6:47b0)
+Func_187b0:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18020
@@ -892,9 +860,8 @@ Func_187b0: ; 187b0 (6:47b0)
 	ld a, ROOMTRANSITION_4 | ROOMTRANSITIONFLAG_2
 	ld [wRoomTransitionParam], a
 	jp Func_18020
-; 0x187c7
 
-Func_187c7: ; 187c7 (6:47c7)
+Func_187c7:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18020
@@ -904,9 +871,8 @@ Func_187c7: ; 187c7 (6:47c7)
 	ld a, ROOMTRANSITION_4
 	ld [wRoomTransitionParam], a
 	jp Func_18020
-; 0x187de
 
-Func_187de: ; 187de (6:47de)
+Func_187de:
 	ld a, [wc0da]
 	and a
 	jp z, Func_181ac
@@ -916,9 +882,8 @@ Func_187de: ; 187de (6:47de)
 	ld a, ROOMTRANSITION_4 | ROOMTRANSITIONFLAG_2
 	ld [wRoomTransitionParam], a
 	jp Func_181ac
-; 0x187f5
 
-Func_187f5: ; 187f5 (6:47f5)
+Func_187f5:
 	ld a, [wc0da]
 	and a
 	jp z, Func_181ac
@@ -928,9 +893,8 @@ Func_187f5: ; 187f5 (6:47f5)
 	ld a, ROOMTRANSITION_4
 	ld [wRoomTransitionParam], a
 	jp Func_181ac
-; 0x1880c
 
-Func_1880c: ; 1880c (6:480c)
+Func_1880c:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18020
@@ -939,9 +903,8 @@ Func_1880c: ; 1880c (6:480c)
 	jp nz, Func_18020
 	call RecoverFromTransformation_WithoutInvincibility
 	jp Func_18020
-; 0x18821
 
-Func_18821: ; 18821 (6:4821)
+Func_18821:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18020
@@ -955,9 +918,8 @@ Func_18821: ; 18821 (6:4821)
 .asm_1883a
 	farcall SetState_ZombieRecovering
 	jp Func_18020
-; 0x1884c
 
-Func_1884c: ; 1884c (6:484c)
+Func_1884c:
 	ld a, TRUE
 	ld [wc0dd], a
 	ld a, [wc0da]
@@ -969,9 +931,8 @@ Func_1884c: ; 1884c (6:484c)
 	ld a, TRUE
 	ld [wIsInSand], a
 	jp Func_18020
-; 0x18868
 
-Func_18868: ; 18868 (6:4868)
+Func_18868:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18020
@@ -1008,16 +969,14 @@ Func_18868: ; 18868 (6:4868)
 	adc $00
 	ld [wXPosHi], a
 	jp Func_18032
-; 0x188ba
 
-Func_188ba: ; 188ba (6:48ba)
+Func_188ba:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18032
 	jp Func_18020
-; 0x188c4
 
-Func_188c4: ; 188c4 (6:48c4)
+Func_188c4:
 	ld a, TRUE
 	ld [wc0dd], a
 	ld a, [wc0da]
@@ -1029,9 +988,8 @@ Func_188c4: ; 188c4 (6:48c4)
 	ld a, $02
 	ld [wWaterInteraction], a
 	jp Func_18020
-; 0x188e0
 
-Func_188e0: ; 188e0 (6:48e0)
+Func_188e0:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18020
@@ -1061,9 +1019,8 @@ Func_188e0: ; 188e0 (6:48e0)
 	call UpdateLevelMusic
 	farcall SetState_OnFire_ResetStateCounter
 	ret
-; 0x18934
 
-Func_18934: ; 18934 (6:4934)
+Func_18934:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18020
@@ -1075,9 +1032,8 @@ Func_18934: ; 18934 (6:4934)
 	ld a, TRUE
 	ld [wIsNearFence], a
 	jp Func_1808c
-; 0x1894d
 
-Func_1894d: ; 1894d (6:494d)
+Func_1894d:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18020
@@ -1104,9 +1060,8 @@ Func_1894d: ; 1894d (6:494d)
 	ld [wca94], a
 	farcall SetState_FanStart
 	jp Func_18020
-; 0x18997
 
-Func_18997: ; 18997 (6:4997)
+Func_18997:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18032
@@ -1116,9 +1071,8 @@ Func_18997: ; 18997 (6:4997)
 	ld a, TRUE
 	ld [wIsOnSlipperyGround], a
 	jp Func_18032
-; 0x189ae
 
-Func_189ae: ; 189ae (6:49ae)
+Func_189ae:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18208
@@ -1128,9 +1082,8 @@ Func_189ae: ; 189ae (6:49ae)
 	ld a, TRUE
 	ld [wIsOnSlipperyGround], a
 	jp Func_18208
-; 0x189c5
 
-Func_189c5: ; 189c5 (6:49c5)
+Func_189c5:
 	ld a, [wRoomPalCycleIndex]
 	cp $07
 	jr z, .asm_189d1
@@ -1138,16 +1091,14 @@ Func_189c5: ; 189c5 (6:49c5)
 	jp nc, Func_18020
 .asm_189d1
 	jp Func_18208
-; 0x189d4
 
-Func_189d4: ; 189d4 (6:49d4)
+Func_189d4:
 	ld a, [wRoomPalCycleIndex]
 	cp $03
 	jp c, Func_18020
 	jp Func_18208
-; 0x189df
 
-Func_189df: ; 189df (6:49df)
+Func_189df:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18020
@@ -1155,40 +1106,38 @@ Func_189df: ; 189df (6:49df)
 	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
 	jp z, Func_18020
 	jp Func_18032
-; 0x189f1
 
-Func_189f1: ; 189f1 (6:49f1)
+Func_189f1:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18020
 	jp Func_18208
-; 0x189fb
 
-Func_189fb: ; 189fb (6:49fb)
+Func_189fb:
 	ld b, $78
 	jr Func_18a19
-Func_189ff: ; 189ff (6:49ff)
+Func_189ff:
 	ld b, $79
 	jr Func_18a19
-Func_18a03: ; 18a03 (6:4a03)
+Func_18a03:
 	ld b, $7a
 	jr Func_18a19
-Func_18a07: ; 18a07 (6:4a07)
+Func_18a07:
 	ld b, $7b
 	jr Func_18a19
-Func_18a0b: ; 18a0b (6:4a0b)
+Func_18a0b:
 	ld b, $7c
 	jr Func_18a19
-Func_18a0f: ; 18a0f (6:4a0f)
+Func_18a0f:
 	ld b, $7d
 	jr Func_18a19
-Func_18a13: ; 18a13 (6:4a13)
+Func_18a13:
 	ld b, $7e
 	jr Func_18a19
-Func_18a17: ; 18a17 (6:4a17)
+Func_18a17:
 	ld b, $7f
 ;	fallthrough
-Func_18a19: ; 18a19 (6:4a19)
+Func_18a19:
 	ld a, [wc0d8]
 	and a
 	jp z, Func_18032
@@ -1254,22 +1203,21 @@ Func_18a19: ; 18a19 (6:4a19)
 	cp SUPER_JUMP_SLAM_OVERALLS
 	jp c, Func_18032
 	jp Func_18020
-; 0x18a9a
 
-Func_18a9a: ; 18a9a (6:4a9a)
+Func_18a9a:
 	ld b, $79
 	jr Func_18aa8
-Func_18a9e: ; 18a9e (6:4a9e)
+Func_18a9e:
 	ld b, $7a
 	jr Func_18aa8
-Func_18aa2: ; 18aa2 (6:4aa2)
+Func_18aa2:
 	ld b, $7b
 	jr Func_18aa8
-Func_18aa6: ; 18aa6 (6:4aa6)
+Func_18aa6:
 	ld b, $78
 ;	fallthrough
 
-Func_18aa8: ; 18aa8 (6:4aa8)
+Func_18aa8:
 	ld a, [wceda]
 	and $07
 	jp nz, Func_18020
@@ -1292,21 +1240,20 @@ Func_18aa8: ; 18aa8 (6:4aa8)
 	or $01
 	ld [wceda], a
 	jp Func_18f32
-; 0x18ade
 
-Func_18ade: ; 18ade (6:4ade)
+Func_18ade:
 	ld b, $79
 	jr Func_18aec
-Func_18ae2: ; 18ae2 (6:4ae2)
+Func_18ae2:
 	ld b, $7a
 	jr Func_18aec
-Func_18ae6: ; 18ae6 (6:4ae6)
+Func_18ae6:
 	ld b, $7b
 	jr Func_18aec
-Func_18aea: ; 18aea (6:4aea)
+Func_18aea:
 	ld b, $78
 ;	fallthrough
-Func_18aec: ; 18aec (6:4aec)
+Func_18aec:
 	ld a, [wceda]
 	and $07
 	jp nz, Func_18020
@@ -1330,7 +1277,7 @@ Func_18aec: ; 18aec (6:4aec)
 	jp Func_18f32
 
 ; unreferenced
-Func_18b1f: ; 18b1f (6:4b1f)
+Func_18b1f:
 	ld b, $79
 	jr .asm_18b2d
 	ld b, $7a
@@ -1363,7 +1310,7 @@ Func_18b1f: ; 18b1f (6:4b1f)
 	jp Func_18f32
 
 ; unreferenced
-Func_18b63: ; 18b63 (6:4b63)
+Func_18b63:
 	ld b, $79
 	jr .asm_18b71
 	ld b, $7a
@@ -1396,7 +1343,7 @@ Func_18b63: ; 18b63 (6:4b63)
 	jp Func_18f32
 
 ; unreferenced
-Func_18ba7: ; 18ba7 (6:4ba7)
+Func_18ba7:
 	ld b, $79
 	jr .asm_18bb5
 	ld b, $7a
@@ -1429,7 +1376,7 @@ Func_18ba7: ; 18ba7 (6:4ba7)
 	jp Func_18f32
 
 ; unreferenced
-Func_18beb: ; 18beb (6:4beb)
+Func_18beb:
 	ld b, $79
 	jr .asm_18bf9
 	ld b, $7a
@@ -1461,7 +1408,7 @@ Func_18beb: ; 18beb (6:4beb)
 	jp Func_18f32
 
 ; unreferenced
-Func_18c2c: ; 18c2c (6:4c2c)
+Func_18c2c:
 	ld b, $79
 	jr .asm_18c3a
 	ld b, $7a
@@ -1494,7 +1441,7 @@ Func_18c2c: ; 18c2c (6:4c2c)
 	jp Func_18f32
 
 ; unreferenced
-Func_18c70: ; 18c70 (6:4c70)
+Func_18c70:
 	ld b, $79
 	jr .asm_18c7e
 	ld b, $7a
@@ -1527,7 +1474,7 @@ Func_18c70: ; 18c70 (6:4c70)
 	jp Func_18f32
 
 ; unreferenced
-Func_18cb4: ; 18cb4 (6:4cb4)
+Func_18cb4:
 	ld b, $78
 	jr .asm_18cd2
 	ld b, $79
@@ -1614,7 +1561,7 @@ Func_18cb4: ; 18cb4 (6:4cb4)
 	jp Func_18020
 
 ; unreferenced
-Func_18d60: ; 18d60 (6:4d60)
+Func_18d60:
 	ld b, $78
 	jr .asm_18d7e
 	ld b, $79
@@ -1704,7 +1651,7 @@ Func_18df1:
 	jp Func_18032
 
 ; unreferenced
-Func_18e0e: ; 18e0e (6:4e0e)
+Func_18e0e:
 	ld b, $79
 	jr .asm_18e2c
 	ld b, $7a
@@ -1778,7 +1725,7 @@ Func_18e0e: ; 18e0e (6:4e0e)
 	jp Func_18f32
 
 ; unreferenced
-Func_18ea2: ; 18ea2 (6:4ea2)
+Func_18ea2:
 	ld b, $79
 	jr .asm_18ec0
 	ld b, $7a
@@ -1851,7 +1798,7 @@ Func_18ea2: ; 18ea2 (6:4ea2)
 	ld [wceda], a
 ;	fallthrough
 
-Func_18f32: ; 18f32 (6:4f32)
+Func_18f32:
 	ld a, [wSRAMBank]
 	ld [wcedb], a
 	ld hl, wYCell
@@ -1878,7 +1825,7 @@ Func_18f32: ; 18f32 (6:4f32)
 	jp Func_18020
 
 ; unreferenced
-Func_18f5f: ; 18f5f (6:4f5f)
+Func_18f5f:
 	ld b, $79
 	jr .asm_18f7d
 	ld b, $7a
@@ -1952,7 +1899,7 @@ Func_18f5f: ; 18f5f (6:4f5f)
 	jp Func_18f32
 
 ; unreferenced
-Func_18ff3: ; 18ff3 (6:4ff3)
+Func_18ff3:
 	ld b, $79
 	jr .asm_19011
 	ld b, $7a
@@ -2071,7 +2018,7 @@ Func_19086:
 	jp Func_18020
 
 ; unreferenced
-Func_190e0: ; 190e0 (6:50e0)
+Func_190e0:
 	ld b, $79
 	jr .asm_190fe
 	ld b, $7a
@@ -2160,7 +2107,7 @@ Func_190e0: ; 190e0 (6:50e0)
 	jp Func_19246
 
 ; unreferenced
-Func_19195: ; 19195 (6:5195)
+Func_19195:
 	ld b, $79
 	jr .asm_191b3
 	ld b, $7a
@@ -2275,7 +2222,7 @@ Func_19246:
 	jp Func_18020
 
 ; unreferenced
-Func_19273: ; 19273 (6:5273)
+Func_19273:
 	ld b, $79
 	jr .asm_19291
 	ld b, $7a
@@ -2364,7 +2311,7 @@ Func_19273: ; 19273 (6:5273)
 	jp Func_19246
 
 ; unreferenced
-Func_19328: ; 19328 (6:5328)
+Func_19328:
 	ld b, $79
 	jr .asm_19346
 	ld b, $7a
@@ -2469,7 +2416,7 @@ Func_193dc:
 	jp Func_18df1
 
 ; unreferenced
-Func_193fb: ; 193fb (6:53fb)
+Func_193fb:
 	ld b, $78
 	jr .asm_19419
 	ld b, $79
@@ -2513,7 +2460,7 @@ Func_19423:
 	jp Func_18020
 
 ; unreferenced
-Func_1944b: ; 1944b (6:544b)
+Func_1944b:
 	ld b, $78
 	jr .asm_19469
 	ld b, $79
@@ -2558,7 +2505,7 @@ Func_19481:
 	jp Func_18020
 
 ; unreferenced
-Func_19497: ; 19497 (6:5497)
+Func_19497:
 	ld b, $78
 	jr .asm_194b5
 	ld b, $79
@@ -2601,7 +2548,7 @@ Func_19497: ; 19497 (6:5497)
 	jp Func_18032
 
 ; unreferenced
-Func_194e4: ; 194e4 (6:54e4)
+Func_194e4:
 	ld b, $78
 	jr .asm_19502
 	ld b, $79
@@ -2627,7 +2574,7 @@ Func_194e4: ; 194e4 (6:54e4)
 	jp Func_18032
 
 ; unreferenced
-Func_19514: ; 19514 (6:5514)
+Func_19514:
 	ld b, $79
 	jr .asm_19522
 	ld b, $7a
@@ -2659,7 +2606,7 @@ Func_19514: ; 19514 (6:5514)
 	jp Func_18f32
 
 ; unreferenced
-Func_19552: ; 19552 (6:5552)
+Func_19552:
 	ld b, $79
 	jr .asm_19560
 	ld b, $7a
@@ -2690,7 +2637,7 @@ Func_19552: ; 19552 (6:5552)
 	jp Func_18f32
 
 ; unreferenced
-Func_1958d: ; 1958d (6:558d)
+Func_1958d:
 	ld b, $79
 	jr .asm_1959b
 	ld b, $7a
@@ -2722,7 +2669,7 @@ Func_1958d: ; 1958d (6:558d)
 	jp Func_18f32
 
 ; unreferenced
-Func_195cb: ; 195cb (6:55cb)
+Func_195cb:
 	ld b, $79
 	jr .asm_195d9
 	ld b, $7a
@@ -2752,9 +2699,8 @@ Func_195cb: ; 195cb (6:55cb)
 	or $04
 	ld [wceda], a
 	jp Func_18f32
-; 0x19609
 
-Func_19609: ; 19609 (6:5609)
+Func_19609:
 	; temporarily store hPos
 	ldh a, [hYPosHi]
 	ldh [hffad], a
@@ -2821,9 +2767,8 @@ Func_19609: ; 19609 (6:5609)
 	ldh a, [hffb0]
 	ldh [hXPosLo], a
 	ret
-; 0x19690
 
-Func_19690: ; 19690 (6:5690)
+Func_19690:
 	; temporarily store hPos
 	ldh a, [hYPosHi]
 	ldh [hffad], a
@@ -2880,27 +2825,24 @@ Func_19690: ; 19690 (6:5690)
 	ldh a, [hffb0]
 	ldh [hXPosLo], a
 	ret
-; 0x19706
 
-Func_19706: ; 19706 (6:5706)
+Func_19706:
 	ld a, TRUE
 	ld [wc0da], a
 	call Func_19741
 	xor a ; FALSE
 	ld [wc0da], a
 	ret
-; 0x19713
 
-Func_19713: ; 19713 (6:5713)
+Func_19713:
 	ld a, TRUE
 	ld [wc0da], a
 	call Func_197b1
 	xor a ; FALSE
 	ld [wc0da], a
 	ret
-; 0x19720
 
-Func_19720: ; 19720 (6:5720)
+Func_19720:
 	ld a, TRUE
 	ld [wc0da], a
 	call CheckAirborneCollision
@@ -2910,10 +2852,9 @@ Func_19720: ; 19720 (6:5720)
 	and a
 	jp nz, TriggerFloorTransition
 	jp TriggerDownwardsFloorTransition
-; 0x19734
 
 ; checks collision in side that Wario is facing
-CheckFrontCollision: ; 19734 (6:5734)
+CheckFrontCollision:
 	ld a, TRUE
 	ld [wc0d8], a
 	ld a, [wDirection]
@@ -2921,12 +2862,12 @@ CheckFrontCollision: ; 19734 (6:5734)
 	jr z, CheckBottomLeftCollision
 	jr CheckBottomRightCollision
 
-Func_19741: ; 19741 (6:5741)
+Func_19741:
 	ld a, TRUE
 	ld [wc0d8], a
 ;	fallthrough
 
-CheckBottomRightCollision: ; 19746 (6:5746)
+CheckBottomRightCollision:
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
 	jr z, .flat
@@ -2997,12 +2938,12 @@ CheckBottomRightCollision: ; 19746 (6:5746)
 	ld a, b
 	ret
 
-Func_197b1: ; 197b1 (6:57b1)
+Func_197b1:
 	ld a, TRUE
 	ld [wc0d8], a
 ;	fallthrough
 
-CheckBottomLeftCollision: ; 197b6 (6:57b6)
+CheckBottomLeftCollision:
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
 	jr z, .flat
@@ -3077,7 +3018,7 @@ CheckBottomLeftCollision: ; 197b6 (6:57b6)
 	ld a, b
 	ret
 
-Func_19823: ; 19823 (6:5823)
+Func_19823:
 	ld a, TRUE
 	ld [wc0d8], a
 	call Func_19bd3
@@ -3086,7 +3027,7 @@ Func_19823: ; 19823 (6:5823)
 	ld b, a
 	ret
 
-Func_19832: ; 19832 (6:5832)
+Func_19832:
 	ld a, [wIsCrouching]
 	and a
 	jp nz, .asm_198c1
@@ -3154,18 +3095,16 @@ Func_19832: ; 19832 (6:5832)
 	ld [wc18d], a
 	ld b, a
 	ret
-; 0x198c7
 
 ; resets wIsStandingOnSlope
-Func_198c7: ; 198c7 (6:58c7)
+Func_198c7:
 	xor a
 	ld [wIsStandingOnSlope], a
 	get_pos
 	call Func_19b51
 	ret
-; 0x198e0
 
-CheckCentreCollision: ; 198e0 (6:58e0)
+CheckCentreCollision:
 ; collision in centre
 	ld a, $01
 	ld [wced3], a
@@ -3230,9 +3169,8 @@ CheckCentreCollision: ; 198e0 (6:58e0)
 	get_pos_y
 	ld a, $01
 	ret
-; 0x19942
 
-Func_19942: ; 19942 (6:5942)
+Func_19942:
 	ld a, [wTransformation]
 	cp TRANSFORMATION_PUFFY_WARIO
 	jr z, .asm_1994e
@@ -3261,9 +3199,8 @@ Func_19942: ; 19942 (6:5942)
 	ld [de], a
 	call Func_19beb
 	ret
-; 0x1996e
 
-CheckUpCollision: ; 1996e (6:596e)
+CheckUpCollision:
 	ld a, $01
 	ld [wced2], a
 	call Func_19942
@@ -3341,9 +3278,8 @@ CheckUpCollision: ; 1996e (6:596e)
 	ld [de], a
 	call Func_19b9b
 	ret
-; 0x199e9
 
-CheckAirborneCollision: ; 199e9 (6:59e9)
+CheckAirborneCollision:
 	call .Func_19a53
 	and a
 	ret nz
@@ -3429,9 +3365,8 @@ CheckAirborneCollision: ; 199e9 (6:59e9)
 	get_pos
 	call Func_19b7b
 	ret
-; 0x19a77
 
-Func_19a77: ; 19a77 (6:5a77)
+Func_19a77:
 	xor a ; FALSE
 	ld [wc1ca], a
 	ld a, [wCollisionBoxLeft]
@@ -3490,9 +3425,8 @@ Func_19a77: ; 19a77 (6:5a77)
 	ld a, TRUE
 	ld [wc1ca], a
 	ret
-; 0x19acd
 
-Func_19acd: ; 19acd (6:5acd)
+Func_19acd:
 	ld hl, wXPosLo
 	ld de, hXPosLo
 	ld a, [hld]
@@ -3509,9 +3443,8 @@ Func_19acd: ; 19acd (6:5acd)
 	sbc $00
 	ld [de], a
 	jr Func_19b3a
-; 0x19ae4
 
-Func_19ae4: ; 19ae4 (6:5ae4)
+Func_19ae4:
 	ld hl, wXPosLo
 	ld de, hXPosLo
 	ld a, [hld]
@@ -3529,7 +3462,7 @@ Func_19ae4: ; 19ae4 (6:5ae4)
 	ld [de], a
 	jr Func_19b3a
 
-Func_19afb: ; 19afb (6:5afb)
+Func_19afb:
 	ld hl, wXPosLo
 	ld de, hXPosLo
 	ld a, [hld]
@@ -3548,12 +3481,12 @@ Func_19afb: ; 19afb (6:5afb)
 	jr Func_19b3a
 
 ; collision on centre
-Func_19b12: ; 19b12 (6:5b12)
+Func_19b12:
 	get_pos
 	jr Func_19b3a
 
 ; collision on top
-Func_19b25: ; 19b25 (6:5b25)
+Func_19b25:
 	ld hl, wXPosLo
 	ld de, hXPosLo
 	ld a, [hld]
@@ -3571,7 +3504,7 @@ Func_19b25: ; 19b25 (6:5b25)
 	ld [de], a
 ;	fallthrough
 
-Func_19b3a: ; 19b3a (6:5b3a)
+Func_19b3a:
 	xor a
 	ld [wWaterInteraction], a
 	ld [wLadderInteraction], a
@@ -3581,50 +3514,44 @@ Func_19b3a: ; 19b3a (6:5b3a)
 	ld [wIsInAirCurrent], a
 	call Func_19c0b
 	ret
-; 0x19b51
 
-Func_19b51:: ; 19b51 (6:5b51)
+Func_19b51::
 	ld hl, hPos
 	call GetCell
 	ld a, 1 << 0
 	ld [wc0d6], a
 ;	fallthrough
 
-Func_19b5c: ; 19b5c (6:5b5c)
+Func_19b5c:
 	call Func_18000
 	ld b, a
 	ret
-; 0x19b61
 
-Func_19b61:: ; 19b61 (6:5b61)
+Func_19b61::
 	call DecrementXCell
 	ld a, [hl]
 	inc a
 	ret z
 	jr Func_19b5c
-; 0x19b69
 
-Func_19b69:: ; 19b69 (6:5b69)
+Func_19b69::
 	call IncrementXCell
 	ld a, [hl]
 	and a
 	ret z
 	jr Func_19b5c
-; 0x19b71
 
-DecrementXCell: ; 19b71 (6:5b71)
+DecrementXCell:
 	ld hl, wXCell
 	dec [hl]
 	ret
-; 0x19b76
 
-IncrementXCell: ; 19b76 (6:5b76)
+IncrementXCell:
 	ld hl, wXCell
 	inc [hl]
 	ret
-; 0x19b7b
 
-Func_19b7b:: ; 19b7b (6:5b7b)
+Func_19b7b::
 	ld hl, hPos
 	call GetCell
 	ld a, 1 << 1
@@ -3632,9 +3559,8 @@ Func_19b7b:: ; 19b7b (6:5b7b)
 	call Func_18000
 	ld b, a
 	ret
-; 0x19b8b
 
-Func_19b8b:: ; 19b8b (6:5b8b)
+Func_19b8b::
 	ld hl, hPos
 	call GetCell
 	ld a, 1 << 2
@@ -3642,9 +3568,8 @@ Func_19b8b:: ; 19b8b (6:5b8b)
 	call Func_18000
 	ld b, a
 	ret
-; 0x19b9b
 
-Func_19b9b:: ; 19b9b (6:5b9b)
+Func_19b9b::
 	ld hl, hPos
 	call GetCell
 	ld a, 1 << 3
@@ -3652,10 +3577,9 @@ Func_19b9b:: ; 19b9b (6:5b9b)
 	call Func_18000
 	ld b, a
 	ret
-; 0x19bab
 
 ; unreferenced
-Func_19bab: ; 19bab (6:5bab)
+Func_19bab:
 	ld hl, wXCell
 	dec [hl]
 	ld a, [hld]
@@ -3664,10 +3588,9 @@ Func_19bab: ; 19bab (6:5bab)
 	call Func_18000
 	ld b, a
 	ret
-; 0x19bb7
 
 ; unreferenced
-Func_19bb7: ; 19bb7 (6:5bb7)
+Func_19bb7:
 	ld hl, wXCell
 	inc [hl]
 	ld a, [hld]
@@ -3676,20 +3599,18 @@ Func_19bb7: ; 19bb7 (6:5bb7)
 	call Func_18000
 	ld b, a
 	ret
-; 0x19bc3
 
-Func_19bc3:: ; 19bc3 (6:5bc3)
+Func_19bc3::
 	ld hl, hPos
 	call GetCell
 	ld a, 1 << 4
 	ld [wc0d6], a
-Func_19bce: ; 19bce (6:5bce)
+Func_19bce:
 	call Func_18000
 	ld b, a
 	ret
-; 0x19bd3
 
-Func_19bd3: ; 19bd3 (6:5bd3)
+Func_19bd3:
 	ld hl, wYCell
 	dec [hl]
 	ld a, [hl]
@@ -3706,9 +3627,8 @@ Func_19bd3: ; 19bd3 (6:5bd3)
 	ld l, [hl]
 	ld h, a
 	jr Func_19bce
-; 0x19beb
 
-Func_19beb: ; 19beb (6:5beb)
+Func_19beb:
 	ld hl, hPos
 	call GetCell
 	ld a, 1 << 5
@@ -3716,9 +3636,8 @@ Func_19beb: ; 19beb (6:5beb)
 	call Func_18000
 	ld b, a
 	ret
-; 0x19bfb
 
-Func_19bfb: ; 19bfb (6:5bfb)
+Func_19bfb:
 	ld hl, hPos
 	call GetCell
 	ld a, 1 << 6
@@ -3726,9 +3645,8 @@ Func_19bfb: ; 19bfb (6:5bfb)
 	call Func_18000
 	ld b, a
 	ret
-; 0x19c0b
 
-Func_19c0b: ; 19c0b (6:5c0b)
+Func_19c0b:
 	ld hl, hPos
 	call GetCell
 	ld a, 1 << 7
@@ -3736,4 +3654,3 @@ Func_19c0b: ; 19c0b (6:5c0b)
 	call Func_18000
 	ld b, a
 	ret
-; 0x19c1b

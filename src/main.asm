@@ -55,7 +55,7 @@ INCLUDE "engine/level/wario_states_3.asm"
 SECTION "Object Functions 1", ROMX
 
 ; sequence of y-offsets used in Func_42725
-Data_40000: ; 40000 (10:4000)
+Data_40000:
 	db  0,  0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  0,  0,  0,  0,  0, -1,  0, -1,  0, -1,  0, -1,  0, -1,  0,  0,  0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,  0,  0,  0,  0,  0,  0, -1,  0, -1,  0, -1,  0, -1,  0, -1, $80
 
 INCLUDE "engine/level/objects/spearhead.asm"

@@ -1,4 +1,4 @@
-YellowBellyBodyFunc: ; 51356 (14:5356)
+YellowBellyBodyFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -783,7 +783,7 @@ YellowBellyBodyFunc: ; 51356 (14:5356)
 	ld [hl], a
 	jp Func_51c62
 
-PumpFunc: ; 518b7 (14:58b7)
+PumpFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_518c6)
 	ld [hld], a
@@ -1036,7 +1036,7 @@ PumpFunc: ; 518b7 (14:58b7)
 	ld [wCurObjXPos + 1], a
 	ret
 
-YellowBellyArrowFunc: ; 51a65 (14:5a65)
+YellowBellyArrowFunc:
 .Left:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_51a7d)
@@ -1181,7 +1181,7 @@ YellowBellyArrowFunc: ; 51a65 (14:5a65)
 	ld [wCurObjAction], a
 	ret
 
-YellowBellyHeadFunc: ; 51b6e (14:5b6e)
+YellowBellyHeadFunc:
 	ld hl, wCurObjFlags
 	set OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -1289,7 +1289,7 @@ YellowBellyHeadFunc: ; 51b6e (14:5b6e)
 	ld [wCurObjFlags], a
 	ret
 
-YellowBellyPlatformFunc: ; 51c18 (14:5c18)
+YellowBellyPlatformFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set 3, [hl]
@@ -1332,23 +1332,21 @@ YellowBellyPlatformFunc: ; 51c18 (14:5c18)
 	ld [wIsBossBattle], a
 ;	fallthrough
 
-Func_51c62: ; 51c62 (14:5c62)
+Func_51c62:
 	ld hl, wCurObjUnk02
 	ld e, $07
 	farcall Func_ba42
 	ret
-; 0x51c77
 
-Func_51c77: ; 51c77 (14:5c77)
+Func_51c77:
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
 	xor a
 	ld [wCurObjFlags], a
 	ret
-; 0x51c81
 
-Pals_51c81: ; 51c81 (14:5c81)
+Pals_51c81:
 	rgb  0, 25,  1
 	rgb  8,  8,  7
 	rgb  9,  5,  0
@@ -1364,7 +1362,7 @@ Pals_51c81: ; 51c81 (14:5c81)
 	rgb  9,  5,  0
 	rgb  0,  0,  0
 
-Pals_51c99: ; 51c99 (14:5c99)
+Pals_51c99:
 	rgb  0, 25,  1
 	rgb 17, 17, 17
 	rgb 20, 10,  0
@@ -1380,7 +1378,7 @@ Pals_51c99: ; 51c99 (14:5c99)
 	rgb 20, 10,  0
 	rgb  0,  0,  0
 
-Pals_51cb1: ; 51cb1 (14:5cb1)
+Pals_51cb1:
 	rgb  0, 25,  1
 	rgb 31, 31, 28
 	rgb 31, 15,  0
@@ -1396,7 +1394,7 @@ Pals_51cb1: ; 51cb1 (14:5cb1)
 	rgb 31, 15,  0
 	rgb  0,  0,  0
 
-Pals_51cc9: ; 51cc9 (14:5cc9)
+Pals_51cc9:
 	rgb  0, 25,  1
 	rgb 31, 15, 15
 	rgb  0, 15, 31
@@ -1412,7 +1410,7 @@ Pals_51cc9: ; 51cc9 (14:5cc9)
 	rgb  0, 15, 31
 	rgb  0,  0,  0
 
-Pals_51ce1: ; 51ce1 (14:5ce1)
+Pals_51ce1:
 	rgb  0, 25,  1
 	rgb 31, 31, 31
 	rgb 17, 31, 17

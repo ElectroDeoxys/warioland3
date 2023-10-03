@@ -1,4 +1,4 @@
-WaterSparkFunc: ; 4a45d (12:645d)
+WaterSparkFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -51,4 +51,3 @@ WaterSparkFunc: ; 4a45d (12:645d)
 	ld [hld], a
 	ld de, Frameset_69b1e
 	jp SetObjectFramesetPtr
-; 0x4a4b5

@@ -1,4 +1,4 @@
-FlameBlockTorchUpdate: ; 40b14 (10:4b14)
+FlameBlockTorchUpdate:
 	ld hl, wCurObjState
 	ld a, [hl]
 	and a
@@ -59,9 +59,8 @@ FlameBlockTorchUpdate: ; 40b14 (10:4b14)
 	ld hl, wNumLitTorches
 	dec [hl]
 	ret
-; 0x40b8c
 
-FlameBlockTorchFunc: ; 40b8c (10:4b8c)
+FlameBlockTorchFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(FlameBlockTorchUpdate)
 	ld [hld], a
@@ -71,7 +70,7 @@ FlameBlockTorchFunc: ; 40b8c (10:4b8c)
 	call SetObjectFramesetPtr
 	jr TorchFunc.got_frameset
 
-TorchNoEmbersFunc: ; 40b9d (10:4b9d)
+TorchNoEmbersFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Update)
 	ld [hld], a
@@ -82,7 +81,7 @@ TorchNoEmbersFunc: ; 40b9d (10:4b9d)
 .Update:
 	ret
 
-TorchFunc: ; 40ba9 (10:4ba9)
+TorchFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Update)
 	ld [hld], a
@@ -147,10 +146,9 @@ TorchFunc: ; 40ba9 (10:4ba9)
 	bit OBJFLAG_ON_SCREEN_F, [hl]
 	play_sfx nz, SFX_073
 	jp CreateObjectFromCurObjPos
-; 0x40c19
 
 ; unreferenced?
-Func_40c19: ; 40c19 (10:4c19)
+Func_40c19:
 	ld a, [wWarioScreenXPos]
 	add $2a
 	ld b, a
@@ -172,23 +170,23 @@ Func_40c19: ; 40c19 (10:4c19)
 	call ApplyObjSetMovement
 	jr TorchEmberCommonFunc
 
-TorchEmberLeft1Func: ; 40c3f (10:4c3f)
+TorchEmberLeft1Func:
 	call MoveObjectLeft
 	jr TorchEmberCommonFunc
 
-TorchEmberRight1Func: ; 40c44 (10:4c44)
+TorchEmberRight1Func:
 	call MoveObjectRight
 	jr TorchEmberCommonFunc
 
-TorchEmberLeft2Func: ; 40c49 (10:4c49)
+TorchEmberLeft2Func:
 	call MoveObjectLeft_Slow
 	jr TorchEmberCommonFunc
 
-TorchEmberRight2Func: ; 40c4e (10:4c4e)
+TorchEmberRight2Func:
 	call MoveObjectRight_Slow
 ;	fallthrough
 
-TorchEmberCommonFunc: ; 40c51 (10:4c51)
+TorchEmberCommonFunc:
 	ld bc, Data_60320
 	call ApplyObjYMovement
 	ld hl, wCurObjFlags
@@ -235,4 +233,3 @@ TorchEmberCommonFunc: ; 40c51 (10:4c51)
 	xor a
 	ld [wCurObjFlags], a
 	ret
-; 0x40ca1

@@ -1,4 +1,4 @@
-Music_Epilogue_Ch1: ; 3b2ba (0e:72ba)
+Music_Epilogue_Ch1:
 	semitone_offset 0
 
 .loop
@@ -93,9 +93,8 @@ Music_Epilogue_Ch1: ; 3b2ba (0e:72ba)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3b337
 
-Music_Epilogue_Ch2: ; 3b337 (0e:7337)
+Music_Epilogue_Ch2:
 	semitone_offset 0
 
 .loop
@@ -189,9 +188,8 @@ Music_Epilogue_Ch2: ; 3b337 (0e:7337)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3b3b3
 
-Music_Epilogue_Ch3: ; 3b3b3 (0e:73b3)
+Music_Epilogue_Ch3:
 	semitone_offset 0
 
 .loop
@@ -354,9 +352,8 @@ Music_Epilogue_Ch3: ; 3b3b3 (0e:73b3)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3b48d
 
-Music_Epilogue: ; 3b48d (0e:748d)
+Music_Epilogue:
 	db 3, 2
 	dw Music_Epilogue_Ch1
 	dw Music_Epilogue_Ch2
@@ -370,4 +367,3 @@ Music_Epilogue: ; 3b48d (0e:748d)
 	dw Music_Epilogue_Ch1.end
 	dw Music_Epilogue_Ch2.end
 	dw Music_Epilogue_Ch3.end
-; 0x3b4a1

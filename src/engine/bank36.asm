@@ -1,10 +1,10 @@
-HiddenFigure1Gfx:: ; d8000 (36:4000)
+HiddenFigure1Gfx::
 INCBIN "gfx/enemies/hidden_figure1.2bpp"
 
-HiddenFigure2Gfx:: ; d9800 (36:5800)
+HiddenFigure2Gfx::
 INCBIN "gfx/enemies/hidden_figure2.2bpp"
 
-Pals_db000: ; db000 (36:7000)
+Pals_db000:
 	rgb  1,  4,  9
 	rgb 31,  0,  0
 	rgb  6, 10, 10
@@ -44,9 +44,8 @@ Pals_db000: ; db000 (36:7000)
 	rgb 22, 13,  2
 	rgb 13,  6,  1
 	rgb  5,  2,  0
-; 0xdb040
 
-Pals_db040: ; db040 (36:7040)
+Pals_db040:
 	rgb 21, 21, 21
 	rgb 31, 31, 31
 	rgb 31,  0,  0
@@ -71,21 +70,20 @@ Pals_db040: ; db040 (36:7040)
 	rgb  0, 21, 31
 	rgb 31, 25,  0
 	rgb  0,  0,  0
-; 0xdb068
 
-HiddenFigure1Map:: ; db068 (36:7068)
+HiddenFigure1Map::
 INCBIN "gfx/bgmaps/hidden_figure1.bin"
 	
-HiddenFigure2Map:: ; db193 (36:7193)
+HiddenFigure2Map::
 INCBIN "gfx/bgmaps/hidden_figure2.bin"
 
-HiddenFigure3Map:: ; db23b (36:723b)
+HiddenFigure3Map::
 INCBIN "gfx/bgmaps/hidden_figure3.bin"
 	
-HiddenFigure4Map:: ; db268 (36:7268)
+HiddenFigure4Map::
 INCBIN "gfx/bgmaps/hidden_figure4.bin"
 
-_GameOverStateTable: ; db277 (36:7277)
+_GameOverStateTable:
 	ld a, [wSubState]
 	jumptable
 
@@ -105,9 +103,8 @@ _GameOverStateTable: ; db277 (36:7277)
 	dw DebugReset
 	dw DebugReset
 	dw DebugReset
-; 0xdb29b
 
-Func_db29b: ; db29b (36:729b)
+Func_db29b:
 	call DisableLCD
 	call FillBGMap0_With7f
 	call ClearVirtualOAM
@@ -169,9 +166,8 @@ Func_db29b: ; db29b (36:729b)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0xdb317
 
-Func_db317: ; db317 (36:7317)
+Func_db317:
 	ld a, [wGameOverWarioVar]
 	dec a
 	jr z, .asm_db338
@@ -262,9 +258,8 @@ Func_db317: ; db317 (36:7317)
 .Func_db3db
 	play_sfx SFX_0F5
 	ret
-; 0xdb3e4
 
-Func_db3e4: ; db3e4 (36:73e4)
+Func_db3e4:
 	ld hl, wGameOverWarioFramesetPtr + 1
 	farcall BANK(Frameset_aaccb), UpdateObjAnim
 
@@ -283,13 +278,11 @@ Func_db3e4: ; db3e4 (36:73e4)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0xdb41b
 
-Func_db41b: ; db41b (36:741b)
+Func_db41b:
 	jp Init
-; 0xdb41e
 
-LoadHiddenFigureGfx: ; db41e (36:741e)
+LoadHiddenFigureGfx:
 	call .LoadPals
 	call .LoadTiles
 	call .LoadMap
@@ -339,9 +332,8 @@ LoadHiddenFigureGfx: ; db41e (36:741e)
 	ld bc, v0BGMap1
 	call Decompress
 	ret
-; 0xdb486
 
-LoadGameOverPals: ; db486 (36:7486)
+LoadGameOverPals:
 	ld hl, Pals_db509
 	call LoadPalsToTempPals1
 	ld hl, Pals_db549
@@ -352,9 +344,8 @@ LoadGameOverPals: ; db486 (36:7486)
 	ld b, 1 palettes
 	farcall BANK(Pals_86ad5), CopyHLToDE_Short
 	ret
-; 0xdb4aa
 
-LoadGameOverGfx: ; db4aa (36:74aa)
+LoadGameOverGfx:
 	xor a
 	ldh [rVBK], a
 	ld hl, GameOverGfx
@@ -365,9 +356,8 @@ LoadGameOverGfx: ; db4aa (36:74aa)
 	ld bc, $80 tiles
 	farcall BANK(WarioSleepGfx), CopyHLToDE_BC
 	ret
-; 0xdb4cf
 
-Func_db4cf: ; db4cf (36:74cf)
+Func_db4cf:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, BGMap_dbb8f
@@ -379,9 +369,8 @@ Func_db4cf: ; db4cf (36:74cf)
 	ld bc, v0BGMap0
 	call Decompress
 	ret
-; 0xdb4e9
 
-Func_db4e9: ; db4e9 (36:74e9)
+Func_db4e9:
 	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
@@ -398,9 +387,8 @@ Func_db4e9: ; db4e9 (36:74e9)
 	ld hl, OAM_dbbd2
 	call TryAddSprite
 	ret
-; 0xdb509
 
-Pals_db509: ; db509 (36:7509)
+Pals_db509:
 	rgb  0,  0,  0
 	rgb 31, 31, 31
 	rgb 31,  3,  0
@@ -440,9 +428,8 @@ Pals_db509: ; db509 (36:7509)
 	rgb  0,  0,  0
 	rgb  0,  0,  0
 	rgb  0,  0,  0
-; 0xdb549
 
-Pals_db549: ; db549 (36:7549)
+Pals_db549:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -482,14 +469,13 @@ Pals_db549: ; db549 (36:7549)
 	rgb  0,  0,  0
 	rgb  0,  0,  0
 	rgb  0,  0,  0
-; 0xdb589
 
 GameOverGfx: INCBIN "gfx/game_over.2bpp.lz"
 
 BGMap_dbaee: INCBIN "gfx/bgmaps/map_dbaee.bin"
 BGMap_dbb8f: INCBIN "gfx/bgmaps/map_dbb8f.bin"
 
-OAM_dbbd2: ; dbbd2 (36:7bd2)
+OAM_dbbd2:
 	dw .frame_0
 
 .frame_0
@@ -502,9 +488,7 @@ OAM_dbbd2: ; dbbd2 (36:7bd2)
 	frame_oam  32,  56, $8c, 2
 	frame_oam  32,  72, $8e, 2
 	db $80
-; 0xdbbf5
 
-Frameset_dbbf5: ; dbbf5 (36:7bf5)
+Frameset_dbbf5:
 	db $00,  4
 	db $ff
-; 0xdbbf8

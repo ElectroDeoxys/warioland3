@@ -1,4 +1,4 @@
-SilkyFunc: ; 42d1d (10:6d1d)
+SilkyFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Init)
 	ld [hld], a
@@ -851,4 +851,3 @@ SilkyFunc: ; 42d1d (10:6d1d)
 	or OBJ_INTERACTION_00
 	ld [hld], a
 	ret
-; 0x43278

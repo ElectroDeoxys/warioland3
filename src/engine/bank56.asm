@@ -1,4 +1,4 @@
-_HandleTempleShakeAndRocks: ; 158000 (56:4000)
+_HandleTempleShakeAndRocks:
 	call HandleTempleScreenShake
 	call HandleTempleRock1Fall
 	call HandleTempleRock2Fall
@@ -11,9 +11,8 @@ _HandleTempleShakeAndRocks: ; 158000 (56:4000)
 	call HandleTempleRock9Bounce
 	call HandleTempleRock10Bounce
 	ret
-; 0x158022
 
-HandleTempleScreenShake: ; 158022 (56:4022)
+HandleTempleScreenShake:
 	ld hl, w2d896
 	ld a, [hli]
 	and a
@@ -127,9 +126,8 @@ HandleTempleScreenShake: ; 158022 (56:4022)
 	sub $07
 	ld [hl], a
 	ret
-; 0x1580c8
 
-Func_1580c8: ; 1580c8 (56:40c8)
+Func_1580c8:
 	ld a, [bc]
 	cp [hl]
 	ret c
@@ -144,11 +142,10 @@ Func_1580c8: ; 1580c8 (56:40c8)
 .asm_1580d6
 	ld [hld], a ; counter
 	ld [hl], a  ; action
-StubTempleRockFunc: ; 1580d8 (56:40d8)
+StubTempleRockFunc:
 	ret
-; 0x1580d9
 
-SetTempleRockSize_WithLarge: ; 1580d9 (56:40d9)
+SetTempleRockSize_WithLarge:
 	cp TEMPLE_ROCK_SIZE_LARGE
 	ld a, $9
 	jr c, .set_state
@@ -163,9 +160,8 @@ SetTempleRockSize_WithLarge: ; 1580d9 (56:40d9)
 	add b
 .set_state
 	jp SetSceneObjState
-; 0x1580ec
 
-SetTempleRockSize_WithoutLarge: ; 1580ec (56:40ec)
+SetTempleRockSize_WithoutLarge:
 	cp TEMPLE_ROCK_SIZE_LARGE
 	ld a, $9
 	jr c, .set_state
@@ -176,11 +172,10 @@ SetTempleRockSize_WithoutLarge: ; 1580ec (56:40ec)
 	add b
 .set_state
 	jp SetSceneObjState
-; 0x1580fa
 
-SpawnRock_Top: ; 1580fa (56:40fa)
+SpawnRock_Top:
 	xor a
-SpawnRock: ; 1580fb (56:40fb)
+SpawnRock:
 	ld [hli], a ; y
 	ld a, d
 	bit 3, c
@@ -189,17 +184,14 @@ SpawnRock: ; 1580fb (56:40fb)
 .got_x_coord
 	ld [hl], a ; x
 	ret
-; 0x158104
 
-SpawnRock_Bottom: ; 158104 (56:4104)
+SpawnRock_Bottom:
 	ld a, $60
 	jr SpawnRock
-; 0x158108
 
-PlayFallingRockSFX: ; 158108 (56:4108)
+PlayFallingRockSFX:
 	play_sfx SFX_TEMPLE_ROCK
 	ret
-; 0x158111
 
 ; \1 = rock number
 ; \2 = scene object to use
@@ -275,7 +267,7 @@ ENDM
 	temple_rock_fall 4, wSceneObj15, FALSE, 104, 120,  96
 	temple_rock_fall 6, wSceneObj2,  FALSE,  96, 144, 160
 
-GetRockYVel: ; 15831b (56:431b)
+GetRockYVel:
 	ld a, [bc]
 	cp $2c
 	jr c, .no_cap
@@ -296,7 +288,6 @@ GetRockYVel: ; 15831b (56:431b)
 	db $02, $02, $02, $02, $02, $02, $02, $02
 	db $02, $02, $02, $02, $02, $02, $02, $02
 	db $03, $03, $03, $03
-; 0x158358
 
 ; \1 = rock number
 ; \2 = scene object to use
@@ -382,17 +373,15 @@ ENDM
 	temple_rock_bounce  9, wSceneObj10, TRUE,  DIRECTION_LEFT,   24,  32
 	temple_rock_bounce 10, wSceneObj11, TRUE,  DIRECTION_RIGHT, 128, 136
 
-BounceTempleRockRight: ; 15847e (56:447e)
+BounceTempleRockRight:
 	ld de, Data_1588de
 	jp ApplyOWMovement_Mirrored
-; 0x158484
 
-BounceTempleRockLeft: ; 158484 (56:4484)
+BounceTempleRockLeft:
 	ld de, Data_1588de
 	jp ApplyOWMovement
-; 0x15848a
 
-Func_15848a: ; 15848a (56:448a)
+Func_15848a:
 	call .Func_15849a
 	call .Func_1584da
 	call .Func_158529
@@ -400,7 +389,7 @@ Func_15848a: ; 15848a (56:448a)
 	call .Func_1585e1
 	ret
 
-.Func_15849a: ; 15849a (56:449a)
+.Func_15849a:
 	ld hl, w2d8a0
 	ld a, [hli]
 	inc [hl]
@@ -443,7 +432,7 @@ Func_15848a: ; 15848a (56:448a)
 	ld [w2d8a0], a
 	ret
 
-.Func_1584da: ; 1584da (56:44da)
+.Func_1584da:
 	ld hl, wTempleMusicBox1
 	ld a, [hli]
 	inc [hl]
@@ -623,7 +612,7 @@ Func_15848a: ; 15848a (56:448a)
 	ld [wTempleMusicBox4], a
 	ret
 
-.Func_1585e1: ; 1585e1 (56:45e1)
+.Func_1585e1:
 	ld hl, wTempleMusicBox5Counter
 	ld a, [hli]
 	inc [hl]
@@ -725,7 +714,7 @@ Func_15848a: ; 15848a (56:448a)
 .data_2
 	db -1, -1, -1, -1, -2, -1, -2, -1, -2, -2, -2, -2, -2, -2, -2, -2, $80
 
-Func_15868e: ; 15868e (56:468e)
+Func_15868e:
 	call .Func_1586a1
 	call .Func_158785
 	call .Func_1586ed
@@ -1095,7 +1084,7 @@ Func_15868e: ; 15868e (56:468e)
 	ld a, $51
 	jr .asm_15886e
 
-Data_158897: ; 158897 (56:4897)
+Data_158897:
 	db  0,  0
 	db -2,  0
 	db -2, -1
@@ -1133,7 +1122,7 @@ Data_158897: ; 158897 (56:4897)
 	db  0, -2
 	db $80
     
-Data_1588de: ; 1588de (56:48de)
+Data_1588de:
     db  0,  0
 	db -1,  0
 	db -2,  0
@@ -1171,7 +1160,7 @@ Data_1588de: ; 1588de (56:48de)
 	db -1, -1
 	db $80
 
-Data_158925: ; 158925 (56:4925)
+Data_158925:
 	db  0,  0
 	db -1,  0
 	db -2, -1
@@ -1209,7 +1198,7 @@ Data_158925: ; 158925 (56:4925)
 	db  0, -1
 	db $80
 
-_InitBestTimeList: ; 15896c (56:496c)
+_InitBestTimeList:
 	call DisableLCD
 	call FillBGMap0_With7f
 	call ClearVirtualOAM
@@ -1274,7 +1263,7 @@ _InitBestTimeList: ; 15896c (56:496c)
 	jp hTransferVirtualOAM
 .func_end
 
-_BestTimeList: ; 158a36 (56:4a36)
+_BestTimeList:
 	ld a, [wCollectionRow]
 	and a
 	jr nz, .asm_158a76
@@ -1380,7 +1369,7 @@ _BestTimeList: ; 158a36 (56:4a36)
 	scf
 	ret
 
-PrintBestTimes: ; 158ace (56:4ace)
+PrintBestTimes:
 	xor a ; LEVEL_OUT_OF_THE_WOODS
 	ld [w2dfff], a
 .loop_levels
@@ -1477,7 +1466,7 @@ PrintBestTimes: ; 158ace (56:4ace)
 	dw v0BGMap0 + $36e ; LEVEL_THE_EAST_CRATER
 	dw v0BGMap0 + $3ae ; LEVEL_FOREST_OF_FEAR
 
-Pals_158b63: ; 158b63 (56:4b63)
+Pals_158b63:
 	rgb 31, 31, 31
 	rgb 31, 20,  0
 	rgb 29,  0,  0

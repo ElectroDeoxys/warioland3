@@ -1,4 +1,4 @@
-Music_TheTidalCoast_Ch1: ; 35a7d (0d:5a7d)
+Music_TheTidalCoast_Ch1:
 	semitone_offset 251
 
 .loop
@@ -262,9 +262,8 @@ Music_TheTidalCoast_Ch1: ; 35a7d (0d:5a7d)
 	note NOTE_DURATION_12, D_3, 19
 	audio_wait_12
 	audio_end
-; 0x35bca
 
-Music_TheTidalCoast_Ch2: ; 35bca (0d:5bca)
+Music_TheTidalCoast_Ch2:
 	semitone_offset 251
 
 .loop
@@ -501,9 +500,8 @@ Music_TheTidalCoast_Ch2: ; 35bca (0d:5bca)
 	note NOTE_DURATION_18, G_3, 19
 	audio_wait_18
 	audio_end
-; 0x35cf4
 
-Music_TheTidalCoast_Ch3: ; 35cf4 (0d:5cf4)
+Music_TheTidalCoast_Ch3:
 	semitone_offset 251
 
 .loop
@@ -859,9 +857,8 @@ Music_TheTidalCoast_Ch3: ; 35cf4 (0d:5cf4)
 	note A_0
 	audio_wait_3
 	audio_end
-; 0x35eb7
 
-Music_TheTidalCoast_Ch4: ; 35eb7 (0d:5eb7)
+Music_TheTidalCoast_Ch4:
 	semitone_offset 0
 
 .loop
@@ -938,9 +935,8 @@ Music_TheTidalCoast_Ch4: ; 35eb7 (0d:5eb7)
 	note NOTE_DURATION_3, D_0
 	audio_wait_3
 	audio_end
-; 0x35f44
 
-Music_TheTidalCoast: ; 35f44 (d:5f44)
+Music_TheTidalCoast:
 	db $4, $2
 	dw Music_TheTidalCoast_Ch1
 	dw Music_TheTidalCoast_Ch2

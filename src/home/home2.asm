@@ -1,4 +1,4 @@
-LoadPermissionMap:: ; 2800 (0:2800)
+LoadPermissionMap::
 	ld a, [wRoomPermissionMap]
 	add a
 	ld e, a
@@ -43,9 +43,8 @@ LoadPermissionMap:: ; 2800 (0:2800)
 
 .reset
 	jp Init
-; 0x285c
 
-Func_285c:: ; 285c (0:285c)
+Func_285c::
 	ld a, $70
 	ld [wca5e], a
 	ld a, $58
@@ -188,9 +187,8 @@ Func_285c:: ; 285c (0:285c)
 	add $b0
 	ld [wc0c6], a
 	ret
-; 0x298d
 
-Func_298d:: ; 298d (0:298d)
+Func_298d::
 	ld a, [wRoomPermissionMap]
 	add a
 	ld e, a
@@ -212,9 +210,8 @@ Func_298d:: ; 298d (0:298d)
 	pop af
 	bankswitch
 	ret
-; 0x29bf
 
-LoadRoomTileMap:: ; 29bf (0:29bf)
+LoadRoomTileMap::
 	ld a, [wRoomTileMap]
 	add a
 	ld e, a
@@ -231,9 +228,8 @@ LoadRoomTileMap:: ; 29bf (0:29bf)
 	ldh [hCallFuncBank], a
 	hcall Decompress
 	ret
-; 0x29e7
 
-LoadRoomMainTiles:: ; 29e7 (0:29e7)
+LoadRoomMainTiles::
 	ld a, [wRoomMainTiles]
 	add a
 	ld e, a
@@ -255,9 +251,8 @@ LoadRoomMainTiles:: ; 29e7 (0:29e7)
 	pop af
 	bankswitch
 	ret
-; 0x2a19
 
-LoadRoomSpecialTiles:: ; 2a19 (0:2a19)
+LoadRoomSpecialTiles::
 	ld a, $1 ; VRAM1
 	ldh [rVBK], a
 	ld a, [wRoomSpecialTiles]
@@ -283,9 +278,8 @@ LoadRoomSpecialTiles:: ; 2a19 (0:2a19)
 	xor a
 	ldh [rVBK], a
 	ret
-; 0x2a52
 
-LoadRoomPalettes:: ; 2a52 (0:2a52)
+LoadRoomPalettes::
 	ld a, [wRoomPalettes]
 	add a ; *2
 	ld e, a
@@ -301,9 +295,8 @@ LoadRoomPalettes:: ; 2a52 (0:2a52)
 	ldh [hCallFuncBank], a
 	hcall LoadPalsToTempPals1
 	ret
-; 0x2a77
 
-UpdateRoomAnimatedPals:: ; 2a77 (0:2a77)
+UpdateRoomAnimatedPals::
 	ldh a, [rLY]
 	cp $88
 	jp nc, .done
@@ -395,4 +388,3 @@ ENDR
 	bankswitch
 .done
 	ret
-; 0x2b25

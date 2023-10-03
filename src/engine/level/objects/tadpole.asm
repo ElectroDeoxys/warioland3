@@ -1,4 +1,4 @@
-TadpoleSpawnerFunc: ; 49e34 (12:5e34)
+TadpoleSpawnerFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_49e4b)
 	ld [hld], a
@@ -51,9 +51,8 @@ TadpoleSpawnerFunc: ; 49e34 (12:5e34)
 	ld l, OBJ_UNK_02
 	farcall DespawnObject
 	ret
-; 0x49ea0
 
-TadpoleFunc: ; 49ea0 (12:5ea0)
+TadpoleFunc:
 	ld a, $81
 	ld [wCurObjAction], a
 	ld hl, wCurObjUpdateFunction + 1
@@ -227,4 +226,3 @@ TadpoleFunc: ; 49ea0 (12:5ea0)
 	xor a
 	ld [wCurObjFlags], a
 	ret
-; 0x49fc4

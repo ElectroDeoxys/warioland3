@@ -1,4 +1,4 @@
-Music_TheVastPlainNight_Ch1: ; 35494 (0d:5494)
+Music_TheVastPlainNight_Ch1:
 	semitone_offset 0
 
 .loop
@@ -126,9 +126,8 @@ Music_TheVastPlainNight_Ch1: ; 35494 (0d:5494)
 	note NOTE_DURATION_3, C_4, 19
 	audio_wait_3
 	audio_end
-; 0x35526
 
-Music_TheVastPlainNight_Ch2: ; 35526 (0d:5526)
+Music_TheVastPlainNight_Ch2:
 	semitone_offset 0
 
 .loop
@@ -255,9 +254,8 @@ Music_TheVastPlainNight_Ch2: ; 35526 (0d:5526)
 	note NOTE_DURATION_3, E_3, 19
 	audio_wait_3
 	audio_end
-; 0x355b8
 
-Music_TheVastPlainNight_Ch3: ; 355b8 (0d:55b8)
+Music_TheVastPlainNight_Ch3:
 	semitone_offset 0
 
 .loop
@@ -446,9 +444,8 @@ Music_TheVastPlainNight_Ch3: ; 355b8 (0d:55b8)
 	note F_1
 	audio_wait_3
 	audio_end
-; 0x35690
 
-Music_TheVastPlainNight_Ch4: ; 35690 (0d:5690)
+Music_TheVastPlainNight_Ch4:
 	semitone_offset 0
 
 .loop
@@ -546,9 +543,8 @@ Music_TheVastPlainNight_Ch4: ; 35690 (0d:5690)
 	note F#0
 	audio_wait_3
 	audio_end
-; 0x35718
 
-Music_TheVastPlainNight: ; 35718 (d:5718)
+Music_TheVastPlainNight:
 	db $4, $2
 	dw Music_TheVastPlainNight_Ch1
 	dw Music_TheVastPlainNight_Ch2

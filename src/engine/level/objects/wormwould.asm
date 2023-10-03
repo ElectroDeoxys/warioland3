@@ -1,4 +1,4 @@
-WormwouldFunc: ; 54020 (15:4020)
+WormwouldFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_54044)
 	ld [hld], a
@@ -534,9 +534,8 @@ WormwouldFunc: ; 54020 (15:4020)
 	rlca
 	jp nc, MoveObjectRight
 	jp MoveObjectLeft
-; 0x543e9
 
-RollingRockFunc_Left: ; 543e9 (15:43e9)
+RollingRockFunc_Left:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
@@ -551,7 +550,7 @@ RollingRockFunc_Left: ; 543e9 (15:43e9)
 	call MoveObjectLeft_Fast
 	jr RollingRockFunc
 
-RollingRockFunc_Right: ; 54401 (15:4401)
+RollingRockFunc_Right:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
@@ -566,7 +565,7 @@ RollingRockFunc_Right: ; 54401 (15:4401)
 	call MoveObjectRight_Fast
 ;	fallthrough
 
-RollingRockFunc: ; 54417 (15:4417)
+RollingRockFunc:
 	ld a, [wCurObjVar1]
 	and a
 	jr nz, .asm_54422
@@ -597,9 +596,8 @@ RollingRockFunc: ; 54417 (15:4417)
 	rlca
 	jp c, MoveObjectRight_Fast
 	jp MoveObjectLeft_Fast
-; 0x54456
 
-PalmTreeSpawnerFunc: ; 54456 (15:4456)
+PalmTreeSpawnerFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.SpawnTrees)
 	ld [hld], a
@@ -644,9 +642,8 @@ PalmTreeSpawnerFunc: ; 54456 (15:4456)
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ret
-; 0x544a2
 
-PalmTreeFunc: ; 544a2 (15:44a2)
+PalmTreeFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Update)
 	ld [hld], a
@@ -682,11 +679,9 @@ PalmTreeFunc: ; 544a2 (15:44a2)
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ret
-; 0x544dd
 
-Pals_544dd: ; 544dd (15:44dd)
+Pals_544dd:
 	rgb 31, 31, 31
 	rgb  0, 23,  5
 	rgb  0, 12,  5
 	rgb  0,  5,  0
-; 0x544e5

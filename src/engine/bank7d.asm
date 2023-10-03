@@ -1,12 +1,11 @@
-LoadPauseMenuPals: ; 1f4000 (7d:4000)
+LoadPauseMenuPals:
 	ld hl, Pals_1f4182
 	call LoadPalsToTempPals1
 	ld hl, Pals_1f41c2
 	call LoadPalsToTempPals2
 	ret
-; 0x1f400d
 
-LoadPauseMenuGfx: ; 1f400d (7d:400d)
+LoadPauseMenuGfx:
 	ld hl, PauseMenuGfx
 	ld bc, v0Tiles0
 	call Decompress
@@ -33,9 +32,8 @@ LoadPauseMenuGfx: ; 1f400d (7d:400d)
 	ld bc, $20 tiles
 	call CopyHLToDE_BC
 	ret
-; 0x1f403f
 
-Func_1f403f: ; 1f403f (7d:403f)
+Func_1f403f:
 	ld a, [wGameModeFlags]
 	bit MODE_TIME_ATTACK_F, a
 	jr nz, .asm_1f4060
@@ -162,17 +160,15 @@ Func_1f403f: ; 1f403f (7d:403f)
 	ld [hli], a
 	add hl, bc
 	ret
-; 0x1f4117
 
-LoadSaveScreenPals: ; 1f4117 (7d:4117)
+LoadSaveScreenPals:
 	ld hl, Pals_1f628c
 	call LoadPalsToTempPals1
 	ld hl, Pals_1f628c
 	call LoadPalsToTempPals2
 	ret
-; 0x1f4124
 
-LoadSaveScreenGfx: ; 1f4124 (7d:4124)
+LoadSaveScreenGfx:
 	xor a
 	ldh [rVBK], a
 	; unnecessary bankswitch...
@@ -190,9 +186,8 @@ LoadSaveScreenGfx: ; 1f4124 (7d:4124)
 	ld [wTempBank], a
 	call FarCopyHLToDE_BC
 	ret
-; 0x1f414e
 
-PrintNowSavingBox: ; 1f414e (7d:414e)
+PrintNowSavingBox:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, BGMap_1f69f9
@@ -204,9 +199,8 @@ PrintNowSavingBox: ; 1f414e (7d:414e)
 	ld bc, v0BGMap0
 	call Decompress
 	ret
-; 0x1f4168
 
-PrintSaveCompleteBox: ; 1f4168 (7d:4168)
+PrintSaveCompleteBox:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, BGMap_1f6ac2
@@ -218,9 +212,8 @@ PrintSaveCompleteBox: ; 1f4168 (7d:4168)
 	ld bc, v0BGMap0
 	call Decompress
 	ret
-; 0x1f4182
 
-Pals_1f4182: ; 1f4182 (7d:4182)
+Pals_1f4182:
 	rgb 31, 31, 31
 	rgb 21, 21, 19
 	rgb 10, 10,  8
@@ -260,9 +253,8 @@ Pals_1f4182: ; 1f4182 (7d:4182)
 	rgb 11, 19, 31
 	rgb  9, 10, 31
 	rgb  0,  0,  0
-; 0x1f41c2
 
-Pals_1f41c2: ; 1f41c2 (7d:41c2)
+Pals_1f41c2:
 	rgb  0, 22, 16
 	rgb 21, 21, 19
 	rgb 10, 10,  8
@@ -302,34 +294,32 @@ Pals_1f41c2: ; 1f41c2 (7d:41c2)
 	rgb 31, 31,  0
 	rgb 31, 14,  0
 	rgb  0,  0,  0
-; 0x1f4202
 
-PauseMenuGfx: ; 1f4202 (7d:4202)
+PauseMenuGfx:
 INCBIN "gfx/pause/pause_menu.2bpp.lz"
 
-ActionHelpOwlGfx: ; 1f57e1 (7d:47e1)
+ActionHelpOwlGfx:
 INCBIN "gfx/pause/action_help_owl.2bpp"
 
-ActionHelpRailGfx: ; 1f59e1 (7d:49e1)
+ActionHelpRailGfx:
 INCBIN "gfx/pause/action_help_rail.2bpp"
 
-ActionHelpVampireGfx: ; 1f5be1 (7d:4be1)
+ActionHelpVampireGfx:
 INCBIN "gfx/pause/action_help_vampire.2bpp"
 
-BGMap_1f5de1: ; 1f5de1 (7d:5de1)
+BGMap_1f5de1:
 INCBIN "gfx/bgmaps/map_1f5de1.bin"
 
-BGMap_1f5f49: ; 1f5f49 (7d:5f49)
+BGMap_1f5f49:
 INCBIN "gfx/bgmaps/map_1f5f49.bin"
 
-BGMap_1f603a: ; 1f603a (7d:603a)
+BGMap_1f603a:
 INCBIN "gfx/bgmaps/map_1f603a.bin"
 
-BGMap_1f6194: ; 1f6194 (7d:6194)
+BGMap_1f6194:
 INCBIN "gfx/bgmaps/map_1f6194.bin"
-; 0x1f628c
 
-Pals_1f628c: ; 1f628c (7d:628c)
+Pals_1f628c:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -369,19 +359,18 @@ Pals_1f628c: ; 1f628c (7d:628c)
 	rgb 31, 13,  0
 	rgb 18,  3, 31
 	rgb 28,  0,  4
-; 0x1f62cc
 
-SaveBoxGfx: ; 1f62cc (7d:62cc)
+SaveBoxGfx:
 INCBIN "gfx/save_box.2bpp.lz"
 
-BGMap_1f6949: ; 1f6949 (7d:6949)
+BGMap_1f6949:
 INCBIN "gfx/bgmaps/map_1f6949.bin"
 
-BGMap_1f69f9: ; 1f69f9 (7d:69f9)
+BGMap_1f69f9:
 INCBIN "gfx/bgmaps/map_1f69f9.bin"
 
-BGMap_1f6a2e: ; 1f6a2e (7d:6a2e)
+BGMap_1f6a2e:
 INCBIN "gfx/bgmaps/map_1f6a2e.bin"
 
-BGMap_1f6ac2: ; 1f6ac2 (7d:6ac2)
+BGMap_1f6ac2:
 INCBIN "gfx/bgmaps/map_1f6ac2.bin"

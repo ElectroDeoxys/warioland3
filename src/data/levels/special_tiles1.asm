@@ -1,23 +1,23 @@
-SpecialTiles0:: ; 138000 (4e:4000)
+SpecialTiles0::
 INCBIN "gfx/levels/special_tiles0.2bpp"
 
-SpecialTiles1:: ; 138800 (4e:4800)
+SpecialTiles1::
 INCBIN "gfx/levels/special_tiles1.2bpp"
 
-SpecialTiles2:: ; 139000 (4e:5000)
+SpecialTiles2::
 INCBIN "gfx/levels/special_tiles2.2bpp"
 
-SpecialTiles3:: ; 139800 (4e:5800)
+SpecialTiles3::
 INCBIN "gfx/levels/special_tiles3.2bpp"
 
-SpecialTiles4:: ; 13a000 (4e:6000)
+SpecialTiles4::
 INCBIN "gfx/levels/special_tiles4.2bpp"
 
-SpecialTiles5:: ; 13a800 (4e:6800)
+SpecialTiles5::
 INCBIN "gfx/levels/special_tiles5.2bpp"
 
-SpecialTiles6:: ; 13b000 (4e:7000)
+SpecialTiles6::
 INCBIN "gfx/levels/special_tiles6.2bpp"
 
-SpecialTiles7:: ; 13b800 (4e:7800)
+SpecialTiles7::
 INCBIN "gfx/levels/special_tiles7.2bpp"

@@ -1,4 +1,4 @@
-CreditsText: ; 161d0f (58:5d0f)
+CreditsText:
 	db " WARIO LAND3\n"
 	db "\n"
 	db "    STAFF\n"
@@ -287,4 +287,3 @@ CreditsText: ; 161d0f (58:5d0f)
 	db "\n"
 	db "\n"
 	db "\n"
-; 0x1620e5

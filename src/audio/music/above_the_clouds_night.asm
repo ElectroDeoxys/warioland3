@@ -1,4 +1,4 @@
-Music_AboveTheCloudsNight_Ch1: ; 343a5 (0d:43a5)
+Music_AboveTheCloudsNight_Ch1:
 	semitone_offset 0
 
 .loop
@@ -258,9 +258,8 @@ Music_AboveTheCloudsNight_Ch1: ; 343a5 (0d:43a5)
 	audio_jump .loop
 .end
 	audio_end
-; 0x344e9
 
-Music_AboveTheCloudsNight_Ch2: ; 344e9 (0d:44e9)
+Music_AboveTheCloudsNight_Ch2:
 	semitone_offset 0
 
 .loop
@@ -558,9 +557,8 @@ Music_AboveTheCloudsNight_Ch2: ; 344e9 (0d:44e9)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3465c
 
-Music_AboveTheCloudsNight_Ch3: ; 3465c (0d:465c)
+Music_AboveTheCloudsNight_Ch3:
 	semitone_offset 0
 
 .loop
@@ -955,9 +953,8 @@ Music_AboveTheCloudsNight_Ch3: ; 3465c (0d:465c)
 .end
 	audio_wait_4
 	audio_end
-; 0x3481c
 
-Music_AboveTheCloudsNight: ; 3481c (d:481c)
+Music_AboveTheCloudsNight:
 	db $3, $2
 	dw Music_AboveTheCloudsNight_Ch1
 	dw Music_AboveTheCloudsNight_Ch2

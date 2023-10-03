@@ -1,4 +1,4 @@
-ZipLineFunc: ; 49326 (12:5326)
+ZipLineFunc:
 	ld hl, wCurObjSubState
 	ld a, [wCurObjUnk07]
 	cp $27
@@ -267,4 +267,3 @@ ZipLineFunc: ; 49326 (12:5326)
 	ret nz
 	play_sfx SFX_08C
 	ret
-; 0x4952d

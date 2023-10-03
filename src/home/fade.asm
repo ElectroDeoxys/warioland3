@@ -1,19 +1,19 @@
-FadeBGToWhite_Normal:: ; 46d (0:46d)
+FadeBGToWhite_Normal::
 	ld a, FADE_SPEED_NORMAL
 	ld [wFadeSpeed], a
 	jr FadeBGToWhite
 
-SlowFadeBGToWhite:: ; 474 (0:474)
+SlowFadeBGToWhite::
 	ld a, FADE_SPEED_FAST
 	ld [wFadeSpeed], a
 	jr FadeBGToWhite
 
-FastFadeToWhite:: ; 47b (0:47b)
+FastFadeToWhite::
 	xor a ; FADE_SPEED_SLOW
 	ld [wFadeSpeed], a
 	; fallthrough
 
-FadeBGToWhite:: ; 47f (0:47f)
+FadeBGToWhite::
 	ld a, [wPalFadeCounter]
 	cp 2
 	jr nc, .lighten
@@ -173,7 +173,7 @@ FadeBGToWhite:: ; 47f (0:47f)
 	ret
 
 ; unreferenced
-Func_54e: ; 54e (0:54e)
+Func_54e:
 	ld a, [wPalFadeCounter]
 	cp $02
 	jr nc, .asm_568
@@ -279,26 +279,25 @@ Func_54e: ; 54e (0:54e)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0x5df
 
-DarkenBGToPal_Normal:: ; 5df (0:5df)
+DarkenBGToPal_Normal::
 	ld a, FADE_SPEED_NORMAL
 	ld [wFadeSpeed], a
 	jr DarkenBGToPal
 
-DarkenBGToPal_Fast:: ; 5e6 (0:5e6)
+DarkenBGToPal_Fast::
 	ld a, FADE_SPEED_FAST
 	ld [wFadeSpeed], a
 	jr DarkenBGToPal
 
-SlowFadeFromWhite:: ; 5ed (0:5ed)
+SlowFadeFromWhite::
 	xor a ; FADE_SPEED_SLOW
 	ld [wFadeSpeed], a
 	; fallthrough
 
 ; fades BG palettes to wTempPals1
 ; gradually darkens up to wTempPals1
-DarkenBGToPal:: ; 5f1 (0:5f1)
+DarkenBGToPal::
 	ld a, [wPalFadeCounter]
 	cp 2
 	jr nc, .asm_60b
@@ -500,12 +499,11 @@ DarkenBGToPal:: ; 5f1 (0:5f1)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0x6fa
 
 ; fades BG palettes to wTempPals1
 ; gradually lightens up to wTempPals1
 ; when fading is complete, advances wSubState
-SlowFadeInScreen:: ; 6fa (0:6fa)
+SlowFadeInScreen::
 	ld a, [wPalFadeCounter]
 	cp 2
 	jr nc, .fade ; jump if in middle of fade
@@ -676,10 +674,9 @@ SlowFadeInScreen:: ; 6fa (0:6fa)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0x7cf
 
 ; unreferenced
-Func_7cf: ; 7cf (0:7cf)
+Func_7cf:
 	ld a, [wPalFadeCounter]
 	cp $02
 	jr nc, .asm_7e9
@@ -817,9 +814,8 @@ Func_7cf: ; 7cf (0:7cf)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0x88d
 
-VBlank_88d:: ; 88d (0:88d)
+VBlank_88d::
 	di
 	ld hl, wVBlankFunc
 	ld de, wBackupVBlankFunc
@@ -847,9 +843,8 @@ VBlank_88d:: ; 88d (0:88d)
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
 	ret
-; 0x8bf
 
-VBlank_8bf:: ; 8bf (0:8bf)
+VBlank_8bf::
 	di
 	ld hl, .Func
 	ld de, wVBlankFunc
@@ -872,4 +867,3 @@ VBlank_8bf:: ; 8bf (0:8bf)
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
 	ret
-; 0x8e6

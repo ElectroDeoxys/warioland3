@@ -1,4 +1,4 @@
-Music_TheVolcanosBaseDay_Ch1: ; 34830 (0d:4830)
+Music_TheVolcanosBaseDay_Ch1:
 	semitone_offset 0
 
 .loop
@@ -183,9 +183,8 @@ Music_TheVolcanosBaseDay_Ch1: ; 34830 (0d:4830)
 	audio_jump .loop
 .end
 	audio_end
-; 0x348fb
 
-Music_TheVolcanosBaseDay_Ch2: ; 348fb (0d:48fb)
+Music_TheVolcanosBaseDay_Ch2:
 	semitone_offset 0
 
 .loop
@@ -391,9 +390,8 @@ Music_TheVolcanosBaseDay_Ch2: ; 348fb (0d:48fb)
 	audio_jump .loop
 .end
 	audio_end
-; 0x349da
 
-Music_TheVolcanosBaseDay_Ch3: ; 349da (0d:49da)
+Music_TheVolcanosBaseDay_Ch3:
 	semitone_offset 0
 
 .loop
@@ -463,9 +461,8 @@ Music_TheVolcanosBaseDay_Ch3: ; 349da (0d:49da)
 	audio_jump .loop
 .end
 	audio_end
-; 0x34a50
 
-Music_TheVolcanosBaseDay: ; 34a50 (d:4a50)
+Music_TheVolcanosBaseDay:
 	db $3, $2
 	dw Music_TheVolcanosBaseDay_Ch1
 	dw Music_TheVolcanosBaseDay_Ch2

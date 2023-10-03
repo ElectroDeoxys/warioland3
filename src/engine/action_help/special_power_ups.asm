@@ -1,4 +1,4 @@
-ExecuteSpecialPowerUpActionHelp: ; 1e4000 (79:4000)
+ExecuteSpecialPowerUpActionHelp:
 	ld a, [wActionHelpPowerUp]
 	sub POWER_UP_OWL
 	jumptable
@@ -6,4 +6,3 @@ ExecuteSpecialPowerUpActionHelp: ; 1e4000 (79:4000)
 	dw OwlActionHelp     ; POWER_UP_OWL
 	dw RailActionHelp    ; POWER_UP_RAIL
 	dw VampireActionHelp ; POWER_UP_VAMPIRE
-; 0x1e400c

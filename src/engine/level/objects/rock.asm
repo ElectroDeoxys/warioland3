@@ -1,4 +1,4 @@
-RockFunc: ; 4a902 (12:6902)
+RockFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -280,4 +280,3 @@ RockFunc: ; 4a902 (12:6902)
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ret
-; 0x4aaf9

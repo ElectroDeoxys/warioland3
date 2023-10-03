@@ -1,4 +1,4 @@
-Music_ActionHelp_Ch1: ; 398c2 (0e:58c2)
+Music_ActionHelp_Ch1:
 	semitone_offset 0
 
 .loop
@@ -112,9 +112,8 @@ Music_ActionHelp_Ch1: ; 398c2 (0e:58c2)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3993e
 
-Music_ActionHelp_Ch2: ; 3993e (0e:593e)
+Music_ActionHelp_Ch2:
 	semitone_offset 0
 
 .loop
@@ -185,9 +184,8 @@ Music_ActionHelp_Ch2: ; 3993e (0e:593e)
 	audio_jump .loop
 .end
 	audio_end
-; 0x39991
 
-Music_ActionHelp: ; 39991 (0e:5991)
+Music_ActionHelp:
 	db 2, 2
 	dw Music_ActionHelp_Ch1
 	dw Music_ActionHelp_Ch2
@@ -198,4 +196,3 @@ Music_ActionHelp: ; 39991 (0e:5991)
 
 	dw Music_ActionHelp_Ch1.end
 	dw Music_ActionHelp_Ch2.end
-; 0x3999f

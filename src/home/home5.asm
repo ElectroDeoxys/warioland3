@@ -1,6 +1,6 @@
 ; b = sprite bank
 ; de = pointer to sprite
-AddOWSpriteWithScroll:: ; 3a00 (0:3a00)
+AddOWSpriteWithScroll::
 	ld a, [wSCY]
 	ld c, a
 	ld a, [hli] ; y coord
@@ -23,7 +23,7 @@ AddOWSpriteWithScroll:: ; 3a00 (0:3a00)
 	ld l, e
 ;	fallthrough
 
-AddOWSpriteWithScroll_GotParams:: ; 3a22 (0:3a22)
+AddOWSpriteWithScroll_GotParams::
 	ld a, [wROMBank]
 	push af
 	ld a, b
@@ -32,12 +32,11 @@ AddOWSpriteWithScroll_GotParams:: ; 3a22 (0:3a22)
 	pop af
 	bankswitch
 	ret
-; 0x3a38
 
 ; hl = OAM data
 ; b = sprite bank
 ; de = pointer to sprite
-AddOWSprite:: ; 3a38 (0:3a38)
+AddOWSprite::
 	ld a, [hli]
 	ld c, $10
 	add c
@@ -61,12 +60,11 @@ AddOWSprite:: ; 3a38 (0:3a38)
 	pop af
 	bankswitch
 	ret
-; 0x3a66
 
 ; hl = wSceneObjXDuration
 ; de = frameset pointer
 ; b = bank
-UpdateOWAnimation:: ; 3a66 (0:3a66)
+UpdateOWAnimation::
 	xor a
 	ld [wOWAnimationFinished], a
 
@@ -119,13 +117,12 @@ UpdateOWAnimation:: ; 3a66 (0:3a66)
 	ld d, a
 	xor a
 	jr .advance_frameset
-; 0x3aac
 
 ; returns TRUE in a and carry set if treasure
 ; in input a has already been collected
 ; if not collected returns z set
 ; a = * constant
-IsTreasureCollected:: ; 3aac (0:3aac)
+IsTreasureCollected::
 	ld hl, wTreasuresCollected
 	ld e, a
 	srl e
@@ -158,9 +155,8 @@ IsTreasureCollected:: ; 3aac (0:3aac)
 	ld a, TRUE
 	scf
 	ret
-; 0x3ad7
 
-GetOWCoordInTilemap:: ; 3ad7 (0:3ad7)
+GetOWCoordInTilemap::
 	ld a, [hli]
 	and %11111000
 	rlca
@@ -183,14 +179,13 @@ GetOWCoordInTilemap:: ; 3ad7 (0:3ad7)
 	ld h, a
 	ld [wOWTilemapPtr + 1], a
 	ret
-; 0x3af7
 
 ; loads source address of tiles
 ; with the given level's name for HDMA transfer
 ; writes them to v0Tiles2 + $500
 ; b = map side constant (NORTH, ...)
 ; d = level index within that map side
-LoadLevelName:: ; 3af7 (0:3af7)
+LoadLevelName::
 	ld a, BANK(LevelNamesJPGfx)
 	ld hl, wLanguage
 	add [hl]
@@ -219,10 +214,9 @@ LoadLevelName:: ; 3af7 (0:3af7)
 	ld a, $1f
 	ld [w2d0b5Mode], a
 	ret
-; 0x3b2b
 
 ; copies c bytes from b:hl to de
-CopyFarBytes:: ; 3b2b (0:3b2b)
+CopyFarBytes::
 	ld a, [wROMBank]
 	push af
 	ld a, b
@@ -232,11 +226,10 @@ CopyFarBytes:: ; 3b2b (0:3b2b)
 	pop af
 	bankswitch
 	ret
-; 0x3b42
 
 ; copies c * $100 bytes from bank b
 ; at address hl to de
-CopyFarBytes_Long:: ; 3b42 (0:3b42)
+CopyFarBytes_Long::
 	ld a, [wROMBank]
 	push af
 	ld a, b
@@ -247,9 +240,8 @@ CopyFarBytes_Long:: ; 3b42 (0:3b42)
 	pop af
 	bankswitch
 	ret
-; 0x3b5b
 
-LoadFarTiles:: ; 3b5b (0:3b5b)
+LoadFarTiles::
 	ld a, [wROMBank]
 	push af
 	ld a, b
@@ -260,9 +252,8 @@ LoadFarTiles:: ; 3b5b (0:3b5b)
 	pop af
 	bankswitch
 	ret
-; 0x3b77
 
-LoadFarBGMap:: ; 3b77 (0:3b77)
+LoadFarBGMap::
 	ld a, [wROMBank]
 	push af
 	ld a, b
@@ -273,20 +264,18 @@ LoadFarBGMap:: ; 3b77 (0:3b77)
 	pop af
 	bankswitch
 	ret
-; 0x3b93
 
 ; sets scene obj's state and
 ; resets its animation data
 ; a = state
-SetSceneObjState:: ; 3b93 (0:3b93)
+SetSceneObjState::
 	ld [hld], a
 	xor a
 	ld [hld], a
 	ld [hl], a
 	ret
-; 0x3b98
 
-PlayOverworldMusic:: ; 3b98 (0:3b98)
+PlayOverworldMusic::
 	ld a, [w2d011]
 	and a
 	jr nz, .night
@@ -295,9 +284,8 @@ PlayOverworldMusic:: ; 3b98 (0:3b98)
 .night
 	play_music2 MUSIC_OVERWORLD_NIGHT
 	ret
-; 0x3bb8
 
-LoadFarPalsToTempPals1:: ; 3bb8 (0:3bb8)
+LoadFarPalsToTempPals1::
 	ld a, [wROMBank]
 	push af
 	ld a, b
@@ -306,9 +294,8 @@ LoadFarPalsToTempPals1:: ; 3bb8 (0:3bb8)
 	pop af
 	bankswitch
 	ret
-; 0x3bce
 
-LoadFarPalsToTempPals2:: ; 3bce (0:3bce)
+LoadFarPalsToTempPals2::
 	ld a, [wROMBank]
 	push af
 	ld a, b
@@ -317,9 +304,8 @@ LoadFarPalsToTempPals2:: ; 3bce (0:3bce)
 	pop af
 	bankswitch
 	ret
-; 0x3be4
 
-ApplyPalConfig:: ; 3be4 (0:3be4)
+ApplyPalConfig::
 	ld c, [hl]
 	xor a
 	ld [hli], a
@@ -351,9 +337,8 @@ ApplyPalConfig:: ; 3be4 (0:3be4)
 	dec b
 	jr nz, .loop
 	ret
-; 0x3c03
 
-Func_3c03:: ; 3c03 (0:3c03)
+Func_3c03::
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, w2d0b5
@@ -375,26 +360,24 @@ Func_3c03:: ; 3c03 (0:3c03)
 	xor a
 	ld [wHDMABank], a
 	ret
-; 0x3c1f
 
 ; same as ApplyOWMovement but the x offsets are mirrored
 ; hl = OW obj
 ; de = relative positions
-ApplyOWMovement_Mirrored:: ; 3c1f (0:3c1f)
+ApplyOWMovement_Mirrored::
 	call Func_3c35
 	sub e
 	jr Func_3c29
-; 0x3c25
 
 ; hl = OW obj
 ; de = relative positions
 ; returns z if movement has finished
-ApplyOWMovement:: ; 3c25 (0:3c25)
+ApplyOWMovement::
 	call Func_3c35
 	add e
 ;	fallthrough
 
-Func_3c29:: ; 3c29 (0:3c29)
+Func_3c29::
 	ld [bc], a
 
 	; reset if reached the end
@@ -408,9 +391,8 @@ Func_3c29:: ; 3c29 (0:3c29)
 	xor a
 	ld [bc], a ; unk7
 	ret
-; 0x3c35
 
-Func_3c35: ; 3c35 (0:3c35)
+Func_3c35:
 	ld c, l
 	ld b, h
 	ld a, $07
@@ -434,9 +416,8 @@ Func_3c35: ; 3c35 (0:3c35)
 	inc c
 	ld a, [bc] ; x coord
 	ret
-; 0x3c4f
 
-AddOffsetInPointerTable:: ; 3c4f (0:3c4f)
+AddOffsetInPointerTable::
 	add a ; *2
 	ld e, a
 	ld a, $00
@@ -444,33 +425,30 @@ AddOffsetInPointerTable:: ; 3c4f (0:3c4f)
 	ld d, a
 	add hl, de
 	ret
-; 0x3c58
 
 ; outputs in hl the pointer corresponding
 ; to the index given in register a
 ; from the pointer table given in hl
-GetPointerFromTableHL:: ; 3c58 (0:3c58)
+GetPointerFromTableHL::
 	call AddOffsetInPointerTable
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	ret
-; 0x3c5f
 
 ; same as GetPointerFromTableHL
 ; but outputs pointer to de
-GetPointerFromTableDE:: ; 3c5f (0:3c5f)
+GetPointerFromTableDE::
 	call AddOffsetInPointerTable
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
 	ret
-; 0x3c66
 
 ; outputs in hl the cth word
 ; contained in the ath table entry
 ; in the pointer table in hl
-GetCthWordFromAthTable:: ; 3c66 (0:3c66)
+GetCthWordFromAthTable::
 	call AddOffsetInPointerTable
 	ld a, [hli]
 	ld h, [hl]
@@ -478,20 +456,17 @@ GetCthWordFromAthTable:: ; 3c66 (0:3c66)
 	ld a, c
 	call AddOffsetInPointerTable
 	ret
-; 0x3c71
 
-GetByteFromPointerInHL:: ; 3c71 (0:3c71)
+GetByteFromPointerInHL::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	ld a, [hl]
 	ret
-; 0x3c76
 
-Func_3c76:: ; 3c76 (0:3c76)
+Func_3c76::
 	xor a
 	ld hl, w2d0c0
 	ld bc, $10
 	call WriteAToHL_BCTimes
 	ret
-; 0x3c81

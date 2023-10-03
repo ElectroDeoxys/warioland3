@@ -1,4 +1,4 @@
-Music_GolfLobby_Ch1: ; 3999f (0e:599f)
+Music_GolfLobby_Ch1:
 	semitone_offset 0
 	tempo 50
 	wave WAVE_51
@@ -106,9 +106,8 @@ Music_GolfLobby_Ch1: ; 3999f (0e:599f)
 	audio_jump .loop
 .end
 	audio_end
-; 0x39a29
 
-Music_GolfLobby_Ch2: ; 39a29 (0e:5a29)
+Music_GolfLobby_Ch2:
 	semitone_offset 0
 	wave WAVE_47
 	vibrato_speed 20
@@ -215,9 +214,8 @@ Music_GolfLobby_Ch2: ; 39a29 (0e:5a29)
 	audio_jump .loop
 .end
 	audio_end
-; 0x39aad
 
-Music_GolfLobby_Ch3: ; 39aad (0e:5aad)
+Music_GolfLobby_Ch3:
 	semitone_offset 0
 	wave WAVE_5E
 	volume 108
@@ -340,9 +338,8 @@ Music_GolfLobby_Ch3: ; 39aad (0e:5aad)
 .end
 	audio_wait_4
 	audio_end
-; 0x39b46
 
-Music_GolfLobby_Ch4: ; 39b46 (0e:5b46)
+Music_GolfLobby_Ch4:
 	semitone_offset 0
 	wave WAVE_28
 	volume 75
@@ -411,9 +408,8 @@ Music_GolfLobby_Ch4: ; 39b46 (0e:5b46)
 	audio_jump .loop
 .end
 	audio_end
-; 0x39ba8
 
-Music_GolfLobby: ; 39ba8 (0e:5ba8)
+Music_GolfLobby:
 	db 4, 2
 	dw Music_GolfLobby_Ch1
 	dw Music_GolfLobby_Ch2
@@ -430,4 +426,3 @@ Music_GolfLobby: ; 39ba8 (0e:5ba8)
 	dw Music_GolfLobby_Ch2.end
 	dw Music_GolfLobby_Ch3.end
 	dw Music_GolfLobby_Ch4.end
-; 0x39bc2

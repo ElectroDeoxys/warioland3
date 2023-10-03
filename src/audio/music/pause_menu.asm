@@ -1,4 +1,4 @@
-Music_PauseMenu_Ch1: ; 38b68 (0e:4b68)
+Music_PauseMenu_Ch1:
 	semitone_offset 1
 
 .loop
@@ -48,9 +48,8 @@ Music_PauseMenu_Ch1: ; 38b68 (0e:4b68)
 	audio_jump .loop
 .end
 	audio_end
-; 0x38b9e
 
-Music_PauseMenu_Ch2: ; 38b9e (0e:4b9e)
+Music_PauseMenu_Ch2:
 	semitone_offset 1
 
 .loop
@@ -103,9 +102,8 @@ Music_PauseMenu_Ch2: ; 38b9e (0e:4b9e)
 	audio_jump .loop
 .end
 	audio_end
-; 0x38bd6
 
-Music_PauseMenu: ; 38bd6 (0e:4bd6)
+Music_PauseMenu:
 	db 2, 2
 	dw Music_PauseMenu_Ch1
 	dw Music_PauseMenu_Ch2
@@ -116,4 +114,3 @@ Music_PauseMenu: ; 38bd6 (0e:4bd6)
 
 	dw Music_PauseMenu_Ch1.end
 	dw Music_PauseMenu_Ch2.end
-; 0x38be4

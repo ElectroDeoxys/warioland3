@@ -1,4 +1,4 @@
-Music_VampireWario_Ch1: ; 381f4 (0e:41f4)
+Music_VampireWario_Ch1:
 	semitone_offset 1
 	tempo 60
 	wave WAVE_17
@@ -119,9 +119,8 @@ Music_VampireWario_Ch1: ; 381f4 (0e:41f4)
 .end
 	audio_call .sub1
 	audio_end
-; 0x38295
 
-Music_VampireWario_Ch2: ; 38295 (0e:4295)
+Music_VampireWario_Ch2:
 	semitone_offset 1
 	wave WAVE_0D
 	vibrato_speed 20
@@ -180,9 +179,8 @@ Music_VampireWario_Ch2: ; 38295 (0e:4295)
 	note NOTE_DURATION_16, G#1, 23
 	audio_wait_16
 	audio_end
-; 0x382dd
 
-Music_VampireWario_Ch3: ; 382dd (0e:42dd)
+Music_VampireWario_Ch3:
 	semitone_offset 0
 	wave WAVE_28
 	volume 85
@@ -246,9 +244,8 @@ Music_VampireWario_Ch3: ; 382dd (0e:42dd)
 	note NOTE_DURATION_2, E_0
 	audio_wait_1
 	audio_end
-; 0x38351
 
-Music_VampireWario: ; 38351 (0e:4351)
+Music_VampireWario:
 	db 3, 2
 	dw Music_VampireWario_Ch1
 	dw Music_VampireWario_Ch2
@@ -262,4 +259,3 @@ Music_VampireWario: ; 38351 (0e:4351)
 	dw Music_VampireWario_Ch1.end
 	dw Music_VampireWario_Ch2.end
 	dw Music_VampireWario_Ch3.end
-; 0x38365

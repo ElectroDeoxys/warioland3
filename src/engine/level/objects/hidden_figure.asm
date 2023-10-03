@@ -1,4 +1,4 @@
-HiddenFigureFunc: ; 4cb51 (13:4b51)
+HiddenFigureFunc:
 	ld a, TRUE
 	ld [wIsBossBattle], a
 
@@ -445,7 +445,7 @@ HiddenFigureFunc: ; 4cb51 (13:4b51)
 	ld [wLevelEndScreen], a
 	jp Func_4d005
 
-Func_4ce39: ; 4ce39 (13:4e39)
+Func_4ce39:
 	ld a, $3c
 	ld [wCurObjStateDuration], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -455,7 +455,7 @@ Func_4ce39: ; 4ce39 (13:4e39)
 	ld [hld], a
 	ret
 
-HiddenFigureFaceFunc: ; 4ce47 (13:4e47)
+HiddenFigureFaceFunc:
 .Func_4ce47:
 	ld hl, w1d14e
 	ld a, [hl]
@@ -607,7 +607,7 @@ HiddenFigureFaceFunc: ; 4ce47 (13:4e47)
 	ld de, Frameset_6a071
 	jp SetObjectFramesetPtr
 
-Func_4cf70: ; 4cf70 (13:4f70)
+Func_4cf70:
 	ld hl, wCurObjVar3
 	ld a, [hl]
 	add c
@@ -627,7 +627,7 @@ Func_4cf70: ; 4cf70 (13:4f70)
 	ld [hl], a
 	ret
 
-Func_4cf87: ; 4cf87 (13:4f87)
+Func_4cf87:
 	ld hl, wCurObjVar2
 	ld a, [hl]
 	add c
@@ -647,7 +647,7 @@ Func_4cf87: ; 4cf87 (13:4f87)
 	ld [hl], a
 	ret
 
-Func_4cf9e: ; 4cf9e (13:4f9e)
+Func_4cf9e:
 	ld hl, wCurObjVar3
 	ld a, [hl]
 	add c
@@ -677,7 +677,7 @@ Func_4cf9e: ; 4cf9e (13:4f9e)
 	dec [hl]
 	ret
 
-Func_4cfbf: ; 4cfbf (13:4fbf)
+Func_4cfbf:
 	ld hl, wCurObjVar2
 	ld a, [hl]
 	add c
@@ -707,7 +707,7 @@ Func_4cfbf: ; 4cfbf (13:4fbf)
 	dec [hl]
 	ret
 
-Func_4cfe0: ; 4cfe0 (13:4fe0)
+Func_4cfe0:
 	ld a, [wGlobalCounter]
 	and $0f
 	jr z, .asm_4cfef
@@ -728,7 +728,7 @@ Func_4cfe0: ; 4cfe0 (13:4fe0)
 	ld b, 6
 	jp Func_35e5
 
-Func_4d005: ; 4d005 (13:5005)
+Func_4d005:
 	ld a, [w1d15a]
 	cp $02
 	jr c, .asm_4d011
@@ -741,7 +741,7 @@ Func_4d005: ; 4d005 (13:5005)
 	ld b, 6
 	jp Func_35e5
 
-Pals_4d01b: ; 4d01b (13:501b)
+Pals_4d01b:
 	rgb  1,  4,  9
 	rgb 31,  0,  0
 	rgb 31,  0,  0
@@ -771,9 +771,8 @@ Pals_4d01b: ; 4d01b (13:501b)
 	rgb 15,  0,  0
 	rgb 31, 25,  0
 	rgb  0,  0,  0
-; 0x4d04b
 
-Pals_4d04b: ; 4d04b (13:504b)
+Pals_4d04b:
 	rgb  0,  0,  4
 	rgb 31,  0,  0
 	rgb 19, 22, 23
@@ -803,9 +802,8 @@ Pals_4d04b: ; 4d04b (13:504b)
 	rgb 31, 12,  3
 	rgb 31, 31, 30
 	rgb  5,  0,  0
-; 0x4d07b
 
-Pals_4d07b: ; 4d07b (13:507b)
+Pals_4d07b:
 	rgb  1,  4,  9
 	rgb 31,  0,  0
 	rgb  6, 10, 10
@@ -836,7 +834,7 @@ Pals_4d07b: ; 4d07b (13:507b)
 	rgb 31, 25,  0
 	rgb  0,  0,  0
 
-HiddenFigureLeftHandFunc: ; 4d0ab (13:50ab)
+HiddenFigureLeftHandFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_4d0c7)
 	ld [hld], a
@@ -1249,7 +1247,7 @@ HiddenFigureLeftHandFunc: ; 4d0ab (13:50ab)
 	jp nc, MoveObjectUp
 	ret
 
-HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
+HiddenFigureRightHandFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_4d3c8)
 	ld [hld], a
@@ -2014,4 +2012,3 @@ HiddenFigureRightHandFunc: ; 4d3ac (13:53ac)
 	and a
 	jp z, Func_3362
 	jp .Func_4d8c9
-; 0x4d8fa

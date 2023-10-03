@@ -1,4 +1,4 @@
-GetCell:: ; bdb (0:bdb)
+GetCell::
 ; y position
 	ld a, [hli] ; hi
 	ld d, a
@@ -43,9 +43,8 @@ GetCell:: ; bdb (0:bdb)
 	ld a, [wYCell]
 	ld h, a
 	ret
-; 0xc19
 
-Func_c19:: ; c19 (0:c19)
+Func_c19::
 	ld a, h
 	sub $a0
 	ld e, a
@@ -76,9 +75,8 @@ Func_c19:: ; c19 (0:c19)
 	ld a, l
 	ld [wccf0 + 1], a
 	ret
-; 0xc4c
 
-DoPendingDMATransfer:: ; c4c (0:c4c)
+DoPendingDMATransfer::
 	ld a, [wIsDMATransferPending]
 	and a
 	jr nz, .dma_transfer
@@ -136,29 +134,26 @@ DoPendingDMATransfer:: ; c4c (0:c4c)
 	ld [wce00], a
 	ld [wce69], a
 	ret
-; 0xcab
 
-Func_cab:: ; cab (0:cab)
+Func_cab::
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, wce6a
 	ld bc, wce35
 	jp wBlankFuncExtended
-; 0xcb8
 
-Func_cb8:: ; cb8 (0:cb8)
+Func_cb8::
 	xor a
 	ld [wce00], a
 	ld [wce69], a
 	ret
-; 0xcc0
 
 ; input:
 ; - hl = hPos
 ; output:
 ; - h = y cell
 ; - l = x cell
-Func_cc0:: ; cc0 (0:cc0)
+Func_cc0::
 	ld a, [hli]
 	ld d, a
 	ld a, [hli]
@@ -197,9 +192,8 @@ Func_cc0:: ; cc0 (0:cc0)
 	ld [wSpawnXCell], a
 	ld h, c
 	ret
-; 0xcf8
 
-Func_cf8:: ; cf8 (0:cf8)
+Func_cf8::
 	push hl
 	ld a, h
 	sub $a0
@@ -246,9 +240,8 @@ Func_cf8:: ; cf8 (0:cf8)
 	ldh [hXPosHi], a
 	pop hl
 	ret
-; 0xd3e
 
-Func_d3e:: ; d3e (0:d3e)
+Func_d3e::
 	ld a, h
 	sub $a0
 	ld d, a
@@ -288,9 +281,8 @@ Func_d3e:: ; d3e (0:d3e)
 	ld b, a
 	ld [wccef], a
 	ret
-; 0xd81
 
-Func_d81:: ; d81 (0:d81)
+Func_d81::
 	ld a, l
 	sub $b0
 	add a
@@ -300,9 +292,8 @@ Func_d81:: ; d81 (0:d81)
 	add l
 	ld l, a
 	ret
-; 0xd8c
 
-Func_d8c:: ; d8c (0:d8c)
+Func_d8c::
 	ld a, [wFloorSRAMBank]
 	ld [wccec], a
 	ld b, $01
@@ -314,10 +305,9 @@ Func_d8c:: ; d8c (0:d8c)
 	add $b0
 	ld l, a
 	ret
-; 0xd9e
 
 ; draws Wario on screen unless he's invisible
-DrawWario:: ; d9e (0:d9e)
+DrawWario::
 	ld a, [wTransformation]
 	cp TRANSFORMATION_INVISIBLE_WARIO
 	jr nz, .invincible
@@ -360,10 +350,9 @@ DrawWario:: ; d9e (0:d9e)
 	pop af
 	bankswitch
 	ret
-; 0xdf4
 
 ; hl = sprite pointer
-TryAddSprite:: ; df4 (0:df4)
+TryAddSprite::
 	ld a, [wCurSpriteFrame]
 	ld d, $00
 	add a
@@ -409,15 +398,14 @@ TryAddSprite:: ; df4 (0:df4)
 	ld [wVirtualOAMByteSize], a
 	inc de
 	jr .loop
-; 0xe2b
 
-Func_e2b:: ; e2b (0:e2b)
+Func_e2b::
 	ld a, [wCurObjFlags]
 	bit OBJFLAG_ON_SCREEN_F, a
 	ret z
 ;	fallthrough
 
-Func_e31:: ; e31 (0:e31)
+Func_e31::
 	ld a, [wFloorSRAMBank]
 	dec a
 	add a
@@ -441,9 +429,8 @@ Func_e31:: ; e31 (0:e31)
 	and $0f
 	ld [wc19e], a
 	ret
-; 0xe53
 
-UpdateAnimation:: ; e53 (0:e53)
+UpdateAnimation::
 	ld a, [wFramesetPtr + 0]
 	ld d, a
 	ld a, [wFramesetPtr + 1]
@@ -484,13 +471,11 @@ UpdateAnimation:: ; e53 (0:e53)
 	ld a, TRUE
 	ld [wAnimationEnded], a
 	ret
-; 0xe87
 
-Func_e87:: ; e87 (0:e87)
+Func_e87::
 	jp Init
-; 0xe8a
 
-LoadLevelLayoutAndObjects:: ; e8a (0:e8a)
+LoadLevelLayoutAndObjects::
 	ld d, $00
 	ld a, [wLevel]
 	add a ; *2
@@ -535,9 +520,8 @@ LoadLevelLayoutAndObjects:: ; e8a (0:e8a)
 .skip_loading_objects
 	pop hl
 	ret
-; 0xedb
 
-Func_edb:: ; edb (0:edb)
+Func_edb::
 	ld d, $00
 	ld a, [wLevel]
 	add a ; *2
@@ -566,9 +550,8 @@ Func_edb:: ; edb (0:edb)
 	bankswitch
 	call Func_f13
 	ret
-; 0xf13
 
-Func_f13:: ; f13 (0:f13)
+Func_f13::
 	ld a, [wceef]
 	and $3c
 	ret nz
@@ -590,9 +573,8 @@ Func_f13:: ; f13 (0:f13)
 	pop af
 	sramswitch
 	ret
-; 0xf4c
 
-Func_f4c:: ; f4c (0:f4c)
+Func_f4c::
 	ld c, $a0
 	ld hl, s0a000
 .asm_f51
@@ -658,9 +640,8 @@ Func_f4c:: ; f4c (0:f4c)
 	inc a
 	sramswitch
 	jr .asm_f93
-; 0xfae
 
-InitAudio:: ; fae (0:fae)
+InitAudio::
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -669,10 +650,9 @@ InitAudio:: ; fae (0:fae)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0xfbc
 
 ; bc = sound ID
-Func_fbc:: ; fbc (0:fbc)
+Func_fbc::
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -681,10 +661,9 @@ Func_fbc:: ; fbc (0:fbc)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0xfca
 
 ; bc = sound ID
-PlaySFX:: ; fca (0:fca)
+PlaySFX::
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -693,10 +672,9 @@ PlaySFX:: ; fca (0:fca)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0xfd8
 
 ; unreferenced
-Func_fd8: ; fd8 (0:fd8)
+Func_fd8:
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -705,10 +683,9 @@ Func_fd8: ; fd8 (0:fd8)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0xfe6
 
 ; bc = sound ID
-Func_fe6:: ; fe6 (0:fe6)
+Func_fe6::
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -717,10 +694,9 @@ Func_fe6:: ; fe6 (0:fe6)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0xff4
 
 ; bc = sound ID
-Func_ff4:: ; ff4 (0:ff4)
+Func_ff4::
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -729,9 +705,8 @@ Func_ff4:: ; ff4 (0:ff4)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0x1002
 
-Func_1002:: ; 1002 (0:1002)
+Func_1002::
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -742,7 +717,7 @@ Func_1002:: ; 1002 (0:1002)
 	ret
 
 ; unreferenced
-Func_1010: ; 1010 (0:1010)
+Func_1010:
 	ldh a, [rSMBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -753,7 +728,7 @@ Func_1010: ; 1010 (0:1010)
 	ret
 
 ; unreferenced
-Func_101e: ; 101e (0:101e)
+Func_101e:
 	ldh a, [rSMBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -763,7 +738,7 @@ Func_101e: ; 101e (0:101e)
 	ldh [rSMBK], a
 	ret
 
-Func_102c:: ; 102c (0:102c)
+Func_102c::
 	ldh [hffac], a
 	ldh a, [rSVBK]
 	push af
@@ -776,7 +751,7 @@ Func_102c:: ; 102c (0:102c)
 	ret
 
 ; unreferenced
-Func_103e: ; 103e (0:103e)
+Func_103e:
 	ldh [hffac], a
 	ldh a, [rSMBK]
 	push af
@@ -789,7 +764,7 @@ Func_103e: ; 103e (0:103e)
 	ret
 
 ; unreferenced
-Func_1050: ; 1050 (0:1050)
+Func_1050:
 	ldh [hffac], a
 	ldh a, [rSMBK]
 	push af
@@ -802,7 +777,7 @@ Func_1050: ; 1050 (0:1050)
 	ret
 
 ; bc = sound ID
-PlayNewMusic_SetNoise:: ; 1062 (0:1062)
+PlayNewMusic_SetNoise::
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -811,14 +786,12 @@ PlayNewMusic_SetNoise:: ; 1062 (0:1062)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0x1070
 
-PlayRecoverySFX:: ; 1070 (0:1070)
+PlayRecoverySFX::
 	play_sfx SFX_RECOVERY
 	ret
-; 0x1079
 
-ClearTransformationValues:: ; 1079 (0:1079)
+ClearTransformationValues::
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_BLIND
 	call z, .RestoreBlindPalettes
@@ -911,7 +884,7 @@ ClearTransformationValues:: ; 1079 (0:1079)
 	ret
 
 ; unreferenced
-Func_10fc: ; 10fc (0:10fc)
+Func_10fc:
 	ld a, c
 	ld b, $00
 	ld hl, 0
@@ -936,7 +909,7 @@ Func_10fc: ; 10fc (0:10fc)
 	ret
 
 ; unreferenced
-Func_111e: ; 111e (0:111e)
+Func_111e:
 	push hl
 	ld a, h
 	ld hl, 0
@@ -968,12 +941,11 @@ Func_111e: ; 111e (0:111e)
 	ld c, l
 	ret
 
-Func_1146:: ; 1146 (0:1146)
+Func_1146::
 	call GetFloorForYPos
 	ld a, c
 	ld [wFloor], a
 	ret
-; 0x114e
 
 ; returns in c:
 ; 6 if   $0 <= ypos <  $80
@@ -982,7 +954,7 @@ Func_1146:: ; 1146 (0:1146)
 ; 3 if $180 <= ypos < $200
 ; 2 if $200 <= ypos < $280
 ; 1 if $280 <= ypos < $300
-GetFloorForYPos:: ; 114e (0:114e)
+GetFloorForYPos::
 	ld a, [wYPosHi]
 	dec a
 	jr z, .asm_115b ; == 1
@@ -1003,9 +975,8 @@ GetFloorForYPos:: ; 114e (0:114e)
 	; < $80
 	inc c
 	ret
-; 0x1169
 
-HandleDownwardsFloorTransition:: ; 1169 (0:1169)
+HandleDownwardsFloorTransition::
 	ld a, [wCameraConfigFlags]
 	and CAM_SCROLLING_MASK
 	cp CAM_TRANSITIONS
@@ -1018,10 +989,9 @@ HandleDownwardsFloorTransition:: ; 1169 (0:1169)
 	jr StartDownwardsFloorTransition
 .skip
 	ret
-; 0x1180
 
 ; unreferenced?
-Func_1180:: ; 1180 (0:1180)
+Func_1180::
 	ld a, [wCameraConfigFlags]
 	and CAM_SCROLLING_MASK
 	cp CAM_TRANSITIONS
@@ -1034,9 +1004,8 @@ Func_1180:: ; 1180 (0:1180)
 	jr StartDownwardsFloorTransition
 .skip
 	ret
-; 0x1197
 
-HandleUpwardsFloorTransition:: ; 1197 (0:1197)
+HandleUpwardsFloorTransition::
 	ld a, [wCameraConfigFlags]
 	and CAM_SCROLLING_MASK
 	cp CAM_TRANSITIONS
@@ -1051,10 +1020,9 @@ HandleUpwardsFloorTransition:: ; 1197 (0:1197)
 
 .skip
 	ret
-; 0x11ae
 
 ; c = new floor
-StartDownwardsFloorTransition:: ; 11ae (0:11ae)
+StartDownwardsFloorTransition::
 	ld a, c
 	ld [wFloor], a
 	cp 5
@@ -1073,10 +1041,9 @@ StartDownwardsFloorTransition:: ; 11ae (0:11ae)
 	xor a
 	ld [wcac8], a
 	ret
-; 0x11d6
 
 ; c = new floor
-StartUpwardsFloorTransition:: ; 11d6 (0:11d6)
+StartUpwardsFloorTransition::
 	ld a, c
 	ld [wFloor], a
 	play_sfx SFX_0E1
@@ -1089,9 +1056,8 @@ StartUpwardsFloorTransition:: ; 11d6 (0:11d6)
 	xor a
 	ld [wcac8], a
 	ret
-; 0x11f6
 
-TriggerRoomTransition:: ; 11f6 (0:11f6)
+TriggerRoomTransition::
 	xor a
 	ld [wGrabState], a
 	ld [wRoomPalCycleDuration], a
@@ -1131,9 +1097,8 @@ TriggerRoomTransition:: ; 11f6 (0:11f6)
 	stop_music
 	stop_sfx
 	ret
-; 0x1259
 
-AddXOffset:: ; 1259 (0:1259)
+AddXOffset::
 	ld a, [wc0c3]
 	add b
 	ld [wc0c3], a
@@ -1144,9 +1109,8 @@ AddXOffset:: ; 1259 (0:1259)
 	adc 0
 	ld [wXPosHi], a
 	ret
-; 0x1270
 
-SubXOffset:: ; 1270 (0:1270)
+SubXOffset::
 	ld a, [wc0c3]
 	sub b
 	ld [wc0c3], a
@@ -1157,16 +1121,15 @@ SubXOffset:: ; 1270 (0:1270)
 	sbc 0
 	ld [wXPosHi], a
 	ret
-; 0x1287
 
 ; b = y offset
-AddYOffset:: ; 1287 (0:1287)
+AddYOffset::
 	ld a, [wc0c2]
 	add b
 	ld [wc0c2], a
 ;	fallthrough
 
-AddYOffset_Sprite:: ; 128e (0:128e)
+AddYOffset_Sprite::
 	ld a, [wYPosLo]
 	add b
 	ld [wYPosLo], a
@@ -1174,16 +1137,15 @@ AddYOffset_Sprite:: ; 128e (0:128e)
 	adc 0
 	ld [wYPosHi], a
 	ret
-; 0x129e
 
 ; b = y offset
-SubYOffset:: ; 129e (0:129e)
+SubYOffset::
 	ld a, [wc0c2]
 	sub b
 	ld [wc0c2], a
 ;	fallthrough
 
-SubYOffset_Sprite:: ; 12a5 (0:12a5)
+SubYOffset_Sprite::
 	ld a, [wYPosLo]
 	sub b
 	ld [wYPosLo], a
@@ -1191,10 +1153,9 @@ SubYOffset_Sprite:: ; 12a5 (0:12a5)
 	sbc 0
 	ld [wYPosHi], a
 	ret
-; 0x12b5
 
 ; b = ground shake counter
-DoGroundShake:: ; 12b5 (0:12b5)
+DoGroundShake::
 	ld a, [wGroundShakeCounter]
 	and a
 	ret nz
@@ -1203,17 +1164,15 @@ DoGroundShake:: ; 12b5 (0:12b5)
 	xor a
 	ld [wIsWarioGroundShaking], a
 	ret
-; 0x12c3
 
-ClearParticles:: ; 12c3 (0:12c3)
+ClearParticles::
 	ld hl, wParticles
 	ld b, PARTICLE_STRUCT_LENGTH * NUM_PARTICLES + 2
 	xor a
 	call WriteAToHL_BTimes
 	ret
-; 0x12cd
 
-SaveBackupVRAM:: ; 12cd (0:12cd)
+SaveBackupVRAM::
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("GFX RAM")
@@ -1280,9 +1239,8 @@ SaveBackupVRAM:: ; 12cd (0:12cd)
 	xor a ; VRAM0
 	ldh [rVBK], a
 	ret
-; 0x1351
 
-LoadBackupVRAM:: ; 1351 (0:1351)
+LoadBackupVRAM::
 	ldh a, [rSVBK]
 	push af
 	ld a, $03
@@ -1348,9 +1306,8 @@ LoadBackupVRAM:: ; 1351 (0:1351)
 	xor a
 	ldh [rVBK], a
 	ret
-; 0x13d5
 
-ReturnToLevelFromGolf:: ; 13d5 (0:13d5)
+ReturnToLevelFromGolf::
 	call DisableLCD
 	ldh a, [rSVBK]
 	push af
@@ -1377,25 +1334,23 @@ ReturnToLevelFromGolf:: ; 13d5 (0:13d5)
 	ldh [rLCDC], a
 ;	fallthrough
 
-ReturnToPendingLevelState:: ; 141a (0:141a)
+ReturnToPendingLevelState::
 	ld hl, wState
 	ld [hl], ST_LEVEL
 	ld a, [wPendingSubState]
 	ld [wSubState], a
 	ret
-; 0x1426
 
-ReturnToMapFromLevel:: ; 1426 (0:1426)
+ReturnToMapFromLevel::
 	ld hl, wca3b
 	set 7, [hl]
-ReturnToMap:: ; 142b (0:142b)
+ReturnToMap::
 	ld a, TRANSITION_RETURN_TO_MAP
 	ld [wTransitionParam], a
 	farcall StartOverworldState
 	ret
-; 0x1440
 
-ReturnToPauseMenuFromActionHelp:: ; 1440 (0:1440)
+ReturnToPauseMenuFromActionHelp::
 	ldh a, [rSVBK]
 	push af
 	ld a, $03
@@ -1404,9 +1359,8 @@ ReturnToPauseMenuFromActionHelp:: ; 1440 (0:1440)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0x145a
 
-UpdateObjAnim:: ; 145a (0:145a)
+UpdateObjAnim::
 	xor a
 	ld [wObjAnimWasReset], a
 	ld a, [hld] ;
@@ -1447,9 +1401,8 @@ UpdateObjAnim:: ; 145a (0:145a)
 	ld a, TRUE
 	ld [wObjAnimWasReset], a
 	ret
-; 0x1488
 
-ApplyJumpVelocity:: ; 1488 (0:1488)
+ApplyJumpVelocity::
 	ld a, [wJumpVelTable]
 	dec a
 	jr z, .knock_back ; JUMP_VEL_KNOCK_BACK
@@ -1509,9 +1462,8 @@ ApplyJumpVelocity:: ; 1488 (0:1488)
 	ld [hl], MAX_JUMP_VEL_INDEX
 .done
 	ret
-; 0x14de
 
-TriggerDownwardsFloorTransition:: ; 14de (0:14de)
+TriggerDownwardsFloorTransition::
 	ld a, [wCameraConfigFlags]
 	and CAM_SCROLLING_MASK
 	cp CAM_TRANSITIONS
@@ -1524,11 +1476,10 @@ TriggerDownwardsFloorTransition:: ; 14de (0:14de)
 	jp StartDownwardsFloorTransition
 .done
 	ret
-; 0x14f6
 
-TriggerFloorTransition:: ; 14f6 (0:14f6)
+TriggerFloorTransition::
 	update_pos_y
-TriggerFloorTransition_SkipUpdateYPos:: ; 1501 (0:1501)
+TriggerFloorTransition_SkipUpdateYPos::
 	ld a, [wCameraConfigFlags]
 	and CAM_SCROLLING_MASK
 	cp CAM_TRANSITIONS
@@ -1544,9 +1495,8 @@ TriggerFloorTransition_SkipUpdateYPos:: ; 1501 (0:1501)
 	call StartUpwardsFloorTransition
 .done
 	ret
-; 0x151e
 
-ApplyWalkVelocity_Right:: ; 151e (0:151e)
+ApplyWalkVelocity_Right::
 	ld a, [wDirection]
 	and a
 	jr nz, .dir_right
@@ -1561,16 +1511,15 @@ ApplyWalkVelocity_Right:: ; 151e (0:151e)
 	jr z, ApplyWalkVelocity
 ;	fallthrough
 
-ApplySlopedWalkVelocity:: ; 1531 (0:1531)
+ApplySlopedWalkVelocity::
 	ld a, [wWalkVelIndex]
 	cp $08
 	jr c, ApplyWalkVelocity
 	ld a, $04
 	ld [wWalkVelIndex], a
 	jr ApplyWalkVelocity
-; 0x153f
 
-ApplyWalkVelocity_Left:: ; 153f (0:153f)
+ApplyWalkVelocity_Left::
 	ld a, [wDirection]
 	and a
 	jr z, .dir_left
@@ -1584,9 +1533,8 @@ ApplyWalkVelocity_Left:: ; 153f (0:153f)
 	bit 1, a
 	jr z, ApplyWalkVelocity
 	jr ApplySlopedWalkVelocity
-; 0x1554
 
-ApplyWalkVelocity:: ; 1554 (0:1554)
+ApplyWalkVelocity::
 	ld a, [wWalkVelIndex]
 	ld e, a
 	ld d, $00
@@ -1603,24 +1551,21 @@ ApplyWalkVelocity:: ; 1554 (0:1554)
 	and $fc
 	ld [hl], a
 	ret
-; 0x156d
 
-InvalidWarioStateReset:: ; 156d (0:156d)
+InvalidWarioStateReset::
 	jp Init
-; 0x1570
 
-RecoverFromTransformation:: ; 1570 (0:1570)
+RecoverFromTransformation::
 	call ClearTransformationValues
 	ld a, $10
 	ld [wInvincibleCounter], a
 	jr ResetLevelMusicWarioPalsAndState
-; 0x157a
 
-RecoverFromTransformation_WithoutInvincibility:: ; 157a (0:157a)
+RecoverFromTransformation_WithoutInvincibility::
 	call ClearTransformationValues
 ;	fallthrough
 
-ResetLevelMusicWarioPalsAndState:: ; 157d (0:157d)
+ResetLevelMusicWarioPalsAndState::
 	call UpdateLevelMusic
 	ld hl, Pals_c800
 	call SetWarioPal
@@ -1632,9 +1577,8 @@ ResetLevelMusicWarioPalsAndState:: ; 157d (0:157d)
 .fall
 	farcall StartFall
 	jp PlayRecoverySFX
-; 0x15b0
 
-LoadWarioGfx:: ; 15b0 (0:15b0)
+LoadWarioGfx::
 	ld a, [wDMASourceBank]
 	ld [wPendingDMASourceBank], a
 	ld a, [wDMASourcePtr + 0]
@@ -1653,9 +1597,8 @@ LoadWarioGfx:: ; 15b0 (0:15b0)
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
 	ret
-; 0x15dc
 
-Func_15dc:: ; 15dc (0:15dc)
+Func_15dc::
 	ld a, [wGameModeFlags]
 	bit MODE_TIME_ATTACK_F, a
 	jr nz, .asm_15ff
@@ -1680,19 +1623,17 @@ Func_15dc:: ; 15dc (0:15dc)
 	ld a, SST_PAUSE_18
 	ld [wSubState], a
 	ret
-; 0x1610
 
-SetPerfectState:: ; 1610 (0:1610)
+SetPerfectState::
 	ld hl, wState
 	ld [hl], ST_PERFECT
 	xor a
 	ld [wSubState], a
 	ret
-; 0x161a
 
 ; loads a music ID to hMusicID, depending on wLevel
 ; and whether there's a new transformation music
-UpdateLevelMusic:: ; 161a (0:161a)
+UpdateLevelMusic::
 	ld a, [wcac3]
 	and a
 	jr nz, .boss_music
@@ -1760,18 +1701,16 @@ UpdateLevelMusic:: ; 161a (0:161a)
 	dw MUSIC_HIDDEN_FIGURE_BATTLE_1
 	dw MUSIC_BOSS_BATTLE
 	dw MUSIC_BOSS_DEFEAT
-; 0x1690
 
 ; set game state to Title
-InitGameState:: ; 1690 (0:1690)
+InitGameState::
 	xor a ; ST_TITLE
 	ld [wState], a
 	ld [wSubState], a
 	ret
-; 0x1698
 
 ; clears some SRAM stuff
-Func_1698:: ; 1698 (0:1698)
+Func_1698::
 	xor a
 	ld hl, s0a380
 	ld b, $8
@@ -1800,17 +1739,15 @@ Func_1698:: ; 1698 (0:1698)
 	ld a, $00
 	ldh [hfffd], a
 	jp Init
-; 0x16d0
 
-OpenActionHelp:: ; 16d0 (0:16d0)
+OpenActionHelp::
 	ld hl, wState
 	ld a, ST_ACTION_HELP
 	ld [hli], a
 	ld [hl], $00 ; wSubState
 	ret
-; 0x16d9
 
-ReleaseOwl:: ; 16d9 (0:16d9)
+ReleaseOwl::
 	ld hl, wXPosLo
 	ld de, hXPosLo
 	ld a, [hld]
@@ -1829,10 +1766,9 @@ ReleaseOwl:: ; 16d9 (0:16d9)
 	ld b, PARTICLE_OWL
 	farcall CreateParticle
 	ret
-; 0x1700
 
 ; returns nz if standing on slippery ground
-IsOnSlipperyGround:: ; 1700 (0:1700)
+IsOnSlipperyGround::
 	xor a
 	ld [wIsOnSlipperyGround], a
 
@@ -1883,9 +1819,8 @@ IsOnSlipperyGround:: ; 1700 (0:1700)
 	ld a, [wIsOnSlipperyGround]
 	and a
 	ret
-; 0x1762
 
-Func_1762:: ; 1762 (0:1762)
+Func_1762::
 	ld a, [wJumpVelIndex]
 	cp FALLING_JUMP_VEL_INDEX
 	jr nc, .asm_1776
@@ -1905,18 +1840,16 @@ Func_1762:: ; 1762 (0:1762)
 	ld [wWalkVelIndex], a
 .asm_1782
 	ret
-; 0x1783
 
 ; return nz if level has had all its
 ; Musical Coins collected already
-CheckLevelMusicalCoinFlag:: ; 1783 (0:1783)
+CheckLevelMusicalCoinFlag::
 	farcall _CheckLevelMusicalCoinFlag
 	ld a, b
 	and a
 	ret
-; 0x1795
 
-Func_1795:: ; 1795 (0:1795)
+Func_1795::
 	ld a, $02
 	ld b, $40
 	ld d, $0f
@@ -1924,11 +1857,10 @@ Func_1795:: ; 1795 (0:1795)
 	call Func_102c
 	call Func_fbc
 	ret
-; 0x17a4
 
 ; returns nz if has all the levels
 ; with their corresponding Musical Coin flag set
-CheckHasAllMusicalCoinFlags:: ; 17a4 (0:17a4)
+CheckHasAllMusicalCoinFlags::
 	ld hl, wMusicalCoinFlags
 	ld c, 3
 .loop_bytes
@@ -1950,9 +1882,8 @@ CheckHasAllMusicalCoinFlags:: ; 17a4 (0:17a4)
 .false
 	xor a ; FALSE
 	ret
-; 0x17be
 
-Func_17be:: ; 17be (0:17be)
+Func_17be::
 	ld a, [hli]
 	add $10
 	ld [wCurSpriteYCoord], a
@@ -1972,9 +1903,8 @@ Func_17be:: ; 17be (0:17be)
 	pop af
 	bankswitch
 	ret
-; 0x17ec
 
-Func_17ec:: ; 17ec (0:17ec)
+Func_17ec::
 	ld a, [hli]
 	add $10
 	ld [wCurSpriteYCoord], a
@@ -1999,12 +1929,11 @@ Func_17ec:: ; 17ec (0:17ec)
 	pop af
 	bankswitch
 	ret
-; 0x1826
 
-EmptyOAMFrame:: ; 1826 (0:1826)
+EmptyOAMFrame::
 	db $80
 
-PalsWhite:: ; 1827 (0:1827)
+PalsWhite::
 	rgb 31, 31, 31
 	rgb 31, 31, 31
 	rgb 31, 31, 31
@@ -2044,14 +1973,8 @@ PalsWhite:: ; 1827 (0:1827)
 	rgb 31, 31, 31
 	rgb 31, 31, 31
 	rgb 31, 31, 31
-; 0x1867
 
-PalsBlack:: ; 1867 (0:1867)
-	rgb 0, 0, 0
-	rgb 0, 0, 0
-	rgb 0, 0, 0
-	rgb 0, 0, 0
-
+PalsBlack::
 	rgb 0, 0, 0
 	rgb 0, 0, 0
 	rgb 0, 0, 0
@@ -2086,9 +2009,13 @@ PalsBlack:: ; 1867 (0:1867)
 	rgb 0, 0, 0
 	rgb 0, 0, 0
 	rgb 0, 0, 0
-; 0x18a7
 
-JumpVelTable_Normal:: ; 18a7 (0:18a7)
+	rgb 0, 0, 0
+	rgb 0, 0, 0
+	rgb 0, 0, 0
+	rgb 0, 0, 0
+
+JumpVelTable_Normal::
 	db -4 ; $00
 	db -4 ; $01
 	db -3 ; $02
@@ -2129,9 +2056,8 @@ JumpVelTable_Normal:: ; 18a7 (0:18a7)
 	db  3 ; $25
 	db  4 ; $26
 	db  4 ; $27
-; 0x18cf
 
-JumpVelTable_HighJump:: ; 18cf (0:18cf)
+JumpVelTable_HighJump::
 	db -4 ; $00
 	db -4 ; $01
 	db -4 ; $02
@@ -2172,9 +2098,8 @@ JumpVelTable_HighJump:: ; 18cf (0:18cf)
 	db  3 ; $25
 	db  4 ; $26
 	db  4 ; $27
-; 0x18f7
 
-JumpVelTable_KnockBack:: ; 18f7 (0:18f7)
+JumpVelTable_KnockBack::
 	db -2 ; $00
 	db -2 ; $01
 	db -2 ; $02
@@ -2215,9 +2140,8 @@ JumpVelTable_KnockBack:: ; 18f7 (0:18f7)
 	db  3 ; $25
 	db  4 ; $26
 	db  4 ; $27
-; 0x191f
 
-JumpVelTable_BouncyJump:: ; 191f (0:191f)
+JumpVelTable_BouncyJump::
 	db -2 ; $00
 	db -2 ; $01
 	db -3 ; $02
@@ -2258,9 +2182,8 @@ JumpVelTable_BouncyJump:: ; 191f (0:191f)
 	db  4 ; $25
 	db  4 ; $26
 	db  4 ; $27
-; 0x1947
 
-JumpVelTable_BouncyHighJump:: ; 1947 (0:1947)
+JumpVelTable_BouncyHighJump::
 	db -2 ; $00
 	db -3 ; $01
 	db -4 ; $02
@@ -2301,9 +2224,8 @@ JumpVelTable_BouncyHighJump:: ; 1947 (0:1947)
 	db  4 ; $25
 	db  4 ; $26
 	db  4 ; $27
-; 0x196f
 
-WalkVelTable:: ; 196f (0:196f)
+WalkVelTable::
 	db 0
 	db 1
 	db 0
@@ -2332,17 +2254,16 @@ WalkVelTable:: ; 196f (0:196f)
 	db 4
 	db 4
 	db 4
-; 0x198b
 
 ; treasure IDs of each level
-LevelTreasureIDs:: ; 198b (0:198b)
+LevelTreasureIDs::
 	; LEVEL_THE_TEMPLE
 	db TREASURE_DUMMY ; grey
 	db TREASURE_DUMMY ; red
 	db TREASURE_DUMMY ; green
 	db TREASURE_DUMMY ; blue
 
-LevelTreasureIDs_WithoutTemple:: ; 198f (0:198f)
+LevelTreasureIDs_WithoutTemple::
 	; LEVEL_OUT_OF_THE_WOODS
 	db AXE ; grey
 	db JAR ; red
@@ -2492,9 +2413,8 @@ LevelTreasureIDs_WithoutTemple:: ; 198f (0:198f)
 	db KEY_CARD_RED ; red
 	db WARP_REMOVAL_APPARATUS ; green
 	db KEY_CARD_BLUE ; blue
-; 0x19f3
 
-LoadBGPalettesFromWRAM:: ; 19f3 (0:19f3)
+LoadBGPalettesFromWRAM::
 	ld hl, wTempBGPals
 	ld a, BCPSF_AUTOINC
 	ldh [rBCPS], a
@@ -2506,9 +2426,8 @@ LoadBGPalettesFromWRAM:: ; 19f3 (0:19f3)
 	dec b
 	jr nz, .loop
 	ret
-; 0x1a04
 
-LoadOBPalettesFromWRAM:: ; 1a04 (0:1a04)
+LoadOBPalettesFromWRAM::
 	ld hl, wTempOBPals
 	ld a, OCPSF_AUTOINC
 	ldh [rOCPS], a
@@ -2520,10 +2439,9 @@ LoadOBPalettesFromWRAM:: ; 1a04 (0:1a04)
 	dec b
 	jr nz, .loop
 	ret
-; 0x1a15
 
 ; copies hl to wTempPals1
-LoadPalsToTempPals1:: ; 1a15 (0:1a15)
+LoadPalsToTempPals1::
 	ld de, wTempPals1
 	ld b, 8 palettes
 .loop
@@ -2533,10 +2451,9 @@ LoadPalsToTempPals1:: ; 1a15 (0:1a15)
 	dec b
 	jr nz, .loop
 	ret
-; 0x1a21
 
 ; copies hl to wTempPals2
-LoadPalsToTempPals2:: ; 1a21 (0:1a21)
+LoadPalsToTempPals2::
 	ld de, wTempPals2
 	ld b, 8 palettes
 .loop
@@ -2546,21 +2463,19 @@ LoadPalsToTempPals2:: ; 1a21 (0:1a21)
 	dec b
 	jr nz, .loop
 	ret
-; 0x1a2d
 
 ; copies b bytes from hl to de
 ; given that e doesn't overflow
-CopyHLToDE_Short:: ; 1a2d (0:1a2d)
+CopyHLToDE_Short::
 	ld a, [hli]
 	ld [de], a
 	inc e
 	dec b
 	jr nz, CopyHLToDE_Short
 	ret
-; 0x1a34
 
 ; copies hl to wTempPals2
-LoadObjPals:: ; 1a34 (0:1a34)
+LoadObjPals::
 	ld de, wTempPals2 palette 4
 	ld b, 4 palettes
 .loop
@@ -2570,9 +2485,8 @@ LoadObjPals:: ; 1a34 (0:1a34)
 	dec b
 	jr nz, .loop
 	ret
-; 0x1a40
 
-EnableDoubleSpeed:: ; 1a40 (0:1a40)
+EnableDoubleSpeed::
 	ldh a, [rSPD]
 	bit 7, a
 	ret nz ; already in double speed
@@ -2598,10 +2512,9 @@ EnableDoubleSpeed:: ; 1a40 (0:1a40)
 	pop af
 	ldh [rIE], a
 	ret
-; 0x1a64
 
 ; clear VRAM if hCGB != 0
-ClearVRAM:: ; 1a64 (0:1a64)
+ClearVRAM::
 	ldh a, [hCGB]
 	and a
 	ret z
@@ -2618,9 +2531,8 @@ ClearVRAM:: ; 1a64 (0:1a64)
 	ld hl, v0Tiles0
 	ld bc, v0End - v0Tiles0
 	jp WriteAToHL_BCTimes
-; 0x1a82
 
-ClearWRAM:: ; 1a82 (0:1a82)
+ClearWRAM::
 	ld e, 1 ; WRAM1
 .loop
 	ld a, e
@@ -2635,10 +2547,9 @@ ClearWRAM:: ; 1a82 (0:1a82)
 	xor a ; WRAM0
 	ldh [rSVBK], a
 	ret
-; 0x1a9a
 
 ; copies all BG pals to wTempBGPals
-StoreBGPals:: ; 1a9a (0:1a9a)
+StoreBGPals::
 	xor a
 	ld e, a
 	ld hl, wTempBGPals
@@ -2653,10 +2564,9 @@ StoreBGPals:: ; 1a9a (0:1a9a)
 	dec b
 	jr nz, .loop
 	ret
-; 0x1aad
 
 ; copies all OB pals to wTempOBPals
-StoreOBPals:: ; 1aad (0:1aad)
+StoreOBPals::
 	xor a
 	ld e, a
 	ld hl, wTempOBPals
@@ -2671,10 +2581,9 @@ StoreOBPals:: ; 1aad (0:1aad)
 	dec b
 	jr nz, .loop
 	ret
-; 0x1ac0
 
 ; fills BG palette with just white
-FillWhiteBGPal:: ; 1ac0 (0:1ac0)
+FillWhiteBGPal::
 	ld hl, PalsWhite
 	ld a, BCPSF_AUTOINC
 	ldh [rBCPS], a
@@ -2686,10 +2595,9 @@ FillWhiteBGPal:: ; 1ac0 (0:1ac0)
 	dec b
 	jr nz, .loop
 	ret
-; 0x1ad1
 
 ; fills OB palette with just white
-FillWhiteOBPal:: ; 1ad1 (0:1ad1)
+FillWhiteOBPal::
 	ld hl, PalsWhite
 	ld a, OCPSF_AUTOINC
 	ldh [rOCPS], a
@@ -2703,7 +2611,7 @@ FillWhiteOBPal:: ; 1ad1 (0:1ad1)
 	ret
 
 ; unreferenced
-Func_1ae2: ; 1ae2 (0:1ae2)
+Func_1ae2:
 	ld hl, PalsWhite
 	ld de, wTempBGPals
 	ld b, 8 palettes
@@ -2714,7 +2622,7 @@ Func_1ae2: ; 1ae2 (0:1ae2)
 	ret
 
 ; hl = palette to copy from Wario Palettes
-SetWarioPal:: ; 1af6 (0:1af6)
+SetWarioPal::
 	ld a, h
 	ld [wWarioPalsPtr + 0], a
 	ld a, l
@@ -2754,11 +2662,10 @@ ENDR
 	pop af
 	bankswitch
 	ret
-; 0x1b4f
 
 ; loads the palette for the treasure
 ; that was collected in the level
-LoadCollectedTreasurePal_Level:: ; 1b4f (0:1b4f)
+LoadCollectedTreasurePal_Level::
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wLevelTreasurePals)
@@ -2818,9 +2725,8 @@ ENDR
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0x1bc7
 
-LoadCollectedTreasurePal_ClearScreen:: ; 1bc7 (0:1bc7)
+LoadCollectedTreasurePal_ClearScreen::
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wLevelTreasurePals)
@@ -2854,13 +2760,12 @@ LoadCollectedTreasurePal_ClearScreen:: ; 1bc7 (0:1bc7)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0x1c13
 
 ; b = number of pals
 ; c = OB palette number
 ; hl = palette source
 ; de = OB pals dest
-CopyAndApplyOBPals:: ; 1c13 (0:1c13)
+CopyAndApplyOBPals::
 	push bc
 	push hl
 	sla b
@@ -2905,9 +2810,8 @@ CopyAndApplyOBPals:: ; 1c13 (0:1c13)
 	dec b
 	jr nz, .wait_lcd_on
 	ret
-; 0x1c4a
 
-ApplyTempPals1ToBGPals:: ; 1c4a (0:1c4a)
+ApplyTempPals1ToBGPals::
 	ld hl, wTempPals1
 	ld a, BCPSF_AUTOINC
 	ldh [rBCPS], a
@@ -2919,9 +2823,8 @@ ApplyTempPals1ToBGPals:: ; 1c4a (0:1c4a)
 	dec b
 	jr nz, .loop
 	ret
-; 0x1c5b
 
-ApplyTempPals2ToOBPals:: ; 1c5b (0:1c5b)
+ApplyTempPals2ToOBPals::
 	ld hl, wTempPals2
 	ld a, OCPSF_AUTOINC
 	ldh [rOCPS], a
@@ -2933,4 +2836,3 @@ ApplyTempPals2ToOBPals:: ; 1c5b (0:1c5b)
 	dec b
 	jr nz, .loop
 	ret
-; 0x1c6c

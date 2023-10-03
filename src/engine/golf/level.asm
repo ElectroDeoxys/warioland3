@@ -1,5 +1,5 @@
 ; unreferenced?
-Func_1c8957: ; 1c8957 (72:4957)
+Func_1c8957:
 	ld a, [wSubState]
 	jumptable
 	dw FastFadeToWhite
@@ -7,9 +7,8 @@ Func_1c8957: ; 1c8957 (72:4957)
 	dw SlowFadeFromWhite
 	dw HandleGolfLevel
 	dw Func_1c8fb7
-; 0x1c8965
 
-InitGolfLevel: ; 1c8965 (72:4965)
+InitGolfLevel:
 	call DisableLCD
 	call ClearVirtualOAM
 	xor a
@@ -92,9 +91,8 @@ InitGolfLevel: ; 1c8965 (72:4965)
 	call PickAndLoadGolfLevel
 	call ShowGolfLevelFlagAndPar
 	jp SetUpGolfLevelObjects
-; 0x1c8a03
 
-PickAndLoadGolfLevel: ; 1c8a03 (72:4a03)
+PickAndLoadGolfLevel:
 	ld a, BANK("Golf Gfx 1")
 	ld [wTempBank], a
 	ld a, [wPredeterminedGolfLevel]
@@ -229,9 +227,8 @@ PickAndLoadGolfLevel: ; 1c8a03 (72:4a03)
 	dw GolfLevel17, BGMap_1c2d30, BGMap_1c2c9e, BGMap_1c2d93, BGMap_1c2cec ; GOLF_LEVEL_17
 	dw GolfLevel18, BGMap_1c2410, BGMap_1c2361, BGMap_1c247d, BGMap_1c23bc ; GOLF_LEVEL_18
 	dw GolfLevel19, BGMap_1c316a, BGMap_1c30b7, BGMap_1c31e4, BGMap_1c3119 ; GOLF_LEVEL_19
-; 0x1c8b8b
 
-ShowGolfLevelFlagAndPar: ; 1c8b8b (72:4b8b)
+ShowGolfLevelFlagAndPar:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 
@@ -313,9 +310,8 @@ ShowGolfLevelFlagAndPar: ; 1c8b8b (72:4b8b)
 	xor a
 	ldh [rVBK], a
 	ret
-; 0x1c8c33
 
-SetUpGolfLevelObjects: ; 1c8c33 (72:4c33)
+SetUpGolfLevelObjects:
 	ld a, HIGH(OAM_1ca6cf)
 	ld [wGolfOAMPtr + 0], a
 	ld a, LOW(OAM_1ca6cf)
@@ -345,9 +341,8 @@ SetUpGolfLevelObjects: ; 1c8c33 (72:4c33)
 	call UpdateGolfParaGoom
 	call UpdateGolfWario
 	jp ClearUnusedVirtualOAM
-; 0x1c8c66
 
-PrintGolfStrokeNumber: ; 1c8c66 (72:4c66)
+PrintGolfStrokeNumber:
 	ld hl, GolfStrokeNumbersGfx
 	ld a, [wGolfStroke]
 	ld d, 0
@@ -388,9 +383,8 @@ PrintGolfStrokeNumber: ; 1c8c66 (72:4c66)
 	ld de, w1db90 tile $02
 	ld b, 2 tiles
 	jp CopyHLToDE
-; 0x1c8ca4
 
-HandleGolfLevel: ; 1c8ca4 (72:4ca4)
+HandleGolfLevel:
 	ld a, HIGH(OAM_1ca6cf)
 	ld [wGolfOAMPtr + 0], a
 	ld a, LOW(OAM_1ca6cf)
@@ -403,9 +397,8 @@ HandleGolfLevel: ; 1c8ca4 (72:4ca4)
 	call ClearUnusedVirtualOAM
 	call LoadGolfWarioStateGfx
 	jp Func_1c9cf9
-; 0x1c8cc3
 
-UpdateGolfLevelUI: ; 1c8cc3 (72:4cc3)
+UpdateGolfLevelUI:
 	ld a, $30
 	ld [wGolfObj1YCoord], a
 	ld a, $0c
@@ -476,9 +469,8 @@ UpdateGolfLevelUI: ; 1c8cc3 (72:4cc3)
 	ld [wGolfObj5Frame], a
 	ld hl, wGolfObj5Sprite
 	jp AddGolfSprite
-; 0x1c8d74
 
-UpdateGolfParaGoom: ; 1c8d74 (72:4d74)
+UpdateGolfParaGoom:
 	ld a, [w1dc20]
 	and a
 	ret nz
@@ -574,16 +566,14 @@ UpdateGolfParaGoom: ; 1c8d74 (72:4d74)
 	dw Frameset_1cafe8 ; GOLF_PARAGOOM_3
 	dw Frameset_1cb005 ; GOLF_PARAGOOM_4
 	dw Frameset_1cafb1 ; GOLF_PARAGOOM_5
-; 0x1c8e21
 
 ; unreferenced?
-Frameset_1c8e21: ; 1c8e21 (72:4e21)
+Frameset_1c8e21:
 	db $23, 78
 	db $20,  4
 	db $ff
-; 0x1c8e26
 
-HandleGolfParaGoomRespawn: ; 1c8e26 (72:4e26)
+HandleGolfParaGoomRespawn:
 	ld a, [wGolfParaGoomState]
 	cp GOLF_PARAGOOM_2
 	jr z, .asm_1c8e32
@@ -651,7 +641,7 @@ HandleGolfParaGoomRespawn: ; 1c8e26 (72:4e26)
 	ld [wGolfParaGoomState], a
 ;	fallthrough
 
-SetGolfParaGoomRespawnYPosIfEnoughStrokes: ; 1c8e91 (72:4e91)
+SetGolfParaGoomRespawnYPosIfEnoughStrokes:
 	ld a, [wGolfMaxStrokes]
 	ld c, a
 	ld a, [wGolfStroke]
@@ -664,9 +654,8 @@ SetGolfParaGoomRespawnYPosIfEnoughStrokes: ; 1c8e91 (72:4e91)
 	ld a, TRUE
 	ld [w1dc20], a
 	ret
-; 0x1c8ea8
 
-UpdateGolfWario: ; 1c8ea8 (72:4ea8)
+UpdateGolfWario:
 	ld hl, wGolfWarioXPos
 	ld a, [hli]
 	ld d, [hl]
@@ -752,12 +741,11 @@ UpdateGolfWario: ; 1c8ea8 (72:4ea8)
 	ret nz
 	play_sfx SFX_WALK
 	ret
-; 0x1c8f37
 
 ; holds the last frame in the animation
 ; of some states of Golf Wario
 ; and increments wGolfCounter
-HoldGolfWarioLastFrame:: ; 1c8f37 (72:4f37)
+HoldGolfWarioLastFrame::
 	ld a, [wGolfWarioState]
 	cp GOLF_WARIO_CHARGING
 	jr z, .ok
@@ -774,10 +762,9 @@ HoldGolfWarioLastFrame:: ; 1c8f37 (72:4f37)
 	ld a, [wGolfAnimLastFrame]
 	ld [wGolfWarioCurrentFrame], a
 	ret
-; 0x1c8f56
 
 ; return (wGolfXScroll - $e0) <= de < (wGolfXScroll + $b0)
-Func_1c8f56: ; 1c8f56 (72:4f56)
+Func_1c8f56:
 	ld hl, wGolfXScroll
 	call Sub16Bit
 	ld a, d
@@ -804,12 +791,11 @@ Func_1c8f56: ; 1c8f56 (72:4f56)
 	jr c, .false ; < wGolfXScroll - $e0
 	ld a, TRUE
 	ret
-; 0x1c8f76
 
 ; stores the bank and pointer
 ; for Golf Wario graphics of his current state
 ; the graphics will be loaded during VBlank
-LoadGolfWarioStateGfx: ; 1c8f76 (72:4f76)
+LoadGolfWarioStateGfx:
 	ld hl, .GfxBanks
 	ld a, [wGolfWarioState]
 	ld b, $00
@@ -853,12 +839,11 @@ LoadGolfWarioStateGfx: ; 1c8f76 (72:4f76)
 	dw WarioClearGfx  ; GOLF_WARIO_ENTERING_DOOR
 	dw WarioIdleGfx   ; GOLF_WARIO_GOING_IN_PIPE
 	dw WarioIdleGfx   ; GOLF_WARIO_TURNING
-; 0x1c8fb7
 
-Func_1c8fb7: ; 1c8fb7 (72:4fb7)
+Func_1c8fb7:
 	ret
 
-GolfLevelStateTable: ; 1c8fb8 (72:4fb8)
+GolfLevelStateTable:
 	ld a, [wGolfLevelState]
 	jumptable
 	dw GolfLevelState_WaitInput       ; GOLFLEVELSTATE_WAIT_INPUT
@@ -875,9 +860,8 @@ GolfLevelStateTable: ; 1c8fb8 (72:4fb8)
 	dw GolfLevelState_GameOver        ; GOLFLEVELSTATE_GAME_OVER
 	dw GolfLevelState_Pause           ; GOLFLEVELSTATE_PAUSE
 	dw GolfLevelState_Result          ; GOLFLEVELSTATE_RESULT
-; 0x1c8fd8
 
-GolfLevelState_WaitInput: ; 1c8fd8 (72:4fd8)
+GolfLevelState_WaitInput:
 	ld hl, wGolfXScroll
 	ld a, [hli]
 	ld d, [hl]
@@ -957,9 +941,8 @@ GolfLevelState_WaitInput: ; 1c8fd8 (72:4fd8)
 	ld a, GOLFLEVELSTATE_SCROLL
 	ld [wGolfLevelState], a
 	ret
-; 0x1c905d
 
-GolfLevelState_Scroll: ; 1c905d (72:505d)
+GolfLevelState_Scroll:
 	call .HandleDirectionalInputScroll
 
 ; handle ParaGoom ghost
@@ -1111,7 +1094,7 @@ GolfLevelState_Scroll: ; 1c905d (72:505d)
 	ld [wGolfLevelState], a
 ;	fallthrough
 
-UpdateGolfDisplayMode: ; 1c9138 (72:5138)
+UpdateGolfDisplayMode:
 	ld hl, wGolfXScroll + 1
 	ld a, [hld]
 	and a
@@ -1138,9 +1121,8 @@ UpdateGolfDisplayMode: ; 1c9138 (72:5138)
 	xor a ; GOLF_DISPLAY_BGMAP0
 	ld [wGolfDisplayMode], a
 	ret
-; 0x1c9164
 
-GolfLevelState_SelectShotPower: ; 1c9164 (72:5164)
+GolfLevelState_SelectShotPower:
 	ld a, [wIsPowerGaugeFalling]
 	and a
 	jr nz, .falling
@@ -1311,9 +1293,8 @@ GolfLevelState_SelectShotPower: ; 1c9164 (72:5164)
 	db 20, 14 ; SHOT_POWER_7
 	db 22, 15 ; SHOT_POWER_8
 	db 24, 16 ; SHOT_POWER_9
-; 0x1c9286
 
-GolfLevelState_SelectShotSpin: ; 1c9286 (72:5286)
+GolfLevelState_SelectShotSpin:
 	ld a, [wIsPowerGaugeFalling]
 	and a
 	jr nz, .falling
@@ -1376,9 +1357,8 @@ GolfLevelState_SelectShotSpin: ; 1c9286 (72:5286)
 	ld a, SHOT_TOPSPIN
 	ld [wShotSpin], a
 	ret
-; 0x1c92f7
 
-GolfLevelState_StartShot: ; 1c92f7 (72:52f7)
+GolfLevelState_StartShot:
 	ld hl, wGolfCounter
 	ld a, [hl]
 	and a
@@ -1466,9 +1446,8 @@ GolfLevelState_StartShot: ; 1c92f7 (72:52f7)
 	ld a, GOLFLEVELSTATE_BETWEEN_SHOTS
 	ld [wGolfLevelState], a
 	ret
-; 0x1c93a7
 
-GolfLevelState_Shot: ; 1c93a7 (72:53a7)
+GolfLevelState_Shot:
 	call UpdateGolfParaGoomXPos
 	call UpdateGolfParaGoomYPos
 	call AlignGolfXScrollWithParaGoom
@@ -1560,9 +1539,8 @@ GolfLevelState_Shot: ; 1c93a7 (72:53a7)
 	db $08, $07 ; $7
 	db $09, $08 ; $8
 	db $0a, $08 ; $9
-; 0x1c9438
 
-UpdateGolfParaGoomXPos: ; 1c9438 (72:5438)
+UpdateGolfParaGoomXPos:
 	ld hl, w1dc51
 	inc [hl]
 	ld a, [hl]
@@ -1673,9 +1651,8 @@ UpdateGolfParaGoomXPos: ; 1c9438 (72:5438)
 	ld hl, wGolfStroke
 	inc [hl]
 	ret
-; 0x1c94e8
 
-UpdateGolfParaGoomYPos: ; 1c94e8 (72:54e8)
+UpdateGolfParaGoomYPos:
 	; apply gravity
 	ld hl, wShotYVel
 	ld a, [hli]
@@ -1839,9 +1816,8 @@ UpdateGolfParaGoomYPos: ; 1c94e8 (72:54e8)
 	ld [hli], a
 	ld [hl], d
 	ret
-; 0x1c960c
 
-AlignGolfXScrollWithParaGoom: ; 1c960c (72:560c)
+AlignGolfXScrollWithParaGoom:
 	ld hl, wGolfParaGoomXPos
 	ld a, [hli]
 	ld d, [hl]
@@ -1888,16 +1864,14 @@ AlignGolfXScrollWithParaGoom: ; 1c960c (72:560c)
 	sbc $00
 	ld [hl], a
 	ret
-; 0x1c9648
 
-GolfLevelState_Bounce: ; 1c9648 (72:5648)
+GolfLevelState_Bounce:
 	call UpdateGolfParaGoomXPos
 	call UpdateGolfParaGoomYPos
 	call AlignGolfXScrollWithParaGoom
 	jp UpdateGolfDisplayMode
-; 0x1c9654
 
-GolfLevelState_SpecialTerrain: ; 1c9654 (72:5654)
+GolfLevelState_SpecialTerrain:
 	ld a, $50
 	ld [wGolfOverlayTextYCoord], a
 	ld a, $58
@@ -2252,9 +2226,8 @@ GolfLevelState_SpecialTerrain: ; 1c9654 (72:5654)
 	db  2
 	db  0
 	db  0
-; 0x1c98c7
 
-GolfLevelState_Walk: ; 1c98c7 (72:58c7)
+GolfLevelState_Walk:
 	ld hl, wGolfCounter
 	ld a, [hl]
 	cp $19
@@ -2408,13 +2381,12 @@ GolfLevelState_Walk: ; 1c98c7 (72:58c7)
 	ld a, [hl]
 	ld [wGolfLevelState], a
 	ret
-; 0x1c99ca
 
 ; compares Para-Goomba's X position to
 ; this level's hole X position, and sets
 ; wGolfHoleDirection accordingly to the left/right
 ; also sets Wario's target X position to move to
-UpdateGolfHoleDirection: ; 1c99ca (72:59ca)
+UpdateGolfHoleDirection:
 	ld hl, wGolfParaGoomXPos
 	ld a, [hli]
 	ld e, a
@@ -2454,9 +2426,8 @@ UpdateGolfHoleDirection: ; 1c99ca (72:59ca)
 	inc de
 	ld [de], a
 	ret
-; 0x1c9a01
 
-GolfLevelState_BetweenShots: ; 1c9a01 (72:5a01)
+GolfLevelState_BetweenShots:
 	ld a, [wGolfCounter]
 	inc a
 	ld [wGolfCounter], a
@@ -2501,9 +2472,8 @@ GolfLevelState_BetweenShots: ; 1c9a01 (72:5a01)
 	ld a, GOLFLEVELSTATE_GAME_OVER
 	ld [wGolfLevelState], a
 	ret
-; 0x1c9a62
 
-GolfLevelState_Cleared: ; 1c9a62 (72:5a62)
+GolfLevelState_Cleared:
 	ld a, [w1d800]
 	cp $01
 	jr z, .asm_1c9ac2
@@ -2622,9 +2592,8 @@ GolfLevelState_Cleared: ; 1c9a62 (72:5a62)
 	ld a, GOLFLEVELSTATE_RESULT
 	ld [wGolfLevelState], a
 	ret
-; 0x1c9b53
 
-ShowGolfResultOverlayText: ; 1c9b53 (72:5b53)
+ShowGolfResultOverlayText:
 	ld a, $50
 	ld [wGolfOverlayTextYCoord], a
 	ld a, $58
@@ -2651,19 +2620,16 @@ ShowGolfResultOverlayText: ; 1c9b53 (72:5b53)
 	dw Frameset_1cb0a9 ; GOLFRESULT_OVER_PAR
 	dw Frameset_1c9b87 ; GOLFRESULT_COURSE_UNDER_PAR
 	dw Frameset_1c9b8a ; GOLFRESULT_COURSE_OVER_PAR
-; 0x1c9b87
 
-Frameset_1c9b87: ; 1c9b87 (72:5b87)
+Frameset_1c9b87:
 	db $73,  4
 	db $ff
-; 0x1c9b8a
 
-Frameset_1c9b8a: ; 1c9b8a (72:5b8a)
+Frameset_1c9b8a:
 	db $6a,  4
 	db $ff
-; 0x1c9b8d
 
-ShowGolfScore: ; 1c9b8d (72:5b8d)
+ShowGolfScore:
 	ld a, [wGolfResult]
 	cp GOLFRESULT_PAR
 	ret z
@@ -2690,9 +2656,8 @@ ShowGolfScore: ; 1c9b8d (72:5b8d)
 	ld hl, wVirtualOAMSprite02Frame
 	ld [hl], a
 	ret
-; 0x1c9bbc
 
-GolfLevelState_GameOver: ; 1c9bbc (72:5bbc)
+GolfLevelState_GameOver:
 	ld a, $50
 	ld [wGolfOverlayTextYCoord], a
 	ld a, $58
@@ -2724,9 +2689,8 @@ GolfLevelState_GameOver: ; 1c9bbc (72:5bbc)
 	xor a
 	ld [wSubState], a
 	ret
-; 0x1c9bfc
 
-GolfLevelState_Pause: ; 1c9bfc (72:5bfc)
+GolfLevelState_Pause:
 	ld a, $9c
 	ld [wGolfObj3YCoord], a
 	ld a, $58
@@ -2763,9 +2727,8 @@ GolfLevelState_Pause: ; 1c9bfc (72:5bfc)
 	ld [wGolfObj3FramesetOffset], a
 	ld [wGolfLevelState], a ; GOLFLEVELSTATE_WAIT_INPUT
 	ret
-; 0x1c9c53
 
-GolfLevelState_Result: ; 1c9c53 (72:5c53)
+GolfLevelState_Result:
 	call ShowGolfResultOverlayText
 	call .SetOverlayTextScore
 
@@ -2849,10 +2812,9 @@ GolfLevelState_Result: ; 1c9c53 (72:5c53)
 	ld hl, wVirtualOAMSprite02Frame
 	ld [hl], a
 	ret
-; 0x1c9cdd
 
 ; outputs de - *hl word
-Sub16Bit: ; 1c9cdd (72:5cdd)
+Sub16Bit:
 	ld a, e
 	sub [hl]
 	ld e, a
@@ -2861,13 +2823,12 @@ Sub16Bit: ; 1c9cdd (72:5cdd)
 	sbc [hl]
 	ld d, a
 	ret
-; 0x1c9ce5
 
 ; outputs in a:
 ; - $0 if de <  *hl
 ; - $1 if de == *hl
 ; - $2 if de >  *hl
-Compare16Bit: ; 1c9ce5 (72:5ce5)
+Compare16Bit:
 	push de
 	call Sub16Bit
 	jr c, .less_than
@@ -2886,9 +2847,8 @@ Compare16Bit: ; 1c9ce5 (72:5ce5)
 .done
 	pop de
 	ret
-; 0x1c9cf9
 
-Func_1c9cf9: ; 1c9cf9 (72:5cf9)
+Func_1c9cf9:
 	ld a, [wGolfDisplayMode]
 	cp GOLF_DISPLAY_SPLIT
 	jr z, .split
@@ -2911,9 +2871,8 @@ Func_1c9cf9: ; 1c9cf9 (72:5cf9)
 	dw VBlank_1c9e8d
 	dw VBlank_1c9eb3
 	dw VBlank_1c9ef1
-; 0x1c9d1d
 
-VBlank_1c9d1d: ; 1c9d1d (72:5d1d)
+VBlank_1c9d1d:
 	call .UpdatePinFlagTiles
 	ld hl, .Func
 	ld de, wVBlankFunc
@@ -2978,11 +2937,10 @@ VBlank_1c9d1d: ; 1c9d1d (72:5d1d)
 	and $1f
 	ld [hl], a
 	ret
-; 0x1c9d8d
 
 GolfPinFlag: INCBIN "gfx/golf/golf_pin_flag.2bpp"
 
-VBlank_1c9e8d: ; 1c9e8d (72:5e8d)
+VBlank_1c9e8d:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -3002,9 +2960,8 @@ VBlank_1c9e8d: ; 1c9e8d (72:5e8d)
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
 .end
-; 0x1c9eb3
 
-VBlank_1c9eb3: ; 1c9eb3 (72:5eb3)
+VBlank_1c9eb3:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -3036,9 +2993,8 @@ VBlank_1c9eb3: ; 1c9eb3 (72:5eb3)
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
 .end
-; 0x1c9ef1
 
-VBlank_1c9ef1: ; 1c9ef1 (72:5ef1)
+VBlank_1c9ef1:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -3072,16 +3028,14 @@ VBlank_1c9ef1: ; 1c9ef1 (72:5ef1)
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
 .end
-; 0x1c9f2e
 
-GolfLobbyVBlank: ; 1c9f2e (72:5f2e)
+GolfLobbyVBlank:
 	ld a, [wGolfVBlankMode]
 	jumptable
 	dw VBlank_1c9f36
 	dw VBlank_1c9f7a
-; 0x1c9f36
 
-VBlank_1c9f36: ; 1c9f36 (72:5f36)
+VBlank_1c9f36:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -3117,9 +3071,8 @@ VBlank_1c9f36: ; 1c9f36 (72:5f36)
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
 .end
-; 0x1c9f7a
 
-VBlank_1c9f7a: ; 1c9f7a (72:5f7a)
+VBlank_1c9f7a:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -3148,9 +3101,8 @@ VBlank_1c9f7a: ; 1c9f7a (72:5f7a)
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
 .end
-; 0x1c9fae
 
-Func_1c9fae: ; 1c9fae (72:5fae)
+Func_1c9fae:
 	call Func_1c9fbd
 	ld a, [wGolfVBlankMode]
 	jumptable
@@ -3158,9 +3110,8 @@ Func_1c9fae: ; 1c9fae (72:5fae)
 	dw VBlank_1c9ffa
 	dw VBlank_1ca033
 	dw VBlank_1ca056
-; 0x1c9fbd
 
-Func_1c9fbd: ; 1c9fbd (72:5fbd)
+Func_1c9fbd:
 	ld a, [wGolfNumCoins + 0]
 	add a
 	add $a0
@@ -3181,9 +3132,8 @@ Func_1c9fbd: ; 1c9fbd (72:5fbd)
 	ld hl, wVirtualOAMSprite02Frame
 	ld [hl], a
 	ret
-; 0x1c9fe1
 
-VBlank_1c9fe1: ; 1c9fe1 (72:5fe1)
+VBlank_1c9fe1:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -3197,9 +3147,8 @@ VBlank_1c9fe1: ; 1c9fe1 (72:5fe1)
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
 .end
-; 0x1c9ffa
 
-VBlank_1c9ffa: ; 1c9ffa (72:5ffa)
+VBlank_1c9ffa:
 	ld a, $18
 	ld [wdc11 + 0], a
 	ld a, $c0
@@ -3228,9 +3177,8 @@ VBlank_1c9ffa: ; 1c9ffa (72:5ffa)
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
 .end
-; 0x1ca033
 
-VBlank_1ca033: ; 1ca033 (72:6033)
+VBlank_1ca033:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -3248,9 +3196,8 @@ VBlank_1ca033: ; 1ca033 (72:6033)
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
 .end
-; 0x1ca056
 
-VBlank_1ca056: ; 1ca056 (72:6056)
+VBlank_1ca056:
 	ld a, $18
 	ld [wdc11 + 0], a
 	ld a, $c0
@@ -3279,4 +3226,3 @@ VBlank_1ca056: ; 1ca056 (72:6056)
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
 .end
-; 0x1ca08f

@@ -1,4 +1,4 @@
-_ClearScreenStateTable: ; d4000 (35:4000)
+_ClearScreenStateTable:
 	ld a, [wSubState]
 	jumptable
 
@@ -23,9 +23,8 @@ _ClearScreenStateTable: ; d4000 (35:4000)
 	dw DebugReset
 	dw DebugReset
 	dw DebugReset
-; 0xd402a
 
-InitClearScreen: ; d402a (35:402a)
+InitClearScreen:
 	ld a, TRUE
 	ld [wResetDisabled], a
 
@@ -206,9 +205,8 @@ InitClearScreen: ; d402a (35:402a)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0xd41bb
 
-Func_d41bb: ; d41bb (35:41bb)
+Func_d41bb:
 	ld a, [wPowerUpLevel]
 	and ACTION_HELP_LEVEL_CLEAR
 	jr z, .asm_d41ce
@@ -296,13 +294,12 @@ Func_d41bb: ; d41bb (35:41bb)
 	ret z
 ;	fallthrough
 
-OpenMusicalCoinsScreen: ; d425b (35:425b)
+OpenMusicalCoinsScreen:
 	ld a, SST_CLEAR_MUSICAL_COINS
 	ld [wSubState], a
 	ret
-; 0xd4261
 
-InitTimeAttackClearScreen: ; d4261 (35:4261)
+InitTimeAttackClearScreen:
 	ld a, TRUE
 	ld [wResetDisabled], a
 
@@ -391,9 +388,8 @@ InitTimeAttackClearScreen: ; d4261 (35:4261)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0xd434c
 
-Func_d434c: ; d434c (35:434c)
+Func_d434c:
 	ld a, [wTimeAttackResult]
 	cp TIME_ATTACK_GOT_HIGH_SCORE
 	jr nz, .asm_d435f
@@ -475,9 +471,8 @@ Func_d434c: ; d434c (35:434c)
 	bit A_BUTTON_F, a
 	ret z
 	jp OpenMusicalCoinsScreen
-; 0xd43e6
 
-InitMusicalCoinScreen: ; d43e6 (35:43e6)
+InitMusicalCoinScreen:
 	call DisableLCD
 	call ClearBGMap0
 	call ClearVirtualOAM
@@ -537,9 +532,8 @@ InitMusicalCoinScreen: ; d43e6 (35:43e6)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0xd4472
 
-Func_d4472: ; d4472 (35:4472)
+Func_d4472:
 	ld hl, wMenuObj3FramesetPtr + 1
 	farcall $7c, UpdateObjAnim
 	ld hl, wMenuObj3
@@ -611,9 +605,8 @@ Func_d4472: ; d4472 (35:4472)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0xd4507
 
-Func_d4507: ; d4507 (35:4507)
+Func_d4507:
 	call DoPencilMovement
 	push af
 	ld hl, wMenuObj1
@@ -633,9 +626,8 @@ Func_d4507: ; d4507 (35:4507)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0xd454c
 
-Func_d454c: ; d454c (35:454c)
+Func_d454c:
 	call DoPencilScribbling
 
 	ld hl, wMenuObj1
@@ -707,7 +699,7 @@ Func_d454c: ; d454c (35:454c)
 	play_sfx SFX_MUSICAL_COIN
 ;	fallthrough
 
-Func_d45e1: ; d45e1 (35:45e1)
+Func_d45e1:
 	xor a
 	ld [wTimer + 0], a
 	ld a, 2
@@ -715,9 +707,8 @@ Func_d45e1: ; d45e1 (35:45e1)
 	ld hl, wSubState
 	ld [hl], SST_CLEAR_EXIT
 	ret
-; 0xd45f0
 
-Func_d45f0: ; d45f0 (35:45f0)
+Func_d45f0:
 	ld hl, wMenuObj3FramesetPtr + 1
 	farcall $7c, UpdateObjAnim
 	ld hl, wMenuObj3
@@ -747,26 +738,23 @@ Func_d45f0: ; d45f0 (35:45f0)
 .asm_d463e
 	farcall Func_4628
 	ret
-; 0xd464e
 
-Func_d464e: ; d464e (35:464e)
+Func_d464e:
 	ld hl, Pals_d50a4
 	call LoadPalsToTempPals1
 	ld hl, Pals_d50e4
 	call LoadPalsToTempPals2
 	ret
-; 0xd465b
 
-Func_d465b: ; d465b (35:465b)
+Func_d465b:
 	xor a
 	ldh [rVBK], a
 	ld hl, GolfMenuGfx
 	ld bc, v0Tiles0
 	call Decompress
 	ret
-; 0xd4668
 
-Func_d4668: ; d4668 (35:4668)
+Func_d4668:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, BGMap_d6502
@@ -778,9 +766,8 @@ Func_d4668: ; d4668 (35:4668)
 	ld bc, v0BGMap0
 	call Decompress
 	ret
-; 0xd4682
 
-AddClearScreenSprite: ; d4682 (35:4682)
+AddClearScreenSprite:
 	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
@@ -797,9 +784,8 @@ AddClearScreenSprite: ; d4682 (35:4682)
 	ld hl, OAM_d4e26
 	call TryAddSprite
 	ret
-; 0xd46a2
 
-AddClearScreenWarioSprite: ; d46a2 (35:46a2)
+AddClearScreenWarioSprite:
 	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
@@ -816,9 +802,8 @@ AddClearScreenWarioSprite: ; d46a2 (35:46a2)
 	ld hl, OAM_d49cc
 	call TryAddSprite
 	ret
-; 0xd46c2
 
-SetTreasureTransitionParam: ; d46c2 (35:46c2)
+SetTreasureTransitionParam:
 	ld a, [wLevelEndScreen]
 	cp LVLEND_NO_TREASURE
 	jr z, .no_treasure
@@ -890,9 +875,8 @@ SetTreasureTransitionParam: ; d46c2 (35:46c2)
 .set_power_up_level
 	ld [wPowerUpLevel], a
 	ret
-; 0xd4733
 
-UpdateNumCollectedTreasures: ; d4733 (35:4733)
+UpdateNumCollectedTreasures:
 	ldh a, [rSVBK]
 	push af
 	ld a, $02
@@ -921,9 +905,8 @@ UpdateNumCollectedTreasures: ; d4733 (35:4733)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0xd4764
 
-VBlank_d4764: ; d4764 (35:4764)
+VBlank_d4764:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -970,9 +953,8 @@ VBlank_d4764: ; d4764 (35:4764)
 	call hTransferVirtualOAM
 	ret
 .end
-; 0xd47a7
 
-VBlank_d47a7: ; d47a7 (35:47a7)
+VBlank_d47a7:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -1021,9 +1003,8 @@ VBlank_d47a7: ; d47a7 (35:47a7)
 	call hTransferVirtualOAM
 	ret
 .end
-; 0xd47f1
 
-Func_d47f1: ; d47f1 (35:47f1)
+Func_d47f1:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, wMusicalCoinFlags
@@ -1071,9 +1052,8 @@ Func_d47f1: ; d47f1 (35:47f1)
 	pop hl
 	pop bc
 	ret
-; 0xd483a
 
-SetMusicalCoinFlag: ; d483a (35:483a)
+SetMusicalCoinFlag:
 	ld a, [wLevel]
 	srl a
 	srl a
@@ -1114,11 +1094,10 @@ SetMusicalCoinFlag: ; d483a (35:483a)
 	dec a
 	jr nz, .rotate_flags_left
 	ret
-; 0xd4876
 
 ; check if a bit is set in wMusicalCoinFlags
 ; for the level in wOWLevel
-_CheckLevelMusicalCoinFlag:: ; d4876 (35:4876)
+_CheckLevelMusicalCoinFlag::
 	ld hl, wMusicalCoinFlags
 	ld a, [wOWLevel]
 	dec a
@@ -1154,9 +1133,8 @@ _CheckLevelMusicalCoinFlag:: ; d4876 (35:4876)
 	dec a
 	jr nz, .loop_2
 	ret
-; 0xd48a7
 
-AddPencilSprite: ; d48a7 (35:48a7)
+AddPencilSprite:
 	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
@@ -1173,10 +1151,9 @@ AddPencilSprite: ; d48a7 (35:48a7)
 	ld hl, OAM_d65e1
 	call TryAddSprite
 	ret
-; 0xd48c7
 
 ; returns TRUE in a if done movement
-DoPencilMovement: ; d48c7 (35:48c7)
+DoPencilMovement:
 	ld a, [wAllMusicalCoinsLevel]
 	cp NUM_LEVELS - 5
 	jr nc, .row_4
@@ -1254,9 +1231,8 @@ DoPencilMovement: ; d48c7 (35:48c7)
 .done_movement
 	ld a, TRUE
 	ret
-; 0xd492e
 
-DoPencilScribbling: ; d492e (35:492e)
+DoPencilScribbling:
 	ld a, [wTimer]
 	ld e, a
 	ld d, $00
@@ -1271,9 +1247,8 @@ DoPencilScribbling: ; d492e (35:492e)
 	add [hl]
 	ld [wMenuObj1XCoord], a
 	ret
-; 0xd494b
 
-MusicalCoinLevelBGPals: ; d494b (35:494b)
+MusicalCoinLevelBGPals:
 	db 4 ; LEVEL_OUT_OF_THE_WOODS
 	db 4 ; LEVEL_THE_PEACEFUL_VILLAGE
 	db 4 ; LEVEL_THE_VAST_PLAIN
@@ -1299,9 +1274,8 @@ MusicalCoinLevelBGPals: ; d494b (35:494b)
 	db 7 ; LEVEL_THE_WARPED_VOID
 	db 7 ; LEVEL_THE_EAST_CRATER
 	db 7 ; LEVEL_FOREST_OF_FEAR
-; 0xd4964
 
-PencilScribbleXOffsets: ; d4964 (35:4964)
+PencilScribbleXOffsets:
 	db  0
 	db  0
 	db  0
@@ -1354,9 +1328,8 @@ PencilScribbleXOffsets: ; d4964 (35:4964)
 	db  0
 	db  0
 	db  0
-; 0xd4998
 
-PencilScribbleYOffsets: ; d4998 (35:4998)
+PencilScribbleYOffsets:
 	db  1
 	db  1
 	db  1
@@ -1409,9 +1382,8 @@ PencilScribbleYOffsets: ; d4998 (35:4998)
 	db -1
 	db -1
 	db -1
-; 0xd49cc
 
-OAM_d49cc:: ; d49cc (35:49cc)
+OAM_d49cc::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1714,14 +1686,12 @@ OAM_d49cc:: ; d49cc (35:49cc)
 	frame_oam -32,  -4, $56, 0
 	frame_oam -16,   8, $7c, 0
 	db $80
-; 0xd4d18
 
-Frameset_d4d18: ; d4d18 (35:4d18)
+Frameset_d4d18:
 	db $00, 30
 	db $ff
-; 0xd4d1b
 
-Frameset_d4d1b:: ; d4d1b (35:4d1b)
+Frameset_d4d1b::
 	db $01,  8
 	db $02,  8
 	db $03,  1
@@ -1753,16 +1723,14 @@ Frameset_d4d1b:: ; d4d1b (35:4d1b)
 	db $1b,  6
 	db $00, 180
 	db $ff
-; 0xd4d58
 
-Frameset_d4d58: ; d4d58 (35:4d58)
+Frameset_d4d58:
 	db $07, 20
 	db $08, 10
 	db $09, 10
 	db $ff
-; 0xd4d5f
 
-Frameset_d4d5f:: ; d4d5f (35:4d5f)
+Frameset_d4d5f::
 	db $0a,  8
 	db $0b,  4
 	db $0c,  4
@@ -1830,9 +1798,8 @@ Frameset_d4d5f:: ; d4d5f (35:4d5f)
 	db $0a,  8
 	db $0b,  4
 	db $ff
-; 0xd4de4
 
-Frameset_d4de4:: ; d4de4 (35:4de4)
+Frameset_d4de4::
 	db $0a,  8
 	db $0b,  4
 	db $0c,  4
@@ -1865,15 +1832,13 @@ Frameset_d4de4:: ; d4de4 (35:4de4)
 	db $0f,  4
 	db $0d, 30
 	db $ff
-; 0xd4e23
 
 ; unreferenced
-Frameset_d4e23: ; d4e23 (35:4e23)
+Frameset_d4e23:
 	db $09,  4
 	db $ff
-; 0xd4e26
 
-OAM_d4e26: ; d4e26 (35:4e26)
+OAM_d4e26:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -2104,63 +2069,52 @@ OAM_d4e26: ; d4e26 (35:4e26)
 	frame_oam -16,  -8, $e8, 7 | OAMF_BANK1
 	frame_oam -16,  -1, $e8, 7 | OAMF_BANK1 | OAMF_XFLIP
 	db $80
-; 0xd5045
 
-Frameset_d5045:: ; d5045 (35:5045)
+Frameset_d5045::
 	db $00,  3
 	db $01,  3
 	db $ff
-; 0xd504a
 
-Frameset_d504a:: ; d504a (35:504a)
+Frameset_d504a::
 	db $02,  3
 	db $03,  3
 	db $ff
-; 0xd504f
 
-Frameset_d504f:: ; d504f (35:504f)
+Frameset_d504f::
 	db $04,  3
 	db $05,  3
 	db $ff
-; 0xd5054
 
-Frameset_d5054:: ; d5054 (35:5054)
+Frameset_d5054::
 	db $06,  3
 	db $07,  3
 	db $ff
-; 0xd5059
 
-Frameset_d5059: ; d5059 (35:5059)
+Frameset_d5059:
 	db $08,  4
 	db $ff
-; 0xd505c
 
-Frameset_d505c: ; d505c (35:505c)
+Frameset_d505c:
 	db $09,  4
 	db $ff
-; 0xd505f
 
-Frameset_d505f: ; d505f (35:505f)
+Frameset_d505f:
 	db $0a,  4
 	db $ff
-; 0xd5062
 
-Frameset_d5062: ; d5062 (35:5062)
+Frameset_d5062:
 	db $0b,  4
 	db $ff
-; 0xd5065
 
-Frameset_d5065: ; d5065 (35:5065)
+Frameset_d5065:
 	db $0c,  4
 	db $ff
-; 0xd5068
 
-Frameset_d5068: ; d5068 (35:5068)
+Frameset_d5068:
 	db $0d,  4
 	db $ff
-; 0xd506b
 
-Frameset_d506b: ; d506b (35:506b)
+Frameset_d506b:
 	db $0e,  4
 	db $0f,  4
 	db $10,  4
@@ -2172,9 +2126,8 @@ Frameset_d506b: ; d506b (35:506b)
 	db $12,  4
 	db $11,  4
 	db $ff
-; 0xd5080
 
-Frameset_d5080: ; d5080 (35:5080)
+Frameset_d5080:
 	db $13,  4
 	db $14,  4
 	db $15,  4
@@ -2186,34 +2139,28 @@ Frameset_d5080: ; d5080 (35:5080)
 	db $17,  4
 	db $16,  4
 	db $ff
-; 0xd5095
 
-Frameset_d5095: ; d5095 (35:5095)
+Frameset_d5095:
 	db $18,  4
 	db $ff
-; 0xd5098
 
-Frameset_d5098: ; d5098 (35:5098)
+Frameset_d5098:
 	db $19,  4
 	db $ff
-; 0xd509b
 
-Frameset_d509b: ; d509b (35:509b)
+Frameset_d509b:
 	db $1a,  4
 	db $ff
-; 0xd509e
 
-Frameset_d509e: ; d509e (35:509e)
+Frameset_d509e:
 	db $1b,  4
 	db $ff
-; 0xd50a1
 
-Frameset_d50a1: ; d50a1 (35:50a1)
+Frameset_d50a1:
 	db $1c,  4
 	db $ff
-; 0xd50a4
 
-Pals_d50a4: ; d50a4 (35:50a4)
+Pals_d50a4:
 	rgb 31, 31, 31
 	rgb 27, 27, 27
 	rgb 22, 22, 22
@@ -2253,9 +2200,8 @@ Pals_d50a4: ; d50a4 (35:50a4)
 	rgb  0, 16,  0
 	rgb 30,  0,  0
 	rgb  0,  4,  0
-; 0xd50e4
 
-Pals_d50e4: ; d50e4 (35:50e4)
+Pals_d50e4:
 	rgb  0, 22, 16
 	rgb 27, 12,  0
 	rgb 27, 20,  0
@@ -2295,18 +2241,17 @@ Pals_d50e4: ; d50e4 (35:50e4)
 	rgb 21, 21, 21
 	rgb 10, 10, 10
 	rgb  0,  0,  0
-; 0xd5124
 
 ; TODO in its own section to be added to golf.o?
 GolfMenuGfx:: INCBIN "gfx/golf/golf_menu.2bpp.lz"
 
-BGMap_d63fd: ; d63fd (1:63fd)
+BGMap_d63fd:
 INCBIN "gfx/bgmaps/map_d63fd.bin"
 
-BGMap_d6502: ; d6502 (1:6502)
+BGMap_d6502:
 INCBIN "gfx/bgmaps/map_d6502.bin"
 
-OAM_d65e1: ; d65e1 (35:65e1)
+OAM_d65e1:
 	dw .frame_0
 
 .frame_0
@@ -2314,9 +2259,7 @@ OAM_d65e1: ; d65e1 (35:65e1)
 	frame_oam -16,   8, $b8, 0
 	frame_oam  -8,   0, $ba, 1
 	db $80
-; 0xd65f0
 
-Frameset_d65f0: ; d65f0 (35:65f0)
+Frameset_d65f0:
 	db $00,  4
 	db $ff
-; 0xd65f3

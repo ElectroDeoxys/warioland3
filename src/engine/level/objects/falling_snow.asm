@@ -1,4 +1,4 @@
-FallingSnowSpawnerFunc: ; 4952d (12:552d)
+FallingSnowSpawnerFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_49544)
 	ld [hld], a
@@ -83,9 +83,8 @@ FallingSnowSpawnerFunc: ; 4952d (12:552d)
 	ld a, LOW(.Func_49544)
 	ld [hld], a
 	ret
-; 0x495c2
 
-FallingSnowFunc: ; 495c2 (12:55c2)
+FallingSnowFunc:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjFlags
@@ -225,4 +224,3 @@ FallingSnowFunc: ; 495c2 (12:55c2)
 	xor a
 	ld [wCurObjFlags], a
 	ret
-; 0x496bd

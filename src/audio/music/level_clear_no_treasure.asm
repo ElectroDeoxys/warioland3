@@ -1,4 +1,4 @@
-Music_LevelClearNoTreasure_Ch1: ; 38965 (0e:4965)
+Music_LevelClearNoTreasure_Ch1:
 	semitone_offset 0
 
 .loop
@@ -76,9 +76,8 @@ Music_LevelClearNoTreasure_Ch1: ; 38965 (0e:4965)
 	audio_jump .loop
 .end
 	audio_end
-; 0x389bd
 
-Music_LevelClearNoTreasure_Ch2: ; 389bd (0e:49bd)
+Music_LevelClearNoTreasure_Ch2:
 	semitone_offset 0
 
 .loop
@@ -151,9 +150,8 @@ Music_LevelClearNoTreasure_Ch2: ; 389bd (0e:49bd)
 	audio_jump .loop
 .end
 	audio_end
-; 0x38a09
 
-Music_LevelClearNoTreasure_Ch3: ; 38a09 (0e:4a09)
+Music_LevelClearNoTreasure_Ch3:
 	semitone_offset 0
 
 .loop
@@ -234,9 +232,8 @@ Music_LevelClearNoTreasure_Ch3: ; 38a09 (0e:4a09)
 	audio_jump .loop
 .end
 	audio_end
-; 0x38a63
 
-Music_LevelClearNoTreasure: ; 38a63 (0e:4a63)
+Music_LevelClearNoTreasure:
 	db 3, 2
 	dw Music_LevelClearNoTreasure_Ch1
 	dw Music_LevelClearNoTreasure_Ch2
@@ -250,4 +247,3 @@ Music_LevelClearNoTreasure: ; 38a63 (0e:4a63)
 	dw Music_LevelClearNoTreasure_Ch1.end
 	dw Music_LevelClearNoTreasure_Ch2.end
 	dw Music_LevelClearNoTreasure_Ch3.end
-; 0x38a77

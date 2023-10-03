@@ -1,4 +1,4 @@
-ParaGoomFunc: ; 41357 (10:5357)
+ParaGoomFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Init)
 	ld [hld], a
@@ -1165,4 +1165,3 @@ ParaGoomFunc: ; 41357 (10:5357)
 	ld a, $f4
 	ld [hl], a
 	ret
-; 0x41a7c

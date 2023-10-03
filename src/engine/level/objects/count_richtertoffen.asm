@@ -1,4 +1,4 @@
-CountRichtertoffenFunc: ; 40e12 (10:4e12)
+CountRichtertoffenFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_SUBSTATE
@@ -781,4 +781,3 @@ CountRichtertoffenFunc: ; 40e12 (10:4e12)
 	or OBJ_INTERACTION_00 ; unnecessary
 	ld [hld], a
 	ret
-; 0x41357

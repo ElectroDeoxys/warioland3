@@ -1,4 +1,4 @@
-DoughnuteerFunc: ; 41a7c (10:5a7c)
+DoughnuteerFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Init)
 	ld [hld], a
@@ -1108,4 +1108,3 @@ DoughnutFunc:
 	ld [wCurObjAction], a
 	ld bc, Data_60040
 	jp ApplyObjYMovement
-; 0x42170

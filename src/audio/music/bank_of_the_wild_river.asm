@@ -1,4 +1,4 @@
-Music_BankOfTheWildRiver_Ch1: ; 35732 (0d:5732)
+Music_BankOfTheWildRiver_Ch1:
 	semitone_offset 12
 	tempo 65
 	wave WAVE_48
@@ -236,9 +236,8 @@ Music_BankOfTheWildRiver_Ch1: ; 35732 (0d:5732)
 	note D_3
 	audio_wait_3
 	audio_end
-; 0x35852
 
-Music_BankOfTheWildRiver_Ch2: ; 35852 (0d:5852)
+Music_BankOfTheWildRiver_Ch2:
 	semitone_offset 0
 	wave WAVE_51
 	volume 66
@@ -436,9 +435,8 @@ Music_BankOfTheWildRiver_Ch2: ; 35852 (0d:5852)
 	note F_2
 	audio_wait_3
 	audio_end
-; 0x3594a
 
-Music_BankOfTheWildRiver_Ch3: ; 3594a (0d:594a)
+Music_BankOfTheWildRiver_Ch3:
 	semitone_offset 0
 	wave WAVE_61
 	volume 108
@@ -547,9 +545,8 @@ Music_BankOfTheWildRiver_Ch3: ; 3594a (0d:594a)
 	note NOTE_DURATION_3
 	audio_wait_3
 	audio_end
-; 0x359dd
 
-Music_BankOfTheWildRiver_Ch4: ; 359dd (0d:59dd)
+Music_BankOfTheWildRiver_Ch4:
 	semitone_offset 0
 	wave WAVE_28
 	volume 85
@@ -634,9 +631,8 @@ Music_BankOfTheWildRiver_Ch4: ; 359dd (0d:59dd)
 	note G#0
 	audio_wait_3
 	audio_end
-; 0x35a63
 
-Music_BankOfTheWildRiver: ; 35a63 (d:5a63)
+Music_BankOfTheWildRiver:
 	db $4, $2
 	dw Music_BankOfTheWildRiver_Ch1
 	dw Music_BankOfTheWildRiver_Ch2

@@ -1,4 +1,4 @@
-ShootFunc: ; 56611 (15:6611)
+ShootFunc:
 	ld a, TRUE
 	ld [wIsBossBattle], a
 	stop_music2
@@ -1082,7 +1082,7 @@ ShootFunc: ; 56611 (15:6611)
 	ld bc, Data_60ea0
 	jp ApplyObjYMovement
 
-GKTortoisePlatformFunc: ; 56dcc (15:6dcc)
+GKTortoisePlatformFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -1175,7 +1175,7 @@ GKTortoisePlatformFunc: ; 56dcc (15:6dcc)
 	ld [hl], a
 	ret
 
-GKTortoiseFunc: ; 56e6a (15:6e6a)
+GKTortoiseFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -1723,7 +1723,7 @@ GKTortoiseFunc: ; 56e6a (15:6e6a)
 	ld [wXPosHi], a
 	ret
 
-Func_57213: ; 57213 (15:7213)
+Func_57213:
 	ld hl, wCurObjVar3
 	ld a, [hl]
 	add c
@@ -1761,7 +1761,7 @@ Func_57213: ; 57213 (15:7213)
 	call SubYOffset
 	jp HandleUpwardsFloorTransition
 
-Func_57244: ; 57244 (15:7244)
+Func_57244:
 	ld hl, wCurObjVar3
 	ld a, [hl]
 	add c
@@ -1778,18 +1778,16 @@ Func_57244: ; 57244 (15:7244)
 	ld b, a
 	call AddYOffset
 	jp HandleDownwardsFloorTransition
-; 0x5725b
 
 ; unreferenced
-Func_5725b: ; 5725b (15:725b)
+Func_5725b:
 	xor a
 	sub b
 	ld b, a
 	call SubYOffset
 	jp HandleUpwardsFloorTransition
-; 0x57264
 
-ShootGoalCounterFunc: ; 57264 (15:7264)
+ShootGoalCounterFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_57284)
 	ld [hld], a
@@ -1834,7 +1832,7 @@ ShootGoalCounterFunc: ; 57264 (15:7264)
 	ld [wcac3], a
 	ret
 
-WarioGoalCounterFunc: ; 572b4 (15:72b4)
+WarioGoalCounterFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_572d4)
 	ld [hld], a
@@ -1876,4 +1874,3 @@ WarioGoalCounterFunc: ; 572b4 (15:72b4)
 	ld a, $3e
 	ld [wCurObjFrame], a
 	ret
-; 0x57300

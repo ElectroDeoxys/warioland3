@@ -1,4 +1,4 @@
-ElectricLampFunc: ; 459a9 (11:59a9)
+ElectricLampFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -50,7 +50,7 @@ ElectricLampFunc: ; 459a9 (11:59a9)
 	ld bc, ObjParams_ElectricLampSpark
 	jp CreateObjectFromCurObjPos
 
-ElectricLampSparkFunc: ; 45a12 (11:5a12)
+ElectricLampSparkFunc:
 	ld hl, wCurObjFlags
 	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld bc, Data_60040
@@ -146,4 +146,3 @@ ElectricLampSparkFunc: ; 45a12 (11:5a12)
 	xor a
 	ld [wCurObjFlags], a
 	ret
-; 0x45ab4

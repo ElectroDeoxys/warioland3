@@ -1,4 +1,4 @@
-Music_TheVastPlainDay_Ch1: ; 3518d (0d:518d)
+Music_TheVastPlainDay_Ch1:
 	semitone_offset 0
 
 .loop
@@ -178,9 +178,8 @@ Music_TheVastPlainDay_Ch1: ; 3518d (0d:518d)
 	note NOTE_DURATION_3, C_3, 19
 	audio_wait_3
 	audio_end
-; 0x35281
 
-Music_TheVastPlainDay_Ch2: ; 35281 (0d:5281)
+Music_TheVastPlainDay_Ch2:
 	semitone_offset 0
 
 .loop
@@ -288,9 +287,8 @@ Music_TheVastPlainDay_Ch2: ; 35281 (0d:5281)
 	note A#1
 	audio_wait_16
 	audio_end
-; 0x3530b
 
-Music_TheVastPlainDay_Ch3: ; 3530b (0d:530b)
+Music_TheVastPlainDay_Ch3:
 	semitone_offset 0
 
 .loop
@@ -503,9 +501,8 @@ Music_TheVastPlainDay_Ch3: ; 3530b (0d:530b)
 	note NOTE_DURATION_3, F_1
 	audio_wait_3
 	audio_end
-; 0x35410
 
-Music_TheVastPlainDay_Ch4: ; 35410 (0d:5410)
+Music_TheVastPlainDay_Ch4:
 	semitone_offset 0
 
 .loop
@@ -573,9 +570,8 @@ Music_TheVastPlainDay_Ch4: ; 35410 (0d:5410)
 	note D_0
 	audio_wait_3
 	audio_end
-; 0x3547a
 
-Music_TheVastPlainDay: ; 3547a (d:547a)
+Music_TheVastPlainDay:
 	db $4, $2
 	dw Music_TheVastPlainDay_Ch1
 	dw Music_TheVastPlainDay_Ch2

@@ -1,4 +1,4 @@
-OwlFunc: ; 491d3 (12:51d3)
+OwlFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -171,4 +171,3 @@ OwlFunc: ; 491d3 (12:51d3)
 	ld hl, wCurObjUnk02
 	farcall DespawnObject
 	ret
-; 0x49326

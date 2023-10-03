@@ -1,4 +1,4 @@
-Music_OwlWario_Ch1: ; 37e0c (0d:7e0c)
+Music_OwlWario_Ch1:
 	semitone_offset 0
 
 .loop
@@ -127,9 +127,8 @@ Music_OwlWario_Ch1: ; 37e0c (0d:7e0c)
 	audio_jump .loop
 .end
 	audio_end
-; 0x37e9e
 
-Music_OwlWario_Ch2: ; 37e9e (0d:7e9e)
+Music_OwlWario_Ch2:
 	semitone_offset 0
 
 .loop
@@ -173,9 +172,8 @@ Music_OwlWario_Ch2: ; 37e9e (0d:7e9e)
 	audio_jump .loop
 .end
 	audio_end
-; 0x37ee5
 
-Music_OwlWario_Ch3: ; 37ee5 (0d:7ee5)
+Music_OwlWario_Ch3:
 	semitone_offset 0
 
 .loop
@@ -237,9 +235,8 @@ Music_OwlWario_Ch3: ; 37ee5 (0d:7ee5)
 	audio_jump .loop
 .end
 	audio_end
-; 0x37f41
 
-Music_OwlWario: ; 37f41 (d:7f41)
+Music_OwlWario:
 	db $3, $2
 	dw Music_OwlWario_Ch1
 	dw Music_OwlWario_Ch2

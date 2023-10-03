@@ -48,7 +48,7 @@ MACRO move_coin
 x = x + 1
 ENDM
 
-CoinFunc: ; 63383 (18:7383)
+CoinFunc:
 	ld a, [wGlobalCounter]
 	dec a
 	and %111111
@@ -770,4 +770,3 @@ CoinFunc: ; 63383 (18:7383)
 	ret z
 	ld [wCurObjFramesetOffset], a
 	ret
-; 0x63936

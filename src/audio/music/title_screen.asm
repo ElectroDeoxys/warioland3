@@ -1,4 +1,4 @@
-Music_TitleScreen_Ch1: ; 39f1f (0e:5f1f)
+Music_TitleScreen_Ch1:
 	semitone_offset 0
 	tempo 60
 	wave WAVE_51
@@ -162,9 +162,8 @@ Music_TitleScreen_Ch1: ; 39f1f (0e:5f1f)
 	audio_jump .loop
 .end
 	audio_end
-; 0x39fe5
 
-Music_TitleScreen_Ch2: ; 39fe5 (0e:5fe5)
+Music_TitleScreen_Ch2:
 	semitone_offset 0
 	wave WAVE_47
 	volume 75
@@ -484,9 +483,8 @@ Music_TitleScreen_Ch2: ; 39fe5 (0e:5fe5)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3a170
 
-Music_TitleScreen_Ch3: ; 3a170 (0e:6170)
+Music_TitleScreen_Ch3:
 	semitone_offset 0
 	wave WAVE_63
 	volume 108
@@ -665,9 +663,8 @@ Music_TitleScreen_Ch3: ; 3a170 (0e:6170)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3a24b
 
-Music_TitleScreen_Ch4: ; 3a24b (0e:624b)
+Music_TitleScreen_Ch4:
 	semitone_offset 0
 	wave WAVE_28
 	volume 75
@@ -789,9 +786,8 @@ Music_TitleScreen_Ch4: ; 3a24b (0e:624b)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3a2ef
 
-Music_TitleScreen: ; 3a2ef (0e:62ef)
+Music_TitleScreen:
 	db 4, 2
 	dw Music_TitleScreen_Ch1
 	dw Music_TitleScreen_Ch2
@@ -808,4 +804,3 @@ Music_TitleScreen: ; 3a2ef (0e:62ef)
 	dw Music_TitleScreen_Ch2.end
 	dw Music_TitleScreen_Ch3.end
 	dw Music_TitleScreen_Ch4.end
-; 0x3a309

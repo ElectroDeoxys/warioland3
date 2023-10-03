@@ -1,4 +1,4 @@
-GreyPrinceFroggyFunc: ; 44080 (11:4080)
+GreyPrinceFroggyFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -17,9 +17,8 @@ GreyPrinceFroggyFunc: ; 44080 (11:4080)
 	ld [hld], a
 	ld l, OBJ_STATE
 	jp PrinceFroggyFunc.Func_441dc
-; 0x440a1
 
-RedPrinceFroggyFunc: ; 440a1 (11:40a1)
+RedPrinceFroggyFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -39,9 +38,8 @@ RedPrinceFroggyFunc: ; 440a1 (11:40a1)
 	ld a, $00
 	ld [hld], a
 	ret
-; 0x440c4
 
-PrinceFroggyFunc: ; 440c4 (11:40c4)
+PrinceFroggyFunc:
 .Func_440c4
 	ld a, HIGH(Func_33f8)
 	ld c, LOW(Func_33f8)
@@ -263,4 +261,3 @@ PrinceFroggyFunc: ; 440c4 (11:40c4)
 	ld [wCurObjVar2], a
 	call MoveObjectLeftByVar2
 	jp VanishObject2
-; 0x4423b

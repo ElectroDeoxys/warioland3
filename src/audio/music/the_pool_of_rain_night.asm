@@ -1,4 +1,4 @@
-Music_ThePoolOfRainNight_Ch1: ; 367e5 (0d:67e5)
+Music_ThePoolOfRainNight_Ch1:
 	semitone_offset 0
 
 .loop
@@ -80,9 +80,8 @@ Music_ThePoolOfRainNight_Ch1: ; 367e5 (0d:67e5)
 	note G_3
 	audio_wait_2
 	audio_end
-; 0x3683f
 
-Music_ThePoolOfRainNight_Ch2: ; 3683f (0d:683f)
+Music_ThePoolOfRainNight_Ch2:
 	semitone_offset 0
 
 .loop
@@ -163,9 +162,8 @@ Music_ThePoolOfRainNight_Ch2: ; 3683f (0d:683f)
 	note D_3
 	audio_wait_2
 	audio_end
-; 0x36897
 
-Music_ThePoolOfRainNight_Ch3: ; 36897 (0d:6897)
+Music_ThePoolOfRainNight_Ch3:
 	semitone_offset 0
 
 .loop
@@ -245,9 +243,8 @@ Music_ThePoolOfRainNight_Ch3: ; 36897 (0d:6897)
 	note NOTE_DURATION_3
 	audio_wait_3
 	audio_end
-; 0x36909
 
-Music_ThePoolOfRainNight_Ch4: ; 36909 (0d:6909)
+Music_ThePoolOfRainNight_Ch4:
 	semitone_offset 0
 
 .loop
@@ -343,9 +340,8 @@ Music_ThePoolOfRainNight_Ch4: ; 36909 (0d:6909)
 	note F#0
 	audio_wait_3
 	audio_end
-; 0x36997
 
-Music_ThePoolOfRainNight: ; 36997 (d:6997)
+Music_ThePoolOfRainNight:
 	db $4, $2
 	dw Music_ThePoolOfRainNight_Ch1
 	dw Music_ThePoolOfRainNight_Ch2

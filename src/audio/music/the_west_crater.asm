@@ -1,4 +1,4 @@
-Music_TheWestCrater_Ch1: ; 34d7d (0d:4d7d)
+Music_TheWestCrater_Ch1:
 	semitone_offset 0
 
 .loop
@@ -290,9 +290,8 @@ Music_TheWestCrater_Ch1: ; 34d7d (0d:4d7d)
 	note NOTE_DURATION_12, F#2, 24
 	audio_wait_12
 	audio_end
-; 0x34eca
 
-Music_TheWestCrater_Ch2: ; 34eca (0d:4eca)
+Music_TheWestCrater_Ch2:
 	semitone_offset 0
 
 .loop
@@ -581,9 +580,8 @@ Music_TheWestCrater_Ch2: ; 34eca (0d:4eca)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3500f
 
-Music_TheWestCrater_Ch3: ; 3500f (0d:500f)
+Music_TheWestCrater_Ch3:
 	semitone_offset 0
 
 .loop
@@ -890,9 +888,8 @@ Music_TheWestCrater_Ch3: ; 3500f (0d:500f)
 	audio_jump .loop
 .end
 	audio_end
-; 0x35179
 
-Music_TheWestCrater: ; 35179 (d:5179)
+Music_TheWestCrater:
 	db $3, $2
 	dw Music_TheWestCrater_Ch1
 	dw Music_TheWestCrater_Ch2

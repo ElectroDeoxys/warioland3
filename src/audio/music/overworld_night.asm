@@ -1,4 +1,4 @@
-Music_OverworldNight_Ch1: ; 38710 (0e:4710)
+Music_OverworldNight_Ch1:
 	semitone_offset 0
 
 .loop
@@ -134,9 +134,8 @@ Music_OverworldNight_Ch1: ; 38710 (0e:4710)
 	note A_3
 	audio_wait_3
 	audio_end
-; 0x387b9
 
-Music_OverworldNight_Ch2: ; 387b9 (0e:47b9)
+Music_OverworldNight_Ch2:
 	semitone_offset 0
 
 .loop
@@ -263,9 +262,8 @@ Music_OverworldNight_Ch2: ; 387b9 (0e:47b9)
 	note F_3
 	audio_wait_3
 	audio_end
-; 0x38857
 
-Music_OverworldNight_Ch3: ; 38857 (0e:4857)
+Music_OverworldNight_Ch3:
 	semitone_offset 0
 
 .loop
@@ -482,9 +480,8 @@ Music_OverworldNight_Ch3: ; 38857 (0e:4857)
 	note C_3
 	audio_wait_3
 	audio_end
-; 0x38951
 
-Music_OverworldNight: ; 38951 (0e:4951)
+Music_OverworldNight:
 	db 3, 2
 	dw Music_OverworldNight_Ch1
 	dw Music_OverworldNight_Ch2
@@ -498,4 +495,3 @@ Music_OverworldNight: ; 38951 (0e:4951)
 	dw Music_OverworldNight_Ch1.end
 	dw Music_OverworldNight_Ch2.end
 	dw Music_OverworldNight_Ch3.end
-; 0x38965

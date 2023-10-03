@@ -1,4 +1,4 @@
-WolfenbossFunc: ; 55e4e (15:5e4e)
+WolfenbossFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -533,7 +533,7 @@ WolfenbossFunc: ; 55e4e (15:5e4e)
 	ld [hl], a
 	ret
 
-MagicSpiralFunc: ; 56201 (15:6201)
+MagicSpiralFunc:
 	ld hl, wCurObjFlags
 	set 3, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -646,7 +646,7 @@ MagicSpiralFunc: ; 56201 (15:6201)
 	ld [wCurObjFlags], a
 	ret
 
-WolfenbossPlatformFunc: ; 562c8 (15:62c8)
+WolfenbossPlatformFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -706,7 +706,7 @@ WolfenbossPlatformFunc: ; 562c8 (15:62c8)
 	jp nz, Func_3326
 ;	fallthrough
 
-Func_56326: ; 56326 (15:6326)
+Func_56326:
 	xor a
 	ld [wCurObjFlags], a
 	ld hl, wCurObjUnk02
@@ -714,7 +714,7 @@ Func_56326: ; 56326 (15:6326)
 	farcall Func_ba42
 	ret
 
-IgaguriFunc: ; 5633f (15:633f)
+IgaguriFunc:
 	ld a, [wGlobalCounter]
 	and $07
 	jr nz, .asm_5634e
@@ -946,7 +946,7 @@ IgaguriFunc: ; 5633f (15:633f)
 	ld [wCurObjFlags], a
 	ret
 
-KuriFunc: ; 564ea (15:64ea)
+KuriFunc:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld bc, Data_60d60
@@ -1116,4 +1116,3 @@ KuriFunc: ; 564ea (15:64ea)
 	ret c
 	play_sfx SFX_01A
 	ret
-; 0x56611

@@ -1,4 +1,4 @@
-StrongWaterCurrentFunc: ; 51cf9 (14:5cf9)
+StrongWaterCurrentFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -28,7 +28,7 @@ StrongWaterCurrentFunc: ; 51cf9 (14:5cf9)
 .Func_51d2d:
 	ret
 
-PesceFunc: ; 51d2e (14:5d2e)
+PesceFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -772,9 +772,8 @@ PesceFunc: ; 51d2e (14:5d2e)
 	ld a, $02
 	ld [wCurObjVar1], a
 	ret
-; 0x5226b
 
-DragonflySpawnerFunc: ; 5226b (14:626b)
+DragonflySpawnerFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_52282)
 	ld [hld], a
@@ -870,7 +869,7 @@ DragonflySpawnerFunc: ; 5226b (14:626b)
 	ld [wca6b], a
 	ret
 
-Dragonfly1Func: ; 52317 (14:6317)
+Dragonfly1Func:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_52321)
 	ld [hld], a
@@ -970,7 +969,7 @@ Dragonfly1Func: ; 52317 (14:6317)
 	jp c, MoveObjectRight_Fast
 	jp MoveObjectLeft_Fast
 
-Dragonfly2Func: ; 523c0 (14:63c0)
+Dragonfly2Func:
 	ld de, Frameset_699d0
 	call SetObjectFramesetPtr
 	ld a, $28
@@ -1065,7 +1064,7 @@ Dragonfly2Func: ; 523c0 (14:63c0)
 	ld [hl], a
 	ret
 
-FlySpawnerFunc: ; 5245e (14:645e)
+FlySpawnerFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_52475)
 	ld [hld], a
@@ -1170,7 +1169,7 @@ FlySpawnerFunc: ; 5245e (14:645e)
 	ld [wCurObjFlags], a
 	ret
 
-FlyFunc: ; 52513 (14:6513)
+FlyFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_52533)
 	ld [hld], a
@@ -1265,7 +1264,7 @@ FlyFunc: ; 52513 (14:6513)
 	ld [hl], a
 	ret
 
-CheeseFunc: ; 525bf (14:65bf)
+CheeseFunc:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjState]
@@ -1359,4 +1358,3 @@ CheeseFunc: ; 525bf (14:65bf)
 	ld b, PARTICLE_BUBBLES
 	farcall CreateParticle
 	ret
-; 0x52665

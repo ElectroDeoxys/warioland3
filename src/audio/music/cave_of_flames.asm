@@ -1,4 +1,4 @@
-Music_CaveOfFlames_Ch1: ; 35f5e (0d:5f5e)
+Music_CaveOfFlames_Ch1:
 	semitone_offset 0
 	tempo 42
 	wave WAVE_63
@@ -312,9 +312,8 @@ Music_CaveOfFlames_Ch1: ; 35f5e (0d:5f5e)
 	note B_1
 	audio_wait_3
 	audio_end
-; 0x360d0
 
-Music_CaveOfFlames_Ch2: ; 360d0 (0d:60d0)
+Music_CaveOfFlames_Ch2:
 	semitone_offset 0
 	wave WAVE_55
 	volume 85
@@ -671,9 +670,8 @@ Music_CaveOfFlames_Ch2: ; 360d0 (0d:60d0)
 	note G_2
 	audio_wait_3
 	audio_end
-; 0x36266
 
-Music_CaveOfFlames_Ch3: ; 36266 (0d:6266)
+Music_CaveOfFlames_Ch3:
 	semitone_offset 0
 	wave WAVE_48
 	volume 66
@@ -1063,9 +1061,8 @@ Music_CaveOfFlames_Ch3: ; 36266 (0d:6266)
 .end
 	audio_call .sub1
 	audio_end
-; 0x3641f
 
-Music_CaveOfFlames_Ch4: ; 3641f (0d:641f)
+Music_CaveOfFlames_Ch4:
 	semitone_offset 0
 	wave WAVE_28
 	volume 75
@@ -1157,9 +1154,8 @@ Music_CaveOfFlames_Ch4: ; 3641f (0d:641f)
 	note NOTE_DURATION_3, D_0
 	audio_wait_3
 	audio_end
-; 0x364c6
 
-Music_CaveOfFlames: ; 364c6 (d:64c6)
+Music_CaveOfFlames:
 	db $4, $2
 	dw Music_CaveOfFlames_Ch1
 	dw Music_CaveOfFlames_Ch2

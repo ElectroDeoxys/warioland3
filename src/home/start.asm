@@ -1,5 +1,5 @@
 SECTION "start", ROM0
-Start:: ; 0150 (0:0150)
+Start::
 	and a
 	cp BOOTUP_A_CGB
 	ld a, FALSE
@@ -11,10 +11,10 @@ Start:: ; 0150 (0:0150)
 	ldh [hfffd], a
 	; fallthrough
 
-Init:: ; 15e (0:15e)
+Init::
 	xor a
 	ldh [hDemoPowerUp], a
-InitWithoutDemoPowerUpReset:: ; 161 (0:161)
+InitWithoutDemoPowerUpReset::
 	di
 	ld sp, $cfff
 	ld hl, sp+$00
@@ -177,16 +177,14 @@ InitWithoutDemoPowerUpReset:: ; 161 (0:161)
 	ld [wVBlankFuncExecuted], a
 	call HandleSound
 	jp .GameLoop
-; 0x28d
 
 ; used as a handler for invalid jumptable entries
 ; resets the game
-DebugReset:: ; 28d (0:28d)
+DebugReset::
 	jp Init
-; 0x290
 
 ; handle playing SFX and music
-HandleSound:: ; 290 (0:290)
+HandleSound::
 	ld a, [wSoundMuted]
 	and a
 	ret nz
@@ -234,7 +232,7 @@ HandleSound:: ; 290 (0:290)
 	ret
 
 ; unreferenced
-UnreferencedMuteSound: ; 2cf (0:2cf)
+UnreferencedMuteSound:
 	ld a, [wSoundMuted]
 	and a
 	ret nz
@@ -250,7 +248,7 @@ UnreferencedMuteSound: ; 2cf (0:2cf)
 	ret
 
 ; unreferenced
-UnreferencedUnmuteSound: ; 2eb (0:2eb)
+UnreferencedUnmuteSound:
 	ld a, [wSoundMuted]
 	and a
 	ret z
@@ -264,4 +262,3 @@ UnreferencedUnmuteSound: ; 2eb (0:2eb)
 	ld c, a
 	call PlayNewMusic_SetNoise
 	ret
-; 0x302

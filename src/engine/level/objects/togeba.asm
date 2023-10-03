@@ -1,4 +1,4 @@
-TogebaFunc: ; 48d8a (12:4d8a)
+TogebaFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_SUBSTATE
@@ -205,4 +205,3 @@ TogebaFunc: ; 48d8a (12:4d8a)
 	ld de, Frameset_69263
 	call SetObjectFramesetPtr
 	ret
-; 0x48ee2

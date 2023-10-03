@@ -1,4 +1,4 @@
-Pals_cc000: ; cc000 (33:4000)
+Pals_cc000:
 	rgb 27, 31, 27
 	rgb  0, 19,  0
 	rgb  0, 10,  0
@@ -38,9 +38,8 @@ Pals_cc000: ; cc000 (33:4000)
 	rgb 20,  7,  0
 	rgb 13,  2,  0
 	rgb  0,  0,  0
-; 0xcc040
 
-Pals_cc040: ; cc040 (33:4040)
+Pals_cc040:
 	rgb 14, 13, 28
 	rgb  0,  9, 14
 	rgb  0,  4,  8
@@ -80,9 +79,8 @@ Pals_cc040: ; cc040 (33:4040)
 	rgb 13,  4, 12
 	rgb  8,  1,  8
 	rgb  0,  0,  0
-; 0xcc080
 
-Pals_cc080: ; cc080 (33:4080)
+Pals_cc080:
 	rgb 26, 27, 28
 	rgb 13, 14, 15
 	rgb  7,  8,  9
@@ -122,9 +120,8 @@ Pals_cc080: ; cc080 (33:4080)
 	rgb 16,  6,  0
 	rgb  8,  4,  2
 	rgb  2,  0,  0
-; 0xcc0c0
 
-Pals_cc0c0: ; cc0c0 (33:40c0)
+Pals_cc0c0:
 	rgb 26, 27, 28
 	rgb 13, 14, 15
 	rgb  7,  8,  9
@@ -164,9 +161,8 @@ Pals_cc0c0: ; cc0c0 (33:40c0)
 	rgb 13,  3,  0
 	rgb  6,  2,  0
 	rgb  2,  0,  0
-; 0xcc100
 
-Pals_cc100: ; cc100 (33:4100)
+Pals_cc100:
 	rgb 31, 31, 31
 	rgb 19, 19, 19
 	rgb  9,  9,  9
@@ -206,9 +202,8 @@ Pals_cc100: ; cc100 (33:4100)
 	rgb 15,  8,  1
 	rgb 11,  4,  0
 	rgb  5,  0,  0
-; 0xcc140
 
-Pals_cc140: ; cc140 (33:4140)
+Pals_cc140:
 	rgb 31, 31, 31
 	rgb 19, 19, 19
 	rgb  9,  9,  9
@@ -248,9 +243,8 @@ Pals_cc140: ; cc140 (33:4140)
 	rgb  9,  3,  9
 	rgb  7,  1,  7
 	rgb  0,  0,  0
-; 0xcc180
 
-Pals_cc180: ; cc180 (33:4180)
+Pals_cc180:
 	rgb 10,  7, 17
 	rgb 17, 14, 25
 	rgb  7,  4, 13
@@ -290,9 +284,8 @@ Pals_cc180: ; cc180 (33:4180)
 	rgb 26, 20,  0
 	rgb 11,  6,  0
 	rgb  2,  0,  0
-; 0xcc1c0
 
-Pals_cc1c0: ; cc1c0 (33:41c0)
+Pals_cc1c0:
 	rgb  7,  5, 14
 	rgb 13, 11, 22
 	rgb  4,  1, 11
@@ -332,9 +325,8 @@ Pals_cc1c0: ; cc1c0 (33:41c0)
 	rgb 18, 12,  0
 	rgb  7,  2,  0
 	rgb  1,  0,  0
-; 0xcc200
 
-Pals_cc200: ; cc200 (33:4200)
+Pals_cc200:
 	rgb 24, 27, 31
 	rgb 13, 14, 15
 	rgb  7,  8,  9
@@ -374,9 +366,8 @@ Pals_cc200: ; cc200 (33:4200)
 	rgb 14,  9,  0
 	rgb 11,  6,  0
 	rgb  0,  0,  0
-; 0xcc240
 
-Pals_cc240: ; cc240 (33:4240)
+Pals_cc240:
 	rgb 26, 27, 28
 	rgb 13, 14, 15
 	rgb  7,  8,  9
@@ -416,9 +407,8 @@ Pals_cc240: ; cc240 (33:4240)
 	rgb 12, 15, 31
 	rgb  5,  8, 23
 	rgb 24, 27, 31
-; 0xcc280
 
-Pals_cc280: ; cc280 (33:4280)
+Pals_cc280:
 	rgb 17, 19, 21
 	rgb  9, 10, 12
 	rgb  4,  5,  8
@@ -458,9 +448,8 @@ Pals_cc280: ; cc280 (33:4280)
 	rgb  7,  7, 15
 	rgb  4,  5, 11
 	rgb  0,  1, 10
-; 0xcc2c0
 
-Pals_cc2c0: ; cc2c0 (33:42c0)
+Pals_cc2c0:
 	rgb 26, 27, 28
 	rgb 13, 14, 15
 	rgb  7,  8,  9
@@ -500,9 +489,8 @@ Pals_cc2c0: ; cc2c0 (33:42c0)
 	rgb 12, 14, 16
 	rgb  7,  8,  9
 	rgb  0,  0,  0
-; 0xcc300
 
-Pals_cc300: ; cc300 (33:4300)
+Pals_cc300:
 	rgb 17, 14,  3
 	rgb 13, 10,  0
 	rgb 10,  7,  0
@@ -542,9 +530,8 @@ Pals_cc300: ; cc300 (33:4300)
 	rgb 19,  8,  5
 	rgb  9,  0,  0
 	rgb  0,  0,  0
-; 0xcc340
 
-Pals_cc340: ; cc340 (33:4340)
+Pals_cc340:
 	rgb 10, 11, 25
 	rgb  5,  7, 14
 	rgb  0,  3,  9
@@ -584,9 +571,8 @@ Pals_cc340: ; cc340 (33:4340)
 	rgb  8,  5, 11
 	rgb  6,  4,  8
 	rgb 29, 25,  9
-; 0xcc380
 
-Pals_cc380: ; cc380 (33:4380)
+Pals_cc380:
 	rgb 27, 29, 31
 	rgb 21, 24, 25
 	rgb 16, 21, 22
@@ -626,9 +612,8 @@ Pals_cc380: ; cc380 (33:4380)
 	rgb 13, 11, 20
 	rgb  4,  9,  0
 	rgb  3,  0,  0
-; 0xcc3c0
 
-Pals_cc3c0: ; cc3c0 (33:43c0)
+Pals_cc3c0:
 	rgb 28, 28, 28
 	rgb 19, 19, 19
 	rgb 10, 10, 10
@@ -668,9 +653,8 @@ Pals_cc3c0: ; cc3c0 (33:43c0)
 	rgb  6, 22, 21
 	rgb  0,  6,  5
 	rgb  2,  0,  0
-; 0xcc400
 
-Pals_cc400: ; cc400 (33:4400)
+Pals_cc400:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 11, 10, 11
@@ -710,9 +694,8 @@ Pals_cc400: ; cc400 (33:4400)
 	rgb 19, 15, 10
 	rgb 13,  8,  3
 	rgb  3,  0,  0
-; 0xcc440
 
-Pals_cc440: ; cc440 (33:4440)
+Pals_cc440:
 	rgb 31, 31, 31
 	rgb 19, 19, 19
 	rgb 10, 10, 10
@@ -752,9 +735,8 @@ Pals_cc440: ; cc440 (33:4440)
 	rgb 11,  8, 18
 	rgb  7,  0, 13
 	rgb  2,  0,  0
-; 0xcc480
 
-Pals_cc480: ; cc480 (33:4480)
+Pals_cc480:
 	rgb  4, 15, 31
 	rgb  3, 10, 22
 	rgb  3,  8, 16
@@ -794,9 +776,8 @@ Pals_cc480: ; cc480 (33:4480)
 	rgb 31,  3,  7
 	rgb 11,  0,  6
 	rgb  2,  0,  0
-; 0xcc4c0
 
-Pals_cc4c0: ; cc4c0 (33:44c0)
+Pals_cc4c0:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 11, 10, 11
@@ -836,9 +817,8 @@ Pals_cc4c0: ; cc4c0 (33:44c0)
 	rgb 17, 13,  8
 	rgb 13,  8,  3
 	rgb  3,  0,  0
-; 0xcc500
 
-Pals_cc500: ; cc500 (33:4500)
+Pals_cc500:
 	rgb 31, 31,  0
 	rgb  6,  6, 15
 	rgb 14, 13,  0
@@ -878,9 +858,8 @@ Pals_cc500: ; cc500 (33:4500)
 	rgb  9,  8,  0
 	rgb  7,  4,  1
 	rgb  3,  0,  0
-; 0xcc540
 
-Pals_cc540: ; cc540 (33:4540)
+Pals_cc540:
 	rgb 31, 31, 31
 	rgb 19, 19, 19
 	rgb 10, 10, 10
@@ -920,9 +899,8 @@ Pals_cc540: ; cc540 (33:4540)
 	rgb  8, 16,  4
 	rgb  3,  8,  0
 	rgb  2,  0,  0
-; 0xcc580
 
-Pals_cc580: ; cc580 (33:4580)
+Pals_cc580:
 	rgb 14, 16, 18
 	rgb  7,  8,  9
 	rgb  3,  4,  5
@@ -962,9 +940,8 @@ Pals_cc580: ; cc580 (33:4580)
 	rgb  7,  7, 15
 	rgb  4,  5, 11
 	rgb  0,  1, 10
-; 0xcc5c0
 
-Pals_cc5c0: ; cc5c0 (33:45c0)
+Pals_cc5c0:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 11, 10, 11
@@ -1004,9 +981,8 @@ Pals_cc5c0: ; cc5c0 (33:45c0)
 	rgb 17, 15,  4
 	rgb  8,  6, 10
 	rgb  3,  0,  0
-; 0xcc600
 
-Pals_cc600: ; cc600 (33:4600)
+Pals_cc600:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 11, 10, 11
@@ -1046,9 +1022,8 @@ Pals_cc600: ; cc600 (33:4600)
 	rgb 21,  2,  4
 	rgb 10,  0,  0
 	rgb  3,  0,  0
-; 0xcc640
 
-Pals_cc640: ; cc640 (33:4640)
+Pals_cc640:
 	rgb 28, 25, 19
 	rgb 22, 17,  9
 	rgb 17, 11,  3
@@ -1088,9 +1063,8 @@ Pals_cc640: ; cc640 (33:4640)
 	rgb 25,  6,  4
 	rgb 12,  0,  0
 	rgb  0,  0,  0
-; 0xcc680
 
-Pals_cc680: ; cc680 (33:4680)
+Pals_cc680:
 	rgb 28, 25, 19
 	rgb 22, 17,  9
 	rgb 17, 11,  3
@@ -1130,9 +1104,8 @@ Pals_cc680: ; cc680 (33:4680)
 	rgb  8, 13,  7
 	rgb  2,  8,  2
 	rgb  0,  0,  0
-; 0xcc6c0
 
-Pals_cc6c0: ; cc6c0 (33:46c0)
+Pals_cc6c0:
 	rgb 15, 11,  1
 	rgb 23, 24, 28
 	rgb  7, 18, 28
@@ -1172,9 +1145,8 @@ Pals_cc6c0: ; cc6c0 (33:46c0)
 	rgb 17, 13,  3
 	rgb 13,  8,  0
 	rgb  2,  0,  0
-; 0xcc700
 
-Pals_cc700: ; cc700 (33:4700)
+Pals_cc700:
 	rgb 26, 24, 20
 	rgb 31, 14, 14
 	rgb 24,  0,  0
@@ -1214,9 +1186,8 @@ Pals_cc700: ; cc700 (33:4700)
 	rgb 16, 10, 13
 	rgb  7,  5, 11
 	rgb  0,  0,  0
-; 0xcc740
 
-Pals_cc740: ; cc740 (33:4740)
+Pals_cc740:
 	rgb 19, 17, 13
 	rgb 26, 10, 10
 	rgb 20,  0,  0
@@ -1256,9 +1227,8 @@ Pals_cc740: ; cc740 (33:4740)
 	rgb 15,  7, 12
 	rgb  6,  2, 10
 	rgb  0,  0,  0
-; 0xcc780
 
-Pals_cc780: ; cc780 (33:4780)
+Pals_cc780:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb  7,  8,  9
@@ -1298,9 +1268,8 @@ Pals_cc780: ; cc780 (33:4780)
 	rgb  9, 11, 14
 	rgb  3,  5, 11
 	rgb  0,  0,  0
-; 0xcc7c0
 
-Pals_cc7c0: ; cc7c0 (33:47c0)
+Pals_cc7c0:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -1340,9 +1309,8 @@ Pals_cc7c0: ; cc7c0 (33:47c0)
 	rgb  0, 15, 11
 	rgb  0,  7,  4
 	rgb  0,  0,  0
-; 0xcc800
 
-Pals_cc800: ; cc800 (33:4800)
+Pals_cc800:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -1382,9 +1350,8 @@ Pals_cc800: ; cc800 (33:4800)
 	rgb 12, 13,  0
 	rgb  5,  6,  2
 	rgb  0,  0,  0
-; 0xcc840
 
-Pals_cc840: ; cc840 (33:4840)
+Pals_cc840:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -1424,9 +1391,8 @@ Pals_cc840: ; cc840 (33:4840)
 	rgb 12, 13,  0
 	rgb  5,  6,  2
 	rgb  0,  0,  0
-; 0xcc880
 
-Pals_cc880: ; cc880 (33:4880)
+Pals_cc880:
 	rgb 22, 25, 29
 	rgb 10, 13, 17
 	rgb  2,  3, 23
@@ -1466,9 +1432,8 @@ Pals_cc880: ; cc880 (33:4880)
 	rgb 12, 15, 15
 	rgb  5,  7,  7
 	rgb  0,  0,  0
-; 0xcc8c0
 
-Pals_cc8c0: ; cc8c0 (33:48c0)
+Pals_cc8c0:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -1508,9 +1473,8 @@ Pals_cc8c0: ; cc8c0 (33:48c0)
 	rgb 19, 13,  8
 	rgb 10,  6,  0
 	rgb  0,  0,  0
-; 0xcc900
 
-Pals_cc900: ; cc900 (33:4900)
+Pals_cc900:
 	rgb 23, 24,  4
 	rgb 26, 28, 31
 	rgb 17, 18,  2
@@ -1550,9 +1514,8 @@ Pals_cc900: ; cc900 (33:4900)
 	rgb 26, 28, 31
 	rgb 16, 17, 23
 	rgb  1,  3, 12
-; 0xcc940
 
-Pals_cc940: ; cc940 (33:4940)
+Pals_cc940:
 	rgb 26, 28, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -1592,9 +1555,8 @@ Pals_cc940: ; cc940 (33:4940)
 	rgb 13, 14,  4
 	rgb  7,  8,  0
 	rgb  0,  0,  0
-; 0xcc980
 
-Pals_cc980: ; cc980 (33:4980)
+Pals_cc980:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 11, 10, 11
@@ -1634,9 +1596,8 @@ Pals_cc980: ; cc980 (33:4980)
 	rgb 11,  8, 11
 	rgb  6,  2,  5
 	rgb  3,  0,  0
-; 0xcc9c0
 
-Pals_cc9c0: ; cc9c0 (33:49c0)
+Pals_cc9c0:
 	rgb 26, 28, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -1676,9 +1637,8 @@ Pals_cc9c0: ; cc9c0 (33:49c0)
 	rgb  9, 12, 20
 	rgb  2,  6, 11
 	rgb  0,  0,  0
-; 0xcca00
 
-Pals_cca00: ; cca00 (33:4a00)
+Pals_cca00:
 	rgb 27, 29, 31
 	rgb 12, 16, 28
 	rgb  0,  6, 19
@@ -1718,9 +1678,8 @@ Pals_cca00: ; cca00 (33:4a00)
 	rgb 15, 14,  8
 	rgb  9,  7,  1
 	rgb  0,  0,  0
-; 0xcca40
 
-Pals_cca40: ; cca40 (33:4a40)
+Pals_cca40:
 	rgb 27, 26, 31
 	rgb 17, 16, 31
 	rgb  9,  8, 29
@@ -1760,9 +1719,8 @@ Pals_cca40: ; cca40 (33:4a40)
 	rgb 15,  9,  7
 	rgb  9,  3,  3
 	rgb  0,  0,  0
-; 0xcca80
 
-Pals_cca80: ; cca80 (33:4a80)
+Pals_cca80:
 	rgb 26, 28, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -1802,9 +1760,8 @@ Pals_cca80: ; cca80 (33:4a80)
 	rgb  8, 13,  4
 	rgb  5,  7,  1
 	rgb  0,  0,  0
-; 0xccac0
 
-Pals_ccac0: ; ccac0 (33:4ac0)
+Pals_ccac0:
 	rgb 18, 21, 25
 	rgb 10, 13, 17
 	rgb  3,  6,  9
@@ -1844,9 +1801,8 @@ Pals_ccac0: ; ccac0 (33:4ac0)
 	rgb 20, 10,  0
 	rgb 11,  4,  0
 	rgb  3,  0,  0
-; 0xccb00
 
-Pals_ccb00: ; ccb00 (33:4b00)
+Pals_ccb00:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 11, 10, 11
@@ -1886,9 +1842,8 @@ Pals_ccb00: ; ccb00 (33:4b00)
 	rgb 15,  9, 13
 	rgb 10,  4,  6
 	rgb  3,  0,  0
-; 0xccb40
 
-Pals_ccb40: ; ccb40 (33:4b40)
+Pals_ccb40:
 	rgb 22, 25, 29
 	rgb 10, 13, 17
 	rgb  2,  3, 23
@@ -1928,9 +1883,8 @@ Pals_ccb40: ; ccb40 (33:4b40)
 	rgb  5,  8,  8
 	rgb  2,  4,  4
 	rgb  0,  0,  0
-; 0xccb80
 
-Pals_ccb80: ; ccb80 (33:4b80)
+Pals_ccb80:
 	rgb  1, 11, 23
 	rgb  2,  8, 19
 	rgb  0,  6, 15
@@ -1970,9 +1924,8 @@ Pals_ccb80: ; ccb80 (33:4b80)
 	rgb 22,  2,  5
 	rgb 10,  0,  6
 	rgb  2,  0,  0
-; 0xccbc0
 
-Pals_ccbc0: ; ccbc0 (33:4bc0)
+Pals_ccbc0:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -2012,9 +1965,8 @@ Pals_ccbc0: ; ccbc0 (33:4bc0)
 	rgb 11, 11, 14
 	rgb  6,  0, 18
 	rgb  0,  0,  0
-; 0xccc00
 
-Pals_ccc00: ; ccc00 (33:4c00)
+Pals_ccc00:
 	rgb 15, 16,  7
 	rgb 18, 24, 31
 	rgb  4, 12, 31
@@ -2054,9 +2006,8 @@ Pals_ccc00: ; ccc00 (33:4c00)
 	rgb  7,  9,  0
 	rgb  2,  6,  2
 	rgb  0,  0,  0
-; 0xccc40
 
-Pals_ccc40: ; ccc40 (33:4c40)
+Pals_ccc40:
 	rgb 18, 21, 25
 	rgb  9, 11, 14
 	rgb 10,  0,  4
@@ -2096,9 +2047,8 @@ Pals_ccc40: ; ccc40 (33:4c40)
 	rgb 25,  6,  3
 	rgb 13,  3,  0
 	rgb  3,  0,  0
-; 0xccc80
 
-Pals_ccc80: ; ccc80 (33:4c80)
+Pals_ccc80:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb  7,  8,  9
@@ -2138,9 +2088,8 @@ Pals_ccc80: ; ccc80 (33:4c80)
 	rgb  6, 12,  9
 	rgb  3,  6, 11
 	rgb  0,  0,  0
-; 0xcccc0
 
-Pals_cccc0: ; cccc0 (33:4cc0)
+Pals_cccc0:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb  7,  8,  9
@@ -2180,9 +2129,8 @@ Pals_cccc0: ; cccc0 (33:4cc0)
 	rgb  7,  9, 12
 	rgb  2,  4,  9
 	rgb  0,  0,  0
-; 0xccd00
 
-Pals_ccd00: ; ccd00 (33:4d00)
+Pals_ccd00:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -2222,9 +2170,8 @@ Pals_ccd00: ; ccd00 (33:4d00)
 	rgb 14,  7, 13
 	rgb  7,  1,  7
 	rgb  0,  0,  0
-; 0xccd40
 
-Pals_ccd40: ; ccd40 (33:4d40)
+Pals_ccd40:
 	rgb 29, 30, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -2264,9 +2211,8 @@ Pals_ccd40: ; ccd40 (33:4d40)
 	rgb 10, 13,  7
 	rgb  5,  7,  2
 	rgb  0,  0,  0
-; 0xccd80
 
-Pals_ccd80: ; ccd80 (33:4d80)
+Pals_ccd80:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb  7,  8,  9
@@ -2306,9 +2252,8 @@ Pals_ccd80: ; ccd80 (33:4d80)
 	rgb 14,  9, 13
 	rgb  9,  4,  7
 	rgb  0,  0,  0
-; 0xccdc0
 
-Pals_ccdc0: ; ccdc0 (33:4dc0)
+Pals_ccdc0:
 	rgb 19, 29, 31
 	rgb  7, 14, 21
 	rgb  0,  5, 12
@@ -2348,9 +2293,8 @@ Pals_ccdc0: ; ccdc0 (33:4dc0)
 	rgb 16,  0,  8
 	rgb  7,  0,  0
 	rgb  0,  0,  0
-; 0xcce00
 
-Pals_cce00: ; cce00 (33:4e00)
+Pals_cce00:
 	rgb 12,  8, 15
 	rgb 10,  6, 11
 	rgb  7,  4,  9
@@ -2390,9 +2334,8 @@ Pals_cce00: ; cce00 (33:4e00)
 	rgb 11,  3, 16
 	rgb  5,  0,  9
 	rgb  0,  0,  0
-; 0xcce40
 
-Pals_cce40: ; cce40 (33:4e40)
+Pals_cce40:
 	rgb 10,  8,  0
 	rgb  9,  5,  0
 	rgb  6,  3,  0
@@ -2432,9 +2375,8 @@ Pals_cce40: ; cce40 (33:4e40)
 	rgb 10,  5,  0
 	rgb  6,  0,  0
 	rgb  0,  0,  0
-; 0xcce80
 
-Pals_cce80: ; cce80 (33:4e80)
+Pals_cce80:
 	rgb 31, 18,  5
 	rgb  0, 10, 10
 	rgb 25,  0,  0
@@ -2474,9 +2416,8 @@ Pals_cce80: ; cce80 (33:4e80)
 	rgb  9,  8,  0
 	rgb  7,  4,  1
 	rgb  3,  0,  0
-; 0xccec0
 
-Pals_ccec0: ; ccec0 (33:4ec0)
+Pals_ccec0:
 	rgb 11,  7, 13
 	rgb 13, 16, 28
 	rgb  7, 11, 23
@@ -2516,9 +2457,8 @@ Pals_ccec0: ; ccec0 (33:4ec0)
 	rgb 11,  7, 13
 	rgb  7,  3,  9
 	rgb  2,  0,  0
-; 0xccf00
 
-Pals_ccf00: ; ccf00 (33:4f00)
+Pals_ccf00:
 	rgb 24, 22, 18
 	rgb 31, 14, 14
 	rgb 24,  0,  0
@@ -2558,9 +2498,8 @@ Pals_ccf00: ; ccf00 (33:4f00)
 	rgb 13,  7, 11
 	rgb  5,  3,  9
 	rgb  0,  0,  0
-; 0xccf40
 
-Pals_ccf40: ; ccf40 (33:4f40)
+Pals_ccf40:
 	rgb 14, 12, 16
 	rgb 22,  5, 14
 	rgb 16,  0,  9
@@ -2600,9 +2539,8 @@ Pals_ccf40: ; ccf40 (33:4f40)
 	rgb 11,  4, 13
 	rgb  4,  0,  8
 	rgb  0,  0,  0
-; 0xccf80
 
-Pals_ccf80: ; ccf80 (33:4f80)
+Pals_ccf80:
 	rgb 31, 31, 31
 	rgb 19, 19, 19
 	rgb 10, 10, 10
@@ -2642,9 +2580,8 @@ Pals_ccf80: ; ccf80 (33:4f80)
 	rgb 15,  0,  1
 	rgb  7,  0,  0
 	rgb  2,  0,  0
-; 0xccfc0
 
-Pals_ccfc0: ; ccfc0 (33:4fc0)
+Pals_ccfc0:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 11, 10, 11
@@ -2684,9 +2621,8 @@ Pals_ccfc0: ; ccfc0 (33:4fc0)
 	rgb 20, 10,  0
 	rgb 11,  4,  0
 	rgb  3,  0,  0
-; 0xcd000
 
-Pals_cd000: ; cd000 (33:5000)
+Pals_cd000:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 11, 10, 11
@@ -2726,9 +2662,8 @@ Pals_cd000: ; cd000 (33:5000)
 	rgb 15,  9, 13
 	rgb 10,  4,  6
 	rgb  3,  0,  0
-; 0xcd040
 
-Pals_cd040: ; cd040 (33:5040)
+Pals_cd040:
 	rgb 26, 23,  6
 	rgb 18, 12,  0
 	rgb 23,  0,  0
@@ -2768,9 +2703,8 @@ Pals_cd040: ; cd040 (33:5040)
 	rgb 12, 15, 15
 	rgb  5,  7,  7
 	rgb  0,  0,  0
-; 0xcd080
 
-Pals_cd080: ; cd080 (33:5080)
+Pals_cd080:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -2810,9 +2744,8 @@ Pals_cd080: ; cd080 (33:5080)
 	rgb  0, 11,  7
 	rgb  0,  5,  2
 	rgb  0,  1,  0
-; 0xcd0c0
 
-Pals_cd0c0: ; cd0c0 (33:50c0)
+Pals_cd0c0:
 	rgb 10,  6,  0
 	rgb 31, 31,  8
 	rgb 25, 16,  0
@@ -2852,9 +2785,8 @@ Pals_cd0c0: ; cd0c0 (33:50c0)
 	rgb  8, 13,  4
 	rgb  5,  7,  1
 	rgb  0,  0,  0
-; 0xcd100
 
-Pals_cd100: ; cd100 (33:5100)
+Pals_cd100:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -2894,9 +2826,8 @@ Pals_cd100: ; cd100 (33:5100)
 	rgb 15,  1,  6
 	rgb  6,  0, 10
 	rgb  0,  0,  0
-; 0xcd140
 
-Pals_cd140: ; cd140 (33:5140)
+Pals_cd140:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -2936,9 +2867,8 @@ Pals_cd140: ; cd140 (33:5140)
 	rgb  0, 16, 14
 	rgb  0,  3, 19
 	rgb  0,  0,  0
-; 0xcd180
 
-Pals_cd180: ; cd180 (33:5180)
+Pals_cd180:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -2978,9 +2908,8 @@ Pals_cd180: ; cd180 (33:5180)
 	rgb  0, 11, 21
 	rgb  8,  0, 19
 	rgb  0,  0,  0
-; 0xcd1c0
 
-Pals_cd1c0: ; cd1c0 (33:51c0)
+Pals_cd1c0:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 11, 10, 11
@@ -3020,9 +2949,8 @@ Pals_cd1c0: ; cd1c0 (33:51c0)
 	rgb  9,  6, 13
 	rgb  5,  2,  7
 	rgb  3,  0,  0
-; 0xcd200
 
-Pals_cd200: ; cd200 (33:5200)
+Pals_cd200:
 	rgb 15, 11, 15
 	rgb 11,  7,  9
 	rgb  8,  4,  7
@@ -3062,9 +2990,8 @@ Pals_cd200: ; cd200 (33:5200)
 	rgb 15,  4, 11
 	rgb  9,  0,  3
 	rgb  0,  0,  0
-; 0xcd240
 
-Pals_cd240: ; cd240 (33:5240)
+Pals_cd240:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -3104,9 +3031,8 @@ Pals_cd240: ; cd240 (33:5240)
 	rgb  0,  7,  9
 	rgb  0,  4,  6
 	rgb  0,  0,  0
-; 0xcd280
 
-Pals_cd280: ; cd280 (33:5280)
+Pals_cd280:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -3146,9 +3072,8 @@ Pals_cd280: ; cd280 (33:5280)
 	rgb 12, 13,  0
 	rgb  5,  6,  2
 	rgb  0,  0,  0
-; 0xcd2c0
 
-Pals_cd2c0: ; cd2c0 (33:52c0)
+Pals_cd2c0:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -3188,9 +3113,8 @@ Pals_cd2c0: ; cd2c0 (33:52c0)
 	rgb  6, 10,  9
 	rgb  2,  5,  4
 	rgb  0,  0,  0
-; 0xcd300
 
-Pals_cd300: ; cd300 (33:5300)
+Pals_cd300:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -3230,9 +3154,8 @@ Pals_cd300: ; cd300 (33:5300)
 	rgb  6, 10,  9
 	rgb  2,  5,  4
 	rgb  0,  0,  0
-; 0xcd340
 
-Pals_cd340: ; cd340 (33:5340)
+Pals_cd340:
 	rgb 21, 24, 29
 	rgb  8, 12, 17
 	rgb  1,  2, 23
@@ -3272,9 +3195,8 @@ Pals_cd340: ; cd340 (33:5340)
 	rgb  8, 11, 14
 	rgb  3,  4,  7
 	rgb  0,  0,  0
-; 0xcd380
 
-Pals_cd380: ; cd380 (33:5380)
+Pals_cd380:
 	rgb 23, 20, 11
 	rgb 15,  9,  4
 	rgb 17,  0,  6
@@ -3314,9 +3236,8 @@ Pals_cd380: ; cd380 (33:5380)
 	rgb  8, 11, 14
 	rgb  3,  4,  7
 	rgb  0,  0,  0
-; 0xcd3c0
 
-Pals_cd3c0: ; cd3c0 (33:53c0)
+Pals_cd3c0:
 	rgb 14, 13, 28
 	rgb 12, 13, 26
 	rgb 10, 12, 24
@@ -3356,9 +3277,8 @@ Pals_cd3c0: ; cd3c0 (33:53c0)
 	rgb  7,  8, 16
 	rgb  2,  5,  6
 	rgb  3,  0,  0
-; 0xcd400
 
-Pals_cd400: ; cd400 (33:5400)
+Pals_cd400:
 	rgb  0,  9, 21
 	rgb  0,  6, 17
 	rgb  0,  4, 12
@@ -3398,9 +3318,8 @@ Pals_cd400: ; cd400 (33:5400)
 	rgb 17,  0, 12
 	rgb  6,  0,  6
 	rgb  2,  0,  0
-; 0xcd440
 
-Pals_cd440: ; cd440 (33:5440)
+Pals_cd440:
 	rgb 31, 31, 31
 	rgb 19, 19, 19
 	rgb 10, 10, 10
@@ -3440,9 +3359,8 @@ Pals_cd440: ; cd440 (33:5440)
 	rgb  5,  0,  0
 	rgb  2,  0,  0
 	rgb  2,  0,  0
-; 0xcd480
 
-Pals_cd480: ; cd480 (33:5480)
+Pals_cd480:
 	rgb 26, 28, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -3482,9 +3400,8 @@ Pals_cd480: ; cd480 (33:5480)
 	rgb  5,  8, 17
 	rgb  2,  3,  9
 	rgb  0,  0,  0
-; 0xcd4c0
 
-Pals_cd4c0: ; cd4c0 (33:54c0)
+Pals_cd4c0:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 11, 10, 11
@@ -3524,9 +3441,8 @@ Pals_cd4c0: ; cd4c0 (33:54c0)
 	rgb 13, 10, 10
 	rgb  8,  5,  6
 	rgb  3,  0,  0
-; 0xcd500
 
-Pals_cd500: ; cd500 (33:5500)
+Pals_cd500:
 	rgb 26, 28, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -3566,9 +3482,8 @@ Pals_cd500: ; cd500 (33:5500)
 	rgb  7,  9,  9
 	rgb  4,  5,  5
 	rgb  0,  0,  0
-; 0xcd540
 
-Pals_cd540: ; cd540 (33:5540)
+Pals_cd540:
 	rgb 18, 21, 25
 	rgb  9, 11, 14
 	rgb 10,  0,  4
@@ -3608,9 +3523,8 @@ Pals_cd540: ; cd540 (33:5540)
 	rgb 22,  5,  1
 	rgb 11,  3,  0
 	rgb  2,  0,  0
-; 0xcd580
 
-Pals_cd580: ; cd580 (33:5580)
+Pals_cd580:
 	rgb 18, 21, 25
 	rgb  9, 11, 14
 	rgb 10,  0,  4
@@ -3650,9 +3564,8 @@ Pals_cd580: ; cd580 (33:5580)
 	rgb 18,  3,  0
 	rgb  9,  2,  0
 	rgb  1,  0,  0
-; 0xcd5c0
 
-Pals_cd5c0: ; cd5c0 (33:55c0)
+Pals_cd5c0:
 	rgb 18, 21, 25
 	rgb  9, 11, 14
 	rgb 10,  0,  4
@@ -3692,9 +3605,8 @@ Pals_cd5c0: ; cd5c0 (33:55c0)
 	rgb 15,  2,  0
 	rgb  7,  1,  0
 	rgb  0,  0,  0
-; 0xcd600
 
-Pals_cd600: ; cd600 (33:5600)
+Pals_cd600:
 	rgb 23, 24,  4
 	rgb 26, 28, 31
 	rgb 17, 18,  2
@@ -3734,9 +3646,8 @@ Pals_cd600: ; cd600 (33:5600)
 	rgb 26, 28, 31
 	rgb 16, 17, 23
 	rgb  1,  3, 12
-; 0xcd640
 
-Pals_cd640: ; cd640 (33:5640)
+Pals_cd640:
 	rgb 23, 24,  4
 	rgb 26, 28, 31
 	rgb 17, 18,  2
@@ -3776,9 +3687,8 @@ Pals_cd640: ; cd640 (33:5640)
 	rgb 26, 28, 31
 	rgb 16, 17, 23
 	rgb  1,  3, 12
-; 0xcd680
 
-Pals_cd680: ; cd680 (33:5680)
+Pals_cd680:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 11, 10, 11
@@ -3818,9 +3728,8 @@ Pals_cd680: ; cd680 (33:5680)
 	rgb 13, 14, 22
 	rgb  9, 10, 18
 	rgb 24, 25, 30
-; 0xcd6c0
 
-Pals_cd6c0: ; cd6c0 (33:56c0)
+Pals_cd6c0:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 11, 10, 11
@@ -3860,9 +3769,8 @@ Pals_cd6c0: ; cd6c0 (33:56c0)
 	rgb 13, 14, 22
 	rgb  9, 10, 18
 	rgb 24, 25, 30
-; 0xcd700
 
-Pals_cd700: ; cd700 (33:5700)
+Pals_cd700:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 11, 10, 11
@@ -3902,9 +3810,8 @@ Pals_cd700: ; cd700 (33:5700)
 	rgb 13, 14, 22
 	rgb  9, 10, 18
 	rgb 24, 25, 30
-; 0xcd740
 
-Pals_cd740: ; cd740 (33:5740)
+Pals_cd740:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -3944,9 +3851,8 @@ Pals_cd740: ; cd740 (33:5740)
 	rgb 15, 14,  6
 	rgb  9,  7,  1
 	rgb  0,  0,  0
-; 0xcd780
 
-Pals_cd780: ; cd780 (33:5780)
+Pals_cd780:
 	rgb 18, 21, 25
 	rgb  9, 11, 14
 	rgb 10,  0,  4
@@ -3986,9 +3892,8 @@ Pals_cd780: ; cd780 (33:5780)
 	rgb 13,  1,  0
 	rgb  6,  0,  0
 	rgb  0,  0,  0
-; 0xcd7c0
 
-Pals_cd7c0: ; cd7c0 (33:57c0)
+Pals_cd7c0:
 	rgb 18, 21, 25
 	rgb  9, 11, 14
 	rgb 10,  0,  4
@@ -4028,9 +3933,8 @@ Pals_cd7c0: ; cd7c0 (33:57c0)
 	rgb 12,  0,  0
 	rgb  5,  0,  0
 	rgb  0,  0,  0
-; 0xcd800
 
-Pals_cd800: ; cd800 (33:5800)
+Pals_cd800:
 	rgb 18, 21, 25
 	rgb  9, 11, 14
 	rgb 10,  0,  4
@@ -4070,9 +3974,8 @@ Pals_cd800: ; cd800 (33:5800)
 	rgb 10,  0,  0
 	rgb  4,  0,  0
 	rgb  0,  0,  0
-; 0xcd840
 
-Pals_cd840: ; cd840 (33:5840)
+Pals_cd840:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb  7,  8,  9
@@ -4112,9 +4015,8 @@ Pals_cd840: ; cd840 (33:5840)
 	rgb  4,  7, 13
 	rgb  0,  2,  9
 	rgb  0,  0,  0
-; 0xcd880
 
-Pals_cd880: ; cd880 (33:5880)
+Pals_cd880:
 	rgb  6, 11, 22
 	rgb  0,  4, 21
 	rgb  0,  2, 10
@@ -4154,9 +4056,8 @@ Pals_cd880: ; cd880 (33:5880)
 	rgb 10,  7, 11
 	rgb  6,  3,  4
 	rgb  0,  0,  0
-; 0xcd8c0
 
-Pals_cd8c0: ; cd8c0 (33:58c0)
+Pals_cd8c0:
 	rgb  6, 11, 22
 	rgb  0,  4, 23
 	rgb  0,  0,  9
@@ -4196,9 +4097,8 @@ Pals_cd8c0: ; cd8c0 (33:58c0)
 	rgb 10, 10,  7
 	rgb  4,  5,  2
 	rgb  0,  0,  0
-; 0xcd900
 
-Pals_cd900: ; cd900 (33:5900)
+Pals_cd900:
 	rgb 29, 30, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -4238,9 +4138,8 @@ Pals_cd900: ; cd900 (33:5900)
 	rgb  5,  8,  7
 	rgb  2,  4,  3
 	rgb  0,  0,  0
-; 0xcd940
 
-Pals_cd940: ; cd940 (33:5940)
+Pals_cd940:
 	rgb 27, 27,  4
 	rgb  7, 12, 22
 	rgb 17, 18,  2
@@ -4280,9 +4179,8 @@ Pals_cd940: ; cd940 (33:5940)
 	rgb  7, 12, 22
 	rgb  4,  8, 15
 	rgb  0,  0,  4
-; 0xcd980
 
-Pals_cd980: ; cd980 (33:5980)
+Pals_cd980:
 	rgb 27, 27,  4
 	rgb  7, 12, 22
 	rgb 17, 18,  2
@@ -4322,9 +4220,8 @@ Pals_cd980: ; cd980 (33:5980)
 	rgb  7, 12, 22
 	rgb  4,  8, 15
 	rgb  0,  0,  4
-; 0xcd9c0
 
-Pals_cd9c0: ; cd9c0 (33:59c0)
+Pals_cd9c0:
 	rgb 27, 27,  4
 	rgb  7, 12, 22
 	rgb 17, 18,  2
@@ -4364,9 +4261,8 @@ Pals_cd9c0: ; cd9c0 (33:59c0)
 	rgb  7, 12, 22
 	rgb  4,  8, 15
 	rgb  0,  0,  4
-; 0xcda00
 
-Pals_cda00: ; cda00 (33:5a00)
+Pals_cda00:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 11, 10, 11
@@ -4406,9 +4302,8 @@ Pals_cda00: ; cda00 (33:5a00)
 	rgb  7,  9, 14
 	rgb  5,  6, 10
 	rgb 14, 17, 24
-; 0xcda40
 
-Pals_cda40: ; cda40 (33:5a40)
+Pals_cda40:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 11, 10, 11
@@ -4448,9 +4343,8 @@ Pals_cda40: ; cda40 (33:5a40)
 	rgb  7,  9, 14
 	rgb  5,  6, 10
 	rgb 14, 17, 24
-; 0xcda80
 
-Pals_cda80: ; cda80 (33:5a80)
+Pals_cda80:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 11, 10, 11
@@ -4490,9 +4384,8 @@ Pals_cda80: ; cda80 (33:5a80)
 	rgb  7,  9, 14
 	rgb  5,  6, 10
 	rgb 14, 17, 24
-; 0xcdac0
 
-Pals_cdac0: ; cdac0 (33:5ac0)
+Pals_cdac0:
 	rgb 11, 13, 10
 	rgb 18, 24, 31
 	rgb  4, 12, 31
@@ -4532,9 +4425,8 @@ Pals_cdac0: ; cdac0 (33:5ac0)
 	rgb  5,  7,  7
 	rgb  2,  5,  5
 	rgb  0,  0,  0
-; 0xcdb00
 
-Pals_cdb00: ; cdb00 (33:5b00)
+Pals_cdb00:
 	rgb 18, 21, 25
 	rgb  9, 11, 14
 	rgb 10,  0,  4
@@ -4574,9 +4466,8 @@ Pals_cdb00: ; cdb00 (33:5b00)
 	rgb 20, 10,  0
 	rgb 11,  4,  0
 	rgb  3,  0,  0
-; 0xcdb40
 
-Pals_cdb40: ; cdb40 (33:5b40)
+Pals_cdb40:
 	rgb 13, 18, 23
 	rgb  5, 10, 17
 	rgb  0,  4,  8
@@ -4616,9 +4507,8 @@ Pals_cdb40: ; cdb40 (33:5b40)
 	rgb 14,  6, 12
 	rgb  9,  0,  7
 	rgb  3,  0,  0
-; 0xcdb80
 
-Pals_cdb80: ; cdb80 (33:5b80)
+Pals_cdb80:
 	rgb 13, 18, 25
 	rgb  4,  9, 14
 	rgb  8,  0,  4
@@ -4658,9 +4548,8 @@ Pals_cdb80: ; cdb80 (33:5b80)
 	rgb 14,  6, 12
 	rgb  9,  0,  7
 	rgb  3,  0,  0
-; 0xcdbc0
 
-Pals_cdbc0: ; cdbc0 (33:5bc0)
+Pals_cdbc0:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 11, 10, 11
@@ -4700,9 +4589,8 @@ Pals_cdbc0: ; cdbc0 (33:5bc0)
 	rgb 14,  6, 12
 	rgb  9,  0,  7
 	rgb  3,  0,  0
-; 0xcdc00
 
-Pals_cdc00: ; cdc00 (33:5c00)
+Pals_cdc00:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -4742,9 +4630,8 @@ Pals_cdc00: ; cdc00 (33:5c00)
 	rgb 19, 13,  8
 	rgb 10,  6,  0
 	rgb  0,  0,  0
-; 0xcdc40
 
-Pals_cdc40: ; cdc40 (33:5c40)
+Pals_cdc40:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -4784,9 +4671,8 @@ Pals_cdc40: ; cdc40 (33:5c40)
 	rgb 13,  7, 12
 	rgb  7,  2,  6
 	rgb  0,  0,  0
-; 0xcdc80
 
-Pals_cdc80: ; cdc80 (33:5c80)
+Pals_cdc80:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -4826,9 +4712,8 @@ Pals_cdc80: ; cdc80 (33:5c80)
 	rgb 13,  7, 12
 	rgb  7,  2,  6
 	rgb  0,  0,  0
-; 0xcdcc0
 
-Pals_cdcc0: ; cdcc0 (33:5cc0)
+Pals_cdcc0:
 	rgb 26, 27, 28
 	rgb 13, 14, 15
 	rgb  7,  8,  9
@@ -4868,9 +4753,8 @@ Pals_cdcc0: ; cdcc0 (33:5cc0)
 	rgb 10,  1,  0
 	rgb  5,  0,  0
 	rgb  2,  0,  0
-; 0xcdd00
 
-Pals_cdd00: ; cdd00 (33:5d00)
+Pals_cdd00:
 	rgb 26, 27, 28
 	rgb 13, 14, 15
 	rgb  7,  8,  9
@@ -4910,9 +4794,8 @@ Pals_cdd00: ; cdd00 (33:5d00)
 	rgb  8,  0,  0
 	rgb  4,  0,  0
 	rgb  2,  0,  0
-; 0xcdd40
 
-Pals_cdd40: ; cdd40 (33:5d40)
+Pals_cdd40:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 11, 10, 11
@@ -4952,9 +4835,8 @@ Pals_cdd40: ; cdd40 (33:5d40)
 	rgb  0, 27,  0
 	rgb  0, 10,  0
 	rgb  3,  0,  0
-; 0xcdd80
 
-Pals_cdd80: ; cdd80 (33:5d80)
+Pals_cdd80:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -4994,9 +4876,8 @@ Pals_cdd80: ; cdd80 (33:5d80)
 	rgb 12, 11, 13
 	rgb  6,  0, 18
 	rgb  0,  0,  0
-; 0xcddc0
 
-Pals_cddc0: ; cddc0 (33:5dc0)
+Pals_cddc0:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5036,9 +4917,8 @@ Pals_cddc0: ; cddc0 (33:5dc0)
 	rgb 13, 11, 12
 	rgb  6,  0, 18
 	rgb  0,  0,  0
-; 0xcde00
 
-Pals_cde00: ; cde00 (33:5e00)
+Pals_cde00:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5078,9 +4958,8 @@ Pals_cde00: ; cde00 (33:5e00)
 	rgb 14, 11, 11
 	rgb  6,  0, 18
 	rgb  0,  0,  0
-; 0xcde40
 
-Pals_cde40: ; cde40 (33:5e40)
+Pals_cde40:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5120,9 +4999,8 @@ Pals_cde40: ; cde40 (33:5e40)
 	rgb 13, 12, 11
 	rgb  6,  0, 18
 	rgb  0,  0,  0
-; 0xcde80
 
-Pals_cde80: ; cde80 (33:5e80)
+Pals_cde80:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5162,9 +5040,8 @@ Pals_cde80: ; cde80 (33:5e80)
 	rgb 12, 13, 11
 	rgb  6,  0, 18
 	rgb  0,  0,  0
-; 0xcdec0
 
-Pals_cdec0: ; cdec0 (33:5ec0)
+Pals_cdec0:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5204,9 +5081,8 @@ Pals_cdec0: ; cdec0 (33:5ec0)
 	rgb 11, 13, 12
 	rgb  6,  0, 18
 	rgb  0,  0,  0
-; 0xcdf00
 
-Pals_cdf00: ; cdf00 (33:5f00)
+Pals_cdf00:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5246,9 +5122,8 @@ Pals_cdf00: ; cdf00 (33:5f00)
 	rgb 11, 12, 13
 	rgb  6,  0, 18
 	rgb  0,  0,  0
-; 0xcdf40
 
-Pals_cdf40: ; cdf40 (33:5f40)
+Pals_cdf40:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5288,9 +5163,8 @@ Pals_cdf40: ; cdf40 (33:5f40)
 	rgb 15,  1,  6
 	rgb  6,  0, 10
 	rgb  0,  0,  0
-; 0xcdf80
 
-Pals_cdf80: ; cdf80 (33:5f80)
+Pals_cdf80:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5330,9 +5204,8 @@ Pals_cdf80: ; cdf80 (33:5f80)
 	rgb 15,  1,  6
 	rgb  6,  0, 10
 	rgb  0,  0,  0
-; 0xcdfc0
 
-Pals_cdfc0: ; cdfc0 (33:5fc0)
+Pals_cdfc0:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5372,9 +5245,8 @@ Pals_cdfc0: ; cdfc0 (33:5fc0)
 	rgb 15,  1,  6
 	rgb  6,  0, 10
 	rgb  0,  0,  0
-; 0xce000
 
-Pals_ce000: ; ce000 (33:6000)
+Pals_ce000:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5414,9 +5286,8 @@ Pals_ce000: ; ce000 (33:6000)
 	rgb 15,  1,  6
 	rgb  6,  0, 10
 	rgb  0,  0,  0
-; 0xce040
 
-Pals_ce040: ; ce040 (33:6040)
+Pals_ce040:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5456,9 +5327,8 @@ Pals_ce040: ; ce040 (33:6040)
 	rgb 15,  1,  6
 	rgb  6,  0, 10
 	rgb  0,  0,  0
-; 0xce080
 
-Pals_ce080: ; ce080 (33:6080)
+Pals_ce080:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5498,9 +5368,8 @@ Pals_ce080: ; ce080 (33:6080)
 	rgb 15,  1,  6
 	rgb  6,  0, 10
 	rgb  0,  0,  0
-; 0xce0c0
 
-Pals_ce0c0: ; ce0c0 (33:60c0)
+Pals_ce0c0:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5540,9 +5409,8 @@ Pals_ce0c0: ; ce0c0 (33:60c0)
 	rgb 15,  1,  6
 	rgb  6,  0, 10
 	rgb  0,  0,  0
-; 0xce100
 
-Pals_ce100: ; ce100 (33:6100)
+Pals_ce100:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5582,9 +5450,8 @@ Pals_ce100: ; ce100 (33:6100)
 	rgb  2, 15, 14
 	rgb  0,  3, 19
 	rgb  0,  0,  0
-; 0xce140
 
-Pals_ce140: ; ce140 (33:6140)
+Pals_ce140:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5624,9 +5491,8 @@ Pals_ce140: ; ce140 (33:6140)
 	rgb  4, 14, 14
 	rgb  0,  3, 19
 	rgb  0,  0,  0
-; 0xce180
 
-Pals_ce180: ; ce180 (33:6180)
+Pals_ce180:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5666,9 +5532,8 @@ Pals_ce180: ; ce180 (33:6180)
 	rgb  6, 13, 14
 	rgb  0,  3, 19
 	rgb  0,  0,  0
-; 0xce1c0
 
-Pals_ce1c0: ; ce1c0 (33:61c0)
+Pals_ce1c0:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5708,9 +5573,8 @@ Pals_ce1c0: ; ce1c0 (33:61c0)
 	rgb  6, 13, 14
 	rgb  0,  3, 19
 	rgb  0,  0,  0
-; 0xce200
 
-Pals_ce200: ; ce200 (33:6200)
+Pals_ce200:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5750,9 +5614,8 @@ Pals_ce200: ; ce200 (33:6200)
 	rgb  4, 13, 14
 	rgb  0,  3, 19
 	rgb  0,  0,  0
-; 0xce240
 
-Pals_ce240: ; ce240 (33:6240)
+Pals_ce240:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5792,9 +5655,8 @@ Pals_ce240: ; ce240 (33:6240)
 	rgb  2, 14, 14
 	rgb  0,  3, 19
 	rgb  0,  0,  0
-; 0xce280
 
-Pals_ce280: ; ce280 (33:6280)
+Pals_ce280:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5834,9 +5696,8 @@ Pals_ce280: ; ce280 (33:6280)
 	rgb  0, 15, 14
 	rgb  0,  3, 19
 	rgb  0,  0,  0
-; 0xce2c0
 
-Pals_ce2c0: ; ce2c0 (33:62c0)
+Pals_ce2c0:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5876,9 +5737,8 @@ Pals_ce2c0: ; ce2c0 (33:62c0)
 	rgb  1, 11, 19
 	rgb  8,  0, 19
 	rgb  0,  0,  0
-; 0xce300
 
-Pals_ce300: ; ce300 (33:6300)
+Pals_ce300:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5918,9 +5778,8 @@ Pals_ce300: ; ce300 (33:6300)
 	rgb  2, 11, 17
 	rgb  8,  0, 19
 	rgb  0,  0,  0
-; 0xce340
 
-Pals_ce340: ; ce340 (33:6340)
+Pals_ce340:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -5960,9 +5819,8 @@ Pals_ce340: ; ce340 (33:6340)
 	rgb  3, 11, 15
 	rgb  8,  0, 19
 	rgb  0,  0,  0
-; 0xce380
 
-Pals_ce380: ; ce380 (33:6380)
+Pals_ce380:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -6002,9 +5860,8 @@ Pals_ce380: ; ce380 (33:6380)
 	rgb  2, 12, 15
 	rgb  8,  0, 19
 	rgb  0,  0,  0
-; 0xce3c0
 
-Pals_ce3c0: ; ce3c0 (33:63c0)
+Pals_ce3c0:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -6044,9 +5901,8 @@ Pals_ce3c0: ; ce3c0 (33:63c0)
 	rgb  1, 13, 15
 	rgb  8,  0, 19
 	rgb  0,  0,  0
-; 0xce400
 
-Pals_ce400: ; ce400 (33:6400)
+Pals_ce400:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -6086,9 +5942,8 @@ Pals_ce400: ; ce400 (33:6400)
 	rgb  0, 13, 17
 	rgb  8,  0, 19
 	rgb  0,  0,  0
-; 0xce440
 
-Pals_ce440: ; ce440 (33:6440)
+Pals_ce440:
 	rgb 28, 29, 31
 	rgb 16, 17, 18
 	rgb 10, 10, 11
@@ -6128,4 +5983,3 @@ Pals_ce440: ; ce440 (33:6440)
 	rgb  0, 12, 19
 	rgb  8,  0, 19
 	rgb  0,  0,  0
-; 0xce480

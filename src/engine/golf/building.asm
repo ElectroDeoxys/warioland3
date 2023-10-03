@@ -1,4 +1,4 @@
-_GolfBuildingStateTable:: ; 1c8570 (72:4570)
+_GolfBuildingStateTable::
 	ld a, [wSubState]
 	jumptable
 
@@ -11,9 +11,8 @@ _GolfBuildingStateTable:: ; 1c8570 (72:4570)
 	dw SlowFadeFromWhite
 	dw HandleGolfLevel
 	dw ReturnToMap
-; 0x1c8586
 
-Func_1c8586: ; 1c8586 (72:4586)
+Func_1c8586:
 	call DisableLCD
 	call ClearVirtualOAM
 	ld a, $08
@@ -76,9 +75,8 @@ Func_1c8586: ; 1c8586 (72:4586)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0x1c8604
 
-Func_1c8604: ; 1c8604 (72:4604)
+Func_1c8604:
 	ld a, BANK(GolfMenuGfx)
 	ld [wTempBank], a
 	xor a
@@ -226,9 +224,8 @@ Func_1c8604: ; 1c8604 (72:4604)
 	xor a
 	ld [de], a
 	jr .got_digits
-; 0x1c86dd
 
-Func_1c86dd: ; 1c86dd (72:46dd)
+Func_1c86dd:
 	call Func_1c882b
 	call Func_1c86f8
 	call ClearUnusedVirtualOAM
@@ -239,9 +236,8 @@ Func_1c86dd: ; 1c86dd (72:46dd)
 	ld [w1d800], a
 	ld [wGolfMenuOption], a
 	jp Func_1c9fae
-; 0x1c86f8
 
-Func_1c86f8: ; 1c86f8 (72:46f8)
+Func_1c86f8:
 	ld a, HIGH(OAM_1cb3e0)
 	ld [wGolfOAMPtr + 0], a
 	ld a, LOW(OAM_1cb3e0)
@@ -337,12 +333,11 @@ Func_1c86f8: ; 1c86f8 (72:46f8)
 	dw Frameset_1cb5db
 	dw Frameset_1cb5de
 	dw Frameset_1cb5e1
-; 0x1c87db
 
 ; loads attribute map to w1d900
 ; and palettes to w1db00
 ; depending on value in wGolfCourse
-Func_1c87db: ; 1c87db (72:47db)
+Func_1c87db:
 	ld a, BANK("Golf Gfx 2")
 	ld [wTempBank], a
 	ld hl, .data
@@ -375,11 +370,10 @@ Func_1c87db: ; 1c87db (72:47db)
 	dw BGMap_1c49c0, Pals_1ca28f ; GOLF_COURSE_2
 	dw BGMap_1c4aa0, Pals_1ca2cf ; GOLF_COURSE_3
 	dw BGMap_1c4b80, Pals_1ca30f ; GOLF_COURSE_4
-; 0x1c8818
 
 ; gets the golf course scroll X value
 ; and writes it as the target SCX
-GetGolfCourseTargetSCX: ; 1c8818 (72:4818)
+GetGolfCourseTargetSCX:
 	ld hl, .scroll_x
 	ld a, [wGolfCourse]
 	ld b, $00
@@ -394,9 +388,8 @@ GetGolfCourseTargetSCX: ; 1c8818 (72:4818)
 	db $0c ; GOLF_COURSE_2
 	db $4c ; GOLF_COURSE_3
 	db $8c ; GOLF_COURSE_4
-; 0x1c882b
 
-Func_1c882b: ; 1c882b (72:482b)
+Func_1c882b:
 	ld a, [w1dc00]
 	jumptable
 	dw Func_1c8837
@@ -405,7 +398,7 @@ Func_1c882b: ; 1c882b (72:482b)
 	dw Func_1c8911
 ; 0x1C8837
 
-Func_1c8837: ; 1c8837 (72:4837)
+Func_1c8837:
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jr nz, .a_btn
@@ -493,9 +486,8 @@ Func_1c8837: ; 1c8837 (72:4837)
 	ld bc, $e0
 	call FarCopyHLToDE_BC2
 	jp GetGolfCourseTargetSCX
-; 0x1c88dc
 
-Func_1c88dc: ; 1c88dc (72:48dc)
+Func_1c88dc:
 	ld a, [wGolfMenuTargetSCX]
 	ld c, a
 	ld a, [wGolfMenuScrollingDir]
@@ -521,17 +513,15 @@ Func_1c88dc: ; 1c88dc (72:48dc)
 	ld [w1dc00], a
 	ld [wGolfVBlankMode], a
 	ret
-; 0x1c8907
 
-Func_1c8907: ; 1c8907 (72:4907)
+Func_1c8907:
 	xor a
 	ld [w1dc00], a
 	ld a, $03
 	ld [wGolfVBlankMode], a
 	ret
-; 0x1c8911
 
-Func_1c8911: ; 1c8911 (72:4911)
+Func_1c8911:
 	ld hl, wGolfCounter
 	ld a, [hl]
 	cp $32 ; aka GOLF_BUILDING_PRICE in hex
@@ -571,4 +561,3 @@ Func_1c8911: ; 1c8911 (72:4911)
 	db GOLF_LEVEL_05 + $1 ; GOLF_COURSE_2
 	db GOLF_LEVEL_10 + $1 ; GOLF_COURSE_3
 	db GOLF_LEVEL_15 + $1 ; GOLF_COURSE_4
-; 0x1c8957

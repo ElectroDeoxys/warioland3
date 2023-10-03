@@ -1,4 +1,4 @@
-Music_CrazyWario_Ch1: ; 379f9 (0d:79f9)
+Music_CrazyWario_Ch1:
 	semitone_offset 1
 	tempo 51
 	wave WAVE_14
@@ -97,9 +97,8 @@ Music_CrazyWario_Ch1: ; 379f9 (0d:79f9)
 	audio_jump .loop
 .end
 	audio_end
-; 0x37a6e
 
-Music_CrazyWario_Ch2: ; 37a6e (0d:7a6e)
+Music_CrazyWario_Ch2:
 	semitone_offset 1
 	wave WAVE_4B
 	volume 75
@@ -159,9 +158,8 @@ Music_CrazyWario_Ch2: ; 37a6e (0d:7a6e)
 	audio_jump .loop
 .end
 	audio_end
-; 0x37abe
 
-Music_CrazyWario_Ch3: ; 37abe (0d:7abe)
+Music_CrazyWario_Ch3:
 	semitone_offset 1
 	wave WAVE_61
 	volume 103
@@ -319,9 +317,8 @@ Music_CrazyWario_Ch3: ; 37abe (0d:7abe)
 	audio_jump .loop
 .end
 	audio_end
-; 0x37b78
 
-Music_CrazyWario: ; 37b78 (d:7b78)
+Music_CrazyWario:
 	db $3, $2
 	dw Music_CrazyWario_Ch1
 	dw Music_CrazyWario_Ch2

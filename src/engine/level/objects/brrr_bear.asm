@@ -1,4 +1,4 @@
-BrrrBearFunc: ; 48000 (12:4000)
+BrrrBearFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Init)
 	ld [hld], a
@@ -801,4 +801,3 @@ SnowflakeFunc:
 	xor a
 	ld [wCurObjFlags], a
 	ret
-; 0x4853b

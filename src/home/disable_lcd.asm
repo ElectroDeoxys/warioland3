@@ -1,4 +1,4 @@
-DisableLCD:: ; 8e6 (0:8e6)
+DisableLCD::
 	ldh a, [rLCDC]
 	bit LCDCB_ON, a
 	ret z ; already disabled
@@ -24,4 +24,3 @@ DisableLCD:: ; 8e6 (0:8e6)
 	ld a, [wTempIE]
 	ldh [rIE], a
 	ret
-; 0x909

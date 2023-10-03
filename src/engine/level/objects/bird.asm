@@ -1,4 +1,4 @@
-BirdFunc: ; 43278 (10:7278)
+BirdFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Init)
 	ld [hld], a
@@ -293,4 +293,3 @@ BirdFunc: ; 43278 (10:7278)
 	ld de, Frameset_687c9
 	call SetObjectFramesetPtr
 	ret
-; 0x43451

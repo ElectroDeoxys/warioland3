@@ -1,5 +1,5 @@
 
-ExecuteMainPowerUpActionHelp: ; 1f826d (7e:426d)
+ExecuteMainPowerUpActionHelp:
 	ld a, [wActionHelpPowerUp]
 	jumptable
 
@@ -13,4 +13,3 @@ ExecuteMainPowerUpActionHelp: ; 1f826d (7e:426d)
 	dw HighJumpBootsActionHelp         ; HIGH_JUMP_BOOTS
 	dw PrinceFrogsGlovesActionHelp     ; PRINCE_FROGS_GLOVES
 	dw SuperGrabGloveActionHelp        ; SUPER_GRAB_GLOVES
-; 0x1f8285

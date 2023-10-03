@@ -1,4 +1,4 @@
-TransformationMusicIDs:: ; 3fe00 (f:7e00)
+TransformationMusicIDs::
 	dw NULL
 	dw MUSIC_HOT_WARIO
 	dw MUSIC_FLAT_WARIO
@@ -31,4 +31,3 @@ TransformationMusicIDs:: ; 3fe00 (f:7e00)
 	dw NULL
 	dw NULL
 	dw NULL
-; 0x3fe40

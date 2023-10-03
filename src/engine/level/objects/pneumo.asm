@@ -1,4 +1,4 @@
-PneumoFunc: ; 4564a (11:564a)
+PneumoFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -532,4 +532,3 @@ PneumoFunc: ; 4564a (11:564a)
 	and a
 	jp z, MoveObjectDown
 	jp .Func_456fe
-; 0x459a9

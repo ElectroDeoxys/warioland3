@@ -1,4 +1,4 @@
-InitHRAMCallFunc:: ; a92 (0:a92)
+InitHRAMCallFunc::
 	ld hl, .Func
 	ld de, hCallFunc
 	ld b, .end - .Func
@@ -15,4 +15,3 @@ InitHRAMCallFunc:: ; a92 (0:a92)
 	bankswitch
 	ret
 .end
-; 0xab5

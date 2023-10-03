@@ -1,4 +1,4 @@
-OwlActionHelp: ; 1e400c (79:400c)
+OwlActionHelp:
 	call .StateTable
 
 	ld a, [wActionHelpBlackedOut]
@@ -31,7 +31,6 @@ OwlActionHelp: ; 1e400c (79:400c)
 	call AddActionHelpSprite_Far
 .done
 	ret
-; 0x1e4060
 
 .StateTable:
 	ld a, [wActionHelpState]
@@ -50,9 +49,8 @@ OwlActionHelp: ; 1e400c (79:400c)
 	dw Func_1e4254
 	dw Func_1e4271
 	dw Func_1e4286
-; 0x1e407e
 
-Func_1e407e: ; 1e407e (79:407e)
+Func_1e407e:
 	ld a, [wPowerUpLevel]
 	bit ACTION_HELP_TITLE_SCREEN_F, a
 	jr z, .restart_action_help
@@ -65,11 +63,11 @@ Func_1e407e: ; 1e407e (79:407e)
 	ld [wActionHelpState], a
 	jr Func_1e409a
 
-Func_1e4095: ; 1e4095 (79:4095)
+Func_1e4095:
 	ld hl, wTimer
 	dec [hl]
 	ret nz
-Func_1e409a: ; 1e409a (79:409a)
+Func_1e409a:
 	ld a, BANK(WarioHangGfx)
 	ld [wPendingDMASourceBank], a
 	ld a, HIGH(WarioHangGfx)
@@ -119,7 +117,7 @@ Func_1e409a: ; 1e409a (79:409a)
 	inc [hl]
 	ret
 
-Func_1e4104: ; 1e4104 (79:4104)
+Func_1e4104:
 	play_sfx_rept 32, SFX_071
 
 	ld a, [wActionHelpCounter]
@@ -138,7 +136,7 @@ Func_1e4104: ; 1e4104 (79:4104)
 	inc [hl]
 	ret
 
-Func_1e4134: ; 1e4134 (79:4134)
+Func_1e4134:
 	play_sfx_rept 32, SFX_071
 
 	ld a, [wActionHelpCounter]
@@ -160,7 +158,7 @@ Func_1e4134: ; 1e4134 (79:4134)
 .asm_1e4162
 	jp ActionHelp2_ClearDPadInput
 
-Func_1e4165: ; 1e4165 (79:4165)
+Func_1e4165:
 	play_sfx_rept 32, SFX_071
 
 	ld a, [wActionHelpCounter]
@@ -179,7 +177,7 @@ Func_1e4165: ; 1e4165 (79:4165)
 	inc [hl]
 	ret
 
-Func_1e4195: ; 1e4195 (79:4195)
+Func_1e4195:
 	play_sfx_rept 32, SFX_071
 
 	ld a, [wActionHelpCounter]
@@ -202,7 +200,7 @@ Func_1e4195: ; 1e4195 (79:4195)
 .asm_1e41c6
 	jp ActionHelp2_ClearDPadInput
 
-Func_1e41c9: ; 1e41c9 (79:41c9)
+Func_1e41c9:
 	play_sfx_rept 32, SFX_071
 
 	ld a, [wActionHelpCounter]
@@ -223,7 +221,7 @@ Func_1e41c9: ; 1e41c9 (79:41c9)
 	inc [hl]
 	ret
 
-Func_1e41fd: ; 1e41fd (79:41fd)
+Func_1e41fd:
 	play_sfx_rept 16, SFX_071
 
 	ld hl, wActionHelpWarioXCoord
@@ -239,7 +237,7 @@ Func_1e41fd: ; 1e41fd (79:41fd)
 	inc [hl]
 	ret
 
-Func_1e4227: ; 1e4227 (79:4227)
+Func_1e4227:
 	play_sfx_rept 16, SFX_071
 
 	ld hl, wActionHelpWarioXCoord
@@ -256,7 +254,7 @@ Func_1e4227: ; 1e4227 (79:4227)
 	inc [hl]
 	ret
 
-Func_1e4254: ; 1e4254 (79:4254)
+Func_1e4254:
 	ld hl, wMenuObj4YCoord
 	dec [hl]
 	dec [hl]
@@ -275,7 +273,7 @@ Func_1e4254: ; 1e4254 (79:4254)
 	inc [hl]
 	ret
 
-Func_1e4271: ; 1e4271 (79:4271)
+Func_1e4271:
 	ld hl, wMenuObj4YCoord
 	dec [hl]
 	dec [hl]
@@ -290,11 +288,10 @@ Func_1e4271: ; 1e4271 (79:4271)
 	inc [hl]
 	ret
 
-Func_1e4286: ; 1e4286 (79:4286)
+Func_1e4286:
 	ld hl, wActionHelpWarioXCoord
 	inc [hl]
 	ld a, [hl]
 	cp $b0
 	ret c
 	jp Func_1e407e
-; 0x1e4291

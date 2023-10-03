@@ -1,4 +1,4 @@
-SparkFunc: ; 4a8a2 (12:68a2)
+SparkFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -57,4 +57,3 @@ SparkFunc: ; 4a8a2 (12:68a2)
 	ld a, $01
 	ld [hl], a
 	ret
-; 0x4a902

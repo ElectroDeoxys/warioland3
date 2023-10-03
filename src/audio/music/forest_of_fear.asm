@@ -1,4 +1,4 @@
-Music_ForestOfFear_Ch1: ; 32d3b (0c:6d3b)
+Music_ForestOfFear_Ch1:
 	semitone_offset 0
 
 .loop
@@ -174,9 +174,8 @@ Music_ForestOfFear_Ch1: ; 32d3b (0c:6d3b)
 	audio_jump .loop
 .end
 	audio_end
-; 0x32e15
 
-Music_ForestOfFear_Ch2: ; 32e15 (0c:6e15)
+Music_ForestOfFear_Ch2:
 	semitone_offset 0
 .loop
 	wave WAVE_48
@@ -350,13 +349,11 @@ Music_ForestOfFear_Ch2: ; 32e15 (0c:6e15)
 	audio_jump .loop
 .end
 	audio_end
-; 0x32eed
 
-Music_ForestOfFear: ; 32eed (c:6eed)
+Music_ForestOfFear:
 	db $2, $2
 	dw Music_ForestOfFear_Ch1
 	dw Music_ForestOfFear_Ch2
-; 0x32ef3
 
 	dw Music_ForestOfFear_Ch1.loop
 	dw Music_ForestOfFear_Ch2.loop

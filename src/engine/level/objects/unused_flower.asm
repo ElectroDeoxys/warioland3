@@ -1,4 +1,4 @@
-UnusedFlowerFunc: ; 40ca1 (10:4ca1)
+UnusedFlowerFunc:
 .Init
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
@@ -122,14 +122,13 @@ UnusedFlowerFunc: ; 40ca1 (10:4ca1)
 	ld a, LOW(.Init)
 	ld [hld], a
 	ret
-; 0x40d76
 
-UnusedFlowerProjectileRightFunc: ; 40d76 (10:4d76)
+UnusedFlowerProjectileRightFunc:
 	call MoveObjectRight
 	jr UnusedFlowerProjectileCommonFunc
-UnusedFlowerProjectileLeftFunc: ; 40d7b (10:4d7b)
+UnusedFlowerProjectileLeftFunc:
 	call MoveObjectLeft
-UnusedFlowerProjectileCommonFunc: ; 40d7e (10:4d7e)
+UnusedFlowerProjectileCommonFunc:
 	ld a, [wCurObjState]
 	and a
 	jr z, .Thrown
@@ -220,4 +219,3 @@ UnusedFlowerProjectileCommonFunc: ; 40d7e (10:4d7e)
 	xor a
 	ld [wCurObjFlags], a
 	ret
-; 0x40e12

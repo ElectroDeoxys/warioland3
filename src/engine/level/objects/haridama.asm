@@ -446,4 +446,3 @@ HaridamaFunc:
 	call Func_3513
 	and $0f
 	ret
-; 0x491d3

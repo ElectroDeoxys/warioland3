@@ -1,4 +1,4 @@
-StoveFunc: ; 4971c (12:571c)
+StoveFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -217,4 +217,3 @@ StoveFunc: ; 4971c (12:571c)
 	inc a ; $1
 	ld [wCurObjVar1], a
 	ret
-; 0x4989e

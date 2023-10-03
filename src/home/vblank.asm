@@ -1,5 +1,5 @@
 ; store in wVBlankFunc a return function
-VBlank_Ret:: ; 334 (0:334)
+VBlank_Ret::
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -11,7 +11,7 @@ VBlank_Ret:: ; 334 (0:334)
 .end
 
 ; store in wLCDFunc a return function
-InitLCD:: ; 341 (0:341)
+InitLCD::
 	ld a, $d9 ; reti
 	ld [wLCDFunc], a
 	xor a
@@ -21,9 +21,8 @@ InitLCD:: ; 341 (0:341)
 	ld hl, rSTAT
 	res STATB_LYC, [hl]
 	ret
-; 0x354
 
-VBlank_354:: ; 354 (0:354)
+VBlank_354::
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -39,9 +38,8 @@ VBlank_354:: ; 354 (0:354)
 	call hTransferVirtualOAM
 	ret
 .end
-; 0x370
 
-WaitVBlank:: ; 370 (0:370)
+WaitVBlank::
 	ldh a, [rSTAT]
 	and STATF_LCD
 	jr z, WaitVBlank
@@ -50,4 +48,3 @@ WaitVBlank:: ; 370 (0:370)
 	and STATF_LCD
 	jr nz, .is_on
 	ret
-; 0x37d

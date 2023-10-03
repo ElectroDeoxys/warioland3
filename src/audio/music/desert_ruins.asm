@@ -1,4 +1,4 @@
-Music_DesertRuins_Ch1: ; 332fb (0c:72fb)
+Music_DesertRuins_Ch1:
 	semitone_offset 0
 	tempo 45
 	vibrato_speed 20
@@ -159,9 +159,8 @@ Music_DesertRuins_Ch1: ; 332fb (0c:72fb)
 	audio_jump .loop
 .end
 	audio_end
-; 0x333c8
 
-Music_DesertRuins_Ch2: ; 333c8 (0c:73c8)
+Music_DesertRuins_Ch2:
 	semitone_offset 0
 	wave WAVE_49
 	volume 94
@@ -419,9 +418,8 @@ Music_DesertRuins_Ch2: ; 333c8 (0c:73c8)
 	audio_jump .loop
 .end
 	audio_end
-; 0x334f4
 
-Music_DesertRuins_Ch3: ; 334f4 (0c:74f4)
+Music_DesertRuins_Ch3:
 	semitone_offset 0
 	wave WAVE_63
 	vibrato_speed 20
@@ -557,14 +555,12 @@ Music_DesertRuins_Ch3: ; 334f4 (0c:74f4)
 	audio_jump .loop
 .end
 	audio_end
-; 0x335af
 
-Music_DesertRuins: ; 335af (c:75af)
+Music_DesertRuins:
 	db $3, $2
 	dw Music_DesertRuins_Ch1
 	dw Music_DesertRuins_Ch2
 	dw Music_DesertRuins_Ch3
-; 0x335b7
 
 ; unused?
 	dw Music_DesertRuins_Ch1.loop

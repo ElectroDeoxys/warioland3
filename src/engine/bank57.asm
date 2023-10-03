@@ -16,7 +16,7 @@ Text_15e212: INCBIN "text/text_15e212.bin" ; unreferenced
 Text_15e225: INCBIN "text/text_15e225.bin"
 Text_15e437: INCBIN "text/text_15e437.bin" ; unreferenced
 
-OAM_15e44a: ; 15e44a (57:644a)
+OAM_15e44a:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -379,21 +379,18 @@ OAM_15e44a: ; 15e44a (57:644a)
 	frame_oam  -8,  -8, $64, 5 | OAMF_BANK1
 	frame_oam  -8,   0, $64, 5 | OAMF_BANK1 | OAMF_XFLIP
 	db $80
-; 0x15e741
 
-Frameset_15e741: ; 15e741 (57:6741)
+Frameset_15e741:
 	db $02,  3
 	db $01,  3
 	db $00,  3
 	db $ff
-; 0x15e748
 
-Frameset_15e748: ; 15e748 (57:6748)
+Frameset_15e748:
 	db $03,  4
 	db $ff
-; 0x15e74b
 
-Frameset_15e74b: ; 15e74b (57:674b)
+Frameset_15e74b:
 	db $04,  5
 	db $05,  5
 	db $06,  5
@@ -415,47 +412,40 @@ Frameset_15e74b: ; 15e74b (57:674b)
 	db $06,  2
 	db $05,  2
 	db $ff
-; 0x15e774
 
-Frameset_15e774: ; 15e774 (57:6774)
+Frameset_15e774:
 	db $07,  3
 	db $08,  3
 	db $09,  3
 	db $0a,  3
 	db $ff
-; 0x15e77d
 
-Frameset_15e77d: ; 15e77d (57:677d)
+Frameset_15e77d:
 	db $0b,  4
 	db $ff
-; 0x15e780
 
-Frameset_15e780: ; 15e780 (57:6780)
+Frameset_15e780:
 	db $0c,  4
 	db $ff
-; 0x15e783
 
-Frameset_15e783: ; 15e783 (57:6783)
+Frameset_15e783:
 	db $0e,  3
 	db $0f,  3
 	db $10,  3
 	db $ff
-; 0x15e78a
 
-Frameset_15e78a: ; 15e78a (57:678a)
+Frameset_15e78a:
 	db $11,  9
 	db $12,  8
 	db $13,  7
 	db $14,  7
 	db $ff
-; 0x15e793
 
-Frameset_15e793: ; 15e793 (57:6793)
+Frameset_15e793:
 	db $0d,  4
 	db $ff
-; 0x15e796
 
-Frameset_15e796: ; 15e796 (57:6796)
+Frameset_15e796:
 	db $15,  2
 	db $16,  2
 	db $17,  6
@@ -463,14 +453,12 @@ Frameset_15e796: ; 15e796 (57:6796)
 	db $17,  6
 	db $18,  3
 	db $ff
-; 0x15e7a3
 
-Frameset_15e7a3: ; 15e7a3 (57:67a3)
+Frameset_15e7a3:
 	db $19,  4
 	db $ff
-; 0x15e7a6
 
-Frameset_15e7a6: ; 15e7a6 (57:67a6)
+Frameset_15e7a6:
 	db $19,  1
 	db $1c,  2
 	db $1a,  2
@@ -480,9 +468,8 @@ Frameset_15e7a6: ; 15e7a6 (57:67a6)
 	db $1f,  2
 	db $20,  2
 	db $ff
-; 0x15e7b7
 
-Frameset_15e7b7: ; 15e7b7 (57:67b7)
+Frameset_15e7b7:
 	db $21,  4
 	db $22,  4
 	db $23,  4
@@ -490,9 +477,8 @@ Frameset_15e7b7: ; 15e7b7 (57:67b7)
 	db $25,  4
 	db $26,  4
 	db $ff
-; 0x15e7c4
 
-Frameset_15e7c4: ; 15e7c4 (57:67c4)
+Frameset_15e7c4:
 	db $27,  2
 	db $28,  1
 	db $29,  2
@@ -514,49 +500,42 @@ Frameset_15e7c4: ; 15e7c4 (57:67c4)
 	db $29,  2
 	db $28,  1
 	db $ff
-; 0x15e7ed
 
-Frameset_15e7ed: ; 15e7ed (57:67ed)
+Frameset_15e7ed:
 	db $31,  4
 	db $ff
-; 0x15e7f0
 
-Frameset_15e7f0: ; 15e7f0 (57:67f0)
+Frameset_15e7f0:
 	db $02,  2
 	db $30,  2
 	db $ff
-; 0x15e7f5
 
-Frameset_15e7f5: ; 15e7f5 (57:67f5)
+Frameset_15e7f5:
 	db $0c,  2
 	db $30,  2
 	db $ff
-; 0x15e7fa
 
-Frameset_15e7fa: ; 15e7fa (57:67fa)
+Frameset_15e7fa:
 	db $2c,  2
 	db $28,  1
 	db $32,  2
 	db $ff
-; 0x15e801
 
-Frameset_15e801: ; 15e801 (57:6801)
+Frameset_15e801:
 	db $34,  2
 	db $32,  1
 	db $29,  2
 	db $32,  1
 	db $ff
-; 0x15e80a
 
-Frameset_15e80a: ; 15e80a (57:680a)
+Frameset_15e80a:
 	db $29,  2
 	db $2d,  1
 	db $33,  2
 	db $2d,  1
 	db $ff
-; 0x15e813
 
-OAM_15e813: ; 15e813 (57:6813)
+OAM_15e813:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -620,367 +599,310 @@ OAM_15e813: ; 15e813 (57:6813)
 	frame_oam -16,   0, $22, 4 | OAMF_BANK1
 	frame_oam -20,   0, $2c, 0 | OAMF_BANK1
 	db $80
-; 0x15e88d
 
-Frameset_15e88d: ; 15e88d (57:688d)
+Frameset_15e88d:
 	db $00,  4
 	db $ff
-; 0x15e890
 
-Frameset_15e890: ; 15e890 (57:6890)
+Frameset_15e890:
 	db $01,  4
 	db $ff
-; 0x15e893
 
-Frameset_15e893: ; 15e893 (57:6893)
+Frameset_15e893:
 	db $02,  4
 	db $ff
-; 0x15e896
 
-Frameset_15e896: ; 15e896 (57:6896)
+Frameset_15e896:
 	db $03,  4
 	db $ff
-; 0x15e899
 
-Frameset_15e899: ; 15e899 (57:6899)
+Frameset_15e899:
 	db $04,  4
 	db $ff
-; 0x15e89c
 
-Frameset_15e89c: ; 15e89c (57:689c)
+Frameset_15e89c:
 	db $05,  4
 	db $ff
-; 0x15e89f
 
-Frameset_15e89f: ; 15e89f (57:689f)
+Frameset_15e89f:
 	db $06,  4
 	db $ff
-; 0x15e8a2
 
-Frameset_15e8a2: ; 15e8a2 (57:68a2)
+Frameset_15e8a2:
 	db $07,  4
 	db $ff
-; 0x15e8a5
 
-Frameset_15e8a5: ; 15e8a5 (57:68a5)
+Frameset_15e8a5:
 	db $08,  4
 	db $ff
-; 0x15e8a8
 
-Frameset_15e8a8: ; 15e8a8 (57:68a8)
+Frameset_15e8a8:
 	db $09,  4
 	db $ff
-; 0x15e8ab
 
-Frameset_15e8ab: ; 15e8ab (57:68ab)
+Frameset_15e8ab:
 	db $00, 20
 	db $01, 20
 	db $ff
-; 0x15e8b0
 
-Frameset_15e8b0: ; 15e8b0 (57:68b0)
+Frameset_15e8b0:
 	db $00, 10
 	db $02,  4
 	db $03, 10
 	db $04,  4
 	db $ff
-; 0x15e8b9
 
 ; unreferenced
-Frameset_15e8b9: ; 15e8b9 (57:68b9)
+Frameset_15e8b9:
 	db $05, 20
 	db $06, 20
 	db $ff
-; 0x15e8be
 
 ; unreferenced
-Frameset_15e8be: ; 15e8be (57:68be)
+Frameset_15e8be:
 	db $07, 20
 	db $08, 20
 	db $ff
-; 0x15e8c3
 
 ; unreferenced
-Frameset_15e8c3: ; 15e8c3 (57:68c3)
+Frameset_15e8c3:
 	db $09,  4
 	db $0a,  4
 	db $09,  4
 	db $0b,  4
 	db $ff
-; 0x15e8cc
 
 ; unreferenced
-Frameset_15e8cc: ; 15e8cc (57:68cc)
+Frameset_15e8cc:
 	db $0c, 15
 	db $0d, 15
 	db $ff
-; 0x15e8d1
 
 ; unreferenced
-Frameset_15e8d1: ; 15e8d1 (57:68d1)
+Frameset_15e8d1:
 	db $0e, 15
 	db $0f, 15
 	db $ff
-; 0x15e8d6
 
 ; unreferenced
-Frameset_15e8d6: ; 15e8d6 (57:68d6)
+Frameset_15e8d6:
 	db $10, 15
 	db $11, 15
 	db $ff
-; 0x15e8db
 
 ; unreferenced
-Frameset_15e8db: ; 15e8db (57:68db)
+Frameset_15e8db:
 	db $15,  7
 	db $16,  7
 	db $17,  7
 	db $18,  7
 	db $19,  7
 	db $ff
-; 0x15e8e6
 
 ; unreferenced
-Frameset_15e8e6: ; 15e8e6 (57:68e6)
+Frameset_15e8e6:
 	db $24,  7
 	db $25,  7
 	db $26,  7
 	db $27,  7
 	db $28,  7
 	db $ff
-; 0x15e8f1
 
 ; unreferenced
-Frameset_15e8f1: ; 15e8f1 (57:68f1)
+Frameset_15e8f1:
 	db $34,  4
 	db $20,  4
 	db $ff
-; 0x15e8f6
 
 ; unreferenced
-Frameset_15e8f6: ; 15e8f6 (57:68f6)
+Frameset_15e8f6:
 	db $35,  4
 	db $2f,  4
 	db $ff
-; 0x15e8fb
 
 ; unreferenced
-Frameset_15e8fb: ; 15e8fb (57:68fb)
+Frameset_15e8fb:
 	db $12, 10
 	db $1c,  6
 	db $1b, 10
 	db $ff
-; 0x15e902
 
 ; unreferenced
-Frameset_15e902: ; 15e902 (57:6902)
+Frameset_15e902:
 	db $1b, 10
 	db $1c,  6
 	db $12, 10
 	db $ff
-; 0x15e909
 
 ; unreferenced
-Frameset_15e909: ; 15e909 (57:6909)
+Frameset_15e909:
 	db $21, 10
 	db $2b,  6
 	db $2a, 10
 	db $ff
-; 0x15e910
 
 ; unreferenced
-Frameset_15e910: ; 15e910 (57:6910)
+Frameset_15e910:
 	db $2a, 10
 	db $2b,  6
 	db $21, 10
 	db $ff
-; 0x15e917
 
 ; unreferenced
-Frameset_15e917: ; 15e917 (57:6917)
+Frameset_15e917:
 	db $12,  4
 	db $ff
-; 0x15e91a
 
 ; unreferenced
-Frameset_15e91a: ; 15e91a (57:691a)
+Frameset_15e91a:
 	db $13,  4
 	db $ff
-; 0x15e91d
 
 ; unreferenced
-Frameset_15e91d: ; 15e91d (57:691d)
+Frameset_15e91d:
 	db $14,  4
 	db $ff
-; 0x15e920
 
 ; unreferenced
-Frameset_15e920: ; 15e920 (57:6920)
+Frameset_15e920:
 	db $15,  4
 	db $ff
-; 0x15e923
 
 ; unreferenced
-Frameset_15e923: ; 15e923 (57:6923)
+Frameset_15e923:
 	db $16,  4
 	db $ff
-; 0x15e926
 
 ; unreferenced
-Frameset_15e926: ; 15e926 (57:6926)
+Frameset_15e926:
 	db $17,  4
 	db $ff
-; 0x15e929
 
 ; unreferenced
-Frameset_15e929: ; 15e929 (57:6929)
+Frameset_15e929:
 	db $18,  4
 	db $ff
-; 0x15e92c
 
 ; unreferenced
-Frameset_15e92c: ; 15e92c (57:692c)
+Frameset_15e92c:
 	db $19,  4
 	db $ff
-; 0x15e92f
 
 ; unreferenced
-Frameset_15e92f: ; 15e92f (57:692f)
+Frameset_15e92f:
 	db $1a,  4
 	db $ff
-; 0x15e932
 
-Frameset_15e932: ; 15e932 (57:6932)
+Frameset_15e932:
 	db $1b,  4
 	db $ff
-; 0x15e935
 
 ; unreferenced
-Frameset_15e935: ; 15e935 (57:6935)
+Frameset_15e935:
 	db $1c,  4
 	db $ff
-; 0x15e938
 
 ; unreferenced
-Frameset_15e938: ; 15e938 (57:6938)
+Frameset_15e938:
 	db $1d,  4
 	db $ff
-; 0x15e93b
 
 ; unreferenced
-Frameset_15e93b: ; 15e93b (57:693b)
+Frameset_15e93b:
 	db $1e,  4
 	db $ff
-; 0x15e93e
 
 ; unreferenced
-Frameset_15e93e: ; 15e93e (57:693e)
+Frameset_15e93e:
 	db $1f,  4
 	db $ff
-; 0x15e941
 
 ; unreferenced
-Frameset_15e941: ; 15e941 (57:6941)
+Frameset_15e941:
 	db $21,  4
 	db $ff
-; 0x15e944
 
 ; unreferenced
-Frameset_15e944: ; 15e944 (57:6944)
+Frameset_15e944:
 	db $22,  4
 	db $ff
-; 0x15e947
 
 ; unreferenced
-Frameset_15e947: ; 15e947 (57:6947)
+Frameset_15e947:
 	db $23,  4
 	db $ff
-; 0x15e94a
 
 ; unreferenced
-Frameset_15e94a: ; 15e94a (57:694a)
+Frameset_15e94a:
 	db $24,  4
 	db $ff
-; 0x15e94d
 
 ; unreferenced
-Frameset_15e94d: ; 15e94d (57:694d)
+Frameset_15e94d:
 	db $25,  4
 	db $ff
-; 0x15e950
 
 ; unreferenced
-Frameset_15e950: ; 15e950 (57:6950)
+Frameset_15e950:
 	db $26,  4
 	db $ff
-; 0x15e953
 
 ; unreferenced
-Frameset_15e953: ; 15e953 (57:6953)
+Frameset_15e953:
 	db $27,  4
 	db $ff
-; 0x15e956
 
 ; unreferenced
-Frameset_15e956: ; 15e956 (57:6956)
+Frameset_15e956:
 	db $28,  4
 	db $ff
-; 0x15e959
 
 ; unreferenced
-Frameset_15e959: ; 15e959 (57:6959)
+Frameset_15e959:
 	db $29,  4
 	db $ff
-; 0x15e95c
 
-Frameset_15e95c: ; 15e95c (57:695c)
+Frameset_15e95c:
 	db $2a,  4
 	db $ff
-; 0x15e95f
 
 ; unreferenced
-Frameset_15e95f: ; 15e95f (57:695f)
+Frameset_15e95f:
 	db $2b,  4
 	db $ff
-; 0x15e962
 
 ; unreferenced
-Frameset_15e962: ; 15e962 (57:6962)
+Frameset_15e962:
 	db $2c,  4
 	db $ff
-; 0x15e965
 
 ; unreferenced
-Frameset_15e965: ; 15e965 (57:6965)
+Frameset_15e965:
 	db $2d,  4
 	db $ff
-; 0x15e968
 
 ; unreferenced
-Frameset_15e968: ; 15e968 (57:6968)
+Frameset_15e968:
 	db $2e,  4
 	db $ff
-; 0x15e96b
 
 ; unreferenced
-Frameset_15e96b: ; 15e96b (57:696b)
+Frameset_15e96b:
 	db $12, 10
 	db $30,  6
 	db $31, 10
 	db $30,  6
 	db $ff
-; 0x15e974
 
 ; unreferenced
-Frameset_15e974: ; 15e974 (57:6974)
+Frameset_15e974:
 	db $33, 10
 	db $32,  6
 	db $21, 10
 	db $32,  6
 	db $ff
-; 0x15e97d
 
-OAM_15e97d: ; 15e97d (57:697d)
+OAM_15e97d:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1424,37 +1346,31 @@ OAM_15e97d: ; 15e97d (57:697d)
 .frame_55
 	frame_oam -16,  -4, $30, 0 | OAMF_BANK1
 	db $80
-; 0x15ed91
 
-Frameset_15ed91: ; 15ed91 (57:6d91)
+Frameset_15ed91:
 	db $00,  4
 	db $ff
-; 0x15ed94
 
-Frameset_15ed94: ; 15ed94 (57:6d94)
+Frameset_15ed94:
 	db $01,  4
 	db $ff
-; 0x15ed97
 
-Frameset_15ed97: ; 15ed97 (57:6d97)
+Frameset_15ed97:
 	db $02,  4
 	db $ff
-; 0x15ed9a
 
-Frameset_15ed9a: ; 15ed9a (57:6d9a)
+Frameset_15ed9a:
 	db $03,  4
 	db $ff
-; 0x15ed9d
 
-Frameset_15ed9d: ; 15ed9d (57:6d9d)
+Frameset_15ed9d:
 	db $07,  4
 	db $06,  4
 	db $05,  4
 	db $04,  4
 	db $ff
-; 0x15eda6
 
-Frameset_15eda6: ; 15eda6 (57:6da6)
+Frameset_15eda6:
 	db $08,  5
 	db $09,  5
 	db $0a,  5
@@ -1462,9 +1378,8 @@ Frameset_15eda6: ; 15eda6 (57:6da6)
 	db $0c,  5
 	db $0d,  5
 	db $ff
-; 0x15edb3
 
-Frameset_15edb3: ; 15edb3 (57:6db3)
+Frameset_15edb3:
 	db $08,  7
 	db $09,  7
 	db $0a,  7
@@ -1472,19 +1387,16 @@ Frameset_15edb3: ; 15edb3 (57:6db3)
 	db $0c,  7
 	db $0d,  7
 	db $ff
-; 0x15edc0
 
-Frameset_15edc0: ; 15edc0 (57:6dc0)
+Frameset_15edc0:
 	db $06,  4
 	db $ff
-; 0x15edc3
 
-Frameset_15edc3: ; 15edc3 (57:6dc3)
+Frameset_15edc3:
 	db $04,  4
 	db $ff
-; 0x15edc6
 
-Frameset_15edc6: ; 15edc6 (57:6dc6)
+Frameset_15edc6:
 	db $04,  4
 	db $0e,  4
 	db $04, 20
@@ -1503,17 +1415,15 @@ Frameset_15edc6: ; 15edc6 (57:6dc6)
 	db $04, 60
 	db $05, 30
 	db $ff
-; 0x15ede9
 
-Frameset_15ede9: ; 15ede9 (57:6de9)
+Frameset_15ede9:
 	db $04,  4
 	db $10,  8
 	db $11, 14
 	db $14,  3
 	db $ff
-; 0x15edf2
 
-Frameset_15edf2: ; 15edf2 (57:6df2)
+Frameset_15edf2:
 	db $04,  4
 	db $14,  9
 	db $15,  9
@@ -1529,9 +1439,8 @@ Frameset_15edf2: ; 15edf2 (57:6df2)
 	db $04,  4
 	db $0e,  4
 	db $ff
-; 0x15ee0f
 
-Frameset_15ee0f: ; 15ee0f (57:6e0f)
+Frameset_15ee0f:
 	db $04,  4
 	db $03,  5
 	db $16, 10
@@ -1540,9 +1449,8 @@ Frameset_15ee0f: ; 15ee0f (57:6e0f)
 	db $06, 10
 	db $05,  5
 	db $ff
-; 0x15ee1e
 
-Frameset_15ee1e: ; 15ee1e (57:6e1e)
+Frameset_15ee1e:
 	db $0f, 20
 	db $10,  4
 	db $17, 10
@@ -1558,17 +1466,15 @@ Frameset_15ee1e: ; 15ee1e (57:6e1e)
 	db $19,  2
 	db $1a,  2
 	db $ff
-; 0x15ee3b
 
-Frameset_15ee3b: ; 15ee3b (57:6e3b)
+Frameset_15ee3b:
 	db $07,  4
 	db $1b, 14
 	db $1c, 24
 	db $1b, 16
 	db $ff
-; 0x15ee44
 
-Frameset_15ee44: ; 15ee44 (57:6e44)
+Frameset_15ee44:
 	db $1d,  2
 	db $1e,  2
 	db $1f,  1
@@ -1579,9 +1485,8 @@ Frameset_15ee44: ; 15ee44 (57:6e44)
 	db $26,  2
 	db $27,  1
 	db $ff
-; 0x15ee57
 
-Frameset_15ee57: ; 15ee57 (57:6e57)
+Frameset_15ee57:
 	db $1f,  2
 	db $1d,  2
 	db $23,  2
@@ -1589,49 +1494,41 @@ Frameset_15ee57: ; 15ee57 (57:6e57)
 	db $27,  2
 	db $25,  2
 	db $ff
-; 0x15ee64
 
-Frameset_15ee64: ; 15ee64 (57:6e64)
+Frameset_15ee64:
 	db $29,  4
 	db $ff
-; 0x15ee67
 
-Frameset_15ee67: ; 15ee67 (57:6e67)
+Frameset_15ee67:
 	db $2a,  4
 	db $2b,  4
 	db $2c,  4
 	db $2d,  4
 	db $ff
-; 0x15ee70
 
-Frameset_15ee70: ; 15ee70 (57:6e70)
+Frameset_15ee70:
 	db $2e,  4
 	db $2f,  4
 	db $30,  4
 	db $31,  4
 	db $ff
-; 0x15ee79
 
-Frameset_15ee79: ; 15ee79 (57:6e79)
+Frameset_15ee79:
 	db $32,  4
 	db $33,  4
 	db $34,  4
 	db $35,  4
 	db $ff
-; 0x15ee82
 
-Frameset_15ee82: ; 15ee82 (57:6e82)
+Frameset_15ee82:
 	db $19,  2
 	db $1a,  2
 	db $ff
-; 0x15ee87
 
-Frameset_15ee87: ; 15ee87 (57:6e87)
+Frameset_15ee87:
 	db $36,  4
 	db $ff
-; 0x15ee8a
 
-Frameset_15ee8a: ; 15ee8a (57:6e8a)
+Frameset_15ee8a:
 	db $37,  4
 	db $ff
-; 0x15ee8d

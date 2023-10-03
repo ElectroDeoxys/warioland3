@@ -7,7 +7,7 @@ REPT 4
 ENDR
 ENDM
 
-LevelMusic:: ; 3fe40 (f:7e40)
+LevelMusic::
 ;               day                             night
 	level_music MUSIC_OUT_OF_THE_WOODS_DAY,     MUSIC_OUT_OF_THE_WOODS_NIGHT     ; OUT_OF_THE_WOODS
 	level_music MUSIC_THE_PEACEFUL_VILLAGE_DAY, MUSIC_THE_PEACEFUL_VILLAGE_NIGHT ; THE_PEACEFUL_VILLAGE
@@ -34,4 +34,3 @@ LevelMusic:: ; 3fe40 (f:7e40)
 	level_music MUSIC_THE_WARPED_VOID,          MUSIC_THE_WARPED_VOID            ; THE_WARPED_VOID
 	level_music MUSIC_THE_WEST_CRATER,          MUSIC_THE_WEST_CRATER            ; THE_EAST_CRATER
 	level_music MUSIC_FOREST_OF_FEAR,           MUSIC_FOREST_OF_FEAR             ; FOREST_OF_FEAR
-; 0x3ffd0

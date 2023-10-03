@@ -1,4 +1,4 @@
-FarCopyHLToDE_BC2:: ; 2c00 (0:2c00)
+FarCopyHLToDE_BC2::
 	ld a, [wROMBank]
 	push af
 	ld a, [wTempBank]
@@ -7,9 +7,8 @@ FarCopyHLToDE_BC2:: ; 2c00 (0:2c00)
 	pop af
 	bankswitch
 	ret
-; 0x2c18
 
-FarDecompress:: ; 2c18 (0:2c18)
+FarDecompress::
 	ld a, [wROMBank]
 	push af
 	ld a, [wTempBank]
@@ -18,11 +17,10 @@ FarDecompress:: ; 2c18 (0:2c18)
 	pop af
 	bankswitch
 	ret
-; 0x2c30
 
 ; hl = source
 ; wdc11 = destination
-Func_2c30:: ; 2c30 (0:2c30)
+Func_2c30::
 	ld a, h
 	ldh [rHDMA1], a
 	ld a, l
@@ -34,9 +32,8 @@ Func_2c30:: ; 2c30 (0:2c30)
 	ld a, [w1dc13]
 	ldh [rHDMA5], a
 	ret
-; 0x2c46
 
-Func_2c46:: ; 2c46 (0:2c46)
+Func_2c46::
 	ld de, rBCPS
 	ld c, 4
 	jr .asm_2c52
@@ -56,12 +53,11 @@ ENDR
 	dec c
 	jr nz, .loop
 	ret
-; 0x2c7a
 
 ; hl = golf object duration
 ; de = frameset
 ; outputs in c whether animation finished
-UpdateGolfObjectAnimation:: ; 2c7a (0:2c7a)
+UpdateGolfObjectAnimation::
 	ld c, $00
 	ld a, [hl] ; duration
 	sub $1
@@ -98,11 +94,10 @@ UpdateGolfObjectAnimation:: ; 2c7a (0:2c7a)
 	ld [hl], a
 	ld c, TRUE
 	ret
-; 0x2ca7
 
 ; hl = golf object sprite
 ; wGolfOAMPtr = oam pointer
-AddGolfSprite:: ; 2ca7 (0:2ca7)
+AddGolfSprite::
 	ld a, [hli]
 	ld [wCurSpriteYCoord], a
 	ld a, [hli]
@@ -117,11 +112,10 @@ AddGolfSprite:: ; 2ca7 (0:2ca7)
 	ld l, a
 	call TryAddSprite
 	ret
-; 0x2cc3
 
 ; updates Golf Wario sprite, given its state
 ; and which direction it is facing
-UpdateGolfWarioAnimation:: ; 2cc3 (0:2cc3)
+UpdateGolfWarioAnimation::
 	ld hl, .OAMBanks
 	ld a, [wGolfWarioState]
 	ld b, $00
@@ -249,35 +243,28 @@ UpdateGolfWarioAnimation:: ; 2cc3 (0:2cc3)
 	dw Frameset_2db5
 	dw Frameset_14cf6
 	dw Frameset_1fc473
-; 0x2da4
 
-Frameset_2da4: ; 2da4 (00:2da4)
+Frameset_2da4:
 	db $08,  1
 	db $ff
-; 0x2da7
 
-Frameset_2da7: ; 2da7 (00:2da7)
+Frameset_2da7:
 	db $09, 15
 	db $ff
-; 0x2daa
 
-Frameset_2daa: ; 2daa (00:2daa)
+Frameset_2daa:
 	db $00,  1
 	db $ff
-; 0x2dad
 
-Frameset_2dad: ; 2dad (00:2dad)
+Frameset_2dad:
 	db $01, 15
 	db $ff
-; 0x2db0
 
-Frameset_2db0: ; 2db0 (00:2db0)
+Frameset_2db0:
 	db $00, 15
 	db $01, 15
 	db $ff
-; 0x2db5
 
-Frameset_2db5: ; 2db5 (00:2db5)
+Frameset_2db5:
 	db $09,  8
 	db $ff
-; 0x2db8

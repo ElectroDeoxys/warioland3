@@ -1,4 +1,4 @@
-SnakeFunc: ; 4989e (12:589e)
+SnakeFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Init)
 	ld [hld], a
@@ -454,9 +454,8 @@ SnakeFunc: ; 4989e (12:589e)
 	ld a, $48
 	ld [wCurObjState], a
 	ret
-; 0x49b90
 
-SnakeFireFunc: ; 49b90 (12:5b90)
+SnakeFireFunc:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjFlags
@@ -508,4 +507,3 @@ ENDR
 	xor a
 	ld [wCurObjFlags], a
 	ret
-; 0x49c70

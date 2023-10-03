@@ -26,7 +26,7 @@ REPT \1
 ENDR
 ENDM
 
-SoundHeaders: ; 3155e (c:555e)
+SoundHeaders:
 	music Music_OutOfTheWoodsDay,        $00, 100, CHAN1, 4 ; MUSIC_OUT_OF_THE_WOODS_DAY
 	music Music_OutOfTheWoodsNight,      $00, 100, CHAN1, 3 ; MUSIC_OUT_OF_THE_WOODS_NIGHT
 	music Music_ForestOfFear,            $00, 100, CHAN1, 2 ; MUSIC_FOREST_OF_FEAR
@@ -349,4 +349,3 @@ SoundHeaders: ; 3155e (c:555e)
 	sfx Sfx_136,                         $00, 236, CHAN6, 1 ; SFX_136
 	sfx Sfx_137,                         $00, 226, CHAN8, 1 ; SFX_137
 	sfx Sfx_138,                         $00, 220, CHAN8, 1 ; SFX_138
-; 0x32726

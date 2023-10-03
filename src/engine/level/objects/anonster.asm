@@ -1,4 +1,4 @@
-AnonsterFunc: ; 50000 (14:4000)
+AnonsterFunc:
 	ld a, TRUE
 	ld [wIsBossBattle], a
 	ld a, 27
@@ -1021,9 +1021,8 @@ AnonsterFunc: ; 50000 (14:4000)
 	rlca
 	jp nc, MoveObjectRight
 	jp MoveObjectLeft
-; 0x5071a
 
-SilkPlatformsFunc: ; 5071a (14:471a)
+SilkPlatformsFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.CreatePlatform1)
 	ld [hld], a
@@ -1070,9 +1069,8 @@ SilkPlatformsFunc: ; 5071a (14:471a)
 	ld a, 2
 	ld [wCurObjFrameDuration], a
 	ret
-; 0x5076c
 
-SilkPlatformFunc: ; 5076c (14:476c)
+SilkPlatformFunc:
 	call SetOneWayPlatformAction
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -1080,9 +1078,8 @@ SilkPlatformFunc: ; 5076c (14:476c)
 	ret z
 	dec [hl]
 	jp MoveObjectDown_Slow
-; 0x50779
 
-AnonsterSilkFunc: ; 50779 (14:4779)
+AnonsterSilkFunc:
 .FloatLeft:
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -1547,9 +1544,8 @@ AnonsteWaveFunc:
 	and a
 	jp nz, AnonsterSilkFunc.destroy
 	ret
-; 0x50a96
 
-UpdateAnonsterPal: ; 50a96 (14:4a96)
+UpdateAnonsterPal:
 	ld a, [wCurObjSubState]
 	and $0f
 	cp $03
@@ -1577,4 +1573,3 @@ UpdateAnonsterPal: ; 50a96 (14:4a96)
 	rgb 31,  0,  0
 	rgb 14,  0,  0
 	rgb  1,  0,  0
-; 0x50ac4

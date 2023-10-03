@@ -1,4 +1,4 @@
-Music_Golf_Ch1: ; 38be4 (0e:4be4)
+Music_Golf_Ch1:
 	semitone_offset 0
 
 .loop
@@ -406,9 +406,8 @@ Music_Golf_Ch1: ; 38be4 (0e:4be4)
 	audio_jump .loop
 .end
 	audio_end
-; 0x38d84
 
-Music_Golf_Ch2: ; 38d84 (0e:4d84)
+Music_Golf_Ch2:
 	semitone_offset 0
 
 .loop
@@ -536,9 +535,8 @@ Music_Golf_Ch2: ; 38d84 (0e:4d84)
 	audio_jump .loop
 .end
 	audio_end
-; 0x38e1c
 
-Music_Golf_Ch3: ; 38e1c (0e:4e1c)
+Music_Golf_Ch3:
 	semitone_offset 0
 
 .loop
@@ -775,9 +773,8 @@ Music_Golf_Ch3: ; 38e1c (0e:4e1c)
 	audio_jump .loop
 .end
 	audio_end
-; 0x38f13
 
-Music_Golf: ; 38f13 (0e:4f13)
+Music_Golf:
 	db 3, 2
 	dw Music_Golf_Ch1
 	dw Music_Golf_Ch2
@@ -791,4 +788,3 @@ Music_Golf: ; 38f13 (0e:4f13)
 	dw Music_Golf_Ch1.end
 	dw Music_Golf_Ch2.end
 	dw Music_Golf_Ch3.end
-; 0x38f27

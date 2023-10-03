@@ -19,4 +19,3 @@ WallCrackFunc:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ret
-; 0x4cb51

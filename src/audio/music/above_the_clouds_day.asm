@@ -1,4 +1,4 @@
-Music_AboveTheCloudsDay_Ch1: ; 34000 (0d:4000)
+Music_AboveTheCloudsDay_Ch1:
 	semitone_offset 0
 
 .loop
@@ -257,9 +257,8 @@ Music_AboveTheCloudsDay_Ch1: ; 34000 (0d:4000)
 	note NOTE_DURATION_24, D_3, 17
 	audio_wait_24
 	audio_end
-; 0x34149
 
-Music_AboveTheCloudsDay_Ch2: ; 34149 (0d:4149)
+Music_AboveTheCloudsDay_Ch2:
 	semitone_offset 0
 
 .loop
@@ -450,9 +449,8 @@ Music_AboveTheCloudsDay_Ch2: ; 34149 (0d:4149)
 	note NOTE_DURATION_2
 	audio_wait_2
 	audio_end
-; 0x34259
 
-Music_AboveTheCloudsDay_Ch3: ; 34259 (0d:4259)
+Music_AboveTheCloudsDay_Ch3:
 	semitone_offset 0
 
 .loop
@@ -682,9 +680,8 @@ Music_AboveTheCloudsDay_Ch3: ; 34259 (0d:4259)
 	note NOTE_DURATION_2
 	audio_wait_2
 	audio_end
-; 0x34391
 
-Music_AboveTheCloudsDay: ; 34391 (d:4391)
+Music_AboveTheCloudsDay:
 	db $3, $2
 	dw Music_AboveTheCloudsDay_Ch1
 	dw Music_AboveTheCloudsDay_Ch2

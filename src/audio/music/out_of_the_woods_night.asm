@@ -1,4 +1,4 @@
-Music_OutOfTheWoodsNight_Ch1: ; 32ab2 (c:6ab2)
+Music_OutOfTheWoodsNight_Ch1:
 	semitone_offset 0
 	tempo 45
 	wave WAVE_52
@@ -270,7 +270,7 @@ Music_OutOfTheWoodsNight_Ch1: ; 32ab2 (c:6ab2)
 	audio_wait_96
 	audio_end
 
-Music_OutOfTheWoodsNight_Ch2: ; 32bfd (c:6bfd)
+Music_OutOfTheWoodsNight_Ch2:
 	semitone_offset 0
 	wave WAVE_48
 	volume 75
@@ -328,7 +328,7 @@ Music_OutOfTheWoodsNight_Ch2: ; 32bfd (c:6bfd)
 .end
 	audio_end
 
-Music_OutOfTheWoodsNight_Ch3: ; 32c3b (c:6c3b)
+Music_OutOfTheWoodsNight_Ch3:
 	semitone_offset 0
 	wave WAVE_61
 	volume 94
@@ -535,12 +535,11 @@ Music_OutOfTheWoodsNight_Ch3: ; 32c3b (c:6c3b)
 .end
 	audio_end
 
-Music_OutOfTheWoodsNight: ; 32d27 (c:6d27)
+Music_OutOfTheWoodsNight:
 	db $3, $2
 	dw Music_OutOfTheWoodsNight_Ch1
 	dw Music_OutOfTheWoodsNight_Ch2
 	dw Music_OutOfTheWoodsNight_Ch3
-; 0x32d2f
 
 ; unused?
 	dw Music_OutOfTheWoodsNight_Ch1.loop

@@ -1,4 +1,4 @@
-Music_HiddenFigureBattle1_Ch1: ; 3a649 (0e:6649)
+Music_HiddenFigureBattle1_Ch1:
 	semitone_offset 0
 	tempo 70
 	wave WAVE_17
@@ -400,9 +400,8 @@ Music_HiddenFigureBattle1_Ch1: ; 3a649 (0e:6649)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3a848
 
-Music_HiddenFigureBattle1_Ch2: ; 3a848 (0e:6848)
+Music_HiddenFigureBattle1_Ch2:
 	semitone_offset 0
 	wave WAVE_0D
 	vibrato_speed 20
@@ -742,9 +741,8 @@ Music_HiddenFigureBattle1_Ch2: ; 3a848 (0e:6848)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3aa0b
 
-Music_HiddenFigureBattle1_Ch3: ; 3aa0b (0e:6a0b)
+Music_HiddenFigureBattle1_Ch3:
 	semitone_offset 0
 	wave WAVE_5D
 	vibrato_speed 20
@@ -990,9 +988,8 @@ Music_HiddenFigureBattle1_Ch3: ; 3aa0b (0e:6a0b)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3ab6d
 
-Music_HiddenFigureBattle1_Ch4: ; 3ab6d (0e:6b6d)
+Music_HiddenFigureBattle1_Ch4:
 	semitone_offset 0
 	wave WAVE_28
 	volume 75
@@ -1091,9 +1088,8 @@ Music_HiddenFigureBattle1_Ch4: ; 3ab6d (0e:6b6d)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3ac2b
 
-Music_HiddenFigureBattle1: ; 3ac2b (0e:6c2b)
+Music_HiddenFigureBattle1:
 	db 4, 2
 	dw Music_HiddenFigureBattle1_Ch1
 	dw Music_HiddenFigureBattle1_Ch2
@@ -1110,4 +1106,3 @@ Music_HiddenFigureBattle1: ; 3ac2b (0e:6c2b)
 	dw Music_HiddenFigureBattle1_Ch2.end
 	dw Music_HiddenFigureBattle1_Ch3.end
 	dw Music_HiddenFigureBattle1_Ch4.end
-; 0x3ac45

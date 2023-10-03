@@ -1,4 +1,4 @@
-Music_LevelClearGotTreasure_Ch1: ; 39322 (0e:5322)
+Music_LevelClearGotTreasure_Ch1:
 	semitone_offset 0
 	tempo 75
 	wave WAVE_58
@@ -99,9 +99,8 @@ Music_LevelClearGotTreasure_Ch1: ; 39322 (0e:5322)
 	audio_jump .loop
 .end
 	audio_end
-; 0x39399
 
-Music_LevelClearGotTreasure_Ch2: ; 39399 (0e:5399)
+Music_LevelClearGotTreasure_Ch2:
 	semitone_offset 0
 	wave WAVE_48
 	volume 85
@@ -166,9 +165,8 @@ Music_LevelClearGotTreasure_Ch2: ; 39399 (0e:5399)
 	audio_jump .loop
 .end
 	audio_end
-; 0x393eb
 
-Music_LevelClearGotTreasure_Ch3: ; 393eb (0e:53eb)
+Music_LevelClearGotTreasure_Ch3:
 	semitone_offset 0
 	wave WAVE_61
 	volume 108
@@ -268,9 +266,8 @@ Music_LevelClearGotTreasure_Ch3: ; 393eb (0e:53eb)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3945b
 
-Music_LevelClearGotTreasure_Ch4: ; 3945b (0e:545b)
+Music_LevelClearGotTreasure_Ch4:
 	semitone_offset 0
 	wave WAVE_28
 	volume 37
@@ -352,9 +349,8 @@ Music_LevelClearGotTreasure_Ch4: ; 3945b (0e:545b)
 	audio_jump .loop
 .end
 	audio_end
-; 0x394cc
 
-Music_LevelClearGotTreasure: ; 394cc (0e:54cc)
+Music_LevelClearGotTreasure:
 	db 4, 2
 	dw Music_LevelClearGotTreasure_Ch1
 	dw Music_LevelClearGotTreasure_Ch2
@@ -371,4 +367,3 @@ Music_LevelClearGotTreasure: ; 394cc (0e:54cc)
 	dw Music_LevelClearGotTreasure_Ch2.end
 	dw Music_LevelClearGotTreasure_Ch3.end
 	dw Music_LevelClearGotTreasure_Ch4.end
-; 0x394e6

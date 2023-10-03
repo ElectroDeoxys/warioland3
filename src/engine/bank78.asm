@@ -1,20 +1,18 @@
-LoadClearScreenPals: ; 1e0000 (78:4000)
+LoadClearScreenPals:
 	ld hl, Pals_1e0378
 	call LoadPalsToTempPals1
 	ld hl, Pals_1e03b8
 	call LoadPalsToTempPals2
 	ret
-; 0x1e000d
 
-Func_1e000d: ; 1e000d (78:400d)
+Func_1e000d:
 	ld hl, Pals_1e03f8
 	call LoadPalsToTempPals1
 	ld hl, Pals_1e0438
 	call LoadPalsToTempPals2
 	ret
-; 0x1e001a
 
-LoadClearScreenGfx: ; 1e001a (78:401a)
+LoadClearScreenGfx:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, ClearScreen2Gfx
@@ -34,9 +32,8 @@ LoadClearScreenGfx: ; 1e001a (78:401a)
 	ld [wTempBank], a
 	call FarCopyHLToDE_BC
 	ret
-; 0x1e0045
 
-Func_1e0045: ; 1e0045 (78:4045)
+Func_1e0045:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, BGMap_1e1962
@@ -49,9 +46,8 @@ Func_1e0045: ; 1e0045 (78:4045)
 	ld bc, v0BGMap0
 	call Decompress
 	ret
-; 0x1e005f
 
-Func_1e005f: ; 1e005f (78:405f)
+Func_1e005f:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, BGMap_1ec5b
@@ -202,9 +198,8 @@ Func_1e005f: ; 1e005f (78:405f)
 	ld a, TIME_ATTACK_GOT_HIGH_SCORE
 	ld [wTimeAttackResult], a
 	ret
-; 0x1e015b
 
-Func_1e015b: ; 1e015b (78:415b)
+Func_1e015b:
 	ld a, [wPowerUpLevel]
 	and ACTION_HELP_LEVEL_CLEAR
 	jr z, .no_power_up
@@ -423,9 +418,8 @@ Func_1e015b: ; 1e015b (78:415b)
 	db $38 ; y
 	db $80 ; x
 	db HIGH(Frameset_d5054), LOW(Frameset_d5054) ; frameset
-; 0x1e028a
 
-Func_1e028a: ; 1e028a (78:428a)
+Func_1e028a:
 	ld a, [wTimeAttackResult]
 	cp TIME_ATTACK_GOT_HIGH_SCORE
 	jr nz, .asm_1e02a5
@@ -580,9 +574,8 @@ Func_1e028a: ; 1e028a (78:428a)
 	ld [hl], a
 .done
 	ret
-; 0x1e0378
 
-Pals_1e0378: ; 1e0378 (78:4378)
+Pals_1e0378:
 	rgb 24, 30, 31
 	rgb 11, 24, 31
 	rgb  0,  9, 25
@@ -622,9 +615,8 @@ Pals_1e0378: ; 1e0378 (78:4378)
 	rgb  0, 20,  0
 	rgb  0, 19, 31
 	rgb  0,  0,  0
-; 0x1e03b8
 
-Pals_1e03b8: ; 1e03b8 (78:43b8)
+Pals_1e03b8:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -664,9 +656,8 @@ Pals_1e03b8: ; 1e03b8 (78:43b8)
 	rgb 21, 21, 19
 	rgb 10, 10,  8
 	rgb  0,  0,  0
-; 0x1e03f8
 
-Pals_1e03f8: ; 1e03f8 (78:43f8)
+Pals_1e03f8:
 	rgb 31, 27, 16
 	rgb 31, 15,  2
 	rgb 25,  3,  0
@@ -706,9 +697,8 @@ Pals_1e03f8: ; 1e03f8 (78:43f8)
 	rgb  0, 20,  0
 	rgb  0, 19, 31
 	rgb  0,  0,  0
-; 0x1e0438
 
-Pals_1e0438: ; 1e0438 (78:4438)
+Pals_1e0438:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -748,22 +738,21 @@ Pals_1e0438: ; 1e0438 (78:4438)
 	rgb 31, 31,  0
 	rgb 31, 17,  0
 	rgb 31,  0,  0
-; 0x1e0478
 
-ClearScreen1Gfx: ; 1e0478 (78:4478)
+ClearScreen1Gfx:
 INCBIN "gfx/pause/clear_screen1.2bpp.lz"
 
-ClearScreen2Gfx: ; 1e11e8 (78:51e8)
+ClearScreen2Gfx:
 INCBIN "gfx/pause/clear_screen2.2bpp.lz"
 
-BGMap_1e17fa: ; 1e17fa (1:57fa)
+BGMap_1e17fa:
 INCBIN "gfx/bgmaps/map_1e17fa.bin"
 	
-BGMap_1e1962: ; 1e1962 (1:5962)
+BGMap_1e1962:
 INCBIN "gfx/bgmaps/map_1e1962.bin"
 
-BGMap_1eae5: ; 1e1ae5 (1:5ae5)
+BGMap_1eae5:
 INCBIN "gfx/bgmaps/map_1e1ae5.bin"
 	
-BGMap_1ec5b: ; 1e1c5b (1:5c5b)
+BGMap_1ec5b:
 INCBIN "gfx/bgmaps/map_1e1c5b.bin"

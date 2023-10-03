@@ -1,4 +1,4 @@
-MizuuoFunc: ; 48730 (12:4730)
+MizuuoFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -173,14 +173,13 @@ MizuuoFunc: ; 48730 (12:4730)
 .asm_4884d
 	ld de, Frameset_686ea
 	jp SetObjectFramesetPtr
-; 0x48853
 
-MizzouProjectileFunc_Left: ; 48853 (12:4853)
+MizzouProjectileFunc_Left:
 	call MoveObjectLeft_Fast
 	jr MizzouProjectileFunc
-MizzouProjectileFunc_Right: ; 48858 (12:4858)
+MizzouProjectileFunc_Right:
 	call MoveObjectRight_Fast
-MizzouProjectileFunc: ; 4885b (12:485b)
+MizzouProjectileFunc:
 	ld l, OBJ_FLAGS
 	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld hl, wCurObjYPos
@@ -258,4 +257,3 @@ MizzouProjectileFunc: ; 4885b (12:485b)
 	xor a
 	ld [wCurObjFlags], a
 	ret
-; 0x488dc

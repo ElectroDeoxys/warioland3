@@ -1,4 +1,4 @@
-WebberFunc: ; 40825 (10:4825)
+WebberFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -394,9 +394,8 @@ WebberFunc: ; 40825 (10:4825)
 	ld a, 5
 	ld [wCurObjVar3], a
 	jp .set_idle
-; 0x40ab1
 
-WebberProjectileFunc: ; 40ab1 (10:4ab1)
+WebberProjectileFunc:
 ; home into Wario
 	ld a, [wWarioScreenXPos]
 	add $2a
@@ -459,4 +458,3 @@ WebberProjectileFunc: ; 40ab1 (10:4ab1)
 	xor a
 	ld [wCurObjFlags], a
 	ret
-; 0x40b14

@@ -1,4 +1,4 @@
-Music_TheWarpedVoid_Ch1: ; 32efb (0c:6efb)
+Music_TheWarpedVoid_Ch1:
 	semitone_offset 0
 	tempo 45
 	wave WAVE_55
@@ -402,9 +402,8 @@ Music_TheWarpedVoid_Ch1: ; 32efb (0c:6efb)
 	note B_2
 	audio_wait_4
 	audio_end
-; 0x330a1
 
-Music_TheWarpedVoid_Ch2: ; 330a1 (0c:70a1)
+Music_TheWarpedVoid_Ch2:
 	semitone_offset 0
 	wave WAVE_48
 	volume 66
@@ -801,9 +800,8 @@ Music_TheWarpedVoid_Ch2: ; 330a1 (0c:70a1)
 	audio_call .sub1
 	audio_wait_1
 	audio_end
-; 0x33246
 
-Music_TheWarpedVoid_Ch3: ; 33246 (0c:7246)
+Music_TheWarpedVoid_Ch3:
 	semitone_offset 0
 	wave WAVE_28
 	volume 75
@@ -892,14 +890,12 @@ Music_TheWarpedVoid_Ch3: ; 33246 (0c:7246)
 	note NOTE_DURATION_3, D_0
 	audio_wait_3
 	audio_end
-; 0x332e7
 
-Music_TheWarpedVoid: ; 332e7 (c:72e7)
+Music_TheWarpedVoid:
 	db $3, $2
 	dw Music_TheWarpedVoid_Ch1
 	dw Music_TheWarpedVoid_Ch2
 	dw Music_TheWarpedVoid_Ch3
-; 0x332ef
 
 	dw Music_TheWarpedVoid_Ch1.loop
 	dw Music_TheWarpedVoid_Ch2.loop

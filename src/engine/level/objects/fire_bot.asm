@@ -1,4 +1,4 @@
-FireBotFunc: ; 46b66 (11:6b66)
+FireBotFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Init)
 	ld [hld], a
@@ -1078,4 +1078,3 @@ FireBotFunc: ; 46b66 (11:6b66)
 	or OBJ_INTERACTION_00
 	ld [hld], a
 	ret
-; 0x4724e

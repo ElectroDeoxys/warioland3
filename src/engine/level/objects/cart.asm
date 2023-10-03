@@ -1,4 +1,4 @@
-CartFunc: ; 4853b (12:453b)
+CartFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -115,9 +115,8 @@ CartFunc: ; 4853b (12:453b)
 
 CartStoppedFunc:
 	jp SetOneWayPlatformAction
-; 0x48625
 
-CartVariableFunc: ; 48625 (12:4625)
+CartVariableFunc:
 	ldh a, [rSVBK]
 	push af
 	ld a, $02
@@ -250,4 +249,3 @@ CartVariableFunc: ; 48625 (12:4625)
 	ld a, LOW(CartStoppedFunc)
 	ld [hld], a
 	ret
-; 0x48730

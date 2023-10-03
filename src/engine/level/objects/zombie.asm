@@ -1,4 +1,4 @@
-ZombieFunc: ; 45ab4 (11:5ab4)
+ZombieFunc:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjUpdateFunction + 1
@@ -550,9 +550,8 @@ ZombieFunc: ; 45ab4 (11:5ab4)
 	ld a, LOW(.OnUnderground)
 	ld [hld], a
 	ret
-; 0x45e54
 
-ZombieHeadFunc_Left: ; 45e54 (11:5e54)
+ZombieHeadFunc_Left:
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
 	and a
@@ -576,7 +575,7 @@ ZombieHeadFunc_Left: ; 45e54 (11:5e54)
 	ld bc, Data_605a0
 	jr ZombieHeadFunc
 
-ZombieHeadFunc_Right: ; 45e78 (11:5e78)
+ZombieHeadFunc_Right:
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
 	and a
@@ -600,7 +599,7 @@ ZombieHeadFunc_Right: ; 45e78 (11:5e78)
 	ld bc, Data_60560
 ;	fallthrough
 
-ZombieHeadFunc: ; 45e9a (11:5e9a)
+ZombieHeadFunc:
 	call ApplyObjXMovement
 	ld hl, wCurObjState
 	ld a, [hld]
@@ -646,4 +645,3 @@ ZombieHeadFunc: ; 45e9a (11:5e9a)
 	xor a
 	ld [hl], a
 	ret
-; 0x45ee3

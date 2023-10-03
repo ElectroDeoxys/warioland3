@@ -1,5 +1,5 @@
 ; clears whole wVirtualOAM
-ClearVirtualOAM:: ; 37d (0:37d)
+ClearVirtualOAM::
 	ld hl, wVirtualOAM
 	ld b, NUM_SPRITE_OAM_STRUCTS * SPRITEOAMSTRUCT_LENGTH
 	xor a
@@ -7,19 +7,18 @@ ClearVirtualOAM:: ; 37d (0:37d)
 	xor a
 	ld [wVirtualOAMByteSize], a
 	ret
-; 0x38b
 
-ClearBGMap0:: ; 38b (0:38b)
+ClearBGMap0::
 	ld a, $ff
 	jr FillBGMap0
 
 ; fills v0BGMap0 and v1BGMap0 with $7f
-FillBGMap0_With7f:: ; 38f (0:38f)
+FillBGMap0_With7f::
 	ld a, $7f
 	; fallthrough
 
 ; fills v0BGMap0 and v1BGMap0 with byte in a
-FillBGMap0:: ; 391 (0:391)
+FillBGMap0::
 	ld d, a
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
@@ -34,18 +33,16 @@ FillBGMap0:: ; 391 (0:391)
 	ld bc, v0BGMap1 - v0BGMap0
 	call WriteAToHL_BCTimes
 	ret
-; 0x3ad
 
-ClearBGMap1:: ; 3ad (0:3ad)
+ClearBGMap1::
 	ld a, $ff
 	ld hl, v0BGMap1
 	ld bc, v0End - v0BGMap1
 	call WriteAToHL_BCTimes
 	ret
-; 0x3b9
 
 ; clears unused sprites that are in wVirtualOAM
-ClearUnusedVirtualOAM:: ; 3b9 (0:3b9)
+ClearUnusedVirtualOAM::
 	ld a, [wVirtualOAMByteSize]
 	ld l, a
 	ld h, HIGH(wVirtualOAM)
@@ -69,4 +66,3 @@ ClearUnusedVirtualOAM:: ; 3b9 (0:3b9)
 	xor a
 	ld [wVirtualOAMByteSize], a
 	ret
-; 0x3d8

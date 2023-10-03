@@ -1,4 +1,4 @@
-SmallOctohonFunc: ; 4a4b5 (12:64b5)
+SmallOctohonFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -163,7 +163,6 @@ SmallOctohonFunc: ; 4a4b5 (12:64b5)
 	ret nc
 	inc [hl]
 	ret
-; 0x4a5a9
 
 Data_4a5a9:
 	db $02, $01, $01, $01, $01, $01, $00, $01
@@ -198,7 +197,7 @@ Data_4a5a9:
 	db $00, $00, $00, $01, $00, $00, $00, $00
 	db $80
 	
-BigOctohonFunc: ; 4a69a (12:669a)
+BigOctohonFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -525,4 +524,3 @@ BigOctohonFunc: ; 4a69a (12:669a)
 	ret nc
 	inc [hl]
 	ret
-; 0x4a8a2

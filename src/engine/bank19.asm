@@ -1,4 +1,4 @@
-LoadEnemyGroupData:: ; 64000 (19:4000)
+LoadEnemyGroupData::
 ; fills wObjDataPointers with Dummy Object
 	ld hl, wObjDataPointers
 	ld bc, DummyObjectData
@@ -148,11 +148,10 @@ LoadEnemyGroupData:: ; 64000 (19:4000)
 
 .copy_pals
 	jp LoadObjPals
-; 0x640e5
 
 ; de = cell
 ; c = entry in wObjDataPointers
-SpawnObject: ; 640e5 (19:40e5)
+SpawnObject:
 	ldh a, [hXPosHi]
 	cp $0a
 	ret nc
@@ -263,9 +262,8 @@ ENDR
 	or OBJFLAG_ACTIVE | OBJFLAG_INVISIBLE
 	ld [de], a ; OBJ_FLAGS
 	ret
-; 0x64187
 
-DespawnAllObjects: ; 64187 (19:4187)
+DespawnAllObjects:
 	ld h, HIGH(wObjects)
 FOR n, 0, NUM_OBJECTS
 	ld l, LOW(wObjects) + OBJ_STRUCT_LENGTH * n
@@ -286,10 +284,9 @@ FOR n, 0, NUM_OBJECTS
 .skip_{u:n}
 ENDR
 	ret
-; 0x6428a
 
 ; bc = object creation data
-_CreateObjectFromCurObjPos:: ; 6428a (19:428a)
+_CreateObjectFromCurObjPos::
 	ld h, HIGH(wObj1Flags)
 FOR n, 1, NUM_OBJECTS + 1
 	ld l, LOW(wObj{u:n}Flags)
@@ -314,9 +311,8 @@ ENDR
 	ld [hli], a
 	ld a, [wCurObjXPos + 1]
 	jr CreateObject_GotPos
-; 0x642d9
 
-_CreateObjectAtRelativePos:: ; 642d9 (19:42d9)
+_CreateObjectAtRelativePos::
 	ld h, HIGH(wObj1Flags)
 FOR n, 1, NUM_OBJECTS + 1
 	ld l, LOW(wObj{u:n}Flags)
@@ -376,7 +372,7 @@ ENDR
 	dec a
 .got_hi_x
 	inc bc
-CreateObject_GotPos:: ; 64352 (19:4352)
+CreateObject_GotPos::
 	ld [hli], a
 	ld e, l
 	ld d, h
@@ -454,9 +450,8 @@ CreateObject_GotPos:: ; 64352 (19:4352)
 	or OBJFLAG_ACTIVE | OBJFLAG_TRANSIENT
 	ld [de], a
 	ret
-; 0x643a1
 
-LoadHiddenFigureData: ; 643a1 (19:43a1)
+LoadHiddenFigureData:
 	ld hl, .pointers
 	ld a, $d
 	ldh [hffa0], a
@@ -483,7 +478,6 @@ LoadHiddenFigureData: ; 643a1 (19:43a1)
 .pointers
 	dw HiddenFigureData
 	dw NULL
-; 0x643c3
 
 ; \1 OAM ptr
 ; \2 unknown
@@ -622,7 +616,7 @@ WallCrackClosedData:       object_data OAM_18c806, $6, OBJ_INTERACTION_0B,      
 WallCrackOpenData:         object_data OAM_18c806, $6, OBJ_INTERACTION_0B,                           0, WallCrackOpenFunc,         $0
 HiddenFigureData:          object_data OAM_18c88a, $a, OBJ_INTERACTION_0B,                           0, HiddenFigureFunc,          $0
 
-ObjParams_HebariiProjectile: ; 6478b (19:478b)
+ObjParams_HebariiProjectile:
 	db -8  ; y
 	db  0  ; x
 	dn $2, $1 ; unk7
@@ -639,7 +633,7 @@ ObjParams_HebariiProjectile: ; 6478b (19:478b)
 	dw HebariiProjectileFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_WebberProjectile: ; 647a0 (19:47a0)
+ObjParams_WebberProjectile:
 	db  5  ; y
 	db -8  ; x
 	dn $0, $3 ; unk7
@@ -656,7 +650,7 @@ ObjParams_WebberProjectile: ; 647a0 (19:47a0)
 	dw WebberProjectileFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_UnusedFlowerProjectileLeft: ; 647b5 (19:47b5)
+ObjParams_UnusedFlowerProjectileLeft:
 	db -10 ; y
 	db   0 ; x
 	dn $0, $5 ; unk7
@@ -673,7 +667,7 @@ ObjParams_UnusedFlowerProjectileLeft: ; 647b5 (19:47b5)
 	dw UnusedFlowerProjectileLeftFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_UnusedFlowerProjectileRight: ; 647ca (19:47ca)
+ObjParams_UnusedFlowerProjectileRight:
 	db -10 ; y
 	db   0 ; x
 	dn $0, $5 ; unk7
@@ -690,7 +684,7 @@ ObjParams_UnusedFlowerProjectileRight: ; 647ca (19:47ca)
 	dw UnusedFlowerProjectileRightFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_BigLeaf1: ; 647df (19:47df)
+ObjParams_BigLeaf1:
 	db -10 ; y
 	db  15 ; x
 	dn $0, $8 ; unk7
@@ -707,7 +701,7 @@ ObjParams_BigLeaf1: ; 647df (19:47df)
 	dw BigLeaf1Func
 	db $0 ; obj flags
 
-ObjParams_BigLeaf2: ; 647df (19:47df)
+ObjParams_BigLeaf2:
 	db -10 ; y
 	db -17 ; x
 	dn $0, $8 ; unk7
@@ -724,7 +718,7 @@ ObjParams_BigLeaf2: ; 647df (19:47df)
 	dw BigLeaf2Func
 	db $0 ; obj flags
 
-ObjParams_BigLeaf3: ; 647df (19:47df)
+ObjParams_BigLeaf3:
 	db -10 ; y
 	db -48 ; x
 	dn $0, $8 ; unk7
@@ -741,7 +735,7 @@ ObjParams_BigLeaf3: ; 647df (19:47df)
 	dw BigLeaf2Func
 	db $0 ; obj flags
 
-ObjParams_DoughnutLeft: ; 6481e (19:481e)
+ObjParams_DoughnutLeft:
 	db -18 ; y
 	db  -9 ; x
 	dn $0, $b ; unk7
@@ -758,7 +752,7 @@ ObjParams_DoughnutLeft: ; 6481e (19:481e)
 	dw DoughnutFunc_Left
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_DoughnutRight: ; 64833 (19:4833)
+ObjParams_DoughnutRight:
 	db -18 ; y
 	db   8 ; x
 	dn $0, $b ; unk7
@@ -775,7 +769,7 @@ ObjParams_DoughnutRight: ; 64833 (19:4833)
 	dw DoughnutFunc_Right
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_DoughnutUpLeft: ; 64848 (19:4848)
+ObjParams_DoughnutUpLeft:
 	db -16 ; y
 	db  -8 ; x
 	dn $0, $b ; unk7
@@ -792,7 +786,7 @@ ObjParams_DoughnutUpLeft: ; 64848 (19:4848)
 	dw DoughnutFunc_Up
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_DoughnutUpRight: ; 6485d (19:485d)
+ObjParams_DoughnutUpRight:
 	db -16 ; y
 	db   7 ; x
 	dn $0, $b ; unk7
@@ -809,7 +803,7 @@ ObjParams_DoughnutUpRight: ; 6485d (19:485d)
 	dw DoughnutFunc_Up
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_InvisibilityPotionLeft: ; 64872 (19:4872)
+ObjParams_InvisibilityPotionLeft:
 	db  -8 ; y
 	db -16 ; x
 	dn $1, $6 ; unk7
@@ -826,7 +820,7 @@ ObjParams_InvisibilityPotionLeft: ; 64872 (19:4872)
 	dw InvisibilityPotionFunc_Left
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_InvisibilityPotionRight: ; 64887 (19:4887)
+ObjParams_InvisibilityPotionRight:
 	db -8 ; y
 	db 15 ; x
 	dn $1, $6 ; unk7
@@ -843,7 +837,7 @@ ObjParams_InvisibilityPotionRight: ; 64887 (19:4887)
 	dw InvisibilityPotionFunc_Right
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_InvisibilityPotionDropLeft: ; 6489c (19:489c)
+ObjParams_InvisibilityPotionDropLeft:
 	db  -8 ; y
 	db -16 ; x
 	dn $1, $6 ; unk7
@@ -860,7 +854,7 @@ ObjParams_InvisibilityPotionDropLeft: ; 6489c (19:489c)
 	dw InvisibilityPotionFunc_Drop
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_InvisibilityPotionDropRight: ; 648b1 (19:48b1)
+ObjParams_InvisibilityPotionDropRight:
 	db -8 ; y
 	db 15 ; x
 	dn $1, $6 ; unk7
@@ -877,7 +871,7 @@ ObjParams_InvisibilityPotionDropRight: ; 648b1 (19:48b1)
 	dw InvisibilityPotionFunc_Drop
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_ZombieHeadLeft: ; 648c6 (19:48c6)
+ObjParams_ZombieHeadLeft:
 	db -16 ; y
 	db   0 ; x
 	dn $1, $a ; unk7
@@ -894,7 +888,7 @@ ObjParams_ZombieHeadLeft: ; 648c6 (19:48c6)
 	dw ZombieHeadFunc_Left
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_ZombieHeadRight: ; 648db (19:48db)
+ObjParams_ZombieHeadRight:
 	db -16 ; y
 	db   0 ; x
 	dn $1, $a ; unk7
@@ -911,7 +905,7 @@ ObjParams_ZombieHeadRight: ; 648db (19:48db)
 	dw ZombieHeadFunc_Right
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_StarsLeft: ; 648f0 (19:48f0)
+ObjParams_StarsLeft:
 	db -20 ; y
 	db -12 ; x
 	dn $3, $0 ; unk7
@@ -928,7 +922,7 @@ ObjParams_StarsLeft: ; 648f0 (19:48f0)
 	dw StarsFunc_SetFlags
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_StarsRight: ; 64905 (19:4905)
+ObjParams_StarsRight:
 	db -20 ; y
 	db  11 ; x
 	dn $3, $0 ; unk7
@@ -945,7 +939,7 @@ ObjParams_StarsRight: ; 64905 (19:4905)
 	dw StarsFunc_SetFlags
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_BeamLeft: ; 6491a (19:491a)
+ObjParams_BeamLeft:
 	db  0 ; y
 	db -8 ; x
 	dn $1, $1 ; unk7
@@ -962,7 +956,7 @@ ObjParams_BeamLeft: ; 6491a (19:491a)
 	dw BeamFunc_Left
 	db $0 ; obj flags
 
-ObjParams_BeamRight: ; 6492f (19:492f)
+ObjParams_BeamRight:
 	db  0 ; y
 	db  8 ; x
 	dn $1, $1 ; unk7
@@ -979,7 +973,7 @@ ObjParams_BeamRight: ; 6492f (19:492f)
 	dw BeamFunc_Right
 	db $0 ; obj flags
 
-ObjParams_AppleLeft: ; 64948 (19:4948)
+ObjParams_AppleLeft:
 	db -14 ; y
 	db   7 ; x
 	dn $1, $1 ; unk7
@@ -996,7 +990,7 @@ ObjParams_AppleLeft: ; 64948 (19:4948)
 	dw AppleFunc_Left
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_AppleRight: ; 64959 (19:4959)
+ObjParams_AppleRight:
 	db -14 ; y
 	db  -8 ; x
 	dn $1, $1 ; unk7
@@ -1013,7 +1007,7 @@ ObjParams_AppleRight: ; 64959 (19:4959)
 	dw AppleFunc_Right
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_SunFlameLeft: ; 6496e (19:496e)
+ObjParams_SunFlameLeft:
 	db  4 ; y
 	db -8 ; x
 	dn $1, $b ; unk7
@@ -1030,7 +1024,7 @@ ObjParams_SunFlameLeft: ; 6496e (19:496e)
 	dw SunFlameFunc_Left
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_SunFlameRight: ; 64983 (19:4983)
+ObjParams_SunFlameRight:
 	db  4 ; y
 	db  7 ; x
 	dn $1, $b ; unk7
@@ -1047,7 +1041,7 @@ ObjParams_SunFlameRight: ; 64983 (19:4983)
 	dw SunFlameFunc_Right
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_MoonStarLeft: ; 64998 (19:4998)
+ObjParams_MoonStarLeft:
 	db  4 ; y
 	db -8 ; x
 	dn $1, $b ; unk7
@@ -1064,7 +1058,7 @@ ObjParams_MoonStarLeft: ; 64998 (19:4998)
 	dw MoonStarFunc_Left
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_MoonStarRight: ; 649ad (19:49ad)
+ObjParams_MoonStarRight:
 	db  4 ; y
 	db  7 ; x
 	dn $1, $b ; unk7
@@ -1081,7 +1075,7 @@ ObjParams_MoonStarRight: ; 649ad (19:49ad)
 	dw MoonStarFunc_Right
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_649c2: ; 649c2 (19:49c2)
+ObjParams_649c2:
 	db -10 ; y
 	db  -7 ; x
 	dn $3, $0 ; unk7
@@ -1098,7 +1092,7 @@ ObjParams_649c2: ; 649c2 (19:49c2)
 	dw StarsFunc_SetFlags
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_649d7: ; 649d7 (19:49d7)
+ObjParams_649d7:
 	db -10 ; y
 	db   6 ; x
 	dn $3, $0 ; unk7
@@ -1115,7 +1109,7 @@ ObjParams_649d7: ; 649d7 (19:49d7)
 	dw StarsFunc_SetFlags
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_SnowflakeLeft: ; 649ec (19:49ec)
+ObjParams_SnowflakeLeft:
 	db -8 ; y
 	db -8 ; x
 	dn $2, $1 ; unk7
@@ -1132,7 +1126,7 @@ ObjParams_SnowflakeLeft: ; 649ec (19:49ec)
 	dw SnowflakeFunc_Left
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_SnowflakeRight: ; 64a01 (19:4a01)
+ObjParams_SnowflakeRight:
 	db -8 ; y
 	db  7 ; x
 	dn $2, $1 ; unk7
@@ -1149,7 +1143,7 @@ ObjParams_SnowflakeRight: ; 64a01 (19:4a01)
 	dw SnowflakeFunc_Right
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_MizzouProjectileLeft: ; 64a16 (19:4a16)
+ObjParams_MizzouProjectileLeft:
 	db -10 ; y
 	db -16 ; x
 	dn $2, $5 ; unk7
@@ -1166,7 +1160,7 @@ ObjParams_MizzouProjectileLeft: ; 64a16 (19:4a16)
 	dw MizzouProjectileFunc_Left
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_MizzouProjectileRight: ; 64a2b (19:4a2b)
+ObjParams_MizzouProjectileRight:
 	db -10 ; y
 	db  15 ; x
 	dn $2, $5 ; unk7
@@ -1183,7 +1177,7 @@ ObjParams_MizzouProjectileRight: ; 64a2b (19:4a2b)
 	dw MizzouProjectileFunc_Right
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_GreyTreasure: ; 64a40 (19:4a40)
+ObjParams_GreyTreasure:
 	db -40 ; y
 	db   0 ; x
 	dn $3, $3 ; unk7
@@ -1200,7 +1194,7 @@ ObjParams_GreyTreasure: ; 64a40 (19:4a40)
 	dw GreyTreasureFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_RedTreasure: ; 64a55 (19:4a55)
+ObjParams_RedTreasure:
 	db -40 ; y
 	db   0 ; x
 	dn $3, $3 ; unk7
@@ -1217,7 +1211,7 @@ ObjParams_RedTreasure: ; 64a55 (19:4a55)
 	dw RedTreasureFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_GreenTreasure: ; 64a6a (19:4a6a)
+ObjParams_GreenTreasure:
 	db -40 ; y
 	db   0 ; x
 	dn $3, $3 ; unk7
@@ -1234,7 +1228,7 @@ ObjParams_GreenTreasure: ; 64a6a (19:4a6a)
 	dw GreenTreasureFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_BlueTreasure: ; 64a7f (19:4a7f)
+ObjParams_BlueTreasure:
 	db -40 ; y
 	db   0 ; x
 	dn $3, $3 ; unk7
@@ -1251,7 +1245,7 @@ ObjParams_BlueTreasure: ; 64a7f (19:4a7f)
 	dw BlueTreasureFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_AnonsterSilk1Left: ; 64a94 (19:4a94)
+ObjParams_AnonsterSilk1Left:
 	db  1 ; y
 	db -4 ; x
 	dn $4, $1 ; unk7
@@ -1268,7 +1262,7 @@ ObjParams_AnonsterSilk1Left: ; 64a94 (19:4a94)
 	dw AnonsterSilkFunc.FloatLeft
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_AnonsterSilk1Right: ; 64aa9 (19:4aa9)
+ObjParams_AnonsterSilk1Right:
 	db 1 ; y
 	db 3 ; x
 	dn $4, $1 ; unk7
@@ -1285,7 +1279,7 @@ ObjParams_AnonsterSilk1Right: ; 64aa9 (19:4aa9)
 	dw AnonsterSilkFunc.FloatRight
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_AnonsterSilk2Left: ; 64abe (19:4abe)
+ObjParams_AnonsterSilk2Left:
 	db  1 ; y
 	db -4 ; x
 	dn $4, $1 ; unk7
@@ -1302,7 +1296,7 @@ ObjParams_AnonsterSilk2Left: ; 64abe (19:4abe)
 	dw AnonsterSilkFunc.FloatLeft
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_AnonsterSilk2Right: ; 64ad3 (19:4ad3)
+ObjParams_AnonsterSilk2Right:
 	db 1 ; y
 	db 3 ; x
 	dn $4, $1 ; unk7
@@ -1336,7 +1330,7 @@ ObjParams_AnonsterSilk3Left: ; 64aae8(19:4aae8)
 	dw AnonsterSilkFunc.FloatLeft
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_AnonsterSilk3Right: ; 64afd (19:4afd)
+ObjParams_AnonsterSilk3Right:
 	db 1 ; y
 	db 3 ; x
 	dn $4, $1 ; unk7
@@ -1370,7 +1364,7 @@ ObjParams_AnonsteWaveLeft: ; 64b12(19:4ab12)
 	dw AnonsteWaveLFunc_Left
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_AnonsterWaveRight: ; 64b27 (19:4b27)
+ObjParams_AnonsterWaveRight:
 	db 4 ; y
 	db 4 ; x
 	dn $4, $1 ; unk7
@@ -1387,7 +1381,7 @@ ObjParams_AnonsterWaveRight: ; 64b27 (19:4b27)
 	dw AnonsterWaveFunc_Right
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_SilkPlatform1: ; 64b27 (19:4b27)
+ObjParams_SilkPlatform1:
 	db  -16 ; y
 	db -112 ; x
 	dn $4, $3 ; unk7
@@ -1404,7 +1398,7 @@ ObjParams_SilkPlatform1: ; 64b27 (19:4b27)
 	dw SilkPlatformFunc
 	db $0 ; obj flags
 
-ObjParams_SilkPlatform2: ; 64b51 (19:4b51)
+ObjParams_SilkPlatform2:
 	db -16 ; y
 	db -80 ; x
 	dn $4, $3 ; unk7
@@ -1421,7 +1415,7 @@ ObjParams_SilkPlatform2: ; 64b51 (19:4b51)
 	dw SilkPlatformFunc
 	db $0 ; obj flags
 
-ObjParams_SilkPlatform3: ; 64b66 (19:4b66)
+ObjParams_SilkPlatform3:
 	db -16 ; y
 	db -48 ; x
 	dn $4, $3 ; unk7
@@ -1438,7 +1432,7 @@ ObjParams_SilkPlatform3: ; 64b66 (19:4b66)
 	dw SilkPlatformFunc
 	db $0 ; obj flags
 
-ObjParams_SnakeFireLeft: ; 64b7b (19:4b7b)
+ObjParams_SnakeFireLeft:
 	db  16 ; y
 	db -21 ; x
 	dn $2, $e ; unk7
@@ -1455,7 +1449,7 @@ ObjParams_SnakeFireLeft: ; 64b7b (19:4b7b)
 	dw SnakeFireFunc
 	db $0 ; obj flags
 
-ObjParams_SnakeFireRight: ; 64b90 (19:4b90)
+ObjParams_SnakeFireRight:
 	db 16 ; y
 	db  6 ; x
 	dn $2, $e ; unk7
@@ -1472,7 +1466,7 @@ ObjParams_SnakeFireRight: ; 64b90 (19:4b90)
 	dw SnakeFireFunc
 	db $0 ; obj flags
 
-ObjParams_DollBoyHammer: ; 64ba5 (19:4ba5)
+ObjParams_DollBoyHammer:
 	db -18 ; y
 	db -10 ; x
 	dn $4, $9 ; unk7
@@ -1489,7 +1483,7 @@ ObjParams_DollBoyHammer: ; 64ba5 (19:4ba5)
 	dw DollBoyHammerFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_HammerPlatform: ; 64bba (19:4bba)
+ObjParams_HammerPlatform:
 	db -60 ; y
 	db  64 ; x
 	dn $4, $6 ; unk7
@@ -1506,7 +1500,7 @@ ObjParams_HammerPlatform: ; 64bba (19:4bba)
 	dw HammerPlatformFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_HighRollingRockLeft: ; 64bcf (19:4bcf)
+ObjParams_HighRollingRockLeft:
 	db   4 ; y
 	db -13 ; x
 	dn $5, $8 ; unk7
@@ -1523,7 +1517,7 @@ ObjParams_HighRollingRockLeft: ; 64bcf (19:4bcf)
 	dw RollingRockFunc_Left
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_HighRollingRockRight: ; 64be4 (19:4be4)
+ObjParams_HighRollingRockRight:
 	db   4 ; y
 	db  12 ; x
 	dn $5, $8 ; unk7
@@ -1540,7 +1534,7 @@ ObjParams_HighRollingRockRight: ; 64be4 (19:4be4)
 	dw RollingRockFunc_Right
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_LowRollingRockLeft: ; 64bcf (19:4bcf)
+ObjParams_LowRollingRockLeft:
 	db   4 ; y
 	db -13 ; x
 	dn $5, $8 ; unk7
@@ -1557,7 +1551,7 @@ ObjParams_LowRollingRockLeft: ; 64bcf (19:4bcf)
 	dw RollingRockFunc_Left
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_LowRollingRockRight: ; 64be4 (19:4be4)
+ObjParams_LowRollingRockRight:
 	db   4 ; y
 	db  12 ; x
 	dn $5, $8 ; unk7
@@ -1575,7 +1569,7 @@ ObjParams_LowRollingRockRight: ; 64be4 (19:4be4)
 	db OBJFLAG_PRIORITY ; obj flags
 
 
-ObjParams_PalmTreeShort: ; 64c23 (19:4c23)
+ObjParams_PalmTreeShort:
 	db 16 ; y
 	db 16 ; x
 	dn $5, $a ; unk7
@@ -1592,7 +1586,7 @@ ObjParams_PalmTreeShort: ; 64c23 (19:4c23)
 	dw PalmTreeFunc
 	db $0 ; obj flags
 
-ObjParams_PalmTreeMedium: ; 64c38 (19:4c38)
+ObjParams_PalmTreeMedium:
 	db 28 ; y
 	db 72 ; x
 	dn $5, $a ; unk7
@@ -1609,7 +1603,7 @@ ObjParams_PalmTreeMedium: ; 64c38 (19:4c38)
 	dw PalmTreeFunc
 	db $0 ; obj flags
 
-ObjParams_PalmTreeTall: ; 64c4d (19:4c4d)
+ObjParams_PalmTreeTall:
 	db  39 ; y
 	db 127 ; x
 	dn $5, $a ; unk7
@@ -1626,7 +1620,7 @@ ObjParams_PalmTreeTall: ; 64c4d (19:4c4d)
 	dw PalmTreeFunc
 	db $0 ; obj flags
 
-ObjParams_YellowBellyArrowLeft: ; 64c62 (19:4c62)
+ObjParams_YellowBellyArrowLeft:
 	db  16 ; y
 	db -16 ; x
 	dn $4, $d ; unk7
@@ -1643,7 +1637,7 @@ ObjParams_YellowBellyArrowLeft: ; 64c62 (19:4c62)
 	dw YellowBellyArrowFunc.Left
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_YellowBellyArrowRight: ; 64c77 (19:4c77)
+ObjParams_YellowBellyArrowRight:
 	db 16 ; y
 	db 15 ; x
 	dn $4, $d ; unk7
@@ -1660,7 +1654,7 @@ ObjParams_YellowBellyArrowRight: ; 64c77 (19:4c77)
 	dw YellowBellyArrowFunc.Right
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_Dragonfly1: ; 64c8c (19:4c8c)
+ObjParams_Dragonfly1:
 	db -64 ; y
 	db  48 ; x
 	dn $4, $8 ; unk7
@@ -1677,7 +1671,7 @@ ObjParams_Dragonfly1: ; 64c8c (19:4c8c)
 	dw Dragonfly1Func
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_Fly: ; 64ca1 (19:4ca1)
+ObjParams_Fly:
 	db -48 ; y
 	db  48 ; x
 	dn $4, $9 ; unk7
@@ -1694,7 +1688,7 @@ ObjParams_Fly: ; 64ca1 (19:4ca1)
 	dw FlyFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_Tadpole: ; 64cb6 (19:4cb6)
+ObjParams_Tadpole:
 	db -3 ; y
 	db  0 ; x
 	dn $2, $f ; unk7
@@ -1711,7 +1705,7 @@ ObjParams_Tadpole: ; 64cb6 (19:4cb6)
 	dw TadpoleFunc
 	db $0 ; obj flags
 
-ObjParams_InkLeft: ; 64ccb (19:4ccb)
+ObjParams_InkLeft:
 	db -12 ; y
 	db  -4 ; x
 	dn $5, $3 ; unk7
@@ -1728,7 +1722,7 @@ ObjParams_InkLeft: ; 64ccb (19:4ccb)
 	dw InkFunc.Left
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_InkRight: ; 64ce0 (19:4ce0)
+ObjParams_InkRight:
 	db -12 ; y
 	db   3 ; x
 	dn $5, $3 ; unk7
@@ -1745,7 +1739,7 @@ ObjParams_InkRight: ; 64ce0 (19:4ce0)
 	dw InkFunc.Right
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_FloatingRing: ; 64cf5 (19:4cf5)
+ObjParams_FloatingRing:
 	db 64 ; y
 	db  0 ; x
 	dn $5, $5 ; unk7
@@ -1762,7 +1756,7 @@ ObjParams_FloatingRing: ; 64cf5 (19:4cf5)
 	dw FloatingRingFunc
 	db $0 ; obj flags
 
-ObjParams_Skull1: ; 64d0a (19:4d0a)
+ObjParams_Skull1:
 	db -28 ; y
 	db -16 ; x
 	dn $5, $0 ; unk7
@@ -1779,7 +1773,7 @@ ObjParams_Skull1: ; 64d0a (19:4d0a)
 	dw SkullFunc
 	db $0 ; obj flags
 
-ObjParams_Skull2: ; 64d1f (19:4d1f)
+ObjParams_Skull2:
 	db 20 ; y
 	db -16 ; x
 	dn $5, $1 ; unk7
@@ -1796,7 +1790,7 @@ ObjParams_Skull2: ; 64d1f (19:4d1f)
 	dw SkullFunc
 	db $0 ; obj flags
 
-ObjParams_Skull3: ; 64d34 (19:4d34)
+ObjParams_Skull3:
 	db -28 ; y
 	db  16 ; x
 	dn $5, $2 ; unk7
@@ -1813,7 +1807,7 @@ ObjParams_Skull3: ; 64d34 (19:4d34)
 	dw SkullFunc
 	db $0 ; obj flags
 
-ObjParams_Skull4: ; 64d49 (19:4d49)
+ObjParams_Skull4:
 	db 20 ; y
 	db 16 ; x
 	dn $5, $3 ; unk7
@@ -1830,7 +1824,7 @@ ObjParams_Skull4: ; 64d49 (19:4d49)
 	dw SkullFunc
 	db $0 ; obj flags
 
-ObjParams_JamanoHat: ; 64d5e (19:4d5e)
+ObjParams_JamanoHat:
 	db -12 ; y
 	db   0 ; x
 	dn $5, $8 ; unk7
@@ -1847,7 +1841,7 @@ ObjParams_JamanoHat: ; 64d5e (19:4d5e)
 	dw JamanoHatFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_MagicSpiralLeft: ; 64d73 (19:4d73)
+ObjParams_MagicSpiralLeft:
 	db  12 ; y
 	db -12 ; x
 	dn $5, $e ; unk7
@@ -1864,7 +1858,7 @@ ObjParams_MagicSpiralLeft: ; 64d73 (19:4d73)
 	dw MagicSpiralFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_MagicSpiralRight: ; 64d88 (19:4d88)
+ObjParams_MagicSpiralRight:
 	db 12 ; y
 	db 11 ; x
 	dn $5, $e ; unk7
@@ -1881,7 +1875,7 @@ ObjParams_MagicSpiralRight: ; 64d88 (19:4d88)
 	dw MagicSpiralFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_IgaguriLeft: ; 64d9d (19:4d9d)
+ObjParams_IgaguriLeft:
 	db  21 ; y
 	db -12 ; x
 	dn $5, $f ; unk7
@@ -1898,7 +1892,7 @@ ObjParams_IgaguriLeft: ; 64d9d (19:4d9d)
 	dw IgaguriFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_IgaguriRight: ; 64db2 (19:4db2)
+ObjParams_IgaguriRight:
 	db 21 ; y
 	db 11 ; x
 	dn $5, $f ; unk7
@@ -1915,7 +1909,7 @@ ObjParams_IgaguriRight: ; 64db2 (19:4db2)
 	dw IgaguriFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_HiddenFigureFace: ; 64dc7 (19:4dc7)
+ObjParams_HiddenFigureFace:
 	db -16 ; y
 	db   8 ; x
 	dn $3, $b ; unk7
@@ -1932,7 +1926,7 @@ ObjParams_HiddenFigureFace: ; 64dc7 (19:4dc7)
 	dw HiddenFigureFaceFunc
 	db $0 ; obj flags
 
-ObjParams_HiddenFigureLeftHand: ; 64ddc (19:4ddc)
+ObjParams_HiddenFigureLeftHand:
 	db  18 ; y
 	db -40 ; x
 	dn $3, $c ; unk7
@@ -1949,7 +1943,7 @@ ObjParams_HiddenFigureLeftHand: ; 64ddc (19:4ddc)
 	dw HiddenFigureLeftHandFunc
 	db $0 ; obj flags
 
-ObjParams_HiddenFigureRightHand: ; 64df1 (19:4df1)
+ObjParams_HiddenFigureRightHand:
 	db 18 ; y
 	db 56 ; x
 	dn $3, $d ; unk7
@@ -1966,7 +1960,7 @@ ObjParams_HiddenFigureRightHand: ; 64df1 (19:4df1)
 	dw HiddenFigureRightHandFunc
 	db $0 ; obj flags
 
-ObjParams_Omodon2: ; 64e06 (19:4e06)
+ObjParams_Omodon2:
 	db 16 ; y
 	db  0 ; x
 	dn $0, $d ; unk7
@@ -1983,7 +1977,7 @@ ObjParams_Omodon2: ; 64e06 (19:4e06)
 	dw Func_4279c
 	db $0 ; obj flags
 
-ObjParams_Omodon1: ; 64e1b (19:4e1b)
+ObjParams_Omodon1:
 	db 16 ; y
 	db  0 ; x
 	dn $0, $d ; unk7
@@ -2000,7 +1994,7 @@ ObjParams_Omodon1: ; 64e1b (19:4e1b)
 	dw Func_4279c
 	db $0 ; obj flags
 
-ObjParams_DollBoyUnkObjLeft: ; 64e30 (19:4e30)
+ObjParams_DollBoyUnkObjLeft:
 	db -20 ; y
 	db -19 ; x
 	dn $3, $0 ; unk7
@@ -2017,7 +2011,7 @@ ObjParams_DollBoyUnkObjLeft: ; 64e30 (19:4e30)
 	dw StarsFunc_SetFlags
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_DollBoyUnkObjRight: ; 64e45 (19:4e45)
+ObjParams_DollBoyUnkObjRight:
 	db -20 ; y
 	db 18 ; x
 	dn $3, $0 ; unk7
@@ -2034,7 +2028,7 @@ ObjParams_DollBoyUnkObjRight: ; 64e45 (19:4e45)
 	dw StarsFunc_SetFlags
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_Coin: ; 64e5a (19:4e5a)
+ObjParams_Coin:
 	dn $8, $1 ; unk7
 	db OBJ_INTERACTION_REGULAR_COIN
 	db -12, 0, -4, 3
@@ -2049,7 +2043,7 @@ ObjParams_Coin: ; 64e5a (19:4e5a)
 	dw CoinFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_ColourCoin: ; 64e6d (19:4e6d)
+ObjParams_ColourCoin:
 	dn $8, $1 ; unk7
 	db OBJ_INTERACTION_COLOUR_COIN
 	db -12, 0, -4, 3
@@ -2064,7 +2058,7 @@ ObjParams_ColourCoin: ; 64e6d (19:4e6d)
 	dw CoinFunc.ColourCoin
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_TorchEmberLeft1: ; 64e80 (19:4e80)
+ObjParams_TorchEmberLeft1:
 	dn $0, $5 ; unk7
 	db OBJ_INTERACTION_FIRE ; interaction type
 	db -12, -3, -5, 3 ; collision box
@@ -2079,7 +2073,7 @@ ObjParams_TorchEmberLeft1: ; 64e80 (19:4e80)
 	dw TorchEmberLeft1Func
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_TorchEmberRight1: ; 64e93 (19:4e93)
+ObjParams_TorchEmberRight1:
 	dn $0, $5 ; unk7
 	db OBJ_INTERACTION_FIRE ; interaction type
 	db -12, -3, -5, 3 ; collision box
@@ -2094,7 +2088,7 @@ ObjParams_TorchEmberRight1: ; 64e93 (19:4e93)
 	dw TorchEmberRight1Func
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_TorchEmberLeft2: ; 64ea6 (19:4ea6)
+ObjParams_TorchEmberLeft2:
 	dn $0, $5 ; unk7
 	db OBJ_INTERACTION_FIRE ; interaction type
 	db -12, -3, -5, 3 ; collision box
@@ -2109,7 +2103,7 @@ ObjParams_TorchEmberLeft2: ; 64ea6 (19:4ea6)
 	dw TorchEmberLeft2Func
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_TorchEmberRight2: ; 64eb9 (19:4eb9)
+ObjParams_TorchEmberRight2:
 	dn $0, $5 ; unk7
 	db OBJ_INTERACTION_FIRE ; interaction type
 	db -12, -3, -5, 3 ; collision box
@@ -2124,7 +2118,7 @@ ObjParams_TorchEmberRight2: ; 64eb9 (19:4eb9)
 	dw TorchEmberRight2Func
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_ElectricLampSpark: ; 64ecc (19:4ecc)
+ObjParams_ElectricLampSpark:
 	dn $1, $8 ; unk7
 	db OBJ_INTERACTION_ELECTRIC ; interaction type
 	db -6, -5, -4, 3 ; collision box
@@ -2138,9 +2132,8 @@ ObjParams_ElectricLampSpark: ; 64ecc (19:4ecc)
 	db $00 ; state
 	dw ElectricLampSparkFunc
 	db OBJFLAG_PRIORITY ; obj flags
-; 0x64edf
 
-ObjParams_Bubble: ; 64edf (19:4edf)
+ObjParams_Bubble:
 	dn $1, $f ; unk7
 	db OBJ_INTERACTION_BUBBLE ; interaction type
 	db -24, -7, -9, 8 ; collision box
@@ -2154,9 +2147,8 @@ ObjParams_Bubble: ; 64edf (19:4edf)
 	db $00 ; state
 	dw BubbleFunc
 	db OBJFLAG_PRIORITY ; obj flags
-; 0x64ef2
 
-ObjParams_FallingSnow: ; 64ef2 (19:4ef2)
+ObjParams_FallingSnow:
 	dn $2, $a ; unk7
 	db OBJ_INTERACTION_2D ; interaction type
 	db -15, -8, -5, 4 ; collision box
@@ -2171,7 +2163,7 @@ ObjParams_FallingSnow: ; 64ef2 (19:4ef2)
 	dw FallingSnowFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_StarsAbove: ; 64f05 (19:4f05)
+ObjParams_StarsAbove:
 	dn $3, $0 ; unk7
 	db OBJ_INTERACTION_01 ; interaction type
 	db 0, 0, 0, 0 ; collision box
@@ -2186,7 +2178,7 @@ ObjParams_StarsAbove: ; 64f05 (19:4f05)
 	dw StarsFunc_WithYOffset
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_YellowBellyHead: ; 64f18 (19:4f18)
+ObjParams_YellowBellyHead:
 	dn $4, $c ; unk7
 	db OBJ_INTERACTION_37 ; interaction type
 	db -10, -6, -4, 3 ; collision box
@@ -2201,7 +2193,7 @@ ObjParams_YellowBellyHead: ; 64f18 (19:4f18)
 	dw YellowBellyHeadFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_Pump: ; 64f2b (19:4f2b)
+ObjParams_Pump:
 	dn $4, $e ; unk7
 	db OBJ_INTERACTION_36 ; interaction type
 	db -13, -1, -6, 5 ; collision box
@@ -2216,7 +2208,7 @@ ObjParams_Pump: ; 64f2b (19:4f2b)
 	dw PumpFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_Cheese: ; 64f3e (19:4f3e)
+ObjParams_Cheese:
 	dn $4, $a ; unk7
 	db OBJ_INTERACTION_0B ; interaction type
 	db -12, -5, -6, 5 ; collision box
@@ -2231,7 +2223,7 @@ ObjParams_Cheese: ; 64f3e (19:4f3e)
 	dw CheeseFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_ScrowlerTentacleRight: ; 64f51 (19:4f51)
+ObjParams_ScrowlerTentacleRight:
 	dn $5, $1 ; unk7
 	db OBJ_INTERACTION_WATER_TELEPORTING ; interaction type
 	db -10, -2, -3, 2 ; collision box
@@ -2246,7 +2238,7 @@ ObjParams_ScrowlerTentacleRight: ; 64f51 (19:4f51)
 	dw ScrowlerTentacleFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_ScrowlerTentacleLeft: ; 64f64 (19:4f64)
+ObjParams_ScrowlerTentacleLeft:
 	dn $5, $2 ; unk7
 	db OBJ_INTERACTION_WATER_TELEPORTING ; interaction type
 	db -10, -2, -3, 2 ; collision box
@@ -2261,7 +2253,7 @@ ObjParams_ScrowlerTentacleLeft: ; 64f64 (19:4f64)
 	dw ScrowlerTentacleFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_MuddeeStinger1: ; 64f77 (19:4f77)
+ObjParams_MuddeeStinger1:
 	dn $3, $4 ; unk7
 	db OBJ_INTERACTION_FULL_STING ; interaction type
 	db -12, 0, -4, 3 ; collision box
@@ -2276,7 +2268,7 @@ ObjParams_MuddeeStinger1: ; 64f77 (19:4f77)
 	dw MuddeeStingerFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_MuddeeStinger2: ; 64f8a (19:4f8a)
+ObjParams_MuddeeStinger2:
 	dn $3, $5 ; unk7
 	db OBJ_INTERACTION_01 ; interaction type
 	db -12, 0, -4, 3 ; collision box
@@ -2291,7 +2283,7 @@ ObjParams_MuddeeStinger2: ; 64f8a (19:4f8a)
 	dw MuddeeStingerFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_Kuri: ; 64f9d (19:4f9d)
+ObjParams_Kuri:
 	dn $5, $e ; unk7
 	db OBJ_INTERACTION_01 ; interaction type
 	db -12, 0, -5, 4 ; collision box
@@ -2306,7 +2298,7 @@ ObjParams_Kuri: ; 64f9d (19:4f9d)
 	dw KuriFunc
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_StarsCentre: ; 64fb0 (19:4fb0)
+ObjParams_StarsCentre:
 	dn $3, $0 ; unk7
 	db OBJ_INTERACTION_01 ; interaction type
 	db 0, 0, 0, 0 ; collision box
@@ -2321,7 +2313,7 @@ ObjParams_StarsCentre: ; 64fb0 (19:4fb0)
 	dw StarsFunc_SetFlags
 	db OBJFLAG_PRIORITY ; obj flags
 
-Data_64fc3: ; 64fc3 (19:4fc3)
+Data_64fc3:
 	dw GreyChestData
 	dw GreyKeyData
 	dw MusicaCoinData
@@ -2331,7 +2323,7 @@ Data_64fc3: ; 64fc3 (19:4fc3)
 	rgb 15, 15, 15
 	rgb  0,  0,  0
 
-Data_64fd1: ; 64fd1 (19:4fd1)
+Data_64fd1:
 	dw RedChestData
 	dw RedKeyData
 	dw MusicaCoinData
@@ -2341,7 +2333,7 @@ Data_64fd1: ; 64fd1 (19:4fd1)
 	rgb 23,  0,  0
 	rgb  7,  0,  0
 
-Data_64fdf: ; 64fdf (19:4fdf)
+Data_64fdf:
 	dw GreenChestData
 	dw GreenKeyData
 	dw MusicaCoinData
@@ -2351,7 +2343,7 @@ Data_64fdf: ; 64fdf (19:4fdf)
 	rgb  0, 16,  0
 	rgb  0,  2,  0
 
-Data_64fed: ; 64fed (19:4fed)
+Data_64fed:
 	dw BlueChestData
 	dw BlueKeyData
 	dw MusicaCoinData
@@ -2361,7 +2353,7 @@ Data_64fed: ; 64fed (19:4fed)
 	rgb  0, 12, 31
 	rgb  0,  0,  7
 
-Data_64ffb: ; 64ffb (19:4ffb)
+Data_64ffb:
 	dw GreyChestData
 	dw GreyKeyData
 	dw MusicaCoinData
@@ -2370,9 +2362,8 @@ Data_64ffb: ; 64ffb (19:4ffb)
 	rgb  0, 27, 31
 	rgb 31,  0, 12
 	rgb  5,  0,  0
-; 0x65009
 
-EnemyGroups: ; 65009 (19:5009)
+EnemyGroups:
 	dw Data_64fc3, EnemyGroupGfx0   ; ENEMY_GROUP_000
 	dw Data_64fdf, EnemyGroupGfx2   ; ENEMY_GROUP_001
 	dw Data_64fd1, EnemyGroupGfx3   ; ENEMY_GROUP_002
@@ -2519,9 +2510,8 @@ EnemyGroups: ; 65009 (19:5009)
 	dw Data_64fdf, EnemyGroupGfx43  ; ENEMY_GROUP_143
 	dw Data_64fd1, EnemyGroupGfx44  ; ENEMY_GROUP_144
 	dw Data_64ffb, EnemyGroupGfx117 ; ENEMY_GROUP_145
-; 0x65251
 
-EnemyGroupGfx0: ; 65251 (19:5251)
+EnemyGroupGfx0:
 	db $00
 
 	dw SpearheadGfx
@@ -2551,7 +2541,7 @@ EnemyGroupGfx0: ; 65251 (19:5251)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx1: ; 6527c (19:527c)
+EnemyGroupGfx1:
 	db $00
 
 	dw SilkyGfx
@@ -2585,7 +2575,7 @@ EnemyGroupGfx1: ; 6527c (19:527c)
 	rgb 10, 17, 31
 	rgb  0,  0,  0
 
-EnemyGroupGfx2: ; 652af (19:52af)
+EnemyGroupGfx2:
 	db $00
 
 	dw SpearheadGfx
@@ -2619,7 +2609,7 @@ EnemyGroupGfx2: ; 652af (19:52af)
 	rgb 31,  0,  0
 	rgb 10,  0,  0
 
-EnemyGroupGfx3: ; 652e2 (19:52e2)
+EnemyGroupGfx3:
 	db $00
 
 	dw SilkyGfx
@@ -2653,7 +2643,7 @@ EnemyGroupGfx3: ; 652e2 (19:52e2)
 	rgb  5, 17, 31
 	rgb  3,  0,  0
 
-EnemyGroupGfx4: ; 65315 (19:5315)
+EnemyGroupGfx4:
 	db $00
 
 	dw SpearheadGfx
@@ -2687,7 +2677,7 @@ EnemyGroupGfx4: ; 65315 (19:5315)
 	rgb  5, 17, 31
 	rgb  3,  0,  0
 
-EnemyGroupGfx5: ; 65348 (19:5348)
+EnemyGroupGfx5:
 	db $00
 
 	dw SpearheadGfx
@@ -2721,7 +2711,7 @@ EnemyGroupGfx5: ; 65348 (19:5348)
 	rgb  5, 17, 31
 	rgb  3,  0,  0
 
-EnemyGroupGfx6: ; 6537b (19:537b)
+EnemyGroupGfx6:
 	db $00
 
 	dw SpearheadGfx
@@ -2756,7 +2746,7 @@ EnemyGroupGfx6: ; 6537b (19:537b)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx7: ; 653b0 (19:53b0)
+EnemyGroupGfx7:
 	db $00
 
 	dw MizuuoGfx
@@ -2787,7 +2777,7 @@ EnemyGroupGfx7: ; 653b0 (19:53b0)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx8: ; 653dd (19:53dd)
+EnemyGroupGfx8:
 	db $00
 
 	dw SpearheadGfx
@@ -2822,7 +2812,7 @@ EnemyGroupGfx8: ; 653dd (19:53dd)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx9: ; 65412 (19:5412)
+EnemyGroupGfx9:
 	db $00
 
 	dw MizuuoGfx
@@ -2855,7 +2845,7 @@ EnemyGroupGfx9: ; 65412 (19:5412)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx10: ; 65443 (19:5443)
+EnemyGroupGfx10:
 	db $00
 
 	dw SilkyGfx
@@ -2888,7 +2878,7 @@ EnemyGroupGfx10: ; 65443 (19:5443)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx11: ; 65474 (19:5474)
+EnemyGroupGfx11:
 	db $00
 
 	dw SnakeGfx
@@ -2922,7 +2912,7 @@ EnemyGroupGfx11: ; 65474 (19:5474)
 	rgb 31,  5,  5
 	rgb  0,  0,  0
 
-EnemyGroupGfx12: ; 654a7 (19:54a7)
+EnemyGroupGfx12:
 	db $00
 
 	dw SnakeGfx
@@ -2956,7 +2946,7 @@ EnemyGroupGfx12: ; 654a7 (19:54a7)
 	rgb 31,  5,  5
 	rgb  0,  0,  0
 
-EnemyGroupGfx13: ; 654da (19:54da)
+EnemyGroupGfx13:
 	db $00
 
 	dw SpearheadGfx
@@ -2990,7 +2980,7 @@ EnemyGroupGfx13: ; 654da (19:54da)
 	rgb 10, 31, 10
 	rgb  0,  5,  0
 
-EnemyGroupGfx14: ; 6550d (19:550d)
+EnemyGroupGfx14:
 	db $00
 
 	dw SpearheadGfx
@@ -3024,7 +3014,7 @@ EnemyGroupGfx14: ; 6550d (19:550d)
 	rgb 31,  0,  0
 	rgb 10,  0,  0
 
-EnemyGroupGfx15: ; 65540 (19:5540)
+EnemyGroupGfx15:
 	db $00
 
 	dw PrinceFroggyGfx
@@ -3058,7 +3048,7 @@ EnemyGroupGfx15: ; 65540 (19:5540)
 	rgb 25,  0,  0
 	rgb  0,  0,  5
 
-EnemyGroupGfx16: ; 65573 (19:5573)
+EnemyGroupGfx16:
 	db $00
 
 	dw MadSciensteinGfx
@@ -3093,7 +3083,7 @@ EnemyGroupGfx16: ; 65573 (19:5573)
 	rgb 31,  2,  2
 	rgb  0,  0,  3
 
-EnemyGroupGfx17: ; 655a8 (19:55a8)
+EnemyGroupGfx17:
 	db $00
 
 	dw SpearheadGfx
@@ -3127,7 +3117,7 @@ EnemyGroupGfx17: ; 655a8 (19:55a8)
 	rgb 10, 10,  8
 	rgb  0,  0,  0
 
-EnemyGroupGfx18: ; 655db (19:55db)
+EnemyGroupGfx18:
 	db $00
 
 	dw MadSciensteinGfx
@@ -3162,7 +3152,7 @@ EnemyGroupGfx18: ; 655db (19:55db)
 	rgb 31, 31,  0
 	rgb  0,  0,  0
 
-EnemyGroupGfx19: ; 65610 (19:5610)
+EnemyGroupGfx19:
 	db $00
 
 	dw Sun1Gfx
@@ -3195,7 +3185,7 @@ EnemyGroupGfx19: ; 65610 (19:5610)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx20: ; 65641 (19:5641)
+EnemyGroupGfx20:
 	db $00
 
 	dw Moon1Gfx
@@ -3228,7 +3218,7 @@ EnemyGroupGfx20: ; 65641 (19:5641)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx21: ; 65672 (19:5672)
+EnemyGroupGfx21:
 	db $00
 
 	dw UnusedFlowerGfx
@@ -3262,7 +3252,7 @@ EnemyGroupGfx21: ; 65672 (19:5672)
 	rgb 31,  0,  0
 	rgb 10,  0,  0
 
-EnemyGroupGfx22: ; 656a5 (19:56a5)
+EnemyGroupGfx22:
 	db $00
 
 	dw SpearheadGfx
@@ -3296,7 +3286,7 @@ EnemyGroupGfx22: ; 656a5 (19:56a5)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx23: ; 656d8 (19:56d8)
+EnemyGroupGfx23:
 	db $00
 
 	dw SpearheadGfx
@@ -3327,7 +3317,7 @@ EnemyGroupGfx23: ; 656d8 (19:56d8)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx24: ; 65705 (19:5705)
+EnemyGroupGfx24:
 	db $00
 
 	dw HaridamaGfx
@@ -3361,7 +3351,7 @@ EnemyGroupGfx24: ; 65705 (19:5705)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx25: ; 65738 (19:5738)
+EnemyGroupGfx25:
 	db $00
 
 	dw SpearheadGfx
@@ -3395,7 +3385,7 @@ EnemyGroupGfx25: ; 65738 (19:5738)
 	rgb  8, 16, 31
 	rgb  0,  0, 10
 
-EnemyGroupGfx26: ; 6576b (19:576b)
+EnemyGroupGfx26:
 	db $00
 
 	dw SnakeGfx
@@ -3430,7 +3420,7 @@ EnemyGroupGfx26: ; 6576b (19:576b)
 	rgb 31,  5,  5
 	rgb  0,  0,  0
 
-EnemyGroupGfx27: ; 657a0 (19:57a0)
+EnemyGroupGfx27:
 	db $00
 
 	dw SpearheadGfx
@@ -3465,7 +3455,7 @@ EnemyGroupGfx27: ; 657a0 (19:57a0)
 	rgb 31,  5,  5
 	rgb  0,  0,  0
 
-EnemyGroupGfx28: ; 657d5 (19:57d5)
+EnemyGroupGfx28:
 	db $00
 
 	dw SnakeGfx
@@ -3500,7 +3490,7 @@ EnemyGroupGfx28: ; 657d5 (19:57d5)
 	rgb 31,  5,  5
 	rgb  0,  0,  0
 
-EnemyGroupGfx29: ; 6580a (19:580a)
+EnemyGroupGfx29:
 	db $00
 
 	dw SpearheadGfx
@@ -3534,7 +3524,7 @@ EnemyGroupGfx29: ; 6580a (19:580a)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx30: ; 6583d (19:583d)
+EnemyGroupGfx30:
 	db $00
 
 	dw SpearheadGfx
@@ -3569,7 +3559,7 @@ EnemyGroupGfx30: ; 6583d (19:583d)
 	rgb 31,  0,  0
 	rgb  0,  0,  0
 
-EnemyGroupGfx31: ; 65872 (19:5872)
+EnemyGroupGfx31:
 	db $00
 
 	dw SilkyGfx
@@ -3603,7 +3593,7 @@ EnemyGroupGfx31: ; 65872 (19:5872)
 	rgb 10, 17, 31
 	rgb  0,  0,  0
 
-EnemyGroupGfx32: ; 658a5 (19:58a5)
+EnemyGroupGfx32:
 	db $00
 
 	dw SpearheadGfx
@@ -3637,7 +3627,7 @@ EnemyGroupGfx32: ; 658a5 (19:58a5)
 	rgb 31, 31,  0
 	rgb  0,  0,  0
 
-EnemyGroupGfx33: ; 658d8 (19:58d8)
+EnemyGroupGfx33:
 	db $00
 
 	dw RoboMouse1Gfx
@@ -3670,7 +3660,7 @@ EnemyGroupGfx33: ; 658d8 (19:58d8)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx34: ; 65909 (19:5909)
+EnemyGroupGfx34:
 	db $00
 
 	dw SpearheadGfx
@@ -3704,7 +3694,7 @@ EnemyGroupGfx34: ; 65909 (19:5909)
 	rgb  0, 18, 31
 	rgb  5,  0,  0
 
-EnemyGroupGfx35: ; 6593c (19:593c)
+EnemyGroupGfx35:
 	db $00
 
 	dw HaridamaGfx
@@ -3738,7 +3728,7 @@ EnemyGroupGfx35: ; 6593c (19:593c)
 	rgb  3, 31, 30
 	rgb  3,  0,  0
 
-EnemyGroupGfx36: ; 6596f (19:596f)
+EnemyGroupGfx36:
 	db $00
 
 	dw HaridamaGfx
@@ -3773,7 +3763,7 @@ EnemyGroupGfx36: ; 6596f (19:596f)
 	rgb 31,  0,  0
 	rgb  0,  0,  0
 
-EnemyGroupGfx37: ; 659a4 (19:59a4)
+EnemyGroupGfx37:
 	db $00
 
 	dw OwlGfx
@@ -3807,7 +3797,7 @@ EnemyGroupGfx37: ; 659a4 (19:59a4)
 	rgb  5, 17, 31
 	rgb  3,  0,  0
 
-EnemyGroupGfx38: ; 659d7 (19:59d7)
+EnemyGroupGfx38:
 	db $00
 
 	dw OwlGfx
@@ -3841,7 +3831,7 @@ EnemyGroupGfx38: ; 659d7 (19:59d7)
 	rgb  5, 17, 31
 	rgb  3,  0,  0
 
-EnemyGroupGfx39: ; 65a0a (19:5a0a)
+EnemyGroupGfx39:
 	db $00
 
 	dw SpearheadGfx
@@ -3879,7 +3869,7 @@ EnemyGroupGfx39: ; 65a0a (19:5a0a)
 	rgb 10, 17, 31
 	rgb  0,  0,  0
 
-EnemyGroupGfx40: ; 65a45 (19:5a45)
+EnemyGroupGfx40:
 	db $00
 
 	dw SpearheadGfx
@@ -3913,7 +3903,7 @@ EnemyGroupGfx40: ; 65a45 (19:5a45)
 	rgb 31,  5,  5
 	rgb  0,  0,  0
 
-EnemyGroupGfx41: ; 65a78 (19:5a78)
+EnemyGroupGfx41:
 	db $04
 
 	dw Anonster1Gfx
@@ -3945,7 +3935,7 @@ EnemyGroupGfx41: ; 65a78 (19:5a78)
 	rgb  0,  4, 23
 	rgb  1,  0,  0
 
-EnemyGroupGfx42: ; 65aa7 (19:5aa7)
+EnemyGroupGfx42:
 	db $00
 
 	dw StoveGfx
@@ -3980,7 +3970,7 @@ EnemyGroupGfx42: ; 65aa7 (19:5aa7)
 	rgb 31,  0,  0
 	rgb 10,  0,  0
 
-EnemyGroupGfx43: ; 65adc (19:5adc)
+EnemyGroupGfx43:
 	db $00
 
 	dw SpearheadGfx
@@ -4014,7 +4004,7 @@ EnemyGroupGfx43: ; 65adc (19:5adc)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx44: ; 65b0f (19:5b0f)
+EnemyGroupGfx44:
 	db $00
 
 	dw SpearheadGfx
@@ -4047,7 +4037,7 @@ EnemyGroupGfx44: ; 65b0f (19:5b0f)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx45: ; 65b40 (19:5b40)
+EnemyGroupGfx45:
 	db $04
 
 	dw DollBoy1Gfx
@@ -4082,7 +4072,7 @@ EnemyGroupGfx45: ; 65b40 (19:5b40)
 	rgb  0, 19, 31
 	rgb  0,  0,  0
 
-EnemyGroupGfx46: ; 65b75 (19:5b75)
+EnemyGroupGfx46:
 	db $00
 
 	dw MadSciensteinGfx
@@ -4117,7 +4107,7 @@ EnemyGroupGfx46: ; 65b75 (19:5b75)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx47: ; 65baa (19:5baa)
+EnemyGroupGfx47:
 	db $04
 
 	dw Wormwould1Gfx
@@ -4149,7 +4139,7 @@ EnemyGroupGfx47: ; 65baa (19:5baa)
 	rgb 16,  3,  0
 	rgb  0,  0,  0
 
-EnemyGroupGfx48: ; 65bd9 (19:5bd9)
+EnemyGroupGfx48:
 	db $00
 
 	dw OwlGfx
@@ -4181,7 +4171,7 @@ EnemyGroupGfx48: ; 65bd9 (19:5bd9)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx49: ; 65c08 (19:5c08)
+EnemyGroupGfx49:
 	db $00
 
 	dw HaridamaGfx
@@ -4217,7 +4207,7 @@ EnemyGroupGfx49: ; 65c08 (19:5c08)
 	rgb 12,  0,  0
 	rgb  0,  0,  0
 
-EnemyGroupGfx50: ; 65c3f (19:5c3f)
+EnemyGroupGfx50:
 	db $00
 
 	dw SpearheadGfx
@@ -4251,7 +4241,7 @@ EnemyGroupGfx50: ; 65c3f (19:5c3f)
 	rgb 31,  5,  5
 	rgb  0,  0,  0
 
-EnemyGroupGfx51: ; 65c72 (19:5c72)
+EnemyGroupGfx51:
 	db $00
 
 	dw SpearheadGfx
@@ -4285,7 +4275,7 @@ EnemyGroupGfx51: ; 65c72 (19:5c72)
 	rgb 31,  5,  5
 	rgb  0,  0,  0
 
-EnemyGroupGfx52: ; 65ca5 (19:5ca5)
+EnemyGroupGfx52:
 	db $04
 
 	dw YellowBelly1Gfx
@@ -4317,7 +4307,7 @@ EnemyGroupGfx52: ; 65ca5 (19:5ca5)
 	rgb 31,  5,  5
 	rgb 31, 31, 31
 
-EnemyGroupGfx53: ; 65cd4 (19:5cd4)
+EnemyGroupGfx53:
 	db $00
 
 	dw SpearheadGfx
@@ -4351,7 +4341,7 @@ EnemyGroupGfx53: ; 65cd4 (19:5cd4)
 	rgb  8, 16, 31
 	rgb  0,  0, 10
 
-EnemyGroupGfx54: ; 65d07 (19:5d07)
+EnemyGroupGfx54:
 	db $00
 
 	dw SpearheadGfx
@@ -4385,7 +4375,7 @@ EnemyGroupGfx54: ; 65d07 (19:5d07)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx55: ; 65d3a (19:5d3a)
+EnemyGroupGfx55:
 	db $00
 
 	dw PrinceFroggyGfx
@@ -4419,7 +4409,7 @@ EnemyGroupGfx55: ; 65d3a (19:5d3a)
 	rgb  3, 31, 30
 	rgb  3,  0,  0
 
-EnemyGroupGfx56: ; 65d6d (19:5d6d)
+EnemyGroupGfx56:
 	db $04
 
 	dw Pesce1Gfx
@@ -4454,7 +4444,7 @@ EnemyGroupGfx56: ; 65d6d (19:5d6d)
 	rgb 31,  6, 11
 	rgb  0,  0,  0
 
-EnemyGroupGfx57: ; 65da2 (19:5da2)
+EnemyGroupGfx57:
 	db $00
 
 	dw StoveGfx
@@ -4487,7 +4477,7 @@ EnemyGroupGfx57: ; 65da2 (19:5da2)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx58: ; 65dd3 (19:5dd3)
+EnemyGroupGfx58:
 	db $00
 
 	dw StoveGfx
@@ -4521,7 +4511,7 @@ EnemyGroupGfx58: ; 65dd3 (19:5dd3)
 	rgb 31,  5,  5
 	rgb  0,  0,  0
 
-EnemyGroupGfx59: ; 65e06 (19:5e06)
+EnemyGroupGfx59:
 	db $00
 
 	dw SnakeGfx
@@ -4556,7 +4546,7 @@ EnemyGroupGfx59: ; 65e06 (19:5e06)
 	rgb 31,  0,  0
 	rgb  0,  0,  0
 
-EnemyGroupGfx60: ; 65e3b (19:5e3b)
+EnemyGroupGfx60:
 	db $00
 
 	dw HaridamaGfx
@@ -4590,7 +4580,7 @@ EnemyGroupGfx60: ; 65e3b (19:5e3b)
 	rgb 25,  0,  0
 	rgb  0,  0,  5
 
-EnemyGroupGfx61: ; 65e6e (19:5e6e)
+EnemyGroupGfx61:
 	db $00
 
 	dw PrinceFroggyGfx
@@ -4624,7 +4614,7 @@ EnemyGroupGfx61: ; 65e6e (19:5e6e)
 	rgb  8, 16, 31
 	rgb  0,  0, 10
 
-EnemyGroupGfx62: ; 65ea1 (19:5ea1)
+EnemyGroupGfx62:
 	db $00
 
 	dw SpearheadGfx
@@ -4659,7 +4649,7 @@ EnemyGroupGfx62: ; 65ea1 (19:5ea1)
 	rgb 31, 31,  0
 	rgb  0,  0,  3
 
-EnemyGroupGfx63: ; 65ed6 (19:5ed6)
+EnemyGroupGfx63:
 	db $00
 
 	dw SpearheadGfx
@@ -4693,7 +4683,7 @@ EnemyGroupGfx63: ; 65ed6 (19:5ed6)
 	rgb 10, 17, 31
 	rgb  0,  0,  0
 
-EnemyGroupGfx64: ; 65f09 (19:5f09)
+EnemyGroupGfx64:
 	db $00
 
 	dw Sun1Gfx
@@ -4727,7 +4717,7 @@ EnemyGroupGfx64: ; 65f09 (19:5f09)
 	rgb  3, 31, 30
 	rgb  3,  0,  0
 
-EnemyGroupGfx65: ; 65f3c (19:5f3c)
+EnemyGroupGfx65:
 	db $00
 
 	dw SpearheadGfx
@@ -4761,7 +4751,7 @@ EnemyGroupGfx65: ; 65f3c (19:5f3c)
 	rgb 25,  0,  0
 	rgb  0,  0,  5
 
-EnemyGroupGfx66: ; 65f6f (19:5f6f)
+EnemyGroupGfx66:
 	db $00
 
 	dw PrinceFroggyGfx
@@ -4795,7 +4785,7 @@ EnemyGroupGfx66: ; 65f6f (19:5f6f)
 	rgb 25,  0,  0
 	rgb  0,  0,  5
 
-EnemyGroupGfx67: ; 65fa2 (19:5fa2)
+EnemyGroupGfx67:
 	db $00
 
 	dw SnakeGfx
@@ -4829,7 +4819,7 @@ EnemyGroupGfx67: ; 65fa2 (19:5fa2)
 	rgb 31,  5,  5
 	rgb  0,  0,  0
 
-EnemyGroupGfx68: ; 65fd5 (19:5fd5)
+EnemyGroupGfx68:
 	db $00
 
 	dw SpearheadGfx
@@ -4864,7 +4854,7 @@ EnemyGroupGfx68: ; 65fd5 (19:5fd5)
 	rgb 31,  0,  0
 	rgb  0,  0,  0
 
-EnemyGroupGfx69: ; 6600a (19:600a)
+EnemyGroupGfx69:
 	db $00
 
 	dw SnakeGfx
@@ -4898,7 +4888,7 @@ EnemyGroupGfx69: ; 6600a (19:600a)
 	rgb 25,  0,  0
 	rgb  0,  0,  5
 
-EnemyGroupGfx70: ; 6603d (19:603d)
+EnemyGroupGfx70:
 	db $04
 
 	dw Scowler1Gfx
@@ -4930,7 +4920,7 @@ EnemyGroupGfx70: ; 6603d (19:603d)
 	rgb  0, 28,  0
 	rgb  0,  0,  0
 
-EnemyGroupGfx71: ; 6606c (19:606c)
+EnemyGroupGfx71:
 	db $00
 
 	dw WaterSparkGfx
@@ -4964,7 +4954,7 @@ EnemyGroupGfx71: ; 6606c (19:606c)
 	rgb 31,  5,  5
 	rgb  0,  0,  0
 
-EnemyGroupGfx72: ; 6609f (19:609f)
+EnemyGroupGfx72:
 	db $00
 
 	dw HaridamaGfx
@@ -4998,7 +4988,7 @@ EnemyGroupGfx72: ; 6609f (19:609f)
 	rgb 31,  3,  3
 	rgb  0,  0,  3
 
-EnemyGroupGfx73: ; 660d2 (19:60d2)
+EnemyGroupGfx73:
 	db $00
 
 	dw HaridamaGfx
@@ -5032,7 +5022,7 @@ EnemyGroupGfx73: ; 660d2 (19:60d2)
 	rgb 31,  3,  3
 	rgb  0,  0,  3
 
-EnemyGroupGfx74: ; 66105 (19:6105)
+EnemyGroupGfx74:
 	db $00
 
 	dw PrinceFroggyGfx
@@ -5066,7 +5056,7 @@ EnemyGroupGfx74: ; 66105 (19:6105)
 	rgb 31,  5,  5
 	rgb  0,  0,  0
 
-EnemyGroupGfx75: ; 66138 (19:6138)
+EnemyGroupGfx75:
 	db $00
 
 	dw OwlGfx
@@ -5101,7 +5091,7 @@ EnemyGroupGfx75: ; 66138 (19:6138)
 	rgb 31, 31,  0
 	rgb  0,  0,  3
 
-EnemyGroupGfx76: ; 6616d (19:616d)
+EnemyGroupGfx76:
 	db $00
 
 	dw SpearheadGfx
@@ -5135,7 +5125,7 @@ EnemyGroupGfx76: ; 6616d (19:616d)
 	rgb  3, 31, 30
 	rgb  3,  0,  0
 
-EnemyGroupGfx77: ; 661a0 (19:61a0)
+EnemyGroupGfx77:
 	db $00
 
 	dw SpearheadGfx
@@ -5169,7 +5159,7 @@ EnemyGroupGfx77: ; 661a0 (19:61a0)
 	rgb  0, 19, 31
 	rgb  0,  0,  0
 
-EnemyGroupGfx78: ; 661d3 (19:61d3)
+EnemyGroupGfx78:
 	db $00
 
 	dw SpearheadGfx
@@ -5203,7 +5193,7 @@ EnemyGroupGfx78: ; 661d3 (19:61d3)
 	rgb 25,  0,  0
 	rgb  0,  0,  5
 
-EnemyGroupGfx79: ; 66206 (19:6206)
+EnemyGroupGfx79:
 	db $00
 
 	dw SilkyGfx
@@ -5237,7 +5227,7 @@ EnemyGroupGfx79: ; 66206 (19:6206)
 	rgb 25,  0,  0
 	rgb  0,  0,  5
 
-EnemyGroupGfx80: ; 66239 (19:6239)
+EnemyGroupGfx80:
 	db $00
 
 	dw StoveGfx
@@ -5269,7 +5259,7 @@ EnemyGroupGfx80: ; 66239 (19:6239)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx81: ; 66268 (19:6268)
+EnemyGroupGfx81:
 	db $00
 
 	dw SpearheadGfx
@@ -5303,7 +5293,7 @@ EnemyGroupGfx81: ; 66268 (19:6268)
 	rgb 31,  5,  5
 	rgb  0,  0,  0
 
-EnemyGroupGfx82: ; 6629b (19:629b)
+EnemyGroupGfx82:
 	db $04
 
 	dw Jamano1Gfx
@@ -5336,7 +5326,7 @@ EnemyGroupGfx82: ; 6629b (19:629b)
 	rgb 21, 21, 21
 	rgb  0,  0,  0
 
-EnemyGroupGfx83: ; 662cc (19:62cc)
+EnemyGroupGfx83:
 	db $00
 
 	dw SpearheadGfx
@@ -5370,7 +5360,7 @@ EnemyGroupGfx83: ; 662cc (19:62cc)
 	rgb  5, 17, 31
 	rgb  3,  0,  0
 
-EnemyGroupGfx84: ; 662ff (19:62ff)
+EnemyGroupGfx84:
 	db $00
 
 	dw SnakeGfx
@@ -5404,7 +5394,7 @@ EnemyGroupGfx84: ; 662ff (19:62ff)
 	rgb 31,  5,  5
 	rgb  0,  0,  0
 
-EnemyGroupGfx85: ; 66332 (19:6332)
+EnemyGroupGfx85:
 	db $00
 
 	dw SpearheadGfx
@@ -5438,7 +5428,7 @@ EnemyGroupGfx85: ; 66332 (19:6332)
 	rgb 25,  0,  0
 	rgb  0,  0,  5
 
-EnemyGroupGfx86: ; 66365 (19:6365)
+EnemyGroupGfx86:
 	db $04
 
 	dw Muddee1Gfx
@@ -5471,7 +5461,7 @@ EnemyGroupGfx86: ; 66365 (19:6365)
 	rgb 31, 20, 20
 	rgb  0,  0,  0
 
-EnemyGroupGfx87: ; 66396 (19:6396)
+EnemyGroupGfx87:
 	db $04
 
 	dw Wolfenboss1Gfx
@@ -5503,7 +5493,7 @@ EnemyGroupGfx87: ; 66396 (19:6396)
 	rgb 31,  4,  0
 	rgb  0,  0,  0
 
-EnemyGroupGfx88: ; 663c5 (19:63c5)
+EnemyGroupGfx88:
 	db $00
 
 	dw SpearheadGfx
@@ -5537,7 +5527,7 @@ EnemyGroupGfx88: ; 663c5 (19:63c5)
 	rgb 25,  0,  0
 	rgb  0,  0,  5
 
-EnemyGroupGfx89: ; 663f8 (19:63f8)
+EnemyGroupGfx89:
 	db $00
 
 	dw SpearheadGfx
@@ -5571,7 +5561,7 @@ EnemyGroupGfx89: ; 663f8 (19:63f8)
 	rgb  5, 17, 31
 	rgb  3,  0,  0
 
-EnemyGroupGfx90: ; 6642b (19:642b)
+EnemyGroupGfx90:
 	db $00
 
 	dw SpearheadGfx
@@ -5606,7 +5596,7 @@ EnemyGroupGfx90: ; 6642b (19:642b)
 	rgb 31,  0,  0
 	rgb  0,  0,  0
 
-EnemyGroupGfx91: ; 66460 (19:6460)
+EnemyGroupGfx91:
 	db $00
 
 	dw SpearheadGfx
@@ -5638,7 +5628,7 @@ EnemyGroupGfx91: ; 66460 (19:6460)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx92: ; 6648f (19:648f)
+EnemyGroupGfx92:
 	db $00
 
 	dw SilkyGfx
@@ -5671,7 +5661,7 @@ EnemyGroupGfx92: ; 6648f (19:648f)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx93: ; 664c0 (19:64c0)
+EnemyGroupGfx93:
 	db $00
 
 	dw SilkyGfx
@@ -5705,7 +5695,7 @@ EnemyGroupGfx93: ; 664c0 (19:64c0)
 	rgb  3, 31, 30
 	rgb  3,  0,  0
 
-EnemyGroupGfx94: ; 664f3 (19:64f3)
+EnemyGroupGfx94:
 	db $00
 
 	dw SpearheadGfx
@@ -5739,7 +5729,7 @@ EnemyGroupGfx94: ; 664f3 (19:64f3)
 	rgb  3, 31, 30
 	rgb  3,  0,  0
 
-EnemyGroupGfx95: ; 66526 (19:6526)
+EnemyGroupGfx95:
 	db $04
 
 	dw Shoot1Gfx
@@ -5774,7 +5764,7 @@ EnemyGroupGfx95: ; 66526 (19:6526)
 	rgb 21, 21, 21
 	rgb  0,  0,  0
 
-EnemyGroupGfx96: ; 6655b (19:655b)
+EnemyGroupGfx96:
 	db $00
 
 	dw SpearheadGfx
@@ -5809,7 +5799,7 @@ EnemyGroupGfx96: ; 6655b (19:655b)
 	rgb 31, 31,  0
 	rgb  0,  0,  3
 
-EnemyGroupGfx97: ; 66590 (19:6590)
+EnemyGroupGfx97:
 	db $00
 
 	dw MadSciensteinGfx
@@ -5844,7 +5834,7 @@ EnemyGroupGfx97: ; 66590 (19:6590)
 	rgb  3, 31, 30
 	rgb  3,  0,  0
 
-EnemyGroupGfx98: ; 665c5 (19:65c5)
+EnemyGroupGfx98:
 	db $00
 
 	dw SilkyGfx
@@ -5878,7 +5868,7 @@ EnemyGroupGfx98: ; 665c5 (19:65c5)
 	rgb 31,  5,  5
 	rgb  0,  0,  0
 
-EnemyGroupGfx99: ; 665f8 (19:65f8)
+EnemyGroupGfx99:
 	db $00
 
 	dw SpearheadGfx
@@ -5910,7 +5900,7 @@ EnemyGroupGfx99: ; 665f8 (19:65f8)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx100: ; 66627 (19:6627)
+EnemyGroupGfx100:
 	db $00
 
 	dw SpearheadGfx
@@ -5944,7 +5934,7 @@ EnemyGroupGfx100: ; 66627 (19:6627)
 	rgb  3, 31, 30
 	rgb  3,  0,  0
 
-EnemyGroupGfx101: ; 6665a (19:665a)
+EnemyGroupGfx101:
 	db $00
 
 	dw SpearheadGfx
@@ -5979,7 +5969,7 @@ EnemyGroupGfx101: ; 6665a (19:665a)
 	rgb 31, 31,  0
 	rgb  0,  0,  3
 
-EnemyGroupGfx102: ; 6668f (19:668f)
+EnemyGroupGfx102:
 	db $00
 
 	dw PrinceFroggyGfx
@@ -6013,7 +6003,7 @@ EnemyGroupGfx102: ; 6668f (19:668f)
 	rgb 10, 10,  8
 	rgb  0,  0,  0
 
-EnemyGroupGfx103: ; 666c2 (19:66c2)
+EnemyGroupGfx103:
 	db $00
 
 	dw SpearheadGfx
@@ -6047,7 +6037,7 @@ EnemyGroupGfx103: ; 666c2 (19:66c2)
 	rgb  0, 18, 31
 	rgb  5,  0,  0
 
-EnemyGroupGfx104: ; 666f5 (19:66f5)
+EnemyGroupGfx104:
 	db $00
 
 	dw SpearheadGfx
@@ -6081,7 +6071,7 @@ EnemyGroupGfx104: ; 666f5 (19:66f5)
 	rgb 25,  0,  0
 	rgb  0,  0,  5
 
-EnemyGroupGfx105: ; 66728 (19:6728)
+EnemyGroupGfx105:
 	db $00
 
 	dw SpearheadGfx
@@ -6115,7 +6105,7 @@ EnemyGroupGfx105: ; 66728 (19:6728)
 	rgb 10, 17, 31
 	rgb  0,  0,  0
 
-EnemyGroupGfx106: ; 6675b (19:675b)
+EnemyGroupGfx106:
 	db $00
 
 	dw Moon1Gfx
@@ -6149,7 +6139,7 @@ EnemyGroupGfx106: ; 6675b (19:675b)
 	rgb 31,  5,  5
 	rgb  0,  0,  0
 
-EnemyGroupGfx107: ; 6678e (19:678e)
+EnemyGroupGfx107:
 	db $00
 
 	dw SpearheadGfx
@@ -6183,7 +6173,7 @@ EnemyGroupGfx107: ; 6678e (19:678e)
 	rgb  3, 31, 30
 	rgb  3,  0,  0
 
-EnemyGroupGfx108: ; 667c1 (19:67c1)
+EnemyGroupGfx108:
 	db $00
 
 	dw SpearheadGfx
@@ -6217,7 +6207,7 @@ EnemyGroupGfx108: ; 667c1 (19:67c1)
 	rgb  0, 18, 31
 	rgb  5,  0,  0
 
-EnemyGroupGfx109: ; 667f4 (19:67f4)
+EnemyGroupGfx109:
 	db $00
 
 	dw SpearheadGfx
@@ -6251,7 +6241,7 @@ EnemyGroupGfx109: ; 667f4 (19:67f4)
 	rgb  5, 17, 31
 	rgb  3,  0,  0
 
-EnemyGroupGfx110: ; 66827 (19:6827)
+EnemyGroupGfx110:
 	db $00
 
 	dw SpearheadGfx
@@ -6285,7 +6275,7 @@ EnemyGroupGfx110: ; 66827 (19:6827)
 	rgb 31,  5,  5
 	rgb  0,  0,  0
 
-EnemyGroupGfx111: ; 6685a (19:685a)
+EnemyGroupGfx111:
 	db $00
 
 	dw SnakeGfx
@@ -6319,7 +6309,7 @@ EnemyGroupGfx111: ; 6685a (19:685a)
 	rgb 31,  5,  5
 	rgb  0,  0,  0
 
-EnemyGroupGfx112: ; 6688d (19:688d)
+EnemyGroupGfx112:
 	db $00
 
 	dw PrinceFroggyGfx
@@ -6353,7 +6343,7 @@ EnemyGroupGfx112: ; 6688d (19:688d)
 	rgb 25,  0,  0
 	rgb  0,  0,  5
 
-EnemyGroupGfx113: ; 668c0 (19:68c0)
+EnemyGroupGfx113:
 	db $00
 
 	dw SpearheadGfx
@@ -6387,7 +6377,7 @@ EnemyGroupGfx113: ; 668c0 (19:68c0)
 	rgb 31,  0,  0
 	rgb 10,  0,  0
 
-EnemyGroupGfx114: ; 668f3 (19:68f3)
+EnemyGroupGfx114:
 	db $00
 
 	dw StoveGfx
@@ -6420,7 +6410,7 @@ EnemyGroupGfx114: ; 668f3 (19:68f3)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx115: ; 66924 (19:6924)
+EnemyGroupGfx115:
 	db $00
 
 	dw SpearheadGfx
@@ -6453,7 +6443,7 @@ EnemyGroupGfx115: ; 66924 (19:6924)
 	rgb  0, 31,  0
 	rgb  0,  0, 15
 
-EnemyGroupGfx116: ; 66955 (19:6955)
+EnemyGroupGfx116:
 	db $00
 
 	dw SpearheadGfx
@@ -6487,7 +6477,7 @@ EnemyGroupGfx116: ; 66955 (19:6955)
 	rgb 31,  2,  2
 	rgb  0,  0,  3
 
-EnemyGroupGfx117: ; 66988 (19:6988)
+EnemyGroupGfx117:
 	db $00
 
 	dw SpearheadGfx
@@ -6518,4 +6508,3 @@ EnemyGroupGfx117: ; 66988 (19:6988)
 	rgb 31,  0,  0
 	rgb  0, 31,  0
 	rgb  0,  0, 15
-; 0x669b7

@@ -1,97 +1,81 @@
-StandingFallYVel_Light: ; 60000 (18:4000)
+StandingFallYVel_Light:
 	db  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
 	db  0,  0,  0,  0,  1,  1,  1,  2,  2,  2,  3,  3,  4,  4,  4, $80
-; 0x60020
 
-StandingFallYVel_Heavy: ; 60020 (18:4020)
+StandingFallYVel_Heavy:
 	db  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
 	db  0,  0,  0,  0,  1,  2,  2,  3,  3,  4,  4,  5,  5,  5,  5, $80
-; 0x60040
 
-Data_60040: ; 60040 (18:4040)
+Data_60040:
 	db -3, -2, -1,  0,  1,  1,  1,  1,  1,  1,  2,  2,  2,  3,  3,  3
 	db  3,  3,  3,  3,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4, $80
-; 0x60060
 
-Data_60060: ; 60060 (18:4060)
+Data_60060:
 	db -2, -1,  1,  2,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  4,  4
 	db  4,  4,  4,  4,  4,  5,  5,  5,  5,  5,  5,  5,  5,  5,  5, $80
-; 0x60080
 
-Data_60080: ; 60080 (18:4080)
+Data_60080:
 	db  0,  0,  1,  1,  1,  2,  2,  2,  2,  3,  3,  3,  3,  4,  3,  4
 	db  4,  4,  4,  4,  4,  4,  5,  5,  5,  5,  5,  5,  5,  5,  5, $80
-; 0x600a0
 
-Data_600a0: ; 600a0 (18:40a0)
+Data_600a0:
 	db  0,  0,  0,  0,  0,  0,  1,  1,  1,  2,  2,  2,  2,  3,  3,  3
 	db  3,  3,  3,  4,  4,  4,  4,  4,  4,  4,  5,  5,  5,  5,  5, $80
-; 0x600c0
 
-Data_600c0: ; 600c0 (18:40c0)
+Data_600c0:
 	db  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
 	db  0,  0,  0,  1,  0,  1,  1,  1,  1,  2,  2,  2,  3,  3,  4, $80
-; 0x600e0
 
-Data_600e0: ; 600e0 (18:40e0)
+Data_600e0:
 	db  0,  0,  0,  0,  0,  0,  1,  0,  1,  1,  1,  1,  2,  2,  2,  2
 	db  3,  3,  3,  3,  3,  3,  4,  4,  4,  4,  4,  4,  4,  4,  4, $80
-; 0x60100
 
-Data_60100: ; 60100 (18:4100)
+Data_60100:
 	db -4, -4, -4, -4, -4, -4, -3, -3, -3, -3, -3, -3, -2, -2, -1, -1
 	db  0,  0,  0,  1,  1,  1,  2,  2,  2,  3,  3,  3,  4,  4,  5, $80
-; 0x60120
 
-Data_60120: ; 60120 (18:4120)
+Data_60120:
 	db -4, -4, -4, -3, -3, -3, -2, -2, -1, -1,  0,  0,  0,  1,  1,  1
 	db  2,  2,  3,  3,  3,  4,  4,  4,  5,  5,  5,  5,  5,  5,  5, $80
-; 0x60140
 
-Data_60140: ; 60140 (18:4140)
+Data_60140:
 	db -7, -7, -7, -7, -6, -6, -6, -6, -5, -5, -5, -5, -4, -4, -4, -3
 	db -3, -3, -2, -2, -1,  0,  0,  0,  0,  1,  1,  2,  3,  4,  5, $80
-; 0x60160
 
-Data_60160: ; 60160 (18:4160)
+Data_60160:
 	db -7, -6, -5, -5, -5, -4, -4, -4, -3, -3, -3, -3, -2, -2, -1, -1
 	db  0,  0,  0,  1,  1,  2,  2,  3,  3,  4,  4,  5,  5,  6,  6, $80
-; 0x60180
 
-Data_60180: ; 60180 (18:4180)
+Data_60180:
 	db -7, -6, -5, -4, -3, -3, -2, -2, -1, -1,  0,  0,  0,  0,  0,  0
 	db  0,  1,  0,  1,  2,  2,  3,  2,  3,  3,  4,  4,  5,  6,  7, $80
-; 0x601a0
 
-Data_601a0: ; 601a0 (18:41a0)
+Data_601a0:
 	db -4, -3, -3, -3, -2, -2, -1, -1, -1,  0,  0,  1,  0,  1,  0,  1
 	db  1,  2,  1,  2,  2,  3,  3,  3,  4,  5,  6,  7,  8,  9, 10, $80
-; 0x601c0
 
-Data_601c0: ; 601c0 (18:41c0)
+Data_601c0:
 	db   3,  -7,  16
 	db   4, -18,  14
 	db   3, -28,   6
 	db   0,   0,   0
 	db   0,   0,   0
 	db   0
-; 0x601d0
 
 ; unreferenced
 Data_601d0:
 	db   7, -5, 16,   7, -12, 16,   5, -28,   6,   0,   0,   0,   0,   0,   0,   0
 
-Data_601e0: ; 601e0 (18:41e0)
+Data_601e0:
 	db   3,  -7, -17
 	db   4, -18, -15
 	db   3, -28,  -7
 	db   0,   0,   0
 	db   0,   0,   0
 	db   0
-; 0x601f0
 
 ; unreferenced
-Data_601f0: ; 601f0 (18:41f0)
+Data_601f0:
 	db   7,  -5, -17,   7, -12, -17,   5, -28,  -7,   0,   0,   0,   0,   0,   0,   0
 	db  15, -30,  -7,   4, -28,  -8,   4, -16, -16,   0,   0,   0,   0,   0,   0,   0
 	db  31, -28,   5,   5, -28,  -8,   5, -16, -16,   0,   0,   0,   0,   0,   0,   0
@@ -103,54 +87,43 @@ Data_601f0: ; 601f0 (18:41f0)
 	db   6, -16,  15,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0
 
 ; y-offset values for falling light objects
-FallingYVel_Light: ; 60280 (18:4280)
+FallingYVel_Light:
 	db 1, 1, 1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4, $80
-; 0x60290
 
 ; y-offset values for falling heavy objects
-FallingYVel_Heavy: ; 60290 (18:4290)
+FallingYVel_Heavy:
 	db 1, 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, $80
-; 0x602a0
 
-Data_602a0: ; 602a0 (18:42a0)
+Data_602a0:
 	db -4, -3, -2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, $80
-; 0x602b0
 
-Data_602b0: ; 602b0 (18:42b0)
+Data_602b0:
 	db -3, -2, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, $80
-; 0x602c0
 
-Data_602c0: ; 602c0 (18:42c0)
+Data_602c0:
 	db -2, -1, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, $80
-; 0x602d0
 
-Data_602d0: ; 602d0 (18:42d0)
+Data_602d0:
 	db -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, $80
-; 0x602e0
 
-Data_602e0: ; 602e0 (18:42e0)
+Data_602e0:
 	db -3, -2, -2, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, $80
-; 0x602f0
 
-Data_602f0: ; 602f0 (18:42f0)
+Data_602f0:
 	db -2, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, $80
-; 0x60300
 
-Data_60300: ; 60300 (18:4300)
+Data_60300:
 	db -4, -3, -3, -2, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, $80
-; 0x60310
 
-Data_60310: ; 60310 (18:4310)
+Data_60310:
 	db -3, -2,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, $80
-; 0x60320
 
-Data_60320: ; 60320 (18:4320)
+Data_60320:
 	db -1, -1, -1, -1,  0, -1,  0, -1,  0, -1,  0,  0,  1,  0,  1,  0
 	db  1,  1,  1,  2,  2,  2,  3,  3,  4,  4,  4,  4,  4,  4,  4, $80
-; 0x60340
 
 ; unreferenced
-Data_60340: ; 60340 (18:4340)
+Data_60340:
 	db  1,  1,  2,  2,  3,  3,  4,  4,  3,  3,  2,  2,  1,  1,  0,  0
 	db -1, -1, -1, -1, -2, -2, -2, -2, -3, -3, -3, -3, -4, -4, -4, -4
 	db -3, -3, -3, -3, -2, -2, -2, -2, -1, -1, -1, -1,  0,  0,  0,  0
@@ -161,20 +134,17 @@ Data_60340: ; 60340 (18:4340)
 	db  1,  1,  1,  1,  2,  2,  2,  2,  3,  3,  3,  3,  4,  4,  4,  4
 	db  3,  3,  3,  3,  2,  2,  2,  2,  1,  1,  1,  1,  0,  0,  0, $80
 
-Data_603d0: ; 603d0 (18:43d0)
+Data_603d0:
 	db -6, -5, -5, -5, -4, -4, -4, -3, -3, -3, -2, -1, -1, -1,  0, $80
-; 0x603e0
 
-Data_603e0: ; 603e0 (18:43e0)
+Data_603e0:
 	db 1, 1, 2, 2, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, $80
-; 0x603f0
 
-Data_603f0: ; 603f0 (18:43f0)
+Data_603f0:
 	db 1, 2, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, $80
-; 0x60400
 
 ; unreferenced
-Data_60400: ; 60400 (18:4400)
+Data_60400:
 	db -1, -1, -2, -2, -3, -3, -4, -4, -3, -3, -2, -2, -1, -1,  0,  0
 	db  1,  1,  1,  1,  2,  2,  2,  2,  3,  3,  3,  3,  4,  4,  4,  4
 	db  3,  3,  3,  3,  2,  2,  2,  2,  1,  1,  1,  1,  0,  0,  0,  0
@@ -185,94 +155,90 @@ Data_60400: ; 60400 (18:4400)
 	db -1, -1, -1, -1, -2, -2, -2, -2, -3, -3, -3, -3, -4, -4, -4, -4
 	db -3, -3, -3, -3, -2, -2, -2, -2, -1, -1, -1, -1,  0,  0,  0, $80
 
-Data_60490: ; 60490 (18:4490)
+Data_60490:
 	db  2,  4,  6,  8, 10,  9,  8,  7,  6,  5,  4,  3,  2,  1,  0, $80
-; 0x604a0
 
-Data_604a0: ; 604a0 (18:44a0)
+Data_604a0:
 	db 1, 2, 3, 4, 4, 4, 4, 4, 3, 2, 1, 0, 0, 0, 0, $80
-; 0x604b0
 
-Data_604b0: ; 604b0 (18:44b0)
+Data_604b0:
 	db -3, -2, -1, -1, -1,  0,  0,  0,  0,  1,  1,  1,  2,  3,  0, $80
-; 0x604c0
 
-Data_604c0: ; 604c0 (18:44c0)
+Data_604c0:
 	db  0,  0,  0,  0,  0,  0,  0,  1,  0,  1,  0,  1,  0,  1,  0,  1,
 	db  0,  0,  0,  0,  0,  0, -1,  0, -1,  0, -1,  0, -1,  0, -1, $80
 
-Data_604e0: ; 604e0 (18:44e0)
+Data_604e0:
 	db -4, -4, -3, -3, -2, -2, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0
 	db  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, -1, -1, -1, -1, $80
 
-Data_60500: ; 60500 (18:4500)
+Data_60500:
 	db  1,  2,  3,  4,  5,  6,  7,  8,  8,  8,  8,  8,  8,  8,  8, $80
 
-Data_60510: ; 60510 (18:4510)
+Data_60510:
 	db -1, -1, -1, -1,  0, -1,  0, -1,  0, -1,  0,  0,  1,  0,  1,  0
 	db  1,  1,  1,  2,  2,  2,  3,  3,  4,  4,  4,  4,  4,  4,  4, $80
 
-Data_60530: ; 60530 (18:4530)
+Data_60530:
 	db -8, -7, -6, -5, -4, -3, -2, -1,  0,  0,  0,  0,  0,  0,  0, $80
 
-Data_60540: ; 60540 (18:4540)
+Data_60540:
 	db -6, -5, -4, -3, -2, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
 	db  1,  1,  1,  1,  2,  2,  2,  3,  3,  4,  4,  4,  4,  4,  4, $80
 
-Data_60560: ; 60560 (18:4560)
+Data_60560:
 	db  1,  0,  1,  0,  1,  1,  1,  1,  2,  2,  2,  2,  3,  3,  3,  3
 	db  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  3,  2,  2,  1,  1
 	db  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
 	db -1, -1, -1, -1, -1, -1, -2, -2, -2, -2, -3, -3, -3, -3, -4, $80
 
-Data_605a0: ; 605a0 (18:45a0)
+Data_605a0:
 	db -1,  0, -1,  0, -1, -1, -1, -1, -2, -2, -2, -2, -3, -3, -3, -3
 	db -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -3, -2, -2, -1, -1
 	db  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
 	db  1,  1,  1,  1,  1,  1,  2,  2,  2,  2,  3,  3,  3,  3,  4, $80
 
-Data_605e0: ; 605e0 (18:45e0)
+Data_605e0:
 	db 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2, 3
 	db 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, $80
-; 0x60600
 
-Data_60600: ; 60600 (18:4600)
+Data_60600:
 	db  0,  0,  0, -1,  0,  0, -1,  0, -1,  0, -1, -1, -1, -2, -3, $80
 
-Data_60610: ; 60610 (18:4610)
+Data_60610:
 	db -1, -1, -1,  0,  0,  1,  1,  1,  0,  0, -1, -1, -1, -1, -2, -2
 	db -2, -2, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -4, $80
 
-Data_60630: ; 60630 (18:4630)
+Data_60630:
 	db  1,  1,  1,  0,  0, -1, -1, -1,  0,  0,  1,  1,  1,  1,  2,  2
 	db  2,  2,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  3,  4, $80
 
-Data_60650: ; 60650 (18:4650)
+Data_60650:
 	db -1,  0,  0,  0,  0,  0,  0,  0,  1,  0,  0,  0,  0,  0,  0,  0
 	db  1,  0,  0,  0,  0,  0,  0,  0, -1,  0,  0,  0,  0,  0,  0, $80
 
-Data_60670: ; 60670 (18:4670)
+Data_60670:
 	db  1,  1,  1,  1,  1,  1,  2,  2,  2,  3,  3,  3,  3,  3,  3,  3
 	db  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4,  4, $80
 
-Data_60690: ; 60690 (18:4690)
+Data_60690:
 	db  0,  0,  0,  0,  0,  0,  0,  0,  0, -1, -1, -2, -1,  1,  1,  1
 	db  1,  1,  1,  1,  1,  1,  1,  1,  2,  2,  2,  2,  3,  3,  3,  2
 	db  1,  1,  1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0
 	db  0,  0,  0,  0, -1, -1, -1, -1, -1, -1, -1, -1, -2, -2, -2, -2
 	db -3, -3, -3, -2, -1, -1, -1, -1, -1, -1,  1,  2,  1,  1,  0, $80
 
-Data_606e0: ; 606e0 (18:46e0)
+Data_606e0:
 	db  0,  0,  0, -1, -1, -1, -1, -1, -1, -2, -1, -2, -2, -2, -3, $80
 
-Data_606f0: ; 606f0 (18:46f0)
+Data_606f0:
 	db  0,  0,  0,  1,  1,  1,  1,  1,  1,  2,  1,  2,  2,  2,  3, $80
 
-Data_60700: ; 60700 (18:4700)
+Data_60700:
 	db -6, -6, -5, -5, -5, -4, -4, -3, -3, -3, -2, -2, -2, -1, -1, -1
 	db  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, $80
 
-Data_60720: ; 60720 (18:4720)
+Data_60720:
 	db -8, -7, -7, -6, -6, -6, -5, -5, -5, -4, -4, -3, -3, -2, -2, -1
 	db  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, $80
 
@@ -432,7 +398,7 @@ Data_60ea0:
 Data_60eb0:
 	db  8,  0, -1, 32, -1, -1,  8,  1,  1,  8,  0,  1,  8,  0,  1, 32, -1,  1,  8,  1, -1,  8,  0, -1,  0
 
-Data_60ec9: ; 60ec9 (18:4ec9)
+Data_60ec9:
 	db  1, -2,  0
 	db  1, -1,  0
 	db  1, -2, -1
@@ -695,7 +661,7 @@ Data_6104a:
 	db  1, -2,  0
 	db  0
 
-UpdateObject_Temple: ; 611cb (18:51cb)
+UpdateObject_Temple:
 	push hl
 	inc l
 	rla
@@ -805,9 +771,8 @@ ENDR
 	ld a, [wCurObjUpdateFunction + 1]
 	ld [hl], a
 	ret
-; 0x6130b
 
-UpdateObjects_Temple: ; 6130b (18:530b)
+UpdateObjects_Temple:
 	call HandleGrabbedObjectCollisions
 
 	ld hl, wObj1Flags
@@ -821,9 +786,8 @@ FOR n, 2, NUM_OBJECTS + 1
 	call c, UpdateObject_Temple ; OBJFLAG_ACTIVE_F set
 ENDR
 	ret
-; 0x61348
 
-UpdateObjects: ; 61348 (18:5348)
+UpdateObjects:
 	ld a, [wPowerUpLevel]
 	ld e, a
 	ld a, [wTransformation]
@@ -866,9 +830,8 @@ FOR n, 2, NUM_OBJECTS + 1
 	call c, UpdateObjectDuringFloorTransition ; OBJFLAG_ACTIVE_F set
 ENDR
 	ret
-; 0x613dc
 
-UpdateObject: ; 613dc (18:53dc)
+UpdateObject:
 	push hl
 	inc l
 	rla
@@ -975,9 +938,8 @@ ENDR
 	ld a, [wCurObjUpdateFunction + 1]
 	ld [hl], a
 	ret
-; 0x61513
 
-UpdateObjectDuringFloorTransition: ; 61513 (18:5513)
+UpdateObjectDuringFloorTransition:
 	push hl
 	inc l
 	rla
@@ -1087,9 +1049,8 @@ ENDR
 	ld a, [wCurObjUpdateFunction + 1]
 	ld [hl], a
 	ret
-; 0x6164e
 
-DrawObjects_NoPriority: ; 6164e (18:564e)
+DrawObjects_NoPriority:
 FOR n, 1, NUM_OBJECTS + 1
 	ld hl, wObj{u:n}Flags
 	ld a, [hl]
@@ -1103,9 +1064,8 @@ FOR n, 1, NUM_OBJECTS + 1
 :
 ENDR
 	ret
-; 0x616d7
 
-DrawObjects_WithPriority: ; 616d7 (18:56d7)
+DrawObjects_WithPriority:
 FOR n, 1, NUM_OBJECTS + 1
 	ld hl, wObj{u:n}Flags
 	ld a, [hl]
@@ -1119,9 +1079,8 @@ FOR n, 1, NUM_OBJECTS + 1
 :
 ENDR
 	ret
-; 0x61760
 
-DoObjectAction: ; 61760 (18:5760)
+DoObjectAction:
 	ld a, [wCurObjAction]
 	and a
 	ret z
@@ -1360,11 +1319,10 @@ DoObjectAction: ; 61760 (18:5760)
 	ld a, OBJSTATE_ACTIVATE
 	ld [hl], a
 	ret
-; 0x6189d
 
-_VanishObject:: ; 6189d (18:589d)
+_VanishObject::
 	play_sfx SFX_VANISH
-VanishObject_NoSFX: ; 618a5 (18:58a5)
+VanishObject_NoSFX:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(StarsFunc)
 	ld [hld], a
@@ -1374,7 +1332,7 @@ VanishObject_NoSFX: ; 618a5 (18:58a5)
 	ld a, [hl]
 	and OBJSUBFLAGS_MASK
 	ld [hld], a
-Func_618b4: ; 618b4 (18:58b4)
+Func_618b4:
 	ld a, (BANK(StarsFunc) - BANK("Object Functions 1")) << 4
 	ld [wCurObjUnk07], a
 
@@ -1406,11 +1364,10 @@ Func_618b4: ; 618b4 (18:58b4)
 	ret nc
 	dec [hl]
 	ret
-; 0x618e2
 
 ; handles the grabbed object collision
 ; with other objects
-HandleGrabbedObjectCollisions: ; 618e2 (18:58e2)
+HandleGrabbedObjectCollisions:
 	ld hl, wObj1Flags
 	ld e, OBJFLAG_ACTIVE | OBJFLAG_GRABBED
 	ld a, [hl]
@@ -1658,9 +1615,8 @@ FOR n, 1, NUM_OBJECTS + 1
 	play_sfx SFX_016
 	ret
 ENDR
-; 0x61f10
 
-Func_61f10: ; 61f10 (18:5f10)
+Func_61f10:
 	xor a
 	call ClearObjects
 	call ClearObjDataPointers
@@ -1671,9 +1627,8 @@ Func_61f10: ; 61f10 (18:5f10)
 	ld [wNumShootGoals], a
 	ld [wNumWarioGoals], a
 	ret
-; 0x61f2a
 
-Func_61f2a: ; 61f2a (18:5f2a)
+Func_61f2a:
 	xor a
 	call ClearObjects
 	call ClearObjDataPointers
@@ -1683,9 +1638,8 @@ Func_61f2a: ; 61f2a (18:5f2a)
 	ld [wNumShootGoals], a
 	ld [wNumWarioGoals], a
 	ret
-; 0x61f41
 
-ClearObjects: ; 61f41 (18:5f41)
+ClearObjects:
 	ld hl, wObjects
 	ld c, a
 .loop
@@ -1693,9 +1647,8 @@ ClearObjects: ; 61f41 (18:5f41)
 	dec c
 	jr nz, .loop
 	ret
-; 0x61f4a
 
-ClearObjDataPointers: ; 61f4a (18:5f4a)
+ClearObjDataPointers:
 	ld hl, wObjDataPointers
 	ld c, $20
 .loop
@@ -1703,9 +1656,8 @@ ClearObjDataPointers: ; 61f4a (18:5f4a)
 	dec c
 	jr nz, .loop
 	ret
-; 0x61f54
 
-Func_61f54:: ; 61f54 (18:5f54)
+Func_61f54::
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 
@@ -1911,9 +1863,8 @@ Func_61f54:: ; 61f54 (18:5f54)
 	ld a, OBJSTATE_19
 	ld [wCurObjState], a
 	jp HomeJumpRet
-; 0x620a6
 
-Func_620a6:: ; 620a6 (18:60a6)
+Func_620a6::
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 
@@ -2122,9 +2073,8 @@ Func_620a6:: ; 620a6 (18:60a6)
 	ld a, OBJSTATE_18
 	ld [wCurObjState], a
 	jp HomeJumpRet
-; 0x621fb
 
-Func_621fb:: ; 621fb (18:61fb)
+Func_621fb::
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld a, [wGrabState]
@@ -2232,9 +2182,8 @@ Func_621fb:: ; 621fb (18:61fb)
 	ld l, OBJ_FLAGS
 	res OBJFLAG_GRABBED_F, [hl]
 	jp HomeJumpRet
-; 0x622bd
 
-Func_622bd:: ; 622bd (18:62bd)
+Func_622bd::
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld a, [wGrabState]
@@ -2344,9 +2293,8 @@ Func_622bd:: ; 622bd (18:62bd)
 	ld l, OBJ_FLAGS
 	res OBJFLAG_GRABBED_F, [hl]
 	jp HomeJumpRet
-; 0x62382
 
-Func_62382:: ; 62382 (18:6382)
+Func_62382::
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld a, [wGrabState]
@@ -2439,9 +2387,8 @@ Func_62382:: ; 62382 (18:6382)
 	ld a, [hli]
 	ld [de], a
 	jp HomeJumpRet
-; 0x62429
 
-ThrowObject_Left: ; 62429 (18:6429)
+ThrowObject_Left:
 	play_sfx SFX_THROW
 	ld hl, wCurObjInteractionType
 	ld a, [hl]
@@ -2492,9 +2439,8 @@ ThrowObject_Left: ; 62429 (18:6429)
 	ld a, 31 | (1 << 7)
 	ld [hld], a ; OBJ_ACTION
 	jp HomeJumpRet
-; 0x6247b
 
-Func_6247b:: ; 6247b (18:647b)
+Func_6247b::
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld a, [wGrabState]
@@ -2587,9 +2533,8 @@ Func_6247b:: ; 6247b (18:647b)
 	ld a, [hli]
 	ld [de], a
 	jp HomeJumpRet
-; 0x62522
 
-ThrowObject_Right: ; 62522 (18:6522)
+ThrowObject_Right:
 	play_sfx SFX_THROW
 	ld hl, wCurObjInteractionType
 	ld a, [hl]
@@ -2640,9 +2585,8 @@ ThrowObject_Right: ; 62522 (18:6522)
 	ld a, 31 | (1 << 7)
 	ld [hld], a ; OBJ_ACTION
 	jp HomeJumpRet
-; 0x62574
 
-Func_62574:: ; 62574 (18:6574)
+Func_62574::
 	ld hl, wCurObjXPos + 1
 	ld a, [hld]
 	ldh [hXPosHi], a
@@ -2722,9 +2666,8 @@ Func_62574:: ; 62574 (18:6574)
 .asm_625ff
 	call MoveObjectLeftByVar2
 	jp Func_62690
-; 0x62605
 
-Func_62605:: ; 62605 (18:6605)
+Func_62605::
 	ld hl, wCurObjXPos + 1
 	ld a, [hld]
 	ldh [hXPosHi], a
@@ -2802,7 +2745,7 @@ Func_62605:: ; 62605 (18:6605)
 	call MoveObjectRightByVar2
 ;	fallthrough
 
-Func_62690: ; 62690 (18:6690)
+Func_62690:
 	ld l, OBJ_VAR_3
 	ld a, [hl]
 	dec b
@@ -2856,9 +2799,8 @@ Func_62690: ; 62690 (18:6690)
 	ld b, HIGH(Data_60100)
 	add LOW(Data_60100)
 	jr .asm_6269a
-; 0x626da
 
-Func_626da:: ; 626da (18:66da)
+Func_626da::
 	ld hl, wCurObjXPos + 1
 	ld a, [hld]
 	ldh [hXPosHi], a
@@ -2936,9 +2878,8 @@ Func_626da:: ; 626da (18:66da)
 	res OBJFLAG_GRABBED_F, [hl]
 .asm_62765
 	jp Func_627f0
-; 0x62768
 
-Func_62768:: ; 62768 (18:6768)
+Func_62768::
 	ld hl, wCurObjXPos + 1
 	ld a, [hld]
 	ldh [hXPosHi], a
@@ -3013,7 +2954,7 @@ Func_62768:: ; 62768 (18:6768)
 	res OBJFLAG_GRABBED_F, [hl]
 ;	fallthrough
 
-Func_627f0: ; 627f0 (18:67f0)
+Func_627f0:
 	ld l, OBJ_VAR_3
 	ld a, [hl]
 	dec b
@@ -3066,14 +3007,13 @@ Func_627f0: ; 627f0 (18:67f0)
 	ld b, $41
 	add $40
 	jr .asm_627fa
-; 0x6283a
 
-Func_6283a:: ; 6283a (18:683a)
+Func_6283a::
 	ld a, [wCurObjVar2]
 	ld b, a
 	jr Func_6284f
 
-Func_62840:: ; 62840 (18:6840)
+Func_62840::
 	ld a, [wCurObjVar2]
 	ld b, a
 	ld a, [wEffectivePowerUp]
@@ -3083,7 +3023,7 @@ Func_62840:: ; 62840 (18:6840)
 	sla b ; *4
 ;	fallthrough
 
-Func_6284f: ; 6284f (18:684f)
+Func_6284f:
 	ld hl, wCurObjXPos
 	ld a, [hl]
 	add b
@@ -3131,14 +3071,13 @@ Func_6284f: ; 6284f (18:684f)
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	jp HomeJumpRet
-; 0x62892
 
-Func_62892:: ; 62892 (18:6892)
+Func_62892::
 	ld a, [wCurObjVar2]
 	ld b, a
 	jr Func_628a7
 
-Func_62898:: ; 62898 (18:6898)
+Func_62898::
 	ld a, [wCurObjVar2]
 	ld b, a
 	ld a, [wEffectivePowerUp]
@@ -3148,7 +3087,7 @@ Func_62898:: ; 62898 (18:6898)
 	sla b
 ;	fallthrough
 
-Func_628a7: ; 628a7 (18:68a7)
+Func_628a7:
 	ld hl, wCurObjXPos
 	ld a, [hl]
 	sub b
@@ -3196,9 +3135,8 @@ Func_628a7: ; 628a7 (18:68a7)
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	jp HomeJumpRet
-; 0x628ea
 
-Func_628ea:: ; 628ea (18:68ea)
+Func_628ea::
 	ld hl, wCurObjYPos
 	ld a, [hli]
 	ldh [hYPosLo], a
@@ -3214,9 +3152,8 @@ Func_628ea:: ; 628ea (18:68ea)
 	ld a, OBJSTATE_12
 	ld [wCurObjState], a
 	jp HomeJumpRet
-; 0x62908
 
-Func_62908:: ; 62908 (18:6908)
+Func_62908::
 	ld hl, wCurObjYPos
 	ld a, [hli]
 	ldh [hYPosLo], a
@@ -3232,9 +3169,8 @@ Func_62908:: ; 62908 (18:6908)
 	ld a, OBJSTATE_STANDING_FALL_START
 	ld [wCurObjState], a
 	jp HomeJumpRet
-; 0x62926
 
-Func_62926:: ; 62926 (18:6926)
+Func_62926::
 	ld hl, wCurObjVar3
 	ld a, [hl]
 	ld b, HIGH(Data_60040)
@@ -3314,9 +3250,8 @@ Func_62926:: ; 62926 (18:6926)
 	ld [wCurObjVar2], a
 	jp z, Func_62d57
 	jp Func_62e31
-; 0x629a6
 
-Func_629a6:: ; 629a6 (18:69a6)
+Func_629a6::
 	ld hl, wCurObjVar3
 	ld a, [hl]
 	ld b, HIGH(Data_602a0)
@@ -3347,9 +3282,8 @@ Func_629a6:: ; 629a6 (18:69a6)
 	dec [hl]
 .asm_629cd
 	jp HomeJumpRet
-; 0x629d0
 
-_ObjState_StandingFall:: ; 629d0 (18:69d0)
+_ObjState_StandingFall::
 ; speed up animation by 3x
 	ld hl, wCurObjFrameDuration
 	ld a, [hl]
@@ -3440,10 +3374,9 @@ _ObjState_StandingFall:: ; 629d0 (18:69d0)
 	ld [wCurObjVar2], a
 	jp z, Func_62d57
 	jp Func_62e31
-; 0x62a5b
 
 ; handle gravity for falling objects
-_ObjState_Fall:: ; 62a5b (18:6a5b)
+_ObjState_Fall::
 	ld hl, wCurObjVar3
 	ld a, [hl]
 	ld b, HIGH(FallingYVel_Light)
@@ -3516,9 +3449,8 @@ _ObjState_Fall:: ; 62a5b (18:6a5b)
 	ld [wCurObjVar2], a
 	jp z, Func_62d57
 	jp Func_62e31
-; 0x62ad0
 
-_ObjState_BumpRight:: ; 62ad0 (18:6ad0)
+_ObjState_BumpRight::
 	ld hl, wCurObjVar2
 	ld a, [hl]
 	and a
@@ -3531,7 +3463,7 @@ _ObjState_BumpRight:: ; 62ad0 (18:6ad0)
 	ld [wCurObjState], a
 	jp HomeJumpRet
 
-Func_62ae5:: ; 62ae5 (18:6ae5)
+Func_62ae5::
 	ld hl, wCurObjYPos
 	ld a, [hli]
 	sub 4
@@ -3648,9 +3580,8 @@ Func_62ae5:: ; 62ae5 (18:6ae5)
 	ld a, OBJSTATE_STUN_RIGHT_START
 	ld [hl], a
 	jp HomeJumpRet
-; 0x62bb9
 
-_ObjState_BumpLeft:: ; 62bb9 (18:6bb9)
+_ObjState_BumpLeft::
 	ld hl, wCurObjVar2
 	ld a, [hl]
 	and a
@@ -3663,7 +3594,7 @@ _ObjState_BumpLeft:: ; 62bb9 (18:6bb9)
 	ld [wCurObjState], a
 	jp HomeJumpRet
 
-Func_62bce:: ; 62bce (18:6bce)
+Func_62bce::
 	ld hl, wCurObjYPos
 	ld a, [hli]
 	sub 4
@@ -3777,9 +3708,8 @@ Func_62bce:: ; 62bce (18:6bce)
 	ld a, OBJSTATE_STUN_LEFT_START
 	ld [hl], a
 	jp HomeJumpRet
-; 0x62c9f
 
-Func_62c9f:: ; 62c9f (18:6c9f)
+Func_62c9f::
 	ld hl, wCurObjState
 	ld a, OBJSTATE_56
 	ld [hld], a
@@ -3788,7 +3718,7 @@ Func_62c9f:: ; 62c9f (18:6c9f)
 	ld [hld], a
 ;	fallthrough
 
-Func_62ca8:: ; 62ca8 (18:6ca8)
+Func_62ca8::
 	call MoveObjectLeftByVar2
 	ld a, [wCurObjScreenXPos]
 	add $28
@@ -3874,7 +3804,7 @@ Func_62ca8:: ; 62ca8 (18:6ca8)
 	ld [wCurObjState], a
 	jp HomeJumpRet
 
-Func_62d34: ; 62d34 (18:6d34)
+Func_62d34:
 	ld hl, wCurObjYPos
 	ldh a, [hYPosLo]
 	ld [hli], a
@@ -3900,7 +3830,7 @@ Func_62d34: ; 62d34 (18:6d34)
 ;	fallthrough
 
 ; hl = OBJ_STATE
-Func_62d57: ; 62d57 (18:6d57)
+Func_62d57:
 	ldh a, [hffa0] ; y vel
 	cp 2
 	jr c, .asm_62d6b
@@ -3923,9 +3853,8 @@ Func_62d57: ; 62d57 (18:6d57)
 	ld a, OBJSTATE_22
 	ld [hl], a
 	jp HomeJumpRet
-; 0x62d7d
 
-Func_62d7d:: ; 62d7d (18:6d7d)
+Func_62d7d::
 	ld hl, wCurObjState
 	ld a, OBJSTATE_57
 	ld [hld], a
@@ -3934,7 +3863,7 @@ Func_62d7d:: ; 62d7d (18:6d7d)
 	ld [hld], a
 ;	fallthrough
 
-Func_62d86:: ; 62d86 (18:6d86)
+Func_62d86::
 	call MoveObjectRightByVar2
 	ld a, [wCurObjScreenXPos]
 	add $28
@@ -4017,7 +3946,7 @@ Func_62d86:: ; 62d86 (18:6d86)
 	ld [wCurObjState], a
 	jp HomeJumpRet
 
-Func_62e0f: ; 62e0f (18:6e0f)
+Func_62e0f:
 	ld hl, wCurObjYPos
 	ldh a, [hYPosLo]
 	ld [hli], a
@@ -4042,7 +3971,7 @@ Func_62e0f: ; 62e0f (18:6e0f)
 ;	fallthrough
 
 ; hl = OBJ_STATE
-Func_62e31: ; 62e31 (18:6e31)
+Func_62e31:
 	ldh a, [hffa0] ; y vel
 	cp 2
 	jr c, .asm_62e45
@@ -4065,9 +3994,8 @@ Func_62e31: ; 62e31 (18:6e31)
 	ld a, OBJSTATE_23
 	ld [hl], a
 	jp HomeJumpRet
-; 0x62e57
 
-Func_62e57:: ; 62e57 (18:6e57)
+Func_62e57::
 	play_sfx SFX_VANISH
 
 	ld hl, wCurObjUpdateFunction + 1
@@ -4077,14 +4005,12 @@ Func_62e57:: ; 62e57 (18:6e57)
 	ld [hld], a
 	call Func_618b4
 	jp HomeJumpRet
-; 0x62e6e
 
-_VanishObject2:: ; 62e6e (18:6e6e)
+_VanishObject2::
 	call _VanishObject
 	jp HomeJumpRet
-; 0x62e74
 
-Func_62e74:: ; 62e74 (18:6e74)
+Func_62e74::
 	ld hl, wCurObjState
 	ld a, OBJSTATE_54
 	ld [hld], a
@@ -4100,11 +4026,11 @@ Func_62e74:: ; 62e74 (18:6e74)
 	ld [wCurObjStateDuration], a
 ;	fallthrough
 
-Func_62e8a:: ; 62e8a (18:6e8a)
+Func_62e8a::
 	ld bc, Data_60300
 	jr Func_62ec3
 
-Func_62e8f:: ; 62e8f (18:6e8f)
+Func_62e8f::
 	ld hl, wCurObjState
 	ld a, OBJSTATE_50
 	ld [hld], a
@@ -4120,11 +4046,11 @@ Func_62e8f:: ; 62e8f (18:6e8f)
 	ld [wCurObjStateDuration], a
 ;	fallthrough
 
-Func_62ea5:: ; 62ea5 (18:6ea5)
+Func_62ea5::
 	ld bc, Data_602c0
 	jr Func_62ec3
 
-Func_62eaa:: ; 62eaa (18:6eaa)
+Func_62eaa::
 	ld hl, wCurObjState
 	ld a, OBJSTATE_52
 	ld [hld], a
@@ -4140,11 +4066,11 @@ Func_62eaa:: ; 62eaa (18:6eaa)
 	ld [wCurObjStateDuration], a
 ;	fallthrough
 
-Func_62ec0:: ; 62ec0 (18:6ec0)
+Func_62ec0::
 	ld bc, Data_602e0
 ;	fallthrough
 
-Func_62ec3: ; 62ec3 (18:6ec3)
+Func_62ec3:
 	ld hl, wCurObjVar3
 	ld a, [hl]
 	add c
@@ -4236,9 +4162,8 @@ Func_62ec3: ; 62ec3 (18:6ec3)
 	ld hl, wCurObjFlags
 	res OBJFLAG_NO_COLLISION_F, [hl]
 	jp HomeJumpRet
-; 0x62f5b
 
-Func_62f5b:: ; 62f5b (18:6f5b)
+Func_62f5b::
 	ld hl, wCurObjState
 	ld a, OBJSTATE_55
 	ld [hld], a
@@ -4254,11 +4179,11 @@ Func_62f5b:: ; 62f5b (18:6f5b)
 	ld [wCurObjStateDuration], a
 ;	fallthrough
 
-Func_62f71:: ; 62f71 (18:6f71)
+Func_62f71::
 	ld bc, Data_60300
 	jr Func_62faa
 
-Func_62f76:: ; 62f76 (18:6f76)
+Func_62f76::
 	ld hl, wCurObjState
 	ld a, OBJSTATE_51
 	ld [hld], a
@@ -4274,11 +4199,11 @@ Func_62f76:: ; 62f76 (18:6f76)
 	ld [wCurObjStateDuration], a
 ;	fallthrough
 
-Func_62f8c:: ; 62f8c (18:6f8c)
+Func_62f8c::
 	ld bc, Data_602c0
 	jr Func_62faa
 
-Func_62f91:: ; 62f91 (18:6f91)
+Func_62f91::
 	ld hl, wCurObjState
 	ld a, OBJSTATE_53
 	ld [hld], a
@@ -4294,11 +4219,11 @@ Func_62f91:: ; 62f91 (18:6f91)
 	ld [wCurObjStateDuration], a
 ;	fallthrough
 
-Func_62fa7:: ; 62fa7 (18:6fa7)
+Func_62fa7::
 	ld bc, Data_602e0
 ;	fallthrough
 
-Func_62faa:: ; 62faa (18:6faa)
+Func_62faa::
 	ld hl, wCurObjVar3
 	ld a, [hl]
 	add c
@@ -4386,9 +4311,8 @@ Func_62faa:: ; 62faa (18:6faa)
 	ld hl, wCurObjFlags
 	res OBJFLAG_NO_COLLISION_F, [hl]
 	jp HomeJumpRet
-; 0x6303f
 
-Func_6303f:: ; 6303f (18:703f)
+Func_6303f::
 	ld hl, wCurObjState
 	ld a, OBJSTATE_1B
 	ld [hld], a
@@ -4398,18 +4322,16 @@ Func_6303f:: ; 6303f (18:703f)
 	ld a, $07
 	ld [wCurObjStateDuration], a
 	jp HomeJumpRet
-; 0x63050
 
-Func_63050:: ; 63050 (18:7050)
+Func_63050::
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	jp nz, Func_629a6
 	ld a, OBJSTATE_STANDING_FALL_START
 	ld [wCurObjState], a
 	jp HomeJumpRet
-; 0x6305f
 
-Func_6305f:: ; 6305f (18:705f)
+Func_6305f::
 	ldh a, [rDIV]
 	rra
 	jr c, .asm_63068
@@ -4429,11 +4351,10 @@ Func_6305f:: ; 6305f (18:705f)
 	ld a, $04
 	ld [hli], a ; OBJ_STATE_DURATION
 	jp HomeJumpRet
-; 0x6307b
 
 ; seems to be a function to load/unload objects
 ; that are inside and outside the screen
-CheckObjectOnScreen: ; 6307b (18:707b)
+CheckObjectOnScreen:
 	ld hl, wCurObjYPos
 	ld a, [hli] ; y lo
 	ld c, a
@@ -4660,9 +4581,8 @@ CheckObjectOnScreen: ; 6307b (18:707b)
 	ld [wCurObjFlags], a
 .done
 	ret
-; 0x631a1
 
-_ApplyObjSetMovement:: ; 631a1 (18:71a1)
+_ApplyObjSetMovement::
 	ld hl, wCurObjVar1
 	dec [hl]
 	ret nz
@@ -4723,9 +4643,8 @@ _ApplyObjSetMovement:: ; 631a1 (18:71a1)
 	ret c
 	dec [hl]
 	ret
-; 0x631e8
 
-_ApplyObjYMovement:: ; 631e8 (18:71e8)
+_ApplyObjYMovement::
 	ld hl, wCurObjVar3
 	ld a, [hl]
 	add c
@@ -4754,9 +4673,8 @@ _ApplyObjYMovement:: ; 631e8 (18:71e8)
 	ret c
 	dec [hl]
 	ret
-; 0x63209
 
-Func_63209:: ; 63209 (18:7209)
+Func_63209::
 	ld hl, wCurObjVar3
 	ld a, [hl]
 	add c
@@ -4793,9 +4711,8 @@ Func_63209:: ; 63209 (18:7209)
 	call AddYOffset
 	farcall Func_19720
 	ret
-; 0x63247
 
-_ApplyObjXMovement:: ; 63247 (18:7247)
+_ApplyObjXMovement::
 	ld hl, wCurObjVar2
 	ld a, [hl]
 	add c
@@ -4824,9 +4741,8 @@ _ApplyObjXMovement:: ; 63247 (18:7247)
 	ret c
 	dec [hl]
 	ret
-; 0x63268
 
-_ApplyObjYMovement_Loop:: ; 63268 (18:7268)
+_ApplyObjYMovement_Loop::
 	ld e, c
 	ld hl, wCurObjVar3
 	ld a, [hl]
@@ -4856,9 +4772,8 @@ _ApplyObjYMovement_Loop:: ; 63268 (18:7268)
 	ret c
 	dec [hl]
 	ret
-; 0x6328a
 
-Func_6328a:: ; 6328a (18:728a)
+Func_6328a::
 	ld e, c
 	ld hl, wCurObjVar2
 	ld a, [hl]
@@ -4888,9 +4803,8 @@ Func_6328a:: ; 6328a (18:728a)
 	ret c
 	dec [hl]
 	ret
-; 0x632ac
 
-Func_632ac:: ; 632ac (18:72ac)
+Func_632ac::
 	ld hl, wCurObjUnk01
 	ld a, [hli]
 	ld c, a
@@ -5003,9 +4917,8 @@ Func_632ac:: ; 632ac (18:72ac)
 	inc e
 .asm_63338
 	ret
-; 0x63339
 
-_CountActiveTransientObjects:: ; 63339 (18:7339)
+_CountActiveTransientObjects::
 	ld e, 0
 	ld d, OBJFLAG_ACTIVE | OBJFLAG_TRANSIENT
 FOR n, 1, NUM_OBJECTS + 1
@@ -5017,12 +4930,10 @@ FOR n, 1, NUM_OBJECTS + 1
 :
 ENDR
 	ret
-; 0x6337e
 
-DummyObjectFunc: ; 6337e (18:737e)
+DummyObjectFunc:
 	xor a
 	ld [wCurObjFlags], a
 	ret
-; 0x63383
 
 INCLUDE "engine/level/objects/coin.asm"

@@ -1,4 +1,4 @@
-BigLeafSpawnerFunc: ; 42ba8 (10:6ba8)
+BigLeafSpawnerFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.SpawnSet1)
 	ld [hld], a
@@ -72,9 +72,8 @@ BigLeafSpawnerFunc: ; 42ba8 (10:6ba8)
 	ld [wCurObjStateDuration], a
 	ld bc, ObjParams_BigLeaf2
 	jp CreateObjectAtRelativePos
-; 0x42c25
 
-BigLeaf1Func: ; 42c25 (10:6c25)
+BigLeaf1Func:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjFlags
@@ -95,9 +94,8 @@ BigLeaf1Func: ; 42c25 (10:6c25)
 	ld de, Frameset_68732
 	call SetObjectFramesetPtr
 	ret
-; 0x42c4c
 
-BigLeafFunc: ; 42c4c (10:6c4c)
+BigLeafFunc:
 BigLeaf2Func:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
@@ -219,4 +217,3 @@ BigLeaf2Func:
 	xor a
 	ld [wCurObjFlags], a
 	ret
-; 0x42d1d

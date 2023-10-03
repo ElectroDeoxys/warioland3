@@ -1,4 +1,4 @@
-OAM_bc000: ; bc000 (2f:4000)
+OAM_bc000:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -89,51 +89,43 @@ OAM_bc000: ; bc000 (2f:4000)
 	frame_oam  -8, -32, $12, 3 | OAMF_BANK1 | OAMF_XFLIP
 	frame_oam -13, -40, $14, 3 | OAMF_BANK1 | OAMF_XFLIP
 	db $80
-; 0xbc10d
 
 ; unreferenced
-Frameset_bc10d: ; bc10d (2f:410d)
+Frameset_bc10d:
 	db $00,  4
 	db $ff
-; 0xbc110
 
 ; unreferenced
-Frameset_bc110: ; bc110 (2f:4110)
+Frameset_bc110:
 	db $01,  4
 	db $ff
-; 0xbc113
 
 ; unreferenced
-Frameset_bc113: ; bc113 (2f:4113)
+Frameset_bc113:
 	db $02,  4
 	db $ff
-; 0xbc116
 
 ; unreferenced
-Frameset_bc116: ; bc116 (2f:4116)
+Frameset_bc116:
 	db $03,  4
 	db $ff
-; 0xbc119
 
 ; unreferenced
-Frameset_bc119: ; bc119 (2f:4119)
+Frameset_bc119:
 	db $04,  4
 	db $ff
-; 0xbc11c
 
 ; unreferenced
-Frameset_bc11c: ; bc11c (2f:411c)
+Frameset_bc11c:
 	db $05,  4
 	db $ff
-; 0xbc11f
 
 ; unreferenced
-Frameset_bc11f: ; bc11f (2f:411f)
+Frameset_bc11f:
 	db $06,  4
 	db $ff
-; 0xbc122
 
-OAM_bc122: ; bc122 (2f:4122)
+OAM_bc122:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -203,23 +195,20 @@ OAM_bc122: ; bc122 (2f:4122)
 	frame_oam -16,  -8, $6e, 0 | OAMF_XFLIP
 	frame_oam -32,  -8, $66, 0 | OAMF_XFLIP
 	db $80
-; 0xbc1e8
 
-Frameset_bc1e8:: ; bc1e8 (2f:41e8)
+Frameset_bc1e8::
 	db $01,  2
 	db $02,  2
 	db $03,  2
 	db $04,  2
 	db $05,  2
 	db $ff
-; 0xbc1f3
 
-Frameset_bc1f3:: ; bc1f3 (2f:41f3)
+Frameset_bc1f3::
 	db $00,  4
 	db $ff
-; 0xbc1f6
 
-OAM_bc1f6:: ; bc1f6 (2f:41f6)
+OAM_bc1f6::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1232,27 +1221,23 @@ OAM_bc1f6:: ; bc1f6 (2f:41f6)
 	frame_oam -64,   6, $ba, 2 | OAMF_XFLIP
 	frame_oam -42,  18, $18, 0
 	db $80
-; 0xbcf15
 
-Frameset_bcf15:: ; bcf15 (2f:4f15)
+Frameset_bcf15::
 	db $00,  4
 	db $ff
-; 0xbcf18
 
-Frameset_bcf18:: ; bcf18 (2f:4f18)
+Frameset_bcf18::
 	db $00, 12
 	db $01, 12
 	db $02, 12
 	db $03, 12
 	db $ff
-; 0xbcf21
 
-Frameset_bcf21:: ; bcf21 (2f:4f21)
+Frameset_bcf21::
 	db $04,  4
 	db $ff
-; 0xbcf24
 
-Frameset_bcf24:: ; bcf24 (2f:4f24)
+Frameset_bcf24::
 	db $04,  8
 	db $05,  8
 	db $06,  8
@@ -1262,14 +1247,12 @@ Frameset_bcf24:: ; bcf24 (2f:4f24)
 	db $0a,  8
 	db $0b,  8
 	db $ff
-; 0xbcf35
 
-Frameset_bcf35:: ; bcf35 (2f:4f35)
+Frameset_bcf35::
 	db $0c,  4
 	db $ff
-; 0xbcf38
 
-Frameset_bcf38:: ; bcf38 (2f:4f38)
+Frameset_bcf38::
 	db $0c, 12
 	db $0d, 12
 	db $0e, 12
@@ -1279,14 +1262,12 @@ Frameset_bcf38:: ; bcf38 (2f:4f38)
 	db $12, 12
 	db $13, 12
 	db $ff
-; 0xbcf49
 
-Frameset_bcf49:: ; bcf49 (2f:4f49)
+Frameset_bcf49::
 	db $14,  4
 	db $ff
-; 0xbcf4c
 
-Frameset_bcf4c:: ; bcf4c (2f:4f4c)
+Frameset_bcf4c::
 	db $14,  4
 	db $15,  4
 	db $16,  4
@@ -1304,14 +1285,12 @@ Frameset_bcf4c:: ; bcf4c (2f:4f4c)
 	db $22,  4
 	db $23,  4
 	db $ff
-; 0xbcf6d
 
-Frameset_bcf6d:: ; bcf6d (2f:4f6d)
+Frameset_bcf6d::
 	db $24,  4
 	db $ff
-; 0xbcf70
 
-Frameset_bcf70:: ; bcf70 (2f:4f70)
+Frameset_bcf70::
 	db $24, 20
 	db $25,  4
 	db $26,  4
@@ -1346,9 +1325,8 @@ Frameset_bcf70:: ; bcf70 (2f:4f70)
 	db $2d,  4
 	db $24, 20
 	db $ff
-; 0xbcfb3
 
-OAM_bcfb3:: ; bcfb3 (2f:4fb3)
+OAM_bcfb3::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1539,35 +1517,29 @@ OAM_bcfb3:: ; bcfb3 (2f:4fb3)
 	frame_oam -64,   0, $fe, 6 | OAMF_XFLIP
 	frame_oam -80,   0, $fe, 6 | OAMF_XFLIP
 	db $80
-; 0xbd1b4
 
-Frameset_bd1b4:: ; bd1b4 (2f:51b4)
+Frameset_bd1b4::
 	db $00,  4
 	db $ff
-; 0xbd1b7
 
-Frameset_bd1b7:: ; bd1b7 (2f:51b7)
+Frameset_bd1b7::
 	db $01,  4
 	db $ff
-; 0xbd1ba
 
-Frameset_bd1ba:: ; bd1ba (2f:51ba)
+Frameset_bd1ba::
 	db $02,  4
 	db $ff
-; 0xbd1bd
 
-Frameset_bd1bd:: ; bd1bd (2f:51bd)
+Frameset_bd1bd::
 	db $03,  4
 	db $ff
-; 0xbd1c0
 
-Frameset_bd1c0:: ; bd1c0 (2f:51c0)
+Frameset_bd1c0::
 	db $04,  2
 	db $05,  2
 	db $ff
-; 0xbd1c5
 
-Frameset_bd1c5:: ; bd1c5 (2f:51c5)
+Frameset_bd1c5::
 	db $06,  4
 	db $07,  4
 	db $08,  4
@@ -1594,15 +1566,13 @@ Frameset_bd1c5:: ; bd1c5 (2f:51c5)
 	db $11,  2
 	db $12,  2
 	db $ff
-; 0xbd1f8
 
-Frameset_bd1f8:: ; bd1f8 (2f:51f8)
+Frameset_bd1f8::
 	db $11,  2
 	db $12,  2
 	db $ff
-; 0xbd1fd
 
-OAM_bd1fd: ; bd1fd (2f:51fd)
+OAM_bd1fd:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1728,29 +1698,24 @@ OAM_bd1fd: ; bd1fd (2f:51fd)
 	frame_oam  -8,  -5, $0a, 7
 	frame_oam -17, -12, $04, 0
 	db $80
-; 0xbd348
 
-Frameset_bd348: ; bd348 (2f:5348)
+Frameset_bd348:
 	db $00,  4
 	db $ff
-; 0xbd34b
 
-Frameset_bd34b: ; bd34b (2f:534b)
+Frameset_bd34b:
 	db $01,  4
 	db $ff
-; 0xbd34e
 
-Frameset_bd34e: ; bd34e (2f:534e)
+Frameset_bd34e:
 	db $02,  4
 	db $ff
-; 0xbd351
 
-Frameset_bd351: ; bd351 (2f:5351)
+Frameset_bd351:
 	db $0c,  4
 	db $ff
-; 0xbd354
 
-Frameset_bd354: ; bd354 (2f:5354)
+Frameset_bd354:
 	db $03,  4
 	db $04,  4
 	db $05,  4
@@ -1759,9 +1724,8 @@ Frameset_bd354: ; bd354 (2f:5354)
 	db $04,  4
 	db $03,  4
 	db $ff
-; 0xbd363
 
-Frameset_bd363: ; bd363 (2f:5363)
+Frameset_bd363:
 	db $03,  2
 	db $04,  2
 	db $05,  2
@@ -1770,15 +1734,13 @@ Frameset_bd363: ; bd363 (2f:5363)
 	db $09,  2
 	db $0a,  2
 	db $ff
-; 0xbd372
 
-Frameset_bd372: ; bd372 (2f:5372)
+Frameset_bd372:
 	db $0a,  2
 	db $0b,  2
 	db $ff
-; 0xbd377
 
-OAM_bd377: ; bd377 (2f:5377)
+OAM_bd377:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1857,14 +1819,12 @@ OAM_bd377: ; bd377 (2f:5377)
 	frame_oam -19,  -1, $6c, 4
 	frame_oam -19,   7, $6e, 4
 	db $80
-; 0xbd43a
 
-Frameset_bd43a:: ; bd43a (2f:543a)
+Frameset_bd43a::
 	db $00,  4
 	db $ff
-; 0xbd43d
 
-Frameset_bd43d:: ; bd43d (2f:543d)
+Frameset_bd43d::
 	db $01,  4
 	db $02,  4
 	db $03,  4
@@ -1872,17 +1832,15 @@ Frameset_bd43d:: ; bd43d (2f:543d)
 	db $05,  4
 	db $06,  4
 	db $ff
-; 0xbd44a
 
-Frameset_bd44a:: ; bd44a (2f:544a)
+Frameset_bd44a::
 	db $06,  8
 	db $07,  8
 	db $06,  8
 	db $08,  8
 	db $ff
-; 0xbd453
 
-OAM_bd453: ; bd453 (2f:5453)
+OAM_bd453:
 	dw .frame_0
 	dw .frame_1
 
@@ -1895,19 +1853,16 @@ OAM_bd453: ; bd453 (2f:5453)
 	frame_oam -46,  -3, $9a, 5 | OAMF_XFLIP
 	frame_oam -46, -11, $9c, 5 | OAMF_XFLIP
 	db $80
-; 0xbd469
 
-Frameset_bd469:: ; bd469 (2f:5469)
+Frameset_bd469::
 	db $00,  4
 	db $ff
-; 0xbd46c
 
-Frameset_bd46c:: ; bd46c (2f:546c)
+Frameset_bd46c::
 	db $01,  4
 	db $ff
-; 0xbd46f
 
-OAM_bd46f: ; bd46f (2f:546f)
+OAM_bd46f:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -2058,44 +2013,38 @@ OAM_bd46f: ; bd46f (2f:546f)
 .frame_19
 	frame_oam -16,  -8, $76, 0
 	db $80
-; 0xbd5c3
 
-Frameset_bd5c3: ; bd5c3 (2f:55c3)
+Frameset_bd5c3:
 	db $10,  4
 	db $11,  4
 	db $12,  4
 	db $13,  4
 	db $ff
-; 0xbd5cc
 
-Frameset_bd5cc: ; bd5cc (2f:55cc)
+Frameset_bd5cc:
 	db $0c,  4
 	db $0d,  4
 	db $0e,  4
 	db $0f,  4
 	db $ff
-; 0xbd5d5
 
-Frameset_bd5d5: ; bd5d5 (2f:55d5)
+Frameset_bd5d5:
 	db $0a,  4
 	db $ff
-; 0xbd5d8
 
-Frameset_bd5d8: ; bd5d8 (2f:55d8)
+Frameset_bd5d8:
 	db $0a,  4
 	db $0b,  4
 	db $ff
-; 0xbd5dd
 
-Frameset_bd5dd: ; bd5dd (2f:55dd)
+Frameset_bd5dd:
 	db $06,  4
 	db $07,  4
 	db $08,  4
 	db $09,  4
 	db $ff
-; 0xbd5e6
 
-Frameset_bd5e6: ; bd5e6 (2f:55e6)
+Frameset_bd5e6:
 	db $02,  4
 	db $01,  2
 	db $00,  2
@@ -2112,31 +2061,26 @@ Frameset_bd5e6: ; bd5e6 (2f:55e6)
 	db $01,  4
 	db $00,  4
 	db $ff
-; 0xbd605
 
-Frameset_bd605: ; bd605 (2f:5605)
+Frameset_bd605:
 	db $00,  4
 	db $ff
-; 0xbd608
 
-Frameset_bd608: ; bd608 (2f:5608)
+Frameset_bd608:
 	db $03,  4
 	db $04,  4
 	db $05,  4
 	db $ff
-; 0xbd60f
 
-Frameset_bd60f: ; bd60f (2f:560f)
+Frameset_bd60f:
 	db $02,  4
 	db $ff
-; 0xbd612
 
-Frameset_bd612: ; bd612 (2f:5612)
+Frameset_bd612:
 	db $03,  4
 	db $ff
-; 0xbd615
 
-OAM_bd615:: ; bd615 (2f:5615)
+OAM_bd615::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -2248,27 +2192,24 @@ OAM_bd615:: ; bd615 (2f:5615)
 	frame_oam -28,  -4, $4c, 3
 	frame_oam -28,   4, $4a, 3 | OAMF_XFLIP
 	db $80
-; 0xbd790
 
-Frameset_bd790:: ; bd790 (2f:5790)
+Frameset_bd790::
 	db $00,  4
 	db $ff
-; 0xbd793
 
-Frameset_bd793:: ; bd793 (2f:5793)
+Frameset_bd793::
 	db $01,  4
 	db $02,  4
 	db $03,  4
 	db $04,  4
 	db $ff
-; 0xbd79c
 
-Frameset_bd79c:: ; bd79c (2f:579c)
+Frameset_bd79c::
 	db $03,  4
 	db $04,  4
 	db $ff
 
-OAM_bd7a1:: ; bd7a1 (2f:57a1)
+OAM_bd7a1::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -2372,27 +2313,23 @@ OAM_bd7a1:: ; bd7a1 (2f:57a1)
 	frame_oam -23,  -2, $b4, 1
 	db $80
 
-Frameset_bd905:: ; bd905 (2f:5905)
+Frameset_bd905::
 	db $00,  4
 	db $ff
-; 0xbd908
 
-Frameset_bd908:: ; bd908 (2f:5908)
+Frameset_bd908::
 	db $01,  4
 	db $ff
-; 0xbd90b
 
-Frameset_bd90b:: ; bd90b (2f:590b)
+Frameset_bd90b::
 	db $02,  4
 	db $ff
-; 0xbd90e
 
-Frameset_bd90e:: ; bd90e (2f:590e)
+Frameset_bd90e::
 	db $03,  4
 	db $ff
-; 0xbd911
 
-OAM_bd911:: ; bd911 (2f:5911)
+OAM_bd911::
 	dw .frame_0
 	dw .frame_1
 
@@ -2422,19 +2359,16 @@ OAM_bd911:: ; bd911 (2f:5911)
 	frame_oam -22,   1, $26, 4
 	frame_oam -24,   8, $28, 3
 	db $80
-; 0xbd96b
 
-Frameset_bd96b:: ; bd96b (2f:596b)
+Frameset_bd96b::
 	db $00,  4
 	db $ff
-; 0xbd96e
 
-Frameset_bd96e:: ; bd96e (2f:596e)
+Frameset_bd96e::
 	db $01,  4
 	db $ff
-; 0xbd971
 
-OAM_bd971: ; bd971 (2f:5971)
+OAM_bd971:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -2482,37 +2416,31 @@ OAM_bd971: ; bd971 (2f:5971)
 	frame_oam  -7,  -4, $86, 2
 	frame_oam  -7,   4, $88, 2
 	db $80
-; 0xbd9ec
 
-Frameset_bd9ec: ; bd9ec (2f:59ec)
+Frameset_bd9ec:
 	db $01,  4
 	db $02,  4
 	db $03,  4
 	db $02,  4
 	db $ff
-; 0xbd9f5
 
-Frameset_bd9f5: ; bd9f5 (2f:59f5)
+Frameset_bd9f5:
 	db $00,  4
 	db $ff
-; 0xbd9f8
 
-Frameset_bd9f8: ; bd9f8 (2f:59f8)
+Frameset_bd9f8:
 	db $04,  4
 	db $ff
-; 0xbd9fb
 
-Frameset_bd9fb: ; bd9fb (2f:59fb)
+Frameset_bd9fb:
 	db $01,  4
 	db $ff
-; 0xbd9fe
 
-Frameset_bd9fe: ; bd9fe (2f:59fe)
+Frameset_bd9fe:
 	db $03,  4
 	db $ff
-; 0xbda01
 
-OAM_bda01:: ; bda01 (2f:5a01)
+OAM_bda01::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -2589,9 +2517,8 @@ OAM_bda01:: ; bda01 (2f:5a01)
 	frame_oam   0,  -8, $98, 2
 	frame_oam -16,  -8, $96, 2
 	db $80
-; 0xbdaa2
 
-Frameset_bdaa2:: ; bdaa2 (2f:5aa2)
+Frameset_bdaa2::
 	db $00,  4
 	db $01,  4
 	db $02,  4
@@ -2604,14 +2531,12 @@ Frameset_bdaa2:: ; bdaa2 (2f:5aa2)
 	db $09,  4
 	db $0a, 50
 	db $ff
-; 0xbdab9
 
-Frameset_bdab9:: ; bdab9 (2f:5ab9)
+Frameset_bdab9::
 	db $0a,  4
 	db $ff
-; 0xbdabc
 
-OAM_bdabc:: ; bdabc (2f:5abc)
+OAM_bdabc::
 	dw .frame_0
 
 .frame_0
@@ -2633,14 +2558,12 @@ OAM_bdabc:: ; bdabc (2f:5abc)
 	frame_oam -10,  -4, $68, 0
 	frame_oam -10,   4, $6a, 0
 	db $80
-; 0xbdb03
 
-Frameset_bdb03:: ; bdb03 (2f:5b03)
+Frameset_bdb03::
 	db $00,  4
 	db $ff
-; 0xbdb06
 
-OAM_bdb06:: ; bdb06 (2f:5b06)
+OAM_bdb06::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -2776,14 +2699,12 @@ OAM_bdb06:: ; bdb06 (2f:5b06)
 	frame_oam   0,  -8, $9c, 4
 	frame_oam   0,   3, $9c, 4
 	db $80
-; 0xbdc5f
 
-Frameset_bdc5f:: ; bdc5f (2f:5c5f)
+Frameset_bdc5f::
 	db $00,  4
 	db $ff
-; 0xbdc62
 
-Frameset_bdc62:: ; bdc62 (2f:5c62)
+Frameset_bdc62::
 	db $01,  4
 	db $02,  4
 	db $03,  4
@@ -2799,9 +2720,8 @@ Frameset_bdc62:: ; bdc62 (2f:5c62)
 	db $06,  4
 	db $05,  4
 	db $ff
-; 0xbdc7f
 
-Frameset_bdc7f:: ; bdc7f (2f:5c7f)
+Frameset_bdc7f::
 	db $08,  4
 	db $09,  4
 	db $0a,  4
@@ -2817,9 +2737,8 @@ Frameset_bdc7f:: ; bdc7f (2f:5c7f)
 	db $0d,  4
 	db $0c,  4
 	db $ff
-; 0xbdc9c
 
-OAM_bdc9c:: ; bdc9c (2f:5c9c)
+OAM_bdc9c::
 	dw .frame_0
 
 .frame_0
@@ -2841,14 +2760,12 @@ OAM_bdc9c:: ; bdc9c (2f:5c9c)
 	frame_oam -59,  -2, $bc, 1
 	frame_oam -52,  13, $bc, 1
 	db $80
-; 0xbdce3
 
-Frameset_bdce3:: ; bdce3 (2f:5ce3)
+Frameset_bdce3::
 	db $00,  4
 	db $ff
-; 0xbdce6
 
-OAM_bdce6: ; bdce6 (2f:5ce6)
+OAM_bdce6:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -2927,9 +2844,8 @@ OAM_bdce6: ; bdce6 (2f:5ce6)
 	frame_oam -16,  16, $0a, 6 | OAMF_XFLIP
 	frame_oam -16,   8, $0c, 6 | OAMF_XFLIP
 	db $80
-; 0xbdda9
 
-Frameset_bdda9: ; bdda9 (2f:5da9)
+Frameset_bdda9:
 	db $00, 50
 	db $01,  6
 	db $02,  6
@@ -2942,34 +2858,28 @@ Frameset_bdda9: ; bdda9 (2f:5da9)
 	db $02,  6
 	db $01,  6
 	db $ff
-; 0xbddc0
 
-Frameset_bddc0: ; bddc0 (2f:5dc0)
+Frameset_bddc0:
 	db $05,  4
 	db $ff
-; 0xbddc3
 
-Frameset_bddc3: ; bddc3 (2f:5dc3)
+Frameset_bddc3:
 	db $06,  4
 	db $ff
-; 0xbddc6
 
-Frameset_bddc6: ; bddc6 (2f:5dc6)
+Frameset_bddc6:
 	db $07,  4
 	db $ff
-; 0xbddc9
 
-Frameset_bddc9: ; bddc9 (2f:5dc9)
+Frameset_bddc9:
 	db $08,  4
 	db $ff
-; 0xbddcc
 
-Frameset_bddcc: ; bddcc (2f:5dcc)
+Frameset_bddcc:
 	db $00,  4
 	db $ff
-; 0xbddcf
 
-OAM_bddcf:: ; bddcf (2f:5dcf)
+OAM_bddcf::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -3016,24 +2926,20 @@ OAM_bddcf:: ; bddcf (2f:5dcf)
 	frame_oam -13,   0, $60, 1
 	frame_oam -16,   8, $62, 1
 	db $80
-; 0xbde60
 
-Frameset_bde60:: ; bde60 (2f:5e60)
+Frameset_bde60::
 	db $00,  4
 	db $ff
-; 0xbde63
 
-Frameset_bde63:: ; bde63 (2f:5e63)
+Frameset_bde63::
 	db $01,  4
 	db $ff
-; 0xbde66
 
-Frameset_bde66:: ; bde66 (2f:5e66)
+Frameset_bde66::
 	db $02,  4
 	db $ff
-; 0xbde69
 
-OAM_bde69: ; bde69 (2f:5e69)
+OAM_bde69:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -3131,29 +3037,25 @@ OAM_bde69: ; bde69 (2f:5e69)
 	frame_oam -16,   0, $b6, 3
 	frame_oam -16,   8, $b8, 3
 	db $80
-; 0xbdf92
 
-Frameset_bdf92: ; bdf92 (2f:5f92)
+Frameset_bdf92:
 	db $00,  4
 	db $ff
-; 0xbdf95
 
-Frameset_bdf95: ; bdf95 (2f:5f95)
+Frameset_bdf95:
 	db $01, 10
 	db $02, 10
 	db $03, 10
 	db $04, 10
 	db $05, 10
 	db $ff
-; 0xbdfa0
 
-Frameset_bdfa0: ; bdfa0 (2f:5fa0)
+Frameset_bdfa0:
 	db $00,  4
 	db $06,  4
 	db $ff
-; 0xbdfa5
 
-OAM_bdfa5: ; bdfa5 (2f:5fa5)
+OAM_bdfa5:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -3340,9 +3242,8 @@ OAM_bdfa5: ; bdfa5 (2f:5fa5)
 	frame_oam -16, -30, $60, 6 | OAMF_BANK1
 	frame_oam -16, -23, $62, 6 | OAMF_BANK1
 	db $80
-; 0xbe1b0
 
-Frameset_be1b0: ; be1b0 (2f:61b0)
+Frameset_be1b0:
 	db $00,  4
 	db $01,  4
 	db $02,  4
@@ -3353,9 +3254,8 @@ Frameset_be1b0: ; be1b0 (2f:61b0)
 	db $04,  4
 	db $05,  4
 	db $ff
-; 0xbe1c3
 
-Frameset_be1c3: ; be1c3 (2f:61c3)
+Frameset_be1c3:
 	db $06,  8
 	db $0f,  4
 	db $07,  8
@@ -3385,21 +3285,18 @@ Frameset_be1c3: ; be1c3 (2f:61c3)
 	db $0a, 50
 	db $0e,  4
 	db $ff
-; 0xbe1fc
 
-Frameset_be1fc: ; be1fc (2f:61fc)
+Frameset_be1fc:
 	db $0b,  4
 	db $0c,  4
 	db $0d,  4
 	db $ff
-; 0xbe203
 
-Frameset_be203: ; be203 (2f:6203)
+Frameset_be203:
 	db $06,  4
 	db $ff
-; 0xbe206
 
-OAM_be206:: ; be206 (2f:6206)
+OAM_be206::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -3474,17 +3371,15 @@ OAM_be206:: ; be206 (2f:6206)
 	frame_oam -32,  -8, $e6, 4 | OAMF_BANK1
 	frame_oam -32,   0, $e8, 4 | OAMF_BANK1
 	db $80
-; 0xbe2b9
 
-Frameset_be2b9:: ; be2b9 (2f:62b9)
+Frameset_be2b9::
 	db $00,  6
 	db $01,  6
 	db $00,  6
 	db $02,  6
 	db $ff
-; 0xbe2c2
 
-Frameset_be2c2:: ; be2c2 (2f:62c2)
+Frameset_be2c2::
 	db $00,  6
 	db $03,  6
 	db $00,  6
@@ -3494,19 +3389,16 @@ Frameset_be2c2:: ; be2c2 (2f:62c2)
 	db $00,  6
 	db $06,  6
 	db $ff
-; 0xbe2d3
 
-Frameset_be2d3:: ; be2d3 (2f:62d3)
+Frameset_be2d3::
 	db $07,  4
 	db $ff
-; 0xbe2d6
 
-Frameset_be2d6:: ; be2d6 (2f:62d6)
+Frameset_be2d6::
 	db $08,  4
 	db $ff
-; 0xbe2d9
 
-OAM_be2d9:: ; be2d9 (2f:62d9)
+OAM_be2d9::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -3580,15 +3472,14 @@ OAM_be2d9:: ; be2d9 (2f:62d9)
 	frame_oam -67,  46, $cc, 7
 	db $80
 
-Frameset_be3c5:: ; be3c5 (2f:63c5)
+Frameset_be3c5::
 	db $00,  6
 	db $01,  6
 	db $02,  6
 	db $03,  6
 	db $ff
-; 0xbe3ce
 
-OAM_be3ce:: ; be3ce (2f:63ce)
+OAM_be3ce::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -3891,12 +3782,11 @@ OAM_be3ce:: ; be3ce (2f:63ce)
 	frame_oam -86,   8, $1e, 4
 	db $80
 
-Frameset_be7e6:: ; be7e6 (2f:67e6)
+Frameset_be7e6::
 	db $00,  4
 	db $ff
-; 0xbe7e9
 
-Frameset_be7e9:: ; be7e9 (2f:67e9)
+Frameset_be7e9::
 	db $00, 50
 	db $01,  6
 	db $02,  6
@@ -3910,15 +3800,13 @@ Frameset_be7e9:: ; be7e9 (2f:67e9)
 	db $09,  6
 	db $0a, 50
 	db $ff
-; 0xbe802
 
-Frameset_be802:: ; be802 (2f:6802)
+Frameset_be802::
 	db $0a,  2
 	db $0b,  2
 	db $ff
-; 0xbe807
 
-OAM_be807: ; be807 (2f:6807)
+OAM_be807:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -4002,27 +3890,23 @@ OAM_be807: ; be807 (2f:6807)
 .frame_8
 	frame_oam  -8,  -2, $b0, 4 | OAMF_BANK1
 	db $80
-; 0xbe8de
 
-Frameset_be8de: ; be8de (2f:68de)
+Frameset_be8de:
 	db $00,  4
 	db $ff
-; 0xbe8e1
 
-Frameset_be8e1: ; be8e1 (2f:68e1)
+Frameset_be8e1:
 	db $01, 20
 	db $02,  6
 	db $03, 20
 	db $02,  6
 	db $ff
-; 0xbe8ea
 
-Frameset_be8ea: ; be8ea (2f:68ea)
+Frameset_be8ea:
 	db $01,  4
 	db $ff
-; 0xbe8ed
 
-Frameset_be8ed: ; be8ed (2f:68ed)
+Frameset_be8ed:
 	db $04,  4
 	db $05,  4
 	db $06,  8
@@ -4032,9 +3916,8 @@ Frameset_be8ed: ; be8ed (2f:68ed)
 	db $08,  8
 	db $07,  4
 	db $ff
-; 0xbe8fe
 
-OAM_be8fe:: ; be8fe (2f:68fe)
+OAM_be8fe::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -4111,22 +3994,19 @@ OAM_be8fe:: ; be8fe (2f:68fe)
 	frame_oam -16,   0, $a4, 4 | OAMF_BANK1 | OAMF_XFLIP | OAMF_YFLIP
 	frame_oam -16,  -8, $a6, 4 | OAMF_BANK1 | OAMF_XFLIP | OAMF_YFLIP
 	db $80
-; 0xbe9fa
 
-Frameset_be9fa:: ; be9fa (2f:69fa)
+Frameset_be9fa::
 	db $00, 20
 	db $ff
-; 0xbe9fd
 
-Frameset_be9fd:: ; be9fd (2f:69fd)
+Frameset_be9fd::
 	db $00, 20
 	db $01,  4
 	db $02,  4
 	db $03,  4
 	db $ff
-; 0xbea06
 
-OAM_bea06: ; bea06 (2f:6a06)
+OAM_bea06:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -4235,14 +4115,12 @@ OAM_bea06: ; bea06 (2f:6a06)
 	frame_oam -16,  -8, $4c, 2 | OAMF_BANK1
 	frame_oam -16,   0, $4c, 2 | OAMF_BANK1 | OAMF_XFLIP
 	db $80
-; 0xbeacc
 
-Frameset_beacc: ; beacc (2f:6acc)
+Frameset_beacc:
 	db $00,  4
 	db $ff
-; 0xbeacf
 
-Frameset_beacf: ; beacf (2f:6acf)
+Frameset_beacf:
 	db $01,  4
 	db $02,  4
 	db $03,  4
@@ -4254,17 +4132,15 @@ Frameset_beacf: ; beacf (2f:6acf)
 	db $03,  4
 	db $02,  4
 	db $ff
-; 0xbeae4
 
-Frameset_beae4: ; beae4 (2f:6ae4)
+Frameset_beae4:
 	db $07,  4
 	db $08,  4
 	db $09,  4
 	db $0a,  4
 	db $ff
-; 0xbeaed
 
-Frameset_beaed: ; beaed (2f:6aed)
+Frameset_beaed:
 	db $0b,  4
 	db $0c,  4
 	db $0d,  4
@@ -4273,9 +4149,8 @@ Frameset_beaed: ; beaed (2f:6aed)
 	db $10,  4
 	db $11,  4
 	db $ff
-; 0xbeafc
 
-OAM_beafc:: ; beafc (2f:6afc)
+OAM_beafc::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -4368,49 +4243,42 @@ OAM_beafc:: ; beafc (2f:6afc)
 	frame_oam -32,   0, $06, 6 | OAMF_BANK1
 	db $80
 
-Frameset_bebcc:: ; bebcc (2f:6bcc)
+Frameset_bebcc::
 	db $00,  4
 	db $01,  4
 	db $02,  4
 	db $ff
-; 0xbebd3
 
-Frameset_bebd3:: ; bebd3 (2f:6bd3)
+Frameset_bebd3::
 	db $05,  4
 	db $06,  4
 	db $07,  4
 	db $ff
-; 0xbebda
 
-Frameset_bebda:: ; bebda (2f:6bda)
+Frameset_bebda::
 	db $00,  4
 	db $ff
-; 0xbebdd
 
-Frameset_bebdd:: ; bebdd (2f:6bdd)
+Frameset_bebdd::
 	db $03,  4
 	db $ff
-; 0xbebe0
 
-Frameset_bebe0:: ; bebe0 (2f:6be0)
+Frameset_bebe0::
 	db $04,  4
 	db $ff
-; 0xbebe3
 
-Frameset_bebe3:: ; bebe3 (2f:6be3)
+Frameset_bebe3::
 	db $08, 20
 	db $09, 10
 	db $0a, 10
 	db $0b, 50
 	db $ff
-; 0xbebec
 
-Frameset_bebec:: ; bebec (2f:6bec)
+Frameset_bebec::
 	db $0b,  4
 	db $ff
-; 0xbebef
 
-OAM_bebef:: ; bebef (2f:6bef)
+OAM_bebef::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -4491,30 +4359,26 @@ OAM_bebef:: ; bebef (2f:6bef)
 	frame_oam -32,   0, $86, 5 | OAMF_BANK1
 	frame_oam -32,   8, $86, 5 | OAMF_BANK1
 	db $80
-; 0xbecc7
 
-Frameset_becc7:: ; becc7 (2f:6cc7)
+Frameset_becc7::
 	db $00,  4
 	db $ff
-; 0xbecca
 
-Frameset_becca:: ; becca (2f:6cca)
+Frameset_becca::
 	db $00,  3
 	db $01,  3
 	db $02,  3
 	db $03,  3
 	db $ff
-; 0xbecd3
 
-Frameset_becd3:: ; becd3 (2f:6cd3)
+Frameset_becd3::
 	db $04,  3
 	db $05,  3
 	db $06,  3
 	db $07,  3
 	db $ff
-; 0xbecdc
 
-OAM_becdc: ; becdc (2f:6cdc)
+OAM_becdc:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -4548,24 +4412,20 @@ OAM_becdc: ; becdc (2f:6cdc)
 	frame_oam   3,   1, $28, 6 | OAMF_BANK1
 	frame_oam  -9,  -4, $36, 4 | OAMF_BANK1
 	db $80
-; 0xbed39
 
-Frameset_bed39: ; bed39 (2f:6d39)
+Frameset_bed39:
 	db $00,  4
 	db $ff
-; 0xbed3c
 
-Frameset_bed3c: ; bed3c (2f:6d3c)
+Frameset_bed3c:
 	db $01,  4
 	db $ff
-; 0xbed3f
 
-Frameset_bed3f: ; bed3f (2f:6d3f)
+Frameset_bed3f:
 	db $02,  4
 	db $ff
-; 0xbed42
 
-OAM_bed42:: ; bed42 (2f:6d42)
+OAM_bed42::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -4662,50 +4522,42 @@ OAM_bed42:: ; bed42 (2f:6d42)
 	frame_oam -16, -16, $14, 4
 	frame_oam -16,   8, $14, 4
 	db $80
-; 0xbee4d
 
-Frameset_bee4d:: ; bee4d (2f:6e4d)
+Frameset_bee4d::
 	db $00,  4
 	db $ff
-; 0xbee50
 
-Frameset_bee50:: ; bee50 (2f:6e50)
+Frameset_bee50::
 	db $00,  4
 	db $01, 10
 	db $ff
-; 0xbee55
 
-Frameset_bee55:: ; bee55 (2f:6e55)
+Frameset_bee55::
 	db $02,  4
 	db $ff
-; 0xbee58
 
-Frameset_bee58:: ; bee58 (2f:6e58)
+Frameset_bee58::
 	db $02,  4
 	db $03, 10
 	db $ff
-; 0xbee5d
 
-Frameset_bee5d:: ; bee5d (2f:6e5d)
+Frameset_bee5d::
 	db $04,  4
 	db $ff
-; 0xbee60
 
-Frameset_bee60:: ; bee60 (2f:6e60)
+Frameset_bee60::
 	db $04,  4
 	db $05,  4
 	db $06,  4
 	db $07,  4
 	db $08,  4
 	db $ff
-; 0xbee6b
 
-Frameset_bee6b:: ; bee6b (2f:6e6b)
+Frameset_bee6b::
 	db $08,  4
 	db $ff
-; 0xbee6e
 
-OAM_bee6e: ; bee6e (2f:6e6e)
+OAM_bee6e:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -4816,19 +4668,16 @@ OAM_bee6e: ; bee6e (2f:6e6e)
 	frame_oam -21,  12, $56, 4 | OAMF_YFLIP
 	frame_oam  -6,   9, $5c, 3
 	db $80
-; 0xbefbe
 
-Frameset_befbe: ; befbe (2f:6fbe)
+Frameset_befbe:
 	db $00,  4
 	db $ff
-; 0xbefc1
 
-Frameset_befc1: ; befc1 (2f:6fc1)
+Frameset_befc1:
 	db $01,  4
 	db $ff
-; 0xbefc4
 
-Frameset_befc4: ; befc4 (2f:6fc4)
+Frameset_befc4:
 	db $01,  4
 	db $02,  4
 	db $03,  4
@@ -4838,9 +4687,8 @@ Frameset_befc4: ; befc4 (2f:6fc4)
 	db $07,  4
 	db $04, 50
 	db $ff
-; 0xbefd5
 
-OAM_befd5: ; befd5 (2f:6fd5)
+OAM_befd5:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -4945,14 +4793,12 @@ OAM_befd5: ; befd5 (2f:6fd5)
 	frame_oam -12,  -8, $f0, 3
 	frame_oam -12,   0, $f0, 3 | OAMF_XFLIP
 	db $80
-; 0xbf100
 
-Frameset_bf100: ; bf100 (2f:7100)
+Frameset_bf100:
 	db $00,  4
 	db $ff
-; 0xbf103
 
-Frameset_bf103: ; bf103 (2f:7103)
+Frameset_bf103:
 	db $01,  1
 	db $08,  1
 	db $02,  1
@@ -4960,9 +4806,8 @@ Frameset_bf103: ; bf103 (2f:7103)
 	db $03,  1
 	db $08,  1
 	db $ff
-; 0xbf110
 
-Frameset_bf110: ; bf110 (2f:7110)
+Frameset_bf110:
 	db $03,  1
 	db $08,  1
 	db $04,  1
@@ -4980,9 +4825,8 @@ Frameset_bf110: ; bf110 (2f:7110)
 	db $06,  1
 	db $08,  1
 	db $ff
-; 0xbf131
 
-OAM_bf131:: ; bf131 (2f:7131)
+OAM_bf131::
 	dw .frame_0
 
 .frame_0
@@ -4995,14 +4839,12 @@ OAM_bf131:: ; bf131 (2f:7131)
 	frame_oam -16,   0, $0e, 5 | OAMF_BANK1
 	frame_oam -16,   8, $0e, 5 | OAMF_BANK1
 	db $80
-; 0xbf154
 
-Frameset_bf154:: ; bf154 (2f:7154)
+Frameset_bf154::
 	db $00,  4
 	db $ff
-; 0xbf157
 
-OAM_bf157: ; bf157 (2f:7157)
+OAM_bf157:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -5116,22 +4958,19 @@ OAM_bf157: ; bf157 (2f:7157)
 	frame_oam -48,  -8, $f0, 5 | OAMF_BANK1
 	frame_oam -48,   0, $f2, 5 | OAMF_BANK1
 	db $80
-; 0xbf28c
 
-Frameset_bf28c: ; bf28c (2f:728c)
+Frameset_bf28c:
 	db $00,  4
 	db $ff
-; 0xbf28f
 
-Frameset_bf28f: ; bf28f (2f:728f)
+Frameset_bf28f:
 	db $01,  4
 	db $02,  4
 	db $03,  4
 	db $04,  4
 	db $ff
-; 0xbf298
 
-Frameset_bf298: ; bf298 (2f:7298)
+Frameset_bf298:
 	db $05,  4
 	db $06,  4
 	db $07,  4
@@ -5139,19 +4978,16 @@ Frameset_bf298: ; bf298 (2f:7298)
 	db $09,  4
 	db $0a,  4
 	db $ff
-; 0xbf2a5
 
-Frameset_bf2a5: ; bf2a5 (2f:72a5)
+Frameset_bf2a5:
 	db $05,  4
 	db $ff
-; 0xbf2a8
 
-Frameset_bf2a8: ; bf2a8 (2f:72a8)
+Frameset_bf2a8:
 	db $0a,  4
 	db $ff
-; 0xbf2ab
 
-OAM_bf2ab: ; bf2ab (2f:72ab)
+OAM_bf2ab:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -5304,14 +5140,12 @@ OAM_bf2ab: ; bf2ab (2f:72ab)
 	frame_oam -13,  -5, $b4, 3
 	frame_oam -13,  -5, $b2, 2
 	db $80
-; 0xbf43b
 
-Frameset_bf43b: ; bf43b (2f:743b)
+Frameset_bf43b:
 	db $00,  4
 	db $ff
-; 0xbf43e
 
-Frameset_bf43e: ; bf43e (2f:743e)
+Frameset_bf43e:
 	db $01, 50
 	db $02,  4
 	db $03,  2
@@ -5328,14 +5162,12 @@ Frameset_bf43e: ; bf43e (2f:743e)
 	db $08,  6
 	db $09,  6
 	db $ff
-; 0xbf45d
 
-Frameset_bf45d: ; bf45d (2f:745d)
+Frameset_bf45d:
 	db $01,  2
 	db $ff
-; 0xbf460
 
-OAM_bf460: ; bf460 (2f:7460)
+OAM_bf460:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -5458,9 +5290,8 @@ OAM_bf460: ; bf460 (2f:7460)
 	frame_oam -20, -17, $7e, 1 | OAMF_BANK1
 	frame_oam -20,  16, $7e, 1 | OAMF_BANK1
 	db $80
-; 0xbf5e0
 
-Frameset_bf5e0: ; bf5e0 (2f:75e0)
+Frameset_bf5e0:
 	db $00, 40
 	db $01,  8
 	db $02, 14
@@ -5486,9 +5317,8 @@ Frameset_bf5e0: ; bf5e0 (2f:75e0)
 	db $02, 20
 	db $01,  4
 	db $ff
-; 0xbf611
 
-OAM_bf611: ; bf611 (2f:7611)
+OAM_bf611:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -5521,31 +5351,26 @@ OAM_bf611: ; bf611 (2f:7611)
 	frame_oam -19,  14, $d2, 1
 	frame_oam -11,  -2, $ce, 1
 	db $80
-; 0xbf65d
 
-Frameset_bf65d: ; bf65d (2f:765d)
+Frameset_bf65d:
 	db $00,  4
 	db $ff
-; 0xbf660
 
-Frameset_bf660: ; bf660 (2f:7660)
+Frameset_bf660:
 	db $00,  4
 	db $01,  4
 	db $ff
-; 0xbf665
 
-Frameset_bf665: ; bf665 (2f:7665)
+Frameset_bf665:
 	db $03,  4
 	db $ff
-; 0xbf668
 
-Frameset_bf668: ; bf668 (2f:7668)
+Frameset_bf668:
 	db $03,  4
 	db $02, 20
 	db $ff
-; 0xbf66d
 
-OAM_bf66d: ; bf66d (2f:766d)
+OAM_bf66d:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -5594,28 +5419,24 @@ OAM_bf66d: ; bf66d (2f:766d)
 .frame_5
 	frame_oam  -8,  -4, $7a, 1
 	db $80
-; 0xbf6df
 
-Frameset_bf6df: ; bf6df (2f:76df)
+Frameset_bf6df:
 	db $00,  4
 	db $ff
-; 0xbf6e2
 
-Frameset_bf6e2: ; bf6e2 (2f:76e2)
+Frameset_bf6e2:
 	db $00,  4
 	db $01,  4
 	db $04,  4
 	db $02,  4
 	db $03,  4
 	db $ff
-; 0xbf6ed
 
-Frameset_bf6ed: ; bf6ed (2f:76ed)
+Frameset_bf6ed:
 	db $05,  4
 	db $ff
-; 0xbf6f0
 
-OAM_bf6f0: ; bf6f0 (2f:76f0)
+OAM_bf6f0:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -5739,43 +5560,37 @@ OAM_bf6f0: ; bf6f0 (2f:76f0)
 	frame_oam -48,  -8, $ea, 2 | OAMF_BANK1
 	frame_oam -48,   0, $ea, 2 | OAMF_BANK1
 	db $80
-; 0xbf826
 
-Frameset_bf826: ; bf826 (2f:7826)
+Frameset_bf826:
 	db $00,  4
 	db $ff
-; 0xbf829
 
-Frameset_bf829: ; bf829 (2f:7829)
+Frameset_bf829:
 	db $01,  4
 	db $02,  4
 	db $03,  4
 	db $04,  4
 	db $ff
-; 0xbf832
 
-Frameset_bf832: ; bf832 (2f:7832)
+Frameset_bf832:
 	db $05,  4
 	db $ff
-; 0xbf835
 
-Frameset_bf835: ; bf835 (2f:7835)
+Frameset_bf835:
 	db $06,  3
 	db $07,  3
 	db $08,  3
 	db $09,  3
 	db $ff
-; 0xbf83e
 
-Frameset_bf83e: ; bf83e (2f:783e)
+Frameset_bf83e:
 	db $0a,  3
 	db $0b,  3
 	db $0c,  3
 	db $0d,  3
 	db $ff
-; 0xbf847
 
-OAM_bf847:: ; bf847 (2f:7847)
+OAM_bf847::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -5844,16 +5659,13 @@ OAM_bf847:: ; bf847 (2f:7847)
 	frame_oam -32,  -8, $8c, 6
 	frame_oam -32,   0, $8e, 6
 	db $80
-; 0xbf923
 
-Frameset_bf923:: ; bf923 (2f:7923)
+Frameset_bf923::
 	db $00,  4
 	db $01,  4
 	db $02,  4
 	db $ff
-; 0xbf92a
 
-Frameset_bf92a:: ; bf92a (2f:792a)
+Frameset_bf92a::
 	db $03,  4
 	db $ff
-; 0xbf92d

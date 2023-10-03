@@ -1,4 +1,4 @@
-HammerBotFunc: ; 4423b (11:423b)
+HammerBotFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Init)
 	ld [hld], a
@@ -1013,4 +1013,3 @@ HammerBotFunc: ; 4423b (11:423b)
 	or OBJ_INTERACTION_00
 	ld [hld], a
 	ret
-; 0x448d7

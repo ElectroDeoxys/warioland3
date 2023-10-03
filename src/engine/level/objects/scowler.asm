@@ -1,4 +1,4 @@
-ScowlerFunc: ; 544e5 (15:44e5)
+ScowlerFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -645,7 +645,7 @@ ScowlerFunc: ; 544e5 (15:44e5)
 	ld bc, Data_60a90
 	jp Func_34a0
 
-FloatingRingSpawnerFunc: ; 54981 (15:4981)
+FloatingRingSpawnerFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_54997)
 	ld [hld], a
@@ -678,7 +678,7 @@ FloatingRingSpawnerFunc: ; 54981 (15:4981)
 	ld [wCurObjAction], a
 	ret
 
-FloatingRingFunc: ; 549b6 (15:49b6)
+FloatingRingFunc:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjUpdateFunction + 1
@@ -786,7 +786,7 @@ FloatingRingFunc: ; 549b6 (15:49b6)
 	ld [wCurObjStateDuration], a
 	ret
 
-ScrowlerTentacleFunc: ; 54a70 (15:4a70)
+ScrowlerTentacleFunc:
 	ld hl, wCurObjFlags
 	set 4, [hl]
 	ld hl, wCurObjUpdateFunction + 1
@@ -969,7 +969,7 @@ ScrowlerTentacleFunc: ; 54a70 (15:4a70)
 	ld [hli], a
 	ret
 
-InkFunc: ; 54b86 (15:4b86)
+InkFunc:
 .Left:
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -1046,7 +1046,7 @@ InkFunc: ; 54b86 (15:4b86)
 	ld [wCurObjFlags], a
 	ret
 
-Func_54c07: ; 54c07 (15:4c07)
+Func_54c07:
 	ld hl, w1d147
 	ld a, [hl]
 	and a
@@ -1111,7 +1111,7 @@ WriteScowlerBGPals:
 	ld b, 8
 	jp Func_35e5
 
-Pals_54c87: ; 54c87 (15:4c87)
+Pals_54c87:
 	rgb  0, 20,  0
 	rgb 31, 27,  0
 	rgb  0, 17, 31
@@ -1127,7 +1127,7 @@ Pals_54c87: ; 54c87 (15:4c87)
 	rgb  0, 28,  0
 	rgb  0,  0,  0
 
-Pals_54c9f: ; 54c9f (15:4c9f)
+Pals_54c9f:
 	rgb  0, 10,  0
 	rgb 31, 13,  0
 	rgb 16, 24, 15
@@ -1143,7 +1143,7 @@ Pals_54c9f: ; 54c9f (15:4c9f)
 	rgb  0, 14,  0
 	rgb  0,  0,  0
 
-Pals_54cb7: ; 54cb7 (15:4cb7)
+Pals_54cb7:
 	rgb  1, 11, 23
 	rgb  2,  8, 19
 	rgb  0,  6, 15
@@ -1184,7 +1184,7 @@ Pals_54cb7: ; 54cb7 (15:4cb7)
 	rgb 10,  0,  6
 	rgb  2,  0,  0
 
-Pals_54cf7: ; 54cf7 (15:4cf7)
+Pals_54cf7:
 	rgb  1,  5, 13
 	rgb  0,  3,  8
 	rgb  0,  1,  5

@@ -1,4 +1,4 @@
-Music_GolfClear_Ch1: ; 39649 (0e:5649)
+Music_GolfClear_Ch1:
 	semitone_offset 1
 	tempo 100
 	wave WAVE_52
@@ -24,9 +24,8 @@ Music_GolfClear_Ch1: ; 39649 (0e:5649)
 	note NOTE_DURATION_6, C_5
 	audio_wait_24
 	audio_end
-; 0x3966a
 
-Music_GolfClear_Ch2: ; 3966a (0e:566a)
+Music_GolfClear_Ch2:
 	semitone_offset 1
 	wave WAVE_48
 	volume 75
@@ -51,9 +50,8 @@ Music_GolfClear_Ch2: ; 3966a (0e:566a)
 	note NOTE_DURATION_6, E_4
 	audio_wait_24
 	audio_end
-; 0x39689
 
-Music_GolfClear_Ch3: ; 39689 (0e:5689)
+Music_GolfClear_Ch3:
 	semitone_offset 1
 	wave WAVE_61
 	volume 108
@@ -78,9 +76,8 @@ Music_GolfClear_Ch3: ; 39689 (0e:5689)
 	note NOTE_DURATION_6, C_0
 	audio_wait_24
 	audio_end
-; 0x396a8
 
-Music_GolfClear_Ch4: ; 396a8 (0e:56a8)
+Music_GolfClear_Ch4:
 	semitone_offset 0
 	wave WAVE_28
 	volume 66
@@ -96,9 +93,8 @@ Music_GolfClear_Ch4: ; 396a8 (0e:56a8)
 	note NOTE_DURATION_2
 	audio_wait_2
 	audio_end
-; 0x396bc
 
-Music_GolfClear: ; 396bc (0e:56bc)
+Music_GolfClear:
 	db 4, 0
 	dw Music_GolfClear_Ch1
 	dw Music_GolfClear_Ch2

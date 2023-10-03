@@ -1,4 +1,4 @@
-OAM_1dc000:: ; 1dc000 (77:4000)
+OAM_1dc000::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -311,42 +311,36 @@ OAM_1dc000:: ; 1dc000 (77:4000)
 	frame_oam  -8,   0, $6c, 0 | OAMF_XFLIP
 	frame_oam  -8,  -8, $6e, 0 | OAMF_XFLIP
 	db $80
-; 0x1dc374
 
-Frameset_1dc374:: ; 1dc374 (77:4374)
+Frameset_1dc374::
 	db $00,  5
 	db $01,  5
 	db $02,  5
 	db $03,  5
 	db $01,  5
 	db $ff
-; 0x1dc37f
 
-Frameset_1dc37f:: ; 1dc37f (77:437f)
+Frameset_1dc37f::
 	db $04,  6
 	db $05,  6
 	db $ff
-; 0x1dc384
 
-Frameset_1dc384:: ; 1dc384 (77:4384)
+Frameset_1dc384::
 	db $05,  6
 	db $04,  6
 	db $ff
-; 0x1dc389
 
-Frameset_1dc389:: ; 1dc389 (77:4389)
+Frameset_1dc389::
 	db $06,  4
 	db $07,  4
 	db $ff
-; 0x1dc38e
 
-Frameset_1dc38e:: ; 1dc38e (77:438e)
+Frameset_1dc38e::
 	db $07,  4
 	db $06,  4
 	db $ff
-; 0x1dc393
 
-Frameset_1dc393:: ; 1dc393 (77:4393)
+Frameset_1dc393::
 	db $00,  3
 	db $06,  3
 	db $07,  3
@@ -366,30 +360,26 @@ Frameset_1dc393:: ; 1dc393 (77:4393)
 	db $14,  3
 	db $15,  3
 	db $ff
-; 0x1dc3b8
 
-Frameset_1dc3b8:: ; 1dc3b8 (77:43b8)
+Frameset_1dc3b8::
 	db $0a,  5
 	db $0b,  5
 	db $0c,  5
 	db $0d,  5
 	db $0b,  5
 	db $ff
-; 0x1dc3c3
 
-Frameset_1dc3c3:: ; 1dc3c3 (77:43c3)
+Frameset_1dc3c3::
 	db $0e,  6
 	db $0f,  6
 	db $ff
-; 0x1dc3c8
 
-Frameset_1dc3c8:: ; 1dc3c8 (77:43c8)
+Frameset_1dc3c8::
 	db $0f,  6
 	db $0e,  6
 	db $ff
-; 0x1dc3cd
 
-OAM_1dc3cd:: ; 1dc3cd (77:43cd)
+OAM_1dc3cd::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -426,9 +416,8 @@ OAM_1dc3cd:: ; 1dc3cd (77:43cd)
 	frame_oam -24,  -8, $5e, 0 | OAMF_XFLIP
 	frame_oam -24,   0, $66, 0 | OAMF_XFLIP
 	db $80
-; 0x1dc40f
 
-Frameset_1dc40f:: ; 1dc40f (77:440f)
+Frameset_1dc40f::
 	db $00,  6
 	db $01,  6
 	db $02,  4
@@ -444,9 +433,8 @@ Frameset_1dc40f:: ; 1dc40f (77:440f)
 	db $02,  8
 	db $01, 30
 	db $ff
-; 0x1dc42c
 
-Frameset_1dc42c:: ; 1dc42c (77:442c)
+Frameset_1dc42c::
 	db $03,  6
 	db $04,  6
 	db $05,  4
@@ -462,9 +450,8 @@ Frameset_1dc42c:: ; 1dc42c (77:442c)
 	db $05,  8
 	db $04, 30
 	db $ff
-; 0x1dc449
 
-OAM_1dc449:: ; 1dc449 (77:4449)
+OAM_1dc449::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -863,25 +850,22 @@ OAM_1dc449:: ; 1dc449 (77:4449)
 	frame_oam -14,  -7, $74, 0 | OAMF_XFLIP
 	frame_oam -14, -15, $76, 0 | OAMF_XFLIP
 	db $80
-; 0x1dc8fb
 
-Frameset_1dc8fb:: ; 1dc8fb (77:48fb)
+Frameset_1dc8fb::
 	db $00,  3
 	db $01,  3
 	db $02,  3
 	db $03,  3
 	db $ff
-; 0x1dc904
 
-Frameset_1dc904:: ; 1dc904 (77:4904)
+Frameset_1dc904::
 	db $04,  3
 	db $05,  3
 	db $06,  3
 	db $07,  3
 	db $ff
-; 0x1dc90d
 
-Frameset_1dc90d:: ; 1dc90d (77:490d)
+Frameset_1dc90d::
 	db $08,  2
 	db $09,  2
 	db $0a,  2
@@ -895,9 +879,8 @@ Frameset_1dc90d:: ; 1dc90d (77:490d)
 	db $11,  6
 	db $12,  6
 	db $ff
-; 0x1dc926
 
-Frameset_1dc926:: ; 1dc926 (77:4926)
+Frameset_1dc926::
 	db $13,  2
 	db $14,  2
 	db $15,  2
@@ -911,9 +894,8 @@ Frameset_1dc926:: ; 1dc926 (77:4926)
 	db $1c,  6
 	db $1d,  6
 	db $ff
-; 0x1dc93f
 
-OAM_1dc93f:: ; 1dc93f (77:493f)
+OAM_1dc93f::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1226,55 +1208,48 @@ OAM_1dc93f:: ; 1dc93f (77:493f)
 	frame_oam -21,  -8, $74, 0 | OAMF_XFLIP
 	frame_oam -21, -16, $76, 0 | OAMF_XFLIP
 	db $80
-; 0x1dccc0
 
-Frameset_1dccc0:: ; 1dccc0 (77:4cc0)
+Frameset_1dccc0::
 	db $00,  8
 	db $01,  9
 	db $02,  7
 	db $03,  7
 	db $ff
-; 0x1dccc9
 
-Frameset_1dccc9:: ; 1dccc9 (77:4cc9)
+Frameset_1dccc9::
 	db $06,  8
 	db $07,  9
 	db $08,  7
 	db $09,  7
 	db $ff
-; 0x1dccd2
 
 ; unreferenced
-Frameset_1dccd2: ; 1dccd2 (77:4cd2)
+Frameset_1dccd2:
 	db $03,  4
 	db $ff
-; 0x1dccd5
 
 ; unreferenced
-Frameset_1dccd5: ; 1dccd5 (77:4cd5)
+Frameset_1dccd5:
 	db $09,  4
 	db $ff
-; 0x1dccd8
 
-Frameset_1dccd8:: ; 1dccd8 (77:4cd8)
+Frameset_1dccd8::
 	db $03,  1
 	db $04,  3
 	db $05,  3
 	db $0a,  3
 	db $09,  1
 	db $ff
-; 0x1dcce3
 
-Frameset_1dcce3:: ; 1dcce3 (77:4ce3)
+Frameset_1dcce3::
 	db $09,  1
 	db $0a,  3
 	db $05,  3
 	db $04,  3
 	db $03,  1
 	db $ff
-; 0x1dccee
 
-Frameset_1dccee:: ; 1dccee (77:4cee)
+Frameset_1dccee::
 	db $0b,  3
 	db $0c,  3
 	db $03,  1
@@ -1285,9 +1260,8 @@ Frameset_1dccee:: ; 1dccee (77:4cee)
 	db $0c,  3
 	db $03,  1
 	db $ff
-; 0x1dcd01
 
-Frameset_1dcd01:: ; 1dcd01 (77:4d01)
+Frameset_1dcd01::
 	db $0b,  1
 	db $0d,  2
 	db $0b,  1
@@ -1303,9 +1277,8 @@ Frameset_1dcd01:: ; 1dcd01 (77:4d01)
 	db $01, 20
 	db $00,  8
 	db $ff
-; 0x1dcd1e
 
-Frameset_1dcd1e:: ; 1dcd1e (77:4d1e)
+Frameset_1dcd1e::
 	db $10,  3
 	db $11,  3
 	db $09,  1
@@ -1316,9 +1289,8 @@ Frameset_1dcd1e:: ; 1dcd1e (77:4d1e)
 	db $11,  3
 	db $09,  1
 	db $ff
-; 0x1dcd31
 
-Frameset_1dcd31:: ; 1dcd31 (77:4d31)
+Frameset_1dcd31::
 	db $10,  1
 	db $12,  2
 	db $10,  1
@@ -1334,25 +1306,22 @@ Frameset_1dcd31:: ; 1dcd31 (77:4d31)
 	db $07, 20
 	db $06,  8
 	db $ff
-; 0x1dcd4e
 
-Frameset_1dcd4e:: ; 1dcd4e (77:4d4e)
+Frameset_1dcd4e::
 	db $15,  7
 	db $16,  7
 	db $17,  7
 	db $16,  7
 	db $ff
-; 0x1dcd57
 
-Frameset_1dcd57:: ; 1dcd57 (77:4d57)
+Frameset_1dcd57::
 	db $18,  7
 	db $19,  7
 	db $1a,  7
 	db $19,  7
 	db $ff
-; 0x1dcd60
 
-OAM_1dcd60:: ; 1dcd60 (77:4d60)
+OAM_1dcd60::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1553,9 +1522,8 @@ OAM_1dcd60:: ; 1dcd60 (77:4d60)
 	frame_oam -16,  -8, $2c, 0 | OAMF_XFLIP
 	frame_oam -16, -16, $2e, 0 | OAMF_XFLIP
 	db $80
-; 0x1dcfb0
 
-Frameset_1dcfb0:: ; 1dcfb0 (77:4fb0)
+Frameset_1dcfb0::
 	db $00,  4
 	db $01,  4
 	db $02,  4
@@ -1589,9 +1557,8 @@ Frameset_1dcfb0:: ; 1dcfb0 (77:4fb0)
 	db $02,  4
 	db $01,  4
 	db $ff
-; 0x1dcff1
 
-OAM_1dcff1:: ; 1dcff1 (77:4ff1)
+OAM_1dcff1::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1817,19 +1784,17 @@ OAM_1dcff1:: ; 1dcff1 (77:4ff1)
 	frame_oam -25,   8, $78, 0 | OAMF_XFLIP
 	frame_oam -25,   0, $7a, 0 | OAMF_XFLIP
 	db $80
-; 0x1dd230
 
-Frameset_1dd230:: ; 1dd230 (77:5230)
+Frameset_1dd230::
 	db $03,  2
 	db $04,  1
 	db $05,  3
 	db $04,  1
 	db $03,  2
 	db $ff
-; 0x1dd23b
 
 ; unreferenced
-Frameset_1dd23b: ; 1dd23b (77:523b)
+Frameset_1dd23b:
 	db $00,  3
 	db $01,  2
 	db $02,  2
@@ -1855,24 +1820,21 @@ Frameset_1dd23b: ; 1dd23b (77:523b)
 	db $02,  2
 	db $01,  2
 	db $ff
-; 0x1dd26c
 
-Frameset_1dd26c:: ; 1dd26c (77:526c)
+Frameset_1dd26c::
 	db $08, 60
 	db $ff
-; 0x1dd26f
 
 ; unreferenced
-Frameset_1dd26f: ; 1dd26f (77:526f)
+Frameset_1dd26f:
 	db $01,  2
 	db $00,  2
 	db $06,  3
 	db $07,  5
 	db $01,  2
 	db $ff
-; 0x1dd27a
 
-Frameset_1dd27a:: ; 1dd27a (77:527a)
+Frameset_1dd27a::
 	db $08,  1
 	db $0b,  1
 	db $12,  2
@@ -1880,33 +1842,29 @@ Frameset_1dd27a:: ; 1dd27a (77:527a)
 	db $11,  2
 	db $02,  1
 	db $ff
-; 0x1dd287
 
-Frameset_1dd287:: ; 1dd287 (77:5287)
+Frameset_1dd287::
 	db $02,  2
 	db $08,  3
 	db $0b,  2
 	db $ff
-; 0x1dd28e
 
-Frameset_1dd28e:: ; 1dd28e (77:528e)
+Frameset_1dd28e::
 	db $0b,  2
 	db $08,  3
 	db $02,  2
 	db $ff
-; 0x1dd295
 
-Frameset_1dd295:: ; 1dd295 (77:5295)
+Frameset_1dd295::
 	db $0c,  2
 	db $0d,  1
 	db $0e,  3
 	db $0d,  1
 	db $0c,  2
 	db $ff
-; 0x1dd2a0
 
 ; unreferenced
-Frameset_1dd2a0: ; 1dd2a0 (77:52a0)
+Frameset_1dd2a0:
 	db $09,  3
 	db $0a,  2
 	db $0b,  2
@@ -1932,19 +1890,17 @@ Frameset_1dd2a0: ; 1dd2a0 (77:52a0)
 	db $0b,  2
 	db $0a,  2
 	db $ff
-; 0x1dd2d1
 
-Frameset_1dd2d1:: ; 1dd2d1 (77:52d1)
+Frameset_1dd2d1::
 	db $0a,  2
 	db $09,  2
 	db $0f,  3
 	db $10,  5
 	db $0a,  2
 	db $ff
-; 0x1dd2dc
 
 ; unreferenced
-Frameset_1dd2dc: ; 1dd2dc (77:52dc)
+Frameset_1dd2dc:
 	db $08,  1
 	db $02,  1
 	db $11,  2
@@ -1952,33 +1908,28 @@ Frameset_1dd2dc: ; 1dd2dc (77:52dc)
 	db $12,  2
 	db $0b,  1
 	db $ff
-; 0x1dd2e9
 
 ; unreferenced
-Frameset_1dd2e9: ; 1dd2e9 (77:52e9)
+Frameset_1dd2e9:
 	db $14,  7
 	db $15,  7
 	db $ff
-; 0x1dd2ee
 
-Frameset_1dd2ee:: ; 1dd2ee (77:52ee)
+Frameset_1dd2ee::
 	db $16,  7
 	db $17,  7
 	db $ff
-; 0x1dd2f3
 
-Frameset_1dd2f3:: ; 1dd2f3 (77:52f3)
+Frameset_1dd2f3::
 	db $02,  2
 	db $ff
-; 0x1dd2f6
 
-Frameset_1dd2f6:: ; 1dd2f6 (77:52f6)
+Frameset_1dd2f6::
 	db $0b,  2
 	db $ff
-; 0x1dd2f9
 
 ; unreferenced
-Frameset_1dd2f9: ; 1dd2f9 (77:52f9)
+Frameset_1dd2f9:
 	db $08,  2
 	db $0b,  2
 	db $12,  3
@@ -1986,10 +1937,9 @@ Frameset_1dd2f9: ; 1dd2f9 (77:52f9)
 	db $11,  3
 	db $02,  2
 	db $ff
-; 0x1dd306
 
 ; unreferenced
-Frameset_1dd306: ; 1dd306 (77:5306)
+Frameset_1dd306:
 	db $08,  2
 	db $02,  2
 	db $11,  3
@@ -1997,14 +1947,12 @@ Frameset_1dd306: ; 1dd306 (77:5306)
 	db $12,  3
 	db $0b,  2
 	db $ff
-; 0x1dd313
 
-Frameset_1dd313:: ; 1dd313 (77:5313)
+Frameset_1dd313::
 	db $18,  4
 	db $ff
-; 0x1dd316
 
-Frameset_1dd316:: ; 1dd316 (77:5316)
+Frameset_1dd316::
 	db $18,  4
 	db $03,  2
 	db $04,  2
@@ -2012,9 +1960,8 @@ Frameset_1dd316:: ; 1dd316 (77:5316)
 	db $04,  2
 	db $03,  2
 	db $ff
-; 0x1dd323
 
-Frameset_1dd323:: ; 1dd323 (77:5323)
+Frameset_1dd323::
 	db $18,  4
 	db $0c,  2
 	db $0d,  2
@@ -2022,4 +1969,3 @@ Frameset_1dd323:: ; 1dd323 (77:5323)
 	db $0d,  2
 	db $0c,  2
 	db $ff
-; 0x1dd330

@@ -1,4 +1,4 @@
-Music_TheFrigidSea_Ch1: ; 335c3 (0c:75c3)
+Music_TheFrigidSea_Ch1:
 	semitone_offset 0
 
 .loop
@@ -254,9 +254,8 @@ Music_TheFrigidSea_Ch1: ; 335c3 (0c:75c3)
 	audio_jump .loop
 .end
 	audio_end
-; 0x336d2
 
-Music_TheFrigidSea_Ch2: ; 336d2 (0c:76d2)
+Music_TheFrigidSea_Ch2:
 	semitone_offset 0
 
 .loop
@@ -340,9 +339,8 @@ Music_TheFrigidSea_Ch2: ; 336d2 (0c:76d2)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3374b
 
-Music_TheFrigidSea_Ch3: ; 3374b (0c:774b)
+Music_TheFrigidSea_Ch3:
 	semitone_offset 0
 
 .loop
@@ -476,9 +474,8 @@ Music_TheFrigidSea_Ch3: ; 3374b (0c:774b)
 	audio_jump .loop
 .end
 	audio_end
-; 0x337f9
 
-Music_TheFrigidSea: ; 337f9 (c:77f9)
+Music_TheFrigidSea:
 	db $3, $2
 	dw Music_TheFrigidSea_Ch1
 	dw Music_TheFrigidSea_Ch2

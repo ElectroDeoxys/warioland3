@@ -1,4 +1,4 @@
-MuddeeStingerFunc: ; 4ca16 (13:4a16)
+MuddeeStingerFunc:
 	ld hl, wCurObjFlags
 	set OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -139,7 +139,6 @@ MuddeeStingerFunc: ; 4ca16 (13:4a16)
 	ld a, [hl]
 	ld [wCurObjXPos + 1], a
 	ret
-; 0x4caed
 
 Data_4caed:
 	db  25,   0

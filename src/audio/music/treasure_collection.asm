@@ -1,4 +1,4 @@
-Music_TreasureCollection_Ch1: ; 3b16c (0e:716c)
+Music_TreasureCollection_Ch1:
 	semitone_offset 0
 
 .loop
@@ -89,9 +89,8 @@ Music_TreasureCollection_Ch1: ; 3b16c (0e:716c)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3b1da
 
-Music_TreasureCollection_Ch2: ; 3b1da (0e:71da)
+Music_TreasureCollection_Ch2:
 	semitone_offset 0
 
 .loop
@@ -181,9 +180,8 @@ Music_TreasureCollection_Ch2: ; 3b1da (0e:71da)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3b246
 
-Music_TreasureCollection_Ch3: ; 3b246 (0e:7246)
+Music_TreasureCollection_Ch3:
 	semitone_offset 0
 
 .loop
@@ -242,9 +240,8 @@ Music_TreasureCollection_Ch3: ; 3b246 (0e:7246)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3b2a6
 
-Music_TreasureCollection: ; 3b2a6 (0e:72a6)
+Music_TreasureCollection:
 	db 3, 2
 	dw Music_TreasureCollection_Ch1
 	dw Music_TreasureCollection_Ch2
@@ -258,4 +255,3 @@ Music_TreasureCollection: ; 3b2a6 (0e:72a6)
 	dw Music_TreasureCollection_Ch1.end
 	dw Music_TreasureCollection_Ch2.end
 	dw Music_TreasureCollection_Ch3.end
-; 0x3b2ba

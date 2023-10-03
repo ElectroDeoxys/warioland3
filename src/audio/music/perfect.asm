@@ -1,4 +1,4 @@
-Music_Perfect_Ch1: ; 3ac45 (0e:6c45)
+Music_Perfect_Ch1:
 	semitone_offset 1
 	tempo 60
 	wave WAVE_17
@@ -307,9 +307,8 @@ Music_Perfect_Ch1: ; 3ac45 (0e:6c45)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3adcd
 
-Music_Perfect_Ch2: ; 3adcd (0e:6dcd)
+Music_Perfect_Ch2:
 	semitone_offset 1
 	wave WAVE_47
 	volume 75
@@ -715,9 +714,8 @@ Music_Perfect_Ch2: ; 3adcd (0e:6dcd)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3af7d
 
-Music_Perfect_Ch3: ; 3af7d (0e:6f7d)
+Music_Perfect_Ch3:
 	semitone_offset 1
 	wave WAVE_5E
 	volume 108
@@ -1000,9 +998,8 @@ Music_Perfect_Ch3: ; 3af7d (0e:6f7d)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3b0c1
 
-Music_Perfect_Ch4: ; 3b0c1 (0e:70c1)
+Music_Perfect_Ch4:
 	semitone_offset 0
 	wave WAVE_28
 	volume 75
@@ -1095,9 +1092,8 @@ Music_Perfect_Ch4: ; 3b0c1 (0e:70c1)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3b152
 
-Music_Perfect: ; 3b152 (0e:7152)
+Music_Perfect:
 	db 4, 2
 	dw Music_Perfect_Ch1
 	dw Music_Perfect_Ch2
@@ -1114,4 +1110,3 @@ Music_Perfect: ; 3b152 (0e:7152)
 	dw Music_Perfect_Ch2.end
 	dw Music_Perfect_Ch3.end
 	dw Music_Perfect_Ch4.end
-; 0x3b16c

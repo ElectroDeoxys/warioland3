@@ -1,4 +1,4 @@
-UpdateWarioStates_Group2: ; 19c1b (6:5c1b)
+UpdateWarioStates_Group2:
 	ld a, [wWarioState]
 	sub $30
 	jumptable
@@ -51,9 +51,8 @@ UpdateWarioStates_Group2: ; 19c1b (6:5c1b)
 	dw InvalidWarioStateReset            ; WST_UNUSED_5D
 	dw InvalidWarioStateReset            ; WST_UNUSED_5E
 	dw InvalidWarioStateReset            ; WST_UNUSED_5F
-; 0x19c81
 
-SetState_Slipping: ; 19c81 (6:5c81)
+SetState_Slipping:
 	ld a, WST_SLIPPING
 	ld [wWarioState], a
 	xor a
@@ -79,9 +78,8 @@ SetState_Slipping: ; 19c81 (6:5c81)
 .got_frameset
 	update_anim_1
 	ret
-; 0x19ce7
 
-UpdateState_Slipping: ; 19ce7 (6:5ce7)
+UpdateState_Slipping:
 	farcall Func_19b25
 	ld a, [wRoomTransitionParam]
 	and a
@@ -222,16 +220,15 @@ UpdateState_Slipping: ; 19ce7 (6:5ce7)
 	ld [wDirection], a
 	farcall SetState_Idling
 	ret
-; 0x19e7f
 
-SetState_CrouchSlipping: ; 19e7f (6:5e7f)
+SetState_CrouchSlipping:
 	xor a
 	ld [wWarioStateCounter], a
 	ld a, [wDirection]
 	ld [wWarioStateCycles], a
 ;	fallthrough
 
-Func_19e89: ; 19e89 (6:5e89)
+Func_19e89:
 	ld a, WST_CROUCH_SLIPPING
 	ld [wWarioState], a
 	xor a
@@ -257,9 +254,8 @@ Func_19e89: ; 19e89 (6:5e89)
 .got_frameset
 	update_anim_1
 	ret
-; 0x19ef1
 
-UpdateState_CrouchSlipping: ; 19ef1 (6:5ef1)
+UpdateState_CrouchSlipping:
 	farcall Func_19b25
 	ld a, [wRoomTransitionParam]
 	and a
@@ -331,9 +327,8 @@ UpdateState_CrouchSlipping: ; 19ef1 (6:5ef1)
 	ld [wDirection], a
 	farcall CrouchOrSlideIfOnSlope
 	ret
-; 0x19fb6
 
-SetState_DraggedDown: ; 19fb6 (6:5fb6)
+SetState_DraggedDown:
 	ld a, WST_DRAGGED_DOWN
 	ld [wWarioState], a
 
@@ -379,9 +374,8 @@ SetState_DraggedDown: ; 19fb6 (6:5fb6)
 .asm_1a036
 	update_anim_1
 	ret
-; 0x1a046
 
-UpdateState_DraggedDown: ; 1a046 (6:6046)
+UpdateState_DraggedDown:
 	update_anim_1
 	ld a, [wAutoMoveState]
 	and a
@@ -396,9 +390,8 @@ UpdateState_DraggedDown: ; 1a046 (6:6046)
 	ld a, LVLEND_GAME_OVER
 	ld [wLevelEndScreen], a
 	ret
-; 0x1a077
 
-UpdateState_Teleporting: ; 1a077 (6:6077)
+UpdateState_Teleporting:
 	ld a, TRUE
 	ld [wIsIntangible], a
 	update_anim_1
@@ -419,12 +412,11 @@ UpdateState_Teleporting: ; 1a077 (6:6077)
 	res ROOMTRANSITIONFLAG_3_F, [hl]
 	jp TriggerRoomTransition
 
-PlayTeleportingSFX: ; 1a0ab (6:60ab)
+PlayTeleportingSFX:
 	play_sfx SFX_082
 	ret
-; 0x1a0b4
 
-UpdateState_WaterTeleporting: ; 1a0b4 (6:60b4)
+UpdateState_WaterTeleporting:
 	ld a, TRUE
 	ld [wIsIntangible], a
 	update_anim_1
@@ -444,9 +436,8 @@ UpdateState_WaterTeleporting: ; 1a0b4 (6:60b4)
 	ld hl, wRoomTransitionParam
 	res ROOMTRANSITIONFLAG_3_F, [hl]
 	jp TriggerRoomTransition
-; 0x1a0e8
 
-SetState_SandFalling: ; 1a0e8 (6:60e8)
+SetState_SandFalling:
 	xor a
 	ld [wGrabState], a
 	ld a, WST_SAND_FALLING
@@ -475,13 +466,13 @@ SetState_SandFalling: ; 1a0e8 (6:60e8)
 	call SetWarioPal
 ;	fallthrough
 
-Func_1a12a: ; 1a12a (6:612a)
+Func_1a12a:
 	load_gfx WarioAirborneGfx
 	call LoadWarioGfx
 	load_oam OAM_15955
 ;	fallthrough
 
-Func_1a14b: ; 1a14b (6:614b)
+Func_1a14b:
 	xor a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
@@ -495,9 +486,8 @@ Func_1a14b: ; 1a14b (6:614b)
 .asm_1a16e
 	update_anim_1
 	ret
-; 0x1a17e
 
-UpdateState_SandFalling: ; 1a17e (6:617e)
+UpdateState_SandFalling:
 	call Func_1b2c0
 	ld a, [wWarioState]
 	cp WST_SAND_FALLING
@@ -509,9 +499,8 @@ UpdateState_SandFalling: ; 1a17e (6:617e)
 	ret z
 	update_pos_y
 	jp SetState_SandIdling
-; 0x1a1a7
 
-SetState_SandJumping: ; 1a1a7 (6:61a7)
+SetState_SandJumping:
 	play_sfx SFX_JUMP
 	ld a, WST_SAND_JUMPING
 	ld [wWarioState], a
@@ -522,9 +511,8 @@ SetState_SandJumping: ; 1a1a7 (6:61a7)
 	inc a
 	ld [wJumpVelTable], a
 	jp Func_1a12a
-; 0x1a1c5
 
-UpdateState_SandJumping: ; 1a1c5 (6:61c5)
+UpdateState_SandJumping:
 	farcall Func_19b25
 	ld a, [wIsInSand]
 	and a
@@ -562,9 +550,8 @@ UpdateState_SandJumping: ; 1a1c5 (6:61c5)
 	and a
 	ret z
 	jp SetState_SandFalling
-; 0x1a236
 
-SetState_SandIdling: ; 1a236 (6:6236)
+SetState_SandIdling:
 	ld a, WST_SAND_IDLING
 	ld [wWarioState], a
 
@@ -587,14 +574,12 @@ SetState_SandIdling: ; 1a236 (6:6236)
 .asm_1a286
 	update_anim_1
 	ret
-; 0x1a296
 
-UpdateState_SandIdling: ; 1a296 (6:6296)
+UpdateState_SandIdling:
 	call Func_1b322
 	ret
-; 0x1a29a
 
-SetState_SandWalking: ; 1a29a (6:629a)
+SetState_SandWalking:
 	xor a
 	ld [wWalkVelIndex], a
 
@@ -623,9 +608,8 @@ SetState_SandWalking: ; 1a29a (6:629a)
 	ld [wJumpVelTable], a
 	farcall Func_1e6ea
 	ret
-; 0x1a2d6
 
-UpdateState_SandWalking: ; 1a2d6 (6:62d6)
+UpdateState_SandWalking:
 	ld a, [wSFXLoopCounter]
 	sub 1
 	ld [wSFXLoopCounter], a
@@ -650,9 +634,8 @@ UpdateState_SandWalking: ; 1a2d6 (6:62d6)
 	and a
 	jp z, SetState_SandFalling
 	ret
-; 0x1a330
 
-SetState_SandTurning: ; 1a330 (6:6330)
+SetState_SandTurning:
 	ld a, WST_SAND_TURNING
 	ld [wWarioState], a
 
@@ -677,9 +660,8 @@ SetState_SandTurning: ; 1a330 (6:6330)
 .asm_1a384
 	update_anim_1
 	ret
-; 0x1a394
 
-UpdateState_SandTurning: ; 1a394 (6:6394)
+UpdateState_SandTurning:
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jp nz, SetState_SandJumping
@@ -691,9 +673,8 @@ UpdateState_SandTurning: ; 1a394 (6:6394)
 	and D_RIGHT | D_LEFT
 	jp nz, SetState_SandWalking
 	jp SetState_SandIdling
-; 0x1a3bb
 
-SetState_LadderClimbing: ; 1a3bb (6:63bb)
+SetState_LadderClimbing:
 	ld a, WST_LADDER_CLIMBING
 	ld [wWarioState], a
 	ld a, [wXPosLo]
@@ -727,9 +708,8 @@ SetState_LadderClimbing: ; 1a3bb (6:63bb)
 	load_frameset Frameset_158d6
 	update_anim_1
 	ret
-; 0x1a436
 
-UpdateState_LadderClimbing: ; 1a436 (6:6436)
+UpdateState_LadderClimbing:
 	farcall Func_19b25
 	ld a, [wRoomTransitionParam]
 	and a
@@ -754,9 +734,8 @@ UpdateState_LadderClimbing: ; 1a436 (6:6436)
 .asm_1a49a
 	call HandleLadderInput
 	ret
-; 0x1a49e
 
-SetState_LadderIdling: ; 1a49e (6:649e)
+SetState_LadderIdling:
 	ld a, WST_LADDER_IDLING
 	ld [wWarioState], a
 
@@ -792,9 +771,8 @@ SetState_LadderIdling: ; 1a49e (6:649e)
 .asm_1a511
 	load_frameset Frameset_158fd
 	jr .asm_1a501
-; 0x1a51d
 
-UpdateState_LadderIdling: ; 1a51d (6:651d)
+UpdateState_LadderIdling:
 	farcall Func_19b25
 	ld a, [wRoomTransitionParam]
 	and a
@@ -809,9 +787,8 @@ UpdateState_LadderIdling: ; 1a51d (6:651d)
 	update_anim_1
 	call Func_1b480
 	ret
-; 0x1a55c
 
-UpdateState_LadderShakeSlipping: ; 1a55c (6:655c)
+UpdateState_LadderShakeSlipping:
 	farcall Func_19b25
 	ld a, [wRoomTransitionParam]
 	and a
@@ -853,9 +830,8 @@ UpdateState_LadderShakeSlipping: ; 1a55c (6:655c)
 	ret c
 	ld [hl], $00
 	jp SetState_LadderIdling
-; 0x1a5ee
 
-SetState_GettingOffLadder: ; 1a5ee (6:65ee)
+SetState_GettingOffLadder:
 	ld a, WST_GETTING_OFF_LADDER
 	ld [wWarioState], a
 	xor a
@@ -876,9 +852,8 @@ SetState_GettingOffLadder: ; 1a5ee (6:65ee)
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
 	ret
-; 0x1a617
 
-UpdateState_GettingOffLadder: ; 1a617 (6:6617)
+UpdateState_GettingOffLadder:
 	ld a, [wSFXLoopCounter]
 	sub 1
 	ld [wSFXLoopCounter], a
@@ -908,9 +883,8 @@ UpdateState_GettingOffLadder: ; 1a617 (6:6617)
 	ld [wIsIntangible], a
 	farcall StartFall
 	ret
-; 0x1a66b
 
-SetState_LadderSliding: ; 1a66b (6:666b)
+SetState_LadderSliding:
 	ld a, WST_LADDER_SLIDING
 	ld [wWarioState], a
 	play_sfx SFX_SLIDE
@@ -934,9 +908,8 @@ SetState_LadderSliding: ; 1a66b (6:666b)
 	load_frameset Frameset_15945
 	update_anim_1
 	ret
-; 0x1a6b6
 
-UpdateState_LadderSliding: ; 1a6b6 (6:66b6)
+UpdateState_LadderSliding:
 	farcall Func_19b25
 	ld a, [wRoomTransitionParam]
 	and a
@@ -989,9 +962,8 @@ UpdateState_LadderSliding: ; 1a6b6 (6:66b6)
 .ground_pound
 	farcall DoGroundPound
 	ret
-; 0x1a773
 
-SetState_GrabSlipping: ; 1a773 (6:6773)
+SetState_GrabSlipping:
 	ld a, WST_GRAB_SLIPPING
 	ld [wWarioState], a
 	xor a
@@ -1016,9 +988,8 @@ SetState_GrabSlipping: ; 1a773 (6:6773)
 .asm_1a7c6
 	update_anim_1
 	ret
-; 0x1a7d6
 
-UpdateState_GrabSlipping: ; 1a7d6 (6:67d6)
+UpdateState_GrabSlipping:
 	farcall Func_19b25
 	ld a, [wRoomTransitionParam]
 	and a
@@ -1093,9 +1064,8 @@ UpdateState_GrabSlipping: ; 1a7d6 (6:67d6)
 .asm_1a88e
 	farcall SetState_GrabIdling
 	ret
-; 0x1a89e
 
-UpdateState_GetTreasureStart: ; 1a89e (6:689e)
+UpdateState_GetTreasureStart:
 	update_anim_1
 	ld a, [wJumpVelTable]
 	and a
@@ -1125,16 +1095,15 @@ UpdateState_GetTreasureStart: ; 1a89e (6:689e)
 	ld [wWarioStateCounter], a
 ;	fallthrough
 
-SetNextGetTreasureState: ; 1a8e7 (6:68e7)
+SetNextGetTreasureState:
 	ld hl, wWarioState
 	inc [hl]
 	xor a
 	ld [wWarioStateCycles], a
 	farcall Func_1e6ea
 	ret
-; 0x1a8ff
 
-UpdateState_GetTreasureWalk: ; 1a8ff (6:68ff)
+UpdateState_GetTreasureWalk:
 	update_anim_1
 	ld a, [wDirection]
 	and a
@@ -1170,9 +1139,8 @@ UpdateState_GetTreasureWalk: ; 1a8ff (6:68ff)
 .asm_1a970
 	update_anim_2
 	ret
-; 0x1a980
 
-UpdateState_GetTreasureTurnFront: ; 1a980 (6:6980)
+UpdateState_GetTreasureTurnFront:
 	update_anim_2
 	ld a, [wAnimationEnded]
 	and a
@@ -1193,9 +1161,8 @@ UpdateState_GetTreasureTurnFront: ; 1a980 (6:6980)
 	load_frameset Frameset_1fc2ab
 	update_anim_2
 	ret
-; 0x1a9e9
 
-UpdateState_GetTreasureLaugh: ; 1a9e9 (6:69e9)
+UpdateState_GetTreasureLaugh:
 	update_anim_2
 	ld a, [wAnimationEnded]
 	and a
@@ -1220,9 +1187,8 @@ UpdateState_GetTreasureLaugh: ; 1a9e9 (6:69e9)
 .asm_1aa4c
 	update_anim_2
 	ret
-; 0x1aa5c
 
-UpdateState_GetTreasureTurnBack: ; 1aa5c (6:6a5c)
+UpdateState_GetTreasureTurnBack:
 	update_anim_2
 	ld a, [wAnimationEnded]
 	and a
@@ -1243,9 +1209,8 @@ UpdateState_GetTreasureTurnBack: ; 1aa5c (6:6a5c)
 	load_frameset Frameset_1fc2c4
 	update_anim_2
 	ret
-; 0x1aac9
 
-UpdateState_GetTreasureOpen: ; 1aac9 (6:6ac9)
+UpdateState_GetTreasureOpen:
 	update_anim_2
 	ld a, [wAnimationEnded]
 	and a
@@ -1275,9 +1240,8 @@ UpdateState_GetTreasureOpen: ; 1aac9 (6:6ac9)
 .asm_1ab34
 	update_anim_2
 	ret
-; 0x1ab44
 
-UpdateState_GetTreasureTurnWalk: ; 1ab44 (6:6b44)
+UpdateState_GetTreasureTurnWalk:
 	update_anim_2
 	ld a, [wAnimationEnded]
 	and a
@@ -1287,9 +1251,8 @@ UpdateState_GetTreasureTurnWalk: ; 1ab44 (6:6b44)
 	xor a
 	ld [wAutoMoveState], a
 	jp SetNextGetTreasureState
-; 0x1ab64
 
-SetState_GetTreasureLookFront: ; 1ab64 (6:6b64)
+SetState_GetTreasureLookFront:
 	ld a, WST_GET_TREASURE_LOOK_FRONT
 	ld [wWarioState], a
 	xor a
@@ -1303,9 +1266,8 @@ SetState_GetTreasureLookFront: ; 1ab64 (6:6b64)
 	load_frameset Frameset_1fc30d
 	update_anim_2
 	ret
-; 0x1abb1
 
-UpdateState_GetTreasureLookFront: ; 1abb1 (6:6bb1)
+UpdateState_GetTreasureLookFront:
 	update_anim_2
 	ld a, [wAnimationEnded]
 	and a
@@ -1331,9 +1293,8 @@ UpdateState_GetTreasureLookFront: ; 1abb1 (6:6bb1)
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ret
-; 0x1abf4
 
-UpdateState_GetTreasureClear: ; 1abf4 (6:6bf4)
+UpdateState_GetTreasureClear:
 	ld hl, wWarioStateCounter
 	ld a, [wJoypadDown]
 	bit A_BUTTON_F, a
@@ -1350,9 +1311,8 @@ UpdateState_GetTreasureClear: ; 1abf4 (6:6bf4)
 	ld hl, wLevelEndScreen
 	res 7, [hl]
 	ret
-; 0x1ac10
 
-SetState_Sleeping: ; 1ac10 (6:6c10)
+SetState_Sleeping:
 	ld a, WST_SLEEPING
 	ld [wWarioState], a
 	xor a
@@ -1376,9 +1336,8 @@ SetState_Sleeping: ; 1ac10 (6:6c10)
 .got_frameset
 	update_anim_1
 	ret
-; 0x1ac73
 
-UpdateState_Sleeping: ; 1ac73 (6:6c73)
+UpdateState_Sleeping:
 	update_anim_1
 
 	ld a, [wWarioStateCounter]
@@ -1434,9 +1393,8 @@ UpdateState_Sleeping: ; 1ac73 (6:6c73)
 	ret z
 	farcall SetState_Idling
 	ret
-; 0x1ad21
 
-SetState_LadderScratching: ; 1ad21 (6:6d21)
+SetState_LadderScratching:
 	ld a, WST_LADDER_SCRATCHING
 	ld [wWarioState], a
 
@@ -1468,9 +1426,8 @@ SetState_LadderScratching: ; 1ad21 (6:6d21)
 .asm_1ad6d
 	update_anim_1
 	ret
-; 0x1ad7d
 
-UpdateState_LadderScratching: ; 1ad7d (6:6d7d)
+UpdateState_LadderScratching:
 	update_anim_1
 	ld a, [wJoypadDown]
 	and a
@@ -1480,9 +1437,8 @@ UpdateState_LadderScratching: ; 1ad7d (6:6d7d)
 	ret z
 .asm_1ad97
 	jp SetState_LadderIdling
-; 0x1ad9a
 
-SetState_FenceShakeSliding: ; 1ad9a (6:6d9a)
+SetState_FenceShakeSliding:
 	ld a, WST_FENCE_SHAKE_SLIDING
 	ld [wWarioState], a
 	xor a
@@ -1506,9 +1462,8 @@ SetState_FenceShakeSliding: ; 1ad9a (6:6d9a)
 .asm_1adeb
 	update_anim_1
 	ret
-; 0x1adfb
 
-UpdateState_FenceShakeSliding: ; 1adfb (6:6dfb)
+UpdateState_FenceShakeSliding:
 	update_anim_1
 	ld a, [wWarioStateCounter]
 	and a
@@ -1542,9 +1497,8 @@ UpdateState_FenceShakeSliding: ; 1adfb (6:6dfb)
 
 .asm_1ae67
 	ret
-; 0x1ae68
 
-SetState_FenceMovingVertical: ; 1ae68 (6:6e68)
+SetState_FenceMovingVertical:
 	ld a, WST_FENCE_MOVING_VERTICAL
 	ld [wWarioState], a
 
@@ -1571,7 +1525,6 @@ SetState_FenceMovingVertical: ; 1ae68 (6:6e68)
 	load_frameset Frameset_158d6
 	update_anim_1
 	ret
-; 0x1aed0
 
 UpdateState_FenceMovingVertical:;1aed0 (6:6ed0)
 	ld a, [wSFXLoopCounter]
@@ -1595,9 +1548,8 @@ UpdateState_FenceMovingVertical:;1aed0 (6:6ed0)
 .asm_1af1e
 	call Func_1b168
 	ret
-; 0x1af22
 
-SetState_FenceIdling: ; 1af22 (6:6f22)
+SetState_FenceIdling:
 	ld a, WST_FENCE_IDLING
 	ld [wWarioState], a
 
@@ -1629,15 +1581,13 @@ SetState_FenceIdling: ; 1af22 (6:6f22)
 .asm_1af88
 	update_anim_1
 	ret
-; 0x1af98
 
-UpdateState_FenceIdling: ; 1af98 (6:6f98)
+UpdateState_FenceIdling:
 	update_anim_1
 	call Func_1b21a
 	ret
-; 0x1afab
 
-SetState_FenceMovingHorizontal: ; 1afab (6:6fab)
+SetState_FenceMovingHorizontal:
 	ld a, WST_FENCE_MOVING_HORIZONTAL
 	ld [wWarioState], a
 
@@ -1676,9 +1626,8 @@ SetState_FenceMovingHorizontal: ; 1afab (6:6fab)
 .asm_1afff
 	update_anim_1
 	ret
-; 0x1b00f
 
-UpdateState_FenceMovingHorizontal: ; 1b00f (6:700f)
+UpdateState_FenceMovingHorizontal:
 	farcall Func_19afb
 	ld a, [wIsNearFence]
 	and a
@@ -1698,9 +1647,8 @@ UpdateState_FenceMovingHorizontal: ; 1b00f (6:700f)
 	update_anim_1
 	call Func_1b24f
 	ret
-; 0x1b05e
 
-SetState_FenceSliding: ; 1b05e (6:705e)
+SetState_FenceSliding:
 	ld a, WST_FENCE_SLIDING
 	ld [wWarioState], a
 	play_sfx SFX_SLIDE
@@ -1725,9 +1673,8 @@ SetState_FenceSliding: ; 1b05e (6:705e)
 	load_frameset Frameset_15945
 	update_anim_1
 	ret
-; 0x1b0a9
 
-UpdateState_FenceSliding: ; 1b0a9 (6:70a9)
+UpdateState_FenceSliding:
 	farcall Func_19b25
 	ld a, [wRoomTransitionParam]
 	and a
@@ -1783,9 +1730,8 @@ UpdateState_FenceSliding: ; 1b0a9 (6:70a9)
 .ground_pound
 	farcall DoGroundPound
 	ret
-; 0x1b168
 
-Func_1b168: ; 1b168 (6:7168)
+Func_1b168:
 	ld a, [wJoypadDown]
 	and B_BUTTON | D_DOWN
 	cp B_BUTTON | D_DOWN
@@ -1842,9 +1788,8 @@ Func_1b168: ; 1b168 (6:7168)
 	update_pos_y
 	farcall SetState_Idling
 	ret
-; 0x1b21a
 
-Func_1b21a: ; 1b21a (6:721a)
+Func_1b21a:
 	ld a, [wJumpingUpwards]
 	and a
 	jr nz, .asm_1b237
@@ -1866,9 +1811,8 @@ Func_1b21a: ; 1b21a (6:721a)
 	and D_RIGHT | D_LEFT
 	jp nz, SetState_FenceMovingHorizontal
 	ret
-; 0x1b24f
 
-Func_1b24f: ; 1b24f (6:724f)
+Func_1b24f:
 	ld a, [wJumpingUpwards]
 	and a
 	jr nz, .asm_1b26c
@@ -1913,9 +1857,8 @@ Func_1b24f: ; 1b24f (6:724f)
 	ld b, $01
 	call SubXOffset
 	ret
-; 0x1b2c0
 
-Func_1b2c0: ; 1b2c0 (6:72c0)
+Func_1b2c0:
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jp nz, SetState_SandJumping
@@ -1939,9 +1882,8 @@ Func_1b2c0: ; 1b2c0 (6:72c0)
 	call Func_1a14b
 .asm_1b301
 	ret
-; 0x1b302
 
-Func_1b302: ; 1b302 (6:7302)
+Func_1b302:
 	farcall CheckCentreCollision
 	ld a, b
 	and a
@@ -1955,9 +1897,8 @@ Func_1b302: ; 1b302 (6:7302)
 .asm_1b31e
 	call AddYOffset
 	ret
-; 0x1b322
 
-Func_1b322: ; 1b322 (6:7322)
+Func_1b322:
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jp nz, SetState_SandJumping
@@ -1965,9 +1906,8 @@ Func_1b322: ; 1b322 (6:7322)
 	and D_RIGHT | D_LEFT
 	jp nz, SetState_SandWalking
 	ret
-; 0x1b333
 
-Func_1b333: ; 1b333 (6:7333)
+Func_1b333:
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jp nz, SetState_SandJumping
@@ -2020,9 +1960,8 @@ Func_1b333: ; 1b333 (6:7333)
 	call ApplyWalkVelocity_Left
 	call SubXOffset
 	jr .asm_1b36d
-; 0x1b3a0
 
-HandleLadderInput: ; 1b3a0 (6:73a0)
+HandleLadderInput:
 	ld a, [wJoypadDown]
 	and B_BUTTON | D_DOWN
 	cp B_BUTTON | D_DOWN
@@ -2100,9 +2039,8 @@ HandleLadderInput: ; 1b3a0 (6:73a0)
 	jr nz, .asm_1b3ff
 	farcall StartFall
 	ret
-; 0x1b480
 
-Func_1b480: ; 1b480 (6:7480)
+Func_1b480:
 	ld a, [wJoypadDown]
 	bit B_BUTTON_F, a
 	jr z, .asm_1b48e
@@ -2155,4 +2093,3 @@ Func_1b480: ; 1b480 (6:7480)
 	ld a, 9
 	ld [wCollisionBoxRight], a
 	ret
-; 0x1b4f6

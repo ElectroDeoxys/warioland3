@@ -1,13 +1,12 @@
 ; writes a to address in hl, b times
-WriteAToHL_BTimes:: ; 420 (0:420)
+WriteAToHL_BTimes::
 	ld [hli], a
 	dec b
 	jr nz, WriteAToHL_BTimes
 	ret
-; 0x425
 
 ; write a to hl, bc times
-WriteAToHL_BCTimes:: ; 425 (0:425)
+WriteAToHL_BCTimes::
 	push af
 	ld a, c
 	and a
@@ -22,10 +21,9 @@ WriteAToHL_BCTimes:: ; 425 (0:425)
 	dec b
 	jr nz, .loop
 	ret
-; 0x434
 
 ; copies bc bytes from hl to de
-CopyHLToDE_BC:: ; 434 (0:434)
+CopyHLToDE_BC::
 	ld a, c
 	and a
 	jr z, .loop
@@ -39,11 +37,10 @@ CopyHLToDE_BC:: ; 434 (0:434)
 	dec b
 	jr nz, .loop
 	ret
-; 0x443
 
 ; switches bank to wTempBank
 ; then copies bc bytes from hl to de
-FarCopyHLToDE_BC:: ; 443 (0:443)
+FarCopyHLToDE_BC::
 	ld a, [wROMBank]
 	push af
 	ld a, [wTempBank]
@@ -63,14 +60,12 @@ FarCopyHLToDE_BC:: ; 443 (0:443)
 	pop af
 	bankswitch
 	ret
-; 0x466
 
 ; copies b bytes from hl to de
-CopyHLToDE:: ; 466 (0:466)
+CopyHLToDE::
 	ld a, [hli]
 	ld [de], a
 	inc de
 	dec b
 	jr nz, CopyHLToDE
 	ret
-; 0x46d

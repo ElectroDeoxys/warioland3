@@ -1,4 +1,4 @@
-UpdateWarioStates: ; 1c000 (7:4000)
+UpdateWarioStates:
 	ld hl, wCoinCooldown
 	ld a, [hl]
 	and a
@@ -24,7 +24,7 @@ UpdateWarioStates: ; 1c000 (7:4000)
 	farcall UpdateWarioStates_Group2
 	ret
 
-UpdateWarioStates_Group1: ; 1c04d (7:404d)
+UpdateWarioStates_Group1:
 	jumptable
 
 	dw UpdateState_Idling              ; WST_IDLING
@@ -81,7 +81,7 @@ UpdateWarioStates_Group1: ; 1c04d (7:404d)
 	dw InvalidWarioStateReset
 ; 1c0b6
 
-UpdateState_Idling: ; 1c0b6 (7:40b6)
+UpdateState_Idling:
 	farcall CheckCentreCollision
 	ld a, [wWarioState]
 	cp WST_IDLING
@@ -160,9 +160,8 @@ UpdateState_Idling: ; 1c0b6 (7:40b6)
 	ret c
 	farcall SetState_Sleeping
 	ret
-; 0x1c1ab
 
-UpdateState_Walking: ; 1c1ab (7:41ab)
+UpdateState_Walking:
 	ld a, [wSFXLoopCounter]
 	sub 1
 	ld [wSFXLoopCounter], a
@@ -204,9 +203,8 @@ UpdateState_Walking: ; 1c1ab (7:41ab)
 
 	update_pos_y
 	ret
-; 0x1c244
 
-UpdateState_Turning: ; 1c244 (7:4244)
+UpdateState_Turning:
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jp nz, StartJump_FromInput
@@ -221,9 +219,8 @@ UpdateState_Turning: ; 1c244 (7:4244)
 	and D_RIGHT | D_LEFT
 	jp nz, SetState_Walking_ResetWalkVel
 	jp SetState_Idling
-; 0x1c270
 
-StartJump_FromWaterSurface: ; 1c270 (7:4270)
+StartJump_FromWaterSurface:
 	play_sfx SFX_SPLASH
 	ld a, $01
 	ld [wJumpVelIndex], a
@@ -233,7 +230,7 @@ StartJump_FromWaterSurface: ; 1c270 (7:4270)
 	ld [wDoFullJump], a
 	jr StartJump
 
-StartJump_FromSand: ; 1c289 (7:4289)
+StartJump_FromSand:
 	xor a
 	ld [wJumpVelIndex], a
 	ld a, TRUE
@@ -252,18 +249,16 @@ StartJump_FromSand: ; 1c289 (7:4289)
 .got_jump_vel_table
 	ld [wJumpVelTable], a
 	jr SetState_Airborne
-; 0x1c2ae
 
-StartFall:: ; 1c2ae (7:42ae)
+StartFall::
 	xor a ; FALSE
 	ld [wJumpingUpwards], a
-StartFall_SkipResetJumpUpwards: ; 1c2b2 (7:42b2)
+StartFall_SkipResetJumpUpwards:
 	ld a, FALLING_JUMP_VEL_INDEX
 	ld [wJumpVelIndex], a
 	jr StartJump
-; 0x1c2b9
 
-StartJump_FromInput: ; 1c2b9 (7:42b9)
+StartJump_FromInput:
 	play_sfx SFX_JUMP
 	xor a
 	ld [wJumpVelIndex], a
@@ -272,7 +267,7 @@ StartJump_FromInput: ; 1c2b9 (7:42b9)
 	ld [wJumpingUpwards], a
 ;	fallthrough
 
-StartJump: ; 1c2cd (7:42cd)
+StartJump:
 	ld a, [wPowerUpLevel]
 	cp HIGH_JUMP_BOOTS
 	ld a, JUMP_VEL_NORMAL
@@ -285,7 +280,7 @@ StartJump: ; 1c2cd (7:42cd)
 	ld [wJumpVelTable], a
 ;	fallthrough
 
-SetState_Airborne: ; 1c2e2 (7:42e2)
+SetState_Airborne:
 	xor a
 	ld [wIsStandingOnSlope], a
 
@@ -328,9 +323,8 @@ SetState_Airborne: ; 1c2e2 (7:42e2)
 	ld b, 2
 	call SubYOffset
 	ret
-; 0x1c369
 
-UpdateState_Airborne: ; 1c369 (7:4369)
+UpdateState_Airborne:
 	farcall Func_19b25
 	ld a, [wRoomTransitionParam]
 	and a
@@ -498,7 +492,7 @@ UpdateState_Airborne: ; 1c369 (7:4369)
 	jr z, DoHardLand
 ;	fallthrough
 
-DoSoftLand: ; 1c541 (7:5541)
+DoSoftLand:
 	call TriggerFloorTransition_SkipUpdateYPos
 
 	xor a
@@ -529,9 +523,8 @@ DoSoftLand: ; 1c541 (7:5541)
 	and D_RIGHT | D_LEFT
 	jp nz, SetState_Walking
 	jp SetState_Idling
-; 0x1d58a
 
-DoHardLand: ; 1d58a (7:558a)
+DoHardLand:
 	call TriggerFloorTransition_SkipUpdateYPos
 
 	xor a
@@ -569,9 +562,8 @@ DoHardLand: ; 1d58a (7:558a)
 .asm_1c5ed
 	update_anim_1
 	ret
-; 0x1c5fd
 
-DoWarioGroundShake: ; 1c5fd (7:45fd)
+DoWarioGroundShake:
 	ld a, [wGroundShakeCounter]
 	and a
 	jr nz, .asm_1c60d
@@ -604,7 +596,7 @@ DoWarioGroundShake: ; 1c5fd (7:45fd)
 	update_anim_1
 	jr SetState_SmashAttacking
 
-DoGroundPound: ; 1c66b (7:466b)
+DoGroundPound:
 	play_sfx SFX_GROUND_POUND
 	xor a
 	ld [wFrameDuration], a
@@ -626,7 +618,7 @@ DoGroundPound: ; 1c66b (7:466b)
 	update_anim_1
 ;	fallthrough
 
-SetState_SmashAttacking: ; 1c6c1 (7:46c1)
+SetState_SmashAttacking:
 	ld a, $81
 	ld [wIsSmashAttacking], a
 	ld a, WST_SMASH_ATTACKING
@@ -645,9 +637,8 @@ SetState_SmashAttacking: ; 1c6c1 (7:46c1)
 	ld a, 9
 	ld [wCollisionBoxRight], a
 	ret
-; 0x1c6ed
 
-UpdateState_Landing: ; 1c6ed (7:46ed)
+UpdateState_Landing:
 	ld a, [wJoypadPressed]
 	and D_RIGHT | D_LEFT
 	jr nz, .walk
@@ -684,9 +675,8 @@ UpdateState_Landing: ; 1c6ed (7:46ed)
 	ld a, JUMP_VEL_HIGH_JUMP
 	ld [wJumpVelTable], a
 	ret
-; 0x1c73b
 
-SetState_CrouchSliding: ; 1c73b (7:473b)
+SetState_CrouchSliding:
 	xor a
 	ld [wSFXLoopCounter], a
 	ld [wAttackCounter], a
@@ -725,9 +715,8 @@ SetState_CrouchSliding: ; 1c73b (7:473b)
 .dir_right
 	load_frameset Frameset_14a3b
 	jr .asm_1c7a7
-; 0x1c7c3
 
-UpdateState_CrouchSliding: ; 1c7c3 (7:47c3)
+UpdateState_CrouchSliding:
 	farcall Func_19b25
 	ld a, [wRoomTransitionParam]
 	and a
@@ -851,9 +840,8 @@ UpdateState_CrouchSliding: ; 1c7c3 (7:47c3)
 	ld a, -15
 	ld [wCollisionBoxTop], a
 	jp CrouchOrSlideIfOnSlope
-; 0x1c8df
 
-UpdateState_Attacking: ; 1c8df (7:48df)
+UpdateState_Attacking:
 	ld a, [wPowerUpLevel]
 	cp GARLIC
 	jr nc, .powered_up
@@ -953,9 +941,8 @@ UpdateState_Attacking: ; 1c8df (7:48df)
 
 .bump
 	jp DoBumpWithSmallBackOffset
-; 0x1c9fa
 
-DoBumpWithBigBackOffset: ; 1c9fa (7:49fa)
+DoBumpWithBigBackOffset:
 	ld a, [wDirection]
 	and a
 	jr nz, .dir_right
@@ -967,9 +954,8 @@ DoBumpWithBigBackOffset: ; 1c9fa (7:49fa)
 	call SubXOffset
 .done_x_offset
 	jr DoBumpOrJumpingBump
-; 0x1ca0e
 
-DoBumpWithSmallBackOffset: ; 1ca0e (7:4a0e)
+DoBumpWithSmallBackOffset:
 	ld a, [wDirection]
 	and a
 	jr nz, .dir_right
@@ -981,7 +967,7 @@ DoBumpWithSmallBackOffset: ; 1ca0e (7:4a0e)
 	call SubXOffset
 ;	fallthrough
 
-DoBumpOrJumpingBump: ; 1ca20 (7:4a20)
+DoBumpOrJumpingBump:
 	play_sfx SFX_BUMP
 	ld a, [wJumpVelTable]
 	and a
@@ -993,18 +979,17 @@ DoBumpOrJumpingBump: ; 1ca20 (7:4a20)
 .got_jump_vel
 	ld [wJumpVelIndex], a
 	jr SetState_Bumping
-; 0x1ca39
 
-DoJumpingBump: ; 1ca39 (7:4a39)
+DoJumpingBump:
 	play_sfx SFX_BUMP
 ;	fallthrough
 
-DoJumpingBump_NoSFX: ; 1ca41 (7:4a41)
+DoJumpingBump_NoSFX:
 	ld a, 10
 	ld [wJumpVelIndex], a
 ;	fallthrough
 
-SetState_Bumping: ; 1ca46 (7:4a46)
+SetState_Bumping:
 	ld a, WST_BUMPING
 	ld [wWarioState], a
 	ld a, [wDirection]
@@ -1074,19 +1059,18 @@ SetState_Bumping: ; 1ca46 (7:4a46)
 	ld [wJumpVelIndex], a
 .asm_1cb32
 	ret
-; 0x1cb33
 
-StartFallingAirborneAttack: ; 1cb33 (7:4b33)
+StartFallingAirborneAttack:
 	ld a, FALLING_JUMP_VEL_INDEX
 	ld [wJumpVelIndex], a
 	jr SetState_AttackingAirborne
 
-StartJumpingAirborneAttack: ; 1cb3a (7:4b3a)
+StartJumpingAirborneAttack:
 	xor a
 	ld [wJumpVelIndex], a
 	ld a, TRUE
 	ld [wJumpingUpwards], a
-SetState_AttackingAirborne: ; 1cb43 (7:4b43)
+SetState_AttackingAirborne:
 	xor a
 	ld [wIsStandingOnSlope], a
 	ld a, WST_ATTACKING_AIRBORNE
@@ -1129,9 +1113,8 @@ SetState_AttackingAirborne: ; 1cb43 (7:4b43)
 	ret z
 	call UpdateState_AttackingAirborne ; can be fallthrough
 	ret
-; 0x1cbb9
 
-UpdateState_AttackingAirborne: ; 1cbb9 (7:4bb9)
+UpdateState_AttackingAirborne:
 	farcall Func_19b25
 	ld a, [wRoomTransitionParam]
 	and a
@@ -1226,9 +1209,8 @@ UpdateState_AttackingAirborne: ; 1cbb9 (7:4bb9)
 
 .bump
 	jp DoBumpWithSmallBackOffset
-; 0x1ccaf
 
-UpdateState_Bumping: ; 1ccaf (7:4caf)
+UpdateState_Bumping:
 	farcall Func_19b25
 	ld a, [wRoomTransitionParam]
 	and a
@@ -1281,9 +1263,8 @@ UpdateState_Bumping: ; 1ccaf (7:4caf)
 	cp WST_BUMPING
 	ret nz ; not bumping anymore
 	jp DoSoftLand
-; 0x1cd48
 
-DiveFromSurface: ; 1cd48 (7:4d48)
+DiveFromSurface:
 	xor a
 	ld [wGrabState], a
 	get_pos
@@ -1297,7 +1278,7 @@ DiveFromSurface: ; 1cd48 (7:4d48)
 	play_sfx SFX_SPLASH
 ;	fallthrough
 
-DiveFromSurface_SkipSplash: ; 1cd7c (7:4d7c)
+DiveFromSurface_SkipSplash:
 	ld a, -27
 	ld [wCollisionBoxTop], a
 	load_oam OAM_15254
@@ -1315,9 +1296,8 @@ DiveFromSurface_SkipSplash: ; 1cd7c (7:4d7c)
 .asm_1cdb3
 	update_anim_1
 	jr SetState_Diving
-; 0x1cdc4
 
-StartDive: ; 1cdc4 (7:4dc4)
+StartDive:
 	xor a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
@@ -1332,7 +1312,7 @@ StartDive: ; 1cdc4 (7:4dc4)
 	update_anim_1
 ;	fallthrough
 
-SetState_Diving: ; 1cdf6 (7:4df6)
+SetState_Diving:
 	ld a, WST_DIVING
 	ld [wWarioState], a
 
@@ -1360,9 +1340,8 @@ SetState_Diving: ; 1cdf6 (7:4df6)
 	load_gfx WarioSwimGfx
 	call LoadWarioGfx
 	ret
-; 0x1ce42
 
-UpdateState_Diving: ; 1ce42 (7:4e42)
+UpdateState_Diving:
 	farcall CheckCentreCollision
 	ld a, [wWarioState]
 	cp WST_DIVING
@@ -1398,7 +1377,7 @@ UpdateState_Diving: ; 1ce42 (7:4e42)
 	update_pos_y
 ;	fallthrough
 
-SetState_Submerged: ; 1ce95 (7:4e95)
+SetState_Submerged:
 	ld a, WST_SUBMERGED
 	ld [wWarioState], a
 
@@ -1458,9 +1437,8 @@ SetState_Submerged: ; 1ce95 (7:4e95)
 .asm_1cf43
 	update_anim_1
 	ret
-; 0x1cf53
 
-UpdateState_Submerged: ; 1cf53 (7:4f53)
+UpdateState_Submerged:
 	xor a
 	ld [wc0e1], a
 	farcall Func_19b25
@@ -1473,9 +1451,8 @@ UpdateState_Submerged: ; 1cf53 (7:4f53)
 	call ApplyWaterCurrentMovement
 	call Func_1f1a9
 	ret
-; 0x1cf7a
 
-SurfaceFromUnderwater: ; 1cf7a (7:4f7a)
+SurfaceFromUnderwater:
 	xor a
 	ld [wSFXLoopCounter], a
 	ld [wWaterSurfaceFloatingCounter], a
@@ -1484,7 +1461,7 @@ SurfaceFromUnderwater: ; 1cf7a (7:4f7a)
 	load_oam OAM_15254
 ;	fallthrough
 
-SetState_WaterSurfaceIdling: ; 1cfa2 (7:4fa2)
+SetState_WaterSurfaceIdling:
 	ld a, WST_WATER_SURFACE_IDLING
 	ld [wWarioState], a
 	ld a, -1
@@ -1520,9 +1497,8 @@ SetState_WaterSurfaceIdling: ; 1cfa2 (7:4fa2)
 .asm_1cff8
 	update_anim_1
 	ret
-; 0x1d008
 
-UpdateState_WaterSurfaceIdling: ; 1d008 (7:5008)
+UpdateState_WaterSurfaceIdling:
 	xor a
 	ld [wc0e1], a
 	farcall Func_19b25
@@ -1554,9 +1530,8 @@ UpdateState_WaterSurfaceIdling: ; 1d008 (7:5008)
 	jr nz, SetState_WaterSurfaceMoving
 	call ApplyWaterCurrentMovement
 	ret
-; 0x1d065
 
-SetState_WaterSurfaceMoving: ; 1d065 (7:5065)
+SetState_WaterSurfaceMoving:
 	ld a, WST_WATER_SURFACE_MOVING
 	ld [wWarioState], a
 
@@ -1585,9 +1560,8 @@ SetState_WaterSurfaceMoving: ; 1d065 (7:5065)
 .asm_1d0aa
 	update_anim_1
 	ret
-; 0x1d0ba
 
-UpdateState_WaterSurfaceMoving: ; 1d0ba (7:50ba)
+UpdateState_WaterSurfaceMoving:
 	xor a
 	ld [wc0e1], a
 	farcall Func_19b25
@@ -1681,9 +1655,8 @@ UpdateState_WaterSurfaceMoving: ; 1d0ba (7:50ba)
 	call ApplyWalkVelocity_Left
 	call SubXOffset
 	jr .done_moving
-; 0x1d1bc
 
-HandleWaterSurfaceFloatingMovement: ; 1d1bc (7:51bc)
+HandleWaterSurfaceFloatingMovement:
 	ld a, [wGlobalCounter]
 	and %11
 	ret nz
@@ -1705,20 +1678,19 @@ HandleWaterSurfaceFloatingMovement: ; 1d1bc (7:51bc)
 	ld b, 1
 	call SubYOffset_Sprite
 	ret
-; 0x1d1dd
 
-StartUpwardsUnderwaterThrusting: ; 1d1dd (7:51dd)
+StartUpwardsUnderwaterThrusting:
 	ld a, D_UP
 	ld [wSwimmingDirectionInput], a
 	jr SetState_UnderwaterThrusting
 
-StartUnderwaterThrusting: ; 1d1e4 (7:51e4)
+StartUnderwaterThrusting:
 	ld a, [wJoypadDown]
 	and D_PAD
 	ld [wSwimmingDirectionInput], a
 ;	fallthrough
 
-SetState_UnderwaterThrusting: ; 1d1ec (7:51ec)
+SetState_UnderwaterThrusting:
 	ld a, WST_UNDERWATER_THRUSTING
 	ld [wWarioState], a
 
@@ -1785,9 +1757,8 @@ SetState_UnderwaterThrusting: ; 1d1ec (7:51ec)
 	ld a, D_RIGHT
 	ld [wSwimmingDirectionInput], a
 	jr .thrust_right
-; 0x1d297
 
-UpdateState_UnderwaterThrusting: ; 1d297 (7:5297)
+UpdateState_UnderwaterThrusting:
 	xor a
 	ld [wc0e1], a
 	farcall Func_19b25
@@ -1815,15 +1786,14 @@ UpdateState_UnderwaterThrusting: ; 1d297 (7:5297)
 
 	call ApplyWaterCurrentMovement
 	ret
-; 0x1d2ea
 
-SetState_SwimKnockBack_SwitchDirection: ; 1d2ea (7:52ea)
+SetState_SwimKnockBack_SwitchDirection:
 	ld a, [wDirection]
 	xor $1 ; switch direction
 	ld [wDirection], a
 ;	fallthrough
 
-SetState_SwimKnockBack: ; 1d2f2 (7:52f2)
+SetState_SwimKnockBack:
 	play_sfx SFX_BUMP
 	ld a, WST_SWIM_KNOCK_BACK
 	ld [wWarioState], a
@@ -1848,9 +1818,8 @@ SetState_SwimKnockBack: ; 1d2f2 (7:52f2)
 .asm_1d344
 	update_anim_1
 	ret
-; 0x1d354
 
-UpdateState_SwimKnockBack: ; 1d354 (7:5354)
+UpdateState_SwimKnockBack:
 	farcall CheckFrontCollision
 	ld a, b
 	and a
@@ -1883,9 +1852,8 @@ UpdateState_SwimKnockBack: ; 1d354 (7:5354)
 	xor $1 ; switch direction
 	ld [wDirection], a
 	jp SetState_Submerged
-; 0x1d395
 
-UpdateState_WaterStung: ; 1d395 (7:5395)
+UpdateState_WaterStung:
 	update_anim_1
 
 	ld hl, wWarioStateCounter
@@ -1935,9 +1903,8 @@ UpdateState_WaterStung: ; 1d395 (7:5395)
 	ld a, $10
 	ld [wInvincibleCounter], a
 	jp SurfaceFromUnderwater
-; 0x1d416
 
-SetState_TryingSubmerge: ; 1d416 (7:5416)
+SetState_TryingSubmerge:
 	ld a, WST_TRYING_SUBMERGE
 	ld [wWarioState], a
 	xor a
@@ -1956,17 +1923,15 @@ SetState_TryingSubmerge: ; 1d416 (7:5416)
 .asm_1d445
 	update_anim_1
 	ret
-; 0x1d455
 
-UpdateState_TryingSubmerge: ; 1d455 (7:5455)
+UpdateState_TryingSubmerge:
 	ld a, [wJoypadDown]
 	bit D_DOWN_F, a
 	jp z, SetState_WaterSurfaceIdling
 	update_anim_1
 	ret
-; 0x1d46d
 
-UpdateState_Crouching: ; 1d46d (7:546d)
+UpdateState_Crouching:
 	farcall Func_19b25
 	ld a, [wWarioState]
 	cp WST_CROUCHING
@@ -1985,9 +1950,8 @@ UpdateState_Crouching: ; 1d46d (7:546d)
 	and a
 	jp z, StartCrouchFall
 	ret
-; 0x1d4a7
 
-UpdateState_CrouchWalking: ; 1d4a7 (7:54a7)
+UpdateState_CrouchWalking:
 	ld a, [wSFXLoopCounter]
 	sub 1
 	ld [wSFXLoopCounter], a
@@ -2025,9 +1989,8 @@ UpdateState_CrouchWalking: ; 1d4a7 (7:54a7)
 	ret
 .asm_1d51f
 	jp SetState_Sliding
-; 0x1d522
 
-UpdateState_CrouchAirborne: ; 1d522 (7:5522)
+UpdateState_CrouchAirborne:
 	farcall Func_19b25
 	ld a, [wRoomTransitionParam]
 	and a
@@ -2121,9 +2084,8 @@ UpdateState_CrouchAirborne: ; 1d522 (7:5522)
 	bit D_DOWN_F, a
 	ret z
 	jp CrouchOrSlideIfOnSlope
-; 0x1d627
 
-UpdateState_Stung: ; 1d627 (7:5627)
+UpdateState_Stung:
 	farcall Func_19b25
 	ld a, [wRoomTransitionParam]
 	and a
@@ -2262,9 +2224,8 @@ UpdateState_Stung: ; 1d627 (7:5627)
 	ld a, WST_STUNG_RECOVERY
 	ld [wWarioState], a
 	ret
-; 0x1d766
 
-UpdateState_StungRecovery: ; 1d766 (7:5766)
+UpdateState_StungRecovery:
 	call Func_1f6c2
 	update_anim_1
 	ld hl, wWarioStateCounter
@@ -2298,9 +2259,8 @@ UpdateState_StungRecovery: ; 1d766 (7:5766)
 	ld a, -15
 	ld [wCollisionBoxTop], a
 	jp CrouchOrSlideIfOnSlope
-; 0x1d7c1
 
-UpdateState_PipeGoingDown: ; 1d7c1 (7:57c1)
+UpdateState_PipeGoingDown:
 	ld a, TRUE
 	ld [wIsIntangible], a
 	update_anim_1
@@ -2331,9 +2291,8 @@ UpdateState_PipeGoingDown: ; 1d7c1 (7:57c1)
 .asm_1d804
 	play_sfx SFX_0E1
 	ret
-; 0x1d80d
 
-UpdateState_PipeGoingUp: ; 1d80d (7:580d)
+UpdateState_PipeGoingUp:
 	ld a, TRUE
 	ld [wIsIntangible], a
 	update_anim_1
@@ -2365,9 +2324,8 @@ UpdateState_PipeGoingUp: ; 1d80d (7:580d)
 .asm_1d853
 	play_sfx SFX_0E1
 	ret
-; 0x1d85c
 
-UpdateState_EnemyBumping: ; 1d85c (7:585c)
+UpdateState_EnemyBumping:
 	farcall Func_19b25
 	ld a, [wRoomTransitionParam]
 	and a
@@ -2420,9 +2378,8 @@ UpdateState_EnemyBumping: ; 1d85c (7:585c)
 	ld a, [hl]
 	ld [de], a
 	jp DoSoftLand
-; 0x1d8f8
 
-UpdateState_SmashAttacking: ; 1d8f8 (7:58f8)
+UpdateState_SmashAttacking:
 	update_anim_1
 	ld hl, wWarioStateCounter
 	inc [hl]
@@ -2432,9 +2389,8 @@ UpdateState_SmashAttacking: ; 1d8f8 (7:58f8)
 	xor a ; FALSE
 	ld [wIsSmashAttacking], a
 	jp SetState_Idling
-; 0x1d916
 
-UpdateState_PickingUp: ; 1d916 (7:5916)
+UpdateState_PickingUp:
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jp nz, Func_1dd78
@@ -2449,9 +2405,8 @@ UpdateState_PickingUp: ; 1d916 (7:5916)
 	and a
 	ret z
 	jp SetState_GrabIdling
-; 0x1d943
 
-UpdateState_GrabIdling: ; 1d943 (7:5943)
+UpdateState_GrabIdling:
 	farcall Func_19b25
 	ld a, [wRoomTransitionParam]
 	and a
@@ -2478,9 +2433,8 @@ UpdateState_GrabIdling: ; 1d943 (7:5943)
 	jp z, Func_1edd3
 	update_pos_y
 	ret
-; 0x1d995
 
-UpdateState_GrabWalking: ; 1d995 (7:5995)
+UpdateState_GrabWalking:
 	farcall Func_19b25
 	ld a, [wRoomTransitionParam]
 	and a
@@ -2513,9 +2467,8 @@ UpdateState_GrabWalking: ; 1d995 (7:5995)
 	jp z, Func_1edd3
 	update_pos_y
 	ret
-; 0x1da07
 
-SetState_ThrowingAirborne: ; 1da07 (7:5a07)
+SetState_ThrowingAirborne:
 	ld a, WST_THROWING_AIRBORNE
 	ld [wWarioState], a
 	ld a, [wGrabState]
@@ -2539,9 +2492,8 @@ SetState_ThrowingAirborne: ; 1da07 (7:5a07)
 .asm_1da43
 	load_frameset Frameset_15fb3
 	jr .asm_1da33
-; 0x1da4f
 
-UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
+UpdateState_GrabAirborne:
 	farcall Func_19b25
 	ld a, [wRoomTransitionParam]
 	and a
@@ -2752,9 +2704,8 @@ UpdateState_GrabAirborne: ; 1da4f (7:5a4f)
 	ld a, 9
 	ld [wCollisionBoxRight], a
 	ret
-; 0x1dc8b
 
-SetState_ThrowCharging: ; 1dc8b (7:5c8b)
+SetState_ThrowCharging:
 	play_sfx SFX_02C
 	xor a
 	ld [wFrameDuration], a
@@ -2781,9 +2732,8 @@ SetState_ThrowCharging: ; 1dc8b (7:5c8b)
 .asm_1dcec
 	update_anim_1
 	ret
-; 0x1dcfc
 
-UpdateState_ThrowCharging: ; 1dcfc (7:5cfc)
+UpdateState_ThrowCharging:
 	ld a, [wGrabState]
 	and a
 	jp z, SetState_Idling
@@ -2835,15 +2785,13 @@ UpdateState_ThrowCharging: ; 1dcfc (7:5cfc)
 .asm_1dd68
 	update_anim_1
 	ret
-; 0x1dd78
 
-Func_1dd78: ; 1dd78 (7:5d78)
+Func_1dd78:
 	xor a
 	ld [wGrabState], a
 	jp StartJump_FromInput
-; 0x1dd7f
 
-UpdateState_ThrowFullyCharged: ; 1dd7f (7:5d7f)
+UpdateState_ThrowFullyCharged:
 	ld a, [wSFXLoopCounter]
 	sub 1
 	ld [wSFXLoopCounter], a
@@ -2914,7 +2862,7 @@ UpdateState_ThrowFullyCharged: ; 1dd7f (7:5d7f)
 	ld [wGrabState], a
 	jr SetState_Throwing
 
-Func_1de3f: ; 1de3f (7:5e3f)
+Func_1de3f:
 	xor a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
@@ -2934,16 +2882,15 @@ Func_1de3f: ; 1de3f (7:5e3f)
 	ld [wGrabState], a
 ;	fallthrough
 
-SetState_Throwing: ; 1de7b (7:5e7b)
+SetState_Throwing:
 	xor a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
 	ld a, WST_THROWING
 	ld [wWarioState], a
 	ret
-; 0x1de88
 
-UpdateState_Throwing: ; 1de88 (7:5e88)
+UpdateState_Throwing:
 	ld a, [wGrabState]
 	and a
 	jp z, SetState_Idling
@@ -2954,9 +2901,8 @@ UpdateState_Throwing: ; 1de88 (7:5e88)
 	xor a
 	ld [wGrabState], a
 	jp SetState_Idling
-; 0x1deaa
 
-UpdateState_ThrowingAirborne: ; 1deaa (7:5eaa)
+UpdateState_ThrowingAirborne:
 	ld a, [wGrabState]
 	and a
 	jp z, StartFall
@@ -2967,9 +2913,8 @@ UpdateState_ThrowingAirborne: ; 1deaa (7:5eaa)
 	xor a
 	ld [wGrabState], a
 	jp StartFall
-; 0x1decc
 
-UpdateState_GrabSmashAttacking: ; 1decc (7:5ecc)
+UpdateState_GrabSmashAttacking:
 	ld a, [wGrabState]
 	and a
 	jp z, SetState_Idling
@@ -2982,9 +2927,8 @@ UpdateState_GrabSmashAttacking: ; 1decc (7:5ecc)
 	xor a ; FALSE
 	ld [wIsSmashAttacking], a
 	jp SetState_GrabIdling
-; 0x1def1
 
-SetState_Sliding: ; 1def1 (7:5ef1)
+SetState_Sliding:
 	ld a, WST_SLIDING
 	ld [wWarioState], a
 
@@ -3066,9 +3010,8 @@ SetState_Sliding: ; 1def1 (7:5ef1)
 .asm_1dfc4
 	update_anim_1
 	ret
-; 0x1dfd4
 
-UpdateState_Sliding: ; 1dfd4 (7:5fd4)
+UpdateState_Sliding:
 	ld a, [wSFXLoopCounter]
 	sub 1
 	ld [wSFXLoopCounter], a
@@ -3099,7 +3042,7 @@ UpdateState_Sliding: ; 1dfd4 (7:5fd4)
 	ret z
 ;	fallthrough
 
-SetState_Rolling: ; 1e042 (7:6042)
+SetState_Rolling:
 	xor a
 	ld [wSFXLoopCounter], a
 	ld [wJumpVelIndex], a
@@ -3130,9 +3073,8 @@ SetState_Rolling: ; 1e042 (7:6042)
 .asm_1e08d
 	update_anim_1
 	ret
-; 0x1e09d
 
-UpdateState_Rolling: ; 1e09d (7:609d)
+UpdateState_Rolling:
 	farcall Func_19b25
 	ld a, [wRoomTransitionParam]
 	and a
@@ -3203,14 +3145,13 @@ UpdateState_Rolling: ; 1e09d (7:609d)
 	xor b
 	jp nz, DoBumpWithSmallBackOffset
 	jp Func_1e1e3
-; 0x1e174
 
-Func_1e174: ; 1e174 (7:6174)
+Func_1e174:
 	ld a, FALLING_JUMP_VEL_INDEX
 	ld [wJumpVelIndex], a
 ;	fallthrough
 
-SetState_RollingAirborne: ; 1e179 (7:6179)
+SetState_RollingAirborne:
 	xor a
 	ld [wIsStandingOnSlope], a
 	ld [wGrabState], a
@@ -3236,15 +3177,13 @@ SetState_RollingAirborne: ; 1e179 (7:6179)
 .asm_1e1d3
 	update_anim_1
 	ret
-; 0x1e1e3
 
-Func_1e1e3: ; 1e1e3 (7:61e3)
+Func_1e1e3:
 	xor a
 	ld [wJumpVelIndex], a
 	jr SetState_RollingAirborne
-; 0x1e1e9
 
-UpdateState_RollingAirborne: ; 1e1e9 (7:61e9)
+UpdateState_RollingAirborne:
 	farcall Func_19b25
 	ld a, [wRoomTransitionParam]
 	and a
@@ -3331,9 +3270,8 @@ UpdateState_RollingAirborne: ; 1e1e9 (7:61e9)
 .asm_1e2bf
 	call TriggerFloorTransition
 	jp SetState_Rolling
-; 0x1e2c5
 
-UpdateState_PickedUp: ; 1e2c5 (7:62c5)
+UpdateState_PickedUp:
 	ld a, [wDirection]
 	and a
 	jr nz, .dir_right
@@ -3386,9 +3324,8 @@ UpdateState_PickedUp: ; 1e2c5 (7:62c5)
 	ld [wDirection], a
 	load_frameset Frameset_15f70
 	jr .wiggle_left
-; 0x1e347
 
-UpdateState_GroundShakeStunned: ; 1e347 (7:6347)
+UpdateState_GroundShakeStunned:
 	update_anim_1
 	ld a, [wGroundShakeCounter]
 	and a
@@ -3436,9 +3373,8 @@ UpdateState_GroundShakeStunned: ; 1e347 (7:6347)
 	and a
 	jp z, StartFall
 	jp SetState_Idling
-; 0x1e3e8
 
-UpdateState_EnteringDoor: ; 1e3e8 (7:63e8)
+UpdateState_EnteringDoor:
 	ld a, [wSFXLoopCounter]
 	sub 1
 	ld [wSFXLoopCounter], a
@@ -3492,9 +3428,8 @@ UpdateState_EnteringDoor: ; 1e3e8 (7:63e8)
 	and D_RIGHT | D_LEFT
 	jp nz, SetState_Walking_ResetWalkVel
 	jp SetState_Idling
-; 0x1e46a
 
-ApplyWaterCurrentMovement: ; 1e46a (7:646a)
+ApplyWaterCurrentMovement:
 	call ApplyLastWaterCurrentMovement
 
 	ld a, [wWaterCurrent]
@@ -3635,12 +3570,11 @@ ApplyWaterCurrentMovement: ; 1e46a (7:646a)
 	add 15 << 4
 	ld [wLastWaterCurrent], a
 	ret
-; 0x1e598
 
 ; water currents have a "lingering" effect
 ; this routine applies the movements and
 ; decreases the counter for the duration of the effect
-ApplyLastWaterCurrentMovement: ; 1e598 (7:6598)
+ApplyLastWaterCurrentMovement:
 	ld a, [wLastWaterCurrent]
 	and a
 	ret z
@@ -3747,9 +3681,8 @@ ApplyLastWaterCurrentMovement: ; 1e598 (7:6598)
 	ld b, 1
 	call AddYOffset
 	jr .decr_counter
-; 0x1e68a
 
-HandleInput_Idling: ; 1e68a (7:668a)
+HandleInput_Idling:
 	ld a, [wJoypadPressed]
 	bit B_BUTTON_F, a
 	jp nz, SetState_Attacking
@@ -3772,14 +3705,13 @@ HandleInput_Idling: ; 1e68a (7:668a)
 	and a
 	jr z, SetState_Walking_ResetWalkVel
 	jp SetState_Turning
-; 0x1e6b5
 
-SetState_Walking_ResetWalkVel: ; 1e6b5 (7:66b5)
+SetState_Walking_ResetWalkVel:
 	xor a
 	ld [wWalkVelIndex], a
 ;	fallthrough
 
-SetState_Walking: ; 1e6b9 (7:66b9)
+SetState_Walking:
 	ld a, WST_WALKING
 	ld [wWarioState], a
 	ld a, [wJoypadDown]
@@ -3806,7 +3738,7 @@ SetState_Walking: ; 1e6b9 (7:66b9)
 	ld [wWarioStateCycles], a
 ;	fallthrough
 
-Func_1e6ea: ; 1e6ea (7:66ea)
+Func_1e6ea:
 	xor a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
@@ -3825,9 +3757,8 @@ Func_1e6ea: ; 1e6ea (7:66ea)
 .got_frameset
 	update_anim_1
 	ret
-; 0x1e73e
 
-SetState_Turning: ; 1e73e (7:673e)
+SetState_Turning:
 	ld a, WST_TURNING
 	ld [wWarioState], a
 	xor a
@@ -3853,9 +3784,8 @@ SetState_Turning: ; 1e73e (7:673e)
 .asm_1e79b
 	update_anim_1
 	ret
-; 0x1e7ab
 
-SetState_Attacking: ; 1e7ab (7:67ab)
+SetState_Attacking:
 	ld a, MAX_ATTACK_COUNTER
 	ld [wAttackCounter], a
 	xor a
@@ -3906,9 +3836,8 @@ SetState_Attacking: ; 1e7ab (7:67ab)
 .asm_1e845
 	update_anim_1
 	ret
-; 0x1e855
 
-CrouchOrSlideIfOnSlope: ; 1e855 (7:6855)
+CrouchOrSlideIfOnSlope:
 	ld a, [wIsStandingOnSlope]
 	and a
 	jp nz, SetState_Sliding
@@ -3955,9 +3884,8 @@ CrouchOrSlideIfOnSlope: ; 1e855 (7:6855)
 .asm_1e8dd
 	update_anim_1
 	ret
-; 0x1e8ed
 
-HandleInput_Walking: ; 1e8ed (7:68ed)
+HandleInput_Walking:
 	ld a, [wJumpingUpwards]
 	and a
 	jr nz, .skip_jump
@@ -4028,7 +3956,7 @@ HandleInput_Walking: ; 1e8ed (7:68ed)
 	farcall SetState_CrouchSlipping
 	ret
 
-SetState_Idling:: ; 1e99b (7:699b)
+SetState_Idling::
 	xor a
 	ld [wWalkVelIndex], a
 
@@ -4076,9 +4004,8 @@ SetState_Idling:: ; 1e99b (7:699b)
 .asm_1ea2e
 	update_anim_1
 	ret
-; 0x1ea3e
 
-HandleInput_Attacking: ; 1ea3e (7:6a3e)
+HandleInput_Attacking:
 	ld a, [wDirection]
 	and a
 	jr nz, .dir_left
@@ -4099,9 +4026,8 @@ HandleInput_Attacking: ; 1ea3e (7:6a3e)
 	bit D_LEFT_F, a
 	jp nz, SetState_Turning
 	jr .check_pressed
-; 0x1ea64
 
-HandleAttackingAirborneMovement: ; 1ea64 (7:6a64)
+HandleAttackingAirborneMovement:
 	call ApplyJumpVelocity
 	farcall HandleWalk
 	ld a, [wWalkVelIndex]
@@ -4111,9 +4037,8 @@ HandleAttackingAirborneMovement: ; 1ea64 (7:6a64)
 	ld [wWalkVelIndex], a
 .done
 	ret
-; 0x1ea83
 
-HandleBumpMovement: ; 1ea83 (7:6a83)
+HandleBumpMovement:
 	ld a, [wJumpVelIndex]
 	cp 28
 	jr c, .no_control
@@ -4200,9 +4125,8 @@ HandleBumpMovement: ; 1ea83 (7:6a83)
 	ld [hl], MAX_JUMP_VEL_INDEX
 .done
 	ret
-; 0x1eb46
 
-Func_1eb46: ; 1eb46 (7:6b46)
+Func_1eb46:
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jp nz, Func_1ec19
@@ -4239,7 +4163,7 @@ Func_1eb46: ; 1eb46 (7:6b46)
 	ld [wDirection], a
 ;	fallthrough
 
-SetState_CrouchWalking: ; 1eb94 (7:6b94)
+SetState_CrouchWalking:
 	ld a, -1
 	ld [wCollisionBoxBottom], a
 	ld a, -15
@@ -4278,9 +4202,8 @@ SetState_CrouchWalking: ; 1eb94 (7:6b94)
 .asm_1ec0d
 	load_frameset Frameset_14a2f
 	jr .asm_1ebfd
-; 0x1ec19
 
-Func_1ec19: ; 1ec19 (7:6c19)
+Func_1ec19:
 	ld a, JUMP_VEL_KNOCK_BACK
 	ld [wJumpVelTable], a
 	ld a, -27
@@ -4302,9 +4225,8 @@ Func_1ec19: ; 1ec19 (7:6c19)
 	ld a, -15
 	ld [wCollisionBoxTop], a
 	ret
-; 0x1ec4b
 
-Func_1ec4b: ; 1ec4b (7:6c4b)
+Func_1ec4b:
 	ld a, -27
 	ld [wCollisionBoxTop], a
 	farcall CheckUpCollision
@@ -4316,9 +4238,8 @@ Func_1ec4b: ; 1ec4b (7:6c4b)
 	ld a, -15
 	ld [wCollisionBoxTop], a
 	ret
-; 0x1ec6c
 
-Func_1ec6c: ; 1ec6c (7:6c6c)
+Func_1ec6c:
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jr nz, Func_1ec19
@@ -4398,22 +4319,21 @@ Func_1ec6c: ; 1ec6c (7:6c6c)
 	ld [wWalkVelIndex], a
 .asm_1ed33
 	ret
-; 0x1ed34
 
-StartCrouchFall: ; 1ed34 (7:6d34)
+StartCrouchFall:
 	xor a
 	ld [wWalkVelIndex], a
 	ld a, FALLING_JUMP_VEL_INDEX
 	ld [wJumpVelIndex], a
 	jr SetState_CrouchAirborne
 
-StartCrouchJump: ; 1ed3f (7:6d3f)
+StartCrouchJump:
 	play_sfx SFX_JUMP
 	xor a
 	ld [wJumpVelIndex], a
 ;	fallthrough
 
-SetState_CrouchAirborne: ; 1ed4b (7:6d4b)
+SetState_CrouchAirborne:
 	ld a, WST_CROUCH_AIRBORNE
 	ld [wWarioState], a
 	xor a
@@ -4453,9 +4373,8 @@ SetState_CrouchAirborne: ; 1ed4b (7:6d4b)
 	ld b, $02
 	call SubYOffset
 	ret
-; 0x1edd3
 
-Func_1edd3: ; 1edd3 (7:6dd3)
+Func_1edd3:
 	ld a, [wGrabState]
 	and GRAB_FLAGS_MASK
 	add GRAB_IDLE
@@ -4467,7 +4386,7 @@ Func_1edd3: ; 1edd3 (7:6dd3)
 	jr SetState_GrabAirborne
 ;	fallthrough
 
-Func_1ede9: ; 1ede9 (7:6de9)
+Func_1ede9:
 	play_sfx SFX_JUMP
 	xor a
 	ld [wJumpVelIndex], a
@@ -4484,7 +4403,7 @@ Func_1ede9: ; 1ede9 (7:6de9)
 	ld [wJumpVelTable], a
 ;	fallthrough
 
-SetState_GrabAirborne: ; 1ee0d (7:6e0d)
+SetState_GrabAirborne:
 	ld a, WST_GRAB_AIRBORNE
 	ld [wWarioState], a
 	ld a, -1
@@ -4518,9 +4437,8 @@ SetState_GrabAirborne: ; 1ee0d (7:6e0d)
 	ret z
 	call UpdateState_GrabAirborne
 	ret
-; 0x1ee88
 
-Func_1ee88: ; 1ee88 (7:6e88)
+Func_1ee88:
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jp nz, Func_1ede9
@@ -4563,9 +4481,8 @@ Func_1ee88: ; 1ee88 (7:6e88)
 	ld [wDirection], a
 	load_frameset Frameset_14a0f
 	jr .asm_1eedb
-; 0x1eefc
 
-Func_1eefc: ; 1eefc (7:6efc)
+Func_1eefc:
 	ld a, [wJoypadPressed]
 	bit B_BUTTON_F, a
 	jp nz, SetState_ThrowCharging
@@ -4670,9 +4587,8 @@ Func_1eefc: ; 1eefc (7:6efc)
 	ld a, $00
 	ld [wWalkVelIndex], a
 	jr .asm_1efd8
-; 0x1efe7
 
-SetState_GrabIdling: ; 1efe7 (7:6fe7)
+SetState_GrabIdling:
 	ld a, [wGrabState]
 	and a
 	jp z, SetState_Idling
@@ -4716,9 +4632,8 @@ SetState_GrabIdling: ; 1efe7 (7:6fe7)
 .asm_1f067
 	update_anim_1
 	ret
-; 0x1f077
 
-HandleInput_Airborne: ; 1f077 (7:7077)
+HandleInput_Airborne:
 	ld a, [wJoypadDown]
 	bit A_BUTTON_F, a
 	jr nz, .skip_set_fall
@@ -4797,9 +4712,8 @@ HandleInput_Airborne: ; 1f077 (7:7077)
 .d_left
 	call WalkLeft
 	jp Func_1762
-; 0x1f0ed
 
-WalkRight: ; 1f0ed (7:70ed)
+WalkRight:
 	xor a
 	ld [wIsTurning], a
 	ld a, [wDirection]
@@ -4811,9 +4725,8 @@ WalkRight: ; 1f0ed (7:70ed)
 	ld [wIsTurning], a
 .walk
 	jp WalkIfPossible_Right
-; 0x1f104
 
-WalkLeft: ; 1f104 (7:7104)
+WalkLeft:
 	xor a
 	ld [wIsTurning], a
 	ld a, [wDirection]
@@ -4825,9 +4738,8 @@ WalkLeft: ; 1f104 (7:7104)
 	ld [wIsTurning], a
 .walk
 	jp WalkIfPossible_Left
-; 0x1f11b
 
-WalkIfPossible_Right: ; 1f11b (7:711b)
+WalkIfPossible_Right:
 	farcall CheckFrontCollision
 	ld a, b
 	and $0f
@@ -4835,9 +4747,8 @@ WalkIfPossible_Right: ; 1f11b (7:711b)
 	call ApplyWalkVelocity_Right
 	call AddXOffset
 	ret
-; 0x1f135
 
-WalkIfPossible_Left: ; 1f135 (7:7135)
+WalkIfPossible_Left:
 	farcall CheckFrontCollision
 	ld a, b
 	and $0f
@@ -4845,9 +4756,8 @@ WalkIfPossible_Left: ; 1f135 (7:7135)
 	call ApplyWalkVelocity_Left
 	call SubXOffset
 	ret
-; 0x1f14f
 
-HandleDivingHorizontalMovement: ; 1f14f (7:714f)
+HandleDivingHorizontalMovement:
 	ld a, [wPowerUpLevel]
 	cp SWIMMING_FLIPPERS
 	ret c
@@ -4887,9 +4797,8 @@ HandleDivingHorizontalMovement: ; 1f14f (7:714f)
 	ld b, 1
 	call SubXOffset
 	ret
-; 0x1f1a9
 
-Func_1f1a9: ; 1f1a9 (7:71a9)
+Func_1f1a9:
 	ld a, [wWaterInteraction]
 	cp $02
 	jr z, .asm_1f1f5
@@ -4947,9 +4856,8 @@ Func_1f1a9: ; 1f1a9 (7:71a9)
 	ld a, D_UP
 	ld [wc0e1], a
 	ret
-; 0x1f24c
 
-Func_1f24c: ; 1f24c (7:724c)
+Func_1f24c:
 	ld a, [wSFXLoopCounter]
 	sub 1
 	ld [wSFXLoopCounter], a
@@ -5015,9 +4923,8 @@ Func_1f24c: ; 1f24c (7:724c)
 	load_frameset Frameset_1558b
 	update_anim_1
 	ret
-; 0x1f310
 
-Func_1f310: ; 1f310 (7:7310)
+Func_1f310:
 	farcall CheckFrontCollision
 	ld a, b
 	and a
@@ -5056,9 +4963,8 @@ Func_1f310: ; 1f310 (7:7310)
 	ld a, D_LEFT
 	ld [wc0e1], a
 	ret
-; 0x1f357
 
-Func_1f357: ; 1f357 (7:7357)
+Func_1f357:
 	farcall CheckCentreCollision
 	ld a, b
 	and a
@@ -5079,9 +4985,8 @@ Func_1f357: ; 1f357 (7:7357)
 	load_frameset Frameset_15576
 	update_anim_1
 	ret
-; 0x1f3a7
 
-Func_1f3a7: ; 1f3a7 (7:73a7)
+Func_1f3a7:
 	farcall CheckCentreCollision
 	ld a, b
 	and a
@@ -5100,9 +5005,8 @@ Func_1f3a7: ; 1f3a7 (7:73a7)
 	ld b, $01
 	call AddYOffset
 	ret
-; 0x1f3d9
 
-Func_1f3d9: ; 1f3d9 (7:73d9)
+Func_1f3d9:
 	farcall CheckUpCollision
 	ld a, b
 	and a
@@ -5119,9 +5023,8 @@ Func_1f3d9: ; 1f3d9 (7:73d9)
 	ld b, $01
 	call SubYOffset
 	ret
-; 0x1f40f
 
-HandleWaterSurfaceInput: ; 1f40f (7:740f)
+HandleWaterSurfaceInput:
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jp nz, StartJump_FromWaterSurface
@@ -5154,9 +5057,8 @@ HandleWaterSurfaceInput: ; 1f40f (7:740f)
 	cp $02
 	jp z, SetState_TryingSubmerge
 	jp SetState_Submerged
-; 0x1f470
 
-HandleUnderwaterThrustingInput: ; 1f470 (7:7470)
+HandleUnderwaterThrustingInput:
 	ld hl, wSwimVelIndex
 	inc [hl]
 	ld a, [hl]
@@ -5339,9 +5241,8 @@ HandleUnderwaterThrustingInput: ; 1f470 (7:7470)
 	ld hl, wc0e1
 	set D_UP_F, [hl]
 	jp StartDive
-; 0x1f64a
 
-HandleInvincibility: ; 1f64a (7:764a)
+HandleInvincibility:
 	ld a, [wInvincibleCounter]
 	and a
 	ret z
@@ -5407,9 +5308,8 @@ HandleInvincibility: ; 1f64a (7:764a)
 	xor $1
 	ld [wInvisibleFrame], a
 	ret
-; 0x1f6c2
 
-Func_1f6c2: ; 1f6c2 (7:76c2)
+Func_1f6c2:
 	ld a, [wGlobalCounter]
 	and %111
 	jr z, .asm_1f6ce
@@ -5426,9 +5326,8 @@ Func_1f6c2: ; 1f6c2 (7:76c2)
 	ld hl, Pals_c800
 	call SetWarioPal
 	ret
-; 0x1f6dc
 
-HandleGroundShake: ; 1f6dc (7:76dc)
+HandleGroundShake:
 	ld a, [wLevelEndScreen]
 	and a
 	ret nz
@@ -5543,9 +5442,8 @@ HandleGroundShake: ; 1f6dc (7:76dc)
 .asm_1f7d6
 	update_anim_1
 	ret
-; 0x1f7e6
 
-SetState_LadderShakeStunned: ; 1f7e6 (7:77e6)
+SetState_LadderShakeStunned:
 	ld a, WST_LADDER_SHAKE_SLIDING
 	ld [wWarioState], a
 	play_sfx SFX_SLIDE
@@ -5563,9 +5461,8 @@ SetState_LadderShakeStunned: ; 1f7e6 (7:77e6)
 	load_frameset Frameset_15948
 	update_anim_1
 	ret
-; 0x1f825
 
-Func_1f825: ; 1f825 (7:7825)
+Func_1f825:
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jr nz, .a_btn
@@ -5602,22 +5499,19 @@ Func_1f825: ; 1f825 (7:7825)
 	xor a
 	ld [wIsRolling], a
 	jp StartJump_FromInput
-; 0x1f863
 
-Func_1f863: ; 1f863 (7:7863)
+Func_1f863:
 	ld hl, SwimStraightVelTable
 	add hl, de
 	ld b, [hl]
 	call SubYOffset
 	ret
-; 0x1f86c
 
-SwimStraightVelTable: ; 1f86c (7:786c)
+SwimStraightVelTable:
 	db $01, $01, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $00, $00, $00
 
-Data_1f894: ; 1f894 (7:7894)
+Data_1f894:
 	db $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $00, $00, $00
 
-SwimDiagonalVelTable: ; 1f8bc (7:78bc)
+SwimDiagonalVelTable:
 	db $01, $01, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $02, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $01, $00, $00, $00
-; 0x1f8e4

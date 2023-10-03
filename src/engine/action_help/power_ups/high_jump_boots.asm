@@ -1,4 +1,4 @@
-HighJumpBootsActionHelp: ; 1fa83f (7e:683f)
+HighJumpBootsActionHelp:
 	call .StateTable
 	ld a, [wActionHelpBlackedOut]
 	and a
@@ -69,9 +69,8 @@ HighJumpBootsActionHelp: ; 1fa83f (7e:683f)
 	dw Func_1fac71
 	dw Func_1faca5
 	dw Func_1facb8
-; 0x1fa912
 
-Func_1fa912: ; 1fa912 (7e:6912)
+Func_1fa912:
 	ld a, [wPowerUpLevel]
 	bit ACTION_HELP_LEVEL_CLEAR_F, a
 	jr nz, .asm_1fa920
@@ -92,13 +91,12 @@ Func_1fa912: ; 1fa912 (7e:6912)
 	ld a, $1
 	ld [wActionHelpState], a
 	jr Func_1fa94a
-; 0x1fa945
 
-Func_1fa945: ; 1fa945 (7e:6945)
+Func_1fa945:
 	ld hl, wTimer
 	dec [hl]
 	ret nz
-Func_1fa94a: ; 1fa94a (7e:694a)
+Func_1fa94a:
 	call ActionHelp_ShowInitialWarioWalk
 	call ActionHelp_ShowDRightInput
 	call ActionHelp_ShowParaGoomWalk
@@ -130,7 +128,7 @@ Func_1fa94a: ; 1fa94a (7e:694a)
 	inc [hl]
 	ret
 
-Func_1fa984: ; 1fa984 (7e:6984)
+Func_1fa984:
 	ld hl, wMenuObj5XCoord
 	dec [hl]
 	ld a, [hl]
@@ -143,7 +141,7 @@ Func_1fa984: ; 1fa984 (7e:6984)
 	inc [hl]
 	ret
 
-Func_1fa994: ; 1fa994 (7e:6994)
+Func_1fa994:
 	ld hl, wTimer
 	inc [hl]
 	ld a, [hl]
@@ -158,7 +156,7 @@ Func_1fa994: ; 1fa994 (7e:6994)
 	inc [hl]
 	ret
 
-Func_1fa9a9: ; 1fa9a9 (7e:69a9)
+Func_1fa9a9:
 	ld hl, wMenuObj5XCoord
 	dec [hl]
 	ld hl, wActionHelpWarioVar
@@ -183,7 +181,7 @@ Func_1fa9a9: ; 1fa9a9 (7e:69a9)
 	inc [hl]
 	ret
 
-Func_1fa9d3: ; 1fa9d3 (7e:69d3)
+Func_1fa9d3:
 	ld hl, wMenuObj5XCoord
 	dec [hl]
 	dec [hl]
@@ -213,7 +211,7 @@ Func_1fa9d3: ; 1fa9d3 (7e:69d3)
 	inc [hl]
 	ret
 
-Func_1faa07: ; 1faa07 (7e:6a07)
+Func_1faa07:
 	ld hl, wTimer
 	dec [hl]
 	ret nz
@@ -227,7 +225,7 @@ Func_1faa07: ; 1faa07 (7e:6a07)
 	inc [hl]
 	ret
 
-Func_1faa1c: ; 1faa1c (7e:6a1c)
+Func_1faa1c:
 	ld hl, wMenuObj5XCoord
 	dec [hl]
 	ld hl, wActionHelpWarioVar
@@ -259,7 +257,7 @@ Func_1faa1c: ; 1faa1c (7e:6a1c)
 	inc [hl]
 	ret
 
-Func_1faa51: ; 1faa51 (7e:6a51)
+Func_1faa51:
 	ld hl, wMenuObj4XCoord
 	dec [hl]
 	ld a, [hl]
@@ -273,7 +271,7 @@ Func_1faa51: ; 1faa51 (7e:6a51)
 	inc [hl]
 	ret
 
-Func_1faa64: ; 1faa64 (7e:6a64)
+Func_1faa64:
 	ld hl, wMenuObj4XCoord
 	dec [hl]
 	ld hl, wActionHelpWarioVar
@@ -303,7 +301,7 @@ Func_1faa64: ; 1faa64 (7e:6a64)
 	inc [hl]
 	ret
 
-Func_1faa99: ; 1faa99 (7e:6a99)
+Func_1faa99:
 	ld hl, wMenuObj5XCoord
 	ld a, [hl]
 	cp $3c
@@ -334,7 +332,7 @@ Func_1faa99: ; 1faa99 (7e:6a99)
 	inc [hl]
 	ret
 
-Func_1faacc: ; 1faacc (7e:6acc)
+Func_1faacc:
 	ld hl, wActionHelpWarioVar
 	inc [hl]
 	ld a, [hl]
@@ -361,7 +359,7 @@ Func_1faacc: ; 1faacc (7e:6acc)
 	inc [hl]
 	ret
 
-Func_1faafb: ; 1faafb (7e:6afb)
+Func_1faafb:
 	call ActionHelp_ClearDPadInput
 	ld hl, wTimer
 	dec [hl]
@@ -378,7 +376,7 @@ Func_1faafb: ; 1faafb (7e:6afb)
 	inc [hl]
 	ret
 
-Func_1fab19: ; 1fab19 (7e:6b19)
+Func_1fab19:
 	ld hl, wMenuObj4XCoord
 	dec [hl]
 	ld hl, wMenuObj5XCoord
@@ -413,7 +411,7 @@ Func_1fab19: ; 1fab19 (7e:6b19)
 	inc [hl]
 	ret
 
-Func_1fab55: ; 1fab55 (7e:6b55)
+Func_1fab55:
 	ld hl, wMenuObj4XCoord
 	inc [hl]
 	ld hl, wMenuObj5XCoord
@@ -440,7 +438,7 @@ Func_1fab55: ; 1fab55 (7e:6b55)
 	inc [hl]
 	ret
 
-Func_1fab83: ; 1fab83 (7e:6b83)
+Func_1fab83:
 	ld hl, wMenuObj4XCoord
 	inc [hl]
 	inc [hl]
@@ -469,7 +467,7 @@ Func_1fab83: ; 1fab83 (7e:6b83)
 	inc [hl]
 	ret
 
-Func_1fabb2: ; 1fabb2 (7e:6bb2)
+Func_1fabb2:
 	ld a, [wMenuObj4AnimationEnded]
 	and a
 	jr z, .asm_1fabbe
@@ -509,7 +507,7 @@ Func_1fabb2: ; 1fabb2 (7e:6bb2)
 	inc [hl]
 	ret
 
-Func_1fabf8: ; 1fabf8 (7e:6bf8)
+Func_1fabf8:
 	ld hl, wTimer
 	dec [hl]
 	ret nz
@@ -521,7 +519,7 @@ Func_1fabf8: ; 1fabf8 (7e:6bf8)
 	inc [hl]
 	ret
 
-Func_1fac08: ; 1fac08 (7e:6c08)
+Func_1fac08:
 	ld hl, wActionHelpWarioVar
 	inc [hl]
 	ld a, [hl]
@@ -552,7 +550,7 @@ Func_1fac08: ; 1fac08 (7e:6c08)
 	call ActionHelp_ClearButtonsInput
 	ret
 
-Func_1fac3c: ; 1fac3c (7e:6c3c)
+Func_1fac3c:
 	ld a, [wActionHelpWarioAnimationEnded]
 	and a
 	ret z
@@ -564,7 +562,7 @@ Func_1fac3c: ; 1fac3c (7e:6c3c)
 	inc [hl]
 	ret
 
-Func_1fac4c: ; 1fac4c (7e:6c4c)
+Func_1fac4c:
 	ld hl, wMenuObj5XCoord
 	dec [hl]
 	ld hl, wActionHelpWarioVar
@@ -587,7 +585,7 @@ Func_1fac4c: ; 1fac4c (7e:6c4c)
 	inc [hl]
 	ret
 
-Func_1fac71: ; 1fac71 (7e:6c71)
+Func_1fac71:
 	ld hl, wMenuObj5XCoord
 	dec [hl]
 	dec [hl]
@@ -617,7 +615,7 @@ Func_1fac71: ; 1fac71 (7e:6c71)
 	inc [hl]
 	ret
 
-Func_1faca5: ; 1faca5 (7e:6ca5)
+Func_1faca5:
 	ld hl, wTimer
 	dec [hl]
 	ret nz
@@ -630,7 +628,7 @@ Func_1faca5: ; 1faca5 (7e:6ca5)
 	inc [hl]
 	ret
 
-Func_1facb8: ; 1facb8 (7e:6cb8)
+Func_1facb8:
 	ld hl, wMenuObj5XCoord
 	dec [hl]
 	dec [hl]
@@ -655,4 +653,3 @@ Func_1facb8: ; 1facb8 (7e:6cb8)
 	ld a, $40
 	ld [wActionHelpWarioYCoord], a
 	jp Func_1fa912
-; 0x1face4

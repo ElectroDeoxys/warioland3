@@ -1,4 +1,4 @@
-Music_HiddenFigureReveal_Ch1: ; 3b4a1 (0e:74a1)
+Music_HiddenFigureReveal_Ch1:
 	semitone_offset 0
 	tempo 90
 	wave WAVE_14
@@ -15,9 +15,8 @@ Music_HiddenFigureReveal_Ch1: ; 3b4a1 (0e:74a1)
 	note NOTE_DURATION_72, G_4
 	audio_wait_72
 	audio_end
-; 0x3b4b9
 
-Music_HiddenFigureReveal_Ch2: ; 3b4b9 (0e:74b9)
+Music_HiddenFigureReveal_Ch2:
 	semitone_offset 0
 	wave WAVE_0A
 	vibrato_amplitude 30
@@ -33,9 +32,8 @@ Music_HiddenFigureReveal_Ch2: ; 3b4b9 (0e:74b9)
 	note NOTE_DURATION_72, B_3
 	audio_wait_72
 	audio_end
-; 0x3b4cf
 
-Music_HiddenFigureReveal_Ch3: ; 3b4cf (0e:74cf)
+Music_HiddenFigureReveal_Ch3:
 	semitone_offset 0
 	wave WAVE_7A
 	vibrato_amplitude 30
@@ -51,11 +49,9 @@ Music_HiddenFigureReveal_Ch3: ; 3b4cf (0e:74cf)
 	note NOTE_DURATION_72, F_3
 	audio_wait_72
 	audio_end
-; 0x3b4e5
 
-Music_HiddenFigureReveal: ; 3b4e5 (0e:74e5)
+Music_HiddenFigureReveal:
 	db 3, 0
 	dw Music_HiddenFigureReveal_Ch1
 	dw Music_HiddenFigureReveal_Ch2
 	dw Music_HiddenFigureReveal_Ch3
-; 0x3b4ed

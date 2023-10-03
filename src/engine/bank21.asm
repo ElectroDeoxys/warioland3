@@ -1,4 +1,4 @@
-Pals_84000: ; 84000 (21:4000)
+Pals_84000:
 	rgb 31, 31, 31
 	rgb 12, 29,  0
 	rgb 15, 15, 15
@@ -38,9 +38,8 @@ Pals_84000: ; 84000 (21:4000)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84040
 
-Pals_84040: ; 84040 (21:4040)
+Pals_84040:
 	rgb 28, 29, 22
 	rgb 15, 14,  2
 	rgb 15, 14, 13
@@ -80,9 +79,8 @@ Pals_84040: ; 84040 (21:4040)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84080
 
-Pals_84080: ; 84080 (21:4080)
+Pals_84080:
 	rgb 20, 19, 22
 	rgb  0, 16, 17
 	rgb 12, 12, 12
@@ -122,9 +120,8 @@ Pals_84080: ; 84080 (21:4080)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x840c0
 
-Pals_840c0: ; 840c0 (21:40c0)
+Pals_840c0:
 	rgb 16, 14, 23
 	rgb  6, 17, 17
 	rgb 12, 12, 12
@@ -164,9 +161,8 @@ Pals_840c0: ; 840c0 (21:40c0)
 	rgb 31, 29,  0
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84100
 
-Pals_84100: ; 84100 (21:4100)
+Pals_84100:
 	rgb 31, 28, 21
 	rgb 20, 26, 15
 	rgb 15, 14, 13
@@ -206,9 +202,8 @@ Pals_84100: ; 84100 (21:4100)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84140
 
-Pals_84140: ; 84140 (21:4140)
+Pals_84140:
 	rgb  3, 23, 31
 	rgb 12, 29,  0
 	rgb 15, 15, 15
@@ -248,9 +243,8 @@ Pals_84140: ; 84140 (21:4140)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84180
 
-Pals_84180: ; 84180 (21:4180)
+Pals_84180:
 	rgb 30, 14,  0
 	rgb 15, 14,  2
 	rgb 15, 14, 13
@@ -290,9 +284,8 @@ Pals_84180: ; 84180 (21:4180)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x841c0
 
-Pals_841c0: ; 841c0 (21:41c0)
+Pals_841c0:
 	rgb 10,  8, 17
 	rgb  0, 18, 17
 	rgb 12, 12, 12
@@ -332,9 +325,8 @@ Pals_841c0: ; 841c0 (21:41c0)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84200
 
-Pals_84200: ; 84200 (21:4200)
+Pals_84200:
 	rgb  3,  0, 21
 	rgb  6, 17, 17
 	rgb  9, 12, 12
@@ -374,9 +366,8 @@ Pals_84200: ; 84200 (21:4200)
 	rgb 31, 29,  0
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84240
 
-Pals_84240: ; 84240 (21:4240)
+Pals_84240:
 	rgb 16, 17, 29
 	rgb 20, 26, 15
 	rgb 17, 16, 14
@@ -416,9 +407,8 @@ Pals_84240: ; 84240 (21:4240)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84280
 
-Pals_84280: ; 84280 (21:4280)
+Pals_84280:
 	rgb  3, 23, 31
 	rgb 12, 29,  0
 	rgb 15, 12,  4
@@ -458,9 +448,8 @@ Pals_84280: ; 84280 (21:4280)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x842c0
 
-Pals_842c0: ; 842c0 (21:42c0)
+Pals_842c0:
 	rgb 30, 14,  0
 	rgb 15, 14,  2
 	rgb  9,  7,  2
@@ -500,9 +489,8 @@ Pals_842c0: ; 842c0 (21:42c0)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84300
 
-Pals_84300: ; 84300 (21:4300)
+Pals_84300:
 	rgb 10,  8, 17
 	rgb  0, 16, 17
 	rgb  0,  9,  8
@@ -542,9 +530,8 @@ Pals_84300: ; 84300 (21:4300)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84340
 
-Pals_84340: ; 84340 (21:4340)
+Pals_84340:
 	rgb  3,  0, 21
 	rgb  6, 17, 17
 	rgb  3,  8, 11
@@ -584,9 +571,8 @@ Pals_84340: ; 84340 (21:4340)
 	rgb 31, 29,  0
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84380
 
-Pals_84380: ; 84380 (21:4380)
+Pals_84380:
 	rgb 16, 17, 29
 	rgb 20, 26, 15
 	rgb 15, 14, 13
@@ -626,9 +612,8 @@ Pals_84380: ; 84380 (21:4380)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x843c0
 
-Pals_843c0: ; 843c0 (21:43c0)
+Pals_843c0:
 	rgb  3, 23, 31
 	rgb 12, 29,  0
 	rgb  3, 11, 16
@@ -668,9 +653,8 @@ Pals_843c0: ; 843c0 (21:43c0)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84400
 
-Pals_84400: ; 84400 (21:4400)
+Pals_84400:
 	rgb 30, 14,  0
 	rgb 15, 14,  2
 	rgb 10,  9, 13
@@ -710,9 +694,8 @@ Pals_84400: ; 84400 (21:4400)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84440
 
-Pals_84440: ; 84440 (21:4440)
+Pals_84440:
 	rgb 10,  8, 17
 	rgb  0, 16, 17
 	rgb  6, 10,  8
@@ -752,9 +735,8 @@ Pals_84440: ; 84440 (21:4440)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84480
 
-Pals_84480: ; 84480 (21:4480)
+Pals_84480:
 	rgb  3,  0, 21
 	rgb  6, 17, 17
 	rgb  9,  9, 10
@@ -794,9 +776,8 @@ Pals_84480: ; 84480 (21:4480)
 	rgb 31, 29,  0
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x844c0
 
-Pals_844c0: ; 844c0 (21:44c0)
+Pals_844c0:
 	rgb 16, 17, 29
 	rgb 20, 26, 15
 	rgb 12, 15, 16
@@ -836,9 +817,8 @@ Pals_844c0: ; 844c0 (21:44c0)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84500
 
-Pals_84500: ; 84500 (21:4500)
+Pals_84500:
 	rgb 31, 31, 31
 	rgb 12, 29,  0
 	rgb  4, 21,  5
@@ -878,9 +858,8 @@ Pals_84500: ; 84500 (21:4500)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84540
 
-Pals_84540: ; 84540 (21:4540)
+Pals_84540:
 	rgb 28, 29, 22
 	rgb 15, 14,  2
 	rgb 10, 15,  1
@@ -920,9 +899,8 @@ Pals_84540: ; 84540 (21:4540)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84580
 
-Pals_84580: ; 84580 (21:4580)
+Pals_84580:
 	rgb 20, 19, 22
 	rgb  0, 16, 17
 	rgb  6, 14, 11
@@ -962,9 +940,8 @@ Pals_84580: ; 84580 (21:4580)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x845c0
 
-Pals_845c0: ; 845c0 (21:45c0)
+Pals_845c0:
 	rgb 16, 14, 23
 	rgb  6, 17, 17
 	rgb  2, 12,  6
@@ -1004,9 +981,8 @@ Pals_845c0: ; 845c0 (21:45c0)
 	rgb 31, 29,  0
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84600
 
-Pals_84600: ; 84600 (21:4600)
+Pals_84600:
 	rgb 31, 28, 21
 	rgb 20, 26, 15
 	rgb 16, 20, 18
@@ -1046,9 +1022,8 @@ Pals_84600: ; 84600 (21:4600)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84640
 
-Pals_84640: ; 84640 (21:4640)
+Pals_84640:
 	rgb  3, 23, 31
 	rgb 12, 29,  0
 	rgb  4, 21,  5
@@ -1088,9 +1063,8 @@ Pals_84640: ; 84640 (21:4640)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84680
 
-Pals_84680: ; 84680 (21:4680)
+Pals_84680:
 	rgb 30, 14,  0
 	rgb 15, 14,  2
 	rgb 10, 15,  1
@@ -1130,9 +1104,8 @@ Pals_84680: ; 84680 (21:4680)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x846c0
 
-Pals_846c0: ; 846c0 (21:46c0)
+Pals_846c0:
 	rgb 10,  8, 17
 	rgb  0, 18, 17
 	rgb  6, 14, 11
@@ -1172,9 +1145,8 @@ Pals_846c0: ; 846c0 (21:46c0)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84700
 
-Pals_84700: ; 84700 (21:4700)
+Pals_84700:
 	rgb  3,  0, 21
 	rgb  6, 17, 17
 	rgb  2, 12,  6
@@ -1214,9 +1186,8 @@ Pals_84700: ; 84700 (21:4700)
 	rgb 31, 29,  0
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84740
 
-Pals_84740: ; 84740 (21:4740)
+Pals_84740:
 	rgb 16, 17, 29
 	rgb 20, 26, 15
 	rgb 16, 20, 18
@@ -1256,9 +1227,8 @@ Pals_84740: ; 84740 (21:4740)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84780
 
-Pals_84780: ; 84780 (21:4780)
+Pals_84780:
 	rgb 31, 31, 31
 	rgb 20, 20, 20
 	rgb 14, 14, 14
@@ -1298,9 +1268,8 @@ Pals_84780: ; 84780 (21:4780)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x847c0
 
-Pals_847c0: ; 847c0 (21:47c0)
+Pals_847c0:
 	rgb 15, 15, 15
 	rgb 20, 20, 20
 	rgb 14, 14, 14
@@ -1340,9 +1309,8 @@ Pals_847c0: ; 847c0 (21:47c0)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84800
 
-Pals_84800: ; 84800 (21:4800)
+Pals_84800:
 	rgb 15, 15, 15
 	rgb 20, 20, 20
 	rgb 10, 10, 10
@@ -1382,9 +1350,8 @@ Pals_84800: ; 84800 (21:4800)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84840
 
-Pals_84840: ; 84840 (21:4840)
+Pals_84840:
 	rgb 15, 15, 15
 	rgb 20, 20, 20
 	rgb 11, 11, 11
@@ -1424,9 +1391,8 @@ Pals_84840: ; 84840 (21:4840)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x84880
 
-Pals_84880: ; 84880 (21:4880)
+Pals_84880:
 	rgb 15, 15, 15
 	rgb 20, 20, 20
 	rgb 11, 11, 11
@@ -1466,10 +1432,9 @@ Pals_84880: ; 84880 (21:4880)
 	rgb 31, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x848c0
 
 ; unreferenced
-Pals_848c0: ; 848c0 (21:48c0)
+Pals_848c0:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 14,  0
@@ -1489,9 +1454,8 @@ Pals_848c0: ; 848c0 (21:48c0)
 	rgb  0,  0,  0
 	rgb  0,  0,  0
 	rgb  0,  0,  0
-; 0x848e0
 
-Pals_848e0: ; 848e0 (21:48e0)
+Pals_848e0:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 27,  1
@@ -1511,9 +1475,8 @@ Pals_848e0: ; 848e0 (21:48e0)
 	rgb  0,  0,  0
 	rgb  0,  0,  0
 	rgb  0,  0,  0
-; 0x84900
 
-Pals_84900: ; 84900 (21:4900)
+Pals_84900:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -1553,9 +1516,8 @@ Pals_84900: ; 84900 (21:4900)
 	rgb 19, 31, 31
 	rgb  0, 12, 31
 	rgb  0,  0,  7
-; 0x84940
 
-Pals_84940: ; 84940 (21:4940)
+Pals_84940:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -1595,9 +1557,8 @@ Pals_84940: ; 84940 (21:4940)
 	rgb 19, 31, 31
 	rgb  0, 12, 31
 	rgb  0,  0,  7
-; 0x84980
 
-Pals_84980: ; 84980 (21:4980)
+Pals_84980:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -1637,9 +1598,8 @@ Pals_84980: ; 84980 (21:4980)
 	rgb 19, 31, 31
 	rgb  0, 12, 31
 	rgb  0,  0,  7
-; 0x849c0
 
-Pals_849c0: ; 849c0 (21:49c0)
+Pals_849c0:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -1679,10 +1639,9 @@ Pals_849c0: ; 849c0 (21:49c0)
 	rgb 19, 31, 31
 	rgb  0, 12, 31
 	rgb  0,  0,  7
-; 0x84a00
 
 ; unreferenced
-Pals_84a00: ; 84a00 (21:4a00)
+Pals_84a00:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -1702,9 +1661,8 @@ Pals_84a00: ; 84a00 (21:4a00)
 	rgb  0,  0,  0
 	rgb  0,  0,  0
 	rgb  0,  0,  0
-; 0x84a20
 
-Pals_84a20: ; 84a20 (21:4a20)
+Pals_84a20:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 19,  1
@@ -1724,9 +1682,8 @@ Pals_84a20: ; 84a20 (21:4a20)
 	rgb 31, 31, 31
 	rgb  0, 12, 31
 	rgb  0,  0,  7
-; 0x84a40
 
-DayNightTransition: ; 84a40 (21:4a40)
+DayNightTransition:
 	ld hl, wOWPalTransitionCounter
 	inc [hl]
 	ld a, [w2d011]
@@ -1955,9 +1912,8 @@ DayNightTransition: ; 84a40 (21:4a40)
 	xor a
 	ld [w2d809], a
 	ret
-; 0x84b97
 
-Func_84b97: ; 84b97 (21:4b97)
+Func_84b97:
 	ld hl, wOWPalTransitionCounter
 	inc [hl]
 	ld a, [wOWPalTransitionState]
@@ -2028,7 +1984,7 @@ Func_84b97: ; 84b97 (21:4b97)
 	ld [wOWPalTransitionCounter], a
 	ret
 
-Func_84c0d: ; 84c0d (21:4c0d)
+Func_84c0d:
 	ld hl, wOWPalTransitionCounter
 	inc [hl]
 	ld a, [wOWPalTransitionState]
@@ -2067,9 +2023,8 @@ Func_84c0d: ; 84c0d (21:4c0d)
 	ld [wOWPalTransitionState], a
 	ld [wOWPalTransitionCounter], a
 	ret
-; 0x84c4b
 
-LoadBaseAndTargetOWPals: ; 84c4b (21:4c4b)
+LoadBaseAndTargetOWPals:
 	call GetOWPals
 	ld a, [hli]
 	ld e, a
@@ -2101,9 +2056,8 @@ LoadBaseAndTargetOWPals: ; 84c4b (21:4c4b)
 	xor a
 	ld [w2d809], a
 	ret
-; 0x84c7a
 
-GetOWPals: ; 84c7a (21:4c7a)
+GetOWPals:
 	add a ; *2
 	ld c, a
 	call .CheckCrayons
@@ -2137,9 +2091,8 @@ GetOWPals: ; 84c7a (21:4c7a)
 .west
 	ld a, $5
 	ret
-; 0x84cab
 
-InitColourFadeStructs: ; 84cab (21:4cab)
+InitColourFadeStructs:
 	ld a, 8 * NUM_PAL_COLORS * 3 
 	ld [w2d807], a
 	ld hl, wFadePals
@@ -2184,12 +2137,11 @@ InitColourFadeStructs: ; 84cab (21:4cab)
 	ld [w2d807], a
 	ret z
 	jr .loop
-; 0x84ce0
 
 ; writes red/blue/green colour values
 ; from the pal in de to hl
 ; in intervals of 8 bytes between them
-CopyPalToColourFadeStructs: ; 84ce0 (21:4ce0)
+CopyPalToColourFadeStructs:
 	ld a, 8 * NUM_PAL_COLORS
 	ld [w2d807], a
 .loop
@@ -2228,9 +2180,8 @@ CopyPalToColourFadeStructs: ; 84ce0 (21:4ce0)
 	and a
 	jr nz, .loop
 	ret
-; 0x84d17
 
-ApplyPalFadeColours: ; 84d17 (21:4d17)
+ApplyPalFadeColours:
 	ld hl, wFadePals + COLOURFADESTRUCT_CURRENT
 	ld de, wTempBGPals
 	ld a, 8 * NUM_PAL_COLORS
@@ -2273,9 +2224,8 @@ ApplyPalFadeColours: ; 84d17 (21:4d17)
 	ld bc, COLOURFADESTRUCT_LENGTH
 	add hl, bc
 	jr .loop
-; 0x84d55
 
-SkipDayNightTransition: ; 84d55 (21:4d55)
+SkipDayNightTransition:
 	; apply target pals immediately
 	ld hl, wTempPals1
 	ld de, wTempBGPals
@@ -2294,9 +2244,8 @@ SkipDayNightTransition: ; 84d55 (21:4d55)
 	ld a, b
 	ld [wOWPalTransitionState], a
 	ret
-; 0x84d76
 
-VBlank_84d76: ; 84d76 (21:4d76)
+VBlank_84d76:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -2355,9 +2304,8 @@ VBlank_84d76: ; 84d76 (21:4d76)
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
 .end
-; 0x84dd9
 
-OWPals: ; 84dd9 (21:4dd9)
+OWPals:
 ; North
 	; day
 	dw Pals_84000
@@ -2435,16 +2383,15 @@ OWPals: ; 84dd9 (21:4dd9)
 	dw Pals_84740
 	dw Pals_84640
 	dw Pals_84640
-; 0x84e39
 
-Data_84e39: ; 84e39 (21:4e39)
+Data_84e39:
 	dw Pals_84780 ; NORTH
 	dw Pals_847c0 ; WEST
 	dw Pals_84800 ; SOUTH
 	dw Pals_84840 ; EAST
 	dw Pals_84880 ; EAST (no Ice)
 
-Func_84e43: ; 84e43 (21:4e43)
+Func_84e43:
 	ld a, [wPalConfig1TotalSteps]
 	cp $01
 	jr nc, .asm_84e77
@@ -2478,7 +2425,7 @@ Func_84e43: ; 84e43 (21:4e43)
 	ld [wPalConfig2TotalSteps], a
 	ret
 
-Func_84e86: ; 84e86 (21:4e86)
+Func_84e86:
 	ld a, [wPalConfig1TotalSteps]
 	cp 1
 	jp nc, .do_fade
@@ -2635,10 +2582,9 @@ Func_84e86: ; 84e86 (21:4e86)
 	ld b, 8 palettes
 	call CopyHLToDE
 	ret
-; 0x84fd5
 
 ; unreferenced
-Func_84fd5: ; 84fd5 (21:4fd5)
+Func_84fd5:
 	xor a
 	ld hl, wTempBGPals
 	ld bc, 8 palettes
@@ -2648,9 +2594,8 @@ Func_84fd5: ; 84fd5 (21:4fd5)
 	ld bc, 8 palettes
 	call WriteAToHL_BCTimes
 	ret
-; 0x84fea
 
-ClearTempPals_Bank21: ; 84fea (21:4fea)
+ClearTempPals_Bank21:
 	xor a
 	ld hl, wTempPals1
 	ld bc, 8 palettes
@@ -2661,7 +2606,7 @@ ClearTempPals_Bank21: ; 84fea (21:4fea)
 	call WriteAToHL_BCTimes
 	ret
 
-Func_84fff: ; 84fff (21:4fff)
+Func_84fff:
 	ld a, [wPalConfig1TotalSteps]
 	cp $01
 	jr nc, .asm_85033
@@ -2697,7 +2642,7 @@ Func_84fff: ; 84fff (21:4fff)
 	inc [hl]
 	ret
 
-Func_85046: ; 85046 (21:5046)
+Func_85046:
 	ld a, [wPalConfig1TotalSteps]
 	cp 1
 	jr nc, .asm_850a6
@@ -2750,7 +2695,7 @@ Func_85046: ; 85046 (21:5046)
 	inc [hl]
 	ret
 
-Func_850b9: ; 850b9 (21:50b9)
+Func_850b9:
 	ld a, [wPalConfig2TotalSteps]
 	cp $01
 	jr nc, .asm_850ef
@@ -2784,7 +2729,7 @@ Func_850b9: ; 850b9 (21:50b9)
 	inc [hl]
 	ret
 
-Func_850ff: ; 850ff (21:50ff)
+Func_850ff:
 	ld a, [wPalConfig1TotalSteps]
 	cp $01
 	jr nc, .asm_85135
@@ -2818,7 +2763,7 @@ Func_850ff: ; 850ff (21:50ff)
 	inc [hl]
 	ret
 
-Func_85145: ; 85145 (21:5145)
+Func_85145:
 	ld a, [wPalConfig1TotalSteps]
 	cp $01
 	jr nc, .asm_85179
@@ -2852,9 +2797,8 @@ Func_85145: ; 85145 (21:5145)
 	ld hl, w2d062
 	inc [hl]
 	ret
-; 0x8518c
 
-Func_8518c: ; 8518c (21:518c)
+Func_8518c:
 	ld a, [wPalConfig1TotalSteps]
 	cp $01
 	jr nc, .fade
@@ -2879,9 +2823,8 @@ Func_8518c: ; 8518c (21:518c)
 	ld hl, w2d062
 	inc [hl]
 	ret
-; 0x851bc
 
-Func_851bc: ; 851bc (21:51bc)
+Func_851bc:
 	ld a, LOW(rBCPS)
 	ld [wPalConfig1Register], a
 	xor a
@@ -2891,9 +2834,8 @@ Func_851bc: ; 851bc (21:51bc)
 	ld hl, wPalConfig1TotalSteps
 	call FadePalConfig
 	ret
-; 0x851d1
 
-Func_851d1: ; 851d1 (21:51d1)
+Func_851d1:
 	ld a, LOW(rOCPS)
 	ld [wPalConfig2Register], a
 	ld a, 1
@@ -2903,9 +2845,8 @@ Func_851d1: ; 851d1 (21:51d1)
 	ld hl, wPalConfig2TotalSteps
 	call FadePalConfig
 	ret
-; 0x851e7
 
-OWGreyTransition: ; 851e7 (21:51e7)
+OWGreyTransition:
 	ld hl, wOWPalTransitionCounter
 	inc [hl]
 	ld a, [wOWPalTransitionState]
@@ -2944,9 +2885,8 @@ OWGreyTransition: ; 851e7 (21:51e7)
 	ld [wOWPalTransitionState], a
 	ld [wOWPalTransitionCounter], a
 	ret
-; 0x85234
 
-LoadGreyOWPals: ; 85234 (21:5234)
+LoadGreyOWPals:
 	ld a, [wCurMapSide]
 	ld b, a
 	add a ; *2
@@ -2986,9 +2926,8 @@ LoadGreyOWPals: ; 85234 (21:5234)
 	inc hl
 	inc hl
 	ret
-; 0x85271
 
-FadeInLevelName: ; 85271 (21:5271)
+FadeInLevelName:
 	ld a, [wPalConfig1TotalSteps]
 	cp 1
 	jr nc, .do_fade
@@ -3052,16 +2991,14 @@ FadeInLevelName: ; 85271 (21:5271)
 	ld c, $00
 	rl c
 	ret
-; 0x852dd
 
-Pals_852dd: ; 852dd (21:52dd)
+Pals_852dd:
 	rgb 31, 31, 31
 	rgb  8, 31, 31
 	rgb 14, 14, 14
 	rgb  0,  0,  0
-; 0x852e5
 
-Func_852e5: ; 852e5 (21:52e5)
+Func_852e5:
 	ld a, [w2d0e0]
 	xor $03
 	ret nz
@@ -3101,9 +3038,8 @@ Func_852e5: ; 852e5 (21:52e5)
 	ld [wPalConfig1TotalSteps], a
 	ld [w2d0e0], a
 	ret
-; 0x85331
 
-FadeBGPalConfig: ; 85331 (21:5331)
+FadeBGPalConfig:
 	ld a, LOW(rBCPS)
 	ld [wPalConfig1Register], a
 	xor a
@@ -3119,12 +3055,11 @@ FadeBGPalConfig: ; 85331 (21:5331)
 	ld hl, wPalConfig1TotalSteps
 	call FadePalConfig
 	ret
-; 0x8534f
 
 ; fades pal in wPalConfig
 ; from wTempBGPals/wTempOBPals to wTempPals1/wTempPals2
 ; return carry if total steps hasn't reached $20
-FadePalConfig: ; 8534f (21:534f)
+FadePalConfig:
 	push hl
 	ld a, [hl]
 	ld [wCurPalTotalSteps], a
@@ -3275,9 +3210,8 @@ FadePalConfig: ; 8534f (21:534f)
 	ld [hl], a
 	cp $20
 	ret
-; 0x8540a
 
-Func_8540a: ; 8540a (21:540a)
+Func_8540a:
 	call GetMapSidePalGroup1
 	call .GetCrayonPal
 	ld a, [w2d011]
@@ -3325,9 +3259,8 @@ Func_8540a: ; 8540a (21:540a)
 .west
 	ld hl, Pals_84640
 	ret
-; 0x85450
 
-LoadOWStarIndicatorPals: ; 85450 (21:5450)
+LoadOWStarIndicatorPals:
 	ld hl, Pals_848e0
 	ld de, wTempPals2 palette 4
 	ld b, 2 palettes
@@ -3343,9 +3276,8 @@ LoadOWStarIndicatorPals: ; 85450 (21:5450)
 	ld a, LOW(rOCPS)
 	ld [wPalConfig1Register], a
 	ret
-; 0x85475
 
-Func_85475: ; 85475 (21:5475)
+Func_85475:
 	call GetMapSidePalGroup1
 	call Func_8548f
 	ld a, [w2d011]
@@ -3358,9 +3290,8 @@ Func_85475: ; 85475 (21:5475)
 	call GetMapSidePalGroup2
 	call LoadPalsToTempPals2
 	ret
-; 0x8548f
 
-Func_8548f: ; 8548f (21:548f)
+Func_8548f:
 	ld a, [wCrayonFlags]
 	and ALL_CRAYONS
 	cp ALL_CRAYONS
@@ -3379,9 +3310,8 @@ Func_8548f: ; 8548f (21:548f)
 .west
 	ld hl, Pals_84640
 	ret
-; 0x854a9
 
-GetMapSidePalGroup1: ; 854a9 (21:54a9)
+GetMapSidePalGroup1:
 	ld hl, Pals_84000
 	ld de, 40 palettes
 	ld a, [wCurMapSide]
@@ -3391,9 +3321,8 @@ GetMapSidePalGroup1: ; 854a9 (21:54a9)
 	ret z
 	add hl, de
 	jr .loop
-; 0x854b8
 
-GetMapSidePalGroup2: ; 854b8 (21:54b8)
+GetMapSidePalGroup2:
 	ld hl, Pals_84900
 	ld de, 8 palettes
 	ld a, [wCurMapSide]
@@ -3403,17 +3332,16 @@ GetMapSidePalGroup2: ; 854b8 (21:54b8)
 	ret z
 	add hl, de
 	jr .loop
-; 0x854c7
 
-ApplyPalConfig2: ; 854c7 (21:54c7)
+ApplyPalConfig2:
 	ld hl, wPalConfig2
 	jr ApplyPalConfig_Bank21
 
-ApplyPalConfig1: ; 854cc (21:54cc)
+ApplyPalConfig1:
 	ld hl, wPalConfig1
 ;	fallthrough
 
-ApplyPalConfig_Bank21: ; 854cf (21:54cf)
+ApplyPalConfig_Bank21:
 	ld c, [hl]
 	xor a
 	ld [hli], a
@@ -3445,9 +3373,8 @@ ApplyPalConfig_Bank21: ; 854cf (21:54cf)
 	dec b
 	jr nz, .loop
 	ret
-; 0x854ee
 
-Func_854ee: ; 854ee (21:54ee)
+Func_854ee:
 .start
 	ld a, [hli]
 	and a
@@ -3475,9 +3402,8 @@ Func_854ee: ; 854ee (21:54ee)
 	ld [bc], a
 	inc bc
 	jr .loop_2
-; 0x8550b
 
-Data_8550b:: ; 8550b (21:550b)
+Data_8550b::
 	dw wTilemap + $109
 	db $6d, $6e, $6e, $6e, $79, $70
 	db $00, $00, $00, $20, $00, $70
@@ -3491,17 +3417,15 @@ Data_8550b:: ; 8550b (21:550b)
 	db $00, $00, $00, $20, $20, $70
 
 	db $00
-; 0x85536
 
-Data_85536:: ; 85536 (21:5536)
+Data_85536::
 	dw wTilemap + $27
 	db $c4, $75, $76, $75, $7f, $77, $c4, $70
 	db $09, $0d, $0d, $2d, $0d, $0d, $29, $70
 	
 	db $00
-; 0x85549
 
-Data_85549:: ; 85549 (21:5549)
+Data_85549::
 	dw wTilemap + $88
 	db $56, $57, $45, $46, $70
 	db $01, $01, $01, $01, $70
@@ -3515,17 +3439,15 @@ Data_85549:: ; 85549 (21:5549)
 	db $01, $01, $01, $01, $70
 
 	db $00
-; 0x8556e
 
-Data_8556e:: ; 8556e (21:556e)
+Data_8556e::
 	dw wTilemap + $1c6
 	db $7e, $7e, $7e, $70
 	db $0c, $0c, $0c, $70
 	
 	db $00
-; 0x85579
 
-Data_85579:: ; 85579 (21:5579)
+Data_85579::
 	dw wTilemap + $4e
 	db $20, $21, $70
 	db $01, $01, $70
@@ -3555,9 +3477,8 @@ Data_85579:: ; 85579 (21:5579)
 	db $05, $05, $70
 
 	db $00
-; 0x855b2
 
-Data_855b2:: ; 855b2 (21:55b2)
+Data_855b2::
 	dw wTilemap + $c5
 	db $00, $70
 	db $00, $70
@@ -3587,9 +3508,8 @@ Data_855b2:: ; 855b2 (21:55b2)
 	db $03, $03, $03, $70
 	
 	db $00
-; 0x855f9
 
-Data_855f9:: ; 855f9 (21:55f9)
+Data_855f9::
 	dw wTilemap + $145
 	db $19, $3e, $3f, $70
 	db $0a, $03, $03, $70
@@ -3599,9 +3519,8 @@ Data_855f9:: ; 855f9 (21:55f9)
 	db $03, $03, $03, $70
 
 	db $00
-; 0x8560e
 
-Data_8560e:: ; 8560e (21:560e)
+Data_8560e::
 	dw wTilemap + $48
 	db $48, $49, $70, $01, $01, $70
 
@@ -3609,9 +3528,8 @@ Data_8560e:: ; 8560e (21:560e)
 	db $58, $59, $70, $01, $01, $70
 	
 	db $00
-; 0x8561f
 
-Data_8561f:: ; 8561f (21:561f)
+Data_8561f::
 	dw wTilemap + $70
 	db $51, $5f, $53, $70
 	db $01, $01, $01, $70
@@ -3625,9 +3543,8 @@ Data_8561f:: ; 8561f (21:561f)
 	db $29, $00, $00, $70
 
 	db $00
-; 0x8563e
 
-Data_8563e:: ; 8563e (21:563e)
+Data_8563e::
 	dw wTilemap + $123
 	db $6c, $6d, $6e, $6f, $70
 	db $00, $00, $00, $00, $70
@@ -3638,7 +3555,7 @@ Data_8563e:: ; 8563e (21:563e)
 
 	db $00
 
-Data_85657:: ; 85657 (21:5657)
+Data_85657::
 	dw wTilemap + $1a1
 	db $f7, $f6, $f9, $f8, $f8, $f8, $f9, $f9, $f9, $40, $41, $42, $43, $2c, $2d, $f8, $f9, $f6, $70
 	db $2a, $2a, $2a, $2a, $0a, $2a, $0a, $2a, $0a, $01, $01, $01, $01, $01, $02, $0a, $0a, $0a, $70
@@ -3648,32 +3565,26 @@ Data_85657:: ; 85657 (21:5657)
 	db $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $02, $02, $02, $02, $02, $02, $0a, $0a, $0a, $70
 
 	db $00
-; 0x856a8
 
 ; unreferenced
-BGMap_856a8:: ; 856a8 (21:56a8)
+BGMap_856a8::
 	INCBIN "gfx/bgmaps/map_856a8.bin"
-; 0x857f7
 
-BGMap_857f7:: ; 857f7 (21:57f7)
+BGMap_857f7::
 	INCBIN "gfx/bgmaps/map_857f7.bin"
-; 0x85888
 
 ; unreferenced
-BGMap_85888:: ; 85888 (21:5888)
+BGMap_85888::
 	INCBIN "gfx/bgmaps/map_85888.bin"
-; 0x85897
 
-BGMap_85897:: ; 85897 (21:5897)
+BGMap_85897::
 	INCBIN "gfx/bgmaps/map_85897.bin"
-; 0x85928
 
 ; unreferenced
-BGMap_85928:: ; 85928 (21:5928)
+BGMap_85928::
 	INCBIN "gfx/bgmaps/map_85928.bin"
-; 0x85a68
 
-Func_85a68: ; 85a68 (21:5a68)
+Func_85a68:
 .asm_85a68
 	ld hl, wSceneWarioDuration
 	ld a, [hli]
@@ -3719,7 +3630,7 @@ Func_85a91:
 	inc de
 	ret
 
-Func_85aa2: ; 85aa2 (21:5aa2)
+Func_85aa2:
 .asm_85aa2
 	ld hl, wOWUIObj2Duration
 	ld a, [hli]
@@ -3748,7 +3659,7 @@ Func_85aa2: ; 85aa2 (21:5aa2)
 	call Func_85a91
 	jr .asm_85aa2
 
-Func_85acb: ; 85acb (21:5acb)
+Func_85acb:
 .asm_85acb
 	ld hl, wd154
 	ld a, [hli]
@@ -3777,50 +3688,49 @@ Func_85acb: ; 85acb (21:5acb)
 	call Func_85a91
 	jr .asm_85acb
 
-Data_85af4: ; 85af4 (21:5af4)
+Data_85af4:
 	dw wTilemap + $64
 	db $44, $45, $70
 	db $01, $01, $70
 
 	db $00
 
-Data_85afd: ; 85afd (21:5afd)
+Data_85afd:
 	dw wTilemap + $83
 	db $46, $47, $48, $49, $70
 	db $01, $01, $01, $01, $70
 
 	db $00
 
-Data_85b0a: ; 85b0a (21:5b0a)
+Data_85b0a:
 	dw wTilemap + $a2
 	db $54, $55, $56, $57, $58, $59, $70
 	db $01, $01, $01, $03, $03, $01, $70
 
 	db $00
 
-Data_85b1b: ; 85b1b (21:5b1b)
+Data_85b1b:
 	dw wTilemap + $c2
 	db $4a, $4b, $4c, $4d, $4e, $4f, $70
 	db $01, $01, $01, $03, $03, $03, $70
 
 	db $00
 
-Data_85b2c: ; 85b2c (21:5b2c)
+Data_85b2c:
 	dw wTilemap + $e2
 	db $5a, $5b, $5c, $5d, $5e, $5f, $70
 	db $03, $03, $01, $03, $03, $03, $70
 
 	db $00
 
-Data_85b3d: ; 85b3d (21:5b3d)
+Data_85b3d:
 	dw wTilemap + $104
 	db $3e, $3f, $01, $70
 	db $03, $03, $20, $70
 
 	db $00
-; 0x85b48
 
-Data_85b48: ; 85b48 (21:5b48)
+Data_85b48:
 	dw wTilemap + $28
 	db $c4, $75, $76, $75, $7f, $77, $c4, $70
 	db $09, $0d, $0d, $2d, $0d, $0d, $29, $70
@@ -3838,72 +3748,56 @@ Data_85b48: ; 85b48 (21:5b48)
 	db $02, $02, $02, $02, $22, $22, $22, $70
 
 	db $00
-; 0x85b91
 
-BGMap_85b91:: ; 85b91 (21:5b91)
+BGMap_85b91::
 	INCBIN "gfx/bgmaps/map_85b91.bin"
-; 0x85bc4
 
-BGMap_85bc4:: ; 85bc4 (21:5bc4)
+BGMap_85bc4::
 	INCBIN "gfx/bgmaps/map_85bc4.bin"
-; 0x85bef
 
-BGMap_85bef:: ; 85bef (21:5bef)
+BGMap_85bef::
 	INCBIN "gfx/bgmaps/map_85bef.bin"
-; 0x85d79
 
-BGMap_85d79:: ; 85d79 (21:5d79)
+BGMap_85d79::
 	INCBIN "gfx/bgmaps/map_85d79.bin"
-; 0x85ea7
 
-BGMap_85ea7:: ; 85ea7 (21:5ea7)
+BGMap_85ea7::
 	INCBIN "gfx/bgmaps/map_85ea7.bin"
-; 0x85eda
 
-BGMap_85eda:: ; 85eda (21:5eda)
+BGMap_85eda::
 	INCBIN "gfx/bgmaps/map_85eda.bin"
-; 0x85f07
 
-BGMap_85f07:: ; 85f07 (21:5f07)
+BGMap_85f07::
 	INCBIN "gfx/bgmaps/map_85f07.bin"
-; 0x860ff
 
-BGMap_860ff:: ; 860ff (21:60ff)
+BGMap_860ff::
 	INCBIN "gfx/bgmaps/map_860ff.bin"
-; 0x86292
 
-BGMap_86292:: ; 86292 (21:6292)
+BGMap_86292::
 	INCBIN "gfx/bgmaps/map_86292.bin"
-; 0x86417
 
-BGMap_86417:: ; 86417 (21:6417)
+BGMap_86417::
 	INCBIN "gfx/bgmaps/map_86417.bin"
-; 0x86546
 
-BGMap_86546:: ; 86546 (21:6546)
+BGMap_86546::
 	INCBIN "gfx/bgmaps/map_86546.bin"
-; 0x86700
 
-BGMap_86700:: ; 86700 (21:6700)
+BGMap_86700::
 	INCBIN "gfx/bgmaps/map_86700.bin"
-; 0x86868
 
-BGMap_86868:: ; 86868 (21:6868)
+BGMap_86868::
 	INCBIN "gfx/bgmaps/map_86868.bin"
-; 0x868b2
 
-BGMap_868b2:: ; 868b2 (21:68b2)
+BGMap_868b2::
 	INCBIN "gfx/bgmaps/map_868b2.bin"
-; 0x868f5
 
-BGMap_868f5:: ; 868f5 (21:68f5)
+BGMap_868f5::
 	INCBIN "gfx/bgmaps/map_868f5.bin"
-; 0x86929
 
-BGMap_86929:: ; 86929 (21:6929)
+BGMap_86929::
 	INCBIN "gfx/bgmaps/map_86929.bin"
 
-Pals_8694d: ; 8694d (21:694d)
+Pals_8694d:
 	rgb 31, 31, 31
 	rgb 12, 29,  0
 	rgb  9, 12, 12
@@ -3944,7 +3838,7 @@ Pals_8694d: ; 8694d (21:694d)
 	rgb 14, 14, 14
 	rgb  0,  0,  0
 
-Pals_8698d: ; 8698d (21:698d)
+Pals_8698d:
 	rgb 31, 31, 31
 	rgb 31, 31, 31
 	rgb  0,  0,  0
@@ -3985,7 +3879,7 @@ Pals_8698d: ; 8698d (21:698d)
 	rgb 14, 14, 14
 	rgb  0,  0,  0
 
-Pals_869cd: ; 869cd (21:69cd)
+Pals_869cd:
 	rgb 31, 31, 31
 	rgb  9,  4,  0
 	rgb  8, 23, 31
@@ -4025,9 +3919,8 @@ Pals_869cd: ; 869cd (21:69cd)
 	rgb  5, 10,  5
 	rgb  2,  4,  2
 	rgb  0,  0,  0
-; 0x86a0d
 
-Pals_86a0d: ; 86a0d (21:6a0d)
+Pals_86a0d:
 	rgb  0,  0,  0
 	rgb 31, 31, 31
 	rgb  2, 31, 31
@@ -4067,9 +3960,8 @@ Pals_86a0d: ; 86a0d (21:6a0d)
 	rgb 31, 31, 31
 	rgb  2, 31, 31
 	rgb 31,  0,  0
-; 0x86a4d
 
-Pals_86a4d: ; 86a4d (21:6a4d)
+Pals_86a4d:
 	rgb 11, 12,  7
 	rgb  5,  6,  3
 	rgb  2,  3,  1
@@ -4109,9 +4001,8 @@ Pals_86a4d: ; 86a4d (21:6a4d)
 	rgb 22, 13,  2
 	rgb 13,  6,  1
 	rgb  5,  2,  0
-; 0x86a8d
 
-Pals_86a8d: ; 86a8d (21:6a8d)
+Pals_86a8d:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -4151,23 +4042,20 @@ Pals_86a8d: ; 86a8d (21:6a8d)
 	rgb 31, 31, 31
 	rgb 20,  2, 31
 	rgb  0,  0,  0
-; 0x86acd
 
-Pals_86acd: ; 86acd (21:6acd)
+Pals_86acd:
 	rgb  0,  0,  0
 	rgb 28, 31, 26
 	rgb 31, 11,  8
 	rgb  7,  2, 20
-; 0x86ad5
 
-Pals_86ad5: ; 86ad5 (21:6ad5)
+Pals_86ad5:
 	rgb  0,  0,  0
 	rgb 31, 31, 31
 	rgb 31, 15, 10
 	rgb  3,  3,  3
-; 0x86add
 
-Pals_86add: ; 86add (21:6add)
+Pals_86add:
 	rgb 15, 28, 31
 	rgb  5, 27, 19
 	rgb  0, 17, 22
@@ -4208,7 +4096,7 @@ Pals_86add: ; 86add (21:6add)
 	rgb 31, 17,  9
 	rgb  5,  5,  0
 
-Pals_86b1d: ; 86b1d (21:6b1d)
+Pals_86b1d:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -4248,4 +4136,3 @@ Pals_86b1d: ; 86b1d (21:6b1d)
 	rgb 31, 31, 31
 	rgb 31, 30,  0
 	rgb  0,  0,  0
-; 0x86b5d

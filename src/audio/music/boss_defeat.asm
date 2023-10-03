@@ -1,4 +1,4 @@
-Music_BossDefeat_Ch1: ; 394e6 (0e:54e6)
+Music_BossDefeat_Ch1:
 	semitone_offset 0
 
 .loop
@@ -97,9 +97,8 @@ Music_BossDefeat_Ch1: ; 394e6 (0e:54e6)
 	audio_jump .loop
 .end
 	audio_end
-; 0x39553
 
-Music_BossDefeat_Ch2: ; 39553 (0e:5553)
+Music_BossDefeat_Ch2:
 	semitone_offset 0
 
 .loop
@@ -232,9 +231,8 @@ Music_BossDefeat_Ch2: ; 39553 (0e:5553)
 	note NOTE_DURATION_3, C#4, 12
 	audio_wait_3
 	audio_end
-; 0x395e1
 
-Music_BossDefeat: ; 395e1 (0e:55e1)
+Music_BossDefeat:
 	db 2, 2
 	dw Music_BossDefeat_Ch1
 	dw Music_BossDefeat_Ch2
@@ -245,4 +243,3 @@ Music_BossDefeat: ; 395e1 (0e:55e1)
 
 	dw Music_BossDefeat_Ch1.end
 	dw Music_BossDefeat_Ch2.end
-; 0x395ef

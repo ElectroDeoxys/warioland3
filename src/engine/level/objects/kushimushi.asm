@@ -1,4 +1,4 @@
-KushimushiVerticalFunc: ; 429c4 (10:69c4)
+KushimushiVerticalFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -274,9 +274,8 @@ KushimushiVerticalFunc: ; 429c4 (10:69c4)
 	or c
 	ld [hl], a
 	jp SetObjectFramesetPtr
-; 0x42b7d
 
-KushimushiHorizontalFunc: ; 42b7d (10:6b7d)
+KushimushiHorizontalFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -302,4 +301,3 @@ KushimushiHorizontalFunc: ; 42b7d (10:6b7d)
 	ld a, -4
 	ld [hl], a
 	ret
-; 0x42ba8

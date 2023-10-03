@@ -1,4 +1,4 @@
-SmallLeafFunc: ; 436ea (10:76ea)
+SmallLeafFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -107,4 +107,3 @@ SmallLeafFunc: ; 436ea (10:76ea)
 	ld a, LOW(.Update4)
 	ld [hld], a
 	ret
-; 0x4379b

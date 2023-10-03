@@ -1,4 +1,4 @@
-OmodonmekaFunc: ; 42170 (10:6170)
+OmodonmekaFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -451,9 +451,8 @@ OmodonmekaFunc: ; 42170 (10:6170)
 	ld a, $f9
 	ld [wCurObjCollBoxBottom], a
 	jr .Func_42432
-; 0x42478
 
-OmodonmekaWithOmodon1Func: ; 42478 (10:6478)
+OmodonmekaWithOmodon1Func:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -482,9 +481,8 @@ OmodonmekaWithOmodon1Func: ; 42478 (10:6478)
 	ld [hli], a
 	ld [wCurObjVar3], a
 	jp OmodonmekaWithOmodonFunc.Func_42535
-; 0x424b1
 
-OmodonmekaWithOmodon2Func: ; 424b1 (10:64b1)
+OmodonmekaWithOmodon2Func:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -513,9 +511,8 @@ OmodonmekaWithOmodon2Func: ; 424b1 (10:64b1)
 	ld [hli], a
 	ld [wCurObjVar3], a
 	jp OmodonmekaWithOmodonFunc.Func_42535
-; 0x424ea
 
-OmodonmekaWithOmodonFunc: ; 424ea (10:64ea)
+OmodonmekaWithOmodonFunc:
 	ld hl, wCurObjState
 	ld a, [hl]
 	and a
@@ -559,7 +556,7 @@ OmodonmekaWithOmodonFunc: ; 424ea (10:64ea)
 	dw .Func_4256c
 	dw .Func_426ee
 
-.Func_42535: ; 42535 (10:6535)
+.Func_42535:
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
 	jp z, Func_42725
@@ -905,9 +902,8 @@ OmodonmekaWithOmodonFunc: ; 424ea (10:64ea)
 	call ApplyObjYMovement
 	ld bc, Data_60650
 	jp Func_34a0
-; 0x42725
 
-Func_42725: ; 42725 (10:6725)
+Func_42725:
 	ld hl, wCurObjVar3
 	ld a, [hl]
 	ld b, HIGH(Data_40000)
@@ -946,9 +942,8 @@ Func_42725: ; 42725 (10:6725)
 	ret c
 	dec [hl]
 	ret
-; 0x42754
 
-Func_42754: ; 42754 (10:6754)
+Func_42754:
 	ld hl, wCurObjFlags
 	res OBJFLAG_STEPPED_F, [hl]
 	ld l, OBJ_STATE_DURATION
@@ -960,9 +955,8 @@ Func_42754: ; 42754 (10:6754)
 	ld de, Frameset_68f50
 	call SetObjectFramesetPtr
 	ret
-; 0x42767
 
-Func_42767: ; 42767 (10:6767)
+Func_42767:
 	ld hl, wCurObjFlags
 	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld a, [wTransformation]
@@ -993,9 +987,8 @@ Func_42767: ; 42767 (10:6767)
 	inc l
 	dec [hl]
 	ret
-; 0x4279c
 
-Func_4279c: ; 4279c (10:679c)
+Func_4279c:
 	ld hl, wCurObjFlags
 	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -1376,4 +1369,3 @@ Func_4279c: ; 4279c (10:679c)
 	ld a, $10
 	ld [wCurObjSubState], a
 	ret
-; 0x429c4

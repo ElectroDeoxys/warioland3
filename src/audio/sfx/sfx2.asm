@@ -1,4 +1,4 @@
-Sfx_02e_Ch1: ; 3c000 (0f:4000)
+Sfx_02e_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -14,14 +14,12 @@ Sfx_02e_Ch1: ; 3c000 (0f:4000)
 	note A_4
 	audio_wait_3
 	audio_end
-; 0x3c015
 
-Sfx_02e: ; 3c015 (0f:4015)
+Sfx_02e:
 	db 1, 0
 	dw Sfx_02e_Ch1
-; 0x3c019
 
-Sfx_02f_Ch1: ; 3c019 (0f:4019)
+Sfx_02f_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_34
@@ -33,14 +31,12 @@ Sfx_02f_Ch1: ; 3c019 (0f:4019)
 	note B_3
 	audio_wait_3
 	audio_end
-; 0x3c02a
 
-Sfx_02f: ; 3c02a (0f:402a)
+Sfx_02f:
 	db 1, 0
 	dw Sfx_02f_Ch1
-; 0x3c02e
 
-Sfx_Pipe_Ch1: ; 3c02e (0f:402e)
+Sfx_Pipe_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_35
@@ -50,14 +46,12 @@ Sfx_Pipe_Ch1: ; 3c02e (0f:402e)
 	note NOTE_DURATION_8
 	audio_wait_16
 	audio_end
-; 0x3c03d
 
-Sfx_Pipe: ; 3c03d (0f:403d)
+Sfx_Pipe:
 	db 1, 0
 	dw Sfx_Pipe_Ch1
-; 0x3c041
 
-Sfx_MusicalCoin_Ch1: ; 3c041 (0f:4041)
+Sfx_MusicalCoin_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -108,9 +102,8 @@ Sfx_MusicalCoin_Ch1: ; 3c041 (0f:4041)
 	note B_4
 	audio_wait_4
 	audio_end
-; 0x3c079
 
-Sfx_MusicalCoin_Ch2: ; 3c079 (0f:4079)
+Sfx_MusicalCoin_Ch2:
 	semitone_offset 0
 	wave WAVE_61
 	volume 108
@@ -159,15 +152,13 @@ Sfx_MusicalCoin_Ch2: ; 3c079 (0f:4079)
 	note B_4
 	audio_wait_4
 	audio_end
-; 0x3c0ae
 
-Sfx_MusicalCoin: ; 3c0ae (0f:40ae)
+Sfx_MusicalCoin:
 	db 2, 0
 	dw Sfx_MusicalCoin_Ch1
 	dw Sfx_MusicalCoin_Ch2
-; 0x3c0b4
 
-Sfx_Key_Ch1: ; 3c0b4 (0f:40b4)
+Sfx_Key_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_47
@@ -237,9 +228,8 @@ Sfx_Key_Ch1: ; 3c0b4 (0f:40b4)
 	note A_4
 	audio_wait_3
 	audio_end
-; 0x3c0ff
 
-Sfx_Key_Ch2: ; 3c0ff (0f:40ff)
+Sfx_Key_Ch2:
 	semitone_offset 0
 	wave WAVE_5D
 	volume 66
@@ -309,15 +299,13 @@ Sfx_Key_Ch2: ; 3c0ff (0f:40ff)
 	note NOTE_DURATION_3, A_4, 25
 	audio_wait_3
 	audio_end
-; 0x3c14f
 
-Sfx_Key: ; 3c14f (0f:414f)
+Sfx_Key:
 	db 2, 0
 	dw Sfx_Key_Ch1
 	dw Sfx_Key_Ch2
-; 0x3c155
 
-Sfx_GroundPound_Ch1: ; 3c155 (0f:4155)
+Sfx_GroundPound_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6E
@@ -327,14 +315,12 @@ Sfx_GroundPound_Ch1: ; 3c155 (0f:4155)
 	note NOTE_DURATION_10, C_1, 31
 	audio_wait_12
 	audio_end
-; 0x3c166
 
-Sfx_GroundPound: ; 3c166 (0f:4166)
+Sfx_GroundPound:
 	db 1, 0
 	dw Sfx_GroundPound_Ch1
-; 0x3c16a
 
-Sfx_034_Ch1: ; 3c16a (0f:416a)
+Sfx_034_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_45
@@ -350,9 +336,8 @@ Sfx_034_Ch1: ; 3c16a (0f:416a)
 	note NOTE_DURATION_2, A_3, 4
 	audio_wait_2
 	audio_end
-; 0x3c187
 
-Sfx_034_Ch2: ; 3c187 (0f:4187)
+Sfx_034_Ch2:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -372,15 +357,13 @@ Sfx_034_Ch2: ; 3c187 (0f:4187)
 	note NOTE_DURATION_2, A_3, 2
 	audio_wait_2
 	audio_end
-; 0x3c1ac
 
-Sfx_034: ; 3c1ac (0f:41ac)
+Sfx_034:
 	db 2, 0
 	dw Sfx_034_Ch1
 	dw Sfx_034_Ch2
-; 0x3c1b2
 
-Sfx_035_Ch1: ; 3c1b2 (0f:41b2)
+Sfx_035_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6A
@@ -394,14 +377,12 @@ Sfx_035_Ch1: ; 3c1b2 (0f:41b2)
 	note G_1, 7
 	audio_wait_3
 	audio_end
-; 0x3c1c8
 
-Sfx_035: ; 3c1c8 (0f:41c8)
+Sfx_035:
 	db 1, 0
 	dw Sfx_035_Ch1
-; 0x3c1cc
 
-Sfx_Sleep_Ch1: ; 3c1cc (0f:41cc)
+Sfx_Sleep_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_68
@@ -418,14 +399,12 @@ Sfx_Sleep_Ch1: ; 3c1cc (0f:41cc)
 	note NOTE_DURATION_10, D_3, 2
 	audio_wait_10
 	audio_end
-; 0x3c1ea
 
-Sfx_Sleep: ; 3c1ea (0f:41ea)
+Sfx_Sleep:
 	db 1, 0
 	dw Sfx_Sleep_Ch1
-; 0x3c1ee
 
-Sfx_WaterSurface_Ch1: ; 3c1ee (0f:41ee)
+Sfx_WaterSurface_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_36
@@ -441,14 +420,12 @@ Sfx_WaterSurface_Ch1: ; 3c1ee (0f:41ee)
 	note NOTE_DURATION_5, D_1
 	audio_wait_10
 	audio_end
-; 0x3c206
 
-Sfx_WaterSurface: ; 3c206 (0f:4206)
+Sfx_WaterSurface:
 	db 1, 0
 	dw Sfx_WaterSurface_Ch1
-; 0x3c20a
 
-Sfx_Climb_Ch1: ; 3c20a (0f:420a)
+Sfx_Climb_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6C
@@ -458,9 +435,8 @@ Sfx_Climb_Ch1: ; 3c20a (0f:420a)
 	note NOTE_DURATION_16
 	audio_wait_16
 	audio_end
-; 0x3c219
 
-Sfx_Climb_Ch2: ; 3c219 (0f:4219)
+Sfx_Climb_Ch2:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -470,15 +446,13 @@ Sfx_Climb_Ch2: ; 3c219 (0f:4219)
 	note NOTE_DURATION_3
 	audio_wait_16
 	audio_end
-; 0x3c228
 
-Sfx_Climb: ; 3c228 (0f:4228)
+Sfx_Climb:
 	db 2, 0
 	dw Sfx_Climb_Ch1
 	dw Sfx_Climb_Ch2
-; 0x3c22e
 
-Sfx_039_Ch1: ; 3c22e (0f:422e)
+Sfx_039_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -508,14 +482,12 @@ Sfx_039_Ch1: ; 3c22e (0f:422e)
 	note D_4
 	audio_wait_1
 	audio_end
-; 0x3c253
 
-Sfx_039: ; 3c253 (0f:4253)
+Sfx_039:
 	db 1, 0
 	dw Sfx_039_Ch1
-; 0x3c257
 
-Sfx_03a_Ch1: ; 3c257 (0f:4257)
+Sfx_03a_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_36
@@ -549,14 +521,12 @@ Sfx_03a_Ch1: ; 3c257 (0f:4257)
 	note F#3
 	audio_wait_2
 	audio_end
-; 0x3c296
 
-Sfx_03a: ; 3c296 (0f:4296)
+Sfx_03a:
 	db 1, 0
 	dw Sfx_03a_Ch1
-; 0x3c29a
 
-Sfx_FatWalk_Ch1: ; 3c29a (0f:429a)
+Sfx_FatWalk_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_3F
@@ -567,14 +537,12 @@ Sfx_FatWalk_Ch1: ; 3c29a (0f:429a)
 	note NOTE_DURATION_4, F_1, 29
 	audio_wait_22
 	audio_end
-; 0x3c2ad
 
-Sfx_FatWalk: ; 3c2ad (0f:42ad)
+Sfx_FatWalk:
 	db 1, 0
 	dw Sfx_FatWalk_Ch1
-; 0x3c2b1
 
-Sfx_03c_Ch1: ; 3c2b1 (0f:42b1)
+Sfx_03c_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -602,14 +570,12 @@ Sfx_03c_Ch1: ; 3c2b1 (0f:42b1)
 	note C_5
 	audio_wait_2
 	audio_end
-; 0x3c2d4
 
-Sfx_03c: ; 3c2d4 (0f:42d4)
+Sfx_03c:
 	db 1, 0
 	dw Sfx_03c_Ch1
-; 0x3c2d8
 
-Sfx_03d_Ch1: ; 3c2d8 (0f:42d8)
+Sfx_03d_Ch1:
 	volume 66
 	semitone_offset 0
 	tempo 74
@@ -673,14 +639,12 @@ Sfx_03d_Ch1: ; 3c2d8 (0f:42d8)
 	note A#6
 	audio_wait_10
 	audio_end
-; 0x3c329
 
-Sfx_03d: ; 3c329 (0f:4329)
+Sfx_03d:
 	db 1, 0
 	dw Sfx_03d_Ch1
-; 0x3c32d
 
-Sfx_03e_Ch1: ; 3c32d (0f:432d)
+Sfx_03e_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -737,14 +701,12 @@ Sfx_03e_Ch1: ; 3c32d (0f:432d)
 	note NOTE_DURATION_16, G_5
 	audio_wait_16
 	audio_end
-; 0x3c374
 
-Sfx_03e: ; 3c374 (0f:4374)
+Sfx_03e:
 	db 1, 0
 	dw Sfx_03e_Ch1
-; 0x3c378
 
-Sfx_03f_Ch1: ; 3c378 (0f:4378)
+Sfx_03f_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_0A
@@ -776,9 +738,8 @@ Sfx_03f_Ch1: ; 3c378 (0f:4378)
 	note D_4
 	audio_wait_3
 	audio_end
-; 0x3c3ab
 
-Sfx_03f_Ch2: ; 3c3ab (0f:43ab)
+Sfx_03f_Ch2:
 	semitone_offset 0
 	wave WAVE_14
 	volume 120
@@ -809,15 +770,13 @@ Sfx_03f_Ch2: ; 3c3ab (0f:43ab)
 	note G#3
 	audio_wait_3
 	audio_end
-; 0x3c3dc
 
-Sfx_03f: ; 3c3dc (0f:43dc)
+Sfx_03f:
 	db 2, 0
 	dw Sfx_03f_Ch1
 	dw Sfx_03f_Ch2
-; 0x3c3e2
 
-Sfx_040_Ch1: ; 3c3e2 (0f:43e2)
+Sfx_040_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6A
@@ -826,14 +785,12 @@ Sfx_040_Ch1: ; 3c3e2 (0f:43e2)
 	note NOTE_DURATION_16, C_3, 17
 	audio_wait_16
 	audio_end
-; 0x3c3f1
 
-Sfx_040: ; 3c3f1 (0f:43f1)
+Sfx_040:
 	db 1, 0
 	dw Sfx_040_Ch1
-; 0x3c3f5
 
-Sfx_041_Ch1: ; 3c3f5 (0f:43f5)
+Sfx_041_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -863,14 +820,12 @@ Sfx_041_Ch1: ; 3c3f5 (0f:43f5)
 	note E_4
 	audio_wait_2
 	audio_end
-; 0x3c418
 
-Sfx_041: ; 3c418 (0f:4418)
+Sfx_041:
 	db 1, 0
 	dw Sfx_041_Ch1
-; 0x3c41c
 
-Sfx_042_Ch1: ; 3c41c (0f:441c)
+Sfx_042_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -908,14 +863,12 @@ Sfx_042_Ch1: ; 3c41c (0f:441c)
 	note D#5, 12
 	audio_wait_8
 	audio_end
-; 0x3c452
 
-Sfx_042: ; 3c452 (0f:4452)
+Sfx_042:
 	db 1, 0
 	dw Sfx_042_Ch1
-; 0x3c456
 
-Sfx_043_Ch1: ; 3c456 (0f:4456)
+Sfx_043_Ch1:
 	volume 66
 	semitone_offset 0
 	tempo 74
@@ -982,14 +935,12 @@ Sfx_043_Ch1: ; 3c456 (0f:4456)
 	note E_2
 	audio_wait_1
 	audio_end
-; 0x3c4a9
 
-Sfx_043: ; 3c4a9 (0f:44a9)
+Sfx_043:
 	db 1, 0
 	dw Sfx_043_Ch1
-; 0x3c4ad
 
-Sfx_044_Ch1: ; 3c4ad (0f:44ad)
+Sfx_044_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -1087,14 +1038,12 @@ Sfx_044_Ch1: ; 3c4ad (0f:44ad)
 	note C_2
 	audio_wait_1
 	audio_end
-; 0x3c520
 
-Sfx_044: ; 3c520 (0f:4520)
+Sfx_044:
 	db 1, 0
 	dw Sfx_044_Ch1
-; 0x3c524
 
-Sfx_045_Ch1: ; 3c524 (0f:4524)
+Sfx_045_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -1140,9 +1089,8 @@ Sfx_045_Ch1: ; 3c524 (0f:4524)
 	note D#2
 	audio_wait_3
 	audio_end
-; 0x3c557
 
-Sfx_045_Ch2: ; 3c557 (0f:4557)
+Sfx_045_Ch2:
 	semitone_offset 0
 	wave WAVE_1A
 	volume 94
@@ -1187,9 +1135,8 @@ Sfx_045_Ch2: ; 3c557 (0f:4557)
 	note B_2
 	audio_wait_3
 	audio_end
-; 0x3c588
 
-Sfx_045_Ch3: ; 3c588 (0f:4588)
+Sfx_045_Ch3:
 	semitone_offset 0
 	wave WAVE_65
 	volume 113
@@ -1198,16 +1145,14 @@ Sfx_045_Ch3: ; 3c588 (0f:4588)
 	note NOTE_DURATION_8, F#1, 4
 	audio_wait_10
 	audio_end
-; 0x3c597
 
-Sfx_045: ; 3c597 (0f:4597)
+Sfx_045:
 	db 3, 0
 	dw Sfx_045_Ch1
 	dw Sfx_045_Ch2
 	dw Sfx_045_Ch3
-; 0x3c59f
 
-Sfx_046_Ch1: ; 3c59f (0f:459f)
+Sfx_046_Ch1:
 	semitone_offset 1
 	tempo 74
 	wave WAVE_10
@@ -1255,9 +1200,8 @@ Sfx_046_Ch1: ; 3c59f (0f:459f)
 	note C#2
 	audio_wait_3
 	audio_end
-; 0x3c5d4
 
-Sfx_046_Ch2: ; 3c5d4 (0f:45d4)
+Sfx_046_Ch2:
 	semitone_offset 1
 	wave WAVE_1A
 	volume 94
@@ -1304,9 +1248,8 @@ Sfx_046_Ch2: ; 3c5d4 (0f:45d4)
 	note A_2
 	audio_wait_3
 	audio_end
-; 0x3c607
 
-Sfx_046_Ch3: ; 3c607 (0f:4607)
+Sfx_046_Ch3:
 	semitone_offset 0
 	wave WAVE_65
 	volume 120
@@ -1316,16 +1259,14 @@ Sfx_046_Ch3: ; 3c607 (0f:4607)
 	note NOTE_DURATION_8, G#1, 9
 	audio_wait_10
 	audio_end
-; 0x3c617
 
-Sfx_046: ; 3c617 (0f:4617)
+Sfx_046:
 	db 3, 0
 	dw Sfx_046_Ch1
 	dw Sfx_046_Ch2
 	dw Sfx_046_Ch3
-; 0x3c61f
 
-Sfx_047_Ch1: ; 3c61f (0f:461f)
+Sfx_047_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_3F
@@ -1395,14 +1336,12 @@ Sfx_047_Ch1: ; 3c61f (0f:461f)
 	note 14
 	audio_wait_3
 	audio_end
-; 0x3c683
 
-Sfx_047: ; 3c683 (0f:4683)
+Sfx_047:
 	db 1, 0
 	dw Sfx_047_Ch1
-; 0x3c687
 
-Sfx_048_Ch1: ; 3c687 (0f:4687)
+Sfx_048_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -1490,9 +1429,8 @@ Sfx_048_Ch1: ; 3c687 (0f:4687)
 	audio_wait_1
 	note E_2
 	audio_end
-; 0x3c6ef
 
-Sfx_048_Ch2: ; 3c6ef (0f:46ef)
+Sfx_048_Ch2:
 	semitone_offset 0
 	volume 94
 	wave WAVE_65
@@ -1518,15 +1456,13 @@ Sfx_048_Ch2: ; 3c6ef (0f:46ef)
 	note NOTE_DURATION_5, D_4, 17
 	audio_wait_5
 	audio_end
-; 0x3c718
 
-Sfx_048: ; 3c718 (0f:4718)
+Sfx_048:
 	db 2, 0
 	dw Sfx_048_Ch1
 	dw Sfx_048_Ch2
-; 0x3c71e
 
-Sfx_049_Ch1: ; 3c71e (0f:471e)
+Sfx_049_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_34
@@ -1536,14 +1472,12 @@ Sfx_049_Ch1: ; 3c71e (0f:471e)
 	note C_4
 	audio_wait_2
 	audio_end
-; 0x3c72d
 
-Sfx_049: ; 3c72d (0f:472d)
+Sfx_049:
 	db 1, 0
 	dw Sfx_049_Ch1
-; 0x3c731
 
-Sfx_CrouchWalk_Ch1: ; 3c731 (0f:4731)
+Sfx_CrouchWalk_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -1554,14 +1488,12 @@ Sfx_CrouchWalk_Ch1: ; 3c731 (0f:4731)
 	note F#3
 	audio_wait_14
 	audio_end
-; 0x3c741
 
-Sfx_CrouchWalk: ; 3c741 (0f:4741)
+Sfx_CrouchWalk:
 	db 1, 0
 	dw Sfx_CrouchWalk_Ch1
-; 0x3c745
 
-Sfx_ColourCoin_Ch1: ; 3c745 (0f:4745)
+Sfx_ColourCoin_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -1609,14 +1541,12 @@ Sfx_ColourCoin_Ch1: ; 3c745 (0f:4745)
 	note E_4
 	audio_wait_3
 	audio_end
-; 0x3c77c
 
-Sfx_ColourCoin: ; 3c77c (0f:477c)
+Sfx_ColourCoin:
 	db 1, 0
 	dw Sfx_ColourCoin_Ch1
-; 0x3c780
 
-Sfx_04c_Ch1: ; 3c780 (0f:4780)
+Sfx_04c_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_11
@@ -1654,9 +1584,8 @@ Sfx_04c_Ch1: ; 3c780 (0f:4780)
 	note D#5, 12
 	audio_wait_8
 	audio_end
-; 0x3c7b6
 
-Sfx_04c_Ch2: ; 3c7b6 (0f:47b6)
+Sfx_04c_Ch2:
 	semitone_offset 0
 	wave WAVE_60
 	volume 66
@@ -1694,15 +1623,13 @@ Sfx_04c_Ch2: ; 3c7b6 (0f:47b6)
 	note D#5, 12
 	audio_wait_8
 	audio_end
-; 0x3c7eb
 
-Sfx_04c: ; 3c7eb (0f:47eb)
+Sfx_04c:
 	db 2, 0
 	dw Sfx_04c_Ch1
 	dw Sfx_04c_Ch2
-; 0x3c7f1
 
-Sfx_061_Ch1: ; 3c7f1 (0f:47f1)
+Sfx_061_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6A
@@ -1722,14 +1649,12 @@ Sfx_061_Ch1: ; 3c7f1 (0f:47f1)
 	note NOTE_DURATION_8
 	audio_wait_8
 	audio_end
-; 0x3c80f
 
-Sfx_061: ; 3c80f (0f:480f)
+Sfx_061:
 	db 1, 0
 	dw Sfx_061_Ch1
-; 0x3c813
 
-Sfx_062_Ch1: ; 3c813 (0f:4813)
+Sfx_062_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6A
@@ -1743,14 +1668,12 @@ Sfx_062_Ch1: ; 3c813 (0f:4813)
 	note NOTE_DURATION_1, 1
 	audio_wait_3
 	audio_end
-; 0x3c82a
 
-Sfx_062: ; 3c82a (0f:482a)
+Sfx_062:
 	db 1, 0
 	dw Sfx_062_Ch1
-; 0x3c82e
 
-Sfx_063_Ch1: ; 3c82e (0f:482e)
+Sfx_063_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6A
@@ -1770,14 +1693,12 @@ Sfx_063_Ch1: ; 3c82e (0f:482e)
 	note NOTE_DURATION_8
 	audio_wait_9
 	audio_end
-; 0x3c84c
 
-Sfx_063: ; 3c84c (0f:484c)
+Sfx_063:
 	db 1, 0
 	dw Sfx_063_Ch1
-; 0x3c850
 
-Sfx_064_Ch1: ; 3c850 (0f:4850)
+Sfx_064_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -1849,14 +1770,12 @@ Sfx_064_Ch1: ; 3c850 (0f:4850)
 	audio_wait_1
 	note E_2
 	audio_end
-; 0x3c8a1
 
-Sfx_064: ; 3c8a1 (0f:48a1)
+Sfx_064:
 	db 1, 0
 	dw Sfx_064_Ch1
-; 0x3c8a5
 
-Sfx_065_Ch1: ; 3c8a5 (0f:48a5)
+Sfx_065_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -1867,14 +1786,12 @@ Sfx_065_Ch1: ; 3c8a5 (0f:48a5)
 	note NOTE_DURATION_2, 18
 	audio_wait_2
 	audio_end
-; 0x3c8b7
 
-Sfx_065: ; 3c8b7 (0f:48b7)
+Sfx_065:
 	db 1, 0
 	dw Sfx_065_Ch1
-; 0x3c8bb
 
-Sfx_066_Ch1: ; 3c8bb (0f:48bb)
+Sfx_066_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_40
@@ -1884,14 +1801,12 @@ Sfx_066_Ch1: ; 3c8bb (0f:48bb)
 	note NOTE_DURATION_1, F_1, 12
 	audio_wait_8
 	audio_end
-; 0x3c8cc
 
-Sfx_066: ; 3c8cc (0f:48cc)
+Sfx_066:
 	db 1, 0
 	dw Sfx_066_Ch1
-; 0x3c8d0
 
-Sfx_067_Ch1: ; 3c8d0 (0f:48d0)
+Sfx_067_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_43
@@ -1912,14 +1827,12 @@ Sfx_067_Ch1: ; 3c8d0 (0f:48d0)
 	audio_wait_19
 	note E_2
 	audio_end
-; 0x3c8eb
 
-Sfx_067: ; 3c8eb (0f:48eb)
+Sfx_067:
 	db 1, 0
 	dw Sfx_067_Ch1
-; 0x3c8ef
 
-Sfx_068_Ch1: ; 3c8ef (0f:48ef)
+Sfx_068_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_68
@@ -1932,14 +1845,12 @@ Sfx_068_Ch1: ; 3c8ef (0f:48ef)
 	note NOTE_DURATION_12, E_1, 29
 	audio_wait_12
 	audio_end
-; 0x3c906
 
-Sfx_068: ; 3c906 (0f:4906)
+Sfx_068:
 	db 1, 0
 	dw Sfx_068_Ch1
-; 0x3c90a
 
-Sfx_069_Ch1: ; 3c90a (0f:490a)
+Sfx_069_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_3E
@@ -1948,14 +1859,12 @@ Sfx_069_Ch1: ; 3c90a (0f:490a)
 	note NOTE_DURATION_16, C_1, 22
 	audio_wait_16
 	audio_end
-; 0x3c919
 
-Sfx_069: ; 3c919 (0f:4919)
+Sfx_069:
 	db 1, 0
 	dw Sfx_069_Ch1
-; 0x3c91d
 
-Sfx_06a_Ch1: ; 3c91d (0f:491d)
+Sfx_06a_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -1977,14 +1886,12 @@ Sfx_06a_Ch1: ; 3c91d (0f:491d)
 	note G_7
 	audio_wait_1
 	audio_end
-; 0x3c93b
 
-Sfx_06a: ; 3c93b (0f:493b)
+Sfx_06a:
 	db 1, 0
 	dw Sfx_06a_Ch1
-; 0x3c93f
 
-Sfx_06b_Ch1: ; 3c93f (0f:493f)
+Sfx_06b_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_5D
@@ -1998,14 +1905,12 @@ Sfx_06b_Ch1: ; 3c93f (0f:493f)
 	note 12
 	audio_wait_2
 	audio_end
-; 0x3c952
 
-Sfx_06b: ; 3c952 (0f:4952)
+Sfx_06b:
 	db 1, 0
 	dw Sfx_06b_Ch1
-; 0x3c956
 
-Sfx_06c_Ch1: ; 3c956 (0f:4956)
+Sfx_06c_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -2094,14 +1999,12 @@ Sfx_06c_Ch1: ; 3c956 (0f:4956)
 	audio_wait_2
 	note E_2
 	audio_end
-; 0x3c9c0
 
-Sfx_06c: ; 3c9c0 (0f:49c0)
+Sfx_06c:
 	db 1, 0
 	dw Sfx_06c_Ch1
-; 0x3c9c4
 
-Sfx_06d_Ch1: ; 3c9c4 (0f:49c4)
+Sfx_06d_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6A
@@ -2112,14 +2015,12 @@ Sfx_06d_Ch1: ; 3c9c4 (0f:49c4)
 	note 12
 	audio_wait_8
 	audio_end
-; 0x3c9d5
 
-Sfx_06d: ; 3c9d5 (0f:49d5)
+Sfx_06d:
 	db 1, 0
 	dw Sfx_06d_Ch1
-; 0x3c9d9
 
-Sfx_06e_Ch1: ; 3c9d9 (0f:49d9)
+Sfx_06e_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_11
@@ -2139,14 +2040,12 @@ Sfx_06e_Ch1: ; 3c9d9 (0f:49d9)
 	note NOTE_DURATION_10, C#5
 	audio_wait_10
 	audio_end
-; 0x3c9f3
 
-Sfx_06e: ; 3c9f3 (0f:49f3)
+Sfx_06e:
 	db 1, 0
 	dw Sfx_06e_Ch1
-; 0x3c9f7
 
-Sfx_06f_Ch1: ; 3c9f7 (0f:49f7)
+Sfx_06f_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_0A
@@ -2168,14 +2067,12 @@ Sfx_06f_Ch1: ; 3c9f7 (0f:49f7)
 	note C_3
 	audio_wait_2
 	audio_end
-; 0x3ca12
 
-Sfx_06f: ; 3ca12 (0f:4a12)
+Sfx_06f:
 	db 1, 0
 	dw Sfx_06f_Ch1
-; 0x3ca16
 
-Sfx_070_Ch1: ; 3ca16 (0f:4a16)
+Sfx_070_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_36
@@ -2193,14 +2090,12 @@ Sfx_070_Ch1: ; 3ca16 (0f:4a16)
 	note F#2
 	audio_wait_3
 	audio_end
-; 0x3ca2d
 
-Sfx_070: ; 3ca2d (0f:4a2d)
+Sfx_070:
 	db 1, 0
 	dw Sfx_070_Ch1
-; 0x3ca31
 
-Sfx_071_Ch1: ; 3ca31 (0f:4a31)
+Sfx_071_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -2214,14 +2109,12 @@ Sfx_071_Ch1: ; 3ca31 (0f:4a31)
 	note 12
 	audio_wait_4
 	audio_end
-; 0x3ca46
 
-Sfx_071: ; 3ca46 (0f:4a46)
+Sfx_071:
 	db 1, 2
 	dw Sfx_071_Ch1
-; 0x3ca4a
 
-Sfx_072_Ch1: ; 3ca4a (0f:4a4a)
+Sfx_072_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_36
@@ -2254,14 +2147,12 @@ Sfx_072_Ch1: ; 3ca4a (0f:4a4a)
 	note 3
 	audio_wait_5
 	audio_end
-; 0x3ca7d
 
-Sfx_072: ; 3ca7d (0f:4a7d)
+Sfx_072:
 	db 1, 0
 	dw Sfx_072_Ch1
-; 0x3ca81
 
-Sfx_073_Ch1: ; 3ca81 (0f:4a81)
+Sfx_073_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -2271,14 +2162,12 @@ Sfx_073_Ch1: ; 3ca81 (0f:4a81)
 	note NOTE_DURATION_8, F#1, 4
 	audio_wait_10
 	audio_end
-; 0x3ca92
 
-Sfx_073: ; 3ca92 (0f:4a92)
+Sfx_073:
 	db 1, 0
 	dw Sfx_073_Ch1
-; 0x3ca96
 
-Sfx_074_Ch1: ; 3ca96 (0f:4a96)
+Sfx_074_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_0D
@@ -2325,14 +2214,12 @@ Sfx_074_Ch1: ; 3ca96 (0f:4a96)
 	note NOTE_DURATION_2, 7
 	audio_wait_2
 	audio_end
-; 0x3cad0
 
-Sfx_074: ; 3cad0 (0f:4ad0)
+Sfx_074:
 	db 1, 0
 	dw Sfx_074_Ch1
-; 0x3cad4
 
-Sfx_075_Ch1: ; 3cad4 (0f:4ad4)
+Sfx_075_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_40
@@ -2348,14 +2235,12 @@ Sfx_075_Ch1: ; 3cad4 (0f:4ad4)
 	note NOTE_DURATION_6, C_1, 12
 	audio_wait_6
 	audio_end
-; 0x3caf1
 
-Sfx_075: ; 3caf1 (0f:4af1)
+Sfx_075:
 	db 1, 0
 	dw Sfx_075_Ch1
-; 0x3caf5
 
-Sfx_076_Ch1: ; 3caf5 (0f:4af5)
+Sfx_076_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -2367,14 +2252,12 @@ Sfx_076_Ch1: ; 3caf5 (0f:4af5)
 	note NOTE_DURATION_10, C_3, 14
 	audio_wait_10
 	audio_end
-; 0x3cb0a
 
-Sfx_076: ; 3cb0a (0f:4b0a)
+Sfx_076:
 	db 1, 0
 	dw Sfx_076_Ch1
-; 0x3cb0e
 
-Sfx_077_Ch1: ; 3cb0e (0f:4b0e)
+Sfx_077_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_64
@@ -2400,14 +2283,12 @@ Sfx_077_Ch1: ; 3cb0e (0f:4b0e)
 	note E_3, 14
 	audio_wait_2
 	audio_end
-; 0x3cb30
 
-Sfx_077: ; 3cb30 (0f:4b30)
+Sfx_077:
 	db 1, 0
 	dw Sfx_077_Ch1
-; 0x3cb34
 
-Sfx_078_Ch1: ; 3cb34 (0f:4b34)
+Sfx_078_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -2417,14 +2298,12 @@ Sfx_078_Ch1: ; 3cb34 (0f:4b34)
 	note NOTE_DURATION_2, 18
 	audio_wait_2
 	audio_end
-; 0x3cb44
 
-Sfx_078: ; 3cb44 (0f:4b44)
+Sfx_078:
 	db 1, 0
 	dw Sfx_078_Ch1
-; 0x3cb48
 
-Sfx_079_Ch1: ; 3cb48 (0f:4b48)
+Sfx_079_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6A
@@ -2467,14 +2346,12 @@ Sfx_079_Ch1: ; 3cb48 (0f:4b48)
 	note E_2
 	audio_wait_1
 	audio_end
-; 0x3cb7a
 
-Sfx_079: ; 3cb7a (0f:4b7a)
+Sfx_079:
 	db 1, 0
 	dw Sfx_079_Ch1
-; 0x3cb7e
 
-Sfx_07a_Ch1: ; 3cb7e (0f:4b7e)
+Sfx_07a_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -2488,14 +2365,12 @@ Sfx_07a_Ch1: ; 3cb7e (0f:4b7e)
 	note NOTE_DURATION_4, F#1, 24
 	audio_wait_4
 	audio_end
-; 0x3cb97
 
-Sfx_07a: ; 3cb97 (0f:4b97)
+Sfx_07a:
 	db 1, 0
 	dw Sfx_07a_Ch1
-; 0x3cb9b
 
-Sfx_07b_Ch1: ; 3cb9b (0f:4b9b)
+Sfx_07b_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6A
@@ -2507,14 +2382,12 @@ Sfx_07b_Ch1: ; 3cb9b (0f:4b9b)
 	note NOTE_DURATION_8, 9
 	audio_wait_9
 	audio_end
-; 0x3cbae
 
-Sfx_07b: ; 3cbae (0f:4bae)
+Sfx_07b:
 	db 1, 0
 	dw Sfx_07b_Ch1
-; 0x3cbb2
 
-Sfx_07c_Ch1: ; 3cbb2 (0f:4bb2)
+Sfx_07c_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_0D
@@ -2603,9 +2476,8 @@ Sfx_07c_Ch1: ; 3cbb2 (0f:4bb2)
 	audio_wait_1
 	note E_2
 	audio_end
-; 0x3cc1c
 
-Sfx_07c_Ch2: ; 3cc1c (0f:4c1c)
+Sfx_07c_Ch2:
 	semitone_offset 0
 	wave WAVE_5D
 	volume 94
@@ -2693,15 +2565,13 @@ Sfx_07c_Ch2: ; 3cc1c (0f:4c1c)
 	audio_wait_1
 	note E_2
 	audio_end
-; 0x3cc84
 
-Sfx_07c: ; 3cc84 (0f:4c84)
+Sfx_07c:
 	db 2, 0
 	dw Sfx_07c_Ch1
 	dw Sfx_07c_Ch2
-; 0x3cc8a
 
-Sfx_07d_Ch1: ; 3cc8a (0f:4c8a)
+Sfx_07d_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6A
@@ -2715,14 +2585,12 @@ Sfx_07d_Ch1: ; 3cc8a (0f:4c8a)
 	note C_2
 	audio_wait_3
 	audio_end
-; 0x3cc9d
 
-Sfx_07d: ; 3cc9d (0f:4c9d)
+Sfx_07d:
 	db 1, 0
 	dw Sfx_07d_Ch1
-; 0x3cca1
 
-Sfx_07e_Ch1: ; 3cca1 (0f:4ca1)
+Sfx_07e_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_33
@@ -2732,14 +2600,12 @@ Sfx_07e_Ch1: ; 3cca1 (0f:4ca1)
 	note NOTE_DURATION_4, A_0, 14
 	audio_wait_8
 	audio_end
-; 0x3ccb2
 
-Sfx_07e: ; 3ccb2 (0f:4cb2)
+Sfx_07e:
 	db 1, 0
 	dw Sfx_07e_Ch1
-; 0x3ccb6
 
-Sfx_07f_Ch1: ; 3ccb6 (0f:4cb6)
+Sfx_07f_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -2776,14 +2642,12 @@ Sfx_07f_Ch1: ; 3ccb6 (0f:4cb6)
 	note G_7
 	audio_wait_1
 	audio_end
-; 0x3cce7
 
-Sfx_07f: ; 3cce7 (0f:4ce7)
+Sfx_07f:
 	db 1, 0
 	dw Sfx_07f_Ch1
-; 0x3cceb
 
-Sfx_080_Ch1: ; 3cceb (0f:4ceb)
+Sfx_080_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6D
@@ -2807,14 +2671,12 @@ Sfx_080_Ch1: ; 3cceb (0f:4ceb)
 	note A_2
 	audio_wait_3
 	audio_end
-; 0x3cd08
 
-Sfx_080: ; 3cd08 (0f:4d08)
+Sfx_080:
 	db 1, 0
 	dw Sfx_080_Ch1
-; 0x3cd0c
 
-Sfx_081_Ch1: ; 3cd0c (0f:4d0c)
+Sfx_081_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -2910,14 +2772,12 @@ Sfx_081_Ch1: ; 3cd0c (0f:4d0c)
 	audio_wait_1
 	note E_2
 	audio_end
-; 0x3cd77
 
-Sfx_081: ; 3cd77 (0f:4d77)
+Sfx_081:
 	db 1, 0
 	dw Sfx_081_Ch1
-; 0x3cd7b
 
-Sfx_082_Ch1: ; 3cd7b (0f:4d7b)
+Sfx_082_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_0A
@@ -2984,9 +2844,8 @@ Sfx_082_Ch1: ; 3cd7b (0f:4d7b)
 	note B_3
 	audio_wait_5
 	audio_end
-; 0x3cdc8
 
-Sfx_082_Ch2: ; 3cdc8 (0f:4dc8)
+Sfx_082_Ch2:
 	semitone_offset 0
 	wave WAVE_63
 	vibrato_amplitude 100
@@ -3045,15 +2904,13 @@ Sfx_082_Ch2: ; 3cdc8 (0f:4dc8)
 	note G#1
 	audio_wait_3
 	audio_end
-; 0x3ce0a
 
-Sfx_082: ; 3ce0a (0f:4e0a)
+Sfx_082:
 	db 2, 0
 	dw Sfx_082_Ch1
 	dw Sfx_082_Ch2
-; 0x3ce10
 
-Sfx_083_Ch1: ; 3ce10 (0f:4e10)
+Sfx_083_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_12
@@ -3087,9 +2944,8 @@ Sfx_083_Ch1: ; 3ce10 (0f:4e10)
 	audio_wait_1
 	note E_2
 	audio_end
-; 0x3ce3b
 
-Sfx_083_Ch2: ; 3ce3b (0f:4e3b)
+Sfx_083_Ch2:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_68
@@ -3112,15 +2968,13 @@ Sfx_083_Ch2: ; 3ce3b (0f:4e3b)
 	note 2
 	audio_wait_5
 	audio_end
-; 0x3ce5a
 
-Sfx_083: ; 3ce5a (0f:4e5a)
+Sfx_083:
 	db 2, 0
 	dw Sfx_083_Ch1
 	dw Sfx_083_Ch2
-; 0x3ce60
 
-Sfx_084_Ch1: ; 3ce60 (0f:4e60)
+Sfx_084_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_42
@@ -3140,14 +2994,12 @@ Sfx_084_Ch1: ; 3ce60 (0f:4e60)
 	audio_wait_22
 	note E_2
 	audio_end
-; 0x3ce7b
 
-Sfx_084: ; 3ce7b (0f:4e7b)
+Sfx_084:
 	db 1, 0
 	dw Sfx_084_Ch1
-; 0x3ce7f
 
-Sfx_085_Ch1: ; 3ce7f (0f:4e7f)
+Sfx_085_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_60
@@ -3159,14 +3011,12 @@ Sfx_085_Ch1: ; 3ce7f (0f:4e7f)
 	note F_2
 	audio_wait_2
 	audio_end
-; 0x3ce90
 
-Sfx_085: ; 3ce90 (0f:4e90)
+Sfx_085:
 	db 1, 0
 	dw Sfx_085_Ch1
-; 0x3ce94
 
-Sfx_086_Ch1: ; 3ce94 (0f:4e94)
+Sfx_086_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -3186,14 +3036,12 @@ Sfx_086_Ch1: ; 3ce94 (0f:4e94)
 	note C#4
 	audio_wait_3
 	audio_end
-; 0x3cead
 
-Sfx_086: ; 3cead (0f:4ead)
+Sfx_086:
 	db 1, 0
 	dw Sfx_086_Ch1
-; 0x3ceb1
 
-Sfx_087_Ch1: ; 3ceb1 (0f:4eb1)
+Sfx_087_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6A
@@ -3203,14 +3051,12 @@ Sfx_087_Ch1: ; 3ceb1 (0f:4eb1)
 	note NOTE_DURATION_2, E_3, 20
 	audio_wait_3
 	audio_end
-; 0x3cec2
 
-Sfx_087: ; 3cec2 (0f:4ec2)
+Sfx_087:
 	db 1, 0
 	dw Sfx_087_Ch1
-; 0x3cec6
 
-Sfx_088_Ch1: ; 3cec6 (0f:4ec6)
+Sfx_088_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_0F
@@ -3259,9 +3105,8 @@ Sfx_088_Ch1: ; 3cec6 (0f:4ec6)
 	audio_wait_1
 	note E_2
 	audio_end
-; 0x3ceff
 
-Sfx_088_Ch2: ; 3ceff (0f:4eff)
+Sfx_088_Ch2:
 	semitone_offset 0
 	wave WAVE_23
 	volume 66
@@ -3309,15 +3154,13 @@ Sfx_088_Ch2: ; 3ceff (0f:4eff)
 	audio_wait_1
 	note E_2
 	audio_end
-; 0x3cf36
 
-Sfx_088: ; 3cf36 (0f:4f36)
+Sfx_088:
 	db 2, 0
 	dw Sfx_088_Ch1
 	dw Sfx_088_Ch2
-; 0x3cf3c
 
-Sfx_089_Ch1: ; 3cf3c (0f:4f3c)
+Sfx_089_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_68
@@ -3332,14 +3175,12 @@ Sfx_089_Ch1: ; 3cf3c (0f:4f3c)
 	note NOTE_DURATION_32, F_1, 23
 	audio_wait_32
 	audio_end
-; 0x3cf57
 
-Sfx_089: ; 3cf57 (0f:4f57)
+Sfx_089:
 	db 1, 0
 	dw Sfx_089_Ch1
-; 0x3cf5b
 
-Sfx_08a_Ch1: ; 3cf5b (0f:4f5b)
+Sfx_08a_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_0A
@@ -3395,9 +3236,8 @@ Sfx_08a_Ch1: ; 3cf5b (0f:4f5b)
 	note B_2
 	audio_wait_2
 	audio_end
-; 0x3cf98
 
-Sfx_08a_Ch2: ; 3cf98 (0f:4f98)
+Sfx_08a_Ch2:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -3453,15 +3293,13 @@ Sfx_08a_Ch2: ; 3cf98 (0f:4f98)
 	note G_2
 	audio_wait_2
 	audio_end
-; 0x3cfd5
 
-Sfx_08a: ; 3cfd5 (0f:4fd5)
+Sfx_08a:
 	db 2, 0
 	dw Sfx_08a_Ch1
 	dw Sfx_08a_Ch2
-; 0x3cfdb
 
-Sfx_08b_Ch1: ; 3cfdb (0f:4fdb)
+Sfx_08b_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_36
@@ -3481,14 +3319,12 @@ Sfx_08b_Ch1: ; 3cfdb (0f:4fdb)
 	note NOTE_DURATION_7, E_0, 19
 	audio_wait_8
 	audio_end
-; 0x3d000
 
-Sfx_08b: ; 3d000 (0f:5000)
+Sfx_08b:
 	db 1, 0
 	dw Sfx_08b_Ch1
-; 0x3d004
 
-Sfx_08c_Ch1: ; 3d004 (0f:5004)
+Sfx_08c_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6A
@@ -3524,14 +3360,12 @@ Sfx_08c_Ch1: ; 3d004 (0f:5004)
 	note G_3
 	audio_wait_2
 	audio_end
-; 0x3d02d
 
-Sfx_08c: ; 3d02d (0f:502d)
+Sfx_08c:
 	db 1, 0
 	dw Sfx_08c_Ch1
-; 0x3d031
 
-Sfx_08d_Ch1: ; 3d031 (0f:5031)
+Sfx_08d_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_0A
@@ -3603,14 +3437,12 @@ Sfx_08d_Ch1: ; 3d031 (0f:5031)
 	audio_wait_1
 	note E_2
 	audio_end
-; 0x3d08c
 
-Sfx_08d: ; 3d08c (0f:508c)
+Sfx_08d:
 	db 1, 0
 	dw Sfx_08d_Ch1
-; 0x3d090
 
-Sfx_08e_Ch1: ; 3d090 (0f:5090)
+Sfx_08e_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_4A
@@ -3680,14 +3512,12 @@ Sfx_08e_Ch1: ; 3d090 (0f:5090)
 	note 7
 	audio_wait_2
 	audio_end
-; 0x3d0f9
 
-Sfx_08e: ; 3d0f9 (0f:50f9)
+Sfx_08e:
 	db 1, 0
 	dw Sfx_08e_Ch1
-; 0x3d0fd
 
-Sfx_08f_Ch1: ; 3d0fd (0f:50fd)
+Sfx_08f_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_68
@@ -3711,14 +3541,12 @@ Sfx_08f_Ch1: ; 3d0fd (0f:50fd)
 	note 3
 	audio_wait_5
 	audio_end
-; 0x3d11e
 
-Sfx_08f: ; 3d11e (0f:511e)
+Sfx_08f:
 	db 1, 0
 	dw Sfx_08f_Ch1
-; 0x3d122
 
-Sfx_0a1_Ch1: ; 3d122 (0f:5122)
+Sfx_0a1_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -3752,14 +3580,12 @@ Sfx_0a1_Ch1: ; 3d122 (0f:5122)
 	note NOTE_DURATION_1, C_3, 2
 	audio_wait_1
 	audio_end
-; 0x3d163
 
-Sfx_0a1: ; 3d163 (0f:5163)
+Sfx_0a1:
 	db 1, 0
 	dw Sfx_0a1_Ch1
-; 0x3d167
 
-Sfx_0a2_Ch1: ; 3d167 (0f:5167)
+Sfx_0a2_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -3790,9 +3616,8 @@ Sfx_0a2_Ch1: ; 3d167 (0f:5167)
 	audio_wait_1
 	note E_2
 	audio_end
-; 0x3d18e
 
-Sfx_0a2_Ch2: ; 3d18e (0f:518e)
+Sfx_0a2_Ch2:
 	semitone_offset 0
 	wave WAVE_60
 	volume 75
@@ -3822,15 +3647,13 @@ Sfx_0a2_Ch2: ; 3d18e (0f:518e)
 	audio_wait_1
 	note E_2
 	audio_end
-; 0x3d1b3
 
-Sfx_0a2: ; 3d1b3 (0f:51b3)
+Sfx_0a2:
 	db 2, 0
 	dw Sfx_0a2_Ch1
 	dw Sfx_0a2_Ch2
-; 0x3d1b9
 
-Sfx_0a3_Ch1: ; 3d1b9 (0f:51b9)
+Sfx_0a3_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_3A
@@ -3838,14 +3661,12 @@ Sfx_0a3_Ch1: ; 3d1b9 (0f:51b9)
 	note NOTE_DURATION_20, C_4, 19
 	audio_wait_20
 	audio_end
-; 0x3d1c6
 
-Sfx_0a3: ; 3d1c6 (0f:51c6)
+Sfx_0a3:
 	db 1, 0
 	dw Sfx_0a3_Ch1
-; 0x3d1ca
 
-Sfx_0a4_Ch1: ; 3d1ca (0f:51ca)
+Sfx_0a4_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_25
@@ -3883,14 +3704,12 @@ Sfx_0a4_Ch1: ; 3d1ca (0f:51ca)
 	note B_3
 	audio_wait_8
 	audio_end
-; 0x3d1f5
 
-Sfx_0a4: ; 3d1f5 (0f:51f5)
+Sfx_0a4:
 	db 1, 0
 	dw Sfx_0a4_Ch1
-; 0x3d1f9
 
-Sfx_0a5_Ch1: ; 3d1f9 (0f:51f9)
+Sfx_0a5_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_42
@@ -3898,14 +3717,12 @@ Sfx_0a5_Ch1: ; 3d1f9 (0f:51f9)
 	note NOTE_DURATION_7, B_0, 31
 	audio_wait_7
 	audio_end
-; 0x3d206
 
-Sfx_0a5: ; 3d206 (0f:5206)
+Sfx_0a5:
 	db 1, 0
 	dw Sfx_0a5_Ch1
-; 0x3d20a
 
-Sfx_0a6_Ch1: ; 3d20a (0f:520a)
+Sfx_0a6_Ch1:
 	semitone_offset 250
 	tempo 74
 	wave WAVE_63
@@ -3954,14 +3771,12 @@ Sfx_0a6_Ch1: ; 3d20a (0f:520a)
 	note E_2
 	audio_wait_3
 	audio_end
-; 0x3d24b
 
-Sfx_0a6: ; 3d24b (0f:524b)
+Sfx_0a6:
 	db 1, 0
 	dw Sfx_0a6_Ch1
-; 0x3d24f
 
-Sfx_0a7_Ch1: ; 3d24f (0f:524f)
+Sfx_0a7_Ch1:
 	semitone_offset 6
 	tempo 74
 	wave WAVE_63
@@ -4034,14 +3849,12 @@ Sfx_0a7_Ch1: ; 3d24f (0f:524f)
 	audio_wait_2
 	note E_1
 	audio_end
-; 0x3d2a8
 
-Sfx_0a7: ; 3d2a8 (0f:52a8)
+Sfx_0a7:
 	db 1, 0
 	dw Sfx_0a7_Ch1
-; 0x3d2ac
 
-Sfx_0a8_Ch1: ; 3d2ac (0f:52ac)
+Sfx_0a8_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6A
@@ -4095,24 +3908,21 @@ Sfx_0a8_Ch1: ; 3d2ac (0f:52ac)
 	note A_2
 	audio_wait_4
 	audio_end
-; 0x3d2e7
 
-Sfx_0a8_Ch2: ; 3d2e7 (0f:52e7)
+Sfx_0a8_Ch2:
 	semitone_offset 0
 	wave WAVE_3A
 	volume 120
 	note NOTE_DURATION_96, G_1, 31
 	audio_wait_96
 	audio_end
-; 0x3d2f2
 
-Sfx_0a8: ; 3d2f2 (0f:52f2)
+Sfx_0a8:
 	db 2, 0
 	dw Sfx_0a8_Ch1
 	dw Sfx_0a8_Ch2
-; 0x3d2f8
 
-Sfx_0a9_Ch1: ; 3d2f8 (0f:52f8)
+Sfx_0a9_Ch1:
 	semitone_offset 3
 	tempo 74
 	wave WAVE_63
@@ -4199,14 +4009,12 @@ Sfx_0a9_Ch1: ; 3d2f8 (0f:52f8)
 	note B_0
 	audio_wait_2
 	audio_end
-; 0x3d355
 
-Sfx_0a9: ; 3d355 (0f:5355)
+Sfx_0a9:
 	db 1, 0
 	dw Sfx_0a9_Ch1
-; 0x3d359
 
-Sfx_0aa_Ch1: ; 3d359 (0f:5359)
+Sfx_0aa_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_45
@@ -4220,9 +4028,8 @@ Sfx_0aa_Ch1: ; 3d359 (0f:5359)
 	note NOTE_DURATION_2, F#3, 9
 	audio_wait_2
 	audio_end
-; 0x3d372
 
-Sfx_0aa_Ch2: ; 3d372 (0f:5372)
+Sfx_0aa_Ch2:
 	semitone_offset 0
 	wave WAVE_6A
 	volume 94
@@ -4233,15 +4040,13 @@ Sfx_0aa_Ch2: ; 3d372 (0f:5372)
 	note NOTE_DURATION_4, G_1, 4
 	audio_wait_5
 	audio_end
-; 0x3d385
 
-Sfx_0aa: ; 3d385 (0f:5385)
+Sfx_0aa:
 	db 2, 0
 	dw Sfx_0aa_Ch1
 	dw Sfx_0aa_Ch2
-; 0x3d38b
 
-Sfx_0ab_Ch1: ; 3d38b (0f:538b)
+Sfx_0ab_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -4263,14 +4068,12 @@ Sfx_0ab_Ch1: ; 3d38b (0f:538b)
 	note G_7
 	audio_wait_1
 	audio_end
-; 0x3d3a9
 
-Sfx_0ab: ; 3d3a9 (0f:53a9)
+Sfx_0ab:
 	db 1, 0
 	dw Sfx_0ab_Ch1
-; 0x3d3ad
 
-Sfx_0ac_Ch1: ; 3d3ad (0f:53ad)
+Sfx_0ac_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -4503,14 +4306,12 @@ Sfx_0ac_Ch1: ; 3d3ad (0f:53ad)
 	audio_wait_2
 	note E_2
 	audio_end
-; 0x3d4ba
 
-Sfx_0ac: ; 3d4ba (0f:54ba)
+Sfx_0ac:
 	db 1, 0
 	dw Sfx_0ac_Ch1
-; 0x3d4be
 
-Sfx_0ad_Ch1: ; 3d4be (0f:54be)
+Sfx_0ad_Ch1:
 	semitone_offset 1
 	tempo 74
 	wave WAVE_32
@@ -4522,14 +4323,12 @@ Sfx_0ad_Ch1: ; 3d4be (0f:54be)
 	note NOTE_DURATION_4, A_1
 	audio_wait_5
 	audio_end
-; 0x3d4d0
 
-Sfx_0ad: ; 3d4d0 (0f:54d0)
+Sfx_0ad:
 	db 1, 0
 	dw Sfx_0ad_Ch1
-; 0x3d4d4
 
-Sfx_0ae_Ch1: ; 3d4d4 (0f:54d4)
+Sfx_0ae_Ch1:
 	semitone_offset 2
 	tempo 74
 	wave WAVE_3B
@@ -4540,14 +4339,12 @@ Sfx_0ae_Ch1: ; 3d4d4 (0f:54d4)
 	note NOTE_DURATION_6, C_2, 19
 	audio_wait_12
 	audio_end
-; 0x3d4e7
 
-Sfx_0ae: ; 3d4e7 (0f:54e7)
+Sfx_0ae:
 	db 1, 0
 	dw Sfx_0ae_Ch1
-; 0x3d4eb
 
-Sfx_0af_Ch1: ; 3d4eb (0f:54eb)
+Sfx_0af_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_44
@@ -4561,14 +4358,12 @@ Sfx_0af_Ch1: ; 3d4eb (0f:54eb)
 	note B_1
 	audio_wait_4
 	audio_end
-; 0x3d4fe
 
-Sfx_0af: ; 3d4fe (0f:54fe)
+Sfx_0af:
 	db 1, 0
 	dw Sfx_0af_Ch1
-; 0x3d502
 
-Sfx_0b0_Ch1: ; 3d502 (0f:5502)
+Sfx_0b0_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6A
@@ -4612,9 +4407,8 @@ Sfx_0b0_Ch1: ; 3d502 (0f:5502)
 	note E_2
 	audio_wait_1
 	audio_end
-; 0x3d536
 
-Sfx_0b0_Ch2: ; 3d536 (0f:5536)
+Sfx_0b0_Ch2:
 	semitone_offset 0
 	wave WAVE_40
 	volume 120
@@ -4809,15 +4603,13 @@ Sfx_0b0_Ch2: ; 3d536 (0f:5536)
 	audio_wait_1
 	note 31
 	audio_end
-; 0x3d643
 
-Sfx_0b0: ; 3d643 (0f:5643)
+Sfx_0b0:
 	db 2, 0
 	dw Sfx_0b0_Ch1
 	dw Sfx_0b0_Ch2
-; 0x3d649
 
-Sfx_0b1_Ch1: ; 3d649 (0f:5649)
+Sfx_0b1_Ch1:
 	semitone_offset 5
 	tempo 74
 	wave WAVE_6F
@@ -4871,14 +4663,12 @@ Sfx_0b1_Ch1: ; 3d649 (0f:5649)
 	note F_1
 	audio_wait_2
 	audio_end
-; 0x3d684
 
-Sfx_0b1: ; 3d684 (0f:5684)
+Sfx_0b1:
 	db 1, 0
 	dw Sfx_0b1_Ch1
-; 0x3d688
 
-Sfx_0b2_Ch1: ; 3d688 (0f:5688)
+Sfx_0b2_Ch1:
 	semitone_offset 5
 	tempo 74
 	wave WAVE_6F
@@ -4944,9 +4734,8 @@ Sfx_0b2_Ch1: ; 3d688 (0f:5688)
 	note D_2
 	audio_wait_2
 	audio_end
-; 0x3d6cf
 
-Sfx_0b2_Ch2: ; 3d6cf (0f:56cf)
+Sfx_0b2_Ch2:
 	semitone_offset 2
 	wave WAVE_65
 	volume 94
@@ -5015,15 +4804,13 @@ Sfx_0b2_Ch2: ; 3d6cf (0f:56cf)
 	note A#2
 	audio_wait_3
 	audio_end
-; 0x3d726
 
-Sfx_0b2: ; 3d726 (0f:5726)
+Sfx_0b2:
 	db 2, 0
 	dw Sfx_0b2_Ch1
 	dw Sfx_0b2_Ch2
-; 0x3d72c
 
-Sfx_0b3_Ch1: ; 3d72c (0f:572c)
+Sfx_0b3_Ch1:
 	volume 120
 	semitone_offset 0
 	tempo 74
@@ -5061,14 +4848,12 @@ Sfx_0b3_Ch1: ; 3d72c (0f:572c)
 	note 2
 	audio_wait_2
 	audio_end
-; 0x3d75b
 
-Sfx_0b3: ; 3d75b (0f:575b)
+Sfx_0b3:
 	db 1, 0
 	dw Sfx_0b3_Ch1
-; 0x3d75f
 
-Sfx_0b4_Ch1: ; 3d75f (0f:575f)
+Sfx_0b4_Ch1:
 	semitone_offset 244
 	tempo 74
 	wave WAVE_63
@@ -5234,14 +5019,12 @@ Sfx_0b4_Ch1: ; 3d75f (0f:575f)
 	audio_wait_1
 	note E_2
 	audio_end
-; 0x3d830
 
-Sfx_0b4: ; 3d830 (0f:5830)
+Sfx_0b4:
 	db 1, 0
 	dw Sfx_0b4_Ch1
-; 0x3d834
 
-Sfx_0b5_Ch1: ; 3d834 (0f:5834)
+Sfx_0b5_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_4B
@@ -5263,9 +5046,8 @@ Sfx_0b5_Ch1: ; 3d834 (0f:5834)
 	note G_3
 	audio_wait_2
 	audio_end
-; 0x3d851
 
-Sfx_0b5_Ch2: ; 3d851 (0f:5851)
+Sfx_0b5_Ch2:
 	semitone_offset 0
 	wave WAVE_1A
 	vibrato_amplitude 0
@@ -5287,15 +5069,13 @@ Sfx_0b5_Ch2: ; 3d851 (0f:5851)
 	note G_3
 	audio_wait_2
 	audio_end
-; 0x3d86d
 
-Sfx_0b5: ; 3d86d (0f:586d)
+Sfx_0b5:
 	db 2, 0
 	dw Sfx_0b5_Ch1
 	dw Sfx_0b5_Ch2
-; 0x3d873
 
-Sfx_0b6_Ch1: ; 3d873 (0f:5873)
+Sfx_0b6_Ch1:
 	semitone_offset 255
 	tempo 74
 	wave WAVE_4B
@@ -5317,9 +5097,8 @@ Sfx_0b6_Ch1: ; 3d873 (0f:5873)
 	note G_3
 	audio_wait_2
 	audio_end
-; 0x3d890
 
-Sfx_0b6_Ch2: ; 3d890 (0f:5890)
+Sfx_0b6_Ch2:
 	semitone_offset 255
 	wave WAVE_1A
 	vibrato_amplitude 0
@@ -5341,15 +5120,13 @@ Sfx_0b6_Ch2: ; 3d890 (0f:5890)
 	note G_3
 	audio_wait_2
 	audio_end
-; 0x3d8ac
 
-Sfx_0b6: ; 3d8ac (0f:58ac)
+Sfx_0b6:
 	db 2, 0
 	dw Sfx_0b6_Ch1
 	dw Sfx_0b6_Ch2
-; 0x3d8b2
 
-Sfx_0b7_Ch1: ; 3d8b2 (0f:58b2)
+Sfx_0b7_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_4B
@@ -5371,9 +5148,8 @@ Sfx_0b7_Ch1: ; 3d8b2 (0f:58b2)
 	note G_4
 	audio_wait_3
 	audio_end
-; 0x3d8cf
 
-Sfx_0b7_Ch2: ; 3d8cf (0f:58cf)
+Sfx_0b7_Ch2:
 	semitone_offset 0
 	wave WAVE_1A
 	volume 56
@@ -5395,15 +5171,13 @@ Sfx_0b7_Ch2: ; 3d8cf (0f:58cf)
 	note G_4
 	audio_wait_3
 	audio_end
-; 0x3d8eb
 
-Sfx_0b7: ; 3d8eb (0f:58eb)
+Sfx_0b7:
 	db 2, 0
 	dw Sfx_0b7_Ch1
 	dw Sfx_0b7_Ch2
-; 0x3d8f1
 
-Sfx_0b8_Ch1: ; 3d8f1 (0f:58f1)
+Sfx_0b8_Ch1:
 	semitone_offset 1
 	tempo 74
 	wave WAVE_4B
@@ -5425,9 +5199,8 @@ Sfx_0b8_Ch1: ; 3d8f1 (0f:58f1)
 	note G_4
 	audio_wait_3
 	audio_end
-; 0x3d90e
 
-Sfx_0b8_Ch2: ; 3d90e (0f:590e)
+Sfx_0b8_Ch2:
 	semitone_offset 1
 	wave WAVE_1A
 	volume 56
@@ -5449,15 +5222,13 @@ Sfx_0b8_Ch2: ; 3d90e (0f:590e)
 	note G_4
 	audio_wait_3
 	audio_end
-; 0x3d92a
 
-Sfx_0b8: ; 3d92a (0f:592a)
+Sfx_0b8:
 	db 2, 0
 	dw Sfx_0b8_Ch1
 	dw Sfx_0b8_Ch2
-; 0x3d930
 
-Sfx_0b9_Ch1: ; 3d930 (0f:5930)
+Sfx_0b9_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_32
@@ -5477,14 +5248,12 @@ Sfx_0b9_Ch1: ; 3d930 (0f:5930)
 	note NOTE_DURATION_4, C_2
 	audio_wait_5
 	audio_end
-; 0x3d94b
 
-Sfx_0b9: ; 3d94b (0f:594b)
+Sfx_0b9:
 	db 1, 0
 	dw Sfx_0b9_Ch1
-; 0x3d94f
 
-Sfx_0ba_Ch1: ; 3d94f (0f:594f)
+Sfx_0ba_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_3C
@@ -5492,9 +5261,8 @@ Sfx_0ba_Ch1: ; 3d94f (0f:594f)
 	note NOTE_DURATION_12, E_3, 24
 	audio_wait_12
 	audio_end
-; 0x3d95c
 
-Sfx_0ba_Ch2: ; 3d95c (0f:595c)
+Sfx_0ba_Ch2:
 	semitone_offset 0
 	wave WAVE_69
 	volume 120
@@ -5505,15 +5273,13 @@ Sfx_0ba_Ch2: ; 3d95c (0f:595c)
 	note D_3, 24
 	audio_wait_2
 	audio_end
-; 0x3d96d
 
-Sfx_0ba: ; 3d96d (0f:596d)
+Sfx_0ba:
 	db 2, 0
 	dw Sfx_0ba_Ch1
 	dw Sfx_0ba_Ch2
-; 0x3d973
 
-Sfx_0bb_Ch1: ; 3d973 (0f:5973)
+Sfx_0bb_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -5539,9 +5305,8 @@ Sfx_0bb_Ch1: ; 3d973 (0f:5973)
 	note C_5
 	audio_wait_2
 	audio_end
-; 0x3d994
 
-Sfx_0bb_Ch2: ; 3d994 (0f:5994)
+Sfx_0bb_Ch2:
 	semitone_offset 0
 	wave WAVE_60
 	volume 113
@@ -5566,15 +5331,13 @@ Sfx_0bb_Ch2: ; 3d994 (0f:5994)
 	note E_4
 	audio_wait_2
 	audio_end
-; 0x3d9b3
 
-Sfx_0bb: ; 3d9b3 (0f:59b3)
+Sfx_0bb:
 	db 2, 0
 	dw Sfx_0bb_Ch1
 	dw Sfx_0bb_Ch2
-; 0x3d9b9
 
-Sfx_0bc_Ch1: ; 3d9b9 (0f:59b9)
+Sfx_0bc_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -5612,14 +5375,12 @@ Sfx_0bc_Ch1: ; 3d9b9 (0f:59b9)
 	note C_5, 12
 	audio_wait_8
 	audio_end
-; 0x3d9ef
 
-Sfx_0bc: ; 3d9ef (0f:59ef)
+Sfx_0bc:
 	db 1, 0
 	dw Sfx_0bc_Ch1
-; 0x3d9f3
 
-Sfx_0bd_Ch1: ; 3d9f3 (0f:59f3)
+Sfx_0bd_Ch1:
 	semitone_offset 2
 	tempo 74
 	wave WAVE_63
@@ -5770,14 +5531,12 @@ Sfx_0bd_Ch1: ; 3d9f3 (0f:59f3)
 	note G_1
 	audio_wait_2
 	audio_end
-; 0x3da97
 
-Sfx_0bd: ; 3da97 (0f:5a97)
+Sfx_0bd:
 	db 1, 0
 	dw Sfx_0bd_Ch1
-; 0x3da9b
 
-Sfx_0be_Ch1: ; 3da9b (0f:5a9b)
+Sfx_0be_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_63
@@ -5813,14 +5572,12 @@ Sfx_0be_Ch1: ; 3da9b (0f:5a9b)
 	note E_2
 	audio_wait_1
 	audio_end
-; 0x3daca
 
-Sfx_0be: ; 3daca (0f:5aca)
+Sfx_0be:
 	db 1, 0
 	dw Sfx_0be_Ch1
-; 0x3dace
 
-Sfx_0bf_Ch1: ; 3dace (0f:5ace)
+Sfx_0bf_Ch1:
 	semitone_offset 12
 	tempo 74
 	wave WAVE_63
@@ -5886,14 +5643,12 @@ Sfx_0bf_Ch1: ; 3dace (0f:5ace)
 	note E_1
 	audio_wait_2
 	audio_end
-; 0x3db17
 
-Sfx_0bf: ; 3db17 (0f:5b17)
+Sfx_0bf:
 	db 1, 0
 	dw Sfx_0bf_Ch1
-; 0x3db1b
 
-Sfx_0c0_Ch1: ; 3db1b (0f:5b1b)
+Sfx_0c0_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_63
@@ -5978,14 +5733,12 @@ Sfx_0c0_Ch1: ; 3db1b (0f:5b1b)
 	note F#1
 	audio_wait_2
 	audio_end
-; 0x3db76
 
-Sfx_0c0: ; 3db76 (0f:5b76)
+Sfx_0c0:
 	db 1, 0
 	dw Sfx_0c0_Ch1
-; 0x3db7a
 
-Sfx_0c1_Ch1: ; 3db7a (0f:5b7a)
+Sfx_0c1_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_60
@@ -5997,24 +5750,21 @@ Sfx_0c1_Ch1: ; 3db7a (0f:5b7a)
 	note C#2
 	audio_wait_2
 	audio_end
-; 0x3db8b
 
-Sfx_0c1_Ch2: ; 3db8b (0f:5b8b)
+Sfx_0c1_Ch2:
 	semitone_offset 0
 	wave WAVE_65
 	volume 113
 	note NOTE_DURATION_8, F_1, 24
 	audio_wait_8
 	audio_end
-; 0x3db96
 
-Sfx_0c1: ; 3db96 (0f:5b96)
+Sfx_0c1:
 	db 2, 0
 	dw Sfx_0c1_Ch1
 	dw Sfx_0c1_Ch2
-; 0x3db9c
 
-Sfx_0c2_Ch1: ; 3db9c (0f:5b9c)
+Sfx_0c2_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -6068,14 +5818,12 @@ Sfx_0c2_Ch1: ; 3db9c (0f:5b9c)
 	note A#4, 12
 	audio_wait_4
 	audio_end
-; 0x3dbe8
 
-Sfx_0c2: ; 3dbe8 (0f:5be8)
+Sfx_0c2:
 	db 1, 0
 	dw Sfx_0c2_Ch1
-; 0x3dbec
 
-Sfx_0c3_Ch1: ; 3dbec (0f:5bec)
+Sfx_0c3_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_44
@@ -6083,14 +5831,12 @@ Sfx_0c3_Ch1: ; 3dbec (0f:5bec)
 	note NOTE_DURATION_10, F_2, 19
 	audio_wait_20
 	audio_end
-; 0x3dbf9
 
-Sfx_0c3: ; 3dbf9 (0f:5bf9)
+Sfx_0c3:
 	db 1, 0
 	dw Sfx_0c3_Ch1
-; 0x3dbfd
 
-Sfx_0c4_Ch1: ; 3dbfd (0f:5bfd)
+Sfx_0c4_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_3D
@@ -6098,14 +5844,12 @@ Sfx_0c4_Ch1: ; 3dbfd (0f:5bfd)
 	note NOTE_DURATION_10, C_3, 17
 	audio_wait_10
 	audio_end
-; 0x3dc0a
 
-Sfx_0c4: ; 3dc0a (0f:5c0a)
+Sfx_0c4:
 	db 1, 0
 	dw Sfx_0c4_Ch1
-; 0x3dc0e
 
-Sfx_0c5_Ch1: ; 3dc0e (0f:5c0e)
+Sfx_0c5_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -6115,14 +5859,12 @@ Sfx_0c5_Ch1: ; 3dc0e (0f:5c0e)
 	note F#4
 	audio_wait_14
 	audio_end
-; 0x3dc1d
 
-Sfx_0c5: ; 3dc1d (0f:5c1d)
+Sfx_0c5:
 	db 1, 0
 	dw Sfx_0c5_Ch1
-; 0x3dc21
 
-Sfx_0c6_Ch1: ; 3dc21 (0f:5c21)
+Sfx_0c6_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_3B
@@ -6136,14 +5878,12 @@ Sfx_0c6_Ch1: ; 3dc21 (0f:5c21)
 	note F_1
 	audio_wait_2
 	audio_end
-; 0x3dc34
 
-Sfx_0c6: ; 3dc34 (0f:5c34)
+Sfx_0c6:
 	db 1, 0
 	dw Sfx_0c6_Ch1
-; 0x3dc38
 
-Sfx_0c7_Ch1: ; 3dc38 (0f:5c38)
+Sfx_0c7_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_0D
@@ -6195,9 +5935,8 @@ Sfx_0c7_Ch1: ; 3dc38 (0f:5c38)
 	note NOTE_DURATION_5, 19
 	audio_wait_5
 	audio_end
-; 0x3dc7d
 
-Sfx_0c7_Ch2: ; 3dc7d (0f:5c7d)
+Sfx_0c7_Ch2:
 	semitone_offset 0
 	wave WAVE_5D
 	vibrato_speed 127
@@ -6231,15 +5970,13 @@ Sfx_0c7_Ch2: ; 3dc7d (0f:5c7d)
 	note NOTE_DURATION_24, B_1, 18
 	audio_wait_24
 	audio_end
-; 0x3dcbc
 
-Sfx_0c7: ; 3dcbc (0f:5cbc)
+Sfx_0c7:
 	db 2, 0
 	dw Sfx_0c7_Ch1
 	dw Sfx_0c7_Ch2
-; 0x3dcc2
 
-Sfx_0c8_Ch1: ; 3dcc2 (0f:5cc2)
+Sfx_0c8_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_40
@@ -6435,14 +6172,12 @@ Sfx_0c8_Ch1: ; 3dcc2 (0f:5cc2)
 	audio_wait_1
 	note 31
 	audio_end
-; 0x3ddd1
 
-Sfx_0c8: ; 3ddd1 (0f:5dd1)
+Sfx_0c8:
 	db 1, 0
 	dw Sfx_0c8_Ch1
-; 0x3ddd5
 
-Sfx_0c9_Ch1: ; 3ddd5 (0f:5dd5)
+Sfx_0c9_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_34
@@ -6452,14 +6187,12 @@ Sfx_0c9_Ch1: ; 3ddd5 (0f:5dd5)
 	note G#2
 	audio_wait_2
 	audio_end
-; 0x3dde4
 
-Sfx_0c9: ; 3dde4 (0f:5de4)
+Sfx_0c9:
 	db 1, 0
 	dw Sfx_0c9_Ch1
-; 0x3dde8
 
-Sfx_0ca_Ch1: ; 3dde8 (0f:5de8)
+Sfx_0ca_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_1A
@@ -6497,9 +6230,8 @@ Sfx_0ca_Ch1: ; 3dde8 (0f:5de8)
 	note B_4
 	audio_wait_4
 	audio_end
-; 0x3de16
 
-Sfx_0ca_Ch2: ; 3de16 (0f:5e16)
+Sfx_0ca_Ch2:
 	semitone_offset 0
 	wave WAVE_10
 	volume 75
@@ -6536,15 +6268,13 @@ Sfx_0ca_Ch2: ; 3de16 (0f:5e16)
 	note B_3
 	audio_wait_4
 	audio_end
-; 0x3de42
 
-Sfx_0ca: ; 3de42 (0f:5e42)
+Sfx_0ca:
 	db 2, 0
 	dw Sfx_0ca_Ch1
 	dw Sfx_0ca_Ch2
-; 0x3de48
 
-Sfx_0cb_Ch1: ; 3de48 (0f:5e48)
+Sfx_0cb_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -6587,14 +6317,12 @@ Sfx_0cb_Ch1: ; 3de48 (0f:5e48)
 	note C_3
 	audio_wait_1
 	audio_end
-; 0x3de7c
 
-Sfx_0cb: ; 3de7c (0f:5e7c)
+Sfx_0cb:
 	db 1, 0
 	dw Sfx_0cb_Ch1
-; 0x3de80
 
-Sfx_0cc_Ch1: ; 3de80 (0f:5e80)
+Sfx_0cc_Ch1:
 	semitone_offset 4
 	tempo 74
 	wave WAVE_5C
@@ -6775,9 +6503,8 @@ Sfx_0cc_Ch1: ; 3de80 (0f:5e80)
 	audio_ret
 
 	audio_end
-; 0x3df66
 
-Sfx_0cc_Ch2: ; 3df66 (0f:5f66)
+Sfx_0cc_Ch2:
 	semitone_offset 4
 	tempo 74
 	wave WAVE_0A
@@ -6787,15 +6514,13 @@ Sfx_0cc_Ch2: ; 3df66 (0f:5f66)
 	audio_wait_6
 	audio_call Sfx_0cc_Ch1.sub1
 	audio_end
-; 0x3df77
 
-Sfx_0cc: ; 3df77 (0f:5f77)
+Sfx_0cc:
 	db 2, 0
 	dw Sfx_0cc_Ch1
 	dw Sfx_0cc_Ch2
-; 0x3df7d
 
-Sfx_0cd_Ch1: ; 3df7d (0f:5f7d)
+Sfx_0cd_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -6845,9 +6570,8 @@ Sfx_0cd_Ch1: ; 3df7d (0f:5f7d)
 	audio_wait_1
 	note 0
 	audio_end
-; 0x3dfba
 
-Sfx_0cd_Ch2: ; 3dfba (0f:5fba)
+Sfx_0cd_Ch2:
 	semitone_offset 0
 	wave WAVE_1A
 	vibrato_amplitude 0
@@ -6897,9 +6621,8 @@ Sfx_0cd_Ch2: ; 3dfba (0f:5fba)
 	audio_wait_1
 	note 0
 	audio_end
-; 0x3dff6
 
-Sfx_0cd_Ch3: ; 3dff6 (0f:5ff6)
+Sfx_0cd_Ch3:
 	semitone_offset 0
 	wave WAVE_60
 	vibrato_amplitude 0
@@ -6949,16 +6672,14 @@ Sfx_0cd_Ch3: ; 3dff6 (0f:5ff6)
 	audio_wait_1
 	note 0
 	audio_end
-; 0x3e032
 
-Sfx_0cd: ; 3e032 (0f:6032)
+Sfx_0cd:
 	db 3, 0
 	dw Sfx_0cd_Ch1
 	dw Sfx_0cd_Ch2
 	dw Sfx_0cd_Ch3
-; 0x3e03a
 
-Sfx_0ce_Ch1: ; 3e03a (0f:603a)
+Sfx_0ce_Ch1:
 	semitone_offset 241
 	tempo 74
 	wave WAVE_63
@@ -7020,9 +6741,8 @@ Sfx_0ce_Ch1: ; 3e03a (0f:603a)
 	note F_1
 	audio_wait_2
 	audio_end
-; 0x3e07d
 
-Sfx_0ce_Ch2: ; 3e07d (0f:607d)
+Sfx_0ce_Ch2:
 	semitone_offset 241
 	tempo 74
 	wave WAVE_0A
@@ -7085,15 +6805,13 @@ Sfx_0ce_Ch2: ; 3e07d (0f:607d)
 	note F_1
 	audio_wait_2
 	audio_end
-; 0x3e0c1
 
-Sfx_0ce: ; 3e0c1 (0f:60c1)
+Sfx_0ce:
 	db 2, 0
 	dw Sfx_0ce_Ch1
 	dw Sfx_0ce_Ch2
-; 0x3e0c7
 
-Sfx_0cf_Ch1: ; 3e0c7 (0f:60c7)
+Sfx_0cf_Ch1:
 	semitone_offset 250
 	tempo 74
 	wave WAVE_63
@@ -7180,9 +6898,8 @@ Sfx_0cf_Ch1: ; 3e0c7 (0f:60c7)
 	note B_0
 	audio_wait_2
 	audio_end
-; 0x3e124
 
-Sfx_0cf_Ch2: ; 3e124 (0f:6124)
+Sfx_0cf_Ch2:
 	semitone_offset 0
 	wave WAVE_0A
 	vibrato_amplitude 50
@@ -7268,15 +6985,13 @@ Sfx_0cf_Ch2: ; 3e124 (0f:6124)
 	note B_0
 	audio_wait_2
 	audio_end
-; 0x3e17f
 
-Sfx_0cf: ; 3e17f (0f:617f)
+Sfx_0cf:
 	db 2, 0
 	dw Sfx_0cf_Ch1
 	dw Sfx_0cf_Ch2
-; 0x3e185
 
-Sfx_0d0_Ch1: ; 3e185 (0f:6185)
+Sfx_0d0_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6A
@@ -7396,14 +7111,12 @@ Sfx_0d0_Ch1: ; 3e185 (0f:6185)
 	note E_2, 23
 	audio_wait_1
 	audio_end
-; 0x3e23a
 
-Sfx_0d0: ; 3e23a (0f:623a)
+Sfx_0d0:
 	db 1, 0
 	dw Sfx_0d0_Ch1
-; 0x3e23e
 
-Sfx_0d1_Ch1: ; 3e23e (0f:623e)
+Sfx_0d1_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_36
@@ -7424,9 +7137,8 @@ Sfx_0d1_Ch1: ; 3e23e (0f:623e)
 	audio_wait_22
 	note E_2
 	audio_end
-; 0x3e25b
 
-Sfx_0d1_Ch2: ; 3e25b (0f:625b)
+Sfx_0d1_Ch2:
 	semitone_offset 244
 	wave WAVE_6A
 	vibrato_amplitude 0
@@ -7482,15 +7194,13 @@ Sfx_0d1_Ch2: ; 3e25b (0f:625b)
 	note G_1
 	audio_wait_1
 	audio_end
-; 0x3e29e
 
-Sfx_0d1: ; 3e29e (0f:629e)
+Sfx_0d1:
 	db 2, 0
 	dw Sfx_0d1_Ch1
 	dw Sfx_0d1_Ch2
-; 0x3e2a4
 
-Sfx_0e1_Ch1: ; 3e2a4 (0f:62a4)
+Sfx_0e1_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_35
@@ -7504,14 +7214,12 @@ Sfx_0e1_Ch1: ; 3e2a4 (0f:62a4)
 	note NOTE_DURATION_8
 	audio_wait_8
 	audio_end
-; 0x3e2b7
 
-Sfx_0e1: ; 3e2b7 (0f:62b7)
+Sfx_0e1:
 	db 1, 0
 	dw Sfx_0e1_Ch1
-; 0x3e2bb
 
-Sfx_0e2_Ch1: ; 3e2bb (0f:62bb)
+Sfx_0e2_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_3C
@@ -7519,14 +7227,12 @@ Sfx_0e2_Ch1: ; 3e2bb (0f:62bb)
 	note NOTE_DURATION_8, E_2, 19
 	audio_wait_8
 	audio_end
-; 0x3e2c8
 
-Sfx_0e2: ; 3e2c8 (0f:62c8)
+Sfx_0e2:
 	db 1, 0
 	dw Sfx_0e2_Ch1
-; 0x3e2cc
 
-Sfx_Selection_Ch1: ; 3e2cc (0f:62cc)
+Sfx_Selection_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -7548,14 +7254,12 @@ Sfx_Selection_Ch1: ; 3e2cc (0f:62cc)
 	note D_5, 9
 	audio_wait_3
 	audio_end
-; 0x3e2e8
 
-Sfx_Selection: ; 3e2e8 (0f:62e8)
+Sfx_Selection:
 	db 1, 0
 	dw Sfx_Selection_Ch1
-; 0x3e2ec
 
-Sfx_0e4_Ch1: ; 3e2ec (0f:62ec)
+Sfx_0e4_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_63
@@ -7569,14 +7273,12 @@ Sfx_0e4_Ch1: ; 3e2ec (0f:62ec)
 	note G_4
 	audio_wait_2
 	audio_end
-; 0x3e303
 
-Sfx_0e4: ; 3e303 (0f:6303)
+Sfx_0e4:
 	db 1, 0
 	dw Sfx_0e4_Ch1
-; 0x3e307
 
-Sfx_0e5_Ch1: ; 3e307 (0f:6307)
+Sfx_0e5_Ch1:
 	semitone_offset 2
 	tempo 74
 	wave WAVE_0D
@@ -7590,9 +7292,8 @@ Sfx_0e5_Ch1: ; 3e307 (0f:6307)
 	note NOTE_DURATION_24
 	audio_wait_24
 	audio_end
-; 0x3e31e
 
-Sfx_0e5_Ch2: ; 3e31e (0f:631e)
+Sfx_0e5_Ch2:
 	semitone_offset 2
 	wave WAVE_5D
 	vibrato_speed 127
@@ -7605,15 +7306,13 @@ Sfx_0e5_Ch2: ; 3e31e (0f:631e)
 	note NOTE_DURATION_24
 	audio_wait_24
 	audio_end
-; 0x3e333
 
-Sfx_0e5: ; 3e333 (0f:6333)
+Sfx_0e5:
 	db 2, 0
 	dw Sfx_0e5_Ch1
 	dw Sfx_0e5_Ch2
-; 0x3e339
 
-Sfx_0e6_Ch1: ; 3e339 (0f:6339)
+Sfx_0e6_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_1B
@@ -7636,14 +7335,12 @@ Sfx_0e6_Ch1: ; 3e339 (0f:6339)
 	note G_4
 	audio_wait_5
 	audio_end
-; 0x3e356
 
-Sfx_0e6: ; 3e356 (0f:6356)
+Sfx_0e6:
 	db 1, 0
 	dw Sfx_0e6_Ch1
-; 0x3e35a
 
-Sfx_0e7_Ch1: ; 3e35a (0f:635a)
+Sfx_0e7_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -7665,14 +7362,12 @@ Sfx_0e7_Ch1: ; 3e35a (0f:635a)
 	note D_3, 9
 	audio_wait_3
 	audio_end
-; 0x3e376
 
-Sfx_0e7: ; 3e376 (0f:6376)
+Sfx_0e7:
 	db 1, 0
 	dw Sfx_0e7_Ch1
-; 0x3e37a
 
-Sfx_0e8_Ch1: ; 3e37a (0f:637a)
+Sfx_0e8_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_3C
@@ -7801,14 +7496,12 @@ Sfx_0e8_Ch1: ; 3e37a (0f:637a)
 	audio_wait_10
 	note E_2
 	audio_end
-; 0x3e412
 
-Sfx_0e8: ; 3e412 (0f:6412)
+Sfx_0e8:
 	db 1, 0
 	dw Sfx_0e8_Ch1
-; 0x3e416
 
-Sfx_0e9_Ch1: ; 3e416 (0f:6416)
+Sfx_0e9_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -7842,14 +7535,12 @@ Sfx_0e9_Ch1: ; 3e416 (0f:6416)
 	note F#7
 	audio_wait_1
 	audio_end
-; 0x3e440
 
-Sfx_0e9: ; 3e440 (0f:6440)
+Sfx_0e9:
 	db 1, 0
 	dw Sfx_0e9_Ch1
-; 0x3e444
 
-Sfx_0ea_Ch1: ; 3e444 (0f:6444)
+Sfx_0ea_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -7883,14 +7574,12 @@ Sfx_0ea_Ch1: ; 3e444 (0f:6444)
 	note 2
 	audio_wait_1
 	audio_end
-; 0x3e46e
 
-Sfx_0ea: ; 3e46e (0f:646e)
+Sfx_0ea:
 	db 1, 0
 	dw Sfx_0ea_Ch1
-; 0x3e472
 
-Sfx_0eb_Ch1: ; 3e472 (0f:6472)
+Sfx_0eb_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_11
@@ -7923,9 +7612,8 @@ Sfx_0eb_Ch1: ; 3e472 (0f:6472)
 	note C_5
 	audio_wait_4
 	audio_end
-; 0x3e499
 
-Sfx_0eb_Ch2: ; 3e499 (0f:6499)
+Sfx_0eb_Ch2:
 	semitone_offset 0
 	wave WAVE_52
 	volume 56
@@ -7958,15 +7646,13 @@ Sfx_0eb_Ch2: ; 3e499 (0f:6499)
 	note C_5
 	audio_wait_4
 	audio_end
-; 0x3e4bf
 
-Sfx_0eb: ; 3e4bf (0f:64bf)
+Sfx_0eb:
 	db 2, 0
 	dw Sfx_0eb_Ch1
 	dw Sfx_0eb_Ch2
-; 0x3e4c5
 
-Sfx_0ec_Ch1: ; 3e4c5 (0f:64c5)
+Sfx_0ec_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_25
@@ -7976,14 +7662,12 @@ Sfx_0ec_Ch1: ; 3e4c5 (0f:64c5)
 	note C_5
 	audio_wait_2
 	audio_end
-; 0x3e4d4
 
-Sfx_0ec: ; 3e4d4 (0f:64d4)
+Sfx_0ec:
 	db 1, 0
 	dw Sfx_0ec_Ch1
-; 0x3e4d8
 
-Sfx_0ed_Ch1: ; 3e4d8 (0f:64d8)
+Sfx_0ed_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_69
@@ -8013,14 +7697,12 @@ Sfx_0ed_Ch1: ; 3e4d8 (0f:64d8)
 	note D_3, 31
 	audio_wait_2
 	audio_end
-; 0x3e506
 
-Sfx_0ed: ; 3e506 (0f:6506)
+Sfx_0ed:
 	db 1, 0
 	dw Sfx_0ed_Ch1
-; 0x3e50a
 
-Sfx_0ee_Ch1: ; 3e50a (0f:650a)
+Sfx_0ee_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -8074,14 +7756,12 @@ Sfx_0ee_Ch1: ; 3e50a (0f:650a)
 	note C_5, 12
 	audio_wait_8
 	audio_end
-; 0x3e558
 
-Sfx_0ee: ; 3e558 (0f:6558)
+Sfx_0ee:
 	db 1, 0
 	dw Sfx_0ee_Ch1
-; 0x3e55c
 
-Sfx_0ef_Ch1: ; 3e55c (0f:655c)
+Sfx_0ef_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -8098,14 +7778,12 @@ Sfx_0ef_Ch1: ; 3e55c (0f:655c)
 	note NOTE_DURATION_1, G_3, 14
 	audio_wait_4
 	audio_end
-; 0x3e57b
 
-Sfx_0ef: ; 3e57b (0f:657b)
+Sfx_0ef:
 	db 1, 0
 	dw Sfx_0ef_Ch1
-; 0x3e57f
 
-Sfx_0f0_Ch1: ; 3e57f (0f:657f)
+Sfx_0f0_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -8150,14 +7828,12 @@ Sfx_0f0_Ch1: ; 3e57f (0f:657f)
 	audio_wait_10
 	note E_2
 	audio_end
-; 0x3e5b4
 
-Sfx_0f0: ; 3e5b4 (0f:65b4)
+Sfx_0f0:
 	db 1, 0
 	dw Sfx_0f0_Ch1
-; 0x3e5b8
 
-Sfx_0f1_Ch1: ; 3e5b8 (0f:65b8)
+Sfx_0f1_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -8169,14 +7845,12 @@ Sfx_0f1_Ch1: ; 3e5b8 (0f:65b8)
 	note A#3
 	audio_wait_3
 	audio_end
-; 0x3e5c9
 
-Sfx_0f1: ; 3e5c9 (0f:65c9)
+Sfx_0f1:
 	db 1, 0
 	dw Sfx_0f1_Ch1
-; 0x3e5cd
 
-Sfx_0f2_Ch1: ; 3e5cd (0f:65cd)
+Sfx_0f2_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -8186,14 +7860,12 @@ Sfx_0f2_Ch1: ; 3e5cd (0f:65cd)
 	note B_4
 	audio_wait_14
 	audio_end
-; 0x3e5dc
 
-Sfx_0f2: ; 3e5dc (0f:65dc)
+Sfx_0f2:
 	db 1, 0
 	dw Sfx_0f2_Ch1
-; 0x3e5e0
 
-Sfx_0f3_Ch1: ; 3e5e0 (0f:65e0)
+Sfx_0f3_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6A
@@ -8202,14 +7874,12 @@ Sfx_0f3_Ch1: ; 3e5e0 (0f:65e0)
 	note NOTE_DURATION_14, C_3, 17
 	audio_wait_14
 	audio_end
-; 0x3e5ef
 
-Sfx_0f3: ; 3e5ef (0f:65ef)
+Sfx_0f3:
 	db 1, 0
 	dw Sfx_0f3_Ch1
-; 0x3e5f3
 
-Sfx_0f4_Ch1: ; 3e5f3 (0f:65f3)
+Sfx_0f4_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_33
@@ -8225,14 +7895,12 @@ Sfx_0f4_Ch1: ; 3e5f3 (0f:65f3)
 	note NOTE_DURATION_4, D#1, 31
 	audio_wait_5
 	audio_end
-; 0x3e610
 
-Sfx_0f4: ; 3e610 (0f:6610)
+Sfx_0f4:
 	db 1, 0
 	dw Sfx_0f4_Ch1
-; 0x3e614
 
-Sfx_0f5_Ch1: ; 3e614 (0f:6614)
+Sfx_0f5_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_68
@@ -8254,14 +7922,12 @@ Sfx_0f5_Ch1: ; 3e614 (0f:6614)
 	note NOTE_DURATION_9, F_1, 12
 	audio_wait_9
 	audio_end
-; 0x3e63d
 
-Sfx_0f5: ; 3e63d (0f:663d)
+Sfx_0f5:
 	db 1, 0
 	dw Sfx_0f5_Ch1
-; 0x3e641
 
-Sfx_Plane1_Ch1: ; 3e641 (0f:6641)
+Sfx_Plane1_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -8275,14 +7941,12 @@ Sfx_Plane1_Ch1: ; 3e641 (0f:6641)
 	note E_1
 	audio_wait_3
 	audio_end
-; 0x3e654
 
-Sfx_Plane1: ; 3e654 (0f:6654)
+Sfx_Plane1:
 	db 1, 0
 	dw Sfx_Plane1_Ch1
-; 0x3e658
 
-Sfx_Plane2_Ch1: ; 3e658 (0f:6658)
+Sfx_Plane2_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -8296,14 +7960,12 @@ Sfx_Plane2_Ch1: ; 3e658 (0f:6658)
 	note E_1
 	audio_wait_3
 	audio_end
-; 0x3e66b
 
-Sfx_Plane2: ; 3e66b (0f:666b)
+Sfx_Plane2:
 	db 1, 0
 	dw Sfx_Plane2_Ch1
-; 0x3e66f
 
-Sfx_Plane3_Ch1: ; 3e66f (0f:666f)
+Sfx_Plane3_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -8317,14 +7979,12 @@ Sfx_Plane3_Ch1: ; 3e66f (0f:666f)
 	note E_1
 	audio_wait_3
 	audio_end
-; 0x3e682
 
-Sfx_Plane3: ; 3e682 (0f:6682)
+Sfx_Plane3:
 	db 1, 0
 	dw Sfx_Plane3_Ch1
-; 0x3e686
 
-Sfx_PlaneExplosion_Ch1: ; 3e686 (0f:6686)
+Sfx_PlaneExplosion_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6A
@@ -8344,14 +8004,12 @@ Sfx_PlaneExplosion_Ch1: ; 3e686 (0f:6686)
 	note NOTE_DURATION_5, A_1, 7
 	audio_wait_6
 	audio_end
-; 0x3e6a5
 
-Sfx_PlaneExplosion: ; 3e6a5 (0f:66a5)
+Sfx_PlaneExplosion:
 	db 1, 0
 	dw Sfx_PlaneExplosion_Ch1
-; 0x3e6a9
 
-Sfx_0fa_Ch1: ; 3e6a9 (0f:66a9)
+Sfx_0fa_Ch1:
 	semitone_offset 0
 	tempo 45
 	wave WAVE_4B
@@ -8386,9 +8044,8 @@ Sfx_0fa_Ch1: ; 3e6a9 (0f:66a9)
 	note 12
 	audio_wait_2
 	audio_end
-; 0x3e6dd
 
-Sfx_0fa_Ch2: ; 3e6dd (0f:66dd)
+Sfx_0fa_Ch2:
 	semitone_offset 0
 	wave WAVE_55
 	volume 113
@@ -8421,9 +8078,8 @@ Sfx_0fa_Ch2: ; 3e6dd (0f:66dd)
 	note 12
 	audio_wait_2
 	audio_end
-; 0x3e70e
 
-Sfx_0fa_Ch3: ; 3e70e (0f:670e)
+Sfx_0fa_Ch3:
 	semitone_offset 0
 	wave WAVE_60
 	volume 113
@@ -8456,16 +8112,14 @@ Sfx_0fa_Ch3: ; 3e70e (0f:670e)
 	note 12
 	audio_wait_2
 	audio_end
-; 0x3e73f
 
-Sfx_0fa: ; 3e73f (0f:673f)
+Sfx_0fa:
 	db 3, 0
 	dw Sfx_0fa_Ch1
 	dw Sfx_0fa_Ch2
 	dw Sfx_0fa_Ch3
-; 0x3e747
 
-Sfx_101_Ch1: ; 3e747 (0f:6747)
+Sfx_101_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -8522,14 +8176,12 @@ Sfx_101_Ch1: ; 3e747 (0f:6747)
 	note G_1
 	audio_wait_1
 	audio_end
-; 0x3e78c
 
-Sfx_101: ; 3e78c (0f:678c)
+Sfx_101:
 	db 1, 0
 	dw Sfx_101_Ch1
-; 0x3e790
 
-Sfx_102_Ch1: ; 3e790 (0f:6790)
+Sfx_102_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -8566,14 +8218,12 @@ Sfx_102_Ch1: ; 3e790 (0f:6790)
 	note G_7
 	audio_wait_1
 	audio_end
-; 0x3e7c1
 
-Sfx_102: ; 3e7c1 (0f:67c1)
+Sfx_102:
 	db 1, 0
 	dw Sfx_102_Ch1
-; 0x3e7c5
 
-Sfx_103_Ch1: ; 3e7c5 (0f:67c5)
+Sfx_103_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -8587,14 +8237,12 @@ Sfx_103_Ch1: ; 3e7c5 (0f:67c5)
 	note D_3
 	audio_wait_2
 	audio_end
-; 0x3e7da
 
-Sfx_103: ; 3e7da (0f:67da)
+Sfx_103:
 	db 1, 0
 	dw Sfx_103_Ch1
-; 0x3e7de
 
-Sfx_104_Ch1: ; 3e7de (0f:67de)
+Sfx_104_Ch1:
 	semitone_offset 0
 	wave WAVE_4A
 	volume 94
@@ -8655,14 +8303,12 @@ Sfx_104_Ch1: ; 3e7de (0f:67de)
 	note 7
 	audio_wait_2
 	audio_end
-; 0x3e839
 
-Sfx_104: ; 3e839 (0f:6839)
+Sfx_104:
 	db 1, 0
 	dw Sfx_104_Ch1
-; 0x3e83d
 
-Sfx_105_Ch1: ; 3e83d (0f:683d)
+Sfx_105_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -8750,9 +8396,8 @@ Sfx_105_Ch1: ; 3e83d (0f:683d)
 	audio_wait_1
 	note E_2
 	audio_end
-; 0x3e8a5
 
-Sfx_105_Ch2: ; 3e8a5 (0f:68a5)
+Sfx_105_Ch2:
 	semitone_offset 0
 	wave WAVE_65
 	vibrato_amplitude 46
@@ -8883,15 +8528,13 @@ Sfx_105_Ch2: ; 3e8a5 (0f:68a5)
 	pitch_offset -90
 	audio_wait_2
 	audio_end
-; 0x3e972
 
-Sfx_105: ; 3e972 (0f:6972)
+Sfx_105:
 	db 2, 0
 	dw Sfx_105_Ch1
 	dw Sfx_105_Ch2
-; 0x3e978
 
-Sfx_106_Ch1: ; 3e978 (0f:6978)
+Sfx_106_Ch1:
 	semitone_offset 0
 	tempo 74
 	volume 120
@@ -8901,14 +8544,12 @@ Sfx_106_Ch1: ; 3e978 (0f:6978)
 	note NOTE_DURATION_16, A#5
 	audio_wait_16
 	audio_end
-; 0x3e988
 
-Sfx_106: ; 3e988 (0f:6988)
+Sfx_106:
 	db 1, 0
 	dw Sfx_106_Ch1
-; 0x3e98c
 
-Sfx_107_Ch1: ; 3e98c (0f:698c)
+Sfx_107_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -8920,14 +8561,12 @@ Sfx_107_Ch1: ; 3e98c (0f:698c)
 	note NOTE_DURATION_2, E_4, 17
 	audio_wait_2
 	audio_end
-; 0x3e9a1
 
-Sfx_107: ; 3e9a1 (0f:69a1)
+Sfx_107:
 	db 1, 0
 	dw Sfx_107_Ch1
-; 0x3e9a5
 
-Sfx_108_Ch1: ; 3e9a5 (0f:69a5)
+Sfx_108_Ch1:
 	semitone_offset 0
 	wave WAVE_65
 	volume 113
@@ -8979,14 +8618,12 @@ Sfx_108_Ch1: ; 3e9a5 (0f:69a5)
 	note NOTE_DURATION_4, E_1, 24
 	audio_wait_4
 	audio_end
-; 0x3ea09
 
-Sfx_108: ; 3ea09 (0f:6a09)
+Sfx_108:
 	db 1, 0
 	dw Sfx_108_Ch1
-; 0x3ea0d
 
-Sfx_109_Ch1: ; 3ea0d (0f:6a0d)
+Sfx_109_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -8996,9 +8633,8 @@ Sfx_109_Ch1: ; 3ea0d (0f:6a0d)
 	note G_4
 	audio_wait_3
 	audio_end
-; 0x3ea1c
 
-Sfx_109_Ch2: ; 3ea1c (0f:6a1c)
+Sfx_109_Ch2:
 	semitone_offset 0
 	wave WAVE_1A
 	volume 56
@@ -9007,15 +8643,13 @@ Sfx_109_Ch2: ; 3ea1c (0f:6a1c)
 	note C#4
 	audio_wait_3
 	audio_end
-; 0x3ea29
 
-Sfx_109: ; 3ea29 (0f:6a29)
+Sfx_109:
 	db 2, 0
 	dw Sfx_109_Ch1
 	dw Sfx_109_Ch2
-; 0x3ea2f
 
-Sfx_10a_Ch1: ; 3ea2f (0f:6a2f)
+Sfx_10a_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6A
@@ -9038,14 +8672,12 @@ Sfx_10a_Ch1: ; 3ea2f (0f:6a2f)
 	note G_7
 	audio_wait_18
 	audio_end
-; 0x3ea4d
 
-Sfx_10a: ; 3ea4d (0f:6a4d)
+Sfx_10a:
 	db 1, 0
 	dw Sfx_10a_Ch1
-; 0x3ea51
 
-Sfx_10b_Ch1: ; 3ea51 (0f:6a51)
+Sfx_10b_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_38
@@ -9053,14 +8685,12 @@ Sfx_10b_Ch1: ; 3ea51 (0f:6a51)
 	note NOTE_DURATION_80, C_1, 19
 	audio_wait_80
 	audio_end
-; 0x3ea5e
 
-Sfx_10b: ; 3ea5e (0f:6a5e)
+Sfx_10b:
 	db 1, 0
 	dw Sfx_10b_Ch1
-; 0x3ea62
 
-Sfx_10c_Ch1: ; 3ea62 (0f:6a62)
+Sfx_10c_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -9117,14 +8747,12 @@ Sfx_10c_Ch1: ; 3ea62 (0f:6a62)
 	note G_3
 	audio_wait_5
 	audio_end
-; 0x3eac5
 
-Sfx_10c: ; 3eac5 (0f:6ac5)
+Sfx_10c:
 	db 1, 0
 	dw Sfx_10c_Ch1
-; 0x3eac9
 
-Sfx_10d_Ch1: ; 3eac9 (0f:6ac9)
+Sfx_10d_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_45
@@ -9138,14 +8766,12 @@ Sfx_10d_Ch1: ; 3eac9 (0f:6ac9)
 	note NOTE_DURATION_2, F#3, 4
 	audio_wait_2
 	audio_end
-; 0x3eae2
 
-Sfx_10d: ; 3eae2 (0f:6ae2)
+Sfx_10d:
 	db 1, 0
 	dw Sfx_10d_Ch1
-; 0x3eae6
 
-Sfx_10e_Ch1: ; 3eae6 (0f:6ae6)
+Sfx_10e_Ch1:
 	semitone_offset 244
 	tempo 74
 	wave WAVE_4B
@@ -9195,9 +8821,8 @@ Sfx_10e_Ch1: ; 3eae6 (0f:6ae6)
 	note G_3
 	audio_wait_3
 	audio_end
-; 0x3eb1f
 
-Sfx_10e_Ch2: ; 3eb1f (0f:6b1f)
+Sfx_10e_Ch2:
 	semitone_offset 244
 	wave WAVE_1A
 	volume 66
@@ -9247,15 +8872,13 @@ Sfx_10e_Ch2: ; 3eb1f (0f:6b1f)
 	note G_3
 	audio_wait_3
 	audio_end
-; 0x3eb57
 
-Sfx_10e: ; 3eb57 (0f:6b57)
+Sfx_10e:
 	db 2, 0
 	dw Sfx_10e_Ch1
 	dw Sfx_10e_Ch2
-; 0x3eb5d
 
-Sfx_10f_Ch1: ; 3eb5d (0f:6b5d)
+Sfx_10f_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -9267,14 +8890,12 @@ Sfx_10f_Ch1: ; 3eb5d (0f:6b5d)
 	note NOTE_DURATION_7, F#1, 24
 	audio_wait_7
 	audio_end
-; 0x3eb72
 
-Sfx_10f: ; 3eb72 (0f:6b72)
+Sfx_10f:
 	db 1, 0
 	dw Sfx_10f_Ch1
-; 0x3eb76
 
-Sfx_110_Ch1: ; 3eb76 (0f:6b76)
+Sfx_110_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -9286,9 +8907,8 @@ Sfx_110_Ch1: ; 3eb76 (0f:6b76)
 	note NOTE_DURATION_7, F#1, 24
 	audio_wait_7
 	audio_end
-; 0x3eb8b
 
-Sfx_110_Ch2: ; 3eb8b (0f:6b8b)
+Sfx_110_Ch2:
 	semitone_offset 0
 	wave WAVE_10
 	vibrato_amplitude 0
@@ -9305,15 +8925,13 @@ Sfx_110_Ch2: ; 3eb8b (0f:6b8b)
 	note G_2
 	audio_wait_2
 	audio_end
-; 0x3eba2
 
-Sfx_110: ; 3eba2 (0f:6ba2)
+Sfx_110:
 	db 2, 0
 	dw Sfx_110_Ch1
 	dw Sfx_110_Ch2
-; 0x3eba8
 
-Sfx_111_Ch1: ; 3eba8 (0f:6ba8)
+Sfx_111_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -9324,14 +8942,12 @@ Sfx_111_Ch1: ; 3eba8 (0f:6ba8)
 	note NOTE_DURATION_4, D_2
 	audio_wait_4
 	audio_end
-; 0x3ebba
 
-Sfx_111: ; 3ebba (0f:6bba)
+Sfx_111:
 	db 1, 0
 	dw Sfx_111_Ch1
-; 0x3ebbe
 
-Sfx_112_Ch1: ; 3ebbe (0f:6bbe)
+Sfx_112_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_11
@@ -9363,9 +8979,8 @@ Sfx_112_Ch1: ; 3ebbe (0f:6bbe)
 	note A#2
 	audio_wait_4
 	audio_end
-; 0x3ebed
 
-Sfx_112_Ch2: ; 3ebed (0f:6bed)
+Sfx_112_Ch2:
 	semitone_offset 0
 	wave WAVE_1B
 	volume 66
@@ -9397,9 +9012,8 @@ Sfx_112_Ch2: ; 3ebed (0f:6bed)
 	note A#2
 	audio_wait_4
 	audio_end
-; 0x3ec1b
 
-Sfx_112_Ch3: ; 3ec1b (0f:6c1b)
+Sfx_112_Ch3:
 	semitone_offset 0
 	wave WAVE_60
 	volume 94
@@ -9431,16 +9045,14 @@ Sfx_112_Ch3: ; 3ec1b (0f:6c1b)
 	note A#2
 	audio_wait_4
 	audio_end
-; 0x3ec49
 
-Sfx_112: ; 3ec49 (0f:6c49)
+Sfx_112:
 	db 3, 0
 	dw Sfx_112_Ch1
 	dw Sfx_112_Ch2
 	dw Sfx_112_Ch3
-; 0x3ec51
 
-Sfx_113_Ch1: ; 3ec51 (0f:6c51)
+Sfx_113_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -9464,14 +9076,12 @@ Sfx_113_Ch1: ; 3ec51 (0f:6c51)
 	note C_4
 	audio_wait_3
 	audio_end
-; 0x3ec70
 
-Sfx_113: ; 3ec70 (0f:6c70)
+Sfx_113:
 	db 1, 0
 	dw Sfx_113_Ch1
-; 0x3ec74
 
-Sfx_114_Ch1: ; 3ec74 (0f:6c74)
+Sfx_114_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -9482,14 +9092,12 @@ Sfx_114_Ch1: ; 3ec74 (0f:6c74)
 	note NOTE_DURATION_4, D_2
 	audio_wait_4
 	audio_end
-; 0x3ec86
 
-Sfx_114: ; 3ec86 (0f:6c86)
+Sfx_114:
 	db 1, 0
 	dw Sfx_114_Ch1
-; 0x3ec8a
 
-Sfx_115_Ch1: ; 3ec8a (0f:6c8a)
+Sfx_115_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -9500,14 +9108,12 @@ Sfx_115_Ch1: ; 3ec8a (0f:6c8a)
 	note NOTE_DURATION_4, D_2
 	audio_wait_4
 	audio_end
-; 0x3ec9c
 
-Sfx_115: ; 3ec9c (0f:6c9c)
+Sfx_115:
 	db 1, 0
 	dw Sfx_115_Ch1
-; 0x3eca0
 
-Sfx_116_Ch1: ; 3eca0 (0f:6ca0)
+Sfx_116_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -9518,14 +9124,12 @@ Sfx_116_Ch1: ; 3eca0 (0f:6ca0)
 	note NOTE_DURATION_4, D_2
 	audio_wait_4
 	audio_end
-; 0x3ecb2
 
-Sfx_116: ; 3ecb2 (0f:6cb2)
+Sfx_116:
 	db 1, 0
 	dw Sfx_116_Ch1
-; 0x3ecb6
 
-Sfx_117_Ch1: ; 3ecb6 (0f:6cb6)
+Sfx_117_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_0A
@@ -9548,9 +9152,8 @@ Sfx_117_Ch1: ; 3ecb6 (0f:6cb6)
 	audio_wait_72
 	note NOTE_DURATION_0
 	audio_end
-; 0x3ecd6
 
-Sfx_117_Ch2: ; 3ecd6 (0f:6cd6)
+Sfx_117_Ch2:
 	semitone_offset 1
 	wave WAVE_14
 	volume 85
@@ -9573,15 +9176,13 @@ Sfx_117_Ch2: ; 3ecd6 (0f:6cd6)
 	audio_wait_72
 	note NOTE_DURATION_0
 	audio_end
-; 0x3ecf5
 
-Sfx_117: ; 3ecf5 (0f:6cf5)
+Sfx_117:
 	db 2, 0
 	dw Sfx_117_Ch1
 	dw Sfx_117_Ch2
-; 0x3ecfb
 
-Sfx_118_Ch1: ; 3ecfb (0f:6cfb)
+Sfx_118_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_46
@@ -9599,9 +9200,8 @@ Sfx_118_Ch1: ; 3ecfb (0f:6cfb)
 	note NOTE_DURATION_72, D#3
 	audio_wait_72
 	audio_end
-; 0x3ed17
 
-Sfx_118_Ch2: ; 3ed17 (0f:6d17)
+Sfx_118_Ch2:
 	semitone_offset 1
 	wave WAVE_14
 	volume 56
@@ -9619,15 +9219,13 @@ Sfx_118_Ch2: ; 3ed17 (0f:6d17)
 	note NOTE_DURATION_72, D#3
 	audio_wait_72
 	audio_end
-; 0x3ed32
 
-Sfx_118: ; 3ed32 (0f:6d32)
+Sfx_118:
 	db 2, 0
 	dw Sfx_118_Ch1
 	dw Sfx_118_Ch2
-; 0x3ed38
 
-Sfx_119_Ch1: ; 3ed38 (0f:6d38)
+Sfx_119_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -9675,14 +9273,12 @@ Sfx_119_Ch1: ; 3ed38 (0f:6d38)
 	note B_0
 	audio_wait_7
 	audio_end
-; 0x3ed7c
 
-Sfx_119: ; 3ed7c (0f:6d7c)
+Sfx_119:
 	db 1, 0
 	dw Sfx_119_Ch1
-; 0x3ed80
 
-Sfx_11a_Ch1: ; 3ed80 (0f:6d80)
+Sfx_11a_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_33
@@ -9698,14 +9294,12 @@ Sfx_11a_Ch1: ; 3ed80 (0f:6d80)
 	note NOTE_DURATION_7, D#1, 31
 	audio_wait_8
 	audio_end
-; 0x3ed9d
 
-Sfx_11a: ; 3ed9d (0f:6d9d)
+Sfx_11a:
 	db 1, 0
 	dw Sfx_11a_Ch1
-; 0x3eda1
 
-Sfx_11b_Ch1: ; 3eda1 (0f:6da1)
+Sfx_11b_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6A
@@ -9933,9 +9527,8 @@ Sfx_11b_Ch1: ; 3eda1 (0f:6da1)
 	note B_1
 	audio_wait_3
 	audio_end
-; 0x3ee8a
 
-Sfx_11b_Ch2: ; 3ee8a (0f:6e8a)
+Sfx_11b_Ch2:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_33
@@ -10004,15 +9597,13 @@ Sfx_11b_Ch2: ; 3ee8a (0f:6e8a)
 	note G#0, 19
 	audio_wait_44
 	audio_end
-; 0x3eef2
 
-Sfx_11b: ; 3eef2 (0f:6ef2)
+Sfx_11b:
 	db 2, 0
 	dw Sfx_11b_Ch1
 	dw Sfx_11b_Ch2
-; 0x3eef8
 
-Sfx_11c_Ch1: ; 3eef8 (0f:6ef8)
+Sfx_11c_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -10059,14 +9650,12 @@ Sfx_11c_Ch1: ; 3eef8 (0f:6ef8)
 	note C_5
 	audio_wait_2
 	audio_end
-; 0x3ef2d
 
-Sfx_11c: ; 3ef2d (0f:6f2d)
+Sfx_11c:
 	db 1, 0
 	dw Sfx_11c_Ch1
-; 0x3ef31
 
-Sfx_11d_Ch1: ; 3ef31 (0f:6f31)
+Sfx_11d_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_33
@@ -10160,14 +9749,12 @@ Sfx_11d_Ch1: ; 3ef31 (0f:6f31)
 	note A#0
 	audio_wait_3
 	audio_end
-; 0x3ef94
 
-Sfx_11d: ; 3ef94 (0f:6f94)
+Sfx_11d:
 	db 1, 0
 	dw Sfx_11d_Ch1
-; 0x3ef98
 
-Sfx_11e_Ch1: ; 3ef98 (0f:6f98)
+Sfx_11e_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_19
@@ -10185,9 +9772,8 @@ Sfx_11e_Ch1: ; 3ef98 (0f:6f98)
 	note NOTE_DURATION_72, C#5
 	audio_wait_72
 	audio_end
-; 0x3efb3
 
-Sfx_11e_Ch2: ; 3efb3 (0f:6fb3)
+Sfx_11e_Ch2:
 	semitone_offset 0
 	wave WAVE_0F
 	volume 75
@@ -10204,15 +9790,13 @@ Sfx_11e_Ch2: ; 3efb3 (0f:6fb3)
 	note NOTE_DURATION_72, A_4
 	audio_wait_72
 	audio_end
-; 0x3efcb
 
-Sfx_11e: ; 3efcb (0f:6fcb)
+Sfx_11e:
 	db 2, 0
 	dw Sfx_11e_Ch1
 	dw Sfx_11e_Ch2
-; 0x3efd1
 
-Sfx_11f_Ch1: ; 3efd1 (0f:6fd1)
+Sfx_11f_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_19
@@ -10232,9 +9816,8 @@ Sfx_11f_Ch1: ; 3efd1 (0f:6fd1)
 	note NOTE_DURATION_72, B_4
 	audio_wait_72
 	audio_end
-; 0x3efee
 
-Sfx_11f_Ch2: ; 3efee (0f:6fee)
+Sfx_11f_Ch2:
 	semitone_offset 0
 	wave WAVE_0F
 	volume 75
@@ -10253,15 +9836,13 @@ Sfx_11f_Ch2: ; 3efee (0f:6fee)
 	note NOTE_DURATION_72, G#4
 	audio_wait_72
 	audio_end
-; 0x3f009
 
-Sfx_11f: ; 3f009 (0f:7009)
+Sfx_11f:
 	db 2, 0
 	dw Sfx_11f_Ch1
 	dw Sfx_11f_Ch2
-; 0x3f00f
 
-Sfx_120_Ch1: ; 3f00f (0f:700f)
+Sfx_120_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_19
@@ -10279,9 +9860,8 @@ Sfx_120_Ch1: ; 3f00f (0f:700f)
 	note NOTE_DURATION_72, A_5
 	audio_wait_72
 	audio_end
-; 0x3f02a
 
-Sfx_120_Ch2: ; 3f02a (0f:702a)
+Sfx_120_Ch2:
 	semitone_offset 0
 	wave WAVE_0F
 	volume 75
@@ -10298,15 +9878,13 @@ Sfx_120_Ch2: ; 3f02a (0f:702a)
 	note NOTE_DURATION_72, C#5
 	audio_wait_72
 	audio_end
-; 0x3f042
 
-Sfx_120: ; 3f042 (0f:7042)
+Sfx_120:
 	db 2, 0
 	dw Sfx_120_Ch1
 	dw Sfx_120_Ch2
-; 0x3f048
 
-Sfx_121_Ch1: ; 3f048 (0f:7048)
+Sfx_121_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_19
@@ -10326,9 +9904,8 @@ Sfx_121_Ch1: ; 3f048 (0f:7048)
 	note NOTE_DURATION_72, A_4
 	audio_wait_72
 	audio_end
-; 0x3f063
 
-Sfx_121_Ch2: ; 3f063 (0f:7063)
+Sfx_121_Ch2:
 	semitone_offset 0
 	wave WAVE_0F
 	volume 75
@@ -10349,15 +9926,13 @@ Sfx_121_Ch2: ; 3f063 (0f:7063)
 	note NOTE_DURATION_72, C#4
 	audio_wait_72
 	audio_end
-; 0x3f07f
 
-Sfx_121: ; 3f07f (0f:707f)
+Sfx_121:
 	db 2, 0
 	dw Sfx_121_Ch1
 	dw Sfx_121_Ch2
-; 0x3f085
 
-Sfx_122_Ch1: ; 3f085 (0f:7085)
+Sfx_122_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_0F
@@ -10381,14 +9956,12 @@ Sfx_122_Ch1: ; 3f085 (0f:7085)
 	note NOTE_DURATION_72, A_4
 	audio_wait_72
 	audio_end
-; 0x3f0a4
 
-Sfx_122: ; 3f0a4 (0f:70a4)
+Sfx_122:
 	db 1, 0
 	dw Sfx_122_Ch1
-; 0x3f0a8
 
-Sfx_123_Ch1: ; 3f0a8 (0f:70a8)
+Sfx_123_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_39
@@ -10411,14 +9984,12 @@ Sfx_123_Ch1: ; 3f0a8 (0f:70a8)
 	note 2
 	audio_wait_2
 	audio_end
-; 0x3f0cd
 
-Sfx_123: ; 3f0cd (0f:70cd)
+Sfx_123:
 	db 1, 0
 	dw Sfx_123_Ch1
-; 0x3f0d1
 
-Sfx_124_Ch1: ; 3f0d1 (0f:70d1)
+Sfx_124_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6B
@@ -10442,14 +10013,12 @@ Sfx_124_Ch1: ; 3f0d1 (0f:70d1)
 	note NOTE_DURATION_5, D_1, 7
 	audio_wait_6
 	audio_end
-; 0x3f0fe
 
-Sfx_124: ; 3f0fe (0f:70fe)
+Sfx_124:
 	db 1, 0
 	dw Sfx_124_Ch1
-; 0x3f102
 
-Sfx_125_Ch1: ; 3f102 (0f:7102)
+Sfx_125_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_68
@@ -10457,14 +10026,12 @@ Sfx_125_Ch1: ; 3f102 (0f:7102)
 	note NOTE_DURATION_14, F_1, 24
 	audio_wait_14
 	audio_end
-; 0x3f10f
 
-Sfx_125: ; 3f10f (0f:710f)
+Sfx_125:
 	db 1, 0
 	dw Sfx_125_Ch1
-; 0x3f113
 
-Sfx_126_Ch1: ; 3f113 (0f:7113)
+Sfx_126_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_68
@@ -10472,14 +10039,12 @@ Sfx_126_Ch1: ; 3f113 (0f:7113)
 	note NOTE_DURATION_14, F_1, 19
 	audio_wait_14
 	audio_end
-; 0x3f120
 
-Sfx_126: ; 3f120 (0f:7120)
+Sfx_126:
 	db 1, 0
 	dw Sfx_126_Ch1
-; 0x3f124
 
-Sfx_127_Ch1: ; 3f124 (0f:7124)
+Sfx_127_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_1A
@@ -10495,9 +10060,8 @@ Sfx_127_Ch1: ; 3f124 (0f:7124)
 	note G#3, 2
 	audio_wait_72
 	audio_end
-; 0x3f13e
 
-Sfx_127_Ch2: ; 3f13e (0f:713e)
+Sfx_127_Ch2:
 	semitone_offset 0
 	wave WAVE_60
 	vibrato_amplitude 50
@@ -10512,15 +10076,13 @@ Sfx_127_Ch2: ; 3f13e (0f:713e)
 	note E_3
 	audio_wait_72
 	audio_end
-; 0x3f154
 
-Sfx_127: ; 3f154 (0f:7154)
+Sfx_127:
 	db 2, 0
 	dw Sfx_127_Ch1
 	dw Sfx_127_Ch2
-; 0x3f15a
 
-Sfx_128_Ch1: ; 3f15a (0f:715a)
+Sfx_128_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_0A
@@ -10587,14 +10149,12 @@ Sfx_128_Ch1: ; 3f15a (0f:715a)
 	note B_3
 	audio_wait_5
 	audio_end
-; 0x3f1a7
 
-Sfx_128: ; 3f1a7 (0f:71a7)
+Sfx_128:
 	db 1, 0
 	dw Sfx_128_Ch1
-; 0x3f1ab
 
-Sfx_129_Ch1: ; 3f1ab (0f:71ab)
+Sfx_129_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6A
@@ -10606,14 +10166,12 @@ Sfx_129_Ch1: ; 3f1ab (0f:71ab)
 	note NOTE_DURATION_5, A_1, 7
 	audio_wait_6
 	audio_end
-; 0x3f1c0
 
-Sfx_129: ; 3f1c0 (0f:71c0)
+Sfx_129:
 	db 1, 0
 	dw Sfx_129_Ch1
-; 0x3f1c4
 
-Sfx_12a_Ch1: ; 3f1c4 (0f:71c4)
+Sfx_12a_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -10627,14 +10185,12 @@ Sfx_12a_Ch1: ; 3f1c4 (0f:71c4)
 	note A_1
 	audio_wait_14
 	audio_end
-; 0x3f1d9
 
-Sfx_12a: ; 3f1d9 (0f:71d9)
+Sfx_12a:
 	db 1, 0
 	dw Sfx_12a_Ch1
-; 0x3f1dd
 
-Sfx_12b_Ch1: ; 3f1dd (0f:71dd)
+Sfx_12b_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_60
@@ -10642,14 +10198,12 @@ Sfx_12b_Ch1: ; 3f1dd (0f:71dd)
 	note NOTE_DURATION_3, C_4, 24
 	audio_wait_4
 	audio_end
-; 0x3f1ea
 
-Sfx_12b: ; 3f1ea (0f:71ea)
+Sfx_12b:
 	db 1, 0
 	dw Sfx_12b_Ch1
-; 0x3f1ee
 
-Sfx_12c_Ch1: ; 3f1ee (0f:71ee)
+Sfx_12c_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_10
@@ -10659,9 +10213,8 @@ Sfx_12c_Ch1: ; 3f1ee (0f:71ee)
 	note G_3
 	audio_wait_3
 	audio_end
-; 0x3f1fd
 
-Sfx_12c_Ch2: ; 3f1fd (0f:71fd)
+Sfx_12c_Ch2:
 	semitone_offset 0
 	wave WAVE_1A
 	volume 120
@@ -10670,15 +10223,13 @@ Sfx_12c_Ch2: ; 3f1fd (0f:71fd)
 	note C#3
 	audio_wait_3
 	audio_end
-; 0x3f20a
 
-Sfx_12c: ; 3f20a (0f:720a)
+Sfx_12c:
 	db 2, 0
 	dw Sfx_12c_Ch1
 	dw Sfx_12c_Ch2
-; 0x3f210
 
-Sfx_12d_Ch1: ; 3f210 (0f:7210)
+Sfx_12d_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -10698,14 +10249,12 @@ Sfx_12d_Ch1: ; 3f210 (0f:7210)
 	note C_3
 	audio_wait_10
 	audio_end
-; 0x3f229
 
-Sfx_12d: ; 3f229 (0f:7229)
+Sfx_12d:
 	db 1, 2
 	dw Sfx_12d_Ch1
-; 0x3f22d
 
-Sfx_12e_Ch1: ; 3f22d (0f:722d)
+Sfx_12e_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_33
@@ -10734,9 +10283,8 @@ Sfx_12e_Ch1: ; 3f22d (0f:722d)
 	note D#1, 31
 	audio_wait_8
 	audio_end
-; 0x3f258
 
-Sfx_12e_Ch2: ; 3f258 (0f:7258)
+Sfx_12e_Ch2:
 	semitone_offset 0
 	wave WAVE_1A
 	vibrato_amplitude 50
@@ -10755,9 +10303,8 @@ Sfx_12e_Ch2: ; 3f258 (0f:7258)
 	note NOTE_DURATION_96, A#3
 	audio_wait_96
 	audio_end
-; 0x3f276
 
-Sfx_12e_Ch3: ; 3f276 (0f:7276)
+Sfx_12e_Ch3:
 	semitone_offset 0
 	wave WAVE_60
 	vibrato_amplitude 50
@@ -10776,9 +10323,8 @@ Sfx_12e_Ch3: ; 3f276 (0f:7276)
 	note NOTE_DURATION_96, F#3, 14
 	audio_wait_96
 	audio_end
-; 0x3f294
 
-Sfx_12e_Ch4: ; 3f294 (0f:7294)
+Sfx_12e_Ch4:
 	semitone_offset 0
 	wave WAVE_6A
 	vibrato_amplitude 30
@@ -10789,17 +10335,15 @@ Sfx_12e_Ch4: ; 3f294 (0f:7294)
 	note NOTE_DURATION_30, C#3
 	audio_wait_30
 	audio_end
-; 0x3f2a5
 
-Sfx_12e: ; 3f2a5 (0f:72a5)
+Sfx_12e:
 	db 4, 0
 	dw Sfx_12e_Ch1
 	dw Sfx_12e_Ch2
 	dw Sfx_12e_Ch3
 	dw Sfx_12e_Ch4
-; 0x3f2af
 
-Sfx_12f_Ch1: ; 3f2af (0f:72af)
+Sfx_12f_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -10814,14 +10358,12 @@ Sfx_12f_Ch1: ; 3f2af (0f:72af)
 	note NOTE_DURATION_2, G_3, 12
 	audio_wait_3
 	audio_end
-; 0x3f2c9
 
-Sfx_12f: ; 3f2c9 (0f:72c9)
+Sfx_12f:
 	db 1, 2
 	dw Sfx_12f_Ch1
-; 0x3f2cd
 
-Sfx_130_Ch1: ; 3f2cd (0f:72cd)
+Sfx_130_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_6A
@@ -10831,14 +10373,12 @@ Sfx_130_Ch1: ; 3f2cd (0f:72cd)
 	note NOTE_DURATION_1, D_3, 14
 	audio_wait_5
 	audio_end
-; 0x3f2de
 
-Sfx_130: ; 3f2de (0f:72de)
+Sfx_130:
 	db 1, 0
 	dw Sfx_130_Ch1
-; 0x3f2e2
 
-Sfx_131_Ch1: ; 3f2e2 (0f:72e2)
+Sfx_131_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -10848,14 +10388,12 @@ Sfx_131_Ch1: ; 3f2e2 (0f:72e2)
 	note NOTE_DURATION_4, F_1, 24
 	audio_wait_4
 	audio_end
-; 0x3f2f3
 
-Sfx_131: ; 3f2f3 (0f:72f3)
+Sfx_131:
 	db 1, 0
 	dw Sfx_131_Ch1
-; 0x3f2f7
 
-Sfx_132_Ch1: ; 3f2f7 (0f:72f7)
+Sfx_132_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_0A
@@ -10867,14 +10405,12 @@ Sfx_132_Ch1: ; 3f2f7 (0f:72f7)
 	note A#5
 	audio_wait_10
 	audio_end
-; 0x3f308
 
-Sfx_132: ; 3f308 (0f:7308)
+Sfx_132:
 	db 1, 0
 	dw Sfx_132_Ch1
-; 0x3f30c
 
-Sfx_133_Ch1: ; 3f30c (0f:730c)
+Sfx_133_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_64
@@ -10884,14 +10420,12 @@ Sfx_133_Ch1: ; 3f30c (0f:730c)
 	note F#3
 	audio_wait_6
 	audio_end
-; 0x3f31b
 
-Sfx_133: ; 3f31b (0f:731b)
+Sfx_133:
 	db 1, 0
 	dw Sfx_133_Ch1
-; 0x3f31f
 
-Sfx_134_Ch1: ; 3f31f (0f:731f)
+Sfx_134_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_39
@@ -10899,14 +10433,12 @@ Sfx_134_Ch1: ; 3f31f (0f:731f)
 	note NOTE_DURATION_80, D_2, 19
 	audio_wait_80
 	audio_end
-; 0x3f32c
 
-Sfx_134: ; 3f32c (0f:732c)
+Sfx_134:
 	db 1, 0
 	dw Sfx_134_Ch1
-; 0x3f330
 
-Sfx_135_Ch1: ; 3f330 (0f:7330)
+Sfx_135_Ch1:
 	semitone_offset 250
 	tempo 74
 	wave WAVE_6D
@@ -10930,14 +10462,12 @@ Sfx_135_Ch1: ; 3f330 (0f:7330)
 	note A_2
 	audio_wait_3
 	audio_end
-; 0x3f34d
 
-Sfx_135: ; 3f34d (0f:734d)
+Sfx_135:
 	db 1, 0
 	dw Sfx_135_Ch1
-; 0x3f351
 
-Sfx_136_Ch1: ; 3f351 (0f:7351)
+Sfx_136_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_1A
@@ -10949,14 +10479,12 @@ Sfx_136_Ch1: ; 3f351 (0f:7351)
 	note A#3
 	audio_wait_3
 	audio_end
-; 0x3f362
 
-Sfx_136: ; 3f362 (0f:7362)
+Sfx_136:
 	db 1, 0
 	dw Sfx_136_Ch1
-; 0x3f366
 
-Sfx_137_Ch1: ; 3f366 (0f:7366)
+Sfx_137_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -10966,14 +10494,12 @@ Sfx_137_Ch1: ; 3f366 (0f:7366)
 	note A_1
 	audio_wait_4
 	audio_end
-; 0x3f375
 
-Sfx_137: ; 3f375 (0f:7375)
+Sfx_137:
 	db 1, 0
 	dw Sfx_137_Ch1
-; 0x3f379
 
-Sfx_138_Ch1: ; 3f379 (0f:7379)
+Sfx_138_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -10987,9 +10513,7 @@ Sfx_138_Ch1: ; 3f379 (0f:7379)
 	note C_2
 	audio_wait_10
 	audio_end
-; 0x3f38e
 
-Sfx_138: ; 3f38e (0f:738e)
+Sfx_138:
 	db 1, 0
 	dw Sfx_138_Ch1
-; 0x3f392

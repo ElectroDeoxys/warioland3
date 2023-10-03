@@ -1,4 +1,4 @@
-_PerfectStateTable: ; dc000 (37:4000)
+_PerfectStateTable:
 	ld a, [wSubState]
 	jumptable
 
@@ -15,9 +15,8 @@ _PerfectStateTable: ; dc000 (37:4000)
 	dw DebugReset
 	dw DebugReset
 	dw DebugReset
-; 0xdc01e
 
-Func_dc01e: ; dc01e (37:401e)
+Func_dc01e:
 	call DisableLCD
 	call FillBGMap0_With7f
 	call ClearVirtualOAM
@@ -62,9 +61,8 @@ Func_dc01e: ; dc01e (37:401e)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0xdc073
 
-Func_dc073: ; dc073 (37:4073)
+Func_dc073:
 	ld hl, wMenuObj1FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj1
@@ -132,58 +130,51 @@ Func_dc073: ; dc073 (37:4073)
 	ld a, SST_PAUSE_28
 	ld [wSubState], a
 	ret
-; 0xdc0f4
 
-LoadPerfectPals: ; dc0f4 (37:40f4)
+LoadPerfectPals:
 	ld hl, Pals_dc173
 	call LoadPalsToTempPals1
 	ld hl, Pals_dc1fb
 	call LoadPalsToTempPals2
 	ret
-; 0xdc101
 
-Func_dc101: ; dc101 (37:4101)
+Func_dc101:
 	ld hl, Pals_dc173 palette 5
 	ld de, wTempPals1 palette 5
 	ld b, 3 palettes
 	call CopyHLToDE_Short
 	ret
-; 0xdc10d
 
-Func_dc10d: ; dc10d (37:410d)
+Func_dc10d:
 	ld hl, Pals_dc1b3
 	ld de, wTempPals1 palette 5
 	ld b, 3 palettes
 	call CopyHLToDE_Short
 	ret
-; 0xdc119
 
-Func_dc119: ; dc119 (37:4119)
+Func_dc119:
 	ld hl, Pals_dc1cb
 	ld de, wTempPals1 palette 5
 	ld b, 3 palettes
 	call CopyHLToDE_Short
 	ret
-; 0xdc125
 
-Func_dc125: ; dc125 (37:4125)
+Func_dc125:
 	ld hl, Pals_dc1e3
 	ld de, wTempPals1 palette 5
 	ld b, 3 palettes
 	call CopyHLToDE_Short
 	ret
-; 0xdc131
 
-LoadPerfectGfx: ; dc131 (37:4131)
+LoadPerfectGfx:
 	xor a
 	ldh [rVBK], a
 	ld hl, PerfectGfx
 	ld bc, v0Tiles0
 	call Decompress
 	ret
-; 0xdc13e
 
-Func_dc13e: ; dc13e (37:413e)
+Func_dc13e:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, BGMap_dd5b5
@@ -195,9 +186,8 @@ Func_dc13e: ; dc13e (37:413e)
 	ld bc, v0BGMap0
 	call Decompress
 	ret
-; 0xdc158
 
-Func_dc158: ; dc158 (37:4158)
+Func_dc158:
 	ld a, [hli]
 	add $10
 	ld [wCurSpriteYCoord], a
@@ -211,9 +201,8 @@ Func_dc158: ; dc158 (37:4158)
 	ld hl, OAM_dd710
 	call TryAddSprite
 	ret
-; 0xdc173
 
-Pals_dc173: ; dc173 (37:4173)
+Pals_dc173:
 	rgb  0,  0,  0
 	rgb 31, 31, 31
 	rgb 31, 26,  2
@@ -253,9 +242,8 @@ Pals_dc173: ; dc173 (37:4173)
 	rgb 11, 31,  0
 	rgb  0, 14, 31
 	rgb  0,  6, 17
-; 0xdc1b3
 
-Pals_dc1b3: ; dc1b3 (37:41b3)
+Pals_dc1b3:
 	rgb  0,  0,  0
 	rgb 14, 27, 14
 	rgb  0, 22,  0
@@ -270,9 +258,8 @@ Pals_dc1b3: ; dc1b3 (37:41b3)
 	rgb 14, 27, 14
 	rgb  0, 22,  0
 	rgb  1, 13,  1
-; 0xdc1cb
 
-Pals_dc1cb: ; dc1cb (37:41cb)
+Pals_dc1cb:
 	rgb  0,  0,  0
 	rgb  0, 27, 27
 	rgb  0, 18, 28
@@ -287,9 +274,8 @@ Pals_dc1cb: ; dc1cb (37:41cb)
 	rgb  0, 27, 27
 	rgb  0, 18, 28
 	rgb  0,  6, 26
-; 0xdc1e3
 
-Pals_dc1e3: ; dc1e3 (37:41e3)
+Pals_dc1e3:
 	rgb  0,  0,  0
 	rgb 27, 17, 26
 	rgb 26,  0, 24
@@ -304,9 +290,8 @@ Pals_dc1e3: ; dc1e3 (37:41e3)
 	rgb 27, 17, 26
 	rgb 26,  0, 24
 	rgb 15,  0, 25
-; 0xdc1fb
 
-Pals_dc1fb: ; dc1fb (37:41fb)
+Pals_dc1fb:
 	rgb  0,  0,  0
 	rgb 31, 31, 31
 	rgb 23, 23, 23
@@ -346,14 +331,13 @@ Pals_dc1fb: ; dc1fb (37:41fb)
 	rgb 31, 27,  0
 	rgb 31,  0, 29
 	rgb 19,  0, 29
-; 0xdc23b
 
 PerfectGfx: INCBIN "gfx/perfect.2bpp.lz"
 
 BGMap_dd417: INCBIN "gfx/bgmaps/map_dd417.bin"
 BGMap_dd5b5: INCBIN "gfx/bgmaps/map_dd5b5.bin"
 
-OAM_dd710: ; dd710 (37:5710)
+OAM_dd710:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -458,9 +442,8 @@ OAM_dd710: ; dd710 (37:5710)
 	frame_oam   4,  83, $3e, 2
 	frame_oam   4,  91, $40, 2
 	db $80
-; 0xdd848
 
-Frameset_dd848: ; dd848 (37:5848)
+Frameset_dd848:
 	db $00,  4
 	db $01,  4
 	db $02,  4
@@ -470,4 +453,3 @@ Frameset_dd848: ; dd848 (37:5848)
 	db $06,  4
 	db $07,  4
 	db $ff
-; 0xdd859

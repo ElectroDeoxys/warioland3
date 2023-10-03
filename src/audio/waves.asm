@@ -1,4 +1,4 @@
-Waves: ; 311c4 (c:51c4)
+Waves:
 	db WAVEFORM_SQUARE_1_2_SAWTOOTH,        0, NO_SWEEP,                      $ff, $ff, $3c ; WAVE_00
 	db RECT_TRACK1 | RECTWAVE_1_8,          0, NO_SWEEP,                      $fb, $28, $3c ; WAVE_01
 	db RECT_TRACK1 | RECTWAVE_1_8,          0, NO_SWEEP,                      $f0, $10, $3c ; WAVE_02
@@ -122,9 +122,8 @@ Waves: ; 311c4 (c:51c4)
 	db WAVEFORM_SQUARE_4_8,                 0, NO_SWEEP,                      $fa, $6c, $3c ; WAVE_78
 	db WAVEFORM_SPIKY,                      0, NO_SWEEP,                      $fa, $4c, $3c ; WAVE_79
 	db WAVEFORM_SQUARE_1_8,                 0, NO_SWEEP,                      $ff, $ff, $3c ; WAVE_7A
-; 0x314a6
 
-WaveSamples: ; 314a6 (c:54a6)
+WaveSamples:
 ; These are streams of 32 nibbles (4-bit values) used as wave patterns.
 ; Plot them as a line chart to see the wave's shape.
 	dn  0,  0,  1,  1,  2,  3,  5,  6,  8,  9, 10, 12, 13, 14, 14, 15, 15, 15, 14, 14, 13, 12, 10,  9,  8,  6,  5,  3,  2,  1,  1,  0 ; WAVEFORM_SINE
@@ -139,4 +138,3 @@ WaveSamples: ; 314a6 (c:54a6)
 	dn 15, 15, 15, 15,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 15, 14, 13, 12, 11, 10,  9,  8,  7,  6,  5,  4,  3,  2,  1 ; WAVEFORM_SQUARE_1_4_SAWTOOTH
 	dn  7,  7,  7,  7,  5,  1, 10,  2,  8,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 ; WAVEFORM_SPIKY
 	dn  7, 10, 12, 14, 15, 15, 15,  8,  7,  9,  9,  7,  7,  7,  7,  5,  5,  6,  6,  4,  4,  4,  4,  3,  3,  2,  2,  2,  2,  1,  1,  0 ; WAVEFORM_SQUISHED_SINE
-; 0x31566

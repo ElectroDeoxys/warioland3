@@ -1,4 +1,4 @@
-VampireActionHelp: ; 1e4580 (79:4580)
+VampireActionHelp:
 	call .StateTable
 
 	ld a, [wActionHelpBlackedOut]
@@ -41,10 +41,9 @@ VampireActionHelp: ; 1e4580 (79:4580)
 	dw Func_1e483d
 	dw Func_1e4871
 	dw Func_1e4898
-; 0x1e45d7
 
 
-Func_1e45d7: ; 1e45d7 (79:45d7)
+Func_1e45d7:
 	ld a, [wPowerUpLevel]
 	bit ACTION_HELP_TITLE_SCREEN_F, a
 	jr z, .restart_action_help
@@ -57,11 +56,11 @@ Func_1e45d7: ; 1e45d7 (79:45d7)
 	ld [wActionHelpState], a
 	jr Func_1e45f3
 
-Func_1e45ee: ; 1e45ee (79:45ee)
+Func_1e45ee:
 	ld hl, wTimer
 	dec [hl]
 	ret nz
-Func_1e45f3: ; 1e45f3 (79:45f3)
+Func_1e45f3:
 	call ActionHelp2_ShowDRightInput
 
 	ld a, BANK(WarioVampireGfx)
@@ -110,7 +109,7 @@ Func_1e45f3: ; 1e45f3 (79:45f3)
 	inc [hl]
 	ret
 
-Func_1e464b: ; 1e464b (79:464b)
+Func_1e464b:
 	ld hl, wActionHelpWarioXCoord
 	inc [hl]
 	ld a, [hl]
@@ -124,7 +123,7 @@ Func_1e464b: ; 1e464b (79:464b)
 	inc [hl]
 	ret
 
-Func_1e465e: ; 1e465e (79:465e)
+Func_1e465e:
 	ld a, [wTimer]
 	and a
 	jr z, .asm_1e4676
@@ -146,7 +145,7 @@ Func_1e465e: ; 1e465e (79:465e)
 	ld [wTimer], a
 	ret
 
-Func_1e4684: ; 1e4684 (79:4684)
+Func_1e4684:
 	play_sfx_rept 32, SFX_071
 
 	ld hl, wTimer
@@ -160,7 +159,7 @@ Func_1e4684: ; 1e4684 (79:4684)
 	inc [hl]
 	ret
 
-ApplyWaterCurrentMovementb: ; 1e46ab (79:46ab)
+ApplyWaterCurrentMovementb:
 	play_sfx_rept 16, SFX_071
 
 	ld a, [wActionHelpCounter]
@@ -188,7 +187,7 @@ ApplyWaterCurrentMovementb: ; 1e46ab (79:46ab)
 	inc [hl]
 	ret
 
-Func_1e46e8: ; 1e46e8 (79:46e8)
+Func_1e46e8:
 	ld a, [wActionHelpCounter]
 	and %1
 	jr z, .asm_1e46f3
@@ -219,7 +218,7 @@ Func_1e46e8: ; 1e46e8 (79:46e8)
 	inc [hl]
 	ret
 
-Func_1e471c: ; 1e471c (79:471c)
+Func_1e471c:
 	play_sfx_rept 16, SFX_071
 
 	ld a, [wActionHelpCounter]
@@ -247,7 +246,7 @@ Func_1e471c: ; 1e471c (79:471c)
 	inc [hl]
 	ret
 
-Func_1e4759: ; 1e4759 (79:4759)
+Func_1e4759:
 	ld a, [wActionHelpCounter]
 	and %1
 	jr z, .asm_1e4764
@@ -278,7 +277,7 @@ Func_1e4759: ; 1e4759 (79:4759)
 	inc [hl]
 	ret
 
-Func_1e478d: ; 1e478d (79:478d)
+Func_1e478d:
 	play_sfx_rept 16, SFX_071
 
 	ld a, [wActionHelpCounter]
@@ -306,7 +305,7 @@ Func_1e478d: ; 1e478d (79:478d)
 	inc [hl]
 	ret
 
-Func_1e47ca: ; 1e47ca (79:47ca)
+Func_1e47ca:
 	ld a, [wActionHelpCounter]
 	and %1
 	jr z, .asm_1e47d5
@@ -337,7 +336,7 @@ Func_1e47ca: ; 1e47ca (79:47ca)
 	inc [hl]
 	ret
 
-Func_1e47fe: ; 1e47fe (79:47fe)
+Func_1e47fe:
 	play_sfx_rept 16, SFX_071
 
 	ld hl, wActionHelpWario
@@ -365,7 +364,7 @@ Func_1e47fe: ; 1e47fe (79:47fe)
 	inc [hl]
 	ret
 
-Func_1e483d: ; 1e483d (79:483d)
+Func_1e483d:
 	ld hl, wActionHelpWarioVar
 	ld a, [hl]
 	cp $27
@@ -396,7 +395,7 @@ Func_1e483d: ; 1e483d (79:483d)
 	inc [hl]
 	ret
 
-Func_1e4871: ; 1e4871 (79:4871)
+Func_1e4871:
 	play_sfx_rept 32, SFX_071
 
 	ld hl, wTimer
@@ -410,9 +409,8 @@ Func_1e4871: ; 1e4871 (79:4871)
 	inc [hl]
 	ret
 
-Func_1e4898: ; 1e4898 (79:4898)
+Func_1e4898:
 	ld a, [wActionHelpWarioAnimationEnded]
 	and a
 	ret z
 	jp Func_1e45d7
-; 0x1e48a0

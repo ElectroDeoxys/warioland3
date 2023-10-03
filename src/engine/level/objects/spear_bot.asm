@@ -1,4 +1,4 @@
-SpearBotFunc: ; 45ee3 (11:5ee3)
+SpearBotFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Init)
 	ld [hld], a
@@ -1068,4 +1068,3 @@ SpearBotFunc: ; 45ee3 (11:5ee3)
 	or OBJ_INTERACTION_00
 	ld [hld], a
 	ret
-; 0x465b5

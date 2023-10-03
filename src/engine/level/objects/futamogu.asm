@@ -1,4 +1,4 @@
-FutamoguFunc: ; 406c4 (10:46c4)
+FutamoguFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 

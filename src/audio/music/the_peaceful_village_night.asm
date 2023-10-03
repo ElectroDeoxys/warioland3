@@ -1,4 +1,4 @@
-Music_ThePeacefulVillageNight_Ch1: ; 33b48 (0c:7b48)
+Music_ThePeacefulVillageNight_Ch1:
 	semitone_offset 0
 	tempo 35
 	wave WAVE_62
@@ -91,9 +91,8 @@ Music_ThePeacefulVillageNight_Ch1: ; 33b48 (0c:7b48)
 	audio_jump .loop
 .end
 	audio_end
-; 0x33bbe
 
-Music_ThePeacefulVillageNight_Ch2: ; 33bbe (0c:7bbe)
+Music_ThePeacefulVillageNight_Ch2:
 	semitone_offset 0
 	wave WAVE_53
 	volume 75
@@ -331,9 +330,8 @@ Music_ThePeacefulVillageNight_Ch2: ; 33bbe (0c:7bbe)
 	audio_jump .loop
 .end
 	audio_end
-; 0x33cc5
 
-Music_ThePeacefulVillageNight_Ch3: ; 33cc5 (0c:7cc5)
+Music_ThePeacefulVillageNight_Ch3:
 	semitone_offset 0
 	wave WAVE_49
 	volume 66
@@ -580,9 +578,8 @@ Music_ThePeacefulVillageNight_Ch3: ; 33cc5 (0c:7cc5)
 	audio_jump .loop
 .end
 	audio_end
-; 0x33dd5
 
-Music_ThePeacefulVillageNight: ; 33dd5 (c:7dd5)
+Music_ThePeacefulVillageNight:
 	db $3, $2
 	dw Music_ThePeacefulVillageNight_Ch1
 	dw Music_ThePeacefulVillageNight_Ch2

@@ -1,4 +1,4 @@
-Pals_1ca08f: ; 1ca08f (72:608f)
+Pals_1ca08f:
 	rgb 12, 27, 31
 	rgb 25, 25, 25
 	rgb 28,  0,  0
@@ -38,9 +38,8 @@ Pals_1ca08f: ; 1ca08f (72:608f)
 	rgb 31, 20,  7
 	rgb  1, 10,  1
 	rgb 18,  7,  2
-; 0x1ca0cf
 
-Pals_1ca0cf: ; 1ca0cf (72:60cf)
+Pals_1ca0cf:
 	rgb 31,  8, 23
 	rgb 25, 25, 25
 	rgb 28,  0,  0
@@ -80,9 +79,8 @@ Pals_1ca0cf: ; 1ca0cf (72:60cf)
 	rgb 31, 17,  4
 	rgb  8,  5,  0
 	rgb 22,  6,  0
-; 0x1ca10f
 
-Pals_1ca10f: ; 1ca10f (72:610f)
+Pals_1ca10f:
 	rgb  3,  3, 31
 	rgb 22, 22, 30
 	rgb 25,  0,  5
@@ -122,9 +120,8 @@ Pals_1ca10f: ; 1ca10f (72:610f)
 	rgb 12, 12, 31
 	rgb  0,  0,  8
 	rgb  8,  8, 31
-; 0x1ca14f
 
-Pals_1ca14f: ; 1ca14f (72:614f)
+Pals_1ca14f:
 	rgb 31, 24,  5
 	rgb 25, 25, 25
 	rgb 28,  0,  0
@@ -164,9 +161,8 @@ Pals_1ca14f: ; 1ca14f (72:614f)
 	rgb 31, 20,  7
 	rgb  6,  8,  0
 	rgb 18,  7,  2
-; 0x1ca18f
 
-Pals_1ca18f: ; 1ca18f (72:618f)
+Pals_1ca18f:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -206,9 +202,8 @@ Pals_1ca18f: ; 1ca18f (72:618f)
 	rgb 31, 31,  0
 	rgb 31, 14,  0
 	rgb  0,  0,  0
-; 0x1ca1cf
 
-Pals_1ca1cf: ; 1ca1cf (72:61cf)
+Pals_1ca1cf:
 	rgb 31, 31, 31
 	rgb  0, 31, 31
 	rgb  0, 12, 26
@@ -248,9 +243,8 @@ Pals_1ca1cf: ; 1ca1cf (72:61cf)
 	rgb 31, 31, 31
 	rgb 31, 31, 31
 	rgb  0,  0,  0
-; 0x1ca20f
 
-Pals_1ca20f: ; 1ca20f (72:620f)
+Pals_1ca20f:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -290,9 +284,8 @@ Pals_1ca20f: ; 1ca20f (72:620f)
 	rgb 20, 10,  0
 	rgb 30, 20,  0
 	rgb  5,  1,  0
-; 0x1ca24f
 
-Pals_1ca24f: ; 1ca24f (72:624f)
+Pals_1ca24f:
 	rgb 31, 31, 31
 	rgb 19, 19, 19
 	rgb 10, 10, 10
@@ -332,9 +325,8 @@ Pals_1ca24f: ; 1ca24f (72:624f)
 	rgb  0, 16,  0
 	rgb 30,  0,  0
 	rgb  0,  4,  0
-; 0x1ca28f
 
-Pals_1ca28f: ; 1ca28f (72:628f)
+Pals_1ca28f:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 10, 10, 10
@@ -374,9 +366,8 @@ Pals_1ca28f: ; 1ca28f (72:628f)
 	rgb  0, 16,  0
 	rgb 30,  0,  0
 	rgb  0,  4,  0
-; 0x1ca2cf
 
-Pals_1ca2cf: ; 1ca2cf (72:62cf)
+Pals_1ca2cf:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 10, 10, 10
@@ -416,9 +407,8 @@ Pals_1ca2cf: ; 1ca2cf (72:62cf)
 	rgb  0, 16,  0
 	rgb 30,  0,  0
 	rgb  0,  4,  0
-; 0x1ca30f
 
-Pals_1ca30f: ; 1ca30f (72:630f)
+Pals_1ca30f:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 10, 10, 10
@@ -458,9 +448,8 @@ Pals_1ca30f: ; 1ca30f (72:630f)
 	rgb  0, 16,  0
 	rgb 30,  0,  0
 	rgb  0,  4,  0
-; 0x1ca34f
 
-Pals_1ca34f: ; 1ca34f (72:634f)
+Pals_1ca34f:
 	rgb  0, 22, 16
 	rgb 21, 21, 21
 	rgb 10, 10, 10
@@ -500,4 +489,3 @@ Pals_1ca34f: ; 1ca34f (72:634f)
 	rgb 31, 31, 31
 	rgb 14, 26,  6
 	rgb  0,  0,  0
-; 0x1ca38f

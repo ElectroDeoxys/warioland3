@@ -1,4 +1,4 @@
-Music_BallOStringWario_Ch1: ; 38000 (0e:4000)
+Music_BallOStringWario_Ch1:
 	semitone_offset 1
 
 .loop
@@ -332,9 +332,8 @@ Music_BallOStringWario_Ch1: ; 38000 (0e:4000)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3815c
 
-Music_BallOStringWario_Ch2: ; 3815c (0e:415c)
+Music_BallOStringWario_Ch2:
 	semitone_offset 1
 
 .loop
@@ -459,9 +458,8 @@ Music_BallOStringWario_Ch2: ; 3815c (0e:415c)
 	audio_jump .loop
 .end
 	audio_end
-; 0x381e6
 
-Music_BallOStringWario: ; 381e6 (0e:41e6)
+Music_BallOStringWario:
 	db 2, 2
 	dw Music_BallOStringWario_Ch1
 	dw Music_BallOStringWario_Ch2
@@ -472,4 +470,3 @@ Music_BallOStringWario: ; 381e6 (0e:41e6)
 
 	dw Music_BallOStringWario_Ch1.end
 	dw Music_BallOStringWario_Ch2.end
-; 0x381f4

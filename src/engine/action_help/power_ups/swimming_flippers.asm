@@ -1,4 +1,4 @@
-SwimmingFlippersActionHelp: ; 1f8dcf (7e:4dcf)
+SwimmingFlippersActionHelp:
 	call .StateTable
 
 	ld a, [wActionHelpBlackedOut]
@@ -40,9 +40,8 @@ SwimmingFlippersActionHelp: ; 1f8dcf (7e:4dcf)
 	dw Func_1f913c
 	dw Func_1f917a
 	dw Func_1f9191
-; 0x1f8e31
 
-Func_1f8e31: ; 1f8e31 (7e:4e31)
+Func_1f8e31:
 	ld a, [wPowerUpLevel]
 	bit ACTION_HELP_LEVEL_CLEAR_F, a
 	jr nz, .asm_1f8e3f
@@ -63,13 +62,12 @@ Func_1f8e31: ; 1f8e31 (7e:4e31)
 	ld a, $1
 	ld [wActionHelpState], a
 	jr Func_1f8e69
-; 0x1f8e64
 
-Func_1f8e64: ; 1f8e64 (7e:4e64)
+Func_1f8e64:
 	ld hl, wTimer
 	dec [hl]
 	ret nz
-Func_1f8e69: ; 1f8e69 (7e:4e69)
+Func_1f8e69:
 	ld a, BANK(WarioIdleGfx)
 	ld [wPendingDMASourceBank], a
 	ld a, HIGH(WarioIdleGfx)
@@ -121,9 +119,8 @@ Func_1f8e69: ; 1f8e69 (7e:4e69)
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
-; 0x1f8ed9
 
-Func_1f8ed9: ; 1f8ed9 (7e:4ed9)
+Func_1f8ed9:
 	ld hl, wTimer
 	dec [hl]
 	ret nz
@@ -134,9 +131,8 @@ Func_1f8ed9: ; 1f8ed9 (7e:4ed9)
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
-; 0x1f8ee9
 
-Func_1f8ee9: ; 1f8ee9 (7e:4ee9)
+Func_1f8ee9:
 	ld hl, wActionHelpWarioXCoord
 	inc [hl]
 	ld a, [hl]
@@ -150,9 +146,8 @@ Func_1f8ee9: ; 1f8ee9 (7e:4ee9)
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
-; 0x1f8efe
 
-Func_1f8efe: ; 1f8efe (7e:4efe)
+Func_1f8efe:
 	ld hl, wActionHelpWarioXCoord
 	inc [hl]
 	ld hl, wActionHelpWarioVar
@@ -178,9 +173,8 @@ Func_1f8efe: ; 1f8efe (7e:4efe)
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
-; 0x1f8f2c
 
-Func_1f8f2c: ; 1f8f2c (7e:4f2c)
+Func_1f8f2c:
 	ld hl, wTimer
 	dec [hl]
 	ret nz
@@ -190,9 +184,8 @@ Func_1f8f2c: ; 1f8f2c (7e:4f2c)
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
-; 0x1f8f39
 
-Func_1f8f39: ; 1f8f39 (7e:4f39)
+Func_1f8f39:
 	play_sfx_rept 37, SFX_00E
 
 	ld a, [wActionHelpCounter]
@@ -210,9 +203,8 @@ Func_1f8f39: ; 1f8f39 (7e:4f39)
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
-; 0x1f8f6b
 
-Func_1f8f6b: ; 1f8f6b (7e:4f6b)
+Func_1f8f6b:
 	play_sfx_rept 37, SFX_00E
 
 	ld hl, wTimer
@@ -238,9 +230,8 @@ Func_1f8f6b: ; 1f8f6b (7e:4f6b)
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
-; 0x1f8fa6
 
-Func_1f8fa6: ; 1f8fa6 (7e:4fa6)
+Func_1f8fa6:
 	play_sfx_rept 37, SFX_00E
 
 	ld hl, wTimer
@@ -264,9 +255,8 @@ Func_1f8fa6: ; 1f8fa6 (7e:4fa6)
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
-; 0x1f8fdc
 
-Func_1f8fdc: ; 1f8fdc (7e:4fdc)
+Func_1f8fdc:
 	play_sfx_rept 37, SFX_00E
 
 	ld hl, wActionHelpWarioXCoord
@@ -282,9 +272,8 @@ Func_1f8fdc: ; 1f8fdc (7e:4fdc)
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
-; 0x1f900a
 
-Func_1f900a: ; 1f900a (7e:500a)
+Func_1f900a:
 	play_sfx_rept 37, SFX_00E
 
 	ld hl, wTimer
@@ -310,9 +299,8 @@ Func_1f900a: ; 1f900a (7e:500a)
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
-; 0x1f9043
 
-Func_1f9043: ; 1f9043 (7e:5043)
+Func_1f9043:
 	play_sfx_rept 15, SFX_00F
 
 	ld hl, wActionHelpWarioXCoord
@@ -337,9 +325,8 @@ Func_1f9043: ; 1f9043 (7e:5043)
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
-; 0x1f9080
 
-Func_1f9080: ; 1f9080 (7e:5080)
+Func_1f9080:
 	play_sfx_rept 37, SFX_00E
 
 	ld hl, wTimer
@@ -364,9 +351,8 @@ Func_1f9080: ; 1f9080 (7e:5080)
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
-; 0x1f90b6
 
-Func_1f90b6: ; 1f90b6 (7e:50b6)
+Func_1f90b6:
 	play_sfx_rept 37, SFX_00E
 
 	ld hl, wActionHelpWarioXCoord
@@ -381,9 +367,8 @@ Func_1f90b6: ; 1f90b6 (7e:50b6)
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
-; 0x1f90e2
 
-Func_1f90e2: ; 1f90e2 (7e:50e2)
+Func_1f90e2:
 	play_sfx_rept 15, SFX_00F
 
 	ld hl, wTimer
@@ -399,9 +384,8 @@ Func_1f90e2: ; 1f90e2 (7e:50e2)
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
-; 0x1f910e
 
-Func_1f910e: ; 1f910e (7e:510e)
+Func_1f910e:
 	play_sfx_rept 37, SFX_00E
 
 	ld hl, wActionHelpWarioXCoord
@@ -418,9 +402,8 @@ Func_1f910e: ; 1f910e (7e:510e)
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
-; 0x1f913c
 
-Func_1f913c: ; 1f913c (7e:513c)
+Func_1f913c:
 	play_sfx_rept 37, SFX_00E
 
 	ld hl, wTimer
@@ -448,9 +431,8 @@ Func_1f913c: ; 1f913c (7e:513c)
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
-; 0x1f917a
 
-Func_1f917a: ; 1f917a (7e:517a)
+Func_1f917a:
 	ld hl, wTimer
 	dec [hl]
 	ret nz
@@ -464,9 +446,8 @@ Func_1f917a: ; 1f917a (7e:517a)
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
-; 0x1f9191
 
-Func_1f9191: ; 1f9191 (7e:5191)
+Func_1f9191:
 	ld hl, wActionHelpWarioXCoord
 	ld a, [hl]
 	cp $18
@@ -495,4 +476,3 @@ Func_1f9191: ; 1f9191 (7e:5191)
 	xor a
 	ld [wActionHelpWarioVar], a
 	jp Func_1f8e31
-; 0x1f91c5

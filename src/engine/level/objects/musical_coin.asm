@@ -1,4 +1,4 @@
-MusicalCoinFunc: ; 4c9d4 (13:49d4)
+MusicalCoinFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]

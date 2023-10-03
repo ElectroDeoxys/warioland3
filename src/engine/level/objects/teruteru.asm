@@ -1,4 +1,4 @@
-TeruteruFunc: ; 448d7 (11:48d7)
+TeruteruFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Init)
 	ld [hld], a
@@ -667,4 +667,3 @@ TeruteruFunc: ; 448d7 (11:48d7)
 	or OBJ_INTERACTION_00
 	ld [hld], a
 	ret
-; 0x44d3c

@@ -1,11 +1,11 @@
 ; b = PARTICLE_* constant
 ; hl = cell
-CreateParticleInCell: ; c9f0 (3:49f0)
+CreateParticleInCell:
 	call Func_ce3e
 ;	fallthrough
 
 ; b = PARTICLE_* constant
-CreateParticle:: ; c9f3 (3:49f3)
+CreateParticle::
 	ld a, [wCurParticleIndex]
 	add a
 	add a
@@ -40,9 +40,8 @@ CreateParticle:: ; c9f3 (3:49f3)
 	ldh a, [hXPosLo]
 	ld [hli], a
 	ret
-; 0xca26
 
-UpdateParticles: ; ca26 (3:4a26)
+UpdateParticles:
 	ld a, [wNumParticles]
 	and a
 	ret z
@@ -86,13 +85,11 @@ ENDR
 	dw ParticleFunc_None           ; PARTICLE_14
 	dw ParticleFunc_None           ; PARTICLE_15
 	dw ParticleFunc_None           ; PARTICLE_16
-; 0xca86
 
-ParticleFunc_None: ; ca86 (3:4a86)
+ParticleFunc_None:
 	ret
-; 0xca87
 
-ParticleFunc_Debris: ; ca87 (3:4a87)
+ParticleFunc_Debris:
 	push bc
 	inc c
 	ld a, [bc] ; PARTICLE_STRUCT_INITIALISED
@@ -135,9 +132,8 @@ ParticleFunc_Debris: ; ca87 (3:4a87)
 	ld hl, wNumParticles
 	dec [hl]
 	ret
-; 0xcab8
 
-ParticleFunc_Stars: ; cab8 (3:4ab8)
+ParticleFunc_Stars:
 	push bc
 	inc c
 	ld a, [bc] ; PARTICLE_STRUCT_INITIALISED
@@ -177,9 +173,8 @@ ParticleFunc_Stars: ; cab8 (3:4ab8)
 	ld hl, wNumParticles
 	dec [hl]
 	ret
-; 0xcae1
 
-ParticleFunc_Splash: ; cae1 (3:4ae1)
+ParticleFunc_Splash:
 	push bc
 	inc c
 	ld a, [bc]
@@ -219,9 +214,8 @@ ParticleFunc_Splash: ; cae1 (3:4ae1)
 	ld hl, wNumParticles
 	dec [hl]
 	ret
-; 0xcb0a
 
-ParticleFunc_Dust: ; cb0a (3:4b0a)
+ParticleFunc_Dust:
 	push bc
 	inc c
 	ld a, [bc]
@@ -261,9 +255,8 @@ ParticleFunc_Dust: ; cb0a (3:4b0a)
 	ld hl, wNumParticles
 	dec [hl]
 	ret
-; 0xcb33
 
-ParticleFunc_SlideDustRight: ; cb33 (3:4b33)
+ParticleFunc_SlideDustRight:
 	push bc
 	inc c
 	ld a, [bc]
@@ -328,9 +321,8 @@ ParticleFunc_SlideDustRight: ; cb33 (3:4b33)
 	ld hl, wNumParticles
 	dec [hl]
 	ret
-; 0xcb82
 
-ParticleFunc_SlideDustLeft: ; cb82 (3:4b82)
+ParticleFunc_SlideDustLeft:
 	push bc
 	inc c
 	ld a, [bc]
@@ -394,9 +386,8 @@ ParticleFunc_SlideDustLeft: ; cb82 (3:4b82)
 	ld hl, wNumParticles
 	dec [hl]
 	ret
-; 0xcbd1
 
-ParticleFunc_SmokeLarge: ; cbd1 (3:4bd1)
+ParticleFunc_SmokeLarge:
 	push bc
 	inc c
 	ld a, [bc]
@@ -436,9 +427,8 @@ ParticleFunc_SmokeLarge: ; cbd1 (3:4bd1)
 	ld hl, wNumParticles
 	dec [hl]
 	ret
-; 0xcbfa
 
-ParticleFunc_SmokeSmall: ; cbfa (3:4bfa)
+ParticleFunc_SmokeSmall:
 	push bc
 	inc c
 	ld a, [bc]
@@ -478,9 +468,8 @@ ParticleFunc_SmokeSmall: ; cbfa (3:4bfa)
 	ld hl, wNumParticles
 	dec [hl]
 	ret
-; 0xcc23
 
-ParticleFunc_Bubbles: ; cc23 (3:4c23)
+ParticleFunc_Bubbles:
 	push bc
 	inc c
 	ld a, [bc]
@@ -520,9 +509,8 @@ ParticleFunc_Bubbles: ; cc23 (3:4c23)
 	ld hl, wNumParticles
 	dec [hl]
 	ret
-; 0xcc4c
 
-ParticleFunc_BouncyJump: ; cc4c (3:4c4c)
+ParticleFunc_BouncyJump:
 	ld a, [wWarioState]
 	cp WST_BOUNCY_AIRBORNE
 	jr nz, .deinit
@@ -586,9 +574,8 @@ ParticleFunc_BouncyJump: ; cc4c (3:4c4c)
 	ld hl, wNumParticles
 	dec [hl]
 	ret
-; 0xcc99
 
-ParticleFunc_BubbleBurst: ; cc99 (3:4c99)
+ParticleFunc_BubbleBurst:
 	push bc
 	inc c
 	ld a, [bc]
@@ -628,9 +615,8 @@ ParticleFunc_BubbleBurst: ; cc99 (3:4c99)
 	ld hl, wNumParticles
 	dec [hl]
 	ret
-; 0xccc2
 
-ParticleFunc_Ice: ; ccc2 (3:4cc2)
+ParticleFunc_Ice:
 	push bc
 	inc c
 	ld a, [bc]
@@ -670,9 +656,8 @@ ParticleFunc_Ice: ; ccc2 (3:4cc2)
 	ld hl, wNumParticles
 	dec [hl]
 	ret
-; 0xcceb
 
-ParticleFunc_TreasureGlow: ; cceb (3:4ceb)
+ParticleFunc_TreasureGlow:
 	push bc
 	inc c
 	ld a, [bc]
@@ -704,9 +689,8 @@ ParticleFunc_TreasureGlow: ; cceb (3:4ceb)
 	call ParticleAnim_TreasureGlow
 	pop bc
 	ret
-; 0xcd09
 
-ParticleFunc_Owl: ; cd09 (3:4d09)
+ParticleFunc_Owl:
 	push bc
 	inc c
 	ld a, [bc]
@@ -754,9 +738,8 @@ ParticleFunc_Owl: ; cd09 (3:4d09)
 	ld hl, wNumParticles
 	dec [hl]
 	ret
-; 0xcd3d
 
-ParticleFunc_Snow: ; cd3d (3:4d3d)
+ParticleFunc_Snow:
 	push bc
 	inc c
 	ld a, [bc]
@@ -796,9 +779,8 @@ ParticleFunc_Snow: ; cd3d (3:4d3d)
 	ld hl, wNumParticles
 	dec [hl]
 	ret
-; 0xcd66
 
-ParticleFunc_Magic1: ; cd66 (3:4d66)
+ParticleFunc_Magic1:
 	ld a, [wWarioState]
 	cp WST_MAGIC_STOPPING
 	jr z, .deinit
@@ -862,9 +844,8 @@ ParticleFunc_Magic1: ; cd66 (3:4d66)
 	ld hl, wNumParticles
 	dec [hl]
 	ret
-; 0xcdaf
 
-ParticleFunc_Magic2: ; cdaf (3:4daf)
+ParticleFunc_Magic2:
 	ld a, [wWarioState]
 	cp WST_MAGIC_STOPPING
 	jr z, .deinit
@@ -928,9 +909,8 @@ ParticleFunc_Magic2: ; cdaf (3:4daf)
 	ld hl, wNumParticles
 	dec [hl]
 	ret
-; 0xcdf8
 
-ParticleFunc_MagicStop: ; cdf8 (3:4df8)
+ParticleFunc_MagicStop:
 	push bc
 	inc c
 	ld a, [bc]
@@ -991,9 +971,8 @@ ParticleFunc_MagicStop: ; cdf8 (3:4df8)
 	ld hl, wNumParticles
 	dec [hl]
 	ret
-; 0xce3e
 
-Func_ce3e: ; ce3e (3:4e3e)
+Func_ce3e:
 	ld a, h
 	sub $a0
 	ld h, a
@@ -1026,9 +1005,8 @@ Func_ce3e: ; ce3e (3:4e3e)
 	adc $00
 	ldh [hXPosHi], a
 	ret
-; 0xce75
 
-ParticleAnim_Bubbles: ; ce75 (3:4e75)
+ParticleAnim_Bubbles:
 	ld h, b
 	ld l, c
 	ld a, [wDirection]
@@ -1054,9 +1032,8 @@ ParticleAnim_Bubbles: ; ce75 (3:4e75)
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d20e
 	jp AddParticleSprite
-; 0xcea1
 
-ParticleAnim_Magic1: ; cea1 (3:4ea1)
+ParticleAnim_Magic1:
 	ld h, b
 	ld l, c
 	ld de, Frameset_d8e7
@@ -1074,9 +1051,8 @@ ParticleAnim_Magic1: ; cea1 (3:4ea1)
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d80d
 	jp AddParticleSprite
-; 0xcec2
 
-ParticleAnim_Magic2: ; cec2 (3:4ec2)
+ParticleAnim_Magic2:
 	ld h, b
 	ld l, c
 	ld de, Frameset_d8f4
@@ -1094,9 +1070,8 @@ ParticleAnim_Magic2: ; cec2 (3:4ec2)
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d80d
 	jp AddParticleSprite
-; 0xcee3
 
-ParticleAnim_MagicStop: ; cee3 (3:4ee3)
+ParticleAnim_MagicStop:
 	ld h, b
 	ld l, c
 	ld de, Frameset_d901
@@ -1114,9 +1089,8 @@ ParticleAnim_MagicStop: ; cee3 (3:4ee3)
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d80d
 	jp AddParticleSprite
-; 0xcf04
 
-ParticleAnim_Owl: ; cf04 (3:4f04)
+ParticleAnim_Owl:
 	ld h, b
 	ld l, c
 	ld de, Frameset_d7b4
@@ -1134,9 +1108,8 @@ ParticleAnim_Owl: ; cf04 (3:4f04)
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d763
 	jp AddParticleSprite
-; 0xcf25
 
-ParticleAnim_TreasureGlow: ; cf25 (3:4f25)
+ParticleAnim_TreasureGlow:
 	ld h, b
 	ld l, c
 	ld de, Frameset_d75a
@@ -1154,9 +1127,8 @@ ParticleAnim_TreasureGlow: ; cf25 (3:4f25)
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d716
 	jp AddParticleSprite
-; 0xcf46
 
-ParticleAnim_BubbleBurst: ; cf46 (3:4f46)
+ParticleAnim_BubbleBurst:
 	ld h, b
 	ld l, c
 	ld de, Frameset_d622
@@ -1174,9 +1146,8 @@ ParticleAnim_BubbleBurst: ; cf46 (3:4f46)
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d5ae
 	jp AddParticleSprite
-; 0xcf67
 
-ParticleAnim_BouncyJump: ; cf67 (3:4f67)
+ParticleAnim_BouncyJump:
 	ld h, b
 	ld l, c
 	ld de, Frameset_d591
@@ -1194,9 +1165,8 @@ ParticleAnim_BouncyJump: ; cf67 (3:4f67)
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d532
 	jp AddParticleSprite
-; 0xcf88
 
-ParticleAnim_Snow: ; cf88 (3:4f88)
+ParticleAnim_Snow:
 	ld h, b
 	ld l, c
 	ld de, Frameset_d806
@@ -1214,9 +1184,8 @@ ParticleAnim_Snow: ; cf88 (3:4f88)
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d7bd
 	jp AddParticleSprite
-; 0xcfa9
 
-ParticleAnim_Ice: ; cfa9 (3:4fa9)
+ParticleAnim_Ice:
 	ld h, b
 	ld l, c
 	ld a, [wDirection]
@@ -1241,9 +1210,8 @@ ParticleAnim_Ice: ; cfa9 (3:4fa9)
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d62b
 	jp AddParticleSprite
-; 0xcfd5
 
-ParticleAnim_Dust: ; cfd5 (3:4fd5)
+ParticleAnim_Dust:
 	ld h, b
 	ld l, c
 	ld de, Frameset_d4c5
@@ -1261,9 +1229,8 @@ ParticleAnim_Dust: ; cfd5 (3:4fd5)
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d20e
 	jp AddParticleSprite
-; 0xcff6
 
-ParticleAnim_Debris: ; cff6 (3:4ff6)
+ParticleAnim_Debris:
 	ld h, b
 	ld l, c
 	ld de, Frameset_d49a
@@ -1281,9 +1248,8 @@ ParticleAnim_Debris: ; cff6 (3:4ff6)
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d20e
 	jr AddParticleSprite
-; 0xd016
 
-ParticleAnim_Stars: ; d016 (3:5016)
+ParticleAnim_Stars:
 	ld h, b
 	ld l, c
 	ld de, Frameset_d525
@@ -1301,9 +1267,8 @@ ParticleAnim_Stars: ; d016 (3:5016)
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d20e
 	jr AddParticleSprite
-; 0xd036
 
-ParticleAnim_SmokeLarge: ; d036 (3:5036)
+ParticleAnim_SmokeLarge:
 	ld h, b
 	ld l, c
 	ld de, Frameset_d4f3
@@ -1321,9 +1286,8 @@ ParticleAnim_SmokeLarge: ; d036 (3:5036)
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d20e
 	jr AddParticleSprite
-; 0xd056
 
-ParticleAnim_SmokeSmall: ; d056 (3:5056)
+ParticleAnim_SmokeSmall:
 	ld h, b
 	ld l, c
 	ld de, Frameset_d4ea
@@ -1341,9 +1305,8 @@ ParticleAnim_SmokeSmall: ; d056 (3:5056)
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d20e
 	jr AddParticleSprite
-; 0xd076
 
-ParticleAnim_Splash: ; d076 (3:5076)
+ParticleAnim_Splash:
 	ld h, b
 	ld l, c
 	ld de, Frameset_d4ba
@@ -1362,7 +1325,7 @@ ParticleAnim_Splash: ; d076 (3:5076)
 	ld hl, OAM_d20e
 ;	fallthrough
 
-AddParticleSprite: ; d094 (3:5094)
+AddParticleSprite:
 	ld a, [wCameraConfigFlags]
 	cp CAM_XSCROLL2 | CAM_TRANSITIONS | CAM_EDGE_RIGHT | CAM_EDGE_LEFT
 	jr z, .asm_d0c5
@@ -1404,10 +1367,9 @@ AddParticleSprite: ; d094 (3:5094)
 	ld [wCurSpriteAttributes], a
 	call TryAddSprite
 	ret
-; 0xd0ef
 
 ; de = frameset
-UpdateParticleAnimation: ; d0ef (3:50ef)
+UpdateParticleAnimation:
 	xor a
 	ld [wCurParticleAnimEnded], a
 	ld a, [hl] ; duration
@@ -1443,4 +1405,3 @@ UpdateParticleAnimation: ; d0ef (3:50ef)
 	ld a, TRUE
 	ld [wCurParticleAnimEnded], a
 	ret
-; 0xd11a

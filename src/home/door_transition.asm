@@ -1,4 +1,4 @@
-DoorTransition:: ; 928 (0:928)
+DoorTransition::
 	ldh a, [rSVBK]
 	push af
 	ld a, $03
@@ -57,9 +57,8 @@ DoorTransition:: ; 928 (0:928)
 	ld hl, wSubState
 	inc [hl]
 	jr .done
-; 0x9a3
 
-Func_9a3:: ; 9a3 (0:9a3)
+Func_9a3::
 	ld a, [wPalFadeCounter]
 	cp $10
 	ret nc
@@ -87,9 +86,8 @@ Func_9a3:: ; 9a3 (0:9a3)
 	add $20
 	ld [hl], a
 	ret
-; 0x9cb
 
-VBlank_9cb:: ; 9cb (0:9cb)
+VBlank_9cb::
 	di
 	ld hl, wVBlankFunc
 	ld de, wBackupVBlankFunc
@@ -229,4 +227,3 @@ VBlank_9cb:: ; 9cb (0:9cb)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0xa92

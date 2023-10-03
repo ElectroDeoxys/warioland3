@@ -1,4 +1,4 @@
-Music_FlatWario_Ch1: ; 3790f (0d:790f)
+Music_FlatWario_Ch1:
 	semitone_offset 1
 	tempo 72
 	wave WAVE_1C
@@ -65,9 +65,8 @@ Music_FlatWario_Ch1: ; 3790f (0d:790f)
 	audio_jump .loop
 .end
 	audio_end
-; 0x37969
 
-Music_FlatWario_Ch2: ; 37969 (0d:7969)
+Music_FlatWario_Ch2:
 	semitone_offset 1
 	wave WAVE_48
 	volume 75
@@ -114,9 +113,8 @@ Music_FlatWario_Ch2: ; 37969 (0d:7969)
 	audio_jump .loop
 .end
 	audio_end
-; 0x379a2
 
-Music_FlatWario_Ch3: ; 379a2 (0d:79a2)
+Music_FlatWario_Ch3:
 	semitone_offset 1
 	wave WAVE_61
 	volume 94
@@ -174,9 +172,8 @@ Music_FlatWario_Ch3: ; 379a2 (0d:79a2)
 	audio_jump .loop
 .end
 	audio_end
-; 0x379e5
 
-Music_FlatWario: ; 379e5 (d:79e5)
+Music_FlatWario:
 	db $3, $2
 	dw Music_FlatWario_Ch1
 	dw Music_FlatWario_Ch2

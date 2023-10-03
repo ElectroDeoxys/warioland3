@@ -1,13 +1,13 @@
-ClearGate3Func: ; 4379b (10:779b)
+ClearGate3Func:
 	ld de, Frameset_698ae
 	jr ClearGateFunc
-ClearGate2Func: ; 437a0 (10:77a0)
+ClearGate2Func:
 	ld de, Frameset_698ab
 	jr ClearGateFunc
-ClearGate1Func: ; 437a5 (10:77a5)
+ClearGate1Func:
 	ld de, Frameset_698a8
 ;	fallthrough
-ClearGateFunc: ; 437a8 (10:77a8)
+ClearGateFunc:
 	call SetObjectFramesetPtr
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]

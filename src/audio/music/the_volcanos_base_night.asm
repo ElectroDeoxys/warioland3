@@ -1,4 +1,4 @@
-Music_TheVolcanosBaseNight_Ch1: ; 34a64 (0d:4a64)
+Music_TheVolcanosBaseNight_Ch1:
 	semitone_offset 0
 
 .loop
@@ -299,9 +299,8 @@ Music_TheVolcanosBaseNight_Ch1: ; 34a64 (0d:4a64)
 	audio_jump .loop
 .end
 	audio_end
-; 0x34bc7
 
-Music_TheVolcanosBaseNight_Ch2: ; 34bc7 (0d:4bc7)
+Music_TheVolcanosBaseNight_Ch2:
 	semitone_offset 0
 
 .loop
@@ -518,9 +517,8 @@ Music_TheVolcanosBaseNight_Ch2: ; 34bc7 (0d:4bc7)
 	audio_jump .loop
 .end
 	audio_end
-; 0x34ccd
 
-Music_TheVolcanosBaseNight_Ch3: ; 34ccd (0d:4ccd)
+Music_TheVolcanosBaseNight_Ch3:
 	semitone_offset 0
 
 .loop
@@ -634,9 +632,8 @@ Music_TheVolcanosBaseNight_Ch3: ; 34ccd (0d:4ccd)
 	audio_jump .loop
 .end
 	audio_end
-; 0x34d69
 
-Music_TheVolcanosBaseNight: ; 34d69 (d:4d69)
+Music_TheVolcanosBaseNight:
 	db $3, $2
 	dw Music_TheVolcanosBaseNight_Ch1
 	dw Music_TheVolcanosBaseNight_Ch2

@@ -1,4 +1,4 @@
-Music_FatWario_Ch1: ; 375d5 (0d:75d5)
+Music_FatWario_Ch1:
 	semitone_offset 1
 	tempo 37
 	wave WAVE_52
@@ -43,9 +43,8 @@ Music_FatWario_Ch1: ; 375d5 (0d:75d5)
 	audio_jump .loop
 .end
 	audio_end
-; 0x37608
 
-Music_FatWario_Ch2: ; 37608 (0d:7608)
+Music_FatWario_Ch2:
 	semitone_offset 1
 	wave WAVE_5A
 	volume 103
@@ -171,9 +170,8 @@ Music_FatWario_Ch2: ; 37608 (0d:7608)
 	audio_jump .loop
 .end
 	audio_end
-; 0x376b0
 
-Music_FatWario_Ch3: ; 376b0 (0d:76b0)
+Music_FatWario_Ch3:
 	semitone_offset 0
 	wave WAVE_28
 	volume 66
@@ -205,9 +203,8 @@ Music_FatWario_Ch3: ; 376b0 (0d:76b0)
 	audio_jump .loop
 .end
 	audio_end
-; 0x376e0
 
-Music_FatWario: ; 376e0 (d:76e0)
+Music_FatWario:
 	db $3, $2
 	dw Music_FatWario_Ch1
 	dw Music_FatWario_Ch2

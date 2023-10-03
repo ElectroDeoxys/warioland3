@@ -1,4 +1,4 @@
-RailActionHelp: ; 1e4291 (79:4291)
+RailActionHelp:
 	call .StateTable
 
 	ld a, [wActionHelpBlackedOut]
@@ -53,9 +53,8 @@ RailActionHelp: ; 1e4291 (79:4291)
 	dw Func_1e453a
 	dw Func_1e454d
 	dw Func_1e4578
-; 0x1e430d
 
-Func_1e430d: ; 1e430d (79:430d)
+Func_1e430d:
 	ld a, [wPowerUpLevel]
 	bit ACTION_HELP_TITLE_SCREEN_F, a
 	jr z, .restart_action_help
@@ -68,11 +67,11 @@ Func_1e430d: ; 1e430d (79:430d)
 	ld [wActionHelpState], a
 	jr Func_1e4329
 
-Func_1e4324: ; 1e4324 (79:4324)
+Func_1e4324:
 	ld hl, wTimer
 	dec [hl]
 	ret nz
-Func_1e4329: ; 1e4329 (79:4329)
+Func_1e4329:
 	ld a, BANK(WarioHangGfx)
 	ld [wPendingDMASourceBank], a
 	ld a, HIGH(WarioHangGfx)
@@ -143,7 +142,7 @@ Func_1e4329: ; 1e4329 (79:4329)
 	inc [hl]
 	ret
 
-Func_1e43a0: ; 1e43a0 (79:43a0)
+Func_1e43a0:
 	play_sfx_rept 30, SFX_08C
 
 	ld hl, wActionHelpWarioXCoord
@@ -160,7 +159,7 @@ Func_1e43a0: ; 1e43a0 (79:43a0)
 	inc [hl]
 	ret
 
-Func_1e43cb: ; 1e43cb (79:43cb)
+Func_1e43cb:
 	play_sfx_rept 30, SFX_08C
 
 	ld hl, wActionHelpWarioXCoord
@@ -180,7 +179,7 @@ Func_1e43cb: ; 1e43cb (79:43cb)
 	inc [hl]
 	ret
 
-Func_1e4403: ; 1e4403 (79:4403)
+Func_1e4403:
 	ld hl, wMenuObj4XCoord
 	inc [hl]
 	ld hl, wActionHelpWarioVar
@@ -208,7 +207,7 @@ Func_1e4403: ; 1e4403 (79:4403)
 	inc [hl]
 	ret
 
-Func_1e4432: ; 1e4432 (79:4432)
+Func_1e4432:
 	ld hl, wMenuObj4XCoord
 	inc [hl]
 	ld a, [hl]
@@ -221,7 +220,7 @@ Func_1e4432: ; 1e4432 (79:4432)
 	inc [hl]
 	ret
 
-Func_1e4442: ; 1e4442 (79:4442)
+Func_1e4442:
 	ld hl, wMenuObj4XCoord
 	dec [hl]
 	ld a, [hl]
@@ -235,7 +234,7 @@ Func_1e4442: ; 1e4442 (79:4442)
 	inc [hl]
 	ret
 
-Func_1e4455: ; 1e4455 (79:4455)
+Func_1e4455:
 	ld hl, wActionHelpWarioVar
 	ld a, [hl]
 	inc [hl]
@@ -262,7 +261,7 @@ Func_1e4455: ; 1e4455 (79:4455)
 	inc [hl]
 	ret
 
-Func_1e4483: ; 1e4483 (79:4483)
+Func_1e4483:
 	ld a, [wActionHelpWarioAnimationEnded]
 	and a
 	ret z
@@ -273,7 +272,7 @@ Func_1e4483: ; 1e4483 (79:4483)
 	inc [hl]
 	ret
 
-Func_1e4490: ; 1e4490 (79:4490)
+Func_1e4490:
 	play_sfx_rept 30, SFX_08C
 
 	ld hl, wActionHelpWarioXCoord
@@ -290,7 +289,7 @@ Func_1e4490: ; 1e4490 (79:4490)
 	inc [hl]
 	ret
 
-Func_1e44bb: ; 1e44bb (79:44bb)
+Func_1e44bb:
 	play_sfx_rept 30, SFX_08C
 
 	ld hl, wActionHelpWarioXCoord
@@ -308,7 +307,7 @@ Func_1e44bb: ; 1e44bb (79:44bb)
 	inc [hl]
 	ret
 
-Func_1e44ee: ; 1e44ee (79:44ee)
+Func_1e44ee:
 	ld hl, wMenuObj4XCoord
 	inc [hl]
 	ld hl, wActionHelpWarioVar
@@ -343,7 +342,7 @@ Func_1e44ee: ; 1e44ee (79:44ee)
 	inc [hl]
 	ret
 
-Func_1e452a: ; 1e452a (79:452a)
+Func_1e452a:
 	ld hl, wMenuObj4XCoord
 	inc [hl]
 	ld a, [hl]
@@ -356,7 +355,7 @@ Func_1e452a: ; 1e452a (79:452a)
 	inc [hl]
 	ret
 
-Func_1e453a: ; 1e453a (79:453a)
+Func_1e453a:
 	ld hl, wMenuObj4XCoord
 	dec [hl]
 	ld a, [hl]
@@ -370,7 +369,7 @@ Func_1e453a: ; 1e453a (79:453a)
 	inc [hl]
 	ret
 
-Func_1e454d: ; 1e454d (79:454d)
+Func_1e454d:
 	ld hl, wActionHelpWarioVar
 	ld a, [hl]
 	inc [hl]
@@ -396,9 +395,8 @@ Func_1e454d: ; 1e454d (79:454d)
 	inc [hl]
 	ret
 
-Func_1e4578: ; 1e4578 (79:4578)
+Func_1e4578:
 	ld a, [wActionHelpWarioAnimationEnded]
 	and a
 	ret z
 	jp Func_1e430d
-; 0x1e4580

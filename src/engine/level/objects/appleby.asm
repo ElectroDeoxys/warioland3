@@ -1,4 +1,4 @@
-ApplebyFunc: ; 479b8 (11:79b8)
+ApplebyFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -208,13 +208,12 @@ ApplebyFunc: ; 479b8 (11:79b8)
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ret
-; 0x47b0f
 
-AppleFunc_Left: ; 47b0f (11:7b0f)
+AppleFunc_Left:
 	ld a, HIGH(AppleFunc.Update1_Left)
 	ld b, LOW(AppleFunc.Update1_Left)
 	jr AppleFunc
-AppleFunc_Right: ; 47b15 (11:7b15)
+AppleFunc_Right:
 	ld a, HIGH(AppleFunc.Update1_Right)
 	ld b, LOW(AppleFunc.Update1_Right)
 AppleFunc:
@@ -346,4 +345,3 @@ AppleFunc:
 	ld [wCurObjAction], a
 	ld bc, Data_60040
 	jp ApplyObjYMovement
-; 0x47be6

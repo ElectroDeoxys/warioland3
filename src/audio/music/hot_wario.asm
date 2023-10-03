@@ -1,4 +1,4 @@
-Music_HotWario_Ch1: ; 3745a (0d:745a)
+Music_HotWario_Ch1:
 	semitone_offset 0
 
 .loop
@@ -85,9 +85,8 @@ Music_HotWario_Ch1: ; 3745a (0d:745a)
 	audio_jump .loop
 .end
 	audio_end
-; 0x374d1
 
-Music_HotWario_Ch2: ; 374d1 (0d:74d1)
+Music_HotWario_Ch2:
 	semitone_offset 0
 
 .loop
@@ -173,9 +172,8 @@ Music_HotWario_Ch2: ; 374d1 (0d:74d1)
 	audio_jump .loop
 .end
 	audio_end
-; 0x37534
 
-Music_HotWario_Ch3: ; 37534 (0d:7534)
+Music_HotWario_Ch3:
 	semitone_offset 0
 
 .loop
@@ -302,9 +300,8 @@ Music_HotWario_Ch3: ; 37534 (0d:7534)
 	audio_jump .loop
 .end
 	audio_end
-; 0x375c1
 
-Music_HotWario: ; 375c1 (d:75c1)
+Music_HotWario:
 	db $3, $2
 	dw Music_HotWario_Ch1
 	dw Music_HotWario_Ch2

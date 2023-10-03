@@ -1,4 +1,4 @@
-NobiiruFunc: ; 437d7 (10:77d7)
+NobiiruFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -33,7 +33,7 @@ NobiiruFunc: ; 437d7 (10:77d7)
 	ld [hl], a
 	ret
 
-.Func_4380e: ; 4380e (10:780e)
+.Func_4380e:
 	ld a, [wCurObjVar1]
 	jumptable
 
@@ -371,4 +371,3 @@ NobiiruFunc: ; 437d7 (10:77d7)
 .asm_43a42
 	call MoveObjectLeftByVar2
 	jp .asm_437f7
-; 0x43a48

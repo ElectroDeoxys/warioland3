@@ -1,4 +1,4 @@
-Music_MusicBoxCave_Ch1: ; 39d67 (0e:5d67)
+Music_MusicBoxCave_Ch1:
 	semitone_offset 0
 
 .loop
@@ -22,9 +22,8 @@ Music_MusicBoxCave_Ch1: ; 39d67 (0e:5d67)
 	audio_jump .loop
 .end
 	audio_end
-; 0x39d85
 
-Music_MusicBoxCave_Ch2: ; 39d85 (0e:5d85)
+Music_MusicBoxCave_Ch2:
 	semitone_offset 0
 
 .loop
@@ -47,9 +46,8 @@ Music_MusicBoxCave_Ch2: ; 39d85 (0e:5d85)
 	audio_jump .loop
 .end
 	audio_end
-; 0x39da1
 
-Music_MusicBoxCave_Ch3: ; 39da1 (0e:5da1)
+Music_MusicBoxCave_Ch3:
 	semitone_offset 0
 
 .loop
@@ -66,9 +64,8 @@ Music_MusicBoxCave_Ch3: ; 39da1 (0e:5da1)
 	audio_jump .loop
 .end
 	audio_end
-; 0x39db7
 
-Music_MusicBoxCave: ; 39db7 (0e:5db7)
+Music_MusicBoxCave:
 	db 3, 2
 	dw Music_MusicBoxCave_Ch1
 	dw Music_MusicBoxCave_Ch2
@@ -82,4 +79,3 @@ Music_MusicBoxCave: ; 39db7 (0e:5db7)
 	dw Music_MusicBoxCave_Ch1.end
 	dw Music_MusicBoxCave_Ch2.end
 	dw Music_MusicBoxCave_Ch3.end
-; 0x39dcb

@@ -1,4 +1,4 @@
-Music_InvisibleWario_Ch1: ; 37b8c (0d:7b8c)
+Music_InvisibleWario_Ch1:
 	semitone_offset 0
 
 .loop
@@ -112,9 +112,8 @@ Music_InvisibleWario_Ch1: ; 37b8c (0d:7b8c)
 	audio_jump .loop
 .end
 	audio_end
-; 0x37c02
 
-Music_InvisibleWario_Ch2: ; 37c02 (0d:7c02)
+Music_InvisibleWario_Ch2:
 	semitone_offset 0
 
 .loop
@@ -227,9 +226,8 @@ Music_InvisibleWario_Ch2: ; 37c02 (0d:7c02)
 	audio_jump .loop
 .end
 	audio_end
-; 0x37c76
 
-Music_InvisibleWario_Ch3: ; 37c76 (0d:7c76)
+Music_InvisibleWario_Ch3:
 	semitone_offset 0
 
 .loop
@@ -348,9 +346,8 @@ Music_InvisibleWario_Ch3: ; 37c76 (0d:7c76)
 	audio_jump .loop
 .end
 	audio_end
-; 0x37cf0
 
-Music_InvisibleWario: ; 37cf0 (d:7cf0)
+Music_InvisibleWario:
 	db $3, $2
 	dw Music_InvisibleWario_Ch1
 	dw Music_InvisibleWario_Ch2

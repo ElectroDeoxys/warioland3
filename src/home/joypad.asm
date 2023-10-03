@@ -1,4 +1,4 @@
-UpdateJoypad:: ; 3d8 (0:3d8)
+UpdateJoypad::
 ; read the joypad register and translate it to something more
 ; workable for use in-game. There are 8 buttons, so we can use
 ; one byte to contain all player input.
@@ -50,9 +50,8 @@ ENDR
 	ld a, P1F_GET_NONE
 	ldh [rP1], a
 	ret
-; 0x418
 
-PushOAM:: ; 418 (0:418)
+PushOAM::
 	ldh [rDMA], a
 	ld a, NUM_SPRITE_OAM_STRUCTS
 .loop
@@ -60,4 +59,3 @@ PushOAM:: ; 418 (0:418)
 	jr nz, .loop
 	ret
 .end
-; 0x420

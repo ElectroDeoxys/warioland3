@@ -1,4 +1,4 @@
-MuddeeFunc: ; 55611 (15:5611)
+MuddeeFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -882,7 +882,7 @@ MuddeeFunc: ; 55611 (15:5611)
 	set 4, [hl]
 	ret
 
-Turtle1Func: ; 55c4a (15:5c4a)
+Turtle1Func:
 	xor a
 	ld [wDollBoyActiveBarrels], a
 	ld hl, wCurObjFlags
@@ -1102,9 +1102,8 @@ TurtleCommonFunc:
 .Func_55de0:
 	call SetOneWayPlatformAction
 	ret
-; 0x55de4
 
-Turtle2Func: ; 55de4 (15:5de4)
+Turtle2Func:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -1155,7 +1154,7 @@ Turtle2Func: ; 55de4 (15:5de4)
 	ld [wCurObjFlags], a
 	ret
 
-Func_55e33: ; 55e33 (15:5e33)
+Func_55e33:
 	ld hl, wCurObjFrameDuration
 	ld a, [hli]
 	and a
@@ -1166,7 +1165,7 @@ Func_55e33: ; 55e33 (15:5e33)
 	play_sfx SFX_084
 	ret
 
-Pals_55e46: ; 55e46 (15:5e46)
+Pals_55e46:
 	rgb 28, 28, 28
 	rgb 31,  7,  6
 	rgb 31, 31,  9

@@ -1,4 +1,4 @@
-Music_GolfGameOver_Ch1: ; 395ef (0e:55ef)
+Music_GolfGameOver_Ch1:
 	semitone_offset 0
 	tempo 90
 	wave WAVE_51
@@ -24,9 +24,8 @@ Music_GolfGameOver_Ch1: ; 395ef (0e:55ef)
 	note NOTE_DURATION_6, C_4
 	audio_wait_24
 	audio_end
-; 0x39611
 
-Music_GolfGameOver_Ch2: ; 39611 (0e:5611)
+Music_GolfGameOver_Ch2:
 	semitone_offset 0
 	wave WAVE_47
 	volume 75
@@ -37,9 +36,8 @@ Music_GolfGameOver_Ch2: ; 39611 (0e:5611)
 	note NOTE_DURATION_6, E_3
 	audio_wait_24
 	audio_end
-; 0x39621
 
-Music_GolfGameOver_Ch3: ; 39621 (0e:5621)
+Music_GolfGameOver_Ch3:
 	semitone_offset 0
 	wave WAVE_5E
 	volume 108
@@ -64,9 +62,8 @@ Music_GolfGameOver_Ch3: ; 39621 (0e:5621)
 	note NOTE_DURATION_6, C_0
 	audio_wait_24
 	audio_end
-; 0x39641
 
-Music_GolfGameOver: ; 39641 (0e:5641)
+Music_GolfGameOver:
 	db 3, 0
 	dw Music_GolfGameOver_Ch1
 	dw Music_GolfGameOver_Ch2

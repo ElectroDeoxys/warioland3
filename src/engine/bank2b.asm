@@ -1,6 +1,6 @@
 	SETCHARMAP temple
 
-Func_ac000: ; ac000 (2b:4000)
+Func_ac000:
 	ld h, b
 	ld l, c
 	res 1, l
@@ -8,9 +8,8 @@ Func_ac000: ; ac000 (2b:4000)
 	call UpdateOWAnimation
 	ld a, [bc]
 	ret
-; 0xac00b
 
-Func_ac00b: ; ac00b (2b:400b)
+Func_ac00b:
 	ld h, b
 	ld l, c
 	res 1, l
@@ -18,9 +17,8 @@ Func_ac00b: ; ac00b (2b:400b)
 	call UpdateOWAnimation
 	ld a, [bc]
 	ret
-; 0xac016
 
-Func_ac016: ; ac016 (2b:4016)
+Func_ac016:
 	ld h, b
 	ld l, c
 	res 1, l
@@ -30,7 +28,7 @@ Func_ac016: ; ac016 (2b:4016)
 	ret
 
 ; unreferenced
-Func_ac021: ; ac021 (2b:4021)
+Func_ac021:
 	ld h, b
 	ld l, c
 	res 1, l
@@ -38,9 +36,8 @@ Func_ac021: ; ac021 (2b:4021)
 	call UpdateOWAnimation
 	ld a, [bc]
 	ret
-; 0xac02c
 
-Func_ac02c: ; ac02c (2b:402c)
+Func_ac02c:
 	ld h, b
 	ld l, c
 	res 1, l
@@ -48,9 +45,8 @@ Func_ac02c: ; ac02c (2b:402c)
 	call UpdateOWAnimation
 	ld a, [bc]
 	ret
-; 0xac037
 
-Func_ac037: ; ac037 (2b:4037)
+Func_ac037:
 	ld h, b
 	ld l, c
 	res 1, l
@@ -58,39 +54,33 @@ Func_ac037: ; ac037 (2b:4037)
 	call UpdateOWAnimation
 	ld a, [bc]
 	ret
-; 0xac042
 
-Func_ac042: ; ac042 (2b:4042)
+Func_ac042:
 	ld b, $57
 	jp AddOWSpriteWithScroll
-; 0xac047
 
-Func_ac047: ; ac047 (2b:4047)
+Func_ac047:
 	ld b, $57
 	jp AddOWSpriteWithScroll
-; 0xac04c
 
-Func_ac04c: ; ac04c (2b:404c)
+Func_ac04c:
 	ld b, $57
 	jp AddOWSpriteWithScroll
-; 0xac051
 
-Func_ac051: ; ac051 (2b:4051)
+Func_ac051:
 	ld b, $57
 	jp AddOWSprite
-; 0xac056
 
-Func_ac056: ; ac056 (2b:4056)
+Func_ac056:
 	ld de, Frameset_76ca
 	call Func_ac02c
 	ld de, OAM_75c3
 	ld b, BANK(OAM_75c3)
 	jp AddOWSprite
-; 0xac064
 
 ; return nz if animation is not finished yet
 ; e = new state
-SetObjStateIfAnimationIsFinished: ; ac064 (2b:4064)
+SetObjStateIfAnimationIsFinished:
 	ld a, [wOWAnimationFinished]
 	cp $ff
 	ret nz
@@ -104,13 +94,13 @@ SetObjStateIfAnimationIsFinished: ; ac064 (2b:4064)
 	ld c, l
 	ret
 
-Func_ac074: ; ac074 (2b:4074)
+Func_ac074:
 	ld bc, wCurSceneObjState
 	call Func_ac0b6
 	ld bc, wSceneObj1State
 	jp Func_ac0b6
 
-Func_ac080: ; ac080 (2b:4080)
+Func_ac080:
 	ld bc, wSceneObj5State
 	call Func_ac0b6
 	ld bc, wSceneObj6State
@@ -130,7 +120,7 @@ Func_ac080: ; ac080 (2b:4080)
 	ld bc, wSceneObj13State
 	jp Func_ac0b6
 
-Func_ac0b6: ; ac0b6 (2b:40b6)
+Func_ac0b6:
 	ld a, [bc]
 	jumptable
 	dw .Func_ac11c
@@ -453,18 +443,16 @@ Func_ac0b6: ; ac0b6 (2b:40b6)
 	ld d, $de
 	ld e, $f9
 	jr .asm_ac290
-; 0xac2b2
 
-Func_ac2b2: ; ac2b2 (2b:42b2)
+Func_ac2b2:
 	ld bc, wCurSceneObjState
 	call UpdateTempleSceneObjAnimation
 	ld bc, wSceneObj1State
 	call UpdateTempleSceneObjAnimation
 	ld bc, wSceneObj2State
 	jp UpdateTempleSceneObjAnimation
-; 0xac2c4
 
-UpdateTempleSceneObjs: ; ac2c4 (2b:42c4)
+UpdateTempleSceneObjs:
 	ld bc, wSceneObj3State
 	call UpdateTempleSceneObjAnimation
 	ld bc, wSceneObj4State
@@ -487,9 +475,8 @@ UpdateTempleSceneObjs: ; ac2c4 (2b:42c4)
 	call UpdateTempleSceneObjAnimation
 	ld bc, wSceneObj15State
 	jp UpdateTempleSceneObjAnimation ; unnecessary jump
-; 0xac306
 
-UpdateTempleSceneObjAnimation: ; ac306 (2b:4306)
+UpdateTempleSceneObjAnimation:
 	ld a, [bc]
 	jumptable
 	dw .Func_ac358
@@ -636,9 +623,8 @@ UpdateTempleSceneObjAnimation: ; ac306 (2b:4306)
 	call SetObjStateIfAnimationIsFinished
 	jr nz, .asm_ac3c4
 	jp UpdateTempleSceneObjAnimation
-; 0xac3d9
 
-Func_ac3d9: ; ac3d9 (2b:43d9)
+Func_ac3d9:
 	ld bc, wCurSceneObjState
 	call Func_ac409
 	ld bc, wSceneObj1State
@@ -651,16 +637,14 @@ Func_ac3d9: ; ac3d9 (2b:43d9)
 	call Func_ac409
 	ld bc, wSceneObj5State
 	jp Func_ac409
-; 0xac3fd
 
-Func_ac3fd: ; ac3fd (2b:43fd)
+Func_ac3fd:
 	ld bc, wSceneObj8State
 	call Func_ac409
 	ld bc, wSceneObj9State
 	jp Func_ac409
-; 0xac409
 
-Func_ac409: ; ac409 (2b:4409)
+Func_ac409:
 	ld a, [bc]
 	jumptable
 	dw .Func_ac450
@@ -810,9 +794,8 @@ Func_ac409: ; ac409 (2b:4409)
 .Func_ac4f4
 	ld de, Frameset_15e80a
 	jp .Func_ac43b
-; 0xac4fa
 
-Func_ac4fa: ; ac4fa (2b:44fa)
+Func_ac4fa:
 	ld hl, w2d14c
 	ld a, [hl]
 	and a
@@ -827,9 +810,8 @@ Func_ac4fa: ; ac4fa (2b:44fa)
 	ld [w2d14c], a
 .asm_ac514
 	ret
-; 0xac515
 
-Func_ac515: ; ac515 (2b:4515)
+Func_ac515:
 	ld hl, w2d14c
 	inc [hl]
 	ld a, [hl]
@@ -839,9 +821,8 @@ Func_ac515: ; ac515 (2b:4515)
 	ld [hl], a
 	play_sfx SFX_137
 	ret
-; 0xac528
 
-UpdateSceneWarioAnimation: ; ac528 (2b:4528)
+UpdateSceneWarioAnimation:
 	call .DoAnimation
 	ld a, [wSceneWarioState]
 	and a
@@ -1358,10 +1339,9 @@ UpdateSceneWarioAnimation: ; ac528 (2b:4528)
 .IdleFront
 	ld de, Frameset_1fc316
 	jp .UpdateAnimation
-; 0xac8b8
 
 ; unreferenced?
-DebugSceneWario: ; ac8b8 (2b:48b8)
+DebugSceneWario:
 	ld a, [wJoypadPressed]
 	ld b, a
 	ld a, [wDebugSceneWarioState]
@@ -1382,7 +1362,7 @@ DebugSceneWario: ; ac8b8 (2b:48b8)
 	ld [wDebugSceneWarioState], a
 ;	fallthrough
 
-SetSceneWarioState: ; ac8d4 (2b:48d4)
+SetSceneWarioState:
 	ld [wSceneWarioState], a
 	ld b, 0
 	cp SCENEWARIO_GROUP_00
@@ -1503,20 +1483,17 @@ ENDM
 	scene_wario_gfx OAM_1fc31b, WarioIdleGfx  ; SCENEWARIO_GROUP_11
 	scene_wario_gfx OAM_1673c,  WarioHotGfx   ; SCENEWARIO_GROUP_12
 	scene_wario_gfx OAM_1fc000, WarioClearGfx ; SCENEWARIO_GROUP_13
-; 0xac9b6
 
 	ret ; stray ret
-; 0xac9b7
 
-InvalidMusicBoxAction: ; ac9b7 (2b:49b7)
+InvalidMusicBoxAction:
 	debug_nop
-; 0xac9ba
 
-Func_ac9ba: ; ac9ba (2b:49ba)
+Func_ac9ba:
 	farcall Func_84e86
 	ret
 
-Func_ac9ca: ; ac9ca (2b:49ca)
+Func_ac9ca:
 	farcall Func_84e43
 	ld a, [wPalConfig1TotalSteps]
 	and a
@@ -1526,15 +1503,15 @@ Func_ac9ca: ; ac9ca (2b:49ca)
 	inc [hl]
 	ret
 
-Func_ac9e4: ; ac9e4 (2b:49e4)
+Func_ac9e4:
 	ld hl, wPalConfig2
 	jr Func_ac9ec
 
-Func_ac9e9: ; ac9e9 (2b:49e9)
+Func_ac9e9:
 	ld hl, wPalConfig1
 ;	fallthrough
 
-Func_ac9ec: ; ac9ec (2b:49ec)
+Func_ac9ec:
 	ld c, $5
 .loop
 	ld a, [de]
@@ -1543,30 +1520,28 @@ Func_ac9ec: ; ac9ec (2b:49ec)
 	dec c
 	jr nz, .loop
 	ret
-; 0xac9f5
 
-Data_ac9f5: ; ac9f5 (2b:49f5)
+Data_ac9f5:
 	db LOW(rBCPS), BCPSF_AUTOINC
 	db 8 ; number of pals
 	db HIGH(wTempPals1), LOW(wTempPals1) ; source pals
 
-Data_ac9fa: ; ac9fa (2b:49fa)
+Data_ac9fa:
 	db LOW(rBCPS), BCPSF_AUTOINC
 	db 8 ; number of pals
 	db HIGH(wTempBGPals), LOW(wTempBGPals) ; source pals
 
-Data_ac9ff: ; ac9ff (2b:49ff)
+Data_ac9ff:
 	db LOW(rOCPS), OCPSF_AUTOINC
 	db 1 ; number of pals
 	db HIGH(wTempOBPals), LOW(wTempOBPals) ; source pals
 
-Data_aca04: ; aca04 (2b:4a04)
+Data_aca04:
 	db LOW(rOCPS), OCPSF_AUTOINC
 	db 8 ; number of pals
 	db HIGH(wTempPals2), LOW(wTempPals2) ; source pals
-; 0xaca09
 
-Func_aca09: ; aca09 (2b:4a09)
+Func_aca09:
 	ld hl, wTempPals2
 	ld de, wTempOBPals
 	ld b, 8 palettes
@@ -1576,16 +1551,15 @@ Func_aca09: ; aca09 (2b:4a09)
 	ld b, 8 palettes
 	call CopyHLToDE
 	ret
-; 0xaca20
 
 ; unreferenced
-Func_aca20: ; aca20 (2b:4a20)
+Func_aca20:
 	ld hl, wTempPals1
 	jr Func_aca28
 
-Func_aca25: ; aca25 (2b:4a25)
+Func_aca25:
 	ld hl, wTempPals2
-Func_aca28: ; aca28 (2b:4a28)
+Func_aca28:
 	ld c, 4 palettes
 .loop
 	ld a, LOW(PALRGB_WHITE)
@@ -1595,11 +1569,10 @@ Func_aca28: ; aca28 (2b:4a28)
 	dec c
 	jr nz, .loop
 	ret
-; 0xaca34
 
 ; moves scene Wario 1.5 pixels to left
 ; if d-left is pressed, moves 2 pixels
-ApplySceneWarioMovementLeft: ; aca34 (2b:4a34)
+ApplySceneWarioMovementLeft:
 	ld a, [wJoypadDown]
 	swap a
 	rra
@@ -1615,11 +1588,10 @@ ApplySceneWarioMovementLeft: ; aca34 (2b:4a34)
 	ld a, [hl]
 	and $fe
 	ret
-; 0xaca4c
 
 ; moves scene Wario 1.5 pixels to right
 ; if d-right is pressed, moves 2 pixels
-ApplySceneWarioMovementRight: ; aca4c (2b:4a4c)
+ApplySceneWarioMovementRight:
 	ld a, [wJoypadDown]
 	swap a
 	ld b, a
@@ -1635,28 +1607,25 @@ ApplySceneWarioMovementRight: ; aca4c (2b:4a4c)
 	and $fe
 	ret
 
-Func_aca63: ; aca63 (2b:4a63)
+Func_aca63:
 	ld hl, wOWUIObj1XCoord
 	dec [hl]
 	ret
-; 0xaca68
 
 ; unreferenced
-Func_aca68: ; aca68 (2b:4a68)
+Func_aca68:
 	ld hl, wOWUIObj1XCoord
 	inc [hl]
 	ret
-; 0xaca6d
 
-Func_aca6d: ; aca6d (2b:4a6d)
+Func_aca6d:
 	ld hl, w2d014
 	xor a
 	ld [hld], a
 	inc [hl] ; w2d013
 	ret
-; 0xaca74
 
-InitTextPrinting: ; aca74 (2b:4a74)
+InitTextPrinting:
 	call ClearText
 
 	ld de, wTextLine1
@@ -1679,9 +1648,8 @@ InitTextPrinting: ; aca74 (2b:4a74)
 	ld hl, wSceneObj1State
 	call SetSceneObjState
 	jr Func_aca6d
-; 0xaca9e
 
-Func_aca9e: ; aca9e (2b:4a9e)
+Func_aca9e:
 	call PrintTextWithHeader
 	ld a, [wCurTextLine]
 	cp $80
@@ -1689,9 +1657,8 @@ Func_aca9e: ; aca9e (2b:4a9e)
 	ld hl, wCurTextBufferPage
 	inc [hl]
 	jr Func_aca6d
-; 0xacaad
 
-LoadCurTextPageBufferPage: ; acaad (2b:4aad)
+LoadCurTextPageBufferPage:
 	ld a, [wCurTextBufferPage]
 	ld b, $00
 	swap a
@@ -1708,9 +1675,8 @@ LoadCurTextPageBufferPage: ; acaad (2b:4aad)
 	xor a
 	ld [wCurTextLine], a
 	jr Func_aca6d
-; 0xacacd
 
-Func_acacd: ; acacd (2b:4acd)
+Func_acacd:
 	ld a, 1
 	ld hl, wCurTextBufferPage
 	cp [hl]
@@ -1724,17 +1690,15 @@ Func_acacd: ; acacd (2b:4acd)
 .clear
 	call ClearTextboxExceptHeader
 	jr Func_aca6d
-; 0xacae7
 
-Func_acae7: ; acae7 (2b:4ae7)
+Func_acae7:
 	call PrintTextWithoutHeader
 	ld a, [wCurTextLine]
 	cp $80
 	ret nz
 	jp Func_aca6d
-; 0xacaf3
 
-Func_acaf3: ; acaf3 (2b:4af3)
+Func_acaf3:
 	ld hl, wCurTextBufferPage
 	inc [hl]
 	ld a, [hl]
@@ -1765,9 +1729,8 @@ Func_acaf3: ; acaf3 (2b:4af3)
 	call Func_aca6d
 	scf
 	ret
-; 0xacb25
 
-_InitTempleScene: ; acb25 (2b:4b25)
+_InitTempleScene:
 	call DisableLCD
 	call FillBGMap0_With7f
 	call ClearVirtualOAM
@@ -1882,25 +1845,22 @@ _InitTempleScene: ; acb25 (2b:4b25)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0xacc9a
 
-ClearGeneralSceneRAM: ; acc9a (2b:4c9a)
+ClearGeneralSceneRAM:
 	ld hl, wLCDCFlagsToFlip
 	ld bc, wWRAM2End - wLCDCFlagsToFlip
 	xor a
 	call WriteAToHL_BCTimes
 	ret
-; 0xacca5
 
-ClearSceneObjsRAM: ; acca5 (2b:4ca5)
+ClearSceneObjsRAM:
 	ld hl, wSceneWario
 	ld bc, wSceneObjsEnd - wSceneWario
 	xor a
 	call WriteAToHL_BCTimes
 	ret
-; 0xaccb0
 
-VBlank_accb0: ; accb0 (2b:4cb0)
+VBlank_accb0:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -1991,9 +1951,8 @@ VBlank_accb0: ; accb0 (2b:4cb0)
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
 .end
-; 0xacd3a
 
-_UpdateTempleScene: ; acd3a (2b:4d3a)
+_UpdateTempleScene:
 	call .UpdateScene
 	call Func_ac2b2
 	call UpdateSceneWarioAnimation
@@ -2171,19 +2130,18 @@ _UpdateTempleScene: ; acd3a (2b:4d3a)
 	ld a, TRUE
 	ld [wTempleMusicIsPlaying], a
 	ret
-; 0xace60
 
-ClearTextbox: ; ace60 (2b:4e60)
+ClearTextbox:
 	ld d, 6 * BG_MAP_WIDTH ; dest lo
 	ld e, hdma 8
 	jr ClearTextboxAtCoord
 
-ClearTextboxExceptHeader: ; ace66 (2b:4e66)
+ClearTextboxExceptHeader:
 	ld d, 7 * BG_MAP_WIDTH ; dest lo
 	ld e, hdma 6
 ;	fallthrough
 
-ClearTextboxAtCoord: ; ace6a (2b:4e6a)
+ClearTextboxAtCoord:
 	ld b, HIGH(v0BGMap0 + $100) - $80 ; dest hi
 	ld a, [wBGMapToPrintText]
 	and a
@@ -2207,25 +2165,22 @@ ClearTextboxAtCoord: ; ace6a (2b:4e6a)
 	ld [wHDMADestVRAMBank], a
 	ld [wPendingCharDest + 0], a
 	ret
-; 0xace90
 
-FillClearedTextBuffer: ; ace90 (2b:4e90)
+FillClearedTextBuffer:
 	ld hl, wClearedTextBuffer
 	ld a, "@"
 	ld bc, 8 * TEXT_LINE_LENGTH
 	call WriteAToHL_BCTimes
 	ret
-; 0xace9c
 
-ClearText: ; ace9c (2b:4e9c)
+ClearText:
 	ld a, "@"
 	ld hl, wText
 	ld bc, 4 * TEXT_LINE_LENGTH
 	call WriteAToHL_BCTimes
 	ret
-; 0xacea8
 
-PrintTextWithHeader: ; acea8 (2b:4ea8)
+PrintTextWithHeader:
 	ld hl, wTextDelayCounter
 	inc [hl]
 	ld a, [wCurTextLine]
@@ -2243,7 +2198,7 @@ PrintTextWithHeader: ; acea8 (2b:4ea8)
 	ld [wCurTextLine], a
 	ret
 
-PrintTextWithoutHeader: ; acec4 (2b:4ec4)
+PrintTextWithoutHeader:
 	ld hl, wTextDelayCounter
 	inc [hl]
 	ld a, [wCurTextLine]
@@ -2259,11 +2214,11 @@ PrintTextWithoutHeader: ; acec4 (2b:4ec4)
 	ld [wCurTextLine], a
 	ret
 
-DelayTextThenGoToNextLine: ; acedd (2b:4edd)
+DelayTextThenGoToNextLine:
 	ld a, [wTextDelayCounter]
 	cp 10
 	ret c
-GoToNextLine: ; acee3 (2b:4ee3)
+GoToNextLine:
 	xor a
 	ld [wCurTextLinePos], a
 	ld [wTextDelayCounter], a
@@ -2271,24 +2226,24 @@ GoToNextLine: ; acee3 (2b:4ee3)
 	inc [hl]
 	ret
 
-PrintText_Line1: ; aceef (2b:4eef)
+PrintText_Line1:
 	ld c, 0
 	jr PrintText
 
-PrintText_Line2: ; acef3 (2b:4ef3)
+PrintText_Line2:
 	ld c, 1
 	jr PrintText
 
-PrintText_Line3: ; acef7 (2b:4ef7)
+PrintText_Line3:
 	ld c, 2
 	jr PrintText
 
-PrintText_Line4: ; acefb (2b:4efb)
+PrintText_Line4:
 	ld c, 3
 	jr PrintText ; unnecessary jump
 
 ; prints text given in wTextBuffer
-PrintText: ; aceff (2b:4eff)
+PrintText:
 	ld a, [wPendingCharDest + 0]
 	and a
 	ret nz
@@ -2373,12 +2328,11 @@ PrintText: ; aceff (2b:4eff)
 	ld a, [wCurTextBufferLine]
 	ld c, a
 	jr .got_buffer_pos
-; 0xacf89
 
 ; checks which level is the next objective
 ; then loads from wTextBuffer the corresponding
 ; text for that objective to print
-LoadNextObjectiveText: ; acf89 (2b:4f89)
+LoadNextObjectiveText:
 	ld de, wTextLine1
 	ld hl, wTextBuffer
 	ld b, TEXT_LINE_LENGTH
@@ -2444,21 +2398,19 @@ LoadNextObjectiveText: ; acf89 (2b:4f89)
 	ld b, TEXT_LINE_LENGTH
 	call CopyHLToDE
 	ret
-; 0xad011
 
-Func_ad011: ; ad011 (2b:5011)
+Func_ad011:
 	ld a, [w2d014]
 	cp c
 	ret c
-Func_ad016: ; ad016 (2b:5016)
+Func_ad016:
 	ld hl, w2d014
 	xor a
 	ld [hld], a
 	inc [hl]
 	ret
-; 0xad01d
 
-SetFightAgainstAHiddenFigure: ; ad01d (2b:501d)
+SetFightAgainstAHiddenFigure:
 	stop_music2
 	stop_sfx
 	xor a
@@ -2467,9 +2419,8 @@ SetFightAgainstAHiddenFigure: ; ad01d (2b:501d)
 	inc [hl] ; ST_LEVEL
 	scf
 	ret
-; 0xad03b
 
-HiddenFigureRevealScene: ; ad03b (2b:503b)
+HiddenFigureRevealScene:
 	ld a, [w2d013]
 	cp $02
 	jr c, .cant_skip
@@ -2889,41 +2840,36 @@ HiddenFigureRevealScene: ; ad03b (2b:503b)
 	ld [wSceneObj1State], a
 	call ClearTextbox
 	jp Func_ad016
-; 0xad329
 
-Func_ad329: ; ad329 (2b:5329)
+Func_ad329:
 	ld a, [wSceneWarioState]
 	cp b
 	ret nz
 	jr Func_ad335
-; 0xad330
 
-Func_ad330: ; ad330 (2b:5330)
+Func_ad330:
 	ld a, [w2d891]
 	cp c
 	ret c
-Func_ad335: ; ad335 (2b:5335)
+Func_ad335:
 	ld hl, w2d891
 	xor a
 	ld [hld], a
 	inc [hl]
 	ret
-; 0xad33c
 
-Func_ad33c: ; ad33c (2b:533c)
+Func_ad33c:
 	xor a
 	ld hl, w2d890
 	ld [hli], a
 	ld [hl], a ; w2d891
 	jp Func_ad016
-; 0xad345
 
-HandleTempleShakeAndRocks: ; ad345 (2b:5345)
+HandleTempleShakeAndRocks:
 	farcall _HandleTempleShakeAndRocks
 	ret
-; 0xad355
 
-HandleHiddenFigureReveal: ; ad355 (2b:5355)
+HandleHiddenFigureReveal:
 	call HandleTempleWarioPanic
 
 	ld hl, w2d891
@@ -2978,9 +2924,8 @@ HandleHiddenFigureReveal: ; ad355 (2b:5355)
 	cp SCENEWARIO_LOOK_BACK
 	ret nz
 	jp Func_ad335
-; 0xad3af
 
-HandleEnterTempleWithAllMusicBoxesScene: ; ad3af (2b:53af)
+HandleEnterTempleWithAllMusicBoxesScene:
 	ld hl, w2d891
 	inc [hl]
 	ld c, l
@@ -3074,9 +3019,8 @@ HandleEnterTempleWithAllMusicBoxesScene: ; ad3af (2b:53af)
 	xor a
 	ld [wSceneObj1State], a
 	jp Func_ad33c
-; 0xad445
 
-Func_ad445: ; ad445 (2b:5445)
+Func_ad445:
 	call HandleTempleMusicBoxes
 
 	ld hl, w2d891
@@ -3149,9 +3093,8 @@ Func_ad445: ; ad445 (2b:5445)
 	ld a, $08
 	ld [w2d8a0], a
 	jp Func_ad335
-; 0xad4b1
 
-HandleTempleMusicBoxes: ; ad4b1 (2b:54b1)
+HandleTempleMusicBoxes:
 	call HandleTempleMusicBox1Hover
 	call HandleTempleMusicBox2Hover
 	call HandleTempleMusicBox3Hover
@@ -3255,10 +3198,9 @@ HandleTempleMusicBoxes: ; ad4b1 (2b:54b1)
 	ld de, wTempleMusicBox5
 	ld hl, wSceneObj12Unk7
 	jr .WaitThenDeinitMusicBox
-; 0xad543
 
 ; a = scene obj state
-InitTempleSceneMusicBox: ; ad543 (2b:5543)
+InitTempleSceneMusicBox:
 	ld [hl], $50 ; y
 	inc l
 	ld [hl], $4e ; x
@@ -3266,9 +3208,8 @@ InitTempleSceneMusicBox: ; ad543 (2b:5543)
 	set 2, l
 	call SetSceneObjState
 	ret
-; 0xad54f
 
-MoveMusicBoxUpLeft: ; ad54f (2b:554f)
+MoveMusicBoxUpLeft:
 	dec [hl] ; x
 	dec l
 	dec [hl] ; y
@@ -3276,14 +3217,12 @@ MoveMusicBoxUpLeft: ; ad54f (2b:554f)
 	ld a, [hl]
 	cp $2c
 	ret
-; 0xad557
 
-Func_ad557: ; ad557 (2b:5557)
+Func_ad557:
 	xor a
 	ld [hld], a
 	inc [hl]
 	ret
-; 0xad55b
 
 ; \1 = music box number
 ; \2 = scene object to use
@@ -3336,7 +3275,7 @@ ENDM
 	temple_music_box_hover 4, wSceneObj11, $6
 	temple_music_box_hover 5, wSceneObj12, $7
 
-Data_ad654: ; ad654 (2b:5654)
+Data_ad654:
 	db -2,  0
 	db -2,  0
 	db -1,  0
@@ -3418,9 +3357,8 @@ Data_ad654: ; ad654 (2b:5654)
 	db -2, -1
 	db -1,  0
 	db $80
-; 0xad6f5
 
-HandleTempleShakeScene: ; ad6f5 (2b:56f5)
+HandleTempleShakeScene:
 	call HandleTempleWarioPanic
 	call HandleTempleShakeAndRocks
 
@@ -3631,7 +3569,6 @@ HandleTempleShakeScene: ; ad6f5 (2b:56f5)
 	ret c
 	ld hl, wTempleRock6
 	jr .InitLargeTempleRock
-; 0xad837
 
 .InitLargeRock7
 	ld a, [bc]
@@ -3676,7 +3613,7 @@ HandleTempleShakeScene: ; ad6f5 (2b:56f5)
 	call SetSceneWarioState
 	jp Func_ad335
 
-.LookBack: ; ad878 (2b:5878)
+.LookBack:
 	ld b, SCENEWARIO_LOOK_BACK
 	jp Func_ad329
 
@@ -3687,9 +3624,8 @@ HandleTempleShakeScene: ; ad6f5 (2b:56f5)
 	ld a, $01
 	ld [w2d894], a
 	jp Func_ad335
-; 0xad889
 
-HandleTempleWarioPanic: ; ad889 (2b:5889)
+HandleTempleWarioPanic:
 	ld a, [w2d894]
 	cp $01
 	ret nz
@@ -3790,9 +3726,8 @@ HandleTempleWarioPanic: ; ad889 (2b:5889)
 	ld [w2d893], a
 	ld [w2d892], a
 	ret
-; 0xad91b
 
-DoHiddenFigureLeftHandMovement: ; ad91b (2b:591b)
+DoHiddenFigureLeftHandMovement:
 	ld a, [w2d8da]
 	and a
 	ret z
@@ -3800,9 +3735,8 @@ DoHiddenFigureLeftHandMovement: ; ad91b (2b:591b)
 	ld de, Data_ad939
 	call ApplyOWMovement
 	ret
-; 0xad92a
 
-DoHiddenFigureRightHandMovement: ; ad92a (2b:592a)
+DoHiddenFigureRightHandMovement:
 	ld a, [w2d8dc]
 	and a
 	ret z
@@ -3810,9 +3744,8 @@ DoHiddenFigureRightHandMovement: ; ad92a (2b:592a)
 	ld de, Data_ad939
 	call ApplyOWMovement_Mirrored
 	ret
-; 0xad939
 
-Data_ad939: ; ad939 (2b:5939)
+Data_ad939:
 	db  0,  0
 	db -1,  0
 	db  0,  0
@@ -3874,9 +3807,8 @@ Data_ad939: ; ad939 (2b:5939)
 	db -1,  0
 	db  0,  0
 	db $80
-; 0xad9b2
 
-Func_ad9b2: ; ad9b2 (2b:59b2)
+Func_ad9b2:
 	call DisableLCD
 	call FillBGMap0_With7f
 	call ClearVirtualOAM
@@ -4148,7 +4080,7 @@ Func_ad9b2: ; ad9b2 (2b:59b2)
 	call CopyHLToDE
 	ret
 
-Func_adbfe: ; adbfe (2b:5bfe)
+Func_adbfe:
 	call .Func_adc0b
 	call nc, .Func_adc2f
 	call UpdateSceneWarioAnimation
@@ -4432,9 +4364,8 @@ Func_adbfe: ; adbfe (2b:5bfe)
 	ret c
 	ld a, $00
 	jp .asm_adc4a
-; 0xaddc9
 
-Pals_addc9: ; addc9 (2b:5dc9)
+Pals_addc9:
 	rgb 31, 31, 31
 	rgb  4,  4,  4
 	rgb 29, 29, 29
@@ -4475,7 +4406,7 @@ Pals_addc9: ; addc9 (2b:5dc9)
 	rgb 10, 10, 10
 	rgb  2,  2,  2
 
-Pals_ade09: ; ade09 (2b:5e09)
+Pals_ade09:
 	rgb 31, 31, 31
 	rgb  9,  4,  0
 	rgb  8, 23, 31
@@ -4516,7 +4447,7 @@ Pals_ade09: ; ade09 (2b:5e09)
 	rgb 31,  0,  0
 	rgb  0,  3,  0
 
-_InitPrologueSequence: ; ade49 (2b:5e49)
+_InitPrologueSequence:
 	call ClearGeneralSceneRAM
 	call ClearSceneObjsRAM
 	call VBlank_accb0
@@ -4572,37 +4503,33 @@ _InitPrologueSequence: ; ade49 (2b:5e49)
 	ld a, LCDCF_BG9C00
 	ld [wLCDCFlagsToFlip], a
 	ret
-; 0xadf92
 
-Func_adf92: ; adf92 (2b:5f92)
+Func_adf92:
 	ld a, [w2d014]
 	cp c
 	ret c
 ;	fallthrough
 
-Func_adf97: ; adf97 (2b:5f97)
+Func_adf97:
 	ld hl, w2d014
 	xor a
 	ld [hld], a
 	inc [hl] ; w2d013
 	ret
-; 0xadf9e
 
-Func_adf9e: ; adf9e (2b:5f9e)
+Func_adf9e:
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0xadfa3
 
-Func_adfa3: ; adfa3 (2b:5fa3)
+Func_adfa3:
 	call Func_adfb0
 	call Func_ac3d9
 	call UpdateSceneWarioAnimation
 	call Func_ac3fd
 	ret
-; 0xadfb0
 
-Func_adfb0: ; adfb0 (2b:5fb0)
+Func_adfb0:
 	ld a, [w2d013]
 	jumptable
 
@@ -4645,40 +4572,35 @@ Func_adfb0: ; adfb0 (2b:5fb0)
 	dw Func_ae1af
 	dw Func_ae668
 	dw Func_adf9e
-; 0xae002
 
-Func_ae002: ; ae002 (2b:6002)
+Func_ae002:
 	ld c, $3c
 	jp Func_adf92
-; 0xae007
 
-Func_ae007: ; ae007 (2b:6007)
+Func_ae007:
 	ld a, $01
 ;	fallthrough
 
-Func_ae009: ; ae009 (2b:6009)
+Func_ae009:
 	ld [w2d880], a
 	xor a
 	ld [wPalConfig1TotalSteps], a
 	ld [wPalConfig2TotalSteps], a
 	jp Func_adf97
-; 0xae016
 
-Func_ae016: ; ae016 (2b:6016)
+Func_ae016:
 	ld hl, wSCX
 	inc [hl]
 	ld a, [hl]
 	cp $28
 	ret nz
 	jp Func_adf97
-; 0xae021
 
-Func_ae021: ; ae021 (2b:6021)
+Func_ae021:
 	ld a, $00
 	jr Func_ae009
-; 0xae025
 
-Func_ae025: ; ae025 (2b:6025)
+Func_ae025:
 	ld a, $70
 	ld [wSCY], a
 	xor a
@@ -4705,9 +4627,8 @@ Func_ae025: ; ae025 (2b:6025)
 	play_music2 MUSIC_MUSIC_BOX_CAVE
 	ld a, $06
 	jr Func_ae009
-; 0xae067
 
-Func_ae067: ; ae067 (2b:6067)
+Func_ae067:
 	ld hl, wSceneObj3YCoord
 	ld a, $c3
 	ld [hli], a
@@ -4717,9 +4638,8 @@ Func_ae067: ; ae067 (2b:6067)
 	ld a, $09
 	call SetSceneObjState
 	ret
-; 0xae079
 
-Func_ae079: ; ae079 (2b:6079)
+Func_ae079:
 	xor a
 	ld [wSCY], a
 	ld [wSCX], a
@@ -4744,7 +4664,7 @@ Func_ae079: ; ae079 (2b:6079)
 	ld hl, Pals_86a0d
 	;	fallthrough
 
-Func_ae0ab: ; ae0ab (2b:60ab)
+Func_ae0ab:
 	ld de, wTempPals1
 	ld c, 8 palettes
 	ld b, BANK(Pals_86a0d)
@@ -4755,9 +4675,8 @@ Func_ae0ab: ; ae0ab (2b:60ab)
 	ld de, Data_ac9ff
 	call Func_ac9e4
 	jp Func_adf97
-; 0xae0c4
 
-Func_ae0c4: ; ae0c4 (2b:60c4)
+Func_ae0c4:
 	ld a, $70
 	ld [wSCY], a
 	xor a
@@ -4779,9 +4698,8 @@ Func_ae0c4: ; ae0c4 (2b:60c4)
 	call CopyHLToDE
 	ld hl, Pals_869cd
 	jr Func_ae0ab
-; 0xae0f9
 
-Func_ae0f9: ; ae0f9 (2b:60f9)
+Func_ae0f9:
 	xor a
 	ld [wHDMADestVRAMBank], a
 	ld de, BGMap_b0300
@@ -4789,7 +4707,7 @@ Func_ae0f9: ; ae0f9 (2b:60f9)
 	ld c, hdma 36
 ;	fallthrough
 
-Func_ae104: ; ae104 (2b:6104)
+Func_ae104:
 	ld a, BANK(BGMap_b0300)
 	ld [wHDMABank], a
 	ld hl, wHDMA
@@ -4804,27 +4722,24 @@ Func_ae104: ; ae104 (2b:6104)
 	ld a, c
 	ld [hl], a
 	jp Func_adf97
-; 0xae119
 
-Func_ae119: ; ae119 (2b:6119)
+Func_ae119:
 	ld a, BANK("VRAM1")
 	ld [wHDMADestVRAMBank], a
 	ld de, BGMap_b0540
 	ld b, $18
 	ld c, hdma 36
 	jr Func_ae104
-; 0xae127
 
-Func_ae127: ; ae127 (2b:6127)
+Func_ae127:
 	xor a
 	ld [wHDMADestVRAMBank], a
 	ld de, BGMap_b0780
 	ld b, $10
 	ld c, hdma 128
 	jr Func_ae104
-; 0xae134
 
-Func_ae134: ; ae134 (2b:6134)
+Func_ae134:
 	xor a
 	ld [wSCY], a
 	ld [wSCX], a
@@ -4840,21 +4755,18 @@ Func_ae134: ; ae134 (2b:6134)
 	play_sfx SFX_0F5
 	ld a, $05
 	jp Func_ae009
-; 0xae15b
 
-Func_ae15b: ; ae15b (2b:615b)
+Func_ae15b:
 	ld a, [w2d014]
 	and $07
 	ret nz
 	jp Func_ac9ba
-; 0xae164
 
-Func_ae164: ; ae164 (2b:6164)
+Func_ae164:
 	ld a, $02
 	jp Func_ae009
-; 0xae169
 
-Func_ae169: ; ae169 (2b:6169)
+Func_ae169:
 	ld c, $07
 	ld a, [wPalConfig1TotalSteps]
 	cp $08
@@ -4865,20 +4777,17 @@ Func_ae169: ; ae169 (2b:6169)
 	and c
 	ret nz
 	jp Func_ac9ba
-; 0xae17c
 
-Func_ae17c: ; ae17c (2b:617c)
+Func_ae17c:
 	ld c, $1e
 	jp Func_adf92
-; 0xae181
 
-Func_ae181: ; ae181 (2b:6181)
+Func_ae181:
 	call Func_acaf3
 	call Func_ae188
 	ret
-; 0xae188
 
-Func_ae188: ; ae188 (2b:6188)
+Func_ae188:
 	ld a, [wCurTextBufferPage]
 	cp $02
 	jr z, .asm_ae190
@@ -4887,15 +4796,13 @@ Func_ae188: ; ae188 (2b:6188)
 	ld a, SCENEWARIO_LOOK_AROUND
 	call SetSceneWarioState
 	ret
-; 0xae196
 
-Func_ae196: ; ae196 (2b:6196)
+Func_ae196:
 	ld a, SCENEWARIO_NOD_ONCE
 	call SetSceneWarioState
 	jp Func_adf97
-; 0xae19e
 
-Func_ae19e: ; ae19e (2b:619e)
+Func_ae19e:
 	ld a, [wSceneWarioState]
 	cp SCENEWARIO_LOOK_BACK
 	ret nz
@@ -4903,9 +4810,8 @@ Func_ae19e: ; ae19e (2b:619e)
 	ld a, $01
 	call SetSceneObjState
 	jp Func_adf97
-; 0xae1af
 
-Func_ae1af: ; ae1af (2b:61af)
+Func_ae1af:
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	ret z
@@ -4914,37 +4820,34 @@ Func_ae1af: ; ae1af (2b:61af)
 	call SetSceneObjState
 	call ClearTextbox
 	jp Func_adf97
-; 0xae1c2
 
-Func_ae1c2: ; ae1c2 (2b:61c2)
+Func_ae1c2:
 	ld a, [wSceneWarioState]
 	cp b
 	ret nz
 	jr Func_ae1ce
 
-Func_ae1c9: ; ae1c9 (2b:61c9)
+Func_ae1c9:
 	ld a, [w2d891]
 	cp c
 	ret c
 ;	fallthrough
 
-Func_ae1ce: ; ae1ce (2b:61ce)
+Func_ae1ce:
 	ld hl, w2d891
 	xor a
 	ld [hld], a
 	inc [hl] ; w2d890
 	ret
-; 0xae1d5
 
-Func_ae1d5: ; ae1d5 (2b:61d5)
+Func_ae1d5:
 	xor a
 	ld hl, w2d890
 	ld [hli], a
 	ld [hl], a ; w2d891
 	jp Func_adf97
-; 0xae1de
 
-Func_ae1de: ; ae1de (2b:61de)
+Func_ae1de:
 	ld hl, w2d891
 	inc [hl]
 	dec l
@@ -4957,14 +4860,12 @@ Func_ae1de: ; ae1de (2b:61de)
 	dw Func_ae215
 	dw Func_ae229
 	dw Func_ae1d5
-; 0xae1f1
 
-Func_ae1f1: ; ae1f1 (2b:61f1)
+Func_ae1f1:
 	ld c, $14
 	jr Func_ae1c9
-; 0xae1f5
 
-Func_ae1f5: ; ae1f5 (2b:61f5)
+Func_ae1f5:
 	ld hl, wSceneObj4
 	ld a, $38
 	ld [hli], a
@@ -4975,14 +4876,12 @@ Func_ae1f5: ; ae1f5 (2b:61f5)
 	call SetSceneObjState
 	play_sfx SFX_104
 	jp Func_ae1ce
-; 0xae211
 
-Func_ae211: ; ae211 (2b:6211)
+Func_ae211:
 	ld c, $0a
 	jr Func_ae1c9
-; 0xae215
 
-Func_ae215: ; ae215 (2b:6215)
+Func_ae215:
 	ld hl, wSceneObj5
 	ld a, $30
 	ld [hli], a
@@ -4992,14 +4891,12 @@ Func_ae215: ; ae215 (2b:6215)
 	ld hl, wSceneObj5State
 	call SetSceneObjState
 	jp Func_ae1ce
-; 0xae229
 
-Func_ae229: ; ae229 (2b:6229)
+Func_ae229:
 	ld c, $5a
 	jr Func_ae1c9
-; 0xae22d
 
-Func_ae22d: ; ae22d (2b:622d)
+Func_ae22d:
 	call Func_ae2dd
 	ld hl, w2d891
 	inc [hl]
@@ -5020,15 +4917,13 @@ Func_ae22d: ; ae22d (2b:622d)
 	dw Func_ae2d3
 	dw Func_ae2d8
 	dw Func_ae1d5
-; 0xae251
 
-Func_ae251: ; ae251 (2b:6251)
+Func_ae251:
 	ld a, SCENEWARIO_WALK_RIGHT
 	call SetSceneWarioState
 	jp Func_ae1ce
-; 0xae259
 
-Func_ae259: ; ae259 (2b:6259)
+Func_ae259:
 	call ApplySceneWarioMovementRight
 	cp $32
 	jr z, Func_ae26c
@@ -5036,25 +4931,23 @@ Func_ae259: ; ae259 (2b:6259)
 	ret nz
 	ld [hl], a
 
-Func_ae264: ; ae264 (2b:6264)
+Func_ae264:
 	ld a, SCENEWARIO_IDLE_RIGHT
 	call SetSceneWarioState
 	jp Func_ae1ce
 
-Func_ae26c: ; ae26c (2b:626c)
+Func_ae26c:
 	ld a, $01
 	ld [w2d8b0], a
 	ret
-; 0xae272
 
-Func_ae272: ; ae272 (2b:6272)
+Func_ae272:
 	ld a, [w2d8b0]
 	and a
 	ret nz
 	jp Func_ae1ce
-; 0xae27a
 
-Func_ae27a: ; ae27a (2b:627a)
+Func_ae27a:
 	ld a, [w2d891]
 	cp $16
 	ret c
@@ -5070,29 +4963,25 @@ Func_ae27a: ; ae27a (2b:627a)
 	call SetSceneObjState
 	play_sfx SFX_106
 	jp Func_ae1ce
-; 0xae2a2
 
-Func_ae2a2: ; ae2a2 (2b:62a2)
+Func_ae2a2:
 	ld a, [wCurSceneObjState]
 	and a
 	ret nz
 	jp Func_ae1ce
-; 0xae2aa
 
-Func_ae2aa: ; ae2aa (2b:62aa)
+Func_ae2aa:
 	ld c, $1a
 	jp Func_ae1c9
-; 0xae2af
 
-Func_ae2af: ; ae2af (2b:62af)
+Func_ae2af:
 	call ApplySceneWarioMovementRight
 	cp $66
 	ret nz
 	ld [hl], a
 	jr Func_ae264
-; 0xae2b8
 
-Func_ae2b8: ; ae2b8 (2b:62b8)
+Func_ae2b8:
 	ld a, [w2d891]
 	cp $14
 	jr z, .asm_ae2c5
@@ -5103,25 +4992,21 @@ Func_ae2b8: ; ae2b8 (2b:62b8)
 	ld a, $03
 	ld [w2d8b0], a
 	ret
-; 0xae2cb
 
-Func_ae2cb: ; ae2cb (2b:62cb)
+Func_ae2cb:
 	ld a, SCENEWARIO_LOOK_MUSIC_BOX
 	call SetSceneWarioState
 	jp Func_ae1ce
-; 0xae2d3
 
-Func_ae2d3: ; ae2d3 (2b:62d3)
+Func_ae2d3:
 	ld b, SCENEWARIO_HOLD_MUSIC_BOX
 	jp Func_ae1c2
-; 0xae2d8
 
-Func_ae2d8: ; ae2d8 (2b:62d8)
+Func_ae2d8:
 	ld c, $3c
 	jp Func_ae1c9
-; 0xae2dd
 
-Func_ae2dd: ; ae2dd (2b:62dd)
+Func_ae2dd:
 	ld a, [w2d8b0]
 	jumptable
 	dw Func_ae2fb
@@ -5130,29 +5015,26 @@ Func_ae2dd: ; ae2dd (2b:62dd)
 	dw Func_ae2ed
 	dw Func_ae2fc
 	dw Func_ae30e
-; 0xae2ed
 
-Func_ae2ed: ; ae2ed (2b:62ed)
+Func_ae2ed:
 	ld a, $0e
 	ld hl, wSceneObj1State
 	call SetSceneObjState
-Func_ae2f5: ; ae2f5 (2b:62f5)
+Func_ae2f5:
 	ld hl, w2d8b1
 	xor a
 	ld [hld], a
 	inc [hl] ; w2d8b0
-Func_ae2fb: ; ae2fb (2b:62fb)
+Func_ae2fb:
 	ret
-; 0xae2fc
 
-Func_ae2fc: ; ae2fc (2b:62fc)
+Func_ae2fc:
 	ld a, [wSceneObj1State]
 	and a
 	ret nz
 	jr Func_ae2f5
-; 0xae303
 
-Func_ae303: ; ae303 (2b:6303)
+Func_ae303:
 	ld a, [wSceneObj1State]
 	and a
 	ret nz
@@ -5160,9 +5042,8 @@ Func_ae303: ; ae303 (2b:6303)
 	ld [hli], a
 	ld [hl], a
 	ret
-; 0xae30e
 
-Func_ae30e: ; ae30e (2b:630e)
+Func_ae30e:
 	ld hl, w2d8b1
 	inc [hl]
 	ld a, [hl]
@@ -5172,9 +5053,8 @@ Func_ae30e: ; ae30e (2b:630e)
 	dec [hl]
 	dec [hl]
 	ret
-; 0xae31c
 
-Func_ae31c: ; ae31c (2b:631c)
+Func_ae31c:
 	call Func_ae523
 	ld hl, w2d891
 	inc [hl]
@@ -5203,35 +5083,30 @@ Func_ae31c: ; ae31c (2b:631c)
 	dw Func_ae4e5
 	dw Func_ae51e
 	dw Func_ae1d5
-; 0xae352
 
-Func_ae352: ; ae352 (2b:6352)
+Func_ae352:
 	ld a, [wSceneObj1State]
 	and a
 	ret nz
 	jp Func_ae1ce
-; 0xae35a
 
-Func_ae35a: ; ae35a (2b:635a)
+Func_ae35a:
 	ld a, [w2d891]
 	cp $14
 	ret c
 	stop_music2
 	jp Func_ae1ce
-; 0xae36f
 
-Func_ae36f: ; ae36f (2b:636f)
+Func_ae36f:
 	ld c, $1e
 	jp Func_ae1c9
-; 0xae374
 
-Func_ae374: ; ae374 (2b:6374)
+Func_ae374:
 	ld a, SCENEWARIO_PICKUP_MUSIC_BOX
 	call SetSceneWarioState
 	jp Func_ae1ce
-; 0xae37c
 
-Func_ae37c: ; ae37c (2b:637c)
+Func_ae37c:
 	ld a, [w2d891]
 	cp $08
 	ret nc
@@ -5239,9 +5114,8 @@ Func_ae37c: ; ae37c (2b:637c)
 	ld a, $0a
 	call SetSceneObjState
 	jp Func_ae1ce
-; 0xae38d
 
-Func_ae38d: ; ae38d (2b:638d)
+Func_ae38d:
 	ld hl, wSceneWario
 	ld a, [w2d891]
 	cp $01
@@ -5261,9 +5135,8 @@ Func_ae38d: ; ae38d (2b:638d)
 	inc l
 	dec [hl] ; x
 	ret
-; 0xae3a9
 
-Func_ae3a9: ; ae3a9 (2b:63a9)
+Func_ae3a9:
 	ld a, [w2d891]
 	and $07
 	ret nz
@@ -5286,21 +5159,18 @@ Func_ae3a9: ; ae3a9 (2b:63a9)
 	ld a, $01
 	ld [w2d150], a
 	ret
-; 0xae3d3
 
-Func_ae3d3: ; ae3d3 (2b:63d3)
+Func_ae3d3:
 	ld c, $78
 	jp Func_ae1c9
-; 0xae3d8
 
-Func_ae3d8: ; ae3d8 (2b:63d8)
+Func_ae3d8:
 	xor a
 	ld hl, wSceneObj2State
 	call SetSceneObjState
 	jp Func_ae1ce
-; 0xae3e2
 
-Func_ae3e2: ; ae3e2 (2b:63e2)
+Func_ae3e2:
 	ld hl, wCurSceneObj
 	ld a, [wSceneWarioYCoord]
 	sub $08
@@ -5311,18 +5181,16 @@ Func_ae3e2: ; ae3e2 (2b:63e2)
 	ld hl, wCurSceneObjState
 	call SetSceneObjState
 	jp Func_ae1ce
-; 0xae3fa
 
-Func_ae3fa: ; ae3fa (2b:63fa)
+Func_ae3fa:
 	ld a, [wCurSceneObjState]
 	and a
 	ret nz
 	ld a, $80
 	ld [w2d150], a
 	jp Func_ae1ce
-; 0xae407
 
-Func_ae407: ; ae407 (2b:6407)
+Func_ae407:
 	ld hl, wCurSceneObj
 	ld a, [wSceneWarioYCoord]
 	sub $10
@@ -5346,23 +5214,20 @@ Func_ae407: ; ae407 (2b:6407)
 	ld de, Data_ac9ff
 	call Func_ac9e4
 	jp Func_ae1ce
-; 0xae435
 
-Func_ae435: ; ae435 (2b:6435)
+Func_ae435:
 	ld a, [wCurSceneObjState]
 	cp $16
 	ret nz
 	xor a ; SCENEWARIO_NONE
 	call SetSceneWarioState
 	jp Func_ae1ce
-; 0xae442
 
-Func_ae442: ; ae442 (2b:6442)
+Func_ae442:
 	ld c, $3c
 	jp Func_ae1c9
-; 0xae447
 
-Func_ae447: ; ae447 (2b:6447)
+Func_ae447:
 	ld hl, wCurSceneObj
 	ld a, [hli]
 	cp $b5
@@ -5395,9 +5260,8 @@ Func_ae447: ; ae447 (2b:6447)
 	ld hl, wCurSceneObjState
 	call SetSceneObjState
 	ret
-; 0xae476
 
-Func_ae476: ; ae476 (2b:6476)
+Func_ae476:
 	ld a, $09
 	ld hl, wSceneObj3State
 	call SetSceneObjState
@@ -5405,9 +5269,8 @@ Func_ae476: ; ae476 (2b:6476)
 	ld hl, wCurSceneObjState
 	call SetSceneObjState
 	jp Func_ae1ce
-; 0xae488
 
-Func_ae488: ; ae488 (2b:6488)
+Func_ae488:
 	ld a, [w2d891]
 	srl a
 	ret c
@@ -5425,14 +5288,12 @@ Func_ae488: ; ae488 (2b:6488)
 	dec [hl]
 	dec [hl]
 	ret
-; 0xae4a4
 
-Func_ae4a4: ; ae4a4 (2b:64a4)
+Func_ae4a4:
 	ld c, $28
 	jp Func_ae1c9
-; 0xae4a9
 
-Func_ae4a9: ; ae4a9 (2b:64a9)
+Func_ae4a9:
 	ld hl, w2d891
 	call Func_ae4c0
 	ld hl, wSceneObj3YCoord
@@ -5444,9 +5305,8 @@ Func_ae4a9: ; ae4a9 (2b:64a9)
 	ld [hl], a
 	call Func_ae515
 	jp Func_ae1ce
-; 0xae4c0
 
-Func_ae4c0: ; ae4c0 (2b:64c0)
+Func_ae4c0:
 	ld a, [hl]
 	cp $14
 	jr c, .asm_ae4c8
@@ -5462,9 +5322,8 @@ Func_ae4c0: ; ae4c0 (2b:64c0)
 
 .data_ae4d1
 	db 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 2, 2
-; 0xae4e5
 
-Func_ae4e5: ; ae4e5 (2b:64e5)
+Func_ae4e5:
 	ld hl, w2d891
 	call Func_ae4fe
 	and a
@@ -5478,9 +5337,8 @@ Func_ae4e5: ; ae4e5 (2b:64e5)
 	cp b
 	ret nz
 	jp Func_ae1ce
-; 0xae4fe
 
-Func_ae4fe: ; ae4fe (2b:64fe)
+Func_ae4fe:
 	ld a, [hl]
 	ld e, a
 	ld d, $00
@@ -5491,19 +5349,16 @@ Func_ae4fe: ; ae4fe (2b:64fe)
 	ret
 .data_ae509
 	db 0, -2, 0, 0, 1, 0, 1, 0, -1, 0, 1, $80
-; 0xae515
 
-Func_ae515: ; ae515 (2b:6515)
+Func_ae515:
 	play_sfx SFX_BUMP
 	ret
-; 0xae51e
 
-Func_ae51e: ; ae51e (2b:651e)
+Func_ae51e:
 	ld c, $78
 	jp Func_ae1c9
-; 0xae523
 
-Func_ae523: ; ae523 (2b:6523)
+Func_ae523:
 	ld hl, w2d150
 	ld a, [hl]
 	and a
@@ -5547,9 +5402,8 @@ Func_ae523: ; ae523 (2b:6523)
 	ld [wSceneWarioAttributes], a
 	ld [w2d150], a
 	ret
-; 0xae55c
 
-Func_ae55c: ; ae55c (2b:655c)
+Func_ae55c:
 	ld hl, w2d891
 	inc [hl]
 	ld c, l
@@ -5573,40 +5427,35 @@ Func_ae55c: ; ae55c (2b:655c)
 	dw Func_ae630
 	dw Func_ae63c
 	dw Func_ae1d5
-; 0xae585
 
-Func_ae585: ; ae585 (2b:6585)
+Func_ae585:
 	ld a, [w2d14e]
 	inc a
 	ret nz
 	jp Func_ae1ce
-; 0xae58d
 
-Func_ae58d: ; ae58d (2b:658d)
+Func_ae58d:
 	ld a, [bc]
 	cp $4b
 	ret c
 	ld a, SCENEWARIO_WAKE_UP
 	call SetSceneWarioState
 	jp Func_ae1ce
-; 0xae599
 
-Func_ae599: ; ae599 (2b:6599)
+Func_ae599:
 	ld a, [bc]
 	cp $14
 	ret c
 	play_sfx SFX_GRAB
 	jp Func_ae1ce
-; 0xae5a8
 
-Func_ae5a8: ; ae5a8 (2b:65a8)
+Func_ae5a8:
 	ld a, [wSceneWarioState]
 	cp SCENEWARIO_SIT_IDLE
 	ret nz
 	jp Func_ae1ce
-; 0xae5b1
 
-Func_ae5b1: ; ae5b1 (2b:65b1)
+Func_ae5b1:
 	ld a, [bc]
 	cp $05
 	ret c
@@ -5620,18 +5469,16 @@ Func_ae5b1: ; ae5b1 (2b:65b1)
 	ld hl, wCurSceneObjState
 	call SetSceneObjState
 	jp Func_ae1ce
-; 0xae5d0
 
-Func_ae5d0: ; ae5d0 (2b:65d0)
+Func_ae5d0:
 	ld a, [bc]
 	cp $8c
 	ret c
 	ld a, SCENEWARIO_SIT_STILL
 	call SetSceneWarioState
 	jp Func_ae1ce
-; 0xae5dc
 
-Func_ae5dc: ; ae5dc (2b:65dc)
+Func_ae5dc:
 	ld a, [bc]
 	cp $10
 	ret c
@@ -5639,20 +5486,17 @@ Func_ae5dc: ; ae5dc (2b:65dc)
 	call SetSceneWarioState
 	play_sfx SFX_12A
 	jp Func_ae1ce
-; 0xae5f0
 
-Func_ae5f0: ; ae5f0 (2b:65f0)
+Func_ae5f0:
 	ld c, $3c
 	jp Func_ae1c9
-; 0xae5f5
 
-Func_ae5f5: ; ae5f5 (2b:65f5)
+Func_ae5f5:
 	ld a, SCENEWARIO_WALK_RIGHT
 	call SetSceneWarioState
 	jp Func_ae1ce
-; 0xae5fd
 
-Func_ae5fd: ; ae5fd (2b:65fd)
+Func_ae5fd:
 	call ApplySceneWarioMovementRight
 	cp $50
 	ret nz
@@ -5660,45 +5504,39 @@ Func_ae5fd: ; ae5fd (2b:65fd)
 	ld a, SCENEWARIO_IDLE_RIGHT
 	call SetSceneWarioState
 	jp Func_ae1ce
-; 0xae60c
 
-Func_ae60c: ; ae60c (2b:660c)
+Func_ae60c:
 	ld a, [bc]
 	cp $1e
 	ret c
 	ld a, SCENEWARIO_TURN_BACK_RIGHT
 	call SetSceneWarioState
 	jp Func_ae1ce
-; 0xae618
 
-Func_ae618: ; ae618 (2b:6618)
+Func_ae618:
 	ld b, SCENEWARIO_LOOK_BACK
 	jp Func_ae1c2
-; 0xae61d
 
-Func_ae61d: ; ae61d (2b:661d)
+Func_ae61d:
 	ld a, [bc]
 	cp $1e
 	ret c
 	play_music2 MUSIC_THE_TEMPLE
 	jp Func_ae1ce
-; 0xae630
 
-Func_ae630: ; ae630 (2b:6630)
+Func_ae630:
 	ld a, [bc]
 	cp $1e
 	ret c
 	ld a, SCENEWARIO_LOOK_AROUND
 	call SetSceneWarioState
 	jp Func_ae1ce
-; 0xae63c
 
-Func_ae63c: ; ae63c (2b:663c)
+Func_ae63c:
 	ld c, $1e
 	jp Func_ae1c9
-; 0xae641
 
-Func_ae641: ; ae641 (2b:6641)
+Func_ae641:
 	ld hl, w2d891
 	inc [hl]
 	ld c, l
@@ -5710,27 +5548,23 @@ Func_ae641: ; ae641 (2b:6641)
 	dw Func_ae657
 	dw Func_ae663
 	dw Func_ae1d5
-; 0xae652
 
-Func_ae652: ; ae652 (2b:6652)
+Func_ae652:
 	ld b, SCENEWARIO_LOOK_FORWARD
 	jp Func_ae1c2
-; 0xae657
 
-Func_ae657: ; ae657 (2b:6657)
+Func_ae657:
 	ld a, SCENEWARIO_JUMP_AND_BOW
 	call SetSceneWarioState
 	xor a
 	ld [wSceneWarioUnk7], a
 	jp Func_ae1ce
-; 0xae663
 
-Func_ae663: ; ae663 (2b:6663)
+Func_ae663:
 	ld b, SCENEWARIO_LOOK_BACK
 	jp Func_ae1c2
-; 0xae668
 
-Func_ae668: ; ae668 (2b:6668)
+Func_ae668:
 	ld hl, w2d891
 	inc [hl]
 	dec l
@@ -5746,67 +5580,57 @@ Func_ae668: ; ae668 (2b:6668)
 	dw Func_ae6c1
 	dw Func_ae6ce
 	dw Func_ae1d5
-; 0xae683
 
-Func_ae683: ; ae683 (2b:6683)
+Func_ae683:
 	ld a, SCENEWARIO_SNAP_FINGERS
 	call SetSceneWarioState
 	jp Func_ae1ce
-; 0xae68b
 
-Func_ae68b: ; ae68b (2b:668b)
+Func_ae68b:
 	ld a, [wSceneWarioFrame]
 	cp $0f
 	ret nz
 	play_sfx SFX_106
 	jp Func_ae1ce
-; 0xae69c
 
-Func_ae69c: ; ae69c (2b:669c)
+Func_ae69c:
 	ld b, SCENEWARIO_LOOK_BACK
 	jp Func_ae1c2
-; 0xae6a1
 
-Func_ae6a1: ; ae6a1 (2b:66a1)
+Func_ae6a1:
 	ld c, $1e
 	jp Func_ae1c9
-; 0xae6a6
 
-Func_ae6a6: ; ae6a6 (2b:66a6)
+Func_ae6a6:
 	ld a, SCENEWARIO_TURN_BACK_TO_LEFT
 	call SetSceneWarioState
 	jp Func_ae1ce
-; 0xae6ae
 
-Func_ae6ae: ; ae6ae (2b:66ae)
+Func_ae6ae:
 	ld b, SCENEWARIO_IDLE_LEFT
 	jp Func_ae1c2
-; 0xae6b3
 
-Func_ae6b3: ; ae6b3 (2b:66b3)
+Func_ae6b3:
 	ld a, [w2d891]
 	cp $04
 	ret c
 	ld a, SCENEWARIO_WALK_LEFT
 	call SetSceneWarioState
 	jp Func_ae1ce
-; 0xae6c1
 
-Func_ae6c1: ; ae6c1 (2b:66c1)
+Func_ae6c1:
 	call ApplySceneWarioMovementLeft
 	cp $f0
 	ret nz
 	xor a ; SCENEWARIO_NONE
 	call SetSceneWarioState
 	jp Func_ae1ce
-; 0xae6ce
 
-Func_ae6ce: ; ae6ce (2b:66ce)
+Func_ae6ce:
 	ld c, $1e
 	jp Func_ae1c9
-; 0xae6d3
 
-Func_ae6d3: ; ae6d3 (2b:66d3)
+Func_ae6d3:
 	call Func_ae8bb
 	ld hl, w2d891
 	inc [hl]
@@ -5824,14 +5648,12 @@ Func_ae6d3: ; ae6d3 (2b:66d3)
 	dw Func_ae820
 	dw Func_ae825
 	dw Func_ae1d5
-; 0xae6f3
 
-Func_ae6f3: ; ae6f3 (2b:66f3)
+Func_ae6f3:
 	ld c, $4a
 	jp Func_ae1c9
-; 0xae6f8
 
-Func_ae6f8: ; ae6f8 (2b:66f8)
+Func_ae6f8:
 	ld hl, wSceneWarioYCoord
 	ld a, $3c
 	ld [hli], a
@@ -5844,17 +5666,15 @@ Func_ae6f8: ; ae6f8 (2b:66f8)
 	ld [w2d894], a
 	ld [w2d892], a
 	jp Func_ae1ce
-; 0xae718
 
-Func_ae718: ; ae718 (2b:6718)
+Func_ae718:
 	call Func_ae724
 	ld a, [w2d892]
 	cp $80
 	ret nz
 	jp Func_ae1ce
-; 0xae724
 
-Func_ae724: ; ae724 (2b:6724)
+Func_ae724:
 	ld a, [w2d894]
 	and a
 	jr z, .asm_ae740
@@ -5969,57 +5789,47 @@ Func_ae724: ; ae724 (2b:6724)
 	xor a
 	ld [w2d893], a
 	ret
-; 0xae7f2
 
-Func_ae7f2: ; ae7f2 (2b:67f2)
+Func_ae7f2:
 	ld a, $80
 	ld [w2d892], a
 	ret
-; 0xae7f8
 
-Func_ae7f8: ; ae7f8 (2b:67f8)
+Func_ae7f8:
 	play_sfx SFX_BUMP
 	ret
-; 0xae801
 
-Func_ae801: ; ae801 (2b:6801)
+Func_ae801:
 	ld c, $3c
 	jp Func_ae1c9
-; 0xae806
 
-Func_ae806: ; ae806 (2b:6806)
+Func_ae806:
 	ld a, SCENEWARIO_TURN_BACK_RIGHT
 	call SetSceneWarioState
 	jp Func_ae1ce
-; 0xae80e
 
-Func_ae80e: ; ae80e (2b:680e)
+Func_ae80e:
 	ld b, SCENEWARIO_LOOK_BACK
 	jp Func_ae1c2
-; 0xae813
 
-Func_ae813: ; ae813 (2b:6813)
+Func_ae813:
 	ld c, $26
 	jp Func_ae1c9
-; 0xae818
 
-Func_ae818: ; ae818 (2b:6818)
+Func_ae818:
 	ld a, SCENEWARIO_LOOK_AROUND_THEN_TURN
 	call SetSceneWarioState
 	jp Func_ae1ce
-; 0xae820
 
-Func_ae820: ; ae820 (2b:6820)
+Func_ae820:
 	ld b, SCENEWARIO_IDLE_RIGHT
 	jp Func_ae1c2
-; 0xae825
 
-Func_ae825: ; ae825 (2b:6825)
+Func_ae825:
 	ld c, $2e
 	jp Func_ae1c9
-; 0xae82a
 
-Func_ae82a: ; ae82a (2b:682a)
+Func_ae82a:
 	ld hl, w2d891
 	inc [hl]
 	dec l
@@ -6038,14 +5848,12 @@ Func_ae82a: ; ae82a (2b:682a)
 	dw Func_ae8a8
 	dw Func_ae8b6
 	dw Func_ae1d5
-; 0xae84b
 
-Func_ae84b: ; ae84b (2b:684b)
+Func_ae84b:
 	ld c, $3c
 	jp Func_ae1c9
-; 0xae850
 
-Func_ae850: ; ae850 (2b:6850)
+Func_ae850:
 	call ApplySceneWarioMovementRight
 	cp $78
 	ret nz
@@ -6053,25 +5861,21 @@ Func_ae850: ; ae850 (2b:6850)
 	ld a, SCENEWARIO_IDLE_RIGHT
 	call SetSceneWarioState
 	jp Func_ae1ce
-; 0xae85f
 
-Func_ae85f: ; ae85f (2b:685f)
+Func_ae85f:
 	ld c, $3c
 	jp Func_ae1c9
-; 0xae864
 
-Func_ae864: ; ae864 (2b:6864)
+Func_ae864:
 	ld a, SCENEWARIO_LOOK_UP
 	call SetSceneWarioState
 	jp Func_ae1ce
-; 0xae86c
 
-Func_ae86c: ; ae86c (2b:686c)
+Func_ae86c:
 	ld b, SCENEWARIO_IDLE_RIGHT
 	jp Func_ae1c2
-; 0xae871
 
-Func_ae871: ; ae871 (2b:6871)
+Func_ae871:
 	ld hl, wCurSceneObj
 	ld a, [wSceneWarioYCoord]
 	sub $18
@@ -6084,27 +5888,23 @@ Func_ae871: ; ae871 (2b:6871)
 	call SetSceneObjState
 	play_sfx SFX_106
 	jp Func_ae1ce
-; 0xae893
 
-Func_ae893: ; ae893 (2b:6893)
+Func_ae893:
 	ld a, [wCurSceneObjState]
 	and a
 	ret nz
 	jp Func_ae1ce
-; 0xae89b
 
-Func_ae89b: ; ae89b (2b:689b)
+Func_ae89b:
 	ld c, $28
 	jp Func_ae1c9
-; 0xae8a0
 
-Func_ae8a0: ; ae8a0 (2b:68a0)
+Func_ae8a0:
 	ld a, SCENEWARIO_WALK_RIGHT
 	call SetSceneWarioState
 	jp Func_ae1ce
-; 0xae8a8
 
-Func_ae8a8: ; ae8a8 (2b:68a8)
+Func_ae8a8:
 	call ApplySceneWarioMovementRight
 	cp $d0
 	ret nz
@@ -6112,14 +5912,12 @@ Func_ae8a8: ; ae8a8 (2b:68a8)
 	xor a ; SCENEWARIO_NONE
 	call SetSceneWarioState
 	jp Func_ae1ce
-; 0xae8b6
 
-Func_ae8b6: ; ae8b6 (2b:68b6)
+Func_ae8b6:
 	ld c, $28
 	jp Func_ae1c9
-; 0xae8bb
 
-Func_ae8bb: ; ae8bb (2b:68bb)
+Func_ae8bb:
 	call Func_ae924
 	call Func_ae9ee
 	call Func_aeb0d
@@ -6173,14 +5971,13 @@ Func_ae8bb: ; ae8bb (2b:68bb)
 .asm_ae912
 	ld hl, w2d8a1
 
-Func_ae915: ; ae915 (2b:6915)
+Func_ae915:
 	xor a
 	ld [hld], a
 	inc [hl]
 	ret
-; 0xae919
 
-Func_ae919: ; ae919 (2b:6919)
+Func_ae919:
 	ld a, d
 	ld [hli], a
 	ld a, e
@@ -6189,9 +5986,8 @@ Func_ae919: ; ae919 (2b:6919)
 	ld a, c
 	call SetSceneObjState
 	ret
-; 0xae924
 
-Func_ae924: ; ae924 (2b:6924)
+Func_ae924:
 	ld hl, wPlanePart1Counter
 	inc [hl]
 	dec l
@@ -6213,17 +6009,15 @@ Func_ae924: ; ae924 (2b:6924)
 	dw Func_ae9bb
 	dw Func_ae9c1
 	dw Func_ae9c5
-; 0xae948
 
-Func_ae948: ; ae948 (2b:6948)
+Func_ae948:
 	play_sfx SFX_006
 
-Func_ae950: ; ae950 (2b:6950)
+Func_ae950:
 	ld hl, wPlanePart1Counter
 	jp Func_ae915
-; 0xae956
 
-Func_ae956: ; ae956 (2b:6956)
+Func_ae956:
 	ld a, [wSceneObj3YCoord]
 	cp $62
 	ret nz
@@ -6231,118 +6025,100 @@ Func_ae956: ; ae956 (2b:6956)
 	ld hl, wPlanePart1Action
 	inc [hl]
 	ret
-; 0xae969
 
-Func_ae969: ; ae969 (2b:6969)
+Func_ae969:
 	ld hl, wPlanePart1Counter
 	ld a, [hl]
 	cp c
 	ret c
 	jr Func_ae915
-; 0xae971
 
-Func_ae971: ; ae971 (2b:6971)
+Func_ae971:
 	ld hl, wSceneObj3
 	lb de, $2e, $f0
 	ld c, $06
 	call Func_ae919
 	jr Func_ae950
-; 0xae97e
 
-Func_ae97e: ; ae97e (2b:697e)
+Func_ae97e:
 	call Func_ae9d0
 	jr Func_ae956
-; 0xae983
 
-Func_ae983: ; ae983 (2b:6983)
+Func_ae983:
 	call Func_ae9d0
 	ret nz
 	jr Func_ae948
-; 0xae989
 
-Func_ae989: ; ae989 (2b:6989)
+Func_ae989:
 	ld c, $08
 	jr Func_ae969
-; 0xae98d
 
-Func_ae98d: ; ae98d (2b:698d)
+Func_ae98d:
 	ld hl, wSceneObj3
 	lb de, $4d, $e0
 	ld c, $05
 	call Func_ae919
 	jr Func_ae950
-; 0xae99a
 
-Func_ae99a: ; ae99a (2b:699a)
+Func_ae99a:
 	call Func_ae9da
 	jr Func_ae956
-; 0xae99f
 
-Func_ae99f: ; ae99f (2b:699f)
+Func_ae99f:
 	call Func_ae9da
 	ret nz
 	jr Func_ae948
-; 0xae9a5
 
-Func_ae9a5: ; ae9a5 (2b:69a5)
+Func_ae9a5:
 	ld c, $28
 	jr Func_ae969
-; 0xae9a9
 
-Func_ae9a9: ; ae9a9 (2b:69a9)
+Func_ae9a9:
 	ld hl, wSceneObj3
 	lb de, $3e, $f0
 	ld c, $04
 	call Func_ae919
 	jr Func_ae950
-; 0xae9b6
 
-Func_ae9b6: ; ae9b6 (2b:69b6)
+Func_ae9b6:
 	call Func_ae9e4
 	jr Func_ae956
-; 0xae9bb
 
-Func_ae9bb: ; ae9bb (2b:69bb)
+Func_ae9bb:
 	call Func_ae9e4
 	ret nz
 	jr Func_ae948
-; 0xae9c1
 
-Func_ae9c1: ; ae9c1 (2b:69c1)
+Func_ae9c1:
 	ld c, $08
 	jr Func_ae969
-; 0xae9c5
 
-Func_ae9c5: ; ae9c5 (2b:69c5)
+Func_ae9c5:
 	xor a
 	ld [wPlanePart1Action], a
 	ld hl, wSceneObj3State
 	call SetSceneObjState
 	ret
-; 0xae9d0
 
-Func_ae9d0: ; ae9d0 (2b:69d0)
+Func_ae9d0:
 	ld de, Data_aee09
 	ld hl, wSceneObj3
 	call ApplyOWMovement
 	ret
-; 0xae9da
 
-Func_ae9da: ; ae9da (2b:69da)
+Func_ae9da:
 	ld de, Data_aedba
 	ld hl, wSceneObj3
 	call ApplyOWMovement
 	ret
-; 0xae9e4
 
-Func_ae9e4: ; ae9e4 (2b:69e4)
+Func_ae9e4:
 	ld de, Data_aed6d
 	ld hl, wSceneObj3
 	call ApplyOWMovement
 	ret
-; 0xae9ee
 
-Func_ae9ee: ; ae9ee (2b:69ee)
+Func_ae9ee:
 	ld hl, wPlanePart2Counter
 	inc [hl]
 	dec l
@@ -6509,9 +6285,8 @@ Func_ae9ee: ; ae9ee (2b:69ee)
 	ld hl, wSceneObj4
 	call ApplyOWMovement
 	ret
-; 0xaeb0d
 
-Func_aeb0d: ; aeb0d (2b:6b0d)
+Func_aeb0d:
 	ld hl, wPlanePart3Counter
 	inc [hl]
 	dec l
@@ -6668,9 +6443,8 @@ Func_aeb0d: ; aeb0d (2b:6b0d)
 .Func_aec1a
 	ld de, Data_aedba
 	jr .Func_aec0e
-; 0xaec1f
 
-Func_aec1f: ; aec1f (2b:6c1f)
+Func_aec1f:
 	ld hl, wPlanePart4Counter
 	inc [hl]
 	dec l
@@ -6803,9 +6577,8 @@ Func_aec1f: ; aec1f (2b:6c1f)
 .Func_aed01
 	ld de, Data_aee09
 	jr .Func_aecf5
-; 0xaed06
 
-Data_aed06: ; aed06 (2b:6d06)
+Data_aed06:
 	db  0, 0
 	db  0, 0
 	db  0, 1
@@ -6858,9 +6631,8 @@ Data_aed06: ; aed06 (2b:6d06)
 	db  2, 2
 	db  2, 1
 	db $80
-; 0xaed6d
 
-Data_aed6d: ; aed6d (2b:6d6d)
+Data_aed6d:
 	db  0, 0
 	db  0, 0
 	db  0, 1
@@ -6900,9 +6672,8 @@ Data_aed6d: ; aed6d (2b:6d6d)
 	db  3, 1
 	db  2, 2
 	db $80
-; 0xaedba
 
-Data_aedba: ; aedba (2b:6dba)
+Data_aedba:
 	db  0, 0
 	db  0, 0
 	db  0, 1
@@ -6943,9 +6714,8 @@ Data_aedba: ; aedba (2b:6dba)
 	db  2, 3
 	db  1, 2
 	db $80
-; 0xaee09
 
-Data_aee09: ; aee09 (2b:6e09)
+Data_aee09:
 	db  0, 0
 	db  0, 0
 	db  0, 0
@@ -6986,9 +6756,8 @@ Data_aee09: ; aee09 (2b:6e09)
 	db  3, 2
 	db  2, 2
 	db $80
-; 0xaee58
 
-_InitEpilogue: ; aee58 (2b:6e58)
+_InitEpilogue:
 	call DisableLCD
 	call FillBGMap0_With7f
 	call ClearVirtualOAM
@@ -7074,10 +6843,9 @@ _InitEpilogue: ; aee58 (2b:6e58)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0xaf01f
 
 ; unreferenced
-Func_af01f: ; af01f (2b:701f)
+Func_af01f:
 	call DisableLCD
 	call FillBGMap0_With7f
 	call ClearVirtualOAM
@@ -7162,23 +6930,21 @@ Func_af01f: ; af01f (2b:701f)
 	xor a
 	ld [wCollectionRow], a
 	jp Func_af135
-; 0xaf130
 
-Func_af130: ; af130 (2b:7130)
+Func_af130:
 	ld a, [w2d014]
 	cp c
 	ret c
 ;	fallthrough
 
-Func_af135: ; af135 (2b:7135)
+Func_af135:
 	ld hl, w2d014
 	xor a
 	ld [hld], a
 	inc [hl]
 	ret
-; 0xaf13c
 
-Func_af13c: ; af13c (2b:713c)
+Func_af13c:
 	call .Func_af14c
 	call Func_ac074
 	call UpdateSceneWarioAnimation
@@ -8307,7 +8073,6 @@ Func_af13c: ; af13c (2b:713c)
 	ld l, a
 	inc [hl]
 	ret
-; 0xaf915
 
 REPT $6eb
 	db $00

@@ -1,4 +1,4 @@
-Music_Credits_Ch1: ; 369b1 (0d:69b1)
+Music_Credits_Ch1:
 	semitone_offset 0
 	tempo 55
 	wave WAVE_19
@@ -541,9 +541,8 @@ Music_Credits_Ch1: ; 369b1 (0d:69b1)
 	note NOTE_DURATION_24, A_5
 	audio_wait_24
 	audio_end
-; 0x36c5f
 
-Music_Credits_Ch2: ; 36c5f (0d:6c5f)
+Music_Credits_Ch2:
 	semitone_offset 0
 	wave WAVE_0F
 	volume 66
@@ -1445,9 +1444,8 @@ Music_Credits_Ch2: ; 36c5f (0d:6c5f)
 	note NOTE_DURATION_24, C#5
 	audio_wait_24
 	audio_end
-; 0x3702c
 
-Music_Credits_Ch3: ; 3702c (0d:702c)
+Music_Credits_Ch3:
 	semitone_offset 0
 	wave WAVE_5E
 	volume 94
@@ -1986,9 +1984,8 @@ Music_Credits_Ch3: ; 3702c (0d:702c)
 	note NOTE_DURATION_24, A_3
 	audio_wait_24
 	audio_end
-; 0x372c4
 
-Music_Credits_Ch4: ; 372c4 (0d:72c4)
+Music_Credits_Ch4:
 	semitone_offset 0
 	wave WAVE_28
 	volume 75
@@ -2288,9 +2285,8 @@ Music_Credits_Ch4: ; 372c4 (0d:72c4)
 	audio_wait_96
 	audio_wait_48
 	audio_end
-; 0x37450
 
-Music_Credits: ; 37450 (d:7450)
+Music_Credits:
 	db $4, $0
 	dw Music_Credits_Ch1
 	dw Music_Credits_Ch2

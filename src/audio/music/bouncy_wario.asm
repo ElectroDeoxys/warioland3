@@ -1,4 +1,4 @@
-Music_BouncyWario_Ch1: ; 376f4 (0d:76f4)
+Music_BouncyWario_Ch1:
 	semitone_offset 1
 	audio_wait_24
 
@@ -109,9 +109,8 @@ Music_BouncyWario_Ch1: ; 376f4 (0d:76f4)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3778b
 
-Music_BouncyWario_Ch2: ; 3778b (0d:778b)
+Music_BouncyWario_Ch2:
 	semitone_offset 1
 	audio_wait_24
 
@@ -159,9 +158,8 @@ Music_BouncyWario_Ch2: ; 3778b (0d:778b)
 	audio_jump .loop
 .end
 	audio_end
-; 0x377c8
 
-Music_BouncyWario_Ch3: ; 377c8 (0d:77c8)
+Music_BouncyWario_Ch3:
 	semitone_offset 1
 	audio_wait_24
 
@@ -249,9 +247,8 @@ Music_BouncyWario_Ch3: ; 377c8 (0d:77c8)
 	audio_jump .loop
 .end
 	audio_end
-; 0x37829
 
-Music_BouncyWario: ; 37829 (d:7829)
+Music_BouncyWario:
 	db $3, $2
 	dw Music_BouncyWario_Ch1
 	dw Music_BouncyWario_Ch2

@@ -6,7 +6,7 @@ OverworldCliffs2Gfx:: INCBIN "gfx/overworld/overworld_cliffs2.2bpp"
 UnusedOverworldCliffsGfx:: INCBIN "gfx/overworld/unused_overworld_cliffs.2bpp" ; unreferenced
 
 ; updates animations for clouds, sea and cliffs
-UpdateCommonOWAnimations: ; 1d8b00 (76:4b00)
+UpdateCommonOWAnimations:
 	xor a
 	ld [w2d031], a
 
@@ -179,9 +179,8 @@ UpdateCommonOWAnimations: ; 1d8b00 (76:4b00)
 	ld hl, w2d031
 	set 1, [hl]
 	ret
-; 0x1d8bf7
 
-Func_1d8bf7: ; 1d8bf7 (76:4bf7)
+Func_1d8bf7:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld a, [w2d030]
@@ -207,9 +206,8 @@ Func_1d8bf7: ; 1d8bf7 (76:4bf7)
 	xor a
 	ldh [rVBK], a
 	ret
-; 0x1d8c2c
 
-Func_1d8c2c: ; 1d8c2c (76:4c2c)
+Func_1d8c2c:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld c, LOW(rHDMA1)
@@ -249,23 +247,22 @@ Func_1d8c2c: ; 1d8c2c (76:4c2c)
 	xor a
 	ldh [rVBK], a
 	ret
-; 0x1d8c62
 
 REPT $39e
 	db $00
 ENDR
 
-WarioUnk2Gfx: ; 1d9000 (76:5000)
+WarioUnk2Gfx:
 INCBIN "gfx/wario/unk2.2bpp"
 
-WarioUnk3Gfx: ; 1d9800 (76:5800)
+WarioUnk3Gfx:
 INCBIN "gfx/wario/unk3.2bpp"
 
-WarioUnk4Gfx: ; 1da000 (76:6000)
+WarioUnk4Gfx:
 INCBIN "gfx/wario/unk4.2bpp"
 
-WarioSleepGfx: ; 1da800 (76:6800)
+WarioSleepGfx:
 INCBIN "gfx/wario/sleep.2bpp"
 
-WarioUnk5Gfx: ; 1db000 (76:7000)
+WarioUnk5Gfx:
 INCBIN "gfx/wario/unk5.2bpp"

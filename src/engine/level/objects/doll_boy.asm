@@ -12,7 +12,7 @@ DEF DOLLBOY_DOLL    EQU 1 << 3
 	const DOLLBOY_HAMMER_LONG      ; 3
 DEF NUM_DOLLBOY_HAMMER_STAGES EQU const_value
 
-DollBoyFunc: ; 50ac4 (14:4ac4)
+DollBoyFunc:
 	ld a, TRUE
 	ld [wIsBossBattle], a
 	ld hl, wCurObjFlags
@@ -740,15 +740,14 @@ DollBoyFunc: ; 50ac4 (14:4ac4)
 	xor a
 	ld [wIsBossBattle], a
 	jp DollBoyGroundShake
-; 0x51006
 
-DollBoyBarrel1Func: ; 51006 (14:5006)
+DollBoyBarrel1Func:
 	ld a, $03
 	jr DollBoyBarrelFunc
-DollBoyBarrel2Func: ; 5100a (14:500a)
+DollBoyBarrel2Func:
 	ld a, $02
 	jr DollBoyBarrelFunc
-DollBoyBarrel3Func: ; 5100e (14:500e)
+DollBoyBarrel3Func:
 	ld a, $01
 DollBoyBarrelFunc:
 	ld [wCurObjSubState], a
@@ -985,9 +984,8 @@ DollBoyBarrelFunc:
 	ld a, TRUE
 	ld [w1d141], a
 	ret
-; 0x511a5
 
-Func_511a5: ; 511a5 (14:51a5)
+Func_511a5:
 	ld a, [wCurObjSubState]
 	dec a
 	ret z
@@ -1008,9 +1006,8 @@ Func_511a5: ; 511a5 (14:51a5)
 	ld hl, wCurObjSubState
 	dec [hl]
 	ret
-; 0x511c7
 
-DollBoyHammerFunc: ; 511c7 (14:51c7)
+DollBoyHammerFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Init)
 	ld [hld], a
@@ -1103,9 +1100,8 @@ DollBoyHammerFunc: ; 511c7 (14:51c7)
 	ld [wCurObjAction], a
 	ld bc, Data_60040
 	jp ApplyObjYMovement
-; 0x5126c
 
-HammerPlatformSpawnerFunc: ; 5126c (14:526c)
+HammerPlatformSpawnerFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_51282)
 	ld [hld], a
@@ -1135,9 +1131,8 @@ HammerPlatformSpawnerFunc: ; 5126c (14:526c)
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ret
-; 0x512a1
 
-HammerPlatformFunc: ; 512a1 (14:52a1)
+HammerPlatformFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.MoveDown)
 	ld [hld], a
@@ -1214,15 +1209,13 @@ HammerPlatformFunc: ; 512a1 (14:52a1)
 	ld a, $8c
 	ld [wCurObjStateDuration], a
 	ret
-; 0x51329
 
-DollBoyGroundShake: ; 51329 (14:5329)
+DollBoyGroundShake:
 	play_sfx SFX_061
 	ld b, 24
 	jp DoGroundShake
-; 0x51336
 
-Pals_51336: ; 51336 (14:5336)
+Pals_51336:
 	rgb  0, 25,  1
 	rgb 31, 31,  0
 	rgb  0, 31, 20
@@ -1232,9 +1225,8 @@ Pals_51336: ; 51336 (14:5336)
 	rgb  0,  0,  0
 	rgb  0, 31, 20
 	rgb 31, 31,  0
-; 0x51346
 
-Pals_51346: ; 51346 (14:5346)
+Pals_51346:
 	rgb  0, 25,  1
 	rgb 31, 31, 25
 	rgb 31,  5,  5
@@ -1244,4 +1236,3 @@ Pals_51346: ; 51346 (14:5346)
 	rgb  0,  0,  0
 	rgb 31,  5,  5
 	rgb 31, 31, 25
-; 0x51356

@@ -1,4 +1,4 @@
-LevelRooms_c4000: ; c4000 (31:4000)
+LevelRooms_c4000:
 	dw .room_00
 	dw .room_01
 	dw .room_02
@@ -75,7 +75,7 @@ LevelRooms_c4000: ; c4000 (31:4000)
 .room_29
 	room_data  0,  2, $3, $2, $1, $0, CAM_TRANSITIONS, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_19,  0, ROOM_019
 
-LevelRooms_c40ec: ; c40ec (31:40ec)
+LevelRooms_c40ec:
 	dw .room_00
 	dw .room_01
 	dw .room_02
@@ -152,7 +152,7 @@ LevelRooms_c40ec: ; c40ec (31:40ec)
 .room_29
 	room_data  0,  2, $3, $2, $1, $0, CAM_TRANSITIONS, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_19,  0, ROOM_019
 
-LevelRooms_c41d8: ; c41d8 (31:41d8)
+LevelRooms_c41d8:
 	dw .room_00
 	dw .room_01
 	dw .room_02
@@ -229,7 +229,7 @@ LevelRooms_c41d8: ; c41d8 (31:41d8)
 .room_29
 	room_data  0,  2, $3, $2, $1, $0, CAM_TRANSITIONS, ENEMY_GROUP_001, ANIMATED_TILES_GROUP_19,  0, ROOM_019
 
-LevelRooms_c42c4: ; c42c4 (31:42c4)
+LevelRooms_c42c4:
 	dw .room_00
 	dw .room_01
 	dw NULL
@@ -286,7 +286,7 @@ LevelRooms_c42c4: ; c42c4 (31:42c4)
 .room_25
 	room_data  1,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_036
 
-LevelRooms_c4360: ; c4360 (31:4360)
+LevelRooms_c4360:
 	dw .room_00
 	dw .room_01
 	dw NULL
@@ -343,7 +343,7 @@ LevelRooms_c4360: ; c4360 (31:4360)
 .room_25
 	room_data  1,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_091
 
-LevelRooms_c43fc: ; c43fc (31:43fc)
+LevelRooms_c43fc:
 	dw .room_00
 	dw .room_01
 	dw NULL
@@ -400,7 +400,7 @@ LevelRooms_c43fc: ; c43fc (31:43fc)
 .room_25
 	room_data  1,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_092
 
-LevelRooms_c4498: ; c4498 (31:4498)
+LevelRooms_c4498:
 	dw .room_00
 	dw .room_01
 	dw NULL
@@ -457,7 +457,7 @@ LevelRooms_c4498: ; c4498 (31:4498)
 .room_25
 	room_data  1,  0, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_073, ANIMATED_TILES_GROUP_03,  0, ROOM_093
 
-LevelRooms_c4534: ; c4534 (31:4534)
+LevelRooms_c4534:
 	dw .room_00
 	dw .room_01
 	dw NULL
@@ -520,7 +520,7 @@ LevelRooms_c4534: ; c4534 (31:4534)
 .room_29
 	room_data  7,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_038
 
-LevelRooms_c45e8: ; c45e8 (31:45e8)
+LevelRooms_c45e8:
 	dw .room_00
 	dw .room_01
 	dw NULL
@@ -583,7 +583,7 @@ LevelRooms_c45e8: ; c45e8 (31:45e8)
 .room_29
 	room_data  7,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_094
 
-LevelRooms_c469c: ; c469c (31:469c)
+LevelRooms_c469c:
 	dw .room_00
 	dw .room_01
 	dw NULL
@@ -646,7 +646,7 @@ LevelRooms_c469c: ; c469c (31:469c)
 .room_29
 	room_data  7,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_094
 
-LevelRooms_c4750: ; c4750 (31:4750)
+LevelRooms_c4750:
 	dw .room_00
 	dw .room_01
 	dw NULL
@@ -709,7 +709,7 @@ LevelRooms_c4750: ; c4750 (31:4750)
 .room_29
 	room_data  7,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_094
 
-LevelRooms_c4804: ; c4804 (31:4804)
+LevelRooms_c4804:
 	dw .room_00
 	dw .room_01
 	dw NULL
@@ -772,7 +772,7 @@ LevelRooms_c4804: ; c4804 (31:4804)
 .room_29
 	room_data  7,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_097
 
-LevelRooms_c48b8: ; c48b8 (31:48b8)
+LevelRooms_c48b8:
 	dw .room_00
 	dw .room_01
 	dw NULL
@@ -835,7 +835,7 @@ LevelRooms_c48b8: ; c48b8 (31:48b8)
 .room_29
 	room_data  7,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_098
 
-LevelRooms_c496c: ; c496c (31:496c)
+LevelRooms_c496c:
 	dw .room_00
 	dw .room_01
 	dw NULL
@@ -898,7 +898,7 @@ LevelRooms_c496c: ; c496c (31:496c)
 .room_29
 	room_data  7,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_098
 
-LevelRooms_c4a20: ; c4a20 (31:4a20)
+LevelRooms_c4a20:
 	dw .room_00
 	dw .room_01
 	dw NULL
@@ -961,7 +961,7 @@ LevelRooms_c4a20: ; c4a20 (31:4a20)
 .room_29
 	room_data  7,  0, $2, $0, $8, $6, CAM_FREE | CAM_EDGE_UP, ENEMY_GROUP_038, ANIMATED_TILES_GROUP_10,  0, ROOM_098
 
-LevelRooms_c4ad4: ; c4ad4 (31:4ad4)
+LevelRooms_c4ad4:
 	dw .room_00
 	dw NULL
 	dw NULL
@@ -1022,7 +1022,7 @@ LevelRooms_c4ad4: ; c4ad4 (31:4ad4)
 .room_29
 	room_data  9,  2, $3, $2, $a, $8, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_060, ANIMATED_TILES_GROUP_03,  0, ROOM_039
 
-LevelRooms_c4b80: ; c4b80 (31:4b80)
+LevelRooms_c4b80:
 	dw .room_00
 	dw NULL
 	dw NULL
@@ -1083,7 +1083,7 @@ LevelRooms_c4b80: ; c4b80 (31:4b80)
 .room_29
 	room_data  9,  2, $3, $2, $a, $8, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_060, ANIMATED_TILES_GROUP_03,  0, ROOM_151
 
-LevelRooms_c4c2c: ; c4c2c (31:4c2c)
+LevelRooms_c4c2c:
 	dw .room_00
 	dw NULL
 	dw NULL
@@ -1144,7 +1144,7 @@ LevelRooms_c4c2c: ; c4c2c (31:4c2c)
 .room_29
 	room_data  9,  2, $3, $2, $a, $8, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_060, ANIMATED_TILES_GROUP_03,  0, ROOM_152
 
-LevelRooms_c4cd8: ; c4cd8 (31:4cd8)
+LevelRooms_c4cd8:
 	dw .room_00
 	dw NULL
 	dw NULL
@@ -1205,7 +1205,7 @@ LevelRooms_c4cd8: ; c4cd8 (31:4cd8)
 .room_29
 	room_data  9,  2, $3, $2, $a, $8, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT, ENEMY_GROUP_060, ANIMATED_TILES_GROUP_03,  0, ROOM_153
 
-LevelRooms_c4d84: ; c4d84 (31:4d84)
+LevelRooms_c4d84:
 	dw .room_00
 	dw NULL
 	dw .room_02
@@ -1276,7 +1276,7 @@ LevelRooms_c4d84: ; c4d84 (31:4d84)
 .room_28
 	room_data  7,  2, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_053
 
-LevelRooms_c4e58: ; c4e58 (31:4e58)
+LevelRooms_c4e58:
 	dw .room_00
 	dw NULL
 	dw .room_02
@@ -1347,7 +1347,7 @@ LevelRooms_c4e58: ; c4e58 (31:4e58)
 .room_28
 	room_data  7,  2, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_121
 
-LevelRooms_c4f2c: ; c4f2c (31:4f2c)
+LevelRooms_c4f2c:
 	dw .room_00
 	dw NULL
 	dw .room_02
@@ -1418,7 +1418,7 @@ LevelRooms_c4f2c: ; c4f2c (31:4f2c)
 .room_28
 	room_data  7,  2, $3, $0, $a, $7, CAM_FREE, ENEMY_GROUP_113, ANIMATED_TILES_GROUP_10,  2, ROOM_122
 
-LevelRooms_c5000: ; c5000 (31:5000)
+LevelRooms_c5000:
 	dw .room_00
 	dw NULL
 	dw .room_02
@@ -1486,7 +1486,7 @@ LevelRooms_c5000: ; c5000 (31:5000)
 .room_29
 	room_data  6,  1, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  3, ROOM_040
 
-LevelRooms_c50c4: ; c50c4 (31:50c4)
+LevelRooms_c50c4:
 	dw .room_00
 	dw NULL
 	dw .room_02
@@ -1554,7 +1554,7 @@ LevelRooms_c50c4: ; c50c4 (31:50c4)
 .room_29
 	room_data  6,  1, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  3, ROOM_135
 
-LevelRooms_c5188: ; c5188 (31:5188)
+LevelRooms_c5188:
 	dw .room_00
 	dw NULL
 	dw .room_02
@@ -1622,7 +1622,7 @@ LevelRooms_c5188: ; c5188 (31:5188)
 .room_29
 	room_data  6,  1, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  6, ROOM_136
 
-LevelRooms_c524c: ; c524c (31:524c)
+LevelRooms_c524c:
 	dw .room_00
 	dw NULL
 	dw .room_02
@@ -1690,7 +1690,7 @@ LevelRooms_c524c: ; c524c (31:524c)
 .room_29
 	room_data  6,  1, $3, $0, $7, $5, CAM_FREE | CAM_EDGE_DOWN, ENEMY_GROUP_126, ANIMATED_TILES_GROUP_03,  6, ROOM_137
 
-LevelRooms_c5310: ; c5310 (31:5310)
+LevelRooms_c5310:
 	dw .room_00
 	dw NULL
 	dw NULL
@@ -1753,7 +1753,7 @@ LevelRooms_c5310: ; c5310 (31:5310)
 .room_27
 	room_data  1,  2, $3, $2, $2, $0, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_03,  0, ROOM_046
 
-LevelRooms_c53c4: ; c53c4 (31:53c4)
+LevelRooms_c53c4:
 	dw .room_00
 	dw NULL
 	dw NULL
@@ -1816,7 +1816,7 @@ LevelRooms_c53c4: ; c53c4 (31:53c4)
 .room_27
 	room_data  1,  2, $3, $2, $2, $0, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_03,  0, ROOM_117
 
-LevelRooms_c5478: ; c5478 (31:5478)
+LevelRooms_c5478:
 	dw .room_00
 	dw NULL
 	dw NULL
@@ -1879,7 +1879,7 @@ LevelRooms_c5478: ; c5478 (31:5478)
 .room_27
 	room_data  1,  2, $3, $2, $2, $0, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_03,  0, ROOM_046
 
-LevelRooms_c552c: ; c552c (31:552c)
+LevelRooms_c552c:
 	dw .room_00
 	dw NULL
 	dw NULL
@@ -1942,7 +1942,7 @@ LevelRooms_c552c: ; c552c (31:552c)
 .room_27
 	room_data  1,  2, $3, $2, $2, $0, CAM_TRANSITIONS | CAM_EDGE_RIGHT, ENEMY_GROUP_002, ANIMATED_TILES_GROUP_03,  0, ROOM_117
 
-LevelRooms_c55e0: ; c55e0 (31:55e0)
+LevelRooms_c55e0:
 	dw .room_00
 	dw .room_01
 	dw NULL
@@ -2011,7 +2011,7 @@ LevelRooms_c55e0: ; c55e0 (31:55e0)
 .room_26
 	room_data  5,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_043
 
-LevelRooms_c56ac: ; c56ac (31:56ac)
+LevelRooms_c56ac:
 	dw .room_00
 	dw .room_01
 	dw NULL
@@ -2080,7 +2080,7 @@ LevelRooms_c56ac: ; c56ac (31:56ac)
 .room_26
 	room_data  5,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_110
 
-LevelRooms_c5778: ; c5778 (31:5778)
+LevelRooms_c5778:
 	dw .room_00
 	dw .room_01
 	dw NULL
@@ -2149,7 +2149,7 @@ LevelRooms_c5778: ; c5778 (31:5778)
 .room_26
 	room_data  5,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_111
 
-LevelRooms_c5844: ; c5844 (31:5844)
+LevelRooms_c5844:
 	dw .room_00
 	dw .room_01
 	dw NULL
@@ -2218,7 +2218,7 @@ LevelRooms_c5844: ; c5844 (31:5844)
 .room_26
 	room_data  5,  1, $2, $0, $6, $1, CAM_FREE, ENEMY_GROUP_096, ANIMATED_TILES_GROUP_09,  0, ROOM_112
 
-LevelRooms_c5910: ; c5910 (31:5910)
+LevelRooms_c5910:
 	dw .room_00
 	dw .room_01
 	dw .room_02
@@ -2293,7 +2293,7 @@ LevelRooms_c5910: ; c5910 (31:5910)
 .room_28
 	room_data  4,  1, $2, $0, $7, $4, CAM_FREE | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_044
 
-LevelRooms_c59f4: ; c59f4 (31:59f4)
+LevelRooms_c59f4:
 	dw .room_00
 	dw .room_01
 	dw .room_02
@@ -2368,7 +2368,7 @@ LevelRooms_c59f4: ; c59f4 (31:59f4)
 .room_28
 	room_data  4,  1, $2, $0, $7, $4, CAM_FREE | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_131
 
-LevelRooms_c5ad8: ; c5ad8 (31:5ad8)
+LevelRooms_c5ad8:
 	dw .room_00
 	dw .room_01
 	dw .room_02
@@ -2443,7 +2443,7 @@ LevelRooms_c5ad8: ; c5ad8 (31:5ad8)
 .room_28
 	room_data  4,  1, $2, $0, $7, $4, CAM_FREE | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_132
 
-LevelRooms_c5bbc: ; c5bbc (31:5bbc)
+LevelRooms_c5bbc:
 	dw .room_00
 	dw .room_01
 	dw .room_02
@@ -2518,7 +2518,7 @@ LevelRooms_c5bbc: ; c5bbc (31:5bbc)
 .room_28
 	room_data  4,  1, $2, $0, $7, $4, CAM_FREE | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_042, ANIMATED_TILES_GROUP_11,  0, ROOM_133
 
-LevelRooms_c5ca0: ; c5ca0 (31:5ca0)
+LevelRooms_c5ca0:
 	dw .room_00
 	dw NULL
 	dw NULL
@@ -2583,7 +2583,7 @@ LevelRooms_c5ca0: ; c5ca0 (31:5ca0)
 .room_27
 	room_data  3,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_045
 
-LevelRooms_c5d5c: ; c5d5c (31:5d5c)
+LevelRooms_c5d5c:
 	dw .room_00
 	dw NULL
 	dw NULL
@@ -2648,7 +2648,7 @@ LevelRooms_c5d5c: ; c5d5c (31:5d5c)
 .room_27
 	room_data  3,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_128
 
-LevelRooms_c5e18: ; c5e18 (31:5e18)
+LevelRooms_c5e18:
 	dw .room_00
 	dw NULL
 	dw NULL
@@ -2713,7 +2713,7 @@ LevelRooms_c5e18: ; c5e18 (31:5e18)
 .room_27
 	room_data  3,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_129
 
-LevelRooms_c5ed4: ; c5ed4 (31:5ed4)
+LevelRooms_c5ed4:
 	dw .room_00
 	dw NULL
 	dw NULL
@@ -2778,7 +2778,7 @@ LevelRooms_c5ed4: ; c5ed4 (31:5ed4)
 .room_27
 	room_data  3,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_UP | CAM_EDGE_DOWN, ENEMY_GROUP_031, ANIMATED_TILES_GROUP_03,  0, ROOM_130
 
-LevelRooms_c5f90: ; c5f90 (31:5f90)
+LevelRooms_c5f90:
 	dw .room_00
 	dw .room_01
 	dw .room_02
@@ -2855,7 +2855,7 @@ LevelRooms_c5f90: ; c5f90 (31:5f90)
 .room_28
 	room_data  5,  2, $3, $2, $6, $4, CAM_FREE, ENEMY_GROUP_011, ANIMATED_TILES_GROUP_15,  8, ROOM_051
 
-LevelRooms_c605c: ; c605c (31:605c)
+LevelRooms_c605c:
 	dw .room_00
 	dw .room_01
 	dw .room_02
@@ -2932,7 +2932,7 @@ LevelRooms_c605c: ; c605c (31:605c)
 .room_28
 	room_data  5,  2, $3, $2, $6, $4, CAM_FREE, ENEMY_GROUP_011, ANIMATED_TILES_GROUP_15,  8, ROOM_149
 
-LevelRooms_c6128: ; c6128 (31:6128)
+LevelRooms_c6128:
 	dw .room_00
 	dw .room_01
 	dw .room_02
@@ -3009,7 +3009,7 @@ LevelRooms_c6128: ; c6128 (31:6128)
 .room_28
 	room_data  5,  2, $3, $2, $6, $4, CAM_FREE, ENEMY_GROUP_011, ANIMATED_TILES_GROUP_15,  8, ROOM_150
 
-LevelRooms_c61f4: ; c61f4 (31:61f4)
+LevelRooms_c61f4:
 	dw .room_00
 	dw NULL
 	dw NULL
@@ -3068,7 +3068,7 @@ LevelRooms_c61f4: ; c61f4 (31:61f4)
 .room_24
 	room_data  1,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_069
 
-LevelRooms_c6298: ; c6298 (31:6298)
+LevelRooms_c6298:
 	dw .room_00
 	dw NULL
 	dw NULL
@@ -3127,7 +3127,7 @@ LevelRooms_c6298: ; c6298 (31:6298)
 .room_24
 	room_data  1,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_069
 
-LevelRooms_c633c: ; c633c (31:633c)
+LevelRooms_c633c:
 	dw .room_00
 	dw NULL
 	dw NULL
@@ -3186,7 +3186,7 @@ LevelRooms_c633c: ; c633c (31:633c)
 .room_24
 	room_data  1,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_069
 
-LevelRooms_c63e0: ; c63e0 (31:63e0)
+LevelRooms_c63e0:
 	dw .room_00
 	dw NULL
 	dw NULL
@@ -3245,7 +3245,7 @@ LevelRooms_c63e0: ; c63e0 (31:63e0)
 .room_24
 	room_data  1,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_138, ANIMATED_TILES_GROUP_10,  0, ROOM_145
 
-LevelRooms_c6484: ; c6484 (31:6484)
+LevelRooms_c6484:
 	dw .room_00
 	dw NULL
 	dw NULL
@@ -3304,7 +3304,7 @@ LevelRooms_c6484: ; c6484 (31:6484)
 .room_24
 	room_data  1,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_146
 
-LevelRooms_c6528: ; c6528 (31:6528)
+LevelRooms_c6528:
 	dw .room_00
 	dw NULL
 	dw NULL
@@ -3363,7 +3363,7 @@ LevelRooms_c6528: ; c6528 (31:6528)
 .room_24
 	room_data  1,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_146
 
-LevelRooms_c65cc: ; c65cc (31:65cc)
+LevelRooms_c65cc:
 	dw .room_00
 	dw NULL
 	dw NULL
@@ -3422,7 +3422,7 @@ LevelRooms_c65cc: ; c65cc (31:65cc)
 .room_24
 	room_data  1,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_082, ANIMATED_TILES_GROUP_10,  0, ROOM_146
 
-LevelRooms_c6670: ; c6670 (31:6670)
+LevelRooms_c6670:
 	dw .room_00
 	dw NULL
 	dw NULL
@@ -3481,7 +3481,7 @@ LevelRooms_c6670: ; c6670 (31:6670)
 .room_24
 	room_data  1,  1, $3, $0, $4, $1, CAM_FREE | CAM_EDGE_RIGHT | CAM_EDGE_LEFT | CAM_EDGE_UP, ENEMY_GROUP_138, ANIMATED_TILES_GROUP_10,  0, ROOM_147
 
-LevelRooms_c6714: ; c6714 (31:6714)
+LevelRooms_c6714:
 	dw .room_00
 	dw .room_01
 	dw NULL
@@ -3536,7 +3536,7 @@ LevelRooms_c6714: ; c6714 (31:6714)
 .room_24
 	room_data  9,  0, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_144, ANIMATED_TILES_GROUP_11,  0, ROOM_052
 
-LevelRooms_c67a8: ; c67a8 (31:67a8)
+LevelRooms_c67a8:
 	dw .room_00
 	dw .room_01
 	dw NULL
@@ -3591,7 +3591,7 @@ LevelRooms_c67a8: ; c67a8 (31:67a8)
 .room_24
 	room_data  9,  0, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_144, ANIMATED_TILES_GROUP_11,  0, ROOM_139
 
-LevelRooms_c683c: ; c683c (31:683c)
+LevelRooms_c683c:
 	dw .room_00
 	dw .room_01
 	dw NULL
@@ -3646,7 +3646,7 @@ LevelRooms_c683c: ; c683c (31:683c)
 .room_24
 	room_data  9,  0, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_144, ANIMATED_TILES_GROUP_11,  0, ROOM_139
 
-LevelRooms_c68d0: ; c68d0 (31:68d0)
+LevelRooms_c68d0:
 	dw .room_00
 	dw .room_01
 	dw NULL
@@ -3701,7 +3701,7 @@ LevelRooms_c68d0: ; c68d0 (31:68d0)
 .room_24
 	room_data  9,  0, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_144, ANIMATED_TILES_GROUP_11,  0, ROOM_140
 
-LevelRooms_c6964: ; c6964 (31:6964)
+LevelRooms_c6964:
 	dw .room_00
 	dw .room_01
 	dw NULL
@@ -3756,7 +3756,7 @@ LevelRooms_c6964: ; c6964 (31:6964)
 .room_24
 	room_data  9,  0, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_144, ANIMATED_TILES_GROUP_11,  0, ROOM_141
 
-LevelRooms_c69f8: ; c69f8 (31:69f8)
+LevelRooms_c69f8:
 	dw .room_00
 	dw .room_01
 	dw NULL
@@ -3811,7 +3811,7 @@ LevelRooms_c69f8: ; c69f8 (31:69f8)
 .room_24
 	room_data  9,  0, $2, $0, $a, $7, CAM_FREE, ENEMY_GROUP_144, ANIMATED_TILES_GROUP_11,  0, ROOM_141
 
-LevelRooms_c6a8c: ; c6a8c (31:6a8c)
+LevelRooms_c6a8c:
 	dw .room_00
 	dw NULL
 	dw NULL

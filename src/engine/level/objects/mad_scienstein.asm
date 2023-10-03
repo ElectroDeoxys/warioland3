@@ -1,4 +1,4 @@
-MadSciensteinFunc: ; 44d3c (11:4d3c)
+MadSciensteinFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Init)
 	ld [hld], a
@@ -1097,14 +1097,13 @@ MadSciensteinFunc: ; 44d3c (11:4d3c)
 	or OBJ_INTERACTION_00
 	ld [hld], a
 	ret
-; 0x4543a
 
-InvisibilityPotionFunc_Left: ; 4543a (11:543a)
+InvisibilityPotionFunc_Left:
 	call MoveObjectLeft_Fast
 	jr InvisibilityPotionFunc
-InvisibilityPotionFunc_Right: ; 4543f (11:543f)
+InvisibilityPotionFunc_Right:
 	call MoveObjectRight_Fast
-InvisibilityPotionFunc: ; 45442 (11:5442)
+InvisibilityPotionFunc:
 	ld l, OBJ_FLAGS
 	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld a, [wCurObjState]
@@ -1113,7 +1112,7 @@ InvisibilityPotionFunc: ; 45442 (11:5442)
 	ld bc, Data_60510
 	jp ApplyObjYMovement
 
-Func_45453: ; 45453 (11:5453)
+Func_45453:
 	ld hl, wCurObjYPos
 	ld a, [hli]
 	ldh [hYPosLo], a
@@ -1131,12 +1130,11 @@ Func_45453: ; 45453 (11:5453)
 	ld [hli], a
 	ldh a, [hYPosHi]
 	ld [hl], a
-DestroyInvisibilityPotion: ; 45470 (11:5470)
+DestroyInvisibilityPotion:
 	farcall VanishObject_NoSFX
 	ret
-; 0x45480
 
-InvisibilityPotionFunc_Drop: ; 45480 (11:5480)
+InvisibilityPotionFunc_Drop:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Update)
 	ld [hld], a
@@ -1155,4 +1153,3 @@ InvisibilityPotionFunc_Drop: ; 45480 (11:5480)
 	ld bc, Data_60540
 	call ApplyObjYMovement
 	jr Func_45453
-; 0x454a0

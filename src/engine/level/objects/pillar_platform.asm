@@ -160,4 +160,3 @@ PillarPlatformFunc:
 	add $20
 	ld b, a
 	jr .asm_49d45
-; 0x49d64

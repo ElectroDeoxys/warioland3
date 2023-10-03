@@ -1,4 +1,4 @@
-HebariiFunc: ; 49fc4 (12:5fc4)
+HebariiFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Init)
 	ld [hld], a
@@ -605,9 +605,8 @@ HebariiFunc: ; 49fc4 (12:5fc4)
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ret
-; 0x4a3c2
 
-HebariiProjectileFunc: ; 4a3c2 (12:63c2)
+HebariiProjectileFunc:
 	ld hl, wCurObjFlags
 	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld l, OBJ_STATE_DURATION
@@ -704,4 +703,3 @@ HebariiProjectileFunc: ; 4a3c2 (12:63c2)
 	xor a
 	ld [wCurObjFlags], a
 	ret
-; 0x4a45d

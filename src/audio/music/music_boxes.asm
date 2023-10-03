@@ -1,4 +1,4 @@
-Music_MusicBoxes_Ch1: ; 396c6 (0e:56c6)
+Music_MusicBoxes_Ch1:
 	semitone_offset 12
 	tempo 50
 	wave WAVE_19
@@ -82,9 +82,8 @@ Music_MusicBoxes_Ch1: ; 396c6 (0e:56c6)
 	note NOTE_DURATION_72, A_3
 	audio_wait_72
 	audio_end
-; 0x39724
 
-Music_MusicBoxes_Ch2: ; 39724 (0e:5724)
+Music_MusicBoxes_Ch2:
 	semitone_offset 12
 	wave WAVE_0F
 	volume 75
@@ -177,9 +176,8 @@ Music_MusicBoxes_Ch2: ; 39724 (0e:5724)
 	note NOTE_DURATION_24, A_2
 	audio_wait_24
 	audio_end
-; 0x39789
 
-Music_MusicBoxes_Ch3: ; 39789 (0e:5789)
+Music_MusicBoxes_Ch3:
 	semitone_offset 12
 	wave WAVE_5E
 	volume 94
@@ -279,9 +277,8 @@ Music_MusicBoxes_Ch3: ; 39789 (0e:5789)
 	note NOTE_DURATION_24, A_2
 	audio_wait_24
 	audio_end
-; 0x397f2
 
-Music_MusicBoxes: ; 397f2 (0e:57f2)
+Music_MusicBoxes:
 	db 3, 0
 	dw Music_MusicBoxes_Ch1
 	dw Music_MusicBoxes_Ch2

@@ -1,4 +1,4 @@
-SpearheadFunc: ; 40040 (10:4040)
+SpearheadFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Init)
 	ld [hld], a
@@ -948,7 +948,7 @@ SpearheadFunc: ; 40040 (10:4040)
 	ld de, Frameset_68277
 	jp SetObjectFramesetPtr
 
-.PickedUpLeftStart: ; 40620 (10:4620)
+.PickedUpLeftStart:
 	ld hl, wCurObjState
 	ld a, OBJSTATE_PICKED_UP_LEFT
 	ld [hld], a
@@ -1053,4 +1053,3 @@ SpearheadFunc: ; 40040 (10:4040)
 	or OBJ_INTERACTION_00 ; unnecessary
 	ld [hld], a
 	ret
-; 0x406c4

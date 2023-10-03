@@ -1,4 +1,4 @@
-Music_ThePeacefulVillageDay_Ch1: ; 3380d (0c:780d)
+Music_ThePeacefulVillageDay_Ch1:
 	semitone_offset 0
 
 .loop
@@ -167,9 +167,8 @@ Music_ThePeacefulVillageDay_Ch1: ; 3380d (0c:780d)
 	audio_jump .loop
 .end
 	audio_end
-; 0x338e4
 
-Music_ThePeacefulVillageDay_Ch2: ; 338e4 (0c:78e4)
+Music_ThePeacefulVillageDay_Ch2:
 	semitone_offset 0
 
 .loop
@@ -348,9 +347,8 @@ Music_ThePeacefulVillageDay_Ch2: ; 338e4 (0c:78e4)
 	audio_jump .loop
 .end
 	audio_end
-; 0x339b5
 
-Music_ThePeacefulVillageDay_Ch3: ; 339b5 (0c:79b5)
+Music_ThePeacefulVillageDay_Ch3:
 	semitone_offset 0
 
 .loop
@@ -482,9 +480,8 @@ Music_ThePeacefulVillageDay_Ch3: ; 339b5 (0c:79b5)
 	audio_jump .loop
 .end
 	audio_end
-; 0x33a5e
 
-Music_ThePeacefulVillageDay_Ch4: ; 33a5e (0c:7a5e)
+Music_ThePeacefulVillageDay_Ch4:
 	semitone_offset 0
 
 .loop
@@ -644,9 +641,8 @@ Music_ThePeacefulVillageDay_Ch4: ; 33a5e (0c:7a5e)
 	audio_jump .loop
 .end
 	audio_end
-; 0x33b2e
 
-Music_ThePeacefulVillageDay: ; 33b2e (c:7b2e)
+Music_ThePeacefulVillageDay:
 	db $4, $2
 	dw Music_ThePeacefulVillageDay_Ch1
 	dw Music_ThePeacefulVillageDay_Ch2

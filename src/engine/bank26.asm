@@ -1,326 +1,326 @@
 TreasureGfx:
-Treasure000Gfx: ; 98000 (26:4000)
+Treasure000Gfx:
 INCBIN "gfx/treasures/treasure_000.2bpp"
 
-Treasure001Gfx: ; 98040 (26:4040)
+Treasure001Gfx:
 INCBIN "gfx/treasures/treasure_001.2bpp"
 
-Treasure002Gfx: ; 98080 (26:4080)
+Treasure002Gfx:
 INCBIN "gfx/treasures/treasure_002.2bpp"
 
-Treasure003Gfx: ; 980c0 (26:40c0)
+Treasure003Gfx:
 INCBIN "gfx/treasures/treasure_003.2bpp"
 
-Treasure004Gfx: ; 98100 (26:4100)
+Treasure004Gfx:
 INCBIN "gfx/treasures/treasure_004.2bpp"
 
-Treasure005Gfx: ; 98140 (26:4140)
+Treasure005Gfx:
 INCBIN "gfx/treasures/treasure_005.2bpp"
 
-Treasure006Gfx: ; 98180 (26:4180)
+Treasure006Gfx:
 INCBIN "gfx/treasures/treasure_006.2bpp"
 
-Treasure007Gfx: ; 981c0 (26:41c0)
+Treasure007Gfx:
 INCBIN "gfx/treasures/treasure_007.2bpp"
 
-Treasure008Gfx: ; 98200 (26:4200)
+Treasure008Gfx:
 INCBIN "gfx/treasures/treasure_008.2bpp"
 
-Treasure009Gfx: ; 98240 (26:4240)
+Treasure009Gfx:
 INCBIN "gfx/treasures/treasure_009.2bpp"
 
-Treasure010Gfx: ; 98280 (26:4280)
+Treasure010Gfx:
 INCBIN "gfx/treasures/treasure_010.2bpp"
 
-Treasure011Gfx: ; 982c0 (26:42c0)
+Treasure011Gfx:
 INCBIN "gfx/treasures/treasure_011.2bpp"
 
-Treasure012Gfx: ; 98300 (26:4300)
+Treasure012Gfx:
 INCBIN "gfx/treasures/treasure_012.2bpp"
 
-Treasure013Gfx: ; 98340 (26:4340)
+Treasure013Gfx:
 INCBIN "gfx/treasures/treasure_013.2bpp"
 
-Treasure014Gfx: ; 98380 (26:4380)
+Treasure014Gfx:
 INCBIN "gfx/treasures/treasure_014.2bpp"
 
-Treasure015Gfx: ; 983c0 (26:43c0)
+Treasure015Gfx:
 INCBIN "gfx/treasures/treasure_015.2bpp"
 
-Treasure016Gfx: ; 98400 (26:4400)
+Treasure016Gfx:
 INCBIN "gfx/treasures/treasure_016.2bpp"
 
-Treasure017Gfx: ; 98440 (26:4440)
+Treasure017Gfx:
 INCBIN "gfx/treasures/treasure_017.2bpp"
 
-Treasure018Gfx: ; 98480 (26:4480)
+Treasure018Gfx:
 INCBIN "gfx/treasures/treasure_018.2bpp"
 
-Treasure019Gfx: ; 984c0 (26:44c0)
+Treasure019Gfx:
 INCBIN "gfx/treasures/treasure_019.2bpp"
 
-Treasure020Gfx: ; 98500 (26:4500)
+Treasure020Gfx:
 INCBIN "gfx/treasures/treasure_020.2bpp"
 
-Treasure021Gfx: ; 98540 (26:4540)
+Treasure021Gfx:
 INCBIN "gfx/treasures/treasure_021.2bpp"
 
-Treasure022Gfx: ; 98580 (26:4580)
+Treasure022Gfx:
 INCBIN "gfx/treasures/treasure_022.2bpp"
 
-Treasure023Gfx: ; 985c0 (26:45c0)
+Treasure023Gfx:
 INCBIN "gfx/treasures/treasure_023.2bpp"
 
-Treasure024Gfx: ; 98600 (26:4600)
+Treasure024Gfx:
 INCBIN "gfx/treasures/treasure_024.2bpp"
 
-Treasure025Gfx: ; 98640 (26:4640)
+Treasure025Gfx:
 INCBIN "gfx/treasures/treasure_025.2bpp"
 
-Treasure026Gfx: ; 98680 (26:4680)
+Treasure026Gfx:
 INCBIN "gfx/treasures/treasure_026.2bpp"
 
-Treasure027Gfx: ; 986c0 (26:46c0)
+Treasure027Gfx:
 INCBIN "gfx/treasures/treasure_027.2bpp"
 
-Treasure028Gfx: ; 98700 (26:4700)
+Treasure028Gfx:
 INCBIN "gfx/treasures/treasure_028.2bpp"
 
-Treasure029Gfx: ; 98740 (26:4740)
+Treasure029Gfx:
 INCBIN "gfx/treasures/treasure_029.2bpp"
 
-Treasure030Gfx: ; 98780 (26:4780)
+Treasure030Gfx:
 INCBIN "gfx/treasures/treasure_030.2bpp"
 
-Treasure031Gfx: ; 987c0 (26:47c0)
+Treasure031Gfx:
 INCBIN "gfx/treasures/treasure_031.2bpp"
 
-Treasure032Gfx: ; 98800 (26:4800)
+Treasure032Gfx:
 INCBIN "gfx/treasures/treasure_032.2bpp"
 
-Treasure033Gfx: ; 98840 (26:4840)
+Treasure033Gfx:
 INCBIN "gfx/treasures/treasure_033.2bpp"
 
-Treasure034Gfx: ; 98880 (26:4880)
+Treasure034Gfx:
 INCBIN "gfx/treasures/treasure_034.2bpp"
 
-Treasure035Gfx: ; 988c0 (26:48c0)
+Treasure035Gfx:
 INCBIN "gfx/treasures/treasure_035.2bpp"
 
-Treasure036Gfx: ; 98900 (26:4900)
+Treasure036Gfx:
 INCBIN "gfx/treasures/treasure_036.2bpp"
 
-Treasure037Gfx: ; 98940 (26:4940)
+Treasure037Gfx:
 INCBIN "gfx/treasures/treasure_037.2bpp"
 
-Treasure038Gfx: ; 98980 (26:4980)
+Treasure038Gfx:
 INCBIN "gfx/treasures/treasure_038.2bpp"
 
-Treasure039Gfx: ; 989c0 (26:49c0)
+Treasure039Gfx:
 INCBIN "gfx/treasures/treasure_039.2bpp"
 
-Treasure040Gfx: ; 98a00 (26:4a00)
+Treasure040Gfx:
 INCBIN "gfx/treasures/treasure_040.2bpp"
 
-Treasure041Gfx: ; 98a40 (26:4a40)
+Treasure041Gfx:
 INCBIN "gfx/treasures/treasure_041.2bpp"
 
-Treasure042Gfx: ; 98a80 (26:4a80)
+Treasure042Gfx:
 INCBIN "gfx/treasures/treasure_042.2bpp"
 
-Treasure043Gfx: ; 98ac0 (26:4ac0)
+Treasure043Gfx:
 INCBIN "gfx/treasures/treasure_043.2bpp"
 
-Treasure044Gfx: ; 98b00 (26:4b00)
+Treasure044Gfx:
 INCBIN "gfx/treasures/treasure_044.2bpp"
 
-Treasure045Gfx: ; 98b40 (26:4b40)
+Treasure045Gfx:
 INCBIN "gfx/treasures/treasure_045.2bpp"
 
-Treasure046Gfx: ; 98b80 (26:4b80)
+Treasure046Gfx:
 INCBIN "gfx/treasures/treasure_046.2bpp"
 
-Treasure047Gfx: ; 98bc0 (26:4bc0)
+Treasure047Gfx:
 INCBIN "gfx/treasures/treasure_047.2bpp"
 
-Treasure048Gfx: ; 98c00 (26:4c00)
+Treasure048Gfx:
 INCBIN "gfx/treasures/treasure_048.2bpp"
 
-Treasure049Gfx: ; 98c40 (26:4c40)
+Treasure049Gfx:
 INCBIN "gfx/treasures/treasure_049.2bpp"
 
-Treasure050Gfx: ; 98c80 (26:4c80)
+Treasure050Gfx:
 INCBIN "gfx/treasures/treasure_050.2bpp"
 
-Treasure051Gfx: ; 98cc0 (26:4cc0)
+Treasure051Gfx:
 INCBIN "gfx/treasures/treasure_051.2bpp"
 
-Treasure052Gfx: ; 98d00 (26:4d00)
+Treasure052Gfx:
 INCBIN "gfx/treasures/treasure_052.2bpp"
 
-Treasure053Gfx: ; 98d40 (26:4d40)
+Treasure053Gfx:
 INCBIN "gfx/treasures/treasure_053.2bpp"
 
-Treasure054Gfx: ; 98d80 (26:4d80)
+Treasure054Gfx:
 INCBIN "gfx/treasures/treasure_054.2bpp"
 
-Treasure055Gfx: ; 98dc0 (26:4dc0)
+Treasure055Gfx:
 INCBIN "gfx/treasures/treasure_055.2bpp"
 
-Treasure056Gfx: ; 98e00 (26:4e00)
+Treasure056Gfx:
 INCBIN "gfx/treasures/treasure_056.2bpp"
 
-Treasure057Gfx: ; 98e40 (26:4e40)
+Treasure057Gfx:
 INCBIN "gfx/treasures/treasure_057.2bpp"
 
-Treasure058Gfx: ; 98e80 (26:4e80)
+Treasure058Gfx:
 INCBIN "gfx/treasures/treasure_058.2bpp"
 
-Treasure059Gfx: ; 98ec0 (26:4ec0)
+Treasure059Gfx:
 INCBIN "gfx/treasures/treasure_059.2bpp"
 
-Treasure060Gfx: ; 98f00 (26:4f00)
+Treasure060Gfx:
 INCBIN "gfx/treasures/treasure_060.2bpp"
 
-Treasure061Gfx: ; 98f40 (26:4f40)
+Treasure061Gfx:
 INCBIN "gfx/treasures/treasure_061.2bpp"
 
-Treasure062Gfx: ; 98f80 (26:4f80)
+Treasure062Gfx:
 INCBIN "gfx/treasures/treasure_062.2bpp"
 
-Treasure063Gfx: ; 98fc0 (26:4fc0)
+Treasure063Gfx:
 INCBIN "gfx/treasures/treasure_063.2bpp"
 
-Treasure064Gfx: ; 99000 (26:5000)
+Treasure064Gfx:
 INCBIN "gfx/treasures/treasure_064.2bpp"
 
-Treasure065Gfx: ; 99040 (26:5040)
+Treasure065Gfx:
 INCBIN "gfx/treasures/treasure_065.2bpp"
 
-Treasure066Gfx: ; 99080 (26:5080)
+Treasure066Gfx:
 INCBIN "gfx/treasures/treasure_066.2bpp"
 
-Treasure067Gfx: ; 990c0 (26:50c0)
+Treasure067Gfx:
 INCBIN "gfx/treasures/treasure_067.2bpp"
 
-Treasure068Gfx: ; 99100 (26:5100)
+Treasure068Gfx:
 INCBIN "gfx/treasures/treasure_068.2bpp"
 
-Treasure069Gfx: ; 99140 (26:5140)
+Treasure069Gfx:
 INCBIN "gfx/treasures/treasure_069.2bpp"
 
-Treasure070Gfx: ; 99180 (26:5180)
+Treasure070Gfx:
 INCBIN "gfx/treasures/treasure_070.2bpp"
 
-Treasure071Gfx: ; 991c0 (26:51c0)
+Treasure071Gfx:
 INCBIN "gfx/treasures/treasure_071.2bpp"
 
-Treasure072Gfx: ; 99200 (26:5200)
+Treasure072Gfx:
 INCBIN "gfx/treasures/treasure_072.2bpp"
 
-Treasure073Gfx: ; 99240 (26:5240)
+Treasure073Gfx:
 INCBIN "gfx/treasures/treasure_073.2bpp"
 
-Treasure074Gfx: ; 99280 (26:5280)
+Treasure074Gfx:
 INCBIN "gfx/treasures/treasure_074.2bpp"
 
-Treasure075Gfx: ; 992c0 (26:52c0)
+Treasure075Gfx:
 INCBIN "gfx/treasures/treasure_075.2bpp"
 
-Treasure076Gfx: ; 99300 (26:5300)
+Treasure076Gfx:
 INCBIN "gfx/treasures/treasure_076.2bpp"
 
-Treasure077Gfx: ; 99340 (26:5340)
+Treasure077Gfx:
 INCBIN "gfx/treasures/treasure_077.2bpp"
 
-Treasure078Gfx: ; 99380 (26:5380)
+Treasure078Gfx:
 INCBIN "gfx/treasures/treasure_078.2bpp"
 
-Treasure079Gfx: ; 993c0 (26:53c0)
+Treasure079Gfx:
 INCBIN "gfx/treasures/treasure_079.2bpp"
 
-Treasure080Gfx: ; 99400 (26:5400)
+Treasure080Gfx:
 INCBIN "gfx/treasures/treasure_080.2bpp"
 
-Treasure081Gfx: ; 99440 (26:5440)
+Treasure081Gfx:
 INCBIN "gfx/treasures/treasure_081.2bpp"
 
-Treasure082Gfx: ; 99480 (26:5480)
+Treasure082Gfx:
 INCBIN "gfx/treasures/treasure_082.2bpp"
 
-Treasure083Gfx: ; 994c0 (26:54c0)
+Treasure083Gfx:
 INCBIN "gfx/treasures/treasure_083.2bpp"
 
-Treasure084Gfx: ; 99500 (26:5500)
+Treasure084Gfx:
 INCBIN "gfx/treasures/treasure_084.2bpp"
 
-Treasure085Gfx: ; 99540 (26:5540)
+Treasure085Gfx:
 INCBIN "gfx/treasures/treasure_085.2bpp"
 
-Treasure086Gfx: ; 99580 (26:5580)
+Treasure086Gfx:
 INCBIN "gfx/treasures/treasure_086.2bpp"
 
-Treasure087Gfx: ; 995c0 (26:55c0)
+Treasure087Gfx:
 INCBIN "gfx/treasures/treasure_087.2bpp"
 
-Treasure088Gfx: ; 99600 (26:5600)
+Treasure088Gfx:
 INCBIN "gfx/treasures/treasure_088.2bpp"
 
-Treasure089Gfx: ; 99640 (26:5640)
+Treasure089Gfx:
 INCBIN "gfx/treasures/treasure_089.2bpp"
 
-Treasure090Gfx: ; 99680 (26:5680)
+Treasure090Gfx:
 INCBIN "gfx/treasures/treasure_090.2bpp"
 
-Treasure091Gfx: ; 996c0 (26:56c0)
+Treasure091Gfx:
 INCBIN "gfx/treasures/treasure_091.2bpp"
 
-Treasure092Gfx: ; 99700 (26:5700)
+Treasure092Gfx:
 INCBIN "gfx/treasures/treasure_092.2bpp"
 
-Treasure093Gfx: ; 99740 (26:5740)
+Treasure093Gfx:
 INCBIN "gfx/treasures/treasure_093.2bpp"
 
-Treasure094Gfx: ; 99780 (26:5780)
+Treasure094Gfx:
 INCBIN "gfx/treasures/treasure_094.2bpp"
 
-Treasure095Gfx: ; 997c0 (26:57c0)
+Treasure095Gfx:
 INCBIN "gfx/treasures/treasure_095.2bpp"
 
-Treasure096Gfx: ; 99800 (26:5800)
+Treasure096Gfx:
 INCBIN "gfx/treasures/treasure_096.2bpp"
 
-Treasure097Gfx: ; 99840 (26:5840)
+Treasure097Gfx:
 INCBIN "gfx/treasures/treasure_097.2bpp"
 
-Treasure098Gfx: ; 99880 (26:5880)
+Treasure098Gfx:
 INCBIN "gfx/treasures/treasure_098.2bpp"
 
-Treasure099Gfx: ; 998c0 (26:58c0)
+Treasure099Gfx:
 INCBIN "gfx/treasures/treasure_099.2bpp"
 
-Treasure100Gfx: ; 99900 (26:5900)
+Treasure100Gfx:
 INCBIN "gfx/treasures/treasure_100.2bpp"
 
-Treasure101Gfx: ; 99940 (26:5940)
+Treasure101Gfx:
 INCBIN "gfx/treasures/treasure_101.2bpp"
 
-NumbersGfx: ; 99980 (26:5980)
+NumbersGfx:
 INCBIN "gfx/gui/numbers.2bpp"
 
-TreasureCollectionGfx: ; 99ae0 (26:5ae0)
+TreasureCollectionGfx:
 INCBIN "gfx/gui/treasure_collection.2bpp.lz"
 
-TreasureCollectionCursorGfx: ; 9a05c (26:605c)
+TreasureCollectionCursorGfx:
 INCBIN "gfx/gui/treasure_collection_cursor.2bpp.lz"
 
-BGMap_9a129: ; 9a129 (26:6129)
+BGMap_9a129:
 INCBIN "gfx/bgmaps/map_9a129.bin"
 
-BGMap_9a2ac: ; 9a2ac (26:62ac)
+BGMap_9a2ac:
 INCBIN "gfx/bgmaps/map_9a2ac.bin"
 
-DrawCoinCount: ; 9a3a2 (26:63a2)
+DrawCoinCount:
 	ld de, v0Tiles1 + $a0
 	ld a, [wNumCoins + 0]
 	call .DrawNumber
@@ -345,9 +345,8 @@ DrawCoinCount: ; 9a3a2 (26:63a2)
 	ld b, $20
 	call CopyHLToDE
 	ret
-; 0x9a3cf
 
-_InitTreasureCollection: ; 9a3cf (26:63cf)
+_InitTreasureCollection:
 	call DisableLCD
 	call FillBGMap0_With7f
 	call ClearVirtualOAM
@@ -474,9 +473,8 @@ _InitTreasureCollection: ; 9a3cf (26:63cf)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0x9a52b
 
-LoadCollectionPageTreasureGfx: ; 9a52b (26:652b)
+LoadCollectionPageTreasureGfx:
 	ld hl, Treasure001Gfx - (NUM_TREASURE_TILES * NUM_COLLECTION_CELLS) tiles
 	ld de, (NUM_TREASURE_TILES * NUM_COLLECTION_CELLS) tiles
 	ld a, [wCollectionPage]
@@ -494,25 +492,22 @@ LoadCollectionPageTreasureGfx: ; 9a52b (26:652b)
 	ld b, NUM_TREASURE_TILES tiles
 	call CopyHLToDE
 	ret
-; 0x9a54e
 
-Func_9a54e: ; 9a54e (26:654e)
+Func_9a54e:
 	ld hl, wCollectionRow
 	ld bc, $800
 	xor a
 	call WriteAToHL_BCTimes
 	ret
-; 0x9a559
 
-Func_9a559: ; 9a559 (26:6559)
+Func_9a559:
 	ld hl, wCurSceneObj
 	ld bc, $200
 	xor a
 	call WriteAToHL_BCTimes
 	ret
-; 0x9a564
 
-VBlank_9a564: ; 9a564 (26:6564)
+VBlank_9a564:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -531,11 +526,10 @@ VBlank_9a564: ; 9a564 (26:6564)
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
 .end
-; 0x9a586
 
 ; iterates all treasures in the current page
 ; and applies the corresponding palette
-ApplyPageTreasuresPals: ; 9a586 (26:6586)
+ApplyPageTreasuresPals:
 	xor a
 	ld [w2dffe], a
 	ld a, [wCollectionPage]
@@ -654,17 +648,15 @@ ApplyPageTreasuresPals: ; 9a586 (26:6586)
 	db $c9 ; 17
 	db $cc ; 18
 	db $cf ; 19
-; 0x9a618
 
-_TreasureCollection: ; 9a618 (26:6618)
+_TreasureCollection:
 	call ProcessDPadRepeat
 	call HandleTreasureCollectionInput
 	call AnimateTreasureCollection
 	call ClearUnusedVirtualOAM
 	ret
-; 0x9a625
 
-HandleTreasureCollectionInput: ; 9a625 (26:6625)
+HandleTreasureCollectionInput:
 	ld a, [wJoypadPressed]
 	bit B_BUTTON_F, a
 	jr z, .asm_9a646
@@ -831,9 +823,8 @@ HandleTreasureCollectionInput: ; 9a625 (26:6625)
 	ld a, $0c
 	ld [wSubState], a
 	ret
-; 0x9a76a
 
-GetCollectionCellCoords: ; 9a76a (26:676a)
+GetCollectionCellCoords:
 	ld a, [wCollectionRow]
 	ld hl, .y_coords
 	ld c, a
@@ -861,9 +852,8 @@ GetCollectionCellCoords: ; 9a76a (26:676a)
 	db $50 ; col 2
 	db $68 ; col 3
 	db $80 ; col 4
-; 0x9a78e
 
-Func_9a78e: ; 9a78e (26:678e)
+Func_9a78e:
 	ld a, [de]
 	ld hl, .table_1
 	ld c, a
@@ -892,14 +882,13 @@ Func_9a78e: ; 9a78e (26:678e)
 	db $50 ; col 2
 	db $68 ; col 3
 	db $80 ; col 4
-; 0x9a7ab
 
-GetCurrentCollectionCellRowAndColumn: ; 9a7ab (26:67ab)
+GetCurrentCollectionCellRowAndColumn:
 	ld a, [wCollectionCell]
 	ld hl, wCollectionRow
 ;	fallthrough
 
-GetCollectionCellRowAndColumn: ; 9a7b1 (26:67b1)
+GetCollectionCellRowAndColumn:
 	ld b, 0
 .loop_find_row
 	cp NUM_COLLECTION_COLS
@@ -912,9 +901,8 @@ GetCollectionCellRowAndColumn: ; 9a7b1 (26:67b1)
 	inc l
 	ld [hli], a ; col
 	ret
-; 0x9a7c0
 
-ProcessCollectionLinkState: ; 9a7c0 (26:67c0)
+ProcessCollectionLinkState:
 	ld hl, wCollectionLinkStateCounter
 	inc [hl]
 	ld b, h
@@ -1059,9 +1047,8 @@ ProcessCollectionLinkState: ; 9a7c0 (26:67c0)
 	ld a, $02
 	call SetSceneObjState
 	ret
-; 0x9a8e0
 
-CollectionLinkTable: ; 9a8e0 (26:68e0)
+CollectionLinkTable:
 	dw .Page0
 	dw .Page1
 	dw .Page2
@@ -1217,9 +1204,8 @@ CollectionLinkTable: ; 9a8e0 (26:68e0)
 
 .crayons
 	db $0e, $0f, $10, $11, $12, $13, $14, $80
-; 0x9a9ec
 
-Func_9a9ec: ; 9a9ec (26:69ec)
+Func_9a9ec:
 	ld h, b
 	ld l, c
 	res 1, l
@@ -1227,15 +1213,13 @@ Func_9a9ec: ; 9a9ec (26:69ec)
 	call UpdateOWAnimation
 	ld a, [bc]
 	ret
-; 0x9a9f7
 
-Func_9a9f7: ; 9a9f7 (26:69f7)
+Func_9a9f7:
 	ld b, $26
 	call AddOWSpriteWithScroll
 	ret
-; 0x9a9fd
 
-Func_9a9fd: ; 9a9fd (26:69fd)
+Func_9a9fd:
 	ld a, [wOWAnimationFinished]
 	cp $ff
 	ret nz
@@ -1248,9 +1232,8 @@ Func_9a9fd: ; 9a9fd (26:69fd)
 	ld b, h
 	ld c, l
 	ret
-; 0x9aa0d
 
-AnimateTreasureCollection: ; 9aa0d (26:6a0d)
+AnimateTreasureCollection:
 	ld bc, wSceneObj1State
 	call .Func_9aa4a
 	ld bc, wSceneObj2State
@@ -1282,52 +1265,44 @@ AnimateTreasureCollection: ; 9aa0d (26:6a0d)
 	dw Func_9aa72
 	dw Func_9aa77
 	dw Func_9aa7c
-; 0x9aa56
 
-Func_9aa56: ; 9aa56 (26:6a56)
+Func_9aa56:
 	call Func_9a9ec
-Func_9aa59: ; 9aa59 (26:6a59)
+Func_9aa59:
 	ld de, OAM_9ac5d
 	call Func_9a9f7
 	ret
-; 0x9aa60
 
 ; unreferenced
-Func_9aa60: ; 9aa60 (26:6a60)
+Func_9aa60:
 	call Func_9a9ec
 	ld e, $00
 	call Func_9a9fd
 	jr nz, Func_9aa59
 	jr AnimateTreasureCollection.Func_9aa4a
-; 0x9aa6c
 
-Func_9aa6c: ; 9aa6c (26:6a6c)
+Func_9aa6c:
 	ret
-; 0x9aa6d
 
-Func_9aa6d: ; 9aa6d (26:6a6d)
+Func_9aa6d:
 	ld de, Frameset_9ace1
 	jr Func_9aa56
-; 0x9aa72
 
-Func_9aa72: ; 9aa72 (26:6a72)
+Func_9aa72:
 	ld de, Frameset_9acea
 	jr Func_9aa56
-; 0x9aa77
 
-Func_9aa77: ; 9aa77 (26:6a77)
+Func_9aa77:
 	ld de, Frameset_9acf3
 	jr Func_9aa56
-; 0x9aa7c
 
-Func_9aa7c: ; 9aa7c (26:6a7c)
+Func_9aa7c:
 	ld de, Frameset_9acfc
 	jr Func_9aa56
-; 0x9aa81
 
 ; input:
 ; c = * constant
-GetLevelThatContainsTreasure: ; 9aa81 (26:6a81)
+GetLevelThatContainsTreasure:
 	ld b, -1
 	ld hl, LevelTreasureIDs
 .loop
@@ -1338,9 +1313,8 @@ GetLevelThatContainsTreasure: ; 9aa81 (26:6a81)
 	srl b
 	srl b ; /4
 	ret
-; 0x9aa90
 
-LoadLevelTreasureData: ; 9aa90 (26:6a90)
+LoadLevelTreasureData:
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM2")
@@ -1359,9 +1333,8 @@ LoadLevelTreasureData: ; 9aa90 (26:6a90)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0x9aab5
 
-Func_9aab5: ; 9aab5 (26:6ab5)
+Func_9aab5:
 	ld a, [wMapSideLevelID]
 	cp OW_EXITS
 	ret nc
@@ -1391,9 +1364,8 @@ Func_9aab5: ; 9aab5 (26:6ab5)
 	ld a, hdma 16
 	ld [wHDMAMode], a
 	ret
-; 0x9aaf4
 
-Func_9aaf4: ; 9aaf4 (26:6af4)
+Func_9aaf4:
 	ld a, [wOWLevel]
 	call CheckLevelMusicalCoinFlag
 	ret z ; didn't get all musical coins
@@ -1404,10 +1376,9 @@ Func_9aaf4: ; 9aaf4 (26:6af4)
 	ld [hli], a
 	ld [hl], a ; wCompassObjUnk7
 	ret
-; 0x9ab07
 
 ; clears treasure tiles and info in WRAM
-ClearTreasureData: ; 9ab07 (26:6b07)
+ClearTreasureData:
 ; clear the treasure tiles
 	xor a
 	ld hl, wTileBuffer
@@ -1420,9 +1391,8 @@ ClearTreasureData: ; 9ab07 (26:6b07)
 	ld bc, $10
 	call WriteAToHL_BCTimes
 	ret
-; 0x9ab1c
 
-Func_9ab1c: ; 9ab1c (26:6b1c)
+Func_9ab1c:
 	ld a, [wOWLevel]
 	and a
 	ret z
@@ -1430,9 +1400,8 @@ Func_9ab1c: ; 9ab1c (26:6b1c)
 	ret z
 	farcall GetOWLevelCollectedTreasures
 	ret
-; 0x9ab34
 
-LoadTreasureTiles: ; 9ab34 (26:6b34)
+LoadTreasureTiles:
 	ld a, [wLevelGreyTreasureID]
 	ld de, wTileBuffer
 	call .CopyGfx
@@ -1466,12 +1435,11 @@ LoadTreasureTiles: ; 9ab34 (26:6b34)
 	ld b, 4 tiles
 	call CopyHLToDE
 	ret
-; 0x9ab6d
 
 ; for each treasure that hasn't been collected
 ; in the current level, write in [de]
 ; a value of $00 (TREASURE_NONE)
-WriteUncollectedBottomBarTreasureIDs: ; 9ab6d (26:6b6d)
+WriteUncollectedBottomBarTreasureIDs:
 	ld a, [wKeyAndTreasureFlags]
 	swap a
 	and $0f
@@ -1488,10 +1456,9 @@ WriteUncollectedBottomBarTreasureIDs: ; 9ab6d (26:6b6d)
 	dec c
 	jr nz, .loop_level_treasures
 	ret
-; 0x9ab85
 
 ; loads in wLevelTreasureIDs the treasure IDs for level in wOWLevel
-LoadLevelTreasures: ; 9ab85 (26:6b85)
+LoadLevelTreasures:
 	ld hl, LevelTreasureIDs
 	ld de, wLevelTreasureIDs
 	call .GetLevelTreasures
@@ -1512,9 +1479,8 @@ LoadLevelTreasures: ; 9ab85 (26:6b85)
 	dec b
 	jr nz, .loop
 	ret
-; 0x9aba1
 
-LoadTreasurePals: ; 9aba1 (26:6ba1)
+LoadTreasurePals:
 	ld de, TreasureOBPals
 	ld a, [wLevelGreyTreasureID]
 	ld l, a
@@ -1544,9 +1510,8 @@ LoadTreasurePals: ; 9aba1 (26:6ba1)
 	ld a, [hl]
 	ld [wLevelBlueTreasurePal], a
 	ret
-; 0x9abd1
 
-GetLevelTimeAttackScore: ; 9abd1 (26:6bd1)
+GetLevelTimeAttackScore:
 	ld a, [wOWLevel]
 	and a
 	ret z
@@ -1565,19 +1530,17 @@ GetLevelTimeAttackScore: ; 9abd1 (26:6bd1)
 	ld a, [hl]
 	ld [de], a ; w2d0ef
 	ret
-; 0x9abeb
 
 ; fills wBottomBarTreasureIDs
 ; with treasures in wLevelTreasureIDs
-FillBottomBarTreasureIDs: ; 9abeb (26:6beb)
+FillBottomBarTreasureIDs:
 	ld de, wBottomBarTreasureIDs
 	ld hl, wLevelTreasureIDs
 	ld b, NUM_LEVEL_TREASURES
 	call CopyHLToDE
 	ret
-; 0x9abf7
 
-TreasureOBPals: ; 9abf7 (26:6bf7)
+TreasureOBPals:
 	db OBPAL_TREASURE_YELLOW ; TREASURE_NONE
 	db OBPAL_TREASURE_YELLOW ; YELLOW_MUSIC_BOX
 	db OBPAL_TREASURE_BLUE   ; BLUE_MUSIC_BOX
@@ -1680,9 +1643,8 @@ TreasureOBPals: ; 9abf7 (26:6bf7)
 	db OBPAL_TREASURE_BLUE   ; CRAYON_BLUE_T
 	db OBPAL_TREASURE_RED    ; CRAYON_PINK_T
 	db $03 ; 101
-; 0x9ac5d
 
-OAM_9ac5d: ; 9ac5d (26:6c5d)
+OAM_9ac5d:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1755,41 +1717,36 @@ OAM_9ac5d: ; 9ac5d (26:6c5d)
 .frame_11
 	frame_oam  -8,  -4, $16, 2 | OAMF_XFLIP
 	db $80
-; 0x9ace1
 
-Frameset_9ace1:: ; 9ace1 (26:6ce1)
+Frameset_9ace1::
 	db $00,  3
 	db $01,  3
 	db $02,  3
 	db $01,  3
 	db $ff
-; 0x9acea
 
-Frameset_9acea:: ; 9acea (26:6cea)
+Frameset_9acea::
 	db $03,  6
 	db $04,  6
 	db $05,  6
 	db $04,  6
 	db $ff
-; 0x9acf3
 
-Frameset_9acf3:: ; 9acf3 (26:6cf3)
+Frameset_9acf3::
 	db $06,  8
 	db $07,  4
 	db $08,  8
 	db $07,  4
 	db $ff
-; 0x9acfc
 
-Frameset_9acfc:: ; 9acfc (26:6cfc)
+Frameset_9acfc::
 	db $09,  8
 	db $0a,  4
 	db $0b,  8
 	db $0a,  4
 	db $ff
-; 0x9ad05
 
-Pals_9ad05: ; 9ad05 (26:6d05)
+Pals_9ad05:
 	rgb 31, 31, 31
 	rgb 10, 31, 10
 	rgb  0, 20,  0
@@ -1829,9 +1786,8 @@ Pals_9ad05: ; 9ad05 (26:6d05)
 	rgb 25, 25, 25
 	rgb 15, 15, 15
 	rgb  0,  0,  7
-; 0x9ad45
 
-Pals_9ad45: ; 9ad45 (26:6d45)
+Pals_9ad45:
 	rgb 31, 31, 31
 	rgb 20, 31, 31
 	rgb 10, 20, 31
@@ -1851,37 +1807,32 @@ Pals_9ad45: ; 9ad45 (26:6d45)
 	rgb 31, 31,  0
 	rgb 31,  4, 13
 	rgb  0,  0,  0
-; 0x9ad65
 
 TreasurePals::
-TreasureYellowPal: ; 9ad65 (26:6d65)
+TreasureYellowPal:
 ; OBPAL_TREASURE_YELLOW
 	rgb 31, 31, 31
 	rgb 31, 31,  0
 	rgb 19, 16,  0
 	rgb  5,  4,  0
-; 0x9ad6d
 
-TreasureRedPal: ; 9ad6d (26:6d6d)
+TreasureRedPal:
 ; OBPAL_TREASURE_RED
 	rgb 31, 31, 31
 	rgb 31, 19, 23
 	rgb 27,  0,  6
 	rgb  7,  0,  0
-; 0x9ad75
 
-TreasureGreenPal: ; 9ad75 (26:6d75)
+TreasureGreenPal:
 ; OBPAL_TREASURE_GREEN
 	rgb 31, 31, 31
 	rgb 22, 31, 20
 	rgb  0, 21,  0
 	rgb  0,  2,  0
-; 0x9ad7d
 
-TreasureBluePal: ; 9ad7d (26:6d7d)
+TreasureBluePal:
 ; OBPAL_TREASURE_BLUE
 	rgb 31, 31, 31
 	rgb  2, 31, 31
 	rgb  6,  6, 31
 	rgb  0,  0,  7
-; 0x9ad85

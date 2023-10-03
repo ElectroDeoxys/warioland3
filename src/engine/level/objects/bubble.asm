@@ -1,4 +1,4 @@
-BubbleHoleFunc: ; 47be6 (11:7be6)
+BubbleHoleFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Update)
 	ld [hld], a
@@ -41,9 +41,8 @@ BubbleHoleFunc: ; 47be6 (11:7be6)
 	ld a, 1
 	ld [wCurObjStateDuration], a
 	ret
-; 0x47c36
 
-BubbleFunc: ; 47c36 (11:7c36)
+BubbleFunc:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjFlags
@@ -286,4 +285,3 @@ BubbleFunc: ; 47c36 (11:7c36)
 	ret nc
 	inc [hl]
 	ret
-; 0x47db3

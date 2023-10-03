@@ -1,5 +1,5 @@
 ; adds a Repeat Delay and Rate to any DPad key
-ProcessDPadRepeat:: ; 302 (0:302)
+ProcessDPadRepeat::
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("GFX RAM")
@@ -35,4 +35,3 @@ ProcessDPadRepeat:: ; 302 (0:302)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0x334

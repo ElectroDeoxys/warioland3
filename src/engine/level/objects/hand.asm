@@ -1,4 +1,4 @@
-HandFunc: ; 4774f (11:774f)
+HandFunc:
 	ld hl, wCurObjFlags
 	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -352,4 +352,3 @@ HandFunc: ; 4774f (11:774f)
 	ld a, [hl]
 	ld [wXPosHi], a
 	ret
-; 0x479b8

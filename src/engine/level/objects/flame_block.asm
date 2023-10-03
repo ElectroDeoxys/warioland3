@@ -1,4 +1,4 @@
-FlameBlockFunc: ; 496bd (12:56bd)
+FlameBlockFunc:
 	ld a, [w1d140]
 	and a
 	jr z, .init
@@ -56,4 +56,3 @@ FlameBlockFunc: ; 496bd (12:56bd)
 	xor a
 	ld [wCurObjFlags], a
 	ret
-; 0x4971c

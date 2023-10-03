@@ -1,34 +1,33 @@
-DeinitChest: ; 4c8b1 (13:48b1)
+DeinitChest:
 	xor a
 	ld [wCurObjFlags], a
 	ret
-; 0x4c8b6
 
-GreyChestFunc: ; 4c8b6 (13:48b6)
+GreyChestFunc:
 	ld a, [wKeyAndTreasureFlags]
 	and GREY_TREASURE
 	jr z, ChestFunc
 	jr DeinitChest
 
-RedChestFunc: ; 4c8bf (13:48bf)
+RedChestFunc:
 	ld a, [wKeyAndTreasureFlags]
 	and RED_TREASURE
 	jr z, ChestFunc
 	jr DeinitChest
 
-GreenChestFunc: ; 4c8c8 (13:48c8)
+GreenChestFunc:
 	ld a, [wKeyAndTreasureFlags]
 	and GREEN_TREASURE
 	jr z, ChestFunc
 	jr DeinitChest
 
-BlueChestFunc: ; 4c8d1 (13:48d1)
+BlueChestFunc:
 	ld a, [wKeyAndTreasureFlags]
 	and BLUE_TREASURE
 	jr z, ChestFunc
 	jr DeinitChest
 
-ChestFunc: ; 4c8da (13:48da)
+ChestFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -111,18 +110,18 @@ ChestFunc: ; 4c8da (13:48da)
 ; these framesets use OAM data that point
 ; to addresses in VRAM that are loaded
 ; with the treasure tiles
-GreyTreasureFunc: ; 4c970 (13:4970)
+GreyTreasureFunc:
 	ld de, Frameset_681be
 	jr TreasureFunc
-RedTreasureFunc: ; 4c975 (13:4975)
+RedTreasureFunc:
 	ld de, Frameset_681c3
 	jr TreasureFunc
-GreenTreasureFunc: ; 4c97a (13:497a)
+GreenTreasureFunc:
 	ld de, Frameset_681c8
 	jr TreasureFunc
-BlueTreasureFunc: ; 4c97f (13:497f)
+BlueTreasureFunc:
 	ld de, Frameset_681cd
-TreasureFunc: ; 4c982 (13:4982)
+TreasureFunc:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration

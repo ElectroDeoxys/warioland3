@@ -1,4 +1,4 @@
-Music_ZombieWario_Ch1: ; 3783d (0d:783d)
+Music_ZombieWario_Ch1:
 	semitone_offset 1
 	tempo 50
 	wave WAVE_60
@@ -53,9 +53,8 @@ Music_ZombieWario_Ch1: ; 3783d (0d:783d)
 	audio_jump .loop
 .end
 	audio_end
-; 0x37883
 
-Music_ZombieWario_Ch2: ; 37883 (0d:7883)
+Music_ZombieWario_Ch2:
 	semitone_offset 1
 	wave WAVE_52
 	volume 75
@@ -152,9 +151,8 @@ Music_ZombieWario_Ch2: ; 37883 (0d:7883)
 	audio_jump .loop
 .end
 	audio_end
-; 0x37901
 
-Music_ZombieWario: ; 37901 (d:7901)
+Music_ZombieWario:
 	db $2, $2
 	dw Music_ZombieWario_Ch1
 	dw Music_ZombieWario_Ch2

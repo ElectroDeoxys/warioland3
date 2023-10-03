@@ -41,7 +41,7 @@ SECTION "serial", ROM0
 SECTION "joypad", ROM0
 	reti
 
-VBlank: ; 61 (0:61)
+VBlank:
 	push af
 	push bc
 	push de
@@ -74,7 +74,6 @@ VBlank: ; 61 (0:61)
 	pop bc
 	pop af
 	reti
-; 0x9a
 	ds $66
 
 SECTION "romheader", ROM0

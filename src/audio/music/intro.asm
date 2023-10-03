@@ -1,4 +1,4 @@
-Music_Intro_Ch1: ; 3a309 (0e:6309)
+Music_Intro_Ch1:
 	semitone_offset 0
 	tempo 90
 	wave WAVE_55
@@ -339,9 +339,8 @@ Music_Intro_Ch1: ; 3a309 (0e:6309)
 	note B_2
 	audio_wait_48
 	audio_end
-; 0x3a479
 
-Music_Intro_Ch2: ; 3a479 (0e:6479)
+Music_Intro_Ch2:
 	semitone_offset 0
 	wave WAVE_10
 	volume 47
@@ -620,9 +619,8 @@ Music_Intro_Ch2: ; 3a479 (0e:6479)
 	note F_2
 	audio_wait_48
 	audio_end
-; 0x3a5a5
 
-Music_Intro_Ch3: ; 3a5a5 (0e:65a5)
+Music_Intro_Ch3:
 	semitone_offset 0
 	wave WAVE_62
 	volume 108
@@ -761,11 +759,9 @@ Music_Intro_Ch3: ; 3a5a5 (0e:65a5)
 	note G_0
 	audio_wait_48
 	audio_end
-; 0x3a641
 
-Music_Intro: ; 3a641 (0e:6641)
+Music_Intro:
 	db 3, 0
 	dw Music_Intro_Ch1
 	dw Music_Intro_Ch2
 	dw Music_Intro_Ch3
-; 0x3a649

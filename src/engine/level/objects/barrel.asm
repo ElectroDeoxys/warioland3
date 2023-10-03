@@ -1,4 +1,4 @@
-Barrel1Func: ; 43451 (10:7451)
+Barrel1Func:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -61,9 +61,8 @@ Barrel1Func: ; 43451 (10:7451)
 .asm_434b4
 	ld bc, Data_60a50
 	jp Func_34fc
-; 0x434ba
 
-Barrel2Func: ; 434ba (10:74ba)
+Barrel2Func:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -368,4 +367,3 @@ Barrel2Func: ; 434ba (10:74ba)
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ret
-; 0x436ea

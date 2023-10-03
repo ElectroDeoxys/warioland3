@@ -1,4 +1,4 @@
-_ActionHelpStateTable:: ; 1f8000 (7e:4000)
+_ActionHelpStateTable::
 	ld a, [wSubState]
 	jumptable
 
@@ -17,9 +17,8 @@ _ActionHelpStateTable:: ; 1f8000 (7e:4000)
 	dw DebugReset
 	dw DebugReset
 	dw DebugReset
-; 0x1f8022
 
-InitActionHelp: ; 1f8022 (7e:4022)
+InitActionHelp:
 	call DisableLCD
 	play_music MUSIC_ACTION_HELP
 
@@ -195,9 +194,8 @@ InitActionHelp: ; 1f8022 (7e:4022)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0x1f8194
 
-UpdateActionHelp: ; 1f8194 (7e:4194)
+UpdateActionHelp:
 	ld a, $02
 	ld b, $20
 	ld d, $0f
@@ -271,4 +269,3 @@ UpdateActionHelp: ; 1f8194 (7e:4194)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0x1f826d

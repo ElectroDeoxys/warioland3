@@ -662,4 +662,3 @@ RoboMouseFunc:
 	ld a, $02
 	ld [wc0d9], a
 	jp Func_3513
-; 0x48d8a

@@ -1,4 +1,4 @@
-Music_ThePoolOfRainDay_Ch1: ; 364e0 (0d:64e0)
+Music_ThePoolOfRainDay_Ch1:
 	semitone_offset 0
 	tempo 60
 	wave WAVE_50
@@ -173,9 +173,8 @@ Music_ThePoolOfRainDay_Ch1: ; 364e0 (0d:64e0)
 	audio_jump .loop
 .end
 	audio_end
-; 0x365b5
 
-Music_ThePoolOfRainDay_Ch2: ; 365b5 (0d:65b5)
+Music_ThePoolOfRainDay_Ch2:
 	semitone_offset 0
 	wave WAVE_47
 	volume 85
@@ -283,9 +282,8 @@ Music_ThePoolOfRainDay_Ch2: ; 365b5 (0d:65b5)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3666b
 
-Music_ThePoolOfRainDay_Ch3: ; 3666b (0d:666b)
+Music_ThePoolOfRainDay_Ch3:
 	semitone_offset 0
 	wave WAVE_5E
 	volume 108
@@ -393,9 +391,8 @@ Music_ThePoolOfRainDay_Ch3: ; 3666b (0d:666b)
 	audio_jump .loop
 .end
 	audio_end
-; 0x36721
 
-Music_ThePoolOfRainDay_Ch4: ; 36721 (0d:6721)
+Music_ThePoolOfRainDay_Ch4:
 	semitone_offset 0
 	wave WAVE_28
 	volume 75
@@ -488,9 +485,8 @@ Music_ThePoolOfRainDay_Ch4: ; 36721 (0d:6721)
 	audio_jump .loop
 .end
 	audio_end
-; 0x367cb
 
-Music_ThePoolOfRainDay: ; 367cb (d:67cb)
+Music_ThePoolOfRainDay:
 	db $4, $2
 	dw Music_ThePoolOfRainDay_Ch1
 	dw Music_ThePoolOfRainDay_Ch2

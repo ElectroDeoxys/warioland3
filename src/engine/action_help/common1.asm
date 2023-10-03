@@ -1,4 +1,4 @@
-ActionHelp_FlashDDownInput: ; 1fb5a1 (7e:75a1)
+ActionHelp_FlashDDownInput:
 	ld a, TRUE
 	ld [wActionHelpFrozen], a
 
@@ -25,9 +25,8 @@ ActionHelp_FlashDDownInput: ; 1fb5a1 (7e:75a1)
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
-; 0x1fb5d5
 
-ActionHelp_FlashDUpInput: ; 1fb5d5 (7e:75d5)
+ActionHelp_FlashDUpInput:
 	ld a, TRUE
 	ld [wActionHelpFrozen], a
 
@@ -54,9 +53,8 @@ ActionHelp_FlashDUpInput: ; 1fb5d5 (7e:75d5)
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
-; 0x1fb609
 
-ActionHelp_FlashBInput: ; 1fb609 (7e:7609)
+ActionHelp_FlashBInput:
 	ld a, TRUE
 	ld [wActionHelpFrozen], a
 
@@ -83,9 +81,8 @@ ActionHelp_FlashBInput: ; 1fb609 (7e:7609)
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
-; 0x1fb63d
 
-ActionHelp_FlashAInput: ; 1fb63d (7e:763d)
+ActionHelp_FlashAInput:
 	ld a, TRUE
 	ld [wActionHelpFrozen], a
 
@@ -112,9 +109,8 @@ ActionHelp_FlashAInput: ; 1fb63d (7e:763d)
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
-; 0x1fb671
 
-ActionHelp_Init: ; 1fb671 (7e:7671)
+ActionHelp_Init:
 	xor a
 	ld [wAnimatedTilesFrameDuration], a
 	ld [wAnimatedTilesGfx], a
@@ -136,9 +132,8 @@ ActionHelp_Init: ; 1fb671 (7e:7671)
 	ld hl, wActionHelpState
 	inc [hl]
 	ret
-; 0x1fb6b7
 
-VBlank_1fb6b7: ; 1fb6b7 (7e:76b7)
+VBlank_1fb6b7:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -181,9 +176,8 @@ VBlank_1fb6b7: ; 1fb6b7 (7e:76b7)
 	call hTransferVirtualOAM
 	ret
 .end
-; 0x1fb6f7
 
-Func_1fb6f7: ; 1fb6f7 (7e:76f7)
+Func_1fb6f7:
 	ld hl, wActionHelpPowerUp
 	ld a, [wJoypadPressed]
 	bit D_RIGHT_F, a
@@ -267,9 +261,8 @@ Func_1fb6f7: ; 1fb6f7 (7e:76f7)
 	ldh [rVBK], a
 	play_sfx SFX_0E2
 	ret
-; 0x1fb780
 
-PowerUpOBPals: ; 1fb780 (7e:7780)
+PowerUpOBPals:
 	db OBPAL_POWER_UP_RED
 	db OBPAL_POWER_UP_BLUE
 	db OBPAL_POWER_UP_GREEN
@@ -280,9 +273,8 @@ PowerUpOBPals: ; 1fb780 (7e:7780)
 	db OBPAL_POWER_UP_BLUE
 	db OBPAL_POWER_UP_GREEN
 	db OBPAL_POWER_UP_YELLOW
-; 0x1fb78a
 
-ActionHelp_ClearDPadInput: ; 1fb78a (7e:778a)
+ActionHelp_ClearDPadInput:
 	xor a
 	ld hl, wMenuObj2FramesetOffset
 	ld [hli], a
@@ -292,9 +284,8 @@ ActionHelp_ClearDPadInput: ; 1fb78a (7e:778a)
 	ld a, LOW(Frameset_1e6b76)
 	ld [hl], a
 	ret
-; 0x1fb797
 
-ActionHelp_ShowDRightInput: ; 1fb797 (7e:7797)
+ActionHelp_ShowDRightInput:
 	xor a
 	ld hl, wMenuObj2FramesetOffset
 	ld [hli], a
@@ -304,9 +295,8 @@ ActionHelp_ShowDRightInput: ; 1fb797 (7e:7797)
 	ld a, LOW(Frameset_1e6b7c)
 	ld [hl], a
 	ret
-; 0x1fb7a4
 
-ActionHelp_ShowDLeftInput: ; 1fb7a4 (7e:77a4)
+ActionHelp_ShowDLeftInput:
 	xor a
 	ld hl, wMenuObj2FramesetOffset
 	ld [hli], a
@@ -316,9 +306,8 @@ ActionHelp_ShowDLeftInput: ; 1fb7a4 (7e:77a4)
 	ld a, LOW(Frameset_1e6b82)
 	ld [hl], a
 	ret
-; 0x1fb7b1
 
-ActionHelp_ShowDDownInput: ; 1fb7b1 (7e:77b1)
+ActionHelp_ShowDDownInput:
 	xor a
 	ld hl, wMenuObj2FramesetOffset
 	ld [hli], a
@@ -328,9 +317,8 @@ ActionHelp_ShowDDownInput: ; 1fb7b1 (7e:77b1)
 	ld a, LOW(Frameset_1e6b7f)
 	ld [hl], a
 	ret
-; 0x1fb7be
 
-ActionHelp_ShowDUpInput: ; 1fb7be (7e:77be)
+ActionHelp_ShowDUpInput:
 	xor a
 	ld hl, wMenuObj2FramesetOffset
 	ld [hli], a
@@ -340,9 +328,8 @@ ActionHelp_ShowDUpInput: ; 1fb7be (7e:77be)
 	ld a, LOW(Frameset_1e6b79)
 	ld [hl], a
 	ret
-; 0x1fb7cb
 
-ActionHelp_ShowDRightAndDDownInput: ; 1fb7cb (7e:77cb)
+ActionHelp_ShowDRightAndDDownInput:
 	xor a
 	ld hl, wMenuObj2FramesetOffset
 	ld [hli], a
@@ -352,9 +339,8 @@ ActionHelp_ShowDRightAndDDownInput: ; 1fb7cb (7e:77cb)
 	ld a, LOW(Frameset_1e6ba8)
 	ld [hl], a
 	ret
-; 0x1fb7d8
 
-ActionHelp_ClearButtonsInput: ; 1fb7d8 (7e:77d8)
+ActionHelp_ClearButtonsInput:
 	ld hl, wMenuObj3FramesetOffset
 	xor a
 	ld [hli], a
@@ -364,9 +350,8 @@ ActionHelp_ClearButtonsInput: ; 1fb7d8 (7e:77d8)
 	ld a, LOW(Frameset_1e6b6d)
 	ld [hl], a
 	ret
-; 0x1fb7e5
 
-ActionHelp_ShowAInput: ; 1fb7e5 (7e:77e5)
+ActionHelp_ShowAInput:
 	xor a
 	ld hl, wMenuObj3FramesetOffset
 	ld [hli], a
@@ -376,9 +361,8 @@ ActionHelp_ShowAInput: ; 1fb7e5 (7e:77e5)
 	ld a, LOW(Frameset_1e6b70)
 	ld [hl], a
 	ret
-; 0x1fb7f2
 
-ActionHelp_ShowBInput: ; 1fb7f2 (7e:77f2)
+ActionHelp_ShowBInput:
 	xor a
 	ld hl, wMenuObj3FramesetOffset
 	ld [hli], a
@@ -388,11 +372,10 @@ ActionHelp_ShowBInput: ; 1fb7f2 (7e:77f2)
 	ld a, LOW(Frameset_1e6b73)
 	ld [hl], a
 	ret
-; 0x1fb7ff
 
-ActionHelp_HideObj5BlockDebris: ; 1fb7ff (7e:77ff)
+ActionHelp_HideObj5BlockDebris:
 	ld hl, wMenuObj5
-ActionHelp_HideBlockDebris: ; 1fb802 (7e:7802)
+ActionHelp_HideBlockDebris:
 	ld a, $a0
 	ld [hli], a
 	ld a, $e8
@@ -415,17 +398,16 @@ ActionHelp_HideBlockDebris: ; 1fb802 (7e:7802)
 	xor a
 	ld [hl], a
 	ret
-; 0x1fb81f
 
 ; b = y offset of debris
-ActionHelp_ShowBlockDebrisWithYOffset: ; 1fb81f (7e:781f)
+ActionHelp_ShowBlockDebrisWithYOffset:
 	ld hl, wMenuObj5YCoord
 	ld c, $00
 ;	fallthrough
 
 ; b = y offset of debris
 ; c = x offset of debris
-ActionHelp_ShowBlockDebris: ; 1fb824 (7e:7824)
+ActionHelp_ShowBlockDebris:
 	play_sfx SFX_BLOCK_BREAK
 
 	ld a, [wMenuObj4YCoord]
@@ -452,9 +434,8 @@ ActionHelp_ShowBlockDebris: ; 1fb824 (7e:7824)
 	xor a
 	ld [hl], a
 	ret
-; 0x1fb84d
 
-ActionHelp_ShowInitialWarioWalk: ; 1fb84d (7e:784d)
+ActionHelp_ShowInitialWarioWalk:
 	ld a, BANK(WarioWalkGfx)
 	ld [wPendingDMASourceBank], a
 	ld a, HIGH(WarioWalkGfx)
@@ -494,9 +475,8 @@ ActionHelp_ShowInitialWarioWalk: ; 1fb84d (7e:784d)
 	ld a, LOW(OAM_1426c)
 	ld [wActionHelpWarioOAMPtr + 1], a
 	ret
-; 0x1fb899
 
-ActionHelp_ShowWarioJump: ; 1fb899 (7e:7899)
+ActionHelp_ShowWarioJump:
 	play_sfx SFX_JUMP
 
 	ld a, BANK(WarioAirborneGfx)
@@ -531,9 +511,8 @@ ActionHelp_ShowWarioJump: ; 1fb899 (7e:7899)
 	ld a, LOW(OAM_15955)
 	ld [wActionHelpWarioOAMPtr + 1], a
 	ret
-; 0x1fb8e2
 
-ActionHelp_ShowWarioJumpLeft: ; 1fb8e2 (7e:78e2)
+ActionHelp_ShowWarioJumpLeft:
 	play_sfx SFX_JUMP
 
 	ld a, BANK(WarioAirborneGfx)
@@ -568,9 +547,8 @@ ActionHelp_ShowWarioJumpLeft: ; 1fb8e2 (7e:78e2)
 	ld a, LOW(OAM_15955)
 	ld [wActionHelpWarioOAMPtr + 1], a
 	ret
-; 0x1fb92b
 
-ActionHelp_ShowWarioSmashAttack: ; 1fb92b (7e:792b)
+ActionHelp_ShowWarioSmashAttack:
 	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
@@ -594,9 +572,8 @@ ActionHelp_ShowWarioSmashAttack: ; 1fb92b (7e:792b)
 	ld a, $18
 	ld [hl], a ; wActionHelpWarioVar
 	ret
-; 0x1fb94c
 
-ActionHelp_ShowWarioGroundPound: ; 1fb94c (7e:794c)
+ActionHelp_ShowWarioGroundPound:
 	play_sfx SFX_GROUND_POUND
 	ld hl, wActionHelpWarioFramesetOffset
 	xor a
@@ -607,9 +584,8 @@ ActionHelp_ShowWarioGroundPound: ; 1fb94c (7e:794c)
 	ld a, LOW(Frameset_16009)
 	ld [hl], a
 	ret
-; 0x1fb961
 
-ActionHelp_ShowWarioGroundShake: ; 1fb961 (7e:7961)
+ActionHelp_ShowWarioGroundShake:
 	play_sfx SFX_GROUND_SHAKE
 
 	ld hl, wActionHelpWarioFramesetOffset
@@ -621,9 +597,8 @@ ActionHelp_ShowWarioGroundShake: ; 1fb961 (7e:7961)
 	ld a, LOW(Frameset_15fc5)
 	ld [hl], a
 	ret
-; 0x1fb976
 
-ActionHelp_ShowWarioLand: ; 1fb976 (7e:7976)
+ActionHelp_ShowWarioLand:
 	play_sfx SFX_LAND
 
 	ld hl, wActionHelpWarioFramesetOffset
@@ -635,9 +610,8 @@ ActionHelp_ShowWarioLand: ; 1fb976 (7e:7976)
 	ld a, LOW(Frameset_15fa1)
 	ld [hl], a
 	ret
-; 0x1fb98b
 
-ActionHelp_ShowWarioIdle: ; 1fb98b (7e:798b)
+ActionHelp_ShowWarioIdle:
 	ld a, BANK(WarioIdleGfx)
 	ld [wPendingDMASourceBank], a
 	ld a, HIGH(WarioIdleGfx)
@@ -668,9 +642,8 @@ ActionHelp_ShowWarioIdle: ; 1fb98b (7e:798b)
 	ld a, LOW(OAM_14000)
 	ld [wActionHelpWarioOAMPtr + 1], a
 	ret
-; 0x1fb9ca
 
-ActionHelp_ShowWarioWalk: ; 1fb9ca (7e:79ca)
+ActionHelp_ShowWarioWalk:
 	ld a, BANK(WarioWalkGfx)
 	ld [wPendingDMASourceBank], a
 	ld a, HIGH(WarioWalkGfx)
@@ -701,9 +674,8 @@ ActionHelp_ShowWarioWalk: ; 1fb9ca (7e:79ca)
 	ld a, LOW(OAM_1426c)
 	ld [wActionHelpWarioOAMPtr + 1], a
 	ret
-; 0x1fba09
 
-ActionHelp_ShowWarioSwim: ; 1fba09 (7e:7a09)
+ActionHelp_ShowWarioSwim:
 	play_sfx SFX_SPLASH
 
 	ld a, BANK(WarioSwimGfx)
@@ -736,9 +708,8 @@ ActionHelp_ShowWarioSwim: ; 1fba09 (7e:7a09)
 	ld a, LOW(OAM_15254)
 	ld [wActionHelpWarioOAMPtr + 1], a
 	ret
-; 0x1fba50
 
-ActionHelp_ShowWarioSwimLeft: ; 1fba50 (7e:7a50)
+ActionHelp_ShowWarioSwimLeft:
 	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
@@ -748,9 +719,8 @@ ActionHelp_ShowWarioSwimLeft: ; 1fba50 (7e:7a50)
 	ld a, LOW(Frameset_15554)
 	ld [hli], a
 	ret
-; 0x1fba5d
 
-ActionHelp_ShowWarioSubmerge: ; 1fba5d (7e:7a5d)
+ActionHelp_ShowWarioSubmerge:
 	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
@@ -763,9 +733,8 @@ ActionHelp_ShowWarioSubmerge: ; 1fba5d (7e:7a5d)
 	xor a
 	ld [wSFXTimer], a
 	ret
-; 0x1fba6e
 
-ActionHelp_ShowWarioUnderwaterThrust: ; 1fba6e (7e:7a6e)
+ActionHelp_ShowWarioUnderwaterThrust:
 	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
@@ -778,9 +747,8 @@ ActionHelp_ShowWarioUnderwaterThrust: ; 1fba6e (7e:7a6e)
 	xor a
 	ld [wSFXTimer], a
 	ret
-; 0x1fba7f
 
-ActionHelp_ShowWarioUnderwaterStopped: ; 1fba7f (7e:7a7f)
+ActionHelp_ShowWarioUnderwaterStopped:
 	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
@@ -790,9 +758,8 @@ ActionHelp_ShowWarioUnderwaterStopped: ; 1fba7f (7e:7a7f)
 	ld a, LOW(Frameset_1556c)
 	ld [hli], a
 	ret
-; 0x1fba8c
 
-ActionHelp_ShowWarioGrab: ; 1fba8c (7e:7a8c)
+ActionHelp_ShowWarioGrab:
 	play_sfx SFX_GRAB
 
 	ld a, BANK(WarioThrowGfx)
@@ -825,9 +792,8 @@ ActionHelp_ShowWarioGrab: ; 1fba8c (7e:7a8c)
 	ld a, LOW(OAM_1606a)
 	ld [wActionHelpWarioOAMPtr + 1], a
 	ret
-; 0x1fbad3
 
-ActionHelp_ShowWarioSlowGrab: ; 1fbad3 (7e:7ad3)
+ActionHelp_ShowWarioSlowGrab:
 	play_sfx SFX_GRAB
 
 	ld a, BANK(WarioThrowGfx)
@@ -860,9 +826,8 @@ ActionHelp_ShowWarioSlowGrab: ; 1fbad3 (7e:7ad3)
 	ld a, LOW(OAM_1606a)
 	ld [wActionHelpWarioOAMPtr + 1], a
 	ret
-; 0x1fbb1a
 
-ActionHelp_ShowWarioBeginGrab: ; 1fbb1a (7e:7b1a)
+ActionHelp_ShowWarioBeginGrab:
 	ld a, BANK(WarioWalkGfx)
 	ld [wPendingDMASourceBank], a
 	ld a, HIGH(WarioWalkGfx)
@@ -893,9 +858,8 @@ ActionHelp_ShowWarioBeginGrab: ; 1fbb1a (7e:7b1a)
 	ld a, LOW(OAM_1426c)
 	ld [wActionHelpWarioOAMPtr + 1], a
 	ret
-; 0x1fbb59
 
-ActionHelp_ShowWarioGrabWalk: ; 1fbb59 (7e:7b59)
+ActionHelp_ShowWarioGrabWalk:
 	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
@@ -905,9 +869,8 @@ ActionHelp_ShowWarioGrabWalk: ; 1fbb59 (7e:7b59)
 	ld a, LOW(Frameset_14a0f)
 	ld [hli], a
 	ret
-; 0x1fbb66
 
-ActionHelp_ShowWarioBeginThrow: ; 1fbb66 (7e:7b66)
+ActionHelp_ShowWarioBeginThrow:
 	play_sfx SFX_02C
 
 	ld a, BANK(WarioThrowGfx)
@@ -940,9 +903,8 @@ ActionHelp_ShowWarioBeginThrow: ; 1fbb66 (7e:7b66)
 	ld a, LOW(OAM_1606a)
 	ld [wActionHelpWarioOAMPtr + 1], a
 	ret
-; 0x1fbbad
 
-ActionHelp_ShowWarioThrow: ; 1fbbad (7e:7bad)
+ActionHelp_ShowWarioThrow:
 	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
@@ -952,9 +914,8 @@ ActionHelp_ShowWarioThrow: ; 1fbbad (7e:7bad)
 	ld a, LOW(Frameset_1641e)
 	ld [hli], a
 	ret
-; 0x1fbbba
 
-ActionHelp_ShowWarioChargeThrow: ; 1fbbba (7e:7bba)
+ActionHelp_ShowWarioChargeThrow:
 	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
@@ -966,9 +927,8 @@ ActionHelp_ShowWarioChargeThrow: ; 1fbbba (7e:7bba)
 	xor a
 	ld [wSFXTimer], a
 	ret
-; 0x1fbbcb
 
-ActionHelp_ShowWarioFullyChargedGrab: ; 1fbbcb (7e:7bcb)
+ActionHelp_ShowWarioFullyChargedGrab:
 	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
@@ -978,9 +938,8 @@ ActionHelp_ShowWarioFullyChargedGrab: ; 1fbbcb (7e:7bcb)
 	ld a, LOW(Frameset_16441)
 	ld [hli], a
 	ret
-; 0x1fbbd8
 
-ActionHelp_ShowWarioFullyChargedThrow: ; 1fbbd8 (7e:7bd8)
+ActionHelp_ShowWarioFullyChargedThrow:
 	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
@@ -990,9 +949,8 @@ ActionHelp_ShowWarioFullyChargedThrow: ; 1fbbd8 (7e:7bd8)
 	ld a, LOW(Frameset_16423)
 	ld [hli], a
 	ret
-; 0x1fbbe5
 
-ActionHelp_ShowWarioAttack: ; 1fbbe5 (7e:7be5)
+ActionHelp_ShowWarioAttack:
 	ld a, BANK(WarioAttackGfx)
 	ld [wPendingDMASourceBank], a
 	ld a, HIGH(WarioAttackGfx)
@@ -1038,9 +996,8 @@ ActionHelp_ShowWarioAttack: ; 1fbbe5 (7e:7be5)
 	ld a, LOW(OAM_14d1b)
 	ld [wActionHelpWarioOAMPtr + 1], a
 	ret
-; 0x1fbc3f
 
-ActionHelp_ShowWarioRoll: ; 1fbc3f (7e:7c3f)
+ActionHelp_ShowWarioRoll:
 	ld hl, wActionHelpWarioFramesetOffset
 	xor a
 	ld [hli], a
@@ -1050,9 +1007,8 @@ ActionHelp_ShowWarioRoll: ; 1fbc3f (7e:7c3f)
 	ld a, LOW(Frameset_166f7)
 	ld [hli], a
 	ret
-; 0x1fbc4c
 
-ActionHelp_ShowWarioBump: ; 1fbc4c (7e:7c4c)
+ActionHelp_ShowWarioBump:
 	play_sfx SFX_BUMP
 
 	ld a, BANK(WarioAirborneGfx)
@@ -1085,9 +1041,8 @@ ActionHelp_ShowWarioBump: ; 1fbc4c (7e:7c4c)
 	ld a, LOW(OAM_15955)
 	ld [wActionHelpWarioOAMPtr + 1], a
 	ret
-; 0x1fbc93
 
-ActionHelp_ShowWarioSlide: ; 1fbc93 (7e:7c93)
+ActionHelp_ShowWarioSlide:
 	ld a, BANK(WarioSlideGfx)
 	ld [wPendingDMASourceBank], a
 	ld a, HIGH(WarioSlideGfx)
@@ -1118,9 +1073,8 @@ ActionHelp_ShowWarioSlide: ; 1fbc93 (7e:7c93)
 	ld a, LOW(OAM_1644a)
 	ld [wActionHelpWarioOAMPtr + 1], a
 	ret
-; 0x1fbcd2
 
-ActionHelp_ShowParaGoomWalk: ; 1fbcd2 (7e:7cd2)
+ActionHelp_ShowParaGoomWalk:
 	ld hl, wMenuObj4
 	ld a, $40
 	ld [hli], a
@@ -1144,9 +1098,8 @@ ActionHelp_ShowParaGoomWalk: ; 1fbcd2 (7e:7cd2)
 	xor a
 	ld [hl], a
 	ret
-; 0x1fbcf2
 
-ActionHelp_ShowParaGoomStun: ; 1fbcf2 (7e:7cf2)
+ActionHelp_ShowParaGoomStun:
 	ld hl, wMenuObj4FramesetOffset
 	xor a
 	ld [hli], a
@@ -1156,9 +1109,8 @@ ActionHelp_ShowParaGoomStun: ; 1fbcf2 (7e:7cf2)
 	ld a, LOW(Frameset_1e6f48)
 	ld [hli], a
 	ret
-; 0x1fbcff
 
-ActionHelp_ShowParaGoomThrown: ; 1fbcff (7e:7cff)
+ActionHelp_ShowParaGoomThrown:
 	ld hl, wMenuObj4FramesetOffset
 	xor a
 	ld [hli], a
@@ -1168,11 +1120,10 @@ ActionHelp_ShowParaGoomThrown: ; 1fbcff (7e:7cff)
 	ld a, LOW(Frameset_1e6f3f)
 	ld [hli], a
 	ret
-; 0x1fbd0c
 
-ActionHelp_ShowObj4EnemyVanish: ; 1fbd0c (7e:7d0c)
+ActionHelp_ShowObj4EnemyVanish:
 	ld hl, wMenuObj4FramesetOffset
-ActionHelp_ShowEnemyVanish: ; 1fbd0f (7e:7d0f)
+ActionHelp_ShowEnemyVanish:
 	xor a
 	ld [hli], a
 	ld [hli], a
@@ -1189,9 +1140,8 @@ ActionHelp_ShowEnemyVanish: ; 1fbd0f (7e:7d0f)
 
 	play_sfx SFX_VANISH
 	ret
-; 0x1fbd2a
 
-ActionHelp_ShowFutamoguAngry: ; 1fbd2a (7e:7d2a)
+ActionHelp_ShowFutamoguAngry:
 	ld hl, wMenuObj4FramesetOffset
 	xor a
 	ld [hli], a
@@ -1201,9 +1151,8 @@ ActionHelp_ShowFutamoguAngry: ; 1fbd2a (7e:7d2a)
 	ld a, LOW(Frameset_1e6f78)
 	ld [hli], a
 	ret
-; 0x1fbd37
 
-ActionHelp_ShowFutamoguHappy: ; 1fbd37 (7e:7d37)
+ActionHelp_ShowFutamoguHappy:
 	ld hl, wMenuObj4FramesetOffset
 	xor a
 	ld [hli], a
@@ -1213,9 +1162,8 @@ ActionHelp_ShowFutamoguHappy: ; 1fbd37 (7e:7d37)
 	ld a, LOW(Frameset_1e6f66)
 	ld [hli], a
 	ret
-; 0x1fbd44
 
-ActionHelp_ShowCountRichtertoffIdle: ; 1fbd44 (7e:7d44)
+ActionHelp_ShowCountRichtertoffIdle:
 	ld hl, wMenuObj4
 	ld a, $40
 	ld [hli], a
@@ -1237,9 +1185,8 @@ ActionHelp_ShowCountRichtertoffIdle: ; 1fbd44 (7e:7d44)
 	ld a, BANK(OAM_1e6bab)
 	ld [hli], a
 	ret
-; 0x1fbd62
 
-ActionHelp_ShowCountRichtertoffStun: ; 1fbd62 (7e:7d62)
+ActionHelp_ShowCountRichtertoffStun:
 	ld hl, wMenuObj4FramesetOffset
 	xor a
 	ld [hli], a
@@ -1249,9 +1196,8 @@ ActionHelp_ShowCountRichtertoffStun: ; 1fbd62 (7e:7d62)
 	ld a, LOW(Frameset_1e6f5e)
 	ld [hli], a
 	ret
-; 0x1fbd6f
 
-ActionHelp_ShowCountRichtertoffThrown: ; 1fbd6f (7e:7d6f)
+ActionHelp_ShowCountRichtertoffThrown:
 	ld hl, wMenuObj4FramesetOffset
 	xor a
 	ld [hli], a
@@ -1261,9 +1207,8 @@ ActionHelp_ShowCountRichtertoffThrown: ; 1fbd6f (7e:7d6f)
 	ld a, LOW(Frameset_1e6f55)
 	ld [hli], a
 	ret
-; 0x1fbd7c
 
-ActionHelp_ShowSingleSolidBlock: ; 1fbd7c (7e:7d7c)
+ActionHelp_ShowSingleSolidBlock:
 	ld hl, wMenuObj4FramesetOffset
 	xor a
 	ld [hli], a
@@ -1273,9 +1218,8 @@ ActionHelp_ShowSingleSolidBlock: ; 1fbd7c (7e:7d7c)
 	ld a, LOW(Frameset_1e6b67)
 	ld [hli], a
 	ret
-; 0x1fbd89
 
-ActionHelp_ShowVerticalBlockPair: ; 1fbd89 (7e:7d89)
+ActionHelp_ShowVerticalBlockPair:
 	ld hl, wMenuObj4
 	ld a, $40
 	ld [hli], a
@@ -1297,9 +1241,8 @@ ActionHelp_ShowVerticalBlockPair: ; 1fbd89 (7e:7d89)
 	ld a, BANK(OAM_1e697c)
 	ld [hl], a
 	ret
-; 0x1fbda7
 
-ActionHelp_ShowSlide: ; 1fbda7 (7e:7da7)
+ActionHelp_ShowSlide:
 	ld hl, wMenuObj4
 	ld a, $40
 	ld [hli], a
@@ -1321,9 +1264,8 @@ ActionHelp_ShowSlide: ; 1fbda7 (7e:7da7)
 	ld a, BANK(OAM_1e697c)
 	ld [hl], a
 	ret
-; 0x1fbdc5
 
-ActionHelp_ShowOverheadPillar: ; 1fbdc5 (7e:7dc5)
+ActionHelp_ShowOverheadPillar:
 	ld hl, wMenuObj6
 	ld a, $20
 	ld [hli], a
@@ -1345,4 +1287,3 @@ ActionHelp_ShowOverheadPillar: ; 1fbdc5 (7e:7dc5)
 	ld a, BANK(OAM_1e697c)
 	ld [hli], a
 	ret
-; 0x1fbde3

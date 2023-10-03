@@ -1,4 +1,4 @@
-Func_d11a: ; d11a (3:511a)
+Func_d11a:
 	ld a, [wLevelEndScreen]
 	and a
 	ret nz
@@ -8,9 +8,8 @@ Func_d11a: ; d11a (3:511a)
 	sramswitch
 	call Func_d132
 	ret
-; 0xd132
 
-Func_d132: ; d132 (3:5132)
+Func_d132:
 	ld e, $0c
 .asm_d134
 	bit 7, [hl]
@@ -56,9 +55,8 @@ Func_d132: ; d132 (3:5132)
 	dec e
 	jr nz, .asm_d134
 	ret
-; 0xd186
 
-Func_d186: ; d186 (3:5186)
+Func_d186:
 	ld a, [wLevelEndScreen]
 	and a
 	ret nz
@@ -68,9 +66,8 @@ Func_d186: ; d186 (3:5186)
 	sramswitch
 	call Func_d19e
 	ret
-; 0xd19e
 
-Func_d19e: ; d19e (3:519e)
+Func_d19e:
 	ld e, $0d
 .asm_d1a0
 	bit 7, [hl]
@@ -110,9 +107,8 @@ Func_d19e: ; d19e (3:519e)
 	dec e
 	jr nz, .asm_d1a0
 	ret
-; 0xd1e2
 
-LoadLevelCommonGfxAndTreasures: ; d1e2 (3:51e2)
+LoadLevelCommonGfxAndTreasures:
 	ld hl, LevelsCommonGfx
 	ld de, v0Tiles1
 	ld bc, $800
@@ -120,23 +116,21 @@ LoadLevelCommonGfxAndTreasures: ; d1e2 (3:51e2)
 
 	farcall LoadLevelTreasureData
 	ret
-; 0xd1fe
 
-Pals_d1fe: ; d1fe (3:51fe)
+Pals_d1fe:
 	rgb  0, 22, 16
 	rgb 28, 31, 29
 	rgb 30, 23,  0
 	rgb  4,  5,  0
 
 ; unreferenced
-Pals_d206: ; d206 (03:5206)
+Pals_d206:
 	rgb  0, 22, 16
 	rgb 31, 31,  0
 	rgb 31, 14,  0
 	rgb  5,  2,  0
-; 0xd20e
 
-OAM_d20e:: ; d20e (03:520e)
+OAM_d20e::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -495,18 +489,16 @@ OAM_d20e:: ; d20e (03:520e)
 	frame_oam -17,   5, $c2, 2
 	frame_oam -11, -13, $c2, 2 | OAMF_XFLIP
 	db $80
-; 0xd49a
 
-Frameset_d49a:: ; d49a (03:549a)
+Frameset_d49a::
 	db $00,  2
 	db $01,  3
 	db $02,  3
 	db $09,  2
 	db $0a,  2
 	db $ff
-; 0xd4a5
 
-Frameset_d4a5:: ; d4a5 (03:54a5)
+Frameset_d4a5::
 	db $35,  2
 	db $36,  1
 	db $37,  2
@@ -518,66 +510,58 @@ Frameset_d4a5:: ; d4a5 (03:54a5)
 	db $3a,  2
 	db $3b,  2
 	db $ff
-; 0xd4ba
 
-Frameset_d4ba: ; d4ba (03:54ba)
+Frameset_d4ba:
 	db $0b,  4
 	db $0c,  4
 	db $0d,  6
 	db $0e,  6
 	db $0f,  4
 	db $ff
-; 0xd4c5
 
-Frameset_d4c5: ; d4c5 (03:54c5)
+Frameset_d4c5:
 	db $10,  2
 	db $11,  3
 	db $12,  6
 	db $13,  3
 	db $ff
-; 0xd4ce
 
 ; unreferenced
-Frameset_d4ce: ; d4ce (03:54ce)
+Frameset_d4ce:
 	db $14,  3
 	db $15,  3
 	db $16,  3
 	db $ff
-; 0xd4d5
 
 ; unreferenced
-Frameset_d4d5: ; d4d5 (03:54d5)
+Frameset_d4d5:
 	db $17,  3
 	db $18,  3
 	db $19,  3
 	db $ff
-; 0xd4dc
 
 ; unreferenced
-Frameset_d4dc: ; d4dc (03:54dc)
+Frameset_d4dc:
 	db $1a,  3
 	db $1b,  3
 	db $1c,  3
 	db $ff
-; 0xd4e3
 
 ; unreferenced
-Frameset_d4e3: ; d4e3 (03:54e3)
+Frameset_d4e3:
 	db $1d,  3
 	db $1e,  3
 	db $1f,  3
 	db $ff
-; 0xd4ea
 
-Frameset_d4ea: ; d4ea (03:54ea)
+Frameset_d4ea:
 	db $20,  9
 	db $21,  8
 	db $22,  7
 	db $23,  7
 	db $ff
-; 0xd4f3
 
-Frameset_d4f3: ; d4f3 (03:54f3)
+Frameset_d4f3:
 	db $0b,  4
 	db $0c,  4
 	db $24,  6
@@ -586,56 +570,48 @@ Frameset_d4f3: ; d4f3 (03:54f3)
 	db $22,  4
 	db $23,  7
 	db $ff
-; 0xd502
 
-Frameset_d502: ; d502 (03:5502)
+Frameset_d502:
 	db $27,  6
 	db $28,  6
 	db $29,  6
 	db $2a,  6
 	db $ff
-; 0xd50b
 
-Frameset_d50b: ; d50b (03:550b)
+Frameset_d50b:
 	db $2b,  6
 	db $2c,  6
 	db $2d,  6
 	db $2e,  6
 	db $ff
-; 0xd514
 
 ; unreferenced
-Frameset_d514: ; d514 (03:5514)
+Frameset_d514:
 	db $2f,  3
 	db $30,  3
 	db $ff
-; 0xd519
 
 ; unreferenced
-Frameset_d519: ; d519 (03:5519)
+Frameset_d519:
 	db $31,  4
 	db $ff
-; 0xd51c
 
 ; unreferenced
-Frameset_d51c: ; d51c (03:551c)
+Frameset_d51c:
 	db $32,  4
 	db $ff
-; 0xd51f
 
 ; unreferenced
-Frameset_d51f: ; d51f (03:551f)
+Frameset_d51f:
 	db $33,  4
 	db $ff
-; 0xd522
 
 ; unreferenced
-Frameset_d522: ; d522 (03:5522)
+Frameset_d522:
 	db $34,  4
 	db $ff
-; 0xd525
 
-Frameset_d525: ; d525 (03:5525)
+Frameset_d525:
 	db $03,  1
 	db $04,  1
 	db $05,  2
@@ -643,9 +619,8 @@ Frameset_d525: ; d525 (03:5525)
 	db $07,  1
 	db $08,  1
 	db $ff
-; 0xd532
 
-OAM_d532: ; d532 (03:5532)
+OAM_d532:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -699,9 +674,8 @@ OAM_d532: ; d532 (03:5532)
 .frame_8
 	frame_oam -16,   0, $70, 1
 	db $80
-; 0xd591
 
-Frameset_d591: ; d591 (03:5591)
+Frameset_d591:
 	db $00,  2
 	db $01,  2
 	db $02,  1
@@ -717,9 +691,8 @@ Frameset_d591: ; d591 (03:5591)
 	db $08,  1
 	db $07,  1
 	db $ff
-; 0xd5ae
 
-OAM_d5ae: ; d5ae (03:55ae)
+OAM_d5ae:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -762,17 +735,15 @@ OAM_d5ae: ; d5ae (03:55ae)
 	frame_oam -12, -24, $aa, 6 | OAMF_BANK1 | OAMF_YFLIP
 	frame_oam   0, -12, $ac, 6 | OAMF_BANK1 | OAMF_YFLIP
 	db $80
-; 0xd622
 
-Frameset_d622: ; d622 (03:5622)
+Frameset_d622:
 	db $00,  2
 	db $01,  3
 	db $02,  5
 	db $03,  3
 	db $ff
-; 0xd62b
 
-OAM_d62b: ; d62b (03:562b)
+OAM_d62b:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -842,9 +813,8 @@ OAM_d62b: ; d62b (03:562b)
 	frame_oam -23,  43, $b2, 0 | OAMF_XFLIP
 	frame_oam -41, -36, $b2, 0
 	db $80
-; 0xd6e4
 
-Frameset_d6e4: ; d6e4 (03:56e4)
+Frameset_d6e4:
 	db $00,  2
 	db $01,  2
 	db $02,  2
@@ -858,9 +828,8 @@ Frameset_d6e4: ; d6e4 (03:56e4)
 	db $05,  1
 	db $01,  8
 	db $ff
-; 0xd6fd
 
-Frameset_d6fd: ; d6fd (03:56fd)
+Frameset_d6fd:
 	db $03,  2
 	db $01,  2
 	db $04,  2
@@ -874,9 +843,8 @@ Frameset_d6fd: ; d6fd (03:56fd)
 	db $06,  1
 	db $01,  8
 	db $ff
-; 0xd716
 
-OAM_d716: ; d716 (03:5716)
+OAM_d716:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -907,17 +875,15 @@ OAM_d716: ; d716 (03:5716)
 	frame_oam -29,   4, $58, 0
 	frame_oam -32,  12, $5a, 0
 	db $80
-; 0xd75a
 
-Frameset_d75a: ; d75a (03:575a)
+Frameset_d75a:
 	db $00,  1
 	db $01,  1
 	db $02,  1
 	db $03,  1
 	db $ff
-; 0xd763
 
-OAM_d763:: ; d763 (03:5763)
+OAM_d763::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -948,17 +914,15 @@ OAM_d763:: ; d763 (03:5763)
 	frame_oam -18,   8, $20, 4 | OAMF_BANK1 | OAMF_XFLIP
 	frame_oam -25,   0, $12, 4 | OAMF_BANK1
 	db $80
-; 0xd7b4
 
-Frameset_d7b4:: ; d7b4 (03:57b4)
+Frameset_d7b4::
 	db $00,  2
 	db $02,  2
 	db $01,  2
 	db $02,  2
 	db $ff
-; 0xd7bd
 
-OAM_d7bd: ; d7bd (03:57bd)
+OAM_d7bd:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -987,16 +951,14 @@ OAM_d7bd: ; d7bd (03:57bd)
 	frame_oam -51, -39, $b2, 2
 	frame_oam -37,  34, $b2, 2
 	db $80
-; 0xd806
 
-Frameset_d806: ; d806 (03:5806)
+Frameset_d806:
 	db $00,  4
 	db $01,  4
 	db $02,  4
 	db $ff
-; 0xd80d
 
-OAM_d80d: ; d80d (03:580d)
+OAM_d80d:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1110,9 +1072,8 @@ OAM_d80d: ; d80d (03:580d)
 .frame_17
 	frame_oam -32,  -4, $50, 1
 	db $80
-; 0xd8e7
 
-Frameset_d8e7: ; d8e7 (03:58e7)
+Frameset_d8e7:
 	db $00,  5
 	db $01,  5
 	db $02,  5
@@ -1120,9 +1081,8 @@ Frameset_d8e7: ; d8e7 (03:58e7)
 	db $04,  5
 	db $05,  5
 	db $ff
-; 0xd8f4
 
-Frameset_d8f4: ; d8f4 (03:58f4)
+Frameset_d8f4:
 	db $06,  7
 	db $07,  7
 	db $08,  7
@@ -1130,9 +1090,8 @@ Frameset_d8f4: ; d8f4 (03:58f4)
 	db $0a,  7
 	db $0b,  7
 	db $ff
-; 0xd901
 
-Frameset_d901: ; d901 (03:5901)
+Frameset_d901:
 	db $0c,  2
 	db $0d,  1
 	db $0e,  1
@@ -1142,4 +1101,3 @@ Frameset_d901: ; d901 (03:5901)
 	db $0f,  1
 	db $10,  2
 	db $ff
-; 0xd912

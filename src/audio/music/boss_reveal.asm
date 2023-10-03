@@ -1,4 +1,4 @@
-Music_BossReveal_Ch1: ; 397fa (0e:57fa)
+Music_BossReveal_Ch1:
 	semitone_offset 0
 
 .loop
@@ -84,9 +84,8 @@ Music_BossReveal_Ch1: ; 397fa (0e:57fa)
 	audio_jump .loop
 .end
 	audio_end
-; 0x39856
 
-Music_BossReveal_Ch2: ; 39856 (0e:5856)
+Music_BossReveal_Ch2:
 	semitone_offset 0
 
 .loop
@@ -175,9 +174,8 @@ Music_BossReveal_Ch2: ; 39856 (0e:5856)
 .end
 	audio_wait_3
 	audio_end
-; 0x398b4
 
-Music_BossReveal: ; 398b4 (0e:58b4)
+Music_BossReveal:
 	db 2, 2
 	dw Music_BossReveal_Ch1
 	dw Music_BossReveal_Ch2
@@ -188,4 +186,3 @@ Music_BossReveal: ; 398b4 (0e:58b4)
 
 	dw Music_BossReveal_Ch1.end
 	dw Music_BossReveal_Ch2.end
-; 0x398c2

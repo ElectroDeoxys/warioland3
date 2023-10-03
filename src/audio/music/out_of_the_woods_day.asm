@@ -1,4 +1,4 @@
-Music_OutOfTheWoodsDay_Ch1: ; 32726 (c:6726)
+Music_OutOfTheWoodsDay_Ch1:
 	semitone_offset 0
 	tempo 55
 	wave WAVE_63
@@ -248,9 +248,8 @@ Music_OutOfTheWoodsDay_Ch1: ; 32726 (c:6726)
 	audio_jump .loop
 .end
 	audio_end
-; 0x3285e
 
-Music_OutOfTheWoodsDay_Ch2: ; 3285e (c:685e)
+Music_OutOfTheWoodsDay_Ch2:
 	semitone_offset 0
 	wave WAVE_0D
 	vibrato_amplitude 20
@@ -385,9 +384,8 @@ Music_OutOfTheWoodsDay_Ch2: ; 3285e (c:685e)
 	audio_jump .loop
 .end
 	audio_end
-; 0x32918
 
-Music_OutOfTheWoodsDay_Ch3: ; 32918 (c:6918)
+Music_OutOfTheWoodsDay_Ch3:
 	semitone_offset 0
 	wave WAVE_17
 	vibrato_amplitude 20
@@ -591,9 +589,8 @@ Music_OutOfTheWoodsDay_Ch3: ; 32918 (c:6918)
 	audio_jump .loop
 .end
 	audio_end
-; 0x32a09
 
-Music_OutOfTheWoodsDay_Ch4: ; 32a09 (c:6a09)
+Music_OutOfTheWoodsDay_Ch4:
 	semitone_offset 0
 	wave WAVE_28
 	volume 75
@@ -681,15 +678,13 @@ Music_OutOfTheWoodsDay_Ch4: ; 32a09 (c:6a09)
 	audio_jump .loop
 .end
 	audio_end
-; 0x32a98
 
-Music_OutOfTheWoodsDay: ; 32a98 (c:6a98)
+Music_OutOfTheWoodsDay:
 	db $4, $2
 	dw Music_OutOfTheWoodsDay_Ch1
 	dw Music_OutOfTheWoodsDay_Ch2
 	dw Music_OutOfTheWoodsDay_Ch3
 	dw Music_OutOfTheWoodsDay_Ch4
-; 0x32aa2
 
 ; unused?
 	dw Music_OutOfTheWoodsDay_Ch1.loop

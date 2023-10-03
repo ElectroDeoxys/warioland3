@@ -1,4 +1,4 @@
-Pals_1e4e6f: ; 1e4e6f (79:4e6f)
+Pals_1e4e6f:
 	rgb 31, 31, 31
 	rgb  9,  7, 31
 	rgb  9, 25, 31
@@ -38,9 +38,8 @@ Pals_1e4e6f: ; 1e4e6f (79:4e6f)
 	rgb  2, 31, 31
 	rgb  6,  6, 31
 	rgb  0,  0,  7
-; 0x1e4eaf
 
-Pals_1e4eaf: ; 1e4eaf (79:4eaf)
+Pals_1e4eaf:
 	rgb 31, 31, 31
 	rgb  9,  7, 31
 	rgb  9, 25, 31
@@ -80,9 +79,8 @@ Pals_1e4eaf: ; 1e4eaf (79:4eaf)
 	rgb  2, 31, 31
 	rgb  6,  6, 31
 	rgb  0,  0,  7
-; 0x1e4eef
 
-Pals_1e4eef: ; 1e4eef (79:4eef)
+Pals_1e4eef:
 	rgb  0,  0,  0
 	rgb  0,  0,  0
 	rgb  0,  0,  0
@@ -122,9 +120,8 @@ Pals_1e4eef: ; 1e4eef (79:4eef)
 	rgb  2, 31, 31
 	rgb  6,  6, 31
 	rgb  0,  0,  7
-; 0x1e4f2f
 
-Pals_1e4f2f: ; 1e4f2f (79:4f2f)
+Pals_1e4f2f:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -164,9 +161,8 @@ Pals_1e4f2f: ; 1e4f2f (79:4f2f)
 	rgb 31,  0,  0
 	rgb 21, 21, 21
 	rgb  0,  0,  0
-; 0x1e4f6f
 
-Pals_1e4f6f: ; 1e4f6f (79:4f6f)
+Pals_1e4f6f:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -176,9 +172,8 @@ Pals_1e4f6f: ; 1e4f6f (79:4f6f)
 	rgb 30,  0,  3
 	rgb 31, 30, 12
 	rgb  6,  5, 26
-; 0x1e4f7f
 
-Pals_1e4f7f: ; 1e4f7f (79:4f7f)
+Pals_1e4f7f:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -218,9 +213,8 @@ Pals_1e4f7f: ; 1e4f7f (79:4f7f)
 	rgb 31,  0,  0
 	rgb 21, 21, 21
 	rgb  0,  0,  0
-; 0x1e4fbf
 
-Pals_1e4fbf: ; 1e4fbf (79:4fbf)
+Pals_1e4fbf:
 	rgb 18, 18, 18
 	rgb 31, 31,  4
 	rgb 18, 12, 31
@@ -230,4 +224,3 @@ Pals_1e4fbf: ; 1e4fbf (79:4fbf)
 	rgb 31, 31, 31
 	rgb 31,  5,  5
 	rgb  0,  0,  0
-; 0x1e4fcf

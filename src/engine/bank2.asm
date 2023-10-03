@@ -1,4 +1,4 @@
-_LevelStateTable: ; 8000 (2:4000)
+_LevelStateTable:
 	ld a, [wSubState]
 	jumptable
 
@@ -18,9 +18,8 @@ _LevelStateTable: ; 8000 (2:4000)
 	dw DebugReset
 	dw DebugReset
 	dw DebugReset
-; 0x8024
 
-InitLevel: ; 8024 (2:4024)
+InitLevel:
 	call DisableLCD
 	call FillBGMap0_With7f
 	call ClearVirtualOAM
@@ -80,9 +79,8 @@ InitLevel: ; 8024 (2:4024)
 	ld a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 	ldh [rLCDC], a
 	ret
-; 0x80aa
 
-UpdateLevel: ; 80aa (2:40aa)
+UpdateLevel:
 	ld a, TRUE
 	ld [wRoomAnimatedPalsEnabled], a
 
@@ -483,9 +481,8 @@ UpdateLevel: ; 80aa (2:40aa)
 	ld [wc0bd], a
 	call Func_b915
 	jp .asm_8229
-; 0x846e
 
-Func_846e: ; 846e (2:446e)
+Func_846e:
 	ld a, [wRoomTransitionParam]
 	and ROOMTRANSITION_MASK
 	cp ROOMTRANSITION_3
@@ -640,9 +637,8 @@ Func_846e: ; 846e (2:446e)
 	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 	ldh [rLCDC], a
 	ret
-; 0x861c
 
-Func_861c: ; 861c (2:461c)
+Func_861c:
 	call .Func_867f
 	farcall UpdateParticles
 
@@ -771,9 +767,8 @@ Func_861c: ; 861c (2:461c)
 	ld a, [wPendingSubState]
 	ld [wSubState], a
 	ret
-; 0x8747
 
-Func_8747: ; 8747 (2:4747)
+Func_8747:
 	xor a
 	ld [wIsBossBattle], a
 	ld a, [wceef]
@@ -987,9 +982,8 @@ Func_8747: ; 8747 (2:4747)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0x896f
 
-Func_896f: ; 896f (2:496f)
+Func_896f:
 	ld de, wc0a6
 	ld hl, hXPosLo
 	ld a, [de]
@@ -1058,9 +1052,8 @@ Func_896f: ; 896f (2:496f)
 	dec d
 	jr nz, .asm_89a9
 	ret
-; 0x89e2
 
-Func_89e2: ; 89e2 (2:49e2)
+Func_89e2:
 	cp $0f
 	ret nc
 	ld c, a
@@ -1118,9 +1111,8 @@ Func_89e2: ; 89e2 (2:49e2)
 	pop bc
 	pop de
 	ret
-; 0x8a41
 
-Func_8a41: ; 8a41 (2:4a41)
+Func_8a41:
 	ld hl, hXPosLo
 	xor a
 	ld [hld], a ; hXPosLo
@@ -1203,9 +1195,8 @@ Func_8a41: ; 8a41 (2:4a41)
 	call Func_1146
 .asm_8ad8
 	ret
-; 0x8ad9
 
-Func_8ad9: ; 8ad9 (2:4ad9)
+Func_8ad9:
 	xor a
 	ld [wc0b5], a
 	ld a, [wCameraConfigFlags]
@@ -1386,9 +1377,8 @@ Func_8ad9: ; 8ad9 (2:4ad9)
 	ld a, $68
 	ld [wcac4 + 1], a
 	ret
-; 0x8c12
 
-Func_8c12: ; 8c12 (2:4c12)
+Func_8c12:
 	ld a, [wcac4 + 0]
 	ld h, a
 	ld a, [wcac4 + 1]
@@ -1493,9 +1483,8 @@ Func_8c12: ; 8c12 (2:4c12)
 	ld a, h
 	ld [wc0a5], a
 	ret
-; 0x8cd7
 
-Func_8cd7: ; 8cd7 (2:4cd7)
+Func_8cd7:
 	ld hl, wc0a3
 	ld de, wc0a7
 	ld a, [hli]
@@ -1588,9 +1577,8 @@ Func_8cd7: ; 8cd7 (2:4cd7)
 	ld a, [hl]
 	ld [de], a
 	ret
-; 0x8d69
 
-Func_8d69: ; 8d69 (2:4d69)
+Func_8d69:
 	call Func_8e5b
 	ld a, [wce69]
 	ld b, a
@@ -1648,9 +1636,8 @@ Func_8d69: ; 8d69 (2:4d69)
 	add $20
 	ld [wce00], a
 	ret
-; 0x8e06
 
-Func_8e06:: ; 8e06 (2:4e06)
+Func_8e06::
 	ld a, [wYPosLo]
 	sub $18
 	ld l, a
@@ -1700,9 +1687,8 @@ Func_8e06:: ; 8e06 (2:4e06)
 	ld a, l
 	ld [wccf0 + 1], a
 	ret
-; 0x8e5b
 
-Func_8e5b: ; 8e5b (2:4e5b)
+Func_8e5b:
 	ld a, [wc0a3]
 	ld h, a
 	ld a, [wc0a4]
@@ -1747,10 +1733,9 @@ Func_8e5b: ; 8e5b (2:4e5b)
 	ld a, l
 	ld [wccf0 + 1], a
 	ret
-; 0x8eac
 
 ; unreferenced
-Func_8eac: ; 8eac (2:4eac)
+Func_8eac:
 	srl l
 	jr c, .asm_8eba
 	ld a, l
@@ -1767,9 +1752,8 @@ Func_8eac: ; 8eac (2:4eac)
 	ld a, [hl]
 	and $0f
 	ret
-; 0x8ec2
 
-GetNextInternalRoomID: ; 8ec2 (2:4ec2)
+GetNextInternalRoomID:
 	ld a, [hli] ; hi y
 	and a
 	jr z, .skip_multiplication
@@ -1789,9 +1773,8 @@ GetNextInternalRoomID: ; 8ec2 (2:4ec2)
 	ld a, [hl] ; hi x
 	ld [wInternalRoomID], a
 	ret
-; 0x8ed9
 
-Func_8ed9: ; 8ed9 (2:4ed9)
+Func_8ed9:
 	ld a, [wc0bb]
 	and a
 	ret z
@@ -1853,9 +1836,8 @@ Func_8ed9: ; 8ed9 (2:4ed9)
 	bit 3, a
 	jp nz, .asm_8ef6
 	ret
-; 0x8f79
 
-Func_8f79: ; 8f79 (2:4f79)
+Func_8f79:
 	ld hl, wcac4 + 1
 	ld a, [hld]
 	and $f8
@@ -1890,9 +1872,8 @@ Func_8f79: ; 8f79 (2:4f79)
 	ld a, l
 	ld [wc0a6], a
 	ret
-; 0x8fb3
 
-Func_8fb3: ; 8fb3 (2:4fb3)
+Func_8fb3:
 	ld hl, wcac4 + 1
 	ld a, [hld]
 	and $f8
@@ -1926,9 +1907,8 @@ Func_8fb3: ; 8fb3 (2:4fb3)
 	ld a, l
 	ld [wc0a6], a
 	ret
-; 0x8fec
 
-Func_8fec: ; 8fec (2:4fec)
+Func_8fec:
 	ld hl, wcac4 + 1
 	ld a, [hld]
 	and $f8
@@ -1976,9 +1956,8 @@ Func_8fec: ; 8fec (2:4fec)
 	ld a, l
 	ld [wc0a6], a
 	ret
-; 0x9039
 
-Func_9039: ; 9039 (2:5039)
+Func_9039:
 	ld hl, wcac4 + 1
 	ld a, [hld]
 	and $f8
@@ -2025,9 +2004,8 @@ Func_9039: ; 9039 (2:5039)
 	ld a, l
 	ld [wc0a6], a
 	ret
-; 0x9085
 
-Func_9085: ; 9085 (2:5085)
+Func_9085:
 	call Func_8e5b
 	ld a, [wce69]
 	ld b, a
@@ -2391,9 +2369,8 @@ Func_9085: ; 9085 (2:5085)
 	add $19
 	ld [wce00], a
 	ret
-; 0x9254
 
-Func_9254: ; 9254 (2:5254)
+Func_9254:
 	ld a, [wce00]
 	ld b, a
 	ld a, HIGH(wce01)
@@ -2699,9 +2676,8 @@ Func_9254: ; 9254 (2:5254)
 	ld [de], a
 	pop hl
 	ret
-; 0x9438
 
-Func_9438: ; 9438 (2:5438)
+Func_9438:
 	ld a, [hli]
 	ld d, $00
 	ld e, a
@@ -2998,9 +2974,8 @@ Func_9438: ; 9438 (2:5438)
 	ld [de], a
 	pop hl
 	ret
-; 0x9605
 
-Func_9605: ; 9605 (2:5605)
+Func_9605:
 	ld a, [wce00]
 	ld b, a
 	ld a, HIGH(wce35)
@@ -3312,9 +3287,8 @@ Func_9605: ; 9605 (2:5605)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0x97f3
 
-Func_97f3: ; 97f3 (2:57f3)
+Func_97f3:
 	ldh a, [rSVBK]
 	push af
 	ld a, $03
@@ -3617,9 +3591,8 @@ Func_97f3: ; 97f3 (2:57f3)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0x99ca
 
-Func_99ca: ; 99ca (2:59ca)
+Func_99ca:
 	ld a, [wce00]
 	ld b, a
 	ld a, HIGH(wce01)
@@ -3899,9 +3872,8 @@ Func_99ca: ; 99ca (2:59ca)
 	ld [de], a
 	pop hl
 	ret
-; 0x9b94
 
-Func_9b94: ; 9b94 (2:5b94)
+Func_9b94:
 	ld a, [hli]
 	ld d, $00
 	ld e, a
@@ -4174,9 +4146,8 @@ Func_9b94: ; 9b94 (2:5b94)
 	ld [de], a
 	pop hl
 	ret
-; 0x9d4c
 
-Func_9d4c: ; 9d4c (2:5d4c)
+Func_9d4c:
 	ld a, [wce00]
 	ld b, a
 	ld a, HIGH(wce35)
@@ -4462,9 +4433,8 @@ Func_9d4c: ; 9d4c (2:5d4c)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0x9f20
 
-Func_9f20: ; 9f20 (2:5f20)
+Func_9f20:
 	ldh a, [rSVBK]
 	push af
 	ld a, $03
@@ -4743,9 +4713,8 @@ Func_9f20: ; 9f20 (2:5f20)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0xa0e2
 
-Func_a0e2: ; a0e2 (2:60e2)
+Func_a0e2:
 	call Func_8e5b
 	ld a, [wce69]
 	ld b, a
@@ -5081,9 +5050,8 @@ Func_a0e2: ; a0e2 (2:60e2)
 	add $17
 	ld [wce00], a
 	ret
-; 0xa2aa
 
-Func_a2aa: ; a2aa (2:62aa)
+Func_a2aa:
 	ld a, [wce00]
 	ld b, a
 	ld a, HIGH(wce01)
@@ -5464,9 +5432,8 @@ Func_a2aa: ; a2aa (2:62aa)
 	ld [de], a
 	pop hl
 	ret
-; 0xa52f
 
-Func_a52f: ; a52f (2:652f)
+Func_a52f:
 	ld a, [hl]
 	ld d, $00
 	ld e, a
@@ -5839,9 +5806,8 @@ Func_a52f: ; a52f (2:652f)
 	ld [de], a
 	pop hl
 	ret
-; 0xa79e
 
-Func_a79e: ; a79e (2:679e)
+Func_a79e:
 	ld a, [wce00]
 	ld b, a
 	ld a, HIGH(wce35)
@@ -6228,9 +6194,8 @@ Func_a79e: ; a79e (2:679e)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0xaa2d
 
-Func_aa2d: ; aa2d (2:6a2d)
+Func_aa2d:
 	ldh a, [rSVBK]
 	push af
 	ld a, $03
@@ -6609,9 +6574,8 @@ Func_aa2d: ; aa2d (2:6a2d)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0xaca6
 
-Func_aca6: ; aca6 (2:6ca6)
+Func_aca6:
 	ld a, [wce00]
 	ld b, a
 	ld a, HIGH(wce01)
@@ -6980,9 +6944,8 @@ Func_aca6: ; aca6 (2:6ca6)
 	ld [de], a
 	pop hl
 	ret
-; 0xaf1f
 
-Func_af1f: ; af1f (2:6f1f)
+Func_af1f:
 	ld a, [hl]
 	ld d, $00
 	ld e, a
@@ -7343,9 +7306,8 @@ Func_af1f: ; af1f (2:6f1f)
 	ld [de], a
 	pop hl
 	ret
-; 0xb182
 
-Func_b182: ; b182 (2:7182)
+Func_b182:
 	ld a, [wce00]
 	ld b, a
 	ld a, HIGH(wce35)
@@ -7720,9 +7682,8 @@ Func_b182: ; b182 (2:7182)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0xb405
 
-Func_b405: ; b405 (2:7405)
+Func_b405:
 	ldh a, [rSVBK]
 	push af
 	ld a, $03
@@ -8089,9 +8050,8 @@ Func_b405: ; b405 (2:7405)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0xb672
 
-VBlank_b672: ; b672 (2:7672)
+VBlank_b672:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -8101,9 +8061,8 @@ VBlank_b672: ; b672 (2:7672)
 .Func:
 	jp DoPendingDMATransfer
 .end
-; 0xb681
 
-Func_b681: ; b681 (2:7681)
+Func_b681:
 	ld hl, wVBlankFunc + $10
 	ld a, [wce00]
 	and a
@@ -8164,9 +8123,8 @@ Func_b681: ; b681 (2:7681)
 	ld a, HIGH(Func_cb8)
 	ld [hl], a
 	ret
-; 0xb6d5
 
-Func_b6d5: ; b6d5 (2:76d5)
+Func_b6d5:
 	xor a
 	ld [wc0c0], a
 	ld a, [wc0b9]
@@ -8231,9 +8189,8 @@ Func_b6d5: ; b6d5 (2:76d5)
 	ld a, $02
 	ld [wc0c0], a
 	ret
-; 0xb74c
 
-Func_b74c: ; b74c (2:774c)
+Func_b74c:
 	xor a
 	ld [wc0bf], a
 	ld a, [wc0b8]
@@ -8313,9 +8270,8 @@ Func_b74c: ; b74c (2:774c)
 .asm_b7d7
 	ld [wcac6 + 1], a
 	ret
-; 0xb7db
 
-Func_b7db: ; b7db (2:77db)
+Func_b7db:
 	ld a, [wc0b6]
 	dec a
 	ld c, a
@@ -8378,9 +8334,8 @@ Func_b7db: ; b7db (2:77db)
 	ld a, $02
 	ld [wc0bd], a
 	ret
-; 0xb850
 
-Func_b850: ; b850 (2:7850)
+Func_b850:
 	ld a, [wc0b7]
 	ld c, a
 	ld a, [wcac4 + 1]
@@ -8454,9 +8409,8 @@ Func_b850: ; b850 (2:7850)
 .asm_b8cf
 	ld [wcac4 + 1], a
 	ret
-; 0xb8d3
 
-SetWarioScreenPos: ; b8d3 (2:78d3)
+SetWarioScreenPos:
 	ld a, [wCameraConfigFlags]
 	cp HIDDEN_FIGURE_CAMCONFIG
 	jr z, .hidden_figure_camconfig
@@ -8491,9 +8445,8 @@ SetWarioScreenPos: ; b8d3 (2:78d3)
 	sub b
 	ld [wWarioScreenXPos], a
 	ret
-; 0xb915
 
-Func_b915: ; b915 (2:7915)
+Func_b915:
 	ld a, [wc0c2]
 	ld b, a
 	and a
@@ -8583,9 +8536,8 @@ Func_b915: ; b915 (2:7915)
 	jr c, .asm_b92e
 	ret z
 	jp .asm_b951
-; 0xb9a6
 
-Func_b9a6: ; b9a6 (2:79a6)
+Func_b9a6:
 	ld a, [wc0c3]
 	ld b, a
 	and a
@@ -8680,9 +8632,8 @@ Func_b9a6: ; b9a6 (2:79a6)
 	jr c, .asm_b9cf
 	ret z
 	jp .asm_ba00
-; 0xba42
 
-Func_ba42: ; ba42 (2:7a42)
+Func_ba42:
 	ldh a, [rSVBK]
 	push af
 	ld a, $01
@@ -8772,10 +8723,9 @@ Func_ba42: ; ba42 (2:7a42)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0xbaee
 
 ; hl = obj unk02
-DespawnObject: ; baee (2:7aee)
+DespawnObject:
 	ldh a, [rSVBK]
 	push af
 	ld a, $01
@@ -8810,9 +8760,8 @@ DespawnObject: ; baee (2:7aee)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0xbb2d
 
-Func_bb2d: ; bb2d (2:7b2d)
+Func_bb2d:
 	ldh a, [rSVBK]
 	push af
 	ld a, $01
@@ -8859,9 +8808,8 @@ Func_bb2d: ; bb2d (2:7b2d)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0xbb85
 
-Func_bb85: ; bb85 (2:7b85)
+Func_bb85:
 	ld a, [wIsDMATransferPending]
 	and a
 	ret nz
@@ -9008,9 +8956,8 @@ Func_bb85: ; bb85 (2:7b85)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0xbc5e
 
-Func_bc5e: ; bc5e (2:7c5e)
+Func_bc5e:
 	ld a, [wca6a]
 	and a
 	ret z
@@ -9130,9 +9077,8 @@ Func_bc5e: ; bc5e (2:7c5e)
 	pop af
 	sramswitch
 	ret
-; 0xbd3c
 
-TickLevelTime: ; bd3c (2:7d3c)
+TickLevelTime:
 	ld a, [wGameModeFlags]
 	bit MODE_TIME_ATTACK_F, a
 	ret z
@@ -9165,4 +9111,3 @@ TickLevelTime: ; bd3c (2:7d3c)
 	ld [wLevelTime + 0], a
 	ld [wLevelTime + 1], a
 	ret
-; 0xbd7c

@@ -3,7 +3,7 @@
 ; (8 * $10 * 4 = $200 bytes each block)
 ; wAnimatedTilesGfx determines which of these blocks to load
 ; wAnimatedTilesFrame determines which of the subset (frame) to load
-UpdateRoomAnimatedTiles:: ; d0000 (34:4000)
+UpdateRoomAnimatedTiles::
 	ldh a, [rLY]
 	cp $7c
 	jr nc, .done
@@ -72,7 +72,6 @@ ENDR
 	ldh [rVBK], a
 .done
 	ret
-; 0xd0071
 
 AnimatedTilesGfx:
 AnimatedTiles1Gfx:  INCBIN "gfx/levels/animated/animated_tiles1.2bpp"  ; ANIMATED_TILES_GFX_00

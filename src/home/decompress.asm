@@ -4,7 +4,7 @@
 ; - if bit 7 is not set, repeat the following byte that amount of times
 ; - if bit 7 is set, copy the next amount of bytes literally
 ; the result is written to bc
-Decompress:: ; 909 (0:909)
+Decompress::
 	ld a, [hli]
 	and a
 	jr z, .done
@@ -36,4 +36,3 @@ Decompress:: ; 909 (0:909)
 	jr Decompress
 .done
 	ret
-; 0x928

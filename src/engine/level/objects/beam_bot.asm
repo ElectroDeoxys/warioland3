@@ -1,4 +1,4 @@
-BeamBotFunc: ; 465b5 (11:65b5)
+BeamBotFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Init)
 	ld [hld], a
@@ -822,7 +822,7 @@ BeamBotFunc: ; 465b5 (11:65b5)
 	ld [hld], a
 	ret
 
-BeamFunc_Left: ; 46b00 (11:6b00)
+BeamFunc_Left:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Update)
 	ld [hld], a
@@ -844,7 +844,7 @@ BeamFunc_Left: ; 46b00 (11:6b00)
 	ld bc, Data_60610
 	jr BeamFunc
 
-BeamFunc_Right: ; 46b2a (11:6b2a)
+BeamFunc_Right:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Update)
 	ld [hld], a
@@ -866,7 +866,7 @@ BeamFunc_Right: ; 46b2a (11:6b2a)
 	ld bc, Data_60630
 ;	fallthrough
 
-BeamFunc: ; 46b2a (11:6b2a)
+BeamFunc:
 	ld hl, wCurObjState
 	ld a, [hl]
 	and a
@@ -876,4 +876,3 @@ BeamFunc: ; 46b2a (11:6b2a)
 	play_sfx SFX_07D
 .apply_movement
 	jp ApplyObjXMovement
-; 0x46b66

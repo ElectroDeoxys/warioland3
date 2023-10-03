@@ -1,4 +1,4 @@
-FireFunc: ; 4aaf9 (12:6af9)
+FireFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -20,4 +20,3 @@ FireFunc: ; 4aaf9 (12:6af9)
 	ld [hl], a
 .Update:
 	ret
-; 0x4ab1e

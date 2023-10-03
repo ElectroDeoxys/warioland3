@@ -1,4 +1,4 @@
-SeeingEyeDoorFunc: ; 454a0 (11:54a0)
+SeeingEyeDoorFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -229,4 +229,3 @@ SeeingEyeDoorFunc: ; 454a0 (11:54a0)
 	ld [hl], a
 	ld de, Frameset_68c4a
 	jp SetObjectFramesetPtr
-; 0x4564a

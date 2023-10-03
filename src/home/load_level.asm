@@ -1,6 +1,6 @@
 ; decompresses level layout data pointed
 ; by wCompressedLevelLayoutPtr to SRAM
-DecompressLevelLayout:: ; ab5 (0:ab5)
+DecompressLevelLayout::
 	ld a, [wceef]
 	and $3c
 	ret nz
@@ -23,13 +23,12 @@ DecompressLevelLayout:: ; ab5 (0:ab5)
 	pop af
 	sramswitch
 	ret
-; 0xaee
 
 ; decompresses level layout data
 ; - if bit 7 is not set, repeat the following byte that amount of times
 ; - if bit 7 is set, copy the next amount of bytes literally
 ; each row is 160 blocks wide
-.Decompress:: ; aee (0:aee)
+.Decompress::
 	ld c, LEVEL_WIDTH
 	ld de, s1a000
 .loop_data
@@ -92,9 +91,8 @@ DecompressLevelLayout:: ; ab5 (0:ab5)
 	inc a
 	sramswitch
 	jr .next_copy
-; 0xb48
 
-DecompressLevelObjectsMap:: ; b48 (0:b48)
+DecompressLevelObjectsMap::
 	ld a, [wSRAMBank]
 	push af
 	ld a, BANK("SRAM1")
@@ -113,9 +111,8 @@ DecompressLevelObjectsMap:: ; b48 (0:b48)
 	pop af
 	sramswitch
 	ret
-; 0xb7b
 
-.Decompress:: ; b7b (0:b7b)
+.Decompress::
 	ld a, LEVEL_WIDTH
 	srl a ; /2
 	add $b0
@@ -181,4 +178,3 @@ DecompressLevelObjectsMap:: ; b48 (0:b48)
 	inc a
 	sramswitch
 	jr .next_copy
-; 0xbdb

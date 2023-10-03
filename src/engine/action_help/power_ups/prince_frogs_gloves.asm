@@ -1,4 +1,4 @@
-PrinceFrogsGlovesActionHelp: ; 1face4 (7e:6ce4)
+PrinceFrogsGlovesActionHelp:
 	call .StateTable
 	ld a, [wActionHelpBlackedOut]
 	and a
@@ -37,9 +37,8 @@ PrinceFrogsGlovesActionHelp: ; 1face4 (7e:6ce4)
 	dw Func_1fb023
 	dw Func_1fb061
 	dw Func_1fb078
-; 0x1fad42
 
-Func_1fad42: ; 1fad42 (7e:6d42)
+Func_1fad42:
 	ld a, [wPowerUpLevel]
 	bit ACTION_HELP_LEVEL_CLEAR_F, a
 	jr nz, .asm_1fad50
@@ -60,13 +59,12 @@ Func_1fad42: ; 1fad42 (7e:6d42)
 	ld a, $01
 	ld [wActionHelpState], a
 	jr Func_1fad7a
-; 0x1fad75
 
-Func_1fad75: ; 1fad75 (7e:6d75)
+Func_1fad75:
 	ld hl, wTimer
 	dec [hl]
 	ret nz
-Func_1fad7a: ; 1fad7a (7e:6d7a)
+Func_1fad7a:
 	ld a, BANK(WarioIdleGfx)
 	ld [wPendingDMASourceBank], a
 	ld a, HIGH(WarioIdleGfx)
@@ -119,7 +117,7 @@ Func_1fad7a: ; 1fad7a (7e:6d7a)
 	inc [hl]
 	ret
 
-Func_1fadea: ; 1fadea (7e:6dea)
+Func_1fadea:
 	ld hl, wTimer
 	dec [hl]
 	ret nz
@@ -131,7 +129,7 @@ Func_1fadea: ; 1fadea (7e:6dea)
 	inc [hl]
 	ret
 
-Func_1fadfa: ; 1fadfa (7e:6dfa)
+Func_1fadfa:
 	ld hl, wActionHelpWarioXCoord
 	inc [hl]
 	ld a, [hl]
@@ -146,7 +144,7 @@ Func_1fadfa: ; 1fadfa (7e:6dfa)
 	inc [hl]
 	ret
 
-Func_1fae0f: ; 1fae0f (7e:6e0f)
+Func_1fae0f:
 	ld hl, wActionHelpWarioXCoord
 	inc [hl]
 	ld hl, wActionHelpWarioVar
@@ -173,7 +171,7 @@ Func_1fae0f: ; 1fae0f (7e:6e0f)
 	inc [hl]
 	ret
 
-Func_1fae3d: ; 1fae3d (7e:6e3d)
+Func_1fae3d:
 	ld hl, wTimer
 	dec [hl]
 	ret nz
@@ -185,7 +183,7 @@ Func_1fae3d: ; 1fae3d (7e:6e3d)
 	inc [hl]
 	ret
 
-Func_1fae4d: ; 1fae4d (7e:6e4d)
+Func_1fae4d:
 	play_sfx_rept 37, SFX_00E
 
 	ld a, [wActionHelpCounter]
@@ -205,7 +203,7 @@ Func_1fae4d: ; 1fae4d (7e:6e4d)
 	inc [hl]
 	ret
 
-Func_1fae7f: ; 1fae7f (7e:6e7f)
+Func_1fae7f:
 	play_sfx_rept 37, SFX_00E
 
 	ld hl, wTimer
@@ -232,7 +230,7 @@ Func_1fae7f: ; 1fae7f (7e:6e7f)
 	inc [hl]
 	ret
 
-Func_1faeba: ; 1faeba (7e:6eba)
+Func_1faeba:
 	play_sfx_rept 37, SFX_00E
 
 	ld hl, wTimer
@@ -257,7 +255,7 @@ Func_1faeba: ; 1faeba (7e:6eba)
 	inc [hl]
 	ret
 
-Func_1faef0: ; 1faef0 (7e:6ef0)
+Func_1faef0:
 	play_sfx_rept 37, SFX_00E
 
 	ld hl, wActionHelpWarioXCoord
@@ -273,7 +271,7 @@ Func_1faef0: ; 1faef0 (7e:6ef0)
 	inc [hl]
 	ret
 
-Func_1faf19: ; 1faf19 (7e:6f19)
+Func_1faf19:
 	play_sfx_rept 15, SFX_00F
 
 	ld hl, wActionHelpWarioXCoord
@@ -296,7 +294,7 @@ Func_1faf19: ; 1faf19 (7e:6f19)
 	inc [hl]
 	ret
 
-Func_1faf4e: ; 1faf4e (7e:6f4e)
+Func_1faf4e:
 	play_sfx_rept 37, SFX_00E
 
 	ld hl, wActionHelpWarioXCoord
@@ -313,7 +311,7 @@ Func_1faf4e: ; 1faf4e (7e:6f4e)
 	inc [hl]
 	ret
 
-Func_1faf7a: ; 1faf7a (7e:6f7a)
+Func_1faf7a:
 	play_sfx_rept 15, SFX_00F
 
 	ld hl, wActionHelpWarioXCoord
@@ -337,7 +335,7 @@ Func_1faf7a: ; 1faf7a (7e:6f7a)
 	inc [hl]
 	ret
 
-Func_1fafb1: ; 1fafb1 (7e:6fb1)
+Func_1fafb1:
 	play_sfx_rept 15, SFX_00F
 
 	ld hl, wTimer
@@ -369,7 +367,7 @@ Func_1fafb1: ; 1fafb1 (7e:6fb1)
 	inc [hl]
 	ret
 
-Func_1faff5: ; 1faff5 (7e:6ff5)
+Func_1faff5:
 	play_sfx_rept 37, SFX_00E
 
 	ld hl, wActionHelpWarioXCoord
@@ -387,7 +385,7 @@ Func_1faff5: ; 1faff5 (7e:6ff5)
 	inc [hl]
 	ret
 
-Func_1fb023: ; 1fb023 (7e:7023)
+Func_1fb023:
 	play_sfx_rept 37, SFX_00E
 
 	ld hl, wTimer
@@ -415,7 +413,7 @@ Func_1fb023: ; 1fb023 (7e:7023)
 	inc [hl]
 	ret
 
-Func_1fb061: ; 1fb061 (7e:7061)
+Func_1fb061:
 	ld hl, wTimer
 	dec [hl]
 	ret nz
@@ -430,7 +428,7 @@ Func_1fb061: ; 1fb061 (7e:7061)
 	inc [hl]
 	ret
 
-Func_1fb078: ; 1fb078 (7e:7078)
+Func_1fb078:
 	ld hl, wActionHelpWarioXCoord
 	ld a, [hl]
 	cp $18
@@ -458,4 +456,3 @@ Func_1fb078: ; 1fb078 (7e:7078)
 	xor a
 	ld [wActionHelpWarioVar], a
 	jp Func_1fad42
-; 0x1fb0ac

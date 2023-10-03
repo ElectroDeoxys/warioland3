@@ -1,4 +1,4 @@
-Music_GameOver_Ch1: ; 39bc2 (0e:5bc2)
+Music_GameOver_Ch1:
 	semitone_offset 0
 
 .loop
@@ -135,9 +135,8 @@ Music_GameOver_Ch1: ; 39bc2 (0e:5bc2)
 	audio_jump .loop
 .end
 	audio_end
-; 0x39c63
 
-Music_GameOver_Ch2: ; 39c63 (0e:5c63)
+Music_GameOver_Ch2:
 	semitone_offset 0
 
 .loop
@@ -201,9 +200,8 @@ Music_GameOver_Ch2: ; 39c63 (0e:5c63)
 	audio_jump .loop
 .end
 	audio_end
-; 0x39cba
 
-Music_GameOver_Ch3: ; 39cba (0e:5cba)
+Music_GameOver_Ch3:
 	semitone_offset 0
 
 .loop
@@ -333,9 +331,8 @@ Music_GameOver_Ch3: ; 39cba (0e:5cba)
 	audio_jump .loop
 .end
 	audio_end
-; 0x39d53
 
-Music_GameOver: ; 39d53 (0e:5d53)
+Music_GameOver:
 	db 3, 2
 	dw Music_GameOver_Ch1
 	dw Music_GameOver_Ch2
@@ -349,4 +346,3 @@ Music_GameOver: ; 39d53 (0e:5d53)
 	dw Music_GameOver_Ch1.end
 	dw Music_GameOver_Ch2.end
 	dw Music_GameOver_Ch3.end
-; 0x39d67

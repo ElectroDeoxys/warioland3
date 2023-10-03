@@ -1,4 +1,4 @@
-StateTable:: ; 4000 (1:4000)
+StateTable::
 	ld a, [wState]
 	jumptable
 
@@ -20,13 +20,11 @@ StateTable:: ; 4000 (1:4000)
 	dw Func_4028                   ; ST_0f
 	dw Func_4028                   ; ST_10
 	dw Func_4028                   ; ST_11
-; 0x4028
 
-Func_4028: ; 4028 (1:4028)
+Func_4028:
 	jp Init
-; 0x402b
 
-TitleStateTable: ; 402b (1:402b)
+TitleStateTable:
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -57,9 +55,8 @@ TitleStateTable: ; 402b (1:402b)
 	dw DebugReset
 	dw DebugReset
 	dw DebugReset
-; 0x405f
 
-InitIntroSequence: ; 405f (1:405f)
+InitIntroSequence:
 	call DisableLCD
 	call FillBGMap0_With7f
 	call ClearVirtualOAM
@@ -301,12 +298,11 @@ InitIntroSequence: ; 405f (1:405f)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0x41cf
 
 ; phase 1 of Intro sequence has Wario's plane
 ; fly to the centre of the screen from the right
 ; then exiting after hovering for a while
-IntroSequencePhase1: ; 41cf (1:41cf)
+IntroSequencePhase1:
 	ld a, [wceef]
 	and a
 	jp nz, StartTitleScreen
@@ -489,11 +485,10 @@ IntroSequencePhase1: ; 41cf (1:41cf)
 	call Func_4b93
 	call ClearUnusedVirtualOAM
 	jp DrawIntroBackgroundLayers
-; 0x42ed
 
 ; phase 2 of Intro sequence, where Wario's plane
 ; comes into the centre while far away from the foreground
-IntroSequencePhase2: ; 42ed (1:42ed)
+IntroSequencePhase2:
 	call Func_4d45
 	call PlayIntroSFXPlane_Far
 
@@ -606,11 +601,10 @@ IntroSequencePhase2: ; 42ed (1:42ed)
 	call Func_4b93
 	call ClearUnusedVirtualOAM
 	jp DrawIntroBackgroundLayers
-; 0x43b5
 
 ; phase 3 of the Intro sequence where Wario's plane
 ; starts wobbling and then explodes, making it nosedive
-IntroSequencePhase3: ; 43b5 (1:43b5)
+IntroSequencePhase3:
 	call Func_4d45
 
 	ld a, [wPlaneWarioVar]
@@ -777,9 +771,8 @@ IntroSequencePhase3: ; 43b5 (1:43b5)
 	call Func_4b93
 	call ClearUnusedVirtualOAM
 	jp DrawIntroBackgroundLayers
-; 0x44c3
 
-EndIntroSequence: ; 44c3 (1:44c3)
+EndIntroSequence:
 	ld hl, wPlaneWarioEnd - 1
 	call UpdateObjAnim
 	ld hl, wPlaneWario
@@ -809,7 +802,7 @@ EndIntroSequence: ; 44c3 (1:44c3)
 
 ; loads TitleScreen music
 ; then starts Action Help timer
-StartTitleScreen: ; 44f0 (1:44f0)
+StartTitleScreen:
 	play_music MUSIC_TITLE_SCREEN
 	ld a, 8
 	ld [wTimer + 1], a
@@ -818,9 +811,8 @@ StartTitleScreen: ; 44f0 (1:44f0)
 	ld hl, wSubState
 	ld [hl], $07
 	ret
-; 0x4508
 
-StartMenu: ; 4508 (1:4508)
+StartMenu:
 	ld hl, wPlaneWarioEnd - 1
 	call UpdateObjAnim
 	ld hl, wPlaneWario
@@ -976,20 +968,19 @@ StartMenu: ; 4508 (1:4508)
 	inc [hl]
 	ret
 
-StartOverworldStateAndNewGameParam: ; 4619 (1:4619)
+StartOverworldStateAndNewGameParam:
 	ld a, TRANSITION_NEW_GAME
 	ld [wTransitionParam], a
 	; fallthrough
 
-StartOverworldState:: ; 461e (1:461e)
+StartOverworldState::
 	ld a, ST_OVERWORLD
 	ld [wState], a
 	xor a
 	ld [wSubState], a
 	ret
-; 0x4628
 
-Func_4628:: ; 4628 (1:4628)
+Func_4628::
 	xor a
 	ld [wAnimatedTilesFrameDuration], a
 	ld [wAnimatedTilesGfx], a
@@ -1000,9 +991,8 @@ Func_4628:: ; 4628 (1:4628)
 	ld hl, wca3b
 	set 7, [hl]
 	jr StartOverworldState
-; 0x4640
 
-InitTimeAttackDescription: ; 4640 (1:4640)
+InitTimeAttackDescription:
 	call DisableLCD
 	call FillBGMap0_With7f
 	call ClearVirtualOAM
@@ -1024,9 +1014,8 @@ InitTimeAttackDescription: ; 4640 (1:4640)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0x4670
 
-TimeAttackDescription: ; 4670 (1:4670)
+TimeAttackDescription:
 	call AdjustJapaneseTimeAttackDescriptionWindow
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
@@ -1036,9 +1025,8 @@ TimeAttackDescription: ; 4670 (1:4670)
 	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 	ldh [rLCDC], a
 	jp StartOverworldState
-; 0x4686
 
-HandleOverworld: ; 4686 (1:4686)
+HandleOverworld:
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM2")
@@ -1070,14 +1058,12 @@ HandleOverworld: ; 4686 (1:4686)
 .the_temple
 	stop_sfx
 	ret
-; 0x46cc
 
-LevelStateTable: ; 46cc (1:46cc)
+LevelStateTable:
 	farcall _LevelStateTable
 	ret
-; 0x46dc
 
-ClearScreenStateTable: ; 46dc (1:46dc)
+ClearScreenStateTable:
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -1086,9 +1072,8 @@ ClearScreenStateTable: ; 46dc (1:46dc)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0x46f6
 
-PauseMenuStateTable: ; 46f6 (1:46f6)
+PauseMenuStateTable:
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -1097,9 +1082,8 @@ PauseMenuStateTable: ; 46f6 (1:46f6)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0x4710
 
-GolfStateTable: ; 4710 (1:4710)
+GolfStateTable:
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Golf RAM")
@@ -1108,9 +1092,8 @@ GolfStateTable: ; 4710 (1:4710)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0x472a
 
-EpilogueStateTable: ; 472a (1:472a)
+EpilogueStateTable:
 	ld a, [wSubState]
 	jumptable
 
@@ -1127,9 +1110,8 @@ EpilogueStateTable: ; 472a (1:472a)
 .Func_473c:
 	farcall Func_4628
 	ret
-; 0x474c
 
-ActionHelpStateTable: ; 474c (1:474c)
+ActionHelpStateTable:
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -1138,10 +1120,9 @@ ActionHelpStateTable: ; 474c (1:474c)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0x4766
 
 ; pauses game for 100 ticks
-CollectKeyDelay: ; 4766 (1:4766)
+CollectKeyDelay:
 	ld hl, wTimer
 	inc [hl]
 	ld a, [hl]
@@ -1151,9 +1132,8 @@ CollectKeyDelay: ; 4766 (1:4766)
 	ld a, ST_LEVEL
 	ld [wState], a
 	ret
-; 0x4776
 
-CreditsStateTable: ; 4776 (1:4776)
+CreditsStateTable:
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -1162,9 +1142,8 @@ CreditsStateTable: ; 4776 (1:4776)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0x4790
 
-GolfBuildingStateTable: ; 4790 (1:4790)
+GolfBuildingStateTable:
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Golf RAM")
@@ -1173,9 +1152,8 @@ GolfBuildingStateTable: ; 4790 (1:4790)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0x47aa
 
-GBIncompatibleStateTable: ; 47aa (1:47aa)
+GBIncompatibleStateTable:
 	ld a, [wSubState]
 	jumptable
 
@@ -1187,9 +1165,8 @@ GBIncompatibleStateTable: ; 47aa (1:47aa)
 	dw  DebugReset
 	dw  DebugReset
 	dw  DebugReset
-; 0x47be
 
-GBIncompatible: ; 47be (1:47be)
+GBIncompatible:
 	call DisableLCD
 	call ClearBGMap0
 	call ClearVirtualOAM
@@ -1208,13 +1185,11 @@ GBIncompatible: ; 47be (1:47be)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0x47fc
 
-ExitGBIncompatible: ; 47fc (1:47fc)
+ExitGBIncompatible:
 	ret
-; 0x47fd
 
-GameOverStateTable: ; 47fd (1:47fd)
+GameOverStateTable:
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -1223,9 +1198,8 @@ GameOverStateTable: ; 47fd (1:47fd)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0x4817
 
-PerfectStateTable: ; 4817 (1:4817)
+PerfectStateTable:
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -1234,9 +1208,8 @@ PerfectStateTable: ; 4817 (1:4817)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0x4831
 
-LanguageSelectionStateTable: ; 4831 (1:4831)
+LanguageSelectionStateTable:
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
@@ -1260,9 +1233,8 @@ LanguageSelectionStateTable: ; 4831 (1:4831)
 	dw DebugReset
 	dw DebugReset
 	dw DebugReset
-; 0x4857
 
-InitLanguageSelection: ; 4857 (1:4857)
+InitLanguageSelection:
 	call DisableLCD
 	call FillBGMap0_With7f
 	call ClearVirtualOAM
@@ -1304,9 +1276,8 @@ InitLanguageSelection: ; 4857 (1:4857)
 	ld hl, wSubState
 	inc [hl]
 	ret
-; 0x48c9
 
-LanguageSelection: ; 48c9 (1:48c9)
+LanguageSelection:
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jp nz, StartOverworldStateAndNewGameParam
@@ -1347,9 +1318,8 @@ LanguageSelection: ; 48c9 (1:48c9)
 	call Func_4e3e
 	call ClearUnusedVirtualOAM
 	ret
-; 0x4917
 
-LoadTitleScreenPals: ; 4917 (1:4917)
+LoadTitleScreenPals:
 	ld a, [wceef]
 	and a
 	jr nz, .asm_492a
@@ -1365,9 +1335,8 @@ LoadTitleScreenPals: ; 4917 (1:4917)
 	ld hl, Pals_5042
 	call LoadPalsToTempPals2
 	ret
-; 0x4937
 
-LoadTitleScreenTiles: ; 4937 (1:4937)
+LoadTitleScreenTiles:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, PlaneGfx
@@ -1380,9 +1349,8 @@ LoadTitleScreenTiles: ; 4937 (1:4937)
 	ld bc, v0Tiles0
 	call Decompress
 	ret
-; 0x4951
 
-LoadTitleScreenTileMap: ; 4951 (1:4951)
+LoadTitleScreenTileMap:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, BGMap_6ae7
@@ -1395,15 +1363,13 @@ LoadTitleScreenTileMap: ; 4951 (1:4951)
 	ld bc, v0BGMap0
 	call Decompress
 	ret
-; 0x496b
 
-LoadTimeAttackDescriptionPals: ; 496b (1:496b)
+LoadTimeAttackDescriptionPals:
 	ld hl, Pal_71b0
 	call LoadPalsToTempPals1
 	ret
-; 0x4972
 
-LoadTimeAttackDescriptionTiles: ; 4972 (1:4972)
+LoadTimeAttackDescriptionTiles:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	farcall LoadFontTiles
@@ -1417,9 +1383,8 @@ LoadTimeAttackDescriptionTiles: ; 4972 (1:4972)
 	ldh [hCallFuncBank], a
 	hcall CopyHLToDE_BC
 	ret
-; 0x49a1
 
-LoadTimeAttackText: ; 49a1 (1:49a1)
+LoadTimeAttackText:
 	ld a, [wLanguage]
 	and a
 	jr nz, .japanese
@@ -1450,9 +1415,8 @@ LoadTimeAttackText: ; 49a1 (1:49a1)
 	ld bc, v0BGMap0
 	call Decompress
 	ret
-; 0x49db
 
-VBlank_49db: ; 49db (1:49db)
+VBlank_49db:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -1496,10 +1460,9 @@ VBlank_49db: ; 49db (1:49db)
 	call hTransferVirtualOAM
 	ret
 .end
-; 0x4a33
 
 ; hl = BG map address
-PrintNumberCoins: ; 4a33 (1:4a33)
+PrintNumberCoins:
 	ld bc, -BG_MAP_WIDTH
 	ld de, BG_MAP_WIDTH
 	ld a, [wNumCoins]
@@ -1531,12 +1494,11 @@ PrintNumberCoins: ; 4a33 (1:4a33)
 	ld [hli], a
 	add hl, bc
 	ret
-; 0x4a63
 
 ; sets flags in wKeyAndTreasureFlags
 ; corresponding to the collected treasures
 ; in wOWLevel
-GetOWLevelCollectedTreasures: ; 4a63 (1:4a63)
+GetOWLevelCollectedTreasures:
 	xor a
 	ld [wKeyAndTreasureFlags], a
 	ldh a, [rSVBK]
@@ -1590,9 +1552,8 @@ GetOWLevelCollectedTreasures: ; 4a63 (1:4a63)
 .done
 	pop hl
 	ret
-; 0x4ab7
 
-PrintNumCollectedTreasures: ; 4ab7 (1:4ab7)
+PrintNumCollectedTreasures:
 	ld bc, -BG_MAP_WIDTH
 	ld de, BG_MAP_WIDTH
 
@@ -1630,9 +1591,8 @@ PrintNumCollectedTreasures: ; 4ab7 (1:4ab7)
 	ld [hli], a
 	add hl, bc
 	ret
-; 0x4ae7
 
-SelectLevel: ; 4ae7 (1:4ae7)
+SelectLevel:
 	ldh a, [rSVBK]
 	push af
 	ld a, 2 ; WRAM2
@@ -1732,9 +1692,8 @@ SelectLevel: ; 4ae7 (1:4ae7)
 	pop af
 	ldh [rSVBK], a
 	ret
-; 0x4b73
 
-Func_4b73: ; 4b73 (1:4b73)
+Func_4b73:
 	; y coord
 	ld a, [wSCY]
 	ld b, a
@@ -1755,9 +1714,8 @@ Func_4b73: ; 4b73 (1:4b73)
 	ld hl, OAM_6b5f
 	call TryAddSprite
 	ret
-; 0x4b93
 
-Func_4b93: ; 4b93 (1:4b93)
+Func_4b93:
 	; y coord
 	ld a, [wSCY]
 	ld b, a
@@ -1776,9 +1734,8 @@ Func_4b93: ; 4b93 (1:4b93)
 	ld hl, OAM_6d21
 	call TryAddSprite
 	ret
-; 0x4bb3
 
-HandleStartMenuSelection: ; 4bb3 (1:4bb3)
+HandleStartMenuSelection:
 	ld a, [wStartMenuSelection]
 	bit 4, a
 	jp nz, .MoveVertical
@@ -1942,12 +1899,11 @@ HandleStartMenuSelection: ; 4bb3 (1:4bb3)
 	dec l
 	ld [hl], a
 	ret
-; 0x4cbb
 
 ; decreases wIntroBGXOffsetFar every 4 ticks
 ; decreases wIntroBGXOffsetCentre by 1
 ; decreases wIntroBGXOffsetNear by 2
-ScrollIntroBackgroundLayers: ; 4cbb (1:4cbb)
+ScrollIntroBackgroundLayers:
 	ld a, [wGlobalCounter]
 	and %11
 	jr nz, .asm_4cc6
@@ -1960,11 +1916,10 @@ ScrollIntroBackgroundLayers: ; 4cbb (1:4cbb)
 	dec [hl]
 	dec [hl]
 	ret
-; 0x4cd0
 
 ; scrolls the intro background layers
 ; until they align to the centre
-FinishIntroBackgroundScroll: ; 4cd0 (1:4cd0)
+FinishIntroBackgroundScroll:
 ; only update far layer evert 4 ticks
 	ld a, [wGlobalCounter]
 	and %11
@@ -2005,11 +1960,10 @@ FinishIntroBackgroundScroll: ; 4cd0 (1:4cd0)
 	dec [hl]
 .done
 	ret
-; 0x4d07
 
 ; pans the background of the intro airplane scene
 ; each horizontal layer scrolls at different speed
-DrawIntroBackgroundLayers: ; 4d07 (1:4d07)
+DrawIntroBackgroundLayers:
 	ld a, [wceef]
 	and a
 	ret nz
@@ -2046,9 +2000,8 @@ DrawIntroBackgroundLayers: ; 4d07 (1:4d07)
 	ld a, [wSCX]
 	ldh [rSCX], a
 	ret
-; 0x4d45
 
-Func_4d45: ; 4d45 (1:4d45)
+Func_4d45:
 	ld a, [wGlobalCounter]
 	and %1
 	jr z, .asm_4d66
@@ -2084,9 +2037,8 @@ Func_4d45: ; 4d45 (1:4d45)
 .incr_x2
 	inc [hl]
 	ret
-; 0x4d7f
 
-AdjustJapaneseTimeAttackDescriptionWindow: ; 4d7f (1:4d7f)
+AdjustJapaneseTimeAttackDescriptionWindow:
 	ld a, [wLanguage]
 	and a
 	ret nz ; return if English
@@ -2140,9 +2092,8 @@ AdjustJapaneseTimeAttackDescriptionWindow: ; 4d7f (1:4d7f)
 	add $07
 	ldh [rSCY], a
 	ret
-; 0x4ddf
 
-VBlank_4ddf: ; 4ddf (1:4ddf)
+VBlank_4ddf:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -2190,9 +2141,8 @@ VBlank_4ddf: ; 4ddf (1:4ddf)
 	call hTransferVirtualOAM
 	ret
 .end
-; 0x4e3e
 
-Func_4e3e: ; 4e3e (1:4e3e)
+Func_4e3e:
 	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
@@ -2209,9 +2159,8 @@ Func_4e3e: ; 4e3e (1:4e3e)
 	ld hl, OAM_75c3
 	call TryAddSprite
 	ret
-; 0x4e5e
 
-PlayIntroSFXPlane_Close: ; 4e5e (1:4e5e)
+PlayIntroSFXPlane_Close:
 	ld a, [wPlaneWarioXCoord]
 	cp 160
 	jr nc, PlayIntroSFXPlane3
@@ -2220,25 +2169,23 @@ PlayIntroSFXPlane_Close: ; 4e5e (1:4e5e)
 	play_sfx_rept 12, SFX_PLANE1
 	ret
 
-PlayIntroSFXPlane2: ; 4e81 (1:4e81)
+PlayIntroSFXPlane2:
 	play_sfx_rept 12, SFX_PLANE2
 	ret
 
-PlayIntroSFXPlane3: ; 4e99 (1:4e99)
+PlayIntroSFXPlane3:
 	play_sfx_rept 12, SFX_PLANE3
 	ret
-; 0x4eb1
 
-PlayIntroSFXPlane_Far: ; 4eb1 (1:4eb1)
+PlayIntroSFXPlane_Far:
 	ld a, [wPlaneWarioXCoord]
 	cp 160
 	jr nc, PlayIntroSFXPlane3
 	jr PlayIntroSFXPlane2
-; 0x4eba
 
 ; the treasure requistes for each variant of a level
 ; if both treasures are collected, then that variant is unlocked
-LevelTreasureRequisites: ; 4eba (1:4eba)
+LevelTreasureRequisites:
 	; LEVEL_OUT_OF_THE_WOODS
 	db GOLD_MAGIC,               TREASURE_NONE ; variant 4
 	db MAGIC_SEEDS,              EYE_OF_THE_STORM ; variant 3
@@ -2388,9 +2335,8 @@ LevelTreasureRequisites: ; 4eba (1:4eba)
 	db MYSTERY_HANDLE,           TREASURE_NONE ; variant 3
 	db SUPER_GRAB_GLOVES_T,        TREASURE_NONE ; variant 2
 	db TREASURE_NONE,            TREASURE_NONE ; variant 1
-; 0x4f82
 
-Pals_4f82: ; 4f82 (1:4f82)
+Pals_4f82:
 	rgb 16, 30, 31
 	rgb 16, 30, 31
 	rgb 16, 30, 31
@@ -2431,7 +2377,7 @@ Pals_4f82: ; 4f82 (1:4f82)
 	rgb  0,  8, 0
 	rgb 14, 23, 0
 
-Pals_4fc2: ; 4fc2 (1:4fc2)
+Pals_4fc2:
 	rgb 21, 30, 31
 	rgb  0,  0,  0
 	rgb  0,  0,  0
@@ -2472,7 +2418,7 @@ Pals_4fc2: ; 4fc2 (1:4fc2)
 	rgb 31, 22,  0
 	rgb 13,  7, 10
 
-Pals_5002: ; 5002 (1:5002)
+Pals_5002:
 	rgb 16, 30, 31
 	rgb 31, 31, 31
 	rgb 18,  3, 31
@@ -2513,7 +2459,7 @@ Pals_5002: ; 5002 (1:5002)
 	rgb  0,  8, 0
 	rgb 14, 23, 0
 
-Pals_5042: ; 5042 (1:5042)
+Pals_5042:
 	rgb  0, 20, 15
 	rgb  0,  0,  0
 	rgb 31, 27,  2
@@ -2553,26 +2499,24 @@ Pals_5042: ; 5042 (1:5042)
 	rgb 31, 31, 31
 	rgb 31, 22,  0
 	rgb 13,  7, 10
-; 0x5082
 
-TitleScreenGfx: ; 5082 (1:5082)
+TitleScreenGfx:
 INCBIN "gfx/intro/title_screen.2bpp.lz"
 
-PlaneGfx: ; 635c (1:635c)
+PlaneGfx:
 INCBIN "gfx/intro/plane.2bpp.lz"
 
-BGMap_697a: ; 697a (1:697a)
+BGMap_697a:
 INCBIN "gfx/bgmaps/map_697a.bin"
 
-BGMap_6ae7: ; 6ae7 (1:6ae7)
+BGMap_6ae7:
 INCBIN "gfx/bgmaps/map_6ae7.bin"
 
-Data_6b47: ; 6b47 (1:6b47)
+Data_6b47:
 	db $7c, $7c, $7c, $7c, $7c, $7c, $7c, $7c, $7c, $7c, $7c, $7c
 	db $10, $11, $12, $1f, $10, $11, $12, $1f, $10, $11, $12, $1f
-; 0x6b5f
 
-OAM_6b5f: ; 6b5f (01:6b5f)
+OAM_6b5f:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -2700,25 +2644,24 @@ OAM_6b5f: ; 6b5f (01:6b5f)
 	frame_oam -21,  24, $38, 0
 	frame_oam -18, -16, $0a, 0
 	db $80
-; 0x6ce6
 
-Frameset_6ce6: ; 6ce6 (1:6ce6)
+Frameset_6ce6:
 	db 0, 4
 	db $ff
 
-Frameset_6ce9: ; 6ce9 (1:6ce9)
+Frameset_6ce9:
 	db 1, 4
 	db $ff
 
-Frameset_6cec: ; 6cec (1:6cec)
+Frameset_6cec:
 	db 2, 4
 	db $ff
 
-Frameset_6cef: ; 6cef (1:6cef)
+Frameset_6cef:
 	db 3, 4
 	db $ff
 
-Frameset_6cf2: ; 6cf2 (1:6cf2)
+Frameset_6cf2:
 	db 4, 30
 	db 2,  3
 	db 4,  3
@@ -2730,7 +2673,7 @@ Frameset_6cf2: ; 6cf2 (1:6cf2)
 	db 4,  3
 	db $ff
 
-Frameset_6d05: ; 6d05 (1:6d05)
+Frameset_6d05:
 	db 5, 30
 	db 3,  3
 	db 5,  3
@@ -2742,19 +2685,19 @@ Frameset_6d05: ; 6d05 (1:6d05)
 	db 5,  3
 	db $ff
 
-Frameset_6d18: ; 6d18 (1:6d18)
+Frameset_6d18:
 	db 6, 4
 	db $ff
 
-Frameset_6d1b: ; 6d1b (1:6d1b)
+Frameset_6d1b:
 	db 7, 4
 	db $ff
 
-Frameset_6d1e: ; 6d1e (1:6d1e)
+Frameset_6d1e:
 	db 8, 4
 	db $ff
 
-OAM_6d21: ; 6d21 (01:6d21)
+OAM_6d21:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -3147,9 +3090,8 @@ OAM_6d21: ; 6d21 (01:6d21)
 	frame_oam   0,   0, $5c, 5 | OAMF_BANK1
 	frame_oam   0,   8, $5e, 5 | OAMF_BANK1
 	db $80
-; 0x712c
 
-Frameset_712c: ; 712c (1:712c)
+Frameset_712c:
 	db 0, 2
 	db 1, 2
 	db 2, 2
@@ -3160,13 +3102,13 @@ Frameset_712c: ; 712c (1:712c)
 	db 7, 2
 	db $ff
 
-Frameset_713d: ; 713d (1:713d)
+Frameset_713d:
 	db  8, 3
 	db  9, 3
 	db 10, 3
 	db $ff
 
-Frameset_7144: ; 7144 (1:7144)
+Frameset_7144:
 	db  8, 3
 	db  9, 3
 	db 10, 3
@@ -3185,7 +3127,7 @@ Frameset_7144: ; 7144 (1:7144)
 	db 11, 4
 	db $ff
 
-Frameset_7165: ; 7165 (1:7165)
+Frameset_7165:
 	db 13,  6
 	db 14,  6
 	db 13,  6
@@ -3194,28 +3136,28 @@ Frameset_7165: ; 7165 (1:7165)
 	db 16, 40
 	db $ff
 
-Frameset_7172: ; 7172 (1:7172)
+Frameset_7172:
 	db 17, 2
 	db 18, 2
 	db 19, 2
 	db 20, 2
 	db $ff
 
-Frameset_717b: ; 717b (1:717b)
+Frameset_717b:
 	db 21, 2
 	db 22, 2
 	db 23, 2
 	db 24, 2
 	db $ff
 
-Frameset_7184: ; 7184 (1:7184)
+Frameset_7184:
 	db 25, 2
 	db 26, 2
 	db 27, 2
 	db 28, 2
 	db $ff
 
-Frameset_718d: ; 718d (1:718d)
+Frameset_718d:
 	db 29, 9
 	db 30, 9
 	db 31, 9
@@ -3223,30 +3165,29 @@ Frameset_718d: ; 718d (1:718d)
 	db 33, 9
 	db $ff
 
-Frameset_7198: ; 7198 (1:7198)
+Frameset_7198:
 	db 34, 9
 	db 35, 9
 	db 36, 9
 	db 37, 9
 	db $ff
 
-Frameset_71a1: ; 71a1 (1:71a1)
+Frameset_71a1:
 	db 39, 4
 	db $ff
 
-Frameset_71a4: ; 71a4 (1:71a4)
+Frameset_71a4:
 	db 40, 4
 	db $ff
 
-Frameset_71a7: ; 71a7 (1:71a7)
+Frameset_71a7:
 	db 0, 2
 	db 1, 2
 	db 2, 2
 	db 3, 2
 	db $ff
-; 0x71b0
 
-Pal_71b0: ; 71b0 (1:71b0)
+Pal_71b0:
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 10, 10, 10
@@ -3286,25 +3227,20 @@ Pal_71b0: ; 71b0 (1:71b0)
 	rgb 21, 21, 21
 	rgb 10, 10, 10
 	rgb  0,  0,  0
-; 0x71f0
 
-TimeAttack1ENTextMap: ; 71f0 (2c:71f0)
+TimeAttack1ENTextMap:
 INCBIN "gfx/bgmaps/text/time_attack1_en.bin"
-; 0x7316
 
-TimeAttack2ENTextMap: ; 7316 (2c:7316)
+TimeAttack2ENTextMap:
 INCBIN "gfx/bgmaps/text/time_attack2_en.bin"
-; 0x73e7
 
-TimeAttack1JPTextMap: ; 73e7 (2c:73e7)
+TimeAttack1JPTextMap:
 INCBIN "gfx/bgmaps/text/time_attack1_jp.bin"
-; 0x74e8
 
-TimeAttack2JPTextMap: ; 74e8 (2c:74e8)
+TimeAttack2JPTextMap:
 INCBIN "gfx/bgmaps/text/time_attack2_jp.bin"
-; 0x75c3
 
-OAM_75c3: ; 75c3 (01:75c3)
+OAM_75c3:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -3411,9 +3347,8 @@ OAM_75c3: ; 75c3 (01:75c3)
 	frame_oam -16,   0, $00, 2 | OAMF_XFLIP
 	frame_oam -16,  -8, $02, 2 | OAMF_XFLIP
 	db $80
-; 0x76b5
 
-Frameset_76b5: ; 76b5 (01:76b5)
+Frameset_76b5:
 	db $00,  8
 	db $05,  8
 	db $06,  8
@@ -3425,9 +3360,8 @@ Frameset_76b5: ; 76b5 (01:76b5)
 	db $0c,  8
 	db $0d,  8
 	db $ff
-; 0x76ca
 
-Frameset_76ca: ; 76ca (01:76ca)
+Frameset_76ca:
 	db $01,  4
 	db $02,  4
 	db $03,  4
@@ -3435,4 +3369,3 @@ Frameset_76ca: ; 76ca (01:76ca)
 	db $03,  4
 	db $02,  4
 	db $ff
-; 0x76d7
