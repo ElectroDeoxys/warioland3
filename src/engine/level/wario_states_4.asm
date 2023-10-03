@@ -70,6 +70,7 @@ UpdateWarioStates_Group4:
 	dw InvalidWarioStateReset        ; WST_UNUSED_F0
 	dw InvalidWarioStateReset        ; WST_UNUSED_F1
 	dw InvalidWarioStateReset        ; WST_UNUSED_F2
+; 0x1ec08c
 
 SetState_IceSkatinStart:
 	ld a, WST_ICE_SKATIN_START
@@ -119,6 +120,7 @@ SetState_IceSkatinStart:
 .asm_1ec114
 	update_anim_2
 	ret
+; 0x1ec124
 
 UpdateState_IceSkatinStart:
 	update_anim_2
@@ -149,6 +151,7 @@ SetState_IceSkatin:
 .asm_1ec167
 	update_anim_2
 	ret
+; 0x1ec177
 
 UpdateState_IceSkatin:
 	farcall Func_19b25
@@ -201,6 +204,7 @@ UpdateState_IceSkatin:
 	ld a, JUMP_VEL_NORMAL
 	ld [wJumpVelTable], a
 	ret
+; 0x1ec215
 
 Func_1ec215:
 	ld a, [wDirection]
@@ -213,6 +217,7 @@ Func_1ec215:
 	ld b, 3
 	call SubXOffset
 	jp SetState_IceSkatinCrash
+; 0x1ec22b
 
 UpdateState_IceSkatinAirborne:
 	farcall Func_19b25
@@ -258,6 +263,7 @@ UpdateState_IceSkatinAirborne:
 	ld a, $10
 	ld [wWalkVelIndex], a
 	jp SetState_IceSkatin
+; 0x1ec2bb
 
 SetState_IceSkatinCrash:
 	play_sfx SFX_02E
@@ -281,6 +287,7 @@ SetState_IceSkatinCrash:
 .asm_1ec2f0
 	update_anim_2
 	ret
+; 0x1ec300
 
 UpdateState_IceSkatinCrash:
 	update_anim_2
@@ -291,6 +298,7 @@ UpdateState_IceSkatinCrash:
 	ld b, PARTICLE_ICE
 	farcall CreateParticle
 	jp RecoverFromTransformation
+; 0x1ec339
 
 UpdateState_GrabbingOwl:
 	update_anim_2
@@ -658,6 +666,7 @@ UpdateState_FallingFromOwl:
 	ld a, [hl]
 	ld [de], a
 	jp RecoverFromTransformation
+; 0x1ec703
 
 UpdateState_HangingRail:
 	ld a, [wWarioStateCounter]
@@ -684,6 +693,7 @@ UpdateState_HangingRail:
 	and a
 	jp z, Func_1ede69
 	ret
+; 0x1ec749
 
 SetState_TurningIntoSnowman:
 	play_sfx SFX_047
@@ -1015,9 +1025,7 @@ UpdateState_SnowmanAirborne:
 .asm_1ecb49
 	ld a, [wFloorTransitionDir]
 	and a
-	jr nz, .asm_1ecb57
-	play_sfx SFX_024
-.asm_1ecb57
+	play_sfx z, SFX_024
 	ld a, WST_SNOWMAN_LANDING
 	ld [wWarioState], a
 	xor a
@@ -1105,6 +1113,7 @@ SetState_SnowballRolling:
 	ld [wJumpVelIndex], a
 	ld [wIsSmashAttacking], a
 	ret
+; 0x1ecc7d
 
 UpdateState_SnowballRolling:
 	farcall Func_19b25
@@ -1292,6 +1301,7 @@ UpdateState_SnowballCrash:
 	ld b, PARTICLE_SNOW
 	farcall CreateParticle
 	jp RecoverFromTransformation
+; 0x1ece9e
 
 SetState_SplitHit:
 	ld a, WST_SPLIT_HIT
@@ -1344,6 +1354,7 @@ SetState_SplitHit:
 .asm_1ecf2a
 	update_anim_2
 	ret
+; 0x1ecf3a
 
 UpdateState_SplitHit:
 	update_anim_2
@@ -1368,6 +1379,7 @@ UpdateState_SplitHit:
 .asm_1ecf76
 	update_anim_2
 	ret
+; 0x1ecf86
 
 UpdateState_SplitKnockedBack:
 	farcall Func_19b25
@@ -1412,6 +1424,7 @@ SetState_Splitting:
 	ld [wJumpVelTable], a
 	ld [wJumpVelIndex], a
 	ret
+; 0x1ed018
 
 UpdateState_Splitting:
 	update_anim_2
@@ -1457,6 +1470,7 @@ Func_1ed09b:
 	xor $1 ; switch direction
 	ld [wDirection], a
 	jp RecoverFromTransformation
+; 0x1ed0a6
 
 SetState_FanStart:
 	ld a, WST_FAN_START
@@ -1652,6 +1666,7 @@ UpdateStart_FanRecovering:
 	and a
 	ret z
 	jp RecoverFromTransformation_WithoutInvincibility
+; 0x1ed331
 
 SetState_BlindIdling:
 	ld a, WST_BLIND_IDLING
@@ -1703,6 +1718,7 @@ SetState_BlindIdling:
 .asm_1ed3bd
 	update_anim_1
 	ret
+; 0x1ed3cd
 
 UpdateState_BlindIdling:
 	update_anim_1
@@ -1716,6 +1732,7 @@ UpdateState_BlindIdling:
 	and a
 	jp z, Func_1ed548
 	ret
+; 0x1ed3fa
 
 SetState_BlindWalking:
 	xor a
@@ -1750,6 +1767,7 @@ SetState_BlindWalking:
 .asm_1ed459
 	update_anim_1
 	ret
+; 0x1ed469
 
 UpdateState_BlindWalking:
 	farcall Func_19b25
@@ -1777,6 +1795,7 @@ UpdateState_BlindWalking:
 	jp z, Func_1ed548
 	update_pos_y
 	ret
+; 0x1ed4d1
 
 SetState_BlindTurning:
 	ld a, WST_BLIND_TURNING
@@ -1799,6 +1818,7 @@ SetState_BlindTurning:
 .asm_1ed51a
 	update_anim_1
 	ret
+; 0x1ed52a
 
 UpdateState_BlindTurning:
 	update_anim_1
@@ -1809,6 +1829,7 @@ UpdateState_BlindTurning:
 	and a
 	ret z
 	jp SetState_BlindWalking
+; 0x1ed548
 
 Func_1ed548:
 	xor a
@@ -1818,6 +1839,7 @@ Func_1ed548:
 	ld a, JUMP_VEL_HIGH_JUMP
 	ld [wJumpVelTable], a
 	jr SetState_BlindAirborne
+; 0x1ed558
 
 Func_1ed558:
 	play_sfx SFX_JUMP
@@ -1865,6 +1887,7 @@ SetState_BlindAirborne:
 	ret z
 	call UpdateState_BlindAirborne
 	ret
+; 0x1ed5e2
 
 UpdateState_BlindAirborne:
 	farcall Func_19b25
@@ -1908,6 +1931,7 @@ UpdateState_BlindAirborne:
 .asm_1ed65a
 	call TriggerFloorTransition
 	jp SetState_BlindIdling
+; 0x1ed660
 
 SetState_Swallowed:
 	ld a, WST_SWALLOWED
@@ -2169,6 +2193,7 @@ SetState_MagicRising:
 	load_frameset Frameset_1dcfb0
 	update_anim_3
 	ret
+; 0x1ed972
 
 UpdateState_MagicRising:
 	farcall Func_19b25
@@ -2220,6 +2245,7 @@ UpdateState_MagicRising:
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
 	ret
+; 0x1eda16
 
 UpdateState_MagicStopping:
 	ld hl, wWarioStateCounter
@@ -2229,6 +2255,7 @@ UpdateState_MagicStopping:
 	ret c
 UpdateState_MagicRecovering:
 	jp RecoverFromTransformation
+; 0x1eda21
 
 SetState_BallStart:
 	call UpdateLevelMusic
@@ -2309,6 +2336,7 @@ Func_1edaca:
 	jp nz, SetState_BallTurning
 	load_frameset Frameset_1dd323
 	jr Func_1edd24
+; 0x1edaf8
 
 Func_1edaf8:
 	ld a, [wDirection]
@@ -2338,6 +2366,7 @@ Func_1edd24:
 	ld [wAnimationFrame], a
 	update_anim_3
 	ret
+; 0x1edb47
 
 UpdateState_BallBouncing:
 	update_anim_3
@@ -2368,6 +2397,7 @@ SetState_BallAirborne:
 .asm_1edb90
 	update_anim_3
 	ret
+; 0x1edba0
 
 UpdateState_BallAirborne:
 	update_anim_3
@@ -2382,6 +2412,7 @@ UpdateState_BallAirborne:
 	ret z
 	update_pos_y
 	jp Func_1edaf8
+; 0x1edbd8
 
 SetState_BallShot:
 	ld a, WST_BALL_SHOT
@@ -2405,6 +2436,7 @@ SetState_BallShot:
 	load_frameset Frameset_1dd26c
 	update_anim_3
 	ret
+; 0x1edc15
 
 UpdateState_BallShot:
 	ld a, [wAutoMoveState]
@@ -2484,6 +2516,7 @@ UpdateState_BallShot:
 	load_frameset Frameset_1dd2ee
 	update_anim_3
 	ret
+; 0x1edcd0
 
 UpdateState_BallThrown:
 	update_anim_3
@@ -2546,6 +2579,7 @@ UpdateState_BallThrown:
 	load_frameset Frameset_1dd2ee
 	update_anim_3
 	ret
+; 0x1edd7e
 
 UpdateState_BallSentUpwards:
 	update_anim_3
@@ -2579,6 +2613,7 @@ UpdateState_BallSentUpwards:
 	ld [wJumpVelTable], a
 	farcall Func_206eb
 	ret
+; 0x1eddf2
 
 SetState_BallTurning:
 	xor a
@@ -2603,6 +2638,7 @@ SetState_BallTurning:
 .asm_1ede26
 	update_anim_3
 	ret
+; 0x1ede36
 
 UpdateState_BallTurning:
 	update_anim_3
@@ -2610,6 +2646,7 @@ UpdateState_BallTurning:
 	and a
 	ret z
 	jp SetState_BallAirborne
+; 0x1ede4d
 
 Func_1ede4d:
 	call ClearTransformationValues
@@ -2618,6 +2655,7 @@ Func_1ede4d:
 	call SetWarioPal
 	farcall StartJump_FromInput
 	ret
+; 0x1ede69
 
 Func_1ede69:
 	call ClearTransformationValues
@@ -2742,6 +2780,7 @@ Func_1edf93:
 	and D_RIGHT | D_LEFT
 	jp nz, SetState_BlindWalking
 	ret
+; 0x1edfa4
 
 Func_1edfa4:
 	ld a, [wJoypadPressed]
@@ -2789,6 +2828,7 @@ Func_1edfa4:
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
 	jp SetState_BlindTurning
+; 0x1ee00f
 
 Func_1ee00f:
 	call ApplyJumpVelocity
@@ -2800,6 +2840,7 @@ Func_1ee00f:
 	ld [wWalkVelIndex], a
 .asm_1ee02d
 	ret
+; 0x1ee02e
 
 Func_1ee02e:
 	call ApplyJumpVelocity
@@ -2811,3 +2852,4 @@ Func_1ee02e:
 	ld [wWalkVelIndex], a
 .asm_1ee04c
 	ret
+; 0x1ee04d

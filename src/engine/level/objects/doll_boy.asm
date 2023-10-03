@@ -576,8 +576,7 @@ DollBoyFunc:
 	jr nz, .asm_50ed5
 	ld a, [wCurObjFrameDuration]
 	cp $01
-	jr nz, .asm_50ed5
-	play_sfx SFX_0A2
+	play_sfx z, SFX_0A2
 .asm_50ed5
 	ld hl, wCurObjYPos
 	ld a, [hli]
@@ -726,8 +725,7 @@ DollBoyFunc:
 	ld hl, wCurObjStateDuration
 .asm_50fe2
 	dec [hl]
-	jr nz, .asm_50fed
-	play_sfx SFX_0A3
+	play_sfx z, SFX_0A3
 .asm_50fed
 	ld bc, Data_60bd0
 	jp ApplyObjYMovement
@@ -918,8 +916,7 @@ DollBoyBarrelFunc:
 	jr z, .asm_5113b
 	ld a, [wGlobalCounter]
 	and %111
-	jr nz, .asm_5113b
-	play_sfx SFX_06A
+	play_sfx z, SFX_06A
 .asm_5113b
 	ld l, OBJ_STATE
 	ld a, [hld]

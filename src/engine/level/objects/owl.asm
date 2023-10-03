@@ -61,8 +61,7 @@ OwlFunc:
 	jr nz, .asm_4924e
 	ld a, [wCurObjFrameDuration]
 	dec a
-	jr nz, .asm_4924e
-	play_sfx SFX_071
+	play_sfx z, SFX_071
 .asm_4924e
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -85,8 +84,7 @@ OwlFunc:
 	jr nz, .asm_4927a
 	ld a, [wCurObjFrameDuration]
 	dec a
-	jr nz, .asm_4927a
-	play_sfx SFX_071
+	play_sfx z, SFX_071
 .asm_4927a
 	call MoveObjectUp
 	ld l, OBJ_STATE_DURATION
@@ -135,8 +133,7 @@ OwlFunc:
 	jr nz, .asm_492dc
 	ld a, [wCurObjFrameDuration]
 	dec a
-	jr nz, .asm_492dc
-	play_sfx SFX_071
+	play_sfx z, SFX_071
 .asm_492dc
 	jp MoveObjectLeft
 .asm_492df
@@ -145,8 +142,7 @@ OwlFunc:
 	jr nz, .asm_492f4
 	ld a, [wCurObjFrameDuration]
 	dec a
-	jr nz, .asm_492f4
-	play_sfx SFX_071
+	play_sfx z, SFX_071
 .asm_492f4
 	jp MoveObjectRight
 .asm_492f7

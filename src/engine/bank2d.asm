@@ -4645,9 +4645,7 @@ WOWFunc_RedMusicBox:
 	and a
 	ret z
 	cp $01
-	jr nz, .asm_b609c
-	play_sfx SFX_076
-.asm_b609c
+	play_sfx z, SFX_076
 	inc [hl]
 	ld a, [hl]
 	cp $1b

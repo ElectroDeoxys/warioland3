@@ -740,8 +740,7 @@ YellowBellyBodyFunc:
 	jr nz, .asm_51880
 	ld a, [hld]
 	and a
-	jr nz, .asm_51880
-	play_sfx SFX_0AA
+	play_sfx z, SFX_0AA
 .asm_51880
 	ld l, OBJ_FRAMESET_OFFSET
 	ld a, [hld]

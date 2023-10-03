@@ -374,9 +374,7 @@ ScowlerFunc:
 .asm_54782
 	ld a, [wGlobalCounter]
 	and $07
-	jr nz, .asm_54791
-	play_sfx SFX_0AB
-.asm_54791
+	play_sfx z, SFX_0AB
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	jr nz, .asm_5479c

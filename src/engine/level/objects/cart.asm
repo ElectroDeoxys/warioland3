@@ -40,9 +40,7 @@ CartFunc:
 	ld a, [wGlobalCounter]
 	ld b, a
 	and $3f
-	jr nz, .asm_4858d
-	play_sfx SFX_06D
-.asm_4858d
+	play_sfx z, SFX_06D
 	srl b
 	ret c
 	ld a, [wCurObjUnk07]
@@ -177,9 +175,7 @@ CartVariableFunc:
 	ld a, [wGlobalCounter]
 	ld b, a
 	and $3f
-	jr nz, .asm_4869b
-	play_sfx SFX_06D
-.asm_4869b
+	play_sfx z, SFX_06D
 	srl b
 	ret c
 	ld a, [wCurObjUnk07]

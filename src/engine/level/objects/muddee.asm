@@ -224,9 +224,7 @@ MuddeeFunc:
 	and a
 	jr z, .asm_557cf
 	cp $28
-	jr nz, .asm_557c3
-	play_sfx SFX_0C0
-.asm_557c3
+	play_sfx z, SFX_0C0
 	dec [hl]
 	ret nz
 	ld a, [wCurObjSubState]

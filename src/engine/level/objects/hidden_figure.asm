@@ -423,9 +423,7 @@ HiddenFigureFunc:
 	ld hl, wCurObjVar1
 	ld a, [hl]
 	and $07
-	jr nz, .asm_4ce1b
-	play_sfx SFX_01F
-.asm_4ce1b
+	play_sfx z, SFX_01F
 	inc [hl]
 	dec l
 	ld a, [hl]
@@ -565,9 +563,7 @@ HiddenFigureFaceFunc:
 	jr z, .asm_4cf29
 	ld a, [hl]
 	cp $2c
-	jr nz, .asm_4cf26
-	play_sfx SFX_0CE
-.asm_4cf26
+	play_sfx z, SFX_0CE
 	jp Func_4cfe0
 .asm_4cf29
 	xor a
@@ -1627,8 +1623,7 @@ HiddenFigureRightHandFunc:
 	jr z, .asm_4d67c
 	ld a, [wGlobalCounter]
 	and $0f
-	jr nz, .asm_4d67c
-	play_sfx SFX_06A
+	play_sfx z, SFX_06A
 .asm_4d67c
 	ld a, e
 	jumptable

@@ -162,9 +162,7 @@ AnonsterFunc:
 	inc l
 	ld a, [hl]
 	dec a
-	jr nz, .asm_50125
-	play_sfx SFX_0B0
-.asm_50125
+	play_sfx z, SFX_0B0
 	ld hl, wCurObjYPos
 	ld a, [hli]
 	sub $04
@@ -735,8 +733,7 @@ AnonsterFunc:
 .asm_504ef
 	ld a, [wGlobalCounter]
 	and %1111
-	jr nz, .asm_504fe
-	play_sfx SFX_0AF
+	play_sfx z, SFX_0AF
 .asm_504fe
 	ld l, OBJ_SUBSTATE
 	bit OBJSUBFLAG_HDIR_F, [hl]
@@ -847,9 +844,7 @@ AnonsterFunc:
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
 	cp $4e
-	jr nz, .asm_505d3
-	play_sfx SFX_0B1
-.asm_505d3
+	play_sfx z, SFX_0B1
 	dec [hl]
 	ret nz
 	ld a, [wCurObjSubState]
@@ -961,9 +956,7 @@ AnonsterFunc:
 	and a
 	jr z, .asm_506f5
 	cp $a4
-	jr nz, .asm_506a1
-	play_sfx SFX_0B1
-.asm_506a1
+	play_sfx z, SFX_0B1
 	dec [hl]
 	ret nz
 	ld hl, wCurObjUnk02

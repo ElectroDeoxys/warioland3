@@ -51,9 +51,7 @@ ShootFunc:
 .Func_56675:
 	ld a, [wGlobalCounter]
 	and $0f
-	jr nz, .asm_56684
-	play_sfx SFX_0C6
-.asm_56684
+	play_sfx z, SFX_0C6
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
@@ -738,9 +736,7 @@ ShootFunc:
 .Func_56b47:
 	ld a, [wCurObjVar3]
 	cp $22
-	jr nz, .asm_56b56
-	play_sfx SFX_075
-.asm_56b56
+	play_sfx z, SFX_075
 	ld hl, wCurObjVar1
 	dec [hl]
 	jr z, .asm_56b00
@@ -763,8 +759,7 @@ ShootFunc:
 .asm_56b81
 	ld a, [wGlobalCounter]
 	and $0f
-	jr nz, .asm_56b90
-	play_sfx SFX_06A
+	play_sfx z, SFX_06A
 .asm_56b90
 	ld bc, Data_60e40
 	jp ApplyObjYMovement_Loop

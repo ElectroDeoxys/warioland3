@@ -219,9 +219,7 @@ PesceFunc:
 .asm_51e97
 	ld a, [wGlobalCounter]
 	and $5f
-	jr nz, .asm_51ea6
-	play_sfx SFX_WATER_SURFACE
-.asm_51ea6
+	play_sfx z, SFX_WATER_SURFACE
 	ld l, OBJ_STATE_DURATION
 	ld a, [hl]
 	and a
@@ -273,8 +271,7 @@ PesceFunc:
 	jr nz, .asm_51f12
 	ld a, [wCurObjFrameDuration]
 	cp $01
-	jr nz, .asm_51f12
-	play_sfx SFX_0AE
+	play_sfx z, SFX_0AE
 .asm_51f12
 	ld hl, wCurObjYPos
 	ld a, [hli]

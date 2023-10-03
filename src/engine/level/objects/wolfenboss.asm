@@ -378,9 +378,7 @@ WolfenbossFunc:
 .asm_560e3
 	ld a, [wGlobalCounter]
 	and $1f
-	jr nz, .asm_560f2
-	play_sfx SFX_0C3
-.asm_560f2
+	play_sfx z, SFX_0C3
 	ld bc, Data_604c0
 	call ApplyObjYMovement_Loop
 	ld a, [wCurObjSubState]
@@ -489,9 +487,7 @@ WolfenbossFunc:
 	jr nc, .asm_561ca
 	ld a, [wCurObjVar3]
 	cp $2b
-	jr nz, .asm_561c4
-	play_sfx SFX_0A3
-.asm_561c4
+	play_sfx z, SFX_0A3
 	ld bc, Data_60da0
 	jp ApplyObjYMovement
 .asm_561ca
@@ -574,8 +570,7 @@ MagicSpiralFunc:
 	and a
 	jr z, .asm_56253
 	dec [hl]
-	jr nz, .asm_56253
-	play_sfx SFX_07C
+	play_sfx z, SFX_07C
 .asm_56253
 	ld a, [wTransformation]
 	and a
@@ -717,9 +712,7 @@ Func_56326:
 IgaguriFunc:
 	ld a, [wGlobalCounter]
 	and $07
-	jr nz, .asm_5634e
-	play_sfx SFX_06B
-.asm_5634e
+	play_sfx z, SFX_06B
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
@@ -920,9 +913,7 @@ IgaguriFunc:
 .asm_564b1
 	ld a, [wGlobalCounter]
 	and $1f
-	jr nz, .asm_564c0
-	play_sfx SFX_0C5
-.asm_564c0
+	play_sfx z, SFX_0C5
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	ret nz
@@ -1038,8 +1029,7 @@ KuriFunc:
 	jr nz, .asm_56587
 	ld a, [wGlobalCounter]
 	and $07
-	jr nz, .asm_56587
-	play_sfx SFX_06A
+	play_sfx z, SFX_06A
 .asm_56587
 	ld l, OBJ_SUBSTATE
 	ld a, [hl]

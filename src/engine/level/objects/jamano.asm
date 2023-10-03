@@ -870,9 +870,7 @@ SkullFunc:
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
 	cp $f7
-	jr nz, .asm_553bd
-	play_sfx SFX_0BF
-.asm_553bd
+	play_sfx z, SFX_0BF
 	dec [hl]
 	ret nz
 	xor a

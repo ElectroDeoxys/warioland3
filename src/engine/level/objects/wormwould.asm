@@ -201,9 +201,7 @@ WormwouldFunc:
 	ld l, OBJ_STATE_DURATION
 	ld a, [hl]
 	cp $10
-	jr nz, .asm_54188
-	play_sfx SFX_0A6
-.asm_54188
+	play_sfx z, SFX_0A6
 	dec [hl]
 	ret nz
 	ld l, OBJ_STATE
@@ -357,9 +355,7 @@ WormwouldFunc:
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
 	cp $1e
-	jr nz, .asm_5429c
-	play_sfx SFX_0A7
-.asm_5429c
+	play_sfx z, SFX_0A7
 	dec [hl]
 	ret nz
 	ld l, OBJ_STATE
