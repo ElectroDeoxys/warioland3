@@ -4,6 +4,9 @@
 # compiled object file
 *.o
 
+# tool binaries
+*.exe
+
 # roms
 *.gbc
 
