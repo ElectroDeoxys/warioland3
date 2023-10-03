@@ -599,8 +599,13 @@ Func_846e:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 
-	load_frameset Frameset_14d18
-	update_anim_1
+	ld a, HIGH(Frameset_14d18)
+	ld [wFramesetPtr + 0], a
+	ld a, LOW(Frameset_14d18)
+	ld [wFramesetPtr + 1], a
+	ld a, BANK("Wario OAM 1")
+	ldh [hCallFuncBank], a
+	hcall UpdateAnimation
 
 .asm_85a7
 	call UpdateLevelMusic

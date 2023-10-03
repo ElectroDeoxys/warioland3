@@ -564,11 +564,26 @@ Func_1842a:
 	ld [wIsCrouching], a
 	ld [wIsSmashAttacking], a
 
-	load_gfx WarioIdleGfx
+	ld a, BANK(WarioIdleGfx)
+	ld [wDMASourceBank], a
+	ld a, HIGH(WarioIdleGfx)
+	ld [wDMASourcePtr + 0], a
+	ld a, LOW(WarioIdleGfx)
+	ld [wDMASourcePtr + 1], a
 	call LoadWarioGfx
-	load_oam OAM_14a82
-	load_frameset Frameset_14cf6
-	update_anim_1
+	ld a, BANK(OAM_14a82)
+	ld [wOAMBank], a
+	ld a, HIGH(OAM_14a82)
+	ld [wOAMPtr + 0], a
+	ld a, LOW(OAM_14a82)
+	ld [wOAMPtr + 1], a
+	ld a, HIGH(Frameset_14cf6)
+	ld [wFramesetPtr + 0], a
+	ld a, LOW(Frameset_14cf6)
+	ld [wFramesetPtr + 1], a
+	ld a, BANK("Wario OAM 1")
+	ldh [hCallFuncBank], a
+	hcall UpdateAnimation
 	jp Func_18032
 
 Func_184fc:
@@ -634,11 +649,26 @@ Func_184fc:
 	ld [wJumpVelTable], a
 	ld [wIsCrouching], a
 
-	load_gfx WarioIdleGfx
+	ld a, BANK(WarioIdleGfx)
+	ld [wDMASourceBank], a
+	ld a, HIGH(WarioIdleGfx)
+	ld [wDMASourcePtr + 0], a
+	ld a, LOW(WarioIdleGfx)
+	ld [wDMASourcePtr + 1], a
 	call LoadWarioGfx
-	load_oam OAM_14a82
-	load_frameset Frameset_14cf6
-	update_anim_1
+	ld a, BANK(OAM_14a82)
+	ld [wOAMBank], a
+	ld a, HIGH(OAM_14a82)
+	ld [wOAMPtr + 0], a
+	ld a, LOW(OAM_14a82)
+	ld [wOAMPtr + 1], a
+	ld a, HIGH(Frameset_14cf6)
+	ld [wFramesetPtr + 0], a
+	ld a, LOW(Frameset_14cf6)
+	ld [wFramesetPtr + 1], a
+	ld a, BANK("Wario OAM 1")
+	ldh [hCallFuncBank], a
+	hcall UpdateAnimation
 	jp Func_18032
 
 Func_185cb:
@@ -745,18 +775,36 @@ Func_18676:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 
-	load_gfx WarioIdleGfx
+	ld a, BANK(WarioIdleGfx)
+	ld [wDMASourceBank], a
+	ld a, HIGH(WarioIdleGfx)
+	ld [wDMASourcePtr + 0], a
+	ld a, LOW(WarioIdleGfx)
+	ld [wDMASourcePtr + 1], a
 	call LoadWarioGfx
-	load_oam OAM_14a82
+	ld a, BANK(OAM_14a82)
+	ld [wOAMBank], a
+	ld a, HIGH(OAM_14a82)
+	ld [wOAMPtr + 0], a
+	ld a, LOW(OAM_14a82)
+	ld [wOAMPtr + 1], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_186dd
-	load_frameset Frameset_14d0b
+	ld a, HIGH(Frameset_14d0b)
+	ld [wFramesetPtr + 0], a
+	ld a, LOW(Frameset_14d0b)
+	ld [wFramesetPtr + 1], a
 	jr .asm_186e7
 .asm_186dd
-	load_frameset Frameset_14d10
+	ld a, HIGH(Frameset_14d10)
+	ld [wFramesetPtr + 0], a
+	ld a, LOW(Frameset_14d10)
+	ld [wFramesetPtr + 1], a
 .asm_186e7
-	update_anim_1
+	ld a, BANK("Wario OAM 1")
+	ldh [hCallFuncBank], a
+	hcall UpdateAnimation
 	jp Func_18020
 
 Func_186f9:
