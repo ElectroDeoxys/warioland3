@@ -1782,7 +1782,7 @@ _InitTempleScene:
 	ld [wTempleScene], a
 
 	decompress_vram1 TempleMusicBoxSceneGfx, v1Tiles0
-	decompress BGMap_b3aaa, v0BGMap1
+	decompress_vram0 BGMap_b3aaa, v0BGMap1
 	decompress_vram1 BGMap_b3ba5, v1BGMap1
 
 	ld a, [wLanguage]
@@ -3839,7 +3839,7 @@ Func_ad9b2:
 	call LoadFarTiles
 
 	decompress_vram1 BGMap_b2616, v1BGMap0
-	decompress BGMap_b2546, v0BGMap0
+	decompress_vram0 BGMap_b2546, v0BGMap0
 
 	call .Func_ada43
 	call UpdateSceneWarioAnimation
@@ -4453,7 +4453,7 @@ _InitPrologueSequence:
 	call VBlank_accb0
 
 	decompress_vram1 BGMap_b34c3, v1BGMap1
-	decompress BGMap_b330c, v0BGMap1
+	decompress_vram0 BGMap_b330c, v0BGMap1
 
 	ld hl, PrologueBackgroundGfx
 	ld b, BANK(PrologueBackgroundGfx)
@@ -4462,7 +4462,7 @@ _InitPrologueSequence:
 	decompress_vram1 FontGFX, v1Tiles0
 	decompress_vram1 PrologueGfx, v1Tiles0
 	decompress_vram1 BGMap_b3a5b, v1BGMap0
-	decompress BGMap_b3a03, v0BGMap0
+	decompress_vram0 BGMap_b3a03, v0BGMap0
 
 	ld hl, MusicBoxGfx
 	ld de, v0Tiles1
@@ -4474,10 +4474,10 @@ _InitPrologueSequence:
 	and a
 	jr z, .japanese
 ; english
-	decompress Data_b37f9, wTileBuffer
+	decompress_vram0 Data_b37f9, wTileBuffer
 	jr .asm_adf63
 .japanese
-	decompress Data_b3675, wTileBuffer
+	decompress_vram0 Data_b3675, wTileBuffer
 .asm_adf63
 	call FillClearedTextBuffer
 
@@ -6784,7 +6784,7 @@ _InitEpilogue:
 	ld bc, 8 palettes
 	call WriteAToHL_BCTimes
 
-	decompress EpilogueGfx, v0Tiles0
+	decompress_vram0 EpilogueGfx, v0Tiles0
 	decompress_vram1 FontGFX, v1Tiles0
 
 	ld a, BANK("VRAM1")
@@ -6806,9 +6806,9 @@ _InitEpilogue:
 	decompress_vram1 DoughnuteerGfx, v1Tiles1
 
 	decompress_vram1 BGMap_15dff8, v1BGMap0
-	decompress BGMap_15df9b, v0BGMap0
+	decompress_vram0 BGMap_15df9b, v0BGMap0
 	decompress_vram1 BGMap_b34c3, v1BGMap1
-	decompress BGMap_b330c, v0BGMap1
+	decompress_vram0 BGMap_b330c, v0BGMap1
 
 	call FillClearedTextBuffer
 	ld a, [wLanguage]
@@ -6874,7 +6874,7 @@ Func_af01f:
 
 	decompress_vram1 FontGFX, v1Tiles0
 	decompress_vram1 BGMap_15cf40, v1BGMap0
-	decompress BGMap_15cd00, v0BGMap0
+	decompress_vram0 BGMap_15cd00, v0BGMap0
 
 	ld hl, wOWUIObj1YCoord
 	ld a, $60

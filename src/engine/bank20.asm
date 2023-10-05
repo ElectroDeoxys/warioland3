@@ -1177,7 +1177,7 @@ Func_8065e:
 	ld [w2d01f], a
 	call Func_80b54
 
-	decompress BGMap_85b91, v0BGMap0 + $3a0
+	decompress_vram0 BGMap_85b91, v0BGMap0 + $3a0
 	decompress_vram1 BGMap_85bc4, v1BGMap0 + $3a0
 
 	ld a, [wTopBarState]
@@ -1217,11 +1217,11 @@ Func_8065e:
 	ld a, [wGameModeFlags]
 	bit MODE_TIME_ATTACK_F, a
 	jr nz, .asm_80753
-	decompress BGMap_86868, v0BGMap1
+	decompress_vram0 BGMap_86868, v0BGMap1
 	decompress_vram1 BGMap_868b2, v1BGMap1
 	jr .asm_80790
 .asm_80753
-	decompress BGMap_868f5, v0BGMap1
+	decompress_vram0 BGMap_868f5, v0BGMap1
 	decompress_vram1 BGMap_86929, v1BGMap1
 .asm_80790
 	xor a
@@ -1479,23 +1479,23 @@ LoadOverworldCommonGfx:
 	ret
 
 LoadOverworld1Gfx:
-	decompress Overworld1Gfx, v0Tiles0
+	decompress_vram0 Overworld1Gfx, v0Tiles0
 	ret
 
 LoadOverworld2Gfx:
-	decompress Overworld2Gfx, v0Tiles0
+	decompress_vram0 Overworld2Gfx, v0Tiles0
 	ret
 
 LoadOverworld5Gfx:
-	decompress Overworld5Gfx, v0Tiles0
+	decompress_vram0 Overworld5Gfx, v0Tiles0
 	ret
 
 LoadOverworld6Gfx:
-	decompress Overworld6Gfx, v0Tiles0
+	decompress_vram0 Overworld6Gfx, v0Tiles0
 	ret
 
 LoadOverworldArrowsGfx:
-	decompress OverworldArrowsGfx, v0Tiles1
+	decompress_vram0 OverworldArrowsGfx, v0Tiles1
 	ret
 
 LoadOverworldGlowGfx:

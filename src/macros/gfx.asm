@@ -11,7 +11,7 @@ MACRO frame_oam
 	db \1, \2, \3, \4
 ENDM
 
-MACRO decompress
+MACRO decompress_vram0
 	ld a, BANK(\1)
 	ld [wTempBank], a
 	ld hl, \1

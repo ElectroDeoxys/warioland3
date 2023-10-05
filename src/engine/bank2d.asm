@@ -279,7 +279,7 @@ Func_b417a:
 	farcall Func_80bd9
 	farcall VBlank_80bf9
 
-	decompress BGMap_86868, v0BGMap1
+	decompress_vram0 BGMap_86868, v0BGMap1
 	decompress_vram1 BGMap_868b2, v1BGMap1
 
 	xor a
@@ -314,7 +314,7 @@ Func_b4247:
 	ret nz
 
 	decompress_vram1 BGMap_85eda, v1BGMap0 + $3a0
-	decompress BGMap_85ea7, v0BGMap0 + $3a0
+	decompress_vram0 BGMap_85ea7, v0BGMap0 + $3a0
 
 	hlbgcoord 0, 30
 	debgcoord 0, 21, wAttrmap
@@ -1196,51 +1196,51 @@ SetBGMapBytesPriority:
 	ret
 
 LoadOverworld3Gfx:
-	decompress Overworld3Gfx, v0Tiles0
+	decompress_vram0 Overworld3Gfx, v0Tiles0
 	ret
 
 LoadOverworld4Gfx:
-	decompress Overworld4Gfx, v0Tiles0
+	decompress_vram0 Overworld4Gfx, v0Tiles0
 	ret
 
 LoadOverworldRocksGfx:
-	decompress OverworldRocksGfx, v0Tiles0 tile $58
+	decompress_vram0 OverworldRocksGfx, v0Tiles0 tile $58
 	ret
 
 LoadOverworldTowerGfx:
-	decompress OverworldTowerGfx, v0Tiles0 tile $60
+	decompress_vram0 OverworldTowerGfx, v0Tiles0 tile $60
 	ret
 
 LoadOverworldFanGfx:
-	decompress OverworldFanGfx, v0Tiles0 tile $60
+	decompress_vram0 OverworldFanGfx, v0Tiles0 tile $60
 	ret
 
 LoadOverworldExplosion1Gfx:
-	decompress OverworldExplosion1Gfx, v0Tiles0
+	decompress_vram0 OverworldExplosion1Gfx, v0Tiles0
 	ret
 
 LoadOverworldThunderGfx:
-	decompress OverworldThunderGfx, v0Tiles0
+	decompress_vram0 OverworldThunderGfx, v0Tiles0
 	ret
 
 LoadOverworldExplosion2Gfx:
-	decompress OverworldExplosion2Gfx, v0Tiles0
+	decompress_vram0 OverworldExplosion2Gfx, v0Tiles0
 	ret
 
 LoadOverworldTorchGfx:
-	decompress OverworldTorchGfx, v0Tiles0 tile $40
+	decompress_vram0 OverworldTorchGfx, v0Tiles0 tile $40
 	ret
 
 LoadOverworldFireGfx:
-	decompress OverworldFireGfx, v0Tiles0
+	decompress_vram0 OverworldFireGfx, v0Tiles0
 	ret
 
 LoadOverworldExplosion3Gfx:
-	decompress OverworldExplosion3Gfx, v0Tiles0
+	decompress_vram0 OverworldExplosion3Gfx, v0Tiles0
 	ret
 
 LoadOverworldSmokeGfx:
-	decompress OverworldSmokeGfx, v0Tiles0 tile $32
+	decompress_vram0 OverworldSmokeGfx, v0Tiles0 tile $32
 	ret
 
 UpdateCurOWOjAnimation:

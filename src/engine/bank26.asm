@@ -406,8 +406,8 @@ _InitTreasureCollection:
 	ld hl, Pals_9ad05
 	call LoadPalsToTempPals2
 
-	decompress TreasureCollectionCursorGfx, v0Tiles0
-	decompress TreasureCollectionGfx, v0Tiles2
+	decompress_vram0 TreasureCollectionCursorGfx, v0Tiles0
+	decompress_vram0 TreasureCollectionGfx, v0Tiles2
 
 	call LoadCollectionPageTreasureGfx
 
@@ -420,8 +420,8 @@ _InitTreasureCollection:
 	xor a
 	ldh [rVBK], a
 
-	decompress BGMap_9a2ac, wAttrmap
-	decompress BGMap_9a129, wTilemap
+	decompress_vram0 BGMap_9a2ac, wAttrmap
+	decompress_vram0 BGMap_9a129, wTilemap
 
 	call ApplyPageTreasuresPals
 

@@ -1233,9 +1233,9 @@ _InitBestTimeList:
 	ld hl, Pals_158b63
 	call LoadPalsToTempPals1
 
-	decompress BestTimeListGfx, v0Tiles1 + $200
+	decompress_vram0 BestTimeListGfx, v0Tiles1 + $200
 	decompress_vram1 BGMap_b3143, v1BGMap0
-	decompress BGMap_b2e72, v0BGMap0
+	decompress_vram0 BGMap_b2e72, v0BGMap0
 
 	call PrintBestTimes
 	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_ON
