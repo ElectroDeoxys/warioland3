@@ -473,9 +473,9 @@ PneumoFunc:
 	ld a, [wTransformation]
 	cp TRANSFORMATION_PUFFY_WARIO
 	jp z, .Func_456fe
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	ld h, a
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	and $fc
 	ld l, a
 	ld de, hffb0

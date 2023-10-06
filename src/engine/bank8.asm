@@ -487,7 +487,7 @@ AttackObject:
 
 	ld a, INTERACTION_RIGHT
 	ld [wInteractionSide], a
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	add $08
@@ -509,7 +509,7 @@ AttackObject:
 .asm_20382
 	ld a, INTERACTION_LEFT
 	ld [wInteractionSide], a
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	sub $08
@@ -1471,7 +1471,7 @@ Func_20b6b:
 	ld a, [wInvincibleCounter]
 	cp 1
 	ret z
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	ld [de], a
@@ -2768,7 +2768,7 @@ Func_2168b:
 
 .asm_21710
 	ld hl, hYPosHi
-	ld de, wPos
+	ld de, wWarioPos
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -3712,7 +3712,7 @@ Func_21f51:
 	ld a, LOW(wce01)
 	add b
 	ld [wcce7 + 1], a
-	ld a, [wc0a4]
+	ld a, [wc0a3 + 1]
 	and $08
 	jr nz, .asm_21fa3
 	ld b, $10
@@ -3834,7 +3834,7 @@ Func_22012:
 	ld a, LOW(wce35)
 	add b
 	ld [wc0b3 + 1], a
-	ld a, [wc0a4]
+	ld a, [wc0a3 + 1]
 	and $08
 	jp nz, Func_2208a
 	ld b, $10
@@ -3974,7 +3974,7 @@ Func_220fc:
 	ld a, LOW(wce01)
 	add b
 	ld [wcce7 + 1], a
-	ld a, [wc0a4]
+	ld a, [wc0a3 + 1]
 	and $08
 	jp nz, Func_2214e
 	ld b, $10
@@ -4093,7 +4093,7 @@ Func_221bb:
 	ld a, LOW(wce35)
 	add b
 	ld [wc0b3 + 1], a
-	ld a, [wc0a4]
+	ld a, [wc0a3 + 1]
 	and $08
 	jp nz, Func_22217
 	ld b, $10

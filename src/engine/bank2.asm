@@ -104,9 +104,9 @@ UpdateLevel:
 	ld a, [wCameraConfigFlags]
 	cp HIDDEN_FIGURE_CAMCONFIG
 	jr z, .asm_80fc
-	ld a, [wcac4 + 1]
+	ld a, [wCameraSCY + 1]
 	ld [wSCY], a
-	ld a, [wcac6 + 1]
+	ld a, [wCameraSCX + 1]
 	ld [wSCX], a
 	jr .asm_8112
 .asm_80fc
@@ -381,9 +381,9 @@ UpdateLevel:
 	ld [wc0da], a
 	farcall UpdateWarioStates
 
-	ld a, [wcac4 + 1]
+	ld a, [wCameraSCY + 1]
 	ld [wSCY], a
-	ld a, [wcac6 + 1]
+	ld a, [wCameraSCX + 1]
 	ld [wSCX], a
 
 	xor a ; FALSE
@@ -434,9 +434,9 @@ UpdateLevel:
 	ld [wc0da], a
 	farcall UpdateWarioStates
 
-	ld a, [wcac4 + 1]
+	ld a, [wCameraSCY + 1]
 	ld [wSCY], a
-	ld a, [wcac6 + 1]
+	ld a, [wCameraSCX + 1]
 	ld [wSCX], a
 
 	xor a ; FALSE
@@ -523,23 +523,23 @@ Func_846e:
 	jr nz, .asm_84e2
 
 	ld a, $01
-	ld [wYPosHi], a
+	ld [wWarioYPos + 0], a
 	xor a
-	ld [wXPosHi], a
+	ld [wWarioXPos + 0], a
 .asm_84e2
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	sub $10
-	ld [wYPosLo], a
-	ld a, [wYPosHi]
+	ld [wWarioYPos + 1], a
+	ld a, [wWarioYPos + 0]
 	sbc $00
-	ld [wYPosHi], a
+	ld [wWarioYPos + 0], a
 	ld b, a
 	swap b
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	or b
 	ld [wca6c], a
 
-	ld hl, wPos
+	ld hl, wWarioPos
 	call GetNextInternalRoomID
 
 	xor a
@@ -922,12 +922,12 @@ Func_8747:
 	jr nz, .not_the_temple
 
 	xor a
-	ld a, [wcac4 + 1]
+	ld a, [wCameraSCY + 1]
 	ld [wc08a], a
 	ld [wc089], a
 	ld [wSCY], a
 	ldh [rSCY], a
-	ld a, [wcac6 + 1]
+	ld a, [wCameraSCX + 1]
 	ld [wc08c], a
 	ld [wc08b], a
 	ld [wSCX], a
@@ -989,7 +989,7 @@ Func_8747:
 	ret
 
 Func_896f:
-	ld de, wc0a6
+	ld de, wc0a5 + 1
 	ld hl, hXPosLo
 	ld a, [de]
 	ld [hld], a
@@ -1207,35 +1207,37 @@ Func_8ad9:
 	ld a, [wCameraConfigFlags]
 	and CAM_SCROLLING_MASK
 	cp CAM_XSCROLL2 | CAM_TRANSITIONS
-	jr z, .asm_8aea
+	jr z, .cam_xscroll_or_cam_yscroll
 	cp CAM_YSCROLL
-	jr nz, .asm_8af7
-.asm_8aea
-	ld a, [wXPosHi]
-	ld [wcac6 + 0], a
+	jr nz, .else
+.cam_xscroll_or_cam_yscroll
+	ld a, [wWarioXPos + 0]
+	ld [wCameraSCX + 0], a
 	ld a, $30
-	ld [wcac6 + 1], a
+	ld [wCameraSCX + 1], a
 	jr .asm_8b69
-.asm_8af7
+
+.else
 	ld a, [wDirection]
 	and a
-	jr nz, .asm_8b05
+	jr nz, .dir_right
+; dir_left
 	ld a, [wca60]
-	sub $08
+	sub 8
 	ld b, a
 	jr .asm_8b0b
-.asm_8b05
+.dir_right
 	ld a, [wca5f]
-	sub $08
+	sub 8
 	ld b, a
 .asm_8b0b
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	sub b
-	ld [wcac6 + 1], a
+	ld [wCameraSCX + 1], a
 	ld l, a
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	sbc $00
-	ld [wcac6 + 0], a
+	ld [wCameraSCX + 0], a
 	ld h, a
 	ld a, [wCameraConfigFlags]
 	bit CAM_EDGE_LEFT_F, a
@@ -1251,17 +1253,18 @@ Func_8ad9:
 	cp b
 	jr c, .asm_8b39
 	jr nz, .asm_8b44
+	; h > b
 	ld a, l
 	and a
 	jr nz, .asm_8b44
 .asm_8b39
 	ld a, b
-	ld [wcac6 + 0], a
+	ld [wCameraSCX + 0], a
 	ld a, $01
 	ld [wc0b5], a
 	jr .asm_8b69
 .asm_8b44
-	ld hl, wcac6
+	ld hl, wCameraSCX
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
@@ -1279,9 +1282,10 @@ Func_8ad9:
 	jr c, .asm_8b69
 	ld a, b
 	dec a
-	ld [wcac6 + 0], a
+	ld [wCameraSCX + 0], a
 	ld a, $ff
 	ld [wc0b5], a
+
 .asm_8b69
 	ld a, [wceef]
 	and %00111100
@@ -1290,17 +1294,18 @@ Func_8ad9:
 	and CAM_SCROLLING_MASK
 	cp CAM_TRANSITIONS
 	ret nc
+
 .asm_8b78
 	xor a
 	ld [wcac8], a
 
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	sub $60
-	ld [wcac4 + 1], a
+	ld [wCameraSCY + 1], a
 	ld l, a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	sbc $00
-	ld [wcac4 + 0], a
+	ld [wCameraSCY + 0], a
 	ld h, a
 	ld a, [wCameraConfigFlags]
 	bit CAM_EDGE_UP_F, a
@@ -1322,12 +1327,12 @@ Func_8ad9:
 	jr nz, .asm_8bb5
 .asm_8bab
 	ld a, b
-	ld [wcac4 + 0], a
+	ld [wCameraSCY + 0], a
 	ld a, $01
 	ld [wcac8], a
 	ret
 .asm_8bb5
-	ld hl, wcac4
+	ld hl, wCameraSCY
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
@@ -1345,7 +1350,7 @@ Func_8ad9:
 	jr c, .asm_8bdb
 	ld a, b
 	dec a
-	ld [wcac4 + 0], a
+	ld [wCameraSCY + 0], a
 	ld a, $ff
 	ld [wcac8], a
 	ret
@@ -1354,39 +1359,39 @@ Func_8ad9:
 	and CAM_SCROLLING_MASK
 	cp CAM_TRANSITIONS
 	ret c
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	cp $80
 	jr nc, .asm_8c0c
 	ld a, [wc0b7]
 	ld b, a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	dec a
-	ld [wcac4 + 0], a
+	ld [wCameraSCY + 0], a
 	cp b
 	jr c, .asm_8bab
 	bit 7, a
 	jr z, .asm_8c06
 
 	xor a
-	ld [wcac4 + 0], a
+	ld [wCameraSCY + 0], a
 	ld a, $01
 	ld [wcac8], a
 	ret
 
 .asm_8c06
 	ld a, $e8
-	ld [wcac4 + 1], a
+	ld [wCameraSCY + 1], a
 	ret
 
 .asm_8c0c
 	ld a, $68
-	ld [wcac4 + 1], a
+	ld [wCameraSCY + 1], a
 	ret
 
 Func_8c12:
-	ld a, [wcac4 + 0]
+	ld a, [wCameraSCY + 0]
 	ld h, a
-	ld a, [wcac4 + 1]
+	ld a, [wCameraSCY + 1]
 	ld l, a
 	ld a, [wcac8]
 	cp $01
@@ -1398,10 +1403,10 @@ Func_8c12:
 	ldh [rSCY], a
 	ld [wSCY], a
 	sub $18
-	ld [wc0a4], a
+	ld [wc0a3 + 1], a
 	ld a, h
 	sbc $00
-	ld [wc0a3], a
+	ld [wc0a3 + 0], a
 	jr .asm_8c70
 
 .asm_8c38
@@ -1411,12 +1416,12 @@ Func_8c12:
 	jr z, .asm_8c43
 	ld a, $20
 .asm_8c43
-	ld [wcac4 + 1], a
+	ld [wCameraSCY + 1], a
 	ldh [rSCY], a
 	ld [wSCY], a
-	ld [wc0a4], a
+	ld [wc0a3 + 1], a
 	ld a, h
-	ld [wc0a3], a
+	ld [wc0a3 + 0], a
 	jr .asm_8c70
 
 .asm_8c54
@@ -1426,17 +1431,17 @@ Func_8c12:
 	jr z, .asm_8c5f
 	ld a, $48
 .asm_8c5f
-	ld [wcac4 + 1], a
+	ld [wCameraSCY + 1], a
 	ldh [rSCY], a
 	ld [wSCY], a
 	sub $20
-	ld [wc0a4], a
+	ld [wc0a3 + 1], a
 	ld a, h
-	ld [wc0a3], a
+	ld [wc0a3 + 0], a
 .asm_8c70
-	ld a, [wcac6 + 0]
+	ld a, [wCameraSCX + 0]
 	ld h, a
-	ld a, [wcac6 + 1]
+	ld a, [wCameraSCX + 1]
 	ld l, a
 	ld a, [wc0b5]
 	cp $01
@@ -1447,15 +1452,15 @@ Func_8c12:
 	ldh [rSCX], a
 	ld [wSCX], a
 	sub $10
-	ld [wc0a6], a
+	ld [wc0a5 + 1], a
 	ld a, h
 	sbc $00
-	ld [wc0a5], a
+	ld [wc0a5 + 0], a
 	bit 7, a
 	ret z
 	xor a
-	ld [wc0a6], a
-	ld [wc0a5], a
+	ld [wc0a5 + 1], a
+	ld [wc0a5 + 0], a
 	ret
 
 .asm_8c9f
@@ -1465,12 +1470,12 @@ Func_8c12:
 	jr z, .asm_8caa
 	ld a, $20
 .asm_8caa
-	ld [wcac6 + 1], a
+	ld [wCameraSCX + 1], a
 	ldh [rSCX], a
 	ld [wSCX], a
-	ld [wc0a6], a
+	ld [wc0a5 + 1], a
 	ld a, h
-	ld [wc0a5], a
+	ld [wc0a5 + 0], a
 	ret
 
 .asm_8cba
@@ -1480,29 +1485,30 @@ Func_8c12:
 	jr z, .asm_8cc5
 	ld a, $40
 .asm_8cc5
-	ld [wcac6 + 1], a
+	ld [wCameraSCX + 1], a
 	ldh [rSCX], a
 	ld [wSCX], a
 	sub $28
-	ld [wc0a6], a
+	ld [wc0a5 + 1], a
 	ld a, h
-	ld [wc0a5], a
+	ld [wc0a5 + 0], a
 	ret
 
 Func_8cd7:
 	ld hl, wc0a3
 	ld de, wc0a7
-	ld a, [hli]
-	ld [de], a
+	ld a, [hli] ; wc0a3
+	ld [de], a  ; wc0a7
 	inc de
 	ld a, [hli]
 	ld [de], a
 	inc de
-	ld a, [hli]
-	ld [de], a
+	ld a, [hli] ; wc0a5
+	ld [de], a  ; wc0a9
 	inc de
 	ld a, [hl]
 	ld [de], a
+
 	ld a, $20
 	ld [wc0a2], a
 .asm_8ced
@@ -1558,12 +1564,12 @@ Func_8cd7:
 	xor a
 	ld [wce69], a
 	ld [wce00], a
-	ld a, [wc0a6]
+	ld a, [wc0a5 + 1]
 	add $08
-	ld [wc0a6], a
-	ld a, [wc0a5]
+	ld [wc0a5 + 1], a
+	ld a, [wc0a5 + 0]
 	adc $00
-	ld [wc0a5], a
+	ld [wc0a5 + 0], a
 	ld a, [wc0a2]
 	dec a
 	ld [wc0a2], a
@@ -1615,7 +1621,7 @@ Func_8d69:
 	call GetCell
 	ld a, [wFloorSRAMBank]
 	sramswitch
-	ld a, [wc0a6]
+	ld a, [wc0a5 + 1]
 	and $08
 	jr z, .asm_8dd4
 
@@ -1643,10 +1649,10 @@ Func_8d69:
 	ret
 
 Func_8e06::
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	sub $18
 	ld l, a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	sbc $00
 	ld h, a
 
@@ -1672,9 +1678,9 @@ Func_8e06::
 	ld d, a
 	ld e, l
 
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	ld h, a
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	ld l, a
 	srl h
 	rr l
@@ -1694,9 +1700,9 @@ Func_8e06::
 	ret
 
 Func_8e5b:
-	ld a, [wc0a3]
+	ld a, [wc0a3 + 0]
 	ld h, a
-	ld a, [wc0a4]
+	ld a, [wc0a3 + 1]
 	ld l, a
 	srl h
 	rr l
@@ -1718,9 +1724,9 @@ Func_8e5b:
 	and $03
 	ld d, a
 	ld e, l
-	ld a, [wc0a5]
+	ld a, [wc0a5 + 0]
 	ld h, a
-	ld a, [wc0a6]
+	ld a, [wc0a5 + 1]
 	ld l, a
 	srl h
 	rr l
@@ -1770,7 +1776,7 @@ GetNextInternalRoomID:
 	add c
 	dec b
 	jr nz, .loop_multiplication
-	; a = XPosHi + 10 * wYPosHi
+	; a = XPosHi + 10 * wWarioYPos
 	ld [wInternalRoomID], a
 	ret
 .skip_multiplication
@@ -1843,7 +1849,7 @@ Func_8ed9:
 	ret
 
 Func_8f79:
-	ld hl, wcac4 + 1
+	ld hl, wCameraSCY + 1
 	ld a, [hld]
 	and $f8
 	ld e, a
@@ -1857,10 +1863,11 @@ Func_8f79:
 	ld hl, $2f8
 	ld a, h
 .asm_8f8f
-	ld [wc0a3], a
+	ld [wc0a3 + 0], a
 	ld a, l
-	ld [wc0a4], a
-	ld hl, wcac6 + 1
+	ld [wc0a3 + 1], a
+
+	ld hl, wCameraSCX + 1
 	ld a, [hld]
 	and $f8
 	ld e, a
@@ -1873,13 +1880,13 @@ Func_8f79:
 	ld hl, $0
 .asm_8faa
 	ld a, h
-	ld [wc0a5], a
+	ld [wc0a5 + 0], a
 	ld a, l
-	ld [wc0a6], a
+	ld [wc0a5 + 1], a
 	ret
 
 Func_8fb3:
-	ld hl, wcac4 + 1
+	ld hl, wCameraSCY + 1
 	ld a, [hld]
 	and $f8
 	ld e, a
@@ -1892,10 +1899,10 @@ Func_8fb3:
 	ld hl, $0
 .asm_8fc7
 	ld a, h
-	ld [wc0a3], a
+	ld [wc0a3 + 0], a
 	ld a, l
-	ld [wc0a4], a
-	ld hl, wcac6 + 1
+	ld [wc0a3 + 1], a
+	ld hl, wCameraSCX + 1
 	ld a, [hld]
 	and $f8
 	ld e, a
@@ -1908,13 +1915,13 @@ Func_8fb3:
 	ld hl, $0
 .asm_8fe3
 	ld a, h
-	ld [wc0a5], a
+	ld [wc0a5 + 0], a
 	ld a, l
-	ld [wc0a6], a
+	ld [wc0a5 + 1], a
 	ret
 
 Func_8fec:
-	ld hl, wcac4 + 1
+	ld hl, wCameraSCY + 1
 	ld a, [hld]
 	and $f8
 	ld e, a
@@ -1940,10 +1947,10 @@ Func_8fec:
 	pop hl
 .asm_9013
 	ld a, h
-	ld [wc0a3], a
+	ld [wc0a3 + 0], a
 	ld a, l
-	ld [wc0a4], a
-	ld hl, wcac6 + 1
+	ld [wc0a3 + 1], a
+	ld hl, wCameraSCX + 1
 	ld a, [hld]
 	and $f8
 	ld e, a
@@ -1957,13 +1964,13 @@ Func_8fec:
 	ld hl, $9f8
 	ld a, h
 .asm_9031
-	ld [wc0a5], a
+	ld [wc0a5 + 0], a
 	ld a, l
-	ld [wc0a6], a
+	ld [wc0a5 + 1], a
 	ret
 
 Func_9039:
-	ld hl, wcac4 + 1
+	ld hl, wCameraSCY + 1
 	ld a, [hld]
 	and $f8
 	ld e, a
@@ -1989,10 +1996,10 @@ Func_9039:
 	pop hl
 .asm_9060
 	ld a, h
-	ld [wc0a3], a
+	ld [wc0a3 + 0], a
 	ld a, l
-	ld [wc0a4], a
-	ld hl, wcac6 + 1
+	ld [wc0a3 + 1], a
+	ld hl, wCameraSCX + 1
 	ld a, [hld]
 	and $f8
 	ld e, a
@@ -2005,9 +2012,9 @@ Func_9039:
 	ld hl, $0
 .asm_907c
 	ld a, h
-	ld [wc0a5], a
+	ld [wc0a5 + 0], a
 	ld a, l
-	ld [wc0a6], a
+	ld [wc0a5 + 1], a
 	ret
 
 Func_9085:
@@ -2351,7 +2358,7 @@ Func_9085:
 
 	ld a, [wFloorSRAMBank]
 	sramswitch
-	ld a, [wc0a4]
+	ld a, [wc0a3 + 1]
 	and $08
 	jr z, .asm_923a
 	push hl
@@ -2383,7 +2390,7 @@ Func_9254:
 	ld a, LOW(wce01)
 	add b
 	ld [wcce7 + 1], a
-	ld a, [wc0a6]
+	ld a, [wc0a5 + 1]
 	and $08
 	jp nz, Func_9438
 	ld a, [hli]
@@ -2988,7 +2995,7 @@ Func_9605:
 	ld a, LOW(wce35)
 	add b
 	ld [wc0b3 + 1], a
-	ld a, [wc0a6]
+	ld a, [wc0a5 + 1]
 	and $08
 	jp nz, Func_97f3
 	ldh a, [rSVBK]
@@ -3605,7 +3612,7 @@ Func_99ca:
 	ld a, LOW(wce01)
 	add b
 	ld [wcce7 + 1], a
-	ld a, [wc0a6]
+	ld a, [wc0a5 + 1]
 	and $08
 	jp nz, Func_9b94
 	ld a, [hli]
@@ -4160,7 +4167,7 @@ Func_9d4c:
 	ld a, LOW(wce35)
 	add b
 	ld [wc0b3 + 1], a
-	ld a, [wc0a6]
+	ld a, [wc0a5 + 1]
 	and $08
 	jp nz, Func_9f20
 	ldh a, [rSVBK]
@@ -5033,7 +5040,7 @@ Func_a0e2:
 	call GetCell
 	ld a, [wFloorSRAMBank]
 	sramswitch
-	ld a, [wc0a6]
+	ld a, [wc0a5 + 1]
 	and $08
 	jr z, .asm_a290
 	push hl
@@ -5064,7 +5071,7 @@ Func_a2aa:
 	ld a, LOW(wce01)
 	add b
 	ld [wcce7 + 1], a
-	ld a, [wc0a4]
+	ld a, [wc0a3 + 1]
 	and $08
 	jp nz, Func_a52f
 	ld a, [hl]
@@ -5820,7 +5827,7 @@ Func_a79e:
 	ld a, LOW(wce35)
 	add b
 	ld [wc0b3 + 1], a
-	ld a, [wc0a4]
+	ld a, [wc0a3 + 1]
 	and $08
 	jp nz, Func_aa2d
 	ldh a, [rSVBK]
@@ -6588,7 +6595,7 @@ Func_aca6:
 	ld a, LOW(wce01)
 	add b
 	ld [wcce7 + 1], a
-	ld a, [wc0a4]
+	ld a, [wc0a3 + 1]
 	and $08
 	jp nz, Func_af1f
 	ld a, [hl]
@@ -7320,7 +7327,7 @@ Func_b182:
 	ld a, LOW(wce35)
 	add b
 	ld [wc0b3 + 1], a
-	ld a, [wc0a4]
+	ld a, [wc0a3 + 1]
 	and $08
 	jp nz, Func_b405
 	ldh a, [rSVBK]
@@ -8101,7 +8108,7 @@ Func_b681:
 
 	ld a, [wce00]
 	ld c, a
-	ld hl, wBlankFuncExtended
+	ld hl, wVBlankFuncExtended
 .loop_2
 	ld a, $2a ; ld a, [hli]
 	ld [hli], a
@@ -8135,33 +8142,33 @@ Func_b6d5:
 	ld a, [wc0b9]
 	dec a
 	ld c, a
-	ld a, [wcac6 + 1]
+	ld a, [wCameraSCX + 1]
 	add b
-	ld [wcac6 + 1], a
-	ld a, [wcac6 + 0]
+	ld [wCameraSCX + 1], a
+	ld a, [wCameraSCX + 0]
 	adc $00
-	ld [wcac6 + 0], a
+	ld [wCameraSCX + 0], a
 	ld a, [wCameraConfigFlags]
 	bit CAM_EDGE_RIGHT_F, a
 	ld b, $60
 	jr z, .asm_b6f8
 	ld b, $40
 .asm_b6f8
-	ld a, [wcac6 + 0]
+	ld a, [wCameraSCX + 0]
 	cp c
 	jr c, .asm_b70e
-	ld a, [wcac6 + 1]
+	ld a, [wCameraSCX + 1]
 	cp b
 	jr c, .asm_b70e
 	ld a, b
-	ld [wcac6 + 1], a
+	ld [wCameraSCX + 1], a
 	ld a, $01
 	ld [wc0c0], a
 	ret
 .asm_b70e
 	ld a, [wc0b8]
 	ld c, a
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	cp c
 	ret nz
 	ld a, [wDirection]
@@ -8181,7 +8188,7 @@ Func_b6d5:
 	add $20
 	ld c, a
 .asm_b733
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	cp c
 	ret nc
 	ld a, [wCameraConfigFlags]
@@ -8190,7 +8197,7 @@ Func_b6d5:
 	jr z, .asm_b743
 	ld a, $20
 .asm_b743
-	ld [wcac6 + 1], a
+	ld [wCameraSCX + 1], a
 	ld a, $02
 	ld [wc0c0], a
 	ret
@@ -8200,16 +8207,16 @@ Func_b74c:
 	ld [wc0bf], a
 	ld a, [wc0b8]
 	ld c, a
-	ld a, [wcac6 + 1]
+	ld a, [wCameraSCX + 1]
 	sub b
-	ld [wcac6 + 1], a
-	ld a, [wcac6 + 0]
+	ld [wCameraSCX + 1], a
+	ld a, [wCameraSCX + 0]
 	sbc $00
-	ld [wcac6 + 0], a
-	ld a, [wcac6 + 1]
+	ld [wCameraSCX + 0], a
+	ld a, [wCameraSCX + 1]
 	add $10
 	ld l, a
-	ld a, [wcac6 + 0]
+	ld a, [wCameraSCX + 0]
 	adc $00
 	cp c
 	jr nz, .asm_b790
@@ -8223,10 +8230,10 @@ Func_b74c:
 	cp b
 	jr nc, .asm_b790
 	ld a, c
-	ld [wcac6 + 0], a
+	ld [wCameraSCX + 0], a
 	ld a, b
 	sub $10
-	ld [wcac6 + 1], a
+	ld [wCameraSCX + 1], a
 	ld a, $01
 	ld [wc0bf], a
 	ret
@@ -8234,7 +8241,7 @@ Func_b74c:
 	ld a, [wc0b9]
 	dec a
 	ld c, a
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	cp c
 	ret nz
 	ld a, [wDirection]
@@ -8259,33 +8266,33 @@ Func_b74c:
 	sub $20
 	ld c, a
 .asm_b7bb
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	cp c
 	ret c
 	ld a, $02
 	ld [wc0bf], a
 	ld a, [wc0b9]
 	dec a
-	ld [wcac6 + 0], a
+	ld [wCameraSCX + 0], a
 	ld a, [wCameraConfigFlags]
 	bit CAM_EDGE_RIGHT_F, a
 	ld a, $60
 	jr z, .asm_b7d7
 	ld a, $40
 .asm_b7d7
-	ld [wcac6 + 1], a
+	ld [wCameraSCX + 1], a
 	ret
 
 Func_b7db:
 	ld a, [wc0b6]
 	dec a
 	ld c, a
-	ld a, [wcac4 + 1]
+	ld a, [wCameraSCY + 1]
 	add b
-	ld [wcac4 + 1], a
-	ld a, [wcac4 + 0]
+	ld [wCameraSCY + 1], a
+	ld a, [wCameraSCY + 0]
 	adc $00
-	ld [wcac4 + 0], a
+	ld [wCameraSCY + 0], a
 	cp c
 	jr c, .asm_b80d
 	ld a, [wCameraConfigFlags]
@@ -8294,11 +8301,11 @@ Func_b7db:
 	jr z, .asm_b7fd
 	ld b, $48
 .asm_b7fd
-	ld a, [wcac4 + 1]
+	ld a, [wCameraSCY + 1]
 	cp b
 	jr c, .asm_b80d
 	ld a, b
-	ld [wcac4 + 1], a
+	ld [wCameraSCY + 1], a
 	ld a, $01
 	ld [wc0bd], a
 	ret
@@ -8309,7 +8316,7 @@ Func_b7db:
 	ret nc
 	ld a, [wc0b7]
 	ld c, a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	cp c
 	jr c, .asm_b836
 	ret nz
@@ -8323,7 +8330,7 @@ Func_b7db:
 	add $20
 	ld c, a
 .asm_b831
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	cp c
 	ret nc
 .asm_b836
@@ -8333,9 +8340,9 @@ Func_b7db:
 	jr z, .asm_b841
 	ld a, $20
 .asm_b841
-	ld [wcac4 + 1], a
+	ld [wCameraSCY + 1], a
 	ld a, [wc0b7]
-	ld [wcac4 + 0], a
+	ld [wCameraSCY + 0], a
 	ld a, $02
 	ld [wc0bd], a
 	ret
@@ -8343,22 +8350,22 @@ Func_b7db:
 Func_b850:
 	ld a, [wc0b7]
 	ld c, a
-	ld a, [wcac4 + 1]
+	ld a, [wCameraSCY + 1]
 	sub b
-	ld [wcac4 + 1], a
-	ld a, [wcac4 + 0]
+	ld [wCameraSCY + 1], a
+	ld a, [wCameraSCY + 0]
 	sbc $00
-	ld [wcac4 + 0], a
+	ld [wCameraSCY + 0], a
 	ld a, [wCameraConfigFlags]
 	bit CAM_EDGE_UP_F, a
 	ld b, $10
 	jr z, .asm_b86e
 	ld b, $30
 .asm_b86e
-	ld a, [wcac4 + 1]
+	ld a, [wCameraSCY + 1]
 	add $10
 	ld l, a
-	ld a, [wcac4 + 0]
+	ld a, [wCameraSCY + 0]
 	adc $00
 	cp c
 	jr c, .asm_b882
@@ -8368,10 +8375,10 @@ Func_b850:
 	jr nc, .asm_b892
 .asm_b882
 	ld a, c
-	ld [wcac4 + 0], a
+	ld [wCameraSCY + 0], a
 	ld a, b
 	sub $10
-	ld [wcac4 + 1], a
+	ld [wCameraSCY + 1], a
 	ld a, $01
 	ld [wc0be], a
 	ret
@@ -8383,7 +8390,7 @@ Func_b850:
 	ld a, [wc0b6]
 	dec a
 	ld c, a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	cp c
 	ret nz
 	ld a, [wca5e]
@@ -8401,7 +8408,7 @@ Func_b850:
 	sub $20
 	ld c, a
 .asm_b8ba
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	cp c
 	ret c
 	ld a, $02
@@ -8412,7 +8419,7 @@ Func_b850:
 	jr z, .asm_b8cf
 	ld a, $48
 .asm_b8cf
-	ld [wcac4 + 1], a
+	ld [wCameraSCY + 1], a
 	ret
 
 SetWarioScreenPos:
@@ -8421,13 +8428,13 @@ SetWarioScreenPos:
 	jr z, .hidden_figure_camconfig
 	ld a, [wSCY]
 	ld b, a
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	add $10
-	sub b ; wYPosLo + $10 - wSCY
+	sub b ; wWarioYPos + 1 + $10 - wSCY
 	ld [wWarioScreenYPos], a
 	ld a, [wSCX]
 	ld b, a
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	add $08
 	sub b
 	ld [wWarioScreenXPos], a
@@ -8439,13 +8446,13 @@ SetWarioScreenPos:
 	ld a, [wc08a]
 	add c
 	ld b, a
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	add $10
 	sub b
 	ld [wWarioScreenYPos], a
 	ld a, [wc08c]
 	ld b, a
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	add $08
 	sub b
 	ld [wWarioScreenXPos], a

@@ -666,7 +666,7 @@ UpdateState_OwlFast:
 	and a
 	jr z, .asm_1ec647
 	ld hl, hYPosHi
-	ld de, wPos
+	ld de, wWarioPos
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -736,7 +736,7 @@ UpdateState_FallingFromOwl:
 	and a
 	ret z
 	ld hl, hYPosHi
-	ld de, wPos
+	ld de, wWarioPos
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -991,7 +991,7 @@ UpdateState_SnowmanWalking:
 	and a
 	ret z
 	ld hl, hYPosHi
-	ld de, wPos
+	ld de, wWarioPos
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -1409,7 +1409,7 @@ UpdateState_SnowballRolling:
 	and a
 	jp z, .asm_1ecd8c
 	ld hl, hYPosHi
-	ld de, wPos
+	ld de, wWarioPos
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -1500,7 +1500,7 @@ UpdateState_SnowballCrash:
 	ld a, [wAnimationEnded]
 	and a
 	ret z
-	ld hl, wPos
+	ld hl, wWarioPos
 	ld de, hYPosHi
 	ld a, [hli]
 	ld [de], a
@@ -2566,7 +2566,7 @@ UpdateState_LaunchCrash:
 	ret
 
 SetState_MagicRising:
-	ld hl, wPos
+	ld hl, wWarioPos
 	ld de, hPos
 	ld a, [hli]
 	ld [de], a
@@ -2582,7 +2582,7 @@ SetState_MagicRising:
 	ld b, PARTICLE_MAGIC_1
 	farcall CreateParticle
 
-	ld hl, wPos
+	ld hl, wWarioPos
 	ld de, hPos
 	ld a, [hli]
 	ld [de], a
@@ -2789,7 +2789,7 @@ UpdateState_BallStart:
 	ret z
 
 	ld hl, hPos
-	ld de, wPos
+	ld de, wWarioPos
 	ld a, [hli]
 	ld [de], a
 	inc de

@@ -117,19 +117,19 @@ PesceFunc:
 	ld l, OBJ_Y_POS
 	ld a, [hli]
 	add $04
-	ld [wYPosLo], a
+	ld [wWarioYPos + 1], a
 	ld a, [hli]
 	adc $00
-	ld [wPos], a
+	ld [wWarioYPos + 0], a
 	ld a, [wCurObjSubState]
 	rlca
 	jr c, .asm_51e0e
 	ld a, [hli]
 	sub $14
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 	ld a, [hl]
 	sbc $00
-	ld [wXPosHi], a
+	ld [wWarioXPos + 0], a
 	ld de, Frameset_6992d
 	call SetObjectFramesetPtr
 	ld a, $3c
@@ -139,9 +139,9 @@ PesceFunc:
 	ret
 .asm_51e0e
 	ld a, [hli]
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 	ld a, [hl]
-	ld [wXPosHi], a
+	ld [wWarioXPos + 0], a
 	ld de, Frameset_69a15
 	call SetObjectFramesetPtr
 	ld a, $0d
@@ -199,10 +199,10 @@ PesceFunc:
 	ld l, OBJ_X_POS
 	ld a, [hli]
 	sub $14
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 	ld a, [hl]
 	sbc $00
-	ld [wXPosHi], a
+	ld [wWarioXPos + 0], a
 	ld de, Frameset_6992d
 	call SetObjectFramesetPtr
 	ld a, $3c

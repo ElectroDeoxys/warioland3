@@ -73,16 +73,16 @@ ZipLineFunc:
 	ld l, OBJ_Y_POS
 	ld a, [hli]
 	add $1b
-	ld [wYPosLo], a
+	ld [wWarioYPos + 1], a
 	ld a, [hli]
 	adc $00
-	ld [wYPosHi], a
+	ld [wWarioYPos + 0], a
 	ld a, [hli]
 	add $04
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 	ld a, [hl]
 	adc $00
-	ld [wXPosHi], a
+	ld [wWarioXPos + 0], a
 	ld a, [wCurObjSubState]
 	rlca
 	jr c, .asm_493c7

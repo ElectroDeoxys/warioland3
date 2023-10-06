@@ -507,10 +507,10 @@ UpdateState_Airborne:
 	and a
 	jp nz, StartFall_SkipResetJumpUpwards
 
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	and $f0
 	add $08
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 	ret
 
 .falling
@@ -2574,9 +2574,9 @@ UpdateState_PipeGoingDown:
 	jr z, .asm_1d804
 	cp $40
 	ret c
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	sub $08
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 	xor a
 	ld [wIsIntangible], a
 	jp SetState_Idling
@@ -2608,9 +2608,9 @@ UpdateState_PipeGoingUp:
 	jr z, .asm_1d853
 	cp $40
 	ret c
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	sub $08
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 	xor a
 	ld [wIsIntangible], a
 	call Func_1146
@@ -2673,7 +2673,7 @@ UpdateState_EnemyBumping:
 	xor $1
 	ld [wDirection], a
 	ld hl, hYPosHi
-	ld de, wPos
+	ld de, wWarioPos
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -3376,7 +3376,7 @@ SetState_Sliding:
 	ld a, [wIsStandingOnSlope]
 	bit 1, a
 	jr nz, .asm_1df8b
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	add $0c
@@ -3405,7 +3405,7 @@ SetState_Sliding:
 	jr .asm_1dfc4
 
 .asm_1df8b
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	sub $0c

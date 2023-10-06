@@ -27,11 +27,11 @@ BigLeafSpawnerFunc:
 	inc a
 .asm_42bd4
 	ld d, a
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	cp d
 	jr c, .asm_42be1
 	ret nz
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	cp e
 	ret nc
 .asm_42be1

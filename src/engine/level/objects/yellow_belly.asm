@@ -147,9 +147,9 @@ YellowBellyBodyFunc:
 	ld a, [hli]
 	ld e, a
 	ld d, [hl]
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	ld b, a
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	ld c, a
 	ld a, b
 	cp d

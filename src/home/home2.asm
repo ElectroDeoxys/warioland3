@@ -53,7 +53,7 @@ Func_285c::
 	cpl
 	inc a
 	add $58
-	ld [wca60], a
+	ld [wca60], a ; a will always be $58 here
 
 	ld a, [wROMBank]
 	push af

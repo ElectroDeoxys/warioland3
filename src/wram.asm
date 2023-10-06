@@ -97,22 +97,12 @@ wSpawnPos:: ; c0a1
 wc0a2:: ; c0a2
 	db
 
-wc0a3:: ; c0a3
-	db
+wc0a3:: dw ; c0a3
+wc0a5:: dw ; c0a5
+wc0a7:: dw ; c0a7
+wc0a9:: dw ; c0a9
 
-wc0a4:: ; c0a4
-	db
-
-wc0a5:: ; c0a5
-	db
-
-wc0a6:: ; c0a6
-	db
-
-wc0a7:: ; c0a7
-	db
-
-	ds $4
+	ds $1
 
 wTempBank:: ; c0ac
 	db
@@ -393,7 +383,7 @@ wROMBank:: ; c5ff
 wc600:: ; c600
 	ds $200
 
-wBlankFuncExtended:: ; c800
+wVBlankFuncExtended:: ; c800
 	ds $200
 
 wGeneralData::
@@ -474,20 +464,13 @@ wNumMusicalCoins:: ; ca5c
 wTempInternalRoomID:: ; ca5d
 	db
 
-wca5e:: ; ca5e
-	db
+wca5e:: db ; ca5e
+wca5f:: db ; ca5f
+wca60:: db ; ca60
 
-wca5f:: ; ca5f
-	db
-
-wca60:: ; ca60
-	db
-
-wPos::
-wYPosHi:: db ; ca61
-wYPosLo:: db ; ca62
-wXPosHi:: db ; ca63
-wXPosLo:: db ; ca64
+wWarioPos::
+wWarioYPos:: dw ; ca61
+wWarioXPos:: dw ; ca63
 
 wca65:: ; ca65
 	db
@@ -705,8 +688,8 @@ wCoinCooldown:: ; cac2
 wcac3:: ; cac3
 	db
 
-wcac4:: ds $2 ; cac4
-wcac6:: ds $2 ; cac6
+wCameraSCY:: dw ; cac4
+wCameraSCX:: dw ; cac6
 
 wcac8:: ; cac8
 	db
@@ -956,6 +939,10 @@ wObjDataPtr12::          dw ; d13c
 wObjDataPtr13::          dw ; d13e
 
 w1d140:: ; d140
+
+; if non-0, the Flame Block puzzle
+; has already been cleared for the level
+wFlameBlockCleared::
 	db
 
 w1d141:: ; d141
@@ -968,11 +955,8 @@ w1d142:: ; d142
 wNumLitTorches:: ; d143
 	db
 
-wNumShootGoals:: ; d144
-	db
-
-wNumWarioGoals:: ; d145
-	db
+wNumShootGoals:: db ; d144
+wNumWarioGoals:: db ; d145
 
 wDollBoyActiveBarrels:: db ; d146
 w1d147:: db ; d147

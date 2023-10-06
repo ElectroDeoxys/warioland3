@@ -1,6 +1,6 @@
 MACRO update_pos_y
 	ld hl, hYPosHi
-	ld de, wYPosHi
+	ld de, wWarioYPos
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -9,7 +9,7 @@ MACRO update_pos_y
 ENDM
 
 MACRO get_pos_y
-	ld hl, wYPosHi
+	ld hl, wWarioYPos
 	ld de, hYPosHi
 	ld a, [hli]
 	ld [de], a
@@ -20,7 +20,7 @@ ENDM
 
 MACRO update_pos_x
 	ld hl, hXPosHi
-	ld de, wXPosHi
+	ld de, wWarioXPos
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -29,7 +29,7 @@ MACRO update_pos_x
 ENDM
 
 MACRO get_pos_x
-	ld hl, wXPosHi
+	ld hl, wWarioXPos
 	ld de, hXPosHi
 	ld a, [hli]
 	ld [de], a
@@ -40,7 +40,7 @@ ENDM
 
 MACRO update_pos
 	ld hl, hPos
-	ld de, wPos
+	ld de, wWarioPos
 REPT 3
 	ld a, [hli]
 	ld [de], a
@@ -51,7 +51,7 @@ ENDR
 ENDM
 
 MACRO get_pos
-	ld hl, wPos
+	ld hl, wWarioPos
 	ld de, hPos
 REPT 3
 	ld a, [hli]

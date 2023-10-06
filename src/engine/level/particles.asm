@@ -279,7 +279,7 @@ ParticleFunc_SlideDustRight:
 	jr .update_anim
 
 .initialised
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	sub $0c
@@ -345,7 +345,7 @@ ParticleFunc_SlideDustLeft:
 	jr .update_anim
 
 .initialised
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	add $0c
@@ -535,7 +535,7 @@ ParticleFunc_BouncyJump:
 	jr .update_anim
 
 .initialised
-	ld hl, wPos
+	ld hl, wWarioPos
 	ld de, hYPosHi
 	ld a, [hli]
 	ld [de], a
@@ -807,7 +807,7 @@ ParticleFunc_Magic1:
 	jr .update_anim
 
 .initialised
-	ld hl, wPos
+	ld hl, wWarioPos
 	ld de, hYPosHi
 	ld a, [hli]
 	ld [de], a
@@ -872,7 +872,7 @@ ParticleFunc_Magic2:
 	jr .update_anim
 
 .initalised
-	ld hl, wPos
+	ld hl, wWarioPos
 	ld de, hYPosHi
 	ld a, [hli]
 	ld [de], a
@@ -933,7 +933,7 @@ ParticleFunc_MagicStop:
 	jr .update_anim
 
 .initialised
-	ld hl, wPos
+	ld hl, wWarioPos
 	ld de, hYPosHi
 	ld a, [hli]
 	ld [de], a
@@ -1349,13 +1349,13 @@ AddParticleSprite:
 	ret
 
 .asm_d0c5
-	ld a, [wcac4 + 1]
+	ld a, [wCameraSCY + 1]
 	ld b, a
 	ld a, [wCurParticleYCoord]
 	add $10
 	sub b
 	ld [wCurSpriteYCoord], a
-	ld a, [wcac6 + 1]
+	ld a, [wCameraSCX + 1]
 	ld b, a
 	ld a, [wCurParticleXCoord]
 	add $08

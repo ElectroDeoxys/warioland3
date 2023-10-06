@@ -140,7 +140,7 @@ Func_cab::
 	ldh [rVBK], a
 	ld hl, wce6a
 	ld bc, wce35
-	jp wBlankFuncExtended
+	jp wVBlankFuncExtended
 
 Func_cb8::
 	xor a
@@ -955,7 +955,7 @@ Func_1146::
 ; 2 if $200 <= ypos < $280
 ; 1 if $280 <= ypos < $300
 GetFloorForYPos::
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	dec a
 	jr z, .asm_115b ; == 1
 	dec a
@@ -969,7 +969,7 @@ GetFloorForYPos::
 	ld c, 1
 
 .asm_1161
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	cp $80
 	ret nc
 	; < $80
@@ -1102,24 +1102,24 @@ AddXOffset::
 	ld a, [wc0c3]
 	add b
 	ld [wc0c3], a
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	add b
-	ld [wXPosLo], a
-	ld a, [wXPosHi]
+	ld [wWarioXPos + 1], a
+	ld a, [wWarioXPos + 0]
 	adc 0
-	ld [wXPosHi], a
+	ld [wWarioXPos + 0], a
 	ret
 
 SubXOffset::
 	ld a, [wc0c3]
 	sub b
 	ld [wc0c3], a
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	sub b
-	ld [wXPosLo], a
-	ld a, [wXPosHi]
+	ld [wWarioXPos + 1], a
+	ld a, [wWarioXPos + 0]
 	sbc 0
-	ld [wXPosHi], a
+	ld [wWarioXPos + 0], a
 	ret
 
 ; b = y offset
@@ -1130,12 +1130,12 @@ AddYOffset::
 ;	fallthrough
 
 AddYOffset_Sprite::
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	add b
-	ld [wYPosLo], a
-	ld a, [wYPosHi]
+	ld [wWarioYPos + 1], a
+	ld a, [wWarioYPos + 0]
 	adc 0
-	ld [wYPosHi], a
+	ld [wWarioYPos + 0], a
 	ret
 
 ; b = y offset
@@ -1146,12 +1146,12 @@ SubYOffset::
 ;	fallthrough
 
 SubYOffset_Sprite::
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	sub b
-	ld [wYPosLo], a
-	ld a, [wYPosHi]
+	ld [wWarioYPos + 1], a
+	ld a, [wWarioYPos + 0]
 	sbc 0
-	ld [wYPosHi], a
+	ld [wWarioYPos + 0], a
 	ret
 
 ; b = ground shake counter
@@ -1748,7 +1748,7 @@ OpenActionHelp::
 	ret
 
 ReleaseOwl::
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	ld [de], a
@@ -1777,7 +1777,7 @@ IsOnSlipperyGround::
 	inc a
 	sub 3
 	ld c, a ; - wCollisionBoxLeft - 3
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	sub c
@@ -1800,7 +1800,7 @@ IsOnSlipperyGround::
 	ld a, [wCollisionBoxRight]
 	sub 3
 	ld c, a ; wCollisionBoxRight - 3
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	add c

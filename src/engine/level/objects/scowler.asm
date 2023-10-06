@@ -61,13 +61,13 @@ ScowlerFunc:
 	call SetObjectFramesetPtr
 	ld l, OBJ_Y_POS
 	ld a, [hli]
-	ld [wYPosLo], a
+	ld [wWarioYPos + 1], a
 	ld a, [hli]
-	ld [wYPosHi], a
+	ld [wWarioYPos + 0], a
 	ld a, [hli]
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 	ld a, [hl]
-	ld [wXPosHi], a
+	ld [wWarioXPos + 0], a
 	ret
 
 .asm_54563

@@ -23,14 +23,14 @@ WormwouldFunc:
 .Func_54044:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	ld c, a
 	ld hl, wCurObjYPos
 	ld a, [hli]
 	cp c
 	ret nz
 	ld c, [hl]
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	ret nz
 	ld a, $20
 	ld [wCurObjVar2], a

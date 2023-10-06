@@ -147,15 +147,15 @@ TeruteruFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_Y_POS
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	sub $0c
 	ld [hli], a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	sbc $00
 	ld [hli], a
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	ld [hli], a
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	ld [hli], a
 	ret
 

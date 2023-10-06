@@ -73,10 +73,10 @@ MuddeeFunc:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	call .Func_55c3a
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	cp $09
 	jr c, .asm_556ab
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	cp $40
 	ret nc
 .asm_556ab
@@ -337,11 +337,11 @@ MuddeeFunc:
 	ld a, [hli]
 	ld e, a
 	ld d, [hl]
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	cp d
 	jr c, .asm_558c1
 	jr nz, .asm_558b2
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	cp e
 	jr c, .asm_558c1
 .asm_558b2
@@ -397,11 +397,11 @@ MuddeeFunc:
 	ld a, [hli]
 	ld e, a
 	ld d, [hl]
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	cp d
 	jr c, .asm_55933
 	jr nz, .asm_55924
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	cp e
 	jr c, .asm_55933
 .asm_55924
@@ -557,11 +557,11 @@ MuddeeFunc:
 	ld a, [hli]
 	sbc $00
 	ldh [hYPosHi], a
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	cp d
 	jr c, .asm_55a60
 	jr nz, .asm_55a4e
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	cp e
 	jr c, .asm_55a60
 	jr z, .asm_55a72
@@ -624,11 +624,11 @@ MuddeeFunc:
 	ld a, [hli]
 	ld e, a
 	ld d, [hl]
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	cp d
 	jr c, .asm_55abd
 	jr nz, .asm_55ab6
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	cp e
 	jr c, .asm_55abd
 .asm_55ab6

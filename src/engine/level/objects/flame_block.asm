@@ -1,5 +1,5 @@
 FlameBlockFunc:
-	ld a, [w1d140]
+	ld a, [wFlameBlockCleared]
 	and a
 	jr z, .init
 	xor a
@@ -31,7 +31,7 @@ FlameBlockFunc:
 	ld a, [wNumLitTorches]
 	cp NUM_FLAME_BLOCK_TORCHES
 	ret nz
-	ld [w1d140], a
+	ld [wFlameBlockCleared], a
 	ld de, Frameset_695e7
 	call SetObjectFramesetPtr
 	ld a, 159

@@ -829,10 +829,10 @@ UpdateState_SandTurning:
 SetState_LadderClimbing:
 	ld a, WST_LADDER_CLIMBING
 	ld [wWarioState], a
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	and $f0
 	add $08
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 
 	xor a
 	ld [wSFXLoopCounter], a
@@ -1294,7 +1294,7 @@ UpdateState_GetTreasureStart:
 	and a
 	ret z
 	ld hl, hYPosHi
-	ld de, wPos
+	ld de, wWarioPos
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -1605,7 +1605,7 @@ UpdateState_GetTreasureLookFront:
 	ret z
 	ld a, WST_GET_TREASURE_CLEAR
 	ld [wWarioState], a
-	ld hl, wPos
+	ld hl, wWarioPos
 	ld de, hPos
 	ld a, [hli]
 	ld [de], a
@@ -2480,10 +2480,10 @@ HandleLadderInput:
 	ld a, b
 	and a
 	ret z
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	and $f0
 	add $08
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 	ret
 
 .asm_1b45d

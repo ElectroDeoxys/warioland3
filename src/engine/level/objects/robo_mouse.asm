@@ -500,11 +500,11 @@ RoboMouseFunc:
 	ld e, a
 	ld d, [hl]
 	ld l, OBJ_SUBSTATE
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	cp d
 	jr c, .asm_48c8a
 	jr nz, .asm_48c7c
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	cp e
 	jr c, .asm_48c8a
 .asm_48c7c

@@ -383,10 +383,10 @@ UpdateState_Hot:
 	ret
 
 Func_28380:
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	and $f0
 	add $08
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 ;	fallthrough
 
 Func_2838a:
@@ -489,10 +489,10 @@ SetState_FlatAirborne:
 .got_x_offset
 	ld a, [hli] ; OBJ_X_POS
 	sub b
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 	ld a, [hl]
 	sbc $00
-	ld [wXPosHi], a
+	ld [wWarioXPos + 0], a
 	pop af
 	ldh [rSVBK], a
 
@@ -1028,7 +1028,7 @@ UpdateState_FlatSinking:
 	jr Func_289c5
 
 .Func_2899a
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	sub $04
@@ -1050,7 +1050,7 @@ UpdateState_FlatSinking:
 	ret
 
 Func_289c5:
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	sub $04
@@ -1995,7 +1995,7 @@ Func_29317:
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29338
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	sub $04
@@ -2014,7 +2014,7 @@ Func_29317:
 	ld [de], a
 	jr .asm_29351
 .asm_29338
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	add $04
@@ -2318,7 +2318,7 @@ UpdateState_Electric:
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29601
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	sub $08
@@ -2338,7 +2338,7 @@ UpdateState_Electric:
 	jr .asm_2961a
 
 .asm_29601
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	add $08

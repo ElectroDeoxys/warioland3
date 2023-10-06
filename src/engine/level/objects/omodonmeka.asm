@@ -40,18 +40,18 @@ OmodonmekaFunc:
 	ld d, $1a
 .asm_421b5
 	ld l, OBJ_Y_POS
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	sub d
 	ld [hli], a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	sbc $00
 	ld [hli], a
 	ld a, [hli]
 	sub $08
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 	ld a, [hl]
 	sbc $00
-	ld [wXPosHi], a
+	ld [wWarioXPos + 0], a
 	ld l, OBJ_SUBSTATE
 	ld a, [hl]
 	and $f0
@@ -169,10 +169,10 @@ OmodonmekaFunc:
 	ld e, $16
 .asm_42283
 	ld l, OBJ_Y_POS
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	sub e
 	ld [hli], a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	sbc $00
 	ld [hli], a
 	ret
@@ -253,10 +253,10 @@ OmodonmekaFunc:
 	ld l, OBJ_Y_POS
 	ld a, [hli]
 	add $1a
-	ld [wYPosLo], a
+	ld [wWarioYPos + 1], a
 	ld a, [hli]
 	adc $00
-	ld [wYPosHi], a
+	ld [wWarioYPos + 0], a
 	ret
 
 .Func_42321:
@@ -1096,10 +1096,10 @@ Func_4279c:
 	ld a, $5a
 	ld [wCurObjState], a
 	ld hl, wCurObjYPos
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	sub $18
 	ld [hli], a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	sbc $00
 	ld [hli], a
 	ret
@@ -1113,10 +1113,10 @@ Func_4279c:
 	and a
 	jp nz, MoveObjectDown_Fast
 	ld hl, wCurObjYPos
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	sub $18
 	ld [hli], a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	sbc $00
 	ld [hli], a
 .asm_42889

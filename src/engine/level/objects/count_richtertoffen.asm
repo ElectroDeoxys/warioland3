@@ -157,10 +157,10 @@ CountRichtertoffenFunc:
 	ld a, OBJSTATE_5A
 	ld [hld], a
 	ld l, OBJ_Y_POS
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	sub 8
 	ld [hli], a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	sbc 0
 	ld [hli], a
 	ret
@@ -174,10 +174,10 @@ CountRichtertoffenFunc:
 	and a
 	jp nz, MoveObjectDown_Fast
 	ld hl, wCurObjYPos
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	sub 8
 	ld [hli], a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	sbc 0
 	ld [hli], a
 .asm_40f72

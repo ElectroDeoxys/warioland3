@@ -232,9 +232,9 @@ SunMoon_GeneralMovement:
 	ld a, [hli]
 	ld e, a
 	ld d, [hl]
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	ld b, a
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	ld c, a
 	ld a, b
 	cp d
@@ -300,9 +300,9 @@ SunMoon_GeneralMovement:
 	ld d, [hl]
 	ld hl, $2a
 	add hl, de
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	ld b, a
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	ld c, a
 	ld a, b
 	cp h
@@ -330,9 +330,9 @@ SunMoon_XMovement:
 	ld a, [hli]
 	ld e, a
 	ld d, [hl]
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	ld b, a
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	ld c, a
 	ld a, b
 	cp d

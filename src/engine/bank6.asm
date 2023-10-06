@@ -517,13 +517,13 @@ Func_1842a:
 	ld a, [wJoypadDown]
 	bit D_DOWN_F, a
 	jp z, Func_18032
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	and $f0
 	add $18
-	ld [wXPosLo], a
-	ld a, [wXPosHi]
+	ld [wWarioXPos + 1], a
+	ld a, [wWarioXPos + 0]
 	adc $00
-	ld [wXPosHi], a
+	ld [wWarioXPos + 0], a
 	jr .asm_1848e
 	ld a, [wc0da]
 	and a
@@ -541,10 +541,10 @@ Func_1842a:
 	ld a, [wJoypadDown]
 	bit D_DOWN_F, a
 	jp z, Func_18032
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	and $f0
 	add $08
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 .asm_1848e
 	ld a, ROOMTRANSITION_1 | ROOMTRANSITIONFLAG_2 | ROOMTRANSITIONFLAG_3
 	ld [wRoomTransitionParam], a
@@ -603,13 +603,13 @@ Func_184fc:
 	ld a, [wJoypadDown]
 	bit D_UP_F, a
 	jp z, Func_18032
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	and $f0
 	add $18
-	ld [wXPosLo], a
-	ld a, [wXPosHi]
+	ld [wWarioXPos + 1], a
+	ld a, [wWarioXPos + 0]
 	adc $00
-	ld [wXPosHi], a
+	ld [wWarioXPos + 0], a
 	jr .asm_18560
 	ld a, [wc0da]
 	and a
@@ -627,10 +627,10 @@ Func_184fc:
 	ld a, [wJoypadDown]
 	bit D_UP_F, a
 	jp z, Func_18032
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	and $f0
 	add $08
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 .asm_18560
 	ld a, ROOMTRANSITION_1 | ROOMTRANSITIONFLAG_2 | ROOMTRANSITIONFLAG_3
 	ld [wRoomTransitionParam], a
@@ -754,10 +754,10 @@ Func_1864e:
 ;	fallthrough
 
 Func_18676: 
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	and $f0
 	add $08
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 	play_sfx SFX_0E6
 
 	ld a, WST_ENTERING_DOOR
@@ -990,18 +990,18 @@ Func_18868:
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_18032
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	and $08
 	jr nz, .asm_1889e
 	ld a, [wCollisionBoxRight]
 	ld b, a
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	and $f0
 	sub b
-	ld [wXPosLo], a
-	ld a, [wXPosHi]
+	ld [wWarioXPos + 1], a
+	ld a, [wWarioXPos + 0]
 	sbc $00
-	ld [wXPosHi], a
+	ld [wWarioXPos + 0], a
 	jp Func_18032
 .asm_1889e
 	ld a, [wCollisionBoxLeft]
@@ -1009,13 +1009,13 @@ Func_18868:
 	ld a, $10
 	sub b
 	ld b, a
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	and $f0
 	add b
-	ld [wXPosLo], a
-	ld a, [wXPosHi]
+	ld [wWarioXPos + 1], a
+	ld a, [wWarioXPos + 0]
 	adc $00
-	ld [wXPosHi], a
+	ld [wWarioXPos + 0], a
 	jp Func_18032
 
 Func_188ba:
@@ -2922,7 +2922,7 @@ CheckBottomRightCollision:
 	ld a, [wCollisionBoxRight]
 	sub 1
 	ld c, a
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	add c
@@ -2950,7 +2950,7 @@ CheckBottomRightCollision:
 	ld a, [wCollisionBoxRight]
 	sub 1
 	ld c, a
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	add c
@@ -3000,7 +3000,7 @@ CheckBottomLeftCollision:
 	inc a
 	sub 1
 	ld c, a
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	sub c
@@ -3030,7 +3030,7 @@ CheckBottomLeftCollision:
 	inc a
 	sub 1
 	ld c, a
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	sub c
@@ -3081,7 +3081,7 @@ Func_19832:
 	jp nz, .asm_198c1
 	ld a, [wCollisionBoxTop]
 	ld b, a
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	add b
 	add 2
 	and $f0
@@ -3168,7 +3168,7 @@ CheckCentreCollision:
 	inc a
 	sub 3
 	ld c, a ; -wCollisionBoxLeft - 3
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	sub c
@@ -3191,7 +3191,7 @@ CheckCentreCollision:
 	ld a, [wCollisionBoxRight]
 	sub 3
 	ld c, a ; wCollisionBoxRight - 3
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	add c
@@ -3230,7 +3230,7 @@ Func_19942:
 	inc a
 	add 2
 	ld c, a
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	ld [de], a
@@ -3267,7 +3267,7 @@ CheckUpCollision:
 	inc a
 	sub 3
 	ld c, a
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	sub c
@@ -3302,7 +3302,7 @@ CheckUpCollision:
 	ld a, [wCollisionBoxRight]
 	sub 3
 	ld c, a
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	add c
@@ -3343,7 +3343,7 @@ CheckAirborneCollision:
 	inc a
 	sub 3
 	ld c, a
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	sub c
@@ -3377,7 +3377,7 @@ CheckAirborneCollision:
 	ld a, [wCollisionBoxRight]
 	sub 3
 	ld c, a
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	add c
@@ -3422,7 +3422,7 @@ Func_19a77:
 	inc a
 	sub $03
 	ld c, a
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	sub c
@@ -3450,7 +3450,7 @@ Func_19a77:
 	ld a, [wCollisionBoxRight]
 	sub $03
 	ld c, a
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	add c
@@ -3475,7 +3475,7 @@ Func_19a77:
 	ret
 
 Func_19acd:
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	ld [de], a
@@ -3493,7 +3493,7 @@ Func_19acd:
 	jr Func_19b3a
 
 Func_19ae4:
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	ld [de], a
@@ -3511,7 +3511,7 @@ Func_19ae4:
 	jr Func_19b3a
 
 Func_19afb:
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	ld [de], a
@@ -3535,7 +3535,7 @@ Func_19b12:
 
 ; collision on top
 Func_19b25:
-	ld hl, wXPosLo
+	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]
 	ld [de], a

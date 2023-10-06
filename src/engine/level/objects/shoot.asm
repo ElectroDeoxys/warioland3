@@ -117,13 +117,13 @@ ShootFunc:
 	ld l, OBJ_Y_POS
 	ld a, [hli]
 	add $10
-	ld [wYPosLo], a
-	ld a, [wYPosHi]
+	ld [wWarioYPos + 1], a
+	ld a, [wWarioYPos + 0]
 	adc $00
-	ld [wYPosHi], a
+	ld [wWarioYPos + 0], a
 	inc l
 	ld a, [hli]
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 	play_sfx SFX_FAT_WALK
 	ld l, OBJ_SUBSTATE
 	set OBJSUBFLAG_HDIR_F, [hl]
@@ -312,7 +312,7 @@ ShootFunc:
 	ld [hl], a
 .asm_5684a
 	ld hl, wCurObjSubState
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	cp $c0
 	jr nc, .asm_56863
 	ld b, a
@@ -406,12 +406,12 @@ ShootFunc:
 	ld l, OBJ_Y_POS
 	ld a, $f0
 	ld [hli], a
-	ld [wYPosLo], a
+	ld [wWarioYPos + 1], a
 	ld a, [hli]
-	ld [wYPosHi], a
+	ld [wWarioYPos + 0], a
 	ld a, [hli]
 	add $08
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 	ret
 
 .Func_568f1:
@@ -430,9 +430,9 @@ ShootFunc:
 	ld de, Frameset_69f54
 	jp SetObjectFramesetPtr
 .asm_56909
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	add $08
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 	play_sfx SFX_HANG_GRAB
 	ret
 
@@ -495,7 +495,7 @@ ShootFunc:
 	ret
 
 .Func_5698c:
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	cp $ed
 	jr nc, .asm_5699e
 	ld bc, Data_54010
@@ -503,7 +503,7 @@ ShootFunc:
 	ld b, $03
 	jp AddXOffset
 .asm_5699e
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	cp $f0
 	jr nc, .asm_569aa
 	ld b, $03
@@ -1356,16 +1356,16 @@ GKTortoiseFunc:
 	ld l, OBJ_Y_POS
 	ld a, [hli]
 	sub $10
-	ld [wYPosLo], a
+	ld [wWarioYPos + 1], a
 	ld a, [hli]
 	sbc $00
-	ld [wYPosHi], a
+	ld [wWarioYPos + 0], a
 	ld a, [hli]
 	sub $0b
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 	ld a, [hli]
 	sbc $00
-	ld [wXPosHi], a
+	ld [wWarioXPos + 0], a
 	ret
 
 .asm_56fd2
@@ -1446,14 +1446,14 @@ GKTortoiseFunc:
 	ld l, OBJ_Y_POS
 	ld a, [hli]
 	sub $16
-	ld [wYPosLo], a
+	ld [wWarioYPos + 1], a
 	ld a, [hli]
 	sbc $00
-	ld [wYPosHi], a
+	ld [wWarioYPos + 0], a
 	ld a, [hli]
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 	ld a, [hli]
-	ld [wXPosHi], a
+	ld [wWarioXPos + 0], a
 	ret
 .asm_57069
 	xor a
@@ -1679,43 +1679,43 @@ GKTortoiseFunc:
 .asm_571c7
 	ld hl, wCurObjYPos
 	ld a, [hli]
-	ld [wYPosLo], a
+	ld [wWarioYPos + 1], a
 	ld a, [hli]
-	ld [wYPosHi], a
+	ld [wWarioYPos + 0], a
 	ld a, [hli]
 	add $0c
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 	ld a, [hli]
 	adc $00
-	ld [wXPosHi], a
+	ld [wWarioXPos + 0], a
 	ret
 .asm_571df
 	ld hl, wCurObjYPos
 	ld a, [hli]
 	sub $16
-	ld [wYPosLo], a
+	ld [wWarioYPos + 1], a
 	ld a, [hli]
 	sbc $00
-	ld [wYPosHi], a
+	ld [wWarioYPos + 0], a
 	ld a, [hli]
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 	ld a, [hli]
-	ld [wXPosHi], a
+	ld [wWarioXPos + 0], a
 	ret
 .asm_571f7
 	ld hl, wCurObjYPos
 	ld a, [hli]
 	sub $10
-	ld [wYPosLo], a
+	ld [wWarioYPos + 1], a
 	ld a, [hli]
 	sbc $00
-	ld [wYPosHi], a
+	ld [wWarioYPos + 0], a
 	ld a, [hli]
 	sub $0b
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 	ld a, [hli]
 	sbc $00
-	ld [wXPosHi], a
+	ld [wWarioXPos + 0], a
 	ret
 
 Func_57213:

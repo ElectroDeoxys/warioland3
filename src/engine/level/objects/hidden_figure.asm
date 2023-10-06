@@ -992,16 +992,16 @@ HiddenFigureLeftHandFunc:
 	ld l, OBJ_Y_POS
 	ld a, [hli]
 	sub $01
-	ld [wYPosLo], a
+	ld [wWarioYPos + 1], a
 	ld a, [hli]
 	sbc $00
-	ld [wYPosHi], a
+	ld [wWarioYPos + 0], a
 	ld a, [hli]
 	add $06
-	ld [wXPosLo], a
+	ld [wWarioXPos + 1], a
 	ld a, [hli]
 	adc $00
-	ld [wXPosHi], a
+	ld [wWarioXPos + 0], a
 	ld l, OBJ_FLAGS
 	set OBJFLAG_PRIORITY_F, [hl]
 	ld de, Frameset_6a0f2

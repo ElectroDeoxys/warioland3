@@ -1620,7 +1620,7 @@ Func_61f10:
 	xor a
 	call ClearObjects
 	call ClearObjDataPointers
-	ld [w1d140], a
+	ld [wFlameBlockCleared], a
 	ld [w1d141], a
 	ld [w1d142], a
 	ld [wNumLitTorches], a
@@ -1680,16 +1680,16 @@ Func_61f54::
 	sub e
 	ld e, a ; = 26 if smash attacking, 30 otherwise
 	ld hl, wCurObjYPos
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	sub e
 	ld [hli], a ; y
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	sbc 0
 	ld [hli], a
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	add 7
 	ld [hli], a ; x
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	adc 0
 	ld [hl], a
 
@@ -1765,18 +1765,18 @@ Func_61f54::
 	ld hl, hffa0
 	ld a, c
 	cp $80
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	jr nc, .negative_y
 	add c
 	ld [hli], a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	jr nc, .got_hi_y
 	inc a
 	jr .got_hi_y
 .negative_y
 	add c
 	ld [hli], a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	jr c, .got_hi_y
 	dec a
 .got_hi_y
@@ -1785,18 +1785,18 @@ Func_61f54::
 
 	ld a, b
 	cp $80
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	jr nc, .negative_x
 	add b
 	ld [hli], a
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	jr nc, .got_hi_x
 	inc a
 	jr .got_hi_x
 .negative_x
 	add b
 	ld [hli], a
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	jr c, .got_hi_x
 	dec a
 .got_hi_x
@@ -1887,16 +1887,16 @@ Func_620a6::
 	sub e
 	ld e, a ; = 26 if smash attacking, 30 otherwise
 	ld hl, wCurObjYPos
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	sub e
 	ld [hli], a ; y
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	sbc 0
 	ld [hli], a
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	sub 7
 	ld [hli], a ; x
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	sbc 0
 	ld [hl], a
 
@@ -1972,18 +1972,18 @@ Func_620a6::
 	ld hl, hffa0
 	ld a, c
 	cp $80
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	jr nc, .negative_y
 	add c
 	ld [hli], a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	jr nc, .got_hi_y
 	inc a
 	jr .got_hi_y
 .negative_y
 	add c
 	ld [hli], a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	jr c, .got_hi_y
 	dec a
 .got_hi_y
@@ -1992,18 +1992,18 @@ Func_620a6::
 
 	ld a, b
 	cp $80
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	jr nc, .negative_x
 	add b
 	ld [hli], a
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	jr nc, .got_hi_x
 	inc a
 	jr .got_hi_x
 .negative_x
 	add b
 	ld [hli], a
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	jr c, .got_hi_x
 	dec a
 .got_hi_x
@@ -2119,16 +2119,16 @@ Func_621fb::
 	sub e
 	ld e, a ; 26 if smash attacking, 30 otherwise
 	ld hl, wCurObjYPos
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	sub e
 	ld [hli], a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	sbc 0
 	ld [hli], a
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	add 7
 	ld [hli], a
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	adc 0
 	ld [hl], a
 	ld a, [wCurObjCollBoxTop]
@@ -2228,16 +2228,16 @@ Func_622bd::
 	sub e
 	ld e, a ; 26 if smash attacking, 30 otherwise
 	ld hl, wCurObjYPos
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	sub e
 	ld [hli], a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	sbc 0
 	ld [hli], a
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	sub 7
 	ld [hli], a
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	sbc 0
 	ld [hl], a
 	ld a, [wCurObjCollBoxTop]
@@ -2325,32 +2325,32 @@ Func_62382::
 	sub e
 	ld e, a
 	ld hl, wCurObjYPos
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	sub e
 	ld [hli], a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	sbc 0
 	ld [hli], a
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	sub 7
 	ld [hli], a
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	sbc 0
 	ld [hl], a
 	jp HomeJumpRet
 
 .HoldFullCharge
 	ld hl, hffa0
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	sub 30
 	ld [hli], a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	sbc 0
 	ld [hli], a
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	add 5
 	ld [hli], a
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	adc 0
 	ld [hli], a
 	ld hl, hffa0
@@ -2471,32 +2471,32 @@ Func_6247b::
 	sub e
 	ld e, a
 	ld hl, wCurObjYPos
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	sub e
 	ld [hli], a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	sbc 0
 	ld [hli], a
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	add 7
 	ld [hli], a
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	adc 0
 	ld [hl], a
 	jp HomeJumpRet
 
 .HoldFullCharge
 	ld hl, hffa0
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	sub 30
 	ld [hli], a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	sbc 0
 	ld [hli], a
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	sub 5
 	ld [hli], a
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	sbc 0
 	ld [hli], a
 	ld hl, hffa0
@@ -4367,7 +4367,7 @@ CheckObjectOnScreen:
 ; bc = y pos
 ; de = x pos
 
-	ld hl, wcac4
+	ld hl, wCameraSCY
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
@@ -4417,7 +4417,7 @@ CheckObjectOnScreen:
 	jr nc, .asm_630fd
 
 .skip_y2
-	ld hl, wcac6
+	ld hl, wCameraSCX
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
@@ -4523,7 +4523,7 @@ CheckObjectOnScreen:
 	jr nc, .asm_6317e
 
 .asm_63147
-	ld hl, wcac6
+	ld hl, wCameraSCX
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a

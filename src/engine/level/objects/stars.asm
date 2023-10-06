@@ -10,15 +10,15 @@ Func_4c860:
 
 StarsFunc_WithYOffset:
 	ld hl, wCurObjYPos
-	ld a, [wYPosLo]
+	ld a, [wWarioYPos + 1]
 	add 4
 	ld [hli], a
-	ld a, [wYPosHi]
+	ld a, [wWarioYPos + 0]
 	adc 0
 	ld [hli], a
-	ld a, [wXPosLo]
+	ld a, [wWarioXPos + 1]
 	ld [hli], a
-	ld a, [wXPosHi]
+	ld a, [wWarioXPos + 0]
 	ld [hli], a
 ;	fallthrough
 
