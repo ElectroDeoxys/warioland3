@@ -124,7 +124,7 @@ SECTION "Enemy Gfx 2 Slot 1", ROMX
 
 Anonster1Gfx::    INCBIN "gfx/enemies/anonster1.2bpp.lz"
 DollBoy1Gfx::     INCBIN "gfx/enemies/doll_boy1.2bpp.lz"
-Wormwould1Gfx::   INCBIN "gfx/enemies/wormwould1_matching.2bpp.lz"
+Wormwould1Gfx::   INCBIN "gfx/enemies/wormwould1.2bpp.lz"
 YellowBelly1Gfx:: INCBIN "gfx/enemies/yellow_belly1.2bpp.lz"
 Pesce1Gfx::       INCBIN "gfx/enemies/pesce1.2bpp.lz"
 Scowler1Gfx::     INCBIN "gfx/enemies/scowler1.2bpp.lz"
@@ -136,14 +136,14 @@ Shoot1Gfx::       INCBIN "gfx/enemies/shoot1.2bpp.lz"
 
 SECTION "Enemy Gfx 2 Slot 2", ROMX
 
-Anonster2Gfx::    INCBIN "gfx/enemies/anonster2_matching.2bpp.lz"
+Anonster2Gfx::    INCBIN "gfx/enemies/anonster2.2bpp.lz"
 DollBoy2Gfx::     INCBIN "gfx/enemies/doll_boy2.2bpp.lz"
 Wormwould2Gfx::   INCBIN "gfx/enemies/wormwould2.2bpp.lz"
 YellowBelly2Gfx:: INCBIN "gfx/enemies/yellow_belly2.2bpp.lz"
 Pesce2Gfx::       INCBIN "gfx/enemies/pesce2.2bpp.lz"
-Scowler2Gfx::     INCBIN "gfx/enemies/scowler2_matching.2bpp.lz"
+Scowler2Gfx::     INCBIN "gfx/enemies/scowler2.2bpp.lz"
 Jamano2Gfx::      INCBIN "gfx/enemies/jamano2.2bpp.lz"
-Muddee2Gfx::      INCBIN "gfx/enemies/muddee2_matching.2bpp.lz"
+Muddee2Gfx::      INCBIN "gfx/enemies/muddee2.2bpp.lz"
 Wolfenboss2Gfx::  INCBIN "gfx/enemies/wolfenboss2.2bpp.lz"
 Shoot2Gfx::       INCBIN "gfx/enemies/shoot2.2bpp.lz"
 

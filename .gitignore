@@ -24,6 +24,7 @@
 *.1bpp
 *.2bpp
 *.pal
+*.lz
 
 # *disasm.py output file
 *output.asm
