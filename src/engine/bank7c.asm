@@ -1106,7 +1106,7 @@ Func_1f08f4:
 	jp Init
 
 LoadFontTiles:
-	ld hl, FontGFX
+	ld hl, FontGfx
 	ld bc, v0Tiles0
 	call Decompress
 	ret
@@ -3671,7 +3671,7 @@ Frameset_1f1d4c:
 	db $34,  4
 	db $ff
 
-FontGFX: INCBIN "gfx/font.2bpp.lz"
+FontGfx: INCBIN "gfx/font.2bpp.lz"
 
 GBIncompatibleGfx: INCBIN "gfx/gb_incompatible.2bpp.lz"
 BGMap_1f34d6: INCBIN "gfx/bgmaps/map_1f34d6.bin"

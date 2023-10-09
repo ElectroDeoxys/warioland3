@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <errno.h>
 
-const unsigned MAX_FILE_SIZE = 0x4000;
+const unsigned MAX_FILE_SIZE = 0x8000;
 
 enum Mode
 {

@@ -1752,7 +1752,7 @@ _InitTempleScene:
 	ld hl, Pals_86a4d
 	ld b, BANK(Pals_86a4d)
 	call LoadFarPalsToTempPals1
-	decompress_vram1 FontGFX, v1Tiles0
+	decompress_vram1 FontGfx, v1Tiles0
 	ld hl, BGMap_b0780
 	ld b, BANK(BGMap_b0780)
 	call LoadFarTiles
@@ -4459,7 +4459,7 @@ _InitPrologueSequence:
 	ld b, BANK(PrologueBackgroundGfx)
 	call LoadFarTiles
 
-	decompress_vram1 FontGFX, v1Tiles0
+	decompress_vram1 FontGfx, v1Tiles0
 	decompress_vram1 PrologueGfx, v1Tiles0
 	decompress_vram1 BGMap_b3a5b, v1BGMap0
 	decompress_vram0 BGMap_b3a03, v0BGMap0
@@ -4474,10 +4474,10 @@ _InitPrologueSequence:
 	and a
 	jr z, .japanese
 ; english
-	decompress_vram0 Data_b37f9, wTileBuffer
+	decompress_vram0 BGMap_b37f9, wTileBuffer
 	jr .asm_adf63
 .japanese
-	decompress_vram0 Data_b3675, wTileBuffer
+	decompress_vram0 BGMap_b3675, wTileBuffer
 .asm_adf63
 	call FillClearedTextBuffer
 
@@ -6785,7 +6785,7 @@ _InitEpilogue:
 	call WriteAToHL_BCTimes
 
 	decompress_vram0 EpilogueGfx, v0Tiles0
-	decompress_vram1 FontGFX, v1Tiles0
+	decompress_vram1 FontGfx, v1Tiles0
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
@@ -6872,7 +6872,7 @@ Func_af01f:
 	ld b, BANK(Pals_86b1d)
 	call CopyFarBytes
 
-	decompress_vram1 FontGFX, v1Tiles0
+	decompress_vram1 FontGfx, v1Tiles0
 	decompress_vram1 BGMap_15cf40, v1BGMap0
 	decompress_vram0 BGMap_15cd00, v0BGMap0
 

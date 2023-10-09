@@ -40,6 +40,8 @@ wl3: $(rom) compare
 
 clean: tidy
 	find src/gfx \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pal' -o -iname '*.lz' \) -delete
+	find src/text \( -iname '*.lz' \) -delete
+	find src/data \( -iname '*.lz' \) -delete
 
 tidy:
 	rm -f $(rom) $(rom_obj) $(rom:.gbc=.map) $(rom:.gbc=.sym) src/rgbdscheck.o
@@ -113,6 +115,11 @@ src/gfx/golf/golf.2bpp.lz: tools/compressor += --no-trailing-repeat
 src/gfx/golf/golf_lobby.2bpp.lz: tools/compressor += --no-trailing-repeat
 src/gfx/misc/action_help_objects1.2bpp.lz: tools/compressor += --force-trailing-repeat
 src/gfx/misc/action_help_objects2.2bpp.lz: tools/compressor += --force-trailing-repeat
+
+src/gfx/bgmaps/map_b34c3.bin.lz: tools/compressor += --force-trailing-copy
+
+src/text/text_b232f.bin.lz: tools/compressor += --force-trailing-copy
+src/text/text_b2424.bin.lz: tools/compressor += --force-trailing-copy
 
 ### Catch-all graphics rules
 
