@@ -34,9 +34,9 @@ int main(int argc, char *argv[])
     char *inFilename = (char*) malloc((strlen(argv[argc - 1]) + 1) * sizeof(char));
     strcpy(inFilename, argv[argc - 1]);
 
-    char *outFilename = (char*) malloc((strlen(inFilename) + 4) * sizeof(char));
+    char *outFilename = (char*) malloc((strlen(inFilename) + 4 + 1) * sizeof(char));
     strcpy(outFilename, inFilename);
-    strcat(outFilename, ".lz");
+    strcat(outFilename, ".rle");
 
     FILE *fi = fopen(inFilename, "rb");
 

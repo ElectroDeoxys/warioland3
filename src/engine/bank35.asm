@@ -2243,7 +2243,7 @@ Pals_d50e4:
 	rgb  0,  0,  0
 
 ; TODO in its own section to be added to golf.o?
-GolfMenuGfx:: INCBIN "gfx/golf/golf_menu.2bpp.lz"
+GolfMenuGfx:: INCBIN "gfx/golf/golf_menu.2bpp.rle"
 
 BGMap_d63fd:
 INCBIN "gfx/bgmaps/map_d63fd.bin"

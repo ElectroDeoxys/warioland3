@@ -470,7 +470,7 @@ Pals_db549:
 	rgb  0,  0,  0
 	rgb  0,  0,  0
 
-GameOverGfx: INCBIN "gfx/game_over.2bpp.lz"
+GameOverGfx: INCBIN "gfx/game_over.2bpp.rle"
 
 BGMap_dbaee: INCBIN "gfx/bgmaps/map_dbaee.bin"
 BGMap_dbb8f: INCBIN "gfx/bgmaps/map_dbb8f.bin"

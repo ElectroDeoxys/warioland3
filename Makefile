@@ -39,9 +39,9 @@ all: $(rom) compare
 wl3: $(rom) compare
 
 clean: tidy
-	find src/gfx \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pal' -o -iname '*.lz' \) -delete
-	find src/text \( -iname '*.lz' \) -delete
-	find src/data \( -iname '*.lz' \) -delete
+	find src/gfx \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pal' -o -iname '*.rle' \) -delete
+	find src/text \( -iname '*.rle' \) -delete
+	find src/data \( -iname '*.rle' \) -delete
 
 tidy:
 	rm -f $(rom) $(rom_obj) $(rom:.gbc=.map) $(rom:.gbc=.sym) src/rgbdscheck.o
@@ -94,36 +94,36 @@ $(rom): $(rom_obj) src/layout.link
 
 ### Compression exceptions for matching purposes
 
-src/gfx/overworld/overworld5.2bpp.lz: tools/compressor += --no-trailing-repeat
-src/gfx/enemies/prince_froggy.2bpp.lz: tools/compressor += --no-trailing-repeat
-src/gfx/enemies/webber.2bpp.lz: tools/compressor += --no-trailing-repeat
-src/gfx/enemies/count_richtertoffen.2bpp.lz: tools/compressor += --force-trailing-copy
-src/gfx/enemies/para_goom.2bpp.lz: tools/compressor += --no-trailing-repeat
-src/gfx/enemies/fire_bot.2bpp.lz: tools/compressor += --no-trailing-repeat
-src/gfx/enemies/togeba.2bpp.lz: tools/compressor += --force-trailing-repeat
-src/gfx/enemies/octohon.2bpp.lz: tools/compressor += --no-trailing-repeat
-src/gfx/enemies/anonster1.2bpp.lz: tools/compressor += --no-trailing-repeat
-src/gfx/enemies/wormwould1.2bpp.lz: tools/compressor += --force-trailing-copy
-src/gfx/enemies/anonster2.2bpp.lz: tools/compressor += --no-trailing-repeat
-src/gfx/enemies/scowler2.2bpp.lz: tools/compressor += --no-trailing-repeat
-src/gfx/enemies/muddee2.2bpp.lz: tools/compressor += --force-trailing-copy
-src/gfx/enemies/shoot2.2bpp.lz: tools/compressor += --no-trailing-repeat
-src/gfx/enemies/anonster3.2bpp.lz: tools/compressor += --no-trailing-repeat
-src/gfx/enemies/shoot3.2bpp.lz: tools/compressor += --no-trailing-repeat
-src/gfx/enemies/anonster4.2bpp.lz: tools/compressor += --no-trailing-repeat
-src/gfx/golf/golf.2bpp.lz: tools/compressor += --no-trailing-repeat
-src/gfx/golf/golf_lobby.2bpp.lz: tools/compressor += --no-trailing-repeat
-src/gfx/misc/action_help_objects1.2bpp.lz: tools/compressor += --force-trailing-repeat
-src/gfx/misc/action_help_objects2.2bpp.lz: tools/compressor += --force-trailing-repeat
+src/gfx/overworld/overworld5.2bpp.rle: tools/compressor += --no-trailing-repeat
+src/gfx/enemies/prince_froggy.2bpp.rle: tools/compressor += --no-trailing-repeat
+src/gfx/enemies/webber.2bpp.rle: tools/compressor += --no-trailing-repeat
+src/gfx/enemies/count_richtertoffen.2bpp.rle: tools/compressor += --force-trailing-copy
+src/gfx/enemies/para_goom.2bpp.rle: tools/compressor += --no-trailing-repeat
+src/gfx/enemies/fire_bot.2bpp.rle: tools/compressor += --no-trailing-repeat
+src/gfx/enemies/togeba.2bpp.rle: tools/compressor += --force-trailing-repeat
+src/gfx/enemies/octohon.2bpp.rle: tools/compressor += --no-trailing-repeat
+src/gfx/enemies/anonster1.2bpp.rle: tools/compressor += --no-trailing-repeat
+src/gfx/enemies/wormwould1.2bpp.rle: tools/compressor += --force-trailing-copy
+src/gfx/enemies/anonster2.2bpp.rle: tools/compressor += --no-trailing-repeat
+src/gfx/enemies/scowler2.2bpp.rle: tools/compressor += --no-trailing-repeat
+src/gfx/enemies/muddee2.2bpp.rle: tools/compressor += --force-trailing-copy
+src/gfx/enemies/shoot2.2bpp.rle: tools/compressor += --no-trailing-repeat
+src/gfx/enemies/anonster3.2bpp.rle: tools/compressor += --no-trailing-repeat
+src/gfx/enemies/shoot3.2bpp.rle: tools/compressor += --no-trailing-repeat
+src/gfx/enemies/anonster4.2bpp.rle: tools/compressor += --no-trailing-repeat
+src/gfx/golf/golf.2bpp.rle: tools/compressor += --no-trailing-repeat
+src/gfx/golf/golf_lobby.2bpp.rle: tools/compressor += --no-trailing-repeat
+src/gfx/misc/action_help_objects1.2bpp.rle: tools/compressor += --force-trailing-repeat
+src/gfx/misc/action_help_objects2.2bpp.rle: tools/compressor += --force-trailing-repeat
 
-src/gfx/bgmaps/map_b34c3.bin.lz: tools/compressor += --force-trailing-copy
+src/gfx/bgmaps/map_b34c3.bin.rle: tools/compressor += --force-trailing-copy
 
-src/text/text_b232f.bin.lz: tools/compressor += --force-trailing-copy
-src/text/text_b2424.bin.lz: tools/compressor += --force-trailing-copy
+src/text/text_b232f.bin.rle: tools/compressor += --force-trailing-copy
+src/text/text_b2424.bin.rle: tools/compressor += --force-trailing-copy
 
 ### Catch-all graphics rules
 
-%.lz: %
+%.rle: %
 	tools/compressor $(tools/compressor) $<
 
 %.pal: ;

@@ -3750,52 +3750,52 @@ Data_85b48:
 	db $00
 
 BGMap_85b91::
-	INCBIN "gfx/bgmaps/map_85b91.bin.lz"
+	INCBIN "gfx/bgmaps/map_85b91.bin.rle"
 
 BGMap_85bc4::
-	INCBIN "gfx/bgmaps/map_85bc4.bin.lz"
+	INCBIN "gfx/bgmaps/map_85bc4.bin.rle"
 
 BGMap_85bef::
-	INCBIN "gfx/bgmaps/map_85bef.bin.lz"
+	INCBIN "gfx/bgmaps/map_85bef.bin.rle"
 
 BGMap_85d79::
-	INCBIN "gfx/bgmaps/map_85d79.bin.lz"
+	INCBIN "gfx/bgmaps/map_85d79.bin.rle"
 
 BGMap_85ea7::
-	INCBIN "gfx/bgmaps/map_85ea7.bin.lz"
+	INCBIN "gfx/bgmaps/map_85ea7.bin.rle"
 
 BGMap_85eda::
-	INCBIN "gfx/bgmaps/map_85eda.bin.lz"
+	INCBIN "gfx/bgmaps/map_85eda.bin.rle"
 
 BGMap_85f07::
-	INCBIN "gfx/bgmaps/map_85f07.bin.lz"
+	INCBIN "gfx/bgmaps/map_85f07.bin.rle"
 
 BGMap_860ff::
-	INCBIN "gfx/bgmaps/map_860ff.bin.lz"
+	INCBIN "gfx/bgmaps/map_860ff.bin.rle"
 
 BGMap_86292::
-	INCBIN "gfx/bgmaps/map_86292.bin.lz"
+	INCBIN "gfx/bgmaps/map_86292.bin.rle"
 
 BGMap_86417::
-	INCBIN "gfx/bgmaps/map_86417.bin.lz"
+	INCBIN "gfx/bgmaps/map_86417.bin.rle"
 
 BGMap_86546::
-	INCBIN "gfx/bgmaps/map_86546.bin.lz"
+	INCBIN "gfx/bgmaps/map_86546.bin.rle"
 
 BGMap_86700::
-	INCBIN "gfx/bgmaps/map_86700.bin.lz"
+	INCBIN "gfx/bgmaps/map_86700.bin.rle"
 
 BGMap_86868::
-	INCBIN "gfx/bgmaps/map_86868.bin.lz"
+	INCBIN "gfx/bgmaps/map_86868.bin.rle"
 
 BGMap_868b2::
-	INCBIN "gfx/bgmaps/map_868b2.bin.lz"
+	INCBIN "gfx/bgmaps/map_868b2.bin.rle"
 
 BGMap_868f5::
-	INCBIN "gfx/bgmaps/map_868f5.bin.lz"
+	INCBIN "gfx/bgmaps/map_868f5.bin.rle"
 
 BGMap_86929::
-	INCBIN "gfx/bgmaps/map_86929.bin.lz"
+	INCBIN "gfx/bgmaps/map_86929.bin.rle"
 
 Pals_8694d:
 	rgb 31, 31, 31

@@ -2501,10 +2501,10 @@ Pals_5042:
 	rgb 13,  7, 10
 
 TitleScreenGfx:
-INCBIN "gfx/intro/title_screen.2bpp.lz"
+INCBIN "gfx/intro/title_screen.2bpp.rle"
 
 PlaneGfx:
-INCBIN "gfx/intro/plane.2bpp.lz"
+INCBIN "gfx/intro/plane.2bpp.rle"
 
 BGMap_697a:
 INCBIN "gfx/bgmaps/map_697a.bin"

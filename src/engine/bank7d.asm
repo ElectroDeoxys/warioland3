@@ -296,7 +296,7 @@ Pals_1f41c2:
 	rgb  0,  0,  0
 
 PauseMenuGfx:
-INCBIN "gfx/pause/pause_menu.2bpp.lz"
+INCBIN "gfx/pause/pause_menu.2bpp.rle"
 
 ActionHelpOwlGfx:
 INCBIN "gfx/pause/action_help_owl.2bpp"
@@ -361,7 +361,7 @@ Pals_1f628c:
 	rgb 28,  0,  4
 
 SaveBoxGfx:
-INCBIN "gfx/save_box.2bpp.lz"
+INCBIN "gfx/save_box.2bpp.rle"
 
 BGMap_1f6949:
 INCBIN "gfx/bgmaps/map_1f6949.bin"

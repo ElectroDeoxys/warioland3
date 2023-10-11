@@ -740,10 +740,10 @@ Pals_1e0438:
 	rgb 31,  0,  0
 
 ClearScreen1Gfx:
-INCBIN "gfx/pause/clear_screen1.2bpp.lz"
+INCBIN "gfx/pause/clear_screen1.2bpp.rle"
 
 ClearScreen2Gfx:
-INCBIN "gfx/pause/clear_screen2.2bpp.lz"
+INCBIN "gfx/pause/clear_screen2.2bpp.rle"
 
 BGMap_1e17fa:
 INCBIN "gfx/bgmaps/map_1e17fa.bin"

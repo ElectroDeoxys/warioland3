@@ -1,5 +1,5 @@
-GolfGfx:     INCBIN "gfx/golf/golf.2bpp.lz"
-GolfFlagGfx: INCBIN "gfx/golf/golf_flag.2bpp.lz"
+GolfGfx:     INCBIN "gfx/golf/golf.2bpp.rle"
+GolfFlagGfx: INCBIN "gfx/golf/golf_flag.2bpp.rle"
 
 BGMap_1c15c5: INCBIN "gfx/bgmaps/map_1c15c5.bin"
 BGMap_1c1651: INCBIN "gfx/bgmaps/map_1c1651.bin"

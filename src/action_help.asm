@@ -24,9 +24,9 @@ INCLUDE "engine/action_help/power_ups/vampire.asm"
 INCLUDE "engine/action_help/common2.asm"
 INCLUDE "gfx/pals/action_help.asm"
 
-ActionHelpHUDGfx:      INCBIN "gfx/misc/action_help_hud.2bpp.lz"
-ActionHelpObjects1Gfx: INCBIN "gfx/misc/action_help_objects1.2bpp.lz"
-ActionHelpObjects2Gfx: INCBIN "gfx/misc/action_help_objects2.2bpp.lz"
+ActionHelpHUDGfx:      INCBIN "gfx/misc/action_help_hud.2bpp.rle"
+ActionHelpObjects1Gfx: INCBIN "gfx/misc/action_help_objects1.2bpp.rle"
+ActionHelpObjects2Gfx: INCBIN "gfx/misc/action_help_objects2.2bpp.rle"
 
 BGMap_1e6796: INCBIN "gfx/bgmaps/map_1e6796.bin"
 BGMap_1e68bd: INCBIN "gfx/bgmaps/map_1e68bd.bin"

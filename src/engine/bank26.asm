@@ -309,16 +309,16 @@ NumbersGfx:
 INCBIN "gfx/gui/numbers.2bpp"
 
 TreasureCollectionGfx:
-INCBIN "gfx/gui/treasure_collection.2bpp.lz"
+INCBIN "gfx/gui/treasure_collection.2bpp.rle"
 
 TreasureCollectionCursorGfx:
-INCBIN "gfx/gui/treasure_collection_cursor.2bpp.lz"
+INCBIN "gfx/gui/treasure_collection_cursor.2bpp.rle"
 
 BGMap_9a129:
-INCBIN "gfx/bgmaps/map_9a129.bin.lz"
+INCBIN "gfx/bgmaps/map_9a129.bin.rle"
 
 BGMap_9a2ac:
-INCBIN "gfx/bgmaps/map_9a2ac.bin.lz"
+INCBIN "gfx/bgmaps/map_9a2ac.bin.rle"
 
 DrawCoinCount:
 	ld de, v0Tiles1 + $a0

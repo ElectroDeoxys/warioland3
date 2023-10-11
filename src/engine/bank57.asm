@@ -6,14 +6,14 @@ BGMap_15cd00: INCBIN "gfx/bgmaps/map_15cd00.bin"
 BGMap_15ce81: INCBIN "gfx/bgmaps/map_15ce81.bin"
 BGMap_15cf40: INCBIN "gfx/bgmaps/map_15cf40.bin"
 BGMap_15cfe1: INCBIN "gfx/bgmaps/map_15cfe1.bin" ; unreferenced
-EpilogueGfx: INCBIN "gfx/epilogue.2bpp.lz"
+EpilogueGfx: INCBIN "gfx/epilogue.2bpp.rle"
 
-BGMap_15df9b: INCBIN "gfx/bgmaps/map_15df9b.bin.lz"
-BGMap_15dff8: INCBIN "gfx/bgmaps/map_15dff8.bin.lz"
+BGMap_15df9b: INCBIN "gfx/bgmaps/map_15df9b.bin.rle"
+BGMap_15dff8: INCBIN "gfx/bgmaps/map_15dff8.bin.rle"
 
-Text_15e06b: INCBIN "text/text_15e06b.bin.lz"
+Text_15e06b: INCBIN "text/text_15e06b.bin.rle"
 Text_15e212: INCBIN "text/text_15e212.bin" ; unreferenced
-Text_15e225: INCBIN "text/text_15e225.bin.lz"
+Text_15e225: INCBIN "text/text_15e225.bin.rle"
 Text_15e437: INCBIN "text/text_15e437.bin" ; unreferenced
 
 OAM_15e44a:

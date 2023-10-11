@@ -893,8 +893,8 @@ Pals_16060c:
 	rgb 20,  2, 31
 	rgb  0,  0,  0
 
-CreditsFontGfx:     INCBIN "gfx/credits_font.2bpp.lz"
-CreditsMusicBoxGfx: INCBIN "gfx/credits_music_box.2bpp.lz"
+CreditsFontGfx:     INCBIN "gfx/credits_font.2bpp.rle"
+CreditsMusicBoxGfx: INCBIN "gfx/credits_music_box.2bpp.rle"
 
 BGMap_161744: INCBIN "gfx/bgmaps/map_161744.bin"
 BGMap_16179c: INCBIN "gfx/bgmaps/map_16179c.bin"

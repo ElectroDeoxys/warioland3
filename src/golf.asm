@@ -23,7 +23,7 @@ BGMap_1c4d83: INCBIN "gfx/bgmaps/map_1c4d83.bin"
 
 BGMap_1c4ea8: INCBIN "gfx/bgmaps/map_1c4ea8.bin"
 
-GolfLobbyGfx: INCBIN "gfx/golf/golf_lobby.2bpp.lz"
+GolfLobbyGfx: INCBIN "gfx/golf/golf_lobby.2bpp.rle"
 
 BGMap_1c5b4e: INCBIN "gfx/bgmaps/map_1c5b4e.bin"
 BGMap_1c5cbe: INCBIN "gfx/bgmaps/map_1c5cbe.bin"

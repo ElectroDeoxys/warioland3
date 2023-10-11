@@ -332,7 +332,7 @@ Pals_dc1fb:
 	rgb 31,  0, 29
 	rgb 19,  0, 29
 
-PerfectGfx: INCBIN "gfx/perfect.2bpp.lz"
+PerfectGfx: INCBIN "gfx/perfect.2bpp.rle"
 
 BGMap_dd417: INCBIN "gfx/bgmaps/map_dd417.bin"
 BGMap_dd5b5: INCBIN "gfx/bgmaps/map_dd5b5.bin"

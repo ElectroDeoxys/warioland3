@@ -764,13 +764,13 @@ def export_palette(palette, filename):
             out.write(text)
 
 
-def png_to_lz(filein):
+def png_to_rle(filein):
 
     name = os.path.splitext(filein)[0]
 
     export_png_to_2bpp(filein)
     image = open(name+'.2bpp', 'rb').read()
-    to_file(name+'.2bpp'+'.lz', Compressed(image).output)
+    to_file(name+'.2bpp'+'.rle', Compressed(image).output)
 
 
 def convert_2bpp_to_1bpp(data):
@@ -835,7 +835,7 @@ def png_to_1bpp(filename, **kwargs):
     return convert_2bpp_to_1bpp(image)
 
 
-def export_lz_to_png(filename, fileout=None):
+def export_rle_to_png(filename, fileout=None):
 
     if fileout == None:
         fileout = os.path.splitext(filename)[0]
@@ -911,11 +911,11 @@ def convert_to_png(filenames=[]):
         else:
             raise Exception, "Don't know how to convert {} to png!".format(filename)
 
-def convert_lz_to_png(filenames=[]):
+def convert_rle_to_png(filenames=[]):
     for filename in filenames:
         name, extension = os.path.splitext(filename)
-        if extension == '.lz':
-            export_lz_to_png(filename)
+        if extension == '.rle':
+            export_rle_to_png(filename)
         else:
             raise Exception, "Don't know how to convert {} to png!".format(filename)
 
@@ -929,7 +929,7 @@ def main():
         '2bpp': convert_to_2bpp,
         '1bpp': convert_to_1bpp,
         'png':  convert_to_png,
-        'lz' : convert_lz_to_png
+        'rle' : convert_rle_to_png
     }.get(args.mode, None)
 
     if method == None:

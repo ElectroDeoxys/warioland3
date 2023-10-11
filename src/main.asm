@@ -247,15 +247,15 @@ INCLUDE "engine/bank21.asm"
 
 SECTION "Bank 22", ROMX
 
-Overworld1Gfx: INCBIN "gfx/overworld/overworld1.2bpp.lz"
-Overworld2Gfx: INCBIN "gfx/overworld/overworld2.2bpp.lz"
-Overworld3Gfx: INCBIN "gfx/overworld/overworld3.2bpp.lz"
-Overworld4Gfx: INCBIN "gfx/overworld/overworld4.2bpp.lz"
-OverworldRocksGfx: INCBIN "gfx/overworld/overworld_rocks.2bpp.lz"
-OverworldCommonGfx: INCBIN "gfx/overworld/overworld_common.2bpp.lz"
-OverworldArrowsGfx: INCBIN "gfx/overworld/overworld_arrows.2bpp.lz"
-OverworldGlowGfx: INCBIN "gfx/overworld/overworld_glow.2bpp.lz"
-OverworldNumbersGfx: INCBIN "gfx/overworld/overworld_numbers.2bpp.lz"
+Overworld1Gfx: INCBIN "gfx/overworld/overworld1.2bpp.rle"
+Overworld2Gfx: INCBIN "gfx/overworld/overworld2.2bpp.rle"
+Overworld3Gfx: INCBIN "gfx/overworld/overworld3.2bpp.rle"
+Overworld4Gfx: INCBIN "gfx/overworld/overworld4.2bpp.rle"
+OverworldRocksGfx: INCBIN "gfx/overworld/overworld_rocks.2bpp.rle"
+OverworldCommonGfx: INCBIN "gfx/overworld/overworld_common.2bpp.rle"
+OverworldArrowsGfx: INCBIN "gfx/overworld/overworld_arrows.2bpp.rle"
+OverworldGlowGfx: INCBIN "gfx/overworld/overworld_glow.2bpp.rle"
+OverworldNumbersGfx: INCBIN "gfx/overworld/overworld_numbers.2bpp.rle"
 
 DebugUnknownTextGfx: INCBIN "gfx/debug_unknown_text.2bpp"
 
@@ -266,17 +266,17 @@ ENDR
 
 SECTION "Bank 23", ROMX
 
-Overworld5Gfx: INCBIN "gfx/overworld/overworld5.2bpp.lz"
-OverworldThunderGfx: INCBIN "gfx/overworld/overworld_thunder.2bpp.lz"
-OverworldTowerGfx: INCBIN "gfx/overworld/overworld_tower.2bpp.lz"
-OverworldFanGfx: INCBIN "gfx/overworld/overworld_fan.2bpp.lz"
-OverworldExplosion1Gfx: INCBIN "gfx/overworld/overworld_explosion1.2bpp.lz"
-Overworld6Gfx: INCBIN "gfx/overworld/overworld6.2bpp.lz"
-OverworldExplosion2Gfx: INCBIN "gfx/overworld/overworld_explosion2.2bpp.lz"
-OverworldFireGfx: INCBIN "gfx/overworld/overworld_fire.2bpp.lz"
-OverworldTorchGfx: INCBIN "gfx/overworld/overworld_torch.2bpp.lz"
-OverworldExplosion3Gfx: INCBIN "gfx/overworld/overworld_explosion3.2bpp.lz"
-OverworldSmokeGfx: INCBIN "gfx/overworld/overworld_smoke.2bpp.lz"
+Overworld5Gfx: INCBIN "gfx/overworld/overworld5.2bpp.rle"
+OverworldThunderGfx: INCBIN "gfx/overworld/overworld_thunder.2bpp.rle"
+OverworldTowerGfx: INCBIN "gfx/overworld/overworld_tower.2bpp.rle"
+OverworldFanGfx: INCBIN "gfx/overworld/overworld_fan.2bpp.rle"
+OverworldExplosion1Gfx: INCBIN "gfx/overworld/overworld_explosion1.2bpp.rle"
+Overworld6Gfx: INCBIN "gfx/overworld/overworld6.2bpp.rle"
+OverworldExplosion2Gfx: INCBIN "gfx/overworld/overworld_explosion2.2bpp.rle"
+OverworldFireGfx: INCBIN "gfx/overworld/overworld_fire.2bpp.rle"
+OverworldTorchGfx: INCBIN "gfx/overworld/overworld_torch.2bpp.rle"
+OverworldExplosion3Gfx: INCBIN "gfx/overworld/overworld_explosion3.2bpp.rle"
+OverworldSmokeGfx: INCBIN "gfx/overworld/overworld_smoke.2bpp.rle"
 
 
 SECTION "Bank 24", ROMX
@@ -309,11 +309,11 @@ INCLUDE "engine/bank27.asm"
 
 SECTION "Cutscenes Gfx 1", ROMX
 
-Cutscenes1Gfx: INCBIN "gfx/cutscenes/cutscenes1.2bpp.lz"
-Cutscenes2Gfx: INCBIN "gfx/cutscenes/cutscenes2.2bpp.lz"
-Cutscenes3Gfx: INCBIN "gfx/cutscenes/cutscenes3.2bpp.lz"
-Cutscenes4Gfx: INCBIN "gfx/cutscenes/cutscenes4.2bpp.lz"
-Cutscenes5Gfx: INCBIN "gfx/cutscenes/cutscenes5.2bpp.lz"
+Cutscenes1Gfx: INCBIN "gfx/cutscenes/cutscenes1.2bpp.rle"
+Cutscenes2Gfx: INCBIN "gfx/cutscenes/cutscenes2.2bpp.rle"
+Cutscenes3Gfx: INCBIN "gfx/cutscenes/cutscenes3.2bpp.rle"
+Cutscenes4Gfx: INCBIN "gfx/cutscenes/cutscenes4.2bpp.rle"
+Cutscenes5Gfx: INCBIN "gfx/cutscenes/cutscenes5.2bpp.rle"
 
 REPT $932
 	db $00
@@ -322,11 +322,11 @@ ENDR
 
 SECTION "Cutscenes Gfx 2", ROMX
 
-Cutscenes6Gfx: INCBIN "gfx/cutscenes/cutscenes6.2bpp.lz"
-Cutscenes7Gfx: INCBIN "gfx/cutscenes/cutscenes7.2bpp.lz"
-Cutscenes8Gfx: INCBIN "gfx/cutscenes/cutscenes8.2bpp.lz"
-Cutscenes9Gfx: INCBIN "gfx/cutscenes/cutscenes9.2bpp.lz"
-Cutscenes10Gfx: INCBIN "gfx/cutscenes/cutscenes10.2bpp.lz"
+Cutscenes6Gfx: INCBIN "gfx/cutscenes/cutscenes6.2bpp.rle"
+Cutscenes7Gfx: INCBIN "gfx/cutscenes/cutscenes7.2bpp.rle"
+Cutscenes8Gfx: INCBIN "gfx/cutscenes/cutscenes8.2bpp.rle"
+Cutscenes9Gfx: INCBIN "gfx/cutscenes/cutscenes9.2bpp.rle"
+Cutscenes10Gfx: INCBIN "gfx/cutscenes/cutscenes10.2bpp.rle"
 
 
 SECTION "Bank 2A", ROMX
