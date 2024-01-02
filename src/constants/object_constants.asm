@@ -2,33 +2,33 @@ DEF NUM_OBJECTS EQU 8
 
 ; wObjects structs constants
 RSRESET
-OBJ_FLAGS            rb ; $00
-OBJ_UNK_01           rb ; $01
-OBJ_UNK_02           rb ; $02
-OBJ_Y_POS            rw ; $03
-OBJ_X_POS            rw ; $05
-OBJ_UNK_07           rb ; $07
-OBJ_INTERACTION_TYPE rb ; $08
-OBJ_COLLBOX_TOP      rb ; $09
-OBJ_COLLBOX_BOTTOM   rb ; $0a
-OBJ_COLLBOX_LEFT     rb ; $0b
-OBJ_COLLBOX_RIGHT    rb ; $0c
-OBJ_SCREEN_Y_POS     rb ; $0d
-OBJ_SCREEN_X_POS     rb ; $0e
-OBJ_FRAME            rb ; $0f
-OBJ_OAM_PTR          rw ; $10
-OBJ_FRAMESET_PTR     rw ; $12
-OBJ_FRAME_DURATION   rb ; $14
-OBJ_FRAMESET_OFFSET  rb ; $15
-OBJ_STATE_DURATION   rb ; $16
-OBJ_VAR_1            rb ; $17
-OBJ_VAR_2            rb ; $18
-OBJ_VAR_3            rb ; $19
-OBJ_SUBSTATE         rb ; $1a
-OBJ_STATE            rb ; $1b
-OBJ_ACTION           rb ; $1c
-OBJ_UNK_1D           rb ; $1d
-OBJ_UPDATE_FUNCTION  rw ; $1e
+DEF OBJ_FLAGS            rb ; $00
+DEF OBJ_UNK_01           rb ; $01
+DEF OBJ_UNK_02           rb ; $02
+DEF OBJ_Y_POS            rw ; $03
+DEF OBJ_X_POS            rw ; $05
+DEF OBJ_UNK_07           rb ; $07
+DEF OBJ_INTERACTION_TYPE rb ; $08
+DEF OBJ_COLLBOX_TOP      rb ; $09
+DEF OBJ_COLLBOX_BOTTOM   rb ; $0a
+DEF OBJ_COLLBOX_LEFT     rb ; $0b
+DEF OBJ_COLLBOX_RIGHT    rb ; $0c
+DEF OBJ_SCREEN_Y_POS     rb ; $0d
+DEF OBJ_SCREEN_X_POS     rb ; $0e
+DEF OBJ_FRAME            rb ; $0f
+DEF OBJ_OAM_PTR          rw ; $10
+DEF OBJ_FRAMESET_PTR     rw ; $12
+DEF OBJ_FRAME_DURATION   rb ; $14
+DEF OBJ_FRAMESET_OFFSET  rb ; $15
+DEF OBJ_STATE_DURATION   rb ; $16
+DEF OBJ_VAR_1            rb ; $17
+DEF OBJ_VAR_2            rb ; $18
+DEF OBJ_VAR_3            rb ; $19
+DEF OBJ_SUBSTATE         rb ; $1a
+DEF OBJ_STATE            rb ; $1b
+DEF OBJ_ACTION           rb ; $1c
+DEF OBJ_UNK_1D           rb ; $1d
+DEF OBJ_UPDATE_FUNCTION  rw ; $1e
 DEF OBJ_STRUCT_LENGTH EQU _RS
 
 ; OBJ_FLAGS constants

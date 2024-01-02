@@ -48,7 +48,7 @@ DEF NUM_LEVELS EQU (const_value / 8) ; 25
 DEF LEVEL_GOLF_BUILDING EQU (const_value / 8) + 1 ; $1a
 
 	const THE_TEMPLE               ; $c8
-const_value = $ff
+	const_def $ff
 	const GOLF_BUILDING            ; $ff
 
 DEF NUM_LEVEL_TREASURES     EQU 4

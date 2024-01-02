@@ -2,7 +2,7 @@ MACRO terrain_tee_box
 REPT 7
 	db GOLF_TERRAIN_TEE_BOX
 ENDR
-num_terrain_blocks = 7
+DEF num_terrain_blocks = 7
 ENDM
 
 MACRO terrain_tee_box_edge
@@ -12,7 +12,7 @@ ENDR
 REPT 2
 	db GOLF_TERRAIN_TEE_BOX
 ENDR
-num_terrain_blocks = 7
+DEF num_terrain_blocks = 7
 ENDM
 
 ; arg 1 = type of block
@@ -21,7 +21,7 @@ MACRO terrain_n_blocks
 REPT \2
 	db \1
 ENDR
-num_terrain_blocks = num_terrain_blocks + \2
+DEF num_terrain_blocks = num_terrain_blocks + \2
 ENDM
 
 ; arg 1 = type of block
@@ -31,7 +31,7 @@ assert \2 >= 2, "Must be at least 2 blocks wide"
 	db \1 | GOLF_TERRAIN_EDGE_LEFT
 	terrain_n_blocks \1, \2 - 2
 	db \1 | GOLF_TERRAIN_EDGE_RIGHT
-num_terrain_blocks = num_terrain_blocks + 2
+DEF num_terrain_blocks = num_terrain_blocks + 2
 ENDM
 
 ; arg 1 = n plain blocks to place
@@ -70,7 +70,7 @@ ENDM
 
 MACRO terrain_end
 	db GOLF_TERRAIN_END
-num_terrain_blocks = num_terrain_blocks + 1
+DEF num_terrain_blocks = num_terrain_blocks + 1
 	assert num_terrain_blocks == NUM_GOLF_LEVEL_BLOCKS, "Expected {d:NUM_GOLF_LEVEL_BLOCKS} blocks, got {d:num_terrain_blocks}"
 ENDM
 
@@ -78,7 +78,7 @@ ENDM
 MACRO terrain_blocks_end
 FOR n, (NUM_GOLF_LEVEL_BLOCKS - num_terrain_blocks - 1)
 	db \1
-num_terrain_blocks = num_terrain_blocks + 1
+DEF num_terrain_blocks = num_terrain_blocks + 1
 ENDR
 	terrain_end
 ENDM
@@ -93,6 +93,6 @@ ENDM
 
 MACRO terrain_ob_end
 	db GOLF_TERRAIN_OB | GOLF_TERRAIN_EDGE_LEFT
-num_terrain_blocks = num_terrain_blocks + 1
+DEF num_terrain_blocks = num_terrain_blocks + 1
 	terrain_blocks_end GOLF_TERRAIN_OB
 ENDM

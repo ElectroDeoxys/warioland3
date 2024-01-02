@@ -262,7 +262,7 @@ UnlockableLevelArrows:
 ; \4 = unknown 2
 MACRO ow_coord
 IF (\1) != -1
-x = \1 + (\2 * BG_MAP_WIDTH)
+DEF x = \1 + (\2 * BG_MAP_WIDTH)
 	db ((x & $1e0) >> 2)
 	db ((x & $01f) << 3)
 ELSE

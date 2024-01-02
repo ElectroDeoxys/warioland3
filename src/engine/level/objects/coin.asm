@@ -1,4 +1,4 @@
-x = 1
+DEF x = 1
 
 ; \1 = movement update state
 ; \2 = duration
@@ -45,7 +45,7 @@ MACRO move_coin
 	dec [hl]
 :
 
-x = x + 1
+DEF x = x + 1
 ENDM
 
 CoinFunc:

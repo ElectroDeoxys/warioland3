@@ -1,12 +1,7 @@
-; requires rgbds 0.4.2 or newer.
-MAJOR EQU 0
-MINOR EQU 4
-PATCH EQU 2
-
 IF !DEF(__RGBDS_MAJOR__) || !DEF(__RGBDS_MINOR__) || !DEF(__RGBDS_PATCH__)
-	fail "wl3 requires rgbds {MAJOR}.{MINOR}.{PATCH} or newer."
-ELIF (__RGBDS_MAJOR__ < MAJOR) || \
-	(__RGBDS_MAJOR__ == MAJOR && __RGBDS_MINOR__ < MINOR) || \
-	(__RGBDS_MAJOR__ == MAJOR && __RGBDS_MINOR__ == MINOR && __RGBDS_PATCH__ < PATCH)
-	fail "wl3 requires rgbds {MAJOR}.{MINOR}.{PATCH} or newer."
+	fail "wl3 requires rgbds 7.0 or newer."
+ENDC
+
+IF (__RGBDS_MAJOR__ == 0 && __RGBDS_MINOR__ < 7)
+	fail "wl3 requires rgbds 7.0 or newer."
 ENDC

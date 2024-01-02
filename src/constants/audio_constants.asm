@@ -24,60 +24,60 @@ DEF AUDIOENG_UNK7         EQU (1 << AUDIOENG_UNK7_F)
 
 ; channel struct members
 RSRESET
-CHANNEL_FLAGS             rb
-CHANNEL_DURATION          rb
-CHANNEL_CMD_PTR           rw
-CHANNEL_SOUND_BANK        rb
-CHANNEL_UNUSED_05         rb
-CHANNEL_SOUND_ID          rw
-CHANNEL_PRIORITY          rb
-CHANNEL_PITCH             rb
-CHANNEL_UNK_0A            rb
-CHANNEL_UNK_0B            rb
-CHANNEL_TIMBRE            rb
-CHANNEL_LENGTH            rb
-CHANNEL_SWEEP             rb
-CHANNEL_FADE_IN_ENVELOPE  rb
-CHANNEL_FADE_OUT_ENVELOPE rb
-CHANNEL_ACTIVE_COMMAND    rb
-CHANNEL_SEMITONE_OFFSET   rb
-CHANNEL_UNK_13            rw
-CHANNEL_VOLUME            rb
-CHANNEL_UNK_16            rb
-CHANNEL_SO1               rb
-CHANNEL_SO2               rb
-CHANNEL_PITCH_OFFSET      rb ; signed integer
-CHANNEL_PITCH_OFFSET_MULT rb ; multiplier for pitch offset
-CHANNEL_PITCH_PRODUCT     rw ; result from pitch offset product
-CHANNEL_UNK_1D            rb
-CHANNEL_UNK_1E            rb
-CHANNEL_VIBRATO_SPEED     rb
-CHANNEL_UNK_VIBRATO_VALUE rb
-CHANNEL_VIBRATO_AMPLITUDE rb
-CHANNEL_UNK_22            rb
-CHANNEL_VIBRATO_DISABLED  rb
-CHANNEL_UNK_24            rw
-CHANNEL_UNK_26            rb
-CHANNEL_UNK_27            rb
-CHANNEL_UNK_28            rb
-CHANNEL_UNK_29            rb
-CHANNEL_VIBRATO_DELAY     rb
-CHANNEL_VIBRATO_COUNTER   rb
-CHANNEL_FREQUENCY         rw
-CHANNEL_SO_FLAGS          rb
-CHANNEL_UNK_2F            rb
-CHANNEL_UNK_30            rb
-CHANNEL_UNK_31            rb
-CHANNEL_UNK_32            rb
-CHANNEL_UNK_33            rb
-CHANNEL_UNK_34            rb
-CHANNEL_UNK_35            rb
-CHANNEL_UNK_36            rb
-CHANNEL_UNK_37            rb
-CHANNEL_UNK_38            rb
-CHANNEL_UNK_39            rb
-CHANNEL_UNK_3A            rb
-CHANNEL_UNK_3B            rb
+DEF CHANNEL_FLAGS             rb
+DEF CHANNEL_DURATION          rb
+DEF CHANNEL_CMD_PTR           rw
+DEF CHANNEL_SOUND_BANK        rb
+DEF CHANNEL_UNUSED_05         rb
+DEF CHANNEL_SOUND_ID          rw
+DEF CHANNEL_PRIORITY          rb
+DEF CHANNEL_PITCH             rb
+DEF CHANNEL_UNK_0A            rb
+DEF CHANNEL_UNK_0B            rb
+DEF CHANNEL_TIMBRE            rb
+DEF CHANNEL_LENGTH            rb
+DEF CHANNEL_SWEEP             rb
+DEF CHANNEL_FADE_IN_ENVELOPE  rb
+DEF CHANNEL_FADE_OUT_ENVELOPE rb
+DEF CHANNEL_ACTIVE_COMMAND    rb
+DEF CHANNEL_SEMITONE_OFFSET   rb
+DEF CHANNEL_UNK_13            rw
+DEF CHANNEL_VOLUME            rb
+DEF CHANNEL_UNK_16            rb
+DEF CHANNEL_SO1               rb
+DEF CHANNEL_SO2               rb
+DEF CHANNEL_PITCH_OFFSET      rb ; signed integer
+DEF CHANNEL_PITCH_OFFSET_MULT rb ; multiplier for pitch offset
+DEF CHANNEL_PITCH_PRODUCT     rw ; result from pitch offset product
+DEF CHANNEL_UNK_1D            rb
+DEF CHANNEL_UNK_1E            rb
+DEF CHANNEL_VIBRATO_SPEED     rb
+DEF CHANNEL_UNK_VIBRATO_VALUE rb
+DEF CHANNEL_VIBRATO_AMPLITUDE rb
+DEF CHANNEL_UNK_22            rb
+DEF CHANNEL_VIBRATO_DISABLED  rb
+DEF CHANNEL_UNK_24            rw
+DEF CHANNEL_UNK_26            rb
+DEF CHANNEL_UNK_27            rb
+DEF CHANNEL_UNK_28            rb
+DEF CHANNEL_UNK_29            rb
+DEF CHANNEL_VIBRATO_DELAY     rb
+DEF CHANNEL_VIBRATO_COUNTER   rb
+DEF CHANNEL_FREQUENCY         rw
+DEF CHANNEL_SO_FLAGS          rb
+DEF CHANNEL_UNK_2F            rb
+DEF CHANNEL_UNK_30            rb
+DEF CHANNEL_UNK_31            rb
+DEF CHANNEL_UNK_32            rb
+DEF CHANNEL_UNK_33            rb
+DEF CHANNEL_UNK_34            rb
+DEF CHANNEL_UNK_35            rb
+DEF CHANNEL_UNK_36            rb
+DEF CHANNEL_UNK_37            rb
+DEF CHANNEL_UNK_38            rb
+DEF CHANNEL_UNK_39            rb
+DEF CHANNEL_UNK_3A            rb
+DEF CHANNEL_UNK_3B            rb
 DEF CHANNEL_STRUCT_LENGTH EQU _RS
 
 	const_def
@@ -103,28 +103,28 @@ DEF NUM_TRACKS EQU 4
 
 ; track struct members
 RSRESET
-TRACK_FLAGS           rb
-TRACK_PRIORITY        rb
-TRACK_UNK02           rb
-TRACK_UNK03           rb
-TRACK_CHANNEL_PTR     rw
-TRACK_UNK06           rb
-TRACK_DURATION        rb
-TRACK_TIMBRE          rb
-TRACK_LENGTH          rb
-TRACK_SWEEP           rb
-TRACK_FADE_IN_ENVELOPE   rb
-TRACK_FADE_OUT_ENVELOPE  rb
-TRACK_UNK0D           rb
-TRACK_UNK0E           rb
-TRACK_UNK0F           rb
-TRACK_VOLUME          rb
-TRACK_VOLUME_ENVELOPE rb
-TRACK_FREQUENCY       rw
-TRACK_UNK14           rb
-TRACK_UNK15           rb
-TRACK_UNK16           rb
-TRACK_UNK17           rb
+DEF TRACK_FLAGS           rb
+DEF TRACK_PRIORITY        rb
+DEF TRACK_UNK02           rb
+DEF TRACK_UNK03           rb
+DEF TRACK_CHANNEL_PTR     rw
+DEF TRACK_UNK06           rb
+DEF TRACK_DURATION        rb
+DEF TRACK_TIMBRE          rb
+DEF TRACK_LENGTH          rb
+DEF TRACK_SWEEP           rb
+DEF TRACK_FADE_IN_ENVELOPE   rb
+DEF TRACK_FADE_OUT_ENVELOPE  rb
+DEF TRACK_UNK0D           rb
+DEF TRACK_UNK0E           rb
+DEF TRACK_UNK0F           rb
+DEF TRACK_VOLUME          rb
+DEF TRACK_VOLUME_ENVELOPE rb
+DEF TRACK_FREQUENCY       rw
+DEF TRACK_UNK14           rb
+DEF TRACK_UNK15           rb
+DEF TRACK_UNK16           rb
+DEF TRACK_UNK17           rb
 DEF TRACK_STRUCT_LENGTH EQU _RS
 
 	const_def

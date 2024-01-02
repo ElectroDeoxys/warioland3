@@ -102,9 +102,9 @@
 	const CRAYON_PINK_T                ; $64
 DEF NUM_TREASURES EQU const_value - 1
 	const TREASURE_DUMMY               ; $65
-const_value = $80
+	const_def $80
 	const INVALID_TREASURE             ; $80
-const_value = $ed
+	const_def $ed
 DEF TREASURES_END EQU const_value
 
 ; pals

@@ -26,7 +26,7 @@ DEF GOLF_BUILDING_PRICE EQU $50
 DEF NUM_GOLF_COURSES EQU const_value
 
 DEF GOLF_BASE_SCORE EQU 20
-golf_score EQUS "GOLF_BASE_SCORE +"
+DEF golf_score EQUS "GOLF_BASE_SCORE +"
 
 ; maximum number of strokes over par 
 ; for golf levels inside the various courses
@@ -61,11 +61,11 @@ DEF NUM_GOLF_LEVELS EQU const_value
 
 ; wGolfLevel struct constants
 RSRESET
-GOLF_LEVEL_UNK00 rw ; $00
-GOLF_LEVEL_UNK01 rw ; $01
-GOLF_LEVEL_UNK02 rw ; $02
-GOLF_LEVEL_UNK03 rw ; $03
-GOLF_LEVEL_UNK04 rw ; $04
+DEF GOLF_LEVEL_UNK00 rw ; $00
+DEF GOLF_LEVEL_UNK01 rw ; $01
+DEF GOLF_LEVEL_UNK02 rw ; $02
+DEF GOLF_LEVEL_UNK03 rw ; $03
+DEF GOLF_LEVEL_UNK04 rw ; $04
 DEF GOLF_LEVEL_STRUCT_LENGTH EQU _RS
 
 ; par values of a Golf level
