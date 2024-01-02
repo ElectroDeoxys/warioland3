@@ -1,4 +1,4 @@
-rom := wl3.gbc
+rom := warioland3.gbc
 
 rom_obj := \
 src/action_help.o \
@@ -10,7 +10,7 @@ src/wram.o \
 src/hram.o \
 src/gfx.o
 
-wl3_obj := $(rom_obj:.o=.o)
+warioland3_obj := $(rom_obj:.o=.o)
 
 ### Build tools
 
@@ -33,10 +33,10 @@ RGBLINK ?= $(RGBDS)rgblink
 .SECONDEXPANSION:
 .PRECIOUS:
 .SECONDARY:
-.PHONY: all wl3 clean tidy compare tools
+.PHONY: all warioland3 clean tidy compare tools
 
 all: $(rom) compare
-wl3: $(rom) compare
+warioland3: $(rom) compare
 
 clean: tidy
 	find src/gfx \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pal' -o -iname '*.rle' \) -delete

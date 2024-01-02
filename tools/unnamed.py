@@ -40,7 +40,7 @@ objects = None
 if args.rootdir:
     for line in Popen(["make", "-C", args.rootdir, "-s", "-p", "DEBUG=1"],
             stdout=PIPE).stdout.read().decode().split("\n"):
-        if line.startswith("wl3_obj := "):
+        if line.startswith("warioland3_obj := "):
             objects = line[11:].strip().split()
             break
     else:
@@ -63,7 +63,7 @@ for line in args.symfile:
         symbols.add(symbol)
 
 # If no object files were provided, just print what we know and exit
-print("Unnamed wl3 symbols: %d (%.2f%% complete)" % (len(symbols),
+print("Unnamed warioland3 symbols: %d (%.2f%% complete)" % (len(symbols),
         (symbols_total - len(symbols)) / symbols_total * 100))
 if not objects:
     for sym in symbols:
