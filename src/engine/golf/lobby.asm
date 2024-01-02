@@ -593,8 +593,8 @@ InitGolfClearCutscene:
 	call DisableLCD
 	call ClearVirtualOAM
 
-	ld hl, wGolfRAMStart
-	ld bc, wGolfRAMEnd - wGolfRAMStart
+	ld hl, STARTOF("Golf RAM")
+	ld bc, SIZEOF("Golf RAM")
 .loop
 	xor a
 	ld [hli], a

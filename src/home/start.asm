@@ -52,8 +52,8 @@ InitWithoutDemoPowerUpReset::
 
 .clear_wram
 	xor a
-	ld hl, w0Start ; start of WRAM0
-	ld bc, w0End - w0Start
+	ld hl, STARTOF("WRAM0")
+	ld bc, SIZEOF("WRAM0")
 	call WriteAToHL_BCTimes
 	call ClearWRAM
 

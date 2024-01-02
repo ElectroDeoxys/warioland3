@@ -2,8 +2,6 @@ INCLUDE "vram.asm"
 
 SECTION "WRAM0", WRAM0
 
-w0Start:: ; c000
-
 wTempPals1:: ds 8 palettes ; c000
 wTempPals2:: ds 8 palettes ; c040
 
@@ -903,8 +901,6 @@ wNumMusicBoxes:: ; cef2
 	db
 
 	ds $d
-
-w0End:: ; cf00
 
 SECTION "WRAM1", WRAMX
 

@@ -2522,14 +2522,14 @@ ClearVRAM::
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	xor a
-	ld hl, v1Tiles0
-	ld bc, v1End - v1Tiles0
+	ld hl, STARTOF("VRAM1")
+	ld bc, SIZEOF("VRAM1")
 	call WriteAToHL_BCTimes
 
 	xor a ; VRAM0
 	ldh [rVBK], a
-	ld hl, v0Tiles0
-	ld bc, v0End - v0Tiles0
+	ld hl, STARTOF("VRAM0")
+	ld bc, SIZEOF("VRAM0")
 	jp WriteAToHL_BCTimes
 
 ClearWRAM::
