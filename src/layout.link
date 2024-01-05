@@ -255,6 +255,10 @@ ROMX $7f
 	"Wario OAM 2"
 WRAM0
 	"WRAM0"
+	"Progress WRAM"
+	"Level WRAM"
+	org $cc00
+	"Sprites WRAM"
 WRAMX 1
 	"WRAM1"
 	"Golf RAM"

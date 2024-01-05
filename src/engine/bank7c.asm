@@ -565,8 +565,8 @@ SaveLevel:
 	ld a, $33
 	ld [de], a
 	inc e
-	ld hl, wGeneralData
-	ld b, wLevelDataEnd - wGeneralData
+	ld hl, STARTOF("Progress WRAM")
+	ld b, SIZEOF("Progress WRAM") + SIZEOF("Level WRAM")
 	call CopyHLToDE
 
 	ldh a, [rSVBK]
@@ -666,8 +666,8 @@ SaveLevel:
 	ld a, $33
 	ld [de], a
 	inc e
-	ld hl, wGeneralData
-	ld b, wLevelDataEnd - wGeneralData
+	ld hl, STARTOF("Progress WRAM")
+	ld b, SIZEOF("Progress WRAM") + SIZEOF("Level WRAM")
 	call CopyHLToDE
 	ldh a, [rSVBK]
 	push af
@@ -731,8 +731,8 @@ SaveLevel:
 	ld a, $33
 	ld [de], a
 	inc e
-	ld hl, wGeneralData
-	ld b, wLevelDataEnd - wGeneralData
+	ld hl, STARTOF("Progress WRAM")
+	ld b, SIZEOF("Progress WRAM") + SIZEOF("Level WRAM")
 	call CopyHLToDE
 	ldh a, [rSVBK]
 	push af
@@ -798,8 +798,8 @@ SaveLevel:
 	ld a, $33
 	ld [de], a
 	inc e
-	ld hl, wGeneralData
-	ld b, wLevelDataEnd - wGeneralData
+	ld hl, STARTOF("Progress WRAM")
+	ld b, SIZEOF("Progress WRAM") + SIZEOF("Level WRAM")
 	call CopyHLToDE
 	ldh a, [rSVBK]
 	push af
@@ -927,29 +927,35 @@ InitSaveScreenAndBackupVRAM:
 Save:
 	call DisableLCD
 	call IncrementSaveCounter
+
 	ld a, [wSRAMBank]
 	push af
-	ld a, $00
+	ld a, BANK("SRAM0")
 	sramswitch
+
 	ld a, $10
 	ld [s0a790], a
 	ld [s0a7e0], a
 	ld [s0afa0], a
-	ld de, s0a380
-	ld a, $77
+
+	ld de, sCheckVals
+	ld a, SAVE_CHECK_VAL_1
 	ld [de], a
 	inc e
-	ld a, $61
+	ld a, SAVE_CHECK_VAL_2
 	ld [de], a
 	inc e
-	ld a, $72
+	ld a, SAVE_CHECK_VAL_3
 	ld [de], a
 	inc e
-	ld a, $33
+	ld a, SAVE_CHECK_VAL_4
 	ld [de], a
 	inc e
-	ld hl, wGeneralData
-	ld b, wGeneralDataEnd - wGeneralData
+
+	; de = sGameData
+	; save game data
+	ld hl, STARTOF("Progress WRAM")
+	ld b, SIZEOF("Progress WRAM")
 	call CopyHLToDE
 	ldh a, [rSVBK]
 	push af
@@ -960,52 +966,63 @@ Save:
 	call CopyHLToDE
 	pop af
 	ldh [rSVBK], a
+
 	ld a, $11
 	ld [s0a790], a
 	ld [s0a7e0], a
 	ld [s0afa0], a
-	call Func_1f1228
+
+	call CalculateGameDataChecksum
 	ld a, d
-	ld [s0a791], a
+	ld [s0a791 + 0], a
 	ld [wChecksum + 0], a
 	ld a, e
-	ld [$a792], a
+	ld [s0a791 + 1], a
 	ld [wChecksum + 1], a
+
 	ld a, $12
 	ld [s0a790], a
 	ld [s0a7e0], a
 	ld [s0afa0], a
+
 	ld a, d
-	ld [s0a7e1], a
+	ld [s0a7e1 + 0], a
 	ld a, e
-	ld [$a7e2], a
+	ld [s0a7e1 + 1], a
+
 	ld a, $13
 	ld [s0a790], a
 	ld [s0a7e0], a
 	ld [s0afa0], a
+
 	ld a, d
-	ld [s0afa1], a
+	ld [s0afa1 + 0], a
 	ld a, e
-	ld [$afa2], a
+	ld [s0afa1 + 1], a
+
 	ld a, $20
 	ld [s0a790], a
 	ld [s0a7e0], a
 	ld [s0afa0], a
-	ld de, s0ab80
-	ld a, $77
+
+	; de = sBackupGameData
+	; save backup game data
+	ld de, sBackupCheckVals
+	ld a, SAVE_CHECK_VAL_1
 	ld [de], a
 	inc e
-	ld a, $61
+	ld a, SAVE_CHECK_VAL_2
 	ld [de], a
 	inc e
-	ld a, $72
+	ld a, SAVE_CHECK_VAL_3
 	ld [de], a
 	inc e
-	ld a, $33
+	ld a, SAVE_CHECK_VAL_4
 	ld [de], a
 	inc e
-	ld hl, wGeneralData
-	ld b, wGeneralDataEnd - wGeneralData
+
+	ld hl, STARTOF("Progress WRAM")
+	ld b, SIZEOF("Progress WRAM")
 	call CopyHLToDE
 	ldh a, [rSVBK]
 	push af
@@ -1016,32 +1033,39 @@ Save:
 	call CopyHLToDE
 	pop af
 	ldh [rSVBK], a
+
 	ld a, $21
 	ld [s0a790], a
 	ld [s0a7e0], a
 	ld [s0afa0], a
+
 	ld a, [wChecksum + 0]
 	ld d, a
-	ld [s0a793], a
-	ld a, [wChecksum + 1]
+	ld [s0a793 + 0], a
+	ld a, [wChecksum  + 0+ 1]
 	ld e, a
-	ld [$a794], a
+	ld [s0a793 + 1], a
+
 	ld a, $22
 	ld [s0a790], a
 	ld [s0a7e0], a
 	ld [s0afa0], a
+
 	ld a, d
-	ld [s0a7e3], a
+	ld [s0a7e3 + 0], a
 	ld a, e
-	ld [$a7e4], a
+	ld [s0a7e3 + 1], a
+
 	ld a, $23
 	ld [s0a790], a
 	ld [s0a7e0], a
 	ld [s0afa0], a
+
 	ld a, d
-	ld [s0afa3], a
+	ld [s0afa3 + 0], a
 	ld a, e
-	ld [$afa4], a
+	ld [s0afa3 + 1], a
+
 	xor a
 	ld [s0a790], a
 	ld [s0a7e0], a
@@ -1498,8 +1522,8 @@ CalculateChecksumLong:
 
 CalculateWRAMDataChecksum:
 	ld de, 0
-	ld hl, wGeneralData
-	ld b, wLevelDataEnd - wGeneralData
+	ld hl, STARTOF("Progress WRAM")
+	ld b, SIZEOF("Progress WRAM") + SIZEOF("Level WRAM")
 	call CalculateChecksum
 
 	ldh a, [rSVBK]
@@ -1661,8 +1685,8 @@ Func_1f0cad::
 	ld a, BANK("SRAM0")
 	sramswitch
 
-	ld hl, s0a380
-	call Func_1f0d2e
+	ld hl, sCheckVals
+	call CheckSaveVals
 	jr nc, .asm_1f0cec
 	ld hl, s0a000
 	call Func_1f0d47
@@ -1670,8 +1694,9 @@ Func_1f0cad::
 	ld hl, s0a400
 	call Func_1f0d47
 	jr nc, .asm_1f0cec
-	ld hl, s0ab80
-	call Func_1f0d2e
+
+	ld hl, sBackupCheckVals
+	call CheckSaveVals
 	jr nc, .asm_1f0cec
 	ld hl, s0a800
 	call Func_1f0d47
@@ -1699,6 +1724,7 @@ Func_1f0cad::
 	jr .asm_1f0d20
 
 .asm_1f0d08
+	; s0a790 != s0afa0
 	cp c
 	jr z, .asm_1f0d16
 	ld a, b
@@ -1725,18 +1751,20 @@ Func_1f0cad::
 	sramswitch
 	ret
 
-Func_1f0d2e:
+; returns carry if bytes in [hl] is not:
+; $77 $61 $72 $33
+CheckSaveVals:
 	ld a, [hli]
-	cp $77
+	cp SAVE_CHECK_VAL_1
 	jr nz, .set_carry
 	ld a, [hli]
-	cp $61
+	cp SAVE_CHECK_VAL_2
 	jr nz, .set_carry
 	ld a, [hli]
-	cp $72
+	cp SAVE_CHECK_VAL_3
 	jr nz, .set_carry
 	ld a, [hli]
-	cp $33
+	cp SAVE_CHECK_VAL_4
 	jr nz, .set_carry
 	scf
 	ccf
@@ -1768,9 +1796,9 @@ Func_1f0d47:
 Func_1f0d60:
 	xor a
 	ld [wceee], a
-	ld hl, s0a380
-	call Func_1f0d2e
-	jr c, .asm_1f0dcc
+	ld hl, sCheckVals
+	call CheckSaveVals
+	jr c, .clear_check_vals
 
 	ld a, [s0a791 + 0]
 	ld b, a
@@ -1785,7 +1813,7 @@ Func_1f0d60:
 	ld a, [s0afa1 + 1]
 	ld l, a
 	call Func_1f1153
-	ld hl, s0a384
+	ld hl, sGameData
 	call Func_1f1210
 	ld a, [wChecksum + 0]
 	cp d
@@ -1798,7 +1826,7 @@ Func_1f0d60:
 .asm_1f0d9b
 	ld a, [wcef0]
 	and a
-	jr z, .asm_1f0dcc
+	jr z, .clear_check_vals
 	ld a, [wcee9]
 	cp d
 	jr nz, .asm_1f0daf
@@ -1810,28 +1838,28 @@ Func_1f0d60:
 .asm_1f0daf
 	ld a, [wcef0]
 	cp $07
-	jr nz, .asm_1f0dcc
+	jr nz, .clear_check_vals
 	ld a, [wceeb]
 	cp d
-	jr nz, .asm_1f0dcc
+	jr nz, .clear_check_vals
 	ld a, [wceec]
 	cp e
-	jr nz, .asm_1f0dcc
+	jr nz, .clear_check_vals
 
 .asm_1f0dc2
-	ld hl, s0a384
+	ld hl, sGameData ; useless
 	ld hl, wceee
 	set 0, [hl]
-	jr .asm_1f0de9
+	jr .check_backup_check_vals
 
-.asm_1f0dcc
+.clear_check_vals
 	ld a, $10
 	ld [s0a790], a
 	ld [s0a7e0], a
 	ld [s0afa0], a
 
 	xor a
-	ld hl, s0a380
+	ld hl, sCheckVals
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
@@ -1842,10 +1870,10 @@ Func_1f0d60:
 	ld [s0a7e0], a
 	ld [s0afa0], a
 
-.asm_1f0de9
-	ld hl, s0ab80
-	call Func_1f0d2e
-	jr c, .asm_1f0e51
+.check_backup_check_vals
+	ld hl, sBackupCheckVals
+	call CheckSaveVals
+	jr c, .clear_backup_check_vals
 	ld a, [s0a793 + 0]
 	ld b, a
 	ld a, [s0a793 + 1]
@@ -1859,7 +1887,7 @@ Func_1f0d60:
 	ld a, [s0afa3 + 1]
 	ld l, a
 	call Func_1f1153
-	ld hl, s0ab84
+	ld hl, sBackupGameData
 	call Func_1f1210
 	ld a, [wChecksum + 0]
 	cp d
@@ -1872,7 +1900,7 @@ Func_1f0d60:
 .asm_1f0e20
 	ld a, [wcef0]
 	and a
-	jr z, .asm_1f0e51
+	jr z, .clear_backup_check_vals
 	ld a, [wcee9]
 	cp d
 	jr nz, .asm_1f0e34
@@ -1884,27 +1912,27 @@ Func_1f0d60:
 .asm_1f0e34
 	ld a, [wcef0]
 	cp $07
-	jr nz, .asm_1f0e51
+	jr nz, .clear_backup_check_vals
 	ld a, [wceeb]
 	cp d
-	jr nz, .asm_1f0e51
+	jr nz, .clear_backup_check_vals
 	ld a, [wceec]
 	cp e
-	jr nz, .asm_1f0e51
+	jr nz, .clear_backup_check_vals
 .asm_1f0e47
-	ld hl, s0ab84
+	ld hl, sBackupGameData ; useless
 	ld hl, wceee
 	set 1, [hl]
 	jr .asm_1f0e6e
 
-.asm_1f0e51
+.clear_backup_check_vals
 	ld a, $20
 	ld [s0a790], a
 	ld [s0a7e0], a
 	ld [s0afa0], a
 
 	xor a
-	ld hl, s0ab80
+	ld hl, sBackupCheckVals
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
@@ -2434,10 +2462,15 @@ Func_1f1153:
 	ld [wceec], a
 	ret
 
+; calculates checksum of data
+; starting at [hl], with length $5b + $11 = $6c
 Func_1f1210:
-	ld de, $0
-	ld b, $5b
+	ld de, 0 ; accumulator
+	ld b, SIZEOF("Progress WRAM")
 	call CalculateChecksum
+	; this changes WRAM bank,
+	; but this routine is never called
+	; to calculate Checksums of WRAM data
 	ldh a, [rSVBK]
 	push af
 	ld a, $02
@@ -2448,10 +2481,10 @@ Func_1f1210:
 	ldh [rSVBK], a
 	ret
 
-Func_1f1228:
-	ld de, $0
-	ld hl, wGeneralData
-	ld b, wGeneralDataEnd - wGeneralData
+CalculateGameDataChecksum:
+	ld de, 0 ; accumulator
+	ld hl, STARTOF("Progress WRAM")
+	ld b, SIZEOF("Progress WRAM")
 	call CalculateChecksum
 	ldh a, [rSVBK]
 	push af
@@ -2498,12 +2531,12 @@ Func_1f1246:
 	dec a
 	jp z, .asm_1f1389
 
-	ld hl, s0a384
+	ld hl, sGameData
 	ld de, s0afe0
 	ld b, $4
 	call CopyHLToDE
 
-	ld hl, s0ab84
+	ld hl, sBackupGameData
 	ld de, s0afe4
 	ld b, $4
 	call CopyHLToDE
@@ -2656,11 +2689,11 @@ Func_1f1246:
 	jr nz, .asm_1f13cd
 	jp .asm_1f1251
 .asm_1f13a7
-	ld hl, s0a384
+	ld hl, sGameData
 	call Func_1f13d7
 	ret
 .asm_1f13ae
-	ld hl, s0ab84
+	ld hl, sBackupGameData
 	call Func_1f13d7
 	ret
 .asm_1f13b5
@@ -2683,7 +2716,7 @@ Func_1f1246:
 	ret
 
 Func_1f13d7:
-	ld de, wSaveCounter
+	ld de, STARTOF("Progress WRAM")
 	ld b, $5b
 	call CopyHLToDE
 	ldh a, [rSVBK]

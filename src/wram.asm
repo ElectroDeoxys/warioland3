@@ -384,7 +384,8 @@ wc600:: ; c600
 wVBlankFuncExtended:: ; c800
 	ds $200
 
-wGeneralData::
+SECTION "Progress WRAM", WRAM0
+
 wSaveCounter:: ; ca00
 	ds $4
 
@@ -440,8 +441,7 @@ wLanguage:: ; ca46
 
 	ds $14
 
-wGeneralDataEnd::
-wLevelData::
+SECTION "Level WRAM", WRAM0
 
 ; collected keys in the level
 ; bit 0: grey key
@@ -695,9 +695,7 @@ wcac8:: ; cac8
 wIsOnSteppableObject:: ; cac9
 	db
 
-wLevelDataEnd::
-
-	ds $136
+SECTION "Sprites WRAM", WRAM0
 
 wVirtualOAM:: ; cc00
 wVirtualOAMSprite00:: sprite_oam_struct wVirtualOAMSprite00
@@ -899,8 +897,6 @@ wcef1:: ; cef1
 
 wNumMusicBoxes:: ; cef2
 	db
-
-	ds $d
 
 SECTION "WRAM1", WRAMX
 

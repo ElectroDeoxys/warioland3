@@ -14,13 +14,13 @@ sLevelData:: ; a05f
 
 	ds $2b2
 
-s0a380:: ; a380
+sCheckVals:: ; a380
 	ds $4
 
-s0a384:: ; a384
-	ds $4
+sGameData:: ; a384
+	ds $6c
 
-	ds $78
+	ds $10
 
 s0a400:: ; a400
 	ds $4
@@ -96,13 +96,13 @@ s0a804:: ; a804
 
 	ds $378
 
-s0ab80:: ; ab80
+sBackupCheckVals:: ; ab80
 	ds $4
 
-s0ab84:: ; ab84
-	ds $4
+sBackupGameData:: ; ab84
+	ds $6c
 
-	ds $78
+	ds $10
 
 s0ac00:: ; ac00
 	ds $4

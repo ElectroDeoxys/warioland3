@@ -78,5 +78,6 @@ hDemoPowerUp:: ; fffc
 hfffd:: ; fffd
 	ds $1
 
+; whether system is CGB or not
 hCGB:: ; fffe
 	ds $1

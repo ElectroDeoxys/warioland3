@@ -1712,11 +1712,11 @@ InitGameState::
 ; clears some SRAM stuff
 Func_1698::
 	xor a
-	ld hl, s0a380
+	ld hl, sCheckVals
 	ld b, $8
 	call WriteAToHL_BTimes
 
-	ld hl, s0ab80
+	ld hl, sBackupCheckVals
 	ld b, $8
 	call WriteAToHL_BTimes
 

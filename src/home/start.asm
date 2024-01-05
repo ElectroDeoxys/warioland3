@@ -32,12 +32,12 @@ InitWithoutDemoPowerUpReset::
 
 	ld a, LCDCF_ON
 	ldh [rLCDC], a
-.wait_lcd_y
+.wait_vblank
 	ldh a, [rLY]
-	cp $94
-	jr nz, .wait_lcd_y
+	cp 148
+	jr nz, .wait_vblank
 
-	ld a, LCDCF_OBJON | LCDCF_BGON
+	ld a, LCDCF_BGON | LCDCF_OBJON
 	ldh [rLCDC], a
 	call ClearVRAM
 	call EnableDoubleSpeed
@@ -45,6 +45,8 @@ InitWithoutDemoPowerUpReset::
 	ldh a, [hCGB]
 	and a
 	jr z, .clear_wram
+
+	; is CGB
 	xor a
 	ldh [rVBK], a
 	ldh [rSVBK], a
@@ -52,8 +54,8 @@ InitWithoutDemoPowerUpReset::
 
 .clear_wram
 	xor a
-	ld hl, STARTOF("WRAM0")
-	ld bc, SIZEOF("WRAM0")
+	ld hl, STARTOF(WRAM0)
+	ld bc, SIZEOF(WRAM0) - $100
 	call WriteAToHL_BCTimes
 	call ClearWRAM
 
@@ -63,8 +65,8 @@ InitWithoutDemoPowerUpReset::
 	ld bc, $100
 	call WriteAToHL_BCTimes
 
-	ld hl, hCallFunc
-	ld b, hDemoPowerUp - hCallFunc
+	ld hl, STARTOF("HRAM")
+	ld b, hDemoPowerUp - STARTOF("HRAM")
 	call WriteAToHL_BTimes
 	call FillBGMap0_With7f
 	call ClearBGMap1
@@ -114,10 +116,10 @@ InitWithoutDemoPowerUpReset::
 	ld [wState], a
 	xor a
 	ld [wSubState], a
-	jr .asm_21d
+	jr .skip_init_game_state
 .is_cgb
 	call InitGameState
-.asm_21d
+.skip_init_game_state
 
 	xor a
 	ld [wJoypadPressed], a
