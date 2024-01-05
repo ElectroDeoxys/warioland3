@@ -1710,7 +1710,7 @@ InitGameState::
 	ret
 
 ; clears some SRAM stuff
-Func_1698::
+ClearSaveData::
 	xor a
 	ld hl, sCheckVals
 	ld b, $8

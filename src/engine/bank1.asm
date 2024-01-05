@@ -73,7 +73,7 @@ InitIntroSequence:
 	ldh [rSCX], a
 	ld a, [wceef]
 	and a
-	jr nz, .asm_40fc
+	jr nz, .no_intro
 
 	ld hl, wPlaneWario
 	ld a, 64
@@ -147,11 +147,11 @@ InitIntroSequence:
 	ld hl, wMenuObj5
 	call Func_4b93
 
-	ld a, $00
+	ld a, STARTMENU_NEW_GAME
 	ld [wStartMenuSelection], a
 	jp .asm_41a8
 
-.asm_40fc
+.no_intro
 	ld hl, wPlaneWario
 	ld a, 108
 	ld [hli], a ; y coord
@@ -270,7 +270,7 @@ InitIntroSequence:
 	ld [hl], a
 	call UpdateObjAnim
 
-	ld a, $01
+	ld a, STARTMENU_CONTINUE
 	ld [wStartMenuSelection], a
 
 .asm_41a8
@@ -842,13 +842,13 @@ StartMenu:
 .asm_453e
 	call ClearUnusedVirtualOAM
 	ld hl, wStartMenuSelection
-	bit 7, [hl]
-	jr nz, .asm_4578
+	bit STARTMENUF_SELECT_F, [hl]
+	jr nz, .select
 	ld a, [hl]
-	cp $00
-	jr z, .action_help_timer
-	cp $01
-	jr z, .action_help_timer
+	cp STARTMENU_NEW_GAME
+	jr z, .tick_action_help_timer
+	cp STARTMENU_CONTINUE
+	jr z, .tick_action_help_timer
 	; start Action Help timer
 	ld a, 8
 	ld [wTimer + 1], a
@@ -856,7 +856,7 @@ StartMenu:
 	ld [wTimer], a
 	ret
 
-.action_help_timer
+.tick_action_help_timer
 	; decrement timer
 	ld hl, wTimer
 	ld a, [hl]
@@ -878,18 +878,18 @@ StartMenu:
 	ld [wPowerUpLevel], a
 	jp OpenActionHelp
 
-.asm_4578
+.select
 	ld hl, wStartMenuSelection
 	ld a, [hl]
 	and $f
-	cp $00
+	cp STARTMENU_NEW_GAME
 	jr z, .NewGame
-	cp $01
-	jr z, .asm_45ed
-	cp $02
-	jr z, .asm_45b1
-	cp $04
-	jp z, Func_1698
+	cp STARTMENU_CONTINUE
+	jr z, .ContinueOrTimeAttack
+	cp STARTMENU_CLEAR_DATA
+	jr z, .ClearData
+	cp STARTMENU_CLEAR_DATA_YES
+	jp z, ClearSaveData
 
 	ld a, 134
 	ld [wMenuObj2YCoord], a
@@ -906,9 +906,9 @@ StartMenu:
 .asm_45aa
 	ld bc, Frameset_6d1e
 .got_frameset
-	ld a, $01
+	ld a, STARTMENU_CONTINUE
 	jr .asm_45c5
-.asm_45b1
+.ClearData
 	ld a, $81
 	ld [wcee4], a
 	ld a, 144
@@ -916,7 +916,8 @@ StartMenu:
 	ld a, 120
 	ld [wMenuObj1YCoord], a
 	ld bc, Frameset_6cec
-	ld a, $03
+	ld a, STARTMENU_CLEAR_DATA_NO
+
 .asm_45c5
 	ld [wStartMenuSelection], a
 	ld hl, wMenuObj1FramesetOffset
@@ -937,13 +938,16 @@ StartMenu:
 	ld [wSubState], a
 	ret
 
+	; unreachable
+	; seems like debug code to start
+	; game with all power ups
 	ld a, SUPER_GRAB_GLOVES
 	ld [wPowerUpLevel], a
 	ld a, [wceef]
 	and $03
 	ld [wceef], a
 
-.asm_45ed
+.ContinueOrTimeAttack
 	ld a, [wGameModeFlags]
 	bit MODE_TIME_ATTACK_F, a
 	jr nz, .TimeAttack
@@ -1737,12 +1741,12 @@ Func_4b93:
 
 HandleStartMenuSelection:
 	ld a, [wStartMenuSelection]
-	bit 4, a
+	bit STARTMENUF_SCROLLING_F, a
 	jp nz, .MoveVertical
-	bit 5, a
-	jp nz, .UpdateAnim
-	bit 6, a
-	jp nz, .asm_4c96
+	bit STARTMENUF_ANIM1_F, a
+	jp nz, .UpdateAnim1
+	bit STARTMENUF_ANIM2_F, a
+	jp nz, .UpdateAnim2
 
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
@@ -1762,11 +1766,11 @@ HandleStartMenuSelection:
 	ld hl, wStartMenuSelection
 	ld a, [hl]
 	and $f
-	cp $03
+	cp STARTMENU_CLEAR_DATA_NO
 	jr z, .asm_4bfa
-	cp $04
+	cp STARTMENU_CLEAR_DATA_YES
 	jr z, .asm_4c01
-	set 6, [hl]
+	set STARTMENUF_ANIM2_F, [hl]
 	xor a
 	ld [wMenuObj1FramesetOffset], a
 	ret
@@ -1782,17 +1786,17 @@ HandleStartMenuSelection:
 
 .d_down
 	ld a, [wStartMenuSelection]
-	cp $01
+	cp STARTMENU_CONTINUE
 	ret nz
-	ld a, $12
+	ld a, STARTMENU_CLEAR_DATA | STARTMENUF_SCROLLING
 	ld [wStartMenuSelection], a
 	jr .asm_4c20
 
 .d_up
 	ld a, [wStartMenuSelection]
-	cp $02
+	cp STARTMENU_CLEAR_DATA
 	ret nz
-	ld a, $11
+	ld a, STARTMENU_CONTINUE | STARTMENUF_SCROLLING
 	ld [wStartMenuSelection], a
 
 .asm_4c20
@@ -1801,20 +1805,20 @@ HandleStartMenuSelection:
 
 .d_left
 	ld a, [wStartMenuSelection]
-	cp $03
+	cp STARTMENU_CLEAR_DATA_NO
 	ret nz
 	call .asm_4c20
 	ld bc, Frameset_6cef
-	ld a, $04
+	ld a, STARTMENU_CLEAR_DATA_YES
 	jr .update_obj
 
 .d_right
 	ld a, [wStartMenuSelection]
-	cp $04
+	cp STARTMENU_CLEAR_DATA_YES
 	ret nz
 	call .asm_4c20
 	ld bc, Frameset_6cec
-	ld a, $03
+	ld a, STARTMENU_CLEAR_DATA_NO
 
 .update_obj
 	ld [wStartMenuSelection], a
@@ -1831,7 +1835,7 @@ HandleStartMenuSelection:
 
 .MoveVertical
 	ld a, [wStartMenuSelection]
-	cp $12
+	cp STARTMENU_CLEAR_DATA | STARTMENUF_SCROLLING
 	jr z, .move_up
 
 ; move down
@@ -1855,31 +1859,31 @@ HandleStartMenuSelection:
 
 .reset_move_vertical_flag
 	ld hl, wStartMenuSelection
-	res 4, [hl]
+	res STARTMENUF_SCROLLING_F, [hl]
 	ret
 
-.UpdateAnim
+.UpdateAnim1
 	ld hl, wMenuObj1End - 1
 	call UpdateObjAnim
 	ld a, [wObjAnimWasReset]
 	and a
 	ret z
 
-.asm_4c8c
+.set_select_flag
 	ld hl, wStartMenuSelection
-	set 7, [hl]
+	set STARTMENUF_SELECT_F, [hl]
 	xor a
 	ld [wMenuObj1FramesetOffset], a
 	ret
 
-.asm_4c96
+.UpdateAnim2
 	ld a, [wGlobalCounter]
 	and %1
 	ret nz
 	ld hl, wMenuObj1FramesetOffset
 	ld a, [hl]
 	cp $10
-	jr z, .asm_4c8c
+	jr z, .set_select_flag
 	inc [hl]
 	and $03
 	jr z, .asm_4cb2
