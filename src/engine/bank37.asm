@@ -53,7 +53,7 @@ Func_dc01e:
 
 	play_music MUSIC_PERFECT
 
-	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	xor a
 	ld [wTimer], a
@@ -189,10 +189,10 @@ Func_dc13e:
 
 Func_dc158:
 	ld a, [hli]
-	add $10
+	add OAM_Y_OFS
 	ld [wCurSpriteYCoord], a
 	ld a, [hli]
-	add $08
+	add OAM_X_OFS
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
 	ld [wCurSpriteFrame], a

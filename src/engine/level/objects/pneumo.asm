@@ -193,7 +193,7 @@ PneumoFunc:
 	ld c, $03
 	jr .asm_457ae
 .asm_45782
-	cp $a0
+	cp SCREEN_WIDTH_PX
 	jr c, .asm_45798
 	cp $f0
 	ld a, $01

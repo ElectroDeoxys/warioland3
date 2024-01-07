@@ -192,22 +192,11 @@ LoadActionHelpBGPals:
 	and STATF_LCD
 	jr nz, .wait_lcd_on
 
+REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
+ENDR
+
 	dec b
 	jr nz, .wait_lcd_off
 	ret
@@ -254,22 +243,11 @@ LoadActionHelpOBPals:
 	and STATF_LCD
 	jr nz, .wait_lcd_on
 
+REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
+ENDR
+
 	dec b
 	jr nz, .wait_lcd_off
 	ret
@@ -319,22 +297,11 @@ Func_1e4a47:
 	and STATF_LCD
 	jr nz, .wait_lcd_on
 
+REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
+ENDR
+
 	dec b
 	jr nz, .wait_lcd_off
 	ret
@@ -344,10 +311,10 @@ AddActionHelpWarioSprite:
 	ld b, a
 	ld a, [hli]
 	sub b
-	add $10
+	add OAM_Y_OFS
 	ld [wCurSpriteYCoord], a
 	ld a, [hli]
-	add $08
+	add OAM_X_OFS
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
 	ld [wCurSpriteFrame], a
@@ -365,10 +332,10 @@ AddActionHelpWarioSprite_FromBank:
 	ld b, a
 	ld a, [hli]
 	sub b
-	add $10
+	add OAM_Y_OFS
 	ld [wCurSpriteYCoord], a
 	ld a, [hli]
-	add $08
+	add OAM_X_OFS
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
 	ld [wCurSpriteFrame], a
@@ -390,10 +357,10 @@ AddActionHelpSprite_Far:
 	ld b, a
 	ld a, [hli]
 	sub b
-	add $10
+	add OAM_Y_OFS
 	ld [wCurSpriteYCoord], a
 	ld a, [hli]
-	add $08
+	add OAM_X_OFS
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
 	ld [wCurSpriteFrame], a
@@ -421,10 +388,10 @@ AddActionHelpSprite:
 	ld b, a
 	ld a, [hli]
 	sub b
-	add $10
+	add OAM_Y_OFS
 	ld [wCurSpriteYCoord], a
 	ld a, [hli]
-	add $08
+	add OAM_X_OFS
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
 	ld [wCurSpriteFrame], a
@@ -440,10 +407,10 @@ Func_1e4b6d:
 	ld b, a
 	ld a, [hli]
 	sub b
-	add $10
+	add OAM_Y_OFS
 	ld [wCurSpriteYCoord], a
 	ld a, [hli]
-	add $08
+	add OAM_X_OFS
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
 	ld [wCurSpriteFrame], a

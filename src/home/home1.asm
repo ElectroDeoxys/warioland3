@@ -371,7 +371,7 @@ TryAddSprite::
 	ld h, HIGH(wVirtualOAM)
 .loop
 	ld a, l
-	cp NUM_SPRITE_OAM_STRUCTS * SPRITEOAMSTRUCT_LENGTH
+	cp OAM_COUNT * SPRITEOAMSTRUCT_LENGTH
 	ret nc
 	ld a, [de]
 	cp $80
@@ -829,22 +829,11 @@ ClearTransformationValues::
 	and STATF_LCD
 	jr nz, .wait_lcd_off_bg
 
+REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
+ENDR
+
 	dec b
 	jr nz, .wait_lcd_on_bg
 
@@ -863,22 +852,11 @@ ClearTransformationValues::
 	and STATF_LCD
 	jr nz, .wait_lcd_off_ob
 
+REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
+ENDR
+
 	dec b
 	jr nz, .wait_lcd_on_ob
 	ret
@@ -1330,7 +1308,7 @@ ReturnToLevelFromGolf::
 	or ROOMTRANSITION_2
 	ld [wRoomTransitionParam], a
 	farcall Func_1f0969
-	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 ;	fallthrough
 
@@ -1885,10 +1863,10 @@ CheckHasAllMusicalCoinFlags::
 
 Func_17be::
 	ld a, [hli]
-	add $10
+	add OAM_Y_OFS
 	ld [wCurSpriteYCoord], a
 	ld a, [hli]
-	add $08
+	add OAM_X_OFS
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
 	ld [wCurSpriteFrame], a
@@ -1906,10 +1884,10 @@ Func_17be::
 
 Func_17ec::
 	ld a, [hli]
-	add $10
+	add OAM_Y_OFS
 	ld [wCurSpriteYCoord], a
 	ld a, [hli]
-	add $08
+	add OAM_X_OFS
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
 	ld [wCurSpriteFrame], a
@@ -2652,11 +2630,13 @@ SetWarioPal::
 	ldh a, [rSTAT]
 	and STATF_LCD
 	jr nz, .wait_lcd_off
+
 ; apply OBJ palette
-REPT PALETTE_SIZE
+REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
 ENDR
+
 	dec b
 	jr nz, .wait_lcd_on
 	pop af
@@ -2716,7 +2696,7 @@ LoadCollectedTreasurePal_Level::
 	and STATF_LCD
 	jr nz, .wait_lcd_off
 ; apply OBJ palette
-REPT PALETTE_SIZE
+REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
 ENDR
@@ -2791,22 +2771,11 @@ CopyAndApplyOBPals::
 	and STATF_LCD
 	jr nz, .wait_lcd_off
 
+REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
+ENDR
+
 	dec b
 	jr nz, .wait_lcd_on
 	ret

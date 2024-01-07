@@ -1227,7 +1227,7 @@ Func_8065e:
 	xor a
 	ld [wWX], a
 	ldh [rWX], a
-	ld a, $90
+	ld a, SCREEN_HEIGHT_PX
 	ld [wWY], a
 	ldh [rWY], a
 	xor a ; BOTBAR_CLOSED
@@ -1402,7 +1402,7 @@ Func_8086f:
 	ld a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 	jr .apply_lcd
 .no_window_display
-	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
+	ld a, LCDC_DEFAULT
 .apply_lcd
 	ldh [rLCDC], a
 
@@ -6386,7 +6386,7 @@ HandleBottomBar:
 .CloseWindow
 	ld hl, wWY
 	ld a, [hl]
-	cp $90
+	cp SCREEN_HEIGHT_PX
 	jr nc, .cap_max_wy
 	inc [hl]
 	inc [hl]
@@ -6396,7 +6396,7 @@ HandleBottomBar:
 	inc [hl]
 	ret
 .cap_max_wy
-	ld [hl], $90
+	ld [hl], SCREEN_HEIGHT_PX
 	ld hl, wBottomBarState
 	inc [hl]
 	ret

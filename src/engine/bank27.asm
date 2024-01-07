@@ -2044,7 +2044,7 @@ Cutscene19Func:
 
 .Func_9d2a9:
 	ld hl, wSceneObj2YCoord
-	ld a, $90
+	ld a, SCREEN_HEIGHT_PX
 	ld [hli], a
 	ld [hl], $50
 	ld a, $01
@@ -2772,7 +2772,7 @@ Cutscene02Func:
 
 .Func_9d7b7
 	ld hl, wSceneObj2
-	ld a, $90
+	ld a, SCREEN_HEIGHT_PX
 	ld [hli], a
 	ld [hl], $6c
 	ld a, $01
@@ -3100,7 +3100,7 @@ Cutscene13Func:
 	ld hl, wSceneObj3YCoord
 	inc [hl]
 	ld a, [hl]
-	cp $90
+	cp SCREEN_HEIGHT_PX
 	ret nz
 	jp AdvanceCutsceneFunc
 
@@ -3371,7 +3371,7 @@ Cutscene24Func:
 	ld a, [hl]
 	cp $30
 	jr z, .asm_9dbdc
-	cp $a0
+	cp SCREEN_WIDTH_PX
 	ret nz
 	xor a
 	ld [wSceneObj3State], a
@@ -5180,7 +5180,7 @@ Cutscene57Func:
 
 Func_9e855:
 	ld hl, wSceneObj2
-	lb de, $90, $48
+	lb de, SCREEN_HEIGHT_PX, $48
 	ld a, $01
 	call Func_9ccf9
 	ld hl, wSceneObj3

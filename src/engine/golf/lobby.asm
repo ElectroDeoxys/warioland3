@@ -53,7 +53,7 @@ InitGolfLobby:
 	jr nz, .asm_1c8069
 	ld a, GOLF_WARIO_WAITING
 	ld [wGolfWarioState], a
-	ld a, $90
+	ld a, SCREEN_HEIGHT_PX
 	ld [wGolfWarioYPos], a
 	ld a, $38
 	ld [wGolfWarioXPos], a
@@ -101,7 +101,7 @@ InitGolfLobby:
 	ld [wSCY], a
 	ld [wSCX], a
 
-	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]
@@ -480,7 +480,7 @@ HandleGolfLobbyStates:
 .walk_left
 	ld de, wGolfWarioYPos
 	ld a, [de]
-	cp $90
+	cp SCREEN_HEIGHT_PX
 	call c, .DoJumpLeft
 	ld hl, wGolfWarioXPos
 	ld a, [hl]
@@ -489,7 +489,7 @@ HandleGolfLobbyStates:
 	dec [hl]
 	ret
 .reached_door
-	ld a, $90
+	ld a, SCREEN_HEIGHT_PX
 	ld [wGolfWarioYPos], a
 	ld a, $38
 	ld [wGolfWarioXPos], a
@@ -620,7 +620,7 @@ InitGolfClearCutscene:
 	ld [wSCY], a
 	ld [wSCX], a
 
-	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]

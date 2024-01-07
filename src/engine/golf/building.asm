@@ -70,7 +70,7 @@ Func_1c8586:
 	ld a, [wGolfMenuTargetSCX]
 	ldh [rSCX], a
 	ld [wSCX], a
-	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]
@@ -265,7 +265,7 @@ Func_1c86f8:
 	ld [wGolfObj3Frame], a
 	ld hl, wGolfObj3Sprite
 	call AddGolfSprite
-	ld a, $a0
+	ld a, SCREEN_WIDTH_PX
 	ld [wGolfObj4YCoord], a
 	ld a, $58
 	ld [wGolfObj4XCoord], a

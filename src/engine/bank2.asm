@@ -64,7 +64,7 @@ InitLevel:
 	ld a, [wLevel]
 	cp THE_TEMPLE
 	jr z, .final_battle
-	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	ret
 
@@ -639,7 +639,7 @@ Func_846e:
 	ld [wIsIntangible], a
 	ld a, $02
 	ld [wSubState], a
-	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	ret
 
@@ -8429,13 +8429,13 @@ SetWarioScreenPos:
 	ld a, [wSCY]
 	ld b, a
 	ld a, [wWarioYPos + 1]
-	add $10
-	sub b ; wWarioYPos + 1 + $10 - wSCY
+	add OAM_Y_OFS
+	sub b ; [wWarioYPos + 1] + $10 - wSCY
 	ld [wWarioScreenYPos], a
 	ld a, [wSCX]
 	ld b, a
 	ld a, [wWarioXPos + 1]
-	add $08
+	add OAM_X_OFS
 	sub b
 	ld [wWarioScreenXPos], a
 	ret
@@ -8447,13 +8447,13 @@ SetWarioScreenPos:
 	add c
 	ld b, a
 	ld a, [wWarioYPos + 1]
-	add $10
+	add OAM_Y_OFS
 	sub b
 	ld [wWarioScreenYPos], a
 	ld a, [wc08c]
 	ld b, a
 	ld a, [wWarioXPos + 1]
-	add $08
+	add OAM_X_OFS
 	sub b
 	ld [wWarioScreenXPos], a
 	ret

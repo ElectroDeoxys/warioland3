@@ -590,7 +590,7 @@ MagicSpiralFunc:
 	set 6, [hl]
 	jr .asm_56281
 .asm_56276
-	cp $90
+	cp SCREEN_HEIGHT_PX
 	jr nc, .asm_5627f
 	call MoveObjectDown
 	jr .asm_56284
@@ -608,7 +608,7 @@ MagicSpiralFunc:
 	set 7, [hl]
 	jr .asm_5629d
 .asm_56296
-	cp $a0
+	cp SCREEN_WIDTH_PX
 	jp c, MoveObjectRight
 	res 7, [hl]
 .asm_5629d
@@ -831,7 +831,7 @@ IgaguriFunc:
 	set 7, [hl]
 	ret
 .asm_56428
-	cp $a0
+	cp SCREEN_WIDTH_PX
 	jp c, MoveObjectRightByVar2
 	res 7, [hl]
 	ret
@@ -1041,7 +1041,7 @@ KuriFunc:
 	set 7, [hl]
 	ret
 .asm_56598
-	cp $a0
+	cp SCREEN_WIDTH_PX
 	jp c, MoveObjectRight
 	res 7, [hl]
 	ret
@@ -1097,7 +1097,7 @@ KuriFunc:
 	set 7, [hl]
 	jr .asm_56602
 .asm_565fb
-	cp $a0
+	cp SCREEN_WIDTH_PX
 	jp c, MoveObjectRightByVar2
 	res 7, [hl]
 .asm_56602

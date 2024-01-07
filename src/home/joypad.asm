@@ -53,7 +53,7 @@ ENDR
 
 PushOAM::
 	ldh [rDMA], a
-	ld a, NUM_SPRITE_OAM_STRUCTS
+	ld a, OAM_COUNT
 .loop
 	dec a
 	jr nz, .loop

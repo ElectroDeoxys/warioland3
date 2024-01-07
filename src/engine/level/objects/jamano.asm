@@ -764,7 +764,7 @@ SkullFunc:
 	ld bc, Data_60ce0
 	jp ApplyObjYMovement
 .asm_552f8
-	cp $a0
+	cp SCREEN_WIDTH_PX
 	jr z, .asm_55309
 	call MoveObjectRight
 	ld a, b

@@ -1,7 +1,7 @@
 ; clears whole wVirtualOAM
 ClearVirtualOAM::
 	ld hl, wVirtualOAM
-	ld b, NUM_SPRITE_OAM_STRUCTS * SPRITEOAMSTRUCT_LENGTH
+	ld b, OAM_COUNT * SPRITEOAMSTRUCT_LENGTH
 	xor a
 	call WriteAToHL_BTimes
 	xor a
@@ -46,7 +46,7 @@ ClearUnusedVirtualOAM::
 	ld a, [wVirtualOAMByteSize]
 	ld l, a
 	ld h, HIGH(wVirtualOAM)
-	ld a, NUM_SPRITE_OAM_STRUCTS * SPRITEOAMSTRUCT_LENGTH
+	ld a, OAM_COUNT * SPRITEOAMSTRUCT_LENGTH
 	sub l
 	jr z, .done
 	jr c, .done

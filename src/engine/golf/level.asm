@@ -74,7 +74,7 @@ InitGolfLevel:
 
 	; setting the LCDC here is unnecessary since we
 	; already set the correct configuration in Func_1c9cf9
-	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 
 	ld hl, wSubState
@@ -426,7 +426,7 @@ UpdateGolfLevelUI:
 	ld a, [wGolfLevelState]
 	cp GOLFLEVELSTATE_PAUSE
 	ret z
-	ld a, $90
+	ld a, SCREEN_HEIGHT_PX
 	ld [wGolfObj3YCoord], a
 	ld a, $58
 	ld [wGolfObj3XCoord], a
@@ -441,7 +441,7 @@ UpdateGolfLevelUI:
 	ld a, [wGolfObj4State]
 	and a
 	ret nz
-	ld a, $90
+	ld a, SCREEN_HEIGHT_PX
 	ld [wGolfObj4YCoord], a
 	ld a, [wShotPowerGaugeCursor]
 	add $32
@@ -457,7 +457,7 @@ UpdateGolfLevelUI:
 	ld a, [wGolfObj5State]
 	and a
 	ret z
-	ld a, $90
+	ld a, SCREEN_HEIGHT_PX
 	ld [wGolfObj5YCoord], a
 	ld a, [wSelectedShotPowerGauge]
 	add $32
@@ -498,7 +498,7 @@ UpdateGolfParaGoom:
 	ld a, [wSCX]
 	ld b, a
 	ld a, e
-	add $8
+	add OAM_X_OFS
 	sub b
 	ld [wGolfParaGoomXCoord], a
 	ld b, $12
@@ -723,7 +723,7 @@ UpdateGolfWario:
 	ld a, [wSCX]
 	ld b, a
 	ld a, e
-	add $8
+	add OAM_X_OFS
 	sub b
 	ld [wGolfWarioXCoord], a
 	ld a, [wGolfWarioYPos]
@@ -1000,7 +1000,7 @@ GolfLevelState_Scroll:
 	ld a, [wSCX]
 	ld b, a
 	ld a, e
-	add $8
+	add OAM_X_OFS
 	sub b
 	ld [wGolfParaGoomGhostXCoord], a
 	ld a, $72
@@ -2855,7 +2855,7 @@ Func_1c9cf9:
 	cp GOLF_DISPLAY_BGMAP1
 	jr z, .bgmap1
 ; bgmap0
-	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
+	ld a, LCDC_DEFAULT
 	jr .got_lcd_config
 .split
 	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_WINON | LCDCF_WIN9C00 | LCDCF_ON
@@ -3153,7 +3153,7 @@ VBlank_1c9ffa:
 	ld [wdc11 + 0], a
 	ld a, $c0
 	ld [wdc11 + 1], a
-	ld a, $0d
+	ld a, 14 - 1
 	ld [w1dc13], a
 
 	ld hl, .Func
@@ -3202,7 +3202,7 @@ VBlank_1ca056:
 	ld [wdc11 + 0], a
 	ld a, $c0
 	ld [wdc11 + 1], a
-	ld a, $0d
+	ld a, 14 - 1
 	ld [w1dc13], a
 
 	ld hl, .Func

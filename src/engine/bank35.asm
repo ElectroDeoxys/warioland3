@@ -200,7 +200,7 @@ InitClearScreen:
 	call AddClearScreenSprite
 
 .no_music_boxes
-	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]
@@ -383,7 +383,7 @@ InitTimeAttackClearScreen:
 	call AddClearScreenSprite
 
 .done_keys
-	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]
@@ -523,7 +523,7 @@ InitMusicalCoinScreen:
 	ld [wAnimatedTilesFrame], a
 	inc a ; TRUE
 	ld [wRoomAnimatedTilesEnabled], a
-	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	xor a
 	ld [wc0e8], a
@@ -771,11 +771,11 @@ AddClearScreenSprite:
 	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
-	add $10
+	add OAM_Y_OFS
 	sub b
 	ld [wCurSprite], a
 	ld a, [hli]
-	add $08
+	add OAM_X_OFS
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
 	ld [wCurSpriteFrame], a
@@ -789,11 +789,11 @@ AddClearScreenWarioSprite:
 	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
-	add $10
+	add OAM_Y_OFS
 	sub b
 	ld [wCurSprite], a
 	ld a, [hli]
-	add $08
+	add OAM_X_OFS
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
 	ld [wCurSpriteFrame], a
@@ -1138,11 +1138,11 @@ AddPencilSprite:
 	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
-	add $10
+	add OAM_Y_OFS
 	sub b
 	ld [wCurSprite], a
 	ld a, [hli]
-	add $8
+	add OAM_X_OFS
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
 	ld [wCurSpriteFrame], a

@@ -723,7 +723,7 @@ ShootFunc:
 	ld [hld], a
 	dec l
 	ld a, [wNumWarioGoals]
-	cp $02
+	cp 2
 	jr nc, .asm_56b3e
 	xor a
 	jr .asm_56b40

@@ -20,6 +20,7 @@ FarDecompress::
 
 ; hl = source
 ; wdc11 = destination
+; w1dc13 = length - 1
 Func_2c30::
 	ld a, h
 	ldh [rHDMA1], a

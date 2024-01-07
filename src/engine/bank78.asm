@@ -440,7 +440,7 @@ Func_1e028a:
 
 .asm_1e02a5
 	ld hl, wClearScreenWario
-	ld a, $90
+	ld a, SCREEN_HEIGHT_PX
 	ld [hli], a
 	ld a, $2c
 	ld [hli], a

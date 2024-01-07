@@ -155,7 +155,7 @@ Func_b40d9:
 	jp InitSceneObjParams
 
 .data_1
-	db $51, $a0, $0f
+	db $51, SCREEN_WIDTH_PX, $0f
 .data_2
 	db $59, $2d, $1d
 
@@ -285,7 +285,7 @@ Func_b417a:
 	xor a
 	ld [wWX], a
 	ldh [rWX], a
-	ld a, $90
+	ld a, SCREEN_HEIGHT_PX
 	ld [wWY], a
 	ldh [rWY], a
 	xor a ; BOTBAR_CLOSED
@@ -484,7 +484,7 @@ Func_b43a8:
 	jp InitSceneObjParams
 
 .data_1
-	db $32, $a0, $12
+	db $32, SCREEN_WIDTH_PX, $12
 .data_2
 	db $3a, $2e, $13
 
@@ -794,7 +794,7 @@ Func_b45f5:
 	jp InitSceneObjParams
 
 .data_1
-	db $37, $a0, $16
+	db $37, SCREEN_WIDTH_PX, $16
 .data_2
 	db $3f, $10, $1d
 

@@ -34,7 +34,7 @@ InitWithoutDemoPowerUpReset::
 	ldh [rLCDC], a
 .wait_vblank
 	ldh a, [rLY]
-	cp 148
+	cp $94
 	jr nz, .wait_vblank
 
 	ld a, LCDCF_BGON | LCDCF_OBJON

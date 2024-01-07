@@ -290,7 +290,7 @@ InitIntroSequence:
 	ld [hl], a
 	call UpdateObjAnim
 
-	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	xor a
 	ld [wTimer], a
@@ -911,7 +911,7 @@ StartMenu:
 .ClearData
 	ld a, $81
 	ld [wcee4], a
-	ld a, 144
+	ld a, SCREEN_HEIGHT_PX
 	ld [wMenuObj2YCoord], a
 	ld a, 120
 	ld [wMenuObj1YCoord], a
@@ -966,7 +966,7 @@ StartMenu:
 	call DisableLCD
 	call FillWhiteBGPal
 	call FillWhiteOBPal
-	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]
@@ -1011,7 +1011,7 @@ InitTimeAttackDescription:
 	ldh [rSCY], a
 	ld [wSCX], a
 	ldh [rSCX], a
-	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	xor a
 	ld [wTimer], a
@@ -1026,7 +1026,7 @@ TimeAttackDescription:
 	ret z
 	call DisableLCD
 	call FillWhiteBGPal
-	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	jp StartOverworldState
 
@@ -1184,7 +1184,7 @@ GBIncompatible:
 	ldh [rSCX], a
 	ld [wSCY], a
 	ldh [rSCY], a
-	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]
@@ -1274,7 +1274,7 @@ InitLanguageSelection:
 	ld hl, wMenuObj1
 	call Func_4e3e
 	call ClearUnusedVirtualOAM
-	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 
 	ld hl, wSubState
@@ -1702,13 +1702,13 @@ Func_4b73:
 	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
-	add $10
+	add OAM_Y_OFS
 	sub b
 	ld [wCurSpriteYCoord], a
 
 	; x coord
 	ld a, [hli]
-	add $08
+	add OAM_X_OFS
 	ld [wCurSpriteXCoord], a
 
 	ld a, [hli]
@@ -1724,12 +1724,12 @@ Func_4b93:
 	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
-	add $10
+	add OAM_Y_OFS
 	sub b
 	ld [wCurSpriteYCoord], a
 	; x coord
 	ld a, [hli]
-	add $08
+	add OAM_X_OFS
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
 	ld [wCurSpriteFrame], a
@@ -2150,11 +2150,11 @@ Func_4e3e:
 	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
-	add $10
+	add OAM_Y_OFS
 	sub b
 	ld [wCurSpriteYCoord], a
 	ld a, [hli]
-	add $08
+	add OAM_X_OFS
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
 	ld [wCurSpriteFrame], a
@@ -2166,7 +2166,7 @@ Func_4e3e:
 
 PlayIntroSFXPlane_Close:
 	ld a, [wPlaneWarioXCoord]
-	cp 160
+	cp SCREEN_WIDTH_PX
 	jr nc, PlayIntroSFXPlane3
 	cp 112
 	jr nc, PlayIntroSFXPlane2
@@ -2183,7 +2183,7 @@ PlayIntroSFXPlane3:
 
 PlayIntroSFXPlane_Far:
 	ld a, [wPlaneWarioXCoord]
-	cp 160
+	cp SCREEN_WIDTH_PX
 	jr nc, PlayIntroSFXPlane3
 	jr PlayIntroSFXPlane2
 

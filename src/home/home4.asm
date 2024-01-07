@@ -552,22 +552,12 @@ Func_35bb::
 	ldh a, [rSTAT]
 	and STATF_LCD
 	jr nz, .wait_lcd_off
+
+REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
+ENDR
+
 	dec b
 	jr nz, .wait_lcd_on
 	ret
@@ -591,22 +581,12 @@ Func_35e5::
 	ldh a, [rSTAT]
 	and STATF_LCD
 	jr nz, .wait_lcd_off
+
+REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
-	ld a, [hli]
-	ld [$ff00+c], a
+ENDR
+
 	dec b
 	jr nz, .wait_lcd_on
 	ret
@@ -627,15 +607,12 @@ Func_360f::
 	ldh a, [rSTAT]
 	and STATF_LCD
 	jr nz, .wait_lcd_off
+
 	xor a ; black
+REPT 1 palettes
 	ld [$ff00+c], a
-	ld [$ff00+c], a
-	ld [$ff00+c], a
-	ld [$ff00+c], a
-	ld [$ff00+c], a
-	ld [$ff00+c], a
-	ld [$ff00+c], a
-	ld [$ff00+c], a
+ENDR
+
 	dec b
 	jr nz, .wait_lcd_on
 	ret
@@ -656,15 +633,12 @@ Func_3632::
 	ldh a, [rSTAT]
 	and STATF_LCD
 	jr nz, .wait_lcd_off
+
 	xor a ; black
+REPT 1 palettes
 	ld [$ff00+c], a
-	ld [$ff00+c], a
-	ld [$ff00+c], a
-	ld [$ff00+c], a
-	ld [$ff00+c], a
-	ld [$ff00+c], a
-	ld [$ff00+c], a
-	ld [$ff00+c], a
+ENDR
+
 	dec b
 	jr nz, .wait_lcd_on
 	ret

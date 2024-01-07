@@ -465,7 +465,7 @@ ReturnFromPauseMenu:
 	ld [wRoomAnimatedTilesEnabled], a
 
 	call UpdateLevelMusic
-	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]
@@ -496,7 +496,7 @@ InitSaveScreen:
 	ld a, HIGH(v0BGMap0 + $164)
 	ld [hli], a
 	ld [hl], LOW(v0BGMap0 + $164)
-	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]
@@ -858,7 +858,7 @@ SaveLevel:
 	call VBlank_1f0c6c
 	farcall LoadSaveScreenPals
 	farcall PrintSaveCompleteBox
-	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	xor a
 	ld [wTimer + 0], a
@@ -918,7 +918,7 @@ InitSaveScreenAndBackupVRAM:
 	ld a, HIGH(v0BGMap0 + $164)
 	ld [hli], a
 	ld [hl], LOW(v0BGMap0 + $164)
-	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]
@@ -1081,7 +1081,7 @@ Save:
 	ld [wTimer + 0], a
 	ld a, $02
 	ld [wTimer + 1], a
-	ld a, LCDCF_ON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]
@@ -1172,10 +1172,10 @@ LoadLanguageSelectionText:
 
 AddPauseMenuSprite:
 	ld a, [hli]
-	add $10
+	add OAM_Y_OFS
 	ld [wCurSpriteYCoord], a
 	ld a, [hli]
-	add $08
+	add OAM_X_OFS
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
 	ld [wCurSpriteFrame], a

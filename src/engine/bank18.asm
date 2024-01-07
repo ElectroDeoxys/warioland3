@@ -690,13 +690,13 @@ ENDR
 	ld a, [wSCY]
 	ld b, a
 	ld a, [wCurObjYPos + 0]
-	add $10
+	add OAM_Y_OFS
 	sub b
 	ld [hli], a
 	ld a, [wSCX]
 	ld b, a
 	ld a, [wCurObjXPos]
-	add $08
+	add OAM_X_OFS
 	sub b
 	ld [hli], a
 
@@ -864,13 +864,13 @@ ENDR
 	ld a, [wSCY]
 	ld b, a
 	ld a, [wCurObjYPos + 0]
-	add $10
+	add OAM_Y_OFS
 	sub b
 	ld [hli], a
 	ld a, [wSCX]
 	ld b, a
 	ld a, [wCurObjXPos]
-	add $08
+	add OAM_X_OFS
 	sub b
 	ld [hli], a
 	pop hl
@@ -976,13 +976,13 @@ ENDR
 	ld a, [wSCY]
 	ld b, a
 	ld a, [wCurObjYPos + 0]
-	add 16
+	add OAM_Y_OFS
 	sub b
 	ld [hli], a
 	ld a, [wSCX]
 	ld b, a
 	ld a, [wCurObjXPos]
-	add 8
+	add OAM_X_OFS
 	sub b
 	ld [hli], a
 	pop hl
@@ -4394,7 +4394,7 @@ CheckObjectOnScreen:
 
 .skip_y1
 	ld a, l
-	add 144
+	add SCREEN_HEIGHT_PX
 	ld l, a
 	jr nc, .no_overflow2
 	inc h
@@ -4438,7 +4438,7 @@ CheckObjectOnScreen:
 	jr z, .on_screen
 .asm_630da
 	ld a, l
-	add $a0
+	add SCREEN_WIDTH_PX
 	ld l, a
 	jr nc, .asm_630e1
 	inc h
@@ -4544,7 +4544,7 @@ CheckObjectOnScreen:
 	jr z, .done
 .asm_63162
 	ld a, l
-	add $a0
+	add SCREEN_WIDTH_PX
 	ld l, a
 	jr nc, .asm_63169
 	inc h

@@ -89,7 +89,7 @@ InitActionHelp:
 	ld [wSCY], a
 
 	ld hl, wMenuObj1
-	ld a, $90
+	ld a, SCREEN_HEIGHT_PX
 	ld [hli], a ; y coord
 	ld a, [wActionHelpPowerUp]
 	swap a

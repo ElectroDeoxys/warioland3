@@ -159,7 +159,7 @@ Func_db29b:
 	ld hl, wMenuObj1
 	call Func_db4e9
 
-	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	ld a, 64
 	ld [wTimer], a
@@ -374,11 +374,11 @@ Func_db4e9:
 	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
-	add $10
+	add OAM_Y_OFS
 	sub b
 	ld [wCurSpriteYCoord], a
 	ld a, [hli]
-	add $08
+	add OAM_X_OFS
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
 	ld [wCurSpriteFrame], a

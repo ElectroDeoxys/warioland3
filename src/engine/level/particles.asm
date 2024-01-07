@@ -1332,13 +1332,13 @@ AddParticleSprite:
 	ld a, [wSCY]
 	ld b, a
 	ld a, [wCurParticleYCoord]
-	add $10
+	add OAM_Y_OFS
 	sub b
 	ld [wCurSpriteYCoord], a
 	ld a, [wSCX]
 	ld b, a
 	ld a, [wCurParticleXCoord]
-	add $08
+	add OAM_X_OFS
 	sub b
 	ld [wCurSpriteXCoord], a
 	ld a, [wCurParticleFrame]
@@ -1352,13 +1352,13 @@ AddParticleSprite:
 	ld a, [wCameraSCY + 1]
 	ld b, a
 	ld a, [wCurParticleYCoord]
-	add $10
+	add OAM_Y_OFS
 	sub b
 	ld [wCurSpriteYCoord], a
 	ld a, [wCameraSCX + 1]
 	ld b, a
 	ld a, [wCurParticleXCoord]
-	add $08
+	add OAM_X_OFS
 	sub b
 	ld [wCurSpriteXCoord], a
 	ld a, [wCurParticleFrame]

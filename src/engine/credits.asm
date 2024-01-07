@@ -108,7 +108,7 @@ InitCredits:
 	stop_music
 	ld a, 120 ; timer before starting music
 	ld [wTimer], a
-	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]
@@ -634,10 +634,10 @@ VBlank_160439:
 
 AddCreditsSprite:
 	ld a, [hli]
-	add $10
+	add OAM_Y_OFS
 	ld [wCurSpriteYCoord], a
 	ld a, [hli]
-	add $08
+	add OAM_X_OFS
 	ld [wCurSpriteXCoord], a
 	ld a, [hli]
 	ld [wCurSpriteFrame], a

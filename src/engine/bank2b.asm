@@ -3844,7 +3844,7 @@ Func_ad9b2:
 	call .Func_ada43
 	call UpdateSceneWarioAnimation
 
-	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_ON
+	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 
 	ld hl, wSubState
@@ -6854,7 +6854,7 @@ Func_af01f:
 
 	ld a, $02
 	ldh [rSVBK], a
-	ld a, $a0
+	ld a, SCREEN_WIDTH_PX
 	ldh [rSCX], a
 	ld [wSCX], a
 	xor a
@@ -7080,7 +7080,7 @@ Func_af13c:
 	ld c, hdma 80
 	jr .asm_af1f2
 .Func_af23e:
-	ld a, $a0
+	ld a, SCREEN_WIDTH_PX
 	ldh [rSCX], a
 	ld [wSCX], a
 	xor a
