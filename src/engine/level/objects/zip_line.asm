@@ -253,7 +253,7 @@ ZipLineFunc:
 	cp $27
 	ret c
 	ld a, [wGlobalCounter]
-	and $07
+	and %111
 	ret nz
 	play_sfx SFX_ZIP_LINE_SLIDE
 	ret
@@ -263,7 +263,7 @@ ZipLineFunc:
 	cp $27
 	ret nc
 	ld a, [wGlobalCounter]
-	and $1f
+	and %11111
 	ret nz
 	play_sfx SFX_08C
 	ret

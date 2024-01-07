@@ -806,7 +806,7 @@ MuddeeFunc:
 
 .Func_55bd8:
 	ld a, [wGlobalCounter]
-	and $0f
+	and %1111
 	ret nz
 	play_sfx SFX_0C1
 	ret
@@ -872,7 +872,7 @@ MuddeeFunc:
 .Func_55c3a:
 	ld hl, wCurObjFlags
 	ld a, [wGlobalCounter]
-	and $03
+	and %11
 	jr z, .asm_55c47
 	res 4, [hl]
 	ret

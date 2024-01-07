@@ -218,7 +218,7 @@ PesceFunc:
 	ret
 .asm_51e97
 	ld a, [wGlobalCounter]
-	and $5f
+	and %1011111
 	play_sfx z, SFX_WATER_SURFACE
 	ld l, OBJ_STATE_DURATION
 	ld a, [hl]
@@ -242,7 +242,7 @@ PesceFunc:
 	and a
 	jr nz, .asm_51ed4
 	ld a, [wGlobalCounter]
-	and $03
+	and %11
 	ret nz
 	ld b, $01
 	call AddYOffset
@@ -294,7 +294,7 @@ PesceFunc:
 	cp b
 	jr c, .asm_51f46
 	ld a, [wGlobalCounter]
-	and $03
+	and %11
 	jr nz, .asm_51f46
 	ld hl, wCurObjVar3
 	inc [hl]

@@ -5657,7 +5657,7 @@ Cutscene44Func:
 
 .Func_9ebbc:
 	ld a, [wGlobalCounter]
-	and $03
+	and %11
 	ret nz
 	ld hl, wSceneObj2YCoord
 	inc [hl]
@@ -5768,7 +5768,7 @@ Cutscene14Func:
 .Func_9ecef:
 	call .Func_9ee5b
 	ld a, [wGlobalCounter]
-	and $01
+	and %1
 	ret nz
 	ld hl, wSceneObj2YCoord
 	dec [hl]
@@ -5793,7 +5793,7 @@ Cutscene14Func:
 .Func_9ed1c:
 	call .Func_9ee5b
 	ld a, [wGlobalCounter]
-	and $03
+	and %11
 	ret nz
 	ld hl, wSceneObj2YCoord
 	inc [hl]
@@ -5811,7 +5811,7 @@ Cutscene14Func:
 .Func_9ed3c:
 	call .Func_9ee5b
 	ld a, [wGlobalCounter]
-	and $03
+	and %11
 	ret nz
 	ld hl, wCurSceneObj
 	inc [hl]

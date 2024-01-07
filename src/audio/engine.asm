@@ -210,12 +210,12 @@ Func_3007a::
 
 SetSFXChannels:
 	ld de, wChannels
-	ld a, NUM_SFX_CHANS
+	ld a, NUM_SFX_CHANNELS
 	jr SetAudioChannels
 
 SetMusicChannels:
 	ld de, wMusicChannels
-	ld a, NUM_MUSIC_CHANS
+	ld a, NUM_MUSIC_CHANNELS
 	jr SetAudioChannels
 
 	ld de, wChannel1
@@ -319,7 +319,7 @@ _PlaySFX::
 	jr nz, .asm_30211 ; jump never taken
 
 	ld b, a
-	sub CHAN5
+	sub CHAN5_F
 	jr nc, .done_1
 	cpl
 	inc a
@@ -473,7 +473,7 @@ Func_302b8::
 	cp b
 	jr nz, PlayMusic
 	ld a, [wActiveChannels]
-	and (1 << CHAN5) | (1 << CHAN6) | (1 << CHAN7) | (1 << CHAN8)
+	and MUSIC_CHANNELS
 	jr z, PlayMusic
 	jp Func_3f8d
 
@@ -492,7 +492,7 @@ _PlayNewMusic_SetNoise::
 
 ; same as wLoadedMusic
 	ld a, [wActiveChannels]
-	and (1 << CHAN5) | (1 << CHAN6) | (1 << CHAN7) | (1 << CHAN8)
+	and MUSIC_CHANNELS
 	jr z, .asm_302e4
 	jp Func_3f8d
 
@@ -745,10 +745,10 @@ TurnMusicOff:
 
 Func_30438::
 	ld a, [wActiveChannels]
-	and $0f
+	and SFX_CHANNELS
 	ld d, a
 	ld a, [wActiveChannels]
-	and $f0
+	and MUSIC_CHANNELS
 	swap a
 	ld e, a
 	jp Func_3f8d
@@ -757,7 +757,7 @@ Func_30449::
 	and a
 	jr nz, .asm_3045d
 	ld a, [wActiveChannels]
-	and $f0
+	and MUSIC_CHANNELS
 	jr z, .asm_30461
 	ld a, [wLoadedMusic + 0]
 	ld c, a

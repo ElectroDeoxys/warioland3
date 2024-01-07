@@ -5966,7 +5966,7 @@ SOWFunc_RaiseTower:
 
 .Func_b6a16:
 	ld a, [wGlobalCounter]
-	and $07
+	and %111
 	jr z, .asm_b6a28
 	and $01
 	ret nz
@@ -5983,7 +5983,7 @@ SOWFunc_RaiseTower:
 
 .Func_b6a2e:
 	ld a, [wGlobalCounter]
-	and $0f
+	and %1111
 	jr z, .asm_b6a40
 	and $03
 	ret nz
@@ -6579,7 +6579,7 @@ SOWFunc_FullMoon:
 
 .MoveMoon:
 	ld a, [wGlobalCounter]
-	and $07
+	and %111
 	ret nz
 	ld hl, wSceneObj14
 	dec [hl]

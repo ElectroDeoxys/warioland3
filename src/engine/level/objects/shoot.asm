@@ -50,7 +50,7 @@ ShootFunc:
 
 .Func_56675:
 	ld a, [wGlobalCounter]
-	and $0f
+	and %1111
 	play_sfx z, SFX_0C6
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -758,7 +758,7 @@ ShootFunc:
 	jr nc, .asm_56b90
 .asm_56b81
 	ld a, [wGlobalCounter]
-	and $0f
+	and %1111
 	play_sfx z, SFX_06A
 .asm_56b90
 	ld bc, Data_60e40

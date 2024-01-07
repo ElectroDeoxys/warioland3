@@ -141,7 +141,7 @@ PneumoFunc:
 	cp TRANSFORMATION_PUFFY_WARIO
 	jr z, .asm_45739
 	ld a, [wGlobalCounter]
-	and $3f
+	and %111111
 	jr nz, .asm_45739
 	ld hl, wCurObjSubState
 	ld a, [hl]

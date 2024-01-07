@@ -230,7 +230,7 @@ OmodonmekaFunc:
 
 .asm_422e2
 	ld a, [wGlobalCounter]
-	and $07
+	and %111
 	play_sfx z, SFX_087
 
 	ld b, $01
@@ -299,7 +299,7 @@ OmodonmekaFunc:
 
 .Func_42369:
 	ld a, [wGlobalCounter]
-	and $1f
+	and %11111
 	play_sfx z, SFX_08C
 
 	ld bc, Data_604c0

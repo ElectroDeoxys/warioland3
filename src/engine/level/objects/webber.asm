@@ -266,7 +266,7 @@ WebberFunc:
 
 .not_stepped3
 	ld a, [wGlobalCounter]
-	and %01111111
+	and %1111111
 	ret nz
 	ld l, OBJ_VAR_3
 	dec [hl]

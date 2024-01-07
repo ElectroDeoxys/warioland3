@@ -373,7 +373,7 @@ ScowlerFunc:
 	ld [hl], a
 .asm_54782
 	ld a, [wGlobalCounter]
-	and $07
+	and %111
 	play_sfx z, SFX_0AB
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -1016,7 +1016,7 @@ InkFunc:
 	and a
 	jr z, .asm_54be6
 	ld a, [wGlobalCounter]
-	and $03
+	and %11
 	ret nz
 	jp MoveObjectUp
 .asm_54be1

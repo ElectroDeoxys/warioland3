@@ -461,7 +461,7 @@ Func_160318:
 	call AddCreditsSprite
 	call ClearUnusedVirtualOAM
 	ld a, [wGlobalCounter]
-	and $0f
+	and %1111
 	ret nz
 	call SlowFadeInScreen
 	ld a, 180

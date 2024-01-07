@@ -8024,7 +8024,7 @@ Func_af13c:
 
 .Func_af8d0:
 	ld a, [wGlobalCounter]
-	and $03
+	and %11
 	ret nz
 	ld a, $07
 	xor l
@@ -8038,7 +8038,7 @@ Func_af13c:
 	cp $1c
 	ret nz
 	ld a, [wGlobalCounter]
-	and $07
+	and %111
 	ret nz
 	ld a, $07
 	xor l
@@ -8052,7 +8052,7 @@ Func_af13c:
 	cp $1b
 	ret nz
 	ld a, [wGlobalCounter]
-	and $03
+	and %11
 	ret nz
 	ld a, $07
 	xor l
@@ -8066,7 +8066,7 @@ Func_af13c:
 	cp $1c
 	ret nz
 	ld a, [wGlobalCounter]
-	and $07
+	and %111
 	ret nz
 	ld a, $07
 	xor l

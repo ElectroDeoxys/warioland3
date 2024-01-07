@@ -123,7 +123,7 @@ TorchFunc:
 
 .zero
 	ld a, [wGlobalCounter]
-	and %01111111
+	and %1111111
 	ret nz
 	ld a, 1
 	ld bc, ObjParams_TorchEmberLeft1
@@ -135,7 +135,7 @@ TorchFunc:
 
 .two
 	ld a, [wGlobalCounter]
-	and %01111111
+	and %1111111
 	ret nz
 	ld a, 3
 	ld bc, ObjParams_TorchEmberLeft2

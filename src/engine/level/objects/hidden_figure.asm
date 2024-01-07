@@ -705,7 +705,7 @@ Func_4cfbf:
 
 Func_4cfe0:
 	ld a, [wGlobalCounter]
-	and $0f
+	and %1111
 	jr z, .asm_4cfef
 	cp $08
 	ret nz
@@ -1622,7 +1622,7 @@ HiddenFigureRightHandFunc:
 	cp $2d
 	jr z, .asm_4d67c
 	ld a, [wGlobalCounter]
-	and $0f
+	and %1111
 	play_sfx z, SFX_06A
 .asm_4d67c
 	ld a, e
@@ -1817,7 +1817,7 @@ HiddenFigureRightHandFunc:
 	call MoveObjectRight
 .asm_4d7c9
 	ld a, [wGlobalCounter]
-	and $03
+	and %11
 	ld hl, wCurObjFlags
 	ld a, [hl]
 	jr nz, .asm_4d7d8

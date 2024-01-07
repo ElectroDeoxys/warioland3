@@ -89,7 +89,7 @@ InitPauseMenu:
 InitPauseMenu_SkipBackupVRAM:
 	stop_sfx
 	play_music MUSIC_PAUSE_MENU
-	xor a
+	xor a ; PAUSEMENU_RETURN
 	ld [wPauseMenuSelection], a
 	xor a
 	ld [wRoomAnimatedTilesEnabled], a
@@ -417,18 +417,18 @@ UpdatePauseMenu:
 	call ClearUnusedVirtualOAM
 
 	ld a, [wPauseMenuSelection]
-	bit 7, a
+	bit PAUSEMENUF_SELECT_F, a
 	ret z
 	ld a, [wObjAnimWasReset]
 	and a
 	ret z
 	ld a, [wPauseMenuSelection]
 	and $0f
-	cp $03
+	cp PAUSEMENU_TO_MAP
 	jr z, .ToMap
-	cp $01
+	cp PAUSEMENU_SAVE
 	jr z, .Save
-	cp $02
+	cp PAUSEMENU_ACTION_HELP
 	jp z, OpenActionHelp
 
 ; Return
@@ -1216,20 +1216,21 @@ Func_1f0969::
 
 HandlePauseMenuInput:
 	ld a, [wPauseMenuSelection]
-	bit 7, a
+	bit PAUSEMENUF_SELECT_F, a
 	ret nz
 	ld a, [wJoypadPressed]
 	bit B_BUTTON_F, a
 	jp nz, .Return
 
 	ld a, [wPauseMenuSelection]
-	cp $01
+	cp PAUSEMENU_SAVE
 	jr z, .asm_1f09f0
-	cp $02
+	cp PAUSEMENU_ACTION_HELP
 	jr z, .asm_1f0a02
-	cp $03
+	cp PAUSEMENU_TO_MAP
 	jr z, .asm_1f0a1d
 
+	; PAUSEMENU_RETURN
 	ld a, [wJoypadPressed]
 	bit D_RIGHT_F, a
 	jr nz, .asm_1f09e7
@@ -1276,7 +1277,7 @@ HandlePauseMenuInput:
 	jp .ToMap
 
 .asm_1f0a2a
-	ld a, $01
+	ld a, PAUSEMENU_SAVE
 	ld [wPauseMenuSelection], a
 	ld hl, wMenuObj2
 	ld a, $40
@@ -1295,7 +1296,7 @@ HandlePauseMenuInput:
 	jr .play_sfx
 
 .asm_1f0a45
-	ld a, $02
+	ld a, PAUSEMENU_ACTION_HELP
 	ld [wPauseMenuSelection], a
 	ld hl, wMenuObj2
 	ld a, $38
@@ -1332,7 +1333,7 @@ HandlePauseMenuInput:
 	jr .play_sfx
 
 .asm_1f0a7f
-	ld a, $03
+	ld a, PAUSEMENU_TO_MAP
 	ld [wPauseMenuSelection], a
 	ld hl, wMenuObj2
 	ld a, $40
@@ -1354,7 +1355,7 @@ HandlePauseMenuInput:
 	ret
 
 .asm_1f0aa1
-	ld a, $00
+	ld a, PAUSEMENU_RETURN
 	ld [wPauseMenuSelection], a
 	ld hl, wMenuObj2
 	ld a, $38
@@ -1373,7 +1374,7 @@ HandlePauseMenuInput:
 	jr .play_sfx
 
 .Return
-	ld a, $00
+	ld a, PAUSEMENU_RETURN
 	ld [wPauseMenuSelection], a
 	ld hl, wMenuObj2
 	ld a, $38
@@ -1391,7 +1392,7 @@ HandlePauseMenuInput:
 	ld [hl], a
 
 	ld hl, wPauseMenuSelection
-	set 7, [hl]
+	set PAUSEMENUF_SELECT_F, [hl]
 	play_sfx SFX_0E7
 	ret
 
@@ -1444,10 +1445,11 @@ HandlePauseMenuInput:
 	ld [hli], a
 	ld a, LOW(Frameset_1f1c77)
 	ld [hl], a
-	jr .do_selection
+	jr .do_selection ; useless jump
+
 .do_selection
 	ld hl, wPauseMenuSelection
-	set 7, [hl]
+	set PAUSEMENUF_SELECT_F, [hl]
 	play_sfx SFX_SELECTION
 	ret
 

@@ -200,7 +200,7 @@ Func_db317:
 
 .asm_db35b
 	ld a, [wGlobalCounter]
-	and $03
+	and %11
 	ret nz
 	ld hl, wTimer
 	dec [hl]

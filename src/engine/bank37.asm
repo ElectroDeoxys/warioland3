@@ -76,7 +76,7 @@ Func_dc073:
 	jr nz, .asm_dc0cf
 .asm_dc08c
 	ld a, [wGlobalCounter]
-	and $07
+	and %111
 	jr nz, .asm_dc0cf
 	call SlowFadeInScreen
 	ld a, [wSubState]

@@ -342,7 +342,7 @@ HaridamaFunc:
 	dec [hl]
 	jr z, .asm_4913f
 	ld a, [wGlobalCounter]
-	and $03
+	and %11
 	ret nz
 	ld a, [wCurObjSubState]
 	rlca

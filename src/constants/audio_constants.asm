@@ -1,16 +1,28 @@
 ; channel
 	const_def
-	const CHAN1 ; 0
-	const CHAN2 ; 1
-	const CHAN3 ; 2
-	const CHAN4 ; 3
-DEF NUM_SFX_CHANS EQU const_value
-	const CHAN5 ; 4
-	const CHAN6 ; 5
-	const CHAN7 ; 6
-	const CHAN8 ; 7
-DEF NUM_MUSIC_CHANS EQU const_value - NUM_SFX_CHANS
+	const CHAN1_F ; 0
+	const CHAN2_F ; 1
+	const CHAN3_F ; 2
+	const CHAN4_F ; 3
+DEF NUM_SFX_CHANNELS EQU const_value
+	const CHAN5_F ; 4
+	const CHAN6_F ; 5
+	const CHAN7_F ; 6
+	const CHAN8_F ; 7
+DEF NUM_MUSIC_CHANNELS EQU const_value - NUM_SFX_CHANNELS
 DEF NUM_CHANNELS EQU const_value
+
+DEF CHAN1 EQU (1 << CHAN1_F)
+DEF CHAN2 EQU (1 << CHAN2_F)
+DEF CHAN3 EQU (1 << CHAN3_F)
+DEF CHAN4 EQU (1 << CHAN4_F)
+DEF CHAN5 EQU (1 << CHAN5_F)
+DEF CHAN6 EQU (1 << CHAN6_F)
+DEF CHAN7 EQU (1 << CHAN7_F)
+DEF CHAN8 EQU (1 << CHAN8_F)
+
+DEF SFX_CHANNELS   EQU CHAN1 | CHAN2 | CHAN3 | CHAN4
+DEF MUSIC_CHANNELS EQU CHAN5 | CHAN6 | CHAN7 | CHAN8
 
 ; wAudioEngineFlags constants
 	const_def 5
