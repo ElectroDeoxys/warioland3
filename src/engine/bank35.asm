@@ -782,7 +782,7 @@ AddClearScreenSprite:
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_d4e26
-	call TryAddSprite
+	call AddSprite
 	ret
 
 AddClearScreenWarioSprite:
@@ -800,7 +800,7 @@ AddClearScreenWarioSprite:
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_d49cc
-	call TryAddSprite
+	call AddSprite
 	ret
 
 SetTreasureTransitionParam:
@@ -1149,7 +1149,7 @@ AddPencilSprite:
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_d65e1
-	call TryAddSprite
+	call AddSprite
 	ret
 
 ; returns TRUE in a if done movement

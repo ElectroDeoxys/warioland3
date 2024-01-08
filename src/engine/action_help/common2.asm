@@ -324,7 +324,7 @@ AddActionHelpWarioSprite:
 	ld h, a
 	ld a, [wActionHelpWarioOAMPtr + 1]
 	ld l, a
-	farcall $05, TryAddSprite
+	farcall $05, AddSprite
 	ret
 
 AddActionHelpWarioSprite_FromBank:
@@ -349,7 +349,7 @@ AddActionHelpWarioSprite_FromBank:
 	ld [wTempBank], a
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	hcall TryAddSprite
+	hcall AddSprite
 	ret
 
 AddActionHelpSprite_Far:
@@ -380,7 +380,7 @@ AddActionHelpSprite_Far:
 	ld l, e
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	hcall TryAddSprite
+	hcall AddSprite
 	ret
 
 AddActionHelpSprite:
@@ -398,7 +398,7 @@ AddActionHelpSprite:
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_1e697c
-	call TryAddSprite
+	call AddSprite
 	ret
 
 ; unreferenced
@@ -417,7 +417,7 @@ Func_1e4b6d:
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_1e6bab
-	call TryAddSprite
+	call AddSprite
 	ret
 
 ActionHelp2_Init:

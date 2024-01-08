@@ -28,7 +28,7 @@ AddOWSpriteWithScroll_GotParams::
 	push af
 	ld a, b
 	bankswitch
-	call TryAddSprite
+	call AddSprite
 	pop af
 	bankswitch
 	ret
@@ -56,7 +56,7 @@ AddOWSprite::
 	push af
 	ld a, b
 	bankswitch
-	call TryAddSprite
+	call AddSprite
 	pop af
 	bankswitch
 	ret

@@ -385,7 +385,7 @@ Func_db4e9:
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_dbbd2
-	call TryAddSprite
+	call AddSprite
 	ret
 
 Pals_db509:

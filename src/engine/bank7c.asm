@@ -1182,7 +1182,7 @@ AddPauseMenuSprite:
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_1f156c
-	call TryAddSprite
+	call AddSprite
 	ret
 
 PrintNumberMusicCoins:

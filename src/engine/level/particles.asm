@@ -1345,7 +1345,7 @@ AddParticleSprite:
 	ld [wCurSpriteFrame], a
 	ld a, [wCurParticleAttributes]
 	ld [wCurSpriteAttributes], a
-	call TryAddSprite
+	call AddSprite
 	ret
 
 .asm_d0c5
@@ -1365,7 +1365,7 @@ AddParticleSprite:
 	ld [wCurSpriteFrame], a
 	ld a, [wCurParticleAttributes]
 	ld [wCurSpriteAttributes], a
-	call TryAddSprite
+	call AddSprite
 	ret
 
 ; de = frameset

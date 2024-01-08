@@ -644,7 +644,7 @@ AddCreditsSprite:
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_1617e8
-	call TryAddSprite
+	call AddSprite
 	ret
 
 Pals_1604cc:

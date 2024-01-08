@@ -44,9 +44,28 @@ INCLUDE "engine/language_selection/init.asm"
 INCLUDE "engine/language_selection/core.asm"
 
 
-SECTION "Bank 1", ROMX
+SECTION "Title Gfx Engine", ROMX
 
-INCLUDE "engine/bank1.asm"
+INCLUDE "engine/title/load_gfx.asm"
+INCLUDE "engine/title/vblank.asm"
+INCLUDE "engine/print_counts.asm"
+INCLUDE "engine/ow/level_select.asm"
+INCLUDE "engine/title/load_oam.asm"
+INCLUDE "engine/title/start_menu_selection.asm"
+INCLUDE "engine/title/intro_animation.asm"
+INCLUDE "engine/title/time_attack_jp_adjustment.asm"
+
+
+SECTION "Language Selection Gfx Engine", ROMX
+
+INCLUDE "engine/language_selection/vblank.asm"
+INCLUDE "engine/language_selection/load_oam.asm"
+INCLUDE "engine/title/plane_sfx.asm"
+
+
+SECTION "Level Treasure Requirements", ROMX
+
+INCLUDE "data/levels/treasure_requirements.asm"
 
 
 SECTION "Level Engine", ROMX
@@ -425,11 +444,6 @@ INCLUDE "engine/bank31.asm"
 SECTION "Permission Maps 1", ROMX
 
 INCLUDE "data/levels/permission_maps1.asm"
-
-
-SECTION "Palettes", ROMX
-
-INCLUDE "gfx/palettes.asm"
 
 
 SECTION "Bank 34", ROMX

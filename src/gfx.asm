@@ -1,3 +1,28 @@
+SECTION "Title Palettes", ROMX
+
+INCLUDE "data/title/palettes.asm"
+
+
+SECTION "Title Gfx", ROMX
+
+TitleScreenGfx:: INCBIN "gfx/intro/title_screen.2bpp.rle"
+PlaneGfx::       INCBIN "gfx/intro/plane.2bpp.rle"
+
+BGMap_697a:: INCBIN "gfx/bgmaps/map_697a.bin"
+BGMap_6ae7:: INCBIN "gfx/bgmaps/map_6ae7.bin"
+BGMap_6b47:: INCBIN "gfx/bgmaps/map_6b47.bin"
+
+
+SECTION "Title OAM", ROMX
+
+INCLUDE "data/title/oam.asm"
+
+
+SECTION "Title Framesets", ROMX
+
+INCLUDE "data/title/framesets.asm"
+
+
 SECTION "Wario Gfx 1", ROMX
 
 WarioIdleGfx::     INCBIN "gfx/wario/idle.2bpp"
@@ -224,3 +249,8 @@ INCLUDE "gfx/oam/objects5.asm"
 SECTION "Objects OAM 6", ROMX
 
 INCLUDE "gfx/oam/objects6.asm"
+
+
+SECTION "Level Palettes", ROMX
+
+INCLUDE "data/levels/palettes.asm"

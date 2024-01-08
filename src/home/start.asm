@@ -71,7 +71,7 @@ InitWithoutDemoPowerUpReset::
 	call FillBGMap0_With7f
 	call ClearBGMap1
 
-	ld a, BANK("Bank 1")
+	ld a, BANK("Main State Table")
 	bankswitch
 	xor a
 	ld [rROMB1 + $100], a

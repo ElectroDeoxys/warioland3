@@ -111,7 +111,7 @@ AddGolfSprite::
 	ld h, a
 	ld a, [wGolfOAMPtr + 1]
 	ld l, a
-	call TryAddSprite
+	call AddSprite
 	ret
 
 ; updates Golf Wario sprite, given its state

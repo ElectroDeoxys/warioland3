@@ -58,7 +58,7 @@ LoadRoom::
 	ld [wRoomSpecialTilesBank], a
 	call LoadRoomSpecialTiles
 
-	ld a, BANK("Palettes")
+	ld a, BANK("Level Palettes")
 	ld [wPaletteBank], a
 	call LoadRoomPalettes
 	ret

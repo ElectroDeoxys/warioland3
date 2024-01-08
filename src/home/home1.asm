@@ -346,13 +346,15 @@ DrawWario::
 	ld [wCurSpriteFrame], a
 	ld a, [wca66]
 	ld [wCurSpriteAttributes], a
-	call TryAddSprite
+	call AddSprite
 	pop af
 	bankswitch
 	ret
 
-; hl = sprite pointer
-TryAddSprite::
+; hl = OAM data pointer
+; given an OAM pointer and a frame index in wCurSpriteFrame
+; goes through each tile element and adds them to virtual OAM
+AddSprite::
 	ld a, [wCurSpriteFrame]
 	ld d, $00
 	add a
@@ -1877,7 +1879,7 @@ Func_17be::
 	ld a, BANK(OAM_aab5c)
 	bankswitch
 	ld hl, OAM_aab5c
-	call TryAddSprite
+	call AddSprite
 	pop af
 	bankswitch
 	ret
@@ -1903,7 +1905,7 @@ Func_17ec::
 	ld h, a
 	ld a, [wCreditsMusicBoxOAMPtr + 1]
 	ld l, a
-	call TryAddSprite
+	call AddSprite
 	pop af
 	bankswitch
 	ret

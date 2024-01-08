@@ -85,9 +85,9 @@ InitIntroSequence:
 	call UpdateObjAnim
 
 	ld hl, wMenuObj4
-	call Func_4b93
+	call AddIntroSprite
 	ld hl, wMenuObj5
-	call Func_4b93
+	call AddIntroSprite
 
 	ld a, STARTMENU_NEW_GAME
 	ld [wStartMenuSelection], a
@@ -148,7 +148,7 @@ InitIntroSequence:
 ; get darker tone behind menu options
 	xor a ; VRAM0
 	ldh [rVBK], a
-	ld hl, Data_6b47
+	ld hl, BGMap_6b47
 	debgcoord 4, 14
 	push de
 	ld b, 12
@@ -422,11 +422,11 @@ IntroSequencePhase1:
 	ld hl, wPlaneWarioEnd - 1
 	call UpdateObjAnim
 	ld hl, wPlaneWario
-	call Func_4b93
+	call AddIntroSprite
 	ld hl, wMenuObj4
-	call Func_4b93
+	call AddIntroSprite
 	ld hl, wMenuObj5
-	call Func_4b93
+	call AddIntroSprite
 	call ClearUnusedVirtualOAM
 	jp PanIntroBackgroundLayers
 
@@ -538,11 +538,11 @@ IntroSequencePhase2:
 	ld hl, wPlaneWarioEnd - 1
 	call UpdateObjAnim
 	ld hl, wMenuObj4
-	call Func_4b93
+	call AddIntroSprite
 	ld hl, wPlaneWario
-	call Func_4b93
+	call AddIntroSprite
 	ld hl, wMenuObj5
-	call Func_4b93
+	call AddIntroSprite
 	call ClearUnusedVirtualOAM
 	jp PanIntroBackgroundLayers
 
@@ -708,11 +708,11 @@ IntroSequencePhase3:
 	ld a, [wObjAnimWasReset]
 	ld [wPlaneWarioAnimationEnded], a
 	ld hl, wMenuObj4
-	call Func_4b93
+	call AddIntroSprite
 	ld hl, wPlaneWario
-	call Func_4b93
+	call AddIntroSprite
 	ld hl, wMenuObj5
-	call Func_4b93
+	call AddIntroSprite
 	call ClearUnusedVirtualOAM
 	jp PanIntroBackgroundLayers
 
@@ -720,7 +720,7 @@ EndIntroSequence:
 	ld hl, wPlaneWarioEnd - 1
 	call UpdateObjAnim
 	ld hl, wPlaneWario
-	call Func_4b93
+	call AddIntroSprite
 	call ClearUnusedVirtualOAM
 
 	ld a, [wceef]

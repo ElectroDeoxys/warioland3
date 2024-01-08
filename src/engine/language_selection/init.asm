@@ -32,7 +32,7 @@ InitLanguageSelection:
 	ld [hl], a
 	call UpdateObjAnim
 	ld hl, wMenuObj1
-	call Func_4e3e
+	call AddLanguageSelectionSprite
 	call ClearUnusedVirtualOAM
 	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a

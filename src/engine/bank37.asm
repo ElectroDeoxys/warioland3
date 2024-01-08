@@ -199,7 +199,7 @@ Func_dc158:
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_dd710
-	call TryAddSprite
+	call AddSprite
 	ret
 
 Pals_dc173:

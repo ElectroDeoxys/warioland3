@@ -347,7 +347,7 @@ UpdateRoomAnimatedPals::
 
 	ld a, [wROMBank]
 	push af
-	ld a, BANK("Palettes")
+	ld a, BANK("Level Palettes")
 	bankswitch
 	ld a, BCPSF_AUTOINC
 	ldh [rBCPS], a
