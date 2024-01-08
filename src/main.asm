@@ -73,11 +73,13 @@ SECTION "Level Engine", ROMX
 INCLUDE "engine/level/state_table.asm"
 INCLUDE "engine/level/init.asm"
 INCLUDE "engine/level/update.asm"
+INCLUDE "engine/level/start_room.asm"
 
 
 SECTION "Bank 2", ROMX
 
 INCLUDE "engine/bank2.asm"
+INCLUDE "engine/level/tick_time.asm"
 
 
 SECTION "Levels Common Gfx", ROMX

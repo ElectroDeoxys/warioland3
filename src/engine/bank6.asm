@@ -394,7 +394,7 @@ Func_182fe:
 	jp z, Func_18020
 	ld a, $01
 	ld [wLadderInteraction], a
-	ld a, ROOMTRANSITION_5 | ROOMTRANSITIONFLAG_2
+	ld a, ROOMTRANSITION_5 | ROOMTRANSITIONF_2
 	ld [wRoomTransitionParam], a
 	jp Func_18020
 
@@ -546,7 +546,7 @@ Func_1842a:
 	add $08
 	ld [wWarioXPos + 1], a
 .asm_1848e
-	ld a, ROOMTRANSITION_1 | ROOMTRANSITIONFLAG_2 | ROOMTRANSITIONFLAG_3
+	ld a, ROOMTRANSITION_1 | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_3
 	ld [wRoomTransitionParam], a
 	play_sfx SFX_PIPE
 	ld a, WST_PIPE_GOING_DOWN
@@ -632,7 +632,7 @@ Func_184fc:
 	add $08
 	ld [wWarioXPos + 1], a
 .asm_18560
-	ld a, ROOMTRANSITION_1 | ROOMTRANSITIONFLAG_2 | ROOMTRANSITIONFLAG_3
+	ld a, ROOMTRANSITION_1 | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_3
 	ld [wRoomTransitionParam], a
 	play_sfx SFX_PIPE
 	ld a, WST_PIPE_GOING_UP
@@ -689,7 +689,7 @@ Func_185cb:
 	cp WST_GRAB_IDLING
 	jp nz, Func_18020
 .asm_185f2
-	ld a, ROOMTRANSITION_2 | ROOMTRANSITIONFLAG_1 | ROOMTRANSITIONFLAG_2 | ROOMTRANSITIONFLAG_3
+	ld a, ROOMTRANSITION_2 | ROOMTRANSITIONF_1 | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_3
 	ld [wRoomTransitionParam], a
 	jp Func_18676
 
@@ -709,7 +709,7 @@ Func_185fa:
 	cp WST_GRAB_IDLING
 	jp nz, Func_18020
 .asm_1861d
-	ld a, ROOMTRANSITION_3 | ROOMTRANSITIONFLAG_1 | ROOMTRANSITIONFLAG_2 | ROOMTRANSITIONFLAG_3
+	ld a, ROOMTRANSITION_GOLF | ROOMTRANSITIONF_1 | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_3
 	ld [wRoomTransitionParam], a
 	jr Func_18676
 
@@ -729,7 +729,7 @@ Func_18624:
 	cp WST_GRAB_IDLING
 	jp nz, Func_18020
 .asm_18647
-	ld a, ROOMTRANSITION_2 | ROOMTRANSITIONFLAG_1 | ROOMTRANSITIONFLAG_3
+	ld a, ROOMTRANSITION_2 | ROOMTRANSITIONF_1 | ROOMTRANSITIONF_3
 	ld [wRoomTransitionParam], a
 	jr Func_18676
 
@@ -749,7 +749,7 @@ Func_1864e:
 	cp WST_GRAB_IDLING
 	jp nz, Func_18020
 .asm_18671
-	ld a, ROOMTRANSITION_3 | ROOMTRANSITIONFLAG_1 | ROOMTRANSITIONFLAG_3
+	ld a, ROOMTRANSITION_GOLF | ROOMTRANSITIONF_1 | ROOMTRANSITIONF_3
 	ld [wRoomTransitionParam], a
 ;	fallthrough
 
@@ -825,7 +825,7 @@ Func_186f9:
 	ld a, [wJoypadPressed]
 	bit D_UP_F, a
 	jr z, .asm_18724
-	ld a, ROOMTRANSITION_6 | ROOMTRANSITIONFLAG_1 | ROOMTRANSITIONFLAG_2
+	ld a, ROOMTRANSITION_6 | ROOMTRANSITIONF_1 | ROOMTRANSITIONF_2
 	ld [wRoomTransitionParam], a
 .asm_18724
 	jp Func_18020
@@ -848,7 +848,7 @@ Func_18727:
 	ld a, [wJoypadPressed]
 	bit D_UP_F, a
 	jr z, .asm_18752
-	ld a, ROOMTRANSITION_6 | ROOMTRANSITIONFLAG_1
+	ld a, ROOMTRANSITION_6 | ROOMTRANSITIONF_1
 	ld [wRoomTransitionParam], a
 .asm_18752
 	jp Func_18020
@@ -869,7 +869,7 @@ Func_18755:
 	ld a, [wJoypadPressed]
 	bit D_UP_F, a
 	jr z, .asm_1877b
-	ld a, ROOMTRANSITION_8 | ROOMTRANSITIONFLAG_1 | ROOMTRANSITIONFLAG_2 | ROOMTRANSITIONFLAG_3
+	ld a, ROOMTRANSITION_8 | ROOMTRANSITIONF_1 | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_3
 	ld [wRoomTransitionParam], a
 .asm_1877b
 	jp Func_18020
@@ -905,7 +905,7 @@ Func_187b0:
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_18020
-	ld a, ROOMTRANSITION_4 | ROOMTRANSITIONFLAG_2
+	ld a, ROOMTRANSITION_4 | ROOMTRANSITIONF_2
 	ld [wRoomTransitionParam], a
 	jp Func_18020
 
@@ -927,7 +927,7 @@ Func_187de:
 	ld a, [wc0d6]
 	bit 7, a
 	jp z, Func_181ac
-	ld a, ROOMTRANSITION_4 | ROOMTRANSITIONFLAG_2
+	ld a, ROOMTRANSITION_4 | ROOMTRANSITIONF_2
 	ld [wRoomTransitionParam], a
 	jp Func_181ac
 

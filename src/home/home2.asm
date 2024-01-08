@@ -44,7 +44,7 @@ LoadPermissionMap::
 .reset
 	jp Init
 
-Func_285c::
+LoadRoom::
 	ld a, $70
 	ld [wca5e], a
 	ld a, $58
@@ -147,7 +147,7 @@ Func_285c::
 
 	ld a, [hl]
 	ld [wRoom], a
-	farcall LoadRoom
+	farcall LoadRoomGfx
 	pop af
 	bankswitch
 

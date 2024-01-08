@@ -2584,7 +2584,7 @@ UpdateState_PipeGoingDown:
 .asm_1d7f9
 	call ClearTransformationValues
 	ld hl, wRoomTransitionParam
-	res ROOMTRANSITIONFLAG_3_F, [hl]
+	res ROOMTRANSITIONF_3_F, [hl]
 	jp TriggerRoomTransition
 .asm_1d804
 	play_sfx SFX_0E1
@@ -2613,13 +2613,13 @@ UpdateState_PipeGoingUp:
 	ld [wWarioXPos + 1], a
 	xor a
 	ld [wIsIntangible], a
-	call Func_1146
+	call UpdateFloor
 	jp SetState_Idling
 
 .asm_1d848
 	call ClearTransformationValues
 	ld hl, wRoomTransitionParam
-	res ROOMTRANSITIONFLAG_3_F, [hl]
+	res ROOMTRANSITIONF_3_F, [hl]
 	jp TriggerRoomTransition
 .asm_1d853
 	play_sfx SFX_0E1
@@ -3889,7 +3889,7 @@ UpdateState_EnteringDoor:
 	ld hl, wWarioStateCounter
 	inc [hl]
 	ld hl, wRoomTransitionParam
-	res ROOMTRANSITIONFLAG_3_F, [hl]
+	res ROOMTRANSITIONF_3_F, [hl]
 	jp TriggerRoomTransition
 
 .asm_1e455

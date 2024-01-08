@@ -6,10 +6,10 @@ Func_d11a:
 	call GetCell
 	ld a, [wFloorSRAMBank]
 	sramswitch
-	call Func_d132
+	call .Func_d132 ; can be fallthrough
 	ret
 
-Func_d132:
+.Func_d132:
 	ld e, $0c
 .asm_d134
 	bit 7, [hl]

@@ -57,13 +57,13 @@ UpdateLevel:
 	; set state to Fence Shake Sliding
 	ld a, [wLevel]
 	cp THE_TEMPLE
-	jr nz, .skip_set_wario_fence_shake
+	jr nz, .process_interactions
 	ld a, [wAutoMoveState]
 	cp $02
-	jr nz, .skip_set_wario_fence_shake
+	jr nz, .process_interactions
 	farcall SetState_FenceShakeSliding
 
-.skip_set_wario_fence_shake
+.process_interactions
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")

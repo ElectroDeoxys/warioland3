@@ -153,6 +153,7 @@ Func_cb8::
 ; output:
 ; - h = y cell
 ; - l = x cell
+; - b = ?
 Func_cc0::
 	ld a, [hli]
 	ld d, a
@@ -921,7 +922,7 @@ Func_111e:
 	ld c, l
 	ret
 
-Func_1146::
+UpdateFloor::
 	call GetFloorForYPos
 	ld a, c
 	ld [wFloor], a
@@ -1051,13 +1052,13 @@ TriggerRoomTransition::
 	ld [wIsIntangible], a
 
 	ld a, [wRoomTransitionParam]
-	bit ROOMTRANSITIONFLAG_3_F, a
+	bit ROOMTRANSITIONF_3_F, a
 	ret nz
 	ld hl, wSubState
 	ld a, [wRoomTransitionParam]
-	bit ROOMTRANSITIONFLAG_1_F, a
+	bit ROOMTRANSITIONF_1_F, a
 	jr z, .asm_1246
-	inc [hl]
+	inc [hl] ; door transition
 	farcall Func_8e06
 	ldh a, [rSVBK]
 	push af
@@ -1306,7 +1307,7 @@ ReturnToLevelFromGolf::
 	ld [wRoomAnimatedTilesEnabled], a
 	call LoadBackupVRAM
 	ld a, [wRoomTransitionParam]
-	and ROOMTRANSITIONFLAGS_MASK
+	and ROOMTRANSITION_FLAGS_MASK
 	or ROOMTRANSITION_2
 	ld [wRoomTransitionParam], a
 	farcall Func_1f0969

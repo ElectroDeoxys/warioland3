@@ -12,7 +12,7 @@ InitLevel:
 
 	farcall LoadLevelCommonGfxAndTreasures
 
-	call Func_8747
+	call StartRoom_FromLevelStart
 	call UpdateLevelMusic
 
 	ld a, TRUE

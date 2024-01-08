@@ -1,6 +1,6 @@
 ; loads a room's permission map, tilemap
 ; main and special tiles and its palettes
-LoadRoom::
+LoadRoomGfx::
 	ld d, $00
 	ld a, [wRoom]
 	add a
@@ -1732,7 +1732,7 @@ AnimatedTilesGroups:
 	db  0, ANIMATED_TILES_GFX_00 ; ANIMATED_TILES_GROUP_27
 	db  0, ANIMATED_TILES_GFX_00 ; ANIMATED_TILES_GROUP_28
 
-	LevelRooms_c0d1f:
+LevelRooms_c0d1f:
 	dw .room_00
 	dw NULL
 	dw .room_02
