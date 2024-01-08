@@ -1,1328 +1,3 @@
-StateTable::
-	ld a, [wState]
-	jumptable
-
-	dw TitleStateTable             ; ST_TITLE
-	dw HandleOverworld             ; ST_OVERWORLD
-	dw LevelStateTable             ; ST_LEVEL
-	dw ClearScreenStateTable       ; ST_CLEAR
-	dw PauseMenuStateTable         ; ST_PAUSE_MENU
-	dw GolfStateTable              ; ST_GOLF
-	dw EpilogueStateTable          ; ST_EPILOGUE
-	dw ActionHelpStateTable        ; ST_ACTION_HELP
-	dw CollectKeyDelay             ; ST_COLLECT_KEY
-	dw CreditsStateTable           ; ST_CREDITS
-	dw GolfBuildingStateTable      ; ST_GOLF_BUILDING
-	dw GBIncompatibleStateTable    ; ST_GB_INCOMPATIBLE
-	dw GameOverStateTable          ; ST_GAME_OVER
-	dw PerfectStateTable           ; ST_PERFECT
-	dw LanguageSelectionStateTable ; ST_LANGUAGE_SELECTION
-	dw InvalidState                ; ST_UNUSED_0F
-	dw InvalidState                ; ST_UNUSED_10
-	dw InvalidState                ; ST_UNUSED_11
-
-InvalidState:
-	jp Init
-
-TitleStateTable:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Audio RAM")
-	ldh [rSVBK], a
-	call .jump
-	pop af
-	ldh [rSVBK], a
-	ret
-
-.jump
-	ld a, [wSubState]
-	jumptable
-
-	dw FastFadeToWhite
-	dw InitIntroSequence
-	dw SlowFadeFromWhite
-	dw IntroSequencePhase1
-	dw IntroSequencePhase2
-	dw IntroSequencePhase3
-	dw EndIntroSequence
-	dw StartMenu
-	dw SlowFadeBGToWhite
-	dw InitTimeAttackDescription
-	dw TimeAttackDescription
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-
-InitIntroSequence:
-	call DisableLCD
-	call FillBGMap0_With7f
-	call ClearVirtualOAM
-	call LoadTitleScreenPals
-	call LoadTitleScreenTiles
-	call LoadTitleScreenTileMap
-	call VBlank_49db
-
-	ld a, $04
-	ld [wSCY], a
-	ldh [rSCY], a
-	xor a
-	ld [wSCX], a
-	ldh [rSCX], a
-	ld a, [wceef]
-	and a
-	jr nz, .no_intro
-
-	ld hl, wPlaneWario
-	ld a, 64
-	ld [hli], a ; y coord
-	ld a, 208
-	ld [hli], a ; x coord
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld a, HIGH(Frameset_712c)
-	ld [hli], a
-	ld a, LOW(Frameset_712c)
-	ld [hli], a
-	xor a
-	ld [hld], a ; state
-	ld [wSFXTimer], a
-	call UpdateObjAnim
-
-	ld hl, wMenuObj1
-	ld a, 128
-	ld [hli], a ; y coord
-	ld a, 80
-	ld [hli], a ; x coord
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld a, HIGH(Frameset_6ce6)
-	ld [hli], a
-	ld a, LOW(Frameset_6ce6)
-	ld [hl], a
-	call UpdateObjAnim
-
-	ld hl, wMenuObj4
-	ld a, 16
-	ld [hli], a ; y coord
-	ld a, 0
-	ld [hli], a ; x coord
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld a, HIGH(Frameset_71a1)
-	ld [hli], a
-	ld a, LOW(Frameset_71a1)
-	ld [hl], a
-	call UpdateObjAnim
-
-	ld hl, wMenuObj5
-	ld a, 8
-	ld [hli], a ; y coord
-	ld a, 32
-	ld [hli], a ; x coord
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld a, HIGH(Frameset_71a4)
-	ld [hli], a
-	ld a, LOW(Frameset_71a4)
-	ld [hl], a
-	call UpdateObjAnim
-
-	ld hl, wMenuObj4
-	call Func_4b93
-	ld hl, wMenuObj5
-	call Func_4b93
-
-	ld a, STARTMENU_NEW_GAME
-	ld [wStartMenuSelection], a
-	jp .asm_41a8
-
-.no_intro
-	ld hl, wPlaneWario
-	ld a, 108
-	ld [hli], a ; y coord
-	ld a, 128
-	ld [hli], a ; x coord
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld a, HIGH(Frameset_7198)
-	ld [hli], a
-	ld a, LOW(Frameset_7198)
-	ld [hli], a
-	xor a
-	ld [hld], a
-	ld [wSFXTimer], a
-
-; set priority flag to hide
-; the menu options behind scenery
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	hlbgcoord 4, 12
-	ld de, BG_MAP_WIDTH
-	ld c, 2
-.loop_outer
-	push hl
-	ld b, 11
-.loop_inner_1
-	ld a, [hl]
-	or %10000000
-	ld [hli], a
-	dec b
-	jr nz, .loop_inner_1
-	pop hl
-	add hl, de
-	push hl
-	ld b, 11
-.loop_inner_2
-	ld a, [hl]
-	or %10000000
-	ld [hli], a
-	dec b
-	jr nz, .loop_inner_2
-	pop hl
-	add hl, de
-	add hl, de
-	add hl, de
-	dec c
-	jr nz, .loop_outer
-
-; get darker tone behind menu options
-	xor a ; VRAM0
-	ldh [rVBK], a
-	ld hl, Data_6b47
-	debgcoord 4, 14
-	push de
-	ld b, 12
-	call CopyHLToDE
-	pop de
-	ld a, e
-	add BG_MAP_WIDTH
-	ld e, a
-	ld a, d
-	adc 0
-	ld d, a
-	ld b, 12
-	call CopyHLToDE
-
-	ld hl, wMenuObj1
-	ld a, $82
-	ld [hli], a
-	ld a, $50
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld a, [wGameModeFlags]
-	bit MODE_TIME_ATTACK_F, a
-	jr nz, .asm_4178
-	ld a, HIGH(Frameset_6ce9)
-	ld [hli], a
-	ld a, LOW(Frameset_6ce9)
-	ld [hl], a
-	jr .asm_417e
-.asm_4178
-	ld a, HIGH(Frameset_6d1e)
-	ld [hli], a
-	ld a, LOW(Frameset_6d1e)
-	ld [hl], a
-.asm_417e
-	call UpdateObjAnim
-
-	ld hl, wMenuObj2
-	ld a, $86
-	ld [hli], a
-	ld a, [wGameModeFlags]
-	bit MODE_TIME_ATTACK_F, a
-	jr nz, .asm_4192
-	ld a, $44
-	jr .asm_4194
-.asm_4192
-	ld a, $40
-.asm_4194
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld a, HIGH(Frameset_6d1b)
-	ld [hli], a
-	ld a, LOW(Frameset_6d1b)
-	ld [hl], a
-	call UpdateObjAnim
-
-	ld a, STARTMENU_CONTINUE
-	ld [wStartMenuSelection], a
-
-.asm_41a8
-	ld hl, wMenuObj3
-	ld a, 36
-	ld [hli], a ; y coord
-	ld a, 104
-	ld [hli], a ; x coord
-	xor a
-	ld [hli], a ; frame
-	ld [hli], a
-	ld [hli], a ; frameset offset
-	ld [hli], a ; duration
-	ld a, HIGH(Frameset_6d18)
-	ld [hli], a
-	ld a, LOW(Frameset_6d18)
-	ld [hl], a
-	call UpdateObjAnim
-
-	ld a, LCDC_DEFAULT
-	ldh [rLCDC], a
-	xor a
-	ld [wTimer], a
-	ld [wGlobalCounter], a
-	ld hl, wSubState
-	inc [hl]
-	ret
-
-; phase 1 of Intro sequence has Wario's plane
-; fly to the centre of the screen from the right
-; then exiting after hovering for a while
-IntroSequencePhase1:
-	ld a, [wceef]
-	and a
-	jp nz, StartTitleScreen
-	call PlayIntroSFXPlane_Close
-	call Func_4d45
-
-	ld a, [wPlaneWarioVar]
-	dec a
-	jr z, .State1 ; 1
-	dec a
-	jr z, .State2 ; 2
-	dec a
-	jr z, .State3 ; 3
-	dec a
-	jr z, .State4 ; 4
-	dec a
-	jp z, .State5 ; 5
-
-; State0
-; start playing Intro music
-; when timer reaches 180
-; then advance to next state
-	ld hl, wTimer
-	inc [hl]
-	ld a, [hl]
-	cp 180
-	jp c, .continue
-	ld [hl], 0 ; reset timer
-	play_music MUSIC_INTRO
-	ld hl, wPlaneWarioVar
-	inc [hl]
-	jp .continue
-
-.State1
-; move left up to 48 units
-; then set timer to 48 and advance state
-	ld hl, wPlaneWarioXCoord
-	ld a, [hl]
-	cp 72
-	jr nc, .move_left_quick
-	cp 56
-	jr nc, .move_left_slow
-	cp 48
-	jr z, .go_to_state2
-	; only move every 4 ticks
-	ld a, [wGlobalCounter]
-	and %11
-	jp nz, .continue
-	jr .move_left_slow
-.move_left_quick
-	dec [hl]
-.move_left_slow
-	dec [hl]
-	jp .continue
-
-.go_to_state2
-	ld a, 48
-	ld [wTimer], a
-	ld hl, wPlaneWarioVar
-	inc [hl]
-	jp .continue
-
-.State2
-; wait for timer then change frameset and advance state
-	ld hl, wTimer
-	dec [hl]
-	jp nz, .continue
-	ld [hl], 3
-	ld hl, wPlaneWarioFramesetOffset
-	xor a
-	ld [hli], a
-	ld [hli], a ; duration
-	ld a, HIGH(Frameset_71a7)
-	ld [hli], a
-	ld a, LOW(Frameset_71a7)
-	ld [hl], a
-	ld hl, wPlaneWarioVar
-	inc [hl]
-	jr .continue
-
-.State3
-; move 1 unit down every 8 ticks up to 70
-; then go to state 4
-	ld a, [wGlobalCounter]
-	and %111
-	jr nz, .continue
-	ld hl, wPlaneWarioYCoord
-	inc [hl]
-	ld a, [hl]
-	cp 70
-	jr nz, .continue
-	ld hl, wPlaneWarioVar
-	inc [hl]
-	jr .continue
-
-.State4
-; move 1 unit up every 8 ticks up to 64
-; then go to state 3
-; if timer reaches 0, then advance to state 5
-	ld a, [wGlobalCounter]
-	and %111
-	jr nz, .continue
-	ld hl, wPlaneWario
-	dec [hl]
-	ld a, [hl]
-	cp 64
-	jr nz, .continue
-	ld hl, wTimer
-	dec [hl]
-	jr z, .go_to_state5
-	ld hl, wPlaneWarioVar
-	dec [hl]
-	jr .continue
-
-.go_to_state5
-	ld hl, wPlaneWarioFramesetOffset
-	xor a
-	ld [hli], a
-	ld [hli], a ; duration
-	ld a, HIGH(Frameset_712c)
-	ld [hli], a
-	ld a, LOW(Frameset_712c)
-	ld [hl], a
-	ld hl, wPlaneWarioVar
-	inc [hl]
-	jr .continue
-
-.State5
-; move to the right and then
-; set to new coordinates when off the screen
-	ld hl, wPlaneWarioXCoord
-	ld a, [hl]
-	cp 192
-	jr z, .skip_move_right
-	; move 1 unit if x >= 56
-	cp 56
-	jr nc, .move_right
-	; else move every 4 ticks
-	ld a, [wGlobalCounter]
-	and %11
-	jr nz, .continue
-.move_right
-	inc [hl]
-	jr .continue
-
-.skip_move_right
-	; set plane coordinate on top of screen
-	ld hl, wPlaneWarioYCoord
-	ld a, 16
-	ld [hli], a
-	ld a, 192
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld a, HIGH(Frameset_713d)
-	ld [hli], a
-	ld a, LOW((Frameset_713d))
-	ld [hli], a
-	xor a
-	ld [hl], a ; state
-	ld [wSFXTimer], a
-	ld a, 28
-	ld [wTimer], a
-	ld hl, wSubState
-	inc [hl]
-	; fallthrough
-
-.continue
-	call ScrollIntroBackgroundLayers
-	ld hl, wPlaneWarioEnd - 1
-	call UpdateObjAnim
-	ld hl, wPlaneWario
-	call Func_4b93
-	ld hl, wMenuObj4
-	call Func_4b93
-	ld hl, wMenuObj5
-	call Func_4b93
-	call ClearUnusedVirtualOAM
-	jp DrawIntroBackgroundLayers
-
-; phase 2 of Intro sequence, where Wario's plane
-; comes into the centre while far away from the foreground
-IntroSequencePhase2:
-	call Func_4d45
-	call PlayIntroSFXPlane_Far
-
-	ld a, [wPlaneWarioVar]
-	dec a
-	jr z, .State1
-	dec a
-	jr z, .State2
-
-; State0
-; wait for timer, then slowly move plane towards centre
-; when reaches the centre, advance to next state
-	ld hl, wTimer
-	ld a, [hl]
-	and a
-	jr z, .move_to_centre
-	dec [hl]
-	jp .continue
-
-.move_to_centre
-	ld hl, wPlaneWarioXCoord
-	ld a, [hl]
-	cp 64
-	jr z, .go_to_state1
-	cp 72
-	jr nc, .move_left_slow
-	; move every 4 ticks
-	ld a, [wGlobalCounter]
-	and %11
-	jp nz, .continue
-	jr .move_left
-.move_left_slow
-	; move every 2 ticks
-	ld a, [wGlobalCounter]
-	and %1
-	jp nz, .continue
-.move_left
-	ld hl, wPlaneWarioXCoord
-	dec [hl]
-	jr .continue
-
-.go_to_state1
-	ld a, 48
-	ld [wTimer], a
-	ld hl, wPlaneWarioVar
-	inc [hl]
-	jr .continue
-
-.State1
-; wait for timer, then change frameset and advance state
-	ld hl, wTimer
-	dec [hl]
-	jr nz, .continue
-	ld hl, wPlaneWarioFramesetOffset
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld a, HIGH(Frameset_7144)
-	ld [hli], a
-	ld a, LOW(Frameset_7144)
-	ld [hli], a
-	xor a
-	ld [wSFXTimer], a
-	ld a, 224
-	ld [wTimer], a
-	ld hl, wPlaneWarioVar
-	inc [hl]
-	jr .continue
-
-.State2
-; plays plane exploding animation
-	ld a, [wPlaneWarioFramesetOffset]
-	cp $18
-	jr nz, .skip_sfx
-	ld a, [wPlaneWarioDuration]
-	and a
-	play_sfx z, SFX_023
-.skip_sfx
-
-	ld hl, wTimer
-	dec [hl]
-	jr nz, .continue
-
-	play_sfx SFX_PLANE_EXPLOSION
-	ld hl, wPlaneWarioFramesetOffset
-	xor a
-	ld [hli], a
-	ld [hli], a ; duration
-	ld a, HIGH(Frameset_7165)
-	ld [hli], a
-	ld a, LOW(Frameset_7165)
-	ld [hli], a
-	xor a
-	ld [hl], a ; state
-	ld [wSFXTimer], a
-	ld a, 48
-	ld [wTimer], a
-	ld hl, wSubState
-	inc [hl]
-
-.continue
-	call ScrollIntroBackgroundLayers
-	ld hl, wPlaneWarioEnd - 1
-	call UpdateObjAnim
-	ld hl, wMenuObj4
-	call Func_4b93
-	ld hl, wPlaneWario
-	call Func_4b93
-	ld hl, wMenuObj5
-	call Func_4b93
-	call ClearUnusedVirtualOAM
-	jp DrawIntroBackgroundLayers
-
-; phase 3 of the Intro sequence where Wario's plane
-; starts wobbling and then explodes, making it nosedive
-IntroSequencePhase3:
-	call Func_4d45
-
-	ld a, [wPlaneWarioVar]
-	dec a
-	jr z, .State1
-	dec a
-	jr z, .State2
-	dec a
-	jr z, .State3
-	dec a
-	jp z, .State4
-
-; State0
-; waits for the animation of the plane to end
-; then advances to the next state
-	ld a, [wPlaneWarioAnimationEnded]
-	and a
-	jp z, .continue
-	play_sfx SFX_119
-	ld hl, wPlaneWarioFramesetOffset
-	xor a
-	ld [hli], a
-	ld [hli], a ; duration
-	ld a, HIGH(Frameset_7172)
-	ld [hli], a
-	ld a, LOW(Frameset_7172)
-	ld [hli], a
-	inc [hl] ; next state
-	jp .continue
-
-.State1
-; moves plane right every 4 ticks
-; moves plane down 1 unit
-; once y offset reaches 16, set new frameset and advance state
-	ld a, [wGlobalCounter]
-	and %11
-	jr nz, .skip_x1
-	ld hl, wPlaneWarioXCoord
-	inc [hl]
-.skip_x1
-	ld hl, wPlaneWarioYCoord
-	inc [hl]
-	ld a, [hl]
-	cp 16
-	jp c, .continue
-	ld hl, wPlaneWarioFramesetOffset
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld a, HIGH(Frameset_717b)
-	ld [hli], a
-	ld a, LOW(Frameset_717b)
-	ld [hli], a
-	inc [hl] ; next state
-	jp .continue
-
-.State2
-; moves plane right every 4 ticks
-; moves plane down 1 unit
-; once y offset reaches 48, set new frameset and advance state
-	ld a, [wGlobalCounter]
-	and %11
-	jr nz, .skip_x2
-	ld hl, wPlaneWarioXCoord
-	inc [hl]
-.skip_x2
-	ld hl, wPlaneWarioYCoord
-	inc [hl]
-	ld a, [hl]
-	cp 48
-	jr c, .continue
-	ld hl, wPlaneWarioFramesetOffset
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld a, HIGH(Frameset_7184)
-	ld [hli], a
-	ld a, LOW(Frameset_7184)
-	ld [hli], a
-	inc [hl] ; next state
-	jr .continue
-
-.State3
-; moves plane right every 4 ticks
-; moves plane down 1 unit
-; once y offset reaches 112, set new frameset and advance state
-	ld a, [wGlobalCounter]
-	and %11
-	jr nz, .skip_x3
-	ld hl, wPlaneWarioXCoord
-	inc [hl]
-.skip_x3
-	ld hl, wPlaneWarioYCoord
-	inc [hl]
-	ld a, [hl]
-	cp 112
-	jr c, .continue
-	play_sfx SFX_061
-	ld hl, wPlaneWarioFramesetOffset
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld a, HIGH(Frameset_718d)
-	ld [hli], a
-	ld a, LOW(Frameset_718d)
-	ld [hli], a
-	inc [hl] ; next state
-	jr .continue
-
-.State4
-	ld a, [wIntroBGXOffsetNear]
-	cp 224
-	jr z, .skip_x4
-	; make plane x offset follow the near layer
-	ld hl, wPlaneWarioXCoord
-	inc [hl]
-	inc [hl]
-.skip_x4
-	ld a, [wPlaneWarioAnimationEnded]
-	and a
-	jr z, .finish_scroll
-
-	; animation ended, load new frameset
-	; and play the Title Screen music
-	ld hl, wPlaneWarioFramesetOffset
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld a, HIGH(Frameset_7198)
-	ld [hli], a
-	ld a, LOW(Frameset_7198)
-	ld [hli], a
-	xor a
-	ld [hld], a ; state
-	ld [wTimer], a
-
-	ld hl, Pals_5002
-	call LoadPalsToTempPals1
-	ld hl, Pals_5042
-	call LoadPalsToTempPals2
-
-	play_music MUSIC_TITLE_SCREEN
-	ld hl, wSubState
-	inc [hl]
-	jr .finish_scroll
-
-.continue
-	call ScrollIntroBackgroundLayers
-	jr .update_anim
-
-.finish_scroll
-	call FinishIntroBackgroundScroll
-
-.update_anim
-	ld hl, wPlaneWarioEnd - 1
-	call UpdateObjAnim
-	ld a, [wObjAnimWasReset]
-	ld [wPlaneWarioAnimationEnded], a
-	ld hl, wMenuObj4
-	call Func_4b93
-	ld hl, wPlaneWario
-	call Func_4b93
-	ld hl, wMenuObj5
-	call Func_4b93
-	call ClearUnusedVirtualOAM
-	jp DrawIntroBackgroundLayers
-
-EndIntroSequence:
-	ld hl, wPlaneWarioEnd - 1
-	call UpdateObjAnim
-	ld hl, wPlaneWario
-	call Func_4b93
-	call ClearUnusedVirtualOAM
-
-	ld a, [wceef]
-	and a
-	jr nz, StartTitleScreen
-	ld hl, wTimer
-	ld a, [hl]
-	cp 120
-	jr nc, .asm_44e2
-	inc [hl]
-	ret
-
-.asm_44e2
-	ld a, [wGlobalCounter]
-	and %11
-	call z, SlowFadeInScreen
-	; continue when substate is advanced
-	; after the title has faded in completely
-	ld a, [wSubState]
-	cp $07
-	ret nz
-;	fallthrough
-
-; loads TitleScreen music
-; then starts Action Help timer
-StartTitleScreen:
-	play_music MUSIC_TITLE_SCREEN
-	ld a, 8
-	ld [wTimer + 1], a
-	ld a, 68
-	ld [wTimer], a
-	ld hl, wSubState
-	ld [hl], $07
-	ret
-
-StartMenu:
-	ld hl, wPlaneWarioEnd - 1
-	call UpdateObjAnim
-	ld hl, wPlaneWario
-	call Func_4b93
-	ld hl, wMenuObj3
-	call Func_4b73
-
-	call HandleStartMenuSelection
-
-	ld hl, wMenuObj1
-	call Func_4b73
-
-	ld a, [wceef]
-	and a
-	jr z, .asm_453e
-
-	ld a, [wGlobalCounter]
-	and %111
-	jr nz, .asm_4538
-	ld a, [wMenuObj2Attributes]
-	xor %11
-	ld [wMenuObj2Attributes], a
-.asm_4538
-	ld hl, wMenuObj2
-	call Func_4b73
-
-.asm_453e
-	call ClearUnusedVirtualOAM
-	ld hl, wStartMenuSelection
-	bit STARTMENUF_SELECT_F, [hl]
-	jr nz, .select
-	ld a, [hl]
-	cp STARTMENU_NEW_GAME
-	jr z, .tick_action_help_timer
-	cp STARTMENU_CONTINUE
-	jr z, .tick_action_help_timer
-	; start Action Help timer
-	ld a, 8
-	ld [wTimer + 1], a
-	ld a, 68
-	ld [wTimer], a
-	ret
-
-.tick_action_help_timer
-	; decrement timer
-	ld hl, wTimer
-	ld a, [hl]
-	sub 1
-	ld [hli], a
-	ld b, a
-	ld a, [hl]
-	sbc 0
-	ld [hl], a
-	or b
-	ret nz ; return if still not 0
-
-; enter Action Help mode
-	xor a
-	ld [hld], a
-	ld [hl], a
-	ld a, [wPowerUpLevel]
-	or ACTION_HELP_TITLE_SCREEN
-	ld [wPowerUpLevel], a
-	jp OpenActionHelp
-
-.select
-	ld hl, wStartMenuSelection
-	ld a, [hl]
-	and $f
-	cp STARTMENU_NEW_GAME
-	jr z, .NewGame
-	cp STARTMENU_CONTINUE
-	jr z, .ContinueOrTimeAttack
-	cp STARTMENU_CLEAR_DATA
-	jr z, .ClearData
-	cp STARTMENU_CLEAR_DATA_YES
-	jp z, ClearSaveData
-
-	ld a, 134
-	ld [wMenuObj2YCoord], a
-	ld a, 130
-	ld [wMenuObj1YCoord], a
-
-	ld a, [wGameModeFlags]
-	bit MODE_TIME_ATTACK_F, a
-	jr nz, .asm_45aa
-	ld a, $80
-	ld [wcee4], a
-	ld bc, Frameset_6ce9
-	jr .got_frameset
-.asm_45aa
-	ld bc, Frameset_6d1e
-.got_frameset
-	ld a, STARTMENU_CONTINUE
-	jr .asm_45c5
-.ClearData
-	ld a, $81
-	ld [wcee4], a
-	ld a, SCREEN_HEIGHT_PX
-	ld [wMenuObj2YCoord], a
-	ld a, 120
-	ld [wMenuObj1YCoord], a
-	ld bc, Frameset_6cec
-	ld a, STARTMENU_CLEAR_DATA_NO
-
-.asm_45c5
-	ld [wStartMenuSelection], a
-	ld hl, wMenuObj1FramesetOffset
-	xor a
-	ld [hli], a
-	ld [hli], a ; duration
-	ld a, b     ;
-	ld [hli], a ; frameset ptr
-	ld a, c     ;
-	ld [hl], a  ;
-	call UpdateObjAnim
-	ret
-
-.NewGame
-	ld a, ST_LANGUAGE_SELECTION
-	ld [wState], a
-	xor a
-	ld [wSubState], a
-	ret
-
-	; unreachable
-	; seems like debug code to start
-	; game with all power ups
-	ld a, SUPER_GRAB_GLOVES
-	ld [wPowerUpLevel], a
-	ld a, [wceef]
-	and $03
-	ld [wceef], a
-
-.ContinueOrTimeAttack
-	ld a, [wGameModeFlags]
-	bit MODE_TIME_ATTACK_F, a
-	jr nz, .TimeAttack
-	ld a, [wceef]
-	and %111100
-	jr nz, .asm_45fd
-	jr StartOverworldState
-.asm_45fd
-	ld a, ST_LEVEL
-	ld [wState], a
-	xor a
-	ld [wSubState], a
-	ret
-
-.TimeAttack
-	call DisableLCD
-	call FillWhiteBGPal
-	call FillWhiteOBPal
-	ld a, LCDC_DEFAULT
-	ldh [rLCDC], a
-	ld hl, wSubState
-	inc [hl]
-	ret
-
-StartOverworldStateAndNewGameParam:
-	ld a, TRANSITION_NEW_GAME
-	ld [wTransitionParam], a
-	; fallthrough
-
-StartOverworldState::
-	ld a, ST_OVERWORLD
-	ld [wState], a
-	xor a
-	ld [wSubState], a
-	ret
-
-Func_4628::
-	xor a
-	ld [wAnimatedTilesFrameDuration], a
-	ld [wAnimatedTilesGfx], a
-	ld [wAnimatedTilesFrameCount], a
-	ld [wAnimatedTilesFrame], a
-	xor a
-	ld [w3d50d], a
-	ld hl, wca3b
-	set 7, [hl]
-	jr StartOverworldState
-
-InitTimeAttackDescription:
-	call DisableLCD
-	call FillBGMap0_With7f
-	call ClearVirtualOAM
-	call LoadTimeAttackDescriptionPals
-	call ApplyTempPals1ToBGPals
-	call LoadTimeAttackDescriptionTiles
-	call LoadTimeAttackText
-	call VBlank_354
-
-	xor a
-	ld [wSCY], a
-	ldh [rSCY], a
-	ld [wSCX], a
-	ldh [rSCX], a
-	ld a, LCDC_DEFAULT
-	ldh [rLCDC], a
-	xor a
-	ld [wTimer], a
-	ld hl, wSubState
-	inc [hl]
-	ret
-
-TimeAttackDescription:
-	call AdjustJapaneseTimeAttackDescriptionWindow
-	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
-	ret z
-	call DisableLCD
-	call FillWhiteBGPal
-	ld a, LCDC_DEFAULT
-	ldh [rLCDC], a
-	jp StartOverworldState
-
-HandleOverworld:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
-	farcall OverworldStateTable
-	pop af
-	ldh [rSVBK], a
-
-	; if a level has been selected
-	; handle the transition
-	ld hl, wState
-	ld a, [hl]
-	cp ST_LEVEL
-	ret nz
-	play_sfx SFX_SELECTION
-	call SelectLevel
-	ld a, [wLevel]
-	cp GOLF_BUILDING
-	jr z, .golf_building
-	cp THE_TEMPLE
-	jr z, .the_temple
-	ret
-
-.golf_building
-	ld a, ST_GOLF_BUILDING
-	ld [wState], a
-	ret
-
-.the_temple
-	stop_sfx
-	ret
-
-LevelStateTable:
-	farcall _LevelStateTable
-	ret
-
-ClearScreenStateTable:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Audio RAM")
-	ldh [rSVBK], a
-	farcall _ClearScreenStateTable
-	pop af
-	ldh [rSVBK], a
-	ret
-
-PauseMenuStateTable:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Audio RAM")
-	ldh [rSVBK], a
-	farcall _PauseMenuStateTable
-	pop af
-	ldh [rSVBK], a
-	ret
-
-GolfStateTable:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Golf RAM")
-	ldh [rSVBK], a
-	farcall _GolfStateTable
-	pop af
-	ldh [rSVBK], a
-	ret
-
-EpilogueStateTable:
-	ld a, [wSubState]
-	jumptable
-
-	dw .Func_4732
-	dw .Func_473c
-
-.Func_4732:
-	ld a, [wGlobalCounter]
-	and %11
-	ret nz
-	call FastFadeToWhite
-	ret
-
-.Func_473c:
-	farcall Func_4628
-	ret
-
-ActionHelpStateTable:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Audio RAM")
-	ldh [rSVBK], a
-	farcall _ActionHelpStateTable
-	pop af
-	ldh [rSVBK], a
-	ret
-
-; pauses game for 100 ticks
-CollectKeyDelay:
-	ld hl, wTimer
-	inc [hl]
-	ld a, [hl]
-	cp 100
-	ret c
-	ld [hl], 0
-	ld a, ST_LEVEL
-	ld [wState], a
-	ret
-
-CreditsStateTable:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Audio RAM")
-	ldh [rSVBK], a
-	farcall _CreditsStateTable
-	pop af
-	ldh [rSVBK], a
-	ret
-
-GolfBuildingStateTable:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Golf RAM")
-	ldh [rSVBK], a
-	farcall _GolfBuildingStateTable
-	pop af
-	ldh [rSVBK], a
-	ret
-
-GBIncompatibleStateTable:
-	ld a, [wSubState]
-	jumptable
-
-	dw  FastFadeToWhite
-	dw  GBIncompatible
-	dw  SlowFadeFromWhite
-	dw  ExitGBIncompatible
-	dw  DebugReset
-	dw  DebugReset
-	dw  DebugReset
-	dw  DebugReset
-
-GBIncompatible:
-	call DisableLCD
-	call ClearBGMap0
-	call ClearVirtualOAM
-
-	farcall LoadGBIncompatibleScreenGfx
-	farcall LoadGBIncompatibleScreenMap
-	call VBlank_354
-
-	xor a
-	ld [wSCX], a
-	ldh [rSCX], a
-	ld [wSCY], a
-	ldh [rSCY], a
-	ld a, LCDC_DEFAULT
-	ldh [rLCDC], a
-	ld hl, wSubState
-	inc [hl]
-	ret
-
-ExitGBIncompatible:
-	ret
-
-GameOverStateTable:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Audio RAM")
-	ldh [rSVBK], a
-	farcall _GameOverStateTable
-	pop af
-	ldh [rSVBK], a
-	ret
-
-PerfectStateTable:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Audio RAM")
-	ldh [rSVBK], a
-	farcall _PerfectStateTable
-	pop af
-	ldh [rSVBK], a
-	ret
-
-LanguageSelectionStateTable:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Audio RAM")
-	ldh [rSVBK], a
-	call .jump
-	pop af
-	ldh [rSVBK], a
-	ret
-
-.jump
-	ld a, [wSubState]
-	jumptable
-
-	dw FastFadeToWhite
-	dw InitLanguageSelection
-	dw SlowFadeFromWhite
-	dw LanguageSelection
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-
-InitLanguageSelection:
-	call DisableLCD
-	call FillBGMap0_With7f
-	call ClearVirtualOAM
-
-	farcall LoadFontPals
-	farcall LoadFontTiles
-	farcall LoadLanguageSelectionText
-	call VBlank_4ddf
-
-	xor a
-	ld [wSCY], a
-	ldh [rSCY], a
-	ld [wSCX], a
-	ldh [rSCX], a
-	ld a, $01
-	ld [wLanguage], a
-
-	ld hl, wMenuObj1
-	ld a, 70
-	ld [hli], a
-	ld a, 24
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld a, HIGH(Frameset_76b5)
-	ld [hli], a
-	ld a, LOW(Frameset_76b5)
-	ld [hl], a
-	call UpdateObjAnim
-	ld hl, wMenuObj1
-	call Func_4e3e
-	call ClearUnusedVirtualOAM
-	ld a, LCDC_DEFAULT
-	ldh [rLCDC], a
-
-	ld hl, wSubState
-	inc [hl]
-	ret
-
-LanguageSelection:
-	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
-	jp nz, StartOverworldStateAndNewGameParam
-	bit D_DOWN_F, a
-	jr nz, .d_down
-	bit D_UP_F, a
-	jr nz, .d_up
-	jr .update_anim
-
-.d_down
-	ld a, [wLanguage]
-	and a
-	ret z ; can't go down
-	ld a, 86
-	ld [wMenuObj1YCoord], a
-	xor a
-	jr .got_language
-
-.d_up
-	ld a, [wLanguage]
-	dec a
-	ret z ; can't go up
-	ld hl, wMenuObj1
-	ld a, 70
-	ld [wMenuObj1YCoord], a
-	ld a, $01
-
-.got_language
-	ld [wLanguage], a
-	add $80
-	ld [wcee4], a
-	play_sfx SFX_0E2
-
-.update_anim
-	ld hl, wMenuObj1End - 1
-	call UpdateObjAnim
-	ld hl, wMenuObj1
-	call Func_4e3e
-	call ClearUnusedVirtualOAM
-	ret
-
 LoadTitleScreenPals:
 	ld a, [wceef]
 	and a
@@ -1391,22 +66,8 @@ LoadTimeAttackDescriptionTiles:
 LoadTimeAttackText:
 	ld a, [wLanguage]
 	and a
-	jr nz, .japanese
+	jr nz, .english
 
-	ld a, BANK("VRAM1")
-	ldh [rVBK], a
-	ld hl, TimeAttack2ENTextMap
-	ld bc, v1BGMap0
-	call Decompress
-
-	xor a ; VRAM0
-	ldh [rVBK], a
-	ld hl, TimeAttack1ENTextMap
-	ld bc, v0BGMap0
-	call Decompress
-	ret
-
-.japanese
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, TimeAttack2JPTextMap
@@ -1420,7 +81,21 @@ LoadTimeAttackText:
 	call Decompress
 	ret
 
-VBlank_49db:
+.english
+	ld a, BANK("VRAM1")
+	ldh [rVBK], a
+	ld hl, TimeAttack2ENTextMap
+	ld bc, v1BGMap0
+	call Decompress
+
+	xor a ; VRAM0
+	ldh [rVBK], a
+	ld hl, TimeAttack1ENTextMap
+	ld bc, v0BGMap0
+	call Decompress
+	ret
+
+VBlank_Title:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -1705,16 +380,15 @@ Func_4b73:
 	add OAM_Y_OFS
 	sub b
 	ld [wCurSpriteYCoord], a
-
 	; x coord
 	ld a, [hli]
 	add OAM_X_OFS
 	ld [wCurSpriteXCoord], a
-
 	ld a, [hli]
 	ld [wCurSpriteFrame], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
+
 	ld hl, OAM_6b5f
 	call TryAddSprite
 	ret
@@ -1735,6 +409,7 @@ Func_4b93:
 	ld [wCurSpriteFrame], a
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
+
 	ld hl, OAM_6d21
 	call TryAddSprite
 	ret
@@ -1967,38 +642,38 @@ FinishIntroBackgroundScroll:
 
 ; pans the background of the intro airplane scene
 ; each horizontal layer scrolls at different speed
-DrawIntroBackgroundLayers:
+PanIntroBackgroundLayers:
 	ld a, [wceef]
 	and a
 	ret nz
-.asm_4d0c
+.sky
 	ldh a, [rLY]
 	cp $5b
-	jr c, .asm_4d0c
+	jr c, .sky
 	call WaitVBlank
 
 	ld a, [wIntroBGXOffsetFar]
 	ldh [rSCX], a
-.asm_4d1a
+.far_layer
 	ldh a, [rLY]
 	cp $63
-	jr c, .asm_4d1a
+	jr c, .far_layer
 	call WaitVBlank
 
 	ld a, [wIntroBGXOffsetCentre]
 	ldh [rSCX], a
-.asm_4d28
+.centre_layer
 	ldh a, [rLY]
 	cp $73
-	jr c, .asm_4d28
+	jr c, .centre_layer
 	call WaitVBlank
 
 	ld a, [wIntroBGXOffsetNear]
 	ldh [rSCX], a
-.asm_4d36
+.near_layer
 	ldh a, [rLY]
 	cp $83
-	jr c, .asm_4d36
+	jr c, .near_layer
 	call WaitVBlank
 
 	ld a, [wSCX]
@@ -2097,7 +772,7 @@ AdjustJapaneseTimeAttackDescriptionWindow:
 	ldh [rSCY], a
 	ret
 
-VBlank_4ddf:
+VBlank_LanguageSelection:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -2107,10 +782,11 @@ VBlank_4ddf:
 .Func:
 	ld a, [wcee4]
 	bit 7, a
-	jr z, .asm_4e2e
+	jr z, .skip
 	and $7f
 	dec a
-	jr z, .asm_4e11
+	jr z, .english
+; japanese
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	hlbgcoord 5, 7
@@ -2122,7 +798,7 @@ VBlank_4ddf:
 	ld a, $06
 	call WriteAToHL_BTimes
 	jr .asm_4e29
-.asm_4e11
+.english
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	hlbgcoord 5, 7
@@ -2136,7 +812,8 @@ VBlank_4ddf:
 .asm_4e29
 	ld hl, wcee4
 	res 7, [hl]
-.asm_4e2e
+
+.skip
 	ld a, [wSCY]
 	ldh [rSCY], a
 	ld a, [wSCX]
@@ -2191,154 +868,154 @@ PlayIntroSFXPlane_Far:
 ; if both treasures are collected, then that variant is unlocked
 LevelTreasureRequisites:
 	; LEVEL_OUT_OF_THE_WOODS
-	db GOLD_MAGIC,               TREASURE_NONE ; variant 4
-	db MAGIC_SEEDS,              EYE_OF_THE_STORM ; variant 3
+	db GOLD_MAGIC,                 TREASURE_NONE ; variant 4
+	db MAGIC_SEEDS,                EYE_OF_THE_STORM ; variant 3
 	db LEAD_OVERALLS_T,            TREASURE_NONE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_PEACEFUL_VILLAGE
 	db SUPER_JUMP_SLAM_OVERALLS_T, TREASURE_NONE ; variant 4
-	db FLUTE,                    TREASURE_NONE ; variant 3
-	db FLUTE,                    TREASURE_NONE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db FLUTE,                      TREASURE_NONE ; variant 3
+	db FLUTE,                      TREASURE_NONE ; variant 2
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_VAST_PLAIN
-	db BLUE_CHEMICAL,            RED_CHEMICAL ; variant 4
-	db POUCH,                    TREASURE_NONE ; variant 3
+	db BLUE_CHEMICAL,              RED_CHEMICAL ; variant 4
+	db POUCH,                      TREASURE_NONE ; variant 3
 	db LEAD_OVERALLS_T,            TREASURE_NONE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_BANK_OF_THE_WILD_RIVER
-	db AIR_PUMP,                 TREASURE_NONE ; variant 4
-	db PRINCE_FROGS_GLOVES_T,       TREASURE_NONE ; variant 3
-	db GARLIC_T,              TREASURE_NONE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db AIR_PUMP,                   TREASURE_NONE ; variant 4
+	db PRINCE_FROGS_GLOVES_T,      TREASURE_NONE ; variant 3
+	db GARLIC_T,                   TREASURE_NONE ; variant 2
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_TIDAL_COAST
-	db SAPLING_OF_GROWTH,        TREASURE_NONE ; variant 4
-	db STATUE,                   TREASURE_NONE ; variant 3
+	db SAPLING_OF_GROWTH,          TREASURE_NONE ; variant 4
+	db STATUE,                     TREASURE_NONE ; variant 3
 	db GRAB_GLOVE_T,               TREASURE_NONE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_SEA_TURTLE_ROCKS
-	db NIGHT_VISION_SCOPE,       TREASURE_NONE ; variant 4
+	db NIGHT_VISION_SCOPE,         TREASURE_NONE ; variant 4
 	db SUPER_JUMP_SLAM_OVERALLS_T, TREASURE_NONE ; variant 3
-	db SCEPTER,                  TREASURE_NONE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db SCEPTER,                    TREASURE_NONE ; variant 2
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_DESERT_RUINS
 	db SUPER_JUMP_SLAM_OVERALLS_T, TREASURE_NONE ; variant 4
 	db HEAD_SMASH_HELMET_T,        TREASURE_NONE ; variant 3
-	db BLUE_TABLET,              GREEN_TABLET ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db BLUE_TABLET,                GREEN_TABLET ; variant 2
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_VOLCANOS_BASE
-	db FOOT_OF_STONE,            TREASURE_NONE ; variant 4
-	db FLUTE,                    TREASURE_NONE ; variant 3
-	db TRUCK_WHEEL,              TREASURE_NONE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db FOOT_OF_STONE,              TREASURE_NONE ; variant 4
+	db FLUTE,                      TREASURE_NONE ; variant 3
+	db TRUCK_WHEEL,                TREASURE_NONE ; variant 2
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_POOL_OF_RAIN
-	db AIR_PUMP,                 TREASURE_NONE ; variant 4
+	db AIR_PUMP,                   TREASURE_NONE ; variant 4
 	db SWIMMING_FLIPPERS_T,        TREASURE_NONE ; variant 3
-	db POUCH,                    TREASURE_NONE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db POUCH,                      TREASURE_NONE ; variant 2
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_A_TOWN_IN_CHAOS
-	db ELECTRIC_FAN_PROPELLER,   TREASURE_NONE ; variant 4
+	db ELECTRIC_FAN_PROPELLER,     TREASURE_NONE ; variant 4
 	db SUPER_GRAB_GLOVES_T,        TREASURE_NONE ; variant 3
 	db HEAD_SMASH_HELMET_T,        TREASURE_NONE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_BENEATH_THE_WAVES
-	db BLUE_CHEMICAL,            RED_CHEMICAL ; variant 4
-	db SAPLING_OF_GROWTH,        TREASURE_NONE ; variant 3
-	db PRINCE_FROGS_GLOVES_T,       TREASURE_NONE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db BLUE_CHEMICAL,              RED_CHEMICAL ; variant 4
+	db SAPLING_OF_GROWTH,          TREASURE_NONE ; variant 3
+	db PRINCE_FROGS_GLOVES_T,      TREASURE_NONE ; variant 2
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_WEST_CRATER
-	db RUST_SPRAY,               TREASURE_NONE ; variant 4
-	db FIRE_DRENCHER,            TREASURE_NONE ; variant 3
+	db RUST_SPRAY,                 TREASURE_NONE ; variant 4
+	db FIRE_DRENCHER,              TREASURE_NONE ; variant 3
 	db SUPER_JUMP_SLAM_OVERALLS_T, TREASURE_NONE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_GRASSLANDS
 	db HIGH_JUMP_BOOTS_T,          TREASURE_NONE ; variant 4
-	db FLUTE,                    TREASURE_NONE ; variant 3
-	db POUCH,                    TREASURE_NONE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db FLUTE,                      TREASURE_NONE ; variant 3
+	db POUCH,                      TREASURE_NONE ; variant 2
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_BIG_BRIDGE
-	db SCEPTER,                  TREASURE_NONE ; variant 4
+	db SCEPTER,                    TREASURE_NONE ; variant 4
 	db GRAB_GLOVE_T,               TREASURE_NONE ; variant 3
 	db SWIMMING_FLIPPERS_T,        TREASURE_NONE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_TOWER_OF_REVIVAL
-	db GOLDEN_LEFT_EYE,          GOLDEN_RIGHT_EYE ; variant 4
-	db STATUE,                   TREASURE_NONE ; variant 3
-	db RIGHT_GLASS_EYE,          LEFT_GLASS_EYE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db GOLDEN_LEFT_EYE,            GOLDEN_RIGHT_EYE ; variant 4
+	db STATUE,                     TREASURE_NONE ; variant 3
+	db RIGHT_GLASS_EYE,            LEFT_GLASS_EYE ; variant 2
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_STEEP_CANYON
-	db RUST_SPRAY,               TREASURE_NONE ; variant 4
-	db PRINCE_FROGS_GLOVES_T,       TREASURE_NONE ; variant 3
-	db FOOT_OF_STONE,            TREASURE_NONE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db RUST_SPRAY,                 TREASURE_NONE ; variant 4
+	db PRINCE_FROGS_GLOVES_T,      TREASURE_NONE ; variant 3
+	db FOOT_OF_STONE,              TREASURE_NONE ; variant 2
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_CAVE_OF_FLAMES
-	db RUST_SPRAY,               TREASURE_NONE ; variant 4
-	db EXPLOSIVE_PLUNGER_BOX,    TREASURE_NONE ; variant 3
+	db RUST_SPRAY,                 TREASURE_NONE ; variant 4
+	db EXPLOSIVE_PLUNGER_BOX,      TREASURE_NONE ; variant 3
 	db HIGH_JUMP_BOOTS_T,          TREASURE_NONE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_ABOVE_THE_CLOUDS
-	db FULL_MOON_GONG,           TREASURE_NONE ; variant 4
-	db SCISSORS,                 TREASURE_NONE ; variant 3
-	db MAGIC_WAND,               TREASURE_NONE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db FULL_MOON_GONG,             TREASURE_NONE ; variant 4
+	db SCISSORS,                   TREASURE_NONE ; variant 3
+	db MAGIC_WAND,                 TREASURE_NONE ; variant 2
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_STAGNANT_SWAMP
-	db EXPLOSIVE_PLUNGER_BOX,    TREASURE_NONE ; variant 4
+	db EXPLOSIVE_PLUNGER_BOX,      TREASURE_NONE ; variant 4
 	db HIGH_JUMP_BOOTS_T,          TREASURE_NONE ; variant 3
-	db FOOT_OF_STONE,            TREASURE_NONE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db FOOT_OF_STONE,              TREASURE_NONE ; variant 2
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_FRIGID_SEA
-	db SUN_MEDALLION_TOP,        SUN_MEDALLION_BOTTOM ; variant 4
-	db SCEPTER,                  TREASURE_NONE ; variant 3
+	db SUN_MEDALLION_TOP,          SUN_MEDALLION_BOTTOM ; variant 4
+	db SCEPTER,                    TREASURE_NONE ; variant 3
 	db GRAB_GLOVE_T,               TREASURE_NONE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_CASTLE_OF_ILLUSIONS
-	db CASTLE_BRICK,             TREASURE_NONE ; variant 4
+	db CASTLE_BRICK,               TREASURE_NONE ; variant 4
 	db SUPER_GRAB_GLOVES_T,        TREASURE_NONE ; variant 3
-	db SUN_MEDALLION_TOP,        SUN_MEDALLION_BOTTOM ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db SUN_MEDALLION_TOP,          SUN_MEDALLION_BOTTOM ; variant 2
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_COLOSSAL_HOLE
-	db EXPLOSIVE_PLUNGER_BOX,    TREASURE_NONE ; variant 4
-	db SUN_MEDALLION_TOP,        SUN_MEDALLION_BOTTOM ; variant 3
-	db GARLIC_T,              TREASURE_NONE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db EXPLOSIVE_PLUNGER_BOX,      TREASURE_NONE ; variant 4
+	db SUN_MEDALLION_TOP,          SUN_MEDALLION_BOTTOM ; variant 3
+	db GARLIC_T,                   TREASURE_NONE ; variant 2
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_WARPED_VOID
-	db KEY_CARD_RED,             KEY_CARD_BLUE ; variant 4
-	db WARP_REMOVAL_APPARATUS,   TREASURE_NONE ; variant 3
-	db WARP_REMOVAL_APPARATUS,   TREASURE_NONE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db KEY_CARD_RED,               KEY_CARD_BLUE ; variant 4
+	db WARP_REMOVAL_APPARATUS,     TREASURE_NONE ; variant 3
+	db WARP_REMOVAL_APPARATUS,     TREASURE_NONE ; variant 2
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_EAST_CRATER
-	db PICK_AXE,                 TREASURE_NONE ; variant 4
-	db JACKHAMMER,               TREASURE_NONE ; variant 3
-	db FIRE_DRENCHER,            TREASURE_NONE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db PICK_AXE,                   TREASURE_NONE ; variant 4
+	db JACKHAMMER,                 TREASURE_NONE ; variant 3
+	db FIRE_DRENCHER,              TREASURE_NONE ; variant 2
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_FOREST_OF_FEAR
-	db DEMONS_BLOOD,             TREASURE_NONE ; variant 4
-	db MYSTERY_HANDLE,           TREASURE_NONE ; variant 3
+	db DEMONS_BLOOD,               TREASURE_NONE ; variant 4
+	db MYSTERY_HANDLE,             TREASURE_NONE ; variant 3
 	db SUPER_GRAB_GLOVES_T,        TREASURE_NONE ; variant 2
-	db TREASURE_NONE,            TREASURE_NONE ; variant 1
+	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 Pals_4f82:
 	rgb 16, 30, 31
@@ -3232,16 +1909,16 @@ Pal_71b0:
 	rgb 10, 10, 10
 	rgb  0,  0,  0
 
-TimeAttack1ENTextMap:
+TimeAttack1JPTextMap:
 INCBIN "gfx/bgmaps/text/time_attack1_en.bin"
 
-TimeAttack2ENTextMap:
+TimeAttack2JPTextMap:
 INCBIN "gfx/bgmaps/text/time_attack2_en.bin"
 
-TimeAttack1JPTextMap:
+TimeAttack1ENTextMap:
 INCBIN "gfx/bgmaps/text/time_attack1_jp.bin"
 
-TimeAttack2JPTextMap:
+TimeAttack2ENTextMap:
 INCBIN "gfx/bgmaps/text/time_attack2_jp.bin"
 
 OAM_75c3:

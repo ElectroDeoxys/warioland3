@@ -1,3 +1,29 @@
+; wLanguage constants
+DEF JAPANESE EQU 0
+DEF ENGLISH  EQU 1
+
+; wStartMenuSelection constants
+	const_def
+	const STARTMENU_NEW_GAME       ; $0
+	const STARTMENU_CONTINUE       ; $1
+	const STARTMENU_CLEAR_DATA     ; $2
+	const STARTMENU_CLEAR_DATA_NO  ; $3
+	const STARTMENU_CLEAR_DATA_YES ; $4
+
+	const_def 4
+	const STARTMENUF_SCROLLING_F ; $4
+	const STARTMENUF_ANIM1_F     ; $5
+	const STARTMENUF_ANIM2_F     ; $6
+	const STARTMENUF_SELECT_F    ; $7
+
+DEF STARTMENUF_SCROLLING EQU 1 << STARTMENUF_SCROLLING_F
+DEF STARTMENUF_ANIM1     EQU 1 << STARTMENUF_ANIM1_F
+DEF STARTMENUF_ANIM2     EQU 1 << STARTMENUF_ANIM2_F
+DEF STARTMENUF_SELECT    EQU 1 << STARTMENUF_SELECT_F
+
+; time it takes to enter Action Help in the Title screen
+DEF ACTION_HELP_TIMER EQU 2116
+
 ; flags for wGameModeFlags
 	const_def
 	const MODE_GAME_CLEARED_F           ; 0
@@ -20,25 +46,6 @@ DEF TRANSITION_NEW_GAME             EQU $ff
 	const TIME_ATTACK_NOT_COMPLETED  ; $0
 	const TIME_ATTACK_NO_HIGH_SCORE  ; $1
 	const TIME_ATTACK_GOT_HIGH_SCORE ; $2
-
-; wStartMenuSelection constants
-	const_def
-	const STARTMENU_NEW_GAME       ; $0
-	const STARTMENU_CONTINUE       ; $1
-	const STARTMENU_CLEAR_DATA     ; $2
-	const STARTMENU_CLEAR_DATA_NO  ; $3
-	const STARTMENU_CLEAR_DATA_YES ; $4
-
-	const_def 4
-	const STARTMENUF_SCROLLING_F ; $4
-	const STARTMENUF_ANIM1_F     ; $5
-	const STARTMENUF_ANIM2_F     ; $6
-	const STARTMENUF_SELECT_F    ; $7
-
-DEF STARTMENUF_SCROLLING EQU 1 << STARTMENUF_SCROLLING_F
-DEF STARTMENUF_ANIM1     EQU 1 << STARTMENUF_ANIM1_F
-DEF STARTMENUF_ANIM2     EQU 1 << STARTMENUF_ANIM2_F
-DEF STARTMENUF_SELECT    EQU 1 << STARTMENUF_SELECT_F
 
 ; wPauseMenuSelection constants
 	const_def

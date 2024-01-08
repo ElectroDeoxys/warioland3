@@ -1,487 +1,3 @@
-_LevelStateTable:
-	ld a, [wSubState]
-	jumptable
-
-	dw FastFadeToWhite
-	dw InitLevel
-	dw SlowFadeFromWhite
-	dw UpdateLevel
-	dw DoorTransition
-	dw FastFadeToWhite
-	dw Func_846e
-	dw Func_861c ; SST_LEVEL_07
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-
-InitLevel:
-	call DisableLCD
-	call FillBGMap0_With7f
-	call ClearVirtualOAM
-	call ClearParticles
-
-	xor a
-	ldh [rSCY], a
-	ld [wSCY], a
-	ldh [rSCX], a
-	ld [wSCX], a
-
-	farcall LoadLevelCommonGfxAndTreasures
-
-	call Func_8747
-	call UpdateLevelMusic
-
-	ld a, TRUE
-	ld [wRoomAnimatedTilesEnabled], a
-	xor a
-	ld [wceef], a
-
-	ld a, [wSRAMBank]
-	push af
-	ld a, $00
-	sramswitch
-	xor a
-	ld hl, s0a000
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hl], a
-	ld hl, s0a800
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hl], a
-	pop af
-	sramswitch
-
-	ld hl, wSubState
-	inc [hl]
-	ld a, [wLevel]
-	cp THE_TEMPLE
-	jr z, .final_battle
-	ld a, LCDC_DEFAULT
-	ldh [rLCDC], a
-	ret
-
-.final_battle
-	farcall LoadHiddenFigureGfx
-
-	ld a, $88
-	ld [wc08d], a
-	ldh [rWY], a
-	ld a, $07
-	ldh [rWX], a
-	ld a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
-	ldh [rLCDC], a
-	ret
-
-UpdateLevel:
-	ld a, TRUE
-	ld [wRoomAnimatedPalsEnabled], a
-
-	farcall UpdateParticles
-
-	ld a, [wCameraConfigFlags]
-	and CAM_SCROLLING_MASK
-	cp CAM_FREE
-	jp z, .free_camera
-	cp CAM_YSCROLL
-	jp z, .yscroll_camera
-
-	ld a, [wFloorTransitionDir]
-	and a
-	jr nz, .skip_update_wario_state
-	ld a, TRUE
-	ld [wc0da], a
-	farcall UpdateWarioStates
-
-.skip_update_wario_state
-	ld a, [wCameraConfigFlags]
-	cp HIDDEN_FIGURE_CAMCONFIG
-	jr z, .asm_80fc
-	ld a, [wCameraSCY + 1]
-	ld [wSCY], a
-	ld a, [wCameraSCX + 1]
-	ld [wSCX], a
-	jr .asm_8112
-.asm_80fc
-	ld hl, wSCYShake
-	ld a, [wc089]
-	add [hl]
-	ld [wSCY], a
-	ld a, [wc08b]
-	ld [wSCX], a
-	ld a, [wc08d]
-	add [hl]
-	ldh [rWY], a
-
-.asm_8112
-	xor a ; FALSE
-	ld [wc0da], a
-
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM1")
-	ldh [rSVBK], a
-	farcall UpdateObjects
-	pop af
-	ldh [rSVBK], a
-
-	call SetWarioScreenPos
-	ld a, [wLevel]
-	cp THE_TEMPLE
-	jr nz, .asm_814f
-	ld a, [wAutoMoveState]
-	cp $02
-	jr nz, .asm_814f
-	farcall SetState_FenceShakeSliding
-
-.asm_814f
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM1")
-	ldh [rSVBK], a
-	ld a, TRUE
-	ld [wc0da], a
-	farcall ProcessInteractions
-	xor a ; FALSE
-	ld [wc0da], a
-	pop af
-	ldh [rSVBK], a
-
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM1")
-	ldh [rSVBK], a
-	farcall DrawObjects_NoPriority
-	pop af
-	ldh [rSVBK], a
-
-	call DrawWario
-
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM1")
-	ldh [rSVBK], a
-	farcall DrawObjects_WithPriority
-	pop af
-	ldh [rSVBK], a
-
-	call ClearUnusedVirtualOAM
-
-	ld a, [wFloorTransitionDir]
-	and FLOOR_TRANSITION_DOWN | FLOOR_TRANSITION_UP
-	jr z, .no_floor_transition
-	ld a, [wIsDMATransferPending]
-	and a
-	jr nz, .no_floor_transition
-	xor a
-	ld [wc0c2], a
-	ld a, [wWarioScreenYPos]
-	ld [wca5e], a
-
-	ld a, [wFloorTransitionDir]
-	bit FLOOR_TRANSITION_UP_F, a
-	jr nz, .transition_up
-; transition down
-	ld b, 4
-	ld a, [wc0c2]
-	sub b
-	ld [wc0c2], a
-	ld a, [wFloorTransitionTimer]
-	sub b
-	ld [wFloorTransitionTimer], a
-	jr nz, .asm_8209
-	ld hl, wFloorTransitionDir
-	res FLOOR_TRANSITION_DOWN_F, [hl]
-	xor a ; FALSE
-	ld [wIsFloorTransition], a
-	jr .asm_8209
-.transition_up
-	ld b, 4
-	ld a, [wc0c2]
-	add b
-	ld [wc0c2], a
-	ld a, [wFloorTransitionTimer]
-	sub b
-	ld [wFloorTransitionTimer], a
-	jr z, .end_up_transition
-	ld a, [wc0bd]
-	dec a
-	jr nz, .asm_8209
-	xor a
-	ld [wFloorTransitionTimer], a
-.end_up_transition
-	ld hl, wFloorTransitionDir
-	res FLOOR_TRANSITION_UP_F, [hl]
-	xor a ; FALSE
-	ld [wIsFloorTransition], a
-
-.asm_8209
-	xor a
-	ld [wc0be], a
-	ld [wc0bd], a
-	call Func_b915
-	jr .asm_8229
-
-.no_floor_transition
-	ld a, [wCameraConfigFlags]
-	cp HIDDEN_FIGURE_CAMCONFIG
-	jr z, .asm_8227
-	and CAM_SCROLLING_MASK
-	cp CAM_XSCROLL2 | CAM_TRANSITIONS
-	jr z, .asm_8229
-	call Func_b9a6
-	jr .asm_8229
-.asm_8227
-	jr .check_end_screen
-
-.asm_8229
-	ld a, [wSRAMBank]
-	push af
-	ld a, BANK("SRAM1")
-	sramswitch
-	call Func_8ed9
-	call Func_bb85
-	di
-	call Func_b681
-	ei
-	pop af
-	sramswitch
-
-.check_end_screen
-	ld a, [wState]
-	cp ST_LEVEL
-	ret nz
-	ld hl, wLevelEndScreen
-	ld a, [hl]
-	and a
-	jr z, .no_end_screen
-	bit 7, a
-	ret nz
-
-	ld a, TRUE
-	ld [wResetDisabled], a
-
-	xor a
-	ld [wGroundShakeCounter], a
-	ld [wSCYShake], a
-	ld [wAnimatedTilesFrameDuration], a
-	ld [wRoomPalCycleDuration], a
-	ld [wRoomAnimatedTilesEnabled], a
-	ld [wRoomAnimatedPalsEnabled], a
-	ld [wWaterCurrent], a
-	ld [wLastWaterCurrent], a
-	ld [wCurWaterCurrent], a
-	ld [wSwimmingDirectionInput], a
-
-	ld hl, wGameModeFlags
-	ld a, [wLevelEndScreen]
-	cp LVLEND_GAME_OVER
-	jr z, .game_over
-	cp LVLEND_EPILOGUE
-	jr z, .epilogue
-
-	ld hl, wState
-	inc [hl] ; ST_CLEAR
-	xor a
-	ld [wSubState], a
-	ld a, [wGameModeFlags]
-	bit MODE_TIME_ATTACK_F, a
-	ret z
-	ld a, SST_CLEAR_TIME_ATTACK
-	ld [wSubState], a
-	ret
-
-.game_over
-	ld a, TRANSITION_GAME_OVER
-	ld [wTransitionParam], a
-	jr .set_fought_a_hidden_figure
-
-.epilogue
-	ld a, [wNumCollectedTreasures]
-	dec a
-	jr z, .got_all_treasures
-	ld a, TRANSITION_EPILOGUE_NOT_PERFECT
-	ld [wTransitionParam], a
-	jr .set_game_cleared
-.got_all_treasures
-	ld a, TRANSITION_EPILOGUE_PERFECT
-	ld [wTransitionParam], a
-	set MODE_TIME_ATTACK_F, [hl]
-.set_game_cleared
-	set MODE_GAME_CLEARED_F, [hl]
-.set_fought_a_hidden_figure
-	set MODE_FOUGHT_A_HIDDEN_FIGURE_F, [hl]
-
-	ld hl, wState
-	ld [hl], ST_EPILOGUE
-	xor a
-	ld [wSubState], a
-	ret
-
-.no_end_screen
-	ld a, [wceda]
-	and a
-	jr z, .tick_time
-	ld a, [wSubState]
-	ld [wPendingSubState], a
-	ld a, SST_LEVEL_07
-	ld [wSubState], a
-	ret
-
-.tick_time
-	call TickLevelTime
-
-	ld a, [wFloorTransitionDir]
-	and a
-	ret nz
-	ld a, [wRoomTransitionParam]
-	and a
-	ret nz
-
-	ld a, [wJoypadPressed]
-	and SELECT | START
-	ret z
-	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_BLIND
-	jr z, .no_pause
-	ld a, [wIsBossBattle]
-	and a
-	jr nz, .no_pause
-	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_BLIND
-	jr nz, .pause ; this jump will always happen
-.no_pause
-	play_sfx SFX_0E5
-	ret
-
-.pause
-	play_sfx SFX_0E4
-	stop_music
-	xor a
-	ld [wRoomAnimatedPalsEnabled], a
-	ld a, $01
-	ld [wced6], a
-	ld a, [wSubState]
-	ld [wPendingSubState], a
-	ld a, ST_PAUSE_MENU
-	ld [wState], a
-	xor a
-	ld [wSubState], a
-	ret
-
-.free_camera
-	ld a, TRUE
-	ld [wc0da], a
-	farcall UpdateWarioStates
-
-	ld a, [wCameraSCY + 1]
-	ld [wSCY], a
-	ld a, [wCameraSCX + 1]
-	ld [wSCX], a
-
-	xor a ; FALSE
-	ld [wc0da], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM1")
-	ldh [rSVBK], a
-	farcall UpdateObjects
-	pop af
-	ldh [rSVBK], a
-
-	call SetWarioScreenPos
-	ld a, TRUE
-	ld [wc0da], a
-	farcall ProcessInteractions
-
-	xor a ; FALSE
-	ld [wc0da], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM1")
-	ldh [rSVBK], a
-	farcall DrawObjects_NoPriority
-	pop af
-	ldh [rSVBK], a
-
-	call DrawWario
-
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM1")
-	ldh [rSVBK], a
-	farcall DrawObjects_WithPriority
-	pop af
-	ldh [rSVBK], a
-
-	call ClearUnusedVirtualOAM
-	xor a
-	ld [wc0be], a
-	ld [wc0bd], a
-	call Func_b915
-	call Func_b9a6
-	jp .asm_8229
-
-.yscroll_camera
-	ld a, TRUE
-	ld [wc0da], a
-	farcall UpdateWarioStates
-
-	ld a, [wCameraSCY + 1]
-	ld [wSCY], a
-	ld a, [wCameraSCX + 1]
-	ld [wSCX], a
-
-	xor a ; FALSE
-	ld [wc0da], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM1")
-	ldh [rSVBK], a
-	farcall UpdateObjects
-	pop af
-	ldh [rSVBK], a
-
-	call SetWarioScreenPos
-	ld a, TRUE
-	ld [wc0da], a
-	farcall ProcessInteractions
-
-	xor a ; FALSE
-	ld [wc0da], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM1")
-	ldh [rSVBK], a
-	farcall DrawObjects_NoPriority
-	pop af
-	ldh [rSVBK], a
-
-	call DrawWario
-
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM1")
-	ldh [rSVBK], a
-	farcall DrawObjects_WithPriority
-	pop af
-	ldh [rSVBK], a
-
-	call ClearUnusedVirtualOAM
-
-	xor a
-	ld [wc0be], a
-	ld [wc0bd], a
-	call Func_b915
-	jp .asm_8229
-
 Func_846e:
 	ld a, [wRoomTransitionParam]
 	and ROOMTRANSITION_MASK
@@ -774,7 +290,7 @@ Func_861c:
 	ret
 
 Func_8747:
-	xor a
+	xor a ; FALSE
 	ld [wIsBossBattle], a
 	ld a, [wceef]
 	and %00111100
@@ -808,6 +324,7 @@ Func_8747:
 	ld [wSwimVelIndex], a
 	ld [wWaterSurfaceFloatingCounter], a
 	call ClearTransformationValues
+	; assumes ClearTransformationValues returns with a = 0
 	ld [wInvisibleFrame], a
 	ld [wcac8], a
 	ld [wIsOnSteppableObject], a
@@ -1240,7 +757,7 @@ Func_8ad9:
 	ld [wCameraSCX + 0], a
 	ld h, a
 	ld a, [wCameraConfigFlags]
-	bit CAM_EDGE_LEFT_F, a
+	bit CAM_BORDER_LEFT_F, a
 	jr z, .asm_8b27
 	ld de, -$20
 	add hl, de
@@ -1270,7 +787,7 @@ Func_8ad9:
 	ld h, a
 	ld de, $a0
 	ld a, [wCameraConfigFlags]
-	bit CAM_EDGE_RIGHT_F, a
+	bit CAM_BORDER_RIGHT_F, a
 	jr z, .asm_8b56
 	ld e, $c0
 .asm_8b56
@@ -1308,7 +825,7 @@ Func_8ad9:
 	ld [wCameraSCY + 0], a
 	ld h, a
 	ld a, [wCameraConfigFlags]
-	bit CAM_EDGE_UP_F, a
+	bit CAM_BORDER_UP_F, a
 	jr z, .asm_8b99
 	ld de, -$20
 	add hl, de
@@ -1338,7 +855,7 @@ Func_8ad9:
 	ld h, a
 	ld de, $90
 	ld a, [wCameraConfigFlags]
-	bit CAM_EDGE_DOWN_F, a
+	bit CAM_BORDER_DOWN_F, a
 	jr z, .asm_8bc7
 	ld e, $b0
 .asm_8bc7
@@ -1411,7 +928,7 @@ Func_8c12:
 
 .asm_8c38
 	ld a, [wCameraConfigFlags]
-	bit CAM_EDGE_UP_F, a
+	bit CAM_BORDER_UP_F, a
 	ld a, $00
 	jr z, .asm_8c43
 	ld a, $20
@@ -1426,7 +943,7 @@ Func_8c12:
 
 .asm_8c54
 	ld a, [wCameraConfigFlags]
-	bit CAM_EDGE_DOWN_F, a
+	bit CAM_BORDER_DOWN_F, a
 	ld a, $68
 	jr z, .asm_8c5f
 	ld a, $48
@@ -1465,7 +982,7 @@ Func_8c12:
 
 .asm_8c9f
 	ld a, [wCameraConfigFlags]
-	bit CAM_EDGE_LEFT_F, a
+	bit CAM_BORDER_LEFT_F, a
 	ld a, $00
 	jr z, .asm_8caa
 	ld a, $20
@@ -1480,7 +997,7 @@ Func_8c12:
 
 .asm_8cba
 	ld a, [wCameraConfigFlags]
-	bit CAM_EDGE_RIGHT_F, a
+	bit CAM_BORDER_RIGHT_F, a
 	ld a, $60
 	jr z, .asm_8cc5
 	ld a, $40
@@ -8149,7 +7666,7 @@ Func_b6d5:
 	adc $00
 	ld [wCameraSCX + 0], a
 	ld a, [wCameraConfigFlags]
-	bit CAM_EDGE_RIGHT_F, a
+	bit CAM_BORDER_RIGHT_F, a
 	ld b, $60
 	jr z, .asm_b6f8
 	ld b, $40
@@ -8182,7 +7699,7 @@ Func_b6d5:
 	sub $08
 	ld c, a
 	ld a, [wCameraConfigFlags]
-	bit CAM_EDGE_LEFT_F, a
+	bit CAM_BORDER_LEFT_F, a
 	jr z, .asm_b733
 	ld a, c
 	add $20
@@ -8192,7 +7709,7 @@ Func_b6d5:
 	cp c
 	ret nc
 	ld a, [wCameraConfigFlags]
-	bit CAM_EDGE_LEFT_F, a
+	bit CAM_BORDER_LEFT_F, a
 	ld a, $00
 	jr z, .asm_b743
 	ld a, $20
@@ -8221,7 +7738,7 @@ Func_b74c:
 	cp c
 	jr nz, .asm_b790
 	ld a, [wCameraConfigFlags]
-	bit CAM_EDGE_LEFT_F, a
+	bit CAM_BORDER_LEFT_F, a
 	ld b, $10
 	jr z, .asm_b77c
 	ld b, $30
@@ -8260,7 +7777,7 @@ Func_b74c:
 	sub c
 	ld c, a
 	ld a, [wCameraConfigFlags]
-	bit CAM_EDGE_RIGHT_F, a
+	bit CAM_BORDER_RIGHT_F, a
 	jr z, .asm_b7bb
 	ld a, c
 	sub $20
@@ -8275,7 +7792,7 @@ Func_b74c:
 	dec a
 	ld [wCameraSCX + 0], a
 	ld a, [wCameraConfigFlags]
-	bit CAM_EDGE_RIGHT_F, a
+	bit CAM_BORDER_RIGHT_F, a
 	ld a, $60
 	jr z, .asm_b7d7
 	ld a, $40
@@ -8287,16 +7804,19 @@ Func_b7db:
 	ld a, [wc0b6]
 	dec a
 	ld c, a
+
+	; add offset to camera Y scroll
 	ld a, [wCameraSCY + 1]
 	add b
 	ld [wCameraSCY + 1], a
 	ld a, [wCameraSCY + 0]
-	adc $00
+	adc 0
 	ld [wCameraSCY + 0], a
+
 	cp c
 	jr c, .asm_b80d
 	ld a, [wCameraConfigFlags]
-	bit CAM_EDGE_DOWN_F, a
+	bit CAM_BORDER_DOWN_F, a
 	ld b, $68
 	jr z, .asm_b7fd
 	ld b, $48
@@ -8309,11 +7829,14 @@ Func_b7db:
 	ld a, $01
 	ld [wc0bd], a
 	ret
+
 .asm_b80d
 	ld a, [wCameraConfigFlags]
 	and CAM_SCROLLING_MASK
 	cp CAM_TRANSITIONS
 	ret nc
+
+	; not CAM_TRANSITIONS
 	ld a, [wc0b7]
 	ld c, a
 	ld a, [wWarioYPos + 0]
@@ -8324,7 +7847,7 @@ Func_b7db:
 	sub $10
 	ld c, a
 	ld a, [wCameraConfigFlags]
-	bit CAM_EDGE_UP_F, a
+	bit CAM_BORDER_UP_F, a
 	jr z, .asm_b831
 	ld a, c
 	add $20
@@ -8335,7 +7858,7 @@ Func_b7db:
 	ret nc
 .asm_b836
 	ld a, [wCameraConfigFlags]
-	bit CAM_EDGE_UP_F, a
+	bit CAM_BORDER_UP_F, a
 	ld a, $00
 	jr z, .asm_b841
 	ld a, $20
@@ -8357,7 +7880,7 @@ Func_b850:
 	sbc $00
 	ld [wCameraSCY + 0], a
 	ld a, [wCameraConfigFlags]
-	bit CAM_EDGE_UP_F, a
+	bit CAM_BORDER_UP_F, a
 	ld b, $10
 	jr z, .asm_b86e
 	ld b, $30
@@ -8402,7 +7925,7 @@ Func_b850:
 	sub c
 	ld c, a
 	ld a, [wCameraConfigFlags]
-	bit CAM_EDGE_DOWN_F, a
+	bit CAM_BORDER_DOWN_F, a
 	jr z, .asm_b8ba
 	ld a, c
 	sub $20
@@ -8414,7 +7937,7 @@ Func_b850:
 	ld a, $02
 	ld [wc0be], a
 	ld a, [wCameraConfigFlags]
-	bit CAM_EDGE_DOWN_F, a
+	bit CAM_BORDER_DOWN_F, a
 	ld a, $68
 	jr z, .asm_b8cf
 	ld a, $48
@@ -8465,12 +7988,16 @@ Func_b915:
 	jr z, .asm_b964
 	xor a
 	ld [wc0d4], a
+
 	bit 7, b
-	jr nz, .asm_b941
+	jr nz, .negative
+
+; positive
 	ld hl, wWarioScreenYPos
 	ld a, [wca5e]
 	cp [hl]
 	jr nc, .asm_b92e
+	; wca5e < wWarioScreenYPos
 	inc b
 .asm_b92e
 	call Func_b7db
@@ -8483,16 +8010,18 @@ Func_b915:
 	xor a
 	ld [wc0c2], a
 	ret
-.asm_b941
+
+.negative
 	ld a, b
 	cpl
 	inc a
-	ld b, a
+	ld b, a ; = -b
 	ld hl, wWarioScreenYPos
 	ld a, [wca5e]
 	cp [hl]
 	jr c, .asm_b951
 	jr z, .asm_b951
+	; wca5e > wWarioScreenYPos
 	inc b
 .asm_b951
 	call Func_b850
@@ -8509,19 +8038,22 @@ Func_b915:
 .asm_b964
 	ld a, [wWaterInteraction]
 	and a
-	ret nz
+	ret nz ; is in water
 	ld a, [wJumpVelIndex]
 	and a
-	ret nz
+	ret nz ; is jumping
+
+	; return if Wario state is WST_LADDER_SCRATCHING
+	; or between WST_LADDER_CLIMBING and WST_LADDER_SLIDING
 	ld a, [wWarioState]
 	cp WST_LADDER_SCRATCHING
 	ret z
 	cp WST_LADDER_CLIMBING
-	jr c, .asm_b97b
-	cp WST_GRAB_SLIPPING
+	jr c, .not_in_ladder
+	cp WST_LADDER_SLIDING + 1
 	ret c
 
-.asm_b97b
+.not_in_ladder
 	ld a, [wc0d4]
 	inc a
 	ld [wc0d4], a
@@ -8537,12 +8069,12 @@ Func_b915:
 	ld b, a
 	ld a, [wIsStandingOnSlope]
 	and a
-	jr nz, .asm_b99c
+	jr nz, .on_slope
 	ld a, b
 	cp $08
 	ret c
 	ld b, $07
-.asm_b99c
+.on_slope
 	ld a, [wca5e]
 	cp [hl]
 	jr c, .asm_b92e

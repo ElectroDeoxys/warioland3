@@ -1,6 +1,59 @@
+SECTION "Main State Table", ROMX
+
+INCLUDE "engine/main_state_table.asm"
+
+
+SECTION "Title", ROMX
+
+INCLUDE "engine/title/state_table.asm"
+INCLUDE "engine/title/intro.asm"
+INCLUDE "engine/title/start_menu.asm"
+INCLUDE "engine/title/time_attack_description.asm"
+
+
+SECTION "Common 1", ROMX
+
+INCLUDE "engine/ow/common.asm"
+INCLUDE "engine/level/common.asm"
+INCLUDE "engine/clear/common.asm"
+INCLUDE "engine/pause/common.asm"
+INCLUDE "engine/golf/common.asm"
+INCLUDE "engine/epilogue/state_table.asm"
+INCLUDE "engine/action_help/common.asm"
+INCLUDE "engine/level/key_delay.asm"
+INCLUDE "engine/credits/common.asm"
+INCLUDE "engine/golf_building/common.asm"
+
+
+SECTION "GB Incompatible", ROMX
+
+INCLUDE "engine/gb_incompatible/state_table.asm"
+INCLUDE "engine/gb_incompatible/core.asm"
+
+
+SECTION "Common 2", ROMX
+
+INCLUDE "engine/game_over/common.asm"
+INCLUDE "engine/perfect/common.asm"
+
+
+SECTION "Language Selection", ROMX
+
+INCLUDE "engine/language_selection/state_table.asm"
+INCLUDE "engine/language_selection/init.asm"
+INCLUDE "engine/language_selection/core.asm"
+
+
 SECTION "Bank 1", ROMX
 
 INCLUDE "engine/bank1.asm"
+
+
+SECTION "Level Engine", ROMX
+
+INCLUDE "engine/level/state_table.asm"
+INCLUDE "engine/level/init.asm"
+INCLUDE "engine/level/update.asm"
 
 
 SECTION "Bank 2", ROMX

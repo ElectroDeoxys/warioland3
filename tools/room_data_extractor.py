@@ -62,13 +62,13 @@ def getCamConfigString(attr):
     if ((attr & 0x08) != 0):
         outStr += ("CAM_TRANSITIONS | ")
     if ((attr & 0x10) != 0):
-        outStr += ("CAM_EDGE_RIGHT | ")
+        outStr += ("CAM_BORDER_RIGHT | ")
     if ((attr & 0x20) != 0):
-        outStr += ("CAM_EDGE_LEFT | ")
+        outStr += ("CAM_BORDER_LEFT | ")
     if ((attr & 0x40) != 0):
-        outStr += ("CAM_EDGE_UP | ")
+        outStr += ("CAM_BORDER_UP | ")
     if ((attr & 0x80) != 0):
-        outStr += ("CAM_EDGE_DOWN | ")
+        outStr += ("CAM_BORDER_DOWN | ")
 
     outStr = outStr[:-3]
     return outStr

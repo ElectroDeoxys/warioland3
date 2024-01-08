@@ -150,7 +150,7 @@ InitWithoutDemoPowerUpReset::
 	jp Init
 
 .no_reset
-	call StateTable
+	call MainStateTable
 
 	ld a, [wRoomAnimatedTilesEnabled]
 	and a

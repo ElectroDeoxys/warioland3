@@ -39,8 +39,15 @@ ROM0
 	org $3f00
 	"Audio Home"
 ROMX $01
+	"Main State Table"
+	"Title"
+	"Common 1"
+	"GB Incompatible"
+	"Common 2"
+	"Language Selection"
 	"Bank 1"
 ROMX $02
+	"Level Engine"
 	"Bank 2"
 ROMX $03
 	"Levels Common Gfx"

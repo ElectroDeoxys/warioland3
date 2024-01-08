@@ -19,6 +19,9 @@
 	const ST_UNUSED_10          ; $10
 	const ST_UNUSED_11          ; $11
 
+; ST_TITLE substates
+DEF SST_START_MENU EQU $07
+
 ; ST_OVERWORLD substates
 DEF SST_OVERWORLD_05 EQU $05
 DEF SST_OVERWORLD_08 EQU $08

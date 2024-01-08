@@ -76,7 +76,7 @@ ENDM
 
 ; fills up with arg 1 block until the end
 MACRO terrain_blocks_end
-FOR n, (NUM_GOLF_LEVEL_BLOCKS - num_terrain_blocks - 1)
+REPT (NUM_GOLF_LEVEL_BLOCKS - num_terrain_blocks - 1)
 	db \1
 DEF num_terrain_blocks = num_terrain_blocks + 1
 ENDR

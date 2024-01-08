@@ -22,6 +22,7 @@ InitLCD::
 	res STATB_LYC, [hl]
 	ret
 
+VBlank_GBIncompatible::
 VBlank_354::
 	ld hl, .Func
 	ld de, wVBlankFunc

@@ -1882,7 +1882,7 @@ UpdateState_FenceShakeSliding:
 .asm_1ae3a
 	ld a, [wJumpVelTable]
 	and a
-	jr z, .asm_1ae67
+	jr z, .done
 	call ApplyJumpVelocity
 	farcall CheckAirborneCollision
 	ld a, b
@@ -1895,7 +1895,7 @@ UpdateState_FenceShakeSliding:
 	ld [wJumpVelTable], a
 	ld [wJumpVelIndex], a
 
-.asm_1ae67
+.done
 	ret
 
 SetState_FenceMovingVertical:

@@ -434,8 +434,8 @@ wMusicalCoinFlags:: ; ca3e
 wGolfBestScores:: ; ca42
 	ds NUM_GOLF_COURSES
 
-; $0 = Japanese
-; $1 = English
+; 0 = Japanese
+; 1 = English
 wLanguage:: ; ca46
 	db
 
