@@ -65,8 +65,8 @@ InitWithoutDemoPowerUpReset::
 	ld bc, $100
 	call WriteAToHL_BCTimes
 
-	ld hl, STARTOF("HRAM")
-	ld b, hDemoPowerUp - STARTOF("HRAM")
+	ld hl, STARTOF(HRAM)
+	ld b, hDemoPowerUp - STARTOF(HRAM)
 	call WriteAToHL_BTimes
 	call FillBGMap0_With7f
 	call ClearBGMap1

@@ -1,4 +1,4 @@
-; loads a room's permission map, tilemap
+; loads a room's function table, tilemap
 ; main and special tiles and its palettes
 LoadRoomGfx::
 	ld d, $00
@@ -14,7 +14,7 @@ LoadRoomGfx::
 	ld a, h
 	debug_assert_not $ff
 	ld a, [hli]
-	ld [wRoomPermissionMap], a
+	ld [wRoomCellFunctionTable], a
 	ld a, [hli]
 	ld [wRoomTileMap], a
 	ld a, [hli]
@@ -24,9 +24,9 @@ LoadRoomGfx::
 	ld a, [hl]
 	ld [wRoomPalettes], a
 
-; divide wRoomPermissionMap by 6
+; divide wRoomCellFunctionTable by 6
 	ld b, 0
-	ld a, [wRoomPermissionMap]
+	ld a, [wRoomCellFunctionTable]
 .loop
 	sub $6
 	jr c, .div_done
@@ -35,10 +35,10 @@ LoadRoomGfx::
 .div_done
 	ld a, BANK("Level Data 1")
 	add b
-	ld [wRoomPermissionMapBank], a
+	ld [wRoomCellFunctionTableBank], a
 	call Func_298d
-	call LoadPermissionMap
-	ld a, [wRoomPermissionMapBank]
+	call LoadCellFunctionTable
+	ld a, [wRoomCellFunctionTableBank]
 	ld [wc0d0], a
 	call LoadRoomTileMap
 
@@ -643,7 +643,7 @@ PointerTable_c0319::
 	dw NULL
 
 MACRO room
-	db \1, \1 ; permission and tile maps coincide
+	db \1, \1 ; function table and tile maps coincide
 	db \2 ; main tiles
 	db \3 ; special tiles
 	db \4

@@ -1,5 +1,7 @@
 GetCell::
 ; y position
+	; computes value, given 2-byte y coordinate in [hl]
+	; transforms 2-byte value 0xXWYZ into 1-byte value 0xWY
 	ld a, [hli] ; hi
 	ld d, a
 	ld a, [hli] ; lo
@@ -12,12 +14,12 @@ GetCell::
 	add b
 
 	ld b, BANK("SRAM1")
-	add $a0
-	cp $c0
+	add HIGH(STARTOF(SRAM))
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .got_sram_bank
 	inc b
 	sub $20
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .got_sram_bank
 	inc b
 	sub $20
@@ -27,6 +29,8 @@ GetCell::
 	ld [wFloorSRAMBank], a
 
 ; x position
+	; computes value, given 2-byte x coordinate in [hl]
+	; transforms 2-byte value 0xXWYZ into 1-byte value 0xWY
 	ld a, [hli] ; hi
 	ld d, a
 	ld a, [hl] ; lo

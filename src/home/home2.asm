@@ -1,13 +1,13 @@
-LoadPermissionMap::
-	ld a, [wRoomPermissionMap]
+LoadCellFunctionTable::
+	ld a, [wRoomCellFunctionTable]
 	add a
 	ld e, a
 	ld d, $00
-	ld hl, PermissionMapPointers
+	ld hl, CellFunctionTablePointers
 	add hl, de
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(PermissionMapPointers)
+	ld a, BANK(CellFunctionTablePointers)
 	bankswitch
 	ld a, [hli]
 	ld h, [hl]
@@ -15,12 +15,12 @@ LoadPermissionMap::
 	ld a, h
 	cp $ff
 	jr z, .reset
-	ld a, [wRoomPermissionMap]
+	ld a, [wRoomCellFunctionTable]
 	cp NUM_TILE_MAPS_GROUP_1 - 1
 	jr nc, .group_2
 
 ; group_1
-	ld de, wPermissionMap
+	ld de, wCellFunctionTable
 	ld b, $00
 	call CopyHLToDE
 	pop af
@@ -30,9 +30,9 @@ LoadPermissionMap::
 .group_2
 	ld a, [wROMBank]
 	push af
-	ld a, BANK("Permission Maps 2")
+	ld a, BANK("Cell Function Tables 2")
 	bankswitch
-	ld de, wPermissionMap
+	ld de, wCellFunctionTable
 	ld b, $00
 	call CopyHLToDE
 	pop af
@@ -189,7 +189,7 @@ LoadRoom::
 	ret
 
 Func_298d::
-	ld a, [wRoomPermissionMap]
+	ld a, [wRoomCellFunctionTable]
 	add a
 	ld e, a
 	ld d, $00
@@ -198,7 +198,7 @@ Func_298d::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [wRoomPermissionMapBank]
+	ld a, [wRoomCellFunctionTableBank]
 	ld [wTempBank], a
 	ld a, [wROMBank]
 	push af

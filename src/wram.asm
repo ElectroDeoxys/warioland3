@@ -166,12 +166,12 @@ wEnemyGroup:: ; c0c8
 	db
 
 wRoom::                  db ; c0c9
-wRoomPermissionMap::     db ; c0ca
+wRoomCellFunctionTable::     db ; c0ca
 wRoomTileMap::           db ; c0cb
 wRoomMainTiles::         db ; c0cc
 wRoomSpecialTiles::      db ; c0cd
 wRoomPalettes::          db ; c0ce
-wRoomPermissionMapBank:: db ; c0cf
+wRoomCellFunctionTableBank:: db ; c0cf
 wc0d0::                  db ; c0d0
 wRoomMainTilesBank::     db ; c0d1
 wRoomSpecialTilesBank::  db ; c0d2
@@ -761,12 +761,13 @@ wCurParticleAnimEnded:: db ; cce6
 wcce7:: ; cce7
 	dw
 
-wFloorSRAMBank:: ; cce9
-	db
+
 
 ; the world is divided in a grid,
 ; with each cell being 16x16 units in dimension
-; these store the y and x cells of the current position
+; these store the y and x floor cells of the current position
+; as well as the SRAM bank of that floor
+wFloorSRAMBank:: db ; cce9
 wYCell:: db ; ccea
 wXCell:: db ; cceb
 
@@ -785,8 +786,8 @@ wCreditsBGMapPtr::
 
 	ds $e
 
-wPermissionMap:: ; cd00
-	ds $100
+wCellFunctionTable:: ; cd00
+	ds 2 * $80
 
 wce00:: ; ce00
 	db

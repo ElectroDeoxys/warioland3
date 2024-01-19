@@ -443,9 +443,9 @@ SECTION "Bank 31", ROMX
 INCLUDE "engine/bank31.asm"
 
 
-SECTION "Permission Maps 1", ROMX
+SECTION "Cell Function Tables 1", ROMX
 
-INCLUDE "data/levels/permission_maps1.asm"
+INCLUDE "data/levels/function_tables1.asm"
 
 
 SECTION "Bank 34", ROMX
@@ -831,9 +831,9 @@ SECTION "Room Special Tiles 2", ROMX
 INCLUDE "data/levels/special_tiles2.asm"
 
 
-SECTION "Permission Maps 2", ROMX
+SECTION "Cell Function Tables 2", ROMX
 
-INCLUDE "data/levels/permission_maps2.asm"
+INCLUDE "data/levels/function_tables2.asm"
 
 
 SECTION "Room Main Tiles 1", ROMX

@@ -11,7 +11,7 @@ Func_18000:
 	add a ; *2
 	ld e, a
 	ld d, $00
-	ld hl, wPermissionMap
+	ld hl, wCellFunctionTable
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]

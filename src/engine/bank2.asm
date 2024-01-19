@@ -398,7 +398,6 @@ ENDR
 	ld [wce69], a
 	ld hl, wc0a3
 	call GetCell
-
 	ld a, [wFloorSRAMBank]
 	sramswitch
 	ld a, [wc0a3 + 1]
