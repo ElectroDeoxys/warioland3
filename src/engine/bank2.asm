@@ -5,24 +5,16 @@ Func_8e06::
 	ld a, [wWarioYPos + 0]
 	sbc $00
 	ld h, a
-
 ; hl = ypos - 24
+REPT 3
 	srl h
 	rr l
-	srl h
-	rr l
-	srl h
-	rr l
+ENDR
+
+REPT 5
 	sla l
 	rl h
-	sla l
-	rl h
-	sla l
-	rl h
-	sla l
-	rl h
-	sla l
-	rl h
+ENDR
 	ld a, h
 	and $03
 	ld d, a
@@ -32,12 +24,10 @@ Func_8e06::
 	ld h, a
 	ld a, [wWarioXPos + 1]
 	ld l, a
+REPT 3
 	srl h
 	rr l
-	srl h
-	rr l
-	srl h
-	rr l
+ENDR
 	ld a, l
 	and $1f
 	ld l, a
@@ -54,22 +44,15 @@ Func_8e5b:
 	ld h, a
 	ld a, [wc0a3 + 1]
 	ld l, a
+REPT 3
 	srl h
 	rr l
-	srl h
-	rr l
-	srl h
-	rr l
+ENDR
+
+REPT 5
 	sla l
 	rl h
-	sla l
-	rl h
-	sla l
-	rl h
-	sla l
-	rl h
-	sla l
-	rl h
+ENDR
 	ld a, h
 	and $03
 	ld d, a
@@ -78,12 +61,10 @@ Func_8e5b:
 	ld h, a
 	ld a, [wc0a5 + 1]
 	ld l, a
+REPT 3
 	srl h
 	rr l
-	srl h
-	rr l
-	srl h
-	rr l
+ENDR
 	ld a, l
 	and $1f
 	ld l, a
@@ -394,8 +375,9 @@ REPT 25
 ENDR
 
 	ld a, [wce69]
-	add $32
+	add $2 * 25
 	ld [wce69], a
+
 	ld hl, wc0a3
 	call GetCell
 	ld a, [wFloorSRAMBank]
@@ -435,6 +417,8 @@ Func_9254:
 	ld a, [wc0a5 + 1]
 	and $08
 	jp nz, Func_9438
+
+REPT 12
 	ld a, [hli]
 	ld d, $00
 	ld e, a
@@ -450,7 +434,7 @@ Func_9254:
 	ld d, a
 	ld a, [wcce7 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -458,259 +442,8 @@ Func_9254:
 	ld a, [hl]
 	ld [de], a
 	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
+ENDR
+
 	ld a, [hli]
 	ld d, $00
 	ld e, a
@@ -753,6 +486,8 @@ Func_9438:
 	ld a, [hl]
 	ld [de], a
 	pop hl
+
+REPT 11
 	ld a, [hli]
 	ld d, $00
 	ld e, a
@@ -768,7 +503,7 @@ Func_9438:
 	ld d, a
 	ld a, [wcce7 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -776,236 +511,8 @@ Func_9438:
 	ld a, [hl]
 	ld [de], a
 	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
+ENDR
+
 	ld a, [hli]
 	ld d, $00
 	ld e, a
@@ -1044,6 +551,8 @@ Func_9605:
 	push af
 	ld a, $03
 	ldh [rSVBK], a
+
+REPT 12
 	ld a, [hli]
 	ld d, $00
 	ld e, a
@@ -1059,7 +568,7 @@ Func_9605:
 	ld d, a
 	ld a, [wc0b3 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -1067,259 +576,8 @@ Func_9605:
 	ld a, [hl]
 	ld [de], a
 	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
+ENDR
+
 	ld a, [hli]
 	ld d, $00
 	ld e, a
@@ -1368,6 +626,8 @@ Func_97f3:
 	ld a, [hl]
 	ld [de], a
 	pop hl
+
+REPT 11
 	ld a, [hli]
 	ld d, $00
 	ld e, a
@@ -1383,7 +643,7 @@ Func_97f3:
 	ld d, a
 	ld a, [wc0b3 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -1391,236 +651,8 @@ Func_97f3:
 	ld a, [hl]
 	ld [de], a
 	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
+ENDR
+
 	ld a, [hli]
 	ld d, $00
 	ld e, a
@@ -1657,6 +689,8 @@ Func_99ca:
 	ld a, [wc0a5 + 1]
 	and $08
 	jp nz, Func_9b94
+
+REPT 12
 	ld a, [hli]
 	ld d, $00
 	ld e, a
@@ -1670,7 +704,7 @@ Func_99ca:
 	ld d, a
 	ld a, [wcce7 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -1678,237 +712,8 @@ Func_99ca:
 	ld a, [hl]
 	ld [de], a
 	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
+ENDR
+
 	ld a, [hli]
 	ld d, $00
 	ld e, a
@@ -1947,6 +752,8 @@ Func_9b94:
 	ld a, [hl]
 	ld [de], a
 	pop hl
+
+REPT 12
 	ld a, [hli]
 	ld d, $00
 	ld e, a
@@ -1960,7 +767,7 @@ Func_9b94:
 	ld d, a
 	ld a, [wcce7 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -1968,237 +775,8 @@ Func_9b94:
 	ld a, [hl]
 	ld [de], a
 	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
+ENDR
+
 	ret
 
 Func_9d4c:
@@ -2216,12 +794,14 @@ Func_9d4c:
 	push af
 	ld a, $03
 	ldh [rSVBK], a
+
+REPT 12
 	ld a, [hli]
 	ld d, $00
 	ld e, a
 	sla e
 	sla e
-	rl d
+	rl d ; *$4
 	push hl
 	ld hl, w3d300
 	add hl, de
@@ -2229,7 +809,7 @@ Func_9d4c:
 	ld d, a
 	ld a, [wc0b3 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -2237,237 +817,7 @@ Func_9d4c:
 	ld a, [hl]
 	ld [de], a
 	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
+ENDR
 	ld a, [hli]
 	ld d, $00
 	ld e, a
@@ -2512,6 +862,8 @@ Func_9f20:
 	ld a, [hl]
 	ld [de], a
 	pop hl
+
+REPT 12
 	ld a, [hli]
 	ld d, $00
 	ld e, a
@@ -2525,7 +877,7 @@ Func_9f20:
 	ld d, a
 	ld a, [wc0b3 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -2533,237 +885,8 @@ Func_9f20:
 	ld a, [hl]
 	ld [de], a
 	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	ld a, [hli]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
+ENDR
+
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -2776,6 +899,8 @@ Func_a0e2:
 	ld a, e
 	add b
 	ld e, a
+
+REPT 23
 	ld a, h
 	ld [de], a
 	inc e
@@ -2783,301 +908,18 @@ Func_a0e2:
 	ld [de], a
 	inc e
 	push de
-	ld de, $20
+	ld de, BG_MAP_WIDTH
 	add hl, de
 	pop de
 	ld a, h
 	and $fb
 	ld h, a
-	ld a, h
-	ld [de], a
-	inc e
-	ld a, l
-	ld [de], a
-	inc e
-	push de
-	ld de, $20
-	add hl, de
-	pop de
-	ld a, h
-	and $fb
-	ld h, a
-	ld a, h
-	ld [de], a
-	inc e
-	ld a, l
-	ld [de], a
-	inc e
-	push de
-	ld de, $20
-	add hl, de
-	pop de
-	ld a, h
-	and $fb
-	ld h, a
-	ld a, h
-	ld [de], a
-	inc e
-	ld a, l
-	ld [de], a
-	inc e
-	push de
-	ld de, $20
-	add hl, de
-	pop de
-	ld a, h
-	and $fb
-	ld h, a
-	ld a, h
-	ld [de], a
-	inc e
-	ld a, l
-	ld [de], a
-	inc e
-	push de
-	ld de, $20
-	add hl, de
-	pop de
-	ld a, h
-	and $fb
-	ld h, a
-	ld a, h
-	ld [de], a
-	inc e
-	ld a, l
-	ld [de], a
-	inc e
-	push de
-	ld de, $20
-	add hl, de
-	pop de
-	ld a, h
-	and $fb
-	ld h, a
-	ld a, h
-	ld [de], a
-	inc e
-	ld a, l
-	ld [de], a
-	inc e
-	push de
-	ld de, $20
-	add hl, de
-	pop de
-	ld a, h
-	and $fb
-	ld h, a
-	ld a, h
-	ld [de], a
-	inc e
-	ld a, l
-	ld [de], a
-	inc e
-	push de
-	ld de, $20
-	add hl, de
-	pop de
-	ld a, h
-	and $fb
-	ld h, a
-	ld a, h
-	ld [de], a
-	inc e
-	ld a, l
-	ld [de], a
-	inc e
-	push de
-	ld de, $20
-	add hl, de
-	pop de
-	ld a, h
-	and $fb
-	ld h, a
-	ld a, h
-	ld [de], a
-	inc e
-	ld a, l
-	ld [de], a
-	inc e
-	push de
-	ld de, $20
-	add hl, de
-	pop de
-	ld a, h
-	and $fb
-	ld h, a
-	ld a, h
-	ld [de], a
-	inc e
-	ld a, l
-	ld [de], a
-	inc e
-	push de
-	ld de, $20
-	add hl, de
-	pop de
-	ld a, h
-	and $fb
-	ld h, a
-	ld a, h
-	ld [de], a
-	inc e
-	ld a, l
-	ld [de], a
-	inc e
-	push de
-	ld de, $20
-	add hl, de
-	pop de
-	ld a, h
-	and $fb
-	ld h, a
-	ld a, h
-	ld [de], a
-	inc e
-	ld a, l
-	ld [de], a
-	inc e
-	push de
-	ld de, $20
-	add hl, de
-	pop de
-	ld a, h
-	and $fb
-	ld h, a
-	ld a, h
-	ld [de], a
-	inc e
-	ld a, l
-	ld [de], a
-	inc e
-	push de
-	ld de, $20
-	add hl, de
-	pop de
-	ld a, h
-	and $fb
-	ld h, a
-	ld a, h
-	ld [de], a
-	inc e
-	ld a, l
-	ld [de], a
-	inc e
-	push de
-	ld de, $20
-	add hl, de
-	pop de
-	ld a, h
-	and $fb
-	ld h, a
-	ld a, h
-	ld [de], a
-	inc e
-	ld a, l
-	ld [de], a
-	inc e
-	push de
-	ld de, $20
-	add hl, de
-	pop de
-	ld a, h
-	and $fb
-	ld h, a
-	ld a, h
-	ld [de], a
-	inc e
-	ld a, l
-	ld [de], a
-	inc e
-	push de
-	ld de, $20
-	add hl, de
-	pop de
-	ld a, h
-	and $fb
-	ld h, a
-	ld a, h
-	ld [de], a
-	inc e
-	ld a, l
-	ld [de], a
-	inc e
-	push de
-	ld de, $20
-	add hl, de
-	pop de
-	ld a, h
-	and $fb
-	ld h, a
-	ld a, h
-	ld [de], a
-	inc e
-	ld a, l
-	ld [de], a
-	inc e
-	push de
-	ld de, $20
-	add hl, de
-	pop de
-	ld a, h
-	and $fb
-	ld h, a
-	ld a, h
-	ld [de], a
-	inc e
-	ld a, l
-	ld [de], a
-	inc e
-	push de
-	ld de, $20
-	add hl, de
-	pop de
-	ld a, h
-	and $fb
-	ld h, a
-	ld a, h
-	ld [de], a
-	inc e
-	ld a, l
-	ld [de], a
-	inc e
-	push de
-	ld de, $20
-	add hl, de
-	pop de
-	ld a, h
-	and $fb
-	ld h, a
-	ld a, h
-	ld [de], a
-	inc e
-	ld a, l
-	ld [de], a
-	inc e
-	push de
-	ld de, $20
-	add hl, de
-	pop de
-	ld a, h
-	and $fb
-	ld h, a
-	ld a, h
-	ld [de], a
-	inc e
-	ld a, l
-	ld [de], a
-	inc e
-	push de
-	ld de, $20
-	add hl, de
-	pop de
-	ld a, h
-	and $fb
-	ld h, a
+ENDR
+
 	ld a, [wce69]
-	add $2e
+	add $2 * 23
 	ld [wce69], a
+
 	ld hl, wc0a3
 	call GetCell
 	ld a, [wFloorSRAMBank]
@@ -3101,7 +943,7 @@ Func_a0e2:
 	call Func_b182
 .asm_a2a1
 	ld a, [wce00]
-	add $17
+	add 23
 	ld [wce00], a
 	ret
 
@@ -3115,7 +957,9 @@ Func_a2aa:
 	ld [wcce7 + 1], a
 	ld a, [wc0a3 + 1]
 	and $08
-	jp nz, Func_a52f
+	jp nz, .asm_a52f
+
+REPT 11
 	ld a, [hl]
 	ld d, $00
 	ld e, a
@@ -3130,7 +974,7 @@ Func_a2aa:
 	ld d, a
 	ld a, [wcce7 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -3141,333 +985,15 @@ Func_a2aa:
 	pop hl
 	inc h
 	ld a, h
-	cp $c0
-	jr nz, .asm_a2f7
-	ld h, $a0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
+	jr nz, :+
+	ld h, HIGH(STARTOF(SRAM))
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
-.asm_a2f7
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a32d
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a32d
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a363
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a363
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a399
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a399
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a3cf
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a3cf
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a405
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a405
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a43b
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a43b
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a471
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a471
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a4a7
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a4a7
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a4dd
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a4dd
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a513
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a513
+:
+ENDR
+
 	ld a, [hl]
 	ld d, $00
 	ld e, a
@@ -3487,7 +1013,7 @@ Func_a2aa:
 	pop hl
 	ret
 
-Func_a52f:
+.asm_a52f:
 	ld a, [hl]
 	ld d, $00
 	ld e, a
@@ -3511,13 +1037,15 @@ Func_a52f:
 	pop hl
 	inc h
 	ld a, h
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, .asm_a562
-	ld h, $a0
+	ld h, HIGH(STARTOF(SRAM))
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
 .asm_a562
+
+REPT 10
 	ld a, [hl]
 	ld d, $00
 	ld e, a
@@ -3532,7 +1060,7 @@ Func_a52f:
 	ld d, a
 	ld a, [wcce7 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -3543,301 +1071,15 @@ Func_a52f:
 	pop hl
 	inc h
 	ld a, h
-	cp $c0
-	jr nz, .asm_a598
-	ld h, $a0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
+	jr nz, :+
+	ld h, HIGH(STARTOF(SRAM))
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
-.asm_a598
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a5ce
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a5ce
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a604
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a604
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a63a
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a63a
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a670
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a670
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a6a6
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a6a6
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a6dc
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a6dc
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a712
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a712
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a748
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a748
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	inc l
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a77e
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a77e
+:
+ENDR
+
 	ld a, [hl]
 	ld d, $00
 	ld e, a
@@ -3876,6 +1118,8 @@ Func_a79e:
 	push af
 	ld a, $03
 	ldh [rSVBK], a
+
+REPT 11
 	ld a, [hl]
 	ld d, $00
 	ld e, a
@@ -3890,7 +1134,7 @@ Func_a79e:
 	ld d, a
 	ld a, [wc0b3 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -3901,333 +1145,15 @@ Func_a79e:
 	pop hl
 	inc h
 	ld a, h
-	cp $c0
-	jr nz, .asm_a7f2
-	ld h, $a0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
+	jr nz, :+
+	ld h, HIGH(STARTOF(SRAM))
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
-.asm_a7f2
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a828
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a828
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a85e
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a85e
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a894
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a894
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a8ca
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a8ca
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a900
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a900
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a936
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a936
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a96c
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a96c
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a9a2
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a9a2
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_a9d8
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_a9d8
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_aa0e
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_aa0e
+:
+ENDR
+
 	ld a, [hl]
 	ld d, $00
 	ld e, a
@@ -4277,13 +1203,15 @@ Func_aa2d:
 	pop hl
 	inc h
 	ld a, h
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, .asm_aa67
-	ld h, $a0
+	ld h, HIGH(STARTOF(SRAM))
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
 .asm_aa67
+
+	REPT 10
 	ld a, [hl]
 	ld d, $00
 	ld e, a
@@ -4298,7 +1226,7 @@ Func_aa2d:
 	ld d, a
 	ld a, [wc0b3 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -4309,301 +1237,15 @@ Func_aa2d:
 	pop hl
 	inc h
 	ld a, h
-	cp $c0
-	jr nz, .asm_aa9d
-	ld h, $a0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
+	jr nz, :+
+	ld h, HIGH(STARTOF(SRAM))
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
-.asm_aa9d
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_aad3
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_aad3
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_ab09
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_ab09
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_ab3f
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_ab3f
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_ab75
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_ab75
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_abab
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_abab
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_abe1
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_abe1
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_ac17
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_ac17
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_ac4d
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_ac4d
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	inc l
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_ac83
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_ac83
+:
+ENDR
+
 	ld a, [hl]
 	ld d, $00
 	ld e, a
@@ -4640,6 +1282,8 @@ Func_aca6:
 	ld a, [wc0a3 + 1]
 	and $08
 	jp nz, Func_af1f
+
+REPT 11
 	ld a, [hl]
 	ld d, $00
 	ld e, a
@@ -4653,7 +1297,7 @@ Func_aca6:
 	ld d, a
 	ld a, [wcce7 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -4664,323 +1308,15 @@ Func_aca6:
 	pop hl
 	inc h
 	ld a, h
-	cp $c0
-	jr nz, .asm_acf2
-	ld h, $a0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
+	jr nz, :+
+	ld h, HIGH(STARTOF(SRAM))
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
-.asm_acf2
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_ad27
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_ad27
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_ad5c
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_ad5c
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_ad91
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_ad91
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_adc6
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_adc6
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_adfb
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_adfb
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_ae30
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_ae30
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_ae65
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_ae65
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_ae9a
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_ae9a
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_aecf
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_aecf
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_af04
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_af04
+:
+ENDR
+
 	ld a, [hl]
 	ld d, $00
 	ld e, a
@@ -5022,13 +1358,15 @@ Func_af1f:
 	pop hl
 	inc h
 	ld a, h
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, .asm_af51
-	ld h, $a0
+	ld h, HIGH(STARTOF(SRAM))
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
 .asm_af51
+
+REPT 10
 	ld a, [hl]
 	ld d, $00
 	ld e, a
@@ -5042,7 +1380,7 @@ Func_af1f:
 	ld d, a
 	ld a, [wcce7 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -5053,292 +1391,15 @@ Func_af1f:
 	pop hl
 	inc h
 	ld a, h
-	cp $c0
-	jr nz, .asm_af86
-	ld h, $a0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
+	jr nz, :+
+	ld h, HIGH(STARTOF(SRAM))
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
-.asm_af86
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_afbb
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_afbb
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_aff0
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_aff0
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b025
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b025
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b05a
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b05a
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b08f
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b08f
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b0c4
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b0c4
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b0f9
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b0f9
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b12e
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b12e
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, wc600
-	add hl, de
-	ld a, [wcce7 + 0]
-	ld d, a
-	ld a, [wcce7 + 1]
-	ld e, a
-	add $02
-	ld [wcce7 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b163
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b163
+:
+ENDR
+
 	ld a, [hl]
 	ld d, $00
 	ld e, a
@@ -5376,6 +1437,8 @@ Func_b182:
 	push af
 	ld a, $03
 	ldh [rSVBK], a
+
+REPT 11
 	ld a, [hl]
 	ld d, $00
 	ld e, a
@@ -5389,7 +1452,7 @@ Func_b182:
 	ld d, a
 	ld a, [wc0b3 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -5400,323 +1463,15 @@ Func_b182:
 	pop hl
 	inc h
 	ld a, h
-	cp $c0
-	jr nz, .asm_b1d5
-	ld h, $a0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
+	jr nz, :+
+	ld h, HIGH(STARTOF(SRAM))
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
-.asm_b1d5
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b20a
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b20a
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b23f
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b23f
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b274
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b274
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b2a9
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b2a9
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b2de
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b2de
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b313
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b313
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b348
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b348
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b37d
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b37d
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b3b2
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b3b2
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b3e7
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b3e7
+:
+ENDR
+
 	ld a, [hl]
 	ld d, $00
 	ld e, a
@@ -5764,13 +1519,15 @@ Func_b405:
 	pop hl
 	inc h
 	ld a, h
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, .asm_b43e
-	ld h, $a0
+	ld h, HIGH(STARTOF(SRAM))
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
 .asm_b43e
+
+REPT 10
 	ld a, [hl]
 	ld d, $00
 	ld e, a
@@ -5784,7 +1541,7 @@ Func_b405:
 	ld d, a
 	ld a, [wc0b3 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -5795,292 +1552,15 @@ Func_b405:
 	pop hl
 	inc h
 	ld a, h
-	cp $c0
-	jr nz, .asm_b473
-	ld h, $a0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
+	jr nz, :+
+	ld h, HIGH(STARTOF(SRAM))
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
-.asm_b473
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b4a8
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b4a8
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b4dd
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b4dd
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b512
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b512
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b547
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b547
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b57c
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b57c
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b5b1
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b5b1
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b5e6
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b5e6
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b61b
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b61b
-	ld a, [hl]
-	ld d, $00
-	ld e, a
-	sla e
-	sla e
-	rl d
-	push hl
-	ld hl, w3d300
-	add hl, de
-	ld a, [wc0b3 + 0]
-	ld d, a
-	ld a, [wc0b3 + 1]
-	ld e, a
-	add $02
-	ld [wc0b3 + 1], a
-	ld a, [hli]
-	ld [de], a
-	inc l
-	inc e
-	ld a, [hl]
-	ld [de], a
-	pop hl
-	inc h
-	ld a, h
-	cp $c0
-	jr nz, .asm_b650
-	ld h, $a0
-	ld a, [wSRAMBank]
-	inc a
-	sramswitch
-.asm_b650
+:
+ENDR
+
 	ld a, [hl]
 	ld d, $00
 	ld e, a
@@ -6715,11 +2195,11 @@ Func_ba42:
 	push hl
 	ld c, $01
 	ld a, [hld]
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .asm_ba68
 	inc c
 	sub $20
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .asm_ba68
 	inc c
 	sub $20
@@ -6755,11 +2235,11 @@ Func_ba42:
 	sramswitch
 	ld c, $01
 	ld a, [hld]
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .asm_baaf
 	inc c
 	sub $20
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .asm_baaf
 	inc c
 	sub $20
@@ -6805,11 +2285,11 @@ DespawnObject:
 	sramswitch
 	ld c, $01
 	ld a, [hld] ; OBJ_UNK_02
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .asm_bb12
 	inc c
 	sub $20
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .asm_bb12
 	inc c
 	sub $20
@@ -6841,11 +2321,11 @@ Func_bb2d:
 	sramswitch
 	ld c, $01
 	ld a, [hld]
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .asm_bb51
 	inc c
 	sub $20
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .asm_bb51
 	inc c
 	sub $20
@@ -6892,11 +2372,11 @@ Func_bb85:
 	and a
 	ret z
 	ld l, [hl]
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .asm_bba8
 	inc b
 	sub $20
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .asm_bba8
 	inc b
 	sub $20
@@ -6913,12 +2393,14 @@ Func_bb85:
 	ld a, e
 	add b
 	ld e, a
+
 	ld a, h
 	ld [de], a
 	inc e
 	ld a, l
 	ld [de], a
 	inc e
+
 	ld a, h
 	ld [de], a
 	inc e
@@ -6931,7 +2413,8 @@ Func_bb85:
 	add c
 	ld [de], a
 	inc e
-	ld bc, $20
+
+	ld bc, BG_MAP_WIDTH
 	add hl, bc
 	ld a, h
 	and $fb
@@ -6941,6 +2424,7 @@ Func_bb85:
 	ld a, l
 	ld [de], a
 	inc e
+
 	ld a, h
 	ld [de], a
 	inc e
@@ -6952,10 +2436,12 @@ Func_bb85:
 	and $1f
 	add c
 	ld [de], a
+
 	ld a, [wce69]
-	add $08
+	add $2 * 4
 	ld [wce69], a
 	pop hl
+
 	ld a, [hl]
 	ld d, $00
 	ld e, a
@@ -7019,7 +2505,7 @@ Func_bb85:
 	ld [hli], a
 	ld [hl], a
 	ld a, e
-	add $02
+	add $2
 	and $0f
 	ld [wc19f], a
 	pop af
@@ -7058,7 +2544,7 @@ Func_bc5e:
 	ld l, $00
 	inc h
 	ld a, h
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, .asm_bc7d
 	pop af
 	sramswitch
@@ -7114,7 +2600,7 @@ Func_bc5e:
 	ld l, $00
 	inc h
 	ld a, h
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, .asm_bce4
 	pop af
 	sramswitch

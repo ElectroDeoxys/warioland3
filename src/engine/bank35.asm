@@ -557,9 +557,9 @@ Func_d4472:
 	ret nz
 	play_sfx SFX_REGULAR_COIN
 	ld hl, wce01
-	ld a, $98
+	ld a, HIGH(v0BGMap0 + $8b)
 	ld [hli], a
-	ld a, $8b
+	ld a, LOW(v0BGMap0 + $8b)
 	ld [hli], a
 
 	ld a, [wc0e8]

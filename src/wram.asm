@@ -792,25 +792,42 @@ wCellFunctionTable:: ; cd00
 wce00:: ; ce00
 	db
 
+UNION
+
 wce01:: ; ce01
-wCreditsTextBuffer::
-	ds $34
+	ds BG_MAP_HEIGHT
+
+	ds $14
 
 wce35:: ; ce35
-wCreditsTextPals::
-	ds $34
+	ds BG_MAP_HEIGHT
 
+	ds $14
+
+; size of wce6a in bytes
 wce69:: ; ce69
 	db
 
 wce6a:: ; ce6a
-wCreditsTextPtr::
+	ds 2 * $34
+
+NEXTU
+
+wCreditsTextBuffer::
+	ds $34
+
+wCreditsTextPals:: ; ce35
+	ds $34
+
+	db
+
+wCreditsTextPtr:: ; ce6a
 	dw
 
 wCreditsPalsMapPtr:: ; ce6c
 	dw
 
-	ds $64
+ENDU
 
 wced2:: ; ced2
 	db
@@ -2333,7 +2350,7 @@ w3d280:: ; d280
 	ds 16 palettes
 
 w3d300:: ; d300
-	ds $200
+	ds $4 * $80
 
 w3d500:: ; d500
 	db

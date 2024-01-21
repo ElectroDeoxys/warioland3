@@ -50,7 +50,7 @@ GetCell::
 
 Func_c19::
 	ld a, h
-	sub $a0
+	sub HIGH(STARTOF(SRAM))
 	ld e, a
 	ld d, $00
 	sla e
@@ -169,7 +169,7 @@ Func_cc0::
 	and $0f
 	swap a
 	add c
-	add $a0
+	add HIGH(STARTOF(SRAM))
 	ld c, a
 	ld [wSpawnYCell], a
 
@@ -201,7 +201,7 @@ Func_cc0::
 Func_cf8::
 	push hl
 	ld a, h
-	sub $a0
+	sub HIGH(STARTOF(SRAM))
 	ld h, a
 	and $f0
 	swap a
@@ -248,7 +248,7 @@ Func_cf8::
 
 Func_d3e::
 	ld a, h
-	sub $a0
+	sub HIGH(STARTOF(SRAM))
 	ld d, a
 	and $f0
 	swap a
@@ -582,7 +582,7 @@ Func_f13::
 	ret
 
 Func_f4c::
-	ld c, $a0
+	ld c, HIGH(STARTOF(SRAM))
 	ld hl, s0a000
 .asm_f51
 	ld a, [de]
@@ -613,7 +613,7 @@ Func_f4c::
 	ld a, h
 	cp $c0
 	jr nz, .asm_f83
-	ld h, $a0
+	ld h, HIGH(STARTOF(SRAM))
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
@@ -642,7 +642,7 @@ Func_f4c::
 	ld a, h
 	cp $c0
 	jr nz, .asm_f93
-	ld h, $a0
+	ld h, HIGH(STARTOF(SRAM))
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch

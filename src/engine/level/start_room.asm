@@ -1017,6 +1017,7 @@ Func_8c12:
 	ret
 
 Func_8cd7:
+	; back up coords in wc0a3 to wc0a7
 	ld hl, wc0a3
 	ld de, wc0a7
 	ld a, [hli] ; wc0a3
@@ -1031,31 +1032,32 @@ Func_8cd7:
 	ld a, [hl]
 	ld [de], a
 
-	ld a, $20
+	ld a, BG_MAP_WIDTH
 	ld [wc0a2], a
-.asm_8ced
+.loop_row
 	call .Func_8d69
+
 	ld a, [wccf0 + 0]
 	ld d, a
 	ld a, [wccf0 + 1]
 	ld e, a
 	ld hl, wce01
-	ld b, $20
-.asm_8cfd
+	ld b, BG_MAP_HEIGHT
+.loop_col_vram0
 	ld a, [hli]
 	ld [de], a
 	ld a, e
-	add $20
+	add BG_MAP_WIDTH
 	ld e, a
 	ld a, d
-	adc $00
+	adc 0
 	ld d, a
-	cp $9c
-	jr nz, .asm_8d0d
-	ld d, $98
-.asm_8d0d
+	cp HIGH(v0BGMap1)
+	jr nz, .continue_vram0
+	ld d, HIGH(v0BGMap0)
+.continue_vram0
 	dec b
-	jr nz, .asm_8cfd
+	jr nz, .loop_col_vram0
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
@@ -1064,25 +1066,25 @@ Func_8cd7:
 	ld a, [wccf0 + 1]
 	ld e, a
 	ld hl, wce35
-	ld b, $20
-.asm_8d21
+	ld b, BG_MAP_HEIGHT
+.loop_col_vram1
 	ld a, [hli]
 	ld [de], a
 	ld a, e
-	add $20
+	add BG_MAP_WIDTH
 	ld e, a
 	ld a, d
-	adc $00
+	adc 0
 	ld d, a
-	cp $9c
-	jr nz, .asm_8d31
-	ld d, $98
-.asm_8d31
+	cp HIGH(v0BGMap1)
+	jr nz, .continue_vram1
+	ld d, HIGH(v0BGMap0)
+.continue_vram1
 	dec b
-	jr nz, .asm_8d21
-
+	jr nz, .loop_col_vram1
 	xor a
 	ldh [rVBK], a
+
 	xor a
 	ld [wce69], a
 	ld [wce00], a
@@ -1095,7 +1097,9 @@ Func_8cd7:
 	ld a, [wc0a2]
 	dec a
 	ld [wc0a2], a
-	jr nz, .asm_8ced
+	jr nz, .loop_row
+
+	; restore backed up coords
 	ld hl, wc0a7
 	ld de, wc0a3
 	ld a, [hli]
@@ -1119,8 +1123,8 @@ Func_8cd7:
 	ld a, e
 	add b
 	ld e, a
-	ld b, $20
-.asm_8d78
+	ld b, BG_MAP_HEIGHT
+.loop_col
 	ld a, h
 	ld [de], a
 	inc e
@@ -1128,17 +1132,19 @@ Func_8cd7:
 	ld [de], a
 	inc e
 	push de
-	ld de, $20
+	ld de, BG_MAP_WIDTH
 	add hl, de
 	pop de
 	ld a, h
 	and $fb
 	ld h, a
 	dec b
-	jr nz, .asm_8d78
+	jr nz, .loop_col
+
 	ld a, [wce69]
-	add $40
+	add 2 * BG_MAP_HEIGHT
 	ld [wce69], a
+
 	ld hl, wc0a3
 	call GetCell
 	ld a, [wFloorSRAMBank]
@@ -1150,7 +1156,6 @@ Func_8cd7:
 	push hl
 	farcall Func_21f51
 	pop hl
-
 	ld a, [wFloorSRAMBank]
 	sramswitch
 	farcall Func_22012
@@ -1160,10 +1165,10 @@ Func_8cd7:
 	push hl
 	farcall Func_220fc
 	pop hl
-
 	ld a, [wFloorSRAMBank]
 	sramswitch
 	farcall Func_221bb
+
 .asm_8dfd
 	ld a, [wce00]
 	add $20
