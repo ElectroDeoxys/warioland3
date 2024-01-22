@@ -166,7 +166,7 @@ wEnemyGroup:: ; c0c8
 	db
 
 wRoom::                  db ; c0c9
-wRoomCellFunctionTable::     db ; c0ca
+wRoomCellFunctionTable:: db ; c0ca
 wRoomTileMap::           db ; c0cb
 wRoomMainTiles::         db ; c0cc
 wRoomSpecialTiles::      db ; c0cd

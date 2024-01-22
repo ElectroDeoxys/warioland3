@@ -1,4 +1,4 @@
-Func_18000:
+ProcessCellFunction:
 	xor a ; FALSE
 	ld [wc0dd], a
 	ld a, [wFloorSRAMBank]
@@ -93,7 +93,9 @@ Func_1809f:
 	ldh a, [hYPosHi]
 	adc $00
 	ldh [hYPosHi], a
-	jr .asm_180f7
+	jr Func_180f7
+
+Func_180b5:
 	ld a, [wc0da]
 	and a
 	jr z, .asm_180c3
@@ -110,13 +112,15 @@ Func_1809f:
 	ldh a, [hYPosHi]
 	sbc $00
 	ldh [hYPosHi], a
-	jr .asm_180f7
+	jr Func_180f7
+
+Func_180d9:
 	ld a, [wc0d6]
 	and $03
 	jp z, Func_18020
 	ld a, [wc0d6]
 	bit 1, a
-	jr z, .asm_180f7
+	jr z, Func_180f7
 	ldh a, [hYPosLo]
 	and $0f
 	ld b, a
@@ -125,7 +129,9 @@ Func_1809f:
 	add b
 	cp $10
 	jp c, Func_18020
-.asm_180f7
+;	fallthrough
+
+Func_180f7:
 	ldh a, [hXPosLo]
 	and $0f
 	ld c, a
@@ -164,7 +170,9 @@ Func_18129:
 	ldh a, [hYPosHi]
 	adc $00
 	ldh [hYPosHi], a
-	jr .asm_1817c
+	jr Func_1817c
+
+Func_1813f:
 	ld a, [wc0da]
 	and a
 	jr z, .asm_1814d
@@ -181,12 +189,14 @@ Func_18129:
 	ldh a, [hYPosHi]
 	sbc $00
 	ldh [hYPosHi], a
-	jr .asm_1817c
+	jr Func_1817c
+
+Func_18163:
 	ld a, [wc0d6]
 	and $03
 	jp z, Func_18020
 	bit 1, a
-	jr z, .asm_1817c
+	jr z, Func_1817c
 	ldh a, [hYPosLo]
 	and $0f
 	ld b, a
@@ -194,7 +204,9 @@ Func_18129:
 	and $0f
 	cp b
 	jp nc, Func_18020
-.asm_1817c
+;	fallthrough
+
+Func_1817c:
 	ld a, [wc0d6]
 	and $03
 	jr z, .asm_181a9
@@ -371,11 +383,14 @@ Func_182dc:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18032
-	jr .asm_182ec
+	jr Func_182ec
+
+Func_182e5:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18208
-.asm_182ec
+
+Func_182ec:
 	ld a, [wc0d6]
 	bit 7, a
 	jr nz, .asm_182f6
@@ -524,7 +539,9 @@ Func_1842a:
 	ld a, [wWarioXPos + 0]
 	adc $00
 	ld [wWarioXPos + 0], a
-	jr .asm_1848e
+	jr Func_1848e
+
+Func_18461:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18032
@@ -545,7 +562,8 @@ Func_1842a:
 	and $f0
 	add $08
 	ld [wWarioXPos + 1], a
-.asm_1848e
+
+Func_1848e:
 	ld a, ROOMTRANSITION_1 | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_3
 	ld [wRoomTransitionParam], a
 	play_sfx SFX_PIPE
@@ -610,7 +628,9 @@ Func_184fc:
 	ld a, [wWarioXPos + 0]
 	adc $00
 	ld [wWarioXPos + 0], a
-	jr .asm_18560
+	jr Func_18560
+
+Func_18533:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18032
@@ -631,7 +651,8 @@ Func_184fc:
 	and $f0
 	add $08
 	ld [wWarioXPos + 1], a
-.asm_18560
+
+Func_18560:
 	ld a, ROOMTRANSITION_1 | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_3
 	ld [wRoomTransitionParam], a
 	play_sfx SFX_PIPE
@@ -1220,6 +1241,7 @@ Func_18a19:
 	and a
 	jr nz, .asm_18a5c
 	jp Func_18032
+
 .asm_18a5c
 	ld hl, wYCell
 	ld a, [hli]
@@ -1327,13 +1349,22 @@ Func_18aec:
 ; unreferenced
 Func_18b1f:
 	ld b, $79
-	jr .asm_18b2d
+	jr Func_18b2d
+
+Func_18b23:
 	ld b, $7a
-	jr .asm_18b2d
+	jr Func_18b2d
+
+; unreferenced
+Func_18b27:
 	ld b, $7b
-	jr .asm_18b2d
+	jr Func_18b2d
+
+Func_18b2b:
 	ld b, $78
-.asm_18b2d
+;	fallthrough
+
+Func_18b2d:
 	ld a, [wceda]
 	and $07
 	jp nz, Func_18020
@@ -1360,13 +1391,22 @@ Func_18b1f:
 ; unreferenced
 Func_18b63:
 	ld b, $79
-	jr .asm_18b71
+	jr Func_18b71
+
+Func_18b67:
 	ld b, $7a
-	jr .asm_18b71
+	jr Func_18b71
+
+; unreferenced
+Func_18b6b:
 	ld b, $7b
-	jr .asm_18b71
+	jr Func_18b71
+
+Func_18b6f:
 	ld b, $78
-.asm_18b71
+;	fallthrough
+
+Func_18b71:
 	ld a, [wceda]
 	and $07
 	jp nz, Func_18020
@@ -1393,13 +1433,23 @@ Func_18b63:
 ; unreferenced
 Func_18ba7:
 	ld b, $79
-	jr .asm_18bb5
+	jr Func_18bb5
+
+; unreferenced
+Func_18bab:
 	ld b, $7a
-	jr .asm_18bb5
+	jr Func_18bb5
+
+; unreferenced
+Func_18baf:
 	ld b, $7b
-	jr .asm_18bb5
+	jr Func_18bb5
+
+Func_18bb3:
 	ld b, $78
-.asm_18bb5
+;	fallthrough
+
+Func_18bb5:
 	ld a, [wceda]
 	and $07
 	jp nz, Func_18020
@@ -1426,13 +1476,23 @@ Func_18ba7:
 ; unreferenced
 Func_18beb:
 	ld b, $79
-	jr .asm_18bf9
+	jr Func_18bf9
+
+; unreferenced
+Func_18bef:
 	ld b, $7a
-	jr .asm_18bf9
+	jr Func_18bf9
+
+; unreferenced
+Func_18bf3:
 	ld b, $7b
-	jr .asm_18bf9
+	jr Func_18bf9
+
+Func_18bf7:
 	ld b, $78
-.asm_18bf9
+;	fallthrough
+
+Func_18bf9:
 	ld a, [wceda]
 	and $07
 	jp nz, Func_18020
@@ -1458,13 +1518,22 @@ Func_18beb:
 ; unreferenced
 Func_18c2c:
 	ld b, $79
-	jr .asm_18c3a
+	jr Func_18c3a
+
+Func_18c30:
 	ld b, $7a
-	jr .asm_18c3a
+	jr Func_18c3a
+
+; unreferenced
+Func_18c34:
 	ld b, $7b
-	jr .asm_18c3a
+	jr Func_18c3a
+
+Func_18c38:
 	ld b, $78
-.asm_18c3a
+;	fallthrough
+
+Func_18c3a:
 	ld a, [wceda]
 	and $07
 	jp nz, Func_18020
@@ -1491,13 +1560,22 @@ Func_18c2c:
 ; unreferenced
 Func_18c70:
 	ld b, $79
-	jr .asm_18c7e
+	jr Func_18c7e
+
+Func_18c74:
 	ld b, $7a
-	jr .asm_18c7e
+	jr Func_18c7e
+
+; unreferenced
+Func_18c78:
 	ld b, $7b
-	jr .asm_18c7e
+	jr Func_18c7e
+
+Func_18c7c:
 	ld b, $78
-.asm_18c7e
+;	fallthrough
+
+Func_18c7e:
 	ld a, [wceda]
 	and $07
 	jp nz, Func_18020
@@ -1521,24 +1599,39 @@ Func_18c70:
 	ld [wceda], a
 	jp Func_18f32
 
-; unreferenced
 Func_18cb4:
 	ld b, $78
-	jr .asm_18cd2
+	jr Func_18cd2
+
+Func_18cb8:
 	ld b, $79
-	jr .asm_18cd2
+	jr Func_18cd2
+
+Func_18cbc:
 	ld b, $7a
-	jr .asm_18cd2
+	jr Func_18cd2
+
+Func_18cc0:
 	ld b, $7b
-	jr .asm_18cd2
+	jr Func_18cd2
+
+Func_18cc4:
 	ld b, $7c
-	jr .asm_18cd2
+	jr Func_18cd2
+
+Func_18cc8:
 	ld b, $7d
-	jr .asm_18cd2
+	jr Func_18cd2
+
+Func_18ccc:
 	ld b, $7e
-	jr .asm_18cd2
+	jr Func_18cd2
+
+Func_18cd0:
 	ld b, $7f
-.asm_18cd2
+;	fallthrough
+
+Func_18cd2:
 	ld a, [wc0d9]
 	cp $02
 	jp z, Func_19423
@@ -1608,24 +1701,39 @@ Func_18cb4:
 	jp c, Func_18032
 	jp Func_18020
 
-; unreferenced
 Func_18d60:
 	ld b, $78
-	jr .asm_18d7e
+	jr Func_18d7e
+
+Func_18d64:
 	ld b, $79
-	jr .asm_18d7e
+	jr Func_18d7e
+
+Func_18d68:
 	ld b, $7a
-	jr .asm_18d7e
+	jr Func_18d7e
+
+Func_18d6c:
 	ld b, $7b
-	jr .asm_18d7e
+	jr Func_18d7e
+
+Func_18d70:
 	ld b, $7c
-	jr .asm_18d7e
+	jr Func_18d7e
+
+Func_18d74:
 	ld b, $7d
-	jr .asm_18d7e
+	jr Func_18d7e
+
+Func_18d78:
 	ld b, $7e
-	jr .asm_18d7e
+	jr Func_18d7e
+
+Func_18d7c:
 	ld b, $7f
-.asm_18d7e
+;	fallthrough
+
+Func_18d7e:
 	ld a, [wc0d9]
 	cp $02
 	jp z, Func_19423
@@ -1698,24 +1806,43 @@ Func_18df1:
 	jp nz, Func_18020
 	jp Func_18032
 
-; unreferenced
 Func_18e0e:
 	ld b, $79
-	jr .asm_18e2c
+	jr Func_18e2c
+
+; unreferenced
+Func_18e12:
 	ld b, $7a
-	jr .asm_18e2c
+	jr Func_18e2c
+
+; unreferenced
+Func_18e16:
 	ld b, $7b
-	jr .asm_18e2c
+	jr Func_18e2c
+
+Func_18e1a:
 	ld b, $7c
-	jr .asm_18e2c
+	jr Func_18e2c
+
+; unreferenced
+Func_18e1e:
 	ld b, $7d
-	jr .asm_18e2c
+	jr Func_18e2c
+
+; unreferenced
+Func_18e22:
 	ld b, $7e
-	jr .asm_18e2c
+	jr Func_18e2c
+
+Func_18e26:
 	ld b, $7f
-	jr .asm_18e2c
+	jr Func_18e2c
+
+Func_18e2a:
 	ld b, $78
-.asm_18e2c
+;	fallthrough
+
+Func_18e2c:
 	ld a, [wceda]
 	and $07
 	jp nz, Func_18020
@@ -1772,24 +1899,44 @@ Func_18e0e:
 	ld [wceda], a
 	jp Func_18f32
 
-; unreferenced
 Func_18ea2:
 	ld b, $79
-	jr .asm_18ec0
+	jr Func_18ec0
+
+; unreferenced
+Func_18ea6:
 	ld b, $7a
-	jr .asm_18ec0
+	jr Func_18ec0
+
+; unreferenced
+Func_18eaa:
 	ld b, $7b
-	jr .asm_18ec0
+	jr Func_18ec0
+
+Func_18eae:
 	ld b, $7c
-	jr .asm_18ec0
+	jr Func_18ec0
+
+; unreferenced
+Func_18eb2:
 	ld b, $7d
-	jr .asm_18ec0
+	jr Func_18ec0
+
+; unreferenced
+Func_18eb6:
 	ld b, $7e
-	jr .asm_18ec0
+	jr Func_18ec0
+
+; unreferenced
+Func_18eba:
 	ld b, $7f
-	jr .asm_18ec0
+	jr Func_18ec0
+
+Func_18ebe:
 	ld b, $78
-.asm_18ec0
+;	fallthrough
+
+Func_18ec0:
 	ld a, [wceda]
 	and $07
 	jp nz, Func_18020
@@ -1872,24 +2019,44 @@ Func_18f32:
 	call Func_19609
 	jp Func_18020
 
-; unreferenced
 Func_18f5f:
 	ld b, $79
-	jr .asm_18f7d
+	jr Func_18f7d
+
+; unreferenced
+Func_18f63:
 	ld b, $7a
-	jr .asm_18f7d
+	jr Func_18f7d
+
+; unreferenced
+Func_18f67:
 	ld b, $7b
-	jr .asm_18f7d
+	jr Func_18f7d
+
+Func_18f6b:
 	ld b, $7c
-	jr .asm_18f7d
+	jr Func_18f7d
+
+; unreferenced
+Func_18f6f:
 	ld b, $7d
-	jr .asm_18f7d
+	jr Func_18f7d
+
+; unreferenced
+Func_18f73:
 	ld b, $7e
-	jr .asm_18f7d
+	jr Func_18f7d
+
+; unreferenced
+Func_18f77:
 	ld b, $7f
-	jr .asm_18f7d
+	jr Func_18f7d
+
+Func_18f7b:
 	ld b, $78
-.asm_18f7d
+;	fallthrough
+
+Func_18f7d:
 	ld a, [wceda]
 	and $07
 	jp nz, Func_18020
@@ -1946,24 +2113,43 @@ Func_18f5f:
 	ld [wceda], a
 	jp Func_18f32
 
-; unreferenced
 Func_18ff3:
 	ld b, $79
-	jr .asm_19011
+	jr Func_19011
+
+; unreferenced
+Func_18ff7:
 	ld b, $7a
-	jr .asm_19011
+	jr Func_19011
+
+; unreferenced
+Func_18ffb:
 	ld b, $7b
-	jr .asm_19011
+	jr Func_19011
+
+Func_18fff:
 	ld b, $7c
-	jr .asm_19011
+	jr Func_19011
+
+; unreferenced
+Func_19003:
 	ld b, $7d
-	jr .asm_19011
+	jr Func_19011
+
+Func_19007:
 	ld b, $7e
-	jr .asm_19011
+	jr Func_19011
+
+; unreferenced
+Func_1900b:
 	ld b, $7f
-	jr .asm_19011
+	jr Func_19011
+
+Func_1900f:
 	ld b, $78
-.asm_19011
+;	fallthrough
+
+Func_19011:
 	ld a, [wceda]
 	and $07
 	jp nz, Func_18020
@@ -2068,21 +2254,41 @@ Func_19086:
 ; unreferenced
 Func_190e0:
 	ld b, $79
-	jr .asm_190fe
+	jr Func_190fe
+
+Func_190e4:
 	ld b, $7a
-	jr .asm_190fe
+	jr Func_190fe
+
+Func_190e8:
 	ld b, $7b
-	jr .asm_190fe
+	jr Func_190fe
+
+; unreferenced
+Func_190ec:
 	ld b, $7c
-	jr .asm_190fe
+	jr Func_190fe
+
+; unreferenced
+Func_190f0:
 	ld b, $7d
-	jr .asm_190fe
+	jr Func_190fe
+
+; unreferenced
+Func_190f4:
 	ld b, $7e
-	jr .asm_190fe
+	jr Func_190fe
+
+; unreferenced
+Func_190f8:
 	ld b, $7f
-	jr .asm_190fe
+	jr Func_190fe
+
+Func_190fc:
 	ld b, $78
-.asm_190fe
+;	fallthrough
+
+Func_190fe:
 	ld a, [wceda]
 	and $07
 	jp nz, Func_18032
@@ -2157,21 +2363,41 @@ Func_190e0:
 ; unreferenced
 Func_19195:
 	ld b, $79
-	jr .asm_191b3
+	jr Func_191b3
+
+Func_19199:
 	ld b, $7a
-	jr .asm_191b3
+	jr Func_191b3
+
+Func_1919d:
 	ld b, $7b
-	jr .asm_191b3
+	jr Func_191b3
+
+; unreferenced
+Func_191a1:
 	ld b, $7c
-	jr .asm_191b3
+	jr Func_191b3
+
+; unreferenced
+Func_191a5:
 	ld b, $7d
-	jr .asm_191b3
+	jr Func_191b3
+
+; unreferenced
+Func_191a9:
 	ld b, $7e
-	jr .asm_191b3
+	jr Func_191b3
+
+; unreferenced
+Func_191ad:
 	ld b, $7f
-	jr .asm_191b3
+	jr Func_191b3
+
+Func_191b1:
 	ld b, $78
-.asm_191b3
+;	fallthrough
+
+Func_191b3:
 	ld a, [wceda]
 	and $07
 	jp nz, Func_18032
@@ -2272,21 +2498,41 @@ Func_19246:
 ; unreferenced
 Func_19273:
 	ld b, $79
-	jr .asm_19291
+	jr Func_19291
+
+Func_19277:
 	ld b, $7a
-	jr .asm_19291
+	jr Func_19291
+
+Func_1927b:
 	ld b, $7b
-	jr .asm_19291
+	jr Func_19291
+
+; unreferenced
+Func_1927f:
 	ld b, $7c
-	jr .asm_19291
+	jr Func_19291
+
+; unreferenced
+Func_19283:
 	ld b, $7d
-	jr .asm_19291
+	jr Func_19291
+
+; unreferenced
+Func_19287:
 	ld b, $7e
-	jr .asm_19291
+	jr Func_19291
+
+; unreferenced
+Func_1928b:
 	ld b, $7f
-	jr .asm_19291
+	jr Func_19291
+
+Func_1928f:
 	ld b, $78
-.asm_19291
+;	fallthrough
+
+Func_19291:
 	ld a, [wceda]
 	and $07
 	jp nz, Func_18032
@@ -2361,21 +2607,41 @@ Func_19273:
 ; unreferenced
 Func_19328:
 	ld b, $79
-	jr .asm_19346
+	jr Func_19346
+
+Func_1932c:
 	ld b, $7a
-	jr .asm_19346
+	jr Func_19346
+
+Func_19330:
 	ld b, $7b
-	jr .asm_19346
+	jr Func_19346
+
+; unreferenced
+Func_19334:
 	ld b, $7c
-	jr .asm_19346
+	jr Func_19346
+
+; unreferenced
+Func_19338:
 	ld b, $7d
-	jr .asm_19346
+	jr Func_19346
+
+; unreferenced
+Func_1933c:
 	ld b, $7e
-	jr .asm_19346
+	jr Func_19346
+
+; unreferenced
+Func_19340:
 	ld b, $7f
-	jr .asm_19346
+	jr Func_19346
+
+Func_19344:
 	ld b, $78
-.asm_19346
+;	fallthrough
+
+Func_19346:
 	ld a, [wceda]
 	and $07
 	jp nz, Func_18032
@@ -2463,24 +2729,39 @@ Func_193dc:
 	ld [wIsFloorTransition], a
 	jp Func_18df1
 
-; unreferenced
 Func_193fb:
 	ld b, $78
-	jr .asm_19419
+	jr Func_19419
+
+Func_193ff:
 	ld b, $79
-	jr .asm_19419
+	jr Func_19419
+
+Func_19403:
 	ld b, $7a
-	jr .asm_19419
+	jr Func_19419
+
+Func_19407:
 	ld b, $7b
-	jr .asm_19419
+	jr Func_19419
+
+Func_1940b:
 	ld b, $7c
-	jr .asm_19419
+	jr Func_19419
+
+Func_1940f:
 	ld b, $7d
-	jr .asm_19419
+	jr Func_19419
+
+Func_19413:
 	ld b, $7e
-	jr .asm_19419
+	jr Func_19419
+
+Func_19417:
 	ld b, $7f
-.asm_19419
+;	fallthrough
+
+Func_19419:
 	ld a, [wc0d9]
 	cp $01
 	jr z, Func_19423
@@ -2507,24 +2788,40 @@ Func_19423:
 	play_sfx SFX_BLOCK_BREAK
 	jp Func_18020
 
-; unreferenced
 Func_1944b:
 	ld b, $78
-	jr .asm_19469
+	jr Func_19469
+
+Func_1944f:
 	ld b, $79
-	jr .asm_19469
+	jr Func_19469
+
+Func_19453:
 	ld b, $7a
-	jr .asm_19469
+	jr Func_19469
+
+Func_19457:
 	ld b, $7b
-	jr .asm_19469
+	jr Func_19469
+
+Func_1945b:
 	ld b, $7c
-	jr .asm_19469
+	jr Func_19469
+
+Func_1945f:
 	ld b, $7d
-	jr .asm_19469
+	jr Func_19469
+
+Func_19463:
 	ld b, $7e
-	jr .asm_19469
+	jr Func_19469
+
+; unreferenced
+Func_19467:
 	ld b, $7f
-.asm_19469
+;	fallthrough
+
+Func_19469:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18032
@@ -2552,24 +2849,43 @@ Func_19481:
 	call Func_19609
 	jp Func_18020
 
-; unreferenced
 Func_19497:
 	ld b, $78
-	jr .asm_194b5
+	jr Func_194b5
+
+Func_1949b:
 	ld b, $79
-	jr .asm_194b5
+	jr Func_194b5
+
+Func_1949f:
 	ld b, $7a
-	jr .asm_194b5
+	jr Func_194b5
+
+Func_194a3:
 	ld b, $7b
-	jr .asm_194b5
+	jr Func_194b5
+
+; unreferenced
+Func_194a7:
 	ld b, $7c
-	jr .asm_194b5
+	jr Func_194b5
+
+; unreferenced
+Func_194ab:
 	ld b, $7d
-	jr .asm_194b5
+	jr Func_194b5
+
+; unreferenced
+Func_194af:
 	ld b, $7e
-	jr .asm_194b5
+	jr Func_194b5
+
+; unreferenced
+Func_194b3:
 	ld b, $7f
-.asm_194b5
+;	fallthrough
+
+Func_194b5:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18032
@@ -2598,21 +2914,44 @@ Func_19497:
 ; unreferenced
 Func_194e4:
 	ld b, $78
-	jr .asm_19502
+	jr Func_19502
+
+; unreferenced
+Func_194e8:
 	ld b, $79
-	jr .asm_19502
+	jr Func_19502
+
+; unreferenced
+Func_194ec:
 	ld b, $7a
-	jr .asm_19502
+	jr Func_19502
+
+; unreferenced
+Func_194f0:
 	ld b, $7b
-	jr .asm_19502
+	jr Func_19502
+
+; unreferenced
+Func_194f4:
 	ld b, $7c
-	jr .asm_19502
+	jr Func_19502
+
+; unreferenced
+Func_194f8:
 	ld b, $7d
-	jr .asm_19502
+	jr Func_19502
+
+; unreferenced
+Func_194fc:
 	ld b, $7e
-	jr .asm_19502
+	jr Func_19502
+
+; unreferenced
+Func_19500:
 	ld b, $7f
-.asm_19502
+;	fallthrough
+
+Func_19502:
 	ld a, [wc0da]
 	and a
 	jp z, Func_18032
@@ -2624,13 +2963,22 @@ Func_194e4:
 ; unreferenced
 Func_19514:
 	ld b, $79
-	jr .asm_19522
+	jr Func_19522
+
+Func_19518:
 	ld b, $7a
-	jr .asm_19522
+	jr Func_19522
+
+; unreferenced
+Func_1951c:
 	ld b, $7b
-	jr .asm_19522
+	jr Func_19522
+
+Func_19520:
 	ld b, $78
-.asm_19522
+;	fallthrough
+
+Func_19522:
 	ld a, [wceda]
 	and $07
 	jp nz, Func_18020
@@ -2653,16 +3001,24 @@ Func_19514:
 	ld [wceda], a
 	jp Func_18f32
 
-; unreferenced
 Func_19552:
 	ld b, $79
-	jr .asm_19560
+	jr Func_19560
+
+Func_19556:
 	ld b, $7a
-	jr .asm_19560
+	jr Func_19560
+
+; unreferenced
+Func_1955a:
 	ld b, $7b
-	jr .asm_19560
+	jr Func_19560
+
+Func_1955e:
 	ld b, $78
-.asm_19560
+;	fallthrough
+
+Func_19560:
 	ld a, [wceda]
 	and $07
 	jp nz, Func_18020
@@ -2684,16 +3040,25 @@ Func_19552:
 	ld [wceda], a
 	jp Func_18f32
 
-; unreferenced
 Func_1958d:
 	ld b, $79
-	jr .asm_1959b
+	jr Func_1959b
+
+; unreferenced
+Func_19591:
 	ld b, $7a
-	jr .asm_1959b
+	jr Func_1959b
+
+; unreferenced
+Func_19595:
 	ld b, $7b
-	jr .asm_1959b
+	jr Func_1959b
+
+Func_19599:
 	ld b, $78
-.asm_1959b
+;	fallthrough
+
+Func_1959b:
 	ld a, [wceda]
 	and $07
 	jp nz, Func_18020
@@ -2716,16 +3081,25 @@ Func_1958d:
 	ld [wceda], a
 	jp Func_18f32
 
-; unreferenced
 Func_195cb:
 	ld b, $79
-	jr .asm_195d9
+	jr Func_195d9
+
+; unreferenced
+Func_195cf:
 	ld b, $7a
-	jr .asm_195d9
+	jr Func_195d9
+
+; unreferenced
+Func_195d3:
 	ld b, $7b
-	jr .asm_195d9
+	jr Func_195d9
+
+Func_195d7:
 	ld b, $78
-.asm_195d9
+;	fallthrough
+
+Func_195d9:
 	ld a, [wceda]
 	and $07
 	jp nz, Func_18020
@@ -3571,7 +3945,7 @@ Func_19b51::
 ;	fallthrough
 
 Func_19b5c:
-	call Func_18000
+	call ProcessCellFunction
 	ld b, a
 	ret
 
@@ -3604,7 +3978,7 @@ Func_19b7b::
 	call GetCell
 	ld a, 1 << 1
 	ld [wc0d6], a
-	call Func_18000
+	call ProcessCellFunction
 	ld b, a
 	ret
 
@@ -3613,7 +3987,7 @@ Func_19b8b::
 	call GetCell
 	ld a, 1 << 2
 	ld [wc0d6], a
-	call Func_18000
+	call ProcessCellFunction
 	ld b, a
 	ret
 
@@ -3622,7 +3996,7 @@ Func_19b9b::
 	call GetCell
 	ld a, 1 << 3
 	ld [wc0d6], a
-	call Func_18000
+	call ProcessCellFunction
 	ld b, a
 	ret
 
@@ -3633,7 +4007,7 @@ Func_19bab:
 	ld a, [hld]
 	ld h, [hl]
 	ld l, a
-	call Func_18000
+	call ProcessCellFunction
 	ld b, a
 	ret
 
@@ -3644,7 +4018,7 @@ Func_19bb7:
 	ld a, [hld]
 	ld h, [hl]
 	ld l, a
-	call Func_18000
+	call ProcessCellFunction
 	ld b, a
 	ret
 
@@ -3654,7 +4028,7 @@ Func_19bc3::
 	ld a, 1 << 4
 	ld [wc0d6], a
 Func_19bce:
-	call Func_18000
+	call ProcessCellFunction
 	ld b, a
 	ret
 
@@ -3681,7 +4055,7 @@ Func_19beb:
 	call GetCell
 	ld a, 1 << 5
 	ld [wc0d6], a
-	call Func_18000
+	call ProcessCellFunction
 	ld b, a
 	ret
 
@@ -3690,7 +4064,7 @@ Func_19bfb:
 	call GetCell
 	ld a, 1 << 6
 	ld [wc0d6], a
-	call Func_18000
+	call ProcessCellFunction
 	ld b, a
 	ret
 
@@ -3699,6 +4073,6 @@ Func_19c0b:
 	call GetCell
 	ld a, 1 << 7
 	ld [wc0d6], a
-	call Func_18000
+	call ProcessCellFunction
 	ld b, a
 	ret

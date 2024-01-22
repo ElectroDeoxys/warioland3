@@ -276,7 +276,7 @@ Func_861c:
 	ld a, [wceda]
 	and $f8
 	ld [wceda], a
-	farcall Func_18000
+	farcall ProcessCellFunction
 	ld a, [wceda]
 	and $07
 	jr nz, .asm_8733
