@@ -2072,7 +2072,7 @@ Func_b915:
 	inc a
 .asm_b98f
 	ld b, a
-	ld a, [wIsStandingOnSlope]
+	ld a, [wSlopeInteraction]
 	and a
 	jr nz, .on_slope
 	ld a, b
@@ -2505,7 +2505,7 @@ Func_bb85:
 	ld [hli], a
 	ld [hl], a
 	ld a, e
-	add $2
+	add 2
 	and $0f
 	ld [wc19f], a
 	pop af

@@ -105,7 +105,7 @@ UpdateState_Idling:
 	ret nz ; not idling
 	ld a, [wLadderInteraction]
 	cp $02
-	jp nz, CrouchOrSlideIfOnSlope
+	jp nz, CrouchOrSlide
 	farcall SetState_LadderClimbing
 	ret
 
@@ -288,7 +288,7 @@ StartJump:
 
 SetState_Airborne:
 	xor a
-	ld [wIsStandingOnSlope], a
+	ld [wSlopeInteraction], a
 
 	ld a, WST_AIRBORNE
 	ld [wWarioState], a
@@ -554,14 +554,14 @@ DoSoftLand:
 .not_smash_attacking
 	ld a, [wJoypadDown]
 	and D_DOWN
-	jp nz, CrouchOrSlideIfOnSlope
+	jp nz, CrouchOrSlide
 	ld a, -27
 	ld [wCollisionBoxTop], a
 	farcall CheckUpCollision
 	ld a, b
 	and a
 	jr z, .no_collision_on_top
-	jp CrouchOrSlideIfOnSlope
+	jp CrouchOrSlide
 .no_collision_on_top
 	ld a, [wJoypadDown]
 	and D_RIGHT | D_LEFT
@@ -589,7 +589,7 @@ DoHardLand:
 .not_smash_attacking
 	ld a, [wJoypadDown]
 	and D_DOWN
-	jp nz, CrouchOrSlideIfOnSlope
+	jp nz, CrouchOrSlide
 
 	play_sfx SFX_LAND
 	ld a, WST_LANDING
@@ -748,7 +748,7 @@ UpdateState_Landing:
 	jr nz, .jump
 	ld a, [wJoypadDown]
 	bit D_DOWN_F, a
-	jp nz, CrouchOrSlideIfOnSlope
+	jp nz, CrouchOrSlide
 	jp SetState_Idling
 
 .jump
@@ -839,7 +839,7 @@ UpdateState_CrouchSliding:
 	ld a, b
 	and a
 	jp z, StartCrouchFall
-	ld a, [wIsStandingOnSlope]
+	ld a, [wSlopeInteraction]
 	and a
 	jr z, .no_slope
 	update_pos_y
@@ -942,7 +942,7 @@ UpdateState_CrouchSliding:
 .crouching
 	ld a, -15
 	ld [wCollisionBoxTop], a
-	jp CrouchOrSlideIfOnSlope
+	jp CrouchOrSlide
 
 UpdateState_Attacking:
 	ld a, [wPowerUpLevel]
@@ -1205,7 +1205,7 @@ StartJumpingAirborneAttack:
 	ld [wJumpingUpwards], a
 SetState_AttackingAirborne:
 	xor a
-	ld [wIsStandingOnSlope], a
+	ld [wSlopeInteraction], a
 	ld a, WST_ATTACKING_AIRBORNE
 	ld [wWarioState], a
 	xor a
@@ -1581,7 +1581,7 @@ SetState_Submerged:
 	cp SWIMMING_FLIPPERS
 	jr c, .cannot_swim_underwater
 	ld a, [wWaterInteraction]
-	cp $02
+	cp NON_SUBMERSIBLE_WATER
 	jr z, .cannot_swim_underwater
 
 	ld a, -1
@@ -1694,7 +1694,7 @@ SetState_WaterSurfaceIdling:
 	ld a, [wWaterInteraction]
 	and a
 	jr nz, .asm_1cfdc
-	ld a, $01
+	ld a, SUBMERSIBLE_WATER
 	ld [wWaterInteraction], a
 
 .asm_1cfdc
@@ -2267,7 +2267,7 @@ UpdateState_CrouchWalking:
 	and a
 	jp z, StartCrouchFall
 	update_pos_y
-	ld a, [wIsStandingOnSlope]
+	ld a, [wSlopeInteraction]
 	and a
 	jr nz, .asm_1d51f
 	ret
@@ -2375,7 +2375,7 @@ UpdateState_CrouchAirborne:
 	ld a, [wJoypadDown]
 	bit D_DOWN_F, a
 	ret z
-	jp CrouchOrSlideIfOnSlope
+	jp CrouchOrSlide
 
 UpdateState_Stung:
 	farcall Func_19b25
@@ -2554,7 +2554,7 @@ UpdateState_StungRecovery:
 .asm_1d7b9
 	ld a, -15
 	ld [wCollisionBoxTop], a
-	jp CrouchOrSlideIfOnSlope
+	jp CrouchOrSlide
 
 UpdateState_PipeGoingDown:
 	ld a, TRUE
@@ -3113,7 +3113,7 @@ UpdateState_ThrowCharging:
 	bit A_BUTTON_F, a
 	jp nz, Func_1dd78
 	bit D_DOWN_F, a
-	jp nz, CrouchOrSlideIfOnSlope
+	jp nz, CrouchOrSlide
 
 	ld a, [wGrabState]
 	bit GRAB_HEAVY_F, a
@@ -3225,7 +3225,7 @@ UpdateState_ThrowFullyCharged:
 	bit A_BUTTON_F, a
 	jp nz, Func_1dd78
 	bit D_DOWN_F, a
-	jp nz, CrouchOrSlideIfOnSlope
+	jp nz, CrouchOrSlide
 	ret
 
 .asm_1de01
@@ -3373,8 +3373,8 @@ SetState_Sliding:
 	ld [wOAMPtr + 0], a
 	ld a, LOW(OAM_1644a)
 	ld [wOAMPtr + 1], a
-	ld a, [wIsStandingOnSlope]
-	bit 1, a
+	ld a, [wSlopeInteraction]
+	bit LEFT_SLOPE_F, a
 	jr nz, .asm_1df8b
 	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
@@ -3559,7 +3559,7 @@ UpdateState_Rolling:
 
 	update_pos_y
 
-	ld a, [wIsStandingOnSlope]
+	ld a, [wSlopeInteraction]
 	and a
 	ret z
 	and $0f
@@ -3573,7 +3573,7 @@ UpdateState_Rolling:
 .asm_1e145
 	farcall CheckCentreCollision
 	update_pos_y
-	ld a, [wIsStandingOnSlope]
+	ld a, [wSlopeInteraction]
 	and a
 	jp z, Func_1e1e3
 	and $0f
@@ -3591,7 +3591,7 @@ Func_1e174:
 
 SetState_RollingAirborne:
 	xor a
-	ld [wIsStandingOnSlope], a
+	ld [wSlopeInteraction], a
 	ld [wGrabState], a
 	ld a, JUMP_VEL_KNOCK_BACK
 	ld [wJumpVelTable], a
@@ -3836,7 +3836,7 @@ UpdateState_GroundShakeStunned:
 	ld a, b
 	and a
 	jr z, .asm_1e3d1
-	jp CrouchOrSlideIfOnSlope
+	jp CrouchOrSlide
 .asm_1e3d1
 	farcall CheckCentreCollision
 	ld a, b
@@ -4374,8 +4374,8 @@ SetState_Attacking:
 	hcall UpdateAnimation
 	ret
 
-CrouchOrSlideIfOnSlope:
-	ld a, [wIsStandingOnSlope]
+CrouchOrSlide:
+	ld a, [wSlopeInteraction]
 	and a
 	jp nz, SetState_Sliding
 	ld a, -1
@@ -4507,7 +4507,7 @@ HandleInput_Walking:
 
 .d_down
 	call IsOnSlipperyGround
-	jp z, CrouchOrSlideIfOnSlope
+	jp z, CrouchOrSlide
 	farcall SetState_CrouchSlipping
 	ret
 
@@ -4545,7 +4545,7 @@ SetState_Idling::
 	ret nz
 	ld a, b
 	and a
-	jp nz, CrouchOrSlideIfOnSlope
+	jp nz, CrouchOrSlide
 	ld a, BANK(WarioIdleGfx)
 	ld [wDMASourceBank], a
 	ld a, HIGH(WarioIdleGfx)
@@ -4859,7 +4859,7 @@ Func_1ec6c:
 	jr nz, .asm_1ecb0
 	bit D_LEFT_F, a
 	jr nz, .asm_1ecf2
-	jp CrouchOrSlideIfOnSlope
+	jp CrouchOrSlide
 
 .asm_1ecb0
 	ld a, [wDirection]
@@ -5079,7 +5079,7 @@ Func_1ee88:
 	bit B_BUTTON_F, a
 	jp nz, SetState_ThrowCharging
 	bit D_DOWN_F, a
-	jp nz, CrouchOrSlideIfOnSlope
+	jp nz, CrouchOrSlide
 	and D_RIGHT | D_LEFT
 	jr nz, .asm_1eea2
 	ret
@@ -5167,20 +5167,20 @@ Func_1eefc:
 .asm_1ef69
 	call ApplyWalkVelocity_Right
 	call AddXOffset
-	ld a, [wIsStandingOnSlope]
+	ld a, [wSlopeInteraction]
 	and a
 	jr z, .asm_1ef8d
-	bit 0, a
+	bit RIGHT_SLOPE_F, a
 	jr z, .asm_1ef8d
 	jr .asm_1efc5
 
 .asm_1ef7b
 	call ApplyWalkVelocity_Left
 	call SubXOffset
-	ld a, [wIsStandingOnSlope]
+	ld a, [wSlopeInteraction]
 	and a
 	jr z, .asm_1ef8d
-	bit 0, a
+	bit RIGHT_SLOPE_F, a
 	jr nz, .asm_1ef8d
 	jr .asm_1efc5
 .asm_1ef8d
@@ -5205,7 +5205,7 @@ Func_1eefc:
 
 .asm_1efaf
 	call IsOnSlipperyGround
-	jp z, CrouchOrSlideIfOnSlope
+	jp z, CrouchOrSlide
 	farcall SetState_CrouchSlipping
 	ret
 
@@ -5459,7 +5459,7 @@ HandleDivingHorizontalMovement:
 
 Func_1f1a9:
 	ld a, [wWaterInteraction]
-	cp $02
+	cp NON_SUBMERSIBLE_WATER
 	jr z, .asm_1f1f5
 	ld a, [wPowerUpLevel]
 	cp SWIMMING_FLIPPERS
@@ -5724,7 +5724,7 @@ HandleWaterSurfaceInput:
 	ret nz
 	farcall Func_19b12
 	ld a, [wWaterInteraction]
-	cp $02
+	cp NON_SUBMERSIBLE_WATER
 	jp z, SetState_TryingSubmerge
 	ld b, 3
 	call AddYOffset
@@ -5739,7 +5739,7 @@ HandleWaterSurfaceInput:
 	jp c, SetState_TryingSubmerge
 	farcall Func_19b12
 	ld a, [wWaterInteraction]
-	cp $02
+	cp NON_SUBMERSIBLE_WATER
 	jp z, SetState_TryingSubmerge
 	jp SetState_Submerged
 

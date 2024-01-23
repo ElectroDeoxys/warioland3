@@ -395,7 +395,7 @@ UpdateState_CrouchSlipping:
 	ld a, [wWarioStateCycles]
 	and $01
 	ld [wDirection], a
-	farcall CrouchOrSlideIfOnSlope
+	farcall CrouchOrSlide
 	ret
 
 SetState_DraggedDown:
@@ -966,11 +966,10 @@ UpdateState_LadderIdling:
 	jp nz, TriggerRoomTransition
 	ld a, [wLadderInteraction]
 	and a
-	jr nz, .asm_1a549
+	jr nz, .continue_ladder
 	farcall StartFall
 	ret
-
-.asm_1a549
+.continue_ladder
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
@@ -984,10 +983,10 @@ UpdateState_LadderShakeSlipping:
 	jp nz, TriggerRoomTransition
 	ld a, [wLadderInteraction]
 	and a
-	jr nz, .asm_1a588
+	jr nz, .continue_ladder
 	farcall StartFall
 	ret
-.asm_1a588
+.continue_ladder
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
@@ -1112,13 +1111,12 @@ UpdateState_LadderSliding:
 	jp nz, TriggerRoomTransition
 	ld a, [wLadderInteraction]
 	and a
-	jr nz, .asm_1a6e6
+	jr nz, .continue_ladder
 	xor a ; FALSE
 	ld [wIsSmashAttacking], a
 	farcall StartFall
 	ret
-
-.asm_1a6e6
+.continue_ladder
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation

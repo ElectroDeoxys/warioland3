@@ -100,6 +100,7 @@ INCLUDE "engine/bank3.asm"
 
 SECTION "Bank 6", ROMX
 
+INCLUDE "engine/level/cell_functions.asm"
 INCLUDE "engine/bank6.asm"
 
 

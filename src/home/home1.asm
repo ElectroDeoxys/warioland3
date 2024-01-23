@@ -432,7 +432,7 @@ Func_e31::
 	ld [hli], a
 	ld [hl], c
 	ld a, e
-	add $02
+	add 2
 	and $0f
 	ld [wc19e], a
 	ret
@@ -1491,8 +1491,8 @@ ApplyWalkVelocity_Right::
 	jr ApplyWalkVelocity
 
 .dir_right
-	ld a, [wIsStandingOnSlope]
-	bit 0, a
+	ld a, [wSlopeInteraction]
+	bit RIGHT_SLOPE_F, a
 	jr z, ApplyWalkVelocity
 ;	fallthrough
 
@@ -1514,8 +1514,8 @@ ApplyWalkVelocity_Left::
 	jr ApplyWalkVelocity
 
 .dir_left
-	ld a, [wIsStandingOnSlope]
-	bit 1, a
+	ld a, [wSlopeInteraction]
+	bit LEFT_SLOPE_F, a
 	jr z, ApplyWalkVelocity
 	jr ApplySlopedWalkVelocity
 

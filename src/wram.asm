@@ -194,7 +194,7 @@ wRoomTransitionParam:: ; c0d7
 wc0d8:: ; c0d8
 	db
 
-wc0d9:: ; c0d9
+wCollisionAgent:: ; c0d9
 	db
 
 wc0da:: ; c0da
@@ -272,7 +272,7 @@ wPalFadeCounter:: ; c187
 
 ; bit 0: slope right
 ; bit 1: slope left
-wIsStandingOnSlope:: ; c189
+wSlopeInteraction:: ; c189
 	db
 
 	ds $2

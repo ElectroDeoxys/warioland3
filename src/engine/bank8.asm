@@ -1284,7 +1284,7 @@ Func_209ca:
 .crouching
 	xor a
 	ld [wWaterInteraction], a
-	farcall CrouchOrSlideIfOnSlope
+	farcall CrouchOrSlide
 	jr .done
 
 .set_grab_state
@@ -1568,8 +1568,8 @@ Func_20b6b:
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_20cdb
-	ld a, [wIsStandingOnSlope]
-	bit 1, a
+	ld a, [wSlopeInteraction]
+	bit LEFT_SLOPE_F, a
 	jr nz, .asm_20cf5
 	ld a, [wGrabState]
 	and (1 << GRAB_HEAVY_F)
@@ -1584,8 +1584,8 @@ Func_20b6b:
 	hcall UpdateAnimation
 	ret
 .asm_20cdb
-	ld a, [wIsStandingOnSlope]
-	bit 0, a
+	ld a, [wSlopeInteraction]
+	bit RIGHT_SLOPE_F, a
 	jr nz, .asm_20cf5
 	ld a, [wGrabState]
 	and (1 << GRAB_HEAVY_F)
