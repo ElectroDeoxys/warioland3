@@ -248,12 +248,14 @@ UpdateLevel:
 	ret
 
 .no_end_screen
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and a
 	jr z, .tick_time
+
+	; set next frame to process multi-cell block
 	ld a, [wSubState]
 	ld [wPendingSubState], a
-	ld a, SST_LEVEL_07
+	ld a, SST_LEVEL_MULTI_CELL_BLOCK
 	ld [wSubState], a
 	ret
 

@@ -1,9 +1,10 @@
+; processes the cell function of wCellPtrBank:wCellPtr
 ProcessCellFunction:
 	xor a ; FALSE
 	ld [wc0dd], a
-	ld a, [wFloorSRAMBank]
+	ld a, [wCellPtrBank]
 	sramswitch
-	ld hl, wYCell
+	ld hl, wCellPtr
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
@@ -22,16 +23,16 @@ CellFunc_Free:
 	xor a ; SRAM0
 	sramswitch
 	xor a ; FALSE
-	ld [wc0d8], a
+	ld [wCellFuncBreakFlag], a
 	ld [wCollisionAgent], a
-	ld [wc18d], a
+	ld [wUnused_c18d], a
 	ret
 
 CellFunc_Solid:
 	xor a
 	sramswitch
 	xor a ; FALSE
-	ld [wc0d8], a
+	ld [wCellFuncBreakFlag], a
 	ld [wCollisionAgent], a
 	ld a, [wc0da]
 	and a
@@ -43,7 +44,7 @@ CellFunc_Solid:
 	bit 4, a
 	jr z, .snap_y_pos
 	xor a
-	ld [wc18d], a
+	ld [wUnused_c18d], a
 	ret
 
 .snap_y_pos
@@ -51,17 +52,17 @@ CellFunc_Solid:
 	and $f0
 	ldh [hYPosLo], a
 	ld a, $01
-	ld [wc18d], a
+	ld [wUnused_c18d], a
 	ret
 
 Func_18064:
 	xor a
 	sramswitch
 	xor a ; FALSE
-	ld [wc0d8], a
+	ld [wCellFuncBreakFlag], a
 	ld [wCollisionAgent], a
 	ld a, $10
-	ld [wc18d], a
+	ld [wUnused_c18d], a
 	ret
 
 ; unreferenced
@@ -69,20 +70,20 @@ Func_18078:
 	xor a
 	sramswitch
 	xor a ; FALSE
-	ld [wc0d8], a
+	ld [wCellFuncBreakFlag], a
 	ld [wCollisionAgent], a
 	ld a, $01
-	ld [wc18d], a
+	ld [wUnused_c18d], a
 	ret
 
 Func_1808c:
 	xor a
 	sramswitch
 	xor a ; FALSE
-	ld [wc0d8], a
+	ld [wCellFuncBreakFlag], a
 	ld [wCollisionAgent], a
 	xor a
-	ld [wc18d], a
+	ld [wUnused_c18d], a
 	ret
 
 CellFunc_1809f:
@@ -351,7 +352,7 @@ CellFunc_Switch:
 	ld a, [wc0d6]
 	and $28
 	jp z, CellFunc_Solid
-	ld hl, wYCell
+	ld hl, wCellPtr
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
@@ -1231,7 +1232,7 @@ Func_18a17:
 ;	fallthrough
 
 CrackedBlockWithColourCoinCollision:
-	ld a, [wc0d8]
+	ld a, [wCellFuncBreakFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wc0d6]
@@ -1267,7 +1268,7 @@ CrackedBlockWithColourCoinCollision:
 	jp CellFunc_Solid
 
 .asm_18a5c
-	ld hl, wYCell
+	ld hl, wCellPtr
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
@@ -1312,10 +1313,10 @@ CellFunc_18aa6:
 ;	fallthrough
 
 Func_18aa8:
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $07
 	jp nz, CellFunc_Free
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_18ad6
 	ld a, [wc0da]
@@ -1328,11 +1329,11 @@ Func_18aa8:
 	cp $01
 	jp c, CellFunc_Solid
 	ld a, $01
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 .asm_18ad6
 	or $01
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 
 Func_18ade:
@@ -1348,10 +1349,10 @@ CellFunc_18aea:
 	ld b, $78
 ;	fallthrough
 Func_18aec:
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $07
 	jp nz, CellFunc_Free
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_18b17
 	ld a, [wc0da]
@@ -1364,10 +1365,10 @@ Func_18aec:
 	cp $01
 	jp c, CellFunc_Solid
 	ld a, $03
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 .asm_18b17
 	or $03
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 
 ; unreferenced
@@ -1389,10 +1390,10 @@ CellFunc_18b2b:
 ;	fallthrough
 
 Func_18b2d:
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $07
 	jp nz, CellFunc_Free
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_18b5b
 	ld a, [wc0da]
@@ -1405,11 +1406,11 @@ Func_18b2d:
 	cp $01
 	jp c, CellFunc_Solid
 	ld a, $02
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 .asm_18b5b
 	or $02
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 
 ; unreferenced
@@ -1431,10 +1432,10 @@ CellFunc_18b6f:
 ;	fallthrough
 
 Func_18b71:
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $07
 	jp nz, CellFunc_Free
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_18b9f
 	ld a, [wc0da]
@@ -1447,11 +1448,11 @@ Func_18b71:
 	cp $01
 	jp c, CellFunc_Solid
 	ld a, $04
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 .asm_18b9f
 	or $04
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 
 ; unreferenced
@@ -1474,10 +1475,10 @@ CellFunc_18bb3:
 ;	fallthrough
 
 Func_18bb5:
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $07
 	jp nz, CellFunc_Free
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_18be3
 	ld a, [wc0da]
@@ -1490,11 +1491,11 @@ Func_18bb5:
 	cp $03
 	jp nz, CellFunc_Solid
 	ld a, $01
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 .asm_18be3
 	or $01
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 
 ; unreferenced
@@ -1517,10 +1518,10 @@ CellFunc_18bf7:
 ;	fallthrough
 
 Func_18bf9:
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $07
 	jp nz, CellFunc_Free
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_18c24
 	ld a, [wc0da]
@@ -1533,10 +1534,10 @@ Func_18bf9:
 	cp $03
 	jp nz, CellFunc_Solid
 	ld a, $03
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 .asm_18c24
 	or $03
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 
 ; unreferenced
@@ -1558,10 +1559,10 @@ CellFunc_18c38:
 ;	fallthrough
 
 Func_18c3a:
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $07
 	jp nz, CellFunc_Free
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_18c68
 	ld a, [wc0da]
@@ -1574,11 +1575,11 @@ Func_18c3a:
 	cp $03
 	jp nz, CellFunc_Solid
 	ld a, $02
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 .asm_18c68
 	or $02
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 
 ; unreferenced
@@ -1600,10 +1601,10 @@ CellFunc_18c7c:
 ;	fallthrough
 
 Func_18c7e:
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $07
 	jp nz, CellFunc_Free
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_18cac
 	ld a, [wc0da]
@@ -1616,11 +1617,11 @@ Func_18c7e:
 	cp $03
 	jp nz, CellFunc_Solid
 	ld a, $04
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 .asm_18cac
 	or $04
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 
 CellFunc_CrackedBlock_78:
@@ -1661,7 +1662,7 @@ CrackedBlockCollision:
 	jp z, Func_19423
 	cp $03
 	jp z, CellFunc_Free
-	ld a, [wc0d8]
+	ld a, [wCellFuncBreakFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wc0d6]
@@ -1694,7 +1695,7 @@ CrackedBlockCollision:
 	jr nz, .asm_18d22
 	jp CellFunc_Solid
 .asm_18d22
-	ld hl, wYCell
+	ld hl, wCellPtr
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
@@ -1763,7 +1764,7 @@ NonCrackedBlockCollision:
 	jp z, Func_19423
 	cp $03
 	jp z, CellFunc_Free
-	ld a, [wc0d8]
+	ld a, [wCellFuncBreakFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wTransformation]
@@ -1817,7 +1818,7 @@ NonCrackedBlockCollision:
 	jp CellFunc_Solid
 
 Func_18df1:
-	ld hl, wYCell
+	ld hl, wCellPtr
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
@@ -1871,10 +1872,10 @@ CellFunc_18e2a:
 ;	fallthrough
 
 Func_18e2c:
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $07
 	jp nz, CellFunc_Free
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_18e92
 	ld a, [wCollisionAgent]
@@ -1882,7 +1883,7 @@ Func_18e2c:
 	jp z, CellFunc_Free
 	cp $02
 	jr z, .asm_18e9a
-	ld a, [wc0d8]
+	ld a, [wCellFuncBreakFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wc0d6]
@@ -1916,15 +1917,15 @@ Func_18e2c:
 	jp CellFunc_Solid
 .asm_18e8a
 	ld a, $01
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_19086
 .asm_18e92
 	or $01
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 .asm_18e9a
 	ld a, $01
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 
 CellFunc_18ea2:
@@ -1965,10 +1966,10 @@ CellFunc_18ebe:
 ;	fallthrough
 
 Func_18ec0:
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $07
 	jp nz, CellFunc_Free
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_18f26
 	ld a, [wCollisionAgent]
@@ -1976,7 +1977,7 @@ Func_18ec0:
 	jp z, CellFunc_Free
 	cp $02
 	jr z, .asm_18f2d
-	ld a, [wc0d8]
+	ld a, [wCellFuncBreakFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wc0d6]
@@ -2010,30 +2011,30 @@ Func_18ec0:
 	jp CellFunc_Solid
 .asm_18f1e
 	ld a, $03
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_19086
 .asm_18f26
 	or $03
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jr Func_18f32
 .asm_18f2d
 	ld a, $03
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 ;	fallthrough
 
 Func_18f32:
 	ld a, [wSRAMBank]
 	ld [wcedb], a
-	ld hl, wYCell
+	ld hl, wCellPtr
 	ld a, [hli]
-	ld [wcedc], a
+	ld [wcedc + 0], a
 	ld d, a
 	ld a, [hl]
-	ld [wcedd], a
+	ld [wcedc + 1], a
 	ld e, a
 	ld a, [de]
 	ld [wcedf], a
-	ld hl, wYCell
+	ld hl, wCellPtr
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
@@ -2084,12 +2085,12 @@ CellFunc_18f7b:
 	ld b, $78
 ;	fallthrough
 
-; same as Func_19011 but outputs $02 in wceda
+; same as Func_19011 but outputs $02 in wMultiCellBlockParam
 Func_18f7d:
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $07
 	jp nz, CellFunc_Free
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_18fe3
 	ld a, [wCollisionAgent]
@@ -2097,7 +2098,7 @@ Func_18f7d:
 	jp z, CellFunc_Free
 	cp $02
 	jr z, .asm_18feb
-	ld a, [wc0d8]
+	ld a, [wCellFuncBreakFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wc0d6]
@@ -2131,15 +2132,15 @@ Func_18f7d:
 	jp CellFunc_Solid
 .asm_18fdb
 	ld a, $02
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_19086
 .asm_18fe3
 	or $02
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 .asm_18feb
 	ld a, $02
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 
 CellFunc_18ff3:
@@ -2178,12 +2179,12 @@ CellFunc_1900f:
 	ld b, $78
 ;	fallthrough
 
-; same as Func_18f7d but outputs $04 in wceda
+; same as Func_18f7d but outputs $04 in wMultiCellBlockParam
 Func_19011:
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $07
 	jp nz, CellFunc_Free
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_19076
 	ld a, [wCollisionAgent]
@@ -2191,7 +2192,7 @@ Func_19011:
 	jp z, CellFunc_Free
 	cp $02
 	jr z, .asm_1907e
-	ld a, [wc0d8]
+	ld a, [wCellFuncBreakFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wc0d6]
@@ -2225,32 +2226,32 @@ Func_19011:
 	jp CellFunc_Solid
 .asm_1906f
 	ld a, $04
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jr Func_19086
 .asm_19076
 	or $04
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 .asm_1907e
 	ld a, $04
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 
 Func_19086:
 	ld a, [wSRAMBank]
 	ld [wcedb], a
-	ld hl, wYCell
+	ld hl, wCellPtr
 	ld a, [hli]
-	ld [wcedc], a
+	ld [wcedc + 0], a
 	ld d, a
 	ld a, [hl]
-	ld [wcedd], a
+	ld [wcedc + 1], a
 	ld e, a
 	ld a, [de]
 	ld [wcedf], a
 	ld a, TRUE
 	ld [wIsFloorTransition], a
-	ld hl, wYCell
+	ld hl, wCellPtr
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
@@ -2319,10 +2320,10 @@ CellFunc_190fc:
 ;	fallthrough
 
 Func_190fe:
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $07
 	jp nz, CellFunc_Solid
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_19185
 	ld a, [wCollisionAgent]
@@ -2330,7 +2331,7 @@ Func_190fe:
 	jp z, CellFunc_Free
 	cp $02
 	jr z, .asm_1918d
-	ld a, [wc0d8]
+	ld a, [wCellFuncBreakFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wTransformation]
@@ -2379,15 +2380,15 @@ Func_190fe:
 	jp c, CellFunc_Solid
 .asm_1917d
 	ld a, $01
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_193dc
 .asm_19185
 	or $01
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_19246
 .asm_1918d
 	ld a, $01
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_19246
 
 ; unreferenced
@@ -2428,10 +2429,10 @@ CellFunc_191b1:
 ;	fallthrough
 
 Func_191b3:
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $07
 	jp nz, CellFunc_Solid
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_1923a
 	ld a, [wCollisionAgent]
@@ -2439,7 +2440,7 @@ Func_191b3:
 	jp z, CellFunc_Free
 	cp $02
 	jr z, .asm_19241
-	ld a, [wc0d8]
+	ld a, [wCellFuncBreakFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wTransformation]
@@ -2488,30 +2489,30 @@ Func_191b3:
 	jp c, CellFunc_Solid
 .asm_19232
 	ld a, $03
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_193dc
 .asm_1923a
 	or $03
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jr Func_19246
 .asm_19241
 	ld a, $03
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 ;	fallthrough
 
 Func_19246:
 	ld a, [wSRAMBank]
 	ld [wcedb], a
-	ld hl, wYCell
+	ld hl, wCellPtr
 	ld a, [hli]
-	ld [wcedc], a
+	ld [wcedc + 0], a
 	ld d, a
 	ld a, [hl]
-	ld [wcedd], a
+	ld [wcedc + 1], a
 	ld e, a
 	ld a, [de]
 	ld [wcedf], a
-	ld hl, wYCell
+	ld hl, wCellPtr
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
@@ -2563,10 +2564,10 @@ CellFunc_1928f:
 ;	fallthrough
 
 Func_19291:
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $07
 	jp nz, CellFunc_Solid
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_19318
 	ld a, [wCollisionAgent]
@@ -2574,7 +2575,7 @@ Func_19291:
 	jp z, CellFunc_Free
 	cp $02
 	jr z, .asm_19320
-	ld a, [wc0d8]
+	ld a, [wCellFuncBreakFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wTransformation]
@@ -2623,15 +2624,15 @@ Func_19291:
 	jp c, CellFunc_Solid
 .asm_19310
 	ld a, $02
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_193dc
 .asm_19318
 	or $02
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_19246
 .asm_19320
 	ld a, $02
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_19246
 
 ; unreferenced
@@ -2672,10 +2673,10 @@ CellFunc_19344:
 ;	fallthrough
 
 Func_19346:
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $07
 	jp nz, CellFunc_Solid
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_193cc
 	ld a, [wCollisionAgent]
@@ -2683,7 +2684,7 @@ Func_19346:
 	jp z, CellFunc_Free
 	cp $02
 	jr z, .asm_193d4
-	ld a, [wc0d8]
+	ld a, [wCellFuncBreakFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wTransformation]
@@ -2732,26 +2733,26 @@ Func_19346:
 	jp c, CellFunc_Solid
 .asm_193c5
 	ld a, $04
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jr Func_193dc
 .asm_193cc
 	or $04
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_19246
 .asm_193d4
 	ld a, $04
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_19246
 
 Func_193dc:
 	ld a, [wSRAMBank]
 	ld [wcedb], a
-	ld hl, wYCell
+	ld hl, wCellPtr
 	ld a, [hli]
-	ld [wcedc], a
+	ld [wcedc + 0], a
 	ld d, a
 	ld a, [hl]
-	ld [wcedd], a
+	ld [wcedc + 1], a
 	ld e, a
 	ld a, [de]
 	ld [wcedf], a
@@ -2798,7 +2799,7 @@ EnemyBlockCollision:
 	jp CellFunc_Solid
 
 Func_19423:
-	ld hl, wYCell
+	ld hl, wCellPtr
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
@@ -2865,7 +2866,7 @@ BonfireBlockCollision:
 	jp CellFunc_Solid
 
 Func_19481:
-	ld hl, wYCell
+	ld hl, wCellPtr
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
@@ -2927,7 +2928,7 @@ DoughnutBlockCollision:
 	jr nz, .break
 	jp CellFunc_Solid
 .break
-	ld hl, wYCell
+	ld hl, wCellPtr
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
@@ -3009,10 +3010,10 @@ CellFunc_19520:
 ;	fallthrough
 
 Func_19522:
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $07
 	jp nz, CellFunc_Free
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_1954a
 	ld a, [wc0da]
@@ -3024,11 +3025,11 @@ Func_19522:
 	jp CellFunc_Solid
 .asm_19542
 	ld a, $01
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 .asm_1954a
 	or $01
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 
 CellFunc_19552:
@@ -3049,10 +3050,10 @@ CellFunc_1955e:
 ;	fallthrough
 
 Func_19560:
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $07
 	jp nz, CellFunc_Free
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_19585
 	ld a, [wc0da]
@@ -3064,10 +3065,10 @@ Func_19560:
 	jp CellFunc_Solid
 .asm_19580
 	ld a, $03
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 .asm_19585
 	or $03
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 
 CellFunc_1958d:
@@ -3089,10 +3090,10 @@ CellFunc_19599:
 ;	fallthrough
 
 Func_1959b:
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $07
 	jp nz, CellFunc_Free
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_195c3
 	ld a, [wc0da]
@@ -3104,11 +3105,11 @@ Func_1959b:
 	jp CellFunc_Solid
 .asm_195bb
 	ld a, $02
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 .asm_195c3
 	or $02
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 
 CellFunc_YarnBlock_79:
@@ -3130,10 +3131,10 @@ CellFunc_YarnBlock_78:
 ;	fallthrough
 
 YarnBlockCollision:
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $07
 	jp nz, CellFunc_Free
-	ld a, [wceda]
+	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_19601
 	ld a, [wc0da]
@@ -3145,11 +3146,11 @@ YarnBlockCollision:
 	jp CellFunc_Solid
 .asm_195f9
 	ld a, $04
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 .asm_19601
 	or $04
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	jp Func_18f32
 
 BreakBlock:

@@ -28,7 +28,7 @@ Func_19720:
 ; checks collision in side that Wario is facing
 CheckFrontCollision:
 	ld a, TRUE
-	ld [wc0d8], a
+	ld [wCellFuncBreakFlag], a
 	ld a, [wDirection]
 	and a
 	jr z, CheckBottomLeftCollision
@@ -36,7 +36,7 @@ CheckFrontCollision:
 
 Func_19741:
 	ld a, TRUE
-	ld [wc0d8], a
+	ld [wCellFuncBreakFlag], a
 ;	fallthrough
 
 CheckBottomRightCollision:
@@ -112,7 +112,7 @@ CheckBottomRightCollision:
 
 Func_197b1:
 	ld a, TRUE
-	ld [wc0d8], a
+	ld [wCellFuncBreakFlag], a
 ;	fallthrough
 
 CheckBottomLeftCollision:
@@ -192,10 +192,10 @@ CheckBottomLeftCollision:
 
 Func_19823:
 	ld a, TRUE
-	ld [wc0d8], a
+	ld [wCellFuncBreakFlag], a
 	call Func_19bd3
 	ld a, $01
-	ld [wc18d], a
+	ld [wUnused_c18d], a
 	ld b, a
 	ret
 
@@ -214,7 +214,7 @@ Func_19832:
 	cp b
 	jp z, .asm_198c1
 	ld a, TRUE
-	ld [wc0d8], a
+	ld [wCellFuncBreakFlag], a
 	call Func_19bd3
 	and $0f
 	ret z
@@ -264,7 +264,7 @@ Func_19832:
 
 .asm_198c1
 	xor a
-	ld [wc18d], a
+	ld [wUnused_c18d], a
 	ld b, a
 	ret
 
@@ -347,7 +347,7 @@ Func_19942:
 	cp TRANSFORMATION_PUFFY_WARIO
 	jr z, .asm_1994e
 	ld a, TRUE
-	ld [wc0d8], a
+	ld [wCellFuncBreakFlag], a
 .asm_1994e
 	ld a, [wCollisionBoxTop]
 	cpl
@@ -384,7 +384,7 @@ CheckUpCollision:
 	cp TRANSFORMATION_PUFFY_WARIO
 	jr z, .asm_19988
 	ld a, TRUE
-	ld [wc0d8], a
+	ld [wCellFuncBreakFlag], a
 .asm_19988
 	ld a, [wCollisionBoxLeft]
 	cpl
@@ -421,7 +421,7 @@ CheckUpCollision:
 	cp TRANSFORMATION_PUFFY_WARIO
 	jr z, .asm_199c0
 	ld a, TRUE
-	ld [wc0d8], a
+	ld [wCellFuncBreakFlag], a
 .asm_199c0
 	ld a, [wCollisionBoxRight]
 	sub 3
@@ -460,7 +460,7 @@ CheckAirborneCollision:
 	and a
 	jr z, .no_smash_attack_1
 	ld a, TRUE
-	ld [wc0d8], a
+	ld [wCellFuncBreakFlag], a
 .no_smash_attack_1
 	ld a, [wCollisionBoxLeft]
 	cpl
@@ -496,7 +496,7 @@ CheckAirborneCollision:
 	and a
 	jr z, .no_smash_attack_2
 	ld a, TRUE
-	ld [wc0d8], a
+	ld [wCellFuncBreakFlag], a
 .no_smash_attack_2
 	ld a, [wCollisionBoxRight]
 	sub 3
@@ -532,7 +532,7 @@ CheckAirborneCollision:
 	and a
 	jr z, .no_smash_attack_3
 	ld a, TRUE
-	ld [wc0d8], a
+	ld [wCellFuncBreakFlag], a
 .no_smash_attack_3
 	get_pos
 	call Func_19b7b
@@ -714,12 +714,12 @@ Func_19b69::
 	jr Func_19b5c
 
 DecrementXCell:
-	ld hl, wXCell
+	ld hl, wCellPtr + 1
 	dec [hl]
 	ret
 
 IncrementXCell:
-	ld hl, wXCell
+	ld hl, wCellPtr + 1
 	inc [hl]
 	ret
 
@@ -752,7 +752,7 @@ Func_19b9b::
 
 ; unreferenced
 Func_19bab:
-	ld hl, wXCell
+	ld hl, wCellPtr + 1
 	dec [hl]
 	ld a, [hld]
 	ld h, [hl]
@@ -763,7 +763,7 @@ Func_19bab:
 
 ; unreferenced
 Func_19bb7:
-	ld hl, wXCell
+	ld hl, wCellPtr + 1
 	inc [hl]
 	ld a, [hld]
 	ld h, [hl]
@@ -783,14 +783,14 @@ Func_19bce:
 	ret
 
 Func_19bd3:
-	ld hl, wYCell
+	ld hl, wCellPtr
 	dec [hl]
 	ld a, [hl]
 	cp $a0 - 1
 	jr nz, .asm_19be6
-	ld a, [wFloorSRAMBank]
+	ld a, [wCellPtrBank]
 	dec a
-	ld [wFloorSRAMBank], a
+	ld [wCellPtrBank], a
 	ld a, $c0 - 1
 	ld [hl], a
 

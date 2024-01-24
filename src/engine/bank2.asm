@@ -380,7 +380,7 @@ ENDR
 
 	ld hl, wc0a3
 	call GetCell
-	ld a, [wFloorSRAMBank]
+	ld a, [wCellPtrBank]
 	sramswitch
 	ld a, [wc0a3 + 1]
 	and $08
@@ -388,7 +388,7 @@ ENDR
 	push hl
 	call Func_9254
 	pop hl
-	ld a, [wFloorSRAMBank]
+	ld a, [wCellPtrBank]
 	sramswitch
 	call Func_9605
 	jr .asm_924b
@@ -397,7 +397,7 @@ ENDR
 	push hl
 	call Func_99ca
 	pop hl
-	ld a, [wFloorSRAMBank]
+	ld a, [wCellPtrBank]
 	sramswitch
 	call Func_9d4c
 .asm_924b
@@ -922,7 +922,7 @@ ENDR
 
 	ld hl, wc0a3
 	call GetCell
-	ld a, [wFloorSRAMBank]
+	ld a, [wCellPtrBank]
 	sramswitch
 	ld a, [wc0a5 + 1]
 	and $08
@@ -930,7 +930,7 @@ ENDR
 	push hl
 	call Func_a2aa
 	pop hl
-	ld a, [wFloorSRAMBank]
+	ld a, [wCellPtrBank]
 	sramswitch
 	call Func_a79e
 	jr .asm_a2a1
@@ -938,7 +938,7 @@ ENDR
 	push hl
 	call Func_aca6
 	pop hl
-	ld a, [wFloorSRAMBank]
+	ld a, [wCellPtrBank]
 	sramswitch
 	call Func_b182
 .asm_a2a1
@@ -2207,7 +2207,7 @@ Func_ba42:
 	ld l, [hl]
 	ld h, a
 	ld a, c
-	ld [wFloorSRAMBank], a
+	ld [wCellPtrBank], a
 	call Func_d8c
 	ld a, [wccec]
 	sramswitch
@@ -2257,7 +2257,7 @@ Func_ba42:
 	pop af
 	ldh [rSVBK], a
 	ld a, c
-	ld [wFloorSRAMBank], a
+	ld [wCellPtrBank], a
 	ld h, d
 	ld l, e
 	call Func_d3e
@@ -2333,7 +2333,7 @@ Func_bb2d:
 	ld l, [hl]
 	ld h, a
 	ld a, c
-	ld [wFloorSRAMBank], a
+	ld [wCellPtrBank], a
 	call Func_d8c
 	ld a, [wccec]
 	sramswitch
@@ -2373,17 +2373,17 @@ Func_bb85:
 	ret z
 	ld l, [hl]
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
-	jr c, .asm_bba8
+	jr c, .got_sram_bank
 	inc b
-	sub $20
+	sub HIGH(SIZEOF(SRAM))
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
-	jr c, .asm_bba8
+	jr c, .got_sram_bank
 	inc b
-	sub $20
-.asm_bba8
+	sub HIGH(SIZEOF(SRAM))
+.got_sram_bank
 	ld h, a
 	ld a, b
-	ld [wFloorSRAMBank], a
+	ld [wCellPtrBank], a
 	sramswitch
 	push hl
 	call Func_c19
@@ -2394,6 +2394,7 @@ Func_bb85:
 	add b
 	ld e, a
 
+	; current tile
 	ld a, h
 	ld [de], a
 	inc e
@@ -2401,6 +2402,7 @@ Func_bb85:
 	ld [de], a
 	inc e
 
+	; right tile
 	ld a, h
 	ld [de], a
 	inc e
@@ -2414,6 +2416,7 @@ Func_bb85:
 	ld [de], a
 	inc e
 
+	; bottom tile
 	ld bc, BG_MAP_WIDTH
 	add hl, bc
 	ld a, h
@@ -2425,6 +2428,7 @@ Func_bb85:
 	ld [de], a
 	inc e
 
+	; bottom-right tile
 	ld a, h
 	ld [de], a
 	inc e
@@ -2447,8 +2451,7 @@ Func_bb85:
 	ld e, a
 	sla e
 	sla e
-	rl d
-
+	rl d ; *4
 	ldh a, [rSVBK]
 	push af
 	ld a, $03
@@ -2458,8 +2461,8 @@ Func_bb85:
 	add hl, de
 	ld a, [wce00]
 	ld e, a
-	ld d, $ce
-	ld a, $01
+	ld d, HIGH(wce01)
+	ld a, LOW(wce01)
 	add e
 	ld e, a
 	ld a, [hli]
@@ -2474,12 +2477,13 @@ Func_bb85:
 	ld a, [hl]
 	ld [de], a
 	pop de
+
 	ld hl, w3d300
 	add hl, de
 	ld a, [wce00]
 	ld e, a
-	ld d, $ce
-	ld a, $35
+	ld d, HIGH(wce35)
+	ld a, LOW(wce35)
 	add e
 	ld e, a
 	ld a, [hli]
@@ -2493,9 +2497,11 @@ Func_bb85:
 	inc e
 	ld a, [hl]
 	ld [de], a
+
 	ld a, [wce00]
-	add $04
+	add 4
 	ld [wce00], a
+
 	ld a, [wc19f]
 	ld e, a
 	ld d, $00

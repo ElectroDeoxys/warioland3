@@ -24,9 +24,9 @@ GetCell::
 	inc b
 	sub $20
 .got_sram_bank
-	ld [wYCell], a
+	ld [wCellPtr + 0], a
 	ld a, b
-	ld [wFloorSRAMBank], a
+	ld [wCellPtrBank], a
 
 ; x position
 	; computes value, given 2-byte x coordinate in [hl]
@@ -42,9 +42,9 @@ GetCell::
 	swap a
 	add l
 	ld l, a
-	ld [wXCell], a
+	ld [wCellPtr + 1], a
 
-	ld a, [wYCell]
+	ld a, [wCellPtr + 0]
 	ld h, a
 	ret
 
@@ -253,7 +253,7 @@ Func_d3e::
 	and $f0
 	swap a
 	ld b, a
-	ld a, [wFloorSRAMBank]
+	ld a, [wCellPtrBank]
 	dec a
 	add a
 	add b
@@ -299,7 +299,7 @@ Func_d81::
 	ret
 
 Func_d8c::
-	ld a, [wFloorSRAMBank]
+	ld a, [wCellPtrBank]
 	ld [wccec], a
 	ld b, $01
 	ld a, l
@@ -413,14 +413,14 @@ Func_e2b::
 ;	fallthrough
 
 Func_e31::
-	ld a, [wFloorSRAMBank]
+	ld a, [wCellPtrBank]
 	dec a
 	add a
 	add a
 	add a
 	add a
-	add a ; *$20
-	add h
+	add a
+	add h ; = h + (wCellPtrBank - 1) * $20
 	ld b, a
 	ld c, l
 	ld hl, wc18e

@@ -23,20 +23,12 @@ wIntroBGXOffsetFar::    db ; c086
 wIntroBGXOffsetCentre:: db ; c087
 wIntroBGXOffsetNear::   db ; c088
 
-wc089:: ; c089
-	db
-
-wc08a:: ; c08a
-	db
-
-wc08b:: ; c08b
-	db
-
-wc08c:: ; c08c
-	db
-
-wc08d:: ; c08d
-	db
+; Hidden Figure fight values
+wc089:: db ; c089
+wc08a:: db ; c08a
+wc08b:: db ; c08b
+wc08c:: db ; c08c
+wc08d:: db ; c08d
 
 wSRAMBank:: ; c08e
 	db
@@ -191,7 +183,7 @@ wc0d6:: ; c0d6
 wRoomTransitionParam:: ; c0d7
 	db
 
-wc0d8:: ; c0d8
+wCellFuncBreakFlag:: ; c0d8
 	db
 
 wCollisionAgent:: ; c0d9
@@ -280,7 +272,7 @@ wSlopeInteraction:: ; c189
 wc18c:: ; c18c
 	db
 
-wc18d:: ; c18d
+wUnused_c18d:: ; c18d
 	db
 
 wc18e:: ds 8 * 2 ; c18e
@@ -379,7 +371,7 @@ wROMBank:: ; c5ff
 	db
 
 wc600:: ; c600
-	ds $200
+	ds 4 * $80
 
 wVBlankFuncExtended:: ; c800
 	ds $200
@@ -765,11 +757,8 @@ wcce7:: ; cce7
 
 ; the world is divided in a grid,
 ; with each cell being 16x16 units in dimension
-; these store the y and x floor cells of the current position
-; as well as the SRAM bank of that floor
-wFloorSRAMBank:: db ; cce9
-wYCell:: db ; ccea
-wXCell:: db ; cceb
+wCellPtrBank:: db ; cce9
+wCellPtr:: dw ; ccea
 
 wccec:: ; ccec
 	db
@@ -854,10 +843,9 @@ wFadeSpeed:: ; ced7
 wRoomAnimatedTilesEnabled:: db ; ced8
 wRoomAnimatedPalsEnabled::  db ; ced9
 
-wceda:: db ; ceda
+wMultiCellBlockParam:: db ; ceda
 wcedb:: db ; cedb
-wcedc:: db ; cedc
-wcedd:: db ; cedd
+wcedc:: dw ; cedc
 wcede:: db ; cede
 wcedf:: db ; cedf
 

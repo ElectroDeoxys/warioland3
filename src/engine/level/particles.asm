@@ -979,7 +979,7 @@ Func_ce3e:
 	and $f0
 	swap a
 	ld d, a
-	ld a, [wFloorSRAMBank]
+	ld a, [wCellPtrBank]
 	dec a
 	add a
 	add d

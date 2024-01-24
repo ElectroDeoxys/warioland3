@@ -163,8 +163,11 @@ StartRoom_FromTransition:
 	ldh [rLCDC], a
 	ret
 
-Func_861c:
-	call .Func_867f
+ProcessMultiCellBlock:
+	call .ProcessBlockCells
+
+	; do normal level stuff
+
 	farcall UpdateParticles
 
 	ldh a, [rSVBK]
@@ -198,96 +201,107 @@ Func_861c:
 	sramswitch
 	ret
 
-.Func_867f:
-	ld a, [wceda]
-	and $0f
+.ProcessBlockCells:
+	ld a, [wMultiCellBlockParam]
+	and %1111
 	add $10
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	and $08
 	ld [wcede], a
+
 .loop
-	ld a, [wceda]
-	and $07
+	ld a, [wMultiCellBlockParam]
+	and %111
 	dec a
-	jr z, .asm_86c1
+	jr z, .right_cell
 	dec a
-	jr z, .asm_86d8
+	jr z, .left_cell
 	dec a
-	jr z, .asm_86ef
-	ld a, [wcedc]
+	jr z, .down_cell
+
+; up cell
+	; get cell above
+	ld a, [wcedc + 0]
 	inc a
 	ld h, a
-	ld [wYCell], a
-	cp $c0
+	ld [wCellPtr + 0], a
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	ld a, [wcedb]
-	jr nz, .asm_86b5
-	ld a, $a0
+	jr nz, .no_wrap_1
+	ld a, HIGH(STARTOF(SRAM))
 	ld h, a
-	ld [wYCell], a
+	ld [wCellPtr + 0], a
 	ld a, [wcedb]
 	inc a
-.asm_86b5
-	ld [wFloorSRAMBank], a
-	ld a, [wcedd]
+.no_wrap_1
+	ld [wCellPtrBank], a
+	ld a, [wcedc + 1]
 	ld l, a
-	ld [wXCell], a
-	jr .asm_8712
-.asm_86c1
+	ld [wCellPtr + 1], a
+	jr .process_cell
+
+.right_cell
+	; get cell on right
 	ld a, [wcedb]
-	ld [wFloorSRAMBank], a
-	ld a, [wcedc]
+	ld [wCellPtrBank], a
+	ld a, [wcedc + 0]
 	ld h, a
-	ld [wYCell], a
-	ld a, [wcedd]
+	ld [wCellPtr + 0], a
+	ld a, [wcedc + 1]
 	inc a
 	ld l, a
-	ld [wXCell], a
-	jr .asm_8712
-.asm_86d8
+	ld [wCellPtr + 1], a
+	jr .process_cell
+
+.left_cell
+	; get cell on left
 	ld a, [wcedb]
-	ld [wFloorSRAMBank], a
-	ld a, [wcedd]
+	ld [wCellPtrBank], a
+	ld a, [wcedc + 1]
 	dec a
 	ld l, a
-	ld [wXCell], a
-	ld a, [wcedc]
+	ld [wCellPtr + 1], a
+	ld a, [wcedc + 0]
 	ld h, a
-	ld [wYCell], a
-	jr .asm_8712
-.asm_86ef
-	ld a, [wcedc]
+	ld [wCellPtr + 0], a
+	jr .process_cell
+
+.down_cell
+	; get cell below
+	ld a, [wcedc + 0]
 	dec a
 	ld h, a
-	ld [wYCell], a
-	cp $9f
+	ld [wCellPtr + 0], a
+	cp HIGH(STARTOF(SRAM)) - 1
 	ld a, [wcedb]
-	jr nz, .asm_8708
-	ld a, $bf
+	jr nz, .no_wrap_2
+	ld a, HIGH(STARTOF(SRAM) + SIZEOF(SRAM)) - 1
 	ld h, a
-	ld [wYCell], a
+	ld [wCellPtr + 0], a
 	ld a, [wcedb]
 	dec a
-.asm_8708
-	ld [wFloorSRAMBank], a
-	ld a, [wcedd]
+.no_wrap_2
+	ld [wCellPtrBank], a
+	ld a, [wcedc + 1]
 	ld l, a
-	ld [wXCell], a
-.asm_8712
-	ld a, [wceda]
-	and $f8
-	ld [wceda], a
+	ld [wCellPtr + 1], a
+
+.process_cell
+	ld a, [wMultiCellBlockParam]
+	and $ff ^ %111
+	ld [wMultiCellBlockParam], a
 	farcall ProcessCellFunction
-	ld a, [wceda]
-	and $07
-	jr nz, .asm_8733
-	jp .asm_8739 ; can be jr
-.asm_8733
+	ld a, [wMultiCellBlockParam]
+	and %111
+	jr nz, .continue_loop
+	jp .break ; can be jr
+.continue_loop
 	call Func_bb85
 	jp .loop
 
-.asm_8739
+.break
 	xor a
-	ld [wceda], a
+	ld [wMultiCellBlockParam], a
 	ld [wIsFloorTransition], a
 	ld a, [wPendingSubState]
 	ld [wSubState], a
@@ -526,11 +540,11 @@ Func_896f:
 	call Func_cc0
 	ld c, $01
 	ld a, [wSpawnYCell]
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .asm_8996
 	inc c
 	sub $20
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .asm_8996
 	inc c
 	sub $20
@@ -567,9 +581,9 @@ Func_896f:
 	ld l, a
 	inc h
 	ld a, h
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, .asm_89de
-	ld h, $a0
+	ld h, HIGH(STARTOF(SRAM))
 	ld a, [wccec]
 	inc a
 	ld [wccec], a
@@ -655,11 +669,11 @@ SetWarioPositionToSpawn:
 
 	ld c, $01
 	ld a, [wSpawnYCell]
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .asm_8a6c
 	inc c
 	sub $20
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .asm_8a6c
 	inc c
 	sub $20
@@ -698,9 +712,9 @@ SetWarioPositionToSpawn:
 	ld l, a
 	inc h
 	ld a, h
-	cp $c0
+	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, .asm_8a77
-	ld h, $a0
+	ld h, HIGH(STARTOF(SRAM))
 	ld a, [wccec]
 	inc a
 	ld [wccec], a
@@ -790,11 +804,11 @@ Func_8ad9:
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a
-	ld de, $a0
+	ld de, HIGH(STARTOF(SRAM))
 	ld a, [wCameraConfigFlags]
 	bit CAM_BORDER_RIGHT_F, a
 	jr z, .asm_8b56
-	ld e, $c0
+	ld e, HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 .asm_8b56
 	add hl, de
 	ld a, [wc0b9]
@@ -1147,7 +1161,7 @@ Func_8cd7:
 
 	ld hl, wc0a3
 	call GetCell
-	ld a, [wFloorSRAMBank]
+	ld a, [wCellPtrBank]
 	sramswitch
 	ld a, [wc0a5 + 1]
 	and $08
@@ -1156,7 +1170,7 @@ Func_8cd7:
 	push hl
 	farcall Func_21f51
 	pop hl
-	ld a, [wFloorSRAMBank]
+	ld a, [wCellPtrBank]
 	sramswitch
 	farcall Func_22012
 	jr .asm_8dfd
@@ -1165,7 +1179,7 @@ Func_8cd7:
 	push hl
 	farcall Func_220fc
 	pop hl
-	ld a, [wFloorSRAMBank]
+	ld a, [wCellPtrBank]
 	sramswitch
 	farcall Func_221bb
 

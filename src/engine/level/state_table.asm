@@ -9,7 +9,8 @@ _LevelStateTable:
 	dw DoorTransition
 	dw FastFadeToWhite
 	dw StartRoom_FromTransition
-	dw Func_861c ; SST_LEVEL_07
+
+	dw ProcessMultiCellBlock ; SST_LEVEL_MULTI_CELL_BLOCK
 
 	dw DebugReset
 	dw DebugReset

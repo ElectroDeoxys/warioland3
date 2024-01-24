@@ -4,7 +4,7 @@ Func_d11a:
 	ret nz
 	ld hl, wc0a3
 	call GetCell
-	ld a, [wFloorSRAMBank]
+	ld a, [wCellPtrBank]
 	sramswitch
 	call .Func_d132 ; can be fallthrough
 	ret
@@ -47,9 +47,9 @@ Func_d11a:
 	cp $c0
 	jr nz, .asm_d182
 	ld h, $a0
-	ld a, [wFloorSRAMBank]
+	ld a, [wCellPtrBank]
 	inc a
-	ld [wFloorSRAMBank], a
+	ld [wCellPtrBank], a
 	sramswitch
 .asm_d182
 	dec e
@@ -62,7 +62,7 @@ Func_d186:
 	ret nz
 	ld hl, wc0a3
 	call GetCell
-	ld a, [wFloorSRAMBank]
+	ld a, [wCellPtrBank]
 	sramswitch
 	call Func_d19e
 	ret
