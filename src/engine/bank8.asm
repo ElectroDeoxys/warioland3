@@ -1859,7 +1859,7 @@ SetState_OnFire:
 	and a
 	ret nz
 
-	ld hl, Pals_c820
+	ld hl, WarioOnFirePal
 	call SetWarioPal
 
 	ld a, BANK(WarioHotGfx)
@@ -2079,7 +2079,7 @@ GetTreasure:
 	ld a, FALLING_JUMP_VEL_INDEX
 	ld [wJumpVelIndex], a
 .asm_210ea
-	ld hl, Pals_c800
+	ld hl, WarioDefaultPal
 	call SetWarioPal
 	ld a, BANK(WarioIdleGfx)
 	ld [wDMASourceBank], a
@@ -2326,7 +2326,7 @@ Func_2126a:
 	xor a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
-	ld hl, Pals_c860
+	ld hl, WarioStringPal
 	call SetWarioPal
 
 	ld a, BANK(WarioStringGfx)
@@ -2549,7 +2549,7 @@ ObjInteraction_Electric:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 
-	ld hl, Pals_c870
+	ld hl, WarioElectricPal
 	call SetWarioPal
 
 	ld a, BANK(WarioElectricGfx)

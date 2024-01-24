@@ -1552,7 +1552,7 @@ RecoverFromTransformation_WithoutInvincibility::
 
 ResetLevelMusicWarioPalsAndState::
 	call UpdateLevelMusic
-	ld hl, Pals_c800
+	ld hl, WarioDefaultPal
 	call SetWarioPal
 	ld a, [wJumpVelTable]
 	and a

@@ -1,4 +1,4 @@
-Pals_c800::
+WarioDefaultPal::
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -9,7 +9,7 @@ Pals_c800::
 	rgb 31, 30, 12
 	rgb  6,  5, 26
 
-Pals_c810:
+WarioInvisiblePal:
 	rgb  0, 22, 16
 	rgb  0,  0,  0
 	rgb  0,  7, 11
@@ -20,7 +20,7 @@ Pals_c810:
 	rgb 21, 21, 21
 	rgb 31, 31, 31
 
-Pals_c820:
+WarioOnFirePal:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -31,7 +31,7 @@ Pals_c820:
 	rgb 31,  0,  0
 	rgb  0,  0,  0
 
-Pals_c830:
+WarioHot1Pal:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -42,7 +42,7 @@ Pals_c830:
 	rgb 31,  0,  0
 	rgb  0,  0,  0
 
-Pals_c840:
+WarioHot2Pal:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -53,7 +53,7 @@ Pals_c840:
 	rgb 24,  0,  0
 	rgb  0,  0,  0
 
-Pals_c850:
+WarioHot3Pal:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -64,7 +64,7 @@ Pals_c850:
 	rgb 20,  0,  0
 	rgb  0,  0,  0
 
-Pals_c860:
+WarioStringPal:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -75,7 +75,7 @@ Pals_c860:
 	rgb 31, 31,  0
 	rgb  0,  0,  0
 
-Pals_c870:
+WarioElectricPal:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -87,7 +87,7 @@ Pals_c870:
 	rgb  0,  0,  0
 
 ; unreferenced
-Pals_c880:
+WarioUnused1Pal:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -98,7 +98,7 @@ Pals_c880:
 	rgb 21, 21, 21
 	rgb 31, 31, 31
 
-Pals_c890:
+WarioZombiePal:
 	rgb 21, 21, 21
 	rgb 31, 31, 21
 	rgb  0, 23, 10
@@ -110,7 +110,7 @@ Pals_c890:
 	rgb  0,  0,  0
 
 ; unreferenced
-Pals_c8a0:
+WarioUnused2Pal:
 	rgb 21, 21, 21
 	rgb 31, 31, 26
 	rgb 17, 25, 13
@@ -122,7 +122,7 @@ Pals_c8a0:
 	rgb  0,  0,  0
 
 ; unreferenced
-Pals_c8b0:
+WarioUnused3Pal:
 	rgb 21, 21, 21
 	rgb 31, 31, 27
 	rgb 29, 29, 14
@@ -134,7 +134,7 @@ Pals_c8b0:
 	rgb  0,  0,  0
 
 ; unreferenced
-Pals_c8c0:
+WarioUnused4Pal:
 	rgb 21, 21, 21
 	rgb 31, 31, 29
 	rgb 30, 22, 11
@@ -146,7 +146,7 @@ Pals_c8c0:
 	rgb  0,  0,  0
 
 ; unreferenced
-Pals_c8d0:
+WarioUnused5Pal:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -158,7 +158,7 @@ Pals_c8d0:
 	rgb  0,  0,  0
 
 ; unreferenced
-Pals_c8e0:
+WarioUnused6Pal:
 	rgb 21, 21, 21
 	rgb 31, 31, 25
 	rgb 31, 18, 14
@@ -170,7 +170,7 @@ Pals_c8e0:
 	rgb  0,  0,  0
 
 ; unreferenced
-Pals_c8f0:
+WarioUnused7Pal:
 	rgb 21, 21, 21
 	rgb 31, 31, 17
 	rgb 31, 22, 19
@@ -182,7 +182,7 @@ Pals_c8f0:
 	rgb  0,  0,  0
 
 ; unreferenced
-Pals_c900:
+WarioUnused8Pal:
 	rgb 21, 21, 21
 	rgb 31, 31,  9
 	rgb 31, 27, 25
@@ -193,7 +193,7 @@ Pals_c900:
 	rgb 21, 21, 21
 	rgb  0,  0,  0
 
-Pals_c910:
+WarioBouncyPal:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -204,7 +204,7 @@ Pals_c910:
 	rgb  0, 26, 31
 	rgb 29,  1, 19
 
-Pals_c920:
+WarioBouncyRedPal:
 	rgb  0, 22, 16
 	rgb 31, 30,  1
 	rgb 31,  0,  0
@@ -216,7 +216,7 @@ Pals_c920:
 	rgb 29,  1, 19
 
 ; unreferenced
-Pals_c930:
+WarioUnused9Pal:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -228,7 +228,7 @@ Pals_c930:
 	rgb 29,  1, 19
 
 ; unreferenced
-Pals_c940:
+WarioUnused10Pal:
 	rgb  0, 22, 16
 	rgb  0,  0,  0
 	rgb 31, 30,  1
@@ -239,7 +239,7 @@ Pals_c940:
 	rgb  0, 26, 31
 	rgb 29,  1, 19
 
-Pals_c950:
+WarioVampirePal:
 	rgb 18, 18, 18
 	rgb 31, 31,  4
 	rgb 18, 12, 31
@@ -250,6 +250,8 @@ Pals_c950:
 	rgb 31,  5,  5
 	rgb  0,  0,  0
 
+; unreferenced
+WarioUnused11Pal:
 	rgb 18, 18, 18
 	rgb 31, 31,  4
 	rgb 31, 12,  8
@@ -260,6 +262,8 @@ Pals_c950:
 	rgb 31,  5,  5
 	rgb  0,  0,  0
 
+; unreferenced
+WarioUnused12Pal:
 	rgb 18, 18, 18
 	rgb 31, 31, 31
 	rgb 25, 25, 26
@@ -270,7 +274,7 @@ Pals_c950:
 	rgb 31,  5,  5
 	rgb  0,  0,  0
 
-Pals_c980:
+WarioBubblePal:
 	rgb 10, 10, 10
 	rgb 31, 31, 31
 	rgb 23, 15, 31
@@ -281,7 +285,7 @@ Pals_c980:
 	rgb 11, 15, 31
 	rgb  0,  4, 11
 
-Pals_c990:
+WarioIceSkatinPal:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -292,7 +296,7 @@ Pals_c990:
 	rgb 18, 16, 31
 	rgb  0,  0,  0
 
-Pals_c9a0:
+WarioSnowmanPal:
 	rgb 15, 15, 15
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -303,7 +307,7 @@ Pals_c9a0:
 	rgb  0, 19, 31
 	rgb  0,  0,  0
 
-Pals_c9b0:
+WarioMagicPal:
 	rgb  0, 22, 16
 	rgb 31, 30, 12
 	rgb 29, 14,  0
@@ -314,7 +318,7 @@ Pals_c9b0:
 	rgb  8, 31, 31
 	rgb  6,  5, 26
 
-Pals_c9c0:
+WarioBallPal:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 30,  8,  5
@@ -325,7 +329,7 @@ Pals_c9c0:
 	rgb 31, 30, 12
 	rgb  6,  5, 26
 
-Pals_c9d0:
+WarioBallShotPal:
 	rgb  0, 22, 16
 	rgb 31, 30,  0
 	rgb 30,  0,  3
@@ -336,7 +340,7 @@ Pals_c9d0:
 	rgb 31, 30, 12
 	rgb  6,  5, 26
 
-Pals_c9e0:
+WarioSplitPal:
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10

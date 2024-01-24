@@ -313,15 +313,15 @@ UpdateState_Hot:
 	jr .burnt
 
 .pal_1
-	ld hl, Pals_c830
+	ld hl, WarioHot1Pal
 	call SetWarioPal
 	jr .ok
 .pal_2
-	ld hl, Pals_c840
+	ld hl, WarioHot2Pal
 	call SetWarioPal
 	jr .ok
 .pal_3
-	ld hl, Pals_c850
+	ld hl, WarioHot3Pal
 	call SetWarioPal
 .ok
 	call HandleHotWarioInput
@@ -347,7 +347,7 @@ UpdateState_Hot:
 	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld hl, Pals_c820
+	ld hl, WarioOnFirePal
 	call SetWarioPal
 	ld a, BANK(WarioBurntGfx)
 	ld [wDMASourceBank], a
@@ -2438,7 +2438,7 @@ SetState_TurningInvisible:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 
-	ld hl, Pals_c800
+	ld hl, WarioDefaultPal
 	call SetWarioPal
 
 	ld a, BANK(WarioDizzyGfx)
@@ -2591,7 +2591,7 @@ SetState_PuffyRising:
 	inc a
 	ld [wJumpVelTable], a
 
-	ld hl, Pals_c800
+	ld hl, WarioDefaultPal
 	call SetWarioPal
 
 	ld a, [wDirection]
@@ -2800,7 +2800,7 @@ SetState_ZombieIdling:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 
-	ld hl, Pals_c890
+	ld hl, WarioZombiePal
 	call SetWarioPal
 
 	ld a, BANK(WarioZombieGfx)
@@ -3290,7 +3290,7 @@ UpdateState_ZombieRecovering:
 	add a ; *16
 	ld e, a
 	ld d, $00
-	ld hl, Pals_c890
+	ld hl, WarioZombiePal
 	add hl, de
 	call SetWarioPal
 	ret
@@ -3411,7 +3411,7 @@ SetState_BouncyStart:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 
-	ld hl, Pals_c910
+	ld hl, WarioBouncyPal
 	call SetWarioPal
 
 	ld a, BANK(WarioBouncyGfx)
@@ -3695,7 +3695,7 @@ SetState_BouncyUpsideDown:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 
-	ld hl, Pals_c910
+	ld hl, WarioBouncyPal
 	call SetWarioPal
 
 	ld a, HIGH(Frameset_1fcc82)
@@ -3762,7 +3762,7 @@ Func_2a2e7:
 	ld a, $02
 	ld [wca94], a
 
-	ld hl, Pals_c910
+	ld hl, WarioBouncyPal
 	call SetWarioPal
 
 	ld a, [wDirection]
@@ -4598,7 +4598,7 @@ SetState_VampireTransforming:
 	xor a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
-	ld hl, Pals_c950
+	ld hl, WarioVampirePal
 	call SetWarioPal
 	ld a, BANK(WarioBatGfx)
 	ld [wDMASourceBank], a
@@ -4794,7 +4794,7 @@ Func_2ac7d:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 
-	ld hl, Pals_c980
+	ld hl, WarioBubblePal
 	call SetWarioPal
 	ld a, BANK(WarioBubbleGfx)
 	ld [wDMASourceBank], a
@@ -4860,7 +4860,7 @@ Func_2ad6a:
 	ld [wAnimationFrame], a
 	inc a
 	ld [wWarioStateCycles], a
-	ld hl, Pals_c800
+	ld hl, WarioDefaultPal
 	call SetWarioPal
 	ld a, BANK(WarioSwimGfx)
 	ld [wDMASourceBank], a
@@ -4928,13 +4928,13 @@ Func_2ae3b:
 	xor $1
 	ld [wWarioStateCycles], a
 	jr z, .asm_2ae54
-	ld hl, Pals_c920
+	ld hl, WarioBouncyRedPal
 	add hl, de
 	call SetWarioPal
 	ret
 
 .asm_2ae54
-	ld hl, Pals_c910
+	ld hl, WarioBouncyPal
 	add hl, de
 	call SetWarioPal
 	ret

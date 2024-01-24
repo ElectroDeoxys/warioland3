@@ -1505,7 +1505,7 @@ SetState_Diving:
 	ld [wIsCrouching], a
 	ld [wc0e0], a
 
-	ld hl, Pals_c800
+	ld hl, WarioDefaultPal
 	call SetWarioPal
 	ld a, BANK(WarioSwimGfx)
 	ld [wDMASourceBank], a
@@ -2536,7 +2536,7 @@ UpdateState_StungRecovery:
 
 	ld a, $10
 	ld [wInvincibleCounter], a
-	ld hl, Pals_c800
+	ld hl, WarioDefaultPal
 	call SetWarioPal
 	ld a, -27
 	ld [wCollisionBoxTop], a
@@ -5948,13 +5948,13 @@ HandleInvincibility:
 	ld a, $10
 	ld [wInvincibleCounter], a
 	ld a, [wWarioPalsPtr + 0]
-	cp HIGH(Pals_c810)
+	cp HIGH(WarioInvisiblePal)
 	jr nz, .done
 	ld a, [wWarioPalsPtr + 1]
-	cp LOW(Pals_c810)
+	cp LOW(WarioInvisiblePal)
 	jr nz, .done
 
-	ld hl, Pals_c800
+	ld hl, WarioDefaultPal
 	call SetWarioPal
 .done
 	ret
@@ -5997,18 +5997,18 @@ HandleInvincibility:
 Func_1f6c2:
 	ld a, [wGlobalCounter]
 	and %111
-	jr z, .asm_1f6ce
-	cp $03
-	jr z, .asm_1f6d5
+	jr z, .set_invisible_pal
+	cp 3
+	jr z, .set_default_pal
 	ret
 
-.asm_1f6ce
-	ld hl, Pals_c810
+.set_invisible_pal
+	ld hl, WarioInvisiblePal
 	call SetWarioPal
 	ret
 
-.asm_1f6d5
-	ld hl, Pals_c800
+.set_default_pal
+	ld hl, WarioDefaultPal
 	call SetWarioPal
 	ret
 

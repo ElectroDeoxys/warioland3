@@ -391,14 +391,14 @@ StartRoom_FromLevelStart:
 
 	farcall SetState_Idling
 
-	ld hl, Pals_c800
+	ld hl, WarioDefaultPal
 	ld a, h
 	ld [wWarioPalsPtr + 0], a
 	ld a, l
 	ld [wWarioPalsPtr + 1], a
 	ld de, wTempPals2
 	ld b, 2 palettes
-	ld a, BANK(Pals_c800)
+	ld a, BANK(WarioDefaultPal)
 	ldh [hCallFuncBank], a
 	hcall CopyHLToDE_Short
 	jr .asm_8861
@@ -410,7 +410,7 @@ StartRoom_FromLevelStart:
 	ld l, a
 	ld de, wTempPals2
 	ld b, 2 palettes
-	ld a, BANK(Pals_c800)
+	ld a, BANK(WarioDefaultPal)
 	ldh [hCallFuncBank], a
 	hcall CopyHLToDE_Short
 

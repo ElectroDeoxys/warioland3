@@ -103,7 +103,7 @@ SetState_IceSkatinStart:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 
-	ld hl, Pals_c990
+	ld hl, WarioIceSkatinPal
 	call SetWarioPal
 	ld a, BANK(WarioBubbleGfx)
 	ld [wDMASourceBank], a
@@ -815,7 +815,7 @@ SetState_TurningIntoSnowman:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 
-	ld hl, Pals_c9a0
+	ld hl, WarioSnowmanPal
 	call SetWarioPal
 	ld a, BANK(WarioSnowmanGfx)
 	ld [wDMASourceBank], a
@@ -1551,7 +1551,7 @@ SetState_SplitHit:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 
-	ld hl, Pals_c9e0
+	ld hl, WarioSplitPal
 	call SetWarioPal
 	ld a, BANK(WarioSnowballGfx)
 	ld [wDMASourceBank], a
@@ -2014,7 +2014,7 @@ SetState_BlindIdling:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 
-	ld hl, Pals_c800
+	ld hl, WarioDefaultPal
 	call SetWarioPal
 	ld a, BANK(WarioIdleGfx)
 	ld [wDMASourceBank], a
@@ -2349,7 +2349,7 @@ SetState_Swallowed:
 	ld [wAnimationFrame], a
 	ld [wIsTurning], a
 
-	ld hl, Pals_c800
+	ld hl, WarioDefaultPal
 	call SetWarioPal
 	ld a, BANK(WarioLaunchGfx)
 	ld [wDMASourceBank], a
@@ -2463,7 +2463,7 @@ SetState_Launched:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 
-	ld hl, Pals_c800
+	ld hl, WarioDefaultPal
 	call SetWarioPal
 	ld a, BANK(WarioLaunchGfx)
 	ld [wDMASourceBank], a
@@ -2630,7 +2630,7 @@ SetState_MagicRising:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 
-	ld hl, Pals_c9b0
+	ld hl, WarioMagicPal
 	call SetWarioPal
 	ld a, BANK(WarioMagicGfx)
 	ld [wDMASourceBank], a
@@ -2737,7 +2737,7 @@ SetState_BallStart:
 	ld [wIsRolling], a
 	ld [wIsSmashAttacking], a
 
-	ld hl, Pals_c9c0
+	ld hl, WarioBallPal
 	call SetWarioPal
 	ld a, BANK(WarioBallGfx)
 	ld [wDMASourceBank], a
@@ -2972,7 +2972,7 @@ UpdateState_BallShot:
 	jr .asm_1edc71
 
 .asm_1edc41
-	ld hl, Pals_c9d0
+	ld hl, WarioBallShotPal
 	call SetWarioPal
 
 	xor a
@@ -2985,7 +2985,7 @@ UpdateState_BallShot:
 	jr .asm_1edc71
 
 .asm_1edc5a
-	ld hl, Pals_c9c0
+	ld hl, WarioBallPal
 	call SetWarioPal
 
 	xor a
@@ -3193,7 +3193,7 @@ UpdateState_BallTurning:
 Func_1ede4d:
 	call ClearTransformationValues
 	call UpdateLevelMusic
-	ld hl, Pals_c800
+	ld hl, WarioDefaultPal
 	call SetWarioPal
 	farcall StartJump_FromInput
 	ret
@@ -3202,7 +3202,7 @@ Func_1ede4d:
 Func_1ede69:
 	call ClearTransformationValues
 	call UpdateLevelMusic
-	ld hl, Pals_c800
+	ld hl, WarioDefaultPal
 	call SetWarioPal
 	farcall Func_1e174
 	ret
