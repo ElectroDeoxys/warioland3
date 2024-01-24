@@ -24,7 +24,7 @@ wIntroBGXOffsetCentre:: db ; c087
 wIntroBGXOffsetNear::   db ; c088
 
 ; Hidden Figure fight values
-wc089:: db ; c089
+wHiddenFigureSCYShake:: db ; c089
 wc08a:: db ; c08a
 wc08b:: db ; c08b
 wc08c:: db ; c08c
@@ -183,13 +183,21 @@ wc0d6:: ; c0d6
 wRoomTransitionParam:: ; c0d7
 	db
 
+; if true, will allow cell functions
+; to run the block breaking routines
+; otherwise, just treats these blocks
+; as a default solid collision
 wCellFuncBreakFlag:: ; c0d8
 	db
 
-wCollisionAgent:: ; c0d9
+; which special entity is causing the collision,
+; either a thrown object or Robo-mouse
+wCellFuncSpecialCollision:: ; c0d9
 	db
 
-wc0da:: ; c0da
+; if true, then the entity causing the collision
+; is Wario, otherwise it's a level object
+wCellFuncWarioFlag:: ; c0da
 	db
 
 ; current position's interaction type with the water

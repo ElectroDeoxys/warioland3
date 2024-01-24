@@ -1,5 +1,5 @@
 ; processes the cell function of wCellPtrBank:wCellPtr
-ProcessCellFunction:
+ProcessCell:
 	xor a ; FALSE
 	ld [wc0dd], a
 	ld a, [wCellPtrBank]
@@ -22,26 +22,26 @@ ProcessCellFunction:
 CellFunc_Free:
 	xor a ; SRAM0
 	sramswitch
-	xor a ; FALSE
-	ld [wCellFuncBreakFlag], a
-	ld [wCollisionAgent], a
+	xor a
+	ld [wCellFuncBreakFlag], a ; FALSE
+	ld [wCellFuncSpecialCollision], a
 	ld [wUnused_c18d], a
 	ret
 
 CellFunc_Solid:
 	xor a
 	sramswitch
-	xor a ; FALSE
-	ld [wCellFuncBreakFlag], a
-	ld [wCollisionAgent], a
-	ld a, [wc0da]
+	xor a
+	ld [wCellFuncBreakFlag], a ; FALSE
+	ld [wCellFuncSpecialCollision], a
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jr z, .snap_y_pos
 	ld a, [wSlopeInteraction]
 	and a
 	jr z, .snap_y_pos
 	ld a, [wc0d6]
-	bit 4, a
+	bit COLLISION_UNK4_F, a
 	jr z, .snap_y_pos
 	xor a
 	ld [wUnused_c18d], a
@@ -58,9 +58,9 @@ CellFunc_Solid:
 Func_18064:
 	xor a
 	sramswitch
-	xor a ; FALSE
-	ld [wCellFuncBreakFlag], a
-	ld [wCollisionAgent], a
+	xor a
+	ld [wCellFuncBreakFlag], a ; FALSE
+	ld [wCellFuncSpecialCollision], a
 	ld a, $10
 	ld [wUnused_c18d], a
 	ret
@@ -69,9 +69,9 @@ Func_18064:
 Func_18078:
 	xor a
 	sramswitch
-	xor a ; FALSE
-	ld [wCellFuncBreakFlag], a
-	ld [wCollisionAgent], a
+	xor a
+	ld [wCellFuncBreakFlag], a ; FALSE
+	ld [wCellFuncSpecialCollision], a
 	ld a, $01
 	ld [wUnused_c18d], a
 	ret
@@ -79,16 +79,16 @@ Func_18078:
 Func_1808c:
 	xor a
 	sramswitch
-	xor a ; FALSE
-	ld [wCellFuncBreakFlag], a
-	ld [wCollisionAgent], a
+	xor a
+	ld [wCellFuncBreakFlag], a ; FALSE
+	ld [wCellFuncSpecialCollision], a
 	xor a
 	ld [wUnused_c18d], a
 	ret
 
 CellFunc_1809f:
 	ld a, [wc0d6]
-	bit 0, a
+	bit COLLISION_DOWN_F, a
 	jp z, CellFunc_Free
 	ldh a, [hYPosLo]
 	add $10
@@ -99,7 +99,7 @@ CellFunc_1809f:
 	jr RightSlopeCollision
 
 CellFunc_180b5:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jr z, .asm_180c3
 	ld a, [wWarioState]
@@ -107,7 +107,7 @@ CellFunc_180b5:
 	jp z, CellFunc_Solid
 .asm_180c3
 	ld a, [wc0d6]
-	and %11
+	and COLLISION_DOWN | COLLISION_UNK1
 	jp z, CellFunc_Free
 	ldh a, [hYPosLo]
 	sub $10
@@ -119,10 +119,10 @@ CellFunc_180b5:
 
 CellFunc_RightSlope:
 	ld a, [wc0d6]
-	and %11
+	and COLLISION_DOWN | COLLISION_UNK1
 	jp z, CellFunc_Free
-	ld a, [wc0d6]
-	bit 1, a
+	ld a, [wc0d6] ; unnecessary
+	bit COLLISION_UNK1_F, a
 	jr z, RightSlopeCollision
 	ldh a, [hYPosLo]
 	and $0f
@@ -149,9 +149,9 @@ RightSlopeCollision:
 	adc 0
 	ldh [hYPosHi], a
 	ld a, [wc0d6]
-	and %11
+	and COLLISION_DOWN | COLLISION_UNK1
 	jr z, .asm_18126
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jr nz, .set_slope_interaction
 	ld a, $11
@@ -165,7 +165,7 @@ RightSlopeCollision:
 
 CellFunc_18129:
 	ld a, [wc0d6]
-	bit 0, a
+	bit COLLISION_DOWN_F, a
 	jp z, CellFunc_Free
 	ldh a, [hYPosLo]
 	add $10
@@ -176,7 +176,7 @@ CellFunc_18129:
 	jr LeftSlopeCollision
 
 CellFunc_1813f:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jr z, .asm_1814d
 	ld a, [wWarioState]
@@ -184,7 +184,7 @@ CellFunc_1813f:
 	jp z, CellFunc_Solid
 .asm_1814d
 	ld a, [wc0d6]
-	and %11
+	and COLLISION_DOWN | COLLISION_UNK1
 	jp z, CellFunc_Free
 	ldh a, [hYPosLo]
 	sub $10
@@ -196,9 +196,9 @@ CellFunc_1813f:
 
 CellFunc_LeftSlope:
 	ld a, [wc0d6]
-	and %11
+	and COLLISION_DOWN | COLLISION_UNK1
 	jp z, CellFunc_Free
-	bit 1, a
+	bit COLLISION_UNK1_F, a
 	jr z, LeftSlopeCollision
 	ldh a, [hYPosLo]
 	and $0f
@@ -211,7 +211,7 @@ CellFunc_LeftSlope:
 
 LeftSlopeCollision:
 	ld a, [wc0d6]
-	and %11
+	and COLLISION_DOWN | COLLISION_UNK1
 	jr z, .asm_181a9
 	ldh a, [hXPosLo]
 	and $0f
@@ -225,7 +225,7 @@ LeftSlopeCollision:
 	ldh a, [hYPosHi]
 	adc 0
 	ldh [hYPosHi], a
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jr nz, .set_slope_interaction
 	ld a, $12
@@ -240,11 +240,11 @@ LeftSlopeCollision:
 CellFunc_Water:
 	ld a, TRUE
 	ld [wc0dd], a
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jp z, CellFunc_Free
 	ld a, SUBMERSIBLE_WATER
 	ld [wWaterInteraction], a
@@ -252,7 +252,7 @@ CellFunc_Water:
 
 CellFunc_RightCurrent:
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jp z, CellFunc_Water
 	ld a, CURRENT_RIGHT
 	ld [wWaterCurrent], a
@@ -260,7 +260,7 @@ CellFunc_RightCurrent:
 
 CellFunc_UpCurrent:
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jp z, CellFunc_Water
 	ld a, CURRENT_UP
 	ld [wWaterCurrent], a
@@ -268,7 +268,7 @@ CellFunc_UpCurrent:
 
 CellFunc_LeftCurrent:
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jp z, CellFunc_Water
 	ld a, CURRENT_LEFT
 	ld [wWaterCurrent], a
@@ -276,7 +276,7 @@ CellFunc_LeftCurrent:
 
 CellFunc_DownCurrent:
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jp z, CellFunc_Water
 	ld a, CURRENT_DOWN
 	ld [wWaterCurrent], a
@@ -286,11 +286,11 @@ CellFunc_Floor:
 	ld a, TRUE
 	ld [wc1ca], a
 	ld a, [wc0d6]
-	bit 0, a
+	bit COLLISION_DOWN_F, a
 	jr nz, .asm_18228
-	bit 2, a
+	bit COLLISION_UNK2_F, a
 	jr nz, .asm_18228
-	and $b8
+	and COLLISION_UNK3 | COLLISION_UNK4 | COLLISION_UNK5 | COLLISION_UNK7
 	jp nz, CellFunc_Free
 	ldh a, [hYPosLo]
 	and $0f
@@ -298,7 +298,7 @@ CellFunc_Floor:
 	jr c, .asm_18228
 	jp CellFunc_Free
 .asm_18228
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wWarioState]
@@ -310,13 +310,13 @@ CellFunc_Floor:
 
 CellFunc_WaterSurface:
 	ld a, [wc0d6]
-	bit 1, a
+	bit COLLISION_UNK1_F, a
 	jr nz, .asm_18257
 	ldh a, [hYPosLo]
 	and $0e
 	jp nz, CellFunc_Water
 	ld a, [wc0d6]
-	and $05
+	and COLLISION_DOWN | COLLISION_UNK2
 	jr nz, .asm_1825a
 	jp CellFunc_Water
 .asm_18257
@@ -327,17 +327,17 @@ CellFunc_WaterSurface:
 	jp CellFunc_Solid
 
 CellFunc_18262:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp nz, CellFunc_Free
 	ld a, TRUE
 	ld [wc1ca], a
 	ld a, [wc0d6]
-	bit 0, a
+	bit COLLISION_DOWN_F, a
 	jp nz, CellFunc_Solid
-	bit 2, a
+	bit COLLISION_UNK2_F, a
 	jp nz, CellFunc_Solid
-	and $b8
+	and COLLISION_UNK3 | COLLISION_UNK4 | COLLISION_UNK5 | COLLISION_UNK7
 	jp nz, CellFunc_Free
 	ldh a, [hYPosLo]
 	and $0f
@@ -346,11 +346,11 @@ CellFunc_18262:
 	jp CellFunc_Free
 
 CellFunc_Switch:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wc0d6]
-	and $28
+	and COLLISION_UNK3 | COLLISION_UNK5
 	jp z, CellFunc_Solid
 	ld hl, wCellPtr
 	ld a, [hli]
@@ -370,11 +370,11 @@ CellFunc_Switch:
 	jp CellFunc_Solid
 
 CellFunc_Ladder:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jr nz, .set_ladder_interaction
 	jp CellFunc_Free
 .set_ladder_interaction
@@ -383,20 +383,20 @@ CellFunc_Ladder:
 	jp Func_1808c
 
 CellFunc_182dc:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 	jr Func_182ec
 
 CellFunc_LadderTop:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Floor
 ;	fallthrough
 
 Func_182ec:
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jr nz, .asm_182f6
 	jp CellFunc_Floor
 .asm_182f6
@@ -405,11 +405,11 @@ Func_182ec:
 	jp Func_1808c
 
 CellFunc_182fe:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jp z, CellFunc_Free
 	ld a, $01
 	ld [wLadderInteraction], a
@@ -418,11 +418,11 @@ CellFunc_182fe:
 	jp CellFunc_Free
 
 Func_1831a:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jp z, CellFunc_Free
 	ld a, $01
 	ld [wLadderInteraction], a
@@ -431,7 +431,7 @@ Func_1831a:
 	jp CellFunc_Free
 
 CellFunc_NonSolidSpike:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	ld a, [wInvincibleCounter]
@@ -473,7 +473,7 @@ CellFunc_NonSolidSpike:
 	jp CellFunc_Free
 
 CellFunc_SolidSpike:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wInvincibleCounter]
@@ -515,7 +515,7 @@ CellFunc_SolidSpike:
 	jp CellFunc_Solid
 
 CellFunc_WaterSpike:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Water
 	ld a, [wInvincibleCounter]
@@ -528,7 +528,7 @@ CellFunc_WaterSpike:
 	jp CellFunc_Water
 
 CellFunc_DownPipe_Left:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 
@@ -539,7 +539,7 @@ CellFunc_DownPipe_Left:
 	jp nz, CellFunc_Solid
 .asm_1843d
 	ld a, [wc0d6]
-	and $01
+	and COLLISION_DOWN
 	jp z, CellFunc_Solid
 	ld a, [wJoypadDown]
 	bit D_DOWN_F, a
@@ -554,7 +554,7 @@ CellFunc_DownPipe_Left:
 	jr EnterPipeDown
 
 CellFunc_DownPipe_Right:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 
@@ -565,7 +565,7 @@ CellFunc_DownPipe_Right:
 	jp nz, CellFunc_Solid
 .asm_18474
 	ld a, [wc0d6]
-	and $01
+	and COLLISION_DOWN
 	jp z, CellFunc_Solid
 	ld a, [wJoypadDown]
 	bit D_DOWN_F, a
@@ -617,7 +617,7 @@ EnterPipeDown:
 	jp CellFunc_Solid
 
 CellFunc_UpPipe_Left:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 
@@ -628,7 +628,7 @@ CellFunc_UpPipe_Left:
 	jp nz, CellFunc_Solid
 .asm_1850f
 	ld a, [wc0d6]
-	and $20
+	and COLLISION_UNK5
 	jp z, CellFunc_Solid
 	ld a, [wJoypadDown]
 	bit D_UP_F, a
@@ -643,7 +643,7 @@ CellFunc_UpPipe_Left:
 	jr EnterPipeUp
 
 CellFunc_UpPipe_Right:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 
@@ -654,7 +654,7 @@ CellFunc_UpPipe_Right:
 	jp nz, CellFunc_Solid
 .asm_18546
 	ld a, [wc0d6]
-	and $20
+	and COLLISION_UNK5
 	jp z, CellFunc_Solid
 	ld a, [wJoypadDown]
 	bit D_UP_F, a
@@ -706,11 +706,11 @@ EnterPipeUp:
 	jp CellFunc_Solid
 
 CellFunc_Door:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jp z, CellFunc_Free
 	ld a, [wJoypadPressed]
 	bit D_UP_F, a
@@ -728,11 +728,11 @@ CellFunc_Door:
 	jp EnterDoor
 
 CellFunc_MinigameDoor:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jp z, CellFunc_Free
 	ld a, [wJoypadPressed]
 	bit D_UP_F, a
@@ -749,11 +749,11 @@ CellFunc_MinigameDoor:
 
 ; unreferenced
 Func_18624:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jp z, CellFunc_Free
 	ld a, [wJoypadPressed]
 	bit D_UP_F, a
@@ -770,11 +770,11 @@ Func_18624:
 
 ; unreferenced
 Func_1864e:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jp z, CellFunc_Free
 	ld a, [wJoypadPressed]
 	bit D_UP_F, a
@@ -844,7 +844,7 @@ EnterDoor:
 	jp CellFunc_Free
 
 CellFunc_186f9:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Water
 	ld a, [wTransformation]
@@ -854,7 +854,7 @@ CellFunc_186f9:
 	jp nz, CellFunc_Water
 .asm_1870b
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jp z, CellFunc_Water
 	ld a, SUBMERSIBLE_WATER
 	ld [wWaterInteraction], a
@@ -867,7 +867,7 @@ CellFunc_186f9:
 	jp CellFunc_Free
 
 CellFunc_18727:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Water
 	ld a, [wTransformation]
@@ -877,7 +877,7 @@ CellFunc_18727:
 	jp nz, CellFunc_Water
 .asm_18739
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jp z, CellFunc_Water
 	ld a, SUBMERSIBLE_WATER
 	ld [wWaterInteraction], a
@@ -890,7 +890,7 @@ CellFunc_18727:
 	jp CellFunc_Free
 
 Func_18755:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	ld a, [wTransformation]
@@ -900,7 +900,7 @@ Func_18755:
 	jp nz, CellFunc_Free
 .asm_18767
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jp z, CellFunc_Free
 	ld a, [wJoypadPressed]
 	bit D_UP_F, a
@@ -911,7 +911,7 @@ Func_18755:
 	jp CellFunc_Free
 
 CellFunc_TreasureDoor:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	ld a, [wJoypadPressed]
@@ -935,51 +935,51 @@ CellFunc_TreasureDoor:
 	jp CellFunc_Free
 
 CellFunc_187b0:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jp z, CellFunc_Free
 	ld a, ROOMTRANSITION_4 | ROOMTRANSITIONF_2
 	ld [wRoomTransitionParam], a
 	jp CellFunc_Free
 
 Func_187c7:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jp z, CellFunc_Free
 	ld a, ROOMTRANSITION_4
 	ld [wRoomTransitionParam], a
 	jp CellFunc_Free
 
 CellFunc_187de:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Water
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jp z, CellFunc_Water
 	ld a, ROOMTRANSITION_4 | ROOMTRANSITIONF_2
 	ld [wRoomTransitionParam], a
 	jp CellFunc_Water
 
 Func_187f5:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Water
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jp z, CellFunc_Water
 	ld a, ROOMTRANSITION_4
 	ld [wRoomTransitionParam], a
 	jp CellFunc_Water
 
 CellFunc_WalkthroughPipe:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	ld a, [wTransformation]
@@ -989,7 +989,7 @@ CellFunc_WalkthroughPipe:
 	jp CellFunc_Free
 
 CellFunc_LightSource:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	ld a, [wTransformation]
@@ -1006,25 +1006,25 @@ CellFunc_LightSource:
 CellFunc_Sand:
 	ld a, TRUE
 	ld [wc0dd], a
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jp z, CellFunc_Free
 	ld a, TRUE
 	ld [wIsInSand], a
 	jp CellFunc_Free
 
 CellFunc_18868:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_VAMPIRE_WARIO
 	jp nz, CellFunc_Free
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jp z, CellFunc_Solid
 	ld a, [wWarioXPos + 1]
 	and $08
@@ -1055,7 +1055,7 @@ CellFunc_18868:
 	jp CellFunc_Solid
 
 CellFunc_188ba:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 	jp CellFunc_Free
@@ -1063,22 +1063,22 @@ CellFunc_188ba:
 CellFunc_NonSubmersibleWater:
 	ld a, TRUE
 	ld [wc0dd], a
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jp z, CellFunc_Free
 	ld a, NON_SUBMERSIBLE_WATER
 	ld [wWaterInteraction], a
 	jp CellFunc_Free
 
 CellFunc_Fire:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	ld a, [wc0d6]
-	and $47
+	and COLLISION_DOWN | COLLISION_UNK1 | COLLISION_UNK2 | COLLISION_UNK6
 	jp nz, CellFunc_Free
 	ld a, [wInvincibleCounter]
 	and a
@@ -1105,11 +1105,11 @@ CellFunc_Fire:
 	ret
 
 CellFunc_Fence:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jr nz, .set_near_fence
 	jp CellFunc_Free
 .set_near_fence
@@ -1118,11 +1118,11 @@ CellFunc_Fence:
 	jp Func_1808c
 
 CellFunc_AirCurrent:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	ld a, [wc0d6]
-	bit 7, a
+	bit COLLISION_UNK7_F, a
 	jr nz, .asm_1895e
 	jp CellFunc_Free
 .asm_1895e
@@ -1146,22 +1146,22 @@ CellFunc_AirCurrent:
 	jp CellFunc_Free
 
 CellFunc_SlipperySolid:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wc0d6]
-	and $01
+	and COLLISION_DOWN
 	jp z, CellFunc_Solid
 	ld a, TRUE
 	ld [wIsOnSlipperyGround], a
 	jp CellFunc_Solid
 
 CellFunc_SlipperyFloor:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Floor
 	ld a, [wc0d6]
-	and $01
+	and COLLISION_DOWN
 	jp z, CellFunc_Floor
 	ld a, TRUE
 	ld [wIsOnSlipperyGround], a
@@ -1183,7 +1183,7 @@ CellFunc_CloudPlatform2:
 	jp CellFunc_Floor
 
 CellFunc_SmallGap:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	ld a, [wTransformation]
@@ -1192,7 +1192,7 @@ CellFunc_SmallGap:
 	jp CellFunc_Solid
 
 CellFunc_189f1:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Free
 	jp CellFunc_Floor
@@ -1236,13 +1236,13 @@ CrackedBlockWithColourCoinCollision:
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wc0d6]
-	bit 4, a
+	bit COLLISION_UNK4_F, a
 	jr nz, .asm_18a36
-	bit 5, a
+	bit COLLISION_UNK5_F, a
 	jr nz, .asm_18a45
-	bit 3, a
+	bit COLLISION_UNK3_F, a
 	jr nz, .asm_18a45
-	and $42
+	and COLLISION_UNK1 | COLLISION_UNK6
 	jr nz, .asm_18a5c
 	jp CellFunc_Solid
 
@@ -1319,7 +1319,7 @@ Func_18aa8:
 	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_18ad6
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wTransformation]
@@ -1355,7 +1355,7 @@ Func_18aec:
 	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_18b17
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wTransformation]
@@ -1396,7 +1396,7 @@ Func_18b2d:
 	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_18b5b
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wTransformation]
@@ -1438,7 +1438,7 @@ Func_18b71:
 	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_18b9f
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wTransformation]
@@ -1481,7 +1481,7 @@ Func_18bb5:
 	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_18be3
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wTransformation]
@@ -1524,7 +1524,7 @@ Func_18bf9:
 	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_18c24
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wTransformation]
@@ -1565,7 +1565,7 @@ Func_18c3a:
 	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_18c68
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wTransformation]
@@ -1607,7 +1607,7 @@ Func_18c7e:
 	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_18cac
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wTransformation]
@@ -1657,22 +1657,22 @@ CellFunc_CrackedBlock_7f:
 ;	fallthrough
 
 CrackedBlockCollision:
-	ld a, [wCollisionAgent]
-	cp $02
+	ld a, [wCellFuncSpecialCollision]
+	cp COLLISION_ROBO_MOUSE_BREAK
 	jp z, Func_19423
-	cp $03
+	cp COLLISION_ROBO_MOUSE_FREE
 	jp z, CellFunc_Free
 	ld a, [wCellFuncBreakFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wc0d6]
-	bit 4, a
+	bit COLLISION_UNK4_F, a
 	jr nz, .asm_18cfc
-	bit 5, a
+	bit COLLISION_UNK5_F, a
 	jr nz, .asm_18d0b
-	bit 3, a
+	bit COLLISION_UNK3_F, a
 	jr nz, .asm_18d0b
-	and $42
+	and COLLISION_UNK1 | COLLISION_UNK6
 	jr nz, .asm_18d22
 	jp CellFunc_Solid
 .asm_18cfc
@@ -1759,10 +1759,10 @@ CellFunc_NonCrackedBlock_7f:
 ;	fallthrough
 
 NonCrackedBlockCollision:
-	ld a, [wCollisionAgent]
-	cp $02
+	ld a, [wCellFuncSpecialCollision]
+	cp COLLISION_ROBO_MOUSE_BREAK
 	jp z, Func_19423
-	cp $03
+	cp COLLISION_ROBO_MOUSE_FREE
 	jp z, CellFunc_Free
 	ld a, [wCellFuncBreakFlag]
 	and a
@@ -1774,19 +1774,19 @@ NonCrackedBlockCollision:
 	cp GARLIC
 	jp c, CellFunc_Solid
 	ld a, [wc0d6]
-	bit 4, a
+	bit COLLISION_UNK4_F, a
 	jr nz, .asm_18dcb
-	bit 5, a
+	bit COLLISION_UNK5_F, a
 	jr nz, .asm_18dda
-	bit 3, a
+	bit COLLISION_UNK3_F, a
 	jr nz, .asm_18dda
-	and $42
+	and COLLISION_UNK1 | COLLISION_UNK6
 	jr nz, .asm_18dc1
 	jp CellFunc_Solid
 
 .fat_wario
 	ld a, [wc0d6]
-	and $42
+	and COLLISION_UNK1 | COLLISION_UNK6
 	jr nz, Func_18df1
 	jp CellFunc_Solid
 
@@ -1878,22 +1878,22 @@ Func_18e2c:
 	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_18e92
-	ld a, [wCollisionAgent]
-	cp $03
+	ld a, [wCellFuncSpecialCollision]
+	cp COLLISION_ROBO_MOUSE_FREE
 	jp z, CellFunc_Free
-	cp $02
+	cp COLLISION_ROBO_MOUSE_BREAK
 	jr z, .asm_18e9a
 	ld a, [wCellFuncBreakFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wc0d6]
-	bit 4, a
+	bit COLLISION_UNK4_F, a
 	jr nz, .asm_18e64
-	bit 5, a
+	bit COLLISION_UNK5_F, a
 	jr nz, .asm_18e73
-	bit 3, a
+	bit COLLISION_UNK3_F, a
 	jr nz, .asm_18e73
-	and $42
+	and COLLISION_UNK1 | COLLISION_UNK6
 	jr nz, .asm_18e8a
 	jp CellFunc_Solid
 .asm_18e64
@@ -1972,22 +1972,22 @@ Func_18ec0:
 	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_18f26
-	ld a, [wCollisionAgent]
-	cp $03
+	ld a, [wCellFuncSpecialCollision]
+	cp COLLISION_ROBO_MOUSE_FREE
 	jp z, CellFunc_Free
-	cp $02
+	cp COLLISION_ROBO_MOUSE_BREAK
 	jr z, .asm_18f2d
 	ld a, [wCellFuncBreakFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wc0d6]
-	bit 4, a
+	bit COLLISION_UNK4_F, a
 	jr nz, .asm_18ef8
-	bit 5, a
+	bit COLLISION_UNK5_F, a
 	jr nz, .asm_18f07
-	bit 3, a
+	bit COLLISION_UNK3_F, a
 	jr nz, .asm_18f07
-	and $42
+	and COLLISION_UNK1 | COLLISION_UNK6
 	jr nz, .asm_18f1e
 	jp CellFunc_Solid
 .asm_18ef8
@@ -2093,22 +2093,22 @@ Func_18f7d:
 	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_18fe3
-	ld a, [wCollisionAgent]
-	cp $03
+	ld a, [wCellFuncSpecialCollision]
+	cp COLLISION_ROBO_MOUSE_FREE
 	jp z, CellFunc_Free
-	cp $02
+	cp COLLISION_ROBO_MOUSE_BREAK
 	jr z, .asm_18feb
 	ld a, [wCellFuncBreakFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wc0d6]
-	bit 4, a
+	bit COLLISION_UNK4_F, a
 	jr nz, .asm_18fb5
-	bit 5, a
+	bit COLLISION_UNK5_F, a
 	jr nz, .asm_18fc4
-	bit 3, a
+	bit COLLISION_UNK3_F, a
 	jr nz, .asm_18fc4
-	and $42
+	and COLLISION_UNK1 | COLLISION_UNK6
 	jr nz, .asm_18fdb
 	jp CellFunc_Solid
 .asm_18fb5
@@ -2187,22 +2187,22 @@ Func_19011:
 	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_19076
-	ld a, [wCollisionAgent]
-	cp $03
+	ld a, [wCellFuncSpecialCollision]
+	cp COLLISION_ROBO_MOUSE_FREE
 	jp z, CellFunc_Free
-	cp $02
+	cp COLLISION_ROBO_MOUSE_BREAK
 	jr z, .asm_1907e
 	ld a, [wCellFuncBreakFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wc0d6]
-	bit 4, a
+	bit COLLISION_UNK4_F, a
 	jr nz, .asm_19049
-	bit 5, a
+	bit COLLISION_UNK5_F, a
 	jr nz, .asm_19058
-	bit 3, a
+	bit COLLISION_UNK3_F, a
 	jr nz, .asm_19058
-	and $42
+	and COLLISION_UNK1 | COLLISION_UNK6
 	jr nz, .asm_1906f
 	jp CellFunc_Solid
 .asm_19049
@@ -2326,10 +2326,10 @@ Func_190fe:
 	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_19185
-	ld a, [wCollisionAgent]
-	cp $03
+	ld a, [wCellFuncSpecialCollision]
+	cp COLLISION_ROBO_MOUSE_FREE
 	jp z, CellFunc_Free
-	cp $02
+	cp COLLISION_ROBO_MOUSE_BREAK
 	jr z, .asm_1918d
 	ld a, [wCellFuncBreakFlag]
 	and a
@@ -2341,18 +2341,18 @@ Func_190fe:
 	cp GARLIC
 	jp c, CellFunc_Solid
 	ld a, [wc0d6]
-	bit 4, a
+	bit COLLISION_UNK4_F, a
 	jr nz, .asm_1914f
-	bit 5, a
+	bit COLLISION_UNK5_F, a
 	jr nz, .asm_1915e
-	bit 3, a
+	bit COLLISION_UNK3_F, a
 	jr nz, .asm_1915e
-	and $42
+	and COLLISION_UNK1 | COLLISION_UNK6
 	jr nz, .asm_19175
 	jp CellFunc_Solid
 .asm_19145
 	ld a, [wc0d6]
-	and $42
+	and COLLISION_UNK1 | COLLISION_UNK6
 	jr nz, .asm_1917d
 	jp CellFunc_Solid
 .asm_1914f
@@ -2435,10 +2435,10 @@ Func_191b3:
 	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_1923a
-	ld a, [wCollisionAgent]
-	cp $03
+	ld a, [wCellFuncSpecialCollision]
+	cp COLLISION_ROBO_MOUSE_FREE
 	jp z, CellFunc_Free
-	cp $02
+	cp COLLISION_ROBO_MOUSE_BREAK
 	jr z, .asm_19241
 	ld a, [wCellFuncBreakFlag]
 	and a
@@ -2450,18 +2450,18 @@ Func_191b3:
 	cp GARLIC
 	jp c, CellFunc_Solid
 	ld a, [wc0d6]
-	bit 4, a
+	bit COLLISION_UNK4_F, a
 	jr nz, .asm_19204
-	bit 5, a
+	bit COLLISION_UNK5_F, a
 	jr nz, .asm_19213
-	bit 3, a
+	bit COLLISION_UNK3_F, a
 	jr nz, .asm_19213
-	and $42
+	and COLLISION_UNK1 | COLLISION_UNK6
 	jr nz, .asm_1922a
 	jp CellFunc_Solid
 .asm_191fa
 	ld a, [wc0d6]
-	and $42
+	and COLLISION_UNK1 | COLLISION_UNK6
 	jr nz, .asm_19232
 	jp CellFunc_Solid
 .asm_19204
@@ -2570,10 +2570,10 @@ Func_19291:
 	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_19318
-	ld a, [wCollisionAgent]
-	cp $03
+	ld a, [wCellFuncSpecialCollision]
+	cp COLLISION_ROBO_MOUSE_FREE
 	jp z, CellFunc_Free
-	cp $02
+	cp COLLISION_ROBO_MOUSE_BREAK
 	jr z, .asm_19320
 	ld a, [wCellFuncBreakFlag]
 	and a
@@ -2585,18 +2585,18 @@ Func_19291:
 	cp GARLIC
 	jp c, CellFunc_Solid
 	ld a, [wc0d6]
-	bit 4, a
+	bit COLLISION_UNK4_F, a
 	jr nz, .asm_192e2
-	bit 5, a
+	bit COLLISION_UNK5_F, a
 	jr nz, .asm_192f1
-	bit 3, a
+	bit COLLISION_UNK3_F, a
 	jr nz, .asm_192f1
-	and $42
+	and COLLISION_UNK1 | COLLISION_UNK6
 	jr nz, .asm_19308
 	jp CellFunc_Solid
 .asm_192d8
 	ld a, [wc0d6]
-	and $42
+	and COLLISION_UNK1 | COLLISION_UNK6
 	jr nz, .asm_19310
 	jp CellFunc_Solid
 .asm_192e2
@@ -2679,10 +2679,10 @@ Func_19346:
 	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_193cc
-	ld a, [wCollisionAgent]
-	cp $03
+	ld a, [wCellFuncSpecialCollision]
+	cp COLLISION_ROBO_MOUSE_FREE
 	jp z, CellFunc_Free
-	cp $02
+	cp COLLISION_ROBO_MOUSE_BREAK
 	jr z, .asm_193d4
 	ld a, [wCellFuncBreakFlag]
 	and a
@@ -2694,18 +2694,18 @@ Func_19346:
 	cp GARLIC
 	jp c, CellFunc_Solid
 	ld a, [wc0d6]
-	bit 4, a
+	bit COLLISION_UNK4_F, a
 	jr nz, .asm_19397
-	bit 5, a
+	bit COLLISION_UNK5_F, a
 	jr nz, .asm_193a6
-	bit 3, a
+	bit COLLISION_UNK3_F, a
 	jr nz, .asm_193a6
-	and $42
+	and COLLISION_UNK1 | COLLISION_UNK6
 	jr nz, .asm_193bd
 	jp CellFunc_Solid
 .asm_1938d
 	ld a, [wc0d6]
-	and $42
+	and COLLISION_UNK1 | COLLISION_UNK6
 	jr nz, .asm_193c5
 	jp CellFunc_Solid
 .asm_19397
@@ -2793,8 +2793,8 @@ CellFunc_EnemyBlock_7f:
 ;	fallthrough
 
 EnemyBlockCollision:
-	ld a, [wCollisionAgent]
-	cp $01
+	ld a, [wCellFuncSpecialCollision]
+	cp COLLISION_THROWN_OBJ
 	jr z, Func_19423
 	jp CellFunc_Solid
 
@@ -2853,7 +2853,7 @@ Func_19467:
 ;	fallthrough
 
 BonfireBlockCollision:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wTransformation]
@@ -2917,14 +2917,14 @@ Func_194b3:
 ;	fallthrough
 
 DoughnutBlockCollision:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wTransformation]
 	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
 	jp nz, CellFunc_Solid
 	ld a, [wc0d6]
-	and $42
+	and COLLISION_UNK1 | COLLISION_UNK6
 	jr nz, .break
 	jp CellFunc_Solid
 .break
@@ -2983,7 +2983,7 @@ Func_19500:
 ;	fallthrough
 
 Func_19502:
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wTransformation]
@@ -3016,7 +3016,7 @@ Func_19522:
 	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_1954a
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wTransformation]
@@ -3056,7 +3056,7 @@ Func_19560:
 	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_19585
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wTransformation]
@@ -3096,7 +3096,7 @@ Func_1959b:
 	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_195c3
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wTransformation]
@@ -3137,7 +3137,7 @@ YarnBlockCollision:
 	ld a, [wMultiCellBlockParam]
 	and $f8
 	jr nz, .asm_19601
-	ld a, [wc0da]
+	ld a, [wCellFuncWarioFlag]
 	and a
 	jp z, CellFunc_Solid
 	ld a, [wTransformation]

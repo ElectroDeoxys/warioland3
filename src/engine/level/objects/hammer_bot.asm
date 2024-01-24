@@ -255,7 +255,7 @@ HammerBotFunc:
 	and $0f
 	sub $10
 	jr nc, .asm_44414
-	call Func_355b
+	call ProcessCellOnLeft
 	and $0f
 	jr z, .asm_44432
 .asm_44414
@@ -286,7 +286,7 @@ HammerBotFunc:
 	add $0f
 	cp $10
 	jr c, .asm_44448
-	call Func_3573
+	call ProcessCellOnRight
 	and $0f
 	jr z, .asm_44466
 .asm_44448
@@ -418,7 +418,7 @@ HammerBotFunc:
 	and $0f
 	sub $08
 	jr nc, .asm_4452a
-	call Func_355b
+	call ProcessCellOnLeft
 	and $0f
 	jr z, .asm_44548
 .asm_4452a
@@ -488,7 +488,7 @@ HammerBotFunc:
 	add $07
 	cp $10
 	jr c, .asm_4459d
-	call Func_3573
+	call ProcessCellOnRight
 	and $0f
 	jr z, .asm_445bb
 .asm_4459d

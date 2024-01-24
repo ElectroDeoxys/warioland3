@@ -264,7 +264,7 @@ MadSciensteinFunc:
 	and $0f
 	sub $07
 	jr nc, .asm_44f1f
-	call Func_355b
+	call ProcessCellOnLeft
 	and $0f
 	jr z, .asm_44f3d
 .asm_44f1f
@@ -299,7 +299,7 @@ MadSciensteinFunc:
 	add $06
 	cp $10
 	jr c, .asm_44f5c
-	call Func_3573
+	call ProcessCellOnRight
 	and $0f
 	jr z, .asm_44f7a
 .asm_44f5c
@@ -554,7 +554,7 @@ MadSciensteinFunc:
 	and $0f
 	sub $07
 	jr nc, .asm_450e8
-	call Func_355b
+	call ProcessCellOnLeft
 	and $0f
 	jr z, .asm_45106
 .asm_450e8
@@ -585,7 +585,7 @@ MadSciensteinFunc:
 	add $06
 	cp $10
 	jr c, .asm_4511c
-	call Func_3573
+	call ProcessCellOnRight
 	and $0f
 	jr z, .asm_4513a
 .asm_4511c

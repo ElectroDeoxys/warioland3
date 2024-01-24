@@ -304,7 +304,7 @@ SpearBotFunc:
 	and $0f
 	sub $06
 	jr nc, .asm_460ef
-	call Func_355b
+	call ProcessCellOnLeft
 	and $0f
 	jr z, .asm_4610d
 .asm_460ef
@@ -339,7 +339,7 @@ SpearBotFunc:
 	add $05
 	cp $10
 	jr c, .asm_4612d
-	call Func_3573
+	call ProcessCellOnRight
 	and $0f
 	jr z, .asm_4614b
 .asm_4612d
@@ -559,7 +559,7 @@ SpearBotFunc:
 	and $0f
 	sub $06
 	jr nc, .asm_4628b
-	call Func_355b
+	call ProcessCellOnLeft
 	and $0f
 	jr z, .asm_462a9
 .asm_4628b
@@ -590,7 +590,7 @@ SpearBotFunc:
 	add $05
 	cp $10
 	jr c, .asm_462bf
-	call Func_3573
+	call ProcessCellOnRight
 	and $0f
 	jr z, .asm_462dd
 .asm_462bf

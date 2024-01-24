@@ -1,25 +1,25 @@
 Func_19706:
 	ld a, TRUE
-	ld [wc0da], a
+	ld [wCellFuncWarioFlag], a
 	call Func_19741
 	xor a ; FALSE
-	ld [wc0da], a
+	ld [wCellFuncWarioFlag], a
 	ret
 
 Func_19713:
 	ld a, TRUE
-	ld [wc0da], a
+	ld [wCellFuncWarioFlag], a
 	call Func_197b1
 	xor a ; FALSE
-	ld [wc0da], a
+	ld [wCellFuncWarioFlag], a
 	ret
 
 Func_19720:
 	ld a, TRUE
-	ld [wc0da], a
+	ld [wCellFuncWarioFlag], a
 	call CheckAirborneCollision
 	xor a
-	ld [wc0da], a
+	ld [wCellFuncWarioFlag], a
 	ld a, b
 	and a
 	jp nz, TriggerFloorTransition
@@ -690,35 +690,35 @@ Func_19b3a:
 Func_19b51::
 	ld hl, hPos
 	call GetCell
-	ld a, 1 << 0
+	ld a, COLLISION_DOWN
 	ld [wc0d6], a
 ;	fallthrough
 
 Func_19b5c:
-	call ProcessCellFunction
+	call ProcessCell
 	ld b, a
 	ret
 
-Func_19b61::
-	call DecrementXCell
+_ProcessCellOnLeft::
+	call DecrementCellPtr
 	ld a, [hl]
 	inc a
 	ret z
 	jr Func_19b5c
 
-Func_19b69::
-	call IncrementXCell
+_ProcessCellOnRight::
+	call IncrementCellPtr
 	ld a, [hl]
 	and a
 	ret z
 	jr Func_19b5c
 
-DecrementXCell:
+DecrementCellPtr:
 	ld hl, wCellPtr + 1
 	dec [hl]
 	ret
 
-IncrementXCell:
+IncrementCellPtr:
 	ld hl, wCellPtr + 1
 	inc [hl]
 	ret
@@ -726,27 +726,27 @@ IncrementXCell:
 Func_19b7b::
 	ld hl, hPos
 	call GetCell
-	ld a, 1 << 1
+	ld a, COLLISION_UNK1
 	ld [wc0d6], a
-	call ProcessCellFunction
+	call ProcessCell
 	ld b, a
 	ret
 
 Func_19b8b::
 	ld hl, hPos
 	call GetCell
-	ld a, 1 << 2
+	ld a, COLLISION_UNK2
 	ld [wc0d6], a
-	call ProcessCellFunction
+	call ProcessCell
 	ld b, a
 	ret
 
 Func_19b9b::
 	ld hl, hPos
 	call GetCell
-	ld a, 1 << 3
+	ld a, COLLISION_UNK3
 	ld [wc0d6], a
-	call ProcessCellFunction
+	call ProcessCell
 	ld b, a
 	ret
 
@@ -757,7 +757,7 @@ Func_19bab:
 	ld a, [hld]
 	ld h, [hl]
 	ld l, a
-	call ProcessCellFunction
+	call ProcessCell
 	ld b, a
 	ret
 
@@ -768,17 +768,17 @@ Func_19bb7:
 	ld a, [hld]
 	ld h, [hl]
 	ld l, a
-	call ProcessCellFunction
+	call ProcessCell
 	ld b, a
 	ret
 
 Func_19bc3::
 	ld hl, hPos
 	call GetCell
-	ld a, 1 << 4
+	ld a, COLLISION_UNK4
 	ld [wc0d6], a
 Func_19bce:
-	call ProcessCellFunction
+	call ProcessCell
 	ld b, a
 	ret
 
@@ -803,26 +803,26 @@ Func_19bd3:
 Func_19beb:
 	ld hl, hPos
 	call GetCell
-	ld a, 1 << 5
+	ld a, COLLISION_UNK5
 	ld [wc0d6], a
-	call ProcessCellFunction
+	call ProcessCell
 	ld b, a
 	ret
 
 Func_19bfb:
 	ld hl, hPos
 	call GetCell
-	ld a, 1 << 6
+	ld a, COLLISION_UNK6
 	ld [wc0d6], a
-	call ProcessCellFunction
+	call ProcessCell
 	ld b, a
 	ret
 
 Func_19c0b:
 	ld hl, hPos
 	call GetCell
-	ld a, 1 << 7
+	ld a, COLLISION_UNK7
 	ld [wc0d6], a
-	call ProcessCellFunction
+	call ProcessCell
 	ld b, a
 	ret

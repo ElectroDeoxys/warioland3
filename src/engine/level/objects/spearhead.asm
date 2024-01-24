@@ -502,7 +502,7 @@ SpearheadFunc:
 	and $f
 	sub 10
 	jr nc, .asm_4036a
-	call Func_355b
+	call ProcessCellOnLeft
 	and $f
 	jr z, .turn_around1
 .asm_4036a
@@ -533,7 +533,7 @@ SpearheadFunc:
 	add 9
 	cp 16
 	jr c, .asm_4039e
-	call Func_3573
+	call ProcessCellOnRight
 	and $f
 	jr z, .turn_around2
 .asm_4039e

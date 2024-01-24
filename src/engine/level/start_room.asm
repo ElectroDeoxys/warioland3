@@ -130,7 +130,7 @@ StartRoom_FromTransition:
 .asm_85a7
 	call UpdateLevelMusic
 	xor a ; FALSE
-	ld [wc0da], a
+	ld [wCellFuncWarioFlag], a
 	ld [wIsFloorTransition], a
 	ldh a, [rSVBK]
 	push af
@@ -290,7 +290,7 @@ ProcessMultiCellBlock:
 	ld a, [wMultiCellBlockParam]
 	and $ff ^ %111
 	ld [wMultiCellBlockParam], a
-	farcall ProcessCellFunction
+	farcall ProcessCell
 	ld a, [wMultiCellBlockParam]
 	and %111
 	jr nz, .continue_loop
@@ -459,7 +459,7 @@ StartRoom_FromLevelStart:
 	xor a
 	ld a, [wCameraSCY + 1]
 	ld [wc08a], a
-	ld [wc089], a
+	ld [wHiddenFigureSCYShake], a
 	ld [wSCY], a
 	ldh [rSCY], a
 	ld a, [wCameraSCX + 1]
@@ -471,7 +471,7 @@ StartRoom_FromLevelStart:
 .not_the_temple
 	call SetWarioScreenPos
 	xor a ; FALSE
-	ld [wc0da], a
+	ld [wCellFuncWarioFlag], a
 
 	ld a, [wceef]
 	and %00111100

@@ -701,7 +701,7 @@ ENDR
 	ld [hli], a
 
 	ld hl, wSCYShake
-	ld a, [wc089]
+	ld a, [wHiddenFigureSCYShake]
 	add [hl]
 	ld [wSCY], a
 	ld a, [wc08b]
@@ -2602,7 +2602,7 @@ Func_62574::
 	xor a ; FALSE
 	ld [wc1ca], a
 	inc a
-	ld [wCollisionAgent], a ; $1
+	ld [wCellFuncSpecialCollision], a ; COLLISION_THROWN_OBJ
 	call Func_352b
 	and a
 	ld a, $03
@@ -2627,8 +2627,8 @@ Func_62574::
 	ld a, [hli]
 	sbc 0
 	ldh [hYPosHi], a
-	ld a, $1
-	ld [wCollisionAgent], a
+	ld a, COLLISION_THROWN_OBJ
+	ld [wCellFuncSpecialCollision], a
 	call Func_358b
 	and a
 	jr nz, .asm_625f7
@@ -2649,8 +2649,8 @@ Func_62574::
 	ld a, [hli]
 	sbc 0
 	ldh [hXPosHi], a
-	ld a, $1
-	ld [wCollisionAgent], a
+	ld a, COLLISION_THROWN_OBJ
+	ld [wCellFuncSpecialCollision], a
 	call Func_3513
 	and $0f
 	jr z, .asm_625ff
@@ -2683,7 +2683,7 @@ Func_62605::
 	xor a ; FALSE
 	ld [wc1ca], a
 	inc a
-	ld [wCollisionAgent], a ; $1
+	ld [wCellFuncSpecialCollision], a ; COLLISION_THROWN_OBJ
 	call Func_352b
 	and a
 	ld a, $03
@@ -2708,8 +2708,8 @@ Func_62605::
 	ld a, [hli]
 	sbc 0
 	ldh [hYPosHi], a
-	ld a, $1
-	ld [wCollisionAgent], a
+	ld a, COLLISION_THROWN_OBJ
+	ld [wCellFuncSpecialCollision], a
 	call Func_358b
 	and a
 	jr nz, .asm_62685
@@ -2727,8 +2727,8 @@ Func_62605::
 	ld a, [hl]
 	adc 0
 	ldh [hXPosHi], a
-	ld a, $1
-	ld [wCollisionAgent], a
+	ld a, COLLISION_THROWN_OBJ
+	ld [wCellFuncSpecialCollision], a
 	call Func_3513
 	and $0f
 	jr z, .asm_6268d
@@ -2816,7 +2816,7 @@ Func_626da::
 	xor a ; FALSE
 	ld [wc1ca], a
 	inc a
-	ld [wCollisionAgent], a ; $1
+	ld [wCellFuncSpecialCollision], a ; COLLISION_THROWN_OBJ
 	call Func_352b
 	and a
 	ld a, $03
@@ -2842,8 +2842,8 @@ Func_626da::
 	ld a, [hli]
 	sbc 0
 	ldh [hYPosHi], a
-	ld a, $1
-	ld [wCollisionAgent], a
+	ld a, COLLISION_THROWN_OBJ
+	ld [wCellFuncSpecialCollision], a
 	call Func_358b
 	and a
 	jr nz, .vanish
@@ -2864,8 +2864,8 @@ Func_626da::
 	ld a, [hli]
 	sbc 0
 	ldh [hXPosHi], a
-	ld a, $1
-	ld [wCollisionAgent], a
+	ld a, COLLISION_THROWN_OBJ
+	ld [wCellFuncSpecialCollision], a
 	call Func_3513
 	and $0f
 	jr nz, .vanish
@@ -2895,7 +2895,7 @@ Func_62768::
 	xor a ; FALSE
 	ld [wc1ca], a
 	inc a
-	ld [wCollisionAgent], a ; $1
+	ld [wCellFuncSpecialCollision], a ; COLLISION_THROWN_OBJ
 	call Func_352b
 	and a
 	ld a, $03
@@ -2921,8 +2921,8 @@ Func_62768::
 	ld a, [hli]
 	sbc 0
 	ldh [hYPosHi], a
-	ld a, $1
-	ld [wCollisionAgent], a
+	ld a, COLLISION_THROWN_OBJ
+	ld [wCellFuncSpecialCollision], a
 	call Func_358b
 	and a
 	jr nz, .vanish
@@ -2940,8 +2940,8 @@ Func_62768::
 	ld a, [hl]
 	adc 0
 	ldh [hXPosHi], a
-	ld a, $1
-	ld [wCollisionAgent], a
+	ld a, COLLISION_THROWN_OBJ
+	ld [wCellFuncSpecialCollision], a
 	call Func_3513
 	and $0f
 	jr nz, .vanish

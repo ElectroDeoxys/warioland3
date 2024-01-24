@@ -15,7 +15,7 @@ UpdateLevel:
 	and a
 	jr nz, .skip_update_wario_state
 	ld a, TRUE
-	ld [wc0da], a
+	ld [wCellFuncWarioFlag], a
 	farcall UpdateWarioStates
 
 .skip_update_wario_state
@@ -29,7 +29,7 @@ UpdateLevel:
 	jr .applied_cam_scrolling
 .shake_override
 	ld hl, wSCYShake
-	ld a, [wc089]
+	ld a, [wHiddenFigureSCYShake]
 	add [hl]
 	ld [wSCY], a
 	ld a, [wc08b]
@@ -40,7 +40,7 @@ UpdateLevel:
 
 .applied_cam_scrolling
 	xor a ; FALSE
-	ld [wc0da], a
+	ld [wCellFuncWarioFlag], a
 
 	ldh a, [rSVBK]
 	push af
@@ -69,10 +69,10 @@ UpdateLevel:
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
 	ld a, TRUE
-	ld [wc0da], a
+	ld [wCellFuncWarioFlag], a
 	farcall ProcessInteractions
 	xor a ; FALSE
-	ld [wc0da], a
+	ld [wCellFuncWarioFlag], a
 	pop af
 	ldh [rSVBK], a
 
@@ -302,7 +302,7 @@ UpdateLevel:
 
 .free_camera
 	ld a, TRUE
-	ld [wc0da], a
+	ld [wCellFuncWarioFlag], a
 	farcall UpdateWarioStates
 
 	ld a, [wCameraSCY + 1]
@@ -311,7 +311,7 @@ UpdateLevel:
 	ld [wSCX], a
 
 	xor a ; FALSE
-	ld [wc0da], a
+	ld [wCellFuncWarioFlag], a
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
@@ -322,11 +322,11 @@ UpdateLevel:
 
 	call SetWarioScreenPos
 	ld a, TRUE
-	ld [wc0da], a
+	ld [wCellFuncWarioFlag], a
 	farcall ProcessInteractions
 
 	xor a ; FALSE
-	ld [wc0da], a
+	ld [wCellFuncWarioFlag], a
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
@@ -355,7 +355,7 @@ UpdateLevel:
 
 .yscroll_camera
 	ld a, TRUE
-	ld [wc0da], a
+	ld [wCellFuncWarioFlag], a
 	farcall UpdateWarioStates
 
 	ld a, [wCameraSCY + 1]
@@ -364,7 +364,7 @@ UpdateLevel:
 	ld [wSCX], a
 
 	xor a ; FALSE
-	ld [wc0da], a
+	ld [wCellFuncWarioFlag], a
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
@@ -375,11 +375,11 @@ UpdateLevel:
 
 	call SetWarioScreenPos
 	ld a, TRUE
-	ld [wc0da], a
+	ld [wCellFuncWarioFlag], a
 	farcall ProcessInteractions
 
 	xor a ; FALSE
-	ld [wc0da], a
+	ld [wCellFuncWarioFlag], a
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")

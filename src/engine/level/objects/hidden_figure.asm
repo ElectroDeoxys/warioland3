@@ -435,7 +435,7 @@ HiddenFigureFunc:
 	ld a, [wCurObjStateDuration]
 	and $03
 	ret nz
-	ld hl, wc089
+	ld hl, wHiddenFigureSCYShake
 	dec [hl]
 	ret
 .asm_4ce31
@@ -617,7 +617,7 @@ Func_4cf70:
 .asm_4cf7f
 	inc [hl]
 .asm_4cf80
-	ld hl, wc089
+	ld hl, wHiddenFigureSCYShake
 	ld c, [hl]
 	add c
 	ld [hl], a

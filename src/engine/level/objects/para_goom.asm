@@ -470,7 +470,7 @@ ParaGoomFunc:
 	and $0f
 	sub b
 	jr nc, .asm_4164e
-	call Func_355b
+	call ProcessCellOnLeft
 	and $0f
 	jr z, .asm_41671
 .asm_4164e
@@ -507,7 +507,7 @@ ParaGoomFunc:
 	add b
 	cp $10
 	jr c, .asm_4168a
-	call Func_3573
+	call ProcessCellOnRight
 	and $0f
 	jr z, .asm_416aa
 .asm_4168a

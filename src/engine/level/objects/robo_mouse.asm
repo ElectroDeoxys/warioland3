@@ -372,8 +372,8 @@ RoboMouseFunc:
 	ld a, [hl]
 	sbc $00
 	ldh [hXPosHi], a
-	ld a, $03
-	ld [wCollisionAgent], a
+	ld a, COLLISION_ROBO_MOUSE_FREE
+	ld [wCellFuncSpecialCollision], a
 	call Func_3513
 	and $0f
 	ret z
@@ -449,8 +449,8 @@ RoboMouseFunc:
 	ld a, [hl]
 	adc $00
 	ldh [hXPosHi], a
-	ld a, $03
-	ld [wCollisionAgent], a
+	ld a, COLLISION_ROBO_MOUSE_FREE
+	ld [wCellFuncSpecialCollision], a
 	call Func_3513
 	and $0f
 	ret z
@@ -595,8 +595,8 @@ RoboMouseFunc:
 	ld a, [hli]
 	sbc $00
 	ldh [hYPosHi], a
-	ld a, $02
-	ld [wCollisionAgent], a
+	ld a, COLLISION_ROBO_MOUSE_BREAK
+	ld [wCellFuncSpecialCollision], a
 	call Func_3513
 	ld hl, wCurObjYPos
 	ld a, [hli]
@@ -605,8 +605,8 @@ RoboMouseFunc:
 	ld a, [hli]
 	sbc $00
 	ldh [hYPosHi], a
-	ld a, $02
-	ld [wCollisionAgent], a
+	ld a, COLLISION_ROBO_MOUSE_BREAK
+	ld [wCellFuncSpecialCollision], a
 	call Func_3513
 	ld hl, wCurObjYPos
 	ld a, [hli]
@@ -615,8 +615,8 @@ RoboMouseFunc:
 	ld a, [hli]
 	sbc $00
 	ldh [hYPosHi], a
-	ld a, $02
-	ld [wCollisionAgent], a
+	ld a, COLLISION_ROBO_MOUSE_BREAK
+	ld [wCellFuncSpecialCollision], a
 	jp Func_3513
 
 .asm_48d39
@@ -639,8 +639,8 @@ RoboMouseFunc:
 	ld a, [hli]
 	sbc $00
 	ldh [hYPosHi], a
-	ld a, $02
-	ld [wCollisionAgent], a
+	ld a, COLLISION_ROBO_MOUSE_BREAK
+	ld [wCellFuncSpecialCollision], a
 	call Func_3513
 	ld hl, wCurObjYPos
 	ld a, [hli]
@@ -649,8 +649,8 @@ RoboMouseFunc:
 	ld a, [hli]
 	sbc $00
 	ldh [hYPosHi], a
-	ld a, $02
-	ld [wCollisionAgent], a
+	ld a, COLLISION_ROBO_MOUSE_BREAK
+	ld [wCellFuncSpecialCollision], a
 	call Func_3513
 	ld hl, wCurObjYPos
 	ld a, [hli]
@@ -659,6 +659,6 @@ RoboMouseFunc:
 	ld a, [hli]
 	sbc $00
 	ldh [hYPosHi], a
-	ld a, $02
-	ld [wCollisionAgent], a
+	ld a, COLLISION_ROBO_MOUSE_BREAK
+	ld [wCellFuncSpecialCollision], a
 	jp Func_3513

@@ -235,7 +235,7 @@ DoughnuteerFunc:
 	and $0f
 	sub $06
 	jr nc, .asm_41c21
-	call Func_355b
+	call ProcessCellOnLeft
 	and $0f
 	jr z, .asm_41c3f
 .asm_41c21
@@ -270,7 +270,7 @@ DoughnuteerFunc:
 	add $05
 	cp $10
 	jr c, .asm_41c5e
-	call Func_3573
+	call ProcessCellOnRight
 	and $0f
 	jr z, .asm_41c7c
 .asm_41c5e
@@ -521,7 +521,7 @@ DoughnuteerFunc:
 	and $0f
 	sub $06
 	jr nc, .asm_41de2
-	call Func_355b
+	call ProcessCellOnLeft
 	and $0f
 	jr z, .asm_41e00
 .asm_41de2
@@ -552,7 +552,7 @@ DoughnuteerFunc:
 	add $05
 	cp $10
 	jr c, .asm_41e16
-	call Func_3573
+	call ProcessCellOnRight
 	and $0f
 	jr z, .asm_41e34
 .asm_41e16
