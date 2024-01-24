@@ -2521,25 +2521,10 @@ EnemyGroupGfx0:
 
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx1:
 	db $00
@@ -2555,25 +2540,10 @@ EnemyGroupGfx1:
 	dw BeamBotData
 	dw NULL
 
-	rgb 31, 31, 31
-	rgb 29, 29, 23
-	rgb  5, 20,  5
-	rgb  0,  0,  5
-
-	rgb  0, 25,  0
-	rgb 31, 31, 20
-	rgb  0, 20, 31
-	rgb  2,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 26
-	rgb 31,  5,  5
-	rgb  0,  0,  3
-
-	rgb  0, 25,  0
-	rgb 31, 31, 15
-	rgb 10, 17, 31
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/silky.pal"
+INCLUDE "gfx/pals/count_richtertoffen.pal"
+INCLUDE "gfx/pals/doughnuteer.pal"
+INCLUDE "gfx/pals/beam_bot.pal"
 
 EnemyGroupGfx2:
 	db $00
@@ -2589,25 +2559,10 @@ EnemyGroupGfx2:
 	dw TorchData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb  0, 25,  0
-	rgb 31, 31, 25
-	rgb  5, 25, 31
-	rgb  3,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 26
-	rgb 31, 10, 10
-	rgb  5,  0,  0
-
-	rgb  0, 25,  0
-	rgb 31, 31, 10
-	rgb 31,  0,  0
-	rgb 10,  0,  0
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/blue_bird.pal"
+INCLUDE "gfx/pals/futamogu1.pal"
+INCLUDE "gfx/pals/torch.pal"
 
 EnemyGroupGfx3:
 	db $00
@@ -2623,25 +2578,10 @@ EnemyGroupGfx3:
 	dw OmodonmekaData
 	dw NULL
 
-	rgb 31, 31, 31
-	rgb 29, 29, 23
-	rgb  5, 20,  5
-	rgb  0,  0,  5
-
-	rgb  0, 25,  0
-	rgb 31, 31, 20
-	rgb  0, 20, 31
-	rgb  2,  0,  0
-
-	rgb 31, 31, 27
-	rgb 31, 31, 27
-	rgb 10, 10,  8
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 25
-	rgb  5, 17, 31
-	rgb  3,  0,  0
+INCLUDE "gfx/pals/silky.pal"
+INCLUDE "gfx/pals/count_richtertoffen.pal"
+INCLUDE "gfx/pals/clear_gate.pal"
+INCLUDE "gfx/pals/omodonmeka.pal"
 
 EnemyGroupGfx4:
 	db $00
@@ -2657,25 +2597,10 @@ EnemyGroupGfx4:
 	dw OmodonmekaData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 31, 25
-	rgb  0, 25,  0
-	rgb  3,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 20
-	rgb 31,  8,  8
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 31, 31, 25
-	rgb  5, 17, 31
-	rgb  3,  0,  0
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/webber1.pal"
+INCLUDE "gfx/pals/omodon.pal"
+INCLUDE "gfx/pals/omodonmeka.pal"
 
 EnemyGroupGfx5:
 	db $00
@@ -2691,25 +2616,10 @@ EnemyGroupGfx5:
 	dw OmodonmekaData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 31, 25
-	rgb  0, 25,  0
-	rgb  3,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 20
-	rgb 31,  8,  8
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 31, 31, 25
-	rgb  5, 17, 31
-	rgb  3,  0,  0
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/webber1.pal"
+INCLUDE "gfx/pals/omodon.pal"
+INCLUDE "gfx/pals/omodonmeka.pal"
 
 EnemyGroupGfx6:
 	db $00
@@ -2726,25 +2636,10 @@ EnemyGroupGfx6:
 	dw KushimushiHorizontalData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 31, 31, 20
-	rgb 31, 11,  0
-	rgb  0,  0, 10
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/kushimushi.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx7:
 	db $00
@@ -2757,25 +2652,10 @@ EnemyGroupGfx7:
 	dw MizuuoData
 	dw NULL
 
-	rgb  0, 20,  0
-	rgb 30, 30, 30
-	rgb  3, 27, 31
-	rgb  0,  0,  5
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/mizuuo.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx8:
 	db $00
@@ -2792,25 +2672,10 @@ EnemyGroupGfx8:
 	dw KushimushiHorizontalData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 31, 31, 20
-	rgb 31, 11,  0
-	rgb  0,  0, 10
-
-	rgb 31, 18, 18
-	rgb 31, 31,  0
-	rgb  0, 30,  0
-	rgb  0,  5,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/kushimushi.pal"
+INCLUDE "gfx/pals/big_leaf.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx9:
 	db $00
@@ -2825,25 +2690,10 @@ EnemyGroupGfx9:
 	dw BigLeafSpawnerData
 	dw NULL
 
-	rgb  0, 20,  0
-	rgb 30, 30, 30
-	rgb  3, 27, 31
-	rgb  0,  0,  5
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 18, 18
-	rgb 31, 31,  0
-	rgb  0, 30,  0
-	rgb  0,  5,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/mizuuo.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/big_leaf.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx10:
 	db $00
@@ -2858,25 +2708,10 @@ EnemyGroupGfx10:
 	dw DoughnuteerData
 	dw NULL
 
-	rgb 31, 31, 31
-	rgb 29, 29, 23
-	rgb  5, 20,  5
-	rgb  0,  0,  5
-
-	rgb 31, 31, 31
-	rgb 31, 31, 24
-	rgb 31, 10,  0
-	rgb  0,  0,  5
-
-	rgb 31, 31, 31
-	rgb 31, 31, 26
-	rgb 31,  5,  5
-	rgb  0,  0,  3
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/silky.pal"
+INCLUDE "gfx/pals/orange_bird.pal"
+INCLUDE "gfx/pals/doughnuteer.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx11:
 	db $00
@@ -2892,25 +2727,10 @@ EnemyGroupGfx11:
 	dw FireBotData
 	dw NULL
 
-	rgb 31, 31, 31
-	rgb 26, 31, 28
-	rgb  1, 17,  0
-	rgb  0,  0,  5
-
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb 31, 14,  0
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 26
-	rgb 31,  5,  5
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 31, 31, 15
-	rgb 31,  5,  5
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/snake.pal"
+INCLUDE "gfx/pals/para_goom.pal"
+INCLUDE "gfx/pals/doughnuteer.pal"
+INCLUDE "gfx/pals/fire_bot.pal"
 
 EnemyGroupGfx12:
 	db $00
@@ -2926,25 +2746,10 @@ EnemyGroupGfx12:
 	dw FireBotData
 	dw NULL
 
-	rgb 31, 31, 31
-	rgb 26, 31, 28
-	rgb  1, 17,  0
-	rgb  0,  0,  5
-
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb 31, 14,  0
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 25,  0
-	rgb  0, 31, 25
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 15
-	rgb 31,  5,  5
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/snake.pal"
+INCLUDE "gfx/pals/para_goom.pal"
+INCLUDE "gfx/pals/zombie.pal"
+INCLUDE "gfx/pals/fire_bot.pal"
 
 EnemyGroupGfx13:
 	db $00
@@ -2960,25 +2765,10 @@ EnemyGroupGfx13:
 	dw SmallLeafData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb  0, 20,  1
-	rgb 31, 31, 23
-	rgb 15,  5,  5
-	rgb  0,  0, 13
-
-	rgb 31, 31, 31
-	rgb 31, 31, 26
-	rgb 31, 10, 10
-	rgb  5,  0,  0
-
-	rgb 31, 31, 31
-	rgb  0, 15,  0
-	rgb 10, 31, 10
-	rgb  0,  5,  0
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/webber2.pal"
+INCLUDE "gfx/pals/futamogu1.pal"
+INCLUDE "gfx/pals/small_leaf.pal"
 
 EnemyGroupGfx14:
 	db $00
@@ -2994,25 +2784,10 @@ EnemyGroupGfx14:
 	dw TorchData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 31, 31, 27
-	rgb 31,  0,  0
-	rgb  0,  0,  5
-
-	rgb 31, 31, 31
-	rgb 31, 31, 26
-	rgb 31, 10, 10
-	rgb  5,  0,  0
-
-	rgb  0, 25,  0
-	rgb 31, 31, 10
-	rgb 31,  0,  0
-	rgb 10,  0,  0
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/appleby.pal"
+INCLUDE "gfx/pals/futamogu1.pal"
+INCLUDE "gfx/pals/torch.pal"
 
 EnemyGroupGfx15:
 	db $00
@@ -3028,25 +2803,10 @@ EnemyGroupGfx15:
 	dw Barrel2Data
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 25
-	rgb 31,  0,  0
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 31, 31, 10
-	rgb  0, 10, 31
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 31, 27, 27
-	rgb  0, 28,  0
-	rgb  0,  0,  0
-
-	rgb  0, 25,  0
-	rgb 31, 31,  0
-	rgb 25,  0,  0
-	rgb  0,  0,  5
+INCLUDE "gfx/pals/prince_froggy1.pal"
+INCLUDE "gfx/pals/hammer_bot.pal"
+INCLUDE "gfx/pals/spear_bot.pal"
+INCLUDE "gfx/pals/barrel.pal"
 
 EnemyGroupGfx16:
 	db $00
@@ -3063,25 +2823,10 @@ EnemyGroupGfx16:
 	dw SeeingEyeDoorData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb 31, 17,  0
-	rgb  3,  3, 13
-
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb 31, 14,  0
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 26
-	rgb 31, 10, 10
-	rgb  5,  0,  0
-
-	rgb  0, 25,  0
-	rgb 31, 31, 27
-	rgb 31,  2,  2
-	rgb  0,  0,  3
+INCLUDE "gfx/pals/mad_scienstein.pal"
+INCLUDE "gfx/pals/para_goom.pal"
+INCLUDE "gfx/pals/futamogu1.pal"
+INCLUDE "gfx/pals/teruteru.pal"
 
 EnemyGroupGfx17:
 	db $00
@@ -3097,25 +2842,10 @@ EnemyGroupGfx17:
 	dw ClearGate3Data
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb  0, 20,  0
-	rgb 31, 31, 30
-	rgb 31,  0,  0
-	rgb  0,  0,  3
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 27
-	rgb 31, 31, 27
-	rgb 10, 10,  8
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/pneumo.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/clear_gate.pal"
 
 EnemyGroupGfx18:
 	db $00
@@ -3132,25 +2862,10 @@ EnemyGroupGfx18:
 	dw SeeingEyeDoorData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb 31, 17,  0
-	rgb  3,  3, 13
-
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb 31, 14,  0
-	rgb  0,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/mad_scienstein.pal"
+INCLUDE "gfx/pals/para_goom.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/electric_lamp.pal"
 
 EnemyGroupGfx19:
 	db $00
@@ -3165,25 +2880,9 @@ EnemyGroupGfx19:
 	dw ClearGate2Data
 	dw NULL
 
-	rgb  0, 20,  0
-	rgb 31, 31, 10
-	rgb 31,  0,  0
-	rgb  0,  0,  3
-
-	rgb  0, 20,  0
-	rgb 31,  0, 10
-	rgb 31, 24, 17
-	rgb  0,  0,  5
-
-	rgb 31, 31, 27
-	rgb 31, 31, 27
-	rgb 10, 10,  8
-	rgb  0,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/sun.pal"
+INCLUDE "gfx/pals/clear_gate.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx20:
 	db $00
@@ -3198,25 +2897,9 @@ EnemyGroupGfx20:
 	dw ClearGate2Data
 	dw NULL
 
-	rgb  0, 20,  0
-	rgb  0, 28, 31
-	rgb 31, 25,  0
-	rgb  0,  0,  3
-
-	rgb  0, 20,  0
-	rgb 31, 31,  0
-	rgb 31, 31, 31
-	rgb  0,  0,  3
-
-	rgb 31, 31, 27
-	rgb 31, 31, 27
-	rgb 10, 10,  8
-	rgb  0,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/moon.pal"
+INCLUDE "gfx/pals/clear_gate.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx21:
 	db $00
@@ -3232,25 +2915,10 @@ EnemyGroupGfx21:
 	dw TorchData
 	dw NULL
 
-	rgb 31, 31, 31
-	rgb 22, 31,  5
-	rgb 31, 10, 31
-	rgb  0,  5,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 10
-	rgb  0, 10, 31
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 31, 27, 27
-	rgb  0, 28,  0
-	rgb  0,  0,  0
-
-	rgb  0, 25,  0
-	rgb 31, 31, 10
-	rgb 31,  0,  0
-	rgb 10,  0,  0
+INCLUDE "gfx/pals/unused_flower.pal"
+INCLUDE "gfx/pals/hammer_bot.pal"
+INCLUDE "gfx/pals/spear_bot.pal"
+INCLUDE "gfx/pals/torch.pal"
 
 EnemyGroupGfx22:
 	db $00
@@ -3266,25 +2934,10 @@ EnemyGroupGfx22:
 	dw DummyObjectData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 27, 20, 10
-	rgb 18, 13,  7
-	rgb  8,  6,  3
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/hand1.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx23:
 	db $00
@@ -3297,25 +2950,10 @@ EnemyGroupGfx23:
 	dw SpearheadData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx24:
 	db $00
@@ -3331,25 +2969,10 @@ EnemyGroupGfx24:
 	dw DummyObjectData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 27
-	rgb 31, 17,  0
-	rgb  0,  0,  3
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 10, 10, 10
-	rgb 31, 31, 31
-	rgb 11, 15, 31
-	rgb  0,  4, 11
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/haridama.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/bubble.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx25:
 	db $00
@@ -3365,25 +2988,10 @@ EnemyGroupGfx25:
 	dw WaterDropData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 20,  0
-	rgb 31, 31, 20
-	rgb 23, 16, 31
-	rgb  0,  0,  0
-
-	rgb  0, 25,  0
-	rgb 23, 30, 31
-	rgb  8, 16, 31
-	rgb  0,  0, 10
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/kobatto.pal"
+INCLUDE "gfx/pals/water_drop.pal"
 
 EnemyGroupGfx26:
 	db $00
@@ -3400,25 +3008,10 @@ EnemyGroupGfx26:
 	dw FireBotData
 	dw NULL
 
-	rgb 31, 31, 31
-	rgb 26, 31, 28
-	rgb  1, 17,  0
-	rgb  0,  0,  5
-
-	rgb 31, 31, 27
-	rgb 31, 31, 27
-	rgb 10, 10,  8
-	rgb  0,  0,  0
-
-	rgb  0, 25,  0
-	rgb 31, 31, 25
-	rgb  8,  8, 31
-	rgb  3,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 15
-	rgb 31,  5,  5
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/snake.pal"
+INCLUDE "gfx/pals/clear_gate.pal"
+INCLUDE "gfx/pals/cart.pal"
+INCLUDE "gfx/pals/fire_bot.pal"
 
 EnemyGroupGfx27:
 	db $00
@@ -3435,25 +3028,10 @@ EnemyGroupGfx27:
 	dw FireBotData
 	dw NULL
 
-	rgb 31, 31, 31
-	rgb 26, 31, 28
-	rgb  1, 17,  0
-	rgb  0,  0,  5
-
-	rgb 31, 31, 27
-	rgb 31, 31, 27
-	rgb 10, 10,  8
-	rgb  0,  0,  0
-
-	rgb  0, 25,  0
-	rgb 31, 31, 25
-	rgb  8,  8, 31
-	rgb  3,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 15
-	rgb 31,  5,  5
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/snake.pal"
+INCLUDE "gfx/pals/clear_gate.pal"
+INCLUDE "gfx/pals/cart.pal"
+INCLUDE "gfx/pals/fire_bot.pal"
 
 EnemyGroupGfx28:
 	db $00
@@ -3470,25 +3048,10 @@ EnemyGroupGfx28:
 	dw FireBotData
 	dw NULL
 
-	rgb 31, 31, 31
-	rgb 26, 31, 28
-	rgb  1, 17,  0
-	rgb  0,  0,  5
-
-	rgb 31, 31, 27
-	rgb 31, 31, 27
-	rgb 10, 10,  8
-	rgb  0,  0,  0
-
-	rgb  0, 25,  0
-	rgb 31, 31, 25
-	rgb  8,  8, 31
-	rgb  3,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 15
-	rgb 31,  5,  5
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/snake.pal"
+INCLUDE "gfx/pals/clear_gate.pal"
+INCLUDE "gfx/pals/cart.pal"
+INCLUDE "gfx/pals/fire_bot.pal"
 
 EnemyGroupGfx29:
 	db $00
@@ -3504,25 +3067,10 @@ EnemyGroupGfx29:
 	dw CartLeftData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 31, 31, 25
-	rgb  8,  8, 31
-	rgb  3,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/cart.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx30:
 	db $00
@@ -3539,25 +3087,10 @@ EnemyGroupGfx30:
 	dw NobiiruRightData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb 31, 14,  0
-	rgb  0,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 25, 31, 31
-	rgb 31,  0,  0
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/para_goom.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/nobiiru.pal"
 
 EnemyGroupGfx31:
 	db $00
@@ -3573,25 +3106,10 @@ EnemyGroupGfx31:
 	dw BeamBotData
 	dw NULL
 
-	rgb 31, 31, 31
-	rgb 29, 29, 23
-	rgb  5, 20,  5
-	rgb  0,  0,  5
-
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb 31, 14,  0
-	rgb  0,  0,  0
-
-	rgb 31, 31, 27
-	rgb 31, 31, 27
-	rgb 10, 10,  8
-	rgb  0,  0,  0
-
-	rgb  0, 25,  0
-	rgb 31, 31, 15
-	rgb 10, 17, 31
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/silky.pal"
+INCLUDE "gfx/pals/para_goom.pal"
+INCLUDE "gfx/pals/clear_gate.pal"
+INCLUDE "gfx/pals/beam_bot.pal"
 
 EnemyGroupGfx32:
 	db $00
@@ -3607,25 +3125,10 @@ EnemyGroupGfx32:
 	dw ElectricLampData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 31, 27
-	rgb 31,  0,  0
-	rgb  0,  0,  5
-
-	rgb 31, 31, 27
-	rgb 31, 31, 27
-	rgb 10, 10,  8
-	rgb  0,  0,  0
-
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/appleby.pal"
+INCLUDE "gfx/pals/clear_gate.pal"
+INCLUDE "gfx/pals/electric_lamp.pal"
 
 EnemyGroupGfx33:
 	db $00
@@ -3640,25 +3143,9 @@ EnemyGroupGfx33:
 	dw SpearBotData
 	dw NULL
 
-	rgb 25, 25, 25
-	rgb 31, 31,  0
-	rgb 31,  0,  0
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 20, 31, 31
-	rgb 11, 12, 31
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 27, 27
-	rgb  0, 28,  0
-	rgb  0,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/robo_mouse.pal"
+INCLUDE "gfx/pals/spear_bot.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx34:
 	db $00
@@ -3674,25 +3161,10 @@ EnemyGroupGfx34:
 	dw TogebaData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb 31, 14,  0
-	rgb  0,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 20,  0
-	rgb 31, 31, 22
-	rgb  0, 18, 31
-	rgb  5,  0,  0
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/para_goom.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/togeba.pal"
 
 EnemyGroupGfx35:
 	db $00
@@ -3708,25 +3180,10 @@ EnemyGroupGfx35:
 	dw BrrrBearData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 27
-	rgb 31, 17,  0
-	rgb  0,  0,  3
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb  3, 31, 30
-	rgb  3,  0,  0
+INCLUDE "gfx/pals/haridama.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/brrr_bear.pal"
 
 EnemyGroupGfx36:
 	db $00
@@ -3743,25 +3200,10 @@ EnemyGroupGfx36:
 	dw NobiiruRightData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 27
-	rgb 31, 17,  0
-	rgb  0,  0,  3
-
-	rgb  0, 20,  1
-	rgb 31, 31, 23
-	rgb 15,  5,  5
-	rgb  0,  0, 13
-
-	rgb 10, 10, 10
-	rgb 31, 31, 31
-	rgb 11, 15, 31
-	rgb  0,  4, 11
-
-	rgb  0, 25,  0
-	rgb 25, 31, 31
-	rgb 31,  0,  0
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/haridama.pal"
+INCLUDE "gfx/pals/webber2.pal"
+INCLUDE "gfx/pals/bubble.pal"
+INCLUDE "gfx/pals/nobiiru.pal"
 
 EnemyGroupGfx37:
 	db $00
@@ -3777,25 +3219,10 @@ EnemyGroupGfx37:
 	dw OmodonmekaData
 	dw NULL
 
-	rgb  0, 22, 16
-	rgb 31, 31, 31
-	rgb 25, 10, 27
-	rgb  7,  3,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 25
-	rgb  0, 25,  0
-	rgb  3,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 20
-	rgb 31,  8,  8
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 31, 31, 25
-	rgb  5, 17, 31
-	rgb  3,  0,  0
+INCLUDE "gfx/pals/owl.pal"
+INCLUDE "gfx/pals/webber1.pal"
+INCLUDE "gfx/pals/omodon.pal"
+INCLUDE "gfx/pals/omodonmeka.pal"
 
 EnemyGroupGfx38:
 	db $00
@@ -3811,25 +3238,10 @@ EnemyGroupGfx38:
 	dw OmodonmekaData
 	dw NULL
 
-	rgb  0, 22, 16
-	rgb 31, 31, 31
-	rgb 25, 10, 27
-	rgb  7,  3,  0
-
-	rgb  0, 20,  0
-	rgb 31, 31, 30
-	rgb 31,  0,  0
-	rgb  0,  0,  3
-
-	rgb 31, 31, 27
-	rgb 31, 31, 27
-	rgb 10, 10,  8
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 25
-	rgb  5, 17, 31
-	rgb  3,  0,  0
+INCLUDE "gfx/pals/owl.pal"
+INCLUDE "gfx/pals/pneumo.pal"
+INCLUDE "gfx/pals/clear_gate.pal"
+INCLUDE "gfx/pals/omodonmeka.pal"
 
 EnemyGroupGfx39:
 	db $00
@@ -3849,25 +3261,10 @@ EnemyGroupGfx39:
 	dw BeamBotData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb 31, 14,  0
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 20
-	rgb 31,  0,  0
-	rgb  0,  0,  3
-
-	rgb  0, 25,  0
-	rgb 31, 31, 15
-	rgb 10, 17, 31
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/para_goom.pal"
+INCLUDE "gfx/pals/zip_line.pal"
+INCLUDE "gfx/pals/beam_bot.pal"
 
 EnemyGroupGfx40:
 	db $00
@@ -3883,25 +3280,10 @@ EnemyGroupGfx40:
 	dw FireBotData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb 31, 14,  0
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 27, 27
-	rgb  0, 28,  0
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 15
-	rgb 31,  5,  5
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/para_goom.pal"
+INCLUDE "gfx/pals/spear_bot.pal"
+INCLUDE "gfx/pals/fire_bot.pal"
 
 EnemyGroupGfx41:
 	db $04
@@ -3915,25 +3297,7 @@ EnemyGroupGfx41:
 	dw SilkPlatformsData
 	dw NULL
 
-	rgb  0, 20, 12
-	rgb 31,  7, 31
-	rgb  5,  2,  0
-	rgb 31, 31, 31
-
-	rgb  0, 20, 12
-	rgb 31, 31, 31
-	rgb 12, 12, 31
-	rgb  1,  0,  0
-
-	rgb  0, 20, 12
-	rgb 31, 31,  0
-	rgb 31,  1,  0
-	rgb  1,  0,  0
-
-	rgb  0, 20, 12
-	rgb  0, 31, 31
-	rgb  0,  4, 23
-	rgb  1,  0,  0
+INCLUDE "gfx/pals/anonster.pal"
 
 EnemyGroupGfx42:
 	db $00
@@ -3950,25 +3314,10 @@ EnemyGroupGfx42:
 	dw FlameBlockTorchData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 29, 29, 29
-	rgb 17, 17, 17
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb 31, 14,  0
-	rgb  0,  0,  0
-
-	rgb  0, 25,  0
-	rgb 31, 31, 15
-	rgb 31,  5,  0
-	rgb  0,  0,  0
-
-	rgb  0, 25,  0
-	rgb 31, 31, 10
-	rgb 31,  0,  0
-	rgb 10,  0,  0
+INCLUDE "gfx/pals/stove.pal"
+INCLUDE "gfx/pals/para_goom.pal"
+INCLUDE "gfx/pals/flame_block.pal"
+INCLUDE "gfx/pals/torch.pal"
 
 EnemyGroupGfx43:
 	db $00
@@ -3984,25 +3333,10 @@ EnemyGroupGfx43:
 	dw DummyObjectData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb  0, 25,  0
-	rgb 31, 31, 25
-	rgb  5, 25, 31
-	rgb  3,  0,  0
-
-	rgb  0, 20,  0
-	rgb 31, 31, 20
-	rgb 23, 16, 31
-	rgb  0,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/blue_bird.pal"
+INCLUDE "gfx/pals/kobatto.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx44:
 	db $00
@@ -4017,25 +3351,10 @@ EnemyGroupGfx44:
 	dw ZombieData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 31, 10
-	rgb  0, 10, 31
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 31, 25,  0
-	rgb  0, 31, 25
-	rgb  0,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/hammer_bot.pal"
+INCLUDE "gfx/pals/zombie.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx45:
 	db $04
@@ -4052,25 +3371,7 @@ EnemyGroupGfx45:
 	dw DollBoyBarrel3Data
 	dw NULL
 
-	rgb  0, 25,  1
-	rgb 31, 31, 25
-	rgb 31,  5,  5
-	rgb  0,  0,  0
-
-	rgb  0, 25,  1
-	rgb  0,  0,  0
-	rgb 31,  5,  5
-	rgb 31, 31, 25
-
-	rgb  0, 25,  1
-	rgb 22, 31, 31
-	rgb  0, 19, 31
-	rgb  0,  0,  0
-
-	rgb  0, 25,  1
-	rgb  0,  3, 20
-	rgb  0, 19, 31
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/doll_boy.pal"
 
 EnemyGroupGfx46:
 	db $00
@@ -4087,25 +3388,10 @@ EnemyGroupGfx46:
 	dw SeeingEyeDoorData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb 31, 17,  0
-	rgb  3,  3, 13
-
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb 31, 14,  0
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 25,  0
-	rgb  0, 31, 25
-	rgb  0,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/mad_scienstein.pal"
+INCLUDE "gfx/pals/para_goom.pal"
+INCLUDE "gfx/pals/zombie.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx47:
 	db $04
@@ -4119,25 +3405,7 @@ EnemyGroupGfx47:
 	dw PalmTreeSpawnerData
 	dw NULL
 
-	rgb 25, 25, 25
-	rgb 31, 21, 18
-	rgb 31,  0,  4
-	rgb  0,  0,  0
-
-	rgb 21, 21, 21
-	rgb 29, 31, 29
-	rgb 31,  2,  5
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb  7, 31, 15
-	rgb 31, 31,  1
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 26, 12,  3
-	rgb 16,  3,  0
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/wormwould.pal"
 
 EnemyGroupGfx48:
 	db $00
@@ -4151,25 +3419,10 @@ EnemyGroupGfx48:
 	dw ParaGoomData
 	dw NULL
 
-	rgb  0, 22, 16
-	rgb 31, 31, 31
-	rgb 25, 10, 27
-	rgb  7,  3,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb 31, 14,  0
-	rgb  0,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/owl.pal"
+INCLUDE "gfx/pals/para_goom.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx49:
 	db $00
@@ -4187,25 +3440,10 @@ EnemyGroupGfx49:
 	dw PillarPlatform3Data
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 27
-	rgb 31, 17,  0
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb 31, 14,  0
-	rgb  0,  0,  0
-
-	rgb  2, 19, 12
-	rgb 15,  4, 11
-	rgb  9,  0,  3
-	rgb  0,  0,  0
-
-	rgb  2, 19, 12
-	rgb 25,  6,  4
-	rgb 12,  0,  0
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/haridama.pal"
+INCLUDE "gfx/pals/para_goom.pal"
+INCLUDE "gfx/pals/futamogu2.pal"
+INCLUDE "gfx/pals/pillar_platform.pal"
 
 EnemyGroupGfx50:
 	db $00
@@ -4221,25 +3459,10 @@ EnemyGroupGfx50:
 	dw FireBotData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb 31, 14,  0
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 26
-	rgb 31,  5,  5
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 31, 31, 15
-	rgb 31,  5,  5
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/para_goom.pal"
+INCLUDE "gfx/pals/doughnuteer.pal"
+INCLUDE "gfx/pals/fire_bot.pal"
 
 EnemyGroupGfx51:
 	db $00
@@ -4255,25 +3478,10 @@ EnemyGroupGfx51:
 	dw FireBotData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb 31, 14,  0
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 25,  0
-	rgb  0, 31, 25
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 15
-	rgb 31,  5,  5
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/para_goom.pal"
+INCLUDE "gfx/pals/zombie.pal"
+INCLUDE "gfx/pals/fire_bot.pal"
 
 EnemyGroupGfx52:
 	db $04
@@ -4287,25 +3495,7 @@ EnemyGroupGfx52:
 	dw YellowBellyPlatformData
 	dw NULL
 
-	rgb  0, 25,  1
-	rgb  3,  0,  0
-	rgb  3,  0,  0
-	rgb  3,  0,  0
-
-	rgb  0, 25,  1
-	rgb  3,  0,  0
-	rgb  3,  0,  0
-	rgb  3,  0,  0
-
-	rgb  0, 25,  1
-	rgb  3,  0,  0
-	rgb  3,  0,  0
-	rgb  3,  0,  0
-
-	rgb  0, 25,  1
-	rgb  0,  0,  0
-	rgb 31,  5,  5
-	rgb 31, 31, 31
+INCLUDE "gfx/pals/yellow_belly.pal"
 
 EnemyGroupGfx53:
 	db $00
@@ -4321,25 +3511,10 @@ EnemyGroupGfx53:
 	dw WaterDropData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 31, 31, 27
-	rgb 31,  0,  0
-	rgb  0,  0,  5
-
-	rgb  0, 20,  0
-	rgb 31, 31, 20
-	rgb 23, 16, 31
-	rgb  0,  0,  0
-
-	rgb  0, 25,  0
-	rgb 23, 30, 31
-	rgb  8, 16, 31
-	rgb  0,  0, 10
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/appleby.pal"
+INCLUDE "gfx/pals/kobatto.pal"
+INCLUDE "gfx/pals/water_drop.pal"
 
 EnemyGroupGfx54:
 	db $00
@@ -4355,25 +3530,10 @@ EnemyGroupGfx54:
 	dw DummyObjectData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 31, 26
-	rgb 31,  5,  5
-	rgb  0,  0,  3
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/doughnuteer.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx55:
 	db $00
@@ -4389,25 +3549,10 @@ EnemyGroupGfx55:
 	dw BrrrBearData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb 15, 15, 15
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb 31, 14,  0
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 20
-	rgb 31,  0,  0
-	rgb  0,  0,  3
-
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb  3, 31, 30
-	rgb  3,  0,  0
+INCLUDE "gfx/pals/prince_froggy2.pal"
+INCLUDE "gfx/pals/para_goom.pal"
+INCLUDE "gfx/pals/zip_line.pal"
+INCLUDE "gfx/pals/brrr_bear.pal"
 
 EnemyGroupGfx56:
 	db $04
@@ -4424,25 +3569,7 @@ EnemyGroupGfx56:
 	dw Dragonfly2Data
 	dw NULL
 
-	rgb 31, 31, 31
-	rgb 29, 30,  0
-	rgb  1, 16,  6
-	rgb  0,  0,  0
-
-	rgb 21, 21, 21
-	rgb 31, 31, 31
-	rgb 28, 10,  0
-	rgb  0,  0,  0
-
-	rgb 10, 10, 10
-	rgb 29, 30,  0
-	rgb 28, 10,  0
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 22,  5
-	rgb 31,  6, 11
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/pesce.pal"
 
 EnemyGroupGfx57:
 	db $00
@@ -4457,25 +3584,10 @@ EnemyGroupGfx57:
 	dw DoughnuteerData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 29, 29, 29
-	rgb 17, 17, 17
-	rgb  0,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 31, 26
-	rgb 31,  5,  5
-	rgb  0,  0,  3
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/stove.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/doughnuteer.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx58:
 	db $00
@@ -4491,25 +3603,10 @@ EnemyGroupGfx58:
 	dw FireBotData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 29, 29, 29
-	rgb 17, 17, 17
-	rgb  0,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 25,  0
-	rgb  0, 31, 25
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 15
-	rgb 31,  5,  5
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/stove.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/zombie.pal"
+INCLUDE "gfx/pals/fire_bot.pal"
 
 EnemyGroupGfx59:
 	db $00
@@ -4526,25 +3623,10 @@ EnemyGroupGfx59:
 	dw NobiiruRightData
 	dw NULL
 
-	rgb 31, 31, 31
-	rgb 26, 31, 28
-	rgb  1, 17,  0
-	rgb  0,  0,  5
-
-	rgb 31, 31, 31
-	rgb 31, 31, 24
-	rgb 31, 10,  0
-	rgb  0,  0,  5
-
-	rgb  0, 25,  0
-	rgb 30, 30, 30
-	rgb 27,  5, 27
-	rgb  0,  0,  5
-
-	rgb  0, 25,  0
-	rgb 25, 31, 31
-	rgb 31,  0,  0
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/snake.pal"
+INCLUDE "gfx/pals/orange_bird.pal"
+INCLUDE "gfx/pals/hebarii.pal"
+INCLUDE "gfx/pals/nobiiru.pal"
 
 EnemyGroupGfx60:
 	db $00
@@ -4560,25 +3642,10 @@ EnemyGroupGfx60:
 	dw Barrel2Data
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 27
-	rgb 31, 17,  0
-	rgb  0,  0,  3
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 31, 31, 28
-	rgb 31,  0,  0
-	rgb  0,  0,  3
-
-	rgb  0, 25,  0
-	rgb 31, 31,  0
-	rgb 25,  0,  0
-	rgb  0,  0,  5
+INCLUDE "gfx/pals/haridama.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/tadpole.pal"
+INCLUDE "gfx/pals/barrel.pal"
 
 EnemyGroupGfx61:
 	db $00
@@ -4594,25 +3661,10 @@ EnemyGroupGfx61:
 	dw WaterDropData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb 15, 15, 15
-	rgb  0,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 20,  0
-	rgb 31, 31, 20
-	rgb 23, 16, 31
-	rgb  0,  0,  0
-
-	rgb  0, 25,  0
-	rgb 23, 30, 31
-	rgb  8, 16, 31
-	rgb  0,  0, 10
+INCLUDE "gfx/pals/prince_froggy2.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/kobatto.pal"
+INCLUDE "gfx/pals/water_drop.pal"
 
 EnemyGroupGfx62:
 	db $00
@@ -4629,25 +3681,10 @@ EnemyGroupGfx62:
 	dw SparkVerticalData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 20,  0
-	rgb 31, 31, 30
-	rgb 31,  0,  0
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 31, 31, 26
-	rgb 31,  5,  5
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 30, 30, 30
-	rgb 31, 31,  0
-	rgb  0,  0,  3
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/pneumo.pal"
+INCLUDE "gfx/pals/doughnuteer.pal"
+INCLUDE "gfx/pals/spark.pal"
 
 EnemyGroupGfx63:
 	db $00
@@ -4663,25 +3700,10 @@ EnemyGroupGfx63:
 	dw BeamBotData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb  0, 20,  0
-	rgb 31, 31, 30
-	rgb 31,  0,  0
-	rgb  0,  0,  3
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 31, 31, 15
-	rgb 10, 17, 31
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/pneumo.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/beam_bot.pal"
 
 EnemyGroupGfx64:
 	db $00
@@ -4697,25 +3719,9 @@ EnemyGroupGfx64:
 	dw BrrrBearData
 	dw NULL
 
-	rgb  0, 20,  0
-	rgb 31, 31, 10
-	rgb 31,  0,  0
-	rgb  0,  0,  3
-
-	rgb  0, 20,  0
-	rgb 31,  0, 10
-	rgb 31, 24, 17
-	rgb  0,  0,  5
-
-	rgb 31, 31, 31
-	rgb 31, 27, 27
-	rgb  0, 28,  0
-	rgb  0,  0,  0
-
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb  3, 31, 30
-	rgb  3,  0,  0
+INCLUDE "gfx/pals/sun.pal"
+INCLUDE "gfx/pals/spear_bot.pal"
+INCLUDE "gfx/pals/brrr_bear.pal"
 
 EnemyGroupGfx65:
 	db $00
@@ -4731,25 +3737,10 @@ EnemyGroupGfx65:
 	dw Barrel1Data
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 31, 24
-	rgb 31, 10,  0
-	rgb  0,  0,  5
-
-	rgb 10, 10, 10
-	rgb 31, 31, 31
-	rgb 11, 15, 31
-	rgb  0,  4, 11
-
-	rgb  0, 25,  0
-	rgb 31, 31,  0
-	rgb 25,  0,  0
-	rgb  0,  0,  5
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/orange_bird.pal"
+INCLUDE "gfx/pals/bubble.pal"
+INCLUDE "gfx/pals/barrel.pal"
 
 EnemyGroupGfx66:
 	db $00
@@ -4765,25 +3756,10 @@ EnemyGroupGfx66:
 	dw Barrel2Data
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb 15, 15, 15
-	rgb  0,  0,  0
-
-	rgb  0, 20,  0
-	rgb 31, 31, 30
-	rgb 31,  0,  0
-	rgb  0,  0,  3
-
-	rgb  9, 16,  8
-	rgb 31, 31,  0
-	rgb 20,  0, 19
-	rgb  8,  0,  5
-
-	rgb  0, 25,  0
-	rgb 31, 31,  0
-	rgb 25,  0,  0
-	rgb  0,  0,  5
+INCLUDE "gfx/pals/prince_froggy2.pal"
+INCLUDE "gfx/pals/pneumo.pal"
+INCLUDE "gfx/pals/wall_crack.pal"
+INCLUDE "gfx/pals/barrel.pal"
 
 EnemyGroupGfx67:
 	db $00
@@ -4799,25 +3775,10 @@ EnemyGroupGfx67:
 	dw FireBotData
 	dw NULL
 
-	rgb 31, 31, 31
-	rgb 26, 31, 28
-	rgb  1, 17,  0
-	rgb  0,  0,  5
-
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb 31, 14,  0
-	rgb  0,  0,  0
-
-	rgb  0, 22, 16
-	rgb 31, 31,  0
-	rgb 31,  0,  0
-	rgb  7,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 15
-	rgb 31,  5,  5
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/snake.pal"
+INCLUDE "gfx/pals/para_goom.pal"
+INCLUDE "gfx/pals/fire.pal"
+INCLUDE "gfx/pals/fire_bot.pal"
 
 EnemyGroupGfx68:
 	db $00
@@ -4834,25 +3795,10 @@ EnemyGroupGfx68:
 	dw NobiiruRightData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 20,  0
-	rgb 31, 31, 20
-	rgb 23, 16, 31
-	rgb  0,  0,  0
-
-	rgb  0, 25,  0
-	rgb 25, 31, 31
-	rgb 31,  0,  0
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/kobatto.pal"
+INCLUDE "gfx/pals/nobiiru.pal"
 
 EnemyGroupGfx69:
 	db $00
@@ -4868,25 +3814,10 @@ EnemyGroupGfx69:
 	dw Barrel2Data
 	dw NULL
 
-	rgb 31, 31, 31
-	rgb 26, 31, 28
-	rgb  1, 17,  0
-	rgb  0,  0,  5
-
-	rgb 31, 31, 31
-	rgb 31, 31, 27
-	rgb 31,  0,  0
-	rgb  0,  0,  5
-
-	rgb  9, 16,  8
-	rgb 31, 31,  0
-	rgb 20,  0, 19
-	rgb  8,  0,  5
-
-	rgb  0, 25,  0
-	rgb 31, 31,  0
-	rgb 25,  0,  0
-	rgb  0,  0,  5
+INCLUDE "gfx/pals/snake.pal"
+INCLUDE "gfx/pals/appleby.pal"
+INCLUDE "gfx/pals/wall_crack.pal"
+INCLUDE "gfx/pals/barrel.pal"
 
 EnemyGroupGfx70:
 	db $04
@@ -4900,25 +3831,7 @@ EnemyGroupGfx70:
 	dw FloatingRingSpawnerData
 	dw NULL
 
-	rgb  0, 20,  0
-	rgb 31, 31, 31
-	rgb 31,  1,  1
-	rgb  0,  0,  0
-
-	rgb  0, 20,  0
-	rgb 31, 27,  0
-	rgb  0, 17, 31
-	rgb  0,  0,  0
-
-	rgb  0, 20,  0
-	rgb 31, 27,  0
-	rgb 29,  1, 29
-	rgb  0,  0,  0
-
-	rgb  0, 20,  0
-	rgb 31, 31, 20
-	rgb  0, 28,  0
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/scowler.pal"
 
 EnemyGroupGfx71:
 	db $00
@@ -4934,25 +3847,10 @@ EnemyGroupGfx71:
 	dw FireBotData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb 31, 20,  0
-	rgb  0,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 27, 27
-	rgb  0, 28,  0
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 15
-	rgb 31,  5,  5
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/water_spark.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/spear_bot.pal"
+INCLUDE "gfx/pals/fire_bot.pal"
 
 EnemyGroupGfx72:
 	db $00
@@ -4968,25 +3866,10 @@ EnemyGroupGfx72:
 	dw SmallOctohonData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 27
-	rgb 31, 17,  0
-	rgb  0,  0,  3
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 10, 10, 10
-	rgb 31, 31, 31
-	rgb 11, 15, 31
-	rgb  0,  4, 11
-
-	rgb  0, 22, 16
-	rgb 31, 31, 28
-	rgb 31,  3,  3
-	rgb  0,  0,  3
+INCLUDE "gfx/pals/haridama.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/bubble.pal"
+INCLUDE "gfx/pals/octohon.pal"
 
 EnemyGroupGfx73:
 	db $00
@@ -5002,25 +3885,10 @@ EnemyGroupGfx73:
 	dw BigOctohonData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 27
-	rgb 31, 17,  0
-	rgb  0,  0,  3
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 10, 10, 10
-	rgb 31, 31, 31
-	rgb 11, 15, 31
-	rgb  0,  4, 11
-
-	rgb  0, 22, 16
-	rgb 31, 31, 28
-	rgb 31,  3,  3
-	rgb  0,  0,  3
+INCLUDE "gfx/pals/haridama.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/bubble.pal"
+INCLUDE "gfx/pals/octohon.pal"
 
 EnemyGroupGfx74:
 	db $00
@@ -5036,25 +3904,10 @@ EnemyGroupGfx74:
 	dw FireBotData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb 15, 15, 15
-	rgb  0,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 13, 13, 31
-	rgb  2,  1, 18
-	rgb  0,  0,  2
-
-	rgb 31, 31, 31
-	rgb 31, 31, 15
-	rgb 31,  5,  5
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/prince_froggy2.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/hand2.pal"
+INCLUDE "gfx/pals/fire_bot.pal"
 
 EnemyGroupGfx75:
 	db $00
@@ -5071,25 +3924,10 @@ EnemyGroupGfx75:
 	dw SparkVerticalData
 	dw NULL
 
-	rgb  0, 22, 16
-	rgb 31, 31, 31
-	rgb 25, 10, 27
-	rgb  7,  3,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 30, 30, 30
-	rgb 31, 31,  0
-	rgb  0,  0,  3
+INCLUDE "gfx/pals/owl.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/spark.pal"
 
 EnemyGroupGfx76:
 	db $00
@@ -5105,25 +3943,10 @@ EnemyGroupGfx76:
 	dw BrrrBearData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 22, 27, 31
-	rgb  0, 13, 20
-	rgb  0,  0,  0
-
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb  3, 31, 30
-	rgb  3,  0,  0
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/rock.pal"
+INCLUDE "gfx/pals/brrr_bear.pal"
 
 EnemyGroupGfx77:
 	db $00
@@ -5139,25 +3962,10 @@ EnemyGroupGfx77:
 	dw FallingSnowSpawnerData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 15, 15, 15
-	rgb 31, 31, 31
-	rgb  0, 19, 31
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/falling_snow.pal"
 
 EnemyGroupGfx78:
 	db $00
@@ -5173,25 +3981,10 @@ EnemyGroupGfx78:
 	dw Barrel2Data
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 31, 27
-	rgb 31,  0,  0
-	rgb  0,  0,  5
-
-	rgb 31, 31, 27
-	rgb 31, 31, 27
-	rgb 10, 10,  8
-	rgb  0,  0,  0
-
-	rgb  0, 25,  0
-	rgb 31, 31,  0
-	rgb 25,  0,  0
-	rgb  0,  0,  5
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/appleby.pal"
+INCLUDE "gfx/pals/clear_gate.pal"
+INCLUDE "gfx/pals/barrel.pal"
 
 EnemyGroupGfx79:
 	db $00
@@ -5207,25 +4000,10 @@ EnemyGroupGfx79:
 	dw Barrel2Data
 	dw NULL
 
-	rgb 31, 31, 31
-	rgb 29, 29, 23
-	rgb  5, 20,  5
-	rgb  0,  0,  5
-
-	rgb 31, 31, 31
-	rgb 31, 31, 27
-	rgb 31,  0,  0
-	rgb  0,  0,  5
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 31, 31,  0
-	rgb 25,  0,  0
-	rgb  0,  0,  5
+INCLUDE "gfx/pals/silky.pal"
+INCLUDE "gfx/pals/appleby.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/barrel.pal"
 
 EnemyGroupGfx80:
 	db $00
@@ -5239,25 +4017,10 @@ EnemyGroupGfx80:
 	dw HammerBotData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 29, 29, 29
-	rgb 17, 17, 17
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 10
-	rgb  0, 10, 31
-	rgb  0,  0,  3
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/stove.pal"
+INCLUDE "gfx/pals/hammer_bot.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx81:
 	db $00
@@ -5273,25 +4036,10 @@ EnemyGroupGfx81:
 	dw FireBotData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 31, 31, 10
-	rgb  0, 10, 31
-	rgb  0,  0,  3
-
-	rgb  0, 22, 16
-	rgb 31, 31,  0
-	rgb 31,  0,  0
-	rgb  7,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 15
-	rgb 31,  5,  5
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/hammer_bot.pal"
+INCLUDE "gfx/pals/fire.pal"
+INCLUDE "gfx/pals/fire_bot.pal"
 
 EnemyGroupGfx82:
 	db $04
@@ -5306,25 +4054,7 @@ EnemyGroupGfx82:
 	dw HatPlatformData
 	dw NULL
 
-	rgb 28, 28, 28
-	rgb 31, 31, 31
-	rgb 31,  0,  0
-	rgb  0,  0,  0
-
-	rgb 28, 28, 28
-	rgb 31, 31, 31
-	rgb  3, 16,  3
-	rgb  0,  0,  0
-
-	rgb 28, 28, 28
-	rgb 21, 21, 21
-	rgb 10, 10, 10
-	rgb  0,  0,  0
-
-	rgb 28, 28, 28
-	rgb 10, 10, 10
-	rgb 21, 21, 21
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/jamano.pal"
 
 EnemyGroupGfx83:
 	db $00
@@ -5340,25 +4070,10 @@ EnemyGroupGfx83:
 	dw OmodonmekaData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 31, 31, 25
-	rgb  0, 25,  0
-	rgb  3,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 20
-	rgb 31,  8,  8
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 31, 31, 25
-	rgb  5, 17, 31
-	rgb  3,  0,  0
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/webber1.pal"
+INCLUDE "gfx/pals/omodon.pal"
+INCLUDE "gfx/pals/omodonmeka.pal"
 
 EnemyGroupGfx84:
 	db $00
@@ -5374,25 +4089,10 @@ EnemyGroupGfx84:
 	dw FireBotData
 	dw NULL
 
-	rgb 31, 31, 31
-	rgb 26, 31, 28
-	rgb  1, 17,  0
-	rgb  0,  0,  5
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 31, 15
-	rgb 31,  5,  5
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/snake.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/fire_bot.pal"
 
 EnemyGroupGfx85:
 	db $00
@@ -5408,25 +4108,10 @@ EnemyGroupGfx85:
 	dw Barrel1Data
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 30, 30, 30
-	rgb 27,  5, 27
-	rgb  0,  0,  5
-
-	rgb  0, 25,  0
-	rgb 31, 31,  0
-	rgb 25,  0,  0
-	rgb  0,  0,  5
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/hebarii.pal"
+INCLUDE "gfx/pals/barrel.pal"
 
 EnemyGroupGfx86:
 	db $04
@@ -5441,25 +4126,7 @@ EnemyGroupGfx86:
 	dw Turtle2Data
 	dw NULL
 
-	rgb 28, 28, 28
-	rgb 26, 16,  4
-	rgb 18,  7,  0
-	rgb  0,  0,  0
-
-	rgb 28, 28, 28
-	rgb 31, 14, 14
-	rgb 31, 31, 31
-	rgb  0,  0,  0
-
-	rgb 28, 28, 28
-	rgb 31,  7,  6
-	rgb 10, 10, 10
-	rgb 10, 10, 10
-
-	rgb 28, 28, 28
-	rgb 31, 31, 31
-	rgb 31, 20, 20
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/muddee.pal"
 
 EnemyGroupGfx87:
 	db $04
@@ -5473,25 +4140,7 @@ EnemyGroupGfx87:
 	dw WolfenbossPlatformData
 	dw NULL
 
-	rgb 28, 28, 28
-	rgb 31, 26,  0
-	rgb 17,  8, 17
-	rgb  0,  0,  0
-
-	rgb 28, 28, 28
-	rgb 31, 26,  0
-	rgb  0, 31,  0
-	rgb  0,  0,  0
-
-	rgb 28, 28, 28
-	rgb 31, 31, 31
-	rgb 21, 21, 21
-	rgb  0, 16, 31
-
-	rgb 28, 28, 28
-	rgb 31, 31,  0
-	rgb 31,  4,  0
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/wolfenboss.pal"
 
 EnemyGroupGfx88:
 	db $00
@@ -5507,25 +4156,10 @@ EnemyGroupGfx88:
 	dw Barrel2Data
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 31, 31, 20
-	rgb  0, 20, 31
-	rgb  2,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 31, 31,  0
-	rgb 25,  0,  0
-	rgb  0,  0,  5
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/count_richtertoffen.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/barrel.pal"
 
 EnemyGroupGfx89:
 	db $00
@@ -5541,25 +4175,10 @@ EnemyGroupGfx89:
 	dw OmodonmekaData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 31, 27
-	rgb 31,  0,  0
-	rgb  0,  0,  5
-
-	rgb 31, 31, 31
-	rgb 31, 31, 20
-	rgb 31,  8,  8
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 31, 31, 25
-	rgb  5, 17, 31
-	rgb  3,  0,  0
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/appleby.pal"
+INCLUDE "gfx/pals/omodon.pal"
+INCLUDE "gfx/pals/omodonmeka.pal"
 
 EnemyGroupGfx90:
 	db $00
@@ -5576,25 +4195,10 @@ EnemyGroupGfx90:
 	dw NobiiruRightData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 31, 24
-	rgb 31, 10,  0
-	rgb  0,  0,  5
-
-	rgb  0, 25,  0
-	rgb 30, 30, 30
-	rgb 27,  5, 27
-	rgb  0,  0,  5
-
-	rgb  0, 25,  0
-	rgb 25, 31, 31
-	rgb 31,  0,  0
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/orange_bird.pal"
+INCLUDE "gfx/pals/hebarii.pal"
+INCLUDE "gfx/pals/nobiiru.pal"
 
 EnemyGroupGfx91:
 	db $00
@@ -5608,25 +4212,10 @@ EnemyGroupGfx91:
 	dw BlueBirdData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb  0, 25,  0
-	rgb 31, 31, 25
-	rgb  5, 25, 31
-	rgb  3,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/blue_bird.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx92:
 	db $00
@@ -5641,25 +4230,10 @@ EnemyGroupGfx92:
 	dw DoughnuteerData
 	dw NULL
 
-	rgb 31, 31, 31
-	rgb 29, 29, 23
-	rgb  5, 20,  5
-	rgb  0,  0,  5
-
-	rgb  0, 25,  0
-	rgb 31, 31, 25
-	rgb  5, 25, 31
-	rgb  3,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 26
-	rgb 31,  5,  5
-	rgb  0,  0,  3
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/silky.pal"
+INCLUDE "gfx/pals/blue_bird.pal"
+INCLUDE "gfx/pals/doughnuteer.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx93:
 	db $00
@@ -5675,25 +4249,10 @@ EnemyGroupGfx93:
 	dw BrrrBearData
 	dw NULL
 
-	rgb 31, 31, 31
-	rgb 29, 29, 23
-	rgb  5, 20,  5
-	rgb  0,  0,  5
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb  3, 31, 30
-	rgb  3,  0,  0
+INCLUDE "gfx/pals/silky.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/brrr_bear.pal"
 
 EnemyGroupGfx94:
 	db $00
@@ -5709,25 +4268,10 @@ EnemyGroupGfx94:
 	dw BrrrBearData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 25,  0
-	rgb  0, 31, 25
-	rgb  0,  0,  0
-
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb  3, 31, 30
-	rgb  3,  0,  0
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/zombie.pal"
+INCLUDE "gfx/pals/brrr_bear.pal"
 
 EnemyGroupGfx95:
 	db $04
@@ -5744,25 +4288,7 @@ EnemyGroupGfx95:
 	dw GKTortoisePlatformData
 	dw NULL
 
-	rgb 28, 28, 28
-	rgb 31, 31, 31
-	rgb 26,  0, 30
-	rgb  0,  0,  0
-
-	rgb 28, 28, 28
-	rgb 31, 31,  0
-	rgb 26,  0, 30
-	rgb  0,  0,  0
-
-	rgb 28, 28, 28
-	rgb 31, 22, 16
-	rgb  3, 21, 16
-	rgb  0,  0,  0
-
-	rgb 28, 28, 28
-	rgb 31, 31, 31
-	rgb 21, 21, 21
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/shoot.pal"
 
 EnemyGroupGfx96:
 	db $00
@@ -5779,25 +4305,10 @@ EnemyGroupGfx96:
 	dw SparkVerticalData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 31, 27
-	rgb 31,  0,  0
-	rgb  0,  0,  5
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 30, 30, 30
-	rgb 31, 31,  0
-	rgb  0,  0,  3
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/appleby.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/spark.pal"
 
 EnemyGroupGfx97:
 	db $00
@@ -5814,25 +4325,10 @@ EnemyGroupGfx97:
 	dw SeeingEyeDoorData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb 31, 17,  0
-	rgb  3,  3, 13
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 31, 31, 28
-	rgb 31,  0,  0
-	rgb  0,  0,  3
-
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb  3, 31, 30
-	rgb  3,  0,  0
+INCLUDE "gfx/pals/mad_scienstein.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/tadpole.pal"
+INCLUDE "gfx/pals/brrr_bear.pal"
 
 EnemyGroupGfx98:
 	db $00
@@ -5848,25 +4344,10 @@ EnemyGroupGfx98:
 	dw FireBotData
 	dw NULL
 
-	rgb 31, 31, 31
-	rgb 29, 29, 23
-	rgb  5, 20,  5
-	rgb  0,  0,  5
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 30, 30, 30
-	rgb 27,  5, 27
-	rgb  0,  0,  5
-
-	rgb 31, 31, 31
-	rgb 31, 31, 15
-	rgb 31,  5,  5
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/silky.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/hebarii.pal"
+INCLUDE "gfx/pals/fire_bot.pal"
 
 EnemyGroupGfx99:
 	db $00
@@ -5880,25 +4361,10 @@ EnemyGroupGfx99:
 	dw WebberData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb  0, 20,  1
-	rgb 31, 31, 23
-	rgb 15,  5,  5
-	rgb  0,  0, 13
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/webber2.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx100:
 	db $00
@@ -5914,25 +4380,10 @@ EnemyGroupGfx100:
 	dw BrrrBearData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 27
-	rgb 31, 31, 27
-	rgb 10, 10,  8
-	rgb  0,  0,  0
-
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb  3, 31, 30
-	rgb  3,  0,  0
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/clear_gate.pal"
+INCLUDE "gfx/pals/brrr_bear.pal"
 
 EnemyGroupGfx101:
 	db $00
@@ -5949,25 +4400,10 @@ EnemyGroupGfx101:
 	dw SparkVerticalData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 31, 31, 25
-	rgb  5, 25, 31
-	rgb  3,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 30, 30, 30
-	rgb 31, 31,  0
-	rgb  0,  0,  3
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/blue_bird.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/spark.pal"
 
 EnemyGroupGfx102:
 	db $00
@@ -5983,25 +4419,10 @@ EnemyGroupGfx102:
 	dw ClearGate3Data
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb 15, 15, 15
-	rgb  0,  0,  0
-
-	rgb  0, 25,  0
-	rgb 31, 31, 25
-	rgb  5, 25, 31
-	rgb  3,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 25,  0
-	rgb  0, 31, 25
-	rgb  0,  0,  0
-
-	rgb 31, 31, 27
-	rgb 31, 31, 27
-	rgb 10, 10,  8
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/prince_froggy2.pal"
+INCLUDE "gfx/pals/blue_bird.pal"
+INCLUDE "gfx/pals/zombie.pal"
+INCLUDE "gfx/pals/clear_gate.pal"
 
 EnemyGroupGfx103:
 	db $00
@@ -6017,25 +4438,10 @@ EnemyGroupGfx103:
 	dw TogebaData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 22, 27, 31
-	rgb  0, 13, 20
-	rgb  0,  0,  0
-
-	rgb  0, 20,  0
-	rgb 31, 31, 22
-	rgb  0, 18, 31
-	rgb  5,  0,  0
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/rock.pal"
+INCLUDE "gfx/pals/togeba.pal"
 
 EnemyGroupGfx104:
 	db $00
@@ -6051,25 +4457,10 @@ EnemyGroupGfx104:
 	dw Barrel1Data
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 31, 31, 25
-	rgb  5, 25, 31
-	rgb  3,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 31, 31,  0
-	rgb 25,  0,  0
-	rgb  0,  0,  5
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/blue_bird.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/barrel.pal"
 
 EnemyGroupGfx105:
 	db $00
@@ -6085,25 +4476,10 @@ EnemyGroupGfx105:
 	dw BeamBotData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 31, 31, 15
-	rgb 10, 17, 31
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/beam_bot.pal"
 
 EnemyGroupGfx106:
 	db $00
@@ -6119,25 +4495,9 @@ EnemyGroupGfx106:
 	dw FireBotData
 	dw NULL
 
-	rgb  0, 20,  0
-	rgb  0, 28, 31
-	rgb 31, 25,  0
-	rgb  0,  0,  3
-
-	rgb  0, 20,  0
-	rgb 31, 31,  0
-	rgb 31, 31, 31
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 31, 27, 27
-	rgb  0, 28,  0
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 15
-	rgb 31,  5,  5
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/moon.pal"
+INCLUDE "gfx/pals/spear_bot.pal"
+INCLUDE "gfx/pals/fire_bot.pal"
 
 EnemyGroupGfx107:
 	db $00
@@ -6153,25 +4513,10 @@ EnemyGroupGfx107:
 	dw BrrrBearData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb 15, 15, 15
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb 31, 14,  0
-	rgb  0,  0,  0
-
-	rgb  0, 25,  0
-	rgb 30, 30, 30
-	rgb 27,  5, 27
-	rgb  0,  0,  5
-
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb  3, 31, 30
-	rgb  3,  0,  0
+INCLUDE "gfx/pals/prince_froggy2.pal"
+INCLUDE "gfx/pals/para_goom.pal"
+INCLUDE "gfx/pals/hebarii.pal"
+INCLUDE "gfx/pals/brrr_bear.pal"
 
 EnemyGroupGfx108:
 	db $00
@@ -6187,25 +4532,10 @@ EnemyGroupGfx108:
 	dw TogebaData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb 31, 14,  0
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 26
-	rgb 31,  5,  5
-	rgb  0,  0,  3
-
-	rgb  0, 20,  0
-	rgb 31, 31, 22
-	rgb  0, 18, 31
-	rgb  5,  0,  0
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/para_goom.pal"
+INCLUDE "gfx/pals/doughnuteer.pal"
+INCLUDE "gfx/pals/togeba.pal"
 
 EnemyGroupGfx109:
 	db $00
@@ -6221,25 +4551,10 @@ EnemyGroupGfx109:
 	dw OmodonmekaData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 27, 27
-	rgb  0, 28,  0
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 31, 31, 25
-	rgb  5, 17, 31
-	rgb  3,  0,  0
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/spear_bot.pal"
+INCLUDE "gfx/pals/omodonmeka.pal"
 
 EnemyGroupGfx110:
 	db $00
@@ -6255,25 +4570,10 @@ EnemyGroupGfx110:
 	dw FireBotData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb 31, 31, 31
-	rgb 31, 31, 10
-	rgb  0, 10, 31
-	rgb  0,  0,  3
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 31, 15
-	rgb 31,  5,  5
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/hammer_bot.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/fire_bot.pal"
 
 EnemyGroupGfx111:
 	db $00
@@ -6289,25 +4589,10 @@ EnemyGroupGfx111:
 	dw FireBotData
 	dw NULL
 
-	rgb 31, 31, 31
-	rgb 26, 31, 28
-	rgb  1, 17,  0
-	rgb  0,  0,  5
-
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb 31, 14,  0
-	rgb  0,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 31, 15
-	rgb 31,  5,  5
-	rgb  0,  0,  0
+INCLUDE "gfx/pals/snake.pal"
+INCLUDE "gfx/pals/para_goom.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/fire_bot.pal"
 
 EnemyGroupGfx112:
 	db $00
@@ -6323,25 +4608,10 @@ EnemyGroupGfx112:
 	dw Barrel2Data
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 31
-	rgb 15, 15, 15
-	rgb  0,  0,  0
-
-	rgb  0, 20,  0
-	rgb 31, 31, 30
-	rgb 31,  0,  0
-	rgb  0,  0,  3
-
-	rgb  9, 16,  8
-	rgb 31, 31,  0
-	rgb 20,  0, 19
-	rgb  8,  0,  5
-
-	rgb  0, 25,  0
-	rgb 31, 31,  0
-	rgb 25,  0,  0
-	rgb  0,  0,  5
+INCLUDE "gfx/pals/prince_froggy2.pal"
+INCLUDE "gfx/pals/pneumo.pal"
+INCLUDE "gfx/pals/wall_crack.pal"
+INCLUDE "gfx/pals/barrel.pal"
 
 EnemyGroupGfx113:
 	db $00
@@ -6357,25 +4627,10 @@ EnemyGroupGfx113:
 	dw TorchData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 22, 27, 31
-	rgb  0, 13, 20
-	rgb  0,  0,  0
-
-	rgb  0, 25,  0
-	rgb 31, 31, 10
-	rgb 31,  0,  0
-	rgb 10,  0,  0
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/rock.pal"
+INCLUDE "gfx/pals/torch.pal"
 
 EnemyGroupGfx114:
 	db $00
@@ -6390,25 +4645,10 @@ EnemyGroupGfx114:
 	dw HebariiData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 29, 29, 29
-	rgb 17, 17, 17
-	rgb  0,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 30, 30, 30
-	rgb 27,  5, 27
-	rgb  0,  0,  5
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/stove.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/hebarii.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx115:
 	db $00
@@ -6423,25 +4663,10 @@ EnemyGroupGfx115:
 	dw HebariiData
 	dw NULL
 
-	rgb  0, 25,  0
-	rgb 31, 31, 29
-	rgb  5, 26, 26
-	rgb  0,  0,  3
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 30, 30, 30
-	rgb 27,  5, 27
-	rgb  0,  0,  5
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/spearhead.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/hebarii.pal"
+INCLUDE "gfx/pals/dummy.pal"
 
 EnemyGroupGfx116:
 	db $00
@@ -6457,25 +4682,10 @@ EnemyGroupGfx116:
 	dw TeruteruData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0, 25,  0
-	rgb 31, 31, 27
-	rgb 31,  2,  2
-	rgb  0,  0,  3
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/teruteru.pal"
 
 EnemyGroupGfx117:
 	db $00
@@ -6489,22 +4699,7 @@ EnemyGroupGfx117:
 	dw ParaGoomData
 	dw NULL
 
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb 31, 31, 31
-	rgb 31, 31,  0
-	rgb 31, 14,  0
-	rgb  0,  0,  0
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
-
-	rgb  0,  0,  0
-	rgb 31,  0,  0
-	rgb  0, 31,  0
-	rgb  0,  0, 15
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/para_goom.pal"
+INCLUDE "gfx/pals/dummy.pal"
+INCLUDE "gfx/pals/dummy.pal"

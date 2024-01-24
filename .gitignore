@@ -20,10 +20,11 @@
 *.sys
 *.sn*
 
-# converted image/palette data
+# converted image data
 *.1bpp
 *.2bpp
-*.pal
+
+# compressed data
 *.rle
 
 # *disasm.py output file
