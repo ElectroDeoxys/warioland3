@@ -3705,11 +3705,11 @@ Func_21f28:
 	jp Func_20e6a
 
 Func_21f51:
-	ld a, [wce00]
+	ld a, [wBGMapTileQueueSize]
 	ld b, a
-	ld a, HIGH(wce01)
+	ld a, HIGH(wBGMapTileQueue)
 	ld [wcce7 + 0], a
-	ld a, LOW(wce01)
+	ld a, LOW(wBGMapTileQueue)
 	add b
 	ld [wcce7 + 1], a
 	ld a, [wc0a3 + 1]
@@ -3827,7 +3827,7 @@ Func_22012:
 	push af
 	ld a, $03
 	ldh [rSVBK], a
-	ld a, [wce00]
+	ld a, [wBGMapTileQueueSize]
 	ld b, a
 	ld a, HIGH(wce35)
 	ld [wc0b3 + 0], a
@@ -3967,11 +3967,11 @@ Func_2208a:
 	ret
 
 Func_220fc:
-	ld a, [wce00]
+	ld a, [wBGMapTileQueueSize]
 	ld b, a
-	ld a, HIGH(wce01)
+	ld a, HIGH(wBGMapTileQueue)
 	ld [wcce7 + 0], a
-	ld a, LOW(wce01)
+	ld a, LOW(wBGMapTileQueue)
 	add b
 	ld [wcce7 + 1], a
 	ld a, [wc0a3 + 1]
@@ -4086,7 +4086,7 @@ Func_221bb:
 	push af
 	ld a, $03
 	ldh [rSVBK], a
-	ld a, [wce00]
+	ld a, [wBGMapTileQueueSize]
 	ld b, a
 	ld a, HIGH(wce35)
 	ld [wc0b3 + 0], a

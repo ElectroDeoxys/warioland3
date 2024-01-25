@@ -1057,7 +1057,7 @@ Func_8cd7:
 	ld d, a
 	ld a, [wccf0 + 1]
 	ld e, a
-	ld hl, wce01
+	ld hl, wBGMapTileQueue
 	ld b, BG_MAP_HEIGHT
 .loop_col_vram0
 	ld a, [hli]
@@ -1102,8 +1102,8 @@ Func_8cd7:
 	ldh [rVBK], a
 
 	xor a
-	ld [wce69], a
-	ld [wce00], a
+	ld [wBGMapAddressQueueSize], a
+	ld [wBGMapTileQueueSize], a
 	ld a, [wc0a5 + 1]
 	add $08
 	ld [wc0a5 + 1], a
@@ -1133,9 +1133,9 @@ Func_8cd7:
 
 .Func_8d69:
 	call Func_8e5b
-	ld a, [wce69]
+	ld a, [wBGMapAddressQueueSize]
 	ld b, a
-	ld de, wce6a
+	ld de, wBGMapAddressQueue
 	ld a, e
 	add b
 	ld e, a
@@ -1157,9 +1157,9 @@ Func_8cd7:
 	dec b
 	jr nz, .loop_col
 
-	ld a, [wce69]
+	ld a, [wBGMapAddressQueueSize]
 	add 2 * BG_MAP_HEIGHT
-	ld [wce69], a
+	ld [wBGMapAddressQueueSize], a
 
 	ld hl, wc0a3
 	call GetCell
@@ -1186,7 +1186,7 @@ Func_8cd7:
 	farcall Func_221bb
 
 .asm_8dfd
-	ld a, [wce00]
+	ld a, [wBGMapTileQueueSize]
 	add $20
-	ld [wce00], a
+	ld [wBGMapTileQueueSize], a
 	ret

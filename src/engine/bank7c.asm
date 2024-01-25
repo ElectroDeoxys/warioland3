@@ -492,7 +492,7 @@ InitSaveScreen:
 	ld [wcee4], a
 	ld [wTimer], a
 
-	ld hl, wce01
+	ld hl, wBGMapTileQueue
 	ld a, HIGH(v0BGMap0 + $164)
 	ld [hli], a
 	ld [hl], LOW(v0BGMap0 + $164)
@@ -519,7 +519,7 @@ FillSaveScreenBar:
 	jr z, .bar_finished
 	or $1 << 7
 	ld [wcee4], a
-	ld hl, wce01 + 1
+	ld hl, wBGMapTileQueue + 1
 	inc [hl]
 	ret
 .bar_finished
@@ -914,7 +914,7 @@ InitSaveScreenAndBackupVRAM:
 	ld [wTimer], a
 	ld [wcee4], a
 
-	ld hl, wce01
+	ld hl, wBGMapTileQueue
 	ld a, HIGH(v0BGMap0 + $164)
 	ld [hli], a
 	ld [hl], LOW(v0BGMap0 + $164)
@@ -1663,7 +1663,7 @@ VBlank_1f0c7e:
 	ld a, [wcee4]
 	bit 7, a
 	jr z, .transfer
-	ld hl, wce01
+	ld hl, wBGMapTileQueue
 	ld a, [hli]
 	ld l, [hl]
 	ld h, a

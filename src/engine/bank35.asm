@@ -556,7 +556,7 @@ Func_d4472:
 	and %11
 	ret nz
 	play_sfx SFX_REGULAR_COIN
-	ld hl, wce01
+	ld hl, wBGMapTileQueue
 	ld a, HIGH(v0BGMap0 + $8b)
 	ld [hli], a
 	ld a, LOW(v0BGMap0 + $8b)
@@ -685,7 +685,7 @@ Func_d454c:
 	add hl, de
 	ld d, h
 	ld e, l
-	ld hl, wce01
+	ld hl, wBGMapTileQueue
 	ld a, d
 	ld [hli], a
 	ld a, e
@@ -971,7 +971,7 @@ VBlank_d47a7:
 	jr z, .dma_transfer
 	and $7f
 	jr nz, .asm_d47d9
-	ld hl, wce01
+	ld hl, wBGMapTileQueue
 	ld a, [hli]
 	ld d, a
 	ld a, [hli]
@@ -988,7 +988,7 @@ VBlank_d47a7:
 .asm_d47d9
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, wce01
+	ld hl, wBGMapTileQueue
 	ld a, [hli]
 	ld d, a
 	ld a, [hli]

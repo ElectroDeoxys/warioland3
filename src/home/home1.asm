@@ -48,7 +48,8 @@ GetCell::
 	ld h, a
 	ret
 
-Func_c19::
+; hl = cell ptr
+GetCellPtrBGMapAddress::
 	ld a, h
 	sub HIGH(STARTOF(SRAM))
 	ld e, a
@@ -96,9 +97,10 @@ DoPendingDMATransfer::
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
 
-; copy wce01 to memory pointed by wce6a
-	ld hl, wce6a
-	ld bc, wce01
+; write tiles in wBGMapTileQueue to the
+; corresponding addresses in wBGMapAddressQueue
+	ld hl, wBGMapAddressQueue
+	ld bc, wBGMapTileQueue
 	jp wVBlankFunc + $10
 
 .dma_transfer
@@ -135,21 +137,21 @@ DoPendingDMATransfer::
 	call hTransferVirtualOAM
 
 	xor a
-	ld [wce00], a
-	ld [wce69], a
+	ld [wBGMapTileQueueSize], a
+	ld [wBGMapAddressQueueSize], a
 	ret
 
 Func_cab::
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, wce6a
+	ld hl, wBGMapAddressQueue
 	ld bc, wce35
 	jp wVBlankFuncExtended
 
 Func_cb8::
 	xor a
-	ld [wce00], a
-	ld [wce69], a
+	ld [wBGMapTileQueueSize], a
+	ld [wBGMapAddressQueueSize], a
 	ret
 
 ; input:

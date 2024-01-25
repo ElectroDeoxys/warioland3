@@ -139,23 +139,23 @@ Func_8ed9:
 	jr .asm_8ee3
 
 .asm_8ef6
-	call Func_8f79
-	call Func_9085
+	call .Func_8f79
+	call .Func_9085
 	ld hl, wc0bb
 	res 3, [hl]
 	farcall Func_d186
 	ret
 
 .asm_8f11
-	call Func_8fb3
-	call Func_9085
+	call .Func_8fb3
+	call .Func_9085
 	ld hl, wc0bb
 	res 2, [hl]
 	farcall Func_d186
 	ret
 
 .asm_8f2c
-	call Func_8fec
+	call .Func_8fec
 	call Func_a0e2
 	ld hl, wc0bb
 	res 0, [hl]
@@ -168,7 +168,7 @@ Func_8ed9:
 	ret
 
 .asm_8f52
-	call Func_9039
+	call .Func_9039
 	call Func_a0e2
 	ld hl, wc0bb
 	res 1, [hl]
@@ -180,7 +180,7 @@ Func_8ed9:
 	jp nz, .asm_8ef6
 	ret
 
-Func_8f79:
+.Func_8f79:
 	ld hl, wCameraSCY + 1
 	ld a, [hld]
 	and $f8
@@ -217,7 +217,7 @@ Func_8f79:
 	ld [wc0a5 + 1], a
 	ret
 
-Func_8fb3:
+.Func_8fb3:
 	ld hl, wCameraSCY + 1
 	ld a, [hld]
 	and $f8
@@ -252,7 +252,7 @@ Func_8fb3:
 	ld [wc0a5 + 1], a
 	ret
 
-Func_8fec:
+.Func_8fec:
 	ld hl, wCameraSCY + 1
 	ld a, [hld]
 	and $f8
@@ -301,7 +301,7 @@ Func_8fec:
 	ld [wc0a5 + 1], a
 	ret
 
-Func_9039:
+.Func_9039:
 	ld hl, wCameraSCY + 1
 	ld a, [hld]
 	and $f8
@@ -349,15 +349,16 @@ Func_9039:
 	ld [wc0a5 + 1], a
 	ret
 
-Func_9085:
+.Func_9085:
 	call Func_8e5b
-	ld a, [wce69]
+	ld a, [wBGMapAddressQueueSize]
 	ld b, a
-	ld de, wce6a
+	ld de, wBGMapAddressQueue
 	ld a, e
 	add b
-	ld e, a
+	ld e, a ; wBGMapAddressQueue + wBGMapAddressQueueSize
 
+	; fill row
 REPT 25
 	ld a, h
 	ld [de], a
@@ -374,9 +375,9 @@ REPT 25
 	ld l, a
 ENDR
 
-	ld a, [wce69]
+	ld a, [wBGMapAddressQueueSize]
 	add $2 * 25
-	ld [wce69], a
+	ld [wBGMapAddressQueueSize], a
 
 	ld hl, wc0a3
 	call GetCell
@@ -386,37 +387,38 @@ ENDR
 	and $08
 	jr z, .asm_923a
 	push hl
-	call Func_9254
+	call .Func_9254
 	pop hl
 	ld a, [wCellPtrBank]
 	sramswitch
-	call Func_9605
-	jr .asm_924b
+	call .Func_9605
+	jr .update_queue_size
 
 .asm_923a
 	push hl
-	call Func_99ca
+	call .Func_99ca
 	pop hl
 	ld a, [wCellPtrBank]
 	sramswitch
-	call Func_9d4c
-.asm_924b
-	ld a, [wce00]
-	add $19
-	ld [wce00], a
+	call .Func_9d4c
+
+.update_queue_size
+	ld a, [wBGMapTileQueueSize]
+	add 25
+	ld [wBGMapTileQueueSize], a
 	ret
 
-Func_9254:
-	ld a, [wce00]
+.Func_9254:
+	ld a, [wBGMapTileQueueSize]
 	ld b, a
-	ld a, HIGH(wce01)
+	ld a, HIGH(wBGMapTileQueue)
 	ld [wcce7 + 0], a
-	ld a, LOW(wce01)
+	ld a, LOW(wBGMapTileQueue)
 	add b
 	ld [wcce7 + 1], a
 	ld a, [wc0a5 + 1]
 	and $08
-	jp nz, Func_9438
+	jp nz, .asm_9438
 
 REPT 12
 	ld a, [hli]
@@ -424,7 +426,7 @@ REPT 12
 	ld e, a
 	sla e
 	sla e
-	rl d
+	rl d ; *$4
 	push hl
 	ld hl, wc600
 	add hl, de
@@ -464,13 +466,13 @@ ENDR
 	pop hl
 	ret
 
-Func_9438:
+.asm_9438
 	ld a, [hli]
 	ld d, $00
 	ld e, a
 	sla e
 	sla e
-	rl d
+	rl d ; *$4
 	push hl
 	ld hl, wc600
 	add hl, de
@@ -536,8 +538,8 @@ ENDR
 	pop hl
 	ret
 
-Func_9605:
-	ld a, [wce00]
+.Func_9605:
+	ld a, [wBGMapTileQueueSize]
 	ld b, a
 	ld a, HIGH(wce35)
 	ld [wc0b3 + 0], a
@@ -546,7 +548,7 @@ Func_9605:
 	ld [wc0b3 + 1], a
 	ld a, [wc0a5 + 1]
 	and $08
-	jp nz, Func_97f3
+	jp nz, .asm_97f3
 	ldh a, [rSVBK]
 	push af
 	ld a, $03
@@ -600,7 +602,7 @@ ENDR
 	ldh [rSVBK], a
 	ret
 
-Func_97f3:
+.asm_97f3
 	ldh a, [rSVBK]
 	push af
 	ld a, $03
@@ -678,17 +680,17 @@ ENDR
 	ldh [rSVBK], a
 	ret
 
-Func_99ca:
-	ld a, [wce00]
+.Func_99ca:
+	ld a, [wBGMapTileQueueSize]
 	ld b, a
-	ld a, HIGH(wce01)
+	ld a, HIGH(wBGMapTileQueue)
 	ld [wcce7 + 0], a
-	ld a, LOW(wce01)
+	ld a, LOW(wBGMapTileQueue)
 	add b
 	ld [wcce7 + 1], a
 	ld a, [wc0a5 + 1]
 	and $08
-	jp nz, Func_9b94
+	jp nz, .asm_9b94
 
 REPT 12
 	ld a, [hli]
@@ -732,7 +734,7 @@ ENDR
 	pop hl
 	ret
 
-Func_9b94:
+.asm_9b94
 	ld a, [hli]
 	ld d, $00
 	ld e, a
@@ -779,8 +781,8 @@ ENDR
 
 	ret
 
-Func_9d4c:
-	ld a, [wce00]
+.Func_9d4c:
+	ld a, [wBGMapTileQueueSize]
 	ld b, a
 	ld a, HIGH(wce35)
 	ld [wc0b3 + 0], a
@@ -789,7 +791,7 @@ Func_9d4c:
 	ld [wc0b3 + 1], a
 	ld a, [wc0a5 + 1]
 	and $08
-	jp nz, Func_9f20
+	jp nz, .asm_9f20
 	ldh a, [rSVBK]
 	push af
 	ld a, $03
@@ -838,7 +840,7 @@ ENDR
 	ldh [rSVBK], a
 	ret
 
-Func_9f20:
+.asm_9f20
 	ldh a, [rSVBK]
 	push af
 	ld a, $03
@@ -893,9 +895,9 @@ ENDR
 
 Func_a0e2:
 	call Func_8e5b
-	ld a, [wce69]
+	ld a, [wBGMapAddressQueueSize]
 	ld b, a
-	ld de, wce6a
+	ld de, wBGMapAddressQueue
 	ld a, e
 	add b
 	ld e, a
@@ -916,9 +918,9 @@ REPT 23
 	ld h, a
 ENDR
 
-	ld a, [wce69]
+	ld a, [wBGMapAddressQueueSize]
 	add $2 * 23
-	ld [wce69], a
+	ld [wBGMapAddressQueueSize], a
 
 	ld hl, wc0a3
 	call GetCell
@@ -942,17 +944,17 @@ ENDR
 	sramswitch
 	call Func_b182
 .asm_a2a1
-	ld a, [wce00]
+	ld a, [wBGMapTileQueueSize]
 	add 23
-	ld [wce00], a
+	ld [wBGMapTileQueueSize], a
 	ret
 
 Func_a2aa:
-	ld a, [wce00]
+	ld a, [wBGMapTileQueueSize]
 	ld b, a
-	ld a, HIGH(wce01)
+	ld a, HIGH(wBGMapTileQueue)
 	ld [wcce7 + 0], a
-	ld a, LOW(wce01)
+	ld a, LOW(wBGMapTileQueue)
 	add b
 	ld [wcce7 + 1], a
 	ld a, [wc0a3 + 1]
@@ -1104,7 +1106,7 @@ ENDR
 	ret
 
 Func_a79e:
-	ld a, [wce00]
+	ld a, [wBGMapTileQueueSize]
 	ld b, a
 	ld a, HIGH(wce35)
 	ld [wc0b3 + 0], a
@@ -1272,11 +1274,11 @@ ENDR
 	ret
 
 Func_aca6:
-	ld a, [wce00]
+	ld a, [wBGMapTileQueueSize]
 	ld b, a
-	ld a, HIGH(wce01)
+	ld a, HIGH(wBGMapTileQueue)
 	ld [wcce7 + 0], a
-	ld a, LOW(wce01)
+	ld a, LOW(wBGMapTileQueue)
 	add b
 	ld [wcce7 + 1], a
 	ld a, [wc0a3 + 1]
@@ -1423,7 +1425,7 @@ ENDR
 	ret
 
 Func_b182:
-	ld a, [wce00]
+	ld a, [wBGMapTileQueueSize]
 	ld b, a
 	ld a, HIGH(wce35)
 	ld [wc0b3 + 0], a
@@ -1598,7 +1600,7 @@ VBlank_b672:
 
 Func_b681:
 	ld hl, wVBlankFunc + $10
-	ld a, [wce00]
+	ld a, [wBGMapTileQueueSize]
 	and a
 	jr z, .asm_b6cb
 
@@ -1628,7 +1630,7 @@ Func_b681:
 	ld a, HIGH(Func_cab)
 	ld [hl], a
 
-	ld a, [wce00]
+	ld a, [wBGMapTileQueueSize]
 	ld c, a
 	ld hl, wVBlankFuncExtended
 .loop_2
@@ -2361,8 +2363,9 @@ Func_bb2d:
 Func_bb85:
 	ld a, [wIsDMATransferPending]
 	and a
-	ret nz
-	ld b, $01
+	ret nz ; exit if DMA pending
+
+	ld b, BANK("SRAM1")
 	ld a, [wc19f]
 	ld e, a
 	ld d, $00
@@ -2370,15 +2373,16 @@ Func_bb85:
 	add hl, de
 	ld a, [hli]
 	and a
-	ret z
+	ret z ; nothing to do
+
 	ld l, [hl]
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .got_sram_bank
-	inc b
+	inc b ; BANK("SRAM2")
 	sub HIGH(SIZEOF(SRAM))
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .got_sram_bank
-	inc b
+	inc b ; BANK("SRAM3")
 	sub HIGH(SIZEOF(SRAM))
 .got_sram_bank
 	ld h, a
@@ -2386,15 +2390,18 @@ Func_bb85:
 	ld [wCellPtrBank], a
 	sramswitch
 	push hl
-	call Func_c19
-	ld a, [wce69]
+	call GetCellPtrBGMapAddress
+	ld a, [wBGMapAddressQueueSize]
 	ld b, a
-	ld de, wce6a
+	ld de, wBGMapAddressQueue
 	ld a, e
 	add b
 	ld e, a
 
-	; current tile
+	; each cell is 2x2 tiles
+	; current address points to the top-left corner tile
+
+	; top-left tile
 	ld a, h
 	ld [de], a
 	inc e
@@ -2402,7 +2409,7 @@ Func_bb85:
 	ld [de], a
 	inc e
 
-	; right tile
+	; top-right tile
 	ld a, h
 	ld [de], a
 	inc e
@@ -2416,7 +2423,7 @@ Func_bb85:
 	ld [de], a
 	inc e
 
-	; bottom tile
+	; bottom-left tile
 	ld bc, BG_MAP_WIDTH
 	add hl, bc
 	ld a, h
@@ -2441,9 +2448,9 @@ Func_bb85:
 	add c
 	ld [de], a
 
-	ld a, [wce69]
+	ld a, [wBGMapAddressQueueSize]
 	add $2 * 4
-	ld [wce69], a
+	ld [wBGMapAddressQueueSize], a
 	pop hl
 
 	ld a, [hl]
@@ -2459,12 +2466,12 @@ Func_bb85:
 	push de
 	ld hl, wc600
 	add hl, de
-	ld a, [wce00]
+	ld a, [wBGMapTileQueueSize]
 	ld e, a
-	ld d, HIGH(wce01)
-	ld a, LOW(wce01)
+	ld d, HIGH(wBGMapTileQueue)
+	ld a, LOW(wBGMapTileQueue)
 	add e
-	ld e, a
+	ld e, a ; wBGMapTileQueue + wBGMapTileQueueSize
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2480,7 +2487,7 @@ Func_bb85:
 
 	ld hl, w3d300
 	add hl, de
-	ld a, [wce00]
+	ld a, [wBGMapTileQueueSize]
 	ld e, a
 	ld d, HIGH(wce35)
 	ld a, LOW(wce35)
@@ -2498,9 +2505,9 @@ Func_bb85:
 	ld a, [hl]
 	ld [de], a
 
-	ld a, [wce00]
+	ld a, [wBGMapTileQueueSize]
 	add 4
-	ld [wce00], a
+	ld [wBGMapTileQueueSize], a
 
 	ld a, [wc19f]
 	ld e, a
