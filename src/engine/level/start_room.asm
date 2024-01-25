@@ -95,7 +95,9 @@ StartRoom_FromTransition:
 .asm_854a
 	xor a
 	ld [wRoomTransitionParam], a
-	call Func_bc5e
+
+	call UpdateSwitchableCells
+
 	ld a, [wSRAMBank]
 	push af
 	ld a, BANK("SRAM1")
@@ -334,7 +336,7 @@ StartRoom_FromLevelStart:
 	ld [wIsRolling], a
 	ld [wIsGettingOffLadder], a
 	ld [wca66], a
-	ld [wca6a], a
+	ld [wSwitchStateUpdated], a
 	ld [wLevelTime + 0], a
 	ld [wLevelTime + 1], a
 	ld [wLevelTime + 2], a

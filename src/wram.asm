@@ -488,11 +488,15 @@ wAnimationFrame:: ; ca68
 wDirection:: ; ca69
 	db
 
-wca6a:: ; ca6a
-	db
-
-wca6b:: ; ca6b
-	db
+; when a switch is hit, this flag is set
+; then UpdateSwitchableCells will update
+; all cells that are controlled by the switch,
+; and then unset this flag
+wSwitchStateUpdated:: db ; ca6a
+; which state the switch is:
+; - $60 is off
+; - $68 is on
+wSwitchState::        db ; ca6b
 
 wca6c:: ; ca6c
 	db

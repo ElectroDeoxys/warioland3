@@ -133,7 +133,7 @@ SoundHeaders:
 	sfx Sfx_02c,                         $00, 220, CHAN5_F, 1 ; SFX_02C
 	sfx Sfx_FullyChargedThrow,           $00, 220, CHAN5_F, 1 ; SFX_FULLY_CHARGED_THROW
 	sfx Sfx_02e,                         $00, 232, CHAN5_F, 1 ; SFX_02E
-	sfx Sfx_02f,                         $00, 236, CHAN5_F, 1 ; SFX_02F
+	sfx Sfx_Switch,                      $00, 236, CHAN5_F, 1 ; SFX_SWITCH
 	sfx Sfx_Pipe,                        $00, 220, CHAN5_F, 1 ; SFX_PIPE
 	sfx Sfx_MusicalCoin,                 $00, 255, CHAN5_F, 2 ; SFX_MUSICAL_COIN
 	sfx Sfx_Key,                         $00, 255, CHAN5_F, 2 ; SFX_KEY

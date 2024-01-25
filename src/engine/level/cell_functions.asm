@@ -357,15 +357,15 @@ CellFunc_Switch:
 	ld l, [hl]
 	ld h, a
 	ld a, [hl]
-	ld [wca6b], a
-	xor $08
+	ld [wSwitchState], a
+	xor $8
 	ld [hl], a
 	call Func_e31
-	ld a, [wca6a]
-	xor $01
-	ld [wca6a], a
-	play_sfx SFX_02F
-	ld b, $10
+	ld a, [wSwitchStateUpdated]
+	xor 1
+	ld [wSwitchStateUpdated], a
+	play_sfx SFX_SWITCH
+	ld b, 16
 	call DoGroundShake
 	jp CellFunc_Solid
 

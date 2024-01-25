@@ -861,9 +861,9 @@ DragonflySpawnerFunc:
 	xor a
 	ld [wIsBossBattle], a
 	ld a, $01
-	ld [wca6a], a
+	ld [wSwitchStateUpdated], a
 	ld a, $60
-	ld [wca6b], a
+	ld [wSwitchState], a
 	ret
 
 Dragonfly1Func:

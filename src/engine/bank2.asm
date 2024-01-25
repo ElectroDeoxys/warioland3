@@ -2518,123 +2518,134 @@ Func_bb85:
 	ldh [rSVBK], a
 	ret
 
-Func_bc5e:
-	ld a, [wca6a]
+; if wSwitchStateUpdated is set, then update cells
+; this update revolves around the assumption that
+; if $8 is added to the cell, then it corresponds
+; to a new cell for its off state, and subtracting $8
+; will revert it to a cell corresponding to on state
+UpdateSwitchableCells:
+	ld a, [wSwitchStateUpdated]
 	and a
 	ret z
 	xor a
-	ld [wca6a], a
-	ld a, [wca6b]
+	ld [wSwitchStateUpdated], a
+	ld a, [wSwitchState]
 	cp $68
-	jr z, .asm_bcd5
+	jr z, .switch_on
+
+; switch off
 	ld a, [wSRAMBank]
 	push af
 	ld a, BANK("SRAM1")
 	sramswitch
 	ld hl, s0a000
-.asm_bc7d
+.loop_1
 	ld a, [hli]
 	and $7f
 	cp $60
-	jr c, .asm_bc8d
+	jr c, .next_cell_1
 	cp $68
-	jr nc, .asm_bc8d
+	jr nc, .next_cell_1
+	; between $60 and $67
 	dec l
 	ld a, [hl]
 	add $08
 	ld [hli], a
-.asm_bc8d
+.next_cell_1
 	ld a, l
-	cp $a0
-	jr c, .asm_bc7d
+	cp LEVEL_WIDTH
+	jr c, .loop_1
 	ld l, $00
 	inc h
 	ld a, h
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
-	jr nz, .asm_bc7d
+	jr nz, .loop_1
 	pop af
 	sramswitch
+
 	ld a, [wSRAMBank]
 	push af
-	ld a, $02
+	ld a, BANK("SRAM2")
 	sramswitch
 	ld hl, s0a000
-.asm_bcb0
+.loop_2
 	ld a, [hli]
 	and $7f
 	cp $60
-	jr c, .asm_bcc0
+	jr c, .next_cell_2
 	cp $68
-	jr nc, .asm_bcc0
+	jr nc, .next_cell_2
 	dec l
 	ld a, [hl]
 	add $08
 	ld [hli], a
-.asm_bcc0
+.next_cell_2
 	ld a, l
-	cp $a0
-	jr c, .asm_bcb0
+	cp LEVEL_WIDTH
+	jr c, .loop_2
 	ld l, $00
 	inc h
 	ld a, h
 	cp $b0
-	jr nz, .asm_bcb0
+	jr nz, .loop_2
 	pop af
 	sramswitch
 	ret
-.asm_bcd5
+
+.switch_on
 	ld a, [wSRAMBank]
 	push af
 	ld a, BANK("SRAM1")
 	sramswitch
 	ld hl, s0a000
-.asm_bce4
+.loop_3
 	ld a, [hli]
 	and $7f
 	cp $68
-	jr c, .asm_bcf4
+	jr c, .next_cell_3
 	cp $70
-	jr nc, .asm_bcf4
+	jr nc, .next_cell_3
 	dec l
 	ld a, [hl]
 	sub $08
 	ld [hli], a
-.asm_bcf4
+.next_cell_3
 	ld a, l
-	cp $a0
-	jr c, .asm_bce4
+	cp LEVEL_WIDTH
+	jr c, .loop_3
 	ld l, $00
 	inc h
 	ld a, h
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
-	jr nz, .asm_bce4
+	jr nz, .loop_3
 	pop af
 	sramswitch
+
 	ld a, [wSRAMBank]
 	push af
-	ld a, $02
+	ld a, BANK("SRAM2")
 	sramswitch
 	ld hl, s0a000
-.asm_bd17
+.loop_4
 	ld a, [hli]
 	and $7f
 	cp $68
-	jr c, .asm_bd27
+	jr c, .next_cell_4
 	cp $70
-	jr nc, .asm_bd27
+	jr nc, .next_cell_4
 	dec l
 	ld a, [hl]
 	sub $08
 	ld [hli], a
-.asm_bd27
+.next_cell_4
 	ld a, l
-	cp $a0
-	jr c, .asm_bd17
+	cp LEVEL_WIDTH
+	jr c, .loop_4
 	ld l, $00
 	inc h
 	ld a, h
 	cp $b0
-	jr nz, .asm_bd17
+	jr nz, .loop_4
 	pop af
 	sramswitch
 	ret

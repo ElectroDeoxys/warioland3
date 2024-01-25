@@ -19,7 +19,7 @@ Sfx_02e:
 	db 1, 0
 	dw Sfx_02e_Ch1
 
-Sfx_02f_Ch1:
+Sfx_Switch_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_34
@@ -32,9 +32,9 @@ Sfx_02f_Ch1:
 	audio_wait_3
 	audio_end
 
-Sfx_02f:
+Sfx_Switch:
 	db 1, 0
-	dw Sfx_02f_Ch1
+	dw Sfx_Switch_Ch1
 
 Sfx_Pipe_Ch1:
 	semitone_offset 0

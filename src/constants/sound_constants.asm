@@ -108,7 +108,7 @@
 	const SFX_02C                          ; 12c
 	const SFX_FULLY_CHARGED_THROW          ; 12d
 	const SFX_02E                          ; 12e
-	const SFX_02F                          ; 12f
+	const SFX_SWITCH                       ; 12f
 	const SFX_PIPE                         ; 130
 	const SFX_MUSICAL_COIN                 ; 131
 	const SFX_KEY                          ; 132

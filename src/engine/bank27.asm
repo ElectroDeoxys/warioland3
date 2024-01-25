@@ -2468,7 +2468,7 @@ Cutscene1eFunc:
 	ld a, [hl]
 	cp $3b
 	ret nz
-	play_sfx SFX_02F
+	play_sfx SFX_SWITCH
 	jp AdvanceCutsceneFunc
 
 .Func_9d5a1:
@@ -3781,7 +3781,7 @@ Cutscene38Func:
 	ld a, [wSceneObj2Frame]
 	cp $01
 	ret nz
-	play_sfx SFX_02F
+	play_sfx SFX_SWITCH
 	jp AdvanceCutsceneFunc
 
 .Func_9deae:
@@ -4080,7 +4080,7 @@ Cutscene3aFunc:
 	ret nz
 	jp AdvanceCutsceneFunc
 .asm_9e0ad
-	play_sfx SFX_02F
+	play_sfx SFX_SWITCH
 	ret
 
 .Func_9e0b6:
@@ -5387,7 +5387,7 @@ Cutscene55Func:
 	ld a, [hl]
 	cp $4e
 	ret nz
-	play_sfx SFX_02F
+	play_sfx SFX_SWITCH
 	jp AdvanceCutsceneFunc
 
 .Func_9e9f6:
