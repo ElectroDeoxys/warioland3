@@ -157,16 +157,16 @@ wc0c7:: ; c0c7
 wEnemyGroup:: ; c0c8
 	db
 
-wRoom::                  db ; c0c9
-wRoomCellFunctionTable:: db ; c0ca
-wRoomTileMap::           db ; c0cb
-wRoomMainTiles::         db ; c0cc
-wRoomSpecialTiles::      db ; c0cd
-wRoomPalettes::          db ; c0ce
-wRoomCellFunctionTableBank:: db ; c0cf
-wc0d0::                  db ; c0d0
-wRoomMainTilesBank::     db ; c0d1
-wRoomSpecialTilesBank::  db ; c0d2
+wRoom::                   db ; c0c9
+wRoomBlockFunctionTable:: db ; c0ca
+wRoomTileMap::            db ; c0cb
+wRoomMainTiles::          db ; c0cc
+wRoomSpecialTiles::       db ; c0cd
+wRoomPalettes::           db ; c0ce
+wRoomBlockFunctionTableBank:: db ; c0cf
+wc0d0::                   db ; c0d0
+wRoomMainTilesBank::      db ; c0d1
+wRoomSpecialTilesBank::   db ; c0d2
 
 wPaletteBank:: ; c0d3
 	db
@@ -183,21 +183,21 @@ wc0d6:: ; c0d6
 wRoomTransitionParam:: ; c0d7
 	db
 
-; if true, will allow cell functions
+; if true, will allow block functions
 ; to run the block breaking routines
 ; otherwise, just treats these blocks
 ; as a default solid collision
-wCellFuncBreakFlag:: ; c0d8
+wBlockFuncBreakFlag:: ; c0d8
 	db
 
 ; which special entity is causing the collision,
 ; either a thrown object or Robo-mouse
-wCellFuncSpecialCollision:: ; c0d9
+wBlockFuncSpecialCollision:: ; c0d9
 	db
 
 ; if true, then the entity causing the collision
 ; is Wario, otherwise it's a level object
-wCellFuncWarioFlag:: ; c0da
+wBlockFuncWarioFlag:: ; c0da
 	db
 
 ; current position's interaction type with the water
@@ -489,8 +489,8 @@ wDirection:: ; ca69
 	db
 
 ; when a switch is hit, this flag is set
-; then UpdateSwitchableCells will update
-; all cells that are controlled by the switch,
+; then UpdateSwitchableBlocks will update
+; all blocks that are controlled by the switch,
 ; and then unset this flag
 wSwitchStateUpdated:: db ; ca6a
 ; which state the switch is:
@@ -538,7 +538,7 @@ wDoFullJump:: ; ca76
 wJumpingUpwards:: ; ca77
 	db
 
-; each y section is divided in 20-cell high slices
+; each y section is divided in 20-block high slices
 ; this stores the floor number of the current position
 wFloor:: ; ca78
 	db
@@ -768,15 +768,15 @@ wcce7:: ; cce7
 
 
 ; the world is divided in a grid,
-; with each cell being 16x16 units in dimension
-wCellPtrBank:: db ; cce9
-wCellPtr:: dw ; ccea
+; with each block being 2x2 tiles in dimension
+wBlockPtrBank:: db ; cce9
+wBlockPtr:: dw ; ccea
 
 wccec:: ; ccec
 	db
 
-wSpawnYCell:: db ; cced
-wSpawnXCell:: db ; ccee
+wSpawnYBlock:: db ; cced
+wSpawnXBlock:: db ; ccee
 
 wccef:: ; ccef
 	db
@@ -787,7 +787,7 @@ wCreditsBGMapPtr::
 
 	ds $e
 
-wCellFunctionTable:: ; cd00
+wBlockFunctionTable:: ; cd00
 	ds 2 * $80
 
 
@@ -857,7 +857,7 @@ wFadeSpeed:: ; ced7
 wRoomAnimatedTilesEnabled:: db ; ced8
 wRoomAnimatedPalsEnabled::  db ; ced9
 
-wMultiCellBlockParam:: db ; ceda
+wMultiBlockParam:: db ; ceda
 wcedb:: db ; cedb
 wcedc:: dw ; cedc
 wcede:: db ; cede

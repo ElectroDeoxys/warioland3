@@ -1,4 +1,4 @@
-GetCell::
+GetBlockPtr::
 ; y position
 	; computes value, given 2-byte y coordinate in [hl]
 	; transforms 2-byte value 0xXWYZ into 1-byte value 0xWY
@@ -24,9 +24,9 @@ GetCell::
 	inc b
 	sub $20
 .got_sram_bank
-	ld [wCellPtr + 0], a
+	ld [wBlockPtr + 0], a
 	ld a, b
-	ld [wCellPtrBank], a
+	ld [wBlockPtrBank], a
 
 ; x position
 	; computes value, given 2-byte x coordinate in [hl]
@@ -42,14 +42,14 @@ GetCell::
 	swap a
 	add l
 	ld l, a
-	ld [wCellPtr + 1], a
+	ld [wBlockPtr + 1], a
 
-	ld a, [wCellPtr + 0]
+	ld a, [wBlockPtr + 0]
 	ld h, a
 	ret
 
-; hl = cell ptr
-GetCellPtrBGMapAddress::
+; hl = block ptr
+GetBlockPtrPtrBGMapAddress::
 	ld a, h
 	sub HIGH(STARTOF(SRAM))
 	ld e, a
@@ -157,8 +157,8 @@ Func_cb8::
 ; input:
 ; - hl = hPos
 ; output:
-; - h = y cell
-; - l = x cell
+; - l = x block
+; - h = y block
 ; - b = ?
 Func_cc0::
 	ld a, [hli]
@@ -173,7 +173,7 @@ Func_cc0::
 	add c
 	add HIGH(STARTOF(SRAM))
 	ld c, a
-	ld [wSpawnYCell], a
+	ld [wSpawnYBlock], a
 
 	ld a, [hli]
 	ld d, a
@@ -196,7 +196,7 @@ Func_cc0::
 	ld a, l
 	add $b0
 	ld l, a
-	ld [wSpawnXCell], a
+	ld [wSpawnXBlock], a
 	ld h, c
 	ret
 
@@ -255,7 +255,7 @@ Func_d3e::
 	and $f0
 	swap a
 	ld b, a
-	ld a, [wCellPtrBank]
+	ld a, [wBlockPtrBank]
 	dec a
 	add a
 	add b
@@ -301,7 +301,7 @@ Func_d81::
 	ret
 
 Func_d8c::
-	ld a, [wCellPtrBank]
+	ld a, [wBlockPtrBank]
 	ld [wccec], a
 	ld b, $01
 	ld a, l
@@ -415,14 +415,14 @@ Func_e2b::
 ;	fallthrough
 
 Func_e31::
-	ld a, [wCellPtrBank]
+	ld a, [wBlockPtrBank]
 	dec a
 	add a
 	add a
 	add a
 	add a
 	add a
-	add h ; = h + (wCellPtrBank - 1) * $20
+	add h ; = h + (wBlockPtrBank - 1) * $20
 	ld b, a
 	ld c, l
 	ld hl, wc18e

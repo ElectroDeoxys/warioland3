@@ -513,13 +513,13 @@ Func_3543::
 	ld a, b
 	ret
 
-ProcessCellOnLeft::
-	homecall _ProcessCellOnLeft
+ProcessBlockOnLeft::
+	homecall _ProcessBlockOnLeft
 	ld a, b
 	ret
 
-ProcessCellOnRight::
-	homecall _ProcessCellOnRight
+ProcessBlockOnRight::
+	homecall _ProcessBlockOnRight
 	ld a, b
 	ret
 

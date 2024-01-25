@@ -311,7 +311,7 @@ FireBotFunc:
 	and $0f
 	sub $06
 	jr nc, .asm_46d81
-	call ProcessCellOnLeft
+	call ProcessBlockOnLeft
 	and $0f
 	jr z, .asm_46d9f
 .asm_46d81
@@ -346,7 +346,7 @@ FireBotFunc:
 	add $05
 	cp $10
 	jr c, .asm_46dbf
-	call ProcessCellOnRight
+	call ProcessBlockOnRight
 	and $0f
 	jr z, .asm_46ddd
 .asm_46dbf
@@ -570,7 +570,7 @@ FireBotFunc:
 	and $0f
 	sub $06
 	jr nc, .asm_46f24
-	call ProcessCellOnLeft
+	call ProcessBlockOnLeft
 	and $0f
 	jr z, .asm_46f42
 .asm_46f24
@@ -601,7 +601,7 @@ FireBotFunc:
 	add $05
 	cp $10
 	jr c, .asm_46f58
-	call ProcessCellOnRight
+	call ProcessBlockOnRight
 	and $0f
 	jr z, .asm_46f76
 .asm_46f58

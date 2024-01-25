@@ -344,7 +344,7 @@ BeamBotFunc:
 	and $0f
 	sub $06
 	jr nc, .asm_46807
-	call ProcessCellOnLeft
+	call ProcessBlockOnLeft
 	and $0f
 	jr z, .asm_4685f
 .asm_46807
@@ -374,7 +374,7 @@ BeamBotFunc:
 	add $05
 	cp $10
 	jr c, .asm_4683b
-	call ProcessCellOnRight
+	call ProcessBlockOnRight
 	and $0f
 	jr z, .asm_4685f
 .asm_4683b

@@ -149,7 +149,7 @@ LoadEnemyGroupData::
 .copy_pals
 	jp LoadObjPals
 
-; de = cell
+; de = block
 ; c = entry in wObjDataPointers
 SpawnObject:
 	ldh a, [hXPosHi]

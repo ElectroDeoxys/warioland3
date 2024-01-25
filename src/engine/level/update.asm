@@ -15,7 +15,7 @@ UpdateLevel:
 	and a
 	jr nz, .skip_update_wario_state
 	ld a, TRUE
-	ld [wCellFuncWarioFlag], a
+	ld [wBlockFuncWarioFlag], a
 	farcall UpdateWarioStates
 
 .skip_update_wario_state
@@ -40,7 +40,7 @@ UpdateLevel:
 
 .applied_cam_scrolling
 	xor a ; FALSE
-	ld [wCellFuncWarioFlag], a
+	ld [wBlockFuncWarioFlag], a
 
 	ldh a, [rSVBK]
 	push af
@@ -69,10 +69,10 @@ UpdateLevel:
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
 	ld a, TRUE
-	ld [wCellFuncWarioFlag], a
+	ld [wBlockFuncWarioFlag], a
 	farcall ProcessInteractions
 	xor a ; FALSE
-	ld [wCellFuncWarioFlag], a
+	ld [wBlockFuncWarioFlag], a
 	pop af
 	ldh [rSVBK], a
 
@@ -248,14 +248,14 @@ UpdateLevel:
 	ret
 
 .no_end_screen
-	ld a, [wMultiCellBlockParam]
+	ld a, [wMultiBlockParam]
 	and a
 	jr z, .tick_time
 
-	; set next frame to process multi-cell block
+	; set next frame to process multi-block
 	ld a, [wSubState]
 	ld [wPendingSubState], a
-	ld a, SST_LEVEL_MULTI_CELL_BLOCK
+	ld a, SST_LEVEL_MULTI_BLOCK
 	ld [wSubState], a
 	ret
 
@@ -302,7 +302,7 @@ UpdateLevel:
 
 .free_camera
 	ld a, TRUE
-	ld [wCellFuncWarioFlag], a
+	ld [wBlockFuncWarioFlag], a
 	farcall UpdateWarioStates
 
 	ld a, [wCameraSCY + 1]
@@ -311,7 +311,7 @@ UpdateLevel:
 	ld [wSCX], a
 
 	xor a ; FALSE
-	ld [wCellFuncWarioFlag], a
+	ld [wBlockFuncWarioFlag], a
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
@@ -322,11 +322,11 @@ UpdateLevel:
 
 	call SetWarioScreenPos
 	ld a, TRUE
-	ld [wCellFuncWarioFlag], a
+	ld [wBlockFuncWarioFlag], a
 	farcall ProcessInteractions
 
 	xor a ; FALSE
-	ld [wCellFuncWarioFlag], a
+	ld [wBlockFuncWarioFlag], a
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
@@ -355,7 +355,7 @@ UpdateLevel:
 
 .yscroll_camera
 	ld a, TRUE
-	ld [wCellFuncWarioFlag], a
+	ld [wBlockFuncWarioFlag], a
 	farcall UpdateWarioStates
 
 	ld a, [wCameraSCY + 1]
@@ -364,7 +364,7 @@ UpdateLevel:
 	ld [wSCX], a
 
 	xor a ; FALSE
-	ld [wCellFuncWarioFlag], a
+	ld [wBlockFuncWarioFlag], a
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
@@ -375,11 +375,11 @@ UpdateLevel:
 
 	call SetWarioScreenPos
 	ld a, TRUE
-	ld [wCellFuncWarioFlag], a
+	ld [wBlockFuncWarioFlag], a
 	farcall ProcessInteractions
 
 	xor a ; FALSE
-	ld [wCellFuncWarioFlag], a
+	ld [wBlockFuncWarioFlag], a
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")

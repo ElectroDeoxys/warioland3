@@ -1,13 +1,13 @@
-LoadCellFunctionTable::
-	ld a, [wRoomCellFunctionTable]
+LoadBlockFunctionTable::
+	ld a, [wRoomBlockFunctionTable]
 	add a
 	ld e, a
 	ld d, $00
-	ld hl, CellFunctionTablePointers
+	ld hl, BlockFunctionTablePointers
 	add hl, de
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(CellFunctionTablePointers)
+	ld a, BANK(BlockFunctionTablePointers)
 	bankswitch
 	ld a, [hli]
 	ld h, [hl]
@@ -15,12 +15,12 @@ LoadCellFunctionTable::
 	ld a, h
 	cp $ff
 	jr z, .reset
-	ld a, [wRoomCellFunctionTable]
+	ld a, [wRoomBlockFunctionTable]
 	cp NUM_TILE_MAPS_GROUP_1 - 1
 	jr nc, .group_2
 
 ; group_1
-	ld de, wCellFunctionTable
+	ld de, wBlockFunctionTable
 	ld b, $00
 	call CopyHLToDE
 	pop af
@@ -30,9 +30,9 @@ LoadCellFunctionTable::
 .group_2
 	ld a, [wROMBank]
 	push af
-	ld a, BANK("Cell Function Tables 2")
+	ld a, BANK("Block Function Tables 2")
 	bankswitch
-	ld de, wCellFunctionTable
+	ld de, wBlockFunctionTable
 	ld b, $00
 	call CopyHLToDE
 	pop af
@@ -189,7 +189,7 @@ LoadRoom::
 	ret
 
 Func_298d::
-	ld a, [wRoomCellFunctionTable]
+	ld a, [wRoomBlockFunctionTable]
 	add a
 	ld e, a
 	ld d, $00
@@ -198,7 +198,7 @@ Func_298d::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [wRoomCellFunctionTableBank]
+	ld a, [wRoomBlockFunctionTableBank]
 	ld [wTempBank], a
 	ld a, [wROMBank]
 	push af

@@ -96,7 +96,7 @@ StartRoom_FromTransition:
 	xor a
 	ld [wRoomTransitionParam], a
 
-	call UpdateSwitchableCells
+	call UpdateSwitchableBlocks
 
 	ld a, [wSRAMBank]
 	push af
@@ -132,7 +132,7 @@ StartRoom_FromTransition:
 .asm_85a7
 	call UpdateLevelMusic
 	xor a ; FALSE
-	ld [wCellFuncWarioFlag], a
+	ld [wBlockFuncWarioFlag], a
 	ld [wIsFloorTransition], a
 	ldh a, [rSVBK]
 	push af
@@ -165,8 +165,8 @@ StartRoom_FromTransition:
 	ldh [rLCDC], a
 	ret
 
-ProcessMultiCellBlock:
-	call .ProcessBlockCells
+ProcessMultiBlock:
+	call .ProcessBlocks
 
 	; do normal level stuff
 
@@ -203,97 +203,97 @@ ProcessMultiCellBlock:
 	sramswitch
 	ret
 
-.ProcessBlockCells:
-	ld a, [wMultiCellBlockParam]
+.ProcessBlocks:
+	ld a, [wMultiBlockParam]
 	and %1111
 	add $10
-	ld [wMultiCellBlockParam], a
+	ld [wMultiBlockParam], a
 	and $08
 	ld [wcede], a
 
 .loop
-	ld a, [wMultiCellBlockParam]
+	ld a, [wMultiBlockParam]
 	and %111
 	dec a
-	jr z, .right_cell
+	jr z, .right_block
 	dec a
-	jr z, .left_cell
+	jr z, .left_block
 	dec a
-	jr z, .down_cell
+	jr z, .down_block
 
-; up cell
-	; get cell above
+; up block
+	; get block above
 	ld a, [wcedc + 0]
 	inc a
 	ld h, a
-	ld [wCellPtr + 0], a
+	ld [wBlockPtr + 0], a
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	ld a, [wcedb]
 	jr nz, .no_wrap_1
 	ld a, HIGH(STARTOF(SRAM))
 	ld h, a
-	ld [wCellPtr + 0], a
+	ld [wBlockPtr + 0], a
 	ld a, [wcedb]
 	inc a
 .no_wrap_1
-	ld [wCellPtrBank], a
+	ld [wBlockPtrBank], a
 	ld a, [wcedc + 1]
 	ld l, a
-	ld [wCellPtr + 1], a
-	jr .process_cell
+	ld [wBlockPtr + 1], a
+	jr .process_block
 
-.right_cell
-	; get cell on right
+.right_block
+	; get block on right
 	ld a, [wcedb]
-	ld [wCellPtrBank], a
+	ld [wBlockPtrBank], a
 	ld a, [wcedc + 0]
 	ld h, a
-	ld [wCellPtr + 0], a
+	ld [wBlockPtr + 0], a
 	ld a, [wcedc + 1]
 	inc a
 	ld l, a
-	ld [wCellPtr + 1], a
-	jr .process_cell
+	ld [wBlockPtr + 1], a
+	jr .process_block
 
-.left_cell
-	; get cell on left
+.left_block
+	; get block on left
 	ld a, [wcedb]
-	ld [wCellPtrBank], a
+	ld [wBlockPtrBank], a
 	ld a, [wcedc + 1]
 	dec a
 	ld l, a
-	ld [wCellPtr + 1], a
+	ld [wBlockPtr + 1], a
 	ld a, [wcedc + 0]
 	ld h, a
-	ld [wCellPtr + 0], a
-	jr .process_cell
+	ld [wBlockPtr + 0], a
+	jr .process_block
 
-.down_cell
-	; get cell below
+.down_block
+	; get block below
 	ld a, [wcedc + 0]
 	dec a
 	ld h, a
-	ld [wCellPtr + 0], a
+	ld [wBlockPtr + 0], a
 	cp HIGH(STARTOF(SRAM)) - 1
 	ld a, [wcedb]
 	jr nz, .no_wrap_2
 	ld a, HIGH(STARTOF(SRAM) + SIZEOF(SRAM)) - 1
 	ld h, a
-	ld [wCellPtr + 0], a
+	ld [wBlockPtr + 0], a
 	ld a, [wcedb]
 	dec a
 .no_wrap_2
-	ld [wCellPtrBank], a
+	ld [wBlockPtrBank], a
 	ld a, [wcedc + 1]
 	ld l, a
-	ld [wCellPtr + 1], a
+	ld [wBlockPtr + 1], a
 
-.process_cell
-	ld a, [wMultiCellBlockParam]
+.process_block
+	ld a, [wMultiBlockParam]
 	and $ff ^ %111
-	ld [wMultiCellBlockParam], a
-	farcall ProcessCell
-	ld a, [wMultiCellBlockParam]
+	ld [wMultiBlockParam], a
+	farcall ProcessBlock
+	ld a, [wMultiBlockParam]
 	and %111
 	jr nz, .continue_loop
 	jp .break ; can be jr
@@ -303,7 +303,7 @@ ProcessMultiCellBlock:
 
 .break
 	xor a
-	ld [wMultiCellBlockParam], a
+	ld [wMultiBlockParam], a
 	ld [wIsFloorTransition], a
 	ld a, [wPendingSubState]
 	ld [wSubState], a
@@ -473,7 +473,7 @@ StartRoom_FromLevelStart:
 .not_the_temple
 	call SetWarioScreenPos
 	xor a ; FALSE
-	ld [wCellFuncWarioFlag], a
+	ld [wBlockFuncWarioFlag], a
 
 	ld a, [wceef]
 	and %00111100
@@ -541,7 +541,7 @@ Func_896f:
 	ld [hl], a
 	call Func_cc0
 	ld c, $01
-	ld a, [wSpawnYCell]
+	ld a, [wSpawnYBlock]
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .asm_8996
 	inc c
@@ -670,7 +670,7 @@ SetWarioPositionToSpawn:
 	call Func_cc0
 
 	ld c, $01
-	ld a, [wSpawnYCell]
+	ld a, [wSpawnYBlock]
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .asm_8a6c
 	inc c
@@ -1162,8 +1162,8 @@ Func_8cd7:
 	ld [wBGMapAddressQueueSize], a
 
 	ld hl, wc0a3
-	call GetCell
-	ld a, [wCellPtrBank]
+	call GetBlockPtr
+	ld a, [wBlockPtrBank]
 	sramswitch
 	ld a, [wc0a5 + 1]
 	and $08
@@ -1172,7 +1172,7 @@ Func_8cd7:
 	push hl
 	farcall Func_21f51
 	pop hl
-	ld a, [wCellPtrBank]
+	ld a, [wBlockPtrBank]
 	sramswitch
 	farcall Func_22012
 	jr .asm_8dfd
@@ -1181,7 +1181,7 @@ Func_8cd7:
 	push hl
 	farcall Func_220fc
 	pop hl
-	ld a, [wCellPtrBank]
+	ld a, [wBlockPtrBank]
 	sramswitch
 	farcall Func_221bb
 

@@ -97,7 +97,7 @@ DEF LEFT_SLOPE  EQU ON_SLOPE | 1 << LEFT_SLOPE_F
 DEF SUBMERSIBLE_WATER     EQU $1
 DEF NON_SUBMERSIBLE_WATER EQU $2
 
-; wCellFuncSpecialCollision constants
+; wBlockFuncSpecialCollision constants
 	const_def 1
 	const COLLISION_THROWN_OBJ       ; $1
 	const COLLISION_ROBO_MOUSE_BREAK ; $2

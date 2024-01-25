@@ -73,7 +73,7 @@ ZombieFunc:
 	and $0f
 	sub 4
 	jr nc, .asm_45b3f
-	call ProcessCellOnLeft
+	call ProcessBlockOnLeft
 	and $0f
 	jp z, .asm_45b61
 .asm_45b3f
@@ -108,7 +108,7 @@ ZombieFunc:
 	add 3
 	cp 16
 	jr c, .asm_45b79
-	call ProcessCellOnRight
+	call ProcessBlockOnRight
 	and $0f
 	jr z, .asm_45b61
 .asm_45b79
@@ -410,7 +410,7 @@ ZombieFunc:
 	and $0f
 	sub $04
 	jr nc, .asm_45d74
-	call ProcessCellOnLeft
+	call ProcessBlockOnLeft
 	and $0f
 	jp z, .asm_45dc9
 .asm_45d74
@@ -437,7 +437,7 @@ ZombieFunc:
 	add $03
 	cp $10
 	jr c, .asm_45da4
-	call ProcessCellOnRight
+	call ProcessBlockOnRight
 	and $0f
 	jr z, .asm_45dc4
 .asm_45da4

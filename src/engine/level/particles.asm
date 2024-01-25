@@ -1,6 +1,6 @@
 ; b = PARTICLE_* constant
-; hl = cell
-CreateParticleInCell:
+; hl = block
+CreateParticleInBlock:
 	call Func_ce3e
 ;	fallthrough
 
@@ -979,7 +979,7 @@ Func_ce3e:
 	and $f0
 	swap a
 	ld d, a
-	ld a, [wCellPtrBank]
+	ld a, [wBlockPtrBank]
 	dec a
 	add a
 	add d

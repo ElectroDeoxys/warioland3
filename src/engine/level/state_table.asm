@@ -10,7 +10,7 @@ _LevelStateTable:
 	dw FastFadeToWhite
 	dw StartRoom_FromTransition
 
-	dw ProcessMultiCellBlock ; SST_LEVEL_MULTI_CELL_BLOCK
+	dw ProcessMultiBlock ; SST_LEVEL_MULTI_BLOCK
 
 	dw DebugReset
 	dw DebugReset

@@ -100,7 +100,7 @@ INCLUDE "engine/bank3.asm"
 
 SECTION "Bank 6", ROMX
 
-INCLUDE "engine/level/cell_functions.asm"
+INCLUDE "engine/level/block_functions.asm"
 INCLUDE "engine/bank6.asm"
 
 
@@ -444,7 +444,7 @@ SECTION "Bank 31", ROMX
 INCLUDE "engine/bank31.asm"
 
 
-SECTION "Cell Function Tables 1", ROMX
+SECTION "Block Function Tables 1", ROMX
 
 INCLUDE "data/levels/function_tables1.asm"
 
@@ -832,7 +832,7 @@ SECTION "Room Special Tiles 2", ROMX
 INCLUDE "data/levels/special_tiles2.asm"
 
 
-SECTION "Cell Function Tables 2", ROMX
+SECTION "Block Function Tables 2", ROMX
 
 INCLUDE "data/levels/function_tables2.asm"
 

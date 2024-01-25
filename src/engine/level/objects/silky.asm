@@ -356,7 +356,7 @@ SilkyFunc:
 	and $0f
 	sub $08
 	jr nc, .asm_42f8d
-	call ProcessCellOnLeft
+	call ProcessBlockOnLeft
 	and $0f
 	jr z, .asm_42fab
 .asm_42f8d
@@ -387,7 +387,7 @@ SilkyFunc:
 	add $07
 	cp $10
 	jr c, .asm_42fc1
-	call ProcessCellOnRight
+	call ProcessBlockOnRight
 	and $0f
 	jr z, .asm_42fdf
 .asm_42fc1

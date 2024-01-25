@@ -339,7 +339,7 @@ BrrrBearFunc:
 	and $0f
 	sub $08
 	jr nc, .asm_4825a
-	call ProcessCellOnLeft
+	call ProcessBlockOnLeft
 	and $0f
 	jr z, .asm_48278
 .asm_4825a
@@ -370,7 +370,7 @@ BrrrBearFunc:
 	add $07
 	cp $10
 	jr c, .asm_4828e
-	call ProcessCellOnRight
+	call ProcessBlockOnRight
 	and $0f
 	jr z, .asm_482ac
 .asm_4828e

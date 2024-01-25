@@ -1,25 +1,25 @@
 Func_19706:
 	ld a, TRUE
-	ld [wCellFuncWarioFlag], a
+	ld [wBlockFuncWarioFlag], a
 	call Func_19741
 	xor a ; FALSE
-	ld [wCellFuncWarioFlag], a
+	ld [wBlockFuncWarioFlag], a
 	ret
 
 Func_19713:
 	ld a, TRUE
-	ld [wCellFuncWarioFlag], a
+	ld [wBlockFuncWarioFlag], a
 	call Func_197b1
 	xor a ; FALSE
-	ld [wCellFuncWarioFlag], a
+	ld [wBlockFuncWarioFlag], a
 	ret
 
 Func_19720:
 	ld a, TRUE
-	ld [wCellFuncWarioFlag], a
+	ld [wBlockFuncWarioFlag], a
 	call CheckAirborneCollision
 	xor a
-	ld [wCellFuncWarioFlag], a
+	ld [wBlockFuncWarioFlag], a
 	ld a, b
 	and a
 	jp nz, TriggerFloorTransition
@@ -28,7 +28,7 @@ Func_19720:
 ; checks collision in side that Wario is facing
 CheckFrontCollision:
 	ld a, TRUE
-	ld [wCellFuncBreakFlag], a
+	ld [wBlockFuncBreakFlag], a
 	ld a, [wDirection]
 	and a
 	jr z, CheckBottomLeftCollision
@@ -36,7 +36,7 @@ CheckFrontCollision:
 
 Func_19741:
 	ld a, TRUE
-	ld [wCellFuncBreakFlag], a
+	ld [wBlockFuncBreakFlag], a
 ;	fallthrough
 
 CheckBottomRightCollision:
@@ -112,7 +112,7 @@ CheckBottomRightCollision:
 
 Func_197b1:
 	ld a, TRUE
-	ld [wCellFuncBreakFlag], a
+	ld [wBlockFuncBreakFlag], a
 ;	fallthrough
 
 CheckBottomLeftCollision:
@@ -192,7 +192,7 @@ CheckBottomLeftCollision:
 
 Func_19823:
 	ld a, TRUE
-	ld [wCellFuncBreakFlag], a
+	ld [wBlockFuncBreakFlag], a
 	call Func_19bd3
 	ld a, $01
 	ld [wUnused_c18d], a
@@ -214,7 +214,7 @@ Func_19832:
 	cp b
 	jp z, .asm_198c1
 	ld a, TRUE
-	ld [wCellFuncBreakFlag], a
+	ld [wBlockFuncBreakFlag], a
 	call Func_19bd3
 	and $0f
 	ret z
@@ -347,7 +347,7 @@ Func_19942:
 	cp TRANSFORMATION_PUFFY_WARIO
 	jr z, .asm_1994e
 	ld a, TRUE
-	ld [wCellFuncBreakFlag], a
+	ld [wBlockFuncBreakFlag], a
 .asm_1994e
 	ld a, [wCollisionBoxTop]
 	cpl
@@ -384,7 +384,7 @@ CheckUpCollision:
 	cp TRANSFORMATION_PUFFY_WARIO
 	jr z, .asm_19988
 	ld a, TRUE
-	ld [wCellFuncBreakFlag], a
+	ld [wBlockFuncBreakFlag], a
 .asm_19988
 	ld a, [wCollisionBoxLeft]
 	cpl
@@ -421,7 +421,7 @@ CheckUpCollision:
 	cp TRANSFORMATION_PUFFY_WARIO
 	jr z, .asm_199c0
 	ld a, TRUE
-	ld [wCellFuncBreakFlag], a
+	ld [wBlockFuncBreakFlag], a
 .asm_199c0
 	ld a, [wCollisionBoxRight]
 	sub 3
@@ -460,7 +460,7 @@ CheckAirborneCollision:
 	and a
 	jr z, .no_smash_attack_1
 	ld a, TRUE
-	ld [wCellFuncBreakFlag], a
+	ld [wBlockFuncBreakFlag], a
 .no_smash_attack_1
 	ld a, [wCollisionBoxLeft]
 	cpl
@@ -496,7 +496,7 @@ CheckAirborneCollision:
 	and a
 	jr z, .no_smash_attack_2
 	ld a, TRUE
-	ld [wCellFuncBreakFlag], a
+	ld [wBlockFuncBreakFlag], a
 .no_smash_attack_2
 	ld a, [wCollisionBoxRight]
 	sub 3
@@ -532,7 +532,7 @@ CheckAirborneCollision:
 	and a
 	jr z, .no_smash_attack_3
 	ld a, TRUE
-	ld [wCellFuncBreakFlag], a
+	ld [wBlockFuncBreakFlag], a
 .no_smash_attack_3
 	get_pos
 	call Func_19b7b
@@ -689,108 +689,108 @@ Func_19b3a:
 
 Func_19b51::
 	ld hl, hPos
-	call GetCell
+	call GetBlockPtr
 	ld a, COLLISION_DOWN
 	ld [wc0d6], a
 ;	fallthrough
 
 Func_19b5c:
-	call ProcessCell
+	call ProcessBlock
 	ld b, a
 	ret
 
-_ProcessCellOnLeft::
-	call DecrementCellPtr
+_ProcessBlockOnLeft::
+	call DecrementBlockPtr
 	ld a, [hl]
 	inc a
 	ret z
 	jr Func_19b5c
 
-_ProcessCellOnRight::
-	call IncrementCellPtr
+_ProcessBlockOnRight::
+	call IncrementBlockPtr
 	ld a, [hl]
 	and a
 	ret z
 	jr Func_19b5c
 
-DecrementCellPtr:
-	ld hl, wCellPtr + 1
+DecrementBlockPtr:
+	ld hl, wBlockPtr + 1
 	dec [hl]
 	ret
 
-IncrementCellPtr:
-	ld hl, wCellPtr + 1
+IncrementBlockPtr:
+	ld hl, wBlockPtr + 1
 	inc [hl]
 	ret
 
 Func_19b7b::
 	ld hl, hPos
-	call GetCell
+	call GetBlockPtr
 	ld a, COLLISION_UNK1
 	ld [wc0d6], a
-	call ProcessCell
+	call ProcessBlock
 	ld b, a
 	ret
 
 Func_19b8b::
 	ld hl, hPos
-	call GetCell
+	call GetBlockPtr
 	ld a, COLLISION_UNK2
 	ld [wc0d6], a
-	call ProcessCell
+	call ProcessBlock
 	ld b, a
 	ret
 
 Func_19b9b::
 	ld hl, hPos
-	call GetCell
+	call GetBlockPtr
 	ld a, COLLISION_UNK3
 	ld [wc0d6], a
-	call ProcessCell
+	call ProcessBlock
 	ld b, a
 	ret
 
 ; unreferenced
 Func_19bab:
-	ld hl, wCellPtr + 1
+	ld hl, wBlockPtr + 1
 	dec [hl]
 	ld a, [hld]
 	ld h, [hl]
 	ld l, a
-	call ProcessCell
+	call ProcessBlock
 	ld b, a
 	ret
 
 ; unreferenced
 Func_19bb7:
-	ld hl, wCellPtr + 1
+	ld hl, wBlockPtr + 1
 	inc [hl]
 	ld a, [hld]
 	ld h, [hl]
 	ld l, a
-	call ProcessCell
+	call ProcessBlock
 	ld b, a
 	ret
 
 Func_19bc3::
 	ld hl, hPos
-	call GetCell
+	call GetBlockPtr
 	ld a, COLLISION_UNK4
 	ld [wc0d6], a
 Func_19bce:
-	call ProcessCell
+	call ProcessBlock
 	ld b, a
 	ret
 
 Func_19bd3:
-	ld hl, wCellPtr
+	ld hl, wBlockPtr
 	dec [hl]
 	ld a, [hl]
 	cp $a0 - 1
 	jr nz, .asm_19be6
-	ld a, [wCellPtrBank]
+	ld a, [wBlockPtrBank]
 	dec a
-	ld [wCellPtrBank], a
+	ld [wBlockPtrBank], a
 	ld a, $c0 - 1
 	ld [hl], a
 
@@ -802,27 +802,27 @@ Func_19bd3:
 
 Func_19beb:
 	ld hl, hPos
-	call GetCell
+	call GetBlockPtr
 	ld a, COLLISION_UNK5
 	ld [wc0d6], a
-	call ProcessCell
+	call ProcessBlock
 	ld b, a
 	ret
 
 Func_19bfb:
 	ld hl, hPos
-	call GetCell
+	call GetBlockPtr
 	ld a, COLLISION_UNK6
 	ld [wc0d6], a
-	call ProcessCell
+	call ProcessBlock
 	ld b, a
 	ret
 
 Func_19c0b:
 	ld hl, hPos
-	call GetCell
+	call GetBlockPtr
 	ld a, COLLISION_UNK7
 	ld [wc0d6], a
-	call ProcessCell
+	call ProcessBlock
 	ld b, a
 	ret

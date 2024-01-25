@@ -380,8 +380,8 @@ ENDR
 	ld [wBGMapAddressQueueSize], a
 
 	ld hl, wc0a3
-	call GetCell
-	ld a, [wCellPtrBank]
+	call GetBlockPtr
+	ld a, [wBlockPtrBank]
 	sramswitch
 	ld a, [wc0a3 + 1]
 	and $08
@@ -389,7 +389,7 @@ ENDR
 	push hl
 	call .Func_9254
 	pop hl
-	ld a, [wCellPtrBank]
+	ld a, [wBlockPtrBank]
 	sramswitch
 	call .Func_9605
 	jr .update_queue_size
@@ -398,7 +398,7 @@ ENDR
 	push hl
 	call .Func_99ca
 	pop hl
-	ld a, [wCellPtrBank]
+	ld a, [wBlockPtrBank]
 	sramswitch
 	call .Func_9d4c
 
@@ -923,8 +923,8 @@ ENDR
 	ld [wBGMapAddressQueueSize], a
 
 	ld hl, wc0a3
-	call GetCell
-	ld a, [wCellPtrBank]
+	call GetBlockPtr
+	ld a, [wBlockPtrBank]
 	sramswitch
 	ld a, [wc0a5 + 1]
 	and $08
@@ -932,7 +932,7 @@ ENDR
 	push hl
 	call Func_a2aa
 	pop hl
-	ld a, [wCellPtrBank]
+	ld a, [wBlockPtrBank]
 	sramswitch
 	call Func_a79e
 	jr .asm_a2a1
@@ -940,7 +940,7 @@ ENDR
 	push hl
 	call Func_aca6
 	pop hl
-	ld a, [wCellPtrBank]
+	ld a, [wBlockPtrBank]
 	sramswitch
 	call Func_b182
 .asm_a2a1
@@ -2209,7 +2209,7 @@ Func_ba42:
 	ld l, [hl]
 	ld h, a
 	ld a, c
-	ld [wCellPtrBank], a
+	ld [wBlockPtrBank], a
 	call Func_d8c
 	ld a, [wccec]
 	sramswitch
@@ -2259,7 +2259,7 @@ Func_ba42:
 	pop af
 	ldh [rSVBK], a
 	ld a, c
-	ld [wCellPtrBank], a
+	ld [wBlockPtrBank], a
 	ld h, d
 	ld l, e
 	call Func_d3e
@@ -2335,7 +2335,7 @@ Func_bb2d:
 	ld l, [hl]
 	ld h, a
 	ld a, c
-	ld [wCellPtrBank], a
+	ld [wBlockPtrBank], a
 	call Func_d8c
 	ld a, [wccec]
 	sramswitch
@@ -2387,10 +2387,10 @@ Func_bb85:
 .got_sram_bank
 	ld h, a
 	ld a, b
-	ld [wCellPtrBank], a
+	ld [wBlockPtrBank], a
 	sramswitch
 	push hl
-	call GetCellPtrBGMapAddress
+	call GetBlockPtrPtrBGMapAddress
 	ld a, [wBGMapAddressQueueSize]
 	ld b, a
 	ld de, wBGMapAddressQueue
@@ -2398,7 +2398,7 @@ Func_bb85:
 	add b
 	ld e, a
 
-	; each cell is 2x2 tiles
+	; each block is 2x2 tiles
 	; current address points to the top-left corner tile
 
 	; top-left tile
@@ -2525,12 +2525,12 @@ Func_bb85:
 	ldh [rSVBK], a
 	ret
 
-; if wSwitchStateUpdated is set, then update cells
+; if wSwitchStateUpdated is set, then update blocks
 ; this update revolves around the assumption that
-; if $8 is added to the cell, then it corresponds
-; to a new cell for its off state, and subtracting $8
-; will revert it to a cell corresponding to on state
-UpdateSwitchableCells:
+; if $8 is added to the block, then it corresponds
+; to a new block for its off state, and subtracting $8
+; will revert it to a block corresponding to on state
+UpdateSwitchableBlocks:
 	ld a, [wSwitchStateUpdated]
 	and a
 	ret z
@@ -2550,15 +2550,15 @@ UpdateSwitchableCells:
 	ld a, [hli]
 	and $7f
 	cp $60
-	jr c, .next_cell_1
+	jr c, .next_block_1
 	cp $68
-	jr nc, .next_cell_1
+	jr nc, .next_block_1
 	; between $60 and $67
 	dec l
 	ld a, [hl]
 	add $08
 	ld [hli], a
-.next_cell_1
+.next_block_1
 	ld a, l
 	cp LEVEL_WIDTH
 	jr c, .loop_1
@@ -2579,14 +2579,14 @@ UpdateSwitchableCells:
 	ld a, [hli]
 	and $7f
 	cp $60
-	jr c, .next_cell_2
+	jr c, .next_block_2
 	cp $68
-	jr nc, .next_cell_2
+	jr nc, .next_block_2
 	dec l
 	ld a, [hl]
 	add $08
 	ld [hli], a
-.next_cell_2
+.next_block_2
 	ld a, l
 	cp LEVEL_WIDTH
 	jr c, .loop_2
@@ -2609,14 +2609,14 @@ UpdateSwitchableCells:
 	ld a, [hli]
 	and $7f
 	cp $68
-	jr c, .next_cell_3
+	jr c, .next_block_3
 	cp $70
-	jr nc, .next_cell_3
+	jr nc, .next_block_3
 	dec l
 	ld a, [hl]
 	sub $08
 	ld [hli], a
-.next_cell_3
+.next_block_3
 	ld a, l
 	cp LEVEL_WIDTH
 	jr c, .loop_3
@@ -2637,14 +2637,14 @@ UpdateSwitchableCells:
 	ld a, [hli]
 	and $7f
 	cp $68
-	jr c, .next_cell_4
+	jr c, .next_block_4
 	cp $70
-	jr nc, .next_cell_4
+	jr nc, .next_block_4
 	dec l
 	ld a, [hl]
 	sub $08
 	ld [hli], a
-.next_cell_4
+.next_block_4
 	ld a, l
 	cp LEVEL_WIDTH
 	jr c, .loop_4
