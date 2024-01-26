@@ -459,7 +459,7 @@ UpdateState_Burnt:
 
 SetState_FlatAirborne:
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	ret nz
 	ld a, [wTransformation]
 	cp TRANSFORMATION_OWL_WARIO
@@ -496,7 +496,7 @@ SetState_FlatAirborne:
 	pop af
 	ldh [rSVBK], a
 
-	ld a, (1 << 6) | TRANSFORMATION_FLAT_WARIO
+	ld a, TRANSFORMATION_FLAT_WARIO
 	ld [wTransformation], a
 	play_sfx SFX_01B
 	call UpdateLevelMusic

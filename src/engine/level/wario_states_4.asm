@@ -2429,7 +2429,7 @@ SetState_Launched:
 	xor a
 	ld [wIsIntangible], a
 
-	ld a, (1 << 6) | TRANSFORMATION_UNK_14
+	ld a, TRANSFORMATION_LAUNCHED
 	ld [wTransformation], a
 
 	ld a, TOUCH_VANISH

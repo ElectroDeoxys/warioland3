@@ -263,7 +263,7 @@ BeamBotFunc:
 
 .asm_4677a
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_SPLIT
+	cp TRANSFORMATION_SPLIT
 	jr z, .asm_467cf
 	ld hl, wCurObjFlags
 	bit OBJFLAG_ON_SCREEN_F, [hl]

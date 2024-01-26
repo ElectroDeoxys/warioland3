@@ -2158,8 +2158,9 @@ Func_b9a6:
 	ret
 .asm_ba13
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
+	cp TRANSFORMATION_FLAT_WARIO
 	jr nz, .asm_ba1f
+	; flat Wario
 	ld a, [wJumpVelTable]
 	and a
 	ret nz

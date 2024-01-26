@@ -793,6 +793,7 @@ UpdateObjects:
 	ld a, [wTransformation]
 	rla
 	jr nc, .got_effective_power_up
+	; TRANSFORMATIONF_SUPER_SMASH_F is set
 	ld e, SUPER_JUMP_SLAM_OVERALLS
 .got_effective_power_up
 	ld a, e

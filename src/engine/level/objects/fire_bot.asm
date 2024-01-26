@@ -492,7 +492,7 @@ FireBotFunc:
 
 .asm_46e9e
 	ld a, [wTransformation]
-	cp (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
+	cp TRANSFORMATION_HOT_WARIO
 	jr z, .asm_46eec
 	ld c, $2a
 	ld a, [wWarioScreenYPos]

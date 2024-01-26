@@ -262,7 +262,7 @@ CountRichtertoffenFunc:
 	ld a, OBJSTATE_SPECIAL_1
 	ld [hld], a
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
+	cp TRANSFORMATION_FLAT_WARIO
 	jr nz, .asm_40ffa
 	ld a, [hl] ; OBJ_SUBSTATE
 	rlca

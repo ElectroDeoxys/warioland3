@@ -270,7 +270,7 @@ SilkyFunc:
 
 .Func_42ef8:
 	ld a, [wTransformation]
-	cp (1 << 6) | (1 << 7) | TRANSFORMATION_BALL_O_STRING_WARIO
+	cp TRANSFORMATION_BALL_O_STRING_WARIO
 	jr z, .asm_42f44
 	ld c, $2a
 	ld a, [wWarioScreenYPos]

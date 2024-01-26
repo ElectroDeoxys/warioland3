@@ -273,13 +273,13 @@ UpdateLevel:
 	and SELECT | START
 	ret z
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_BLIND
+	cp TRANSFORMATION_BLIND
 	jr z, .no_pause
 	ld a, [wIsBossBattle]
 	and a
 	jr nz, .no_pause
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_BLIND
+	cp TRANSFORMATION_BLIND
 	jr nz, .pause ; this jump will always happen
 .no_pause
 	play_sfx SFX_0E5

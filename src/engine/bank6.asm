@@ -41,7 +41,7 @@ Func_19741:
 
 CheckBottomRightCollision:
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
+	cp TRANSFORMATION_FLAT_WARIO
 	jr z, .flat
 	ld a, [wCollisionBoxRight]
 	sub 1
@@ -117,7 +117,7 @@ Func_197b1:
 
 CheckBottomLeftCollision:
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
+	cp TRANSFORMATION_FLAT_WARIO
 	jr z, .flat
 	ld a, [wCollisionBoxLeft]
 	cpl
@@ -345,10 +345,11 @@ CheckCentreCollision:
 Func_19942:
 	ld a, [wTransformation]
 	cp TRANSFORMATION_PUFFY_WARIO
-	jr z, .asm_1994e
+	jr z, .puffy
+	; can destroy blocks above
 	ld a, TRUE
 	ld [wBlockFuncBreakFlag], a
-.asm_1994e
+.puffy
 	ld a, [wCollisionBoxTop]
 	cpl
 	inc a
@@ -382,10 +383,11 @@ CheckUpCollision:
 	ld [wced2], a
 	ld a, [wTransformation]
 	cp TRANSFORMATION_PUFFY_WARIO
-	jr z, .asm_19988
+	jr z, .puffy_1
+	; can destroy blocks above
 	ld a, TRUE
 	ld [wBlockFuncBreakFlag], a
-.asm_19988
+.puffy_1
 	ld a, [wCollisionBoxLeft]
 	cpl
 	inc a
@@ -419,10 +421,11 @@ CheckUpCollision:
 
 	ld a, [wTransformation]
 	cp TRANSFORMATION_PUFFY_WARIO
-	jr z, .asm_199c0
+	jr z, .puffy_2
+	; can destroy blocks above
 	ld a, TRUE
 	ld [wBlockFuncBreakFlag], a
-.asm_199c0
+.puffy_2
 	ld a, [wCollisionBoxRight]
 	sub 3
 	ld c, a

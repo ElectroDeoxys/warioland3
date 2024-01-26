@@ -993,9 +993,9 @@ BlockFunc_LightSource:
 	and a
 	jp z, BlockFunc_Free
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_ZOMBIE_WARIO
+	cp TRANSFORMATION_ZOMBIE_WARIO
 	jr z, .asm_1883a
-	cp (1 << 6) | TRANSFORMATION_VAMPIRE_WARIO
+	cp TRANSFORMATION_VAMPIRE_WARIO
 	jp nz, BlockFunc_Free
 	call RecoverFromTransformation_WithoutInvincibility
 	jp BlockFunc_Free
@@ -1021,7 +1021,7 @@ BlockFunc_18868:
 	and a
 	jp z, BlockFunc_Free
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_VAMPIRE_WARIO
+	cp TRANSFORMATION_VAMPIRE_WARIO
 	jp nz, BlockFunc_Free
 	ld a, [wc0d6]
 	bit COLLISION_UNK7_F, a
@@ -1084,9 +1084,9 @@ BlockFunc_Fire:
 	and a
 	jp nz, BlockFunc_Free
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	jp nz, BlockFunc_Free
-	ld a, (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
+	ld a, TRANSFORMATION_HOT_WARIO
 	ld [wTransformation], a
 	ld a, 1
 	ld [wWarioTransformationProgress], a
@@ -1187,7 +1187,7 @@ BlockFunc_SmallGap:
 	and a
 	jp z, BlockFunc_Free
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
+	cp TRANSFORMATION_FLAT_WARIO
 	jp z, BlockFunc_Free
 	jp BlockFunc_Solid
 
@@ -1284,7 +1284,7 @@ CrackedBlockWithColourCoinCollision:
 	and a
 	jp nz, BlockFunc_Free
 	ld a, [wTransformation]
-	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
+	cp TRANSFORMATION_FAT_WARIO
 	jp z, BlockFunc_Free
 	ld a, [wIsSmashAttacking]
 	and a
@@ -1323,7 +1323,7 @@ Func_18aa8:
 	and a
 	jp z, BlockFunc_Solid
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_SNOWMAN_WARIO
+	cp TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
 	ld a, [wWarioTransformationProgress]
 	cp 1
@@ -1359,7 +1359,7 @@ Func_18aec:
 	and a
 	jp z, BlockFunc_Solid
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_SNOWMAN_WARIO
+	cp TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
 	ld a, [wWarioTransformationProgress]
 	cp 1
@@ -1400,7 +1400,7 @@ Func_18b2d:
 	and a
 	jp z, BlockFunc_Solid
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_SNOWMAN_WARIO
+	cp TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
 	ld a, [wWarioTransformationProgress]
 	cp 1
@@ -1442,7 +1442,7 @@ Func_18b71:
 	and a
 	jp z, BlockFunc_Solid
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_SNOWMAN_WARIO
+	cp TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
 	ld a, [wWarioTransformationProgress]
 	cp 1
@@ -1485,7 +1485,7 @@ Func_18bb5:
 	and a
 	jp z, BlockFunc_Solid
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_SNOWMAN_WARIO
+	cp TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
 	ld a, [wWarioTransformationProgress]
 	cp 3
@@ -1528,7 +1528,7 @@ Func_18bf9:
 	and a
 	jp z, BlockFunc_Solid
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_SNOWMAN_WARIO
+	cp TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
 	ld a, [wWarioTransformationProgress]
 	cp 3
@@ -1569,7 +1569,7 @@ Func_18c3a:
 	and a
 	jp z, BlockFunc_Solid
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_SNOWMAN_WARIO
+	cp TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
 	ld a, [wWarioTransformationProgress]
 	cp 3
@@ -1611,7 +1611,7 @@ Func_18c7e:
 	and a
 	jp z, BlockFunc_Solid
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_SNOWMAN_WARIO
+	cp TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
 	ld a, [wWarioTransformationProgress]
 	cp 3
@@ -1711,7 +1711,7 @@ CrackedBlockCollision:
 	and a
 	jp nz, BlockFunc_Free
 	ld a, [wTransformation]
-	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
+	cp TRANSFORMATION_FAT_WARIO
 	jp z, BlockFunc_Free
 	ld a, [wIsSmashAttacking]
 	and a
@@ -1768,7 +1768,7 @@ NonCrackedBlockCollision:
 	and a
 	jp z, BlockFunc_Solid
 	ld a, [wTransformation]
-	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
+	cp TRANSFORMATION_FAT_WARIO
 	jr z, .fat_wario
 	ld a, [wPowerUpLevel]
 	cp GARLIC
@@ -2267,7 +2267,7 @@ Func_19086:
 	and a
 	jp nz, BlockFunc_Free
 	ld a, [wTransformation]
-	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
+	cp TRANSFORMATION_FAT_WARIO
 	jp z, BlockFunc_Free
 	ld a, [wIsSmashAttacking]
 	and a
@@ -2335,7 +2335,7 @@ Func_190fe:
 	and a
 	jp z, BlockFunc_Solid
 	ld a, [wTransformation]
-	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
+	cp TRANSFORMATION_FAT_WARIO
 	jr z, .asm_19145
 	ld a, [wPowerUpLevel]
 	cp GARLIC
@@ -2444,7 +2444,7 @@ Func_191b3:
 	and a
 	jp z, BlockFunc_Solid
 	ld a, [wTransformation]
-	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
+	cp TRANSFORMATION_FAT_WARIO
 	jr z, .asm_191fa
 	ld a, [wPowerUpLevel]
 	cp GARLIC
@@ -2579,7 +2579,7 @@ Func_19291:
 	and a
 	jp z, BlockFunc_Solid
 	ld a, [wTransformation]
-	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
+	cp TRANSFORMATION_FAT_WARIO
 	jr z, .asm_192d8
 	ld a, [wPowerUpLevel]
 	cp GARLIC
@@ -2688,7 +2688,7 @@ Func_19346:
 	and a
 	jp z, BlockFunc_Solid
 	ld a, [wTransformation]
-	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
+	cp TRANSFORMATION_FAT_WARIO
 	jr z, .asm_1938d
 	ld a, [wPowerUpLevel]
 	cp GARLIC
@@ -2857,7 +2857,7 @@ BonfireBlockCollision:
 	and a
 	jp z, BlockFunc_Solid
 	ld a, [wTransformation]
-	cp (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
+	cp TRANSFORMATION_HOT_WARIO
 	jr nz, .dont_break
 	ld a, [wWarioTransformationProgress]
 	cp 2
@@ -2921,7 +2921,7 @@ DoughnutBlockCollision:
 	and a
 	jp z, BlockFunc_Solid
 	ld a, [wTransformation]
-	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
+	cp TRANSFORMATION_FAT_WARIO
 	jp nz, BlockFunc_Solid
 	ld a, [wc0d6]
 	and COLLISION_UNK1 | COLLISION_UNK6
@@ -2987,7 +2987,7 @@ Func_19502:
 	and a
 	jp z, BlockFunc_Solid
 	ld a, [wTransformation]
-	cp (1 << 6) | (1 << 7) | TRANSFORMATION_BALL_O_STRING_WARIO
+	cp TRANSFORMATION_BALL_O_STRING_WARIO
 	jp z, Func_19481
 	jp BlockFunc_Solid
 
@@ -3020,7 +3020,7 @@ Func_19522:
 	and a
 	jp z, BlockFunc_Solid
 	ld a, [wTransformation]
-	cp (1 << 6) | (1 << 7) | TRANSFORMATION_BALL_O_STRING_WARIO
+	cp TRANSFORMATION_BALL_O_STRING_WARIO
 	jr z, .asm_19542
 	jp BlockFunc_Solid
 .asm_19542
@@ -3060,7 +3060,7 @@ Func_19560:
 	and a
 	jp z, BlockFunc_Solid
 	ld a, [wTransformation]
-	cp (1 << 6) | (1 << 7) | TRANSFORMATION_BALL_O_STRING_WARIO
+	cp TRANSFORMATION_BALL_O_STRING_WARIO
 	jr z, .asm_19580
 	jp BlockFunc_Solid
 .asm_19580
@@ -3100,7 +3100,7 @@ Func_1959b:
 	and a
 	jp z, BlockFunc_Solid
 	ld a, [wTransformation]
-	cp (1 << 6) | (1 << 7) | TRANSFORMATION_BALL_O_STRING_WARIO
+	cp TRANSFORMATION_BALL_O_STRING_WARIO
 	jr z, .asm_195bb
 	jp BlockFunc_Solid
 .asm_195bb
@@ -3141,7 +3141,7 @@ YarnBlockCollision:
 	and a
 	jp z, BlockFunc_Solid
 	ld a, [wTransformation]
-	cp (1 << 6) | (1 << 7) | TRANSFORMATION_BALL_O_STRING_WARIO
+	cp TRANSFORMATION_BALL_O_STRING_WARIO
 	jr z, .asm_195f9
 	jp BlockFunc_Solid
 .asm_195f9

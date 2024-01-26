@@ -212,7 +212,7 @@ ZombieFunc:
 
 .Rising:
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_ZOMBIE_WARIO
+	cp TRANSFORMATION_ZOMBIE_WARIO
 	jr nz, .asm_45c2f
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
@@ -252,7 +252,7 @@ ZombieFunc:
 	and a
 	jr z, .substate_table
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_ZOMBIE_WARIO
+	cp TRANSFORMATION_ZOMBIE_WARIO
 	jr nz, .asm_45cb2
 	ld a, [hl]
 	cp $0a

@@ -802,7 +802,7 @@ PlayRecoverySFX::
 
 ClearTransformationValues::
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_BLIND
+	cp TRANSFORMATION_BLIND
 	call z, .RestoreBlindPalettes
 
 	xor a
@@ -1675,8 +1675,8 @@ UpdateLevelMusic::
 	ld hl, TransformationMusicIDs
 	add hl, de
 	ld a, [hli]
-	cp $ff ; is it null?
-	jr z, .level_music
+	cp $ff
+	jr z, .level_music ; jump if null
 	ldh [hMusicID + 1], a
 	ld a, [hl]
 	ldh [hMusicID + 0], a

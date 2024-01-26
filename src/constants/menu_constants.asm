@@ -55,3 +55,18 @@ DEF TRANSITION_NEW_GAME             EQU $ff
 	const PAUSEMENU_TO_MAP      ; $3
 
 DEF PAUSEMENUF_SELECT_F EQU 7
+
+; flags in wPowerUpLevel for Action Help stuff
+	const_def 6
+	const ACTION_HELP_TITLE_SCREEN_F ; 6
+	const ACTION_HELP_LEVEL_CLEAR_F  ; 7
+
+DEF ACTION_HELP_TITLE_SCREEN EQU (1 << ACTION_HELP_TITLE_SCREEN_F)
+DEF ACTION_HELP_LEVEL_CLEAR  EQU (1 << ACTION_HELP_LEVEL_CLEAR_F)
+
+; pals for Power Up icons in Action Help screen
+	const_def $4
+	const OBPAL_POWER_UP_YELLOW ; 4
+	const OBPAL_POWER_UP_RED    ; 5
+	const OBPAL_POWER_UP_GREEN  ; 6
+	const OBPAL_POWER_UP_BLUE   ; 7

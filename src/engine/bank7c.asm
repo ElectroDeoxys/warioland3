@@ -1313,7 +1313,7 @@ HandlePauseMenuInput:
 	jr z, .owl_1
 	cp TRANSFORMATION_RAIL
 	jr z, .rail_1
-	cp (1 << 6) | TRANSFORMATION_VAMPIRE_WARIO
+	cp TRANSFORMATION_VAMPIRE_WARIO
 	jr z, .vampire_1
 	ld bc, Frameset_1f1c50
 	jr .asm_1f0a79
@@ -1417,7 +1417,7 @@ HandlePauseMenuInput:
 	jr z, .owl_2
 	cp TRANSFORMATION_RAIL
 	jr z, .rail_2
-	cp (1 << 6) | TRANSFORMATION_VAMPIRE_WARIO
+	cp TRANSFORMATION_VAMPIRE_WARIO
 	jr z, .vampire_2
 	ld bc, Frameset_1f1c69
 	jr .asm_1f0b18

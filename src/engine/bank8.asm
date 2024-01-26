@@ -367,7 +367,7 @@ Func_2023b:
 	cp $01
 	ret z ; is invincible
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
+	cp TRANSFORMATION_FLAT_WARIO
 	jr z, Func_2028a
 	and a
 	ret nz
@@ -533,9 +533,9 @@ AttackObject:
 	ld b, OBJACTION_ATTACK
 	call SetObjAction
 	ld a, [wTransformation]
-	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
+	cp TRANSFORMATION_FAT_WARIO
 	jr z, .fat
-	cp (1 << 6) | TRANSFORMATION_SNOWMAN_WARIO
+	cp TRANSFORMATION_SNOWMAN_WARIO
 	jr z, .snowman
 	and a
 	ret nz
@@ -592,7 +592,7 @@ StepOnObject:
 	jr nz, .no_smash_attack
 ; Wario is smash attacking
 	ld a, [wTransformation]
-	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
+	cp TRANSFORMATION_FAT_WARIO
 	jp z, Func_205e7
 	jp Func_20602
 
@@ -721,7 +721,7 @@ StepOnObject:
 
 .Transformed
 	ld a, [wTransformation]
-	cp (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
+	cp TRANSFORMATION_HOT_WARIO
 	jr nz, .not_hot_wario
 	ld a, [wWarioTransformationProgress]
 	cp 2
@@ -729,7 +729,7 @@ StepOnObject:
 .not_hot_wario
 
 	ld a, [wTransformation]
-	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
+	cp TRANSFORMATION_FAT_WARIO
 	jp z, AttackObject
 	ld a, [wWarioScreenXPos]
 	ld b, a
@@ -749,7 +749,7 @@ StepOnObject:
 	ld b, OBJACTION_WOBBLE
 	call SetObjAction
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
+	cp TRANSFORMATION_FLAT_WARIO
 	jp z, Func_2028a
 	cp TRANSFORMATION_BOUNCY_WARIO
 	jr z, .asm_205d1
@@ -765,7 +765,7 @@ Func_205e7:
 	ld b, OBJACTION_VANISH_TOUCH
 	call SetObjAction
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_ZOMBIE_WARIO
+	cp TRANSFORMATION_ZOMBIE_WARIO
 	ret nz
 	farcall SetState_ZombieKnockBack
 	ret
@@ -773,10 +773,10 @@ Func_205e7:
 Func_20602:
 	ld a, [wTransformation]
 	cp TRANSFORMATION_INVISIBLE_WARIO
-	jr z, .asm_2060c
+	jr z, .invisible
 	and a
-	jr nz, Func_205e7
-.asm_2060c
+	jr nz, Func_205e7 ; has transformation except invisible
+.invisible
 	ld a, [wGrabState]
 	and GRAB_STATE_MASK
 	cp GRAB_IDLE
@@ -1342,11 +1342,11 @@ Func_20a6f:
 	call AddXOffset
 .asm_20acf
 	ld a, [wTransformation]
-	cp (1 << 6) | (1 << 7) | TRANSFORMATION_BALL_O_STRING_WARIO
+	cp TRANSFORMATION_BALL_O_STRING_WARIO
 	jr z, .ball_o_string
-	cp (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
+	cp TRANSFORMATION_HOT_WARIO
 	jr z, .hot
-	cp (1 << 6) | TRANSFORMATION_ICE_SKATIN
+	cp TRANSFORMATION_ICE_SKATIN
 	jr z, .ice_skatin
 	xor a
 	ld [wWalkVelIndex], a
@@ -1805,10 +1805,10 @@ ObjInteraction_Fire:
 	and a
 	ret nz
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	jp nz, Func_2022c
 
-	ld a, (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
+	ld a, TRANSFORMATION_HOT_WARIO
 	ld [wTransformation], a
 	ld a, 1
 	ld [wWarioTransformationProgress], a
@@ -1918,7 +1918,7 @@ ObjInteraction_Richtertoffen:
 	and a
 	ret nz
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	jp nz, Func_2022c
 	ld a, -11
 	ld [wCollisionBoxLeft], a
@@ -2132,7 +2132,7 @@ Func_21156:
 	ld b, OBJACTION_0C
 	call SetObjAction
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
+	cp TRANSFORMATION_FLAT_WARIO
 	jp z, SetState_FlatStretching
 	and a
 	jp nz, Func_2022c
@@ -2272,7 +2272,7 @@ Func_2126a:
 	and a
 	ret nz
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	jp nz, Func_2023b
 	ld a, [wWarioScreenXPos]
 	ld b, a
@@ -2289,7 +2289,7 @@ Func_2126a:
 .asm_212b8
 	play_sfx SFX_039
 
-	ld a, (1 << 6) | (1 << 7) | TRANSFORMATION_BALL_O_STRING_WARIO
+	ld a, TRANSFORMATION_BALL_O_STRING_WARIO
 	ld [wTransformation], a
 	xor a
 	ld [wWarioTransformationProgress], a
@@ -2361,15 +2361,15 @@ Func_21358:
 	and a
 	ret nz
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	jp nz, Func_20a69
-	cp (1 << 7) | TRANSFORMATION_FAT_WARIO
+	cp TRANSFORMATION_FAT_WARIO
 	jr nz, .asm_21373
 	jp Func_20a69
 
 .asm_21373
 	call Func_20a63
-	ld a, (1 << 7) | TRANSFORMATION_FAT_WARIO
+	ld a, TRANSFORMATION_FAT_WARIO
 	ld [wTransformation], a
 	ld a, TOUCH_BUMP
 	ld [wTouchState], a
@@ -2494,9 +2494,9 @@ ObjInteraction_Electric:
 	and a
 	ret nz
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	ret nz
-	cp (1 << 7) | TRANSFORMATION_ELECTRIC
+	cp TRANSFORMATION_ELECTRIC
 	ret z
 	ld a, [wInteractionSide]
 	bit INTERACTION_RIGHT_F, a
@@ -2535,7 +2535,7 @@ ObjInteraction_Electric:
 	ld a, 9
 	ld [wCollisionBoxRight], a
 
-	ld a, (1 << 7) | TRANSFORMATION_ELECTRIC
+	ld a, TRANSFORMATION_ELECTRIC
 	ld [wTransformation], a
 	ld a, TOUCH_VANISH
 	ld [wTouchState], a
@@ -2592,7 +2592,7 @@ Func_21548:
 	and a
 	ret nz
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	ret nz
 	cp TRANSFORMATION_INVISIBLE_WARIO
 	ret z
@@ -2610,7 +2610,7 @@ Func_21573:
 	and a
 	ret nz
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	jp nz, Func_2022c
 	cp TRANSFORMATION_PUFFY_WARIO
 	jp z, Func_2022c
@@ -2627,9 +2627,9 @@ Func_215a2:
 	and a
 	jp nz, Func_20a69
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_ZOMBIE_WARIO
+	cp TRANSFORMATION_ZOMBIE_WARIO
 	jp z, Func_205e7
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	jp nz, Func_20a69
 
 	ld b, OBJACTION_06
@@ -2637,7 +2637,7 @@ Func_215a2:
 
 	play_sfx SFX_028
 
-	ld a, (1 << 6) | TRANSFORMATION_ZOMBIE_WARIO
+	ld a, TRANSFORMATION_ZOMBIE_WARIO
 	ld [wTransformation], a
 	ld a, TOUCH_VANISH
 	ld [wTouchState], a
@@ -2672,7 +2672,7 @@ Func_2160a:
 	ld b, OBJACTION_06
 	call SetObjAction
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	jp nz, Func_2022c
 	cp TRANSFORMATION_BOUNCY_WARIO
 	jp z, Func_2022c
@@ -2754,7 +2754,7 @@ Func_2168b:
 	cp $01
 	ret z
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
+	cp TRANSFORMATION_FLAT_WARIO
 	jr z, .asm_2173e
 	and a
 	ret nz
@@ -2778,7 +2778,7 @@ Func_2168b:
 	cp $01
 	ret z
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
+	cp TRANSFORMATION_FLAT_WARIO
 	jr z, .asm_2175e
 	and a
 	ret nz
@@ -2817,7 +2817,7 @@ Func_21774:
 	and a
 	ret nz
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	ret nz
 	ld b, OBJACTION_FLATTEN
 	call SetObjAction
@@ -2852,7 +2852,7 @@ Func_217b9:
 	and a
 	ret nz
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	jp nz, Func_2022c
 	cp TRANSFORMATION_CRAZY_WARIO
 	jp z, Func_2022c
@@ -2876,17 +2876,17 @@ ObjInteraction_Vampire:
 	and a
 	ret nz
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	ret nz
 
 	ld b, OBJACTION_06
 	call SetObjAction
 
-	ld a, (1 << 6) | TRANSFORMATION_VAMPIRE_WARIO
+	ld a, TRANSFORMATION_VAMPIRE_WARIO
 	ld [wTransformation], a
 	farcall Func_19b25
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_VAMPIRE_WARIO
+	cp TRANSFORMATION_VAMPIRE_WARIO
 	ret nz
 	farcall SetState_VampireTransforming
 	ret
@@ -2896,13 +2896,13 @@ ObjInteraction_Bubble:
 	and a
 	ret nz
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	ret nz
 
 	ld b, OBJACTION_07
 	call SetObjAction
 
-	ld a, (1 << 6) | TRANSFORMATION_BUBBLE
+	ld a, TRANSFORMATION_BUBBLE
 	ld [wTransformation], a
 	ld a, TOUCH_BUMP
 	ld [wTouchState], a
@@ -2918,7 +2918,7 @@ ObjInteraction_Ice:
 	and a
 	ret nz
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	ret nz
 	ld a, [wIsCrouching]
 	and a
@@ -2938,7 +2938,7 @@ ObjInteraction_Ice:
 	call SetObjAction
 
 	play_sfx SFX_028
-	ld a, (1 << 6) | TRANSFORMATION_ICE_SKATIN
+	ld a, TRANSFORMATION_ICE_SKATIN
 	ld [wTransformation], a
 	ld a, TOUCH_ATTACK
 	ld [wTouchState], a
@@ -2957,7 +2957,7 @@ ObjInteraction_Owl:
 
 .asm_218f1
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	ret nz
 	cp TRANSFORMATION_OWL_WARIO
 	ret z
@@ -3028,7 +3028,7 @@ ObjInteraction_Owl:
 
 ObjInteraction_Rail:
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	ret nz
 	cp TRANSFORMATION_RAIL
 	ret z
@@ -3118,11 +3118,11 @@ Func_21a52:
 	and a
 	jp nz, Func_20a69
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	jp nz, Func_20a69
 	call Func_20a63
 
-	ld a, (1 << 6) | TRANSFORMATION_SNOWMAN_WARIO
+	ld a, TRANSFORMATION_SNOWMAN_WARIO
 	ld [wTransformation], a
 
 	xor a
@@ -3138,7 +3138,7 @@ Func_21a52:
 
 ObjInteraction_UnlitTorch:
 	ld a, [wTransformation]
-	cp (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
+	cp TRANSFORMATION_HOT_WARIO
 	ret nz
 	ld b, OBJACTION_0E
 	jp SetObjAction
@@ -3239,13 +3239,13 @@ Func_21b42:
 	and a
 	ret nz
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	jp nz, Func_2022c
 
 	ld b, OBJACTION_06
 	call SetObjAction
 
-	ld a, (1 << 6) | TRANSFORMATION_SPLIT
+	ld a, TRANSFORMATION_SPLIT
 	ld [wTransformation], a
 
 	ld a, TOUCH_PASS_THROUGH
@@ -3275,13 +3275,13 @@ Func_21b89:
 	and a
 	ret nz
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	jp nz, Func_2022c
 
 	ld b, OBJACTION_06
 	call SetObjAction
 
-	ld a, (1 << 6) | TRANSFORMATION_BLIND
+	ld a, TRANSFORMATION_BLIND
 	ld [wTransformation], a
 
 	ld a, TOUCH_BUMP
@@ -3525,7 +3525,7 @@ Func_21dac:
 	and a
 	ret nz
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	jp nz, Func_2022c
 	ld a, [wEnemyDirection]
 	ld [wDirection], a
@@ -3563,12 +3563,12 @@ Func_21df8:
 	and a
 	ret nz
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	jp nz, Func_2022c
 	ld b, OBJACTION_06
 	call SetObjAction
 
-	ld a, (1 << 6) | TRANSFORMATION_MAGIC
+	ld a, TRANSFORMATION_MAGIC
 	ld [wTransformation], a
 
 	ld a, TOUCH_PASS_THROUGH
@@ -3590,7 +3590,7 @@ ObjInteraction_BottomSting:
 
 Func_21e3e:
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_BALL
+	cp TRANSFORMATION_BALL
 	jr z, Func_21e8a
 	ld a, [wInteractionSide]
 	bit INTERACTION_DOWN_F, a
@@ -3604,11 +3604,11 @@ Func_21e3e:
 	and a
 	ret nz
 	ld a, [wTransformation]
-	bit 6, a
+	bit TRANSFORMATIONF_PERSISTENT_F, a
 	jp nz, Func_2022c
 	ld b, OBJACTION_06
 	call SetObjAction
-	ld a, (1 << 6) | TRANSFORMATION_BALL
+	ld a, TRANSFORMATION_BALL
 	ld [wTransformation], a
 
 	ld a, TOUCH_PASS_THROUGH
@@ -3627,7 +3627,7 @@ Func_21e8a:
 
 Func_21e9c:
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_BALL
+	cp TRANSFORMATION_BALL
 	jr z, Func_21e8a
 	jp Func_20939
 

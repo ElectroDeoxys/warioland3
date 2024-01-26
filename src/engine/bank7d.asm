@@ -15,7 +15,7 @@ LoadPauseMenuGfx:
 	jr z, .owl
 	cp TRANSFORMATION_RAIL
 	jr z, .rail
-	cp (1 << 6) | TRANSFORMATION_VAMPIRE_WARIO
+	cp TRANSFORMATION_VAMPIRE_WARIO
 	jr z, .vampire
 	ret
 .owl

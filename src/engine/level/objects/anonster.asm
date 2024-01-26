@@ -685,7 +685,7 @@ AnonsterFunc:
 
 .asm_504aa
 	ld a, [wTransformation]
-	cp (1 << 6) | (1 << 7) | TRANSFORMATION_BALL_O_STRING_WARIO
+	cp TRANSFORMATION_BALL_O_STRING_WARIO
 	jr nz, .asm_504d0
 
 .asm_504b1
@@ -910,7 +910,7 @@ AnonsterFunc:
 	jp ApplyObjYMovement
 .asm_50647
 	ld a, [wTransformation]
-	cp (1 << 6) | (1 << 7) | TRANSFORMATION_BALL_O_STRING_WARIO
+	cp TRANSFORMATION_BALL_O_STRING_WARIO
 	jp nz, .asm_50031
 	ret
 

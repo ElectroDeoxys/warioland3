@@ -38,7 +38,7 @@ InitActionHelp:
 	jr z, .owl_wario
 	cp TRANSFORMATION_RAIL
 	jr z, .rail
-	cp (1 << 6) | TRANSFORMATION_VAMPIRE_WARIO
+	cp TRANSFORMATION_VAMPIRE_WARIO
 	jr z, .vampire_wario
 	ld a, [wPowerUpLevel]
 	and POWER_UP_MASK

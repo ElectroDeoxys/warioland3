@@ -28,7 +28,7 @@ OmodonmekaFunc:
 	ld de, Frameset_68f14
 	call SetObjectFramesetPtr
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
+	cp TRANSFORMATION_FLAT_WARIO
 	jr nz, .asm_421b1
 	ld a, $18
 	ld [hli], a
@@ -435,7 +435,7 @@ OmodonmekaFunc:
 	ld bc, Data_60650
 	call Func_34a0
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
+	cp TRANSFORMATION_FLAT_WARIO
 	ret nz
 	ld hl, wCurObjVar1
 	ld e, [hl]
@@ -558,7 +558,7 @@ OmodonmekaWithOmodonFunc:
 
 .Func_42535:
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
+	cp TRANSFORMATION_FLAT_WARIO
 	jp z, Func_42725
 	ld hl, wCurObjSubState
 	ld a, [hl]
@@ -960,7 +960,7 @@ Func_42767:
 	ld hl, wCurObjFlags
 	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_FLAT_WARIO
+	cp TRANSFORMATION_FLAT_WARIO
 	jr nz, .asm_4277f
 	call Func_42725
 	call Func_4279c.Func_42894

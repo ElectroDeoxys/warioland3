@@ -8,7 +8,7 @@ TeruteruFunc:
 
 .Init:
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_BLIND
+	cp TRANSFORMATION_BLIND
 	jr z, .asm_448ed
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
@@ -29,7 +29,7 @@ TeruteruFunc:
 .Update:
 	ld hl, wCurObjFlags
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_BLIND
+	cp TRANSFORMATION_BLIND
 	jr nz, .asm_44911
 	set OBJFLAG_INVISIBLE_F, [hl]
 	jr .asm_44913
@@ -142,7 +142,7 @@ TeruteruFunc:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_BLIND
+	cp TRANSFORMATION_BLIND
 	jr nz, .asm_449ff
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
@@ -279,7 +279,7 @@ TeruteruFunc:
 
 .Func_44ac1:
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_BLIND
+	cp TRANSFORMATION_BLIND
 	jr z, .asm_44afd
 	ld c, $2a
 	ld a, [wCurObjScreenYPos]

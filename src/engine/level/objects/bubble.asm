@@ -21,7 +21,7 @@ BubbleHoleFunc:
 .asm_47c08
 	call CountActiveTransientObjects
 	ld a, [wTransformation]
-	cp (1 << 6) | TRANSFORMATION_BUBBLE
+	cp TRANSFORMATION_BUBBLE
 	ld a, e
 	jr nz, .asm_47c19
 	cp 1
