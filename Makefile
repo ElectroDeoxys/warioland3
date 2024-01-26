@@ -39,7 +39,7 @@ all: $(rom) compare
 warioland3: $(rom) compare
 
 clean: tidy
-	find src/gfx \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.pal' -o -iname '*.rle' \) -delete
+	find src/gfx \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.rle' \) -delete
 	find src/text \( -iname '*.rle' \) -delete
 	find src/data \( -iname '*.rle' \) -delete
 
@@ -129,8 +129,6 @@ src/data/levels/unknown2/data_103a6d.bin.rle: tools/compressor += --force-traili
 
 %.rle: %
 	tools/compressor $(tools/compressor) $<
-
-%.pal: ;
 
 %.2bpp: %.png
 	$(RGBGFX) $(rgbgfx) -o $@ $<
