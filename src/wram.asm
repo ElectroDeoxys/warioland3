@@ -378,7 +378,7 @@ wLCDFunc:: ; c400
 wROMBank:: ; c5ff
 	db
 
-wc600:: ; c600
+wRoomBlockTiles:: ; c600
 	ds 4 * $80
 
 wVBlankFuncExtended:: ; c800
@@ -791,18 +791,18 @@ wBlockFunctionTable:: ; cd00
 	ds 2 * $80
 
 
-; size of wBGMapTileQueue in bytes
+; size of wBGMapTileVRAM0Queue in bytes
 wBGMapTileQueueSize:: ; ce00
 	db
 
 UNION
 
 ; each tile corresponds to an address
-; that is queued in wBGMapTileQueue
-wBGMapTileQueue:: ; ce01
+; that is queued in wBGMapTileVRAM0Queue
+wBGMapTileVRAM0Queue:: ; ce01
 	ds $34
 
-wce35:: ; ce35
+wBGMapTileVRAM1Queue:: ; ce35
 	ds $34
 
 ; size of wBGMapAddressQueue in bytes
@@ -810,7 +810,7 @@ wBGMapAddressQueueSize:: ; ce69
 	db
 
 ; each address corresponds to a tile
-; that is queued in wBGMapTileQueue
+; that is queued in wBGMapTileVRAM0Queue
 wBGMapAddressQueue:: ; ce6a
 	ds 2 * $34
 

@@ -3707,9 +3707,9 @@ Func_21f28:
 Func_21f51:
 	ld a, [wBGMapTileQueueSize]
 	ld b, a
-	ld a, HIGH(wBGMapTileQueue)
+	ld a, HIGH(wBGMapTileVRAM0Queue)
 	ld [wcce7 + 0], a
-	ld a, LOW(wBGMapTileQueue)
+	ld a, LOW(wBGMapTileVRAM0Queue)
 	add b
 	ld [wcce7 + 1], a
 	ld a, [wc0a3 + 1]
@@ -3724,7 +3724,7 @@ Func_21f51:
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	inc l
 	ld a, [wcce7 + 0]
@@ -3761,7 +3761,7 @@ Func_21f51:
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	inc l
 	inc l
@@ -3793,7 +3793,7 @@ Func_21f51:
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	inc l
 	ld a, [wcce7 + 0]
@@ -3829,9 +3829,9 @@ Func_22012:
 	ldh [rSVBK], a
 	ld a, [wBGMapTileQueueSize]
 	ld b, a
-	ld a, HIGH(wce35)
+	ld a, HIGH(wBGMapTileVRAM1Queue)
 	ld [wc0b3 + 0], a
-	ld a, LOW(wce35)
+	ld a, LOW(wBGMapTileVRAM1Queue)
 	add b
 	ld [wc0b3 + 1], a
 	ld a, [wc0a3 + 1]
@@ -3902,7 +3902,7 @@ Func_2208a:
 	sla e
 	rl d
 	push hl
-	ld hl, wce35
+	ld hl, wBGMapTileVRAM1Queue
 	add hl, de
 	inc l
 	inc l
@@ -3969,9 +3969,9 @@ Func_2208a:
 Func_220fc:
 	ld a, [wBGMapTileQueueSize]
 	ld b, a
-	ld a, HIGH(wBGMapTileQueue)
+	ld a, HIGH(wBGMapTileVRAM0Queue)
 	ld [wcce7 + 0], a
-	ld a, LOW(wBGMapTileQueue)
+	ld a, LOW(wBGMapTileVRAM0Queue)
 	add b
 	ld [wcce7 + 1], a
 	ld a, [wc0a3 + 1]
@@ -3986,7 +3986,7 @@ Func_220fc:
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	ld a, [wcce7 + 0]
 	ld d, a
@@ -4022,7 +4022,7 @@ Func_2214e:
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	inc l
 	inc l
@@ -4053,7 +4053,7 @@ Func_2214e:
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	ld a, [wcce7 + 0]
 	ld d, a
@@ -4088,9 +4088,9 @@ Func_221bb:
 	ldh [rSVBK], a
 	ld a, [wBGMapTileQueueSize]
 	ld b, a
-	ld a, HIGH(wce35)
+	ld a, HIGH(wBGMapTileVRAM1Queue)
 	ld [wc0b3 + 0], a
-	ld a, LOW(wce35)
+	ld a, LOW(wBGMapTileVRAM1Queue)
 	add b
 	ld [wc0b3 + 1], a
 	ld a, [wc0a3 + 1]

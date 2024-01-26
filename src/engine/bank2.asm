@@ -387,7 +387,7 @@ ENDR
 	and $08
 	jr z, .asm_923a
 	push hl
-	call .Func_9254
+	call .AddRowBottomTiles
 	pop hl
 	ld a, [wBlockPtrBank]
 	sramswitch
@@ -396,7 +396,7 @@ ENDR
 
 .asm_923a
 	push hl
-	call .Func_99ca
+	call .AddRowTopTiles
 	pop hl
 	ld a, [wBlockPtrBank]
 	sramswitch
@@ -408,14 +408,14 @@ ENDR
 	ld [wBGMapTileQueueSize], a
 	ret
 
-.Func_9254:
+.AddRowBottomTiles:
 	ld a, [wBGMapTileQueueSize]
 	ld b, a
-	ld a, HIGH(wBGMapTileQueue)
+	ld a, HIGH(wBGMapTileVRAM0Queue)
 	ld [wcce7 + 0], a
-	ld a, LOW(wBGMapTileQueue)
+	ld a, LOW(wBGMapTileVRAM0Queue)
 	add b
-	ld [wcce7 + 1], a
+	ld [wcce7 + 1], a ; wBGMapTileVRAM0Queue + wBGMapTileQueueSize
 	ld a, [wc0a5 + 1]
 	and $08
 	jp nz, .asm_9438
@@ -428,7 +428,7 @@ REPT 12
 	sla e
 	rl d ; *$4
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	inc l
 	inc l
@@ -438,10 +438,10 @@ REPT 12
 	ld e, a
 	add $2
 	ld [wcce7 + 1], a
-	ld a, [hli]
+	ld a, [hli] ; bottom-left tile
 	ld [de], a
 	inc e
-	ld a, [hl]
+	ld a, [hl] ; bottom-right tile
 	ld [de], a
 	pop hl
 ENDR
@@ -453,7 +453,7 @@ ENDR
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	inc l
 	inc l
@@ -461,7 +461,7 @@ ENDR
 	ld d, a
 	ld a, [wcce7 + 1]
 	ld e, a
-	ld a, [hl]
+	ld a, [hl] ; bottom-left tile
 	ld [de], a
 	pop hl
 	ret
@@ -474,7 +474,7 @@ ENDR
 	sla e
 	rl d ; *$4
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	inc l
 	inc l
@@ -485,7 +485,7 @@ ENDR
 	ld e, a
 	inc a
 	ld [wcce7 + 1], a
-	ld a, [hl]
+	ld a, [hl] ; bottom-right tile
 	ld [de], a
 	pop hl
 
@@ -497,7 +497,7 @@ REPT 11
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	inc l
 	inc l
@@ -507,10 +507,10 @@ REPT 11
 	ld e, a
 	add $2
 	ld [wcce7 + 1], a
-	ld a, [hli]
+	ld a, [hli] ; bottom-left tile
 	ld [de], a
 	inc e
-	ld a, [hl]
+	ld a, [hl] ; bottom-right tile
 	ld [de], a
 	pop hl
 ENDR
@@ -522,7 +522,7 @@ ENDR
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	inc l
 	inc l
@@ -530,10 +530,10 @@ ENDR
 	ld d, a
 	ld a, [wcce7 + 1]
 	ld e, a
-	ld a, [hli]
+	ld a, [hli] ; bottom-left tile
 	ld [de], a
 	inc e
-	ld a, [hl]
+	ld a, [hl] ; bottom-right tile
 	ld [de], a
 	pop hl
 	ret
@@ -541,9 +541,9 @@ ENDR
 .Func_9605:
 	ld a, [wBGMapTileQueueSize]
 	ld b, a
-	ld a, HIGH(wce35)
+	ld a, HIGH(wBGMapTileVRAM1Queue)
 	ld [wc0b3 + 0], a
-	ld a, LOW(wce35)
+	ld a, LOW(wBGMapTileVRAM1Queue)
 	add b
 	ld [wc0b3 + 1], a
 	ld a, [wc0a5 + 1]
@@ -680,14 +680,14 @@ ENDR
 	ldh [rSVBK], a
 	ret
 
-.Func_99ca:
+.AddRowTopTiles:
 	ld a, [wBGMapTileQueueSize]
 	ld b, a
-	ld a, HIGH(wBGMapTileQueue)
+	ld a, HIGH(wBGMapTileVRAM0Queue)
 	ld [wcce7 + 0], a
-	ld a, LOW(wBGMapTileQueue)
+	ld a, LOW(wBGMapTileVRAM0Queue)
 	add b
-	ld [wcce7 + 1], a
+	ld [wcce7 + 1], a ; wBGMapTileVRAM0Queue + wBGMapTileQueueSize
 	ld a, [wc0a5 + 1]
 	and $08
 	jp nz, .asm_9b94
@@ -700,7 +700,7 @@ REPT 12
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	ld a, [wcce7 + 0]
 	ld d, a
@@ -708,10 +708,10 @@ REPT 12
 	ld e, a
 	add $2
 	ld [wcce7 + 1], a
-	ld a, [hli]
+	ld a, [hli] ; top-left
 	ld [de], a
 	inc e
-	ld a, [hl]
+	ld a, [hl] ; top-right
 	ld [de], a
 	pop hl
 ENDR
@@ -723,13 +723,13 @@ ENDR
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	ld a, [wcce7 + 0]
 	ld d, a
 	ld a, [wcce7 + 1]
 	ld e, a
-	ld a, [hl]
+	ld a, [hl] ; top-left
 	ld [de], a
 	pop hl
 	ret
@@ -742,7 +742,7 @@ ENDR
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	inc l
 	ld a, [wcce7 + 0]
@@ -751,7 +751,7 @@ ENDR
 	ld e, a
 	inc a
 	ld [wcce7 + 1], a
-	ld a, [hl]
+	ld a, [hl] ; top-right
 	ld [de], a
 	pop hl
 
@@ -763,7 +763,7 @@ REPT 12
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	ld a, [wcce7 + 0]
 	ld d, a
@@ -771,10 +771,10 @@ REPT 12
 	ld e, a
 	add $2
 	ld [wcce7 + 1], a
-	ld a, [hli]
+	ld a, [hli] ; top-left
 	ld [de], a
 	inc e
-	ld a, [hl]
+	ld a, [hl] ; top-right
 	ld [de], a
 	pop hl
 ENDR
@@ -784,9 +784,9 @@ ENDR
 .Func_9d4c:
 	ld a, [wBGMapTileQueueSize]
 	ld b, a
-	ld a, HIGH(wce35)
+	ld a, HIGH(wBGMapTileVRAM1Queue)
 	ld [wc0b3 + 0], a
-	ld a, LOW(wce35)
+	ld a, LOW(wBGMapTileVRAM1Queue)
 	add b
 	ld [wc0b3 + 1], a
 	ld a, [wc0a5 + 1]
@@ -952,11 +952,11 @@ ENDR
 Func_a2aa:
 	ld a, [wBGMapTileQueueSize]
 	ld b, a
-	ld a, HIGH(wBGMapTileQueue)
+	ld a, HIGH(wBGMapTileVRAM0Queue)
 	ld [wcce7 + 0], a
-	ld a, LOW(wBGMapTileQueue)
+	ld a, LOW(wBGMapTileVRAM0Queue)
 	add b
-	ld [wcce7 + 1], a
+	ld [wcce7 + 1], a ; wBGMapTileVRAM0Queue + wBGMapTileQueueSize
 	ld a, [wc0a3 + 1]
 	and $08
 	jp nz, .asm_a52f
@@ -969,7 +969,7 @@ REPT 11
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	inc l
 	ld a, [wcce7 + 0]
@@ -1003,7 +1003,7 @@ ENDR
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	inc l
 	ld a, [wcce7 + 0]
@@ -1023,7 +1023,7 @@ ENDR
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	inc l
 	inc l
@@ -1055,7 +1055,7 @@ REPT 10
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	inc l
 	ld a, [wcce7 + 0]
@@ -1089,7 +1089,7 @@ ENDR
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	inc l
 	ld a, [wcce7 + 0]
@@ -1108,9 +1108,9 @@ ENDR
 Func_a79e:
 	ld a, [wBGMapTileQueueSize]
 	ld b, a
-	ld a, HIGH(wce35)
+	ld a, HIGH(wBGMapTileVRAM1Queue)
 	ld [wc0b3 + 0], a
-	ld a, LOW(wce35)
+	ld a, LOW(wBGMapTileVRAM1Queue)
 	add b
 	ld [wc0b3 + 1], a
 	ld a, [wc0a3 + 1]
@@ -1276,11 +1276,11 @@ ENDR
 Func_aca6:
 	ld a, [wBGMapTileQueueSize]
 	ld b, a
-	ld a, HIGH(wBGMapTileQueue)
+	ld a, HIGH(wBGMapTileVRAM0Queue)
 	ld [wcce7 + 0], a
-	ld a, LOW(wBGMapTileQueue)
+	ld a, LOW(wBGMapTileVRAM0Queue)
 	add b
-	ld [wcce7 + 1], a
+	ld [wcce7 + 1], a ; wBGMapTileVRAM0Queue + wBGMapTileQueueSize
 	ld a, [wc0a3 + 1]
 	and $08
 	jp nz, Func_af1f
@@ -1293,7 +1293,7 @@ REPT 11
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	ld a, [wcce7 + 0]
 	ld d, a
@@ -1326,7 +1326,7 @@ ENDR
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	ld a, [wcce7 + 0]
 	ld d, a
@@ -1345,7 +1345,7 @@ Func_af1f:
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	inc l
 	inc l
@@ -1376,7 +1376,7 @@ REPT 10
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	ld a, [wcce7 + 0]
 	ld d, a
@@ -1409,7 +1409,7 @@ ENDR
 	sla e
 	rl d
 	push hl
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	ld a, [wcce7 + 0]
 	ld d, a
@@ -1427,9 +1427,9 @@ ENDR
 Func_b182:
 	ld a, [wBGMapTileQueueSize]
 	ld b, a
-	ld a, HIGH(wce35)
+	ld a, HIGH(wBGMapTileVRAM1Queue)
 	ld [wc0b3 + 0], a
-	ld a, LOW(wce35)
+	ld a, LOW(wBGMapTileVRAM1Queue)
 	add b
 	ld [wc0b3 + 1], a
 	ld a, [wc0a3 + 1]
@@ -2464,14 +2464,14 @@ Func_bb85:
 	ld a, $03
 	ldh [rSVBK], a
 	push de
-	ld hl, wc600
+	ld hl, wRoomBlockTiles
 	add hl, de
 	ld a, [wBGMapTileQueueSize]
 	ld e, a
-	ld d, HIGH(wBGMapTileQueue)
-	ld a, LOW(wBGMapTileQueue)
+	ld d, HIGH(wBGMapTileVRAM0Queue)
+	ld a, LOW(wBGMapTileVRAM0Queue)
 	add e
-	ld e, a ; wBGMapTileQueue + wBGMapTileQueueSize
+	ld e, a ; wBGMapTileVRAM0Queue + wBGMapTileQueueSize
 	ld a, [hli]
 	ld [de], a
 	inc e
@@ -2489,8 +2489,8 @@ Func_bb85:
 	add hl, de
 	ld a, [wBGMapTileQueueSize]
 	ld e, a
-	ld d, HIGH(wce35)
-	ld a, LOW(wce35)
+	ld d, HIGH(wBGMapTileVRAM1Queue)
+	ld a, LOW(wBGMapTileVRAM1Queue)
 	add e
 	ld e, a
 	ld a, [hli]

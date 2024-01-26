@@ -204,7 +204,7 @@ Func_298d::
 	push af
 	ld a, [wTempBank]
 	bankswitch
-	ld de, wc600
+	ld de, wRoomBlockTiles
 	ld bc, $200
 	call CopyHLToDE_BC
 	pop af

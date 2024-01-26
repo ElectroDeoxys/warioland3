@@ -97,10 +97,10 @@ DoPendingDMATransfer::
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
 
-; write tiles in wBGMapTileQueue to the
+; write tiles in wBGMapTileVRAM0Queue to the
 ; corresponding addresses in wBGMapAddressQueue
 	ld hl, wBGMapAddressQueue
-	ld bc, wBGMapTileQueue
+	ld bc, wBGMapTileVRAM0Queue
 	jp wVBlankFunc + $10
 
 .dma_transfer
@@ -145,7 +145,7 @@ Func_cab::
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, wBGMapAddressQueue
-	ld bc, wce35
+	ld bc, wBGMapTileVRAM1Queue
 	jp wVBlankFuncExtended
 
 Func_cb8::

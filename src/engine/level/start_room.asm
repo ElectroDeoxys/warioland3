@@ -1057,7 +1057,7 @@ Func_8cd7:
 	ld d, a
 	ld a, [wccf0 + 1]
 	ld e, a
-	ld hl, wBGMapTileQueue
+	ld hl, wBGMapTileVRAM0Queue
 	ld b, BG_MAP_HEIGHT
 .loop_col_vram0
 	ld a, [hli]
@@ -1081,7 +1081,7 @@ Func_8cd7:
 	ld d, a
 	ld a, [wccf0 + 1]
 	ld e, a
-	ld hl, wce35
+	ld hl, wBGMapTileVRAM1Queue
 	ld b, BG_MAP_HEIGHT
 .loop_col_vram1
 	ld a, [hli]
