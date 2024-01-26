@@ -574,7 +574,7 @@ AttackObject:
 	ret
 
 .snowman
-	ld a, [wca8f]
+	ld a, [wWarioTransformationProgress]
 	and a
 	ret nz
 	farcall SetState_SnowmanBumped
@@ -723,8 +723,8 @@ StepOnObject:
 	ld a, [wTransformation]
 	cp (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
 	jr nz, .not_hot_wario
-	ld a, [wca8f]
-	cp $02
+	ld a, [wWarioTransformationProgress]
+	cp 2
 	jr nc, Func_205e7
 .not_hot_wario
 
@@ -1343,11 +1343,11 @@ Func_20a6f:
 .asm_20acf
 	ld a, [wTransformation]
 	cp (1 << 6) | (1 << 7) | TRANSFORMATION_BALL_O_STRING_WARIO
-	jr z, .asm_20aff
+	jr z, .ball_o_string
 	cp (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
-	jr z, .asm_20b15
+	jr z, .hot
 	cp (1 << 6) | TRANSFORMATION_ICE_SKATIN
-	jr z, .asm_20b2b
+	jr z, .ice_skatin
 	xor a
 	ld [wWalkVelIndex], a
 	ld a, [wIsRolling]
@@ -1361,21 +1361,21 @@ Func_20a6f:
 	farcall DoJumpingBump
 	ret
 
-.asm_20aff
-	ld a, [wca8f]
-	cp $01
+.ball_o_string
+	ld a, [wWarioTransformationProgress]
+	cp 1
 	ret nz
 	farcall Func_28bd5
 	ret
 
-.asm_20b15
-	ld a, [wca8f]
-	cp $01
+.hot
+	ld a, [wWarioTransformationProgress]
+	cp 1
 	ret nz
 	farcall Func_2afc5
 	ret
 
-.asm_20b2b
+.ice_skatin
 	ld a, [wWarioState]
 	cp WST_ICE_SKATIN_CRASH
 	ret z
@@ -1810,8 +1810,8 @@ ObjInteraction_Fire:
 
 	ld a, (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
 	ld [wTransformation], a
-	ld a, $01
-	ld [wca8f], a
+	ld a, 1
+	ld [wWarioTransformationProgress], a
 	ld a, TOUCH_BUMP
 	ld [wTouchState], a
 	ld a, TOUCH_BUMP
@@ -2292,7 +2292,7 @@ Func_2126a:
 	ld a, (1 << 6) | (1 << 7) | TRANSFORMATION_BALL_O_STRING_WARIO
 	ld [wTransformation], a
 	xor a
-	ld [wca8f], a
+	ld [wWarioTransformationProgress], a
 	ld a, TOUCH_ATTACK
 	ld [wTouchState], a
 	ld a, TOUCH_ATTACK
@@ -3126,7 +3126,7 @@ Func_21a52:
 	ld [wTransformation], a
 
 	xor a
-	ld [wca8f], a
+	ld [wWarioTransformationProgress], a
 	ld a, TOUCH_ATTACK
 	ld [wTouchState], a
 	ld a, TOUCH_ATTACK

@@ -600,13 +600,27 @@ wInvisibleFrame:: ; ca8d
 wTransformation:: ; ca8e
 	db
 
-wca8f:: ; ca8f
+; a general value on the progress of
+; a transformation, used for Hot, Ball-o-string
+; and Snowman Wario
+; for Hot Wario, the values are:
+; - 1: running around in flames
+; - 2: engulfed in flames
+; for Ball-o-string Wario, the value are:
+; - 0: stopped and not rolling
+; - 1: rolling
+; for Snowman Wario, the values are:
+; - 0: walking around
+; - 1: small snowball
+; - 2: medium snowball
+; - 3: big snowball
+wWarioTransformationProgress:: ; ca8f
 	db
 
 ; duration left for current transformation
 ; big endian
 wTransformationDuration:: ; ca90
-	ds $2
+	dw
 
 ; a TOUCH_* constant that determines
 ; how Wario interacts with objects

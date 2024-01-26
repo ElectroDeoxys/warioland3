@@ -1088,8 +1088,8 @@ BlockFunc_Fire:
 	jp nz, BlockFunc_Free
 	ld a, (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
 	ld [wTransformation], a
-	ld a, $01
-	ld [wca8f], a
+	ld a, 1
+	ld [wWarioTransformationProgress], a
 	ld a, TOUCH_BUMP
 	ld [wTouchState], a
 	ld a, TOUCH_BUMP
@@ -1325,9 +1325,9 @@ Func_18aa8:
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
-	ld a, [wca8f]
-	cp $01
-	jp c, BlockFunc_Solid
+	ld a, [wWarioTransformationProgress]
+	cp 1
+	jp c, BlockFunc_Solid ; not in snowball
 	ld a, $01
 	ld [wMultiBlockParam], a
 	jp Func_18f32
@@ -1361,9 +1361,9 @@ Func_18aec:
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
-	ld a, [wca8f]
-	cp $01
-	jp c, BlockFunc_Solid
+	ld a, [wWarioTransformationProgress]
+	cp 1
+	jp c, BlockFunc_Solid ; not in snowball
 	ld a, $03
 	ld [wMultiBlockParam], a
 .asm_18b17
@@ -1402,9 +1402,9 @@ Func_18b2d:
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
-	ld a, [wca8f]
-	cp $01
-	jp c, BlockFunc_Solid
+	ld a, [wWarioTransformationProgress]
+	cp 1
+	jp c, BlockFunc_Solid ; not in snowball
 	ld a, $02
 	ld [wMultiBlockParam], a
 	jp Func_18f32
@@ -1444,9 +1444,9 @@ Func_18b71:
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
-	ld a, [wca8f]
-	cp $01
-	jp c, BlockFunc_Solid
+	ld a, [wWarioTransformationProgress]
+	cp 1
+	jp c, BlockFunc_Solid ; not in snowball
 	ld a, $04
 	ld [wMultiBlockParam], a
 	jp Func_18f32
@@ -1487,9 +1487,9 @@ Func_18bb5:
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
-	ld a, [wca8f]
-	cp $03
-	jp nz, BlockFunc_Solid
+	ld a, [wWarioTransformationProgress]
+	cp 3
+	jp nz, BlockFunc_Solid ; not big snowball
 	ld a, $01
 	ld [wMultiBlockParam], a
 	jp Func_18f32
@@ -1530,9 +1530,9 @@ Func_18bf9:
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
-	ld a, [wca8f]
-	cp $03
-	jp nz, BlockFunc_Solid
+	ld a, [wWarioTransformationProgress]
+	cp 3
+	jp nz, BlockFunc_Solid ; not big snowball
 	ld a, $03
 	ld [wMultiBlockParam], a
 .asm_18c24
@@ -1571,9 +1571,9 @@ Func_18c3a:
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
-	ld a, [wca8f]
-	cp $03
-	jp nz, BlockFunc_Solid
+	ld a, [wWarioTransformationProgress]
+	cp 3
+	jp nz, BlockFunc_Solid ; not big snowball
 	ld a, $02
 	ld [wMultiBlockParam], a
 	jp Func_18f32
@@ -1613,9 +1613,9 @@ Func_18c7e:
 	ld a, [wTransformation]
 	cp (1 << 6) | TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
-	ld a, [wca8f]
-	cp $03
-	jp nz, BlockFunc_Solid
+	ld a, [wWarioTransformationProgress]
+	cp 3
+	jp nz, BlockFunc_Solid ; not big snowball
 	ld a, $04
 	ld [wMultiBlockParam], a
 	jp Func_18f32
@@ -2859,9 +2859,9 @@ BonfireBlockCollision:
 	ld a, [wTransformation]
 	cp (1 << 6) | (1 << 7) | TRANSFORMATION_HOT_WARIO
 	jr nz, .dont_break
-	ld a, [wca8f]
-	cp $02
-	jr nc, Func_19481
+	ld a, [wWarioTransformationProgress]
+	cp 2
+	jr nc, Func_19481 ; engulfed in flames
 .dont_break
 	jp BlockFunc_Solid
 

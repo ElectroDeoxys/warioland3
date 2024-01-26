@@ -997,7 +997,7 @@ UpdateState_SnowmanWalking:
 	inc de
 	ld a, [hl]
 	ld [de], a
-	jp Func_1ecc08
+	jp TurnIntoSmallSnowball
 
 SetState_SnowmanTurning:
 	ld a, WST_SNOWMAN_TURNING
@@ -1167,7 +1167,7 @@ UpdateState_SnowmanAirborne:
 	ld a, [wSlopeInteraction]
 	and a
 	jr z, .asm_1ecb39
-	jp Func_1ecc08
+	jp TurnIntoSmallSnowball
 .asm_1ecb39
 	ld a, [wGroundShakeCounter]
 	and a
@@ -1254,9 +1254,9 @@ UpdateState_SnowmanBumped:
 	ret z
 	jp SetState_SnowmanIdle
 
-Func_1ecc08:
-	ld a, $01
-	ld [wca8f], a
+TurnIntoSmallSnowball:
+	ld a, 1
+	ld [wWarioTransformationProgress], a
 	xor a
 	ld [wWarioStateCounter], a
 	ld a, BANK(WarioSnowballGfx)
@@ -1312,16 +1312,18 @@ UpdateState_SnowballRolling:
 	ld a, [wRoomTransitionParam]
 	and a
 	jp nz, TriggerRoomTransition
-	ld a, [wca8f]
-	cp $02
-	jr z, .asm_1ecccc
-	cp $03
-	jr z, .asm_1ecd00
+	ld a, [wWarioTransformationProgress]
+	cp 2
+	jr z, .medium_snowball
+	cp 3
+	jr z, .no_size_change
+
+; small snowball
 	ld a, [wWarioStateCounter]
 	cp $70
-	jr c, .asm_1ecd00
-	ld a, $02
-	ld [wca8f], a
+	jr c, .no_size_change
+	ld a, 2
+	ld [wWarioTransformationProgress], a
 	xor a
 	ld [wFrameDuration], a
 	ld a, [wDirection]
@@ -1331,19 +1333,20 @@ UpdateState_SnowballRolling:
 	ld [wFramesetPtr + 0], a
 	ld a, LOW(Frameset_1ff963)
 	ld [wFramesetPtr + 1], a
-	jr .asm_1ecd00
+	jr .no_size_change
 .asm_1eccc0
 	ld a, HIGH(Frameset_1ff938)
 	ld [wFramesetPtr + 0], a
 	ld a, LOW(Frameset_1ff938)
 	ld [wFramesetPtr + 1], a
-	jr .asm_1ecd00
-.asm_1ecccc
+	jr .no_size_change
+
+.medium_snowball
 	ld a, [wWarioStateCounter]
 	cp $e0
-	jr c, .asm_1ecd00
-	ld a, $03
-	ld [wca8f], a
+	jr c, .no_size_change
+	ld a, 3
+	ld [wWarioTransformationProgress], a
 	xor a
 	ld [wFrameDuration], a
 	ld a, [wAnimationFrame]
@@ -1356,21 +1359,22 @@ UpdateState_SnowballRolling:
 	ld [wFramesetPtr + 0], a
 	ld a, LOW(Frameset_1ff970)
 	ld [wFramesetPtr + 1], a
-	jr .asm_1ecd00
+	jr .no_size_change
 .asm_1eccf6
 	ld a, HIGH(Frameset_1ff945)
 	ld [wFramesetPtr + 0], a
 	ld a, LOW(Frameset_1ff945)
 	ld [wFramesetPtr + 1], a
-.asm_1ecd00
+
+.no_size_change
 	ld a, [wSFXLoopCounter]
 	sub 1
 	ld [wSFXLoopCounter], a
-	jr nc, .asm_1ecd17
+	jr nc, .no_sfx
 	ld a, $0c
 	ld [wSFXLoopCounter], a
 	play_sfx SFX_ROLL
-.asm_1ecd17
+.no_sfx
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
@@ -1379,13 +1383,14 @@ UpdateState_SnowballRolling:
 	jr nz, .asm_1ecd34
 	call ApplyWalkVelocity_Left
 	call SubXOffset
-	jr .asm_1ecd3a
+	jr .increment_counter_if_not_big
 .asm_1ecd34
 	call ApplyWalkVelocity_Right
 	call AddXOffset
-.asm_1ecd3a
-	ld a, [wca8f]
-	cp $03
+
+.increment_counter_if_not_big
+	ld a, [wWarioTransformationProgress]
+	cp 3
 	jr nc, .asm_1ecd4b
 	ld hl, wWarioStateCounter
 	ld a, [hl]
@@ -1460,7 +1465,7 @@ UpdateState_SnowballAirborne:
 
 SetState_SnowballCrash:
 	xor a
-	ld [wca8f], a
+	ld [wWarioTransformationProgress], a
 	ld a, WST_SNOWBALL_CRASH
 	ld [wWarioState], a
 	ld a, [wDirection]

@@ -157,8 +157,8 @@ SetState_Hot_ResetDuration:
 ;	fallthrough
 
 SetState_Hot:
-	ld a, $02
-	ld [wca8f], a
+	ld a, 2
+	ld [wWarioTransformationProgress], a
 	ld a, WST_HOT
 	ld [wWarioState], a
 	xor a
@@ -1173,8 +1173,8 @@ UpdateState_GettingWrappedInString:
 SetState_BallOString:
 	ld a, WST_BALL_O_STRING
 	ld [wWarioState], a
-	ld a, $01
-	ld [wca8f], a
+	ld a, 1
+	ld [wWarioTransformationProgress], a
 	xor a
 	ld [wSFXLoopCounter], a
 	ld [wWalkVelIndex], a
@@ -1342,7 +1342,7 @@ UpdateState_BallOStringAirborne:
 
 SetState_BallOStringKnockBack:
 	xor a
-	ld [wca8f], a
+	ld [wWarioTransformationProgress], a
 	play_sfx SFX_BUMP
 	ld a, WST_BALL_O_STRING_KNOCK_BACK
 	ld [wWarioState], a

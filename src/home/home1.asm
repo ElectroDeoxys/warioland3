@@ -808,7 +808,7 @@ ClearTransformationValues::
 	xor a
 	ld [wInvincibleCounter], a
 	ld [wTransformation], a
-	ld [wca8f], a
+	ld [wWarioTransformationProgress], a
 	ld [wStingTouchState], a
 	ld [wTouchState], a
 	ld [wca94], a
