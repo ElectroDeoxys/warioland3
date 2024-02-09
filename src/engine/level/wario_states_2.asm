@@ -2428,7 +2428,7 @@ HandleLadderInput:
 
 .d_up
 	farcall CheckUpCollision
-	ld a, [wced2]
+	ld a, [wJumpCollision]
 	and a
 	ret nz
 	ld b, 1

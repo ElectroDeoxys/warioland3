@@ -1819,7 +1819,7 @@ _InitTempleScene:
 	ld a, $60
 	ld [w1d140], a
 	ld a, $e8
-	ld [w1d141], a
+	ld [wDollBoyNoFlashingBarrel], a
 	ld a, SCENEWARIO_GROUP_NONE
 	ld [wSceneWarioStateGroup], a
 

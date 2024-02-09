@@ -2185,6 +2185,8 @@ Func_b9a6:
 	ret z
 	jp .asm_ba00
 
+; input:
+; - e = ?
 Func_ba42:
 	ldh a, [rSVBK]
 	push af

@@ -50,7 +50,7 @@ PesceFunc:
 	call SetObjectFramesetPtr
 	xor a
 	ld [w1d147], a
-	ld [wDollBoyHammerStage], a
+	ld [wDollBoyHammerRange], a
 	ld [hli], a
 	ld [hli], a
 	ld a, $0a
@@ -61,7 +61,7 @@ PesceFunc:
 	ld a, $3c
 	ld [wCurObjVar2], a
 	ld a, $02
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
 	ld a, TRUE
 	ld [wIsBossBattle], a
@@ -729,7 +729,7 @@ PesceFunc:
 	ld e, $07
 	farcall Func_ba42
 	ld a, $01
-	ld [wDollBoyHammerStage], a
+	ld [wDollBoyHammerRange], a
 	ret
 .asm_5222b
 	ld l, OBJ_STATE_DURATION
@@ -847,7 +847,7 @@ DragonflySpawnerFunc:
 	ld [wCurObjAction], a
 	ld a, $02
 	ld [wCurObjFrameDuration], a
-	ld a, [wDollBoyHammerStage]
+	ld a, [wDollBoyHammerRange]
 	and a
 	ret z
 	xor a
@@ -856,7 +856,7 @@ DragonflySpawnerFunc:
 	ld e, $08
 	farcall Func_ba42
 	ld a, $03
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
 	xor a
 	ld [wIsBossBattle], a
@@ -1111,7 +1111,7 @@ FlySpawnerFunc:
 	ret nz
 	ld a, [wAutoMoveState]
 	and a
-	jr nz, .asm_524e6
+	jr nz, .deactivate
 
 	xor a ; LOW(wObj1)
 	ld b, a
@@ -1146,7 +1146,7 @@ FlySpawnerFunc:
 	ld a, LOW(.Func_524eb)
 	ld [hld], a
 	ret
-.asm_524e6
+.deactivate
 	xor a
 	ld [wCurObjFlags], a
 	ret
@@ -1156,7 +1156,7 @@ FlySpawnerFunc:
 	ld [wCurObjAction], a
 	ld a, $02
 	ld [wCurObjFrameDuration], a
-	ld a, [wDollBoyHammerStage]
+	ld a, [wDollBoyHammerRange]
 	and a
 	ret z
 	ld hl, wCurObjUnk02

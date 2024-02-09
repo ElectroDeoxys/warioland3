@@ -503,7 +503,7 @@ GreyKeyData:               object_data OAM_18c000, $2, OBJ_INTERACTION_GREY_KEY,
 RedKeyData:                object_data OAM_18c000, $2, OBJ_INTERACTION_RED_KEY,                    -24, KeyFunc,                   $0
 GreenKeyData:              object_data OAM_18c000, $2, OBJ_INTERACTION_GREEN_KEY,                  -24, KeyFunc,                   $0
 BlueKeyData:               object_data OAM_18c000, $2, OBJ_INTERACTION_BLUE_KEY,                   -24, KeyFunc,                   $0
-MusicaCoinData:            object_data OAM_18c000, $3, OBJ_INTERACTION_MUSICAL_COIN,               -25, MusicalCoinFunc,           $0
+MusicalCoinData:           object_data OAM_18c000, $3, OBJ_INTERACTION_MUSICAL_COIN,               -25, MusicalCoinFunc,           $0
 SpearheadData:             object_data OAM_18007b, $0, OBJ_INTERACTION_01,                         -14, SpearheadFunc,             OBJFLAG_PRIORITY
 FutamoguData:              object_data OAM_180564, $1, OBJ_INTERACTION_WALKABLE       | HEAVY_OBJ, -17, FutamoguFunc,              OBJFLAG_PRIORITY
 WebberData:                object_data OAM_180242, $2, OBJ_INTERACTION_WALKABLE       | HEAVY_OBJ, -16, WebberFunc,                OBJFLAG_PRIORITY
@@ -1994,7 +1994,7 @@ ObjParams_Omodon1:
 	dw Func_4279c
 	db $0 ; obj flags
 
-ObjParams_DollBoyUnkObjLeft:
+ObjParams_DollBoyHammerStarsLeft:
 	db -20 ; y
 	db -19 ; x
 	dn $3, $0 ; unk7
@@ -2011,7 +2011,7 @@ ObjParams_DollBoyUnkObjLeft:
 	dw StarsFunc_SetFlags
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_DollBoyUnkObjRight:
+ObjParams_DollBoyHammerStarsRight:
 	db -20 ; y
 	db 18 ; x
 	dn $3, $0 ; unk7
@@ -2316,7 +2316,7 @@ ObjParams_StarsCentre:
 Data_64fc3:
 	dw GreyChestData
 	dw GreyKeyData
-	dw MusicaCoinData
+	dw MusicalCoinData
 
 	rgb  0, 22, 16
 	rgb 28, 28, 28
@@ -2326,7 +2326,7 @@ Data_64fc3:
 Data_64fd1:
 	dw RedChestData
 	dw RedKeyData
-	dw MusicaCoinData
+	dw MusicalCoinData
 
 	rgb  0, 22, 16
 	rgb 31, 24, 24
@@ -2336,7 +2336,7 @@ Data_64fd1:
 Data_64fdf:
 	dw GreenChestData
 	dw GreenKeyData
-	dw MusicaCoinData
+	dw MusicalCoinData
 
 	rgb  0, 22, 16
 	rgb 24, 31, 21
@@ -2346,7 +2346,7 @@ Data_64fdf:
 Data_64fed:
 	dw BlueChestData
 	dw BlueKeyData
-	dw MusicaCoinData
+	dw MusicalCoinData
 
 	rgb  0, 22, 16
 	rgb 19, 31, 31
@@ -2356,7 +2356,7 @@ Data_64fed:
 Data_64ffb:
 	dw GreyChestData
 	dw GreyKeyData
-	dw MusicaCoinData
+	dw MusicalCoinData
 
 	rgb 31, 31, 31
 	rgb  0, 27, 31

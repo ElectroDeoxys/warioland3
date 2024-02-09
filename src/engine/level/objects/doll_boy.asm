@@ -1,16 +1,16 @@
 ; wDollBoyActiveBarrels flags
-DEF DOLLBOY_BARREL1 EQU 1 << 0
-DEF DOLLBOY_BARREL2 EQU 1 << 1
-DEF DOLLBOY_BARREL3 EQU 1 << 2
+DEF DOLLBOY_BARREL1 EQU 1 << 0 ; top barrel
+DEF DOLLBOY_BARREL2 EQU 1 << 1 ; middle barrel
+DEF DOLLBOY_BARREL3 EQU 1 << 2 ; bottom barrel
 DEF DOLLBOY_DOLL    EQU 1 << 3
 
-; wDollBoyHammerStage constants
+; wDollBoyHammerRange constants
 	const_def
 	const DOLLBOY_HAMMER_SHORT     ; 0
 	const DOLLBOY_HAMMER_MID_SHORT ; 1
 	const DOLLBOY_HAMMER_MID_LONG  ; 2
 	const DOLLBOY_HAMMER_LONG      ; 3
-DEF NUM_DOLLBOY_HAMMER_STAGES EQU const_value
+DEF NUM_DOLLBOY_HAMMER_RANGES EQU const_value
 
 DollBoyFunc:
 	ld a, TRUE
@@ -21,154 +21,163 @@ DollBoyFunc:
 	res OBJSUBFLAG_UNINITIALISED_F, [hl]
 	ld a, [hl]
 	and $f0
-	or $85
+	or $5 | OBJSUBFLAG_HDIR
 	ld [hl], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_50af8)
+	ld a, HIGH(.Init)
 	ld [hld], a
-	ld a, LOW(.Func_50af8)
+	ld a, LOW(.Init)
 	ld [hld], a
 	ld l, OBJ_COLLBOX_RIGHT
-	ld a, $0b
+	ld a, 11
 	ld [hld], a
-	ld a, $f4
+	ld a, -12
 	ld [hld], a
-	ld a, $00
+	ld a, 0
 	ld [hld], a
-	ld a, $e4
+	ld a, -28
 	ld [hld], a
 	ld de, Frameset_69632
 	call SetObjectFramesetPtr
-	ld a, $28
+	ld a, 40
 	ld [hli], a
 	ret
 
-.Func_50af8:
+.Init:
 	ld a, [wCurObjFlags]
 	rra
 	rra
-	ret nc
+	ret nc ; jump if OBJFLAG_ON_SCREEN_F not set
+
+	; is on screen
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
+
+	; initialise some variables and set boss music
 	ld hl, wCurObjUpdateFunction + 1
-	ld a, HIGH(.Func_50b29)
+	ld a, HIGH(.BarrelPhase)
 	ld [hld], a
-	ld a, LOW(.Func_50b29)
+	ld a, LOW(.BarrelPhase)
 	ld [hld], a
+
 	ld a, TRUE
-	ld [w1d141], a
+	ld [wDollBoyNoFlashingBarrel], a
 	xor a
 	ld [wCurObjVar1], a
 	ld [w1d147], a
-	ld [wDollBoyHammerStage], a ; DOLLBOY_HAMMER_SHORT
+	ld [wDollBoyHammerRange], a ; DOLLBOY_HAMMER_SHORT
 	ld a, DOLLBOY_BARREL1 | DOLLBOY_BARREL2 | DOLLBOY_BARREL3
 	ld [wDollBoyActiveBarrels], a
+
 	ld a, $02
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
 	ret
 
-.Func_50b29:
+.BarrelPhase:
 	ld a, [wCurObjVar1]
 	and a
-	jp z, .asm_50c21
+	jp z, .check_if_wario_is_bouncy
 	cp $01
-	jp z, .asm_50beb
+	jp z, .throw_hammer
 	cp $08
-	jr z, .asm_50b3e
+	jr z, .start_fall
 	cp $09
-	jr z, .asm_50b4b
+	jr z, .fall
 	ret
 
-.asm_50b3e
+.start_fall
 	ld de, Frameset_69632
 	call SetObjectFramesetPtr
 	inc l
 	ld a, $09
-	ld [hli], a
+	ld [hli], a ; wCurObjVar1
 	inc l
 	xor a
-	ld [hl], a
-.asm_50b4b
+	ld [hl], a ; wCurObjVar3
+.fall
 	ld a, [wCurObjSubState]
 	and $0f
-	cp $04
+	cp $4
 	jr nz, .asm_50b61
 	ld a, [wDollBoyActiveBarrels]
 	cp DOLLBOY_BARREL1 | DOLLBOY_BARREL2
-	jr z, .asm_50b98
+	jr z, .fall_wait_2_barrels
 	cp DOLLBOY_BARREL1 | DOLLBOY_BARREL3
-	jr z, .asm_50b76
-	jr .asm_50bbf
+	jr z, .fall_wait_1_barrel
+	jr .fall_immediately
 .asm_50b61
 	cp $03
-	jr nz, .asm_50bbf
+	jr nz, .fall_immediately
 	ld a, [wDollBoyActiveBarrels]
 	cp DOLLBOY_BARREL1
-	jr z, .asm_50b76
+	jr z, .fall_wait_1_barrel
 	cp DOLLBOY_BARREL3
-	jr z, .asm_50bbf
+	jr z, .fall_immediately
 	ld a, [w1d147]
 	and a
-	jr nz, .asm_50bbf
-.asm_50b76
+	jr nz, .fall_immediately
+.fall_wait_1_barrel
 	ld a, [wCurObjVar3]
-	cp $12
-	jr nz, .asm_50b85
+	cp 18
+	jr nz, .wait_ground_shake_1
 	ld de, Frameset_69646
 	call SetObjectFramesetPtr
-	jr .asm_50b92
-.asm_50b85
-	cp $1a
-	jr nz, .asm_50b8e
+	jr .fall_movement_1
+.wait_ground_shake_1
+	cp 26
+	jr nz, .wait_end_fall_1
 	call DollBoyGroundShake
-	jr .asm_50b92
-.asm_50b8e
-	cp $1e
-	jr z, .asm_50be1
-.asm_50b92
+	jr .fall_movement_1
+.wait_end_fall_1
+	cp 30
+	jr z, .after_fall
+.fall_movement_1
 	ld bc, Data_60b80
 	jp ApplyObjYMovement
-.asm_50b98
+
+.fall_wait_2_barrels
 	ld a, $01
 	ld [w1d147], a
 	ld a, [wCurObjVar3]
-	cp $22
-	jr nz, .asm_50bac
+	cp 34
+	jr nz, .wait_ground_shake_2
 	ld de, Frameset_69646
 	call SetObjectFramesetPtr
-	jr .asm_50bb9
-.asm_50bac
-	cp $2a
-	jr nz, .asm_50bb5
+	jr .fall_movement_2
+.wait_ground_shake_2
+	cp 42
+	jr nz, .wait_end_fall_2
 	call DollBoyGroundShake
-	jr .asm_50bb9
-.asm_50bb5
-	cp $2e
-	jr z, .asm_50be1
-.asm_50bb9
+	jr .fall_movement_2
+.wait_end_fall_2
+	cp 46
+	jr z, .after_fall
+.fall_movement_2
 	ld bc, Data_60ba0
 	jp ApplyObjYMovement
-.asm_50bbf
+
+.fall_immediately
 	ld a, [wCurObjVar3]
-	cp $02
-	jr nz, .asm_50bce
+	cp 2
+	jr nz, .wait_ground_shake_3
 	ld de, Frameset_69646
 	call SetObjectFramesetPtr
-	jr .asm_50bdb
-.asm_50bce
-	cp $0a
-	jr nz, .asm_50bd7
+	jr .fall_movement_3
+.wait_ground_shake_3
+	cp 10
+	jr nz, .wait_end_fall_3
 	call DollBoyGroundShake
-	jr .asm_50bdb
-.asm_50bd7
-	cp $0e
-	jr z, .asm_50be1
-.asm_50bdb
+	jr .fall_movement_3
+.wait_end_fall_3
+	cp 14
+	jr z, .after_fall
+.fall_movement_3
 	ld bc, Data_60880
 	jp ApplyObjYMovement
-.asm_50be1
+
+.after_fall
 	ld de, Frameset_69632
 	call SetObjectFramesetPtr
 	inc l
@@ -176,144 +185,147 @@ DollBoyFunc:
 	ld [hl], a
 	ret
 
-.asm_50beb
+.throw_hammer
 	call Func_511a5
 	ld a, [wCurObjVar1]
 	cp $08
 	ret z
 	ld hl, wCurObjStateDuration
 	dec [hl]
-	jr z, .asm_50c17
+	jr z, .after_hammer_throw
 	ld a, [hl]
 	cp $13
 	ret nz
-	ld hl, wDollBoyHammerStage
+	ld hl, wDollBoyHammerRange
 	ld a, [hl]
-	cp NUM_DOLLBOY_HAMMER_STAGES
-	jr nz, .asm_50c08
+	cp NUM_DOLLBOY_HAMMER_RANGES
+	jr nz, .spawn_hammer
 	xor a ; DOLLBOY_HAMMER_SHORT
 	ld [hl], a
-.asm_50c08
-	inc [hl]
+.spawn_hammer
+	inc [hl] ; queue up next range
 	play_sfx SFX_0A2
 	ld bc, ObjParams_DollBoyHammer
 	jp CreateObjectAtRelativePos
-.asm_50c17
+
+.after_hammer_throw
 	ld de, Frameset_69632
 	call SetObjectFramesetPtr
 	inc l
 	xor a
-	ld [hl], a
+	ld [hl], a ; wCurObjVar1
 	ret
 
-.asm_50c21
+.check_if_wario_is_bouncy
 	ld a, [wTransformation]
 	cp TRANSFORMATION_BOUNCY_WARIO
-	jr nz, .asm_50c36
+	jr nz, .not_bouncy
+	; Wario is bouncy
 	ld hl, wCurObjUpdateFunction + 1
-	ld a, HIGH(.Func_50fad)
+	ld a, HIGH(.DoNothing)
 	ld [hld], a
-	ld a, LOW(.Func_50fad)
+	ld a, LOW(.DoNothing)
 	ld [hld], a
 	xor a
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	ret
 
-.asm_50c36
+.not_bouncy
 	ld a, [wCurObjSubState]
-	cp $82
-	jr z, .asm_50c58
+	cp $2 | OBJSUBFLAG_HDIR
+	jr z, .walking_phase
 	call Func_511a5
 	ld a, [wCurObjVar1]
 	cp $08
 	ret z
 	ldh a, [rDIV]
-	cp $fa
+	cp 250
 	ret c
+	; rDIV >= 250, throw hammer
 	ld de, Frameset_6963b
 	call SetObjectFramesetPtr
-	ld a, $38
-	ld [hli], a
+	ld a, 56
+	ld [hli], a ; wCurObjStateDuration
 	ld a, $01
-	ld [hl], a
+	ld [hl], a ; wCurObjVar1
 	ret
 
-.asm_50c58
+.walking_phase
 	ld hl, wCurObjUpdateFunction + 1
-	ld a, HIGH(.Func_50c6f)
+	ld a, HIGH(.InitWalkingPhase)
 	ld [hld], a
-	ld a, LOW(.Func_50c6f)
+	ld a, LOW(.InitWalkingPhase)
 	ld [hld], a
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
 	and HEAVY_OBJ
 	or OBJ_INTERACTION_0B
 	ld [hli], a
-	ld a, $50
+	ld a, 80
 	ld [wCurObjStateDuration], a
 	ret
 
-.Func_50c6f:
+.InitWalkingPhase:
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
 	ld de, Frameset_6964d
 	call SetObjectFramesetPtr
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_50d88)
+	ld a, HIGH(.WalkingPhase)
 	ld [hld], a
-	ld a, LOW(.Func_50d88)
+	ld a, LOW(.WalkingPhase)
 	ld [hld], a
 	xor a
 	ld [wCurObjState], a
 	ld [wCurObjVar1], a
-	ld hl, Pals_51336
+	ld hl, DollBoyGreenPals
 	ld de, wTempPals2 palette 4
 	ld c, 4
 	ld b, 2
 	jp CopyAndApplyOBPals
 
-.asm_50c96
+.show_stars_left
 	ld de, Frameset_696b9
-	ld bc, ObjParams_DollBoyUnkObjLeft
-	jr .asm_50ca4
-.asm_50c9e
+	ld bc, ObjParams_DollBoyHammerStarsLeft
+	jr .got_stars_params
+.show_stars_right
 	ld de, Frameset_696b6
-	ld bc, ObjParams_DollBoyUnkObjRight
-.asm_50ca4
+	ld bc, ObjParams_DollBoyHammerStarsRight
+.got_stars_params
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_50f49)
+	ld a, HIGH(.HitWario)
 	ld [hld], a
-	ld a, LOW(.Func_50f49)
+	ld a, LOW(.HitWario)
 	ld [hld], a
 	xor a
 	ld [wCurObjVar3], a
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	stop_sfx
 	call SetObjectFramesetPtr
-	ld a, $01
-	ld [hli], a
+	ld a, 1
+	ld [hli], a ; wCurObjStateDuration
 	jp CreateObjectAtRelativePos
 
 .asm_50cc4
-	ld a, $32
+	ld a, $32 ; wCurObjState
 	ld [hld], a
 	jr .asm_50ccc
 .asm_50cc9
 	ld a, $33
-	ld [hld], a
+	ld [hld], a ; wCurObjState
 .asm_50ccc
-	ld a, $0c
+	ld a, 12
 	ld [wCurObjStateDuration], a
 	ld a, $02
 	ld [wCurObjVar2], a
 	ret
 
-.asm_50cd7
+.set_stunned
 	play_sfx SFX_0A4
 	ld a, $5c
-	ld [hld], a
-	ld a, [hld]
+	ld [hld], a ; wCurObjState
+	ld a, [hld] ; wCurObjSubState
 	rlca
 	jr c, .asm_50ceb
 	ld de, Frameset_6967a
@@ -322,19 +334,19 @@ DollBoyFunc:
 	ld de, Frameset_69675
 .asm_50cee
 	xor a
-	ld [hl], a
+	ld [hl], a ; wCurObjVar3
 	call SetObjectFramesetPtr
-	ld a, $78
-	ld [hli], a
+	ld a, 120
+	ld [hli], a ; wCurObjStateDuration
 	ld a, $ff
-	ld [hl], a
-	ld hl, Pals_51346
+	ld [hl], a ; wCurObjVar1
+	ld hl, DollBoyRedPals
 	ld de, wTempPals2 palette 4
 	ld c, 4
 	ld b, 2
 	jp CopyAndApplyOBPals
 
-.asm_50d06
+.update_stunned
 	ld hl, wCurObjYPos
 	ld a, [hli]
 	ldh [hYPosLo], a
@@ -355,16 +367,17 @@ DollBoyFunc:
 	ld [hl], a
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
-	jr z, .asm_50d3e
+	jr z, .end_stun
 	ld a, [hl]
-	cp $0a
+	cp 10
 	ret nz
-	ld hl, Pals_51336
+	ld hl, DollBoyGreenPals
 	ld de, wTempPals2 palette 4
 	ld c, 4
 	ld b, 2
 	jp CopyAndApplyOBPals
-.asm_50d3e
+
+.end_stun
 	ld l, OBJ_STATE
 	xor a
 	ld [hld], a
@@ -379,12 +392,13 @@ DollBoyFunc:
 	cp b
 	jr c, .asm_50d5b
 	ld de, Frameset_69656
-	ld b, $00
+	ld b, 0
 	jr .asm_50d7c
 .asm_50d5b
 	ld de, Frameset_6966a
-	ld b, $20
+	ld b, 32
 	jr .asm_50d7c
+
 .asm_50d62
 	ld a, [wWarioScreenXPos]
 	add $2a
@@ -394,20 +408,21 @@ DollBoyFunc:
 	cp b
 	jr c, .asm_50d77
 	ld de, Frameset_6965f
-	ld b, $20
+	ld b, 32
 	jr .asm_50d7c
 .asm_50d77
 	ld de, Frameset_6964d
-	ld b, $00
+	ld b, 0
+
 .asm_50d7c
 	call SetObjectFramesetPtr
-	ld [hl], b
+	ld [hl], b ; wCurObjStateDuration
 	xor a
 	ld [wCurObjVar1], a
 	ld [wCurObjVar3], a
 	ret
 
-.Func_50d88:
+.WalkingPhase:
 	ld hl, wCurObjInteractionType
 	ld a, [hl]
 	and HEAVY_OBJ
@@ -416,13 +431,13 @@ DollBoyFunc:
 	ld hl, wCurObjState
 	ld a, [hl]
 	and a
-	jp z, .asm_50e4e
+	jp z, .switch_direction
 	cp $5a
-	jp z, .asm_50e26
+	jp z, .jump_platform_below
 	cp $5b
-	jp z, .asm_50e2b
+	jp z, .jump_platform_above
 	cp $5c
-	jp z, .asm_50d06
+	jp z, .update_stunned
 	cp $02
 	jp z, .asm_50cc4
 	cp $03
@@ -432,34 +447,35 @@ DollBoyFunc:
 	cp $33
 	jp z, ObjState_BumpRight
 	cp $0b
-	jp z, .asm_50c96
+	jp z, .show_stars_left
 	cp $0c
-	jp z, .asm_50c9e
+	jp z, .show_stars_right
 	and $fe
 	cp $08
-	jp z, .asm_50cd7
+	jp z, .set_stunned
 	cp $04
 	jr z, .asm_50de0
 	ld a, [wCurObjVar1]
 	inc a
-	jp z, .asm_50cd7
-	ld a, $01
+	jp z, .set_stunned
+	ld a, 1
 	ld [wCurObjStateDuration], a
-	jp .asm_50d06
+	jp .update_stunned
+
 .asm_50de0
 	ld a, [wCurObjVar1]
 	inc a
-	jp nz, .asm_50cd7
+	jp nz, .set_stunned
 	ld a, $48
-	ld [hld], a
-	ld a, [hl]
+	ld [hld], a ; wCurObjState
+	ld a, [hl] ; wCurObjSubState
 	and $f0
 	ld [hld], a
 	xor a
-	ld [hld], a
-	ld a, $2b
+	ld [hld], a ; wCurObjVar3
+	ld a, 43
 	ld [wCurObjStateDuration], a
-	ld bc, .Func_50fb3
+	ld bc, .Defeated
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, b
 	ld [hld], a
@@ -473,19 +489,18 @@ DollBoyFunc:
 	ld de, Frameset_6967f
 	jp SetObjectFramesetPtr
 
-.asm_50e26
+.jump_platform_below
 	ld bc, Data_60890
-	jr .asm_50e2e
-.asm_50e2b
+	jr .got_jump_movement
+.jump_platform_above
 	ld bc, Data_608a0
-.asm_50e2e
+.got_jump_movement
 	ld l, OBJ_STATE_DURATION
 	ld a, [hl]
 	and a
 	jr z, .asm_50e36
 	dec [hl]
 	ret
-
 .asm_50e36
 	call ApplyObjYMovement
 	ld a, [wCurObjVar3]
@@ -500,7 +515,7 @@ DollBoyFunc:
 	ld [wCurObjState], a
 	ret
 
-.asm_50e4e
+.switch_direction
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
 	and a
@@ -510,12 +525,13 @@ DollBoyFunc:
 	ld l, OBJ_VAR_3
 	ld a, [hli]
 	cp $17
-	jr nz, .asm_50e66
-	ld a, [hl]
-	xor $80
+	jr nz, .short_hop_movement
+	; switch horizontal directions
+	ld a, [hl] ; wCurObjSubState
+	xor OBJSUBFLAG_HDIR
 	ld [hl], a
 	call DollBoyGroundShake
-.asm_50e66
+.short_hop_movement
 	ld bc, Data_60c00
 	jp ApplyObjYMovement
 .asm_50e6c
@@ -529,122 +545,132 @@ DollBoyFunc:
 	jp SetObjectFramesetPtr
 .asm_50e7e
 	inc l
-	ld a, [hl]
+	ld a, [hl] ; wCurObjVar1
 	and a
 	jr z, .asm_50e86
 	dec [hl]
-	jr .asm_50ebf
+	jr .handle_walk_movement
 .asm_50e86
 	ld a, [wCurObjScreenXPos]
 	cp $78
-	jr nc, .asm_50ebf
+	jr nc, .handle_walk_movement
 	cp $18
-	jr c, .asm_50ebf
+	jr c, .handle_walk_movement
 	ld a, [wWarioScreenYPos]
 	cp $28
-	jr c, .asm_50ebf
+	jr c, .handle_walk_movement
 	ld b, a
 	ld a, [wCurObjScreenYPos]
 	cp $a0
-	jr nc, .asm_50ebf
+	jr nc, .handle_walk_movement
 	sub b
 	jr nc, .asm_50eab
 	cp $e1
-	jr nc, .asm_50ebf
+	jr nc, .handle_walk_movement
+	; jump to platform below
 	ld a, $5a
 	jr .asm_50eb1
 .asm_50eab
 	cp $20
-	jr c, .asm_50ebf
+	jr c, .handle_walk_movement
+	; jump to platform above
 	ld a, $5b
 .asm_50eb1
 	ld l, OBJ_STATE
-	ld [hld], a
+	ld [hld], a ; wCurObjState
 	dec l
 	xor a
-	ld [hld], a
+	ld [hld], a ; wCurObjVar3
 	dec l
 	ld a, $1e
-	ld [hld], a
-	ld a, $14
-	ld [hl], a
+	ld [hld], a ; wCurObjVar1
+	ld a, 20
+	ld [hl], a ; wCurObjStateDuration
 	ret
 
-.asm_50ebf
+.handle_walk_movement
 	ld a, [wCurObjFramesetOffset]
 	cp $06
-	jr nz, .asm_50ed5
+	jr nz, .no_sfx
 	ld a, [wCurObjFrameDuration]
 	cp $01
 	play_sfx z, SFX_0A2
-.asm_50ed5
+.no_sfx
 	ld hl, wCurObjYPos
 	ld a, [hli]
-	sub $04
+	sub 4
 	ldh [hYPosLo], a
 	ld a, [hli]
-	sbc $00
+	sbc 0
 	ldh [hYPosHi], a
 	ld a, [wCurObjSubState]
 	rlca
-	jr c, .asm_50f14
+	jr c, .going_right
+; going_left
 	ld a, [hli]
-	sub $0c
+	sub 12
 	ldh [hXPosLo], a
 	ld a, [hli]
-	sbc $00
+	sbc 0
 	ldh [hXPosHi], a
 	call Func_3513
 	and a
-	jr nz, .asm_50f0f
+	jr nz, .turn_right
 	ld a, [wCurObjFramesetOffset]
 	cp $06
-	jr c, .asm_50f0b
+	jr c, .skip_move_left
 	ld hl, wCurObjInteractionType
 	ld a, [hl]
 	and HEAVY_OBJ
 	or OBJ_INTERACTION_BOUNCY
 	ld [hli], a
 	jp MoveObjectLeft
-.asm_50f0b
+.skip_move_left
 	ret
+
+	; unreachable
 	jp MoveObjectLeft
-.asm_50f0f
+
+.turn_right
 	ld de, Frameset_6966a
-	jr .asm_50f3e
-.asm_50f14
+	jr .set_turn_frameset
+
+.going_right
 	ld a, [hli]
-	add $0b
+	add 11
 	ldh [hXPosLo], a
 	ld a, [hli]
-	adc $00
+	adc 0
 	ldh [hXPosHi], a
 	call Func_3513
 	and a
-	jr nz, .asm_50f3b
+	jr nz, .turn_left
 	ld a, [wCurObjFramesetOffset]
 	cp $06
-	jr c, .asm_50f37
+	jr c, .skip_move_right
 	ld hl, wCurObjInteractionType
 	ld a, [hl]
 	and HEAVY_OBJ
 	or OBJ_INTERACTION_BOUNCY
 	ld [hli], a
 	jp MoveObjectRight
-.asm_50f37
+.skip_move_right
 	ret
+
+	; unreachable
 	jp MoveObjectRight
-.asm_50f3b
+
+.turn_left
 	ld de, Frameset_6965f
-.asm_50f3e
+.set_turn_frameset
 	call SetObjectFramesetPtr
-	ld a, $20
-	ld [hli], a
+	ld a, 32
+	ld [hli], a ; wCurObjStateDuration
 	xor a
 	ld [wCurObjVar3], a
 	ret
 
-.Func_50f49:
+.HitWario:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
@@ -673,22 +699,22 @@ DollBoyFunc:
 	ldh a, [hYPosHi]
 	ld [hl], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_50f8e)
+	ld a, HIGH(.WaitThenDoNothing)
 	ld [hld], a
-	ld a, LOW(.Func_50f8e)
+	ld a, LOW(.WaitThenDoNothing)
 	ld [hld], a
-	ld a, $3c
+	ld a, 60
 	ld [wCurObjStateDuration], a
 	ret
 
-.Func_50f8e:
+.WaitThenDoNothing:
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, $4f
+	ld a, HIGH(.DoNothing)
 	ld [hld], a
-	ld a, $ad
+	ld a, LOW(.DoNothing)
 	ld [hld], a
 	ld a, [wCurObjSubState]
 	rlca
@@ -699,25 +725,27 @@ DollBoyFunc:
 	ld de, Frameset_69695
 	jp SetObjectFramesetPtr
 
-.Func_50fad:
+.DoNothing:
+	; Wario was hit by a hammer,
+	; so no more actions to process
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ret
 
-.Func_50fb3:
+.Defeated:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjScreenYPos]
 	cp $d0
-	jr nc, .asm_50ff3
+	jr nc, .set_defeat_music
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
 	and a
-	jr z, .asm_50fed
-	cp $1b
+	jr z, .defeated_fall_movement
+	cp 27
 	jr nz, .asm_50fe2
 	stop_sfx
-	ld hl, Pals_51346
+	ld hl, DollBoyRedPals
 	ld de, wTempPals2 palette 4
 	ld c, 4
 	ld b, 2
@@ -726,14 +754,15 @@ DollBoyFunc:
 .asm_50fe2
 	dec [hl]
 	play_sfx z, SFX_0A3
-.asm_50fed
+.defeated_fall_movement
 	ld bc, Data_60bd0
 	jp ApplyObjYMovement
-.asm_50ff3
+
+.set_defeat_music
 	xor a
 	ld [wCurObjFlags], a
 	ld a, $03
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
 	xor a
 	ld [wIsBossBattle], a
@@ -755,94 +784,97 @@ DollBoyBarrelFunc:
 	res OBJSUBFLAG_UNINITIALISED_F, [hl]
 	set OBJSUBFLAG_UNK_4_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_5103c)
+	ld a, HIGH(.StartDelay)
 	ld [hld], a
-	ld a, LOW(.Func_5103c)
+	ld a, LOW(.StartDelay)
 	ld [hld], a
 	ld de, Frameset_6969f
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
-	ld a, $07
+	ld a, 7
 	ld [hld], a
-	ld a, $f8
+	ld a, -8
 	ld [hld], a
-	ld a, $00
+	ld a, 0
 	ld [hl], a
 	xor a
 	ld [wCurObjVar1], a
 	ret
 
-.Func_5103c:
-	ld a, $02
+.StartDelay:
+	; wait until it's possible to start flashing
+	ld a, 2
 	ld [wCurObjFrameDuration], a
-	ld a, [w1d141]
+	ld a, [wDollBoyNoFlashingBarrel]
 	and a
 	ret z
 	ld hl, wCurObjUpdateFunction + 1
-	ld a, HIGH(.Func_51050)
+	ld a, HIGH(.Main)
 	ld [hld], a
-	ld a, LOW(.Func_51050)
+	ld a, LOW(.Main)
 	ld [hld], a
 	ret
 
-.Func_51050:
+.Main:
 	ld a, [wCurObjVar1]
 	and a
-	jr z, .asm_510b1
+	jr z, .not_flashing
 	cp $01
-	jp z, .asm_51101
+	jp z, .wait_to_start_flashing
 	cp $02
-	jp z, .asm_51117
+	jp z, .flashing
 	cp $08
-	jr z, .asm_51069
+	jr z, .start_fall
 	cp $09
-	jr z, .asm_51072
+	jr z, .fall
 	ret
 
-.asm_51069
+.start_fall
 	ld hl, wCurObjVar1
 	ld a, $09
 	ld [hli], a
 	inc l
 	xor a
-	ld [hl], a
-.asm_51072
+	ld [hl], a ; wCurObjVar3
+.fall
 	ld a, [wCurObjUnk07]
 	cp $41
-	jr nz, .asm_51080
+	jr nz, .no_delay_fall
 	ld a, [wDollBoyActiveBarrels]
 	cp DOLLBOY_BARREL1 | DOLLBOY_BARREL2
-	jr z, .asm_51096
-.asm_51080
+	jr z, .delay_then_fall
+
+.no_delay_fall
 	ld a, [wCurObjVar3]
 	cp $0a
-	jr nz, .asm_5108c
+	jr nz, .no_shake_1
 	call DollBoyGroundShake
-	jr .asm_51090
-.asm_5108c
+	jr .fall_movement
+.no_shake_1
 	cp $0e
-	jr z, .asm_510ac
-.asm_51090
+	jr z, .end_falling
+.fall_movement
 	ld bc, Data_60880
 	jp ApplyObjYMovement
-.asm_51096
+
+.delay_then_fall
 	ld a, [wCurObjVar3]
 	cp $1a
-	jr nz, .asm_510a2
+	jr nz, .no_shake_2
 	call DollBoyGroundShake
-	jr .asm_510a6
-.asm_510a2
+	jr .fall_with_delay_movement
+.no_shake_2
 	cp $1e
-	jr z, .asm_510ac
-.asm_510a6
+	jr z, .end_falling
+.fall_with_delay_movement
 	ld bc, Data_60b80
 	jp ApplyObjYMovement
-.asm_510ac
+.end_falling
 	xor a
 	ld [wCurObjVar1], a
 	ret
 
-.asm_510b1
+.not_flashing
 	call Func_511a5
 	ld a, [wCurObjVar1]
 	cp $08
@@ -854,97 +886,100 @@ DollBoyBarrelFunc:
 	and %11
 	cp e
 	ret nz
-	ld a, [w1d141]
+	ld a, [wDollBoyNoFlashingBarrel]
 	and a
 	ret z
 	ld a, [wDollBoyActiveBarrels]
 	cp DOLLBOY_BARREL1
-	jr z, .asm_510ed
+	jr z, .set_flashing
 	cp DOLLBOY_BARREL2
-	jr z, .asm_510ed
+	jr z, .set_flashing
 	cp DOLLBOY_BARREL3
-	jr z, .asm_510ed
+	jr z, .set_flashing
 	ld a, [wWarioScreenYPos]
 	add $2a
 	ld b, a
 	ld a, [wCurObjScreenYPos]
 	add $2a
 	sub b
-	cp $08
+	cp 8
 	ret c
-	cp $f8
+	cp -8
 	ret nc
-.asm_510ed
+	; |barrel y - Wario y| > 8
+.set_flashing
 	xor a ; FALSE
-	ld [w1d141], a
+	ld [wDollBoyNoFlashingBarrel], a
 	ldh a, [rDIV]
 	and %11
 	ld b, a
 	ld a, 70
 	add b
+	; b = value between 70 and 73
 	ld hl, wCurObjStateDuration
 	ld [hli], a
 	ld a, $01
-	ld [hl], a
+	ld [hl], a ; wCurObjVar1
 	ret
 
-.asm_51101
+.wait_to_start_flashing
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
 	ld de, Frameset_696a8
 	call SetObjectFramesetPtr
-	ld a, $f0
-	ld [hli], a
+	ld a, 240
+	ld [hli], a ; wCurObjStateDuration
 	ld a, $02
-	ld [hl], a
+	ld [hl], a ; wCurObjVar1
 	xor a
 	ld [wCurObjState], a
 	ret
 
-.asm_51117
+.flashing
 	ld a, [wTransformation]
 	cp TRANSFORMATION_BOUNCY_WARIO
-	jr nz, .asm_51125
+	jr nz, .not_bouncy
 	ld hl, wCurObjStateDuration
 	xor a
 	ld [hli], a
-	jr .asm_51148
-.asm_51125
+	jr .end_flashing
+.not_bouncy
 	ld hl, wCurObjFlags
 	bit OBJFLAG_ON_SCREEN_F, [hl]
-	jr z, .asm_5113b
+	jr z, .not_on_screen
 	ld a, [wGlobalCounter]
 	and %111
 	play_sfx z, SFX_06A
-.asm_5113b
+.not_on_screen
 	ld l, OBJ_STATE
 	ld a, [hld]
 	cp $05
-	jr z, .asm_51159
+	jr z, .attacked
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	ret nz
 	inc l
 	xor a
-.asm_51148
-	ld [hl], a
+.end_flashing
+	ld [hl], a ; wCurObjVar1
 	ld de, Frameset_6969f
 	call SetObjectFramesetPtr
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_51050)
+	ld a, HIGH(.Main)
 	ld [hld], a
-	ld a, LOW(.Func_51050)
+	ld a, LOW(.Main)
 	ld [hld], a
-	jr .asm_5119f
-.asm_51159
-	ld a, [hl]
+	jr .set_no_barrel_flashing
+
+.attacked
+	ld a, [hl] ; wCurObjSubState
 	and $f0
 	ld [hld], a
 	xor a
-	ld [hld], a
+	ld [hld], a ; wCurObjVar3
 	ld a, $01
-	ld [hld], a
+	ld [hld], a ; wCurObjVar2
 	ld de, Frameset_6969f
 	call SetObjectFramesetPtr
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -961,7 +996,7 @@ DollBoyBarrelFunc:
 	and $ff ^ DOLLBOY_BARREL1
 	ld [hl], a
 	ld a, DOLLBOY_DOLL
-	jr .asm_5119c
+	jr .got_remaining_parts
 .asm_5118a
 	cp $42
 	jr nz, .asm_51196
@@ -969,35 +1004,35 @@ DollBoyBarrelFunc:
 	and $ff ^ DOLLBOY_BARREL2
 	ld [hl], a
 	ld a, DOLLBOY_BARREL1 | DOLLBOY_DOLL
-	jr .asm_5119c
+	jr .got_remaining_parts
 .asm_51196
 	ld a, [hl]
 	and $ff ^ DOLLBOY_BARREL3
 	ld [hl], a
 	ld a, DOLLBOY_BARREL1 | DOLLBOY_BARREL2 | DOLLBOY_DOLL
-.asm_5119c
-	ld [w1d142], a
-.asm_5119f
+.got_remaining_parts
+	ld [wDollBoyRemainingParts], a
+.set_no_barrel_flashing
 	ld a, TRUE
-	ld [w1d141], a
+	ld [wDollBoyNoFlashingBarrel], a
 	ret
 
 Func_511a5:
 	ld a, [wCurObjSubState]
 	dec a
-	ret z
+	ret z ; exit if wCurObjSubState == $1
 	ld a, [wCurObjUnk07]
 	and $0f
 	ld b, a
-	ld a, [w1d142]
+	ld a, [wDollBoyRemainingParts]
 	ld e, a
 	and b
 	ret z
-	; unset flag in unk7 from w1d142
+	; unset flag in unk7 from wDollBoyRemainingParts
 	ld a, b
 	xor $ff
 	and e
-	ld [w1d142], a
+	ld [wDollBoyRemainingParts], a
 	ld a, $08
 	ld [wCurObjVar1], a
 	ld hl, wCurObjSubState
@@ -1042,7 +1077,7 @@ DollBoyHammerFunc:
 	jp nz, MoveObjectRight_Fast
 	ld bc, Data_60860
 	call ApplyObjYMovement
-	ld a, [wDollBoyHammerStage]
+	ld a, [wDollBoyHammerRange]
 	cp DOLLBOY_HAMMER_MID_SHORT
 	jr nz, .check_mid_long
 ; mid-short
@@ -1100,29 +1135,29 @@ DollBoyHammerFunc:
 
 HammerPlatformSpawnerFunc:
 	ld hl, wCurObjUpdateFunction + 1
-	ld a, HIGH(.Func_51282)
+	ld a, HIGH(.SpawnHammerPlatform)
 	ld [hld], a
-	ld a, LOW(.Func_51282)
+	ld a, LOW(.SpawnHammerPlatform)
 	ld [hld], a
 	ld l, OBJ_SUBSTATE
 	res OBJSUBFLAG_UNINITIALISED_F, [hl]
 	set OBJSUBFLAG_UNK_4_F, [hl]
 	ld a, 150
 	ld [wCurObjStateDuration], a
-	jr .Func_51296
+	jr .DoNothing
 
-.Func_51282:
+.SpawnHammerPlatform:
 	ld hl, wCurObjStateDuration
 	dec [hl]
-	jr nz, .Func_51296
+	jr nz, .DoNothing
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_51296)
+	ld a, HIGH(.DoNothing)
 	ld [hld], a
-	ld a, LOW(.Func_51296)
+	ld a, LOW(.DoNothing)
 	ld [hld], a
 	ld bc, ObjParams_HammerPlatform
 	call CreateObjectAtRelativePos
-.Func_51296:
+.DoNothing:
 	ld a, 2
 	ld [wCurObjFrameDuration], a
 	ld a, NO_ACTIONS_FOR 1
@@ -1146,10 +1181,10 @@ HammerPlatformFunc:
 	ld hl, wCurObjState
 	ld a, [hl]
 	and a
-	jr nz, .asm_512dc
+	jr nz, .switch_direction_up
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
-	jr z, .asm_512dc
+	jr z, .switch_direction_up
 	ld l, OBJ_FLAGS
 	bit OBJFLAG_STEPPED_F, [hl]
 	jp z, MoveObjectDown_Slow
@@ -1157,11 +1192,11 @@ HammerPlatformFunc:
 	ld a, [wGlobalCounter]
 	rra
 	ret nc
-	ld b, $01
+	ld b, 1
 	call AddYOffset
 	call HandleDownwardsFloorTransition
 	jp MoveObjectDown
-.asm_512dc
+.switch_direction_up
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.MoveUp)
 	ld [hld], a
@@ -1177,13 +1212,13 @@ HammerPlatformFunc:
 	ld b, [hl]
 	ld a, [wCurObjYPos + 0]
 	cp b
-	jr nz, .asm_512fe
+	jr nz, .continue_move_up
 	inc l
 	ld b, [hl]
 	ld a, [wCurObjYPos + 1]
 	cp b
-	jr z, .asm_51317
-.asm_512fe
+	jr z, .switch_direction_down
+.continue_move_up
 	ld l, OBJ_FLAGS
 	bit OBJFLAG_STEPPED_F, [hl]
 	jp z, MoveObjectUp_Slow
@@ -1191,11 +1226,11 @@ HammerPlatformFunc:
 	ld a, [wGlobalCounter]
 	rra
 	ret nc
-	ld b, $01
+	ld b, 1
 	call SubYOffset
 	call HandleUpwardsFloorTransition
 	jp MoveObjectUp
-.asm_51317
+.switch_direction_down
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.MoveDown)
 	ld [hld], a
@@ -1203,7 +1238,7 @@ HammerPlatformFunc:
 	ld [hld], a
 	xor a
 	ld [wCurObjState], a
-	ld a, $8c
+	ld a, 140
 	ld [wCurObjStateDuration], a
 	ret
 
@@ -1212,7 +1247,7 @@ DollBoyGroundShake:
 	ld b, 24
 	jp DoGroundShake
 
-Pals_51336:
+DollBoyGreenPals:
 	rgb  0, 25,  1
 	rgb 31, 31,  0
 	rgb  0, 31, 20
@@ -1223,7 +1258,7 @@ Pals_51336:
 	rgb  0, 31, 20
 	rgb 31, 31,  0
 
-Pals_51346:
+DollBoyRedPals:
 	rgb  0, 25,  1
 	rgb 31, 31, 25
 	rgb 31,  5,  5

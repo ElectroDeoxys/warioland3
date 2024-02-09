@@ -1,3 +1,9 @@
+; wJamanoActiveSkulls flags
+DEF JAMANO_SKULL1 EQU 1 << 0
+DEF JAMANO_SKULL2 EQU 1 << 1
+DEF JAMANO_SKULL3 EQU 1 << 2
+DEF JAMANO_SKULL4 EQU 1 << 3
+
 JamanoFunc:
 	ld a, TRUE
 	ld [wIsBossBattle], a
@@ -63,7 +69,7 @@ JamanoFunc:
 	dec [hl]
 	ret nz
 	ld a, $02
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
 	ld hl, wCurObjFlags
 	set 7, [hl]
@@ -114,7 +120,7 @@ JamanoFunc:
 	ret
 .asm_54e1c
 	set 4, [hl]
-	ld a, [wDollBoyHammerStage]
+	ld a, [wDollBoyHammerRange]
 	and a
 	jr nz, .asm_54e46
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -543,7 +549,7 @@ JamanoHatFunc:
 	ld e, $06
 	farcall Func_ba42
 	ld a, $03
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
 	xor a
 	ld [wIsBossBattle], a
@@ -648,11 +654,11 @@ SkullSpawnerFunc:
 	call CreateObjectAtRelativePos
 	ld bc, ObjParams_Skull4
 	call CreateObjectAtRelativePos
-	ld a, $0f
-	ld [wDollBoyActiveBarrels], a
+	ld a, JAMANO_SKULL1 | JAMANO_SKULL2 | JAMANO_SKULL3 | JAMANO_SKULL4
+	ld [wJamanoActiveSkulls], a
 	xor a
 	ld [w1d147], a
-	ld [wDollBoyHammerStage], a
+	ld [wDollBoyHammerRange], a
 	ld a, $01
 	ld [w1d149], a
 	ret
@@ -665,7 +671,7 @@ SkullSpawnerFunc:
 	ld a, [w1d149]
 	and a
 	jr nz, .asm_5525b
-	ld a, [wDollBoyHammerStage]
+	ld a, [wDollBoyHammerRange]
 	and a
 	jr nz, .asm_5525b
 	xor a
@@ -676,28 +682,30 @@ SkullSpawnerFunc:
 	ret
 .asm_5525b
 	call Func_55407
-	ld hl, wDollBoyActiveBarrels
+
+	ld hl, wJamanoActiveSkulls
 	ld a, [hl]
 	rra
-	jr nc, .asm_55275
+	jr nc, .spawn_skull_1
 	rra
-	jr nc, .asm_5527d
+	jr nc, .spawn_skull_2
 	rra
-	jr nc, .asm_55285
+	jr nc, .spawn_skull_3
 	rra
 	ret c
+; spawn skull 4
 	set 3, [hl]
 	ld bc, ObjParams_Skull4
 	jp CreateObjectAtRelativePos
-.asm_55275
+.spawn_skull_1
 	set 0, [hl]
 	ld bc, ObjParams_Skull1
 	jp CreateObjectAtRelativePos
-.asm_5527d
+.spawn_skull_2
 	set 1, [hl]
 	ld bc, ObjParams_Skull2
 	jp CreateObjectAtRelativePos
-.asm_55285
+.spawn_skull_3
 	set 2, [hl]
 	ld bc, ObjParams_Skull3
 	jp CreateObjectAtRelativePos
@@ -875,34 +883,36 @@ SkullFunc:
 	ret nz
 	xor a
 	ld [wCurObjFlags], a
+
 	ld a, [wCurObjUnk07]
 	cp $50
-	jr z, .asm_553d6
+	jr z, .deactivate_skull_1
 	cp $51
-	jr z, .asm_553da
+	jr z, .deactivate_skull_2
 	cp $52
-	jr z, .asm_553de
-	ld b, $f7
-	jr .asm_553e0
-.asm_553d6
-	ld b, $fe
-	jr .asm_553e0
-.asm_553da
-	ld b, $fd
-	jr .asm_553e0
-.asm_553de
-	ld b, $fb
-.asm_553e0
-	ld a, [wDollBoyActiveBarrels]
+	jr z, .deactivate_skull_3
+; deactivate skull 4
+	ld b, $ff ^ JAMANO_SKULL4
+	jr .got_skull_mask
+.deactivate_skull_1
+	ld b, $ff ^ JAMANO_SKULL1
+	jr .got_skull_mask
+.deactivate_skull_2
+	ld b, $ff ^ JAMANO_SKULL2
+	jr .got_skull_mask
+.deactivate_skull_3
+	ld b, $ff ^ JAMANO_SKULL3
+.got_skull_mask
+	ld a, [wJamanoActiveSkulls]
 	and b
-	ld [wDollBoyActiveBarrels], a
+	ld [wJamanoActiveSkulls], a
 	ret
 
 .Func_553e8:
 	ld a, [w1d149]
 	and a
 	jr nz, .asm_553f4
-	ld a, [wDollBoyHammerStage]
+	ld a, [wDollBoyHammerRange]
 	and a
 	jr z, .asm_55403
 .asm_553f4
@@ -922,7 +932,7 @@ SkullFunc:
 Func_55407:
 	ld a, [w1d147]
 	ld b, a
-	ld hl, wDollBoyHammerStage
+	ld hl, wDollBoyHammerRange
 	ld a, [hl]
 	and a
 	jr z, .asm_5542b
@@ -1040,7 +1050,7 @@ Func_55407:
 ;	fallthrough
 
 Func_554bc:
-	ld a, [wDollBoyHammerStage]
+	ld a, [wDollBoyHammerRange]
 	cp $01
 	jr z, .asm_554de
 	cp $02

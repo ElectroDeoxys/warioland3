@@ -131,7 +131,7 @@ DEF INTERACTION_DOWN  EQU (1 << INTERACTION_DOWN_F)  ; $80
 	const OBJ_INTERACTION_31             ; 31
 	const OBJ_INTERACTION_32             ; 32
 	const OBJ_INTERACTION_33             ; 33
-	const OBJ_INTERACTION_34             ; 34
+	const OBJ_INTERACTION_WORMWOULD             ; 34
 	const OBJ_INTERACTION_35             ; 35
 	const OBJ_INTERACTION_36             ; 36
 	const OBJ_INTERACTION_37             ; 37

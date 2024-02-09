@@ -503,7 +503,7 @@ UpdateState_Airborne:
 	ld a, [wWarioState]
 	cp WST_AIRBORNE
 	ret nz ; not airborne anymore
-	ld a, [wced2]
+	ld a, [wJumpCollision]
 	and a
 	jp nz, StartFall_SkipResetJumpUpwards
 

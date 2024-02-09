@@ -26,7 +26,7 @@ YellowBellyBodyFunc:
 	xor a
 	ld [wDollBoyActiveBarrels], a
 	ld [w1d147], a
-	ld [wDollBoyHammerStage], a
+	ld [wDollBoyHammerRange], a
 	ld a, TRUE
 	ld [wIsBossBattle], a
 	stop_music2
@@ -98,7 +98,7 @@ YellowBellyBodyFunc:
 	ld a, LOW(.Func_51419)
 	ld [hld], a
 	ld a, $02
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
 	ret
 
@@ -133,7 +133,7 @@ YellowBellyBodyFunc:
 	ld [hld], a
 	ld a, LOW(.Func_514a4)
 	ld [hld], a
-	ld a, [wDollBoyHammerStage]
+	ld a, [wDollBoyHammerRange]
 	and a
 	jr z, .asm_5145c
 	xor a
@@ -229,7 +229,7 @@ YellowBellyBodyFunc:
 	ld bc, ObjParams_YellowBellyArrowRight
 	jp CreateObjectAtRelativePos
 .asm_514eb
-	ld a, [wDollBoyHammerStage]
+	ld a, [wDollBoyHammerRange]
 	and a
 	jr nz, .asm_51523
 	ld hl, wCurObjUpdateFunction + 1
@@ -287,7 +287,7 @@ YellowBellyBodyFunc:
 .asm_5154e
 	stop_sfx
 	ld a, $01
-	ld [wDollBoyHammerStage], a
+	ld [wDollBoyHammerRange], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.Func_51572)
 	ld [hld], a
@@ -354,13 +354,13 @@ YellowBellyBodyFunc:
 	cp TRANSFORMATION_PUFFY_WARIO
 	jr nz, .asm_515eb
 	xor a
-	ld [wDollBoyHammerStage], a
+	ld [wDollBoyHammerRange], a
 	jp .asm_514eb
 .asm_515eb
 	ld a, [w1d147]
 	and a
 	jp nz, .asm_5179a
-	ld a, [wDollBoyHammerStage]
+	ld a, [wDollBoyHammerRange]
 	and a
 	jp z, .asm_514eb
 	ld a, LOW(wObj1)
@@ -515,7 +515,7 @@ YellowBellyBodyFunc:
 	dec [hl]
 .asm_516d4
 	ld l, OBJ_SUBSTATE
-	ld a, [wDollBoyHammerStage]
+	ld a, [wDollBoyHammerRange]
 	dec a
 	jr z, .asm_516ec
 	bit OBJSUBFLAG_VDIR_F, [hl]
@@ -958,7 +958,7 @@ PumpFunc:
 	ld [hl], a
 	ld [w1d147], a
 	xor a
-	ld [wDollBoyHammerStage], a
+	ld [wDollBoyHammerRange], a
 	ld de, Frameset_69882
 	call SetObjectFramesetPtr
 	ld a, $1d
@@ -985,7 +985,7 @@ PumpFunc:
 	ld a, $58
 	ld [hl], a
 	xor a
-	ld [wDollBoyHammerStage], a
+	ld [wDollBoyHammerRange], a
 .asm_51a1d
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
@@ -1042,7 +1042,7 @@ YellowBellyArrowFunc:
 	ld [hld], a
 	ld a, LOW(.Func_51a7d)
 	ld [hld], a
-	ld a, [wDollBoyHammerStage]
+	ld a, [wDollBoyHammerRange]
 	and a
 	jr z, .Func_51a7d
 	ld l, OBJ_FLAGS
@@ -1059,7 +1059,7 @@ YellowBellyArrowFunc:
 	and a
 	jr nz, .asm_51af7
 	call MoveObjectDownByVar2
-	ld a, [wDollBoyHammerStage]
+	ld a, [wDollBoyHammerRange]
 	and a
 	jp z, MoveObjectLeftByVar2
 	jp MoveObjectLeft
@@ -1091,7 +1091,7 @@ YellowBellyArrowFunc:
 	ld [hld], a
 	ld a, LOW(.Func_51ad9)
 	ld [hld], a
-	ld a, [wDollBoyHammerStage]
+	ld a, [wDollBoyHammerRange]
 	and a
 	jr z, .Func_51ad9
 	ld l, OBJ_FLAGS
@@ -1108,7 +1108,7 @@ YellowBellyArrowFunc:
 	and a
 	jr nz, .asm_51af7
 	call MoveObjectDownByVar2
-	ld a, [wDollBoyHammerStage]
+	ld a, [wDollBoyHammerRange]
 	and a
 	jp z, MoveObjectRightByVar2
 	jp MoveObjectRight
@@ -1122,7 +1122,7 @@ YellowBellyArrowFunc:
 	ld [hld], a
 	stop_music2
 	xor a
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	ret
 
 .Func_51b16:
@@ -1207,7 +1207,7 @@ YellowBellyHeadFunc:
 	ld [wDollBoyActiveBarrels], a
 	stop_music2
 	xor a
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 .asm_51baa
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -1325,7 +1325,7 @@ YellowBellyPlatformFunc:
 	ld a, LOW(Func_51c77)
 	ld [hld], a
 	ld a, $03
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
 	xor a
 	ld [wIsBossBattle], a

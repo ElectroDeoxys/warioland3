@@ -261,7 +261,7 @@ ProcessInteractions:
 	dw Func_21af1                      ; OBJ_INTERACTION_31
 	dw Func_21b08                      ; OBJ_INTERACTION_32
 	dw Func_21b0b                      ; OBJ_INTERACTION_33
-	dw Func_21b2b                      ; OBJ_INTERACTION_34
+	dw ObjInteraction_Wormwould        ; OBJ_INTERACTION_WORMWOULD
 	dw Func_21b42                      ; OBJ_INTERACTION_35
 	dw Func_21b78                      ; OBJ_INTERACTION_36
 	dw Func_21573                      ; OBJ_INTERACTION_37
@@ -3220,7 +3220,7 @@ Func_21b0b:
 	farcall Func_1e174
 	ret
 
-Func_21b2b:
+ObjInteraction_Wormwould:
 	ld a, [wInteractionSide]
 	and INTERACTION_UP | INTERACTION_DOWN
 	jp nz, StepOnObject

@@ -1622,8 +1622,8 @@ Func_61f10:
 	call ClearObjects
 	call ClearObjDataPointers
 	ld [wFlameBlockCleared], a
-	ld [w1d141], a
-	ld [w1d142], a
+	ld [wDollBoyNoFlashingBarrel], a
+	ld [wDollBoyRemainingParts], a
 	ld [wNumLitTorches], a
 	ld [wNumShootGoals], a
 	ld [wNumWarioGoals], a
@@ -1633,8 +1633,8 @@ Func_61f2a:
 	xor a
 	call ClearObjects
 	call ClearObjDataPointers
-	ld [w1d141], a
-	ld [w1d142], a
+	ld [wDollBoyNoFlashingBarrel], a
+	ld [wDollBoyRemainingParts], a
 	ld [wNumLitTorches], a
 	ld [wNumShootGoals], a
 	ld [wNumWarioGoals], a

@@ -68,7 +68,7 @@ ShootFunc:
 	ld a, $01
 	ld [w1d147], a
 	ld a, $02
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
 	jp .Func_56755
 
@@ -1247,7 +1247,7 @@ GKTortoiseFunc:
 	ld e, $08
 	farcall Func_ba42
 	ld a, $03
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
 	xor a
 	ld [wIsBossBattle], a
@@ -1824,7 +1824,7 @@ ShootGoalCounterFunc:
 	ld a, $3e
 	ld [wCurObjFrame], a
 	xor a
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	ret
 
 WarioGoalCounterFunc:

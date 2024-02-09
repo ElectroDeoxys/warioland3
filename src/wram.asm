@@ -701,7 +701,7 @@ wIsMinigameCleared:: ; cac1
 wCoinCooldown:: ; cac2
 	db
 
-wcac3:: ; cac3
+wBossBattleMusic:: ; cac3
 	db
 
 wCameraSCY:: dw ; cac4
@@ -779,8 +779,6 @@ wCurParticleAnimEnded:: db ; cce6
 wcce7:: ; cce7
 	dw
 
-
-
 ; the world is divided in a grid,
 ; with each block being 2x2 tiles in dimension
 wBlockPtrBank:: db ; cce9
@@ -846,7 +844,7 @@ wCreditsPalsMapPtr:: ; ce6c
 
 ENDU
 
-wced2:: ; ced2
+wJumpCollision:: ; ced2
 	db
 
 wced3:: ; ced3
@@ -971,10 +969,10 @@ w1d140:: ; d140
 wFlameBlockCleared::
 	db
 
-w1d141:: ; d141
+wDollBoyNoFlashingBarrel:: ; d141
 	db
 
-w1d142:: ; d142
+wDollBoyRemainingParts:: ; d142
 	db
 
 ; number of torches lit for the Flame Block puzzle
@@ -984,9 +982,12 @@ wNumLitTorches:: ; d143
 wNumShootGoals:: db ; d144
 wNumWarioGoals:: db ; d145
 
-wDollBoyActiveBarrels:: db ; d146
+wDollBoyActiveBarrels:: ; d146
+wJamanoActiveSkulls::
+wMuddeeAmbushState::
+	db
 w1d147:: db ; d147
-wDollBoyHammerStage:: db ; d148
+wDollBoyHammerRange:: db ; d148
 
 w1d149:: ; d149
 	ds $1
@@ -1051,8 +1052,6 @@ w1d161:: ; d161
 
 w1d162:: ; d162
 	db
-
-	ds $69d
 
 
 SECTION "Golf RAM", WRAMX

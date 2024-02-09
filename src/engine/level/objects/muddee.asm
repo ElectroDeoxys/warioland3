@@ -35,7 +35,7 @@ MuddeeFunc:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	call .Func_55c3a
-	ld a, [wDollBoyActiveBarrels]
+	ld a, [wMuddeeAmbushState]
 	dec a
 	ret nz
 	ld a, TRUE
@@ -100,7 +100,7 @@ MuddeeFunc:
 	ld l, OBJ_FLAGS
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld a, $02
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
 	xor a
 	ld [w1d147], a
@@ -296,8 +296,8 @@ MuddeeFunc:
 	ld e, $07
 	farcall Func_ba42
 	stop_music2
-	ld a, $02
-	ld [wDollBoyActiveBarrels], a
+	ld a, 2
+	ld [wMuddeeAmbushState], a
 	ret
 
 .Func_55861:
@@ -882,7 +882,7 @@ MuddeeFunc:
 
 Turtle1Func:
 	xor a
-	ld [wDollBoyActiveBarrels], a
+	ld [wMuddeeAmbushState], a
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -968,8 +968,8 @@ Turtle1Func:
 	ld [hld], a
 	ld a, LOW(.Func_55cf9)
 	ld [hld], a
-	ld a, $01
-	ld [wDollBoyActiveBarrels], a
+	ld a, 1
+	ld [wMuddeeAmbushState], a
 	ret
 
 .Func_55cf9:
@@ -996,8 +996,8 @@ Turtle1Func:
 .Func_55d18:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
-	ld a, [wDollBoyActiveBarrels]
-	cp $02
+	ld a, [wMuddeeAmbushState]
+	cp 2
 	ret nz
 	ld de, Frameset_69d5c
 	call SetObjectFramesetPtr
@@ -1027,7 +1027,7 @@ Turtle1Func:
 	dec [hl]
 	ret nz
 	ld a, $03
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
 	xor a
 	ld [wIsBossBattle], a

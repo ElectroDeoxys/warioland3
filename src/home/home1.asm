@@ -1052,7 +1052,7 @@ TriggerRoomTransition::
 	ld [wWaterCurrent], a
 	ld [wLastWaterCurrent], a
 	ld [wCurWaterCurrent], a
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	ld [wIsBossBattle], a
 	inc a ; TRUE
 	ld [wIsIntangible], a
@@ -1621,7 +1621,7 @@ SetPerfectState::
 ; loads a music ID to hMusicID, depending on wLevel
 ; and whether there's a new transformation music
 UpdateLevelMusic::
-	ld a, [wcac3]
+	ld a, [wBossBattleMusic]
 	and a
 	jr nz, .boss_music
 	ld a, [wTransformation]

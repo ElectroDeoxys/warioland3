@@ -1,8 +1,8 @@
 WormwouldFunc:
 	ld hl, wCurObjUpdateFunction + 1
-	ld a, HIGH(.Func_54044)
+	ld a, HIGH(.Init)
 	ld [hld], a
-	ld a, LOW(.Func_54044)
+	ld a, LOW(.Init)
 	ld [hld], a
 	ld l, OBJ_SUBSTATE
 	res OBJSUBFLAG_UNINITIALISED_F, [hl]
@@ -11,16 +11,16 @@ WormwouldFunc:
 	or $4 | OBJSUBFLAG_UNK_4 | OBJSUBFLAG_HDIR
 	ld [hl], a
 	ld l, OBJ_COLLBOX_RIGHT
-	ld a, $07
+	ld a, 7
 	ld [hld], a
-	ld a, $f8
+	ld a, -8
 	ld [hld], a
-	ld a, $1e
+	ld a, 30
 	ld [hld], a
 	ld de, Frameset_696ce
 	jp SetObjectFramesetPtr
 
-.Func_54044:
+.Init:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld a, [wWarioYPos + 1]
@@ -36,68 +36,71 @@ WormwouldFunc:
 	ld [wCurObjVar2], a
 	call MoveObjectDownByVar2
 	ld a, $02
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
 	ld a, TRUE
 	ld [wIsBossBattle], a
+
 .asm_5406d
 	ld hl, wCurObjSubState
 	ld a, [hl]
 	rlca
-	jr nc, .asm_540a2
+	jr nc, .asm_540a2 ; OBJSUBFLAG_HDIR_F
 	ld a, [wCurObjFlags]
 	rra
 	rra
-	jr nc, .asm_5408d
+	jr nc, .not_on_screen_1 ; OBJFLAG_ON_SCREEN_F
 	ld a, [wCurObjScreenXPos]
 	add $2a
 	ld b, a
 	ld a, [wWarioScreenXPos]
 	add $2a
 	sub b
-	jr c, .asm_54092
+	jr c, .place_on_right_side
 	cp $38
-	jr c, .asm_54092
-.asm_5408d
+	jr c, .place_on_right_side
+.not_on_screen_1
 	ld de, Frameset_696ce
-	jr .asm_540ce
-.asm_54092
-	res 7, [hl]
+	jr .set_direction_frameset
+.place_on_right_side
+	res OBJSUBFLAG_HDIR_F, [hl]
 	ld de, Frameset_6970a
 	ld l, OBJ_X_POS
 	ld a, [hl]
 	add $70
 	ld [hli], a
-	jr nc, .asm_540ce
+	jr nc, .set_direction_frameset
 	inc [hl]
-	jr .asm_540ce
+	jr .set_direction_frameset
+
 .asm_540a2
 	ld a, [wCurObjFlags]
 	rra
 	rra
-	jr nc, .asm_540bb
+	jr nc, .not_on_screen_2
 	ld a, [wWarioScreenXPos]
 	add $2a
 	ld b, a
 	ld a, [wCurObjScreenXPos]
 	add $2a
 	sub b
-	jr c, .asm_540c0
+	jr c, .place_on_left_side
 	cp $38
-	jr c, .asm_540c0
-.asm_540bb
+	jr c, .place_on_left_side
+.not_on_screen_2
 	ld de, Frameset_6970a
-	jr .asm_540ce
-.asm_540c0
-	set 7, [hl]
+	jr .set_direction_frameset
+.place_on_left_side
+	set OBJSUBFLAG_HDIR_F, [hl]
 	ld de, Frameset_696ce
 	ld l, OBJ_X_POS
 	ld a, [hl]
 	sub $70
 	ld [hli], a
-	jr nc, .asm_540ce
+	jr nc, .set_direction_frameset
 	dec [hl]
-.asm_540ce
+
+.set_direction_frameset
 	call SetObjectFramesetPtr
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.Func_541b5)
@@ -108,40 +111,40 @@ WormwouldFunc:
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_STATE_DURATION
 	xor a
-	ld [hli], a
+	ld [hli], a ; wCurObjStateDuration
 	ld a, [wCurObjYPos + 0]
-	ld [hli], a
+	ld [hli], a ; wCurObjVar1
 	ld a, [wCurObjYPos + 1]
-	ld [hli], a
+	ld [hli], a ; wCurObjVar2
 	ld a, $41
-	ld [hl], a
+	ld [hl], a ; wCurObjVar3
 	ld a, $2d
 	ld [wCurObjState], a
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
 	and HEAVY_OBJ
-	or OBJ_INTERACTION_34
+	or OBJ_INTERACTION_WORMWOULD
 	ld [hli], a
 	play_sfx SFX_11A
 	ret
 
-.Func_54103:
+.DoNothing:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ret
 
-.asm_54109
+.shoot_rock_low
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	ld a, [hl]
 	ld l, OBJ_SUBSTATE
 	cp $0a
-	jr z, .asm_54119
+	jr z, .spaw_low_rock
 	and a
 	ret nz
 	ld l, OBJ_STATE
 	jr .asm_5414b
-.asm_54119
+.spaw_low_rock
 	play_sfx SFX_TEMPLE_ROCK
 	ld a, [hld]
 	rlca
@@ -151,6 +154,7 @@ WormwouldFunc:
 .asm_5412b
 	ld bc, ObjParams_LowRollingRockRight
 	jp CreateObjectAtRelativePos
+
 .asm_54131
 	ld a, [wCurObjSubState]
 	rlca
@@ -161,18 +165,19 @@ WormwouldFunc:
 	ld de, Frameset_696c5
 .asm_5413f
 	call SetObjectFramesetPtr
-	ld a, $22
+	ld a, 34
 	ld [hli], a
 	ld a, $5b
 	ld [wCurObjState], a
 	ret
+
 .asm_5414b
-	ld a, $01
+	ld a, 1
 	ld [wCurObjStateDuration], a
 .asm_54150
 	ld a, $5c
-	ld [hld], a
-	ld a, [hld]
+	ld [hld], a ; wCurObjState
+	ld a, [hld] ; wCurObjSubState
 	rlca
 	jr c, .asm_5415d
 	ld de, Frameset_69734
@@ -212,11 +217,11 @@ WormwouldFunc:
 	ld a, [wCurObjSubState]
 	and $0f
 	cp $03
-	jr nc, .asm_5419e
-	ld a, [hl]
+	jr nc, .raise
+	ld a, [hl] ; wCurObjVar3
 	cp $1e
 	jr z, .asm_54131
-.asm_5419e
+.raise
 	dec [hl]
 	jp nz, MoveObjectUp
 	ld l, OBJ_SUBSTATE
@@ -227,7 +232,7 @@ WormwouldFunc:
 .asm_541ab
 	xor a
 	ld [wCurObjState], a
-	ld a, $2b
+	ld a, 43
 	ld [wCurObjStateDuration], a
 	ret
 
@@ -239,11 +244,11 @@ WormwouldFunc:
 	cp $34
 	jr z, .asm_54179
 	cp $5a
-	jr z, .asm_54221
+	jr z, .shoot_rock_high
 	cp $2d
 	jr z, .asm_5418e
 	cp $5b
-	jp z, .asm_54109
+	jp z, .shoot_rock_low
 	cp $5c
 	jp z, .asm_542cb
 	and $fe
@@ -258,21 +263,25 @@ WormwouldFunc:
 	xor a
 	ld [hl], a
 	ret
+
 .asm_541e9
 	ld a, [wCurObjScreenYPos]
 	add $20
 	cp $20
 	jr nc, .asm_54203
+	; wCurObjScreenYPos < 0
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_54103)
+	ld a, HIGH(.DoNothing)
 	ld [hld], a
-	ld a, LOW(.Func_54103)
+	ld a, LOW(.DoNothing)
 	ld [hld], a
 	ld a, $00
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
 	ret
+
 .asm_54203
+	; wCurObjScreenYPos >= 0
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	ret nz
@@ -287,18 +296,19 @@ WormwouldFunc:
 	ld de, Frameset_696d7
 .asm_54215
 	call SetObjectFramesetPtr
-	ld a, $45
-	ld [hli], a
+	ld a, 69
+	ld [hli], a ; wCurObjFrameDuration
 	ld a, $5a
 	ld [wCurObjState], a
 	ret
-.asm_54221
+
+.shoot_rock_high
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	ld a, [hl]
 	ld l, OBJ_SUBSTATE
 	cp $15
-	jr z, .asm_5423f
+	jr z, .spawn_high_rock
 	and a
 	ret nz
 	ld a, [hld]
@@ -311,7 +321,8 @@ WormwouldFunc:
 .asm_54239
 	call SetObjectFramesetPtr
 	jp .asm_541ab
-.asm_5423f
+
+.spawn_high_rock
 	play_sfx SFX_TEMPLE_ROCK
 	ld a, [hld]
 	rlca
@@ -321,10 +332,11 @@ WormwouldFunc:
 .asm_54251
 	ld bc, ObjParams_HighRollingRockRight
 	jp CreateObjectAtRelativePos
+
 .asm_54257
 	ld a, $3a
-	ld [hld], a
-	ld a, [hld]
+	ld [hld], a ; wCurObjState
+	ld a, [hld] ; wCurObjSubState
 	rlca
 	jr c, .asm_54263
 	ld de, Frameset_69721
@@ -386,16 +398,17 @@ WormwouldFunc:
 	cp $04
 	jr c, .asm_542e0
 	dec l
-	ld a, [hli]
+	ld a, [hli] ; wCurObjStateDuration
 	and a
 	jr nz, .asm_542e0
+	; lower slowly
 	ld a, [wGlobalCounter]
 	rra
 	ret nc
 .asm_542e0
 	ld a, [wCurObjYPos + 0]
 	ld c, a
-	ld a, [hli]
+	ld a, [hli] ; wCurObjVar1
 	cp c
 	jp nz, MoveObjectDown
 	ld a, [wCurObjYPos + 1]
@@ -406,7 +419,7 @@ WormwouldFunc:
 	and $0f
 	dec a
 	jr z, .asm_5430b
-	ld a, $1e
+	ld a, 30
 	ld [wCurObjStateDuration], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.Func_54335)
@@ -416,13 +429,14 @@ WormwouldFunc:
 	ld l, OBJ_FLAGS
 	set OBJFLAG_INVISIBLE_F, [hl]
 	ret
+
 .asm_5430b
 	ld a, $21
 	ld [wCurObjVar3], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_5435f)
+	ld a, HIGH(.DefeatedRaise)
 	ld [hld], a
-	ld a, LOW(.Func_5435f)
+	ld a, LOW(.DefeatedRaise)
 	ld [hld], a
 	ld hl, wCurObjUnk02
 	ld e, $05
@@ -437,14 +451,15 @@ WormwouldFunc:
 	cp $3a
 	jr nc, .asm_54353
 	ld hl, wCurObjUpdateFunction + 1
-	ld a, HIGH(.Func_54103)
+	ld a, HIGH(.DoNothing)
 	ld [hld], a
-	ld a, LOW(.Func_54103)
+	ld a, LOW(.DoNothing)
 	ld [hld], a
 	ld a, $00
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
 	ret
+
 .asm_54353
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -453,7 +468,7 @@ WormwouldFunc:
 	res OBJFLAG_INVISIBLE_F, [hl]
 	jp .asm_5406d
 
-.Func_5435f:
+.DefeatedRaise:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjVar3
@@ -469,22 +484,22 @@ WormwouldFunc:
 	ld de, Frameset_696f3
 .asm_54378
 	call SetObjectFramesetPtr
-	ld a, $1e
-	ld [hli], a
+	ld a, 30
+	ld [hli], a ; wCurObjStateDuration
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_54387)
+	ld a, HIGH(.DefeatedWait)
 	ld [hld], a
-	ld a, LOW(.Func_54387)
+	ld a, LOW(.DefeatedWait)
 	ld [hld], a
 	ret
 
-.Func_54387:
+.DefeatedWait:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
 	and a
-	jr z, .asm_543c4
+	jr z, .defeat_wait_over
 	dec [hl]
 	ret nz
 	ld l, OBJ_SUBSTATE
@@ -495,33 +510,34 @@ WormwouldFunc:
 	add $2a
 	cp b
 	jr c, .asm_543a9
-	res 7, [hl]
+	res OBJSUBFLAG_HDIR_F, [hl]
 	jr .asm_543ab
 .asm_543a9
-	set 7, [hl]
+	set OBJSUBFLAG_HDIR_F, [hl]
 .asm_543ab
-	res 4, [hl]
+	res OBJSUBFLAG_UNK_4_F, [hl]
 	ld a, [hl]
 	and $80
 	ld [hld], a
 	xor a
-	ld [hl], a
+	ld [hl], a ; wCurObjVar3
 	ld l, OBJ_FLAGS
 	set OBJFLAG_PRIORITY_F, [hl]
 	ld a, $03
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
 	xor a
 	ld [wIsBossBattle], a
 	ret
-.asm_543c4
+
+.defeat_wait_over
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_543d4)
+	ld a, HIGH(.DefeatedFall)
 	ld [hld], a
-	ld a, LOW(.Func_543d4)
+	ld a, LOW(.DefeatedFall)
 	ld [hld], a
 	play_sfx SFX_0A3
-.Func_543d4:
+.DefeatedFall:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld bc, Data_60180

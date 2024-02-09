@@ -22,7 +22,7 @@ AnonsterFunc:
 	dec [hl]
 	ret nz
 	ld a, $02
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
 
 .asm_50031
@@ -963,7 +963,7 @@ AnonsterFunc:
 	ld e, $05
 	farcall Func_ba42
 	ld a, $03
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
 	xor a
 	ld [wIsBossBattle], a

@@ -274,6 +274,7 @@ WRAM0
 	"Sprites WRAM"
 WRAMX 1
 	"WRAM1"
+	org $d800
 	"Golf RAM"
 WRAMX 2
 	"WRAM2"

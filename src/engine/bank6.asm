@@ -374,13 +374,13 @@ Func_19942:
 	ret
 
 CheckUpCollision:
-	ld a, $01
-	ld [wced2], a
+	ld a, TRUE
+	ld [wJumpCollision], a
 	call Func_19942
 	and a
 	ret nz
 	xor a
-	ld [wced2], a
+	ld [wJumpCollision], a
 	ld a, [wTransformation]
 	cp TRANSFORMATION_PUFFY_WARIO
 	jr z, .puffy_1

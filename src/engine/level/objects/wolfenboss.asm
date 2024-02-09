@@ -29,7 +29,7 @@ WolfenbossFunc:
 	ld [wDollBoyActiveBarrels], a
 	ld [w1d147], a
 	ld a, $04
-	ld [wDollBoyHammerStage], a
+	ld [wDollBoyHammerRange], a
 	ld a, $02
 	ld [w1d149], a
 	ret
@@ -107,7 +107,7 @@ WolfenbossFunc:
 	ld a, $07
 	ld [hli], a
 	ld a, $02
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
 	ret
 
@@ -197,7 +197,7 @@ WolfenbossFunc:
 	ld a, LOW(.Func_55f6e)
 	ld [hld], a
 	xor a
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	ret
 
 .Func_55fb3:
@@ -231,7 +231,7 @@ WolfenbossFunc:
 	dec a
 	ret z
 	dec [hl]
-	ld hl, wDollBoyHammerStage
+	ld hl, wDollBoyHammerRange
 	dec [hl]
 	ret
 .asm_55fec
@@ -492,7 +492,7 @@ WolfenbossFunc:
 	jp ApplyObjYMovement
 .asm_561ca
 	ld a, $03
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
 	xor a
 	ld [wIsBossBattle], a
@@ -575,7 +575,7 @@ MagicSpiralFunc:
 	ld a, [wTransformation]
 	and a
 	jr nz, .asm_562a2
-	ld a, [wDollBoyHammerStage]
+	ld a, [wDollBoyHammerRange]
 	dec a
 	jr z, .asm_562c3
 	ld hl, wCurObjSubState
@@ -740,7 +740,7 @@ IgaguriFunc:
 	ld [hli], a
 	ld a, $03
 	ld [hli], a
-	ld a, [wDollBoyHammerStage]
+	ld a, [wDollBoyHammerRange]
 	cp $03
 	jr c, .asm_56394
 	play_sfx SFX_101
@@ -764,7 +764,7 @@ IgaguriFunc:
 .asm_563ad
 	ld a, $02
 	ld [wCurObjFrameDuration], a
-	ld a, [wDollBoyHammerStage]
+	ld a, [wDollBoyHammerRange]
 	cp $03
 	jr c, .asm_563c5
 	ld hl, wCurObjYPos
@@ -796,7 +796,7 @@ IgaguriFunc:
 	ldh a, [hYPosHi]
 	ld [hl], a
 	call .Func_5647b
-	ld a, [wDollBoyHammerStage]
+	ld a, [wDollBoyHammerRange]
 	cp $03
 	jr nc, .asm_56469
 	ld hl, wCurObjSubState

@@ -63,7 +63,7 @@ HiddenFigureFunc:
 	ld a, LOW(.Func_4cbc4)
 	ld [hld], a
 	ld a, $01
-	ld [wcac3], a
+	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
 	ret
 
