@@ -361,7 +361,7 @@ _InitTreasureCollection:
 
 	ld a, $02
 	ldh [rSVBK], a
-	call VBlank_9a564
+	call VBlank_TreasureCollection
 	call Func_9a54e
 	call Func_9a559
 	xor a
@@ -507,7 +507,7 @@ Func_9a559:
 	call WriteAToHL_BCTimes
 	ret
 
-VBlank_9a564:
+VBlank_TreasureCollection:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func

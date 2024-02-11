@@ -103,7 +103,7 @@ InitPauseMenu_SkipBackupVRAM:
 	call PrintNumberMusicCoins
 	hlbgcoord 14, 15, v0BGMap1
 	farcall PrintNumberCoins
-	call VBlank_354
+	call VBlank_PauseMenu
 
 	xor a
 	ldh [rSCY], a
@@ -480,7 +480,7 @@ InitSaveScreen:
 	farcall LoadSaveScreenPals
 	farcall LoadSaveScreenGfx
 	farcall PrintNowSavingBox
-	call VBlank_1f0c7e
+	call VBlank_SaveScreen
 
 	xor a
 	ld [wSCY], a
@@ -902,7 +902,7 @@ InitSaveScreenAndBackupVRAM:
 	farcall LoadSaveScreenPals
 	farcall LoadSaveScreenGfx
 	farcall PrintNowSavingBox
-	call VBlank_1f0c7e
+	call VBlank_SaveScreen
 
 	xor a
 	ld [wSCY], a
@@ -1195,7 +1195,7 @@ PrintNumberMusicCoins:
 	ret
 
 Func_1f0969::
-	farcall VBlank_b672
+	farcall VBlank_Level
 	farcall Func_b681
 	ldh a, [rSVBK]
 	push af
@@ -1652,7 +1652,7 @@ VBlank_1f0c6c:
 	ret
 .end
 
-VBlank_1f0c7e:
+VBlank_SaveScreen:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func

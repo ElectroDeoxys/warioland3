@@ -23,7 +23,10 @@ InitLCD::
 	ret
 
 VBlank_GBIncompatible::
-VBlank_354::
+VBlank_PauseMenu::
+VBlank_GameOver::
+VBlank_Perfect::
+VBlank_TimeAttackDescription::
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func

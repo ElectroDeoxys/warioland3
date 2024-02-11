@@ -838,8 +838,10 @@ VBlank_88d::
 	ldh [rSCY], a
 	ld a, [wSCX]
 	ldh [rSCX], a
+
 	call StoreBGPals
 	call StoreOBPals
+
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
 	ret

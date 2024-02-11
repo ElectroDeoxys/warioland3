@@ -1587,7 +1587,7 @@ ENDR
 	ldh [rSVBK], a
 	ret
 
-VBlank_b672:
+VBlank_Level:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func

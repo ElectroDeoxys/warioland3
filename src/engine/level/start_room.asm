@@ -431,7 +431,7 @@ StartRoom_FromLevelStart:
 
 	call Func_8ad9
 	call Func_8c12
-	call VBlank_b672
+	call VBlank_Level
 	call Func_b681
 
 	ld a, [wSRAMBank]

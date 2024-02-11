@@ -112,7 +112,7 @@ Func_db29b:
 	call LoadGameOverPals
 	call LoadGameOverGfx
 	call Func_db4cf
-	call VBlank_354
+	call VBlank_GameOver
 
 	xor a
 	ldh [rSCX], a

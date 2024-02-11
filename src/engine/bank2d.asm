@@ -20,24 +20,24 @@ Func_b4014:
 	jumptable
 
 	dw Func_b4001
-	dw Func_b403e
-	dw Func_b408e
-	dw Func_b409c
-	dw Func_b40c0
-	dw Func_b40d9
-	dw Func_b40ff
-	dw Func_b4140
-	dw Func_b4140
-	dw Func_b4141
-	dw Func_b4162
-	dw Func_b4166
-	dw Func_b416a
-	dw Func_b416e
-	dw Func_b4172
-	dw Func_b4176
-	dw Func_b417a
-	dw Func_b4247
-	dw Func_b42e7
+	dw Func_b403e ; NOWFUNC_CUT_TREE
+	dw Func_b408e ; NOWFUNC_OPEN_GATE
+	dw Func_b409c ; NOWFUNC_GARLIC
+	dw Func_b40c0 ; NOWFUNC_MAGIC_SEED
+	dw Func_b40d9 ; NOWFUNC_SUMMON_SNAKE
+	dw Func_b40ff ; NOWFUNC_FALL_LEAVES
+	dw Func_b4140 ; NOWFUNC_BLUE_MUSIC_BOX
+	dw Func_b4140 ; NOWFUNC_GOLD_MUSIC_BOX
+	dw Func_b4141 ; NOWFUNC_CRAYON_RED
+	dw Func_b4162 ; NOWFUNC_CRAYON_BROWN
+	dw Func_b4166 ; NOWFUNC_CRAYON_YELLOW
+	dw Func_b416a ; NOWFUNC_CRAYON_GREEN
+	dw Func_b416e ; NOWFUNC_CRAYON_CYAN
+	dw Func_b4172 ; NOWFUNC_CRAYON_BLUE
+	dw Func_b4176 ; NOWFUNC_CRAYON_PINK
+	dw Func_b417a ; NOWFUNC_BOTTOM_BAR
+	dw Func_b4247 ; NOWFUNC_DAY_NIGHT_SPELL
+	dw Func_b42e7 ; NOWFUNC_PROLOGUE
 
 Func_b403e:
 	dec c
@@ -277,7 +277,7 @@ Func_b417a:
 	set 2, [hl]
 
 	farcall Func_80bd9
-	farcall VBlank_80bf9
+	farcall VBlank_Overworld
 
 	decompress_vram0 BGMap_86868, v0BGMap1
 	decompress_vram1 BGMap_868b2, v1BGMap1
@@ -340,7 +340,7 @@ Func_b4247:
 	ld de, .data
 	call InitSceneObjParams
 
-	farcall VBlank_80bf9
+	farcall VBlank_Overworld
 	farcall DrawCoinCount
 
 	xor a
@@ -375,14 +375,14 @@ Func_b4309:
 	jumptable
 
 	dw Func_b4001
-	dw Func_b431f
-	dw Func_b4351
-	dw Func_b435f
-	dw Func_b438f
-	dw Func_b43a8
-	dw Func_b43dd
-	dw Func_b4448
-	dw Func_b4474
+	dw Func_b431f ; WOWFUNC_RAIN
+	dw Func_b4351 ; WOWFUNC_CLEAR_TORNADO
+	dw Func_b435f ; WOWFUNC_ELEVATOR_WORKING
+	dw Func_b438f ; WOWFUNC_MAGIC_SEED
+	dw Func_b43a8 ; WOWFUNC_SUMMON_SNAKE
+	dw Func_b43dd ; WOWFUNC_EARTHQUAKE
+	dw Func_b4448 ; WOWFUNC_VULCANO_ERUPTION
+	dw Func_b4474 ; WOWFUNC_RED_MUSIC_BOX
 
 Func_b431f:
 	ld a, c
@@ -595,17 +595,17 @@ Func_b449b:
 	jumptable
 
 	dw Func_b4001
-	dw Func_b44b7
-	dw Func_b44e7
-	dw Func_b4509
-	dw Func_b4520
-	dw Func_b4567
-	dw Func_b45c8
-	dw Func_b45f5
-	dw Func_b461b
-	dw Func_b4637
-	dw Func_b4653
-	dw Func_b4665
+	dw Func_b44b7 ; SOWFUNC_SEND_SEEDS
+	dw Func_b44e7 ; SOWFUNC_MAGIC_SEED
+	dw Func_b4509 ; SOWFUNC_YELLOW_MUSIC_BOX
+	dw Func_b4520 ; SOWFUNC_CANYON_THUNDER
+	dw Func_b4567 ; SOWFUNC_RAISE_TOWER
+	dw Func_b45c8 ; SOWFUNC_FAN
+	dw Func_b45f5 ; SOWFUNC_SUMMON_SNAKE
+	dw Func_b461b ; SOWFUNC_EARTHQUAKE
+	dw Func_b4637 ; SOWFUNC_GREEN_MUSIC_BOX
+	dw Func_b4653 ; SOWFUNC_EXPLOSIVES
+	dw Func_b4665 ; SOWFUNC_FULL_MOON
 
 Func_b44b7:
 	ld a, $80
@@ -870,15 +870,15 @@ Func_b4688:
 	jumptable
 
 	dw Func_b4001
-	dw Func_b46a0
-	dw Func_b46d9
-	dw Func_b4712
-	dw Func_b4771
-	dw Func_b4792
-	dw Func_b47f7
-	dw Func_b481b
-	dw Func_b4832
-	dw Func_b4873
+	dw Func_b46a0 ; EOWFUNC_FREEZE_SEA
+	dw Func_b46d9 ; EOWFUNC_EARTHQUAKE
+	dw Func_b4712 ; EOWFUNC_FORM_CASTLE
+	dw Func_b4771 ; EOWFUNC_EXPLOSIVES
+	dw Func_b4792 ; EOWFUNC_VULCANO_ERUPTION
+	dw Func_b47f7 ; EOWFUNC_BURN_VINES
+	dw Func_b481b ; EOWFUNC_SHOW_WARPED_VOID
+	dw Func_b4832 ; EOWFUNC_RAISE_PIPE
+	dw Func_b4873 ; EOWFUNC_DAYTIME
 
 Func_b46a0:
 	ld a, c
@@ -2414,9 +2414,9 @@ _DoOWFunction:
 	jumptable
 
 	dw NorthOWFunctions ; NORTH
-	dw WestOWFunctions ; WEST
+	dw WestOWFunctions  ; WEST
 	dw SouthOWFunctions ; SOUTH
-	dw Func_b6ea8 ; EAST
+	dw EastOWFunctions  ; EAST
 
 NorthOWFunctions:
 	ld a, [wCutsceneActionParam]
@@ -3329,7 +3329,7 @@ NOWFunc_DayNightSpell:
 	and a
 	ret nz
 	di
-	farcall VBlank_80bf9
+	farcall VBlank_Overworld
 	ei
 	jp AdvanceOWFunc
 
@@ -6691,19 +6691,19 @@ WaitOWScene16Frames:
 	ld a, 16
 	jp WaitOWFunc
 
-Func_b6ea8:
+EastOWFunctions:
 	ld a, [wCutsceneActionParam]
 	dec a
 	jumptable
-	dw EOWFunc_FreezeSea ; EOWFUNC_FREEZE_SEA
-	dw EOWFunc_Earthquake ; EOWFUNC_EARTHQUAKE
-	dw EOWFunc_FormCastle ; EOWFUNC_FORM_CASTLE
-	dw EOWFunc_Explosives ; EOWFUNC_EXPLOSIVES
+	dw EOWFunc_FreezeSea       ; EOWFUNC_FREEZE_SEA
+	dw EOWFunc_Earthquake      ; EOWFUNC_EARTHQUAKE
+	dw EOWFunc_FormCastle      ; EOWFUNC_FORM_CASTLE
+	dw EOWFunc_Explosives      ; EOWFUNC_EXPLOSIVES
 	dw EOWFunc_VulcanoEruption ; EOWFUNC_VULCANO_ERUPTION
-	dw EOWFunc_BurnVines ; EOWFUNC_BURN_VINES
-	dw EOWFunc_ShowWarpedVoid ; EOWFUNC_SHOW_WARPED_VOID
-	dw EOW_RaisePipe ; EOWFUNC_RAISE_PIPE
-	dw EOW_Daytime ; EOWFUNC_DAYTIME
+	dw EOWFunc_BurnVines       ; EOWFUNC_BURN_VINES
+	dw EOWFunc_ShowWarpedVoid  ; EOWFUNC_SHOW_WARPED_VOID
+	dw EOWFunc_RaisePipe       ; EOWFUNC_RAISE_PIPE
+	dw EOWFunc_Daytime         ; EOWFUNC_DAYTIME
 
 EOWFunc_FreezeSea:
 	call .Func_b6f77
@@ -8196,7 +8196,7 @@ EOWFunc_ShowWarpedVoid:
 	ld b, $19
 	jp WaitOWObjState
 
-EOW_RaisePipe:
+EOWFunc_RaisePipe:
 	ld a, [w2d062]
 	jumptable
 	dw AdvanceOWFunc
@@ -8238,7 +8238,7 @@ EOW_RaisePipe:
 	ld hl, wSceneObj8State
 	jp WaitOWObjState
 
-EOW_Daytime:
+EOWFunc_Daytime:
 	ld a, [w2d062]
 	jumptable
 	dw AdvanceOWFunc

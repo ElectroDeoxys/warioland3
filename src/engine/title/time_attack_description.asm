@@ -6,7 +6,7 @@ InitTimeAttackDescription:
 	call ApplyTempPals1ToBGPals
 	call LoadTimeAttackDescriptionTiles
 	call LoadTimeAttackText
-	call VBlank_354
+	call VBlank_TimeAttackDescription
 
 	xor a
 	ld [wSCY], a

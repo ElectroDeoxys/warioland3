@@ -839,7 +839,7 @@ OverworldStateTable:
 	dw Func_80e33
 
 	dw FadeBGToWhite_Normal
-	dw Func_80e45           ; SST_OVERWORLD_20
+	dw GolfBuilding           ; SST_OVERWORLD_20
 	dw DarkenBGToPal_Normal
 	dw Func_80e55
 
@@ -1053,7 +1053,7 @@ Func_8055f:
 	ld a, $02
 	ldh [rSVBK], a
 	call ClearVirtualOAM
-	call VBlank_80bf9
+	call VBlank_Overworld
 
 	call Func_80b29
 	call GetNextTreasureToCollect
@@ -1666,7 +1666,7 @@ Func_80bd9:
 	ld d, h
 	jr .loop_outer
 
-VBlank_80bf9:
+VBlank_Overworld:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -1992,8 +1992,8 @@ Func_80e33:
 	ld [wSubState], a
 	ret
 
-Func_80e45:
-	farcall Func_ad9b2
+GolfBuilding:
+	farcall _GolfBuilding
 	ret
 
 Func_80e55:
@@ -2077,7 +2077,7 @@ Func_80f0d:
 	and a
 	ret nz
 	di
-	call VBlank_80bf9
+	call VBlank_Overworld
 	ei
 	ret
 
@@ -4689,7 +4689,7 @@ Func_81dce:
 	ld a, $80
 	ld [w2d065], a
 .asm_81dfd
-	call Func_81e16
+	call .Func_81e16
 	ld a, [wCutscene]
 	inc a
 	cp NUM_CUTSCENES + 1
@@ -4704,7 +4704,7 @@ Func_81dce:
 	ld [wLastTransitionParam], a ; = 0
 	ret
 
-Func_81e16:
+.Func_81e16:
 	ld a, [wCutscene]
 	call GetCutsceneOWParams
 	ret z
@@ -4714,7 +4714,7 @@ Func_81e16:
 	ld a, [wCurMapSide]
 	cp b
 	jr nz, .same_side
-	call Func_81e36
+	call .Func_81e36
 .same_side
 	ld hl, wCutsceneOWParamsPtr
 	call GetByteFromPointerInHL
@@ -4722,7 +4722,7 @@ Func_81e16:
 	ret z
 	jr .loop
 
-Func_81e36:
+.Func_81e36:
 	ld a, [wOWCutsceneAction]
 	jumptable
 
@@ -5643,7 +5643,7 @@ UpdateTopBar:
 	jr nz, .still_transitioning
 
 	di
-	call VBlank_80bf9
+	call VBlank_Overworld
 	ei
 
 	ld a, TOPBARST_INPUT

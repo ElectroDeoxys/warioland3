@@ -24,7 +24,7 @@ Func_dc01e:
 	call LoadPerfectPals
 	call LoadPerfectGfx
 	call Func_dc13e
-	call VBlank_354
+	call VBlank_Perfect
 
 	xor a
 	ldh [rSCX], a

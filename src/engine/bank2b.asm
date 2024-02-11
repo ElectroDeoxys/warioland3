@@ -1745,7 +1745,7 @@ _InitTempleScene:
 	ldh [rSCY], a
 	ld [wSCY], a
 
-	call VBlank_accb0
+	call VBlank_PrologueEpilogue
 	call ClearGeneralSceneRAM
 	call ClearSceneObjsRAM
 
@@ -1860,7 +1860,7 @@ ClearSceneObjsRAM:
 	call WriteAToHL_BCTimes
 	ret
 
-VBlank_accb0:
+VBlank_PrologueEpilogue:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -3808,7 +3808,7 @@ Data_ad939:
 	db  0,  0
 	db $80
 
-Func_ad9b2:
+_GolfBuilding:
 	call DisableLCD
 	call FillBGMap0_With7f
 	call ClearVirtualOAM
@@ -3822,7 +3822,7 @@ Func_ad9b2:
 	ld [wSCX], a
 	ldh [rSCY], a
 	ld [wSCY], a
-	call .VBlank_adaac
+	call .VBlank_GolfBuilding
 
 	call ClearGeneralSceneRAM
 	call ClearSceneObjsRAM
@@ -3908,7 +3908,7 @@ Func_ad9b2:
 	inc [hl]
 	ret
 
-.VBlank_adaac:
+.VBlank_GolfBuilding:
 	ld hl, .func
 	ld de, wVBlankFunc
 	ld b, .func_end - .func
@@ -4450,7 +4450,7 @@ Pals_ade09:
 _InitPrologueSequence:
 	call ClearGeneralSceneRAM
 	call ClearSceneObjsRAM
-	call VBlank_accb0
+	call VBlank_PrologueEpilogue
 
 	decompress_vram1 BGMap_b34c3, v1BGMap1
 	decompress_vram0 BGMap_b330c, v0BGMap1
@@ -6771,7 +6771,7 @@ _InitEpilogue:
 	ldh [rSCY], a
 	ld [wSCY], a
 
-	call VBlank_accb0
+	call VBlank_PrologueEpilogue
 	call ClearGeneralSceneRAM
 	call ClearSceneObjsRAM
 
