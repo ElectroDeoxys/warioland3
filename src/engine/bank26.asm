@@ -378,7 +378,7 @@ _InitTreasureCollection:
 	ld a, [wTransitionParam]
 	and a
 	jr z, .got_page
-	cp NUM_TREASURES + 1
+	cp NUM_TREASURES
 	jr nc, .got_page
 .loop_find_page
 	cp NUM_COLLECTION_CELLS + 1
@@ -1541,6 +1541,7 @@ FillBottomBarTreasureIDs:
 	ret
 
 TreasureOBPals:
+	table_width 1, TreasureOBPals
 	db OBPAL_TREASURE_YELLOW ; TREASURE_NONE
 	db OBPAL_TREASURE_YELLOW ; YELLOW_MUSIC_BOX
 	db OBPAL_TREASURE_BLUE   ; BLUE_MUSIC_BOX
@@ -1642,7 +1643,8 @@ TreasureOBPals:
 	db OBPAL_TREASURE_BLUE   ; CRAYON_CYAN_T
 	db OBPAL_TREASURE_BLUE   ; CRAYON_BLUE_T
 	db OBPAL_TREASURE_RED    ; CRAYON_PINK_T
-	db $03 ; 101
+	db $03                   ; TREASURE_DUMMY
+	assert_table_length NUM_TREASURES + 1
 
 OAM_9ac5d:
 	dw .frame_0

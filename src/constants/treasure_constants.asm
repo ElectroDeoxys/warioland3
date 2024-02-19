@@ -100,7 +100,7 @@
 	const CRAYON_CYAN_T                ; $62
 	const CRAYON_BLUE_T                ; $63
 	const CRAYON_PINK_T                ; $64
-DEF NUM_TREASURES EQU const_value - 1
+DEF NUM_TREASURES EQU const_value
 	const TREASURE_DUMMY               ; $65
 	const_def $80
 	const INVALID_TREASURE             ; $80

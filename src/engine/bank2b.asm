@@ -843,6 +843,8 @@ UpdateSceneWarioAnimation:
 	ld a, [wSceneWarioState]
 	jumptable
 
+.table
+	table_width 2, UpdateSceneWarioAnimation.table
 	dw .None                 ; SCENEWARIO_NONE
 	dw .LookFront            ; SCENEWARIO_LOOK_FRONT
 	dw .LookBack             ; SCENEWARIO_LOOK_BACK
@@ -904,6 +906,7 @@ UpdateSceneWarioAnimation:
 	dw .PanicRunLeft         ; SCENEWARIO_PANIC_RUN_LEFT
 	dw .PanicRunRight        ; SCENEWARIO_PANIC_RUN_RIGHT
 	dw .IdleFront            ; SCENEWARIO_IDLE_FRONT
+	assert_table_length NUM_SCENEWARIO_STATES
 
 .None
 	ret
@@ -1355,7 +1358,7 @@ DebugSceneWario:
 	dec a
 	jr .got_state
 .d_right
-	cp NUM_SCENEWARIO_STATES
+	cp NUM_SCENEWARIO_STATES - 1
 	jr nc, .got_state
 	inc a
 .got_state

@@ -19,13 +19,14 @@
 	const PARTICLE_MAGIC_1          ; $10
 	const PARTICLE_MAGIC_2          ; $11
 	const PARTICLE_MAGIC_STOP       ; $12
-	const PARTICLE_13               ; $13 (unused)
-	const PARTICLE_14               ; $14 (unused)
-	const PARTICLE_15               ; $15 (unused)
-	const PARTICLE_16               ; $16 (unused)
+	const PARTICLE_UNUSED_13        ; $13
+	const PARTICLE_UNUSED_14        ; $14
+	const PARTICLE_UNUSED_15        ; $15
+	const PARTICLE_UNUSED_16        ; $16
+DEF NUM_PARTICLES EQU const_value
 
 ; the maximum number of active particles
-DEF NUM_PARTICLES EQU 4
+DEF MAX_NUM_PARTICLES EQU 4
 
 ; wObjects structs constants
 RSRESET

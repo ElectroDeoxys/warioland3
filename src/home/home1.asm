@@ -1154,7 +1154,7 @@ DoGroundShake::
 
 ClearParticles::
 	ld hl, wParticles
-	ld b, PARTICLE_STRUCT_LENGTH * NUM_PARTICLES + 2
+	ld b, PARTICLE_STRUCT_LENGTH * MAX_NUM_PARTICLES + 2
 	xor a
 	call WriteAToHL_BTimes
 	ret

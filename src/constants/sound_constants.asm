@@ -60,6 +60,7 @@
 	const MUSIC_EPILOGUE                   ; 038
 	const MUSIC_HIDDEN_FIGURE_REVEAL       ; 039
 	const MUSIC_HIDDEN_FIGURE_BATTLE_2     ; 03a
+DEF NUM_MUSICS EQU const_value - 1
 
 	const_def $101
 	const SFX_JUMP                         ; 101

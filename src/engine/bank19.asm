@@ -2364,6 +2364,7 @@ Data_64ffb:
 	rgb  5,  0,  0
 
 EnemyGroups:
+	table_width 4, EnemyGroups
 	dw Data_64fc3, EnemyGroupGfx0   ; ENEMY_GROUP_000
 	dw Data_64fdf, EnemyGroupGfx2   ; ENEMY_GROUP_001
 	dw Data_64fd1, EnemyGroupGfx3   ; ENEMY_GROUP_002
@@ -2510,6 +2511,7 @@ EnemyGroups:
 	dw Data_64fdf, EnemyGroupGfx43  ; ENEMY_GROUP_143
 	dw Data_64fd1, EnemyGroupGfx44  ; ENEMY_GROUP_144
 	dw Data_64ffb, EnemyGroupGfx117 ; ENEMY_GROUP_145
+	assert_table_length NUM_ENEMY_GROUPS
 
 EnemyGroupGfx0:
 	db $00

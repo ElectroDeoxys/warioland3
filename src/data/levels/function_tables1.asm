@@ -99,6 +99,7 @@ BlockFunctionTablePointers::
 	dw NULL
 
 BlockFunctionTable0:
+	table_width 2, BlockFunctionTable0
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -227,8 +228,10 @@ BlockFunctionTable0:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Free ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable1:
+	table_width 2, BlockFunctionTable1
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -357,8 +360,10 @@ BlockFunctionTable1:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Free ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable2:
+	table_width 2, BlockFunctionTable2
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -487,8 +492,10 @@ BlockFunctionTable2:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable3:
+	table_width 2, BlockFunctionTable3
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -617,8 +624,10 @@ BlockFunctionTable3:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Free ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable4:
+	table_width 2, BlockFunctionTable4
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -747,8 +756,10 @@ BlockFunctionTable4:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Free ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable5:
+	table_width 2, BlockFunctionTable5
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -877,8 +888,10 @@ BlockFunctionTable5:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Free ; $7e
 	dw BlockFunc_Free ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable6:
+	table_width 2, BlockFunctionTable6
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -1007,8 +1020,10 @@ BlockFunctionTable6:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Door ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable7:
+	table_width 2, BlockFunctionTable7
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -1137,8 +1152,10 @@ BlockFunctionTable7:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable8:
+	table_width 2, BlockFunctionTable8
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -1267,8 +1284,10 @@ BlockFunctionTable8:
 	dw BlockFunc_188ba ; $7d
 	dw BlockFunc_WalkthroughPipe ; $7e
 	dw BlockFunc_188ba ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable9:
+	table_width 2, BlockFunctionTable9
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -1397,8 +1416,10 @@ BlockFunctionTable9:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable10:
+	table_width 2, BlockFunctionTable10
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -1527,8 +1548,10 @@ BlockFunctionTable10:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Door ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable11:
+	table_width 2, BlockFunctionTable11
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -1657,8 +1680,10 @@ BlockFunctionTable11:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Free ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable12:
+	table_width 2, BlockFunctionTable12
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -1787,8 +1812,10 @@ BlockFunctionTable12:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable13:
+	table_width 2, BlockFunctionTable13
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -1917,8 +1944,10 @@ BlockFunctionTable13:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable14:
+	table_width 2, BlockFunctionTable14
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -2047,8 +2076,10 @@ BlockFunctionTable14:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable15:
+	table_width 2, BlockFunctionTable15
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -2177,8 +2208,10 @@ BlockFunctionTable15:
 	dw BlockFunc_Door ; $7d
 	dw BlockFunc_Free ; $7e
 	dw BlockFunc_Free ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable16:
+	table_width 2, BlockFunctionTable16
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -2307,8 +2340,10 @@ BlockFunctionTable16:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable17:
+	table_width 2, BlockFunctionTable17
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -2437,8 +2472,10 @@ BlockFunctionTable17:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Free ; $7e
 	dw BlockFunc_Door ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable18:
+	table_width 2, BlockFunctionTable18
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -2567,8 +2604,10 @@ BlockFunctionTable18:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable19:
+	table_width 2, BlockFunctionTable19
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -2697,8 +2736,10 @@ BlockFunctionTable19:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Free ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable20:
+	table_width 2, BlockFunctionTable20
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -2827,8 +2868,10 @@ BlockFunctionTable20:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Free ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable21:
+	table_width 2, BlockFunctionTable21
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -2957,8 +3000,10 @@ BlockFunctionTable21:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable22:
+	table_width 2, BlockFunctionTable22
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -3087,8 +3132,10 @@ BlockFunctionTable22:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Free ; $7e
 	dw BlockFunc_Free ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable23:
+	table_width 2, BlockFunctionTable23
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -3217,8 +3264,10 @@ BlockFunctionTable23:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Water ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable24:
+	table_width 2, BlockFunctionTable24
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Free ; $02
@@ -3347,8 +3396,10 @@ BlockFunctionTable24:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable25:
+	table_width 2, BlockFunctionTable25
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -3477,8 +3528,10 @@ BlockFunctionTable25:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable26:
+	table_width 2, BlockFunctionTable26
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -3607,8 +3660,10 @@ BlockFunctionTable26:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable27:
+	table_width 2, BlockFunctionTable27
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -3737,8 +3792,10 @@ BlockFunctionTable27:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Free ; $7e
 	dw BlockFunc_Free ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable28:
+	table_width 2, BlockFunctionTable28
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -3867,8 +3924,10 @@ BlockFunctionTable28:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable29:
+	table_width 2, BlockFunctionTable29
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -3997,8 +4056,10 @@ BlockFunctionTable29:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Free ; $7e
 	dw BlockFunc_Free ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable30:
+	table_width 2, BlockFunctionTable30
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -4127,8 +4188,10 @@ BlockFunctionTable30:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable31:
+	table_width 2, BlockFunctionTable31
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -4257,8 +4320,10 @@ BlockFunctionTable31:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable32:
+	table_width 2, BlockFunctionTable32
 	dw BlockFunc_SlipperySolid ; $00
 	dw BlockFunc_SlipperySolid ; $01
 	dw BlockFunc_SlipperySolid ; $02
@@ -4387,8 +4452,10 @@ BlockFunctionTable32:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable33:
+	table_width 2, BlockFunctionTable33
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -4517,8 +4584,10 @@ BlockFunctionTable33:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable34:
+	table_width 2, BlockFunctionTable34
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -4647,8 +4716,10 @@ BlockFunctionTable34:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Free ; $7e
 	dw BlockFunc_Free ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable35:
+	table_width 2, BlockFunctionTable35
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -4777,8 +4848,10 @@ BlockFunctionTable35:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable36:
+	table_width 2, BlockFunctionTable36
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -4907,8 +4980,10 @@ BlockFunctionTable36:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Free ; $7e
 	dw BlockFunc_MinigameDoor ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable37:
+	table_width 2, BlockFunctionTable37
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -5037,8 +5112,10 @@ BlockFunctionTable37:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable38:
+	table_width 2, BlockFunctionTable38
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -5167,8 +5244,10 @@ BlockFunctionTable38:
 	dw BlockFunc_EnemyBlock_7a ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Free ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable39:
+	table_width 2, BlockFunctionTable39
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -5297,8 +5376,10 @@ BlockFunctionTable39:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable40:
+	table_width 2, BlockFunctionTable40
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -5427,8 +5508,10 @@ BlockFunctionTable40:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable41:
+	table_width 2, BlockFunctionTable41
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -5557,8 +5640,10 @@ BlockFunctionTable41:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable42:
+	table_width 2, BlockFunctionTable42
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -5687,8 +5772,10 @@ BlockFunctionTable42:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable43:
+	table_width 2, BlockFunctionTable43
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -5817,8 +5904,10 @@ BlockFunctionTable43:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable44:
+	table_width 2, BlockFunctionTable44
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -5947,8 +6036,10 @@ BlockFunctionTable44:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable45:
+	table_width 2, BlockFunctionTable45
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -6077,8 +6168,10 @@ BlockFunctionTable45:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Free ; $7e
 	dw BlockFunc_Door ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable46:
+	table_width 2, BlockFunctionTable46
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -6207,8 +6300,10 @@ BlockFunctionTable46:
 	dw BlockFunc_188ba ; $7d
 	dw BlockFunc_WalkthroughPipe ; $7e
 	dw BlockFunc_188ba ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable47:
+	table_width 2, BlockFunctionTable47
 	dw BlockFunc_SlipperySolid ; $00
 	dw BlockFunc_SlipperySolid ; $01
 	dw BlockFunc_SlipperySolid ; $02
@@ -6337,8 +6432,10 @@ BlockFunctionTable47:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable48:
+	table_width 2, BlockFunctionTable48
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -6467,8 +6564,10 @@ BlockFunctionTable48:
 	dw BlockFunc_188ba ; $7d
 	dw BlockFunc_WalkthroughPipe ; $7e
 	dw BlockFunc_188ba ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable49:
+	table_width 2, BlockFunctionTable49
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -6597,8 +6696,10 @@ BlockFunctionTable49:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable50:
+	table_width 2, BlockFunctionTable50
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -6727,8 +6828,10 @@ BlockFunctionTable50:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Free ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable51:
+	table_width 2, BlockFunctionTable51
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -6857,8 +6960,10 @@ BlockFunctionTable51:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_18e2a ; $7e
 	dw BlockFunc_18ebe ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable52:
+	table_width 2, BlockFunctionTable52
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -6987,8 +7092,10 @@ BlockFunctionTable52:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Free ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable53:
+	table_width 2, BlockFunctionTable53
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -7117,8 +7224,10 @@ BlockFunctionTable53:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable54:
+	table_width 2, BlockFunctionTable54
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Free ; $02
@@ -7247,8 +7356,10 @@ BlockFunctionTable54:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable55:
+	table_width 2, BlockFunctionTable55
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -7377,8 +7488,10 @@ BlockFunctionTable55:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Solid ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable56:
+	table_width 2, BlockFunctionTable56
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -7507,8 +7620,10 @@ BlockFunctionTable56:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Free ; $7e
 	dw BlockFunc_Free ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable57:
+	table_width 2, BlockFunctionTable57
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -7637,8 +7752,10 @@ BlockFunctionTable57:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_18e2a ; $7e
 	dw BlockFunc_18ebe ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable58:
+	table_width 2, BlockFunctionTable58
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -7767,8 +7884,10 @@ BlockFunctionTable58:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_18e2a ; $7e
 	dw BlockFunc_18ebe ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable59:
+	table_width 2, BlockFunctionTable59
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -7897,8 +8016,10 @@ BlockFunctionTable59:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Free ; $7e
 	dw BlockFunc_Solid ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable60:
+	table_width 2, BlockFunctionTable60
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -8027,8 +8148,10 @@ BlockFunctionTable60:
 	dw BlockFunc_Solid ; $7d
 	dw BlockFunc_Free ; $7e
 	dw BlockFunc_Free ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable61:
+	table_width 2, BlockFunctionTable61
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -8157,8 +8280,10 @@ BlockFunctionTable61:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Free ; $7e
 	dw BlockFunc_Free ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES
 
 BlockFunctionTable62:
+	table_width 2, BlockFunctionTable62
 	dw BlockFunc_Solid ; $00
 	dw BlockFunc_Solid ; $01
 	dw BlockFunc_Solid ; $02
@@ -8287,3 +8412,4 @@ BlockFunctionTable62:
 	dw BlockFunc_Free ; $7d
 	dw BlockFunc_Free ; $7e
 	dw BlockFunc_Free ; $7f
+	assert_table_length NUM_ROOM_BLOCK_TYPES

@@ -3656,6 +3656,8 @@ LoadCutsceneTreasures:
 	ret
 
 CutsceneTreasures:
+	table_width 3, CutsceneTreasures
+	
 ; CUTSCENE_00
 	db INVALID_TREASURE
 	db INVALID_TREASURE
@@ -4110,6 +4112,8 @@ CutsceneTreasures:
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
+
+	assert_table_length NUM_CUTSCENES
 
 	db TREASURES_END
 
@@ -4692,7 +4696,7 @@ Func_81dce:
 	call .Func_81e16
 	ld a, [wCutscene]
 	inc a
-	cp NUM_CUTSCENES + 1
+	cp NUM_CUTSCENES
 	jr z, .asm_81e0d
 	ld [wCutscene], a
 	jr .asm_81de5

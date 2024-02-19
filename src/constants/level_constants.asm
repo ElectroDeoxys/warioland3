@@ -120,3 +120,7 @@ DEF COIN_COOLDOWN EQU 100
 ; number of torches that need to be lit
 ; to destroy the Flame Block
 DEF NUM_FLAME_BLOCK_TORCHES EQU 3
+
+; number of different types of blocks
+; that can fit inside a single room
+DEF NUM_ROOM_BLOCK_TYPES EQU $80

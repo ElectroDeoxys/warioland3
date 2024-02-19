@@ -1098,6 +1098,8 @@ DoObjectAction:
 .jump
 	jumptable
 
+.table
+	table_width 2, DoObjectAction.table
 	dw .None ; OBJACTION_NONE
 	dw .Bump ; OBJACTION_BUMP
 	dw .Attack ; OBJACTION_ATTACK
@@ -1118,6 +1120,7 @@ DoObjectAction:
 	dw .Action11 ; OBJACTION_11
 	dw .Action12 ; OBJACTION_12
 	dw .Func_6179c ; OBJACTION_13
+	assert_table_length NUM_OBJ_ACTIONS
 
 .Func_6179c:
 	ld hl, wCurObjAction

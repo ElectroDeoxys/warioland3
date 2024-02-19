@@ -154,6 +154,15 @@
 	const ROOM_152 ; $98
 	const ROOM_153 ; $99
 	const ROOM_154 ; $9a
+	const ROOM_UNUSED_155 ; $9b
+	const ROOM_UNUSED_156 ; $9c
+	const ROOM_UNUSED_157 ; $9d
+	const ROOM_UNUSED_158 ; $9e
+	const ROOM_UNUSED_159 ; $9f
+	const ROOM_UNUSED_160 ; $a0
+	const ROOM_UNUSED_161 ; $a1
+	const ROOM_UNUSED_162 ; $a2
+DEF NUM_ROOMS EQU const_value
 
 	const_def
 	const TILE_MAP_00 ; $00

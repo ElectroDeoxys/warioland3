@@ -46,7 +46,7 @@ UpdateParticles:
 	and a
 	ret z
 
-FOR n, 1, NUM_PARTICLES + 1
+FOR n, 1, MAX_NUM_PARTICLES + 1
 	ld hl, wParticle{u:n}
 	ld a, [hl]
 	and a
@@ -62,6 +62,8 @@ ENDR
 	ld a, [hl]
 	jumptable
 
+.table
+	table_width 2, UpdateParticles.table
 	dw ParticleFunc_None           ; PARTICLE_NONE
 	dw ParticleFunc_Debris         ; PARTICLE_DEBRIS
 	dw ParticleFunc_Stars          ; PARTICLE_STARS
@@ -77,14 +79,15 @@ ENDR
 	dw ParticleFunc_Ice            ; PARTICLE_ICE
 	dw ParticleFunc_TreasureGlow   ; PARTICLE_TREASURE_GLOW
 	dw ParticleFunc_Owl            ; PARTICLE_OWL
-	dw ParticleFunc_Snow            ; PARTICLE_SNOW
+	dw ParticleFunc_Snow           ; PARTICLE_SNOW
 	dw ParticleFunc_Magic1         ; PARTICLE_MAGIC_1
 	dw ParticleFunc_Magic2         ; PARTICLE_MAGIC_2
 	dw ParticleFunc_MagicStop      ; PARTICLE_MAGIC_STOP
-	dw ParticleFunc_None           ; PARTICLE_13
-	dw ParticleFunc_None           ; PARTICLE_14
-	dw ParticleFunc_None           ; PARTICLE_15
-	dw ParticleFunc_None           ; PARTICLE_16
+	dw ParticleFunc_None           ; PARTICLE_UNUSED_13
+	dw ParticleFunc_None           ; PARTICLE_UNUSED_14
+	dw ParticleFunc_None           ; PARTICLE_UNUSED_15
+	dw ParticleFunc_None           ; PARTICLE_UNUSED_16
+	assert_table_length NUM_PARTICLES
 
 ParticleFunc_None:
 	ret

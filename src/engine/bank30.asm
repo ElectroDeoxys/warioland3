@@ -651,6 +651,7 @@ MACRO room
 ENDM
 
 RoomBlockAndGfxData:
+	table_width 2, RoomBlockAndGfxData
 	dw NULL      ; ROOM_000
 	dw .room_001 ; ROOM_001
 	dw .room_002 ; ROOM_002
@@ -806,14 +807,15 @@ RoomBlockAndGfxData:
 	dw .room_152 ; ROOM_152
 	dw .room_153 ; ROOM_153
 	dw .room_154 ; ROOM_154
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
+	dw NULL      ; ROOM_UNUSED_155
+	dw NULL      ; ROOM_UNUSED_156
+	dw NULL      ; ROOM_UNUSED_157
+	dw NULL      ; ROOM_UNUSED_158
+	dw NULL      ; ROOM_UNUSED_159
+	dw NULL      ; ROOM_UNUSED_160
+	dw NULL      ; ROOM_UNUSED_161
+	dw NULL      ; ROOM_UNUSED_162
+	assert_table_length NUM_ROOMS
 
 .room_001
 	room BLOCK_FUNCTION_TABLE_00, TILE_MAP_00, MAIN_TILES_00, SPECIAL_TILES_0, ROOM_PAL_000

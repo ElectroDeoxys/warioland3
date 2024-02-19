@@ -1,5 +1,6 @@
 INCLUDE "charmaps.asm"
 
+INCLUDE "macros/asserts.asm"
 INCLUDE "macros/audio.asm"
 INCLUDE "macros/audio_commands.asm"
 INCLUDE "macros/constants.asm"

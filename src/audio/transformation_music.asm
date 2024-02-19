@@ -1,5 +1,6 @@
 TransformationMusicIDs::
-	dw NULL
+	table_width 2, TransformationMusicIDs
+	dw NULL                      ; TRANSFORMATION_NONE_ID
 	dw MUSIC_HOT_WARIO           ; TRANSFORMATION_HOT_WARIO_ID
 	dw MUSIC_FLAT_WARIO          ; TRANSFORMATION_FLAT_WARIO_ID
 	dw MUSIC_BALL_O_STRING_WARIO ; TRANSFORMATION_BALL_O_STRING_WARIO_ID
@@ -22,12 +23,13 @@ TransformationMusicIDs::
 	dw NULL                      ; TRANSFORMATION_LAUNCHED_ID
 	dw NULL                      ; TRANSFORMATION_MAGIC_ID
 	dw NULL                      ; TRANSFORMATION_BALL_ID
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
-	dw NULL
+	dw NULL                      ; TRANSFORMATION_UNUSED_17_ID
+	dw NULL                      ; TRANSFORMATION_UNUSED_18_ID
+	dw NULL                      ; TRANSFORMATION_UNUSED_19_ID
+	dw NULL                      ; TRANSFORMATION_UNUSED_1A_ID
+	dw NULL                      ; TRANSFORMATION_UNUSED_1B_ID
+	dw NULL                      ; TRANSFORMATION_UNUSED_1C_ID
+	dw NULL                      ; TRANSFORMATION_UNUSED_1D_ID
+	dw NULL                      ; TRANSFORMATION_UNUSED_1E_ID
+	dw NULL                      ; TRANSFORMATION_UNUSED_1F_ID
+	assert_table_length NUM_TRANSFORMATIONS

@@ -209,6 +209,8 @@ ProcessInteractions:
 	and INTERACTION_MASK
 	jumptable
 
+.table
+	table_width 2, ProcessInteractions.table
 	dw Func_20b6b                      ; OBJ_INTERACTION_00
 	dw Func_20d1d                      ; OBJ_INTERACTION_01
 	dw ObjInteraction_FrontSting       ; OBJ_INTERACTION_FRONT_STING
@@ -298,6 +300,7 @@ ProcessInteractions:
 	dw ObjInteraction_None             ; OBJ_INTERACTION_UNUSED_4
 	dw ObjInteraction_None             ; OBJ_INTERACTION_UNUSED_5
 	dw ObjInteraction_None             ; OBJ_INTERACTION_UNUSED_6
+	assert_table_length NUM_OBJ_INTERACTIONS
 
 ObjInteraction_None:
 	ret

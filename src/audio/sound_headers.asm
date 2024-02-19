@@ -27,6 +27,7 @@ ENDR
 ENDM
 
 SoundHeaders:
+	table_width 8, SoundHeaders
 	music Music_OutOfTheWoodsDay,        $00, 100, CHAN1_F, 4 ; MUSIC_OUT_OF_THE_WOODS_DAY
 	music Music_OutOfTheWoodsNight,      $00, 100, CHAN1_F, 3 ; MUSIC_OUT_OF_THE_WOODS_NIGHT
 	music Music_ForestOfFear,            $00, 100, CHAN1_F, 2 ; MUSIC_FOREST_OF_FEAR
@@ -85,6 +86,8 @@ SoundHeaders:
 	music Music_Epilogue,                $00, 100, CHAN1_F, 3 ; MUSIC_EPILOGUE
 	music Music_HiddenFigureReveal,      $00, 100, CHAN1_F, 3 ; MUSIC_HIDDEN_FIGURE_REVEAL
 	music Music_HiddenFigureBattle2,     $00, 100, CHAN1_F, 4 ; MUSIC_HIDDEN_FIGURE_BATTLE_2
+	assert_table_length NUM_MUSICS
+
 	filler_sounds 198
 
 	sfx Sfx_Jump,                        $00, 220, CHAN5_F, 1 ; SFX_JUMP

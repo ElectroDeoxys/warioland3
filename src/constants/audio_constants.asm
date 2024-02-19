@@ -190,6 +190,7 @@ DEF RECT_TRACK2 EQU (1 << 3)
 	const WAVEFORM_SQUARE_1_4_SAWTOOTH ; $19 (square & sawtooth)
 	const WAVEFORM_SPIKY               ; $1a (spiky)
 	const WAVEFORM_SQUISHED_SINE       ; $1b (squished sine)
+DEF NUM_WAVEFORMS EQU const_value - $10
 
 DEF NOISE_POLYCOUNTER_15 EQU 0
 DEF NOISE_POLYCOUNTER_07 EQU 1
@@ -332,6 +333,7 @@ DEF SWEEP_TIME_7 EQU (%111 << 4) ; 54.7 ms
 	const WAVE_78 ; $78
 	const WAVE_79 ; $79
 	const WAVE_7A ; $7a
+DEF NUM_WAVES EQU const_value
 
 	const_def $cf
 	const NOTE_DURATION_0  ; $cf

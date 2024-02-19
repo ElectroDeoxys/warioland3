@@ -884,7 +884,7 @@ UpdateNumCollectedTreasures:
 	xor a
 	ld [wNumCollectedTreasures + 1], a
 	ld [wNumCollectedTreasures + 0], a
-	ld a, NUM_TREASURES
+	ld a, NUM_TREASURES - 1
 .loop_treasures
 	push af
 	call IsTreasureCollected

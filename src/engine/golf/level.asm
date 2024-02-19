@@ -133,7 +133,7 @@ PickAndLoadGolfLevel:
 	jr .loop_division
 
 .got_golf_level
-	ld hl, .GolfLevels
+	ld hl, GolfLevels
 	ld a, c
 	and a
 	jr z, .got_golf_level_data
@@ -206,7 +206,8 @@ PickAndLoadGolfLevel:
 	ld [wGolfLevelHoleXPos + 1], a
 	ret
 
-.GolfLevels
+GolfLevels:
+	table_width 10, GolfLevels
 	dw GolfLevel00, BGMap_1c18fd, BGMap_1c1869, BGMap_1c1973, BGMap_1c18be ; GOLF_LEVEL_00
 	dw GolfLevel01, BGMap_1c1824, BGMap_1c1756, BGMap_1c1850, BGMap_1c17c6 ; GOLF_LEVEL_01
 	dw GolfLevel02, BGMap_1c2287, BGMap_1c21e7, BGMap_1c2303, BGMap_1c224f ; GOLF_LEVEL_02
@@ -227,6 +228,7 @@ PickAndLoadGolfLevel:
 	dw GolfLevel17, BGMap_1c2d30, BGMap_1c2c9e, BGMap_1c2d93, BGMap_1c2cec ; GOLF_LEVEL_17
 	dw GolfLevel18, BGMap_1c2410, BGMap_1c2361, BGMap_1c247d, BGMap_1c23bc ; GOLF_LEVEL_18
 	dw GolfLevel19, BGMap_1c316a, BGMap_1c30b7, BGMap_1c31e4, BGMap_1c3119 ; GOLF_LEVEL_19
+	assert_table_length NUM_GOLF_LEVELS
 
 ShowGolfLevelFlagAndPar:
 	ld a, BANK("VRAM1")

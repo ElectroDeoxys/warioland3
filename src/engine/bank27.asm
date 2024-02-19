@@ -74,6 +74,7 @@ Func_9c072:
 	jumptable
 
 .table
+	table_width 2, Func_9c072.table
 	dw Func_9c000  ; CUTSCENE_00
 	dw .Func_9c15e ; CUTSCENE_01
 	dw .InitCutscene02 ; CUTSCENE_02
@@ -165,6 +166,7 @@ Func_9c072:
 	dw .Func_9c7a5 ; CUTSCENE_58
 	dw Func_9c000  ; CUTSCENE_59
 	dw Func_9c000  ; CUTSCENE_5A
+	assert_table_length NUM_CUTSCENES
 
 .Func_9c15e:
 	farcall _InitPrologueSequence
@@ -1416,9 +1418,12 @@ Func_9ce28:
 	ld c, l
 
 	ld a, [w2d01e]
-	cp NUM_CUTSCENES + 1
+	cp NUM_CUTSCENES
 	jp nc, .OutOfBoundsCutscene
 	jumptable
+
+.table
+	table_width 2, Func_9ce28.table
 	dw .InvalidCutscene ; CUTSCENE_00
 	dw Cutscene01Func ; CUTSCENE_01
 	dw Cutscene02Func ; CUTSCENE_02
@@ -1510,6 +1515,7 @@ Func_9ce28:
 	dw Cutscene58Func ; CUTSCENE_58
 	dw .InvalidCutscene ; CUTSCENE_59
 	dw .InvalidCutscene ; CUTSCENE_5A
+	assert_table_length NUM_CUTSCENES
 
 .OutOfBoundsCutscene
 	debug_nop

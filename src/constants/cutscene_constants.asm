@@ -90,7 +90,7 @@
 	const CUTSCENE_58 ; $58
 	const CUTSCENE_59 ; $59
 	const CUTSCENE_5A ; $5a
-DEF NUM_CUTSCENES EQU const_value - 1
+DEF NUM_CUTSCENES EQU const_value
 
 	const_def
 ; WarioIdleGfx
@@ -182,7 +182,7 @@ DEF SCENEWARIO_GROUP_12 EQU const_value
 ; WarioClearGfx
 	const SCENEWARIO_IDLE_FRONT              ; $3c
 DEF SCENEWARIO_GROUP_13 EQU const_value
-DEF NUM_SCENEWARIO_STATES EQU const_value - 1
+DEF NUM_SCENEWARIO_STATES EQU const_value
 
 DEF SCENEWARIO_GROUP_NONE EQU $ff
 
