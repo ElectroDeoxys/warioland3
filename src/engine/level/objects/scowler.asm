@@ -867,8 +867,8 @@ ScrowlerTentacleFunc:
 	ld [wCurObjAction], a
 	ld hl, wCurObjInteractionType
 	ld a, [hl]
-	and $80
-	or $43
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_43
 	ld [hli], a
 	ld a, $fd
 	ld [hli], a
@@ -885,8 +885,8 @@ ScrowlerTentacleFunc:
 	ld [wCurObjAction], a
 	ld hl, wCurObjInteractionType
 	ld a, [hl]
-	and $80
-	or $40
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_WATER_TELEPORTING
 	ld [hli], a
 	ld a, $f6
 	ld [hli], a

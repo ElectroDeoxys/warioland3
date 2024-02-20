@@ -264,8 +264,8 @@ BigOctohonFunc:
 	ld [hli], a
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
-	and $80
-	or $06
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_06
 	ld [hld], a
 	play_sfx SFX_08D
 	ret
@@ -421,8 +421,8 @@ BigOctohonFunc:
 	ld [hl], a
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
-	and $80
-	or $49
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_49
 	ld [hld], a
 	ret
 .asm_4a812

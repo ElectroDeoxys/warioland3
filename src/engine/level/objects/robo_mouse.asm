@@ -217,8 +217,8 @@ RoboMouseFunc:
 	ld [hli], a
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
-	and $80
-	or $0b
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_0B
 	ld [hld], a
 	play_sfx SFX_VANISH
 	ld bc, ObjParams_StarsAbove
@@ -531,8 +531,8 @@ RoboMouseFunc:
 .asm_48c9c
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
-	and $80
-	or $30
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_30
 	ld [hld], a
 	ret
 

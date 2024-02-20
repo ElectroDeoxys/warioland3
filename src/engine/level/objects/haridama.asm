@@ -104,8 +104,8 @@ HaridamaFunc:
 	ld [wCurObjState], a
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
-	and $80
-	or $06
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_06
 	ld [hld], a
 	ret
 
@@ -123,8 +123,8 @@ HaridamaFunc:
 	ret nz
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
-	and $80
-	or $2a
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_2A
 	ld [hld], a
 	ld l, OBJ_STATE
 	ld a, $32
@@ -244,8 +244,8 @@ HaridamaFunc:
 .asm_49077
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
-	and $80
-	or $06
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_06
 	ld [hld], a
 	ld l, OBJ_STATE
 	ld a, $38

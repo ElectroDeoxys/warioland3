@@ -1329,7 +1329,7 @@ ReturnToPendingLevelState::
 	ret
 
 ReturnToMapFromLevel::
-	ld hl, wca3b
+	ld hl, wDayNight
 	set 7, [hl]
 ReturnToMap::
 	ld a, TRANSITION_RETURN_TO_MAP

@@ -784,13 +784,13 @@ DoDayNightSpell:
 	ld a, [wGotSunMedallion]
 	and a
 	jr nz, SwitchDayNight
-	ld hl, wca3b
+	ld hl, wDayNight
 	res 4, [hl]
 	ret
 
-; flips bit 4 of wca3b
+; flips bit 4 of wDayNight
 SwitchDayNight:
-	ld hl, wca3b
+	ld hl, wDayNight
 	ld a, $1 << 4
 	xor [hl]
 	ld [hl], a
@@ -811,7 +811,7 @@ OverworldStateTable:
 	dw Func_80540
 
 	dw FadeBGToWhite_Normal ; SST_OVERWORLD_08
-	dw Func_8055f           ; SST_OVERWORLD_09
+	dw InitMapSide           ; SST_OVERWORLD_09
 	dw DarkenBGToPal_Normal
 	dw Func_805d7           ; SST_OVERWORLD_0B
 
@@ -1044,7 +1044,7 @@ Func_80540:
 	call ClearUnusedVirtualOAM
 	ret
 
-Func_8055f:
+InitMapSide:
 	call DisableLCD
 	call FillBGMap0_With7f
 
@@ -1058,15 +1058,16 @@ Func_8055f:
 	call Func_80b29
 	call GetNextTreasureToCollect
 
-	ld a, [wca3b]
+	ld a, [wDayNight]
 	ld b, a
 	bit 7, a
 	jr nz, .asm_8059b
-	ld hl, wca3b
+	ld hl, wDayNight
 	ld a, [hl]
 	swap a
 	and $0f
 	ld [w2d011], a
+	; swap bit 0 in a and [hl]
 	srl [hl]
 	rra
 	rl [hl]
@@ -1084,7 +1085,7 @@ Func_8055f:
 	ld a, [w2d011]
 	xor $1
 	ld [w2d011], a
-	ld hl, wca3b
+	ld hl, wDayNight
 	srl [hl]
 	rra
 	rl [hl]
@@ -1146,7 +1147,7 @@ Func_80621:
 	jr nz, .got_medallion
 	ld a, $01
 	ld [w2d011], a
-	ld hl, wca3b
+	ld hl, wDayNight
 	set 0, [hl]
 	res 7, [hl]
 .got_medallion
@@ -1559,10 +1560,10 @@ Func_80b1b:
 	call LoadBGMapsToWRAM
 	ret
 
-; clears w2d060 onwards
+; clears wOWPendingTileUpdate onwards
 ; seems like level-related stuff
 Func_80b29:
-	ld hl, w2d060
+	ld hl, wOWPendingTileUpdate
 	ld bc, $7a0
 	xor a
 	call WriteAToHL_BCTimes
@@ -1810,9 +1811,9 @@ VBlank_80cb1:
 	ld a, [wSCX]
 	ldh [rSCX], a
 
-	ld a, [w2d060]
+	ld a, [wOWPendingTileUpdate]
 	and a
-	jr z, .asm_80cff
+	jr z, .skip_update_tiles
 	ld c, LOW(rHDMA1)
 	ld a, HIGH(wTilemap)
 	ld [$ff00+c], a
@@ -1847,9 +1848,9 @@ VBlank_80cb1:
 	ld a, $1d
 	ld [$ff00+c], a
 	xor a
-	ld [w2d060], a
+	ld [wOWPendingTileUpdate], a
 
-.asm_80cff
+.skip_update_tiles
 	ld a, [wHDMABank]
 	and a
 	jr z, .asm_80d1b
@@ -2062,7 +2063,7 @@ Func_80ee7:
 	ret
 
 Func_80f0d:
-	ld a, [wca3b]
+	ld a, [wDayNight]
 	bit 7, a
 	jr nz, .asm_80f1f
 	call PlayOverworldMusic
@@ -4850,13 +4851,13 @@ Func_81f21:
 	jr z, .skip
 	ld de, wTileToPlaceInOW
 .loop
-	ld a, [de]
+	ld a, [de] ; wTileToPlaceInOW
 	ld c, a
 	inc e
-	ld a, [de]
+	ld a, [de] ; wAttrToPlaceInOW
 	ld b, a
 	inc e
-	ld a, [de]
+	ld a, [de] ; wOWTilemapPtr
 	ld l, a
 	inc e
 	ld a, [de]
@@ -4872,8 +4873,8 @@ Func_81f21:
 	ld [w2d07f], a
 	and a
 	jr nz, .loop
-	ld a, $01
-	ld [w2d060], a
+	ld a, TRUE
+	ld [wOWPendingTileUpdate], a
 .skip
 	ret
 

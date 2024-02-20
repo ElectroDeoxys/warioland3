@@ -21,8 +21,8 @@ TogebaFunc:
 	ld [hld], a
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
-	and $80
-	or $05
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_FULL_STING
 	ld [hld], a
 	ret
 
@@ -67,8 +67,8 @@ TogebaFunc:
 	ld [hli], a
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
-	and $80
-	or $0b
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_0B
 	ld [hld], a
 	xor a
 	ld [wCurObjVar3], a
@@ -92,8 +92,8 @@ TogebaFunc:
 	ld [wCurObjState], a
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
-	and $80
-	or $0c
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_WALKABLE
 	ld [hld], a
 	ret
 

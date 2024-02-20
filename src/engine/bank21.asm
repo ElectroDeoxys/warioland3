@@ -1714,7 +1714,7 @@ DayNightTransition:
 
 .LoadBaseAndTargetPals:
 	di
-	call VBlank_84d76
+	call VBlank_OWPalTransition
 	ei
 
 	; load the very last pal to buffer
@@ -1860,7 +1860,7 @@ DayNightTransition:
 	ld a, [w2d011]
 	xor $1
 	ld [w2d011], a
-	ld hl, wca3b
+	ld hl, wDayNight
 	srl [hl]
 	rra
 	rl [hl]
@@ -1975,7 +1975,7 @@ Func_84b97:
 	ld a, [wTopBarState]
 	and a
 	jr nz, .asm_84bff
-	ld [wca3b], a
+	ld [wDayNight], a ; $0
 .asm_84bff
 	xor a
 	ld [w2d011], a
@@ -1999,7 +1999,7 @@ Func_84c0d:
 
 .Init:
 	di
-	call VBlank_84d76
+	call VBlank_OWPalTransition
 	ei
 	xor a
 	call LoadBaseAndTargetOWPals
@@ -2245,7 +2245,9 @@ SkipDayNightTransition:
 	ld [wOWPalTransitionState], a
 	ret
 
-VBlank_84d76:
+; used for both Day/Night transition
+; and for grey transition
+VBlank_OWPalTransition:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -2875,7 +2877,7 @@ OWGreyTransition:
 	xor a
 	ld [w2d809], a
 	di
-	call VBlank_84d76
+	call VBlank_OWPalTransition
 	ei
 	jp DayNightTransition.AdvanceTable
 

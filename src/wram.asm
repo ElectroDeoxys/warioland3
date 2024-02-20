@@ -239,7 +239,11 @@ wIsBossBattle:: ; c0e6
 wAllMusicalCoinsLevel:: ; c0e7
 	db
 
-wc0e8:: ; c0e8
+; used in the Musical Coin screen
+; this value counts up from 0 up to
+; the number of Musical Coins that
+; Wario collected in the level
+wMusicalCoinVisualCounter:: ; c0e8
 	db
 
 	ds $17
@@ -259,7 +263,7 @@ wCurRed::   db ; c183
 wCurGreen:: db ; c184
 wCurBlue::  db ; c185
 
-wc186:: ; c186
+wUnused_c186:: ; c186
 	db
 
 ; keeps track of the fade amount, starting at 1
@@ -325,7 +329,7 @@ wRoomPalCycleCounter::  db ; c1b5
 wObjPtr:: ; c1b6
 	dw
 
-wc1b8:: ; c1b8
+wUnused_c1b8:: ; c1b8
 	db
 
 ; OBJ_INTERACTION_* constant for ProcessInteractions
@@ -413,7 +417,9 @@ wLevelTimeAttackScores:: ; ca07
 wNumCollectedTreasures:: ; ca39
 	ds $2
 
-wca3b:: ; ca3b
+; bit 0: not set = day, set = night
+; bit 7: trigger day/night transition
+wDayNight:: ; ca3b
 	db
 
 ; a POWER_UP_* constant
@@ -1521,7 +1527,7 @@ wCollectionCell:: ; d059
 
 	ds $6
 
-w2d060:: ; d060
+wOWPendingTileUpdate:: ; d060
 	db
 
 wOWFuncCounter:: ; d061

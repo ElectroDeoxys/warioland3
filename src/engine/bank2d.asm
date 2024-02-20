@@ -3452,8 +3452,8 @@ EndOWFunc:
 	ret
 
 Func_b5868:
-	ld a, $01
-	ld [w2d060], a
+	ld a, TRUE
+	ld [wOWPendingTileUpdate], a
 ;	fallthrough
 Func_b586d:
 	farcall Func_854ee
@@ -6883,8 +6883,8 @@ EOWFunc_FreezeSea:
 	ld a, h
 	ld [wOWUIObj1Frame], a
 	farcall Func_85a68
-	ld a, $01
-	ld [w2d060], a
+	ld a, TRUE
+	ld [wOWPendingTileUpdate], a
 	ret
 .asm_b6ff9
 	xor a
@@ -6929,8 +6929,8 @@ EOWFunc_FreezeSea:
 	ld a, h
 	ld [wOWUIObj2Unk7], a
 	farcall Func_85aa2
-	ld a, $01
-	ld [w2d060], a
+	ld a, TRUE
+	ld [wOWPendingTileUpdate], a
 	ret
 .asm_b7051
 	xor a
@@ -6975,8 +6975,8 @@ EOWFunc_FreezeSea:
 	ld a, h
 	ld [wd156 + 1], a
 	farcall Func_85acb
-	ld a, $01
-	ld [w2d060], a
+	ld a, TRUE
+	ld [wOWPendingTileUpdate], a
 	ret
 .asm_b70a9
 	xor a
@@ -6984,20 +6984,25 @@ EOWFunc_FreezeSea:
 	ret
 
 .data
-	db $04, $61, $d6, $c9, $56, $04, $62, $d6
-	db $ca, $56, $04, $63, $d6, $cb, $56, $04
-	db $64, $d6, $cc, $56, $04, $65, $d6, $cd
-	db $56, $04, $66, $d6, $ce, $56, $04, $67
-	db $d6, $cf, $56, $04, $68, $d6, $d0, $56
-	db $04, $69, $d6, $d1, $56, $04, $6a, $d6
-	db $d2, $56, $04, $6b, $d6, $d3, $56, $04
-	db $6c, $d6, $d4, $56, $04, $6d, $d6, $d5
-	db $56, $04, $6e, $d6, $d6, $56, $05, $4f
-	db $d6, $b7, $56, $05, $50, $d6, $b8, $56
-	db $05, $51, $d6, $b9, $56, $05, $52, $d6
-	db $ba, $56
-
-	db $80
+	db $04, $61, $d6, $c9, $56
+	db $04, $62, $d6, $ca, $56
+	db $04, $63, $d6, $cb, $56
+	db $04, $64, $d6, $cc, $56
+	db $04, $65, $d6, $cd, $56
+	db $04, $66, $d6, $ce, $56
+	db $04, $67, $d6, $cf, $56
+	db $04, $68, $d6, $d0, $56
+	db $04, $69, $d6, $d1, $56
+	db $04, $6a, $d6, $d2, $56
+	db $04, $6b, $d6, $d3, $56
+	db $04, $6c, $d6, $d4, $56
+	db $04, $6d, $d6, $d5, $56
+	db $04, $6e, $d6, $d6, $56
+	db $05, $4f, $d6, $b7, $56
+	db $05, $50, $d6, $b8, $56
+	db $05, $51, $d6, $b9, $56
+	db $05, $52, $d6, $ba, $56
+	db $80 ; end
 
 EOWFunc_Earthquake:
 	call Func_b71fc
@@ -7048,8 +7053,8 @@ EOWFunc_Earthquake:
 	inc hl
 	dec b
 	jr nz, .asm_b7152
-	ld a, $01
-	ld [w2d060], a
+	ld a, TRUE
+	ld [wOWPendingTileUpdate], a
 	jp AdvanceOWFunc
 
 .Func_b7160:

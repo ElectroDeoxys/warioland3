@@ -149,8 +149,8 @@ BrrrBearFunc:
 .Func_4811f:
 	ld hl, wCurObjInteractionType
 	ld a, [hl]
-	and $80
-	or $01
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_01
 	ld [hld], a
 	ld l, OBJ_STATE
 	ld a, $30
@@ -233,8 +233,8 @@ BrrrBearFunc:
 .Func_481aa:
 	ld hl, wCurObjInteractionType
 	ld a, [hl]
-	and $80
-	or $01
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_01
 	ld [hld], a
 	ld l, OBJ_STATE
 	ld a, $31
@@ -420,8 +420,8 @@ BrrrBearFunc:
 	ld [wCurObjVar2], a
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
-	and $80
-	or $01
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_01
 	ld [hld], a
 	ret
 
@@ -432,8 +432,8 @@ BrrrBearFunc:
 	call SetObjectFramesetPtr
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
-	and $80
-	or $00
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_00
 	ld [hld], a
 .Func_482f3:
 	ld hl, wCurObjVar2
@@ -451,8 +451,8 @@ BrrrBearFunc:
 	call SetObjectFramesetPtr
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
-	and $80
-	or $00
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_00
 	ld [hld], a
 .Func_48314:
 	ld hl, wCurObjVar2
@@ -480,8 +480,8 @@ BrrrBearFunc:
 	ld [hli], a
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
-	and $80
-	or $00
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_00
 	ld [hld], a
 	ret
 
@@ -531,8 +531,8 @@ BrrrBearFunc:
 	ld [hli], a
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
-	and $80
-	or $01
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_01
 	ld [hld], a
 	ret
 
@@ -561,8 +561,8 @@ BrrrBearFunc:
 	ld [hli], a
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
-	and $80
-	or $01
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_01
 	ld [hld], a
 	ret
 
@@ -625,8 +625,8 @@ BrrrBearFunc:
 	ld [hli], a
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
-	and $80
-	or $00
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_00
 	ld [hld], a
 	ret
 
@@ -765,8 +765,8 @@ BrrrBearFunc:
 	ld [hld], a
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
-	and $80
-	or $00
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_00
 	ld [hld], a
 	ret
 

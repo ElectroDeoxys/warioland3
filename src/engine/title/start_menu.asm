@@ -179,6 +179,6 @@ Func_4628::
 	ld [wAnimatedTilesFrame], a
 	xor a
 	ld [w3d50d], a
-	ld hl, wca3b
+	ld hl, wDayNight
 	set 7, [hl]
 	jr StartOverworldState

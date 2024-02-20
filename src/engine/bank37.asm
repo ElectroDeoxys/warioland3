@@ -122,7 +122,7 @@ Func_dc073:
 	xor a
 	ld [wFadeSpeed], a
 	ld [wPalFadeCounter], a
-	ld [wc186], a
+	ld [wUnused_c186], a
 	ld hl, wGameModeFlags
 	set MODE_TIME_ATTACK_F, [hl]
 	ld a, ST_PAUSE_MENU

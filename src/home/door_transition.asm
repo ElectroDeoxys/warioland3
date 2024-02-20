@@ -10,7 +10,7 @@ DoorTransition::
 	jr nz, .asm_95e
 
 	ld a, $01
-	ld [wc186], a
+	ld [wUnused_c186], a
 	call VBlank_9cb
 	ld a, [w3d506]
 	xor $1
@@ -50,7 +50,7 @@ DoorTransition::
 
 	xor a
 	ld [wPalFadeCounter], a
-	ld [wc186], a
+	ld [wUnused_c186], a
 	ld [w3d506], a
 	stop_music
 	stop_sfx

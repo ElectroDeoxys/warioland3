@@ -633,8 +633,8 @@ AnonsterFunc:
 	ld a, $f0
 	ld [hld], a
 	ld a, [hl]
-	and $80
-	or $48
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_48
 	ld [hli], a
 	call SetObjectFramesetPtr
 	xor a

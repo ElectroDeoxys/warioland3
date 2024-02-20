@@ -58,7 +58,7 @@ SelectLevel:
 .day_night
 ; all levels have 4 states for day and night respectively
 ; setting bit 2 yields the night time levels
-	ld a, [wca3b]
+	ld a, [wDayNight]
 	and %1
 	add a
 	add a ; *4

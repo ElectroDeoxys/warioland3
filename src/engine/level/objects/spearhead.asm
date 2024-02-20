@@ -18,7 +18,7 @@ SpearheadFunc:
 	ld [hld], a
 	ld l, OBJ_SUBSTATE
 	res OBJSUBFLAG_UNINITIALISED_F, [hl]
-	ld a, [wca3b]
+	ld a, [wDayNight]
 	rra
 	jp c, .SleepStart ; night
 	jp .Default ; day

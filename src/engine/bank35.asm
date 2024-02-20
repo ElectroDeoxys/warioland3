@@ -526,7 +526,7 @@ InitMusicalCoinScreen:
 	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	xor a
-	ld [wc0e8], a
+	ld [wMusicalCoinVisualCounter], a
 	ld a, 60
 	ld [wTimer], a
 	ld hl, wSubState
@@ -541,17 +541,17 @@ Func_d4472:
 	call ClearUnusedVirtualOAM
 
 	ld hl, wNumMusicalCoins
-	ld a, [wc0e8]
+	ld a, [wMusicalCoinVisualCounter]
 	cp [hl]
-	jr z, .asm_d44dc
+	jr z, .counting_up_done
 	ld hl, wTimer
 	ld a, [hl]
 	and a
-	jr z, .asm_d44ab
+	jr z, .count_up
 	dec [hl]
 	ret
 
-.asm_d44ab
+.count_up
 	ld a, [wGlobalCounter]
 	and %11
 	ret nz
@@ -562,9 +562,9 @@ Func_d4472:
 	ld a, LOW(v0BGMap0 + $8b)
 	ld [hli], a
 
-	ld a, [wc0e8]
+	ld a, [wMusicalCoinVisualCounter]
 	inc a
-	ld [wc0e8], a
+	ld [wMusicalCoinVisualCounter], a
 	add a ; *2
 	add $a0
 	ld b, a
@@ -579,7 +579,7 @@ Func_d4472:
 	ld [wcee4], a
 	ret
 
-.asm_d44dc
+.counting_up_done
 	ld a, [wAllMusicalCoinsLevel]
 	inc a
 	jp z, Func_d45e1

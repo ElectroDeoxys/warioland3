@@ -38,7 +38,7 @@ PillarPlatformFunc:
 	ld [hld], a
 	ld a, $f4
 	ld [hl], a
-	ld a, [wca3b]
+	ld a, [wDayNight]
 	rra
 	jr c, .asm_49cbc
 	ld de, Frameset_6975b

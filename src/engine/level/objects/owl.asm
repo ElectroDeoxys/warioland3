@@ -11,7 +11,7 @@ OwlFunc:
 	ld [hld], a
 	ld a, $fe
 	ld [hl], a
-	ld a, [wca3b]
+	ld a, [wDayNight]
 	rra
 	jr c, .asm_491fd
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -26,8 +26,8 @@ OwlFunc:
 	play_sfx SFX_077
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
-	and $80
-	or $0b
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_0B
 	ld [hld], a
 	jr .asm_49253
 
@@ -49,8 +49,8 @@ OwlFunc:
 	ld [hli], a
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
-	and $80
-	or $0b
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_0B
 	ld [hld], a
 	play_sfx SFX_077
 	ret
@@ -99,8 +99,8 @@ OwlFunc:
 	ld [hld], a
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
-	and $80
-	or $28
+	and HEAVY_OBJ
+	or OBJ_INTERACTION_OWL
 	ld [hld], a
 	ld l, OBJ_SUBSTATE
 	ld a, [wWarioScreenXPos]

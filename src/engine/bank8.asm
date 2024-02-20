@@ -38,7 +38,7 @@ ProcessInteractions:
 	ld d, $00
 	add hl, de
 	ld a, [hld]
-	ld [wc1b8], a
+	ld [wUnused_c1b8], a
 	ld a, [hl] ; OBJ_ACTION
 	pop hl
 	and a

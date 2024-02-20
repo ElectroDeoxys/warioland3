@@ -366,7 +366,7 @@ WormwouldFunc:
 	call ApplyObjYMovement
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
-	cp $1e
+	cp 30
 	play_sfx z, SFX_0A7
 	dec [hl]
 	ret nz

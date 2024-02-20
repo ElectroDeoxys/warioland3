@@ -20,7 +20,7 @@ FadeBGToWhite::
 	dec a
 	jr z, .asm_496
 	ld a, $01
-	ld [wc186], a
+	ld [wUnused_c186], a
 	call VBlank_88d
 	ld hl, wPalFadeCounter
 	inc [hl]
@@ -167,7 +167,7 @@ FadeBGToWhite::
 	xor a
 	ld [wFadeSpeed], a
 	ld [wPalFadeCounter], a
-	ld [wc186], a
+	ld [wUnused_c186], a
 	ld hl, wSubState
 	inc [hl]
 	ret
@@ -180,7 +180,7 @@ Func_54e:
 	dec a
 	jr z, .asm_565
 	ld a, $01
-	ld [wc186], a
+	ld [wUnused_c186], a
 	call VBlank_88d
 	ld hl, wPalFadeCounter
 	inc [hl]
@@ -275,7 +275,7 @@ Func_54e:
 	ei
 	xor a
 	ld [wPalFadeCounter], a
-	ld [wc186], a
+	ld [wUnused_c186], a
 	ld hl, wSubState
 	inc [hl]
 	ret
@@ -304,7 +304,7 @@ DarkenBGToPal::
 	dec a
 	jr z, .asm_608
 	ld a, $01
-	ld [wc186], a
+	ld [wUnused_c186], a
 	call VBlank_88d
 	ld hl, wPalFadeCounter
 	inc [hl] ; set up to begin fade
@@ -495,7 +495,7 @@ DarkenBGToPal::
 	xor a
 	ld [wFadeSpeed], a
 	ld [wPalFadeCounter], a
-	ld [wc186], a
+	ld [wUnused_c186], a
 	ld hl, wSubState
 	inc [hl]
 	ret
@@ -511,7 +511,7 @@ SlowFadeInScreen::
 	jr z, .begin_fade
 
 	ld a, $01
-	ld [wc186], a
+	ld [wUnused_c186], a
 	call VBlank_88d
 	ld hl, wPalFadeCounter
 	inc [hl] ; set up to begin fade
@@ -670,7 +670,7 @@ SlowFadeInScreen::
 	xor a
 	ld [wFadeSpeed], a
 	ld [wPalFadeCounter], a
-	ld [wc186], a
+	ld [wUnused_c186], a
 	ld hl, wSubState
 	inc [hl]
 	ret
@@ -683,7 +683,7 @@ Func_7cf:
 	dec a
 	jr z, .asm_7e6
 	ld a, $01
-	ld [wc186], a
+	ld [wUnused_c186], a
 	call VBlank_88d
 	ld hl, wPalFadeCounter
 	inc [hl]
@@ -810,7 +810,7 @@ Func_7cf:
 	ei
 	xor a
 	ld [wPalFadeCounter], a
-	ld [wc186], a
+	ld [wUnused_c186], a
 	ld hl, wSubState
 	inc [hl]
 	ret
