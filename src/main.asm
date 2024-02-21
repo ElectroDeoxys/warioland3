@@ -98,10 +98,14 @@ INCLUDE "engine/level/particles.asm"
 INCLUDE "engine/bank3.asm"
 
 
-SECTION "Bank 6", ROMX
+SECTION "Block Functions", ROMX
 
 INCLUDE "engine/level/block_functions.asm"
-INCLUDE "engine/bank6.asm"
+
+
+SECTION "Collision", ROMX
+
+INCLUDE "engine/level/collisions.asm"
 
 
 SECTION "Wario States 2", ROMX
@@ -112,6 +116,11 @@ INCLUDE "engine/level/wario_states_2.asm"
 SECTION "Wario States 1", ROMX
 
 INCLUDE "engine/level/wario_states_1.asm"
+
+
+SECTION "Object Interactions", ROMX
+
+INCLUDE "engine/level/object_interactions.asm"
 
 
 SECTION "Bank 8", ROMX
@@ -302,12 +311,13 @@ INCLUDE "engine/level/objects/shoot.asm"
 
 SECTION "Bank 18", ROMX
 
+INCLUDE "data/object_movements.asm"
 INCLUDE "engine/bank18.asm"
 
 
-SECTION "Bank 19", ROMX
+SECTION "Object Loading", ROMX
 
-INCLUDE "engine/bank19.asm"
+INCLUDE "engine/level/load_objects.asm"
 
 
 SECTION "Bank 20", ROMX

@@ -154,7 +154,7 @@ wc0c6:: ; c0c6
 wc0c7:: ; c0c7
 	db
 
-wEnemyGroup:: ; c0c8
+wObjectGroup:: ; c0c8
 	db
 
 wRoom::                   db ; c0c9

@@ -64,11 +64,13 @@ ROMX $04
 ROMX $05
 	"Wario OAM 1"
 ROMX $06
-	"Bank 6"
+	"Block Functions"
+	"Collision"
 	"Wario States 2"
 ROMX $07
 	"Wario States 1"
 ROMX $08
+	"Object Interactions"
 	"Bank 8"
 ROMX $09
 	"Wario Gfx 2"
@@ -102,7 +104,7 @@ ROMX $15
 ROMX $18
 	"Bank 18"
 ROMX $19
-	"Bank 19"
+	"Object Loading"
 ROMX $1a
 	"Object Framesets"
 ROMX $20

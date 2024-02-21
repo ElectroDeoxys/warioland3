@@ -122,13 +122,13 @@ LoadRoom::
 	ld [wCameraConfigFlags], a
 
 	ld a, [hli]
-	ld [wEnemyGroup], a
+	ld [wObjectGroup], a
 	push hl
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	farcall LoadEnemyGroupData
+	farcall LoadObjectGroupData
 	pop af
 	ldh [rSVBK], a
 	pop hl
