@@ -124,7 +124,7 @@ HaridamaFunc:
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
 	and HEAVY_OBJ
-	or OBJ_INTERACTION_2A
+	or OBJ_INTERACTION_HARIDAMA
 	ld [hld], a
 	ld l, OBJ_STATE
 	ld a, $32

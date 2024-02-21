@@ -572,7 +572,7 @@ AnonsterFunc:
 	ld a, [wCurObjSubState]
 	rlca
 	jr c, .asm_503fd
-	ld bc, ObjParams_AnonsteWaveLeft
+	ld bc, ObjParams_AnonsterWaveLeft
 	jp CreateObjectAtRelativePos
 .asm_503fd
 	ld bc, ObjParams_AnonsterWaveRight

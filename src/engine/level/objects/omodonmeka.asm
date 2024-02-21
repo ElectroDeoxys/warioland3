@@ -423,7 +423,7 @@ OmodonmekaFunc:
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
 	and HEAVY_OBJ
-	or OBJ_INTERACTION_18
+	or OBJ_INTERACTION_OMODONMEKA
 	ld [hld], a
 	ret
 
@@ -980,7 +980,7 @@ Func_42767:
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
 	and HEAVY_OBJ
-	or OBJ_INTERACTION_23
+	or OBJ_INTERACTION_OMODON
 	ld [hld], a
 	ld l, OBJ_COLLBOX_LEFT
 	inc [hl]

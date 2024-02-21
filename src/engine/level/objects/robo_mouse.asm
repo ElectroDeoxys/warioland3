@@ -532,7 +532,7 @@ RoboMouseFunc:
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
 	and HEAVY_OBJ
-	or OBJ_INTERACTION_30
+	or OBJ_INTERACTION_ROBO_MOUSE
 	ld [hld], a
 	ret
 

@@ -178,7 +178,7 @@ TeruteruFunc:
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
 	and HEAVY_OBJ
-	or OBJ_INTERACTION_38
+	or OBJ_INTERACTION_TERUTERU
 	ld [hli], a
 	ret
 

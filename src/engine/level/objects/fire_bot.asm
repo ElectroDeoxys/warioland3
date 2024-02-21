@@ -263,7 +263,7 @@ FireBotFunc:
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
 	and HEAVY_OBJ
-	or OBJ_INTERACTION_21
+	or OBJ_INTERACTION_FIRE_BOT
 	ld [hld], a
 	ld l, OBJ_FLAGS
 	bit OBJFLAG_ON_SCREEN_F, [hl]

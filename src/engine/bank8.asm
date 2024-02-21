@@ -211,95 +211,95 @@ ProcessInteractions:
 
 .table
 	table_width 2, ProcessInteractions.table
-	dw Func_20b6b                      ; OBJ_INTERACTION_00
-	dw Func_20d1d                      ; OBJ_INTERACTION_01
-	dw ObjInteraction_FrontSting       ; OBJ_INTERACTION_FRONT_STING
-	dw ObjInteraction_BackSting        ; OBJ_INTERACTION_BACK_STING
-	dw ObjInteraction_TopSting         ; OBJ_INTERACTION_TOP_STING
-	dw ObjInteraction_FullSting        ; OBJ_INTERACTION_FULL_STING
-	dw Func_20d81                      ; OBJ_INTERACTION_06
-	dw Func_20d8c                      ; OBJ_INTERACTION_07
-	dw Func_20deb                      ; OBJ_INTERACTION_08
-	dw Func_20e39                      ; OBJ_INTERACTION_09
-	dw Func_20e60                      ; OBJ_INTERACTION_0A
-	dw Func_20e6a                      ; OBJ_INTERACTION_0B
-	dw ObjInteraction_Walkable         ; OBJ_INTERACTION_WALKABLE
-	dw ObjInteraction_MusicalCoin      ; OBJ_INTERACTION_MUSICAL_COIN
-	dw ObjInteraction_Fire             ; OBJ_INTERACTION_FIRE
-	dw ObjInteraction_Richtertoffen    ; OBJ_INTERACTION_RICHTERTOFFEN
-	dw ObjInteraction_GreyKey          ; OBJ_INTERACTION_GREY_KEY
-	dw ObjInteraction_RedKey           ; OBJ_INTERACTION_RED_KEY
-	dw ObjInteraction_GreenKey         ; OBJ_INTERACTION_GREEN_KEY
-	dw ObjInteraction_BlueKey          ; OBJ_INTERACTION_BLUE_KEY
-	dw ObjInteraction_GreyTreasure     ; OBJ_INTERACTION_GREY_TREASURE
-	dw ObjInteraction_RedTreasure      ; OBJ_INTERACTION_RED_TREASURE
-	dw ObjInteraction_GreenTreasure    ; OBJ_INTERACTION_GREEN_TREASURE
-	dw ObjInteraction_BlueTreasure     ; OBJ_INTERACTION_BLUE_TREASURE
-	dw Func_21156                      ; OBJ_INTERACTION_18
-	dw Func_21245                      ; OBJ_INTERACTION_19
-	dw Func_21358                      ; OBJ_INTERACTION_1A
-	dw ObjInteraction_RegularCoin      ; OBJ_INTERACTION_REGULAR_COIN
-	dw ObjInteraction_Electric         ; OBJ_INTERACTION_ELECTRIC
-	dw Func_21548                      ; OBJ_INTERACTION_1D
-	dw Func_21569                      ; OBJ_INTERACTION_1E
-	dw Func_215a2                      ; OBJ_INTERACTION_1F
-	dw ObjInteraction_Bouncy           ; OBJ_INTERACTION_BOUNCY
-	dw Func_2164f                      ; OBJ_INTERACTION_21
-	dw ObjInteraction_Solid            ; OBJ_INTERACTION_SOLID
-	dw Func_21774                      ; OBJ_INTERACTION_23
-	dw Func_217b9                      ; OBJ_INTERACTION_24
-	dw ObjInteraction_Vampire          ; OBJ_INTERACTION_VAMPIRE
-	dw ObjInteraction_Bubble           ; OBJ_INTERACTION_BUBBLE
-	dw ObjInteraction_Ice              ; OBJ_INTERACTION_ICE
-	dw ObjInteraction_Owl              ; OBJ_INTERACTION_OWL
-	dw ObjInteraction_Rail             ; OBJ_INTERACTION_RAIL
-	dw Func_20e0f                      ; OBJ_INTERACTION_2A
-	dw Func_21a4f                      ; OBJ_INTERACTION_2B
-	dw Func_21a47                      ; OBJ_INTERACTION_2C
-	dw Func_21a52                      ; OBJ_INTERACTION_2D
-	dw ObjInteraction_UnlitTorch       ; OBJ_INTERACTION_UNLIT_TORCH
-	dw ObjInteraction_Stove            ; OBJ_INTERACTION_STOVE
-	dw Func_21ac3                      ; OBJ_INTERACTION_30
-	dw Func_21af1                      ; OBJ_INTERACTION_31
-	dw Func_21b08                      ; OBJ_INTERACTION_32
-	dw Func_21b0b                      ; OBJ_INTERACTION_33
-	dw ObjInteraction_Wormwould        ; OBJ_INTERACTION_WORMWOULD
-	dw Func_21b42                      ; OBJ_INTERACTION_35
-	dw Func_21b78                      ; OBJ_INTERACTION_36
-	dw Func_21573                      ; OBJ_INTERACTION_37
-	dw Func_21b89                      ; OBJ_INTERACTION_38
-	dw ObjInteraction_WaterDrop        ; OBJ_INTERACTION_WATER_DROP
-	dw Func_21c26                      ; OBJ_INTERACTION_3A
-	dw Func_21c56                      ; OBJ_INTERACTION_3B
-	dw Func_21c61                      ; OBJ_INTERACTION_3C
-	dw Func_21c86                      ; OBJ_INTERACTION_3D
-	dw ObjInteraction_PrinceFroggy     ; OBJ_INTERACTION_PRINCE_FROGGY
-	dw Func_21ca8                      ; OBJ_INTERACTION_3F
-	dw ObjInteraction_WaterTeleporting ; OBJ_INTERACTION_WATER_TELEPORTING
-	dw Func_21ce9                      ; OBJ_INTERACTION_41
-	dw Func_21cf8                      ; OBJ_INTERACTION_42
-	dw Func_207ed                      ; OBJ_INTERACTION_43
-	dw Func_21cfd                      ; OBJ_INTERACTION_44
-	dw Func_21d17                      ; OBJ_INTERACTION_45
-	dw Func_21d3b                      ; OBJ_INTERACTION_46
-	dw Func_21d64                      ; OBJ_INTERACTION_47
-	dw Func_21d6f                      ; OBJ_INTERACTION_48
-	dw Func_21d88                      ; OBJ_INTERACTION_49
-	dw ObjInteraction_ColourCoin       ; OBJ_INTERACTION_COLOUR_COIN
-	dw Func_21df8                      ; OBJ_INTERACTION_4B
-	dw ObjInteraction_BottomSting      ; OBJ_INTERACTION_BOTTOM_STING
-	dw Func_21e3e                      ; OBJ_INTERACTION_4D
-	dw Func_21e9c                      ; OBJ_INTERACTION_4E
-	dw Func_21ea6                      ; OBJ_INTERACTION_4F
-	dw Func_21ecd                      ; OBJ_INTERACTION_50
-	dw Func_21f01                      ; OBJ_INTERACTION_51
-	dw Func_21f28                      ; OBJ_INTERACTION_52
-	dw ObjInteraction_None             ; OBJ_INTERACTION_UNUSED_1
-	dw ObjInteraction_None             ; OBJ_INTERACTION_UNUSED_2
-	dw ObjInteraction_None             ; OBJ_INTERACTION_UNUSED_3
-	dw ObjInteraction_None             ; OBJ_INTERACTION_UNUSED_4
-	dw ObjInteraction_None             ; OBJ_INTERACTION_UNUSED_5
-	dw ObjInteraction_None             ; OBJ_INTERACTION_UNUSED_6
+	dw Func_20b6b                        ; OBJ_INTERACTION_00
+	dw Func_20d1d                        ; OBJ_INTERACTION_01
+	dw ObjInteraction_FrontSting         ; OBJ_INTERACTION_FRONT_STING
+	dw ObjInteraction_BackSting          ; OBJ_INTERACTION_BACK_STING
+	dw ObjInteraction_TopSting           ; OBJ_INTERACTION_TOP_STING
+	dw ObjInteraction_FullSting          ; OBJ_INTERACTION_FULL_STING
+	dw Func_20d81                        ; OBJ_INTERACTION_06
+	dw Func_20d8c                        ; OBJ_INTERACTION_07
+	dw Func_20deb                        ; OBJ_INTERACTION_08
+	dw Func_20e39                        ; OBJ_INTERACTION_09
+	dw Func_20e60                        ; OBJ_INTERACTION_0A
+	dw Func_20e6a                        ; OBJ_INTERACTION_0B
+	dw ObjInteraction_Walkable           ; OBJ_INTERACTION_WALKABLE
+	dw ObjInteraction_MusicalCoin        ; OBJ_INTERACTION_MUSICAL_COIN
+	dw ObjInteraction_Fire               ; OBJ_INTERACTION_FIRE
+	dw ObjInteraction_Richtertoffen      ; OBJ_INTERACTION_RICHTERTOFFEN
+	dw ObjInteraction_GreyKey            ; OBJ_INTERACTION_GREY_KEY
+	dw ObjInteraction_RedKey             ; OBJ_INTERACTION_RED_KEY
+	dw ObjInteraction_GreenKey           ; OBJ_INTERACTION_GREEN_KEY
+	dw ObjInteraction_BlueKey            ; OBJ_INTERACTION_BLUE_KEY
+	dw ObjInteraction_GreyTreasure       ; OBJ_INTERACTION_GREY_TREASURE
+	dw ObjInteraction_RedTreasure        ; OBJ_INTERACTION_RED_TREASURE
+	dw ObjInteraction_GreenTreasure      ; OBJ_INTERACTION_GREEN_TREASURE
+	dw ObjInteraction_BlueTreasure       ; OBJ_INTERACTION_BLUE_TREASURE
+	dw ObjInteraction_Omodonmeka         ; OBJ_INTERACTION_OMODONMEKA
+	dw ObjInteraction_Silky              ; OBJ_INTERACTION_SILKY
+	dw ObjInteraction_Food               ; OBJ_INTERACTION_FOOD
+	dw ObjInteraction_RegularCoin        ; OBJ_INTERACTION_REGULAR_COIN
+	dw ObjInteraction_Electric           ; OBJ_INTERACTION_ELECTRIC
+	dw ObjInteraction_InvisibilityPotion ; OBJ_INTERACTION_INVISIBILITY_POTION
+	dw ObjInteraction_Pneumo             ; OBJ_INTERACTION_PNEUMO
+	dw ObjInteraction_ZombieHead         ; OBJ_INTERACTION_ZOMBIE_HEAD
+	dw ObjInteraction_Bouncy             ; OBJ_INTERACTION_BOUNCY
+	dw ObjInteraction_FireBot            ; OBJ_INTERACTION_FIRE_BOT
+	dw ObjInteraction_Solid              ; OBJ_INTERACTION_SOLID
+	dw ObjInteraction_Omodon             ; OBJ_INTERACTION_OMODON
+	dw ObjInteraction_OrangeBird         ; OBJ_INTERACTION_ORANGE_BIRD
+	dw ObjInteraction_Vampire            ; OBJ_INTERACTION_VAMPIRE
+	dw ObjInteraction_Bubble             ; OBJ_INTERACTION_BUBBLE
+	dw ObjInteraction_Ice                ; OBJ_INTERACTION_ICE
+	dw ObjInteraction_Owl                ; OBJ_INTERACTION_OWL
+	dw ObjInteraction_Rail               ; OBJ_INTERACTION_RAIL
+	dw ObjInteraction_Haridama           ; OBJ_INTERACTION_HARIDAMA
+	dw ObjInteraction_AnonsterWave       ; OBJ_INTERACTION_ANONSTER_WAVE
+	dw ObjInteraction_AnonsterSilk       ; OBJ_INTERACTION_ANONSTER_SILK
+	dw ObjInteraction_Snow               ; OBJ_INTERACTION_SNOW
+	dw ObjInteraction_UnlitTorch         ; OBJ_INTERACTION_UNLIT_TORCH
+	dw ObjInteraction_Stove              ; OBJ_INTERACTION_STOVE
+	dw ObjInteraction_RoboMouse          ; OBJ_INTERACTION_ROBO_MOUSE
+	dw Func_21af1                        ; OBJ_INTERACTION_31
+	dw ObjInteraction_DollBoyHammer      ; OBJ_INTERACTION_DOLL_BOY_HAMMER
+	dw ObjInteraction_RollingRock        ; OBJ_INTERACTION_ROLLING_ROCK
+	dw ObjInteraction_Wormwould          ; OBJ_INTERACTION_WORMWOULD
+	dw ObjInteraction_Beam               ; OBJ_INTERACTION_BEAM
+	dw Func_21b78                        ; OBJ_INTERACTION_36
+	dw ObjInteraction_YellowBellyArrow   ; OBJ_INTERACTION_YELLOW_BELLY_ARROW
+	dw ObjInteraction_Teruteru           ; OBJ_INTERACTION_TERUTERU
+	dw ObjInteraction_WaterDrop          ; OBJ_INTERACTION_WATER_DROP
+	dw ObjInteraction_Pesce              ; OBJ_INTERACTION_PESCE
+	dw Func_21c56                        ; OBJ_INTERACTION_3B
+	dw ObjInteraction_Tadpole            ; OBJ_INTERACTION_TADPOLE
+	dw ObjInteraction_Hebarii            ; OBJ_INTERACTION_HEBARII
+	dw ObjInteraction_PrinceFroggy       ; OBJ_INTERACTION_PRINCE_FROGGY
+	dw ObjInteraction_Hand               ; OBJ_INTERACTION_HAND
+	dw ObjInteraction_WaterTeleporting   ; OBJ_INTERACTION_WATER_TELEPORTING
+	dw Func_21ce9                        ; OBJ_INTERACTION_41
+	dw ObjInteraction_Ink                ; OBJ_INTERACTION_INK
+	dw Func_207ed                        ; OBJ_INTERACTION_43
+	dw ObjInteraction_Jamano             ; OBJ_INTERACTION_JAMANO
+	dw ObjInteraction_Turtle             ; OBJ_INTERACTION_TURTLE
+	dw Func_21d3b                        ; OBJ_INTERACTION_46
+	dw Func_21d64                        ; OBJ_INTERACTION_47
+	dw Func_21d6f                        ; OBJ_INTERACTION_48
+	dw Func_21d88                        ; OBJ_INTERACTION_49
+	dw ObjInteraction_ColourCoin         ; OBJ_INTERACTION_COLOUR_COIN
+	dw ObjInteraction_MagicalSpiral      ; OBJ_INTERACTION_MAGICAL_SPIRAL
+	dw ObjInteraction_BottomSting        ; OBJ_INTERACTION_BOTTOM_STING
+	dw Func_21e3e                        ; OBJ_INTERACTION_4D
+	dw Func_21e9c                        ; OBJ_INTERACTION_4E
+	dw Func_21ea6                        ; OBJ_INTERACTION_4F
+	dw Func_21ecd                        ; OBJ_INTERACTION_50
+	dw Func_21f01                        ; OBJ_INTERACTION_51
+	dw Func_21f28                        ; OBJ_INTERACTION_52
+	dw ObjInteraction_None               ; OBJ_INTERACTION_UNUSED_1
+	dw ObjInteraction_None               ; OBJ_INTERACTION_UNUSED_2
+	dw ObjInteraction_None               ; OBJ_INTERACTION_UNUSED_3
+	dw ObjInteraction_None               ; OBJ_INTERACTION_UNUSED_4
+	dw ObjInteraction_None               ; OBJ_INTERACTION_UNUSED_5
+	dw ObjInteraction_None               ; OBJ_INTERACTION_UNUSED_6
 	assert_table_length NUM_OBJ_INTERACTIONS
 
 ObjInteraction_None:
@@ -1420,7 +1420,7 @@ Func_20b6b:
 	jp z, Func_205e7
 	cp TOUCH_PASS_THROUGH
 	jp z, ProcessInteractions.next_obj
-	jp .asm_20c41
+	jp .step_on_obj
 
 .check_water
 	ld a, [wWarioState]
@@ -1440,19 +1440,20 @@ Func_20b6b:
 	ld b, a
 	ld a, [wGrabState]
 	or b
-	jp nz, .asm_20c41
+	jp nz, .step_on_obj
 
 	ld a, [wPowerUpLevel]
 	cp GRAB_GLOVE
-	jp c, .asm_20c41
+	jp c, .step_on_obj
 	ld a, [wWarioState]
 	cp WST_LADDER_SCRATCHING
-	jp z, .asm_20c41
+	jp z, .step_on_obj
 	cp WST_LADDER_CLIMBING
-	jr c, .asm_20bc6
+	jr c, .not_on_ladder
 	cp WST_LADDER_SLIDING + 1
-	jp c, .asm_20c41
-.asm_20bc6
+	jp c, .step_on_obj
+
+.not_on_ladder
 	ld a, [wWarioScreenXPos]
 	ld b, a
 	ld a, [wObjScreenXPos]
@@ -1463,13 +1464,13 @@ Func_20b6b:
 	ld a, [wDirection]
 	and a
 	jr nz, .check_invincible_counter
-	jr .asm_20c41
+	jr .step_on_obj
 .asm_20bdd
 	ld a, INTERACTION_LEFT
 	ld [wInteractionSide], a
 	ld a, [wDirection]
 	and a
-	jr nz, .asm_20c41
+	jr nz, .step_on_obj
 .check_invincible_counter
 	ld a, [wInvincibleCounter]
 	cp 1
@@ -1499,7 +1500,7 @@ Func_20b6b:
 .heavy_obj
 	ld a, [wPowerUpLevel]
 	cp SUPER_GRAB_GLOVES
-	jr c, .asm_20c41
+	jr c, .step_on_obj
 	ld a, GRAB_PICK_UP | (1 << GRAB_HEAVY_F)
 	ld [wGrabState], a
 
@@ -1513,14 +1514,15 @@ Func_20b6b:
 	ld a, [wObjInteractionType]
 	bit HEAVY_OBJ_F, a
 	jr z, .asm_20c31
-	jr .asm_20c41
+	jr .step_on_obj
 .asm_20c31
 	farcall Func_1edd3
 	ret
 
-.asm_20c41
+.step_on_obj
 	jp StepOnObject
 
+; unreachable
 	ld a, [wWarioScreenXPos]
 	ld b, a
 	ld a, [wObjScreenXPos]
@@ -1685,7 +1687,7 @@ Func_20d8c:
 	ret nz
 	ld a, [wInteractionSide]
 	bit INTERACTION_DOWN_F, a
-	jr nz, .asm_20ddb
+	jr nz, .dive
 	ld a, [wWarioScreenXPos]
 	ld b, a
 	ld a, [wObjScreenXPos]
@@ -1696,7 +1698,7 @@ Func_20d8c:
 	ld [wInteractionSide], a
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
-	jr .asm_20dcb
+	jr .knock_back
 .asm_20dbe
 	ld a, [wInteractionSide]
 	or INTERACTION_LEFT
@@ -1704,11 +1706,11 @@ Func_20d8c:
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
 
-.asm_20dcb
+.knock_back
 	farcall SetState_SwimKnockBack
 	ret
 
-.asm_20ddb
+.dive
 	farcall StartDive
 	ret
 
@@ -1729,7 +1731,7 @@ Func_20deb:
 	jp nz, Func_207ed
 	jp Func_208f2
 
-Func_20e0f:
+ObjInteraction_Haridama:
 	ld a, [wInteractionSide]
 	bit INTERACTION_DOWN_F, a
 	jp nz, Func_20899
@@ -2128,18 +2130,21 @@ GetTreasure:
 	hcall UpdateAnimation
 	ret
 
-Func_21156:
+ObjInteraction_Omodonmeka:
 	ld a, [wJumpVelTable]
 	and a
 	jp nz, Func_2022c
+
 	ld b, OBJACTION_0C
 	call SetObjAction
+
 	ld a, [wTransformation]
 	cp TRANSFORMATION_FLAT_WARIO
 	jp z, SetState_FlatStretching
 	and a
 	jp nz, Func_2022c
 
+	; pick Wario up
 	ld a, $01
 	ld [wAutoMoveState], a
 	ld a, WST_PICKED_UP
@@ -2162,9 +2167,9 @@ Func_21156:
 	ld [wWarioStateCycles], a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
-
 	inc a
 	ld [wJumpVelTable], a
+
 	ld a, NUM_WIGGLES_TO_ESCAPE
 	ld [wPickedUpWiggleCounter], a
 
@@ -2232,7 +2237,7 @@ SetState_FlatStretching:
 	hcall UpdateAnimation
 	ret
 
-Func_21245:
+ObjInteraction_Silky:
 	ld a, [wInteractionSide]
 	and INTERACTION_UP | INTERACTION_DOWN
 	jr nz, .asm_21267
@@ -2285,11 +2290,12 @@ Func_2126a:
 
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
-	jr .asm_212b8
+	jr .set_ball_o_string
 .asm_212b3
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
-.asm_212b8
+
+.set_ball_o_string
 	play_sfx SFX_039
 
 	ld a, TRANSFORMATION_BALL_O_STRING_WARIO
@@ -2356,7 +2362,7 @@ Func_2126a:
 	hcall UpdateAnimation
 	ret
 
-Func_21358:
+ObjInteraction_Food:
 	ld a, [wIsCrouching]
 	and a
 	jp nz, Func_20a69
@@ -2367,10 +2373,10 @@ Func_21358:
 	bit TRANSFORMATIONF_PERSISTENT_F, a
 	jp nz, Func_20a69
 	cp TRANSFORMATION_FAT_WARIO
-	jr nz, .asm_21373
+	jr nz, .set_fat_wario
 	jp Func_20a69
 
-.asm_21373
+.set_fat_wario
 	call Func_20a63
 	ld a, TRANSFORMATION_FAT_WARIO
 	ld [wTransformation], a
@@ -2589,7 +2595,7 @@ ObjInteraction_Electric:
 	hcall UpdateAnimation
 	ret
 
-Func_21548:
+ObjInteraction_InvisibilityPotion:
 	call Func_20a63
 	ld a, [wInvincibleCounter]
 	and a
@@ -2602,13 +2608,13 @@ Func_21548:
 	farcall SetState_TurningInvisible
 	ret
 
-Func_21569:
+ObjInteraction_Pneumo:
 	ld a, [wInteractionSide]
 	bit INTERACTION_DOWN_F, a
-	jr nz, Func_21573
+	jr nz, ObjInteraction_YellowBellyArrow
 	jp Func_2022c
 
-Func_21573:
+ObjInteraction_YellowBellyArrow:
 	ld a, [wInvincibleCounter]
 	and a
 	ret nz
@@ -2625,7 +2631,7 @@ Func_21573:
 	farcall SetState_PuffyInflating
 	ret
 
-Func_215a2:
+ObjInteraction_ZombieHead:
 	ld a, [wInvincibleCounter]
 	and a
 	jp nz, Func_20a69
@@ -2696,7 +2702,7 @@ Func_2160a:
 	farcall SetState_BouncyStart
 	ret
 
-Func_2164f:
+ObjInteraction_FireBot:
 	ld a, [wInteractionSide]
 	and INTERACTION_UP | INTERACTION_DOWN
 	jp nz, StepOnObject
@@ -2805,7 +2811,7 @@ Func_2168b:
 	farcall SetState_FlatIdling
 	ret
 
-Func_21774:
+ObjInteraction_Omodon:
 	ld a, [wInteractionSide]
 	bit INTERACTION_UP_F, a
 	jp nz, Func_209ca
@@ -2831,7 +2837,7 @@ Func_217a9:
 	farcall DoJumpingBump
 	ret
 
-Func_217b9:
+ObjInteraction_OrangeBird:
 	ld a, [wInteractionSide]
 	and INTERACTION_UP | INTERACTION_DOWN
 	jr nz, .asm_217db
@@ -3107,16 +3113,16 @@ ObjInteraction_Rail:
 	hcall UpdateAnimation
 	ret
 
-Func_21a47:
+ObjInteraction_AnonsterSilk:
 	ld a, [wInteractionSide]
 	bit INTERACTION_UP_F, a
 	jp nz, StepOnObject
 ;	fallthrough
 
-Func_21a4f:
+ObjInteraction_AnonsterWave:
 	jp Func_2126a
 
-Func_21a52:
+ObjInteraction_Snow:
 	ld a, [wInvincibleCounter]
 	and a
 	jp nz, Func_20a69
@@ -3172,7 +3178,7 @@ Func_21abb:
 	call SetObjAction
 	jp Func_20a6f
 
-Func_21ac3:
+ObjInteraction_RoboMouse:
 	ld a, [wInteractionSide]
 	bit INTERACTION_UP_F, a
 	jr nz, .asm_21ae4
@@ -3196,7 +3202,7 @@ Func_21ac3:
 	jp nz, Func_20602
 	jp Func_20e6a
 .asm_21aee
-	jp Func_21cfd
+	jp ObjInteraction_Jamano
 
 Func_21af1:
 	ld a, [wInteractionSide]
@@ -3209,10 +3215,10 @@ Func_21af1:
 	jp nz, Func_217a9
 	jp Func_20a6f
 
-Func_21b08:
+ObjInteraction_DollBoyHammer:
 	jp Func_2160a
 
-Func_21b0b:
+ObjInteraction_RollingRock:
 	ld b, OBJACTION_06
 	call SetObjAction
 	ld a, [wIsRolling]
@@ -3237,7 +3243,7 @@ Func_21b3a:
 	ld b, OBJACTION_NONE
 	jp SetObjAction
 
-Func_21b42:
+ObjInteraction_Beam:
 	ld a, [wInvincibleCounter]
 	and a
 	ret nz
@@ -3270,7 +3276,7 @@ Func_21b78:
 .asm_21b86
 	jp Func_20939
 
-Func_21b89:
+ObjInteraction_Teruteru:
 	ld a, [wInteractionSide]
 	bit INTERACTION_DOWN_F, a
 	jp z, Func_2022c
@@ -3345,7 +3351,7 @@ ObjInteraction_WaterDrop:
 	jp z, ProcessInteractions.next_obj
 	jp RecoverFromTransformation
 
-Func_21c26:
+ObjInteraction_Pesce:
 	ld a, [wEnemyDirection]
 	cp DIRECTION_RIGHT
 	jr z, .asm_21c37
@@ -3370,7 +3376,7 @@ Func_21c56:
 	jp nz, Func_21aac
 	jp Func_20b6b
 
-Func_21c61:
+ObjInteraction_Tadpole:
 	ld a, [wInteractionSide]
 	and INTERACTION_UP | INTERACTION_DOWN
 	jp nz, StepOnObject
@@ -3379,17 +3385,17 @@ Func_21c61:
 	jr nz, .asm_21c7a
 	ld a, [wInteractionSide]
 	bit INTERACTION_RIGHT_F, a
-	jp nz, Func_21b0b
+	jp nz, ObjInteraction_RollingRock
 	jp Func_20e6a
 .asm_21c7a
 	ld a, [wInteractionSide]
 	bit INTERACTION_LEFT_F, a
-	jp nz, Func_21b0b
+	jp nz, ObjInteraction_RollingRock
 	jp Func_20e6a
 
 	ret ; stray ret
 
-Func_21c86:
+ObjInteraction_Hebarii:
 	ld a, [wInteractionSide]
 	and INTERACTION_UP | INTERACTION_DOWN
 	jp nz, Func_20e6a
@@ -3406,7 +3412,7 @@ ObjInteraction_PrinceFroggy:
 	jp nz, Func_2168b
 	jp Func_20b41
 
-Func_21ca8:
+ObjInteraction_Hand:
 	ld a, [wInvincibleCounter]
 	and a
 	ret nz
@@ -3441,11 +3447,11 @@ Func_21ce9:
 	jr nz, ObjInteraction_WaterTeleporting
 	jp Func_208f2
 
-Func_21cf8:
+ObjInteraction_Ink:
 	ld b, OBJACTION_06
 	jp SetObjAction
 
-Func_21cfd:
+ObjInteraction_Jamano:
 	ld a, ROOMTRANSITION_TELEPORT | ROOMTRANSITIONF_1 | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_3
 	ld [wRoomTransitionParam], a
 	call Func_206eb
@@ -3455,7 +3461,7 @@ Func_21cfd:
 	ld b, OBJACTION_TELEPORT
 	jp SetObjAction
 
-Func_21d17:
+ObjInteraction_Turtle:
 	ld a, [wInteractionSide]
 	bit INTERACTION_UP_F, a
 	jp nz, Func_209ca
@@ -3561,7 +3567,7 @@ CollectMusicalCoin:
 	call Func_20a63
 	jp ProcessInteractions.next_obj
 
-Func_21df8:
+ObjInteraction_MagicalSpiral:
 	ld a, [wInvincibleCounter]
 	and a
 	ret nz
