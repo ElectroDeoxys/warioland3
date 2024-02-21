@@ -5,12 +5,28 @@ DEF DOLLBOY_BARREL3 EQU 1 << 2 ; bottom barrel
 DEF DOLLBOY_DOLL    EQU 1 << 3
 
 ; wDollBoyHammerRange constants
-	const_def
-	const DOLLBOY_HAMMER_SHORT     ; 0
-	const DOLLBOY_HAMMER_MID_SHORT ; 1
-	const DOLLBOY_HAMMER_MID_LONG  ; 2
-	const DOLLBOY_HAMMER_LONG      ; 3
-DEF NUM_DOLLBOY_HAMMER_RANGES EQU const_value
+	const_def 1
+	const HAMMER_SHORT     ; 1
+	const HAMMER_MID_SHORT ; 2
+	const HAMMER_MID_LONG  ; 3
+	const HAMMER_LONG      ; 4
+
+; every frame Doll Boy checks to decide whether
+; to throw a hammer, if rDIV is bigger than or equal to
+; this number, then throw hammer of next range
+DEF DOLLBOY_THROW_HAMMER_ODDS EQU 250 ; out of 256
+
+DEF DOLLBOY_START_DELAY         EQU 40  ; delay before starting actions
+DEF DOLLBOY_THROW_HAMMER_DELAY  EQU 56  ; delay before throwing a hammer
+DEF DOLLBOY_WALKING_PHASE_DELAY EQU 80  ; delay before beginning walking phase
+DEF DOLLBOY_JUMP_DELAY          EQU 20  ; delay before jumping up/down
+DEF DOLLBOY_TURN_DELAY          EQU 32  ; delay before turning around
+DEF DOLLBOY_AFTER_HIT_DELAY     EQU 60  ; delay after hitting Wario with the hammer
+DEF DOLLBOY_STUN_DURATION       EQU 120 ; stun duration where Doll Boy is vulnerable
+DEF DOLLBOY_DEFEAT_DURATION     EQU 43  ; duration after getting defeated to fall off screen
+DEF BARREL_FLASH_DELAY          EQU 70  ; delay before a barrel starts flashing
+DEF BARREL_FLASH_DURATION       EQU 240 ; duration of barrel flashing
+DEF HAMMER_PLATFORM_DURATION    EQU 140 ; duration for hammer platform movement (going up or down)
 
 DollBoyFunc:
 	ld a, TRUE
@@ -66,7 +82,7 @@ DollBoyFunc:
 	xor a
 	ld [wCurObjVar1], a
 	ld [w1d147], a
-	ld [wDollBoyHammerRange], a ; DOLLBOY_HAMMER_SHORT
+	ld [wDollBoyHammerRange], a
 	ld a, DOLLBOY_BARREL1 | DOLLBOY_BARREL2 | DOLLBOY_BARREL3
 	ld [wDollBoyActiveBarrels], a
 
@@ -198,12 +214,13 @@ DollBoyFunc:
 	ret nz
 	ld hl, wDollBoyHammerRange
 	ld a, [hl]
-	cp NUM_DOLLBOY_HAMMER_RANGES
+	cp HAMMER_LONG
 	jr nz, .spawn_hammer
-	xor a ; DOLLBOY_HAMMER_SHORT
+	; restart hammer range cycle
+	xor a
 	ld [hl], a
 .spawn_hammer
-	inc [hl] ; queue up next range
+	inc [hl] ; next hammer range
 	play_sfx SFX_0A2
 	ld bc, ObjParams_DollBoyHammer
 	jp CreateObjectAtRelativePos
@@ -239,12 +256,12 @@ DollBoyFunc:
 	cp $08
 	ret z
 	ldh a, [rDIV]
-	cp 250
+	cp DOLLBOY_THROW_HAMMER_ODDS
 	ret c
-	; rDIV >= 250, throw hammer
+	; rDIV >= DOLLBOY_THROW_HAMMER_ODDS, throw hammer
 	ld de, Frameset_6963b
 	call SetObjectFramesetPtr
-	ld a, 56
+	ld a, DOLLBOY_THROW_HAMMER_DELAY
 	ld [hli], a ; wCurObjStateDuration
 	ld a, $01
 	ld [hl], a ; wCurObjVar1
@@ -261,7 +278,7 @@ DollBoyFunc:
 	and HEAVY_OBJ
 	or OBJ_INTERACTION_0B
 	ld [hli], a
-	ld a, 80
+	ld a, DOLLBOY_WALKING_PHASE_DELAY
 	ld [wCurObjStateDuration], a
 	ret
 
@@ -336,7 +353,7 @@ DollBoyFunc:
 	xor a
 	ld [hl], a ; wCurObjVar3
 	call SetObjectFramesetPtr
-	ld a, 120
+	ld a, DOLLBOY_STUN_DURATION
 	ld [hli], a ; wCurObjStateDuration
 	ld a, $ff
 	ld [hl], a ; wCurObjVar1
@@ -473,7 +490,7 @@ DollBoyFunc:
 	ld [hld], a
 	xor a
 	ld [hld], a ; wCurObjVar3
-	ld a, 43
+	ld a, DOLLBOY_DEFEAT_DURATION
 	ld [wCurObjStateDuration], a
 	ld bc, .Defeated
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -551,21 +568,30 @@ DollBoyFunc:
 	dec [hl]
 	jr .handle_walk_movement
 .asm_50e86
+
+	; jump if x < $18 || x >= $78
 	ld a, [wCurObjScreenXPos]
 	cp $78
 	jr nc, .handle_walk_movement
 	cp $18
 	jr c, .handle_walk_movement
+
+	; jump if Wario's y < $28
 	ld a, [wWarioScreenYPos]
 	cp $28
 	jr c, .handle_walk_movement
 	ld b, a
+
+	; jump if y >= $a0
 	ld a, [wCurObjScreenYPos]
 	cp $a0
 	jr nc, .handle_walk_movement
+
 	sub b
-	jr nc, .asm_50eab
-	cp $e1
+	jr nc, .asm_50eab ; y >= Wario's y
+
+	; jump if y >= Wario's y - $1f
+	cp -$1f
 	jr nc, .handle_walk_movement
 	; jump to platform below
 	ld a, $5a
@@ -584,7 +610,7 @@ DollBoyFunc:
 	dec l
 	ld a, $1e
 	ld [hld], a ; wCurObjVar1
-	ld a, 20
+	ld a, DOLLBOY_JUMP_DELAY
 	ld [hl], a ; wCurObjStateDuration
 	ret
 
@@ -664,7 +690,7 @@ DollBoyFunc:
 	ld de, Frameset_6965f
 .set_turn_frameset
 	call SetObjectFramesetPtr
-	ld a, 32
+	ld a, DOLLBOY_TURN_DELAY
 	ld [hli], a ; wCurObjStateDuration
 	xor a
 	ld [wCurObjVar3], a
@@ -703,7 +729,7 @@ DollBoyFunc:
 	ld [hld], a
 	ld a, LOW(.WaitThenDoNothing)
 	ld [hld], a
-	ld a, 60
+	ld a, DOLLBOY_AFTER_HIT_DELAY
 	ld [wCurObjStateDuration], a
 	ret
 
@@ -913,7 +939,7 @@ DollBoyBarrelFunc:
 	ldh a, [rDIV]
 	and %11
 	ld b, a
-	ld a, 70
+	ld a, BARREL_FLASH_DELAY
 	add b
 	; b = value between 70 and 73
 	ld hl, wCurObjStateDuration
@@ -928,7 +954,7 @@ DollBoyBarrelFunc:
 	ret nz
 	ld de, Frameset_696a8
 	call SetObjectFramesetPtr
-	ld a, 240
+	ld a, BARREL_FLASH_DURATION
 	ld [hli], a ; wCurObjStateDuration
 	ld a, $02
 	ld [hl], a ; wCurObjVar1
@@ -1072,30 +1098,34 @@ DollBoyHammerFunc:
 	ld a, [wCurObjState]
 	and a
 	jr nz, .hit
+
+	; if var 1 is set, this hammer just moves right
 	ld a, [wCurObjVar1]
 	and a
 	jp nz, MoveObjectRight_Fast
+
 	ld bc, Data_60860
 	call ApplyObjYMovement
+
 	ld a, [wDollBoyHammerRange]
-	cp DOLLBOY_HAMMER_MID_SHORT
-	jr nz, .check_mid_long
-; mid-short
+	cp HAMMER_SHORT
+	jr nz, .check_mid_short
+; short
 	ld bc, Data_60ae0
 	jp ApplyObjXMovement
-.check_mid_long
-	cp DOLLBOY_HAMMER_MID_LONG
-	jr nz, .check_long
-; mid-long
+.check_mid_short
+	cp HAMMER_MID_SHORT
+	jr nz, .check_mid_long
+; mid-short
 	ld bc, Data_60b00
 	jp ApplyObjXMovement
-.check_long
-	cp DOLLBOY_HAMMER_LONG
-	jr nz, .short
-; long
+.check_mid_long
+	cp HAMMER_MID_LONG
+	jr nz, .long
+; mid-long
 	ld bc, Data_60b30
 	jp ApplyObjXMovement
-.short
+.long
 	ld bc, Data_60b60
 	jp ApplyObjXMovement
 
@@ -1238,7 +1268,7 @@ HammerPlatformFunc:
 	ld [hld], a
 	xor a
 	ld [wCurObjState], a
-	ld a, 140
+	ld a, HAMMER_PLATFORM_DURATION
 	ld [wCurObjStateDuration], a
 	ret
 
