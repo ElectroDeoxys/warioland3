@@ -456,10 +456,10 @@ DoObjectAction:
 	dw .Teleport ; OBJACTION_TELEPORT
 	dw .Action11 ; OBJACTION_11
 	dw .Action12 ; OBJACTION_12
-	dw .Func_6179c ; OBJACTION_13
+	dw .Action13 ; OBJACTION_13
 	assert_table_length NUM_OBJ_ACTIONS
 
-.Func_6179c:
+.Action13:
 	ld hl, wCurObjAction
 	ld a, 15 | (1 << 7)
 	ld [hld], a

@@ -1601,7 +1601,7 @@ CalculateBackupSRAMChecksum2:
 	push af
 	ld a, BANK("SRAM3")
 	sramswitch
-	ld hl, s0a000
+	ld hl, s3a000
 	ld de, $0
 	ld bc, $2000
 .loop_sram_3

@@ -2548,7 +2548,7 @@ UpdateSwitchableBlocks:
 	push af
 	ld a, BANK("SRAM1")
 	sramswitch
-	ld hl, s0a000
+	ld hl, s1a000
 .loop_1
 	ld a, [hli]
 	and $7f
@@ -2577,7 +2577,7 @@ UpdateSwitchableBlocks:
 	push af
 	ld a, BANK("SRAM2")
 	sramswitch
-	ld hl, s0a000
+	ld hl, s2a000
 .loop_2
 	ld a, [hli]
 	and $7f
@@ -2607,7 +2607,7 @@ UpdateSwitchableBlocks:
 	push af
 	ld a, BANK("SRAM1")
 	sramswitch
-	ld hl, s0a000
+	ld hl, s1a000
 .loop_3
 	ld a, [hli]
 	and $7f
@@ -2635,7 +2635,7 @@ UpdateSwitchableBlocks:
 	push af
 	ld a, BANK("SRAM2")
 	sramswitch
-	ld hl, s0a000
+	ld hl, s2a000
 .loop_4
 	ld a, [hli]
 	and $7f

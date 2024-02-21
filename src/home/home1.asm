@@ -523,7 +523,7 @@ LoadLevelLayoutAndObjects::
 
 	push hl
 	ld a, [wceef]
-	and $3c
+	and %111100
 	jr nz, .skip_loading_objects
 	call DecompressLevelObjectsMap
 .skip_loading_objects
