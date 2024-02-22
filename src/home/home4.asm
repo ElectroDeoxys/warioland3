@@ -228,7 +228,10 @@ SetObjectFramesetPtr::
 	ld [hli], a ; OBJ_FRAMESET_OFFSET
 	ret
 
-Func_30fb::
+; some bosses hold the number of hits required to be defeated
+; in the substate variable of their object struct
+; this routine decrements this counter to a minimum of 0
+DecrementRemainingBossHits::
 	ld l, OBJ_SUBSTATE
 	ld a, [hl]
 	and $0f

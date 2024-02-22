@@ -379,7 +379,7 @@ TeruteruFunc:
 	ld hl, wCurObjState
 	ld a, $46
 	ld [hld], a
-	call Func_30fb
+	call DecrementRemainingBossHits
 	ld a, [hl]
 	and $0f
 	dec a
@@ -404,7 +404,7 @@ TeruteruFunc:
 	ld hl, wCurObjState
 	ld a, $47
 	ld [hld], a
-	call Func_30fb
+	call DecrementRemainingBossHits
 	ld a, [hl]
 	and $0f
 	dec a

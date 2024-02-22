@@ -624,7 +624,7 @@ YellowBellyBodyFunc:
 	ld [hld], a
 	ld a, LOW(.Func_517ee)
 	ld [hld], a
-	call Func_30fb
+	call DecrementRemainingBossHits
 	ld a, [hl]
 	and $0f
 	dec a

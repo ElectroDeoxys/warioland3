@@ -351,7 +351,7 @@ ScowlerFunc:
 	and HEAVY_OBJ
 	or OBJ_INTERACTION_07
 	ld [hld], a
-	jp Func_30fb
+	jp DecrementRemainingBossHits
 .asm_54765
 	xor a
 	ld [hld], a

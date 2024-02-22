@@ -217,7 +217,7 @@ MuddeeFunc:
 	ld [hli], a
 	xor a
 	ld [wCurObjVar3], a
-	jp Func_30fb
+	jp DecrementRemainingBossHits
 .asm_557b1
 	ld l, OBJ_STATE_DURATION
 	ld a, [hl]

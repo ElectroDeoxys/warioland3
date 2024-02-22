@@ -799,7 +799,7 @@ AnonsterFunc:
 	or OBJ_INTERACTION_0B
 	ld [hld], a
 	play_sfx SFX_VANISH
-	call Func_30fb
+	call DecrementRemainingBossHits
 	ld a, [hld]
 	rlca
 	jr c, .asm_50580

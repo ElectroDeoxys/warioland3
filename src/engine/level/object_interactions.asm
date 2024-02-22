@@ -507,7 +507,7 @@ AttackObject:
 	ld a, [hl]
 	sbc $00
 	ld [de], a
-	jr .asm_203a0
+	jr .spawn_stars
 
 .asm_20382
 	ld a, INTERACTION_LEFT
@@ -530,9 +530,10 @@ AttackObject:
 	sbc $00
 	ld [de], a
 
-.asm_203a0
+.spawn_stars
 	ld b, PARTICLE_STARS
 	farcall CreateParticle
+
 	ld b, OBJACTION_ATTACK
 	call SetObjAction
 	ld a, [wTransformation]

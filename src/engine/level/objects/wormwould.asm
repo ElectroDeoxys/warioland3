@@ -1,3 +1,11 @@
+DEF WORMWOULD_NUM_HITS             EQU 3  ; number of hits to defeat
+DEF WORMWOULD_IDLE_DURATION        EQU 43 ; duration between shooting rocks when above ground
+DEF WORMWOULD_SHOOT_ROCK_DURATION  EQU 69 ; how long it takes for the whole shooting animation
+DEF WORMWOULD_SHOOT_ROCK_DELAY     EQU 48 ; delay between starting shooting animation and spawning a rock
+DEF WORMWOULD_BURROW_DELAY         EQU 26 ; delay of starting to burrow after being attacked
+DEF WORMWOULD_UNDERGROUND_DURATION EQU 30 ; duration of waiting underground before popping up
+DEF WORMWOULD_HURT_DURATION        EQU 50 ; duration of hurt state
+
 WormwouldFunc:
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Init)
@@ -8,7 +16,7 @@ WormwouldFunc:
 	res OBJSUBFLAG_UNINITIALISED_F, [hl]
 	ld a, [hl]
 	and OBJSUBFLAGS_MASK
-	or $4 | OBJSUBFLAG_UNK_4 | OBJSUBFLAG_HDIR
+	or (WORMWOULD_NUM_HITS + 1) | OBJSUBFLAG_UNK_4 | OBJSUBFLAG_HDIR
 	ld [hl], a
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, 7
@@ -41,11 +49,14 @@ WormwouldFunc:
 	ld a, TRUE
 	ld [wIsBossBattle], a
 
-.asm_5406d
+.check_change_side
 	ld hl, wCurObjSubState
 	ld a, [hl]
 	rlca
-	jr nc, .asm_540a2 ; OBJSUBFLAG_HDIR_F
+	jr nc, .check_if_change_to_left_side ; OBJSUBFLAG_HDIR_F
+
+	; checks whether to continue on the left side
+	; or to change position to right side
 	ld a, [wCurObjFlags]
 	rra
 	rra
@@ -73,7 +84,9 @@ WormwouldFunc:
 	inc [hl]
 	jr .set_direction_frameset
 
-.asm_540a2
+.check_if_change_to_left_side
+	; checks whether to continue on the right side
+	; or to change position to left side
 	ld a, [wCurObjFlags]
 	rra
 	rra
@@ -103,9 +116,9 @@ WormwouldFunc:
 .set_direction_frameset
 	call SetObjectFramesetPtr
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_541b5)
+	ld a, HIGH(.Main)
 	ld [hld], a
-	ld a, LOW(.Func_541b5)
+	ld a, LOW(.Main)
 	ld [hld], a
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
@@ -139,12 +152,12 @@ WormwouldFunc:
 	ld a, [hl]
 	ld l, OBJ_SUBSTATE
 	cp $0a
-	jr z, .spaw_low_rock
+	jr z, .spawn_low_rock
 	and a
 	ret nz
 	ld l, OBJ_STATE
 	jr .asm_5414b
-.spaw_low_rock
+.spawn_low_rock
 	play_sfx SFX_TEMPLE_ROCK
 	ld a, [hld]
 	rlca
@@ -174,7 +187,7 @@ WormwouldFunc:
 .asm_5414b
 	ld a, 1
 	ld [wCurObjStateDuration], a
-.asm_54150
+.set_burrowing
 	ld a, $5c
 	ld [hld], a ; wCurObjState
 	ld a, [hld] ; wCurObjSubState
@@ -186,7 +199,7 @@ WormwouldFunc:
 	ld de, Frameset_69701
 	jp SetObjectFramesetPtr
 
-.asm_54163
+.attacked
 	ld a, $34
 	ld [hld], a
 	ld a, [hld]
@@ -198,26 +211,27 @@ WormwouldFunc:
 	ld de, Frameset_696e0
 .asm_54172
 	call SetObjectFramesetPtr
-	ld a, $1a
+	ld a, WORMWOULD_BURROW_DELAY
 	ld [hli], a
 	ret
 
-.asm_54179
+.after_attack
 	ld l, OBJ_STATE_DURATION
 	ld a, [hl]
-	cp $10
+	cp 16
 	play_sfx z, SFX_0A6
 	dec [hl]
 	ret nz
 	ld l, OBJ_STATE
-	jr .asm_54150
+	jr .set_burrowing
 
-.asm_5418e
+.raising
 	ld l, OBJ_VAR_3
 	ld a, [wCurObjSubState]
 	and $0f
-	cp $03
+	cp (WORMWOULD_NUM_HITS + 1) - 1
 	jr nc, .raise
+	; has only 1 remaining hit
 	ld a, [hl] ; wCurObjVar3
 	cp $1e
 	jr z, .asm_54131
@@ -227,39 +241,39 @@ WormwouldFunc:
 	ld l, OBJ_SUBSTATE
 	ld a, [hl]
 	and $0f
-	cp $04
+	cp WORMWOULD_NUM_HITS + 1
 	jr c, .asm_54209
-.asm_541ab
+.set_idle
 	xor a
 	ld [wCurObjState], a
-	ld a, 43
+	ld a, WORMWOULD_IDLE_DURATION
 	ld [wCurObjStateDuration], a
 	ret
 
-.Func_541b5:
+.Main:
 	ld hl, wCurObjState
 	ld a, [hl]
 	and a
 	jr z, .asm_541e9
 	cp $34
-	jr z, .asm_54179
+	jr z, .after_attack
 	cp $5a
 	jr z, .shoot_rock_high
 	cp $2d
-	jr z, .asm_5418e
+	jr z, .raising
 	cp $5b
 	jp z, .shoot_rock_low
 	cp $5c
-	jp z, .asm_542cb
+	jp z, .burrowing
 	and $fe
-	cp $04
-	jr z, .asm_54163
+	cp OBJSTATE_ATTACKED_LEFT_START ; or OBJSTATE_ATTACKED_RIGHT_START
+	jr z, .attacked
 	cp $08
 	jp z, .asm_5414b
-	cp $0a
-	jr z, .asm_54257
+	cp OBJSTATE_VANISH_TOUCH
+	jr z, .smash_attacked
 	cp $3a
-	jp z, .asm_54286
+	jp z, .hurt
 	xor a
 	ld [hl], a
 	ret
@@ -268,7 +282,7 @@ WormwouldFunc:
 	ld a, [wCurObjScreenYPos]
 	add $20
 	cp $20
-	jr nc, .asm_54203
+	jr nc, .not_on_upper_part
 	; wCurObjScreenYPos < 0
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.DoNothing)
@@ -280,7 +294,7 @@ WormwouldFunc:
 	call UpdateLevelMusic
 	ret
 
-.asm_54203
+.not_on_upper_part
 	; wCurObjScreenYPos >= 0
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
@@ -296,7 +310,7 @@ WormwouldFunc:
 	ld de, Frameset_696d7
 .asm_54215
 	call SetObjectFramesetPtr
-	ld a, 69
+	ld a, WORMWOULD_SHOOT_ROCK_DURATION
 	ld [hli], a ; wCurObjFrameDuration
 	ld a, $5a
 	ld [wCurObjState], a
@@ -307,7 +321,7 @@ WormwouldFunc:
 	dec [hl]
 	ld a, [hl]
 	ld l, OBJ_SUBSTATE
-	cp $15
+	cp WORMWOULD_SHOOT_ROCK_DURATION - WORMWOULD_SHOOT_ROCK_DELAY
 	jr z, .spawn_high_rock
 	and a
 	ret nz
@@ -320,7 +334,7 @@ WormwouldFunc:
 	ld de, Frameset_696ce
 .asm_54239
 	call SetObjectFramesetPtr
-	jp .asm_541ab
+	jp .set_idle
 
 .spawn_high_rock
 	play_sfx SFX_TEMPLE_ROCK
@@ -333,7 +347,7 @@ WormwouldFunc:
 	ld bc, ObjParams_HighRollingRockRight
 	jp CreateObjectAtRelativePos
 
-.asm_54257
+.smash_attacked
 	ld a, $3a
 	ld [hld], a ; wCurObjState
 	ld a, [hld] ; wCurObjSubState
@@ -345,23 +359,23 @@ WormwouldFunc:
 	ld de, Frameset_696e5
 .asm_54266
 	call SetObjectFramesetPtr
-	ld a, $32
+	ld a, WORMWOULD_HURT_DURATION
 	ld [hli], a
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
 	and HEAVY_OBJ
 	or OBJ_INTERACTION_0B
 	ld [hli], a
-	ld a, $f0
-	ld [hl], a
-	call Func_30fb
+	ld a, -16
+	ld [hl], a ; OBJ_COLLBOX_TOP
+	call DecrementRemainingBossHits
 	dec l
 	xor a
 	ld [hl], a
 	play_sfx SFX_VANISH
 	ret
 
-.asm_54286
+.hurt
 	ld bc, Data_60dd0
 	call ApplyObjYMovement
 	ld hl, wCurObjStateDuration
@@ -377,10 +391,11 @@ WormwouldFunc:
 	and $0f
 	dec a
 	jr nz, .asm_542b6
+	; no more remaining hits
 	stop_music2
 	ret
 .asm_542b6
-	ld a, $e6
+	ld a, -26
 	ld [wCurObjCollBoxTop], a
 	ld a, [hld]
 	rlca
@@ -391,21 +406,21 @@ WormwouldFunc:
 	ld de, Frameset_696ea
 	jp SetObjectFramesetPtr
 
-.asm_542cb
+.burrowing
 	ld l, OBJ_VAR_1
 	ld a, [wCurObjSubState]
 	and $0f
-	cp $04
-	jr c, .asm_542e0
+	cp WORMWOULD_NUM_HITS + 1
+	jr c, .lower_quickly
 	dec l
 	ld a, [hli] ; wCurObjStateDuration
 	and a
-	jr nz, .asm_542e0
-	; lower slowly
+	jr nz, .lower_quickly
+; lower slowly
 	ld a, [wGlobalCounter]
 	rra
 	ret nc
-.asm_542e0
+.lower_quickly
 	ld a, [wCurObjYPos + 0]
 	ld c, a
 	ld a, [hli] ; wCurObjVar1
@@ -415,22 +430,24 @@ WormwouldFunc:
 	ld c, [hl]
 	cp c
 	jp nz, MoveObjectDown
+
+	; y pos == y pos in var 1 and 2
 	ld a, [wCurObjSubState]
 	and $0f
 	dec a
-	jr z, .asm_5430b
-	ld a, 30
+	jr z, .set_defeated
+	ld a, WORMWOULD_UNDERGROUND_DURATION
 	ld [wCurObjStateDuration], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_54335)
+	ld a, HIGH(.Underground)
 	ld [hld], a
-	ld a, LOW(.Func_54335)
+	ld a, LOW(.Underground)
 	ld [hld], a
 	ld l, OBJ_FLAGS
 	set OBJFLAG_INVISIBLE_F, [hl]
 	ret
 
-.asm_5430b
+.set_defeated
 	ld a, $21
 	ld [wCurObjVar3], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -444,12 +461,12 @@ WormwouldFunc:
 	play_sfx SFX_0A7
 	ret
 
-.Func_54335:
+.Underground:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjScreenYPos]
 	cp $3a
-	jr nc, .asm_54353
+	jr nc, .wait_underground
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.DoNothing)
 	ld [hld], a
@@ -460,13 +477,13 @@ WormwouldFunc:
 	call UpdateLevelMusic
 	ret
 
-.asm_54353
+.wait_underground
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
 	ld l, OBJ_FLAGS
 	res OBJFLAG_INVISIBLE_F, [hl]
-	jp .asm_5406d
+	jp .check_change_side
 
 .DefeatedRaise:
 	ld a, NO_ACTIONS_FOR 1
@@ -580,12 +597,12 @@ RollingRockFunc_Right:
 RollingRockFunc:
 	ld a, [wCurObjVar1]
 	and a
-	jr nz, .asm_54422
+	jr nz, .low_rock
 	ld bc, Data_608b0
-	jr .asm_54425
-.asm_54422
+	jr .got_y_movement
+.low_rock
 	ld bc, Data_60900
-.asm_54425
+.got_y_movement
 	ld a, [wCurObjState]
 	and a
 	jp z, ApplyObjYMovement
@@ -661,7 +678,7 @@ PalmTreeFunc:
 	ld [hld], a
 	ld a, LOW(.Update)
 	ld [hld], a
-	ld hl, Pals_544dd
+	ld hl, PalmTreePals
 	ld de, wTempPals2 palette 7
 	ld c, 7
 	ld b, 1
@@ -692,7 +709,7 @@ PalmTreeFunc:
 	ld [wCurObjAction], a
 	ret
 
-Pals_544dd:
+PalmTreePals:
 	rgb 31, 31, 31
 	rgb  0, 23,  5
 	rgb  0, 12,  5
