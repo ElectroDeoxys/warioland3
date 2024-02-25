@@ -641,7 +641,7 @@ ScowlerFunc:
 .asm_54978
 	call MoveObjectDown_Slow
 	ld bc, Data_60a90
-	jp Func_34a0
+	jp ApplyObjXMovement_Loop
 
 FloatingRingSpawnerFunc:
 	ld hl, wCurObjUpdateFunction + 1

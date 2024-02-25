@@ -1235,7 +1235,7 @@ ObjParams_MagicSpiralLeft:
 	db $00 ; var1
 	db $00 ; var2
 	db $00 ; var3
-	db $5 | OBJSUBFLAG_VDIR ; substate
+	db 5 | OBJSUBFLAG_VDIR ; substate
 	db $00 ; state
 	dw MagicSpiralFunc
 	db OBJFLAG_PRIORITY ; obj flags
@@ -1252,7 +1252,7 @@ ObjParams_MagicSpiralRight:
 	db $00 ; var1
 	db $00 ; var2
 	db $00 ; var3
-	db $5 | OBJSUBFLAG_VDIR | OBJSUBFLAG_HDIR ; substate
+	db 5 | OBJSUBFLAG_VDIR | OBJSUBFLAG_HDIR ; substate
 	db $00 ; state
 	dw MagicSpiralFunc
 	db OBJFLAG_PRIORITY ; obj flags

@@ -1,40 +1,57 @@
+DEF WOLFENBOSS_NUM_HITS                EQU   3  ; number of hits to defeat
+DEF WOLFENBOSS_WHISP_WAIT_DURATION     EQU  20  ; duration of whisp waiting to rise
+DEF WOLFENBOSS_WHISP_RISE_DURATION     EQU  64  ; duration of whisp rising
+DEF WOLFENBOSS_SMOKE_ENTRANCE_DURATION EQU  19  ; duration of smoke animation when entering field
+DEF WOLFENBOSS_SMOKE_EXIT_DURATION     EQU  14  ; duration of smoke animation when exiting field
+DEF WOLFENBOSS_START_DELAY             EQU  40  ; delay before starting actions
+DEF WOLFENBOSS_DISAPPEAR_DELAY         EQU  70  ; delay before exiting field
+DEF WOLFENBOSS_SPIRAL_ATTACK_DURATION  EQU 103  ; duration of spiral attack
+DEF WOLFENBOSS_IGUGARI_ATTACK_DURATION EQU  72  ; duration of igugari attack
+DEF WOLFENBOSS_SPAWN_SPIRAL_DELAY      EQU  16  ; delay before spawning spiral
+DEF WOLFENBOSS_SPAWN_IGUGARI_DELAY     EQU  16  ; delay before spawning igugari
+DEF WOLFENBOSS_AFTER_ATTACK_DELAY      EQU  19  ; delay after attack animation
+DEF WOLFENBOSS_HURT_DURATION           EQU  60  ; duration of hurt state
+DEF WOLFENBOSS_AFTER_HURT_DELAY        EQU  40  ; delay after hurt animation
+
 WolfenbossFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_55e8d)
+	ld a, HIGH(.WhispWaiting)
 	ld [hld], a
-	ld a, LOW(.Func_55e8d)
+	ld a, LOW(.WhispWaiting)
 	ld [hld], a
 	ld l, OBJ_SUBSTATE
 	res OBJSUBFLAG_UNINITIALISED_F, [hl]
 	ld a, [hl]
-	and $f0
-	or $04
+	and OBJSUBFLAGS_MASK
+	or WOLFENBOSS_NUM_HITS + 1
 	ld [hl], a
 	ld l, OBJ_COLLBOX_RIGHT
-	ld a, $02
+	ld a, 2
 	ld [hld], a
-	ld a, $fd
+	ld a, -3
 	ld [hld], a
-	ld a, $01
+	ld a, 1
 	ld [hl], a
 	ld de, Frameset_69e97
 	call SetObjectFramesetPtr
-	ld a, $14
+	ld a, WOLFENBOSS_WHISP_WAIT_DURATION
 	ld [hli], a
 	inc l
+
 	xor a
-	ld [hl], a
-	ld [wDollBoyActiveBarrels], a
-	ld [w1d147], a
-	ld a, $04
-	ld [wDollBoyHammerRange], a
-	ld a, $02
-	ld [w1d149], a
+	ld [hl], a ; OBJ_VAR_2
+	ld [wWolfenbossNextAttack], a
+	ld [wWolfenbossIgaguriOrKuriActive], a
+	ld a, WOLFENBOSS_NUM_HITS + 1
+	ld [wWolfenbossRemainingHits], a
+	; set up so that there is always 2 spiral attacks at the start
+	ld a, 2
+	ld [wWolfenbossConsecutiveSpirals], a
 	ret
 
-.Func_55e8d:
+.WhispWaiting:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjFlags
@@ -43,95 +60,98 @@ WolfenbossFunc:
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	ld bc, Data_60650
-	jp nz, Func_34a0
+	jp nz, ApplyObjXMovement_Loop
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_55ec4)
+	ld a, HIGH(.WhispRising)
 	ld [hld], a
-	ld a, LOW(.Func_55ec4)
+	ld a, LOW(.WhispRising)
 	ld [hld], a
 	ld de, Frameset_69ea0
 	call SetObjectFramesetPtr
-	ld a, $40
+	ld a, WOLFENBOSS_WHISP_RISE_DURATION
 	ld [hli], a
 	ld a, TRUE
 	ld [wIsBossBattle], a
 	stop_music2
 	ret
 
-.Func_55ec4:
+.WhispRising:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	jp nz, MoveObjectUp
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_55eea)
+	ld a, HIGH(.SmokeEntrance)
 	ld [hld], a
-	ld a, LOW(.Func_55eea)
+	ld a, LOW(.SmokeEntrance)
 	ld [hld], a
 	ld de, Frameset_69ea9
 	call SetObjectFramesetPtr
-	ld a, $13
+	ld a, WOLFENBOSS_SMOKE_ENTRANCE_DURATION
 	ld [hli], a
 	play_sfx SFX_0AA
 	ret
 
-.Func_55eea:
+.SmokeEntrance:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_55f20)
+	ld a, HIGH(.EmergeFromSmoke)
 	ld [hld], a
-	ld a, LOW(.Func_55f20)
+	ld a, LOW(.EmergeFromSmoke)
 	ld [hld], a
 	ld l, OBJ_FRAMESET_PTR
-	ld a, $0e
+	ld a, LOW(Frameset_69e0e)
 	ld [hli], a
-	ld a, $5e
+	ld a, HIGH(Frameset_69e0e)
 	ld [hli], a
 	xor a
-	ld [hli], a
+	ld [hli], a ; OBJ_FRAME_DURATION
 	inc a
 	inc a
-	ld [hli], a
+	; a = $2
+	ld [hli], a ; OBJ_FRAMESET_OFFSET
 	ld l, OBJ_COLLBOX_TOP
-	ld a, $f8
+	ld a, -8
 	ld [hli], a
-	ld a, $0c
+	ld a, 12
 	ld [hli], a
-	ld a, $f8
+	ld a, -8
 	ld [hli], a
-	ld a, $07
+	ld a, 7
 	ld [hli], a
 	ld a, $02
 	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
 	ret
 
-.Func_55f20:
+.EmergeFromSmoke:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
+	; move up slowly while animation plays
 	ld a, [wCurObjFrame]
 	and a
 	jp nz, MoveObjectUp_Slow
+	; animation is over, continue to next state
 	ld de, Frameset_69dcb
 	call SetObjectFramesetPtr
-	ld a, $28
-	ld [hli], a
+	ld a, WOLFENBOSS_START_DELAY
+	ld [hli], a ; OBJ_STATE_DURATION
 	xor a
-	ld [hli], a
-	ld [hl], a
+	ld [hli], a ; OBJ_VAR_1
+	ld [hl], a ; OBJ_VAR_2
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_55f41)
+	ld a, HIGH(.StartWait)
 	ld [hld], a
-	ld a, LOW(.Func_55f41)
+	ld a, LOW(.StartWait)
 	ld [hld], a
 	ret
 
-.Func_55f41:
+.StartWait:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
@@ -139,19 +159,19 @@ WolfenbossFunc:
 	ret nz
 	inc l
 	xor a
-	ld [hli], a
+	ld [hli], a ; OBJ_STATE_DURATION
 	inc l
-	ld [hli], a
+	ld [hli], a ; OBJ_VAR_2
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_55fb3)
+	ld a, HIGH(.Main)
 	ld [hld], a
-	ld a, LOW(.Func_55fb3)
+	ld a, LOW(.Main)
 	ld [hld], a
 	ld de, Frameset_69dec
 	call SetObjectFramesetPtr
 	ret
 
-.Func_55f5f:
+.SmokeExit:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
@@ -161,7 +181,7 @@ WolfenbossFunc:
 	ld [wCurObjFlags], a
 	ret
 
-.Func_55f6e:
+.Disappear:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
@@ -169,17 +189,17 @@ WolfenbossFunc:
 	ret nz
 	ld de, Frameset_69ea9
 	call SetObjectFramesetPtr
-	ld a, $0e
+	ld a, WOLFENBOSS_SMOKE_EXIT_DURATION
 	ld [hli], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_55f5f)
+	ld a, HIGH(.SmokeExit)
 	ld [hld], a
-	ld a, LOW(.Func_55f5f)
+	ld a, LOW(.SmokeExit)
 	ld [hld], a
 	play_sfx SFX_0AA
 	ret
 
-.asm_55f92
+.start_disappear
 	ld a, [wCurObjSubState]
 	rlca
 	jr c, .asm_55f9d
@@ -189,29 +209,32 @@ WolfenbossFunc:
 	ld de, Frameset_69e1f
 .asm_55fa0
 	call SetObjectFramesetPtr
-	ld a, $46
+	ld a, WOLFENBOSS_DISAPPEAR_DELAY
 	ld [hli], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_55f6e)
+	ld a, HIGH(.Disappear)
 	ld [hld], a
-	ld a, LOW(.Func_55f6e)
+	ld a, LOW(.Disappear)
 	ld [hld], a
 	xor a
 	ld [wBossBattleMusic], a
 	ret
 
-.Func_55fb3:
+.Main:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
+
+	; if Wario was hit, then exit the field
 	ld a, [wTransformation]
 	and a
-	jr nz, .asm_55f92
+	jr nz, .start_disappear
+
 	ld hl, wCurObjState
 	ld a, [hl]
 	and $fe
-	jr z, .asm_56025
+	jr z, .do_attacks_and_movement
 	cp $08
-	jr nz, .asm_55fec
+	jr nz, .check_hurt_animation
 	ld a, $38
 	ld [hld], a
 	ld a, [hld]
@@ -223,7 +246,7 @@ WolfenbossFunc:
 	ld de, Frameset_69e8e
 .asm_55fd9
 	call SetObjectFramesetPtr
-	ld a, $3c
+	ld a, WOLFENBOSS_HURT_DURATION
 	ld [hli], a
 	ld l, OBJ_SUBSTATE
 	ld a, [hl]
@@ -231,26 +254,28 @@ WolfenbossFunc:
 	dec a
 	ret z
 	dec [hl]
-	ld hl, wDollBoyHammerRange
+	ld hl, wWolfenbossRemainingHits
 	dec [hl]
 	ret
-.asm_55fec
+
+.check_hurt_animation
 	cp $38
-	jr nz, .asm_56023
+	jr nz, .restart_attacks_and_movement
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
-	jr z, .asm_56005
+	jr z, .done_hurt
 	ld a, [hl]
-	cp $29
+	cp 41
 	jp c, MoveObjectDown_Slow
 	ret nz
 	play_sfx SFX_0A9
 	ret
-.asm_56005
-	ld a, $28
-	ld [hli], a
+
+.done_hurt
+	ld a, WOLFENBOSS_AFTER_HURT_DELAY
+	ld [hli], a ; OBJ_STATE_DURATION
 	ld a, $04
-	ld [hl], a
+	ld [hl], a ; OBJ_VAR_1
 	ld l, OBJ_FLAGS
 	res OBJFLAG_NO_COLLISION_F, [hl]
 	ld l, OBJ_STATE
@@ -263,61 +288,66 @@ WolfenbossFunc:
 .asm_5601d
 	ld de, Frameset_69e1f
 	jp SetObjectFramesetPtr
-.asm_56023
+
+.restart_attacks_and_movement
 	xor a
 	ld [hl], a
-.asm_56025
+.do_attacks_and_movement
 	ld l, OBJ_VAR_1
 	ld a, [hl]
 	and a
-	jp z, .asm_560e3
+	jp z, .do_movement
 	cp $01
-	jr z, .asm_5605b
+	jr z, .do_attack
 	cp $02
-	jr z, .asm_56055
+	jr z, .wait_then_start_movement
 	cp $03
-	jr z, .asm_560ac
+	jr z, .turning
 	cp $04
-	jr z, .asm_5603d
+	jr z, .after_hurt
 	ret
-.asm_5603d
+
+.after_hurt
 	call MoveObjectUp_Slow
 	ld l, OBJ_FRAMESET_OFFSET
 	ld a, [hld]
-	cp $04
-	jr nz, .asm_56055
+	cp $4
+	jr nz, .wait_then_start_movement
 	ld a, [hld]
 	and a
-	jr nz, .asm_56055
+	jr nz, .wait_then_start_movement
 	ld a, [wCurObjSubState]
 	and $0f
-	cp $01
-	jp z, .Func_56183
-.asm_56055
+	cp 1 ; no more remaining hits
+	jp z, .defeated
+
+.wait_then_start_movement
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	ret nz
-	jr .asm_560c3
-.asm_5605b
-	ld a, [wDollBoyActiveBarrels]
+	jr .start_movement
+
+.do_attack
+	ld a, [wWolfenbossNextAttack]
 	ld c, a
 	and a
-	jr z, .asm_56066
-	ld b, $38
-	jr .asm_56068
-.asm_56066
-	ld b, $57
-.asm_56068
+	jr z, .spiral_delay
+; igugari delay
+	ld b, WOLFENBOSS_IGUGARI_ATTACK_DURATION - WOLFENBOSS_SPAWN_IGUGARI_DELAY
+	jr .got_attack_delay
+.spiral_delay
+	ld b, WOLFENBOSS_SPIRAL_ATTACK_DURATION - WOLFENBOSS_SPAWN_SPIRAL_DELAY
+.got_attack_delay
 	ld l, OBJ_STATE_DURATION
 	ld a, [hl]
 	cp b
-	jr z, .asm_56088
+	jr z, .spawn_igugari_or_spiral
 	dec [hl]
 	ret nz
-	ld a, $13
-	ld [hli], a
+	ld a, WOLFENBOSS_AFTER_ATTACK_DELAY
+	ld [hli], a ; OBJ_STATE_DURATION
 	ld a, $02
-	ld [hl], a
+	ld [hl], a ; OBJ_VAR_1
 	ld a, [wCurObjSubState]
 	rlca
 	jr c, .asm_56082
@@ -326,26 +356,29 @@ WolfenbossFunc:
 .asm_56082
 	ld de, Frameset_69e00
 	jp SetObjectFramesetPtr
-.asm_56088
+
+.spawn_igugari_or_spiral
 	dec [hl]
 	ld a, [wCurObjSubState]
 	rlca
 	dec c
-	jr c, .asm_5609e
-	jr z, .asm_56098
+	jr c, .spawn_on_right
+; spawn on left
+	jr z, .spawn_igugari_left
 	ld bc, ObjParams_MagicSpiralLeft
 	jp CreateObjectAtRelativePos
-.asm_56098
+.spawn_igugari_left
 	ld bc, ObjParams_IgaguriLeft
 	jp CreateObjectAtRelativePos
-.asm_5609e
-	jr z, .asm_560a6
+.spawn_on_right
+	jr z, .spawn_igugari_right
 	ld bc, ObjParams_MagicSpiralRight
 	jp CreateObjectAtRelativePos
-.asm_560a6
+.spawn_igugari_right
 	ld bc, ObjParams_IgaguriRight
 	jp CreateObjectAtRelativePos
-.asm_560ac
+
+.turning
 	ld bc, Data_604c0
 	call ApplyObjYMovement_Loop
 	ld hl, wCurObjStateDuration
@@ -358,7 +391,7 @@ WolfenbossFunc:
 	ld a, [wCurObjVar2]
 	and a
 	jr nz, .asm_560d9
-.asm_560c3
+.start_movement
 	xor a
 	ld [wCurObjVar1], a
 	ld a, [wCurObjSubState]
@@ -372,21 +405,24 @@ WolfenbossFunc:
 .asm_560d9
 	xor a
 	ld [wCurObjVar2], a
-	bit 7, [hl]
+	bit OBJSUBFLAG_HDIR_F, [hl]
 	jr z, .asm_56115
 	jr .asm_5613e
-.asm_560e3
+
+.do_movement
 	ld a, [wGlobalCounter]
 	and %11111
 	play_sfx z, SFX_0C3
 	ld bc, Data_604c0
 	call ApplyObjYMovement_Loop
+
 	ld a, [wCurObjSubState]
 	rlca
-	jr c, .asm_56127
+	jr c, .moving_right
+; moving left
 	ld a, [wGlobalCounter]
 	and a
-	jr nz, .asm_5611a
+	jr nz, .move_left
 	ld a, [wWarioScreenXPos]
 	ld b, a
 	ld a, [wCurObjScreenXPos]
@@ -397,18 +433,19 @@ WolfenbossFunc:
 	jr .asm_56122
 .asm_56115
 	ld de, Frameset_69df1
-	jr .asm_56141
-.asm_5611a
+	jr .start_attack
+.move_left
 	ld a, [wCurObjScreenXPos]
 	cp $18
 	jp nz, MoveObjectLeft_Slow
 .asm_56122
 	ld de, Frameset_69dd5
-	jr .asm_56179
-.asm_56127
+	jr .start_turning
+
+.moving_right
 	ld a, [wGlobalCounter]
 	and a
-	jr nz, .asm_5616e
+	jr nz, .move_right
 	ld a, [wCurObjScreenXPos]
 	ld b, a
 	ld a, [wWarioScreenXPos]
@@ -419,57 +456,63 @@ WolfenbossFunc:
 	jr .asm_56176
 .asm_5613e
 	ld de, Frameset_69df6
-.asm_56141
+
+.start_attack
 	call SetObjectFramesetPtr
-	ld a, [w1d149]
+
+	; decide which attack to use
+	ld a, [wWolfenbossConsecutiveSpirals]
 	and a
-	jr z, .asm_56150
+	jr z, .alternate_attacks
+	; forced spiral attack
 	dec a
-	ld [w1d149], a
-	jr .asm_56156
-.asm_56150
-	ld a, [w1d147]
+	ld [wWolfenbossConsecutiveSpirals], a
+	jr .set_spiral_attack
+.alternate_attacks
+	; only attack with Igaguri if last attack was spiral
+	ld a, [wWolfenbossIgaguriOrKuriActive]
 	and a
-	jr z, .asm_5615c
-.asm_56156
-	ld b, $00
-	ld a, $67
-	jr .asm_56165
-.asm_5615c
+	jr z, .set_igugari_attack
+.set_spiral_attack
+	ld b, $00 ; var 1
+	ld a, WOLFENBOSS_SPIRAL_ATTACK_DURATION ; duration
+	jr .got_next_attack
+.set_igugari_attack
+	ld a, TRUE
+	ld [wWolfenbossIgaguriOrKuriActive], a
+	ld b, $01 ; var 1
+	ld a, WOLFENBOSS_IGUGARI_ATTACK_DURATION ; duration
+.got_next_attack
+	ld [hli], a ; OBJ_STATE_DURATION
 	ld a, $01
-	ld [w1d147], a
-	ld b, $01
-	ld a, $48
-.asm_56165
-	ld [hli], a
-	ld a, $01
-	ld [hl], a
+	ld [hl], a ; OBJ_VAR_1
 	ld a, b
-	ld [wDollBoyActiveBarrels], a
+	ld [wWolfenbossNextAttack], a
 	ret
-.asm_5616e
+
+.move_right
 	ld a, [wCurObjScreenXPos]
 	cp $98
 	jp nz, MoveObjectRight_Slow
 .asm_56176
 	ld de, Frameset_69dde
-.asm_56179
+.start_turning
 	call SetObjectFramesetPtr
-	ld a, $1b
-	ld [hli], a
+	ld a, 27
+	ld [hli], a ; OBJ_STATE_DURATION
 	ld a, $03
-	ld [hl], a
+	ld [hl], a ; OBJ_VAR_1
 	ret
 
-.Func_56183:
+.defeated
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_561a9)
+	ld a, HIGH(.DefeatFall)
 	ld [hld], a
-	ld a, LOW(.Func_561a9)
+	ld a, LOW(.DefeatFall)
 	ld [hld], a
 	ld l, OBJ_SUBSTATE
 	ld a, [hl]
-	and $80
+	and $0 | OBJSUBFLAG_HDIR
 	ld [hld], a
 	xor a
 	ld [hl], a
@@ -479,7 +522,7 @@ WolfenbossFunc:
 	ld de, Frameset_69e05
 	jp SetObjectFramesetPtr
 
-.Func_561a9:
+.DefeatFall:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjScreenYPos]
@@ -498,32 +541,33 @@ WolfenbossFunc:
 	ld [wIsBossBattle], a
 	call Func_56326
 
+	; search for Platform's object struct
 	ld a, LOW(wObj1)
 	ld b, LOW(wObj1)
 	ld h, HIGH(wObj1)
-.asm_561df
+.loop_objects
 	ld l, OBJ_UNK_07
 	add l
 	ld l, a
 	ld a, [hl] ; OBJ_UNK_07
 	cp $5a
-	jr nz, .asm_561f0
+	jr nz, .next_object
 	ld a, l
 	sub OBJ_UNK_07 - OBJ_FLAGS
 	ld l, a
 	ld a, [hli] ; OBJ_FLAGS
 	rra
-	jr c, .asm_561f9
-.asm_561f0
+	jr c, .found_platform_obj
+.next_object
 	ld a, b
 	cp LOW(wObj8)
 	ret z
 	add OBJ_STRUCT_LENGTH
 	ld b, a
-	jr .asm_561df
-.asm_561f9
+	jr .loop_objects
+.found_platform_obj
 	ld a, l
-	add $1a
+	add OBJ_STATE - OBJ_UNK_01
 	ld l, a
 	ld a, $2f
 	ld [hl], a
@@ -531,112 +575,119 @@ WolfenbossFunc:
 
 MagicSpiralFunc:
 	ld hl, wCurObjFlags
-	set 3, [hl]
+	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_56216)
+	ld a, HIGH(.Grow)
 	ld [hld], a
-	ld a, LOW(.Func_56216)
+	ld a, LOW(.Grow)
 	ld [hld], a
 	play_sfx SFX_0C2
-.Func_56216:
+.Grow:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
-	jr z, .asm_56235
+	jr z, .done_grow
 	ld a, [hl]
-	cp $45
+	cp 69
 	jr nz, .asm_5622c
 	ld de, Frameset_69e39
 	jp SetObjectFramesetPtr
 .asm_5622c
-	cp $26
+	cp 38
 	ret nz
 	ld de, Frameset_69e42
 	jp SetObjectFramesetPtr
-.asm_56235
-	ld a, $08
+.done_grow
+	ld a, 8
 	ld [hl], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_56241)
+	ld a, HIGH(.Move)
 	ld [hld], a
-	ld a, LOW(.Func_56241)
+	ld a, LOW(.Move)
 	ld [hld], a
 	ret
 
-.Func_56241:
+.Move:
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
 	and a
-	jr z, .asm_56253
+	jr z, .skip_sfx
 	dec [hl]
 	play_sfx z, SFX_07C
-.asm_56253
+.skip_sfx
 	ld a, [wTransformation]
 	and a
-	jr nz, .asm_562a2
-	ld a, [wDollBoyHammerRange]
+	jr nz, .disappear
+	ld a, [wWolfenbossRemainingHits]
 	dec a
-	jr z, .asm_562c3
+	jr z, .destroy
 	ld hl, wCurObjSubState
-	bit 6, [hl]
+	bit OBJSUBFLAG_VDIR_F, [hl]
 	ld a, [wCurObjScreenYPos]
-	jr nz, .asm_56276
+	jr nz, .moving_down
+; moving up
 	cp $18
-	jr c, .asm_56272
+	jr c, .set_move_down
 	call MoveObjectUp
-	jr .asm_56284
-.asm_56272
-	set 6, [hl]
+	jr .done_vertical_movement
+.set_move_down
+	set OBJSUBFLAG_VDIR_F, [hl]
 	jr .asm_56281
-.asm_56276
+.moving_down
 	cp SCREEN_HEIGHT_PX
-	jr nc, .asm_5627f
+	jr nc, .set_move_up
 	call MoveObjectDown
-	jr .asm_56284
-.asm_5627f
-	res 6, [hl]
+	jr .done_vertical_movement
+.set_move_up
+	res OBJSUBFLAG_VDIR_F, [hl]
+
 .asm_56281
-	call .asm_5629d
-.asm_56284
+	call .reflect
+.done_vertical_movement
 	ld l, OBJ_SUBSTATE
 	bit OBJSUBFLAG_HDIR_F, [hl]
 	ld a, [wCurObjScreenXPos]
-	jr nz, .asm_56296
+	jr nz, .moving_right
+; moving left
 	cp $10
 	jp nc, MoveObjectLeft
-	set 7, [hl]
-	jr .asm_5629d
-.asm_56296
+	set OBJSUBFLAG_HDIR_F, [hl]
+	jr .reflect
+.moving_right
 	cp SCREEN_WIDTH_PX
 	jp c, MoveObjectRight
-	res 7, [hl]
-.asm_5629d
+	res OBJSUBFLAG_HDIR_F, [hl]
+
+.reflect
+	; each time there is a reflection
+	; (either horizontally or vertically)
+	; then decrement substatus
 	dec [hl]
 	ld a, [hl]
 	and $0f
 	ret nz
-.asm_562a2
+.disappear
 	ld de, Frameset_69eb2
 	call SetObjectFramesetPtr
-	ld a, $1b
+	ld a, 27
 	ld [hli], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_562b9)
+	ld a, HIGH(.Disappear)
 	ld [hld], a
-	ld a, LOW(.Func_562b9)
+	ld a, LOW(.Disappear)
 	ld [hld], a
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ret
 
-.Func_562b9:
+.Disappear:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
-.asm_562c3
+.destroy
 	xor a
 	ld [wCurObjFlags], a
 	ret
@@ -646,9 +697,9 @@ WolfenbossPlatformFunc:
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_562ef)
+	ld a, HIGH(.WaitOpen)
 	ld [hld], a
-	ld a, LOW(.Func_562ef)
+	ld a, LOW(.WaitOpen)
 	ld [hld], a
 	ld de, Frameset_69e72
 	call SetObjectFramesetPtr
@@ -656,30 +707,30 @@ WolfenbossPlatformFunc:
 	res OBJSUBFLAG_UNINITIALISED_F, [hl]
 	set OBJSUBFLAG_UNK_4_F, [hl]
 	ld l, OBJ_COLLBOX_RIGHT
-	ld a, $07
+	ld a, 7
 	ld [hld], a
-	ld a, $f8
+	ld a, -8
 	ld [hld], a
-	ld a, $08
+	ld a, 8
 	ld [hl], a
 	ret
 
-.Func_562ef:
-	ld a, $02
+.WaitOpen:
+	ld a, 2
 	ld [wCurObjFrameDuration], a
 	ld a, [wCurObjState]
 	cp $2f
 	ret nz
 	ld hl, wCurObjUpdateFunction + 1
-	ld a, HIGH(.Func_56309)
+	ld a, HIGH(.Open)
 	ld [hld], a
-	ld a, LOW(.Func_56309)
+	ld a, LOW(.Open)
 	ld [hld], a
 	ld a, $50
 	ld [wCurObjStateDuration], a
 	ret
 
-.Func_56309:
+.Open:
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
@@ -689,13 +740,13 @@ WolfenbossPlatformFunc:
 	xor a
 	ld [hl], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_5631e)
+	ld a, HIGH(.Disappear)
 	ld [hld], a
-	ld a, LOW(.Func_5631e)
+	ld a, LOW(.Disappear)
 	ld [hld], a
 	ret
 
-.Func_5631e:
+.Disappear:
 	ld hl, wCurObjFlags
 	bit OBJFLAG_ON_SCREEN_F, [hl]
 	jp nz, Func_3326
@@ -717,67 +768,71 @@ IgaguriFunc:
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
-	jr z, .asm_5636d
+	jr z, .done_grow
 	ld a, [hl]
-	cp $2b
+	cp 43
 	jr nz, .asm_56364
 	ld de, Frameset_69e80
 	jp SetObjectFramesetPtr
 .asm_56364
-	cp $18
+	cp 24
 	ret nz
 	ld de, Frameset_69e4b
 	jp SetObjectFramesetPtr
-.asm_5636d
+
+.done_grow
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_563a2)
+	ld a, HIGH(.Fall)
 	ld [hld], a
-	ld a, LOW(.Func_563a2)
+	ld a, LOW(.Fall)
 	ld [hld], a
 	ld de, Frameset_69e4b
 	call SetObjectFramesetPtr
-	ld a, $28
+	ld a, 40
 	ld [hli], a
 	ld a, $03
-	ld [hli], a
-	ld a, [wDollBoyHammerRange]
-	cp $03
-	jr c, .asm_56394
+	ld [hli], a ; OBJ_VAR_1
+	ld a, [wWolfenbossRemainingHits]
+	cp 2 + 1
+	jr c, .last_hit_1
 	play_sfx SFX_101
 	ld a, $02
-	jr .asm_5639e
-.asm_56394
+	jr .got_var_2
+.last_hit_1
 	play_sfx SFX_067
 	ld a, $01
-.asm_5639e
-	ld [hli], a
+.got_var_2
+	ld [hli], a ; OBJ_VAR_2
 	xor a
-	ld [hl], a
+	ld [hl], a ; OBJ_VAR_3
 	ret
 
-.Func_563a2:
+.Fall:
 	ld a, [wTransformation]
 	and a
-	jr z, .asm_563ad
+	jr z, .no_transformation_1
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
-.asm_563ad
+.no_transformation_1
 	ld a, $02
 	ld [wCurObjFrameDuration], a
-	ld a, [wDollBoyHammerRange]
-	cp $03
-	jr c, .asm_563c5
+	ld a, [wWolfenbossRemainingHits]
+	cp 2 + 1
+	jr c, .arc_movement
+	; adjust y position 4 pixels down
 	ld hl, wCurObjYPos
 	ld a, [hl]
-	add $04
+	add $4
 	ld [hli], a
-	jr nc, .asm_563cb
+	jr nc, .check_floor
 	inc [hl]
-	jr .asm_563cb
-.asm_563c5
+	jr .check_floor
+.arc_movement
+	; igaguri is thrown upwards
+	; before falling to the floor
 	ld bc, Data_60d80
 	call ApplyObjYMovement
-.asm_563cb
+.check_floor
 	ld hl, wCurObjYPos
 	ld a, [hli]
 	ldh [hYPosLo], a
@@ -789,16 +844,19 @@ IgaguriFunc:
 	ldh [hXPosHi], a
 	call Func_352b
 	and a
-	jr z, .asm_56416
+	jr z, .do_horizontal_movement
+
+	; collide with floor
 	ld hl, wCurObjYPos
 	ldh a, [hYPosLo]
 	ld [hli], a
 	ldh a, [hYPosHi]
 	ld [hl], a
-	call .Func_5647b
-	ld a, [wDollBoyHammerRange]
-	cp $03
-	jr nc, .asm_56469
+	call .ground_shake
+	ld a, [wWolfenbossRemainingHits]
+	cp 2 + 1
+	jr nc, .skip_bounce
+	; is on last hit, track Wario's position
 	ld hl, wCurObjSubState
 	ld a, [wWarioScreenXPos]
 	add $2a
@@ -806,45 +864,51 @@ IgaguriFunc:
 	ld a, [wCurObjScreenXPos]
 	add $2a
 	cp b
-	jr c, .asm_56408
-	res 7, [hl]
-	jr .asm_5640a
-.asm_56408
-	set 7, [hl]
-.asm_5640a
+	jr c, .track_right
+; track left
+	res OBJSUBFLAG_HDIR_F, [hl]
+	jr .do_bounce
+.track_right
+	set OBJSUBFLAG_HDIR_F, [hl]
+.do_bounce
 	dec l
 	xor a
 	ld [hld], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_56430)
+	ld a, HIGH(.Bounce)
 	ld [hld], a
-	ld a, LOW(.Func_56430)
+	ld a, LOW(.Bounce)
 	ld [hld], a
 	ret
-.asm_56416
+
+.do_horizontal_movement
 	ld hl, wCurObjSubState
 	bit OBJSUBFLAG_HDIR_F, [hl]
 	ld a, [wCurObjScreenXPos]
-	jr nz, .asm_56428
+	jr nz, .moving_right
+; moving left
 	cp $10
 	jp nc, MoveObjectLeftByVar2
-	set 7, [hl]
+	; reverse horizontal direction
+	set OBJSUBFLAG_HDIR_F, [hl]
 	ret
-.asm_56428
+.moving_right
 	cp SCREEN_WIDTH_PX
 	jp c, MoveObjectRightByVar2
-	res 7, [hl]
+	; reverse horizontal direction
+	res OBJSUBFLAG_HDIR_F, [hl]
 	ret
 
-.Func_56430
+.Bounce
 	ld a, [wTransformation]
 	and a
-	jr z, .asm_5643b
+	jr z, .no_transformation_2
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
-.asm_5643b
-	ld a, $02
+.no_transformation_2
+	ld a, $2
 	ld [wCurObjFrameDuration], a
+
 	ld bc, Data_60e00
 	call ApplyObjYMovement
 	ld hl, wCurObjYPos
@@ -858,7 +922,9 @@ IgaguriFunc:
 	ldh [hXPosHi], a
 	call Func_352b
 	and a
-	jr z, .asm_56416
+	jr z, .do_horizontal_movement
+
+	; collide with floor
 	ld hl, wCurObjYPos
 	ldh a, [hYPosLo]
 	ld [hli], a
@@ -867,11 +933,11 @@ IgaguriFunc:
 	ld l, OBJ_VAR_1
 	dec [hl]
 	jr nz, .asm_56477
-.asm_56469
+.skip_bounce
 	ld hl, wCurObjUpdateFunction + 1
-	ld a, HIGH(.Func_56488)
+	ld a, HIGH(.Hatch)
 	ld [hld], a
-	ld a, LOW(.Func_56488)
+	ld a, LOW(.Hatch)
 	ld [hld], a
 	xor a
 	ld [wCurObjVar1], a
@@ -879,18 +945,18 @@ IgaguriFunc:
 .asm_56477
 	xor a
 	ld [wCurObjVar3], a
-.Func_5647b:
+.ground_shake
 	play_sfx SFX_061
-	ld b, $18
+	ld b, 24
 	jp DoGroundShake
 
-.Func_56488:
+.Hatch:
 	ld a, [wTransformation]
 	and a
-	jr z, .asm_56493
+	jr z, .no_transformation_3
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
-.asm_56493
+.no_transformation_3
 	ld hl, wCurObjVar1
 	ld a, [hl]
 	and a
@@ -901,14 +967,14 @@ IgaguriFunc:
 	jr z, .asm_564ce
 	ret
 .asm_564a3
-	ld a, $02
+	ld a, $2
 	ld [wCurObjFrameDuration], a
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	ret nz
-	ld a, $3c
+	ld a, 60
 	ld [hli], a
-	inc [hl]
+	inc [hl] ; OBJ_VAR_1
 	ret
 .asm_564b1
 	ld a, [wGlobalCounter]
@@ -917,22 +983,22 @@ IgaguriFunc:
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	ret nz
-	ld a, $0e
+	ld a, 14
 	ld [hli], a
-	inc [hl]
+	inc [hl] ; OBJ_VAR_1
 	ld de, Frameset_69e59
 	jp SetObjectFramesetPtr
 .asm_564ce
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
-	jr z, .asm_564e5
+	jr z, .destroy
 	ld a, [hl]
-	cp $05
+	cp 5
 	ret nz
 	play_sfx SFX_0C4
 	ld bc, ObjParams_Kuri
 	jp CreateObjectFromCurObjPos
-.asm_564e5
+.destroy
 	xor a
 	ld [wCurObjFlags], a
 	ret
@@ -953,16 +1019,16 @@ KuriFunc:
 	ldh [hXPosHi], a
 	call Func_352b
 	and a
-	ret z
+	ret z ; not yet reach the floor
 	ld hl, wCurObjYPos
 	ldh a, [hYPosLo]
 	ld [hli], a
 	ldh a, [hYPosHi]
 	ld [hl], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_5653c)
+	ld a, HIGH(.Landed)
 	ld [hld], a
-	ld a, LOW(.Func_5653c)
+	ld a, LOW(.Landed)
 	ld [hld], a
 	ld l, OBJ_SUBSTATE
 	ld a, [wWarioScreenXPos]
@@ -972,22 +1038,23 @@ KuriFunc:
 	add $2a
 	cp b
 	jr c, .asm_5652d
-	set 7, [hl]
+	set OBJSUBFLAG_HDIR_F, [hl]
 	ret
 .asm_5652d
-	res 7, [hl]
+	res OBJSUBFLAG_HDIR_F, [hl]
 	ret
 
-.asm_56530
-	bit 7, [hl]
-	jr z, .asm_56562
-	jr .asm_56566
-.asm_56536
-	bit 7, [hl]
-	jr nz, .asm_56562
-	jr .asm_56566
+.switch_direction_if_moving_left
+	bit OBJSUBFLAG_HDIR_F, [hl]
+	jr z, .switch_direction
+	jr .set_walking
 
-.Func_5653c:
+.switch_direction_if_moving_right
+	bit OBJSUBFLAG_HDIR_F, [hl]
+	jr nz, .switch_direction
+	jr .set_walking
+
+.Landed:
 	ld a, [wTransformation]
 	and a
 	jr z, .asm_56547
@@ -997,64 +1064,70 @@ KuriFunc:
 	ld hl, wCurObjState
 	ld a, [hld]
 	and a
-	jr z, .asm_56569
-	cp $02
-	jr z, .asm_56530
-	cp $03
-	jr z, .asm_56536
-	cp $0a
-	jr z, .asm_565a0
-	cp $04
-	jr z, .asm_565a7
-	cp $05
-	jr z, .asm_565ae
-.asm_56562
+	jr z, .walking
+	cp OBJSTATE_BUMP_LEFT_START
+	jr z, .switch_direction_if_moving_left
+	cp OBJSTATE_BUMP_RIGHT_START
+	jr z, .switch_direction_if_moving_right
+	cp OBJSTATE_VANISH_TOUCH
+	jr z, .vanish
+	cp OBJSTATE_ATTACKED_LEFT_START
+	jr z, .attacked_left
+	cp OBJSTATE_ATTACKED_RIGHT_START
+	jr z, .attacked_right
+.switch_direction
 	ld a, [hl]
-	xor $80
+	xor OBJSUBFLAG_HDIR
 	ld [hl], a
-.asm_56566
+
+.set_walking
 	inc l
 	xor a
 	ld [hld], a
-.asm_56569
+
+.walking
 	ld l, OBJ_FLAGS
 	bit OBJFLAG_ON_SCREEN_F, [hl]
-	jr nz, .asm_56572
+	jr nz, .on_screen_1
+	; destroy itself
 	xor a
 	ld [hl], a
 	ret
-.asm_56572
+.on_screen_1
 	ld a, [wTransformation]
 	and a
-	jr nz, .asm_56587
+	jr nz, .skip_sfx
 	ld a, [wGlobalCounter]
 	and %111
 	play_sfx z, SFX_06A
-.asm_56587
+.skip_sfx
 	ld l, OBJ_SUBSTATE
 	ld a, [hl]
 	rlca
 	ld a, [wCurObjScreenXPos]
-	jr c, .asm_56598
+	jr c, .moving_right
+; moving left
 	cp $10
 	jp nc, MoveObjectLeft
-	set 7, [hl]
+	set OBJSUBFLAG_HDIR_F, [hl]
 	ret
-.asm_56598
+.moving_right
 	cp SCREEN_WIDTH_PX
 	jp c, MoveObjectRight
-	res 7, [hl]
+	res OBJSUBFLAG_HDIR_F, [hl]
 	ret
-.asm_565a0
-	ld hl, w1d147
+
+.vanish
+	ld hl, wWolfenbossIgaguriOrKuriActive
 	dec [hl]
 	jp VanishObject2
-.asm_565a7
-	set 7, [hl]
+
+.attacked_left
+	set OBJSUBFLAG_HDIR_F, [hl]
 	ld de, Frameset_69e60
 	jr .asm_565b3
-.asm_565ae
-	res 7, [hl]
+.attacked_right
+	res OBJSUBFLAG_HDIR_F, [hl]
 	ld de, Frameset_69e60
 .asm_565b3
 	inc l
@@ -1062,45 +1135,46 @@ KuriFunc:
 	ld [hl], a
 	ld l, OBJ_FLAGS
 	set OBJFLAG_GRABBED_F, [hl]
-	ld a, $03
+	ld a, 3
 	ld [wCurObjVar2], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_565ca)
+	ld a, HIGH(.Launched)
 	ld [hld], a
-	ld a, LOW(.Func_565ca)
+	ld a, LOW(.Launched)
 	ld [hld], a
 	jp SetObjectFramesetPtr
 
-.Func_565ca:
+.Launched:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjState]
 	and $fe
 	cp $28
-	jr z, .asm_565a0
+	jr z, .vanish
 	call MoveObjectUp_Fast
 	ld l, OBJ_FLAGS
 	bit OBJFLAG_ON_SCREEN_F, [hl]
-	jr nz, .asm_565e8
+	jr nz, .on_screen_2
 	xor a
 	ld [hl], a
-	ld hl, w1d147
+	ld hl, wWolfenbossIgaguriOrKuriActive
 	dec [hl]
 	ret
-.asm_565e8
+.on_screen_2
 	ld hl, wCurObjSubState
 	bit OBJSUBFLAG_HDIR_F, [hl]
 	ld a, [wCurObjScreenXPos]
-	jr nz, .asm_565fb
+	jr nz, .launched_right
+; launched left
 	cp $10
 	jp nc, MoveObjectLeftByVar2
-	set 7, [hl]
-	jr .asm_56602
-.asm_565fb
+	set OBJSUBFLAG_HDIR_F, [hl]
+	jr .launch_switch_direction
+.launched_right
 	cp SCREEN_WIDTH_PX
 	jp c, MoveObjectRightByVar2
-	res 7, [hl]
-.asm_56602
+	res OBJSUBFLAG_HDIR_F, [hl]
+.launch_switch_direction
 	ld a, [wCurObjScreenYPos]
 	cp $11
 	ret c

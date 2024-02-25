@@ -188,7 +188,7 @@ JamanoFunc:
 	jr .asm_54efb
 .asm_54ea6
 	ld bc, Data_60c80
-	call Func_34a0
+	call ApplyObjXMovement_Loop
 	jr .asm_54efb
 .asm_54eae
 	call .Func_54f55
@@ -219,7 +219,7 @@ JamanoFunc:
 	jr .asm_54efb
 .asm_54edc
 	ld bc, Data_60c20
-	call Func_34a0
+	call ApplyObjXMovement_Loop
 	jr .asm_54efb
 
 .Func_54ee4:

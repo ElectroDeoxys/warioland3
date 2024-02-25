@@ -1,4 +1,4 @@
-DEF WORMWOULD_NUM_HITS             EQU 3  ; number of hits to defeat
+DEF WORMWOULD_NUM_HITS             EQU  3 ; number of hits to defeat
 DEF WORMWOULD_IDLE_DURATION        EQU 43 ; duration between shooting rocks when above ground
 DEF WORMWOULD_SHOOT_ROCK_DURATION  EQU 69 ; how long it takes for the whole shooting animation
 DEF WORMWOULD_SHOOT_ROCK_DELAY     EQU 48 ; delay between starting shooting animation and spawning a rock

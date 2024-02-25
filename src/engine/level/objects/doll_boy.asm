@@ -16,15 +16,15 @@ DEF DOLLBOY_DOLL    EQU 1 << 3
 ; this number, then throw hammer of next range
 DEF DOLLBOY_THROW_HAMMER_ODDS EQU 250 ; out of 256
 
-DEF DOLLBOY_START_DELAY         EQU 40  ; delay before starting actions
-DEF DOLLBOY_THROW_HAMMER_DELAY  EQU 56  ; delay before throwing a hammer
-DEF DOLLBOY_WALKING_PHASE_DELAY EQU 80  ; delay before beginning walking phase
-DEF DOLLBOY_JUMP_DELAY          EQU 20  ; delay before jumping up/down
-DEF DOLLBOY_TURN_DELAY          EQU 32  ; delay before turning around
-DEF DOLLBOY_AFTER_HIT_DELAY     EQU 60  ; delay after hitting Wario with the hammer
+DEF DOLLBOY_START_DELAY         EQU  40 ; delay before starting actions
+DEF DOLLBOY_THROW_HAMMER_DELAY  EQU  56 ; delay before throwing a hammer
+DEF DOLLBOY_WALKING_PHASE_DELAY EQU  80 ; delay before beginning walking phase
+DEF DOLLBOY_JUMP_DELAY          EQU  20 ; delay before jumping up/down
+DEF DOLLBOY_TURN_DELAY          EQU  32 ; delay before turning around
+DEF DOLLBOY_AFTER_HIT_DELAY     EQU  60 ; delay after hitting Wario with the hammer
 DEF DOLLBOY_STUN_DURATION       EQU 120 ; stun duration where Doll Boy is vulnerable
-DEF DOLLBOY_DEFEAT_DURATION     EQU 43  ; duration after getting defeated to fall off screen
-DEF BARREL_FLASH_DELAY          EQU 70  ; delay before a barrel starts flashing
+DEF DOLLBOY_DEFEAT_DURATION     EQU  43 ; duration after getting defeated to fall off screen
+DEF BARREL_FLASH_DELAY          EQU  70 ; delay before a barrel starts flashing
 DEF BARREL_FLASH_DURATION       EQU 240 ; duration of barrel flashing
 DEF HAMMER_PLATFORM_DURATION    EQU 140 ; duration for hammer platform movement (going up or down)
 
@@ -55,7 +55,7 @@ DollBoyFunc:
 	ld [hld], a
 	ld de, Frameset_69632
 	call SetObjectFramesetPtr
-	ld a, 40
+	ld a, DOLLBOY_START_DELAY
 	ld [hli], a
 	ret
 
@@ -202,7 +202,7 @@ DollBoyFunc:
 	ret
 
 .throw_hammer
-	call Func_511a5
+	call UpdateDollBoyRemainingParts
 	ld a, [wCurObjVar1]
 	cp $08
 	ret z
@@ -251,7 +251,7 @@ DollBoyFunc:
 	ld a, [wCurObjSubState]
 	cp $2 | OBJSUBFLAG_HDIR
 	jr z, .walking_phase
-	call Func_511a5
+	call UpdateDollBoyRemainingParts
 	ld a, [wCurObjVar1]
 	cp $08
 	ret z
@@ -901,7 +901,7 @@ DollBoyBarrelFunc:
 	ret
 
 .not_flashing
-	call Func_511a5
+	call UpdateDollBoyRemainingParts
 	ld a, [wCurObjVar1]
 	cp $08
 	ret z
@@ -1043,7 +1043,7 @@ DollBoyBarrelFunc:
 	ld [wDollBoyNoFlashingBarrel], a
 	ret
 
-Func_511a5:
+UpdateDollBoyRemainingParts:
 	ld a, [wCurObjSubState]
 	dec a
 	ret z ; exit if wCurObjSubState == $1

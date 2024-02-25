@@ -4114,7 +4114,7 @@ _ApplyObjYMovement_Loop::
 	dec [hl]
 	ret
 
-Func_6328a::
+_ApplyObjXMovement_Loop::
 	ld e, c
 	ld hl, wCurObjVar2
 	ld a, [hl]
@@ -4123,6 +4123,7 @@ Func_6328a::
 	ld a, [bc]
 	cp $80
 	jr nz, .asm_6329a
+	; restart movement
 	xor a
 	ld [hl], a
 	ld c, e
@@ -4132,13 +4133,13 @@ Func_6328a::
 	ld l, OBJ_X_POS
 	cp $80
 	ld c, [hl]
-	jr nc, .asm_632a7
+	jr nc, .negative
 	add c
 	ld [hli], a
 	ret nc
 	inc [hl]
 	ret
-.asm_632a7
+.negative
 	add c
 	ld [hli], a
 	ret c

@@ -433,7 +433,7 @@ OmodonmekaFunc:
 	ld bc, Data_604e0
 	call ApplyObjYMovement
 	ld bc, Data_60650
-	call Func_34a0
+	call ApplyObjXMovement_Loop
 	ld a, [wTransformation]
 	cp TRANSFORMATION_FLAT_WARIO
 	ret nz
@@ -901,7 +901,7 @@ OmodonmekaWithOmodonFunc:
 	ld bc, Data_604e0
 	call ApplyObjYMovement
 	ld bc, Data_60650
-	jp Func_34a0
+	jp ApplyObjXMovement_Loop
 
 Func_42725:
 	ld hl, wCurObjVar3

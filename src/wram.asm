@@ -988,12 +988,38 @@ wNumLitTorches:: ; d143
 wNumShootGoals:: db ; d144
 wNumWarioGoals:: db ; d145
 
+; during Doll Boy's barrel phase,
+; each 4 lower significant bits represent a Doll Boy
+; barrel that is still active, or Doll Boy itself
 wDollBoyActiveBarrels:: ; d146
+
+; decides what the next Wolfenboss attack will be
+; - if 0, then spawn Spiral
+; - if 1, then spawn Igaguri
+wWolfenbossNextAttack:: ; d146
+
 wJamanoActiveSkulls::
 wMuddeeAmbushState::
 	db
-w1d147:: db ; d147
-wDollBoyHammerRange:: db ; d148
+
+; if TRUE, then there is an Igaguri or Kuri still on screen
+; this is checked so that Wolfenboss doesn't spawn another one
+wWolfenbossIgaguriOrKuriActive:: ; d147
+
+w1d147:: ; d147
+	db
+
+; decides which range for Doll Boy's hammer
+; can be short, mid-short, mid-long and long range
+wDollBoyHammerRange:: ; d148
+
+; remaining hits to defeat Wolfenboss + 1
+wWolfenbossRemainingHits:: ; d148
+	db
+
+; how many spirals that Wolfenboss will shoot
+; before switching to attacking with a Igaguri
+wWolfenbossConsecutiveSpirals:: ; d149
 
 w1d149:: ; d149
 	ds $1

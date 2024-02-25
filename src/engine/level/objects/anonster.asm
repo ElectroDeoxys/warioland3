@@ -1166,7 +1166,7 @@ AnonsterSilkFunc:
 	rlca
 	jr nc, .asm_5082a
 	ld bc, Data_60800
-	call Func_34a0
+	call ApplyObjXMovement_Loop
 	ld l, OBJ_X_POS
 	ld a, [hli]
 	sub $05
@@ -1177,7 +1177,7 @@ AnonsterSilkFunc:
 	jr .asm_5083c
 .asm_5082a
 	ld bc, Data_60830
-	call Func_34a0
+	call ApplyObjXMovement_Loop
 	ld l, OBJ_X_POS
 	ld a, [hli]
 	add $04

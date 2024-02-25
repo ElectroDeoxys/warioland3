@@ -481,8 +481,8 @@ ApplyObjYMovement_Loop::
 	homecall _ApplyObjYMovement_Loop
 	ret
 
-Func_34a0::
-	homecall Func_6328a
+ApplyObjXMovement_Loop::
+	homecall _ApplyObjXMovement_Loop
 	ret
 
 ApplyObjYMovement::
