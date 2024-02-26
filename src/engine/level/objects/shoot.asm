@@ -1,11 +1,13 @@
-DEF NUM_SHOOT_GOALS_NEEDED EQU 3 ; number of goals Shoot needs to win
-DEF NUM_WARIO_GOALS_NEEDED EQU 3 ; number of goals Wario needs to win
+DEF NUM_SHOOT_GOALS_NEEDED        EQU   3 ; number of goals Shoot needs to win
+DEF NUM_WARIO_GOALS_NEEDED        EQU   3 ; number of goals Wario needs to win
 
-DEF SHOOT_JUMP_LATERAL_SPEED EQU  1 ; how fast Shoot moves horizontally while jumping
+DEF SHOOT_JUMP_LATERAL_SPEED      EQU   1 ; how fast Shoot moves horizontally while jumping
 
-DEF SHOOT_TAUNT_DURATION     EQU 80 ; duration of taunt animation
-DEF SHOOT_JUMP_DELAY_LONG    EQU 25 ; duration between jumps when Wario has 0 goals
-DEF SHOOT_JUMP_DELAY_SHORT   EQU  2 ; duration between jumps when Wario has at least 1 goal
+DEF SHOOT_TAUNT_DURATION          EQU  80 ; duration of taunt animation
+DEF SHOOT_JUMP_DELAY_LONG         EQU  25 ; duration between jumps when Wario has 0 goals
+DEF SHOOT_JUMP_DELAY_SHORT        EQU   2 ; duration between jumps when Wario has at least 1 goal
+DEF SHOOT_LAST_GOAL_BALL_DURATION EQU 256 ; duration of ball form when Wario has 0 or 1 goal
+DEF SHOOT_LAST_GOAL_BALL_DURATION EQU 40 ;160 ; duration of ball form when Wario already has 2 goals
 
 ShootFunc:
 	ld a, TRUE
@@ -202,7 +204,9 @@ ShootFunc:
 	ld [hli], a
 	xor a
 	ld [hli], a ; OBJ_VAR_1
-	ld a, SHOOT_JUMP_LATERAL_SPEED
+	ld a, [rDIV]
+	and %1
+	inc a
 	ld [hl], a ; OBJ_VAR_2
 	ret
 
@@ -702,7 +706,7 @@ ShootFunc:
 	ld de, Frameset_69f5d
 	jp SetObjectFramesetPtr
 
-.asm_56b00
+.return_to_regular_form
 	ld hl, wCurObjFlags
 	res OBJFLAG_GRABBED_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -738,17 +742,17 @@ ShootFunc:
 	ld [hld], a
 	dec l
 	xor a
-	ld [hld], a
+	ld [hld], a ; OBJ_VAR_3
 	dec l
 	ld a, [wWarioGoals]
 	cp 2
-	jr nc, .at_least_2_goals
-	xor a
-	jr .asm_56b40
+	;jr nc, .at_least_2_goals
+	xor a ; treated as $100 (SHOOT_LAST_GOAL_BALL_DURATION)
+	jr .got_ball_form_duration
 .at_least_2_goals
-	ld a, $a0
-.asm_56b40
-	ld [hl], a
+	ld a, SHOOT_LAST_GOAL_BALL_DURATION
+.got_ball_form_duration
+	ld [hl], a ; OBJ_VAR_1
 	ld de, Frameset_69f5d
 	call SetObjectFramesetPtr
 .Func_56b47:
@@ -757,7 +761,7 @@ ShootFunc:
 	play_sfx z, SFX_075
 	ld hl, wCurObjVar1
 	dec [hl]
-	jr z, .asm_56b00
+	jr z, .return_to_regular_form
 	ld a, [hl]
 	cp $12
 	jr nz, .asm_56b71
@@ -794,24 +798,24 @@ ShootFunc:
 	jr .Func_56bb8
 .Func_56bae:
 	ld hl, wCurObjAction
-	ld a, $8f
+	ld a, NO_ACTIONS_FOR 15
 	ld [hld], a
 	ld a, $38
 	jr .asm_56bc0
 .Func_56bb8:
 	ld hl, wCurObjAction
-	ld a, $8f
+	ld a, NO_ACTIONS_FOR 15
 	ld [hld], a
 	ld a, $39
 .asm_56bc0
-	ld [hld], a
+	ld [hld], a ; OBJ_STATE
 	ld de, Frameset_69f5d
 	call SetObjectFramesetPtr
-	ld a, $04
+	ld a, 4
 	ld [hli], a
 	inc l
 	ld a, $02
-	ld [hli], a
+	ld [hli], a ; OBJ_VAR_2
 	xor a
 	ld [hli], a
 	ret
@@ -936,7 +940,7 @@ ShootFunc:
 	jp z, .set_defeated
 	ld a, $01
 	ld [w1d147], a
-	jp .asm_56b00
+	jp .return_to_regular_form
 .asm_56c93
 	ld l, OBJ_SUBSTATE
 	bit OBJSUBFLAG_VDIR_F, [hl]
