@@ -288,7 +288,7 @@ ProcessInteractions:
 	dw ObjInteraction_ColourCoin         ; OBJ_INTERACTION_COLOUR_COIN
 	dw ObjInteraction_MagicalSpiral      ; OBJ_INTERACTION_MAGICAL_SPIRAL
 	dw ObjInteraction_BottomSting        ; OBJ_INTERACTION_BOTTOM_STING
-	dw Func_21e3e                        ; OBJ_INTERACTION_4D
+	dw ObjInteraction_Shoot              ; OBJ_INTERACTION_SHOOT
 	dw Func_21e9c                        ; OBJ_INTERACTION_4E
 	dw Func_21ea6                        ; OBJ_INTERACTION_4F
 	dw Func_21ecd                        ; OBJ_INTERACTION_50
@@ -3598,24 +3598,26 @@ ObjInteraction_BottomSting:
 	jp nz, StepOnObject
 	jp Func_2022c
 
-Func_21e3e:
+ObjInteraction_Shoot:
 	ld a, [wTransformation]
 	cp TRANSFORMATION_BALL
 	jr z, Func_21e8a
 	ld a, [wInteractionSide]
 	bit INTERACTION_DOWN_F, a
-	jr nz, .asm_21e54
+	jr nz, .interaction_down
 	bit INTERACTION_UP_F, a
 	jp nz, StepOnObject
 	jp Func_20e63
 
-.asm_21e54
+.interaction_down
 	ld a, [wInvincibleCounter]
 	and a
-	ret nz
+	ret nz ; skip if invincible
 	ld a, [wTransformation]
 	bit TRANSFORMATIONF_PERSISTENT_F, a
 	jp nz, Func_2022c
+
+	; turn Wario into ball form
 	ld b, OBJACTION_06
 	call SetObjAction
 	ld a, TRANSFORMATION_BALL

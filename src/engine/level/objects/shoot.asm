@@ -2,6 +2,8 @@ DEF NUM_SHOOT_GOALS_NEEDED EQU 3 ; number of goals Shoot needs to win
 DEF NUM_WARIO_GOALS_NEEDED EQU 3 ; number of goals Wario needs to win
 
 DEF SHOOT_JUMP_LATERAL_SPEED EQU  1 ; how fast Shoot moves horizontally while jumping
+
+DEF SHOOT_TAUNT_DURATION     EQU 80 ; duration of taunt animation
 DEF SHOOT_JUMP_DELAY_LONG    EQU 25 ; duration between jumps when Wario has 0 goals
 DEF SHOOT_JUMP_DELAY_SHORT   EQU  2 ; duration between jumps when Wario has at least 1 goal
 
@@ -37,7 +39,7 @@ ShootFunc:
 	ld [hl], a
 	ld de, Frameset_69f7c
 	call SetObjectFramesetPtr
-	ld a, 80
+	ld a, SHOOT_TAUNT_DURATION
 	ld [hli], a
 
 	; position Shoot $20 pixels up
@@ -80,7 +82,7 @@ ShootFunc:
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
 	and HEAVY_OBJ
-	or OBJ_INTERACTION_4D
+	or OBJ_INTERACTION_SHOOT
 	ld [hli], a
 	ld a, $01
 	ld [w1d147], a
@@ -163,7 +165,7 @@ ShootFunc:
 	jr z, .asm_566bd
 	cp $05
 	jr z, .asm_566b7
-	cp $2f
+	cp OBJSTATE_SPECIAL_3
 	jr z, .asm_566d5
 	and $fe
 	cp OBJSTATE_WOBBLE_LEFT_START ; aka OBJSTATE_WOBBLE_RIGHT_START
@@ -732,7 +734,7 @@ ShootFunc:
 	ld [hld], a
 	res 7, [hl]
 	ld l, OBJ_INTERACTION_TYPE
-	ld a, OBJ_INTERACTION_4D | HEAVY_OBJ
+	ld a, OBJ_INTERACTION_SHOOT | HEAVY_OBJ
 	ld [hli], a
 	ld a, -32
 	ld [hli], a

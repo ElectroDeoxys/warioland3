@@ -156,7 +156,7 @@ DEF INTERACTION_DOWN  EQU (1 << INTERACTION_DOWN_F)  ; $80
 	const OBJ_INTERACTION_COLOUR_COIN         ; $4a
 	const OBJ_INTERACTION_MAGICAL_SPIRAL      ; $4b
 	const OBJ_INTERACTION_BOTTOM_STING        ; $4c
-	const OBJ_INTERACTION_4D                  ; $4d
+	const OBJ_INTERACTION_SHOOT               ; $4d
 	const OBJ_INTERACTION_4E                  ; $4e
 	const OBJ_INTERACTION_4F                  ; $4f
 	const OBJ_INTERACTION_50                  ; $50
