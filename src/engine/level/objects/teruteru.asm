@@ -254,12 +254,7 @@ TeruteruFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_44aa6
-	ld de, Frameset_68b64
-	jr .asm_44aa9
-.asm_44aa6
-	ld de, Frameset_68b6d
-.asm_44aa9
+	ld_obj_frameset Frameset_68b64, Frameset_68b6d
 	xor a
 	ld [hld], a
 	call SetObjectFramesetPtr

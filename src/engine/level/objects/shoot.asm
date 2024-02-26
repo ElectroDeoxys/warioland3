@@ -108,12 +108,7 @@ ShootFunc:
 .asm_566c1
 	ld a, [hld]
 	rlca
-	jr c, .asm_566ca
-	ld de, Frameset_6a022 + $2
-	jr .asm_566cd
-.asm_566ca
-	ld de, Frameset_6a03a + $2
-.asm_566cd
+	ld_obj_frameset Frameset_6a022 + $2, Frameset_6a03a + $2
 	ld a, $02
 	ld [wCurObjVar2], a
 	jp .asm_56787
@@ -217,11 +212,7 @@ ShootFunc:
 	ret nz
 	ld a, [wCurObjSubState]
 	rlca
-	jr c, .asm_56784
-	ld de, Frameset_6a02b
-	jr .asm_56787
-.asm_56784
-	ld de, Frameset_6a043
+	ld_obj_frameset Frameset_6a02b, Frameset_6a043
 .asm_56787
 	call SetObjectFramesetPtr
 	ld a, 22
@@ -362,12 +353,7 @@ ShootFunc:
 	jr nz, .asm_56889
 	ld a, [hl]
 	rlca
-	jr c, .asm_56872
-	ld de, Frameset_6a037
-	jr .asm_56875
-.asm_56872
-	ld de, Frameset_6a04f
-.asm_56875
+	ld_obj_frameset Frameset_6a037, Frameset_6a04f
 	call SetObjectFramesetPtr
 
 	ld a, [wWarioGoals]
@@ -387,12 +373,7 @@ ShootFunc:
 .asm_56889
 	ld a, [hl]
 	rlca
-	jr c, .asm_56892
-	ld de, Frameset_69f35
-	jr .asm_56895
-.asm_56892
-	ld de, Frameset_69f40
-.asm_56895
+	ld_obj_frameset Frameset_69f35, Frameset_69f40
 	call SetObjectFramesetPtr
 	ld a, 42
 	ld [hli], a

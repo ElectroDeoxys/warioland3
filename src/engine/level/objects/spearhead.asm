@@ -399,12 +399,7 @@ SpearheadFunc:
 	ld [hld], a
 	ld a, [hld] ; OBJ_SUBSTATE
 	rlca
-	jr c, .asm_402d1
-	ld de, Frameset_681d2
-	jr .asm_402d4
-.asm_402d1
-	ld de, Frameset_681db
-.asm_402d4
+	ld_obj_frameset Frameset_681d2, Frameset_681db
 	call SetObjectFramesetPtr
 	ret
 
@@ -577,11 +572,7 @@ SpearheadFunc:
 	ld [hld], a
 	ld a, [hld] ; OBJ_SUBSTATE
 	rlca
-	jr c, .asm_403e5
-	ld de, Frameset_681ff
-	jr .asm_403e8
-.asm_403e5
-	ld de, Frameset_68265
+	ld_obj_frameset Frameset_681ff, Frameset_68265
 .asm_403e8
 	call SetObjectFramesetPtr
 
@@ -607,12 +598,7 @@ SpearheadFunc:
 	ld [hld], a
 	ld a, [hld] ; OBJ_SUBSTATE
 	rlca
-	jr c, .asm_40413
-	ld de, Frameset_681e4
-	jr .asm_40416
-.asm_40413
-	ld de, Frameset_681ed
-.asm_40416
+	ld_obj_frameset Frameset_681e4, Frameset_681ed
 	call SetObjectFramesetPtr
 
 	ld l, OBJ_COLLBOX_RIGHT
@@ -640,12 +626,7 @@ SpearheadFunc:
 	ld [hld], a
 	ld a, [hld] ; OBJ_SUBSTATE
 	rlca
-	jr c, .asm_40446
-	ld de, Frameset_681e4
-	jr .asm_40449
-.asm_40446
-	ld de, Frameset_681ed
-.asm_40449
+	ld_obj_frameset Frameset_681e4, Frameset_681ed
 	call SetObjectFramesetPtr
 
 	ld l, OBJ_COLLBOX_RIGHT

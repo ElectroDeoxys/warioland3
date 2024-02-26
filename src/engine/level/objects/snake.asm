@@ -299,12 +299,7 @@ SnakeFunc:
 	or $08
 	ld [hl], a
 	rlca
-	jr c, .asm_49a97
-	ld de, Frameset_68804
-	jr .asm_49a9a
-.asm_49a97
-	ld de, Frameset_6881d
-.asm_49a9a
+	ld_obj_frameset Frameset_68804, Frameset_6881d
 	call SetObjectFramesetPtr
 	ld a, $01
 	ld [hli], a

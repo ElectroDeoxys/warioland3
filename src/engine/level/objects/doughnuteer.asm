@@ -685,13 +685,7 @@ DoughnuteerFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_41ee6
-	ld de, Frameset_685b2
-	jr .asm_41ee9
-
-.asm_41ee6
-	ld de, Frameset_685bb
-.asm_41ee9
+	ld_obj_frameset Frameset_685b2, Frameset_685bb
 	call SetObjectFramesetPtr
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
@@ -713,13 +707,7 @@ DoughnuteerFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_41f11
-	ld de, Frameset_685b2
-	jr .asm_41f14
-
-.asm_41f11
-	ld de, Frameset_685bb
-.asm_41f14
+	ld_obj_frameset Frameset_685b2, Frameset_685bb
 	call SetObjectFramesetPtr
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]

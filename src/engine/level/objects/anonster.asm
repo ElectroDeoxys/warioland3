@@ -28,12 +28,7 @@ AnonsterFunc:
 .asm_50031
 	ld a, [wCurObjSubState]
 	rlca
-	jr c, .asm_5003c
-	ld de, Frameset_693c4
-	jr .asm_5003f
-.asm_5003c
-	ld de, Frameset_693d5
-.asm_5003f
+	ld_obj_frameset Frameset_693c4, Frameset_693d5
 	call SetObjectFramesetPtr
 	ld a, $50
 	ld [hli], a
@@ -87,12 +82,7 @@ AnonsterFunc:
 	jr nz, .asm_500a8
 	ld a, [hld]
 	rlca
-	jr c, .asm_50097
-	ld de, Frameset_6943c
-	jr .asm_5009a
-.asm_50097
-	ld de, Frameset_69441
-.asm_5009a
+	ld_obj_frameset Frameset_6943c, Frameset_69441
 	call SetObjectFramesetPtr
 	xor a
 	ld [hl], a
@@ -226,12 +216,7 @@ AnonsterFunc:
 .asm_5018e
 	ld a, [wCurObjSubState]
 	rlca
-	jr c, .asm_50199
-	ld de, Frameset_693f9
-	jr .asm_5019c
-.asm_50199
-	ld de, Frameset_69424
-.asm_5019c
+	ld_obj_frameset Frameset_693f9, Frameset_69424
 	call SetObjectFramesetPtr
 	ld a, $20
 	ld [hli], a
@@ -345,12 +330,7 @@ AnonsterFunc:
 	ld [hld], a
 	ld a, [wCurObjSubState]
 	rlca
-	jr c, .asm_50279
-	ld de, Frameset_69402
-	jr .asm_5027c
-.asm_50279
-	ld de, Frameset_6942d
-.asm_5027c
+	ld_obj_frameset Frameset_69402, Frameset_6942d
 	call SetObjectFramesetPtr
 	jp .asm_5017f
 
@@ -691,12 +671,7 @@ AnonsterFunc:
 .asm_504b1
 	ld a, [wCurObjSubState]
 	rlca
-	jr c, .asm_504bc
-	ld de, Frameset_69554
-	jr .asm_504bf
-.asm_504bc
-	ld de, Frameset_6954d
-.asm_504bf
+	ld_obj_frameset Frameset_69554, Frameset_6954d
 	call SetObjectFramesetPtr
 	ld a, $07
 	ld [hli], a
@@ -802,12 +777,7 @@ AnonsterFunc:
 	call DecrementRemainingBossHits
 	ld a, [hld]
 	rlca
-	jr c, .asm_50580
-	ld de, Frameset_694a7
-	jr .asm_50583
-.asm_50580
-	ld de, Frameset_694b8
-.asm_50583
+	ld_obj_frameset Frameset_694a7, Frameset_694b8
 	call SetObjectFramesetPtr
 	ld a, [wCurObjSubState]
 	and $0f
@@ -849,12 +819,7 @@ AnonsterFunc:
 	ret nz
 	ld a, [wCurObjSubState]
 	rlca
-	jr c, .asm_505e0
-	ld de, Frameset_6953c
-	jr .asm_505e3
-.asm_505e0
-	ld de, Frameset_69543
-.asm_505e3
+	ld_obj_frameset Frameset_6953c, Frameset_69543
 	call SetObjectFramesetPtr
 	ld a, $0e
 	ld [hli], a
@@ -969,12 +934,7 @@ AnonsterFunc:
 	ld [wIsBossBattle], a
 	ld a, [wCurObjSubState]
 	rlca
-	jr c, .asm_506ce
-	ld de, Frameset_694d7
-	jr .asm_506d1
-.asm_506ce
-	ld de, Frameset_694dc
-.asm_506d1
+	ld_obj_frameset Frameset_694d7, Frameset_694dc
 	call SetObjectFramesetPtr
 	ld l, OBJ_STATE
 	ld a, $48

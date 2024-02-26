@@ -407,12 +407,7 @@ BrrrBearFunc:
 .asm_482c0
 	ld a, [hld]
 	rlca
-	jr c, .asm_482c9
-	ld de, Frameset_69137
-	jr .asm_482cc
-.asm_482c9
-	ld de, Frameset_6913a
-.asm_482cc
+	ld_obj_frameset Frameset_69137, Frameset_6913a
 	call SetObjectFramesetPtr
 	ld a, $0c
 	ld [hld], a
@@ -550,12 +545,7 @@ BrrrBearFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_483b3
-	ld de, Frameset_69175
-	jr .asm_483b6
-.asm_483b3
-	ld de, Frameset_6917c
-.asm_483b6
+	ld_obj_frameset Frameset_69175, Frameset_6917c
 	call SetObjectFramesetPtr
 	ld a, $16
 	ld [hli], a

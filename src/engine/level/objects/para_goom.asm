@@ -299,13 +299,7 @@ ParaGoomFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_41553
-	ld de, Frameset_6844b
-	jr .asm_41556
-
-.asm_41553
-	ld de, Frameset_68454
-.asm_41556
+	ld_obj_frameset Frameset_6844b, Frameset_68454
 	call SetObjectFramesetPtr
 	xor a
 	ld [hli], a
@@ -389,13 +383,7 @@ ParaGoomFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_415d4
-	ld de, Frameset_6846e
-	jr .asm_415d7
-
-.asm_415d4
-	ld de, Frameset_68490
-.asm_415d7
+	ld_obj_frameset Frameset_6846e, Frameset_68490
 	call SetObjectFramesetPtr
 	ld a, $a3
 	ld [hli], a
@@ -414,13 +402,7 @@ ParaGoomFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_415f7
-	ld de, Frameset_6845d
-	jr .asm_415fa
-
-.asm_415f7
-	ld de, Frameset_6847f
-.asm_415fa
+	ld_obj_frameset Frameset_6845d, Frameset_6847f
 	call SetObjectFramesetPtr
 	ld a, $a3
 	ld [hli], a
@@ -549,12 +531,7 @@ ParaGoomFunc:
 	jr z, .asm_416ed
 	ld a, [hld]
 	rlca
-	jr c, .asm_416ce
-	ld de, Frameset_68439
-	jr .asm_416d1
-
-.asm_416ce
-	ld de, Frameset_68442
+	ld_obj_frameset Frameset_68439, Frameset_68442
 .asm_416d1
 	call SetObjectFramesetPtr
 	ld a, $0c
@@ -590,13 +567,7 @@ ParaGoomFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_4170a
-	ld de, Frameset_684aa
-	jr .asm_4170d
-
-.asm_4170a
-	ld de, Frameset_684af
-.asm_4170d
+	ld_obj_frameset Frameset_684aa, Frameset_684af
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $05
@@ -625,13 +596,7 @@ ParaGoomFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_41740
-	ld de, Frameset_684aa
-	jr .asm_41743
-
-.asm_41740
-	ld de, Frameset_684af
-.asm_41743
+	ld_obj_frameset Frameset_684aa, Frameset_684af
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $05

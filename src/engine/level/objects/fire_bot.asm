@@ -637,12 +637,7 @@ FireBotFunc:
 .asm_46f8a
 	ld a, [hld]
 	rlca
-	jr c, .asm_46f93
-	ld de, Frameset_68983
-	jr .asm_46f96
-.asm_46f93
-	ld de, Frameset_68986
-.asm_46f96
+	ld_obj_frameset Frameset_68983, Frameset_68986
 	call SetObjectFramesetPtr
 	ld a, 12
 	ld [hld], a
@@ -665,12 +660,7 @@ FireBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_46fc1
-	ld de, Frameset_68989
-	jr .asm_46fc4
-.asm_46fc1
-	ld de, Frameset_68992
-.asm_46fc4
+	ld_obj_frameset Frameset_68989, Frameset_68992
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $05
@@ -696,12 +686,7 @@ FireBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_46ff4
-	ld de, Frameset_68989
-	jr .asm_46ff7
-.asm_46ff4
-	ld de, Frameset_68992
-.asm_46ff7
+	ld_obj_frameset Frameset_68989, Frameset_68992
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $05
@@ -733,12 +718,7 @@ FireBotFunc:
 .asm_47026
 	ld a, [hld]
 	rlca
-	jr c, .asm_4702f
-	ld de, Frameset_68989
-	jr .asm_47032
-.asm_4702f
-	ld de, Frameset_68992
-.asm_47032
+	ld_obj_frameset Frameset_68989, Frameset_68992
 	call SetObjectFramesetPtr
 	inc l
 	inc l
@@ -801,12 +781,7 @@ FireBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_470a0
-	ld de, Frameset_689a5
-	jr .asm_470a3
-.asm_470a0
-	ld de, Frameset_689ac
-.asm_470a3
+	ld_obj_frameset Frameset_689a5, Frameset_689ac
 	call SetObjectFramesetPtr
 	ld a, 26
 	ld [hli], a
@@ -870,12 +845,7 @@ FireBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_47106
-	ld de, Frameset_68989
-	jr .asm_47109
-.asm_47106
-	ld de, Frameset_68992
-.asm_47109
+	ld_obj_frameset Frameset_68989, Frameset_68992
 	call SetObjectFramesetPtr
 	ld a, 4
 	ld [hli], a
@@ -1011,12 +981,7 @@ FireBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_471e5
-	ld de, Frameset_68989
-	jr .asm_471e8
-.asm_471e5
-	ld de, Frameset_68992
-.asm_471e8
+	ld_obj_frameset Frameset_68989, Frameset_68992
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $05
@@ -1040,12 +1005,7 @@ FireBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_47216
-	ld de, Frameset_68989
-	jr .asm_47219
-.asm_47216
-	ld de, Frameset_68992
-.asm_47219
+	ld_obj_frameset Frameset_68989, Frameset_68992
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $05

@@ -525,12 +525,7 @@ HammerBotFunc:
 .asm_445cf
 	ld a, [hld]
 	rlca
-	jr c, .asm_445d8
-	ld de, Frameset_68b58
-	jr .asm_445db
-.asm_445d8
-	ld de, Frameset_68b5b
-.asm_445db
+	ld_obj_frameset Frameset_68b58, Frameset_68b5b
 	call SetObjectFramesetPtr
 	ld a, 12
 	ld [hld], a
@@ -554,12 +549,7 @@ HammerBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_44606
-	ld de, Frameset_68b2e
-	jr .asm_44609
-.asm_44606
-	ld de, Frameset_68b37
-.asm_44609
+	ld_obj_frameset Frameset_68b2e, Frameset_68b37
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $07
@@ -586,12 +576,7 @@ HammerBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_44639
-	ld de, Frameset_68b2e
-	jr .asm_4463c
-.asm_44639
-	ld de, Frameset_68b37
-.asm_4463c
+	ld_obj_frameset Frameset_68b2e, Frameset_68b37
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $07
@@ -624,12 +609,7 @@ HammerBotFunc:
 .asm_4466b
 	ld a, [hld]
 	rlca
-	jr c, .asm_44674
-	ld de, Frameset_68b2e
-	jr .asm_44677
-.asm_44674
-	ld de, Frameset_68b37
-.asm_44677
+	ld_obj_frameset Frameset_68b2e, Frameset_68b37
 	call SetObjectFramesetPtr
 	inc l
 	inc l
@@ -695,12 +675,7 @@ HammerBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_446e5
-	ld de, Frameset_68b4a
-	jr .asm_446e8
-.asm_446e5
-	ld de, Frameset_68b51
-.asm_446e8
+	ld_obj_frameset Frameset_68b4a, Frameset_68b51
 	call SetObjectFramesetPtr
 	ld a, 26
 	ld [hli], a
@@ -766,12 +741,7 @@ HammerBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_4474b
-	ld de, Frameset_68b2e
-	jr .asm_4474e
-.asm_4474b
-	ld de, Frameset_68b37
-.asm_4474e
+	ld_obj_frameset Frameset_68b2e, Frameset_68b37
 	call SetObjectFramesetPtr
 	ld a, 4
 	ld [hli], a
@@ -944,12 +914,7 @@ HammerBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_4486e
-	ld de, Frameset_68b2e
-	jr .asm_44871
-.asm_4486e
-	ld de, Frameset_68b37
-.asm_44871
+	ld_obj_frameset Frameset_68b2e, Frameset_68b37
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $07
@@ -974,12 +939,7 @@ HammerBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_4489f
-	ld de, Frameset_68b2e
-	jr .asm_448a2
-.asm_4489f
-	ld de, Frameset_68b37
-.asm_448a2
+	ld_obj_frameset Frameset_68b2e, Frameset_68b37
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $07

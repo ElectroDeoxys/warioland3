@@ -275,12 +275,7 @@ BigOctohonFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_4a71c
-	ld de, Frameset_69b7f
-	jr .asm_4a71f
-.asm_4a71c
-	ld de, Frameset_69b88
-.asm_4a71f
+	ld_obj_frameset Frameset_69b7f, Frameset_69b88
 	call SetObjectFramesetPtr
 	ld a, $3c
 	ld [hli], a
@@ -428,12 +423,7 @@ BigOctohonFunc:
 .asm_4a812
 	ld a, [wCurObjSubState]
 	rlca
-	jr c, .asm_4a81d
-	ld de, Frameset_69b69
-	jr .asm_4a820
-.asm_4a81d
-	ld de, Frameset_69b74
-.asm_4a820
+	ld_obj_frameset Frameset_69b69, Frameset_69b74
 	call SetObjectFramesetPtr
 .asm_4a823
 	ld hl, wCurObjYPos

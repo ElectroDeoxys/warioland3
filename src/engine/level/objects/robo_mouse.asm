@@ -150,12 +150,7 @@ RoboMouseFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_489f7
-	ld de, Frameset_69200
-	jr .asm_489fa
-.asm_489f7
-	ld de, Frameset_691fb
-.asm_489fa
+	ld_obj_frameset Frameset_69200, Frameset_691fb
 	call SetObjectFramesetPtr
 	ret
 
@@ -206,12 +201,7 @@ RoboMouseFunc:
 	res OBJFLAG_PRIORITY_F, [hl]
 	ld a, [wCurObjSubState]
 	rlca
-	jr c, .asm_48a5d
-	ld de, Frameset_6920c
-	jr .asm_48a60
-.asm_48a5d
-	ld de, Frameset_69205
-.asm_48a60
+	ld_obj_frameset Frameset_6920c, Frameset_69205
 	call SetObjectFramesetPtr
 	ld a, $3c
 	ld [hli], a
@@ -241,12 +231,7 @@ RoboMouseFunc:
 	jr z, .asm_48aab
 	ld a, [hld]
 	rlca
-	jr c, .asm_48aa5
-	ld de, Frameset_69220
-	jr .asm_48aa8
-.asm_48aa5
-	ld de, Frameset_691de
-.asm_48aa8
+	ld_obj_frameset Frameset_69220, Frameset_691de
 	call SetObjectFramesetPtr
 .asm_48aab
 	ld l, OBJ_FLAGS
@@ -545,12 +530,7 @@ RoboMouseFunc:
 	jr nz, .asm_48c9c
 	ld a, [hld]
 	rlca
-	jr c, .asm_48cba
-	ld de, Frameset_69220
-	jr .asm_48cbd
-.asm_48cba
-	ld de, Frameset_691de
-.asm_48cbd
+	ld_obj_frameset Frameset_69220, Frameset_691de
 	call SetObjectFramesetPtr
 	ld l, OBJ_FLAGS
 	set OBJFLAG_PRIORITY_F, [hl]

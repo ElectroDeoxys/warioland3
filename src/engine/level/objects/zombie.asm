@@ -611,12 +611,7 @@ ZombieHeadFunc:
 	jp nc, ZombieFunc.asm_45c83
 	ld a, [hld]
 	rlca
-	jr c, .asm_45eb6
-	ld de, Frameset_68dd5
-	jr .asm_45eb9
-.asm_45eb6
-	ld de, Frameset_68dda
-.asm_45eb9
+	ld_obj_frameset Frameset_68dd5, Frameset_68dda
 	call SetObjectFramesetPtr
 	ld a, 40
 	ld [hli], a

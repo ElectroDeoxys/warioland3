@@ -344,12 +344,7 @@ DollBoyFunc:
 	ld [hld], a ; wCurObjState
 	ld a, [hld] ; wCurObjSubState
 	rlca
-	jr c, .asm_50ceb
-	ld de, Frameset_6967a
-	jr .asm_50cee
-.asm_50ceb
-	ld de, Frameset_69675
-.asm_50cee
+	ld_obj_frameset Frameset_6967a, Frameset_69675
 	xor a
 	ld [hl], a ; wCurObjVar3
 	call SetObjectFramesetPtr

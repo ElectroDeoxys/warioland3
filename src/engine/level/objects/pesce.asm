@@ -517,11 +517,7 @@ PesceFunc:
 .asm_520b2
 	ld c, $25
 	sla b
-	jr c, .asm_520bd
-	ld de, Frameset_699ab
-	jr .asm_520c0
-.asm_520bd
-	ld de, Frameset_699a4
+	ld_obj_frameset Frameset_699ab, Frameset_699a4
 .asm_520c0
 	call SetObjectFramesetPtr
 	ld [hl], c
@@ -556,11 +552,7 @@ PesceFunc:
 	jr .asm_52105
 .asm_520f9
 	sla b
-	jr c, .asm_52102
-	ld de, Frameset_6993b
-	jr .asm_52105
-.asm_52102
-	ld de, Frameset_69973
+	ld_obj_frameset Frameset_6993b, Frameset_69973
 .asm_52105
 	jp SetObjectFramesetPtr
 
@@ -592,11 +584,7 @@ PesceFunc:
 	jr .asm_5214b
 .asm_5213f
 	sla b
-	jr c, .asm_52148
-	ld de, Frameset_699bc
-	jr .asm_5214b
-.asm_52148
-	ld de, Frameset_699cb
+	ld_obj_frameset Frameset_699bc, Frameset_699cb
 .asm_5214b
 	call SetObjectFramesetPtr
 	ld a, $3c
@@ -642,11 +630,7 @@ PesceFunc:
 	jr .asm_521a2
 .asm_52196
 	sla b
-	jr c, .asm_5219f
-	ld de, Frameset_69926
-	jr .asm_521a2
-.asm_5219f
-	ld de, Frameset_6995e
+	ld_obj_frameset Frameset_69926, Frameset_6995e
 .asm_521a2
 	jp SetObjectFramesetPtr
 

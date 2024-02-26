@@ -72,12 +72,7 @@ SeeingEyeDoorFunc:
 	ld a, [wCurObjScreenXPos]
 	add $2a
 	cp b
-	jr c, .asm_4552e
-	ld de, Frameset_68c4a
-	jr .asm_45531
-.asm_4552e
-	ld de, Frameset_68c56
-.asm_45531
+	ld_obj_frameset Frameset_68c4a, Frameset_68c56
 	call SetObjectFramesetPtr
 	ld a, 8
 	ld [hli], a

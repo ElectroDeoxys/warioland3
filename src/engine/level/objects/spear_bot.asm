@@ -626,12 +626,7 @@ SpearBotFunc:
 .asm_462f1
 	ld a, [hld]
 	rlca
-	jr c, .asm_462fa
-	ld de, Frameset_68e11
-	jr .asm_462fd
-.asm_462fa
-	ld de, Frameset_68e14
-.asm_462fd
+	ld_obj_frameset Frameset_68e11, Frameset_68e14
 	call SetObjectFramesetPtr
 	ld a, 12
 	ld [hld], a
@@ -654,12 +649,7 @@ SpearBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_46328
-	ld de, Frameset_68e17
-	jr .asm_4632b
-.asm_46328
-	ld de, Frameset_68e20
-.asm_4632b
+	ld_obj_frameset Frameset_68e17, Frameset_68e20
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $05
@@ -685,12 +675,7 @@ SpearBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_4635b
-	ld de, Frameset_68e17
-	jr .asm_4635e
-.asm_4635b
-	ld de, Frameset_68e20
-.asm_4635e
+	ld_obj_frameset Frameset_68e17, Frameset_68e20
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $05
@@ -722,12 +707,7 @@ SpearBotFunc:
 .asm_4638d
 	ld a, [hld]
 	rlca
-	jr c, .asm_46396
-	ld de, Frameset_68e17
-	jr .asm_46399
-.asm_46396
-	ld de, Frameset_68e20
-.asm_46399
+	ld_obj_frameset Frameset_68e17, Frameset_68e20
 	call SetObjectFramesetPtr
 	inc l
 	inc l
@@ -790,12 +770,7 @@ SpearBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_46407
-	ld de, Frameset_68e33
-	jr .asm_4640a
-.asm_46407
-	ld de, Frameset_68e3a
-.asm_4640a
+	ld_obj_frameset Frameset_68e33, Frameset_68e3a
 	call SetObjectFramesetPtr
 	ld a, 26
 	ld [hli], a
@@ -859,12 +834,7 @@ SpearBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_4646d
-	ld de, Frameset_68e17
-	jr .asm_46470
-.asm_4646d
-	ld de, Frameset_68e20
-.asm_46470
+	ld_obj_frameset Frameset_68e17, Frameset_68e20
 	call SetObjectFramesetPtr
 	ld a, 4
 	ld [hli], a
@@ -1000,12 +970,7 @@ SpearBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_4654c
-	ld de, Frameset_68e17
-	jr .asm_4654f
-.asm_4654c
-	ld de, Frameset_68e20
-.asm_4654f
+	ld_obj_frameset Frameset_68e17, Frameset_68e20
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $05
@@ -1029,12 +994,7 @@ SpearBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_4657d
-	ld de, Frameset_68e17
-	jr .asm_46580
-.asm_4657d
-	ld de, Frameset_68e20
-.asm_46580
+	ld_obj_frameset Frameset_68e17, Frameset_68e20
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $05

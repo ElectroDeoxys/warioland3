@@ -201,12 +201,7 @@ BeamBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_46722
-	ld de, Frameset_68ea3
-	jr .asm_46725
-.asm_46722
-	ld de, Frameset_68eaa
-.asm_46725
+	ld_obj_frameset Frameset_68ea3, Frameset_68eaa
 	call SetObjectFramesetPtr
 	ld a, 50
 	ld [hli], a
@@ -240,12 +235,7 @@ BeamBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_4675f
-	ld de, Frameset_68e77
-	jr .asm_46762
-.asm_4675f
-	ld de, Frameset_68e80
-.asm_46762
+	ld_obj_frameset Frameset_68e77, Frameset_68e80
 	call SetObjectFramesetPtr
 	ld a, 100
 	ld [hli], a
@@ -423,12 +413,7 @@ BeamBotFunc:
 .asm_46882
 	ld a, [hld]
 	rlca
-	jr c, .asm_4688b
-	ld de, Frameset_68eb1
-	jr .asm_4688e
-.asm_4688b
-	ld de, Frameset_68eb4
-.asm_4688e
+	ld_obj_frameset Frameset_68eb1, Frameset_68eb4
 	call SetObjectFramesetPtr
 	ld a, 12
 	ld [hld], a
@@ -451,12 +436,7 @@ BeamBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_468b9
-	ld de, Frameset_68eb7
-	jr .asm_468bc
-.asm_468b9
-	ld de, Frameset_68ec0
-.asm_468bc
+	ld_obj_frameset Frameset_68eb7, Frameset_68ec0
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $05
@@ -482,12 +462,7 @@ BeamBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_468ec
-	ld de, Frameset_68eb7
-	jr .asm_468ef
-.asm_468ec
-	ld de, Frameset_68ec0
-.asm_468ef
+	ld_obj_frameset Frameset_68eb7, Frameset_68ec0
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $05
@@ -519,12 +494,7 @@ BeamBotFunc:
 .asm_4691e
 	ld a, [hld]
 	rlca
-	jr c, .asm_46927
-	ld de, Frameset_68eb7
-	jr .asm_4692a
-.asm_46927
-	ld de, Frameset_68ec0
-.asm_4692a
+	ld_obj_frameset Frameset_68eb7, Frameset_68ec0
 	call SetObjectFramesetPtr
 	inc l
 	inc l
@@ -587,12 +557,7 @@ BeamBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_46998
-	ld de, Frameset_68ed3
-	jr .asm_4699b
-.asm_46998
-	ld de, Frameset_68eda
-.asm_4699b
+	ld_obj_frameset Frameset_68ed3, Frameset_68eda
 	call SetObjectFramesetPtr
 	ld a, 17
 	ld [hli], a
@@ -656,12 +621,7 @@ BeamBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_469fe
-	ld de, Frameset_68eb7
-	jr .asm_46a01
-.asm_469fe
-	ld de, Frameset_68ec0
-.asm_46a01
+	ld_obj_frameset Frameset_68eb7, Frameset_68ec0
 	call SetObjectFramesetPtr
 	ld a, 4
 	ld [hli], a
@@ -754,12 +714,7 @@ BeamBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_46a97
-	ld de, Frameset_68eb7
-	jr .asm_46a9a
-.asm_46a97
-	ld de, Frameset_68ec0
-.asm_46a9a
+	ld_obj_frameset Frameset_68eb7, Frameset_68ec0
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $05
@@ -783,12 +738,7 @@ BeamBotFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_46ac8
-	ld de, Frameset_68eb7
-	jr .asm_46acb
-.asm_46ac8
-	ld de, Frameset_68ec0
-.asm_46acb
+	ld_obj_frameset Frameset_68eb7, Frameset_68ec0
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $05

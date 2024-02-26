@@ -216,13 +216,7 @@ NobiiruFunc:
 	ret nz
 	ld a, [wCurObjSubState]
 	rlca
-	jr c, .asm_43946
-	ld de, Frameset_698ea
-	jr .asm_43949
-
-.asm_43946
-	ld de, Frameset_698c3
-.asm_43949
+	ld_obj_frameset Frameset_698ea, Frameset_698c3
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
 	and HEAVY_OBJ
@@ -237,13 +231,7 @@ NobiiruFunc:
 	ret nz
 	ld a, [wCurObjSubState]
 	rlca
-	jr c, .asm_43966
-	ld de, Frameset_698ed
-	jr .asm_43969
-
-.asm_43966
-	ld de, Frameset_698c6
-.asm_43969
+	ld_obj_frameset Frameset_698ed, Frameset_698c6
 	ld b, $14
 	jp .SetFrameset
 

@@ -721,12 +721,7 @@ MadSciensteinFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_451f4
-	ld de, Frameset_68be3
-	jr .asm_451f7
-.asm_451f4
-	ld de, Frameset_68be8
-.asm_451f7
+	ld_obj_frameset Frameset_68be3, Frameset_68be8
 	call SetObjectFramesetPtr
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
@@ -748,12 +743,7 @@ MadSciensteinFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_4521f
-	ld de, Frameset_68be3
-	jr .asm_45222
-.asm_4521f
-	ld de, Frameset_68be8
-.asm_45222
+	ld_obj_frameset Frameset_68be3, Frameset_68be8
 	call SetObjectFramesetPtr
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]

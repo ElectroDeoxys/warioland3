@@ -202,12 +202,7 @@ WolfenbossFunc:
 .start_disappear
 	ld a, [wCurObjSubState]
 	rlca
-	jr c, .asm_55f9d
-	ld de, Frameset_69e0e
-	jr .asm_55fa0
-.asm_55f9d
-	ld de, Frameset_69e1f
-.asm_55fa0
+	ld_obj_frameset Frameset_69e0e, Frameset_69e1f
 	call SetObjectFramesetPtr
 	ld a, WOLFENBOSS_DISAPPEAR_DELAY
 	ld [hli], a
@@ -239,12 +234,7 @@ WolfenbossFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_55fd6
-	ld de, Frameset_69e85
-	jr .asm_55fd9
-.asm_55fd6
-	ld de, Frameset_69e8e
-.asm_55fd9
+	ld_obj_frameset Frameset_69e85, Frameset_69e8e
 	call SetObjectFramesetPtr
 	ld a, WOLFENBOSS_HURT_DURATION
 	ld [hli], a

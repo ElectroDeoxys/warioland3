@@ -418,13 +418,7 @@ SilkyFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_42ff4
-	ld de, Frameset_6877a
-	jr .asm_42ff7
-
-.asm_42ff4
-	ld de, Frameset_68783
-.asm_42ff7
+	ld_obj_frameset Frameset_6877a, Frameset_68783
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $05
@@ -451,13 +445,7 @@ SilkyFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_43027
-	ld de, Frameset_6877a
-	jr .asm_4302a
-
-.asm_43027
-	ld de, Frameset_68783
-.asm_4302a
+	ld_obj_frameset Frameset_6877a, Frameset_68783
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $05
@@ -524,13 +512,7 @@ SilkyFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_43092
-	ld de, Frameset_6877a
-	jr .asm_43095
-
-.asm_43092
-	ld de, Frameset_68783
-.asm_43095
+	ld_obj_frameset Frameset_6877a, Frameset_68783
 	call SetObjectFramesetPtr
 	ld a, $64
 	ld [hli], a
@@ -575,13 +557,7 @@ SilkyFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_430e4
-	ld de, Frameset_68768
-	jr .asm_430e7
-
-.asm_430e4
-	ld de, Frameset_68771
-.asm_430e7
+	ld_obj_frameset Frameset_68768, Frameset_68771
 	call SetObjectFramesetPtr
 	ld a, $23
 	ld [hli], a
@@ -639,13 +615,7 @@ SilkyFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_43142
-	ld de, Frameset_6878c
-	jr .asm_43145
-
-.asm_43142
-	ld de, Frameset_68795
-.asm_43145
+	ld_obj_frameset Frameset_6878c, Frameset_68795
 	call SetObjectFramesetPtr
 	ld a, $04
 	ld [hli], a
@@ -780,13 +750,7 @@ SilkyFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_4320f
-	ld de, Frameset_6877a
-	jr .asm_43212
-
-.asm_4320f
-	ld de, Frameset_68783
-.asm_43212
+	ld_obj_frameset Frameset_6877a, Frameset_68783
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $05
@@ -811,13 +775,7 @@ SilkyFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_43240
-	ld de, Frameset_6877a
-	jr .asm_43243
-
-.asm_43240
-	ld de, Frameset_68783
-.asm_43243
+	ld_obj_frameset Frameset_6877a, Frameset_68783
 	call SetObjectFramesetPtr
 	ld l, OBJ_COLLBOX_RIGHT
 	ld a, $05

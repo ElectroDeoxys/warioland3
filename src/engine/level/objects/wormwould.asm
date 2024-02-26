@@ -171,12 +171,7 @@ WormwouldFunc:
 .asm_54131
 	ld a, [wCurObjSubState]
 	rlca
-	jr c, .asm_5413c
-	ld de, Frameset_696bc
-	jr .asm_5413f
-.asm_5413c
-	ld de, Frameset_696c5
-.asm_5413f
+	ld_obj_frameset Frameset_696bc, Frameset_696c5
 	call SetObjectFramesetPtr
 	ld a, 34
 	ld [hli], a
@@ -204,12 +199,7 @@ WormwouldFunc:
 	ld [hld], a
 	ld a, [hld]
 	rlca
-	jr c, .asm_5416f
-	ld de, Frameset_6971c
-	jr .asm_54172
-.asm_5416f
-	ld de, Frameset_696e0
-.asm_54172
+	ld_obj_frameset Frameset_6971c, Frameset_696e0
 	call SetObjectFramesetPtr
 	ld a, WORMWOULD_BURROW_DELAY
 	ld [hli], a
@@ -303,12 +293,7 @@ WormwouldFunc:
 .asm_54209
 	ld a, [hld]
 	rlca
-	jr c, .asm_54212
-	ld de, Frameset_69713
-	jr .asm_54215
-.asm_54212
-	ld de, Frameset_696d7
-.asm_54215
+	ld_obj_frameset Frameset_69713, Frameset_696d7
 	call SetObjectFramesetPtr
 	ld a, WORMWOULD_SHOOT_ROCK_DURATION
 	ld [hli], a ; wCurObjFrameDuration
@@ -327,12 +312,7 @@ WormwouldFunc:
 	ret nz
 	ld a, [hld]
 	rlca
-	jr c, .asm_54236
-	ld de, Frameset_6970a
-	jr .asm_54239
-.asm_54236
-	ld de, Frameset_696ce
-.asm_54239
+	ld_obj_frameset Frameset_6970a, Frameset_696ce
 	call SetObjectFramesetPtr
 	jp .set_idle
 
@@ -352,12 +332,7 @@ WormwouldFunc:
 	ld [hld], a ; wCurObjState
 	ld a, [hld] ; wCurObjSubState
 	rlca
-	jr c, .asm_54263
-	ld de, Frameset_69721
-	jr .asm_54266
-.asm_54263
-	ld de, Frameset_696e5
-.asm_54266
+	ld_obj_frameset Frameset_69721, Frameset_696e5
 	call SetObjectFramesetPtr
 	ld a, WORMWOULD_HURT_DURATION
 	ld [hli], a
@@ -494,12 +469,7 @@ WormwouldFunc:
 	inc l
 	ld a, [hld]
 	rlca
-	jr c, .asm_54375
-	ld de, Frameset_6972f
-	jr .asm_54378
-.asm_54375
-	ld de, Frameset_696f3
-.asm_54378
+	ld_obj_frameset Frameset_6972f, Frameset_696f3
 	call SetObjectFramesetPtr
 	ld a, 30
 	ld [hli], a ; wCurObjStateDuration

@@ -54,12 +54,7 @@ MizuuoFunc:
 .asm_48789
 	ld a, [wCurObjSubState]
 	rlca
-	jr c, .asm_48794
-	ld de, Frameset_68713
-	jr .asm_48797
-.asm_48794
-	ld de, Frameset_6871e
-.asm_48797
+	ld_obj_frameset Frameset_68713, Frameset_6871e
 	call SetObjectFramesetPtr
 	ld a, $22
 	ld [hli], a
@@ -76,12 +71,7 @@ MizuuoFunc:
 	ld [hld], a
 	ld a, [wCurObjSubState]
 	rlca
-	jr c, .asm_487b5
-	ld de, Frameset_686ef
-	jr .asm_487b8
-.asm_487b5
-	ld de, Frameset_686f8
-.asm_487b8
+	ld_obj_frameset Frameset_686ef, Frameset_686f8
 	call SetObjectFramesetPtr
 	ld a, $19
 	ld [hli], a
@@ -100,12 +90,7 @@ MizuuoFunc:
 	ld [hld], a
 	ld a, [wCurObjSubState]
 	rlca
-	jr c, .asm_487dc
-	ld de, Frameset_686a4
-	jr .asm_487df
-.asm_487dc
-	ld de, Frameset_686b9
-.asm_487df
+	ld_obj_frameset Frameset_686a4, Frameset_686b9
 	call SetObjectFramesetPtr
 	ld a, $5d
 	ld [hli], a
@@ -137,12 +122,7 @@ MizuuoFunc:
 .asm_48812
 	ld a, [wCurObjSubState]
 	rlca
-	jr c, .asm_4881d
-	ld de, Frameset_68701
-	jr .asm_48820
-.asm_4881d
-	ld de, Frameset_6870a
-.asm_48820
+	ld_obj_frameset Frameset_68701, Frameset_6870a
 	call SetObjectFramesetPtr
 	ld a, $19
 	ld [hli], a

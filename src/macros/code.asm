@@ -93,3 +93,14 @@ MACRO maskbits
 		and x
 	endc
 ENDM
+
+; \1 = frameset when facing left
+; \2 = frameset when facing right
+MACRO ld_obj_frameset
+	jr c, :+
+	ld de, \1
+	jr :++
+:
+	ld de, \2
+:
+ENDM
