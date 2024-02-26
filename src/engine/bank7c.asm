@@ -584,7 +584,7 @@ SaveLevel:
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
 	ld hl, wObjects
-	ld bc, (wNumWarioGoals - wObjects) + 5
+	ld bc, (wWarioGoals - wObjects) + 5
 	call CopyHLToDE_BC
 	pop af
 	ldh [rSVBK], a
@@ -683,7 +683,7 @@ SaveLevel:
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
 	ld hl, wObjects
-	ld bc, (wNumWarioGoals - wObjects) + 5
+	ld bc, (wWarioGoals - wObjects) + 5
 	call CopyHLToDE_BC
 	pop af
 	ldh [rSVBK], a
@@ -748,7 +748,7 @@ SaveLevel:
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
 	ld hl, wObjects
-	ld bc, (wNumWarioGoals - wObjects) + 5
+	ld bc, (wWarioGoals - wObjects) + 5
 	call CopyHLToDE_BC
 	pop af
 	ldh [rSVBK], a
@@ -815,7 +815,7 @@ SaveLevel:
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
 	ld hl, wObjects
-	ld bc, (wNumWarioGoals - wObjects) + 5
+	ld bc, (wWarioGoals - wObjects) + 5
 	call CopyHLToDE_BC
 	pop af
 	ldh [rSVBK], a
@@ -1543,7 +1543,7 @@ CalculateWRAMDataChecksum:
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
 	ld hl, wObjects
-	ld bc, (wNumWarioGoals - wObjects) + 5
+	ld bc, (wWarioGoals - wObjects) + 5
 	call CalculateChecksumLong
 	pop af
 	ldh [rSVBK], a

@@ -965,8 +965,8 @@ Func_61f10:
 	ld [wDollBoyNoFlashingBarrel], a
 	ld [wDollBoyRemainingParts], a
 	ld [wNumLitTorches], a
-	ld [wNumShootGoals], a
-	ld [wNumWarioGoals], a
+	ld [wShootGoals], a
+	ld [wWarioGoals], a
 	ret
 
 Func_61f2a:
@@ -976,8 +976,8 @@ Func_61f2a:
 	ld [wDollBoyNoFlashingBarrel], a
 	ld [wDollBoyRemainingParts], a
 	ld [wNumLitTorches], a
-	ld [wNumShootGoals], a
-	ld [wNumWarioGoals], a
+	ld [wShootGoals], a
+	ld [wWarioGoals], a
 	ret
 
 ClearObjects:

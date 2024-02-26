@@ -975,18 +975,15 @@ w1d140:: ; d140
 wFlameBlockCleared::
 	db
 
-wDollBoyNoFlashingBarrel:: ; d141
-	db
-
-wDollBoyRemainingParts:: ; d142
-	db
+wDollBoyNoFlashingBarrel:: db ; d141
+wDollBoyRemainingParts::   db ; d142
 
 ; number of torches lit for the Flame Block puzzle
 wNumLitTorches:: ; d143
 	db
 
-wNumShootGoals:: db ; d144
-wNumWarioGoals:: db ; d145
+wShootGoals:: db ; d144
+wWarioGoals:: db ; d145
 
 ; during Doll Boy's barrel phase,
 ; each 4 lower significant bits represent a Doll Boy
