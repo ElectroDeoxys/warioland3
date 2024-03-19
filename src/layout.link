@@ -274,6 +274,8 @@ WRAM0
 	"Level WRAM"
 	org $cc00
 	"Sprites WRAM"
+	org $cf00
+	"Stack"
 WRAMX 1
 	"WRAM1"
 	org $d800

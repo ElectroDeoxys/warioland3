@@ -936,6 +936,13 @@ wcef1:: ; cef1
 wNumMusicBoxes:: ; cef2
 	db
 
+SECTION "Stack", WRAM0
+
+wStackBottom:: ; cf00
+	ds $100 - 1
+wStackTop:: ; cfff
+	db
+
 SECTION "WRAM1", WRAMX
 
 wObjects::

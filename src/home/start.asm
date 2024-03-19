@@ -16,9 +16,9 @@ Init::
 	ldh [hDemoPowerUp], a
 InitWithoutDemoPowerUpReset::
 	di
-	ld sp, $cfff
+	ld sp, wStackTop
 	ld hl, sp+$00
-	ld c, $00
+	ld c, 0 ; aka $100 bytes
 	xor a
 .loop_clear_stack
 	ld [hld], a
