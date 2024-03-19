@@ -6,8 +6,8 @@ DEF SHOOT_JUMP_LATERAL_SPEED      EQU   1 ; how fast Shoot moves horizontally wh
 DEF SHOOT_TAUNT_DURATION          EQU  80 ; duration of taunt animation
 DEF SHOOT_JUMP_DELAY_LONG         EQU  25 ; duration between jumps when Wario has 0 goals
 DEF SHOOT_JUMP_DELAY_SHORT        EQU   2 ; duration between jumps when Wario has at least 1 goal
-DEF SHOOT_LAST_GOAL_BALL_DURATION EQU 256 ; duration of ball form when Wario has 0 or 1 goal
-DEF SHOOT_LAST_GOAL_BALL_DURATION EQU 40 ;160 ; duration of ball form when Wario already has 2 goals
+DEF SHOOT_REGULAR_BALL_DURATION   EQU 256 ; duration of ball form when Wario has 0 or 1 goal
+DEF SHOOT_LAST_GOAL_BALL_DURATION EQU 160 ; duration of ball form when Wario already has 2 goals
 
 ShootFunc:
 	ld a, TRUE
@@ -101,12 +101,12 @@ ShootFunc:
 .asm_566b7
 	xor a
 	ld [hld], a
-	res 6, [hl]
+	res OBJSUBFLAG_VDIR_F, [hl]
 	jr .asm_566c1
 .asm_566bd
 	xor a
 	ld [hld], a
-	set 6, [hl]
+	set OBJSUBFLAG_VDIR_F, [hl]
 .asm_566c1
 	ld a, [hld]
 	rlca
@@ -115,21 +115,21 @@ ShootFunc:
 	ld [wCurObjVar2], a
 	jp .asm_56787
 
-.asm_566d5
+.interacted_with_ball_wario
 	xor a
-	ld [hld], a
+	ld [hld], a ; OBJ_STATE
 	dec l
-	ld [hld], a
+	ld [hld], a ; OBJ_VAR_3
 	ld a, $10
-	ld [hl], a
+	ld [hl], a ; OBJ_VAR_2
 	call MoveObjectUpByVar2
 	ld de, Frameset_69ffd
 	call SetObjectFramesetPtr
 	inc l
 	ld a, $05
-	ld [hli], a
+	ld [hli], a ; OBJ_VAR_1
 	ld a, $01
-	ld [hl], a
+	ld [hl], a ; OBJ_VAR_2
 	ld l, OBJ_Y_POS
 	ld a, [hli]
 	add $10
@@ -140,15 +140,19 @@ ShootFunc:
 	inc l
 	ld a, [hli]
 	ld [wWarioXPos + 1], a
+
 	play_sfx SFX_FAT_WALK
+
 	ld l, OBJ_SUBSTATE
 	set OBJSUBFLAG_HDIR_F, [hl]
+	; bug, this expects x position in register a
+	; but the play_sfx macro cobbles it
 	cp $7b
-	jr c, .asm_56714
-	res 6, [hl]
+	jr c, .asm_56714 ; jump is always taken
+	res OBJSUBFLAG_VDIR_F, [hl]
 	ret
 .asm_56714
-	set 6, [hl]
+	set OBJSUBFLAG_VDIR_F, [hl]
 	ret
 
 .Main:
@@ -163,7 +167,7 @@ ShootFunc:
 	cp $05
 	jr z, .asm_566b7
 	cp OBJSTATE_SPECIAL_3
-	jr z, .asm_566d5
+	jr z, .interacted_with_ball_wario
 	and $fe
 	cp OBJSTATE_WOBBLE_LEFT_START ; aka OBJSTATE_WOBBLE_RIGHT_START
 	jp z, .stepped_on
@@ -204,9 +208,7 @@ ShootFunc:
 	ld [hli], a
 	xor a
 	ld [hli], a ; OBJ_VAR_1
-	ld a, [rDIV]
-	and %1
-	inc a
+	ld a, SHOOT_JUMP_LATERAL_SPEED
 	ld [hl], a ; OBJ_VAR_2
 	ret
 
@@ -746,8 +748,8 @@ ShootFunc:
 	dec l
 	ld a, [wWarioGoals]
 	cp 2
-	;jr nc, .at_least_2_goals
-	xor a ; treated as $100 (SHOOT_LAST_GOAL_BALL_DURATION)
+	jr nc, .at_least_2_goals
+	xor a ; treated as $100 (SHOOT_REGULAR_BALL_DURATION)
 	jr .got_ball_form_duration
 .at_least_2_goals
 	ld a, SHOOT_LAST_GOAL_BALL_DURATION
