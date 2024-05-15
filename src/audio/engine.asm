@@ -83,10 +83,11 @@ Func_3007a::
 	ld hl, w3d007
 	ld a, [hli]
 	add [hl]
-	ld [hli], a ; w3d008
+	ld [hli], a ; w3d008 += w3d007
 	ld a, 0
 	adc [hl]
 	ld [hld], a
+
 	ld a, [hli] ; w3d008
 	sub $4a
 	ld b, a
@@ -94,6 +95,7 @@ Func_3007a::
 	sbc 0
 	jr nc, .asm_300a4
 
+	; w3d008 < $4a
 	call SetSFXChannels
 .loop_chs_1
 	call Func_30547
@@ -102,6 +104,7 @@ Func_3007a::
 	jr .asm_300c8
 
 .asm_300a4
+	; w3d008 -= $4a
 	ld [hld], a
 	ld [hl], b
 
@@ -814,6 +817,9 @@ Func_3049e::
 	call Func_304a4
 	jp Func_3f8d
 
+; bc = parameters
+; d = ?
+; e = ?
 Func_304a4:
 	; return if a >= $7
 	cp $7
@@ -888,7 +894,7 @@ Func_304fa:
 	ld d, a ; low nibble
 	ld a, [w3d03a]
 	swap a
-	and $f0 ; *16
+	and $f0
 	or d
 	ld d, a
 	ld e, NUM_CHANNELS
@@ -1408,6 +1414,7 @@ AudioCmd_SetTempo:
 	call Func_307e4
 	jp DoAudioCommand
 
+; hl = either wSFXTempo or wMusicTempo
 Func_307e4:
 	ld a, [hli]
 	ld b, a
@@ -1459,7 +1466,7 @@ AudioCmd_SetSemitoneOffset:
 
 Func_30829:
 	ld a, [wNumChannels]
-	set 2, a
+	set CHANFLAGS_UPDATE_FREQUENCY_F, a
 	ld [wNumChannels], a
 	ld bc, CHANNEL_UNK_13
 	jp Func_304d9
@@ -1646,7 +1653,7 @@ AudioCmd_SetChannelVolume:
 
 Func_30930:
 	ld a, [wNumChannels]
-	set 1, a
+	set CHANFLAGS_UPDATE_VOLUME_F, a
 	ld [wNumChannels], a
 	ld bc, CHANNEL_UNK_16
 	jp Func_304bc
@@ -1660,7 +1667,7 @@ Func_3093e:
 
 Func_3094b:
 	ld a, [wNumChannels]
-	set 0, a
+	set CHANFLAGS_UPDATE_SO_F, a
 	ld [wNumChannels], a
 	ld bc, CHANNEL_SO2
 	jp Func_304bc
