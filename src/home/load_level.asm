@@ -119,7 +119,7 @@ DecompressLevelObjectMap::
 	srl a ; /2
 	add $b0
 	dec a
-	ld c, a
+	ld c, a ; (LEVEL_WIDTH / 2) + $b0 - 1
 	ld de, s1a000 + $b0
 .loop_data
 	ld a, [hli]
@@ -175,7 +175,7 @@ DecompressLevelObjectMap::
 	ld a, d
 	cp $c0
 	jr nz, .next_copy
-	ld d, HIGH($a000)
+	ld d, HIGH(STARTOF(SRAM))
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch

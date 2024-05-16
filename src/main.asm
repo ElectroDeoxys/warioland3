@@ -482,11 +482,11 @@ INCLUDE "engine/bank37.asm"
 
 SECTION "Level Data 1", ROMX
 
-OutOfTheWoodsBlockMap:       INCBIN "data/levels/block_map/out_of_the_woods.bin"
-ThePeacefulVillage1BlockMap: INCBIN "data/levels/block_map/the_peaceful_village_1.bin"
+OutOfTheWoodsBlockMap:       INCBIN "data/levels/block_map/out_of_the_woods.bin.rle"
+ThePeacefulVillage1BlockMap: INCBIN "data/levels/block_map/the_peaceful_village_1.bin.rle"
 
-OutOfTheWoodsObjectMap:       INCBIN "data/levels/object_map/out_of_the_woods.bin"
-ThePeacefulVillage1ObjectMap: INCBIN "data/levels/object_map/the_peaceful_village_1.bin"
+OutOfTheWoodsObjectMap:       INCBIN "data/levels/object_map/out_of_the_woods.bin.rle"
+ThePeacefulVillage1ObjectMap: INCBIN "data/levels/object_map/the_peaceful_village_1.bin.rle"
 
 LevelDataUnk1_e2c0b: INCBIN "data/levels/unknown1/data_e2c0b.bin"
 LevelDataUnk2_e2e0b: INCBIN "data/levels/unknown2/data_e2e0b.bin.rle"
@@ -504,11 +504,11 @@ LevelDataUnk2_e3bbe: INCBIN "data/levels/unknown2/data_e3bbe.bin.rle"
 
 SECTION "Level Data 2", ROMX
 
-TheVastPlain1BlockMap:   INCBIN "data/levels/block_map/the_vast_plain_1.bin"
-TheSteepCanyon1BlockMap: INCBIN "data/levels/block_map/the_steep_canyon_1.bin"
+TheVastPlain1BlockMap:   INCBIN "data/levels/block_map/the_vast_plain_1.bin.rle"
+TheSteepCanyon1BlockMap: INCBIN "data/levels/block_map/the_steep_canyon_1.bin.rle"
 
-TheVastPlain1ObjectMap:   INCBIN "data/levels/object_map/the_vast_plain_1.bin"
-TheSteepCanyon1ObjectMap: INCBIN "data/levels/object_map/the_steep_canyon_1.bin"
+TheVastPlain1ObjectMap:   INCBIN "data/levels/object_map/the_vast_plain_1.bin.rle"
+TheSteepCanyon1ObjectMap: INCBIN "data/levels/object_map/the_steep_canyon_1.bin.rle"
 
 LevelDataUnk1_e6cf7: INCBIN "data/levels/unknown1/data_e6cf7.bin"
 LevelDataUnk2_e6ef7: INCBIN "data/levels/unknown2/data_e6ef7.bin.rle"
@@ -526,11 +526,11 @@ LevelDataUnk2_e7d99: INCBIN "data/levels/unknown2/data_e7d99.bin.rle"
 
 SECTION "Level Data 3", ROMX
 
-TheTidalCoast1BlockMap: INCBIN "data/levels/block_map/the_tidal_coast_1.bin"
-SeaTurtleRocksBlockMap: INCBIN "data/levels/block_map/sea_turtle_rocks.bin"
+TheTidalCoast1BlockMap: INCBIN "data/levels/block_map/the_tidal_coast_1.bin.rle"
+SeaTurtleRocksBlockMap: INCBIN "data/levels/block_map/sea_turtle_rocks.bin.rle"
 
-TheTidalCoast1ObjectMap: INCBIN "data/levels/object_map/the_tidal_coast_1.bin"
-SeaTurtleRocksObjectMap: INCBIN "data/levels/object_map/sea_turtle_rocks.bin"
+TheTidalCoast1ObjectMap: INCBIN "data/levels/object_map/the_tidal_coast_1.bin.rle"
+SeaTurtleRocksObjectMap: INCBIN "data/levels/object_map/sea_turtle_rocks.bin.rle"
 
 LevelDataUnk1_ea43f: INCBIN "data/levels/unknown1/data_ea43f.bin"
 LevelDataUnk2_ea63f: INCBIN "data/levels/unknown2/data_ea63f.bin.rle"
@@ -548,11 +548,11 @@ LevelDataUnk2_eb3c3: INCBIN "data/levels/unknown2/data_eb3c3.bin.rle"
 
 SECTION "Level Data 4", ROMX
 
-DesertRuinsBlockMap:      INCBIN "data/levels/block_map/desert_ruins.bin"
-TheVolcanosBase1BlockMap: INCBIN "data/levels/block_map/the_volcanos_base_1.bin"
+DesertRuinsBlockMap:      INCBIN "data/levels/block_map/desert_ruins.bin.rle"
+TheVolcanosBase1BlockMap: INCBIN "data/levels/block_map/the_volcanos_base_1.bin.rle"
 
-DesertRuinsObjectMap:      INCBIN "data/levels/object_map/desert_ruins.bin"
-TheVolcanosBase1ObjectMap: INCBIN "data/levels/object_map/the_volcanos_base_1.bin"
+DesertRuinsObjectMap:      INCBIN "data/levels/object_map/desert_ruins.bin.rle"
+TheVolcanosBase1ObjectMap: INCBIN "data/levels/object_map/the_volcanos_base_1.bin.rle"
 
 LevelDataUnk1_eed97: INCBIN "data/levels/unknown1/data_eed97.bin"
 LevelDataUnk2_eef97: INCBIN "data/levels/unknown2/data_eef97.bin.rle"
@@ -570,11 +570,11 @@ LevelDataUnk2_efde2: INCBIN "data/levels/unknown2/data_efde2.bin.rle"
 
 SECTION "Level Data 5", ROMX
 
-ThePoolOfRain1BlockMap: INCBIN "data/levels/block_map/the_pool_of_rain_1.bin"
-ATownInChaosBlockMap:   INCBIN "data/levels/block_map/a_town_in_chaos.bin"
+ThePoolOfRain1BlockMap: INCBIN "data/levels/block_map/the_pool_of_rain_1.bin.rle"
+ATownInChaosBlockMap:   INCBIN "data/levels/block_map/a_town_in_chaos.bin.rle"
 
-ThePoolOfRain1ObjectMap: INCBIN "data/levels/object_map/the_pool_of_rain_1.bin"
-ATownInChaosObjectMap:   INCBIN "data/levels/object_map/a_town_in_chaos.bin"
+ThePoolOfRain1ObjectMap: INCBIN "data/levels/object_map/the_pool_of_rain_1.bin.rle"
+ATownInChaosObjectMap:   INCBIN "data/levels/object_map/a_town_in_chaos.bin.rle"
 
 LevelDataUnk1_f2ab7: INCBIN "data/levels/unknown1/data_f2ab7.bin"
 LevelDataUnk2_f2cb7: INCBIN "data/levels/unknown2/data_f2cb7.bin.rle"
@@ -592,11 +592,11 @@ LevelDataUnk2_f3ad7: INCBIN "data/levels/unknown2/data_f3ad7.bin.rle"
 
 SECTION "Level Data 6", ROMX
 
-BeneathTheWavesBlockMap: INCBIN "data/levels/block_map/beneath_the_waves.bin"
-TheWestCraterBlockMap:   INCBIN "data/levels/block_map/the_west_crater.bin"
+BeneathTheWavesBlockMap: INCBIN "data/levels/block_map/beneath_the_waves.bin.rle"
+TheWestCraterBlockMap:   INCBIN "data/levels/block_map/the_west_crater.bin.rle"
 
-BeneathTheWavesObjectMap: INCBIN "data/levels/object_map/beneath_the_waves.bin"
-TheWestCraterObjectMap:   INCBIN "data/levels/object_map/the_west_crater.bin"
+BeneathTheWavesObjectMap: INCBIN "data/levels/object_map/beneath_the_waves.bin.rle"
+TheWestCraterObjectMap:   INCBIN "data/levels/object_map/the_west_crater.bin.rle"
 
 LevelDataUnk1_f6759: INCBIN "data/levels/unknown1/data_f6759.bin"
 LevelDataUnk2_f6959: INCBIN "data/levels/unknown2/data_f6959.bin.rle"
@@ -614,11 +614,11 @@ LevelDataUnk2_f7803: INCBIN "data/levels/unknown2/data_f7803.bin.rle"
 
 SECTION "Level Data 7", ROMX
 
-TheGrasslandsBlockMap: INCBIN "data/levels/block_map/the_grasslands.bin"
-TheBigBridgeBlockMap:  INCBIN "data/levels/block_map/the_big_bridge.bin"
+TheGrasslandsBlockMap: INCBIN "data/levels/block_map/the_grasslands.bin.rle"
+TheBigBridgeBlockMap:  INCBIN "data/levels/block_map/the_big_bridge.bin.rle"
 
-TheGrasslandsObjectMap: INCBIN "data/levels/object_map/the_grasslands.bin"
-TheBigBridgeObjectMap:  INCBIN "data/levels/object_map/the_big_bridge.bin"
+TheGrasslandsObjectMap: INCBIN "data/levels/object_map/the_grasslands.bin.rle"
+TheBigBridgeObjectMap:  INCBIN "data/levels/object_map/the_big_bridge.bin.rle"
 
 LevelDataUnk1_fa4fe: INCBIN "data/levels/unknown1/data_fa4fe.bin"
 LevelDataUnk2_fa6fe: INCBIN "data/levels/unknown2/data_fa6fe.bin.rle"
@@ -636,11 +636,11 @@ LevelDataUnk2_fb4f0: INCBIN "data/levels/unknown2/data_fb4f0.bin.rle"
 
 SECTION "Level Data 8", ROMX
 
-TowerOfRevivalBlockMap:     INCBIN "data/levels/block_map/tower_of_revival.bin"
-BankOfTheWildRiverBlockMap: INCBIN "data/levels/block_map/bank_of_the_wild_river.bin"
+TowerOfRevivalBlockMap:     INCBIN "data/levels/block_map/tower_of_revival.bin.rle"
+BankOfTheWildRiverBlockMap: INCBIN "data/levels/block_map/bank_of_the_wild_river.bin.rle"
 
-TowerOfRevivalObjectMap:     INCBIN "data/levels/object_map/tower_of_revival.bin"
-BankOfTheWildRiverObjectMap: INCBIN "data/levels/object_map/bank_of_the_wild_river.bin"
+TowerOfRevivalObjectMap:     INCBIN "data/levels/object_map/tower_of_revival.bin.rle"
+BankOfTheWildRiverObjectMap: INCBIN "data/levels/object_map/bank_of_the_wild_river.bin.rle"
 
 LevelDataUnk1_feb90: INCBIN "data/levels/unknown1/data_feb90.bin"
 LevelDataUnk2_fed90: INCBIN "data/levels/unknown2/data_fed90.bin.rle"
@@ -658,11 +658,11 @@ LevelDataUnk2_ffaa4: INCBIN "data/levels/unknown2/data_ffaa4.bin.rle"
 
 SECTION "Level Data 9", ROMX
 
-CaveOfFlamesBlockMap:    INCBIN "data/levels/block_map/cave_of_flames.bin"
-AboveTheClouds1BlockMap: INCBIN "data/levels/block_map/above_the_clouds_1.bin"
+CaveOfFlamesBlockMap:    INCBIN "data/levels/block_map/cave_of_flames.bin.rle"
+AboveTheClouds1BlockMap: INCBIN "data/levels/block_map/above_the_clouds_1.bin.rle"
 
-CaveOfFlamesObjectMap:    INCBIN "data/levels/object_map/cave_of_flames.bin"
-AboveTheClouds1ObjectMap: INCBIN "data/levels/object_map/above_the_clouds_1.bin"
+CaveOfFlamesObjectMap:    INCBIN "data/levels/object_map/cave_of_flames.bin.rle"
+AboveTheClouds1ObjectMap: INCBIN "data/levels/object_map/above_the_clouds_1.bin.rle"
 
 LevelDataUnk1_102c8e: INCBIN "data/levels/unknown1/data_102c8e.bin"
 LevelDataUnk2_102e8e: INCBIN "data/levels/unknown2/data_102e8e.bin.rle"
@@ -680,11 +680,11 @@ LevelDataUnk2_103d9c: INCBIN "data/levels/unknown2/data_103d9c.bin.rle"
 
 SECTION "Level Data 10", ROMX
 
-TheStagnantSwamp1BlockMap: INCBIN "data/levels/block_map/the_stagnant_swamp_1.bin"
-TheFrigidSeaBlockMap:      INCBIN "data/levels/block_map/the_frigid_sea.bin"
+TheStagnantSwamp1BlockMap: INCBIN "data/levels/block_map/the_stagnant_swamp_1.bin.rle"
+TheFrigidSeaBlockMap:      INCBIN "data/levels/block_map/the_frigid_sea.bin.rle"
 
-TheStagnantSwamp1ObjectMap: INCBIN "data/levels/object_map/the_stagnant_swamp_1.bin"
-TheFrigidSeaObjectMap:      INCBIN "data/levels/object_map/the_frigid_sea.bin"
+TheStagnantSwamp1ObjectMap: INCBIN "data/levels/object_map/the_stagnant_swamp_1.bin.rle"
+TheFrigidSeaObjectMap:      INCBIN "data/levels/object_map/the_frigid_sea.bin.rle"
 
 LevelDataUnk1_1061f4: INCBIN "data/levels/unknown1/data_1061f4.bin"
 LevelDataUnk2_1063f4: INCBIN "data/levels/unknown2/data_1063f4.bin.rle"
@@ -702,11 +702,11 @@ LevelDataUnk2_10723d: INCBIN "data/levels/unknown2/data_10723d.bin.rle"
 
 SECTION "Level Data 11", ROMX
 
-CastleOfIllusionsBlockMap: INCBIN "data/levels/block_map/castle_of_illusions.bin"
-TheColossalHole1BlockMap:  INCBIN "data/levels/block_map/the_colossal_hole_1.bin"
+CastleOfIllusionsBlockMap: INCBIN "data/levels/block_map/castle_of_illusions.bin.rle"
+TheColossalHole1BlockMap:  INCBIN "data/levels/block_map/the_colossal_hole_1.bin.rle"
 
-CastleOfIllusionsObjectMap: INCBIN "data/levels/object_map/castle_of_illusions.bin"
-TheColossalHole1ObjectMap:  INCBIN "data/levels/object_map/the_colossal_hole_1.bin"
+CastleOfIllusionsObjectMap: INCBIN "data/levels/object_map/castle_of_illusions.bin.rle"
+TheColossalHole1ObjectMap:  INCBIN "data/levels/object_map/the_colossal_hole_1.bin.rle"
 
 LevelDataUnk1_10ae4f: INCBIN "data/levels/unknown1/data_10ae4f.bin"
 LevelDataUnk2_10b04f: INCBIN "data/levels/unknown2/data_10b04f.bin.rle"
@@ -724,11 +724,11 @@ LevelDataUnk2_10be28: INCBIN "data/levels/unknown2/data_10be28.bin.rle"
 
 SECTION "Level Data 12", ROMX
 
-TheWarpedVoidBlockMap: INCBIN "data/levels/block_map/the_warped_void.bin"
-TheEastCraterBlockMap: INCBIN "data/levels/block_map/the_east_crater.bin"
+TheWarpedVoidBlockMap: INCBIN "data/levels/block_map/the_warped_void.bin.rle"
+TheEastCraterBlockMap: INCBIN "data/levels/block_map/the_east_crater.bin.rle"
 
-TheWarpedVoidObjectMap: INCBIN "data/levels/object_map/the_warped_void.bin"
-TheEastCraterObjectMap: INCBIN "data/levels/object_map/the_east_crater.bin"
+TheWarpedVoidObjectMap: INCBIN "data/levels/object_map/the_warped_void.bin.rle"
+TheEastCraterObjectMap: INCBIN "data/levels/object_map/the_east_crater.bin.rle"
 
 LevelDataUnk1_10e436: INCBIN "data/levels/unknown1/data_10e436.bin"
 LevelDataUnk2_10e636: INCBIN "data/levels/unknown2/data_10e636.bin.rle"
@@ -746,11 +746,11 @@ LevelDataUnk2_10f392: INCBIN "data/levels/unknown2/data_10f392.bin.rle"
 
 SECTION "Level Data 13", ROMX
 
-ForestOfFearBlockMap:     INCBIN "data/levels/block_map/forest_of_fear.bin"
-HiddenFigureRoomBlockMap: INCBIN "data/levels/block_map/hidden_figure_room.bin"
+ForestOfFearBlockMap:     INCBIN "data/levels/block_map/forest_of_fear.bin.rle"
+HiddenFigureRoomBlockMap: INCBIN "data/levels/block_map/hidden_figure_room.bin.rle"
 
-ForestOfFearObjectMap:     INCBIN "data/levels/object_map/forest_of_fear.bin"
-HiddenFigureRoomObjectMap: INCBIN "data/levels/object_map/hidden_figure_room.bin"
+ForestOfFearObjectMap:     INCBIN "data/levels/object_map/forest_of_fear.bin.rle"
+HiddenFigureRoomObjectMap: INCBIN "data/levels/object_map/hidden_figure_room.bin.rle"
 
 LevelDataUnk1_1115a5: INCBIN "data/levels/unknown1/data_1115a5.bin"
 LevelDataUnk2_1117a5: INCBIN "data/levels/unknown2/data_1117a5.bin.rle"
@@ -768,11 +768,11 @@ LevelDataUnk2_1126a3: INCBIN "data/levels/unknown2/data_1126a3.bin.rle"
 
 SECTION "Level Data 14", ROMX
 
-TheVastPlain2BlockMap:    INCBIN "data/levels/block_map/the_vast_plain_2.bin"
-TheVolcanosBase2BlockMap: INCBIN "data/levels/block_map/the_volcanos_base_2.bin"
+TheVastPlain2BlockMap:    INCBIN "data/levels/block_map/the_vast_plain_2.bin.rle"
+TheVolcanosBase2BlockMap: INCBIN "data/levels/block_map/the_volcanos_base_2.bin.rle"
 
-TheVastPlain2ObjectMap:    INCBIN "data/levels/object_map/the_vast_plain_2.bin"
-TheVolcanosBase2ObjectMap: INCBIN "data/levels/object_map/the_volcanos_base_2.bin"
+TheVastPlain2ObjectMap:    INCBIN "data/levels/object_map/the_vast_plain_2.bin.rle"
+TheVolcanosBase2ObjectMap: INCBIN "data/levels/object_map/the_volcanos_base_2.bin.rle"
 
 LevelDataUnk1_11699e: INCBIN "data/levels/unknown1/data_11699e.bin"
 LevelDataUnk2_116b9e: INCBIN "data/levels/unknown2/data_116b9e.bin.rle"
@@ -790,11 +790,11 @@ LevelDataUnk2_117a1c: INCBIN "data/levels/unknown2/data_117a1c.bin.rle"
 
 SECTION "Level Data 15", ROMX
 
-ThePoolOfRain2BlockMap:   INCBIN "data/levels/block_map/the_pool_of_rain_2.bin"
-TheColossalHole2BlockMap: INCBIN "data/levels/block_map/the_colossal_hole_2.bin"
+ThePoolOfRain2BlockMap:   INCBIN "data/levels/block_map/the_pool_of_rain_2.bin.rle"
+TheColossalHole2BlockMap: INCBIN "data/levels/block_map/the_colossal_hole_2.bin.rle"
 
-ThePoolOfRain2ObjectMap:   INCBIN "data/levels/object_map/the_pool_of_rain_2.bin"
-TheColossalHole2ObjectMap: INCBIN "data/levels/object_map/the_colossal_hole_2.bin"
+ThePoolOfRain2ObjectMap:   INCBIN "data/levels/object_map/the_pool_of_rain_2.bin.rle"
+TheColossalHole2ObjectMap: INCBIN "data/levels/object_map/the_colossal_hole_2.bin.rle"
 
 LevelDataUnk1_11a7c8: INCBIN "data/levels/unknown1/data_11a7c8.bin"
 LevelDataUnk2_11a9c8: INCBIN "data/levels/unknown2/data_11a9c8.bin.rle"
@@ -810,27 +810,27 @@ LevelDataUnk2_11b624: INCBIN "data/levels/unknown2/data_11b624.bin.rle"
 
 SECTION "Level Data 16", ROMX
 
-TheTidalCoast2BlockMap:    INCBIN "data/levels/block_map/the_tidal_coast_2.bin"
-TheStagnantSwamp2BlockMap: INCBIN "data/levels/block_map/the_stagnant_swamp_2.bin"
+TheTidalCoast2BlockMap:    INCBIN "data/levels/block_map/the_tidal_coast_2.bin.rle"
+TheStagnantSwamp2BlockMap: INCBIN "data/levels/block_map/the_stagnant_swamp_2.bin.rle"
 
-TheTidalCoast2ObjectMap:    INCBIN "data/levels/object_map/the_tidal_coast_2.bin"
-TheStagnantSwamp2ObjectMap: INCBIN "data/levels/object_map/the_stagnant_swamp_2.bin"
+TheTidalCoast2ObjectMap:    INCBIN "data/levels/object_map/the_tidal_coast_2.bin.rle"
+TheStagnantSwamp2ObjectMap: INCBIN "data/levels/object_map/the_stagnant_swamp_2.bin.rle"
 
 
 SECTION "Level Data 17", ROMX
 
-AboveTheClouds2BlockMap: INCBIN "data/levels/block_map/above_the_clouds_2.bin"
-TheSteepCanyon2BlockMap: INCBIN "data/levels/block_map/the_steep_canyon_2.bin"
+AboveTheClouds2BlockMap: INCBIN "data/levels/block_map/above_the_clouds_2.bin.rle"
+TheSteepCanyon2BlockMap: INCBIN "data/levels/block_map/the_steep_canyon_2.bin.rle"
 
-AboveTheClouds2ObjectMap: INCBIN "data/levels/object_map/above_the_clouds_2.bin"
-TheSteepCanyon2ObjectMap: INCBIN "data/levels/object_map/the_steep_canyon_2.bin"
+AboveTheClouds2ObjectMap: INCBIN "data/levels/object_map/above_the_clouds_2.bin.rle"
+TheSteepCanyon2ObjectMap: INCBIN "data/levels/object_map/the_steep_canyon_2.bin.rle"
 
 
 SECTION "Level Data 18", ROMX
 
-ThePeacefulVillage2BlockMap: INCBIN "data/levels/block_map/the_peaceful_village_2.bin"
+ThePeacefulVillage2BlockMap: INCBIN "data/levels/block_map/the_peaceful_village_2.bin.rle"
 
-ThePeacefulVillage2ObjectMap: INCBIN "data/levels/object_map/the_peaceful_village_2.bin"
+ThePeacefulVillage2ObjectMap: INCBIN "data/levels/object_map/the_peaceful_village_2.bin.rle"
 
 
 SECTION "Room Special Tiles 1", ROMX
