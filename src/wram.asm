@@ -97,7 +97,7 @@ wc0a9:: dw ; c0a9
 wTempBank:: ; c0ac
 	db
 
-wCompressedLevelLayoutPtr:: ; c0ad
+wCompressedLevelBlockMapPtr:: ; c0ad
 	dw
 
 	ds $4
@@ -799,7 +799,7 @@ wSpawnXBlock:: db ; ccee
 wccef:: ; ccef
 	db
 
-wccf0:: ; ccf0
+wBGPtr:: ; ccf0
 wCreditsBGMapPtr::
 	dw
 

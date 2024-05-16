@@ -321,110 +321,110 @@ LevelHeaders::
 	dw NULL
 
 .out_of_the_woods
-	dab OutOfTheWoodsLayout
-	dw OutOfTheWoodsObjectsMap
+	dab OutOfTheWoodsBlockMap
+	dw OutOfTheWoodsObjectMap
 .the_peaceful_village_1
-	dab ThePeacefulVillage1Layout
-	dw ThePeacefulVillage1ObjectsMap
+	dab ThePeacefulVillage1BlockMap
+	dw ThePeacefulVillage1ObjectMap
 .the_vast_plain_1
-	dab TheVastPlain1Layout
-	dw TheVastPlain1ObjectsMap
+	dab TheVastPlain1BlockMap
+	dw TheVastPlain1ObjectMap
 .bank_of_the_wild_river
-	dab BankOfTheWildRiverLayout
-	dw BankOfTheWildRiverObjectsMap
+	dab BankOfTheWildRiverBlockMap
+	dw BankOfTheWildRiverObjectMap
 .the_tidal_coast_1
-	dab TheTidalCoast1Layout
-	dw TheTidalCoast1ObjectsMap
+	dab TheTidalCoast1BlockMap
+	dw TheTidalCoast1ObjectMap
 .sea_turtle_rocks
-	dab SeaTurtleRocksLayout
-	dw SeaTurtleRocksObjectsMap
+	dab SeaTurtleRocksBlockMap
+	dw SeaTurtleRocksObjectMap
 .desert_ruins
-	dab DesertRuinsLayout
-	dw DesertRuinsObjectsMap
+	dab DesertRuinsBlockMap
+	dw DesertRuinsObjectMap
 .the_volcanos_base_1
-	dab TheVolcanosBase1Layout
-	dw TheVolcanosBase1ObjectsMap
+	dab TheVolcanosBase1BlockMap
+	dw TheVolcanosBase1ObjectMap
 .the_pool_of_rain_1
-	dab ThePoolOfRain1Layout
-	dw ThePoolOfRain1ObjectsMap
+	dab ThePoolOfRain1BlockMap
+	dw ThePoolOfRain1ObjectMap
 .a_town_in_chaos
-	dab ATownInChaosLayout
-	dw ATownInChaosObjectsMap
+	dab ATownInChaosBlockMap
+	dw ATownInChaosObjectMap
 .beneath_the_waves
-	dab BeneathTheWavesLayout
-	dw BeneathTheWavesObjectsMap
+	dab BeneathTheWavesBlockMap
+	dw BeneathTheWavesObjectMap
 .the_west_crater
-	dab TheWestCraterLayout
-	dw TheWestCraterObjectsMap
+	dab TheWestCraterBlockMap
+	dw TheWestCraterObjectMap
 .the_grasslands
-	dab TheGrasslandsLayout
-	dw TheGrasslandsObjectsMap
+	dab TheGrasslandsBlockMap
+	dw TheGrasslandsObjectMap
 .the_big_bridge
-	dab TheBigBridgeLayout
-	dw TheBigBridgeObjectsMap
+	dab TheBigBridgeBlockMap
+	dw TheBigBridgeObjectMap
 .tower_of_revival
-	dab TowerOfRevivalLayout
-	dw TowerOfRevivalObjectsMap
+	dab TowerOfRevivalBlockMap
+	dw TowerOfRevivalObjectMap
 .the_steep_canyon_1
-	dab TheSteepCanyon1Layout
-	dw TheSteepCanyon1ObjectsMap
+	dab TheSteepCanyon1BlockMap
+	dw TheSteepCanyon1ObjectMap
 .cave_of_flames
-	dab CaveOfFlamesLayout
-	dw CaveOfFlamesObjectsMap
+	dab CaveOfFlamesBlockMap
+	dw CaveOfFlamesObjectMap
 .above_the_clouds_1
-	dab AboveTheClouds1Layout
-	dw AboveTheClouds1ObjectsMap
+	dab AboveTheClouds1BlockMap
+	dw AboveTheClouds1ObjectMap
 .the_stagnant_swamp_1
-	dab TheStagnantSwamp1Layout
-	dw TheStagnantSwamp1ObjectsMap
+	dab TheStagnantSwamp1BlockMap
+	dw TheStagnantSwamp1ObjectMap
 .the_frigid_sea
-	dab TheFrigidSeaLayout
-	dw TheFrigidSeaObjectsMap
+	dab TheFrigidSeaBlockMap
+	dw TheFrigidSeaObjectMap
 .castle_of_illusions
-	dab CastleOfIllusionsLayout
-	dw CastleOfIllusionsObjectsMap
+	dab CastleOfIllusionsBlockMap
+	dw CastleOfIllusionsObjectMap
 .the_colossal_hole_1
-	dab TheColossalHole1Layout
-	dw TheColossalHole1ObjectsMap
+	dab TheColossalHole1BlockMap
+	dw TheColossalHole1ObjectMap
 .the_warped_void
-	dab TheWarpedVoidLayout
-	dw TheWarpedVoidObjectsMap
+	dab TheWarpedVoidBlockMap
+	dw TheWarpedVoidObjectMap
 .the_east_crater
-	dab TheEastCraterLayout
-	dw TheEastCraterObjectsMap
+	dab TheEastCraterBlockMap
+	dw TheEastCraterObjectMap
 .forest_of_fear
-	dab ForestOfFearLayout
-	dw ForestOfFearObjectsMap
+	dab ForestOfFearBlockMap
+	dw ForestOfFearObjectMap
 .the_temple
-	dab HiddenFigureRoomLayout
-	dw HiddenFigureRoomObjectsMap
+	dab HiddenFigureRoomBlockMap
+	dw HiddenFigureRoomObjectMap
 .the_vast_plain_2
-	dab TheVastPlain2Layout
-	dw TheVastPlain2ObjectsMap
+	dab TheVastPlain2BlockMap
+	dw TheVastPlain2ObjectMap
 .the_volcanos_base_2
-	dab TheVolcanosBase2Layout
-	dw TheVolcanosBase2ObjectsMap
+	dab TheVolcanosBase2BlockMap
+	dw TheVolcanosBase2ObjectMap
 .the_pool_of_rain_2
-	dab ThePoolOfRain2Layout
-	dw ThePoolOfRain2ObjectsMap
+	dab ThePoolOfRain2BlockMap
+	dw ThePoolOfRain2ObjectMap
 .the_colossal_hole_2
-	dab TheColossalHole2Layout
-	dw TheColossalHole2ObjectsMap
+	dab TheColossalHole2BlockMap
+	dw TheColossalHole2ObjectMap
 .the_tidal_coast_2
-	dab TheTidalCoast2Layout
-	dw TheTidalCoast2ObjectsMap
+	dab TheTidalCoast2BlockMap
+	dw TheTidalCoast2ObjectMap
 .the_stagnant_swamp_2
-	dab TheStagnantSwamp2Layout
-	dw TheStagnantSwamp2ObjectsMap
+	dab TheStagnantSwamp2BlockMap
+	dw TheStagnantSwamp2ObjectMap
 .above_the_clouds_2
-	dab AboveTheClouds2Layout
-	dw AboveTheClouds2ObjectsMap
+	dab AboveTheClouds2BlockMap
+	dw AboveTheClouds2ObjectMap
 .the_steep_canyon_2
-	dab TheSteepCanyon2Layout
-	dw TheSteepCanyon2ObjectsMap
+	dab TheSteepCanyon2BlockMap
+	dw TheSteepCanyon2ObjectMap
 .the_peaceful_village_2
-	dab ThePeacefulVillage2Layout
-	dw ThePeacefulVillage2ObjectsMap
+	dab ThePeacefulVillage2BlockMap
+	dw ThePeacefulVillage2ObjectMap
 
 PointerTable_c0319::
 	dw LevelRooms_c0d1f ; OUT_OF_THE_WOODS_DAY_1

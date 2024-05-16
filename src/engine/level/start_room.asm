@@ -366,15 +366,15 @@ StartRoom_FromLevelStart:
 	farcall Func_61f10
 	pop af
 	ldh [rSVBK], a
-	jr .load_layout
+	jr .load_blocks_and_objects
 
 .asm_87e2
 	ld a, [wTempInternalRoomID]
 	ld [wInternalRoomID], a
 	call LoadWarioGfx
 
-.load_layout
-	call LoadLevelLayoutAndObjects
+.load_blocks_and_objects
+	call LoadLevelBlockMapAndObjects
 
 	ldh a, [rSVBK]
 	push af
@@ -1053,9 +1053,9 @@ Func_8cd7:
 .loop_row
 	call .Func_8d69
 
-	ld a, [wccf0 + 0]
+	ld a, [wBGPtr + 0]
 	ld d, a
-	ld a, [wccf0 + 1]
+	ld a, [wBGPtr + 1]
 	ld e, a
 	ld hl, wBGMapTileVRAM0Queue
 	ld b, BG_MAP_HEIGHT
@@ -1077,9 +1077,9 @@ Func_8cd7:
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld a, [wccf0 + 0]
+	ld a, [wBGPtr + 0]
 	ld d, a
-	ld a, [wccf0 + 1]
+	ld a, [wBGPtr + 1]
 	ld e, a
 	ld hl, wBGMapTileVRAM1Queue
 	ld b, BG_MAP_HEIGHT

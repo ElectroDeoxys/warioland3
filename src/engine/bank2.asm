@@ -1,4 +1,5 @@
-Func_8e06::
+; outputs BG pointer to hl and wBGPtr
+GetWarioBGPtr::
 	ld a, [wWarioYPos + 1]
 	sub $18
 	ld l, a
@@ -34,11 +35,12 @@ ENDR
 	ld h, HIGH(v0BGMap0)
 	add hl, de
 	ld a, h
-	ld [wccf0 + 0], a
+	ld [wBGPtr + 0], a
 	ld a, l
-	ld [wccf0 + 1], a
+	ld [wBGPtr + 1], a
 	ret
 
+; outputs BG pointer to hl and wBGPtr
 Func_8e5b:
 	ld a, [wc0a3 + 0]
 	ld h, a
@@ -71,9 +73,9 @@ ENDR
 	ld h, HIGH(v0BGMap0)
 	add hl, de
 	ld a, h
-	ld [wccf0 + 0], a
+	ld [wBGPtr + 0], a
 	ld a, l
-	ld [wccf0 + 1], a
+	ld [wBGPtr + 1], a
 	ret
 
 ; unreferenced
@@ -143,7 +145,7 @@ Func_8ed9:
 	call .Func_9085
 	ld hl, wc0bb
 	res 3, [hl]
-	farcall Func_d186
+	farcall SpawnColEdgeObjects
 	ret
 
 .asm_8f11
@@ -151,7 +153,7 @@ Func_8ed9:
 	call .Func_9085
 	ld hl, wc0bb
 	res 2, [hl]
-	farcall Func_d186
+	farcall SpawnColEdgeObjects
 	ret
 
 .asm_8f2c
@@ -159,7 +161,7 @@ Func_8ed9:
 	call Func_a0e2
 	ld hl, wc0bb
 	res 0, [hl]
-	farcall Func_d11a
+	farcall SpawnRowEdgeObjects
 	ld a, [wc0bb]
 	bit 2, a
 	jr nz, .asm_8f11
@@ -172,7 +174,7 @@ Func_8ed9:
 	call Func_a0e2
 	ld hl, wc0bb
 	res 1, [hl]
-	farcall Func_d11a
+	farcall SpawnRowEdgeObjects
 	ld a, [wc0bb]
 	bit 2, a
 	jr nz, .asm_8f11

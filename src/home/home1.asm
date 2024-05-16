@@ -76,9 +76,9 @@ GetBlockPtrPtrBGMapAddress::
 	ld h, HIGH(v0BGMap0)
 	add hl, de
 	ld a, h
-	ld [wccf0 + 0], a
+	ld [wBGPtr + 0], a
 	ld a, l
-	ld [wccf0 + 1], a
+	ld [wBGPtr + 1], a
 	ret
 
 DoPendingDMATransfer::
@@ -484,7 +484,7 @@ UpdateAnimation::
 Func_e87::
 	jp Init
 
-LoadLevelLayoutAndObjects::
+LoadLevelBlockMapAndObjects::
 	ld d, $00
 	ld a, [wLevel]
 	add a ; *2
@@ -504,28 +504,28 @@ LoadLevelLayoutAndObjects::
 	jr z, Func_e87 ; null
 
 	ld a, [hli]
-	ld [wCompressedLevelLayoutPtr + 1], a
+	ld [wCompressedLevelBlockMapPtr + 1], a
 	ld a, [hli]
-	ld [wCompressedLevelLayoutPtr + 0], a
+	ld [wCompressedLevelBlockMapPtr + 0], a
 	ld a, [hl]
 	ld [wTempBank], a
 	push hl
-	call DecompressLevelLayout
+	call DecompressLevelBlockMap
 	pop hl
+
 	ld a, [hli]
 	ld [wTempBank], a
 	ld a, [hli]
-	ld [wCompressedLevelLayoutPtr + 1], a
+	ld [wCompressedLevelBlockMapPtr + 1], a
 	ld a, [hl]
-	ld [wCompressedLevelLayoutPtr + 0], a
+	ld [wCompressedLevelBlockMapPtr + 0], a
 	pop af
 	bankswitch
-
 	push hl
 	ld a, [wceef]
 	and %111100
 	jr nz, .skip_loading_objects
-	call DecompressLevelObjectsMap
+	call DecompressLevelObjectMap
 .skip_loading_objects
 	pop hl
 	ret
@@ -550,9 +550,9 @@ Func_edb::
 	jp z, Func_e87 ; null
 
 	ld a, [hli]
-	ld [wCompressedLevelLayoutPtr + 1], a
+	ld [wCompressedLevelBlockMapPtr + 1], a
 	ld a, [hli]
-	ld [wCompressedLevelLayoutPtr + 0], a
+	ld [wCompressedLevelBlockMapPtr + 0], a
 	ld a, [hl]
 	ld [wTempBank], a
 	pop af
@@ -560,39 +560,42 @@ Func_edb::
 	call Func_f13
 	ret
 
+; almost identical to DecompressLevelBlockMap
+; but instead only copies over the highest bit
 Func_f13::
 	ld a, [wceef]
 	and $3c
 	ret nz
 	ld a, [wSRAMBank]
 	push af
-	ld a, $01
+	ld a, BANK("SRAM1")
 	sramswitch
 	ld a, [wROMBank]
 	push af
 	ld a, [wTempBank]
 	bankswitch
-	ld a, [wCompressedLevelLayoutPtr + 0]
+	ld a, [wCompressedLevelBlockMapPtr + 0]
 	ld d, a
-	ld a, [wCompressedLevelLayoutPtr + 1]
+	ld a, [wCompressedLevelBlockMapPtr + 1]
 	ld e, a
-	call Func_f4c
+	call .Decompress
 	pop af
 	bankswitch
 	pop af
 	sramswitch
 	ret
 
-Func_f4c::
-	ld c, HIGH(STARTOF(SRAM))
-	ld hl, s0a000
-.asm_f51
+.Decompress
+	ld c, $a0
+	ld hl, s1a000
+.loop_data
 	ld a, [de]
 	and a
-	ret z
+	ret z ; done
 	bit 7, a
 	jr nz, .asm_f85
-	ld b, a
+
+	ld b, a ; num rows
 	inc de
 	ld a, [de]
 	and $80
@@ -604,28 +607,29 @@ Func_f4c::
 	ld [hli], a
 	ld a, l
 	cp c
-	jr z, .asm_f6f
-.asm_f6a
+	jr z, .next_row_1
+.next_repeat
 	dec b
 	jr nz, .asm_f61
-	jr .asm_f51
-.asm_f6f
-	ld l, $00
+	jr .loop_data
+.next_row_1
+	ld l, LOW(STARTOF(SRAM))
 	inc h
 	ld a, h
-	cp $c0
-	jr nz, .asm_f83
+	cp $c0 ; check if already outside SRAM
+	jr nz, .skip_sram_switch
 	ld h, HIGH(STARTOF(SRAM))
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
-.asm_f83
-	jr .asm_f6a
+.skip_sram_switch
+	jr .next_repeat
+
 .asm_f85
-	and $7f
+	and %01111111
 	ld b, a
 	inc de
-.asm_f89
+.loop_copy
 	ld a, [de]
 	and $80
 	or [hl]
@@ -636,10 +640,10 @@ Func_f4c::
 	jr z, .asm_f98
 .asm_f93
 	dec b
-	jr nz, .asm_f89
-	jr .asm_f51
+	jr nz, .loop_copy
+	jr .loop_data
 .asm_f98
-	ld l, $00
+	ld l, LOW(STARTOF(SRAM))
 	inc h
 	ld a, h
 	cp $c0
@@ -1065,7 +1069,7 @@ TriggerRoomTransition::
 	bit ROOMTRANSITIONF_1_F, a
 	jr z, .asm_1246
 	inc [hl] ; door transition
-	farcall Func_8e06
+	farcall GetWarioBGPtr
 	ldh a, [rSVBK]
 	push af
 	ld a, $03

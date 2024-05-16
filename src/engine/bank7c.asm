@@ -8,7 +8,7 @@ _PauseMenuStateTable:
 	dw UpdatePauseMenu
 
 	dw SlowFadeBGToWhite
-	dw ReturnFromPauseMenu
+	dw ExitPauseMenu
 	dw DarkenBGToPal_Fast
 	dw ReturnToPendingLevelState
 
@@ -446,7 +446,7 @@ UpdatePauseMenu:
 	ld [wSubState], a
 	ret
 
-ReturnFromPauseMenu:
+ExitPauseMenu:
 	call DisableLCD
 	call ClearVirtualOAM
 	call Func_1f0969

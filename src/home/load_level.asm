@@ -1,6 +1,6 @@
-; decompresses level layout data pointed
-; by wCompressedLevelLayoutPtr to SRAM
-DecompressLevelLayout::
+; decompresses level block mao data pointed
+; by wCompressedLevelBlockMapPtr to SRAM
+DecompressLevelBlockMap::
 	ld a, [wceef]
 	and $3c
 	ret nz
@@ -13,9 +13,9 @@ DecompressLevelLayout::
 	push af
 	ld a, [wTempBank]
 	bankswitch
-	ld a, [wCompressedLevelLayoutPtr + 0]
+	ld a, [wCompressedLevelBlockMapPtr + 0]
 	ld h, a
-	ld a, [wCompressedLevelLayoutPtr + 1]
+	ld a, [wCompressedLevelBlockMapPtr + 1]
 	ld l, a
 	call .Decompress
 	pop af
@@ -24,11 +24,11 @@ DecompressLevelLayout::
 	sramswitch
 	ret
 
-; decompresses level layout data
+; decompresses level block map data
 ; - if bit 7 is not set, repeat the following byte that amount of times
 ; - if bit 7 is set, copy the next amount of bytes literally
 ; each row is 160 blocks wide
-.Decompress::
+.Decompress:
 	ld c, LEVEL_WIDTH
 	ld de, s1a000
 .loop_data
@@ -38,7 +38,9 @@ DecompressLevelLayout::
 
 	bit 7, a
 	jr nz, .literal_copy
-	ld b, a
+
+	; repeat for given number of rows
+	ld b, a ; num rows
 	ld a, [hli]
 	ld [wRepeatByte], a
 .loop_repeat
@@ -53,12 +55,12 @@ DecompressLevelLayout::
 	jr nz, .loop_repeat
 	jr .loop_data
 .next_row_1
-	ld e, LOW($a000)
+	ld e, LOW(STARTOF(SRAM))
 	inc d
 	ld a, d
 	cp $c0 ; check if already outside SRAM
 	jr nz, .skip_sram_switch ; can be .next_repeat
-	ld d, HIGH($a000)
+	ld d, HIGH(STARTOF(SRAM))
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
@@ -81,18 +83,18 @@ DecompressLevelLayout::
 	jr .loop_data
 
 .next_row_2
-	ld e, LOW($a000)
+	ld e, LOW(STARTOF(SRAM))
 	inc d
 	ld a, d
 	cp $c0
 	jr nz, .next_copy
-	ld d, HIGH($a000)
+	ld d, HIGH(STARTOF(SRAM))
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
 	jr .next_copy
 
-DecompressLevelObjectsMap::
+DecompressLevelObjectMap::
 	ld a, [wSRAMBank]
 	push af
 	ld a, BANK("SRAM1")
@@ -101,9 +103,9 @@ DecompressLevelObjectsMap::
 	push af
 	ld a, [wTempBank]
 	bankswitch
-	ld a, [wCompressedLevelLayoutPtr + 0]
+	ld a, [wCompressedLevelBlockMapPtr + 0]
 	ld h, a
-	ld a, [wCompressedLevelLayoutPtr + 1]
+	ld a, [wCompressedLevelBlockMapPtr + 1]
 	ld l, a
 	call .Decompress
 	pop af
@@ -141,12 +143,12 @@ DecompressLevelObjectsMap::
 	jr nz, .loop_repeat
 	jr .loop_data
 .next_row_1
-	ld e, $b0
+	ld e, LOW(STARTOF(SRAM)) + $b0
 	inc d
 	ld a, d
 	cp $c0 ; check if already outside SRAM
 	jr nz, .skip_sram_switch ; can be .next_repeat
-	ld d, HIGH($a000)
+	ld d, HIGH(STARTOF(SRAM))
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
@@ -168,7 +170,7 @@ DecompressLevelObjectsMap::
 	jr nz, .loop_copy
 	jr .loop_data
 .next_row_2
-	ld e, $b0
+	ld e, LOW(STARTOF(SRAM)) + $b0
 	inc d
 	ld a, d
 	cp $c0
