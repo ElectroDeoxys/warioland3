@@ -1,1134 +1,3 @@
-_PauseMenuStateTable:
-	ld a, [wSubState]
-	jumptable
-
-	dw SlowFadeBGToWhite
-	dw InitPauseMenu
-	dw DarkenBGToPal_Fast
-	dw UpdatePauseMenu
-
-	dw SlowFadeBGToWhite
-	dw ExitPauseMenu
-	dw DarkenBGToPal_Fast
-	dw ReturnToPendingLevelState
-
-	dw SlowFadeBGToWhite ; SST_PAUSE_MENU_SAVE
-	dw InitSaveScreen
-	dw DarkenBGToPal_Fast
-	dw FillSaveScreenBar
-	dw SlowFadeBGToWhite
-	dw SaveLevel
-	dw DarkenBGToPal_Fast
-	dw HandleSaveCompleteBox
-	dw ResetAfterSave
-
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-
-	dw SlowFadeBGToWhite ; SST_PAUSE_18
-	dw InitSaveScreenAndBackupVRAM
-	dw DarkenBGToPal_Fast
-	dw FillSaveScreenBar
-	dw SlowFadeBGToWhite
-	dw Save
-	dw DarkenBGToPal_Fast
-	dw HandleSaveCompleteBox
-	dw SlowFadeBGToWhite
-	dw Func_1f08af
-
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-
-	dw SlowFadeBGToWhite
-	dw InitSaveScreenAndBackupVRAM
-	dw DarkenBGToPal_Fast
-	dw FillSaveScreenBar
-	dw SlowFadeBGToWhite
-	dw Save
-	dw DarkenBGToPal_Fast
-	dw HandleSaveCompleteBox
-	dw SlowFadeBGToWhite
-	dw Func_1f08f4
-
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-	dw DebugReset
-
-_ReturnToPauseMenuFromActionHelp::
-	call DisableLCD
-	ld hl, wState
-	ld a, ST_PAUSE_MENU
-	ld [hli], a
-	ld [hl], SST_PAUSE_INIT_MENU
-	jr InitPauseMenu_SkipBackupVRAM
-
-InitPauseMenu:
-	call DisableLCD
-	call SaveBackupVRAM
-	ld a, [wAnimatedTilesFrameDuration]
-	ld [wTempAnimatedTilesFrameDuration], a
-	ld a, [wAnimatedTilesGfx]
-	ld [wTempAnimatedTilesGroup], a
-;	fallthrough
-
-InitPauseMenu_SkipBackupVRAM:
-	stop_sfx
-	play_music MUSIC_PAUSE_MENU
-	xor a ; PAUSEMENU_RETURN
-	ld [wPauseMenuSelection], a
-	xor a
-	ld [wRoomAnimatedTilesEnabled], a
-	call ClearBGMap0
-	call ClearVirtualOAM
-
-	farcall LoadPauseMenuPals
-	farcall LoadPauseMenuGfx
-	farcall Func_1f403f
-
-	call PrintNumberMusicCoins
-	hlbgcoord 14, 15, v0BGMap1
-	farcall PrintNumberCoins
-	call VBlank_PauseMenu
-
-	xor a
-	ldh [rSCY], a
-	ldh [rSCX], a
-	ld [wSCY], a
-	ld [wSCX], a
-
-	ld hl, wMenuObj2
-	ld a, $38
-	ld [hli], a
-	ld a, $20
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld a, HIGH(Frameset_1f1cb8)
-	ld [hli], a
-	ld a, LOW(Frameset_1f1cb8)
-	ld [hl], a
-	call UpdateObjAnim
-	ld hl, wMenuObj2
-	call AddPauseMenuSprite
-
-	ld hl, wMenuObj3
-	ld a, $8c
-	ld [hli], a
-	ld a, $20
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld a, HIGH(Frameset_1f1cd4)
-	ld [hli], a
-	ld a, LOW(Frameset_1f1cd4)
-	ld [hl], a
-	call UpdateObjAnim
-	ld hl, wMenuObj3
-	call AddPauseMenuSprite
-
-	ld a, [wKeyAndTreasureFlags]
-	bit GREY_KEY_F, a
-	jr z, .red_key
-	ld hl, wMenuObj4
-	ld a, $54
-	ld [hli], a
-	ld a, $38
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld a, $03
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld a, HIGH(Frameset_1f1c4a)
-	ld [hli], a
-	ld a, LOW(Frameset_1f1c4a)
-	ld [hl], a
-	call UpdateObjAnim
-	ld hl, wMenuObj4
-	call AddPauseMenuSprite
-
-.red_key
-	ld a, [wKeyAndTreasureFlags]
-	bit RED_KEY_F, a
-	jr z, .green_key
-	ld hl, wMenuObj5
-	ld a, $54
-	ld [hli], a
-	ld a, $48
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld a, $03
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld a, HIGH(Frameset_1f1c4d)
-	ld [hli], a
-	ld a, LOW(Frameset_1f1c4d)
-	ld [hl], a
-	call UpdateObjAnim
-	ld hl, wMenuObj5
-	call AddPauseMenuSprite
-
-.green_key
-	ld a, [wKeyAndTreasureFlags]
-	bit GREEN_KEY_F, a
-	jr z, .blue_key
-	ld hl, wMenuObj6
-	ld a, $54
-	ld [hli], a
-	ld a, $58
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld a, $04
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld a, HIGH(Frameset_1f1c4a)
-	ld [hli], a
-	ld a, LOW(Frameset_1f1c4a)
-	ld [hl], a
-	call UpdateObjAnim
-	ld hl, wMenuObj6
-	call AddPauseMenuSprite
-
-.blue_key
-	ld a, [wKeyAndTreasureFlags]
-	bit BLUE_KEY_F, a
-	jr z, .collected_treasures
-	ld hl, wMenuObj7
-	ld a, $54
-	ld [hli], a
-	ld a, $68
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld a, $04
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld a, HIGH(Frameset_1f1c4d)
-	ld [hli], a
-	ld a, LOW(Frameset_1f1c4d)
-	ld [hl], a
-	call UpdateObjAnim
-	ld hl, wMenuObj7
-	call AddPauseMenuSprite
-
-.collected_treasures
-	ld hl, wMenuObj8
-	ld a, $64
-	ld [hli], a
-	ld a, $38
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld a, $03
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld a, [wKeyAndTreasureFlags]
-	bit GREY_TREASURE_F, a
-	jr z, .no_grey_treasure
-	ld a, HIGH(Frameset_1f1cf0)
-	ld [hli], a
-	ld a, LOW(Frameset_1f1cf0)
-	ld [hl], a
-	jr .set_grey_treasure_sprite
-.no_grey_treasure
-	ld a, HIGH(Frameset_1f1ced)
-	ld [hli], a
-	ld a, LOW(Frameset_1f1ced)
-	ld [hl], a
-.set_grey_treasure_sprite
-	call UpdateObjAnim
-	ld hl, wMenuObj8
-	call AddPauseMenuSprite
-
-	ld hl, wMenuObj9
-	ld a, $64
-	ld [hli], a
-	ld a, $48
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld a, $03
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld a, [wKeyAndTreasureFlags]
-	bit RED_TREASURE_F, a
-	jr z, .no_red_treasure
-	ld a, HIGH(Frameset_1f1cf6)
-	ld [hli], a
-	ld a, LOW(Frameset_1f1cf6)
-	ld [hl], a
-	jr .set_red_treasure_sprite
-.no_red_treasure
-	ld a, HIGH(Frameset_1f1cf3)
-	ld [hli], a
-	ld a, LOW(Frameset_1f1cf3)
-	ld [hl], a
-.set_red_treasure_sprite
-	call UpdateObjAnim
-	ld hl, wMenuObj9
-	call AddPauseMenuSprite
-
-	ld hl, wMenuObj10
-	ld a, $64
-	ld [hli], a
-	ld a, $58
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld a, $04
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld a, [wKeyAndTreasureFlags]
-	bit GREEN_TREASURE_F, a
-	jr z, .no_green_treasure
-	ld a, HIGH(Frameset_1f1cf0)
-	ld [hli], a
-	ld a, LOW(Frameset_1f1cf0)
-	ld [hl], a
-	jr .set_green_treasure_sprite
-.no_green_treasure
-	ld a, HIGH(Frameset_1f1ced)
-	ld [hli], a
-	ld a, LOW(Frameset_1f1ced)
-	ld [hl], a
-.set_green_treasure_sprite
-	call UpdateObjAnim
-	ld hl, wMenuObj10
-	call AddPauseMenuSprite
-
-	ld hl, wMenuObj11
-	ld a, $64
-	ld [hli], a
-	ld a, $68
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld a, $04
-	ld [hli], a
-	xor a
-	ld [hli], a
-	ld [hli], a
-	ld a, [wKeyAndTreasureFlags]
-	bit BLUE_TREASURE_F, a
-	jr z, .no_blue_treasure
-	ld a, HIGH(Frameset_1f1cf6)
-	ld [hli], a
-	ld a, LOW(Frameset_1f1cf6)
-	ld [hl], a
-	jr .set_blue_treasure_sprite
-.no_blue_treasure
-	ld a, HIGH(Frameset_1f1cf3)
-	ld [hli], a
-	ld a, LOW(Frameset_1f1cf3)
-	ld [hl], a
-.set_blue_treasure_sprite
-	call UpdateObjAnim
-	ld hl, wMenuObj11
-	call AddPauseMenuSprite
-
-	ld a, LCDCF_ON | LCDCF_BG9C00 | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
-	ldh [rLCDC], a
-
-	ld hl, wSubState
-	inc [hl]
-	ret
-
-UpdatePauseMenu:
-	call HandlePauseMenuInput
-	ld hl, wMenuObj3FramesetPtr + 1
-	call UpdateObjAnim
-	ld hl, wMenuObj3
-	call AddPauseMenuSprite
-	ld a, [wKeyAndTreasureFlags]
-	bit GREY_KEY_F, a
-	jr z, .red_key
-	ld hl, wMenuObj4
-	call AddPauseMenuSprite
-.red_key
-	ld a, [wKeyAndTreasureFlags]
-	bit RED_KEY_F, a
-	jr z, .green_key
-	ld hl, wMenuObj5
-	call AddPauseMenuSprite
-.green_key
-	ld a, [wKeyAndTreasureFlags]
-	bit GREEN_KEY_F, a
-	jr z, .blue_key
-	ld hl, wMenuObj6
-	call AddPauseMenuSprite
-.blue_key
-	ld a, [wKeyAndTreasureFlags]
-	bit BLUE_KEY_F, a
-	jr z, .asm_1f02e5
-	ld hl, wMenuObj7
-	call AddPauseMenuSprite
-
-.asm_1f02e5
-	ld hl, wMenuObj8
-	call AddPauseMenuSprite
-	ld hl, wMenuObj8End
-	call AddPauseMenuSprite
-	ld hl, wMenuObj10
-	call AddPauseMenuSprite
-	ld hl, wMenuObj11
-	call AddPauseMenuSprite
-	ld hl, wMenuObj2FramesetPtr + 1
-	call UpdateObjAnim
-	ld hl, wMenuObj2
-	call AddPauseMenuSprite
-
-	call ClearUnusedVirtualOAM
-
-	ld a, [wPauseMenuSelection]
-	bit PAUSEMENUF_SELECT_F, a
-	ret z
-	ld a, [wObjAnimWasReset]
-	and a
-	ret z
-	ld a, [wPauseMenuSelection]
-	and $0f
-	cp PAUSEMENU_TO_MAP
-	jr z, .ToMap
-	cp PAUSEMENU_SAVE
-	jr z, .Save
-	cp PAUSEMENU_ACTION_HELP
-	jp z, OpenActionHelp
-
-; Return
-	ld hl, wSubState
-	inc [hl]
-	ret
-
-.ToMap
-	jp ReturnToMapFromLevel
-
-.Save
-	ld a, TRUE
-	ld [wResetDisabled], a
-	ld a, SST_PAUSE_MENU_SAVE
-	ld [wSubState], a
-	ret
-
-ExitPauseMenu:
-	call DisableLCD
-	call ClearVirtualOAM
-	call Func_1f0969
-	call LoadBackupVRAM
-
-	xor a
-	ld [wced6], a
-	ld a, [wTempAnimatedTilesFrameDuration]
-	ld [wAnimatedTilesFrameDuration], a
-	ld a, [wTempAnimatedTilesGroup]
-	ld [wAnimatedTilesGfx], a
-	xor a
-	ld [wAnimatedTilesFrameCount], a
-	ld [wAnimatedTilesFrame], a
-	ld a, TRUE
-	ld [wRoomAnimatedTilesEnabled], a
-
-	call UpdateLevelMusic
-	ld a, LCDC_DEFAULT
-	ldh [rLCDC], a
-	ld hl, wSubState
-	inc [hl]
-	ret
-
-InitSaveScreen:
-	ld a, TRUE
-	ld [wResetDisabled], a
-	call DisableLCD
-	call ClearVirtualOAM
-
-	farcall LoadSaveScreenPals
-	farcall LoadSaveScreenGfx
-	farcall PrintNowSavingBox
-	call VBlank_SaveScreen
-
-	xor a
-	ld [wSCY], a
-	ldh [rSCY], a
-	ld [wSCX], a
-	ldh [rSCX], a
-	xor a
-	ld [wPalFadeCounter], a
-	ld [wcee4], a
-	ld [wTimer], a
-
-	ld hl, wBGMapTileVRAM0Queue
-	ld a, HIGH(v0BGMap0 + $164)
-	ld [hli], a
-	ld [hl], LOW(v0BGMap0 + $164)
-	ld a, LCDC_DEFAULT
-	ldh [rLCDC], a
-	ld hl, wSubState
-	inc [hl]
-	ret
-
-; every 4 frames fill another tile
-; in the save screen bar
-; when done, advance to next substate
-FillSaveScreenBar:
-	ld a, [wTimer]
-	inc a
-	ld [wTimer], a
-	cp $04
-	ret c
-	xor a
-	ld [wTimer], a
-	ld a, [wcee4]
-	inc a
-	cp $0a
-	jr z, .bar_finished
-	or $1 << 7
-	ld [wcee4], a
-	ld hl, wBGMapTileVRAM0Queue + 1
-	inc [hl]
-	ret
-.bar_finished
-	xor a
-	ld [wcee4], a
-	ld hl, wSubState
-	inc [hl]
-	ret
-
-SaveLevel:
-	call DisableLCD
-	ldh a, [rSVBK]
-	push af
-	ld a, $03
-	ldh [rSVBK], a
-	ld hl, w3d280 palette 12
-	ld de, wcaa1
-	ld b, 4 palettes
-	call CopyHLToDE
-	pop af
-	ldh [rSVBK], a
-
-	call IncrementSaveCounter
-
-	ld a, [wSRAMBank]
-	push af
-	ld a, BANK("SRAM0")
-	sramswitch
-	ld a, $30
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-	ld de, s0a000
-	ld a, $57
-	ld [de], a
-	inc e
-	ld a, $41
-	ld [de], a
-	inc e
-	ld a, $52
-	ld [de], a
-	inc e
-	ld a, $33
-	ld [de], a
-	inc e
-	ld hl, STARTOF("Progress WRAM")
-	ld b, SIZEOF("Progress WRAM") + SIZEOF("Level WRAM")
-	call CopyHLToDE
-
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
-	ld hl, wTreasuresCollected
-	ld b, (wOWLevel - wTreasuresCollected) + 2
-	call CopyHLToDE
-	pop af
-	ldh [rSVBK], a
-
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM1")
-	ldh [rSVBK], a
-	ld hl, wObjects
-	ld bc, (wWarioGoals - wObjects) + 5
-	call CopyHLToDE_BC
-	pop af
-	ldh [rSVBK], a
-
-	ld a, $31
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-	call CalculateWRAMDataChecksum
-	ld a, d
-	ld [sChecksum + 0], a
-	ld [wChecksum + 0], a
-	ld a, e
-	ld [sChecksum + 1], a
-	ld [wChecksum + 1], a
-
-	ld a, $32
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-	ld a, d
-	ld [s0a7e5 + 0], a
-	ld a, e
-	ld [s0a7e5 + 1], a
-
-	ld a, $33
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-	ld a, d
-	ld [s0afa5 + 0], a
-	ld a, e
-	ld [s0afa5 + 1], a
-
-	ld a, $41
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-	call CalculateBackupSRAMChecksum1
-	ld a, d
-	ld [s0a79d + 0], a
-	ld [wChecksum + 0], a
-	ld a, e
-	ld [s0a79d + 1], a
-	ld [wChecksum + 1], a
-
-	ld a, $42
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-	ld a, d
-	ld [s0a7ed + 0], a
-	ld a, e
-	ld [s0a7ed + 1], a
-
-	ld a, $43
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-	ld a, d
-	ld [s0afad + 0], a
-	ld a, e
-	ld [s0afad + 1], a
-
-	ld a, $50
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-	ld de, s0a800
-	ld a, $57
-	ld [de], a
-	inc e
-	ld a, $41
-	ld [de], a
-	inc e
-	ld a, $52
-	ld [de], a
-	inc e
-	ld a, $33
-	ld [de], a
-	inc e
-	ld hl, STARTOF("Progress WRAM")
-	ld b, SIZEOF("Progress WRAM") + SIZEOF("Level WRAM")
-	call CopyHLToDE
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
-	ld hl, wTreasuresCollected
-	ld b, (wOWLevel - wTreasuresCollected) + 2
-	call CopyHLToDE
-	pop af
-	ldh [rSVBK], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM1")
-	ldh [rSVBK], a
-	ld hl, wObjects
-	ld bc, (wWarioGoals - wObjects) + 5
-	call CopyHLToDE_BC
-	pop af
-	ldh [rSVBK], a
-	ld a, $51
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-	call CalculateWRAMDataChecksum
-	ld a, d
-	ld [s0a797 + 0], a
-	ld [wChecksum + 0], a
-	ld a, e
-	ld [s0a797 + 1], a
-	ld [wChecksum + 1], a
-	ld a, $52
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-	ld a, d
-	ld [s0a7e7 + 0], a
-	ld a, e
-	ld [s0a7e7 + 1], a
-	ld a, $53
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-	ld a, d
-	ld [s0afa7 + 0], a
-	ld a, e
-	ld [s0afa7 + 1], a
-	ld a, $60
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-	ld de, s0a400
-	ld a, $57
-	ld [de], a
-	inc e
-	ld a, $41
-	ld [de], a
-	inc e
-	ld a, $52
-	ld [de], a
-	inc e
-	ld a, $33
-	ld [de], a
-	inc e
-	ld hl, STARTOF("Progress WRAM")
-	ld b, SIZEOF("Progress WRAM") + SIZEOF("Level WRAM")
-	call CopyHLToDE
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
-	ld hl, wTreasuresCollected
-	ld b, (wOWLevel - wTreasuresCollected) + 2
-	call CopyHLToDE
-	pop af
-	ldh [rSVBK], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM1")
-	ldh [rSVBK], a
-	ld hl, wObjects
-	ld bc, (wWarioGoals - wObjects) + 5
-	call CopyHLToDE_BC
-	pop af
-	ldh [rSVBK], a
-	ld a, $61
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-	call CalculateWRAMDataChecksum
-	ld a, d
-	ld [s0a799 + 0], a
-	ld [wChecksum + 0], a
-	ld a, e
-	ld [s0a799 + 1], a
-	ld [wChecksum + 1], a
-	ld a, $62
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-	ld a, d
-	ld [s0a7e9 + 0], a
-	ld a, e
-	ld [s0a7e9 + 1], a
-	ld a, $63
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-	ld a, d
-	ld [s0afa9 + 0], a
-	ld a, e
-	ld [s0afa9 + 1], a
-
-	call Func_1f14c6
-	ld a, $80
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-	ld de, s0ac00
-	ld a, $57
-	ld [de], a
-	inc e
-	ld a, $41
-	ld [de], a
-	inc e
-	ld a, $52
-	ld [de], a
-	inc e
-	ld a, $33
-	ld [de], a
-	inc e
-	ld hl, STARTOF("Progress WRAM")
-	ld b, SIZEOF("Progress WRAM") + SIZEOF("Level WRAM")
-	call CopyHLToDE
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
-	ld hl, wTreasuresCollected
-	ld b, (wOWLevel - wTreasuresCollected) + 2
-	call CopyHLToDE
-	pop af
-	ldh [rSVBK], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM1")
-	ldh [rSVBK], a
-	ld hl, wObjects
-	ld bc, (wWarioGoals - wObjects) + 5
-	call CopyHLToDE_BC
-	pop af
-	ldh [rSVBK], a
-	ld a, $81
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-	call CalculateWRAMDataChecksum
-	ld a, d
-	ld [s0a79b + 0], a
-	ld [wChecksum + 0], a
-	ld a, e
-	ld [s0a79b + 1], a
-	ld [wChecksum + 1], a
-	ld a, $82
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-	ld a, d
-	ld [s0a7eb + 0], a
-	ld a, e
-	ld [s0a7eb + 1], a
-	ld a, $83
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-	ld a, d
-	ld [s0afab + 0], a
-	ld a, e
-	ld [s0afab + 1], a
-
-	xor a
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-	ld [wResetDisabled], a
-	pop af
-	sramswitch
-
-	call VBlank_1f0c6c
-	farcall LoadSaveScreenPals
-	farcall PrintSaveCompleteBox
-	ld a, LCDC_DEFAULT
-	ldh [rLCDC], a
-	xor a
-	ld [wTimer + 0], a
-	ld a, 2
-	ld [wTimer + 1], a
-	ld hl, wSubState
-	inc [hl]
-	ret
-
-; advances substate if A button is pressed
-; or when wTimer has elapsed
-HandleSaveCompleteBox:
-	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
-	jr nz, .close
-	ld hl, wTimer
-	dec [hl]
-	ret nz
-	ld hl, wTimer + 1
-	dec [hl]
-	ret nz
-.close
-	xor a
-	ld [wTimer + 0], a
-	ld [wTimer + 1], a
-	ld hl, wSubState
-	inc [hl]
-	ret
-
-ResetAfterSave:
-	jp Init
-
-InitSaveScreenAndBackupVRAM:
-	ld a, TRUE
-	ld [wResetDisabled], a
-	call DisableLCD
-	call SaveBackupVRAM
-	call ClearBGMap1
-	call ClearVirtualOAM
-
-	farcall LoadSaveScreenPals
-	farcall LoadSaveScreenGfx
-	farcall PrintNowSavingBox
-	call VBlank_SaveScreen
-
-	xor a
-	ld [wSCY], a
-	ldh [rSCY], a
-	ld [wSCX], a
-	ldh [rSCX], a
-	xor a
-	ld [wPalFadeCounter], a
-	ld [wTimer], a
-	ld [wcee4], a
-
-	ld hl, wBGMapTileVRAM0Queue
-	ld a, HIGH(v0BGMap0 + $164)
-	ld [hli], a
-	ld [hl], LOW(v0BGMap0 + $164)
-	ld a, LCDC_DEFAULT
-	ldh [rLCDC], a
-	ld hl, wSubState
-	inc [hl]
-	ret
-
-Save:
-	call DisableLCD
-	call IncrementSaveCounter
-
-	ld a, [wSRAMBank]
-	push af
-	ld a, BANK("SRAM0")
-	sramswitch
-
-	ld a, $10
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-
-	ld de, sCheckVals
-	ld a, SAVE_CHECK_VAL_1
-	ld [de], a
-	inc e
-	ld a, SAVE_CHECK_VAL_2
-	ld [de], a
-	inc e
-	ld a, SAVE_CHECK_VAL_3
-	ld [de], a
-	inc e
-	ld a, SAVE_CHECK_VAL_4
-	ld [de], a
-	inc e
-
-	; de = sGameData
-	; save game data
-	ld hl, STARTOF("Progress WRAM")
-	ld b, SIZEOF("Progress WRAM")
-	call CopyHLToDE
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
-	ld hl, wTreasuresCollected
-	ld b, (wOWLevel - wTreasuresCollected) + 2
-	call CopyHLToDE
-	pop af
-	ldh [rSVBK], a
-
-	ld a, $11
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-
-	call CalculateGameDataChecksum
-	ld a, d
-	ld [s0a791 + 0], a
-	ld [wChecksum + 0], a
-	ld a, e
-	ld [s0a791 + 1], a
-	ld [wChecksum + 1], a
-
-	ld a, $12
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-
-	ld a, d
-	ld [s0a7e1 + 0], a
-	ld a, e
-	ld [s0a7e1 + 1], a
-
-	ld a, $13
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-
-	ld a, d
-	ld [s0afa1 + 0], a
-	ld a, e
-	ld [s0afa1 + 1], a
-
-	ld a, $20
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-
-	; de = sBackupGameData
-	; save backup game data
-	ld de, sBackupCheckVals
-	ld a, SAVE_CHECK_VAL_1
-	ld [de], a
-	inc e
-	ld a, SAVE_CHECK_VAL_2
-	ld [de], a
-	inc e
-	ld a, SAVE_CHECK_VAL_3
-	ld [de], a
-	inc e
-	ld a, SAVE_CHECK_VAL_4
-	ld [de], a
-	inc e
-
-	ld hl, STARTOF("Progress WRAM")
-	ld b, SIZEOF("Progress WRAM")
-	call CopyHLToDE
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
-	ld hl, wTreasuresCollected
-	ld b, (wOWLevel - wTreasuresCollected) + 2
-	call CopyHLToDE
-	pop af
-	ldh [rSVBK], a
-
-	ld a, $21
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-
-	ld a, [wChecksum + 0]
-	ld d, a
-	ld [s0a793 + 0], a
-	ld a, [wChecksum  + 0+ 1]
-	ld e, a
-	ld [s0a793 + 1], a
-
-	ld a, $22
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-
-	ld a, d
-	ld [s0a7e3 + 0], a
-	ld a, e
-	ld [s0a7e3 + 1], a
-
-	ld a, $23
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-
-	ld a, d
-	ld [s0afa3 + 0], a
-	ld a, e
-	ld [s0afa3 + 1], a
-
-	xor a
-	ld [s0a790], a
-	ld [s0a7e0], a
-	ld [s0afa0], a
-	pop af
-	sramswitch
-
-	call VBlank_1f0c6c
-	farcall LoadSaveScreenPals
-	farcall PrintSaveCompleteBox
-
-	xor a
-	ld [wTimer + 0], a
-	ld a, $02
-	ld [wTimer + 1], a
-	ld a, LCDC_DEFAULT
-	ldh [rLCDC], a
-	ld hl, wSubState
-	inc [hl]
-	ret
-
-Func_1f08af:
-	ld a, [wTransitionParam]
-	cp TRANSITION_EPILOGUE_NOT_PERFECT
-	jr z, .after_epilogue
-	cp TRANSITION_EPILOGUE_PERFECT
-	jr z, .after_epilogue
-	cp TRANSITION_GAME_OVER
-	jr z, .game_over
-
-	call DisableLCD
-	call LoadBackupVRAM
-	xor a
-	ld [wResetDisabled], a
-	ld a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
-	ldh [rLCDC], a
-	ld a, ST_OVERWORLD
-	ld [wState], a
-	ld a, [wPendingSubState]
-	ld [wSubState], a
-	ret
-
-.after_epilogue
-	xor a
-	ld [wResetDisabled], a
-	ld hl, wState
-	ld [hl], ST_CREDITS
-	xor a
-	ld [wSubState], a
-	ret
-
-.game_over
-	xor a
-	ld [wResetDisabled], a
-	ld hl, wState
-	ld [hl], ST_GAME_OVER
-	xor a
-	ld [wSubState], a
-	ret
-
-Func_1f08f4:
-	jp Init
-
 LoadFontTiles:
 	ld hl, FontGfx
 	ld bc, v0Tiles0
@@ -1194,7 +63,7 @@ PrintNumberMusicCoins:
 	ldbgcoord 7, 16, v0BGMap1
 	ret
 
-Func_1f0969::
+DrawLevelObjectsAfterLevelReturn::
 	farcall VBlank_Level
 	farcall Func_b681
 	ldh a, [rSVBK]
@@ -1240,15 +109,15 @@ HandlePauseMenuInput:
 .asm_1f09e7
 	ld a, [wGameModeFlags]
 	bit MODE_TIME_ATTACK_F, a
-	jr nz, .asm_1f0a45
-	jr .asm_1f0a2a
+	jr nz, .highlight_action_help_button
+	jr .highlight_save_button
 
 .asm_1f09f0
 	ld a, [wJoypadPressed]
 	bit D_LEFT_F, a
-	jp nz, .asm_1f0aa1
+	jp nz, .highlight_return_button
 	bit D_RIGHT_F, a
-	jr nz, .asm_1f0a45
+	jr nz, .highlight_action_help_button
 	bit A_BUTTON_F, a
 	ret z
 	jp .Save
@@ -1258,25 +127,25 @@ HandlePauseMenuInput:
 	bit D_LEFT_F, a
 	jr nz, .asm_1f0a13
 	bit D_RIGHT_F, a
-	jr nz, .asm_1f0a7f
+	jr nz, .highlight_to_map_button
 	bit A_BUTTON_F, a
 	ret z
 	jp .ActionHelp
 .asm_1f0a13
 	ld a, [wGameModeFlags]
 	bit MODE_TIME_ATTACK_F, a
-	jp nz, .asm_1f0aa1
-	jr .asm_1f0a2a
+	jp nz, .highlight_return_button
+	jr .highlight_save_button
 
 .asm_1f0a1d
 	ld a, [wJoypadPressed]
 	bit D_LEFT_F, a
-	jr nz, .asm_1f0a45
+	jr nz, .highlight_action_help_button
 	bit A_BUTTON_F, a
 	ret z
 	jp .ToMap
 
-.asm_1f0a2a
+.highlight_save_button
 	ld a, PAUSEMENU_SAVE
 	ld [wPauseMenuSelection], a
 	ld hl, wMenuObj2
@@ -1295,7 +164,7 @@ HandlePauseMenuInput:
 	ld [hl], a
 	jr .play_sfx
 
-.asm_1f0a45
+.highlight_action_help_button
 	ld a, PAUSEMENU_ACTION_HELP
 	ld [wPauseMenuSelection], a
 	ld hl, wMenuObj2
@@ -1332,7 +201,7 @@ HandlePauseMenuInput:
 	ld [hl], a
 	jr .play_sfx
 
-.asm_1f0a7f
+.highlight_to_map_button
 	ld a, PAUSEMENU_TO_MAP
 	ld [wPauseMenuSelection], a
 	ld hl, wMenuObj2
@@ -1354,7 +223,7 @@ HandlePauseMenuInput:
 	play_sfx SFX_0E2
 	ret
 
-.asm_1f0aa1
+.highlight_return_button
 	ld a, PAUSEMENU_RETURN
 	ld [wPauseMenuSelection], a
 	ld hl, wMenuObj2
@@ -1453,7 +322,7 @@ HandlePauseMenuInput:
 	play_sfx SFX_SELECTION
 	ret
 
-; increments counter in wSaveCounter
+; increments 4-byte counter in wSaveCounter
 IncrementSaveCounter:
 	ld a, [wSaveCounter + 3]
 	add 1
@@ -1557,14 +426,14 @@ CalculateBackupSRAMChecksum1:
 	ld a, BANK("SRAM1")
 	sramswitch
 	ld hl, s1a000
-	ld de, $0
-	ld bc, $2000
+	ld de, 0
+	ld bc, SIZEOF(SRAM)
 .loop_sram_1
 	ld a, [hli]
 	add e
 	ld e, a
 	ld a, d
-	adc $00
+	adc 0
 	ld d, a
 	dec c
 	jr nz, .loop_sram_1
@@ -1602,14 +471,14 @@ CalculateBackupSRAMChecksum2:
 	ld a, BANK("SRAM3")
 	sramswitch
 	ld hl, s3a000
-	ld de, $0
-	ld bc, $2000
+	ld de, 0
+	ld bc, SIZEOF(SRAM)
 .loop_sram_3
 	ld a, [hli]
 	add e
 	ld e, a
 	ld a, d
-	adc $00
+	adc 0
 	ld d, a
 	dec c
 	jr nz, .loop_sram_3
@@ -1802,17 +671,17 @@ Func_1f0d60:
 	call CheckSaveVals
 	jr c, .clear_check_vals
 
-	ld a, [s0a791 + 0]
+	ld a, [sGameDataChecksum + 0]
 	ld b, a
-	ld a, [s0a791 + 1]
+	ld a, [sGameDataChecksum + 1]
 	ld c, a
-	ld a, [s0a7e1 + 0]
+	ld a, [sGameDataChecksumEcho1 + 0]
 	ld d, a
-	ld a, [s0a7e1 + 1]
+	ld a, [sGameDataChecksumEcho1 + 1]
 	ld e, a
-	ld a, [s0afa1 + 0]
+	ld a, [sGameDataChecksumEcho2 + 0]
 	ld h, a
-	ld a, [s0afa1 + 1]
+	ld a, [sGameDataChecksumEcho2 + 1]
 	ld l, a
 	call Func_1f1153
 	ld hl, sGameData
@@ -1876,17 +745,17 @@ Func_1f0d60:
 	ld hl, sBackupCheckVals
 	call CheckSaveVals
 	jr c, .clear_backup_check_vals
-	ld a, [s0a793 + 0]
+	ld a, [sBackupGameDataChecksum + 0]
 	ld b, a
-	ld a, [s0a793 + 1]
+	ld a, [sBackupGameDataChecksum + 1]
 	ld c, a
-	ld a, [s0a7e3 + 0]
+	ld a, [sBackupGameDataChecksumEcho1 + 0]
 	ld d, a
-	ld a, [s0a7e3 + 1]
+	ld a, [sBackupGameDataChecksumEcho1 + 1]
 	ld e, a
-	ld a, [s0afa3 + 0]
+	ld a, [sBackupGameDataChecksumEcho2 + 0]
 	ld h, a
-	ld a, [s0afa3 + 1]
+	ld a, [sBackupGameDataChecksumEcho2 + 1]
 	ld l, a
 	call Func_1f1153
 	ld hl, sBackupGameData
@@ -1996,17 +865,17 @@ Func_1f0d60:
 	ld hl, s0a000
 	call Func_1f0d47
 	jr c, .asm_1f0f2f
-	ld a, [sChecksum + 0]
+	ld a, [sWRAMChecksum + 0]
 	ld b, a
-	ld a, [sChecksum + 1]
+	ld a, [sWRAMChecksum + 1]
 	ld c, a
-	ld a, [s0a7e5 + 0]
+	ld a, [sWRAMChecksumEcho1 + 0]
 	ld d, a
-	ld a, [s0a7e5 + 1]
+	ld a, [sWRAMChecksumEcho1 + 1]
 	ld e, a
-	ld a, [s0afa5 + 0]
+	ld a, [sWRAMChecksumEcho2 + 0]
 	ld h, a
-	ld a, [s0afa5 + 1]
+	ld a, [sWRAMChecksumEcho2 + 1]
 	ld l, a
 	call Func_1f1153
 	ld hl, sSaveCounter
@@ -2068,17 +937,17 @@ Func_1f0d60:
 	ld hl, s0a800
 	call Func_1f0d47
 	jr c, .asm_1f0fb2
-	ld a, [s0a797 + 0]
+	ld a, [sBackup1WRAMChecksum + 0]
 	ld b, a
-	ld a, [s0a797 + 1]
+	ld a, [sBackup1WRAMChecksum + 1]
 	ld c, a
-	ld a, [s0a7e7 + 0]
+	ld a, [sBackup1WRAMChecksumEcho1 + 0]
 	ld d, a
-	ld a, [s0a7e7 + 1]
+	ld a, [sBackup1WRAMChecksumEcho1 + 1]
 	ld e, a
-	ld a, [s0afa7 + 0]
+	ld a, [sBackup1WRAMChecksumEcho2 + 0]
 	ld h, a
-	ld a, [s0afa7 + 1]
+	ld a, [sBackup1WRAMChecksumEcho2 + 1]
 	ld l, a
 	call Func_1f1153
 	ld hl, s0a804
@@ -2194,17 +1063,17 @@ Func_1f0d60:
 	ld hl, s0a400
 	call Func_1f0d47
 	jr c, .asm_1f10a1
-	ld a, [s0a799 + 0]
+	ld a, [sBackup2WRAMChecksum + 0]
 	ld b, a
-	ld a, [s0a799 + 1]
+	ld a, [sBackup2WRAMChecksum + 1]
 	ld c, a
-	ld a, [s0a7e9 + 0]
+	ld a, [sBackup2WRAMChecksumEcho1 + 0]
 	ld d, a
-	ld a, [s0a7e9 + 1]
+	ld a, [sBackup2WRAMChecksumEcho1 + 1]
 	ld e, a
-	ld a, [s0afa9 + 0]
+	ld a, [sBackup2WRAMChecksumEcho2 + 0]
 	ld h, a
-	ld a, [s0afa9 + 1]
+	ld a, [sBackup2WRAMChecksumEcho2 + 1]
 	ld l, a
 	call Func_1f1153
 	ld hl, s0a404
@@ -2265,17 +1134,17 @@ Func_1f0d60:
 	ld hl, s0ac00
 	call Func_1f0d47
 	jr c, .asm_1f1122
-	ld a, [s0a79b + 0]
+	ld a, [sBackup3WRAMChecksum + 0]
 	ld b, a
-	ld a, [s0a79b + 1]
+	ld a, [sBackup3WRAMChecksum + 1]
 	ld c, a
-	ld a, [s0a7eb + 0]
+	ld a, [sBackup3WRAMChecksumEcho1 + 0]
 	ld d, a
-	ld a, [s0a7eb + 1]
+	ld a, [sBackup3WRAMChecksumEcho1 + 1]
 	ld e, a
-	ld a, [s0afab + 0]
+	ld a, [sBackup3WRAMChecksumEcho2 + 0]
 	ld h, a
-	ld a, [s0afab + 1]
+	ld a, [sBackup3WRAMChecksumEcho2 + 1]
 	ld l, a
 	call Func_1f1153
 	ld hl, s0ac04

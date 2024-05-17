@@ -908,6 +908,9 @@ INCLUDE "engine/level/wario_states_4.asm"
 
 SECTION "Bank 7C", ROMX
 
+INCLUDE "engine/pause/state_table.asm"
+INCLUDE "engine/pause/pause_menu.asm"
+INCLUDE "engine/pause/save.asm"
 INCLUDE "engine/bank7c.asm"
 
 

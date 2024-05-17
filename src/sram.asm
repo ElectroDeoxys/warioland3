@@ -33,23 +33,13 @@ s0a404:: ; a404
 s0a790:: ; a790
 	ds $1
 
-s0a791:: ; a791
-	ds $2
+sGameDataChecksum::       dw ; a791
+sBackupGameDataChecksum:: dw ; a793
 
-s0a793:: ; a793
-	ds $2
-
-sChecksum:: ; a795
-	dw
-
-s0a797:: ; a797
-	ds $2
-
-s0a799:: ; a799
-	ds $2
-
-s0a79b:: ; a79b
-	ds $2
+sWRAMChecksum::        dw ; a795
+sBackup1WRAMChecksum:: dw ; a797
+sBackup2WRAMChecksum:: dw ; a799
+sBackup3WRAMChecksum:: dw ; a79b
 
 s0a79d:: ; a79d
 	ds $2
@@ -62,23 +52,13 @@ s0a79f:: ; a79f
 s0a7e0:: ; a7e0
 	ds $1
 
-s0a7e1:: ; a7e1
-	ds $2
+sGameDataChecksumEcho1::       dw ; a7e1
+sBackupGameDataChecksumEcho1:: dw ; a7e3
 
-s0a7e3:: ; a7e3
-	ds $2
-
-s0a7e5:: ; a7e5
-	ds $2
-
-s0a7e7:: ; a7e7
-	ds $2
-
-s0a7e9:: ; a7e9
-	ds $2
-
-s0a7eb:: ; a7eb
-	ds $2
+sWRAMChecksumEcho1::        dw ; a7e5
+sBackup1WRAMChecksumEcho1:: dw ; a7e7
+sBackup2WRAMChecksumEcho1:: dw ; a7e9
+sBackup3WRAMChecksumEcho1:: dw ; a7eb
 
 s0a7ed:: ; a7ed
 	ds $2
@@ -115,23 +95,13 @@ s0ac04:: ; ac04
 s0afa0:: ; afa0
 	ds $1
 
-s0afa1:: ; afa1
-	ds $2
+sGameDataChecksumEcho2::       dw ; afa1
+sBackupGameDataChecksumEcho2:: dw ; afa3
 
-s0afa3:: ; afa3
-	ds $2
-
-s0afa5:: ; afa5
-	ds $2
-
-s0afa7:: ; afa7
-	ds $2
-
-s0afa9:: ; afa9
-	ds $2
-
-s0afab:: ; afab
-	ds $2
+sWRAMChecksumEcho2::        dw ; afa5
+sBackup1WRAMChecksumEcho2:: dw ; afa7
+sBackup2WRAMChecksumEcho2:: dw ; afa9
+sBackup3WRAMChecksumEcho2:: dw ; afab
 
 s0afad:: ; afad
 	ds $2

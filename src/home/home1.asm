@@ -1320,7 +1320,7 @@ ReturnToLevelFromGolf::
 	and ROOMTRANSITION_FLAGS_MASK
 	or ROOMTRANSITION_2
 	ld [wRoomTransitionParam], a
-	farcall Func_1f0969
+	farcall DrawLevelObjectsAfterLevelReturn
 	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 ;	fallthrough
