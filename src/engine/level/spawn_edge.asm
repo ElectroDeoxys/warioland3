@@ -47,7 +47,7 @@ SpawnRowEdgeObjects:
 	ld a, h
 	cp $c0
 	jr nz, .skip_incr_srambank
-	ld h, HIGH(STARTOF(SRAM))
+	ld h, HIGH(sLevelBlockObjectMap)
 	ld a, [wBlockPtrBank]
 	inc a
 	ld [wBlockPtrBank], a

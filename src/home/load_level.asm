@@ -30,7 +30,7 @@ DecompressLevelBlockMap::
 ; each row is 160 blocks wide
 .Decompress:
 	ld c, LEVEL_WIDTH
-	ld de, s1a000
+	ld de, sLevelBlockObjectMap
 .loop_data
 	ld a, [hli]
 	and a
@@ -120,7 +120,7 @@ DecompressLevelObjectMap::
 	add $b0
 	dec a
 	ld c, a ; (LEVEL_WIDTH / 2) + $b0 - 1
-	ld de, s1a000 + $b0
+	ld de, sLevelBlockObjectMap + $b0
 .loop_data
 	ld a, [hli]
 	and a

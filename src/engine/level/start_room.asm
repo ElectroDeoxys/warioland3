@@ -230,7 +230,7 @@ ProcessMultiBlock:
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	ld a, [wcedb]
 	jr nz, .no_wrap_1
-	ld a, HIGH(STARTOF(SRAM))
+	ld a, HIGH(sLevelBlockObjectMap)
 	ld h, a
 	ld [wBlockPtr + 0], a
 	ld a, [wcedb]
@@ -585,7 +585,7 @@ Func_896f:
 	ld a, h
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, .asm_89de
-	ld h, HIGH(STARTOF(SRAM))
+	ld h, HIGH(sLevelBlockObjectMap)
 	ld a, [wccec]
 	inc a
 	ld [wccec], a
@@ -716,7 +716,7 @@ SetWarioPositionToSpawn:
 	ld a, h
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, .asm_8a77
-	ld h, HIGH(STARTOF(SRAM))
+	ld h, HIGH(sLevelBlockObjectMap)
 	ld a, [wccec]
 	inc a
 	ld [wccec], a

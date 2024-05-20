@@ -134,7 +134,10 @@ s0aff8:: ; aff8
 
 SECTION "SRAM1", SRAM
 
-s1a000:: ; a000
+; map is seperated into LEVEL_WIDTH wide rows of blocks
+; followed by (LEVEL_WIDTH / 2) wide rows of objects
+; these are interleaved with each other for each row
+sLevelBlockObjectMap:: ; a000
 	ds $2000
 
 SECTION "SRAM2", SRAM

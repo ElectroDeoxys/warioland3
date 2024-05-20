@@ -991,7 +991,7 @@ REPT 11
 	ld a, h
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, :+
-	ld h, HIGH(STARTOF(SRAM))
+	ld h, HIGH(sLevelBlockObjectMap)
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
@@ -1043,7 +1043,7 @@ ENDR
 	ld a, h
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, .asm_a562
-	ld h, HIGH(STARTOF(SRAM))
+	ld h, HIGH(sLevelBlockObjectMap)
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
@@ -1077,7 +1077,7 @@ REPT 10
 	ld a, h
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, :+
-	ld h, HIGH(STARTOF(SRAM))
+	ld h, HIGH(sLevelBlockObjectMap)
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
@@ -1151,7 +1151,7 @@ REPT 11
 	ld a, h
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, :+
-	ld h, HIGH(STARTOF(SRAM))
+	ld h, HIGH(sLevelBlockObjectMap)
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
@@ -1209,7 +1209,7 @@ Func_aa2d:
 	ld a, h
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, .asm_aa67
-	ld h, HIGH(STARTOF(SRAM))
+	ld h, HIGH(sLevelBlockObjectMap)
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
@@ -1243,7 +1243,7 @@ Func_aa2d:
 	ld a, h
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, :+
-	ld h, HIGH(STARTOF(SRAM))
+	ld h, HIGH(sLevelBlockObjectMap)
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
@@ -1314,7 +1314,7 @@ REPT 11
 	ld a, h
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, :+
-	ld h, HIGH(STARTOF(SRAM))
+	ld h, HIGH(sLevelBlockObjectMap)
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
@@ -1364,7 +1364,7 @@ Func_af1f:
 	ld a, h
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, .asm_af51
-	ld h, HIGH(STARTOF(SRAM))
+	ld h, HIGHsLevelBlockObjectMap)
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
@@ -1397,7 +1397,7 @@ REPT 10
 	ld a, h
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, :+
-	ld h, HIGH(STARTOF(SRAM))
+	ld h, HIGH(sLevelBlockObjectMap)
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
@@ -1469,7 +1469,7 @@ REPT 11
 	ld a, h
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, :+
-	ld h, HIGH(STARTOF(SRAM))
+	ld h, HIGH(sLevelBlockObjectMap)
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
@@ -1525,7 +1525,7 @@ Func_b405:
 	ld a, h
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, .asm_b43e
-	ld h, HIGH(STARTOF(SRAM))
+	ld h, HIGH(sLevelBlockObjectMap)
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
@@ -1558,7 +1558,7 @@ REPT 10
 	ld a, h
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, :+
-	ld h, HIGH(STARTOF(SRAM))
+	ld h, HIGH(sLevelBlockObjectMap)
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch
@@ -2395,7 +2395,7 @@ Func_bb85:
 	ld [wBlockPtrBank], a
 	sramswitch
 	push hl
-	call GetBlockPtrPtrBGMapAddress
+	call GetBlockPtrBGMapAddress
 	ld a, [wBGMapAddressQueueSize]
 	ld b, a
 	ld de, wBGMapAddressQueue
@@ -2550,7 +2550,7 @@ UpdateSwitchableBlocks:
 	push af
 	ld a, BANK("SRAM1")
 	sramswitch
-	ld hl, s1a000
+	ld hl, sLevelBlockObjectMap
 .loop_1
 	ld a, [hli]
 	and $7f
@@ -2609,7 +2609,7 @@ UpdateSwitchableBlocks:
 	push af
 	ld a, BANK("SRAM1")
 	sramswitch
-	ld hl, s1a000
+	ld hl, sLevelBlockObjectMap
 .loop_3
 	ld a, [hli]
 	and $7f

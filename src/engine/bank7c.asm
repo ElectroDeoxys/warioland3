@@ -425,7 +425,7 @@ CalculateBackupSRAMChecksum1:
 	push af
 	ld a, BANK("SRAM1")
 	sramswitch
-	ld hl, s1a000
+	ld hl, sLevelBlockObjectMap
 	ld de, 0
 	ld bc, SIZEOF(SRAM)
 .loop_sram_1

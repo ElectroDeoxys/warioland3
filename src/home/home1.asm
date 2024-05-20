@@ -14,7 +14,7 @@ GetBlockPtr::
 	add b
 
 	ld b, BANK("SRAM1")
-	add HIGH(STARTOF(SRAM))
+	add HIGH(sLevelBlockObjectMap)
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .got_sram_bank
 	inc b
@@ -49,7 +49,7 @@ GetBlockPtr::
 	ret
 
 ; hl = block ptr
-GetBlockPtrPtrBGMapAddress::
+GetBlockPtrBGMapAddress::
 	ld a, h
 	sub HIGH(STARTOF(SRAM))
 	ld e, a
@@ -586,8 +586,8 @@ Func_f13::
 	ret
 
 .Decompress
-	ld c, $a0
-	ld hl, s1a000
+	ld c, LEVEL_WIDTH
+	ld hl, sLevelBlockObjectMap
 .loop_data
 	ld a, [de]
 	and a
