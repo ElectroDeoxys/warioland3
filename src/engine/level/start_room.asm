@@ -31,7 +31,7 @@ StartRoom_FromTransition:
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-	farcall Func_61f2a
+	farcall InitObjectVars_FromTransition
 	pop af
 	ldh [rSVBK], a
 
@@ -116,11 +116,10 @@ StartRoom_FromTransition:
 
 	ld a, [wWarioState]
 	cp WST_ENTERING_DOOR
-	jr nz, .asm_85a7
+	jr nz, .not_entering_door
 	xor a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
-
 	ld a, HIGH(Frameset_14d18)
 	ld [wFramesetPtr + 0], a
 	ld a, LOW(Frameset_14d18)
@@ -129,7 +128,7 @@ StartRoom_FromTransition:
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
 
-.asm_85a7
+.not_entering_door
 	call UpdateLevelMusic
 	xor a ; FALSE
 	ld [wBlockFuncWarioFlag], a
@@ -314,7 +313,7 @@ StartRoom_FromLevelStart:
 	ld [wIsBossBattle], a
 	ld a, [wceef]
 	and %00111100
-	jp nz, .asm_87e2
+	jp nz, .from_saved_level
 
 	xor a
 	ld [wInternalRoomID], a
@@ -363,12 +362,12 @@ StartRoom_FromLevelStart:
 	push af
 	ld a, 1 ; WRAM1
 	ldh [rSVBK], a
-	farcall Func_61f10
+	farcall InitObjectVars_FromLevelStart
 	pop af
 	ldh [rSVBK], a
 	jr .load_blocks_and_objects
 
-.asm_87e2
+.from_saved_level
 	ld a, [wTempInternalRoomID]
 	ld [wInternalRoomID], a
 	call LoadWarioGfx
@@ -484,13 +483,11 @@ StartRoom_FromLevelStart:
 	push af
 	ld a, BANK("WRAM1")
 	ldh [rSVBK], a
-
 	farcall UpdateObjects
 	farcall UpdateObjects
-
 	pop af
 	ldh [rSVBK], a
-	jr .asm_8935
+	jr .draw_objs
 
 .asm_8917
 	ld a, TRUE
@@ -503,7 +500,7 @@ StartRoom_FromLevelStart:
 	pop af
 	ldh [rSVBK], a
 
-.asm_8935
+.draw_objs
 	xor a ; FALSE
 	ld [wIsFloorTransition], a
 

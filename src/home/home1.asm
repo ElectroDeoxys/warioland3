@@ -557,12 +557,12 @@ Func_edb::
 	ld [wTempBank], a
 	pop af
 	bankswitch
-	call Func_f13
+	call .DecompressLevelBlockMap_OnlyHighBit
 	ret
 
 ; almost identical to DecompressLevelBlockMap
 ; but instead only copies over the highest bit
-Func_f13::
+.DecompressLevelBlockMap_OnlyHighBit:
 	ld a, [wceef]
 	and $3c
 	ret nz

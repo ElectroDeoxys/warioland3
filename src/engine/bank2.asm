@@ -1364,7 +1364,7 @@ Func_af1f:
 	ld a, h
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr nz, .asm_af51
-	ld h, HIGHsLevelBlockObjectMap)
+	ld h, HIGH(sLevelBlockObjectMap)
 	ld a, [wSRAMBank]
 	inc a
 	sramswitch

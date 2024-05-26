@@ -957,7 +957,7 @@ FOR n, 1, NUM_OBJECTS + 1
 	ret
 ENDR
 
-Func_61f10:
+InitObjectVars_FromLevelStart:
 	xor a
 	call ClearObjects
 	call ClearObjDataPointers
@@ -969,7 +969,7 @@ Func_61f10:
 	ld [wWarioGoals], a
 	ret
 
-Func_61f2a:
+InitObjectVars_FromTransition:
 	xor a
 	call ClearObjects
 	call ClearObjDataPointers
@@ -991,7 +991,7 @@ ClearObjects:
 
 ClearObjDataPointers:
 	ld hl, wObjDataPointers
-	ld c, $20
+	ld c, wObjDataPointersEnd - wObjDataPointers
 .loop
 	ld [hli], a
 	dec c

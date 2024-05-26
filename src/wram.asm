@@ -974,6 +974,7 @@ wObjDataPtr10::          dw ; d138
 wObjDataPtr11::          dw ; d13a
 wObjDataPtr12::          dw ; d13c
 wObjDataPtr13::          dw ; d13e
+wObjDataPointersEnd::
 
 w1d140:: ; d140
 
