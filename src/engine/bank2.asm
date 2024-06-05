@@ -98,7 +98,7 @@ Func_8eac:
 	ret
 
 ; hl = Wario's position
-GetNextInternalRoomID:
+GetNextLevelRoomID:
 	ld a, [hli] ; hi y
 	and a
 	jr z, .skip_multiplication
@@ -111,12 +111,12 @@ GetNextInternalRoomID:
 	dec b
 	jr nz, .loop_multiplication
 	; a = XPosHi + 10 * YPosHi
-	ld [wInternalRoomID], a
+	ld [wLevelRoomID], a
 	ret
 .skip_multiplication
 	inc hl
 	ld a, [hl] ; hi x
-	ld [wInternalRoomID], a
+	ld [wLevelRoomID], a
 	ret
 
 Func_8ed9:

@@ -60,7 +60,7 @@ StartRoom_FromTransition:
 
 	; get next room ID from Wario's position
 	ld hl, wWarioPos
-	call GetNextInternalRoomID
+	call GetNextLevelRoomID
 
 	xor a
 	ld [wFloorTransitionDir], a
@@ -71,8 +71,8 @@ StartRoom_FromTransition:
 	ld [wc0bd], a
 	ld [wGroundShakeCounter], a
 	ld [wSCYShake], a
-	ld a, [wInternalRoomID]
-	ld [wTempInternalRoomID], a
+	ld a, [wLevelRoomID]
+	ld [wTempLevelRoomID], a
 
 	ldh a, [rSVBK]
 	push af
@@ -316,9 +316,9 @@ StartRoom_FromLevelStart:
 	jp nz, .from_saved_level
 
 	xor a
-	ld [wInternalRoomID], a
+	ld [wLevelRoomID], a
 	ld [wca6c], a
-	ld [wTempInternalRoomID], a
+	ld [wTempLevelRoomID], a
 
 	xor a
 	ld [wLevelEndScreen], a
@@ -368,8 +368,8 @@ StartRoom_FromLevelStart:
 	jr .load_blocks_and_objects
 
 .from_saved_level
-	ld a, [wTempInternalRoomID]
-	ld [wInternalRoomID], a
+	ld a, [wTempLevelRoomID]
+	ld [wLevelRoomID], a
 	call LoadWarioGfx
 
 .load_blocks_and_objects
@@ -538,7 +538,7 @@ Func_896f:
 	ld [hl], a
 	call Func_cc0
 	ld c, $01
-	ld a, [wSpawnYBlock]
+	ld a, [wWarioSpawnYBlock]
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .asm_8996
 	inc c
@@ -655,19 +655,19 @@ SetWarioPositionToSpawn:
 	ld hl, hXPosLo
 	xor a
 	ld [hld], a ; hXPosLo
-	ld a, [wSpawnPos]
+	ld a, [wWarioSpawnPos]
 	and $0f
 	ld [hld], a ; hXPosHi
 	xor a
 	ld [hld], a ; hYPosLo
-	ld a, [wSpawnPos]
+	ld a, [wWarioSpawnPos]
 	and $f0
 	swap a
 	ld [hl], a ; hYPosHi
 	call Func_cc0
 
 	ld c, $01
-	ld a, [wSpawnYBlock]
+	ld a, [wWarioSpawnYBlock]
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .asm_8a6c
 	inc c

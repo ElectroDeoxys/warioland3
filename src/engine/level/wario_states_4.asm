@@ -118,7 +118,7 @@ SetState_IceSkatinStart:
 	ld a, LOW(OAM_1fdb6d)
 	ld [wOAMPtr + 1], a
 
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	ld [wDirection], a
 	and a
 	jr nz, .asm_1ec10a
@@ -1560,7 +1560,7 @@ SetState_SplitHit:
 	ld a, LOW(OAM_1ffa12)
 	ld [wOAMPtr + 1], a
 
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	ld [wDirection], a
 	ld a, [wDirection]
 	and a
@@ -2344,7 +2344,7 @@ SetState_Swallowed:
 	ld a, LOW(OAM_1dc3cd)
 	ld [wOAMPtr + 1], a
 
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	ld [wDirection], a
 	and a
 	jr nz, .asm_1ed6d4

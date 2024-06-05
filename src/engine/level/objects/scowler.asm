@@ -518,7 +518,7 @@ ScowlerFunc:
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
 	and HEAVY_OBJ
-	or OBJ_INTERACTION_41
+	or OBJ_INTERACTION_SCOWLER
 	ld [hld], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.Func_5458a)

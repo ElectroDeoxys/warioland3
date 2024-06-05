@@ -115,7 +115,7 @@ SmallOctohonData:          object_data OAM_18a895, $0, OBJ_INTERACTION_06,      
 BigOctohonData:            object_data OAM_18a895, $1, OBJ_INTERACTION_06,                          -9, BigOctohonFunc,            $0
 SparkHorizontalData:       object_data OAM_18ab04, $2, OBJ_INTERACTION_FULL_STING,                 -11, SparkFunc,                 OBJFLAG_PRIORITY
 SparkVerticalData:         object_data OAM_18ab04, $0, OBJ_INTERACTION_FULL_STING,                 -11, SparkFunc,                 OBJFLAG_PRIORITY
-ScowlerData:               object_data OAM_194895, $0, OBJ_INTERACTION_41             | HEAVY_OBJ, -32, ScowlerFunc,               $0
+ScowlerData:               object_data OAM_194895, $0, OBJ_INTERACTION_SCOWLER             | HEAVY_OBJ, -32, ScowlerFunc,               $0
 FloatingRingSpawnerData:   object_data OAM_194895, $4, OBJ_INTERACTION_0B,                           0, FloatingRingSpawnerFunc,   $0
 FireData:                  object_data OAM_18aba0, $4, OBJ_INTERACTION_FIRE,                       -24, FireFunc,                  $0
 JamanoData:                object_data OAM_19501c, $6, OBJ_INTERACTION_JAMANO,                     -10, JamanoFunc,                $0
@@ -127,7 +127,7 @@ Turtle2Data:               object_data OAM_195699, $c, OBJ_INTERACTION_TURTLE,  
 WolfenbossData:            object_data OAM_195e06, $d, OBJ_INTERACTION_0B             | HEAVY_OBJ,   0, WolfenbossFunc,            $0
 WolfenbossPlatformData:    object_data OAM_195e06, $a, OBJ_INTERACTION_SOLID,                       -1, WolfenbossPlatformFunc,    $0
 ShootData:                 object_data OAM_196583, $0, OBJ_INTERACTION_0B             | HEAVY_OBJ, -32, ShootFunc,                 $0
-GKTortoiseData:            object_data OAM_196583, $1, OBJ_INTERACTION_4E             | HEAVY_OBJ, -20, GKTortoiseFunc,            $0
+GKTortoiseData:            object_data OAM_196583, $1, OBJ_INTERACTION_GK_TORTOISE             | HEAVY_OBJ, -20, GKTortoiseFunc,            $0
 ShootGoalCounterData:      object_data OAM_196583, $a, OBJ_INTERACTION_0B,                         -32, ShootGoalCounterFunc,      $0
 WarioGoalCounterData:      object_data OAM_196583, $b, OBJ_INTERACTION_0B,                         -32, WarioGoalCounterFunc,      $0
 GKTortoisePlatformData:    object_data OAM_196583, $5, OBJ_INTERACTION_31,                         -10, GKTortoisePlatformFunc,    $0

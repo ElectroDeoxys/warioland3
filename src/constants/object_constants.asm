@@ -144,7 +144,7 @@ DEF INTERACTION_DOWN  EQU (1 << INTERACTION_DOWN_F)  ; $80
 	const OBJ_INTERACTION_PRINCE_FROGGY       ; $3e
 	const OBJ_INTERACTION_HAND                ; $3f
 	const OBJ_INTERACTION_WATER_TELEPORTING   ; $40
-	const OBJ_INTERACTION_41                  ; $41
+	const OBJ_INTERACTION_SCOWLER                  ; $41
 	const OBJ_INTERACTION_INK                 ; $42
 	const OBJ_INTERACTION_43                  ; $43
 	const OBJ_INTERACTION_JAMANO              ; $44
@@ -157,7 +157,7 @@ DEF INTERACTION_DOWN  EQU (1 << INTERACTION_DOWN_F)  ; $80
 	const OBJ_INTERACTION_MAGICAL_SPIRAL      ; $4b
 	const OBJ_INTERACTION_BOTTOM_STING        ; $4c
 	const OBJ_INTERACTION_SHOOT               ; $4d
-	const OBJ_INTERACTION_4E                  ; $4e
+	const OBJ_INTERACTION_GK_TORTOISE                  ; $4e
 	const OBJ_INTERACTION_4F                  ; $4f
 	const OBJ_INTERACTION_50                  ; $50
 	const OBJ_INTERACTION_51                  ; $51

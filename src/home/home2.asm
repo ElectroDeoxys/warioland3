@@ -90,7 +90,7 @@ LoadRoom::
 	bankswitch
 
 .got_bank
-	ld a, [wInternalRoomID]
+	ld a, [wLevelRoomID]
 	add a ; *2
 	ld e, a
 	ld d, $00
@@ -103,7 +103,7 @@ LoadRoom::
 	debug_assert_not $ff
 
 	ld a, [hli]
-	ld [wSpawnPos], a
+	ld [wWarioSpawnPos], a
 	ld a, [hl]
 	swap a
 	and $0f

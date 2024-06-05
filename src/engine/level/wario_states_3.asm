@@ -3917,7 +3917,7 @@ SetState_CrazySpinning:
 	ld a, LOW(OAM_14a82)
 	ld [wOAMPtr + 1], a
 
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	ld [wDirection], a
 	and a
 	jr nz, .asm_2a46f
@@ -4810,7 +4810,7 @@ Func_2ac7d:
 	ld a, LOW(OAM_1fd87c)
 	ld [wOAMPtr + 1], a
 
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	ld [wDirection], a
 	ld [wWarioStateCounter], a
 	ld a, HIGH(Frameset_1fdb2c)

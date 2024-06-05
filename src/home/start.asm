@@ -174,7 +174,7 @@ InitWithoutDemoPowerUpReset::
 
 	ld hl, wGlobalCounter
 	inc [hl]
-	xor a
+	xor a ; FALSE
 	ld [wEnableVBlankFunc], a
 	ld [wVBlankFuncExecuted], a
 	call HandleSound

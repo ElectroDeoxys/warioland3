@@ -173,7 +173,7 @@ Func_cc0::
 	add c
 	add HIGH(STARTOF(SRAM))
 	ld c, a
-	ld [wSpawnYBlock], a
+	ld [wWarioSpawnYBlock], a
 
 	ld a, [hli]
 	ld d, a
@@ -196,7 +196,7 @@ Func_cc0::
 	ld a, l
 	add $b0
 	ld l, a
-	ld [wSpawnXBlock], a
+	ld [wWarioSpawnXBlock], a
 	ld h, c
 	ret
 

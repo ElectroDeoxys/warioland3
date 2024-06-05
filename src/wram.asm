@@ -38,17 +38,15 @@ wGlobalCounter:: ; c08f
 	db
 
 ; if not 0, then all sounds are muted
-; is always set to 0
+; is always set to FALSE
 wSoundMuted:: ; c090
 	db
 
 ; whether VBlank function has been executed or not
-; $0 false, $1 true
 wVBlankFuncExecuted:: ; c091
 	db
 
 ; whether to run the VBlank function
-; $0, don't run; $1 run
 wEnableVBlankFunc:: ; c092
 	db
 
@@ -76,12 +74,12 @@ wTempIE:: ; c09e
 wRepeatByte:: ; c09f
 	db
 
-wInternalRoomID:: ; c0a0
+wLevelRoomID:: ; c0a0
 	db
 
 ; low nybble = x pos
 ; high nybble = y pos
-wSpawnPos:: ; c0a1
+wWarioSpawnPos:: ; c0a1
 	db
 
 wc0a2:: ; c0a2
@@ -354,7 +352,7 @@ wc1c4:: db ; c1c4
 
 	db
 
-wEnemyDirection:: ; c1c6
+wObjDirection:: ; c1c6
 	db
 
 wLadderInteraction:: ; c1c7
@@ -465,7 +463,7 @@ wKeyAndTreasureFlags:: ; ca5b
 wNumMusicalCoins:: ; ca5c
 	db
 
-wTempInternalRoomID:: ; ca5d
+wTempLevelRoomID:: ; ca5d
 	db
 
 wca5e:: db ; ca5e
@@ -793,8 +791,8 @@ wBlockPtr:: dw ; ccea
 wccec:: ; ccec
 	db
 
-wSpawnYBlock:: db ; cced
-wSpawnXBlock:: db ; ccee
+wWarioSpawnYBlock:: db ; cced
+wWarioSpawnXBlock:: db ; ccee
 
 wccef:: ; ccef
 	db

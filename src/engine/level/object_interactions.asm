@@ -22,7 +22,7 @@ ProcessInteractions:
 	ld a, [hl] ; OBJ_FLAGS
 	and OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN
 	cp OBJFLAG_ACTIVE | OBJFLAG_ON_SCREEN
-	jr z, .asm_20036
+	jr z, .is_visible
 .next_obj
 	ld a, [wObjPtr + 0]
 	ld h, a
@@ -32,7 +32,7 @@ ProcessInteractions:
 	add hl, de
 	jr .loop_objects
 
-.asm_20036
+.is_visible
 	push hl
 	ld e, OBJ_UNK_1D
 	ld d, $00
@@ -67,13 +67,13 @@ ProcessInteractions:
 	add hl, de
 	ld a, [hl] ; OBJ_SUBSTATE
 	bit OBJSUBFLAG_HDIR_F, a
-	jr nz, .asm_20074
+	jr nz, .obj_facing_right
 	ld a, DIRECTION_LEFT
-	jr .asm_20076
-.asm_20074
+	jr .got_obj_direction
+.obj_facing_right
 	ld a, DIRECTION_RIGHT
-.asm_20076
-	ld [wEnemyDirection], a
+.got_obj_direction
+	ld [wObjDirection], a
 
 	xor a
 	ld [wInteractionSide], a
@@ -276,7 +276,7 @@ ProcessInteractions:
 	dw ObjInteraction_PrinceFroggy       ; OBJ_INTERACTION_PRINCE_FROGGY
 	dw ObjInteraction_Hand               ; OBJ_INTERACTION_HAND
 	dw ObjInteraction_WaterTeleporting   ; OBJ_INTERACTION_WATER_TELEPORTING
-	dw Func_21ce9                        ; OBJ_INTERACTION_41
+	dw ObjInteraction_Scowler            ; OBJ_INTERACTION_SCOWLER
 	dw ObjInteraction_Ink                ; OBJ_INTERACTION_INK
 	dw Func_207ed                        ; OBJ_INTERACTION_43
 	dw ObjInteraction_Jamano             ; OBJ_INTERACTION_JAMANO
@@ -289,7 +289,7 @@ ProcessInteractions:
 	dw ObjInteraction_MagicalSpiral      ; OBJ_INTERACTION_MAGICAL_SPIRAL
 	dw ObjInteraction_BottomSting        ; OBJ_INTERACTION_BOTTOM_STING
 	dw ObjInteraction_Shoot              ; OBJ_INTERACTION_SHOOT
-	dw Func_21e9c                        ; OBJ_INTERACTION_4E
+	dw Func_21e9c                        ; OBJ_INTERACTION_GK_TORTOISE
 	dw Func_21ea6                        ; OBJ_INTERACTION_4F
 	dw Func_21ecd                        ; OBJ_INTERACTION_50
 	dw Func_21f01                        ; OBJ_INTERACTION_51
@@ -355,7 +355,7 @@ Func_2023b:
 	cp TOUCH_ATTACK
 	jp z, AttackObject
 	cp TOUCH_VANISH
-	jp z, Func_205e7
+	jp z, VanishObjectAndKnockBackIfZombie
 	jp ProcessInteractions.next_obj
 
 .asm_20257
@@ -597,7 +597,7 @@ StepOnObject:
 ; Wario is smash attacking
 	ld a, [wTransformation]
 	cp TRANSFORMATION_FAT_WARIO
-	jp z, Func_205e7
+	jp z, VanishObjectAndKnockBackIfZombie
 	jp Func_20602
 
 .no_smash_attack
@@ -729,7 +729,7 @@ StepOnObject:
 	jr nz, .not_hot_wario
 	ld a, [wWarioTransformationProgress]
 	cp 2
-	jr nc, Func_205e7
+	jr nc, VanishObjectAndKnockBackIfZombie
 .not_hot_wario
 
 	ld a, [wTransformation]
@@ -765,7 +765,7 @@ StepOnObject:
 	farcall Func_2a0b2
 	ret
 
-Func_205e7:
+VanishObjectAndKnockBackIfZombie:
 	ld b, OBJACTION_VANISH_TOUCH
 	call SetObjAction
 	ld a, [wTransformation]
@@ -779,7 +779,7 @@ Func_20602:
 	cp TRANSFORMATION_INVISIBLE_WARIO
 	jr z, .invisible
 	and a
-	jr nz, Func_205e7 ; has transformation except invisible
+	jr nz, VanishObjectAndKnockBackIfZombie ; has transformation except invisible
 .invisible
 	ld a, [wGrabState]
 	and GRAB_STATE_MASK
@@ -854,7 +854,7 @@ Func_20670:
 	cp TOUCH_ATTACK
 	jp z, AttackObject
 	cp TOUCH_VANISH
-	jp z, Func_205e7
+	jp z, VanishObjectAndKnockBackIfZombie
 	jp ProcessInteractions.next_obj
 
 .asm_206a8
@@ -1397,7 +1397,7 @@ Func_20b41:
 	cp TOUCH_ATTACK
 	jp z, AttackObject
 	cp TOUCH_VANISH
-	jp z, Func_205e7
+	jp z, VanishObjectAndKnockBackIfZombie
 	jp Func_20a6f
 
 .asm_20b5e
@@ -1418,7 +1418,7 @@ Func_20b6b:
 	cp TOUCH_ATTACK
 	jp z, AttackObject
 	cp TOUCH_VANISH
-	jp z, Func_205e7
+	jp z, VanishObjectAndKnockBackIfZombie
 	cp TOUCH_PASS_THROUGH
 	jp z, ProcessInteractions.next_obj
 	jp .step_on_obj
@@ -1624,7 +1624,7 @@ ObjInteraction_FrontSting:
 	ld a, [wInteractionSide]
 	and INTERACTION_UP | INTERACTION_DOWN
 	jr nz, .asm_20d44
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	cp DIRECTION_RIGHT
 	jr z, .asm_20d39
 	ld a, [wInteractionSide]
@@ -1643,7 +1643,7 @@ ObjInteraction_BackSting:
 	ld a, [wInteractionSide]
 	and INTERACTION_UP | INTERACTION_DOWN
 	jr nz, .asm_20d6b
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	cp DIRECTION_RIGHT
 	jr z, .asm_20d60
 	ld a, [wInteractionSide]
@@ -1719,7 +1719,7 @@ Func_20deb:
 	ld a, [wInteractionSide]
 	and INTERACTION_UP | INTERACTION_DOWN
 	jp nz, Func_20899
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	and a
 	jr nz, .asm_20e04
 	ld a, [wInteractionSide]
@@ -1739,7 +1739,7 @@ ObjInteraction_Haridama:
 	bit INTERACTION_UP_F, a
 	jp nz, Func_207ed
 
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	cp DIRECTION_RIGHT
 	jr z, .asm_20e2e
 	ld a, [wInteractionSide]
@@ -1756,7 +1756,7 @@ Func_20e39:
 	ld a, [wInteractionSide]
 	and INTERACTION_UP | INTERACTION_DOWN
 	jr nz, .asm_20e5d
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	cp DIRECTION_RIGHT
 	jr z, .asm_20e52
 	ld a, [wInteractionSide]
@@ -2242,7 +2242,7 @@ ObjInteraction_Silky:
 	ld a, [wInteractionSide]
 	and INTERACTION_UP | INTERACTION_DOWN
 	jr nz, .asm_21267
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	cp DIRECTION_RIGHT
 	jr z, .asm_2125d
 	ld a, [wInteractionSide]
@@ -2638,7 +2638,7 @@ ObjInteraction_ZombieHead:
 	jp nz, Func_20a69
 	ld a, [wTransformation]
 	cp TRANSFORMATION_ZOMBIE_WARIO
-	jp z, Func_205e7
+	jp z, VanishObjectAndKnockBackIfZombie
 	bit TRANSFORMATIONF_PERSISTENT_F, a
 	jp nz, Func_20a69
 
@@ -2662,7 +2662,7 @@ ObjInteraction_Bouncy:
 	ld a, [wInteractionSide]
 	and INTERACTION_UP | INTERACTION_DOWN
 	jp nz, StepOnObject
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	cp DIRECTION_RIGHT
 	jr z, .asm_21600
 	ld a, [wInteractionSide]
@@ -2707,7 +2707,7 @@ ObjInteraction_FireBot:
 	ld a, [wInteractionSide]
 	and INTERACTION_UP | INTERACTION_DOWN
 	jp nz, StepOnObject
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	cp DIRECTION_RIGHT
 	jr z, .asm_21668
 	ld a, [wInteractionSide]
@@ -2842,7 +2842,7 @@ ObjInteraction_OrangeBird:
 	ld a, [wInteractionSide]
 	and INTERACTION_UP | INTERACTION_DOWN
 	jr nz, .asm_217db
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	cp DIRECTION_RIGHT
 	jr z, .asm_217d1
 	ld a, [wInteractionSide]
@@ -3025,7 +3025,7 @@ ObjInteraction_Owl:
 	ld [wOAMPtr + 0], a
 	ld a, LOW(OAM_1fddb4)
 	ld [wOAMPtr + 1], a
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	ld [wDirection], a
 	ld a, HIGH(Frameset_1fed53)
 	ld [wFramesetPtr + 0], a
@@ -3103,7 +3103,7 @@ ObjInteraction_Rail:
 	ld a, LOW(OAM_1fee05)
 	ld [wOAMPtr + 1], a
 
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	ld [wDirection], a
 	ld a, HIGH(Frameset_1feec4)
 	ld [wFramesetPtr + 0], a
@@ -3184,7 +3184,7 @@ ObjInteraction_RoboMouse:
 	bit INTERACTION_UP_F, a
 	jr nz, .asm_21ae4
 
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	and a
 	jr nz, .asm_21ada
 	ld a, [wInteractionSide]
@@ -3225,7 +3225,7 @@ ObjInteraction_RollingRock:
 	ld a, [wIsRolling]
 	and a
 	ret nz
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	ld [wDirection], a
 	farcall Func_1e174
 	ret
@@ -3353,7 +3353,7 @@ ObjInteraction_WaterDrop:
 	jp RecoverFromTransformation
 
 ObjInteraction_Pesce:
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	cp DIRECTION_RIGHT
 	jr z, .asm_21c37
 	ld a, [wInteractionSide]
@@ -3381,7 +3381,7 @@ ObjInteraction_Tadpole:
 	ld a, [wInteractionSide]
 	and INTERACTION_UP | INTERACTION_DOWN
 	jp nz, StepOnObject
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	and a
 	jr nz, .asm_21c7a
 	ld a, [wInteractionSide]
@@ -3440,7 +3440,7 @@ ObjInteraction_WaterTeleporting:
 	ld b, OBJACTION_TELEPORT
 	jp SetObjAction
 
-Func_21ce9:
+ObjInteraction_Scowler:
 	ld a, [wInteractionSide]
 	bit INTERACTION_UP_F, a
 	jp nz, Func_20899
@@ -3481,7 +3481,7 @@ Func_21d3b:
 	jp nz, Func_20e6a
 	bit INTERACTION_DOWN_F, a
 	jp nz, Func_20e6a
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	and a
 	jr nz, .asm_21d59
 	ld a, [wInteractionSide]
@@ -3517,7 +3517,7 @@ Func_21d88:
 	ld a, [wInteractionSide]
 	and INTERACTION_UP | INTERACTION_DOWN
 	jp nz, Func_20899
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	and a
 	jr nz, .asm_21da1
 	ld a, [wInteractionSide]
@@ -3537,7 +3537,7 @@ Func_21dac:
 	ld a, [wTransformation]
 	bit TRANSFORMATIONF_PERSISTENT_F, a
 	jp nz, Func_2022c
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	ld [wDirection], a
 	farcall SetState_Launched
 	ld b, OBJACTION_06
@@ -3644,7 +3644,7 @@ Func_21e9c:
 	jp Func_20939
 
 Func_21ea6:
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	ld b, a
 	and a
 	jr nz, .asm_21eb6
@@ -3658,7 +3658,7 @@ Func_21ea6:
 	jr nz, .asm_21ebf
 	jr .asm_21eca
 .asm_21ebf
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	xor $1
 	ld [wDirection], a
 	jp Func_20a6f
@@ -3666,7 +3666,7 @@ Func_21ea6:
 	jp Func_21b3a
 
 Func_21ecd:
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	and a
 	jr nz, .asm_21edd
 	ld a, [wInteractionSide]
@@ -3703,7 +3703,7 @@ Func_21f28:
 	jp nz, Func_21d6f.asm_21d7e
 	bit INTERACTION_DOWN_F, a
 	jp nz, Func_20e6a
-	ld a, [wEnemyDirection]
+	ld a, [wObjDirection]
 	and a
 	jr nz, .asm_21f46
 	ld a, [wInteractionSide]
