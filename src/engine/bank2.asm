@@ -1665,7 +1665,7 @@ Func_b681:
 Func_b6d5:
 	xor a
 	ld [wc0c0], a
-	ld a, [wc0b9]
+	ld a, [wRoomRightXLimit]
 	dec a
 	ld c, a
 	ld a, [wCameraSCX + 1]
@@ -1692,7 +1692,7 @@ Func_b6d5:
 	ld [wc0c0], a
 	ret
 .asm_b70e
-	ld a, [wc0b8]
+	ld a, [wRoomLeftXLimit]
 	ld c, a
 	ld a, [wWarioXPos + 0]
 	cp c
@@ -1731,7 +1731,7 @@ Func_b6d5:
 Func_b74c:
 	xor a
 	ld [wc0bf], a
-	ld a, [wc0b8]
+	ld a, [wRoomLeftXLimit]
 	ld c, a
 	ld a, [wCameraSCX + 1]
 	sub b
@@ -1764,7 +1764,7 @@ Func_b74c:
 	ld [wc0bf], a
 	ret
 .asm_b790
-	ld a, [wc0b9]
+	ld a, [wRoomRightXLimit]
 	dec a
 	ld c, a
 	ld a, [wWarioXPos + 0]
@@ -1797,7 +1797,7 @@ Func_b74c:
 	ret c
 	ld a, $02
 	ld [wc0bf], a
-	ld a, [wc0b9]
+	ld a, [wRoomRightXLimit]
 	dec a
 	ld [wCameraSCX + 0], a
 	ld a, [wCameraConfigFlags]
@@ -1810,7 +1810,7 @@ Func_b74c:
 	ret
 
 Func_b7db:
-	ld a, [wc0b6]
+	ld a, [wRoomLowerYLimit]
 	dec a
 	ld c, a
 
@@ -1846,7 +1846,7 @@ Func_b7db:
 	ret nc
 
 	; not CAM_TRANSITIONS
-	ld a, [wc0b7]
+	ld a, [wRoomUpperYLimit]
 	ld c, a
 	ld a, [wWarioYPos + 0]
 	cp c
@@ -1873,14 +1873,14 @@ Func_b7db:
 	ld a, $20
 .asm_b841
 	ld [wCameraSCY + 1], a
-	ld a, [wc0b7]
+	ld a, [wRoomUpperYLimit]
 	ld [wCameraSCY + 0], a
 	ld a, $02
 	ld [wc0bd], a
 	ret
 
 Func_b850:
-	ld a, [wc0b7]
+	ld a, [wRoomUpperYLimit]
 	ld c, a
 	ld a, [wCameraSCY + 1]
 	sub b
@@ -1919,7 +1919,7 @@ Func_b850:
 	and CAM_SCROLLING_MASK
 	cp CAM_TRANSITIONS
 	ret nc
-	ld a, [wc0b6]
+	ld a, [wRoomLowerYLimit]
 	dec a
 	ld c, a
 	ld a, [wWarioYPos + 0]

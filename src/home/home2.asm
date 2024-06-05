@@ -107,17 +107,17 @@ LoadRoom::
 	ld a, [hl]
 	swap a
 	and $0f
-	ld [wc0b7], a
+	ld [wRoomUpperYLimit], a
 	ld a, [hli]
 	and $0f
-	ld [wc0b6], a
+	ld [wRoomLowerYLimit], a
 	ld a, [hl]
 	swap a
 	and $0f
-	ld [wc0b8], a
+	ld [wRoomLeftXLimit], a
 	ld a, [hli]
 	and $0f
-	ld [wc0b9], a
+	ld [wRoomRightXLimit], a
 	ld a, [hli]
 	ld [wCameraConfigFlags], a
 
@@ -151,7 +151,7 @@ LoadRoom::
 	pop af
 	bankswitch
 
-	ld a, [wc0b6]
+	ld a, [wRoomLowerYLimit]
 	add a
 	add a
 	add a
@@ -162,7 +162,7 @@ LoadRoom::
 .asm_2963
 	ld [wc0c4], a
 
-	ld a, [wc0b7]
+	ld a, [wRoomUpperYLimit]
 	add a
 	add a
 	add a
@@ -170,7 +170,7 @@ LoadRoom::
 	add $a0
 	ld [wc0c5], a
 
-	ld a, [wc0b9]
+	ld a, [wRoomRightXLimit]
 	add a
 	add a
 	add a ; *8
@@ -180,7 +180,7 @@ LoadRoom::
 .asm_297e
 	ld [wc0c7], a
 
-	ld a, [wc0b8]
+	ld a, [wRoomLeftXLimit]
 	add a
 	add a
 	add a ; *8

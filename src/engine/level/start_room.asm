@@ -780,7 +780,7 @@ Func_8ad9:
 	ld de, -$20
 	add hl, de
 .asm_8b27
-	ld a, [wc0b8]
+	ld a, [wRoomLeftXLimit]
 	ld b, a
 	ld a, h
 	bit 7, a
@@ -810,7 +810,7 @@ Func_8ad9:
 	ld e, HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 .asm_8b56
 	add hl, de
-	ld a, [wc0b9]
+	ld a, [wRoomRightXLimit]
 	ld b, a
 	ld a, h
 	cp b
@@ -849,7 +849,7 @@ Func_8ad9:
 	add hl, de
 
 .asm_8b99
-	ld a, [wc0b7]
+	ld a, [wRoomUpperYLimit]
 	ld b, a
 	ld a, h
 	bit 7, a
@@ -878,7 +878,7 @@ Func_8ad9:
 	ld e, $b0
 .asm_8bc7
 	add hl, de
-	ld a, [wc0b6]
+	ld a, [wRoomLowerYLimit]
 	ld b, a
 	ld a, h
 	cp b
@@ -897,7 +897,7 @@ Func_8ad9:
 	ld a, [wWarioYPos + 1]
 	cp $80
 	jr nc, .asm_8c0c
-	ld a, [wc0b7]
+	ld a, [wRoomUpperYLimit]
 	ld b, a
 	ld a, [wWarioYPos + 0]
 	dec a

@@ -106,17 +106,10 @@ wc0b3:: ; c0b3
 wc0b5:: ; c0b5
 	db
 
-wc0b6:: ; c0b6
-	db
-
-wc0b7:: ; c0b7
-	db
-
-wc0b8:: ; c0b8
-	db
-
-wc0b9:: ; c0b9
-	db
+wRoomLowerYLimit:: db ; c0b6
+wRoomUpperYLimit:: db ; c0b7
+wRoomLeftXLimit::  db ; c0b8
+wRoomRightXLimit:: db ; c0b9
 
 wCameraConfigFlags:: ; c0ba
 	db

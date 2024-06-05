@@ -55,8 +55,8 @@ ENDM
 
 MACRO room_data
 	dn \2, \1 ; y, x
-	dn \4, \3 ; ?
-	dn \6, \5 ; ?
+	dn \3, \4 ; y limits
+	dn \5, \6 ; x limits
 	db \7 ; cam configuration
 	db \8 ; enemy group
 	db \9 ; animated tiles group
