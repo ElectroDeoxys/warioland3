@@ -1,306 +1,105 @@
 TreasureGfx:
-Treasure000Gfx:
 INCBIN "gfx/treasures/treasure_000.2bpp"
-
-Treasure001Gfx:
-INCBIN "gfx/treasures/treasure_001.2bpp"
-
-Treasure002Gfx:
-INCBIN "gfx/treasures/treasure_002.2bpp"
-
-Treasure003Gfx:
-INCBIN "gfx/treasures/treasure_003.2bpp"
-
-Treasure004Gfx:
-INCBIN "gfx/treasures/treasure_004.2bpp"
-
-Treasure005Gfx:
-INCBIN "gfx/treasures/treasure_005.2bpp"
-
-Treasure006Gfx:
-INCBIN "gfx/treasures/treasure_006.2bpp"
-
-Treasure007Gfx:
-INCBIN "gfx/treasures/treasure_007.2bpp"
-
-Treasure008Gfx:
-INCBIN "gfx/treasures/treasure_008.2bpp"
-
-Treasure009Gfx:
-INCBIN "gfx/treasures/treasure_009.2bpp"
-
-Treasure010Gfx:
-INCBIN "gfx/treasures/treasure_010.2bpp"
-
-Treasure011Gfx:
-INCBIN "gfx/treasures/treasure_011.2bpp"
-
-Treasure012Gfx:
-INCBIN "gfx/treasures/treasure_012.2bpp"
-
-Treasure013Gfx:
-INCBIN "gfx/treasures/treasure_013.2bpp"
-
-Treasure014Gfx:
-INCBIN "gfx/treasures/treasure_014.2bpp"
-
-Treasure015Gfx:
-INCBIN "gfx/treasures/treasure_015.2bpp"
-
-Treasure016Gfx:
-INCBIN "gfx/treasures/treasure_016.2bpp"
-
-Treasure017Gfx:
-INCBIN "gfx/treasures/treasure_017.2bpp"
-
-Treasure018Gfx:
-INCBIN "gfx/treasures/treasure_018.2bpp"
-
-Treasure019Gfx:
-INCBIN "gfx/treasures/treasure_019.2bpp"
-
-Treasure020Gfx:
-INCBIN "gfx/treasures/treasure_020.2bpp"
-
-Treasure021Gfx:
-INCBIN "gfx/treasures/treasure_021.2bpp"
-
-Treasure022Gfx:
-INCBIN "gfx/treasures/treasure_022.2bpp"
-
-Treasure023Gfx:
-INCBIN "gfx/treasures/treasure_023.2bpp"
-
-Treasure024Gfx:
-INCBIN "gfx/treasures/treasure_024.2bpp"
-
-Treasure025Gfx:
-INCBIN "gfx/treasures/treasure_025.2bpp"
-
-Treasure026Gfx:
-INCBIN "gfx/treasures/treasure_026.2bpp"
-
-Treasure027Gfx:
-INCBIN "gfx/treasures/treasure_027.2bpp"
-
-Treasure028Gfx:
-INCBIN "gfx/treasures/treasure_028.2bpp"
-
-Treasure029Gfx:
-INCBIN "gfx/treasures/treasure_029.2bpp"
-
-Treasure030Gfx:
-INCBIN "gfx/treasures/treasure_030.2bpp"
-
-Treasure031Gfx:
-INCBIN "gfx/treasures/treasure_031.2bpp"
-
-Treasure032Gfx:
-INCBIN "gfx/treasures/treasure_032.2bpp"
-
-Treasure033Gfx:
-INCBIN "gfx/treasures/treasure_033.2bpp"
-
-Treasure034Gfx:
-INCBIN "gfx/treasures/treasure_034.2bpp"
-
-Treasure035Gfx:
-INCBIN "gfx/treasures/treasure_035.2bpp"
-
-Treasure036Gfx:
-INCBIN "gfx/treasures/treasure_036.2bpp"
-
-Treasure037Gfx:
-INCBIN "gfx/treasures/treasure_037.2bpp"
-
-Treasure038Gfx:
-INCBIN "gfx/treasures/treasure_038.2bpp"
-
-Treasure039Gfx:
-INCBIN "gfx/treasures/treasure_039.2bpp"
-
-Treasure040Gfx:
-INCBIN "gfx/treasures/treasure_040.2bpp"
-
-Treasure041Gfx:
-INCBIN "gfx/treasures/treasure_041.2bpp"
-
-Treasure042Gfx:
-INCBIN "gfx/treasures/treasure_042.2bpp"
-
-Treasure043Gfx:
-INCBIN "gfx/treasures/treasure_043.2bpp"
-
-Treasure044Gfx:
-INCBIN "gfx/treasures/treasure_044.2bpp"
-
-Treasure045Gfx:
-INCBIN "gfx/treasures/treasure_045.2bpp"
-
-Treasure046Gfx:
-INCBIN "gfx/treasures/treasure_046.2bpp"
-
-Treasure047Gfx:
-INCBIN "gfx/treasures/treasure_047.2bpp"
-
-Treasure048Gfx:
-INCBIN "gfx/treasures/treasure_048.2bpp"
-
-Treasure049Gfx:
-INCBIN "gfx/treasures/treasure_049.2bpp"
-
-Treasure050Gfx:
-INCBIN "gfx/treasures/treasure_050.2bpp"
-
-Treasure051Gfx:
-INCBIN "gfx/treasures/treasure_051.2bpp"
-
-Treasure052Gfx:
-INCBIN "gfx/treasures/treasure_052.2bpp"
-
-Treasure053Gfx:
-INCBIN "gfx/treasures/treasure_053.2bpp"
-
-Treasure054Gfx:
-INCBIN "gfx/treasures/treasure_054.2bpp"
-
-Treasure055Gfx:
-INCBIN "gfx/treasures/treasure_055.2bpp"
-
-Treasure056Gfx:
-INCBIN "gfx/treasures/treasure_056.2bpp"
-
-Treasure057Gfx:
-INCBIN "gfx/treasures/treasure_057.2bpp"
-
-Treasure058Gfx:
-INCBIN "gfx/treasures/treasure_058.2bpp"
-
-Treasure059Gfx:
-INCBIN "gfx/treasures/treasure_059.2bpp"
-
-Treasure060Gfx:
-INCBIN "gfx/treasures/treasure_060.2bpp"
-
-Treasure061Gfx:
-INCBIN "gfx/treasures/treasure_061.2bpp"
-
-Treasure062Gfx:
-INCBIN "gfx/treasures/treasure_062.2bpp"
-
-Treasure063Gfx:
-INCBIN "gfx/treasures/treasure_063.2bpp"
-
-Treasure064Gfx:
-INCBIN "gfx/treasures/treasure_064.2bpp"
-
-Treasure065Gfx:
-INCBIN "gfx/treasures/treasure_065.2bpp"
-
-Treasure066Gfx:
-INCBIN "gfx/treasures/treasure_066.2bpp"
-
-Treasure067Gfx:
-INCBIN "gfx/treasures/treasure_067.2bpp"
-
-Treasure068Gfx:
-INCBIN "gfx/treasures/treasure_068.2bpp"
-
-Treasure069Gfx:
-INCBIN "gfx/treasures/treasure_069.2bpp"
-
-Treasure070Gfx:
-INCBIN "gfx/treasures/treasure_070.2bpp"
-
-Treasure071Gfx:
-INCBIN "gfx/treasures/treasure_071.2bpp"
-
-Treasure072Gfx:
-INCBIN "gfx/treasures/treasure_072.2bpp"
-
-Treasure073Gfx:
-INCBIN "gfx/treasures/treasure_073.2bpp"
-
-Treasure074Gfx:
-INCBIN "gfx/treasures/treasure_074.2bpp"
-
-Treasure075Gfx:
-INCBIN "gfx/treasures/treasure_075.2bpp"
-
-Treasure076Gfx:
-INCBIN "gfx/treasures/treasure_076.2bpp"
-
-Treasure077Gfx:
-INCBIN "gfx/treasures/treasure_077.2bpp"
-
-Treasure078Gfx:
-INCBIN "gfx/treasures/treasure_078.2bpp"
-
-Treasure079Gfx:
-INCBIN "gfx/treasures/treasure_079.2bpp"
-
-Treasure080Gfx:
-INCBIN "gfx/treasures/treasure_080.2bpp"
-
-Treasure081Gfx:
-INCBIN "gfx/treasures/treasure_081.2bpp"
-
-Treasure082Gfx:
-INCBIN "gfx/treasures/treasure_082.2bpp"
-
-Treasure083Gfx:
-INCBIN "gfx/treasures/treasure_083.2bpp"
-
-Treasure084Gfx:
-INCBIN "gfx/treasures/treasure_084.2bpp"
-
-Treasure085Gfx:
-INCBIN "gfx/treasures/treasure_085.2bpp"
-
-Treasure086Gfx:
-INCBIN "gfx/treasures/treasure_086.2bpp"
-
-Treasure087Gfx:
-INCBIN "gfx/treasures/treasure_087.2bpp"
-
-Treasure088Gfx:
-INCBIN "gfx/treasures/treasure_088.2bpp"
-
-Treasure089Gfx:
-INCBIN "gfx/treasures/treasure_089.2bpp"
-
-Treasure090Gfx:
-INCBIN "gfx/treasures/treasure_090.2bpp"
-
-Treasure091Gfx:
-INCBIN "gfx/treasures/treasure_091.2bpp"
-
-Treasure092Gfx:
-INCBIN "gfx/treasures/treasure_092.2bpp"
-
-Treasure093Gfx:
-INCBIN "gfx/treasures/treasure_093.2bpp"
-
-Treasure094Gfx:
-INCBIN "gfx/treasures/treasure_094.2bpp"
-
-Treasure095Gfx:
-INCBIN "gfx/treasures/treasure_095.2bpp"
-
-Treasure096Gfx:
-INCBIN "gfx/treasures/treasure_096.2bpp"
-
-Treasure097Gfx:
-INCBIN "gfx/treasures/treasure_097.2bpp"
-
-Treasure098Gfx:
-INCBIN "gfx/treasures/treasure_098.2bpp"
-
-Treasure099Gfx:
-INCBIN "gfx/treasures/treasure_099.2bpp"
-
-Treasure100Gfx:
-INCBIN "gfx/treasures/treasure_100.2bpp"
+INCBIN "gfx/treasures/yellow_music_box.2bpp"
+INCBIN "gfx/treasures/blue_music_box.2bpp"
+INCBIN "gfx/treasures/green_music_box.2bpp"
+INCBIN "gfx/treasures/red_music_box.2bpp"
+INCBIN "gfx/treasures/gold_music_box.2bpp"
+INCBIN "gfx/treasures/prince_frogs_gloves.2bpp"
+INCBIN "gfx/treasures/swimming_flippers.2bpp"
+INCBIN "gfx/treasures/high_jump_boots.2bpp"
+INCBIN "gfx/treasures/super_grab_gloves.2bpp"
+INCBIN "gfx/treasures/garlic.2bpp"
+INCBIN "gfx/treasures/grab_glove.2bpp"
+INCBIN "gfx/treasures/lead_overalls.2bpp"
+INCBIN "gfx/treasures/super_jump_slam_overalls.2bpp"
+INCBIN "gfx/treasures/head_smash_helmet.2bpp"
+INCBIN "gfx/treasures/lantern.2bpp"
+INCBIN "gfx/treasures/magical_flame.2bpp"
+INCBIN "gfx/treasures/torch.2bpp"
+INCBIN "gfx/treasures/gear_1.2bpp"
+INCBIN "gfx/treasures/gear_2.2bpp"
+INCBIN "gfx/treasures/warp_compact.2bpp"
+INCBIN "gfx/treasures/jar.2bpp"
+INCBIN "gfx/treasures/treasure_map.2bpp"
+INCBIN "gfx/treasures/blue_book.2bpp"
+INCBIN "gfx/treasures/magic_wand.2bpp"
+INCBIN "gfx/treasures/sky_key.2bpp"
+INCBIN "gfx/treasures/yellow_book.2bpp"
+INCBIN "gfx/treasures/axe.2bpp"
+INCBIN "gfx/treasures/trident.2bpp"
+INCBIN "gfx/treasures/skull_ring_blue.2bpp"
+INCBIN "gfx/treasures/skull_ring_red.2bpp"
+INCBIN "gfx/treasures/blue_tablet.2bpp"
+INCBIN "gfx/treasures/green_tablet.2bpp"
+INCBIN "gfx/treasures/ornamental_fan.2bpp"
+INCBIN "gfx/treasures/top_half_of_scroll.2bpp"
+INCBIN "gfx/treasures/bottom_half_of_scroll.2bpp"
+INCBIN "gfx/treasures/tusk_blue.2bpp"
+INCBIN "gfx/treasures/tusk_red.2bpp"
+INCBIN "gfx/treasures/green_flower.2bpp"
+INCBIN "gfx/treasures/blue_chemical.2bpp"
+INCBIN "gfx/treasures/red_chemical.2bpp"
+INCBIN "gfx/treasures/air_pump.2bpp"
+INCBIN "gfx/treasures/sapling_of_growth.2bpp"
+INCBIN "gfx/treasures/night_vision_scope.2bpp"
+INCBIN "gfx/treasures/electric_fan_propeller.2bpp"
+INCBIN "gfx/treasures/rust_spray.2bpp"
+INCBIN "gfx/treasures/statue.2bpp"
+INCBIN "gfx/treasures/explosive_plunger_box.2bpp"
+INCBIN "gfx/treasures/scissors.2bpp"
+INCBIN "gfx/treasures/castle_brick.2bpp"
+INCBIN "gfx/treasures/warp_removal_apparatus.2bpp"
+INCBIN "gfx/treasures/key_card_red.2bpp"
+INCBIN "gfx/treasures/key_card_blue.2bpp"
+INCBIN "gfx/treasures/jackhammer.2bpp"
+INCBIN "gfx/treasures/pick_axe.2bpp"
+INCBIN "gfx/treasures/rocket.2bpp"
+INCBIN "gfx/treasures/pocket_pet.2bpp"
+INCBIN "gfx/treasures/mystery_handle.2bpp"
+INCBIN "gfx/treasures/demons_blood.2bpp"
+INCBIN "gfx/treasures/gold_magic.2bpp"
+INCBIN "gfx/treasures/fighter_mannequin.2bpp"
+INCBIN "gfx/treasures/truck_wheel.2bpp"
+INCBIN "gfx/treasures/flute.2bpp"
+INCBIN "gfx/treasures/foot_of_stone.2bpp"
+INCBIN "gfx/treasures/golden_right_eye.2bpp"
+INCBIN "gfx/treasures/golden_left_eye.2bpp"
+INCBIN "gfx/treasures/right_glass_eye.2bpp"
+INCBIN "gfx/treasures/left_glass_eye.2bpp"
+INCBIN "gfx/treasures/scepter.2bpp"
+INCBIN "gfx/treasures/sun_medallion_top.2bpp"
+INCBIN "gfx/treasures/sun_medallion_bottom.2bpp"
+INCBIN "gfx/treasures/eye_of_the_storm.2bpp"
+INCBIN "gfx/treasures/pouch.2bpp"
+INCBIN "gfx/treasures/magic_seeds.2bpp"
+INCBIN "gfx/treasures/full_moon_gong.2bpp"
+INCBIN "gfx/treasures/telephone.2bpp"
+INCBIN "gfx/treasures/crown.2bpp"
+INCBIN "gfx/treasures/day_or_night_spell.2bpp"
+INCBIN "gfx/treasures/red_gem.2bpp"
+INCBIN "gfx/treasures/green_gem.2bpp"
+INCBIN "gfx/treasures/blue_gem.2bpp"
+INCBIN "gfx/treasures/clubs_crest.2bpp"
+INCBIN "gfx/treasures/spades_crest.2bpp"
+INCBIN "gfx/treasures/heart_crest.2bpp"
+INCBIN "gfx/treasures/diamonds_crest.2bpp"
+INCBIN "gfx/treasures/earthen_figure.2bpp"
+INCBIN "gfx/treasures/saber.2bpp"
+INCBIN "gfx/treasures/goblet.2bpp"
+INCBIN "gfx/treasures/teapot.2bpp"
+INCBIN "gfx/treasures/magnifying_glass.2bpp"
+INCBIN "gfx/treasures/ufo.2bpp"
+INCBIN "gfx/treasures/minicar.2bpp"
+INCBIN "gfx/treasures/locomotive.2bpp"
+INCBIN "gfx/treasures/fire_drencher.2bpp"
+INCBIN "gfx/treasures/crayon_red.2bpp"
+INCBIN "gfx/treasures/crayon_brown.2bpp"
+INCBIN "gfx/treasures/crayon_yellow.2bpp"
+INCBIN "gfx/treasures/crayon_green.2bpp"
+INCBIN "gfx/treasures/crayon_cyan.2bpp"
+INCBIN "gfx/treasures/crayon_blue.2bpp"
+INCBIN "gfx/treasures/crayon_pink.2bpp"
 
 Treasure101Gfx:
 INCBIN "gfx/treasures/treasure_101.2bpp"
@@ -475,7 +274,7 @@ _InitTreasureCollection:
 	ret
 
 LoadCollectionPageTreasureGfx:
-	ld hl, Treasure001Gfx - (NUM_TREASURE_TILES * NUM_COLLECTION_CELLS) tiles
+	ld hl, (TreasureGfx + 4 tiles) - (NUM_TREASURE_TILES * NUM_COLLECTION_CELLS) tiles
 	ld de, (NUM_TREASURE_TILES * NUM_COLLECTION_CELLS) tiles
 	ld a, [wCollectionPage]
 	inc a

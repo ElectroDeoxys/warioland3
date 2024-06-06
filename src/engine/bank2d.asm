@@ -291,10 +291,11 @@ Func_b417a:
 	xor a ; BOTBAR_CLOSED
 	ld [wBottomBarAction], a
 
-	ld hl, Treasure000Gfx
+	; copy empty treasure gfx
+	ld hl, TreasureGfx
 	ld de, v0Tiles1 tile $10
 	ld c, 4 tiles
-	ld b, BANK(Treasure000Gfx)
+	ld b, BANK(TreasureGfx)
 	jp CopyFarBytes
 
 .data_1
