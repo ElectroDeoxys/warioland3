@@ -129,6 +129,20 @@ src/data/levels/unknown2/data_ef52c.bin.rle: tools/compressor += --force-trailin
 src/data/levels/unknown2/data_10345c.bin.rle: tools/compressor += --force-trailing-copy
 src/data/levels/unknown2/data_103a6d.bin.rle: tools/compressor += --force-trailing-copy
 
+### Interleaved gfx
+
+src/gfx/cutscenes/%.2bpp: tools/gfx += --interleave --png=$<
+src/gfx/enemies/%.2bpp: tools/gfx += --interleave --png=$<
+src/gfx/golf/golf_flag.2bpp: tools/gfx += --interleave --png=$<
+src/gfx/golf/golf_hole_flag.2bpp: tools/gfx += --interleave --png=$<
+src/gfx/golf/unused_golf_flag.2bpp: tools/gfx += --interleave --png=$<
+src/gfx/intro/plane.2bpp: tools/gfx += --interleave --png=$<
+src/gfx/levels/common.2bpp: tools/gfx += --interleave --png=$<
+src/gfx/misc/action_help_objects1.2bpp: tools/gfx += --interleave --png=$<
+src/gfx/misc/action_help_objects2.2bpp: tools/gfx += --interleave --png=$<
+src/gfx/treasures/%.2bpp: tools/gfx += --interleave --png=$<
+src/gfx/wario/%.2bpp: tools/gfx += --interleave --png=$<
+
 ### Catch-all graphics rules
 
 %.rle: %
@@ -138,8 +152,3 @@ src/data/levels/unknown2/data_103a6d.bin.rle: tools/compressor += --force-traili
 	$(RGBGFX) $(rgbgfx) -o $@ $<
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) -o $@ $@)
-
-%.1bpp: %.png
-	$(RGBGFX) $(rgbgfx) -d1 -o $@ $<
-	$(if $(tools/gfx),\
-		tools/gfx $(tools/gfx) -d1 -o $@ $@)
