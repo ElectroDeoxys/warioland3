@@ -85,10 +85,13 @@ wWarioSpawnPos:: ; c0a1
 wc0a2:: ; c0a2
 	db
 
-wc0a3:: dw ; c0a3
-wc0a5:: dw ; c0a5
-wc0a7:: dw ; c0a7
-wc0a9:: dw ; c0a9
+wBlockPos::
+wBlockYPos:: dw ; c0a3
+wBlockXPos:: dw ; c0a5
+
+; temporary backup of wBlockPos
+wBackupBlockPos::
+	ds $4
 
 	ds $1
 

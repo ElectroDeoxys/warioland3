@@ -523,7 +523,7 @@ StartRoom_FromLevelStart:
 	ret
 
 Func_896f:
-	ld de, wc0a5 + 1
+	ld de, wBlockXPos + 1
 	ld hl, hXPosLo
 	ld a, [de]
 	ld [hld], a
@@ -938,10 +938,10 @@ Func_8c12:
 	ldh [rSCY], a
 	ld [wSCY], a
 	sub $18
-	ld [wc0a3 + 1], a
+	ld [wBlockYPos + 1], a
 	ld a, h
 	sbc $00
-	ld [wc0a3 + 0], a
+	ld [wBlockYPos + 0], a
 	jr .asm_8c70
 
 .asm_8c38
@@ -954,9 +954,9 @@ Func_8c12:
 	ld [wCameraSCY + 1], a
 	ldh [rSCY], a
 	ld [wSCY], a
-	ld [wc0a3 + 1], a
+	ld [wBlockYPos + 1], a
 	ld a, h
-	ld [wc0a3 + 0], a
+	ld [wBlockYPos + 0], a
 	jr .asm_8c70
 
 .asm_8c54
@@ -970,9 +970,9 @@ Func_8c12:
 	ldh [rSCY], a
 	ld [wSCY], a
 	sub $20
-	ld [wc0a3 + 1], a
+	ld [wBlockYPos + 1], a
 	ld a, h
-	ld [wc0a3 + 0], a
+	ld [wBlockYPos + 0], a
 .asm_8c70
 	ld a, [wCameraSCX + 0]
 	ld h, a
@@ -987,15 +987,15 @@ Func_8c12:
 	ldh [rSCX], a
 	ld [wSCX], a
 	sub $10
-	ld [wc0a5 + 1], a
+	ld [wBlockXPos + 1], a
 	ld a, h
 	sbc $00
-	ld [wc0a5 + 0], a
+	ld [wBlockXPos + 0], a
 	bit 7, a
 	ret z
 	xor a
-	ld [wc0a5 + 1], a
-	ld [wc0a5 + 0], a
+	ld [wBlockXPos + 1], a
+	ld [wBlockXPos + 0], a
 	ret
 
 .asm_8c9f
@@ -1008,9 +1008,9 @@ Func_8c12:
 	ld [wCameraSCX + 1], a
 	ldh [rSCX], a
 	ld [wSCX], a
-	ld [wc0a5 + 1], a
+	ld [wBlockXPos + 1], a
 	ld a, h
-	ld [wc0a5 + 0], a
+	ld [wBlockXPos + 0], a
 	ret
 
 .asm_8cba
@@ -1024,23 +1024,23 @@ Func_8c12:
 	ldh [rSCX], a
 	ld [wSCX], a
 	sub $28
-	ld [wc0a5 + 1], a
+	ld [wBlockXPos + 1], a
 	ld a, h
-	ld [wc0a5 + 0], a
+	ld [wBlockXPos + 0], a
 	ret
 
 Func_8cd7:
-	; back up coords in wc0a3 to wc0a7
-	ld hl, wc0a3
-	ld de, wc0a7
-	ld a, [hli] ; wc0a3
-	ld [de], a  ; wc0a7
+	; back up coords in wBlockYPos to wBackupBlockPos
+	ld hl, wBlockPos
+	ld de, wBackupBlockPos
+	ld a, [hli] ; wBlockYPos
+	ld [de], a  ; wBackupBlockPos
 	inc de
 	ld a, [hli]
 	ld [de], a
 	inc de
-	ld a, [hli] ; wc0a5
-	ld [de], a  ; wc0a9
+	ld a, [hli] ; wBlockXPos
+	ld [de], a
 	inc de
 	ld a, [hl]
 	ld [de], a
@@ -1101,20 +1101,20 @@ Func_8cd7:
 	xor a
 	ld [wBGMapAddressQueueSize], a
 	ld [wBGMapTileQueueSize], a
-	ld a, [wc0a5 + 1]
+	ld a, [wBlockXPos + 1]
 	add $08
-	ld [wc0a5 + 1], a
-	ld a, [wc0a5 + 0]
+	ld [wBlockXPos + 1], a
+	ld a, [wBlockXPos + 0]
 	adc $00
-	ld [wc0a5 + 0], a
+	ld [wBlockXPos + 0], a
 	ld a, [wc0a2]
 	dec a
 	ld [wc0a2], a
 	jr nz, .loop_row
 
 	; restore backed up coords
-	ld hl, wc0a7
-	ld de, wc0a3
+	ld hl, wBackupBlockPos
+	ld de, wBlockYPos
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -1129,7 +1129,7 @@ Func_8cd7:
 	ret
 
 .Func_8d69:
-	call Func_8e5b
+	call GetBlockBGPtr
 	ld a, [wBGMapAddressQueueSize]
 	ld b, a
 	ld de, wBGMapAddressQueue
@@ -1158,11 +1158,11 @@ Func_8cd7:
 	add 2 * BG_MAP_HEIGHT
 	ld [wBGMapAddressQueueSize], a
 
-	ld hl, wc0a3
+	ld hl, wBlockPos
 	call GetBlockPtr
 	ld a, [wBlockPtrBank]
 	sramswitch
-	ld a, [wc0a5 + 1]
+	ld a, [wBlockXPos + 1]
 	and $08
 	jr z, .asm_8dd4
 

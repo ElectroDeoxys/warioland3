@@ -6,7 +6,7 @@ Func_21f51:
 	ld a, LOW(wBGMapTileVRAM0Queue)
 	add b
 	ld [wcce7 + 1], a
-	ld a, [wc0a3 + 1]
+	ld a, [wBlockYPos + 1]
 	and $08
 	jr nz, .asm_21fa3
 	ld b, $10
@@ -128,7 +128,7 @@ Func_22012:
 	ld a, LOW(wBGMapTileVRAM1Queue)
 	add b
 	ld [wc0b3 + 1], a
-	ld a, [wc0a3 + 1]
+	ld a, [wBlockYPos + 1]
 	and $08
 	jp nz, Func_2208a
 	ld b, $10
@@ -268,7 +268,7 @@ Func_220fc:
 	ld a, LOW(wBGMapTileVRAM0Queue)
 	add b
 	ld [wcce7 + 1], a
-	ld a, [wc0a3 + 1]
+	ld a, [wBlockYPos + 1]
 	and $08
 	jp nz, Func_2214e
 	ld b, $10
@@ -387,7 +387,7 @@ Func_221bb:
 	ld a, LOW(wBGMapTileVRAM1Queue)
 	add b
 	ld [wc0b3 + 1], a
-	ld a, [wc0a3 + 1]
+	ld a, [wBlockYPos + 1]
 	and $08
 	jp nz, Func_22217
 	ld b, $10

@@ -3,7 +3,7 @@ SpawnRowEdgeObjects:
 	and a
 	ret nz ; level ended
 
-	ld hl, wc0a3
+	ld hl, wBlockPos
 	call GetBlockPtr
 	ld a, [wBlockPtrBank]
 	sramswitch
@@ -62,7 +62,7 @@ SpawnColEdgeObjects:
 	and a
 	ret nz ; level ended
 
-	ld hl, wc0a3
+	ld hl, wBlockPos
 	call GetBlockPtr
 	ld a, [wBlockPtrBank]
 	sramswitch
