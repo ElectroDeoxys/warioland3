@@ -44,7 +44,7 @@ UpdateLevel:
 
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall UpdateObjects
 	pop af
@@ -66,7 +66,7 @@ UpdateLevel:
 .process_interactions
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	ld a, TRUE
 	ld [wBlockFuncWarioFlag], a
@@ -78,7 +78,7 @@ UpdateLevel:
 
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall DrawObjects_NoPriority
 	pop af
@@ -88,7 +88,7 @@ UpdateLevel:
 
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall DrawObjects_WithPriority
 	pop af
@@ -314,7 +314,7 @@ UpdateLevel:
 	ld [wBlockFuncWarioFlag], a
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall UpdateObjects
 	pop af
@@ -329,7 +329,7 @@ UpdateLevel:
 	ld [wBlockFuncWarioFlag], a
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall DrawObjects_NoPriority
 	pop af
@@ -339,7 +339,7 @@ UpdateLevel:
 
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall DrawObjects_WithPriority
 	pop af
@@ -367,7 +367,7 @@ UpdateLevel:
 	ld [wBlockFuncWarioFlag], a
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall UpdateObjects
 	pop af
@@ -382,7 +382,7 @@ UpdateLevel:
 	ld [wBlockFuncWarioFlag], a
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall DrawObjects_NoPriority
 	pop af
@@ -392,7 +392,7 @@ UpdateLevel:
 
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall DrawObjects_WithPriority
 	pop af

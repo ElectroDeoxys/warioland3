@@ -276,6 +276,7 @@ WRAM0
 	org $cf00
 	"Stack"
 WRAMX 1
+	"Level Objects WRAM"
 	"WRAM1"
 	org $d800
 	"Golf RAM"

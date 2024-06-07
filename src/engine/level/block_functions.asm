@@ -3175,7 +3175,7 @@ BreakBlock:
 	; everything okay, spawn coin
 	ldh a, [rSVBK]
 	push af
-	ld a, $01
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	ld a, COIN_COOLDOWN
 	ld [wCoinCooldown], a
@@ -3236,7 +3236,7 @@ BreakBlockWithColourCoin:
 	farcall CreateParticleInBlock
 	ldh a, [rSVBK]
 	push af
-	ld a, $01
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 
 	; backup CurObj

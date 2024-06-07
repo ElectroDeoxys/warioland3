@@ -957,6 +957,9 @@ FOR n, 1, NUM_OBJECTS + 1
 	ret
 ENDR
 
+; clears objects and object data pointers
+; and also some variables from level start
+; such as whether the Flame Block is cleared
 InitObjectVars_FromLevelStart:
 	xor a
 	call ClearObjects
@@ -969,6 +972,8 @@ InitObjectVars_FromLevelStart:
 	ld [wWarioGoals], a
 	ret
 
+; clears objects and object data pointers
+; and also some variables from room start
 InitObjectVars_FromTransition:
 	xor a
 	call ClearObjects

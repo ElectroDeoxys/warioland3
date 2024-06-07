@@ -60,7 +60,7 @@ SaveLevel:
 	call DisableLCD
 	ldh a, [rSVBK]
 	push af
-	ld a, $03
+	ld a, BANK(w3d280)
 	ldh [rSVBK], a
 	ld hl, w3d280 palette 12
 	ld de, wcaa1
@@ -108,10 +108,10 @@ SaveLevel:
 
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
-	ld hl, wObjects
-	ld bc, (wWarioGoals - wObjects) + 5
+	ld hl, STARTOF("Level Objects WRAM")
+	ld bc, SIZEOF("Level Objects WRAM")
 	call CopyHLToDE_BC
 	pop af
 	ldh [rSVBK], a
@@ -213,10 +213,10 @@ SaveLevel:
 	ldh [rSVBK], a
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
-	ld hl, wObjects
-	ld bc, (wWarioGoals - wObjects) + 5
+	ld hl, STARTOF("Level Objects WRAM")
+	ld bc, SIZEOF("Level Objects WRAM")
 	call CopyHLToDE_BC
 	pop af
 	ldh [rSVBK], a
@@ -278,10 +278,10 @@ SaveLevel:
 	ldh [rSVBK], a
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
-	ld hl, wObjects
-	ld bc, (wWarioGoals - wObjects) + 5
+	ld hl, STARTOF("Level Objects WRAM")
+	ld bc, SIZEOF("Level Objects WRAM")
 	call CopyHLToDE_BC
 	pop af
 	ldh [rSVBK], a
@@ -345,10 +345,10 @@ SaveLevel:
 	ldh [rSVBK], a
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
-	ld hl, wObjects
-	ld bc, (wWarioGoals - wObjects) + 5
+	ld hl, STARTOF("Level Objects WRAM")
+	ld bc, SIZEOF("Level Objects WRAM")
 	call CopyHLToDE_BC
 	pop af
 	ldh [rSVBK], a

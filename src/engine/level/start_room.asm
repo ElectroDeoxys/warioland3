@@ -29,7 +29,7 @@ StartRoom_FromTransition:
 
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall InitObjectVars_FromTransition
 	pop af
@@ -135,7 +135,7 @@ StartRoom_FromTransition:
 	ld [wIsFloorTransition], a
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall UpdateObjects
 	farcall UpdateObjects
@@ -143,7 +143,7 @@ StartRoom_FromTransition:
 	ldh [rSVBK], a
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall DrawObjects_NoPriority
 	pop af
@@ -151,7 +151,7 @@ StartRoom_FromTransition:
 	call DrawWario
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall DrawObjects_WithPriority
 	pop af
@@ -173,7 +173,7 @@ ProcessMultiBlock:
 
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall DrawObjects_NoPriority
 	pop af
@@ -183,7 +183,7 @@ ProcessMultiBlock:
 
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall DrawObjects_WithPriority
 	pop af
@@ -311,16 +311,17 @@ ProcessMultiBlock:
 StartRoom_FromLevelStart:
 	xor a ; FALSE
 	ld [wIsBossBattle], a
+
+	; if from saved level, don't init start level vars
 	ld a, [wceef]
 	and %00111100
-	jp nz, .from_saved_level
+	jp nz, .skip_init_vars_and_objects
 
 	xor a
 	ld [wLevelRoomID], a
 	ld [wca6c], a
 	ld [wTempLevelRoomID], a
-
-	xor a
+	xor a ; unnecessary
 	ld [wLevelEndScreen], a
 	ld [wNumMusicalCoins], a
 	ld [wFloorTransitionDir], a
@@ -358,16 +359,18 @@ StartRoom_FromLevelStart:
 	ld [wLastWaterCurrent], a
 	ld [wCurWaterCurrent], a
 
+	; init variables from level start
+	; as well as everything related to objects
 	ldh a, [rSVBK]
 	push af
-	ld a, 1 ; WRAM1
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall InitObjectVars_FromLevelStart
 	pop af
 	ldh [rSVBK], a
 	jr .load_blocks_and_objects
 
-.from_saved_level
+.skip_init_vars_and_objects
 	ld a, [wTempLevelRoomID]
 	ld [wLevelRoomID], a
 	call LoadWarioGfx
@@ -481,7 +484,7 @@ StartRoom_FromLevelStart:
 	ld [wIsFloorTransition], a
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall UpdateObjects
 	farcall UpdateObjects
@@ -494,7 +497,7 @@ StartRoom_FromLevelStart:
 	ld [wIsFloorTransition], a
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall UpdateObjects
 	pop af
@@ -506,7 +509,7 @@ StartRoom_FromLevelStart:
 
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall DrawObjects_NoPriority
 	pop af
@@ -515,7 +518,7 @@ StartRoom_FromLevelStart:
 	call DrawWario
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall DrawObjects_WithPriority
 	pop af
@@ -641,7 +644,7 @@ Func_896f:
 	ld e, l
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall SpawnObject
 	pop af
@@ -746,6 +749,7 @@ Func_8ad9:
 	cp CAM_YSCROLL
 	jr nz, .else
 .cam_xscroll_or_cam_yscroll
+	; snap camera X scroll to Wario's x position
 	ld a, [wWarioXPos + 0]
 	ld [wCameraSCX + 0], a
 	ld a, $30

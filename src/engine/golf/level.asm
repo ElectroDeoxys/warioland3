@@ -3142,7 +3142,7 @@ VBlank_1c9fe1:
 	jp CopyHLToDE
 
 .Func:
-	ld a, $1
+	ld a, BANK("Golf RAM")
 	ldh [rSVBK], a
 	ld a, [wSCX]
 	ldh [rSCX], a
@@ -3164,7 +3164,7 @@ VBlank_1c9ffa:
 	jp CopyHLToDE
 
 .Func:
-	ld a, $1
+	ld a, BANK("Golf RAM")
 	ldh [rSVBK], a
 	xor a
 	ld [wGolfVBlankMode], a

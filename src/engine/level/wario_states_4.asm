@@ -3041,7 +3041,7 @@ UpdateState_BallThrown:
 
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK(wShootGoals)
 	ldh [rSVBK], a
 	ld a, [wShootGoals]
 	cp 3

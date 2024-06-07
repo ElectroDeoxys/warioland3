@@ -57,7 +57,7 @@ LoadObjectGroupData::
 	ld c, a
 	ld h, [hl]
 	ld l, c
-	ld a, BANK("WRAM1")
+	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld a, [hli]
 	ldh [hffa0], a

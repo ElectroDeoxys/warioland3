@@ -126,7 +126,7 @@ LoadRoom::
 	push hl
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall LoadObjectGroupData
 	pop af

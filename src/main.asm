@@ -88,6 +88,7 @@ SECTION "Levels Common Gfx", ROMX
 LevelsCommonGfx: INCBIN "gfx/levels/common.2bpp"
 LevelsCommonGfxEnd:
 
+
 SECTION "Wario Palettes", romx
 
 INCLUDE "gfx/pals/wario.asm"

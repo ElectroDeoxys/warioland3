@@ -68,7 +68,7 @@ DrawLevelObjectsAfterLevelReturn::
 	farcall Func_b681
 	ldh a, [rSVBK]
 	push af
-	ld a, $01
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall DrawObjects_NoPriority
 	pop af
@@ -76,7 +76,7 @@ DrawLevelObjectsAfterLevelReturn::
 	call DrawWario
 	ldh a, [rSVBK]
 	push af
-	ld a, $01
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	farcall DrawObjects_WithPriority
 	pop af
@@ -352,9 +352,9 @@ Func_1f0b5b:
 	ldh [rSVBK], a
 	ldh a, [rSVBK]
 	push af
-	ld a, $01
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
-	ld bc, $14a
+	ld bc, SIZEOF("Level Objects WRAM")
 	call CalculateChecksumLong
 	pop af
 	ldh [rSVBK], a
@@ -409,10 +409,10 @@ CalculateWRAMDataChecksum:
 	ldh [rSVBK], a
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
-	ld hl, wObjects
-	ld bc, (wWarioGoals - wObjects) + 5
+	ld hl, STARTOF("Level Objects WRAM")
+	ld bc, SIZEOF("Level Objects WRAM")
 	call CalculateChecksumLong
 	pop af
 	ldh [rSVBK], a
@@ -1616,10 +1616,10 @@ Func_1f13f2:
 	ldh [rSVBK], a
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("WRAM1")
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
-	ld de, $d000
-	ld bc, $14a
+	ld de, STARTOF("Level Objects WRAM")
+	ld bc, SIZEOF("Level Objects WRAM")
 	call CopyHLToDE_BC
 	pop af
 	ldh [rSVBK], a

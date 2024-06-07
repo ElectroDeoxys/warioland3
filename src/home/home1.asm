@@ -484,6 +484,8 @@ UpdateAnimation::
 Func_e87::
 	jp Init
 
+; loads data related to the level block and object map
+; and stores them in SRAM
 LoadLevelBlockMapAndObjects::
 	ld d, $00
 	ld a, [wLevel]

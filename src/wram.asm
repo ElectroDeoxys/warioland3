@@ -462,8 +462,11 @@ wNumMusicalCoins:: ; ca5c
 wTempLevelRoomID:: ; ca5d
 	db
 
+; always $70 or wWarioYPos
 wca5e:: db ; ca5e
+; always $58
 wca5f:: db ; ca5f
+; always $58
 wca60:: db ; ca60
 
 wWarioPos::
@@ -937,7 +940,7 @@ wStackBottom:: ; cf00
 wStackTop:: ; cfff
 	db
 
-SECTION "WRAM1", WRAMX
+SECTION "Level Objects WRAM", WRAMX
 
 wObjects::
 wObj1:: obj_struct wObj1 ; d000
@@ -1022,6 +1025,8 @@ wWolfenbossConsecutiveSpirals:: ; d149
 
 w1d149:: ; d149
 	ds $1
+
+SECTION "WRAM1", WRAMX
 
 ; some transformations can confer to Wario special power-ups
 ; e.g. Fat Wario can effectively have the Super Jump Slam Overalls

@@ -467,7 +467,7 @@ SetState_FlatAirborne:
 
 	ldh a, [rSVBK]
 	push af
-	ld a, $01
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	ld a, [wObjPtr + 0]
 	ld h, a

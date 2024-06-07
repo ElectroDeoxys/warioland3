@@ -3,7 +3,7 @@
 Func_ba42:
 	ldh a, [rSVBK]
 	push af
-	ld a, $01
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	ld a, [wSRAMBank]
 	push af
@@ -45,7 +45,7 @@ Func_ba42:
 
 	ldh a, [rSVBK]
 	push af
-	ld a, $01
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	ld a, [wSRAMBank]
 	push af
@@ -95,7 +95,7 @@ Func_ba42:
 DespawnObject:
 	ldh a, [rSVBK]
 	push af
-	ld a, $01
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	ld a, [wSRAMBank]
 	push af
@@ -131,7 +131,7 @@ DespawnObject:
 Func_bb2d:
 	ldh a, [rSVBK]
 	push af
-	ld a, $01
+	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
 	ld a, [wSRAMBank]
 	push af
