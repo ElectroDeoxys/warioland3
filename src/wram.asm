@@ -2,92 +2,92 @@ INCLUDE "vram.asm"
 
 SECTION "WRAM0", WRAM0
 
-wTempPals1:: ds 8 palettes ; c000
-wTempPals2:: ds 8 palettes ; c040
+wTempPals1:: ds 8 palettes
+wTempPals2:: ds 8 palettes
 
-wBackupVBlankFunc:: ; c080
+wBackupVBlankFunc::
 	ds $3
 
-wSCY:: ; c083
+wSCY::
 	db
 
-wCreditsPage:: ; c084
+wCreditsPage::
 	db
 
-wSCX:: ; c085
+wSCX::
 	db
 
 ; intro background layers x offsets,
 ; that all scroll at different speeds
-wIntroBGXOffsetFar::    db ; c086
-wIntroBGXOffsetCentre:: db ; c087
-wIntroBGXOffsetNear::   db ; c088
+wIntroBGXOffsetFar::    db
+wIntroBGXOffsetCentre:: db
+wIntroBGXOffsetNear::   db
 
 ; Hidden Figure fight values
-wHiddenFigureSCYShake:: db ; c089
-wc08a:: db ; c08a
-wc08b:: db ; c08b
-wc08c:: db ; c08c
-wc08d:: db ; c08d
+wHiddenFigureSCYShake:: db
+wc08a:: db
+wc08b:: db
+wc08c:: db
+wc08d:: db
 
-wSRAMBank:: ; c08e
+wSRAMBank::
 	db
 
 ; ticks up by one every game loop
-wGlobalCounter:: ; c08f
+wGlobalCounter::
 	db
 
 ; if not 0, then all sounds are muted
 ; is always set to FALSE
-wSoundMuted:: ; c090
+wSoundMuted::
 	db
 
 ; whether VBlank function has been executed or not
-wVBlankFuncExecuted:: ; c091
+wVBlankFuncExecuted::
 	db
 
 ; whether to run the VBlank function
-wEnableVBlankFunc:: ; c092
+wEnableVBlankFunc::
 	db
 
-wJoypadDown::    db ; c093
-wJoypadPressed:: db ; c094
+wJoypadDown::    db
+wJoypadPressed:: db
 
 ; size of wVirtualOAM in number of bytes
-wVirtualOAMByteSize:: ; c095
+wVirtualOAMByteSize::
 	db
 
-wCurSprite:: sprite_oam_struct wCurSprite ; c096
+wCurSprite:: sprite_oam_struct wCurSprite
 
 ; if TRUE, hard reset is not possible
-wResetDisabled:: ; c09a
+wResetDisabled::
 	db
 
-wState::    db ; c09b
-wSubState:: db ; c09c
+wState::    db
+wSubState:: db
 
 	db
 
-wTempIE:: ; c09e
+wTempIE::
 	db
 
-wRepeatByte:: ; c09f
+wRepeatByte::
 	db
 
-wLevelRoomID:: ; c0a0
+wLevelRoomID::
 	db
 
 ; low nybble = x pos
 ; high nybble = y pos
-wWarioSpawnPos:: ; c0a1
+wWarioSpawnPos::
 	db
 
-wc0a2:: ; c0a2
+wc0a2::
 	db
 
 wBlockPos::
-wBlockYPos:: dw ; c0a3
-wBlockXPos:: dw ; c0a5
+wBlockYPos:: dw
+wBlockXPos:: dw
 
 ; temporary backup of wBlockPos
 wBackupBlockPos::
@@ -95,348 +95,348 @@ wBackupBlockPos::
 
 	ds $1
 
-wTempBank:: ; c0ac
+wTempBank::
 	db
 
-wCompressedLevelBlockMapPtr:: ; c0ad
+wCompressedLevelBlockMapPtr::
 	dw
 
 	ds $4
 
-wc0b3:: ; c0b3
+wc0b3::
 	dw
 
-wc0b5:: ; c0b5
+wc0b5::
 	db
 
-wRoomLowerYLimit:: db ; c0b6
-wRoomUpperYLimit:: db ; c0b7
-wRoomLeftXLimit::  db ; c0b8
-wRoomRightXLimit:: db ; c0b9
+wRoomLowerYLimit:: db
+wRoomUpperYLimit:: db
+wRoomLeftXLimit::  db
+wRoomRightXLimit:: db
 
-wCameraConfigFlags:: ; c0ba
+wCameraConfigFlags::
 	db
 
-wc0bb:: ; c0bb
+wc0bb::
 	db
 
-wSCYShake:: ; c0bc
+wSCYShake::
 	db
 
-wc0bd:: db ; c0bd
-wc0be:: db ; c0be
-wc0bf:: db ; c0bf
-wc0c0:: db ; c0c0
+wc0bd:: db
+wc0be:: db
+wc0bf:: db
+wc0c0:: db
 
 	db
 
-wc0c2:: ; c0c2
+wc0c2::
 	db
 
-wc0c3:: ; c0c3
+wc0c3::
 	db
 
-wc0c4:: ; c0c4
+wc0c4::
 	db
 
-wc0c5:: ; c0c5
+wc0c5::
 	db
 
-wc0c6:: ; c0c6
+wc0c6::
 	db
 
-wc0c7:: ; c0c7
+wc0c7::
 	db
 
-wObjectGroup:: ; c0c8
+wObjectGroup::
 	db
 
-wRoom::                   db ; c0c9
-wRoomBlockFunctionTable:: db ; c0ca
-wRoomTileMap::            db ; c0cb
-wRoomMainTiles::          db ; c0cc
-wRoomSpecialTiles::       db ; c0cd
-wRoomPalettes::           db ; c0ce
-wRoomBlockFunctionTableBank:: db ; c0cf
-wc0d0::                   db ; c0d0
-wRoomMainTilesBank::      db ; c0d1
-wRoomSpecialTilesBank::   db ; c0d2
+wRoom::                   db
+wRoomBlockFunctionTable:: db
+wRoomTileMap::            db
+wRoomMainTiles::          db
+wRoomSpecialTiles::       db
+wRoomPalettes::           db
+wRoomBlockFunctionTableBank:: db
+wc0d0::                   db
+wRoomMainTilesBank::      db
+wRoomSpecialTilesBank::   db
 
-wPaletteBank:: ; c0d3
+wPaletteBank::
 	db
 
-wc0d4:: ; c0d4
+wc0d4::
 	db
 
-wc0d5:: ; c0d5
+wc0d5::
 	db
 
-wc0d6:: ; c0d6
+wc0d6::
 	db
 
-wRoomTransitionParam:: ; c0d7
+wRoomTransitionParam::
 	db
 
 ; if true, will allow block functions
 ; to run the block breaking routines
 ; otherwise, just treats these blocks
 ; as a default solid collision
-wBlockFuncBreakFlag:: ; c0d8
+wBlockFuncBreakFlag::
 	db
 
 ; which special entity is causing the collision,
 ; either a thrown object or Robo-mouse
-wBlockFuncSpecialCollision:: ; c0d9
+wBlockFuncSpecialCollision::
 	db
 
 ; if true, then the entity causing the collision
 ; is Wario, otherwise it's a level object
-wBlockFuncWarioFlag:: ; c0da
+wBlockFuncWarioFlag::
 	db
 
 ; current position's interaction type with the water
 ; 0 = no water
 ; 1 = submersible water
 ; 2 = non-submersible water
-wWaterInteraction:: ; c0db
+wWaterInteraction::
 	db
 
-wc0dc:: ; c0dc
+wc0dc::
 	db
 
-wc0dd:: ; c0dd
+wc0dd::
 	db
 
-wIsOnSlipperyGround:: ; c0de
+wIsOnSlipperyGround::
 	db
 
 	db
 
-wc0e0:: ; c0e0
+wc0e0::
 	db
 
-wc0e1:: ; c0e1
+wc0e1::
 	db
 
 ; byte 1 = minutes
 ; byte 2 = seconds
 ; byte 3 = frames (60 fps, so 60 here is 1 second)
-wLevelTime:: ; c0e2
+wLevelTime::
 	ds 3
 
-wTimeAttackResult:: ; c0e5
+wTimeAttackResult::
 	db
 
-wIsBossBattle:: ; c0e6
+wIsBossBattle::
 	db
 
-wAllMusicalCoinsLevel:: ; c0e7
+wAllMusicalCoinsLevel::
 	db
 
 ; used in the Musical Coin screen
 ; this value counts up from 0 up to
 ; the number of Musical Coins that
 ; Wario collected in the level
-wMusicalCoinVisualCounter:: ; c0e8
+wMusicalCoinVisualCounter::
 	db
 
 	ds $17
 
-wTempBGPals:: ds 8 palettes ; c100
-wTempOBPals:: ds 8 palettes ; c140
+wTempBGPals:: ds 8 palettes
+wTempOBPals:: ds 8 palettes
 
 ; target rgb values for fading
-wTargetRGB:: ; c180
-wTargetRed::   db ; c180
-wTargetGreen:: db ; c181
-wTargetBlue::  db ; c182
+wTargetRGB::
+wTargetRed::   db
+wTargetGreen:: db
+wTargetBlue::  db
 
 ; current rgb values for color fade
-wCurRGB:: ; c183
-wCurRed::   db ; c183
-wCurGreen:: db ; c184
-wCurBlue::  db ; c185
+wCurRGB::
+wCurRed::   db
+wCurGreen:: db
+wCurBlue::  db
 
-wUnused_c186:: ; c186
+wUnused_c186::
 	db
 
 ; keeps track of the fade amount, starting at 1
 ; when it reaches 32 + 1 (maximum amount of fade possible),
 ; fading is stopped
-wPalFadeCounter:: ; c187
+wPalFadeCounter::
 	db
 
 	db
 
 ; bit 0: slope right
 ; bit 1: slope left
-wSlopeInteraction:: ; c189
+wSlopeInteraction::
 	db
 
 	ds $2
 
-wc18c:: ; c18c
+wc18c::
 	db
 
-wUnused_c18d:: ; c18d
+wUnused_c18d::
 	db
 
-wc18e:: ds 8 * 2 ; c18e
-wc19e:: db       ; c19e
-wc19f:: db       ; c19f
+wc18e:: ds 8 * 2
+wc19e:: db      
+wc19f:: db      
 
-wIsDMATransferPending::      db ; c1a0
-wPendingDMASourceBank::      db ; c1a1
-wPendingDMASourcePtr::       dw ; c1a2
-wPendingDMADestinationBank:: db ; c1a3
-wPendingDMADestinationPtr::  dw ; c1a4
-wPendingDMALength::          db ; c1a6
+wIsDMATransferPending::      db
+wPendingDMASourceBank::      db
+wPendingDMASourcePtr::       dw
+wPendingDMADestinationBank:: db
+wPendingDMADestinationPtr::  dw
+wPendingDMALength::          db
 
-wAnimationEnded:: ; c1a8
+wAnimationEnded::
 	db
 
-wFloorTransitionTimer:: ; c1a9
+wFloorTransitionTimer::
 	db
 
 ; bit 2 set = transitioning downwards
 ; bit 3 set = transitioning upwards
-wFloorTransitionDir:: ; c1aa
+wFloorTransitionDir::
 	db
 
-wAnimatedTilesGroup::         db ; c1ab
-wAnimatedTilesFrameDuration:: db ; c1ac
-wAnimatedTilesGfx::           db ; c1ad
-wAnimatedTilesFrame::         db ; c1ae
-wAnimatedTilesFrameCount::    db ; c1af
+wAnimatedTilesGroup::         db
+wAnimatedTilesFrameDuration:: db
+wAnimatedTilesGfx::           db
+wAnimatedTilesFrame::         db
+wAnimatedTilesFrameCount::    db
 
 ; counter is incremented each time the room pals are updated
 ; when it reaches wRoomPalCycleDuration, the cycle advances
 ; to the next index and counter value is reset
 ; see UpdateRoomAnimatedPals
-wRoomPalCycle::         db ; c1b0
-wRoomPalCycleDuration:: db ; c1b1
-wRoomPalCyclePtr::      dw ; c1b2
-wRoomPalCycleIndex::    db ; c1b4
-wRoomPalCycleCounter::  db ; c1b5
+wRoomPalCycle::         db
+wRoomPalCycleDuration:: db
+wRoomPalCyclePtr::      dw
+wRoomPalCycleIndex::    db
+wRoomPalCycleCounter::  db
 
 ; pointer to an object struct in wObjects
-wObjPtr:: ; c1b6
+wObjPtr::
 	dw
 
-wUnused_c1b8:: ; c1b8
+wUnused_c1b8::
 	db
 
 ; OBJ_INTERACTION_* constant for ProcessInteractions
-wObjInteractionType:: ; c1b9
+wObjInteractionType::
 	db
 
-wObjCollBoxTop::    db ; c1ba
-wObjCollBoxBottom:: db ; c1bb
-wObjCollBoxLeft::   db ; c1bc
-wObjCollBoxRight::  db ; c1bd
+wObjCollBoxTop::    db
+wObjCollBoxBottom:: db
+wObjCollBoxLeft::   db
+wObjCollBoxRight::  db
 
-wObjScreenYPos:: db ; c1be
-wObjScreenXPos:: db ; c1bf
+wObjScreenYPos:: db
+wObjScreenXPos:: db
 
-wInteractionSide:: ; c1c0
+wInteractionSide::
 	db
 
-wc1c1:: db ; c1c1
-wc1c2:: db ; c1c2
-wc1c3:: db ; c1c3
-wc1c4:: db ; c1c4
+wc1c1:: db
+wc1c2:: db
+wc1c3:: db
+wc1c4:: db
 
 	db
 
-wObjDirection:: ; c1c6
+wObjDirection::
 	db
 
-wLadderInteraction:: ; c1c7
+wLadderInteraction::
 	db
 
-wIsNearFence:: ; c1c8
+wIsNearFence::
 	db
 
-wIsInAirCurrent:: ; c1c9
+wIsInAirCurrent::
 	db
 
-wc1ca:: ; c1ca
+wc1ca::
 	db
 
 	ds $35
 
 ; function called on V-Blank
-wVBlankFunc:: ; c200
+wVBlankFunc::
 	ds $200
 
 ; function called on LCD
-wLCDFunc:: ; c400
+wLCDFunc::
 	ds $1ff
 
-wROMBank:: ; c5ff
+wROMBank::
 	db
 
-wRoomBlockTiles:: ; c600
+wRoomBlockTiles::
 	ds 4 * $80
 
-wVBlankFuncExtended:: ; c800
+wVBlankFuncExtended::
 	ds $200
 
 SECTION "Progress WRAM", WRAM0
 
-wSaveCounter:: ; ca00
+wSaveCounter::
 	ds $4
 
 ; number of coins collected
 ; it's in big endian decimal form
-wNumCoins:: ; ca04
+wNumCoins::
 	ds $2
 
 ; each level selectable in the overworld has 8 states
 ; divided by 2, which are the day and night variants
-wLevel:: ; ca06
+wLevel::
 	db
 
 ; digits are represented in each nybble
 ; the first byte holds the tens and ones digits
 ; for the minute value, and the second byte
 ; holds the tens and ones digits for seconds
-wLevelTimeAttackScores:: ; ca07
+wLevelTimeAttackScores::
 	ds 2 * NUM_LEVELS
 
 ; stores total number of treasures collected
 ; byte 1 lo nybble = hundreds
 ; byte 2 hi nybble = tens
 ; byte 2 lo nybble = ones
-wNumCollectedTreasures:: ; ca39
+wNumCollectedTreasures::
 	ds $2
 
 ; bit 0: not set = day, set = night
 ; bit 7: trigger day/night transition
-wDayNight:: ; ca3b
+wDayNight::
 	db
 
 ; a POWER_UP_* constant
 ; this value is incremental which means that
 ; a Power Up level unlocks all levels before it
-wPowerUpLevel:: ; ca3c
+wPowerUpLevel::
 	db
 
 ; MODE_* constant
-wGameModeFlags:: ; ca3d
+wGameModeFlags::
 	db
 
 ; flag set means that all the Musical Coins
 ; in that level have been collected
-wMusicalCoinFlags:: ; ca3e
+wMusicalCoinFlags::
 	ds (NUM_LEVELS / 8) + 1
 
-wGolfBestScores:: ; ca42
+wGolfBestScores::
 	ds NUM_GOLF_COURSES
 
 ; 0 = Japanese
 ; 1 = English
-wLanguage:: ; ca46
+wLanguage::
 	db
 
 	ds $14
@@ -453,154 +453,154 @@ SECTION "Level WRAM", WRAM0
 ; bit 5: red treasure
 ; bit 6: green treasure
 ; bit 7: blue treasure
-wKeyAndTreasureFlags:: ; ca5b
+wKeyAndTreasureFlags::
 	db
 
-wNumMusicalCoins:: ; ca5c
+wNumMusicalCoins::
 	db
 
-wTempLevelRoomID:: ; ca5d
+wTempLevelRoomID::
 	db
 
 ; always $70 or wWarioYPos
-wca5e:: db ; ca5e
+wca5e:: db
 ; always $58
-wca5f:: db ; ca5f
+wca5f:: db
 ; always $58
-wca60:: db ; ca60
+wca60:: db
 
 wWarioPos::
-wWarioYPos:: dw ; ca61
-wWarioXPos:: dw ; ca63
+wWarioYPos:: dw
+wWarioXPos:: dw
 
-wca65:: ; ca65
+wca65::
 	db
 
-wca66:: ; ca66
+wca66::
 	db
 
-wFrameDuration:: ; ca67
+wFrameDuration::
 	db
 
-wAnimationFrame:: ; ca68
+wAnimationFrame::
 	db
 
 ; which way Wario is facing
 ; DIRECTION_LEFT  = 0
 ; DIRECTION_RIGHT = 1
-wDirection:: ; ca69
+wDirection::
 	db
 
 ; when a switch is hit, this flag is set
 ; then UpdateSwitchableBlocks will update
 ; all blocks that are controlled by the switch,
 ; and then unset this flag
-wSwitchStateUpdated:: db ; ca6a
+wSwitchStateUpdated:: db
 ; which state the switch is:
 ; - $60 is off
 ; - $68 is on
-wSwitchState::        db ; ca6b
+wSwitchState::        db
 
-wca6c:: ; ca6c
+wca6c::
 	db
 
-wSwimVelIndex:: ; ca6d
+wSwimVelIndex::
 	db
 
 ; counter to keep track of
 ; Wario's water surface floating movement
-wWaterSurfaceFloatingCounter:: ; ca6e
+wWaterSurfaceFloatingCounter::
 	db
 
-wCollisionBoxTop::    db ; ca6f
-wCollisionBoxBottom:: db ; ca70
-wCollisionBoxLeft::   db ; ca71
-wCollisionBoxRight::  db ; ca72
+wCollisionBoxTop::    db
+wCollisionBoxBottom:: db
+wCollisionBoxLeft::   db
+wCollisionBoxRight::  db
 
-wIsFloorTransition:: ; ca73
+wIsFloorTransition::
 	db
 
 ; which table to use for jump velocities
 ; JUMP_VEL_* constant
-wJumpVelTable:: ; ca74
+wJumpVelTable::
 	db
 
 ; the index of the jump velocity value
 ; corresponding to wJumpVelTable
-wJumpVelIndex:: ; ca75
+wJumpVelIndex::
 	db
 
 ; if TRUE, then execute the full jump
 ; independently of pressing A or not
-wDoFullJump:: ; ca76
+wDoFullJump::
 	db
 
 ; whether Wario is jumping upwards or not
 ; used to check if the player can still
 ; gain height while holding down the jump button
-wJumpingUpwards:: ; ca77
+wJumpingUpwards::
 	db
 
 ; each y section is divided in 20-block high slices
 ; this stores the floor number of the current position
-wFloor:: ; ca78
+wFloor::
 	db
 
 ; palette pointer
-wWarioPalsPtr:: ; ca79
+wWarioPalsPtr::
 	dw
 
-wDMASourceBank:: db ; ca7b
-wDMASourcePtr::  dw ; ca7c
+wDMASourceBank:: db
+wDMASourcePtr::  dw
 
-wOAMBank:: db ; ca7e
-wOAMPtr::  dw ; ca7f
+wOAMBank:: db
+wOAMPtr::  dw
 
-wFramesetPtr:: ; ca81
+wFramesetPtr::
 	dw
 
 ; a STATE_* constant, corresponding
 ; to Wario's current state
-wWarioState:: ; ca83
+wWarioState::
 	db
 
 ; increments every frame
 ; that Wario is in some state
-wWarioStateCounter:: ; ca84
+wWarioStateCounter::
 	db
 
 ; counts how many times wWarioStateCounter overflows
 ; used for knowing how long Wario is some state
-wWarioStateCycles:: ; ca85
+wWarioStateCycles::
 	db
 
-wWalkVelIndex:: ; ca86
+wWalkVelIndex::
 	db
 
-wWarioScreenYPos:: ; ca87
+wWarioScreenYPos::
 	db
 
-wWarioScreenXPos:: ; ca88
+wWarioScreenXPos::
 	db
 
-wAttackCounter:: ; ca89
+wAttackCounter::
 	db
 
 ; whether objects can interact with Wario
-wIsIntangible:: ; ca8a
+wIsIntangible::
 	db
 
-wIsCrouching:: ; ca8b
+wIsCrouching::
 	db
 
-wInvincibleCounter:: ; ca8c
+wInvincibleCounter::
 	db
 
-wInvisibleFrame:: ; ca8d
+wInvisibleFrame::
 	db
 
 ; lower 5 bits: TRANSFORMATION_* constant
-wTransformation:: ; ca8e
+wTransformation::
 	db
 
 ; a general value on the progress of
@@ -617,19 +617,19 @@ wTransformation:: ; ca8e
 ; - 1: small snowball
 ; - 2: medium snowball
 ; - 3: big snowball
-wWarioTransformationProgress:: ; ca8f
+wWarioTransformationProgress::
 	db
 
 ; duration left for current transformation
 ; big endian
-wTransformationDuration:: ; ca90
+wTransformationDuration::
 	dw
 
 ; a TOUCH_* constant that determines
 ; how Wario interacts with objects
 ; that would normally sting him
 ; this is used to override the normal stinging action
-wStingTouchState:: ; ca92
+wStingTouchState::
 	db
 
 ; a TOUCH_* constant that determines
@@ -640,85 +640,85 @@ wStingTouchState:: ; ca92
 ; TOUCH_ATTACK: acts as a regular attack
 ; TOUCH_VANISH: vanishes object
 ; TOUCH_PASS_THROUGH: does not interact horizontally
-wTouchState:: ; ca93
+wTouchState::
 	db
 
-wca94:: ; ca94
+wca94::
 	db
 
-wIsTurning:: ; ca95
+wIsTurning::
 	db
 
-wIsSmashAttacking:: ; ca96
+wIsSmashAttacking::
 	db
 
-wGroundShakeCounter:: ; ca97
+wGroundShakeCounter::
 	db
 
 ; whether Wario is causing ground shaking
-wIsWarioGroundShaking:: ; ca98
+wIsWarioGroundShaking::
 	db
 
-wIsGettingOffLadder:: ; ca99
+wIsGettingOffLadder::
 	db
 
 ; Wario's grabbing state
 ; lower 4 bits is GRAB_* constant
 ; bit 7: heavy object
-wGrabState:: ; ca9a
+wGrabState::
 	db
 
-wAutoMoveState:: ; ca9b
+wAutoMoveState::
 	db
 
-wSwimmingDirectionInput:: ; ca9c
+wSwimmingDirectionInput::
 	db
 
-wIsRolling:: ; ca9d
+wIsRolling::
 	db
 
 ; counter to keep track of number of times
 ; Wario needs to "wiggle" to escape being picked up
 ; is reset to NUM_WIGGLES_TO_ESCAPE
-wPickedUpWiggleCounter:: ; ca9e
+wPickedUpWiggleCounter::
 	db
 
 ; counter determining number of remaining frames
 ; Wario has to wiggle out of being picked up
 ; counts down from MAX_PICKED_UP_FRAME_COUNTER
 ; then resets after reaching 0
-wPickedUpFrameCounter:: ; ca9f
+wPickedUpFrameCounter::
 	db
 
-wIsInSand:: ; caa0
+wIsInSand::
 	db
 
-wcaa1:: ; caa1
+wcaa1::
 	ds 4 palettes
 
 ; whether the level's Mini-Game
 ; has already been cleared
-wIsMinigameCleared:: ; cac1
+wIsMinigameCleared::
 	db
 
-wCoinCooldown:: ; cac2
+wCoinCooldown::
 	db
 
-wBossBattleMusic:: ; cac3
+wBossBattleMusic::
 	db
 
-wCameraSCY:: dw ; cac4
-wCameraSCX:: dw ; cac6
+wCameraSCY:: dw
+wCameraSCX:: dw
 
-wcac8:: ; cac8
+wcac8::
 	db
 
-wIsOnSteppableObject:: ; cac9
+wIsOnSteppableObject::
 	db
 
 SECTION "Sprites WRAM", WRAM0
 
-wVirtualOAM:: ; cc00
+wVirtualOAM::
 wVirtualOAMSprite00:: sprite_oam_struct wVirtualOAMSprite00
 wVirtualOAMSprite01:: sprite_oam_struct wVirtualOAMSprite01
 wVirtualOAMSprite02:: sprite_oam_struct wVirtualOAMSprite02
@@ -762,71 +762,71 @@ wVirtualOAMSprite39:: sprite_oam_struct wVirtualOAMSprite39
 wVirtualOAMEnd::
 
 wParticles::
-wParticle1:: particle_struct wParticle1 ; cca0
-wParticle2:: particle_struct wParticle2 ; ccb0
-wParticle3:: particle_struct wParticle3 ; ccc0
-wParticle4:: particle_struct wParticle4 ; ccd0
+wParticle1:: particle_struct wParticle1
+wParticle2:: particle_struct wParticle2
+wParticle3:: particle_struct wParticle3
+wParticle4:: particle_struct wParticle4
 
 ; how many particles are active now
-wNumParticles:: ; cce0
+wNumParticles::
 	db
 
 ; this particle will be overwritten
 ; when the next one is created
-wCurParticleIndex:: ; cce1
+wCurParticleIndex::
 	db
 
-wCurParticle:: sprite_oam_struct wCurParticle ; cce2
-wCurParticleAnimEnded:: db ; cce6
+wCurParticle:: sprite_oam_struct wCurParticle
+wCurParticleAnimEnded:: db
 
-wcce7:: ; cce7
+wcce7::
 	dw
 
 ; the world is divided in a grid,
 ; with each block being 2x2 tiles in dimension
-wBlockPtrBank:: db ; cce9
-wBlockPtr:: dw ; ccea
+wBlockPtrBank:: db
+wBlockPtr:: dw
 
-wccec:: ; ccec
+wccec::
 	db
 
-wWarioSpawnYBlock:: db ; cced
-wWarioSpawnXBlock:: db ; ccee
+wWarioSpawnYBlock:: db
+wWarioSpawnXBlock:: db
 
-wccef:: ; ccef
+wccef::
 	db
 
-wBGPtr:: ; ccf0
+wBGPtr::
 wCreditsBGMapPtr::
 	dw
 
 	ds $e
 
-wBlockFunctionTable:: ; cd00
+wBlockFunctionTable::
 	ds 2 * $80
 
 
 ; size of wBGMapTileVRAM0Queue in bytes
-wBGMapTileQueueSize:: ; ce00
+wBGMapTileQueueSize::
 	db
 
 UNION
 
 ; each tile corresponds to an address
 ; that is queued in wBGMapTileVRAM0Queue
-wBGMapTileVRAM0Queue:: ; ce01
+wBGMapTileVRAM0Queue::
 	ds $34
 
-wBGMapTileVRAM1Queue:: ; ce35
+wBGMapTileVRAM1Queue::
 	ds $34
 
 ; size of wBGMapAddressQueue in bytes
-wBGMapAddressQueueSize:: ; ce69
+wBGMapAddressQueueSize::
 	db
 
 ; each address corresponds to a tile
 ; that is queued in wBGMapTileVRAM0Queue
-wBGMapAddressQueue:: ; ce6a
+wBGMapAddressQueue::
 	ds 2 * $34
 
 NEXTU
@@ -834,171 +834,171 @@ NEXTU
 wCreditsTextBuffer::
 	ds $34
 
-wCreditsTextPals:: ; ce35
+wCreditsTextPals::
 	ds $34
 
 	db
 
-wCreditsTextPtr:: ; ce6a
+wCreditsTextPtr::
 	dw
 
-wCreditsPalsMapPtr:: ; ce6c
+wCreditsPalsMapPtr::
 	dw
 
 ENDU
 
-wJumpCollision:: ; ced2
+wJumpCollision::
 	db
 
-wced3:: ; ced3
+wced3::
 	db
 
 ; which screen to fade out to for level end
 ; LVLEND_* constant
-wLevelEndScreen:: ; ced4
+wLevelEndScreen::
 	db
 
-wPendingSubState:: ; ced5
+wPendingSubState::
 	db
 
-wced6:: ; ced6
+wced6::
 	db
 
 ; the speed in which to perform fading between palettes
 ; uses a FADE_SPEED_* constant
-wFadeSpeed:: ; ced7
+wFadeSpeed::
 	db
 
-wRoomAnimatedTilesEnabled:: db ; ced8
-wRoomAnimatedPalsEnabled::  db ; ced9
+wRoomAnimatedTilesEnabled:: db
+wRoomAnimatedPalsEnabled::  db
 
-wMultiBlockParam:: db ; ceda
-wcedb:: db ; cedb
-wcedc:: dw ; cedc
-wcede:: db ; cede
-wcedf:: db ; cedf
+wMultiBlockParam:: db
+wcedb:: db
+wcedc:: dw
+wcede:: db
+wcedf:: db
 
 ; uses CURRENT_* as flags
 ; to indicate what direction the
 ; current is pulling
-wWaterCurrent::     db ; cee0
-wLastWaterCurrent:: db ; cee1
-wCurWaterCurrent::  db ; cee2
+wWaterCurrent::     db
+wLastWaterCurrent:: db
+wCurWaterCurrent::  db
 
-wTransitionParam:: ; cee3
+wTransitionParam::
 	db
 
-wcee4:: ; cee4
+wcee4::
 	db
 
 ; used to time various events in
 ; Intro/Credits/other sequences
-wTimer:: ; cee5
+wTimer::
 	ds $2
 
-wChecksum:: ; cee7
+wChecksum::
 	dw
 
-wcee9:: ; cee9
+wcee9::
 	db
 
-wceea:: ; ceea
+wceea::
 	db
 
-wceeb:: ; ceeb
+wceeb::
 	db
 
-wceec:: ; ceec
+wceec::
 	db
 
 ; used to control SFX looping
 ; every frame 1 is subtracted
 ; when it reaches 0 it plays SFX
 ; then it's reset to loop duration
-wSFXLoopCounter:: ; ceed
+wSFXLoopCounter::
 	db
 
-wceee:: ; ceee
+wceee::
 	db
 
-wceef:: ; ceef
+wceef::
 	db
 
-wcef0:: ; cef0
+wcef0::
 	db
 
-wcef1:: ; cef1
+wcef1::
 	db
 
-wNumMusicBoxes:: ; cef2
+wNumMusicBoxes::
 	db
 
 SECTION "Stack", WRAM0
 
-wStackBottom:: ; cf00
+wStackBottom::
 	ds $100 - 1
-wStackTop:: ; cfff
+wStackTop::
 	db
 
 SECTION "Level Objects WRAM", WRAMX
 
 wObjects::
-wObj1:: obj_struct wObj1 ; d000
-wObj2:: obj_struct wObj2 ; d020
-wObj3:: obj_struct wObj3 ; d040
-wObj4:: obj_struct wObj4 ; d060
-wObj5:: obj_struct wObj5 ; d080
-wObj6:: obj_struct wObj6 ; d0a0
-wObj7:: obj_struct wObj7 ; d0c0
-wObj8:: obj_struct wObj8 ; d0e0
+wObj1:: obj_struct wObj1
+wObj2:: obj_struct wObj2
+wObj3:: obj_struct wObj3
+wObj4:: obj_struct wObj4
+wObj5:: obj_struct wObj5
+wObj6:: obj_struct wObj6
+wObj7:: obj_struct wObj7
+wObj8:: obj_struct wObj8
 
-wCurObj:: obj_struct wCurObj ; d100
+wCurObj:: obj_struct wCurObj
 
 wObjDataPointers::
-wChestObjDataPtr::       dw ; d120
-wKeyObjDataPtr::         dw ; d122
-wMusicalCoinObjDataPtr:: dw ; d124
-wObjDataPtr01::          dw ; d126
-wObjDataPtr02::          dw ; d128
-wObjDataPtr03::          dw ; d12a
-wObjDataPtr04::          dw ; d12c
-wObjDataPtr05::          dw ; d12e
-wObjDataPtr06::          dw ; d130
-wObjDataPtr07::          dw ; d132
-wObjDataPtr08::          dw ; d134
-wObjDataPtr09::          dw ; d136
-wObjDataPtr10::          dw ; d138
-wObjDataPtr11::          dw ; d13a
-wObjDataPtr12::          dw ; d13c
-wObjDataPtr13::          dw ; d13e
+wChestObjDataPtr::       dw
+wKeyObjDataPtr::         dw
+wMusicalCoinObjDataPtr:: dw
+wObjDataPtr01::          dw
+wObjDataPtr02::          dw
+wObjDataPtr03::          dw
+wObjDataPtr04::          dw
+wObjDataPtr05::          dw
+wObjDataPtr06::          dw
+wObjDataPtr07::          dw
+wObjDataPtr08::          dw
+wObjDataPtr09::          dw
+wObjDataPtr10::          dw
+wObjDataPtr11::          dw
+wObjDataPtr12::          dw
+wObjDataPtr13::          dw
 wObjDataPointersEnd::
 
-w1d140:: ; d140
+w1d140::
 
 ; if non-0, the Flame Block puzzle
 ; has already been cleared for the level
 wFlameBlockCleared::
 	db
 
-wDollBoyNoFlashingBarrel:: db ; d141
-wDollBoyRemainingParts::   db ; d142
+wDollBoyNoFlashingBarrel:: db
+wDollBoyRemainingParts::   db
 
 ; number of torches lit for the Flame Block puzzle
-wNumLitTorches:: ; d143
+wNumLitTorches::
 	db
 
-wShootGoals:: db ; d144
-wWarioGoals:: db ; d145
+wShootGoals:: db
+wWarioGoals:: db
 
 ; during Doll Boy's barrel phase,
 ; each 4 lower significant bits represent a Doll Boy
 ; barrel that is still active, or Doll Boy itself
-wDollBoyActiveBarrels:: ; d146
+wDollBoyActiveBarrels::
 
 ; decides what the next Wolfenboss attack will be
 ; - if 0, then spawn Spiral
 ; - if 1, then spawn Igaguri
-wWolfenbossNextAttack:: ; d146
+wWolfenbossNextAttack::
 
 wJamanoActiveSkulls::
 wMuddeeAmbushState::
@@ -1006,24 +1006,24 @@ wMuddeeAmbushState::
 
 ; if TRUE, then there is an Igaguri or Kuri still on screen
 ; this is checked so that Wolfenboss doesn't spawn another one
-wWolfenbossIgaguriOrKuriActive:: ; d147
+wWolfenbossIgaguriOrKuriActive::
 
-w1d147:: ; d147
+w1d147::
 	db
 
 ; decides which range for Doll Boy's hammer
 ; can be short, mid-short, mid-long and long range
-wDollBoyHammerRange:: ; d148
+wDollBoyHammerRange::
 
 ; remaining hits to defeat Wolfenboss + 1
-wWolfenbossRemainingHits:: ; d148
+wWolfenbossRemainingHits::
 	db
 
 ; how many spirals that Wolfenboss will shoot
 ; before switching to attacking with a Igaguri
-wWolfenbossConsecutiveSpirals:: ; d149
+wWolfenbossConsecutiveSpirals::
 
-w1d149:: ; d149
+w1d149::
 	ds $1
 
 SECTION "WRAM1", WRAMX
@@ -1032,61 +1032,61 @@ SECTION "WRAM1", WRAMX
 ; e.g. Fat Wario can effectively have the Super Jump Slam Overalls
 ; this stores the Power-Up that is effectively active
 ; by taking into account the current transformation
-wEffectivePowerUp:: ; d14a
+wEffectivePowerUp::
 	db
 
-w1d14b:: ; d14b
+w1d14b::
 	db
 
-w1d14c:: ; d14c
+w1d14c::
 	db
 
-w1d14d:: ; d14d
+w1d14d::
 	db
 
-w1d14e:: ; d14e
+w1d14e::
 	db
 
-w1d14f:: ; d14f
+w1d14f::
 	db
 
-w1d150:: ; d150
+w1d150::
 	db
 
-w1d151:: ; d151
+w1d151::
 	db
 
-w1d152:: ; d152
+w1d152::
 	ds $4
 
-w1d156:: ; d156
+w1d156::
 	ds $4
 
-w1d15a:: ; d15a
+w1d15a::
 	db
 
-w1d15b:: ; d15b
+w1d15b::
 	db
 
-w1d15c:: ; d15c
+w1d15c::
 	db
 
-w1d15d:: ; d15d
+w1d15d::
 	db
 
-w1d15e:: ; d15e
+w1d15e::
 	db
 
-w1d15f:: ; d15f
+w1d15f::
 	db
 
-w1d160:: ; d160
+w1d160::
 	db
 
-w1d161:: ; d161
+w1d161::
 	db
 
-w1d162:: ; d162
+w1d162::
 	db
 
 
@@ -1095,24 +1095,24 @@ SECTION "Golf RAM", WRAMX
 ; start of the whole Golf RAM
 wGolfRAMStart::
 
-w1d800:: ; d800
+w1d800::
 	db
 
-wGolfMenuOption:: ; d801
+wGolfMenuOption::
 	db
 
-wPredeterminedGolfLevel:: ; d802
+wPredeterminedGolfLevel::
 	db
 
-w1d803:: ; d803
+w1d803::
 	db
 
 ; GOLF_COURSE_* constant
-wGolfCourse:: ; d804
+wGolfCourse::
 	db
 
 ; current score in the gold course being played
-wGolfCourseScore:: ; d805
+wGolfCourseScore::
 	db
 
 	ds $fa
@@ -1120,159 +1120,159 @@ wGolfCourseScore:: ; d805
 ; start of the RAM related to the Golf levels
 wGolfLevelRAMStart::
 
-w1d900:: ; d900
+w1d900::
 	ds 16 tiles
 
-w1da00:: ; da00
+w1da00::
 	ds $100
 
-w1db00:: ; db00
+w1db00::
 	ds 8 palettes
 
 wGolfLevelData::
-wGolfTerrainBlocks:: ds NUM_GOLF_LEVEL_BLOCKS ; db40
-wGolfPar::           db ; db81
-w1db82::             ds $2 ; db82
-wGolfWaterSpawn1::   db ; db84
-wGolfWaterSpawn2::   db ; db85
+wGolfTerrainBlocks:: ds NUM_GOLF_LEVEL_BLOCKS
+wGolfPar::           db
+w1db82::             ds $2
+wGolfWaterSpawn1::   db
+wGolfWaterSpawn2::   db
 wGolfLevelDataEnd::
 
 	ds $a
 
-w1db90:: ; db90
+w1db90::
 	ds 4 tiles
 
 	ds $30
 
-w1dc00:: ; dc00
-wGolfLobbyState:: ; dc00
-wGolfLevelState:: ; dc00
+w1dc00::
+wGolfLobbyState::
+wGolfLevelState::
 	db
 
-w1dc01:: ; dc01
+w1dc01::
 	db
 
-wGolfVBlankMode:: ; dc02
+wGolfVBlankMode::
 	db
 
-wHasAllMusicalCoinFlags:: ; dc03
+wHasAllMusicalCoinFlags::
 	db
 
 	ds $5
 
-wGolfAnimLastFrame:: ; dc09
+wGolfAnimLastFrame::
 	db
 
 ; keeps track of several counters
-wGolfCounter:: ; dc0a
+wGolfCounter::
 	db
 
-w1dc0b:: ; dc0b
+w1dc0b::
 	db
 
-wGolfLCDConfig:: ; dc0c
+wGolfLCDConfig::
 	db
 
-wGolfWarioTilesBank:: ; dc0d
+wGolfWarioTilesBank::
 	db
 
-w1dc0e:: ; dc0e
+w1dc0e::
 	db
 
-wGolfPrice:: ; dc0f
+wGolfPrice::
 	db
 
 	db
 
-wdc11:: ; dc11
-wGolfWarioTilesPtr:: ; dc11
+wdc11::
+wGolfWarioTilesPtr::
 	dw
 
-w1dc13:: ; dc13
+w1dc13::
 	db
 
 	ds $3
 
-wGolfOAMPtr:: ; dc17
+wGolfOAMPtr::
 	dw
 
 ; number of coins to be displayed
 ; in the Golf Lobby screen
-wGolfNumCoins:: ; dc19
+wGolfNumCoins::
 	ds $2
 
 	ds $5
 
-w1dc20:: ; dc20
+w1dc20::
 	db
 
-w1dc21:: ; dc21
+w1dc21::
 	db
 
 ; current stroke number
-wGolfStroke:: ; dc22
+wGolfStroke::
 	db
 
-wGolfMaxStrokes:: ; dc23
+wGolfMaxStrokes::
 	db
 
-wGolfResult:: ; dc24
+wGolfResult::
 	db
 
-w1dc25:: ; dc25
+w1dc25::
 	db
 
 ; GOLF_DISPLAY_* constant
-wGolfDisplayMode:: ; dc26
+wGolfDisplayMode::
 	db
 
 ; $0 = right
 ; $1 = left
-wGolfMenuScrollingDir:: ; dc27
-wGolfLevelScrollingDir:: ; dc27
+wGolfMenuScrollingDir::
+wGolfLevelScrollingDir::
 	db
 
 ; which side of the Para-Goomba that the hole is in
 ; $0 = to the right
 ; $1 = to the left
-wGolfHoleDirection:: ; dc28
+wGolfHoleDirection::
 	db
 
-wShotDirection:: ; dc29
+wShotDirection::
 	db
 
-wHasGolfWarioAnimationFinished:: ; dc2a
+wHasGolfWarioAnimationFinished::
 	db
 
 	db
 
-wGolfXScroll:: ; dc2c
+wGolfXScroll::
 	ds $2
 
-wGolfMenuTargetSCX:: ; dc2e
-wTempGolfXScroll:: ; dc2e
+wGolfMenuTargetSCX::
+wTempGolfXScroll::
 	ds $2
 
-wGolfWarioYPos:: ds $2 ; dc30
-wGolfWarioXPos:: ds $2 ; dc32
+wGolfWarioYPos:: ds $2
+wGolfWarioXPos:: ds $2
 
-wGolfParaGoomYPos:: ds $2 ; dc34
-wGolfParaGoomXPos:: ds $2 ; dc36
+wGolfParaGoomYPos:: ds $2
+wGolfParaGoomXPos:: ds $2
 
-wGolfLevelHoleXPos:: ds $2 ; dc38
+wGolfLevelHoleXPos:: ds $2
 
 ; position of Para-Goom when it was last shot
 ; used to reset position when, e.g. going in OB
-wLastGolfParaGoomYPos:: ds $2 ; dc3a
-wLastGolfParaGoomXPos:: ds $2 ; dc3c
+wLastGolfParaGoomYPos:: ds $2
+wLastGolfParaGoomXPos:: ds $2
 
-w1dc3e:: ; dc3e
+w1dc3e::
 	ds $2
 
-wGolfWarioTargetXPos:: ; dc40
+wGolfWarioTargetXPos::
 	ds $2
 
-wGolfWarioDir:: ; dc42
+wGolfWarioDir::
 	db
 
 	db
@@ -1281,71 +1281,71 @@ wGolfWarioDir:: ; dc42
 ; PARAGOOM_GROUND_LEVEL or PARAGOOM_TEE_BOX_LEVEL
 ; the ground level y position proper is considered
 ; to be $1xx, where xx is this value
-wGroundLevelYPos:: ; dc44
+wGroundLevelYPos::
 	db
 
-wGolfTerrain:: ; dc45
+wGolfTerrain::
 	db
 
-wShotTerrainModifier:: ; dc46
+wShotTerrainModifier::
 	db
 
 ; used to check whether the Para-Goom
 ; has already left the Tee Box
-w1dc47:: ; dc47
+w1dc47::
 	db
 
 ; golf terrain of where Para-Goom was shot from
-wStrokeGolfTerrain:: ; dc48
+wStrokeGolfTerrain::
 	db
 
 ; which way the Power Gauge is flowing
 ; FALSE = rising
 ; TRUE = falling
-wIsPowerGaugeFalling:: ; dc49
+wIsPowerGaugeFalling::
 	db
 
-wShotPowerGaugeCursor:: ; dc4a
+wShotPowerGaugeCursor::
 	db
 
-wShotPowerLevel:: ; dc4b
+wShotPowerLevel::
 	db
 
-wSelectedShotPowerGauge:: ; dc4c
+wSelectedShotPowerGauge::
 	db
 
-wShotSpin:: ; dc4d
+wShotSpin::
 	db
 
-wGolfWarioYVel:: ; dc4e
-wShotYVel:: ; dc4e
+wGolfWarioYVel::
+wShotYVel::
 	db
 
-w1dc4f:: ; dc4f
+w1dc4f::
 	db
 
-wShotXVel:: ; dc50
+wShotXVel::
 	db
 
-w1dc51:: ; dc51
+w1dc51::
 	db
 
 	db
 
-w1dc53:: ; dc53
+w1dc53::
 	db
 
-wGolfObj1:: golf_obj_struct wGolfObj1 ; dc54
-wGolfObj2:: golf_obj_struct wGolfObj2 ; dc5c
-wGolfObj3:: golf_obj_struct wGolfObj3 ; dc64
-wGolfObj4:: golf_obj_struct wGolfObj4 ; dc6c
-wGolfObj5:: golf_obj_struct wGolfObj5 ; dc74
+wGolfObj1:: golf_obj_struct wGolfObj1
+wGolfObj2:: golf_obj_struct wGolfObj2
+wGolfObj3:: golf_obj_struct wGolfObj3
+wGolfObj4:: golf_obj_struct wGolfObj4
+wGolfObj5:: golf_obj_struct wGolfObj5
 
-wGolfParaGoom:: golf_obj_struct wGolfParaGoom ; dc7c
-wGolfWario:: golf_obj_struct wGolfWario ; dc84
+wGolfParaGoom:: golf_obj_struct wGolfParaGoom
+wGolfWario:: golf_obj_struct wGolfWario
 
-wGolfOverlayText:: golf_obj_struct wGolfOverlayText ; dc8c
-wGolfParaGoomGhost:: golf_obj_struct wGolfParaGoomGhost ; dc94
+wGolfOverlayText:: golf_obj_struct wGolfOverlayText
+wGolfParaGoomGhost:: golf_obj_struct wGolfParaGoomGhost
 
 	ds $364
 
@@ -1354,178 +1354,178 @@ wGolfRAMEnd::
 
 SECTION "WRAM2", WRAMX
 
-wTreasuresCollected:: ; d000
+wTreasuresCollected::
 	ds (NUM_TREASURES / 8) + 1
 
-w2d00d:: ; d00d
+w2d00d::
 	db
 
 ; next treasure in the list to collect
-wNextTreasure:: ; d00e
+wNextTreasure::
 	db
 
 ; LEVEL_* constant
-wOWLevel:: ; d00f
+wOWLevel::
 	db
 
 	db
 
-w2d011:: ; d011
+w2d011::
 	db
 
-wNextMapSide:: ; d012
+wNextMapSide::
 	db
 
-w2d013:: ; d013
+w2d013::
 	db
 
-w2d014:: ; d014
+w2d014::
 	db
 
-w2d015:: ; d015
+w2d015::
 	db
 
-wCutsceneMapSide:: ; d016
+wCutsceneMapSide::
 	db
 
-wCutsceneActionParam:: ; d017
+wCutsceneActionParam::
 	db
 
-w2d018:: ; d018
+w2d018::
 	db
 
-wTempUnlockableConnectionID:: ; d019
+wTempUnlockableConnectionID::
 	db
 
 ; NORTH, WEST, SOUTH or EAST
-wCurMapSide:: ; d01a
+wCurMapSide::
 	db
 
-wLastTransitionParam:: ; d01b
-	db
-
-	db
-
-wMapSideLevelID:: ; d01d
-	db
-
-w2d01e:: ; d01e
-	db
-
-w2d01f:: ; d01f
-	db
-
-wGotSunMedallion:: ; d020
+wLastTransitionParam::
 	db
 
 	db
 
-w2d022:: ; d022
+wMapSideLevelID::
 	db
 
-w2d023:: ; d023
+w2d01e::
+	db
+
+w2d01f::
+	db
+
+wGotSunMedallion::
+	db
+
+	db
+
+w2d022::
+	db
+
+w2d023::
 	db
 
 ; $00 when OW object animation is ongoing
 ; $ff when it reset
-wOWAnimationFinished:: ; d024
+wOWAnimationFinished::
 	db
 
-w2d025:: ; d025
+w2d025::
 	db
 
-wCutsceneOWParamsPtr::     dw ; d026
-wOWCutsceneAction::        db ; d028
-wTempOWCutsceneAction::    db ; d029
-wTempCutsceneOWParamsPtr:: dw ; d02a
+wCutsceneOWParamsPtr::     dw
+wOWCutsceneAction::        db
+wTempOWCutsceneAction::    db
+wTempCutsceneOWParamsPtr:: dw
 
-w2d02c:: ; d02c
+w2d02c::
 	db
 
 	ds $3
 
-w2d030:: ; d030
+w2d030::
 	db
 
-w2d031:: ; d031
+w2d031::
 	db
 
-w2d032:: ; d032
+w2d032::
 	db
 
-w2d033:: ; d033
+w2d033::
 	db
 
-w2d034:: ; d034
+w2d034::
 	db
 
-w2d035:: ; d035
+w2d035::
 	db
 
-w2d036:: ; d036
+w2d036::
 	db
 
-w2d037:: ; d037
+w2d037::
 	db
 
-w2d038:: ; d038
+w2d038::
 	db
 
-w2d039:: ; d039
+w2d039::
 	db
 
-w2d03a:: ; d03a
+w2d03a::
 	db
 
-w2d03b:: ; d03b
+w2d03b::
 	db
 
-w2d03c:: ; d03c
+w2d03c::
 	db
 
-w2d03d:: ; d03d
+w2d03d::
 	db
 
-w2d03e:: ; d03e
+w2d03e::
 	db
 
-w2d03f:: ; d03f
+w2d03f::
 	db
 
-w2d040:: ; d040
+w2d040::
 	db
 
-w2d041:: ; d041
+w2d041::
 	db
 
-w2d042:: ; d042
+w2d042::
 	db
 
-w2d043:: ; d043
+w2d043::
 	db
 
-w2d044:: ; d044
+w2d044::
 	ds $2
 
-w2d046:: ; d046
+w2d046::
 	db
 
-w2d047:: ; d047
+w2d047::
 	db
 
-w2d048:: ; d048
+w2d048::
 	db
 
-w2d049:: ; d049
+w2d049::
 	db
 
 	ds $6
 
 ; TOPBARST_* constant
-wTopBarState:: ; d050
+wTopBarState::
 	db
 
-wTopBarStateCounter:: ; d051
+wTopBarStateCounter::
 	db
 
 	db
@@ -1535,622 +1535,622 @@ wTopBarStateCounter:: ; d051
 ; 2: Collection
 ; 3: Next map
 ; 4: Prev map
-wTopBarSelection:: ; d053
+wTopBarSelection::
 	db
 
-wTopBarSelectableButtons:: ; d054
+wTopBarSelectableButtons::
 	db
 
-wOWPalTransitionState::   db ; d055
-wOWPalTransitionCounter:: db ; d056
+wOWPalTransitionState::   db
+wOWPalTransitionCounter:: db
 
 ; which crayons have been collected
 ; each bit corresponds to CRAYON_*
-wCrayonFlags:: ; d057
+wCrayonFlags::
 	db
 
-wCollectionPage:: ; d058
+wCollectionPage::
 	db
 
-wCollectionCell:: ; d059
+wCollectionCell::
 	db
 
 	ds $6
 
-wOWPendingTileUpdate:: ; d060
+wOWPendingTileUpdate::
 	db
 
-wOWFuncCounter:: ; d061
+wOWFuncCounter::
 	db
 
-w2d062:: ; d062
+w2d062::
 	db
 
-wUnlockedLevelArrowsPtr:: ; d063
+wUnlockedLevelArrowsPtr::
 	dw
 
-w2d065:: ; d065
+w2d065::
 	db
 
-wConnectedLevel1:: db ; d066
-wConnectedLevel2:: db ; d067
+wConnectedLevel1:: db
+wConnectedLevel2:: db
 
-w2d068:: ; d068
+w2d068::
 	db
 
-w2d069:: ; d069
+w2d069::
 	db
 
-w2d06a:: ; d06a
+w2d06a::
 	db
 
-wConnectedLevel1Coords:: ; d06b
-wConnectedLevel1YCoord:: db ; d06b
-wConnectedLevel1XCoord:: db ; d06c
+wConnectedLevel1Coords::
+wConnectedLevel1YCoord:: db
+wConnectedLevel1XCoord:: db
 
-wConnectedLevel2Coords:: ; d06d
-wConnectedLevel2YCoord:: db ; d06d
-wConnectedLevel2XCoord:: db ; d06e
+wConnectedLevel2Coords::
+wConnectedLevel2YCoord:: db
+wConnectedLevel2XCoord:: db
 
-w2d06f:: ; d06f
+w2d06f::
 	db
 
-w2d070:: ; d070
+w2d070::
 	db
 
-w2d071:: ; d071
+w2d071::
 	db
 
-w2d072:: ; d072
+w2d072::
 	db
 
-wLevelArrowDirections1:: db ; d073
-w2d074::                 db ; d074
-wLevelArrowDirections2:: db ; d075
-w2d076::                 db ; d076
+wLevelArrowDirections1:: db
+w2d074::                 db
+wLevelArrowDirections2:: db
+w2d076::                 db
 
 ; CUTSCENE_* constant
-wCutscene:: ; d077
+wCutscene::
 	db
 
-w2d078:: ; d078
+w2d078::
 	db
 
-wHDMABank:: ; d079
+wHDMABank::
 	db
 
-wAccessibleMapSides:: ; d07a
+wAccessibleMapSides::
 	db
 
-wIsCollectionOpen:: ; d07b
+wIsCollectionOpen::
 	db
 
-w2d07c:: ; d07c
+w2d07c::
 	db
 
-w2d07d:: ; d07d
+w2d07d::
 	db
 
 	db
 
-w2d07f:: ; d07f
+w2d07f::
 	db
 
-wTileToPlaceInOW:: ; d080
+wTileToPlaceInOW::
 	db
 
-wAttrToPlaceInOW:: ; d081
+wAttrToPlaceInOW::
 	db
 
-wOWTilemapPtr:: ; d082
+wOWTilemapPtr::
 	dw
 
 	ds $2
 
-wTempOWTilemapPtr:: ; d086
+wTempOWTilemapPtr::
 	dw
 
 	ds $8
 
-wHasMagnifyingGlass:: ; d090
+wHasMagnifyingGlass::
 	db
 
 ; BOTBAR_* constant
-wBottomBarAction:: ; d091
+wBottomBarAction::
 	db
 
-wBottomBarState:: ; d092
+wBottomBarState::
 	db
 
-wMagnifyingGlassCounter:: ; d093
+wMagnifyingGlassCounter::
 	db
 
-wWY:: ; d094
+wWY::
 	db
 
-wWX:: ; d095
+wWX::
 	db
 
-w2d096:: ; d096
+w2d096::
 	db
 
 	ds $9
 
-w2d0a0:: ; d0a0
+w2d0a0::
 	db
 
-w2d0a1:: ; d0a1
+w2d0a1::
 	db
 
-w2d0a2:: ; d0a2
+w2d0a2::
 	db
 
-w2d0a3:: ; d0a3
+w2d0a3::
 	db
 
-w2d0a4:: ; d0a4
+w2d0a4::
 	db
 
-w2d0a5:: ; d0a5
+w2d0a5::
 	db
 
-w2d0a6:: ; d0a6
+w2d0a6::
 	db
 
-w2d0a7:: ; d0a7
+w2d0a7::
 	db
 
-w2d0a8:: ; d0a8
+w2d0a8::
 	db
 
 	ds $7
 
-wHDMA::  hdma_config_struct wHDMA ; d0b0
-w2d0b5:: hdma_config_struct w2d0b5 ; d0b5
+wHDMA::  hdma_config_struct wHDMA
+w2d0b5:: hdma_config_struct w2d0b5
 
 	ds $6
 
 	
-w2d0c0:: ; d0dc0
+w2d0c0::
 	ds $10
 
-wPalConfig1:: pal_config_struct wPalConfig1 ; d0d0
-wPalConfig2:: pal_config_struct wPalConfig2 ; d0d6
+wPalConfig1:: pal_config_struct wPalConfig1
+wPalConfig2:: pal_config_struct wPalConfig2
 
 ; which PalConfig to fade in FadePalConfig
 ; 0 = wPalConfig1
 ; 1 = wPalConfig2
-wPalConfigToFade:: ; d0dc
+wPalConfigToFade::
 	db
 
 ; how many times to repeat the fade routine
 ; higher values means more fade happens per frame
-wPalFadeRepeat:: ; d0dd
+wPalFadeRepeat::
 	db
 
 	ds $2
 
-w2d0e0:: ; d0e0
+w2d0e0::
 	db
 
-wCurPalTotalSteps:: ; d0e1
+wCurPalTotalSteps::
 	db
 
-w2d0e2:: ; d0e2
+w2d0e2::
 	db
 
-w2d0e3:: ; d0e3
+w2d0e3::
 	db
 
-w2d0e4:: ; d0e4
+w2d0e4::
 	db
 
-w2d0e5:: ; d0e5
+w2d0e5::
 	db
 
 	ds $8
 
-w2d0ee:: ; d0ee
+w2d0ee::
 	db
 
-w2d0ef:: ; d0ef
+w2d0ef::
 	db
 
 wLevelTreasureIDs::
-wLevelGreyTreasureID::  db ; d0f0
-wLevelRedTreasureID::   db ; d0f1
-wLevelGreenTreasureID:: db ; d0f2
-wLevelBlueTreasureID::  db ; d0f3
+wLevelGreyTreasureID::  db
+wLevelRedTreasureID::   db
+wLevelGreenTreasureID:: db
+wLevelBlueTreasureID::  db
 
 wLevelTreasurePals::
-wLevelGreyTreasurePal::  db ; d0f4
-wLevelRedTreasurePal::   db ; d0f5
-wLevelGreenTreasurePal:: db ; d0f6
-wLevelBlueTreasurePal::  db ; d0f7
+wLevelGreyTreasurePal::  db
+wLevelRedTreasurePal::   db
+wLevelGreenTreasurePal:: db
+wLevelBlueTreasurePal::  db
 
 	ds $2
 
-wBottomBarFlags:: ; d0fa
+wBottomBarFlags::
 	db
 
 	db
 
-wBottomBarTreasureIDs:: ; d0fc
+wBottomBarTreasureIDs::
 	ds NUM_LEVEL_TREASURES
 
-w2d100:: ; d100
+w2d100::
 	db
 
-w2d101:: ; d101
+w2d101::
 	db
 
 	ds $2
 
-w2d104:: ; d104
+w2d104::
 	ds $2
 
-w2d106:: ; d106
+w2d106::
 	db
 
 ; some sprite pointer
-w2d107:: ; d107
+w2d107::
 	ds $2
 
 ; some frameset pointer
-w2d109:: ; d109
+w2d109::
 	ds $2
 
-wOWAllowedDPadInput:: ; d10b
+wOWAllowedDPadInput::
 	db
 
-w2d10c:: ; d10c
+w2d10c::
 	db
 
-w2d10d:: ; d10d
+w2d10d::
 	db
 
-w2d10e:: ; d10e
+w2d10e::
 	db
 
 	db
 
-wCompassObj:: scene_obj_struct wCompassObj ; d110
+wCompassObj:: scene_obj_struct wCompassObj
 
 	ds $6
 
-wCurSceneObjPtr:: ; d11e
+wCurSceneObjPtr::
 	ds $2
 
 	ds $1
 
-w2d121:: ; d121
+w2d121::
 	db
 
-w2d122:: ; d122
+w2d122::
 	db
 
-w2d123:: ; d123
+w2d123::
 	ds $1
 
-w2d124:: ; d124
+w2d124::
 	db
 
-w2d125:: ; d125
+w2d125::
 	db
 
-w2d126:: ; d126
+w2d126::
 	db
 
-w2d127:: ; d127
-	db
-
-	ds $1
-
-w2d129:: ; d129
-	db
-
-w2d12a:: ; d12a
-	db
-
-w2d12b:: ; d12b
-	db
-
-w2d12c:: ; d12c
-	db
-
-w2d12d:: ; d12d
-	db
-
-w2d12e:: ; d12e
-	db
-
-w2d12f:: ; d12f
-	db
-
-w2d130:: ; d130
+w2d127::
 	db
 
 	ds $1
 
-w2d132:: ; d132
+w2d129::
 	db
 
-w2d133:: ; d133
+w2d12a::
 	db
 
-w2d134:: ; d134
+w2d12b::
 	db
 
-w2d135:: ; d135
+w2d12c::
+	db
+
+w2d12d::
+	db
+
+w2d12e::
+	db
+
+w2d12f::
+	db
+
+w2d130::
+	db
+
+	ds $1
+
+w2d132::
+	db
+
+w2d133::
+	db
+
+w2d134::
+	db
+
+w2d135::
 	db
 
 	ds $2
 
-w2d138:: ; d138
+w2d138::
 	db
 
-w2d139:: ; d139
+w2d139::
 	db
 
-w2d13a:: ; d13a
+w2d13a::
 	db
 
-w2d13b:: ; d13b
+w2d13b::
 	db
 
-w2d13c:: ; d13c
+w2d13c::
 	db
 
-w2d13d:: ; d13d
+w2d13d::
 	db
 
-w2d13e:: ; d13e
+w2d13e::
 	db
 
-w2d13f:: ; d13f
+w2d13f::
 	db
 
 UNION
 
-wSceneWario:: scene_obj_struct wSceneWario ; d140
-wSceneWarioStateGroup:: db ; d148
-wSceneWarioOAMPtr::     dw ; d149
-wSceneWarioOAMBank::    db ; d14b
+wSceneWario:: scene_obj_struct wSceneWario
+wSceneWarioStateGroup:: db
+wSceneWarioOAMPtr::     dw
+wSceneWarioOAMBank::    db
 
-w2d14c:: ; d14c
+w2d14c::
 	db
 
-wSceneWarioIgnoreScroll:: ; d14d
+wSceneWarioIgnoreScroll::
 	db
 
-w2d14e:: ; d14e
+w2d14e::
 	db
 
 	db
 
 NEXTU
 
-wOWUIObj1:: scene_obj_struct wOWUIObj1 ; d140
-wOWUIObj2:: scene_obj_struct wOWUIObj2 ; d148
+wOWUIObj1:: scene_obj_struct wOWUIObj1
+wOWUIObj2:: scene_obj_struct wOWUIObj2
 
 ENDU
 
-w2d150:: ; d150
+w2d150::
 	db
 
-w2d151:: ; d151
+w2d151::
 	db
 
-wd152:: ; d152
-wDebugSceneWarioState:: ; d152
+wd152::
+wDebugSceneWarioState::
 	db
 
-wd153:: ; d153
+wd153::
 	db
 
-wd154:: ; d154
+wd154::
 	db
 
-wd155:: ; d155
+wd155::
 	db
 
-wd156:: ; d156
+wd156::
 	ds $2
 
-wHDMADestVRAMBank:: ; d158
+wHDMADestVRAMBank::
 	db
 
 	ds $5
 
-w2d15e:: ; d15e
+w2d15e::
 	db
 
 	ds $1
 
-w2d160:: ; d160
+w2d160::
 	ds $6
 
-w2d166:: ; d166
+w2d166::
 	ds $8
 
-w2d16e:: ; d16e
+w2d16e::
 	ds $8
 
-w2d176:: ; d176
+w2d176::
 	ds $8
 
-w2d17e:: ; d17e
+w2d17e::
 	ds $2
 
-wCurSceneObj:: scene_obj_struct wCurSceneObj ; d180
+wCurSceneObj:: scene_obj_struct wCurSceneObj
 
 wSceneObjs::
-wSceneObj1::  scene_obj_struct wSceneObj1  ; d188
-wSceneObj2::  scene_obj_struct wSceneObj2  ; d190
-wSceneObj3::  scene_obj_struct wSceneObj3  ; d198
-wSceneObj4::  scene_obj_struct wSceneObj4  ; d1a0
-wSceneObj5::  scene_obj_struct wSceneObj5  ; d1a8
-wSceneObj6::  scene_obj_struct wSceneObj6  ; d1b0
-wSceneObj7::  scene_obj_struct wSceneObj7  ; d1b8
-wSceneObj8::  scene_obj_struct wSceneObj8  ; d1c0
-wSceneObj9::  scene_obj_struct wSceneObj9  ; d1c8
-wSceneObj10:: scene_obj_struct wSceneObj10 ; d1d0
-wSceneObj11:: scene_obj_struct wSceneObj11 ; d1d8
-wSceneObj12:: scene_obj_struct wSceneObj12 ; d1e0
-wSceneObj13:: scene_obj_struct wSceneObj13 ; d1e8
-wSceneObj14:: scene_obj_struct wSceneObj14 ; d1f0
-wSceneObj15:: scene_obj_struct wSceneObj15 ; d1f8
+wSceneObj1::  scene_obj_struct wSceneObj1 
+wSceneObj2::  scene_obj_struct wSceneObj2 
+wSceneObj3::  scene_obj_struct wSceneObj3 
+wSceneObj4::  scene_obj_struct wSceneObj4 
+wSceneObj5::  scene_obj_struct wSceneObj5 
+wSceneObj6::  scene_obj_struct wSceneObj6 
+wSceneObj7::  scene_obj_struct wSceneObj7 
+wSceneObj8::  scene_obj_struct wSceneObj8 
+wSceneObj9::  scene_obj_struct wSceneObj9 
+wSceneObj10:: scene_obj_struct wSceneObj10
+wSceneObj11:: scene_obj_struct wSceneObj11
+wSceneObj12:: scene_obj_struct wSceneObj12
+wSceneObj13:: scene_obj_struct wSceneObj13
+wSceneObj14:: scene_obj_struct wSceneObj14
+wSceneObj15:: scene_obj_struct wSceneObj15
 wSceneObjsEnd::
 
-wAttrmap:: ; d200
+wAttrmap::
 	ds $300
 
-wTilemap:: ; d500
+wTilemap::
 	ds $300
 
 UNION
 
-w2d800:: ; d800
+w2d800::
 wLCDCFlagsToFlip::
 	db
 
-w2d801:: ; d801
+w2d801::
 	db
 
 	ds $7e
 
-w2d880:: ; d880
+w2d880::
 	ds $9
 
-w2d889:: ; d889
+w2d889::
 	ds $2
 
-w2d88b:: ; d88b
+w2d88b::
 	db
 
 	ds $2
 
-w2d88e:: ; d88e
+w2d88e::
 	db
 
-w2d88f:: ; d88f
+w2d88f::
 	db
 
-w2d890:: ; d890
+w2d890::
 	db
 
-w2d891:: ; d891
+w2d891::
 	db
 
-w2d892:: ; d892
+w2d892::
 	db
 
-w2d893:: ; d893
+w2d893::
 	db
 
-w2d894:: ; d894
+w2d894::
 	db
 
 	db
 
-w2d896:: ; d896
+w2d896::
 	db
 
-w2d897:: ; d897
+w2d897::
 	db
 
 	ds $8
 
-w2d8a0:: ; d8a0
+w2d8a0::
 	db
 
-w2d8a1:: ; d8a1
+w2d8a1::
 	db
 
 UNION
 
 wTempleMusicBoxes::
-wTempleMusicBox1::  temple_music_box_struct wTempleMusicBox1  ; d8a2
-wTempleMusicBox2::  temple_music_box_struct wTempleMusicBox2  ; d8a4
-wTempleMusicBox3::  temple_music_box_struct wTempleMusicBox3  ; d8a6
-wTempleMusicBox4::  temple_music_box_struct wTempleMusicBox4  ; d8a8
-wTempleMusicBox5::  temple_music_box_struct wTempleMusicBox5  ; d8aa
+wTempleMusicBox1::  temple_music_box_struct wTempleMusicBox1 
+wTempleMusicBox2::  temple_music_box_struct wTempleMusicBox2 
+wTempleMusicBox3::  temple_music_box_struct wTempleMusicBox3 
+wTempleMusicBox4::  temple_music_box_struct wTempleMusicBox4 
+wTempleMusicBox5::  temple_music_box_struct wTempleMusicBox5 
 
 	ds $4
 
 wTempleRocks::
-wTempleRock1::  temple_rock_struct wTempleRock1  ; d8b0
-wTempleRock2::  temple_rock_struct wTempleRock2  ; d8b4
-wTempleRock3::  temple_rock_struct wTempleRock3  ; d8b8
-wTempleRock4::  temple_rock_struct wTempleRock4  ; d8bc
-wTempleRock5::  temple_rock_struct wTempleRock5  ; d8c0
-wTempleRock6::  temple_rock_struct wTempleRock6  ; d8c4
-wTempleRock7::  temple_rock_struct wTempleRock7  ; d8c8
-wTempleRock8::  temple_rock_struct wTempleRock8  ; d8cc
-wTempleRock9::  temple_rock_struct wTempleRock9  ; d8d0
-wTempleRock10:: temple_rock_struct wTempleRock10 ; d8d4
+wTempleRock1::  temple_rock_struct wTempleRock1 
+wTempleRock2::  temple_rock_struct wTempleRock2 
+wTempleRock3::  temple_rock_struct wTempleRock3 
+wTempleRock4::  temple_rock_struct wTempleRock4 
+wTempleRock5::  temple_rock_struct wTempleRock5 
+wTempleRock6::  temple_rock_struct wTempleRock6 
+wTempleRock7::  temple_rock_struct wTempleRock7 
+wTempleRock8::  temple_rock_struct wTempleRock8 
+wTempleRock9::  temple_rock_struct wTempleRock9 
+wTempleRock10:: temple_rock_struct wTempleRock10
 
 NEXTU
 
 wPlaneParts::
-wPlanePart1::  plane_part_struct wPlanePart1  ; d8a2
-wPlanePart2::  plane_part_struct wPlanePart2  ; d8a4
-wPlanePart3::  plane_part_struct wPlanePart3  ; d8a6
-wPlanePart4::  plane_part_struct wPlanePart4  ; d8a8
+wPlanePart1::  plane_part_struct wPlanePart1 
+wPlanePart2::  plane_part_struct wPlanePart2 
+wPlanePart3::  plane_part_struct wPlanePart3 
+wPlanePart4::  plane_part_struct wPlanePart4 
 
 	ds $6
 
-w2d8b0:: ; d8b0
+w2d8b0::
 	db
 
-w2d8b1:: ; d8b1
+w2d8b1::
 	db
 
 ENDU
 
 	ds $2
 
-w2d8da:: ; d8da
+w2d8da::
 	db
 
 	db
 
-w2d8dc:: ; d8dc
+w2d8dc::
 	db
 
 	ds $123
 
 ; TEMPLE_SCENE_* constant
-wTempleScene:: ; da00
+wTempleScene::
 	db
 
 	db
 
-wTempleMusicIsPlaying::    db ; da02
-wTempleMusicDelayCounter:: db ; da03
+wTempleMusicIsPlaying::    db
+wTempleMusicDelayCounter:: db
 
-w2da04:: ; da04
+w2da04::
 	db
 
-wTempleSceneCounter:: ; da05
+wTempleSceneCounter::
 	db
 
 	ds $7a
 
 wTextPrintInfo::
-wTextDelayCounter::  db ; da80
-wCurTextLine::       db ; da81
-wCurTextBufferLine:: db ; da82
-wCurTextLinePos::    db ; da83
-wCurTextBufferPage:: db ; da84
-wBGMapToPrintText::  db ; da85
+wTextDelayCounter::  db
+wCurTextLine::       db
+wCurTextBufferLine:: db
+wCurTextLinePos::    db
+wCurTextBufferPage:: db
+wBGMapToPrintText::  db
 
 	ds $2
 
 ; pending character to write to BGMap
-wPendingCharDest:: dw ; da88
-wPendingCharTile:: db ; da8a
-wPendingCharAttr:: db ; da8b
+wPendingCharDest:: dw
+wPendingCharTile:: db
+wPendingCharAttr:: db
 
 	ds $4
 
@@ -2160,64 +2160,64 @@ wTextPrintInfoEnd::
 
 ; true if the next objective is to
 ; go to The Temple to fight A Hidden Figure
-wIsNextObjectiveTheTemple:: ; dab0
+wIsNextObjectiveTheTemple::
 	db
 
 	ds $4f
 
 wText::
-wTextLine1:: ds TEXT_LINE_LENGTH ; db00
-wTextLine2:: ds TEXT_LINE_LENGTH ; db10
-wTextLine3:: ds TEXT_LINE_LENGTH ; db20
-wTextLine4:: ds TEXT_LINE_LENGTH ; db30
+wTextLine1:: ds TEXT_LINE_LENGTH
+wTextLine2:: ds TEXT_LINE_LENGTH
+wTextLine3:: ds TEXT_LINE_LENGTH
+wTextLine4:: ds TEXT_LINE_LENGTH
 
 	ds $40
 
-wClearedTextBuffer:: ; db80
+wClearedTextBuffer::
 	ds 8 * TEXT_LINE_LENGTH
 
 wTextBuffer::
-wTileBuffer:: ; dc00
+wTileBuffer::
 	ds $20 tiles
 
 	ds $100
 
-w2df00:: ; df00
+w2df00::
 	ds $fc
 
-w2dffc:: ; dffc
+w2dffc::
 	db
 
-w2dffd:: ; dffd
+w2dffd::
 	db
 
-w2dffe:: ; dffe
+w2dffe::
 	db
 
-w2dfff:: ; dfff
+w2dfff::
 	db
 
 NEXTU
 
 	ds 2
 
-wColourFadeDiff::           db ; d802
-wColourFadeAccumulator::    db ; d803
+wColourFadeDiff::           db
+wColourFadeAccumulator::    db
 	ds 2
-wDayNightTransistionSteps:: db ; d806
+wDayNightTransistionSteps:: db
 
-w2d807:: ; d807
+w2d807::
 	db
 
-wColourFadeStep:: ; d808
+wColourFadeStep::
 	db
 
-w2d809:: ; d809
+w2d809::
 	db
 
 	ds $6
 
-wFadePals:: ; d810
+wFadePals::
 wPalFade1:: pal_fade_struct wPalFade1
 wPalFade2:: pal_fade_struct wPalFade2
 wPalFade3:: pal_fade_struct wPalFade3
@@ -2229,17 +2229,17 @@ wPalFade8:: pal_fade_struct wPalFade8
 
 NEXTU
 
-wCollectionRow::              db ; d800
-wCollectionCol::              db ; d801
-wCollectionLinkState::        db ; d802
-wCollectionLinkStateCounter:: db ; d803
-wCollectionScrollMode::       db ; d804
+wCollectionRow::              db
+wCollectionCol::              db
+wCollectionLinkState::        db
+wCollectionLinkStateCounter:: db
+wCollectionScrollMode::       db
 
 	ds $b
 
 ; set of treasures that are
 ; linked together
-wCollectionLinkedCells:: ; d810
+wCollectionLinkedCells::
 	ds $7
 
 ENDU
@@ -2251,52 +2251,52 @@ SECTION "Audio RAM", WRAMX
 ; bit 5: ???
 ; bit 6: whether to invoke audio callback function
 ; bit 7: ???
-wAudioEngineFlags:: ; d000
+wAudioEngineFlags::
 	db
 
-wAudioBankBackup:: ; d001
+wAudioBankBackup::
 	db
 
 	db
 
-wAudioBankCallback:: ; d003
+wAudioBankCallback::
 	dw
 
-wSFXTempo:: ; d005
+wSFXTempo::
 	db
 
-w3d006:: ; d006
+w3d006::
 	db
 
-w3d007:: ; d007
+w3d007::
 	db
 
-w3d008:: ; d008
+w3d008::
 	ds $2
 
-wMusicTempo:: ; d00a
+wMusicTempo::
 	db
 
-w3d00b:: ; d00b
+w3d00b::
 	db
 
-w3d00c:: ; d00c
+w3d00c::
 	db
 
-w3d00d:: ; d00d
+w3d00d::
 	ds $2
 
-wNumAudioChannels:: ; d00f
+wNumAudioChannels::
 	db
 
 ; points to one of channel_struct
-wCurChannelPtr:: ; d010
+wCurChannelPtr::
 	dw
 
-wNumTracks:: ; d012
+wNumTracks::
 	db
 
-wCurTrackPtr:: ; d013
+wCurTrackPtr::
 	dw
 
 ; low byte of a sound register:
@@ -2304,40 +2304,40 @@ wCurTrackPtr:: ; d013
 ; sound2 = rAUD2ENV
 ; sound3 = rAUD3LEVEL
 ; sound4 = rAUD4ENV
-wCurSoundRegister:: ; d015
+wCurSoundRegister::
 	db
 
 	db
 
-wAudioCmdPtr:: ; d017
+wAudioCmdPtr::
 	dw
 
 ; channel Flags1
-wCurChannelFlags:: ; d019
+wCurChannelFlags::
 	db
 
-w3d01a:: ; d01a
+w3d01a::
 	db
 
-wLoadedMusic:: ; d01b
+wLoadedMusic::
 	ds $2
 
-wCurWaveSample:: ; d01d
+wCurWaveSample::
 	db
 
-wVibratoValue:: ; d01e
+wVibratoValue::
 	db
 
-wAudioCmdArg:: ; d01f
+wAudioCmdArg::
 	db
 
-w3d020:: ; d020
+w3d020::
 	db
 
-w3d021:: ; d021
+w3d021::
 	db
 
-w3d022:: ; d022
+w3d022::
 	db
 
 	db
@@ -2346,184 +2346,184 @@ w3d022:: ; d022
 ; bit 0: MusicChannel1
 ; bit 1: MusicChannel2
 ; ...
-wActiveChannels:: ; d024
+wActiveChannels::
 	db
 
-w3d025:: ; d025
+w3d025::
 	db
 
-wSoundBank:: ; d026
+wSoundBank::
 	db
 
 	ds $11
 
-wCurSoundID:: ; d038
+wCurSoundID::
 	ds $2
 
-w3d03a:: ; d03a
+w3d03a::
 	db
 
-w3d03b:: ; d03b
+w3d03b::
 	db
 
-wNumChannels:: ; d03c
+wNumChannels::
 	db
 
 	db
 
-wSoundPriority:: ; d03e
+wSoundPriority::
 	db
 
-wStartChannel:: ; d03f
+wStartChannel::
 	db
 
 wChannels::
-wChannel1:: channel_struct wChannel1 ; d040
-wChannel2:: channel_struct wChannel2 ; d07c
-wChannel3:: channel_struct wChannel3 ; d0b8
-wChannel4:: channel_struct wChannel4 ; d0f4
+wChannel1:: channel_struct wChannel1
+wChannel2:: channel_struct wChannel2
+wChannel3:: channel_struct wChannel3
+wChannel4:: channel_struct wChannel4
 
 wMusicChannels::
-wChannel5:: channel_struct wChannel5 ; d130
-wChannel6:: channel_struct wChannel6 ; d16c
-wChannel7:: channel_struct wChannel7 ; d1a8
-wChannel8:: channel_struct wChannel8 ; d1e4
+wChannel5:: channel_struct wChannel5
+wChannel6:: channel_struct wChannel6
+wChannel7:: channel_struct wChannel7
+wChannel8:: channel_struct wChannel8
 
 wTracks::
-wTrack1:: track_struct wTrack1 ; d220
-wTrack2:: track_struct wTrack2 ; d238
-wTrack3:: track_struct wTrack3 ; d250
-wTrack4:: track_struct wTrack4 ; d268
+wTrack1:: track_struct wTrack1
+wTrack2:: track_struct wTrack2
+wTrack3:: track_struct wTrack3
+wTrack4:: track_struct wTrack4
 
 SECTION "GFX RAM", WRAMX
 
-w3d280:: ; d280
+w3d280::
 	ds 16 palettes
 
-w3d300:: ; d300
+w3d300::
 	ds $4 * $80
 
-w3d500:: ; d500
+w3d500::
 	db
 
-w3d501:: ; d501
+w3d501::
 	db
 
-wDPadRepeatCounter:: ; d502
+wDPadRepeatCounter::
 	db
 
-w3d503:: ; d503
+w3d503::
 	db
 
-w3d504:: ; d504
+w3d504::
 	ds $2
 
-w3d506:: ; d506
+w3d506::
 	db
 
-w3d507:: ; d507
+w3d507::
 	ds $2
 
 ; if TRUE, Action Help is in
 ; the initial blacked out state
-wActionHelpBlackedOut:: ; d509
+wActionHelpBlackedOut::
 	db
 
 ; counts up for each frame in Action Help
-wActionHelpCounter:: ; d50a
+wActionHelpCounter::
 	db
 
-wActionHelpPowerUp:: ; d50b
+wActionHelpPowerUp::
 	db
 
-wActionHelpState:: ; d50c
+wActionHelpState::
 	db
 
-w3d50d:: ; d50d
+w3d50d::
 	db
 
 ; if TRUE, don't update the animations
 ; in the Action Help
-wActionHelpFrozen:: ; d50e
+wActionHelpFrozen::
 	db
 
-wTempAnimatedTilesFrameDuration:: ; d50f
+wTempAnimatedTilesFrameDuration::
 	db
 
-wTempAnimatedTilesGroup:: ; d510
+wTempAnimatedTilesGroup::
 	db
 
-w3d511:: ; d511
+w3d511::
 	ds $2
 
-wStartMenuSelection:: ; d513
-wPauseMenuSelection:: ; d513
+wStartMenuSelection::
+wPauseMenuSelection::
 	db
 
-wObjAnimWasReset:: ; d514
+wObjAnimWasReset::
 	db
 
 UNION
-wActionHelpWario:: menu_obj_ext_struct wActionHelpWario ; d515
+wActionHelpWario:: menu_obj_ext_struct wActionHelpWario
 NEXTU
-wPlaneWario:: menu_obj_ext_struct wPlaneWario ; d515
+wPlaneWario:: menu_obj_ext_struct wPlaneWario
 NEXTU
-wClearScreenWario:: menu_obj_ext_struct wClearScreenWario ; d515
+wClearScreenWario:: menu_obj_ext_struct wClearScreenWario
 NEXTU
-wGameOverWario:: menu_obj_ext_struct wGameOverWario ; d515
+wGameOverWario:: menu_obj_ext_struct wGameOverWario
 NEXTU
-wCreditsMusicBox:: menu_obj_ext_struct wCreditsMusicBox ; d515
+wCreditsMusicBox:: menu_obj_ext_struct wCreditsMusicBox
 ENDU
 
-wSFXTimer:: ; d522
+wSFXTimer::
 	db
 
-wMenuObj1:: menu_obj_struct wMenuObj1 ; d523
-wMenuObj2:: menu_obj_struct wMenuObj2 ; d52b
-wMenuObj3:: menu_obj_struct wMenuObj3 ; d533
+wMenuObj1:: menu_obj_struct wMenuObj1
+wMenuObj2:: menu_obj_struct wMenuObj2
+wMenuObj3:: menu_obj_struct wMenuObj3
 
-wMenuObj4:: menu_obj_struct wMenuObj4 ; d53b
-wMenuObj4OAMPtr::               dw ; d543
-wMenuObj4FramesetBank::         db ; d545
-wMenuObj4AnimationEnded::       db ; d546
+wMenuObj4:: menu_obj_struct wMenuObj4
+wMenuObj4OAMPtr::               dw
+wMenuObj4FramesetBank::         db
+wMenuObj4AnimationEnded::       db
 
-wMenuObj5:: menu_obj_struct wMenuObj5 ; d547
-wMenuObj5OAMPtr::               dw ; d54f
-wMenuObj5FramesetBank::         db ; d551
-wMenuObj5AnimationEnded::       db ; d552
+wMenuObj5:: menu_obj_struct wMenuObj5
+wMenuObj5OAMPtr::               dw
+wMenuObj5FramesetBank::         db
+wMenuObj5AnimationEnded::       db
 
-wMenuObj6:: menu_obj_struct wMenuObj6 ; d553
-wMenuObj6OAMPtr::               dw ; d55b
-wMenuObj6FramesetBank::         db ; d55d
+wMenuObj6:: menu_obj_struct wMenuObj6
+wMenuObj6OAMPtr::               dw
+wMenuObj6FramesetBank::         db
 
-wMenuObj7:: menu_obj_struct wMenuObj7 ; d55e
-wMenuObj7OAMPtr::               dw ; d566
-wMenuObj7FramesetBank::         db ; d568
-wMenuObj7AnimationEnded::       db ; d569
+wMenuObj7:: menu_obj_struct wMenuObj7
+wMenuObj7OAMPtr::               dw
+wMenuObj7FramesetBank::         db
+wMenuObj7AnimationEnded::       db
 
-wMenuObj8::  menu_obj_struct wMenuObj8  ; d56a
-wMenuObj9::  menu_obj_struct wMenuObj9  ; d572
-wMenuObj10:: menu_obj_struct wMenuObj10 ; d57a
-wMenuObj11:: menu_obj_struct wMenuObj11 ; d582
+wMenuObj8::  menu_obj_struct wMenuObj8 
+wMenuObj9::  menu_obj_struct wMenuObj9 
+wMenuObj10:: menu_obj_struct wMenuObj10
+wMenuObj11:: menu_obj_struct wMenuObj11
 
 SECTION "WRAM4", WRAMX
 
-w4d000:: ; d000
+w4d000::
 	ds $1000
 
 SECTION "WRAM5", WRAMX
 
-w5d000:: ; d000
+w5d000::
 	ds $1000
 
 SECTION "WRAM6", WRAMX
 
-w6d000:: ; d000
+w6d000::
 	ds $1000
 
 SECTION "WRAM7", WRAMX
 
-w7d000:: ; d000
+w7d000::
 	ds $1000
 
 INCLUDE "sram.asm"
