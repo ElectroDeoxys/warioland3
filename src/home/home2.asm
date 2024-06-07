@@ -48,12 +48,12 @@ LoadRoom::
 	ld a, $70
 	ld [wca5e], a
 	ld a, $58
-	ld [wca5f], a
+	ld [wCamRightSpacing], a
 	sub $58
 	cpl
 	inc a
 	add $58
-	ld [wca60], a ; a will always be $58 here
+	ld [wCamLeftSpacing], a ; a will always be $58 here
 
 	ld a, [wROMBank]
 	push af

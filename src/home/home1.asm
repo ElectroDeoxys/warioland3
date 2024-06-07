@@ -1032,7 +1032,7 @@ StartDownwardsFloorTransition::
 	ld a, TRUE
 	ld [wIsFloorTransition], a
 	xor a
-	ld [wcac8], a
+	ld [wCameraRoomYScrollLimit], a
 	ret
 
 ; c = new floor
@@ -1047,7 +1047,7 @@ StartUpwardsFloorTransition::
 	ld a, $80
 	ld [wFloorTransitionTimer], a
 	xor a
-	ld [wcac8], a
+	ld [wCameraRoomYScrollLimit], a
 	ret
 
 TriggerRoomTransition::

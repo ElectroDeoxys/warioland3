@@ -106,7 +106,11 @@ wCompressedLevelBlockMapPtr::
 wc0b3::
 	dw
 
-wc0b5::
+; whether camera is on the edge of the room horizontally
+;  0 = not on the edge
+;  1 = on left edge
+; -1 = on right edge
+wCameraRoomXScrollLimit::
 	db
 
 wRoomLowerYLimit:: db
@@ -464,10 +468,10 @@ wTempLevelRoomID::
 
 ; always $70 or wWarioYPos
 wca5e:: db
-; always $58
-wca5f:: db
-; always $58
-wca60:: db
+; spacing between Wario and left/right
+; edge of the screen, always $58
+wCamRightSpacing:: db
+wCamLeftSpacing:: db
 
 wWarioPos::
 wWarioYPos:: dw
@@ -710,7 +714,11 @@ wBossBattleMusic::
 wCameraSCY:: dw
 wCameraSCX:: dw
 
-wcac8::
+; whether camera is on the edge of the room vertically
+;  0 = not on the edge
+;  1 = on upper edge
+; -1 = on lower edge
+wCameraRoomYScrollLimit::
 	db
 
 wIsOnSteppableObject::

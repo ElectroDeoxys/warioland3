@@ -86,8 +86,10 @@ StartRoom_FromTransition:
 	call ClearVirtualOAM
 	call ClearParticles
 	call SetWarioPositionToSpawn
-	call Func_8ad9
-	call Func_8c12
+
+	call SetInitialCameraScroll
+	call ApplyInitialCameraScroll
+
 	ld a, [wRoomTransitionParam]
 	bit ROOMTRANSITIONF_2_F, a
 	jr z, .asm_854a
@@ -346,7 +348,7 @@ StartRoom_FromLevelStart:
 	call ClearTransformationValues
 	; assumes ClearTransformationValues returns with a = 0
 	ld [wInvisibleFrame], a
-	ld [wcac8], a
+	ld [wCameraRoomYScrollLimit], a
 	ld [wIsOnSteppableObject], a
 	ld [wGroundShakeCounter], a
 	ld [wSCYShake], a
@@ -431,8 +433,9 @@ StartRoom_FromLevelStart:
 	ldh [hCallFuncBank], a
 	hcall CopyHLToDE_Short
 
-	call Func_8ad9
-	call Func_8c12
+	call SetInitialCameraScroll
+	call ApplyInitialCameraScroll
+
 	call VBlank_Level
 	call Func_b681
 
@@ -739,9 +742,11 @@ SetWarioPositionToSpawn:
 .skip_floor_update
 	ret
 
-Func_8ad9:
+; sets the initial camera scroll values
+; when entering a new room or level starts
+SetInitialCameraScroll:
 	xor a
-	ld [wc0b5], a
+	ld [wCameraRoomXScrollLimit], a
 	ld a, [wCameraConfigFlags]
 	and CAM_SCROLLING_MASK
 	cp CAM_XSCROLL2 | CAM_TRANSITIONS
@@ -754,55 +759,61 @@ Func_8ad9:
 	ld [wCameraSCX + 0], a
 	ld a, $30
 	ld [wCameraSCX + 1], a
-	jr .asm_8b69
+	jr .check_if_saved_level
 
 .else
 	ld a, [wDirection]
 	and a
 	jr nz, .dir_right
 ; dir_left
-	ld a, [wca60]
+	ld a, [wCamLeftSpacing]
 	sub 8
-	ld b, a
-	jr .asm_8b0b
+	ld b, a ; wCamLeftSpacing - 8
+	jr .got_x_spacing
 .dir_right
-	ld a, [wca5f]
+	ld a, [wCamRightSpacing]
 	sub 8
-	ld b, a
-.asm_8b0b
+	ld b, a ; wCamRightSpacing - 8
+.got_x_spacing
+	; subtract spacing from Wario's X position
+	; and apply it to the camera X scroll
 	ld a, [wWarioXPos + 1]
 	sub b
 	ld [wCameraSCX + 1], a
 	ld l, a
 	ld a, [wWarioXPos + 0]
-	sbc $00
+	sbc 0
 	ld [wCameraSCX + 0], a
 	ld h, a
+
+	; next limit the camera to the left and right sides
+
 	ld a, [wCameraConfigFlags]
 	bit CAM_BORDER_LEFT_F, a
-	jr z, .asm_8b27
+	jr z, .no_left_border
 	ld de, -$20
 	add hl, de
-.asm_8b27
+.no_left_border
 	ld a, [wRoomLeftXLimit]
 	ld b, a
 	ld a, h
 	bit 7, a
-	jr nz, .asm_8b39
+	jr nz, .cap_left_side ; is less than 0, cap it
 	cp b
-	jr c, .asm_8b39
-	jr nz, .asm_8b44
-	; h > b
+	jr c, .cap_left_side ; over room limit, cap it
+	jr nz, .check_right_limit
+	; h == b, test low byte
 	ld a, l
 	and a
-	jr nz, .asm_8b44
-.asm_8b39
+	jr nz, .check_right_limit
+.cap_left_side
 	ld a, b
 	ld [wCameraSCX + 0], a
-	ld a, $01
-	ld [wc0b5], a
-	jr .asm_8b69
-.asm_8b44
+	ld a, 1
+	ld [wCameraRoomXScrollLimit], a
+	jr .check_if_saved_level
+
+.check_right_limit
 	ld hl, wCameraSCX
 	ld a, [hli]
 	ld l, [hl]
@@ -810,67 +821,70 @@ Func_8ad9:
 	ld de, HIGH(STARTOF(SRAM))
 	ld a, [wCameraConfigFlags]
 	bit CAM_BORDER_RIGHT_F, a
-	jr z, .asm_8b56
-	ld e, HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
-.asm_8b56
+	jr z, .no_right_border
+	ld e, $c0
+.no_right_border
 	add hl, de
 	ld a, [wRoomRightXLimit]
 	ld b, a
 	ld a, h
 	cp b
-	jr c, .asm_8b69
+	jr c, .check_if_saved_level
 	ld a, b
 	dec a
 	ld [wCameraSCX + 0], a
-	ld a, $ff
-	ld [wc0b5], a
+	ld a, -1
+	ld [wCameraRoomXScrollLimit], a
 
-.asm_8b69
+.check_if_saved_level
 	ld a, [wceef]
 	and %00111100
-	jr z, .asm_8b78
+	jr z, .handle_cam_y_scroll
 	ld a, [wCameraConfigFlags]
 	and CAM_SCROLLING_MASK
 	cp CAM_TRANSITIONS
-	ret nc
+	ret nc ; no need to handle Y scroll
 
-.asm_8b78
+.handle_cam_y_scroll
 	xor a
-	ld [wcac8], a
+	ld [wCameraRoomYScrollLimit], a
+
+	; next limit the camera to the upper and lower sides
 
 	ld a, [wWarioYPos + 1]
 	sub $60
 	ld [wCameraSCY + 1], a
 	ld l, a
 	ld a, [wWarioYPos + 0]
-	sbc $00
+	sbc 0
 	ld [wCameraSCY + 0], a
 	ld h, a
 	ld a, [wCameraConfigFlags]
 	bit CAM_BORDER_UP_F, a
-	jr z, .asm_8b99
+	jr z, .no_up_border
 	ld de, -$20
 	add hl, de
-
-.asm_8b99
+.no_up_border
 	ld a, [wRoomUpperYLimit]
 	ld b, a
 	ld a, h
 	bit 7, a
-	jr nz, .asm_8bab
+	jr nz, .cap_up_side ; is less than 0, cap it
 	cp b
-	jr c, .asm_8bab
-	jr nz, .asm_8bb5
+	jr c, .cap_up_side ; over room limit, cap it
+	jr nz, .check_lower_limit
+	; h == b, test low byte
 	ld a, l
 	and a
-	jr nz, .asm_8bb5
-.asm_8bab
+	jr nz, .check_lower_limit
+.cap_up_side
 	ld a, b
 	ld [wCameraSCY + 0], a
-	ld a, $01
-	ld [wcac8], a
+	ld a, 1
+	ld [wCameraRoomYScrollLimit], a
 	ret
-.asm_8bb5
+
+.check_lower_limit
 	ld hl, wCameraSCY
 	ld a, [hli]
 	ld l, [hl]
@@ -878,26 +892,27 @@ Func_8ad9:
 	ld de, $90
 	ld a, [wCameraConfigFlags]
 	bit CAM_BORDER_DOWN_F, a
-	jr z, .asm_8bc7
+	jr z, .no_down_border
 	ld e, $b0
-.asm_8bc7
+.no_down_border
 	add hl, de
 	ld a, [wRoomLowerYLimit]
 	ld b, a
 	ld a, h
 	cp b
-	jr c, .asm_8bdb
+	jr c, .check_transitions
 	ld a, b
 	dec a
 	ld [wCameraSCY + 0], a
-	ld a, $ff
-	ld [wcac8], a
+	ld a, -1
+	ld [wCameraRoomYScrollLimit], a
 	ret
-.asm_8bdb
+
+.check_transitions
 	ld a, [wCameraConfigFlags]
 	and CAM_SCROLLING_MASK
 	cp CAM_TRANSITIONS
-	ret c
+	ret c ; not CAM_TRANSITIONS
 	ld a, [wWarioYPos + 1]
 	cp $80
 	jr nc, .asm_8c0c
@@ -907,14 +922,14 @@ Func_8ad9:
 	dec a
 	ld [wCameraSCY + 0], a
 	cp b
-	jr c, .asm_8bab
+	jr c, .cap_up_side
 	bit 7, a
 	jr z, .asm_8c06
 
 	xor a
 	ld [wCameraSCY + 0], a
-	ld a, $01
-	ld [wcac8], a
+	ld a, 1
+	ld [wCameraRoomYScrollLimit], a
 	ret
 
 .asm_8c06
@@ -927,16 +942,18 @@ Func_8ad9:
 	ld [wCameraSCY + 1], a
 	ret
 
-Func_8c12:
+; applies the camera scroll set in SetInitialCameraScroll
+; to the actual scroll registers rSCY and rSCX
+ApplyInitialCameraScroll:
 	ld a, [wCameraSCY + 0]
 	ld h, a
 	ld a, [wCameraSCY + 1]
 	ld l, a
-	ld a, [wcac8]
-	cp $01
-	jr z, .asm_8c38
-	cp $ff
-	jr z, .asm_8c54
+	ld a, [wCameraRoomYScrollLimit]
+	cp 1
+	jr z, .on_upper_edge
+	cp -1
+	jr z, .on_lower_edge
 
 	ld a, l
 	ldh [rSCY], a
@@ -944,11 +961,11 @@ Func_8c12:
 	sub $18
 	ld [wBlockYPos + 1], a
 	ld a, h
-	sbc $00
+	sbc 0
 	ld [wBlockYPos + 0], a
-	jr .asm_8c70
+	jr .cam_x_scroll
 
-.asm_8c38
+.on_upper_edge
 	ld a, [wCameraConfigFlags]
 	bit CAM_BORDER_UP_F, a
 	ld a, $00
@@ -961,9 +978,9 @@ Func_8c12:
 	ld [wBlockYPos + 1], a
 	ld a, h
 	ld [wBlockYPos + 0], a
-	jr .asm_8c70
+	jr .cam_x_scroll
 
-.asm_8c54
+.on_lower_edge
 	ld a, [wCameraConfigFlags]
 	bit CAM_BORDER_DOWN_F, a
 	ld a, $68
@@ -977,16 +994,17 @@ Func_8c12:
 	ld [wBlockYPos + 1], a
 	ld a, h
 	ld [wBlockYPos + 0], a
-.asm_8c70
+
+.cam_x_scroll
 	ld a, [wCameraSCX + 0]
 	ld h, a
 	ld a, [wCameraSCX + 1]
 	ld l, a
-	ld a, [wc0b5]
-	cp $01
-	jr z, .asm_8c9f
-	cp $ff
-	jr z, .asm_8cba
+	ld a, [wCameraRoomXScrollLimit]
+	cp 1
+	jr z, .on_left_edge
+	cp -1
+	jr z, .on_right_edge
 	ld a, l
 	ldh [rSCX], a
 	ld [wSCX], a
@@ -1002,7 +1020,7 @@ Func_8c12:
 	ld [wBlockXPos + 0], a
 	ret
 
-.asm_8c9f
+.on_left_edge
 	ld a, [wCameraConfigFlags]
 	bit CAM_BORDER_LEFT_F, a
 	ld a, $00
@@ -1017,7 +1035,7 @@ Func_8c12:
 	ld [wBlockXPos + 0], a
 	ret
 
-.asm_8cba
+.on_right_edge
 	ld a, [wCameraConfigFlags]
 	bit CAM_BORDER_RIGHT_F, a
 	ld a, $60

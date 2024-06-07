@@ -36,10 +36,10 @@ Func_b6d5:
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_b722
-	ld a, [wca60]
+	ld a, [wCamLeftSpacing]
 	jr .asm_b725
 .asm_b722
-	ld a, [wca5f]
+	ld a, [wCamRightSpacing]
 .asm_b725
 	sub $08
 	ld c, a
@@ -109,10 +109,10 @@ Func_b74c:
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_b7a5
-	ld a, [wca60]
+	ld a, [wCamLeftSpacing]
 	jr .asm_b7a8
 .asm_b7a5
-	ld a, [wca5f]
+	ld a, [wCamRightSpacing]
 .asm_b7a8
 	ld c, a
 	ld a, $a8
@@ -439,10 +439,10 @@ Func_b9a6:
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_b9c3
-	ld a, [wca60]
+	ld a, [wCamLeftSpacing]
 	jr .asm_b9c6
 .asm_b9c3
-	ld a, [wca5f]
+	ld a, [wCamRightSpacing]
 .asm_b9c6
 	cp [hl]
 	jr z, .asm_b9cf
@@ -471,10 +471,10 @@ Func_b9a6:
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_b9f4
-	ld a, [wca60]
+	ld a, [wCamLeftSpacing]
 	jr .asm_b9f7
 .asm_b9f4
-	ld a, [wca5f]
+	ld a, [wCamRightSpacing]
 .asm_b9f7
 	cp [hl]
 	jr z, .asm_ba00
@@ -513,10 +513,10 @@ Func_b9a6:
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_ba38
-	ld a, [wca60]
+	ld a, [wCamLeftSpacing]
 	jr .asm_ba3b
 .asm_ba38
-	ld a, [wca5f]
+	ld a, [wCamRightSpacing]
 .asm_ba3b
 	cp [hl]
 	jr c, .asm_b9cf
