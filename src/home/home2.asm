@@ -223,7 +223,7 @@ LoadRoomTileMap::
 	ld l, a
 	ld a, [wc0d0]
 	ld [wTempBank], a
-	ld bc, w3d300
+	ld bc, wRoomBlockAttributes
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	hcall Decompress

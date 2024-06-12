@@ -76,7 +76,7 @@ StartRoom_FromTransition:
 
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("Audio RAM")
+	ld a, BANK("GFX RAM")
 	ldh [rSVBK], a
 	call LoadRoom
 	pop af
@@ -104,7 +104,7 @@ StartRoom_FromTransition:
 	push af
 	ld a, BANK("SRAM1")
 	sramswitch
-	call Func_8cd7
+	call DrawRoom_FromStart
 	pop af
 	sramswitch
 	ld a, [wSRAMBank]
@@ -382,7 +382,7 @@ StartRoom_FromLevelStart:
 
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("Audio RAM")
+	ld a, BANK("GFX RAM")
 	ldh [rSVBK], a
 	call LoadRoom
 	pop af
@@ -394,9 +394,7 @@ StartRoom_FromLevelStart:
 	call SetWarioPositionToSpawn
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
-
 	farcall SetState_Idling
-
 	ld hl, WarioDefaultPal
 	ld a, h
 	ld [wWarioPalsPtr + 0], a
@@ -443,7 +441,7 @@ StartRoom_FromLevelStart:
 	push af
 	ld a, BANK("SRAM1")
 	sramswitch
-	call Func_8cd7
+	call DrawRoom_FromStart
 	pop af
 	sramswitch
 
@@ -529,6 +527,7 @@ StartRoom_FromLevelStart:
 	ret
 
 Func_896f:
+	; load block X pos to hPos
 	ld de, wBlockXPos + 1
 	ld hl, hXPosLo
 	ld a, [de]
@@ -1051,7 +1050,10 @@ ApplyInitialCameraScroll:
 	ld [wBlockXPos + 0], a
 	ret
 
-Func_8cd7:
+; loads all room tiles that are visible in the BGMap
+; this routine goes row by row, collecting all tiles/attributes
+; for all blocks in each row and loads them to VRAM
+DrawRoom_FromStart:
 	; back up coords in wBlockYPos to wBackupBlockPos
 	ld hl, wBlockPos
 	ld de, wBackupBlockPos
@@ -1070,7 +1072,7 @@ Func_8cd7:
 	ld a, BG_MAP_WIDTH
 	ld [wc0a2], a
 .loop_row
-	call .Func_8d69
+	call .QueueRowTilesAndAttributes
 
 	ld a, [wBGPtr + 0]
 	ld d, a
@@ -1150,7 +1152,7 @@ Func_8cd7:
 	ld [de], a
 	ret
 
-.Func_8d69:
+.QueueRowTilesAndAttributes:
 	call GetBlockBGPtr
 	ld a, [wBGMapAddressQueueSize]
 	ld b, a
@@ -1186,26 +1188,27 @@ Func_8cd7:
 	sramswitch
 	ld a, [wBlockXPos + 1]
 	and $08
-	jr z, .asm_8dd4
+	jr z, .starting_even_column
 
+; starting from odd column
 	push hl
-	farcall Func_21f51
+	farcall QueueBlockTilesAlongRow_OddColumn
 	pop hl
 	ld a, [wBlockPtrBank]
 	sramswitch
-	farcall Func_22012
-	jr .asm_8dfd
+	farcall QueueBlockAttributesAlongRow_OddColumn
+	jr .done_queuing
 
-.asm_8dd4
+.starting_even_column
 	push hl
-	farcall Func_220fc
+	farcall QueueBlockTilesAlongRow_EvenColumn
 	pop hl
 	ld a, [wBlockPtrBank]
 	sramswitch
-	farcall Func_221bb
+	farcall QueueBlockAttributesAlongRow_EvenColumn
 
-.asm_8dfd
+.done_queuing
 	ld a, [wBGMapTileQueueSize]
-	add $20
+	add BG_MAP_WIDTH
 	ld [wBGMapTileQueueSize], a
 	ret

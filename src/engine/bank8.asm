@@ -1,4 +1,8 @@
-Func_21f51:
+; queues up all the tiles related to the
+; row in wBlockYPos in wBGMapTileVRAM0Queue
+; input:
+; - hl = SRAM pointer to start of row
+QueueBlockTilesAlongRow_OddColumn:
 	ld a, [wBGMapTileQueueSize]
 	ld b, a
 	ld a, HIGH(wBGMapTileVRAM0Queue)
@@ -8,7 +12,7 @@ Func_21f51:
 	ld [wcce7 + 1], a
 	ld a, [wBlockYPos + 1]
 	and $08
-	jr nz, .asm_21fa3
+	jr nz, .odd_row
 	ld b, $10
 .asm_21f69
 	ld a, [hl]
@@ -16,7 +20,7 @@ Func_21f51:
 	ld e, a
 	sla e
 	sla e
-	rl d
+	rl d ; *4
 	push hl
 	ld hl, wRoomBlockTiles
 	add hl, de
@@ -25,7 +29,7 @@ Func_21f51:
 	ld d, a
 	ld a, [wcce7 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -47,13 +51,13 @@ Func_21f51:
 	jr nz, .asm_21f69
 	ret
 
-.asm_21fa3
+.odd_row
 	ld a, [hl]
 	ld d, $00
 	ld e, a
 	sla e
 	sla e
-	rl d
+	rl d ; *4
 	push hl
 	ld hl, wRoomBlockTiles
 	add hl, de
@@ -85,7 +89,7 @@ Func_21f51:
 	ld e, a
 	sla e
 	sla e
-	rl d
+	rl d ; *4
 	push hl
 	ld hl, wRoomBlockTiles
 	add hl, de
@@ -94,7 +98,7 @@ Func_21f51:
 	ld d, a
 	ld a, [wcce7 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -116,10 +120,14 @@ Func_21f51:
 	jr nz, .asm_21fd8
 	ret
 
-Func_22012:
+; queues up all the attributes related to the
+; row in wBlockYPos in wBGMapTileVRAM1Queue
+; input:
+; - hl = SRAM pointer to start of row
+QueueBlockAttributesAlongRow_OddColumn:
 	ldh a, [rSVBK]
 	push af
-	ld a, $03
+	ld a, BANK("GFX RAM")
 	ldh [rSVBK], a
 	ld a, [wBGMapTileQueueSize]
 	ld b, a
@@ -130,7 +138,7 @@ Func_22012:
 	ld [wc0b3 + 1], a
 	ld a, [wBlockYPos + 1]
 	and $08
-	jp nz, Func_2208a
+	jp nz, .asm_2208a
 	ld b, $10
 .asm_22032
 	ld a, [hl]
@@ -138,16 +146,16 @@ Func_22012:
 	ld e, a
 	sla e
 	sla e
-	rl d
+	rl d ; *4
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	inc l
 	ld a, [wc0b3 + 0]
 	ld d, a
 	ld a, [wc0b3 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -172,9 +180,9 @@ Func_22012:
 	ld e, a
 	sla e
 	sla e
-	rl d
+	rl d ; *4
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	inc l
 	ld a, [wc0b3 + 0]
@@ -188,13 +196,13 @@ Func_22012:
 	ldh [rSVBK], a
 	ret
 
-Func_2208a:
+.asm_2208a
 	ld a, [hl]
 	ld d, $00
 	ld e, a
 	sla e
 	sla e
-	rl d
+	rl d ; *4
 	push hl
 	ld hl, wBGMapTileVRAM1Queue
 	add hl, de
@@ -227,16 +235,16 @@ Func_2208a:
 	ld e, a
 	sla e
 	sla e
-	rl d
+	rl d ; *4
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	inc l
 	ld a, [wc0b3 + 0]
 	ld d, a
 	ld a, [wc0b3 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -260,7 +268,11 @@ Func_2208a:
 	ldh [rSVBK], a
 	ret
 
-Func_220fc:
+; queues up all the tiles related to the
+; row in wBlockYPos in wBGMapTileVRAM0Queue
+; input:
+; - hl = SRAM pointer to start of row
+QueueBlockTilesAlongRow_EvenColumn:
 	ld a, [wBGMapTileQueueSize]
 	ld b, a
 	ld a, HIGH(wBGMapTileVRAM0Queue)
@@ -270,7 +282,7 @@ Func_220fc:
 	ld [wcce7 + 1], a
 	ld a, [wBlockYPos + 1]
 	and $08
-	jp nz, Func_2214e
+	jp nz, .odd_row
 	ld b, $10
 .asm_22115
 	ld a, [hl]
@@ -278,7 +290,7 @@ Func_220fc:
 	ld e, a
 	sla e
 	sla e
-	rl d
+	rl d ; *4
 	push hl
 	ld hl, wRoomBlockTiles
 	add hl, de
@@ -286,7 +298,7 @@ Func_220fc:
 	ld d, a
 	ld a, [wcce7 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -308,13 +320,13 @@ Func_220fc:
 	jr nz, .asm_22115
 	ret
 
-Func_2214e:
+.odd_row
 	ld a, [hl]
 	ld d, $00
 	ld e, a
 	sla e
 	sla e
-	rl d
+	rl d ; *4
 	push hl
 	ld hl, wRoomBlockTiles
 	add hl, de
@@ -345,7 +357,7 @@ Func_2214e:
 	ld e, a
 	sla e
 	sla e
-	rl d
+	rl d ; *4
 	push hl
 	ld hl, wRoomBlockTiles
 	add hl, de
@@ -353,7 +365,7 @@ Func_2214e:
 	ld d, a
 	ld a, [wcce7 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wcce7 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -375,10 +387,14 @@ Func_2214e:
 	jr nz, .asm_22182
 	ret
 
-Func_221bb:
+; queues up all the attributes related to the
+; row in wBlockYPos in wBGMapTileVRAM1Queue
+; input:
+; - hl = SRAM pointer to start of row
+QueueBlockAttributesAlongRow_EvenColumn:
 	ldh a, [rSVBK]
 	push af
-	ld a, $03
+	ld a, BANK("GFX RAM")
 	ldh [rSVBK], a
 	ld a, [wBGMapTileQueueSize]
 	ld b, a
@@ -389,7 +405,7 @@ Func_221bb:
 	ld [wc0b3 + 1], a
 	ld a, [wBlockYPos + 1]
 	and $08
-	jp nz, Func_22217
+	jp nz, .asm_22217
 	ld b, $10
 .asm_221db
 	ld a, [hl]
@@ -397,15 +413,15 @@ Func_221bb:
 	ld e, a
 	sla e
 	sla e
-	rl d
+	rl d ; *4
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	ld a, [wc0b3 + 0]
 	ld d, a
 	ld a, [wc0b3 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a
@@ -429,15 +445,15 @@ Func_221bb:
 	ldh [rSVBK], a
 	ret
 
-Func_22217:
+.asm_22217
 	ld a, [hl]
 	ld d, $00
 	ld e, a
 	sla e
 	sla e
-	rl d
+	rl d ; *4
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	inc l
 	inc l
@@ -466,15 +482,15 @@ Func_22217:
 	ld e, a
 	sla e
 	sla e
-	rl d
+	rl d ; *4
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	ld a, [wc0b3 + 0]
 	ld d, a
 	ld a, [wc0b3 + 1]
 	ld e, a
-	add $02
+	add $2
 	ld [wc0b3 + 1], a
 	ld a, [hli]
 	ld [de], a

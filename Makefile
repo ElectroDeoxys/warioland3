@@ -54,7 +54,7 @@ tools:
 	$(MAKE) -C tools/
 
 
-RGBASMFLAGS = -h -P includes.asm -I src/ -L -Weverything
+RGBASMFLAGS = -P includes.asm -I src/ -Weverything
 # Create a sym/map for debug purposes if `make` run with `DEBUG=1`
 ifeq ($(DEBUG),1)
 RGBASMFLAGS += -E

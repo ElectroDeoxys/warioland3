@@ -465,7 +465,7 @@ REPT 12
 	sla e
 	rl d
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	inc l
 	inc l
@@ -490,7 +490,7 @@ ENDR
 	sla e
 	rl d
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	inc l
 	inc l
@@ -517,7 +517,7 @@ ENDR
 	sla e
 	rl d
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	inc l
 	inc l
@@ -540,7 +540,7 @@ REPT 11
 	sla e
 	rl d
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	inc l
 	inc l
@@ -565,7 +565,7 @@ ENDR
 	sla e
 	rl d
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	inc l
 	inc l
@@ -708,7 +708,7 @@ REPT 12
 	sla e
 	rl d ; *$4
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	ld a, [wc0b3 + 0]
 	ld d, a
@@ -730,7 +730,7 @@ ENDR
 	sla e
 	rl d
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	ld a, [wc0b3 + 0]
 	ld d, a
@@ -755,7 +755,7 @@ ENDR
 	sla e
 	rl d
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	inc l
 	ld a, [wc0b3 + 0]
@@ -776,7 +776,7 @@ REPT 12
 	sla e
 	rl d
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	ld a, [wc0b3 + 0]
 	ld d, a
@@ -1032,7 +1032,7 @@ REPT 11
 	sla e
 	rl d
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	inc l
 	ld a, [wc0b3 + 0]
@@ -1066,7 +1066,7 @@ ENDR
 	sla e
 	rl d
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	inc l
 	ld a, [wc0b3 + 0]
@@ -1092,7 +1092,7 @@ ENDR
 	sla e
 	rl d
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	inc l
 	inc l
@@ -1124,7 +1124,7 @@ ENDR
 	sla e
 	rl d
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	inc l
 	ld a, [wc0b3 + 0]
@@ -1158,7 +1158,7 @@ ENDR
 	sla e
 	rl d
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	inc l
 	ld a, [wc0b3 + 0]
@@ -1351,7 +1351,7 @@ REPT 11
 	sla e
 	rl d
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	ld a, [wc0b3 + 0]
 	ld d, a
@@ -1384,7 +1384,7 @@ ENDR
 	sla e
 	rl d
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	ld a, [wc0b3 + 0]
 	ld d, a
@@ -1409,7 +1409,7 @@ ENDR
 	sla e
 	rl d
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	inc l
 	inc l
@@ -1440,7 +1440,7 @@ REPT 10
 	sla e
 	rl d
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	ld a, [wc0b3 + 0]
 	ld d, a
@@ -1473,7 +1473,7 @@ ENDR
 	sla e
 	rl d
 	push hl
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	ld a, [wc0b3 + 0]
 	ld d, a

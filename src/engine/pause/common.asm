@@ -1,7 +1,7 @@
 PauseMenuStateTable:
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("Audio RAM")
+	ld a, BANK("GFX RAM")
 	ldh [rSVBK], a
 	farcall _PauseMenuStateTable
 	pop af

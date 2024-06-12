@@ -381,7 +381,7 @@ wROMBank::
 	db
 
 wRoomBlockTiles::
-	ds 4 * $80
+	ds $4 * $80
 
 wVBlankFuncExtended::
 	ds $200
@@ -2408,7 +2408,7 @@ SECTION "GFX RAM", WRAMX
 w3d280::
 	ds 16 palettes
 
-w3d300::
+wRoomBlockAttributes::
 	ds $4 * $80
 
 w3d500::

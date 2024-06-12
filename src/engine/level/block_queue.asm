@@ -301,7 +301,7 @@ Func_bb85:
 	ld [de], a
 	pop de
 
-	ld hl, w3d300
+	ld hl, wRoomBlockAttributes
 	add hl, de
 	ld a, [wBGMapTileQueueSize]
 	ld e, a

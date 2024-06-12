@@ -1,7 +1,7 @@
 LanguageSelectionStateTable:
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK("Audio RAM")
+	ld a, BANK("GFX RAM")
 	ldh [rSVBK], a
 	call .jump
 	pop af
