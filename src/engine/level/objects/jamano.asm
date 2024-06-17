@@ -994,7 +994,7 @@ Func_55407:
 	call .Func_5548b
 	ld c, 0
 	ld b, 8
-	jp Func_3632
+	jp BlackOutBGPals
 .asm_55478
 	cp $02
 	ret nz
@@ -1005,7 +1005,7 @@ Func_55407:
 .asm_55484
 	ld c, 0
 	ld b, 8
-	jp Func_35e5
+	jp SetBGPals
 
 .Func_5548b:
 	ld a, [w1d149]

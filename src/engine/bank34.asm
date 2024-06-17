@@ -46,28 +46,20 @@ UpdateRoomAnimatedTiles::
 	add hl, de
 
 	ld de, v1Tiles2 + $700
-	ld b, $10
+	ld b, TILE_SIZE
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-
-.wait_lcd_on
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr z, .wait_lcd_on
-
-.wait_ld_off
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr nz, .wait_ld_off
-
+.loop_copy_tiles
+	wait_lcd_on
+	wait_lcd_off
 REPT 8
 	ld a, [hli]
 	ld [de], a
 	inc e
 ENDR
-
 	dec b
-	jr nz, .wait_lcd_on
+	jr nz, .loop_copy_tiles
+
 	xor a ; VRAM0
 	ldh [rVBK], a
 .done

@@ -1081,10 +1081,10 @@ Func_54c07:
 	ld [wDollBoyActiveBarrels], a
 	ld c, 5
 	ld b, 3
-	call Func_360f
+	call BlackOutOBPals
 	ld c, 0
 	ld b, 8
-	jp Func_3632
+	jp BlackOutBGPals
 
 .asm_54c5f
 	play_sfx SFX_0B8
@@ -1102,12 +1102,12 @@ Func_54c07:
 WriteScowlerOBPals:
 	ld c, 5
 	ld b, 3
-	jp Func_35bb
+	jp SetOBPals
 
 WriteScowlerBGPals:
 	ld c, 0
 	ld b, 8
-	jp Func_35e5
+	jp SetBGPals
 
 Pals_54c87:
 	rgb  0, 20,  0

@@ -183,22 +183,15 @@ LoadActionHelpBGPals:
 	ld b, 8
 	ld c, LOW(rBCPD)
 
-.wait_lcd_off
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr z, .wait_lcd_off
-.wait_lcd_on
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr nz, .wait_lcd_on
-
+.loop_copy_bg_pals
+	wait_lcd_on
+	wait_lcd_off
 REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
 ENDR
-
 	dec b
-	jr nz, .wait_lcd_off
+	jr nz, .loop_copy_bg_pals
 	ret
 
 LoadActionHelpOBPals:
@@ -234,22 +227,15 @@ LoadActionHelpOBPals:
 	ldh [rOCPS], a
 	ld b, 8
 	ld c, LOW(rOCPD)
-.wait_lcd_off
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr z, .wait_lcd_off
-.wait_lcd_on
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr nz, .wait_lcd_on
-
+.loop_copy_ob_pals
+	wait_lcd_on
+	wait_lcd_off
 REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
 ENDR
-
 	dec b
-	jr nz, .wait_lcd_off
+	jr nz, .loop_copy_ob_pals
 	ret
 
 Func_1e4a47:
@@ -288,22 +274,15 @@ Func_1e4a47:
 	ldh [rOCPS], a
 	ld c, LOW(rOCPD)
 	ld b, 4
-.wait_lcd_off
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr z, .wait_lcd_off
-.wait_lcd_on
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr nz, .wait_lcd_on
-
-REPT 1 palettes
+.loop_copy_pals
+	wait_lcd_on
+	wait_lcd_off
+REPT PALETTE_SIZE
 	ld a, [hli]
 	ld [$ff00+c], a
 ENDR
-
 	dec b
-	jr nz, .wait_lcd_off
+	jr nz, .loop_copy_pals
 	ret
 
 AddActionHelpWarioSprite:

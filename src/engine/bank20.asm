@@ -6153,10 +6153,7 @@ UnreferencedLCD_82729:
 	push hl
 	ld a, $02
 	ldh [rSVBK], a
-.loop_wait_lcd
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr nz, .loop_wait_lcd
+	wait_lcd_off
 	ld hl, rLCDC
 	set LCDCB_BG9C00, [hl]
 	ldh [rSCY], a

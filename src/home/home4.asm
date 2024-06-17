@@ -539,7 +539,7 @@ Func_35a3::
 ; c = OB pal index
 ; b = num of pals
 ; hl = pals
-Func_35bb::
+SetOBPals::
 	ld a, c
 	add a
 	add a
@@ -547,28 +547,21 @@ Func_35bb::
 	or OCPSF_AUTOINC
 	ldh [rOCPS], a
 	ld c, LOW(rOCPD)
-.wait_lcd_on
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr z, .wait_lcd_on
-.wait_lcd_off
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr nz, .wait_lcd_off
-
+.loop_copy_pals
+	wait_lcd_on
+	wait_lcd_off
 REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
 ENDR
-
 	dec b
-	jr nz, .wait_lcd_on
+	jr nz, .loop_copy_pals
 	ret
 
 ; c = BG pal index
 ; b = num of pals
 ; hl = pals
-Func_35e5::
+SetBGPals::
 	ld a, c
 	add a
 	add a
@@ -576,25 +569,20 @@ Func_35e5::
 	or BCPSF_AUTOINC
 	ldh [rBCPS], a
 	ld c, LOW(rBCPD)
-.wait_lcd_on
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr z, .wait_lcd_on
-.wait_lcd_off
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr nz, .wait_lcd_off
-
-REPT 1 palettes
+.loop_copy_pals
+	wait_lcd_on
+	wait_lcd_off
+REPT PALETTE_SIZE
 	ld a, [hli]
 	ld [$ff00+c], a
 ENDR
-
 	dec b
-	jr nz, .wait_lcd_on
+	jr nz, .loop_copy_pals
 	ret
 
-Func_360f::
+; blacks out b OB palettes starting
+; from OB palette index c
+BlackOutOBPals::
 	ld a, c
 	add a
 	add a
@@ -602,25 +590,20 @@ Func_360f::
 	or OCPSF_AUTOINC
 	ldh [rOCPS], a
 	ld c, LOW(rOCPD)
-.wait_lcd_on
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr z, .wait_lcd_on
-.wait_lcd_off
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr nz, .wait_lcd_off
-
+.loop_clear_pals
+	wait_lcd_on
+	wait_lcd_off
 	xor a ; black
-REPT 1 palettes
+REPT PALETTE_SIZE
 	ld [$ff00+c], a
 ENDR
-
 	dec b
-	jr nz, .wait_lcd_on
+	jr nz, .loop_clear_pals
 	ret
 
-Func_3632::
+; blacks out b BG palettes starting
+; from BG palette index c
+BlackOutBGPals::
 	ld a, c
 	add a
 	add a
@@ -628,22 +611,15 @@ Func_3632::
 	or BCPSF_AUTOINC
 	ldh [rBCPS], a
 	ld c, LOW(rBCPD)
-.wait_lcd_on
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr z, .wait_lcd_on
-.wait_lcd_off
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr nz, .wait_lcd_off
-
+.loop_clear_pals
+	wait_lcd_on
+	wait_lcd_off
 	xor a ; black
-REPT 1 palettes
+REPT PALETTE_SIZE
 	ld [$ff00+c], a
 ENDR
-
 	dec b
-	jr nz, .wait_lcd_on
+	jr nz, .loop_clear_pals
 	ret
 
 ; if Wario is underneath a one-way platform,

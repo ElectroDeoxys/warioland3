@@ -722,7 +722,7 @@ Func_4cfe0:
 .asm_4cffe
 	ld c, 0
 	ld b, 6
-	jp Func_35e5
+	jp SetBGPals
 
 Func_4d005:
 	ld a, [w1d15a]
@@ -735,7 +735,7 @@ Func_4d005:
 .asm_4d014
 	ld c, 0
 	ld b, 6
-	jp Func_35e5
+	jp SetBGPals
 
 Pals_4d01b:
 	rgb  1,  4,  9

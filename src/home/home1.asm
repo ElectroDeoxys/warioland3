@@ -835,22 +835,15 @@ ClearTransformationValues::
 	ld b, 8
 	ld c, LOW(rBCPD)
 
-.wait_lcd_on_bg
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr z, .wait_lcd_on_bg
-.wait_lcd_off_bg
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr nz, .wait_lcd_off_bg
-
+.loop_copy_bg_pals
+	wait_lcd_on
+	wait_lcd_off
 REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
 ENDR
-
 	dec b
-	jr nz, .wait_lcd_on_bg
+	jr nz, .loop_copy_bg_pals
 
 	ld hl, wTempPals2 palette 3
 	ld a, OCPSF_AUTOINC | $18
@@ -858,22 +851,15 @@ ENDR
 	ld b, 4
 	ld c, LOW(rOCPD)
 
-.wait_lcd_on_ob
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr z, .wait_lcd_on_ob
-.wait_lcd_off_ob
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr nz, .wait_lcd_off_ob
-
+.loop_copy_ob_pals
+	wait_lcd_on
+	wait_lcd_off
 REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
 ENDR
-
 	dec b
-	jr nz, .wait_lcd_on_ob
+	jr nz, .loop_copy_ob_pals
 	ret
 
 ; unreferenced
@@ -2637,23 +2623,17 @@ SetWarioPal::
 	ld b, 2
 	ld c, LOW(rOCPD)
 
-.wait_lcd_on
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr z, .wait_lcd_on
-.wait_lcd_off
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr nz, .wait_lcd_off
-
 ; apply OBJ palette
+.loop_copy
+	wait_lcd_on
+	wait_lcd_off
 REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
 ENDR
-
 	dec b
-	jr nz, .wait_lcd_on
+	jr nz, .loop_copy
+
 	pop af
 	bankswitch
 	ret
@@ -2702,14 +2682,8 @@ LoadCollectedTreasurePal_Level::
 	or c
 	ldh [rOCPS], a
 	ld c, LOW(rOCPD)
-.wait_lcd_on
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr z, .wait_lcd_on
-.wait_lcd_off
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr nz, .wait_lcd_off
+	wait_lcd_on
+	wait_lcd_off
 ; apply OBJ palette
 REPT 1 palettes
 	ld a, [hli]
@@ -2777,22 +2751,15 @@ CopyAndApplyOBPals::
 	ldh [rOCPS], a
 	ld c, LOW(rOCPD)
 
-.wait_lcd_on
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr z, .wait_lcd_on
-.wait_lcd_off
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr nz, .wait_lcd_off
-
+.loop_copy
+	wait_lcd_on
+	wait_lcd_off
 REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
 ENDR
-
 	dec b
-	jr nz, .wait_lcd_on
+	jr nz, .loop_copy
 	ret
 
 ApplyTempPals1ToBGPals::

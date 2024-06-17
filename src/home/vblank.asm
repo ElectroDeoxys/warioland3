@@ -44,11 +44,6 @@ VBlank_TimeAttackDescription::
 .end
 
 WaitVBlank::
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr z, WaitVBlank
-.is_on
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr nz, .is_on
+	wait_lcd_on
+	wait_lcd_off
 	ret

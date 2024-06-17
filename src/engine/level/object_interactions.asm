@@ -3307,41 +3307,29 @@ ObjInteraction_Teruteru:
 	ldh [rBCPS], a
 	ld b, 4
 	ld c, LOW(rBCPD)
-.wait_lcd_off_1
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr z, .wait_lcd_off_1
-.wait_lcd_on_1
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr nz, .wait_lcd_on_1
-
+.loop_zero_bg_pals
+	wait_lcd_on
+	wait_lcd_off
 	xor a
 REPT 2 palettes
 	ld [$ff00+c], a
 ENDR
 	dec b
-	jr nz, .wait_lcd_off_1
+	jr nz, .loop_zero_bg_pals
 
 	ld a, OCPSF_AUTOINC | $18
 	ldh [rOCPS], a
 	ld b, 2
 	ld c, LOW(rOCPD)
-.wait_lcd_off_2
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr z, .wait_lcd_off_2
-.wait_lcd_on_2
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr nz, .wait_lcd_on_2
-
+.loop_zero_ob_pals
+	wait_lcd_on
+	wait_lcd_off
 	xor a
 REPT 2 palettes
 	ld [$ff00+c], a
 ENDR
 	dec b
-	jr nz, .wait_lcd_off_2
+	jr nz, .loop_zero_ob_pals
 	ret
 
 ObjInteraction_WaterDrop:

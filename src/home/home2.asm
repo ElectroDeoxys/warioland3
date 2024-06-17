@@ -353,31 +353,18 @@ UpdateRoomAnimatedPals::
 	ldh [rBCPS], a
 	ld b, 5
 	ld c, LOW(rBCPD)
-.wait_lcd_1
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr z, .wait_lcd_1
-.wait_lcd_2
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr nz, .wait_lcd_2
-
+.loop_copy_pals
+	wait_lcd_on
+	wait_lcd_off
 REPT 12
 	ld a, [hli]
 	ld [$ff00+c], a
 ENDR
 	dec b
-	jr nz, .wait_lcd_1
+	jr nz, .loop_copy_pals
 
-.wait_lcd_3
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr z, .wait_lcd_3
-.wait_lcd_4
-	ldh a, [rSTAT]
-	and STATF_LCD
-	jr nz, .wait_lcd_4
-
+	wait_lcd_on
+	wait_lcd_off
 REPT 3
 	ld a, [hli]
 	ld [$ff00+c], a
