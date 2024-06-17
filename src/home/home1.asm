@@ -830,7 +830,7 @@ ClearTransformationValues::
 ; recovering from Blind transformation
 .RestoreBlindPalettes
 	ld hl, wTempPals1
-	ld a, BCPSF_AUTOINC
+	ld a, BCPSF_AUTOINC | palette 0
 	ldh [rBCPS], a
 	ld b, 8
 	ld c, LOW(rBCPD)
@@ -846,7 +846,7 @@ ENDR
 	jr nz, .loop_copy_bg_pals
 
 	ld hl, wTempPals2 palette 3
-	ld a, OCPSF_AUTOINC | $18
+	ld a, OCPSF_AUTOINC | palette 3
 	ldh [rOCPS], a
 	ld b, 4
 	ld c, LOW(rOCPD)
@@ -2395,7 +2395,7 @@ LevelTreasureIDs_WithoutTemple::
 
 LoadBGPalettesFromWRAM::
 	ld hl, wTempBGPals
-	ld a, BCPSF_AUTOINC
+	ld a, BCPSF_AUTOINC | palette 0
 	ldh [rBCPS], a
 	ld b, 8 palettes
 	ld c, LOW(rBCPD)
@@ -2408,7 +2408,7 @@ LoadBGPalettesFromWRAM::
 
 LoadOBPalettesFromWRAM::
 	ld hl, wTempOBPals
-	ld a, OCPSF_AUTOINC
+	ld a, OCPSF_AUTOINC | palette 0
 	ldh [rOCPS], a
 	ld b, 8 palettes
 	ld c, LOW(rOCPD)
@@ -2564,7 +2564,7 @@ StoreOBPals::
 ; fills BG palette with just white
 FillWhiteBGPal::
 	ld hl, PalsWhite
-	ld a, BCPSF_AUTOINC
+	ld a, BCPSF_AUTOINC | palette 0
 	ldh [rBCPS], a
 	ld b, 8 palettes
 	ld c, LOW(rBCPD)
@@ -2578,7 +2578,7 @@ FillWhiteBGPal::
 ; fills OB palette with just white
 FillWhiteOBPal::
 	ld hl, PalsWhite
-	ld a, OCPSF_AUTOINC
+	ld a, OCPSF_AUTOINC | palette 0
 	ldh [rOCPS], a
 	ld b, 8 palettes
 	ld c, LOW(rOCPD)
@@ -2618,7 +2618,7 @@ SetWarioPal::
 	hcall CopyHLToDE_Short
 	pop hl
 
-	ld a, OCPSF_AUTOINC
+	ld a, OCPSF_AUTOINC | palette 0
 	ldh [rOCPS], a
 	ld b, 2
 	ld c, LOW(rOCPD)
@@ -2678,7 +2678,7 @@ LoadCollectedTreasurePal_Level::
 	ld b, 1 palettes
 	farcall BANK(TreasurePals), CopyHLToDE_Short ; unneeded farcall
 	pop hl
-	ld a, $20 | OCPSF_AUTOINC
+	ld a, OCPSF_AUTOINC | palette 4
 	or c
 	ldh [rOCPS], a
 	ld c, LOW(rOCPD)
@@ -2764,7 +2764,7 @@ ENDR
 
 ApplyTempPals1ToBGPals::
 	ld hl, wTempPals1
-	ld a, BCPSF_AUTOINC
+	ld a, BCPSF_AUTOINC | palette 0
 	ldh [rBCPS], a
 	ld b, 8 palettes
 	ld c, LOW(rBCPD)
@@ -2777,7 +2777,7 @@ ApplyTempPals1ToBGPals::
 
 ApplyTempPals2ToOBPals::
 	ld hl, wTempPals2
-	ld a, OCPSF_AUTOINC
+	ld a, OCPSF_AUTOINC | palette 0
 	ldh [rOCPS], a
 	ld b, 8 palettes
 	ld c, LOW(rOCPD)

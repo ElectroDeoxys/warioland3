@@ -349,7 +349,7 @@ UpdateRoomAnimatedPals::
 	push af
 	ld a, BANK("Level Palettes")
 	bankswitch
-	ld a, BCPSF_AUTOINC
+	ld a, BCPSF_AUTOINC | palette 0
 	ldh [rBCPS], a
 	ld b, 5
 	ld c, LOW(rBCPD)

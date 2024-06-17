@@ -5419,7 +5419,7 @@ UpdateTopBar:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempPals2 palette 4)
 	ld [wPalConfig1SourceLo], a
-	ld a, OCPSF_AUTOINC | (4 << 3)
+	ld a, OCPSF_AUTOINC | palette 4
 	ld [wPalConfig1Index], a
 	ld a, 4 ; number of pals
 	ld [wPalConfig1Number], a
@@ -5507,7 +5507,7 @@ UpdateTopBar:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempPals2 palette 4)
 	ld [wPalConfig1SourceLo], a
-	ld a, OCPSF_AUTOINC | (4 << 3)
+	ld a, OCPSF_AUTOINC | palette 4
 	ld [wPalConfig1Index], a
 	ld a, 4 ; number of pals
 	ld [wPalConfig1Number], a

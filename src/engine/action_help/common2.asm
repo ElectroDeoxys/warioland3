@@ -178,7 +178,7 @@ LoadActionHelpBGPals:
 	call CopyHLToDE_Short
 	pop hl
 
-	ld a, BCPSF_AUTOINC
+	ld a, BCPSF_AUTOINC | palette 0
 	ldh [rBCPS], a
 	ld b, 8
 	ld c, LOW(rBCPD)
@@ -223,7 +223,7 @@ LoadActionHelpOBPals:
 	pop hl
 
 .apply_palettes
-	ld a, OCPSF_AUTOINC
+	ld a, OCPSF_AUTOINC | palette 0
 	ldh [rOCPS], a
 	ld b, 8
 	ld c, LOW(rOCPD)
@@ -270,7 +270,7 @@ Func_1e4a47:
 	pop hl
 
 .asm_1e4a84
-	ld a, OCPSF_AUTOINC | $20
+	ld a, OCPSF_AUTOINC | palette 4
 	ldh [rOCPS], a
 	ld c, LOW(rOCPD)
 	ld b, 4

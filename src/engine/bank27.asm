@@ -1302,7 +1302,7 @@ Func_9cd40:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempPals1)
 	ld [wPalConfig1SourceLo], a
-	ld a, BCPSF_AUTOINC
+	ld a, BCPSF_AUTOINC | palette 0
 	ld [wPalConfig1Index], a
 	ld a, 8
 	ld [wPalConfig1Number], a
@@ -1315,7 +1315,7 @@ Func_9cd5a:
 	ld [wPalConfig2SourceHi], a
 	ld a, LOW(wTempPals2)
 	ld [wPalConfig2SourceLo], a
-	ld a, OCPSF_AUTOINC
+	ld a, OCPSF_AUTOINC | palette 0
 	ld [wPalConfig2Index], a
 	ld a, 8
 	ld [wPalConfig2Number], a
@@ -2106,7 +2106,7 @@ Cutscene19Func:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempPals1 palette 2)
 	ld [wPalConfig1SourceLo], a
-	ld a, BCPSF_AUTOINC | $10
+	ld a, BCPSF_AUTOINC | palette 2
 	ld [wPalConfig1Index], a
 	ld a, 1
 	ld [wPalConfig1Number], a
@@ -2210,7 +2210,7 @@ Cutscene11Func:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempPals1)
 	ld [wPalConfig1SourceLo], a
-	ld a, BCPSF_AUTOINC
+	ld a, BCPSF_AUTOINC | palette 0
 	ld [wPalConfig1Index], a
 	ld a, 8
 	ld [wPalConfig1Number], a

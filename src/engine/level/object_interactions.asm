@@ -3303,7 +3303,7 @@ ObjInteraction_Teruteru:
 
 	farcall SetState_BlindIdling
 
-	ld a, BCPSF_AUTOINC
+	ld a, BCPSF_AUTOINC | palette 0
 	ldh [rBCPS], a
 	ld b, 4
 	ld c, LOW(rBCPD)
@@ -3317,7 +3317,7 @@ ENDR
 	dec b
 	jr nz, .loop_zero_bg_pals
 
-	ld a, OCPSF_AUTOINC | $18
+	ld a, OCPSF_AUTOINC | palette 3
 	ldh [rOCPS], a
 	ld b, 2
 	ld c, LOW(rOCPD)

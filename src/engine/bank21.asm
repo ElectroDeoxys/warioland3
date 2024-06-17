@@ -2278,7 +2278,7 @@ VBlank_OWPalTransition:
 
 	ld hl, wTempBGPals
 	ld c, LOW(rBCPS)
-	ld a, BCPSF_AUTOINC
+	ld a, BCPSF_AUTOINC | palette 0
 	ld [$ff00+c], a
 	inc c
 	ld b, 8 ; num pals
@@ -2403,7 +2403,7 @@ Func_84e43:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals)
 	ld [wPalConfig1SourceLo], a
-	ld a, BCPSF_AUTOINC
+	ld a, BCPSF_AUTOINC | palette 0
 	ld [wPalConfig1Index], a
 	ld a, 8
 	ld [wPalConfig1Number], a
@@ -2412,7 +2412,7 @@ Func_84e43:
 	ld [wPalConfig2SourceHi], a
 	ld a, LOW(wTempOBPals)
 	ld [wPalConfig2SourceLo], a
-	ld a, OCPSF_AUTOINC
+	ld a, OCPSF_AUTOINC | palette 0
 	ld [wPalConfig2Index], a
 	ld a, 8
 	ld [wPalConfig2Number], a
@@ -2453,7 +2453,7 @@ Func_84e86:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals)
 	ld [wPalConfig1SourceLo], a
-	ld a, BCPSF_AUTOINC
+	ld a, BCPSF_AUTOINC | palette 0
 	ld [wPalConfig1Index], a
 	ld a, 8 ; number of pals
 	ld [wPalConfig1Number], a
@@ -2462,7 +2462,7 @@ Func_84e86:
 	ld [wPalConfig2SourceHi], a
 	ld a, LOW(wTempOBPals)
 	ld [wPalConfig2SourceLo], a
-	ld a, OCPSF_AUTOINC
+	ld a, OCPSF_AUTOINC | palette 0
 	ld [wPalConfig2Index], a
 	ld a, 8 ; number of pals
 	ld [wPalConfig2Number], a
@@ -2618,7 +2618,7 @@ Func_84fff:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals)
 	ld [wPalConfig1SourceLo], a
-	ld a, BCPSF_AUTOINC
+	ld a, BCPSF_AUTOINC | palette 0
 	ld [wPalConfig1Index], a
 	ld a, 8
 	ld [wPalConfig1Number], a
@@ -2627,7 +2627,7 @@ Func_84fff:
 	ld [wPalConfig2SourceHi], a
 	ld a, LOW(wTempOBPals)
 	ld [wPalConfig2SourceLo], a
-	ld a, OCPSF_AUTOINC
+	ld a, OCPSF_AUTOINC | palette 0
 	ld [wPalConfig2Index], a
 	ld a, 8
 	ld [wPalConfig2Number], a
@@ -2672,7 +2672,7 @@ Func_85046:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals palette 1)
 	ld [wPalConfig1SourceLo], a
-	ld a, BCPSF_AUTOINC | $8
+	ld a, BCPSF_AUTOINC | palette 1
 	ld [wPalConfig1Index], a
 	ld a, 7
 	ld [wPalConfig1Number], a
@@ -2680,7 +2680,7 @@ Func_85046:
 	ld [wPalConfig2SourceHi], a
 	ld a, LOW(wTempOBPals)
 	ld [wPalConfig2SourceLo], a
-	ld a, OCPSF_AUTOINC
+	ld a, OCPSF_AUTOINC | palette 0
 	ld [wPalConfig2Index], a
 	ld a, 8
 	ld [wPalConfig2Number], a
@@ -2715,7 +2715,7 @@ Func_850b9:
 	ld [wPalConfig2SourceHi], a
 	ld a, LOW(wTempOBPals)
 	ld [wPalConfig2SourceLo], a
-	ld a, OCPSF_AUTOINC
+	ld a, OCPSF_AUTOINC | palette 0
 	ld [wPalConfig2Index], a
 	ld a, 8
 	ld [wPalConfig2Number], a
@@ -2749,7 +2749,7 @@ Func_850ff:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals palette 1)
 	ld [wPalConfig1SourceLo], a
-	ld a, BCPSF_AUTOINC | $8
+	ld a, BCPSF_AUTOINC | palette 1
 	ld [wPalConfig1Index], a
 	ld a, 7
 	ld [wPalConfig1Number], a
@@ -2775,7 +2775,7 @@ Func_85145:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals)
 	ld [wPalConfig1SourceLo], a
-	ld a, BCPSF_AUTOINC
+	ld a, BCPSF_AUTOINC | palette 0
 	ld [wPalConfig1Index], a
 	ld a, 8
 	ld [wPalConfig1Number], a
@@ -2783,7 +2783,7 @@ Func_85145:
 	ld [wPalConfig2SourceHi], a
 	ld a, LOW(wTempOBPals)
 	ld [wPalConfig2SourceLo], a
-	ld a, OCPSF_AUTOINC
+	ld a, OCPSF_AUTOINC | palette 0
 	ld [wPalConfig2Index], a
 	ld a, 8
 	ld [wPalConfig2Number], a
@@ -2808,7 +2808,7 @@ Func_8518c:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals)
 	ld [wPalConfig1SourceLo], a
-	ld a, OCPSF_AUTOINC
+	ld a, OCPSF_AUTOINC | palette 0
 	ld [wPalConfig1Index], a
 	ld a, 8
 	ld [wPalConfig1Number], a
@@ -2971,7 +2971,7 @@ FadeInLevelName:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals palette 7)
 	ld [wPalConfig1SourceLo], a
-	ld a, OCPSF_AUTOINC | (7 << 3)
+	ld a, OCPSF_AUTOINC | palette 7
 	ld [wPalConfig1Index], a
 	ld a, 1
 	ld [wPalConfig1Number], a
@@ -3027,7 +3027,7 @@ Func_852e5:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals palette 7)
 	ld [wPalConfig1SourceLo], a
-	ld a, OCPSF_AUTOINC | (7 << 3)
+	ld a, OCPSF_AUTOINC | palette 7
 	ld [wPalConfig1Index], a
 	ld a, 1
 	ld [wPalConfig1Number], a
@@ -3271,7 +3271,7 @@ LoadOWStarIndicatorPals:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempPals2 palette 4)
 	ld [wPalConfig1SourceLo], a
-	ld a, OCPSF_AUTOINC | (4 << 3)
+	ld a, OCPSF_AUTOINC | palette 4
 	ld [wPalConfig1Index], a
 	ld a, 2
 	ld [wPalConfig1Number], a

@@ -3162,7 +3162,7 @@ NOWFunc_BottomBar:
 	ld hl, wPalConfig1
 	ld a, LOW(rBCPS)
 	ld [hli], a
-	ld a, BCPSF_AUTOINC | $38
+	ld a, BCPSF_AUTOINC | palette 7
 	ld [hli], a
 	ld a, 1
 	ld [hli], a
@@ -3778,7 +3778,7 @@ WOWFunc_Rain:
 	ld hl, wPalConfig1
 	ld a, LOW(rBCPS)
 	ld [hli], a
-	ld a, BCPSF_AUTOINC
+	ld a, BCPSF_AUTOINC | palette 0
 	ld [hli], a
 	ld a, 1 palettes
 	ld [hli], a
@@ -4198,7 +4198,7 @@ WOWFunc_VulcanoEruption:
 	ld [hl], a
 
 	ld hl, wPalConfig1Index
-	ld a, BCPSF_AUTOINC | $28
+	ld a, BCPSF_AUTOINC | palette 5
 	ld [hli], a
 	ld a, 1
 	ld [hli], a
@@ -4254,7 +4254,7 @@ WOWFunc_VulcanoEruption:
 	ld hl, wPalConfig1
 	ld a, LOW(rBCPS)
 	ld [hli], a
-	ld a, BCPSF_AUTOINC
+	ld a, BCPSF_AUTOINC | palette 0
 	ld [hli], a
 	ld a, 1 palettes
 	ld [hli], a
@@ -4266,7 +4266,7 @@ WOWFunc_VulcanoEruption:
 	ld hl, wPalConfig2
 	ld a, LOW(rOCPS)
 	ld [hli], a
-	ld a, OCPSF_AUTOINC
+	ld a, OCPSF_AUTOINC | palette 0
 	ld [hli], a
 	ld a, 1 palettes
 	ld [hli], a
@@ -4297,7 +4297,7 @@ WOWFunc_VulcanoEruption:
 	ld hl, wPalConfig1
 	ld a, LOW(rBCPS)
 	ld [hli], a
-	ld a, BCPSF_AUTOINC
+	ld a, BCPSF_AUTOINC | palette 0
 	ld [hli], a
 	ld a, 1 palettes
 	ld [hli], a
@@ -4309,7 +4309,7 @@ WOWFunc_VulcanoEruption:
 	ld hl, wPalConfig2
 	ld a, LOW(rOCPS)
 	ld [hli], a
-	ld a, OCPSF_AUTOINC
+	ld a, OCPSF_AUTOINC | palette 0
 	ld [hli], a
 	ld a, 1 palettes
 	ld [hli], a
@@ -5752,7 +5752,7 @@ SOWFunc_CanyonThunder:
 	ld hl, wPalConfig1
 	ld a, LOW(rBCPS)
 	ld [hli], a
-	ld a, BCPSF_AUTOINC
+	ld a, BCPSF_AUTOINC | palette 0
 	ld [hli], a
 	ld a, 1 palettes
 	ld [hli], a
@@ -6803,7 +6803,7 @@ EOWFunc_FreezeSea:
 	ld hl, wPalConfig1
 	ld a, LOW(rBCPS)
 	ld [hli], a
-	ld a, BCPSF_AUTOINC | $20
+	ld a, BCPSF_AUTOINC | palette 4
 	ld [hli], a
 	ld a, 1
 	ld [hli], a
@@ -7613,7 +7613,7 @@ EOWFunc_FormCastle:
 	ret
 .asm_b74df
 	ld hl, wPalConfig1Index
-	ld a, BCPSF_AUTOINC
+	ld a, BCPSF_AUTOINC | palette 0
 	ld [hli], a
 	ld a, 6
 	ld [hli], a
@@ -7623,7 +7623,7 @@ EOWFunc_FormCastle:
 	ld [hli], a
 
 	ld hl, wPalConfig2Index
-	ld a, BCPSF_AUTOINC
+	ld a, BCPSF_AUTOINC | palette 0
 	ld [hli], a
 	ld a, 6
 	ld [hli], a
