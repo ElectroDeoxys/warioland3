@@ -1,197 +1,175 @@
-#define _DEFAULT_SOURCE
+#define PROGRAM_NAME "scan_includes"
+#define USAGE_OPTS "[-h|--help] [-s|--strict] filename.asm"
 
+#include <ctype.h>
+#include <errno.h>
+#include <inttypes.h>
+#include <getopt.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdnoreturn.h>
 #include <string.h>
-#include <stdbool.h>
-#include <getopt.h>
-#include <limits.h>
 
-void usage(void) {
-	printf("Usage: scan_includes [-h] [-s] [-i path] filename\n"
-	       "-h, --help\n"
-	       "    Print usage and exit\n"
-	       "-s, --strict\n"
-	       "    Fail if a file cannot be read\n"
-	       "-i, --include\n"
-	       "    Add an include path\n");
+const char* include_prefix = "src/";
+
+#define error_exit(...) exit((fprintf(stderr, PROGRAM_NAME ": " __VA_ARGS__), 1))
+
+noreturn void usage_exit(int status) {
+	fprintf(stderr, "Usage: " PROGRAM_NAME " " USAGE_OPTS "\n");
+	exit(status);
 }
 
-struct Options {
-	bool help;
-	bool strict;
-	char **include_paths;
-	int include_paths_len;
-};
+int getopt_long_index;
+#define getopt_long(argc, argv, optstring, longopts) getopt_long(argc, argv, optstring, longopts, &getopt_long_index)
 
-struct Options Options = {0};
-
-void *xmalloc(const size_t size)
-{
-	void *ptr = malloc(size);
-	if (!ptr) {
-		perror("malloc");
-		exit(1);
+void *xmalloc(size_t size) {
+	errno = 0;
+	void *m = malloc(size);
+	if (!m) {
+		error_exit("Could not allocate %zu bytes: %s\n", size, strerror(errno));
 	}
-	return ptr;
+	return m;
 }
 
-void options_add_file(char *fname)
-{
-	char *filename = xmalloc(strlen(fname) + 1);
-	strcpy(filename, fname);
-	if (!(Options.include_paths = realloc(Options.include_paths,
-			sizeof(Options.include_paths[0]) * ++Options.include_paths_len))) {
-		perror("realloc");
-		exit(1);
+void xfread(uint8_t *data, size_t size, const char *filename, FILE *f) {
+	errno = 0;
+	if (fread(data, 1, size, f) != size) {
+		fclose(f);
+		error_exit("Could not read from file \"%s\": %s\n", filename, strerror(errno));
 	}
-	Options.include_paths[Options.include_paths_len - 1] = filename;
 }
 
-void scan_file(char *filename) {
-	FILE *f = fopen(filename, "r");
+long xfsize(const char *filename, FILE *f) {
+	long size = -1;
+	errno = 0;
+	if (!fseek(f, 0, SEEK_END)) {
+		size = ftell(f);
+		if (size != -1) {
+			rewind(f);
+		}
+	}
+	if (size == -1) {
+		error_exit("Could not measure file \"%s\": %s\n", filename, strerror(errno));
+	}
+	return size;
+}
 
+void parse_args(int argc, char *argv[], bool *strict) {
+	struct option long_options[] = {
+		{"strict", no_argument, 0, 's'},
+		{"help", no_argument, 0, 'h'},
+		{0}
+	};
+	for (int opt; (opt = getopt_long(argc, argv, "sh", long_options)) != -1;) {
+		switch (opt) {
+		case 's':
+			*strict = true;
+			break;
+		case 'h':
+			usage_exit(0);
+			break;
+		default:
+			usage_exit(1);
+		}
+	}
+}
+
+void scan_file(const char *filename, bool strict) {
+	errno = 0;
+	FILE *f = fopen(filename, "rb");
 	if (!f) {
-		if (Options.strict) {
-			fprintf(stderr, "Could not open file: '%s'\n", filename);
-			exit(1);
+		if (strict) {
+			error_exit("Could not open file \"%s\": %s\n", filename, strerror(errno));
 		} else {
 			return;
 		}
 	}
 
-	fseek(f, 0, SEEK_END);
-	long size = ftell(f);
-	rewind(f);
-
-	char *buffer = xmalloc(size + 1);
-	char *orig = buffer;
-	size = fread(buffer, 1, size, f);
-	buffer[size] = '\0';
+	long size = xfsize(filename, f);
+	char *contents = xmalloc(size + 1);
+	xfread((uint8_t *)contents, size, filename, f);
 	fclose(f);
+	contents[size] = '\0';
 
-	for (; buffer && (buffer - orig < size); buffer++) {
-		bool is_include = false;
-		bool is_incbin = false;
-		switch (*buffer) {
-			case ';':
-				buffer = strchr(buffer, '\n');
-				if (!buffer) {
-					fprintf(stderr, "%s: no newline at end of file\n", filename);
-					break;
-				}
-				break;
-
-			case '"':
-				buffer++;
-				buffer = strchr(buffer, '"');
-				if (!buffer) {
-					fprintf(stderr, "%s: unterminated string\n", filename);
-					break;
-				}
-				buffer++;
-				break;
-
-			case 'i':
-			case 'I':
-				if ((strncmp(buffer, "INCBIN", 6) == 0) || (strncmp(buffer, "incbin", 6) == 0)) {
-					is_incbin = true;
-				} else if ((strncmp(buffer, "INCLUDE", 7) == 0) || (strncmp(buffer, "include", 7) == 0)) {
-					is_include = true;
-				}
-				if (is_incbin || is_include) {
-					buffer = strchr(buffer, '"');
-					if (!buffer) {
-						break;
-					}
-					buffer++;
-					int length = strcspn(buffer, "\"");
-					char *include = xmalloc(length + 1);
-					strncpy(include, buffer, length);
-					include[length] = '\0';
-
-					f = fopen(include, "r");
-					char *path = NULL;
-					if (!f) {
-						for (char **include_path = Options.include_paths;
-								include_path < Options.include_paths + Options.include_paths_len;
-								include_path++) {
-							size_t len = strlen(*include_path) + strlen(include) + 1;
-							path = xmalloc(len);
-							snprintf(path, len, "%s%s", *include_path, include);
-							f = fopen(path, "r");
-							if (f) break;
-							free(path);
-							path = NULL;
-						}
-						if (!path && is_incbin && Options.include_paths_len == 1) {
-							char **include_path = Options.include_paths;
-							size_t len = strlen(*include_path) + strlen(include) + 1;
-							path = xmalloc(len);
-							snprintf(path, len, "%s%s", *include_path, include);
-						}
-					}
-					if (f) fclose(f);
-
-					if (path) {
-						free(include);
-						include = path;
-					}
-					printf("%s ", include);
-					if (is_include) {
-						scan_file(include);
-					}
-					free(include);
-					buffer = strchr(buffer, '"');
-				}
-				break;
-
-		}
-		if (!buffer) {
+	for (char *ptr = contents; ptr && ptr < contents + size; ptr++) {
+		ptr = strpbrk(ptr, ";\"Ii");
+		if (!ptr) {
 			break;
 		}
+		switch (*ptr) {
+		case ';':
+			// Skip comments until the end of the line
+			ptr += strcspn(ptr + 1, "\r\n");
+			if (*ptr) {
+				ptr++;
+			}
+			break;
 
+		case '"':
+			// Skip string literal until the closing quote
+			ptr += strcspn(ptr + 1, "\"");
+			if (*ptr) {
+				ptr++;
+			}
+			break;
+
+		case 'I':
+		case 'i':
+			/* empty statement between the label and the variable declaration */;
+			// Check that an INCLUDE/INCBIN starts as its own token
+			char before = ptr > contents ? *(ptr - 1) : '\n';
+			if (!isspace((unsigned)before) && before != ':') {
+				break;
+			}
+			bool is_incbin = !strncmp(ptr, "INCBIN", 6) || !strncmp(ptr, "incbin", 6);
+			bool is_include = !strncmp(ptr, "INCLUDE", 7) || !strncmp(ptr, "include", 7);
+			if (is_incbin || is_include) {
+				// Check that an INCLUDE/INCBIN ends as its own token
+				ptr += is_include ? 7 : 6;
+				if (!isspace((unsigned)*ptr) && *ptr != '"') {
+					break;
+				}
+				ptr += strspn(ptr, " \t");
+				if (*ptr == '"') {
+					// Print the file path and recursively scan INCLUDEs
+					ptr++;
+					char *include_path = ptr;
+					size_t length = strcspn(ptr, "\"");
+					ptr += length + 1;
+					include_path[length] = '\0';
+					char *complete_include_path = xmalloc(strlen(include_prefix) + length + 1);
+					strcpy(complete_include_path, include_prefix);
+					strcat(complete_include_path, include_path);
+					printf("%s ", complete_include_path);
+					if (is_include) {
+						scan_file(complete_include_path, strict);
+					}
+				} else {
+					fprintf(stderr, "%s: no file path after INC%s\n", filename, is_include ? "LUDE" : "BIN");
+					// Continue to process a comment
+					if (*ptr == ';') {
+						ptr--;
+					}
+				}
+			}
+			break;
+		}
 	}
 
-	free(orig);
+	free(contents);
 }
 
-int main(int argc, char* argv[]) {
-	int i = 0;
-	struct option long_options[] = {
-		{"strict", no_argument, 0, 's'},
-		{"help", no_argument, 0, 'h'},
-		{"include", required_argument, 0, 'i'},
-		{0}
-	};
-	int opt = -1;
-	while ((opt = getopt_long(argc, argv, "shi:", long_options, &i)) != -1) {
-		switch (opt) {
-		case 's':
-			Options.strict = true;
-			break;
-		case 'h':
-			Options.help = true;
-			break;
-		case 'i':
-			options_add_file(optarg);
-			break;
-		default:
-			usage();
-			exit(1);
-			break;
-		}
-	}
+int main(int argc, char *argv[]) {
+	bool strict = false;
+	parse_args(argc, argv, &strict);
+
 	argc -= optind;
 	argv += optind;
-	if (Options.help) {
-		usage();
-		return 0;
-	}
 	if (argc < 1) {
-		usage();
-		exit(1);
+		usage_exit(1);
 	}
-	scan_file(argv[0]);
+
+	scan_file(argv[0], strict);
 	return 0;
 }

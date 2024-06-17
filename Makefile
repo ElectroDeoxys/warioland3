@@ -67,7 +67,7 @@ src/rgbdscheck.o: src/rgbdscheck.asm
 # As a side effect, they're evaluated immediately instead of when the rule is invoked.
 # It doesn't look like $(shell) can be deferred so there might not be a better way.
 define DEP
-$1: $2 $$(shell tools/scan_includes -s -i src/ $2) | src/rgbdscheck.o
+$1: $2 $$(shell tools/scan_includes -s $2) | src/rgbdscheck.o
 	$$(RGBASM) $$(RGBASMFLAGS) -o $$@ $$<
 endef
 
