@@ -86,7 +86,7 @@ endif
 %.asm: ;
 
 
-opts = -Cjv -k 01 -l 0x33 -m 0x1b -p 0 -r 03 -t WARIOLAND3 -i AW8A
+opts = -Cjv -k 01 -l 0x33 -m MBC5+RAM+BATTERY -p 0 -r 03 -t WARIOLAND3 -i AW8A
 
 $(rom): $(rom_obj) src/layout.link
 	$(RGBLINK) -p 0xff -m $(rom:.gbc=.map) -n $(rom:.gbc=.sym) -l src/layout.link -o $@ $(filter %.o,$^)
