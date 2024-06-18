@@ -354,8 +354,8 @@ UpdateRoomAnimatedPals::
 	ld b, 5
 	ld c, LOW(rBCPD)
 .loop_copy_pals
-	wait_lcd_on
-	wait_lcd_off
+	wait_ppu_busy
+	wait_ppu_free
 REPT 12
 	ld a, [hli]
 	ld [$ff00+c], a
@@ -363,8 +363,8 @@ ENDR
 	dec b
 	jr nz, .loop_copy_pals
 
-	wait_lcd_on
-	wait_lcd_off
+	wait_ppu_busy
+	wait_ppu_free
 REPT 3
 	ld a, [hli]
 	ld [$ff00+c], a

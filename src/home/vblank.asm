@@ -44,6 +44,6 @@ VBlank_TimeAttackDescription::
 .end
 
 WaitVBlank::
-	wait_lcd_on
-	wait_lcd_off
+	wait_ppu_busy
+	wait_ppu_free
 	ret

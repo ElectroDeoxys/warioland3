@@ -69,14 +69,14 @@ MACRO debug_assert_not
 :
 ENDM
 
-MACRO wait_lcd_on
+MACRO wait_ppu_busy
 :
 	ldh a, [rSTAT]
 	and STATF_LCD
 	jr z, :-
 ENDM
 
-MACRO wait_lcd_off
+MACRO wait_ppu_free
 :
 	ldh a, [rSTAT]
 	and STATF_LCD

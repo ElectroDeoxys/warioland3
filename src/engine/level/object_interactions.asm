@@ -3308,8 +3308,8 @@ ObjInteraction_Teruteru:
 	ld b, 4
 	ld c, LOW(rBCPD)
 .loop_zero_bg_pals
-	wait_lcd_on
-	wait_lcd_off
+	wait_ppu_busy
+	wait_ppu_free
 	xor a
 REPT 2 palettes
 	ld [$ff00+c], a
@@ -3322,8 +3322,8 @@ ENDR
 	ld b, 2
 	ld c, LOW(rOCPD)
 .loop_zero_ob_pals
-	wait_lcd_on
-	wait_lcd_off
+	wait_ppu_busy
+	wait_ppu_free
 	xor a
 REPT 2 palettes
 	ld [$ff00+c], a

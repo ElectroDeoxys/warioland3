@@ -548,8 +548,8 @@ SetOBPals::
 	ldh [rOCPS], a
 	ld c, LOW(rOCPD)
 .loop_copy_pals
-	wait_lcd_on
-	wait_lcd_off
+	wait_ppu_busy
+	wait_ppu_free
 REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
@@ -570,8 +570,8 @@ SetBGPals::
 	ldh [rBCPS], a
 	ld c, LOW(rBCPD)
 .loop_copy_pals
-	wait_lcd_on
-	wait_lcd_off
+	wait_ppu_busy
+	wait_ppu_free
 REPT PALETTE_SIZE
 	ld a, [hli]
 	ld [$ff00+c], a
@@ -591,8 +591,8 @@ BlackOutOBPals::
 	ldh [rOCPS], a
 	ld c, LOW(rOCPD)
 .loop_clear_pals
-	wait_lcd_on
-	wait_lcd_off
+	wait_ppu_busy
+	wait_ppu_free
 	xor a ; black
 REPT PALETTE_SIZE
 	ld [$ff00+c], a
@@ -612,8 +612,8 @@ BlackOutBGPals::
 	ldh [rBCPS], a
 	ld c, LOW(rBCPD)
 .loop_clear_pals
-	wait_lcd_on
-	wait_lcd_off
+	wait_ppu_busy
+	wait_ppu_free
 	xor a ; black
 REPT PALETTE_SIZE
 	ld [$ff00+c], a

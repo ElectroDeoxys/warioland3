@@ -184,8 +184,8 @@ LoadActionHelpBGPals:
 	ld c, LOW(rBCPD)
 
 .loop_copy_bg_pals
-	wait_lcd_on
-	wait_lcd_off
+	wait_ppu_busy
+	wait_ppu_free
 REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
@@ -228,8 +228,8 @@ LoadActionHelpOBPals:
 	ld b, 8
 	ld c, LOW(rOCPD)
 .loop_copy_ob_pals
-	wait_lcd_on
-	wait_lcd_off
+	wait_ppu_busy
+	wait_ppu_free
 REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
@@ -275,8 +275,8 @@ Func_1e4a47:
 	ld c, LOW(rOCPD)
 	ld b, 4
 .loop_copy_pals
-	wait_lcd_on
-	wait_lcd_off
+	wait_ppu_busy
+	wait_ppu_free
 REPT PALETTE_SIZE
 	ld a, [hli]
 	ld [$ff00+c], a

@@ -50,8 +50,8 @@ UpdateRoomAnimatedTiles::
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 .loop_copy_tiles
-	wait_lcd_on
-	wait_lcd_off
+	wait_ppu_busy
+	wait_ppu_free
 REPT 8
 	ld a, [hli]
 	ld [de], a

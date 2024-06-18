@@ -836,8 +836,8 @@ ClearTransformationValues::
 	ld c, LOW(rBCPD)
 
 .loop_copy_bg_pals
-	wait_lcd_on
-	wait_lcd_off
+	wait_ppu_busy
+	wait_ppu_free
 REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
@@ -852,8 +852,8 @@ ENDR
 	ld c, LOW(rOCPD)
 
 .loop_copy_ob_pals
-	wait_lcd_on
-	wait_lcd_off
+	wait_ppu_busy
+	wait_ppu_free
 REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
@@ -2625,8 +2625,8 @@ SetWarioPal::
 
 ; apply OBJ palette
 .loop_copy
-	wait_lcd_on
-	wait_lcd_off
+	wait_ppu_busy
+	wait_ppu_free
 REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
@@ -2682,8 +2682,8 @@ LoadCollectedTreasurePal_Level::
 	or c
 	ldh [rOCPS], a
 	ld c, LOW(rOCPD)
-	wait_lcd_on
-	wait_lcd_off
+	wait_ppu_busy
+	wait_ppu_free
 ; apply OBJ palette
 REPT 1 palettes
 	ld a, [hli]
@@ -2752,8 +2752,8 @@ CopyAndApplyOBPals::
 	ld c, LOW(rOCPD)
 
 .loop_copy
-	wait_lcd_on
-	wait_lcd_off
+	wait_ppu_busy
+	wait_ppu_free
 REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a

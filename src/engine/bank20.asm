@@ -6153,7 +6153,7 @@ UnreferencedLCD_82729:
 	push hl
 	ld a, $02
 	ldh [rSVBK], a
-	wait_lcd_off
+	wait_ppu_free
 	ld hl, rLCDC
 	set LCDCB_BG9C00, [hl]
 	ldh [rSCY], a
