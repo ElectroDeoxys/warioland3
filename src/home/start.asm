@@ -193,10 +193,10 @@ HandleSound::
 	ld hl, hSFXID
 	ld a, [hli]
 	cp $ff
-	jr nz, .asm_2a2
+	jr nz, .valid_sfx
 	ld bc, SOUND_OFF
 	jr .got_sfx
-.asm_2a2
+.valid_sfx
 	ld c, [hl]
 	ld b, a
 	or c
@@ -211,15 +211,15 @@ HandleSound::
 	ld hl, hMusicID
 	ld a, [hli]
 	cp $ff
-	jr nz, .asm_2c0
+	jr nz, .valid_music
 	ld bc, SOUND_OFF
 	xor a
 	ld [hld], a
 	ld [hl], a
-	call Func_fe6
+	call PlayNewMusic
 	jr .asm_2cb
 
-.asm_2c0
+.valid_music
 	ld c, [hl]
 	ld b, a
 	or c

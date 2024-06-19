@@ -198,7 +198,7 @@ Func_3007a::
 	ld hl, wChannels
 .loop_chs
 	ld a, [hl]
-	and CHANFLAGS_ACTIVE | CHANFLAGS_6 | CHANFLAGS_5 | CHANFLAGS_UPDATE_PERCUSSION | CHANFLAGS_3
+	and $ff ^ (CHANFLAGS_UPDATE_SO | CHANFLAGS_UPDATE_VOLUME | CHANFLAGS_UPDATE_FREQUENCY)
 	ld [hl], a
 	rla
 	rr b
@@ -209,7 +209,7 @@ Func_3007a::
 	ld [wActiveChannels], a
 	pop de
 	pop bc
-	jp Func_3f8d
+	jp ReturnFromAudioJump
 
 SetSFXChannels:
 	ld de, wChannels
@@ -368,7 +368,7 @@ _PlaySFX::
 	jr nz, .loop_1
 
 .done_1
-	jp Func_3f8d
+	jp ReturnFromAudioJump
 
 .asm_30211
 	call SetSFXChannels
@@ -426,7 +426,7 @@ _PlaySFX::
 	jr nz, .loop_3
 
 .done_2
-	jp Func_3f8d
+	jp ReturnFromAudioJump
 
 ; bc = sound ID
 PlayMusic::
@@ -465,10 +465,14 @@ PlayMusic::
 	jr nz, .loop_music_chs
 
 .done
-	jp Func_3f8d
+	jp ReturnFromAudioJump
 
+; plays music if different from the one currently playing
+; if the ID is the same
 ; bc = sound ID
-Func_302b8::
+_PlayNewMusic::
+; only start playing music if it's not
+; the same as the loaded one
 	ld a, [wLoadedMusic + 0]
 	cp c
 	jr nz, PlayMusic
@@ -478,10 +482,9 @@ Func_302b8::
 	ld a, [wActiveChannels]
 	and MUSIC_CHANNELS
 	jr z, PlayMusic
-	jp Func_3f8d
+	jp ReturnFromAudioJump
 
-; plays music if different from the one currently playing
-; if the ID is the same, then set flag in noise channels
+
 ; bc = sound ID
 _PlayNewMusic_SetNoise::
 ; only start playing music if it's not
@@ -496,10 +499,10 @@ _PlayNewMusic_SetNoise::
 ; same as wLoadedMusic
 	ld a, [wActiveChannels]
 	and MUSIC_CHANNELS
-	jr z, .asm_302e4
-	jp Func_3f8d
+	jr z, Func_302e4
+	jp ReturnFromAudioJump
 
-.asm_302e4::
+Func_302e4::
 	xor a
 	ld [w3d025], a
 	call SetMusicChannels
@@ -509,13 +512,13 @@ _PlayNewMusic_SetNoise::
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
 	ld a, [hl]
-	and CHANFLAGS_6 | CHANFLAGS_5 ; CHANNEL_FLAGS
+	and CHANFLAGS_5 | CHANFLAGS_6 ; CHANNEL_FLAGS
 	jr z, .next_ch
 	set CHANFLAGS_ACTIVE_F, [hl]
 .next_ch
 	call NextChannel
 	jr nz, .loop_chs
-	jp Func_3f8d
+	jp ReturnFromAudioJump
 
 ; loads the sound data of wCurSoundID
 ; bc = sound ID
@@ -529,7 +532,7 @@ GetSound:
 	jr c, .ok
 .invalid_sound
 	pop hl
-	jp Func_3f8d
+	jp ReturnFromAudioJump
 .check_low_byte
 	cp LOW(NUM_SOUNDS)
 	jr nc, .invalid_sound
@@ -571,7 +574,7 @@ LoadChannelWithSound:
 	ld l, a
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
-	ld a, CHANFLAGS_ACTIVE | CHANFLAGS_5
+	ld a, CHANFLAGS_5 | CHANFLAGS_ACTIVE
 	ld [hli], a ; CHANNEL_FLAGS
 	inc hl
 	ld a, [wAudioCmdPtr + 0]
@@ -708,7 +711,7 @@ Func_303c9::
 .asm_303f9
 	call NextChannel
 	jr nz, .asm_303d9
-	jp Func_3f8d
+	jp ReturnFromAudioJump
 
 TurnSFXOff:
 	call SetSFXChannels
@@ -721,11 +724,11 @@ TurnSFXOff:
 	ld [hl], a ; CHANNEL_FLAGS
 	call NextChannel
 	jr nz, .loop_chs
-	jp Func_3f8d
+	jp ReturnFromAudioJump
 
 Func_30416::
 	call TurnMusicOff
-	jp Func_3f8d
+	jp ReturnFromAudioJump
 
 Func_3041c:
 	xor a
@@ -754,7 +757,7 @@ Func_30438::
 	and MUSIC_CHANNELS
 	swap a
 	ld e, a
-	jp Func_3f8d
+	jp ReturnFromAudioJump
 
 Func_30449::
 	and a
@@ -796,7 +799,7 @@ Func_30449::
 	ld a, [hli]
 	ld b, a
 .asm_30485
-	jp Func_3f8d
+	jp ReturnFromAudioJump
 
 .channel_pointers
 	dw wChannel1
@@ -815,7 +818,7 @@ PointerTable_30490:
 
 Func_3049e::
 	call Func_304a4
-	jp Func_3f8d
+	jp ReturnFromAudioJump
 
 ; bc = parameters
 ; d = ?
@@ -916,7 +919,7 @@ Func_30519::
 	ld [w3d021], a
 	ld a, $40
 	ld [w3d022], a
-	jp Func_3f8d
+	jp ReturnFromAudioJump
 
 Func_30527:
 	ld a, [w3d025]
@@ -945,7 +948,7 @@ Func_30547:
 	ld a, [wCurChannelPtr + 1]
 	ld h, a
 	ld a, [hl] ; CHANNEL_FLAGS
-	cp CHANFLAGS_ACTIVE | CHANFLAGS_6
+	cp CHANFLAGS_6 | CHANFLAGS_ACTIVE
 	ret c
 	ld [wCurChannelFlags], a
 	jp Func_30651
@@ -2188,7 +2191,7 @@ Func_30bfb:
 	ld [wCurChannelPtr + 1], a
 	ld d, a
 	ld a, [de]
-	cp CHANFLAGS_ACTIVE | CHANFLAGS_6
+	cp CHANFLAGS_6 | CHANFLAGS_ACTIVE
 	jr nc, .asm_30c1f
 	pop hl
 	jr Func_30bf6

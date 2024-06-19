@@ -661,7 +661,7 @@ InitAudio::
 	push af
 	ld a, BANK("Audio RAM")
 	ldh [rSVBK], a
-	call DoAudioFunc_InitAudio
+	call AudioFunc_InitAudio
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -683,7 +683,7 @@ PlaySFX::
 	push af
 	ld a, BANK("Audio RAM")
 	ldh [rSVBK], a
-	call DoAudioFunc_PlaySFX
+	call AudioFunc_PlaySFX
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -700,12 +700,12 @@ Func_fd8:
 	ret
 
 ; bc = sound ID
-Func_fe6::
+PlayNewMusic::
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Audio RAM")
 	ldh [rSVBK], a
-	call Func_3f18
+	call AudioFunc_PlayNewMusic
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -797,7 +797,7 @@ PlayNewMusic_SetNoise::
 	push af
 	ld a, BANK("Audio RAM")
 	ldh [rSVBK], a
-	call DoAudioFunc_PlayNewMusic_SetNoise
+	call AudioFunc_PlayNewMusic_SetNoise
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -2474,7 +2474,7 @@ EnableDoubleSpeed::
 	ldh [rSPD], a
 	ldh a, [rIE]
 	push af
-	xor a
+	xor a ; disable all interrupts
 	ldh [rIE], a
 	ld a, P1F_GET_NONE
 	ldh [rP1], a

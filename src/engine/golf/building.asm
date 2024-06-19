@@ -62,7 +62,7 @@ Func_1c8586:
 	call Func_1c9fae
 
 	ld bc, MUSIC_GOLF_LOBBY
-	call Func_fe6
+	call PlayNewMusic
 
 	xor a
 	ldh [rSCY], a

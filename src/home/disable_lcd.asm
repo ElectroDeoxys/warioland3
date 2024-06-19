@@ -5,7 +5,7 @@ DisableLCD::
 
 	ldh a, [rIE]
 	ld [wTempIE], a
-; disable VBlank
+; disable VBlank interrupt
 	res IEB_VBLANK, a
 	ldh [rIE], a
 
