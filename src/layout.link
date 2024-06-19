@@ -70,7 +70,7 @@ ROMX $07
 	"Wario States 1"
 ROMX $08
 	"Object Interactions"
-	"Bank 8"
+	"Level Engine Extra"
 ROMX $09
 	"Wario Gfx 2"
 ROMX $0a

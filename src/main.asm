@@ -126,9 +126,9 @@ SECTION "Object Interactions", ROMX
 INCLUDE "engine/level/object_interactions.asm"
 
 
-SECTION "Bank 8", ROMX
+SECTION "Level Engine Extra", ROMX
 
-INCLUDE "engine/bank8.asm"
+INCLUDE "engine/level/row_block_queue.asm"
 
 
 SECTION "Wario States 3", ROMX
