@@ -1,3 +1,5 @@
+INCLUDE "data/object_movements.asm"
+
 UpdateObject_Temple:
 	push hl
 	inc l
@@ -4277,10 +4279,3 @@ FOR n, 1, NUM_OBJECTS + 1
 :
 ENDR
 	ret
-
-DummyObjectFunc:
-	xor a
-	ld [wCurObjFlags], a
-	ret
-
-INCLUDE "engine/level/objects/coin.asm"

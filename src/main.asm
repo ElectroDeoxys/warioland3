@@ -72,7 +72,7 @@ SECTION "Level Engine", ROMX
 
 INCLUDE "engine/level/state_table.asm"
 INCLUDE "engine/level/init.asm"
-INCLUDE "engine/level/update.asm"
+INCLUDE "engine/level/update_level.asm"
 INCLUDE "engine/level/start_room.asm"
 INCLUDE "engine/level/get_bg_ptr.asm"
 INCLUDE "engine/level/scroll.asm"
@@ -312,10 +312,15 @@ INCLUDE "engine/level/objects/wolfenboss.asm"
 INCLUDE "engine/level/objects/shoot.asm"
 
 
-SECTION "Bank 18", ROMX
+SECTION "Update Objects", ROMX
 
-INCLUDE "data/object_movements.asm"
-INCLUDE "engine/bank18.asm"
+INCLUDE "engine/level/update_objects.asm"
+
+
+SECTION "Object Functions 7", ROMX
+
+INCLUDE "engine/level/objects/dummy.asm"
+INCLUDE "engine/level/objects/coin.asm"
 
 
 SECTION "Object Loading", ROMX

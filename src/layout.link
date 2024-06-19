@@ -101,7 +101,8 @@ ROMX $14
 ROMX $15
 	"Object Functions 6"
 ROMX $18
-	"Bank 18"
+	"Update Objects"
+	"Object Functions 7"
 ROMX $19
 	"Object Loading"
 ROMX $1a
