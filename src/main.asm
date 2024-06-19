@@ -330,6 +330,7 @@ INCLUDE "engine/level/load_objects.asm"
 
 SECTION "Bank 20", ROMX
 
+INCLUDE "data/ow/unlockable_connections.asm"
 INCLUDE "engine/bank20.asm"
 
 
