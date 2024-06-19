@@ -81,19 +81,24 @@ GetBlockPtrBGMapAddress::
 	ld [wBGPtr + 1], a
 	ret
 
-DoPendingDMATransfer::
+; this function is called during level V-Blank
+LevelVBlankFunc::
 	ld a, [wIsDMATransferPending]
 	and a
 	jr nz, .dma_transfer
 
-	xor a
+	xor a ; SRAM0
 	ld [rRAMB + $100], a
+
+	; apply scroll X and Y, including shake effect
 	ld hl, wSCYShake
 	ld a, [wSCY]
 	add [hl]
 	ldh [rSCY], a
 	ld a, [wSCX]
 	ldh [rSCX], a
+
+	; push OAM
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
 
@@ -127,12 +132,16 @@ DoPendingDMATransfer::
 
 	xor a
 	ld [wIsDMATransferPending], a
+
+	; apply scroll X and Y, including shake effect
 	ld hl, wSCYShake
 	ld a, [wSCY]
 	add [hl]
 	ldh [rSCY], a
 	ld a, [wSCX]
 	ldh [rSCX], a
+	
+	; push OAM
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
 

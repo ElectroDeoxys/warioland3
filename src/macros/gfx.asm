@@ -35,4 +35,4 @@ MACRO decompress_vram1
 	ldh [rVBK], a
 ENDM
 
-DEF hdma EQUS "(-1) + "
+DEF dma_tiles EQUS " - 1" ; number in tiles

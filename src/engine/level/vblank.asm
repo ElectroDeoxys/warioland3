@@ -6,7 +6,7 @@ VBlank_Level:
 	ret
 
 .Func:
-	jp DoPendingDMATransfer
+	jp LevelVBlankFunc
 .end
 
 Func_b681:

@@ -1459,7 +1459,7 @@ SetSceneWarioState:
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, hdma 128
+	ld a, $80 dma_tiles
 	ld [hl], a
 
 	xor a
@@ -2136,12 +2136,12 @@ _UpdateTempleScene:
 
 ClearTextbox:
 	ld d, 6 * BG_MAP_WIDTH ; dest lo
-	ld e, hdma 8
+	ld e, $8 dma_tiles
 	jr ClearTextboxAtCoord
 
 ClearTextboxExceptHeader:
 	ld d, 7 * BG_MAP_WIDTH ; dest lo
-	ld e, hdma 6
+	ld e, $6 dma_tiles
 ;	fallthrough
 
 ClearTextboxAtCoord:
@@ -2571,7 +2571,7 @@ HiddenFigureRevealScene:
 	ld [wHDMADestVRAMBank], a
 	ld de, HiddenFigure1Gfx tile $80
 	ld b, HIGH(v0Tiles1) - $80
-	ld c, hdma 128
+	ld c, $80 dma_tiles
 	ld a, BANK(HiddenFigure1Gfx)
 	ld [wHDMABank], a
 
@@ -2597,7 +2597,7 @@ HiddenFigureRevealScene:
 	ld [wHDMADestVRAMBank], a
 	ld de, HiddenFigure1Gfx tile $100
 	ld b, HIGH(v0Tiles2) - $80
-	ld c, hdma 128
+	ld c, $80 dma_tiles
 	ld a, BANK(HiddenFigure1Gfx)
 	ld [wHDMABank], a
 	jr .SetHDMA
@@ -2607,7 +2607,7 @@ HiddenFigureRevealScene:
 	ld [wHDMADestVRAMBank], a
 	ld de, HiddenFigure2Gfx
 	ld b, HIGH(v1Tiles0) - $80
-	ld c, hdma 128
+	ld c, $80 dma_tiles
 	ld a, BANK(HiddenFigure1Gfx)
 	ld [wHDMABank], a
 	jr .SetHDMA
@@ -4707,7 +4707,7 @@ Func_ae0f9:
 	ld [wHDMADestVRAMBank], a
 	ld de, BGMap_b0300
 	ld b, $18
-	ld c, hdma 36
+	ld c, $24 dma_tiles
 ;	fallthrough
 
 Func_ae104:
@@ -4731,7 +4731,7 @@ Func_ae119:
 	ld [wHDMADestVRAMBank], a
 	ld de, BGMap_b0540
 	ld b, $18
-	ld c, hdma 36
+	ld c, $24 dma_tiles
 	jr Func_ae104
 
 Func_ae127:
@@ -4739,7 +4739,7 @@ Func_ae127:
 	ld [wHDMADestVRAMBank], a
 	ld de, BGMap_b0780
 	ld b, $10
-	ld c, hdma 128
+	ld c, $80 dma_tiles
 	jr Func_ae104
 
 Func_ae134:
@@ -7037,7 +7037,7 @@ Func_af13c:
 	ld [wHDMADestVRAMBank], a
 	ld de, OldMan1Gfx
 	ld b, HIGH(v0Tiles1) - $80
-	ld c, hdma 64
+	ld c, $40 dma_tiles
 .asm_af1f2
 	ld a, BANK(OldMan1Gfx)
 	ld [wHDMABank], a
@@ -7059,28 +7059,28 @@ Func_af13c:
 	ld [wHDMADestVRAMBank], a
 	ld de, OldMan2Gfx
 	ld b, HIGH(v1Tiles0) - $80
-	ld c, hdma 128
+	ld c, $80 dma_tiles
 	jr .asm_af1f2
 .Func_af215:
 	xor a
 	ld [wHDMADestVRAMBank], a
 	ld de, BGMap_15cd00
 	ld b, HIGH(v0BGMap0) - $80
-	ld c, hdma 36
+	ld c, $24 dma_tiles
 	jr .asm_af1f2
 .Func_af222:
 	ld a, BANK("VRAM1")
 	ld [wHDMADestVRAMBank], a
 	ld de, BGMap_15cf40
 	ld b, HIGH(v1BGMap0) - $80
-	ld c, hdma 36
+	ld c, $24 dma_tiles
 	jr .asm_af1f2
 .Func_af230:
 	ld a, BANK("VRAM1")
 	ld [wHDMADestVRAMBank], a
 	ld de, wAttrmap
 	ld b, HIGH(v1Tiles1) - $80
-	ld c, hdma 80
+	ld c, $50 dma_tiles
 	jr .asm_af1f2
 .Func_af23e:
 	ld a, SCREEN_WIDTH_PX
@@ -7162,7 +7162,7 @@ Func_af13c:
 	ld [wHDMADestVRAMBank], a
 	ld de, PrologueBackgroundGfx
 	ld b, HIGH(v0Tiles2) - $80
-	ld c, hdma 128
+	ld c, $80 dma_tiles
 	ld a, BANK(PrologueBackgroundGfx)
 	ld [wHDMABank], a
 	jp .asm_af1f7

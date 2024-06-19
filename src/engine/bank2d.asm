@@ -3376,7 +3376,7 @@ NOWFunc_DayNightSpell:
 	ld [wHDMADestHi], a
 	ld a, $c0
 	ld [wHDMADestLo], a
-	ld a, hdma 4
+	ld a, $4 dma_tiles
 	ld [wHDMAMode], a
 	ld a, HIGH(wAttrmap tile $26)
 	ld [w2d0b5SourceHi], a
@@ -3386,7 +3386,7 @@ NOWFunc_DayNightSpell:
 	ld [w2d0b5DestHi], a
 	ld a, $c0
 	ld [w2d0b5DestLo], a
-	ld a, hdma 4
+	ld a, $4 dma_tiles
 	ld [w2d0b5Mode], a
 	ret
 

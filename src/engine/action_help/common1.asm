@@ -448,7 +448,7 @@ ActionHelp_ShowInitialWarioWalk:
 	ld [wPendingDMADestinationPtr + 1], a
 	ld a, BANK("VRAM0")
 	ld [wPendingDMADestinationBank], a
-	ld a, $7f
+	ld a, $80 dma_tiles
 	ld [wPendingDMALength], a
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
@@ -491,7 +491,7 @@ ActionHelp_ShowWarioJump:
 	ld [wPendingDMADestinationPtr + 1], a
 	ld a, BANK("VRAM0")
 	ld [wPendingDMADestinationBank], a
-	ld a, $7f
+	ld a, $80 dma_tiles
 	ld [wPendingDMALength], a
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
@@ -527,7 +527,7 @@ ActionHelp_ShowWarioJumpLeft:
 	ld [wPendingDMADestinationPtr + 1], a
 	ld a, BANK("VRAM0")
 	ld [wPendingDMADestinationBank], a
-	ld a, $7f
+	ld a, $80 dma_tiles
 	ld [wPendingDMALength], a
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
@@ -624,7 +624,7 @@ ActionHelp_ShowWarioIdle:
 	ld [wPendingDMADestinationPtr + 1], a
 	ld a, BANK("VRAM0")
 	ld [wPendingDMADestinationBank], a
-	ld a, $7f
+	ld a, $80 dma_tiles
 	ld [wPendingDMALength], a
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
@@ -656,7 +656,7 @@ ActionHelp_ShowWarioWalk:
 	ld [wPendingDMADestinationPtr + 1], a
 	ld a, BANK("VRAM0")
 	ld [wPendingDMADestinationBank], a
-	ld a, $7f
+	ld a, $80 dma_tiles
 	ld [wPendingDMALength], a
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
@@ -690,7 +690,7 @@ ActionHelp_ShowWarioSwim:
 	ld [wPendingDMADestinationPtr + 1], a
 	ld a, BANK("VRAM0")
 	ld [wPendingDMADestinationBank], a
-	ld a, $7f
+	ld a, $80 dma_tiles
 	ld [wPendingDMALength], a
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
@@ -774,7 +774,7 @@ ActionHelp_ShowWarioGrab:
 	ld [wPendingDMADestinationPtr + 1], a
 	ld a, BANK("VRAM0")
 	ld [wPendingDMADestinationBank], a
-	ld a, $7f
+	ld a, $80 dma_tiles
 	ld [wPendingDMALength], a
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
@@ -808,7 +808,7 @@ ActionHelp_ShowWarioSlowGrab:
 	ld [wPendingDMADestinationPtr + 1], a
 	ld a, BANK("VRAM0")
 	ld [wPendingDMADestinationBank], a
-	ld a, $7f
+	ld a, $80 dma_tiles
 	ld [wPendingDMALength], a
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
@@ -840,7 +840,7 @@ ActionHelp_ShowWarioBeginGrab:
 	ld [wPendingDMADestinationPtr + 1], a
 	ld a, BANK("VRAM0")
 	ld [wPendingDMADestinationBank], a
-	ld a, $7f
+	ld a, $80 dma_tiles
 	ld [wPendingDMALength], a
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
@@ -885,7 +885,7 @@ ActionHelp_ShowWarioBeginThrow:
 	ld [wPendingDMADestinationPtr + 1], a
 	ld a, BANK("VRAM0")
 	ld [wPendingDMADestinationBank], a
-	ld a, $7f
+	ld a, $80 dma_tiles
 	ld [wPendingDMALength], a
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
@@ -963,7 +963,7 @@ ActionHelp_ShowWarioAttack:
 	ld [wPendingDMADestinationPtr + 1], a
 	ld a, BANK("VRAM0")
 	ld [wPendingDMADestinationBank], a
-	ld a, $7f
+	ld a, $80 dma_tiles
 	ld [wPendingDMALength], a
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
@@ -1023,7 +1023,7 @@ ActionHelp_ShowWarioBump:
 	ld [wPendingDMADestinationPtr + 1], a
 	ld a, BANK("VRAM0")
 	ld [wPendingDMADestinationBank], a
-	ld a, $7f
+	ld a, $80 dma_tiles
 	ld [wPendingDMALength], a
 	ld a, TRUE
 	ld [wIsDMATransferPending], a
@@ -1055,7 +1055,7 @@ ActionHelp_ShowWarioSlide:
 	ld [wPendingDMADestinationPtr + 1], a
 	ld a, BANK("VRAM0")
 	ld [wPendingDMADestinationBank], a
-	ld a, $7f
+	ld a, $80 dma_tiles
 	ld [wPendingDMALength], a
 	ld a, TRUE
 	ld [wIsDMATransferPending], a

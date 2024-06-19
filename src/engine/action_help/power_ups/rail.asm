@@ -84,7 +84,7 @@ Func_1e4329:
 	ld [wPendingDMADestinationPtr + 1], a
 	ld a, BANK("VRAM0")
 	ld [wPendingDMADestinationBank], a
-	ld a, $7f
+	ld a, $80 dma_tiles
 	ld [wPendingDMALength], a
 	ld a, TRUE
 	ld [wIsDMATransferPending], a

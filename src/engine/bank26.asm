@@ -1160,7 +1160,7 @@ Func_9aab5:
 	ld [wHDMADestHi], a
 	xor a
 	ld [wHDMADestLo], a
-	ld a, hdma 16
+	ld a, $10 dma_tiles
 	ld [wHDMAMode], a
 	ret
 
