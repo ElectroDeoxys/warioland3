@@ -25,25 +25,9 @@ MACRO dba
 	dw \1
 ENDM
 
-MACRO dx
-x = 8 * ((\1) - 1)
-	REPT \1
-	db ((\2) >> x) & $ff
-x = x - 8
-	ENDR
-	ENDM
-
-MACRO dt ; three-byte (big-endian)
-	dx 3, \1
-	ENDM
-
-MACRO dd ; four-byte (big-endian)
-	dx 4, \1
-	ENDM
-
 MACRO bigdw ; big-endian word
-	dx 2, \1
-	ENDM
+	db HIGH(\1), LOW(\1)
+ENDM
 
 MACRO sgb
 	db \1 << 3 + \2 ; sgb_command * 8 + length

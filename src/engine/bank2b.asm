@@ -1527,22 +1527,22 @@ Func_ac9ec:
 Data_ac9f5:
 	db LOW(rBCPS), BCPSF_AUTOINC
 	db 8 ; number of pals
-	db HIGH(wTempPals1), LOW(wTempPals1) ; source pals
+	bigdw wTempPals1 ; source pals
 
 Data_ac9fa:
 	db LOW(rBCPS), BCPSF_AUTOINC
 	db 8 ; number of pals
-	db HIGH(wTempBGPals), LOW(wTempBGPals) ; source pals
+	bigdw wTempBGPals ; source pals
 
 Data_ac9ff:
 	db LOW(rOCPS), OCPSF_AUTOINC
 	db 1 ; number of pals
-	db HIGH(wTempOBPals), LOW(wTempOBPals) ; source pals
+	bigdw wTempOBPals ; source pals
 
 Data_aca04:
 	db LOW(rOCPS), OCPSF_AUTOINC
 	db 8 ; number of pals
-	db HIGH(wTempPals2), LOW(wTempPals2) ; source pals
+	bigdw wTempPals2 ; source pals
 
 Func_aca09:
 	ld hl, wTempPals2

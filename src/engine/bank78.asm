@@ -402,22 +402,22 @@ Func_1e015b:
 .GreyTreasureParams
 	db $38 ; y
 	db $20 ; x
-	db HIGH(Frameset_d5045), LOW(Frameset_d5045) ; frameset
+	bigdw Frameset_d5045 ; frameset
 
 .RedTreasureParams
 	db $38 ; y
 	db $40 ; x
-	db HIGH(Frameset_d504a), LOW(Frameset_d504a) ; frameset
+	bigdw Frameset_d504a ; frameset
 
 .GreenTreasureParams
 	db $38 ; y
 	db $60 ; x
-	db HIGH(Frameset_d504f), LOW(Frameset_d504f) ; frameset
+	bigdw Frameset_d504f ; frameset
 
 .BlueTreasureParams
 	db $38 ; y
 	db $80 ; x
-	db HIGH(Frameset_d5054), LOW(Frameset_d5054) ; frameset
+	bigdw Frameset_d5054 ; frameset
 
 Func_1e028a:
 	ld a, [wTimeAttackResult]
