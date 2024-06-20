@@ -9,6 +9,7 @@ src/home.o \
 src/hram.o \
 src/main.o \
 src/overworld.o \
+src/sram.o \
 src/wram.o
 
 warioland3_obj := $(rom_obj:.o=.o)

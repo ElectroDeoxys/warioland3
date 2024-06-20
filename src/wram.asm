@@ -2548,5 +2548,3 @@ SECTION "WRAM7", WRAMX
 
 w7d000::
 	ds $1000
-
-INCLUDE "sram.asm"
