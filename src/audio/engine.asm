@@ -502,6 +502,9 @@ _PlayNewMusic_SetNoise::
 	jr z, Func_302e4
 	jp ReturnFromAudioJump
 
+; loops through all music channels and
+; if either CHANFLAGS_5 or CHANFLAGS_6 are set
+; then set it as active
 Func_302e4::
 	xor a
 	ld [w3d025], a

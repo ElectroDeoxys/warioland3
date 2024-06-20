@@ -1833,7 +1833,7 @@ _InitTempleScene:
 	xor a
 	ld [w2d013], a
 	ld [w2d014], a
-	ld a, [w1d800]
+	ld a, [wLCDCFlagsToFlip]
 	ld b, a
 	and a
 	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_WIN9C00 | LCDCF_ON
@@ -1843,7 +1843,7 @@ _InitTempleScene:
 	ldh [rLCDC], a
 
 	xor a
-	ld [w1d800], a
+	ld [wLCDCFlagsToFlip], a
 
 	ld hl, wSubState
 	inc [hl]
@@ -2563,7 +2563,7 @@ HiddenFigureRevealScene:
 	and a
 	ret nz
 	ld a, LCDCF_BG9C00
-	ld [w1d800], a
+	ld [wLCDCFlagsToFlip], a
 	jp Func_ad016
 
 .LoadHiddenFigureGfx1
@@ -3010,8 +3010,8 @@ HandleEnterTempleWithAllMusicBoxesScene:
 	ret z
 	xor a
 	ld [wSceneObj1State], a
-	ld a, $02
-	ld [w1da00], a
+	ld a, TEMPLE_SCENE_EXITING
+	ld [wTempleScene], a
 	xor a
 	ld [wTempleSceneCounter], a
 	ret

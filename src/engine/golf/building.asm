@@ -33,9 +33,11 @@ Func_1c8586:
 	jr nz, .asm_1c85b3
 	ld a, $01
 	ld [w1d800], a
+
 .asm_1c85b3
+	; clear all Golf RAM starting from wPredeterminedGolfLevel onwards
 	ld hl, wPredeterminedGolfLevel
-	ld bc, $7fe
+	ld bc, SIZEOF("Golf RAM") - (wPredeterminedGolfLevel - STARTOF("Golf RAM"))
 .loop
 	xor a
 	ld [hli], a
@@ -97,7 +99,7 @@ Func_1c8604:
 	ld [wGolfCourse], a
 	call Func_1c87db
 	call GetGolfCourseTargetSCX
-	ld hl, w1d900
+	ld hl, wGolfCourseTileMap
 	debgcoord 0, 6
 	ld b, 7 * BG_MAP_WIDTH
 	call CopyHLToDE
@@ -334,7 +336,7 @@ Func_1c86f8:
 	dw Frameset_1cb5de
 	dw Frameset_1cb5e1
 
-; loads attribute map to w1d900
+; loads attribute map to wGolfCourseTileMap
 ; and palettes to w1db00
 ; depending on value in wGolfCourse
 Func_1c87db:
@@ -354,8 +356,8 @@ Func_1c87db:
 	push hl
 	ld h, d
 	ld l, e
-	ld de, w1d900
-	ld bc, $e0
+	ld de, wGolfCourseTileMap
+	ld bc, 7 * BG_MAP_WIDTH
 	call FarCopyHLToDE_BC2
 	pop hl
 	ld a, [hli]
@@ -396,7 +398,6 @@ Func_1c882b:
 	dw Func_1c88dc
 	dw Func_1c8907
 	dw Func_1c8911
-; 0x1C8837
 
 Func_1c8837:
 	ld a, [wJoypadPressed]
@@ -541,12 +542,12 @@ Func_1c8911:
 	ret
 .done_subtracting
 	play_sfx SFX_SELECTION
-	call .Func_1c8944
+	call .SetGolfLevel
 	ld a, $04
 	ld [wSubState], a
 	ret
 
-.Func_1c8944
+.SetGolfLevel:
 	ld hl, .first_golf_levels
 	ld a, [wGolfMenuOption]
 	ld b, $00

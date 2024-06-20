@@ -1112,7 +1112,8 @@ wGolfMenuOption::
 wPredeterminedGolfLevel::
 	db
 
-w1d803::
+; current level number of golf course
+wGolfCourseLevel::
 	db
 
 ; GOLF_COURSE_* constant
@@ -1128,8 +1129,22 @@ wGolfCourseScore::
 ; start of the RAM related to the Golf levels
 wGolfLevelRAMStart::
 
-w1d900::
-	ds 16 tiles
+UNION
+
+; BGMap values to draw the golf course
+; currently shown in the Golf Building menu
+wGolfCourseTileMap::
+	ds 7 * BG_MAP_WIDTH
+
+NEXTU
+
+; golf flag animation tiles to draw to VRAM
+wGolfPinFlagTiles::
+	ds 4 tiles
+
+ENDU
+
+	ds $20
 
 w1da00::
 	ds $100
@@ -1184,7 +1199,7 @@ wGolfLCDConfig::
 wGolfWarioTilesBank::
 	db
 
-w1dc0e::
+wGolfLevelTier::
 	db
 
 wGolfPrice::

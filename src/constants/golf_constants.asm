@@ -25,12 +25,13 @@ DEF GOLF_BUILDING_PRICE EQU $50
 	const GOLF_COURSE_4 ; $3
 DEF NUM_GOLF_COURSES EQU const_value
 
-DEF GOLF_BASE_SCORE EQU 20
-DEF golf_score EQUS "GOLF_BASE_SCORE +"
+DEF NUM_GOLF_COURSE_LEVELS EQU 4 ; how many levels in a golf course
 
 ; maximum number of strokes over par 
 ; for golf levels inside the various courses
 DEF MAX_GOLF_COURSE_STROKES EQU 19
+DEF GOLF_BASE_SCORE EQU MAX_GOLF_COURSE_STROKES + 1
+DEF golf_score EQUS "GOLF_BASE_SCORE +"
 
 ; golf level constants
 	const_def

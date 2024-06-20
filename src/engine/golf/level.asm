@@ -92,6 +92,10 @@ InitGolfLevel:
 	call ShowGolfLevelFlagAndPar
 	jp SetUpGolfLevelObjects
 
+; if there's a golf level already loaded in wPredeterminedGolfLevel
+; then pick that one, otherwise, determine the golf level tier
+; given the number of collected treasures, and select a random
+; level up to that tier
 PickAndLoadGolfLevel:
 	ld a, BANK("Golf Gfx 1")
 	ld [wTempBank], a
@@ -104,7 +108,7 @@ PickAndLoadGolfLevel:
 .no_predetermined_golf_level
 ; tier 3
 	ld a, GOLF_LEVEL_TIER_3
-	ld [w1dc0e], a
+	ld [wGolfLevelTier], a
 	ld a, [wNumCollectedTreasures + 0]
 	and a
 	jr nz, .got_tier
@@ -115,14 +119,15 @@ PickAndLoadGolfLevel:
 	jr nc, .tier_2
 ; tier 1
 	ld a, GOLF_LEVEL_TIER_1
-	ld [w1dc0e], a
+	ld [wGolfLevelTier], a
 	jr .got_tier
 .tier_2
 	ld a, GOLF_LEVEL_TIER_2
-	ld [w1dc0e], a
+	ld [wGolfLevelTier], a
 
 .got_tier
-	ld a, [w1dc0e]
+	; golfLevel = rDIV % wGolfLevelTier
+	ld a, [wGolfLevelTier]
 	ld b, a
 	ldh a, [rDIV]
 	ld c, a
@@ -242,7 +247,7 @@ ShowGolfLevelFlagAndPar:
 	ld a, [wGolfPar]
 	add MAX_GOLF_COURSE_STROKES
 	ld [wGolfMaxStrokes], a
-	ld a, [w1d803]
+	ld a, [wGolfCourseLevel]
 	jr .got_max_strokes
 .asm_1c8ba3
 	ld a, [wGolfPar]
@@ -2544,10 +2549,11 @@ GolfLevelState_Cleared:
 	ld a, [wGolfCourseScore]
 	add c
 	ld [wGolfCourseScore], a
-	ld hl, w1d803
+	ld hl, wGolfCourseLevel
 	ld a, [hl]
-	cp $04
-	jr z, .asm_1c9b00
+	cp NUM_GOLF_COURSE_LEVELS
+	jr z, .finished_course
+; still more levels left
 	inc [hl]
 	ld hl, wPredeterminedGolfLevel
 	inc [hl]
@@ -2555,7 +2561,7 @@ GolfLevelState_Cleared:
 	ld [wSubState], a
 	ret
 
-.asm_1c9b00
+.finished_course
 	xor a
 	ld [wGolfCounter], a
 	ld [wGolfWarioDuration], a
@@ -2892,15 +2898,15 @@ VBlank_1c9d1d:
 	ld a, [wGolfLCDConfig]
 	ldh [rLCDC], a
 	ld hl, rHDMA1
-	ld a, HIGH(w1d900)
+	ld a, HIGH(wGolfPinFlagTiles)
 	ld [hli], a
-	ld a, LOW(w1d900)
+	ld a, LOW(wGolfPinFlagTiles)
 	ld [hli], a
 	ld a, $17
 	ld [hli], a
 	ld a, $40
 	ld [hli], a
-	ld a, $03
+	ld a, 4 dma_tiles
 	ld [hl], a
 	xor a
 	ldh [rVBK], a
@@ -2918,18 +2924,18 @@ VBlank_1c9d1d:
 	cp $08
 	jr nc, .frame_1
 ; frame 0
-	ld hl, GolfPinFlag tile $00
+	ld hl, GolfPinFlagGfx tile $00
 	jr .got_tiles
 .frame_1
-	ld hl, GolfPinFlag tile $04
+	ld hl, GolfPinFlagGfx tile $04
 	jr .got_tiles
 .frame_2
-	ld hl, GolfPinFlag tile $08
+	ld hl, GolfPinFlagGfx tile $08
 	jr .got_tiles
 .frame_3
-	ld hl, GolfPinFlag tile $0c
+	ld hl, GolfPinFlagGfx tile $0c
 .got_tiles
-	ld de, w1d900
+	ld de, wGolfPinFlagTiles
 	ld b, 4 tiles
 	call CopyHLToDE
 
@@ -2940,7 +2946,7 @@ VBlank_1c9d1d:
 	ld [hl], a
 	ret
 
-GolfPinFlag: INCBIN "gfx/golf/golf_pin_flag.2bpp"
+GolfPinFlagGfx: INCBIN "gfx/golf/golf_pin_flag.2bpp"
 
 VBlank_1c9e8d:
 	ld hl, .Func
@@ -3098,7 +3104,7 @@ VBlank_1c9f7a:
 	xor a
 	ld [hli], a
 	ld [hli], a
-	ld a, $7f
+	ld a, $80 dma_tiles
 	ld [hl], a
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
@@ -3155,7 +3161,7 @@ VBlank_1c9ffa:
 	ld [wdc11 + 0], a
 	ld a, $c0
 	ld [wdc11 + 1], a
-	ld a, 14 - 1
+	ld a, $e dma_tiles
 	ld [w1dc13], a
 
 	ld hl, .Func
@@ -3204,7 +3210,7 @@ VBlank_1ca056:
 	ld [wdc11 + 0], a
 	ld a, $c0
 	ld [wdc11 + 1], a
-	ld a, 14 - 1
+	ld a, $e dma_tiles
 	ld [w1dc13], a
 
 	ld hl, .Func
@@ -3221,7 +3227,7 @@ VBlank_1ca056:
 	ldh [rSCX], a
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, w1d900
+	ld hl, wGolfPinFlagTiles
 	call Func_2c30
 	xor a
 	ldh [rVBK], a
