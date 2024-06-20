@@ -16,7 +16,7 @@ Text_15e212: INCBIN "text/text_15e212.bin" ; unreferenced
 Text_15e225: INCBIN "text/text_15e225.bin.rle"
 Text_15e437: INCBIN "text/text_15e437.bin" ; unreferenced
 
-OAM_15e44a:
+OAM_15e44a::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -501,7 +501,7 @@ Frameset_15e7c4:
 	db $28,  1
 	db $ff
 
-Frameset_15e7ed:
+Frameset_15e7ed::
 	db $31,  4
 	db $ff
 

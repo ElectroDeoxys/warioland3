@@ -1113,7 +1113,7 @@ GetLevelThatContainsTreasure:
 	srl b ; /4
 	ret
 
-LoadLevelTreasureData:
+LoadLevelTreasureData::
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("WRAM2")

@@ -35,7 +35,7 @@ PrintNumberCoins:
 ; sets flags in wKeyAndTreasureFlags
 ; corresponding to the collected treasures
 ; in wOWLevel
-GetOWLevelCollectedTreasures:
+GetOWLevelCollectedTreasures::
 	xor a
 	ld [wKeyAndTreasureFlags], a
 	ldh a, [rSVBK]
@@ -90,7 +90,7 @@ GetOWLevelCollectedTreasures:
 	pop hl
 	ret
 
-PrintNumCollectedTreasures:
+PrintNumCollectedTreasures::
 	ld bc, -BG_MAP_WIDTH
 	ld de, BG_MAP_WIDTH
 

@@ -83,7 +83,7 @@ INCBIN "gfx/bgmaps/hidden_figure3.bin"
 HiddenFigure4Map::
 INCBIN "gfx/bgmaps/hidden_figure4.bin"
 
-_GameOverStateTable:
+_GameOverStateTable::
 	ld a, [wSubState]
 	jumptable
 
@@ -282,7 +282,7 @@ Func_db3e4:
 Func_db41b:
 	jp Init
 
-LoadHiddenFigureGfx:
+LoadHiddenFigureGfx::
 	call .LoadPals
 	call .LoadTiles
 	call .LoadMap

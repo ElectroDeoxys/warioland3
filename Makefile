@@ -3,12 +3,13 @@ rom := warioland3.gbc
 rom_obj := \
 src/action_help.o \
 src/audio.o \
+src/gfx.o \
 src/golf.o \
 src/home.o \
-src/main.o \
-src/wram.o \
 src/hram.o \
-src/gfx.o
+src/main.o \
+src/overworld.o \
+src/wram.o
 
 warioland3_obj := $(rom_obj:.o=.o)
 

@@ -2575,7 +2575,7 @@ Frameset_1f1d4c:
 	db $34,  4
 	db $ff
 
-FontGfx: INCBIN "gfx/font.2bpp.rle"
+FontGfx:: INCBIN "gfx/font.2bpp.rle"
 
 GBIncompatibleGfx: INCBIN "gfx/gb_incompatible.2bpp.rle"
 BGMap_1f34d6: INCBIN "gfx/bgmaps/map_1f34d6.bin"

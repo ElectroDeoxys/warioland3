@@ -1,4 +1,4 @@
-MusicBoxGfx:
+MusicBoxGfx::
 INCBIN "gfx/music_box.2bpp"
 
 BGMap_b0300:
@@ -10,10 +10,10 @@ INCBIN "gfx/bgmaps/map_b0540.bin"
 BGMap_b0780:
 INCBIN "gfx/bgmaps/map_b0780.bin"
 
-PrologueBackgroundGfx:
+PrologueBackgroundGfx::
 INCBIN "gfx/cutscenes/prologue_background.2bpp"
 
-PrologueGfx:
+PrologueGfx::
 INCBIN "gfx/cutscenes/prologue.2bpp.rle"
 
 TempleMusicBoxSceneGfx:

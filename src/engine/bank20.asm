@@ -538,7 +538,7 @@ SwitchDayNight:
 	ld [hl], a
 	ret
 
-OverworldStateTable:
+OverworldStateTable::
 	ld a, [wSubState]
 	jumptable
 
