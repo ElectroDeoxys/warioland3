@@ -66,7 +66,7 @@ wResetDisabled::
 wState::    db
 wSubState:: db
 
-	db
+	ds $1
 
 wTempIE::
 	db
@@ -132,7 +132,7 @@ wc0be:: db
 wc0bf:: db
 wc0c0:: db
 
-	db
+	ds $1
 
 wc0c2::
 	db
@@ -214,7 +214,7 @@ wc0dd::
 wIsOnSlipperyGround::
 	db
 
-	db
+	ds $1
 
 wc0e0::
 	db
@@ -270,7 +270,7 @@ wUnused_c186::
 wPalFadeCounter::
 	db
 
-	db
+	ds $1
 
 ; bit 0: slope right
 ; bit 1: slope left
@@ -350,7 +350,7 @@ wc1c2:: db
 wc1c3:: db
 wc1c4:: db
 
-	db
+	ds $1
 
 wObjDirection::
 	db
@@ -845,7 +845,7 @@ wCreditsTextBuffer::
 wCreditsTextPals::
 	ds $34
 
-	db
+	ds $1
 
 wCreditsTextPtr::
 	dw
@@ -1205,7 +1205,7 @@ wGolfLevelTier::
 wGolfPrice::
 	db
 
-	db
+	ds $1
 
 wdc11::
 wGolfWarioTilesPtr::
@@ -1267,7 +1267,7 @@ wShotDirection::
 wHasGolfWarioAnimationFinished::
 	db
 
-	db
+	ds $1
 
 wGolfXScroll::
 	ds $2
@@ -1298,7 +1298,7 @@ wGolfWarioTargetXPos::
 wGolfWarioDir::
 	db
 
-	db
+	ds $1
 
 ; can either be low byte of
 ; PARAGOOM_GROUND_LEVEL or PARAGOOM_TEE_BOX_LEVEL
@@ -1353,7 +1353,7 @@ wShotXVel::
 w1dc51::
 	db
 
-	db
+	ds $1
 
 w1dc53::
 	db
@@ -1391,7 +1391,7 @@ wNextTreasure::
 wOWLevel::
 	db
 
-	db
+	ds $1
 
 w2d011::
 	db
@@ -1427,7 +1427,7 @@ wCurMapSide::
 wLastTransitionParam::
 	db
 
-	db
+	ds $1
 
 wMapSideLevelID::
 	db
@@ -1441,7 +1441,7 @@ w2d01f::
 wGotSunMedallion::
 	db
 
-	db
+	ds $1
 
 w2d022::
 	db
@@ -1551,7 +1551,7 @@ wTopBarState::
 wTopBarStateCounter::
 	db
 
-	db
+	ds $1
 
 ; 0: Day/Night spell
 ; 1: Cutscene
@@ -1654,7 +1654,7 @@ w2d07c::
 w2d07d::
 	db
 
-	db
+	ds $1
 
 w2d07f::
 	db
@@ -1796,7 +1796,7 @@ wLevelBlueTreasurePal::  db
 wBottomBarFlags::
 	db
 
-	db
+	ds $1
 
 wBottomBarTreasureIDs::
 	ds NUM_LEVEL_TREASURES
@@ -1835,7 +1835,7 @@ w2d10d::
 w2d10e::
 	db
 
-	db
+	ds $1
 
 wCompassObj:: scene_obj_struct wCompassObj
 
@@ -1949,7 +1949,7 @@ wSceneWarioIgnoreScroll::
 w2d14e::
 	db
 
-	db
+	ds $1
 
 NEXTU
 
@@ -2074,7 +2074,7 @@ w2d893::
 w2d894::
 	db
 
-	db
+	ds $1
 
 w2d896::
 	db
@@ -2136,7 +2136,7 @@ ENDU
 w2d8da::
 	db
 
-	db
+	ds $1
 
 w2d8dc::
 	db
@@ -2147,7 +2147,7 @@ w2d8dc::
 wTempleScene::
 	db
 
-	db
+	ds $1
 
 wTempleMusicIsPlaying::    db
 wTempleMusicDelayCounter:: db
@@ -2280,7 +2280,7 @@ wAudioEngineFlags::
 wAudioBankBackup::
 	db
 
-	db
+	ds $1
 
 wAudioBankCallback::
 	dw
@@ -2330,7 +2330,7 @@ wCurTrackPtr::
 wCurSoundRegister::
 	db
 
-	db
+	ds $1
 
 wAudioCmdPtr::
 	dw
@@ -2363,7 +2363,7 @@ w3d021::
 w3d022::
 	db
 
-	db
+	ds $1
 
 ; each bit represents whether a channel is active/inactive
 ; bit 0: MusicChannel1
@@ -2392,7 +2392,7 @@ w3d03b::
 wNumChannels::
 	db
 
-	db
+	ds $1
 
 wSoundPriority::
 	db

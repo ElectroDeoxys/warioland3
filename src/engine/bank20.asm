@@ -1417,7 +1417,7 @@ VBlank_Overworld:
 	ret
 
 .Func:
-	ld a, $02
+	ld a, BANK("WRAM2")
 	ldh [rSVBK], a
 	ld a, [wSCY]
 	ldh [rSCY], a
