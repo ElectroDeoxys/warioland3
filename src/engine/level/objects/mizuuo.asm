@@ -182,7 +182,7 @@ MizzouProjectileFunc:
 	jr nz, .asm_488b5
 	ld a, [wIsInWaterOrSand]
 	and a
-	jr nz, .asm_488c8
+	jr nz, .in_water
 	ld bc, Data_60740
 	jr .asm_4888e
 .asm_4888b
@@ -223,7 +223,7 @@ MizzouProjectileFunc:
 	ld [hli], a
 	ret
 
-.asm_488c8
+.in_water
 	xor a
 	ld [wCurObjFlags], a
 	ret

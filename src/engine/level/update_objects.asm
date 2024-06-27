@@ -1942,7 +1942,7 @@ Func_62574::
 	ldh [hXPosLo], a
 	ld a, [wCurObjStateDuration]
 	and a
-	jr z, .asm_625aa
+	jr z, .check_collision
 	ld a, [hld]
 	ldh [hYPosHi], a
 	ld a, [hl]
@@ -1958,12 +1958,13 @@ Func_62574::
 	jp nz, Func_62d34
 	ld a, [wIsInWaterOrSand]
 	and a
-	jr z, .asm_625aa
+	jr z, .check_collision
+	; vanish when touching water or sand
 	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
 	jp HomeJumpRet
 
-.asm_625aa
+.check_collision
 	ld a, [wCurObjCollBoxTop]
 	cpl
 	inc a
@@ -2023,7 +2024,7 @@ Func_62605::
 	ldh [hXPosLo], a
 	ld a, [wCurObjStateDuration]
 	and a
-	jr z, .asm_6263b
+	jr z, .check_collision
 	ld a, [hld]
 	ldh [hYPosHi], a
 	ld a, [hl]
@@ -2039,12 +2040,13 @@ Func_62605::
 	jp nz, Func_62e0f
 	ld a, [wIsInWaterOrSand]
 	and a
-	jr z, .asm_6263b
+	jr z, .check_collision
+	; vanish when touching water or sand
 	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
 	jp HomeJumpRet
 
-.asm_6263b
+.check_collision
 	ld a, [wCurObjCollBoxTop]
 	cpl
 	inc a
@@ -2173,6 +2175,7 @@ Func_626da::
 	ld a, [wIsInWaterOrSand]
 	and a
 	jr z, .asm_62710
+	; vanish when touching water or sand
 .vanish
 	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
@@ -2235,7 +2238,7 @@ Func_62768::
 	ldh [hXPosLo], a
 	ld a, [wCurObjStateDuration]
 	and a
-	jr z, .asm_6279e
+	jr z, .check_collision
 	ld a, [hld]
 	ldh [hYPosHi], a
 	ld a, [hl]
@@ -2251,13 +2254,14 @@ Func_62768::
 	jp nz, Func_62e0f
 	ld a, [wIsInWaterOrSand]
 	and a
-	jr z, .asm_6279e
+	jr z, .check_collision
+	; vanish when touching water or sand
 .vanish
 	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
 	jp HomeJumpRet
 
-.asm_6279e
+.check_collision
 	ld a, [wCurObjCollBoxTop]
 	cpl
 	inc a
@@ -2573,6 +2577,7 @@ Func_62926::
 	ld a, [wIsInWaterOrSand]
 	and a
 	jp z, HomeJumpRet
+	; vanish when touching water or sand
 	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
 	jp HomeJumpRet
@@ -2697,6 +2702,7 @@ _ObjState_StandingFall::
 	ld a, [wIsInWaterOrSand]
 	and a
 	jp z, HomeJumpRet
+	; vanish when touching water or sand
 	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
 	jp HomeJumpRet
@@ -2772,6 +2778,7 @@ _ObjState_Fall::
 	ld a, [wIsInWaterOrSand]
 	and a
 	jp z, HomeJumpRet
+	; vanish when touching water or sand
 	ld a, OBJSTATE_VANISH_TOUCH
 	ld [wCurObjState], a
 	jp HomeJumpRet
@@ -3121,7 +3128,7 @@ Func_62ca8::
 	jr nz, Func_62d34
 	ld a, [wIsInWaterOrSand]
 	and a
-	jr nz, .vanish
+	jr nz, .vanish ; vanish when touching water or sand
 
 	ld hl, wCurObjYPos
 	ld a, [hli]
@@ -3266,7 +3273,7 @@ Func_62d86::
 	jr nz, Func_62e0f
 	ld a, [wIsInWaterOrSand]
 	and a
-	jr nz, .vanish
+	jr nz, .vanish ; vanish when touching water or sand
 
 	ld hl, wCurObjYPos
 	ld a, [hli]

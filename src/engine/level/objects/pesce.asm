@@ -1313,7 +1313,7 @@ CheeseFunc:
 	call Func_352b
 	ld a, [wIsInWaterOrSand]
 	and a
-	jr nz, .asm_5263d
+	jr nz, .in_water
 	ld hl, wCurObjFlags
 	bit OBJFLAG_ON_SCREEN_F, [hl]
 	jp nz, MoveObjectDown_Fast
@@ -1324,7 +1324,8 @@ CheeseFunc:
 	xor a
 	ld [wCurObjFlags], a
 	ret
-.asm_5263d
+
+.in_water
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjFlags

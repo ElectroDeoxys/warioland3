@@ -245,10 +245,11 @@ MuddeeFunc:
 	call Func_352b
 	ld a, [wIsInWaterOrSand]
 	and a
-	jr nz, .asm_557ed
+	jr nz, .in_water
 	ld bc, Data_60d40
 	jp ApplyObjYMovement
-.asm_557ed
+
+.in_water
 	xor a
 	ld [w1d147], a
 	ld de, Frameset_69dc0
@@ -259,6 +260,7 @@ MuddeeFunc:
 	ld [hl], a
 	play_sfx SFX_083
 	ret
+
 .asm_55806
 	ld de, Frameset_69d6a
 	call SetObjectFramesetPtr
