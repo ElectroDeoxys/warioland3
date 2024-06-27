@@ -731,7 +731,7 @@ ENDR
 	add OBJ_INTERACTION_TYPE - OBJ_FLAGS
 	ld l, a
 	ld a, [hli] ; OBJ_INTERACTION_TYPE
-	ldh [hffa0], a
+	ldh [hThrownObjInteractionType], a
 	ld a, [hli] ; OBJ_COLLBOX_TOP
 	ld b, a
 	ld a, [hli] ; OBJ_COLLBOX_BOTTOM
@@ -774,7 +774,7 @@ ENDR
 .full_throw
 	; >= OBJSTATE_FULL_THROW_LEFT_START
 	rra
-	ld hl, hffa0
+	ld hl, hThrownObjInteractionType
 	ld a, [hli]
 	jr c, .thrown_right
 
@@ -782,66 +782,66 @@ ENDR
 	rla
 	jr c, .is_heavy1
 	ld a, OBJSTATE_28
-	ld [hli], a ; hffa1
+	ld [hli], a ; hCollidedObjState_Light
 	ld a, OBJSTATE_29
-	ld [hli], a ; hffa2
+	ld [hli], a ; hThrownObjState_Light
 	ld a, OBJSTATE_WOBBLE_RIGHT_START
-	ld [hli], a ; hffa3
+	ld [hli], a ; hCollidedObjState_Heavy
 	ld a, OBJSTATE_29
-	ld [hli], a ; hffa4
+	ld [hli], a ; hThrownObjState_Heavy
 	jr .check_objs
 
 .is_heavy1
 	ld a, OBJSTATE_28
-	ld [hli], a ; hffa1
+	ld [hli], a ; hCollidedObjState_Light
 	ld a, OBJSTATE_WOBBLE_LEFT_START
-	ld [hli], a ; hffa2
+	ld [hli], a ; hThrownObjState_Light
 	ld a, OBJSTATE_28
-	ld [hli], a ; hffa3
+	ld [hli], a ; hCollidedObjState_Heavy
 	ld a, OBJSTATE_29
-	ld [hli], a ; hffa4
+	ld [hli], a ; hThrownObjState_Heavy
 	jr .check_objs
 
 .thrown_right
 	rla
 	jr c, .is_heavy2
 	ld a, OBJSTATE_29
-	ld [hli], a ; ; hffa1
+	ld [hli], a ; ; hCollidedObjState_Light
 	ld a, OBJSTATE_28
-	ld [hli], a ; ; hffa2
+	ld [hli], a ; ; hThrownObjState_Light
 	ld a, OBJSTATE_WOBBLE_LEFT_START
-	ld [hli], a ; ; hffa3
+	ld [hli], a ; ; hCollidedObjState_Heavy
 	ld a, OBJSTATE_28
-	ld [hli], a ; ; hffa4
+	ld [hli], a ; ; hThrownObjState_Heavy
 	jr .check_objs
 
 .is_heavy2
 	ld a, OBJSTATE_29
-	ld [hli], a ; hffa1
+	ld [hli], a ; hCollidedObjState_Light
 	ld a, OBJSTATE_WOBBLE_RIGHT_START
-	ld [hli], a ; hffa2
+	ld [hli], a ; hThrownObjState_Light
 	ld a, OBJSTATE_29
-	ld [hli], a ; hffa3
+	ld [hli], a ; hCollidedObjState_Heavy
 	ld a, OBJSTATE_28
-	ld [hli], a ; hffa4
+	ld [hli], a ; hThrownObjState_Heavy
 	jr .check_objs
 
 .asm_61992
 	; OBJSTATE_48 <= action <= OBJSTATE_4B
 	rra
-	ld hl, hffa1
+	ld hl, hCollidedObjState_Light
 	jr c, .asm_619a0
 	ld a, OBJSTATE_WOBBLE_RIGHT_START
-	ld [hli], a ; hffa1
+	ld [hli], a ; hCollidedObjState_Light
 	ld a, OBJSTATE_WOBBLE_LEFT_START
-	ld [hli], a ; hffa2
+	ld [hli], a ; hThrownObjState_Light
 	jr .check_objs
 
 .asm_619a0
 	ld a, OBJSTATE_WOBBLE_LEFT_START
-	ld [hli], a ; hffa1
+	ld [hli], a ; hCollidedObjState_Light
 	ld a, OBJSTATE_WOBBLE_RIGHT_START
-	ld [hli], a ; hffa2
+	ld [hli], a ; hThrownObjState_Light
 
 .check_objs
 
@@ -889,7 +889,7 @@ FOR n, 1, NUM_OBJECTS + 1
 	rla
 	jp c, .CollideWithHeavyObject{u:n} ; heavy
 
-	ldh a, [hffa2]
+	ldh a, [hThrownObjState_Light]
 	ld [hl], a ; OBJ_STATE
 	ld l, LOW(wObj{u:n}State)
 	ld a, [hl]
@@ -902,7 +902,7 @@ FOR n, 1, NUM_OBJECTS + 1
 	xor a
 	ld [wGrabState], a
 .skip_reset_grab_{u:n}_1
-	ldh a, [hffa1]
+	ldh a, [hCollidedObjState_Light]
 	ld [hl], a ; OBJ_STATE
 	ld l, LOW(wObj{u:n}Flags)
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -915,16 +915,16 @@ ENDR
 
 FOR n, 1, NUM_OBJECTS + 1
 ; hl = state of thrown object
-; hffa2 = new state for thrown object
+; hThrownObjState_Light = new state for thrown object
 ; n = index of collided object
-; hffa1 = new state for collided object
+; hCollidedObjState_Light = new state for collided object
 .CollideWithObject{u:n}
 	xor a
 	ld [wGrabState], a
-	ldh a, [hffa2]
+	ldh a, [hThrownObjState_Light]
 	ld [hl], a ; OBJ_STATE
 	ld l, LOW(wObj{u:n}State)
-	ldh a, [hffa1]
+	ldh a, [hCollidedObjState_Light]
 	ld [hl], a
 	ld l, LOW(wObj{u:n}Flags)
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -934,11 +934,11 @@ ENDR
 
 FOR n, 1, NUM_OBJECTS + 1
 ; hl = state of thrown object
-; hffa4 = new state for thrown object
+; hThrownObjState_Heavy = new state for thrown object
 ; n = index of collided object
-; hffa3 = new state for collided object
+; hCollidedObjState_Heavy = new state for collided object
 .CollideWithHeavyObject{u:n}
-	ldh a, [hffa4]
+	ldh a, [hThrownObjState_Heavy]
 	ld [hl], a
 	ld l, LOW(wObj{u:n}State)
 	ld a, [hl]
@@ -951,7 +951,7 @@ FOR n, 1, NUM_OBJECTS + 1
 	xor a
 	ld [wGrabState], a
 .skip_reset_grab_{u:n}_2
-	ldh a, [hffa3]
+	ldh a, [hCollidedObjState_Heavy]
 	ld [hl], a
 	ld l, LOW(wObj{u:n}Flags)
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -1110,7 +1110,7 @@ Func_61f54::
 	ld a, h
 	ld [wCurObjVar3], a
 
-	ld hl, hffa0
+	ld hl, hPickedUpObjPos
 	ld a, c
 	cp $80
 	ld a, [wWarioYPos + 1]
@@ -1150,7 +1150,7 @@ Func_61f54::
 .got_hi_x
 	ld [hl], a
 
-	ld hl, hffa0
+	ld hl, hPickedUpObjPos
 	ld a, [hli]
 	sub 4
 	ldh [hYPosLo], a
@@ -1172,7 +1172,7 @@ Func_61f54::
 	cpl
 	inc a
 	ld b, a
-	ld hl, hffa0
+	ld hl, hPickedUpObjPos
 	ld a, [hli]
 	sub b
 	ldh [hYPosLo], a
@@ -1187,7 +1187,7 @@ Func_61f54::
 	call Func_358b
 	and $0f
 	jr nz, .asm_62091
-	ld hl, hffa0
+	ld hl, hPickedUpObjPos
 	ld de, wCurObjYPos
 	ld a, [hli]
 	ld [de], a
@@ -1317,7 +1317,7 @@ Func_620a6::
 	ld a, h
 	ld [wCurObjVar3], a
 
-	ld hl, hffa0
+	ld hl, hPickedUpObjPos
 	ld a, c
 	cp $80
 	ld a, [wWarioYPos + 1]
@@ -1357,7 +1357,7 @@ Func_620a6::
 .got_hi_x
 	ld [hl], a
 
-	ld hl, hffa0
+	ld hl, hPickedUpObjPos
 	ld a, [hli]
 	sub 4
 	ldh [hYPosLo], a
@@ -1382,7 +1382,7 @@ Func_620a6::
 	cpl
 	inc a
 	ld b, a
-	ld hl, hffa0
+	ld hl, hPickedUpObjPos
 	ld a, [hli]
 	sub b
 	ldh [hYPosLo], a
@@ -1397,7 +1397,7 @@ Func_620a6::
 	call Func_358b
 	and $0f
 	jr nz, .asm_621e6
-	ld hl, hffa0
+	ld hl, hPickedUpObjPos
 	ld de, wCurObjYPos
 	ld a, [hli]
 	ld [de], a
@@ -1688,7 +1688,7 @@ Func_62382::
 	jp HomeJumpRet
 
 .HoldFullCharge
-	ld hl, hffa0
+	ld hl, hPickedUpObjPos
 	ld a, [wWarioYPos + 1]
 	sub 30
 	ld [hli], a
@@ -1701,7 +1701,7 @@ Func_62382::
 	ld a, [wWarioXPos + 0]
 	adc 0
 	ld [hli], a
-	ld hl, hffa0
+	ld hl, hPickedUpObjPos
 	ld a, [hli]
 	sub 4
 	ldh [hYPosLo], a
@@ -1721,7 +1721,7 @@ Func_62382::
 	jr .asm_6239e
 
 .asm_62415
-	ld hl, hffa0
+	ld hl, hPickedUpObjPos
 	ld de, wCurObjYPos
 	ld a, [hli]
 	ld [de], a
@@ -1834,7 +1834,7 @@ Func_6247b::
 	jp HomeJumpRet
 
 .HoldFullCharge
-	ld hl, hffa0
+	ld hl, hPickedUpObjPos
 	ld a, [wWarioYPos + 1]
 	sub 30
 	ld [hli], a
@@ -1847,7 +1847,7 @@ Func_6247b::
 	ld a, [wWarioXPos + 0]
 	sbc 0
 	ld [hli], a
-	ld hl, hffa0
+	ld hl, hPickedUpObjPos
 	ld a, [hli]
 	sub 4
 	ldh [hYPosLo], a
@@ -1867,7 +1867,7 @@ Func_6247b::
 	jr .asm_62497
 
 .asm_6250e
-	ld hl, hffa0
+	ld hl, hPickedUpObjPos
 	ld de, wCurObjYPos
 	ld a, [hli]
 	ld [de], a
@@ -1956,7 +1956,7 @@ Func_62574::
 	ld a, $03
 	ldh [hffa0], a
 	jp nz, Func_62d34
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jr z, .asm_625aa
 	ld a, OBJSTATE_VANISH_TOUCH
@@ -2037,7 +2037,7 @@ Func_62605::
 	ld a, $03
 	ldh [hffa0], a
 	jp nz, Func_62e0f
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jr z, .asm_6263b
 	ld a, OBJSTATE_VANISH_TOUCH
@@ -2170,7 +2170,7 @@ Func_626da::
 	ld a, $03
 	ldh [hffa0], a
 	jp nz, Func_62d34
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jr z, .asm_62710
 .vanish
@@ -2249,7 +2249,7 @@ Func_62768::
 	ld a, $03
 	ldh [hffa0], a
 	jp nz, Func_62e0f
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jr z, .asm_6279e
 .vanish
@@ -2570,7 +2570,7 @@ Func_62926::
 	call Func_352b
 	and a
 	jr nz, .asm_62980
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jp z, HomeJumpRet
 	ld a, OBJSTATE_VANISH_TOUCH
@@ -2694,7 +2694,7 @@ _ObjState_StandingFall::
 	call Func_352b
 	and a
 	jr nz, .asm_62a35
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jp z, HomeJumpRet
 	ld a, OBJSTATE_VANISH_TOUCH
@@ -2769,7 +2769,7 @@ _ObjState_Fall::
 	call Func_352b
 	and a
 	jr nz, .land
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jp z, HomeJumpRet
 	ld a, OBJSTATE_VANISH_TOUCH
@@ -3119,7 +3119,7 @@ Func_62ca8::
 	call Func_352b
 	and a
 	jr nz, Func_62d34
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jr nz, .vanish
 
@@ -3264,7 +3264,7 @@ Func_62d86::
 	call Func_352b
 	and a
 	jr nz, Func_62e0f
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jr nz, .vanish
 

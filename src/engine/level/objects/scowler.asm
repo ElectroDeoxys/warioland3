@@ -272,7 +272,7 @@ ScowlerFunc:
 	ld a, [hli]
 	ldh [hXPosHi], a
 	call Func_358b
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jp nz, MoveObjectUp
 	ld hl, wCurObjSubState
@@ -504,7 +504,7 @@ ScowlerFunc:
 	ld a, [hli]
 	ldh [hXPosHi], a
 	call Func_358b
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	ret z
 	ld bc, Data_60a70
@@ -569,7 +569,7 @@ ScowlerFunc:
 	ld a, [hli]
 	ldh [hXPosHi], a
 	call Func_358b
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	ld bc, Data_60a70
 	jp nz, ApplyObjYMovement
@@ -1012,7 +1012,7 @@ InkFunc:
 	ld a, [hli]
 	ldh [hXPosHi], a
 	call Func_358b
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jr z, .asm_54be6
 	ld a, [wGlobalCounter]

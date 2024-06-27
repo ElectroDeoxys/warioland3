@@ -184,7 +184,7 @@ BigLeaf2Func:
 	ld a, [hl]
 	ldh [hXPosHi], a
 	call Func_352b
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	ret z
 	ld a, NO_ACTIONS_FOR 1

@@ -208,7 +208,7 @@ wWaterInteraction::
 wc0dc::
 	db
 
-wc0dd::
+wIsInWaterOrSand::
 	db
 
 wIsOnSlipperyGround::

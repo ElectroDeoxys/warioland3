@@ -180,7 +180,7 @@ MizzouProjectileFunc:
 	call Func_3543
 	and a
 	jr nz, .asm_488b5
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jr nz, .asm_488c8
 	ld bc, Data_60740

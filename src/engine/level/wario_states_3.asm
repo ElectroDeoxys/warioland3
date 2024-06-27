@@ -2120,13 +2120,13 @@ UpdateState_ElectricStart:
 	ld a, -27
 	ld [wCollisionBoxTop], a
 	ldh a, [hYPosHi]
-	ldh [hffad], a
+	ldh [hYPosHiBackup], a
 	ldh a, [hYPosLo]
-	ldh [hffae], a
+	ldh [hYPosLoBackup], a
 	ldh a, [hXPosHi]
-	ldh [hffaf], a
+	ldh [hXPosHiBackup], a
 	ldh a, [hXPosLo]
-	ldh [hffb0], a
+	ldh [hXPosLoBackup], a
 	farcall CheckUpCollision
 	ld a, [wWarioState]
 	cp WST_ELECTRIC
@@ -2138,13 +2138,13 @@ UpdateState_ElectricStart:
 	xor a
 	ld [wIsCrouching], a
 
-	ldh a, [hffad]
+	ldh a, [hYPosHiBackup]
 	ldh [hYPosHi], a
-	ldh a, [hffae]
+	ldh a, [hYPosLoBackup]
 	ldh [hYPosLo], a
-	ldh a, [hffaf]
+	ldh a, [hXPosHiBackup]
 	ldh [hXPosHi], a
-	ldh a, [hffb0]
+	ldh a, [hXPosLoBackup]
 	ldh [hXPosLo], a
 .asm_2946e
 	ld a, -27
@@ -2157,13 +2157,13 @@ UpdateState_ElectricStart:
 	ld [wCollisionBoxTop], a
 	xor a
 	ld [wJumpVelTable], a
-	ldh a, [hffad]
+	ldh a, [hYPosHiBackup]
 	ldh [hYPosHi], a
-	ldh a, [hffae]
+	ldh a, [hYPosLoBackup]
 	ldh [hYPosLo], a
-	ldh a, [hffaf]
+	ldh a, [hXPosHiBackup]
 	ldh [hXPosHi], a
-	ldh a, [hffb0]
+	ldh a, [hXPosLoBackup]
 	ldh [hXPosLo], a
 
 .asm_29493

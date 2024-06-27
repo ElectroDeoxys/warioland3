@@ -277,7 +277,7 @@ HaridamaFunc:
 	call Func_358b
 	and a
 	jr nz, .asm_490d5
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jr z, .asm_490d5
 	ld hl, wCurObjYPos

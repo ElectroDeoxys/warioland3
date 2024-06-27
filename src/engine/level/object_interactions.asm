@@ -931,13 +931,13 @@ SetState_Stung:
 	ld [wCollisionBoxTop], a
 
 	ldh a, [hYPosHi]
-	ldh [hffad], a
+	ldh [hYPosHiBackup], a
 	ldh a, [hYPosLo]
-	ldh [hffae], a
+	ldh [hYPosLoBackup], a
 	ldh a, [hXPosHi]
-	ldh [hffaf], a
+	ldh [hXPosHiBackup], a
 	ldh a, [hXPosLo]
-	ldh [hffb0], a
+	ldh [hXPosLoBackup], a
 
 	farcall CheckUpCollision
 	ld a, b
@@ -946,13 +946,13 @@ SetState_Stung:
 
 	xor a
 	ld [wIsCrouching], a
-	ldh a, [hffad]
+	ldh a, [hYPosHiBackup]
 	ldh [hYPosHi], a
-	ldh a, [hffae]
+	ldh a, [hYPosLoBackup]
 	ldh [hYPosLo], a
-	ldh a, [hffaf]
+	ldh a, [hXPosHiBackup]
 	ldh [hXPosHi], a
-	ldh a, [hffb0]
+	ldh a, [hXPosLoBackup]
 	ldh [hXPosLo], a
 
 .asm_20774
@@ -968,13 +968,13 @@ SetState_Stung:
 	xor a ; JUMP_VEL_NONE
 	ld [wJumpVelTable], a
 
-	ldh a, [hffad]
+	ldh a, [hYPosHiBackup]
 	ldh [hYPosHi], a
-	ldh a, [hffae]
+	ldh a, [hYPosLoBackup]
 	ldh [hYPosLo], a
-	ldh a, [hffaf]
+	ldh a, [hXPosHiBackup]
 	ldh [hXPosHi], a
-	ldh a, [hffb0]
+	ldh a, [hXPosLoBackup]
 	ldh [hXPosLo], a
 
 .asm_20799

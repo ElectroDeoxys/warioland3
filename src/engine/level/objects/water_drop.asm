@@ -110,7 +110,7 @@ WaterDropFunc:
 	call Func_352b
 	and a
 	jr nz, .asm_49e26
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jr nz, .asm_49e26
 	ld bc, FallingYVel_Light

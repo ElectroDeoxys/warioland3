@@ -1,7 +1,7 @@
 ; processes the block function of wBlockPtrBank:wBlockPtr
 ProcessBlock:
 	xor a ; FALSE
-	ld [wc0dd], a
+	ld [wIsInWaterOrSand], a
 	ld a, [wBlockPtrBank]
 	sramswitch
 	ld hl, wBlockPtr
@@ -239,7 +239,7 @@ LeftSlopeCollision:
 
 BlockFunc_Water:
 	ld a, TRUE
-	ld [wc0dd], a
+	ld [wIsInWaterOrSand], a
 	ld a, [wBlockFuncWarioFlag]
 	and a
 	jp z, BlockFunc_Free
@@ -323,7 +323,7 @@ BlockFunc_WaterSurface:
 	jp BlockFunc_Floor
 .asm_1825a
 	ld a, TRUE
-	ld [wc0dd], a
+	ld [wIsInWaterOrSand], a
 	jp BlockFunc_Solid
 
 BlockFunc_18262:
@@ -1005,7 +1005,7 @@ BlockFunc_LightSource:
 
 BlockFunc_Sand:
 	ld a, TRUE
-	ld [wc0dd], a
+	ld [wIsInWaterOrSand], a
 	ld a, [wBlockFuncWarioFlag]
 	and a
 	jp z, BlockFunc_Free
@@ -1062,7 +1062,7 @@ BlockFunc_188ba:
 
 BlockFunc_NonSubmersibleWater:
 	ld a, TRUE
-	ld [wc0dd], a
+	ld [wIsInWaterOrSand], a
 	ld a, [wBlockFuncWarioFlag]
 	and a
 	jp z, BlockFunc_Free
@@ -3156,13 +3156,13 @@ YarnBlockCollision:
 BreakBlock:
 	; temporarily store hPos
 	ldh a, [hYPosHi]
-	ldh [hffad], a
+	ldh [hYPosHiBackup], a
 	ldh a, [hYPosLo]
-	ldh [hffae], a
+	ldh [hYPosLoBackup], a
 	ldh a, [hXPosHi]
-	ldh [hffaf], a
+	ldh [hXPosHiBackup], a
 	ldh a, [hXPosLo]
-	ldh [hffb0], a
+	ldh [hXPosLoBackup], a
 
 	ld b, PARTICLE_DEBRIS
 	farcall CreateParticleInBlock
@@ -3182,7 +3182,7 @@ BreakBlock:
 
 	; backup CurObj
 	ld hl, wCurObjUnk01
-	ld de, hffa0
+	ld de, hCurObjBackup
 	ld b, OBJ_UNK_07 - OBJ_UNK_01
 	call CopyHLToDE
 
@@ -3202,7 +3202,7 @@ BreakBlock:
 	farcall _CreateObjectFromCurObjPos
 
 	; restore CurObj
-	ld hl, hffa0
+	ld hl, hCurObjBackup
 	ld de, wCurObjUnk01
 	ld b, OBJ_UNK_07 - OBJ_UNK_01
 	call CopyHLToDE
@@ -3211,26 +3211,26 @@ BreakBlock:
 
 .done
 	; restore hPos
-	ldh a, [hffad]
+	ldh a, [hYPosHiBackup]
 	ldh [hYPosHi], a
-	ldh a, [hffae]
+	ldh a, [hYPosLoBackup]
 	ldh [hYPosLo], a
-	ldh a, [hffaf]
+	ldh a, [hXPosHiBackup]
 	ldh [hXPosHi], a
-	ldh a, [hffb0]
+	ldh a, [hXPosLoBackup]
 	ldh [hXPosLo], a
 	ret
 
 BreakBlockWithColourCoin:
 	; temporarily store hPos
 	ldh a, [hYPosHi]
-	ldh [hffad], a
+	ldh [hYPosHiBackup], a
 	ldh a, [hYPosLo]
-	ldh [hffae], a
+	ldh [hYPosLoBackup], a
 	ldh a, [hXPosHi]
-	ldh [hffaf], a
+	ldh [hXPosHiBackup], a
 	ldh a, [hXPosLo]
-	ldh [hffb0], a
+	ldh [hXPosLoBackup], a
 
 	ld b, PARTICLE_DEBRIS
 	farcall CreateParticleInBlock
@@ -3241,7 +3241,7 @@ BreakBlockWithColourCoin:
 
 	; backup CurObj
 	ld hl, wCurObjUnk01
-	ld de, hffa0
+	ld de, hCurObjBackup
 	ld b, OBJ_UNK_07 - OBJ_UNK_01
 	call CopyHLToDE
 
@@ -3261,7 +3261,7 @@ BreakBlockWithColourCoin:
 	farcall _CreateObjectFromCurObjPos
 
 	; restore CurObj
-	ld hl, hffa0
+	ld hl, hCurObjBackup
 	ld de, wCurObjUnk01
 	ld b, OBJ_UNK_07 - OBJ_UNK_01
 	call CopyHLToDE
@@ -3269,12 +3269,12 @@ BreakBlockWithColourCoin:
 	ldh [rSVBK], a
 
 	; restore hPos
-	ldh a, [hffad]
+	ldh a, [hYPosHiBackup]
 	ldh [hYPosHi], a
-	ldh a, [hffae]
+	ldh a, [hYPosLoBackup]
 	ldh [hYPosLo], a
-	ldh a, [hffaf]
+	ldh a, [hXPosHiBackup]
 	ldh [hXPosHi], a
-	ldh a, [hffb0]
+	ldh a, [hXPosLoBackup]
 	ldh [hXPosLo], a
 	ret

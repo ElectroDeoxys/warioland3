@@ -338,7 +338,7 @@ HebariiFunc:
 	call Func_352b
 	and a
 	jr nz, .asm_4a204
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jp nz, VanishObject2
 	ld bc, FallingYVel_Light

@@ -1725,7 +1725,7 @@ ClearSaveData::
 	call WriteAToHL_BTimes
 
 	ld a, $00
-	ldh [hfffd], a
+	ldh [hUnused_fffd], a
 	jp Init
 
 OpenActionHelp::

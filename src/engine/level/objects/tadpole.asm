@@ -180,7 +180,7 @@ TadpoleFunc:
 	ld a, [hl]
 	ldh [hXPosHi], a
 	call Func_352b
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jr nz, .asm_49f85
 	ld bc, Data_60a40

@@ -267,7 +267,7 @@ PneumoFunc:
 	jr z, .asm_45801
 	jr .asm_457ed
 .asm_457e7
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jr nz, .asm_45801
 .asm_457ed
@@ -478,7 +478,7 @@ PneumoFunc:
 	ld a, [wWarioYPos + 1]
 	and $fc
 	ld l, a
-	ld de, hffb0
+	ld de, hXPosLoBackup
 	add hl, de
 	ld d, h
 	ld e, l
@@ -528,7 +528,7 @@ PneumoFunc:
 	jp nz, MoveObjectDown_Slow
 	jp .Func_456fe
 .asm_4599f
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jp z, MoveObjectDown
 	jp .Func_456fe

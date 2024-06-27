@@ -243,7 +243,7 @@ MuddeeFunc:
 	ld a, [hl]
 	ldh [hXPosHi], a
 	call Func_352b
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jr nz, .asm_557ed
 	ld bc, Data_60d40
@@ -381,7 +381,7 @@ MuddeeFunc:
 	ld a, [hli]
 	ldh [hXPosHi], a
 	call Func_352b
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jr nz, .asm_55910
 	call .Func_55c2b
@@ -761,7 +761,7 @@ MuddeeFunc:
 	ld a, [hli]
 	ldh [hXPosHi], a
 	call Func_352b
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jr nz, .asm_55b9a
 	jp MoveObjectDown_Slow

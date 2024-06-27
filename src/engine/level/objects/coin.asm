@@ -310,7 +310,7 @@ CoinFunc:
 	call Func_352b
 	and a
 	jr nz, .asm_63680
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jr z, .asm_6365d
 	ld [wCurObjFramesetOffset], a
@@ -420,7 +420,7 @@ CoinFunc:
 	call Func_352b
 	and a
 	jr nz, .asm_63729
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jr z, .asm_63706
 	ld [wCurObjFramesetOffset], a
@@ -765,7 +765,7 @@ CoinFunc:
 	ld a, $12
 	ld [wCurObjState], a
 .asm_6392d
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	ret z
 	ld [wCurObjFramesetOffset], a

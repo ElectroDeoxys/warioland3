@@ -427,7 +427,7 @@ CountRichtertoffenFunc:
 	jp DoGroundShake
 
 .continue_fall
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jp nz, VanishObject2
 	ld bc, Data_603e0

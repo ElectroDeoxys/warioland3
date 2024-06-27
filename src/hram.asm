@@ -1,83 +1,71 @@
 SECTION "HRAM", HRAM
 
-hCallFunc:: ; ff80
-	ds $5
-
-hCallFuncBank:: ; ff85
-	ds $1
-
+hCallFunc::        ds $5
+hCallFuncBank::    db
 	ds $7
-
-hCallFuncPointer:: ; ff8d
-	ds $2
+hCallFuncPointer:: dw
 
 	ds $11
 
-hffa0:: ; ffa0
-	ds $1
+UNION
 
-hffa1:: ; ffa1
-	ds $1
+hThrownObjInteractionType::
+hIsInWaterOrSandBackup::
+hffa0::
+	db
 
-hffa2:: ; ffa2
-	ds $1
+hCollidedObjState_Light:: db
+hThrownObjState_Light::   db
+hCollidedObjState_Heavy:: db
+hThrownObjState_Heavy::   db
 
-hffa3:: ; ffa3
-	ds $1
+NEXTU
 
-hffa4:: ; ffa4
-	ds $1
+hCurObjBackup::
+	ds $6
 
-	ds $3
+NEXTU
+
+hPickedUpObjPos::
+	ds $4
+
+ENDU
+
+	ds $2
 
 hPos::
-hYPosHi:: ds $1 ; ffa8
-hYPosLo:: ds $1 ; ffa9
-hXPosHi:: ds $1 ; ffaa
-hXPosLo:: ds $1 ; ffab
+hYPosHi:: db
+hYPosLo:: db
+hXPosHi:: db
+hXPosLo:: db
 
-hffac:: ; ffac
-	ds $1
+hffac::
+	db
 
-hffad:: ; ffad
-	ds $1
+hYPosHiBackup:: db
+hYPosLoBackup:: db
+hXPosHiBackup:: db
+hXPosLoBackup:: db
 
-hffae:: ; ffae
-	ds $1
-
-hffaf:: ; ffaf
-	ds $1
-
-hffb0:: ; ffb0
-	ds $1
-
-hMusicID:: ; ffb1
-	ds $2
-
-hffb3:: ; ffb3
-	ds $1
-
-hffb4:: ; ffb4
-	ds $1
-
-hSFXID:: ; ffb5
-	ds $2
+hMusicID::       dw
+hMusicIDBackup:: dw
+hSFXID::         dw
 
 	ds $31
 
-hTransferVirtualOAM:: ; ffe8
+hTransferVirtualOAM::
 	ds $e
 
 	ds $6
 
 ; which Power Up to show in the next
 ; Action Help demo in the Title Screen
-hDemoPowerUp:: ; fffc
-	ds $1
+hDemoPowerUp::
+	db
 
-hfffd:: ; fffd
-	ds $1
+hUnused_fffd::
+	db
 
 ; whether system is CGB or not
-hCGB:: ; fffe
-	ds $1
+hCGB::
+	db

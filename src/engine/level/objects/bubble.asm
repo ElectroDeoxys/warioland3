@@ -119,8 +119,8 @@ BubbleFunc:
 	call Func_358b
 	and a
 	jp nz, .set_burst
-	ld a, [wc0dd]
-	ldh [hffa0], a
+	ld a, [wIsInWaterOrSand]
+	ldh [hIsInWaterOrSandBackup], a
 
 	ld hl, wCurObjYPos
 	ld a, [hli]
@@ -134,12 +134,12 @@ BubbleFunc:
 	ld a, [hli]
 	ldh [hXPosHi], a
 	call Func_358b
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
-	ret nz
-	ldh a, [hffa0]
+	ret nz ; still underwater
+	ldh a, [hIsInWaterOrSandBackup]
 	and a
-	ret nz
+	ret nz ; still underwater
 	jp .set_burst
 
 .asm_47ce0

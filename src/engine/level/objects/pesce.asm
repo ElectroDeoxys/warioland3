@@ -285,7 +285,7 @@ PesceFunc:
 	ld a, [hli]
 	ldh [hXPosHi], a
 	call Func_358b
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jr z, .asm_51f46
 	ld a, [wWarioScreenYPos]
@@ -1311,7 +1311,7 @@ CheeseFunc:
 	ld a, [hl]
 	ldh [hXPosHi], a
 	call Func_352b
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	jr nz, .asm_5263d
 	ld hl, wCurObjFlags

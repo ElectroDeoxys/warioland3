@@ -8,7 +8,7 @@ Start::
 .not_cgb
 	ldh [hCGB], a
 	ld a, $00
-	ldh [hfffd], a
+	ldh [hUnused_fffd], a
 	; fallthrough
 
 Init::
@@ -258,9 +258,9 @@ UnreferencedUnmuteSound:
 	ld [wSoundMuted], a
 	ldh [hSFXID + 0], a
 	ldh [hSFXID + 1], a
-	ldh a, [hffb3]
+	ldh a, [hMusicIDBackup + 0]
 	ld b, a
-	ldh a, [hffb4]
+	ldh a, [hMusicIDBackup + 1]
 	ld c, a
 	call PlayNewMusic_SetNoise
 	ret

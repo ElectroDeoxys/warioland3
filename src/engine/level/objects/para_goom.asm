@@ -761,7 +761,7 @@ ParaGoomFunc:
 	call Func_352b
 	and a
 	jr nz, .asm_41857
-	ld a, [wc0dd]
+	ld a, [wIsInWaterOrSand]
 	and a
 	ret z
 	ld a, $0a
