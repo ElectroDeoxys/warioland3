@@ -23,6 +23,14 @@ DEF CRAYON_PINK   EQU 1 << CRAYON_PINK_F   ; $40
 
 DEF ALL_CRAYONS EQU CRAYON_RED | CRAYON_BROWN | CRAYON_YELLOW | CRAYON_GREEN | CRAYON_CYAN | CRAYON_BLUE | CRAYON_PINK
 
+; OW Wario direction contants
+	const_def 1
+	const OWWARIO_DOWN   ; $1
+	const OWWARIO_LEFT   ; $2
+	const OWWARIO_RIGHT  ; $3
+	const OWWARIO_UP     ; $4
+	const OWWARIO_ARROWS ; $5
+
 ; north side level indices
 	const_def
 	const OWNORTH_THE_TEMPLE             ; $0
@@ -32,6 +40,7 @@ DEF ALL_CRAYONS EQU CRAYON_RED | CRAYON_BROWN | CRAYON_YELLOW | CRAYON_GREEN | C
 	const OWNORTH_BANK_OF_THE_WILD_RIVER ; $4
 	const OWNORTH_THE_TIDAL_COAST        ; $5
 	const OWNORTH_SEA_TURTLE_ROCKS       ; $6
+DEF NUM_NORTH_LEVELS EQU const_value
 	const OWNORTH_JUNCTION               ; $7
 
 ; west side level indices
@@ -42,6 +51,7 @@ DEF ALL_CRAYONS EQU CRAYON_RED | CRAYON_BROWN | CRAYON_YELLOW | CRAYON_GREEN | C
 	const OWWEST_A_TOWN_IN_CHAOS   ; $3
 	const OWWEST_BENEATH_THE_WAVES ; $4
 	const OWWEST_THE_WEST_CRATER   ; $5
+DEF NUM_WEST_LEVELS EQU const_value
 
 ; south side level indices
 	const_def
@@ -51,6 +61,7 @@ DEF ALL_CRAYONS EQU CRAYON_RED | CRAYON_BROWN | CRAYON_YELLOW | CRAYON_GREEN | C
 	const OWSOUTH_THE_STEEP_CANYON ; $3
 	const OWSOUTH_CAVE_OF_FLAMES   ; $4
 	const OWSOUTH_ABOVE_THE_CLOUDS ; $5
+DEF NUM_SOUTH_LEVELS EQU const_value
 
 ; east side level indices
 	const_def
@@ -61,6 +72,7 @@ DEF ALL_CRAYONS EQU CRAYON_RED | CRAYON_BROWN | CRAYON_YELLOW | CRAYON_GREEN | C
 	const OWEAST_THE_WARPED_VOID     ; $4
 	const OWEAST_THE_EAST_CRATER     ; $5
 	const OWEAST_FOREST_OF_FEAR      ; $6
+DEF NUM_EAST_LEVELS EQU const_value
 
 	const_def $e
 DEF OW_EXITS EQU const_value

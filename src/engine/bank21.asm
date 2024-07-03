@@ -3279,21 +3279,23 @@ LoadOWStarIndicatorPals:
 	ld [wPalConfig1Register], a
 	ret
 
-Func_85475:
+_LoadMapSidePals:
 	call GetMapSidePalGroup1
-	call Func_8548f
+	call .UpdatePalsIfGotAllCrayons
 	ld a, [w2d011]
 	and a
-	jr z, .asm_85485
+	jr z, .load_pals
 	ld de, 24 palettes
 	add hl, de
-.asm_85485
+.load_pals
 	call LoadPalsToTempPals1
 	call GetMapSidePalGroup2
 	call LoadPalsToTempPals2
 	ret
 
-Func_8548f:
+; for North and West side, update pals if all the
+; crayons were collected, to change Golf Building's colour
+.UpdatePalsIfGotAllCrayons:
 	ld a, [wCrayonFlags]
 	and ALL_CRAYONS
 	cp ALL_CRAYONS

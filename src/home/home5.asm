@@ -121,7 +121,7 @@ UpdateOWAnimation::
 ; returns TRUE in a and carry set if treasure
 ; in input a has already been collected
 ; if not collected returns z set
-; a = * constant
+; a = treasure constant
 IsTreasureCollected::
 	ld hl, wTreasuresCollected
 	ld e, a

@@ -8374,7 +8374,7 @@ Func_b7984:
 	ld a, [w2d025]
 	and a
 	ret nz
-	ld a, [wConnectedLevel2]
+	ld a, [wLevel2]
 	cp $06
 	ret nz
 	ld a, $06

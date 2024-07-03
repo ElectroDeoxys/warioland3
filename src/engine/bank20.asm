@@ -662,7 +662,7 @@ InitOverworld:
 	jr .asm_8048a
 
 .asm_80466
-	call .Func_804c9
+	call Func_804c9
 	farcall Func_9c005
 	ld a, [w2d01e]
 	and a
@@ -684,13 +684,13 @@ InitOverworld:
 	ret
 
 .asm_80497
-	call .Func_804d4
+	call Func_804d4
 	ld a, SST_OVERWORLD_05
 	ld [wSubState], a
 	ret
 
 .asm_804a0
-	call .Func_804d4
+	call Func_804d4
 	ld a, SST_OVERWORLD_11
 	ld [wSubState], a
 	ret
@@ -715,7 +715,7 @@ InitOverworld:
 	call Func_803e6
 	ret
 
-.Func_804c9
+Func_804c9:
 	ld a, [wTopBarState]
 	and a
 	ret nz
@@ -723,7 +723,7 @@ InitOverworld:
 	ld [w2d00d], a
 	ret
 
-.Func_804d4
+Func_804d4:
 	ld a, [wTopBarState]
 	and a
 	ret nz
@@ -841,10 +841,10 @@ InitMapSide:
 	ld [wCurMapSide], a
 	jumptable
 
-	dw Func_805e1 ; NORTH
-	dw Func_805fd ; WEST
-	dw Func_8060f ; SOUTH
-	dw Func_80621 ; EAST
+	dw InitNorthMapSide ; NORTH
+	dw InitWestMapSide  ; WEST
+	dw InitSouthMapSide ; SOUTH
+	dw InitEastMapSide  ; EAST
 
 Func_805d7:
 	call Func_80e89
@@ -852,8 +852,8 @@ Func_805d7:
 	call ClearUnusedVirtualOAM
 	ret
 
-Func_805e1:
-	call Func_80aa5
+InitNorthMapSide:
+	call LoadMapSidePals
 	call LoadOverworld1Gfx
 	call LoadOverworldCommonGfx
 	call LoadOverworldArrowsGfx
@@ -864,23 +864,23 @@ Func_805e1:
 	call LoadBGMapsToWRAM
 	jp Func_8065e
 
-Func_805fd:
-	call Func_80aa5
+InitWestMapSide:
+	call LoadMapSidePals
 	call LoadOverworld2Gfx
 	call LoadOverworldCommonGfx
 	call LoadOverworldArrowsGfx
 	call Func_80ae7
 	jp Func_8065e
 
-Func_8060f:
-	call Func_80aa5
+InitSouthMapSide:
+	call LoadMapSidePals
 	call LoadOverworld5Gfx
 	call LoadOverworldCommonGfx
 	call LoadOverworldArrowsGfx
 	call Func_80af5
 	jp Func_8065e
 
-Func_80621:
+InitEastMapSide:
 	ld a, CUTSCENE_1B
 	call Func_819c6
 	ld [wGotSunMedallion], a
@@ -896,7 +896,7 @@ Func_80621:
 	ld a, [wTransitionParam]
 	cp KEY_CARD_BLUE
 	call z, .Func_80655
-	call Func_80aa5
+	call LoadMapSidePals
 	call LoadOverworld6Gfx
 	call LoadOverworldCommonGfx
 	call LoadOverworldArrowsGfx
@@ -906,7 +906,7 @@ Func_80621:
 .Func_80655
 	ld a, KEY_CARD_RED
 	call IsTreasureCollected
-	jp z, InitOverworld.Func_804c9
+	jp z, Func_804c9
 	ret
 
 Func_8065e:
@@ -917,7 +917,7 @@ Func_8065e:
 	jr z, .asm_80669
 	xor a
 .asm_80669
-	ld [w2d01f], a
+	ld [wMissingTreasureIndicatorsEnabled], a
 	call Func_80b54
 
 	decompress_vram0 BGMap_85b91, v0BGMap0 + $3a0
@@ -939,19 +939,19 @@ Func_8065e:
 
 	ld a, [wCurMapSide] ; a gets overwritten
 	call Func_81dce
-	call Func_812c0
+	call ShowMissingTreasureIndicators
 	call Func_80bd9
 	call WriteBGMapFromWRAM
 
 	call Func_8212c
 	ld a, [wMapSideLevelID]
-	ld [wConnectedLevel2], a
+	ld [wLevel2], a
 	ld [w2d068], a
 	xor a
 	ld [wLevelArrowDirections1], a
 
-	ld a, $01
-	call Func_820af
+	ld a, OWWARIO_DOWN
+	call SetOWWarioOAM
 	farcall Func_b4a3d
 	call Func_82041
 	farcall Func_b4aa9
@@ -1245,8 +1245,8 @@ LoadOverworldGlowGfx:
 	decompress_vram1 OverworldGlowGfx, v1Tiles0 tile $20
 	ret
 
-Func_80aa5:
-	farcall Func_85475
+LoadMapSidePals:
+	farcall _LoadMapSidePals
 	ret
 
 Func_80ab5:
@@ -1390,12 +1390,15 @@ Func_80bc9:
 Func_80bd9:
 	hlbgcoord 0, 14, wAttrmap
 	res 7, [hl]
-	ld de, 30 tiles
-	ld c, $04
+
+	; reset BG priority inside a
+	; 3x4 rectangle, at coord (0, 15)
+	ld de, 15 * BG_MAP_WIDTH
+	ld c, 4
 .loop_outer
 	ld hl, wAttrmap
 	add hl, de
-	ld b, $03
+	ld b, 3
 .loop_inner
 	res 7, [hl]
 	inc hl
@@ -1792,7 +1795,7 @@ Func_80ee7:
 	call Func_8212c
 	call GetOWAllowedDPadInput
 	ld a, [wMapSideLevelID]
-	ld [wConnectedLevel2], a
+	ld [wLevel2], a
 	ld [w2d068], a
 	xor a
 	ld [wPalConfig1TotalSteps], a
@@ -1962,7 +1965,7 @@ Func_81034:
 	ld [wLevelArrowDirections1], a
 	call Func_820e6
 	ld a, [w2d068]
-	ld [wConnectedLevel2], a
+	ld [wLevel2], a
 	ld a, $03
 	ld [w2d0e0], a
 	xor a
@@ -1997,8 +2000,8 @@ Func_81077:
 	ret nz
 .asm_81092
 	call Func_3c76
-	ld a, $04
-	call Func_820af
+	ld a, OWWARIO_UP
+	call SetOWWarioOAM
 	play_sfx SFX_113
 	ld a, $0a
 	ld [w2d013], a
@@ -2021,10 +2024,10 @@ Func_810a9:
 	ret
 
 Func_810bb:
-	ld a, [wConnectedLevel1YCoord]
-	ld [wConnectedLevel2YCoord], a
-	ld a, [wConnectedLevel1XCoord]
-	ld [wConnectedLevel2XCoord], a
+	ld a, [wLevel1YCoord]
+	ld [wLevel2YCoord], a
+	ld a, [wLevel1XCoord]
+	ld [wLevel2XCoord], a
 
 	ld a, [w2d068]
 	call GetMapLevelCoords
@@ -2075,35 +2078,35 @@ Func_81108:
 
 Func_8110d:
 	ld a, [w2d06f]
-	ld [wConnectedLevel2YCoord], a
+	ld [wLevel2YCoord], a
 	ld a, [w2d070]
-	ld [wConnectedLevel2XCoord], a
+	ld [wLevel2XCoord], a
 	xor a
 	ld [bc], a
 	ret
 
 Func_8111c:
 	ld a, [w2d06f]
-	ld [wConnectedLevel2YCoord], a
+	ld [wLevel2YCoord], a
 	ld a, $01
 	ld [bc], a
 	ret
 
 Func_81126:
 	ld a, [w2d070]
-	ld [wConnectedLevel2XCoord], a
+	ld [wLevel2XCoord], a
 	ld a, $01
 	ld [bc], a
 	ret
 
 Func_81130:
-	ld a, [wConnectedLevel1XCoord]
+	ld a, [wLevel1XCoord]
 	ld e, a
 	ld a, [w2d070]
 	sub e
 	sra a
 	add e
-	ld [wConnectedLevel2XCoord], a
+	ld [wLevel2XCoord], a
 	ld a, $02
 	ld [bc], a
 	ret
@@ -2145,9 +2148,9 @@ Func_8115c:
 .asm_81177
 	call nz, Func_82208
 
-	ld a, [wConnectedLevel1YCoord]
+	ld a, [wLevel1YCoord]
 	ld [w2d100], a
-	ld a, [wConnectedLevel1XCoord]
+	ld a, [wLevel1XCoord]
 	ld [w2d101], a
 	ld a, [w2d0a1]
 	and a
@@ -2347,10 +2350,12 @@ Func_812b0:
 	db $05 ; SOUTH
 	db $06 ; EAST
 
-Func_812c0:
-	ld a, [w2d01f]
+; when game is cleared, show indicators on level
+; where some treasures are still missing
+ShowMissingTreasureIndicators:
+	ld a, [wMissingTreasureIndicatorsEnabled]
 	and a
-	ret z
+	ret z ; game not cleared OR all treasures collected
 	ld a, [wOWLevel]
 	ld [w2dffd], a
 	ld a, [wCurMapSide]
@@ -2362,32 +2367,34 @@ Func_812c0:
 	ld [wOWLevel], a
 
 	ld a, [wNextMapSide]
-	ld b, $06
+	ld b, NUM_WEST_LEVELS
 	dec a
-	jr z, .asm_812ed ; west
-	ld b, $06
+	jr z, .got_level_count ; west
+	ld b, NUM_SOUTH_LEVELS
 	dec a
-	jr z, .asm_812ed ; south
-	ld b, $07
+	jr z, .got_level_count ; south
+	ld b, NUM_EAST_LEVELS
 	dec a
-	jr z, .asm_812ed ; east
-	ld b, $07
-.asm_812ed
+	jr z, .got_level_count ; east
+	ld b, NUM_NORTH_LEVELS
+.got_level_count
 	ld a, b
 	ld [w2dfff], a
 	xor a
 	ld [w2dffe], a
 
+	; if in North, skip The Temple
 	ld a, [wOWLevel]
 	and a
-	jr z, .asm_81314
-.asm_812fb
+	jr z, .skip_level
+.loop_levels
 	farcall GetOWLevelCollectedTreasures
 	ld a, [wKeyAndTreasureFlags]
 	and TREASURES_MASK
 	xor TREASURES_MASK
-	call nz, .Func_8132a ; at least 1 treasure missing
-.asm_81314
+	; nz means at least 1 treasure missing
+	call nz, .PlaceTreasureMissingIndicator
+.skip_level
 	ld a, [wOWLevel]
 	inc a
 	ld [wOWLevel], a
@@ -2395,25 +2402,25 @@ Func_812c0:
 	inc [hl]
 	ld a, [hli]
 	cp [hl] ; w2dfff
-	jr nz, .asm_812fb
+	jr nz, .loop_levels
 	ld a, [w2dffd]
 	ld [wOWLevel], a
 	ret
 
-.Func_8132a
+.PlaceTreasureMissingIndicator:
 	ld a, [w2dffe]
 	call GetMapLevelCoords
 	ld a, [hli]
-	ld [wConnectedLevel1YCoord], a
+	ld [wLevel1YCoord], a
 	ld a, [hl]
-	ld [wConnectedLevel1XCoord], a
-	ld hl, wConnectedLevel1Coords
+	ld [wLevel1XCoord], a
+	ld hl, wLevel1Coords
 	call GetOWCoordInTilemap
-	ld [hl], $7b
+	ld [hl], $7b ; tile index
 	dec h
 	dec h
 	dec h
-	ld [hl], $0d
+	ld [hl], $0d ; attribute
 	ret
 
 Func_81346:
@@ -2522,8 +2529,8 @@ Func_81413:
 	jp Func_81398
 
 Func_8142d:
-	ld a, $01
-	call Func_820af
+	ld a, OWWARIO_DOWN
+	call SetOWWarioOAM
 	xor a
 	ld [w2d013], a
 	ld [w2d014], a
@@ -2538,18 +2545,18 @@ Func_8143d:
 	ld a, [w2d101]
 	ld [hl], a
 	ld a, [w2d069]
-	ld [wConnectedLevel1YCoord], a
+	ld [wLevel1YCoord], a
 	ld [w2d100], a
 	ld a, [w2d06a]
-	ld [wConnectedLevel1XCoord], a
+	ld [wLevel1XCoord], a
 	ld [w2d101], a
 	call .Func_8146f
 	ld hl, wPalFade2Colour2RedUnk3
 	ld a, [hli]
-	ld [wConnectedLevel1YCoord], a
+	ld [wLevel1YCoord], a
 	ld [w2d100], a
 	ld a, [hl]
-	ld [wConnectedLevel1XCoord], a
+	ld [wLevel1XCoord], a
 	ld [w2d101], a
 	ret
 
@@ -2577,16 +2584,16 @@ Func_81477:
 	ld a, [w2d0e3]
 	and a
 	ret z
-	ld a, $01
+	ld a, OWWARIO_DOWN
 	ld hl, w2d106
 	cp [hl]
-	call nz, Func_820af
+	call nz, SetOWWarioOAM
 	ld hl, w2d88e
 	ld a, [hli] ; w2d88e
-	ld [wConnectedLevel1YCoord], a
+	ld [wLevel1YCoord], a
 	ld [w2d100], a
 	ld a, [hl] ; w2d88f
-	ld [wConnectedLevel1XCoord], a
+	ld [wLevel1XCoord], a
 	ld [w2d101], a
 	xor a
 	ld [w2d0e3], a
@@ -2614,13 +2621,13 @@ Func_814c4:
 	ret c
 	play_sfx SFX_113
 	ld a, [w2d069]
-	ld [wConnectedLevel1YCoord], a
+	ld [wLevel1YCoord], a
 	ld [w2d100], a
 	ld a, [w2d06a]
-	ld [wConnectedLevel1XCoord], a
+	ld [wLevel1XCoord], a
 	ld [w2d101], a
-	ld a, $05
-	call Func_820af
+	ld a, OWWARIO_ARROWS
+	call SetOWWarioOAM
 	jr Func_814bd
 
 Func_814ec:
@@ -2696,7 +2703,7 @@ Func_8150c:
 	ld de, w2d0a0
 	ld b, $7
 	call CopyHLToDE
-	ld de, wConnectedLevel1Coords
+	ld de, wLevel1Coords
 	ld b, $8
 	call CopyHLToDE
 	ret
@@ -2712,7 +2719,7 @@ Func_8150c:
 	ld hl, w2d0a0
 	ld b, $07
 	call CopyHLToDE
-	ld hl, wConnectedLevel1Coords
+	ld hl, wLevel1Coords
 	ld b, $08
 	call CopyHLToDE
 	ret
@@ -2805,13 +2812,13 @@ Func_8150c:
 .asm_81645
 	ld a, d
 	ld [w2d880], a
-	ld [wConnectedLevel1YCoord], a
-	ld [wConnectedLevel2YCoord], a
+	ld [wLevel1YCoord], a
+	ld [wLevel2YCoord], a
 	ld [w2d06f], a
 	ld a, e
 	ld [wPalFade2Colour1BlueTarget], a
-	ld [wConnectedLevel1XCoord], a
-	ld [wConnectedLevel2XCoord], a
+	ld [wLevel1XCoord], a
+	ld [wLevel2XCoord], a
 	ld [w2d070], a
 	ld hl, wPalFade2Colour1BlueUnk1
 	xor a
@@ -2876,9 +2883,9 @@ Func_8150c:
 
 .Func_816be:
 	call Func_82208
-	ld a, [wConnectedLevel1YCoord]
+	ld a, [wLevel1YCoord]
 	ld [w2d880], a
-	ld a, [wConnectedLevel1XCoord]
+	ld a, [wLevel1XCoord]
 	ld [wPalFade2Colour1BlueTarget], a
 	ld a, [w2d0a1]
 	and a
@@ -4495,7 +4502,7 @@ Func_81e57:
 	xor a
 	ld [w2d072], a
 	call GetUnlockedOWLevelData
-	call Func_81f94
+	call GetUnlockedLevelArrows
 .loop
 	call .Func_81e88
 	ld hl, w2d072
@@ -4537,15 +4544,15 @@ Func_81e57:
 	ld [hl], a
 	xor a ; FALSE
 	ld [w2d07f], a
-	ld a, [wConnectedLevel2]
+	ld a, [wLevel2]
 	cp OW_EXIT_RIGHT
 	ret z
 
 .second_connection
-	ld a, [wConnectedLevel2XCoord]
-	ld [wConnectedLevel1XCoord], a
-	ld a, [wConnectedLevel2YCoord]
-	ld [wConnectedLevel1YCoord], a
+	ld a, [wLevel2XCoord]
+	ld [wLevel1XCoord], a
+	ld a, [wLevel2YCoord]
+	ld [wLevel1YCoord], a
 	ld a, [wLevelArrowDirections2]
 	ld [wLevelArrowDirections1], a
 	ld a, [wLevelArrowDirections1]
@@ -4571,7 +4578,7 @@ Func_81e57:
 
 	ld hl, wAttrToPlaceInOW
 	call ShowLevelPointInOW
-	ld hl, wConnectedLevel2Coords
+	ld hl, wLevel2Coords
 	call GetOWCoordInTilemap
 	ld a, TRUE
 	ld [w2d07f], a
@@ -4629,9 +4636,9 @@ GetUnlockedOWLevelData:
 	ld hl, UnlockableConnections
 	call GetCthWordFromAthTable
 	ld a, [hli]
-	ld [wConnectedLevel1], a
+	ld [wLevel1], a
 	ld a, [hl]
-	ld [wConnectedLevel2], a
+	ld [wLevel2], a
 
 	ld hl, wCutsceneMapSide
 	ld a, [hli]
@@ -4643,24 +4650,24 @@ GetUnlockedOWLevelData:
 	ld a, [hl]
 	ld [wUnlockedLevelArrowsPtr + 1], a
 
-	ld a, [wConnectedLevel1]
+	ld a, [wLevel1]
 	call GetMapLevelCoords
 	ld a, [hli]
 	ld [w2d069], a
-	ld [wConnectedLevel1YCoord], a
+	ld [wLevel1YCoord], a
 	ld a, [hl]
 	ld [w2d06a], a
-	ld [wConnectedLevel1XCoord], a
+	ld [wLevel1XCoord], a
 
-	ld a, [wConnectedLevel2]
+	ld a, [wLevel2]
 	call GetMapLevelCoords
 	ld a, [hli]
-	ld [wConnectedLevel2YCoord], a
+	ld [wLevel2YCoord], a
 	ld a, [hl]
-	ld [wConnectedLevel2XCoord], a
+	ld [wLevel2XCoord], a
 	ret
 
-Func_81f94:
+GetUnlockedLevelArrows:
 	ld a, [wUnlockedLevelArrowsPtr + 0]
 	ld l, a
 	ld a, [wUnlockedLevelArrowsPtr + 1]
@@ -4686,12 +4693,12 @@ Func_81f94:
 GetConnectedLevel1ArrowCoord:
 	ld b, a
 	ld a, $8
-	ld hl, wConnectedLevel1XCoord
+	ld hl, wLevel1XCoord
 	bit D_RIGHT_F, b
 	jr nz, .right_down
 	bit D_LEFT_F, b
 	jr nz, .left_up
-	ld hl, wConnectedLevel1YCoord
+	ld hl, wLevel1YCoord
 	bit D_UP_F, b
 	jr nz, .left_up
 	bit D_DOWN_F, b
@@ -4710,7 +4717,7 @@ GetConnectedLevel1CoordsInTilemap:
 	ld [wTempOWTilemapPtr + 0], a
 	ld a, [wOWTilemapPtr + 1]
 	ld [wTempOWTilemapPtr + 1], a
-	ld hl, wConnectedLevel1Coords
+	ld hl, wLevel1Coords
 	call GetOWCoordInTilemap
 	ret
 
@@ -4764,7 +4771,7 @@ AddCompassSprite:
 	call AddOWSpriteWithScroll
 	ret
 
-PlaySFX12A:
+PlaySFX_12A:
 	play_sfx SFX_12A
 	ret
 
@@ -4777,7 +4784,7 @@ Func_82041:
 	ld hl, w2d10d
 	ld a, [hl]
 	and a
-	call z, PlaySFX12A
+	call z, PlaySFX_12A
 	inc [hl]
 	ld a, [w2d10e]
 	rlca
@@ -4799,19 +4806,19 @@ Func_82041:
 	cp b
 	jr z, Func_8208d
 	ld [w2d10c], a
-	ld c, $04
+	ld c, OWWARIO_UP
 	bit 6, a
 	jr nz, .asm_82089
-	ld c, $03
+	ld c, OWWARIO_RIGHT
 	bit 4, a
 	jr nz, .asm_82089
-	ld c, $02
+	ld c, OWWARIO_LEFT
 	bit 5, a
 	jr nz, .asm_82089
-	ld c, $01
+	ld c, OWWARIO_DOWN
 .asm_82089
 	ld a, c
-	call Func_820af
+	call SetOWWarioOAM
 ;	fallthrough
 Func_8208d:
 	ld a, [w2d106]
@@ -4833,7 +4840,9 @@ Func_8208d:
 	call AddOWSpriteWithScroll
 	ret
 
-Func_820af:
+; input:
+; - a = OWWARIO_* constant
+SetOWWarioOAM:
 	ld [w2d106], a
 	and a
 	ret z
@@ -4917,21 +4926,21 @@ Func_82111:
 
 Func_8212c:
 	ld a, [wMapSideLevelID]
-	ld [wConnectedLevel1], a
+	ld [wLevel1], a
 	call GetMapLevelCoords
 	ld a, [hli]
-	ld [w2d069], a
+	ld [w2d069], a ; level x
 	ld b, a
 	ld a, [hli]
-	ld [w2d06a], a
+	ld [w2d06a], a ; level y
 	ld c, a
 	ld a, [hli]
 	add b
-	ld [wConnectedLevel1YCoord], a
+	ld [wLevel1YCoord], a
 	ld [w2d100], a
 	ld a, [hl]
 	add c
-	ld [wConnectedLevel1XCoord], a
+	ld [wLevel1XCoord], a
 	ld [w2d101], a
 	ret
 
@@ -5001,14 +5010,14 @@ Func_821a1:
 	ld [w2d0a0], a
 
 	ld c, $02
-	ld hl, wConnectedLevel1YCoord
-	ld de, wConnectedLevel2YCoord
+	ld hl, wLevel1YCoord
+	ld de, wLevel2YCoord
 	call Func_821f9
 	ld [w2d0a7], a
 
 	ld c, $04
-	ld hl, wConnectedLevel1XCoord
-	ld de, wConnectedLevel2XCoord
+	ld hl, wLevel1XCoord
+	ld de, wLevel2XCoord
 	call Func_821f9
 	ld [w2d0a8], a
 
@@ -5093,7 +5102,7 @@ Func_8222f:
 ;	fallthrough
 
 Func_82234:
-	ld hl, wConnectedLevel1YCoord
+	ld hl, wLevel1YCoord
 	ld de, w2d0a5
 	jr z, .asm_8223e
 	inc e
@@ -6380,7 +6389,7 @@ Func_82a26:
 Func_82a2f:
 	ld a, [wCutsceneMapSide]
 	ld b, a ; map side
-	ld a, [wConnectedLevel2]
+	ld a, [wLevel2]
 	ld d, a ; map side level index
 	cp OW_EXITS
 	jr nc, .is_exit
@@ -6431,7 +6440,7 @@ Func_82a8d:
 	ret
 
 Func_82a96:
-	call Func_81f94
+	call GetUnlockedLevelArrows
 	jr Func_82a8d
 
 Func_82a9b:
@@ -6467,7 +6476,7 @@ Func_82ad2:
 ; return z if 1st connected level is left exit
 ; or if it is North's map side junction
 IsLeftExitOrJunction:
-	ld a, [wConnectedLevel1]
+	ld a, [wLevel1]
 	cp OW_EXIT_LEFT
 	ret z ; is left exit
 	ld c, a
@@ -6479,13 +6488,13 @@ IsLeftExitOrJunction:
 	ret
 
 Func_82aea:
-	ld a, [wConnectedLevel2]
+	ld a, [wLevel2]
 	cp OW_EXIT_RIGHT
 	jr z, Func_82a8d
-	ld a, [wConnectedLevel2XCoord]
-	ld [wConnectedLevel1XCoord], a
-	ld a, [wConnectedLevel2YCoord]
-	ld [wConnectedLevel1YCoord], a
+	ld a, [wLevel2XCoord]
+	ld [wLevel1XCoord], a
+	ld a, [wLevel2YCoord]
+	ld [wLevel1YCoord], a
 	ld a, [wLevelArrowDirections2]
 	ld [wLevelArrowDirections1], a
 	call GetConnectedLevel1ArrowCoord
@@ -6499,10 +6508,10 @@ Func_82aea:
 	jp Func_82ad2
 
 Func_82b22:
-	ld a, [wConnectedLevel2]
+	ld a, [wLevel2]
 	cp OW_EXIT_RIGHT
 	jp z, Func_82a8d
-	ld hl, wConnectedLevel2Coords
+	ld hl, wLevel2Coords
 	call GetOWCoordInTilemap
 	ld hl, wAttrToPlaceInOW
 	call ShowLevelPointInOW
@@ -6567,12 +6576,12 @@ Func_82b7b:
 	ret c
 	jp Func_82a8d
 .asm_82b88
-	ld a, [wConnectedLevel2]
+	ld a, [wLevel2]
 	cp OW_EXITS
 	jp nc, Func_82a8d
-	ld a, [wConnectedLevel2YCoord]
+	ld a, [wLevel2YCoord]
 	ld [wCurSceneObjYCoord], a
-	ld a, [wConnectedLevel2XCoord]
+	ld a, [wLevel2XCoord]
 	ld [wCurSceneObjXCoord], a
 	ld a, $01
 	ld [wCurSceneObjState], a
@@ -6688,7 +6697,7 @@ Func_82c33:
 	; carry set if not North
 	ld a, [wCutsceneActionParam]
 	sbc 0
-	ld [wConnectedLevel2], a
+	ld [wLevel2], a
 	ld a, [w2d025]
 	cp CUTSCENE_25
 	jr z, .asm_82c71
@@ -6719,7 +6728,7 @@ Func_82c33:
 	jr Func_82c1d
 
 .Func_82c93:
-	ld a, [wConnectedLevel2]
+	ld a, [wLevel2]
 	ld c, a
 	ld de, wCurSceneObj
 	call SetObjPositionToLevelCoords

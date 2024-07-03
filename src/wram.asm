@@ -1435,7 +1435,9 @@ wMapSideLevelID::
 w2d01e::
 	db
 
-w2d01f::
+; is TRUE if game has been cleared
+; but there are still treasures left to collect
+wMissingTreasureIndicatorsEnabled::
 	db
 
 wGotSunMedallion::
@@ -1595,8 +1597,8 @@ wUnlockedLevelArrowsPtr::
 w2d065::
 	db
 
-wConnectedLevel1:: db
-wConnectedLevel2:: db
+wLevel1:: db
+wLevel2:: db
 
 w2d068::
 	db
@@ -1607,13 +1609,13 @@ w2d069::
 w2d06a::
 	db
 
-wConnectedLevel1Coords::
-wConnectedLevel1YCoord:: db
-wConnectedLevel1XCoord:: db
+wLevel1Coords::
+wLevel1YCoord:: db
+wLevel1XCoord:: db
 
-wConnectedLevel2Coords::
-wConnectedLevel2YCoord:: db
-wConnectedLevel2XCoord:: db
+wLevel2Coords::
+wLevel2YCoord:: db
+wLevel2XCoord:: db
 
 w2d06f::
 	db
