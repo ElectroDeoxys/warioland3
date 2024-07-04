@@ -35,6 +35,4 @@ INCLUDE "home/home5.asm"
 SECTION "Audio Home", ROM0
 INCLUDE "home/audio.asm"
 
-REPT $3d
-	db $00
-ENDR
+	ds $3d, $00

@@ -1,26 +1,18 @@
 MACRO terrain_tee_box
-REPT 7
-	db GOLF_TERRAIN_TEE_BOX
-ENDR
+	ds 7, GOLF_TERRAIN_TEE_BOX
 DEF num_terrain_blocks = 7
 ENDM
 
 MACRO terrain_tee_box_edge
-REPT 5
-	db GOLF_TERRAIN_TEE_BOX | GOLF_TERRAIN_EDGE_RIGHT
-ENDR
-REPT 2
-	db GOLF_TERRAIN_TEE_BOX
-ENDR
+	ds 5, GOLF_TERRAIN_TEE_BOX | GOLF_TERRAIN_EDGE_RIGHT
+	ds 2, GOLF_TERRAIN_TEE_BOX
 DEF num_terrain_blocks = 7
 ENDM
 
 ; arg 1 = type of block
 ; arg 2 = n blocks to place
 MACRO terrain_n_blocks
-REPT \2
-	db \1
-ENDR
+	ds \2, \1
 DEF num_terrain_blocks = num_terrain_blocks + \2
 ENDM
 

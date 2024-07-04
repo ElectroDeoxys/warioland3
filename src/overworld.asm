@@ -23,9 +23,7 @@ OverworldNumbersGfx: INCBIN "gfx/overworld/overworld_numbers.2bpp.rle"
 
 DebugUnknownTextGfx: INCBIN "gfx/debug_unknown_text.2bpp"
 
-REPT $2
-	db $0
-ENDR
+	ds $2, $0
 
 
 SECTION "Bank 23", ROMX
@@ -79,9 +77,7 @@ Cutscenes3Gfx: INCBIN "gfx/cutscenes/cutscenes3.2bpp.rle"
 Cutscenes4Gfx: INCBIN "gfx/cutscenes/cutscenes4.2bpp.rle"
 Cutscenes5Gfx: INCBIN "gfx/cutscenes/cutscenes5.2bpp.rle"
 
-REPT $932
-	db $00
-ENDR
+	ds $932, $00
 
 
 SECTION "Cutscenes Gfx 2", ROMX

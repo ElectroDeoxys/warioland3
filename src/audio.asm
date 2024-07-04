@@ -16,9 +16,7 @@ INCLUDE "audio/music/the_frigid_sea.asm"
 INCLUDE "audio/music/the_peaceful_village_day.asm"
 INCLUDE "audio/music/the_peaceful_village_night.asm"
 
-REPT $217
-	db $00
-ENDR
+	ds $217, $00
 
 
 SECTION "Music 2", ROMX
@@ -46,9 +44,7 @@ INCLUDE "audio/music/invisible_wario.asm"
 INCLUDE "audio/music/snowman_wario.asm"
 INCLUDE "audio/music/owl_wario.asm"
 
-REPT $ab
-	db $00
-ENDR
+	ds $ab, $00
 
 
 SECTION "Music 3", ROMX
@@ -87,18 +83,14 @@ SECTION "SFX 1", ROMX
 
 INCLUDE "audio/sfx/sfx1.asm"
 
-REPT $e
-	db $00
-ENDR
+	ds $e, $00
 
 
 SECTION "SFX 2", ROMX
 
 INCLUDE "audio/sfx/sfx2.asm"
 
-REPT $a6e
-	db $00
-ENDR
+	ds $a6e, $00
 
 SECTION "Audio Miscellaneous", ROMX
 

@@ -7857,6 +7857,4 @@ Pals_9fca3:
 	rgb  0,  7, 23
 	rgb  0,  0, 11
 
-REPT $355
-	db $00
-ENDR
+	ds $355, $00

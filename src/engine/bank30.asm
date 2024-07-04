@@ -1545,9 +1545,7 @@ RoomPals::
 	dw Pals_ce400 ; ROOM_PAL_144
 	dw Pals_ce440 ; ROOM_PAL_145
 
-REPT $12
-	db $ff
-ENDR
+	ds $12, $ff
 
 RoomPalCycles::
 	dw .PalCycle0  ; ROOM_PAL_CYCLE_00

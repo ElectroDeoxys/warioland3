@@ -248,9 +248,7 @@ Func_1d8c2c:
 	ldh [rVBK], a
 	ret
 
-REPT $39e
-	db $00
-ENDR
+	ds $39e, $00
 
 WarioUnk2Gfx:
 INCBIN "gfx/wario/unk2.2bpp"

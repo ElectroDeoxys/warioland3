@@ -8077,6 +8077,4 @@ Func_af13c:
 	inc [hl]
 	ret
 
-REPT $6eb
-	db $00
-ENDR
+	ds $6eb, $00
