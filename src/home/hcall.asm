@@ -6,12 +6,23 @@ InitHRAMCallFunc::
 	ret
 
 .Func:
+LOAD "HCall", HRAM
+hCallFunc::
 	ld a, [wROMBank]
 	push af
-	ld a, $0 ; placeholder bank
+
+	db $3e ; ld a, n8
+hCallFuncBank::
+	db $0 ; placeholder bank
+
 	bankswitch
-	call $4000 ; placeholder function pointer
+
+	db $cd ; call a16
+hCallFuncPointer::
+	dw $4000 ; placeholder function pointer
+
 	pop af
 	bankswitch
 	ret
+ENDL
 .end

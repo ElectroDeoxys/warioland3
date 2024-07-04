@@ -307,4 +307,5 @@ SRAM $02
 SRAM $03
 	"SRAM3"
 HRAM
+	"HCall"
 	"HRAM"

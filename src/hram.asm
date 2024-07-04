@@ -1,11 +1,6 @@
 SECTION "HRAM", HRAM
 
-hCallFunc::        ds $5
-hCallFuncBank::    db
-	ds $7
-hCallFuncPointer:: dw
-
-	ds $11
+	ds $9
 
 UNION
 
