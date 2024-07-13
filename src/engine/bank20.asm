@@ -5902,6 +5902,7 @@ UnreferencedLCD_82729:
 	ret
 
 .func
+LOAD UNION "LCD Function", WRAM0
 	push af
 	push bc
 	push de
@@ -5920,6 +5921,7 @@ UnreferencedLCD_82729:
 	pop bc
 	pop af
 	reti
+ENDL
 .func_end
 
 ; unreferenced
@@ -5931,7 +5933,9 @@ UnreferencedLCD_82754:
 	ret
 
 .func
+LOAD UNION "LCD Function", WRAM0
 	reti
+ENDL
 .func_end
 
 HandleBottomBar:

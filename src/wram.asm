@@ -369,13 +369,21 @@ wc1ca::
 
 	ds $35
 
+SECTION "wVBlankFunc", WRAM0
+
 ; function called on V-Blank
 wVBlankFunc::
 	ds $200
 
+SECTION "wLCDFunc", WRAM0
+
 ; function called on LCD
 wLCDFunc::
-	ds $1ff
+; "LCD Function" goes here
+
+SECTION "Room Block Tiles", WRAM0
+
+	ds $1e0
 
 wROMBank::
 	db

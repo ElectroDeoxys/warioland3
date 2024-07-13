@@ -270,6 +270,10 @@ ROMX $7f
 	"Wario OAM 2"
 WRAM0
 	"WRAM0"
+	"wVBlankFunc"
+	"wLCDFunc"
+	"LCD Function"
+	"Room Block Tiles"
 	"Progress WRAM"
 	"Level WRAM"
 	org $cc00
