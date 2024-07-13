@@ -1,16 +1,3 @@
-Pals_d1fe:
-	rgb  0, 22, 16
-	rgb 28, 31, 29
-	rgb 30, 23,  0
-	rgb  4,  5,  0
-
-; unreferenced
-Pals_d206:
-	rgb  0, 22, 16
-	rgb 31, 31,  0
-	rgb 31, 14,  0
-	rgb  5,  2,  0
-
 OAM_d20e::
 	dw .frame_0
 	dw .frame_1
@@ -953,32 +940,3 @@ OAM_d80d:
 .frame_17
 	frame_oam -32,  -4, $50, 1
 	db $80
-
-Frameset_d8e7:
-	db $00,  5
-	db $01,  5
-	db $02,  5
-	db $03,  5
-	db $04,  5
-	db $05,  5
-	db $ff
-
-Frameset_d8f4:
-	db $06,  7
-	db $07,  7
-	db $08,  7
-	db $09,  7
-	db $0a,  7
-	db $0b,  7
-	db $ff
-
-Frameset_d901:
-	db $0c,  2
-	db $0d,  1
-	db $0e,  1
-	db $0d,  2
-	db $11,  1
-	db $10,  2
-	db $0f,  1
-	db $10,  2
-	db $ff

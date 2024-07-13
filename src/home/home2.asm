@@ -57,14 +57,14 @@ LoadRoom::
 
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(PointerTable_c0319)
+	ld a, BANK(LevelRooms)
 	bankswitch
 	ld a, [wLevel]
 	add a ; *2
 	ld e, a
 	ld d, $00
 	rl d
-	ld hl, PointerTable_c0319
+	ld hl, LevelRooms
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]

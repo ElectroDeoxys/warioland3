@@ -98,7 +98,9 @@ SECTION "Bank 3", ROMX
 
 INCLUDE "engine/level/particles.asm"
 INCLUDE "engine/level/spawn_edge.asm"
-INCLUDE "engine/bank3.asm"
+INCLUDE "data/levels/common/palettes.asm"
+INCLUDE "data/levels/common/oam.asm"
+INCLUDE "data/levels/common/framesets.asm"
 
 
 SECTION "Block Functions", ROMX
@@ -328,14 +330,19 @@ SECTION "Object Loading", ROMX
 INCLUDE "engine/level/load_objects.asm"
 
 
-SECTION "Bank 30", ROMX
+SECTION "Level Data", ROMX
 
-INCLUDE "engine/bank30.asm"
+INCLUDE "engine/level/load_room_gfx.asm"
+INCLUDE "data/levels/level_headers.asm"
+
+SECTION "Rooms 1", ROMX
+
+INCLUDE "data/levels/rooms1.asm"
 
 
-SECTION "Bank 31", ROMX
+SECTION "Rooms 2", ROMX
 
-INCLUDE "engine/bank31.asm"
+INCLUDE "data/levels/rooms2.asm"
 
 
 SECTION "Block Function Tables 1", ROMX
@@ -343,14 +350,37 @@ SECTION "Block Function Tables 1", ROMX
 INCLUDE "data/levels/function_tables1.asm"
 
 
-SECTION "Bank 34", ROMX
+SECTION "Update Animated Tiles", ROMX
 
-INCLUDE "engine/bank34.asm"
+INCLUDE "engine/level/update_animated_tiles.asm"
 
 
-SECTION "Bank 35", ROMX
+SECTION "Clear Level", ROMX
 
-INCLUDE "engine/bank35.asm"
+INCLUDE "engine/clear/state_table.asm"
+INCLUDE "engine/clear/treasure_clear.asm"
+INCLUDE "engine/clear/time_attack_clear.asm"
+INCLUDE "engine/clear/musical_coins.asm"
+INCLUDE "engine/clear/add_sprite.asm"
+INCLUDE "engine/clear/treasure_transition.asm"
+INCLUDE "engine/clear/treasure_count.asm"
+INCLUDE "engine/clear/vblank.asm"
+INCLUDE "engine/clear/musical_coin_flags.asm"
+INCLUDE "engine/clear/pencil.asm"
+INCLUDE "data/clear/musical_coin_pals.asm"
+INCLUDE "data/clear/pencil_offsets.asm"
+INCLUDE "data/golf/oam.asm"
+INCLUDE "data/golf/framesets.asm"
+INCLUDE "data/clear/oam.asm"
+INCLUDE "data/clear/framesets.asm"
+INCLUDE "data/clear/palettes.asm"
+
+; TODO in its own section to be added to golf.o?
+GolfMenuGfx:: INCBIN "gfx/golf/golf_menu.2bpp.rle"
+BGMap_d63fd: INCBIN "gfx/bgmaps/map_d63fd.bin"
+BGMap_d6502: INCBIN "gfx/bgmaps/map_d6502.bin"
+
+INCLUDE "data/clear/pencil_oam.asm"
 
 
 SECTION "Bank 37", ROMX

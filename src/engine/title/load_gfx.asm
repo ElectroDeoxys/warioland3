@@ -44,7 +44,7 @@ LoadTitleScreenTileMap:
 	ret
 
 LoadTimeAttackDescriptionPals:
-	ld hl, Pal_71b0
+	ld hl, Pals_71b0
 	call LoadPalsToTempPals1
 	ret
 

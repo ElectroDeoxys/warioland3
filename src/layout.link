@@ -140,17 +140,19 @@ ROMX $2e
 ROMX $2f
 	"Bank 2F"
 ROMX $30
-	"Bank 30"
+	"Level Data"
+	"Rooms 1"
 ROMX $31
-	"Bank 31"
+	"Rooms 2"
 ROMX $32
 	"Block Function Tables 1"
 ROMX $33
 	"Level Palettes"
 ROMX $34
-	"Bank 34"
+	"Update Animated Tiles"
+	"Animated Tile GFX"
 ROMX $35
-	"Bank 35"
+	"Clear Level"
 ROMX $36
 	"Bank 36"
 ROMX $37

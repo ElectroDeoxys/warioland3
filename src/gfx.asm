@@ -22,6 +22,54 @@ SECTION "Title Framesets", ROMX
 
 INCLUDE "data/title/framesets.asm"
 
+Pals_71b0::
+	rgb 31, 31, 31
+	rgb 21, 21, 21
+	rgb 10, 10, 10
+	rgb  0,  7,  0
+
+	rgb 31, 25, 9
+	rgb 21, 15, 4
+	rgb 13,  8, 1
+	rgb 0,   0, 0
+
+	rgb 31, 31, 31
+	rgb 21, 21, 21
+	rgb 10, 10, 10
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb 21, 21, 21
+	rgb 10, 10, 10
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb 21, 21, 21
+	rgb 10, 10, 10
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb 21, 21, 21
+	rgb 10, 10, 10
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb 21, 21, 21
+	rgb 10, 10, 10
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb 21, 21, 21
+	rgb 10, 10, 10
+	rgb  0,  0,  0
+
+TimeAttack1JPTextMap:: INCBIN "gfx/bgmaps/text/time_attack1_en.bin"
+TimeAttack2JPTextMap:: INCBIN "gfx/bgmaps/text/time_attack2_en.bin"
+TimeAttack1ENTextMap:: INCBIN "gfx/bgmaps/text/time_attack1_jp.bin"
+TimeAttack2ENTextMap:: INCBIN "gfx/bgmaps/text/time_attack2_jp.bin"
+
+INCLUDE "data/ow/epilogue/oam.asm"
+INCLUDE "data/ow/epilogue/framesets.asm"
 
 SECTION "Wario Gfx 1", ROMX
 
@@ -254,3 +302,32 @@ INCLUDE "gfx/oam/objects6.asm"
 SECTION "Level Palettes", ROMX
 
 INCLUDE "data/levels/palettes.asm"
+
+
+SECTION "Animated Tile GFX", ROMX
+
+AnimatedTilesGfx::
+AnimatedTiles1Gfx::  INCBIN "gfx/levels/animated/animated_tiles1.2bpp"  ; ANIMATED_TILES_GFX_00
+AnimatedTiles2Gfx::  INCBIN "gfx/levels/animated/animated_tiles2.2bpp"  ; ANIMATED_TILES_GFX_01
+AnimatedTiles3Gfx::  INCBIN "gfx/levels/animated/animated_tiles3.2bpp"  ; ANIMATED_TILES_GFX_02
+AnimatedTiles4Gfx::  INCBIN "gfx/levels/animated/animated_tiles4.2bpp"  ; ANIMATED_TILES_GFX_03
+AnimatedTiles5Gfx::  INCBIN "gfx/levels/animated/animated_tiles5.2bpp"  ; ANIMATED_TILES_GFX_04
+AnimatedTiles6Gfx::  INCBIN "gfx/levels/animated/animated_tiles6.2bpp"  ; ANIMATED_TILES_GFX_05
+AnimatedTiles7Gfx::  INCBIN "gfx/levels/animated/animated_tiles7.2bpp"  ; ANIMATED_TILES_GFX_06
+AnimatedTiles8Gfx::  INCBIN "gfx/levels/animated/animated_tiles8.2bpp"  ; ANIMATED_TILES_GFX_07
+AnimatedTiles9Gfx::  INCBIN "gfx/levels/animated/animated_tiles9.2bpp"  ; ANIMATED_TILES_GFX_08
+AnimatedTiles10Gfx:: INCBIN "gfx/levels/animated/animated_tiles10.2bpp" ; ANIMATED_TILES_GFX_09
+AnimatedTiles11Gfx:: INCBIN "gfx/levels/animated/animated_tiles11.2bpp" ; ANIMATED_TILES_GFX_10
+AnimatedTiles12Gfx:: INCBIN "gfx/levels/animated/animated_tiles12.2bpp" ; ANIMATED_TILES_GFX_11
+AnimatedTiles13Gfx:: INCBIN "gfx/levels/animated/animated_tiles13.2bpp" ; ANIMATED_TILES_GFX_12
+AnimatedTiles14Gfx:: INCBIN "gfx/levels/animated/animated_tiles14.2bpp" ; ANIMATED_TILES_GFX_13
+AnimatedTiles15Gfx:: INCBIN "gfx/levels/animated/animated_tiles15.2bpp" ; ANIMATED_TILES_GFX_14
+AnimatedTiles16Gfx:: INCBIN "gfx/levels/animated/animated_tiles16.2bpp" ; ANIMATED_TILES_GFX_15
+AnimatedTiles17Gfx:: INCBIN "gfx/levels/animated/animated_tiles17.2bpp" ; ANIMATED_TILES_GFX_16
+AnimatedTiles18Gfx:: INCBIN "gfx/levels/animated/animated_tiles18.2bpp" ; ANIMATED_TILES_GFX_17
+AnimatedTiles19Gfx:: INCBIN "gfx/levels/animated/animated_tiles19.2bpp" ; ANIMATED_TILES_GFX_18
+AnimatedTiles20Gfx:: INCBIN "gfx/levels/animated/animated_tiles20.2bpp" ; ANIMATED_TILES_GFX_19
+AnimatedTiles21Gfx:: INCBIN "gfx/levels/animated/animated_tiles21.2bpp" ; ANIMATED_TILES_GFX_20
+AnimatedTiles22Gfx:: INCBIN "gfx/levels/animated/animated_tiles22.2bpp" ; ANIMATED_TILES_GFX_21
+AnimatedTiles23Gfx:: INCBIN "gfx/levels/animated/animated_tiles23.2bpp" ; ANIMATED_TILES_GFX_22
+AnimatedTiles24Gfx:: INCBIN "gfx/levels/animated/animated_tiles24.2bpp" ; ANIMATED_TILES_GFX_23
