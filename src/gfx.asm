@@ -331,3 +331,81 @@ AnimatedTiles21Gfx:: INCBIN "gfx/levels/animated/animated_tiles21.2bpp" ; ANIMAT
 AnimatedTiles22Gfx:: INCBIN "gfx/levels/animated/animated_tiles22.2bpp" ; ANIMATED_TILES_GFX_21
 AnimatedTiles23Gfx:: INCBIN "gfx/levels/animated/animated_tiles23.2bpp" ; ANIMATED_TILES_GFX_22
 AnimatedTiles24Gfx:: INCBIN "gfx/levels/animated/animated_tiles24.2bpp" ; ANIMATED_TILES_GFX_23
+
+
+SECTION "Hidden Figure GFX", ROMX
+
+HiddenFigure1Gfx:: INCBIN "gfx/enemies/hidden_figure1.2bpp"
+HiddenFigure2Gfx:: INCBIN "gfx/enemies/hidden_figure2.2bpp"
+
+Pals_db000::
+	rgb  1,  4,  9
+	rgb 31,  0,  0
+	rgb  6, 10, 10
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb  0, 30, 31
+	rgb  6, 10, 10
+	rgb  0,  0,  0
+
+	rgb  1,  4,  9
+	rgb  0, 31, 18
+	rgb  6, 10, 10
+	rgb  0,  0,  0
+
+	rgb  1,  4,  9
+	rgb 28, 20,  6
+	rgb  6, 10, 10
+	rgb  0,  0,  0
+
+	rgb  1,  4,  9
+	rgb  0, 11, 21
+	rgb 31, 25,  0
+	rgb  0,  0,  0
+
+	rgb  1,  4,  9
+	rgb 15,  0,  0
+	rgb 31, 25,  0
+	rgb  0,  0,  0
+
+	rgb 31, 19, 23
+	rgb 21,  8, 17
+	rgb 12,  2,  6
+	rgb  0,  0,  0
+
+	rgb 27, 23, 11
+	rgb 22, 13,  2
+	rgb 13,  6,  1
+	rgb  5,  2,  0
+
+Pals_db040::
+	rgb 21, 21, 21
+	rgb 31, 31, 31
+	rgb 31,  0,  0
+	rgb  0,  0,  0
+
+	rgb 21, 21, 21
+	rgb  4, 24, 12
+	rgb  4, 11, 12
+	rgb  0,  0,  0
+
+	rgb 21, 21, 21
+	rgb 15,  0,  0
+	rgb 31, 25,  0
+	rgb  0,  0,  0
+
+	rgb 21, 21, 21
+	rgb 25, 10,  0
+	rgb 31, 25,  0
+	rgb  0,  0,  0
+
+	rgb 21, 21, 21
+	rgb  0, 21, 31
+	rgb 31, 25,  0
+	rgb  0,  0,  0
+
+HiddenFigure1Map:: INCBIN "gfx/bgmaps/hidden_figure1.bin"
+HiddenFigure2Map:: INCBIN "gfx/bgmaps/hidden_figure2.bin"
+HiddenFigure3Map:: INCBIN "gfx/bgmaps/hidden_figure3.bin"
+HiddenFigure4Map:: INCBIN "gfx/bgmaps/hidden_figure4.bin"

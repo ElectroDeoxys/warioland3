@@ -119,11 +119,6 @@ SECTION "Bank 2F", ROMX
 INCLUDE "engine/bank2f.asm"
 
 
-SECTION "Bank 36", ROMX
-
-INCLUDE "engine/bank36.asm"
-
-
 SECTION "Bank 56", ROMX
 
 INCLUDE "engine/bank56.asm"

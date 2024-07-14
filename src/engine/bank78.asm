@@ -60,7 +60,7 @@ Func_1e005f:
 	ld bc, v0BGMap0
 	call Decompress
 
-	call .GeResult
+	call .GetResult
 	ld a, [wLevel]
 	srl a
 	srl a
@@ -163,7 +163,7 @@ Func_1e005f:
 	ld [hl], a
 	ret
 
-.GeResult:
+.GetResult:
 	xor a ; TIME_ATTACK_NOT_COMPLETED
 	ld [wTimeAttackResult], a
 	ld a, [wKeyAndTreasureFlags]

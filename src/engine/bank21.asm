@@ -4053,7 +4053,7 @@ Pals_86acd:
 	rgb 31, 11,  8
 	rgb  7,  2, 20
 
-Pals_86ad5:
+Pals_86ad5::
 	rgb  0,  0,  0
 	rgb 31, 31, 31
 	rgb 31, 15, 10

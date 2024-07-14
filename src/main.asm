@@ -330,7 +330,7 @@ SECTION "Object Loading", ROMX
 INCLUDE "engine/level/load_objects.asm"
 
 
-SECTION "Level Data", ROMX
+SECTION "Level Headers", ROMX
 
 INCLUDE "engine/level/load_room_gfx.asm"
 INCLUDE "data/levels/level_headers.asm"
@@ -383,9 +383,33 @@ BGMap_d6502: INCBIN "gfx/bgmaps/map_d6502.bin"
 INCLUDE "data/clear/pencil_oam.asm"
 
 
-SECTION "Bank 37", ROMX
+SECTION "Game Over", ROMX
 
-INCLUDE "engine/bank37.asm"
+INCLUDE "engine/game_over/state_table.asm"
+INCLUDE "engine/game_over/core.asm"
+INCLUDE "engine/game_over/load_gfx.asm"
+INCLUDE "data/game_over/palettes.asm"
+
+GameOverGfx: INCBIN "gfx/game_over.2bpp.rle"
+BGMap_dbaee: INCBIN "gfx/bgmaps/map_dbaee.bin"
+BGMap_dbb8f: INCBIN "gfx/bgmaps/map_dbb8f.bin"
+
+INCLUDE "data/game_over/oam.asm"
+INCLUDE "data/game_over/framesets.asm"
+
+
+SECTION "Perfect", ROMX
+
+INCLUDE "engine/perfect/state_table.asm"
+INCLUDE "engine/perfect/core.asm"
+INCLUDE "data/perfect/palettes.asm"
+
+PerfectGfx: INCBIN "gfx/perfect.2bpp.rle"
+BGMap_dd417: INCBIN "gfx/bgmaps/map_dd417.bin"
+BGMap_dd5b5: INCBIN "gfx/bgmaps/map_dd5b5.bin"
+
+INCLUDE "data/perfect/oam.asm"
+INCLUDE "data/perfect/framesets.asm"
 
 
 SECTION "Level Data 1", ROMX

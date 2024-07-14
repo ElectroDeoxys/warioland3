@@ -140,7 +140,7 @@ ROMX $2e
 ROMX $2f
 	"Bank 2F"
 ROMX $30
-	"Level Data"
+	"Level Headers"
 	"Rooms 1"
 ROMX $31
 	"Rooms 2"
@@ -154,9 +154,10 @@ ROMX $34
 ROMX $35
 	"Clear Level"
 ROMX $36
-	"Bank 36"
+	"Hidden Figure GFX"
+	"Game Over"
 ROMX $37
-	"Bank 37"
+	"Perfect"
 ROMX $38
 	"Level Data 1"
 ROMX $39
