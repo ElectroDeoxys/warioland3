@@ -304,7 +304,7 @@ SECTION "Level Palettes", ROMX
 INCLUDE "data/levels/palettes.asm"
 
 
-SECTION "Animated Tile GFX", ROMX
+SECTION "Animated Tile Gfx", ROMX
 
 AnimatedTilesGfx::
 AnimatedTiles1Gfx::  INCBIN "gfx/levels/animated/animated_tiles1.2bpp"  ; ANIMATED_TILES_GFX_00
@@ -333,7 +333,7 @@ AnimatedTiles23Gfx:: INCBIN "gfx/levels/animated/animated_tiles23.2bpp" ; ANIMAT
 AnimatedTiles24Gfx:: INCBIN "gfx/levels/animated/animated_tiles24.2bpp" ; ANIMATED_TILES_GFX_23
 
 
-SECTION "Hidden Figure GFX", ROMX
+SECTION "Hidden Figure Gfx", ROMX
 
 HiddenFigure1Gfx:: INCBIN "gfx/enemies/hidden_figure1.2bpp"
 HiddenFigure2Gfx:: INCBIN "gfx/enemies/hidden_figure2.2bpp"

@@ -150,11 +150,11 @@ ROMX $33
 	"Level Palettes"
 ROMX $34
 	"Update Animated Tiles"
-	"Animated Tile GFX"
+	"Animated Tile Gfx"
 ROMX $35
 	"Clear Level"
 ROMX $36
-	"Hidden Figure GFX"
+	"Hidden Figure Gfx"
 	"Game Over"
 ROMX $37
 	"Perfect"

@@ -32,7 +32,7 @@ DoorTransition::
 	xor $1
 	ld [w3d506], a
 	jr z, .asm_96d
-	call Func_9a3
+	call .Func_9a3
 	jr .done
 .asm_96d
 	ld hl, wPalFadeCounter
@@ -58,7 +58,7 @@ DoorTransition::
 	inc [hl]
 	jr .done
 
-Func_9a3::
+.Func_9a3:
 	ld a, [wPalFadeCounter]
 	cp $10
 	ret nc

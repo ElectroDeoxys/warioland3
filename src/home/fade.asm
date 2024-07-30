@@ -864,8 +864,10 @@ VBlank_8bf::
 	ldh [rSCY], a
 	ld a, [wSCX]
 	ldh [rSCX], a
+
 	call LoadBGPalettesFromWRAM
 	call LoadOBPalettesFromWRAM
+
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM
 	ret
