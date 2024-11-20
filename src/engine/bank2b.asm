@@ -1790,11 +1790,11 @@ _InitTempleScene:
 
 	ld a, [wLanguage]
 	and a
-	ld hl, Text_b232f
+	ld hl, TextJP_HiddenFigureReplenishPower
 	jr z, .japanese1
-	ld hl, Text_b2424
+	ld hl, TextEN_HiddenFigureReplenishPower
 .japanese1
-	ld a, BANK(Text_b232f) ; aka Text_b2424
+	ld a, BANK(TextJP_HiddenFigureReplenishPower) ; aka TextEN_HiddenFigureReplenishPower
 	ld [wTempBank], a
 	ld bc, wTextBuffer
 	ld a, [wTempBank]
@@ -1806,11 +1806,11 @@ _InitTempleScene:
 	ld [wTempleScene], a
 	ld a, [wLanguage]
 	and a
-	ld hl, BGMap_b1fd7
+	ld hl, TextJP_HiddenFigureHeadFor
 	jr z, .japanese2
-	ld hl, BGMap_b211a
+	ld hl, TextEN_HiddenFigureHeadFor
 .japanese2
-	ld a, BANK(BGMap_b1fd7) ; aka BGMap_b211a
+	ld a, BANK(TextJP_HiddenFigureHeadFor) ; aka TextEN_HiddenFigureHeadFor
 	ld [wTempBank], a
 	ld bc, wTextBuffer
 	ld a, [wTempBank]
@@ -4477,10 +4477,10 @@ _InitPrologueSequence:
 	and a
 	jr z, .japanese
 ; english
-	decompress_vram0 BGMap_b37f9, wTileBuffer
+	decompress_vram0 TextEN_HiddenFigureAreYouAware, wTextBuffer
 	jr .asm_adf63
 .japanese
-	decompress_vram0 BGMap_b3675, wTileBuffer
+	decompress_vram0 TextJP_HiddenFigureAreYouAware, wTextBuffer
 .asm_adf63
 	call FillClearedTextBuffer
 
@@ -6816,11 +6816,11 @@ _InitEpilogue:
 	call FillClearedTextBuffer
 	ld a, [wLanguage]
 	and a
-	ld hl, Text_15e06b ; japanese
+	ld hl, TextJP_OldManThankYou ; japanese
 	jr z, .got_text
-	ld hl, Text_15e225 ; english
+	ld hl, TextEN_OldManThankYou ; english
 .got_text
-	ld a, BANK(Text_15e06b) ; aka BANK(Text_15e225)
+	ld a, BANK(TextJP_OldManThankYou) ; aka BANK(TextEN_OldManThankYou)
 	ld [wTempBank], a
 	ld bc, wTextBuffer
 	ld a, [wTempBank]

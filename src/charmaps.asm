@@ -7,6 +7,8 @@
 	CHARMAP "!",         $21
 	CHARMAP "?",         $22
 	CHARMAP "-",         $23
+	CHARMAP "·",         $24
+	CHARMAP "…",         $25
 
 	CHARMAP "0",         $30
 	CHARMAP "1",         $31
@@ -163,6 +165,6 @@
 
 	CHARMAP " ",         $7e
 
-	CHARMAP "\n",         $7f
+	CHARMAP "\n",        $7f
 
 	POPC

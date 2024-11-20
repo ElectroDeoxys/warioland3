@@ -19,29 +19,29 @@ INCBIN "gfx/cutscenes/prologue.2bpp.rle"
 TempleMusicBoxSceneGfx:
 INCBIN "gfx/temple_music_box_scene.2bpp.rle"
 
-BGMap_b1fd7:
+TextJP_HiddenFigureHeadFor:
 INCBIN "gfx/bgmaps/map_b1fd7.bin.rle"
 
 ; unreferenced
 BGMap_b2107:
 INCBIN "gfx/bgmaps/map_b2107.bin"
 
-BGMap_b211a:
-INCBIN "gfx/bgmaps/map_b211a.bin.rle"
+TextEN_HiddenFigureHeadFor:
+INCBIN "text/en/hidden_figure_head_for.bin.rle"
 
 ; unreferenced
 BGMap_b231c:
 INCBIN "gfx/bgmaps/map_b231c.bin"
 
-Text_b232f:
+TextJP_HiddenFigureReplenishPower:
 INCBIN "text/text_b232f.bin.rle"
 
 ; unreferenced
 BGMap_b2411:
 INCBIN "gfx/bgmaps/map_b2411.bin"
 
-Text_b2424:
-INCBIN "text/text_b2424.bin.rle"
+TextEN_HiddenFigureReplenishPower:
+INCBIN "text/en/hidden_figure_replenish_power.bin.rle"
 
 ; unreferenced
 BGMap_b2533:
@@ -68,15 +68,15 @@ INCBIN "gfx/bgmaps/map_b330c.bin.rle"
 BGMap_b34c3:
 INCBIN "gfx/bgmaps/map_b34c3.bin.rle"
 
-BGMap_b3675:
+TextJP_HiddenFigureAreYouAware:
 INCBIN "gfx/bgmaps/map_b3675.bin.rle"
 
 ; unreferenced
 BGMap_b37e6:
 INCBIN "gfx/bgmaps/map_b37e6.bin"
 
-BGMap_b37f9:
-INCBIN "gfx/bgmaps/map_b37f9.bin.rle"
+TextEN_HiddenFigureAreYouAware:
+INCBIN "text/en/hidden_figure_are_you_aware.bin.rle"
 
 ; unreferenced
 BGMap_b39f0:

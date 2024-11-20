@@ -43,6 +43,7 @@ warioland3: $(rom) compare
 clean: tidy
 	find src/gfx \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.rle' \) -delete
 	find src/text \( -iname '*.rle' \) -delete
+	find src/text/en \( -iname '*.bin' \) -delete
 	find src/data \( -iname '*.rle' \) -delete
 
 tidy:
@@ -121,7 +122,7 @@ src/gfx/misc/action_help_objects2.2bpp.rle: tools/compressor += --force-trailing
 src/gfx/bgmaps/map_b34c3.bin.rle: tools/compressor += --force-trailing-copy
 
 src/text/text_b232f.bin.rle: tools/compressor += --force-trailing-copy
-src/text/text_b2424.bin.rle: tools/compressor += --force-trailing-copy
+src/text/en/hidden_figure_replenish_power.bin.rle: tools/compressor += --force-trailing-copy
 
 src/data/levels/block_map/the_peaceful_village_1.bin.rle: tools/compressor += --force-trailing-copy
 src/data/levels/block_map/tower_of_revival.bin.rle: tools/compressor += --force-trailing-copy
@@ -147,10 +148,13 @@ src/gfx/wario/%.2bpp: tools/gfx += --interleave --png=$<
 
 ### Catch-all graphics rules
 
-%.rle: %
-	tools/compressor $(tools/compressor) $<
-
 %.2bpp: %.png
 	$(RGBGFX) $(rgbgfx) -o $@ $<
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) -o $@ $@)
+
+%.bin: %.txt
+	tools/text $(tools/text) -o $@ $<
+
+%.rle: %
+	tools/compressor $(tools/compressor) $<

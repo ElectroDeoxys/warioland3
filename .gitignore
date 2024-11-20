@@ -24,6 +24,9 @@
 *.1bpp
 *.2bpp
 
+# converted text data
+src/text/en/*.bin
+
 # compressed data
 *.rle
 
