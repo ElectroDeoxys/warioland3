@@ -264,6 +264,9 @@ wCurBlue::  db
 wUnused_c186::
 	db
 
+; keeps track of the duration of the door transition
+; used so that it exits after some cycles have passed
+wDoorTransitionCounter::
 ; keeps track of the fade amount, starting at 1
 ; when it reaches 32 + 1 (maximum amount of fade possible),
 ; fading is stopped
@@ -2445,16 +2448,19 @@ w3d501::
 wDPadRepeatCounter::
 	db
 
-w3d503::
-	db
+; number of tiles that are written in a line
+; during door transition VBlank
+; starts at 1 and increments in 2s,
+; to achieve the growing square effect
+wTransitionEffectStep:: db
+; current pointer to BGMap to continue
+; the transition effect
+wDoorTransitionEffectBGPtr:: ds $2
+; either 0 or 1, decides which side
+; that is filled in the transition effect
+wDoorTransitionOrientation:: db
 
-w3d504::
-	ds $2
-
-w3d506::
-	db
-
-w3d507::
+wWarioTileBGPtr::
 	ds $2
 
 ; if TRUE, Action Help is in

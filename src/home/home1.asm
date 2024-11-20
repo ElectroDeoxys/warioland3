@@ -1072,9 +1072,9 @@ TriggerRoomTransition::
 	ld a, $03
 	ldh [rSVBK], a
 	ld a, h
-	ld [w3d507 + 1], a
+	ld [wWarioTileBGPtr + 1], a
 	ld a, l
-	ld [w3d507 + 0], a
+	ld [wWarioTileBGPtr + 0], a
 	pop af
 	ldh [rSVBK], a
 	ret

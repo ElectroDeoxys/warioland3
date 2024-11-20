@@ -3,44 +3,52 @@ DoorTransition::
 	push af
 	ld a, $03
 	ldh [rSVBK], a
-	ld a, [w3d506]
+	ld a, [wDoorTransitionOrientation]
 	ld c, a
-	ld a, [wPalFadeCounter]
+	ld a, [wDoorTransitionCounter]
 	or c
-	jr nz, .asm_95e
+	jr nz, .already_started
 
 	ld a, $01
 	ld [wUnused_c186], a
-	call VBlank_9cb
-	ld a, [w3d506]
+
+	; set VBlank function
+	call VBlank_DoorTransition
+
+	; toggle wDoorTransitionOrientation
+	ld a, [wDoorTransitionOrientation]
 	xor $1
-	ld [w3d506], a
-	ld a, $01
-	ld [w3d503], a
-	ld a, [w3d507 + 0]
-	ld [w3d504 + 0], a
-	ld a, [w3d507 + 1]
-	ld [w3d504 + 1], a
+	ld [wDoorTransitionOrientation], a
+
+	ld a, 1
+	ld [wTransitionEffectStep], a
+	; start wDoorTransitionEffectBGPtr with Wario's current tile
+	ld a, [wWarioTileBGPtr + 0]
+	ld [wDoorTransitionEffectBGPtr + 0], a
+	ld a, [wWarioTileBGPtr + 1]
+	ld [wDoorTransitionEffectBGPtr + 1], a
 
 .done
 	pop af
 	ldh [rSVBK], a
 	ret
 
-.asm_95e
-	ld a, [w3d506]
+.already_started
+	; toggle wDoorTransitionOrientation
+	ld a, [wDoorTransitionOrientation]
 	xor $1
-	ld [w3d506], a
-	jr z, .asm_96d
-	call .Func_9a3
+	ld [wDoorTransitionOrientation], a
+	jr z, .skip_incr_step
+	call .PrepareNextStepInTransitionEffect
 	jr .done
-.asm_96d
-	ld hl, wPalFadeCounter
+.skip_incr_step
+	ld hl, wDoorTransitionCounter
 	inc [hl]
 	ld a, [hl]
-	cp $11
+	cp 17
 	jr c, .done
 
+	; restore backed up VBlank function
 	di
 	ld hl, wBackupVBlankFunc
 	ld de, wVBlankFunc
@@ -48,52 +56,60 @@ DoorTransition::
 	call CopyHLToDE
 	ei
 
+	; finish door transition and advance level state
 	xor a
-	ld [wPalFadeCounter], a
+	ld [wDoorTransitionCounter], a
 	ld [wUnused_c186], a
-	ld [w3d506], a
+	ld [wDoorTransitionOrientation], a
 	stop_music
 	stop_sfx
 	ld hl, wSubState
 	inc [hl]
 	jr .done
 
-.Func_9a3:
-	ld a, [wPalFadeCounter]
-	cp $10
-	ret nc
-	ld hl, w3d503
+.PrepareNextStepInTransitionEffect:
+	ld a, [wDoorTransitionCounter]
+	cp 16
+	ret nc ; >= 16
+	ld hl, wTransitionEffectStep
 	ld a, [hl]
-	add $02
+	add 2
 	ld [hli], a
-	ld a, [hl] ; w3d504
-	add $20
+	ld a, [hl] ; wDoorTransitionEffectBGPtr
+	; one row below
+	add BG_MAP_WIDTH
 	ld [hli], a
 	ld a, [hl]
 	adc $00
-	cp $9c
-	jr c, .asm_9bd
-	sub $04
-.asm_9bd
+	cp HIGH(v0BGMap0 + $400)
+	jr c, .no_wrap_up
+	; wrap up
+	sub HIGH($400)
+.no_wrap_up
 	ld [hld], a
+
+	; one column left
 	ld a, [hl]
 	dec a
 	ld [hl], a
 	and $1f
 	cp $1f
 	ret nz
+	; wrap right
 	ld a, [hl]
-	add $20
+	add BG_MAP_WIDTH
 	ld [hl], a
 	ret
 
-VBlank_9cb::
+VBlank_DoorTransition::
 	di
+	; back up current VBlank function
 	ld hl, wVBlankFunc
 	ld de, wBackupVBlankFunc
 	ld b, 3
 	call CopyHLToDE
 
+	; then overwrite it
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -102,10 +118,11 @@ VBlank_9cb::
 	ret
 
 .Func:
-	jp .asm_9e7
+	jp .DoTransitionEffect
 .end
 
-.asm_9e7
+.DoTransitionEffect:
+	; apply scroll
 	ld a, [wSCY]
 	ldh [rSCY], a
 	ld a, [wSCX]
@@ -116,113 +133,130 @@ VBlank_9cb::
 	ld a, $03
 	ldh [rSVBK], a
 	ld de, -BG_MAP_WIDTH
-	ld a, [w3d506]
+	ld a, [wDoorTransitionOrientation]
 	and a
-	jr z, .asm_a49
-	ld hl, w3d503
+	jr z, .left_then_up
+
+; up then left
+	ld hl, wTransitionEffectStep
 	ld a, [hli]
 	ld b, a
 	ld c, a
-	ld a, [hli] ; w3d504
+	ld a, [hli] ; wDoorTransitionEffectBGPtr
 	ld h, [hl]
 	ld l, a
-.asm_a0a
+	
+	; do wTransitionEffectStep tiles up
+.loop_fill_upwards_1
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld a, [hl]
 	and $7f
 	or $0f
 	ld [hl], a
-	xor a
+	xor a ; BANK("VRAM0")
 	ldh [rVBK], a
-	ld [hl], $7f
+	ld [hl], $7f ; overwrite tile
+
+	; go up a row (-BG_MAP_WIDTH)
 	add hl, de
 	ld a, h
 	cp HIGH(v0BGMap0)
-	jr nc, .asm_a22
-	add $4
+	jr nc, .no_wrap_up_1
+	; wrap down
+	add HIGH($400)
 	ld h, a
-.asm_a22
+.no_wrap_up_1
 	dec b
-	jr nz, .asm_a0a
+	jr nz, .loop_fill_upwards_1
+
+	; do wTransitionEffectStep+1 tiles left
 	ld b, c
 	inc b
-.asm_a27
+.loop_fill_left_1
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld a, [hl]
 	and $7f
 	or $0f
 	ld [hl], a
-	xor a
+	xor a ; BANK("VRAM0")
 	ldh [rVBK], a
 	ld a, $7f
-	ld [hli], a
+	ld [hli], a ; overwrite tile
 	ld a, l
 	and $1f
-	jr nz, .asm_a44
+	jr nz, .no_wrap_left_1
+	; wrap left
 	ld a, l
 	sub BG_MAP_WIDTH
 	ld l, a
 	ld a, h
 	sbc $00
 	ld h, a
-.asm_a44
+.no_wrap_left_1
 	dec b
-	jr nz, .asm_a27
+	jr nz, .loop_fill_left_1
 	jr .asm_a8e
 
-.asm_a49
-	ld hl, w3d503
+	; do wTransitionEffectStep tiles left
+.left_then_up
+	ld hl, wTransitionEffectStep
 	ld a, [hli]
 	ld b, a
 	ld c, a
-	ld a, [hli] ; w3d504
+	ld a, [hli] ; wDoorTransitionEffectBGPtr
 	ld h, [hl]
 	ld l, a
-.asm_a52
+.loop_fill_left_2
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld a, [hl]
 	and $7f
 	or $0f
 	ld [hl], a
-	xor a
+	xor a ; BANK("VRAM0")
 	ldh [rVBK], a
 	ld a, $7f
-	ld [hli], a
+	ld [hli], a ; overwrite tile
 	ld a, l
 	and $1f
-	jr nz, .asm_a6f
+	jr nz, .no_wrap_left_2
+	; wrap left
 	ld a, l
 	sub BG_MAP_WIDTH
 	ld l, a
 	ld a, h
 	sbc $00
 	ld h, a
-.asm_a6f
+.no_wrap_left_2
 	dec b
-	jr nz, .asm_a52
+	jr nz, .loop_fill_left_2
+
+	; do wTransitionEffectStep tiles up
 	ld b, c
-.asm_a73
+.loop_fill_upwards_2
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld a, [hl]
 	and $7f
 	or $0f
 	ld [hl], a
-	xor a
+	xor a ; BANK("VRAM0")
 	ldh [rVBK], a
-	ld [hl], $7f
+	ld [hl], $7f ; overwrite tile
+
+	; go up a row (-BG_MAP_WIDTH)
 	add hl, de
 	ld a, h
 	cp HIGH(v0BGMap0)
-	jr nc, .asm_a8b
-	add $4
+	jr nc, .no_wrap_up_2
+	; wrap down
+	add HIGH($400)
 	ld h, a
-.asm_a8b
+.no_wrap_up_2
 	dec b
-	jr nz, .asm_a73
+	jr nz, .loop_fill_upwards_2
 .asm_a8e
 	pop af
 	ldh [rSVBK], a

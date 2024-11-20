@@ -12,9 +12,11 @@ Start::
 	; fallthrough
 
 Init::
+	; reset power up to show in Demo
 	xor a
 	ldh [hDemoPowerUp], a
 InitWithoutDemoPowerUpReset::
+	; init stack
 	di
 	ld sp, wStackTop
 	ld hl, sp+$00
@@ -30,6 +32,7 @@ InitWithoutDemoPowerUpReset::
 	ldh [rSVBK], a
 	ldh [rRP], a
 
+	; set lcd on and wait for VBlank
 	ld a, LCDCF_ON
 	ldh [rLCDC], a
 .wait_vblank
@@ -37,6 +40,7 @@ InitWithoutDemoPowerUpReset::
 	cp $94
 	jr nz, .wait_vblank
 
+	; enable BG and OBJ
 	ld a, LCDCF_BGON | LCDCF_OBJON
 	ldh [rLCDC], a
 	call ClearVRAM
@@ -61,13 +65,16 @@ InitWithoutDemoPowerUpReset::
 
 	; clear OAM
 	xor a
-	ld hl, $fe00
+	ld hl, _OAMRAM
 	ld bc, $100
 	call WriteAToHL_BCTimes
 
+	; clears most of HRAM
 	ld hl, STARTOF(HRAM)
 	ld b, hDemoPowerUp - STARTOF(HRAM)
 	call WriteAToHL_BTimes
+
+	; clear BGMap0 and BGMap1
 	call FillBGMap0_With7f
 	call ClearBGMap1
 
@@ -85,6 +92,7 @@ InitWithoutDemoPowerUpReset::
 	ldh [rSCX], a
 	ldh [rSTAT], a
 
+	; init hTransferVirtualOAM
 	ld c, LOW(hTransferVirtualOAM)
 	; should be ld b, (PushOAM.end - PushOAM) + 1
 	ld b, (WriteAToHL_BCTimes - PushOAM) + 1
@@ -95,7 +103,10 @@ InitWithoutDemoPowerUpReset::
 	inc c
 	dec b
 	jr nz, .loop_write_oam_func
+
+	; init VBlank function
 	call VBlank_Ret
+	; init HRAM call function
 	call InitHRAMCallFunc
 
 	xor a
@@ -104,11 +115,14 @@ InitWithoutDemoPowerUpReset::
 	ldh [rIE], a
 	call InitLCD
 
+	; enable SRAM
 	ld a, CART_SRAM_ENABLE
 	ld [rRAMG], a
 	farcall Func_1f0cad
 	ei
 
+	; if not playing on CGB, then show
+	; the GB Incompatible screen
 	ldh a, [hCGB]
 	and a
 	jr nz, .is_cgb
@@ -118,6 +132,7 @@ InitWithoutDemoPowerUpReset::
 	ld [wSubState], a
 	jr .skip_init_game_state
 .is_cgb
+	; otherwise, init the game state
 	call InitGameState
 .skip_init_game_state
 
@@ -126,6 +141,8 @@ InitWithoutDemoPowerUpReset::
 	call FillWhiteBGPal
 	ld a, LCDCF_ON
 	ldh [rLCDC], a
+
+	; init audio
 	di
 	call InitAudio
 	ei
