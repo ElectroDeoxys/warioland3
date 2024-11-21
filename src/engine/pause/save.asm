@@ -58,16 +58,12 @@ FillSaveScreenBar:
 
 SaveLevel:
 	call DisableLCD
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(w3d280)
-	ldh [rSVBK], a
+	push_wram BANK(w3d280)
 	ld hl, w3d280 palette 12
 	ld de, wcaa1
 	ld b, 4 palettes
 	call CopyHLToDE
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	call IncrementSaveCounter
 
@@ -96,25 +92,17 @@ SaveLevel:
 	ld b, SIZEOF("Progress WRAM") + SIZEOF("Level WRAM")
 	call CopyHLToDE
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
+	push_wram BANK("WRAM2")
 	ld hl, wTreasuresCollected
 	ld b, (wOWLevel - wTreasuresCollected) + 2
 	call CopyHLToDE
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	ld hl, STARTOF("Level Objects WRAM")
 	ld bc, SIZEOF("Level Objects WRAM")
 	call CopyHLToDE_BC
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	ld a, $31
 	ld [s0a790], a
@@ -202,24 +190,16 @@ SaveLevel:
 	ld hl, STARTOF("Progress WRAM")
 	ld b, SIZEOF("Progress WRAM") + SIZEOF("Level WRAM")
 	call CopyHLToDE
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
+	push_wram BANK("WRAM2")
 	ld hl, wTreasuresCollected
 	ld b, (wOWLevel - wTreasuresCollected) + 2
 	call CopyHLToDE
-	pop af
-	ldh [rSVBK], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	pop_wram
+	push_wram BANK("Level Objects WRAM")
 	ld hl, STARTOF("Level Objects WRAM")
 	ld bc, SIZEOF("Level Objects WRAM")
 	call CopyHLToDE_BC
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ld a, $51
 	ld [s0a790], a
 	ld [s0a7e0], a
@@ -267,24 +247,16 @@ SaveLevel:
 	ld hl, STARTOF("Progress WRAM")
 	ld b, SIZEOF("Progress WRAM") + SIZEOF("Level WRAM")
 	call CopyHLToDE
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
+	push_wram BANK("WRAM2")
 	ld hl, wTreasuresCollected
 	ld b, (wOWLevel - wTreasuresCollected) + 2
 	call CopyHLToDE
-	pop af
-	ldh [rSVBK], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	pop_wram
+	push_wram BANK("Level Objects WRAM")
 	ld hl, STARTOF("Level Objects WRAM")
 	ld bc, SIZEOF("Level Objects WRAM")
 	call CopyHLToDE_BC
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ld a, $61
 	ld [s0a790], a
 	ld [s0a7e0], a
@@ -334,24 +306,16 @@ SaveLevel:
 	ld hl, STARTOF("Progress WRAM")
 	ld b, SIZEOF("Progress WRAM") + SIZEOF("Level WRAM")
 	call CopyHLToDE
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
+	push_wram BANK("WRAM2")
 	ld hl, wTreasuresCollected
 	ld b, (wOWLevel - wTreasuresCollected) + 2
 	call CopyHLToDE
-	pop af
-	ldh [rSVBK], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	pop_wram
+	push_wram BANK("Level Objects WRAM")
 	ld hl, STARTOF("Level Objects WRAM")
 	ld bc, SIZEOF("Level Objects WRAM")
 	call CopyHLToDE_BC
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ld a, $81
 	ld [s0a790], a
 	ld [s0a7e0], a
@@ -490,15 +454,11 @@ Save:
 	ld hl, STARTOF("Progress WRAM")
 	ld b, SIZEOF("Progress WRAM")
 	call CopyHLToDE
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
+	push_wram BANK("WRAM2")
 	ld hl, wTreasuresCollected
 	ld b, (wOWLevel - wTreasuresCollected) + 2
 	call CopyHLToDE
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	ld a, $11
 	ld [s0a790], a
@@ -557,15 +517,11 @@ Save:
 	ld hl, STARTOF("Progress WRAM")
 	ld b, SIZEOF("Progress WRAM")
 	call CopyHLToDE
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
+	push_wram BANK("WRAM2")
 	ld hl, wTreasuresCollected
 	ld b, (wOWLevel - wTreasuresCollected) + 2
 	call CopyHLToDE
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	ld a, $21
 	ld [s0a790], a

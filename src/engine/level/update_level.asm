@@ -44,13 +44,9 @@ UpdateLevel:
 	ld [wBlockFuncWarioFlag], a
 
 	; update objects
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	farcall UpdateObjects
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	call SetWarioScreenPos
 
@@ -66,35 +62,23 @@ UpdateLevel:
 	farcall SetState_FenceShakeSliding
 
 .process_interactions
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	ld a, TRUE
 	ld [wBlockFuncWarioFlag], a
 	farcall ProcessInteractions
 	xor a ; FALSE
 	ld [wBlockFuncWarioFlag], a
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	farcall DrawObjects_NoPriority
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	call DrawWario
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	farcall DrawObjects_WithPriority
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	call ClearUnusedVirtualOAM
 
@@ -314,13 +298,9 @@ UpdateLevel:
 
 	xor a ; FALSE
 	ld [wBlockFuncWarioFlag], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	farcall UpdateObjects
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	call SetWarioScreenPos
 	ld a, TRUE
@@ -329,23 +309,15 @@ UpdateLevel:
 
 	xor a ; FALSE
 	ld [wBlockFuncWarioFlag], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	farcall DrawObjects_NoPriority
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	call DrawWario
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	farcall DrawObjects_WithPriority
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	call ClearUnusedVirtualOAM
 	xor a
@@ -367,13 +339,9 @@ UpdateLevel:
 
 	xor a ; FALSE
 	ld [wBlockFuncWarioFlag], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	farcall UpdateObjects
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	call SetWarioScreenPos
 	ld a, TRUE
@@ -382,23 +350,15 @@ UpdateLevel:
 
 	xor a ; FALSE
 	ld [wBlockFuncWarioFlag], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	farcall DrawObjects_NoPriority
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	call DrawWario
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	farcall DrawObjects_WithPriority
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	call ClearUnusedVirtualOAM
 

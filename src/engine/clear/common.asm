@@ -1,9 +1,5 @@
 ClearScreenStateTable:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("GFX RAM")
-	ldh [rSVBK], a
+	push_wram BANK("GFX RAM")
 	farcall _ClearScreenStateTable
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret

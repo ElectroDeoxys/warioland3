@@ -125,10 +125,7 @@ QueueBlockTilesAlongRow_OddColumn:
 ; input:
 ; - hl = SRAM pointer to start of row
 QueueBlockAttributesAlongRow_OddColumn:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("GFX RAM")
-	ldh [rSVBK], a
+	push_wram BANK("GFX RAM")
 	ld a, [wBGMapTileQueueSize]
 	ld b, a
 	ld a, HIGH(wBGMapTileVRAM1Queue)
@@ -192,8 +189,7 @@ QueueBlockAttributesAlongRow_OddColumn:
 	ld a, [hl]
 	ld [de], a
 	pop hl
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 .asm_2208a
@@ -264,8 +260,7 @@ QueueBlockAttributesAlongRow_OddColumn:
 .asm_220f5
 	dec b
 	jr nz, .asm_220bf
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 ; queues up all the tiles related to the
@@ -392,10 +387,7 @@ QueueBlockTilesAlongRow_EvenColumn:
 ; input:
 ; - hl = SRAM pointer to start of row
 QueueBlockAttributesAlongRow_EvenColumn:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("GFX RAM")
-	ldh [rSVBK], a
+	push_wram BANK("GFX RAM")
 	ld a, [wBGMapTileQueueSize]
 	ld b, a
 	ld a, HIGH(wBGMapTileVRAM1Queue)
@@ -441,8 +433,7 @@ QueueBlockAttributesAlongRow_EvenColumn:
 .asm_22210
 	dec b
 	jr nz, .asm_221db
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 .asm_22217
@@ -510,6 +501,5 @@ QueueBlockAttributesAlongRow_EvenColumn:
 .asm_22280
 	dec b
 	jr nz, .asm_2224b
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret

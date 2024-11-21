@@ -465,10 +465,7 @@ SetState_FlatAirborne:
 	cp TRANSFORMATION_OWL_WARIO
 	call z, ReleaseOwl
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	ld a, [wObjPtr + 0]
 	ld h, a
 	ld a, [wObjPtr + 1]
@@ -493,8 +490,7 @@ SetState_FlatAirborne:
 	ld a, [hl]
 	sbc $00
 	ld [wWarioXPos + 0], a
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	ld a, TRANSFORMATION_FLAT_WARIO
 	ld [wTransformation], a

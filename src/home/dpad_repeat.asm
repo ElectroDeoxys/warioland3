@@ -1,9 +1,6 @@
 ; adds a Repeat Delay and Rate to any DPad key
 ProcessDPadRepeat::
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("GFX RAM")
-	ldh [rSVBK], a
+	push_wram BANK("GFX RAM")
 
 	ld hl, wDPadRepeatCounter
 	ld a, [hl]
@@ -32,6 +29,5 @@ ProcessDPadRepeat::
 .set_counter
 	ld [hl], a
 .done
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret

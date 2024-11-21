@@ -38,15 +38,11 @@ PrintNumberCoins:
 GetOWLevelCollectedTreasures::
 	xor a
 	ld [wKeyAndTreasureFlags], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wOWLevel)
-	ldh [rSVBK], a
+	push_wram BANK(wOWLevel)
 	ld a, [wOWLevel]
 	dec a
 	call .SetFlags
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 .SetFlags

@@ -3173,10 +3173,7 @@ BreakBlock:
 	and a
 	jr nz, .done
 	; everything okay, spawn coin
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	ld a, COIN_COOLDOWN
 	ld [wCoinCooldown], a
 
@@ -3206,8 +3203,7 @@ BreakBlock:
 	ld de, wCurObjUnk01
 	ld b, OBJ_UNK_07 - OBJ_UNK_01
 	call CopyHLToDE
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 .done
 	; restore hPos
@@ -3234,10 +3230,7 @@ BreakBlockWithColourCoin:
 
 	ld b, PARTICLE_DEBRIS
 	farcall CreateParticleInBlock
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 
 	; backup CurObj
 	ld hl, wCurObjUnk01
@@ -3265,8 +3258,7 @@ BreakBlockWithColourCoin:
 	ld de, wCurObjUnk01
 	ld b, OBJ_UNK_07 - OBJ_UNK_01
 	call CopyHLToDE
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	; restore hPos
 	ldh a, [hYPosHiBackup]

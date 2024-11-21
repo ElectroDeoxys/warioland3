@@ -5,16 +5,13 @@ StartRoom_FromTransition:
 	jr nz, .not_golf
 
 	; enter Golf minigame
-	ldh a, [rSVBK]
-	push af
-	ld a, $03
-	ldh [rSVBK], a
+	push_wram $03
 	ld a, [wAnimatedTilesFrameDuration]
 	ld [wTempAnimatedTilesFrameDuration], a
 	ld a, [wAnimatedTilesGfx]
 	ld [wTempAnimatedTilesGroup], a
-	pop af
-	ldh [rSVBK], a
+	pop_wram
+	
 	ld a, [wSubState]
 	ld [wPendingSubState], a
 	ld hl, wState
@@ -27,13 +24,9 @@ StartRoom_FromTransition:
 	call DisableLCD
 	farcall DespawnAllObjects
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	farcall InitObjectVars_FromTransition
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	ld a, $00
 	sramswitch
@@ -74,13 +67,9 @@ StartRoom_FromTransition:
 	ld a, [wLevelRoomID]
 	ld [wTempLevelRoomID], a
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("GFX RAM")
-	ldh [rSVBK], a
+	push_wram BANK("GFX RAM")
 	call LoadRoom
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	call FillBGMap0_With7f
 	call ClearVirtualOAM
@@ -135,29 +124,17 @@ StartRoom_FromTransition:
 	xor a ; FALSE
 	ld [wBlockFuncWarioFlag], a
 	ld [wIsFloorTransition], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	farcall UpdateObjects
 	farcall UpdateObjects
-	pop af
-	ldh [rSVBK], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	pop_wram
+	push_wram BANK("Level Objects WRAM")
 	farcall DrawObjects_NoPriority
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	call DrawWario
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	farcall DrawObjects_WithPriority
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	xor a
 	ld [wIsIntangible], a
 	ld a, $02
@@ -173,23 +150,15 @@ ProcessMultiBlock:
 
 	farcall UpdateParticles
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	farcall DrawObjects_NoPriority
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	call DrawWario
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	farcall DrawObjects_WithPriority
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	call ClearUnusedVirtualOAM
 
@@ -363,13 +332,9 @@ StartRoom_FromLevelStart:
 
 	; init variables from level start
 	; as well as everything related to objects
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	farcall InitObjectVars_FromLevelStart
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	jr .load_blocks_and_objects
 
 .skip_init_vars_and_objects
@@ -380,13 +345,9 @@ StartRoom_FromLevelStart:
 .load_blocks_and_objects
 	call LoadLevelBlockMapAndObjects
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("GFX RAM")
-	ldh [rSVBK], a
+	push_wram BANK("GFX RAM")
 	call LoadRoom
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	ld a, [wceef]
 	and %00111100
@@ -483,49 +444,33 @@ StartRoom_FromLevelStart:
 	jr nz, .asm_8917
 	xor a ; FALSE
 	ld [wIsFloorTransition], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	; for some reason updates objects twice?
 	farcall UpdateObjects
 	farcall UpdateObjects
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	jr .draw_objs
 
 .asm_8917
 	ld a, TRUE
 	ld [wIsFloorTransition], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	farcall UpdateObjects
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 .draw_objs
 	xor a ; FALSE
 	ld [wIsFloorTransition], a
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	farcall DrawObjects_NoPriority
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	call DrawWario
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	farcall DrawObjects_WithPriority
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 Func_896f:
@@ -647,13 +592,9 @@ Func_896f:
 	call Func_d81
 	ld d, h
 	ld e, l
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	farcall SpawnObject
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	pop hl
 	pop bc
 	pop de

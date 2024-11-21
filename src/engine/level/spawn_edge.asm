@@ -32,13 +32,9 @@ SpawnRowEdgeObjects:
 	ld d, h
 	ld e, l
 	push hl
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	farcall SpawnObject
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	pop hl
 	pop bc
 	pop de
@@ -91,13 +87,9 @@ SpawnColEdgeObjects:
 	ld d, h
 	ld e, l
 	push hl
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	farcall SpawnObject
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	pop hl
 	pop bc
 	pop de

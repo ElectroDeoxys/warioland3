@@ -1,11 +1,7 @@
 HandleOverworld:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
+	push_wram BANK("WRAM2")
 	farcall OverworldStateTable
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	; if a level has been selected
 	; handle the transition

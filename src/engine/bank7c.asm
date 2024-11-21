@@ -66,21 +66,17 @@ PrintNumberMusicCoins:
 DrawLevelObjectsAfterLevelReturn::
 	farcall VBlank_Level
 	farcall SetTileQueueProcessingFunctions
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+
+	push_wram BANK("Level Objects WRAM")
 	farcall DrawObjects_NoPriority
-	pop af
-	ldh [rSVBK], a
+	pop_wram
+
 	call DrawWario
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+
+	push_wram BANK("Level Objects WRAM")
 	farcall DrawObjects_WithPriority
-	pop af
-	ldh [rSVBK], a
+	pop_wram
+
 	ret
 
 HandlePauseMenuInput:
@@ -342,22 +338,14 @@ Func_1f0b5b:
 	ld de, $0
 	ld b, $ca
 	call CalculateChecksum
-	ldh a, [rSVBK]
-	push af
-	ld a, $02
-	ldh [rSVBK], a
+	push_wram $02
 	ld b, $11
 	call CalculateChecksum
-	pop af
-	ldh [rSVBK], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	pop_wram
+	push_wram BANK("Level Objects WRAM")
 	ld bc, SIZEOF("Level Objects WRAM")
 	call CalculateChecksumLong
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 ; sums b bytes starting at hl
@@ -397,25 +385,17 @@ CalculateWRAMDataChecksum:
 	ld b, SIZEOF("Progress WRAM") + SIZEOF("Level WRAM")
 	call CalculateChecksum
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
+	push_wram BANK("WRAM2")
 	ld hl, wTreasuresCollected
 	ld b, (wOWLevel - wTreasuresCollected) + 2
 	call CalculateChecksum
-	pop af
-
-	ldh [rSVBK], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	pop_wram
+	
+	push_wram BANK("Level Objects WRAM")
 	ld hl, STARTOF("Level Objects WRAM")
 	ld bc, SIZEOF("Level Objects WRAM")
 	call CalculateChecksumLong
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 ; calculates checksum for SRAM1 and first half of SRAM2
@@ -1342,14 +1322,10 @@ Func_1f1210:
 	; this changes WRAM bank,
 	; but this routine is never called
 	; to calculate Checksums of WRAM data
-	ldh a, [rSVBK]
-	push af
-	ld a, $02
-	ldh [rSVBK], a
+	push_wram $02
 	ld b, $11
 	call CalculateChecksum
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 CalculateGameDataChecksum:
@@ -1357,15 +1333,11 @@ CalculateGameDataChecksum:
 	ld hl, STARTOF("Progress WRAM")
 	ld b, SIZEOF("Progress WRAM")
 	call CalculateChecksum
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
+	push_wram BANK("WRAM2")
 	ld hl, wTreasuresCollected
 	ld b, (wOWLevel - wTreasuresCollected) + 2
 	call CalculateChecksum
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 Func_1f1246:
@@ -1590,39 +1562,27 @@ Func_1f13d7:
 	ld de, STARTOF("Progress WRAM")
 	ld b, $5b
 	call CopyHLToDE
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
+	push_wram BANK("WRAM2")
 	ld de, $d000
 	ld b, $11
 	call CopyHLToDE
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 Func_1f13f2:
 	ld de, wSaveCounter
 	ld b, $ca
 	call CopyHLToDE
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
+	push_wram BANK("WRAM2")
 	ld de, $d000
 	ld b, $11
 	call CopyHLToDE
-	pop af
-	ldh [rSVBK], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	pop_wram
+	push_wram BANK("Level Objects WRAM")
 	ld de, STARTOF("Level Objects WRAM")
 	ld bc, SIZEOF("Level Objects WRAM")
 	call CopyHLToDE_BC
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 Func_1f1420:

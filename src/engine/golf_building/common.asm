@@ -1,9 +1,5 @@
 GolfBuildingStateTable:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Golf RAM")
-	ldh [rSVBK], a
+	push_wram BANK("Golf RAM")
 	farcall _GolfBuildingStateTable
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret

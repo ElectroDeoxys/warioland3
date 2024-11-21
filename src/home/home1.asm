@@ -673,78 +673,50 @@ Func_edb::
 	jr .asm_f93
 
 InitAudio::
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Audio RAM")
-	ldh [rSVBK], a
+	push_wram BANK("Audio RAM")
 	call AudioFunc_InitAudio
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 ; bc = sound ID
 Func_fbc::
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Audio RAM")
-	ldh [rSVBK], a
+	push_wram BANK("Audio RAM")
 	call Func_3f06
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 ; bc = sound ID
 PlaySFX::
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Audio RAM")
-	ldh [rSVBK], a
+	push_wram BANK("Audio RAM")
 	call AudioFunc_PlaySFX
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 ; unreferenced
 Func_fd8:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Audio RAM")
-	ldh [rSVBK], a
+	push_wram BANK("Audio RAM")
 	call Func_3f12
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 ; bc = sound ID
 PlayNewMusic::
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Audio RAM")
-	ldh [rSVBK], a
+	push_wram BANK("Audio RAM")
 	call AudioFunc_PlayNewMusic
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 ; bc = sound ID
 Func_ff4::
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Audio RAM")
-	ldh [rSVBK], a
+	push_wram BANK("Audio RAM")
 	call Func_3f1e
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 Func_1002::
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Audio RAM")
-	ldh [rSVBK], a
+	push_wram BANK("Audio RAM")
 	call Func_3f24
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 ; unreferenced
@@ -771,14 +743,10 @@ Func_101e:
 
 Func_102c::
 	ldh [hffac], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Audio RAM")
-	ldh [rSVBK], a
+	push_wram BANK("Audio RAM")
 	ldh a, [hffac]
 	call Func_3f36
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 ; unreferenced
@@ -809,13 +777,9 @@ Func_1050:
 
 ; bc = sound ID
 PlayNewMusic_SetNoise::
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Audio RAM")
-	ldh [rSVBK], a
+	push_wram BANK("Audio RAM")
 	call AudioFunc_PlayNewMusic_SetNoise
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 PlayRecoverySFX::
@@ -1074,16 +1038,12 @@ TriggerRoomTransition::
 	jr z, .asm_1246
 	inc [hl] ; door transition
 	farcall GetWarioBGPtr
-	ldh a, [rSVBK]
-	push af
-	ld a, $03
-	ldh [rSVBK], a
+	push_wram $03
 	ld a, h
 	ld [wWarioTileBGPtr + 1], a
 	ld a, l
 	ld [wWarioTileBGPtr + 0], a
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 .asm_1246
@@ -1168,10 +1128,7 @@ ClearParticles::
 	ret
 
 SaveBackupVRAM::
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("GFX RAM")
-	ldh [rSVBK], a
+	push_wram BANK("GFX RAM")
 	ld a, [wSCY]
 	ld [w3d500], a
 	ld a, [wSCX]
@@ -1180,66 +1137,46 @@ SaveBackupVRAM::
 	ld de, w3d280
 	ld b, 16 palettes
 	call CopyHLToDE
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	xor a ; VRAM0
 	ldh [rVBK], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM4")
-	ldh [rSVBK], a
+	push_wram BANK("WRAM4")
 	ld hl, v0Tiles0
 	ld de, w4d000
 	ld bc, v0Tiles2 - v0Tiles0
 	call CopyHLToDE_BC
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM5")
-	ldh [rSVBK], a
+	push_wram BANK("WRAM5")
 	ld hl, v0Tiles2
 	ld de, w5d000
 	ld bc, v0End - v0Tiles2
 	call CopyHLToDE_BC
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM6")
-	ldh [rSVBK], a
+	push_wram BANK("WRAM6")
 	ld hl, v1Tiles0
 	ld de, w6d000
 	ld bc, v1Tiles2 - v1Tiles0
 	call CopyHLToDE_BC
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM7")
-	ldh [rSVBK], a
+	push_wram BANK("WRAM7")
 	ld hl, v1Tiles2
 	ld de, w7d000
 	ld bc, v1End - v1Tiles2
 	call CopyHLToDE_BC
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	xor a ; VRAM0
 	ldh [rVBK], a
 	ret
 
 LoadBackupVRAM::
-	ldh a, [rSVBK]
-	push af
-	ld a, $03
-	ldh [rSVBK], a
+	push_wram $03
 	ld a, [w3d500]
 	ld [wSCY], a
 	ld a, [w3d501]
@@ -1248,72 +1185,51 @@ LoadBackupVRAM::
 	ld de, wTempPals1
 	ld b, 16 palettes
 	call CopyHLToDE
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	xor a
 	ldh [rVBK], a
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM4")
-	ldh [rSVBK], a
+	push_wram BANK("WRAM4")
 	ld hl, w4d000
 	ld de, v0Tiles0
 	ld bc, $1000
 	call CopyHLToDE_BC
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM5")
-	ldh [rSVBK], a
+	push_wram BANK("WRAM5")
 	ld hl, w5d000
 	ld de, v0Tiles2
 	ld bc, $1000
 	call CopyHLToDE_BC
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM6")
-	ldh [rSVBK], a
+	push_wram BANK("WRAM6")
 	ld hl, w6d000
 	ld de, v1Tiles0
 	ld bc, $1000
 	call CopyHLToDE_BC
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM7")
-	ldh [rSVBK], a
+	push_wram BANK("WRAM7")
 	ld hl, w7d000
 	ld de, v1Tiles2
 	ld bc, $1000
 	call CopyHLToDE_BC
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	xor a
 	ldh [rVBK], a
 	ret
 
 ReturnToLevelFromGolf::
 	call DisableLCD
-	ldh a, [rSVBK]
-	push af
-	ld a, $03
-	ldh [rSVBK], a
+	push_wram $03
 	ld a, [wTempAnimatedTilesFrameDuration]
 	ld [wAnimatedTilesFrameDuration], a
 	ld a, [wTempAnimatedTilesGroup]
 	ld [wAnimatedTilesGfx], a
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	xor a
 	ld [wAnimatedTilesFrameCount], a
 	ld [wAnimatedTilesFrame], a
@@ -1346,13 +1262,9 @@ ReturnToMap::
 	ret
 
 ReturnToPauseMenuFromActionHelp::
-	ldh a, [rSVBK]
-	push af
-	ld a, $03
-	ldh [rSVBK], a
+	push_wram $03
 	farcall _ReturnToPauseMenuFromActionHelp
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 UpdateObjAnim::
@@ -2657,10 +2569,7 @@ ENDR
 ; loads the palette for the treasure
 ; that was collected in the level
 LoadCollectedTreasurePal_Level::
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wLevelTreasurePals)
-	ldh [rSVBK], a
+	push_wram BANK(wLevelTreasurePals)
 	ld hl, wLevelEndScreen
 	ld a, [hl]
 	and $7f
@@ -2707,15 +2616,11 @@ REPT 1 palettes
 ENDR
 	pop af
 	bankswitch
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 LoadCollectedTreasurePal_ClearScreen::
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wLevelTreasurePals)
-	ldh [rSVBK], a
+	push_wram BANK(wLevelTreasurePals)
 	ld hl, wLevelEndScreen
 	ld a, [hl]
 	and $7f
@@ -2742,8 +2647,7 @@ LoadCollectedTreasurePal_ClearScreen::
 	farcall BANK(TreasurePals), CopyHLToDE_Short ; unneeded farcall
 	pop af
 	bankswitch
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 ; b = number of pals

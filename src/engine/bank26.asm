@@ -1114,10 +1114,7 @@ GetLevelThatContainsTreasure:
 	ret
 
 LoadLevelTreasureData::
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
+	push_wram BANK("WRAM2")
 	call ClearTreasureData
 	call LoadLevelTreasures
 	call LoadTreasurePals
@@ -1129,8 +1126,7 @@ LoadLevelTreasureData::
 	ld de, v0Tiles1 tile $10
 	ld b, $00 ; $100 bytes = 10 tiles
 	call CopyHLToDE
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 Func_9aab5:

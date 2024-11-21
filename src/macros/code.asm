@@ -12,6 +12,20 @@ MACRO sramswitch
 	ld [rRAMB + $100], a
 ENDM
 
+; used to temporarily switch
+; to the given WRAM bank
+MACRO push_wram
+	ldh a, [rSVBK]
+	push af
+	ld a, \1 ; WRAM bank number
+	ldh [rSVBK], a
+ENDM
+
+MACRO pop_wram
+	pop af
+	ldh [rSVBK], a
+ENDM
+
 MACRO jumptable
 	rst JumpTable
 ENDM

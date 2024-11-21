@@ -1,8 +1,5 @@
 UpdateNumCollectedTreasures:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wTreasuresCollected)
-	ldh [rSVBK], a
+	push_wram BANK(wTreasuresCollected)
 	xor a
 	ld [wNumCollectedTreasures + 1], a
 	ld [wNumCollectedTreasures + 0], a
@@ -24,6 +21,5 @@ UpdateNumCollectedTreasures:
 	pop af
 	dec a
 	jr nz, .loop_treasures
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret

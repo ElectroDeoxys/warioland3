@@ -452,10 +452,7 @@ ENDR
 	ld a, [wBlockXPos + 1]
 	and $08
 	jp nz, .asm_97f3
-	ldh a, [rSVBK]
-	push af
-	ld a, $03
-	ldh [rSVBK], a
+	push_wram $03
 
 REPT 12
 	ld a, [hli]
@@ -501,15 +498,11 @@ ENDR
 	ld a, [hl]
 	ld [de], a
 	pop hl
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 .asm_97f3
-	ldh a, [rSVBK]
-	push af
-	ld a, $03
-	ldh [rSVBK], a
+	push_wram $03
 	ld a, [hli]
 	ld d, $00
 	ld e, a
@@ -579,8 +572,7 @@ ENDR
 	ld a, [hl]
 	ld [de], a
 	pop hl
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 .AddRowTopTiles:
@@ -695,10 +687,7 @@ ENDR
 	ld a, [wBlockXPos + 1]
 	and $08
 	jp nz, .asm_9f20
-	ldh a, [rSVBK]
-	push af
-	ld a, $03
-	ldh [rSVBK], a
+	push_wram $03
 
 REPT 12
 	ld a, [hli]
@@ -739,15 +728,11 @@ ENDR
 	ld a, [hl]
 	ld [de], a
 	pop hl
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 .asm_9f20
-	ldh a, [rSVBK]
-	push af
-	ld a, $03
-	ldh [rSVBK], a
+	push_wram $03
 	ld a, [hli]
 	ld d, $00
 	ld e, a
@@ -792,8 +777,7 @@ REPT 12
 	pop hl
 ENDR
 
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 Func_a0e2:
@@ -1019,10 +1003,7 @@ Func_a79e:
 	ld a, [wBlockYPos + 1]
 	and $08
 	jp nz, .asm_aa2d
-	ldh a, [rSVBK]
-	push af
-	ld a, $03
-	ldh [rSVBK], a
+	push_wram $03
 
 REPT 11
 	ld a, [hl]
@@ -1076,15 +1057,11 @@ ENDR
 	ld a, [hl]
 	ld [de], a
 	pop hl
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 .asm_aa2d
-	ldh a, [rSVBK]
-	push af
-	ld a, $03
-	ldh [rSVBK], a
+	push_wram $03
 	ld a, [hl]
 	ld d, $00
 	ld e, a
@@ -1172,8 +1149,7 @@ ENDR
 	ld a, [hl]
 	ld [de], a
 	pop hl
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 Func_aca6:
@@ -1338,10 +1314,7 @@ Func_b182:
 	ld a, [wBlockYPos + 1]
 	and $08
 	jp nz, .asm_b405
-	ldh a, [rSVBK]
-	push af
-	ld a, $03
-	ldh [rSVBK], a
+	push_wram $03
 
 REPT 11
 	ld a, [hl]
@@ -1393,15 +1366,11 @@ ENDR
 	ld a, [hl]
 	ld [de], a
 	pop hl
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 .asm_b405
-	ldh a, [rSVBK]
-	push af
-	ld a, $03
-	ldh [rSVBK], a
+	push_wram $03
 	ld a, [hl]
 	ld d, $00
 	ld e, a
@@ -1486,6 +1455,5 @@ ENDR
 	ld a, [hl]
 	ld [de], a
 	pop hl
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret

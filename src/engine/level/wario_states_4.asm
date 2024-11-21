@@ -3039,21 +3039,16 @@ UpdateState_BallThrown:
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wShootGoals)
-	ldh [rSVBK], a
+	push_wram BANK(wShootGoals)
 	ld a, [wShootGoals]
 	cp 3
 	jr z, .asm_1edd3c
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	farcall Func_206eb
 	ret
 
 .asm_1edd3c
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	ld a, WST_BALL_SENT_UPWARDS
 	ld [wWarioState], a

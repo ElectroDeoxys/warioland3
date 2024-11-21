@@ -1,8 +1,5 @@
 DoorTransition::
-	ldh a, [rSVBK]
-	push af
-	ld a, $03
-	ldh [rSVBK], a
+	push_wram $03
 	ld a, [wDoorTransitionOrientation]
 	ld c, a
 	ld a, [wDoorTransitionCounter]
@@ -29,8 +26,7 @@ DoorTransition::
 	ld [wDoorTransitionEffectBGPtr + 1], a
 
 .done
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 .already_started
@@ -128,10 +124,7 @@ VBlank_DoorTransition::
 	ld a, [wSCX]
 	ldh [rSCX], a
 
-	ldh a, [rSVBK]
-	push af
-	ld a, $03
-	ldh [rSVBK], a
+	push_wram $03
 	ld de, -BG_MAP_WIDTH
 	ld a, [wDoorTransitionOrientation]
 	and a
@@ -258,6 +251,5 @@ VBlank_DoorTransition::
 	dec b
 	jr nz, .loop_fill_upwards_2
 .asm_a8e
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret

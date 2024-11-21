@@ -1,10 +1,7 @@
 ; input:
 ; - e = ?
 Func_ba42:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	ld a, [wSRAMBank]
 	push af
 	ld a, $01
@@ -43,10 +40,7 @@ Func_ba42:
 	ld [hl], a
 	pop hl
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	ld a, [wSRAMBank]
 	push af
 	ld a, $01
@@ -72,8 +66,8 @@ Func_ba42:
 	ld [de], a
 	pop af
 	sramswitch
-	pop af
-	ldh [rSVBK], a
+	pop_wram
+
 	ld a, c
 	ld [wBlockPtrBank], a
 	ld h, d
@@ -87,16 +81,12 @@ Func_ba42:
 	farcall SpawnObject
 	pop af
 	sramswitch
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 ; hl = obj unk02
 DespawnObject:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	ld a, [wSRAMBank]
 	push af
 	ld a, BANK("SRAM1")
@@ -124,15 +114,11 @@ DespawnObject:
 	ld [de], a
 	pop af
 	sramswitch
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 Func_bb2d:
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK("Level Objects WRAM")
-	ldh [rSVBK], a
+	push_wram BANK("Level Objects WRAM")
 	ld a, [wSRAMBank]
 	push af
 	ld a, $01
@@ -162,8 +148,7 @@ Func_bb2d:
 	ld [hl], a
 	pop af
 	sramswitch
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 .asm_bb76
@@ -172,8 +157,7 @@ Func_bb2d:
 	ld [hl], a
 	pop af
 	sramswitch
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 Func_bb85:
@@ -275,10 +259,7 @@ Func_bb85:
 	sla e
 	sla e
 	rl d ; *4
-	ldh a, [rSVBK]
-	push af
-	ld a, $03
-	ldh [rSVBK], a
+	push_wram $03
 	push de
 	ld hl, wRoomBlockTiles
 	add hl, de
@@ -337,6 +318,5 @@ Func_bb85:
 	add 2
 	and $0f
 	ld [wc19f], a
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret

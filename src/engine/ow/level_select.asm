@@ -1,8 +1,5 @@
 SelectLevel:
-	ldh a, [rSVBK]
-	push af
-	ld a, 2 ; WRAM2
-	ldh [rSVBK], a
+	push_wram 2 ; WRAM2
 	ld a, [wOWLevel]
 	and a
 	jr z, .the_temple
@@ -66,8 +63,7 @@ SelectLevel:
 	ld a, [wLevel]
 	or b
 	ld [wLevel], a
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret
 
 .variant_4
@@ -95,6 +91,5 @@ SelectLevel:
 	ld a, GOLF_BUILDING
 .got_level
 	ld [wLevel], a
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ret

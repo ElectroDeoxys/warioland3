@@ -8,10 +8,7 @@ InitClearScreen:
 
 	call SetTreasureTransitionParam
 
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wTreasuresCollected)
-	ldh [rSVBK], a
+	push_wram BANK(wTreasuresCollected)
 	ld a, [wTransitionParam]
 	cp TRANSITION_RETURN_TO_MAP
 	jr z, .return_to_map
@@ -51,8 +48,7 @@ InitClearScreen:
 	ld a, 1
 .got_number_music_boxes
 	ld [wNumMusicBoxes], a
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 
 	farcall LoadClearScreenPals
 	call LoadCollectedTreasurePal_ClearScreen

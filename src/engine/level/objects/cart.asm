@@ -115,10 +115,7 @@ CartStoppedFunc:
 	jp SetOneWayPlatformAction
 
 CartVariableFunc:
-	ldh a, [rSVBK]
-	push af
-	ld a, $02
-	ldh [rSVBK], a
+	push_wram $02
 	ld a, TRUCK_WHEEL
 	call IsTreasureCollected
 	jr nz, .asm_4863b
@@ -129,8 +126,7 @@ CartVariableFunc:
 	ld de, Frameset_691bf
 	ld bc, .Waiting
 .asm_48641
-	pop af
-	ldh [rSVBK], a
+	pop_wram
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
