@@ -104,6 +104,8 @@ LevelVBlankFunc::
 
 ; write tiles in wBGMapTileVRAM0Queue to the
 ; corresponding addresses in wBGMapAddressQueue
+; this takes care of both VRAM0 and VRAM1
+; since afterwards we got a jump to ProcessLevelTileQueue_VRAM1
 	ld hl, wBGMapAddressQueue
 	ld bc, wBGMapTileVRAM0Queue
 	jp wVBlankFunc + $10
@@ -150,14 +152,15 @@ LevelVBlankFunc::
 	ld [wBGMapAddressQueueSize], a
 	ret
 
-Func_cab::
+; called within level VBlank
+ProcessLevelTileQueue_VRAM1::
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, wBGMapAddressQueue
 	ld bc, wBGMapTileVRAM1Queue
 	jp wVBlankFuncExtended
 
-Func_cb8::
+ClearLevelTileQueue::
 	xor a
 	ld [wBGMapTileQueueSize], a
 	ld [wBGMapAddressQueueSize], a
@@ -170,6 +173,7 @@ Func_cb8::
 ; - h = y block
 ; - b = ?
 Func_cc0::
+	; [hl] = y pos
 	ld a, [hli]
 	ld d, a
 	ld a, [hli]
@@ -180,10 +184,12 @@ Func_cc0::
 	and $0f
 	swap a
 	add c
+	; a = [hl] >> 4
 	add HIGH(STARTOF(SRAM))
 	ld c, a
 	ld [wWarioSpawnYBlock], a
 
+	; [hl] = x pos
 	ld a, [hli]
 	ld d, a
 	ld a, [hl]
@@ -195,11 +201,12 @@ Func_cc0::
 	swap a
 	add l
 	srl a
+	; a = [hl] >> 5
 	ld l, a
 	ld a, $00
 	adc $00
 	xor $01
-	ld [wccef], a
+	ld [wUnused_ccef], a
 	ld b, a
 
 	ld a, l
@@ -295,7 +302,7 @@ Func_d3e::
 	and $01
 	xor $01
 	ld b, a
-	ld [wccef], a
+	ld [wUnused_ccef], a
 	ret
 
 Func_d81::

@@ -65,7 +65,7 @@ PrintNumberMusicCoins:
 
 DrawLevelObjectsAfterLevelReturn::
 	farcall VBlank_Level
-	farcall Func_b681
+	farcall SetTileQueueProcessingFunctions
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Level Objects WRAM")

@@ -11,6 +11,7 @@ UpdateLevel:
 	cp CAM_YSCROLL
 	jp z, .yscroll_camera
 
+	; if doing floor transition, don't update Wario state
 	ld a, [wFloorTransitionDir]
 	and a
 	jr nz, .skip_update_wario_state
@@ -42,6 +43,7 @@ UpdateLevel:
 	xor a ; FALSE
 	ld [wBlockFuncWarioFlag], a
 
+	; update objects
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Level Objects WRAM")
@@ -171,7 +173,7 @@ UpdateLevel:
 	call Func_8ed9
 	call Func_bb85
 	di
-	call Func_b681
+	call SetTileQueueProcessingFunctions
 	ei
 	pop af
 	sramswitch

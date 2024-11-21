@@ -198,7 +198,7 @@ ProcessMultiBlock:
 	ld a, BANK("SRAM1")
 	sramswitch
 	di
-	call Func_b681
+	call SetTileQueueProcessingFunctions
 	ei
 	pop af
 	sramswitch
@@ -435,7 +435,7 @@ StartRoom_FromLevelStart:
 	call ApplyInitialCameraScroll
 
 	call VBlank_Level
-	call Func_b681
+	call SetTileQueueProcessingFunctions
 
 	ld a, [wSRAMBank]
 	push af
@@ -487,6 +487,7 @@ StartRoom_FromLevelStart:
 	push af
 	ld a, BANK("Level Objects WRAM")
 	ldh [rSVBK], a
+	; for some reason updates objects twice?
 	farcall UpdateObjects
 	farcall UpdateObjects
 	pop af
@@ -517,6 +518,7 @@ StartRoom_FromLevelStart:
 	ldh [rSVBK], a
 
 	call DrawWario
+
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK("Level Objects WRAM")
@@ -558,7 +560,7 @@ Func_896f:
 	ld [wccec], a
 	sramswitch
 	ld a, $01
-	ld [wccef], a
+	ld [wUnused_ccef], a
 	ld b, a
 	ld d, $10
 .asm_89a9
@@ -605,12 +607,13 @@ Func_896f:
 	dec a
 	cp l
 	ret c
+	; wc0c7 > l
 	ld a, [wc0c6]
 	cp l
 	jr z, .asm_89f3
 	ret nc
-
 .asm_89f3
+	; wc0c6 <= l
 	ld a, [wccec]
 	dec a
 	jr nz, .asm_8a08

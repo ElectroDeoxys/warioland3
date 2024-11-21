@@ -812,7 +812,7 @@ wccec::
 wWarioSpawnYBlock:: db
 wWarioSpawnXBlock:: db
 
-wccef::
+wUnused_ccef::
 	db
 
 wBGPtr::

@@ -9,11 +9,11 @@ VBlank_Level:
 	jp LevelVBlankFunc
 .end
 
-Func_b681:
+SetTileQueueProcessingFunctions:
 	ld hl, wVBlankFunc + $10
 	ld a, [wBGMapTileQueueSize]
 	and a
-	jr z, .asm_b6cb
+	jr z, .no_queue
 
 	ld c, a
 .loop_1
@@ -36,9 +36,9 @@ Func_b681:
 
 	ld a, $c3 ; jp
 	ld [hli], a
-	ld a, LOW(Func_cab)
+	ld a, LOW(ProcessLevelTileQueue_VRAM1)
 	ld [hli], a
-	ld a, HIGH(Func_cab)
+	ld a, HIGH(ProcessLevelTileQueue_VRAM1)
 	ld [hl], a
 
 	ld a, [wBGMapTileQueueSize]
@@ -62,11 +62,11 @@ Func_b681:
 	dec c
 	jr nz, .loop_2
 
-.asm_b6cb
+.no_queue
 	ld a, $c3 ; jp
 	ld [hli], a
-	ld a, LOW(Func_cb8)
+	ld a, LOW(ClearLevelTileQueue)
 	ld [hli], a
-	ld a, HIGH(Func_cb8)
+	ld a, HIGH(ClearLevelTileQueue)
 	ld [hl], a
 	ret
