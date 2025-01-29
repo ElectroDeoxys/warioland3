@@ -81,7 +81,7 @@ DollBoyFunc:
 	ld [wDollBoyNoFlashingBarrel], a
 	xor a
 	ld [wCurObjVar1], a
-	ld [w1d147], a
+	ld [wDollBoyFallImmediatelyMiddleBarrel], a
 	ld [wDollBoyHammerRange], a
 	ld a, DOLLBOY_BARREL1 | DOLLBOY_BARREL2 | DOLLBOY_BARREL3
 	ld [wDollBoyActiveBarrels], a
@@ -119,19 +119,21 @@ DollBoyFunc:
 	jr nz, .asm_50b61
 	ld a, [wDollBoyActiveBarrels]
 	cp DOLLBOY_BARREL1 | DOLLBOY_BARREL2
-	jr z, .fall_wait_2_barrels
+	jr z, .fall_wait_2_barrels ; bottom barrel attacked
 	cp DOLLBOY_BARREL1 | DOLLBOY_BARREL3
-	jr z, .fall_wait_1_barrel
+	jr z, .fall_wait_1_barrel ; middle barrel attacked
 	jr .fall_immediately
 .asm_50b61
-	cp $03
+	cp $3
 	jr nz, .fall_immediately
 	ld a, [wDollBoyActiveBarrels]
 	cp DOLLBOY_BARREL1
-	jr z, .fall_wait_1_barrel
+	jr z, .fall_wait_1_barrel ; only top barrel
 	cp DOLLBOY_BARREL3
-	jr z, .fall_immediately
-	ld a, [w1d147]
+	jr z, .fall_immediately ; only bottom barrel
+	; only middle barrel is active, check whether
+	; to fall immediately or wait for barrel to fall
+	ld a, [wDollBoyFallImmediatelyMiddleBarrel]
 	and a
 	jr nz, .fall_immediately
 .fall_wait_1_barrel
@@ -154,8 +156,11 @@ DollBoyFunc:
 	jp ApplyObjYMovement
 
 .fall_wait_2_barrels
-	ld a, $01
-	ld [w1d147], a
+	; mark middle barrel fall flag as true because
+	; if the top barrel is attacked next, DollBoy has
+	; to fall immediately
+	ld a, TRUE
+	ld [wDollBoyFallImmediatelyMiddleBarrel], a
 	ld a, [wCurObjVar3]
 	cp 34
 	jr nz, .wait_ground_shake_2

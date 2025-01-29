@@ -1023,6 +1023,14 @@ wJamanoActiveSkulls::
 wMuddeeAmbushState::
 	db
 
+; if TRUE, then DollBoy will fall immediately
+; when the middle barrel is destroyed
+wDollBoyFallImmediatelyMiddleBarrel::
+
+
+; which state ball Wario or ball Shoot is in
+wShootBallState::
+
 ; if TRUE, then there is an Igaguri or Kuri still on screen
 ; this is checked so that Wolfenboss doesn't spawn another one
 wWolfenbossIgaguriOrKuriActive::

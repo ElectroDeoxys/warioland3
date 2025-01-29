@@ -9,6 +9,11 @@ DEF SHOOT_JUMP_DELAY_SHORT        EQU   2 ; duration between jumps when Wario ha
 DEF SHOOT_REGULAR_BALL_DURATION   EQU 256 ; duration of ball form when Wario has 0 or 1 goal
 DEF SHOOT_LAST_GOAL_BALL_DURATION EQU 160 ; duration of ball form when Wario already has 2 goals
 
+; wShootBallState constants
+	const_def 5
+	const SHOOTBALL_WARIO_KICKED ; Wario is moving towards goal after being kicked
+	const SHOOTBALL_WARIO_GOAL   ; Wario entered the net zone and Shoot scores a goal
+
 ShootFunc:
 	ld a, TRUE
 	ld [wIsBossBattle], a
@@ -16,7 +21,7 @@ ShootFunc:
 
 	xor a
 	ld [wDollBoyActiveBarrels], a
-	ld [w1d147], a
+	ld [wShootBallState], a
 
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
@@ -87,7 +92,7 @@ ShootFunc:
 	or OBJ_INTERACTION_SHOOT
 	ld [hli], a
 	ld a, $01
-	ld [w1d147], a
+	ld [wShootBallState], a
 	ld a, $02
 	ld [wBossBattleMusic], a
 	call UpdateLevelMusic
@@ -100,15 +105,15 @@ ShootFunc:
 	jr nc, .asm_566bd
 .asm_566b7
 	xor a
-	ld [hld], a
+	ld [hld], a ; OBJ_STATE
 	res OBJSUBFLAG_VDIR_F, [hl]
 	jr .asm_566c1
 .asm_566bd
 	xor a
-	ld [hld], a
+	ld [hld], a ; OBJ_STATE
 	set OBJSUBFLAG_VDIR_F, [hl]
 .asm_566c1
-	ld a, [hld]
+	ld a, [hld] ; OBJ_SUBSTATE
 	rlca
 	ld_obj_frameset Frameset_6a022 + $2, Frameset_6a03a + $2
 	ld a, $02
@@ -205,7 +210,7 @@ ShootFunc:
 .asm_56768
 	call SetObjectFramesetPtr
 	ld a, 27
-	ld [hli], a
+	ld [hli], a ; OBJ_STATE_DURATION
 	xor a
 	ld [hli], a ; OBJ_VAR_1
 	ld a, SHOOT_JUMP_LATERAL_SPEED
@@ -215,14 +220,14 @@ ShootFunc:
 .Standing:
 	ld hl, wCurObjStateDuration
 	dec [hl]
-	ret nz
+	ret nz ; not finished yet
 	ld a, [wCurObjSubState]
 	rlca
 	ld_obj_frameset Frameset_6a02b, Frameset_6a043
 .asm_56787
 	call SetObjectFramesetPtr
 	ld a, 22
-	ld [hli], a
+	ld [hli], a ; OBJ_STATE_DURATION
 	ld a, $01
 	ld [hli], a ; OBJ_VAR_1
 	inc l
@@ -459,8 +464,8 @@ ShootFunc:
 	ret
 
 .Kicking:
-	ld a, [w1d147]
-	cp $05
+	ld a, [wShootBallState]
+	cp SHOOTBALL_WARIO_KICKED
 	call z, .MoveWarioBallAfterKick
 	ld hl, wCurObjFrameDuration
 	ld a, [hli] ; OBJ_FRAME_DURATION
@@ -477,8 +482,8 @@ ShootFunc:
 	ld de, Frameset_6a00b
 	jp SetObjectFramesetPtr
 .shoot_wario
-	ld a, $05
-	ld [w1d147], a
+	ld a, SHOOTBALL_WARIO_KICKED
+	ld [wShootBallState], a
 	xor a
 	ld [wCurObjVar3], a
 	ld a, $2 | (1 << 7)
@@ -487,8 +492,8 @@ ShootFunc:
 	ret
 
 .ScoreGoal:
-	ld a, [w1d147]
-	cp $06
+	ld a, [wShootBallState]
+	cp SHOOTBALL_WARIO_GOAL
 	jp nz, .MoveWarioBallAfterKick
 	ld hl, wShootGoals
 	ld a, [hl]
@@ -520,21 +525,23 @@ ShootFunc:
 .MoveWarioBallAfterKick:
 	ld a, [wWarioXPos + 1]
 	cp $ed
-	jr nc, .move_wario_down
+	jr nc, .ball_wario_inside_net
 ; move Wario right
 	ld bc, Data_54010
-	call Func_57244
+	call ApplyYOffsetOnKickedWarioBall
 	ld b, 3
 	jp AddXOffset
-.move_wario_down
+.ball_wario_inside_net
+; move Wario down to the ground
 	ld a, [wWarioYPos + 1]
 	cp $f0
-	jr nc, .asm_569aa
+	jr nc, .set_wario_ball_goal_state
 	ld b, 3
 	jp AddYOffset
-.asm_569aa
-	ld a, $06
-	ld [w1d147], a
+.set_wario_ball_goal_state
+; if on ground, set goal state
+	ld a, SHOOTBALL_WARIO_GOAL
+	ld [wShootBallState], a
 	ret
 
 .Func_569b0:
@@ -934,14 +941,14 @@ ShootFunc:
 	cp b
 	ret c
 	ld [hl], b
-	ld a, [w1d147]
+	ld a, [wShootBallState]
 	cp $04
 	jr nz, .asm_56c93
 	ld a, [wWarioGoals]
 	cp NUM_WARIO_GOALS_NEEDED
 	jp z, .set_defeated
 	ld a, $01
-	ld [w1d147], a
+	ld [wShootBallState], a
 	jp .return_to_regular_form
 .asm_56c93
 	ld l, OBJ_SUBSTATE
@@ -964,7 +971,7 @@ ShootFunc:
 	ld a, $2d
 	ld [hl], a
 	ld a, $02
-	ld [w1d147], a
+	ld [wShootBallState], a
 	play_sfx SFX_0C7
 	ld hl, wWarioGoals
 	ld a, [hl]
@@ -1015,7 +1022,7 @@ ShootFunc:
 	ld [wCurObjAction], a
 	ld hl, wCurObjFlags
 	res OBJFLAG_GRABBED_F, [hl]
-	ld a, [w1d147]
+	ld a, [wShootBallState]
 	cp $04
 	ret nz
 	ld de, Frameset_69fa4
@@ -1023,10 +1030,10 @@ ShootFunc:
 	ld l, OBJ_STATE
 	ld a, $35
 	ld [hld], a
-	res 6, [hl]
+	res OBJSUBFLAG_VDIR_F, [hl] ; OBJ_SUBSTATE
 	dec l
 	xor a
-	ld [hld], a
+	ld [hld], a ; OBJ_VAR_3
 	ld a, [wWarioGoals]
 	cp $03
 	jr nz, .asm_56d47
@@ -1035,7 +1042,7 @@ ShootFunc:
 .asm_56d47
 	ld a, $03
 .asm_56d49
-	ld [hl], a
+	ld [hl], a ; OBJ_VAR_2
 	ret
 
 .set_defeated
@@ -1244,8 +1251,8 @@ GKTortoiseFunc:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 .asm_56eb7
-	ld a, [w1d147]
-	cp $05
+	ld a, [wShootBallState]
+	cp SHOOTBALL_WARIO_KICKED
 	jr nz, .asm_56ec5
 	ld a, [wCurObjVar1]
 	cp $07
@@ -1289,8 +1296,8 @@ GKTortoiseFunc:
 	jr z, .asm_56f21
 	cp $06
 	ret c
-	ld a, [w1d147]
-	cp $06
+	ld a, [wShootBallState]
+	cp SHOOTBALL_WARIO_GOAL
 	ret z
 	ld a, $10
 	ld [hl], a
@@ -1302,11 +1309,11 @@ GKTortoiseFunc:
 	jp .asm_56fd2
 
 .Func_56f27:
-	ld a, [w1d147]
+	ld a, [wShootBallState]
 	and a
 	jp nz, .asm_57009
 .Func_56f2e
-	ld a, [w1d147]
+	ld a, [wShootBallState]
 	cp $02
 	jr z, .asm_56f93
 	ld hl, wCurObjAction
@@ -1328,7 +1335,7 @@ GKTortoiseFunc:
 	ld a, $09
 	ld [hl], a
 	ld a, $03
-	ld [w1d147], a
+	ld [wShootBallState], a
 	play_sfx SFX_FAT_WALK
 	call .Func_57170
 .asm_56f63
@@ -1365,7 +1372,7 @@ GKTortoiseFunc:
 	ret
 .asm_56f93
 	ld a, $03
-	ld [w1d147], a
+	ld [wShootBallState], a
 	ld de, Frameset_69fba
 	call SetObjectFramesetPtr
 	inc l
@@ -1379,7 +1386,7 @@ GKTortoiseFunc:
 	call SetObjectFramesetPtr
 	inc l
 	ld a, $05
-	ld [hl], a
+	ld [hl], a ; OBJ_VAR_1
 	play_sfx SFX_FAT_WALK
 .asm_56fb7
 	ld l, OBJ_Y_POS
@@ -1399,7 +1406,7 @@ GKTortoiseFunc:
 
 .asm_56fd2
 	ld a, $07
-	ld [w1d147], a
+	ld [wShootBallState], a
 	ld de, Frameset_69fba
 	call SetObjectFramesetPtr
 	inc l
@@ -1411,7 +1418,7 @@ GKTortoiseFunc:
 	ret
 
 .Func_56fef:
-	ld a, [w1d147]
+	ld a, [wShootBallState]
 	cp $02
 	jr z, .asm_56fff
 	ld hl, wCurObjState
@@ -1525,7 +1532,7 @@ GKTortoiseFunc:
 
 .asm_570b3
 	ld a, $04
-	ld [w1d147], a
+	ld [wShootBallState], a
 	play_sfx SFX_067
 	ret
 
@@ -1618,7 +1625,7 @@ GKTortoiseFunc:
 	ret
 .asm_5713f
 	ld a, $04
-	ld [w1d147], a
+	ld [wShootBallState], a
 	play_sfx SFX_067
 	ret
 
@@ -1702,7 +1709,7 @@ GKTortoiseFunc:
 	jp .asm_57009
 .asm_571b5
 	ld a, $01
-	ld [w1d147], a
+	ld [wShootBallState], a
 	xor a
 	ld [wAutoMoveState], a
 	play_sfx SFX_067
@@ -1787,7 +1794,7 @@ Func_57213:
 	call SubYOffset
 	jp HandleUpwardsFloorTransition
 
-Func_57244:
+ApplyYOffsetOnKickedWarioBall:
 	ld hl, wCurObjVar3
 	ld a, [hl]
 	add c
