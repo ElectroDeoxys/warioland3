@@ -37,7 +37,7 @@ BlockFunc_Solid:
 	ld a, [wBlockFuncWarioFlag]
 	and a
 	jr z, .snap_y_pos
-	ld a, [wSlopeInteraction]
+	ld a, [wWarioSlopeInteraction]
 	and a
 	jr z, .snap_y_pos
 	ld a, [wc0d6]
@@ -124,6 +124,29 @@ BlockFunc_RightSlope:
 	ld a, [wc0d6] ; unnecessary
 	bit COLLISION_UNK1_F, a
 	jr z, RightSlopeCollision
+
+	; if x + y < $10, then it means that
+	; that Wario is in a pixel on the upper part
+	; of a square divided diagonally by a line
+
+	; ................
+	; ...............x
+	; ...< $10......xx
+	; .............xxx
+	; ............xxxx
+	; ...........xxxxx
+	; ..........xxxxxx
+	; .........xxxxxxx
+	; ........xxxxxxxx
+	; .......xxxxxxxxx
+	; ......xxxxxxxxxx
+	; .....xxxxxxxxxxx
+	; ....xx > $ 10 xx
+	; ...xxxxxxxxxxxxx
+	; ..xxxxxxxxxxxxxx
+	; .xxxxxxxxxxxxxxx
+	; xxxxxxxxxxxxxxxx
+
 	ldh a, [hYPosLo]
 	and $0f
 	ld b, a
@@ -154,12 +177,12 @@ RightSlopeCollision:
 	ld a, [wBlockFuncWarioFlag]
 	and a
 	jr nz, .set_slope_interaction
-	ld a, $11
-	ld [wc18c], a
+	ld a, ON_SLOPE | RIGHT_SLOPE
+	ld [wObjSlopeInteraction], a
 	jr .asm_18126
 .set_slope_interaction
-	ld a, RIGHT_SLOPE
-	ld [wSlopeInteraction], a
+	ld a, ON_SLOPE | RIGHT_SLOPE
+	ld [wWarioSlopeInteraction], a
 .asm_18126
 	jp Func_18064
 
@@ -200,6 +223,29 @@ BlockFunc_LeftSlope:
 	jp z, BlockFunc_Free
 	bit COLLISION_UNK1_F, a
 	jr z, LeftSlopeCollision
+
+	; if x >= y, then it means that
+	; that Wario is in a pixel on the upper part
+	; of a square divided diagonally by a line
+
+	; ................
+	; x...............
+	; xx.....x > y....
+	; xxx.............
+	; xxxx............
+	; xxxxx...........
+	; xxxxxx..........
+	; xxxxxxx.........
+	; xxxxxxxx........
+	; xxxxxxxxx.......
+	; xxxxxxxxxx......
+	; xxxxxxxxxxx.....
+	; xx x < y xxx....
+	; xxxxxxxxxxxxx...
+	; xxxxxxxxxxxxxx..
+	; xxxxxxxxxxxxxxx.
+	; xxxxxxxxxxxxxxxx
+
 	ldh a, [hYPosLo]
 	and $0f
 	ld b, a
@@ -228,12 +274,12 @@ LeftSlopeCollision:
 	ld a, [wBlockFuncWarioFlag]
 	and a
 	jr nz, .set_slope_interaction
-	ld a, $12
-	ld [wc18c], a
+	ld a, ON_SLOPE | LEFT_SLOPE
+	ld [wObjSlopeInteraction], a
 	jr .asm_181a9
 .set_slope_interaction
-	ld a, LEFT_SLOPE
-	ld [wSlopeInteraction], a
+	ld a, ON_SLOPE | LEFT_SLOPE
+	ld [wWarioSlopeInteraction], a
 .asm_181a9
 	jp Func_18064
 
@@ -378,7 +424,7 @@ BlockFunc_Ladder:
 	jr nz, .set_ladder_interaction
 	jp BlockFunc_Free
 .set_ladder_interaction
-	ld a, $01
+	ld a, LADDER_COLLISION
 	ld [wLadderInteraction], a
 	jp Func_1808c
 
@@ -400,7 +446,7 @@ Func_182ec:
 	jr nz, .asm_182f6
 	jp BlockFunc_Floor
 .asm_182f6
-	ld a, $02
+	ld a, LADDER_UNDERNEATH
 	ld [wLadderInteraction], a
 	jp Func_1808c
 
@@ -411,7 +457,7 @@ BlockFunc_182fe:
 	ld a, [wc0d6]
 	bit COLLISION_UNK7_F, a
 	jp z, BlockFunc_Free
-	ld a, $01
+	ld a, LADDER_COLLISION
 	ld [wLadderInteraction], a
 	ld a, ROOMTRANSITION_5 | ROOMTRANSITIONF_2
 	ld [wRoomTransitionParam], a
@@ -424,7 +470,7 @@ Func_1831a:
 	ld a, [wc0d6]
 	bit COLLISION_UNK7_F, a
 	jp z, BlockFunc_Free
-	ld a, $01
+	ld a, LADDER_COLLISION
 	ld [wLadderInteraction], a
 	ld a, ROOMTRANSITION_5
 	ld [wRoomTransitionParam], a

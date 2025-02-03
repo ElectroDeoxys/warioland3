@@ -977,7 +977,7 @@ UpdateState_SnowmanWalking:
 	ld a, b
 	and a
 	jp z, SetState_SnowmanAirborne_Fall
-	ld a, [wSlopeInteraction]
+	ld a, [wWarioSlopeInteraction]
 	and a
 	ret z
 	ld hl, hYPosHi
@@ -1154,7 +1154,7 @@ UpdateState_SnowmanAirborne:
 .asm_1ecb1e
 	call TriggerFloorTransition
 	farcall CheckCentreCollision
-	ld a, [wSlopeInteraction]
+	ld a, [wWarioSlopeInteraction]
 	and a
 	jr z, .asm_1ecb39
 	jp TurnIntoSmallSnowball
@@ -1265,7 +1265,7 @@ TurnIntoSmallSnowball:
 	xor a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
-	ld a, [wSlopeInteraction]
+	ld a, [wWarioSlopeInteraction]
 	and $0f
 	dec a
 	ld [wDirection], a
@@ -2208,7 +2208,7 @@ Func_1ed558:
 
 SetState_BlindAirborne:
 	xor a ; FALSE
-	ld [wSlopeInteraction], a
+	ld [wWarioSlopeInteraction], a
 
 	ld a, WST_BLIND_AIRBORNE
 	ld [wWarioState], a

@@ -84,18 +84,24 @@ DEF CURRENT_LEFT  EQU 1 << CURRENT_LEFT_F
 DEF CURRENT_UP    EQU 1 << CURRENT_UP_F
 DEF CURRENT_DOWN  EQU 1 << CURRENT_DOWN_F
 
-; wSlopeInteraction constants
+; wObjSlopeInteraction and wWarioSlopeInteraction constants
 	const_def
 	const RIGHT_SLOPE_F ; 0
 	const LEFT_SLOPE_F  ; 1
 
 DEF ON_SLOPE    EQU $10
-DEF RIGHT_SLOPE EQU ON_SLOPE | 1 << RIGHT_SLOPE_F
-DEF LEFT_SLOPE  EQU ON_SLOPE | 1 << LEFT_SLOPE_F
+DEF RIGHT_SLOPE EQU 1 << RIGHT_SLOPE_F
+DEF LEFT_SLOPE  EQU 1 << LEFT_SLOPE_F
 
 ; wWaterInteraction constants
-DEF SUBMERSIBLE_WATER     EQU $1
-DEF NON_SUBMERSIBLE_WATER EQU $2
+	const_def 1
+	const SUBMERSIBLE_WATER     ; $1
+	const NON_SUBMERSIBLE_WATER ; $2
+
+; wLadderInteraction constants
+	const_def 1
+	const LADDER_COLLISION  ; $1
+	const LADDER_UNDERNEATH ; $2
 
 ; wBlockFuncSpecialCollision constants
 	const_def 1

@@ -277,12 +277,12 @@ wPalFadeCounter::
 
 ; bit 0: slope right
 ; bit 1: slope left
-wSlopeInteraction::
+wWarioSlopeInteraction::
 	db
 
 	ds $2
 
-wc18c::
+wObjSlopeInteraction::
 	db
 
 wUnused_c18d::

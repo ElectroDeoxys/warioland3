@@ -412,7 +412,7 @@ Func_b915:
 	inc a
 .asm_b98f
 	ld b, a
-	ld a, [wSlopeInteraction]
+	ld a, [wWarioSlopeInteraction]
 	and a
 	jr nz, .on_slope
 	ld a, b

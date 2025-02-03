@@ -2473,7 +2473,7 @@ HandleLadderInput:
 	farcall Func_19b12
 	ld a, [wLadderInteraction]
 	and a
-	jr z, .asm_1b45d
+	jr z, .no_more_ladder_interaction
 	farcall CheckCentreCollision
 	ld a, b
 	and a
@@ -2484,7 +2484,7 @@ HandleLadderInput:
 	ld [wWarioXPos + 1], a
 	ret
 
-.asm_1b45d
+.no_more_ladder_interaction
 	farcall CheckCentreCollision
 	ld a, b
 	and a

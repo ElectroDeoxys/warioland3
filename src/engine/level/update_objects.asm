@@ -2570,7 +2570,7 @@ Func_62926::
 	ld a, [hl]
 	ldh [hXPosHi], a
 	xor a
-	ld [wc18c], a
+	ld [wObjSlopeInteraction], a
 	call Func_352b
 	and a
 	jr nz, .asm_62980
@@ -2589,7 +2589,7 @@ Func_62926::
 	ldh a, [hYPosHi]
 	ld [hl], a
 	ld l, OBJ_STATE
-	ld a, [wc18c]
+	ld a, [wObjSlopeInteraction]
 	and a
 	jr nz, .asm_62997
 	ld a, OBJSTATE_0F
@@ -2695,7 +2695,7 @@ _ObjState_StandingFall::
 	ld a, [hl]
 	ldh [hXPosHi], a
 	xor a
-	ld [wc18c], a
+	ld [wObjSlopeInteraction], a
 	call Func_352b
 	and a
 	jr nz, .asm_62a35
@@ -2714,7 +2714,7 @@ _ObjState_StandingFall::
 	ldh a, [hYPosHi]
 	ld [hl], a
 	ld l, OBJ_STATE
-	ld a, [wc18c]
+	ld a, [wObjSlopeInteraction]
 	and a
 	jr nz, .asm_62a4c
 	ld a, OBJSTATE_TURN_AROUND_START
@@ -2771,7 +2771,7 @@ _ObjState_Fall::
 	ldh [hXPosHi], a
 
 	xor a
-	ld [wc18c], a
+	ld [wObjSlopeInteraction], a
 	call Func_352b
 	and a
 	jr nz, .land
@@ -2790,7 +2790,7 @@ _ObjState_Fall::
 	ldh a, [hYPosHi]
 	ld [hl], a
 	ld l, OBJ_STATE
-	ld a, [wc18c]
+	ld a, [wObjSlopeInteraction]
 	and a
 	jr nz, .asm_62ac1
 	ld a, OBJSTATE_LAND
@@ -2858,7 +2858,7 @@ Func_62ae5::
 	ld a, [hl]
 	ldh [hXPosHi], a
 	xor a
-	ld [wc18c], a
+	ld [wObjSlopeInteraction], a
 	call Func_3543
 	cp $10
 
@@ -2922,7 +2922,7 @@ Func_62ae5::
 	ld l, OBJ_FLAGS
 	res OBJFLAG_GRABBED_F, [hl]
 	ld l, OBJ_STATE
-	ld a, [wc18c]
+	ld a, [wObjSlopeInteraction]
 	rra
 	jr nc, .asm_62bb3
 	ld a, [hl]
@@ -2986,7 +2986,7 @@ Func_62bce::
 	ld a, [hl]
 	ldh [hXPosHi], a
 	xor a
-	ld [wc18c], a
+	ld [wObjSlopeInteraction], a
 	call Func_3543
 	cp $10
 
@@ -3050,7 +3050,7 @@ Func_62bce::
 	ld l, OBJ_FLAGS
 	res OBJFLAG_GRABBED_F, [hl]
 	ld l, OBJ_STATE
-	ld a, [wc18c]
+	ld a, [wObjSlopeInteraction]
 	rra
 	jr c, .asm_62c99
 	ld a, [hl]
@@ -3121,7 +3121,7 @@ Func_62ca8::
 	ld a, [hl]
 	ldh [hXPosHi], a
 	xor a
-	ld [wc18c], a
+	ld [wObjSlopeInteraction], a
 	ld [wc1ca], a
 	call Func_352b
 	and a
@@ -3165,9 +3165,9 @@ Func_62d34:
 	ld [hli], a
 	ldh a, [hYPosHi]
 	ld [hl], a
-	ld a, [wc18c]
+	ld a, [wObjSlopeInteraction]
 	and $0f
-	cp $01
+	cp RIGHT_SLOPE
 	jr z, .asm_62d55
 	ld l, OBJ_VAR_2
 	cp $02
@@ -3266,7 +3266,7 @@ Func_62d86::
 	ld a, [hl]
 	ldh [hXPosHi], a
 	xor a
-	ld [wc18c], a
+	ld [wObjSlopeInteraction], a
 	ld [wc1ca], a
 	call Func_352b
 	and a
@@ -3307,9 +3307,9 @@ Func_62e0f:
 	ld [hli], a
 	ldh a, [hYPosHi]
 	ld [hl], a
-	ld a, [wc18c]
+	ld a, [wObjSlopeInteraction]
 	and $0f
-	cp $02
+	cp LEFT_SLOPE
 	jr z, .asm_62e2f
 	ld l, OBJ_VAR_2
 	cp $01

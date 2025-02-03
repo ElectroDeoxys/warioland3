@@ -782,7 +782,7 @@ SetState_FlatFalling:
 	ld [wAnimationFrame], a
 	ld [wWarioStateCounter], a
 	ld [wWarioStateCycles], a
-	ld [wSlopeInteraction], a
+	ld [wWarioSlopeInteraction], a
 	inc a
 	ld [wJumpVelIndex], a
 	ld [wJumpVelTable], a
@@ -1252,7 +1252,7 @@ UpdateState_BallOString:
 	jp z, Func_28c15
 
 	update_pos_y
-	ld a, [wSlopeInteraction]
+	ld a, [wWarioSlopeInteraction]
 	and a
 	ret z
 	and $0f

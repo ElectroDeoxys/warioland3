@@ -1413,7 +1413,7 @@ ApplyWalkVelocity_Right::
 	jr ApplyWalkVelocity
 
 .dir_right
-	ld a, [wSlopeInteraction]
+	ld a, [wWarioSlopeInteraction]
 	bit RIGHT_SLOPE_F, a
 	jr z, ApplyWalkVelocity
 ;	fallthrough
@@ -1436,7 +1436,7 @@ ApplyWalkVelocity_Left::
 	jr ApplyWalkVelocity
 
 .dir_left
-	ld a, [wSlopeInteraction]
+	ld a, [wWarioSlopeInteraction]
 	bit LEFT_SLOPE_F, a
 	jr z, ApplyWalkVelocity
 	jr ApplySlopedWalkVelocity

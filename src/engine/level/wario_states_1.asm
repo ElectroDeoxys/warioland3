@@ -79,7 +79,6 @@ UpdateWarioStates_Group1:
 	dw InvalidWarioStateReset
 	dw InvalidWarioStateReset
 	dw InvalidWarioStateReset
-; 1c0b6
 
 UpdateState_Idling:
 	farcall CheckCentreCollision
@@ -104,8 +103,9 @@ UpdateState_Idling:
 	cp WST_IDLING
 	ret nz ; not idling
 	ld a, [wLadderInteraction]
-	cp $02
+	cp LADDER_UNDERNEATH
 	jp nz, CrouchOrSlide
+	; start climbing down ladder
 	farcall SetState_LadderClimbing
 	ret
 
@@ -124,6 +124,7 @@ UpdateState_Idling:
 	ld a, [wJoypadDown]
 	bit D_UP_F, a
 	jr z, .skip_ladder
+	; start climbing up ladder
 	farcall SetState_LadderClimbing
 	ret
 
@@ -220,7 +221,8 @@ UpdateState_Turning:
 
 	ld a, [wAnimationEnded]
 	and a
-	ret z
+	ret z ; continue animation
+	; change state to either walking or idling
 	ld a, [wJoypadDown]
 	and D_RIGHT | D_LEFT
 	jp nz, SetState_Walking_ResetWalkVel
@@ -288,7 +290,7 @@ StartJump:
 
 SetState_Airborne:
 	xor a
-	ld [wSlopeInteraction], a
+	ld [wWarioSlopeInteraction], a
 
 	ld a, WST_AIRBORNE
 	ld [wWarioState], a
@@ -839,7 +841,7 @@ UpdateState_CrouchSliding:
 	ld a, b
 	and a
 	jp z, StartCrouchFall
-	ld a, [wSlopeInteraction]
+	ld a, [wWarioSlopeInteraction]
 	and a
 	jr z, .no_slope
 	update_pos_y
@@ -1205,7 +1207,7 @@ StartJumpingAirborneAttack:
 	ld [wJumpingUpwards], a
 SetState_AttackingAirborne:
 	xor a
-	ld [wSlopeInteraction], a
+	ld [wWarioSlopeInteraction], a
 	ld a, WST_ATTACKING_AIRBORNE
 	ld [wWarioState], a
 	xor a
@@ -2267,7 +2269,7 @@ UpdateState_CrouchWalking:
 	and a
 	jp z, StartCrouchFall
 	update_pos_y
-	ld a, [wSlopeInteraction]
+	ld a, [wWarioSlopeInteraction]
 	and a
 	jr nz, .asm_1d51f
 	ret
@@ -3373,7 +3375,7 @@ SetState_Sliding:
 	ld [wOAMPtr + 0], a
 	ld a, LOW(OAM_1644a)
 	ld [wOAMPtr + 1], a
-	ld a, [wSlopeInteraction]
+	ld a, [wWarioSlopeInteraction]
 	bit LEFT_SLOPE_F, a
 	jr nz, .asm_1df8b
 	ld hl, wWarioXPos + 1
@@ -3559,7 +3561,7 @@ UpdateState_Rolling:
 
 	update_pos_y
 
-	ld a, [wSlopeInteraction]
+	ld a, [wWarioSlopeInteraction]
 	and a
 	ret z
 	and $0f
@@ -3573,7 +3575,7 @@ UpdateState_Rolling:
 .asm_1e145
 	farcall CheckCentreCollision
 	update_pos_y
-	ld a, [wSlopeInteraction]
+	ld a, [wWarioSlopeInteraction]
 	and a
 	jp z, Func_1e1e3
 	and $0f
@@ -3591,7 +3593,7 @@ Func_1e174:
 
 SetState_RollingAirborne:
 	xor a
-	ld [wSlopeInteraction], a
+	ld [wWarioSlopeInteraction], a
 	ld [wGrabState], a
 	ld a, JUMP_VEL_KNOCK_BACK
 	ld [wJumpVelTable], a
@@ -3799,7 +3801,7 @@ UpdateState_GroundShakeStunned:
 	hcall UpdateAnimation
 	ld a, [wGroundShakeCounter]
 	and a
-	jr z, .asm_1e3b6
+	jr z, .no_more_ground_shake
 	ld a, [wJumpVelTable]
 	and a
 	ret z
@@ -3829,7 +3831,7 @@ UpdateState_GroundShakeStunned:
 	ld [wJumpVelTable], a
 	ld [wJumpVelIndex], a
 	ret
-.asm_1e3b6
+.no_more_ground_shake
 	ld a, -27
 	ld [wCollisionBoxTop], a
 	farcall CheckUpCollision
@@ -4375,7 +4377,7 @@ SetState_Attacking:
 	ret
 
 CrouchOrSlide:
-	ld a, [wSlopeInteraction]
+	ld a, [wWarioSlopeInteraction]
 	and a
 	jp nz, SetState_Sliding
 	ld a, -1
@@ -5167,7 +5169,7 @@ Func_1eefc:
 .asm_1ef69
 	call ApplyWalkVelocity_Right
 	call AddXOffset
-	ld a, [wSlopeInteraction]
+	ld a, [wWarioSlopeInteraction]
 	and a
 	jr z, .asm_1ef8d
 	bit RIGHT_SLOPE_F, a
@@ -5177,7 +5179,7 @@ Func_1eefc:
 .asm_1ef7b
 	call ApplyWalkVelocity_Left
 	call SubXOffset
-	ld a, [wSlopeInteraction]
+	ld a, [wWarioSlopeInteraction]
 	and a
 	jr z, .asm_1ef8d
 	bit RIGHT_SLOPE_F, a
@@ -6021,36 +6023,39 @@ HandleGroundShake:
 	ld a, [hl]
 	and a
 	jr z, .no_ground_shake
+
+	; there is ground shake, check if there are
+	; conditions to stun Wario (on ground or ladder)
 	cp $10
-	jr c, .continue
+	jr c, .continue ; ground shake counter >= $10
 	ld a, [wIsGettingOffLadder]
 	and a
-	jr nz, .continue
+	jr nz, .continue ; getting off ladder
 	ld a, [wIsWarioGroundShaking]
 	and a
-	jr nz, .continue
+	jr nz, .continue ; Wario himself is ground shaking
 	ld a, [wJumpVelTable]
 	and a
-	jr nz, .continue
+	jr nz, .continue ; Wario is jumping/falling
 	ld a, [wWaterInteraction]
 	and a
-	jr nz, .continue
+	jr nz, .continue ; Wario is interacting with water
 	ld a, [wTransformation]
 	and a
-	jr nz, .continue
+	jr nz, .continue ; Wario is in a transformation
 	ld a, [wRoomTransitionParam]
 	and a
-	jr nz, .continue
+	jr nz, .continue ; room transition happening
 	ld a, [wIsIntangible]
 	and a
-	jr nz, .continue
+	jr nz, .continue ; Wario is intangible
 	ld a, [wIsOnSteppableObject]
 	and a
-	jr nz, .continue
+	jr nz, .continue ; Wario is on a steppable object
 	ld a, [wWarioState]
 	cp WST_GROUND_SHAKE_STUNNED
-	jr z, .continue
-	jr .asm_1f73c
+	jr z, .continue ; Wario is already shake stunned
+	jr .wario_shake_stun
 	ret ; unnecessary
 
 .no_ground_shake
@@ -6071,7 +6076,8 @@ HandleGroundShake:
 	ld [wSCYShake], a
 	ret
 
-.asm_1f73c
+.wario_shake_stun
+	; if in a ladder, do ladder shake stun
 	ld a, [wWarioState]
 	cp WST_LADDER_CLIMBING
 	jp z, SetState_LadderShakeStunned
@@ -6079,7 +6085,7 @@ HandleGroundShake:
 	jp z, SetState_LadderShakeStunned
 	cp WST_LADDER_SCRATCHING
 	jp z, SetState_LadderShakeStunned
-
+	; else, do ground shake stun
 	ld a, WST_GROUND_SHAKE_STUNNED
 	ld [wWarioState], a
 	xor a

@@ -268,10 +268,10 @@ Func_19832:
 	ld b, a
 	ret
 
-; resets wSlopeInteraction
+; resets wWarioSlopeInteraction
 Func_198c7:
 	xor a
-	ld [wSlopeInteraction], a
+	ld [wWarioSlopeInteraction], a
 	get_pos
 	call Func_19b51
 	ret
@@ -530,7 +530,7 @@ CheckAirborneCollision:
 
 .Func_19a53
 	xor a
-	ld [wSlopeInteraction], a
+	ld [wWarioSlopeInteraction], a
 	ld a, [wIsSmashAttacking]
 	and a
 	jr z, .no_smash_attack_3

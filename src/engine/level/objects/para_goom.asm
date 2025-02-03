@@ -757,7 +757,7 @@ ParaGoomFunc:
 	ld a, [hl]
 	ldh [hXPosHi], a
 	xor a
-	ld [wc18c], a
+	ld [wObjSlopeInteraction], a
 	call Func_352b
 	and a
 	jr nz, .asm_41857

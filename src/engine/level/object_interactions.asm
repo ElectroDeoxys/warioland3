@@ -1574,7 +1574,7 @@ Func_20b6b:
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_20cdb
-	ld a, [wSlopeInteraction]
+	ld a, [wWarioSlopeInteraction]
 	bit LEFT_SLOPE_F, a
 	jr nz, .asm_20cf5
 	ld a, [wGrabState]
@@ -1590,7 +1590,7 @@ Func_20b6b:
 	hcall UpdateAnimation
 	ret
 .asm_20cdb
-	ld a, [wSlopeInteraction]
+	ld a, [wWarioSlopeInteraction]
 	bit RIGHT_SLOPE_F, a
 	jr nz, .asm_20cf5
 	ld a, [wGrabState]
@@ -1931,7 +1931,7 @@ ObjInteraction_Richtertoffen:
 	ld a, 11
 	ld [wCollisionBoxRight], a
 	ld a, [wLadderInteraction]
-	cp $02
+	cp LADDER_UNDERNEATH
 	jr z, .asm_20fdb
 	farcall Func_197b1
 	ld a, b
