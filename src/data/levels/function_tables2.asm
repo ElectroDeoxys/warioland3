@@ -78,7 +78,7 @@ BlockFunctionTable63:
 	dw BlockFunc_Free ; $4b
 	dw BlockFunc_Free ; $4c
 	dw BlockFunc_Free ; $4d
-	dw BlockFunc_186f9 ; $4e
+	dw BlockFunc_UnderwaterDoor ; $4e
 	dw BlockFunc_187b0 ; $4f
 	dw BlockFunc_DownPipe_Left ; $50
 	dw BlockFunc_DownPipe_Right ; $51
@@ -210,7 +210,7 @@ BlockFunctionTable64:
 	dw BlockFunc_Free ; $4b
 	dw BlockFunc_Free ; $4c
 	dw BlockFunc_Free ; $4d
-	dw BlockFunc_186f9 ; $4e
+	dw BlockFunc_UnderwaterDoor ; $4e
 	dw BlockFunc_187b0 ; $4f
 	dw BlockFunc_DownPipe_Left ; $50
 	dw BlockFunc_DownPipe_Right ; $51
@@ -342,7 +342,7 @@ BlockFunctionTable65:
 	dw BlockFunc_Free ; $4b
 	dw BlockFunc_Free ; $4c
 	dw BlockFunc_Free ; $4d
-	dw BlockFunc_186f9 ; $4e
+	dw BlockFunc_UnderwaterDoor ; $4e
 	dw BlockFunc_187b0 ; $4f
 	dw BlockFunc_DownPipe_Left ; $50
 	dw BlockFunc_DownPipe_Right ; $51
@@ -365,7 +365,7 @@ BlockFunctionTable65:
 	dw BlockFunc_Water ; $62
 	dw BlockFunc_Water ; $63
 	dw BlockFunc_Water ; $64
-	dw BlockFunc_186f9 ; $65
+	dw BlockFunc_UnderwaterDoor ; $65
 	dw BlockFunc_Solid ; $66
 	dw BlockFunc_Solid ; $67
 	dw BlockFunc_Switch ; $68
@@ -427,7 +427,7 @@ BlockFunctionTable66:
 	dw BlockFunc_UpPipe_Right ; $1c
 	dw BlockFunc_Floor ; $1d
 	dw BlockFunc_TreasureDoor ; $1e
-	dw BlockFunc_186f9 ; $1f
+	dw BlockFunc_UnderwaterDoor ; $1f
 	dw BlockFunc_Solid ; $20
 	dw BlockFunc_Solid ; $21
 	dw BlockFunc_Solid ; $22
@@ -559,7 +559,7 @@ BlockFunctionTable67:
 	dw BlockFunc_UpPipe_Right ; $1c
 	dw BlockFunc_Floor ; $1d
 	dw BlockFunc_TreasureDoor ; $1e
-	dw BlockFunc_186f9 ; $1f
+	dw BlockFunc_UnderwaterDoor ; $1f
 	dw BlockFunc_Solid ; $20
 	dw BlockFunc_Solid ; $21
 	dw BlockFunc_Solid ; $22
@@ -1383,7 +1383,7 @@ BlockFunctionTable73:
 	dw BlockFunc_Free ; $3c
 	dw BlockFunc_Free ; $3d
 	dw BlockFunc_Free ; $3e
-	dw BlockFunc_186f9 ; $3f
+	dw BlockFunc_UnderwaterDoor ; $3f
 	dw BlockFunc_Solid ; $40
 	dw BlockFunc_Solid ; $41
 	dw BlockFunc_Solid ; $42
@@ -1515,7 +1515,7 @@ BlockFunctionTable74:
 	dw BlockFunc_Free ; $3c
 	dw BlockFunc_Free ; $3d
 	dw BlockFunc_Free ; $3e
-	dw BlockFunc_186f9 ; $3f
+	dw BlockFunc_UnderwaterDoor ; $3f
 	dw BlockFunc_Solid ; $40
 	dw BlockFunc_Solid ; $41
 	dw BlockFunc_Solid ; $42

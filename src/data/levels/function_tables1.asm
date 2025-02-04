@@ -870,7 +870,7 @@ BlockFunctionTable5:
 	dw BlockFunc_Solid ; $6b
 	dw BlockFunc_Water ; $6c
 	dw BlockFunc_Floor ; $6d
-	dw BlockFunc_186f9 ; $6e
+	dw BlockFunc_UnderwaterDoor ; $6e
 	dw BlockFunc_Door ; $6f
 	dw BlockFunc_Solid ; $70
 	dw BlockFunc_Solid ; $71
@@ -1722,7 +1722,7 @@ BlockFunctionTable12:
 	dw BlockFunc_Solid ; $23
 	dw BlockFunc_Free ; $24
 	dw BlockFunc_Ladder ; $25
-	dw BlockFunc_186f9 ; $26
+	dw BlockFunc_UnderwaterDoor ; $26
 	dw BlockFunc_Water ; $27
 	dw BlockFunc_Solid ; $28
 	dw BlockFunc_Solid ; $29
@@ -1979,7 +1979,7 @@ BlockFunctionTable14:
 	dw BlockFunc_UpPipe_Right ; $1c
 	dw BlockFunc_Floor ; $1d
 	dw BlockFunc_TreasureDoor ; $1e
-	dw BlockFunc_186f9 ; $1f
+	dw BlockFunc_UnderwaterDoor ; $1f
 	dw BlockFunc_Solid ; $20
 	dw BlockFunc_Solid ; $21
 	dw BlockFunc_Solid ; $22
@@ -2143,7 +2143,7 @@ BlockFunctionTable15:
 	dw BlockFunc_Free ; $3c
 	dw BlockFunc_CrackedBlock_79 ; $3d
 	dw BlockFunc_CrackedBlock_79 ; $3e
-	dw BlockFunc_186f9 ; $3f
+	dw BlockFunc_UnderwaterDoor ; $3f
 	dw BlockFunc_NonCrackedBlock_78 ; $40
 	dw BlockFunc_NonCrackedBlock_78 ; $41
 	dw BlockFunc_NonCrackedBlock_79 ; $42
@@ -2191,7 +2191,7 @@ BlockFunctionTable15:
 	dw BlockFunc_188ba ; $6c
 	dw BlockFunc_188ba ; $6d
 	dw BlockFunc_Door ; $6e
-	dw BlockFunc_186f9 ; $6f
+	dw BlockFunc_UnderwaterDoor ; $6f
 	dw BlockFunc_NonSolidSpike ; $70
 	dw BlockFunc_NonSolidSpike ; $71
 	dw BlockFunc_Free ; $72
@@ -2843,7 +2843,7 @@ BlockFunctionTable20:
 	dw BlockFunc_Free ; $64
 	dw BlockFunc_TreasureDoor ; $65
 	dw BlockFunc_Free ; $66
-	dw BlockFunc_186f9 ; $67
+	dw BlockFunc_UnderwaterDoor ; $67
 	dw BlockFunc_Solid ; $68
 	dw BlockFunc_Solid ; $69
 	dw BlockFunc_Solid ; $6a
@@ -2857,7 +2857,7 @@ BlockFunctionTable20:
 	dw BlockFunc_Solid ; $72
 	dw BlockFunc_Solid ; $73
 	dw BlockFunc_Water ; $74
-	dw BlockFunc_186f9 ; $75
+	dw BlockFunc_UnderwaterDoor ; $75
 	dw BlockFunc_Solid ; $76
 	dw BlockFunc_Solid ; $77
 	dw BlockFunc_Free ; $78
@@ -3199,7 +3199,7 @@ BlockFunctionTable23:
 	dw BlockFunc_Free ; $3c
 	dw BlockFunc_Free ; $3d
 	dw BlockFunc_Free ; $3e
-	dw BlockFunc_186f9 ; $3f
+	dw BlockFunc_UnderwaterDoor ; $3f
 	dw BlockFunc_Solid ; $40
 	dw BlockFunc_Solid ; $41
 	dw BlockFunc_Solid ; $42
@@ -3482,10 +3482,10 @@ BlockFunctionTable25:
 	dw BlockFunc_Free ; $4f
 	dw BlockFunc_Solid ; $50
 	dw BlockFunc_CrackedBlock_79 ; $51
-	dw BlockFunc_186f9 ; $52
+	dw BlockFunc_UnderwaterDoor ; $52
 	dw BlockFunc_Floor ; $53
 	dw BlockFunc_Floor ; $54
-	dw BlockFunc_186f9 ; $55
+	dw BlockFunc_UnderwaterDoor ; $55
 	dw BlockFunc_TreasureDoor ; $56
 	dw BlockFunc_Door ; $57
 	dw BlockFunc_EnemyBlock_7b ; $58
@@ -4402,7 +4402,7 @@ BlockFunctionTable32:
 	dw BlockFunc_Free ; $4b
 	dw BlockFunc_Free ; $4c
 	dw BlockFunc_Free ; $4d
-	dw BlockFunc_186f9 ; $4e
+	dw BlockFunc_UnderwaterDoor ; $4e
 	dw BlockFunc_187b0 ; $4f
 	dw BlockFunc_DownPipe_Left ; $50
 	dw BlockFunc_DownPipe_Right ; $51
@@ -4425,7 +4425,7 @@ BlockFunctionTable32:
 	dw BlockFunc_Water ; $62
 	dw BlockFunc_Water ; $63
 	dw BlockFunc_Water ; $64
-	dw BlockFunc_186f9 ; $65
+	dw BlockFunc_UnderwaterDoor ; $65
 	dw BlockFunc_Solid ; $66
 	dw BlockFunc_Solid ; $67
 	dw BlockFunc_Switch ; $68
@@ -5443,7 +5443,7 @@ BlockFunctionTable40:
 	dw BlockFunc_Solid ; $3c
 	dw BlockFunc_188ba ; $3d
 	dw BlockFunc_188ba ; $3e
-	dw BlockFunc_186f9 ; $3f
+	dw BlockFunc_UnderwaterDoor ; $3f
 	dw BlockFunc_YarnBlock_79 ; $40
 	dw BlockFunc_1958d ; $41
 	dw BlockFunc_Solid ; $42
@@ -6382,7 +6382,7 @@ BlockFunctionTable47:
 	dw BlockFunc_Free ; $4b
 	dw BlockFunc_LeftSlope ; $4c
 	dw BlockFunc_RightSlope ; $4d
-	dw BlockFunc_186f9 ; $4e
+	dw BlockFunc_UnderwaterDoor ; $4e
 	dw BlockFunc_187b0 ; $4f
 	dw BlockFunc_1900f ; $50
 	dw BlockFunc_18f7b ; $51
@@ -6405,7 +6405,7 @@ BlockFunctionTable47:
 	dw BlockFunc_Water ; $62
 	dw BlockFunc_Water ; $63
 	dw BlockFunc_Water ; $64
-	dw BlockFunc_186f9 ; $65
+	dw BlockFunc_UnderwaterDoor ; $65
 	dw BlockFunc_Solid ; $66
 	dw BlockFunc_Solid ; $67
 	dw BlockFunc_Switch ; $68
@@ -6803,7 +6803,7 @@ BlockFunctionTable50:
 	dw BlockFunc_188ba ; $64
 	dw BlockFunc_TreasureDoor ; $65
 	dw BlockFunc_Free ; $66
-	dw BlockFunc_186f9 ; $67
+	dw BlockFunc_UnderwaterDoor ; $67
 	dw BlockFunc_18ff3 ; $68
 	dw BlockFunc_18f5f ; $69
 	dw BlockFunc_18ff3 ; $6a
@@ -6817,7 +6817,7 @@ BlockFunctionTable50:
 	dw BlockFunc_18e0e ; $72
 	dw BlockFunc_18ea2 ; $73
 	dw BlockFunc_Water ; $74
-	dw BlockFunc_186f9 ; $75
+	dw BlockFunc_UnderwaterDoor ; $75
 	dw BlockFunc_Solid ; $76
 	dw BlockFunc_Solid ; $77
 	dw BlockFunc_Free ; $78
@@ -7067,7 +7067,7 @@ BlockFunctionTable52:
 	dw BlockFunc_Free ; $64
 	dw BlockFunc_TreasureDoor ; $65
 	dw BlockFunc_Free ; $66
-	dw BlockFunc_186f9 ; $67
+	dw BlockFunc_UnderwaterDoor ; $67
 	dw BlockFunc_Solid ; $68
 	dw BlockFunc_Solid ; $69
 	dw BlockFunc_Solid ; $6a
@@ -7445,7 +7445,7 @@ BlockFunctionTable55:
 	dw BlockFunc_Water ; $52
 	dw BlockFunc_Floor ; $53
 	dw BlockFunc_Floor ; $54
-	dw BlockFunc_186f9 ; $55
+	dw BlockFunc_UnderwaterDoor ; $55
 	dw BlockFunc_TreasureDoor ; $56
 	dw BlockFunc_Door ; $57
 	dw BlockFunc_EnemyBlock_7b ; $58
@@ -8083,7 +8083,7 @@ BlockFunctionTable60:
 	dw BlockFunc_Water ; $3c
 	dw BlockFunc_CrackedBlock_79 ; $3d
 	dw BlockFunc_CrackedBlock_79 ; $3e
-	dw BlockFunc_186f9 ; $3f
+	dw BlockFunc_UnderwaterDoor ; $3f
 	dw BlockFunc_Water ; $40
 	dw BlockFunc_NonCrackedBlock_78 ; $41
 	dw BlockFunc_NonCrackedBlock_79 ; $42
@@ -8131,7 +8131,7 @@ BlockFunctionTable60:
 	dw BlockFunc_188ba ; $6c
 	dw BlockFunc_188ba ; $6d
 	dw BlockFunc_Door ; $6e
-	dw BlockFunc_186f9 ; $6f
+	dw BlockFunc_UnderwaterDoor ; $6f
 	dw BlockFunc_NonSolidSpike ; $70
 	dw BlockFunc_NonSolidSpike ; $71
 	dw BlockFunc_Free ; $72
@@ -8215,7 +8215,7 @@ BlockFunctionTable61:
 	dw BlockFunc_Free ; $3c
 	dw BlockFunc_CrackedBlock_79 ; $3d
 	dw BlockFunc_CrackedBlock_79 ; $3e
-	dw BlockFunc_186f9 ; $3f
+	dw BlockFunc_UnderwaterDoor ; $3f
 	dw BlockFunc_NonCrackedBlock_78 ; $40
 	dw BlockFunc_NonCrackedBlock_78 ; $41
 	dw BlockFunc_NonCrackedBlock_79 ; $42
@@ -8347,7 +8347,7 @@ BlockFunctionTable62:
 	dw BlockFunc_Free ; $3c
 	dw BlockFunc_CrackedBlock_79 ; $3d
 	dw BlockFunc_CrackedBlock_79 ; $3e
-	dw BlockFunc_186f9 ; $3f
+	dw BlockFunc_UnderwaterDoor ; $3f
 	dw BlockFunc_NonCrackedBlock_78 ; $40
 	dw BlockFunc_NonCrackedBlock_78 ; $41
 	dw BlockFunc_NonCrackedBlock_79 ; $42
@@ -8395,7 +8395,7 @@ BlockFunctionTable62:
 	dw BlockFunc_188ba ; $6c
 	dw BlockFunc_188ba ; $6d
 	dw BlockFunc_Door ; $6e
-	dw BlockFunc_186f9 ; $6f
+	dw BlockFunc_UnderwaterDoor ; $6f
 	dw BlockFunc_NonSolidSpike ; $70
 	dw BlockFunc_NonSolidSpike ; $71
 	dw BlockFunc_Free ; $72

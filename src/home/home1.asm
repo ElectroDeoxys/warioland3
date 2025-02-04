@@ -992,7 +992,7 @@ StartDownwardsFloorTransition::
 	ld a, $68
 .asm_11bc
 	ld [wFloorTransitionTimer], a
-	play_sfx SFX_0E1
+	play_sfx SFX_PIPE_EXIT
 	ld a, FLOOR_TRANSITION_UP
 	ld [wFloorTransitionDir], a
 	ld a, TRUE
@@ -1005,7 +1005,7 @@ StartDownwardsFloorTransition::
 StartUpwardsFloorTransition::
 	ld a, c
 	ld [wFloor], a
-	play_sfx SFX_0E1
+	play_sfx SFX_PIPE_EXIT
 	ld a, FLOOR_TRANSITION_DOWN
 	ld [wFloorTransitionDir], a
 	ld a, TRUE
@@ -1030,12 +1030,13 @@ TriggerRoomTransition::
 	ld [wIsIntangible], a
 
 	ld a, [wRoomTransitionParam]
-	bit ROOMTRANSITIONF_3_F, a
-	ret nz
+	bit ROOMTRANSITIONF_DELAY_F, a
+	ret nz ; delayed, don't transition for now
+
 	ld hl, wSubState
 	ld a, [wRoomTransitionParam]
-	bit ROOMTRANSITIONF_1_F, a
-	jr z, .asm_1246
+	bit ROOMTRANSITIONF_DOOR_F, a
+	jr z, .not_door
 	inc [hl] ; door transition
 	farcall GetWarioBGPtr
 	push_wram $03
@@ -1046,7 +1047,7 @@ TriggerRoomTransition::
 	pop_wram
 	ret
 
-.asm_1246
+.not_door
 	inc [hl]
 	inc [hl]
 	stop_music

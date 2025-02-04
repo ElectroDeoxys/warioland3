@@ -2564,7 +2564,7 @@ UpdateState_PipeGoingDown:
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
-	ld b, $01
+	ld b, 1
 	call AddYOffset
 
 	ld hl, wWarioStateCounter
@@ -2586,10 +2586,10 @@ UpdateState_PipeGoingDown:
 .asm_1d7f9
 	call ClearTransformationValues
 	ld hl, wRoomTransitionParam
-	res ROOMTRANSITIONF_3_F, [hl]
+	res ROOMTRANSITIONF_DELAY_F, [hl]
 	jp TriggerRoomTransition
 .asm_1d804
-	play_sfx SFX_0E1
+	play_sfx SFX_PIPE_EXIT
 	ret
 
 UpdateState_PipeGoingUp:
@@ -2621,10 +2621,10 @@ UpdateState_PipeGoingUp:
 .asm_1d848
 	call ClearTransformationValues
 	ld hl, wRoomTransitionParam
-	res ROOMTRANSITIONF_3_F, [hl]
+	res ROOMTRANSITIONF_DELAY_F, [hl]
 	jp TriggerRoomTransition
 .asm_1d853
-	play_sfx SFX_0E1
+	play_sfx SFX_PIPE_EXIT
 	ret
 
 UpdateState_EnemyBumping:
@@ -3891,7 +3891,7 @@ UpdateState_EnteringDoor:
 	ld hl, wWarioStateCounter
 	inc [hl]
 	ld hl, wRoomTransitionParam
-	res ROOMTRANSITIONF_3_F, [hl]
+	res ROOMTRANSITIONF_DELAY_F, [hl]
 	jp TriggerRoomTransition
 
 .asm_1e455

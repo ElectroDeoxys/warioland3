@@ -36,7 +36,7 @@ Sfx_Switch:
 	db 1, 0
 	dw Sfx_Switch_Ch1
 
-Sfx_Pipe_Ch1:
+Sfx_PipeEnter_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_35
@@ -47,9 +47,9 @@ Sfx_Pipe_Ch1:
 	audio_wait_16
 	audio_end
 
-Sfx_Pipe:
+Sfx_PipeEnter:
 	db 1, 0
-	dw Sfx_Pipe_Ch1
+	dw Sfx_PipeEnter_Ch1
 
 Sfx_MusicalCoin_Ch1:
 	semitone_offset 0
@@ -7200,7 +7200,7 @@ Sfx_0d1:
 	dw Sfx_0d1_Ch1
 	dw Sfx_0d1_Ch2
 
-Sfx_0e1_Ch1:
+Sfx_PipeExit_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_35
@@ -7215,9 +7215,9 @@ Sfx_0e1_Ch1:
 	audio_wait_8
 	audio_end
 
-Sfx_0e1:
+Sfx_PipeExit:
 	db 1, 0
-	dw Sfx_0e1_Ch1
+	dw Sfx_PipeExit_Ch1
 
 Sfx_0e2_Ch1:
 	semitone_offset 0

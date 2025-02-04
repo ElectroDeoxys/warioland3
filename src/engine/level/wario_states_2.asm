@@ -501,7 +501,7 @@ UpdateState_Teleporting:
 	ld a, $01
 	ld [wInvincibleCounter], a
 	ld hl, wRoomTransitionParam
-	res ROOMTRANSITIONF_3_F, [hl]
+	res ROOMTRANSITIONF_DELAY_F, [hl]
 	jp TriggerRoomTransition
 
 PlayTeleportingSFX:
@@ -528,7 +528,7 @@ UpdateState_WaterTeleporting:
 	ld a, $01
 	ld [wInvincibleCounter], a
 	ld hl, wRoomTransitionParam
-	res ROOMTRANSITIONF_3_F, [hl]
+	res ROOMTRANSITIONF_DELAY_F, [hl]
 	jp TriggerRoomTransition
 
 SetState_SandFalling:

@@ -361,7 +361,7 @@ HandleGolfLobbyStates:
 	ret
 
 .enough_coins
-	play_sfx SFX_PIPE
+	play_sfx SFX_PIPE_ENTER
 	ld a, [wGolfPrice]
 	ld c, a
 	ld a, [wNumCoins + 1]
@@ -572,7 +572,7 @@ HandleGolfLobbyStates:
 	cp $80
 	jr z, .asm_1c844f
 	cp $a0
-	play_sfx z, SFX_PIPE
+	play_sfx z, SFX_PIPE_ENTER
 	dec [hl]
 	ret
 .asm_1c844f

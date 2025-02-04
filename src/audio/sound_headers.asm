@@ -137,7 +137,7 @@ SoundHeaders:
 	sfx Sfx_FullyChargedThrow,           $00, 220, CHAN5_F, 1 ; SFX_FULLY_CHARGED_THROW
 	sfx Sfx_02e,                         $00, 232, CHAN5_F, 1 ; SFX_02E
 	sfx Sfx_Switch,                      $00, 236, CHAN5_F, 1 ; SFX_SWITCH
-	sfx Sfx_Pipe,                        $00, 220, CHAN5_F, 1 ; SFX_PIPE
+	sfx Sfx_PipeEnter,                   $00, 220, CHAN5_F, 1 ; SFX_PIPE_ENTER
 	sfx Sfx_MusicalCoin,                 $00, 255, CHAN5_F, 2 ; SFX_MUSICAL_COIN
 	sfx Sfx_Key,                         $00, 255, CHAN5_F, 2 ; SFX_KEY
 	sfx Sfx_GroundPound,                 $00, 237, CHAN5_F, 1 ; SFX_GROUND_POUND
@@ -268,7 +268,7 @@ SoundHeaders:
 	sfx Sfx_0d1,                         $00, 239, CHAN5_F, 2 ; SFX_0D1
 	filler_sounds 15
 
-	sfx Sfx_0e1,                         $00, 255, CHAN5_F, 1 ; SFX_0E1
+	sfx Sfx_PipeExit,                    $00, 255, CHAN5_F, 1 ; SFX_PIPE_EXIT
 	sfx Sfx_0e2,                         $00, 220, CHAN5_F, 1 ; SFX_0E2
 	sfx Sfx_Selection,                   $00, 220, CHAN5_F, 1 ; SFX_SELECTION
 	sfx Sfx_0e4,                         $00, 251, CHAN5_F, 1 ; SFX_0E4

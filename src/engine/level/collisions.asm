@@ -350,6 +350,7 @@ Func_19942:
 	ld a, TRUE
 	ld [wBlockFuncBreakFlag], a
 .puffy
+	; 2 pixels above collision box
 	ld a, [wCollisionBoxTop]
 	cpl
 	inc a
@@ -388,6 +389,7 @@ CheckUpCollision:
 	ld a, TRUE
 	ld [wBlockFuncBreakFlag], a
 .puffy_1
+	; left collision boundary - 3 pixels
 	ld a, [wCollisionBoxLeft]
 	cpl
 	inc a
@@ -403,6 +405,7 @@ CheckUpCollision:
 	sbc $00
 	ld [de], a
 	dec de
+	; 2 pixels above collision box
 	ld a, [wCollisionBoxTop]
 	cpl
 	inc a
@@ -426,6 +429,7 @@ CheckUpCollision:
 	ld a, TRUE
 	ld [wBlockFuncBreakFlag], a
 .puffy_2
+	; right collision boundary - 3 pixels
 	ld a, [wCollisionBoxRight]
 	sub 3
 	ld c, a
@@ -439,6 +443,7 @@ CheckUpCollision:
 	adc $00
 	ld [de], a
 	dec de
+	; 2 pixels above collision box
 	ld a, [wCollisionBoxTop]
 	cpl
 	inc a

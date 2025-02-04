@@ -622,9 +622,9 @@ BlockFunc_DownPipe_Right:
 	ld [wWarioXPos + 1], a
 
 EnterPipeDown:
-	ld a, ROOMTRANSITION_1 | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_3
+	ld a, ROOMTRANSITION_1 | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_DELAY
 	ld [wRoomTransitionParam], a
-	play_sfx SFX_PIPE
+	play_sfx SFX_PIPE_ENTER
 	ld a, WST_PIPE_GOING_DOWN
 	ld [wWarioState], a
 
@@ -712,9 +712,9 @@ BlockFunc_UpPipe_Right:
 ;	fallthrough
 
 EnterPipeUp:
-	ld a, ROOMTRANSITION_1 | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_3
+	ld a, ROOMTRANSITION_1 | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_DELAY
 	ld [wRoomTransitionParam], a
-	play_sfx SFX_PIPE
+	play_sfx SFX_PIPE_ENTER
 	ld a, WST_PIPE_GOING_UP
 	ld [wWarioState], a
 
@@ -769,7 +769,7 @@ BlockFunc_Door:
 	cp WST_GRAB_IDLING
 	jp nz, BlockFunc_Free
 .enter_door
-	ld a, ROOMTRANSITION_2 | ROOMTRANSITIONF_1 | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_3
+	ld a, ROOMTRANSITION_2 | ROOMTRANSITIONF_DOOR | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_DELAY
 	ld [wRoomTransitionParam], a
 	jp EnterDoor
 
@@ -789,7 +789,7 @@ BlockFunc_MinigameDoor:
 	cp WST_GRAB_IDLING
 	jp nz, BlockFunc_Free
 .enter_door
-	ld a, ROOMTRANSITION_GOLF | ROOMTRANSITIONF_1 | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_3
+	ld a, ROOMTRANSITION_GOLF | ROOMTRANSITIONF_DOOR | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_DELAY
 	ld [wRoomTransitionParam], a
 	jr EnterDoor
 
@@ -810,7 +810,7 @@ Func_18624:
 	cp WST_GRAB_IDLING
 	jp nz, BlockFunc_Free
 .asm_18647
-	ld a, ROOMTRANSITION_2 | ROOMTRANSITIONF_1 | ROOMTRANSITIONF_3
+	ld a, ROOMTRANSITION_2 | ROOMTRANSITIONF_DOOR | ROOMTRANSITIONF_DELAY
 	ld [wRoomTransitionParam], a
 	jr EnterDoor
 
@@ -831,7 +831,7 @@ Func_1864e:
 	cp WST_GRAB_IDLING
 	jp nz, BlockFunc_Free
 .asm_18671
-	ld a, ROOMTRANSITION_GOLF | ROOMTRANSITIONF_1 | ROOMTRANSITIONF_3
+	ld a, ROOMTRANSITION_GOLF | ROOMTRANSITIONF_DOOR | ROOMTRANSITIONF_DELAY
 	ld [wRoomTransitionParam], a
 ;	fallthrough
 
@@ -889,7 +889,7 @@ EnterDoor:
 	hcall UpdateAnimation
 	jp BlockFunc_Free
 
-BlockFunc_186f9:
+BlockFunc_UnderwaterDoor:
 	ld a, [wBlockFuncWarioFlag]
 	and a
 	jp z, BlockFunc_Water
@@ -907,7 +907,7 @@ BlockFunc_186f9:
 	ld a, [wJoypadPressed]
 	bit D_UP_F, a
 	jr z, .asm_18724
-	ld a, ROOMTRANSITION_6 | ROOMTRANSITIONF_1 | ROOMTRANSITIONF_2
+	ld a, ROOMTRANSITION_6 | ROOMTRANSITIONF_DOOR | ROOMTRANSITIONF_2
 	ld [wRoomTransitionParam], a
 .asm_18724
 	jp BlockFunc_Free
@@ -930,7 +930,7 @@ BlockFunc_18727:
 	ld a, [wJoypadPressed]
 	bit D_UP_F, a
 	jr z, .asm_18752
-	ld a, ROOMTRANSITION_6 | ROOMTRANSITIONF_1
+	ld a, ROOMTRANSITION_6 | ROOMTRANSITIONF_DOOR
 	ld [wRoomTransitionParam], a
 .asm_18752
 	jp BlockFunc_Free
@@ -951,7 +951,7 @@ Func_18755:
 	ld a, [wJoypadPressed]
 	bit D_UP_F, a
 	jr z, .asm_1877b
-	ld a, ROOMTRANSITION_8 | ROOMTRANSITIONF_1 | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_3
+	ld a, ROOMTRANSITION_8 | ROOMTRANSITIONF_DOOR | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_DELAY
 	ld [wRoomTransitionParam], a
 .asm_1877b
 	jp BlockFunc_Free
