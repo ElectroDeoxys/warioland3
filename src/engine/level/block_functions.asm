@@ -459,7 +459,7 @@ BlockFunc_182fe:
 	jp z, BlockFunc_Free
 	ld a, LADDER_COLLISION
 	ld [wLadderInteraction], a
-	ld a, ROOMTRANSITION_5 | ROOMTRANSITIONF_2
+	ld a, ROOMTRANSITION_5 | ROOMTRANSITIONF_RELOAD_OBJECTS
 	ld [wRoomTransitionParam], a
 	jp BlockFunc_Free
 
@@ -622,7 +622,7 @@ BlockFunc_DownPipe_Right:
 	ld [wWarioXPos + 1], a
 
 EnterPipeDown:
-	ld a, ROOMTRANSITION_1 | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_DELAY
+	ld a, ROOMTRANSITION_PIPE | ROOMTRANSITIONF_RELOAD_OBJECTS | ROOMTRANSITIONF_DELAY
 	ld [wRoomTransitionParam], a
 	play_sfx SFX_PIPE_ENTER
 	ld a, WST_PIPE_GOING_DOWN
@@ -712,7 +712,7 @@ BlockFunc_UpPipe_Right:
 ;	fallthrough
 
 EnterPipeUp:
-	ld a, ROOMTRANSITION_1 | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_DELAY
+	ld a, ROOMTRANSITION_PIPE | ROOMTRANSITIONF_RELOAD_OBJECTS | ROOMTRANSITIONF_DELAY
 	ld [wRoomTransitionParam], a
 	play_sfx SFX_PIPE_ENTER
 	ld a, WST_PIPE_GOING_UP
@@ -769,7 +769,7 @@ BlockFunc_Door:
 	cp WST_GRAB_IDLING
 	jp nz, BlockFunc_Free
 .enter_door
-	ld a, ROOMTRANSITION_2 | ROOMTRANSITIONF_DOOR | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_DELAY
+	ld a, ROOMTRANSITION_DOOR | ROOMTRANSITIONF_DOOR | ROOMTRANSITIONF_RELOAD_OBJECTS | ROOMTRANSITIONF_DELAY
 	ld [wRoomTransitionParam], a
 	jp EnterDoor
 
@@ -789,7 +789,7 @@ BlockFunc_MinigameDoor:
 	cp WST_GRAB_IDLING
 	jp nz, BlockFunc_Free
 .enter_door
-	ld a, ROOMTRANSITION_GOLF | ROOMTRANSITIONF_DOOR | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_DELAY
+	ld a, ROOMTRANSITION_GOLF | ROOMTRANSITIONF_DOOR | ROOMTRANSITIONF_RELOAD_OBJECTS | ROOMTRANSITIONF_DELAY
 	ld [wRoomTransitionParam], a
 	jr EnterDoor
 
@@ -810,7 +810,7 @@ Func_18624:
 	cp WST_GRAB_IDLING
 	jp nz, BlockFunc_Free
 .asm_18647
-	ld a, ROOMTRANSITION_2 | ROOMTRANSITIONF_DOOR | ROOMTRANSITIONF_DELAY
+	ld a, ROOMTRANSITION_DOOR | ROOMTRANSITIONF_DOOR | ROOMTRANSITIONF_DELAY
 	ld [wRoomTransitionParam], a
 	jr EnterDoor
 
@@ -907,7 +907,7 @@ BlockFunc_UnderwaterDoor:
 	ld a, [wJoypadPressed]
 	bit D_UP_F, a
 	jr z, .asm_18724
-	ld a, ROOMTRANSITION_6 | ROOMTRANSITIONF_DOOR | ROOMTRANSITIONF_2
+	ld a, ROOMTRANSITION_UNDERWATER_DOOR | ROOMTRANSITIONF_DOOR | ROOMTRANSITIONF_RELOAD_OBJECTS
 	ld [wRoomTransitionParam], a
 .asm_18724
 	jp BlockFunc_Free
@@ -930,11 +930,12 @@ BlockFunc_18727:
 	ld a, [wJoypadPressed]
 	bit D_UP_F, a
 	jr z, .asm_18752
-	ld a, ROOMTRANSITION_6 | ROOMTRANSITIONF_DOOR
+	ld a, ROOMTRANSITION_UNDERWATER_DOOR | ROOMTRANSITIONF_DOOR
 	ld [wRoomTransitionParam], a
 .asm_18752
 	jp BlockFunc_Free
 
+; unreferenced
 Func_18755:
 	ld a, [wBlockFuncWarioFlag]
 	and a
@@ -951,7 +952,7 @@ Func_18755:
 	ld a, [wJoypadPressed]
 	bit D_UP_F, a
 	jr z, .asm_1877b
-	ld a, ROOMTRANSITION_8 | ROOMTRANSITIONF_DOOR | ROOMTRANSITIONF_2 | ROOMTRANSITIONF_DELAY
+	ld a, ROOMTRANSITION_8 | ROOMTRANSITIONF_DOOR | ROOMTRANSITIONF_RELOAD_OBJECTS | ROOMTRANSITIONF_DELAY
 	ld [wRoomTransitionParam], a
 .asm_1877b
 	jp BlockFunc_Free
@@ -987,7 +988,7 @@ BlockFunc_187b0:
 	ld a, [wc0d6]
 	bit COLLISION_UNK7_F, a
 	jp z, BlockFunc_Free
-	ld a, ROOMTRANSITION_4 | ROOMTRANSITIONF_2
+	ld a, ROOMTRANSITION_4 | ROOMTRANSITIONF_RELOAD_OBJECTS
 	ld [wRoomTransitionParam], a
 	jp BlockFunc_Free
 
@@ -1009,7 +1010,7 @@ BlockFunc_187de:
 	ld a, [wc0d6]
 	bit COLLISION_UNK7_F, a
 	jp z, BlockFunc_Water
-	ld a, ROOMTRANSITION_4 | ROOMTRANSITIONF_2
+	ld a, ROOMTRANSITION_4 | ROOMTRANSITIONF_RELOAD_OBJECTS
 	ld [wRoomTransitionParam], a
 	jp BlockFunc_Water
 

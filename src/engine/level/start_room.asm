@@ -80,10 +80,10 @@ StartRoom_FromTransition:
 	call ApplyInitialCameraScroll
 
 	ld a, [wRoomTransitionParam]
-	bit ROOMTRANSITIONF_2_F, a
-	jr z, .asm_854a
-	call Func_edb
-.asm_854a
+	bit ROOMTRANSITIONF_RELOAD_OBJECTS_F, a
+	jr z, .no_object_reloading
+	call ReloadLevelObjects
+.no_object_reloading
 	xor a
 	ld [wRoomTransitionParam], a
 

@@ -548,7 +548,7 @@ LoadLevelBlockMapAndObjects::
 	pop hl
 	ret
 
-Func_edb::
+ReloadLevelObjects::
 	ld d, $00
 	ld a, [wLevel]
 	add a ; *2
@@ -1239,7 +1239,7 @@ ReturnToLevelFromGolf::
 	call LoadBackupVRAM
 	ld a, [wRoomTransitionParam]
 	and ROOMTRANSITION_FLAGS_MASK
-	or ROOMTRANSITION_2
+	or ROOMTRANSITION_DOOR
 	ld [wRoomTransitionParam], a
 	farcall DrawLevelObjectsAfterLevelReturn
 	ld a, LCDC_DEFAULT

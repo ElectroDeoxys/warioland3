@@ -347,6 +347,7 @@ INCLUDE "data/levels/rooms2.asm"
 
 SECTION "Block Function Tables 1", ROMX
 
+INCLUDE "data/levels/function_table_pointers.asm"
 INCLUDE "data/levels/function_tables1.asm"
 
 
