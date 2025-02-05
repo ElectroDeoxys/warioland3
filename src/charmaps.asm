@@ -1,7 +1,161 @@
 	PUSHC
 	NEWCHARMAP temple
 
+	; hiragana characters
+	CHARMAP "あ",         $80
+	CHARMAP "い",         $81
+	CHARMAP "う",         $82
+	CHARMAP "え",         $83
+	CHARMAP "お",         $84
+	CHARMAP "か",         $85
+	CHARMAP "き",         $86
+	CHARMAP "く",         $87
+	CHARMAP "け",         $88
+	CHARMAP "こ",         $89
+	CHARMAP "さ",         $8a
+	CHARMAP "し",         $8b
+	CHARMAP "す",         $8c
+	CHARMAP "せ",         $8d
+	CHARMAP "そ",         $8e
+	CHARMAP "た",         $8f
+	CHARMAP "ち",         $90
+	CHARMAP "っ",         $91
+	CHARMAP "て",         $92
+	CHARMAP "と",         $93
+	CHARMAP "な",         $94
+	CHARMAP "に",         $95
+	CHARMAP "ぬ",         $96
+	CHARMAP "ね",         $97
+	CHARMAP "の",         $98
+	CHARMAP "は",         $99
+	CHARMAP "ひ",         $9a
+	CHARMAP "ふ",         $9b
+	CHARMAP "へ",         $9c
+	CHARMAP "ほ",         $9d
+	CHARMAP "ま",         $9e
+	CHARMAP "み",         $9f
+	CHARMAP "む",         $a0
+	CHARMAP "め",         $a1
+	CHARMAP "も",         $a2
+	CHARMAP "や",         $a3
+	CHARMAP "ゆ",         $a4
+	CHARMAP "よ",         $a5
+	CHARMAP "ら",         $a6
+	CHARMAP "り",         $a7
+	CHARMAP "る",         $a8
+	CHARMAP "れ",         $a9
+	CHARMAP "ろ",         $aa
+	CHARMAP "わ",         $ab
+	CHARMAP "を",         $ac
+	CHARMAP "ん",         $ad
+	CHARMAP "ぁ",         $ae
+	CHARMAP "ぃ",         $af
+	CHARMAP "ぅ",         $b0
+	CHARMAP "ぇ",         $b1
+	CHARMAP "ぉ",         $b2
+	CHARMAP "ゃ",         $b3
+	CHARMAP "ゅ",         $b4
+	CHARMAP "ょ",         $b5
+	CHARMAP "っ",         $b6
+	CHARMAP "が",         $b7
+	CHARMAP "ぎ",         $b8
+	CHARMAP "ぐ",         $b9
+	CHARMAP "げ",         $ba
+	CHARMAP "ご",         $bb
+	CHARMAP "ざ",         $bc
+	CHARMAP "じ",         $bd
+	CHARMAP "ず",         $be
+	CHARMAP "ぜ",         $bf
+	CHARMAP "ぞ",         $c0
+	CHARMAP "だ",         $c1
+	CHARMAP "ぢ",         $c2
+	CHARMAP "づ",         $c3
+	CHARMAP "で",         $c4
+	CHARMAP "ど",         $c5
+	CHARMAP "ば",         $c6
+	CHARMAP "び",         $c7
+	CHARMAP "ぶ",         $c8
+	CHARMAP "べ",         $c9
+	CHARMAP "ぼ",         $ca
+	CHARMAP "ぱ",         $cb
+	CHARMAP "ぴ",         $cc
+	CHARMAP "ぷ",         $cd
+	CHARMAP "ぺ",         $ce
+	CHARMAP "ぽ",         $cf
+
+	; katakana characters
+	CHARMAP "ア",         $d0
+	CHARMAP "イ",         $d1
+	CHARMAP "ウ",         $d2
+	CHARMAP "エ",         $d3
+	CHARMAP "オ",         $d4
+	CHARMAP "カ",         $d5
+	CHARMAP "キ",         $d6
+	CHARMAP "ク",         $d7
+	CHARMAP "ケ",         $d8
+	CHARMAP "コ",         $d9
+	CHARMAP "サ",         $da
+	CHARMAP "シ",         $db
+	CHARMAP "ス",         $dc
+	CHARMAP "セ",         $dd
+	CHARMAP "ソ",         $de
+	CHARMAP "タ",         $df
+	CHARMAP "テ",         $e2
+	CHARMAP "ト",         $e3
+	CHARMAP "ノ",         $e8
+	CHARMAP "ハ",         $e9
+	CHARMAP "ヘ",         $ec
+	CHARMAP "ホ",         $ed
+	CHARMAP "マ",         $ee
+	CHARMAP "ミ",         $ef
+	CHARMAP "ム",         $f0
+	CHARMAP "メ",         $f1
+	CHARMAP "モ",         $f2
+	CHARMAP "ヤ",         $f3
+	CHARMAP "ユ",         $f4
+	CHARMAP "ヨ",         $f5
+	CHARMAP "ラ",         $f6
+	CHARMAP "リ",         $f7
+	CHARMAP "ル",         $f8
+	CHARMAP "レ",         $f9
+	CHARMAP "ロ",         $fa
+	CHARMAP "ワ",         $fb
+	CHARMAP "ヲ",         $fc
+	CHARMAP "ン",         $fd
+	CHARMAP "ァ",         $fe
+	CHARMAP "ィ",         $ff
 	CHARMAP ":",         $00
+	CHARMAP "ェ",         $01
+	CHARMAP "ォ",         $02
+	CHARMAP "ャ",         $03
+	CHARMAP "ュ",         $04
+	CHARMAP "ョ",         $05
+	CHARMAP "ッ",         $06
+	CHARMAP "ガ",         $07
+	CHARMAP "ギ",         $08
+	CHARMAP "グ",         $09
+	CHARMAP "ゲ",         $0a
+	CHARMAP "ゴ",         $0b
+	CHARMAP "ザ",         $0c
+	CHARMAP "ジ",         $0d
+	CHARMAP "ズ",         $0e
+	CHARMAP "ゼ",         $0f
+	CHARMAP "ゾ",         $10
+	CHARMAP "ダ",         $11
+	CHARMAP "ヂ",         $12
+	CHARMAP "ヅ",         $13
+	CHARMAP "デ",         $14
+	CHARMAP "ド",         $15
+	CHARMAP "バ",         $16
+	CHARMAP "ビ",         $17
+	CHARMAP "ブ",         $18
+	CHARMAP "ベ",         $19
+	CHARMAP "ボ",         $1a
+	CHARMAP "パ",         $1b
+	CHARMAP "ピ",         $1c
+	CHARMAP "プ",         $1d
+	CHARMAP "ペ",         $1e
+	CHARMAP "ポ",         $1f
 
 	CHARMAP "~",         $20
 	CHARMAP "!",         $21
@@ -9,6 +163,17 @@
 	CHARMAP "-",         $23
 	CHARMAP "·",         $24
 	CHARMAP "…",         $25
+
+	CHARMAP "ヌ",         $26
+	CHARMAP "ネ",         $27
+	CHARMAP "、",         $28
+	CHARMAP "。",         $29
+	CHARMAP "ヒ",         $2a
+	CHARMAP "フ",         $2b
+	CHARMAP "チ",         $2c
+	CHARMAP "ツ",         $2d
+	CHARMAP "ナ",         $2e
+	CHARMAP "二",         $2f
 
 	CHARMAP "0",         $30
 	CHARMAP "1",         $31
@@ -82,6 +247,11 @@
 	CHARMAP "x",         $77
 	CHARMAP "y",         $78
 	CHARMAP "z",         $79
+
+	CHARMAP "日",         $7a
+	CHARMAP "本",         $7b
+	CHARMAP "英",         $7c
+	CHARMAP "語",         $7d
 
 	CHARMAP " ",         $7e
 	CHARMAP "@",         $7f ; denotes no character

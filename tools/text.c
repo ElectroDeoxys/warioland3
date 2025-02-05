@@ -170,7 +170,7 @@ uint8_t convertCharToByte(const char *str, int *offset)
     if ((str[0] & 0x80) == 0)
     {
         *offset = 1;
-        if (str[0] == '\n' || str[0] == '\0')
+        if (str[0] == '\n' || str[0] == '\0' || str[0] == '\r')
             return 0x7f;
 
         for (uint8_t i = 0; i < 0x80; i++)
