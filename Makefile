@@ -128,9 +128,9 @@ src/data/levels/block_map/the_peaceful_village_1.bin.rle: tools/compressor += --
 src/data/levels/block_map/tower_of_revival.bin.rle: tools/compressor += --force-trailing-copy
 src/data/levels/block_map/the_peaceful_village_2.bin.rle: tools/compressor += --force-trailing-copy
 
-src/data/levels/unknown2/data_ef52c.bin.rle: tools/compressor += --force-trailing-copy
-src/data/levels/unknown2/data_10345c.bin.rle: tools/compressor += --force-trailing-copy
-src/data/levels/unknown2/data_103a6d.bin.rle: tools/compressor += --force-trailing-copy
+src/data/levels/blocksets/blockset_attributes_20.bin.rle: tools/compressor += --force-trailing-copy
+src/data/levels/blocksets/blockset_attributes_50.bin.rle: tools/compressor += --force-trailing-copy
+src/data/levels/blocksets/blockset_attributes_52.bin.rle: tools/compressor += --force-trailing-copy
 
 ### Interleaved gfx
 

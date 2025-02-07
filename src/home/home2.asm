@@ -16,7 +16,7 @@ LoadBlockFunctionTable::
 	cp $ff
 	jr z, .reset
 	ld a, [wRoomBlockFunctionTable]
-	cp NUM_TILE_MAPS_GROUP_1 - 1
+	cp NUM_BLOCKSETS_GROUP_1 - 1
 	jr nc, .group_2
 
 ; group_1
@@ -189,7 +189,7 @@ Func_298d::
 	add a
 	ld e, a
 	ld d, $00
-	ld hl, PointerTable_c090d
+	ld hl, RoomBlockTilesPointers
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
@@ -201,7 +201,7 @@ Func_298d::
 	ld a, [wTempBank]
 	bankswitch
 	ld de, wRoomBlockTiles
-	ld bc, $200
+	ld bc, 4 * NUM_ROOM_BLOCK_TYPES
 	call CopyHLToDE_BC
 	pop af
 	bankswitch
@@ -212,7 +212,7 @@ LoadRoomTileMap::
 	add a
 	ld e, a
 	ld d, $00
-	ld hl, TileMapsPointers
+	ld hl, RoomBlockAttributePointers
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]

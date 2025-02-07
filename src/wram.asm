@@ -392,7 +392,7 @@ wROMBank::
 	db
 
 wRoomBlockTiles::
-	ds $4 * $80
+	ds $4 * NUM_ROOM_BLOCK_TYPES
 
 wVBlankFuncExtended::
 	ds $200
