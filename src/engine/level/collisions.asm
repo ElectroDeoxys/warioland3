@@ -279,12 +279,12 @@ Func_198c7:
 CheckCentreCollision:
 ; collision in centre
 	ld a, $01
-	ld [wced3], a
+	ld [wUnused_ced3], a
 	call Func_198c7
 	and a
 	ret nz
 	xor a
-	ld [wced3], a
+	ld [wUnused_ced3], a
 
 ; collision on left
 	ld a, [wCollisionBoxLeft]
@@ -699,7 +699,7 @@ Func_19b51::
 	ld hl, hPos
 	call GetBlockPtr
 	ld a, COLLISION_DOWN
-	ld [wc0d6], a
+	ld [wCollisionPoints], a
 ;	fallthrough
 
 Func_19b5c:
@@ -735,7 +735,7 @@ Func_19b7b::
 	ld hl, hPos
 	call GetBlockPtr
 	ld a, COLLISION_UNK1
-	ld [wc0d6], a
+	ld [wCollisionPoints], a
 	call ProcessBlock
 	ld b, a
 	ret
@@ -744,7 +744,7 @@ Func_19b8b::
 	ld hl, hPos
 	call GetBlockPtr
 	ld a, COLLISION_UNK2
-	ld [wc0d6], a
+	ld [wCollisionPoints], a
 	call ProcessBlock
 	ld b, a
 	ret
@@ -753,7 +753,7 @@ Func_19b9b::
 	ld hl, hPos
 	call GetBlockPtr
 	ld a, COLLISION_UNK3
-	ld [wc0d6], a
+	ld [wCollisionPoints], a
 	call ProcessBlock
 	ld b, a
 	ret
@@ -784,7 +784,7 @@ Func_19bc3::
 	ld hl, hPos
 	call GetBlockPtr
 	ld a, COLLISION_UNK4
-	ld [wc0d6], a
+	ld [wCollisionPoints], a
 Func_19bce:
 	call ProcessBlock
 	ld b, a
@@ -812,7 +812,7 @@ Func_19beb:
 	ld hl, hPos
 	call GetBlockPtr
 	ld a, COLLISION_UNK5
-	ld [wc0d6], a
+	ld [wCollisionPoints], a
 	call ProcessBlock
 	ld b, a
 	ret
@@ -821,7 +821,7 @@ Func_19bfb:
 	ld hl, hPos
 	call GetBlockPtr
 	ld a, COLLISION_UNK6
-	ld [wc0d6], a
+	ld [wCollisionPoints], a
 	call ProcessBlock
 	ld b, a
 	ret
@@ -830,7 +830,7 @@ Func_19c0b:
 	ld hl, hPos
 	call GetBlockPtr
 	ld a, COLLISION_UNK7
-	ld [wc0d6], a
+	ld [wCollisionPoints], a
 	call ProcessBlock
 	ld b, a
 	ret

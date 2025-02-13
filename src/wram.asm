@@ -175,7 +175,7 @@ wc0d4::
 wc0d5::
 	db
 
-wc0d6::
+wCollisionPoints::
 	db
 
 wRoomTransitionParam::
@@ -869,7 +869,7 @@ ENDU
 wJumpCollision::
 	db
 
-wced3::
+wUnused_ced3::
 	db
 
 ; which screen to fade out to for level end
