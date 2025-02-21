@@ -259,11 +259,11 @@ UpdateState_Slipping:
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_19e63
-	call SubXOffset
+	call MoveWarioLeft
 	ret
 
 .asm_19e63
-	call AddXOffset
+	call MoveWarioRight
 	ret
 
 .asm_19e67
@@ -384,11 +384,11 @@ UpdateState_CrouchSlipping:
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_19f9a
-	call SubXOffset
+	call MoveWarioLeft
 	ret
 
 .asm_19f9a
-	call AddXOffset
+	call MoveWarioRight
 	ret
 
 .asm_19f9e
@@ -992,7 +992,7 @@ UpdateState_LadderShakeSlipping:
 	hcall UpdateAnimation
 
 	ld b, $02
-	call AddYOffset
+	call MoveWarioDown
 	ld a, [wCameraConfigFlags]
 	and CAM_SCROLLING_MASK
 	cp CAM_TRANSITIONS
@@ -1057,11 +1057,11 @@ UpdateState_GettingOffLadder:
 	and a
 	jr nz, .asm_1a63b
 	ld b, $01
-	call SubXOffset
+	call MoveWarioLeft
 	jr .asm_1a640
 .asm_1a63b
 	ld b, $01
-	call AddXOffset
+	call MoveWarioRight
 
 .asm_1a640
 	farcall Func_19b25
@@ -1126,7 +1126,7 @@ UpdateState_LadderSliding:
 	jp nz, SetState_LadderClimbing
 
 	ld b, $02
-	call AddYOffset
+	call MoveWarioDown
 	ld a, [wCameraConfigFlags]
 	and CAM_SCROLLING_MASK
 	cp CAM_TRANSITIONS
@@ -1268,11 +1268,11 @@ UpdateState_GrabSlipping:
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1a88a
-	call SubXOffset
+	call MoveWarioLeft
 	ret
 
 .asm_1a88a
-	call AddXOffset
+	call MoveWarioRight
 	ret
 
 .asm_1a88e
@@ -1328,11 +1328,11 @@ UpdateState_GetTreasureWalk:
 	jr nz, .go_right
 ; go left
 	ld b, 1
-	call SubXOffset
+	call MoveWarioLeft
 	jr .done_moving
 .go_right
 	ld b, 1
-	call AddXOffset
+	call MoveWarioRight
 
 .done_moving
 	ld hl, wWarioStateCounter
@@ -2149,7 +2149,7 @@ UpdateState_FenceSliding:
 
 .asm_1b0f2
 	ld b, $02
-	call AddYOffset
+	call MoveWarioDown
 	ld a, [wCameraConfigFlags]
 	and CAM_SCROLLING_MASK
 	cp CAM_TRANSITIONS
@@ -2219,12 +2219,12 @@ Func_1b168:
 	and a
 	ret z
 	ld b, $01
-	call SubYOffset
+	call MoveWarioUp
 	ret
 
 .d_down
 	ld b, $01
-	call AddYOffset
+	call MoveWarioDown
 	farcall CheckCentreCollision
 	ld a, b
 	and a
@@ -2296,7 +2296,7 @@ Func_1b24f:
 	and a
 	ret nz
 	ld b, $01
-	call AddXOffset
+	call MoveWarioRight
 	ret
 
 .d_left
@@ -2307,7 +2307,7 @@ Func_1b24f:
 	and a
 	ret nz
 	ld b, $01
-	call SubXOffset
+	call MoveWarioLeft
 	ret
 
 Func_1b2c0:
@@ -2347,7 +2347,7 @@ Func_1b302:
 	jr z, .asm_1b31e
 	inc b
 .asm_1b31e
-	call AddYOffset
+	call MoveWarioDown
 	ret
 
 Func_1b322:
@@ -2385,7 +2385,7 @@ Func_1b333:
 	and a
 	ret nz
 	call ApplyWalkVelocity_Right
-	call AddXOffset
+	call MoveWarioRight
 .asm_1b36d
 	ld a, [wWalkVelIndex]
 	cp $04
@@ -2410,7 +2410,7 @@ Func_1b333:
 	and a
 	ret nz
 	call ApplyWalkVelocity_Left
-	call SubXOffset
+	call MoveWarioLeft
 	jr .asm_1b36d
 
 HandleLadderInput:
@@ -2432,7 +2432,7 @@ HandleLadderInput:
 	and a
 	ret nz
 	ld b, 1
-	call SubYOffset
+	call MoveWarioUp
 	ld a, [wCameraConfigFlags]
 	and CAM_SCROLLING_MASK
 	cp CAM_TRANSITIONS
@@ -2457,7 +2457,7 @@ HandleLadderInput:
 
 .d_down
 	ld b, $01
-	call AddYOffset
+	call MoveWarioDown
 	ld a, [wCameraConfigFlags]
 	and CAM_SCROLLING_MASK
 	cp CAM_TRANSITIONS

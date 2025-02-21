@@ -250,12 +250,12 @@ Func_19832:
 	jr nz, .add_offset
 .sub_offset
 	ld b, 2
-	call SubXOffset
+	call MoveWarioLeft
 	farcall CrouchOrSlide
 	jr .asm_198c1
 .add_offset
 	ld b, 2
-	call AddXOffset
+	call MoveWarioRight
 	farcall CrouchOrSlide
 	jr .asm_198c1
 

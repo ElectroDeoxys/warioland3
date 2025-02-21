@@ -560,7 +560,7 @@ UpdateState_GettingFlatAirborne:
 	and a
 	jp nz, SetState_FlatSinking
 	ld b, $02
-	call AddYOffset
+	call MoveWarioDown
 	farcall CheckAirborneCollision
 	ld a, b
 	and a
@@ -854,7 +854,7 @@ UpdateState_FlatFalling:
 	ld hl, Data_2b68c
 	add hl, de
 	ld b, [hl]
-	call SubXOffset
+	call MoveWarioLeft
 
 .asm_28816
 	ld a, [wWalkVelIndex]
@@ -874,11 +874,11 @@ UpdateState_FlatFalling:
 	and a
 	jr nz, .asm_2884e
 	ld b, $03
-	call SubXOffset
+	call MoveWarioLeft
 	jr .asm_28853
 .asm_2884e
 	ld b, $03
-	call AddXOffset
+	call MoveWarioRight
 .asm_28853
 	ld a, $00
 	jr .asm_288a8
@@ -933,7 +933,7 @@ UpdateState_FlatFalling:
 	ld hl, Data_2b68c
 	add hl, de
 	ld b, [hl]
-	call AddXOffset
+	call MoveWarioRight
 	jp .asm_28816
 
 .asm_288b8
@@ -941,7 +941,7 @@ UpdateState_FlatFalling:
 	ld hl, Data_2b664
 	add hl, de
 	ld b, [hl]
-	call AddYOffset
+	call MoveWarioDown
 	farcall CheckAirborneCollision
 	ld a, b
 	and a
@@ -1016,7 +1016,7 @@ UpdateState_FlatSinking:
 	and %1
 	ret nz
 	ld b, $01
-	call AddYOffset
+	call MoveWarioDown
 	farcall CheckCentreCollision
 	ld a, b
 	and a
@@ -1142,7 +1142,7 @@ UpdateState_FlatSquishedLifting:
 	hcall UpdateAnimation
 
 	ld b, $01
-	call SubYOffset
+	call MoveWarioUp
 	ld hl, wWarioStateCounter
 	inc [hl]
 	ld a, [hl]
@@ -1230,11 +1230,11 @@ UpdateState_BallOString:
 	and a
 	jr nz, .asm_28b80
 	call ApplyWalkVelocity_Left
-	call SubXOffset
+	call MoveWarioLeft
 	jr .asm_28b86
 .asm_28b80
 	call ApplyWalkVelocity_Right
-	call AddXOffset
+	call MoveWarioRight
 .asm_28b86
 	ld a, [wWalkVelIndex]
 	cp $18
@@ -1979,7 +1979,7 @@ UpdateState_FatSinking:
 	and %1111
 	call z, Func_29317
 	ld b, $01
-	call AddYOffset
+	call MoveWarioDown
 	farcall CheckCentreCollision
 	ld a, b
 	and a
@@ -2207,7 +2207,7 @@ UpdateState_Electric:
 	jr nc, .asm_2950e
 	inc b
 .asm_2950e
-	call SubXOffset
+	call MoveWarioLeft
 	jr .asm_29534
 
 .asm_29513
@@ -2217,7 +2217,7 @@ UpdateState_Electric:
 	jr nc, .asm_2951d
 	inc b
 .asm_2951d
-	call AddXOffset
+	call MoveWarioRight
 	jr .asm_29534
 
 .asm_29522
@@ -2225,11 +2225,11 @@ UpdateState_Electric:
 	and a
 	jr nz, .asm_2952f
 	ld b, $01
-	call AddXOffset
+	call MoveWarioRight
 	jr .asm_29534
 .asm_2952f
 	ld b, $01
-	call SubXOffset
+	call MoveWarioLeft
 .asm_29534
 	ld a, [wJumpVelTable]
 	and a
@@ -2263,7 +2263,7 @@ UpdateState_Electric:
 	cpl
 	inc a
 	ld b, a
-	call SubYOffset
+	call MoveWarioUp
 	ld hl, wJumpVelIndex
 	inc [hl]
 	farcall CheckUpCollision
@@ -2276,7 +2276,7 @@ UpdateState_Electric:
 
 .falling
 	ld b, [hl]
-	call AddYOffset
+	call MoveWarioDown
 	ld hl, wJumpVelIndex
 	inc [hl]
 	ld a, [hl]
@@ -3438,7 +3438,7 @@ SetState_BouncyStart:
 	and a
 	ret z
 	ld b, $02
-	call AddXOffset
+	call MoveWarioRight
 	ret
 
 UpdateState_BouncyStart:
@@ -4990,7 +4990,7 @@ Func_2ae8a:
 	and a
 	jr nz, .asm_2aef1
 	call ApplyWalkVelocity_Left
-	call SubXOffset
+	call MoveWarioLeft
 	jp .asm_2aee4 ; should be jr
 .asm_2aecb
 	farcall CheckFrontCollision
@@ -4998,7 +4998,7 @@ Func_2ae8a:
 	and a
 	jr nz, .asm_2af19
 	call ApplyWalkVelocity_Right
-	call AddXOffset
+	call MoveWarioRight
 
 .asm_2aee4
 	ld a, [wWalkVelIndex]
@@ -5011,7 +5011,7 @@ Func_2ae8a:
 
 .asm_2aef1
 	ld b, $02
-	call AddXOffset
+	call MoveWarioRight
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
 	ld a, [wWarioStateCounter]
@@ -5031,7 +5031,7 @@ Func_2ae8a:
 
 .asm_2af19
 	ld b, $02
-	call SubXOffset
+	call MoveWarioLeft
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
 	ld a, [wWarioStateCounter]
@@ -5111,7 +5111,7 @@ Func_2afc5:
 	and a
 	jr nz, .asm_2aff6
 	ld b, $03
-	call SubXOffset
+	call MoveWarioLeft
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_2afea
@@ -5128,7 +5128,7 @@ Func_2afc5:
 	jr .asm_2b017
 .asm_2aff6
 	ld b, $03
-	call AddXOffset
+	call MoveWarioRight
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_2b00d
@@ -5219,7 +5219,7 @@ HandleHotWarioInput:
 	and a
 	ret nz
 	ld b, 1
-	call SubXOffset
+	call MoveWarioLeft
 	ret
 
 .asm_2b0c7
@@ -5246,7 +5246,7 @@ HandleHotWarioInput:
 	and a
 	ret nz
 	ld b, 1
-	call AddXOffset
+	call MoveWarioRight
 	ret
 
 Func_2b10a:
@@ -5277,7 +5277,7 @@ Func_2b11b:
 	and a
 	ret nz
 	call ApplyWalkVelocity_Left
-	call SubXOffset
+	call MoveWarioLeft
 	jr .asm_2b16d
 
 .asm_2b150
@@ -5288,7 +5288,7 @@ Func_2b11b:
 	and a
 	ret nz
 	call ApplyWalkVelocity_Right
-	call AddXOffset
+	call MoveWarioRight
 
 .asm_2b16d
 	ld a, [wWalkVelIndex]
@@ -5328,24 +5328,24 @@ Func_2b1cc:
 	and a
 	jr nz, .asm_2b1f1
 	ld b, $02
-	call SubXOffset
+	call MoveWarioLeft
 	farcall Func_197b1
 
 	ld a, b
 	and a
 	jr z, .asm_2b20e
 	ld b, $02
-	call AddXOffset
+	call MoveWarioRight
 	jr .asm_2b20e
 .asm_2b1f1
 	ld b, $02
-	call AddXOffset
+	call MoveWarioRight
 	farcall Func_19741
 	ld a, b
 	and a
 	jr z, .asm_2b20e
 	ld b, $02
-	call SubXOffset
+	call MoveWarioLeft
 
 .asm_2b20e
 	ld a, [wJumpVelIndex]
@@ -5361,13 +5361,13 @@ Func_2b1cc:
 	cpl
 	inc a
 	ld b, a
-	call SubYOffset
+	call MoveWarioUp
 	ld hl, wJumpVelIndex
 	inc [hl]
 	jr .asm_2b238
 .falling
 	ld b, [hl]
-	call AddYOffset
+	call MoveWarioDown
 	ld hl, wJumpVelIndex
 	inc [hl]
 	ld a, [hl]
@@ -5476,7 +5476,7 @@ Func_2b2c2:
 	and a
 	ret nz
 	ld b, $01
-	call SubXOffset
+	call MoveWarioLeft
 	ret
 
 .asm_2b31f
@@ -5490,7 +5490,7 @@ Func_2b2c2:
 	and a
 	ret nz
 	ld b, $01
-	call AddXOffset
+	call MoveWarioRight
 	ret
 
 Func_2b342:
@@ -5498,7 +5498,7 @@ Func_2b342:
 	and %1
 	ret nz
 	ld b, $01
-	call SubYOffset
+	call MoveWarioUp
 	ret
 
 Func_2b34e:
@@ -5652,7 +5652,7 @@ Func_2b42b:
 	and a
 	jr nz, .asm_2b4cd
 	ld b, $01
-	call SubXOffset
+	call MoveWarioLeft
 	ret
 
 .asm_2b47c
@@ -5661,7 +5661,7 @@ Func_2b42b:
 	and a
 	jr nz, .asm_2b4cd
 	ld b, $01
-	call AddXOffset
+	call MoveWarioRight
 	ret
 
 .asm_2b495
@@ -5673,7 +5673,7 @@ Func_2b42b:
 	and a
 	jr nz, .asm_2b4cd
 	ld b, $02
-	call SubXOffset
+	call MoveWarioLeft
 	ret
 
 .asm_2b4b4
@@ -5682,7 +5682,7 @@ Func_2b42b:
 	and a
 	jr nz, .asm_2b4cd
 	ld b, $02
-	call AddXOffset
+	call MoveWarioRight
 	ret
 .asm_2b4cd
 	jp SetState_CrazyTurning
@@ -5752,7 +5752,7 @@ Func_2b56f:
 	and %1
 	jr z, .asm_2b5b2
 	ld b, $01
-	call SubYOffset
+	call MoveWarioUp
 	farcall CheckUpCollision
 	ld a, b
 	and a
@@ -5786,10 +5786,10 @@ Func_2b56f:
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_2b5ec
-	call SubXOffset
+	call MoveWarioLeft
 	jr .asm_2b5ef
 .asm_2b5ec
-	call AddXOffset
+	call MoveWarioRight
 .asm_2b5ef
 	ld hl, wJumpVelIndex
 	inc [hl]
@@ -5813,7 +5813,7 @@ Func_2b56f:
 	and a
 	jr nz, .asm_2b5f7
 	ld b, $01
-	call AddXOffset
+	call MoveWarioRight
 	jr .asm_2b602
 .asm_2b621
 	farcall Func_197b1
@@ -5821,7 +5821,7 @@ Func_2b56f:
 	and a
 	jr nz, .asm_2b5f7
 	ld b, $01
-	call SubXOffset
+	call MoveWarioLeft
 	jr .asm_2b602
 
 Func_2b63b:

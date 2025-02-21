@@ -4063,7 +4063,7 @@ Func_63209::
 	bit OBJFLAG_STEPPED_F, [hl]
 	ret z
 	res OBJFLAG_STEPPED_F, [hl]
-	call AddYOffset
+	call MoveWarioDown
 	farcall Func_19720
 	ret
 

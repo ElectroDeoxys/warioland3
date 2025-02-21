@@ -163,7 +163,7 @@ BigLeaf2Func:
 	rra
 	ret nc
 	ld b, $01
-	call AddYOffset
+	call MoveWarioDown
 	call HandleDownwardsFloorTransition
 	call MoveObjectDown
 	jr .asm_42ccd

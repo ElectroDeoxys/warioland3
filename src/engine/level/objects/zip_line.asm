@@ -223,7 +223,7 @@ ZipLineFunc:
 	ld a, [wCurObjVar1]
 	dec a
 	ret nz
-	call SubXOffset
+	call MoveWarioLeft
 	farcall Func_19713
 	jr .asm_49518
 
@@ -232,7 +232,7 @@ ZipLineFunc:
 	ld a, [wCurObjVar1]
 	dec a
 	ret nz
-	call AddXOffset
+	call MoveWarioRight
 	farcall Func_19706
 	jr .asm_49518
 .asm_494e7
@@ -240,14 +240,14 @@ ZipLineFunc:
 	ld a, [wCurObjVar1]
 	dec a
 	ret nz
-	call SubYOffset
+	call MoveWarioUp
 	jp HandleUpwardsFloorTransition
 .asm_494f5
 	call MoveObjectDownByVar2
 	ld a, [wCurObjVar1]
 	dec a
 	ret nz
-	call AddYOffset
+	call MoveWarioDown
 	call HandleDownwardsFloorTransition
 	ld a, [wCurObjUnk07]
 	cp $27

@@ -204,11 +204,11 @@ UpdateState_IceSkatin:
 	and a
 	jr nz, .asm_1ec1d4
 	call ApplyWalkVelocity_Left
-	call SubXOffset
+	call MoveWarioLeft
 	jr .asm_1ec1da
 .asm_1ec1d4
 	call ApplyWalkVelocity_Right
-	call AddXOffset
+	call MoveWarioRight
 .asm_1ec1da
 	ld a, [wWalkVelIndex]
 	cp $14
@@ -237,11 +237,11 @@ Func_1ec215:
 	and a
 	jr nz, .asm_1ec223
 	ld b, 3
-	call AddXOffset
+	call MoveWarioRight
 	jp SetState_IceSkatinCrash
 .asm_1ec223
 	ld b, 3
-	call SubXOffset
+	call MoveWarioLeft
 	jp SetState_IceSkatinCrash
 
 UpdateState_IceSkatinAirborne:
@@ -443,7 +443,7 @@ UpdateState_OwlSlow:
 	and a
 	jr nz, .asm_1ec443
 	ld b, 1
-	call SubXOffset
+	call MoveWarioLeft
 	ret
 .asm_1ec443
 	ld a, DIRECTION_RIGHT
@@ -459,7 +459,7 @@ UpdateState_OwlSlow:
 	and a
 	jr nz, .asm_1ec46a
 	ld b, 1
-	call AddXOffset
+	call MoveWarioRight
 	ret
 .asm_1ec46a
 	ld a, DIRECTION_LEFT
@@ -475,7 +475,7 @@ UpdateState_OwlSlow:
 	and a
 	jr nz, .asm_1ec4b0
 	ld b, 1
-	call SubYOffset
+	call MoveWarioUp
 	ret
 
 .go_down
@@ -487,7 +487,7 @@ UpdateState_OwlSlow:
 	and a
 	jr nz, .asm_1ec4b8
 	ld b, 1
-	call AddYOffset
+	call MoveWarioDown
 	ret
 
 .asm_1ec4b0
@@ -613,7 +613,7 @@ UpdateState_OwlFast:
 	and a
 	ret nz
 	ld b, 2
-	call SubXOffset
+	call MoveWarioLeft
 	ret
 
 .going_right
@@ -628,7 +628,7 @@ UpdateState_OwlFast:
 	and a
 	ret nz
 	ld b, 2
-	call AddXOffset
+	call MoveWarioRight
 	ret
 
 .going_up
@@ -643,7 +643,7 @@ UpdateState_OwlFast:
 	and a
 	ret nz
 	ld b, 2
-	call SubYOffset
+	call MoveWarioUp
 	ret
 
 .going_down
@@ -667,7 +667,7 @@ UpdateState_OwlFast:
 	ret
 .asm_1ec647
 	ld b, 2
-	call AddYOffset
+	call MoveWarioDown
 	ret
 
 Func_1ec64d:
@@ -1371,11 +1371,11 @@ UpdateState_SnowballRolling:
 	and a
 	jr nz, .asm_1ecd34
 	call ApplyWalkVelocity_Left
-	call SubXOffset
+	call MoveWarioLeft
 	jr .increment_counter_if_not_big
 .asm_1ecd34
 	call ApplyWalkVelocity_Right
-	call AddXOffset
+	call MoveWarioRight
 
 .increment_counter_if_not_big
 	ld a, [wWarioTransformationProgress]
@@ -1463,11 +1463,11 @@ SetState_SnowballCrash:
 	and a
 	jr nz, .asm_1ece31
 	ld b, 2
-	call SubXOffset
+	call MoveWarioLeft
 	jr .asm_1ece36
 .asm_1ece31
 	ld b, 2
-	call AddXOffset
+	call MoveWarioRight
 .asm_1ece36
 	xor a
 	ld [wWarioStateCounter], a
@@ -2501,11 +2501,11 @@ UpdateState_Launched:
 	and a
 	jr nz, .asm_1ed840
 	ld b, 2
-	call SubXOffset
+	call MoveWarioLeft
 	ret
 .asm_1ed840
 	ld b, 2
-	call AddXOffset
+	call MoveWarioRight
 	ret
 
 .asm_1ed846
@@ -2655,7 +2655,7 @@ UpdateState_MagicRising:
 	hcall UpdateAnimation
 
 	ld b, 1
-	call SubYOffset
+	call MoveWarioUp
 	ld a, [wCameraConfigFlags]
 	and CAM_SCROLLING_MASK
 	cp CAM_TRANSITIONS
@@ -3022,12 +3022,12 @@ UpdateState_BallThrown:
 	jr nc, .falling
 ; rising
 	ld b, 3
-	call SubXOffset
+	call MoveWarioLeft
 	ret
 
 .falling
 	ld b, 2
-	call SubXOffset
+	call MoveWarioLeft
 	farcall CheckAirborneCollision
 	ld a, b
 	and a
@@ -3085,7 +3085,7 @@ UpdateState_BallSentUpwards:
 	jr nc, .falling
 ; rising
 	ld b, 3
-	call SubYOffset
+	call MoveWarioUp
 	farcall CheckUpCollision
 	ld a, b
 	and a
@@ -3241,7 +3241,7 @@ Func_1edf2b:
 	and a
 	jp z, SetState_FanSpinning
 	ld b, 1
-	call SubYOffset
+	call MoveWarioUp
 	ret
 
 Func_1edf47:
@@ -3258,7 +3258,7 @@ Func_1edf47:
 	and a
 	ret nz
 	ld b, 1
-	call SubXOffset
+	call MoveWarioLeft
 	ret
 .asm_1edf70
 	ld a, [wJoypadDown]
@@ -3271,7 +3271,7 @@ Func_1edf47:
 	and a
 	ret nz
 	ld b, 1
-	call AddXOffset
+	call MoveWarioRight
 	ret
 
 Func_1edf93:

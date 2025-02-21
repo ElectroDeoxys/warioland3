@@ -1254,7 +1254,7 @@ Func_209ca:
 	ld a, $02
 .asm_209f1
 	ld b, a
-	call SubYOffset
+	call MoveWarioUp
 .set_stepped_on
 	ld b, OBJACTION_STEP_ON
 	call SetObjAction
@@ -1326,7 +1326,7 @@ Func_20a6f:
 	cp $ff
 	jr z, .asm_20aa5
 	ld b, a
-	call SubXOffset
+	call MoveWarioLeft
 	jr .asm_20acf
 
 .asm_20aa5
@@ -1343,7 +1343,7 @@ Func_20a6f:
 	cp $ff
 	jr z, .asm_20a79
 	ld b, a
-	call AddXOffset
+	call MoveWarioRight
 .asm_20acf
 	ld a, [wTransformation]
 	cp TRANSFORMATION_BALL_O_STRING_WARIO
@@ -2107,7 +2107,7 @@ GetTreasure:
 	jr nz, .asm_21130
 	ld a, [wc1c3]
 	ld b, a
-	call SubXOffset
+	call MoveWarioLeft
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
 	ld a, HIGH(Frameset_1425f)
@@ -2118,7 +2118,7 @@ GetTreasure:
 .asm_21130
 	ld a, [wc1c4]
 	ld b, a
-	call AddXOffset
+	call MoveWarioRight
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
 	ld a, HIGH(Frameset_14252)
@@ -2747,7 +2747,7 @@ Func_2168b:
 	ld a, $0c
 .asm_216ab
 	ld b, a
-	call AddYOffset
+	call MoveWarioDown
 	farcall Func_19b25
 	ld a, [wWaterInteraction]
 	and a

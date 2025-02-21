@@ -89,18 +89,18 @@ UpdateLevel:
 	and a
 	jr nz, .no_floor_transition
 	xor a
-	ld [wc0c2], a
+	ld [wCameraYDelta], a
 	ld a, [wWarioScreenYPos]
-	ld [wca5e], a
+	ld [wPrevWarioScreenYPos], a
 
 	ld a, [wFloorTransitionDir]
 	bit FLOOR_TRANSITION_UP_F, a
 	jr nz, .transition_up
 ; transition down
 	ld b, 4
-	ld a, [wc0c2]
+	ld a, [wCameraYDelta]
 	sub b
-	ld [wc0c2], a
+	ld [wCameraYDelta], a
 	ld a, [wFloorTransitionTimer]
 	sub b
 	ld [wFloorTransitionTimer], a
@@ -112,14 +112,14 @@ UpdateLevel:
 	jr .asm_8209
 .transition_up
 	ld b, 4
-	ld a, [wc0c2]
+	ld a, [wCameraYDelta]
 	add b
-	ld [wc0c2], a
+	ld [wCameraYDelta], a
 	ld a, [wFloorTransitionTimer]
 	sub b
 	ld [wFloorTransitionTimer], a
 	jr z, .end_up_transition
-	ld a, [wc0bd]
+	ld a, [wScrollDownEdge]
 	dec a
 	jr nz, .asm_8209
 	xor a
@@ -132,9 +132,9 @@ UpdateLevel:
 
 .asm_8209
 	xor a
-	ld [wc0be], a
-	ld [wc0bd], a
-	call Func_b915
+	ld [wScrollUpEdge], a
+	ld [wScrollDownEdge], a
+	call LevelScroll_Vertical
 	jr .asm_8229
 
 .no_floor_transition
@@ -144,7 +144,7 @@ UpdateLevel:
 	and CAM_SCROLLING_MASK
 	cp CAM_XSCROLL2 | CAM_TRANSITIONS
 	jr z, .asm_8229
-	call Func_b9a6
+	call LevelScroll_Horizontal
 	jr .asm_8229
 .asm_8227
 	jr .check_end_screen
@@ -321,10 +321,10 @@ UpdateLevel:
 
 	call ClearUnusedVirtualOAM
 	xor a
-	ld [wc0be], a
-	ld [wc0bd], a
-	call Func_b915
-	call Func_b9a6
+	ld [wScrollUpEdge], a
+	ld [wScrollDownEdge], a
+	call LevelScroll_Vertical
+	call LevelScroll_Horizontal
 	jp .asm_8229
 
 .yscroll_camera
@@ -363,7 +363,7 @@ UpdateLevel:
 	call ClearUnusedVirtualOAM
 
 	xor a
-	ld [wc0be], a
-	ld [wc0bd], a
-	call Func_b915
+	ld [wScrollUpEdge], a
+	ld [wScrollDownEdge], a
+	call LevelScroll_Vertical
 	jp .asm_8229

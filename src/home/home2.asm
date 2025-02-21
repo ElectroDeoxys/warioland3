@@ -46,7 +46,7 @@ LoadBlockFunctionTable::
 
 LoadRoom::
 	ld a, $70
-	ld [wca5e], a
+	ld [wPrevWarioScreenYPos], a
 	ld a, $58
 	ld [wCamRightSpacing], a
 	sub $58

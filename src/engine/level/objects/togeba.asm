@@ -188,7 +188,7 @@ TogebaFunc:
 	jp z, MoveObjectDown
 	res OBJFLAG_STEPPED_F, [hl]
 	ld b, $01
-	call AddYOffset
+	call MoveWarioDown
 	call HandleDownwardsFloorTransition
 	jp MoveObjectDown
 

@@ -1054,10 +1054,10 @@ TriggerRoomTransition::
 	stop_sfx
 	ret
 
-AddXOffset::
-	ld a, [wc0c3]
+MoveWarioRight::
+	ld a, [wCameraXDelta]
 	add b
-	ld [wc0c3], a
+	ld [wCameraXDelta], a
 	ld a, [wWarioXPos + 1]
 	add b
 	ld [wWarioXPos + 1], a
@@ -1066,10 +1066,10 @@ AddXOffset::
 	ld [wWarioXPos + 0], a
 	ret
 
-SubXOffset::
-	ld a, [wc0c3]
+MoveWarioLeft::
+	ld a, [wCameraXDelta]
 	sub b
-	ld [wc0c3], a
+	ld [wCameraXDelta], a
 	ld a, [wWarioXPos + 1]
 	sub b
 	ld [wWarioXPos + 1], a
@@ -1079,13 +1079,11 @@ SubXOffset::
 	ret
 
 ; b = y offset
-AddYOffset::
-	ld a, [wc0c2]
+MoveWarioDown::
+	ld a, [wCameraYDelta]
 	add b
-	ld [wc0c2], a
-;	fallthrough
-
-AddYOffset_Sprite::
+	ld [wCameraYDelta], a
+MoveWarioDown_WithoutCameraOffset::
 	ld a, [wWarioYPos + 1]
 	add b
 	ld [wWarioYPos + 1], a
@@ -1095,13 +1093,11 @@ AddYOffset_Sprite::
 	ret
 
 ; b = y offset
-SubYOffset::
-	ld a, [wc0c2]
+MoveWarioUp::
+	ld a, [wCameraYDelta]
 	sub b
-	ld [wc0c2], a
-;	fallthrough
-
-SubYOffset_Sprite::
+	ld [wCameraYDelta], a
+MoveWarioUp_WithoutCameraOffset::
 	ld a, [wWarioYPos + 1]
 	sub b
 	ld [wWarioYPos + 1], a
@@ -1352,7 +1348,7 @@ ApplyJumpVelocity::
 	cpl
 	inc a
 	ld b, a
-	call SubYOffset
+	call MoveWarioUp
 	ld hl, wJumpVelIndex
 	inc [hl]
 	jr .done
@@ -1361,7 +1357,7 @@ ApplyJumpVelocity::
 	xor a
 	ld [wDoFullJump], a
 	ld b, [hl]
-	call AddYOffset
+	call MoveWarioDown
 	ld hl, wJumpVelIndex
 	inc [hl]
 	ld a, [hl]

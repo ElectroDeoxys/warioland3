@@ -245,7 +245,7 @@ PesceFunc:
 	and %11
 	ret nz
 	ld b, $01
-	call AddYOffset
+	call MoveWarioDown
 	jp MoveObjectDown
 .asm_51ed4
 	xor a
@@ -907,7 +907,7 @@ Dragonfly1Func:
 	ret z
 	res OBJFLAG_STEPPED_F, [hl]
 	ld b, $01
-	jp SubXOffset
+	jp MoveWarioLeft
 .asm_52379
 	call MoveObjectRight
 	ld l, OBJ_FLAGS
@@ -915,7 +915,7 @@ Dragonfly1Func:
 	ret z
 	res OBJFLAG_STEPPED_F, [hl]
 	ld b, $01
-	jp AddXOffset
+	jp MoveWarioRight
 .asm_52388
 	ld a, $70
 	ld [hli], a
@@ -1018,7 +1018,7 @@ Dragonfly2Func:
 	ret z
 	res OBJFLAG_STEPPED_F, [hl]
 	ld b, $01
-	call AddYOffset
+	call MoveWarioDown
 	jp HandleDownwardsFloorTransition
 .asm_5243a
 	ld a, $50
@@ -1036,7 +1036,7 @@ Dragonfly2Func:
 	ret z
 	res OBJFLAG_STEPPED_F, [hl]
 	ld b, $01
-	call SubYOffset
+	call MoveWarioUp
 	jp HandleUpwardsFloorTransition
 .asm_52458
 	ld a, $50

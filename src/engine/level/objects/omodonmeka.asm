@@ -234,7 +234,7 @@ OmodonmekaFunc:
 	play_sfx z, SFX_087
 
 	ld b, $01
-	call SubYOffset
+	call MoveWarioUp
 	call HandleUpwardsFloorTransition
 	jp MoveObjectUp
 .Func_422fc:
@@ -880,7 +880,7 @@ OmodonmekaWithOmodonFunc:
 	rra
 	ret c
 	ld b, $01
-	call SubYOffset
+	call MoveWarioUp
 	call HandleUpwardsFloorTransition
 .asm_42702
 	ld l, OBJ_STATE_DURATION

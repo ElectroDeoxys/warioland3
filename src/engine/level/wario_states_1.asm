@@ -347,7 +347,7 @@ SetState_Airborne:
 	and a
 	ret z
 	ld b, 2
-	call SubYOffset
+	call MoveWarioUp
 	ret
 
 UpdateState_Airborne:
@@ -889,10 +889,10 @@ UpdateState_CrouchSliding:
 	and a
 	jr nz, .add_x_offset
 .sub_x_offset
-	call SubXOffset
+	call MoveWarioLeft
 	ret
 .add_x_offset
-	call AddXOffset
+	call MoveWarioRight
 	ret
 .slide_slow
 	ld b, 1
@@ -1010,7 +1010,7 @@ UpdateState_Attacking:
 	jr nz, .dir_right
 ; dir left
 	call ApplyWalkVelocity_Left
-	call SubXOffset
+	call MoveWarioLeft
 	ld a, [wWalkVelIndex]
 	cp $14
 	jr c, .asm_1c99e
@@ -1020,7 +1020,7 @@ UpdateState_Attacking:
 	jr .check_collision
 .dir_right
 	call ApplyWalkVelocity_Right
-	call AddXOffset
+	call MoveWarioRight
 	ld a, [wWalkVelIndex]
 	cp $14
 	jr c, .check_collision
@@ -1054,11 +1054,11 @@ DoBumpWithBigBackOffset:
 	and a
 	jr nz, .dir_right
 	ld b, 3
-	call AddXOffset
+	call MoveWarioRight
 	jr .done_x_offset
 .dir_right
 	ld b, 3
-	call SubXOffset
+	call MoveWarioLeft
 .done_x_offset
 	jr DoBumpOrJumpingBump
 
@@ -1067,11 +1067,11 @@ DoBumpWithSmallBackOffset:
 	and a
 	jr nz, .dir_right
 	ld b, 2
-	call AddXOffset
+	call MoveWarioRight
 	jr DoBumpOrJumpingBump
 .dir_right
 	ld b, 2
-	call SubXOffset
+	call MoveWarioLeft
 ;	fallthrough
 
 DoBumpOrJumpingBump:
@@ -1542,7 +1542,7 @@ UpdateState_Diving:
 .slow
 	ld b, 1
 .descend
-	call AddYOffset
+	call MoveWarioDown
 
 	farcall CheckCentreCollision
 	ld a, b
@@ -1855,7 +1855,7 @@ UpdateState_WaterSurfaceMoving:
 	ret nz
 	; no left/right current
 	call ApplyWalkVelocity_Right
-	call AddXOffset
+	call MoveWarioRight
 
 .done_moving
 	ld a, [wWalkVelIndex]
@@ -1896,7 +1896,7 @@ UpdateState_WaterSurfaceMoving:
 	ret nz
 	; no left/right current
 	call ApplyWalkVelocity_Left
-	call SubXOffset
+	call MoveWarioLeft
 	jr .done_moving
 
 HandleWaterSurfaceFloatingMovement:
@@ -1910,7 +1910,7 @@ HandleWaterSurfaceFloatingMovement:
 	jr nc, .go_up
 ; go down
 	ld b, 1
-	call AddYOffset_Sprite
+	call MoveWarioDown_WithoutCameraOffset
 	ret
 .go_up
 	cp 12
@@ -1919,7 +1919,7 @@ HandleWaterSurfaceFloatingMovement:
 	ld [hl], a
 .sub_y_offset
 	ld b, 1
-	call SubYOffset_Sprite
+	call MoveWarioUp_WithoutCameraOffset
 	ret
 
 StartUpwardsUnderwaterThrusting:
@@ -2113,10 +2113,10 @@ UpdateState_SwimKnockBack:
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1d386
-	call SubXOffset
+	call MoveWarioLeft
 	ret
 .asm_1d386
-	call AddXOffset
+	call MoveWarioRight
 	ret
 
 .asm_1d38a
@@ -2147,7 +2147,7 @@ UpdateState_WaterStung:
 	and %1
 	ret nz
 	ld b, $01
-	call SubYOffset
+	call MoveWarioUp
 	ld a, [wWaterCurrent]
 	and a
 	ret z
@@ -2411,7 +2411,7 @@ UpdateState_Stung:
 	jr nc, .asm_1d68f
 	inc b
 .asm_1d68f
-	call SubXOffset
+	call MoveWarioLeft
 	jr .asm_1d6b5
 .asm_1d694
 	ld b, $01
@@ -2420,19 +2420,19 @@ UpdateState_Stung:
 	jr nc, .asm_1d69e
 	inc b
 .asm_1d69e
-	call AddXOffset
+	call MoveWarioRight
 	jr .asm_1d6b5
 .asm_1d6a3
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_1d6b0
 	ld b, $01
-	call AddXOffset
+	call MoveWarioRight
 	jr .asm_1d6b5
 
 .asm_1d6b0
 	ld b, $01
-	call SubXOffset
+	call MoveWarioLeft
 .asm_1d6b5
 	ld a, [wJumpVelTable]
 	and a
@@ -2466,7 +2466,7 @@ UpdateState_Stung:
 	cpl
 	inc a
 	ld b, a
-	call SubYOffset
+	call MoveWarioUp
 	ld hl, wJumpVelIndex
 	inc [hl]
 	farcall CheckUpCollision
@@ -2479,7 +2479,7 @@ UpdateState_Stung:
 
 .falling
 	ld b, [hl]
-	call AddYOffset
+	call MoveWarioDown
 	ld hl, wJumpVelIndex
 	inc [hl]
 	ld a, [hl]
@@ -2565,7 +2565,7 @@ UpdateState_PipeGoingDown:
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
 	ld b, 1
-	call AddYOffset
+	call MoveWarioDown
 
 	ld hl, wWarioStateCounter
 	inc [hl]
@@ -2599,7 +2599,7 @@ UpdateState_PipeGoingUp:
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
 	ld b, $01
-	call SubYOffset
+	call MoveWarioUp
 
 	ld hl, wWarioStateCounter
 	inc [hl]
@@ -3537,11 +3537,11 @@ UpdateState_Rolling:
 	and a
 	jr nz, .asm_1e0ee
 	call ApplyWalkVelocity_Left
-	call SubXOffset
+	call MoveWarioLeft
 	jr .asm_1e0f4
 .asm_1e0ee
 	call ApplyWalkVelocity_Right
-	call AddXOffset
+	call MoveWarioRight
 
 .asm_1e0f4
 	ld a, [wWalkVelIndex]
@@ -3663,11 +3663,11 @@ UpdateState_RollingAirborne:
 	and a
 	jr nz, .asm_1e239
 	call ApplyWalkVelocity_Left
-	call SubXOffset
+	call MoveWarioLeft
 	jr .asm_1e23f
 .asm_1e239
 	call ApplyWalkVelocity_Right
-	call AddXOffset
+	call MoveWarioRight
 
 .asm_1e23f
 	ld a, [wWalkVelIndex]
@@ -3694,14 +3694,14 @@ UpdateState_RollingAirborne:
 	cpl
 	inc a
 	ld b, a
-	call SubYOffset
+	call MoveWarioUp
 	ld hl, wJumpVelIndex
 	inc [hl]
 	jr .asm_1e28a
 
 .falling
 	ld b, [hl]
-	call AddYOffset
+	call MoveWarioDown
 	ld hl, wJumpVelIndex
 	inc [hl]
 	ld a, [hl]
@@ -3954,7 +3954,7 @@ ApplyWaterCurrentMovement:
 	ret nc
 .push_right
 	ld b, 2
-	call AddXOffset
+	call MoveWarioRight
 	ret
 
 .left_current
@@ -3982,7 +3982,7 @@ ApplyWaterCurrentMovement:
 	ret nc
 .push_left
 	ld b, 2
-	call SubXOffset
+	call MoveWarioLeft
 	ret
 
 .up_current
@@ -4010,7 +4010,7 @@ ApplyWaterCurrentMovement:
 	ret nc
 .push_up
 	ld b, 2
-	call SubYOffset
+	call MoveWarioUp
 	ret
 
 .down_current
@@ -4038,7 +4038,7 @@ ApplyWaterCurrentMovement:
 	ret nc
 .push_down
 	ld b, 2
-	call AddYOffset
+	call MoveWarioDown
 	ret
 
 .ChangeCurrentDirection
@@ -4085,7 +4085,7 @@ ApplyLastWaterCurrentMovement:
 	jr nc, .decr_counter
 .push_right
 	ld b, 1
-	call AddXOffset
+	call MoveWarioRight
 	jr .decr_counter
 
 .left_current
@@ -4106,7 +4106,7 @@ ApplyLastWaterCurrentMovement:
 	jr nc, .decr_counter
 .push_left
 	ld b, 1
-	call SubXOffset
+	call MoveWarioLeft
 
 .decr_counter
 	ld a, [wLastWaterCurrent]
@@ -4137,7 +4137,7 @@ ApplyLastWaterCurrentMovement:
 	jr nc, .decr_counter
 .push_up
 	ld b, 1
-	call SubYOffset
+	call MoveWarioUp
 	jr .decr_counter
 
 .down_current
@@ -4158,7 +4158,7 @@ ApplyLastWaterCurrentMovement:
 	jr nc, .decr_counter
 .push_down
 	ld b, 1
-	call AddYOffset
+	call MoveWarioDown
 	jr .decr_counter
 
 HandleInput_Idling:
@@ -4477,7 +4477,7 @@ HandleInput_Walking:
 	and a
 	ret nz
 	call ApplyWalkVelocity_Right
-	call AddXOffset
+	call MoveWarioRight
 .asm_1e93d
 	ld a, [wWalkVelIndex]
 	cp $10
@@ -4498,7 +4498,7 @@ HandleInput_Walking:
 	and a
 	ret nz
 	call ApplyWalkVelocity_Left
-	call SubXOffset
+	call MoveWarioLeft
 	jr .asm_1e93d
 
 .asm_1e970
@@ -4630,7 +4630,7 @@ HandleBumpMovement:
 	and a
 	jr nz, .start_fall
 	ld b, 1
-	call AddXOffset
+	call MoveWarioRight
 	jr .start_fall
 
 .d_right
@@ -4641,7 +4641,7 @@ HandleBumpMovement:
 	and a
 	jr nz, .start_fall
 	ld b, 1
-	call SubXOffset
+	call MoveWarioLeft
 
 .start_fall
 	xor a
@@ -4654,23 +4654,23 @@ HandleBumpMovement:
 	jr z, .dir_right
 ; dir left
 	ld b, 1
-	call SubXOffset
+	call MoveWarioLeft
 	farcall Func_197b1
 	ld a, b
 	and a
 	jr z, .handle_vertical
 	ld b, 1
-	call AddXOffset
+	call MoveWarioRight
 	jr .handle_vertical
 .dir_right
 	ld b, 1
-	call AddXOffset
+	call MoveWarioRight
 	farcall Func_19741
 	ld a, b
 	and a
 	jr z, .handle_vertical
 	ld b, 1
-	call SubXOffset
+	call MoveWarioLeft
 
 .handle_vertical
 	ld a, [wJumpVelIndex]
@@ -4685,13 +4685,13 @@ HandleBumpMovement:
 	cpl
 	inc a
 	ld b, a
-	call SubYOffset
+	call MoveWarioUp
 	ld hl, wJumpVelIndex
 	inc [hl]
 	jr .done
 .rising
 	ld b, [hl]
-	call AddYOffset
+	call MoveWarioDown
 	ld hl, wJumpVelIndex
 	inc [hl]
 	ld a, [hl]
@@ -4882,7 +4882,7 @@ Func_1ec6c:
 	and $0f
 	ret nz
 	call ApplyWalkVelocity_Right
-	call AddXOffset
+	call MoveWarioRight
 	ld a, [wWalkVelIndex]
 	cp $04
 	jr c, .asm_1ecf1
@@ -4910,7 +4910,7 @@ Func_1ec6c:
 	and $0f
 	ret nz
 	call ApplyWalkVelocity_Left
-	call SubXOffset
+	call MoveWarioLeft
 	ld a, [wWalkVelIndex]
 	cp $04
 	jr c, .asm_1ed33
@@ -4988,7 +4988,7 @@ SetState_CrouchAirborne:
 	and a
 	ret z
 	ld b, $02
-	call SubYOffset
+	call MoveWarioUp
 	ret
 
 Func_1edd3:
@@ -5168,7 +5168,7 @@ Func_1eefc:
 
 .asm_1ef69
 	call ApplyWalkVelocity_Right
-	call AddXOffset
+	call MoveWarioRight
 	ld a, [wWarioSlopeInteraction]
 	and a
 	jr z, .asm_1ef8d
@@ -5178,7 +5178,7 @@ Func_1eefc:
 
 .asm_1ef7b
 	call ApplyWalkVelocity_Left
-	call SubXOffset
+	call MoveWarioLeft
 	ld a, [wWarioSlopeInteraction]
 	and a
 	jr z, .asm_1ef8d
@@ -5341,7 +5341,7 @@ HandleInput_Airborne:
 	cpl
 	inc a
 	ld b, a
-	call SubYOffset
+	call MoveWarioUp
 	ld hl, wJumpVelIndex
 	inc [hl]
 	jr .check_input
@@ -5350,7 +5350,7 @@ HandleInput_Airborne:
 	xor a
 	ld [wDoFullJump], a
 	ld b, [hl]
-	call AddYOffset
+	call MoveWarioDown
 	ld hl, wJumpVelIndex
 	inc [hl]
 	ld a, [hl]
@@ -5406,7 +5406,7 @@ WalkIfPossible_Right:
 	and $0f
 	ret nz
 	call ApplyWalkVelocity_Right
-	call AddXOffset
+	call MoveWarioRight
 	ret
 
 WalkIfPossible_Left:
@@ -5415,7 +5415,7 @@ WalkIfPossible_Left:
 	and $0f
 	ret nz
 	call ApplyWalkVelocity_Left
-	call SubXOffset
+	call MoveWarioLeft
 	ret
 
 HandleDivingHorizontalMovement:
@@ -5441,7 +5441,7 @@ HandleDivingHorizontalMovement:
 	and a
 	ret nz
 	ld b, 1
-	call AddXOffset
+	call MoveWarioRight
 	ret
 
 .d_left
@@ -5456,7 +5456,7 @@ HandleDivingHorizontalMovement:
 	and a
 	ret nz
 	ld b, 1
-	call SubXOffset
+	call MoveWarioLeft
 	ret
 
 Func_1f1a9:
@@ -5518,7 +5518,7 @@ Func_1f1a9:
 	and CURRENT_UP | CURRENT_DOWN
 	ret nz
 	ld b, $01
-	call SubYOffset
+	call MoveWarioUp
 	ret
 
 .asm_1f246
@@ -5620,7 +5620,7 @@ Func_1f310:
 	and CURRENT_RIGHT | CURRENT_LEFT
 	ret nz
 	ld b, $01
-	call AddXOffset
+	call MoveWarioRight
 	ret
 
 .asm_1f337
@@ -5630,7 +5630,7 @@ Func_1f310:
 	and CURRENT_RIGHT | CURRENT_LEFT
 	ret nz
 	ld b, $01
-	call SubXOffset
+	call MoveWarioLeft
 	ret
 
 .asm_1f345
@@ -5690,7 +5690,7 @@ Func_1f3a7:
 	and CURRENT_UP | CURRENT_DOWN
 	ret nz
 	ld b, $01
-	call AddYOffset
+	call MoveWarioDown
 	ret
 
 Func_1f3d9:
@@ -5708,7 +5708,7 @@ Func_1f3d9:
 	and CURRENT_UP | CURRENT_DOWN
 	ret nz
 	ld b, $01
-	call SubYOffset
+	call MoveWarioUp
 	ret
 
 HandleWaterSurfaceInput:
@@ -5729,7 +5729,7 @@ HandleWaterSurfaceInput:
 	cp NON_SUBMERSIBLE_WATER
 	jp z, SetState_TryingSubmerge
 	ld b, 3
-	call AddYOffset
+	call MoveWarioDown
 	jp StartUnderwaterThrusting
 
 .no_thrust
@@ -5795,7 +5795,7 @@ HandleUnderwaterThrustingInput:
 .not_diagonal_1
 	add hl, de
 	ld b, [hl]
-	call AddXOffset
+	call MoveWarioRight
 	ld a, [wSwimmingDirectionInput]
 	bit D_UP_F, a
 	jp nz, .up
@@ -5828,7 +5828,7 @@ HandleUnderwaterThrustingInput:
 .not_diagonal_2
 	add hl, de
 	ld b, [hl]
-	call SubXOffset
+	call MoveWarioLeft
 	ld a, [wSwimmingDirectionInput]
 	bit D_UP_F, a
 	jp nz, .up
@@ -5853,7 +5853,7 @@ HandleUnderwaterThrustingInput:
 	and a
 	jp z, SurfaceFromUnderwater
 	ld b, 1
-	call SubYOffset
+	call MoveWarioUp
 	ret
 
 .asm_1f593
@@ -5867,7 +5867,7 @@ HandleUnderwaterThrustingInput:
 	and a
 	jr nz, .asm_1f5b2
 	ld b, 1
-	call AddYOffset
+	call MoveWarioDown
 	ret
 
 .asm_1f5b2
@@ -5892,7 +5892,7 @@ HandleUnderwaterThrustingInput:
 .asm_1f5e9
 	add hl, de
 	ld b, [hl]
-	call AddYOffset
+	call MoveWarioDown
 	ret
 
 .asm_1f5ef
@@ -5921,7 +5921,7 @@ HandleUnderwaterThrustingInput:
 .asm_1f63c
 	add hl, de
 	ld b, [hl]
-	call SubYOffset
+	call MoveWarioUp
 	ret
 
 .asm_1f642
@@ -6218,7 +6218,7 @@ Func_1f863:
 	ld hl, SwimStraightVelTable
 	add hl, de
 	ld b, [hl]
-	call SubYOffset
+	call MoveWarioUp
 	ret
 
 SwimStraightVelTable:

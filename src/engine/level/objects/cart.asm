@@ -72,7 +72,7 @@ CartFunc:
 	and a
 	ret nz
 	ld b, $01
-	jp SubXOffset
+	jp MoveWarioLeft
 .asm_485d5
 	ld hl, wCurObjYPos
 	ld a, [hli]
@@ -100,7 +100,7 @@ CartFunc:
 	and a
 	ret nz
 	ld b, $01
-	jp AddXOffset
+	jp MoveWarioRight
 .asm_48613
 	ld de, Frameset_69199
 	call SetObjectFramesetPtr
@@ -203,7 +203,7 @@ CartVariableFunc:
 	and a
 	ret nz
 	ld b, $01
-	jp SubXOffset
+	jp MoveWarioLeft
 .asm_486e3
 	ld hl, wCurObjYPos
 	ld a, [hli]
@@ -231,7 +231,7 @@ CartVariableFunc:
 	and a
 	ret nz
 	ld b, $01
-	jp AddXOffset
+	jp MoveWarioRight
 .asm_48721
 	ld de, Frameset_691bf
 	call SetObjectFramesetPtr

@@ -58,10 +58,10 @@ StartRoom_FromTransition:
 	xor a
 	ld [wFloorTransitionDir], a
 	ld [wFloorTransitionTimer], a
-	ld [wc0c2], a
-	ld [wc0c3], a
-	ld [wc0be], a
-	ld [wc0bd], a
+	ld [wCameraYDelta], a
+	ld [wCameraXDelta], a
+	ld [wScrollUpEdge], a
+	ld [wScrollDownEdge], a
 	ld [wGroundShakeCounter], a
 	ld [wSCYShake], a
 	ld a, [wLevelRoomID]
@@ -297,10 +297,10 @@ StartRoom_FromLevelStart:
 	ld [wNumMusicalCoins], a
 	ld [wFloorTransitionDir], a
 	ld [wFloorTransitionTimer], a
-	ld [wc0c2], a
-	ld [wc0c3], a
-	ld [wc0be], a
-	ld [wc0bd], a
+	ld [wCameraYDelta], a
+	ld [wCameraXDelta], a
+	ld [wScrollUpEdge], a
+	ld [wScrollDownEdge], a
 	ld [wIsIntangible], a
 	ld [wInvincibleCounter], a
 	ld [wIsMinigameCleared], a

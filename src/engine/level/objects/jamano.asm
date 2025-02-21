@@ -607,7 +607,7 @@ HatPlatformFunc:
 	jp z, MoveObjectDown
 	res OBJFLAG_STEPPED_F, [hl]
 	ld b, $01
-	call AddYOffset
+	call MoveWarioDown
 	call HandleDownwardsFloorTransition
 	jp MoveObjectDown
 .asm_551c3
@@ -623,7 +623,7 @@ HatPlatformFunc:
 	jp z, MoveObjectUp
 	res OBJFLAG_STEPPED_F, [hl]
 	ld b, $01
-	call SubYOffset
+	call MoveWarioUp
 	call HandleUpwardsFloorTransition
 	jp MoveObjectUp
 .asm_551e0

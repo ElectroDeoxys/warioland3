@@ -1223,7 +1223,7 @@ HammerPlatformFunc:
 	rra
 	ret nc
 	ld b, 1
-	call AddYOffset
+	call MoveWarioDown
 	call HandleDownwardsFloorTransition
 	jp MoveObjectDown
 .switch_direction_up
@@ -1257,7 +1257,7 @@ HammerPlatformFunc:
 	rra
 	ret nc
 	ld b, 1
-	call SubYOffset
+	call MoveWarioUp
 	call HandleUpwardsFloorTransition
 	jp MoveObjectUp
 .switch_direction_down

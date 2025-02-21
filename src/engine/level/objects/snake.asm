@@ -120,7 +120,7 @@ SnakeFunc:
 	rra
 	ret nc
 	ld b, $01
-	call SubYOffset
+	call MoveWarioUp
 	call HandleUpwardsFloorTransition
 	jp MoveObjectUp
 .asm_4997d
@@ -335,7 +335,7 @@ SnakeFunc:
 	rra
 	ret nc
 	ld b, $01
-	call AddYOffset
+	call MoveWarioDown
 	call HandleDownwardsFloorTransition
 	jp MoveObjectDown
 .asm_49ae2

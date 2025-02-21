@@ -166,7 +166,7 @@ WebberFunc:
 	rra
 	ret nc
 	ld b, 1
-	call SubYOffset
+	call MoveWarioUp
 	call HandleUpwardsFloorTransition
 	jr .obj_move_up
 .not_stepped1
@@ -188,7 +188,7 @@ WebberFunc:
 	rra
 	ret nc
 	ld b, 1
-	call AddYOffset
+	call MoveWarioDown
 	call HandleDownwardsFloorTransition
 	jr .obj_move_down
 .not_stepped2

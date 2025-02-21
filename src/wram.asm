@@ -127,18 +127,33 @@ wc0bb::
 wSCYShake::
 	db
 
-wc0bd:: db
-wc0be:: db
-wc0bf:: db
-wc0c0:: db
+; while scrolling the camera down,
+; whether we reached a level edge
+; - $1: lower edge reached
+; - $2: upper edge reached
+wScrollDownEdge:: db
+; while scrolling the camera up,
+; whether we reached a level edge
+; - $1: upper edge reached
+; - $2: lower edge reached
+wScrollUpEdge:: db
+; while scrolling the camera right,
+; whether we reached a level edge
+; - $1: right edge reached
+; - $2: left edge reached
+wScrollLeftEdge:: db
+; while scrolling the camera left,
+; whether we reached a level edge
+; - $1: left edge reached
+; - $2: right edge reached
+wScrollRightEdge:: db
 
 	ds $1
 
-wc0c2::
-	db
-
-wc0c3::
-	db
+; Y coordinate delta from camera to scroll
+wCameraYDelta:: db
+; X coordinate delta from camera to scroll
+wCameraXDelta:: db
 
 wc0c4::
 	db
@@ -478,7 +493,7 @@ wTempLevelRoomID::
 	db
 
 ; always $70 or wWarioYPos
-wca5e:: db
+wPrevWarioScreenYPos:: db
 ; spacing between Wario and left/right
 ; edge of the screen, always $58
 wCamRightSpacing:: db

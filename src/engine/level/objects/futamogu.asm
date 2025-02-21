@@ -55,7 +55,7 @@ FutamoguFunc:
 	rra
 	ret nc
 	ld b, 1
-	call SubYOffset
+	call MoveWarioUp
 	call HandleUpwardsFloorTransition
 	jp MoveObjectUp
 

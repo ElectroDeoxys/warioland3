@@ -942,7 +942,7 @@ Turtle1Func:
 	and a
 	ret nz
 	ld b, $01
-	jp AddXOffset
+	jp MoveWarioRight
 .asm_55cc3
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.Func_55cdd)
@@ -1090,7 +1090,7 @@ TurtleCommonFunc:
 	and a
 	ret nz
 	ld b, $01
-	jp AddXOffset
+	jp MoveWarioRight
 .asm_55dd6
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_55de0)

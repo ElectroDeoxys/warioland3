@@ -111,6 +111,43 @@ DEF ROOMTRANSITIONF_DELAY          EQU (1 << ROOMTRANSITIONF_DELAY_F)
 DEF ROOMTRANSITION_MASK       EQU $0f
 DEF ROOMTRANSITION_FLAGS_MASK EQU $10 | ROOMTRANSITIONF_DOOR | ROOMTRANSITIONF_RELOAD_OBJECTS | ROOMTRANSITIONF_DELAY
 
+; wCameraConfigFlags constants
+	const_def
+	const CAM_FREE_F          ; 0
+	const CAM_XSCROLL1_F      ; 1
+	const CAM_XSCROLL2_F      ; 2
+	const CAM_TRANSITIONS_F   ; 3
+
+	const CAM_BORDER_RIGHT_F  ; 4
+	const CAM_BORDER_LEFT_F   ; 5
+	const CAM_BORDER_UP_F     ; 6
+	const CAM_BORDER_DOWN_F   ; 7
+
+DEF CAM_YSCROLL       EQU 0
+DEF CAM_FREE          EQU 1 << CAM_FREE_F
+DEF CAM_XSCROLL1      EQU 1 << CAM_XSCROLL1_F
+DEF CAM_XSCROLL2      EQU 1 << CAM_XSCROLL2_F
+DEF CAM_TRANSITIONS   EQU 1 << CAM_TRANSITIONS_F
+DEF CAM_BORDER_RIGHT  EQU 1 << CAM_BORDER_RIGHT_F
+DEF CAM_BORDER_LEFT   EQU 1 << CAM_BORDER_LEFT_F
+DEF CAM_BORDER_UP     EQU 1 << CAM_BORDER_UP_F
+DEF CAM_BORDER_DOWN   EQU 1 << CAM_BORDER_DOWN_F
+
+DEF CAM_SCROLLING_MASK EQU CAM_YSCROLL | CAM_FREE | CAM_XSCROLL1 | CAM_XSCROLL2 | CAM_TRANSITIONS
+
+DEF HIDDEN_FIGURE_CAMCONFIG EQU CAM_XSCROLL2 | CAM_TRANSITIONS | CAM_BORDER_RIGHT | CAM_BORDER_LEFT
+
+; length in pixels of the spacing between Wario and the edge
+; of the level on levels with corresponding CAM_BORDER_* flags set
+DEF CAMERA_BORDER_RIGHT_W EQU $20
+DEF CAMERA_BORDER_LEFT_W  EQU $20
+DEF CAMERA_BORDER_UPPER_H EQU $20
+DEF CAMERA_BORDER_LOWER_H EQU $20
+
+; number of different types of blocks
+; that can fit inside a single room
+DEF NUM_ROOM_BLOCK_TYPES EQU $80
+
 ; number of frames for a new coin to spawn
 ; after another coin has spawned
 DEF COIN_COOLDOWN EQU 100
@@ -118,7 +155,3 @@ DEF COIN_COOLDOWN EQU 100
 ; number of torches that need to be lit
 ; to destroy the Flame Block
 DEF NUM_FLAME_BLOCK_TORCHES EQU 3
-
-; number of different types of blocks
-; that can fit inside a single room
-DEF NUM_ROOM_BLOCK_TYPES EQU $80

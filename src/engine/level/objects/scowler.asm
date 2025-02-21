@@ -735,7 +735,7 @@ FloatingRingFunc:
 	jp z, MoveObjectUp
 	res OBJFLAG_STEPPED_F, [hl]
 	ld b, $01
-	call SubYOffset
+	call MoveWarioUp
 	call HandleUpwardsFloorTransition
 	jp MoveObjectUp
 .asm_54a24
@@ -767,7 +767,7 @@ FloatingRingFunc:
 	rra
 	ret nc
 	ld b, $01
-	call AddYOffset
+	call MoveWarioDown
 	call HandleDownwardsFloorTransition
 	jp MoveObjectDown
 .asm_54a5b

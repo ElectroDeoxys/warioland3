@@ -530,14 +530,14 @@ ShootFunc:
 	ld bc, Data_54010
 	call ApplyYOffsetOnKickedWarioBall
 	ld b, 3
-	jp AddXOffset
+	jp MoveWarioRight
 .ball_wario_inside_net
 ; move Wario down to the ground
 	ld a, [wWarioYPos + 1]
 	cp $f0
 	jr nc, .set_wario_ball_goal_state
 	ld b, 3
-	jp AddYOffset
+	jp MoveWarioDown
 .set_wario_ball_goal_state
 ; if on ground, set goal state
 	ld a, SHOOTBALL_WARIO_GOAL
@@ -551,10 +551,10 @@ ShootFunc:
 	bit OBJSUBFLAG_VDIR_F, [hl]
 	jr nz, .asm_569c1
 	call MoveObjectLeftByVar2
-	jp SubXOffset
+	jp MoveWarioLeft
 .asm_569c1
 	call MoveObjectRightByVar2
-	jp AddXOffset
+	jp MoveWarioRight
 
 .MoveLeftOrRight:
 	ld a, [wCurObjSubState]
@@ -1178,7 +1178,7 @@ GKTortoisePlatformFunc:
 	jp z, MoveObjectDown
 	res OBJFLAG_STEPPED_F, [hl]
 	ld b, 1
-	call AddYOffset
+	call MoveWarioDown
 	call HandleDownwardsFloorTransition
 	jp MoveObjectDown
 .set_move_up
@@ -1195,7 +1195,7 @@ GKTortoisePlatformFunc:
 	jp z, MoveObjectUp
 	res OBJFLAG_STEPPED_F, [hl]
 	ld b, 1
-	call SubYOffset
+	call MoveWarioUp
 	call HandleUpwardsFloorTransition
 	jp MoveObjectUp
 .set_move_down
@@ -1780,7 +1780,7 @@ Func_57213:
 	jr nc, .asm_57230
 	inc [hl]
 .asm_57230
-	call AddYOffset
+	call MoveWarioDown
 	jp HandleDownwardsFloorTransition
 .asm_57236
 	add c
@@ -1791,7 +1791,7 @@ Func_57213:
 	xor a
 	sub b
 	ld b, a
-	call SubYOffset
+	call MoveWarioUp
 	jp HandleUpwardsFloorTransition
 
 ApplyYOffsetOnKickedWarioBall:
@@ -1809,7 +1809,7 @@ ApplyYOffsetOnKickedWarioBall:
 	inc [hl]
 .asm_57254
 	ld b, a
-	call AddYOffset
+	call MoveWarioDown
 	jp HandleDownwardsFloorTransition
 
 ; unreferenced
@@ -1817,7 +1817,7 @@ Func_5725b:
 	xor a
 	sub b
 	ld b, a
-	call SubYOffset
+	call MoveWarioUp
 	jp HandleUpwardsFloorTransition
 
 ShootGoalCounterFunc:
