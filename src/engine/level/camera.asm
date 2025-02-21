@@ -391,10 +391,10 @@ LevelScroll_Vertical:
 	call ScrollCameraDown
 	ld a, [wScrollDownEdge]
 	and a
-	jr nz, .asm_b93c
-	ld hl, wc0bb
-	set 3, [hl]
-.asm_b93c
+	jr nz, .edge_reached_d
+	ld hl, wLevelEdgeUpdateFlags
+	set LEVEL_EDGE_UPDATE_DOWN_F, [hl]
+.edge_reached_d
 	xor a
 	ld [wCameraYDelta], a
 	ret
@@ -418,8 +418,8 @@ LevelScroll_Vertical:
 	ld a, [wScrollUpEdge]
 	and a
 	jr nz, .edge_reached_u
-	ld hl, wc0bb
-	set 2, [hl]
+	ld hl, wLevelEdgeUpdateFlags
+	set LEVEL_EDGE_UPDATE_UP_F, [hl]
 .edge_reached_u
 	xor a
 	ld [wCameraYDelta], a
@@ -510,8 +510,8 @@ LevelScroll_Horizontal:
 	ld a, [wScrollRightEdge]
 	and a
 	jr nz, .edge_reached_r
-	ld hl, wc0bb
-	set 0, [hl]
+	ld hl, wLevelEdgeUpdateFlags
+	set LEVEL_EDGE_UPDATE_RIGHT_F, [hl]
 .edge_reached_r
 	xor a
 	ld [wCameraXDelta], a
@@ -549,8 +549,8 @@ LevelScroll_Horizontal:
 	ld a, [wScrollLeftEdge]
 	and a
 	jr nz, .edge_reached_l
-	ld hl, wc0bb
-	set 1, [hl]
+	ld hl, wLevelEdgeUpdateFlags
+	set LEVEL_EDGE_UPDATE_LEFT_F, [hl]
 .edge_reached_l
 	xor a
 	ld [wCameraXDelta], a

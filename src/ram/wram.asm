@@ -80,16 +80,14 @@ wLevelRoomID::
 wWarioSpawnPos::
 	db
 
-wc0a2::
+wDrawRoomWidthLoopVar::
 	db
 
 wBlockPos::
 wBlockYPos:: dw
 wBlockXPos:: dw
-
 ; temporary backup of wBlockPos
-wBackupBlockPos::
-	ds $4
+wBackupBlockPos:: ds $4
 
 	ds $1
 
@@ -119,7 +117,10 @@ wRoomRightXLimit:: db
 wCameraConfigFlags::
 	db
 
-wc0bb::
+; holds LEVEL_EDGE_UPDATE_* flags
+; used in Func_8ed9 to know which
+; edge in the level screen to update
+wLevelEdgeUpdateFlags::
 	db
 
 wSCYShake::
@@ -893,7 +894,9 @@ wLevelEndScreen::
 wPendingSubState::
 	db
 
-wced6::
+; TRUE if game is paused in a level
+; is written to but never read
+wUnused_IsPaused::
 	db
 
 ; the speed in which to perform fading between palettes

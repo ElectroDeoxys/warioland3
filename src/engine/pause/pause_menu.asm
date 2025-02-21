@@ -382,7 +382,7 @@ ExitPauseMenu:
 	call LoadBackupVRAM
 
 	xor a
-	ld [wced6], a
+	ld [wUnused_IsPaused], a
 	ld a, [wTempAnimatedTilesFrameDuration]
 	ld [wAnimatedTilesFrameDuration], a
 	ld a, [wTempAnimatedTilesGroup]

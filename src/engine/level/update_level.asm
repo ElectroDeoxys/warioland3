@@ -276,8 +276,8 @@ UpdateLevel:
 	stop_music
 	xor a
 	ld [wRoomAnimatedPalsEnabled], a
-	ld a, $01
-	ld [wced6], a
+	ld a, TRUE
+	ld [wUnused_IsPaused], a
 	ld a, [wSubState]
 	ld [wPendingSubState], a
 	ld a, ST_PAUSE_MENU

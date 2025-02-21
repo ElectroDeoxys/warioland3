@@ -21,66 +21,66 @@ GetNextLevelRoomID:
 	ret
 
 Func_8ed9:
-	ld a, [wc0bb]
+	ld a, [wLevelEdgeUpdateFlags]
 	and a
 	ret z
 	ld b, a
-	and $03
-	jr nz, .asm_8eec
-.asm_8ee3
-	bit 2, b
-	jr nz, .asm_8f11
-	bit 3, b
-	jr nz, .asm_8ef6
+	and LEVEL_EDGE_UPDATE_RIGHT | LEVEL_EDGE_UPDATE_LEFT
+	jr nz, .right_or_left
+.check_vertical_direction
+	bit LEVEL_EDGE_UPDATE_UP_F, b
+	jr nz, .up
+	bit LEVEL_EDGE_UPDATE_DOWN_F, b
+	jr nz, .down
 	ret
 
-.asm_8eec
-	bit 0, b
-	jr nz, .asm_8f2c
-	bit 1, b
-	jr nz, .asm_8f52
-	jr .asm_8ee3
+.right_or_left
+	bit LEVEL_EDGE_UPDATE_RIGHT_F, b
+	jr nz, .right
+	bit LEVEL_EDGE_UPDATE_LEFT_F, b
+	jr nz, .left
+	jr .check_vertical_direction
 
-.asm_8ef6
+.down
 	call .Func_8f79
 	call .Func_9085
-	ld hl, wc0bb
-	res 3, [hl]
+	ld hl, wLevelEdgeUpdateFlags
+	res LEVEL_EDGE_UPDATE_DOWN_F, [hl]
 	farcall SpawnColEdgeObjects
 	ret
 
-.asm_8f11
+.up
 	call .Func_8fb3
 	call .Func_9085
-	ld hl, wc0bb
-	res 2, [hl]
+	ld hl, wLevelEdgeUpdateFlags
+	res LEVEL_EDGE_UPDATE_UP_F, [hl]
 	farcall SpawnColEdgeObjects
 	ret
 
-.asm_8f2c
+.right
 	call .Func_8fec
 	call Func_a0e2
-	ld hl, wc0bb
-	res 0, [hl]
+	ld hl, wLevelEdgeUpdateFlags
+	res LEVEL_EDGE_UPDATE_RIGHT_F, [hl]
 	farcall SpawnRowEdgeObjects
-	ld a, [wc0bb]
-	bit 2, a
-	jr nz, .asm_8f11
-	bit 3, a
-	jr nz, .asm_8ef6
+	ld a, [wLevelEdgeUpdateFlags]
+	bit LEVEL_EDGE_UPDATE_UP_F, a
+	jr nz, .up
+	bit LEVEL_EDGE_UPDATE_DOWN_F, a
+	jr nz, .down
 	ret
 
-.asm_8f52
+.left
 	call .Func_9039
 	call Func_a0e2
-	ld hl, wc0bb
-	res 1, [hl]
+	ld hl, wLevelEdgeUpdateFlags
+	res LEVEL_EDGE_UPDATE_LEFT_F, [hl]
 	farcall SpawnRowEdgeObjects
-	ld a, [wc0bb]
-	bit 2, a
-	jr nz, .asm_8f11
-	bit 3, a
-	jp nz, .asm_8ef6
+	ld a, [wLevelEdgeUpdateFlags]
+	bit LEVEL_EDGE_UPDATE_UP_F, a
+	jr nz, .up
+	bit LEVEL_EDGE_UPDATE_DOWN_F, a
+	jp nz, .down
 	ret
 
 .Func_8f79:

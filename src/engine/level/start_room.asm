@@ -1014,7 +1014,7 @@ DrawRoom_FromStart:
 	ld [de], a
 
 	ld a, BG_MAP_WIDTH
-	ld [wc0a2], a
+	ld [wDrawRoomWidthLoopVar], a
 .loop_row
 	call .QueueRowTilesAndAttributes
 
@@ -1075,9 +1075,9 @@ DrawRoom_FromStart:
 	ld a, [wBlockXPos + 0]
 	adc $00
 	ld [wBlockXPos + 0], a
-	ld a, [wc0a2]
+	ld a, [wDrawRoomWidthLoopVar]
 	dec a
-	ld [wc0a2], a
+	ld [wDrawRoomWidthLoopVar], a
 	jr nz, .loop_row
 
 	; restore backed up coords
