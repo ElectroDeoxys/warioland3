@@ -212,7 +212,7 @@ PickAndLoadGolfLevel:
 	ret
 
 GolfLevels:
-	table_width 10, GolfLevels
+	table_width 10
 	dw GolfLevel00, BGMap_1c18fd, BGMap_1c1869, BGMap_1c1973, BGMap_1c18be ; GOLF_LEVEL_00
 	dw GolfLevel01, BGMap_1c1824, BGMap_1c1756, BGMap_1c1850, BGMap_1c17c6 ; GOLF_LEVEL_01
 	dw GolfLevel02, BGMap_1c2287, BGMap_1c21e7, BGMap_1c2303, BGMap_1c224f ; GOLF_LEVEL_02

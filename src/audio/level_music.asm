@@ -8,7 +8,7 @@ ENDR
 ENDM
 
 LevelMusic::
-	table_width 8 * 2, LevelMusic
+	table_width 8 * 2
 ;               day                             night
 	level_music MUSIC_OUT_OF_THE_WOODS_DAY,     MUSIC_OUT_OF_THE_WOODS_NIGHT     ; OUT_OF_THE_WOODS
 	level_music MUSIC_THE_PEACEFUL_VILLAGE_DAY, MUSIC_THE_PEACEFUL_VILLAGE_NIGHT ; THE_PEACEFUL_VILLAGE

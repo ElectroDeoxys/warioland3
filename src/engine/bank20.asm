@@ -3408,7 +3408,7 @@ LoadCutsceneTreasures:
 	ret
 
 CutsceneTreasures:
-	table_width 3, CutsceneTreasures
+	table_width 3
 	
 ; CUTSCENE_00
 	db INVALID_TREASURE

@@ -1,5 +1,5 @@
 TransformationMusicIDs::
-	table_width 2, TransformationMusicIDs
+	table_width 2
 	dw NULL                      ; TRANSFORMATION_NONE_ID
 	dw MUSIC_HOT_WARIO           ; TRANSFORMATION_HOT_WARIO_ID
 	dw MUSIC_FLAT_WARIO          ; TRANSFORMATION_FLAT_WARIO_ID

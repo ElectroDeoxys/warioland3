@@ -27,7 +27,7 @@ ENDR
 ENDM
 
 SoundHeaders:
-	table_width 8, SoundHeaders
+	table_width 8
 	music Music_OutOfTheWoodsDay,        $00, 100, CHAN1_F, 4 ; MUSIC_OUT_OF_THE_WOODS_DAY
 	music Music_OutOfTheWoodsNight,      $00, 100, CHAN1_F, 3 ; MUSIC_OUT_OF_THE_WOODS_NIGHT
 	music Music_ForestOfFear,            $00, 100, CHAN1_F, 2 ; MUSIC_FOREST_OF_FEAR

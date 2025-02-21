@@ -210,7 +210,7 @@ ProcessInteractions:
 	jumptable
 
 .table
-	table_width 2, ProcessInteractions.table
+	table_width 2
 	dw Func_20b6b                        ; OBJ_INTERACTION_00
 	dw Func_20d1d                        ; OBJ_INTERACTION_01
 	dw ObjInteraction_FrontSting         ; OBJ_INTERACTION_FRONT_STING

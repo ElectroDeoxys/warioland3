@@ -4,7 +4,7 @@ ExecuteMainPowerUpActionHelp:
 	jumptable
 
 .table
-	table_width 2, ExecuteMainPowerUpActionHelp.table
+	table_width 2
 	dw NoPowerUpActionHelp             ; NO_POWER_UP
 	dw LeadOverallsActionHelp          ; LEAD_OVERALLS
 	dw SwimmingFlippersActionHelp      ; SWIMMING_FLIPPERS

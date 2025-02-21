@@ -1336,7 +1336,7 @@ FillBottomBarTreasureIDs:
 	ret
 
 TreasureOBPals:
-	table_width 1, TreasureOBPals
+	table_width 1
 	db OBPAL_TREASURE_YELLOW ; TREASURE_NONE
 	db OBPAL_TREASURE_YELLOW ; YELLOW_MUSIC_BOX
 	db OBPAL_TREASURE_BLUE   ; BLUE_MUSIC_BOX

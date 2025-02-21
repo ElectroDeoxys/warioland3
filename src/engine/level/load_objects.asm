@@ -533,7 +533,7 @@ CommonObjects_Special:
 	rgb  5,  0,  0
 
 ObjectGroups:
-	table_width 4, ObjectGroups
+	table_width 4
 	dw CommonObjects_Grey,    ObjectGroup0   ; OBJECT_GROUP_000
 	dw CommonObjects_Green,   ObjectGroup2   ; OBJECT_GROUP_001
 	dw CommonObjects_Red,     ObjectGroup3   ; OBJECT_GROUP_002

@@ -74,7 +74,7 @@ Func_9c072:
 	jumptable
 
 .table
-	table_width 2, Func_9c072.table
+	table_width 2
 	dw Func_9c000  ; CUTSCENE_00
 	dw .Func_9c15e ; CUTSCENE_01
 	dw .InitCutscene02 ; CUTSCENE_02
@@ -1423,7 +1423,7 @@ Func_9ce28:
 	jumptable
 
 .table
-	table_width 2, Func_9ce28.table
+	table_width 2
 	dw .InvalidCutscene ; CUTSCENE_00
 	dw Cutscene01Func ; CUTSCENE_01
 	dw Cutscene02Func ; CUTSCENE_02

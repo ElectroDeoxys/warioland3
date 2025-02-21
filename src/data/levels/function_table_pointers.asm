@@ -1,5 +1,5 @@
 BlockFunctionTablePointers::
-	table_width 2, BlockFunctionTablePointers
+	table_width 2
 	dw BlockFunctionTable00 ; BLOCK_FUNCTION_TABLE_00
 	dw BlockFunctionTable01 ; BLOCK_FUNCTION_TABLE_01
 	dw BlockFunctionTable02 ; BLOCK_FUNCTION_TABLE_02

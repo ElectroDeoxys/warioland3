@@ -844,7 +844,7 @@ UpdateSceneWarioAnimation:
 	jumptable
 
 .table
-	table_width 2, UpdateSceneWarioAnimation.table
+	table_width 2
 	dw .None                 ; SCENEWARIO_NONE
 	dw .LookFront            ; SCENEWARIO_LOOK_FRONT
 	dw .LookBack             ; SCENEWARIO_LOOK_BACK

@@ -223,7 +223,7 @@ MACRO room
 ENDM
 
 RoomBlockAndGfxData:
-	table_width 2, RoomBlockAndGfxData
+	table_width 2
 	dw NULL      ; ROOM_000
 	dw .room_001 ; ROOM_001
 	dw .room_002 ; ROOM_002
@@ -699,7 +699,7 @@ RoomBlockAndGfxData:
 	room BLOCK_FUNCTION_TABLE_19, BLOCKSET_19, MAIN_TILES_14, SPECIAL_TILES_1, ROOM_PAL_117
 
 RoomBlockTilesPointers::
-	table_width 2, RoomBlockTilesPointers
+	table_width 2
 	dw BlocksetTiles00 ; BLOCKSET_00
 	dw BlocksetTiles01 ; BLOCKSET_01
 	dw BlocksetTiles02 ; BLOCKSET_02
@@ -801,7 +801,7 @@ RoomBlockTilesPointers::
 	assert_table_length NUM_BLOCKSETS
 
 RoomBlockAttributePointers::
-	table_width 2, RoomBlockAttributePointers
+	table_width 2
 	dw BlocksetAttributes00 ; BLOCKSET_00
 	dw BlocksetAttributes01 ; BLOCKSET_01
 	dw BlocksetAttributes02 ; BLOCKSET_02

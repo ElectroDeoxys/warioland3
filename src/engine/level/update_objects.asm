@@ -438,7 +438,7 @@ DoObjectAction:
 	jumptable
 
 .table
-	table_width 2, DoObjectAction.table
+	table_width 2
 	dw .None ; OBJACTION_NONE
 	dw .Bump ; OBJACTION_BUMP
 	dw .Attack ; OBJACTION_ATTACK

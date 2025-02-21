@@ -1,5 +1,5 @@
 Waves:
-	table_width 6, Waves
+	table_width 6
 	db WAVEFORM_SQUARE_1_2_SAWTOOTH,        0, NO_SWEEP,                      $ff, $ff, $3c ; WAVE_00
 	db RECT_TRACK1 | RECTWAVE_1_8,          0, NO_SWEEP,                      $fb, $28, $3c ; WAVE_01
 	db RECT_TRACK1 | RECTWAVE_1_8,          0, NO_SWEEP,                      $f0, $10, $3c ; WAVE_02
@@ -128,7 +128,7 @@ Waves:
 WaveSamples:
 ; These are streams of 32 nibbles (4-bit values) used as wave patterns.
 ; Plot them as a line chart to see the wave's shape.
-	table_width 16, WaveSamples
+	table_width 16
 	dn  0,  0,  1,  1,  2,  3,  5,  6,  8,  9, 10, 12, 13, 14, 14, 15, 15, 15, 14, 14, 13, 12, 10,  9,  8,  6,  5,  3,  2,  1,  1,  0 ; WAVEFORM_SINE
 	dn  0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 15, 14, 13, 12, 11, 10,  9,  8,  7,  6,  5,  4,  3,  2,  1,  0 ; WAVEFORM_TRIANGLE
 	dn 15, 15, 14, 14, 13, 13, 12, 12, 11, 11, 10, 10,  9,  9,  8,  8,  7,  7,  6,  6,  5,  5,  4,  4,  3,  3,  2,  2,  1,  1,  0,  0 ; WAVEFORM_SAWTOOTH

@@ -63,7 +63,7 @@ ENDR
 	jumptable
 
 .table
-	table_width 2, UpdateParticles.table
+	table_width 2
 	dw ParticleFunc_None           ; PARTICLE_NONE
 	dw ParticleFunc_Debris         ; PARTICLE_DEBRIS
 	dw ParticleFunc_Stars          ; PARTICLE_STARS
