@@ -15,7 +15,7 @@ VampireActionHelp:
 
 .action_help_frozen
 	ld hl, wActionHelpWario
-	call AddActionHelpWarioSprite_FromBank
+	call LoadActionHelpWarioSprite_FromBank
 	ld hl, wMenuObj4 ; unnecessary
 .done
 	ret

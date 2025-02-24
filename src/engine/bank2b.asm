@@ -57,26 +57,26 @@ Func_ac037:
 
 Func_ac042:
 	ld b, $57
-	jp AddOWSpriteWithScroll
+	jp LoadOWSpriteWithScroll
 
 Func_ac047:
 	ld b, $57
-	jp AddOWSpriteWithScroll
+	jp LoadOWSpriteWithScroll
 
 Func_ac04c:
 	ld b, $57
-	jp AddOWSpriteWithScroll
+	jp LoadOWSpriteWithScroll
 
 Func_ac051:
 	ld b, $57
-	jp AddOWSprite
+	jp LoadOWSprite
 
 Func_ac056:
 	ld de, Frameset_76ca
 	call Func_ac02c
 	ld de, OAM_75c3
 	ld b, BANK(OAM_75c3)
-	jp AddOWSprite
+	jp LoadOWSprite
 
 ; return nz if animation is not finished yet
 ; e = new state
@@ -346,21 +346,21 @@ Func_ac0b6:
 	call Func_ac021
 	ld de, OAM_18007b
 	ld b, BANK(OAM_18007b)
-	jp AddOWSpriteWithScroll
+	jp LoadOWSpriteWithScroll
 
 .Func_ac22c:
 	ld de, Frameset_68b12
 	call Func_ac021
 	ld de, OAM_18422f
 	ld b, BANK(OAM_18422f)
-	jp AddOWSpriteWithScroll
+	jp LoadOWSpriteWithScroll
 
 .Func_ac23a:
 	ld de, Frameset_68562
 	call Func_ac021
 	ld de, OAM_180ea7
 	ld b, BANK(OAM_180ea7)
-	jp AddOWSpriteWithScroll
+	jp LoadOWSpriteWithScroll
 
 .Func_ac248:
 	ld de, Frameset_15ee87
@@ -578,7 +578,7 @@ UpdateTempleSceneObjAnimation:
 	call Func_ac00b
 	ld de, OAM_15e813
 	ld b, BANK(OAM_15e813)
-	jp AddOWSprite
+	jp LoadOWSprite
 
 .Func_ac399
 	ld de, Frameset_15e8ab
@@ -613,7 +613,7 @@ UpdateTempleSceneObjAnimation:
 .asm_ac3c4
 	ld de, OAM_18c88a
 	ld b, BANK(OAM_18c88a)
-	jp AddOWSpriteWithScroll
+	jp LoadOWSpriteWithScroll
 
 ; unreferenced
 	call Func_ac00b
@@ -779,7 +779,7 @@ Func_ac409:
 	jp z, Func_ac409
 	ld de, OAM_aab5c
 	ld b, BANK(OAM_aab5c)
-	jp AddOWSpriteWithScroll
+	jp LoadOWSpriteWithScroll
 
 .Func_ac4e3
 	ld de, Frameset_15e7fa
@@ -836,8 +836,8 @@ UpdateSceneWarioAnimation:
 	ld hl, wSceneWario
 	ld a, [wSceneWarioIgnoreScroll]
 	and a
-	jp z, AddOWSpriteWithScroll
-	jp AddOWSprite
+	jp z, LoadOWSpriteWithScroll
+	jp LoadOWSprite
 
 .DoAnimation
 	ld a, [wSceneWarioState]

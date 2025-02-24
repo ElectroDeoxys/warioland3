@@ -14,7 +14,7 @@ GarlicActionHelp:
 	ld a, [wObjAnimWasReset]
 	ld [wMenuObj5AnimationEnded], a
 	ld hl, wMenuObj5YCoord
-	farcall AddActionHelpSprite_Far
+	farcall LoadActionHelpSprite_Far
 
 	ld hl, wMenuObj7FramesetPtr + 1
 	ld a, [wMenuObj7FramesetBank]
@@ -25,7 +25,7 @@ GarlicActionHelp:
 	ld a, [wObjAnimWasReset]
 	ld [wMenuObj7AnimationEnded], a
 	ld hl, wMenuObj7
-	farcall AddActionHelpSprite_Far
+	farcall LoadActionHelpSprite_Far
 
 	ld a, [wActionHelpFrozen]
 	and a
@@ -54,11 +54,11 @@ GarlicActionHelp:
 
 .action_help_frozen
 	ld hl, wMenuObj4
-	farcall AddActionHelpSprite_Far
+	farcall LoadActionHelpSprite_Far
 	ld hl, wMenuObj6
-	farcall AddActionHelpSprite_Far
+	farcall LoadActionHelpSprite_Far
 	ld hl, wActionHelpWario
-	farcall AddActionHelpWarioSprite
+	farcall LoadActionHelpWarioSprite
 .done
 	ret
 

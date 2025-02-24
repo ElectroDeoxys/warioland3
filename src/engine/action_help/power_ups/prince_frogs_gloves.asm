@@ -10,7 +10,7 @@ PrinceFrogsGlovesActionHelp:
 	farcall $05, UpdateObjAnim
 .action_help_frozen
 	ld hl, wActionHelpWario
-	farcall AddActionHelpWarioSprite
+	farcall LoadActionHelpWarioSprite
 .done
 	ret
 

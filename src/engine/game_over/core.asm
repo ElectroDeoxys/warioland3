@@ -33,7 +33,7 @@ InitGameOverScreen:
 	ld [hl], a
 	farcall BANK(Frameset_aaccb), UpdateObjAnim
 	ld hl, wGameOverWario
-	call Func_17be
+	call LoadGameOverSprite
 
 	ld hl, wMenuObj1
 	ld a, $18
@@ -141,7 +141,7 @@ UpdateGameOverScreen:
 	and a
 	call nz, .Func_db3db
 	ld hl, wGameOverWario
-	call Func_17be
+	call LoadGameOverSprite
 	ld hl, wMenuObj1FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj1
@@ -160,7 +160,7 @@ Func_db3e4:
 	ld a, [wObjAnimWasReset]
 	ld [wGameOverWarioAnimationEnded], a
 	ld hl, wGameOverWario
-	call Func_17be
+	call LoadGameOverSprite
 	ld hl, wMenuObj1FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj1

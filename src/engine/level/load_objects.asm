@@ -149,8 +149,9 @@ LoadObjectGroupData::
 .copy_pals
 	jp LoadObjPals
 
-; de = block
-; c = entry in wObjDataPointers
+; input:
+; - de = block
+; - c = entry in wObjDataPointers
 SpawnObject:
 	ldh a, [hXPosHi]
 	cp $0a

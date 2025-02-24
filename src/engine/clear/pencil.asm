@@ -1,4 +1,4 @@
-AddPencilSprite:
+LoadPencilSprite:
 	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
@@ -13,7 +13,7 @@ AddPencilSprite:
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_d65e1
-	call AddSprite
+	call LoadSprite
 	ret
 
 ; returns TRUE in a if done movement

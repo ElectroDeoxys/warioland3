@@ -805,10 +805,12 @@ Func_30449::
 	jp ReturnFromAudioJump
 
 .channel_pointers
+	table_width 2
 	dw wChannel1
 	dw wChannel2
 	dw wChannel3
 	dw wChannel4
+	assert_table_length NUM_MUSIC_CHANNELS
 
 PointerTable_30490:
 	dw Func_30802

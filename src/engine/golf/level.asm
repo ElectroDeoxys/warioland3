@@ -416,7 +416,7 @@ UpdateGolfLevelUI:
 	ld a, [wGolfObj1CurrentFrame]
 	ld [wGolfObj1Frame], a
 	ld hl, wGolfObj1Sprite
-	call AddGolfSprite
+	call LoadGolfSprite
 
 	ld a, $30
 	ld [wGolfObj2YCoord], a
@@ -428,7 +428,7 @@ UpdateGolfLevelUI:
 	ld a, [wGolfObj2CurrentFrame]
 	ld [wGolfObj2Frame], a
 	ld hl, wGolfObj2Sprite
-	call AddGolfSprite
+	call LoadGolfSprite
 
 	ld a, [wGolfLevelState]
 	cp GOLFLEVELSTATE_PAUSE
@@ -443,7 +443,7 @@ UpdateGolfLevelUI:
 	ld a, [wGolfObj3CurrentFrame]
 	ld [wGolfObj3Frame], a
 	ld hl, wGolfObj3Sprite
-	call AddGolfSprite
+	call LoadGolfSprite
 
 	ld a, [wGolfObj4State]
 	and a
@@ -459,7 +459,7 @@ UpdateGolfLevelUI:
 	ld a, [wGolfObj4CurrentFrame]
 	ld [wGolfObj4Frame], a
 	ld hl, wGolfObj4Sprite
-	call AddGolfSprite
+	call LoadGolfSprite
 
 	ld a, [wGolfObj5State]
 	and a
@@ -475,7 +475,7 @@ UpdateGolfLevelUI:
 	ld a, [wGolfObj5CurrentFrame]
 	ld [wGolfObj5Frame], a
 	ld hl, wGolfObj5Sprite
-	jp AddGolfSprite
+	jp LoadGolfSprite
 
 UpdateGolfParaGoom:
 	ld a, [w1dc20]
@@ -564,7 +564,7 @@ UpdateGolfParaGoom:
 	ld a, [wGolfParaGoomCurrentFrame]
 	ld [wGolfParaGoomFrame], a
 	ld hl, wGolfParaGoomSprite
-	jp AddGolfSprite
+	jp LoadGolfSprite
 
 .Framesets
 	dw Frameset_1cafb1 ; GOLF_PARAGOOM_0
@@ -1018,7 +1018,7 @@ GolfLevelState_Scroll:
 	ld a, [wGolfParaGoomGhostCurrentFrame]
 	ld [wGolfParaGoomGhostFrame], a
 	ld hl, wGolfParaGoomGhostSprite
-	jp AddGolfSprite
+	jp LoadGolfSprite
 
 .HandleDirectionalInputScroll:
 	ld a, [wJoypadPressed]
@@ -1919,7 +1919,7 @@ GolfLevelState_SpecialTerrain:
 	ld a, [wGolfOverlayTextCurrentFrame]
 	ld [wGolfOverlayTextFrame], a
 	ld hl, wGolfOverlayTextSprite
-	jp AddGolfSprite
+	jp LoadGolfSprite
 
 .asm_1c96ba
 	ld hl, wGolfParaGoomYPos
@@ -1970,7 +1970,7 @@ GolfLevelState_SpecialTerrain:
 	ld a, [wGolfOverlayTextCurrentFrame]
 	ld [wGolfOverlayTextFrame], a
 	ld hl, wGolfOverlayTextSprite
-	jp AddGolfSprite
+	jp LoadGolfSprite
 
 .Water:
 	ld a, [wGolfParaGoomState]
@@ -2068,7 +2068,7 @@ GolfLevelState_SpecialTerrain:
 	ld a, [wGolfOverlayTextCurrentFrame]
 	ld [wGolfOverlayTextFrame], a
 	ld hl, wGolfOverlayTextSprite
-	jp AddGolfSprite
+	jp LoadGolfSprite
 .asm_1c97e4
 	ld a, GOLF_PARAGOOM_4
 	ld [wGolfParaGoomState], a
@@ -2494,7 +2494,7 @@ GolfLevelState_Cleared:
 	ld a, [wGolfOverlayTextCurrentFrame]
 	ld [wGolfOverlayTextFrame], a
 	ld hl, wGolfOverlayTextSprite
-	call AddGolfSprite
+	call LoadGolfSprite
 
 	ld hl, wGolfCounter
 	ld a, [hl]
@@ -2620,7 +2620,7 @@ ShowGolfResultOverlayText:
 	ld a, [wGolfOverlayTextCurrentFrame]
 	ld [wGolfOverlayTextFrame], a
 	ld hl, wGolfOverlayTextSprite
-	jp AddGolfSprite
+	jp LoadGolfSprite
 
 .Framesets
 	dw Frameset_1cb0c2 ; GOLFRESULT_UNDER_PAR
@@ -2676,7 +2676,7 @@ GolfLevelState_GameOver:
 	ld a, [wGolfOverlayTextCurrentFrame]
 	ld [wGolfOverlayTextFrame], a
 	ld hl, wGolfOverlayTextSprite
-	call AddGolfSprite
+	call LoadGolfSprite
 
 	ld hl, wGolfCounter
 	ld a, [hl]
@@ -2709,7 +2709,7 @@ GolfLevelState_Pause:
 	ld a, [wGolfObj3CurrentFrame]
 	ld [wGolfObj3Frame], a
 	ld hl, wGolfObj3Sprite
-	call AddGolfSprite
+	call LoadGolfSprite
 
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
@@ -2751,7 +2751,7 @@ GolfLevelState_Result:
 	ld a, [wGolfParaGoomGhostCurrentFrame]
 	ld [wGolfParaGoomGhostFrame], a
 	ld hl, wGolfParaGoomGhostSprite
-	call AddGolfSprite
+	call LoadGolfSprite
 
 	ld hl, wGolfCounter
 	ld a, [hl]

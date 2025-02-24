@@ -1,23 +1,3 @@
-FarCopyHLToDE_BC2::
-	ld a, [wROMBank]
-	push af
-	ld a, [wTempBank]
-	bankswitch
-	call CopyHLToDE_BC
-	pop af
-	bankswitch
-	ret
-
-FarDecompress::
-	ld a, [wROMBank]
-	push af
-	ld a, [wTempBank]
-	bankswitch
-	call Decompress
-	pop af
-	bankswitch
-	ret
-
 ; hl = source
 ; wdc11 = destination
 ; w1dc13 = length - 1
@@ -98,7 +78,7 @@ UpdateGolfObjectAnimation::
 
 ; hl = golf object sprite
 ; wGolfOAMPtr = oam pointer
-AddGolfSprite::
+LoadGolfSprite::
 	ld a, [hli]
 	ld [wCurSpriteYCoord], a
 	ld a, [hli]
@@ -111,7 +91,7 @@ AddGolfSprite::
 	ld h, a
 	ld a, [wGolfOAMPtr + 1]
 	ld l, a
-	call AddSprite
+	call LoadSprite
 	ret
 
 ; updates Golf Wario sprite, given its state
@@ -168,7 +148,7 @@ UpdateGolfWarioAnimation::
 	ld a, [wTempBank]
 	bankswitch
 	ld hl, wGolfWarioSprite
-	call AddGolfSprite
+	call LoadGolfSprite
 	pop af
 	bankswitch
 	ret

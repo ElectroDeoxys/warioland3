@@ -38,7 +38,7 @@ InitMusicalCoinScreen:
 	ld [hl], a
 	farcall $7c, UpdateObjAnim
 	ld hl, wMenuObj3
-	farcall AddPauseMenuSprite
+	farcall LoadPauseMenuSprite
 
 	ld a, 8
 	ld [wAnimatedTilesFrameDuration], a
@@ -63,7 +63,7 @@ Func_d4472:
 	ld hl, wMenuObj3FramesetPtr + 1
 	farcall $7c, UpdateObjAnim
 	ld hl, wMenuObj3
-	farcall AddPauseMenuSprite
+	farcall LoadPauseMenuSprite
 	call ClearUnusedVirtualOAM
 
 	ld hl, wNumMusicalCoins
@@ -136,11 +136,11 @@ Func_d4507:
 	call DoPencilMovement
 	push af
 	ld hl, wMenuObj1
-	call AddPencilSprite
+	call LoadPencilSprite
 	ld hl, wMenuObj3FramesetPtr + 1
 	farcall $7c, UpdateObjAnim
 	ld hl, wMenuObj3
-	farcall AddPauseMenuSprite
+	farcall LoadPauseMenuSprite
 	call ClearUnusedVirtualOAM
 	pop af
 	and a
@@ -157,12 +157,12 @@ Func_d454c:
 	call DoPencilScribbling
 
 	ld hl, wMenuObj1
-	call AddPencilSprite
+	call LoadPencilSprite
 
 	ld hl, wMenuObj3FramesetPtr + 1
 	farcall $7c, UpdateObjAnim
 	ld hl, wMenuObj3YCoord
-	farcall AddPauseMenuSprite
+	farcall LoadPauseMenuSprite
 	call ClearUnusedVirtualOAM
 
 	ld hl, wTimer
@@ -238,7 +238,7 @@ ExitClearScreen:
 	ld hl, wMenuObj3FramesetPtr + 1
 	farcall $7c, UpdateObjAnim
 	ld hl, wMenuObj3
-	farcall AddPauseMenuSprite
+	farcall LoadPauseMenuSprite
 	call ClearUnusedVirtualOAM
 
 	ld a, [wJoypadPressed]

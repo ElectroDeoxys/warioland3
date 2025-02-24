@@ -6054,22 +6054,22 @@ Func_9f0b5:
 ; de = OAM
 Func_9f0bc:
 	ld b, $2f
-	jp AddOWSprite
+	jp LoadOWSprite
 
 ; de = OAM
 Func_9f0c1:
 	ld b, $62
-	jp AddOWSprite
+	jp LoadOWSprite
 
 ; de = OAM
 Func_9f0c6:
 	ld b, $60
-	jp AddOWSprite
+	jp LoadOWSprite
 
 ; de = OAM
 Func_9f0cb:
 	ld b, $63
-	jp AddOWSprite
+	jp LoadOWSprite
 
 Func_9f0d0:
 	ld a, [wOWAnimationFinished]

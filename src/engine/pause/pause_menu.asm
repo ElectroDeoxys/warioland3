@@ -56,7 +56,7 @@ InitPauseMenu_SkipBackupVRAM:
 	ld [hl], a
 	call UpdateObjAnim
 	ld hl, wMenuObj2
-	call AddPauseMenuSprite
+	call LoadPauseMenuSprite
 
 	ld hl, wMenuObj3
 	ld a, $8c
@@ -74,7 +74,7 @@ InitPauseMenu_SkipBackupVRAM:
 	ld [hl], a
 	call UpdateObjAnim
 	ld hl, wMenuObj3
-	call AddPauseMenuSprite
+	call LoadPauseMenuSprite
 
 	ld a, [wKeyAndTreasureFlags]
 	bit GREY_KEY_F, a
@@ -97,7 +97,7 @@ InitPauseMenu_SkipBackupVRAM:
 	ld [hl], a
 	call UpdateObjAnim
 	ld hl, wMenuObj4
-	call AddPauseMenuSprite
+	call LoadPauseMenuSprite
 
 .red_key
 	ld a, [wKeyAndTreasureFlags]
@@ -121,7 +121,7 @@ InitPauseMenu_SkipBackupVRAM:
 	ld [hl], a
 	call UpdateObjAnim
 	ld hl, wMenuObj5
-	call AddPauseMenuSprite
+	call LoadPauseMenuSprite
 
 .green_key
 	ld a, [wKeyAndTreasureFlags]
@@ -145,7 +145,7 @@ InitPauseMenu_SkipBackupVRAM:
 	ld [hl], a
 	call UpdateObjAnim
 	ld hl, wMenuObj6
-	call AddPauseMenuSprite
+	call LoadPauseMenuSprite
 
 .blue_key
 	ld a, [wKeyAndTreasureFlags]
@@ -169,7 +169,7 @@ InitPauseMenu_SkipBackupVRAM:
 	ld [hl], a
 	call UpdateObjAnim
 	ld hl, wMenuObj7
-	call AddPauseMenuSprite
+	call LoadPauseMenuSprite
 
 .collected_treasures
 	ld hl, wMenuObj8
@@ -200,7 +200,7 @@ InitPauseMenu_SkipBackupVRAM:
 .set_grey_treasure_sprite
 	call UpdateObjAnim
 	ld hl, wMenuObj8
-	call AddPauseMenuSprite
+	call LoadPauseMenuSprite
 
 	ld hl, wMenuObj9
 	ld a, $64
@@ -230,7 +230,7 @@ InitPauseMenu_SkipBackupVRAM:
 .set_red_treasure_sprite
 	call UpdateObjAnim
 	ld hl, wMenuObj9
-	call AddPauseMenuSprite
+	call LoadPauseMenuSprite
 
 	ld hl, wMenuObj10
 	ld a, $64
@@ -260,7 +260,7 @@ InitPauseMenu_SkipBackupVRAM:
 .set_green_treasure_sprite
 	call UpdateObjAnim
 	ld hl, wMenuObj10
-	call AddPauseMenuSprite
+	call LoadPauseMenuSprite
 
 	ld hl, wMenuObj11
 	ld a, $64
@@ -290,7 +290,7 @@ InitPauseMenu_SkipBackupVRAM:
 .set_blue_treasure_sprite
 	call UpdateObjAnim
 	ld hl, wMenuObj11
-	call AddPauseMenuSprite
+	call LoadPauseMenuSprite
 
 	ld a, LCDCF_ON | LCDCF_BG9C00 | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 	ldh [rLCDC], a
@@ -304,44 +304,44 @@ UpdatePauseMenu:
 	ld hl, wMenuObj3FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj3
-	call AddPauseMenuSprite
+	call LoadPauseMenuSprite
 	ld a, [wKeyAndTreasureFlags]
 	bit GREY_KEY_F, a
 	jr z, .red_key
 	ld hl, wMenuObj4
-	call AddPauseMenuSprite
+	call LoadPauseMenuSprite
 .red_key
 	ld a, [wKeyAndTreasureFlags]
 	bit RED_KEY_F, a
 	jr z, .green_key
 	ld hl, wMenuObj5
-	call AddPauseMenuSprite
+	call LoadPauseMenuSprite
 .green_key
 	ld a, [wKeyAndTreasureFlags]
 	bit GREEN_KEY_F, a
 	jr z, .blue_key
 	ld hl, wMenuObj6
-	call AddPauseMenuSprite
+	call LoadPauseMenuSprite
 .blue_key
 	ld a, [wKeyAndTreasureFlags]
 	bit BLUE_KEY_F, a
 	jr z, .asm_1f02e5
 	ld hl, wMenuObj7
-	call AddPauseMenuSprite
+	call LoadPauseMenuSprite
 
 .asm_1f02e5
 	ld hl, wMenuObj8
-	call AddPauseMenuSprite
+	call LoadPauseMenuSprite
 	ld hl, wMenuObj8End
-	call AddPauseMenuSprite
+	call LoadPauseMenuSprite
 	ld hl, wMenuObj10
-	call AddPauseMenuSprite
+	call LoadPauseMenuSprite
 	ld hl, wMenuObj11
-	call AddPauseMenuSprite
+	call LoadPauseMenuSprite
 	ld hl, wMenuObj2FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj2
-	call AddPauseMenuSprite
+	call LoadPauseMenuSprite
 
 	call ClearUnusedVirtualOAM
 

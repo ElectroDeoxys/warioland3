@@ -111,12 +111,12 @@ InitClearScreen:
 	ld hl, wMenuObj8FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj8
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 .no_power_up
 	ld hl, wClearScreenWarioFramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wClearScreenWario
-	call AddClearScreenWarioSprite
+	call LoadClearScreenWarioSprite
 
 	ld a, [wLevelEndScreen]
 	cp LVLEND_NO_TREASURE
@@ -124,13 +124,13 @@ InitClearScreen:
 	ld hl, wMenuObj1FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj1
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 
 .no_treasure
 	ld hl, wMenuObj2FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj2
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 
 	ld a, [wNumMusicBoxes]
 	and a
@@ -147,27 +147,27 @@ InitClearScreen:
 	ld hl, wMenuObj3FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj3
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 .four_music_boxes
 	ld hl, wMenuObj4FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj4
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 .three_music_boxes
 	ld hl, wMenuObj5FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj5
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 .two_music_boxes
 	ld hl, wMenuObj6FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj6
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 .one_music_box
 	ld hl, wMenuObj7FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj7
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 
 .no_music_boxes
 	ld a, LCDC_DEFAULT
@@ -183,7 +183,7 @@ UpdateClearScreen:
 	ld hl, wMenuObj8FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj8
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 
 .asm_d41ce
 	ld hl, wClearScreenWarioFramesetPtr + 1
@@ -218,17 +218,17 @@ UpdateClearScreen:
 	call UpdateObjAnim
 .asm_d4203
 	ld hl, wClearScreenWario
-	call AddClearScreenWarioSprite
+	call LoadClearScreenWarioSprite
 
 	ld hl, wMenuObj2
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 	ld a, [wLevelEndScreen]
 	cp LVLEND_NO_TREASURE
 	jr z, .draw_music_boxes
 	ld hl, wMenuObj1FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj1
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 
 .draw_music_boxes
 	ld a, [wNumMusicBoxes]
@@ -244,19 +244,19 @@ UpdateClearScreen:
 	jr z, .four_music_boxes
 ; five music boxes
 	ld hl, wMenuObj3
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 .four_music_boxes
 	ld hl, wMenuObj4
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 .three_music_boxes
 	ld hl, wMenuObj5
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 .two_music_boxes
 	ld hl, wMenuObj6
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 .one_music_box
 	ld hl, wMenuObj7
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 .no_music_boxes
 	call ClearUnusedVirtualOAM
 

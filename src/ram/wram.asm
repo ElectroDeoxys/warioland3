@@ -823,8 +823,8 @@ wBlockPtr:: dw
 wccec::
 	db
 
-wWarioSpawnYBlock:: db
-wWarioSpawnXBlock:: db
+wObjectSpawnBlockY:: db
+wObjectSpawnBlockX:: db
 
 wUnused_ccef::
 	db

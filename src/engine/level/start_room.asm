@@ -489,8 +489,9 @@ Func_896f:
 	ld a, [de]
 	ld [hl], a
 	call Func_cc0
+
 	ld c, $01
-	ld a, [wWarioSpawnYBlock]
+	ld a, [wObjectSpawnBlockY]
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .asm_8996
 	inc c
@@ -508,9 +509,9 @@ Func_896f:
 	ld [wUnused_ccef], a
 	ld b, a
 	ld d, $10
-.asm_89a9
-	ld e, $08
-.asm_89ab
+.loop_search
+	ld e, 16 / 2
+.loop_row
 	ld a, [hl]
 	and $f0
 	swap a
@@ -526,7 +527,7 @@ Func_896f:
 	xor $01
 	ld b, a
 	dec e
-	jr nz, .asm_89ab
+	jr nz, .loop_row
 	ld a, l
 	sub $08
 	ld l, a
@@ -541,13 +542,13 @@ Func_896f:
 	sramswitch
 .asm_89de
 	dec d
-	jr nz, .asm_89a9
+	jr nz, .loop_search
 	ret
 
 .Func_89e2:
 	cp $0f
-	ret nc
-	ld c, a
+	ret nc ; is Wario spawn block
+	ld c, a ; object index
 	ld a, [wc0c7]
 	dec a
 	cp l
@@ -568,9 +569,9 @@ Func_896f:
 	ret c
 	ld a, [wc0c5]
 	cp h
-	jr z, .asm_8a19
+	jr z, .spawn
 	ret nc
-	jr .asm_8a19
+	jr .spawn
 
 .asm_8a08
 	ld a, [wc0c4]
@@ -581,10 +582,10 @@ Func_896f:
 	ld a, [wc0c5]
 	sub $20
 	cp h
-	jr z, .asm_8a19
+	jr z, .spawn
 	ret nc
 
-.asm_8a19
+.spawn
 	push de
 	push bc
 	call Func_cf8
@@ -616,7 +617,7 @@ SetWarioPositionToSpawn:
 	call Func_cc0
 
 	ld c, $01
-	ld a, [wWarioSpawnYBlock]
+	ld a, [wObjectSpawnBlockY]
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
 	jr c, .asm_8a6c
 	inc c
@@ -631,14 +632,14 @@ SetWarioPositionToSpawn:
 	ld [wccec], a
 	sramswitch
 
-.asm_8a77
-	ld e, $08
-.asm_8a79
+.loop_search
+	ld e, 16 / 2
+.loop_row
 	ld a, [hl]
 	and $f0
 	swap a
 	cp $0f
-	jr nc, .asm_8ab0
+	jr nc, .found_spawn_block
 	ld a, b
 	xor $01
 	ld b, a
@@ -646,14 +647,14 @@ SetWarioPositionToSpawn:
 	ld a, [hl]
 	and $0f
 	cp $0f
-	jr nc, .asm_8ab0
+	jr nc, .found_spawn_block
 	inc l
 	ld a, b
 	xor $01
 	ld b, a
 
 	dec e
-	jr nz, .asm_8a79
+	jr nz, .loop_row
 
 	ld a, l
 	sub $08
@@ -661,15 +662,15 @@ SetWarioPositionToSpawn:
 	inc h
 	ld a, h
 	cp HIGH(STARTOF(SRAM) + SIZEOF(SRAM))
-	jr nz, .asm_8a77
+	jr nz, .loop_search
 	ld h, HIGH(sLevelBlockObjectMap)
 	ld a, [wccec]
 	inc a
 	ld [wccec], a
 	sramswitch
-	jr .asm_8a77
+	jr .loop_search
 
-.asm_8ab0
+.found_spawn_block
 	ld c, a
 	call Func_cf8
 	update_pos

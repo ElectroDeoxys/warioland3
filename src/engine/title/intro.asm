@@ -85,9 +85,9 @@ InitIntroSequence:
 	call UpdateObjAnim
 
 	ld hl, wMenuObj4
-	call AddIntroSprite
+	call LoadIntroSprite
 	ld hl, wMenuObj5
-	call AddIntroSprite
+	call LoadIntroSprite
 
 	ld a, STARTMENU_NEW_GAME
 	ld [wStartMenuSelection], a
@@ -422,11 +422,11 @@ IntroSequencePhase1:
 	ld hl, wPlaneWarioEnd - 1
 	call UpdateObjAnim
 	ld hl, wPlaneWario
-	call AddIntroSprite
+	call LoadIntroSprite
 	ld hl, wMenuObj4
-	call AddIntroSprite
+	call LoadIntroSprite
 	ld hl, wMenuObj5
-	call AddIntroSprite
+	call LoadIntroSprite
 	call ClearUnusedVirtualOAM
 	jp PanIntroBackgroundLayers
 
@@ -538,11 +538,11 @@ IntroSequencePhase2:
 	ld hl, wPlaneWarioEnd - 1
 	call UpdateObjAnim
 	ld hl, wMenuObj4
-	call AddIntroSprite
+	call LoadIntroSprite
 	ld hl, wPlaneWario
-	call AddIntroSprite
+	call LoadIntroSprite
 	ld hl, wMenuObj5
-	call AddIntroSprite
+	call LoadIntroSprite
 	call ClearUnusedVirtualOAM
 	jp PanIntroBackgroundLayers
 
@@ -708,11 +708,11 @@ IntroSequencePhase3:
 	ld a, [wObjAnimWasReset]
 	ld [wPlaneWarioAnimationEnded], a
 	ld hl, wMenuObj4
-	call AddIntroSprite
+	call LoadIntroSprite
 	ld hl, wPlaneWario
-	call AddIntroSprite
+	call LoadIntroSprite
 	ld hl, wMenuObj5
-	call AddIntroSprite
+	call LoadIntroSprite
 	call ClearUnusedVirtualOAM
 	jp PanIntroBackgroundLayers
 
@@ -720,7 +720,7 @@ EndIntroSequence:
 	ld hl, wPlaneWarioEnd - 1
 	call UpdateObjAnim
 	ld hl, wPlaneWario
-	call AddIntroSprite
+	call LoadIntroSprite
 	call ClearUnusedVirtualOAM
 
 	ld a, [wceef]

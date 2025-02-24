@@ -2,14 +2,14 @@ StartMenu:
 	ld hl, wPlaneWarioEnd - 1
 	call UpdateObjAnim
 	ld hl, wPlaneWario
-	call AddIntroSprite
+	call LoadIntroSprite
 	ld hl, wMenuObj3
-	call AddStartMenuSprite
+	call LoadStartMenuSprite
 
 	call HandleStartMenuSelection
 
 	ld hl, wMenuObj1
-	call AddStartMenuSprite
+	call LoadStartMenuSprite
 
 	ld a, [wceef]
 	and a
@@ -23,7 +23,7 @@ StartMenu:
 	ld [wMenuObj2Attributes], a
 .asm_4538
 	ld hl, wMenuObj2
-	call AddStartMenuSprite
+	call LoadStartMenuSprite
 
 .asm_453e
 	call ClearUnusedVirtualOAM

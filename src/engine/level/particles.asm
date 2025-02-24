@@ -1034,7 +1034,7 @@ ParticleAnim_Bubbles:
 	xor a
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d20e
-	jp AddParticleSprite
+	jp LoadParticleSprite
 
 ParticleAnim_Magic1:
 	ld h, b
@@ -1053,7 +1053,7 @@ ParticleAnim_Magic1:
 	xor a
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d80d
-	jp AddParticleSprite
+	jp LoadParticleSprite
 
 ParticleAnim_Magic2:
 	ld h, b
@@ -1072,7 +1072,7 @@ ParticleAnim_Magic2:
 	xor a
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d80d
-	jp AddParticleSprite
+	jp LoadParticleSprite
 
 ParticleAnim_MagicStop:
 	ld h, b
@@ -1091,7 +1091,7 @@ ParticleAnim_MagicStop:
 	xor a
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d80d
-	jp AddParticleSprite
+	jp LoadParticleSprite
 
 ParticleAnim_Owl:
 	ld h, b
@@ -1110,7 +1110,7 @@ ParticleAnim_Owl:
 	xor a
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d763
-	jp AddParticleSprite
+	jp LoadParticleSprite
 
 ParticleAnim_TreasureGlow:
 	ld h, b
@@ -1129,7 +1129,7 @@ ParticleAnim_TreasureGlow:
 	xor a
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d716
-	jp AddParticleSprite
+	jp LoadParticleSprite
 
 ParticleAnim_BubbleBurst:
 	ld h, b
@@ -1148,7 +1148,7 @@ ParticleAnim_BubbleBurst:
 	xor a
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d5ae
-	jp AddParticleSprite
+	jp LoadParticleSprite
 
 ParticleAnim_BouncyJump:
 	ld h, b
@@ -1167,7 +1167,7 @@ ParticleAnim_BouncyJump:
 	xor a
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d532
-	jp AddParticleSprite
+	jp LoadParticleSprite
 
 ParticleAnim_Snow:
 	ld h, b
@@ -1186,7 +1186,7 @@ ParticleAnim_Snow:
 	xor a
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d7bd
-	jp AddParticleSprite
+	jp LoadParticleSprite
 
 ParticleAnim_Ice:
 	ld h, b
@@ -1212,7 +1212,7 @@ ParticleAnim_Ice:
 	xor a
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d62b
-	jp AddParticleSprite
+	jp LoadParticleSprite
 
 ParticleAnim_Dust:
 	ld h, b
@@ -1231,7 +1231,7 @@ ParticleAnim_Dust:
 	xor a
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d20e
-	jp AddParticleSprite
+	jp LoadParticleSprite
 
 ParticleAnim_Debris:
 	ld h, b
@@ -1250,7 +1250,7 @@ ParticleAnim_Debris:
 	xor a
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d20e
-	jr AddParticleSprite
+	jr LoadParticleSprite
 
 ParticleAnim_Stars:
 	ld h, b
@@ -1269,7 +1269,7 @@ ParticleAnim_Stars:
 	xor a
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d20e
-	jr AddParticleSprite
+	jr LoadParticleSprite
 
 ParticleAnim_SmokeLarge:
 	ld h, b
@@ -1288,7 +1288,7 @@ ParticleAnim_SmokeLarge:
 	xor a
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d20e
-	jr AddParticleSprite
+	jr LoadParticleSprite
 
 ParticleAnim_SmokeSmall:
 	ld h, b
@@ -1307,7 +1307,7 @@ ParticleAnim_SmokeSmall:
 	xor a
 	ld [wCurParticleAttributes], a
 	ld hl, OAM_d20e
-	jr AddParticleSprite
+	jr LoadParticleSprite
 
 ParticleAnim_Splash:
 	ld h, b
@@ -1328,7 +1328,7 @@ ParticleAnim_Splash:
 	ld hl, OAM_d20e
 ;	fallthrough
 
-AddParticleSprite:
+LoadParticleSprite:
 	ld a, [wCameraConfigFlags]
 	cp CAM_XSCROLL2 | CAM_TRANSITIONS | CAM_BORDER_RIGHT | CAM_BORDER_LEFT
 	jr z, .asm_d0c5
@@ -1348,7 +1348,7 @@ AddParticleSprite:
 	ld [wCurSpriteFrame], a
 	ld a, [wCurParticleAttributes]
 	ld [wCurSpriteAttributes], a
-	call AddSprite
+	call LoadSprite
 	ret
 
 .asm_d0c5
@@ -1368,7 +1368,7 @@ AddParticleSprite:
 	ld [wCurSpriteFrame], a
 	ld a, [wCurParticleAttributes]
 	ld [wCurSpriteAttributes], a
-	call AddSprite
+	call LoadSprite
 	ret
 
 ; de = frameset

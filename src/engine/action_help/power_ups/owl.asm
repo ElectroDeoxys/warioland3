@@ -26,9 +26,9 @@ OwlActionHelp:
 
 .action_help_frozen
 	ld hl, wActionHelpWario
-	call AddActionHelpWarioSprite_FromBank
+	call LoadActionHelpWarioSprite_FromBank
 	ld hl, wMenuObj4
-	call AddActionHelpSprite_Far
+	call LoadActionHelpSprite_Far
 .done
 	ret
 

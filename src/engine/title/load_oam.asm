@@ -1,4 +1,4 @@
-AddStartMenuSprite:
+LoadStartMenuSprite:
 	; y coord
 	ld a, [wSCY]
 	ld b, a
@@ -16,10 +16,10 @@ AddStartMenuSprite:
 	ld [wCurSpriteAttributes], a
 
 	ld hl, OAM_6b5f
-	call AddSprite
+	call LoadSprite
 	ret
 
-AddIntroSprite:
+LoadIntroSprite:
 	; y coord
 	ld a, [wSCY]
 	ld b, a
@@ -37,5 +37,5 @@ AddIntroSprite:
 	ld [wCurSpriteAttributes], a
 
 	ld hl, OAM_6d21
-	call AddSprite
+	call LoadSprite
 	ret

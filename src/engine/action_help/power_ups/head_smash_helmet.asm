@@ -14,7 +14,7 @@ HeadSmashHelmetActionHelp:
 	ld a, [wObjAnimWasReset]
 	ld [wMenuObj5AnimationEnded], a
 	ld hl, wMenuObj5YCoord
-	farcall AddActionHelpSprite_Far
+	farcall LoadActionHelpSprite_Far
 
 	ld a, [wActionHelpFrozen]
 	and a
@@ -33,9 +33,9 @@ HeadSmashHelmetActionHelp:
 
 .action_help_frozen
 	ld hl, wMenuObj4YCoord
-	farcall AddActionHelpSprite_Far
+	farcall LoadActionHelpSprite_Far
 	ld hl, wActionHelpWario
-	farcall AddActionHelpWarioSprite
+	farcall LoadActionHelpWarioSprite
 .done
 	ret
 

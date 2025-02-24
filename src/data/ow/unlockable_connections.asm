@@ -1,10 +1,13 @@
 UnlockableConnections:
-	dw .North
-	dw .West
-	dw .South
-	dw .East
+	table_width 2
+	dw .North ; NORTH
+	dw .West  ; WEST
+	dw .South ; SOUTH
+	dw .East  ; EAST
+	assert_table_length NUM_CARDINAL_DIRECTIONS
 
 .North:
+	table_width 2
 	db $ff, $ff
 	db OWNORTH_THE_TEMPLE,             OWNORTH_OUT_OF_THE_WOODS       ; NORTHCONN_1
 	db OWNORTH_OUT_OF_THE_WOODS,       OWNORTH_THE_PEACEFUL_VILLAGE   ; NORTHCONN_2
@@ -14,8 +17,10 @@ UnlockableConnections:
 	db OWNORTH_THE_TIDAL_COAST,        OWNORTH_SEA_TURTLE_ROCKS       ; NORTHCONN_6
 	db OWNORTH_THE_VAST_PLAIN,         OW_EXIT_RIGHT                  ; NORTHCONN_7
 	db OW_EXIT_LEFT,                   OWNORTH_THE_PEACEFUL_VILLAGE   ; NORTHCONN_8
+	assert_table_length NUM_NORTH_CONNECTIONS + 1
 
 .West:
+	table_width 2
 	db $ff, $ff
 	db OWWEST_DESERT_RUINS,      OWWEST_THE_VOLCANOS_BASE ; WESTCONN_1
 	db OWWEST_THE_VOLCANOS_BASE, OWWEST_THE_POOL_OF_RAIN  ; WESTCONN_2
@@ -24,8 +29,10 @@ UnlockableConnections:
 	db OWWEST_THE_POOL_OF_RAIN,  OWWEST_BENEATH_THE_WAVES ; WESTCONN_5
 	db OWWEST_A_TOWN_IN_CHAOS,   OW_EXIT_RIGHT            ; WESTCONN_6
 	db OW_EXIT_LEFT,             OWWEST_DESERT_RUINS      ; WESTCONN_7
+	assert_table_length NUM_WEST_CONNECTIONS + 1
 
 .South:
+	table_width 2
 	db $ff, $ff
 	db OWSOUTH_THE_GRASSLANDS,   OWSOUTH_THE_BIG_BRIDGE   ; SOUTHCONN_1
 	db OWSOUTH_THE_BIG_BRIDGE,   OWSOUTH_TOWER_OF_REVIVAL ; SOUTHCONN_2
@@ -34,8 +41,10 @@ UnlockableConnections:
 	db OWSOUTH_TOWER_OF_REVIVAL, OWSOUTH_ABOVE_THE_CLOUDS ; SOUTHCONN_5
 	db OWSOUTH_TOWER_OF_REVIVAL, OW_EXIT_RIGHT            ; SOUTHCONN_6
 	db OW_EXIT_LEFT,             OWSOUTH_THE_GRASSLANDS   ; SOUTHCONN_7
+	assert_table_length NUM_SOUTH_CONNECTIONS + 1
 
 .East:
+	table_width 2
 	db $ff, $ff
 	db OWEAST_THE_STAGNANT_SWAMP,  OWEAST_THE_FRIGID_SEA      ; EASTCONN_1
 	db OWEAST_THE_STAGNANT_SWAMP,  OWEAST_CASTLE_OF_ILLUSIONS ; EASTCONN_2
@@ -45,14 +54,18 @@ UnlockableConnections:
 	db OWEAST_CASTLE_OF_ILLUSIONS, OWEAST_THE_EAST_CRATER     ; EASTCONN_6
 	db OWEAST_FOREST_OF_FEAR,      OW_EXIT_RIGHT              ; EASTCONN_7
 	db OW_EXIT_LEFT,               OWEAST_THE_STAGNANT_SWAMP  ; EASTCONN_8
+	assert_table_length NUM_EAST_CONNECTIONS + 1
 
 UnlockableLevelArrows:
-	dw .North
-	dw .West
-	dw .South
-	dw .East
+	table_width 2
+	dw .North ; NORTH
+	dw .West  ; WEST
+	dw .South ; SOUTH
+	dw .East  ; EAST
+	assert_table_length NUM_CARDINAL_DIRECTIONS
 
 .North:
+	table_width 2
 	dw .InvalidNorthConnection
 	dw .NorthConnection1 ; NORTHCONN_1
 	dw .NorthConnection2 ; NORTHCONN_2
@@ -62,8 +75,10 @@ UnlockableLevelArrows:
 	dw .NorthConnection6 ; NORTHCONN_6
 	dw .NorthConnection7 ; NORTHCONN_7
 	dw .NorthConnection8 ; NORTHCONN_8
+	assert_table_length NUM_NORTH_CONNECTIONS + 1
 
 .West:
+	table_width 2
 	dw .InvalidWestConnection
 	dw .WestConnection1 ; WESTCONN_1
 	dw .WestConnection2 ; WESTCONN_2
@@ -72,8 +87,10 @@ UnlockableLevelArrows:
 	dw .WestConnection5 ; WESTCONN_5
 	dw .WestConnection6 ; WESTCONN_6
 	dw .WestConnection7 ; WESTCONN_7
+	assert_table_length NUM_WEST_CONNECTIONS + 1
 
 .South:
+	table_width 2
 	dw .InvalidSouthConnection
 	dw .SouthConnection1 ; SOUTHCONN_1
 	dw .SouthConnection2 ; SOUTHCONN_2
@@ -82,8 +99,10 @@ UnlockableLevelArrows:
 	dw .SouthConnection5 ; SOUTHCONN_5
 	dw .SouthConnection6 ; SOUTHCONN_6
 	dw .SouthConnection7 ; SOUTHCONN_7
+	assert_table_length NUM_SOUTH_CONNECTIONS + 1
 
 .East:
+	table_width 2
 	dw .InvalidEastConnection
 	dw .EastConnection1 ; EASTCONN_1
 	dw .EastConnection2 ; EASTCONN_2
@@ -93,6 +112,7 @@ UnlockableLevelArrows:
 	dw .EastConnection6 ; EASTCONN_6
 	dw .EastConnection7 ; EASTCONN_7
 	dw .EastConnection8 ; EASTCONN_8
+	assert_table_length NUM_EAST_CONNECTIONS + 1
 
 .InvalidNorthConnection
 	db $ff, $ff

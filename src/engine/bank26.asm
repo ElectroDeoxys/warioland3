@@ -1015,7 +1015,7 @@ Func_9a9ec:
 
 Func_9a9f7:
 	ld b, $26
-	call AddOWSpriteWithScroll
+	call LoadOWSpriteWithScroll
 	ret
 
 Func_9a9fd:

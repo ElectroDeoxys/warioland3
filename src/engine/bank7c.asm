@@ -39,7 +39,7 @@ LoadLanguageSelectionText:
 	call Decompress
 	ret
 
-AddPauseMenuSprite:
+LoadPauseMenuSprite:
 	ld a, [hli]
 	add OAM_Y_OFS
 	ld [wCurSpriteYCoord], a
@@ -51,7 +51,7 @@ AddPauseMenuSprite:
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_1f156c
-	call AddSprite
+	call LoadSprite
 	ret
 
 PrintNumberMusicCoins:

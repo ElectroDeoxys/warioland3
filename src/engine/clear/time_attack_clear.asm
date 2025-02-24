@@ -28,23 +28,23 @@ InitTimeAttackClearScreen:
 	ld hl, wMenuObj8FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj8
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 
 .asm_d42d3
 	ld hl, wClearScreenWarioFramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wClearScreenWario
-	call AddClearScreenWarioSprite
+	call LoadClearScreenWarioSprite
 
 	ld hl, wMenuObj2FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj2
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 
 	ld hl, wMenuObj3FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj3
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 
 	ld a, [wKeyAndTreasureFlags]
 	bit GREY_KEY_F, a
@@ -52,7 +52,7 @@ InitTimeAttackClearScreen:
 	ld hl, wMenuObj4FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj4
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 
 .red_key
 	ld a, [wKeyAndTreasureFlags]
@@ -61,7 +61,7 @@ InitTimeAttackClearScreen:
 	ld hl, wMenuObj5FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj5
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 
 .green_key
 	ld a, [wKeyAndTreasureFlags]
@@ -70,7 +70,7 @@ InitTimeAttackClearScreen:
 	ld hl, wMenuObj6FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj6
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 
 .blue_key
 	ld a, [wKeyAndTreasureFlags]
@@ -79,7 +79,7 @@ InitTimeAttackClearScreen:
 	ld hl, wMenuObj7FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj7
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 
 .done_keys
 	ld a, LCDC_DEFAULT
@@ -95,7 +95,7 @@ Func_d434c:
 	ld hl, wMenuObj8FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj8
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 
 .asm_d435f
 	ld hl, wClearScreenWarioFramesetPtr + 1
@@ -130,39 +130,39 @@ Func_d434c:
 	call UpdateObjAnim
 .asm_d4394
 	ld hl, wClearScreenWario
-	call AddClearScreenWarioSprite
+	call LoadClearScreenWarioSprite
 
 	ld hl, wMenuObj2
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 	ld hl, wMenuObj3
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 
 	ld a, [wKeyAndTreasureFlags]
 	bit GREY_KEY_F, a
 	jr z, .red_key
 	ld hl, wMenuObj4
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 
 .red_key
 	ld a, [wKeyAndTreasureFlags]
 	bit RED_KEY_F, a
 	jr z, .green_key
 	ld hl, wMenuObj5
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 
 .green_key
 	ld a, [wKeyAndTreasureFlags]
 	bit GREEN_KEY_F, a
 	jr z, .blue_key
 	ld hl, wMenuObj6
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 
 .blue_key
 	ld a, [wKeyAndTreasureFlags]
 	bit BLUE_KEY_F, a
 	jr z, .done_keys
 	ld hl, wMenuObj7
-	call AddClearScreenSprite
+	call LoadClearScreenSprite
 .done_keys
 	call ClearUnusedVirtualOAM
 

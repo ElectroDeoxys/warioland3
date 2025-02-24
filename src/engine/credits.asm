@@ -83,7 +83,7 @@ InitCredits:
 	ld [wCreditsMusicBoxOAMBank], a
 	call UpdateObjAnim
 	ld hl, wCreditsMusicBox
-	call AddCreditsSprite
+	call LoadCreditsSprite
 
 	ld hl, wMenuObj1
 	ld a, $5b
@@ -101,7 +101,7 @@ InitCredits:
 	ld [hl], a
 	call UpdateObjAnim
 	ld hl, wMenuObj1
-	call AddCreditsSprite
+	call LoadCreditsSprite
 
 	call ClearUnusedVirtualOAM
 
@@ -124,9 +124,9 @@ ShowCredits:
 	dec [hl]
 	call z, .PlayCreditsMusic
 	ld hl, wCreditsMusicBox
-	call AddCreditsSprite
+	call LoadCreditsSprite
 	ld hl, wMenuObj1
-	call AddCreditsSprite
+	call LoadCreditsSprite
 	call ClearUnusedVirtualOAM
 	ret
 
@@ -138,11 +138,11 @@ ShowCredits:
 	ld hl, wCreditsMusicBoxFramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wCreditsMusicBox
-	call AddCreditsSprite
+	call LoadCreditsSprite
 	ld hl, wMenuObj1FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj1
-	call AddCreditsSprite
+	call LoadCreditsSprite
 	call ClearUnusedVirtualOAM
 
 	ld a, [wCreditsPage]
@@ -300,9 +300,9 @@ Func_160190:
 	call UpdateObjAnim
 .add_sprites
 	ld hl, wCreditsMusicBox
-	call Func_17ec
+	call LoadCreditsMusicBoxSprite
 	ld hl, wMenuObj1
-	call AddCreditsSprite
+	call LoadCreditsSprite
 	call ClearUnusedVirtualOAM
 	ret
 
@@ -417,7 +417,7 @@ Func_16026c:
 	hcall UpdateObjAnim
 .add_sprites
 	ld hl, wCreditsMusicBox
-	call Func_17ec
+	call LoadCreditsMusicBoxSprite
 	call ClearUnusedVirtualOAM
 	ret
 
@@ -429,7 +429,7 @@ Func_1602ee:
 	ldh [hCallFuncBank], a
 	hcall UpdateObjAnim
 	ld hl, wCreditsMusicBox
-	call Func_17ec
+	call LoadCreditsMusicBoxSprite
 	call ClearUnusedVirtualOAM
 	call Func_1603cb
 	ld hl, wSubState
@@ -445,7 +445,7 @@ Func_160318:
 	hcall UpdateObjAnim
 
 	ld hl, wCreditsMusicBox
-	call Func_17ec
+	call LoadCreditsMusicBoxSprite
 	ld hl, wMenuObj1
 	ld a, [hl]
 	cp $80
@@ -458,7 +458,7 @@ Func_160318:
 	ld hl, wMenuObj1FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj1
-	call AddCreditsSprite
+	call LoadCreditsSprite
 	call ClearUnusedVirtualOAM
 	ld a, [wGlobalCounter]
 	and %1111
@@ -477,7 +477,7 @@ Func_160365:
 	hcall UpdateObjAnim
 
 	ld hl, wCreditsMusicBox
-	call Func_17ec
+	call LoadCreditsMusicBoxSprite
 	ld hl, wMenuObj1
 	ld a, [hl]
 	cp $80
@@ -487,7 +487,7 @@ Func_160365:
 	ld hl, wMenuObj1FramesetPtr + 1
 	call UpdateObjAnim
 	ld hl, wMenuObj1
-	call AddCreditsSprite
+	call LoadCreditsSprite
 	call ClearUnusedVirtualOAM
 	ld a, [wTransitionParam]
 	cp TRANSITION_EPILOGUE_PERFECT
@@ -632,7 +632,7 @@ VBlank_160439:
 	ret
 .end
 
-AddCreditsSprite:
+LoadCreditsSprite:
 	ld a, [hli]
 	add OAM_Y_OFS
 	ld [wCurSpriteYCoord], a
@@ -644,7 +644,7 @@ AddCreditsSprite:
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_1617e8
-	call AddSprite
+	call LoadSprite
 	ret
 
 Pals_1604cc:

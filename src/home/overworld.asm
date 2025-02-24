@@ -1,6 +1,6 @@
 ; b = sprite bank
 ; de = pointer to sprite
-AddOWSpriteWithScroll::
+LoadOWSpriteWithScroll::
 	ld a, [wSCY]
 	ld c, a
 	ld a, [hli] ; y coord
@@ -23,12 +23,12 @@ AddOWSpriteWithScroll::
 	ld l, e
 ;	fallthrough
 
-AddOWSpriteWithScroll_GotParams::
+LoadOWSpriteWithScroll_GotParams::
 	ld a, [wROMBank]
 	push af
 	ld a, b
 	bankswitch
-	call AddSprite
+	call LoadSprite
 	pop af
 	bankswitch
 	ret
@@ -36,7 +36,7 @@ AddOWSpriteWithScroll_GotParams::
 ; hl = OAM data
 ; b = sprite bank
 ; de = pointer to sprite
-AddOWSprite::
+LoadOWSprite::
 	ld a, [hli]
 	ld c, $10
 	add c
@@ -56,7 +56,7 @@ AddOWSprite::
 	push af
 	ld a, b
 	bankswitch
-	call AddSprite
+	call LoadSprite
 	pop af
 	bankswitch
 	ret

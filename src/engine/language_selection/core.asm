@@ -36,6 +36,6 @@ LanguageSelection:
 	ld hl, wMenuObj1End - 1
 	call UpdateObjAnim
 	ld hl, wMenuObj1
-	call AddLanguageSelectionSprite
+	call LoadLanguageSelectionSprite
 	call ClearUnusedVirtualOAM
 	ret

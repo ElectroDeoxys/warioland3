@@ -181,5 +181,5 @@ Func_dc158:
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_dd710
-	call AddSprite
+	call LoadSprite
 	ret

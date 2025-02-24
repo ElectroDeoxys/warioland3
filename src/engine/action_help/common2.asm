@@ -285,7 +285,7 @@ ENDR
 	jr nz, .loop_copy_pals
 	ret
 
-AddActionHelpWarioSprite:
+LoadActionHelpWarioSprite:
 	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
@@ -303,10 +303,10 @@ AddActionHelpWarioSprite:
 	ld h, a
 	ld a, [wActionHelpWarioOAMPtr + 1]
 	ld l, a
-	farcall $05, AddSprite
+	farcall $05, LoadSprite
 	ret
 
-AddActionHelpWarioSprite_FromBank:
+LoadActionHelpWarioSprite_FromBank:
 	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
@@ -328,10 +328,10 @@ AddActionHelpWarioSprite_FromBank:
 	ld [wTempBank], a
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	hcall AddSprite
+	hcall LoadSprite
 	ret
 
-AddActionHelpSprite_Far:
+LoadActionHelpSprite_Far:
 	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
@@ -359,10 +359,10 @@ AddActionHelpSprite_Far:
 	ld l, e
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
-	hcall AddSprite
+	hcall LoadSprite
 	ret
 
-AddActionHelpSprite:
+LoadActionHelpSprite:
 	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
@@ -377,7 +377,7 @@ AddActionHelpSprite:
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_1e697c
-	call AddSprite
+	call LoadSprite
 	ret
 
 ; unreferenced
@@ -396,7 +396,7 @@ Func_1e4b6d:
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_1e6bab
-	call AddSprite
+	call LoadSprite
 	ret
 
 ActionHelp2_Init:

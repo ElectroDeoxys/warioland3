@@ -1,4 +1,4 @@
-AddLanguageSelectionSprite:
+LoadLanguageSelectionSprite:
 	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
@@ -13,5 +13,5 @@ AddLanguageSelectionSprite:
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_75c3
-	call AddSprite
+	call LoadSprite
 	ret

@@ -194,7 +194,7 @@ UpdateGolfLobbyAnimations:
 	ld a, [wGolfObj1CurrentFrame]
 	ld [wGolfObj1Frame], a
 	ld hl, wGolfObj1Sprite
-	call AddGolfSprite
+	call LoadGolfSprite
 
 	ld a, $2d
 	ld [wGolfObj3YCoord], a
@@ -206,7 +206,7 @@ UpdateGolfLobbyAnimations:
 	ld a, [wGolfObj3CurrentFrame]
 	ld [wGolfObj3Frame], a
 	ld hl, wGolfObj3Sprite
-	call AddGolfSprite
+	call LoadGolfSprite
 
 	ld a, $60
 	ld [wGolfObj5YCoord], a
@@ -218,7 +218,7 @@ UpdateGolfLobbyAnimations:
 	ld a, [wGolfObj5CurrentFrame]
 	ld [wGolfObj5Frame], a
 	ld hl, wGolfObj5Sprite
-	call AddGolfSprite
+	call LoadGolfSprite
 
 	ld a, [wGolfObj4State]
 	cp COININFO_SHOW_MESSAGE
@@ -247,7 +247,7 @@ UpdateGolfLobbyAnimations:
 	ld a, [wGolfObj4CurrentFrame]
 	ld [wGolfObj4Frame], a
 	ld hl, wGolfObj4Sprite
-	jp AddGolfSprite
+	jp LoadGolfSprite
 
 HandleGolfLobbyWarioSprite:
 	ld a, [wGolfWarioYPos]
@@ -729,5 +729,5 @@ UpdateGolfClearCutsceneAnimation:
 	ld a, $58
 	ld [wGolfObj1XCoord], a
 	ld hl, wGolfObj1Sprite
-	call AddGolfSprite
+	call LoadGolfSprite
 	jp ClearUnusedVirtualOAM

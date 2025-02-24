@@ -26,6 +26,7 @@ DEF NUM_MAIN_POWER_UPS EQU const_value
 	const POWER_UP_OWL             ; a
 	const POWER_UP_RAIL            ; b
 	const POWER_UP_VAMPIRE         ; c
+DEF NUM_SPECIAL_POWER_UPS EQU const_value - NUM_MAIN_POWER_UPS
 DEF NUM_TOTAL_POWER_UPS EQU const_value
 
 DEF POWER_UP_MASK EQU %111111

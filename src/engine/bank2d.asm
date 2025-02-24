@@ -1267,21 +1267,21 @@ Func_b4a0d:
 	ld c, l
 	ret
 
-AddCurSceneObjSpriteWithScroll:
+LoadCurSceneObjSpriteWithScroll:
 	ld b, $2a
 	ld a, [wCurSceneObjPtr + 0]
 	ld l, a
 	ld a, [wCurSceneObjPtr + 1]
 	ld h, a
-	jp AddOWSpriteWithScroll
+	jp LoadOWSpriteWithScroll
 
-AddCurSceneObjSprite:
+LoadCurSceneObjSprite:
 	ld b, $2a
 	ld a, [wCurSceneObjPtr + 0]
 	ld l, a
 	ld a, [wCurSceneObjPtr + 1]
 	ld h, a
-	jp AddOWSprite
+	jp LoadOWSprite
 
 Func_b4a37:
 	call Func_b4a3d
@@ -1567,7 +1567,7 @@ Func_b4c57:
 
 Func_b4c5a:
 	ld de, OAM_a980c
-	jp AddCurSceneObjSpriteWithScroll
+	jp LoadCurSceneObjSpriteWithScroll
 
 Func_b4c60:
 	call UpdateCurOWOjAnimation
@@ -1795,7 +1795,7 @@ Func_b4da0:
 
 Func_b4da3:
 	ld de, OAM_a9161
-	jp AddCurSceneObjSpriteWithScroll
+	jp LoadCurSceneObjSpriteWithScroll
 ;	fallthrough
 
 Func_b4da9:
@@ -1823,7 +1823,7 @@ Func_b4dc0:
 	cp $ff
 	call z, Func_b4dd4
 	ld de, OAM_a9161
-	jp AddCurSceneObjSpriteWithScroll
+	jp LoadCurSceneObjSpriteWithScroll
 
 Func_b4dd4:
 	play_sfx SFX_12F
@@ -1906,7 +1906,7 @@ Func_b4e4d:
 
 Func_b4e50:
 	ld de, OAM_a884a
-	jp AddCurSceneObjSpriteWithScroll
+	jp LoadCurSceneObjSpriteWithScroll
 
 Func_b4e56:
 	call UpdateCurOWOjAnimation
@@ -1924,7 +1924,7 @@ Func_b4e62:
 
 Func_b4e65:
 	ld de, OAM_a8f57
-	jp AddCurSceneObjSpriteWithScroll
+	jp LoadCurSceneObjSpriteWithScroll
 
 ; unreferenced
 Func_b4e6b:
@@ -2279,7 +2279,7 @@ Func_b507c:
 
 Func_b507f:
 	ld de, OAM_a8000
-	jp AddCurSceneObjSpriteWithScroll
+	jp LoadCurSceneObjSpriteWithScroll
 
 Func_b5085:
 	call UpdateCurOWOjAnimation
@@ -2350,13 +2350,13 @@ Func_b50de:
 Func_b50e1:
 	call UpdateCurOWOjAnimation
 	ld de, OAM_aa580
-	jp AddCurSceneObjSpriteWithScroll
+	jp LoadCurSceneObjSpriteWithScroll
 
 Func_b50ea:
 	ld de, Frameset_aa252
 	call UpdateCurOWOjAnimation
 	ld de, OAM_aa0cf
-	jp AddCurSceneObjSpriteWithScroll
+	jp LoadCurSceneObjSpriteWithScroll
 
 Func_b50f6:
 	ld de, Frameset_aa0a3
@@ -2382,7 +2382,7 @@ Func_b5114:
 	call UpdateCurOWOjAnimation
 .asm_b5117
 	ld de, OAM_a9fe2
-	jp AddCurSceneObjSpriteWithScroll
+	jp LoadCurSceneObjSpriteWithScroll
 
 	call UpdateCurOWOjAnimation
 	ld b, $00
@@ -2406,7 +2406,7 @@ Func_b5136:
 	call Func_b4a0d
 	jp z, Func_b4fab
 	ld de, OAM_a87fa
-	jp AddCurSceneObjSprite
+	jp LoadCurSceneObjSprite
 
 _DoOWFunction:
 	ld hl, wOWFuncCounter

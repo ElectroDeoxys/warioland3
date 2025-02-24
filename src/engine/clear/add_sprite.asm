@@ -1,4 +1,4 @@
-AddClearScreenSprite:
+LoadClearScreenSprite:
 	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
@@ -13,10 +13,10 @@ AddClearScreenSprite:
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_d4e26
-	call AddSprite
+	call LoadSprite
 	ret
 
-AddClearScreenWarioSprite:
+LoadClearScreenWarioSprite:
 	ld a, [wSCY]
 	ld b, a
 	ld a, [hli]
@@ -31,5 +31,5 @@ AddClearScreenWarioSprite:
 	ld a, [hl]
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_d49cc
-	call AddSprite
+	call LoadSprite
 	ret

@@ -254,7 +254,7 @@ Func_1c86f8:
 	ld a, [wGolfObj1CurrentFrame]
 	ld [wGolfObj1Frame], a
 	ld hl, wGolfObj1Sprite
-	call AddGolfSprite
+	call LoadGolfSprite
 
 	ld a, $2a
 	ld [wGolfObj3YCoord], a
@@ -266,7 +266,7 @@ Func_1c86f8:
 	ld a, [wGolfObj3CurrentFrame]
 	ld [wGolfObj3Frame], a
 	ld hl, wGolfObj3Sprite
-	call AddGolfSprite
+	call LoadGolfSprite
 	ld a, SCREEN_WIDTH_PX
 	ld [wGolfObj4YCoord], a
 	ld a, $58
@@ -277,7 +277,7 @@ Func_1c86f8:
 	ld a, [wGolfObj4CurrentFrame]
 	ld [wGolfObj4Frame], a
 	ld hl, wGolfObj4Sprite
-	call AddGolfSprite
+	call LoadGolfSprite
 
 	ld a, [w1dc00]
 	and a
@@ -292,7 +292,7 @@ Func_1c86f8:
 	ld a, [wGolfObj5CurrentFrame]
 	ld [wGolfObj5Frame], a
 	ld hl, wGolfObj5Sprite
-	call AddGolfSprite
+	call LoadGolfSprite
 
 	xor a
 	ld [wGolfWarioDuration], a
@@ -316,7 +316,7 @@ Func_1c86f8:
 	ld a, [wGolfWarioCurrentFrame]
 	ld [wGolfWarioFrame], a
 	ld hl, wGolfWarioSprite
-	call AddGolfSprite
+	call LoadGolfSprite
 
 	ld a, $50
 	ld [wGolfParaGoomYCoord], a
@@ -328,7 +328,7 @@ Func_1c86f8:
 	ld a, [wGolfParaGoomCurrentFrame]
 	ld [wGolfParaGoomFrame], a
 	ld hl, wGolfParaGoomSprite
-	jp AddGolfSprite
+	jp LoadGolfSprite
 
 .framesets
 	dw Frameset_1cb5d8

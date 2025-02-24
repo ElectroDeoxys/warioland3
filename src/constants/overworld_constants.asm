@@ -3,6 +3,7 @@
 	const WEST  ; $1
 	const SOUTH ; $2
 	const EAST  ; $3
+DEF NUM_CARDINAL_DIRECTIONS EQU const_value
 
 	const_def
 	const CRAYON_RED_F    ; 0
@@ -189,6 +190,7 @@ DEF DAYNIGHT_TRANSITION_STEPS EQU 32
 	const NORTHCONN_6 ; $6
 	const NORTHCONN_7 ; $7
 	const NORTHCONN_8 ; $8
+DEF NUM_NORTH_CONNECTIONS EQU const_value - 1
 
 ; west connections
 	const_def 1
@@ -199,6 +201,7 @@ DEF DAYNIGHT_TRANSITION_STEPS EQU 32
 	const WESTCONN_5 ; $5
 	const WESTCONN_6 ; $6
 	const WESTCONN_7 ; $7
+DEF NUM_WEST_CONNECTIONS EQU const_value - 1
 
 ; south connections
 	const_def 1
@@ -209,7 +212,7 @@ DEF DAYNIGHT_TRANSITION_STEPS EQU 32
 	const SOUTHCONN_5 ; $5
 	const SOUTHCONN_6 ; $6
 	const SOUTHCONN_7 ; $7
-	const SOUTHCONN_8 ; $8
+DEF NUM_SOUTH_CONNECTIONS EQU const_value - 1
 
 ; east connections
 	const_def 1
@@ -221,3 +224,4 @@ DEF DAYNIGHT_TRANSITION_STEPS EQU 32
 	const EASTCONN_6 ; $6
 	const EASTCONN_7 ; $7
 	const EASTCONN_8 ; $8
+DEF NUM_EAST_CONNECTIONS EQU const_value - 1

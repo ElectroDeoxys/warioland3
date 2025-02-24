@@ -601,7 +601,7 @@ Func_803e6:
 	ld a, [wMapSideLevelID]
 	cp OW_EXITS
 	ret nc
-	jp Func_15dc
+	jp SaveGameOrEnterPerfectScreen
 
 InitOverworld:
 	ld a, BANK("WRAM2")
@@ -782,7 +782,7 @@ Func_80540:
 	call Func_82bb8
 	call Func_82bda
 	farcall Func_b4a37
-	call AddCompassSprite
+	call LoadCompassSprite
 	call ClearUnusedVirtualOAM
 	ret
 
@@ -848,7 +848,7 @@ InitMapSide:
 
 Func_805d7:
 	call Func_80e89
-	call AddCompassSprite
+	call LoadCompassSprite
 	call ClearUnusedVirtualOAM
 	ret
 
@@ -2987,7 +2987,7 @@ Func_81714:
 	ld l, a
 	ld de, OAM_aa0cf
 	ld b, BANK(OAM_aa0cf)
-	call AddOWSpriteWithScroll
+	call LoadOWSpriteWithScroll
 	ret
 
 .framesets
@@ -4764,11 +4764,11 @@ SetCompassSprite:
 Data_82026:
 	db $14, $14, $14, $14, $14, $14
 
-AddCompassSprite:
+LoadCompassSprite:
 	ld hl, wCompassObj
 	ld de, OAM_aa580
 	ld b, BANK(OAM_aa580)
-	call AddOWSpriteWithScroll
+	call LoadOWSpriteWithScroll
 	ret
 
 PlaySFX_12A:
@@ -4837,7 +4837,7 @@ Func_8208d:
 	ld e, a
 	ld hl, w2d100
 	ld b, $2a
-	call AddOWSpriteWithScroll
+	call LoadOWSpriteWithScroll
 	ret
 
 ; input:
@@ -5534,7 +5534,7 @@ Func_824f1:
 	ld b, BANK(OAM_a9fe2)
 	ld de, OAM_a9fe2
 	ld hl, wOWUIObj1
-	call AddOWSpriteWithScroll
+	call LoadOWSpriteWithScroll
 	ret
 
 Func_8250a:
@@ -5546,7 +5546,7 @@ Func_8250a:
 	ld b, BANK(OAM_a9fe2)
 	ld de, OAM_a9fe2
 	ld hl, wOWUIObj2
-	call AddOWSpriteWithScroll
+	call LoadOWSpriteWithScroll
 	ret
 
 Func_82521:
@@ -6192,7 +6192,7 @@ DrawBottomBar:
 	ld c, $00
 .has_grey
 	ld d, $20
-	call AddSpriteInsideWindow_Low
+	call LoadSpriteInsideWindow_Low
 
 	ld a, [wLevelRedTreasurePal]
 	ld c, a
@@ -6204,7 +6204,7 @@ DrawBottomBar:
 	ld c, $00
 .has_red
 	ld d, $3c
-	call AddSpriteInsideWindow_Low
+	call LoadSpriteInsideWindow_Low
 
 	ld a, [wLevelGreenTreasurePal]
 	ld c, a
@@ -6216,7 +6216,7 @@ DrawBottomBar:
 	ld c, $00
 .has_green
 	ld d, $58
-	call AddSpriteInsideWindow_Low
+	call LoadSpriteInsideWindow_Low
 
 	ld a, [wLevelBlueTreasurePal]
 	ld c, a
@@ -6228,17 +6228,17 @@ DrawBottomBar:
 	ld c, $00
 .has_blue
 	ld d, $74
-	call AddSpriteInsideWindow_Low
+	call LoadSpriteInsideWindow_Low
 
 	call DrawBottomBarButtonPrompt
 	call DrawBottomBar8Coin
 	ret
 
-AddSpriteInsideWindow_High:
+LoadSpriteInsideWindow_High:
 	ld b, $20
-	jr AddSpriteInsideWindow
+	jr LoadSpriteInsideWindow
 
-AddSpriteInsideWindow_Low:
+LoadSpriteInsideWindow_Low:
 	ld b, $24
 ;	fallthrough
 
@@ -6246,7 +6246,7 @@ AddSpriteInsideWindow_Low:
 ; d = x coord
 ; e = tile ID
 ; c = attributes
-AddSpriteInsideWindow:
+LoadSpriteInsideWindow:
 	ld a, [wWY]
 	add b
 	ld [wCurSpriteYCoord], a
@@ -6259,7 +6259,7 @@ AddSpriteInsideWindow:
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_aa0cf
 	ld b, BANK(OAM_aa0cf)
-	call AddOWSpriteWithScroll_GotParams
+	call LoadOWSpriteWithScroll_GotParams
 	ret
 
 DrawBottomBar8Coin:
@@ -6275,7 +6275,7 @@ DrawBottomBar8Coin:
 	ld a, [hli]
 	ld e, a
 	ld c, $00
-	jr AddSpriteInsideWindow_Low
+	jr LoadSpriteInsideWindow_Low
 
 DrawBottomBarButtonPrompt:
 	ld a, [wHasMagnifyingGlass]
@@ -6306,7 +6306,7 @@ DrawBottomBarButtonPrompt:
 	ld [wCurSpriteAttributes], a
 	ld hl, OAM_aa580
 	ld b, BANK(OAM_aa580)
-	call AddOWSpriteWithScroll_GotParams
+	call LoadOWSpriteWithScroll_GotParams
 	ret
 
 Func_82997:
@@ -6323,14 +6323,14 @@ Func_829a1:
 	ld e, a
 	ld c, $00
 	ld d, $50
-	call AddSpriteInsideWindow_High
+	call LoadSpriteInsideWindow_High
 	ld a, [w2d0ee]
 	and $0f ; bottom nybble
 	add $1e
 	ld e, a
 	ld c, $00
 	ld d, $58
-	call AddSpriteInsideWindow_High
+	call LoadSpriteInsideWindow_High
 	ld a, [w2d0ef]
 	and $f0
 	swap a ; top nybble
@@ -6338,14 +6338,14 @@ Func_829a1:
 	ld e, a
 	ld c, $00
 	ld d, $68
-	call AddSpriteInsideWindow_High
+	call LoadSpriteInsideWindow_High
 	ld a, [w2d0ef]
 	and $0f ; bottom nybbles
 	add $1e
 	ld e, a
 	ld c, $00
 	ld d, $70
-	call AddSpriteInsideWindow_High
+	call LoadSpriteInsideWindow_High
 	ret
 
 UnlockLevel:
@@ -6615,7 +6615,7 @@ Func_82bb8:
 	ld hl, wCurSceneObj
 	ld de, OAM_aa445
 	ld b, BANK(OAM_aa445)
-	call AddOWSpriteWithScroll
+	call LoadOWSpriteWithScroll
 	ret
 
 Func_82bda:
@@ -6635,7 +6635,7 @@ Func_82bda:
 	ld hl, wCurSceneObj
 	ld de, OAM_aa445
 	ld b, BANK(OAM_aa445)
-	call AddOWSpriteWithScroll
+	call LoadOWSpriteWithScroll
 	ret
 .asm_82c03
 	ld hl, wCurSceneObjState

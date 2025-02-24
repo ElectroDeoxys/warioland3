@@ -17,7 +17,7 @@ NoPowerUpActionHelp:
 	ld a, [wObjAnimWasReset]
 	ld [wMenuObj5AnimationEnded], a
 	ld hl, wMenuObj5
-	farcall AddActionHelpSprite_Far
+	farcall LoadActionHelpSprite_Far
 
 	ld hl, wMenuObj4FramesetPtr + 1
 	ld a, [wMenuObj4FramesetBank]
@@ -33,9 +33,9 @@ NoPowerUpActionHelp:
 
 .action_help_frozen
 	ld hl, wMenuObj4
-	farcall AddActionHelpSprite_Far
+	farcall LoadActionHelpSprite_Far
 	ld hl, wActionHelpWario
-	farcall AddActionHelpWarioSprite
+	farcall LoadActionHelpWarioSprite
 .done
 	ret
 

@@ -139,7 +139,7 @@ InitActionHelp:
 	farcall $79, UpdateObjAnim
 
 	ld hl, wMenuObj3
-	farcall AddActionHelpSprite
+	farcall LoadActionHelpSprite
 
 	ld a, [wPowerUpLevel]
 	and ACTION_HELP_TITLE_SCREEN
@@ -233,20 +233,20 @@ UpdateActionHelp:
 	ld hl, wMenuObj1FramesetPtr + 1
 	farcall $79, UpdateObjAnim
 	ld hl, wMenuObj1
-	farcall AddActionHelpSprite
+	farcall LoadActionHelpSprite
 
 .update_input_anim
 	; d-pad animation
 	ld hl, wMenuObj2FramesetPtr + 1
 	farcall $79, UpdateObjAnim
 	ld hl, wMenuObj2
-	farcall AddActionHelpSprite
+	farcall LoadActionHelpSprite
 
 	; buttons animation
 	ld hl, wMenuObj3FramesetPtr + 1
 	farcall $79, UpdateObjAnim
 	ld hl, wMenuObj3
-	farcall AddActionHelpSprite
+	farcall LoadActionHelpSprite
 
 	call ClearUnusedVirtualOAM
 	ret
