@@ -19,7 +19,7 @@
 	CHARMAP "そ",         $8e
 	CHARMAP "た",         $8f
 	CHARMAP "ち",         $90
-	CHARMAP "っ",         $91
+	CHARMAP "つ",         $91
 	CHARMAP "て",         $92
 	CHARMAP "と",         $93
 	CHARMAP "な",         $94

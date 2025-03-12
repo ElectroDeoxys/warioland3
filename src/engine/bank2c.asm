@@ -69,7 +69,7 @@ BGMap_b34c3:
 INCBIN "gfx/bgmaps/map_b34c3.bin.rle"
 
 TextJP_HiddenFigureAreYouAware:
-INCBIN "gfx/bgmaps/map_b3675.bin.rle"
+INCBIN "text/text_b3675.bin.rle"
 
 ; unreferenced
 BGMap_b37e6:
