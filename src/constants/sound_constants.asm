@@ -110,7 +110,7 @@ DEF NUM_MUSICS EQU const_value - 1
 	const SFX_FULLY_CHARGED_THROW          ; 12d
 	const SFX_02E                          ; 12e
 	const SFX_SWITCH                       ; 12f
-	const SFX_PIPE_ENTER                         ; 130
+	const SFX_PIPE_ENTER                   ; 130
 	const SFX_MUSICAL_COIN                 ; 131
 	const SFX_KEY                          ; 132
 	const SFX_GROUND_POUND                 ; 133
@@ -287,7 +287,7 @@ DEF NUM_MUSICS EQU const_value - 1
 	const SFX_0DE                          ; 1de (unused)
 	const SFX_0DF                          ; 1df (unused)
 	const SFX_0E0                          ; 1e0 (unused)
-	const SFX_PIPE_EXIT                          ; 1e1
+	const SFX_PIPE_EXIT                    ; 1e1
 	const SFX_0E2                          ; 1e2
 	const SFX_SELECTION                    ; 1e3
 	const SFX_0E4                          ; 1e4

@@ -373,9 +373,9 @@ _PlaySFX::
 .asm_30211
 	call SetSFXChannels
 	ld a, $1
-	ld [w3d03b], a
+	ld [wSoundEngineParam4], a
 	xor a
-	ld [w3d03a], a
+	ld [wSoundEngineParam3], a
 .loop_2
 	ld a, [wCurChannelPtr + 0]
 	ld l, a
@@ -385,25 +385,25 @@ _PlaySFX::
 	jr nz, .active_ch
 	call LoadChannelWithSound
 	jr z, .done_2
-	ld a, [w3d03b]
+	ld a, [wSoundEngineParam4]
 	ld b, a
-	ld a, [w3d03a]
+	ld a, [wSoundEngineParam3]
 	or b
-	ld [w3d03a], a
+	ld [wSoundEngineParam3], a
 .active_ch
-	ld a, [w3d03b]
+	ld a, [wSoundEngineParam4]
 	sla a
-	ld [w3d03b], a
+	ld [wSoundEngineParam4], a
 	call NextChannel
 	jr nz, .loop_2
 
 	call SetSFXChannels
 	ld a, $1
-	ld [w3d03b], a
+	ld [wSoundEngineParam4], a
 .loop_3
-	ld a, [w3d03b]
+	ld a, [wSoundEngineParam4]
 	ld b, a
-	ld a, [w3d03a]
+	ld a, [wSoundEngineParam3]
 	and b
 	jr nz, .asm_3026f
 
@@ -419,9 +419,9 @@ _PlaySFX::
 	call LoadChannelWithSound
 	jr z, .done_2
 .asm_3026f
-	ld a, [w3d03b]
+	ld a, [wSoundEngineParam4]
 	sla a
-	ld [w3d03b], a
+	ld [wSoundEngineParam4], a
 	call NextChannel
 	jr nz, .loop_3
 
@@ -823,24 +823,25 @@ Func_3049e::
 	call Func_304a4
 	jp ReturnFromAudioJump
 
-; bc = parameters
-; d = ?
-; e = ?
+; wSoundEngineParam1 <- c
+; wSoundEngineParam2 <- b
+; wSoundEngineParam3 <- e
+; wSoundEngineParam4 <- d
 Func_304a4:
 	; return if a >= $7
 	cp $7
 	ret nc
 
 	push af
-	ld hl, wCurSoundID
+	ld hl, wSoundEngineParams
 	ld a, c
-	ld [hli], a
+	ld [hli], a ; wSoundEngineParam1
 	ld a, b
-	ld [hli], a
+	ld [hli], a ; wSoundEngineParam2
 	ld a, e
-	ld [hli], a ; w3d03a
+	ld [hli], a ; wSoundEngineParam3
 	ld a, d
-	ld [hli], a ; w3d03b
+	ld [hli], a ; wSoundEngineParam4
 	xor a
 	ld [hl], a ; wNumChannels
 	pop af
@@ -860,7 +861,7 @@ Func_304bc:
 	ld [hl], a
 	push hl
 	add hl, bc
-	ld a, [wCurSoundID + 1]
+	ld a, [wSoundEngineParam2]
 	ld [hl], a
 	pop hl
 .next_ch
@@ -880,9 +881,9 @@ Func_304d9:
 	ld [hl], a
 	push hl
 	add hl, bc
-	ld a, [wCurSoundID + 0]
+	ld a, [wSoundEngineParam1]
 	ld [hli], a
-	ld a, [wCurSoundID + 1]
+	ld a, [wSoundEngineParam2]
 	ld [hld], a
 	pop hl
 .next_ch
@@ -891,14 +892,14 @@ Func_304d9:
 	ret
 
 ; output:
-; - d = (w3d03a low nibble << 4) | w3d03b low nibble
+; - d = (wSoundEngineParam3 low nibble << 4) | wSoundEngineParam4 low nibble
 ; - e = NUM_CHANNELS
 ; - hl = wChannels
 Func_304fa:
-	ld a, [w3d03b]
+	ld a, [wSoundEngineParam4]
 	and $0f
 	ld d, a ; low nibble
-	ld a, [w3d03a]
+	ld a, [wSoundEngineParam3]
 	swap a
 	and $f0
 	or d
@@ -1447,19 +1448,19 @@ Func_307e4:
 	ret
 
 Func_30802:
-	ld a, [w3d03b]
+	ld a, [wSoundEngineParam4]
 	and a
 	jr z, .asm_30812
 	ld hl, w3d006
-	ld a, [wCurSoundID + 1]
+	ld a, [wSoundEngineParam2]
 	ld [hld], a
 	call Func_307e4
 .asm_30812
-	ld a, [w3d03a]
+	ld a, [wSoundEngineParam3]
 	and a
 	jr z, .asm_30822
 	ld hl, w3d00b
-	ld a, [wCurSoundID + 1]
+	ld a, [wSoundEngineParam2]
 	ld [hld], a
 	call Func_307e4
 .asm_30822
@@ -1620,17 +1621,17 @@ AudioCmd_SetVibratoSpeed:
 	jp DoAudioCommand
 
 Func_308f1:
-	ld a, [wCurSoundID + 1]
+	ld a, [wSoundEngineParam2]
 	sla a
 	jr z, .asm_308fe
 	ld bc, CHANNEL_VIBRATO_SPEED
 	jp Func_304bc
 .asm_308fe
 	rra
-	ld [wCurSoundID + 0], a
+	ld [wSoundEngineParam1], a
 	rra
 	xor $40
-	ld [wCurSoundID + 1], a
+	ld [wSoundEngineParam2], a
 	ld bc, CHANNEL_VIBRATO_SPEED
 	jp Func_304d9
 
@@ -1888,8 +1889,8 @@ Func_30a1f:
 	ld bc, CHANNEL_SEMITONE_OFFSET - CHANNEL_PITCH
 	add hl, bc
 	add [hl] ; add pitch offset
-	ld [w3d03a], a
-	ld [w3d03b], a
+	ld [wSoundEngineParam3], a
+	ld [wSoundEngineParam4], a
 	ld bc, CHANNEL_VIBRATO_DELAY - CHANNEL_SEMITONE_OFFSET
 	add hl, bc
 	ld a, [hli]
@@ -1903,7 +1904,7 @@ Func_30a1f:
 	push hl
 	ld e, l
 	ld d, h
-	ld a, [w3d03a]
+	ld a, [wSoundEngineParam3]
 	add $4
 	call GetWave
 	ld a, [hli]
@@ -1921,7 +1922,7 @@ Func_30a1f:
 	ld a, [hli]
 	ld [de], a ; CHANNEL_FADE_OUT_ENVELOPE
 	ld a, [hl]
-	ld [w3d03b], a
+	ld [wSoundEngineParam4], a
 	pop hl
 .asm_30aa5
 
@@ -1957,7 +1958,7 @@ Func_30a1f:
 	jr z, .asm_30ad0
 	set 7, a
 .asm_30ad0
-	ld [wCurSoundID + 1], a
+	ld [wTempTrackUnk02], a
 	ld e, a
 	ld a, [wCurChannelPtr + 0]
 	ld l, a
@@ -1966,7 +1967,7 @@ Func_30a1f:
 	ld bc, CHANNEL_PRIORITY
 	add hl, bc
 	ld a, [hl]
-	ld [wCurSoundID + 0], a
+	ld [wTempTrackPriority], a
 	ld d, a
 
 	ld a, [wCurTrackPtr + 0]
@@ -2002,11 +2003,11 @@ Func_30a1f:
 
 	ld a, TRACKFLAGS_4 | TRACKFLAGS_5 | TRACKFLAGS_6 | TRACKFLAGS_7
 	ld [hli], a ; TRACK_FLAGS
-	ld a, [wCurSoundID + 0]
+	ld a, [wTempTrackPriority]
 	ld [hli], a ; TRACK_PRIORITY
-	ld a, [wCurSoundID + 1]
+	ld a, [wTempTrackUnk02]
 	ld [hli], a ; TRACK_UNK02
-	ld a, [w3d03a]
+	ld a, [wSoundEngineParam3]
 	ld [hli], a ; TRACK_UNK03
 	ld a, e
 	ld [hli], a ; TRACK_CHANNEL_PTR
@@ -2040,7 +2041,7 @@ Func_30a1f:
 	ld [hli], a ; TRACK_FADE_OUT_ENVELOPE
 	xor a
 	ld [hli], a ; TRACK_UNK0D
-	ld a, [w3d03b]
+	ld a, [wSoundEngineParam4]
 	ld [hl], a ; TRACK_UNK0E
 .skip
 	pop de
@@ -2065,7 +2066,7 @@ Func_30b4d:
 	ld bc, CHANNEL_SEMITONE_OFFSET - CHANNEL_PITCH
 	add hl, bc
 	add [hl]
-	ld [w3d03a], a
+	ld [wSoundEngineParam3], a
 
 	push de
 	call SetAllTracks
@@ -2076,7 +2077,7 @@ Func_30b4d:
 	set 7, a
 .asm_30b7f
 	ld e, a
-	ld a, [w3d03a]
+	ld a, [wSoundEngineParam3]
 	ld d, a
 
 .loop_tracks

@@ -2416,14 +2416,19 @@ wSoundBank::
 
 	ds $11
 
+UNION
 wCurSoundID::
 	ds $2
-
-w3d03a::
-	db
-
-w3d03b::
-	db
+NEXTU
+wSoundEngineParams::
+wSoundEngineParam1:: db
+wSoundEngineParam2:: db
+wSoundEngineParam3:: db
+wSoundEngineParam4:: db
+NEXTU
+wTempTrackPriority:: db
+wTempTrackUnk02::    db
+ENDU
 
 wNumChannels::
 	db
