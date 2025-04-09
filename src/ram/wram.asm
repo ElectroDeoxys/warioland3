@@ -1,5 +1,3 @@
-INCLUDE "vram.asm"
-
 SECTION "WRAM0", WRAM0
 
 wTempPals1:: ds 8 palettes
