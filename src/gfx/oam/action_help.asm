@@ -201,98 +201,98 @@ OAM_1e697c:
 	db $80
 
 Frameset_1e6b64:
-	db $00,  4
+	db   0,  4
 	db $ff
 
 Frameset_1e6b67:
-	db $01,  4
+	db   1,  4
 	db $ff
 
 Frameset_1e6b6a:
-	db $02,  4
+	db   2,  4
 	db $ff
 
 Frameset_1e6b6d:
-	db $03,  4
+	db   3,  4
 	db $ff
 
 Frameset_1e6b70:
-	db $04,  4
+	db   4,  4
 	db $ff
 
 Frameset_1e6b73:
-	db $05,  4
+	db   5,  4
 	db $ff
 
 Frameset_1e6b76:
-	db $06,  4
+	db   6,  4
 	db $ff
 
 Frameset_1e6b79:
-	db $07,  4
+	db   7,  4
 	db $ff
 
 Frameset_1e6b7c:
-	db $08,  4
+	db   8,  4
 	db $ff
 
 Frameset_1e6b7f:
-	db $09,  4
+	db   9,  4
 	db $ff
 
 Frameset_1e6b82:
-	db $0a,  4
+	db  10,  4
 	db $ff
 
 Frameset_1e6b85:
-	db $0b,  4
+	db  11,  4
 	db $ff
 
 Frameset_1e6b88:
-	db $0c,  4
+	db  12,  4
 	db $ff
 
 Frameset_1e6b8b:
-	db $0d,  4
+	db  13,  4
 	db $ff
 
 Frameset_1e6b8e:
-	db $0e, 10
-	db $0f, 10
+	db  14, 10
+	db  15, 10
 	db $ff
 
 Frameset_1e6b93:
-	db $10,  4
+	db  16,  4
 	db $ff
 
 Frameset_1e6b96:
-	db $11,  4
+	db  17,  4
 	db $ff
 
 Frameset_1e6b99:
-	db $12,  4
+	db  18,  4
 	db $ff
 
 Frameset_1e6b9c:
-	db $13,  4
+	db  19,  4
 	db $ff
 
 ; unreferenced
 ; L shaped cracked blocks
 Frameset_1e6b9f:
-	db $14,  4
+	db  20,  4
 	db $ff
 
 Frameset_1e6ba2:
-	db $15,  4
+	db  21,  4
 	db $ff
 
 Frameset_1e6ba5:
-	db $16,  4
+	db  22,  4
 	db $ff
 
 Frameset_1e6ba8:
-	db $17,  4
+	db  23,  4
 	db $ff
 
 OAM_1e6bab:
@@ -632,77 +632,77 @@ OAM_1e6bab:
 	db $80
 
 Frameset_1e6f36:
-	db $00,  8
-	db $01, 12
-	db $02,  8
-	db $03, 12
+	db   0,  8
+	db   1, 12
+	db   2,  8
+	db   3, 12
 	db $ff
 
 Frameset_1e6f3f:
-	db $04,  3
-	db $05,  3
-	db $06,  3
-	db $07,  3
+	db   4,  3
+	db   5,  3
+	db   6,  3
+	db   7,  3
 	db $ff
 
 Frameset_1e6f48:
-	db $08,  8
-	db $09,  8
+	db   8,  8
+	db   9,  8
 	db $ff
 
 Frameset_1e6f4d:
-	db $0a, 10
-	db $0b, 10
+	db  10, 10
+	db  11, 10
 	db $ff
 
 ; unreferenced
 ; Count Richtertoffen with eyes closed
 Frameset_1e6f52:
-	db $0c,  4
+	db  12,  4
 	db $ff
 
 Frameset_1e6f55:
-	db $0d, 12
-	db $0e, 12
-	db $0f, 12
-	db $10, 12
+	db  13, 12
+	db  14, 12
+	db  15, 12
+	db  16, 12
 	db $ff
 
 Frameset_1e6f5e:
-	db $11, 12
-	db $0f, 12
+	db  17, 12
+	db  15, 12
 	db $ff
 
 ; unreferenced
 ; Count Richtertoffen with eyes open
 Frameset_1e6f63:
-	db $12,  4
+	db  18,  4
 	db $ff
 
 Frameset_1e6f66:
-	db $14, 24
-	db $13, 24
+	db  20, 24
+	db  19, 24
 	db $ff
 
 Frameset_1e6f6b:
-	db $15,  8
-	db $1d,  4
-	db $1e,  4
-	db $16,  8
-	db $1f,  4
-	db $20,  4
+	db  21,  8
+	db  29,  4
+	db  30,  4
+	db  22,  8
+	db  31,  4
+	db  32,  4
 	db $ff
 
 Frameset_1e6f78:
-	db $17, 40
-	db $18, 40
+	db  23, 40
+	db  24, 40
 	db $ff
 
 Frameset_1e6f7d:
-	db $19,  6
-	db $1a,  4
-	db $1b,  4
-	db $1c,  6
+	db  25,  6
+	db  26,  4
+	db  27,  4
+	db  28,  6
 	db $ff
 
 OAM_1e6f86:
@@ -736,15 +736,15 @@ OAM_1e6f86:
 	db $80
 
 Frameset_1e6fc2:
-	db $00,  3
-	db $01,  3
-	db $02,  4
-	db $03,  3
+	db   0,  3
+	db   1,  3
+	db   2,  4
+	db   3,  3
 	db $ff
 
 Frameset_1e6fcb:
-	db $00,  3
-	db $03,  3
-	db $02,  4
-	db $01,  3
+	db   0,  3
+	db   3,  3
+	db   2,  4
+	db   1,  3
 	db $ff

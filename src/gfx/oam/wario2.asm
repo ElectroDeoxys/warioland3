@@ -240,69 +240,69 @@ OAM_1fc000::
 	db $80
 
 Frameset_1fc2ab::
-	db $00, 30
-	db $01, 18
-	db $00,  4
-	db $01,  3
-	db $00,  4
-	db $01,  3
-	db $00,  4
-	db $01,  3
-	db $00,  4
-	db $01,  3
-	db $00,  4
-	db $01,  3
+	db   0, 30
+	db   1, 18
+	db   0,  4
+	db   1,  3
+	db   0,  4
+	db   1,  3
+	db   0,  4
+	db   1,  3
+	db   0,  4
+	db   1,  3
+	db   0,  4
+	db   1,  3
 	db $ff
 
 Frameset_1fc2c4::
-	db $06, 10
-	db $05,  3
-	db $04,  8
-	db $05,  3
-	db $06,  6
-	db $07,  3
-	db $08,  8
-	db $07,  3
-	db $06, 30
-	db $09, 14
-	db $13,  8
-	db $0d,  8
-	db $0a,  5
-	db $0b,  5
-	db $0a,  5
-	db $0b,  5
-	db $09,  5
-	db $0a,  5
-	db $0b,  5
-	db $0a,  5
-	db $0b,  5
-	db $09,  5
-	db $0a,  5
-	db $0b,  5
-	db $0a,  6
-	db $0b,  8
-	db $0c,  2
-	db $0f,  2
-	db $11,  6
-	db $12,  3
-	db $11,  6
-	db $12,  3
-	db $14, 30
-	db $13, 30
-	db $0e,  8
-	db $06,  1
+	db   6, 10
+	db   5,  3
+	db   4,  8
+	db   5,  3
+	db   6,  6
+	db   7,  3
+	db   8,  8
+	db   7,  3
+	db   6, 30
+	db   9, 14
+	db  19,  8
+	db  13,  8
+	db  10,  5
+	db  11,  5
+	db  10,  5
+	db  11,  5
+	db   9,  5
+	db  10,  5
+	db  11,  5
+	db  10,  5
+	db  11,  5
+	db   9,  5
+	db  10,  5
+	db  11,  5
+	db  10,  6
+	db  11,  8
+	db  12,  2
+	db  15,  2
+	db  17,  6
+	db  18,  3
+	db  17,  6
+	db  18,  3
+	db  20, 30
+	db  19, 30
+	db  14,  8
+	db   6,  1
 	db $ff
 
 Frameset_1fc30d::
-	db $00, 60
-	db $01,  8
-	db $02,  8
-	db $10,  1
+	db   0, 60
+	db   1,  8
+	db   2,  8
+	db  16,  1
 	db $ff
 
 Frameset_1fc316::
-	db $00, 20
-	db $01, 20
+	db   0, 20
+	db   1, 20
 	db $ff
 
 OAM_1fc31b::
@@ -412,69 +412,69 @@ OAM_1fc31b::
 	db $80
 
 Frameset_1fc439::
-	db $02,  2
-	db $01,  1
-	db $00,  1
-	db $09,  1
-	db $08,  1
-	db $07,  2
+	db   2,  2
+	db   1,  1
+	db   0,  1
+	db   9,  1
+	db   8,  1
+	db   7,  2
 	db $ff
 
 Frameset_1fc446::
-	db $02,  2
-	db $03,  1
-	db $04,  1
-	db $05,  1
-	db $06,  1
-	db $07,  2
+	db   2,  2
+	db   3,  1
+	db   4,  1
+	db   5,  1
+	db   6,  1
+	db   7,  2
 	db $ff
 
 Frameset_1fc453::
-	db $07,  4
-	db $08,  2
-	db $09,  4
+	db   7,  4
+	db   8,  2
+	db   9,  4
 	db $ff
 
 Frameset_1fc45a::
-	db $07,  4
-	db $06,  2
-	db $05,  4
+	db   7,  4
+	db   6,  2
+	db   5,  4
 	db $ff
 
 Frameset_1fc461::
-	db $09,  2
-	db $00,  1
-	db $01,  1
-	db $02,  2
+	db   9,  2
+	db   0,  1
+	db   1,  1
+	db   2,  2
 	db $ff
 
 Frameset_1fc46a::
-	db $05,  2
-	db $04,  1
-	db $03,  1
-	db $02,  2
+	db   5,  2
+	db   4,  1
+	db   3,  1
+	db   2,  2
 	db $ff
 
 Frameset_1fc473::
-	db $02,  2
-	db $03,  1
-	db $04,  1
-	db $05,  2
+	db   2,  2
+	db   3,  1
+	db   4,  1
+	db   5,  2
 	db $ff
 
 Frameset_1fc47c::
-	db $02,  2
-	db $01,  1
-	db $00,  1
-	db $09,  2
+	db   2,  2
+	db   1,  1
+	db   0,  1
+	db   9,  2
 	db $ff
 
 Frameset_1fc485::
-	db $09,  4
+	db   9,  4
 	db $ff
 
 Frameset_1fc488::
-	db $05,  4
+	db   5,  4
 	db $ff
 
 OAM_1fc48b::
@@ -882,177 +882,177 @@ OAM_1fc48b::
 	db $80
 
 Frameset_1fc870::
-	db $01,  9
-	db $02, 15
-	db $03, 12
-	db $00, 11
+	db   1,  9
+	db   2, 15
+	db   3, 12
+	db   0, 11
 	db $ff
 
 Frameset_1fc879::
-	db $05,  9
-	db $06, 15
-	db $07, 12
-	db $04, 11
+	db   5,  9
+	db   6, 15
+	db   7, 12
+	db   4, 11
 	db $ff
 
 Frameset_1fc882::
-	db $08, 12
-	db $09, 12
-	db $0a, 12
-	db $0b, 12
+	db   8, 12
+	db   9, 12
+	db  10, 12
+	db  11, 12
 	db $ff
 
 Frameset_1fc88b::
-	db $0c, 12
-	db $0d, 12
-	db $0e, 12
-	db $0f, 12
+	db  12, 12
+	db  13, 12
+	db  14, 12
+	db  15, 12
 	db $ff
 
 Frameset_1fc894::
-	db $00,  1
-	db $10,  8
-	db $11,  8
-	db $12,  8
+	db   0,  1
+	db  16,  8
+	db  17,  8
+	db  18,  8
 	db $ff
 
 Frameset_1fc89d::
-	db $04,  1
-	db $12,  8
-	db $11,  8
-	db $10,  8
+	db   4,  1
+	db  18,  8
+	db  17,  8
+	db  16,  8
 	db $ff
 
 Frameset_1fc8a6::
-	db $00,  6
-	db $01,  8
+	db   0,  6
+	db   1,  8
 	db $ff
 
 Frameset_1fc8ab::
-	db $04,  6
-	db $05,  8
+	db   4,  6
+	db   5,  8
 	db $ff
 
 Frameset_1fc8b0::
-	db $13,  4
+	db  19,  4
 	db $ff
 
 Frameset_1fc8b3::
-	db $14,  4
+	db  20,  4
 	db $ff
 
 Frameset_1fc8b6::
-	db $00,  4
+	db   0,  4
 	db $ff
 
 Frameset_1fc8b9::
-	db $04,  4
+	db   4,  4
 	db $ff
 
 Frameset_1fc8bc::
-	db $01,  7
-	db $15,  6
-	db $17,  2
-	db $16,  2
-	db $18,  2
-	db $19,  1
-	db $1a,  2
-	db $18,  3
-	db $1b,  5
-	db $1c,  5
-	db $1d,  5
-	db $1e,  5
+	db   1,  7
+	db  21,  6
+	db  23,  2
+	db  22,  2
+	db  24,  2
+	db  25,  1
+	db  26,  2
+	db  24,  3
+	db  27,  5
+	db  28,  5
+	db  29,  5
+	db  30,  5
 	db $ff
 
 Frameset_1fc8d5::
-	db $05,  7
-	db $20,  6
-	db $22,  2
-	db $21,  2
-	db $23,  2
-	db $24,  1
-	db $25,  2
-	db $23,  3
-	db $26,  5
-	db $27,  5
-	db $28,  5
-	db $29,  5
+	db   5,  7
+	db  32,  6
+	db  34,  2
+	db  33,  2
+	db  35,  2
+	db  36,  1
+	db  37,  2
+	db  35,  3
+	db  38,  5
+	db  39,  5
+	db  40,  5
+	db  41,  5
 	db $ff
 
 Frameset_1fc8ee::
-	db $1f,  2
-	db $2b,  2
-	db $1f,  2
-	db $2b,  3
-	db $1f,  2
-	db $2b,  3
-	db $16,  2
-	db $17,  4
-	db $15,  6
-	db $08,  5
-	db $09,  5
-	db $0a,  5
-	db $0b,  5
-	db $00, 10
+	db  31,  2
+	db  43,  2
+	db  31,  2
+	db  43,  3
+	db  31,  2
+	db  43,  3
+	db  22,  2
+	db  23,  4
+	db  21,  6
+	db   8,  5
+	db   9,  5
+	db  10,  5
+	db  11,  5
+	db   0, 10
 	db $ff
 
 Frameset_1fc90b::
-	db $2a,  2
-	db $2c,  2
-	db $2a,  2
-	db $2c,  3
-	db $2a,  2
-	db $2c,  3
-	db $21,  2
-	db $21,  4
-	db $20,  6
-	db $0c,  5
-	db $0d,  5
-	db $0e,  5
-	db $0f,  5
-	db $04, 10
+	db  42,  2
+	db  44,  2
+	db  42,  2
+	db  44,  3
+	db  42,  2
+	db  44,  3
+	db  33,  2
+	db  33,  4
+	db  32,  6
+	db  12,  5
+	db  13,  5
+	db  14,  5
+	db  15,  5
+	db   4, 10
 	db $ff
 
 Frameset_1fc928::
-	db $1f,  4
+	db  31,  4
 	db $ff
 
 Frameset_1fc92b::
-	db $2a,  4
+	db  42,  4
 	db $ff
 
 Frameset_1fc92e::
-	db $00,  1
-	db $09,  3
-	db $2d,  5
-	db $13,  2
-	db $0a,  3
-	db $08,  3
+	db   0,  1
+	db   9,  3
+	db  45,  5
+	db  19,  2
+	db  10,  3
+	db   8,  3
 	db $ff
 
 Frameset_1fc93b::
-	db $04,  1
-	db $0d,  3
-	db $2e,  5
-	db $14,  2
-	db $0e,  3
-	db $0c,  3
+	db   4,  1
+	db  13,  3
+	db  46,  5
+	db  20,  2
+	db  14,  3
+	db  12,  3
 	db $ff
 
 Frameset_1fc948::
-	db $01,  6
-	db $15,  4
-	db $17,  3
-	db $16,  4
-	db $15,  8
+	db   1,  6
+	db  21,  4
+	db  23,  3
+	db  22,  4
+	db  21,  8
 	db $ff
 
 Frameset_1fc953::
-	db $05,  6
-	db $20,  4
-	db $22,  3
-	db $21,  4
-	db $20,  8
+	db   5,  6
+	db  32,  4
+	db  34,  3
+	db  33,  4
+	db  32,  8
 	db $ff
 
 OAM_1fc95e::
@@ -1338,88 +1338,88 @@ OAM_1fc95e::
 	db $80
 
 Frameset_1fcc5f::
-	db $04,  1
-	db $03,  1
-	db $02,  1
-	db $01,  2
-	db $00,  7
-	db $01,  2
+	db   4,  1
+	db   3,  1
+	db   2,  1
+	db   1,  2
+	db   0,  7
+	db   1,  2
 	db $ff
 
 Frameset_1fcc6c::
-	db $02,  1
-	db $03,  1
-	db $04,  1
-	db $05,  2
+	db   2,  1
+	db   3,  1
+	db   4,  1
+	db   5,  2
 	db $ff
 
 Frameset_1fcc75::
-	db $06,  1
-	db $07,  1
-	db $08,  1
-	db $09,  2
-	db $0a,  7
-	db $09,  2
+	db   6,  1
+	db   7,  1
+	db   8,  1
+	db   9,  2
+	db  10,  7
+	db   9,  2
 	db $ff
 
 Frameset_1fcc82::
-	db $10,  4
+	db  16,  4
 	db $ff
 
 Frameset_1fcc85::
-	db $16,  1
-	db $17,  1
-	db $18,  1
-	db $19,  2
-	db $1a,  7
-	db $19,  2
-	db $18,  1
-	db $17,  1
-	db $16,  1
+	db  22,  1
+	db  23,  1
+	db  24,  1
+	db  25,  2
+	db  26,  7
+	db  25,  2
+	db  24,  1
+	db  23,  1
+	db  22,  1
 	db $ff
 
 Frameset_1fcc98::
-	db $10,  1
-	db $15,  4
-	db $14,  4
-	db $13,  6
-	db $11,  4
-	db $12,  3
+	db  16,  1
+	db  21,  4
+	db  20,  4
+	db  19,  6
+	db  17,  4
+	db  18,  3
 	db $ff
 
 Frameset_1fcca5::
-	db $10,  1
-	db $0f,  4
-	db $0e,  4
-	db $0d,  6
-	db $0b,  4
-	db $0c,  3
+	db  16,  1
+	db  15,  4
+	db  14,  4
+	db  13,  6
+	db  11,  4
+	db  12,  3
 	db $ff
 
 Frameset_1fccb2::
-	db $0b,  3
-	db $0c,  4
-	db $0d,  6
-	db $0e,  4
-	db $0f,  4
-	db $10,  1
+	db  11,  3
+	db  12,  4
+	db  13,  6
+	db  14,  4
+	db  15,  4
+	db  16,  1
 	db $ff
 
 Frameset_1fccbf::
-	db $11,  3
-	db $12,  4
-	db $13,  6
-	db $14,  4
-	db $15,  4
-	db $10,  1
+	db  17,  3
+	db  18,  4
+	db  19,  6
+	db  20,  4
+	db  21,  4
+	db  16,  1
 	db $ff
 
 ; unreferenced
 Frameset_1fcccc:
-	db $08,  2
-	db $07,  1
-	db $06,  1
-	db $05,  4
+	db   8,  2
+	db   7,  1
+	db   6,  1
+	db   5,  4
 	db $ff
 
 OAM_1fccd5::
@@ -1653,121 +1653,121 @@ OAM_1fccd5::
 	db $80
 
 Frameset_1fcf6e::
-	db $00,  3
-	db $01,  3
-	db $02,  3
-	db $03,  3
-	db $00,  3
-	db $01,  3
-	db $02,  3
-	db $03,  3
-	db $00,  3
-	db $04,  2
-	db $01,  3
-	db $05,  2
-	db $02,  3
-	db $06,  2
-	db $03,  3
-	db $07,  2
-	db $00,  3
-	db $04,  2
-	db $01,  3
-	db $05,  2
-	db $02,  3
-	db $06,  2
-	db $03,  3
-	db $07,  2
+	db   0,  3
+	db   1,  3
+	db   2,  3
+	db   3,  3
+	db   0,  3
+	db   1,  3
+	db   2,  3
+	db   3,  3
+	db   0,  3
+	db   4,  2
+	db   1,  3
+	db   5,  2
+	db   2,  3
+	db   6,  2
+	db   3,  3
+	db   7,  2
+	db   0,  3
+	db   4,  2
+	db   1,  3
+	db   5,  2
+	db   2,  3
+	db   6,  2
+	db   3,  3
+	db   7,  2
 	db $ff
 
 Frameset_1fcf9f::
-	db $09,  3
-	db $0a,  3
-	db $0b,  3
-	db $0c,  3
-	db $09,  3
-	db $0a,  3
-	db $0b,  3
-	db $0c,  3
-	db $09,  3
-	db $0d,  2
-	db $0a,  3
-	db $0e,  2
-	db $0b,  3
-	db $0f,  2
-	db $0c,  3
-	db $10,  2
-	db $09,  3
-	db $0d,  2
-	db $0a,  3
-	db $0e,  2
-	db $0b,  3
-	db $0f,  2
-	db $0c,  3
-	db $10,  2
+	db   9,  3
+	db  10,  3
+	db  11,  3
+	db  12,  3
+	db   9,  3
+	db  10,  3
+	db  11,  3
+	db  12,  3
+	db   9,  3
+	db  13,  2
+	db  10,  3
+	db  14,  2
+	db  11,  3
+	db  15,  2
+	db  12,  3
+	db  16,  2
+	db   9,  3
+	db  13,  2
+	db  10,  3
+	db  14,  2
+	db  11,  3
+	db  15,  2
+	db  12,  3
+	db  16,  2
 	db $ff
 
 Frameset_1fcfd0::
-	db $11,  3
-	db $08,  3
-	db $12,  3
+	db  17,  3
+	db   8,  3
+	db  18,  3
 	db $ff
 
 Frameset_1fcfd7::
-	db $12,  3
-	db $08,  3
-	db $11,  3
+	db  18,  3
+	db   8,  3
+	db  17,  3
 	db $ff
 
 ; unreferenced
 Frameset_1fcfde:
-	db $00,  3
-	db $04,  2
-	db $01,  3
-	db $05,  2
-	db $02,  3
-	db $06,  2
-	db $03,  3
-	db $07,  2
+	db   0,  3
+	db   4,  2
+	db   1,  3
+	db   5,  2
+	db   2,  3
+	db   6,  2
+	db   3,  3
+	db   7,  2
 	db $ff
 
 ; unreferenced
 Frameset_1fcfef:
-	db $09,  3
-	db $0d,  2
-	db $0a,  3
-	db $0e,  2
-	db $0b,  3
-	db $0f,  2
-	db $0c,  3
-	db $10,  2
+	db   9,  3
+	db  13,  2
+	db  10,  3
+	db  14,  2
+	db  11,  3
+	db  15,  2
+	db  12,  3
+	db  16,  2
 	db $ff
 
 ; unreferenced
 Frameset_1fd000:
-	db $09,  3
-	db $0a,  3
-	db $0b,  3
-	db $0c,  3
-	db $09,  3
-	db $0a,  3
-	db $0b,  3
-	db $0c,  3
-	db $09,  3
-	db $0d,  2
-	db $0a,  3
-	db $0e,  2
-	db $0b,  3
-	db $0f,  2
-	db $0c,  3
-	db $10,  2
-	db $09,  3
-	db $0d,  2
-	db $0a,  3
-	db $0e,  2
-	db $0b,  3
-	db $0f,  2
-	db $0c,  3
-	db $10,  2
+	db   9,  3
+	db  10,  3
+	db  11,  3
+	db  12,  3
+	db   9,  3
+	db  10,  3
+	db  11,  3
+	db  12,  3
+	db   9,  3
+	db  13,  2
+	db  10,  3
+	db  14,  2
+	db  11,  3
+	db  15,  2
+	db  12,  3
+	db  16,  2
+	db   9,  3
+	db  13,  2
+	db  10,  3
+	db  14,  2
+	db  11,  3
+	db  15,  2
+	db  12,  3
+	db  16,  2
 	db $ff
 
 OAM_1fd031::
@@ -2120,102 +2120,102 @@ OAM_1fd031::
 	db $80
 
 Frameset_1fd40a::
-	db $00,  1
-	db $01,  8
-	db $02,  8
-	db $03,  6
-	db $04,  6
-	db $05,  4
-	db $06,  4
-	db $07,  6
-	db $08,  7
-	db $09, 10
-	db $0a, 10
-	db $0b,  8
-	db $0c,  8
-	db $0d,  8
-	db $0e,  1
+	db   0,  1
+	db   1,  8
+	db   2,  8
+	db   3,  6
+	db   4,  6
+	db   5,  4
+	db   6,  4
+	db   7,  6
+	db   8,  7
+	db   9, 10
+	db  10, 10
+	db  11,  8
+	db  12,  8
+	db  13,  8
+	db  14,  1
 	db $ff
 
 ; unreferenced
 Frameset_1fd429:
-	db $0e,  4
+	db  14,  4
 	db $ff
 
 Frameset_1fd42c::
-	db $0e,  3
-	db $0f,  4
+	db  14,  3
+	db  15,  4
 	db $ff
 
 ; unreferenced
 Frameset_1fd431:
-	db $10,  4
+	db  16,  4
 	db $ff
 
 Frameset_1fd434::
-	db $10,  3
-	db $11,  4
+	db  16,  3
+	db  17,  4
 	db $ff
 
 Frameset_1fd439::
-	db $13,  4
-	db $14,  6
-	db $08,  7
-	db $09, 10
-	db $15, 10
-	db $0b,  2
-	db $16,  1
-	db $0b,  2
-	db $16,  1
-	db $0b,  2
-	db $16,  1
-	db $17,  6
-	db $18,  5
-	db $19,  3
-	db $02, 12
-	db $19, 10
-	db $00,  1
+	db  19,  4
+	db  20,  6
+	db   8,  7
+	db   9, 10
+	db  21, 10
+	db  11,  2
+	db  22,  1
+	db  11,  2
+	db  22,  1
+	db  11,  2
+	db  22,  1
+	db  23,  6
+	db  24,  5
+	db  25,  3
+	db   2, 12
+	db  25, 10
+	db   0,  1
 	db $ff
 
 ; unreferenced
 Frameset_1fd45c:
-	db $00,  4
+	db   0,  4
 	db $ff
 
 Frameset_1fd45f::
-	db $1a,  8
-	db $0e,  5
-	db $1b,  3
-	db $1a,  2
-	db $0e,  5
-	db $1b,  4
+	db  26,  8
+	db  14,  5
+	db  27,  3
+	db  26,  2
+	db  14,  5
+	db  27,  4
 	db $ff
 
 Frameset_1fd46c::
-	db $1c,  8
-	db $10,  5
-	db $1d,  3
-	db $1c,  2
-	db $10,  5
-	db $1d,  4
+	db  28,  8
+	db  16,  5
+	db  29,  3
+	db  28,  2
+	db  16,  5
+	db  29,  4
 	db $ff
 
 Frameset_1fd479::
-	db $00,  1
-	db $01,  8
-	db $02,  8
-	db $03,  6
-	db $04,  6
-	db $05,  4
-	db $06,  4
-	db $07,  6
-	db $08,  7
-	db $09, 10
-	db $0a, 10
-	db $0b,  8
-	db $0c,  8
-	db $1e,  8
-	db $10,  1
+	db   0,  1
+	db   1,  8
+	db   2,  8
+	db   3,  6
+	db   4,  6
+	db   5,  4
+	db   6,  4
+	db   7,  6
+	db   8,  7
+	db   9, 10
+	db  10, 10
+	db  11,  8
+	db  12,  8
+	db  30,  8
+	db  16,  1
 	db $ff
 
 OAM_1fd498::
@@ -2537,95 +2537,95 @@ OAM_1fd498::
 	db $80
 
 Frameset_1fd81c::
-	db $00,  6
-	db $01,  6
-	db $02,  6
-	db $03,  6
+	db   0,  6
+	db   1,  6
+	db   2,  6
+	db   3,  6
 	db $ff
 
 Frameset_1fd825::
-	db $07,  6
-	db $04,  6
-	db $05,  6
-	db $06,  6
+	db   7,  6
+	db   4,  6
+	db   5,  6
+	db   6,  6
 	db $ff
 
 Frameset_1fd82e::
-	db $0b,  6
-	db $08,  6
-	db $09,  6
-	db $0a,  6
+	db  11,  6
+	db   8,  6
+	db   9,  6
+	db  10,  6
 	db $ff
 
 ; unreferenced
 Frameset_1fd837:
-	db $00,  4
+	db   0,  4
 	db $ff
 
 Frameset_1fd83a::
-	db $0c,  2
-	db $00,  1
-	db $0d,  2
+	db  12,  2
+	db   0,  1
+	db  13,  2
 	db $ff
 
 Frameset_1fd841::
-	db $0d,  2
-	db $00,  1
-	db $0c,  2
+	db  13,  2
+	db   0,  1
+	db  12,  2
 	db $ff
 
 ; unreferenced
 Frameset_1fd848:
-	db $0e,  6
-	db $0f,  6
-	db $10,  6
-	db $11,  6
+	db  14,  6
+	db  15,  6
+	db  16,  6
+	db  17,  6
 	db $ff
 
 ; unreferenced
 Frameset_1fd851:
-	db $12,  6
-	db $13,  6
-	db $14,  6
-	db $15,  6
+	db  18,  6
+	db  19,  6
+	db  20,  6
+	db  21,  6
 	db $ff
 
 ; unreferenced
 Frameset_1fd85a:
-	db $16,  4
+	db  22,  4
 	db $ff
 
 ; unreferenced
 Frameset_1fd85d:
-	db $19,  4
+	db  25,  4
 	db $ff
 
 ; unreferenced
 Frameset_1fd860:
-	db $16,  4
-	db $17,  4
-	db $18,  6
-	db $17,  4
+	db  22,  4
+	db  23,  4
+	db  24,  6
+	db  23,  4
 	db $ff
 
 ; unreferenced
 Frameset_1fd869:
-	db $19,  4
-	db $1a,  4
-	db $1b,  6
-	db $1a,  4
+	db  25,  4
+	db  26,  4
+	db  27,  6
+	db  26,  4
 	db $ff
 
 ; unreferenced
 Frameset_1fd872:
-	db $00,  1
-	db $0c,  2
+	db   0,  1
+	db  12,  2
 	db $ff
 
 ; unreferenced
 Frameset_1fd877:
-	db $00,  1
-	db $0d,  2
+	db   0,  1
+	db  13,  2
 	db $ff
 
 OAM_1fd87c::
@@ -2855,38 +2855,38 @@ OAM_1fd87c::
 	db $80
 
 Frameset_1fdb2c::
-	db $00,  4
-	db $01,  4
-	db $02,  4
-	db $03,  4
-	db $04,  4
-	db $05,  4
-	db $06,  4
-	db $07,  4
-	db $08,  4
-	db $09,  4
-	db $0a,  4
-	db $0b,  4
-	db $0c,  4
-	db $0d,  4
-	db $0e,  4
-	db $0f,  4
-	db $00,  4
-	db $0f,  4
-	db $0e,  4
-	db $0d,  4
-	db $0c,  4
-	db $0b,  4
-	db $0a,  4
-	db $09,  4
-	db $08,  4
-	db $07,  4
-	db $06,  4
-	db $05,  4
-	db $04,  4
-	db $03,  4
-	db $02,  4
-	db $01,  4
+	db   0,  4
+	db   1,  4
+	db   2,  4
+	db   3,  4
+	db   4,  4
+	db   5,  4
+	db   6,  4
+	db   7,  4
+	db   8,  4
+	db   9,  4
+	db  10,  4
+	db  11,  4
+	db  12,  4
+	db  13,  4
+	db  14,  4
+	db  15,  4
+	db   0,  4
+	db  15,  4
+	db  14,  4
+	db  13,  4
+	db  12,  4
+	db  11,  4
+	db  10,  4
+	db   9,  4
+	db   8,  4
+	db   7,  4
+	db   6,  4
+	db   5,  4
+	db   4,  4
+	db   3,  4
+	db   2,  4
+	db   1,  4
 	db $ff
 
 OAM_1fdb6d::
@@ -3087,43 +3087,43 @@ OAM_1fdb6d::
 	db $80
 
 Frameset_1fdd82::
-	db $00,  2
-	db $01,  2
-	db $02,  2
-	db $03,  2
+	db   0,  2
+	db   1,  2
+	db   2,  2
+	db   3,  2
 	db $ff
 
 Frameset_1fdd8b::
-	db $05,  2
-	db $06,  2
-	db $07,  2
-	db $08,  2
+	db   5,  2
+	db   6,  2
+	db   7,  2
+	db   8,  2
 	db $ff
 
 Frameset_1fdd94::
-	db $04,  4
+	db   4,  4
 	db $ff
 
 Frameset_1fdd97::
-	db $09,  4
+	db   9,  4
 	db $ff
 
 Frameset_1fdd9a::
-	db $0d,  3
-	db $0b,  3
-	db $0d,  3
-	db $0a,  2
-	db $0c,  3
-	db $0e,  1
+	db  13,  3
+	db  11,  3
+	db  13,  3
+	db  10,  2
+	db  12,  3
+	db  14,  1
 	db $ff
 
 Frameset_1fdda7::
-	db $12,  3
-	db $10,  3
-	db $12,  3
-	db $0f,  2
-	db $11,  3
-	db $0e,  1
+	db  18,  3
+	db  16,  3
+	db  18,  3
+	db  15,  2
+	db  17,  3
+	db  14,  1
 	db $ff
 
 OAM_1fddb4::
@@ -4353,112 +4353,112 @@ OAM_1fddb4::
 	db $80
 
 Frameset_1fed53::
-	db $00,  2
-	db $01,  2
-	db $02,  2
-	db $03,  2
-	db $00,  2
-	db $01,  2
-	db $02,  2
-	db $03,  2
-	db $00,  2
-	db $01,  2
-	db $02,  2
-	db $03,  2
-	db $00,  2
-	db $01,  2
-	db $02,  2
-	db $03,  2
-	db $00,  2
-	db $01,  2
-	db $02,  2
-	db $03,  2
+	db   0,  2
+	db   1,  2
+	db   2,  2
+	db   3,  2
+	db   0,  2
+	db   1,  2
+	db   2,  2
+	db   3,  2
+	db   0,  2
+	db   1,  2
+	db   2,  2
+	db   3,  2
+	db   0,  2
+	db   1,  2
+	db   2,  2
+	db   3,  2
+	db   0,  2
+	db   1,  2
+	db   2,  2
+	db   3,  2
 	db $ff
 
 Frameset_1fed7c::
-	db $04,  5
-	db $05,  5
-	db $06,  5
-	db $07,  5
-	db $08,  5
-	db $09,  5
-	db $0a,  5
-	db $0b,  5
-	db $0c,  5
-	db $0d,  5
+	db   4,  5
+	db   5,  5
+	db   6,  5
+	db   7,  5
+	db   8,  5
+	db   9,  5
+	db  10,  5
+	db  11,  5
+	db  12,  5
+	db  13,  5
 	db $ff
 
 Frameset_1fed91::
-	db $0e,  5
-	db $0f,  5
-	db $10,  5
-	db $11,  5
-	db $12,  5
-	db $13,  5
-	db $14,  5
-	db $15,  5
-	db $16,  5
-	db $17,  5
+	db  14,  5
+	db  15,  5
+	db  16,  5
+	db  17,  5
+	db  18,  5
+	db  19,  5
+	db  20,  5
+	db  21,  5
+	db  22,  5
+	db  23,  5
 	db $ff
 
 Frameset_1feda6::
-	db $18,  3
-	db $19,  3
-	db $1a,  3
-	db $1b,  3
-	db $1c,  3
-	db $1d,  3
-	db $1e,  3
-	db $1f,  3
-	db $20,  3
-	db $21,  3
+	db  24,  3
+	db  25,  3
+	db  26,  3
+	db  27,  3
+	db  28,  3
+	db  29,  3
+	db  30,  3
+	db  31,  3
+	db  32,  3
+	db  33,  3
 	db $ff
 
 Frameset_1fedbb::
-	db $22,  3
-	db $23,  3
-	db $24,  3
-	db $25,  3
-	db $26,  3
-	db $27,  3
-	db $28,  3
-	db $29,  3
-	db $2a,  3
-	db $2b,  3
+	db  34,  3
+	db  35,  3
+	db  36,  3
+	db  37,  3
+	db  38,  3
+	db  39,  3
+	db  40,  3
+	db  41,  3
+	db  42,  3
+	db  43,  3
 	db $ff
 
 Frameset_1fedd0::
-	db $2e,  5
-	db $2f,  5
-	db $30,  5
-	db $31,  5
-	db $32,  5
-	db $33,  5
-	db $34,  5
-	db $35,  5
-	db $2c,  5
-	db $2d,  5
+	db  46,  5
+	db  47,  5
+	db  48,  5
+	db  49,  5
+	db  50,  5
+	db  51,  5
+	db  52,  5
+	db  53,  5
+	db  44,  5
+	db  45,  5
 	db $ff
 
 Frameset_1fede5::
-	db $38,  3
-	db $39,  3
-	db $3a,  3
-	db $3b,  3
-	db $41,  1
-	db $3c,  2
-	db $3d,  3
-	db $3e,  3
-	db $3f,  3
-	db $36,  3
-	db $40,  1
-	db $37,  2
+	db  56,  3
+	db  57,  3
+	db  58,  3
+	db  59,  3
+	db  65,  1
+	db  60,  2
+	db  61,  3
+	db  62,  3
+	db  63,  3
+	db  54,  3
+	db  64,  1
+	db  55,  2
 	db $ff
 
 Frameset_1fedfe::
-	db $42,  2
-	db $43,  3
-	db $44,  4
+	db  66,  2
+	db  67,  3
+	db  68,  4
 	db $ff
 
 OAM_1fee05::
@@ -4524,21 +4524,21 @@ OAM_1fee05::
 	db $80
 
 Frameset_1feeb4::
-	db $00,  4
-	db $01,  6
-	db $02,  4
-	db $01,  6
+	db   0,  4
+	db   1,  6
+	db   2,  4
+	db   1,  6
 	db $ff
 
 ; unreferenced
 Frameset_1feebd:
-	db $00,  1
-	db $03,  8
-	db $04,  8
+	db   0,  1
+	db   3,  8
+	db   4,  8
 	db $ff
 
 Frameset_1feec4::
-	db $01,  2
+	db   1,  2
 	db $ff
 
 OAM_1feec7::
@@ -5158,155 +5158,155 @@ OAM_1feec7::
 	db $80
 
 Frameset_1ff560::
-	db $00,  1
-	db $01,  1
-	db $02,  2
-	db $03,  5
-	db $04,  3
-	db $05,  2
-	db $06,  2
-	db $07,  2
-	db $08,  4
-	db $09,  4
-	db $08,  4
-	db $0a, 16
-	db $0b,  2
-	db $0c,  2
-	db $0a,  2
-	db $0b,  2
-	db $0c,  2
-	db $0a,  2
-	db $0b,  2
-	db $0c,  2
-	db $0a,  2
-	db $0b,  2
-	db $0c,  2
-	db $0d,  4
-	db $0e,  6
-	db $0f,  8
-	db $10,  6
-	db $11,  4
-	db $12,  4
-	db $13,  8
-	db $12,  4
-	db $11,  4
-	db $10,  6
+	db   0,  1
+	db   1,  1
+	db   2,  2
+	db   3,  5
+	db   4,  3
+	db   5,  2
+	db   6,  2
+	db   7,  2
+	db   8,  4
+	db   9,  4
+	db   8,  4
+	db  10, 16
+	db  11,  2
+	db  12,  2
+	db  10,  2
+	db  11,  2
+	db  12,  2
+	db  10,  2
+	db  11,  2
+	db  12,  2
+	db  10,  2
+	db  11,  2
+	db  12,  2
+	db  13,  4
+	db  14,  6
+	db  15,  8
+	db  16,  6
+	db  17,  4
+	db  18,  4
+	db  19,  8
+	db  18,  4
+	db  17,  4
+	db  16,  6
 	db $ff
 
 Frameset_1ff5a3::
-	db $18,  1
-	db $19,  1
-	db $1a,  2
-	db $1b,  5
-	db $1c,  3
-	db $1d,  2
-	db $1e,  2
-	db $1f,  2
-	db $20,  4
-	db $21,  4
-	db $20,  4
-	db $22, 16
-	db $23,  2
-	db $24,  2
-	db $22,  2
-	db $23,  2
-	db $24,  2
-	db $22,  2
-	db $23,  2
-	db $24,  2
-	db $22,  2
-	db $23,  2
-	db $24,  2
-	db $25,  4
-	db $26,  6
-	db $27,  8
-	db $28,  6
-	db $29,  4
-	db $2a,  4
-	db $2b,  8
-	db $2a,  4
-	db $29,  4
-	db $28,  6
+	db  24,  1
+	db  25,  1
+	db  26,  2
+	db  27,  5
+	db  28,  3
+	db  29,  2
+	db  30,  2
+	db  31,  2
+	db  32,  4
+	db  33,  4
+	db  32,  4
+	db  34, 16
+	db  35,  2
+	db  36,  2
+	db  34,  2
+	db  35,  2
+	db  36,  2
+	db  34,  2
+	db  35,  2
+	db  36,  2
+	db  34,  2
+	db  35,  2
+	db  36,  2
+	db  37,  4
+	db  38,  6
+	db  39,  8
+	db  40,  6
+	db  41,  4
+	db  42,  4
+	db  43,  8
+	db  42,  4
+	db  41,  4
+	db  40,  6
 	db $ff
 
 Frameset_1ff5e6::
-	db $15,  6
-	db $16,  6
-	db $17,  6
-	db $14,  6
+	db  21,  6
+	db  22,  6
+	db  23,  6
+	db  20,  6
 	db $ff
 
 Frameset_1ff5ef::
-	db $2d,  6
-	db $2e,  6
-	db $2f,  6
-	db $2c,  6
+	db  45,  6
+	db  46,  6
+	db  47,  6
+	db  44,  6
 	db $ff
 
 Frameset_1ff5f8::
-	db $14,  4
+	db  20,  4
 	db $ff
 
 Frameset_1ff5fb::
-	db $2c,  4
+	db  44,  4
 	db $ff
 
 Frameset_1ff5fe::
-	db $30,  2
-	db $31,  2
-	db $32,  2
+	db  48,  2
+	db  49,  2
+	db  50,  2
 	db $ff
 
 Frameset_1ff605::
-	db $32,  2
-	db $30,  2
-	db $31,  2
+	db  50,  2
+	db  48,  2
+	db  49,  2
 	db $ff
 
 Frameset_1ff60c::
-	db $12,  1
-	db $13,  2
-	db $33,  3
-	db $13,  1
-	db $12,  1
+	db  18,  1
+	db  19,  2
+	db  51,  3
+	db  19,  1
+	db  18,  1
 	db $ff
 
 Frameset_1ff617::
-	db $2a,  1
-	db $2b,  2
-	db $34,  3
-	db $2b,  1
-	db $2a,  1
+	db  42,  1
+	db  43,  2
+	db  52,  3
+	db  43,  1
+	db  42,  1
 	db $ff
 
 Frameset_1ff622::
-	db $11,  4
+	db  17,  4
 	db $ff
 
 Frameset_1ff625::
-	db $29,  4
+	db  41,  4
 	db $ff
 
 Frameset_1ff628::
-	db $35,  2
-	db $36,  1
-	db $35,  2
-	db $36,  1
-	db $37,  2
-	db $35,  2
-	db $36,  1
-	db $37,  2
+	db  53,  2
+	db  54,  1
+	db  53,  2
+	db  54,  1
+	db  55,  2
+	db  53,  2
+	db  54,  1
+	db  55,  2
 	db $ff
 
 Frameset_1ff639::
-	db $38,  2
-	db $39,  1
-	db $38,  2
-	db $39,  1
-	db $3a,  2
-	db $38,  2
-	db $39,  1
-	db $3a,  2
+	db  56,  2
+	db  57,  1
+	db  56,  2
+	db  57,  1
+	db  58,  2
+	db  56,  2
+	db  57,  1
+	db  58,  2
 	db $ff
 
 OAM_1ff64a::
@@ -5571,143 +5571,143 @@ OAM_1ff64a::
 	db $80
 
 Frameset_1ff92b::
-	db $00,  3
-	db $01,  3
-	db $02,  4
-	db $03,  3
-	db $04,  3
-	db $05,  4
+	db   0,  3
+	db   1,  3
+	db   2,  4
+	db   3,  3
+	db   4,  3
+	db   5,  4
 	db $ff
 
 Frameset_1ff938::
-	db $06,  3
-	db $07,  3
-	db $08,  4
-	db $09,  3
-	db $0a,  3
-	db $0b,  4
+	db   6,  3
+	db   7,  3
+	db   8,  4
+	db   9,  3
+	db  10,  3
+	db  11,  4
 	db $ff
 
 Frameset_1ff945::
-	db $13,  3
-	db $0c,  2
-	db $0d,  2
-	db $0e,  3
-	db $0f,  3
-	db $10,  2
-	db $11,  2
-	db $12,  3
+	db  19,  3
+	db  12,  2
+	db  13,  2
+	db  14,  3
+	db  15,  3
+	db  16,  2
+	db  17,  2
+	db  18,  3
 	db $ff
 
 Frameset_1ff956::
-	db $04,  3
-	db $03,  3
-	db $02,  4
-	db $01,  3
-	db $00,  3
-	db $05,  4
+	db   4,  3
+	db   3,  3
+	db   2,  4
+	db   1,  3
+	db   0,  3
+	db   5,  4
 	db $ff
 
 Frameset_1ff963::
-	db $0a,  3
-	db $09,  3
-	db $08,  4
-	db $07,  3
-	db $06,  3
-	db $0b,  4
+	db  10,  3
+	db   9,  3
+	db   8,  4
+	db   7,  3
+	db   6,  3
+	db  11,  4
 	db $ff
 
 Frameset_1ff970::
-	db $12,  3
-	db $11,  2
-	db $10,  2
-	db $0f,  3
-	db $0e,  3
-	db $0d,  2
-	db $0c,  2
-	db $13,  3
+	db  18,  3
+	db  17,  2
+	db  16,  2
+	db  15,  3
+	db  14,  3
+	db  13,  2
+	db  12,  2
+	db  19,  3
 	db $ff
 
 Frameset_1ff981::
-	db $14,  4
-	db $15,  4
-	db $16,  4
+	db  20,  4
+	db  21,  4
+	db  22,  4
 	db $ff
 
 ; unreferenced
 Frameset_1ff988:
-	db $00,  3
-	db $01,  3
-	db $02,  4
-	db $03,  3
-	db $04,  3
-	db $05,  4
-	db $00,  3
-	db $01,  3
-	db $02,  4
-	db $03,  3
-	db $04,  3
-	db $05,  4
-	db $06,  3
-	db $07,  3
-	db $08,  4
-	db $09,  3
-	db $0a,  3
-	db $0b,  4
-	db $13,  3
-	db $0c,  2
-	db $0d,  2
-	db $0e,  3
-	db $0f,  3
-	db $10,  2
-	db $11,  2
-	db $12,  3
-	db $13,  3
-	db $0c,  2
-	db $0d,  2
-	db $0e,  3
-	db $0f,  3
-	db $10,  2
-	db $11,  2
-	db $12,  3
+	db   0,  3
+	db   1,  3
+	db   2,  4
+	db   3,  3
+	db   4,  3
+	db   5,  4
+	db   0,  3
+	db   1,  3
+	db   2,  4
+	db   3,  3
+	db   4,  3
+	db   5,  4
+	db   6,  3
+	db   7,  3
+	db   8,  4
+	db   9,  3
+	db  10,  3
+	db  11,  4
+	db  19,  3
+	db  12,  2
+	db  13,  2
+	db  14,  3
+	db  15,  3
+	db  16,  2
+	db  17,  2
+	db  18,  3
+	db  19,  3
+	db  12,  2
+	db  13,  2
+	db  14,  3
+	db  15,  3
+	db  16,  2
+	db  17,  2
+	db  18,  3
 	db $ff
 
 ; unreferenced
 Frameset_1ff9cd:
-	db $04,  3
-	db $03,  3
-	db $02,  4
-	db $01,  3
-	db $00,  3
-	db $05,  4
-	db $04,  3
-	db $03,  3
-	db $02,  4
-	db $01,  3
-	db $00,  3
-	db $05,  4
-	db $0a,  3
-	db $09,  3
-	db $08,  4
-	db $07,  3
-	db $06,  3
-	db $0b,  4
-	db $12,  3
-	db $11,  2
-	db $10,  2
-	db $0f,  3
-	db $0e,  3
-	db $0d,  2
-	db $0c,  2
-	db $13,  3
-	db $12,  3
-	db $11,  2
-	db $10,  2
-	db $0f,  3
-	db $0e,  3
-	db $0d,  2
-	db $0c,  2
-	db $13,  3
+	db   4,  3
+	db   3,  3
+	db   2,  4
+	db   1,  3
+	db   0,  3
+	db   5,  4
+	db   4,  3
+	db   3,  3
+	db   2,  4
+	db   1,  3
+	db   0,  3
+	db   5,  4
+	db  10,  3
+	db   9,  3
+	db   8,  4
+	db   7,  3
+	db   6,  3
+	db  11,  4
+	db  18,  3
+	db  17,  2
+	db  16,  2
+	db  15,  3
+	db  14,  3
+	db  13,  2
+	db  12,  2
+	db  19,  3
+	db  18,  3
+	db  17,  2
+	db  16,  2
+	db  15,  3
+	db  14,  3
+	db  13,  2
+	db  12,  2
+	db  19,  3
 	db $ff
 
 OAM_1ffa12::
@@ -5963,87 +5963,87 @@ OAM_1ffa12::
 	db $80
 
 Frameset_1ffc8e::
-	db $00,  3
-	db $01,  3
-	db $02,  2
-	db $03,  2
-	db $02,  2
-	db $03,  2
-	db $02,  2
-	db $04,  5
-	db $05,  4
-	db $06,  4
-	db $07,  4
-	db $08,  3
-	db $09,  3
-	db $0a,  3
-	db $0b, 30
-	db $0c,  2
-	db $0b,  2
-	db $0c,  2
-	db $0b,  2
-	db $0c,  2
-	db $0b,  2
-	db $0c,  2
-	db $0b,  2
-	db $0c,  2
-	db $0b,  2
-	db $0a,  2
-	db $09,  2
-	db $08,  2
-	db $07,  2
-	db $06,  3
-	db $05,  4
-	db $04,  5
+	db   0,  3
+	db   1,  3
+	db   2,  2
+	db   3,  2
+	db   2,  2
+	db   3,  2
+	db   2,  2
+	db   4,  5
+	db   5,  4
+	db   6,  4
+	db   7,  4
+	db   8,  3
+	db   9,  3
+	db  10,  3
+	db  11, 30
+	db  12,  2
+	db  11,  2
+	db  12,  2
+	db  11,  2
+	db  12,  2
+	db  11,  2
+	db  12,  2
+	db  11,  2
+	db  12,  2
+	db  11,  2
+	db  10,  2
+	db   9,  2
+	db   8,  2
+	db   7,  2
+	db   6,  3
+	db   5,  4
+	db   4,  5
 	db $ff
 
 Frameset_1ffccf::
-	db $0d,  3
-	db $0e,  3
-	db $0f,  2
-	db $10,  2
-	db $0f,  2
-	db $10,  2
-	db $0f,  2
-	db $11,  5
-	db $12,  4
-	db $13,  4
-	db $14,  4
-	db $15,  3
-	db $16,  3
-	db $17,  3
-	db $18, 30
-	db $19,  2
-	db $18,  2
-	db $19,  2
-	db $18,  2
-	db $19,  2
-	db $18,  2
-	db $19,  2
-	db $18,  2
-	db $19,  2
-	db $18,  2
-	db $17,  2
-	db $16,  2
-	db $15,  2
-	db $14,  2
-	db $13,  3
-	db $12,  4
-	db $11,  5
+	db  13,  3
+	db  14,  3
+	db  15,  2
+	db  16,  2
+	db  15,  2
+	db  16,  2
+	db  15,  2
+	db  17,  5
+	db  18,  4
+	db  19,  4
+	db  20,  4
+	db  21,  3
+	db  22,  3
+	db  23,  3
+	db  24, 30
+	db  25,  2
+	db  24,  2
+	db  25,  2
+	db  24,  2
+	db  25,  2
+	db  24,  2
+	db  25,  2
+	db  24,  2
+	db  25,  2
+	db  24,  2
+	db  23,  2
+	db  22,  2
+	db  21,  2
+	db  20,  2
+	db  19,  3
+	db  18,  4
+	db  17,  5
 	db $ff
 
 Frameset_1ffd10::
-	db $1a,  2
+	db  26,  2
 	db $ff
 
 Frameset_1ffd13::
-	db $00,  4
+	db   0,  4
 	db $ff
 
 Frameset_1ffd16::
-	db $1b,  2
+	db  27,  2
 	db $ff
 
 Frameset_1ffd19::
-	db $0d,  4
+	db  13,  4
 	db $ff

@@ -1516,31 +1516,31 @@ OAM_9ac5d:
 	db $80
 
 Frameset_9ace1::
-	db $00,  3
-	db $01,  3
-	db $02,  3
-	db $01,  3
+	db   0,  3
+	db   1,  3
+	db   2,  3
+	db   1,  3
 	db $ff
 
 Frameset_9acea::
-	db $03,  6
-	db $04,  6
-	db $05,  6
-	db $04,  6
+	db   3,  6
+	db   4,  6
+	db   5,  6
+	db   4,  6
 	db $ff
 
 Frameset_9acf3::
-	db $06,  8
-	db $07,  4
-	db $08,  8
-	db $07,  4
+	db   6,  8
+	db   7,  4
+	db   8,  8
+	db   7,  4
 	db $ff
 
 Frameset_9acfc::
-	db $09,  8
-	db $0a,  4
-	db $0b,  8
-	db $0a,  4
+	db   9,  8
+	db  10,  4
+	db  11,  8
+	db  10,  4
 	db $ff
 
 Pals_9ad05:

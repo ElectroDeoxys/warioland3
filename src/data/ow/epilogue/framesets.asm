@@ -1,21 +1,21 @@
 Frameset_76b5::
-	db $00,  8
-	db $05,  8
-	db $06,  8
-	db $07,  8
-	db $08,  8
-	db $09,  8
-	db $0a,  8
-	db $0b,  8
-	db $0c,  8
-	db $0d,  8
+	db   0,  8
+	db   5,  8
+	db   6,  8
+	db   7,  8
+	db   8,  8
+	db   9,  8
+	db  10,  8
+	db  11,  8
+	db  12,  8
+	db  13,  8
 	db $ff
 
 Frameset_76ca::
-	db $01,  4
-	db $02,  4
-	db $03,  4
-	db $04,  4
-	db $03,  4
-	db $02,  4
+	db   1,  4
+	db   2,  4
+	db   3,  4
+	db   4,  4
+	db   3,  4
+	db   2,  4
 	db $ff

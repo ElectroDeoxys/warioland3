@@ -226,26 +226,26 @@ UpdateGolfWarioAnimation::
 	dw Frameset_1fc473
 
 Frameset_2da4:
-	db $08,  1
+	db   8,  1
 	db $ff
 
 Frameset_2da7:
-	db $09, 15
+	db   9, 15
 	db $ff
 
 Frameset_2daa:
-	db $00,  1
+	db   0,  1
 	db $ff
 
 Frameset_2dad:
-	db $01, 15
+	db   1, 15
 	db $ff
 
 Frameset_2db0:
-	db $00, 15
-	db $01, 15
+	db   0, 15
+	db   1, 15
 	db $ff
 
 Frameset_2db5:
-	db $09,  8
+	db   9,  8
 	db $ff

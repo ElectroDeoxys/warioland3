@@ -359,133 +359,133 @@ OAM_d20e::
 	db $80
 
 Frameset_d49a::
-	db $00,  2
-	db $01,  3
-	db $02,  3
-	db $09,  2
-	db $0a,  2
+	db   0,  2
+	db   1,  3
+	db   2,  3
+	db   9,  2
+	db  10,  2
 	db $ff
 
 Frameset_d4a5::
-	db $35,  2
-	db $36,  1
-	db $37,  2
-	db $38,  3
-	db $39,  2
-	db $3a,  2
-	db $38,  3
-	db $39,  2
-	db $3a,  2
-	db $3b,  2
+	db  53,  2
+	db  54,  1
+	db  55,  2
+	db  56,  3
+	db  57,  2
+	db  58,  2
+	db  56,  3
+	db  57,  2
+	db  58,  2
+	db  59,  2
 	db $ff
 
 Frameset_d4ba:
-	db $0b,  4
-	db $0c,  4
-	db $0d,  6
-	db $0e,  6
-	db $0f,  4
+	db  11,  4
+	db  12,  4
+	db  13,  6
+	db  14,  6
+	db  15,  4
 	db $ff
 
 Frameset_d4c5:
-	db $10,  2
-	db $11,  3
-	db $12,  6
-	db $13,  3
+	db  16,  2
+	db  17,  3
+	db  18,  6
+	db  19,  3
 	db $ff
 
 ; unreferenced
 Frameset_d4ce:
-	db $14,  3
-	db $15,  3
-	db $16,  3
+	db  20,  3
+	db  21,  3
+	db  22,  3
 	db $ff
 
 ; unreferenced
 Frameset_d4d5:
-	db $17,  3
-	db $18,  3
-	db $19,  3
+	db  23,  3
+	db  24,  3
+	db  25,  3
 	db $ff
 
 ; unreferenced
 Frameset_d4dc:
-	db $1a,  3
-	db $1b,  3
-	db $1c,  3
+	db  26,  3
+	db  27,  3
+	db  28,  3
 	db $ff
 
 ; unreferenced
 Frameset_d4e3:
-	db $1d,  3
-	db $1e,  3
-	db $1f,  3
+	db  29,  3
+	db  30,  3
+	db  31,  3
 	db $ff
 
 Frameset_d4ea:
-	db $20,  9
-	db $21,  8
-	db $22,  7
-	db $23,  7
+	db  32,  9
+	db  33,  8
+	db  34,  7
+	db  35,  7
 	db $ff
 
 Frameset_d4f3:
-	db $0b,  4
-	db $0c,  4
-	db $24,  6
-	db $25,  6
-	db $26,  4
-	db $22,  4
-	db $23,  7
+	db  11,  4
+	db  12,  4
+	db  36,  6
+	db  37,  6
+	db  38,  4
+	db  34,  4
+	db  35,  7
 	db $ff
 
 Frameset_d502:
-	db $27,  6
-	db $28,  6
-	db $29,  6
-	db $2a,  6
+	db  39,  6
+	db  40,  6
+	db  41,  6
+	db  42,  6
 	db $ff
 
 Frameset_d50b:
-	db $2b,  6
-	db $2c,  6
-	db $2d,  6
-	db $2e,  6
+	db  43,  6
+	db  44,  6
+	db  45,  6
+	db  46,  6
 	db $ff
 
 ; unreferenced
 Frameset_d514:
-	db $2f,  3
-	db $30,  3
+	db  47,  3
+	db  48,  3
 	db $ff
 
 ; unreferenced
 Frameset_d519:
-	db $31,  4
+	db  49,  4
 	db $ff
 
 ; unreferenced
 Frameset_d51c:
-	db $32,  4
+	db  50,  4
 	db $ff
 
 ; unreferenced
 Frameset_d51f:
-	db $33,  4
+	db  51,  4
 	db $ff
 
 ; unreferenced
 Frameset_d522:
-	db $34,  4
+	db  52,  4
 	db $ff
 
 Frameset_d525:
-	db $03,  1
-	db $04,  1
-	db $05,  2
-	db $06,  2
-	db $07,  1
-	db $08,  1
+	db   3,  1
+	db   4,  1
+	db   5,  2
+	db   6,  2
+	db   7,  1
+	db   8,  1
 	db $ff
 
 OAM_d532:
@@ -544,20 +544,20 @@ OAM_d532:
 	db $80
 
 Frameset_d591:
-	db $00,  2
-	db $01,  2
-	db $02,  1
-	db $03,  1
-	db $04,  1
-	db $05,  1
-	db $04,  2
-	db $06,  1
-	db $08,  1
-	db $07,  2
-	db $08,  1
-	db $07,  1
-	db $08,  1
-	db $07,  1
+	db   0,  2
+	db   1,  2
+	db   2,  1
+	db   3,  1
+	db   4,  1
+	db   5,  1
+	db   4,  2
+	db   6,  1
+	db   8,  1
+	db   7,  2
+	db   8,  1
+	db   7,  1
+	db   8,  1
+	db   7,  1
 	db $ff
 
 OAM_d5ae:
@@ -605,10 +605,10 @@ OAM_d5ae:
 	db $80
 
 Frameset_d622:
-	db $00,  2
-	db $01,  3
-	db $02,  5
-	db $03,  3
+	db   0,  2
+	db   1,  3
+	db   2,  5
+	db   3,  3
 	db $ff
 
 OAM_d62b:
@@ -683,33 +683,33 @@ OAM_d62b:
 	db $80
 
 Frameset_d6e4:
-	db $00,  2
-	db $01,  2
-	db $02,  2
-	db $01,  2
-	db $02,  2
-	db $01,  1
-	db $02,  1
-	db $01,  2
-	db $05,  2
-	db $01,  2
-	db $05,  1
-	db $01,  8
+	db   0,  2
+	db   1,  2
+	db   2,  2
+	db   1,  2
+	db   2,  2
+	db   1,  1
+	db   2,  1
+	db   1,  2
+	db   5,  2
+	db   1,  2
+	db   5,  1
+	db   1,  8
 	db $ff
 
 Frameset_d6fd:
-	db $03,  2
-	db $01,  2
-	db $04,  2
-	db $01,  2
-	db $04,  2
-	db $01,  1
-	db $04,  1
-	db $01,  2
-	db $06,  2
-	db $01,  2
-	db $06,  1
-	db $01,  8
+	db   3,  2
+	db   1,  2
+	db   4,  2
+	db   1,  2
+	db   4,  2
+	db   1,  1
+	db   4,  1
+	db   1,  2
+	db   6,  2
+	db   1,  2
+	db   6,  1
+	db   1,  8
 	db $ff
 
 OAM_d716:
@@ -745,10 +745,10 @@ OAM_d716:
 	db $80
 
 Frameset_d75a:
-	db $00,  1
-	db $01,  1
-	db $02,  1
-	db $03,  1
+	db   0,  1
+	db   1,  1
+	db   2,  1
+	db   3,  1
 	db $ff
 
 OAM_d763::
@@ -784,10 +784,10 @@ OAM_d763::
 	db $80
 
 Frameset_d7b4::
-	db $00,  2
-	db $02,  2
-	db $01,  2
-	db $02,  2
+	db   0,  2
+	db   2,  2
+	db   1,  2
+	db   2,  2
 	db $ff
 
 OAM_d7bd:
@@ -821,9 +821,9 @@ OAM_d7bd:
 	db $80
 
 Frameset_d806:
-	db $00,  4
-	db $01,  4
-	db $02,  4
+	db   0,  4
+	db   1,  4
+	db   2,  4
 	db $ff
 
 OAM_d80d:

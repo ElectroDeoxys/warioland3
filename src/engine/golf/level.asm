@@ -576,8 +576,8 @@ UpdateGolfParaGoom:
 
 ; unreferenced?
 Frameset_1c8e21:
-	db $23, 78
-	db $20,  4
+	db  35, 78
+	db  32,  4
 	db $ff
 
 HandleGolfParaGoomRespawn:
@@ -2630,11 +2630,11 @@ ShowGolfResultOverlayText:
 	dw Frameset_1c9b8a ; GOLFRESULT_COURSE_OVER_PAR
 
 Frameset_1c9b87:
-	db $73,  4
+	db 115,  4
 	db $ff
 
 Frameset_1c9b8a:
-	db $6a,  4
+	db 106,  4
 	db $ff
 
 ShowGolfScore:

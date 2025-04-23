@@ -8,5 +8,5 @@ OAM_d65e1:
 	db $80
 
 Frameset_d65f0:
-	db $00,  4
+	db   0,  4
 	db $ff
