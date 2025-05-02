@@ -931,20 +931,9 @@ wcee4::
 wTimer::
 	ds $2
 
-wChecksum::
-	dw
-
-wcee9::
-	db
-
-wceea::
-	db
-
-wceeb::
-	db
-
-wceec::
-	db
+wChecksum:: dw
+wcee9::     dw
+wceeb::     dw
 
 ; used to control SFX looping
 ; every frame 1 is subtracted
@@ -959,7 +948,7 @@ wceee::
 wceef::
 	db
 
-wcef0::
+wChecksumMismatches::
 	db
 
 wcef1::
@@ -1042,7 +1031,6 @@ wMuddeeAmbushState::
 ; if TRUE, then DollBoy will fall immediately
 ; when the middle barrel is destroyed
 wDollBoyFallImmediatelyMiddleBarrel::
-
 
 ; which state ball Wario or ball Shoot is in
 wShootBallState::

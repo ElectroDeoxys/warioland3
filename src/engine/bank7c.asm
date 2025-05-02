@@ -530,30 +530,30 @@ VBlank_SaveScreen:
 	ret
 .end
 
-Func_1f0cad::
+ValidateSaveData::
 	ld a, [wSRAMBank]
 	push af
 	ld a, BANK("SRAM0")
 	sramswitch
 
 	ld hl, sCheckVals
-	call CheckSaveVals
+	call CheckSaveVals1
 	jr nc, .asm_1f0cec
 	ld hl, s0a000
-	call Func_1f0d47
+	call CheckSaveVals2
 	jr nc, .asm_1f0cec
 	ld hl, s0a400
-	call Func_1f0d47
+	call CheckSaveVals2
 	jr nc, .asm_1f0cec
 
 	ld hl, sBackupCheckVals
-	call CheckSaveVals
+	call CheckSaveVals1
 	jr nc, .asm_1f0cec
 	ld hl, s0a800
-	call Func_1f0d47
+	call CheckSaveVals2
 	jr nc, .asm_1f0cec
 	ld hl, s0ac00
-	call Func_1f0d47
+	call CheckSaveVals2
 	jr nc, .asm_1f0cec
 	jp .asm_1f0d0f
 
@@ -564,9 +564,9 @@ Func_1f0cad::
 	ld c, a
 	ld a, [s0afa0]
 	ld d, a
-	cp b
+	cp b ; s0afa0 == s0a790?
 	jr nz, .asm_1f0d08
-	cp c
+	cp c ; s0afa0 == s0a7e0?
 	jr z, .asm_1f0d03 ; both branches are the same
 	ld [wcef1], a
 	jr .asm_1f0d20
@@ -576,10 +576,10 @@ Func_1f0cad::
 
 .asm_1f0d08
 	; s0a790 != s0afa0
-	cp c
+	cp c ; s0afa0 == s0a7e0?
 	jr z, .asm_1f0d16
 	ld a, b
-	cp c
+	cp c ; s0a790 == s0a7e0?
 	jr z, .asm_1f0d1b
 
 .asm_1f0d0f
@@ -593,7 +593,7 @@ Func_1f0cad::
 
 .asm_1f0d1b
 	ld [wcef1], a
-	jr .asm_1f0d20
+	jr .asm_1f0d20 ; useless jump
 
 .asm_1f0d20
 	call Func_1f0d60
@@ -602,20 +602,20 @@ Func_1f0cad::
 	sramswitch
 	ret
 
-; returns carry if bytes in [hl] is not:
+; returns carry if bytes in [hl] are not:
 ; $77 $61 $72 $33
-CheckSaveVals:
+CheckSaveVals1:
 	ld a, [hli]
-	cp SAVE_CHECK_VAL_1
+	cp CHECKVAL1_1
 	jr nz, .set_carry
 	ld a, [hli]
-	cp SAVE_CHECK_VAL_2
+	cp CHECKVAL1_2
 	jr nz, .set_carry
 	ld a, [hli]
-	cp SAVE_CHECK_VAL_3
+	cp CHECKVAL1_3
 	jr nz, .set_carry
 	ld a, [hli]
-	cp SAVE_CHECK_VAL_4
+	cp CHECKVAL1_4
 	jr nz, .set_carry
 	scf
 	ccf
@@ -624,18 +624,20 @@ CheckSaveVals:
 	scf
 	ret
 
-Func_1f0d47:
+; returns carry if bytes in [hl] are not:
+; $57 $41 $52 $33
+CheckSaveVals2:
 	ld a, [hli]
-	cp $57
+	cp CHECKVAL2_1
 	jr nz, .set_carry
 	ld a, [hli]
-	cp $41
+	cp CHECKVAL2_2
 	jr nz, .set_carry
 	ld a, [hli]
-	cp $52
+	cp CHECKVAL2_3
 	jr nz, .set_carry
 	ld a, [hli]
-	cp $33
+	cp CHECKVAL2_4
 	jr nz, .set_carry
 	scf
 	ccf
@@ -648,7 +650,7 @@ Func_1f0d60:
 	xor a
 	ld [wceee], a
 	ld hl, sCheckVals
-	call CheckSaveVals
+	call CheckSaveVals1
 	jr c, .clear_check_vals
 
 	ld a, [sGameDataChecksum + 0]
@@ -663,9 +665,10 @@ Func_1f0d60:
 	ld h, a
 	ld a, [sGameDataChecksumEcho2 + 1]
 	ld l, a
-	call Func_1f1153
+	call .GetMatchingChecksum
+
 	ld hl, sGameData
-	call Func_1f1210
+	call .CalculateChecksumAtHL
 	ld a, [wChecksum + 0]
 	cp d
 	jr nz, .asm_1f0d9b
@@ -675,25 +678,29 @@ Func_1f0d60:
 	jr .asm_1f0dc2
 
 .asm_1f0d9b
-	ld a, [wcef0]
+	ld a, [wChecksumMismatches]
 	and a
 	jr z, .clear_check_vals
-	ld a, [wcee9]
+	; there's at least 1 mismatch, check if
+	; it's equal to calculated checksum
+	ld a, [wcee9 + 0]
 	cp d
 	jr nz, .asm_1f0daf
-	ld a, [wceea]
+	ld a, [wcee9 + 1]
 	cp e
 	jr nz, .asm_1f0daf
 	jr .asm_1f0dc2
 
 .asm_1f0daf
-	ld a, [wcef0]
-	cp $07
+	ld a, [wChecksumMismatches]
+	cp MISMATCH_ORIG | MISMATCH_ECHO1 | MISMATCH_ECHO2
 	jr nz, .clear_check_vals
-	ld a, [wceeb]
+	; there are 2 mismatches, check if next one
+	; is equal to calculated checksum
+	ld a, [wceeb + 0]
 	cp d
 	jr nz, .clear_check_vals
-	ld a, [wceec]
+	ld a, [wceeb + 1]
 	cp e
 	jr nz, .clear_check_vals
 
@@ -723,7 +730,7 @@ Func_1f0d60:
 
 .check_backup_check_vals
 	ld hl, sBackupCheckVals
-	call CheckSaveVals
+	call CheckSaveVals1
 	jr c, .clear_backup_check_vals
 	ld a, [sBackupGameDataChecksum + 0]
 	ld b, a
@@ -737,9 +744,10 @@ Func_1f0d60:
 	ld h, a
 	ld a, [sBackupGameDataChecksumEcho2 + 1]
 	ld l, a
-	call Func_1f1153
+	call .GetMatchingChecksum
+
 	ld hl, sBackupGameData
-	call Func_1f1210
+	call .CalculateChecksumAtHL
 	ld a, [wChecksum + 0]
 	cp d
 	jr nz, .asm_1f0e20
@@ -749,27 +757,32 @@ Func_1f0d60:
 	jr .asm_1f0e47
 
 .asm_1f0e20
-	ld a, [wcef0]
+	ld a, [wChecksumMismatches]
 	and a
 	jr z, .clear_backup_check_vals
-	ld a, [wcee9]
+	; there's at least 1 mismatch, check if
+	; it's equal to calculated checksum
+	ld a, [wcee9 + 0]
 	cp d
 	jr nz, .asm_1f0e34
-	ld a, [wceea]
+	ld a, [wcee9 + 1]
 	cp e
 	jr nz, .asm_1f0e34
 	jr .asm_1f0e47
 
 .asm_1f0e34
-	ld a, [wcef0]
-	cp $07
+	ld a, [wChecksumMismatches]
+	cp MISMATCH_ORIG | MISMATCH_ECHO1 | MISMATCH_ECHO2
 	jr nz, .clear_backup_check_vals
-	ld a, [wceeb]
+	; there are 2 mismatches, check if next one
+	; is equal to calculated checksum
+	ld a, [wceeb + 0]
 	cp d
 	jr nz, .clear_backup_check_vals
-	ld a, [wceec]
+	ld a, [wceeb + 1]
 	cp e
 	jr nz, .clear_backup_check_vals
+
 .asm_1f0e47
 	ld hl, sBackupGameData ; useless
 	ld hl, wceee
@@ -807,7 +820,8 @@ Func_1f0d60:
 	ld h, a
 	ld a, [s0afad + 1]
 	ld l, a
-	call Func_1f1153
+	call .GetMatchingChecksum
+
 	call CalculateBackupSRAMChecksum1
 	ld a, [wChecksum + 0]
 	cp d
@@ -818,32 +832,32 @@ Func_1f0d60:
 	jr .asm_1f0ec1
 
 .asm_1f0e9a
-	ld a, [wcef0]
+	ld a, [wChecksumMismatches]
 	and a
 	jr z, .asm_1f0efd
-	ld a, [wcee9]
+	ld a, [wcee9 + 0]
 	cp d
 	jr nz, .asm_1f0eae
-	ld a, [wceea]
+	ld a, [wcee9 + 1]
 	cp e
 	jr nz, .asm_1f0eae
 	jr .asm_1f0ec1
 
 .asm_1f0eae
-	ld a, [wcef0]
-	cp $07
+	ld a, [wChecksumMismatches]
+	cp MISMATCH_ORIG | MISMATCH_ECHO1 | MISMATCH_ECHO2
 	jr nz, .asm_1f0efd
-	ld a, [wceeb]
+	ld a, [wceeb + 0]
 	cp d
 	jr nz, .asm_1f0efd
-	ld a, [wceec]
+	ld a, [wceeb + 1]
 	cp e
 	jr nz, .asm_1f0efd
 .asm_1f0ec1
 	ld hl, wceee
 	set 6, [hl]
 	ld hl, s0a000
-	call Func_1f0d47
+	call CheckSaveVals2
 	jr c, .asm_1f0f2f
 	ld a, [sWRAMChecksum + 0]
 	ld b, a
@@ -857,7 +871,8 @@ Func_1f0d60:
 	ld h, a
 	ld a, [sWRAMChecksumEcho2 + 1]
 	ld l, a
-	call Func_1f1153
+	call .GetMatchingChecksum
+
 	ld hl, sSaveCounter
 	call Func_1f0b5b
 	ld a, [wChecksum + 0]
@@ -872,24 +887,24 @@ Func_1f0d60:
 	jp .asm_1f0fb2
 
 .asm_1f0f00
-	ld a, [wcef0]
+	ld a, [wChecksumMismatches]
 	and a
 	jr z, .asm_1f0f2f
-	ld a, [wcee9]
+	ld a, [wcee9 + 0]
 	cp d
 	jr nz, .asm_1f0f14
-	ld a, [wceea]
+	ld a, [wcee9 + 1]
 	cp e
 	jr nz, .asm_1f0f14
 	jr .asm_1f0f27
 .asm_1f0f14
-	ld a, [wcef0]
-	cp $07
+	ld a, [wChecksumMismatches]
+	cp MISMATCH_ORIG | MISMATCH_ECHO1 | MISMATCH_ECHO2
 	jr nz, .asm_1f0f2f
-	ld a, [wceeb]
+	ld a, [wceeb + 0]
 	cp d
 	jr nz, .asm_1f0f2f
-	ld a, [wceec]
+	ld a, [wceeb + 1]
 	cp e
 	jr nz, .asm_1f0f2f
 .asm_1f0f27
@@ -915,7 +930,7 @@ Func_1f0d60:
 	ld [s0afa0], a
 
 	ld hl, s0a800
-	call Func_1f0d47
+	call CheckSaveVals2
 	jr c, .asm_1f0fb2
 	ld a, [sBackup1WRAMChecksum + 0]
 	ld b, a
@@ -929,7 +944,8 @@ Func_1f0d60:
 	ld h, a
 	ld a, [sBackup1WRAMChecksumEcho2 + 1]
 	ld l, a
-	call Func_1f1153
+	call .GetMatchingChecksum
+
 	ld hl, s0a804
 	call Func_1f0b5b
 	ld a, [wChecksum + 0]
@@ -940,24 +956,24 @@ Func_1f0d60:
 	jr nz, .asm_1f0f83
 	jr .asm_1f0faa
 .asm_1f0f83
-	ld a, [wcef0]
+	ld a, [wChecksumMismatches]
 	and a
 	jr z, .asm_1f0fb2
-	ld a, [wcee9]
+	ld a, [wcee9 + 0]
 	cp d
 	jr nz, .asm_1f0f97
-	ld a, [wceea]
+	ld a, [wcee9 + 1]
 	cp e
 	jr nz, .asm_1f0f97
 	jr .asm_1f0faa
 .asm_1f0f97
-	ld a, [wcef0]
-	cp $07
+	ld a, [wChecksumMismatches]
+	cp MISMATCH_ORIG | MISMATCH_ECHO1 | MISMATCH_ECHO2
 	jr nz, .asm_1f0fb2
-	ld a, [wceeb]
+	ld a, [wceeb + 0]
 	cp d
 	jr nz, .asm_1f0fb2
-	ld a, [wceec]
+	ld a, [wceeb + 1]
 	cp e
 	jr nz, .asm_1f0fb2
 .asm_1f0faa
@@ -1007,7 +1023,8 @@ Func_1f0d60:
 	ld h, a
 	ld a, [s0afaf + 1]
 	ld l, a
-	call Func_1f1153
+	call .GetMatchingChecksum
+
 	call CalculateBackupSRAMChecksum2
 	ld a, [wChecksum + 0]
 	cp d
@@ -1017,31 +1034,31 @@ Func_1f0d60:
 	jr nz, .asm_1f100e
 	jr .asm_1f1035
 .asm_1f100e
-	ld a, [wcef0]
+	ld a, [wChecksumMismatches]
 	and a
 	jr z, .asm_1f1071
-	ld a, [wcee9]
+	ld a, [wcee9 + 0]
 	cp d
 	jr nz, .asm_1f1022
-	ld a, [wceea]
+	ld a, [wcee9 + 1]
 	cp e
 	jr nz, .asm_1f1022
 	jr .asm_1f1035
 .asm_1f1022
-	ld a, [wcef0]
-	cp $07
+	ld a, [wChecksumMismatches]
+	cp MISMATCH_ORIG | MISMATCH_ECHO1 | MISMATCH_ECHO2
 	jr nz, .asm_1f1071
-	ld a, [wceeb]
+	ld a, [wceeb + 0]
 	cp d
 	jr nz, .asm_1f1071
-	ld a, [wceec]
+	ld a, [wceeb + 1]
 	cp e
 	jr nz, .asm_1f1071
 .asm_1f1035
 	ld hl, wceee
 	set 7, [hl]
 	ld hl, s0a400
-	call Func_1f0d47
+	call CheckSaveVals2
 	jr c, .asm_1f10a1
 	ld a, [sBackup2WRAMChecksum + 0]
 	ld b, a
@@ -1055,7 +1072,8 @@ Func_1f0d60:
 	ld h, a
 	ld a, [sBackup2WRAMChecksumEcho2 + 1]
 	ld l, a
-	call Func_1f1153
+	call .GetMatchingChecksum
+
 	ld hl, s0a404
 	call Func_1f0b5b
 	ld a, [wChecksum + 0]
@@ -1068,24 +1086,24 @@ Func_1f0d60:
 .asm_1f1071
 	jp .asm_1f1122
 .asm_1f1074
-	ld a, [wcef0]
+	ld a, [wChecksumMismatches]
 	and a
 	jr z, .asm_1f10a1
-	ld a, [wcee9]
+	ld a, [wcee9 + 0]
 	cp d
 	jr nz, .asm_1f1088
-	ld a, [wceea]
+	ld a, [wcee9 + 1]
 	cp e
 	jr nz, .asm_1f1088
 	jr .asm_1f109b
 .asm_1f1088
-	ld a, [wcef0]
-	cp $07
+	ld a, [wChecksumMismatches]
+	cp MISMATCH_ORIG | MISMATCH_ECHO1 | MISMATCH_ECHO2
 	jr nz, .asm_1f10a1
-	ld a, [wceeb]
+	ld a, [wceeb + 0]
 	cp d
 	jr nz, .asm_1f10a1
-	ld a, [wceec]
+	ld a, [wceeb + 1]
 	cp e
 	jr nz, .asm_1f10a1
 .asm_1f109b
@@ -1112,7 +1130,7 @@ Func_1f0d60:
 	ld [s0afa0], a
 
 	ld hl, s0ac00
-	call Func_1f0d47
+	call CheckSaveVals2
 	jr c, .asm_1f1122
 	ld a, [sBackup3WRAMChecksum + 0]
 	ld b, a
@@ -1126,7 +1144,8 @@ Func_1f0d60:
 	ld h, a
 	ld a, [sBackup3WRAMChecksumEcho2 + 1]
 	ld l, a
-	call Func_1f1153
+	call .GetMatchingChecksum
+
 	ld hl, s0ac04
 	call Func_1f0b5b
 	ld a, [wChecksum + 0]
@@ -1137,24 +1156,24 @@ Func_1f0d60:
 	jr nz, .asm_1f10f5
 	jr .asm_1f111c
 .asm_1f10f5
-	ld a, [wcef0]
+	ld a, [wChecksumMismatches]
 	and a
 	jr z, .asm_1f1122
-	ld a, [wcee9]
+	ld a, [wcee9 + 0]
 	cp d
 	jr nz, .asm_1f1109
-	ld a, [wceea]
+	ld a, [wcee9 + 1]
 	cp e
 	jr nz, .asm_1f1109
 	jr .asm_1f111c
 .asm_1f1109
-	ld a, [wcef0]
-	cp $07
+	ld a, [wChecksumMismatches]
+	cp MISMATCH_ORIG | MISMATCH_ECHO1 | MISMATCH_ECHO2
 	jr nz, .asm_1f1122
-	ld a, [wceeb]
+	ld a, [wceeb + 0]
 	cp d
 	jr nz, .asm_1f1122
-	ld a, [wceec]
+	ld a, [wceeb + 1]
 	cp e
 	jr nz, .asm_1f1122
 .asm_1f111c
@@ -1193,129 +1212,149 @@ Func_1f0d60:
 	ld [s0afa0], a
 	ret
 
-Func_1f1153:
+; input:
+; - bc = checksum
+; - de = checksum echo 1
+; - hl = checksum echo 2
+; output:
+; - wChecksum = best option for checksum value
+.GetMatchingChecksum:
 	ld a, h
 	cp b
-	jr nz, .asm_1f1160
+	jr nz, .echo2_not_equal
 	cp d
-	jr z, .asm_1f1175
+	jr z, .all_high_bytes_equal
 	ld a, c
 	cp l
-	jr nz, .asm_1f1185
-	jr .asm_1f11bf
+	jr nz, .none_equal
+	jr .only_echo2_equal
 
-.asm_1f1160
+.echo2_not_equal
 	cp d
-	jr z, .asm_1f1169
+	jr z, .check_lower_echos
 	ld a, b
 	cp d
-	jr z, .asm_1f116f
-	jr .asm_1f1185
+	jr z, .check_lower_echo1
+	jr .none_equal
 
-.asm_1f1169
+.check_lower_echos
 	ld a, e
 	cp l
-	jr nz, .asm_1f1185
-	jr .asm_1f11db
+	jr nz, .none_equal
+	jr .only_echos_equal
 
-.asm_1f116f
+.check_lower_echo1
 	ld a, c
 	cp e
-	jr nz, .asm_1f1185
-	jr .asm_1f11a3
+	jr nz, .none_equal
+	jr .only_echo1_equal
 
-.asm_1f1175
+.all_high_bytes_equal
 	ld a, l
 	cp c
-	jr nz, .asm_1f117e
+	jr nz, .check_echos_equality
 	cp e
-	jr z, .asm_1f11f7
-	jr .asm_1f11bf
+	jr z, .all_equal
+	jr .only_echo2_equal
 
-.asm_1f117e
+.check_echos_equality
 	cp e
-	jr z, .asm_1f11db
+	jr z, .only_echos_equal
 	ld a, c
 	cp e
-	jr z, .asm_1f11a3
-.asm_1f1185
-	ld a, $07
-	ld [wcef0], a
+	jr z, .only_echo1_equal
+
+.none_equal
+	; none of the checksums match,
+	; we'll use main checksum value for wChecksum
+	ld a, MISMATCH_ORIG | MISMATCH_ECHO1 | MISMATCH_ECHO2
+	ld [wChecksumMismatches], a
 	ld a, b
 	ld [wChecksum + 0], a
 	ld a, d
-	ld [wcee9], a
+	ld [wcee9 + 0], a
 	ld a, h
-	ld [wceeb], a
+	ld [wceeb + 0], a
 	ld a, c
 	ld [wChecksum + 1], a
 	ld a, e
-	ld [wceea], a
+	ld [wcee9 + 1], a
 	ld a, l
-	ld [wceec], a
+	ld [wceeb + 1], a
 	ret
 
-.asm_1f11a3
-	ld a, $04
-	ld [wcef0], a
+.only_echo1_equal
+	; only echo1 matches, so we'll,
+	; that value for wChecksum
+	ld a, MISMATCH_ECHO2
+	ld [wChecksumMismatches], a
 	ld a, b
 	ld [wChecksum + 0], a
-	ld [wceeb], a
+	ld [wceeb + 0], a
 	ld a, h
-	ld [wcee9], a
+	ld [wcee9 + 0], a
 	ld a, c
 	ld [wChecksum + 1], a
-	ld [wceec], a
+	ld [wceeb + 1], a
 	ld a, l
-	ld [wceea], a
+	ld [wcee9 + 1], a
 	ret
 
-.asm_1f11bf
-	ld a, $02
-	ld [wcef0], a
+.only_echo2_equal
+	; only echo2 matches, so we'll,
+	; that value for wChecksum
+	ld a, MISMATCH_ECHO1
+	ld [wChecksumMismatches], a
 	ld a, b
 	ld [wChecksum + 0], a
-	ld [wceeb], a
+	ld [wceeb + 0], a
 	ld a, d
-	ld [wcee9], a
+	ld [wcee9 + 0], a
 	ld a, c
 	ld [wChecksum + 1], a
-	ld [wceec], a
+	ld [wceeb + 1], a
 	ld a, e
-	ld [wceea], a
+	ld [wcee9 + 1], a
 	ret
 
-.asm_1f11db
-	ld a, $01
-	ld [wcef0], a
+.only_echos_equal
+	; only the echos match together,
+	; use that for wChecksum
+	ld a, MISMATCH_ORIG
+	ld [wChecksumMismatches], a
 	ld a, d
 	ld [wChecksum + 0], a
-	ld [wceeb], a
+	ld [wceeb + 0], a
 	ld a, b
-	ld [wcee9], a
+	ld [wcee9 + 0], a
 	ld a, e
 	ld [wChecksum + 1], a
-	ld [wceec], a
+	ld [wceeb + 1], a
 	ld a, c
-	ld [wceea], a
+	ld [wcee9 + 1], a
 	ret
 
-.asm_1f11f7
+.all_equal
+	; all checksums match, use that value for wChecksum
 	xor a
-	ld [wcef0], a
+	ld [wChecksumMismatches], a
 	ld a, b
 	ld [wChecksum + 0], a
-	ld [wcee9], a
-	ld [wceeb], a
+	ld [wcee9 + 0], a
+	ld [wceeb + 0], a
 	ld a, c
 	ld [wChecksum + 1], a
-	ld [wceea], a
-	ld [wceec], a
+	ld [wcee9 + 1], a
+	ld [wceeb + 1], a
 	ret
 
 ; calculates checksum of data
 ; starting at [hl], with length $5b + $11 = $6c
-Func_1f1210:
+; input:
+; - hl = pointer to data to start calculation
+; output:
+; - de = checksum result
+.CalculateChecksumAtHL:
 	ld de, 0 ; accumulator
 	ld b, SIZEOF("Progress WRAM")
 	call CalculateChecksum
@@ -1328,6 +1367,8 @@ Func_1f1210:
 	pop_wram
 	ret
 
+; output:
+; - de = checksum result
 CalculateGameDataChecksum:
 	ld de, 0 ; accumulator
 	ld hl, STARTOF("Progress WRAM")

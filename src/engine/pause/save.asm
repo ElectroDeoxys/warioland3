@@ -436,16 +436,16 @@ Save:
 	ld [s0afa0], a
 
 	ld de, sCheckVals
-	ld a, SAVE_CHECK_VAL_1
+	ld a, CHECKVAL1_1
 	ld [de], a
 	inc e
-	ld a, SAVE_CHECK_VAL_2
+	ld a, CHECKVAL1_2
 	ld [de], a
 	inc e
-	ld a, SAVE_CHECK_VAL_3
+	ld a, CHECKVAL1_3
 	ld [de], a
 	inc e
-	ld a, SAVE_CHECK_VAL_4
+	ld a, CHECKVAL1_4
 	ld [de], a
 	inc e
 
@@ -501,16 +501,16 @@ Save:
 	; de = sBackupGameData
 	; save backup game data
 	ld de, sBackupCheckVals
-	ld a, SAVE_CHECK_VAL_1
+	ld a, CHECKVAL1_1
 	ld [de], a
 	inc e
-	ld a, SAVE_CHECK_VAL_2
+	ld a, CHECKVAL1_2
 	ld [de], a
 	inc e
-	ld a, SAVE_CHECK_VAL_3
+	ld a, CHECKVAL1_3
 	ld [de], a
 	inc e
-	ld a, SAVE_CHECK_VAL_4
+	ld a, CHECKVAL1_4
 	ld [de], a
 	inc e
 

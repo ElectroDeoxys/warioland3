@@ -60,15 +60,6 @@ DEF GOLF_LEVEL_TIER_3 EQU const_value - 1
 	const GOLF_LEVEL_19 ; $13
 DEF NUM_GOLF_LEVELS EQU const_value
 
-; wGolfLevel struct constants
-RSRESET
-DEF GOLF_LEVEL_UNK00 rw ; $00
-DEF GOLF_LEVEL_UNK01 rw ; $01
-DEF GOLF_LEVEL_UNK02 rw ; $02
-DEF GOLF_LEVEL_UNK03 rw ; $03
-DEF GOLF_LEVEL_UNK04 rw ; $04
-DEF GOLF_LEVEL_STRUCT_LENGTH EQU _RS
-
 ; par values of a Golf level
 	const_def 3
 	const PAR_3 ; $3

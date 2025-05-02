@@ -57,9 +57,10 @@ InitWithoutDemoPowerUpReset::
 	ldh [rRP], a
 
 .clear_wram
+	; clear all WRAM except stack
 	xor a
 	ld hl, STARTOF(WRAM0)
-	ld bc, SIZEOF(WRAM0) - $100
+	ld bc, SIZEOF(WRAM0) - SIZEOF("Stack")
 	call WriteAToHL_BCTimes
 	call ClearWRAM
 
@@ -70,6 +71,7 @@ InitWithoutDemoPowerUpReset::
 	call WriteAToHL_BCTimes
 
 	; clears most of HRAM
+	; except hDemoPowerUp, hUnused_fffd and hCGB
 	ld hl, STARTOF(HRAM)
 	ld b, hDemoPowerUp - STARTOF(HRAM)
 	call WriteAToHL_BTimes
@@ -118,7 +120,7 @@ InitWithoutDemoPowerUpReset::
 	; enable SRAM
 	ld a, CART_SRAM_ENABLE
 	ld [rRAMG], a
-	farcall Func_1f0cad
+	farcall ValidateSaveData
 	ei
 
 	; if not playing on CGB, then show

@@ -142,7 +142,7 @@ PickAndLoadGolfLevel:
 	ld a, c
 	and a
 	jr z, .got_golf_level_data
-	ld de, GOLF_LEVEL_STRUCT_LENGTH
+	ld de, 5 * $2
 .loop_get_data
 	add hl, de
 	dec c
