@@ -279,8 +279,8 @@ Func_b417a:
 	farcall Func_80bd9
 	farcall VBlank_Overworld
 
-	decompress_vram0 BGMap_86868, v0BGMap1
-	decompress_vram1 BGMap_868b2, v1BGMap1
+	decompress_bgmap0 BGMap_86868, v0BGMap1
+	decompress_bgmap1 BGMap_868b2, v1BGMap1
 
 	xor a
 	ld [wWX], a
@@ -314,8 +314,8 @@ Func_b4247:
 	cp c
 	ret nz
 
-	decompress_vram1 BGMap_85eda, v1BGMap0 + $3a0
-	decompress_vram0 BGMap_85ea7, v0BGMap0 + $3a0
+	decompress_bgmap1 BGMap_85eda, v1BGMap0, 29
+	decompress_bgmap0 BGMap_85ea7, v0BGMap0, 29
 
 	hlbgcoord 0, 30
 	debgcoord 0, 21, wAttrmap
@@ -1197,51 +1197,51 @@ SetBGMapBytesPriority:
 	ret
 
 LoadOverworld3Gfx:
-	decompress_vram0 Overworld3Gfx, v0Tiles0
+	decompress_tiles0 Overworld3Gfx, v0Tiles0
 	ret
 
 LoadOverworld4Gfx:
-	decompress_vram0 Overworld4Gfx, v0Tiles0
+	decompress_tiles0 Overworld4Gfx, v0Tiles0
 	ret
 
 LoadOverworldRocksGfx:
-	decompress_vram0 OverworldRocksGfx, v0Tiles0 tile $58
+	decompress_tiles0 OverworldRocksGfx, v0Tiles0, $58
 	ret
 
 LoadOverworldTowerGfx:
-	decompress_vram0 OverworldTowerGfx, v0Tiles0 tile $60
+	decompress_tiles0 OverworldTowerGfx, v0Tiles0, $60
 	ret
 
 LoadOverworldFanGfx:
-	decompress_vram0 OverworldFanGfx, v0Tiles0 tile $60
+	decompress_tiles0 OverworldFanGfx, v0Tiles0, $60
 	ret
 
 LoadOverworldExplosion1Gfx:
-	decompress_vram0 OverworldExplosion1Gfx, v0Tiles0
+	decompress_tiles0 OverworldExplosion1Gfx, v0Tiles0
 	ret
 
 LoadOverworldThunderGfx:
-	decompress_vram0 OverworldThunderGfx, v0Tiles0
+	decompress_tiles0 OverworldThunderGfx, v0Tiles0
 	ret
 
 LoadOverworldExplosion2Gfx:
-	decompress_vram0 OverworldExplosion2Gfx, v0Tiles0
+	decompress_tiles0 OverworldExplosion2Gfx, v0Tiles0
 	ret
 
 LoadOverworldTorchGfx:
-	decompress_vram0 OverworldTorchGfx, v0Tiles0 tile $40
+	decompress_tiles0 OverworldTorchGfx, v0Tiles0, $40
 	ret
 
 LoadOverworldFireGfx:
-	decompress_vram0 OverworldFireGfx, v0Tiles0
+	decompress_tiles0 OverworldFireGfx, v0Tiles0
 	ret
 
 LoadOverworldExplosion3Gfx:
-	decompress_vram0 OverworldExplosion3Gfx, v0Tiles0
+	decompress_tiles0 OverworldExplosion3Gfx, v0Tiles0
 	ret
 
 LoadOverworldSmokeGfx:
-	decompress_vram0 OverworldSmokeGfx, v0Tiles0 tile $32
+	decompress_tiles0 OverworldSmokeGfx, v0Tiles0, $32
 	ret
 
 UpdateCurOWOjAnimation:

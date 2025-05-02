@@ -1755,7 +1755,7 @@ _InitTempleScene:
 	ld hl, Pals_86a4d
 	ld b, BANK(Pals_86a4d)
 	call LoadFarPalsToTempPals1
-	decompress_vram1 FontGfx, v1Tiles0
+	decompress_tiles1 FontGfx, v1Tiles0
 	ld hl, BGMap_b0780
 	ld b, BANK(BGMap_b0780)
 	call LoadFarTiles
@@ -1784,9 +1784,9 @@ _InitTempleScene:
 	ld a, TEMPLE_SCENE_HIDDEN_FIGURE_REVEAL
 	ld [wTempleScene], a
 
-	decompress_vram1 TempleMusicBoxSceneGfx, v1Tiles0
-	decompress_vram0 BGMap_b3aaa, v0BGMap1
-	decompress_vram1 BGMap_b3ba5, v1BGMap1
+	decompress_tiles1 TempleMusicBoxSceneGfx, v1Tiles0
+	decompress_bgmap0 BGMap_b3aaa, v0BGMap1
+	decompress_bgmap1 BGMap_b3ba5, v1BGMap1
 
 	ld a, [wLanguage]
 	and a
@@ -3841,8 +3841,8 @@ _GolfBuilding:
 	ld b, BANK(PrologueBackgroundGfx)
 	call LoadFarTiles
 
-	decompress_vram1 BGMap_b2616, v1BGMap0
-	decompress_vram0 BGMap_b2546, v0BGMap0
+	decompress_bgmap1 BGMap_b2616, v1BGMap0
+	decompress_bgmap0 BGMap_b2546, v0BGMap0
 
 	call .Func_ada43
 	call UpdateSceneWarioAnimation
@@ -4455,17 +4455,17 @@ _InitPrologueSequence:
 	call ClearSceneObjsRAM
 	call VBlank_PrologueEpilogue
 
-	decompress_vram1 BGMap_b34c3, v1BGMap1
-	decompress_vram0 BGMap_b330c, v0BGMap1
+	decompress_bgmap1 BGMap_b34c3, v1BGMap1
+	decompress_bgmap0 BGMap_b330c, v0BGMap1
 
 	ld hl, PrologueBackgroundGfx
 	ld b, BANK(PrologueBackgroundGfx)
 	call LoadFarTiles
 
-	decompress_vram1 FontGfx, v1Tiles0
-	decompress_vram1 PrologueGfx, v1Tiles0
-	decompress_vram1 BGMap_b3a5b, v1BGMap0
-	decompress_vram0 BGMap_b3a03, v0BGMap0
+	decompress_tiles1 FontGfx, v1Tiles0
+	decompress_tiles1 PrologueGfx, v1Tiles0
+	decompress_bgmap1 BGMap_b3a5b, v1BGMap0
+	decompress_bgmap0 BGMap_b3a03, v0BGMap0
 
 	ld hl, MusicBoxGfx
 	ld de, v0Tiles1
@@ -4477,10 +4477,10 @@ _InitPrologueSequence:
 	and a
 	jr z, .japanese
 ; english
-	decompress_vram0 TextEN_HiddenFigureAreYouAware, wTextBuffer
+	decompress_bgmap0 TextEN_HiddenFigureAreYouAware, wTextBuffer
 	jr .asm_adf63
 .japanese
-	decompress_vram0 TextJP_HiddenFigureAreYouAware, wTextBuffer
+	decompress_bgmap0 TextJP_HiddenFigureAreYouAware, wTextBuffer
 .asm_adf63
 	call FillClearedTextBuffer
 
@@ -6787,8 +6787,8 @@ _InitEpilogue:
 	ld bc, 8 palettes
 	call WriteAToHL_BCTimes
 
-	decompress_vram0 EpilogueGfx, v0Tiles0
-	decompress_vram1 FontGfx, v1Tiles0
+	decompress_tiles0 EpilogueGfx, v0Tiles0
+	decompress_tiles1 FontGfx, v1Tiles0
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
@@ -6804,14 +6804,14 @@ _InitEpilogue:
 	xor a
 	ldh [rVBK], a
 
-	decompress_vram1 SpearheadGfx, v1Tiles0
-	decompress_vram1 HammerBotGfx, v1Tiles0 + $400
-	decompress_vram1 DoughnuteerGfx, v1Tiles1
+	decompress_tiles1 SpearheadGfx, v1Tiles0
+	decompress_tiles1 HammerBotGfx, v1Tiles0, $40
+	decompress_tiles1 DoughnuteerGfx, v1Tiles1
 
-	decompress_vram1 BGMap_15dff8, v1BGMap0
-	decompress_vram0 BGMap_15df9b, v0BGMap0
-	decompress_vram1 BGMap_b34c3, v1BGMap1
-	decompress_vram0 BGMap_b330c, v0BGMap1
+	decompress_bgmap1 BGMap_15dff8, v1BGMap0
+	decompress_bgmap0 BGMap_15df9b, v0BGMap0
+	decompress_bgmap1 BGMap_b34c3, v1BGMap1
+	decompress_bgmap0 BGMap_b330c, v0BGMap1
 
 	call FillClearedTextBuffer
 	ld a, [wLanguage]
@@ -6875,9 +6875,9 @@ Func_af01f:
 	ld b, BANK(Pals_86b1d)
 	call CopyFarBytes
 
-	decompress_vram1 FontGfx, v1Tiles0
-	decompress_vram1 BGMap_15cf40, v1BGMap0
-	decompress_vram0 BGMap_15cd00, v0BGMap0
+	decompress_tiles1 FontGfx, v1Tiles0
+	decompress_bgmap1 BGMap_15cf40, v1BGMap0
+	decompress_bgmap0 BGMap_15cd00, v0BGMap0
 
 	ld hl, wOWUIObj1YCoord
 	ld a, $60

@@ -67,7 +67,7 @@ Func_9c072:
 	ld a, [w2d025]
 	dec a
 	jr z, .skip_load_tiles
-	decompress_vram1 Cutscenes6Gfx, v1Tiles0
+	decompress_tiles1 Cutscenes6Gfx, v1Tiles0
 .skip_load_tiles
 	ld a, [w2d025]
 	ld [w2d01e], a
@@ -207,8 +207,8 @@ Func_9c072:
 .Func_9c1b6:
 	call LoadCutscenes3Gfx
 
-	decompress_vram1 BGMap_b956d, v1BGMap0
-	decompress_vram0 BGMap_b951f, v0BGMap0
+	decompress_bgmap1 BGMap_b956d, v1BGMap0
+	decompress_bgmap0 BGMap_b951f, v0BGMap0
 
 	ld b, BANK(Pals_b8080)
 	ld hl, Pals_b8080
@@ -221,8 +221,8 @@ Func_9c072:
 .Func_9c209:
 	call LoadCutscenes1Gfx
 
-	decompress_vram1 BGMap_b9424, v1BGMap0
-	decompress_vram0 BGMap_b93c8, v0BGMap0
+	decompress_bgmap1 BGMap_b9424, v1BGMap0
+	decompress_bgmap0 BGMap_b93c8, v0BGMap0
 
 	ld b, BANK(Pals_b8000)
 	ld hl, Pals_b8000
@@ -390,7 +390,7 @@ Func_9c072:
 .Func_9c39c:
 	call LoadCutscenes4Gfx
 
-	decompress_vram1 OwlGfx, v1Tiles0
+	decompress_tiles1 OwlGfx, v1Tiles0
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
@@ -402,8 +402,8 @@ Func_9c072:
 
 	call Func_9ca77
 
-	decompress_vram1 BGMap_ba64e, v1BGMap1
-	decompress_vram0 BGMap_ba5fd, v0BGMap1
+	decompress_bgmap1 BGMap_ba64e, v1BGMap1
+	decompress_bgmap0 BGMap_ba5fd, v0BGMap1
 
 	ld b, BANK(Pals_b8040)
 	ld hl, Pals_b8040
@@ -423,16 +423,16 @@ Func_9c072:
 
 	call LoadCutscenes3Gfx
 
-	decompress_vram1 BGMap_b9691, v1BGMap0
-	decompress_vram0 BGMap_b9635, v0BGMap0
+	decompress_bgmap1 BGMap_b9691, v1BGMap0
+	decompress_bgmap0 BGMap_b9635, v0BGMap0
 
 	jp Func_9d536
 
 .Func_9c476:
 	call LoadCutscenes3Gfx
 
-	decompress_vram1 BGMap_b97c4, v1BGMap0
-	decompress_vram0 BGMap_b9768, v0BGMap0
+	decompress_bgmap1 BGMap_b97c4, v1BGMap0
+	decompress_bgmap0 BGMap_b9768, v0BGMap0
 
 	jp ClearTempPals_Bank27
 
@@ -466,8 +466,8 @@ Func_9c072:
 	xor a
 	ldh [rVBK], a
 
-	decompress_vram1 BGMap_b9859, v1BGMap0
-	decompress_vram0 BGMap_b9816, v0BGMap0
+	decompress_bgmap1 BGMap_b9859, v1BGMap0
+	decompress_bgmap0 BGMap_b9816, v0BGMap0
 
 	ld hl, Pals_cc5c0
 	ld de, wTempPals1
@@ -475,7 +475,7 @@ Func_9c072:
 	ld b, BANK(Pals_cc5c0)
 	call CopyFarBytes
 
-	decompress_vram1 CartGfx, v0Tiles1
+	decompress_tiles1 CartGfx, v0Tiles1
 
 	ld hl, .palette
 	ld de, wTempPals2 palette 6
@@ -628,7 +628,7 @@ Func_9c072:
 	call LoadFarPalsToTempPals2
 	call Func_9c9cb
 
-	decompress_vram1 ParaGoomGfx, v1Tiles0 tile $40
+	decompress_tiles1 ParaGoomGfx, v1Tiles0, $40
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
@@ -655,7 +655,7 @@ Func_9c072:
 	call ClearTempPals_Bank27
 	call LoadCutscenes8Gfx
 
-	decompress_vram1 FireGfx, v1Tiles1
+	decompress_tiles1 FireGfx, v1Tiles1
 
 	call Func_9ca28
 	call Func_9cb61
@@ -716,7 +716,7 @@ Func_9c072:
 	call ClearTempPals_Bank27
 	call Func_9c9cb
 
-	decompress_vram1 WallCrackGfx, v1Tiles1
+	decompress_tiles1 WallCrackGfx, v1Tiles1
 
 	call Func_9ca28
 	call Func_9cb95
@@ -741,7 +741,7 @@ Func_9c072:
 	call LoadFarPalsToTempPals2
 	call Func_9c931
 
-	decompress_vram1 OctohonGfx, v1Tiles1 tile $40
+	decompress_tiles1 OctohonGfx, v1Tiles1, $40
 
 	call Func_9ca6a
 	call Func_9cbaf
@@ -751,35 +751,35 @@ Func_9c072:
 	ret
 
 LoadCutscenes1Gfx:
-	decompress_vram0 Cutscenes1Gfx, v0Tiles0
+	decompress_tiles0 Cutscenes1Gfx, v0Tiles0
 	jr LoadCutscenes5Gfx
 
 Func_9c84f:
-	decompress_vram1 Cutscenes1Gfx, v1Tiles0
+	decompress_tiles1 Cutscenes1Gfx, v1Tiles0
 	jr Func_9c8e9
 
 LoadCutscenes2Gfx:
-	decompress_vram0 Cutscenes2Gfx, v0Tiles0
+	decompress_tiles0 Cutscenes2Gfx, v0Tiles0
 	jp LoadCutscenes5Gfx ; can be jr
 
 LoadCutscenes3Gfx:
-	decompress_vram0 Cutscenes3Gfx, v0Tiles0
+	decompress_tiles0 Cutscenes3Gfx, v0Tiles0
 	jp LoadCutscenes5Gfx ; can be jr
 
 LoadCutscenes4Gfx:
-	decompress_vram0 Cutscenes4Gfx, v0Tiles0
+	decompress_tiles0 Cutscenes4Gfx, v0Tiles0
 	jp LoadCutscenes5Gfx ; unnecessary jump
 
 LoadCutscenes5Gfx:
-	decompress_vram0 Cutscenes5Gfx, v0Tiles2
+	decompress_tiles0 Cutscenes5Gfx, v0Tiles2
 	ret
 
 Func_9c8e9:
-	decompress_vram1 Cutscenes5Gfx, v1Tiles2
+	decompress_tiles1 Cutscenes5Gfx, v1Tiles2
 	ret
 
 Func_9c90c:
-	decompress_vram1 Cutscenes7Gfx, v1Tiles0
+	decompress_tiles1 Cutscenes7Gfx, v1Tiles0
 	jp Func_9c8e9
 
 Func_9c931:
@@ -791,11 +791,11 @@ Func_9c937:
 	jp Func_9ca0c
 
 Func_9c93d:
-	decompress_vram0 Cutscenes7Gfx, v0Tiles0
+	decompress_tiles0 Cutscenes7Gfx, v0Tiles0
 	ret
 
 LoadCutscenes8Gfx:
-	decompress_vram0 Cutscenes8Gfx, v0Tiles0
+	decompress_tiles0 Cutscenes8Gfx, v0Tiles0
 	jp LoadCutscenes5Gfx
 
 Func_9c977:
@@ -807,23 +807,23 @@ Func_9c97d:
 	jp Func_9c9e9
 
 Func_9c983:
-	decompress_vram1 Cutscenes8Gfx, v1Tiles0
+	decompress_tiles1 Cutscenes8Gfx, v1Tiles0
 	ret
 
 Func_9c9a6:
-	decompress_vram1 Cutscenes9Gfx, v1Tiles0
+	decompress_tiles1 Cutscenes9Gfx, v1Tiles0
 	jp Func_9c9e9
 
 Func_9c9cb:
-	decompress_vram0 Cutscenes9Gfx, v0Tiles0
+	decompress_tiles0 Cutscenes9Gfx, v0Tiles0
 	jp Func_9ca0c
 
 Func_9c9e9:
-	decompress_vram1 Cutscenes10Gfx, v1Tiles2
+	decompress_tiles1 Cutscenes10Gfx, v1Tiles2
 	ret
 
 Func_9ca0c:
-	decompress_vram0 Cutscenes10Gfx, v0Tiles2
+	decompress_tiles0 Cutscenes10Gfx, v0Tiles2
 	ret
 
 Func_9ca28:

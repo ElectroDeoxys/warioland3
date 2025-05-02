@@ -11,26 +11,54 @@ MACRO frame_oam
 	db \1, \2, \3, \4
 ENDM
 
-MACRO decompress_vram0
+MACRO decompress_tiles0
 	ld a, BANK(\1)
 	ld [wTempBank], a
 	ld hl, \1
-	ld bc, \2
+IF _NARG == 3
+	ld bc, \2 tile \3
+ELSE
+	ld bc, \2 tile $00
+ENDC
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	hcall Decompress
 ENDM
 
-MACRO decompress_vram1
+MACRO decompress_tiles1
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
+IF _NARG == 3
+	decompress_tiles0 \1, \2, \3
+ELSE
+	decompress_tiles0 \1, \2
+ENDC
+	xor a
+	ldh [rVBK], a
+ENDM
+
+MACRO decompress_bgmap0
 	ld a, BANK(\1)
 	ld [wTempBank], a
 	ld hl, \1
+IF _NARG == 3
+	ld bc, \2 + (\3 * SCRN_VX_B)
+ELSE
 	ld bc, \2
+ENDC
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	hcall Decompress
+ENDM
+
+MACRO decompress_bgmap1
+	ld a, BANK("VRAM1")
+	ldh [rVBK], a
+IF _NARG == 3
+	decompress_bgmap0 \1, \2, \3
+ELSE
+	decompress_bgmap0 \1, \2
+ENDC
 	xor a
 	ldh [rVBK], a
 ENDM

@@ -920,8 +920,8 @@ Func_8065e:
 	ld [wMissingTreasureIndicatorsEnabled], a
 	call Func_80b54
 
-	decompress_vram0 BGMap_85b91, v0BGMap0 + $3a0
-	decompress_vram1 BGMap_85bc4, v1BGMap0 + $3a0
+	decompress_bgmap0 BGMap_85b91, v0BGMap0, 29
+	decompress_bgmap1 BGMap_85bc4, v1BGMap0, 29
 
 	ld a, [wTopBarState]
 	and a
@@ -960,12 +960,12 @@ Func_8065e:
 	ld a, [wGameModeFlags]
 	bit MODE_TIME_ATTACK_F, a
 	jr nz, .asm_80753
-	decompress_vram0 BGMap_86868, v0BGMap1
-	decompress_vram1 BGMap_868b2, v1BGMap1
+	decompress_bgmap0 BGMap_86868, v0BGMap1
+	decompress_bgmap1 BGMap_868b2, v1BGMap1
 	jr .asm_80790
 .asm_80753
-	decompress_vram0 BGMap_868f5, v0BGMap1
-	decompress_vram1 BGMap_86929, v1BGMap1
+	decompress_bgmap0 BGMap_868f5, v0BGMap1
+	decompress_bgmap1 BGMap_86929, v1BGMap1
 .asm_80790
 	xor a
 	ld [wWX], a
@@ -1217,32 +1217,32 @@ LoadBGMapsToWRAM:
 	ret
 
 LoadOverworldCommonGfx:
-	decompress_vram1 OverworldCommonGfx, v1Tiles0
-	decompress_vram1 OverworldNumbersGfx, v1Tiles0 tile $60
+	decompress_tiles1 OverworldCommonGfx, v1Tiles0
+	decompress_tiles1 OverworldNumbersGfx, v1Tiles0, $60
 	ret
 
 LoadOverworld1Gfx:
-	decompress_vram0 Overworld1Gfx, v0Tiles0
+	decompress_tiles0 Overworld1Gfx, v0Tiles0
 	ret
 
 LoadOverworld2Gfx:
-	decompress_vram0 Overworld2Gfx, v0Tiles0
+	decompress_tiles0 Overworld2Gfx, v0Tiles0
 	ret
 
 LoadOverworld5Gfx:
-	decompress_vram0 Overworld5Gfx, v0Tiles0
+	decompress_tiles0 Overworld5Gfx, v0Tiles0
 	ret
 
 LoadOverworld6Gfx:
-	decompress_vram0 Overworld6Gfx, v0Tiles0
+	decompress_tiles0 Overworld6Gfx, v0Tiles0
 	ret
 
 LoadOverworldArrowsGfx:
-	decompress_vram0 OverworldArrowsGfx, v0Tiles1
+	decompress_tiles0 OverworldArrowsGfx, v0Tiles1
 	ret
 
 LoadOverworldGlowGfx:
-	decompress_vram1 OverworldGlowGfx, v1Tiles0 tile $20
+	decompress_tiles1 OverworldGlowGfx, v1Tiles0, $20
 	ret
 
 LoadMapSidePals:
