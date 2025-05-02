@@ -42,7 +42,7 @@ MACRO decompress_bgmap0
 	ld [wTempBank], a
 	ld hl, \1
 IF _NARG == 3
-	ld bc, \2 + (\3 * SCRN_VX_B)
+	ld bc, \2 + (\3 * BG_MAP_WIDTH)
 ELSE
 	ld bc, \2
 ENDC

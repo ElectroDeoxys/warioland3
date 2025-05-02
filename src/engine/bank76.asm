@@ -72,7 +72,7 @@ UpdateCommonOWAnimations:
 	and %11
 	ld [hl], a ; current frame
 
-	ld hl, w2d030
+	ld hl, wCloudType
 	ld d, [hl]
 	sla d ; *2
 	ld e, $00
@@ -180,10 +180,10 @@ UpdateCommonOWAnimations:
 	set 1, [hl]
 	ret
 
-Func_1d8bf7:
+_LoadCloudAndSeaGfx:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld a, [w2d030]
+	ld a, [wCloudType]
 	add a ; *2
 	ld d, a
 	ld e, $00

@@ -4,18 +4,18 @@ Func_b4000:
 Func_b4001:
 	debug_nop
 
-Func_b4004:
+_InitOWObjects:
 	ld a, [w2d065]
 	ld c, a
 	ld a, [wCutsceneMapSide]
 	jumptable
 
-	dw Func_b4014 ; NORTH
-	dw Func_b4309 ; WEST
-	dw Func_b449b ; SOUTH
-	dw Func_b4688 ; EAST
+	dw InitOWObjects_North ; NORTH
+	dw InitOWObjects_West  ; WEST
+	dw InitOWObjects_South ; SOUTH
+	dw InitOWObjects_East  ; EAST
 
-Func_b4014:
+InitOWObjects_North:
 	ld a, [wCutsceneActionParam]
 	jumptable
 
@@ -51,11 +51,11 @@ Func_b403e:
 	db $44, $30, $01
 
 .asm_b404f
-	call Func_b4055
+	call .Func_b4055
 	jp Func_b4082
 
-Func_b4055:
-	ld a, [w2d025]
+.Func_b4055:
+	ld a, [wQueuedCutscene]
 	and a
 	ret nz
 	ld hl, wSceneObj15
@@ -101,7 +101,7 @@ Func_b409c:
 	ld a, GREEN_MUSIC_BOX
 	call IsTreasureCollected
 	ret nz
-	ld a, [w2d025]
+	ld a, [wQueuedCutscene]
 	and a
 	jr nz, .asm_b40b4
 	ld a, [wNextMapSide]
@@ -371,7 +371,7 @@ Func_b42e7:
 .data
 	db $28, $50, 00
 
-Func_b4309:
+InitOWObjects_West:
 	ld a, [wCutsceneActionParam]
 	jumptable
 
@@ -423,7 +423,7 @@ Func_b435f:
 	ld a, [w2d065]
 	add a
 	ret z
-	ld a, [w2d025]
+	ld a, [wQueuedCutscene]
 	and a
 	ret nz
 	ld hl, wSceneObj7
@@ -472,12 +472,12 @@ Func_b43a8:
 	call .asm_b43ce
 	xor a
 	ld [wSceneObj5State], a
-	ld hl, wAttrmap + $b0
-	res 7, [hl]
-	ld hl, wAttrmap + $d0
-	res 7, [hl]
-	ld hl, wAttrmap + $e0
-	res 7, [hl]
+	hlbgcoord 16, 5, wAttrmap
+	res BGB_PRI, [hl]
+	hlbgcoord 16, 6, wAttrmap
+	res BGB_PRI, [hl]
+	hlbgcoord  0, 7, wAttrmap
+	res BGB_PRI, [hl]
 	ret
 .asm_b43ce
 	ld hl, wSceneObj5
@@ -591,7 +591,7 @@ Func_b4474:
 .data
 	db $78, $3c, $23
 
-Func_b449b:
+InitOWObjects_South:
 	ld a, [wCutsceneActionParam]
 	jumptable
 
@@ -716,12 +716,12 @@ Func_b4567:
 	call InitSceneObjParams
 
 	ld b, 3
-	ld de, $1f
-	ld hl, wAttrmap + $12e
+	ld de, BG_MAP_WIDTH - 1
+	hlbgcoord 14, 9, wAttrmap
 .loop
-	set 7, [hl]
+	set BGB_PRI, [hl]
 	inc hl
-	set 7, [hl]
+	set BGB_PRI, [hl]
 	add hl, de
 	dec b
 	jr nz, .loop
@@ -735,7 +735,7 @@ Func_b4567:
 .asm_b459a
 	ld hl, Data_85579
 	farcall Func_854ee
-	ld a, [w2d025]
+	ld a, [wQueuedCutscene]
 	and a
 	ret nz
 	ld hl, wSceneObj15
@@ -866,7 +866,7 @@ Func_b4665:
 .data
 	db $25, $70, $20
 
-Func_b4688:
+InitOWObjects_East:
 	ld a, [wCutsceneActionParam]
 	jumptable
 
@@ -901,7 +901,7 @@ Func_b46a0:
 	ld b, BANK(BGMap_857f7)
 	call CopyFarBytes
 	ld hl, BGMap_85897
-	ld de, wAttrmap + $14f
+	debgcoord 15, 10, wAttrmap
 	ld c, $91
 	ld b, BANK(BGMap_85897)
 	jp CopyFarBytes
@@ -933,11 +933,11 @@ Func_b46d9:
 	ld de, .data_2
 	call InitSceneObjParams
 
-	ld hl, wAttrmap + $143
-	ld b, $4
+	hlbgcoord 3, 10, wAttrmap
+	ld b, 4
 	call SetBGMapBytesPriority
-	ld hl, wAttrmap + $163
-	ld b, $4
+	hlbgcoord 3, 11, wAttrmap
+	ld b, 4
 	jp SetBGMapBytesPriority
 
 .data_1
@@ -1114,14 +1114,14 @@ Func_b4832:
 	ld hl, wSceneObj2
 	ld de, .data_2
 	call InitSceneObjParams
-	ld hl, wAttrmap + $ee
-	ld b, $3
+	hlbgcoord 14, 7, wAttrmap
+	ld b, 3
 	call SetBGMapBytesPriority
-	ld hl, wAttrmap + $10e
-	ld b, $3
+	hlbgcoord 14, 8, wAttrmap
+	ld b, 3
 	call SetBGMapBytesPriority
-	ld hl, wAttrmap + $12e
-	ld b, $2
+	hlbgcoord 14, 9, wAttrmap
+	ld b, 2
 	jp SetBGMapBytesPriority
 
 .asm_b4864
@@ -1190,7 +1190,7 @@ Func_b4895:
 ; starting from hl in BGMap
 SetBGMapBytesPriority:
 .loop
-	set 7, [hl]
+	set BGB_PRI, [hl]
 	inc hl
 	dec b
 	jr nz, .loop
@@ -3352,41 +3352,45 @@ NOWFunc_DayNightSpell:
 .visible_button_attr
 	db $34, $35
 	db $36, $37
-	db $0f, $0f
-	db $0f, $0f
+
+	db $7 | BGF_BANK1, $7 | BGF_BANK1
+	db $7 | BGF_BANK1, $7 | BGF_BANK1
 
 .invisible_button_attr
 	db $3e, $3e
 	db $3f, $3f
-	db $0f, $2f
-	db $0f, $2f
+
+	db $7 | BGF_BANK1, $7 | BGF_BANK1 | BGF_XFLIP
+	db $7 | BGF_BANK1, $7 | BGF_BANK1 | BGF_XFLIP
 
 .pressed_button_attr
 	db $48, $49
 	db $4a, $4b
-	db $0f, $0f
-	db $0f, $0f
+
+	db $7 | BGF_BANK1, $7 | BGF_BANK1
+	db $7 | BGF_BANK1, $7 | BGF_BANK1
 
 .Func_b57f4:
-	ld a, HIGH(wAttrmap tile $2a)
+	ld a, HIGH(wAttrmap + 0 + 21 * BG_MAP_WIDTH)
 	ld [wHDMASourceHi], a
-	ld a, LOW(wAttrmap tile $2a)
+	ld a, LOW(wAttrmap + 0 + 21 * BG_MAP_WIDTH)
 	ld [wHDMASourceLo], a
-	ld a, $1b
+	ld a, HIGH(v0BGMap0 + 0 + 30 * BG_MAP_WIDTH) - $80
 	ld [wHDMADestHi], a
-	ld a, $c0
+	ld a, LOW(v0BGMap0 + 0 + 30 * BG_MAP_WIDTH)
 	ld [wHDMADestLo], a
-	ld a, $4 dma_tiles
+	ld a, $4 - $1 ; 2 rows
 	ld [wHDMAMode], a
-	ld a, HIGH(wAttrmap tile $26)
+
+	ld a, HIGH(wAttrmap + 0 + 19 * BG_MAP_WIDTH)
 	ld [w2d0b5SourceHi], a
-	ld a, LOW(wAttrmap tile $26)
+	ld a, LOW(wAttrmap + 0 + 19 * BG_MAP_WIDTH)
 	ld [w2d0b5SourceLo], a
-	ld a, $1b
+	ld a, HIGH(v0BGMap0 + 0 + 30 * BG_MAP_WIDTH) - $80
 	ld [w2d0b5DestHi], a
-	ld a, $c0
+	ld a, LOW(v0BGMap0 + 0 + 30 * BG_MAP_WIDTH)
 	ld [w2d0b5DestLo], a
-	ld a, $4 dma_tiles
+	ld a, $4 - $1 ; 2 rows
 	ld [w2d0b5Mode], a
 	ret
 
@@ -3399,6 +3403,7 @@ NOWFunc_DayNightSpell:
 	ld a, $00
 	adc d
 	ld d, a
+	; debgcoord 11, 21, wAttrmap
 	ld c, 2
 .loop
 	ld a, [hli]
@@ -3832,7 +3837,7 @@ UpdateOWTornado:
 	ld hl, wSceneObj1
 	call ApplyOWMovement
 	ret nz
-	ld a, [w2d025]
+	ld a, [wQueuedCutscene]
 	and a
 	ret nz
 	ld a, [wTopBarState]
@@ -7041,16 +7046,16 @@ EOWFunc_Earthquake:
 
 .Func_b7142:
 	ld b, $04
-	ld hl, wAttrmap + $142
+	hlbgcoord 2, 10, wAttrmap
 .asm_b7147
-	set 7, [hl]
+	set BGB_PRI, [hl]
 	inc hl
 	dec b
 	jr nz, .asm_b7147
 	ld b, $04
-	ld hl, wAttrmap + $162
+	hlbgcoord 2, 11, wAttrmap
 .asm_b7152
-	set 7, [hl]
+	set BGB_PRI, [hl]
 	inc hl
 	dec b
 	jr nz, .asm_b7152
@@ -8267,7 +8272,7 @@ EOWFunc_Daytime:
 	and a
 	ret nz
 	di
-	farcall VBlank_80cb1
+	farcall VBlank_OWScene
 	ei
 	jp AdvanceOWFunc
 
@@ -8371,7 +8376,7 @@ Func_b7984:
 	dw Func_b791d
 
 .Func_b79de:
-	ld a, [w2d025]
+	ld a, [wQueuedCutscene]
 	and a
 	ret nz
 	ld a, [wLevel2]
@@ -8445,7 +8450,7 @@ Func_b7984:
 	ret
 
 .Func_b7a5a:
-	ld a, [w2d025]
+	ld a, [wQueuedCutscene]
 	and a
 	ret nz
 	ld a, [w2d124]
@@ -8499,13 +8504,13 @@ Func_b7a6d:
 	dw Func_b791d
 
 Func_b7ab7:
-	ld a, [w2d025]
+	ld a, [wQueuedCutscene]
 	cp $04
 	ret z
 	jp UpdateOWTornado
 
 Func_b7ac0:
-	ld a, [w2d025]
+	ld a, [wQueuedCutscene]
 	and a
 	ret nz
 	ld hl, wSceneObj8Unk7
@@ -8541,7 +8546,7 @@ Func_b7ac0:
 	jr .asm_b7ae5
 
 Func_b7afb:
-	ld a, [w2d025]
+	ld a, [wQueuedCutscene]
 	and a
 	ret nz
 	ld hl, wSceneObj8Unk7
@@ -8592,7 +8597,7 @@ Func_b7b26:
 	ret
 
 Func_b7b4e:
-	ld a, [w2d025]
+	ld a, [wQueuedCutscene]
 	and a
 	ret nz
 	ld a, [w2d12a]
@@ -8690,7 +8695,7 @@ Func_b7be9:
 	jr z, .asm_b7bf9
 	cp HIGHLIGHT_LEVEL
 	jr z, .asm_b7bf9
-	ld a, [w2d025]
+	ld a, [wQueuedCutscene]
 	and a
 	ret
 .asm_b7bf9
@@ -8702,7 +8707,7 @@ Func_b7be9:
 	ret
 
 Func_b7c05:
-	ld a, [w2d025]
+	ld a, [wQueuedCutscene]
 	and a
 	ret nz
 	ld hl, w2d12b
@@ -8776,7 +8781,7 @@ Func_b7c5c:
 	ret
 
 Func_b7c84:
-	ld a, [w2d025]
+	ld a, [wQueuedCutscene]
 	and a
 	ret nz
 	ld a, [w2d12e]
@@ -8807,7 +8812,7 @@ Func_b7ca5:
 	ret
 
 Func_b7cb3:
-	ld a, [w2d025]
+	ld a, [wQueuedCutscene]
 	and a
 	ret nz
 	ld a, [w2d07c]

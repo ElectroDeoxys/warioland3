@@ -11,6 +11,20 @@ DEF TILE_SIZE EQU 16 ; bytes
 DEF tiles EQUS "* TILE_SIZE"
 DEF tile  EQUS "+ TILE_SIZE *"
 
+; bg flags
+DEF BGF_PRI        EQU %10000000 ; Priority
+DEF BGF_YFLIP      EQU %01000000 ; Y flip
+DEF BGF_XFLIP      EQU %00100000 ; X flip
+DEF BGF_BANK0      EQU %00000000 ; Bank number; 0,1
+DEF BGF_BANK1      EQU %00001000 ; Bank number; 0,1
+
+DEF BGF_PALMASK    EQU %00000111 ; Palette
+
+DEF BGB_PRI        EQU 7 ; Priority
+DEF BGB_YFLIP      EQU 6 ; Y flip
+DEF BGB_XFLIP      EQU 5 ; X flip
+DEF BGB_BANK1      EQU 3 ; Bank number; 0,1
+
 ; fading speed used by wFadeSpeed
 	const_def
 	const FADE_SPEED_SLOW   ; $00

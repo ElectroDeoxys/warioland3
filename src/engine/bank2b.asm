@@ -6797,7 +6797,7 @@ _InitEpilogue:
 	ld bc, $50 tiles
 	call CopyHLToDE_BC
 	ld hl, EpilogueStarGfx
-	ld de, v1Tiles1 + $400
+	ld de, v1Tiles1 tile $40
 	ld c, $00 ; aka $100 bytes
 	ld b, BANK(EpilogueStarGfx)
 	call CopyFarBytes

@@ -120,7 +120,7 @@ BGMap_9a2ac:
 INCBIN "gfx/bgmaps/map_9a2ac.bin.rle"
 
 DrawCoinCount:
-	ld de, v0Tiles1 + $a0
+	ld de, v0Tiles1 tile $a
 	ld a, [wNumCoins + 0]
 	call .DrawNumber
 	ld a, [wNumCoins + 1]
@@ -224,12 +224,12 @@ _InitTreasureCollection:
 
 	call ApplyPageTreasuresPals
 
-	ld hl, wAttrmap + $22
-	ld a, $09
+	hlbgcoord 2, 1, wAttrmap
+	ld a, $1 | BGF_BANK1
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
-	ld hl, wAttrmap + $42
+	hlbgcoord 2, 2, wAttrmap
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
@@ -237,7 +237,7 @@ _InitTreasureCollection:
 	ld a, [wCollectionPage]
 	inc a
 	add $20
-	ld [wTilemap + $30], a
+	ldbgcoord 16, 1, wTilemap
 
 	ld hl, wTilemap
 	ld de, v0BGMap1

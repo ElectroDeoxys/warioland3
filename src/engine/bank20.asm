@@ -1,17 +1,18 @@
-; \1 = x coord
-; \2 = y coord
+; \1 = bg y coord
+; \2 = bg x coord
 ; \3 = unknown 1
 ; \4 = unknown 2
 MACRO ow_coord
 IF (\1) != -1
-DEF x = \1 + (\2 * BG_MAP_WIDTH)
-	db ((x & $1e0) >> 2)
-	db ((x & $01f) << 3)
+DEF x = \2 + (\1 * BG_MAP_WIDTH)
+	db ((x & $1e0) >> 2) ; y coord in px
+	db ((x & $01f) << 3) ; x coord in px
 ELSE
 	db -1
 	db -1
 ENDC
-	db \3, \4
+	db \3
+	db \4
 ENDM
 
 MapLevelCoords:
@@ -21,30 +22,30 @@ MapLevelCoords:
 	dw .East
 
 .North:
-	ow_coord  7,  5, 8,  8 ; OWNORTH_THE_TEMPLE
-	ow_coord  3,  5, 8, -4 ; OWNORTH_OUT_OF_THE_WOODS
-	ow_coord  3, 10, 4, -4 ; OWNORTH_THE_PEACEFUL_VILLAGE
-	ow_coord 10,  8, 4,  4 ; OWNORTH_THE_VAST_PLAIN
-	ow_coord  8, 10, 4,  4 ; OWNORTH_BANK_OF_THE_WILD_RIVER
-	ow_coord 11, 12, 4,  4 ; OWNORTH_THE_TIDAL_COAST
-	ow_coord 17, 12, 4,  4 ; OWNORTH_SEA_TURTLE_ROCKS
-	ow_coord  3,  8, 4, -4 ; OWNORTH_JUNCTION
+	ow_coord  5,  7, 8,  8 ; OWNORTH_THE_TEMPLE
+	ow_coord  5,  3, 8, -4 ; OWNORTH_OUT_OF_THE_WOODS
+	ow_coord 10,  3, 4, -4 ; OWNORTH_THE_PEACEFUL_VILLAGE
+	ow_coord  8, 10, 4,  4 ; OWNORTH_THE_VAST_PLAIN
+	ow_coord 10,  8, 4,  4 ; OWNORTH_BANK_OF_THE_WILD_RIVER
+	ow_coord 12, 11, 4,  4 ; OWNORTH_THE_TIDAL_COAST
+	ow_coord 12, 17, 4,  4 ; OWNORTH_SEA_TURTLE_ROCKS
+	ow_coord  8,  3, 4, -4 ; OWNORTH_JUNCTION
 	ow_coord -1, -1, 0,  0
 	ow_coord -1, -1, 0,  0
 	ow_coord -1, -1, 0,  0
 	ow_coord -1, -1, 0,  0
 	ow_coord -1, -1, 0,  0
 	ow_coord -1, -1, 0,  0
-	ow_coord 19,  7, 0,  0 ; OW_EXIT_RIGHT
-	ow_coord  0, 10, 4,  0 ; OW_EXIT_LEFT
+	ow_coord  7, 19, 0,  0 ; OW_EXIT_RIGHT
+	ow_coord 10,  0, 4,  0 ; OW_EXIT_LEFT
 
 .West:
-	ow_coord  2, 10,  8, 12 ; OWWEST_DESERT_RUINS
+	ow_coord 10,  2,  8, 12 ; OWWEST_DESERT_RUINS
 	ow_coord  7,  7,  8, 12 ; OWWEST_THE_VOLCANOS_BASE
-	ow_coord  9, 10,  4, 12 ; OWWEST_THE_POOL_OF_RAIN
-	ow_coord 15,  8,  8, -4 ; OWWEST_A_TOWN_IN_CHAOS
-	ow_coord  9, 14,  4, 12 ; OWWEST_BENEATH_THE_WAVES
-	ow_coord  9,  2, 12, 12 ; OWWEST_THE_WEST_CRATER
+	ow_coord 10,  9,  4, 12 ; OWWEST_THE_POOL_OF_RAIN
+	ow_coord  8, 15,  8, -4 ; OWWEST_A_TOWN_IN_CHAOS
+	ow_coord 14,  9,  4, 12 ; OWWEST_BENEATH_THE_WAVES
+	ow_coord  2,  9, 12, 12 ; OWWEST_THE_WEST_CRATER
 	ow_coord -1, -1,  0,  0
 	ow_coord -1, -1,  0,  0
 	ow_coord -1, -1,  0,  0
@@ -53,16 +54,16 @@ MapLevelCoords:
 	ow_coord -1, -1,  0,  0
 	ow_coord -1, -1,  0,  0
 	ow_coord -1, -1,  0,  0
-	ow_coord 19,  5, -1,  0 ; OW_EXIT_RIGHT
-	ow_coord  0, 10,  8,  0 ; OW_EXIT_LEFT
+	ow_coord  5, 19, -1,  0 ; OW_EXIT_RIGHT
+	ow_coord 10,  0,  8,  0 ; OW_EXIT_LEFT
 
 .South:
-	ow_coord  2,  8,  4,  4 ; OWSOUTH_THE_GRASSLANDS
-	ow_coord  6,  8,  4, 12 ; OWSOUTH_THE_BIG_BRIDGE
-	ow_coord 13,  8,  4, 12 ; OWSOUTH_TOWER_OF_REVIVAL
-	ow_coord 10, 11,  4,  4 ; OWSOUTH_THE_STEEP_CANYON
-	ow_coord  8,  3,  8, 12 ; OWSOUTH_CAVE_OF_FLAMES
-	ow_coord 17,  2, 12,  4 ; OWSOUTH_ABOVE_THE_CLOUDS
+	ow_coord  8,  2,  4,  4 ; OWSOUTH_THE_GRASSLANDS
+	ow_coord  8,  6,  4, 12 ; OWSOUTH_THE_BIG_BRIDGE
+	ow_coord  8, 13,  4, 12 ; OWSOUTH_TOWER_OF_REVIVAL
+	ow_coord 11, 10,  4,  4 ; OWSOUTH_THE_STEEP_CANYON
+	ow_coord  3,  8,  8, 12 ; OWSOUTH_CAVE_OF_FLAMES
+	ow_coord  2, 17, 12,  4 ; OWSOUTH_ABOVE_THE_CLOUDS
 	ow_coord -1, -1,  0,  0
 	ow_coord -1, -1,  0,  0
 	ow_coord -1, -1,  0,  0
@@ -71,17 +72,17 @@ MapLevelCoords:
 	ow_coord -1, -1,  0,  0
 	ow_coord -1, -1,  0,  0
 	ow_coord -1, -1,  0,  0
-	ow_coord 19,  8,  4,  0 ; OW_EXIT_RIGHT
-	ow_coord  0,  8,  4,  0 ; OW_EXIT_LEFT
+	ow_coord  8, 19,  4,  0 ; OW_EXIT_RIGHT
+	ow_coord  8,  0,  4,  0 ; OW_EXIT_LEFT
 
 .East:
-	ow_coord  2, 10,  8, 12 ; OWEAST_THE_STAGNANT_SWAMP
-	ow_coord 11, 13,  4, 12 ; OWEAST_THE_FRIGID_SEA
+	ow_coord 10,  2,  8, 12 ; OWEAST_THE_STAGNANT_SWAMP
+	ow_coord 13, 11,  4, 12 ; OWEAST_THE_FRIGID_SEA
 	ow_coord  7,  7,  4, 12 ; OWEAST_CASTLE_OF_ILLUSIONS
-	ow_coord 11,  9,  8, 12 ; OWEAST_THE_COLOSSAL_HOLE
-	ow_coord 16, 11,  4, 12 ; OWEAST_THE_WARPED_VOID
-	ow_coord  7,  2, 12, 12 ; OWEAST_THE_EAST_CRATER
-	ow_coord 16,  7,  4, 12 ; OWEAST_FOREST_OF_FEAR
+	ow_coord  9, 11,  8, 12 ; OWEAST_THE_COLOSSAL_HOLE
+	ow_coord 11, 16,  4, 12 ; OWEAST_THE_WARPED_VOID
+	ow_coord  2,  7, 12, 12 ; OWEAST_THE_EAST_CRATER
+	ow_coord  7, 16,  4, 12 ; OWEAST_FOREST_OF_FEAR
 	ow_coord -1, -1,  0,  0
 	ow_coord -1, -1,  0,  0
 	ow_coord -1, -1,  0,  0
@@ -89,8 +90,8 @@ MapLevelCoords:
 	ow_coord -1, -1,  0,  0
 	ow_coord -1, -1,  0,  0
 	ow_coord -1, -1,  0,  0
-	ow_coord 19,  7,  4,  0 ; OW_EXIT_RIGHT
-	ow_coord  0, 10,  8,  0 ; OW_EXIT_LEFT
+	ow_coord  7, 19,  4,  0 ; OW_EXIT_RIGHT
+	ow_coord 10,  0,  8,  0 ; OW_EXIT_LEFT
 
 Data_8023e:
 	dw .North
@@ -538,58 +539,7 @@ SwitchDayNight:
 	ld [hl], a
 	ret
 
-OverworldStateTable::
-	ld a, [wSubState]
-	jumptable
-
-	dw FastFadeToWhite
-	dw InitOverworld
-	dw SlowFadeFromWhite
-	dw Func_804ec
-	dw FastFadeToWhite
-
-	dw Func_804f7           ; SST_OVERWORLD_05
-	dw SlowFadeFromWhite
-	dw Func_80540
-
-	dw FadeBGToWhite_Normal ; SST_OVERWORLD_08
-	dw InitMapSide           ; SST_OVERWORLD_09
-	dw DarkenBGToPal_Normal
-	dw Func_805d7           ; SST_OVERWORLD_0B
-
-	dw FadeBGToWhite_Normal ; SST_OVERWORLD_COLLECTION
-	dw InitTreasureCollection
-	dw DarkenBGToPal_Normal
-	dw TreasureCollection
-	dw FadeBGToWhite_Normal
-
-	dw Func_80d6c           ; SST_OVERWORLD_11
-	dw DarkenBGToPal_Normal
-	dw Func_80d7c
-	dw FadeBGToWhite_Normal
-	dw Func_80db1
-
-	dw FadeBGToWhite_Normal ; SST_OVERWORLD_BEST_TIME_LIST
-	dw InitBestTimeList
-	dw DarkenBGToPal_Normal
-	dw BestTimeList
-
-	dw FadeBGToWhite_Normal ; SST_OVERWORLD_1A
-	dw InitTempleScene
-	dw DarkenBGToPal_Normal
-	dw UpdateTempleScene
-	dw Func_80e33
-
-	dw FadeBGToWhite_Normal
-	dw GolfBuilding           ; SST_OVERWORLD_20
-	dw DarkenBGToPal_Normal
-	dw Func_80e55
-
-	dw FastFadeToWhite ; SST_OVERWORLD_EPILOGUE
-	dw InitEpilogue
-	dw SlowFadeFromWhite
-	dw Func_80e75
-	dw Func_80e85
+INCLUDE "engine/ow/state_table.asm"
 
 Func_803e6:
 	ld a, [wTransitionParam]
@@ -636,7 +586,7 @@ InitOverworld:
 	ld a, d
 	ld [wMapSideLevelID], a
 .skip_get_level_index
-	call Func_80b29
+	call ClearOWWRAM
 
 	ld a, [wLastTransitionParam]
 	and a
@@ -654,8 +604,9 @@ InitOverworld:
 
 	; TRANSITION_NEW_GAME
 	ld a, CUTSCENE_01
-	ld [w2d025], a
+	ld [wQueuedCutscene], a
 	jr .asm_80466
+
 .asm_8045f
 	call Func_8197e
 	jr nz, .asm_80466
@@ -664,20 +615,20 @@ InitOverworld:
 .asm_80466
 	call Func_804c9
 	farcall Func_9c005
-	ld a, [w2d01e]
+	ld a, [wCutscenePlaying]
 	and a
-	jr z, .asm_80480
-	jr .asm_804a0
+	jr z, .after_cutscene
+	jr .play_cutscene
 
-.asm_80480
-	ld a, [w2d025]
+.after_cutscene
+	ld a, [wQueuedCutscene]
 	call GetCutsceneOWParams
 	jr z, .asm_8048a
 	jr .asm_80497
 
 .asm_8048a
 	xor a ; CUTSCENE_00
-	ld [w2d025], a
+	ld [wQueuedCutscene], a
 	ld a, SST_OVERWORLD_09
 	ld [wSubState], a
 	call Func_803e6
@@ -685,13 +636,13 @@ InitOverworld:
 
 .asm_80497
 	call Func_804d4
-	ld a, SST_OVERWORLD_05
+	ld a, SST_OVERWORLD_OW_SCENE
 	ld [wSubState], a
 	ret
 
-.asm_804a0
+.play_cutscene
 	call Func_804d4
-	ld a, SST_OVERWORLD_11
+	ld a, SST_OVERWORLD_CUTSCENE
 	ld [wSubState], a
 	ret
 
@@ -699,8 +650,8 @@ InitOverworld:
 	ld a, TRANSITION_RETURN_TO_MAP
 	ld [w2d00d], a
 	ld a, CUTSCENE_5A
-	ld [w2d025], a
-	jr .asm_80480
+	ld [wQueuedCutscene], a
+	jr .after_cutscene
 
 .asm_804b5
 	call Func_803e6
@@ -751,8 +702,8 @@ Func_804f7:
 	call DisableLCD
 	stop_music2
 
-	call Func_80b29
-	call VBlank_80cb1
+	call ClearOWWRAM
+	call VBlank_OWScene
 	call ClearVirtualOAM
 
 	xor a
@@ -797,7 +748,7 @@ InitMapSide:
 	call ClearVirtualOAM
 	call VBlank_Overworld
 
-	call Func_80b29
+	call ClearOWWRAM
 	call GetNextTreasureToCollect
 
 	ld a, [wDayNight]
@@ -955,7 +906,7 @@ Func_8065e:
 	farcall Func_b4a3d
 	call Func_82041
 	farcall Func_b4aa9
-	call Func_80bc9
+	call LoadCloudAndSeaGfx
 
 	ld a, [wGameModeFlags]
 	bit MODE_TIME_ATTACK_F, a
@@ -1059,10 +1010,10 @@ Func_8065e:
 	ret
 
 Func_80851:
-	call Func_80ab5
+	call LoadPalsForOWScene
 	call LoadOverworldCommonGfx
 	call LoadOverworld1Gfx
-	ld a, [w2d025]
+	ld a, [wQueuedCutscene]
 	cp CUTSCENE_35
 	call nz, LoadOverworldGlowGfx
 
@@ -1100,7 +1051,7 @@ Func_8086f:
 	ld [wCutsceneOWParamsPtr + 1], a
 
 	farcall Func_b4a37
-	call Func_80bc9
+	call LoadCloudAndSeaGfx
 
 	xor a
 	ld hl, wTempPals1 palette 7 color 1
@@ -1113,17 +1064,17 @@ Func_8086f:
 	ld a, [wLanguage]
 	add b
 	ld b, a
-	ld c, $00
-	ld hl, LevelNamesNorthJPGfx + (7 * $200)
-	ld de, v1Tiles2 + $500
+	ld c, $00 ; $10 tiles
+	ld hl, LevelNamesNorthJPGfx + (7 * $20 tiles)
+	ld de, v1Tiles2 tile $50
 	call CopyFarBytes
 	ld b, $24
 	ld a, [wLanguage]
 	add b
 	ld b, a
-	ld c, $00
-	ld hl, LevelNamesNorthJPGfx + (7 * $200)
-	ld de, v1Tiles2 + $600
+	ld c, $00 ; $10 tiles
+	ld hl, LevelNamesNorthJPGfx + (7 * $20 tiles)
+	ld de, v1Tiles2 tile $60
 	call CopyFarBytes
 	xor a
 	ldh [rVBK], a
@@ -1139,7 +1090,7 @@ Func_8086f:
 	ld a, [wCurMapSide]
 	and a
 	jr nz, .no_window_display
-	ld a, [w2d025]
+	ld a, [wQueuedCutscene]
 	cp CUTSCENE_2F
 	jr nz, .no_window_display
 	ld a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
@@ -1154,7 +1105,7 @@ Func_8086f:
 	ret
 
 Func_8091e:
-	call Func_80ab5
+	call LoadPalsForOWScene
 	call LoadOverworld2Gfx
 	call LoadOverworldCommonGfx
 	call LoadOverworldGlowGfx
@@ -1162,13 +1113,13 @@ Func_8091e:
 	jp Func_8086f
 
 Func_80930:
-	ld a, [w2d025]
+	ld a, [wQueuedCutscene]
 	cp CUTSCENE_57
 	jr nz, .asm_8093c
 	ld a, $01
 	ld [w2d011], a
 .asm_8093c
-	call Func_80ab5
+	call LoadPalsForOWScene
 	call LoadOverworld5Gfx
 	call LoadOverworldCommonGfx
 	call LoadOverworldGlowGfx
@@ -1185,7 +1136,7 @@ Func_8094e:
 	ld a, $01
 	ld [w2d011], a
 .got_medallion
-	call Func_80ab5
+	call LoadPalsForOWScene
 	call LoadOverworld6Gfx
 	call LoadOverworldCommonGfx
 	call LoadOverworldGlowGfx
@@ -1249,14 +1200,14 @@ LoadMapSidePals:
 	farcall _LoadMapSidePals
 	ret
 
-Func_80ab5:
-	call .Func_80ac8
-	farcall Func_8540a
+LoadPalsForOWScene:
+	call .CheckIfIsUnlockedExit
+	farcall _LoadPalsForOWScene
 	ret
 
-.Func_80ac8:
+.CheckIfIsUnlockedExit:
 	xor a ; FALSE
-	ld [w2dfff], a
+	ld [wOWExitUnlocked], a
 	ld a, [wOWCutsceneAction]
 	cp UNLOCK_LEVEL
 	ret nz
@@ -1270,7 +1221,7 @@ Func_80ab5:
 	ret c
 	; either OW_EXIT_RIGHT or OW_EXIT_LEFT
 	ld a, TRUE
-	ld [w2dfff], a
+	ld [wOWExitUnlocked], a
 	ret
 
 Func_80ae7:
@@ -1302,11 +1253,9 @@ Func_80b1b:
 	call LoadBGMapsToWRAM
 	ret
 
-; clears wOWPendingTileUpdate onwards
-; seems like level-related stuff
-Func_80b29:
-	ld hl, wOWPendingTileUpdate
-	ld bc, $7a0
+ClearOWWRAM:
+	ld hl, STARTOF("OW WRAM")
+	ld bc, SIZEOF("OW WRAM")
 	xor a
 	call WriteAToHL_BCTimes
 	ret
@@ -1343,7 +1292,7 @@ Func_80b54:
 
 	xor a
 	ld [w2d031], a
-	ld [w2d030], a
+	ld [wCloudType], a
 	ld [w2d049], a
 	ld [w2d033], a
 	ld [w2d036], a
@@ -1376,20 +1325,20 @@ Func_80b54:
 	ret
 .asm_80bbd
 	ld a, $01
-	ld [w2d030], a
+	ld [wCloudType], a
 	ret
 .asm_80bc3
 	ld a, $04
 	ld [w2d03b], a
 	ret
 
-Func_80bc9:
-	farcall Func_1d8bf7
+LoadCloudAndSeaGfx:
+	farcall _LoadCloudAndSeaGfx
 	ret
 
 Func_80bd9:
 	hlbgcoord 0, 14, wAttrmap
-	res 7, [hl]
+	res BGB_PRI, [hl]
 
 	; reset BG priority inside a
 	; 3x4 rectangle, at coord (0, 15)
@@ -1400,7 +1349,7 @@ Func_80bd9:
 	add hl, de
 	ld b, 3
 .loop_inner
-	res 7, [hl]
+	res BGB_PRI, [hl]
 	inc hl
 	dec b
 	jr nz, .loop_inner
@@ -1541,7 +1490,7 @@ VBlank_Overworld:
 	jp hTransferVirtualOAM
 .end
 
-VBlank_80cb1:
+VBlank_OWScene:
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -1561,36 +1510,36 @@ VBlank_80cb1:
 	jr z, .skip_update_tiles
 	ld c, LOW(rHDMA1)
 	ld a, HIGH(wTilemap)
-	ld [$ff00+c], a
+	ld [$ff00+c], a ; rHDMA1
 	inc c
 	xor a ; LOW(wTilemap)
+	ld [$ff00+c], a ; rHDMA2
+	inc c
+	ld a, HIGH(v0BGMap0) - $80
+	ld [$ff00+c], a ; rHDMA3
+	inc c
+	xor a ; LOW(v0BGMap0)
 	ld [$ff00+c], a
 	inc c
-	ld a, $18
-	ld [$ff00+c], a
-	inc c
-	xor a
-	ld [$ff00+c], a
-	inc c
-	ld a, $1d
+	ld a, 30 - 1 ; 15 rows
 	ld [$ff00+c], a
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld c, LOW(rHDMA1)
 	ld a, HIGH(wAttrmap)
-	ld [$ff00+c], a
+	ld [$ff00+c], a ; rHDMA1
 	inc c
 	xor a ; LOW(wAttrmap)
+	ld [$ff00+c], a ; rHDMA2
+	inc c
+	ld a, HIGH(v1BGMap0) - $80
+	ld [$ff00+c], a ; rHDMA3
+	inc c
+	xor a ; LOW(v1BGMap0)
 	ld [$ff00+c], a
 	inc c
-	ld a, $18
-	ld [$ff00+c], a
-	inc c
-	xor a
-	ld [$ff00+c], a
-	inc c
-	ld a, $1d
+	ld a, 30 - 1 ; 15 rows
 	ld [$ff00+c], a
 	xor a
 	ld [wOWPendingTileUpdate], a
@@ -1649,34 +1598,36 @@ UnreferencedOpenTreasureCollection:
 	dw FadeBGToWhite_Normal
 	dw ReturnToPauseMenuFromActionHelp
 
-Func_80d6c:
-	farcall Func_9c021
+InitCutscene:
+	farcall _InitCutscene
 	ret
 
-Func_80d7c:
-	call Func_80d92
-	farcall Func_9ce28
+UpdateCutscene:
+	call .SkipCutsceneIfAble
+	farcall DoCutsceneFunc
 	call ClearUnusedVirtualOAM
 	ret
 
-Func_80d92:
+.SkipCutsceneIfAble:
 	ld a, [wTopBarState]
 	and a
 	ret z
+	; was a cutscene triggered from the Top Bar
 	ld a, [w2d013]
 	cp $01
 	ret c
 	ld a, [wJoypadPressed]
 	bit B_BUTTON_F, a
 	ret z
-	pop hl
+	; b btn pressed
+	pop hl ; skip rest of UpdateCutscene
 	ld hl, wSubState
 	inc [hl]
 	stop_sfx
 	ret
 
 Func_80db1:
-	jp InitOverworld.asm_80480
+	jp InitOverworld.after_cutscene
 
 ; de = scene obj
 ; c = level index in wCurMapSide
@@ -3271,11 +3222,11 @@ Func_81900:
 
 Func_81931:
 	stop_sfx
-	ld a, [w2d025]
+	ld a, [wQueuedCutscene]
 	ld b, a
 	xor a
 	ld [wLastTransitionParam], a
-	ld [w2d025], a
+	ld [wQueuedCutscene], a
 	ld [wOWCutsceneAction], a
 	ld [wTempOWCutsceneAction], a
 	ld a, CUTSCENE_5A
@@ -3312,7 +3263,7 @@ Func_8197e:
 	ld b, a
 	xor a
 	ld c, a ; CUTSCENE_00
-	ld [w2d025], a
+	ld [wQueuedCutscene], a
 
 	ld hl, CutsceneTreasures
 .loop
@@ -3332,18 +3283,22 @@ Func_8197e:
 
 .found
 	ld a, c
-	ld [w2d025], a
+	ld [wQueuedCutscene], a
 	call CheckAllCutsceneTreasures
 	jr z, .asm_819a7
 	ret ; collected all treasures
 
 .asm_819a7
 	xor a ; CUTSCENE_00
-	ld [w2d025], a
+	ld [wQueuedCutscene], a
 	ret
 
 ; input:
 ; - a = CUTSCENE_* constant
+; output:
+; - a = TRUE and no carry if all treasures
+; for the inpu cutscene have been collected
+; - a = FALSE and carry set otherwise
 CheckAllCutsceneTreasures:
 	call LoadCutsceneTreasures
 	ld c, TRUE
@@ -3364,9 +3319,10 @@ Func_819c6:
 	and c
 	ret
 
-; returns carry if treasure in a
+; returns carry and 0 in a if treasure in a
 ; is different from wLastTransitionParam
 ; and has not been collected
+; else return no carry and $01 in a
 CheckCutsceneTreasure:
 	cp INVALID_TREASURE
 	jr z, .no_carry
@@ -3375,13 +3331,13 @@ CheckCutsceneTreasure:
 	jr z, .equal
 	call IsTreasureCollected
 	jr nz, .no_carry
-	xor a
+	xor a ; FALSE
 	scf
 	ret
 .equal
 	ld c, FALSE
 .no_carry
-	ld a, $01
+	ld a, TRUE
 	and a
 	ret
 
@@ -3871,6 +3827,8 @@ CutsceneTreasures:
 
 ; input:
 ; - a = CUTSCENE_* constant
+; output:
+; - z set if scene finished
 GetCutsceneOWParams:
 	ld hl, CutsceneOWParams
 	call GetPointerFromTableHL
@@ -4426,13 +4384,13 @@ Func_81dce:
 	and a
 	jr z, .asm_81de1
 	cp TRANSITION_NEW_GAME
-	jr nz, .asm_81de5
+	jr nz, .loop_cutscenes
 	ld c, $00
 .asm_81de1
 	ld a, c
 	ld [wLastTransitionParam], a
 
-.asm_81de5
+.loop_cutscenes
 	xor a
 	ld [w2d078], a
 	ld a, [wCutscene]
@@ -4445,14 +4403,14 @@ Func_81dce:
 	ld a, $80
 	ld [w2d065], a
 .asm_81dfd
-	call .Func_81e16
+	call .PrepareScene
 	ld a, [wCutscene]
 	inc a
 	cp NUM_CUTSCENES
-	jr z, .asm_81e0d
+	jr z, .break
 	ld [wCutscene], a
-	jr .asm_81de5
-.asm_81e0d
+	jr .loop_cutscenes
+.break
 	ld a, [wLastTransitionParam]
 	inc a
 	ret nz
@@ -4460,45 +4418,50 @@ Func_81dce:
 	ld [wLastTransitionParam], a ; = 0
 	ret
 
-.Func_81e16:
+; run through all scene params of this cutscene
+; and initialise everything that is needed
+; for this side of the map
+.PrepareScene:
 	ld a, [wCutscene]
 	call GetCutsceneOWParams
-	ret z
+	ret z ; finished
 .loop
 	ld a, [wCutsceneMapSide]
 	ld b, a
 	ld a, [wCurMapSide]
 	cp b
-	jr nz, .same_side
-	call .Func_81e36
-.same_side
+	jr nz, .diff_side
+	; same side
+	call .DoInitFunc
+.diff_side
 	ld hl, wCutsceneOWParamsPtr
 	call GetByteFromPointerInHL
 	call GetCutsceneOWParams_GotPtr
-	ret z
+	ret z ; finished
 	jr .loop
 
-.Func_81e36:
+.DoInitFunc:
 	ld a, [wOWCutsceneAction]
 	jumptable
 
 	dw Func_81e44
-	dw Func_81e57 ; UNLOCK_LEVEL
-	dw Func_81e47 ; DO_OW_FUNC
-	dw Func_82c09 ; HIGHLIGHT_LEVEL
-	dw Func_81e47 ; SPECIAL_ACTION
+	dw DrawUnlockedLevels      ; UNLOCK_LEVEL
+	dw InitOWObjects           ; DO_OW_FUNC
+	dw InitHighlightLevelScene ; HIGHLIGHT_LEVEL
+	dw InitOWObjects           ; SPECIAL_ACTION
 
 Func_81e44:
 	debug_nop
 
-Func_81e47:
-	farcall Func_b4004
+InitOWObjects:
+	farcall _InitOWObjects
 	ret
 
-Func_81e57:
+DrawUnlockedLevels:
 	ld a, [w2d065]
 	add a
-	ret z
+	ret z ; conditions not fulfilled
+
 	xor a
 	ld [w2d072], a
 	call GetUnlockedOWLevelData
@@ -4721,28 +4684,34 @@ GetConnectedLevel1CoordsInTilemap:
 	call GetOWCoordInTilemap
 	ret
 
+; applies palette 7 and bank1 bit to wAttrToPlaceInOW
+; if w2d07f is TRUE
 Func_81feb:
 	ld a, [w2d07f]
 	and a
 	ret z
+
+	; this load to hl and a is never used
 	ld a, [wOWTilemapPtr + 1]
 	ld h, a
 	ld a, [wOWTilemapPtr + 0]
 	ld l, a
 	ld a, [hl]
-	call .Func_8200f
+
+	call .GetTilePalIndex
 	ld a, [wAttrToPlaceInOW]
-	and $f8
-	or c
-	or $08
+	and $ff ^ BGF_PALMASK
+	or c ; always $7
+	or BGF_BANK1
 	ld [wAttrToPlaceInOW], a
+
 	ld a, [w2d07f]
 	dec a
 	ret z
 	debug_nop
 
-.Func_8200f:
-	ld c, $07
+.GetTilePalIndex:
+	ld c, $7
 	ret
 
 SetCompassSprite:
@@ -4993,7 +4962,7 @@ GetOWAllowedDPadInput:
 	dec d
 	dec d
 	ld a, [de] ; wAttrmap
-	bit 3, a
+	bit BGB_BANK1, a
 	ret z ; not an arrow
 	ld a, c
 	or b
@@ -6379,7 +6348,7 @@ Func_82a0a:
 	ret nz
 	; done fading
 	di
-	call VBlank_80cb1
+	call VBlank_OWScene
 	ei
 	jp Func_82a8d
 
@@ -6643,7 +6612,7 @@ Func_82bda:
 	ld [hl], a
 	ret
 
-Func_82c09:
+InitHighlightLevelScene:
 	ld a, [w2d065]
 	cp $80
 	ret nz
@@ -6702,7 +6671,7 @@ Func_82c33:
 	ld a, [wCutsceneActionParam]
 	sbc 0
 	ld [wLevel2], a
-	ld a, [w2d025]
+	ld a, [wQueuedCutscene]
 	cp CUTSCENE_25
 	jr z, .asm_82c71
 	cp CUTSCENE_23

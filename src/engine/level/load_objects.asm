@@ -84,7 +84,7 @@ LoadObjectGroupData::
 	push hl
 	ld h, a
 	ld l, c
-	ld bc, v1Tiles0 + $400
+	ld bc, v1Tiles0 tile $40
 	ldh a, [hffa0]
 	ld e, BANK("Enemy Gfx 1 Slot 2")
 	add e
@@ -114,7 +114,7 @@ LoadObjectGroupData::
 	push hl
 	ld h, a
 	ld l, c
-	ld bc, v1Tiles1 + $400
+	ld bc, v1Tiles1 tile $40
 	ldh a, [hffa0]
 	ld e, BANK("Enemy Gfx 1 Slot 4")
 	add e

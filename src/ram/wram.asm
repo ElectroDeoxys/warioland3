@@ -1455,7 +1455,7 @@ wLastTransitionParam::
 wMapSideLevelID::
 	db
 
-w2d01e::
+wCutscenePlaying::
 	db
 
 ; is TRUE if game has been cleared
@@ -1468,18 +1468,15 @@ wGotSunMedallion::
 
 	ds $1
 
-w2d022::
-	db
-
-w2d023::
-	db
+wCutsceneWY:: db
+wCutsceneWX:: db
 
 ; $00 when OW object animation is ongoing
 ; $ff when it reset
 wOWAnimationFinished::
 	db
 
-w2d025::
+wQueuedCutscene::
 	db
 
 wCutsceneOWParamsPtr::     dw
@@ -1492,7 +1489,7 @@ w2d02c::
 
 	ds $3
 
-w2d030::
+wCloudType::
 	db
 
 w2d031::
@@ -1604,6 +1601,9 @@ wCollectionCell::
 	db
 
 	ds $6
+
+
+SECTION "OW WRAM", WRAMX
 
 wOWPendingTileUpdate::
 	db
@@ -2056,6 +2056,9 @@ wAttrmap::
 wTilemap::
 	ds $300
 
+
+SECTION "WRAM2 2", WRAMX
+
 UNION
 
 w2d800::
@@ -2241,6 +2244,10 @@ w2dffd::
 
 w2dffe::
 	db
+
+; if TRUE, current OW scene
+; unlocks a connection to map side exit
+wOWExitUnlocked::
 
 w2dfff::
 	db

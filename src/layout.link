@@ -290,6 +290,8 @@ WRAMX 1
 	"Golf RAM"
 WRAMX 2
 	"WRAM2"
+	"OW WRAM"
+	"WRAM2 2"
 WRAMX 3
 	"Audio RAM"
 	"GFX RAM"

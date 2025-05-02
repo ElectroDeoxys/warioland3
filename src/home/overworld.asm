@@ -182,7 +182,7 @@ GetOWCoordInTilemap::
 
 ; loads source address of tiles
 ; with the given level's name for HDMA transfer
-; writes them to v0Tiles2 + $500
+; writes them to v0Tiles2 tile $50
 ; b = map side constant (NORTH, ...)
 ; d = level index within that map side
 LoadLevelName::
@@ -211,7 +211,7 @@ LoadLevelName::
 	ld [w2d0b5DestHi], a
 	xor a
 	ld [w2d0b5DestLo], a
-	ld a, $1f
+	ld a, 32 dma_tiles
 	ld [w2d0b5Mode], a
 	ret
 

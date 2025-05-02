@@ -3047,7 +3047,7 @@ FadeBGPalConfig:
 	xor a
 	ld [wPalConfigToFade], a
 	ld b, 4 ; fast fade
-	ld a, [w2d025]
+	ld a, [wQueuedCutscene]
 	and a
 	jr z, .fast_fade
 	ld b, 1 ; slow fade
@@ -3213,7 +3213,7 @@ FadePalConfig:
 	cp $20
 	ret
 
-Func_8540a:
+_LoadPalsForOWScene:
 	call GetMapSidePalGroup1
 	call .GetCrayonPal
 	ld a, [w2d011]
@@ -3227,9 +3227,10 @@ Func_8540a:
 	call GetMapSidePalGroup2
 	call LoadPalsToTempPals2
 
-	ld a, [w2dfff]
+	; load grey pals if it's a map exit unlock
+	ld a, [wOWExitUnlocked]
 	and a
-	ret z
+	ret z ; not exit
 	call LoadGreyOWPals
 	ret
 

@@ -45,7 +45,7 @@ UpdateRoomAnimatedTiles::
 	rl d
 	add hl, de
 
-	ld de, v1Tiles2 + $700
+	ld de, v1Tiles2 tile $70
 	ld b, TILE_SIZE
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
