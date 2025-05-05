@@ -1431,10 +1431,10 @@ w2d014::
 w2d015::
 	db
 
-wCutsceneMapSide::
+wOWSceneMapSide::
 	db
 
-wCutsceneActionParam::
+wOWSceneActionParam::
 	db
 
 w2d018::
@@ -1476,13 +1476,13 @@ wCutsceneWX:: db
 wOWAnimationFinished::
 	db
 
-wQueuedCutscene::
+wCurEvent::
 	db
 
-wCutsceneOWParamsPtr::     dw
-wOWCutsceneAction::        db
-wTempOWCutsceneAction::    db
-wTempCutsceneOWParamsPtr:: dw
+wOWSceneParamsPtr::     dw
+wOWSceneAction::        db
+wTempOWSceneAction::    db
+wTempOWSceneParamsPtr:: dw
 
 w2d02c::
 	db
@@ -1657,8 +1657,8 @@ w2d074::                 db
 wLevelArrowDirections2:: db
 w2d076::                 db
 
-; CUTSCENE_* constant
-wCutscene::
+; EVENT_* constant
+wTempEvent::
 	db
 
 w2d078::

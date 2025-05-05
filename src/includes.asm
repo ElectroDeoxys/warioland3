@@ -13,7 +13,7 @@ INCLUDE "macros/pos.asm"
 INCLUDE "macros/wram.asm"
 
 INCLUDE "constants/audio_constants.asm"
-INCLUDE "constants/cutscene_constants.asm"
+INCLUDE "constants/event_constants.asm"
 INCLUDE "constants/gfx_constants.asm"
 INCLUDE "constants/golf_constants.asm"
 INCLUDE "constants/hardware.inc"

@@ -8,7 +8,7 @@ NoInitCutscene:
 Func_9c005:
 	xor a
 	ld [wCutscenePlaying], a
-	ld a, [wQueuedCutscene]
+	ld a, [wCurEvent]
 	ld b, a
 	ld hl, CutsceneInitFunctions
 	call GetPointerFromTableHL
@@ -63,115 +63,115 @@ _InitCutscene:
 	ret
 
 ; runs the init function from CutsceneInitFunctions
-; for the cutscene in [wQueuedCutscene]
+; for the cutscene in [wCurEvent]
 InitLoadedCutscene:
 	xor a
 	ld [wLCDCFlagsToFlip], a
 	call ClearVirtualOAM
-	ld a, [wQueuedCutscene]
+	ld a, [wCurEvent]
 	dec a
 	jr z, .skip_load_tiles
-	; != CUTSCENE_01
+	; != EVENT_01
 	decompress_tiles1 Cutscenes6Gfx, v1Tiles0
 .skip_load_tiles
-	ld a, [wQueuedCutscene]
+	ld a, [wCurEvent]
 	ld [wCutscenePlaying], a
 	jumptable
 
 CutsceneInitFunctions:
 	table_width 2
-	dw NoInitCutscene  ; CUTSCENE_00
-	dw .InitPrologue ; CUTSCENE_01
-	dw .InitCutscene02 ; CUTSCENE_02
-	dw .InitCutscene03 ; CUTSCENE_03
-	dw .InitCutscene04 ; CUTSCENE_04
-	dw NoInitCutscene  ; CUTSCENE_05
-	dw .InitCutscene06 ; CUTSCENE_06
-	dw .InitCutscene07 ; CUTSCENE_07
-	dw .InitCutscene08 ; CUTSCENE_08
-	dw .InitCutscene09 ; CUTSCENE_09
-	dw .InitCutscene0a ; CUTSCENE_0A
-	dw NoInitCutscene  ; CUTSCENE_0B
-	dw .InitCutscene0c ; CUTSCENE_0C
-	dw .InitCutscene0d ; CUTSCENE_0D
-	dw .InitCutscene0e ; CUTSCENE_0E
-	dw NoInitCutscene  ; CUTSCENE_0F
-	dw .InitCutscene10 ; CUTSCENE_10
-	dw .InitCutscene11 ; CUTSCENE_11
-	dw NoInitCutscene  ; CUTSCENE_12
-	dw .InitCutscene13 ; CUTSCENE_13
-	dw .InitCutscene14 ; CUTSCENE_14
-	dw .InitCutscene15 ; CUTSCENE_15
-	dw NoInitCutscene  ; CUTSCENE_16
-	dw .InitCutscene17 ; CUTSCENE_17
-	dw .InitCutscene18 ; CUTSCENE_18
-	dw .InitCutscene19 ; CUTSCENE_19
-	dw NoInitCutscene  ; CUTSCENE_1A
-	dw .InitCutscene1b ; CUTSCENE_1B
-	dw NoInitCutscene  ; CUTSCENE_1C
-	dw .InitCutscene1d ; CUTSCENE_1D
-	dw .InitCutscene1e ; CUTSCENE_1E
-	dw .InitCutscene1f ; CUTSCENE_1F
-	dw NoInitCutscene  ; CUTSCENE_20
-	dw .InitCutscene21 ; CUTSCENE_21
-	dw .InitCutscene22 ; CUTSCENE_22
-	dw NoInitCutscene  ; CUTSCENE_23
-	dw .InitCutscene24 ; CUTSCENE_24
-	dw .InitCutscene25 ; CUTSCENE_25
-	dw NoInitCutscene  ; CUTSCENE_26
-	dw .InitCutscene27 ; CUTSCENE_27
-	dw NoInitCutscene  ; CUTSCENE_28
-	dw NoInitCutscene  ; CUTSCENE_29
-	dw NoInitCutscene  ; CUTSCENE_2A
-	dw NoInitCutscene  ; CUTSCENE_2B
-	dw NoInitCutscene  ; CUTSCENE_2C
-	dw NoInitCutscene  ; CUTSCENE_2D
-	dw NoInitCutscene  ; CUTSCENE_2E
-	dw NoInitCutscene  ; CUTSCENE_2F
-	dw .InitCutscene30 ; CUTSCENE_30
-	dw NoInitCutscene  ; CUTSCENE_31
-	dw NoInitCutscene  ; CUTSCENE_32
-	dw NoInitCutscene  ; CUTSCENE_33
-	dw NoInitCutscene  ; CUTSCENE_34
-	dw NoInitCutscene  ; CUTSCENE_35
-	dw NoInitCutscene  ; CUTSCENE_36
-	dw .InitCutscene37 ; CUTSCENE_37
-	dw .InitCutscene38 ; CUTSCENE_38
-	dw .InitCutscene39 ; CUTSCENE_39
-	dw .InitCutscene3a ; CUTSCENE_3A
-	dw NoInitCutscene  ; CUTSCENE_3B
-	dw .InitCutscene3c ; CUTSCENE_3C
-	dw .InitCutscene3d ; CUTSCENE_3D
-	dw NoInitCutscene  ; CUTSCENE_3E
-	dw NoInitCutscene  ; CUTSCENE_3F
-	dw NoInitCutscene  ; CUTSCENE_40
-	dw NoInitCutscene  ; CUTSCENE_41
-	dw NoInitCutscene  ; CUTSCENE_42
-	dw .InitCutscene43 ; CUTSCENE_43
-	dw .InitCutscene44 ; CUTSCENE_44
-	dw NoInitCutscene  ; CUTSCENE_45
-	dw NoInitCutscene  ; CUTSCENE_46
-	dw NoInitCutscene  ; CUTSCENE_47
-	dw NoInitCutscene  ; CUTSCENE_48
-	dw .InitCutscene49 ; CUTSCENE_49
-	dw .InitCutscene4a ; CUTSCENE_4A
-	dw NoInitCutscene  ; CUTSCENE_4B
-	dw .InitCutscene4c ; CUTSCENE_4C
-	dw NoInitCutscene  ; CUTSCENE_4D
-	dw .InitCutscene4e ; CUTSCENE_4E
-	dw .InitCutscene4f ; CUTSCENE_4F
-	dw NoInitCutscene  ; CUTSCENE_50
-	dw .InitCutscene51 ; CUTSCENE_51
-	dw NoInitCutscene  ; CUTSCENE_52
-	dw NoInitCutscene  ; CUTSCENE_53
-	dw .InitCutscene54 ; CUTSCENE_54
-	dw .InitCutscene55 ; CUTSCENE_55
-	dw .InitCutscene56 ; CUTSCENE_56
-	dw .InitCutscene57 ; CUTSCENE_57
-	dw .InitCutscene58 ; CUTSCENE_58
-	dw NoInitCutscene  ; CUTSCENE_59
-	dw NoInitCutscene  ; CUTSCENE_5A
-	assert_table_length NUM_CUTSCENES
+	dw NoInitCutscene  ; EVENT_00
+	dw .InitPrologue ; EVENT_01
+	dw .InitCutscene02 ; EVENT_02
+	dw .InitCutscene03 ; EVENT_03
+	dw .InitCutscene04 ; EVENT_04
+	dw NoInitCutscene  ; EVENT_05
+	dw .InitCutscene06 ; EVENT_06
+	dw .InitCutscene07 ; EVENT_07
+	dw .InitCutscene08 ; EVENT_08
+	dw .InitCutscene09 ; EVENT_09
+	dw .InitCutscene0a ; EVENT_0A
+	dw NoInitCutscene  ; EVENT_0B
+	dw .InitCutscene0c ; EVENT_0C
+	dw .InitCutscene0d ; EVENT_0D
+	dw .InitCutscene0e ; EVENT_0E
+	dw NoInitCutscene  ; EVENT_0F
+	dw .InitCutscene10 ; EVENT_10
+	dw .InitCutscene11 ; EVENT_11
+	dw NoInitCutscene  ; EVENT_12
+	dw .InitCutscene13 ; EVENT_13
+	dw .InitCutscene14 ; EVENT_14
+	dw .InitCutscene15 ; EVENT_15
+	dw NoInitCutscene  ; EVENT_16
+	dw .InitCutscene17 ; EVENT_17
+	dw .InitCutscene18 ; EVENT_18
+	dw .InitCutscene19 ; EVENT_19
+	dw NoInitCutscene  ; EVENT_1A
+	dw .InitCutscene1b ; EVENT_1B
+	dw NoInitCutscene  ; EVENT_1C
+	dw .InitCutscene1d ; EVENT_1D
+	dw .InitCutscene1e ; EVENT_1E
+	dw .InitCutscene1f ; EVENT_1F
+	dw NoInitCutscene  ; EVENT_20
+	dw .InitCutscene21 ; EVENT_21
+	dw .InitCutscene22 ; EVENT_22
+	dw NoInitCutscene  ; EVENT_23
+	dw .InitCutscene24 ; EVENT_24
+	dw .InitCutscene25 ; EVENT_25
+	dw NoInitCutscene  ; EVENT_26
+	dw .InitCutscene27 ; EVENT_27
+	dw NoInitCutscene  ; EVENT_28
+	dw NoInitCutscene  ; EVENT_29
+	dw NoInitCutscene  ; EVENT_2A
+	dw NoInitCutscene  ; EVENT_2B
+	dw NoInitCutscene  ; EVENT_2C
+	dw NoInitCutscene  ; EVENT_2D
+	dw NoInitCutscene  ; EVENT_2E
+	dw NoInitCutscene  ; EVENT_2F
+	dw .InitCutscene30 ; EVENT_30
+	dw NoInitCutscene  ; EVENT_31
+	dw NoInitCutscene  ; EVENT_32
+	dw NoInitCutscene  ; EVENT_33
+	dw NoInitCutscene  ; EVENT_34
+	dw NoInitCutscene  ; EVENT_35
+	dw NoInitCutscene  ; EVENT_36
+	dw .InitCutscene37 ; EVENT_37
+	dw .InitCutscene38 ; EVENT_38
+	dw .InitCutscene39 ; EVENT_39
+	dw .InitCutscene3a ; EVENT_3A
+	dw NoInitCutscene  ; EVENT_3B
+	dw .InitCutscene3c ; EVENT_3C
+	dw .InitCutscene3d ; EVENT_3D
+	dw NoInitCutscene  ; EVENT_3E
+	dw NoInitCutscene  ; EVENT_3F
+	dw NoInitCutscene  ; EVENT_40
+	dw NoInitCutscene  ; EVENT_41
+	dw NoInitCutscene  ; EVENT_42
+	dw .InitCutscene43 ; EVENT_43
+	dw .InitCutscene44 ; EVENT_44
+	dw NoInitCutscene  ; EVENT_45
+	dw NoInitCutscene  ; EVENT_46
+	dw NoInitCutscene  ; EVENT_47
+	dw NoInitCutscene  ; EVENT_48
+	dw .InitCutscene49 ; EVENT_49
+	dw .InitCutscene4a ; EVENT_4A
+	dw NoInitCutscene  ; EVENT_4B
+	dw .InitCutscene4c ; EVENT_4C
+	dw NoInitCutscene  ; EVENT_4D
+	dw .InitCutscene4e ; EVENT_4E
+	dw .InitCutscene4f ; EVENT_4F
+	dw NoInitCutscene  ; EVENT_50
+	dw .InitCutscene51 ; EVENT_51
+	dw NoInitCutscene  ; EVENT_52
+	dw NoInitCutscene  ; EVENT_53
+	dw .InitCutscene54 ; EVENT_54
+	dw .InitCutscene55 ; EVENT_55
+	dw .InitCutscene56 ; EVENT_56
+	dw .InitCutscene57 ; EVENT_57
+	dw .InitCutscene58 ; EVENT_58
+	dw NoInitCutscene  ; EVENT_59
+	dw NoInitCutscene  ; EVENT_5A
+	assert_table_length NUM_EVENTS
 
 .InitPrologue:
 	farcall _InitPrologueSequence
@@ -1421,104 +1421,104 @@ DoCutsceneFunc:
 	ld c, l
 
 	ld a, [wCutscenePlaying]
-	cp NUM_CUTSCENES
+	cp NUM_EVENTS
 	jp nc, .OutOfBoundsCutscene
 	jumptable
 
 .table
 	table_width 2
-	dw .InvalidCutscene ; CUTSCENE_00
-	dw Cutscene01Func ; CUTSCENE_01
-	dw Cutscene02Func ; CUTSCENE_02
-	dw Cutscene03Func ; CUTSCENE_03
-	dw Cutscene04Func ; CUTSCENE_04
-	dw .InvalidCutscene ; CUTSCENE_05
-	dw Cutscene06Func ; CUTSCENE_06
-	dw Cutscene07Func ; CUTSCENE_07
-	dw Cutscene08Func ; CUTSCENE_08
-	dw Cutscene09Func ; CUTSCENE_09
-	dw Cutscene0aFunc ; CUTSCENE_0A
-	dw .InvalidCutscene ; CUTSCENE_0B
-	dw Cutscene0cFunc ; CUTSCENE_0C
-	dw Cutscene0dFunc ; CUTSCENE_0D
-	dw Cutscene0eFunc ; CUTSCENE_0E
-	dw .InvalidCutscene ; CUTSCENE_0F
-	dw Cutscene10Func ; CUTSCENE_10
-	dw Cutscene11Func ; CUTSCENE_11
-	dw .InvalidCutscene ; CUTSCENE_12
-	dw Cutscene13Func ; CUTSCENE_13
-	dw Cutscene14Func ; CUTSCENE_14
-	dw Cutscene15Func ; CUTSCENE_15
-	dw .InvalidCutscene ; CUTSCENE_16
-	dw Cutscene17Func ; CUTSCENE_17
-	dw Cutscene18Func ; CUTSCENE_18
-	dw Cutscene19Func ; CUTSCENE_19
-	dw .InvalidCutscene ; CUTSCENE_1A
-	dw Cutscene1bFunc ; CUTSCENE_1B
-	dw .InvalidCutscene ; CUTSCENE_1C
-	dw Cutscene1dFunc ; CUTSCENE_1D
-	dw Cutscene1eFunc ; CUTSCENE_1E
-	dw Cutscene1fFunc ; CUTSCENE_1F
-	dw .InvalidCutscene ; CUTSCENE_20
-	dw Cutscene21Func ; CUTSCENE_21
-	dw Cutscene22Func ; CUTSCENE_22
-	dw .InvalidCutscene ; CUTSCENE_23
-	dw Cutscene24Func ; CUTSCENE_24
-	dw Cutscene25Func ; CUTSCENE_25
-	dw .InvalidCutscene ; CUTSCENE_26
-	dw Cutscene27Func ; CUTSCENE_27
-	dw .InvalidCutscene ; CUTSCENE_28
-	dw .InvalidCutscene ; CUTSCENE_29
-	dw .InvalidCutscene ; CUTSCENE_2A
-	dw .InvalidCutscene ; CUTSCENE_2B
-	dw .InvalidCutscene ; CUTSCENE_2C
-	dw .InvalidCutscene ; CUTSCENE_2D
-	dw .InvalidCutscene ; CUTSCENE_2E
-	dw .InvalidCutscene ; CUTSCENE_2F
-	dw Cutscene30Func ; CUTSCENE_30
-	dw .InvalidCutscene ; CUTSCENE_31
-	dw .InvalidCutscene ; CUTSCENE_32
-	dw .InvalidCutscene ; CUTSCENE_33
-	dw .InvalidCutscene ; CUTSCENE_34
-	dw .InvalidCutscene ; CUTSCENE_35
-	dw .InvalidCutscene ; CUTSCENE_36
-	dw Cutscene37Func ; CUTSCENE_37
-	dw Cutscene38Func ; CUTSCENE_38
-	dw Cutscene39Func ; CUTSCENE_39
-	dw Cutscene3aFunc ; CUTSCENE_3A
-	dw .InvalidCutscene ; CUTSCENE_3B
-	dw Cutscene3cFunc ; CUTSCENE_3C
-	dw Cutscene3dFunc ; CUTSCENE_3D
-	dw .InvalidCutscene ; CUTSCENE_3E
-	dw .InvalidCutscene ; CUTSCENE_3F
-	dw .InvalidCutscene ; CUTSCENE_40
-	dw .InvalidCutscene ; CUTSCENE_41
-	dw .InvalidCutscene ; CUTSCENE_42
-	dw Cutscene43Func ; CUTSCENE_43
-	dw Cutscene44Func ; CUTSCENE_44
-	dw .InvalidCutscene ; CUTSCENE_45
-	dw .InvalidCutscene ; CUTSCENE_46
-	dw .InvalidCutscene ; CUTSCENE_47
-	dw .InvalidCutscene ; CUTSCENE_48
-	dw Cutscene49Func ; CUTSCENE_49
-	dw Cutscene4aFunc ; CUTSCENE_4A
-	dw .InvalidCutscene ; CUTSCENE_4B
-	dw Cutscene4cFunc ; CUTSCENE_4C
-	dw .InvalidCutscene ; CUTSCENE_4D
-	dw Cutscene4eFunc ; CUTSCENE_4E
-	dw Cutscene4fFunc ; CUTSCENE_4F
-	dw .InvalidCutscene ; CUTSCENE_50
-	dw Cutscene51Func ; CUTSCENE_51
-	dw .InvalidCutscene ; CUTSCENE_52
-	dw .InvalidCutscene ; CUTSCENE_53
-	dw Cutscene54Func ; CUTSCENE_54
-	dw Cutscene55Func ; CUTSCENE_55
-	dw Cutscene56Func ; CUTSCENE_56
-	dw Cutscene57Func ; CUTSCENE_57
-	dw Cutscene58Func ; CUTSCENE_58
-	dw .InvalidCutscene ; CUTSCENE_59
-	dw .InvalidCutscene ; CUTSCENE_5A
-	assert_table_length NUM_CUTSCENES
+	dw .InvalidCutscene ; EVENT_00
+	dw Cutscene01Func ; EVENT_01
+	dw Cutscene02Func ; EVENT_02
+	dw Cutscene03Func ; EVENT_03
+	dw Cutscene04Func ; EVENT_04
+	dw .InvalidCutscene ; EVENT_05
+	dw Cutscene06Func ; EVENT_06
+	dw Cutscene07Func ; EVENT_07
+	dw Cutscene08Func ; EVENT_08
+	dw Cutscene09Func ; EVENT_09
+	dw Cutscene0aFunc ; EVENT_0A
+	dw .InvalidCutscene ; EVENT_0B
+	dw Cutscene0cFunc ; EVENT_0C
+	dw Cutscene0dFunc ; EVENT_0D
+	dw Cutscene0eFunc ; EVENT_0E
+	dw .InvalidCutscene ; EVENT_0F
+	dw Cutscene10Func ; EVENT_10
+	dw Cutscene11Func ; EVENT_11
+	dw .InvalidCutscene ; EVENT_12
+	dw Cutscene13Func ; EVENT_13
+	dw Cutscene14Func ; EVENT_14
+	dw Cutscene15Func ; EVENT_15
+	dw .InvalidCutscene ; EVENT_16
+	dw Cutscene17Func ; EVENT_17
+	dw Cutscene18Func ; EVENT_18
+	dw Cutscene19Func ; EVENT_19
+	dw .InvalidCutscene ; EVENT_1A
+	dw Cutscene1bFunc ; EVENT_1B
+	dw .InvalidCutscene ; EVENT_1C
+	dw Cutscene1dFunc ; EVENT_1D
+	dw Cutscene1eFunc ; EVENT_1E
+	dw Cutscene1fFunc ; EVENT_1F
+	dw .InvalidCutscene ; EVENT_20
+	dw Cutscene21Func ; EVENT_21
+	dw Cutscene22Func ; EVENT_22
+	dw .InvalidCutscene ; EVENT_23
+	dw Cutscene24Func ; EVENT_24
+	dw Cutscene25Func ; EVENT_25
+	dw .InvalidCutscene ; EVENT_26
+	dw Cutscene27Func ; EVENT_27
+	dw .InvalidCutscene ; EVENT_28
+	dw .InvalidCutscene ; EVENT_29
+	dw .InvalidCutscene ; EVENT_2A
+	dw .InvalidCutscene ; EVENT_2B
+	dw .InvalidCutscene ; EVENT_2C
+	dw .InvalidCutscene ; EVENT_2D
+	dw .InvalidCutscene ; EVENT_2E
+	dw .InvalidCutscene ; EVENT_2F
+	dw Cutscene30Func ; EVENT_30
+	dw .InvalidCutscene ; EVENT_31
+	dw .InvalidCutscene ; EVENT_32
+	dw .InvalidCutscene ; EVENT_33
+	dw .InvalidCutscene ; EVENT_34
+	dw .InvalidCutscene ; EVENT_35
+	dw .InvalidCutscene ; EVENT_36
+	dw Cutscene37Func ; EVENT_37
+	dw Cutscene38Func ; EVENT_38
+	dw Cutscene39Func ; EVENT_39
+	dw Cutscene3aFunc ; EVENT_3A
+	dw .InvalidCutscene ; EVENT_3B
+	dw Cutscene3cFunc ; EVENT_3C
+	dw Cutscene3dFunc ; EVENT_3D
+	dw .InvalidCutscene ; EVENT_3E
+	dw .InvalidCutscene ; EVENT_3F
+	dw .InvalidCutscene ; EVENT_40
+	dw .InvalidCutscene ; EVENT_41
+	dw .InvalidCutscene ; EVENT_42
+	dw Cutscene43Func ; EVENT_43
+	dw Cutscene44Func ; EVENT_44
+	dw .InvalidCutscene ; EVENT_45
+	dw .InvalidCutscene ; EVENT_46
+	dw .InvalidCutscene ; EVENT_47
+	dw .InvalidCutscene ; EVENT_48
+	dw Cutscene49Func ; EVENT_49
+	dw Cutscene4aFunc ; EVENT_4A
+	dw .InvalidCutscene ; EVENT_4B
+	dw Cutscene4cFunc ; EVENT_4C
+	dw .InvalidCutscene ; EVENT_4D
+	dw Cutscene4eFunc ; EVENT_4E
+	dw Cutscene4fFunc ; EVENT_4F
+	dw .InvalidCutscene ; EVENT_50
+	dw Cutscene51Func ; EVENT_51
+	dw .InvalidCutscene ; EVENT_52
+	dw .InvalidCutscene ; EVENT_53
+	dw Cutscene54Func ; EVENT_54
+	dw Cutscene55Func ; EVENT_55
+	dw Cutscene56Func ; EVENT_56
+	dw Cutscene57Func ; EVENT_57
+	dw Cutscene58Func ; EVENT_58
+	dw .InvalidCutscene ; EVENT_59
+	dw .InvalidCutscene ; EVENT_5A
+	assert_table_length NUM_EVENTS
 
 .OutOfBoundsCutscene
 	debug_nop
@@ -2164,7 +2164,7 @@ Cutscene11Func:
 
 .Func_9d36a:
 	ld a, [wCutscenePlaying]
-	cp CUTSCENE_11
+	cp EVENT_11
 	jp nz, AdvanceCutsceneFunc
 	ld a, $09
 	ld [w2d013], a

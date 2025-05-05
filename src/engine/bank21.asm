@@ -3047,7 +3047,7 @@ FadeBGPalConfig:
 	xor a
 	ld [wPalConfigToFade], a
 	ld b, 4 ; fast fade
-	ld a, [wQueuedCutscene]
+	ld a, [wCurEvent]
 	and a
 	jr z, .fast_fade
 	ld b, 1 ; slow fade

@@ -109,7 +109,7 @@ DEF TOPBAR_PREV_MAP   EQU (1 << TOPBAR_PREV_MAP_F)
 	const TOPBARST_OPEN                 ; $3
 	const TOPBARST_INPUT                ; $4
 	const TOPBARST_CLOSE                ; $5
-	const TOPBARST_CUTSCENE             ; $6
+	const TOPBARST_EVENT             ; $6
 	const TOPBARST_COLLECTION           ; $7
 	const TOPBARST_NEXT_MAP             ; $8
 	const TOPBARST_DAY_NIGHT            ; $9
@@ -118,14 +118,14 @@ DEF TOPBAR_PREV_MAP   EQU (1 << TOPBAR_PREV_MAP_F)
 
 DEF DAYNIGHT_TRANSITION_STEPS EQU 32
 
-; wOWCutsceneAction constants
+; wOWSceneAction constants
 	const_def 1
 	const UNLOCK_LEVEL    ; $1
 	const DO_OW_FUNC      ; $2
 	const HIGHLIGHT_LEVEL ; $3
 	const SPECIAL_ACTION  ; $4
 
-; OW cutscene functions
+; OW scene functions
 	const_def 1
 	const NOWFUNC_CUT_TREE         ; $01
 	const NOWFUNC_OPEN_GATE        ; $02

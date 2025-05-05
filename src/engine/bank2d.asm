@@ -7,7 +7,7 @@ Func_b4001:
 _InitOWObjects:
 	ld a, [w2d065]
 	ld c, a
-	ld a, [wCutsceneMapSide]
+	ld a, [wOWSceneMapSide]
 	jumptable
 
 	dw InitOWObjects_North ; NORTH
@@ -16,7 +16,7 @@ _InitOWObjects:
 	dw InitOWObjects_East  ; EAST
 
 InitOWObjects_North:
-	ld a, [wCutsceneActionParam]
+	ld a, [wOWSceneActionParam]
 	jumptable
 
 	dw Func_b4001
@@ -55,7 +55,7 @@ Func_b403e:
 	jp Func_b4082
 
 .Func_b4055:
-	ld a, [wQueuedCutscene]
+	ld a, [wCurEvent]
 	and a
 	ret nz
 	ld hl, wSceneObj15
@@ -101,7 +101,7 @@ Func_b409c:
 	ld a, GREEN_MUSIC_BOX
 	call IsTreasureCollected
 	ret nz
-	ld a, [wQueuedCutscene]
+	ld a, [wCurEvent]
 	and a
 	jr nz, .asm_b40b4
 	ld a, [wNextMapSide]
@@ -372,7 +372,7 @@ Func_b42e7:
 	db $28, $50, 00
 
 InitOWObjects_West:
-	ld a, [wCutsceneActionParam]
+	ld a, [wOWSceneActionParam]
 	jumptable
 
 	dw Func_b4001
@@ -423,7 +423,7 @@ Func_b435f:
 	ld a, [w2d065]
 	add a
 	ret z
-	ld a, [wQueuedCutscene]
+	ld a, [wCurEvent]
 	and a
 	ret nz
 	ld hl, wSceneObj7
@@ -555,7 +555,7 @@ Func_b4448:
 	ld hl, Data_85536
 	jp Func_b586d
 .asm_b4455
-	ld a, [wCutsceneActionParam]
+	ld a, [wOWSceneActionParam]
 	ld b, a
 	ld a, [wTempUnlockableConnectionID]
 	cp b
@@ -592,7 +592,7 @@ Func_b4474:
 	db $78, $3c, $23
 
 InitOWObjects_South:
-	ld a, [wCutsceneActionParam]
+	ld a, [wOWSceneActionParam]
 	jumptable
 
 	dw Func_b4001
@@ -612,7 +612,7 @@ Func_b44b7:
 	ld a, $80
 	cp c
 	ret nz
-	ld a, [wCutsceneActionParam]
+	ld a, [wOWSceneActionParam]
 	ld hl, wTempUnlockableConnectionID
 	cp [hl]
 	ret nz
@@ -641,7 +641,7 @@ Func_b44e7:
 	ld de, .data_2
 	cp $80
 	jr nz, .asm_b4500
-	ld a, [wCutsceneActionParam]
+	ld a, [wOWSceneActionParam]
 	ld b, a
 	ld a, [wTempUnlockableConnectionID]
 	cp b
@@ -735,7 +735,7 @@ Func_b4567:
 .asm_b459a
 	ld hl, Data_85579
 	farcall Func_854ee
-	ld a, [wQueuedCutscene]
+	ld a, [wCurEvent]
 	and a
 	ret nz
 	ld hl, wSceneObj15
@@ -867,7 +867,7 @@ Func_b4665:
 	db $25, $70, $20
 
 InitOWObjects_East:
-	ld a, [wCutsceneActionParam]
+	ld a, [wOWSceneActionParam]
 	jumptable
 
 	dw Func_b4001
@@ -982,7 +982,7 @@ Func_b4712:
 	db $28, $28, $12
 
 .Func_b4757
-	ld a, [wTempOWCutsceneAction]
+	ld a, [wTempOWSceneAction]
 	cp UNLOCK_LEVEL
 	ret z
 	ld hl, wSceneObj7
@@ -1018,7 +1018,7 @@ Func_b4792:
 	ret z
 	sla c
 	jr nc, .asm_b47dc
-	ld a, [wCutsceneActionParam]
+	ld a, [wOWSceneActionParam]
 	ld b, a
 	ld a, [wTempUnlockableConnectionID]
 	cp b
@@ -2420,7 +2420,7 @@ _DoOWFunction:
 	dw EastOWFunctions  ; EAST
 
 NorthOWFunctions:
-	ld a, [wCutsceneActionParam]
+	ld a, [wOWSceneActionParam]
 	dec a
 	jumptable
 
@@ -3005,7 +3005,7 @@ NOWFunc_PlayMusicBox:
 	jp WaitOWFunc
 
 .PlayMusicBox:
-	ld a, [wCutsceneActionParam]
+	ld a, [wOWSceneActionParam]
 	cp NOWFUNC_GOLD_MUSIC_BOX
 	jr z, .gold_music_box
 	play_sfx SFX_11F
@@ -3451,7 +3451,7 @@ WaitOWObjState:
 
 EndOWFunc:
 	xor a
-	ld [wCutsceneActionParam], a
+	ld [wOWSceneActionParam], a
 	ld hl, wOWFuncCounter
 	ld [hli], a
 	ld [hl], a ; w2d062
@@ -3636,7 +3636,7 @@ NOWFunc_Prologue:
 	ret
 
 WestOWFunctions:
-	ld a, [wCutsceneActionParam]
+	ld a, [wOWSceneActionParam]
 	dec a
 	jumptable
 	dw WOWFunc_Rain            ; WOWFUNC_RAIN
@@ -3837,7 +3837,7 @@ UpdateOWTornado:
 	ld hl, wSceneObj1
 	call ApplyOWMovement
 	ret nz
-	ld a, [wQueuedCutscene]
+	ld a, [wCurEvent]
 	and a
 	ret nz
 	ld a, [wTopBarState]
@@ -5339,7 +5339,7 @@ Data_b64cd:
 	db $80
 
 SouthOWFunctions:
-	ld a, [wCutsceneActionParam]
+	ld a, [wOWSceneActionParam]
 	dec a
 	jumptable
 	dw SOWFunc_SendSeeds      ; SOWFUNC_SEND_SEEDS
@@ -6612,7 +6612,7 @@ LoadOWSceneLevelName:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [wCutsceneActionParam]
+	ld a, [wOWSceneActionParam]
 	dec a
 	ld e, a
 	add hl, de
@@ -6698,7 +6698,7 @@ WaitOWScene16Frames:
 	jp WaitOWFunc
 
 EastOWFunctions:
-	ld a, [wCutsceneActionParam]
+	ld a, [wOWSceneActionParam]
 	dec a
 	jumptable
 	dw EOWFunc_FreezeSea       ; EOWFUNC_FREEZE_SEA
@@ -8376,7 +8376,7 @@ Func_b7984:
 	dw Func_b791d
 
 .Func_b79de:
-	ld a, [wQueuedCutscene]
+	ld a, [wCurEvent]
 	and a
 	ret nz
 	ld a, [wLevel2]
@@ -8450,7 +8450,7 @@ Func_b7984:
 	ret
 
 .Func_b7a5a:
-	ld a, [wQueuedCutscene]
+	ld a, [wCurEvent]
 	and a
 	ret nz
 	ld a, [w2d124]
@@ -8504,13 +8504,13 @@ Func_b7a6d:
 	dw Func_b791d
 
 Func_b7ab7:
-	ld a, [wQueuedCutscene]
+	ld a, [wCurEvent]
 	cp $04
 	ret z
 	jp UpdateOWTornado
 
 Func_b7ac0:
-	ld a, [wQueuedCutscene]
+	ld a, [wCurEvent]
 	and a
 	ret nz
 	ld hl, wSceneObj8Unk7
@@ -8546,7 +8546,7 @@ Func_b7ac0:
 	jr .asm_b7ae5
 
 Func_b7afb:
-	ld a, [wQueuedCutscene]
+	ld a, [wCurEvent]
 	and a
 	ret nz
 	ld hl, wSceneObj8Unk7
@@ -8597,7 +8597,7 @@ Func_b7b26:
 	ret
 
 Func_b7b4e:
-	ld a, [wQueuedCutscene]
+	ld a, [wCurEvent]
 	and a
 	ret nz
 	ld a, [w2d12a]
@@ -8690,12 +8690,12 @@ Func_b7bc9:
 	jr .asm_b7bd9
 
 Func_b7be9:
-	ld a, [wOWCutsceneAction]
+	ld a, [wOWSceneAction]
 	cp UNLOCK_LEVEL
 	jr z, .asm_b7bf9
 	cp HIGHLIGHT_LEVEL
 	jr z, .asm_b7bf9
-	ld a, [wQueuedCutscene]
+	ld a, [wCurEvent]
 	and a
 	ret
 .asm_b7bf9
@@ -8707,7 +8707,7 @@ Func_b7be9:
 	ret
 
 Func_b7c05:
-	ld a, [wQueuedCutscene]
+	ld a, [wCurEvent]
 	and a
 	ret nz
 	ld hl, w2d12b
@@ -8781,7 +8781,7 @@ Func_b7c5c:
 	ret
 
 Func_b7c84:
-	ld a, [wQueuedCutscene]
+	ld a, [wCurEvent]
 	and a
 	ret nz
 	ld a, [w2d12e]
@@ -8812,7 +8812,7 @@ Func_b7ca5:
 	ret
 
 Func_b7cb3:
-	ld a, [wQueuedCutscene]
+	ld a, [wCurEvent]
 	and a
 	ret nz
 	ld a, [w2d07c]

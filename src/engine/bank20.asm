@@ -603,12 +603,12 @@ InitOverworld:
 	jr nz, .asm_8045f
 
 	; TRANSITION_NEW_GAME
-	ld a, CUTSCENE_01
-	ld [wQueuedCutscene], a
+	ld a, EVENT_01
+	ld [wCurEvent], a
 	jr .asm_80466
 
 .asm_8045f
-	call Func_8197e
+	call CheckIfTreasureUnlocksEvent
 	jr nz, .asm_80466
 	jr .asm_8048a
 
@@ -621,14 +621,14 @@ InitOverworld:
 	jr .play_cutscene
 
 .after_cutscene
-	ld a, [wQueuedCutscene]
-	call GetCutsceneOWParams
+	ld a, [wCurEvent]
+	call GetOWSceneParams
 	jr z, .asm_8048a
 	jr .asm_80497
 
 .asm_8048a
-	xor a ; CUTSCENE_00
-	ld [wQueuedCutscene], a
+	xor a ; EVENT_00
+	ld [wCurEvent], a
 	ld a, SST_OVERWORLD_09
 	ld [wSubState], a
 	call Func_803e6
@@ -649,8 +649,8 @@ InitOverworld:
 .asm_804a9
 	ld a, TRANSITION_RETURN_TO_MAP
 	ld [w2d00d], a
-	ld a, CUTSCENE_5A
-	ld [wQueuedCutscene], a
+	ld a, EVENT_5A
+	ld [wCurEvent], a
 	jr .after_cutscene
 
 .asm_804b5
@@ -678,7 +678,7 @@ Func_804d4:
 	ld a, [wTopBarState]
 	and a
 	ret nz
-	ld a, [wOWCutsceneAction]
+	ld a, [wOWSceneAction]
 	cp SPECIAL_ACTION
 	ret z
 	ld a, [wLastTransitionParam]
@@ -710,16 +710,16 @@ Func_804f7:
 	ld [w2d011], a
 	ld a, [w2d015]
 	ld [w2d018], a
-	ld a, [wCutsceneActionParam]
+	ld a, [wOWSceneActionParam]
 	ld [wTempUnlockableConnectionID], a
-	ld a, [wOWCutsceneAction]
-	ld [wTempOWCutsceneAction], a
-	ld a, [wCutsceneOWParamsPtr + 0]
-	ld [wTempCutsceneOWParamsPtr + 0], a
-	ld a, [wCutsceneOWParamsPtr + 1]
-	ld [wTempCutsceneOWParamsPtr + 1], a
+	ld a, [wOWSceneAction]
+	ld [wTempOWSceneAction], a
+	ld a, [wOWSceneParamsPtr + 0]
+	ld [wTempOWSceneParamsPtr + 0], a
+	ld a, [wOWSceneParamsPtr + 1]
+	ld [wTempOWSceneParamsPtr + 1], a
 
-	ld a, [wCutsceneMapSide]
+	ld a, [wOWSceneMapSide]
 	ld [wCurMapSide], a
 	jumptable
 
@@ -832,7 +832,7 @@ InitSouthMapSide:
 	jp Func_8065e
 
 InitEastMapSide:
-	ld a, CUTSCENE_1B
+	ld a, EVENT_1B
 	call Func_819c6
 	ld [wGotSunMedallion], a
 	ld a, [wGotSunMedallion] ; unnecessary
@@ -1013,8 +1013,8 @@ Func_80851:
 	call LoadPalsForOWScene
 	call LoadOverworldCommonGfx
 	call LoadOverworld1Gfx
-	ld a, [wQueuedCutscene]
-	cp CUTSCENE_35
+	ld a, [wCurEvent]
+	cp EVENT_35
 	call nz, LoadOverworldGlowGfx
 
 	ld bc, BGMap_85bef
@@ -1040,15 +1040,15 @@ Func_8086f:
 	ld a, [w2d018]
 	ld [w2d015], a
 	ld a, [wTempUnlockableConnectionID]
-	ld [wCutsceneActionParam], a
-	ld a, [wTempOWCutsceneAction]
-	ld [wOWCutsceneAction], a
+	ld [wOWSceneActionParam], a
+	ld a, [wTempOWSceneAction]
+	ld [wOWSceneAction], a
 	ld a, [wCurMapSide]
-	ld [wCutsceneMapSide], a
-	ld a, [wTempCutsceneOWParamsPtr + 0]
-	ld [wCutsceneOWParamsPtr + 0], a
-	ld a, [wTempCutsceneOWParamsPtr + 1]
-	ld [wCutsceneOWParamsPtr + 1], a
+	ld [wOWSceneMapSide], a
+	ld a, [wTempOWSceneParamsPtr + 0]
+	ld [wOWSceneParamsPtr + 0], a
+	ld a, [wTempOWSceneParamsPtr + 1]
+	ld [wOWSceneParamsPtr + 1], a
 
 	farcall Func_b4a37
 	call LoadCloudAndSeaGfx
@@ -1090,8 +1090,8 @@ Func_8086f:
 	ld a, [wCurMapSide]
 	and a
 	jr nz, .no_window_display
-	ld a, [wQueuedCutscene]
-	cp CUTSCENE_2F
+	ld a, [wCurEvent]
+	cp EVENT_2F
 	jr nz, .no_window_display
 	ld a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
 	jr .apply_lcd
@@ -1113,8 +1113,8 @@ Func_8091e:
 	jp Func_8086f
 
 Func_80930:
-	ld a, [wQueuedCutscene]
-	cp CUTSCENE_57
+	ld a, [wCurEvent]
+	cp EVENT_57
 	jr nz, .asm_8093c
 	ld a, $01
 	ld [w2d011], a
@@ -1127,7 +1127,7 @@ Func_80930:
 	jp Func_8086f
 
 Func_8094e:
-	ld a, CUTSCENE_1B
+	ld a, EVENT_1B
 	call Func_819c6
 	ld [wGotSunMedallion], a
 	ld a, [wGotSunMedallion] ; unnecessary
@@ -1208,12 +1208,12 @@ LoadPalsForOWScene:
 .CheckIfIsUnlockedExit:
 	xor a ; FALSE
 	ld [wOWExitUnlocked], a
-	ld a, [wOWCutsceneAction]
+	ld a, [wOWSceneAction]
 	cp UNLOCK_LEVEL
 	ret nz
-	ld hl, wCutsceneMapSide
+	ld hl, wOWSceneMapSide
 	ld a, [hli]
-	ld c, [hl] ; wCutsceneActionParam
+	ld c, [hl] ; wOWSceneActionParam
 	ld hl, UnlockableConnections
 	call GetCthWordFromAthTable
 	ld a, [hl]
@@ -1238,7 +1238,7 @@ Func_80af5:
 	ld hl, BGMap_86417
 	ld e, BANK(BGMap_86417)
 	call LoadBGMapsToWRAM
-	ld a, CUTSCENE_19
+	ld a, EVENT_19
 	call Func_819c6
 	ret z
 	ld hl, Data_8561f
@@ -2432,8 +2432,8 @@ GetMapSideAndLevelForNextTreasure:
 	cp TREASURES_END
 	jr z, .no_more_treasures
 	ld b, a
-	call GetCutsceneWithTreasure
-	ld a, CUTSCENE_25
+	call GetEventWithTreasure
+	ld a, EVENT_25
 	cp c
 	jr nc, .get_level
 	ld a, [wGameModeFlags]
@@ -2978,20 +2978,20 @@ Func_817b1:
 	ld a, [wGameModeFlags]
 	bit MODE_GAME_CLEARED_F, a
 	ret nz
-	ld a, CUTSCENE_01
+	ld a, EVENT_01
 .loop
 	ld [w2dffc], a
-	call CheckAllCutsceneTreasures
+	call CheckIfEventIsUnlocked
 	ld a, [w2dffc]
 	jr z, .asm_817cb
 	inc a
-	ld b, CUTSCENE_26
+	ld b, EVENT_26
 	cp b
 	jr c, .loop
 	ld a, b
 .asm_817cb
 	dec a
-	call LoadCutsceneTreasures
+	call LoadEventTreasures
 	ld a, [w2dfff]
 	ld [w2d00d], a
 	jr Func_817a9
@@ -3006,8 +3006,8 @@ SetNextPrevMapButtonsSelectable:
 
 .CheckAccessibleMapSides
 	; check west side accessible
-	ld a, CUTSCENE_03
-	call CheckAllCutsceneTreasures
+	ld a, EVENT_03
+	call CheckIfEventIsUnlocked
 	rlca
 	rlca
 	rlca
@@ -3016,8 +3016,8 @@ SetNextPrevMapButtonsSelectable:
 	ld [hl], a
 
 	; check south side accessible
-	ld a, CUTSCENE_07
-	call CheckAllCutsceneTreasures
+	ld a, EVENT_07
+	call CheckIfEventIsUnlocked
 	rlca
 	rlca
 	ld hl, wAccessibleMapSides
@@ -3025,16 +3025,16 @@ SetNextPrevMapButtonsSelectable:
 	ld [hl], a
 
 	; check east side accessible
-	ld a, CUTSCENE_0C
-	call CheckAllCutsceneTreasures
+	ld a, EVENT_0C
+	call CheckIfEventIsUnlocked
 	rlca
 	ld hl, wAccessibleMapSides
 	or [hl]
 	ld [hl], a
 
 	; check north side accessible
-	ld a, CUTSCENE_37
-	call CheckAllCutsceneTreasures
+	ld a, EVENT_37
+	call CheckIfEventIsUnlocked
 	ld hl, wAccessibleMapSides
 	or [hl]
 	ld [hl], a
@@ -3106,7 +3106,7 @@ GetNextTreasureToCollect:
 .collected
 
 	ld b, [hl]
-	call GetCutsceneWithTreasure
+	call GetEventWithTreasure
 ; loop until a treasure
 ; that hasn't been collected
 ; is found in the table
@@ -3135,10 +3135,10 @@ GetNextTreasureToCollect:
 ; input:
 ; - b = * constant
 ; output:
-; - c = CUTSCENE_* constant
-GetCutsceneWithTreasure:
-	ld c, CUTSCENE_00
-	ld hl, CutsceneTreasures
+; - c = EVENT_* constant
+GetEventWithTreasure:
+	ld c, EVENT_00
+	ld hl, EventTreasures
 .loop
 	ld a, [hli]
 	cp TREASURES_END
@@ -3156,7 +3156,7 @@ GetCutsceneWithTreasure:
 .found
 	ret
 .not_found
-	ld c, CUTSCENE_00
+	ld c, EVENT_00
 	ret
 
 Func_818ad:
@@ -3192,7 +3192,7 @@ Func_818ed:
 
 Func_818f6:
 	call Func_8195d
-	ld a, [wCutsceneActionParam]
+	ld a, [wOWSceneActionParam]
 	and a
 	ret nz
 	jr Func_818ed
@@ -3201,13 +3201,13 @@ Func_81900:
 	ld a, [w2d014]
 	cp $04
 	ret c
-	ld hl, wCutsceneOWParamsPtr
+	ld hl, wOWSceneParamsPtr
 	call GetByteFromPointerInHL
-	call GetCutsceneOWParams_GotPtr
+	call GetOWSceneParams_GotPtr
 	jr z, Func_81931
 	ld a, [wCurMapSide]
 	ld b, a
-	ld a, [wCutsceneMapSide]
+	ld a, [wOWSceneMapSide]
 	cp b
 	jr nz, .asm_81923
 	xor a
@@ -3222,14 +3222,14 @@ Func_81900:
 
 Func_81931:
 	stop_sfx
-	ld a, [wQueuedCutscene]
+	ld a, [wCurEvent]
 	ld b, a
 	xor a
 	ld [wLastTransitionParam], a
-	ld [wQueuedCutscene], a
-	ld [wOWCutsceneAction], a
-	ld [wTempOWCutsceneAction], a
-	ld a, CUTSCENE_5A
+	ld [wCurEvent], a
+	ld [wOWSceneAction], a
+	ld [wTempOWSceneAction], a
+	ld a, EVENT_5A
 	cp b
 	jr z, .epilogue
 	ld hl, wSubState
@@ -3242,7 +3242,7 @@ Func_81931:
 	ret
 
 Func_8195d:
-	ld a, [wOWCutsceneAction]
+	ld a, [wOWSceneAction]
 	jumptable
 
 	dw .InvalidAction
@@ -3258,18 +3258,23 @@ DoOWFunction:
 	farcall _DoOWFunction
 	ret
 
-Func_8197e:
+; input:
+; - [wLastTransitionParam] = treasure that was just collected
+; output
+; - nz if there's an event unlocked
+; - wCurEvent = EVENT_* constant of unlocked event
+CheckIfTreasureUnlocksEvent:
 	ld a, [wLastTransitionParam]
 	ld b, a
 	xor a
-	ld c, a ; CUTSCENE_00
-	ld [wQueuedCutscene], a
+	ld c, a ; EVENT_00
+	ld [wCurEvent], a
 
-	ld hl, CutsceneTreasures
+	ld hl, EventTreasures
 .loop
 	ld a, [hli]
 	cp TREASURES_END
-	jr z, .asm_819a7
+	jr z, .no_event_unlocked
 	cp b
 	jr z, .found
 	ld a, [hli]
@@ -3283,39 +3288,40 @@ Func_8197e:
 
 .found
 	ld a, c
-	ld [wQueuedCutscene], a
-	call CheckAllCutsceneTreasures
-	jr z, .asm_819a7
-	ret ; collected all treasures
+	ld [wCurEvent], a
+	call CheckIfEventIsUnlocked
+	jr z, .no_event_unlocked
+	; unlocked this event
+	ret
 
-.asm_819a7
-	xor a ; CUTSCENE_00
-	ld [wQueuedCutscene], a
+.no_event_unlocked
+	xor a ; EVENT_00
+	ld [wCurEvent], a
 	ret
 
 ; input:
-; - a = CUTSCENE_* constant
+; - a = EVENT_* constant
 ; output:
 ; - a = TRUE and no carry if all treasures
-; for the inpu cutscene have been collected
+; for the input event have been collected
 ; - a = FALSE and carry set otherwise
-CheckAllCutsceneTreasures:
-	call LoadCutsceneTreasures
+CheckIfEventIsUnlocked:
+	call LoadEventTreasures
 	ld c, TRUE
 	ld a, [w2dffd]
-	call CheckCutsceneTreasure
+	call CheckEventTreasure
 	ret c
 	ld a, [w2dffe]
-	call CheckCutsceneTreasure
+	call CheckEventTreasure
 	ret c
 	ld a, [w2dfff]
-	call CheckCutsceneTreasure
+	call CheckEventTreasure
 	ret
 
 ; input:
-; - a = CUTSCENE_* constant
+; - a = EVENT_* constant
 Func_819c6:
-	call CheckAllCutsceneTreasures
+	call CheckIfEventIsUnlocked
 	and c
 	ret
 
@@ -3323,7 +3329,7 @@ Func_819c6:
 ; is different from wLastTransitionParam
 ; and has not been collected
 ; else return no carry and $01 in a
-CheckCutsceneTreasure:
+CheckEventTreasure:
 	cp INVALID_TREASURE
 	jr z, .no_carry
 	ld hl, wLastTransitionParam
@@ -3342,15 +3348,15 @@ CheckCutsceneTreasure:
 	ret
 
 ; input:
-; - a = CUTSCENE_* constant
-LoadCutsceneTreasures:
+; - a = EVENT_* constant
+LoadEventTreasures:
 	ld c, a
 	add a
 	add c ; *3
 	ld e, a
 	ld d, $00
 	rl d
-	ld hl, CutsceneTreasures
+	ld hl, EventTreasures
 	add hl, de
 	ld de, w2dfff
 	ld a, [hli]
@@ -3363,488 +3369,488 @@ LoadCutsceneTreasures:
 	ld [de], a ; w2dffd
 	ret
 
-CutsceneTreasures:
+EventTreasures:
 	table_width 3
 	
-; CUTSCENE_00
+; EVENT_00
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_01
+; EVENT_01
 	db TREASURE_NONE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_02
+; EVENT_02
 	db AXE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_03
+; EVENT_03
 	db BLUE_TABLET
 	db GREEN_TABLET
 	db INVALID_TREASURE
 
-; CUTSCENE_04
+; EVENT_04
 	db TOP_HALF_OF_SCROLL
 	db BOTTOM_HALF_OF_SCROLL
 	db INVALID_TREASURE
 
-; CUTSCENE_05
+; EVENT_05
 	db LEAD_OVERALLS_T
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_06
+; EVENT_06
 	db JAR
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_07
+; EVENT_07
 	db GEAR_1
 	db GEAR_2
 	db INVALID_TREASURE
 
-; CUTSCENE_08
+; EVENT_08
 	db YELLOW_MUSIC_BOX
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_09
+; EVENT_09
 	db POUCH
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_0A
+; EVENT_0A
 	db SKULL_RING_RED
 	db SKULL_RING_BLUE
 	db INVALID_TREASURE
 
-; CUTSCENE_0B
+; EVENT_0B
 	db SWIMMING_FLIPPERS_T
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_0C
+; EVENT_0C
 	db ORNAMENTAL_FAN
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_0D
+; EVENT_0D
 	db FLUTE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_0E
+; EVENT_0E
 	db BLUE_BOOK
 	db TRIDENT
 	db INVALID_TREASURE
 
-; CUTSCENE_0F
+; EVENT_0F
 	db HEAD_SMASH_HELMET_T
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_10
+; EVENT_10
 	db BLUE_MUSIC_BOX
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_11
+; EVENT_11
 	db YELLOW_BOOK
 	db SKY_KEY
 	db INVALID_TREASURE
 
-; CUTSCENE_12
+; EVENT_12
 	db GRAB_GLOVE_T
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_13
+; EVENT_13
 	db FOOT_OF_STONE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_14
+; EVENT_14
 	db TUSK_BLUE
 	db TUSK_RED
 	db GREEN_FLOWER
 
-; CUTSCENE_15
+; EVENT_15
 	db RIGHT_GLASS_EYE
 	db LEFT_GLASS_EYE
 	db INVALID_TREASURE
 
-; CUTSCENE_16
+; EVENT_16
 	db GARLIC_T
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_17
+; EVENT_17
 	db GREEN_MUSIC_BOX
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_18
+; EVENT_18
 	db SCEPTER
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_19
+; EVENT_19
 	db LANTERN
 	db MAGICAL_FLAME
 	db INVALID_TREASURE
 
-; CUTSCENE_1A
+; EVENT_1A
 	db SUPER_JUMP_SLAM_OVERALLS_T
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_1B
+; EVENT_1B
 	db SUN_MEDALLION_TOP
 	db SUN_MEDALLION_BOTTOM
 	db INVALID_TREASURE
 
-; CUTSCENE_1C
+; EVENT_1C
 	db HIGH_JUMP_BOOTS_T
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_1D
+; EVENT_1D
 	db RED_MUSIC_BOX
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_1E
+; EVENT_1E
 	db EXPLOSIVE_PLUNGER_BOX
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_1F
+; EVENT_1F
 	db MAGIC_SEEDS
 	db EYE_OF_THE_STORM
 	db INVALID_TREASURE
 
-; CUTSCENE_20
+; EVENT_20
 	db PRINCE_FROGS_GLOVES_T
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_21
+; EVENT_21
 	db STATUE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_22
+; EVENT_22
 	db TREASURE_MAP
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_23
+; EVENT_23
 	db SUPER_GRAB_GLOVES_T
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_24
+; EVENT_24
 	db GOLD_MAGIC
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_25
+; EVENT_25
 	db GOLD_MUSIC_BOX
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_26
+; EVENT_26
 	db CRAYON_BLUE_T
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_27
+; EVENT_27
 	db TRUCK_WHEEL
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_28
+; EVENT_28
 	db BLUE_GEM
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_29
+; EVENT_29
 	db CRAYON_CYAN_T
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_2A
+; EVENT_2A
 	db GOBLET
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_2B
+; EVENT_2B
 	db CROWN
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_2C
+; EVENT_2C
 	db CRAYON_PINK_T
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_2D
+; EVENT_2D
 	db TEAPOT
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_2E
+; EVENT_2E
 	db POCKET_PET
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_2F
+; EVENT_2F
 	db MAGNIFYING_GLASS
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_30
+; EVENT_30
 	db AIR_PUMP
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_31
+; EVENT_31
 	db ROCKET
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_32
+; EVENT_32
 	db CRAYON_YELLOW_T
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_33
+; EVENT_33
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_34
+; EVENT_34
 	db SABER
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_35
+; EVENT_35
 	db DAY_OR_NIGHT_SPELL
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_36
+; EVENT_36
 	db UFO
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_37
+; EVENT_37
 	db TORCH
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_38
+; EVENT_38
 	db WARP_COMPACT
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_39
+; EVENT_39
 	db MYSTERY_HANDLE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_3A
+; EVENT_3A
 	db WARP_REMOVAL_APPARATUS
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_3B
+; EVENT_3B
 	db CRAYON_BROWN_T
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_3C
+; EVENT_3C
 	db DEMONS_BLOOD
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_3D
+; EVENT_3D
 	db KEY_CARD_RED
 	db KEY_CARD_BLUE
 	db INVALID_TREASURE
 
-; CUTSCENE_3E
+; EVENT_3E
 	db HEART_CREST
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_3F
+; EVENT_3F
 	db MINICAR
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_40
+; EVENT_40
 	db LOCOMOTIVE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_41
+; EVENT_41
 	db TELEPHONE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_42
+; EVENT_42
 	db CRAYON_RED_T
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_43
+; EVENT_43
 	db ELECTRIC_FAN_PROPELLER
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_44
+; EVENT_44
 	db SAPLING_OF_GROWTH
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_45
+; EVENT_45
 	db GREEN_GEM
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_46
+; EVENT_46
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_47
+; EVENT_47
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_48
+; EVENT_48
 	db FIGHTER_MANNEQUIN
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_49
+; EVENT_49
 	db GOLDEN_LEFT_EYE
 	db GOLDEN_RIGHT_EYE
 	db INVALID_TREASURE
 
-; CUTSCENE_4A
+; EVENT_4A
 	db MAGIC_WAND
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_4B
+; EVENT_4B
 	db CRAYON_GREEN_T
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_4C
+; EVENT_4C
 	db FIRE_DRENCHER
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_4D
+; EVENT_4D
 	db DIAMONDS_CREST
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_4E
+; EVENT_4E
 	db CASTLE_BRICK
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_4F
+; EVENT_4F
 	db RUST_SPRAY
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_50
+; EVENT_50
 	db SPADES_CREST
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_51
+; EVENT_51
 	db RED_CHEMICAL
 	db BLUE_CHEMICAL
 	db INVALID_TREASURE
 
-; CUTSCENE_52
+; EVENT_52
 	db RED_GEM
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_53
+; EVENT_53
 	db CLUBS_CREST
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_54
+; EVENT_54
 	db SCISSORS
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_55
+; EVENT_55
 	db JACKHAMMER
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_56
+; EVENT_56
 	db NIGHT_VISION_SCOPE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_57
+; EVENT_57
 	db FULL_MOON_GONG
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_58
+; EVENT_58
 	db PICK_AXE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_59
+; EVENT_59
 	db EARTHEN_FIGURE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; CUTSCENE_5A
+; EVENT_5A
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-	assert_table_length NUM_CUTSCENES
+	assert_table_length NUM_EVENTS
 
 	db TREASURES_END
 
 ; input:
-; - a = CUTSCENE_* constant
+; - a = EVENT_* constant
 ; output:
 ; - z set if scene finished
-GetCutsceneOWParams:
-	ld hl, CutsceneOWParams
+GetOWSceneParams:
+	ld hl, OWSceneParams
 	call GetPointerFromTableHL
-GetCutsceneOWParams_GotPtr:
+GetOWSceneParams_GotPtr:
 	ld a, [hli]
-	ld [wOWCutsceneAction], a
+	ld [wOWSceneAction], a
 	cp $80
 	ret z ; finished
 	ld a, [hli]
-	ld [wCutsceneMapSide], a ; map side
+	ld [wOWSceneMapSide], a ; map side
 	ld a, [hli]
-	ld [wCutsceneActionParam], a
+	ld [wOWSceneActionParam], a
 	ld a, l
-	ld [wCutsceneOWParamsPtr + 0], a
+	ld [wOWSceneParamsPtr + 0], a
 	ld a, h
-	ld [wCutsceneOWParamsPtr + 1], a
+	ld [wOWSceneParamsPtr + 1], a
 	ret
 
 ; \1 = map side
@@ -3875,509 +3881,509 @@ MACRO ow_scene_end
 	db $80
 ENDM
 
-CutsceneOWParams:
-	dw .cutscene00
-	dw .cutscene01
-	dw .cutscene02
-	dw .cutscene03
-	dw .cutscene04
-	dw .cutscene05
-	dw .cutscene06
-	dw .cutscene07
-	dw .cutscene08
-	dw .cutscene09
-	dw .cutscene0a
-	dw .cutscene0b
-	dw .cutscene0c
-	dw .cutscene0d
-	dw .cutscene0e
-	dw .cutscene0f
-	dw .cutscene10
-	dw .cutscene11
-	dw .cutscene12
-	dw .cutscene13
-	dw .cutscene14
-	dw .cutscene15
-	dw .cutscene16
-	dw .cutscene17
-	dw .cutscene18
-	dw .cutscene19
-	dw .cutscene1a
-	dw .cutscene1b
-	dw .cutscene1c
-	dw .cutscene1d
-	dw .cutscene1e
-	dw .cutscene1f
-	dw .cutscene20
-	dw .cutscene21
-	dw .cutscene22
-	dw .cutscene23
-	dw .cutscene24
-	dw .cutscene25
-	dw .cutscene26
-	dw .cutscene27
-	dw .cutscene28
-	dw .cutscene29
-	dw .cutscene2a
-	dw .cutscene2b
-	dw .cutscene2c
-	dw .cutscene2d
-	dw .cutscene2e
-	dw .cutscene2f
-	dw .cutscene30
-	dw .cutscene31
-	dw .cutscene32
-	dw .cutscene33
-	dw .cutscene34
-	dw .cutscene35
-	dw .cutscene36
-	dw .cutscene37
-	dw .cutscene38
-	dw .cutscene39
-	dw .cutscene3a
-	dw .cutscene3b
-	dw .cutscene3c
-	dw .cutscene3d
-	dw .cutscene3e
-	dw .cutscene3f
-	dw .cutscene40
-	dw .cutscene41
-	dw .cutscene42
-	dw .cutscene43
-	dw .cutscene44
-	dw .cutscene45
-	dw .cutscene46
-	dw .cutscene47
-	dw .cutscene48
-	dw .cutscene49
-	dw .cutscene4a
-	dw .cutscene4b
-	dw .cutscene4c
-	dw .cutscene4d
-	dw .cutscene4e
-	dw .cutscene4f
-	dw .cutscene50
-	dw .cutscene51
-	dw .cutscene52
-	dw .cutscene53
-	dw .cutscene54
-	dw .cutscene55
-	dw .cutscene56
-	dw .cutscene57
-	dw .cutscene58
-	dw .cutscene59
-	dw .cutscene5a
+OWSceneParams:
+	dw .event_00
+	dw .event_01
+	dw .event_02
+	dw .event_03
+	dw .event_04
+	dw .event_05
+	dw .event_06
+	dw .event_07
+	dw .event_08
+	dw .event_09
+	dw .event_0a
+	dw .event_0b
+	dw .event_0c
+	dw .event_0d
+	dw .event_0e
+	dw .event_0f
+	dw .event_10
+	dw .event_11
+	dw .event_12
+	dw .event_13
+	dw .event_14
+	dw .event_15
+	dw .event_16
+	dw .event_17
+	dw .event_18
+	dw .event_19
+	dw .event_1a
+	dw .event_1b
+	dw .event_1c
+	dw .event_1d
+	dw .event_1e
+	dw .event_1f
+	dw .event_20
+	dw .event_21
+	dw .event_22
+	dw .event_23
+	dw .event_24
+	dw .event_25
+	dw .event_26
+	dw .event_27
+	dw .event_28
+	dw .event_29
+	dw .event_2a
+	dw .event_2b
+	dw .event_2c
+	dw .event_2d
+	dw .event_2e
+	dw .event_2f
+	dw .event_30
+	dw .event_31
+	dw .event_32
+	dw .event_33
+	dw .event_34
+	dw .event_35
+	dw .event_36
+	dw .event_37
+	dw .event_38
+	dw .event_39
+	dw .event_3a
+	dw .event_3b
+	dw .event_3c
+	dw .event_3d
+	dw .event_3e
+	dw .event_3f
+	dw .event_40
+	dw .event_41
+	dw .event_42
+	dw .event_43
+	dw .event_44
+	dw .event_45
+	dw .event_46
+	dw .event_47
+	dw .event_48
+	dw .event_49
+	dw .event_4a
+	dw .event_4b
+	dw .event_4c
+	dw .event_4d
+	dw .event_4e
+	dw .event_4f
+	dw .event_50
+	dw .event_51
+	dw .event_52
+	dw .event_53
+	dw .event_54
+	dw .event_55
+	dw .event_56
+	dw .event_57
+	dw .event_58
+	dw .event_59
+	dw .event_5a
 
-.cutscene00
+.event_00
 	ow_scene_end
 
-.cutscene01
+.event_01
 	ow_unlock_level NORTH, NORTHCONN_1
 	ow_scene_end
 
-.cutscene02
+.event_02
 	ow_func NORTH, NOWFUNC_CUT_TREE
 	ow_unlock_level NORTH, NORTHCONN_2
 	ow_unlock_level NORTH, NORTHCONN_3
 	ow_scene_end
 
-.cutscene03
+.event_03
 	ow_func NORTH, NOWFUNC_OPEN_GATE
 	ow_unlock_level NORTH, NORTHCONN_7
 	ow_unlock_level WEST, WESTCONN_7
 	ow_scene_end
 
-.cutscene04
+.event_04
 	ow_func WEST, WOWFUNC_CLEAR_TORNADO
 	ow_unlock_level WEST, WESTCONN_1
 	ow_scene_end
 
-.cutscene05
+.event_05
 	ow_highlight_level NORTH, OWNORTH_OUT_OF_THE_WOODS
 	ow_highlight_level NORTH, OWNORTH_THE_VAST_PLAIN
 	ow_scene_end
 
-.cutscene06
+.event_06
 	ow_func WEST, WOWFUNC_RAIN
 	ow_unlock_level WEST, WESTCONN_2
 	ow_unlock_level WEST, WESTCONN_3
 	ow_scene_end
 
-.cutscene07
+.event_07
 	ow_func WEST, WOWFUNC_ELEVATOR_WORKING
 	ow_unlock_level WEST, WESTCONN_6
 	ow_unlock_level SOUTH, SOUTHCONN_7
 	ow_scene_end
 
-.cutscene08
+.event_08
 	ow_func SOUTH, SOWFUNC_YELLOW_MUSIC_BOX
 	ow_unlock_level SOUTH, SOUTHCONN_1
 	ow_scene_end
 
-.cutscene09
+.event_09
 	ow_func SOUTH, SOWFUNC_SEND_SEEDS
 	ow_func NORTH, NOWFUNC_MAGIC_SEED
 	ow_func WEST, WOWFUNC_MAGIC_SEED
 	ow_func SOUTH, SOWFUNC_MAGIC_SEED
 	ow_scene_end
 
-.cutscene0a
+.event_0a
 	ow_func SOUTH, SOWFUNC_RAISE_TOWER
 	ow_unlock_level SOUTH, SOUTHCONN_2
 	ow_scene_end
 
-.cutscene0b
+.event_0b
 	ow_highlight_level WEST, OWWEST_THE_POOL_OF_RAIN
 	ow_highlight_level SOUTH, OWSOUTH_THE_BIG_BRIDGE
 	ow_scene_end
 
-.cutscene0c
+.event_0c
 	ow_func SOUTH, SOWFUNC_FAN
 	ow_unlock_level SOUTH, SOUTHCONN_6
 	ow_unlock_level EAST, EASTCONN_8
 	ow_scene_end
 
-.cutscene0d
+.event_0d
 	ow_func SOUTH, SOWFUNC_SUMMON_SNAKE
 	ow_func WEST, WOWFUNC_SUMMON_SNAKE
 	ow_func NORTH, NOWFUNC_SUMMON_SNAKE
 	ow_scene_end
 
-.cutscene0e
+.event_0e
 	ow_func EAST, EOWFUNC_FREEZE_SEA
 	ow_unlock_level EAST, EASTCONN_1
 	ow_scene_end
 
-.cutscene0f
+.event_0f
 	ow_highlight_level WEST, OWWEST_A_TOWN_IN_CHAOS
 	ow_highlight_level WEST, OWWEST_DESERT_RUINS
 	ow_scene_end
 
-.cutscene10
+.event_10
 	ow_func NORTH, NOWFUNC_BLUE_MUSIC_BOX
 	ow_unlock_level NORTH, NORTHCONN_4
 	ow_unlock_level NORTH, NORTHCONN_5
 	ow_scene_end
 
-.cutscene11
+.event_11
 	ow_func SOUTH, SOWFUNC_CANYON_THUNDER
 	ow_unlock_level SOUTH, SOUTHCONN_3
 	ow_scene_end
 
-.cutscene12
+.event_12
 	ow_highlight_level NORTH, OWNORTH_THE_TIDAL_COAST
 	ow_highlight_level EAST, OWEAST_THE_FRIGID_SEA
 	ow_highlight_level SOUTH, OWSOUTH_THE_BIG_BRIDGE
 	ow_scene_end
 
-.cutscene13
+.event_13
 	ow_func WEST, WOWFUNC_EARTHQUAKE
 	ow_func SOUTH, SOWFUNC_EARTHQUAKE
 	ow_func EAST, EOWFUNC_EARTHQUAKE
 	ow_scene_end
 
-.cutscene14
+.event_14
 	ow_func WEST, WOWFUNC_VULCANO_ERUPTION
 	ow_func EAST, EOWFUNC_VULCANO_ERUPTION
 	ow_unlock_level WEST, WESTCONN_4
 	ow_unlock_level EAST, SOUTHCONN_3
 	ow_scene_end
 
-.cutscene15
+.event_15
 	ow_highlight_level SOUTH, OWSOUTH_TOWER_OF_REVIVAL
 	ow_scene_end
 
-.cutscene16
+.event_16
 	ow_func NORTH, NOWFUNC_GARLIC
 	ow_highlight_level NORTH, OWNORTH_BANK_OF_THE_WILD_RIVER
 	ow_highlight_level EAST, OWEAST_THE_COLOSSAL_HOLE
 	ow_unlock_level NORTH, NORTHCONN_6
 	ow_scene_end
 
-.cutscene17
+.event_17
 	ow_func SOUTH, SOWFUNC_GREEN_MUSIC_BOX
 	ow_unlock_level SOUTH, SOUTHCONN_4
 	ow_scene_end
 
-.cutscene18
+.event_18
 	ow_highlight_level SOUTH, OWSOUTH_THE_BIG_BRIDGE
 	ow_highlight_level EAST, OWEAST_THE_FRIGID_SEA
 	ow_highlight_level NORTH, OWNORTH_SEA_TURTLE_ROCKS
 	ow_scene_end
 
-.cutscene19
+.event_19
 	ow_func EAST, EOWFUNC_FORM_CASTLE
 	ow_unlock_level EAST, EASTCONN_2
 	ow_scene_end
 
-.cutscene1a
+.event_1a
 	ow_highlight_level NORTH, OWNORTH_SEA_TURTLE_ROCKS
 	ow_highlight_level WEST, OWWEST_THE_WEST_CRATER
 	ow_highlight_level WEST, OWWEST_DESERT_RUINS
 	ow_highlight_level NORTH, OWNORTH_THE_PEACEFUL_VILLAGE
 	ow_scene_end
 
-.cutscene1b
+.event_1b
 	ow_func EAST, EOWFUNC_DAYTIME
 	ow_highlight_level EAST, OWEAST_THE_COLOSSAL_HOLE
 	ow_highlight_level EAST, OWEAST_THE_FRIGID_SEA
 	ow_highlight_level EAST, OWEAST_CASTLE_OF_ILLUSIONS
 	ow_scene_end
 
-.cutscene1c
+.event_1c
 	ow_highlight_level SOUTH, OWSOUTH_THE_GRASSLANDS
 	ow_highlight_level EAST, OWEAST_THE_STAGNANT_SWAMP
 	ow_highlight_level SOUTH, OWSOUTH_CAVE_OF_FLAMES
 	ow_scene_end
 
-.cutscene1d
+.event_1d
 	ow_func WEST, WOWFUNC_RED_MUSIC_BOX
 	ow_unlock_level WEST, WESTCONN_5
 	ow_scene_end
 
-.cutscene1e
+.event_1e
 	ow_func SOUTH, SOWFUNC_EXPLOSIVES
 	ow_func EAST, EOWFUNC_EXPLOSIVES
 	ow_scene_end
 
-.cutscene1f
+.event_1f
 	ow_func NORTH, NOWFUNC_FALL_LEAVES
 	ow_scene_end
 
-.cutscene20
+.event_20
 	ow_highlight_level NORTH, OWNORTH_BANK_OF_THE_WILD_RIVER
 	ow_highlight_level SOUTH, OWSOUTH_THE_STEEP_CANYON
 	ow_highlight_level WEST, OWWEST_BENEATH_THE_WAVES
 	ow_scene_end
 
-.cutscene21
+.event_21
 	ow_highlight_level SOUTH, OWSOUTH_TOWER_OF_REVIVAL
 	ow_highlight_level NORTH, OWNORTH_THE_TIDAL_COAST
 	ow_scene_end
 
-.cutscene22
+.event_22
 	ow_unlock_level EAST, EASTCONN_6
 	ow_scene_end
 
-.cutscene23
+.event_23
 	ow_highlight_level WEST, OWWEST_A_TOWN_IN_CHAOS
 	ow_highlight_level EAST, OWEAST_CASTLE_OF_ILLUSIONS
 	ow_highlight_level EAST, OWEAST_FOREST_OF_FEAR
 	ow_scene_end
 
-.cutscene24
+.event_24
 	ow_highlight_level NORTH, OWNORTH_OUT_OF_THE_WOODS
 	ow_scene_end
 
-.cutscene25
+.event_25
 	ow_func NORTH, NOWFUNC_GOLD_MUSIC_BOX
 	ow_highlight_level NORTH, OWNORTH_THE_TEMPLE
 	ow_scene_end
 
-.cutscene26
+.event_26
 	db SPECIAL_ACTION, NORTH, $09
 	ow_scene_end
 
-.cutscene27
+.event_27
 	ow_highlight_level WEST, OWWEST_THE_VOLCANOS_BASE
 	ow_scene_end
 
-.cutscene28
+.event_28
 	ow_scene_end
 
-.cutscene29
+.event_29
 	db SPECIAL_ACTION, NORTH, $0a
 	ow_scene_end
 
-.cutscene2a
+.event_2a
 	ow_scene_end
 
-.cutscene2b
+.event_2b
 	ow_scene_end
 
-.cutscene2c
+.event_2c
 	db SPECIAL_ACTION, NORTH, $0b
 	ow_scene_end
 
-.cutscene2d
+.event_2d
 	ow_scene_end
 
-.cutscene2e
+.event_2e
 	ow_scene_end
 
-.cutscene2f
+.event_2f
 	db SPECIAL_ACTION, NORTH, $10
 	ow_scene_end
 
-.cutscene30
+.event_30
 	ow_highlight_level NORTH, OWNORTH_BANK_OF_THE_WILD_RIVER
 	ow_highlight_level WEST, OWWEST_THE_POOL_OF_RAIN
 	ow_scene_end
 
-.cutscene31
+.event_31
 	ow_scene_end
 
-.cutscene32
+.event_32
 	db SPECIAL_ACTION, NORTH, $0c
 	ow_scene_end
 
-.cutscene33
+.event_33
 	ow_scene_end
 
-.cutscene34
+.event_34
 	ow_scene_end
 
-.cutscene35
+.event_35
 	db SPECIAL_ACTION, NORTH, $11
 	ow_scene_end
 
-.cutscene36
+.event_36
 	ow_scene_end
 
-.cutscene37
+.event_37
 	ow_func EAST, EOWFUNC_BURN_VINES
 	ow_unlock_level EAST, EASTCONN_5
 	ow_unlock_level EAST, EASTCONN_7
 	ow_unlock_level NORTH, $08
 	ow_scene_end
 
-.cutscene38
+.event_38
 	ow_func EAST, EOWFUNC_SHOW_WARPED_VOID
 	ow_unlock_level EAST, SOUTHCONN_4
 	ow_scene_end
 
-.cutscene39
+.event_39
 	ow_func EAST, EOWFUNC_RAISE_PIPE
 	ow_scene_end
 
-.cutscene3a
+.event_3a
 	ow_highlight_level EAST, OWEAST_THE_WARPED_VOID
 	ow_scene_end
 
-.cutscene3b
+.event_3b
 	db SPECIAL_ACTION, NORTH, $0d
 	ow_scene_end
 
-.cutscene3c
+.event_3c
 	ow_highlight_level EAST, OWEAST_FOREST_OF_FEAR
 	ow_scene_end
 
-.cutscene3d
+.event_3d
 	ow_highlight_level EAST, OWEAST_THE_WARPED_VOID
 	ow_scene_end
 
-.cutscene3e
+.event_3e
 	ow_scene_end
 
-.cutscene3f
+.event_3f
 	ow_scene_end
 
-.cutscene40
+.event_40
 	ow_scene_end
 
-.cutscene41
+.event_41
 	ow_scene_end
 
-.cutscene42
+.event_42
 	db SPECIAL_ACTION, NORTH, $0e
 	ow_scene_end
 
-.cutscene43
+.event_43
 	ow_highlight_level WEST, OWWEST_A_TOWN_IN_CHAOS
 	ow_scene_end
 
-.cutscene44
+.event_44
 	ow_highlight_level NORTH, OWNORTH_THE_TIDAL_COAST
 	ow_highlight_level WEST, OWWEST_BENEATH_THE_WAVES
 	ow_scene_end
 
-.cutscene45
+.event_45
 	ow_scene_end
 
-.cutscene46
+.event_46
 	ow_scene_end
 
-.cutscene47
+.event_47
 	ow_scene_end
 
-.cutscene48
+.event_48
 	ow_scene_end
 
-.cutscene49
+.event_49
 	ow_highlight_level SOUTH, OWSOUTH_TOWER_OF_REVIVAL
 	ow_scene_end
 
-.cutscene4a
+.event_4a
 	ow_unlock_level SOUTH, SOUTHCONN_5
 	ow_scene_end
 
-.cutscene4b
+.event_4b
 	db SPECIAL_ACTION, NORTH, $0f
 	ow_scene_end
 
-.cutscene4c
+.event_4c
 	ow_highlight_level WEST, OWWEST_THE_WEST_CRATER
 	ow_highlight_level EAST, OWEAST_THE_EAST_CRATER
 	ow_scene_end
 
-.cutscene4d
+.event_4d
 	ow_scene_end
 
-.cutscene4e
+.event_4e
 	ow_highlight_level EAST, OWEAST_CASTLE_OF_ILLUSIONS
 	ow_scene_end
 
-.cutscene4f
+.event_4f
 	ow_highlight_level WEST, OWWEST_THE_WEST_CRATER
 	ow_highlight_level SOUTH, OWSOUTH_THE_STEEP_CANYON
 	ow_highlight_level SOUTH, OWSOUTH_CAVE_OF_FLAMES
 	ow_scene_end
 
-.cutscene50
+.event_50
 	ow_scene_end
 
-.cutscene51
+.event_51
 	ow_highlight_level NORTH, OWNORTH_THE_VAST_PLAIN
 	ow_highlight_level WEST, OWWEST_BENEATH_THE_WAVES
 	ow_scene_end
 
-.cutscene52
+.event_52
 	ow_scene_end
 
-.cutscene53
+.event_53
 	ow_scene_end
 
-.cutscene54
+.event_54
 	ow_highlight_level SOUTH, OWSOUTH_ABOVE_THE_CLOUDS
 	ow_scene_end
 
-.cutscene55
+.event_55
 	ow_highlight_level EAST, OWEAST_THE_EAST_CRATER
 	ow_scene_end
 
-.cutscene56
+.event_56
 	ow_highlight_level NORTH, OWNORTH_SEA_TURTLE_ROCKS
 	ow_scene_end
 
-.cutscene57
+.event_57
 	ow_func SOUTH, SOWFUNC_FULL_MOON
 	ow_highlight_level SOUTH, OWSOUTH_ABOVE_THE_CLOUDS
 	ow_scene_end
 
-.cutscene58
+.event_58
 	ow_highlight_level EAST, OWEAST_THE_EAST_CRATER
 	ow_scene_end
 
-.cutscene59
+.event_59
 	ow_scene_end
 
-.cutscene5a
+.event_5a
 	ow_func NORTH, NOWFUNC_PROLOGUE
 	ow_scene_end
 
 Func_81dce:
-	ld a, CUTSCENE_01
-	ld [wCutscene], a
+	ld a, EVENT_01
+	ld [wTempEvent], a
 	ld a, [wLastTransitionParam]
 	ld c, a
 	dec c
@@ -4393,8 +4399,8 @@ Func_81dce:
 .loop_cutscenes
 	xor a
 	ld [w2d078], a
-	ld a, [wCutscene]
-	call CheckAllCutsceneTreasures
+	ld a, [wTempEvent]
+	call CheckIfEventIsUnlocked
 	ld [w2d065], a
 	and a
 	jr z, .asm_81dfd
@@ -4404,11 +4410,11 @@ Func_81dce:
 	ld [w2d065], a
 .asm_81dfd
 	call .PrepareScene
-	ld a, [wCutscene]
+	ld a, [wTempEvent]
 	inc a
-	cp NUM_CUTSCENES
+	cp NUM_EVENTS
 	jr z, .break
-	ld [wCutscene], a
+	ld [wTempEvent], a
 	jr .loop_cutscenes
 .break
 	ld a, [wLastTransitionParam]
@@ -4422,11 +4428,11 @@ Func_81dce:
 ; and initialise everything that is needed
 ; for this side of the map
 .PrepareScene:
-	ld a, [wCutscene]
-	call GetCutsceneOWParams
+	ld a, [wTempEvent]
+	call GetOWSceneParams
 	ret z ; finished
 .loop
-	ld a, [wCutsceneMapSide]
+	ld a, [wOWSceneMapSide]
 	ld b, a
 	ld a, [wCurMapSide]
 	cp b
@@ -4434,14 +4440,14 @@ Func_81dce:
 	; same side
 	call .DoInitFunc
 .diff_side
-	ld hl, wCutsceneOWParamsPtr
+	ld hl, wOWSceneParamsPtr
 	call GetByteFromPointerInHL
-	call GetCutsceneOWParams_GotPtr
+	call GetOWSceneParams_GotPtr
 	ret z ; finished
 	jr .loop
 
 .DoInitFunc:
-	ld a, [wOWCutsceneAction]
+	ld a, [wOWSceneAction]
 	jumptable
 
 	dw Func_81e44
@@ -4593,9 +4599,9 @@ Func_81f21:
 	ret
 
 GetUnlockedOWLevelData:
-	ld hl, wCutsceneMapSide
+	ld hl, wOWSceneMapSide
 	ld a, [hli]
-	ld c, [hl] ; wCutsceneActionParam
+	ld c, [hl] ; wOWSceneActionParam
 	ld hl, UnlockableConnections
 	call GetCthWordFromAthTable
 	ld a, [hli]
@@ -4603,9 +4609,9 @@ GetUnlockedOWLevelData:
 	ld a, [hl]
 	ld [wLevel2], a
 
-	ld hl, wCutsceneMapSide
+	ld hl, wOWSceneMapSide
 	ld a, [hli]
-	ld c, [hl] ; wCutsceneActionParam
+	ld c, [hl] ; wOWSceneActionParam
 	ld hl, UnlockableLevelArrows
 	call GetCthWordFromAthTable
 	ld a, [hli]
@@ -5097,7 +5103,7 @@ UpdateTopBar:
 	dw .HandleInput             ; TOPBARST_INPUT
 	dw .CloseTopBar             ; TOPBARST_CLOSE
 
-	dw .Cutscene                ; TOPBARST_CUTSCENE
+	dw .Cutscene                ; TOPBARST_EVENT
 	dw .Collection              ; TOPBARST_COLLECTION
 	dw .NextMap                 ; TOPBARST_NEXT_MAP
 
@@ -5671,7 +5677,7 @@ HandleTopBarSelection:
 	call .ShowPressedButton
 	debgcoord 9, 19, wAttrmap
 	call .ApplyPressedButtonAttrs
-	ld a, TOPBARST_CUTSCENE
+	ld a, TOPBARST_EVENT
 	ld [wTopBarState], a
 	xor a
 	ld [wTopBarStateCounter], a
@@ -6360,7 +6366,7 @@ Func_82a26:
 	jr Func_82a8d
 
 Func_82a2f:
-	ld a, [wCutsceneMapSide]
+	ld a, [wOWSceneMapSide]
 	ld b, a ; map side
 	ld a, [wLevel2]
 	ld d, a ; map side level index
@@ -6453,7 +6459,7 @@ IsLeftExitOrJunction:
 	cp OW_EXIT_LEFT
 	ret z ; is left exit
 	ld c, a
-	ld a, [wCutsceneMapSide]
+	ld a, [wOWSceneMapSide]
 	and a
 	ret nz ; not North
 	ld a, OWNORTH_JUNCTION
@@ -6566,12 +6572,12 @@ Func_82baa:
 	cp 30
 	ret c
 	xor a
-	ld [wCutsceneActionParam], a
+	ld [wOWSceneActionParam], a
 	ld [w2d062], a
 	ret
 
 Func_82bb8:
-	ld a, [wOWCutsceneAction]
+	ld a, [wOWSceneAction]
 	cp UNLOCK_LEVEL
 	ret nz
 	ld a, [wCurSceneObjState]
@@ -6588,7 +6594,7 @@ Func_82bb8:
 	ret
 
 Func_82bda:
-	ld a, [wOWCutsceneAction]
+	ld a, [wOWSceneAction]
 	cp HIGHLIGHT_LEVEL
 	ret nz
 	ld a, [wCurSceneObjState]
@@ -6636,7 +6642,7 @@ Func_82c22:
 
 Func_82c29:
 	xor a
-	ld [wCutsceneActionParam], a
+	ld [wOWSceneActionParam], a
 	ld hl, wOWFuncCounter
 	ld [hli], a
 	ld [hl], a ; w2d062
@@ -6668,27 +6674,27 @@ Func_82c33:
 	sub 1
 	ccf
 	; carry set if not North
-	ld a, [wCutsceneActionParam]
+	ld a, [wOWSceneActionParam]
 	sbc 0
 	ld [wLevel2], a
-	ld a, [wQueuedCutscene]
-	cp CUTSCENE_25
+	ld a, [wCurEvent]
+	cp EVENT_25
 	jr z, .asm_82c71
-	cp CUTSCENE_23
+	cp EVENT_23
 	jr z, .asm_82c78
 .asm_82c6e
 	jp Func_82c22
 
 .asm_82c71
 	ld a, $07
-	ld [wCutsceneActionParam], a
+	ld [wOWSceneActionParam], a
 	jr .asm_82c6e
 
 .asm_82c78
 	ld a, [wCurMapSide]
 	cp EAST
 	jr nz, .asm_82c6e
-	ld a, [wCutsceneActionParam]
+	ld a, [wOWSceneActionParam]
 	cp $07
 	jr nz, .asm_82c6e
 	ld a, MYSTERY_HANDLE
