@@ -23,11 +23,11 @@
 	const JAR                          ; $15
 	const TREASURE_MAP                 ; $16
 	const BLUE_BOOK                    ; $17
-	const MAGIC_WAND                   ; $18
-	const SKY_KEY                      ; $19
-	const YELLOW_BOOK                  ; $1a
+	const SKY_KEY                      ; $18
+	const YELLOW_BOOK                  ; $19
+	const TRIDENT                      ; $1a
 	const AXE                          ; $1b
-	const TRIDENT                      ; $1c
+	const MAGIC_WAND                   ; $1c
 	const SKULL_RING_BLUE              ; $1d
 	const SKULL_RING_RED               ; $1e
 	const BLUE_TABLET                  ; $1f
@@ -71,8 +71,8 @@
 	const SUN_MEDALLION_TOP            ; $45
 	const SUN_MEDALLION_BOTTOM         ; $46
 	const EYE_OF_THE_STORM             ; $47
-	const POUCH                        ; $48
-	const MAGIC_SEEDS                  ; $49
+	const MAGIC_SEEDS                  ; $48
+	const POUCH                        ; $49
 	const FULL_MOON_GONG               ; $4a
 	const TELEPHONE                    ; $4b
 	const CROWN                        ; $4c

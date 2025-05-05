@@ -71,7 +71,7 @@ InitLoadedCutscene:
 	ld a, [wCurEvent]
 	dec a
 	jr z, .skip_load_tiles
-	; != EVENT_01
+	; != EVENT_PROLOGUE
 	decompress_tiles1 Cutscenes6Gfx, v1Tiles0
 .skip_load_tiles
 	ld a, [wCurEvent]
@@ -81,94 +81,94 @@ InitLoadedCutscene:
 CutsceneInitFunctions:
 	table_width 2
 	dw NoInitCutscene  ; EVENT_00
-	dw .InitPrologue ; EVENT_01
-	dw .InitCutscene02 ; EVENT_02
-	dw .InitCutscene03 ; EVENT_03
-	dw .InitCutscene04 ; EVENT_04
-	dw NoInitCutscene  ; EVENT_05
-	dw .InitCutscene06 ; EVENT_06
-	dw .InitCutscene07 ; EVENT_07
-	dw .InitCutscene08 ; EVENT_08
-	dw .InitCutscene09 ; EVENT_09
-	dw .InitCutscene0a ; EVENT_0A
-	dw NoInitCutscene  ; EVENT_0B
-	dw .InitCutscene0c ; EVENT_0C
-	dw .InitCutscene0d ; EVENT_0D
-	dw .InitCutscene0e ; EVENT_0E
-	dw NoInitCutscene  ; EVENT_0F
-	dw .InitCutscene10 ; EVENT_10
-	dw .InitCutscene11 ; EVENT_11
-	dw NoInitCutscene  ; EVENT_12
-	dw .InitCutscene13 ; EVENT_13
-	dw .InitCutscene14 ; EVENT_14
-	dw .InitCutscene15 ; EVENT_15
-	dw NoInitCutscene  ; EVENT_16
-	dw .InitCutscene17 ; EVENT_17
-	dw .InitCutscene18 ; EVENT_18
-	dw .InitCutscene19 ; EVENT_19
-	dw NoInitCutscene  ; EVENT_1A
-	dw .InitCutscene1b ; EVENT_1B
-	dw NoInitCutscene  ; EVENT_1C
-	dw .InitCutscene1d ; EVENT_1D
-	dw .InitCutscene1e ; EVENT_1E
-	dw .InitCutscene1f ; EVENT_1F
-	dw NoInitCutscene  ; EVENT_20
-	dw .InitCutscene21 ; EVENT_21
-	dw .InitCutscene22 ; EVENT_22
-	dw NoInitCutscene  ; EVENT_23
-	dw .InitCutscene24 ; EVENT_24
-	dw .InitCutscene25 ; EVENT_25
-	dw NoInitCutscene  ; EVENT_26
-	dw .InitCutscene27 ; EVENT_27
+	dw .InitPrologue ; EVENT_PROLOGUE
+	dw .InitCutscene02 ; EVENT_CUT_TREE
+	dw .InitCutscene03 ; EVENT_OPEN_NORTH_GATE
+	dw .InitCutscene04 ; EVENT_EXPEL_TORNADO
+	dw NoInitCutscene  ; EVENT_LEAD_OVERALLS
+	dw .InitCutscene06 ; EVENT_RAINSTORM
+	dw .InitCutscene07 ; EVENT_FIX_ELEVATOR
+	dw .InitCutscene08 ; EVENT_YELLOW_MUSIC_BOX
+	dw .InitCutscene09 ; EVENT_PLANT_SEEDS
+	dw .InitCutscene0a ; EVENT_RAISE_TOWER
+	dw NoInitCutscene  ; EVENT_SWIMMING_FLIPPERS
+	dw .InitCutscene0c ; EVENT_BLOW_MIST
+	dw .InitCutscene0d ; EVENT_SUMMON_SNAKES
+	dw .InitCutscene0e ; EVENT_FREEZE_SEA
+	dw NoInitCutscene  ; EVENT_HEAD_SMASH_HELMET
+	dw .InitCutscene10 ; EVENT_BLUE_MUSIC_BOX
+	dw .InitCutscene11 ; EVENT_SUMMON_LIGHTNING
+	dw NoInitCutscene  ; EVENT_GRAB_GLOVE
+	dw .InitCutscene13 ; EVENT_FOOT_STONE
+	dw .InitCutscene14 ; EVENT_VOLCANO_ERUPTION
+	dw .InitCutscene15 ; EVENT_OPEN_BLUE_SNAKE_DOOR
+	dw NoInitCutscene  ; EVENT_GARLIC
+	dw .InitCutscene17 ; EVENT_GREEN_MUSIC_BOX
+	dw .InitCutscene18 ; EVENT_PURIFY_WATER
+	dw .InitCutscene19 ; EVENT_REVEAL_CASTLE
+	dw NoInitCutscene  ; EVENT_SUPER_JUMP_SLAM_OVERALLS
+	dw .InitCutscene1b ; EVENT_SUMMON_SUN
+	dw NoInitCutscene  ; EVENT_HIGH_JUMP_BOOTS
+	dw .InitCutscene1d ; EVENT_RED_MUSIC_BOX
+	dw .InitCutscene1e ; EVENT_EXPLODE_BOMBS
+	dw .InitCutscene1f ; EVENT_LEAVES_FALL
+	dw NoInitCutscene  ; EVENT_PRINCE_FROGS_GLOVES
+	dw .InitCutscene21 ; EVENT_MAKE_WIRE
+	dw .InitCutscene22 ; EVENT_TREASURE_MAP
+	dw NoInitCutscene  ; EVENT_SUPER_GRAB_GLOVES
+	dw .InitCutscene24 ; EVENT_OPEN_TREE_MOUTH
+	dw .InitCutscene25 ; EVENT_GOLD_MUSIC_BOX
+	dw NoInitCutscene  ; EVENT_BLUE_CRAYON
+	dw .InitCutscene27 ; EVENT_PLACE_CART_WHEELS
 	dw NoInitCutscene  ; EVENT_28
-	dw NoInitCutscene  ; EVENT_29
+	dw NoInitCutscene  ; EVENT_CYAN_CRAYON
 	dw NoInitCutscene  ; EVENT_2A
 	dw NoInitCutscene  ; EVENT_2B
-	dw NoInitCutscene  ; EVENT_2C
+	dw NoInitCutscene  ; EVENT_PINK_CRAYON
 	dw NoInitCutscene  ; EVENT_2D
 	dw NoInitCutscene  ; EVENT_2E
-	dw NoInitCutscene  ; EVENT_2F
-	dw .InitCutscene30 ; EVENT_30
+	dw NoInitCutscene  ; EVENT_MAGNIFYING_GLASS
+	dw .InitCutscene30 ; EVENT_RAISE_ICE_BLOCKS
 	dw NoInitCutscene  ; EVENT_31
-	dw NoInitCutscene  ; EVENT_32
+	dw NoInitCutscene  ; EVENT_YELLOW_CRAYON
 	dw NoInitCutscene  ; EVENT_33
 	dw NoInitCutscene  ; EVENT_34
-	dw NoInitCutscene  ; EVENT_35
+	dw NoInitCutscene  ; EVENT_DAY_OR_NIGHT_SPELL
 	dw NoInitCutscene  ; EVENT_36
-	dw .InitCutscene37 ; EVENT_37
-	dw .InitCutscene38 ; EVENT_38
-	dw .InitCutscene39 ; EVENT_39
-	dw .InitCutscene3a ; EVENT_3A
-	dw NoInitCutscene  ; EVENT_3B
+	dw .InitCutscene37 ; EVENT_TORCH_FOREST
+	dw .InitCutscene38 ; EVENT_REVEAL_WARPED_VOID
+	dw .InitCutscene39 ; EVENT_RAISE_PIPE
+	dw .InitCutscene3a ; EVENT_REMOVE_WARPS
+	dw NoInitCutscene  ; EVENT_BROWN_CRAYON
 	dw .InitCutscene3c ; EVENT_3C
-	dw .InitCutscene3d ; EVENT_3D
+	dw .InitCutscene3d ; EVENT_OPEN_PARAGOOM_CAGE
 	dw NoInitCutscene  ; EVENT_3E
 	dw NoInitCutscene  ; EVENT_3F
 	dw NoInitCutscene  ; EVENT_40
 	dw NoInitCutscene  ; EVENT_41
-	dw NoInitCutscene  ; EVENT_42
-	dw .InitCutscene43 ; EVENT_43
-	dw .InitCutscene44 ; EVENT_44
+	dw NoInitCutscene  ; EVENT_RED_CRAYON
+	dw .InitCutscene43 ; EVENT_PLACE_PROPELLER
+	dw .InitCutscene44 ; EVENT_FEED_OCTOHON
 	dw NoInitCutscene  ; EVENT_45
 	dw NoInitCutscene  ; EVENT_46
 	dw NoInitCutscene  ; EVENT_47
 	dw NoInitCutscene  ; EVENT_48
-	dw .InitCutscene49 ; EVENT_49
-	dw .InitCutscene4a ; EVENT_4A
-	dw NoInitCutscene  ; EVENT_4B
-	dw .InitCutscene4c ; EVENT_4C
+	dw .InitCutscene49 ; EVENT_OPEN_GOLDEN_SNAKE_DOOR
+	dw .InitCutscene4a ; EVENT_OPEN_SKY_DOOR
+	dw NoInitCutscene  ; EVENT_GREEN_CRAYON
+	dw .InitCutscene4c ; EVENT_EXTINGUISH_FIRE
 	dw NoInitCutscene  ; EVENT_4D
-	dw .InitCutscene4e ; EVENT_4E
-	dw .InitCutscene4f ; EVENT_4F
+	dw .InitCutscene4e ; EVENT_PLACE_BRICK
+	dw .InitCutscene4f ; EVENT_SPRAY_IRON_WALL
 	dw NoInitCutscene  ; EVENT_50
-	dw .InitCutscene51 ; EVENT_51
+	dw .InitCutscene51 ; EVENT_MIX_CHEMICALS
 	dw NoInitCutscene  ; EVENT_52
 	dw NoInitCutscene  ; EVENT_53
-	dw .InitCutscene54 ; EVENT_54
-	dw .InitCutscene55 ; EVENT_55
-	dw .InitCutscene56 ; EVENT_56
-	dw .InitCutscene57 ; EVENT_57
-	dw .InitCutscene58 ; EVENT_58
+	dw .InitCutscene54 ; EVENT_CUT_BALOON
+	dw .InitCutscene55 ; EVENT_DRILL_HOLES
+	dw .InitCutscene56 ; EVENT_REVEAL_DARK_ROOM
+	dw .InitCutscene57 ; EVENT_SUMMON_MOON
+	dw .InitCutscene58 ; EVENT_OPEN_CRATER_HOLE
 	dw NoInitCutscene  ; EVENT_59
 	dw NoInitCutscene  ; EVENT_5A
 	assert_table_length NUM_EVENTS
@@ -1428,94 +1428,94 @@ DoCutsceneFunc:
 .table
 	table_width 2
 	dw .InvalidCutscene ; EVENT_00
-	dw Cutscene01Func ; EVENT_01
-	dw Cutscene02Func ; EVENT_02
-	dw Cutscene03Func ; EVENT_03
-	dw Cutscene04Func ; EVENT_04
-	dw .InvalidCutscene ; EVENT_05
-	dw Cutscene06Func ; EVENT_06
-	dw Cutscene07Func ; EVENT_07
-	dw Cutscene08Func ; EVENT_08
-	dw Cutscene09Func ; EVENT_09
-	dw Cutscene0aFunc ; EVENT_0A
-	dw .InvalidCutscene ; EVENT_0B
-	dw Cutscene0cFunc ; EVENT_0C
-	dw Cutscene0dFunc ; EVENT_0D
-	dw Cutscene0eFunc ; EVENT_0E
-	dw .InvalidCutscene ; EVENT_0F
-	dw Cutscene10Func ; EVENT_10
-	dw Cutscene11Func ; EVENT_11
-	dw .InvalidCutscene ; EVENT_12
-	dw Cutscene13Func ; EVENT_13
-	dw Cutscene14Func ; EVENT_14
-	dw Cutscene15Func ; EVENT_15
-	dw .InvalidCutscene ; EVENT_16
-	dw Cutscene17Func ; EVENT_17
-	dw Cutscene18Func ; EVENT_18
-	dw Cutscene19Func ; EVENT_19
-	dw .InvalidCutscene ; EVENT_1A
-	dw Cutscene1bFunc ; EVENT_1B
-	dw .InvalidCutscene ; EVENT_1C
-	dw Cutscene1dFunc ; EVENT_1D
-	dw Cutscene1eFunc ; EVENT_1E
-	dw Cutscene1fFunc ; EVENT_1F
-	dw .InvalidCutscene ; EVENT_20
-	dw Cutscene21Func ; EVENT_21
-	dw Cutscene22Func ; EVENT_22
-	dw .InvalidCutscene ; EVENT_23
-	dw Cutscene24Func ; EVENT_24
-	dw Cutscene25Func ; EVENT_25
-	dw .InvalidCutscene ; EVENT_26
-	dw Cutscene27Func ; EVENT_27
+	dw Cutscene01Func ; EVENT_PROLOGUE
+	dw Cutscene02Func ; EVENT_CUT_TREE
+	dw Cutscene03Func ; EVENT_OPEN_NORTH_GATE
+	dw Cutscene04Func ; EVENT_EXPEL_TORNADO
+	dw .InvalidCutscene ; EVENT_LEAD_OVERALLS
+	dw Cutscene06Func ; EVENT_RAINSTORM
+	dw Cutscene07Func ; EVENT_FIX_ELEVATOR
+	dw Cutscene08Func ; EVENT_YELLOW_MUSIC_BOX
+	dw Cutscene09Func ; EVENT_PLANT_SEEDS
+	dw Cutscene0aFunc ; EVENT_RAISE_TOWER
+	dw .InvalidCutscene ; EVENT_SWIMMING_FLIPPERS
+	dw Cutscene0cFunc ; EVENT_BLOW_MIST
+	dw Cutscene0dFunc ; EVENT_SUMMON_SNAKES
+	dw Cutscene0eFunc ; EVENT_FREEZE_SEA
+	dw .InvalidCutscene ; EVENT_HEAD_SMASH_HELMET
+	dw Cutscene10Func ; EVENT_BLUE_MUSIC_BOX
+	dw Cutscene11Func ; EVENT_SUMMON_LIGHTNING
+	dw .InvalidCutscene ; EVENT_GRAB_GLOVE
+	dw Cutscene13Func ; EVENT_FOOT_STONE
+	dw Cutscene14Func ; EVENT_VOLCANO_ERUPTION
+	dw Cutscene15Func ; EVENT_OPEN_BLUE_SNAKE_DOOR
+	dw .InvalidCutscene ; EVENT_GARLIC
+	dw Cutscene17Func ; EVENT_GREEN_MUSIC_BOX
+	dw Cutscene18Func ; EVENT_PURIFY_WATER
+	dw Cutscene19Func ; EVENT_REVEAL_CASTLE
+	dw .InvalidCutscene ; EVENT_SUPER_JUMP_SLAM_OVERALLS
+	dw Cutscene1bFunc ; EVENT_SUMMON_SUN
+	dw .InvalidCutscene ; EVENT_HIGH_JUMP_BOOTS
+	dw Cutscene1dFunc ; EVENT_RED_MUSIC_BOX
+	dw Cutscene1eFunc ; EVENT_EXPLODE_BOMBS
+	dw Cutscene1fFunc ; EVENT_LEAVES_FALL
+	dw .InvalidCutscene ; EVENT_PRINCE_FROGS_GLOVES
+	dw Cutscene21Func ; EVENT_MAKE_WIRE
+	dw Cutscene22Func ; EVENT_TREASURE_MAP
+	dw .InvalidCutscene ; EVENT_SUPER_GRAB_GLOVES
+	dw Cutscene24Func ; EVENT_OPEN_TREE_MOUTH
+	dw Cutscene25Func ; EVENT_GOLD_MUSIC_BOX
+	dw .InvalidCutscene ; EVENT_BLUE_CRAYON
+	dw Cutscene27Func ; EVENT_PLACE_CART_WHEELS
 	dw .InvalidCutscene ; EVENT_28
-	dw .InvalidCutscene ; EVENT_29
+	dw .InvalidCutscene ; EVENT_CYAN_CRAYON
 	dw .InvalidCutscene ; EVENT_2A
 	dw .InvalidCutscene ; EVENT_2B
-	dw .InvalidCutscene ; EVENT_2C
+	dw .InvalidCutscene ; EVENT_PINK_CRAYON
 	dw .InvalidCutscene ; EVENT_2D
 	dw .InvalidCutscene ; EVENT_2E
-	dw .InvalidCutscene ; EVENT_2F
-	dw Cutscene30Func ; EVENT_30
+	dw .InvalidCutscene ; EVENT_MAGNIFYING_GLASS
+	dw Cutscene30Func ; EVENT_RAISE_ICE_BLOCKS
 	dw .InvalidCutscene ; EVENT_31
-	dw .InvalidCutscene ; EVENT_32
+	dw .InvalidCutscene ; EVENT_YELLOW_CRAYON
 	dw .InvalidCutscene ; EVENT_33
 	dw .InvalidCutscene ; EVENT_34
-	dw .InvalidCutscene ; EVENT_35
+	dw .InvalidCutscene ; EVENT_DAY_OR_NIGHT_SPELL
 	dw .InvalidCutscene ; EVENT_36
-	dw Cutscene37Func ; EVENT_37
-	dw Cutscene38Func ; EVENT_38
-	dw Cutscene39Func ; EVENT_39
-	dw Cutscene3aFunc ; EVENT_3A
-	dw .InvalidCutscene ; EVENT_3B
+	dw Cutscene37Func ; EVENT_TORCH_FOREST
+	dw Cutscene38Func ; EVENT_REVEAL_WARPED_VOID
+	dw Cutscene39Func ; EVENT_RAISE_PIPE
+	dw Cutscene3aFunc ; EVENT_REMOVE_WARPS
+	dw .InvalidCutscene ; EVENT_BROWN_CRAYON
 	dw Cutscene3cFunc ; EVENT_3C
-	dw Cutscene3dFunc ; EVENT_3D
+	dw Cutscene3dFunc ; EVENT_OPEN_PARAGOOM_CAGE
 	dw .InvalidCutscene ; EVENT_3E
 	dw .InvalidCutscene ; EVENT_3F
 	dw .InvalidCutscene ; EVENT_40
 	dw .InvalidCutscene ; EVENT_41
-	dw .InvalidCutscene ; EVENT_42
-	dw Cutscene43Func ; EVENT_43
-	dw Cutscene44Func ; EVENT_44
+	dw .InvalidCutscene ; EVENT_RED_CRAYON
+	dw Cutscene43Func ; EVENT_PLACE_PROPELLER
+	dw Cutscene44Func ; EVENT_FEED_OCTOHON
 	dw .InvalidCutscene ; EVENT_45
 	dw .InvalidCutscene ; EVENT_46
 	dw .InvalidCutscene ; EVENT_47
 	dw .InvalidCutscene ; EVENT_48
-	dw Cutscene49Func ; EVENT_49
-	dw Cutscene4aFunc ; EVENT_4A
-	dw .InvalidCutscene ; EVENT_4B
-	dw Cutscene4cFunc ; EVENT_4C
+	dw Cutscene49Func ; EVENT_OPEN_GOLDEN_SNAKE_DOOR
+	dw Cutscene4aFunc ; EVENT_OPEN_SKY_DOOR
+	dw .InvalidCutscene ; EVENT_GREEN_CRAYON
+	dw Cutscene4cFunc ; EVENT_EXTINGUISH_FIRE
 	dw .InvalidCutscene ; EVENT_4D
-	dw Cutscene4eFunc ; EVENT_4E
-	dw Cutscene4fFunc ; EVENT_4F
+	dw Cutscene4eFunc ; EVENT_PLACE_BRICK
+	dw Cutscene4fFunc ; EVENT_SPRAY_IRON_WALL
 	dw .InvalidCutscene ; EVENT_50
-	dw Cutscene51Func ; EVENT_51
+	dw Cutscene51Func ; EVENT_MIX_CHEMICALS
 	dw .InvalidCutscene ; EVENT_52
 	dw .InvalidCutscene ; EVENT_53
-	dw Cutscene54Func ; EVENT_54
-	dw Cutscene55Func ; EVENT_55
-	dw Cutscene56Func ; EVENT_56
-	dw Cutscene57Func ; EVENT_57
-	dw Cutscene58Func ; EVENT_58
+	dw Cutscene54Func ; EVENT_CUT_BALOON
+	dw Cutscene55Func ; EVENT_DRILL_HOLES
+	dw Cutscene56Func ; EVENT_REVEAL_DARK_ROOM
+	dw Cutscene57Func ; EVENT_SUMMON_MOON
+	dw Cutscene58Func ; EVENT_OPEN_CRATER_HOLE
 	dw .InvalidCutscene ; EVENT_59
 	dw .InvalidCutscene ; EVENT_5A
 	assert_table_length NUM_EVENTS
@@ -2164,7 +2164,7 @@ Cutscene11Func:
 
 .Func_9d36a:
 	ld a, [wCutscenePlaying]
-	cp EVENT_11
+	cp EVENT_SUMMON_LIGHTNING
 	jp nz, AdvanceCutsceneFunc
 	ld a, $09
 	ld [w2d013], a

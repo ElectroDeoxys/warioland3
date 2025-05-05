@@ -23,11 +23,11 @@ INCBIN "gfx/treasures/warp_compact.2bpp"
 INCBIN "gfx/treasures/jar.2bpp"
 INCBIN "gfx/treasures/treasure_map.2bpp"
 INCBIN "gfx/treasures/blue_book.2bpp"
-INCBIN "gfx/treasures/magic_wand.2bpp"
 INCBIN "gfx/treasures/sky_key.2bpp"
 INCBIN "gfx/treasures/yellow_book.2bpp"
-INCBIN "gfx/treasures/axe.2bpp"
 INCBIN "gfx/treasures/trident.2bpp"
+INCBIN "gfx/treasures/axe.2bpp"
+INCBIN "gfx/treasures/magic_wand.2bpp"
 INCBIN "gfx/treasures/skull_ring_blue.2bpp"
 INCBIN "gfx/treasures/skull_ring_red.2bpp"
 INCBIN "gfx/treasures/blue_tablet.2bpp"
@@ -71,8 +71,8 @@ INCBIN "gfx/treasures/scepter.2bpp"
 INCBIN "gfx/treasures/sun_medallion_top.2bpp"
 INCBIN "gfx/treasures/sun_medallion_bottom.2bpp"
 INCBIN "gfx/treasures/eye_of_the_storm.2bpp"
-INCBIN "gfx/treasures/pouch.2bpp"
 INCBIN "gfx/treasures/magic_seeds.2bpp"
+INCBIN "gfx/treasures/pouch.2bpp"
 INCBIN "gfx/treasures/full_moon_gong.2bpp"
 INCBIN "gfx/treasures/telephone.2bpp"
 INCBIN "gfx/treasures/crown.2bpp"
@@ -889,12 +889,12 @@ CollectionLinkTable:
 .Page1
 	dw .none ; JAR
 	dw .none ; TREASURE_MAP
-	dw .book_and_trident ; BLUE_BOOK
-	dw .none ; MAGIC_WAND
-	dw .book_and_sky_key ; SKY_KEY
-	dw .book_and_sky_key ; YELLOW_BOOK
-	dw .none ; AXE
+	dw .book_and_magic_wand ; BLUE_BOOK
+	dw .none ; SKY_KEY
+	dw .book_and_trident ; YELLOW_BOOK
 	dw .book_and_trident ; TRIDENT
+	dw .none ; AXE
+	dw .book_and_magic_wand ; MAGIC_WAND
 	dw .skull_rings ; SKULL_RING_BLUE
 	dw .skull_rings ; SKULL_RING_RED
 	dw .tablets ; BLUE_TABLET
@@ -908,9 +908,9 @@ CollectionLinkTable:
 	dw .chemicals ; BLUE_CHEMICAL
 	dw .chemicals ; RED_CHEMICAL
 
-.book_and_trident
+.book_and_magic_wand
 	db $03, $08, $80
-.book_and_sky_key
+.book_and_trident
 	db $05, $06, $80
 .skull_rings
 	db $09, $0a, $80
@@ -959,9 +959,9 @@ CollectionLinkTable:
 	dw .none ; SCEPTER
 	dw .sun_medallion ; SUN_MEDALLION_TOP
 	dw .sun_medallion ; SUN_MEDALLION_BOTTOM
-	dw .storm_and_magic_seeds ; EYE_OF_THE_STORM
-	dw .none ; POUCH
-	dw .storm_and_magic_seeds ; MAGIC_SEEDS
+	dw .storm_and_pouch ; EYE_OF_THE_STORM
+	dw .none ; MAGIC_SEEDS
+	dw .storm_and_pouch ; POUCH
 	dw .none ; FULL_MOON_GONG
 	dw .none ; TELEPHONE
 	dw .none ; CROWN
@@ -976,7 +976,7 @@ CollectionLinkTable:
 	db $06, $07, $80
 .sun_medallion
 	db $09, $0a, $80
-.storm_and_magic_seeds
+.storm_and_pouch
 	db $0b, $0d, $80
 
 .Page4
@@ -1361,11 +1361,11 @@ TreasureOBPals:
 	db OBPAL_TREASURE_BLUE   ; JAR
 	db OBPAL_TREASURE_YELLOW ; TREASURE_MAP
 	db OBPAL_TREASURE_BLUE   ; BLUE_BOOK
-	db OBPAL_TREASURE_YELLOW ; MAGIC_WAND
 	db OBPAL_TREASURE_YELLOW ; SKY_KEY
-	db OBPAL_TREASURE_GREEN  ; YELLOW_BOOK
+	db OBPAL_TREASURE_YELLOW ; YELLOW_BOOK
+	db OBPAL_TREASURE_GREEN  ; TRIDENT
 	db OBPAL_TREASURE_BLUE   ; AXE
-	db OBPAL_TREASURE_YELLOW ; TRIDENT
+	db OBPAL_TREASURE_YELLOW ; MAGIC_WAND
 	db OBPAL_TREASURE_BLUE   ; SKULL_RING_BLUE
 	db OBPAL_TREASURE_RED    ; SKULL_RING_RED
 	db OBPAL_TREASURE_BLUE   ; BLUE_TABLET
@@ -1409,8 +1409,8 @@ TreasureOBPals:
 	db OBPAL_TREASURE_RED    ; SUN_MEDALLION_TOP
 	db OBPAL_TREASURE_RED    ; SUN_MEDALLION_BOTTOM
 	db OBPAL_TREASURE_BLUE   ; EYE_OF_THE_STORM
-	db OBPAL_TREASURE_GREEN  ; POUCH
-	db OBPAL_TREASURE_BLUE   ; MAGIC_SEEDS
+	db OBPAL_TREASURE_GREEN  ; MAGIC_SEEDS
+	db OBPAL_TREASURE_BLUE   ; POUCH
 	db OBPAL_TREASURE_YELLOW ; FULL_MOON_GONG
 	db OBPAL_TREASURE_GREEN  ; TELEPHONE
 	db OBPAL_TREASURE_RED    ; CROWN

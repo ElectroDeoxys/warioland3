@@ -3,7 +3,7 @@
 LevelTreasureRequirements:
 	; LEVEL_OUT_OF_THE_WOODS
 	db GOLD_MAGIC,                 TREASURE_NONE ; variant 4
-	db MAGIC_SEEDS,                EYE_OF_THE_STORM ; variant 3
+	db POUCH,                EYE_OF_THE_STORM ; variant 3
 	db LEAD_OVERALLS_T,            TREASURE_NONE ; variant 2
 	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
@@ -15,7 +15,7 @@ LevelTreasureRequirements:
 
 	; LEVEL_THE_VAST_PLAIN
 	db BLUE_CHEMICAL,              RED_CHEMICAL ; variant 4
-	db POUCH,                      TREASURE_NONE ; variant 3
+	db MAGIC_SEEDS,                      TREASURE_NONE ; variant 3
 	db LEAD_OVERALLS_T,            TREASURE_NONE ; variant 2
 	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
@@ -52,7 +52,7 @@ LevelTreasureRequirements:
 	; LEVEL_THE_POOL_OF_RAIN
 	db AIR_PUMP,                   TREASURE_NONE ; variant 4
 	db SWIMMING_FLIPPERS_T,        TREASURE_NONE ; variant 3
-	db POUCH,                      TREASURE_NONE ; variant 2
+	db MAGIC_SEEDS,                      TREASURE_NONE ; variant 2
 	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_A_TOWN_IN_CHAOS
@@ -76,7 +76,7 @@ LevelTreasureRequirements:
 	; LEVEL_THE_GRASSLANDS
 	db HIGH_JUMP_BOOTS_T,          TREASURE_NONE ; variant 4
 	db FLUTE,                      TREASURE_NONE ; variant 3
-	db POUCH,                      TREASURE_NONE ; variant 2
+	db MAGIC_SEEDS,                      TREASURE_NONE ; variant 2
 	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_BIG_BRIDGE
@@ -106,7 +106,7 @@ LevelTreasureRequirements:
 	; LEVEL_ABOVE_THE_CLOUDS
 	db FULL_MOON_GONG,             TREASURE_NONE ; variant 4
 	db SCISSORS,                   TREASURE_NONE ; variant 3
-	db MAGIC_WAND,                 TREASURE_NONE ; variant 2
+	db SKY_KEY,                 TREASURE_NONE ; variant 2
 	db TREASURE_NONE,              TREASURE_NONE ; variant 1
 
 	; LEVEL_THE_STAGNANT_SWAMP

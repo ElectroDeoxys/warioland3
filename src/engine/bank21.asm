@@ -2918,7 +2918,7 @@ LoadGreyOWPals:
 	ld a, BLUE_BOOK
 	call IsTreasureCollected
 	jr z, .next_pal
-	ld a, TRIDENT
+	ld a, MAGIC_WAND
 	call IsTreasureCollected
 	jr z, .next_pal
 	pop hl

@@ -26,13 +26,13 @@ LevelTreasureIDs_WithoutTemple::
 	db RED_GEM ; blue
 
 	; LEVEL_BANK_OF_THE_WILD_RIVER
-	db YELLOW_BOOK ; grey
+	db TRIDENT ; grey
 	db MAGNIFYING_GLASS ; red
 	db STATUE ; green
 	db ROCKET ; blue
 
 	; LEVEL_THE_TIDAL_COAST
-	db SKY_KEY ; grey
+	db YELLOW_BOOK ; grey
 	db FOOT_OF_STONE ; red
 	db ELECTRIC_FAN_PROPELLER ; green
 	db GREEN_GEM ; blue
@@ -82,11 +82,11 @@ LevelTreasureIDs_WithoutTemple::
 	; LEVEL_THE_GRASSLANDS
 	db YELLOW_MUSIC_BOX ; grey
 	db TRUCK_WHEEL ; red
-	db TRIDENT ; green
+	db MAGIC_WAND ; green
 	db FIGHTER_MANNEQUIN ; blue
 
 	; LEVEL_THE_BIG_BRIDGE
-	db POUCH ; grey
+	db MAGIC_SEEDS ; grey
 	db CRAYON_CYAN_T ; red
 	db POCKET_PET ; green
 	db LANTERN ; blue
@@ -95,7 +95,7 @@ LevelTreasureIDs_WithoutTemple::
 	db SWIMMING_FLIPPERS_T ; grey
 	db GARLIC_T ; red
 	db TREASURE_MAP ; green
-	db MAGIC_WAND ; blue
+	db SKY_KEY ; blue
 
 	; LEVEL_THE_STEEP_CANYON
 	db GRAB_GLOVE_T ; grey
@@ -106,7 +106,7 @@ LevelTreasureIDs_WithoutTemple::
 	; LEVEL_CAVE_OF_FLAMES
 	db SCEPTER ; grey
 	db MINICAR ; red
-	db MAGIC_SEEDS ; green
+	db POUCH ; green
 	db SCISSORS ; blue
 
 	; LEVEL_ABOVE_THE_CLOUDS
