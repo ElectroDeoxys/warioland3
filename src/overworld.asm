@@ -1,6 +1,6 @@
 SECTION "Bank 20", ROMX
 
-INCLUDE "data/ow/unlockable_connections.asm"
+INCLUDE "data/overworld/unlockable_connections.asm"
 INCLUDE "engine/bank20.asm"
 
 

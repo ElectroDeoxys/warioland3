@@ -13,7 +13,7 @@ INCLUDE "engine/title/time_attack_description.asm"
 
 SECTION "Common 1", ROMX
 
-INCLUDE "engine/ow/common.asm"
+INCLUDE "engine/overworld/common.asm"
 INCLUDE "engine/level/common.asm"
 INCLUDE "engine/clear/common.asm"
 INCLUDE "engine/pause/common.asm"
@@ -49,7 +49,7 @@ SECTION "Title Gfx Engine", ROMX
 INCLUDE "engine/title/load_gfx.asm"
 INCLUDE "engine/title/vblank.asm"
 INCLUDE "engine/print_counts.asm"
-INCLUDE "engine/ow/level_select.asm"
+INCLUDE "engine/overworld/level_select.asm"
 INCLUDE "engine/title/load_oam.asm"
 INCLUDE "engine/title/start_menu_selection.asm"
 INCLUDE "engine/title/intro_animation.asm"

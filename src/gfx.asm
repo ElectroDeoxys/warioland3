@@ -68,8 +68,8 @@ TimeAttack2JPTextMap:: INCBIN "gfx/bgmaps/text/time_attack2_en.bin"
 TimeAttack1ENTextMap:: INCBIN "gfx/bgmaps/text/time_attack1_jp.bin"
 TimeAttack2ENTextMap:: INCBIN "gfx/bgmaps/text/time_attack2_jp.bin"
 
-INCLUDE "data/ow/epilogue/oam.asm"
-INCLUDE "data/ow/epilogue/framesets.asm"
+INCLUDE "data/overworld/epilogue/oam.asm"
+INCLUDE "data/overworld/epilogue/framesets.asm"
 
 SECTION "Wario Gfx 1", ROMX
 

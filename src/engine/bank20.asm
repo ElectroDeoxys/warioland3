@@ -539,7 +539,7 @@ SwitchDayNight:
 	ld [hl], a
 	ret
 
-INCLUDE "engine/ow/state_table.asm"
+INCLUDE "engine/overworld/state_table.asm"
 
 Func_803e6:
 	ld a, [wTransitionParam]
