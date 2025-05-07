@@ -151,7 +151,7 @@ LevelTreasureIDs_WithoutTemple::
 	db NIGHT_VISION_SCOPE ; green
 	db EARTHEN_FIGURE ; blue
 
-	; LEVEL_FOREST_OF_FEAR 
+	; LEVEL_FOREST_OF_FEAR
 	db WARP_COMPACT ; grey
 	db KEY_CARD_RED ; red
 	db WARP_REMOVAL_APPARATUS ; green

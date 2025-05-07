@@ -11,7 +11,7 @@ StartRoom_FromTransition:
 	ld a, [wAnimatedTilesGfx]
 	ld [wTempAnimatedTilesGroup], a
 	pop_wram
-	
+
 	ld a, [wSubState]
 	ld [wPendingSubState], a
 	ld hl, wState

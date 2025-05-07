@@ -27,7 +27,7 @@ DEF NUM_GOLF_COURSES EQU const_value
 
 DEF NUM_GOLF_COURSE_LEVELS EQU 4 ; how many levels in a golf course
 
-; maximum number of strokes over par 
+; maximum number of strokes over par
 ; for golf levels inside the various courses
 DEF MAX_GOLF_COURSE_STROKES EQU 19
 DEF GOLF_BASE_SCORE EQU MAX_GOLF_COURSE_STROKES + 1

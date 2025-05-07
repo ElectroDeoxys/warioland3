@@ -2928,7 +2928,7 @@ ENDR
 	add hl, bc
 	ret
 
-; returns a = high nybble b * high nybble c, 
+; returns a = high nybble b * high nybble c,
 MultiplyBByC_Short:
 	ld a, c
 	and $f0 ; high nybble

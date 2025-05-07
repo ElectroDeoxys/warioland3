@@ -390,7 +390,7 @@ CalculateWRAMDataChecksum:
 	ld b, (wOWLevel - wTreasuresCollected) + 2
 	call CalculateChecksum
 	pop_wram
-	
+
 	push_wram BANK("Level Objects WRAM")
 	ld hl, STARTOF("Level Objects WRAM")
 	ld bc, SIZEOF("Level Objects WRAM")

@@ -228,7 +228,7 @@ ENDM
 MACRO pitch_offset
 	assert -128 <= (\1) && (\1) <= 127, "offset must be between -128 and 127"
 	db $c1
-	db (\1 + $80) >> 1 
+	db (\1 + $80) >> 1
 ENDM
 
 MACRO pitch_offset_mult

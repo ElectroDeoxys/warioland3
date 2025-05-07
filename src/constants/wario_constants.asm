@@ -5,7 +5,7 @@ DEF NUM_SLEEPING_IDLE_CYCLES EQU 7
 ; number of attack frames on the ground
 DEF MAX_ATTACK_COUNTER EQU $30
 ; after wAttackCounter reaches this value
-; Wario will start to charge 
+; Wario will start to charge
 DEF CHARGE_ATTACK_COUNTER EQU $2b
 
 ; power up level constants
@@ -41,7 +41,7 @@ DEF POWER_UP_MASK EQU %111111
 	const TRANSFORMATION_ELECTRIC_ID            ; $05
 	const TRANSFORMATION_INVISIBLE_WARIO_ID     ; $06
 	const TRANSFORMATION_PUFFY_WARIO_ID         ; $07
-	const TRANSFORMATION_ZOMBIE_WARIO_ID        ; $08 
+	const TRANSFORMATION_ZOMBIE_WARIO_ID        ; $08
 	const TRANSFORMATION_BOUNCY_WARIO_ID        ; $09
 	const TRANSFORMATION_CRAZY_WARIO_ID         ; $0a
 	const TRANSFORMATION_VAMPIRE_WARIO_ID       ; $0b

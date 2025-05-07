@@ -3,7 +3,7 @@ import subprocess
 import math
 import argparse
 
-# TODO - 
+# TODO -
 # -- reportINCROMs --
 	# add in percentage
 # -- reportUnnamedSymbols --
@@ -76,7 +76,7 @@ def reportINCROMs(incromDir):
 		if i == 0:
 			bankName = "home:   "
 		bytesString = str(incromBytes[i])
-		formattingStrings = " "*(8-len(bytesString)) 
+		formattingStrings = " "*(8-len(bytesString))
 		print(bankName + bytesString + formattingStrings + "bytes (" + "{0:.2f}".format(incromBytes[i] / 0x4000 * 100) + "%)")
 
 
@@ -128,7 +128,7 @@ def reportUnnamedSymbols(symfile, listBankSet, showFunctionBanks, showOtherUnnam
 		globalAddr = bank*0x4000 + localAddr
 		if bank > 0:
 			globalAddr -= 0x4000
-		
+
 		globalAddrString = format(globalAddr,"04x")
 		if name.endswith(globalAddrString):
 
@@ -169,13 +169,13 @@ def reportUnnamedSymbols(symfile, listBankSet, showFunctionBanks, showOtherUnnam
 
 			if not foundType:
 				typeCounts.append([labelType,1])
-					
+
 
 	# there are so many that I did them manually, but they're a misc type
 	typeCounts.append(["Branch_", branchCount])
 
 	# do some sorting.
-	typeCounts = sorted(typeCounts, key = lambda x: x[1], reverse = True) 
+	typeCounts = sorted(typeCounts, key = lambda x: x[1], reverse = True)
 
 	namedLabelTotal = labelTotal - unnamedLabelTotal
 	namedLabelPercent = round((namedLabelTotal / labelTotal)*100, 3)

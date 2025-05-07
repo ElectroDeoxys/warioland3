@@ -303,7 +303,7 @@ GetRockYVel:
 MACRO temple_rock_bounce
 	ld a, [wTempleRock\1Action]
 	jumptable
-	
+
 	dw StubTempleRockFunc
 	dw .Spawn
 	dw .Update
@@ -1129,7 +1129,7 @@ Data_158897:
 	db  0, -2
 	db  0, -2
 	db $80
-    
+
 Data_1588de:
     db  0,  0
 	db -1,  0

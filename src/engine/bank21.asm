@@ -1767,7 +1767,7 @@ DayNightTransition:
 
 	xor a
 	ld [wOWPalTransitionCounter], a
-	ld a, 8 * NUM_PAL_COLORS * 3 
+	ld a, 8 * NUM_PAL_COLORS * 3
 	ld [w2d807], a
 
 	ld hl, wFadePals + COLOURFADESTRUCT_SIGN
@@ -2093,7 +2093,7 @@ GetOWPals:
 	ret
 
 InitColourFadeStructs:
-	ld a, 8 * NUM_PAL_COLORS * 3 
+	ld a, 8 * NUM_PAL_COLORS * 3
 	ld [w2d807], a
 	ld hl, wFadePals
 .loop
@@ -3427,7 +3427,7 @@ Data_85536::
 	dw wTilemap + $27
 	db $c4, $75, $76, $75, $7f, $77, $c4, $70
 	db $09, $0d, $0d, $2d, $0d, $0d, $29, $70
-	
+
 	db $00
 
 Data_85549::
@@ -3449,7 +3449,7 @@ Data_8556e::
 	dw wTilemap + $1c6
 	db $7e, $7e, $7e, $70
 	db $0c, $0c, $0c, $70
-	
+
 	db $00
 
 Data_85579::
@@ -3511,7 +3511,7 @@ Data_855b2::
 	dw wTilemap + $187
 	db $1d, $1e, $1f, $70
 	db $03, $03, $03, $70
-	
+
 	db $00
 
 Data_855f9::
@@ -3531,7 +3531,7 @@ Data_8560e::
 
 	dw wTilemap + $68
 	db $58, $59, $70, $01, $01, $70
-	
+
 	db $00
 
 Data_8561f::
@@ -3564,7 +3564,7 @@ Data_85657::
 	dw wTilemap + $1a1
 	db $f7, $f6, $f9, $f8, $f8, $f8, $f9, $f9, $f9, $40, $41, $42, $43, $2c, $2d, $f8, $f9, $f6, $70
 	db $2a, $2a, $2a, $2a, $0a, $2a, $0a, $2a, $0a, $01, $01, $01, $01, $01, $02, $0a, $0a, $0a, $70
-	
+
 	dw wTilemap + $1c1
 	db $78, $79, $78, $79, $78, $79, $78, $79, $78, $50, $51, $52, $53, $3c, $3d, $79, $78, $79, $70
 	db $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $02, $02, $02, $02, $02, $02, $0a, $0a, $0a, $70

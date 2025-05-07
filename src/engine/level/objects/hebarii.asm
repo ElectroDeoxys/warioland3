@@ -221,7 +221,7 @@ HebariiFunc:
 	jp CreateObjectAtRelativePos
 
 .DetachedUpdate:
-; functions for when Hebarii is detached from the ceiling 
+; functions for when Hebarii is detached from the ceiling
 	ld a, [wCurObjState]
 	jumptable
 

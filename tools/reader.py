@@ -34,7 +34,7 @@ def pointerBytesToBankOffset(ptrBytes, bank):
         return (bank * 0x4000) + (ptrBytes[0] + ptrBytes[1] * 0x100) - 0x4000
 
 def standardiseList(ls):
-# sorts list 
+# sorts list
     listSorted = sorted(ls)
     return list(dict.fromkeys(listSorted))
 

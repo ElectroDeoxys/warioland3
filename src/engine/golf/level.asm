@@ -1135,7 +1135,7 @@ GolfLevelState_SelectShotPower:
 	jr nz, .falling
 
 	; if < 16 add 1 to shot power
-	; otherwise, add 2 
+	; otherwise, add 2
 	ld b, 1
 	ld a, [wShotPowerGaugeCursor]
 	cp 16

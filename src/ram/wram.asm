@@ -303,8 +303,8 @@ wUnused_c18d::
 	db
 
 wc18e:: ds 8 * 2
-wc19e:: db      
-wc19f:: db      
+wc19e:: db
+wc19f:: db
 
 wIsDMATransferPending::      db
 wPendingDMASourceBank::      db
@@ -1758,7 +1758,7 @@ w2d0b5:: hdma_config_struct w2d0b5
 
 	ds $6
 
-	
+
 w2d0c0::
 	ds $10
 
@@ -2033,15 +2033,15 @@ w2d17e::
 wCurSceneObj:: scene_obj_struct wCurSceneObj
 
 wSceneObjs::
-wSceneObj1::  scene_obj_struct wSceneObj1 
-wSceneObj2::  scene_obj_struct wSceneObj2 
-wSceneObj3::  scene_obj_struct wSceneObj3 
-wSceneObj4::  scene_obj_struct wSceneObj4 
-wSceneObj5::  scene_obj_struct wSceneObj5 
-wSceneObj6::  scene_obj_struct wSceneObj6 
-wSceneObj7::  scene_obj_struct wSceneObj7 
-wSceneObj8::  scene_obj_struct wSceneObj8 
-wSceneObj9::  scene_obj_struct wSceneObj9 
+wSceneObj1::  scene_obj_struct wSceneObj1
+wSceneObj2::  scene_obj_struct wSceneObj2
+wSceneObj3::  scene_obj_struct wSceneObj3
+wSceneObj4::  scene_obj_struct wSceneObj4
+wSceneObj5::  scene_obj_struct wSceneObj5
+wSceneObj6::  scene_obj_struct wSceneObj6
+wSceneObj7::  scene_obj_struct wSceneObj7
+wSceneObj8::  scene_obj_struct wSceneObj8
+wSceneObj9::  scene_obj_struct wSceneObj9
 wSceneObj10:: scene_obj_struct wSceneObj10
 wSceneObj11:: scene_obj_struct wSceneObj11
 wSceneObj12:: scene_obj_struct wSceneObj12
@@ -2121,33 +2121,33 @@ w2d8a1::
 UNION
 
 wTempleMusicBoxes::
-wTempleMusicBox1::  temple_music_box_struct wTempleMusicBox1 
-wTempleMusicBox2::  temple_music_box_struct wTempleMusicBox2 
-wTempleMusicBox3::  temple_music_box_struct wTempleMusicBox3 
-wTempleMusicBox4::  temple_music_box_struct wTempleMusicBox4 
-wTempleMusicBox5::  temple_music_box_struct wTempleMusicBox5 
+wTempleMusicBox1::  temple_music_box_struct wTempleMusicBox1
+wTempleMusicBox2::  temple_music_box_struct wTempleMusicBox2
+wTempleMusicBox3::  temple_music_box_struct wTempleMusicBox3
+wTempleMusicBox4::  temple_music_box_struct wTempleMusicBox4
+wTempleMusicBox5::  temple_music_box_struct wTempleMusicBox5
 
 	ds $4
 
 wTempleRocks::
-wTempleRock1::  temple_rock_struct wTempleRock1 
-wTempleRock2::  temple_rock_struct wTempleRock2 
-wTempleRock3::  temple_rock_struct wTempleRock3 
-wTempleRock4::  temple_rock_struct wTempleRock4 
-wTempleRock5::  temple_rock_struct wTempleRock5 
-wTempleRock6::  temple_rock_struct wTempleRock6 
-wTempleRock7::  temple_rock_struct wTempleRock7 
-wTempleRock8::  temple_rock_struct wTempleRock8 
-wTempleRock9::  temple_rock_struct wTempleRock9 
+wTempleRock1::  temple_rock_struct wTempleRock1
+wTempleRock2::  temple_rock_struct wTempleRock2
+wTempleRock3::  temple_rock_struct wTempleRock3
+wTempleRock4::  temple_rock_struct wTempleRock4
+wTempleRock5::  temple_rock_struct wTempleRock5
+wTempleRock6::  temple_rock_struct wTempleRock6
+wTempleRock7::  temple_rock_struct wTempleRock7
+wTempleRock8::  temple_rock_struct wTempleRock8
+wTempleRock9::  temple_rock_struct wTempleRock9
 wTempleRock10:: temple_rock_struct wTempleRock10
 
 NEXTU
 
 wPlaneParts::
-wPlanePart1::  plane_part_struct wPlanePart1 
-wPlanePart2::  plane_part_struct wPlanePart2 
-wPlanePart3::  plane_part_struct wPlanePart3 
-wPlanePart4::  plane_part_struct wPlanePart4 
+wPlanePart1::  plane_part_struct wPlanePart1
+wPlanePart2::  plane_part_struct wPlanePart2
+wPlanePart3::  plane_part_struct wPlanePart3
+wPlanePart4::  plane_part_struct wPlanePart4
 
 	ds $6
 
@@ -2564,8 +2564,8 @@ wMenuObj7OAMPtr::               dw
 wMenuObj7FramesetBank::         db
 wMenuObj7AnimationEnded::       db
 
-wMenuObj8::  menu_obj_struct wMenuObj8 
-wMenuObj9::  menu_obj_struct wMenuObj9 
+wMenuObj8::  menu_obj_struct wMenuObj8
+wMenuObj9::  menu_obj_struct wMenuObj9
 wMenuObj10:: menu_obj_struct wMenuObj10
 wMenuObj11:: menu_obj_struct wMenuObj11
 

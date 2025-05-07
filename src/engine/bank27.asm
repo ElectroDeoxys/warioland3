@@ -6176,7 +6176,7 @@ Func_9f146:
 	jp Func_9f0bc
 
 .framesets
-	dw Frameset_bd469 
+	dw Frameset_bd469
 	dw Frameset_bd46c
 
 Func_9f174:

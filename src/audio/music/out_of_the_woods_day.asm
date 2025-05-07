@@ -197,7 +197,7 @@ Music_OutOfTheWoodsDay_Ch1:
 	note D_2
 	audio_wait_36
 	note NOTE_DURATION_18, A_1
-	audio_wait_18 
+	audio_wait_18
 	note NOTE_DURATION_6, C#2
 	audio_wait_6
 	note NOTE_DURATION_3, E_2
@@ -460,7 +460,7 @@ Music_OutOfTheWoodsDay_Ch3:
 	note C#1
 	audio_wait_12
 	audio_ret
-	
+
 	note D_1
 	audio_wait_12
 	note A_1
@@ -492,7 +492,7 @@ Music_OutOfTheWoodsDay_Ch3:
 	note A_1
 	audio_wait_12
 	audio_ret
-	
+
 	audio_call .sub1
 	audio_call .sub2
 	audio_call .sub3

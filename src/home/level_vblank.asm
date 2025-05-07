@@ -59,7 +59,7 @@ LevelVBlankFunc::
 	ldh [rSCY], a
 	ld a, [wSCX]
 	ldh [rSCX], a
-	
+
 	; push OAM
 	ld a, HIGH(wVirtualOAM)
 	call hTransferVirtualOAM

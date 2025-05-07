@@ -1263,7 +1263,7 @@ UpdateState_BallOString:
 	jr nz, Func_28bd5
 	ret
 
-Func_28bd5: 
+Func_28bd5:
 	ld a, [wDirection]
 	xor $1 ; switch direction
 	ld [wDirection], a
@@ -4043,7 +4043,7 @@ SetState_Crazy:
 	ld a, LOW(WarioCrazyGfx)
 	ld [wDMASourcePtr + 1], a
 	call LoadWarioGfx
-	
+
 	ld a, BANK(OAM_1fccd5)
 	ld [wOAMBank], a
 	ld a, HIGH(OAM_1fccd5)

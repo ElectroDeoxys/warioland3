@@ -96,7 +96,7 @@ with open("src/gfx/bgmaps/map_b37f9.bin", "rb") as file:
         pos += 1
         if pos >= len(stringArray):
             break
-            
+
     string = ""
     for c in stringArray:
         string += c

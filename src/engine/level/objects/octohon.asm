@@ -196,7 +196,7 @@ Data_4a5a9:
 	db $01, $00, $00, $00, $00, $01, $00, $00
 	db $00, $00, $00, $01, $00, $00, $00, $00
 	db $80
-	
+
 BigOctohonFunc:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]

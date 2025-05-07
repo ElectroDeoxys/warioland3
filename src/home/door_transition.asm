@@ -138,7 +138,7 @@ VBlank_DoorTransition::
 	ld a, [hli] ; wDoorTransitionEffectBGPtr
 	ld h, [hl]
 	ld l, a
-	
+
 	; do wTransitionEffectStep tiles up
 .loop_fill_upwards_1
 	ld a, BANK("VRAM1")
