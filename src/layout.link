@@ -136,7 +136,8 @@ ROMX $2c
 ROMX $2d
 	"Bank 2D"
 ROMX $2e
-	"Bank 2E"
+	"Cutscene Palettes"
+	"Cutscene BG Maps"
 ROMX $2f
 	"Bank 2F"
 ROMX $30

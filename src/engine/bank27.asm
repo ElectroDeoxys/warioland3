@@ -2,25 +2,28 @@
 ; need to run an init function
 NoInitCutscene:
 	xor a
-	ld [wCutscenePlaying], a
+	ld [wEventWithCutscene], a
 	ret
 
-Func_9c005:
+; returns nz if event in wCurEvent has a cutscene
+; if TRUE, outputs event in wEventWithCutscene
+; otherwise outputs 0
+CheckIfEventHasCutscene:
 	xor a
-	ld [wCutscenePlaying], a
+	ld [wEventWithCutscene], a
 	ld a, [wCurEvent]
 	ld b, a
 	ld hl, CutsceneInitFunctions
 	call GetPointerFromTableHL
 	ld a, h
 	cp HIGH(NoInitCutscene)
-	jr nz, .has_init_func
+	jr nz, .has_cutscene
 	ld a, l
 	cp LOW(NoInitCutscene)
-	ret z
-.has_init_func
+	ret z ; no cutscene
+.has_cutscene
 	ld a, b
-	ld [wCutscenePlaying], a
+	ld [wEventWithCutscene], a
 	ret
 
 _InitCutscene:
@@ -75,7 +78,7 @@ InitLoadedCutscene:
 	decompress_tiles1 Cutscenes6Gfx, v1Tiles0
 .skip_load_tiles
 	ld a, [wCurEvent]
-	ld [wCutscenePlaying], a
+	ld [wEventWithCutscene], a
 	jumptable
 
 CutsceneInitFunctions:
@@ -120,57 +123,57 @@ CutsceneInitFunctions:
 	dw .InitCutscene25 ; EVENT_GOLD_MUSIC_BOX
 	dw NoInitCutscene  ; EVENT_BLUE_CRAYON
 	dw .InitCutscene27 ; EVENT_PLACE_CART_WHEELS
-	dw NoInitCutscene  ; EVENT_28
+	dw NoInitCutscene  ; EVENT_COLLECT_BLUE_GEM
 	dw NoInitCutscene  ; EVENT_CYAN_CRAYON
-	dw NoInitCutscene  ; EVENT_2A
-	dw NoInitCutscene  ; EVENT_2B
+	dw NoInitCutscene  ; EVENT_COLLECT_GOBLET
+	dw NoInitCutscene  ; EVENT_COLLECT_CROWN
 	dw NoInitCutscene  ; EVENT_PINK_CRAYON
-	dw NoInitCutscene  ; EVENT_2D
-	dw NoInitCutscene  ; EVENT_2E
+	dw NoInitCutscene  ; EVENT_COLLECT_TEAPOT
+	dw NoInitCutscene  ; EVENT_COLLECT_POCKET_PET
 	dw NoInitCutscene  ; EVENT_MAGNIFYING_GLASS
 	dw .InitCutscene30 ; EVENT_RAISE_ICE_BLOCKS
-	dw NoInitCutscene  ; EVENT_31
+	dw NoInitCutscene  ; EVENT_COLLECT_ROCKET
 	dw NoInitCutscene  ; EVENT_YELLOW_CRAYON
-	dw NoInitCutscene  ; EVENT_33
-	dw NoInitCutscene  ; EVENT_34
+	dw NoInitCutscene  ; EVENT_UNUSED_33
+	dw NoInitCutscene  ; EVENT_COLLECT_SABER
 	dw NoInitCutscene  ; EVENT_DAY_OR_NIGHT_SPELL
-	dw NoInitCutscene  ; EVENT_36
+	dw NoInitCutscene  ; EVENT_COLLECT_UFO
 	dw .InitCutscene37 ; EVENT_TORCH_FOREST
 	dw .InitCutscene38 ; EVENT_REVEAL_WARPED_VOID
 	dw .InitCutscene39 ; EVENT_RAISE_PIPE
 	dw .InitCutscene3a ; EVENT_REMOVE_WARPS
 	dw NoInitCutscene  ; EVENT_BROWN_CRAYON
-	dw .InitCutscene3c ; EVENT_3C
+	dw .InitCutscene3c ; EVENT_COLLECT_DEMONS_BLOOD
 	dw .InitCutscene3d ; EVENT_OPEN_PARAGOOM_CAGE
-	dw NoInitCutscene  ; EVENT_3E
-	dw NoInitCutscene  ; EVENT_3F
-	dw NoInitCutscene  ; EVENT_40
-	dw NoInitCutscene  ; EVENT_41
+	dw NoInitCutscene  ; EVENT_COLLECT_HEART_CREST
+	dw NoInitCutscene  ; EVENT_COLLECT_MINICAR
+	dw NoInitCutscene  ; EVENT_COLLECT_LOCOMOTIVE
+	dw NoInitCutscene  ; EVENT_COLLECT_TELEPHONE
 	dw NoInitCutscene  ; EVENT_RED_CRAYON
 	dw .InitCutscene43 ; EVENT_PLACE_PROPELLER
 	dw .InitCutscene44 ; EVENT_FEED_OCTOHON
-	dw NoInitCutscene  ; EVENT_45
-	dw NoInitCutscene  ; EVENT_46
-	dw NoInitCutscene  ; EVENT_47
-	dw NoInitCutscene  ; EVENT_48
+	dw NoInitCutscene  ; EVENT_COLLECT_GREEN_GEM
+	dw NoInitCutscene  ; EVENT_UNUSED_46
+	dw NoInitCutscene  ; EVENT_UNUSED_47
+	dw NoInitCutscene  ; EVENT_COLLECT_FIGHTER_MANNEQUIN
 	dw .InitCutscene49 ; EVENT_OPEN_GOLDEN_SNAKE_DOOR
 	dw .InitCutscene4a ; EVENT_OPEN_SKY_DOOR
 	dw NoInitCutscene  ; EVENT_GREEN_CRAYON
 	dw .InitCutscene4c ; EVENT_EXTINGUISH_FIRE
-	dw NoInitCutscene  ; EVENT_4D
+	dw NoInitCutscene  ; EVENT_COLLECT_DIAMONDS_CREST
 	dw .InitCutscene4e ; EVENT_PLACE_BRICK
 	dw .InitCutscene4f ; EVENT_SPRAY_IRON_WALL
-	dw NoInitCutscene  ; EVENT_50
+	dw NoInitCutscene  ; EVENT_COLLECT_SPADES_CREST
 	dw .InitCutscene51 ; EVENT_MIX_CHEMICALS
-	dw NoInitCutscene  ; EVENT_52
-	dw NoInitCutscene  ; EVENT_53
+	dw NoInitCutscene  ; EVENT_COLLECT_RED_GEM
+	dw NoInitCutscene  ; EVENT_COLLECT_CLUBS_CREST
 	dw .InitCutscene54 ; EVENT_CUT_BALOON
 	dw .InitCutscene55 ; EVENT_DRILL_HOLES
 	dw .InitCutscene56 ; EVENT_REVEAL_DARK_ROOM
 	dw .InitCutscene57 ; EVENT_SUMMON_MOON
 	dw .InitCutscene58 ; EVENT_OPEN_CRATER_HOLE
-	dw NoInitCutscene  ; EVENT_59
-	dw NoInitCutscene  ; EVENT_5A
+	dw NoInitCutscene  ; EVENT_COLLECT_EARTHEN_FIGURE
+	dw NoInitCutscene  ; EVENT_EPILOGUE
 	assert_table_length NUM_EVENTS
 
 .InitPrologue:
@@ -660,7 +663,7 @@ CutsceneInitFunctions:
 
 	decompress_tiles1 FireGfx, v1Tiles1
 
-	call Func_9ca28
+	call LoadLevelMainTiles29_Vram1
 	call Func_9cb61
 	jp Func_9e4ae
 
@@ -721,14 +724,14 @@ CutsceneInitFunctions:
 
 	decompress_tiles1 WallCrackGfx, v1Tiles1
 
-	call Func_9ca28
+	call LoadLevelMainTiles29_Vram1
 	call Func_9cb95
 	call Func_9cc17
 	jp Func_9e855
 
 .InitCutscene55:
 	call ClearTempPals_Bank27
-	call Func_9ca38
+	call LoadLevelMainTiles29_Vram0
 	call LoadCutscenes7Gfx_Vram1
 	call Func_9cb20
 	jp Func_9e91a
@@ -829,7 +832,7 @@ LoadCutscenes10Gfx_Vram0:
 	decompress_tiles0 Cutscenes10Gfx, v0Tiles2
 	ret
 
-Func_9ca28:
+LoadLevelMainTiles29_Vram1:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld b, BANK(LevelMainTiles29)
@@ -839,7 +842,7 @@ Func_9ca28:
 	ldh [rVBK], a
 	ret
 
-Func_9ca38:
+LoadLevelMainTiles29_Vram0:
 	ld b, BANK(LevelMainTiles29)
 	ld hl, LevelMainTiles29
 	call LoadFarTiles
@@ -854,9 +857,9 @@ LoadCutsceneTilemap0:
 ;	fallthrough
 
 LoadCutsceneBGMap:
-	ld a, $2e
+	ld a, BANK("Cutscene BG Maps")
 	ld [wTempBank], a
-	ld a, [wTempBank]
+	ld a, [wTempBank] ; unnecessary
 	ldh [hCallFuncBank], a
 	hcall Decompress
 	xor a
@@ -1420,7 +1423,7 @@ DoCutsceneFunc:
 	ld b, h
 	ld c, l
 
-	ld a, [wCutscenePlaying]
+	ld a, [wEventWithCutscene]
 	cp NUM_EVENTS
 	jp nc, .OutOfBoundsCutscene
 	jumptable
@@ -1467,57 +1470,57 @@ DoCutsceneFunc:
 	dw Cutscene25Func ; EVENT_GOLD_MUSIC_BOX
 	dw .InvalidCutscene ; EVENT_BLUE_CRAYON
 	dw Cutscene27Func ; EVENT_PLACE_CART_WHEELS
-	dw .InvalidCutscene ; EVENT_28
+	dw .InvalidCutscene ; EVENT_COLLECT_BLUE_GEM
 	dw .InvalidCutscene ; EVENT_CYAN_CRAYON
-	dw .InvalidCutscene ; EVENT_2A
-	dw .InvalidCutscene ; EVENT_2B
+	dw .InvalidCutscene ; EVENT_COLLECT_GOBLET
+	dw .InvalidCutscene ; EVENT_COLLECT_CROWN
 	dw .InvalidCutscene ; EVENT_PINK_CRAYON
-	dw .InvalidCutscene ; EVENT_2D
-	dw .InvalidCutscene ; EVENT_2E
+	dw .InvalidCutscene ; EVENT_COLLECT_TEAPOT
+	dw .InvalidCutscene ; EVENT_COLLECT_POCKET_PET
 	dw .InvalidCutscene ; EVENT_MAGNIFYING_GLASS
 	dw Cutscene30Func ; EVENT_RAISE_ICE_BLOCKS
-	dw .InvalidCutscene ; EVENT_31
+	dw .InvalidCutscene ; EVENT_COLLECT_ROCKET
 	dw .InvalidCutscene ; EVENT_YELLOW_CRAYON
-	dw .InvalidCutscene ; EVENT_33
-	dw .InvalidCutscene ; EVENT_34
+	dw .InvalidCutscene ; EVENT_UNUSED_33
+	dw .InvalidCutscene ; EVENT_COLLECT_SABER
 	dw .InvalidCutscene ; EVENT_DAY_OR_NIGHT_SPELL
-	dw .InvalidCutscene ; EVENT_36
+	dw .InvalidCutscene ; EVENT_COLLECT_UFO
 	dw Cutscene37Func ; EVENT_TORCH_FOREST
 	dw Cutscene38Func ; EVENT_REVEAL_WARPED_VOID
 	dw Cutscene39Func ; EVENT_RAISE_PIPE
 	dw Cutscene3aFunc ; EVENT_REMOVE_WARPS
 	dw .InvalidCutscene ; EVENT_BROWN_CRAYON
-	dw Cutscene3cFunc ; EVENT_3C
+	dw Cutscene3cFunc ; EVENT_COLLECT_DEMONS_BLOOD
 	dw Cutscene3dFunc ; EVENT_OPEN_PARAGOOM_CAGE
-	dw .InvalidCutscene ; EVENT_3E
-	dw .InvalidCutscene ; EVENT_3F
-	dw .InvalidCutscene ; EVENT_40
-	dw .InvalidCutscene ; EVENT_41
+	dw .InvalidCutscene ; EVENT_COLLECT_HEART_CREST
+	dw .InvalidCutscene ; EVENT_COLLECT_MINICAR
+	dw .InvalidCutscene ; EVENT_COLLECT_LOCOMOTIVE
+	dw .InvalidCutscene ; EVENT_COLLECT_TELEPHONE
 	dw .InvalidCutscene ; EVENT_RED_CRAYON
 	dw Cutscene43Func ; EVENT_PLACE_PROPELLER
 	dw Cutscene44Func ; EVENT_FEED_OCTOHON
-	dw .InvalidCutscene ; EVENT_45
-	dw .InvalidCutscene ; EVENT_46
-	dw .InvalidCutscene ; EVENT_47
-	dw .InvalidCutscene ; EVENT_48
+	dw .InvalidCutscene ; EVENT_COLLECT_GREEN_GEM
+	dw .InvalidCutscene ; EVENT_UNUSED_46
+	dw .InvalidCutscene ; EVENT_UNUSED_47
+	dw .InvalidCutscene ; EVENT_COLLECT_FIGHTER_MANNEQUIN
 	dw Cutscene49Func ; EVENT_OPEN_GOLDEN_SNAKE_DOOR
 	dw Cutscene4aFunc ; EVENT_OPEN_SKY_DOOR
 	dw .InvalidCutscene ; EVENT_GREEN_CRAYON
 	dw Cutscene4cFunc ; EVENT_EXTINGUISH_FIRE
-	dw .InvalidCutscene ; EVENT_4D
+	dw .InvalidCutscene ; EVENT_COLLECT_DIAMONDS_CREST
 	dw Cutscene4eFunc ; EVENT_PLACE_BRICK
 	dw Cutscene4fFunc ; EVENT_SPRAY_IRON_WALL
-	dw .InvalidCutscene ; EVENT_50
+	dw .InvalidCutscene ; EVENT_COLLECT_SPADES_CREST
 	dw Cutscene51Func ; EVENT_MIX_CHEMICALS
-	dw .InvalidCutscene ; EVENT_52
-	dw .InvalidCutscene ; EVENT_53
+	dw .InvalidCutscene ; EVENT_COLLECT_RED_GEM
+	dw .InvalidCutscene ; EVENT_COLLECT_CLUBS_CREST
 	dw Cutscene54Func ; EVENT_CUT_BALOON
 	dw Cutscene55Func ; EVENT_DRILL_HOLES
 	dw Cutscene56Func ; EVENT_REVEAL_DARK_ROOM
 	dw Cutscene57Func ; EVENT_SUMMON_MOON
 	dw Cutscene58Func ; EVENT_OPEN_CRATER_HOLE
-	dw .InvalidCutscene ; EVENT_59
-	dw .InvalidCutscene ; EVENT_5A
+	dw .InvalidCutscene ; EVENT_COLLECT_EARTHEN_FIGURE
+	dw .InvalidCutscene ; EVENT_EPILOGUE
 	assert_table_length NUM_EVENTS
 
 .OutOfBoundsCutscene
@@ -2163,7 +2166,7 @@ Cutscene11Func:
 	dw EndCutsceneDelay_60Frames
 
 .Func_9d36a:
-	ld a, [wCutscenePlaying]
+	ld a, [wEventWithCutscene]
 	cp EVENT_SUMMON_LIGHTNING
 	jp nz, AdvanceCutsceneFunc
 	ld a, $09

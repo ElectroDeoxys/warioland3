@@ -605,17 +605,17 @@ InitOverworld:
 	; TRANSITION_NEW_GAME
 	ld a, EVENT_PROLOGUE
 	ld [wCurEvent], a
-	jr .asm_80466
+	jr .load_cutscene
 
 .asm_8045f
 	call CheckIfTreasureUnlocksEvent
-	jr nz, .asm_80466
+	jr nz, .load_cutscene
 	jr .asm_8048a
 
-.asm_80466
+.load_cutscene
 	call Func_804c9
-	farcall Func_9c005
-	ld a, [wCutscenePlaying]
+	farcall CheckIfEventHasCutscene
+	ld a, [wEventWithCutscene]
 	and a
 	jr z, .after_cutscene
 	jr .play_cutscene
@@ -649,7 +649,7 @@ InitOverworld:
 .asm_804a9
 	ld a, TRANSITION_RETURN_TO_MAP
 	ld [w2d00d], a
-	ld a, EVENT_5A
+	ld a, EVENT_EPILOGUE
 	ld [wCurEvent], a
 	jr .after_cutscene
 
@@ -3229,7 +3229,7 @@ Func_81931:
 	ld [wCurEvent], a
 	ld [wOWSceneAction], a
 	ld [wTempOWSceneAction], a
-	ld a, EVENT_5A
+	ld a, EVENT_EPILOGUE
 	cp b
 	jr z, .epilogue
 	ld hl, wSubState
@@ -3371,7 +3371,7 @@ LoadEventTreasures:
 
 EventTreasures:
 	table_width 3
-	
+
 ; EVENT_00
 	db INVALID_TREASURE
 	db INVALID_TREASURE
@@ -3572,7 +3572,7 @@ EventTreasures:
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; EVENT_28
+; EVENT_COLLECT_BLUE_GEM
 	db BLUE_GEM
 	db INVALID_TREASURE
 	db INVALID_TREASURE
@@ -3582,12 +3582,12 @@ EventTreasures:
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; EVENT_2A
+; EVENT_COLLECT_GOBLET
 	db GOBLET
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; EVENT_2B
+; EVENT_COLLECT_CROWN
 	db CROWN
 	db INVALID_TREASURE
 	db INVALID_TREASURE
@@ -3597,12 +3597,12 @@ EventTreasures:
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; EVENT_2D
+; EVENT_COLLECT_TEAPOT
 	db TEAPOT
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; EVENT_2E
+; EVENT_COLLECT_POCKET_PET
 	db POCKET_PET
 	db INVALID_TREASURE
 	db INVALID_TREASURE
@@ -3617,7 +3617,7 @@ EventTreasures:
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; EVENT_31
+; EVENT_COLLECT_ROCKET
 	db ROCKET
 	db INVALID_TREASURE
 	db INVALID_TREASURE
@@ -3627,12 +3627,12 @@ EventTreasures:
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; EVENT_33
+; EVENT_UNUSED_33
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; EVENT_34
+; EVENT_COLLECT_SABER
 	db SABER
 	db INVALID_TREASURE
 	db INVALID_TREASURE
@@ -3642,7 +3642,7 @@ EventTreasures:
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; EVENT_36
+; EVENT_COLLECT_UFO
 	db UFO
 	db INVALID_TREASURE
 	db INVALID_TREASURE
@@ -3672,7 +3672,7 @@ EventTreasures:
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; EVENT_3C
+; EVENT_COLLECT_DEMONS_BLOOD
 	db DEMONS_BLOOD
 	db INVALID_TREASURE
 	db INVALID_TREASURE
@@ -3682,22 +3682,22 @@ EventTreasures:
 	db KEY_CARD_BLUE
 	db INVALID_TREASURE
 
-; EVENT_3E
+; EVENT_COLLECT_HEART_CREST
 	db HEART_CREST
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; EVENT_3F
+; EVENT_COLLECT_MINICAR
 	db MINICAR
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; EVENT_40
+; EVENT_COLLECT_LOCOMOTIVE
 	db LOCOMOTIVE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; EVENT_41
+; EVENT_COLLECT_TELEPHONE
 	db TELEPHONE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
@@ -3717,22 +3717,22 @@ EventTreasures:
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; EVENT_45
+; EVENT_COLLECT_GREEN_GEM
 	db GREEN_GEM
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; EVENT_46
+; EVENT_UNUSED_46
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; EVENT_47
+; EVENT_UNUSED_47
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; EVENT_48
+; EVENT_COLLECT_FIGHTER_MANNEQUIN
 	db FIGHTER_MANNEQUIN
 	db INVALID_TREASURE
 	db INVALID_TREASURE
@@ -3757,7 +3757,7 @@ EventTreasures:
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; EVENT_4D
+; EVENT_COLLECT_DIAMONDS_CREST
 	db DIAMONDS_CREST
 	db INVALID_TREASURE
 	db INVALID_TREASURE
@@ -3772,7 +3772,7 @@ EventTreasures:
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; EVENT_50
+; EVENT_COLLECT_SPADES_CREST
 	db SPADES_CREST
 	db INVALID_TREASURE
 	db INVALID_TREASURE
@@ -3782,12 +3782,12 @@ EventTreasures:
 	db BLUE_CHEMICAL
 	db INVALID_TREASURE
 
-; EVENT_52
+; EVENT_COLLECT_RED_GEM
 	db RED_GEM
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; EVENT_53
+; EVENT_COLLECT_CLUBS_CREST
 	db CLUBS_CREST
 	db INVALID_TREASURE
 	db INVALID_TREASURE
@@ -3817,12 +3817,12 @@ EventTreasures:
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; EVENT_59
+; EVENT_COLLECT_EARTHEN_FIGURE
 	db EARTHEN_FIGURE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 
-; EVENT_5A
+; EVENT_EPILOGUE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
 	db INVALID_TREASURE
@@ -3882,502 +3882,504 @@ MACRO ow_scene_end
 ENDM
 
 OWSceneParams:
-	dw .event_00
-	dw .event_01
-	dw .event_02
-	dw .event_03
-	dw .event_04
-	dw .event_05
-	dw .event_06
-	dw .event_07
-	dw .event_08
-	dw .event_09
-	dw .event_0a
-	dw .event_0b
-	dw .event_0c
-	dw .event_0d
-	dw .event_0e
-	dw .event_0f
-	dw .event_10
-	dw .event_11
-	dw .event_12
-	dw .event_13
-	dw .event_14
-	dw .event_15
-	dw .event_16
-	dw .event_17
-	dw .event_18
-	dw .event_19
-	dw .event_1a
-	dw .event_1b
-	dw .event_1c
-	dw .event_1d
-	dw .event_1e
-	dw .event_1f
-	dw .event_20
-	dw .event_21
-	dw .event_22
-	dw .event_23
-	dw .event_24
-	dw .event_25
-	dw .event_26
-	dw .event_27
-	dw .event_28
-	dw .event_29
-	dw .event_2a
-	dw .event_2b
-	dw .event_2c
-	dw .event_2d
-	dw .event_2e
-	dw .event_2f
-	dw .event_30
-	dw .event_31
-	dw .event_32
-	dw .event_33
-	dw .event_34
-	dw .event_35
-	dw .event_36
-	dw .event_37
-	dw .event_38
-	dw .event_39
-	dw .event_3a
-	dw .event_3b
-	dw .event_3c
-	dw .event_3d
-	dw .event_3e
-	dw .event_3f
-	dw .event_40
-	dw .event_41
-	dw .event_42
-	dw .event_43
-	dw .event_44
-	dw .event_45
-	dw .event_46
-	dw .event_47
-	dw .event_48
-	dw .event_49
-	dw .event_4a
-	dw .event_4b
-	dw .event_4c
-	dw .event_4d
-	dw .event_4e
-	dw .event_4f
-	dw .event_50
-	dw .event_51
-	dw .event_52
-	dw .event_53
-	dw .event_54
-	dw .event_55
-	dw .event_56
-	dw .event_57
-	dw .event_58
-	dw .event_59
-	dw .event_5a
+	table_width 2
+	dw .event_00                        ; EVENT_00
+	dw .event_prologue                  ; EVENT_PROLOGUE
+	dw .event_cut_tree                  ; EVENT_CUT_TREE
+	dw .event_open_north_gate           ; EVENT_OPEN_NORTH_GATE
+	dw .event_expel_tornado             ; EVENT_EXPEL_TORNADO
+	dw .event_lead_overalls             ; EVENT_LEAD_OVERALLS
+	dw .event_rainstorm                 ; EVENT_RAINSTORM
+	dw .event_fix_elevator              ; EVENT_FIX_ELEVATOR
+	dw .event_yellow_music_box          ; EVENT_YELLOW_MUSIC_BOX
+	dw .event_plant_seeds               ; EVENT_PLANT_SEEDS
+	dw .event_raise_tower               ; EVENT_RAISE_TOWER
+	dw .event_swimming_flippers         ; EVENT_SWIMMING_FLIPPERS
+	dw .event_blow_mist                 ; EVENT_BLOW_MIST
+	dw .event_summon_snakes             ; EVENT_SUMMON_SNAKES
+	dw .event_freeze_sea                ; EVENT_FREEZE_SEA
+	dw .event_head_smash_helmet         ; EVENT_HEAD_SMASH_HELMET
+	dw .event_blue_music_box            ; EVENT_BLUE_MUSIC_BOX
+	dw .event_summon_lightning          ; EVENT_SUMMON_LIGHTNING
+	dw .event_grab_glove                ; EVENT_GRAB_GLOVE
+	dw .event_foot_stone                ; EVENT_FOOT_STONE
+	dw .event_volcano_eruption          ; EVENT_VOLCANO_ERUPTION
+	dw .event_open_blue_snake_door      ; EVENT_OPEN_BLUE_SNAKE_DOOR
+	dw .event_garlic                    ; EVENT_GARLIC
+	dw .event_green_music_box           ; EVENT_GREEN_MUSIC_BOX
+	dw .event_purify_water              ; EVENT_PURIFY_WATER
+	dw .event_reveal_castle             ; EVENT_REVEAL_CASTLE
+	dw .event_super_jump_slam_overalls  ; EVENT_SUPER_JUMP_SLAM_OVERALLS
+	dw .event_summon_sun                ; EVENT_SUMMON_SUN
+	dw .event_high_jump_boots           ; EVENT_HIGH_JUMP_BOOTS
+	dw .event_red_music_box             ; EVENT_RED_MUSIC_BOX
+	dw .event_explode_bombs             ; EVENT_EXPLODE_BOMBS
+	dw .event_leaves_fall               ; EVENT_LEAVES_FALL
+	dw .event_prince_frogs_gloves       ; EVENT_PRINCE_FROGS_GLOVES
+	dw .event_make_wire                 ; EVENT_MAKE_WIRE
+	dw .event_treasure_map              ; EVENT_TREASURE_MAP
+	dw .event_super_grab_gloves         ; EVENT_SUPER_GRAB_GLOVES
+	dw .event_open_tree_mouth           ; EVENT_OPEN_TREE_MOUTH
+	dw .event_gold_music_box            ; EVENT_GOLD_MUSIC_BOX
+	dw .event_blue_crayon               ; EVENT_BLUE_CRAYON
+	dw .event_place_cart_wheels         ; EVENT_PLACE_CART_WHEELS
+	dw .event_collect_blue_gem          ; EVENT_COLLECT_BLUE_GEM
+	dw .event_cyan_crayon               ; EVENT_CYAN_CRAYON
+	dw .event_collect_goblet            ; EVENT_COLLECT_GOBLET
+	dw .event_collect_crown             ; EVENT_COLLECT_CROWN
+	dw .event_pink_crayon               ; EVENT_PINK_CRAYON
+	dw .event_collect_teapot            ; EVENT_COLLECT_TEAPOT
+	dw .event_collect_pocket_pet        ; EVENT_COLLECT_POCKET_PET
+	dw .event_magnifying_glass          ; EVENT_MAGNIFYING_GLASS
+	dw .event_raise_ice_blocks          ; EVENT_RAISE_ICE_BLOCKS
+	dw .event_collect_rocket            ; EVENT_COLLECT_ROCKET
+	dw .event_yellow_crayon             ; EVENT_YELLOW_CRAYON
+	dw .event_unused_33                 ; EVENT_UNUSED_33
+	dw .event_collect_saber             ; EVENT_COLLECT_SABER
+	dw .event_day_or_night_spell        ; EVENT_DAY_OR_NIGHT_SPELL
+	dw .event_collect_ufo               ; EVENT_COLLECT_UFO
+	dw .event_torch_forest              ; EVENT_TORCH_FOREST
+	dw .event_reveal_warped_void        ; EVENT_REVEAL_WARPED_VOID
+	dw .event_raise_pipe                ; EVENT_RAISE_PIPE
+	dw .event_remove_warps              ; EVENT_REMOVE_WARPS
+	dw .event_brown_crayon              ; EVENT_BROWN_CRAYON
+	dw .event_collect_demons_blood      ; EVENT_COLLECT_DEMONS_BLOOD
+	dw .event_open_paragoom_cage        ; EVENT_OPEN_PARAGOOM_CAGE
+	dw .event_collect_heart_crest       ; EVENT_COLLECT_HEART_CREST
+	dw .event_collect_minicar           ; EVENT_COLLECT_MINICAR
+	dw .event_collect_locomotive        ; EVENT_COLLECT_LOCOMOTIVE
+	dw .event_collect_telephone         ; EVENT_COLLECT_TELEPHONE
+	dw .event_red_crayon                ; EVENT_RED_CRAYON
+	dw .event_place_propeller           ; EVENT_PLACE_PROPELLER
+	dw .event_feed_octohon              ; EVENT_FEED_OCTOHON
+	dw .event_collect_green_gem         ; EVENT_COLLECT_GREEN_GEM
+	dw .event_unused_46                 ; EVENT_UNUSED_46
+	dw .event_unused_47                 ; EVENT_UNUSED_47
+	dw .event_collect_fighter_mannequin ; EVENT_COLLECT_FIGHTER_MANNEQUIN
+	dw .event_open_golden_snake_door    ; EVENT_OPEN_GOLDEN_SNAKE_DOOR
+	dw .event_open_sky_door             ; EVENT_OPEN_SKY_DOOR
+	dw .event_green_crayon              ; EVENT_GREEN_CRAYON
+	dw .event_extinguish_fire           ; EVENT_EXTINGUISH_FIRE
+	dw .event_collect_diamonds_crest    ; EVENT_COLLECT_DIAMONDS_CREST
+	dw .event_place_brick               ; EVENT_PLACE_BRICK
+	dw .event_spray_iron_wall           ; EVENT_SPRAY_IRON_WALL
+	dw .event_collect_spades_crest      ; EVENT_COLLECT_SPADES_CREST
+	dw .event_mix_chemicals             ; EVENT_MIX_CHEMICALS
+	dw .event_collect_red_gem           ; EVENT_COLLECT_RED_GEM
+	dw .event_collect_clubs_crest       ; EVENT_COLLECT_CLUBS_CREST
+	dw .event_cut_baloon                ; EVENT_CUT_BALOON
+	dw .event_drill_holes               ; EVENT_DRILL_HOLES
+	dw .event_reveal_dark_room          ; EVENT_REVEAL_DARK_ROOM
+	dw .event_summon_moon               ; EVENT_SUMMON_MOON
+	dw .event_open_crater_hole          ; EVENT_OPEN_CRATER_HOLE
+	dw .event_collect_earthen_figure    ; EVENT_COLLECT_EARTHEN_FIGURE
+	dw .event_epilogue                  ; EVENT_EPILOGUE
+	assert_table_length NUM_EVENTS
 
 .event_00
 	ow_scene_end
 
-.event_01
+.event_prologue
 	ow_unlock_level NORTH, NORTHCONN_1
 	ow_scene_end
 
-.event_02
+.event_cut_tree
 	ow_func NORTH, NOWFUNC_CUT_TREE
 	ow_unlock_level NORTH, NORTHCONN_2
 	ow_unlock_level NORTH, NORTHCONN_3
 	ow_scene_end
 
-.event_03
+.event_open_north_gate
 	ow_func NORTH, NOWFUNC_OPEN_GATE
 	ow_unlock_level NORTH, NORTHCONN_7
 	ow_unlock_level WEST, WESTCONN_7
 	ow_scene_end
 
-.event_04
+.event_expel_tornado
 	ow_func WEST, WOWFUNC_CLEAR_TORNADO
 	ow_unlock_level WEST, WESTCONN_1
 	ow_scene_end
 
-.event_05
+.event_lead_overalls
 	ow_highlight_level NORTH, OWNORTH_OUT_OF_THE_WOODS
 	ow_highlight_level NORTH, OWNORTH_THE_VAST_PLAIN
 	ow_scene_end
 
-.event_06
+.event_rainstorm
 	ow_func WEST, WOWFUNC_RAIN
 	ow_unlock_level WEST, WESTCONN_2
 	ow_unlock_level WEST, WESTCONN_3
 	ow_scene_end
 
-.event_07
+.event_fix_elevator
 	ow_func WEST, WOWFUNC_ELEVATOR_WORKING
 	ow_unlock_level WEST, WESTCONN_6
 	ow_unlock_level SOUTH, SOUTHCONN_7
 	ow_scene_end
 
-.event_08
+.event_yellow_music_box
 	ow_func SOUTH, SOWFUNC_YELLOW_MUSIC_BOX
 	ow_unlock_level SOUTH, SOUTHCONN_1
 	ow_scene_end
 
-.event_09
+.event_plant_seeds
 	ow_func SOUTH, SOWFUNC_SEND_SEEDS
 	ow_func NORTH, NOWFUNC_MAGIC_SEED
 	ow_func WEST, WOWFUNC_MAGIC_SEED
 	ow_func SOUTH, SOWFUNC_MAGIC_SEED
 	ow_scene_end
 
-.event_0a
+.event_raise_tower
 	ow_func SOUTH, SOWFUNC_RAISE_TOWER
 	ow_unlock_level SOUTH, SOUTHCONN_2
 	ow_scene_end
 
-.event_0b
+.event_swimming_flippers
 	ow_highlight_level WEST, OWWEST_THE_POOL_OF_RAIN
 	ow_highlight_level SOUTH, OWSOUTH_THE_BIG_BRIDGE
 	ow_scene_end
 
-.event_0c
+.event_blow_mist
 	ow_func SOUTH, SOWFUNC_FAN
 	ow_unlock_level SOUTH, SOUTHCONN_6
 	ow_unlock_level EAST, EASTCONN_8
 	ow_scene_end
 
-.event_0d
+.event_summon_snakes
 	ow_func SOUTH, SOWFUNC_SUMMON_SNAKE
 	ow_func WEST, WOWFUNC_SUMMON_SNAKE
 	ow_func NORTH, NOWFUNC_SUMMON_SNAKE
 	ow_scene_end
 
-.event_0e
+.event_freeze_sea
 	ow_func EAST, EOWFUNC_FREEZE_SEA
 	ow_unlock_level EAST, EASTCONN_1
 	ow_scene_end
 
-.event_0f
+.event_head_smash_helmet
 	ow_highlight_level WEST, OWWEST_A_TOWN_IN_CHAOS
 	ow_highlight_level WEST, OWWEST_DESERT_RUINS
 	ow_scene_end
 
-.event_10
+.event_blue_music_box
 	ow_func NORTH, NOWFUNC_BLUE_MUSIC_BOX
 	ow_unlock_level NORTH, NORTHCONN_4
 	ow_unlock_level NORTH, NORTHCONN_5
 	ow_scene_end
 
-.event_11
+.event_summon_lightning
 	ow_func SOUTH, SOWFUNC_CANYON_THUNDER
 	ow_unlock_level SOUTH, SOUTHCONN_3
 	ow_scene_end
 
-.event_12
+.event_grab_glove
 	ow_highlight_level NORTH, OWNORTH_THE_TIDAL_COAST
 	ow_highlight_level EAST, OWEAST_THE_FRIGID_SEA
 	ow_highlight_level SOUTH, OWSOUTH_THE_BIG_BRIDGE
 	ow_scene_end
 
-.event_13
+.event_foot_stone
 	ow_func WEST, WOWFUNC_EARTHQUAKE
 	ow_func SOUTH, SOWFUNC_EARTHQUAKE
 	ow_func EAST, EOWFUNC_EARTHQUAKE
 	ow_scene_end
 
-.event_14
+.event_volcano_eruption
 	ow_func WEST, WOWFUNC_VULCANO_ERUPTION
 	ow_func EAST, EOWFUNC_VULCANO_ERUPTION
 	ow_unlock_level WEST, WESTCONN_4
 	ow_unlock_level EAST, SOUTHCONN_3
 	ow_scene_end
 
-.event_15
+.event_open_blue_snake_door
 	ow_highlight_level SOUTH, OWSOUTH_TOWER_OF_REVIVAL
 	ow_scene_end
 
-.event_16
+.event_garlic
 	ow_func NORTH, NOWFUNC_GARLIC
 	ow_highlight_level NORTH, OWNORTH_BANK_OF_THE_WILD_RIVER
 	ow_highlight_level EAST, OWEAST_THE_COLOSSAL_HOLE
 	ow_unlock_level NORTH, NORTHCONN_6
 	ow_scene_end
 
-.event_17
+.event_green_music_box
 	ow_func SOUTH, SOWFUNC_GREEN_MUSIC_BOX
 	ow_unlock_level SOUTH, SOUTHCONN_4
 	ow_scene_end
 
-.event_18
+.event_purify_water
 	ow_highlight_level SOUTH, OWSOUTH_THE_BIG_BRIDGE
 	ow_highlight_level EAST, OWEAST_THE_FRIGID_SEA
 	ow_highlight_level NORTH, OWNORTH_SEA_TURTLE_ROCKS
 	ow_scene_end
 
-.event_19
+.event_reveal_castle
 	ow_func EAST, EOWFUNC_FORM_CASTLE
 	ow_unlock_level EAST, EASTCONN_2
 	ow_scene_end
 
-.event_1a
+.event_super_jump_slam_overalls
 	ow_highlight_level NORTH, OWNORTH_SEA_TURTLE_ROCKS
 	ow_highlight_level WEST, OWWEST_THE_WEST_CRATER
 	ow_highlight_level WEST, OWWEST_DESERT_RUINS
 	ow_highlight_level NORTH, OWNORTH_THE_PEACEFUL_VILLAGE
 	ow_scene_end
 
-.event_1b
+.event_summon_sun
 	ow_func EAST, EOWFUNC_DAYTIME
 	ow_highlight_level EAST, OWEAST_THE_COLOSSAL_HOLE
 	ow_highlight_level EAST, OWEAST_THE_FRIGID_SEA
 	ow_highlight_level EAST, OWEAST_CASTLE_OF_ILLUSIONS
 	ow_scene_end
 
-.event_1c
+.event_high_jump_boots
 	ow_highlight_level SOUTH, OWSOUTH_THE_GRASSLANDS
 	ow_highlight_level EAST, OWEAST_THE_STAGNANT_SWAMP
 	ow_highlight_level SOUTH, OWSOUTH_CAVE_OF_FLAMES
 	ow_scene_end
 
-.event_1d
+.event_red_music_box
 	ow_func WEST, WOWFUNC_RED_MUSIC_BOX
 	ow_unlock_level WEST, WESTCONN_5
 	ow_scene_end
 
-.event_1e
+.event_explode_bombs
 	ow_func SOUTH, SOWFUNC_EXPLOSIVES
 	ow_func EAST, EOWFUNC_EXPLOSIVES
 	ow_scene_end
 
-.event_1f
+.event_leaves_fall
 	ow_func NORTH, NOWFUNC_FALL_LEAVES
 	ow_scene_end
 
-.event_20
+.event_prince_frogs_gloves
 	ow_highlight_level NORTH, OWNORTH_BANK_OF_THE_WILD_RIVER
 	ow_highlight_level SOUTH, OWSOUTH_THE_STEEP_CANYON
 	ow_highlight_level WEST, OWWEST_BENEATH_THE_WAVES
 	ow_scene_end
 
-.event_21
+.event_make_wire
 	ow_highlight_level SOUTH, OWSOUTH_TOWER_OF_REVIVAL
 	ow_highlight_level NORTH, OWNORTH_THE_TIDAL_COAST
 	ow_scene_end
 
-.event_22
+.event_treasure_map
 	ow_unlock_level EAST, EASTCONN_6
 	ow_scene_end
 
-.event_23
+.event_super_grab_gloves
 	ow_highlight_level WEST, OWWEST_A_TOWN_IN_CHAOS
 	ow_highlight_level EAST, OWEAST_CASTLE_OF_ILLUSIONS
 	ow_highlight_level EAST, OWEAST_FOREST_OF_FEAR
 	ow_scene_end
 
-.event_24
+.event_open_tree_mouth
 	ow_highlight_level NORTH, OWNORTH_OUT_OF_THE_WOODS
 	ow_scene_end
 
-.event_25
+.event_gold_music_box
 	ow_func NORTH, NOWFUNC_GOLD_MUSIC_BOX
 	ow_highlight_level NORTH, OWNORTH_THE_TEMPLE
 	ow_scene_end
 
-.event_26
+.event_blue_crayon
 	db SPECIAL_ACTION, NORTH, $09
 	ow_scene_end
 
-.event_27
+.event_place_cart_wheels
 	ow_highlight_level WEST, OWWEST_THE_VOLCANOS_BASE
 	ow_scene_end
 
-.event_28
+.event_collect_blue_gem
 	ow_scene_end
 
-.event_29
+.event_cyan_crayon
 	db SPECIAL_ACTION, NORTH, $0a
 	ow_scene_end
 
-.event_2a
+.event_collect_goblet
 	ow_scene_end
 
-.event_2b
+.event_collect_crown
 	ow_scene_end
 
-.event_2c
+.event_pink_crayon
 	db SPECIAL_ACTION, NORTH, $0b
 	ow_scene_end
 
-.event_2d
+.event_collect_teapot
 	ow_scene_end
 
-.event_2e
+.event_collect_pocket_pet
 	ow_scene_end
 
-.event_2f
+.event_magnifying_glass
 	db SPECIAL_ACTION, NORTH, $10
 	ow_scene_end
 
-.event_30
+.event_raise_ice_blocks
 	ow_highlight_level NORTH, OWNORTH_BANK_OF_THE_WILD_RIVER
 	ow_highlight_level WEST, OWWEST_THE_POOL_OF_RAIN
 	ow_scene_end
 
-.event_31
+.event_collect_rocket
 	ow_scene_end
 
-.event_32
+.event_yellow_crayon
 	db SPECIAL_ACTION, NORTH, $0c
 	ow_scene_end
 
-.event_33
+.event_unused_33
 	ow_scene_end
 
-.event_34
+.event_collect_saber
 	ow_scene_end
 
-.event_35
+.event_day_or_night_spell
 	db SPECIAL_ACTION, NORTH, $11
 	ow_scene_end
 
-.event_36
+.event_collect_ufo
 	ow_scene_end
 
-.event_37
+.event_torch_forest
 	ow_func EAST, EOWFUNC_BURN_VINES
 	ow_unlock_level EAST, EASTCONN_5
 	ow_unlock_level EAST, EASTCONN_7
 	ow_unlock_level NORTH, $08
 	ow_scene_end
 
-.event_38
+.event_reveal_warped_void
 	ow_func EAST, EOWFUNC_SHOW_WARPED_VOID
 	ow_unlock_level EAST, SOUTHCONN_4
 	ow_scene_end
 
-.event_39
+.event_raise_pipe
 	ow_func EAST, EOWFUNC_RAISE_PIPE
 	ow_scene_end
 
-.event_3a
+.event_remove_warps
 	ow_highlight_level EAST, OWEAST_THE_WARPED_VOID
 	ow_scene_end
 
-.event_3b
+.event_brown_crayon
 	db SPECIAL_ACTION, NORTH, $0d
 	ow_scene_end
 
-.event_3c
+.event_collect_demons_blood
 	ow_highlight_level EAST, OWEAST_FOREST_OF_FEAR
 	ow_scene_end
 
-.event_3d
+.event_open_paragoom_cage
 	ow_highlight_level EAST, OWEAST_THE_WARPED_VOID
 	ow_scene_end
 
-.event_3e
+.event_collect_heart_crest
 	ow_scene_end
 
-.event_3f
+.event_collect_minicar
 	ow_scene_end
 
-.event_40
+.event_collect_locomotive
 	ow_scene_end
 
-.event_41
+.event_collect_telephone
 	ow_scene_end
 
-.event_42
+.event_red_crayon
 	db SPECIAL_ACTION, NORTH, $0e
 	ow_scene_end
 
-.event_43
+.event_place_propeller
 	ow_highlight_level WEST, OWWEST_A_TOWN_IN_CHAOS
 	ow_scene_end
 
-.event_44
+.event_feed_octohon
 	ow_highlight_level NORTH, OWNORTH_THE_TIDAL_COAST
 	ow_highlight_level WEST, OWWEST_BENEATH_THE_WAVES
 	ow_scene_end
 
-.event_45
+.event_collect_green_gem
 	ow_scene_end
 
-.event_46
+.event_unused_46
 	ow_scene_end
 
-.event_47
+.event_unused_47
 	ow_scene_end
 
-.event_48
+.event_collect_fighter_mannequin
 	ow_scene_end
 
-.event_49
+.event_open_golden_snake_door
 	ow_highlight_level SOUTH, OWSOUTH_TOWER_OF_REVIVAL
 	ow_scene_end
 
-.event_4a
+.event_open_sky_door
 	ow_unlock_level SOUTH, SOUTHCONN_5
 	ow_scene_end
 
-.event_4b
+.event_green_crayon
 	db SPECIAL_ACTION, NORTH, $0f
 	ow_scene_end
 
-.event_4c
+.event_extinguish_fire
 	ow_highlight_level WEST, OWWEST_THE_WEST_CRATER
 	ow_highlight_level EAST, OWEAST_THE_EAST_CRATER
 	ow_scene_end
 
-.event_4d
+.event_collect_diamonds_crest
 	ow_scene_end
 
-.event_4e
+.event_place_brick
 	ow_highlight_level EAST, OWEAST_CASTLE_OF_ILLUSIONS
 	ow_scene_end
 
-.event_4f
+.event_spray_iron_wall
 	ow_highlight_level WEST, OWWEST_THE_WEST_CRATER
 	ow_highlight_level SOUTH, OWSOUTH_THE_STEEP_CANYON
 	ow_highlight_level SOUTH, OWSOUTH_CAVE_OF_FLAMES
 	ow_scene_end
 
-.event_50
+.event_collect_spades_crest
 	ow_scene_end
 
-.event_51
+.event_mix_chemicals
 	ow_highlight_level NORTH, OWNORTH_THE_VAST_PLAIN
 	ow_highlight_level WEST, OWWEST_BENEATH_THE_WAVES
 	ow_scene_end
 
-.event_52
+.event_collect_red_gem
 	ow_scene_end
 
-.event_53
+.event_collect_clubs_crest
 	ow_scene_end
 
-.event_54
+.event_cut_baloon
 	ow_highlight_level SOUTH, OWSOUTH_ABOVE_THE_CLOUDS
 	ow_scene_end
 
-.event_55
+.event_drill_holes
 	ow_highlight_level EAST, OWEAST_THE_EAST_CRATER
 	ow_scene_end
 
-.event_56
+.event_reveal_dark_room
 	ow_highlight_level NORTH, OWNORTH_SEA_TURTLE_ROCKS
 	ow_scene_end
 
-.event_57
+.event_summon_moon
 	ow_func SOUTH, SOWFUNC_FULL_MOON
 	ow_highlight_level SOUTH, OWSOUTH_ABOVE_THE_CLOUDS
 	ow_scene_end
 
-.event_58
+.event_open_crater_hole
 	ow_highlight_level EAST, OWEAST_THE_EAST_CRATER
 	ow_scene_end
 
-.event_59
+.event_collect_earthen_figure
 	ow_scene_end
 
-.event_5a
+.event_epilogue
 	ow_func NORTH, NOWFUNC_PROLOGUE
 	ow_scene_end
 

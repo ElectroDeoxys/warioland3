@@ -1455,7 +1455,7 @@ wLastTransitionParam::
 wMapSideLevelID::
 	db
 
-wCutscenePlaying::
+wEventWithCutscene::
 	db
 
 ; is TRUE if game has been cleared
