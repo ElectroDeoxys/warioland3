@@ -545,7 +545,7 @@ RollingRockFunc_Left:
 	ld [hld], a
 	ld a, LOW(.MoveLeft)
 	ld [hld], a
-.MoveLeft
+.MoveLeft:
 	call MoveObjectLeft_Fast
 	jr RollingRockFunc
 
@@ -560,7 +560,7 @@ RollingRockFunc_Right:
 	ld [hld], a
 	ld a, LOW(.MoveRight)
 	ld [hld], a
-.MoveRight
+.MoveRight:
 	call MoveObjectRight_Fast
 ;	fallthrough
 
@@ -635,7 +635,7 @@ PalmTreeSpawnerFunc:
 	ld [hld], a
 .create
 	call CreateObjectAtRelativePos
-.Wait
+.Wait:
 	ld a, 2
 	ld [wCurObjFrameDuration], a
 	ld a, NO_ACTIONS_FOR 1

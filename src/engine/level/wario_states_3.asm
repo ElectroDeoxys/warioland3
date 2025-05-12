@@ -1023,7 +1023,7 @@ UpdateState_FlatSinking:
 	ret z
 	jr Func_289c5
 
-.Func_2899a
+.Func_2899a:
 	ld hl, wWarioXPos + 1
 	ld de, hXPosLo
 	ld a, [hld]

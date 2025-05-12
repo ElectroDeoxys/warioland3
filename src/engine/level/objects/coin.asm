@@ -76,7 +76,7 @@ CoinFunc:
 	ld l, OBJ_FLAGS
 	set OBJFLAG_NO_COLLISION_F, [hl]
 
-.Update
+.Update:
 	ld hl, wCurObjFrameDuration
 	ld a, 2
 	ld [hli], a
@@ -702,7 +702,7 @@ CoinFunc:
 	res OBJFLAG_INVISIBLE_F, a
 	ld [hl], a
 	ret
-.State18
+.State18:
 	xor a
 	ld [wCurObjFlags], a
 	ret

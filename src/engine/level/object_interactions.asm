@@ -723,7 +723,7 @@ StepOnObject:
 	ld b, OBJACTION_WOBBLE
 	jp SetObjAction
 
-.Transformed
+.Transformed:
 	ld a, [wTransformation]
 	cp TRANSFORMATION_HOT_WARIO
 	jr nz, .not_hot_wario
@@ -1134,7 +1134,7 @@ Func_20899:
 Func_208f2:
 	jr .start
 
-.Bump
+.Bump:
 	ld b, OBJACTION_BUMP
 	call SetObjAction
 	ret

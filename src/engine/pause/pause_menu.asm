@@ -365,10 +365,10 @@ UpdatePauseMenu:
 	inc [hl]
 	ret
 
-.ToMap
+.ToMap:
 	jp ReturnToMapFromLevel
 
-.Save
+.Save:
 	ld a, TRUE
 	ld [wResetDisabled], a
 	ld a, SST_PAUSE_MENU_SAVE

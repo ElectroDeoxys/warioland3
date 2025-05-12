@@ -91,7 +91,7 @@ HandleStartMenuSelection:
 	call UpdateObjAnim
 	ret
 
-.MoveVertical
+.MoveVertical:
 	ld a, [wStartMenuSelection]
 	cp STARTMENU_CLEAR_DATA | STARTMENUF_SCROLLING
 	jr z, .move_up
@@ -120,7 +120,7 @@ HandleStartMenuSelection:
 	res STARTMENUF_SCROLLING_F, [hl]
 	ret
 
-.UpdateAnim1
+.UpdateAnim1:
 	ld hl, wMenuObj1FramesetPtr + 1
 	call UpdateObjAnim
 	ld a, [wObjAnimWasReset]
@@ -134,7 +134,7 @@ HandleStartMenuSelection:
 	ld [wMenuObj1FramesetOffset], a
 	ret
 
-.UpdateAnim2
+.UpdateAnim2:
 	ld a, [wGlobalCounter]
 	and %1
 	ret nz

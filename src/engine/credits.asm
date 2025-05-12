@@ -130,7 +130,7 @@ ShowCredits:
 	call ClearUnusedVirtualOAM
 	ret
 
-.PlayCreditsMusic
+.PlayCreditsMusic:
 	play_music MUSIC_CREDITS
 	ret
 

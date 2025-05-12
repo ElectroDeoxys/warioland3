@@ -149,7 +149,7 @@ UpdateGameOverScreen:
 	call ClearUnusedVirtualOAM
 	ret
 
-.Func_db3db
+.Func_db3db:
 	play_sfx SFX_0F5
 	ret
 

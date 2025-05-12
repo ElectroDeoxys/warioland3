@@ -81,7 +81,7 @@ InitGolfLevel:
 	inc [hl]
 	ret
 
-.GolfCoursePals
+.GolfCoursePals:
 	dw Pals_1ca08f
 	dw Pals_1ca0cf
 	dw Pals_1ca10f
@@ -566,7 +566,7 @@ UpdateGolfParaGoom:
 	ld hl, wGolfParaGoomSprite
 	jp LoadGolfSprite
 
-.Framesets
+.Framesets:
 	dw Frameset_1cafb1 ; GOLF_PARAGOOM_0
 	dw Frameset_1cafb6 ; GOLF_PARAGOOM_1
 	dw Frameset_1cafc7 ; GOLF_PARAGOOM_2
@@ -819,7 +819,7 @@ LoadGolfWarioStateGfx:
 	ld [wGolfWarioTilesPtr + 0], a
 	ret
 
-.GfxBanks
+.GfxBanks:
 	db BANK(WarioIdleGfx)   ; GOLF_WARIO_IDLING
 	db BANK(WarioWalkGfx)   ; GOLF_WARIO_WALKING
 	db BANK(WarioAttackGfx) ; GOLF_WARIO_CHARGING
@@ -833,7 +833,7 @@ LoadGolfWarioStateGfx:
 	db BANK(WarioIdleGfx)   ; GOLF_WARIO_GOING_IN_PIPE
 	db BANK(WarioIdleGfx)   ; GOLF_WARIO_TURNING
 
-.GfxPointers
+.GfxPointers:
 	dw WarioIdleGfx   ; GOLF_WARIO_IDLING
 	dw WarioWalkGfx   ; GOLF_WARIO_WALKING
 	dw WarioAttackGfx ; GOLF_WARIO_CHARGING
@@ -1378,7 +1378,7 @@ GolfLevelState_StartShot:
 	jr nc, .FinishShot
 	ret
 
-.StartShot
+.StartShot:
 	inc [hl]
 	ld hl, wGolfStroke
 	inc [hl]
@@ -1386,7 +1386,7 @@ GolfLevelState_StartShot:
 	ld [wGolfVBlankMode], a
 	jp PrintGolfStrokeNumber
 
-.ChargeShot
+.ChargeShot:
 	inc [hl]
 	play_sfx SFX_0ED
 	xor a
@@ -1398,7 +1398,7 @@ GolfLevelState_StartShot:
 	ld [wGolfVBlankMode], a
 	ret
 
-.HitOrMiss
+.HitOrMiss:
 	inc [hl]
 	xor a
 	ld [wGolfWarioDuration], a
@@ -1422,7 +1422,7 @@ GolfLevelState_StartShot:
 	ld [wGolfVBlankMode], a
 	ret
 
-.FinishShot
+.FinishShot:
 	xor a
 	ld [wGolfCounter], a
 	ld [wGolfWarioDuration], a
@@ -1523,7 +1523,7 @@ GolfLevelState_Shot:
 	ld [hli], a ; (a + 1) / 2
 	ret
 
-.NormalBounceVels
+.NormalBounceVels:
 	db $01, $01 ; $0
 	db $02, $01 ; $1
 	db $03, $02 ; $2
@@ -1535,7 +1535,7 @@ GolfLevelState_Shot:
 	db $09, $04 ; $8
 	db $0a, $04 ; $9
 
-.TopspinBounceVels
+.TopspinBounceVels:
 	db $01, $02 ; $0
 	db $02, $03 ; $1
 	db $03, $04 ; $2
@@ -2156,7 +2156,7 @@ GolfLevelState_SpecialTerrain:
 	ld [w1dc01], a
 	jp .asm_1c976f
 
-.HoleXPosOffsetSigns
+.HoleXPosOffsetSigns:
 	db $0
 	db $0
 	db $1
@@ -2182,7 +2182,7 @@ GolfLevelState_SpecialTerrain:
 	db $0
 	db $0
 
-.HoleXPosOffsets
+.HoleXPosOffsets:
 	db 2
 	db 2
 	db 4
@@ -2208,7 +2208,7 @@ GolfLevelState_SpecialTerrain:
 	db 0
 	db 0
 
-.HoleYPosOffset
+.HoleYPosOffset:
 	db  4
 	db  4
 	db  4
@@ -2622,7 +2622,7 @@ ShowGolfResultOverlayText:
 	ld hl, wGolfOverlayTextSprite
 	jp LoadGolfSprite
 
-.Framesets
+.Framesets:
 	dw Frameset_1cb0c2 ; GOLFRESULT_UNDER_PAR
 	dw Frameset_1cb089 ; GOLFRESULT_PAR
 	dw Frameset_1cb0a9 ; GOLFRESULT_OVER_PAR
@@ -2914,7 +2914,7 @@ VBlank_1c9d1d:
 	jp hTransferVirtualOAM
 .end
 
-.UpdatePinFlagTiles
+.UpdatePinFlagTiles:
 	ld hl, w1dc0b
 	ld a, [hl]
 	cp $18

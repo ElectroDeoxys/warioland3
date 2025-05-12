@@ -146,7 +146,7 @@ LoadActionHelpBGMaps:
 	hlbgcoord 18, 16, v0BGMap1
 	jr .asm_1e498a
 
-.Func_1e499c
+.Func_1e499c:
 	ld de, BG_MAP_WIDTH
 	push hl
 	ld a, BANK("VRAM1")

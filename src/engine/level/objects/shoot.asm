@@ -1312,7 +1312,7 @@ GKTortoiseFunc:
 	ld a, [wShootBallState]
 	and a
 	jp nz, .asm_57009
-.Func_56f2e
+.Func_56f2e:
 	ld a, [wShootBallState]
 	cp $02
 	jr z, .asm_56f93

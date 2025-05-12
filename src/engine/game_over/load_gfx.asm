@@ -4,7 +4,7 @@ LoadHiddenFigureGfx::
 	call .LoadMap
 	ret
 
-.LoadPals
+.LoadPals:
 	ld hl, Pals_db000
 	call LoadPalsToTempPals1
 	ld hl, Pals_db040
@@ -13,7 +13,7 @@ LoadHiddenFigureGfx::
 	call CopyHLToDE_Short
 	ret
 
-.LoadTiles
+.LoadTiles:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, HiddenFigure2Gfx
@@ -29,7 +29,7 @@ LoadHiddenFigureGfx::
 	call CopyHLToDE_BC
 	ret
 
-.LoadMap
+.LoadMap:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, HiddenFigure2Map

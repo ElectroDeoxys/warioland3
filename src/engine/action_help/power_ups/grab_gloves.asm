@@ -886,7 +886,7 @@ Func_1f9999:
 	inc [hl]
 	ret
 
-.Func_1f9a25
+.Func_1f9a25:
 	ld b, $00
 	call ActionHelp_ShowBlockDebrisWithYOffset
 	ld a, [wMenuObj6]

@@ -1019,7 +1019,7 @@ Func_61f54::
 	ld [wCurObjState], a
 	jp HomeJumpRet
 
-.GrabIdle
+.GrabIdle:
 	ld a, [wIsSmashAttacking]
 	add a
 	add a ; *4
@@ -1083,7 +1083,7 @@ Func_61f54::
 	ld [wCurObjState], a
 	jp HomeJumpRet
 
-.PickUp
+.PickUp:
 	ld hl, wCurObjVar1
 	dec [hl]
 	jp nz, HomeJumpRet
@@ -1226,7 +1226,7 @@ Func_620a6::
 	ld [wCurObjState], a
 	jp HomeJumpRet
 
-.GrabIdle
+.GrabIdle:
 	ld a, [wIsSmashAttacking]
 	add a
 	add a ; *4
@@ -1290,7 +1290,7 @@ Func_620a6::
 	ld [wCurObjState], a
 	jp HomeJumpRet
 
-.PickUp
+.PickUp:
 	ld hl, wCurObjVar1
 	dec [hl]
 	jp nz, HomeJumpRet
@@ -1453,12 +1453,12 @@ Func_621fb::
 	ld [hl], a
 	jp HomeJumpRet
 
-.GrabChargeThrow
+.GrabChargeThrow:
 	ld a, OBJSTATE_4B
 	ld [wCurObjState], a
 	jp HomeJumpRet
 
-.GrabIdle
+.GrabIdle:
 	ld a, [wIsSmashAttacking]
 	add a
 	add a
@@ -1562,12 +1562,12 @@ Func_622bd::
 	ld [hl], a
 	jp HomeJumpRet
 
-.GrabChargeThrow
+.GrabChargeThrow:
 	ld a, OBJSTATE_4A
 	ld [wCurObjState], a
 	jp HomeJumpRet
 
-.GrabIdle
+.GrabIdle:
 	ld a, [wIsSmashAttacking]
 	add a
 	add a
@@ -1664,7 +1664,7 @@ Func_62382::
 	ld [wCurObjState], a
 	jp HomeJumpRet
 
-.ChargeThrow
+.ChargeThrow:
 	ld a, [wIsSmashAttacking]
 	add a
 	add a
@@ -1687,7 +1687,7 @@ Func_62382::
 	ld [hl], a
 	jp HomeJumpRet
 
-.HoldFullCharge
+.HoldFullCharge:
 	ld hl, hPickedUpObjPos
 	ld a, [wWarioYPos + 1]
 	sub 30
@@ -1810,7 +1810,7 @@ Func_6247b::
 	ld [wCurObjState], a
 	jp HomeJumpRet
 
-.ChargeThrow
+.ChargeThrow:
 	ld a, [wIsSmashAttacking]
 	add a
 	add a
@@ -1833,7 +1833,7 @@ Func_6247b::
 	ld [hl], a
 	jp HomeJumpRet
 
-.HoldFullCharge
+.HoldFullCharge:
 	ld hl, hPickedUpObjPos
 	ld a, [wWarioYPos + 1]
 	sub 30

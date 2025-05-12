@@ -1086,10 +1086,10 @@ DoughnutFunc:
 	xor a
 	ld [wCurObjVar3], a
 	ret
-.Update_Left
+.Update_Left:
 	call MoveObjectLeft
 	jr .asm_42165
-.Update_Right
+.Update_Right:
 	call MoveObjectRight
 .asm_42165
 	ld a, NO_ACTIONS_FOR 1

@@ -62,7 +62,7 @@ GarlicActionHelp:
 .done
 	ret
 
-.StateTable
+.StateTable:
 	ld a, [wActionHelpState]
 	jumptable
 

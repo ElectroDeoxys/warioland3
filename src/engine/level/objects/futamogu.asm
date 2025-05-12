@@ -105,7 +105,7 @@ FutamoguFunc:
 	jr z, .Attacked
 	jr .set_idle
 
-.Idle
+.Idle:
 	ld a, [wGroundShakeCounter]
 	cp $10
 	jr c, .no_shake
@@ -150,7 +150,7 @@ FutamoguFunc:
 	call SetObjectFramesetPtr
 	ret
 
-.Attacked
+.Attacked:
 	ld a, OBJSTATE_ATTACKED_LEFT
 	ld [hl], a ; OBJ_STATE
 	ld de, Frameset_68351
@@ -159,7 +159,7 @@ FutamoguFunc:
 	ld [hli], a ; OBJ_STATE_DURATION
 	ret
 
-.Shake
+.Shake:
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	ret nz

@@ -44,7 +44,7 @@ HandleTempleScreenShake:
 	dw .FastScrollRight
 	dw .FastScrollLeftAndReset
 
-.Init
+.Init:
 	ld hl, w2d897
 	xor a
 	ld [hld], a
@@ -53,16 +53,16 @@ HandleTempleScreenShake:
 	ld [wSCY], a
 	ret
 
-.Next
+.Next:
 	ld hl, w2d897
 	xor a
 	ld [hld], a
 	inc [hl]
 	ret
 
-.SlowScrollLeftWithSFX
+.SlowScrollLeftWithSFX:
 	play_sfx SFX_01F
-.SlowScrollLeft
+.SlowScrollLeft:
 	ld a, [bc]
 	cp 2
 	ret c
@@ -70,7 +70,7 @@ HandleTempleScreenShake:
 	dec [hl]
 	jr .Next
 
-.SlowScrollRight
+.SlowScrollRight:
 	ld a, [bc]
 	cp 2
 	ret c
@@ -78,7 +78,7 @@ HandleTempleScreenShake:
 	inc [hl]
 	jr .Next
 
-.SlowScrollRightAndReset
+.SlowScrollRightAndReset:
 	ld a, [bc]
 	cp 2
 	ret c
@@ -92,9 +92,9 @@ HandleTempleScreenShake:
 	ld [hl], a
 	ret
 
-.FastScrollRightWithSFX
+.FastScrollRightWithSFX:
 	play_sfx SFX_01F
-.FastScrollRight
+.FastScrollRight:
 	ld a, [bc]
 	cp 2
 	ret c
@@ -103,7 +103,7 @@ HandleTempleScreenShake:
 	inc [hl]
 	jr .Next
 
-.FastScrollLeft
+.FastScrollLeft:
 	ld a, [bc]
 	cp 2
 	ret c
@@ -112,7 +112,7 @@ HandleTempleScreenShake:
 	dec [hl]
 	jr .Next
 
-.FastScrollLeftAndReset
+.FastScrollLeftAndReset:
 	ld a, [bc]
 	cp 2
 	ret c
@@ -212,7 +212,7 @@ MACRO temple_rock_fall
 	dw .Update
 	dw .Reset
 
-.Spawn
+.Spawn:
 	ldh a, [rDIV]
 	ld c, a
 	ld hl, \2
@@ -225,14 +225,14 @@ IF (\3) == TRUE
 ELSE
 	call SetTempleRockSize_WithoutLarge
 ENDC
-.Next
+.Next:
 	ld hl, wTempleRock\1Counter
 	xor a
 	ld [hld], a
 	inc [hl] ; action
 	ret
 
-.Update
+.Update:
 	call GetRockYVel
 	ld hl, \2YCoord
 	add [hl]
@@ -254,7 +254,7 @@ ENDC
 	call PlayFallingRockSFX
 	jr .Next
 
-.Reset
+.Reset:
 	ld hl, wTempleRock\1RespawnTime
 	jp Func_1580c8
 ENDM
@@ -309,7 +309,7 @@ MACRO temple_rock_bounce
 	dw .Update
 	dw .Reset
 
-.Spawn
+.Spawn:
 	ldh a, [rDIV]
 	ld c, a
 	ld hl, \2
@@ -319,14 +319,14 @@ MACRO temple_rock_bounce
 	ld hl, \2State
 	call SetTempleRockSize_WithoutLarge
 	call PlayFallingRockSFX
-.Next
+.Next:
 	ld hl, wTempleRock\1Counter
 	xor a
 	ld [hld], a
 	inc [hl]
 	ret
 
-.Update
+.Update:
 IF (\3) == TRUE
 
 IF (\4) == DIRECTION_LEFT
@@ -360,7 +360,7 @@ ENDC
 
 ENDC
 
-.Reset
+.Reset:
 	ld a, [wTempleRock\1Size]
 	and a
 	jr z, .set_action

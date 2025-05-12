@@ -87,11 +87,11 @@ NobiiruFunc:
 ; c = right col
 ; b = duration
 ; de = frameset
-.SetCollisionAndFrameset
+.SetCollisionAndFrameset:
 	ld l, OBJ_COLLBOX_LEFT
 	ld [hli], a
 	ld [hl], c
-.SetFrameset
+.SetFrameset:
 	call SetObjectFramesetPtr
 	ld a, b
 	ld [hli], a
@@ -188,7 +188,7 @@ NobiiruFunc:
 	ld b, $02
 	jp .SetCollisionAndFrameset
 
-.Func_43910
+.Func_43910:
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
@@ -210,7 +210,7 @@ NobiiruFunc:
 	ld b, $14
 	jp .SetCollisionAndFrameset
 
-.Func_43936
+.Func_43936:
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
@@ -225,7 +225,7 @@ NobiiruFunc:
 	ld b, $08
 	jp .SetFrameset
 
-.Func_43956
+.Func_43956:
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
@@ -235,7 +235,7 @@ NobiiruFunc:
 	ld b, $14
 	jp .SetFrameset
 
-.Func_4396e
+.Func_4396e:
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
@@ -257,7 +257,7 @@ NobiiruFunc:
 	ld b, $02
 	jp .SetCollisionAndFrameset
 
-.Func_43994
+.Func_43994:
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
@@ -279,7 +279,7 @@ NobiiruFunc:
 	ld b, $02
 	jp .SetCollisionAndFrameset
 
-.Func_439ba
+.Func_439ba:
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
@@ -301,7 +301,7 @@ NobiiruFunc:
 	ld b, $02
 	jp .SetCollisionAndFrameset
 
-.Func_439e0
+.Func_439e0:
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
@@ -323,7 +323,7 @@ NobiiruFunc:
 	ld b, $02
 	jp .SetCollisionAndFrameset
 
-.Func_43a06
+.Func_43a06:
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
@@ -345,7 +345,7 @@ NobiiruFunc:
 	ld b, $02
 	jp .SetCollisionAndFrameset
 
-.Func_43a2c
+.Func_43a2c:
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz

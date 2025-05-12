@@ -83,7 +83,7 @@ SeeingEyeDoorFunc:
 	ld [hld], a
 	ret
 
-.LookAround
+.LookAround:
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz

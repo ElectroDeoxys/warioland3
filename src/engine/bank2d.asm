@@ -981,7 +981,7 @@ Func_b4712:
 .data_2
 	db $28, $28, $12
 
-.Func_b4757
+.Func_b4757:
 	ld a, [wTempOWSceneAction]
 	cp UNLOCK_LEVEL
 	ret z
@@ -1296,7 +1296,7 @@ Func_b4a3d:
 	dw .South ; SOUTH
 	dw .East  ; EAST
 
-.North
+.North:
 	ld bc, wSceneObj1State
 	call Func_b4fa2
 	ld bc, wSceneObj2State
@@ -1306,7 +1306,7 @@ Func_b4a3d:
 	ld bc, wSceneObj4State
 	jp Func_b4fa2
 
-.West
+.West:
 	ld bc, wSceneObj1State
 	call Func_b4dfb
 	ld bc, wSceneObj2State
@@ -1316,7 +1316,7 @@ Func_b4a3d:
 	ld bc, wSceneObj4State
 	jp Func_b4dfb
 
-.South
+.South:
 	ld bc, wSceneObj1State
 	call Func_b4cc2
 	ld bc, wSceneObj2State
@@ -1326,7 +1326,7 @@ Func_b4a3d:
 	ld bc, wSceneObj4State
 	jp Func_b4cc2
 
-.East
+.East:
 	ld bc, wSceneObj1State
 	call Func_b4b99
 	ld bc, wSceneObj2State
@@ -1345,7 +1345,7 @@ Func_b4aa9:
 	dw .South ; SOUTH
 	dw .East  ; EAST
 
-.North
+.North:
 	ld bc, wSceneObj5State
 	call Func_b4fa2
 	ld bc, wSceneObj6State
@@ -1365,7 +1365,7 @@ Func_b4aa9:
 	ld bc, wSceneObj15State
 	jp Func_b4fa2
 
-.West
+.West:
 	ld bc, wSceneObj5State
 	call Func_b4dfb
 	ld bc, wSceneObj6State
@@ -1387,7 +1387,7 @@ Func_b4aa9:
 	ld bc, wSceneObj15State
 	jp Func_b4dfb
 
-.South
+.South:
 	ld bc, wSceneObj5State
 	call Func_b4cc2
 	ld bc, wSceneObj6State
@@ -1405,7 +1405,7 @@ Func_b4aa9:
 	ld bc, wSceneObj15State
 	jp Func_b4cc2
 
-.East
+.East:
 	ld bc, wSceneObj5State
 	call Func_b4b99
 	ld bc, wSceneObj6State
@@ -4662,19 +4662,19 @@ WOWFunc_RedMusicBox:
 	ld [hl], a
 	ret
 
-.Wait1
+.Wait1:
 	ld a, 20
 	jp WaitOWFunc
 
-.Func_b60aa
+.Func_b60aa:
 	play_sfx SFX_121
 	jp AdvanceOWFunc
 
-.Func_b60b5
+.Func_b60b5:
 	ld a, 254
 	jp WaitOWFunc
 
-.Func_b60ba
+.Func_b60ba:
 	ld a, $20
 	ld hl, wSceneObj6State
 	call SetSceneObjState
@@ -4684,11 +4684,11 @@ WOWFunc_RedMusicBox:
 	ld [wSceneObj6Unk7], a
 	jp AdvanceOWFunc
 
-.Func_b60d0
+.Func_b60d0:
 	ld a, 23
 	jp WaitOWFunc
 
-.Func_b60d5
+.Func_b60d5:
 	ld a, $21
 	ld hl, wSceneObj6State
 	call SetSceneObjState
@@ -4696,17 +4696,17 @@ WOWFunc_RedMusicBox:
 	dec [hl]
 	jp AdvanceOWFunc
 
-.Func_b60e4
+.Func_b60e4:
 	ld a, 10
 	jp WaitOWFunc
 
-.Func_b60e9
+.Func_b60e9:
 	ld a, $22
 	ld hl, wSceneObj6State
 	call SetSceneObjState
 	jp AdvanceOWFunc
 
-.Func_b60f4
+.Func_b60f4:
 	ld a, [wOWFuncCounter]
 	cp 106
 	ret c
@@ -7315,7 +7315,7 @@ Func_b71fc:
 	jr .asm_b7304
 .Func_b72f8:
 	play_sfx SFX_01F
-.Func_b7300
+.Func_b7300:
 	ld hl, wSCY
 	dec [hl]
 .asm_b7304
@@ -8129,7 +8129,7 @@ EOWFunc_BurnVines:
 .Func_b7808:
 	ld a, 30
 	jp WaitOWFunc
-.Func_b780d
+.Func_b780d:
 	ld a, $15
 	ld hl, wSceneObj1State
 	call SetSceneObjState
@@ -8290,7 +8290,7 @@ UpdateMapSideOWAnimations:
 	dw .South ; SOUTH
 	dw .East  ; EAST
 
-.North
+.North:
 	ld bc, wSceneObj2State
 	call Func_b7984
 	ld bc, wSceneObj3State
@@ -8304,7 +8304,7 @@ UpdateMapSideOWAnimations:
 	ld bc, wSceneObj15State
 	jp Func_b7984
 
-.West
+.West:
 	ld bc, wSceneObj1State
 	call Func_b7a6d
 	ld bc, wSceneObj7State
@@ -8314,7 +8314,7 @@ UpdateMapSideOWAnimations:
 	ld bc, wSceneObj5State
 	jp Func_b7a6d
 
-.South
+.South:
 	ld bc, wSceneObj7State
 	call Func_b7c18
 	ld bc, wSceneObj14State
@@ -8322,7 +8322,7 @@ UpdateMapSideOWAnimations:
 	ld bc, wSceneObj15State
 	jp Func_b7c18
 
-.East
+.East:
 	ld bc, wSceneObj5State
 	call Func_b7b61
 	ld bc, wSceneObj7State
@@ -8837,7 +8837,7 @@ Func_b7cb3:
 	inc [hl]
 	ret
 
-.Func_b7cda
+.Func_b7cda:
 	ld hl, w2d07d
 	inc [hl]
 	ld hl, wSceneObj14YCoord
@@ -8869,7 +8869,7 @@ Func_b7cb3:
 	ld [hl], $70
 	ret
 
-.Func_b7d0d
+.Func_b7d0d:
 	ld hl, w2d07d
 	inc [hl]
 	ret

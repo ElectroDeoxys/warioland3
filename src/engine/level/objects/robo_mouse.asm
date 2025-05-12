@@ -558,7 +558,7 @@ RoboMouseFunc:
 .asm_48ce8
 	ld b, $0c
 	jr .asm_48cee
-.Func_48cec
+.Func_48cec:
 	ld b, $0e
 .asm_48cee
 	ld hl, wCurObjXPos

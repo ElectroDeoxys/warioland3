@@ -933,7 +933,7 @@ HammerBotFunc:
 	ld [hl], a
 	jr .Func_44890
 
-.Func_44890
+.Func_44890:
 	ld hl, wCurObjState
 	ld a, $48
 	ld [hld], a

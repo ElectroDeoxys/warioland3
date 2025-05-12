@@ -2574,7 +2574,7 @@ Func_84e86:
 	call CopyHLToDE
 	jp .asm_84eab
 
-.CopyPalsToBGAndOBPals
+.CopyPalsToBGAndOBPals:
 	ld hl, wTempPals1
 	ld de, wTempBGPals
 	ld b, 8 palettes
@@ -2913,7 +2913,7 @@ LoadGreyOWPals:
 
 ; if Blue Book or Trident have not been collected
 ; then advance to the next palette
-.GetEastMapNoIcePalette
+.GetEastMapNoIcePalette:
 	push hl
 	ld a, BLUE_BOOK
 	call IsTreasureCollected

@@ -889,7 +889,7 @@ IgaguriFunc:
 	res OBJSUBFLAG_HDIR_F, [hl]
 	ret
 
-.Bounce
+.Bounce:
 	ld a, [wTransformation]
 	and a
 	jr z, .no_transformation_2

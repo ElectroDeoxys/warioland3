@@ -166,7 +166,7 @@ CartVariableFunc:
 	ld de, Frameset_691aa
 	jp SetObjectFramesetPtr
 
-.Moving
+.Moving:
 	call SetOneWayPlatformAction
 	ld a, [wGlobalCounter]
 	ld b, a

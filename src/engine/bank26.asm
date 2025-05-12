@@ -130,7 +130,7 @@ DrawCoinCount:
 	call .DrawNumber
 	ret
 
-.DrawNumber
+.DrawNumber:
 	and $0f
 	inc a
 	ld hl, NumbersGfx
@@ -407,7 +407,7 @@ ApplyPageTreasuresPals:
 ; outputs in hl and de the addresses in wTilemap
 ; for the treasure in Cell w2dffe
 ; hl = de + BG_MAP_WIDTH
-.GetAttrmapAddress
+.GetAttrmapAddress:
 	ld a, [w2dffe]
 	ld d, HIGH(wTilemap) + $1
 	cp NUM_COLLECTION_COLS
@@ -483,7 +483,7 @@ HandleTreasureCollectionInput:
 	jr nz, .a_left
 	ret
 
-.SetScrollMode
+.SetScrollMode:
 	ld a, TRUE
 	ld [wCollectionScrollMode], a
 	ld hl, wSceneObj9State
@@ -716,20 +716,20 @@ ProcessCollectionLinkState:
 	dw .Func_9a806
 	dw .Return
 
-.AdvanceState
+.AdvanceState:
 	ld hl, wCollectionLinkStateCounter
 	xor a
 	ld [hld], a
 	inc [hl] ; wCollectionLinkState
 	ret
 
-.WaitDelay
+.WaitDelay:
 	ld a, [bc]
 	cp $14
 	ret c
 	jr .AdvanceState
 
-.GetLinkedCells
+.GetLinkedCells:
 	ld hl, CollectionLinkTable
 	ld a, [wCollectionPage]
 	call GetPointerFromTableHL
@@ -744,10 +744,10 @@ ProcessCollectionLinkState:
 	call .AdvanceState
 	jp .AdvanceState
 
-.Return
+.Return:
 	ret
 
-.Func_9a806
+.Func_9a806:
 	ld a, [wCollectionLinkedCells + 0]
 	cp $80
 	jr z, .AdvanceState
@@ -841,7 +841,7 @@ ProcessCollectionLinkState:
 .asm_9a8d5
 	jp .AdvanceState
 
-.Func_9a8d8
+.Func_9a8d8:
 	set 2, l
 	ld a, $02
 	call SetSceneObjState
@@ -857,7 +857,7 @@ CollectionLinkTable:
 .none
 	db $80
 
-.Page0
+.Page0:
 	dw .music_boxes ; YELLOW_MUSIC_BOX
 	dw .music_boxes ; BLUE_MUSIC_BOX
 	dw .music_boxes ; GREEN_MUSIC_BOX
@@ -886,7 +886,7 @@ CollectionLinkTable:
 .gears
 	db $12, $13, $80
 
-.Page1
+.Page1:
 	dw .none ; JAR
 	dw .none ; TREASURE_MAP
 	dw .book_and_magic_wand ; BLUE_BOOK
@@ -923,7 +923,7 @@ CollectionLinkTable:
 .chemicals
 	db $13, $14, $80
 
-.Page2
+.Page2:
 	dw .none ; AIR_PUMP
 	dw .none ; SAPLING_OF_GROWTH
 	dw .none ; NIGHT_VISION_SCOPE
@@ -948,7 +948,7 @@ CollectionLinkTable:
 .key_cards
 	db $0b, $0c, $80
 
-.Page3
+.Page3:
 	dw .none ; TRUCK_WHEEL
 	dw .none ; FLUTE
 	dw .none ; FOOT_OF_STONE
@@ -979,7 +979,7 @@ CollectionLinkTable:
 .storm_and_pouch
 	db $0b, $0d, $80
 
-.Page4
+.Page4:
 	dw .none ; CLUBS_CREST
 	dw .none ; SPADES_CREST
 	dw .none ; HEART_CREST
@@ -1055,7 +1055,7 @@ AnimateTreasureCollection:
 	call .Func_9aa4a
 	ret
 
-.Func_9aa4a
+.Func_9aa4a:
 	ld a, [bc]
 	jumptable
 
@@ -1208,7 +1208,7 @@ LoadTreasureTiles:
 	call .CopyGfx
 	; bug, fallthrough
 
-.CopyGfx
+.CopyGfx:
 ; this gets right addr given that a < 128
 	and a
 	ld b, $00
@@ -1259,7 +1259,7 @@ LoadLevelTreasures:
 	call .GetLevelTreasures
 	ret ; can be fallthrough
 
-.GetLevelTreasures
+.GetLevelTreasures:
 	ld a, [wOWLevel]
 	add a
 	add a ; *4

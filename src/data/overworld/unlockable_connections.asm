@@ -114,7 +114,7 @@ UnlockableLevelArrows:
 	dw .EastConnection8 ; EASTCONN_8
 	assert_table_length NUM_EAST_CONNECTIONS + 1
 
-.InvalidNorthConnection
+.InvalidNorthConnection:
 	db $ff, $ff
 
 .NorthConnection1:

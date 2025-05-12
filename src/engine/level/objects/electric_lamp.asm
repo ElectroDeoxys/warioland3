@@ -101,7 +101,7 @@ ElectricLampSparkFunc:
 	play_sfx SFX_06C
 	ret
 
-.GoLeft
+.GoLeft:
 	ld hl, wCurObjXPos
 	ld a, [hl]
 	sub 2
@@ -109,7 +109,7 @@ ElectricLampSparkFunc:
 	jr nc, .check_destroy
 	dec [hl]
 	jr .check_destroy
-.GoRight
+.GoRight:
 	ld hl, wCurObjXPos
 	ld a, [hl]
 	add 2

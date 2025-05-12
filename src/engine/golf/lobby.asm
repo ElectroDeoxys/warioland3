@@ -281,7 +281,7 @@ HandleGolfLobbyStates:
 	dw .EnteringDoor ; GOLFLOBBYSTATE_ENTER_DOOR
 	dw .ExitingPipe  ; GOLFLOBBYSTATE_EXIT_PIPE
 
-.WaitingInput
+.WaitingInput:
 	ld a, [wJoypadPressed]
 	bit D_DOWN_F, a
 	jr nz, .d_down
@@ -386,7 +386,7 @@ HandleGolfLobbyStates:
 	ld [wGolfLobbyState], a
 	ret
 
-.WalkingRight
+.WalkingRight:
 	; check if still doing turning animation
 	ld hl, wGolfCounter
 	ld a, [hl]
@@ -432,7 +432,7 @@ HandleGolfLobbyStates:
 	ld [wGolfLobbyState], a ; GOLFLOBBYSTATE_WAIT_INPUT
 	ret
 
-.DoJumpRight
+.DoJumpRight:
 	ld hl, wGolfWarioYVel
 	ld c, [hl]
 	ld a, [wGolfCounter]
@@ -458,7 +458,7 @@ HandleGolfLobbyStates:
 	ld [de], a
 	ret
 
-.WalkingLeft
+.WalkingLeft:
 	; check if still doing turning animation
 	ld hl, wGolfCounter
 	ld a, [hl]
@@ -504,7 +504,7 @@ HandleGolfLobbyStates:
 	ld [wGolfLobbyState], a ; GOLFLOBBYSTATE_WAIT_INPUT
 	ret
 
-.DoJumpLeft
+.DoJumpLeft:
 	ld a, [wGolfWarioXPos]
 	cp $64
 	ret nc
@@ -513,7 +513,7 @@ HandleGolfLobbyStates:
 	ld [de], a
 	ret
 
-.EnteringPipe
+.EnteringPipe:
 	ld hl, wGolfCounter
 	ld a, [hl]
 	and a
@@ -536,7 +536,7 @@ HandleGolfLobbyStates:
 	ld [wSubState], a
 	ret
 
-.EnteringDoor
+.EnteringDoor:
 	ld hl, wGolfCounter
 	ld a, [hl]
 	and a
@@ -566,7 +566,7 @@ HandleGolfLobbyStates:
 	ld [wSubState], a
 	ret
 
-.ExitingPipe
+.ExitingPipe:
 	ld hl, wGolfWarioYPos
 	ld a, [hl]
 	cp $80
@@ -626,7 +626,7 @@ InitGolfClearCutscene:
 	inc [hl]
 	ret
 
-.LoadCutsceneGfx
+.LoadCutsceneGfx:
 	ld a, BANK(GolfMenuGfx)
 	ld [wTempBank], a
 	ld hl, BGMap_1c5d6c

@@ -84,7 +84,7 @@ StoveFunc:
 	jr z, .State3a
 	jp .set_fall
 
-.VanishTouch
+.VanishTouch:
 	ld a, [wTransformation]
 	and a
 	jp nz, Func_3173

@@ -45,7 +45,7 @@ GetOWLevelCollectedTreasures::
 	pop_wram
 	ret
 
-.SetFlags
+.SetFlags:
 	add a
 	add a ; *4
 	ld e, a

@@ -4041,7 +4041,7 @@ ApplyWaterCurrentMovement:
 	call MoveWarioDown
 	ret
 
-.ChangeCurrentDirection
+.ChangeCurrentDirection:
 	ld a, [wLastWaterCurrent]
 	and a
 	ret nz

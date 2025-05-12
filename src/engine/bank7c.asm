@@ -238,7 +238,7 @@ HandlePauseMenuInput:
 	ld [hl], a
 	jr .play_sfx
 
-.Return
+.Return:
 	ld a, PAUSEMENU_RETURN
 	ld [wPauseMenuSelection], a
 	ld hl, wMenuObj2
@@ -261,7 +261,7 @@ HandlePauseMenuInput:
 	play_sfx SFX_0E7
 	ret
 
-.Save
+.Save:
 	ld hl, wMenuObj2FramesetOffset
 	xor a
 	ld [hli], a
@@ -272,7 +272,7 @@ HandlePauseMenuInput:
 	ld [hl], a
 	jr .do_selection
 
-.ActionHelp
+.ActionHelp:
 	ld hl, wMenuObj2FramesetOffset
 	xor a
 	ld [hli], a
@@ -301,7 +301,7 @@ HandlePauseMenuInput:
 	ld [hl], a
 	jr .do_selection
 
-.ToMap
+.ToMap:
 	ld hl, wMenuObj2FramesetOffset
 	xor a
 	ld [hli], a

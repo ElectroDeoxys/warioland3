@@ -251,7 +251,7 @@ UpdateActionHelp:
 	call ClearUnusedVirtualOAM
 	ret
 
-.CloseActionHelp
+.CloseActionHelp:
 	ld a, [wPowerUpLevel]
 	and ACTION_HELP_TITLE_SCREEN
 	jp nz, InitWithoutDemoPowerUpReset

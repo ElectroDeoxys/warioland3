@@ -24,7 +24,7 @@ ClearTransformationValues::
 
 ; restores the palettes after
 ; recovering from Blind transformation
-.RestoreBlindPalettes
+.RestoreBlindPalettes:
 	ld hl, wTempPals1
 	ld a, BCPSF_AUTOINC | palette 0
 	ldh [rBCPS], a

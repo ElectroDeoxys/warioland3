@@ -1,5 +1,5 @@
 UnusedFlowerFunc:
-.Init
+.Init:
 	ld hl, wCurObjFlags
 	res OBJFLAG_INVISIBLE_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -148,7 +148,7 @@ UnusedFlowerProjectileCommonFunc:
 	ld [hli], a ; OBJ_STATE_DURATION
 	ret
 
-.Roll
+.Roll:
 	ld l, OBJ_Y_POS
 	ld a, [hli]
 	sub 4
@@ -181,7 +181,7 @@ UnusedFlowerProjectileCommonFunc:
 	ld [wCurObjVar3], a
 	ret
 
-.Jump
+.Jump:
 	ld bc, Data_60320 + $8
 	jr .asm_40ddd
 .Thrown:

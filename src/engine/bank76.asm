@@ -57,7 +57,7 @@ UpdateCommonOWAnimations:
 	ld [w2d044 + 1], a
 	ret
 
-.UpdateBigClouds
+.UpdateBigClouds:
 	ld a, [hli]
 	and a
 	ret z ; no animation
@@ -96,7 +96,7 @@ UpdateCommonOWAnimations:
 	set 0, [hl]
 	ret
 
-.UpdateSmallClouds
+.UpdateSmallClouds:
 	ld a, [hli]
 	and a
 	ret z ; no animation
@@ -133,7 +133,7 @@ UpdateCommonOWAnimations:
 	set 1, [hl]
 	ret
 
-.UpdateSea
+.UpdateSea:
 	ld a, [hli]
 	and a
 	ret z ; no animation

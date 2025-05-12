@@ -483,7 +483,7 @@ SunFlameFunc:
 	ld [hli], a
 	ret
 
-.Update
+.Update:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
@@ -739,7 +739,7 @@ MoonStarFunc:
 	ld [hli], a
 	ret
 
-.Update
+.Update:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration

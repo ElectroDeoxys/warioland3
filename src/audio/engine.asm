@@ -1992,7 +1992,7 @@ Func_30a1f:
 	cp [hl] ; TRACK_UNK02
 	jr c, .skip
 
-.UpdateTrack
+.UpdateTrack:
 	call TurnSoundRegisterOff
 	ld a, [wCurChannelPtr + 0]
 	ld e, a
@@ -2478,7 +2478,7 @@ Func_30bfb:
 	ret z ; skip envelope
 	jp SetVolumeEnvelope
 
-.CheckEnvelopeValue
+.CheckEnvelopeValue:
 	ld bc, TRACK_FADE_OUT_ENVELOPE - TRACK_VOLUME_ENVELOPE
 	add hl, bc
 	ld a, [hl]
@@ -2487,7 +2487,7 @@ Func_30bfb:
 	and $f0
 	ret
 
-.Func_30dc6
+.Func_30dc6:
 	push hl
 	ld bc, TRACK_UNK06
 	add hl, bc
@@ -2510,7 +2510,7 @@ Func_30bfb:
 	add hl, de
 	ret
 
-.Func_30deb
+.Func_30deb:
 	push hl
 	ld bc, TRACK_FADE_OUT_ENVELOPE
 	add hl, bc
@@ -2539,7 +2539,7 @@ Func_30bfb:
 	add hl, de
 	ret
 
-.Func_30e1b
+.Func_30e1b:
 	ld b, a
 	ld a, [wCurSoundRegister]
 	cp LOW(rAUD3LEVEL)

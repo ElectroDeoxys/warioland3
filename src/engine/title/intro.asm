@@ -280,7 +280,7 @@ IntroSequencePhase1:
 	inc [hl]
 	jp .continue
 
-.State1
+.State1:
 ; move left up to 48 units
 ; then set timer to 48 and advance state
 	ld hl, wPlaneWarioXCoord
@@ -309,7 +309,7 @@ IntroSequencePhase1:
 	inc [hl]
 	jp .continue
 
-.State2
+.State2:
 ; wait for timer then change frameset and advance state
 	ld hl, wTimer
 	dec [hl]
@@ -327,7 +327,7 @@ IntroSequencePhase1:
 	inc [hl]
 	jr .continue
 
-.State3
+.State3:
 ; move 1 unit down every 8 ticks up to 70
 ; then go to state 4
 	ld a, [wGlobalCounter]
@@ -342,7 +342,7 @@ IntroSequencePhase1:
 	inc [hl]
 	jr .continue
 
-.State4
+.State4:
 ; move 1 unit up every 8 ticks up to 64
 ; then go to state 3
 ; if timer reaches 0, then advance to state 5
@@ -374,7 +374,7 @@ IntroSequencePhase1:
 	inc [hl]
 	jr .continue
 
-.State5
+.State5:
 ; move to the right and then
 ; set to new coordinates when off the screen
 	ld hl, wPlaneWarioXCoord
@@ -481,7 +481,7 @@ IntroSequencePhase2:
 	inc [hl]
 	jr .continue
 
-.State1
+.State1:
 ; wait for timer, then change frameset and advance state
 	ld hl, wTimer
 	dec [hl]
@@ -502,7 +502,7 @@ IntroSequencePhase2:
 	inc [hl]
 	jr .continue
 
-.State2
+.State2:
 ; plays plane exploding animation
 	ld a, [wPlaneWarioFramesetOffset]
 	cp $18
@@ -579,7 +579,7 @@ IntroSequencePhase3:
 	inc [hl] ; next state
 	jp .continue
 
-.State1
+.State1:
 ; moves plane right every 4 ticks
 ; moves plane down 1 unit
 ; once y offset reaches 16, set new frameset and advance state
@@ -605,7 +605,7 @@ IntroSequencePhase3:
 	inc [hl] ; next state
 	jp .continue
 
-.State2
+.State2:
 ; moves plane right every 4 ticks
 ; moves plane down 1 unit
 ; once y offset reaches 48, set new frameset and advance state
@@ -631,7 +631,7 @@ IntroSequencePhase3:
 	inc [hl] ; next state
 	jr .continue
 
-.State3
+.State3:
 ; moves plane right every 4 ticks
 ; moves plane down 1 unit
 ; once y offset reaches 112, set new frameset and advance state
@@ -658,7 +658,7 @@ IntroSequencePhase3:
 	inc [hl] ; next state
 	jr .continue
 
-.State4
+.State4:
 	ld a, [wIntroBGXOffsetNear]
 	cp 224
 	jr z, .skip_x4

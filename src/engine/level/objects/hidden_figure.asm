@@ -1850,7 +1850,7 @@ HiddenFigureRightHandFunc:
 	ld [wCurObjStateDuration], a
 	ld hl, wCurObjFlags
 	res OBJFLAG_GRABBED_F, [hl]
-.Func_4d7fd
+.Func_4d7fd:
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
@@ -1881,13 +1881,13 @@ HiddenFigureRightHandFunc:
 	add $2a
 	cp b
 	jr c, .Func_4d844
-.Func_4d83a
+.Func_4d83a:
 	ld hl, wCurObjAction
 	ld a, NO_ACTIONS_FOR 15
 	ld [hld], a
 	ld a, $38
 	jr .asm_4d84c
-.Func_4d844
+.Func_4d844:
 	ld hl, wCurObjAction
 	ld a, NO_ACTIONS_FOR 15
 	ld [hld], a

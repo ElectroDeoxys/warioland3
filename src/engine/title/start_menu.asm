@@ -95,7 +95,7 @@ StartMenu:
 	ld a, STARTMENU_CONTINUE
 	jr .asm_45c5
 
-.ClearData
+.ClearData:
 	ld a, $81
 	ld [wcee4], a
 	ld a, SCREEN_HEIGHT_PX
@@ -118,7 +118,7 @@ StartMenu:
 	call UpdateObjAnim
 	ret
 
-.NewGame
+.NewGame:
 	ld a, ST_LANGUAGE_SELECTION
 	ld [wState], a
 	xor a
@@ -134,7 +134,7 @@ StartMenu:
 	and $03
 	ld [wceef], a
 
-.ContinueOrTimeAttack
+.ContinueOrTimeAttack:
 	ld a, [wGameModeFlags]
 	bit MODE_TIME_ATTACK_F, a
 	jr nz, .TimeAttack
@@ -149,7 +149,7 @@ StartMenu:
 	ld [wSubState], a
 	ret
 
-.TimeAttack
+.TimeAttack:
 	call DisableLCD
 	call FillWhiteBGPal
 	call FillWhiteOBPal

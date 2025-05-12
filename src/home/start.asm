@@ -150,7 +150,7 @@ InitWithoutDemoPowerUpReset::
 	ei
 
 ; main game loop
-.GameLoop
+.GameLoop:
 	call UpdateJoypad
 	ld a, [wResetDisabled]
 	and a

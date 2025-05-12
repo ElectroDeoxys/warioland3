@@ -1145,7 +1145,7 @@ RoomPalCycles::
 	dw .PalCycle0  ; ROOM_PAL_CYCLE_18
 	dw .PalCycle0  ; ROOM_PAL_CYCLE_19
 
-.PalCycle0
+.PalCycle0:
 	db ROOM_PAL_000
 	db ROOM_PAL_000
 	db ROOM_PAL_000
@@ -1156,7 +1156,7 @@ RoomPalCycles::
 	db ROOM_PAL_000
 	db 0 ; duration
 
-.PalCycle1
+.PalCycle1:
 	db ROOM_PAL_002
 	db ROOM_PAL_002
 	db ROOM_PAL_002
@@ -1167,7 +1167,7 @@ RoomPalCycles::
 	db ROOM_PAL_003
 	db 11 ; duration
 
-.PalCycle2
+.PalCycle2:
 	db ROOM_PAL_049
 	db ROOM_PAL_049
 	db ROOM_PAL_085
@@ -1178,7 +1178,7 @@ RoomPalCycles::
 	db ROOM_PAL_085
 	db 13 ; duration
 
-.PalCycle3
+.PalCycle3:
 	db ROOM_PAL_036
 	db ROOM_PAL_036
 	db ROOM_PAL_036
@@ -1189,7 +1189,7 @@ RoomPalCycles::
 	db ROOM_PAL_088
 	db 22 ; duration
 
-.PalCycle4
+.PalCycle4:
 	db ROOM_PAL_090
 	db ROOM_PAL_090
 	db ROOM_PAL_090
@@ -1200,7 +1200,7 @@ RoomPalCycles::
 	db ROOM_PAL_091
 	db 22 ; duration
 
-.PalCycle5
+.PalCycle5:
 	db ROOM_PAL_087
 	db ROOM_PAL_087
 	db ROOM_PAL_094
@@ -1211,7 +1211,7 @@ RoomPalCycles::
 	db ROOM_PAL_094
 	db 13 ; duration
 
-.PalCycle6
+.PalCycle6:
 	db ROOM_PAL_101
 	db ROOM_PAL_101
 	db ROOM_PAL_101
@@ -1222,7 +1222,7 @@ RoomPalCycles::
 	db ROOM_PAL_102
 	db 22 ; duration
 
-.PalCycle7
+.PalCycle7:
 	db ROOM_PAL_104
 	db ROOM_PAL_104
 	db ROOM_PAL_104
@@ -1233,7 +1233,7 @@ RoomPalCycles::
 	db ROOM_PAL_105
 	db 22 ; duration
 
-.PalCycle8
+.PalCycle8:
 	db ROOM_PAL_047
 	db ROOM_PAL_118
 	db ROOM_PAL_119
@@ -1244,7 +1244,7 @@ RoomPalCycles::
 	db ROOM_PAL_124
 	db 16 ; duration
 
-.PalCycle9
+.PalCycle9:
 	db ROOM_PAL_068
 	db ROOM_PAL_125
 	db ROOM_PAL_126
@@ -1255,7 +1255,7 @@ RoomPalCycles::
 	db ROOM_PAL_131
 	db 16 ; duration
 
-.PalCycle10
+.PalCycle10:
 	db ROOM_PAL_069
 	db ROOM_PAL_132
 	db ROOM_PAL_133
@@ -1266,7 +1266,7 @@ RoomPalCycles::
 	db ROOM_PAL_138
 	db 16 ; duration
 
-.PalCycle11
+.PalCycle11:
 	db ROOM_PAL_070
 	db ROOM_PAL_139
 	db ROOM_PAL_140

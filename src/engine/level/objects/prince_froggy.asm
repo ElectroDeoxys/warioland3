@@ -40,19 +40,19 @@ RedPrinceFroggyFunc:
 	ret
 
 PrinceFroggyFunc:
-.Func_440c4
+.Func_440c4:
 	ld a, HIGH(Func_33f8)
 	ld c, LOW(Func_33f8)
 	jr .asm_440da
-.Func_440ca
+.Func_440ca:
 	ld a, HIGH(Func_3407)
 	ld c, LOW(Func_3407)
 	jr .asm_440da
-.Func_440d0
+.Func_440d0:
 	ld a, HIGH(Func_3326)
 	ld c, LOW(Func_3326)
 	jr .asm_440da
-.Func_440d6
+.Func_440d6:
 	ld a, HIGH(Func_3317)
 	ld c, LOW(Func_3317)
 .asm_440da

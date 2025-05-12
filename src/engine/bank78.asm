@@ -399,22 +399,22 @@ Func_1e015b:
 .asm_1e0279
 	ret
 
-.GreyTreasureParams
+.GreyTreasureParams:
 	db $38 ; y
 	db $20 ; x
 	bigdw Frameset_d5045 ; frameset
 
-.RedTreasureParams
+.RedTreasureParams:
 	db $38 ; y
 	db $40 ; x
 	bigdw Frameset_d504a ; frameset
 
-.GreenTreasureParams
+.GreenTreasureParams:
 	db $38 ; y
 	db $60 ; x
 	bigdw Frameset_d504f ; frameset
 
-.BlueTreasureParams
+.BlueTreasureParams:
 	db $38 ; y
 	db $80 ; x
 	bigdw Frameset_d5054 ; frameset

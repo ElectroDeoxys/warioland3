@@ -533,7 +533,7 @@ CheckAirborneCollision:
 	ld b, a
 	ret
 
-.Func_19a53
+.Func_19a53:
 	xor a
 	ld [wWarioSlopeInteraction], a
 	ld a, [wIsSmashAttacking]

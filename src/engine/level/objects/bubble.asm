@@ -10,7 +10,7 @@ BubbleHoleFunc:
 	set OBJFLAG_NO_COLLISION_F, [hl]
 	jr .asm_47c08
 
-.Update
+.Update:
 	ld a, NO_ACTIONS_FOR 1
 	ld [wCurObjAction], a
 	ld a, 2

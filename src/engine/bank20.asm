@@ -99,7 +99,7 @@ Data_8023e:
 	dw .South
 	dw .East
 
-.North
+.North:
 ; OWNORTH_THE_TEMPLE
 	db $80 ; right
 	db OWNORTH_OUT_OF_THE_WOODS ; left
@@ -189,7 +189,7 @@ Data_8023e:
 	db $01 ; down
 
 
-.West
+.West:
 ; OWWEST_DESERT_RUINS
 	db $80 ; right
 	db OW_EXIT_LEFT ; left
@@ -257,7 +257,7 @@ Data_8023e:
 	db $00 ; down
 
 
-.South
+.South:
 ; OWSOUTH_THE_GRASSLANDS
 	db OWSOUTH_THE_BIG_BRIDGE ; right
 	db OW_EXIT_LEFT ; left
@@ -325,7 +325,7 @@ Data_8023e:
 	db $00 ; down
 
 
-.East
+.East:
 ; OWEAST_THE_STAGNANT_SWAMP
 	db $80 ; right
 	db OW_EXIT_LEFT ; left
@@ -409,7 +409,7 @@ Data_8031e:
 	dw .South ; SOUTH
 	dw .East ; EAST
 
-.North
+.North:
 ; OW_EXIT_RIGHT
 	db $80 ; right
 	db OWNORTH_THE_VAST_PLAIN ; left
@@ -432,7 +432,7 @@ Data_8031e:
 	db $00 ; up
 	db $00 ; down
 
-.West
+.West:
 ; OW_EXIT_RIGHT
 	db $80 ; right
 	db OWWEST_A_TOWN_IN_CHAOS ; left
@@ -455,7 +455,7 @@ Data_8031e:
 	db $00 ; up
 	db $00 ; down
 
-.South
+.South:
 ; OW_EXIT_RIGHT
 	db $80 ; right
 	db OWSOUTH_TOWER_OF_REVIVAL ; left
@@ -478,7 +478,7 @@ Data_8031e:
 	db $00 ; up
 	db $00 ; down
 
-.East
+.East:
 ; OW_EXIT_RIGHT
 	db $80 ; right
 	db OWEAST_FOREST_OF_FEAR ; left
@@ -865,7 +865,7 @@ InitEastMapSide:
 	call Func_80b1b
 	jp Func_8065e
 
-.Func_80655
+.Func_80655:
 	ld a, KEY_CARD_RED
 	call IsTreasureCollected
 	jp z, SetStoredTransitionParamAsReturnToMap
@@ -1842,7 +1842,7 @@ Func_80f3c:
 	ld [w2d013], a
 	ret
 
-.GetDirectionalInput
+.GetDirectionalInput:
 	ld a, [wJoypadDown]
 	and D_PAD
 	ld b, a
@@ -2656,7 +2656,7 @@ Func_8150c:
 	dec [hl]
 	ret
 
-.Func_81576
+.Func_81576:
 	ld [w2d88b], a
 	call .Func_815b6
 	ld de, w2d880
@@ -2670,7 +2670,7 @@ Func_8150c:
 	call CopyHLToDE
 	ret
 
-.Func_81595
+.Func_81595:
 	ld a, [w2d88b]
 	call .Func_815b6
 	ld e, l
@@ -2686,7 +2686,7 @@ Func_8150c:
 	call CopyHLToDE
 	ret
 
-.Func_815b6
+.Func_815b6:
 	rlca
 	swap a
 	ld e, a
@@ -2695,7 +2695,7 @@ Func_8150c:
 	add hl, de
 	ret
 
-.Func_815c1
+.Func_815c1:
 	ld hl, w2d800
 	ld de, wOWUIObj1
 	ld b, $08
@@ -2711,7 +2711,7 @@ Func_8150c:
 	call CopyHLToDE
 	ret
 
-.Func_815e5
+.Func_815e5:
 	ld hl, w2d800
 	ld de, w2d160
 	ld b, $08
@@ -2727,7 +2727,7 @@ Func_8150c:
 	call CopyHLToDE
 	ret
 
-.Func_81609
+.Func_81609:
 	ld de, $8
 	xor a
 	ld [hl], a
@@ -2739,7 +2739,7 @@ Func_8150c:
 	ld [hl], a
 	ret
 
-.Func_81615
+.Func_81615:
 	ld a, [w2d880 + $7]
 	jumptable
 	dw .Func_81625
@@ -3015,7 +3015,7 @@ SetNextPrevMapButtonsSelectable:
 	ld [hl], a
 	ret
 
-.CheckAccessibleMapSides
+.CheckAccessibleMapSides:
 	; check west side accessible
 	ld a, EVENT_OPEN_NORTH_GATE
 	call CheckIfEventIsUnlocked
@@ -4967,7 +4967,7 @@ GetOWAllowedDPadInput:
 	ld [wOWAllowedDPadInput], a
 	ret
 
-.CheckAllowedDirection
+.CheckAllowedDirection:
 	ld a, [hl]
 	cp $02
 	jr z, .check
@@ -5350,7 +5350,7 @@ UpdateTopBar:
 	ld [w2d068], a
 	ret
 
-.Indices
+.Indices:
 	; left, right
 	db OWNORTH_THE_PEACEFUL_VILLAGE, OWNORTH_THE_VAST_PLAIN   ; NORTH
 	db OWWEST_DESERT_RUINS,          OWWEST_A_TOWN_IN_CHAOS   ; WEST
@@ -5558,81 +5558,81 @@ Func_82521:
 	dw .Func_8258b
 	dw .Func_82590
 
-.Func_82541
+.Func_82541:
 	pop hl
 	ret
 
-.Func_82543
+.Func_82543:
 	ld de, Frameset_aa091
 	jr .UpdateAnimation_PopHL
 
-.Func_82548
+.Func_82548:
 	ld de, Frameset_aa094
 	jr .UpdateAnimation_PopHL
 
-.Func_8254d
+.Func_8254d:
 	ld de, Frameset_aa097
 	jr .UpdateAnimation_PopHL
 
-.Func_82552
+.Func_82552:
 	ld de, Frameset_aa09a
 	jr .UpdateAnimation_PopHL
 
-.Func_82557
+.Func_82557:
 	ld de, Frameset_aa09d
 	jr .UpdateAnimation_PopHL
 
-.Func_8255c
+.Func_8255c:
 	ld de, Frameset_aa0bc
 	pop hl
 	call .UpdateAnimation
 	ld b, $07
 	jr .Func_8259a
 
-.Func_82567
+.Func_82567:
 	ld de, Frameset_aa0a3
 	jr .UpdateAnimation_PopHL
 
-.Func_8256c
+.Func_8256c:
 	ld de, Frameset_aa0c1
 	pop hl
 	call .UpdateAnimation
 	ld b, $05
 	jr .Func_8259a
 
-.Func_82577
+.Func_82577:
 	ld de, Frameset_aa0a9
 	jr .UpdateAnimation_PopHL
 
-.Func_8257c
+.Func_8257c:
 	ld de, Frameset_aa0ae
 	jr .UpdateAnimation_PopHL
 
-.Func_82581
+.Func_82581:
 	ld de, Frameset_aa0b1
 	jr .UpdateAnimation_PopHL
 
-.Func_82586
+.Func_82586:
 	ld de, Frameset_aa0c6
 	jr .UpdateAnimation_PopHL
 
-.Func_8258b
+.Func_8258b:
 	ld de, Frameset_aa0b4
 	jr .UpdateAnimation_PopHL
 
-.Func_82590
+.Func_82590:
 	ld de, Frameset_aa0b9
 ;	fallthrough
 
-.UpdateAnimation_PopHL
+.UpdateAnimation_PopHL:
 	pop hl
 ;	fallthrough
-.UpdateAnimation
+.UpdateAnimation:
 	ld b, $2a
 	call UpdateOWAnimation
 	ret
 
-.Func_8259a
+.Func_8259a:
 	ld a, [wOWAnimationFinished]
 	cp $ff
 	ret nz
@@ -5785,12 +5785,12 @@ LoadTopBarButtonAttributes:
 	call .LoadSelectedAttrs ; can be fallthrough
 	ret
 
-.LoadSelectedAttrs
+.LoadSelectedAttrs:
 	srl b
 	ret nc
 	jr Func_8269f
 
-.LoadSelectableAttrs
+.LoadSelectableAttrs:
 	srl b
 	jr c, Func_8269f
 	ld hl, Data_826be ; non-selectable
@@ -5962,7 +5962,7 @@ HandleBottomBar:
 
 ; returns carry if opening
 ; the bottom bar is not possible
-.CheckBottomBarPossible
+.CheckBottomBarPossible:
 	ld a, [wOWLevel]
 	add a
 	; if it's either $00 (the Temple) or $80 (Junction)
@@ -5977,7 +5977,7 @@ HandleBottomBar:
 	scf
 	ret
 
-.HandleClosedBottomBar
+.HandleClosedBottomBar:
 	ld a, [wHasMagnifyingGlass]
 	and a
 	ret z ; no magnifying glass, exit
@@ -6000,7 +6000,7 @@ HandleBottomBar:
 	ld [wBottomBarState], a
 	ret
 
-.HandleOpenedBottomBar
+.HandleOpenedBottomBar:
 	ld a, [wJoypadDown]
 	bit B_BUTTON_F, a
 	ret nz ; B button still pressed
@@ -6015,7 +6015,7 @@ HandleBottomBar:
 	ld [wBottomBarState], a
 	ret
 
-.OpenBottomBar
+.OpenBottomBar:
 	ld a, [wJoypadDown]
 	bit B_BUTTON_F, a
 	jr z, .no_b_btn
@@ -6036,7 +6036,7 @@ HandleBottomBar:
 	ld [wBottomBarState], a
 	ret
 
-.InitBar
+.InitBar:
 	ld hl, wBottomBarFlags
 	set 4, [hl]
 	xor a
@@ -6046,7 +6046,7 @@ HandleBottomBar:
 	inc [hl]
 	ret
 
-.OpenWindow
+.OpenWindow:
 	ld hl, wWY
 	ld b, [hl]
 	ld a, $78
@@ -6067,7 +6067,7 @@ HandleBottomBar:
 	inc [hl]
 	ret
 
-.SetVisibleTreasures
+.SetVisibleTreasures:
 	ld hl, wMagnifyingGlassCounter
 	inc [hl]
 	ld a, [hl]
@@ -6112,7 +6112,7 @@ HandleBottomBar:
 	inc [hl]
 	ret
 
-.SetBottomBarAsOpen
+.SetBottomBarAsOpen:
 	ld a, BOTBAR_OPENED
 	ld [wBottomBarAction], a
 	xor a
@@ -6123,14 +6123,14 @@ HandleBottomBar:
 	set 7, [hl]
 	ret
 
-.CloseBottomBar
+.CloseBottomBar:
 	ld a, [wBottomBarState]
 	jumptable
 
 	dw .CloseWindow
 	dw .DeinitBar
 
-.CloseWindow
+.CloseWindow:
 	ld hl, wWY
 	ld a, [hl]
 	cp SCREEN_HEIGHT_PX
@@ -6148,7 +6148,7 @@ HandleBottomBar:
 	inc [hl]
 	ret
 
-.DeinitBar
+.DeinitBar:
 	ld hl, wBottomBarFlags
 	ld a, $1 << 6
 	and [hl]

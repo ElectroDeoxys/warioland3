@@ -714,7 +714,7 @@ OmodonmekaWithOmodonFunc:
 .asm_4261e
 	ret
 
-.Func_4261f
+.Func_4261f:
 	ld a, [wCurObjScreenYPos]
 	ld c, a
 	ld a, [hl]

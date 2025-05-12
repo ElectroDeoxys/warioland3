@@ -153,7 +153,7 @@ UpdateGolfWarioAnimation::
 	bankswitch
 	ret
 
-.OAMBanks
+.OAMBanks:
 	db BANK(OAM_14000)
 	db BANK(OAM_1426c)
 	db BANK(OAM_14d1b)
@@ -167,7 +167,7 @@ UpdateGolfWarioAnimation::
 	db BANK(OAM_14a82)
 	db BANK(OAM_1fc31b)
 
-.OAMTable
+.OAMTable:
 	; facing right
 	dw OAM_14000
 	dw OAM_1426c
@@ -196,7 +196,7 @@ UpdateGolfWarioAnimation::
 	dw OAM_14a82
 	dw OAM_1fc31b
 
-.Framesets
+.Framesets:
 	; facing right
 	dw Frameset_1425f
 	dw Frameset_149c5

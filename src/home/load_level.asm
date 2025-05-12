@@ -104,7 +104,7 @@ ReloadLevelObjects::
 	sramswitch
 	ret
 
-.Decompress
+.Decompress:
 	ld c, LEVEL_WIDTH
 	ld hl, sLevelBlockObjectMap
 .loop_data

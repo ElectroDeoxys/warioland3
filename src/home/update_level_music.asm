@@ -97,7 +97,7 @@ UpdateLevelMusic::
 	bankswitch
 	ret
 
-.BossMusicIDs
+.BossMusicIDs:
 	dw MUSIC_HIDDEN_FIGURE_BATTLE_1
 	dw MUSIC_BOSS_BATTLE
 	dw MUSIC_BOSS_DEFEAT
