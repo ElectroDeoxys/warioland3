@@ -77,10 +77,10 @@ DoorTransition::
 	ld [hli], a
 	ld a, [hl]
 	adc $00
-	cp HIGH(v0BGMap0 + $400)
+	cp HIGH(v0BGMap0 + BG_MAP_WIDTH * BG_MAP_HEIGHT)
 	jr c, .no_wrap_up
 	; wrap up
-	sub HIGH($400)
+	sub HIGH(BG_MAP_WIDTH * BG_MAP_HEIGHT)
 .no_wrap_up
 	ld [hld], a
 

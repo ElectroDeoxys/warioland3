@@ -37,7 +37,7 @@ _InitCutscene:
 	call WriteAToHL_BCTimes
 
 	call VBlank_Cutscene
-	call InitLoadedCutscene
+	call InitEventCutscene
 
 	xor a
 	ldh [rSCY], a
@@ -67,7 +67,7 @@ _InitCutscene:
 
 ; runs the init function from CutsceneInitFunctions
 ; for the cutscene in [wCurEvent]
-InitLoadedCutscene:
+InitEventCutscene:
 	xor a
 	ld [wLCDCFlagsToFlip], a
 	call ClearVirtualOAM
@@ -417,7 +417,7 @@ CutsceneInitFunctions:
 	ld b, BANK(Pals_b8c80)
 	ld hl, Pals_b8c80
 	call LoadFarPalsToTempPals2
-	jp Func_9cc3c
+	jp SetBGPriorityOnTopRows_BGMap1
 
 .InitCutscene1e:
 	ld b, BANK(Pals_b80c0)
@@ -525,7 +525,7 @@ CutsceneInitFunctions:
 	call LoadFarPalsToTempPals2
 	call Func_9c931
 	call Func_9cab8
-	call Func_9cc28
+	call SetBGPriorityOnTopRows_Vram0
 	call Func_9cc4f
 	jp Func_9dc6a
 
@@ -602,7 +602,7 @@ CutsceneInitFunctions:
 	ld hl, LevelMainTiles31
 	call LoadFarTiles
 	call Func_9caf9
-	jp Func_9cc24
+	jp SetBGPriorityOnTopRows_Vram1
 
 .InitCutscene43:
 	ld b, BANK(Pals_b8440)
@@ -698,7 +698,7 @@ CutsceneInitFunctions:
 	call Func_9c931
 	call Func_9cad2
 	call Func_9cbd6
-	call Func_9cc28
+	call SetBGPriorityOnTopRows_Vram0
 	jp Func_9e655
 
 .InitCutscene56:
@@ -715,7 +715,7 @@ CutsceneInitFunctions:
 	call ClearTempPals_Bank27
 	call Func_9c937
 	call Func_9cb3a
-	call Func_9cc28
+	call SetBGPriorityOnTopRows_Vram0
 	jp Func_9e79a
 
 .InitCutscene58:
@@ -751,8 +751,8 @@ CutsceneInitFunctions:
 
 	call Func_9ca6a
 	call Func_9cbaf
-	call Func_9cc3c
-	call Func_9cc28
+	call SetBGPriorityOnTopRows_BGMap1
+	call SetBGPriorityOnTopRows_Vram0
 	call Func_9cc4f
 	ret
 
@@ -1112,17 +1112,16 @@ Func_9cc17:
 	call LoadCutsceneTilemap1
 	ret
 
-Func_9cc24:
-	ld d, $88
-	jr Func_9cc2a
-
-Func_9cc28:
-	ld d, $80
+SetBGPriorityOnTopRows_Vram1:
+	ld d, BGF_BANK1 | BGF_PRI
+	jr SetBGPriorityOnTopRows
+SetBGPriorityOnTopRows_Vram0:
+	ld d, BGF_BANK0 | BGF_PRI
 ;	fallthrough
-Func_9cc2a:
+SetBGPriorityOnTopRows:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, v1BGMap0
+	hlbgcoord 0, 0, v1BGMap0
 	ld bc, 5 * BG_MAP_WIDTH
 	ld a, d
 	call WriteAToHL_BCTimes
@@ -1130,25 +1129,27 @@ Func_9cc2a:
 	ldh [rVBK], a
 	ret
 
-Func_9cc3c:
+SetBGPriorityOnTopRows_BGMap1:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, v1BGMap1
+	hlbgcoord 0, 0, v1BGMap1
 	ld bc, 5 * BG_MAP_WIDTH
-	ld a, $80
+	ld a, BGF_BANK0 | BGF_PRI
 	call WriteAToHL_BCTimes
 	xor a
 	ldh [rVBK], a
 	ret
 
+; fills 6x7 rectangle in attribute map at coordinate 0, 5
+; sets those tiles to use vram0 tiles and with priority
 Func_9cc4f:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld d, $80
+	ld d, BGF_BANK0 | BGF_PRI
 	hlbgcoord 0, 5
-	ld e, 7
+	ld e, 7 ; num rows
 .loop_outer
-	ld b, 6
+	ld b, 6 ; num cols
 	ld a, d
 .loop_inner
 	ld [hli], a
@@ -1159,7 +1160,7 @@ Func_9cc4f:
 	ld a, BG_MAP_WIDTH - 6
 	add l
 	ld l, a
-	ld a, $00
+	ld a, 0
 	adc h
 	ld h, a
 	jr .loop_outer
@@ -1211,14 +1212,14 @@ VBlank_Cutscene:
 
 	ld a, [wLCDCFlagsToFlip]
 	and a
-	jr z, .asm_9cccf
+	jr z, .skip_lcd_flip
 	ld hl, rLCDC
 	xor [hl]
 	ld [hl], a
 	xor a
 	ld [wLCDCFlagsToFlip], a
 
-.asm_9cccf
+.skip_lcd_flip
 	ld b, BANK(ApplyPalConfig1)
 	ld a, [wROMBank]
 	push af

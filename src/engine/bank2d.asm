@@ -3837,10 +3837,12 @@ UpdateOWTornado:
 	ld hl, wSceneObj1
 	call ApplyOWMovement
 	ret nz
+	; only play SFX if not playing a scene...
 	ld a, [wCurEvent]
 	and a
 	ret nz
-	ld a, [wTopBarState]
+	; ...and if no bars are open
+	ld a, [wOWBarsState]
 	and a
 	ret nz
 	play_sfx SFX_11D

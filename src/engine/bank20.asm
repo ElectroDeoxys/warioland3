@@ -545,7 +545,7 @@ Func_803e6:
 	ld a, [wTransitionParam]
 	and a
 	ret z
-	ld a, [wTopBarState]
+	ld a, [wOWBarsState]
 	and a
 	ret nz
 	ld a, [wMapSideLevelID]
@@ -563,6 +563,8 @@ InitOverworld:
 	xor a
 	ld [wRoomAnimatedTilesEnabled], a
 
+	; if transition was from New Game,
+	; set 0th treasure as collected
 	ld a, [wLastTransitionParam]
 	inc a
 	jr nz, .skip_set_first_treasure_flag
@@ -571,14 +573,15 @@ InitOverworld:
 	set 0, [hl]
 .skip_set_first_treasure_flag
 
+	; load crayon flags from collected treasures
 	call GetCrayonFlags
 
-	ld a, [wTopBarState]
-	cp TOPBARST_INPUT
+	ld a, [wOWBarsState]
+	cp OWBARS_INPUT_TOP
 	jr z, .skip_get_level_index
 	ld a, [wOWLevel]
 	cp LEVEL_GOLF_BUILDING
-	jp nc, .GolfBuilding
+	jp nc, .golf_building
 	ld b, a
 	call GetMapLevelID
 	ld a, b
@@ -588,32 +591,34 @@ InitOverworld:
 .skip_get_level_index
 	call ClearOWWRAM
 
+	; jump to corresponding handler depending
+	; on what transition to map it is
 	ld a, [wLastTransitionParam]
 	and a
-	jr z, .asm_8048a ; == 0
+	jr z, .load_map_without_scene ; == 0
 	cp TRANSITION_RETURN_TO_MAP
-	jr z, .asm_8048a
+	jr z, .load_map_without_scene
 	cp TRANSITION_EPILOGUE_NOT_PERFECT
-	jr z, .asm_804a9
+	jr z, .epilogue
 	cp TRANSITION_EPILOGUE_PERFECT
-	jr z, .asm_804a9
+	jr z, .epilogue
 	cp TRANSITION_GAME_OVER
-	jr z, .asm_804b5
+	jr z, .game_over
 	inc a
-	jr nz, .asm_8045f
+	jr nz, .check_if_unlocked_event
 
 	; TRANSITION_NEW_GAME
 	ld a, EVENT_PROLOGUE
 	ld [wCurEvent], a
-	jr .load_cutscene
-
-.asm_8045f
+	jr .cutscene_check
+.check_if_unlocked_event
+	; transition was from collected treasure
+	; if an event is unlocked, play cutscene
 	call CheckIfTreasureUnlocksEvent
-	jr nz, .load_cutscene
-	jr .asm_8048a
-
-.load_cutscene
-	call Func_804c9
+	jr nz, .cutscene_check
+	jr .load_map_without_scene
+.cutscene_check
+	call SetStoredTransitionParamAsReturnToMap
 	farcall CheckIfEventHasCutscene
 	ld a, [wEventWithCutscene]
 	and a
@@ -621,12 +626,15 @@ InitOverworld:
 	jr .play_cutscene
 
 .after_cutscene
+	; check if there's a OW scene to play
 	ld a, [wCurEvent]
 	call GetOWSceneParams
-	jr z, .asm_8048a
-	jr .asm_80497
+	jr z, .load_map_without_scene
+	jr .play_ow_scene
 
-.asm_8048a
+.load_map_without_scene
+	; simply loads and shows the overworld map
+	; for player to navigate
 	xor a ; EVENT_00
 	ld [wCurEvent], a
 	ld a, SST_OVERWORLD_09
@@ -634,30 +642,33 @@ InitOverworld:
 	call Func_803e6
 	ret
 
-.asm_80497
-	call Func_804d4
+.play_ow_scene
+	; plays the OW scene
+	call UpdateStoredTransitionParam
 	ld a, SST_OVERWORLD_OW_SCENE
 	ld [wSubState], a
 	ret
 
 .play_cutscene
-	call Func_804d4
+	; plays the cutscene
+	call UpdateStoredTransitionParam
 	ld a, SST_OVERWORLD_CUTSCENE
 	ld [wSubState], a
 	ret
 
-.asm_804a9
+.epilogue
+	; plays epilogue sequence
 	ld a, TRANSITION_RETURN_TO_MAP
-	ld [w2d00d], a
+	ld [wStoredTransitionParam], a
 	ld a, EVENT_EPILOGUE
 	ld [wCurEvent], a
 	jr .after_cutscene
 
-.asm_804b5
+.game_over
 	call Func_803e6
 	ret
 
-.GolfBuilding
+.golf_building
 	xor a
 	ld [wNextMapSide], a
 	ld [wMapSideLevelID], a
@@ -666,18 +677,18 @@ InitOverworld:
 	call Func_803e6
 	ret
 
-Func_804c9:
-	ld a, [wTopBarState]
+SetStoredTransitionParamAsReturnToMap:
+	ld a, [wOWBarsState]
 	and a
-	ret nz
+	ret nz ; is manual cutscene
 	ld a, TRANSITION_RETURN_TO_MAP
-	ld [w2d00d], a
+	ld [wStoredTransitionParam], a
 	ret
 
-Func_804d4:
-	ld a, [wTopBarState]
+UpdateStoredTransitionParam:
+	ld a, [wOWBarsState]
 	and a
-	ret nz
+	ret nz ; exit if any bar is open
 	ld a, [wOWSceneAction]
 	cp SPECIAL_ACTION
 	ret z
@@ -686,7 +697,7 @@ Func_804d4:
 	ret z
 	cp TRANSITION_EPILOGUE_PERFECT
 	ret z
-	ld [w2d00d], a
+	ld [wStoredTransitionParam], a
 	ret
 
 ; waits for A button input
@@ -698,7 +709,7 @@ Func_804ec:
 	inc [hl]
 	ret
 
-Func_804f7:
+InitOWScene:
 	call DisableLCD
 	stop_music2
 
@@ -723,10 +734,10 @@ Func_804f7:
 	ld [wCurMapSide], a
 	jumptable
 
-	dw Func_80851 ; NORTH
-	dw Func_8091e ; WEST
-	dw Func_80930 ; SOUTH
-	dw Func_8094e ; EAST
+	dw InitMapSideForScene_North ; NORTH
+	dw InitMapSideForScene_West  ; WEST
+	dw InitMapSideForScene_South ; SOUTH
+	dw InitMapSideForScene_East  ; EAST
 
 Func_80540:
 	call Func_818ad
@@ -857,7 +868,7 @@ InitEastMapSide:
 .Func_80655
 	ld a, KEY_CARD_RED
 	call IsTreasureCollected
-	jp z, Func_804c9
+	jp z, SetStoredTransitionParamAsReturnToMap
 	ret
 
 Func_8065e:
@@ -874,7 +885,7 @@ Func_8065e:
 	decompress_bgmap0 BGMap_85b91, v0BGMap0, 29
 	decompress_bgmap1 BGMap_85bc4, v1BGMap0, 29
 
-	ld a, [wTopBarState]
+	ld a, [wOWBarsState]
 	and a
 	ld a, $ec
 	jr nz, .asm_806b6
@@ -955,8 +966,8 @@ Func_8065e:
 	xor a
 	ldh [rVBK], a
 
-	ld a, [wTopBarState]
-	cp TOPBARST_INPUT
+	ld a, [wOWBarsState]
+	cp OWBARS_INPUT_TOP
 	jr nz, .asm_80809
 	call UpdateTopBar.InitTopBarButtons
 	hlbgcoord 0, 21, wAttrmap
@@ -993,7 +1004,7 @@ Func_8065e:
 	farcall DrawCoinCount
 	call SetCompassSprite
 
-	ld a, [wTopBarState]
+	ld a, [wOWBarsState]
 	and a
 	call z, DrawBottomBar
 
@@ -1009,7 +1020,7 @@ Func_8065e:
 	inc [hl]
 	ret
 
-Func_80851:
+InitMapSideForScene_North:
 	call LoadPalsForOWScene
 	call LoadOverworldCommonGfx
 	call LoadOverworld1Gfx
@@ -1104,7 +1115,7 @@ Func_8086f:
 	inc [hl]
 	ret
 
-Func_8091e:
+InitMapSideForScene_West:
 	call LoadPalsForOWScene
 	call LoadOverworld2Gfx
 	call LoadOverworldCommonGfx
@@ -1112,7 +1123,7 @@ Func_8091e:
 	call Func_80ae7
 	jp Func_8086f
 
-Func_80930:
+InitMapSideForScene_South:
 	ld a, [wCurEvent]
 	cp EVENT_SUMMON_MOON
 	jr nz, .asm_8093c
@@ -1126,7 +1137,7 @@ Func_80930:
 	call Func_80af5
 	jp Func_8086f
 
-Func_8094e:
+InitMapSideForScene_East:
 	ld a, EVENT_SUMMON_SUN
 	call Func_819c6
 	ld [wGotSunMedallion], a
@@ -1609,7 +1620,7 @@ UpdateCutscene:
 	ret
 
 .SkipCutsceneIfAble:
-	ld a, [wTopBarState]
+	ld a, [wOWBarsState]
 	and a
 	ret z
 	; was a cutscene triggered from the Top Bar
@@ -1717,7 +1728,7 @@ Func_80e89:
 	farcall UpdateCommonOWAnimations
 
 	call UpdateTopBar
-	ld a, [wTopBarState]
+	ld a, [wOWBarsState]
 	and a
 	jp nz, Func_81055
 
@@ -1891,7 +1902,7 @@ Func_80ff7:
 	ld a, [wJoypadPressed]
 	bit SELECT_F, a
 	jr z, .asm_81016
-	ld hl, wTopBarState
+	ld hl, wOWBarsState
 	inc [hl]
 	jr Func_81055
 
@@ -2963,12 +2974,12 @@ SetDayNightSpellSelectable:
 	ret
 
 SetCutsceneButtonSelectable:
-	ld a, [w2d00d]
+	ld a, [wStoredTransitionParam]
 	cp TRANSITION_RETURN_TO_MAP
-	ret z
-Func_817a9:
+	ret z ; no playable cutscene
+SetCutsceneButtonSelectable_GotTransitionParam:
 	and a
-	ret z
+	ret z ; invalid param for cutscene
 	ld hl, wTopBarSelectableButtons
 	set TOPBAR_CUTSCENE_F, [hl]
 	ret
@@ -2993,8 +3004,8 @@ Func_817b1:
 	dec a
 	call LoadEventTreasures
 	ld a, [w2dfff]
-	ld [w2d00d], a
-	jr Func_817a9
+	ld [wStoredTransitionParam], a
+	jr SetCutsceneButtonSelectable_GotTransitionParam
 
 SetNextPrevMapButtonsSelectable:
 	call .CheckAccessibleMapSides
@@ -3059,7 +3070,7 @@ GetAccessibleMapFlags:
 	ret
 
 UpdateNextPrevMapButtonsSelectable:
-	ld a, [wTopBarState]
+	ld a, [wOWBarsState]
 	and a
 	ret z
 	ld a, [wTopBarSelection]
@@ -3163,7 +3174,7 @@ Func_818ad:
 	farcall UpdateCommonOWAnimations
 	farcall UpdateMapSideOWAnimations
 
-	ld a, [wTopBarState]
+	ld a, [wOWBarsState]
 	and a
 	jr z, .no_top_bar
 	ld a, [wJoypadPressed]
@@ -3222,6 +3233,7 @@ Func_81900:
 
 Func_81931:
 	stop_sfx
+
 	ld a, [wCurEvent]
 	ld b, a
 	xor a
@@ -5091,27 +5103,27 @@ Func_82234:
 	ret
 
 UpdateTopBar:
-	ld hl, wTopBarStateCounter
+	ld hl, wOWBarsStateCounter
 	inc [hl]
-	ld a, [wTopBarState]
+	ld a, [wOWBarsState]
 	and a
 	ret z
 	dec a
 	jumptable
 
-	dw .StartCloseBottomBar     ; TOPBARST_START_CLOSE_BOT_BAR
-	dw .HandleBottomBarClose    ; TOPBARST_HANDLE_CLOSE_BOT_BAR
-	dw .OpenTopBar              ; TOPBARST_OPEN
-	dw .HandleInput             ; TOPBARST_INPUT
-	dw .CloseTopBar             ; TOPBARST_CLOSE
+	dw .StartCloseBottomBar     ; OWBARS_START_CLOSE_BOT
+	dw .HandleBottomBarClose    ; OWBARS_HANDLE_CLOSE_BOT
+	dw .OpenTopBar              ; OWBARS_OPEN_TOP
+	dw .HandleInput             ; OWBARS_INPUT_TOP
+	dw .CloseTopBar             ; OWBARS_CLOSE_TOP
 
-	dw .Cutscene                ; TOPBARST_EVENT
-	dw .Collection              ; TOPBARST_COLLECTION
-	dw .NextMap                 ; TOPBARST_NEXT_MAP
+	dw .Cutscene                ; OWBARS_EVENT
+	dw .Collection              ; OWBARS_COLLECTION
+	dw .NextMap                 ; OWBARS_NEXT_MAP
 
-	dw .DayNight                ; TOPBARST_DAY_NIGHT
-	dw .DelayDayNightTransition ; TOPBARST_DAY_NIGHT_DELAY
-	dw .DoDayNightTransition    ; TOPBARST_DAY_NIGHT_TRANSITION
+	dw .DayNight                ; OWBARS_DAY_NIGHT
+	dw .DelayDayNightTransition ; OWBARS_DAY_NIGHT_DELAY
+	dw .DoDayNightTransition    ; OWBARS_DAY_NIGHT_TRANSITION
 
 .StartCloseBottomBar:
 	; mark bottom bar as closing
@@ -5122,7 +5134,7 @@ UpdateTopBar:
 	ld [wBottomBarState], a
 	ld [wMagnifyingGlassCounter], a
 
-	ld hl, wTopBarState
+	ld hl, wOWBarsState
 	inc [hl]
 	ret
 
@@ -5156,7 +5168,7 @@ UpdateTopBar:
 	ld a, 4 ; number of pals
 	ld [wPalConfig1Number], a
 
-	ld hl, wTopBarState
+	ld hl, wOWBarsState
 	inc [hl]
 	ret
 
@@ -5188,7 +5200,7 @@ UpdateTopBar:
 	; fully open, advance state
 	ld a, [wTransitionParam]
 	ld [w2d02c], a
-	ld hl, wTopBarState
+	ld hl, wOWBarsState
 	inc [hl]
 .still_opening
 	call DrawTopBar
@@ -5203,7 +5215,7 @@ UpdateTopBar:
 	and B_BUTTON | SELECT
 	jr z, .done_input
 	play_sfx SFX_0EA
-	ld hl, wTopBarState
+	ld hl, wOWBarsState
 	inc [hl]
 .done_input
 	jp DrawTopBar
@@ -5218,7 +5230,7 @@ UpdateTopBar:
 
 	xor a
 	ld [w2d013], a
-	ld [wTopBarState], a ; TOPBARST_NONE
+	ld [wOWBarsState], a ; OWBARS_NONE
 	ld hl, Pals_84900 palette 4
 	ld de, 8 palettes
 	ld a, [wCurMapSide]
@@ -5252,19 +5264,19 @@ UpdateTopBar:
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jr nz, .skip_cutscene_wait
-	ld a, [wTopBarStateCounter]
+	ld a, [wOWBarsStateCounter]
 	cp 30
 	jr c, .wait_cutscene
 .skip_cutscene_wait
-	ld a, [w2d00d]
+	ld a, [wStoredTransitionParam]
 	ld [wTransitionParam], a
 	xor a
 	ld [wSubState], a
 	xor a
-	ld hl, wTopBarStateCounter
+	ld hl, wOWBarsStateCounter
 	ld [hld], a
-	ld a, TOPBARST_INPUT
-	ld [hl], a ; wTopBarState
+	ld a, OWBARS_INPUT_TOP
+	ld [hl], a ; wOWBarsState
 .wait_cutscene
 	call DrawTopBar
 	ret
@@ -5273,15 +5285,15 @@ UpdateTopBar:
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jr nz, .skip_collection_wait
-	ld a, [wTopBarStateCounter]
+	ld a, [wOWBarsStateCounter]
 	cp 30
 	jr c, .wait_collection
 .skip_collection_wait
 	xor a
-	ld hl, wTopBarStateCounter
+	ld hl, wOWBarsStateCounter
 	ld [hld], a
-	ld a, TOPBARST_INPUT
-	ld [hl], a ; wTopBarState
+	ld a, OWBARS_INPUT_TOP
+	ld [hl], a ; wOWBarsState
 	ld a, SST_OVERWORLD_COLLECTION
 	ld [wSubState], a
 .wait_collection
@@ -5292,15 +5304,15 @@ UpdateTopBar:
 	ld a, [wJoypadPressed]
 	bit A_BUTTON_F, a
 	jr nz, .skip_next_map_wait
-	ld a, [wTopBarStateCounter]
+	ld a, [wOWBarsStateCounter]
 	cp 30
 	jr c, .wait_next_map
 .skip_next_map_wait
 	xor a
-	ld hl, wTopBarStateCounter
+	ld hl, wOWBarsStateCounter
 	ld [hld], a
-	ld a, TOPBARST_INPUT
-	ld [hl], a ; wTopBarState
+	ld a, OWBARS_INPUT_TOP
+	ld [hl], a ; wOWBarsState
 	ld a, [wOWUIObj1State]
 	ld b, 1
 	cp $0a
@@ -5356,7 +5368,7 @@ UpdateTopBar:
 	call DoDayNightSpell
 	call LoadTopBarButtonAttributes
 	call ApplyTopBarButtonAttributes
-	ld hl, wTopBarState
+	ld hl, wOWBarsState
 	inc [hl]
 	ret
 
@@ -5367,7 +5379,7 @@ UpdateTopBar:
 	cp $07
 	jr nz, .skip_transition
 .start_transition
-	ld hl, wTopBarState
+	ld hl, wOWBarsState
 	inc [hl]
 .skip_transition
 	call DrawTopBar
@@ -5383,8 +5395,8 @@ UpdateTopBar:
 	call VBlank_Overworld
 	ei
 
-	ld a, TOPBARST_INPUT
-	ld [wTopBarState], a
+	ld a, OWBARS_INPUT_TOP
+	ld [wOWBarsState], a
 .still_transitioning
 	call DrawTopBar
 	ret
@@ -5660,69 +5672,66 @@ HandleTopBarSelection:
 	xor a
 	ret
 
-.DayNight
+.DayNight:
 	call .ShowPressedButton
 	debgcoord 11, 19, wAttrmap
 	call .ApplyPressedButtonAttrs
-	ld a, TOPBARST_DAY_NIGHT
-	ld [wTopBarState], a
+	ld a, OWBARS_DAY_NIGHT
+	ld [wOWBarsState], a
 
 .play_selection_sfx
 	play_sfx SFX_SELECTION
 	scf
 	ret
 
-.Cutscene
-	ld a, [w2d00d]
+.Cutscene:
+	ld a, [wStoredTransitionParam]
 	and a
 	ret z
 	call .ShowPressedButton
 	debgcoord 9, 19, wAttrmap
 	call .ApplyPressedButtonAttrs
-	ld a, TOPBARST_EVENT
-	ld [wTopBarState], a
+	ld a, OWBARS_EVENT
+	ld [wOWBarsState], a
 	xor a
-	ld [wTopBarStateCounter], a
+	ld [wOWBarsStateCounter], a
 	jr .play_selection_sfx
 
-.Collection
+.Collection:
 	call .ShowPressedButton
 	debgcoord 7, 19, wAttrmap
 	call .ApplyPressedButtonAttrs
-	ld a, TOPBARST_COLLECTION
-	ld [wTopBarState], a
+	ld a, OWBARS_COLLECTION
+	ld [wOWBarsState], a
 	xor a
-	ld [wTopBarStateCounter], a
+	ld [wOWBarsStateCounter], a
 	ld a, FALSE
 	ld [wIsCollectionOpen], a
 	jr .play_selection_sfx
 
-.NextMap
+.NextMap:
 	call .ShowPressedButton
 	call .ShowNextMapIndicatorFlash
-	ld a, TOPBARST_NEXT_MAP
-	ld [wTopBarState], a
+	ld a, OWBARS_NEXT_MAP
+	ld [wOWBarsState], a
 	xor a
-	ld [wTopBarStateCounter], a
+	ld [wOWBarsStateCounter], a
 	jr .play_selection_sfx
 
-.PrevMap
+.PrevMap:
 	call .ShowPressedButton
 	call .ShowNextMapIndicatorFlash
-	ld a, TOPBARST_NEXT_MAP
-	ld [wTopBarState], a
+	ld a, OWBARS_NEXT_MAP
+	ld [wOWBarsState], a
 	xor a
-	ld [wTopBarStateCounter], a
+	ld [wOWBarsStateCounter], a
 	jr .play_selection_sfx
 
 .ShowNextMapIndicatorFlash:
 	ld hl, wOWUIObj2State
 	jr .adv_obj_state
-
 .ShowPressedButton:
 	ld hl, wOWUIObj1State
-;	fallthrough
-
 .adv_obj_state
 	ld a, [hl]
 	inc a

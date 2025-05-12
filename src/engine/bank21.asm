@@ -1972,7 +1972,7 @@ Func_84b97:
 	ret
 
 .Func_84bf6:
-	ld a, [wTopBarState]
+	ld a, [wOWBarsState]
 	and a
 	jr nz, .asm_84bff
 	ld [wDayNight], a ; $0
@@ -3409,167 +3409,167 @@ Func_854ee:
 	jr .loop_2
 
 Data_8550b::
-	dw wTilemap + $109
+	dwcoord 9, 8, wTilemap
 	db $6d, $6e, $6e, $6e, $79, $70
 	db $00, $00, $00, $20, $00, $70
 
-	dw wTilemap + $129
+	dwcoord 9, 9, wTilemap
 	db $6c, $7c, $7c, $7c, $6c, $70
 	db $00, $09, $09, $09, $20, $70
 
-	dw wTilemap + $149
+	dwcoord 9, 10, wTilemap
 	db $7d, $7e, $7e, $7e, $7d, $70
 	db $00, $00, $00, $20, $20, $70
 
-	db $00
+	db $00 ; end
 
 Data_85536::
-	dw wTilemap + $27
+	dwcoord 7, 1, wTilemap
 	db $c4, $75, $76, $75, $7f, $77, $c4, $70
 	db $09, $0d, $0d, $2d, $0d, $0d, $29, $70
 
-	db $00
+	db $00 ; end
 
 Data_85549::
-	dw wTilemap + $88
+	dwcoord 8, 4, wTilemap
 	db $56, $57, $45, $46, $70
 	db $01, $01, $01, $01, $70
 
-	dw wTilemap + $a8
+	dwcoord 8, 5, wTilemap
 	db $58, $59, $5a, $5b, $70
 	db $01, $01, $01, $01, $70
 
-	dw wTilemap + $c8
+	dwcoord 8, 6, wTilemap
 	db $5c, $5d, $5e, $5f, $70
 	db $01, $01, $01, $01, $70
 
-	db $00
+	db $00 ; end
 
 Data_8556e::
-	dw wTilemap + $1c6
+	dwcoord 6, 14, wTilemap
 	db $7e, $7e, $7e, $70
 	db $0c, $0c, $0c, $70
 
-	db $00
+	db $00 ; end
 
 Data_85579::
-	dw wTilemap + $4e
+	dwcoord 14, 2, wTilemap
 	db $20, $21, $70
 	db $01, $01, $70
 
-	dw wTilemap + $6e
+	dwcoord 14, 3, wTilemap
 	db $30, $31, $70
 	db $01, $01, $70
 
-	dw wTilemap + $8e
+	dwcoord 14, 4, wTilemap
 	db $22, $23, $70
 	db $05, $05, $70
 
-	dw wTilemap + $ae
+	dwcoord 14, 5, wTilemap
 	db $32, $33, $70
 	db $05, $05, $70
 
-	dw wTilemap + $ce
+	dwcoord 14, 6, wTilemap
 	db $24, $25, $70
 	db $05, $05, $70
 
-	dw wTilemap + $ee
+	dwcoord 14, 7, wTilemap
 	db $34, $35, $70
 	db $05, $05, $70
 
-	dw wTilemap + $10e
+	dwcoord 14, 8, wTilemap
 	db $26, $27, $70
 	db $05, $05, $70
 
-	db $00
+	db $00 ; end
 
 Data_855b2::
-	dw wTilemap + $c5
+	dwcoord 5, 6, wTilemap
 	db $00, $70
 	db $00, $70
 
-	dw wTilemap + $e5
+	dwcoord 5, 7, wTilemap
 	db $0d, $0e, $0f, $04, $70
 	db $03, $03, $00, $00, $70
 
-	dw wTilemap + $106
+	dwcoord 6, 8, wTilemap
 	db $00, $02, $12, $13, $70
 	db $0f, $0f, $03, $03, $70
 
-	dw wTilemap + $127
+	dwcoord 7, 9, wTilemap
 	db $14, $15, $16, $70
 	db $03, $03, $03, $70
 
-	dw wTilemap + $147
+	dwcoord 7, 10, wTilemap
 	db $17, $18, $19, $70
 	db $03, $03, $03, $70
 
-	dw wTilemap + $167
+	dwcoord 7, 11, wTilemap
 	db $1a, $1b, $1c, $70
 	db $03, $03, $03, $70
 
-	dw wTilemap + $187
+	dwcoord 7, 12, wTilemap
 	db $1d, $1e, $1f, $70
 	db $03, $03, $03, $70
 
-	db $00
+	db $00 ; end
 
 Data_855f9::
-	dw wTilemap + $145
+	dwcoord 5, 10, wTilemap
 	db $19, $3e, $3f, $70
 	db $0a, $03, $03, $70
 
-	dw wTilemap + $165
+	dwcoord 5, 11, wTilemap
 	db $3d, $4e, $4f, $70
 	db $03, $03, $03, $70
 
-	db $00
+	db $00 ; end
 
 Data_8560e::
-	dw wTilemap + $48
+	dwcoord 8, 2, wTilemap
 	db $48, $49, $70, $01, $01, $70
 
-	dw wTilemap + $68
+	dwcoord 8, 3, wTilemap
 	db $58, $59, $70, $01, $01, $70
 
-	db $00
+	db $00 ; end
 
 Data_8561f::
-	dw wTilemap + $70
+	dwcoord 16, 3, wTilemap
 	db $51, $5f, $53, $70
 	db $01, $01, $01, $70
 
-	dw wTilemap + $90
+	dwcoord 16, 4, wTilemap
 	db $5c, $5d, $5e, $70
 	db $01, $00, $00, $70
 
-	dw wTilemap + $b0
+	dwcoord 16, 5, wTilemap
 	db $d9, $79, $7a, $70
 	db $29, $00, $00, $70
 
-	db $00
+	db $00 ; end
 
 Data_8563e::
-	dw wTilemap + $123
+	dwcoord 3, 9, wTilemap
 	db $6c, $6d, $6e, $6f, $70
 	db $00, $00, $00, $00, $70
 
-	dw wTilemap + $143
+	dwcoord 3, 10, wTilemap
 	db $7c, $7d, $7e, $7f, $70
 	db $00, $00, $00, $00, $70
 
-	db $00
+	db $00 ; end
 
 Data_85657::
-	dw wTilemap + $1a1
+	dwcoord 1, 13, wTilemap
 	db $f7, $f6, $f9, $f8, $f8, $f8, $f9, $f9, $f9, $40, $41, $42, $43, $2c, $2d, $f8, $f9, $f6, $70
 	db $2a, $2a, $2a, $2a, $0a, $2a, $0a, $2a, $0a, $01, $01, $01, $01, $01, $02, $0a, $0a, $0a, $70
 
-	dw wTilemap + $1c1
+	dwcoord 1, 14, wTilemap
 	db $78, $79, $78, $79, $78, $79, $78, $79, $78, $50, $51, $52, $53, $3c, $3d, $79, $78, $79, $70
 	db $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $0a, $02, $02, $02, $02, $02, $02, $0a, $0a, $0a, $70
 
-	db $00
+	db $00 ; end
 
 ; unreferenced
 BGMap_856a8::
@@ -3694,65 +3694,65 @@ Func_85acb:
 	jr .asm_85acb
 
 Data_85af4:
-	dw wTilemap + $64
+	dwcoord 4, 3, wTilemap
 	db $44, $45, $70
 	db $01, $01, $70
 
-	db $00
+	db $00 ; end
 
 Data_85afd:
-	dw wTilemap + $83
+	dwcoord 3, 4, wTilemap
 	db $46, $47, $48, $49, $70
 	db $01, $01, $01, $01, $70
 
-	db $00
+	db $00 ; end
 
 Data_85b0a:
-	dw wTilemap + $a2
+	dwcoord 2, 5, wTilemap
 	db $54, $55, $56, $57, $58, $59, $70
 	db $01, $01, $01, $03, $03, $01, $70
 
-	db $00
+	db $00 ; end
 
 Data_85b1b:
-	dw wTilemap + $c2
+	dwcoord 2, 6, wTilemap
 	db $4a, $4b, $4c, $4d, $4e, $4f, $70
 	db $01, $01, $01, $03, $03, $03, $70
 
-	db $00
+	db $00 ; end
 
 Data_85b2c:
-	dw wTilemap + $e2
+	dwcoord 2, 7, wTilemap
 	db $5a, $5b, $5c, $5d, $5e, $5f, $70
 	db $03, $03, $01, $03, $03, $03, $70
 
-	db $00
+	db $00 ; end
 
 Data_85b3d:
-	dw wTilemap + $104
+	dwcoord 4, 8, wTilemap
 	db $3e, $3f, $01, $70
 	db $03, $03, $20, $70
 
-	db $00
+	db $00 ; end
 
 Data_85b48:
-	dw wTilemap + $28
+	dwcoord 8, 1, wTilemap
 	db $c4, $75, $76, $75, $7f, $77, $c4, $70
 	db $09, $0d, $0d, $2d, $0d, $0d, $29, $70
 
-	dw wTilemap + $e8
+	dwcoord 8, 7, wTilemap
 	db $20, $21, $22, $22, $22, $21, $20, $70
 	db $03, $03, $03, $03, $23, $23, $23, $70
 
-	dw wTilemap + $108
+	dwcoord 8, 8, wTilemap
 	db $23, $24, $25, $25, $25, $24, $23, $70
 	db $03, $03, $03, $03, $23, $23, $23, $70
 
-	dw wTilemap + $128
+	dwcoord 8, 9, wTilemap
 	db $33, $34, $35, $35, $35, $34, $33, $70
 	db $02, $02, $02, $02, $22, $22, $22, $70
 
-	db $00
+	db $00 ; end
 
 BGMap_85b91::
 	INCBIN "gfx/bgmaps/map_85b91.bin.rle"

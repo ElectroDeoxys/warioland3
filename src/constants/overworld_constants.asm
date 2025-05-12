@@ -101,20 +101,20 @@ DEF TOPBAR_COLLECTION EQU (1 << TOPBAR_COLLECTION_F)
 DEF TOPBAR_NEXT_MAP   EQU (1 << TOPBAR_NEXT_MAP_F)
 DEF TOPBAR_PREV_MAP   EQU (1 << TOPBAR_PREV_MAP_F)
 
-; wTopBarState constants
+; wOWBarsState constants
 	const_def
-	const TOPBARST_NONE                 ; $0
-	const TOPBARST_START_CLOSE_BOT_BAR  ; $1
-	const TOPBARST_HANDLE_CLOSE_BOT_BAR ; $2
-	const TOPBARST_OPEN                 ; $3
-	const TOPBARST_INPUT                ; $4
-	const TOPBARST_CLOSE                ; $5
-	const TOPBARST_EVENT             ; $6
-	const TOPBARST_COLLECTION           ; $7
-	const TOPBARST_NEXT_MAP             ; $8
-	const TOPBARST_DAY_NIGHT            ; $9
-	const TOPBARST_DAY_NIGHT_DELAY      ; $a
-	const TOPBARST_DAY_NIGHT_TRANSITION ; $b
+	const OWBARS_NONE                 ; $0
+	const OWBARS_START_CLOSE_BOT      ; $1
+	const OWBARS_HANDLE_CLOSE_BOT     ; $2
+	const OWBARS_OPEN_TOP             ; $3
+	const OWBARS_INPUT_TOP            ; $4
+	const OWBARS_CLOSE_TOP            ; $5
+	const OWBARS_EVENT                ; $6
+	const OWBARS_COLLECTION           ; $7
+	const OWBARS_NEXT_MAP             ; $8
+	const OWBARS_DAY_NIGHT            ; $9
+	const OWBARS_DAY_NIGHT_DELAY      ; $a
+	const OWBARS_DAY_NIGHT_TRANSITION ; $b
 
 DEF DAYNIGHT_TRANSITION_STEPS EQU 32
 

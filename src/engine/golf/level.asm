@@ -2959,7 +2959,7 @@ VBlank_1c9e8d:
 	ldh [rSVBK], a
 	ldh [rVBK], a
 	ld a, $03
-	ldbgcoord 5, 10
+	ldcoord_a 5, 10
 	ld a, [wGolfLCDConfig]
 	ldh [rLCDC], a
 	xor a
@@ -3058,24 +3058,24 @@ VBlank_1c9f36:
 	ld a, [wGolfNumCoins + 0]
 	add a
 	add $e0
-	ldbgcoord 6, 8
+	ldcoord_a 6, 8
 	inc a
-	ldbgcoord 6, 9
+	ldcoord_a 6, 9
 	ld a, [wGolfNumCoins + 1]
 	and $f0
 	swap a
 	add a
 	add $e0
-	ldbgcoord 7, 8
+	ldcoord_a 7, 8
 	inc a
-	ldbgcoord 7, 9
+	ldcoord_a 7, 9
 	ld a, [wGolfNumCoins + 1]
 	and $0f
 	add a
 	add $e0
-	ldbgcoord 8, 8
+	ldcoord_a 8, 8
 	inc a
-	ldbgcoord 8, 9
+	ldcoord_a 8, 9
 	ld a, HIGH(wVirtualOAM)
 	jp hTransferVirtualOAM
 .end

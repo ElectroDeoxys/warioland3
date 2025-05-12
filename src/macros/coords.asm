@@ -11,11 +11,20 @@ ELSE
 ENDC
 ENDM
 
-MACRO ldbgcoord
+MACRO ldcoord_a
 ; x, y[, origin]
 IF _NARG < 3
 	ld [(\2) * BG_MAP_WIDTH + (\1) + v0BGMap0], a
 ELSE
 	ld [(\2) * BG_MAP_WIDTH + (\1) + \3], a
+ENDC
+ENDM
+
+MACRO dwcoord
+; x, y[, origin]
+IF _NARG < 3
+	dw (\2) * BG_MAP_WIDTH + (\1) + v0BGMap0
+ELSE
+	dw (\2) * BG_MAP_WIDTH + (\1) + \3
 ENDC
 ENDM

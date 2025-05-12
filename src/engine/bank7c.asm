@@ -58,9 +58,9 @@ PrintNumberMusicCoins:
 	ld a, [wNumMusicalCoins]
 	add a ; *2
 	add $a0
-	ldbgcoord 7, 15, v0BGMap1
+	ldcoord_a 7, 15, v0BGMap1
 	inc a
-	ldbgcoord 7, 16, v0BGMap1
+	ldcoord_a 7, 16, v0BGMap1
 	ret
 
 DrawLevelObjectsAfterLevelReturn::
@@ -538,26 +538,26 @@ ValidateSaveData::
 
 	ld hl, sCheckVals
 	call CheckSaveVals1
-	jr nc, .asm_1f0cec
+	jr nc, .checkvals_ok
 	ld hl, s0a000
 	call CheckSaveVals2
-	jr nc, .asm_1f0cec
+	jr nc, .checkvals_ok
 	ld hl, s0a400
 	call CheckSaveVals2
-	jr nc, .asm_1f0cec
+	jr nc, .checkvals_ok
 
 	ld hl, sBackupCheckVals
 	call CheckSaveVals1
-	jr nc, .asm_1f0cec
+	jr nc, .checkvals_ok
 	ld hl, s0a800
 	call CheckSaveVals2
-	jr nc, .asm_1f0cec
+	jr nc, .checkvals_ok
 	ld hl, s0ac00
 	call CheckSaveVals2
-	jr nc, .asm_1f0cec
+	jr nc, .checkvals_ok
 	jp .asm_1f0d0f
 
-.asm_1f0cec
+.checkvals_ok
 	ld a, [s0a790]
 	ld b, a
 	ld a, [s0a7e0]

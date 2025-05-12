@@ -111,7 +111,7 @@ INCLUDE "engine/bank2d.asm"
 
 SECTION "Cutscene Palettes", ROMX
 
-INCLUDE "data/overworld/cutscene_palettes.asm"
+INCLUDE "data/overworld/cutscene/palettes.asm"
 
 
 SECTION "Cutscene BG Maps", ROMX

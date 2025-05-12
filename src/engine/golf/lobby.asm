@@ -163,13 +163,13 @@ InitGolfLobby:
 	lb bc, $fe, $ff
 .got_price
 	ld a, d
-	ldbgcoord 11, 8
+	ldcoord_a 11, 8
 	ld a, e
-	ldbgcoord 11, 9
+	ldcoord_a 11, 9
 	ld a, b
-	ldbgcoord 12, 8
+	ldcoord_a 12, 8
 	ld a, c
-	ldbgcoord 12, 9
+	ldcoord_a 12, 9
 	ret
 
 HandleGolfLobby:

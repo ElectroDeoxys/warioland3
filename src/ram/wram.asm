@@ -1381,16 +1381,16 @@ w1dc51::
 w1dc53::
 	db
 
-wGolfObj1:: golf_obj_struct wGolfObj1
-wGolfObj2:: golf_obj_struct wGolfObj2
-wGolfObj3:: golf_obj_struct wGolfObj3
-wGolfObj4:: golf_obj_struct wGolfObj4
-wGolfObj5:: golf_obj_struct wGolfObj5
+wGolfObj1::          golf_obj_struct wGolfObj1
+wGolfObj2::          golf_obj_struct wGolfObj2
+wGolfObj3::          golf_obj_struct wGolfObj3
+wGolfObj4::          golf_obj_struct wGolfObj4
+wGolfObj5::          golf_obj_struct wGolfObj5
 
-wGolfParaGoom:: golf_obj_struct wGolfParaGoom
-wGolfWario:: golf_obj_struct wGolfWario
+wGolfParaGoom::      golf_obj_struct wGolfParaGoom
+wGolfWario::         golf_obj_struct wGolfWario
 
-wGolfOverlayText:: golf_obj_struct wGolfOverlayText
+wGolfOverlayText::   golf_obj_struct wGolfOverlayText
 wGolfParaGoomGhost:: golf_obj_struct wGolfParaGoomGhost
 
 	ds $364
@@ -1403,7 +1403,10 @@ SECTION "WRAM2", WRAMX
 wTreasuresCollected::
 	ds (NUM_TREASURES / 8) + 1
 
-w2d00d::
+; holds a transition parameter that was already processed
+; used to know if there's a cutscene that can
+; be played from the OW top bar
+wStoredTransitionParam::
 	db
 
 ; next treasure in the list to collect
@@ -1566,11 +1569,11 @@ w2d049::
 
 	ds $6
 
-; TOPBARST_* constant
-wTopBarState::
+; OWBARS_* constant
+wOWBarsState::
 	db
 
-wTopBarStateCounter::
+wOWBarsStateCounter::
 	db
 
 	ds $1

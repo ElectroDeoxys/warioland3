@@ -237,7 +237,7 @@ _InitTreasureCollection:
 	ld a, [wCollectionPage]
 	inc a
 	add $20
-	ldbgcoord 16, 1, wTilemap
+	ldcoord_a 16, 1, wTilemap
 
 	ld hl, wTilemap
 	ld de, v0BGMap1

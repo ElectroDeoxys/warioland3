@@ -8,7 +8,7 @@ OverworldStateTable::
 	dw Func_804ec
 	dw FastFadeToWhite
 
-	dw Func_804f7           ; SST_OVERWORLD_OW_SCENE
+	dw InitOWScene          ; SST_OVERWORLD_OW_SCENE
 	dw SlowFadeFromWhite
 	dw Func_80540
 
