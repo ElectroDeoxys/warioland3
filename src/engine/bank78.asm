@@ -745,14 +745,8 @@ INCBIN "gfx/pause/clear_screen1.2bpp.rle"
 ClearScreen2Gfx:
 INCBIN "gfx/pause/clear_screen2.2bpp.rle"
 
-BGMap_1e17fa:
-INCBIN "gfx/bgmaps/map_1e17fa.bin"
+BGMap_1e17fa: INCBIN "gfx/bgmaps/map_1e17fa.tilemap.rle"
+BGMap_1e1962: INCBIN "gfx/bgmaps/map_1e1962.attrmap.rle"
 
-BGMap_1e1962:
-INCBIN "gfx/bgmaps/map_1e1962.bin"
-
-BGMap_1eae5:
-INCBIN "gfx/bgmaps/map_1e1ae5.bin"
-
-BGMap_1ec5b:
-INCBIN "gfx/bgmaps/map_1e1c5b.bin"
+BGMap_1eae5: INCBIN "gfx/bgmaps/map_1e1ae5.tilemap.rle"
+BGMap_1ec5b: INCBIN "gfx/bgmaps/map_1e1c5b.attrmap.rle"

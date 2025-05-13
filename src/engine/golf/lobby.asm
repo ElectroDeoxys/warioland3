@@ -117,8 +117,8 @@ InitGolfLobby:
 	push hl
 	ld hl, BGMap_1c5cbe
 	push hl
-	ld hl, GolfLobbyGfx
 
+	ld hl, GolfLobbyGfx
 	ld bc, v0Tiles1
 	xor a
 	ldh [rVBK], a
@@ -633,8 +633,8 @@ InitGolfClearCutscene:
 	push hl
 	ld hl, BGMap_1c5dc6
 	push hl
-	ld hl, GolfMenuGfx
 
+	ld hl, GolfMenuGfx
 	ld bc, v0Tiles0
 	xor a
 	ldh [rVBK], a

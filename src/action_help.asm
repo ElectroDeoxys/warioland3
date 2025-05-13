@@ -28,7 +28,7 @@ ActionHelpHUDGfx:      INCBIN "gfx/misc/action_help_hud.2bpp.rle"
 ActionHelpObjects1Gfx: INCBIN "gfx/misc/action_help_objects1.2bpp.rle"
 ActionHelpObjects2Gfx: INCBIN "gfx/misc/action_help_objects2.2bpp.rle"
 
-BGMap_1e6796: INCBIN "gfx/bgmaps/map_1e6796.bin"
-BGMap_1e68bd: INCBIN "gfx/bgmaps/map_1e68bd.bin"
+BGMap_1e6796: INCBIN "gfx/bgmaps/map_1e6796.tilemap.rle"
+BGMap_1e68bd: INCBIN "gfx/bgmaps/map_1e68bd.attrmap.rle"
 
 INCLUDE "gfx/oam/action_help.asm"

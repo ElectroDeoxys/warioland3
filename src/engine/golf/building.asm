@@ -483,8 +483,8 @@ Func_1c8837:
 	ld [wGolfCourse], a
 	call Func_1c87db
 	ld hl, BGMap_1c4800
-	ld de, w1da00
-	ld bc, $e0
+	ld de, wGoldBuildingCourseAttrMap
+	ld bc, 7 * BG_MAP_WIDTH
 	call FarCopyHLToDE_BC2
 	jp GetGolfCourseTargetSCX
 

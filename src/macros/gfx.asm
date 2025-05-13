@@ -37,7 +37,7 @@ ENDC
 	ldh [rVBK], a
 ENDM
 
-MACRO decompress_bgmap0
+MACRO decompress_tilemap
 	ld a, BANK(\1)
 	ld [wTempBank], a
 	ld hl, \1
@@ -51,16 +51,17 @@ ENDC
 	hcall Decompress
 ENDM
 
-MACRO decompress_bgmap1
+MACRO decompress_attrmap
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 IF _NARG == 3
-	decompress_bgmap0 \1, \2, \3
+	decompress_tilemap \1, \2, \3
 ELSE
-	decompress_bgmap0 \1, \2
+	decompress_tilemap \1, \2
 ENDC
 	xor a
 	ldh [rVBK], a
 ENDM
 
-DEF dma_tiles EQUS " - 1" ; number in tiles
+DEF dma_tiles EQUS " - 1"    ; number in tiles
+DEF dma_rows EQUS " * 2 - 1" ; number in rows

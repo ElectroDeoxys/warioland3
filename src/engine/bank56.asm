@@ -1234,8 +1234,8 @@ _InitBestTimeList:
 	call LoadPalsToTempPals1
 
 	decompress_tiles0 BestTimeListGfx, v0Tiles1, $20
-	decompress_bgmap1 BGMap_b3143, v1BGMap0
-	decompress_bgmap0 BGMap_b2e72, v0BGMap0
+	decompress_attrmap BGMap_b3143, v1BGMap0
+	decompress_tilemap BGMap_b2e72, v0BGMap0
 
 	call PrintBestTimes
 	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_ON

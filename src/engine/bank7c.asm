@@ -2579,8 +2579,8 @@ Frameset_1f1d4c:
 FontGfx:: INCBIN "gfx/font.2bpp.rle"
 
 GBIncompatibleGfx: INCBIN "gfx/gb_incompatible.2bpp.rle"
-BGMap_1f34d6: INCBIN "gfx/bgmaps/map_1f34d6.bin"
-BGMap_1f35e0: INCBIN "gfx/bgmaps/map_1f35e0.bin" ; unreferenced
+BGMap_1f34d6: INCBIN "gfx/bgmaps/map_1f34d6.tilemap.rle"
+BGMap_1f35e0: INCBIN "gfx/bgmaps/map_1f35e0.attrmap.rle" ; unreferenced
 
 Pals_1f3610:
 	rgb  0, 22, 16
@@ -2624,7 +2624,7 @@ Pals_1f3610:
 	rgb  0,  0,  0
 
 LanguageSelection1TextMap:
-INCBIN "gfx/bgmaps/text/language_selection1.bin"
+INCBIN "gfx/bgmaps/text/language_selection1.tilemap"
 
 LanguageSelection2TextMap:
-INCBIN "gfx/bgmaps/text/language_selection2.bin"
+INCBIN "gfx/bgmaps/text/language_selection2.tilemap"

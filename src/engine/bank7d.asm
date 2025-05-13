@@ -307,17 +307,11 @@ INCBIN "gfx/pause/action_help_rail.2bpp"
 ActionHelpVampireGfx:
 INCBIN "gfx/pause/action_help_vampire.2bpp"
 
-BGMap_1f5de1:
-INCBIN "gfx/bgmaps/map_1f5de1.bin"
+BGMap_1f5de1: INCBIN "gfx/bgmaps/map_1f5de1.tilemap.rle"
+BGMap_1f5f49: INCBIN "gfx/bgmaps/map_1f5f49.attrmap.rle"
 
-BGMap_1f5f49:
-INCBIN "gfx/bgmaps/map_1f5f49.bin"
-
-BGMap_1f603a:
-INCBIN "gfx/bgmaps/map_1f603a.bin"
-
-BGMap_1f6194:
-INCBIN "gfx/bgmaps/map_1f6194.bin"
+BGMap_1f603a: INCBIN "gfx/bgmaps/map_1f603a.tilemap.rle"
+BGMap_1f6194: INCBIN "gfx/bgmaps/map_1f6194.attrmap.rle"
 
 Pals_1f628c:
 	rgb  0, 22, 16
@@ -363,14 +357,8 @@ Pals_1f628c:
 SaveBoxGfx:
 INCBIN "gfx/save_box.2bpp.rle"
 
-BGMap_1f6949:
-INCBIN "gfx/bgmaps/map_1f6949.bin"
+BGMap_1f6949: INCBIN "gfx/bgmaps/map_1f6949.tilemap.rle"
+BGMap_1f69f9: INCBIN "gfx/bgmaps/map_1f69f9.attrmap.rle"
 
-BGMap_1f69f9:
-INCBIN "gfx/bgmaps/map_1f69f9.bin"
-
-BGMap_1f6a2e:
-INCBIN "gfx/bgmaps/map_1f6a2e.bin"
-
-BGMap_1f6ac2:
-INCBIN "gfx/bgmaps/map_1f6ac2.bin"
+BGMap_1f6a2e: INCBIN "gfx/bgmaps/map_1f6a2e.tilemap.rle"
+BGMap_1f6ac2: INCBIN "gfx/bgmaps/map_1f6ac2.attrmap.rle"

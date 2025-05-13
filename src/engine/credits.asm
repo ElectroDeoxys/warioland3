@@ -896,8 +896,8 @@ Pals_16060c:
 CreditsFontGfx:     INCBIN "gfx/credits_font.2bpp.rle"
 CreditsMusicBoxGfx: INCBIN "gfx/credits_music_box.2bpp.rle"
 
-BGMap_161744: INCBIN "gfx/bgmaps/map_161744.bin"
-BGMap_16179c: INCBIN "gfx/bgmaps/map_16179c.bin"
+BGMap_161744: INCBIN "gfx/bgmaps/map_161744.tilemap.rle"
+BGMap_16179c: INCBIN "gfx/bgmaps/map_16179c.attrmap.rle"
 
 OAM_1617e8:
 	dw .frame_0

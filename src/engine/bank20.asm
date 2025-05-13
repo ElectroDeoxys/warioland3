@@ -882,8 +882,8 @@ Func_8065e:
 	ld [wMissingTreasureIndicatorsEnabled], a
 	call Func_80b54
 
-	decompress_bgmap0 BGMap_85b91, v0BGMap0, 29
-	decompress_bgmap1 BGMap_85bc4, v1BGMap0, 29
+	decompress_tilemap BGMap_85b91, v0BGMap0, 29
+	decompress_attrmap BGMap_85bc4, v1BGMap0, 29
 
 	ld a, [wOWBarsState]
 	and a
@@ -922,12 +922,12 @@ Func_8065e:
 	ld a, [wGameModeFlags]
 	bit MODE_TIME_ATTACK_F, a
 	jr nz, .asm_80753
-	decompress_bgmap0 BGMap_86868, v0BGMap1
-	decompress_bgmap1 BGMap_868b2, v1BGMap1
+	decompress_tilemap BGMap_86868, v0BGMap1
+	decompress_attrmap BGMap_868b2, v1BGMap1
 	jr .asm_80790
 .asm_80753
-	decompress_bgmap0 BGMap_868f5, v0BGMap1
-	decompress_bgmap1 BGMap_86929, v1BGMap1
+	decompress_tilemap BGMap_868f5, v0BGMap1
+	decompress_attrmap BGMap_86929, v1BGMap1
 .asm_80790
 	xor a
 	ld [wWX], a
@@ -1532,7 +1532,7 @@ VBlank_OWScene:
 	xor a ; LOW(v0BGMap0)
 	ld [$ff00+c], a
 	inc c
-	ld a, 30 - 1 ; 15 rows
+	ld a, 15 dma_rows
 	ld [$ff00+c], a
 
 	ld a, BANK("VRAM1")
@@ -1550,7 +1550,7 @@ VBlank_OWScene:
 	xor a ; LOW(v1BGMap0)
 	ld [$ff00+c], a
 	inc c
-	ld a, 30 - 1 ; 15 rows
+	ld a, 15 dma_rows
 	ld [$ff00+c], a
 	xor a
 	ld [wOWPendingTileUpdate], a

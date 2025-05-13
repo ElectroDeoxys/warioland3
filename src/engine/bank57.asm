@@ -2,19 +2,17 @@ OldMan2Gfx: INCBIN "gfx/cutscenes/old_man2.2bpp"
 EpilogueStarGfx: INCBIN "gfx/epilogue_star.2bpp"
 OldMan1Gfx: INCBIN "gfx/cutscenes/old_man1.2bpp"
 
-BGMap_15cd00: INCBIN "gfx/bgmaps/map_15cd00.bin"
-BGMap_15ce81: INCBIN "gfx/bgmaps/map_15ce81.bin"
-BGMap_15cf40: INCBIN "gfx/bgmaps/map_15cf40.bin"
-BGMap_15cfe1: INCBIN "gfx/bgmaps/map_15cfe1.bin" ; unreferenced
+BGMap_15cd00: INCBIN "gfx/bgmaps/map_15cd00.tilemap"
+BGMap_15cf40: INCBIN "gfx/bgmaps/map_15cf40.attrmap"
 EpilogueGfx: INCBIN "gfx/epilogue.2bpp.rle"
 
-BGMap_15df9b: INCBIN "gfx/bgmaps/map_15df9b.bin.rle"
-BGMap_15dff8: INCBIN "gfx/bgmaps/map_15dff8.bin.rle"
+BGMap_15df9b: INCBIN "gfx/bgmaps/map_15df9b.tilemap.rle"
+BGMap_15dff8: INCBIN "gfx/bgmaps/map_15dff8.attrmap.rle"
 
-TextJP_OldManThankYou: INCBIN "text/text_15e06b.bin.rle"
-Text_15e212: INCBIN "text/text_15e212.bin" ; unreferenced
-TextEN_OldManThankYou: INCBIN "text/en/old_man_thank_you.bin.rle"
-Text_15e437: INCBIN "text/text_15e437.bin" ; unreferenced
+TextJP_OldManThankYou: INCBIN "text/text_15e06b.tilemap.rle"
+Text_15e212: INCBIN "text/text_15e212.tilemap" ; unreferenced
+TextEN_OldManThankYou: INCBIN "text/en/old_man_thank_you.tilemap.rle"
+Text_15e437: INCBIN "text/text_15e437.tilemap" ; unreferenced
 
 OAM_15e44a::
 	dw .frame_0

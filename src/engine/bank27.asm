@@ -215,8 +215,8 @@ CutsceneInitFunctions:
 .InitCutscene06:
 	call LoadCutscenes3Gfx
 
-	decompress_bgmap1 BGMap_b956d, v1BGMap0
-	decompress_bgmap0 BGMap_b951f, v0BGMap0
+	decompress_attrmap BGMap_b956d, v1BGMap0
+	decompress_tilemap BGMap_b951f, v0BGMap0
 
 	ld b, BANK(Pals_b8080)
 	ld hl, Pals_b8080
@@ -229,8 +229,8 @@ CutsceneInitFunctions:
 .InitCutscene07:
 	call LoadCutscenes1Gfx_Vram0
 
-	decompress_bgmap1 BGMap_b9424, v1BGMap0
-	decompress_bgmap0 BGMap_b93c8, v0BGMap0
+	decompress_attrmap BGMap_b9424, v1BGMap0
+	decompress_tilemap BGMap_b93c8, v0BGMap0
 
 	ld b, BANK(Pals_b8000)
 	ld hl, Pals_b8000
@@ -408,8 +408,8 @@ CutsceneInitFunctions:
 
 	call Func_9ca77
 
-	decompress_bgmap1 BGMap_ba64e, v1BGMap1
-	decompress_bgmap0 BGMap_ba5fd, v0BGMap1
+	decompress_attrmap BGMap_ba64e, v1BGMap1
+	decompress_tilemap BGMap_ba5fd, v0BGMap1
 
 	ld b, BANK(Pals_b8040)
 	ld hl, Pals_b8040
@@ -429,16 +429,16 @@ CutsceneInitFunctions:
 
 	call LoadCutscenes3Gfx
 
-	decompress_bgmap1 BGMap_b9691, v1BGMap0
-	decompress_bgmap0 BGMap_b9635, v0BGMap0
+	decompress_attrmap BGMap_b9691, v1BGMap0
+	decompress_tilemap BGMap_b9635, v0BGMap0
 
 	jp Func_9d536
 
 .InitCutscene22:
 	call LoadCutscenes3Gfx
 
-	decompress_bgmap1 BGMap_b97c4, v1BGMap0
-	decompress_bgmap0 BGMap_b9768, v0BGMap0
+	decompress_attrmap BGMap_b97c4, v1BGMap0
+	decompress_tilemap BGMap_b9768, v0BGMap0
 
 	jp ClearTempPals_Bank27
 
@@ -472,8 +472,8 @@ CutsceneInitFunctions:
 	xor a
 	ldh [rVBK], a
 
-	decompress_bgmap1 BGMap_b9859, v1BGMap0
-	decompress_bgmap0 BGMap_b9816, v0BGMap0
+	decompress_attrmap BGMap_b9859, v1BGMap0
+	decompress_tilemap BGMap_b9816, v0BGMap0
 
 	ld hl, Pals_cc5c0
 	ld de, wTempPals1

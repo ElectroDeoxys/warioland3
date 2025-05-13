@@ -41,7 +41,7 @@ warioland3: $(rom) compare
 clean: tidy
 	find src/gfx \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.rle' \) -delete
 	find src/text \( -iname '*.rle' \) -delete
-	find src/text/en \( -iname '*.bin' \) -delete
+	find src/text/en \( -iname '*.tilemap' \) -delete
 	find src/data \( -iname '*.rle' \) -delete
 
 tidy:
@@ -117,10 +117,95 @@ src/gfx/golf/golf_lobby.2bpp.rle: tools/compressor += --no-trailing-repeat
 src/gfx/misc/action_help_objects1.2bpp.rle: tools/compressor += --force-trailing-repeat
 src/gfx/misc/action_help_objects2.2bpp.rle: tools/compressor += --force-trailing-repeat
 
-src/gfx/bgmaps/map_b34c3.bin.rle: tools/compressor += --force-trailing-copy
+src/gfx/bgmaps/map_b34c3.attrmap.rle: tools/compressor += --force-trailing-copy
+src/gfx/bgmaps/map_1c15c5.tilemap.rle: tools/compressor += --force-trailing-copy
+src/gfx/bgmaps/map_1c1651.attrmap.rle: tools/compressor += --force-trailing-copy
+src/gfx/bgmaps/map_1c168a.tilemap.rle: tools/compressor += --force-trailing-copy
+src/gfx/bgmaps/map_1c1716.attrmap.rle: tools/compressor += --force-trailing-copy
+src/gfx/bgmaps/map_1c1756.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c17c6.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c1824.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c1850.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c1869.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c18be.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c18fd.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c1973.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c19c5.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c1a1c.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c1a80.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c1ae5.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c1b2c.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c1b78.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c1bc6.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c1c2b.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c1c82.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c1cd8.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c1d24.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c1d7a.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c1dd0.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c1e25.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c1e6e.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c1ed2.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c1f18.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c1f8f.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c1ffd.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2047.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2084.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c20c9.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c210b.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c218e.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c21e7.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c224f.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2287.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2303.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2361.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c23bc.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2410.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c247d.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c24db.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c254d.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c25b6.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c25e5.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c25f8.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2656.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c26ad.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2725.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c277e.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c27cc.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2819.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c288c.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c28e3.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c292c.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2970.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c29e1.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2a45.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2a73.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2aaf.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2b03.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2b55.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2b9b.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2bdd.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2c41.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2c9e.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2cec.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2d30.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2d93.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2ddc.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2e39.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2e88.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2efc.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2f55.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2fa8.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c2ffc.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c3062.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c30b7.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c3119.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c316a.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/map_1c31e4.attrmap.rle: tools/compressor += --force-trailing-repeat
+src/gfx/bgmaps/hidden_figure2.tilemap.rle: tools/compressor += --force-trailing-repeat
 
-src/text/text_b232f.bin.rle: tools/compressor += --force-trailing-copy
-src/text/en/hidden_figure_replenish_power.bin.rle: tools/compressor += --force-trailing-copy
+src/text/text_b232f.tilemap.rle: tools/compressor += --force-trailing-copy
+src/text/en/hidden_figure_replenish_power.tilemap.rle: tools/compressor += --force-trailing-copy
 
 src/data/levels/block_map/the_peaceful_village_1.bin.rle: tools/compressor += --force-trailing-copy
 src/data/levels/block_map/tower_of_revival.bin.rle: tools/compressor += --force-trailing-copy
@@ -151,7 +236,7 @@ src/gfx/wario/%.2bpp: tools/gfx += --interleave --png=$<
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) -o $@ $@)
 
-%.bin: %.txt
+%.tilemap: %.txt
 	tools/text $(tools/text) -o $@ $<
 
 %.rle: %

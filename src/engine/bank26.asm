@@ -113,11 +113,8 @@ INCBIN "gfx/gui/treasure_collection.2bpp.rle"
 TreasureCollectionCursorGfx:
 INCBIN "gfx/gui/treasure_collection_cursor.2bpp.rle"
 
-BGMap_9a129:
-INCBIN "gfx/bgmaps/map_9a129.bin.rle"
-
-BGMap_9a2ac:
-INCBIN "gfx/bgmaps/map_9a2ac.bin.rle"
+BGMap_9a129: INCBIN "gfx/bgmaps/map_9a129.tilemap.rle"
+BGMap_9a2ac: INCBIN "gfx/bgmaps/map_9a2ac.attrmap.rle"
 
 DrawCoinCount:
 	ld de, v0Tiles1 tile $a
@@ -219,8 +216,8 @@ _InitTreasureCollection:
 	xor a
 	ldh [rVBK], a
 
-	decompress_bgmap0 BGMap_9a2ac, wAttrmap
-	decompress_bgmap0 BGMap_9a129, wTilemap
+	decompress_tilemap BGMap_9a2ac, wAttrmap
+	decompress_tilemap BGMap_9a129, wTilemap
 
 	call ApplyPageTreasuresPals
 

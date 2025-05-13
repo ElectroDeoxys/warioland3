@@ -1169,7 +1169,7 @@ ENDU
 
 	ds $20
 
-w1da00::
+wGoldBuildingCourseAttrMap::
 	ds $100
 
 w1db00::

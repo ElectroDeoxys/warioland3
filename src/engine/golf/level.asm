@@ -825,7 +825,7 @@ LoadGolfWarioStateGfx:
 	db BANK(WarioAttackGfx) ; GOLF_WARIO_CHARGING
 	db BANK(WarioAttackGfx) ; GOLF_WARIO_ATTACKING_1
 	db BANK(WarioAttackGfx) ; GOLF_WARIO_ATTACKING_2
-	db BANK(WarioGolfMiss)  ; GOLF_WARIO_MISSING
+	db BANK(WarioGolfMissGfx)  ; GOLF_WARIO_MISSING
 	db BANK(WarioClearGfx)  ; GOLF_WARIO_CLEARED
 	db BANK(WarioClearGfx)  ; GOLF_WARIO_LOST
 	db BANK(WarioClearGfx)  ; GOLF_WARIO_WAITING
@@ -834,18 +834,18 @@ LoadGolfWarioStateGfx:
 	db BANK(WarioIdleGfx)   ; GOLF_WARIO_TURNING
 
 .GfxPointers:
-	dw WarioIdleGfx   ; GOLF_WARIO_IDLING
-	dw WarioWalkGfx   ; GOLF_WARIO_WALKING
-	dw WarioAttackGfx ; GOLF_WARIO_CHARGING
-	dw WarioAttackGfx ; GOLF_WARIO_ATTACKING_1
-	dw WarioAttackGfx ; GOLF_WARIO_ATTACKING_2
-	dw WarioGolfMiss  ; GOLF_WARIO_MISSING
-	dw WarioClearGfx  ; GOLF_WARIO_CLEARED
-	dw WarioClearGfx  ; GOLF_WARIO_LOST
-	dw WarioClearGfx  ; GOLF_WARIO_WAITING
-	dw WarioClearGfx  ; GOLF_WARIO_ENTERING_DOOR
-	dw WarioIdleGfx   ; GOLF_WARIO_GOING_IN_PIPE
-	dw WarioIdleGfx   ; GOLF_WARIO_TURNING
+	dw WarioIdleGfx     ; GOLF_WARIO_IDLING
+	dw WarioWalkGfx     ; GOLF_WARIO_WALKING
+	dw WarioAttackGfx   ; GOLF_WARIO_CHARGING
+	dw WarioAttackGfx   ; GOLF_WARIO_ATTACKING_1
+	dw WarioAttackGfx   ; GOLF_WARIO_ATTACKING_2
+	dw WarioGolfMissGfx ; GOLF_WARIO_MISSING
+	dw WarioClearGfx    ; GOLF_WARIO_CLEARED
+	dw WarioClearGfx    ; GOLF_WARIO_LOST
+	dw WarioClearGfx    ; GOLF_WARIO_WAITING
+	dw WarioClearGfx    ; GOLF_WARIO_ENTERING_DOOR
+	dw WarioIdleGfx     ; GOLF_WARIO_GOING_IN_PIPE
+	dw WarioIdleGfx     ; GOLF_WARIO_TURNING
 
 Func_1c8fb7:
 	ret
@@ -3157,11 +3157,11 @@ VBlank_1c9fe1:
 .end
 
 VBlank_1c9ffa:
-	ld a, $18
+	ld a, HIGH(v1BGMap0 + 6 * BG_MAP_WIDTH) - $80
 	ld [wdc11 + 0], a
-	ld a, $c0
+	ld a, LOW(v1BGMap0 + 6 * BG_MAP_WIDTH)
 	ld [wdc11 + 1], a
-	ld a, $e dma_tiles
+	ld a, 7 dma_rows
 	ld [w1dc13], a
 
 	ld hl, .Func
@@ -3178,7 +3178,7 @@ VBlank_1c9ffa:
 	ldh [rSCX], a
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, w1da00
+	ld hl, wGoldBuildingCourseAttrMap
 	call Func_2c30
 	xor a
 	ldh [rVBK], a
@@ -3206,9 +3206,9 @@ VBlank_1ca033:
 .end
 
 VBlank_1ca056:
-	ld a, $18
+	ld a, HIGH(v1BGMap0 + 6 * BG_MAP_WIDTH) - $80
 	ld [wdc11 + 0], a
-	ld a, $c0
+	ld a, LOW(v1BGMap0 + 6 * BG_MAP_WIDTH)
 	ld [wdc11 + 1], a
 	ld a, $e dma_tiles
 	ld [w1dc13], a

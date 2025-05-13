@@ -25,7 +25,7 @@
 *.2bpp
 
 # converted text data
-src/text/en/*.bin
+src/text/en/*.tilemap
 
 # compressed data
 *.rle

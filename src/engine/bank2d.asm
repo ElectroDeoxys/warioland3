@@ -279,8 +279,8 @@ Func_b417a:
 	farcall Func_80bd9
 	farcall VBlank_Overworld
 
-	decompress_bgmap0 BGMap_86868, v0BGMap1
-	decompress_bgmap1 BGMap_868b2, v1BGMap1
+	decompress_tilemap BGMap_86868, v0BGMap1
+	decompress_attrmap BGMap_868b2, v1BGMap1
 
 	xor a
 	ld [wWX], a
@@ -314,8 +314,8 @@ Func_b4247:
 	cp c
 	ret nz
 
-	decompress_bgmap1 BGMap_85eda, v1BGMap0, 29
-	decompress_bgmap0 BGMap_85ea7, v0BGMap0, 29
+	decompress_attrmap BGMap_85eda, v1BGMap0, 29
+	decompress_tilemap BGMap_85ea7, v0BGMap0, 29
 
 	hlbgcoord 0, 30
 	debgcoord 0, 21, wAttrmap
@@ -3379,7 +3379,7 @@ NOWFunc_DayNightSpell:
 	ld [wHDMADestHi], a
 	ld a, LOW(v0BGMap0 + 0 + 30 * BG_MAP_WIDTH)
 	ld [wHDMADestLo], a
-	ld a, $4 - $1 ; 2 rows
+	ld a, 2 dma_rows
 	ld [wHDMAMode], a
 
 	ld a, HIGH(wAttrmap + 0 + 19 * BG_MAP_WIDTH)
@@ -3390,7 +3390,7 @@ NOWFunc_DayNightSpell:
 	ld [w2d0b5DestHi], a
 	ld a, LOW(v0BGMap0 + 0 + 30 * BG_MAP_WIDTH)
 	ld [w2d0b5DestLo], a
-	ld a, $4 - $1 ; 2 rows
+	ld a, 2 dma_rows
 	ld [w2d0b5Mode], a
 	ret
 
