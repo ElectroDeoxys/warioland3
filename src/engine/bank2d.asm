@@ -896,7 +896,7 @@ Func_b46a0:
 	ld [w2d046], a
 
 	ld hl, BGMap_857f7
-	ld de, wTilemap + $14f
+	debgcoord 15, 10, wTilemap
 	ld c, $91
 	ld b, BANK(BGMap_857f7)
 	call CopyFarBytes
@@ -1244,7 +1244,7 @@ LoadOverworldSmokeGfx:
 	decompress_tiles0 OverworldSmokeGfx, v0Tiles0, $32
 	ret
 
-UpdateCurOWOjAnimation:
+UpdateCurOWObjAnimation:
 	ld b, $2a
 	ld a, [wCurSceneObjPtr + 0]
 	ld l, a
@@ -1519,7 +1519,7 @@ Func_b4c16:
 
 Func_b4c1b:
 	ld de, Frameset_a9eea
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $0b
 	jr Func_b4c65
 
@@ -1533,7 +1533,7 @@ Func_b4c2a:
 
 Func_b4c2f:
 	ld de, Frameset_a9ef6
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $0e
 	jr Func_b4c65
 
@@ -1559,18 +1559,17 @@ Func_b4c4d:
 
 Func_b4c52:
 	ld de, Frameset_a9ed0
-	jr Func_b4c57
+	jr Func_b4c57 ; useless jump
 
 Func_b4c57:
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 ;	fallthrough
-
 Func_b4c5a:
 	ld de, OAM_a980c
 	jp LoadCurSceneObjSpriteWithScroll
 
 Func_b4c60:
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $00
 ;	fallthrough
 
@@ -1605,13 +1604,13 @@ Func_b4c86:
 
 Func_b4c8b:
 	ld de, Frameset_a9f47
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $1b
 	jr Func_b4c65
 
 Func_b4c95:
 	ld de, Frameset_a9f76
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $19
 	jr Func_b4c65
 
@@ -1621,7 +1620,7 @@ Func_b4c9f:
 
 Func_b4ca4:
 	ld de, Frameset_a9faa
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $1c
 	jr Func_b4c65
 
@@ -1693,7 +1692,7 @@ Func_b4d0e:
 
 Func_b4d14:
 	ld de, Frameset_a968d
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $01
 	jp Func_b4dae
 
@@ -1711,7 +1710,7 @@ Func_b4d2b:
 
 Func_b4d31:
 	ld de, Frameset_a9680
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $03
 	jp Func_b4dae
 
@@ -1721,7 +1720,7 @@ Func_b4d3c:
 
 Func_b4d41:
 	ld de, Frameset_a96b2
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $09
 	jr Func_b4dae
 
@@ -1767,13 +1766,13 @@ Func_b4d78:
 
 Func_b4d7d:
 	ld de, Frameset_a96ef
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $15
 	jr Func_b4dae
 
 Func_b4d87:
 	ld de, Frameset_a974a
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $15
 	jr Func_b4dae
 
@@ -1790,7 +1789,7 @@ Func_b4d9b:
 	jr Func_b4da9
 
 Func_b4da0:
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 ;	fallthrough
 
 Func_b4da3:
@@ -1799,7 +1798,7 @@ Func_b4da3:
 ;	fallthrough
 
 Func_b4da9:
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $00
 ;	fallthrough
 
@@ -1818,7 +1817,7 @@ Func_b4dbb:
 
 Func_b4dc0:
 	ld de, Frameset_a97d4
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld a, [wOWAnimationFinished]
 	cp $ff
 	call z, Func_b4dd4
@@ -1839,7 +1838,7 @@ Func_b4de2:
 
 Func_b4de7:
 	ld de, Frameset_a97b2
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $15
 	jr Func_b4dae
 
@@ -1901,7 +1900,7 @@ Func_b4e04:
 	dw Func_b4f9c
 
 Func_b4e4d:
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 ;	fallthrough
 
 Func_b4e50:
@@ -1909,7 +1908,7 @@ Func_b4e50:
 	jp LoadCurSceneObjSpriteWithScroll
 
 Func_b4e56:
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $00
 ;	fallthrough
 
@@ -1919,7 +1918,7 @@ Func_b4e5b:
 	jr Func_b4e50
 
 Func_b4e62:
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 ;	fallthrough
 
 Func_b4e65:
@@ -1928,7 +1927,7 @@ Func_b4e65:
 
 ; unreferenced
 Func_b4e6b:
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $00
 ;	fallthrough
 
@@ -1956,7 +1955,7 @@ Func_b4e86:
 Func_b4e8b:
 	push bc
 	ld de, Frameset_a8e29
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	pop hl
 	ld a, [w2d011]
 	and a
@@ -1994,7 +1993,7 @@ Func_b4ec2:
 
 Func_b4ec8:
 	ld de, Frameset_a8e04
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $0c
 	jr Func_b4e5b
 
@@ -2004,7 +2003,7 @@ Func_b4ed2:
 
 Func_b4ed8:
 	ld de, Frameset_a8e11
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $0e
 	jp Func_b4e5b
 
@@ -2014,13 +2013,13 @@ Func_b4ee3:
 
 Func_b4ee9:
 	ld de, Frameset_a9090
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $11
 	jp Func_b4e70
 
 Func_b4ef4:
 	ld de, Frameset_a90eb
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $11
 	jp Func_b4e70
 
@@ -2034,7 +2033,7 @@ Func_b4f05:
 
 Func_b4f0b:
 	ld de, Frameset_a914e
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $11
 	jp Func_b4e70
 
@@ -2215,7 +2214,7 @@ Func_b5022:
 
 Func_b5027:
 	ld de, Frameset_a8639
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $09
 	jr Func_b508a
 
@@ -2225,7 +2224,7 @@ Func_b5031:
 
 Func_b5036:
 	ld de, Frameset_a8646
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $0b
 	jr Func_b508a
 
@@ -2235,13 +2234,13 @@ Func_b5040:
 
 Func_b5045:
 	ld de, Frameset_a867f
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $0e
 	jr Func_b508a
 
 Func_b504f:
 	ld de, Frameset_a86da
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $0e
 	jr Func_b508a
 
@@ -2274,7 +2273,7 @@ Func_b5077:
 	jr Func_b507c
 
 Func_b507c:
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 ;	fallthrough
 
 Func_b507f:
@@ -2282,7 +2281,7 @@ Func_b507f:
 	jp LoadCurSceneObjSpriteWithScroll
 
 Func_b5085:
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $00
 ;	fallthrough
 
@@ -2293,13 +2292,13 @@ Func_b508a:
 
 Func_b5093:
 	ld de, Frameset_a8782
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $18
 	jr Func_b508a
 
 Func_b509d:
 	ld de, Frameset_a8793
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $19
 	jr Func_b508a
 
@@ -2317,13 +2316,13 @@ Func_b50b1:
 
 Func_b50b6:
 	ld de, Frameset_a873d
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $0e
 	jr Func_b508a
 
 Func_b50c0:
 	ld de, Frameset_a87d2
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $20
 	jr Func_b508a
 
@@ -2348,13 +2347,13 @@ Func_b50de:
 ;	fallthrough
 
 Func_b50e1:
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld de, OAM_aa580
 	jp LoadCurSceneObjSpriteWithScroll
 
 Func_b50ea:
 	ld de, Frameset_aa252
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld de, OAM_aa0cf
 	jp LoadCurSceneObjSpriteWithScroll
 
@@ -2364,7 +2363,7 @@ Func_b50f6:
 
 Func_b50fb:
 	ld de, Frameset_aa0c1
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $27
 	jr Func_b5114.asm_b5122
 
@@ -2374,17 +2373,17 @@ Func_b5105:
 
 Func_b510a:
 	ld de, Frameset_aa0bc
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $25
 	jr Func_b5114.asm_b5122
 
 Func_b5114:
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 .asm_b5117
 	ld de, OAM_a9fe2
 	jp LoadCurSceneObjSpriteWithScroll
 
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $00
 .asm_b5122
 	call Func_b4a0d
@@ -2401,7 +2400,7 @@ Func_b5130:
 
 Func_b5136:
 	ld de, Frameset_a883b
-	call UpdateCurOWOjAnimation
+	call UpdateCurOWObjAnimation
 	ld b, $00
 	call Func_b4a0d
 	jp z, Func_b4fab
