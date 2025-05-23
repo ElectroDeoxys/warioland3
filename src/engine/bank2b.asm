@@ -1759,13 +1759,13 @@ _InitTempleScene:
 	ld hl, TempleGfx
 	ld b, BANK(TempleGfx)
 	call LoadFarTiles
-	ld hl, BGMap_b0300
-	ld b, BANK(BGMap_b0300)
+	ld hl, TempleTilemap
+	ld b, BANK(TempleTilemap)
 	call LoadFarBGMap
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, BGMap_b0540
-	ld b, BANK(BGMap_b0540)
+	ld hl, TempleAttrmap
+	ld b, BANK(TempleAttrmap)
 	call LoadFarBGMap
 	xor a
 	ldh [rVBK], a
@@ -1785,8 +1785,8 @@ _InitTempleScene:
 	ld [wTempleScene], a
 
 	decompress_tiles1 TempleMusicBoxSceneGfx, v1Tiles0
-	decompress_tilemap BGMap_b3aaa, v0BGMap1
-	decompress_attrmap BGMap_b3ba5, v1BGMap1
+	decompress_tilemap HiddenFigureCutsceneTilemap, v0BGMap1
+	decompress_attrmap HiddenFigureCutsceneAttrmap, v1BGMap1
 
 	ld a, [wLanguage]
 	and a
@@ -3841,8 +3841,8 @@ _GolfBuilding:
 	ld b, BANK(PrologueBackgroundGfx)
 	call LoadFarTiles
 
-	decompress_attrmap BGMap_b2616, v1BGMap0
-	decompress_tilemap BGMap_b2546, v0BGMap0
+	decompress_attrmap GolfBuildingAttrmap, v1BGMap0
+	decompress_tilemap GolfBuildingTilemap, v0BGMap0
 
 	call .Func_ada43
 	call UpdateSceneWarioAnimation
@@ -4455,8 +4455,8 @@ _InitPrologueSequence:
 	call ClearSceneObjsRAM
 	call VBlank_PrologueEpilogue
 
-	decompress_attrmap BGMap_b34c3, v1BGMap1
-	decompress_tilemap BGMap_b330c, v0BGMap1
+	decompress_attrmap PrologueAttrmap, v1BGMap1
+	decompress_tilemap PrologueTilemap, v0BGMap1
 
 	ld hl, PrologueBackgroundGfx
 	ld b, BANK(PrologueBackgroundGfx)
@@ -4464,8 +4464,9 @@ _InitPrologueSequence:
 
 	decompress_tiles1 FontGfx, v1Tiles0
 	decompress_tiles1 PrologueGfx, v1Tiles0
-	decompress_attrmap BGMap_b3a5b, v1BGMap0
-	decompress_tilemap BGMap_b3a03, v0BGMap0
+
+	decompress_attrmap MusicBoxAttrmap, v1BGMap0
+	decompress_tilemap MusicBoxTilemap, v0BGMap0
 
 	ld hl, MusicBoxGfx
 	ld de, v0Tiles1
@@ -4705,13 +4706,13 @@ Func_ae0c4:
 Func_ae0f9:
 	xor a
 	ld [wHDMADestVRAMBank], a
-	ld de, BGMap_b0300
+	ld de, TempleTilemap
 	ld b, HIGH(v0BGMap0) - $80
 	ld c, 18 dma_rows
 ;	fallthrough
 
 Func_ae104:
-	ld a, BANK(BGMap_b0300)
+	ld a, BANK(TempleTilemap)
 	ld [wHDMABank], a
 	ld hl, wHDMA
 	ld a, d
@@ -4729,7 +4730,7 @@ Func_ae104:
 Func_ae119:
 	ld a, BANK("VRAM1")
 	ld [wHDMADestVRAMBank], a
-	ld de, BGMap_b0540
+	ld de, TempleAttrmap
 	ld b, HIGH(v0BGMap0) - $80
 	ld c, 18 dma_rows
 	jr Func_ae104
@@ -6808,10 +6809,10 @@ _InitEpilogue:
 	decompress_tiles1 HammerBotGfx, v1Tiles0, $40
 	decompress_tiles1 DoughnuteerGfx, v1Tiles1
 
-	decompress_attrmap BGMap_15dff8, v1BGMap0
-	decompress_tilemap BGMap_15df9b, v0BGMap0
-	decompress_attrmap BGMap_b34c3, v1BGMap1
-	decompress_tilemap BGMap_b330c, v0BGMap1
+	decompress_attrmap EpilogueTransformationAttrmap, v1BGMap0
+	decompress_tilemap EpilogueTransformationTilemap, v0BGMap0
+	decompress_attrmap PrologueAttrmap, v1BGMap1
+	decompress_tilemap PrologueTilemap, v0BGMap1
 
 	call FillClearedTextBuffer
 	ld a, [wLanguage]
@@ -6878,8 +6879,8 @@ Func_af01f:
 	decompress_tiles1 FontGfx, v1Tiles0
 
 	; attempting to decompress uncompressed data
-	decompress_attrmap BGMap_15cf40, v1BGMap0
-	decompress_tilemap BGMap_15cd00, v0BGMap0
+	decompress_attrmap EpilogueCrowdAttrmap, v1BGMap0
+	decompress_tilemap EpilogueCrowdTilemap, v0BGMap0
 
 	ld hl, wOWUIObj1YCoord
 	ld a, $60
@@ -7066,14 +7067,14 @@ Func_af13c:
 .Func_af215:
 	xor a
 	ld [wHDMADestVRAMBank], a
-	ld de, BGMap_15cd00
+	ld de, EpilogueCrowdTilemap
 	ld b, HIGH(v0BGMap0) - $80
 	ld c, 18 dma_rows
 	jr .asm_af1f2
 .Func_af222:
 	ld a, BANK("VRAM1")
 	ld [wHDMADestVRAMBank], a
-	ld de, BGMap_15cf40
+	ld de, EpilogueCrowdAttrmap
 	ld b, HIGH(v1BGMap0) - $80
 	ld c, 18 dma_rows
 	jr .asm_af1f2

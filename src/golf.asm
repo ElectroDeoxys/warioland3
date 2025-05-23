@@ -12,24 +12,24 @@ SECTION "Golf Gfx 2", ROMX
 
 WarioGolfMissGfx:: INCBIN "gfx/wario/golf_miss.2bpp"
 
-BGMap_1c4800: INCBIN "gfx/bgmaps/map_1c4800.attrmap"
-BGMap_1c48e0: INCBIN "gfx/bgmaps/map_1c48e0.tilemap"
-BGMap_1c49c0: INCBIN "gfx/bgmaps/map_1c49c0.tilemap"
-BGMap_1c4aa0: INCBIN "gfx/bgmaps/map_1c4aa0.tilemap"
-BGMap_1c4b80: INCBIN "gfx/bgmaps/map_1c4b80.tilemap"
+GolfBuildingCourseScrollingAttrmap: INCBIN "data/bgmaps/golf_building_course_scrolling.attrmap"
 
-BGMap_1c4c60: INCBIN "gfx/bgmaps/map_1c4c60.tilemap.rle"
-BGMap_1c4d83: INCBIN "gfx/bgmaps/map_1c4d83.tilemap.rle"
+GolfBuildingCourse1Tilemap: INCBIN "data/bgmaps/golf_building_course_1.tilemap"
+GolfBuildingCourse2Tilemap: INCBIN "data/bgmaps/golf_building_course_2.tilemap"
+GolfBuildingCourse3Tilemap: INCBIN "data/bgmaps/golf_building_course_3.tilemap"
+GolfBuildingCourse4Tilemap: INCBIN "data/bgmaps/golf_building_course_4.tilemap"
 
-BGMap_1c4ea8: INCBIN "gfx/bgmaps/map_1c4ea8.attrmap.rle"
+GolfBuildingCoursesLockedTilemap:   INCBIN "data/bgmaps/golf_building_courses_locked.tilemap.rle"
+GolfBuildingCoursesUnlockedTilemap: INCBIN "data/bgmaps/golf_building_courses_unlocked.tilemap.rle"
+GolfBuildingCoursesAttrmap:         INCBIN "data/bgmaps/golf_building_courses.attrmap.rle"
 
 GolfLobbyGfx: INCBIN "gfx/golf/golf_lobby.2bpp.rle"
 
-BGMap_1c5b4e: INCBIN "gfx/bgmaps/map_1c5b4e.tilemap.rle"
-BGMap_1c5cbe: INCBIN "gfx/bgmaps/map_1c5cbe.attrmap.rle"
+GolfLobbyTilemap: INCBIN "data/bgmaps/golf_lobby.tilemap.rle"
+GolfLobbyAttrmap: INCBIN "data/bgmaps/golf_lobby.attrmap.rle"
 
-BGMap_1c5d6c: INCBIN "gfx/bgmaps/map_1c5d6c.tilemap.rle"
-BGMap_1c5dc6: INCBIN "gfx/bgmaps/map_1c5dc6.attrmap.rle"
+GolfClearTilemap: INCBIN "data/bgmaps/golf_clear.tilemap.rle"
+GolfClearAttrmap: INCBIN "data/bgmaps/golf_clear.attrmap.rle"
 
 
 SECTION "Bank 72", ROMX

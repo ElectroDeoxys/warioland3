@@ -283,12 +283,12 @@ Func_d465b:
 Func_d4668:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, BGMap_d6502
+	ld hl, GolfMenuAttrmap
 	ld bc, v1BGMap0
 	call Decompress
 	xor a
 	ldh [rVBK], a
-	ld hl, BGMap_d63fd
+	ld hl, GolfMenuTilemap
 	ld bc, v0BGMap0
 	call Decompress
 	ret

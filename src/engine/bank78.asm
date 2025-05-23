@@ -36,13 +36,13 @@ LoadClearScreenGfx:
 Func_1e0045:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, BGMap_1e1962
+	ld hl, ClearScreenTreasureAttrmap
 	ld bc, v1BGMap0
 	call Decompress
 
 	xor a
 	ldh [rVBK], a
-	ld hl, BGMap_1e17fa
+	ld hl, ClearScreenTreasureTilemap
 	ld bc, v0BGMap0
 	call Decompress
 	ret
@@ -50,13 +50,13 @@ Func_1e0045:
 Func_1e005f:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, BGMap_1ec5b
+	ld hl, ClearScreenTimeAttackAttrmap
 	ld bc, v0BGMap0
 	call Decompress
 
 	xor a
 	ldh [rVBK], a
-	ld hl, BGMap_1eae5
+	ld hl, ClearScreenTimeAttackTilemap
 	ld bc, v0BGMap0
 	call Decompress
 
@@ -745,8 +745,8 @@ INCBIN "gfx/pause/clear_screen1.2bpp.rle"
 ClearScreen2Gfx:
 INCBIN "gfx/pause/clear_screen2.2bpp.rle"
 
-BGMap_1e17fa: INCBIN "gfx/bgmaps/map_1e17fa.tilemap.rle"
-BGMap_1e1962: INCBIN "gfx/bgmaps/map_1e1962.attrmap.rle"
+ClearScreenTreasureTilemap: INCBIN "data/bgmaps/clear_screen_treasure.tilemap.rle"
+ClearScreenTreasureAttrmap: INCBIN "data/bgmaps/clear_screen_treasure.attrmap.rle"
 
-BGMap_1eae5: INCBIN "gfx/bgmaps/map_1e1ae5.tilemap.rle"
-BGMap_1ec5b: INCBIN "gfx/bgmaps/map_1e1c5b.attrmap.rle"
+ClearScreenTimeAttackTilemap: INCBIN "data/bgmaps/clear_screen_time_attack.tilemap.rle"
+ClearScreenTimeAttackAttrmap: INCBIN "data/bgmaps/clear_screen_time_attack.attrmap.rle"

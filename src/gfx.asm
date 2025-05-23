@@ -8,9 +8,9 @@ SECTION "Title Gfx", ROMX
 TitleScreenGfx:: INCBIN "gfx/intro/title_screen.2bpp.rle"
 PlaneGfx::       INCBIN "gfx/intro/plane.2bpp.rle"
 
-BGMap_697a:: INCBIN "gfx/bgmaps/map_697a.tilemap.rle"
-BGMap_6ae7:: INCBIN "gfx/bgmaps/map_6ae7.attrmap.rle"
-BGMap_6b47:: INCBIN "gfx/bgmaps/map_6b47.tilemap"
+TitleScreenTilemap::    INCBIN "data/bgmaps/title_screen.tilemap.rle"
+TitleScreenAttrmap::    INCBIN "data/bgmaps/title_screen.attrmap.rle"
+TitleScreenBoxTilemap:: INCBIN "data/bgmaps/title_screen_box.tilemap"
 
 
 SECTION "Title OAM", ROMX
@@ -63,10 +63,10 @@ Pals_71b0::
 	rgb 10, 10, 10
 	rgb  0,  0,  0
 
-TimeAttack1JPTextMap:: INCBIN "gfx/bgmaps/text/time_attack_en.tilemap"
-TimeAttack2JPTextMap:: INCBIN "gfx/bgmaps/text/time_attack_en.attrmap"
-TimeAttack1ENTextMap:: INCBIN "gfx/bgmaps/text/time_attack_jp.tilemap"
-TimeAttack2ENTextMap:: INCBIN "gfx/bgmaps/text/time_attack_jp.attrmap"
+TimeAttack1JPTextMap:: INCBIN "data/bgmaps/text/time_attack_en.tilemap"
+TimeAttack2JPTextMap:: INCBIN "data/bgmaps/text/time_attack_en.attrmap"
+TimeAttack1ENTextMap:: INCBIN "data/bgmaps/text/time_attack_jp.tilemap"
+TimeAttack2ENTextMap:: INCBIN "data/bgmaps/text/time_attack_jp.attrmap"
 
 INCLUDE "data/overworld/epilogue/oam.asm"
 INCLUDE "data/overworld/epilogue/framesets.asm"
@@ -405,7 +405,7 @@ Pals_db040::
 	rgb 31, 25,  0
 	rgb  0,  0,  0
 
-HiddenFigure1Map:: INCBIN "gfx/bgmaps/hidden_figure1.tilemap.rle"
-HiddenFigure2Map:: INCBIN "gfx/bgmaps/hidden_figure1.attrmap.rle"
-HiddenFigure3Map:: INCBIN "gfx/bgmaps/hidden_figure2.tilemap.rle"
-HiddenFigure4Map:: INCBIN "gfx/bgmaps/hidden_figure2.attrmap.rle"
+HiddenFigure1Map:: INCBIN "data/bgmaps/hidden_figure1.tilemap.rle"
+HiddenFigure2Map:: INCBIN "data/bgmaps/hidden_figure1.attrmap.rle"
+HiddenFigure3Map:: INCBIN "data/bgmaps/hidden_figure2.tilemap.rle"
+HiddenFigure4Map:: INCBIN "data/bgmaps/hidden_figure2.attrmap.rle"

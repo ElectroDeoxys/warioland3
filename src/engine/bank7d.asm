@@ -39,12 +39,12 @@ Func_1f403f:
 	jr nz, .asm_1f4060
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, BGMap_1f5f49
+	ld hl, PauseMenuAttrmap
 	ld bc, v1BGMap1
 	call Decompress
 	xor a
 	ldh [rVBK], a
-	ld hl, BGMap_1f5de1
+	ld hl, PauseMenuTilemap
 	ld bc, v1BGMap1
 	call Decompress
 	ret
@@ -52,12 +52,12 @@ Func_1f403f:
 .asm_1f4060
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, BGMap_1f6194
+	ld hl, TimeAttackPauseMenuAttrmap
 	ld bc, v0BGMap1
 	call Decompress
 	xor a
 	ldh [rVBK], a
-	ld hl, BGMap_1f603a
+	ld hl, TimeAttackPauseMenuTilemap
 	ld bc, v0BGMap1
 	call Decompress
 
@@ -187,28 +187,28 @@ LoadSaveScreenGfx:
 	call FarCopyHLToDE_BC
 	ret
 
-PrintNowSavingBox:
+DrawSaveInProgressBox:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, BGMap_1f69f9
+	ld hl, SaveInProgressBoxAttrmap
 	ld bc, v0BGMap0
 	call Decompress
 	xor a
 	ldh [rVBK], a
-	ld hl, BGMap_1f6949
+	ld hl, SaveInProgressBoxTilemap
 	ld bc, v0BGMap0
 	call Decompress
 	ret
 
-PrintSaveCompleteBox:
+DrawSaveCompleteBox:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, BGMap_1f6ac2
+	ld hl, SaveCompleteBoxAttrmap
 	ld bc, v0BGMap0
 	call Decompress
 	xor a
 	ldh [rVBK], a
-	ld hl, BGMap_1f6a2e
+	ld hl, SaveCompleteBoxTilemap
 	ld bc, v0BGMap0
 	call Decompress
 	ret
@@ -307,11 +307,11 @@ INCBIN "gfx/pause/action_help_rail.2bpp"
 ActionHelpVampireGfx:
 INCBIN "gfx/pause/action_help_vampire.2bpp"
 
-BGMap_1f5de1: INCBIN "gfx/bgmaps/map_1f5de1.tilemap.rle"
-BGMap_1f5f49: INCBIN "gfx/bgmaps/map_1f5f49.attrmap.rle"
+PauseMenuTilemap: INCBIN "data/bgmaps/pause_menu.tilemap.rle"
+PauseMenuAttrmap: INCBIN "data/bgmaps/pause_menu.attrmap.rle"
 
-BGMap_1f603a: INCBIN "gfx/bgmaps/map_1f603a.tilemap.rle"
-BGMap_1f6194: INCBIN "gfx/bgmaps/map_1f6194.attrmap.rle"
+TimeAttackPauseMenuTilemap: INCBIN "data/bgmaps/time_attack_pause_menu.tilemap.rle"
+TimeAttackPauseMenuAttrmap: INCBIN "data/bgmaps/time_attack_pause_menu.attrmap.rle"
 
 Pals_1f628c:
 	rgb  0, 22, 16
@@ -354,11 +354,10 @@ Pals_1f628c:
 	rgb 18,  3, 31
 	rgb 28,  0,  4
 
-SaveBoxGfx:
-INCBIN "gfx/save_box.2bpp.rle"
+SaveBoxGfx: INCBIN "gfx/save_box.2bpp.rle"
 
-BGMap_1f6949: INCBIN "gfx/bgmaps/map_1f6949.tilemap.rle"
-BGMap_1f69f9: INCBIN "gfx/bgmaps/map_1f69f9.attrmap.rle"
+SaveInProgressBoxTilemap: INCBIN "data/bgmaps/save_in_progress_box.tilemap.rle"
+SaveInProgressBoxAttrmap: INCBIN "data/bgmaps/save_in_progress_box.attrmap.rle"
 
-BGMap_1f6a2e: INCBIN "gfx/bgmaps/map_1f6a2e.tilemap.rle"
-BGMap_1f6ac2: INCBIN "gfx/bgmaps/map_1f6ac2.attrmap.rle"
+SaveCompleteBoxTilemap: INCBIN "data/bgmaps/save_complete_box.tilemap.rle"
+SaveCompleteBoxAttrmap: INCBIN "data/bgmaps/save_complete_box.attrmap.rle"

@@ -176,13 +176,13 @@ PickAndLoadGolfLevel:
 	ldh [rVBK], a
 	bcbgcoord 0, 7
 	call FarDecompress
-	ld hl, BGMap_1c1651
+	ld hl, GolfBackground1Attrmap
 	ld bc, v1BGMap0
 	call FarDecompress
 	pop hl
 	bcbgcoord 0, 7, v1BGMap1
 	call FarDecompress
-	ld hl, BGMap_1c1716
+	ld hl, GolfBackground2Attrmap
 	ld bc, v1BGMap1
 	call FarDecompress
 
@@ -191,13 +191,13 @@ PickAndLoadGolfLevel:
 	pop hl
 	bcbgcoord 0, 7
 	call FarDecompress
-	ld hl, BGMap_1c15c5
+	ld hl, GolfBackground1Tilemap
 	ld bc, v0BGMap0
 	call FarDecompress
 	pop hl
 	bcbgcoord 0, 7, v0BGMap1
 	call FarDecompress
-	ld hl, BGMap_1c168a
+	ld hl, GolfBackground2Tilemap
 	ld bc, v0BGMap1
 	call FarDecompress
 	pop hl
@@ -213,26 +213,26 @@ PickAndLoadGolfLevel:
 
 GolfLevels:
 	table_width 10
-	dw GolfLevel00, BGMap_1c18fd, BGMap_1c1869, BGMap_1c1973, BGMap_1c18be ; GOLF_LEVEL_00
-	dw GolfLevel01, BGMap_1c1824, BGMap_1c1756, BGMap_1c1850, BGMap_1c17c6 ; GOLF_LEVEL_01
-	dw GolfLevel02, BGMap_1c2287, BGMap_1c21e7, BGMap_1c2303, BGMap_1c224f ; GOLF_LEVEL_02
-	dw GolfLevel03, BGMap_1c2819, BGMap_1c277e, BGMap_1c288c, BGMap_1c27cc ; GOLF_LEVEL_03
-	dw GolfLevel04, BGMap_1c2aaf, BGMap_1c2a45, BGMap_1c2b03, BGMap_1c2a73 ; GOLF_LEVEL_04
-	dw GolfLevel05, BGMap_1c1d24, BGMap_1c1c82, BGMap_1c1d7a, BGMap_1c1cd8 ; GOLF_LEVEL_05
-	dw GolfLevel06, BGMap_1c1bc6, BGMap_1c1b2c, BGMap_1c1c2b, BGMap_1c1b78 ; GOLF_LEVEL_06
-	dw GolfLevel07, BGMap_1c1e6e, BGMap_1c1dd0, BGMap_1c1ed2, BGMap_1c1e25 ; GOLF_LEVEL_07
-	dw GolfLevel08, BGMap_1c1ffd, BGMap_1c1f18, BGMap_1c2047, BGMap_1c1f8f ; GOLF_LEVEL_08
-	dw GolfLevel09, BGMap_1c2970, BGMap_1c28e3, BGMap_1c29e1, BGMap_1c292c ; GOLF_LEVEL_09
-	dw GolfLevel10, BGMap_1c1a80, BGMap_1c19c5, BGMap_1c1ae5, BGMap_1c1a1c ; GOLF_LEVEL_10
-	dw GolfLevel11, BGMap_1c26ad, BGMap_1c25f8, BGMap_1c2725, BGMap_1c2656 ; GOLF_LEVEL_11
-	dw GolfLevel12, BGMap_1c2bdd, BGMap_1c2b55, BGMap_1c2c41, BGMap_1c2b9b ; GOLF_LEVEL_12
-	dw GolfLevel13, BGMap_1c210b, BGMap_1c2084, BGMap_1c218e, BGMap_1c20c9 ; GOLF_LEVEL_13
-	dw GolfLevel14, BGMap_1c2e88, BGMap_1c2ddc, BGMap_1c2efc, BGMap_1c2e39 ; GOLF_LEVEL_14
-	dw GolfLevel15, BGMap_1c2ffc, BGMap_1c2f55, BGMap_1c3062, BGMap_1c2fa8 ; GOLF_LEVEL_15
-	dw GolfLevel16, BGMap_1c25b6, BGMap_1c24db, BGMap_1c25e5, BGMap_1c254d ; GOLF_LEVEL_16
-	dw GolfLevel17, BGMap_1c2d30, BGMap_1c2c9e, BGMap_1c2d93, BGMap_1c2cec ; GOLF_LEVEL_17
-	dw GolfLevel18, BGMap_1c2410, BGMap_1c2361, BGMap_1c247d, BGMap_1c23bc ; GOLF_LEVEL_18
-	dw GolfLevel19, BGMap_1c316a, BGMap_1c30b7, BGMap_1c31e4, BGMap_1c3119 ; GOLF_LEVEL_19
+	dw GolfLevel00, GolfLevel00_1Tilemap, GolfLevel00_2Tilemap, GolfLevel00_1Attrmap, GolfLevel00_2Attrmap ; GOLF_LEVEL_00
+	dw GolfLevel01, GolfLevel01_1Tilemap, GolfLevel01_2Tilemap, GolfLevel01_1Attrmap, GolfLevel01_2Attrmap ; GOLF_LEVEL_01
+	dw GolfLevel02, GolfLevel02_1Tilemap, GolfLevel02_2Tilemap, GolfLevel02_1Attrmap, GolfLevel02_2Attrmap ; GOLF_LEVEL_02
+	dw GolfLevel03, GolfLevel03_1Tilemap, GolfLevel03_2Tilemap, GolfLevel03_1Attrmap, GolfLevel03_2Attrmap ; GOLF_LEVEL_03
+	dw GolfLevel04, GolfLevel04_1Tilemap, GolfLevel04_2Tilemap, GolfLevel04_1Attrmap, GolfLevel04_2Attrmap ; GOLF_LEVEL_04
+	dw GolfLevel05, GolfLevel05_1Tilemap, GolfLevel05_2Tilemap, GolfLevel05_1Attrmap, GolfLevel05_2Attrmap ; GOLF_LEVEL_05
+	dw GolfLevel06, GolfLevel06_1Tilemap, GolfLevel06_2Tilemap, GolfLevel06_1Attrmap, GolfLevel06_2Attrmap ; GOLF_LEVEL_06
+	dw GolfLevel07, GolfLevel07_1Tilemap, GolfLevel07_2Tilemap, GolfLevel07_1Attrmap, GolfLevel07_2Attrmap ; GOLF_LEVEL_07
+	dw GolfLevel08, GolfLevel08_1Tilemap, GolfLevel08_2Tilemap, GolfLevel08_1Attrmap, GolfLevel08_2Attrmap ; GOLF_LEVEL_08
+	dw GolfLevel09, GolfLevel09_1Tilemap, GolfLevel09_2Tilemap, GolfLevel09_1Attrmap, GolfLevel09_2Attrmap ; GOLF_LEVEL_09
+	dw GolfLevel10, GolfLevel10_1Tilemap, GolfLevel10_2Tilemap, GolfLevel10_1Attrmap, GolfLevel10_2Attrmap ; GOLF_LEVEL_10
+	dw GolfLevel11, GolfLevel11_1Tilemap, GolfLevel11_2Tilemap, GolfLevel11_1Attrmap, GolfLevel11_2Attrmap ; GOLF_LEVEL_11
+	dw GolfLevel12, GolfLevel12_1Tilemap, GolfLevel12_2Tilemap, GolfLevel12_1Attrmap, GolfLevel12_2Attrmap ; GOLF_LEVEL_12
+	dw GolfLevel13, GolfLevel13_1Tilemap, GolfLevel13_2Tilemap, GolfLevel13_1Attrmap, GolfLevel13_2Attrmap ; GOLF_LEVEL_13
+	dw GolfLevel14, GolfLevel14_1Tilemap, GolfLevel14_2Tilemap, GolfLevel14_1Attrmap, GolfLevel14_2Attrmap ; GOLF_LEVEL_14
+	dw GolfLevel15, GolfLevel15_1Tilemap, GolfLevel15_2Tilemap, GolfLevel15_1Attrmap, GolfLevel15_2Attrmap ; GOLF_LEVEL_15
+	dw GolfLevel16, GolfLevel16_1Tilemap, GolfLevel16_2Tilemap, GolfLevel16_1Attrmap, GolfLevel16_2Attrmap ; GOLF_LEVEL_16
+	dw GolfLevel17, GolfLevel17_1Tilemap, GolfLevel17_2Tilemap, GolfLevel17_1Attrmap, GolfLevel17_2Attrmap ; GOLF_LEVEL_17
+	dw GolfLevel18, GolfLevel18_1Tilemap, GolfLevel18_2Tilemap, GolfLevel18_1Attrmap, GolfLevel18_2Attrmap ; GOLF_LEVEL_18
+	dw GolfLevel19, GolfLevel19_1Tilemap, GolfLevel19_2Tilemap, GolfLevel19_1Attrmap, GolfLevel19_2Attrmap ; GOLF_LEVEL_19
 	assert_table_length NUM_GOLF_LEVELS
 
 ShowGolfLevelFlagAndPar:

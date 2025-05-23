@@ -377,9 +377,9 @@ INCLUDE "data/clear/framesets.asm"
 INCLUDE "data/clear/palettes.asm"
 
 ; TODO in its own section to be added to golf.o?
-GolfMenuGfx:: INCBIN "gfx/golf/golf_menu.2bpp.rle"
-BGMap_d63fd: INCBIN "gfx/bgmaps/map_d63fd.tilemap.rle"
-BGMap_d6502: INCBIN "gfx/bgmaps/map_d6502.attrmap.rle"
+GolfMenuGfx::    INCBIN "gfx/golf/golf_menu.2bpp.rle"
+GolfMenuTilemap: INCBIN "data/bgmaps/golf_menu.tilemap.rle"
+GolfMenuAttrmap: INCBIN "data/bgmaps/golf_menu.attrmap.rle"
 
 INCLUDE "data/clear/pencil_oam.asm"
 
@@ -391,9 +391,9 @@ INCLUDE "engine/game_over/core.asm"
 INCLUDE "engine/game_over/load_gfx.asm"
 INCLUDE "data/game_over/palettes.asm"
 
-GameOverGfx: INCBIN "gfx/game_over.2bpp.rle"
-BGMap_dbaee: INCBIN "gfx/bgmaps/map_dbaee.tilemap.rle"
-BGMap_dbb8f: INCBIN "gfx/bgmaps/map_dbb8f.attrmap.rle"
+GameOverGfx:     INCBIN "gfx/game_over.2bpp.rle"
+GameOverTilemap: INCBIN "data/bgmaps/game_over.tilemap.rle"
+GameOverAttrmap: INCBIN "data/bgmaps/game_over.attrmap.rle"
 
 INCLUDE "data/game_over/oam.asm"
 INCLUDE "data/game_over/framesets.asm"
@@ -405,9 +405,9 @@ INCLUDE "engine/perfect/state_table.asm"
 INCLUDE "engine/perfect/core.asm"
 INCLUDE "data/perfect/palettes.asm"
 
-PerfectGfx: INCBIN "gfx/perfect.2bpp.rle"
-BGMap_dd417: INCBIN "gfx/bgmaps/map_dd417.tilemap.rle"
-BGMap_dd5b5: INCBIN "gfx/bgmaps/map_dd5b5.attrmap.rle"
+PerfectGfx:     INCBIN "gfx/perfect.2bpp.rle"
+PerfectTilemap: INCBIN "data/bgmaps/perfect.tilemap.rle"
+PerfectAttrmap: INCBIN "data/bgmaps/perfect.attrmap.rle"
 
 INCLUDE "data/perfect/oam.asm"
 INCLUDE "data/perfect/framesets.asm"

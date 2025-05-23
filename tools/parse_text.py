@@ -85,7 +85,7 @@ charmap = {
 	0x7f: "@",
 }
 
-with open("src/gfx/bgmaps/map_b37f9.bin", "rb") as file:
+with open("src/data/bgmaps/map_b37f9.bin", "rb") as file:
     buffer = file.read()
     stringArray = [charmap[c] for c in buffer]
 

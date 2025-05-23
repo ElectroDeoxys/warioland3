@@ -8,12 +8,12 @@ VBlank_Title:
 .Func:
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(BGMap_6b47)
+	ld a, BANK(TitleScreenBoxTilemap)
 	bankswitch
 	ld a, [wcee4]
 	bit 7, a
 	jr z, .skip
-	ld hl, BGMap_6b47
+	ld hl, TitleScreenBoxTilemap
 	xor a ; VRAM0
 	ldh [rVBK], a
 	debgcoord 4, 14

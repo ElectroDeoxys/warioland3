@@ -548,12 +548,12 @@ LoadCreditsGfx:
 Func_16041f:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, BGMap_16179c
+	ld hl, CreditsAttrmap
 	ld bc, v1BGMap1
 	call Decompress
 	xor a
 	ldh [rVBK], a
-	ld hl, BGMap_161744
+	ld hl, CreditsTilemap
 	ld bc, v0BGMap1
 	call Decompress
 	ret
@@ -896,8 +896,8 @@ Pals_16060c:
 CreditsFontGfx:     INCBIN "gfx/credits_font.2bpp.rle"
 CreditsMusicBoxGfx: INCBIN "gfx/credits_music_box.2bpp.rle"
 
-BGMap_161744: INCBIN "gfx/bgmaps/map_161744.tilemap.rle"
-BGMap_16179c: INCBIN "gfx/bgmaps/map_16179c.attrmap.rle"
+CreditsTilemap: INCBIN "data/bgmaps/credits.tilemap.rle"
+CreditsAttrmap: INCBIN "data/bgmaps/credits.attrmap.rle"
 
 OAM_1617e8:
 	dw .frame_0

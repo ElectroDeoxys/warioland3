@@ -159,12 +159,12 @@ LoadPerfectGfx:
 Func_dc13e:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, BGMap_dd5b5
+	ld hl, PerfectAttrmap
 	ld bc, v0BGMap0
 	call Decompress
 	xor a
 	ldh [rVBK], a
-	ld hl, BGMap_dd417
+	ld hl, PerfectTilemap
 	ld bc, v0BGMap0
 	call Decompress
 	ret

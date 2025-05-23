@@ -32,13 +32,13 @@ LoadTitleScreenTiles:
 LoadTitleScreenTileMap:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, BGMap_6ae7
+	ld hl, TitleScreenAttrmap
 	ld bc, v1BGMap0
 	call Decompress
 
 	xor a ; VRAM0
 	ldh [rVBK], a
-	ld hl, BGMap_697a
+	ld hl, TitleScreenTilemap
 	ld bc, v0BGMap0
 	call Decompress
 	ret

@@ -6,7 +6,7 @@ InitSaveScreen:
 
 	farcall LoadSaveScreenPals
 	farcall LoadSaveScreenGfx
-	farcall PrintNowSavingBox
+	farcall DrawSaveInProgressBox
 	call VBlank_SaveScreen
 
 	xor a
@@ -354,7 +354,7 @@ SaveLevel:
 
 	call VBlank_1f0c6c
 	farcall LoadSaveScreenPals
-	farcall PrintSaveCompleteBox
+	farcall DrawSaveCompleteBox
 	ld a, LCDC_DEFAULT
 	ldh [rLCDC], a
 	xor a
@@ -398,7 +398,7 @@ InitSaveScreenAndBackupVRAM:
 
 	farcall LoadSaveScreenPals
 	farcall LoadSaveScreenGfx
-	farcall PrintNowSavingBox
+	farcall DrawSaveInProgressBox
 	call VBlank_SaveScreen
 
 	xor a
@@ -564,7 +564,7 @@ Save:
 
 	call VBlank_1f0c6c
 	farcall LoadSaveScreenPals
-	farcall PrintSaveCompleteBox
+	farcall DrawSaveCompleteBox
 
     ; sets wTimer to 512
 	xor a ; LOW(512)

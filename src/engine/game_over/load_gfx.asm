@@ -76,12 +76,12 @@ LoadGameOverGfx:
 Func_db4cf:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, BGMap_dbb8f
+	ld hl, GameOverAttrmap
 	ld bc, v0BGMap0
 	call Decompress
 	xor a
 	ldh [rVBK], a
-	ld hl, BGMap_dbaee
+	ld hl, GameOverTilemap
 	ld bc, v0BGMap0
 	call Decompress
 	ret

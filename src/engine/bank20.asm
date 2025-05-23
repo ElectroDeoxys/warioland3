@@ -819,10 +819,10 @@ InitNorthMapSide:
 	call LoadOverworld1Gfx
 	call LoadOverworldCommonGfx
 	call LoadOverworldArrowsGfx
-	ld bc, BGMap_85bef
-	ld d, BANK(BGMap_85bef)
-	ld hl, BGMap_85d79
-	ld e, BANK(BGMap_85d79)
+	ld bc, OverworldNorthTilemap
+	ld d, BANK(OverworldNorthTilemap)
+	ld hl, OverworldNorthAttrmap
+	ld e, BANK(OverworldNorthAttrmap)
 	call LoadBGMapsToWRAM
 	jp Func_8065e
 
@@ -882,8 +882,8 @@ Func_8065e:
 	ld [wMissingTreasureIndicatorsEnabled], a
 	call Func_80b54
 
-	decompress_tilemap BGMap_85b91, v0BGMap0, 29
-	decompress_attrmap BGMap_85bc4, v1BGMap0, 29
+	decompress_tilemap OverworldTopBarTilemap, v0BGMap0, 29
+	decompress_attrmap OverworldTopBarAttrmap, v1BGMap0, 29
 
 	ld a, [wOWBarsState]
 	and a
@@ -922,12 +922,12 @@ Func_8065e:
 	ld a, [wGameModeFlags]
 	bit MODE_TIME_ATTACK_F, a
 	jr nz, .asm_80753
-	decompress_tilemap BGMap_86868, v0BGMap1
-	decompress_attrmap BGMap_868b2, v1BGMap1
+	decompress_tilemap OverworldBottomBarTreasuresTilemap, v0BGMap1
+	decompress_attrmap OverworldBottomBarTreasuresAttrmap, v1BGMap1
 	jr .asm_80790
 .asm_80753
-	decompress_tilemap BGMap_868f5, v0BGMap1
-	decompress_attrmap BGMap_86929, v1BGMap1
+	decompress_tilemap OverworldBottomBarTimeAttackTilemap, v0BGMap1
+	decompress_attrmap OverworldBottomBarTimeAttackAttrmap, v1BGMap1
 .asm_80790
 	xor a
 	ld [wWX], a
@@ -1028,10 +1028,10 @@ InitMapSideForScene_North:
 	cp EVENT_DAY_OR_NIGHT_SPELL
 	call nz, LoadOverworldGlowGfx
 
-	ld bc, BGMap_85bef
-	ld d, BANK(BGMap_85bef)
-	ld hl, BGMap_85d79
-	ld e, BANK(BGMap_85d79)
+	ld bc, OverworldNorthTilemap
+	ld d, BANK(OverworldNorthTilemap)
+	ld hl, OverworldNorthAttrmap
+	ld e, BANK(OverworldNorthAttrmap)
 	call LoadBGMapsToWRAM
 ;	fallthrough
 
@@ -1236,18 +1236,18 @@ LoadPalsForOWScene:
 	ret
 
 Func_80ae7:
-	ld bc, BGMap_85f07
-	ld d, BANK(BGMap_85f07)
-	ld hl, BGMap_860ff
-	ld e, BANK(BGMap_860ff)
+	ld bc, OverworldWestTilemap
+	ld d, BANK(OverworldWestTilemap)
+	ld hl, OverworldWestAttrmap
+	ld e, BANK(OverworldWestAttrmap)
 	call LoadBGMapsToWRAM
 	ret
 
 Func_80af5:
-	ld bc, BGMap_86292
-	ld d, BANK(BGMap_86292)
-	ld hl, BGMap_86417
-	ld e, BANK(BGMap_86417)
+	ld bc, OverworldSouthTilemap
+	ld d, BANK(OverworldSouthTilemap)
+	ld hl, OverworldSouthAttrmap
+	ld e, BANK(OverworldSouthAttrmap)
 	call LoadBGMapsToWRAM
 	ld a, EVENT_REVEAL_CASTLE
 	call Func_819c6
@@ -1257,10 +1257,10 @@ Func_80af5:
 	ret
 
 Func_80b1b:
-	ld bc, BGMap_86546
-	ld d, BANK(BGMap_86546)
-	ld hl, BGMap_86700
-	ld e, BANK(BGMap_86700)
+	ld bc, OverworldEastTilemap
+	ld d, BANK(OverworldEastTilemap)
+	ld hl, OverworldEastAttrmap
+	ld e, BANK(OverworldEastAttrmap)
 	call LoadBGMapsToWRAM
 	ret
 

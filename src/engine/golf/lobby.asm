@@ -113,9 +113,9 @@ InitGolfLobby:
 .LoadGolfLobby:
 	ld a, BANK("Golf Gfx 2")
 	ld [wTempBank], a
-	ld hl, BGMap_1c5b4e
+	ld hl, GolfLobbyTilemap
 	push hl
-	ld hl, BGMap_1c5cbe
+	ld hl, GolfLobbyAttrmap
 	push hl
 
 	ld hl, GolfLobbyGfx
@@ -629,9 +629,9 @@ InitGolfClearCutscene:
 .LoadCutsceneGfx:
 	ld a, BANK(GolfMenuGfx)
 	ld [wTempBank], a
-	ld hl, BGMap_1c5d6c
+	ld hl, GolfClearTilemap
 	push hl
-	ld hl, BGMap_1c5dc6
+	ld hl, GolfClearAttrmap
 	push hl
 
 	ld hl, GolfMenuGfx

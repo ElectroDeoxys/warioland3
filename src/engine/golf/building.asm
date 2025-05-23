@@ -91,7 +91,7 @@ Func_1c8604:
 	ld [wTempBank], a
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, BGMap_1c4ea8
+	ld hl, GolfBuildingCoursesAttrmap
 	ld bc, v1BGMap0
 	call FarDecompress
 
@@ -109,11 +109,11 @@ Func_1c8604:
 	ld a, [wHasAllMusicalCoinFlags]
 	and a
 	jr nz, .has_all_musical_coins
-	ld hl, BGMap_1c4c60
-	jr .asm_1c864f
+	ld hl, GolfBuildingCoursesLockedTilemap
+	jr .got_tilemap
 .has_all_musical_coins
-	ld hl, BGMap_1c4d83
-.asm_1c864f
+	ld hl, GolfBuildingCoursesUnlockedTilemap
+.got_tilemap
 	ld bc, v0BGMap0
 	call FarDecompress
 
@@ -368,10 +368,10 @@ Func_1c87db:
 	jp CopyHLToDE
 
 .data
-	dw BGMap_1c48e0, Pals_1ca24f ; GOLF_COURSE_1
-	dw BGMap_1c49c0, Pals_1ca28f ; GOLF_COURSE_2
-	dw BGMap_1c4aa0, Pals_1ca2cf ; GOLF_COURSE_3
-	dw BGMap_1c4b80, Pals_1ca30f ; GOLF_COURSE_4
+	dw GolfBuildingCourse1Tilemap, Pals_1ca24f ; GOLF_COURSE_1
+	dw GolfBuildingCourse2Tilemap, Pals_1ca28f ; GOLF_COURSE_2
+	dw GolfBuildingCourse3Tilemap, Pals_1ca2cf ; GOLF_COURSE_3
+	dw GolfBuildingCourse4Tilemap, Pals_1ca30f ; GOLF_COURSE_4
 
 ; gets the golf course scroll X value
 ; and writes it as the target SCX
@@ -482,7 +482,7 @@ Func_1c8837:
 	ld a, [hl]
 	ld [wGolfCourse], a
 	call Func_1c87db
-	ld hl, BGMap_1c4800
+	ld hl, GolfBuildingCourseScrollingAttrmap
 	ld de, wGoldBuildingCourseAttrMap
 	ld bc, 7 * BG_MAP_WIDTH
 	call FarCopyHLToDE_BC2

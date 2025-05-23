@@ -279,8 +279,8 @@ Func_b417a:
 	farcall Func_80bd9
 	farcall VBlank_Overworld
 
-	decompress_tilemap BGMap_86868, v0BGMap1
-	decompress_attrmap BGMap_868b2, v1BGMap1
+	decompress_tilemap OverworldBottomBarTreasuresTilemap, v0BGMap1
+	decompress_attrmap OverworldBottomBarTreasuresAttrmap, v1BGMap1
 
 	xor a
 	ld [wWX], a
@@ -314,8 +314,8 @@ Func_b4247:
 	cp c
 	ret nz
 
-	decompress_attrmap BGMap_85eda, v1BGMap0, 29
-	decompress_tilemap BGMap_85ea7, v0BGMap0, 29
+	decompress_attrmap OverworldTopBarDayNightAttrmap, v1BGMap0, 29
+	decompress_tilemap OverworldTopBarDayNightTilemap, v0BGMap0, 29
 
 	hlbgcoord 0, 30
 	debgcoord 0, 21, wAttrmap
@@ -895,15 +895,15 @@ Func_b46a0:
 	ld [w2d03e], a
 	ld [w2d046], a
 
-	ld hl, BGMap_857f7
+	ld hl, OWSceneFreezeSeaTilemap
 	debgcoord 15, 10, wTilemap
 	ld c, $91
-	ld b, BANK(BGMap_857f7)
+	ld b, BANK(OWSceneFreezeSeaTilemap)
 	call CopyFarBytes
-	ld hl, BGMap_85897
+	ld hl, OWSceneFreezeSeaAttrmap
 	debgcoord 15, 10, wAttrmap
 	ld c, $91
-	ld b, BANK(BGMap_85897)
+	ld b, BANK(OWSceneFreezeSeaAttrmap)
 	jp CopyFarBytes
 
 .asm_b46cd

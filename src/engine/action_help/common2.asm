@@ -81,12 +81,12 @@ LoadActionHelpGfx:
 LoadActionHelpBGMaps:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld hl, BGMap_1e68bd
+	ld hl, ActionHelpAttrmap
 	ld bc, v1BGMap1
 	call Decompress
 	xor a
 	ldh [rVBK], a
-	ld hl, BGMap_1e6796
+	ld hl, ActionHelpTilemap
 	ld bc, v0BGMap1
 	call Decompress
 

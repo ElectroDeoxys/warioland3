@@ -148,7 +148,7 @@ InitIntroSequence:
 ; get darker tone behind menu options
 	xor a ; VRAM0
 	ldh [rVBK], a
-	ld hl, BGMap_6b47
+	ld hl, TitleScreenBoxTilemap
 	debgcoord 4, 14
 	push de
 	ld b, 12

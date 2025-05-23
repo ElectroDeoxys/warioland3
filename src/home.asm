@@ -45,24 +45,30 @@ INCLUDE "home/double_speed.asm"
 INCLUDE "home/clear_ram.asm"
 INCLUDE "home/bg_ob_pals.asm"
 
+
 SECTION "Home 2", ROM0
 
 INCLUDE "home/load_room.asm"
+
 
 SECTION "Home 3", ROM0
 
 INCLUDE "home/far_decompress.asm"
 INCLUDE "home/load_golf_sprite.asm"
 
+
 SECTION "Home 4", ROM0
 
 INCLUDE "home/object_mechanics.asm"
+
 
 SECTION "Home 5", ROM0
 
 INCLUDE "home/overworld.asm"
 
+
 SECTION "Audio Home", ROM0
+
 INCLUDE "home/audio.asm"
 
 	ds $3d, $00

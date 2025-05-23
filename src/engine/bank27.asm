@@ -215,8 +215,8 @@ CutsceneInitFunctions:
 .InitCutscene06:
 	call LoadCutscenes3Gfx
 
-	decompress_attrmap BGMap_b956d, v1BGMap0
-	decompress_tilemap BGMap_b951f, v0BGMap0
+	decompress_attrmap Cutscene08Attrmap, v1BGMap0
+	decompress_tilemap Cutscene08Tilemap, v0BGMap0
 
 	ld b, BANK(Pals_b8080)
 	ld hl, Pals_b8080
@@ -229,8 +229,8 @@ CutsceneInitFunctions:
 .InitCutscene07:
 	call LoadCutscenes1Gfx_Vram0
 
-	decompress_attrmap BGMap_b9424, v1BGMap0
-	decompress_tilemap BGMap_b93c8, v0BGMap0
+	decompress_attrmap Cutscene06Attrmap, v1BGMap0
+	decompress_tilemap Cutscene06Tilemap, v0BGMap0
 
 	ld b, BANK(Pals_b8000)
 	ld hl, Pals_b8000
@@ -408,8 +408,8 @@ CutsceneInitFunctions:
 
 	call Func_9ca77
 
-	decompress_attrmap BGMap_ba64e, v1BGMap1
-	decompress_tilemap BGMap_ba5fd, v0BGMap1
+	decompress_attrmap Cutscene33Attrmap, v1BGMap1
+	decompress_tilemap Cutscene33Tilemap, v0BGMap1
 
 	ld b, BANK(Pals_b8040)
 	ld hl, Pals_b8040
@@ -429,16 +429,16 @@ CutsceneInitFunctions:
 
 	call LoadCutscenes3Gfx
 
-	decompress_attrmap BGMap_b9691, v1BGMap0
-	decompress_tilemap BGMap_b9635, v0BGMap0
+	decompress_attrmap Cutscene09Attrmap, v1BGMap0
+	decompress_tilemap Cutscene09Tilemap, v0BGMap0
 
 	jp Func_9d536
 
 .InitCutscene22:
 	call LoadCutscenes3Gfx
 
-	decompress_attrmap BGMap_b97c4, v1BGMap0
-	decompress_tilemap BGMap_b9768, v0BGMap0
+	decompress_attrmap Cutscene10Attrmap, v1BGMap0
+	decompress_tilemap Cutscene10Tilemap, v0BGMap0
 
 	jp ClearTempPals_Bank27
 
@@ -472,8 +472,8 @@ CutsceneInitFunctions:
 	xor a
 	ldh [rVBK], a
 
-	decompress_attrmap BGMap_b9859, v1BGMap0
-	decompress_tilemap BGMap_b9816, v0BGMap0
+	decompress_attrmap Cutscene11Attrmap, v1BGMap0
+	decompress_tilemap Cutscene11Tilemap, v0BGMap0
 
 	ld hl, Pals_cc5c0
 	ld de, wTempPals1
@@ -875,240 +875,240 @@ LoadCutsceneTilemap1:
 	jr LoadCutsceneBGMap
 
 Func_9ca6a:
-	ld hl, BGMap_b9113
+	ld hl, Cutscene01Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_b9100
+	ld hl, Cutscene01Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9ca77:
-	ld hl, BGMap_b9235
+	ld hl, Cutscene03Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_b91e7
+	ld hl, Cutscene03Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9ca84:
-	ld hl, BGMap_b94d1
+	ld hl, Cutscene07Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_b9475
+	ld hl, Cutscene07Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9ca91:
-	ld hl, BGMap_b98d7
+	ld hl, Cutscene12Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_b989c
+	ld hl, Cutscene12Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9ca9e:
-	ld hl, BGMap_b996e
+	ld hl, Cutscene13Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_b9920
+	ld hl, Cutscene13Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9caab:
-	ld hl, BGMap_b9a8c
+	ld hl, Cutscene15Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_b9a22
+	ld hl, Cutscene15Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9cab8:
-	ld hl, BGMap_b9b2d
+	ld hl, Cutscene16Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_b9ae0
+	ld hl, Cutscene16Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9cac5:
-	ld hl, BGMap_b9be0
+	ld hl, Cutscene17Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_b9b84
+	ld hl, Cutscene17Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9cad2:
-	ld hl, BGMap_b9c75
+	ld hl, Cutscene18Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_b9c2c
+	ld hl, Cutscene18Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9cadf:
-	ld hl, BGMap_b9da3
+	ld hl, Cutscene20Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_b9d48
+	ld hl, Cutscene20Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9caec:
-	ld hl, BGMap_b9ed5
+	ld hl, Cutscene22Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_b9e7b
+	ld hl, Cutscene22Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9caf9:
-	ld hl, BGMap_b9f73
+	ld hl, Cutscene23Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_b9f1e
+	ld hl, Cutscene23Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9cb06:
-	ld hl, BGMap_b9fe6
+	ld hl, Cutscene24Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_b9fb1
+	ld hl, Cutscene24Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9cb13:
-	ld hl, BGMap_ba0e6
+	ld hl, Cutscene26Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_ba0b4
+	ld hl, Cutscene26Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9cb20:
-	ld hl, BGMap_ba19c
+	ld hl, Cutscene27Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_ba143
+	ld hl, Cutscene27Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9cb2d:
-	ld hl, BGMap_ba286
+	ld hl, Cutscene28Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_ba221
+	ld hl, Cutscene28Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9cb3a:
-	ld hl, BGMap_ba37b
+	ld hl, Cutscene29Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_ba31f
+	ld hl, Cutscene29Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9cb47:
-	ld hl, BGMap_ba425
+	ld hl, Cutscene30Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_ba3d3
+	ld hl, Cutscene30Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9cb54:
-	ld hl, BGMap_ba4c4
+	ld hl, Cutscene31Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_ba46a
+	ld hl, Cutscene31Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9cb61:
-	ld hl, BGMap_ba5a0
+	ld hl, Cutscene32Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_ba544
+	ld hl, Cutscene32Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9cb6e:
-	ld hl, BGMap_ba6e1
+	ld hl, Cutscene34Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_ba685
+	ld hl, Cutscene34Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9cb7b:
-	ld hl, BGMap_ba82d
+	ld hl, Cutscene36Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_ba7f9
+	ld hl, Cutscene36Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9cb88:
-	ld hl, BGMap_ba8a6
+	ld hl, Cutscene37Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_ba865
+	ld hl, Cutscene37Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9cb95:
-	ld hl, BGMap_ba9b4
+	ld hl, Cutscene39Attrmap
 	call LoadCutsceneAttrmap0
-	ld hl, BGMap_ba958
+	ld hl, Cutscene39Tilemap
 	call LoadCutsceneTilemap0
 	ret
 
 Func_9cba2:
-	ld hl, BGMap_b919b
+	ld hl, Cutscene02Attrmap
 	call LoadCutsceneAttrmap1
-	ld hl, BGMap_b914a
+	ld hl, Cutscene02Tilemap
 	call LoadCutsceneTilemap1
 	ret
 
 Func_9cbaf:
-	ld hl, BGMap_b92c2
+	ld hl, Cutscene04Attrmap
 	call LoadCutsceneAttrmap1
-	ld hl, BGMap_b926d
+	ld hl, Cutscene04Tilemap
 	call LoadCutsceneTilemap1
 	ret
 
 Func_9cbbc:
-	ld hl, BGMap_b936c
+	ld hl, Cutscene05Attrmap
 	call LoadCutsceneAttrmap1
-	ld hl, BGMap_b9310
+	ld hl, Cutscene05Tilemap
 	call LoadCutsceneTilemap1
 	ret
 
 Func_9cbc9:
-	ld hl, BGMap_b99e8
+	ld hl, Cutscene14Attrmap
 	call LoadCutsceneAttrmap1
-	ld hl, BGMap_b99aa
+	ld hl, Cutscene14Tilemap
 	call LoadCutsceneTilemap1
 	ret
 
 Func_9cbd6:
-	ld hl, BGMap_b9d01
+	ld hl, Cutscene19Attrmap
 	call LoadCutsceneAttrmap1
-	ld hl, BGMap_b9cb8
+	ld hl, Cutscene19Tilemap
 	call LoadCutsceneTilemap1
 	ret
 
 Func_9cbe3:
-	ld hl, BGMap_b9e3b
+	ld hl, Cutscene21Attrmap
 	call LoadCutsceneAttrmap1
-	ld hl, BGMap_b9dea
+	ld hl, Cutscene21Tilemap
 	call LoadCutsceneTilemap1
 	ret
 
 Func_9cbf0:
-	ld hl, BGMap_ba07d
+	ld hl, Cutscene25Attrmap
 	call LoadCutsceneAttrmap1
-	ld hl, BGMap_ba02a
+	ld hl, Cutscene25Tilemap
 	call LoadCutsceneTilemap1
 	ret
 
 Func_9cbfd:
-	ld hl, BGMap_ba79c
+	ld hl, Cutscene35Attrmap
 	call LoadCutsceneAttrmap1
-	ld hl, BGMap_ba740
+	ld hl, Cutscene35Tilemap
 	call LoadCutsceneTilemap1
 	ret
 
 Func_9cc0a:
-	ld hl, BGMap_ba925
+	ld hl, Cutscene38Attrmap
 	call LoadCutsceneAttrmap1
-	ld hl, BGMap_ba8d2
+	ld hl, Cutscene38Tilemap
 	call LoadCutsceneTilemap1
 	ret
 
 Func_9cc17:
-	ld hl, BGMap_baa6e
+	ld hl, Cutscene40Attrmap
 	call LoadCutsceneAttrmap1
-	ld hl, BGMap_baa12
+	ld hl, Cutscene40Tilemap
 	call LoadCutsceneTilemap1
 	ret
 

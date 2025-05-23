@@ -2,12 +2,11 @@ OldMan2Gfx: INCBIN "gfx/cutscenes/old_man2.2bpp"
 EpilogueStarGfx: INCBIN "gfx/epilogue_star.2bpp"
 OldMan1Gfx: INCBIN "gfx/cutscenes/old_man1.2bpp"
 
-BGMap_15cd00: INCBIN "gfx/bgmaps/map_15cd00.tilemap"
-BGMap_15cf40: INCBIN "gfx/bgmaps/map_15cf40.attrmap"
-EpilogueGfx: INCBIN "gfx/epilogue.2bpp.rle"
-
-BGMap_15df9b: INCBIN "gfx/bgmaps/map_15df9b.tilemap.rle"
-BGMap_15dff8: INCBIN "gfx/bgmaps/map_15dff8.attrmap.rle"
+EpilogueCrowdTilemap:          INCBIN "data/bgmaps/epilogue_crowd.tilemap"
+EpilogueCrowdAttrmap:          INCBIN "data/bgmaps/epilogue_crowd.attrmap"
+EpilogueGfx:                   INCBIN "gfx/epilogue.2bpp.rle"
+EpilogueTransformationTilemap: INCBIN "data/bgmaps/epilogue_transformation.tilemap.rle"
+EpilogueTransformationAttrmap: INCBIN "data/bgmaps/epilogue_transformation.attrmap.rle"
 
 TextJP_OldManThankYou: INCBIN "text/text_15e06b.tilemap.rle"
 Text_15e212: INCBIN "text/text_15e212.tilemap" ; unreferenced
