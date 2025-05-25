@@ -1,9 +1,9 @@
-OverworldClouds1Gfx:: INCBIN "gfx/overworld/overworld_clouds1.2bpp"
-OverworldClouds2Gfx:: INCBIN "gfx/overworld/overworld_clouds2.2bpp"
-OverworldSeaGfx::     INCBIN "gfx/overworld/overworld_sea.2bpp"
-OverworldCliffs1Gfx:: INCBIN "gfx/overworld/overworld_cliffs1.2bpp"
-OverworldCliffs2Gfx:: INCBIN "gfx/overworld/overworld_cliffs2.2bpp"
-UnusedOverworldCliffsGfx:: INCBIN "gfx/overworld/unused_overworld_cliffs.2bpp" ; unreferenced
+OverworldClouds1Gfx:: INCBIN "gfx/overworld/clouds1.2bpp"
+OverworldClouds2Gfx:: INCBIN "gfx/overworld/clouds2.2bpp"
+OverworldSeaGfx::     INCBIN "gfx/overworld/sea.2bpp"
+OverworldCliffs1Gfx:: INCBIN "gfx/overworld/cliffs1.2bpp"
+OverworldCliffs2Gfx:: INCBIN "gfx/overworld/cliffs2.2bpp"
+UnusedOverworldCliffsGfx:: INCBIN "gfx/overworld/unused_cliffs.2bpp" ; unreferenced
 
 ; updates animations for clouds, sea and cliffs
 UpdateCommonOWAnimations:

@@ -12,24 +12,24 @@ SECTION "Golf Gfx 2", ROMX
 
 WarioGolfMissGfx:: INCBIN "gfx/wario/golf_miss.2bpp"
 
-GolfBuildingCourseScrollingAttrmap: INCBIN "data/bgmaps/golf_building_course_scrolling.attrmap"
+GolfBuildingCourseScrollingAttrmap: INCBIN "data/bgmaps/golf/building_course_scrolling.attrmap"
 
-GolfBuildingCourse1Tilemap: INCBIN "data/bgmaps/golf_building_course_1.tilemap"
-GolfBuildingCourse2Tilemap: INCBIN "data/bgmaps/golf_building_course_2.tilemap"
-GolfBuildingCourse3Tilemap: INCBIN "data/bgmaps/golf_building_course_3.tilemap"
-GolfBuildingCourse4Tilemap: INCBIN "data/bgmaps/golf_building_course_4.tilemap"
+GolfBuildingCourse1Tilemap: INCBIN "data/bgmaps/golf/building_course_1.tilemap"
+GolfBuildingCourse2Tilemap: INCBIN "data/bgmaps/golf/building_course_2.tilemap"
+GolfBuildingCourse3Tilemap: INCBIN "data/bgmaps/golf/building_course_3.tilemap"
+GolfBuildingCourse4Tilemap: INCBIN "data/bgmaps/golf/building_course_4.tilemap"
 
-GolfBuildingCoursesLockedTilemap:   INCBIN "data/bgmaps/golf_building_courses_locked.tilemap.rle"
-GolfBuildingCoursesUnlockedTilemap: INCBIN "data/bgmaps/golf_building_courses_unlocked.tilemap.rle"
-GolfBuildingCoursesAttrmap:         INCBIN "data/bgmaps/golf_building_courses.attrmap.rle"
+GolfBuildingCoursesLockedTilemap:   INCBIN "data/bgmaps/golf/building_courses_locked.tilemap.rle"
+GolfBuildingCoursesUnlockedTilemap: INCBIN "data/bgmaps/golf/building_courses_unlocked.tilemap.rle"
+GolfBuildingCoursesAttrmap:         INCBIN "data/bgmaps/golf/building_courses.attrmap.rle"
 
 GolfLobbyGfx: INCBIN "gfx/golf/golf_lobby.2bpp.rle"
 
-GolfLobbyTilemap: INCBIN "data/bgmaps/golf_lobby.tilemap.rle"
-GolfLobbyAttrmap: INCBIN "data/bgmaps/golf_lobby.attrmap.rle"
+GolfLobbyTilemap: INCBIN "data/bgmaps/golf/lobby.tilemap.rle"
+GolfLobbyAttrmap: INCBIN "data/bgmaps/golf/lobby.attrmap.rle"
 
-GolfClearTilemap: INCBIN "data/bgmaps/golf_clear.tilemap.rle"
-GolfClearAttrmap: INCBIN "data/bgmaps/golf_clear.attrmap.rle"
+GolfClearTilemap: INCBIN "data/bgmaps/golf/clear.tilemap.rle"
+GolfClearAttrmap: INCBIN "data/bgmaps/golf/clear.attrmap.rle"
 
 
 SECTION "Bank 72", ROMX

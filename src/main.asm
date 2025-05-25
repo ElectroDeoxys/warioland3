@@ -378,8 +378,8 @@ INCLUDE "data/clear/palettes.asm"
 
 ; TODO in its own section to be added to golf.o?
 GolfMenuGfx::    INCBIN "gfx/golf/golf_menu.2bpp.rle"
-GolfMenuTilemap: INCBIN "data/bgmaps/golf_menu.tilemap.rle"
-GolfMenuAttrmap: INCBIN "data/bgmaps/golf_menu.attrmap.rle"
+GolfMenuTilemap: INCBIN "data/bgmaps/golf/menu.tilemap.rle"
+GolfMenuAttrmap: INCBIN "data/bgmaps/golf/menu.attrmap.rle"
 
 INCLUDE "data/clear/pencil_oam.asm"
 

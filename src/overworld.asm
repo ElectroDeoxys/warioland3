@@ -16,11 +16,11 @@ Overworld1Gfx:       INCBIN "gfx/overworld/overworld1.2bpp.rle"
 Overworld2Gfx:       INCBIN "gfx/overworld/overworld2.2bpp.rle"
 Overworld3Gfx:       INCBIN "gfx/overworld/overworld3.2bpp.rle"
 Overworld4Gfx:       INCBIN "gfx/overworld/overworld4.2bpp.rle"
-OverworldRocksGfx:   INCBIN "gfx/overworld/overworld_rocks.2bpp.rle"
-OverworldCommonGfx:  INCBIN "gfx/overworld/overworld_common.2bpp.rle"
-OverworldArrowsGfx:  INCBIN "gfx/overworld/overworld_arrows.2bpp.rle"
-OverworldGlowGfx:    INCBIN "gfx/overworld/overworld_glow.2bpp.rle"
-OverworldNumbersGfx: INCBIN "gfx/overworld/overworld_numbers.2bpp.rle"
+OverworldRocksGfx:   INCBIN "gfx/overworld/rocks.2bpp.rle"
+OverworldCommonGfx:  INCBIN "gfx/overworld/common.2bpp.rle"
+OverworldArrowsGfx:  INCBIN "gfx/overworld/arrows.2bpp.rle"
+OverworldGlowGfx:    INCBIN "gfx/overworld/glow.2bpp.rle"
+OverworldNumbersGfx: INCBIN "gfx/overworld/numbers.2bpp.rle"
 
 DebugUnknownTextGfx: INCBIN "gfx/debug_unknown_text.2bpp"
 
@@ -30,16 +30,16 @@ DebugUnknownTextGfx: INCBIN "gfx/debug_unknown_text.2bpp"
 SECTION "Bank 23", ROMX
 
 Overworld5Gfx:          INCBIN "gfx/overworld/overworld5.2bpp.rle"
-OverworldThunderGfx:    INCBIN "gfx/overworld/overworld_thunder.2bpp.rle"
-OverworldTowerGfx:      INCBIN "gfx/overworld/overworld_tower.2bpp.rle"
-OverworldFanGfx:        INCBIN "gfx/overworld/overworld_fan.2bpp.rle"
-OverworldExplosion1Gfx: INCBIN "gfx/overworld/overworld_explosion1.2bpp.rle"
+OverworldThunderGfx:    INCBIN "gfx/overworld/thunder.2bpp.rle"
+OverworldTowerGfx:      INCBIN "gfx/overworld/tower.2bpp.rle"
+OverworldFanGfx:        INCBIN "gfx/overworld/fan.2bpp.rle"
+OverworldExplosion1Gfx: INCBIN "gfx/overworld/explosion1.2bpp.rle"
 Overworld6Gfx:          INCBIN "gfx/overworld/overworld6.2bpp.rle"
-OverworldExplosion2Gfx: INCBIN "gfx/overworld/overworld_explosion2.2bpp.rle"
-OverworldFireGfx:       INCBIN "gfx/overworld/overworld_fire.2bpp.rle"
-OverworldTorchGfx:      INCBIN "gfx/overworld/overworld_torch.2bpp.rle"
-OverworldExplosion3Gfx: INCBIN "gfx/overworld/overworld_explosion3.2bpp.rle"
-OverworldSmokeGfx:      INCBIN "gfx/overworld/overworld_smoke.2bpp.rle"
+OverworldExplosion2Gfx: INCBIN "gfx/overworld/explosion2.2bpp.rle"
+OverworldFireGfx:       INCBIN "gfx/overworld/fire.2bpp.rle"
+OverworldTorchGfx:      INCBIN "gfx/overworld/torch.2bpp.rle"
+OverworldExplosion3Gfx: INCBIN "gfx/overworld/explosion3.2bpp.rle"
+OverworldSmokeGfx:      INCBIN "gfx/overworld/smoke.2bpp.rle"
 
 
 SECTION "Bank 24", ROMX
@@ -137,8 +137,8 @@ INCBIN "text/en/hidden_figure_replenish_power.tilemap.rle"
 ; unreferenced
 BGMap_b2533: INCBIN "data/bgmaps/map_b2533.bin"
 
-GolfBuildingTilemap: INCBIN "data/bgmaps/golf_building.tilemap.rle"
-GolfBuildingAttrmap: INCBIN "data/bgmaps/golf_building.attrmap.rle"
+GolfBuildingTilemap: INCBIN "data/bgmaps/golf/building.tilemap.rle"
+GolfBuildingAttrmap: INCBIN "data/bgmaps/golf/building.attrmap.rle"
 
 BestTimeListGfx:     INCBIN "gfx/best_time_list.2bpp.rle"
 BestTimeListTilemap: INCBIN "data/bgmaps/best_time_list.tilemap.rle"
@@ -178,125 +178,125 @@ INCLUDE "data/overworld/cutscene/palettes.asm"
 
 SECTION "Cutscene BG Maps", ROMX
 
-Cutscene01Tilemap: INCBIN "data/bgmaps/cutscene_01.tilemap.rle"
-Cutscene01Attrmap: INCBIN "data/bgmaps/cutscene_01.attrmap.rle"
+Cutscene01Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_01.tilemap.rle"
+Cutscene01Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_01.attrmap.rle"
 
-Cutscene02Tilemap: INCBIN "data/bgmaps/cutscene_02.tilemap.rle"
-Cutscene02Attrmap: INCBIN "data/bgmaps/cutscene_02.attrmap.rle"
+Cutscene02Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_02.tilemap.rle"
+Cutscene02Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_02.attrmap.rle"
 
-Cutscene03Tilemap: INCBIN "data/bgmaps/cutscene_03.tilemap.rle"
-Cutscene03Attrmap: INCBIN "data/bgmaps/cutscene_03.attrmap.rle"
+Cutscene03Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_03.tilemap.rle"
+Cutscene03Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_03.attrmap.rle"
 
-Cutscene04Tilemap: INCBIN "data/bgmaps/cutscene_04.tilemap.rle"
-Cutscene04Attrmap: INCBIN "data/bgmaps/cutscene_04.attrmap.rle"
+Cutscene04Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_04.tilemap.rle"
+Cutscene04Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_04.attrmap.rle"
 
-Cutscene05Tilemap: INCBIN "data/bgmaps/cutscene_05.tilemap.rle"
-Cutscene05Attrmap: INCBIN "data/bgmaps/cutscene_05.attrmap.rle"
+Cutscene05Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_05.tilemap.rle"
+Cutscene05Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_05.attrmap.rle"
 
-Cutscene06Tilemap: INCBIN "data/bgmaps/cutscene_06.tilemap.rle"
-Cutscene06Attrmap: INCBIN "data/bgmaps/cutscene_06.attrmap.rle"
+Cutscene06Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_06.tilemap.rle"
+Cutscene06Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_06.attrmap.rle"
 
-Cutscene07Tilemap: INCBIN "data/bgmaps/cutscene_07.tilemap.rle"
-Cutscene07Attrmap: INCBIN "data/bgmaps/cutscene_07.attrmap.rle"
+Cutscene07Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_07.tilemap.rle"
+Cutscene07Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_07.attrmap.rle"
 
-Cutscene08Tilemap: INCBIN "data/bgmaps/cutscene_08.tilemap.rle"
-Cutscene08Attrmap: INCBIN "data/bgmaps/cutscene_08.attrmap.rle"
+Cutscene08Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_08.tilemap.rle"
+Cutscene08Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_08.attrmap.rle"
 
-Cutscene09Tilemap: INCBIN "data/bgmaps/cutscene_09.tilemap.rle"
-Cutscene09Attrmap: INCBIN "data/bgmaps/cutscene_09.attrmap.rle"
+Cutscene09Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_09.tilemap.rle"
+Cutscene09Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_09.attrmap.rle"
 
-Cutscene10Tilemap: INCBIN "data/bgmaps/cutscene_10.tilemap.rle"
-Cutscene10Attrmap: INCBIN "data/bgmaps/cutscene_10.attrmap.rle"
+Cutscene10Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_10.tilemap.rle"
+Cutscene10Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_10.attrmap.rle"
 
-Cutscene11Tilemap: INCBIN "data/bgmaps/cutscene_11.tilemap.rle"
-Cutscene11Attrmap: INCBIN "data/bgmaps/cutscene_11.attrmap.rle"
+Cutscene11Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_11.tilemap.rle"
+Cutscene11Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_11.attrmap.rle"
 
-Cutscene12Tilemap: INCBIN "data/bgmaps/cutscene_12.tilemap.rle"
-Cutscene12Attrmap: INCBIN "data/bgmaps/cutscene_12.attrmap.rle"
+Cutscene12Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_12.tilemap.rle"
+Cutscene12Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_12.attrmap.rle"
 
-Cutscene13Tilemap: INCBIN "data/bgmaps/cutscene_13.tilemap.rle"
-Cutscene13Attrmap: INCBIN "data/bgmaps/cutscene_13.attrmap.rle"
+Cutscene13Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_13.tilemap.rle"
+Cutscene13Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_13.attrmap.rle"
 
-Cutscene14Tilemap: INCBIN "data/bgmaps/cutscene_14.tilemap.rle"
-Cutscene14Attrmap: INCBIN "data/bgmaps/cutscene_14.attrmap.rle"
+Cutscene14Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_14.tilemap.rle"
+Cutscene14Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_14.attrmap.rle"
 
-Cutscene15Tilemap: INCBIN "data/bgmaps/cutscene_15.tilemap.rle"
-Cutscene15Attrmap: INCBIN "data/bgmaps/cutscene_15.attrmap.rle"
+Cutscene15Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_15.tilemap.rle"
+Cutscene15Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_15.attrmap.rle"
 
-Cutscene16Tilemap: INCBIN "data/bgmaps/cutscene_16.tilemap.rle"
-Cutscene16Attrmap: INCBIN "data/bgmaps/cutscene_16.attrmap.rle"
+Cutscene16Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_16.tilemap.rle"
+Cutscene16Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_16.attrmap.rle"
 
-Cutscene17Tilemap: INCBIN "data/bgmaps/cutscene_17.tilemap.rle"
-Cutscene17Attrmap: INCBIN "data/bgmaps/cutscene_17.attrmap.rle"
+Cutscene17Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_17.tilemap.rle"
+Cutscene17Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_17.attrmap.rle"
 
-Cutscene18Tilemap: INCBIN "data/bgmaps/cutscene_18.tilemap.rle"
-Cutscene18Attrmap: INCBIN "data/bgmaps/cutscene_18.attrmap.rle"
+Cutscene18Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_18.tilemap.rle"
+Cutscene18Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_18.attrmap.rle"
 
-Cutscene19Tilemap: INCBIN "data/bgmaps/cutscene_19.tilemap.rle"
-Cutscene19Attrmap: INCBIN "data/bgmaps/cutscene_19.attrmap.rle"
+Cutscene19Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_19.tilemap.rle"
+Cutscene19Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_19.attrmap.rle"
 
-Cutscene20Tilemap: INCBIN "data/bgmaps/cutscene_20.tilemap.rle"
-Cutscene20Attrmap: INCBIN "data/bgmaps/cutscene_20.attrmap.rle"
+Cutscene20Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_20.tilemap.rle"
+Cutscene20Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_20.attrmap.rle"
 
-Cutscene21Tilemap: INCBIN "data/bgmaps/cutscene_21.tilemap.rle"
-Cutscene21Attrmap: INCBIN "data/bgmaps/cutscene_21.attrmap.rle"
+Cutscene21Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_21.tilemap.rle"
+Cutscene21Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_21.attrmap.rle"
 
-Cutscene22Tilemap: INCBIN "data/bgmaps/cutscene_22.tilemap.rle"
-Cutscene22Attrmap: INCBIN "data/bgmaps/cutscene_22.attrmap.rle"
+Cutscene22Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_22.tilemap.rle"
+Cutscene22Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_22.attrmap.rle"
 
-Cutscene23Tilemap: INCBIN "data/bgmaps/cutscene_23.tilemap.rle"
-Cutscene23Attrmap: INCBIN "data/bgmaps/cutscene_23.attrmap.rle"
+Cutscene23Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_23.tilemap.rle"
+Cutscene23Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_23.attrmap.rle"
 
-Cutscene24Tilemap: INCBIN "data/bgmaps/cutscene_24.tilemap.rle"
-Cutscene24Attrmap: INCBIN "data/bgmaps/cutscene_24.attrmap.rle"
+Cutscene24Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_24.tilemap.rle"
+Cutscene24Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_24.attrmap.rle"
 
-Cutscene25Tilemap: INCBIN "data/bgmaps/cutscene_25.tilemap.rle"
-Cutscene25Attrmap: INCBIN "data/bgmaps/cutscene_25.attrmap.rle"
+Cutscene25Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_25.tilemap.rle"
+Cutscene25Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_25.attrmap.rle"
 
-Cutscene26Tilemap: INCBIN "data/bgmaps/cutscene_26.tilemap.rle"
-Cutscene26Attrmap: INCBIN "data/bgmaps/cutscene_26.attrmap.rle"
+Cutscene26Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_26.tilemap.rle"
+Cutscene26Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_26.attrmap.rle"
 
-Cutscene27Tilemap: INCBIN "data/bgmaps/cutscene_27.tilemap.rle"
-Cutscene27Attrmap: INCBIN "data/bgmaps/cutscene_27.attrmap.rle"
+Cutscene27Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_27.tilemap.rle"
+Cutscene27Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_27.attrmap.rle"
 
-Cutscene28Tilemap: INCBIN "data/bgmaps/cutscene_28.tilemap.rle"
-Cutscene28Attrmap: INCBIN "data/bgmaps/cutscene_28.attrmap.rle"
+Cutscene28Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_28.tilemap.rle"
+Cutscene28Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_28.attrmap.rle"
 
-Cutscene29Tilemap: INCBIN "data/bgmaps/cutscene_29.tilemap.rle"
-Cutscene29Attrmap: INCBIN "data/bgmaps/cutscene_29.attrmap.rle"
+Cutscene29Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_29.tilemap.rle"
+Cutscene29Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_29.attrmap.rle"
 
-Cutscene30Tilemap: INCBIN "data/bgmaps/cutscene_30.tilemap.rle"
-Cutscene30Attrmap: INCBIN "data/bgmaps/cutscene_30.attrmap.rle"
+Cutscene30Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_30.tilemap.rle"
+Cutscene30Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_30.attrmap.rle"
 
-Cutscene31Tilemap: INCBIN "data/bgmaps/cutscene_31.tilemap.rle"
-Cutscene31Attrmap: INCBIN "data/bgmaps/cutscene_31.attrmap.rle"
+Cutscene31Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_31.tilemap.rle"
+Cutscene31Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_31.attrmap.rle"
 
-Cutscene32Tilemap: INCBIN "data/bgmaps/cutscene_32.tilemap.rle"
-Cutscene32Attrmap: INCBIN "data/bgmaps/cutscene_32.attrmap.rle"
+Cutscene32Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_32.tilemap.rle"
+Cutscene32Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_32.attrmap.rle"
 
-Cutscene33Tilemap: INCBIN "data/bgmaps/cutscene_33.tilemap.rle"
-Cutscene33Attrmap: INCBIN "data/bgmaps/cutscene_33.attrmap.rle"
+Cutscene33Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_33.tilemap.rle"
+Cutscene33Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_33.attrmap.rle"
 
-Cutscene34Tilemap: INCBIN "data/bgmaps/cutscene_34.tilemap.rle"
-Cutscene34Attrmap: INCBIN "data/bgmaps/cutscene_34.attrmap.rle"
+Cutscene34Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_34.tilemap.rle"
+Cutscene34Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_34.attrmap.rle"
 
-Cutscene35Tilemap: INCBIN "data/bgmaps/cutscene_35.tilemap.rle"
-Cutscene35Attrmap: INCBIN "data/bgmaps/cutscene_35.attrmap.rle"
+Cutscene35Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_35.tilemap.rle"
+Cutscene35Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_35.attrmap.rle"
 
-Cutscene36Tilemap: INCBIN "data/bgmaps/cutscene_36.tilemap.rle"
-Cutscene36Attrmap: INCBIN "data/bgmaps/cutscene_36.attrmap.rle"
+Cutscene36Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_36.tilemap.rle"
+Cutscene36Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_36.attrmap.rle"
 
-Cutscene37Tilemap: INCBIN "data/bgmaps/cutscene_37.tilemap.rle"
-Cutscene37Attrmap: INCBIN "data/bgmaps/cutscene_37.attrmap.rle"
+Cutscene37Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_37.tilemap.rle"
+Cutscene37Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_37.attrmap.rle"
 
-Cutscene38Tilemap: INCBIN "data/bgmaps/cutscene_38.tilemap.rle"
-Cutscene38Attrmap: INCBIN "data/bgmaps/cutscene_38.attrmap.rle"
+Cutscene38Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_38.tilemap.rle"
+Cutscene38Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_38.attrmap.rle"
 
-Cutscene39Tilemap: INCBIN "data/bgmaps/cutscene_39.tilemap.rle"
-Cutscene39Attrmap: INCBIN "data/bgmaps/cutscene_39.attrmap.rle"
+Cutscene39Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_39.tilemap.rle"
+Cutscene39Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_39.attrmap.rle"
 
-Cutscene40Tilemap: INCBIN "data/bgmaps/cutscene_40.tilemap.rle"
-Cutscene40Attrmap: INCBIN "data/bgmaps/cutscene_40.attrmap.rle"
+Cutscene40Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_40.tilemap.rle"
+Cutscene40Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_40.attrmap.rle"
 
 
 SECTION "Overworld OAM 2", ROMX

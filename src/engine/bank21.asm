@@ -1890,9 +1890,9 @@ Data_85657::
 
 
 BGMap_856a8:: INCBIN "data/bgmaps/map_856a8.bin" ; unreferenced
-OWSceneFreezeSeaTilemap:: INCBIN "data/bgmaps/ow_scene_freeze_sea.tilemap"
+OWSceneFreezeSeaTilemap:: INCBIN "data/bgmaps/overworld/ow_scene_freeze_sea.tilemap"
 BGMap_85888:: INCBIN "data/bgmaps/map_85888.bin" ; unreferenced
-OWSceneFreezeSeaAttrmap:: INCBIN "data/bgmaps/ow_scene_freeze_sea.attrmap"
+OWSceneFreezeSeaAttrmap:: INCBIN "data/bgmaps/overworld/ow_scene_freeze_sea.attrmap"
 
 BGMap_85928:: INCBIN "data/bgmaps/map_85928.bin" ; unreferenced
 
@@ -2061,29 +2061,29 @@ Data_85b48:
 
 	db $00 ; end
 
-OverworldTopBarTilemap::INCBIN "data/bgmaps/overworld_top_bar.tilemap.rle"
-OverworldTopBarAttrmap::INCBIN "data/bgmaps/overworld_top_bar.attrmap.rle"
+OverworldTopBarTilemap::INCBIN "data/bgmaps/overworld/top_bar.tilemap.rle"
+OverworldTopBarAttrmap::INCBIN "data/bgmaps/overworld/top_bar.attrmap.rle"
 
-OverworldNorthTilemap::INCBIN "data/bgmaps/overworld_north.tilemap.rle"
-OverworldNorthAttrmap::INCBIN "data/bgmaps/overworld_north.attrmap.rle"
+OverworldNorthTilemap::INCBIN "data/bgmaps/overworld/north.tilemap.rle"
+OverworldNorthAttrmap::INCBIN "data/bgmaps/overworld/north.attrmap.rle"
 
-OverworldTopBarDayNightTilemap::INCBIN "data/bgmaps/overworld_top_bar_day_night.tilemap.rle"
-OverworldTopBarDayNightAttrmap::INCBIN "data/bgmaps/overworld_top_bar_day_night.attrmap.rle"
+OverworldTopBarDayNightTilemap::INCBIN "data/bgmaps/overworld/top_bar_day_night.tilemap.rle"
+OverworldTopBarDayNightAttrmap::INCBIN "data/bgmaps/overworld/top_bar_day_night.attrmap.rle"
 
-OverworldWestTilemap::INCBIN "data/bgmaps/overworld_west.tilemap.rle"
-OverworldWestAttrmap::INCBIN "data/bgmaps/overworld_west.attrmap.rle"
+OverworldWestTilemap::INCBIN "data/bgmaps/overworld/west.tilemap.rle"
+OverworldWestAttrmap::INCBIN "data/bgmaps/overworld/west.attrmap.rle"
 
-OverworldSouthTilemap::INCBIN "data/bgmaps/overworld_south.tilemap.rle"
-OverworldSouthAttrmap::INCBIN "data/bgmaps/overworld_south.attrmap.rle"
+OverworldSouthTilemap::INCBIN "data/bgmaps/overworld/south.tilemap.rle"
+OverworldSouthAttrmap::INCBIN "data/bgmaps/overworld/south.attrmap.rle"
 
-OverworldEastTilemap::INCBIN "data/bgmaps/overworld_east.tilemap.rle"
-OverworldEastAttrmap::INCBIN "data/bgmaps/overworld_east.attrmap.rle"
+OverworldEastTilemap::INCBIN "data/bgmaps/overworld/east.tilemap.rle"
+OverworldEastAttrmap::INCBIN "data/bgmaps/overworld/east.attrmap.rle"
 
-OverworldBottomBarTreasuresTilemap::INCBIN "data/bgmaps/overworld_bottom_bar_treasures.tilemap.rle"
-OverworldBottomBarTreasuresAttrmap::INCBIN "data/bgmaps/overworld_bottom_bar_treasures.attrmap.rle"
+OverworldBottomBarTreasuresTilemap::INCBIN "data/bgmaps/overworld/bottom_bar_treasures.tilemap.rle"
+OverworldBottomBarTreasuresAttrmap::INCBIN "data/bgmaps/overworld/bottom_bar_treasures.attrmap.rle"
 
-OverworldBottomBarTimeAttackTilemap::INCBIN "data/bgmaps/overworld_bottom_bar_time_attack.tilemap.rle"
-OverworldBottomBarTimeAttackAttrmap::INCBIN "data/bgmaps/overworld_bottom_bar_time_attack.attrmap.rle"
+OverworldBottomBarTimeAttackTilemap::INCBIN "data/bgmaps/overworld/bottom_bar_time_attack.tilemap.rle"
+OverworldBottomBarTimeAttackAttrmap::INCBIN "data/bgmaps/overworld/bottom_bar_time_attack.attrmap.rle"
 
 Pals_8694d:
 	rgb 31, 31, 31
