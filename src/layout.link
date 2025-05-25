@@ -128,7 +128,7 @@ ROMX $28
 ROMX $29
 	"Cutscenes Gfx 2"
 ROMX $2a
-	"Bank 2A"
+	"Overworld OAM 1"
 ROMX $2b
 	"Bank 2B"
 ROMX $2c
@@ -139,7 +139,7 @@ ROMX $2e
 	"Cutscene Palettes"
 	"Cutscene BG Maps"
 ROMX $2f
-	"Bank 2F"
+	"Overworld OAM 2"
 ROMX $30
 	"Level Headers"
 	"Rooms 1"
@@ -215,6 +215,7 @@ ROMX $56
 	"Bank 56"
 ROMX $57
 	"Bank 57"
+	"Credits OAM"
 ROMX $58
 	"Credits"
 ROMX $60
