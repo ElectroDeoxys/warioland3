@@ -63,12 +63,12 @@ ENDM
 MACRO terrain_end
 	db GOLF_TERRAIN_END
 DEF num_terrain_blocks = num_terrain_blocks + 1
-	assert num_terrain_blocks == NUM_GOLF_LEVEL_BLOCKS, "Expected {d:NUM_GOLF_LEVEL_BLOCKS} blocks, got {d:num_terrain_blocks}"
+	assert num_terrain_blocks == NUM_GOLF_TERRAIN_BLOCKS, "Expected {d:NUM_GOLF_TERRAIN_BLOCKS} blocks, got {d:num_terrain_blocks}"
 ENDM
 
 ; fills up with arg 1 block until the end
 MACRO terrain_blocks_end
-REPT (NUM_GOLF_LEVEL_BLOCKS - num_terrain_blocks - 1)
+REPT (NUM_GOLF_TERRAIN_BLOCKS - num_terrain_blocks - 1)
 	db \1
 DEF num_terrain_blocks = num_terrain_blocks + 1
 ENDR

@@ -25,42 +25,42 @@ DEF GOLF_BUILDING_PRICE EQU $50
 	const GOLF_COURSE_4 ; $3
 DEF NUM_GOLF_COURSES EQU const_value
 
-DEF NUM_GOLF_COURSE_LEVELS EQU 4 ; how many levels in a golf course
+DEF NUM_GOLF_COURSE_HOLES EQU 4 ; how many holes in a golf course
 
 ; maximum number of strokes over par
-; for golf levels inside the various courses
+; for golf holes inside the various courses
 DEF MAX_GOLF_COURSE_STROKES EQU 19
 DEF GOLF_BASE_SCORE EQU MAX_GOLF_COURSE_STROKES + 1
 DEF golf_score EQUS "GOLF_BASE_SCORE +"
 
-; golf level constants
+; golf hole constants
 	const_def
-	const GOLF_LEVEL_00 ; $00
-	const GOLF_LEVEL_01 ; $01
-	const GOLF_LEVEL_02 ; $02
-	const GOLF_LEVEL_03 ; $03
-	const GOLF_LEVEL_04 ; $04
-	const GOLF_LEVEL_05 ; $05
-DEF GOLF_LEVEL_TIER_1 EQU const_value - 1
-	const GOLF_LEVEL_06 ; $06
-	const GOLF_LEVEL_07 ; $07
-	const GOLF_LEVEL_08 ; $08
-	const GOLF_LEVEL_09 ; $09
-	const GOLF_LEVEL_10 ; $0a
-DEF GOLF_LEVEL_TIER_2 EQU const_value - 1
-	const GOLF_LEVEL_11 ; $0b
-	const GOLF_LEVEL_12 ; $0c
-	const GOLF_LEVEL_13 ; $0d
-	const GOLF_LEVEL_14 ; $0e
-	const GOLF_LEVEL_15 ; $0f
-DEF GOLF_LEVEL_TIER_3 EQU const_value - 1
-	const GOLF_LEVEL_16 ; $10
-	const GOLF_LEVEL_17 ; $11
-	const GOLF_LEVEL_18 ; $12
-	const GOLF_LEVEL_19 ; $13
-DEF NUM_GOLF_LEVELS EQU const_value
+	const GOLF_HOLE_00 ; $00
+	const GOLF_HOLE_01 ; $01
+	const GOLF_HOLE_02 ; $02
+	const GOLF_HOLE_03 ; $03
+	const GOLF_HOLE_04 ; $04
+	const GOLF_HOLE_05 ; $05
+DEF GOLF_HOLE_TIER_1 EQU const_value - 1
+	const GOLF_HOLE_06 ; $06
+	const GOLF_HOLE_07 ; $07
+	const GOLF_HOLE_08 ; $08
+	const GOLF_HOLE_09 ; $09
+	const GOLF_HOLE_10 ; $0a
+DEF GOLF_HOLE_TIER_2 EQU const_value - 1
+	const GOLF_HOLE_11 ; $0b
+	const GOLF_HOLE_12 ; $0c
+	const GOLF_HOLE_13 ; $0d
+	const GOLF_HOLE_14 ; $0e
+	const GOLF_HOLE_15 ; $0f
+DEF GOLF_HOLE_TIER_3 EQU const_value - 1
+	const GOLF_HOLE_16 ; $10
+	const GOLF_HOLE_17 ; $11
+	const GOLF_HOLE_18 ; $12
+	const GOLF_HOLE_19 ; $13
+DEF NUM_GOLF_HOLES EQU const_value
 
-; par values of a Golf level
+; par values of a Golf hole
 	const_def 3
 	const PAR_3 ; $3
 	const PAR_4 ; $4
@@ -101,7 +101,7 @@ DEF GOLF_TERRAIN_2ND_WATER  EQU 1 << GOLF_TERRAIN_2ND_WATER_F ; flag for differe
 DEF GOLF_TERRAIN_MASK       EQU $0f
 DEF GOLF_TERRAIN_FLAGS_MASK EQU $f0
 
-DEF NUM_GOLF_LEVEL_BLOCKS EQU 64 + 1 ; $40 plus end block
+DEF NUM_GOLF_TERRAIN_BLOCKS EQU 64 + 1 ; $40 plus end block
 
 DEF BASE_SHOT_POWER EQU 8
 DEF MAX_SHOT_POWER EQU 76
@@ -138,7 +138,7 @@ DEF MAX_SHOT_POWER EQU 76
 	const GOLF_DISPLAY_SPLIT  ; $1
 	const GOLF_DISPLAY_BGMAP1 ; $2
 
-; golf level dimensions
+; golf hole dimensions
 DEF MAX_GOLF_X_SCROLL EQU $160
 DEF PARAGOOM_GROUND_LEVEL  EQU $180 ; Y pos considered to be 'ground level' for ParaGoom
 DEF PARAGOOM_TEE_BOX_LEVEL EQU PARAGOOM_GROUND_LEVEL - $20
@@ -180,19 +180,19 @@ DEF NUM_GOLF_WARIO_STATES EQU const_value
 	const GOLFLOBBYSTATE_ENTER_DOOR ; $4
 	const GOLFLOBBYSTATE_EXIT_PIPE  ; $5
 
-; wGolfLevelState consants
+; wGolfHoleState consants
 	const_def
-	const GOLFLEVELSTATE_WAIT_INPUT        ; $0
-	const GOLFLEVELSTATE_SCROLL            ; $1
-	const GOLFLEVELSTATE_SELECT_SHOT_POWER ; $2
-	const GOLFLEVELSTATE_SELECT_SHOT_SPIN  ; $3
-	const GOLFLEVELSTATE_START_SHOT        ; $4
-	const GOLFLEVELSTATE_SHOT              ; $5
-	const GOLFLEVELSTATE_BOUNCE            ; $6
-	const GOLFLEVELSTATE_SPECIAL_TERRAIN   ; $7
-	const GOLFLEVELSTATE_WALK              ; $8
-	const GOLFLEVELSTATE_BETWEEN_SHOTS     ; $9
-	const GOLFLEVELSTATE_CLEARED           ; $a
-	const GOLFLEVELSTATE_GAME_OVER         ; $b
-	const GOLFLEVELSTATE_PAUSE             ; $c
-	const GOLFLEVELSTATE_RESULT            ; $d
+	const GOLFHOLESTATE_WAIT_INPUT        ; $0
+	const GOLFHOLESTATE_SCROLL            ; $1
+	const GOLFHOLESTATE_SELECT_SHOT_POWER ; $2
+	const GOLFHOLESTATE_SELECT_SHOT_SPIN  ; $3
+	const GOLFHOLESTATE_START_SHOT        ; $4
+	const GOLFHOLESTATE_SHOT              ; $5
+	const GOLFHOLESTATE_BOUNCE            ; $6
+	const GOLFHOLESTATE_SPECIAL_TERRAIN   ; $7
+	const GOLFHOLESTATE_WALK              ; $8
+	const GOLFHOLESTATE_BETWEEN_SHOTS     ; $9
+	const GOLFHOLESTATE_CLEARED           ; $a
+	const GOLFHOLESTATE_GAME_OVER         ; $b
+	const GOLFHOLESTATE_PAUSE             ; $c
+	const GOLFHOLESTATE_RESULT            ; $d

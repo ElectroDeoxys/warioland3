@@ -7,9 +7,9 @@ _GolfBuildingStateTable::
 	dw SlowFadeFromWhite
 	dw Func_1c86dd
 	dw FastFadeToWhite
-	dw InitGolfLevel
+	dw InitGolfHole
 	dw SlowFadeFromWhite
-	dw HandleGolfLevel
+	dw HandleGolfHole
 	dw ReturnToMap
 
 Func_1c8586:
@@ -35,9 +35,9 @@ Func_1c8586:
 	ld [w1d800], a
 
 .asm_1c85b3
-	; clear all Golf RAM starting from wPredeterminedGolfLevel onwards
-	ld hl, wPredeterminedGolfLevel
-	ld bc, SIZEOF("Golf RAM") - (wPredeterminedGolfLevel - STARTOF("Golf RAM"))
+	; clear all Golf RAM starting from wPredeterminedGolfHole onwards
+	ld hl, wPredeterminedGolfHole
+	ld bc, SIZEOF("Golf RAM") - (wPredeterminedGolfHole - STARTOF("Golf RAM"))
 .loop
 	xor a
 	ld [hli], a
@@ -542,23 +542,23 @@ Func_1c8911:
 	ret
 .done_subtracting
 	play_sfx SFX_SELECTION
-	call .SetGolfLevel
+	call .SetGolfHole
 	ld a, $04
 	ld [wSubState], a
 	ret
 
-.SetGolfLevel:
-	ld hl, .first_golf_levels
+.SetGolfHole:
+	ld hl, .first_golf_holes
 	ld a, [wGolfMenuOption]
 	ld b, $00
 	ld c, a
 	add hl, bc
 	ld a, [hl]
-	ld [wPredeterminedGolfLevel], a
+	ld [wPredeterminedGolfHole], a
 	ret
 
-.first_golf_levels
-	db GOLF_LEVEL_00 + $1 ; GOLF_COURSE_1
-	db GOLF_LEVEL_05 + $1 ; GOLF_COURSE_2
-	db GOLF_LEVEL_10 + $1 ; GOLF_COURSE_3
-	db GOLF_LEVEL_15 + $1 ; GOLF_COURSE_4
+.first_golf_holes
+	db GOLF_HOLE_00 + $1 ; GOLF_COURSE_1
+	db GOLF_HOLE_05 + $1 ; GOLF_COURSE_2
+	db GOLF_HOLE_10 + $1 ; GOLF_COURSE_3
+	db GOLF_HOLE_15 + $1 ; GOLF_COURSE_4

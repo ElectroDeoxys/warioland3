@@ -1132,11 +1132,11 @@ w1d800::
 wGolfMenuOption::
 	db
 
-wPredeterminedGolfLevel::
+wPredeterminedGolfHole::
 	db
 
-; current level number of golf course
-wGolfCourseLevel::
+; current hole number of golf course
+wGolfCourseHole::
 	db
 
 ; GOLF_COURSE_* constant
@@ -1150,7 +1150,7 @@ wGolfCourseScore::
 	ds $fa
 
 ; start of the RAM related to the Golf levels
-wGolfLevelRAMStart::
+wGolfHoleRAMStart::
 
 UNION
 
@@ -1175,13 +1175,13 @@ wGoldBuildingCourseAttrMap::
 w1db00::
 	ds 8 palettes
 
-wGolfLevelData::
-wGolfTerrainBlocks:: ds NUM_GOLF_LEVEL_BLOCKS
+wGolfHoleData::
+wGolfTerrainBlocks:: ds NUM_GOLF_TERRAIN_BLOCKS
 wGolfPar::           db
 w1db82::             ds $2
 wGolfWaterSpawn1::   db
 wGolfWaterSpawn2::   db
-wGolfLevelDataEnd::
+wGolfHoleDataEnd::
 
 	ds $a
 
@@ -1192,7 +1192,7 @@ w1db90::
 
 w1dc00::
 wGolfLobbyState::
-wGolfLevelState::
+wGolfHoleState::
 	db
 
 w1dc01::
@@ -1222,7 +1222,7 @@ wGolfLCDConfig::
 wGolfWarioTilesBank::
 	db
 
-wGolfLevelTier::
+wGolfHoleTier::
 	db
 
 wGolfPrice::
@@ -1275,7 +1275,7 @@ wGolfDisplayMode::
 ; $0 = right
 ; $1 = left
 wGolfMenuScrollingDir::
-wGolfLevelScrollingDir::
+wGolfHoleScrollingDir::
 	db
 
 ; which side of the Para-Goomba that the hole is in
@@ -1305,7 +1305,7 @@ wGolfWarioXPos:: ds $2
 wGolfParaGoomYPos:: ds $2
 wGolfParaGoomXPos:: ds $2
 
-wGolfLevelHoleXPos:: ds $2
+wGolfHoleHoleXPos:: ds $2
 
 ; position of Para-Goom when it was last shot
 ; used to reset position when, e.g. going in OB

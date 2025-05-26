@@ -3,9 +3,9 @@ SECTION "Golf Gfx 1", ROMX
 INCLUDE "engine/bank70.asm"
 
 
-SECTION "Golf Levels", ROMX
+SECTION "Golf Holes", ROMX
 
-INCLUDE "data/golf/levels.asm"
+INCLUDE "data/golf/holes.asm"
 
 
 SECTION "Golf Gfx 2", ROMX
@@ -36,7 +36,7 @@ SECTION "Bank 72", ROMX
 
 INCLUDE "engine/golf/lobby.asm"
 INCLUDE "engine/golf/building.asm"
-INCLUDE "engine/golf/level.asm"
+INCLUDE "engine/golf/hole.asm"
 INCLUDE "gfx/pals/golf.asm"
 
 GolfFlagNumbersGfx:   INCBIN "gfx/golf/golf_flag_numbers.2bpp"

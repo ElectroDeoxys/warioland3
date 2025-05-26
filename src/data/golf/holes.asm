@@ -1,4 +1,4 @@
-GolfLevel01:
+GolfHole01:
 	; terrain blocks
 	terrain_tee_box
 	terrain_plain 8
@@ -13,7 +13,7 @@ GolfLevel01:
 	db 0 ; 2nd water patch spawn block
 
 
-GolfLevel00:
+GolfHole00:
 	; terrain blocks
 	terrain_tee_box
 	terrain_plain 9
@@ -33,7 +33,7 @@ GolfLevel00:
 	db 0 ; 2nd water patch spawn block
 
 
-GolfLevel10:
+GolfHole10:
 	; terrain blocks
 	terrain_tee_box
 	terrain_plain 11
@@ -52,7 +52,7 @@ GolfLevel10:
 	db 0 ; 2nd water patch spawn block
 
 
-GolfLevel06:
+GolfHole06:
 	; terrain blocks
 	terrain_tee_box
 	terrain_plain 7
@@ -72,7 +72,7 @@ GolfLevel06:
 	db 24 ; 2nd water patch spawn block
 
 
-GolfLevel05:
+GolfHole05:
 	; terrain blocks
 	terrain_tee_box
 	terrain_plain 1
@@ -91,7 +91,7 @@ GolfLevel05:
 	db 33 ; 2nd water patch spawn block
 
 
-GolfLevel07:
+GolfHole07:
 	; terrain blocks
 	terrain_tee_box
 	terrain_plain 8
@@ -111,7 +111,7 @@ GolfLevel07:
 	db 32 ; 2nd water patch spawn block
 
 
-GolfLevel08:
+GolfHole08:
 	; terrain blocks
 	terrain_tee_box_edge
 	terrain_plain 3
@@ -127,7 +127,7 @@ GolfLevel08:
 	db 0 ; 2nd water patch spawn block
 
 
-GolfLevel13:
+GolfHole13:
 	; terrain blocks
 	terrain_tee_box
 	terrain_plain 19
@@ -145,7 +145,7 @@ GolfLevel13:
 	db 0 ; 2nd water patch spawn block
 
 
-GolfLevel02:
+GolfHole02:
 	; terrain blocks
 	terrain_tee_box
 	terrain_plain 1
@@ -165,7 +165,7 @@ GolfLevel02:
 	db 0 ; 2nd water patch spawn block
 
 
-GolfLevel18:
+GolfHole18:
 	; terrain blocks
 	terrain_tee_box
 	terrain_plain 6
@@ -189,7 +189,7 @@ GolfLevel18:
 	db 40 ; 2nd water patch spawn block
 
 
-GolfLevel16:
+GolfHole16:
 	; terrain blocks
 	terrain_tee_box_edge
 	terrain_plain 1
@@ -206,7 +206,7 @@ GolfLevel16:
 	db 0 ; 2nd water patch spawn block
 
 
-GolfLevel11:
+GolfHole11:
 	; terrain blocks
 	terrain_tee_box
 	terrain_plain 5
@@ -228,7 +228,7 @@ GolfLevel11:
 	db 0 ; 2nd water patch spawn block
 
 
-GolfLevel03:
+GolfHole03:
 	; terrain blocks
 	terrain_tee_box
 	terrain_plain 14
@@ -248,7 +248,7 @@ GolfLevel03:
 	db 0 ; 2nd water patch spawn block
 
 
-GolfLevel09:
+GolfHole09:
 	; terrain blocks
 	terrain_tee_box
 	terrain_plain 10
@@ -268,7 +268,7 @@ GolfLevel09:
 	db 43 ; 2nd water patch spawn block
 
 
-GolfLevel04:
+GolfHole04:
 	; terrain blocks
 	terrain_tee_box
 	terrain_plain 41
@@ -284,7 +284,7 @@ GolfLevel04:
 	db 0 ; 2nd water patch spawn block
 
 
-GolfLevel12:
+GolfHole12:
 	; terrain blocks
 	terrain_tee_box
 	terrain_plain 13
@@ -304,7 +304,7 @@ GolfLevel12:
 	db 0 ; 2nd water patch spawn block
 
 
-GolfLevel17:
+GolfHole17:
 	; terrain blocks
 	terrain_tee_box
 	terrain_plain 13
@@ -324,7 +324,7 @@ GolfLevel17:
 	db 41 ; 2nd water patch spawn block
 
 
-GolfLevel14:
+GolfHole14:
 	; terrain blocks
 	terrain_tee_box
 	terrain_plain 2
@@ -348,7 +348,7 @@ GolfLevel14:
 	db 50 ; 2nd water patch spawn block
 
 
-GolfLevel15:
+GolfHole15:
 	; terrain blocks
 	terrain_tee_box
 	terrain_plain 6
@@ -370,7 +370,7 @@ GolfLevel15:
 	db 24 ; 2nd water patch spawn block
 
 
-GolfLevel19:
+GolfHole19:
 	; terrain blocks
 	terrain_tee_box
 	terrain_plain 5

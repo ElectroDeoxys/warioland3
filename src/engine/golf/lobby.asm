@@ -7,10 +7,10 @@ _GolfStateTable::
 	dw SlowFadeFromWhite
 	dw HandleGolfLobby
 
-	dw FastFadeToWhite ; SST_GOLF_LEVEL
-	dw InitGolfLevel
+	dw FastFadeToWhite ; SST_GOLF_HOLE
+	dw InitGolfHole
 	dw SlowFadeFromWhite
-	dw HandleGolfLevel
+	dw HandleGolfHole
 
 	dw FastFadeToWhite ; SST_GOLF_EXIT
 	dw ReturnToLevelFromGolf
@@ -31,8 +31,8 @@ InitGolfLobby:
 	xor a
 	ld [wRoomAnimatedTilesEnabled], a
 
-	ld hl, wPredeterminedGolfLevel
-	ld bc, wGolfRAMEnd - wPredeterminedGolfLevel
+	ld hl, wPredeterminedGolfHole
+	ld bc, wGolfRAMEnd - wPredeterminedGolfHole
 .loop_clear
 	xor a
 	ld [hli], a
@@ -532,7 +532,7 @@ HandleGolfLobbyStates:
 	inc [hl]
 	ret
 .asm_1c83f7
-	ld a, SST_GOLF_LEVEL
+	ld a, SST_GOLF_HOLE
 	ld [wSubState], a
 	ret
 
