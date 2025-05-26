@@ -30,6 +30,9 @@ src/text/en/*.tilemap
 # compressed data
 *.rle
 
+# golf holes files
+src/data/golf/holes/*.bin
+
 # *disasm.py output file
 *output.asm
 

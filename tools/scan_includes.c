@@ -8,14 +8,13 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdnoreturn.h>
 #include <string.h>
 
 const char* include_prefix = "src/";
 
 #define error_exit(...) exit((fprintf(stderr, PROGRAM_NAME ": " __VA_ARGS__), 1))
 
-noreturn void usage_exit(int status) {
+void usage_exit(int status) {
 	fprintf(stderr, "Usage: " PROGRAM_NAME " " USAGE_OPTS "\n");
 	exit(status);
 }

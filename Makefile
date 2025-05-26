@@ -43,6 +43,7 @@ clean: tidy
 	find src/text \( -iname '*.rle' \) -delete
 	find src/text/en \( -iname '*.tilemap' \) -delete
 	find src/data \( -iname '*.rle' \) -delete
+	find src/data/golf/holes \( -iname '*.bin' \) -delete
 
 tidy:
 	rm -f $(rom) $(rom_obj) $(rom:.gbc=.map) $(rom:.gbc=.sym) src/rgbdscheck.o
@@ -235,6 +236,9 @@ src/gfx/wario/%.2bpp: tools/gfx += --interleave --png=$<
 	$(RGBGFX) $(rgbgfx) -o $@ $<
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) -o $@ $@)
+
+src/data/golf/holes/%.bin: src/data/golf/holes/%.golf
+	tools/golf $< $@
 
 %.tilemap: %.txt
 	tools/text $(tools/text) -o $@ $<
