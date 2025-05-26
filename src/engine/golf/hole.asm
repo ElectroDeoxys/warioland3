@@ -213,26 +213,26 @@ PickAndLoadGolfHole:
 
 GolfHoles:
 	table_width 10
-	dw GolfHole00, GolfHole00_1Tilemap, GolfHole00_2Tilemap, GolfHole00_1Attrmap, GolfHole00_2Attrmap ; GOLF_HOLE_00
-	dw GolfHole01, GolfHole01_1Tilemap, GolfHole01_2Tilemap, GolfHole01_1Attrmap, GolfHole01_2Attrmap ; GOLF_HOLE_01
-	dw GolfHole02, GolfHole02_1Tilemap, GolfHole02_2Tilemap, GolfHole02_1Attrmap, GolfHole02_2Attrmap ; GOLF_HOLE_02
-	dw GolfHole03, GolfHole03_1Tilemap, GolfHole03_2Tilemap, GolfHole03_1Attrmap, GolfHole03_2Attrmap ; GOLF_HOLE_03
-	dw GolfHole04, GolfHole04_1Tilemap, GolfHole04_2Tilemap, GolfHole04_1Attrmap, GolfHole04_2Attrmap ; GOLF_HOLE_04
-	dw GolfHole05, GolfHole05_1Tilemap, GolfHole05_2Tilemap, GolfHole05_1Attrmap, GolfHole05_2Attrmap ; GOLF_HOLE_05
-	dw GolfHole06, GolfHole06_1Tilemap, GolfHole06_2Tilemap, GolfHole06_1Attrmap, GolfHole06_2Attrmap ; GOLF_HOLE_06
-	dw GolfHole07, GolfHole07_1Tilemap, GolfHole07_2Tilemap, GolfHole07_1Attrmap, GolfHole07_2Attrmap ; GOLF_HOLE_07
-	dw GolfHole08, GolfHole08_1Tilemap, GolfHole08_2Tilemap, GolfHole08_1Attrmap, GolfHole08_2Attrmap ; GOLF_HOLE_08
-	dw GolfHole09, GolfHole09_1Tilemap, GolfHole09_2Tilemap, GolfHole09_1Attrmap, GolfHole09_2Attrmap ; GOLF_HOLE_09
-	dw GolfHole10, GolfHole10_1Tilemap, GolfHole10_2Tilemap, GolfHole10_1Attrmap, GolfHole10_2Attrmap ; GOLF_HOLE_10
-	dw GolfHole11, GolfHole11_1Tilemap, GolfHole11_2Tilemap, GolfHole11_1Attrmap, GolfHole11_2Attrmap ; GOLF_HOLE_11
-	dw GolfHole12, GolfHole12_1Tilemap, GolfHole12_2Tilemap, GolfHole12_1Attrmap, GolfHole12_2Attrmap ; GOLF_HOLE_12
-	dw GolfHole13, GolfHole13_1Tilemap, GolfHole13_2Tilemap, GolfHole13_1Attrmap, GolfHole13_2Attrmap ; GOLF_HOLE_13
-	dw GolfHole14, GolfHole14_1Tilemap, GolfHole14_2Tilemap, GolfHole14_1Attrmap, GolfHole14_2Attrmap ; GOLF_HOLE_14
-	dw GolfHole15, GolfHole15_1Tilemap, GolfHole15_2Tilemap, GolfHole15_1Attrmap, GolfHole15_2Attrmap ; GOLF_HOLE_15
-	dw GolfHole16, GolfHole16_1Tilemap, GolfHole16_2Tilemap, GolfHole16_1Attrmap, GolfHole16_2Attrmap ; GOLF_HOLE_16
-	dw GolfHole17, GolfHole17_1Tilemap, GolfHole17_2Tilemap, GolfHole17_1Attrmap, GolfHole17_2Attrmap ; GOLF_HOLE_17
-	dw GolfHole18, GolfHole18_1Tilemap, GolfHole18_2Tilemap, GolfHole18_1Attrmap, GolfHole18_2Attrmap ; GOLF_HOLE_18
-	dw GolfHole19, GolfHole19_1Tilemap, GolfHole19_2Tilemap, GolfHole19_1Attrmap, GolfHole19_2Attrmap ; GOLF_HOLE_19
+	dw GolfHole00, GolfHole00_2Tilemap, GolfHole00_1Tilemap, GolfHole00_2Attrmap, GolfHole00_1Attrmap ; GOLF_HOLE_00
+	dw GolfHole01, GolfHole01_2Tilemap, GolfHole01_1Tilemap, GolfHole01_2Attrmap, GolfHole01_1Attrmap ; GOLF_HOLE_01
+	dw GolfHole02, GolfHole02_2Tilemap, GolfHole02_1Tilemap, GolfHole02_2Attrmap, GolfHole02_1Attrmap ; GOLF_HOLE_02
+	dw GolfHole03, GolfHole03_2Tilemap, GolfHole03_1Tilemap, GolfHole03_2Attrmap, GolfHole03_1Attrmap ; GOLF_HOLE_03
+	dw GolfHole04, GolfHole04_2Tilemap, GolfHole04_1Tilemap, GolfHole04_2Attrmap, GolfHole04_1Attrmap ; GOLF_HOLE_04
+	dw GolfHole05, GolfHole05_2Tilemap, GolfHole05_1Tilemap, GolfHole05_2Attrmap, GolfHole05_1Attrmap ; GOLF_HOLE_05
+	dw GolfHole06, GolfHole06_2Tilemap, GolfHole06_1Tilemap, GolfHole06_2Attrmap, GolfHole06_1Attrmap ; GOLF_HOLE_06
+	dw GolfHole07, GolfHole07_2Tilemap, GolfHole07_1Tilemap, GolfHole07_2Attrmap, GolfHole07_1Attrmap ; GOLF_HOLE_07
+	dw GolfHole08, GolfHole08_2Tilemap, GolfHole08_1Tilemap, GolfHole08_2Attrmap, GolfHole08_1Attrmap ; GOLF_HOLE_08
+	dw GolfHole09, GolfHole09_2Tilemap, GolfHole09_1Tilemap, GolfHole09_2Attrmap, GolfHole09_1Attrmap ; GOLF_HOLE_09
+	dw GolfHole10, GolfHole10_2Tilemap, GolfHole10_1Tilemap, GolfHole10_2Attrmap, GolfHole10_1Attrmap ; GOLF_HOLE_10
+	dw GolfHole11, GolfHole11_2Tilemap, GolfHole11_1Tilemap, GolfHole11_2Attrmap, GolfHole11_1Attrmap ; GOLF_HOLE_11
+	dw GolfHole12, GolfHole12_2Tilemap, GolfHole12_1Tilemap, GolfHole12_2Attrmap, GolfHole12_1Attrmap ; GOLF_HOLE_12
+	dw GolfHole13, GolfHole13_2Tilemap, GolfHole13_1Tilemap, GolfHole13_2Attrmap, GolfHole13_1Attrmap ; GOLF_HOLE_13
+	dw GolfHole14, GolfHole14_2Tilemap, GolfHole14_1Tilemap, GolfHole14_2Attrmap, GolfHole14_1Attrmap ; GOLF_HOLE_14
+	dw GolfHole15, GolfHole15_2Tilemap, GolfHole15_1Tilemap, GolfHole15_2Attrmap, GolfHole15_1Attrmap ; GOLF_HOLE_15
+	dw GolfHole16, GolfHole16_2Tilemap, GolfHole16_1Tilemap, GolfHole16_2Attrmap, GolfHole16_1Attrmap ; GOLF_HOLE_16
+	dw GolfHole17, GolfHole17_2Tilemap, GolfHole17_1Tilemap, GolfHole17_2Attrmap, GolfHole17_1Attrmap ; GOLF_HOLE_17
+	dw GolfHole18, GolfHole18_2Tilemap, GolfHole18_1Tilemap, GolfHole18_2Attrmap, GolfHole18_1Attrmap ; GOLF_HOLE_18
+	dw GolfHole19, GolfHole19_2Tilemap, GolfHole19_1Tilemap, GolfHole19_2Attrmap, GolfHole19_1Attrmap ; GOLF_HOLE_19
 	assert_table_length NUM_GOLF_HOLES
 
 ShowGolfHoleFlagAndPar:
