@@ -248,6 +248,7 @@ ROMX $6f
 	"Enemy Gfx 2 Slot 4"
 ROMX $70
 	"Golf Gfx 1"
+	"Golf Hole BGMaps"
 	"Golf Holes"
 ROMX $71
 	"Golf Gfx 2"

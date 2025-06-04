@@ -32,6 +32,8 @@ src/text/en/*.tilemap
 
 # golf holes files
 src/data/golf/holes/*.bin
+src/data/golf/holes/*.tilemap
+src/data/golf/holes/*.attrmap
 
 # *disasm.py output file
 *output.asm

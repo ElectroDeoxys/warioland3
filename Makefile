@@ -43,7 +43,7 @@ clean: tidy
 	find src/text \( -iname '*.rle' \) -delete
 	find src/text/en \( -iname '*.tilemap' \) -delete
 	find src/data \( -iname '*.rle' \) -delete
-	find src/data/golf/holes \( -iname '*.bin' \) -delete
+	find src/data/golf/holes \( -iname '*.bin' -o -iname '*.tilemap' -o -iname '*.attrmap' \) -delete
 
 tidy:
 	rm -f $(rom) $(rom_obj) $(rom:.gbc=.map) $(rom:.gbc=.sym) src/rgbdscheck.o
@@ -123,87 +123,8 @@ src/data/bgmaps/golf/background_1.tilemap.rle: tools/compressor += --force-trail
 src/data/bgmaps/golf/background_1.attrmap.rle: tools/compressor += --force-trailing-copy
 src/data/bgmaps/golf/background_2.tilemap.rle: tools/compressor += --force-trailing-copy
 src/data/bgmaps/golf/background_2.attrmap.rle: tools/compressor += --force-trailing-copy
-src/data/bgmaps/golf/golf_01_2.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_01_2.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_01_1.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_01_1.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_00_2.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_00_2.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_00_1.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_00_1.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_10_2.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_10_2.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_10_1.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_10_1.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_06_2.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_06_2.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_06_1.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_06_1.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_05_2.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_05_2.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_05_1.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_05_1.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_07_2.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_07_2.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_07_1.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_07_1.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_08_2.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_08_2.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_08_1.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_08_1.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_13_2.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_13_2.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_13_1.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_13_1.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_02_2.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_02_2.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_02_1.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_02_1.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_18_2.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_18_2.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_18_1.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_18_1.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_16_2.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_16_2.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_16_1.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_16_1.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_11_2.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_11_2.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_11_1.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_11_1.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_03_2.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_03_2.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_03_1.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_03_1.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_09_2.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_09_2.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_09_1.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_09_1.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_04_2.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_04_2.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_04_1.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_04_1.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_12_2.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_12_2.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_12_1.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_12_1.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_17_2.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_17_2.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_17_1.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_17_1.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_14_2.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_14_2.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_14_1.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_14_1.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_15_2.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_15_2.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_15_1.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_15_1.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_19_2.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_19_2.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_19_1.tilemap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/golf/golf_19_1.attrmap.rle: tools/compressor += --force-trailing-repeat
-src/data/bgmaps/hidden_figure2.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/data/golf/holes/%.tilemap.rle: tools/compressor += --force-trailing-repeat
+src/data/golf/holes/%.attrmap.rle: tools/compressor += --force-trailing-repeat
 
 src/text/text_b232f.tilemap.rle: tools/compressor += --force-trailing-copy
 src/text/en/hidden_figure_replenish_power.tilemap.rle: tools/compressor += --force-trailing-copy
@@ -237,11 +158,20 @@ src/gfx/wario/%.2bpp: tools/gfx += --interleave --png=$<
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) -o $@ $@)
 
-src/data/golf/holes/%.bin: src/data/golf/holes/%.golf
-	tools/golf $< $@
+### Golf holes
+# golf_patch is used to take care of some discrepancies between
+# tools/golf building algorithm and the original game, for matching purposes
+
+%.bin %_1.tilemap %_2.tilemap %_1.attrmap %_2.attrmap &: %.golf
+	tools/golf $(tools/golf) $< $*.bin $*_1.tilemap $*_2.tilemap $*_1.attrmap $*_2.attrmap
+	tools/golf_patch $(tools/golf_patch) $(notdir $*) $*_1.tilemap $*_2.tilemap $*_1.attrmap $*_2.attrmap
+
+### Text BG tile maps
 
 %.tilemap: %.txt
 	tools/text $(tools/text) -o $@ $<
+
+### Compressed data
 
 %.rle: %
 	tools/compressor $(tools/compressor) $<

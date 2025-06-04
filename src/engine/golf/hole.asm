@@ -1,4 +1,4 @@
-; unreferenced?
+; unreferenced
 Func_1c8957:
 	ld a, [wSubState]
 	jumptable
