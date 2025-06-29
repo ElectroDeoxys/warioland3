@@ -196,11 +196,13 @@ InitActionHelp:
 	ret
 
 UpdateActionHelp:
+PUSHO Q.4
 	ld a, $02
-	ld b, $20
+	ld b, 2.0
 	ld d, $0f
 	ld e, $0f
 	call Func_102c
+POPO
 
 	ld a, [wPowerUpLevel]
 	and $80

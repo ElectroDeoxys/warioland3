@@ -162,10 +162,10 @@ InitWithoutDemoPowerUpReset::
 	cp A_BUTTON | B_BUTTON | SELECT | START
 	jr nz, .no_reset
 	; restart game
-	call Func_1002
+	call TurnMusicOff
 	ld bc, SOUND_OFF
-	call Func_ff4
-	call Func_fbc
+	call TurnOffSFXID
+	call UpdateAudio
 	jp Init
 
 .no_reset
@@ -249,7 +249,7 @@ HandleSound::
 	call PlayNewMusic_SetNoise
 
 .asm_2cb
-	call Func_fbc
+	call UpdateAudio
 	ret
 
 ; unreferenced
@@ -260,10 +260,10 @@ UnreferencedMuteSound:
 	xor a
 	ldh [hSFXID + 0], a
 	ldh [hSFXID + 1], a
-	call Func_1002
+	call TurnMusicOff
 	ld bc, SOUND_OFF
-	call Func_ff4
-	call Func_fbc
+	call TurnOffSFXID
+	call UpdateAudio
 	ld a, TRUE
 	ld [wSoundMuted], a
 	ret

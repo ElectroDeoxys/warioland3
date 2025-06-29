@@ -7,12 +7,14 @@ CheckLevelMusicalCoinFlag::
 	ret
 
 Func_1795::
+PUSHO Q.4
 	ld a, $02
-	ld b, $40
+	ld b, 4.0
 	ld d, $0f
 	ld e, $0f
 	call Func_102c
-	call Func_fbc
+POPO
+	call UpdateAudio
 	ret
 
 ; returns nz if has all the levels

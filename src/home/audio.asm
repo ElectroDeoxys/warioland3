@@ -2,52 +2,52 @@ AudioFunc_InitAudio:
 	call BackupBankAndSwitchToAudioBank
 	jp _InitAudio
 
-Func_3f06:
-	call Func_3f75
-	jp Func_3007a
+AudioFunc_UpdateAudio:
+	call PrepareAudioJump_WithCallback
+	jp _UpdateAudio
 
 AudioFunc_PlaySFX:
-	call PrepareAudioJump
+	call PrepareAudioJump_NoCallback
 	jp _PlaySFX
 
 Func_3f12:
-	call PrepareAudioJump
+	call PrepareAudioJump_NoCallback
 	jp PlayMusic
 
 AudioFunc_PlayNewMusic::
-	call PrepareAudioJump
+	call PrepareAudioJump_NoCallback
 	jp _PlayNewMusic
 
-Func_3f1e:
-	call PrepareAudioJump
-	jp Func_303c9
+AudioFunc_TurnOffSFXID:
+	call PrepareAudioJump_NoCallback
+	jp _TurnOffSFXID
 
-Func_3f24:
-	call PrepareAudioJump
-	jp Func_30416
+AudioFunc_TurnMusicOff:
+	call PrepareAudioJump_NoCallback
+	jp _TurnMusicOff
 
 Func_3f2a:
-	call PrepareAudioJump
+	call PrepareAudioJump_NoCallback
 	jp Func_302e4
 
 Func_3f30:
-	call PrepareAudioJump
+	call PrepareAudioJump_NoCallback
 	jp Func_30438
 
 Func_3f36:
-	call PrepareAudioJump
+	call PrepareAudioJump_NoCallback
 	jp Func_3049e
 
 Func_3f3c:
-	call PrepareAudioJump
+	call PrepareAudioJump_NoCallback
 	jp Func_30519
 
 Func_3f42:
-	call PrepareAudioJump
+	call PrepareAudioJump_NoCallback
 	jp Func_30449
 
 AudioFunc_PlayNewMusic_SetNoise::
-	call PrepareAudioJump
+	call PrepareAudioJump_NoCallback
 	jp _PlayNewMusic_SetNoise
 
 BackupBankAndSwitchToAudioBank::
@@ -71,7 +71,7 @@ SwitchBackFromAudioBank::
 ; - if there is already, pop the stack and return
 ; (skips the rest of the caller's instructions)
 ; - if not, then calls BackupBankAndSwitchToAudioBank and returns
-PrepareAudioJump:
+PrepareAudioJump_NoCallback:
 	ld hl, wAudioEngineFlags
 	bit AUDIOENG_HAS_BACKUP_BANK_F, [hl]
 	jr nz, .pop_stack
@@ -86,12 +86,14 @@ PrepareAudioJump:
 	ld a, $ff
 	ret
 
-Func_3f75::
+; same as PrepareAudioJump_NoCallback but can additionally
+; use wAudioBankCallback in case backup bank is already set
+PrepareAudioJump_WithCallback::
 	ld hl, wAudioEngineFlags
 	bit AUDIOENG_HAS_BACKUP_BANK_F, [hl]
-	jr z, PrepareAudioJump.backup
+	jr z, PrepareAudioJump_NoCallback.backup
 	bit AUDIOENG_HAS_CALLBACK_F, [hl]
-	jr nz, PrepareAudioJump.pop_stack
+	jr nz, PrepareAudioJump_NoCallback.pop_stack
 	set AUDIOENG_HAS_CALLBACK_F, [hl]
 
 	; pop calling function from the stack
@@ -104,7 +106,8 @@ Func_3f75::
 	xor a
 	ret
 
-; expects functions called after PrepareAudioJump to jump to this routine
+; expects functions called after PrepareAudioJump_NoCallback
+; or PrepareAudioJump_WithCallback to jump to this routine
 ReturnFromAudioJump::
 	ld hl, wAudioEngineFlags
 	bit AUDIOENG_HAS_CALLBACK_F, [hl]

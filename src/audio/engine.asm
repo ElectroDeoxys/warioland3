@@ -72,7 +72,7 @@ _InitAudio::
 
 	jp SwitchBackFromAudioBank
 
-Func_3007a::
+_UpdateAudio::
 	push bc
 	push de
 	call Func_30527
@@ -432,7 +432,7 @@ _PlaySFX::
 PlayMusic::
 	ld a, b
 	or c
-	jp z, Func_30416
+	jp z, _TurnMusicOff
 	ld a, c
 	ld [wLoadedMusic + 0], a
 	ld a, b
@@ -645,7 +645,7 @@ InitChannel:
 	ld [hli], a
 	ld a, $ff
 	ld [hli], a ; CHANNEL_VOLUME
-	ld a, $40
+	ld a, 4.0
 	ld [hli], a ; CHANNEL_UNK_16
 	xor a
 	ld [hli], a ; CHANNEL_SO1
@@ -681,39 +681,42 @@ InitChannel:
 	ld [hli], a ; CHANNEL_UNK_30
 	ret
 
-; bc = sound ID
-Func_303c9::
+; only ever used to switch SFX off (SOUND_OFF)
+; input:
+; - bc = sound ID
+_TurnOffSFXID::
 	ld a, b
 	or c
 	jp z, TurnSFXOff
 
+; unused code
 	ld a, c
 	ld [wCurSoundID + 0], a
 	ld a, b
 	ld [wCurSoundID + 1], a
 	call SetSFXChannels
-.asm_303d9
+.loop_sfx_channels
 	ld a, [wCurChannelPtr + 0]
 	ld c, a
 	ld a, [wCurChannelPtr + 1]
 	ld b, a
-	ld a, [bc]
+	ld a, [bc] ; CHANNEL_FLAGS
 	bit CHANFLAGS_ACTIVE_F, a
-	jr z, .asm_303f9
-	ld hl, $6
+	jr z, .next_channel
+	ld hl, CHANNEL_SOUND_ID - CHANNEL_FLAGS
 	add hl, bc
 	ld a, [wCurSoundID + 0]
 	cp [hl]
-	jr nz, .asm_303f9
+	jr nz, .next_channel
 	inc hl
 	ld a, [wCurSoundID + 1]
 	cp [hl]
-	jr nz, .asm_303f9
+	jr nz, .next_channel
 	xor a
-	ld [bc], a
-.asm_303f9
+	ld [bc], a ; CHANNEL_FLAGS
+.next_channel
 	call NextChannel
-	jr nz, .asm_303d9
+	jr nz, .loop_sfx_channels
 	jp ReturnFromAudioJump
 
 TurnSFXOff:
@@ -729,8 +732,8 @@ TurnSFXOff:
 	jr nz, .loop_chs
 	jp ReturnFromAudioJump
 
-Func_30416::
-	call TurnMusicOff
+_TurnMusicOff::
+	call DeactivateMusicChannels
 	jp ReturnFromAudioJump
 
 Func_3041c:
@@ -738,7 +741,7 @@ Func_3041c:
 	ld [w3d020], a
 	; fallthrough
 
-TurnMusicOff:
+DeactivateMusicChannels:
 	ld a, $ff
 	ld [w3d025], a
 	call SetMusicChannels
@@ -851,8 +854,14 @@ Func_304a4:
 	ld bc, PointerTable_30490
 	jp JumpToPointerInTable
 
+; applies value in wSoundEngineParam2 to all active channels
+; selected for in wSoundEngineParam3 and wSoundEngineParam4
+; to the struct field given by bc
+; input:
+; - bc = channel struct field
+; - wSoundEngineParam2 = value to apply
 Func_304bc:
-	call Func_304fa
+	call PrepareChannelBitmasks
 .loop_chs
 	rrc d
 	jr nc, .next_ch
@@ -871,8 +880,11 @@ Func_304bc:
 	jr nz, .loop_chs
 	ret
 
+; applies value in wSoundEngineParam1 (as 16-bit) to all active channels
+; selected for in wSoundEngineParam3 and wSoundEngineParam4
+; to the struct field given by bc
 Func_304d9:
-	call Func_304fa
+	call PrepareChannelBitmasks
 .loop_chs
 	rrc d
 	jr nc, .next_ch
@@ -893,11 +905,14 @@ Func_304d9:
 	jr nz, .loop_chs
 	ret
 
+; interprets wSoundEngineParam4 as selector for SFX channels
+; and wSoundEngineParam3 as selector of music channels
+; outputs channel bitmasks in d, NUM_CHANNELS in e and wChannels in hl
 ; output:
 ; - d = (wSoundEngineParam3 low nibble << 4) | wSoundEngineParam4 low nibble
 ; - e = NUM_CHANNELS
 ; - hl = wChannels
-Func_304fa:
+PrepareChannelBitmasks:
 	ld a, [wSoundEngineParam4]
 	and $0f
 	ld d, a ; low nibble
@@ -940,12 +955,12 @@ Func_30527:
 	ret nz
 	ld [hli], a
 	ld a, [hl] ; w3d022
-	sub $04
+	sub 0.25
 	jp c, Func_3041c
 	ld [hl], a
 	ld b, a
 	ld a, $02
-	lb de, $00, $ff
+	lb de, $00, $ff ; select only music channels
 	jp Func_304a4
 
 Func_30547:
@@ -1223,16 +1238,16 @@ Func_30651:
 	ld a, [hli]
 	ld b, a
 	ld c, [hl] ; CHANNEL_UNK_16
-	call MultiplyBByC_Short
+	call MultiplyBByC_Q4
 	add $0f
 	and $f0
-	cp $40
+	cp 4.0
 	jr c, .no_cap
 	ld a, $ff
 .no_cap
 	rlca
 	rlca
-	ld e, a
+	ld e, a ; *4
 	ld bc, CHANNEL_UNK_2F - CHANNEL_UNK_16
 	add hl, bc
 	ld [hl], e
@@ -2420,7 +2435,7 @@ Func_30bfb:
 	ld a, d
 	and a
 	jr z, .asm_30d77
-	call MultiplyBByC_Short
+	call MultiplyBByC_Q4
 	add $0f
 	and $f0
 	ld [hli], a
@@ -2499,7 +2514,7 @@ Func_30bfb:
 	ld de, CHANNEL_UNK_2F
 	add hl, de
 	ld b, [hl]
-	call MultiplyBByC_Short
+	call MultiplyBByC_Q4
 	add $0f
 	and $f0
 	pop hl
@@ -2518,7 +2533,7 @@ Func_30bfb:
 	ld de, TRACK_UNK06 - TRACK_FADE_OUT_ENVELOPE
 	add hl, de
 	ld c, [hl]
-	call MultiplyBByC_Short
+	call MultiplyBByC_Q4
 	add $0f
 	ld c, a
 	ld a, [wCurChannelPtr + 0]
@@ -2528,7 +2543,7 @@ Func_30bfb:
 	ld de, CHANNEL_UNK_2F
 	add hl, de
 	ld b, [hl]
-	call MultiplyBByC_Short
+	call MultiplyBByC_Q4
 	add $0f
 	and $f0
 	pop hl
@@ -2916,7 +2931,6 @@ MultiplyBByC:
 	ld h, b
 	ld l, $00
 	ld b, l
-
 REPT 7
 	add hl, hl
 	jr nc, :+
@@ -2928,8 +2942,9 @@ ENDR
 	add hl, bc
 	ret
 
-; returns a = high nybble b * high nybble c,
-MultiplyBByC_Short:
+; performs Q4 precision multiplication
+; returns a = high nybble b * high nybble c
+MultiplyBByC_Q4:
 	ld a, c
 	and $f0 ; high nybble
 	swap a

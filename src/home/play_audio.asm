@@ -4,14 +4,14 @@ InitAudio::
 	pop_wram
 	ret
 
-; bc = sound ID
-Func_fbc::
+UpdateAudio::
 	push_wram BANK("Audio RAM")
-	call Func_3f06
+	call AudioFunc_UpdateAudio
 	pop_wram
 	ret
 
-; bc = sound ID
+; input:
+; - bc = sound ID
 PlaySFX::
 	push_wram BANK("Audio RAM")
 	call AudioFunc_PlaySFX
@@ -25,48 +25,51 @@ Func_fd8:
 	pop_wram
 	ret
 
-; bc = sound ID
+; input:
+; - bc = sound ID
 PlayNewMusic::
 	push_wram BANK("Audio RAM")
 	call AudioFunc_PlayNewMusic
 	pop_wram
 	ret
 
-; bc = sound ID
-Func_ff4::
+; turns off all SFX channels playing
+; SFX ID given by bc
+; if bc = SOUND_OFF, then turn off all SFX
+; only ever used to switch SFX off (SOUND_OFF)
+; input:
+; - bc = sound ID
+TurnOffSFXID::
 	push_wram BANK("Audio RAM")
-	call Func_3f1e
+	call AudioFunc_TurnOffSFXID
 	pop_wram
 	ret
 
-Func_1002::
+TurnMusicOff::
 	push_wram BANK("Audio RAM")
-	call Func_3f24
+	call AudioFunc_TurnMusicOff
 	pop_wram
 	ret
 
 ; unreferenced
 Func_1010:
-	ldh a, [rSMBK]
-	push af
-	ld a, BANK("Audio RAM")
-	ldh [rSMBK], a
+	push_wram BANK("Audio RAM")
 	call Func_3f2a
-	pop af
-	ldh [rSMBK], a
+	pop_wram
 	ret
 
 ; unreferenced
 Func_101e:
-	ldh a, [rSMBK]
-	push af
-	ld a, BANK("Audio RAM")
-	ldh [rSMBK], a
+	push_wram BANK("Audio RAM")
 	call Func_3f30
-	pop af
-	ldh [rSMBK], a
+	pop_wram
 	ret
 
+; input:
+; - a = ?
+; - b = ?
+; - d = ?
+; - e = ?
 Func_102c::
 	ldh [hffac], a
 	push_wram BANK("Audio RAM")
@@ -76,32 +79,27 @@ Func_102c::
 	ret
 
 ; unreferenced
+; input:
+; - a = ?
 Func_103e:
 	ldh [hffac], a
-	ldh a, [rSMBK]
-	push af
-	ld a, BANK("Audio RAM")
-	ldh [rSMBK], a
+	push_wram BANK("Audio RAM")
 	ldh a, [hffac]
 	call Func_3f3c
-	pop af
-	ldh [rSMBK], a
+	pop_wram
 	ret
 
 ; unreferenced
 Func_1050:
 	ldh [hffac], a
-	ldh a, [rSMBK]
-	push af
-	ld a, BANK("Audio RAM")
-	ldh [rSMBK], a
+	push_wram BANK("Audio RAM")
 	ldh a, [hffac]
 	call Func_3f42
-	pop af
-	ldh [rSMBK], a
+	pop_wram
 	ret
 
-; bc = sound ID
+; input:
+; - bc = sound ID
 PlayNewMusic_SetNoise::
 	push_wram BANK("Audio RAM")
 	call AudioFunc_PlayNewMusic_SetNoise
