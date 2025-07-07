@@ -53,9 +53,9 @@ DEF CHANNEL_FADE_IN_ENVELOPE  rb
 DEF CHANNEL_FADE_OUT_ENVELOPE rb
 DEF CHANNEL_ACTIVE_COMMAND    rb
 DEF CHANNEL_SEMITONE_OFFSET   rb
-DEF CHANNEL_UNK_13            rw
+DEF CHANNEL_PITCH_OFFSET_MOD  rw
 DEF CHANNEL_VOLUME            rb
-DEF CHANNEL_UNK_16            rb
+DEF CHANNEL_VOLUME_MOD        rb
 DEF CHANNEL_SO1               rb
 DEF CHANNEL_SO2               rb
 DEF CHANNEL_PITCH_OFFSET      rb ; signed integer
@@ -66,7 +66,7 @@ DEF CHANNEL_UNK_1E            rb
 DEF CHANNEL_VIBRATO_SPEED     rb
 DEF CHANNEL_UNK_VIBRATO_VALUE rb
 DEF CHANNEL_VIBRATO_AMPLITUDE rb
-DEF CHANNEL_UNK_22            rb
+DEF CHANNEL_VIBRATO_AMPLITUDE_MOD rb
 DEF CHANNEL_VIBRATO_DISABLED  rb
 DEF CHANNEL_UNK_24            rw
 DEF CHANNEL_UNK_26            rb
@@ -115,28 +115,28 @@ DEF NUM_TRACKS EQU 4
 
 ; track struct members
 RSRESET
-DEF TRACK_FLAGS           rb
-DEF TRACK_PRIORITY        rb
-DEF TRACK_UNK02           rb
-DEF TRACK_UNK03           rb
-DEF TRACK_CHANNEL_PTR     rw
-DEF TRACK_UNK06           rb
-DEF TRACK_DURATION        rb
-DEF TRACK_TIMBRE          rb
-DEF TRACK_LENGTH          rb
-DEF TRACK_SWEEP           rb
-DEF TRACK_FADE_IN_ENVELOPE   rb
-DEF TRACK_FADE_OUT_ENVELOPE  rb
-DEF TRACK_UNK0D           rb
-DEF TRACK_UNK0E           rb
-DEF TRACK_UNK0F           rb
-DEF TRACK_VOLUME          rb
-DEF TRACK_VOLUME_ENVELOPE rb
-DEF TRACK_FREQUENCY       rw
-DEF TRACK_UNK14           rb
-DEF TRACK_UNK15           rb
-DEF TRACK_UNK16           rb
-DEF TRACK_UNK17           rb
+DEF TRACK_FLAGS             rb
+DEF TRACK_PRIORITY          rb
+DEF TRACK_UNK02             rb
+DEF TRACK_UNK03             rb
+DEF TRACK_CHANNEL_PTR       rw
+DEF TRACK_UNK06             rb
+DEF TRACK_DURATION          rb
+DEF TRACK_TIMBRE            rb
+DEF TRACK_LENGTH            rb
+DEF TRACK_SWEEP             rb
+DEF TRACK_FADE_IN_ENVELOPE  rb
+DEF TRACK_FADE_OUT_ENVELOPE rb
+DEF TRACK_UNK0D             rb
+DEF TRACK_UNK0E             rb
+DEF TRACK_UNK0F             rb
+DEF TRACK_VOLUME            rb
+DEF TRACK_VOLUME_ENVELOPE   rb
+DEF TRACK_FREQUENCY         rw
+DEF TRACK_UNK14             rb
+DEF TRACK_UNK15             rb
+DEF TRACK_UNK16             rb
+DEF TRACK_UNK17             rb
 DEF TRACK_STRUCT_LENGTH EQU _RS
 
 	const_def
@@ -479,3 +479,47 @@ DEF NUM_WAVES EQU const_value
 	const F_7 ; $7d
 	const F#7 ; $7e
 	const G_7 ; $7f
+
+; constants related to functions used to "dynamically" modify
+; some properties in audio channels (check AudioModFunctionTable)
+	const_def
+
+	; change SFX or Music tempo by some modifier
+	; - wSoundEngineParam2 = modifier (Q6 precision)
+	; - wSoundEngineParam3 = bool, whether to apply to SFX
+	; - wSoundEngineParam4 = bool, whether to apply to Music
+	const AUDIOMOD_TEMPO             ; $0
+
+	; change SFX or Music pitch by an offset
+	; - wSoundEngineParam1 = pitch offset (16-bit)
+	; - wSoundEngineParam3 = music channel bitmask
+	; - wSoundEngineParam4 = SFX channel bitmask
+	const AUDIOMOD_PITCH             ; $1
+
+	; change SFX or Music volume by some modifier
+	; - wSoundEngineParam2 = modifier (Q6 precision)
+	; - wSoundEngineParam3 = music channel bitmask
+	; - wSoundEngineParam4 = SFX channel bitmask
+	const AUDIOMOD_VOLUME            ; $2
+
+	; change SFX or Music pan by some modifier
+	; - wSoundEngineParam2 = pan SO (8-bit)
+	; - wSoundEngineParam3 = music channel bitmask
+	; - wSoundEngineParam4 = SFX channel bitmask
+	const AUDIOMOD_PAN               ; $3
+
+	; change SFX or Music vibrato amplitude by some modifier
+	; - wSoundEngineParam2 = modifier (Q8 precision)
+	; - wSoundEngineParam3 = music channel bitmask
+	; - wSoundEngineParam4 = SFX channel bitmask
+	const AUDIOMOD_VIBRATO_AMPLITUDE ; $4
+
+	; change SFX or Music vibrato speed to a value
+	; - wSoundEngineParam1 = speed value (8-bit)
+	; - wSoundEngineParam2 = ? (8-bit)
+	; - wSoundEngineParam3 = music channel bitmask
+	; - wSoundEngineParam4 = SFX channel bitmask
+	const AUDIOMOD_VIBRATO_SPEED     ; $5
+
+	const AUDIOMOD_UNK               ; $6
+DEF NUM_AUDIOMOD_FUNCTIONS EQU const_value

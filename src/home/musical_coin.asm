@@ -6,14 +6,13 @@ CheckLevelMusicalCoinFlag::
 	and a
 	ret
 
-Func_1795::
-PUSHO Q.4
-	ld a, $02
-	ld b, 4.0
-	ld d, $0f
-	ld e, $0f
-	call Func_102c
-POPO
+ResumeNormalVolume::
+	; resume normal volume level
+	ld a, AUDIOMOD_VOLUME
+	ld b, 1.0q6 ; volume modifier
+	ld d, SFX_CHANNELS ; sfx channels
+	ld e, MUSIC_CHANNELS >> 4 ; music channels
+	call ExecuteAudioMod
 	call UpdateAudio
 	ret
 

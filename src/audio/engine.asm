@@ -14,15 +14,14 @@ _InitAudio::
 	pop af
 	ld [wAudioBankBackup], a
 
-	ld a, $4a
+	ld a, 74
+	ld [wSFXBaseTempo], a
 	ld [wSFXTempo], a
-	ld [w3d007], a
+	ld [wMusicBaseTempo], a
 	ld [wMusicTempo], a
-	ld [w3d00c], a
-
-	ld a, $40
-	ld [w3d006], a
-	ld [w3d00b], a
+	ld a, 1.0q6
+	ld [wSFXTempoMult], a
+	ld [wMusicTempoMult], a
 
 	ld a, $ff
 	ld [wCurWaveSample], a
@@ -80,10 +79,10 @@ _UpdateAudio::
 	ld hl, wAudioEngineFlags
 	set AUDIOENG_UNK5_F, [hl]
 
-	ld hl, w3d007
+	ld hl, wSFXTempo
 	ld a, [hli]
 	add [hl]
-	ld [hli], a ; w3d008 += w3d007
+	ld [hli], a ; w3d008 += wSFXTempo
 	ld a, 0
 	adc [hl]
 	ld [hld], a
@@ -132,7 +131,7 @@ _UpdateAudio::
 	ld hl, wAudioEngineFlags
 	res AUDIOENG_UNK5_F, [hl]
 
-	ld hl, w3d00c
+	ld hl, wMusicTempo
 	ld a, [hli]
 	add [hl] ; w3d00d
 	ld [hli], a
@@ -641,12 +640,12 @@ InitChannel:
 	xor a
 	ld [hli], a ; CHANNEL_ACTIVE_COMMAND
 	ld [hli], a ; CHANNEL_SEMITONE_OFFSET
-	ld [hli], a ; CHANNEL_UNK_13
+	ld [hli], a ; CHANNEL_PITCH_OFFSET_MOD
 	ld [hli], a
 	ld a, $ff
 	ld [hli], a ; CHANNEL_VOLUME
-	ld a, 4.0
-	ld [hli], a ; CHANNEL_UNK_16
+	ld a, 1.0q6
+	ld [hli], a ; CHANNEL_VOLUME_MOD
 	xor a
 	ld [hli], a ; CHANNEL_SO1
 	ld [hli], a ; CHANNEL_SO2
@@ -663,7 +662,7 @@ InitChannel:
 	xor a
 	ld [hli], a ; CHANNEL_UNK_VIBRATO_VALUE
 	ld [hli], a ; CHANNEL_VIBRATO_AMPLITUDE
-	ld [hli], a ; CHANNEL_UNK_22
+	ld [hli], a ; CHANNEL_VIBRATO_AMPLITUDE_MOD
 	ld [hli], a ; CHANNEL_VIBRATO_DISABLED
 	ld [hli], a ; CHANNEL_UNK_24
 	ld [hli], a
@@ -765,24 +764,24 @@ Func_30438::
 	ld e, a
 	jp ReturnFromAudioJump
 
-Func_30449::
+_GetPlayingSoundID::
 	and a
 	jr nz, .asm_3045d
 	ld a, [wActiveChannels]
 	and MUSIC_CHANNELS
-	jr z, .asm_30461
+	jr z, .no_music
 	ld a, [wLoadedMusic + 0]
 	ld c, a
 	ld a, [wLoadedMusic + 1]
 	ld b, a
-	jr .asm_30485
+	jr .got_id
 .asm_3045d
-	cp $05
-	jr c, .asm_30466
-.asm_30461
+	cp NUM_SFX_CHANNELS + 1
+	jr c, .valid_sfx_channel
+.no_music
 	ld bc, $0
-	jr .asm_30485
-.asm_30466
+	jr .got_id
+.valid_sfx_channel
 	ld bc, .channel_pointers - $2
 	sla a
 	add c
@@ -796,15 +795,15 @@ Func_30449::
 	ld a, [bc]
 	ld h, a
 	ld bc, $0
-	bit 7, [hl]
-	jr z, .asm_30485
-	ld bc, $6
+	bit CHANFLAGS_ACTIVE_F, [hl]
+	jr z, .got_id
+	ld bc, CHANNEL_SOUND_ID
 	add hl, bc
 	ld a, [hli]
 	ld c, a
 	ld a, [hli]
 	ld b, a
-.asm_30485
+.got_id
 	jp ReturnFromAudioJump
 
 .channel_pointers
@@ -815,26 +814,31 @@ Func_30449::
 	dw wChannel4
 	assert_table_length NUM_MUSIC_CHANNELS
 
-PointerTable_30490:
-	dw Func_30802
-	dw Func_30829
-	dw Func_30930
-	dw Func_3094b
-	dw Func_3097a
-	dw Func_308f1
-	dw Func_309b6
+AudioModFunctionTable:
+	table_width 2
+	dw AudioMod_Tempo            ; AUDIOMOD_TEMPO
+	dw AudioMod_Pitch            ; AUDIOMOD_PITCH
+	dw AudioMod_Volume           ; AUDIOMOD_VOLUME
+	dw AudioMod_Pan              ; AUDIOMOD_PAN
+	dw AudioMod_VibratoAmplitude ; AUDIOMOD_VIBRATO_AMPLITUDE
+	dw AudioMod_VibratoSpeed     ; AUDIOMOD_VIBRATO_SPEED
+	dw Func_309b6                ; AUDIOMOD_UNK
+	assert_table_length NUM_AUDIOMOD_FUNCTIONS
 
-Func_3049e::
-	call Func_304a4
+; input:
+; - a = AUDIOMOD_* constant
+_ExecuteAudioMod::
+	call ExecuteAudioMod_Internal
 	jp ReturnFromAudioJump
 
 ; wSoundEngineParam1 <- c
 ; wSoundEngineParam2 <- b
 ; wSoundEngineParam3 <- e
 ; wSoundEngineParam4 <- d
-Func_304a4:
-	; return if a >= $7
-	cp $7
+; input:
+; - a = AUDIOMOD_* constant
+ExecuteAudioMod_Internal:
+	cp NUM_AUDIOMOD_FUNCTIONS
 	ret nc
 
 	push af
@@ -851,7 +855,7 @@ Func_304a4:
 	ld [hl], a ; wNumChannels
 	pop af
 
-	ld bc, PointerTable_30490
+	ld bc, AudioModFunctionTable
 	jp JumpToPointerInTable
 
 ; applies value in wSoundEngineParam2 to all active channels
@@ -860,7 +864,7 @@ Func_304a4:
 ; input:
 ; - bc = channel struct field
 ; - wSoundEngineParam2 = value to apply
-Func_304bc:
+AudioModSetValue_Short:
 	call PrepareChannelBitmasks
 .loop_chs
 	rrc d
@@ -883,7 +887,7 @@ Func_304bc:
 ; applies value in wSoundEngineParam1 (as 16-bit) to all active channels
 ; selected for in wSoundEngineParam3 and wSoundEngineParam4
 ; to the struct field given by bc
-Func_304d9:
+AudioModSetValue_Long:
 	call PrepareChannelBitmasks
 .loop_chs
 	rrc d
@@ -955,13 +959,13 @@ Func_30527:
 	ret nz
 	ld [hli], a
 	ld a, [hl] ; w3d022
-	sub 0.25
+	sub $04
 	jp c, Func_3041c
 	ld [hl], a
 	ld b, a
-	ld a, $02
+	ld a, AUDIOMOD_VOLUME
 	lb de, $00, $ff ; select only music channels
-	jp Func_304a4
+	jp ExecuteAudioMod_Internal
 
 Func_30547:
 	ld a, [wCurChannelPtr + 0]
@@ -1095,7 +1099,7 @@ UpdateVibrato:
 	ld bc, CHANNEL_VIBRATO_AMPLITUDE - CHANNEL_UNK_VIBRATO_VALUE
 	add hl, bc
 	ld a, [hli]
-	add [hl] ; CHANNEL_UNK_22
+	add [hl] ; CHANNEL_VIBRATO_AMPLITUDE_MOD
 	jr z, .asm_3060c
 	ld c, a
 	ld a, [wVibratoValue]
@@ -1183,7 +1187,7 @@ Func_30651:
 	adc d
 	ld d, a
 
-	ld bc, CHANNEL_UNK_13 - CHANNEL_PITCH_PRODUCT
+	ld bc, CHANNEL_PITCH_OFFSET_MOD - CHANNEL_PITCH_PRODUCT
 	add hl, bc
 	ld a, [hli]
 	add e
@@ -1192,7 +1196,7 @@ Func_30651:
 	adc d
 	ld d, a
 
-	ld bc, CHANNEL_VIBRATO_DISABLED - CHANNEL_UNK_13
+	ld bc, CHANNEL_VIBRATO_DISABLED - CHANNEL_PITCH_OFFSET_MOD
 	add hl, bc
 	ld a, [hli]
 	cp FALSE
@@ -1237,18 +1241,18 @@ Func_30651:
 	add hl, bc
 	ld a, [hli]
 	ld b, a
-	ld c, [hl] ; CHANNEL_UNK_16
-	call MultiplyBByC_Q4
+	ld c, [hl] ; CHANNEL_VOLUME_MOD
+	call MultiplyBByC_Short
 	add $0f
 	and $f0
-	cp 4.0
+	cp $40
 	jr c, .no_cap
 	ld a, $ff
 .no_cap
 	rlca
 	rlca
 	ld e, a ; *4
-	ld bc, CHANNEL_UNK_2F - CHANNEL_UNK_16
+	ld bc, CHANNEL_UNK_2F - CHANNEL_VOLUME_MOD
 	add hl, bc
 	ld [hl], e
 	ld bc, -CHANNEL_UNK_2F
@@ -1293,18 +1297,18 @@ PointerTable_306d1:
 	dw Func_30b4d                         ; cf
 
 PointerTable_3070f:
-	dw AudioCmd_ClearFlags           ; 00
-	dw AudioCmd_SetChannelTimbre     ; 01
-	dw AudioCmd_SetChannelFadeInEnvelope ; 02
-	dw Func_309e8                    ; 03
-	dw Func_30a03                    ; 04
+	dw AudioCmd_ClearFlags                ; 00
+	dw AudioCmd_SetChannelTimbre          ; 01
+	dw AudioCmd_SetChannelFadeInEnvelope  ; 02
+	dw Func_309e8                         ; 03
+	dw Func_30a03                         ; 04
 	dw AudioCmd_SetChannelFadeOutEnvelope ; 05
-	dw AudioCmd_SetChannelUnk27      ; 06
-	dw AudioCmd_SetChannelUnk28      ; 07
+	dw AudioCmd_SetChannelUnk27           ; 06
+	dw AudioCmd_SetChannelUnk28           ; 07
 	dw InvalidAudioCmd                    ; 08
 	dw InvalidAudioCmd                    ; 09
-	dw AudioCmd_SetChannelDuration   ; 0a
-	dw AudioCmd_SetChannelSweep      ; 0b
+	dw AudioCmd_SetChannelDuration        ; 0a
+	dw AudioCmd_SetChannelSweep           ; 0b
 
 Func_30727:
 	ld a, [wAudioCmdArg]
@@ -1428,59 +1432,65 @@ AudioCmd_SetTempo:
 ; tempo
 	ld hl, wAudioEngineFlags
 	bit AUDIOENG_UNK5_F, [hl]
-	ld hl, wMusicTempo
+	ld hl, wMusicBaseTempo
 	jr z, .not_set
-	ld hl, wSFXTempo
+	ld hl, wSFXBaseTempo
 .not_set
 	ld a, [wAudioCmdArg]
 	inc de
 	ld [hl], a
-	call Func_307e4
+	call CalculateTempo
 	jp DoAudioCommand
 
-; hl = either wSFXTempo or wMusicTempo
-Func_307e4:
-	ld a, [hli]
+; multiplies base tempo given in hl by its multiplier,
+; then stores the result
+; input:
+; - hl = either wSFXBaseTempo or wMusicBaseTempo
+CalculateTempo:
+	ld a, [hli] ; wSFXBaseTempo / wMusicBaseTempo
 	ld b, a
-	ld a, [hli]
+	ld a, [hli] ; wSFXTempoMult / wMusicTempoMult
 	ld c, a
 	push hl
 	call MultiplyBByC
 	ld a, h
-	cp $40
+	cp HIGH(256.0q6)
 	jr c, .no_cap
-	ld a, $3f
-	ld l, $ff
+	ld a, HIGH(255.99q6)
+	ld l, LOW(255.99q6)
 .no_cap
 	sla l
 	rla
 	sla l
 	rla ; *4
 	and a
-	jr nz, .asm_307ff
+	jr nz, .got_tempo
 	inc a ; at least 1
-.asm_307ff
+.got_tempo
 	pop hl
-	ld [hl], a
+	ld [hl], a ; wSFXTempo / wMusicTempo
 	ret
 
-Func_30802:
+; if wSoundEngineParam4 != 0, then set wSFXTempoMult to wSoundEngineParam2
+; if wSoundEngineParam3 != 0, then set wMusicTempoMult to wSoundEngineParam2
+; in either case, recalculate the new tempo value
+AudioMod_Tempo:
 	ld a, [wSoundEngineParam4]
 	and a
-	jr z, .asm_30812
-	ld hl, w3d006
+	jr z, .check_music
+	ld hl, wSFXTempoMult
 	ld a, [wSoundEngineParam2]
 	ld [hld], a
-	call Func_307e4
-.asm_30812
+	call CalculateTempo
+.check_music
 	ld a, [wSoundEngineParam3]
 	and a
-	jr z, .asm_30822
-	ld hl, w3d00b
+	jr z, .done
+	ld hl, wMusicTempoMult
 	ld a, [wSoundEngineParam2]
 	ld [hld], a
-	call Func_307e4
-.asm_30822
+	call CalculateTempo
+.done
 	ret
 
 AudioCmd_SetSemitoneOffset:
@@ -1488,12 +1498,12 @@ AudioCmd_SetSemitoneOffset:
 	ld bc, CHANNEL_SEMITONE_OFFSET
 	jp SetChannelProperty
 
-Func_30829:
+AudioMod_Pitch:
 	ld a, [wNumChannels]
 	set CHANFLAGS_UPDATE_FREQUENCY_F, a
 	ld [wNumChannels], a
-	ld bc, CHANNEL_UNK_13
-	jp Func_304d9
+	ld bc, CHANNEL_PITCH_OFFSET_MOD
+	jp AudioModSetValue_Long
 
 AudioCmd_SetWave:
 ; wave
@@ -1637,20 +1647,20 @@ AudioCmd_SetVibratoSpeed:
 .asm_308ee
 	jp DoAudioCommand
 
-Func_308f1:
+AudioMod_VibratoSpeed:
 	ld a, [wSoundEngineParam2]
 	sla a
 	jr z, .asm_308fe
 	ld bc, CHANNEL_VIBRATO_SPEED
-	jp Func_304bc
+	jp AudioModSetValue_Short
 .asm_308fe
 	rra
 	ld [wSoundEngineParam1], a
 	rra
 	xor $40
 	ld [wSoundEngineParam2], a
-	ld bc, CHANNEL_VIBRATO_SPEED
-	jp Func_304d9
+	ld bc, CHANNEL_VIBRATO_SPEED ; and CHANNEL_UNK_VIBRATO_VALUE
+	jp AudioModSetValue_Long
 
 AudioCmd_SetVibratoDelay:
 ; vibrato_delay
@@ -1675,12 +1685,12 @@ AudioCmd_SetChannelVolume:
 	ld [hl], a
 	jp DoAudioCommand
 
-Func_30930:
+AudioMod_Volume:
 	ld a, [wNumChannels]
 	set CHANFLAGS_UPDATE_VOLUME_F, a
 	ld [wNumChannels], a
-	ld bc, CHANNEL_UNK_16
-	jp Func_304bc
+	ld bc, CHANNEL_VOLUME_MOD
+	jp AudioModSetValue_Short
 
 Func_3093e:
 	ld a, [wCurChannelFlags]
@@ -1689,12 +1699,12 @@ Func_3093e:
 	ld bc, CHANNEL_SO1
 	jr Func_3098b
 
-Func_3094b:
+AudioMod_Pan:
 	ld a, [wNumChannels]
 	set CHANFLAGS_UPDATE_SO_F, a
 	ld [wNumChannels], a
 	ld bc, CHANNEL_SO2
-	jp Func_304bc
+	jp AudioModSetValue_Short
 
 AudioCmd_SetVibratoAmplitude:
 ; vibrato_amplitude
@@ -1720,9 +1730,9 @@ AudioCmd_SetChannelVibratoDisabled:
 	ld bc, CHANNEL_VIBRATO_DISABLED
 	jr SetChannelProperty
 
-Func_3097a:
-	ld bc, CHANNEL_UNK_22
-	jp Func_304bc
+AudioMod_VibratoAmplitude:
+	ld bc, CHANNEL_VIBRATO_AMPLITUDE_MOD
+	jp AudioModSetValue_Short
 
 Func_30980:
 	ld a, [wCurChannelFlags]
@@ -1764,7 +1774,7 @@ AudioCmd_SetChannelUnk28:
 
 Func_309b6:
 	ld bc, CHANNEL_UNK_27
-	jp Func_304d9
+	jp AudioModSetValue_Long
 
 AudioCmd_SetChannelTimbre:
 ; set_timbre
@@ -2197,8 +2207,8 @@ Func_30bfb:
 	ld l, a
 	ld a, [wCurTrackPtr + 1]
 	ld h, a
-	ld a, [hl]
-	bit 7, a
+	ld a, [hl] ; TRACK_FLAGS
+	bit TRACKFLAGS_7_F, a
 	ret z
 
 	ld b, a
@@ -2230,21 +2240,20 @@ Func_30bfb:
 .asm_30c31
 	inc [hl]
 	pop hl
-	bit 5, b
+	bit TRACKFLAGS_5_F, b
 	jr z, .asm_30c3e
-	bit 4, b
+	bit TRACKFLAGS_4_F, b
 	jr nz, .asm_30c95
 	jp .asm_30ce9
 .asm_30c3e
-	bit 4, b
+	bit TRACKFLAGS_4_F, b
 	jp nz, .asm_30d22
 	jp .asm_30d70
 
 .asm_30c46
 	pop hl
-	res 6, [hl]
-
-	bit 5, [hl]
+	res TRACKFLAGS_6_F, [hl]
+	bit TRACKFLAGS_5_F, [hl]
 	jr z, .fade_out
 
 	push hl
@@ -2399,16 +2408,18 @@ Func_30bfb:
 	ld a, [hli]
 	and $07
 	dec a
-	cp [hl]
+	cp [hl] ; TRACK_FREQUENCY
 	jr nc, .asm_30d84
 	xor a
-	ld [hld], a
-	ld a, [hl]
+	ld [hld], a ; TRACK_FREQUENCY
+	ld a, [hl] ; TRACK_VOLUME_ENVELOPE
 	sub $10
 	jr c, .asm_30d3b
 	call .Func_30e1b
 	ld [hl], a
 	jr .asm_30d84
+
+	; unreachable
 	dec hl
 
 .asm_30d3b
@@ -2426,6 +2437,11 @@ Func_30bfb:
 	ld c, a
 	ld d, [hl] ; CHANNEL_UNK_28
 	pop hl
+
+	; b = CHANNEL_UNK_2F
+	; c = CHANNEL_UNK_27
+	; d = CHANNEL_UNK_28
+
 	ld a, b
 	and a
 	jr z, .asm_30d77
@@ -2435,15 +2451,15 @@ Func_30bfb:
 	ld a, d
 	and a
 	jr z, .asm_30d77
-	call MultiplyBByC_Q4
+	call MultiplyBByC_Short
 	add $0f
 	and $f0
-	ld [hli], a
-	ld [hl], d
-	ld bc, -18
+	ld [hli], a ; TRACK_VOLUME_ENVELOPE
+	ld [hl], d ; TRACK_FREQUENCY
+	ld bc, TRACK_FLAGS - TRACK_FREQUENCY
 	add hl, bc
-	ld a, [hl]
-	and $8f
+	ld a, [hl] ; TRACK_FLAGS
+	and $ff ^ (TRACKFLAGS_4 | TRACKFLAGS_5 | TRACKFLAGS_6)
 	ld [hl], a
 	jr .asm_30d95
 
@@ -2489,7 +2505,7 @@ Func_30bfb:
 	ld a, [wCurChannelFlags]
 .skip_so
 
-	bit 1, a
+	bit CHANFLAGS_UPDATE_VOLUME_F, a
 	ret z ; skip envelope
 	jp SetVolumeEnvelope
 
@@ -2514,7 +2530,7 @@ Func_30bfb:
 	ld de, CHANNEL_UNK_2F
 	add hl, de
 	ld b, [hl]
-	call MultiplyBByC_Q4
+	call MultiplyBByC_Short
 	add $0f
 	and $f0
 	pop hl
@@ -2533,7 +2549,7 @@ Func_30bfb:
 	ld de, TRACK_UNK06 - TRACK_FADE_OUT_ENVELOPE
 	add hl, de
 	ld c, [hl]
-	call MultiplyBByC_Q4
+	call MultiplyBByC_Short
 	add $0f
 	ld c, a
 	ld a, [wCurChannelPtr + 0]
@@ -2543,7 +2559,7 @@ Func_30bfb:
 	ld de, CHANNEL_UNK_2F
 	add hl, de
 	ld b, [hl]
-	call MultiplyBByC_Q4
+	call MultiplyBByC_Short
 	add $0f
 	and $f0
 	pop hl
@@ -2944,7 +2960,7 @@ ENDR
 
 ; performs Q4 precision multiplication
 ; returns a = high nybble b * high nybble c
-MultiplyBByC_Q4:
+MultiplyBByC_Short:
 	ld a, c
 	and $f0 ; high nybble
 	swap a

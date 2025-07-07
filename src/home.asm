@@ -19,7 +19,7 @@ INCLUDE "home/level_vblank.asm"
 INCLUDE "home/object_pos.asm"
 INCLUDE "home/sprite.asm"
 INCLUDE "home/load_level.asm"
-INCLUDE "home/play_audio.asm"
+INCLUDE "home/audio.asm"
 INCLUDE "home/clear_transformation.asm"
 INCLUDE "home/floor_transition.asm"
 INCLUDE "home/room_transition.asm"
@@ -69,6 +69,6 @@ INCLUDE "home/overworld.asm"
 
 SECTION "Audio Home", ROM0
 
-INCLUDE "home/audio.asm"
+INCLUDE "home/audio_functions.asm"
 
 	ds $3d, $00

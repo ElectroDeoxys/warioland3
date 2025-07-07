@@ -196,13 +196,12 @@ InitActionHelp:
 	ret
 
 UpdateActionHelp:
-PUSHO Q.4
-	ld a, $02
-	ld b, 2.0
-	ld d, $0f
-	ld e, $0f
-	call Func_102c
-POPO
+	; lower overall volume
+	ld a, AUDIOMOD_VOLUME
+	ld b, 0.5q6 ; volume modifier
+	ld d, SFX_CHANNELS ; sfx channels
+	ld e, MUSIC_CHANNELS >> 4 ; music channels
+	call ExecuteAudioMod
 
 	ld a, [wPowerUpLevel]
 	and $80
@@ -267,7 +266,7 @@ POPO
 	xor a ; unnecessary
 	ld [w3d50d], a
 
-	call Func_1795
+	call ResumeNormalVolume
 	ld hl, wSubState
 	inc [hl]
 	ret

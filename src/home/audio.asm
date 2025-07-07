@@ -1,146 +1,110 @@
-AudioFunc_InitAudio:
-	call BackupBankAndSwitchToAudioBank
-	jp _InitAudio
-
-AudioFunc_UpdateAudio:
-	call PrepareAudioJump_WithCallback
-	jp _UpdateAudio
-
-AudioFunc_PlaySFX:
-	call PrepareAudioJump_NoCallback
-	jp _PlaySFX
-
-Func_3f12:
-	call PrepareAudioJump_NoCallback
-	jp PlayMusic
-
-AudioFunc_PlayNewMusic::
-	call PrepareAudioJump_NoCallback
-	jp _PlayNewMusic
-
-AudioFunc_TurnOffSFXID:
-	call PrepareAudioJump_NoCallback
-	jp _TurnOffSFXID
-
-AudioFunc_TurnMusicOff:
-	call PrepareAudioJump_NoCallback
-	jp _TurnMusicOff
-
-Func_3f2a:
-	call PrepareAudioJump_NoCallback
-	jp Func_302e4
-
-Func_3f30:
-	call PrepareAudioJump_NoCallback
-	jp Func_30438
-
-Func_3f36:
-	call PrepareAudioJump_NoCallback
-	jp Func_3049e
-
-Func_3f3c:
-	call PrepareAudioJump_NoCallback
-	jp Func_30519
-
-Func_3f42:
-	call PrepareAudioJump_NoCallback
-	jp Func_30449
-
-AudioFunc_PlayNewMusic_SetNoise::
-	call PrepareAudioJump_NoCallback
-	jp _PlayNewMusic_SetNoise
-
-BackupBankAndSwitchToAudioBank::
-	ld a, [wROMBank]
-	ld [wAudioBankBackup], a
-;	fallthrough
-
-SwitchToAudioBank::
-	ld a, BANK("Audio Engine")
-.switch_bank
-	ld [wROMBank], a
-	ld [rROMB0], a
+InitAudio::
+	push_wram BANK("Audio RAM")
+	call AudioFunc_InitAudio
+	pop_wram
 	ret
 
-SwitchBackFromAudioBank::
-	ld a, [wAudioBankBackup]
-	jr SwitchToAudioBank.switch_bank
-
-; prepares jumping into a function in the Audio Engine
-; checks if there's a backup bank to switch after the function returns:
-; - if there is already, pop the stack and return
-; (skips the rest of the caller's instructions)
-; - if not, then calls BackupBankAndSwitchToAudioBank and returns
-PrepareAudioJump_NoCallback:
-	ld hl, wAudioEngineFlags
-	bit AUDIOENG_HAS_BACKUP_BANK_F, [hl]
-	jr nz, .pop_stack
-.backup
-	set AUDIOENG_HAS_BACKUP_BANK_F, [hl]
-	push af
-	call BackupBankAndSwitchToAudioBank
-	pop af
-	ret
-.pop_stack
-	pop hl
-	ld a, $ff
+UpdateAudio::
+	push_wram BANK("Audio RAM")
+	call AudioFunc_UpdateAudio
+	pop_wram
 	ret
 
-; same as PrepareAudioJump_NoCallback but can additionally
-; use wAudioBankCallback in case backup bank is already set
-PrepareAudioJump_WithCallback::
-	ld hl, wAudioEngineFlags
-	bit AUDIOENG_HAS_BACKUP_BANK_F, [hl]
-	jr z, PrepareAudioJump_NoCallback.backup
-	bit AUDIOENG_HAS_CALLBACK_F, [hl]
-	jr nz, PrepareAudioJump_NoCallback.pop_stack
-	set AUDIOENG_HAS_CALLBACK_F, [hl]
-
-	; pop calling function from the stack
-	; and store it in WRAM
-	pop hl
-	ld a, h
-	ld [wAudioBankCallback + 1], a
-	ld a, l
-	ld [wAudioBankCallback + 0], a
-	xor a
+; input:
+; - bc = sound ID
+PlaySFX::
+	push_wram BANK("Audio RAM")
+	call AudioFunc_PlaySFX
+	pop_wram
 	ret
 
-; expects functions called after PrepareAudioJump_NoCallback
-; or PrepareAudioJump_WithCallback to jump to this routine
-ReturnFromAudioJump::
-	ld hl, wAudioEngineFlags
-	bit AUDIOENG_HAS_CALLBACK_F, [hl]
-	jr nz, .push_callback
-	call SwitchBackFromAudioBank
-	res AUDIOENG_HAS_BACKUP_BANK_F, [hl]
-	xor a
+; unreferenced
+Func_fd8:
+	push_wram BANK("Audio RAM")
+	call Func_3f12
+	pop_wram
 	ret
 
-.push_callback
-	; push callback to stack and return to it
-	ld a, [wAudioBankCallback + 1]
-	ld h, a
-	ld a, [wAudioBankCallback + 0]
-	ld l, a
-	push hl
-	ld hl, wAudioEngineFlags
-	res AUDIOENG_HAS_CALLBACK_F, [hl]
+; input:
+; - bc = sound ID
+PlayNewMusic::
+	push_wram BANK("Audio RAM")
+	call AudioFunc_PlayNewMusic
+	pop_wram
 	ret
 
-ReadAudioCommands_1Byte::
-	ld a, [wSoundBank]
-	call SwitchToAudioBank.switch_bank
-	ld a, [de]
-	ld c, a
-	jp SwitchToAudioBank
+; turns off all SFX channels playing
+; SFX ID given by bc
+; if bc = SOUND_OFF, then turn off all SFX
+; only ever used to switch SFX off (SOUND_OFF)
+; input:
+; - bc = sound ID
+TurnOffSFXID::
+	push_wram BANK("Audio RAM")
+	call AudioFunc_TurnOffSFXID
+	pop_wram
+	ret
 
-ReadAudioCommands_2Bytes::
-	ld a, [wSoundBank]
-	call SwitchToAudioBank.switch_bank
-	ld a, [de]
-	ld c, a
-	inc de
-	ld a, [de]
-	ld b, a
-	jp SwitchToAudioBank
+TurnMusicOff::
+	push_wram BANK("Audio RAM")
+	call AudioFunc_TurnMusicOff
+	pop_wram
+	ret
+
+; unreferenced
+Func_1010:
+	push_wram BANK("Audio RAM")
+	call Func_3f2a
+	pop_wram
+	ret
+
+; unreferenced
+Func_101e:
+	push_wram BANK("Audio RAM")
+	call Func_3f30
+	pop_wram
+	ret
+
+; input:
+; - a = AUDIOMOD_* constant
+; - c = wSoundEngineParam1
+; - b = wSoundEngineParam2
+; - e = wSoundEngineParam3
+; - d = wSoundEngineParam4
+ExecuteAudioMod::
+	ldh [hffac], a
+	push_wram BANK("Audio RAM")
+	ldh a, [hffac]
+	call AudioFunc_ExecuteAudioMod
+	pop_wram
+	ret
+
+; unreferenced
+; input:
+; - a = ?
+Func_103e:
+	ldh [hffac], a
+	push_wram BANK("Audio RAM")
+	ldh a, [hffac]
+	call Func_3f3c
+	pop_wram
+	ret
+
+; unreferenced
+; output:
+; - bc = sound ID
+UnreferencedGetPlayingSoundID:
+	ldh [hffac], a
+	push_wram BANK("Audio RAM")
+	ldh a, [hffac]
+	call AudioFunc_GetPlayingSoundID
+	pop_wram
+	ret
+
+; input:
+; - bc = sound ID
+PlayNewMusic_SetNoise::
+	push_wram BANK("Audio RAM")
+	call AudioFunc_PlayNewMusic_SetNoise
+	pop_wram
+	ret

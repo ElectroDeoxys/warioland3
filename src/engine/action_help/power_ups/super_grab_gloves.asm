@@ -81,7 +81,7 @@ Func_1fb179:
 	and POWER_UP_MASK
 	ld [wPowerUpLevel], a
 	farcall Func_4628
-	call Func_1795
+	call ResumeNormalVolume
 	ret
 
 .restart_action_help

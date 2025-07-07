@@ -2320,26 +2320,16 @@ wAudioBankBackup::
 wAudioBankCallback::
 	dw
 
-wSFXTempo::
-	db
-
-w3d006::
-	db
-
-w3d007::
-	db
+wSFXBaseTempo:: db
+wSFXTempoMult:: db
+wSFXTempo::     db
 
 w3d008::
 	ds $2
 
-wMusicTempo::
-	db
-
-w3d00b::
-	db
-
-w3d00c::
-	db
+wMusicBaseTempo:: db
+wMusicTempoMult:: db
+wMusicTempo::     db
 
 w3d00d::
 	ds $2
