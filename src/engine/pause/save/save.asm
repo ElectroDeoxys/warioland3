@@ -352,7 +352,7 @@ SaveLevel:
 	pop af
 	sramswitch
 
-	call VBlank_1f0c6c
+	call VBlank_Saving
 	farcall LoadSaveScreenPals
 	farcall DrawSaveCompleteBox
 	ld a, LCDC_DEFAULT
@@ -562,7 +562,7 @@ Save:
 	pop af
 	sramswitch
 
-	call VBlank_1f0c6c
+	call VBlank_Saving
 	farcall LoadSaveScreenPals
 	farcall DrawSaveCompleteBox
 

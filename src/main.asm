@@ -827,9 +827,28 @@ INCLUDE "engine/level/wario_states_4.asm"
 SECTION "Bank 7C", ROMX
 
 INCLUDE "engine/pause/state_table.asm"
-INCLUDE "engine/pause/pause_menu.asm"
-INCLUDE "engine/pause/save.asm"
-INCLUDE "engine/bank7c.asm"
+INCLUDE "engine/pause/pause_menu_1.asm"
+INCLUDE "engine/pause/save/save.asm"
+INCLUDE "engine/load_font.asm"
+INCLUDE "engine/pause/pause_menu_2.asm"
+INCLUDE "engine/pause/save/checksum.asm"
+INCLUDE "engine/pause/save/vblank.asm"
+INCLUDE "engine/pause/save/validate_save.asm"
+INCLUDE "data/pause/oam.asm"
+
+FontGfx:: INCBIN "gfx/font.2bpp.rle"
+
+GBIncompatibleGfx:     INCBIN "gfx/gb_incompatible.2bpp.rle"
+GBIncompatibleTilemap: INCBIN "data/bgmaps/gb_incompatible.tilemap.rle"
+GBIncompatibleAttrmap: INCBIN "data/bgmaps/gb_incompatible.attrmap.rle" ; unreferenced
+
+INCLUDE "data/pause/palettes.asm"
+
+LanguageSelection1TextMap:
+INCBIN "data/bgmaps/text/language_selection1.tilemap"
+
+LanguageSelection2TextMap:
+INCBIN "data/bgmaps/text/language_selection2.tilemap"
 
 
 SECTION "Bank 7D", ROMX

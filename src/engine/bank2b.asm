@@ -4,7 +4,7 @@ Func_ac000:
 	ld h, b
 	ld l, c
 	res 1, l
-	ld b, $57
+	ld b, BANK("Credits OAM")
 	call UpdateOWAnimation
 	ld a, [bc]
 	ret
@@ -13,7 +13,7 @@ Func_ac00b:
 	ld h, b
 	ld l, c
 	res 1, l
-	ld b, $57
+	ld b, BANK("Credits OAM")
 	call UpdateOWAnimation
 	ld a, [bc]
 	ret
@@ -22,7 +22,7 @@ Func_ac016:
 	ld h, b
 	ld l, c
 	res 1, l
-	ld b, $57
+	ld b, BANK("Credits OAM")
 	call UpdateOWAnimation
 	ld a, [bc]
 	ret
@@ -32,7 +32,7 @@ Func_ac021:
 	ld h, b
 	ld l, c
 	res 1, l
-	ld b, $1a
+	ld b, BANK("Object Framesets")
 	call UpdateOWAnimation
 	ld a, [bc]
 	ret
@@ -41,7 +41,7 @@ Func_ac02c:
 	ld h, b
 	ld l, c
 	res 1, l
-	ld b, $01
+	ld b, BANK("Title Framesets")
 	call UpdateOWAnimation
 	ld a, [bc]
 	ret
@@ -50,25 +50,25 @@ Func_ac037:
 	ld h, b
 	ld l, c
 	res 1, l
-	ld b, $2a
+	ld b, BANK("Overworld OAM 1")
 	call UpdateOWAnimation
 	ld a, [bc]
 	ret
 
 Func_ac042:
-	ld b, $57
+	ld b, BANK("Credits OAM")
 	jp LoadOWSpriteWithScroll
 
 Func_ac047:
-	ld b, $57
+	ld b, BANK("Credits OAM")
 	jp LoadOWSpriteWithScroll
 
 Func_ac04c:
-	ld b, $57
+	ld b, BANK("Credits OAM")
 	jp LoadOWSpriteWithScroll
 
 Func_ac051:
-	ld b, $57
+	ld b, BANK("Credits OAM")
 	jp LoadOWSprite
 
 Func_ac056:
