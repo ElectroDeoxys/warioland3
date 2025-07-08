@@ -1,4 +1,4 @@
-LoadFontTiles:
+LoadFontTiles::
 	ld hl, FontGfx
 	ld bc, v0Tiles0
 	call Decompress

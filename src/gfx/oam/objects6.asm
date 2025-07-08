@@ -1,4 +1,4 @@
-OAM_194000::
+OAM_194000:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -702,7 +702,7 @@ OAM_194000::
 	frame_oam  16,  -4, $9e, 7 | OAMF_BANK1
 	db $80
 
-OAM_194895::
+OAM_194895:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1358,7 +1358,7 @@ OAM_194895::
 	frame_oam  -8,   4, $f8, 6 | OAMF_BANK1 | OAMF_XFLIP
 	db $80
 
-OAM_19501c::
+OAM_19501c:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1954,7 +1954,7 @@ OAM_19501c::
 	frame_oam   8,  -4, $4c, 6 | OAMF_BANK1
 	db $80
 
-OAM_195699::
+OAM_195699:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -2584,7 +2584,7 @@ OAM_195699::
 .frame_46
 	db $80
 
-OAM_195e06::
+OAM_195e06:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -3296,7 +3296,7 @@ OAM_195e06::
 	frame_oam  -8,  -4, $00, 6 | OAMF_BANK1 | OAMF_XFLIP | OAMF_YFLIP
 	db $80
 
-OAM_196583::
+OAM_196583:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2

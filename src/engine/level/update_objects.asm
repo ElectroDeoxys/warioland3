@@ -3578,7 +3578,7 @@ Func_62fa7::
 	ld bc, Data_602e0
 ;	fallthrough
 
-Func_62faa::
+Func_62faa:
 	ld hl, wCurObjVar3
 	ld a, [hl]
 	add c

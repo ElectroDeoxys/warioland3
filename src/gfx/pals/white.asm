@@ -1,4 +1,4 @@
-PalsWhite::
+PalsWhite:
 	rgb 31, 31, 31
 	rgb 31, 31, 31
 	rgb 31, 31, 31

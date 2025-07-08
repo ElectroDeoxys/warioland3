@@ -1,4 +1,4 @@
-_ActionHelpStateTable::
+_ActionHelpStateTable:
 	ld a, [wSubState]
 	jumptable
 

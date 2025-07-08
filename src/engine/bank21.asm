@@ -1723,7 +1723,7 @@ Func_854ee:
 	inc bc
 	jr .loop_2
 
-Data_8550b::
+Data_8550b:
 	dwcoord 9, 8, wTilemap
 	db $6d, $6e, $6e, $6e, $79, $70
 	db $0 | BGF_BANK0, $0 | BGF_BANK0, $0 | BGF_BANK0, $0 | BGF_BANK0 | BGF_XFLIP, $0 | BGF_BANK0, $70
@@ -1738,14 +1738,14 @@ Data_8550b::
 
 	db $00 ; end
 
-Data_85536::
+Data_85536:
 	dwcoord 7, 1, wTilemap
 	db $c4, $75, $76, $75, $7f, $77, $c4, $70
 	db $1 | BGF_BANK1, $5 | BGF_BANK1, $5 | BGF_BANK1, $5 | BGF_BANK1 | BGF_XFLIP, $5 | BGF_BANK1, $5 | BGF_BANK1, $1 | BGF_BANK1 | BGF_XFLIP, $70
 
 	db $00 ; end
 
-Data_85549::
+Data_85549:
 	dwcoord 8, 4, wTilemap
 	db $56, $57, $45, $46, $70
 	db $1 | BGF_BANK0, $1 | BGF_BANK0, $1 | BGF_BANK0, $1 | BGF_BANK0, $70
@@ -1760,14 +1760,14 @@ Data_85549::
 
 	db $00 ; end
 
-Data_8556e::
+Data_8556e:
 	dwcoord 6, 14, wTilemap
 	db $7e, $7e, $7e, $70
 	db $4 | BGF_BANK1, $4 | BGF_BANK1, $4 | BGF_BANK1, $70
 
 	db $00 ; end
 
-Data_85579::
+Data_85579:
 	dwcoord 14, 2, wTilemap
 	db $20, $21, $70
 	db $1 | BGF_BANK0, $1 | BGF_BANK0, $70
@@ -1798,7 +1798,7 @@ Data_85579::
 
 	db $00 ; end
 
-Data_855b2::
+Data_855b2:
 	dwcoord 5, 6, wTilemap
 	db $00, $70
 	db $0 | BGF_BANK0, $70
@@ -1829,7 +1829,7 @@ Data_855b2::
 
 	db $00 ; end
 
-Data_855f9::
+Data_855f9:
 	dwcoord 5, 10, wTilemap
 	db $19, $3e, $3f, $70
 	db $2 | BGF_BANK1, $3 | BGF_BANK0, $3 | BGF_BANK0, $70
@@ -1840,7 +1840,7 @@ Data_855f9::
 
 	db $00 ; end
 
-Data_8560e::
+Data_8560e:
 	dwcoord 8, 2, wTilemap
 	db $48, $49, $70
 	db $1 | BGF_BANK0, $1 | BGF_BANK0, $70
@@ -1851,7 +1851,7 @@ Data_8560e::
 
 	db $00 ; end
 
-Data_8561f::
+Data_8561f:
 	dwcoord 16, 3, wTilemap
 	db $51, $5f, $53, $70
 	db $1 | BGF_BANK0, $1 | BGF_BANK0, $1 | BGF_BANK0, $70
@@ -1866,7 +1866,7 @@ Data_8561f::
 
 	db $00 ; end
 
-Data_8563e::
+Data_8563e:
 	dwcoord 3, 9, wTilemap
 	db $6c, $6d, $6e, $6f, $70
 	db $0 | BGF_BANK0, $0 | BGF_BANK0, $0 | BGF_BANK0, $0 | BGF_BANK0, $70
@@ -1877,7 +1877,7 @@ Data_8563e::
 
 	db $00 ; end
 
-Data_85657::
+Data_85657:
 	dwcoord 1, 13, wTilemap
 	db $f7, $f6, $f9, $f8, $f8, $f8, $f9, $f9, $f9, $40, $41, $42, $43, $2c, $2d, $f8, $f9, $f6, $70
 	db $2 | BGF_BANK1 | BGF_XFLIP, $2 | BGF_BANK1 | BGF_XFLIP, $2 | BGF_BANK1 | BGF_XFLIP, $2 | BGF_BANK1 | BGF_XFLIP, $2 | BGF_BANK1, $2 | BGF_BANK1 | BGF_XFLIP, $2 | BGF_BANK1, $2 | BGF_BANK1 | BGF_XFLIP, $2 | BGF_BANK1, $1 | BGF_BANK0, $1 | BGF_BANK0, $1 | BGF_BANK0, $1 | BGF_BANK0, $1 | BGF_BANK0, $2 | BGF_BANK0, $2 | BGF_BANK1, $2 | BGF_BANK1, $2 | BGF_BANK1, $70
@@ -1888,10 +1888,10 @@ Data_85657::
 
 	db $00 ; end
 
-OWSceneFreezeSeaTilemap:: INCBIN "data/bgmaps/overworld/ow_scene_freeze_sea.tilemap"
-OWSceneFreezeSeaAttrmap:: INCBIN "data/bgmaps/overworld/ow_scene_freeze_sea.attrmap"
+OWSceneFreezeSeaTilemap: INCBIN "data/bgmaps/overworld/ow_scene_freeze_sea.tilemap"
+OWSceneFreezeSeaAttrmap: INCBIN "data/bgmaps/overworld/ow_scene_freeze_sea.attrmap"
 
-Tilemap_85928:: INCBIN "data/bgmaps/map_85928.tilemap" ; unreferenced
+Tilemap_85928: INCBIN "data/bgmaps/map_85928.tilemap" ; unreferenced
 
 Func_85a68:
 .asm_85a68
@@ -2058,29 +2058,29 @@ Data_85b48:
 
 	db $00 ; end
 
-OverworldTopBarTilemap::INCBIN "data/bgmaps/overworld/top_bar.tilemap.rle"
-OverworldTopBarAttrmap::INCBIN "data/bgmaps/overworld/top_bar.attrmap.rle"
+OverworldTopBarTilemap:INCBIN "data/bgmaps/overworld/top_bar.tilemap.rle"
+OverworldTopBarAttrmap:INCBIN "data/bgmaps/overworld/top_bar.attrmap.rle"
 
-OverworldNorthTilemap::INCBIN "data/bgmaps/overworld/north.tilemap.rle"
-OverworldNorthAttrmap::INCBIN "data/bgmaps/overworld/north.attrmap.rle"
+OverworldNorthTilemap:INCBIN "data/bgmaps/overworld/north.tilemap.rle"
+OverworldNorthAttrmap:INCBIN "data/bgmaps/overworld/north.attrmap.rle"
 
-OverworldTopBarDayNightTilemap::INCBIN "data/bgmaps/overworld/top_bar_day_night.tilemap.rle"
-OverworldTopBarDayNightAttrmap::INCBIN "data/bgmaps/overworld/top_bar_day_night.attrmap.rle"
+OverworldTopBarDayNightTilemap:INCBIN "data/bgmaps/overworld/top_bar_day_night.tilemap.rle"
+OverworldTopBarDayNightAttrmap:INCBIN "data/bgmaps/overworld/top_bar_day_night.attrmap.rle"
 
-OverworldWestTilemap::INCBIN "data/bgmaps/overworld/west.tilemap.rle"
-OverworldWestAttrmap::INCBIN "data/bgmaps/overworld/west.attrmap.rle"
+OverworldWestTilemap:INCBIN "data/bgmaps/overworld/west.tilemap.rle"
+OverworldWestAttrmap:INCBIN "data/bgmaps/overworld/west.attrmap.rle"
 
-OverworldSouthTilemap::INCBIN "data/bgmaps/overworld/south.tilemap.rle"
-OverworldSouthAttrmap::INCBIN "data/bgmaps/overworld/south.attrmap.rle"
+OverworldSouthTilemap:INCBIN "data/bgmaps/overworld/south.tilemap.rle"
+OverworldSouthAttrmap:INCBIN "data/bgmaps/overworld/south.attrmap.rle"
 
-OverworldEastTilemap::INCBIN "data/bgmaps/overworld/east.tilemap.rle"
-OverworldEastAttrmap::INCBIN "data/bgmaps/overworld/east.attrmap.rle"
+OverworldEastTilemap:INCBIN "data/bgmaps/overworld/east.tilemap.rle"
+OverworldEastAttrmap:INCBIN "data/bgmaps/overworld/east.attrmap.rle"
 
-OverworldBottomBarTreasuresTilemap::INCBIN "data/bgmaps/overworld/bottom_bar_treasures.tilemap.rle"
-OverworldBottomBarTreasuresAttrmap::INCBIN "data/bgmaps/overworld/bottom_bar_treasures.attrmap.rle"
+OverworldBottomBarTreasuresTilemap:INCBIN "data/bgmaps/overworld/bottom_bar_treasures.tilemap.rle"
+OverworldBottomBarTreasuresAttrmap:INCBIN "data/bgmaps/overworld/bottom_bar_treasures.attrmap.rle"
 
-OverworldBottomBarTimeAttackTilemap::INCBIN "data/bgmaps/overworld/bottom_bar_time_attack.tilemap.rle"
-OverworldBottomBarTimeAttackAttrmap::INCBIN "data/bgmaps/overworld/bottom_bar_time_attack.attrmap.rle"
+OverworldBottomBarTimeAttackTilemap:INCBIN "data/bgmaps/overworld/bottom_bar_time_attack.tilemap.rle"
+OverworldBottomBarTimeAttackAttrmap:INCBIN "data/bgmaps/overworld/bottom_bar_time_attack.attrmap.rle"
 
 Pals_8694d:
 	rgb 31, 31, 31
@@ -2334,7 +2334,7 @@ Pals_86acd:
 	rgb 31, 11,  8
 	rgb  7,  2, 20
 
-Pals_86ad5::
+Pals_86ad5:
 	rgb  0,  0,  0
 	rgb 31, 31, 31
 	rgb 31, 15, 10

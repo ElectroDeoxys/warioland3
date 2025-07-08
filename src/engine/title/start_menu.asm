@@ -159,7 +159,7 @@ StartMenu:
 	inc [hl]
 	ret
 
-StartOverworldStateAndNewGameParam:
+StartOverworldStateAndNewGameParam::
 	ld a, TRANSITION_NEW_GAME
 	ld [wTransitionParam], a
 	; fallthrough
@@ -182,3 +182,4 @@ Func_4628::
 	ld hl, wDayNight
 	set 7, [hl]
 	jr StartOverworldState
+

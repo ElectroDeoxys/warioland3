@@ -124,7 +124,7 @@ JumpVelTable_KnockBack::
 	db  4 ; $26
 	db  4 ; $27
 
-JumpVelTable_BouncyJump::
+JumpVelTable_BouncyJump:
 	db -2 ; $00
 	db -2 ; $01
 	db -3 ; $02
@@ -166,7 +166,7 @@ JumpVelTable_BouncyJump::
 	db  4 ; $26
 	db  4 ; $27
 
-JumpVelTable_BouncyHighJump::
+JumpVelTable_BouncyHighJump:
 	db -2 ; $00
 	db -3 ; $01
 	db -4 ; $02

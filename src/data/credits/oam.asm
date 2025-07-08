@@ -1,4 +1,4 @@
-OAM_15e44a::
+OAM_15e44a:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -483,7 +483,7 @@ Frameset_15e7c4:
 	db  40,  1
 	db $ff
 
-Frameset_15e7ed::
+Frameset_15e7ed:
 	db  49,  4
 	db $ff
 

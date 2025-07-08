@@ -41,7 +41,7 @@ Func_ac02c:
 	ld h, b
 	ld l, c
 	res 1, l
-	ld b, BANK("Title Framesets")
+	ld b, BANK("Title Gfx")
 	call UpdateOWAnimation
 	ld a, [bc]
 	ret

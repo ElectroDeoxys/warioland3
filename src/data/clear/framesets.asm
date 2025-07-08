@@ -1,19 +1,19 @@
-Frameset_d5045::
+Frameset_d5045:
 	db   0,  3
 	db   1,  3
 	db $ff
 
-Frameset_d504a::
+Frameset_d504a:
 	db   2,  3
 	db   3,  3
 	db $ff
 
-Frameset_d504f::
+Frameset_d504f:
 	db   4,  3
 	db   5,  3
 	db $ff
 
-Frameset_d5054::
+Frameset_d5054:
 	db   6,  3
 	db   7,  3
 	db $ff

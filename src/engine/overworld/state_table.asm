@@ -1,4 +1,4 @@
-OverworldStateTable::
+OverworldStateTable:
 	ld a, [wSubState]
 	jumptable
 

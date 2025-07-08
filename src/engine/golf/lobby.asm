@@ -1,4 +1,4 @@
-_GolfStateTable::
+_GolfStateTable:
 	ld a, [wSubState]
 	jumptable
 

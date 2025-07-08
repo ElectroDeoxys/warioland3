@@ -1,9 +1,9 @@
-OverworldClouds1Gfx:: INCBIN "gfx/overworld/clouds1.2bpp"
-OverworldClouds2Gfx:: INCBIN "gfx/overworld/clouds2.2bpp"
-OverworldSeaGfx::     INCBIN "gfx/overworld/sea.2bpp"
-OverworldCliffs1Gfx:: INCBIN "gfx/overworld/cliffs1.2bpp"
-OverworldCliffs2Gfx:: INCBIN "gfx/overworld/cliffs2.2bpp"
-UnusedOverworldCliffsGfx:: INCBIN "gfx/overworld/unused_cliffs.2bpp" ; unreferenced
+OverworldClouds1Gfx: INCBIN "gfx/overworld/clouds1.2bpp"
+OverworldClouds2Gfx: INCBIN "gfx/overworld/clouds2.2bpp"
+OverworldSeaGfx:     INCBIN "gfx/overworld/sea.2bpp"
+OverworldCliffs1Gfx: INCBIN "gfx/overworld/cliffs1.2bpp"
+OverworldCliffs2Gfx: INCBIN "gfx/overworld/cliffs2.2bpp"
+UnusedOverworldCliffsGfx: INCBIN "gfx/overworld/unused_cliffs.2bpp" ; unreferenced
 
 ; updates animations for clouds, sea and cliffs
 UpdateCommonOWAnimations:
@@ -259,7 +259,7 @@ INCBIN "gfx/wario/unk3.2bpp"
 WarioUnk4Gfx:
 INCBIN "gfx/wario/unk4.2bpp"
 
-WarioSleepGfx::
+WarioSleepGfx:
 INCBIN "gfx/wario/sleep.2bpp"
 
 WarioUnk5Gfx:

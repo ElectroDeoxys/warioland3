@@ -1,4 +1,4 @@
-LoadHiddenFigureGfx::
+LoadHiddenFigureGfx:
 	call .LoadPals
 	call .LoadTiles
 	call .LoadMap

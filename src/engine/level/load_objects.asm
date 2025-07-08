@@ -373,7 +373,7 @@ ENDR
 	dec a
 .got_hi_x
 	inc bc
-CreateObject_GotPos::
+CreateObject_GotPos:
 	ld [hli], a
 	ld e, l
 	ld d, h

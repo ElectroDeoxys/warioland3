@@ -1,4 +1,4 @@
-OAM_75c3::
+OAM_75c3:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2

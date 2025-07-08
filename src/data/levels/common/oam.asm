@@ -1,4 +1,4 @@
-OAM_d20e::
+OAM_d20e:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -358,7 +358,7 @@ OAM_d20e::
 	frame_oam -11, -13, $c2, 2 | OAMF_XFLIP
 	db $80
 
-Frameset_d49a::
+Frameset_d49a:
 	db   0,  2
 	db   1,  3
 	db   2,  3
@@ -366,7 +366,7 @@ Frameset_d49a::
 	db  10,  2
 	db $ff
 
-Frameset_d4a5::
+Frameset_d4a5:
 	db  53,  2
 	db  54,  1
 	db  55,  2
@@ -751,7 +751,7 @@ Frameset_d75a:
 	db   3,  1
 	db $ff
 
-OAM_d763::
+OAM_d763:
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -783,7 +783,7 @@ OAM_d763::
 	frame_oam -25,   0, $12, 4 | OAMF_BANK1
 	db $80
 
-Frameset_d7b4::
+Frameset_d7b4:
 	db   0,  2
 	db   2,  2
 	db   1,  2

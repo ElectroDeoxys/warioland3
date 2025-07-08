@@ -3,14 +3,6 @@ SECTION "Main State Table", ROMX
 INCLUDE "engine/main_state_table.asm"
 
 
-SECTION "Title", ROMX
-
-INCLUDE "engine/title/state_table.asm"
-INCLUDE "engine/title/intro.asm"
-INCLUDE "engine/title/start_menu.asm"
-INCLUDE "engine/title/time_attack_description.asm"
-
-
 SECTION "Common 1", ROMX
 
 INCLUDE "engine/overworld/common.asm"
@@ -44,23 +36,16 @@ INCLUDE "engine/language_selection/init.asm"
 INCLUDE "engine/language_selection/core.asm"
 
 
-SECTION "Title Gfx Engine", ROMX
+SECTION "Print Counts", ROMX
 
-INCLUDE "engine/title/load_gfx.asm"
-INCLUDE "engine/title/vblank.asm"
 INCLUDE "engine/print_counts.asm"
 INCLUDE "engine/overworld/level_select.asm"
-INCLUDE "engine/title/load_oam.asm"
-INCLUDE "engine/title/start_menu_selection.asm"
-INCLUDE "engine/title/intro_animation.asm"
-INCLUDE "engine/title/time_attack_jp_adjustment.asm"
 
 
 SECTION "Language Selection Gfx Engine", ROMX
 
 INCLUDE "engine/language_selection/vblank.asm"
 INCLUDE "engine/language_selection/load_oam.asm"
-INCLUDE "engine/title/plane_sfx.asm"
 
 
 SECTION "Level Treasure Requirements", ROMX
@@ -377,7 +362,7 @@ INCLUDE "data/clear/framesets.asm"
 INCLUDE "data/clear/palettes.asm"
 
 ; TODO in its own section to be added to golf.o?
-GolfMenuGfx::    INCBIN "gfx/golf/golf_menu.2bpp.rle"
+GolfMenuGfx:    INCBIN "gfx/golf/golf_menu.2bpp.rle"
 GolfMenuTilemap: INCBIN "data/bgmaps/golf/menu.tilemap.rle"
 GolfMenuAttrmap: INCBIN "data/bgmaps/golf/menu.attrmap.rle"
 
@@ -836,7 +821,7 @@ INCLUDE "engine/pause/save/vblank.asm"
 INCLUDE "engine/pause/save/validate_save.asm"
 INCLUDE "data/pause/oam.asm"
 
-FontGfx:: INCBIN "gfx/font.2bpp.rle"
+FontGfx: INCBIN "gfx/font.2bpp.rle"
 
 GBIncompatibleGfx:     INCBIN "gfx/gb_incompatible.2bpp.rle"
 GBIncompatibleTilemap: INCBIN "data/bgmaps/gb_incompatible.tilemap.rle"
@@ -854,3 +839,901 @@ INCBIN "data/bgmaps/text/language_selection2.tilemap"
 SECTION "Bank 7D", ROMX
 
 INCLUDE "engine/bank7d.asm"
+
+SECTION "Action Help 1", ROMX
+
+INCLUDE "engine/action_help/core.asm"
+INCLUDE "engine/action_help/main_power_ups.asm"
+INCLUDE "engine/action_help/power_ups/none.asm"
+INCLUDE "engine/action_help/power_ups/lead_overalls.asm"
+INCLUDE "engine/action_help/power_ups/swimming_flippers.asm"
+INCLUDE "engine/action_help/power_ups/head_smash_helmet.asm"
+INCLUDE "engine/action_help/power_ups/grab_gloves.asm"
+INCLUDE "engine/action_help/power_ups/garlic.asm"
+INCLUDE "engine/action_help/power_ups/super_jump_slam_overalls.asm"
+INCLUDE "engine/action_help/power_ups/high_jump_boots.asm"
+INCLUDE "engine/action_help/power_ups/prince_frogs_gloves.asm"
+INCLUDE "engine/action_help/power_ups/super_grab_gloves.asm"
+INCLUDE "engine/action_help/common1.asm"
+
+
+SECTION "Action Help 2", ROMX
+
+INCLUDE "engine/action_help/special_power_ups.asm"
+INCLUDE "engine/action_help/power_ups/owl.asm"
+INCLUDE "engine/action_help/power_ups/rail.asm"
+INCLUDE "engine/action_help/power_ups/vampire.asm"
+INCLUDE "engine/action_help/common2.asm"
+INCLUDE "gfx/pals/action_help.asm"
+
+ActionHelpHUDGfx:      INCBIN "gfx/misc/action_help_hud.2bpp.rle"
+ActionHelpObjects1Gfx: INCBIN "gfx/misc/action_help_objects1.2bpp.rle"
+ActionHelpObjects2Gfx: INCBIN "gfx/misc/action_help_objects2.2bpp.rle"
+
+ActionHelpTilemap: INCBIN "data/bgmaps/action_help.tilemap.rle"
+ActionHelpAttrmap: INCBIN "data/bgmaps/action_help.attrmap.rle"
+
+INCLUDE "gfx/oam/action_help.asm"
+
+
+SECTION "Epilogue Gfx", ROMX
+
+INCLUDE "data/overworld/epilogue/oam.asm"
+INCLUDE "data/overworld/epilogue/framesets.asm"
+
+
+SECTION "Wario Gfx 1", ROMX
+
+WarioIdleGfx:     INCBIN "gfx/wario/idle.2bpp"
+WarioWalkGfx:     INCBIN "gfx/wario/walk.2bpp"
+WarioDizzyGfx:    INCBIN "gfx/wario/dizzy.2bpp"
+WarioAttackGfx:   INCBIN "gfx/wario/attack.2bpp"
+WarioSwimGfx:     INCBIN "gfx/wario/swim.2bpp"
+WarioLadderGfx:   INCBIN "gfx/wario/ladder.2bpp"
+WarioThrowGfx:    INCBIN "gfx/wario/throw.2bpp"
+WarioAirborneGfx: INCBIN "gfx/wario/airborne.2bpp"
+
+
+SECTION "Wario Gfx 2", ROMX
+
+WarioHotGfx:      INCBIN "gfx/wario/hot.2bpp"
+WarioBurntGfx:    INCBIN "gfx/wario/burnt.2bpp"
+WarioSlideGfx:    INCBIN "gfx/wario/slide.2bpp"
+WarioStringGfx:   INCBIN "gfx/wario/string.2bpp"
+WarioFatGfx:      INCBIN "gfx/wario/fat.2bpp"
+WarioElectricGfx: INCBIN "gfx/wario/electric.2bpp"
+WarioPuffyGfx:    INCBIN "gfx/wario/puffy.2bpp"
+
+
+SECTION "Wario Gfx 3", ROMX
+
+WarioZombieGfx:  INCBIN "gfx/wario/zombie.2bpp"
+WarioBouncyGfx:  INCBIN "gfx/wario/bouncy.2bpp"
+WarioCrazyGfx:   INCBIN "gfx/wario/crazy.2bpp"
+WarioBatGfx:     INCBIN "gfx/wario/bat.2bpp"
+WarioVampireGfx: INCBIN "gfx/wario/vampire.2bpp"
+WarioBubbleGfx:  INCBIN "gfx/wario/bubble.2bpp"
+WarioClearGfx:   INCBIN "gfx/wario/clear.2bpp"
+WarioHangGfx:    INCBIN "gfx/wario/hang.2bpp"
+
+
+SECTION "Wario Gfx 4", ROMX
+
+WarioSnowmanGfx:  INCBIN "gfx/wario/snowman.2bpp"
+WarioSnowballGfx: INCBIN "gfx/wario/snowball.2bpp"
+WarioFanGfx:      INCBIN "gfx/wario/fan.2bpp"
+WarioLaunchGfx:   INCBIN "gfx/wario/launch.2bpp"
+WarioMagicGfx:    INCBIN "gfx/wario/magic.2bpp"
+WarioBallGfx:     INCBIN "gfx/wario/ball.2bpp"
+
+
+SECTION "Enemy Gfx 1 Slot 1", ROMX
+
+SpearheadGfx:     INCBIN "gfx/enemies/spearhead.2bpp.rle"
+UnusedFlowerGfx:  INCBIN "gfx/enemies/unused_flower.2bpp.rle"
+MizuuoGfx:        INCBIN "gfx/enemies/mizuuo.2bpp.rle"
+SilkyGfx:         INCBIN "gfx/enemies/silky.2bpp.rle"
+SnakeGfx:         INCBIN "gfx/enemies/snake.2bpp.rle"
+PrinceFroggyGfx:  INCBIN "gfx/enemies/prince_froggy.2bpp.rle"
+MadSciensteinGfx: INCBIN "gfx/enemies/mad_scienstein.2bpp.rle"
+Sun1Gfx:          INCBIN "gfx/enemies/sun1.2bpp.rle"
+Moon1Gfx:         INCBIN "gfx/enemies/moon1.2bpp.rle"
+RoboMouse1Gfx:    INCBIN "gfx/enemies/robo_mouse1.2bpp.rle"
+HaridamaGfx:      INCBIN "gfx/enemies/haridama.2bpp.rle"
+OwlGfx:           INCBIN "gfx/enemies/owl.2bpp.rle"
+StoveGfx:         INCBIN "gfx/enemies/stove.2bpp.rle"
+WaterSparkGfx:    INCBIN "gfx/enemies/water_spark.2bpp.rle"
+
+
+SECTION "Enemy Gfx 1 Slot 2", ROMX
+
+WebberGfx:             INCBIN "gfx/enemies/webber.2bpp.rle"
+CountRichtertoffenGfx: INCBIN "gfx/enemies/count_richtertoffen.2bpp.rle"
+ParaGoomGfx:           INCBIN "gfx/enemies/para_goom.2bpp.rle"
+KushimushiGfx:         INCBIN "gfx/enemies/kushimushi.2bpp.rle"
+BirdGfx:               INCBIN "gfx/enemies/bird.2bpp.rle"
+ApplebyGfx:            INCBIN "gfx/enemies/appleby.2bpp.rle"
+HammerBotGfx:          INCBIN "gfx/enemies/hammer_bot.2bpp.rle"
+PneumoGfx:             INCBIN "gfx/enemies/pneumo.2bpp.rle"
+Sun2Gfx:               INCBIN "gfx/enemies/sun2.2bpp.rle"
+Moon2Gfx:              INCBIN "gfx/enemies/moon2.2bpp.rle"
+RoboMouse2Gfx:         INCBIN "gfx/enemies/robo_mouse2.2bpp.rle"
+ClearGate1Gfx:         INCBIN "gfx/enemies/clear_gate.2bpp.rle"
+
+
+SECTION "Enemy Gfx 1 Slot 3", ROMX
+
+FutamoguGfx:    INCBIN "gfx/enemies/futamogu.2bpp.rle"
+HebariiGfx:     INCBIN "gfx/enemies/hebarii.2bpp.rle"
+DoughnuteerGfx: INCBIN "gfx/enemies/doughnuteer.2bpp.rle"
+BigLeafGfx:     INCBIN "gfx/enemies/big_leaf.2bpp.rle"
+ZombieGfx:      INCBIN "gfx/enemies/zombie.2bpp.rle"
+SpearBotGfx:    INCBIN "gfx/enemies/spear_bot.2bpp.rle"
+OmodonGfx:      INCBIN "gfx/enemies/omodon.2bpp.rle"
+KobattoGfx:     INCBIN "gfx/enemies/kobatto.2bpp.rle"
+HandGfx:        INCBIN "gfx/enemies/hand.2bpp.rle"
+BubbleGfx:      INCBIN "gfx/enemies/bubble.2bpp.rle"
+CartGfx:        INCBIN "gfx/enemies/cart.2bpp.rle"
+ZipLineGfx:     INCBIN "gfx/enemies/zip_line.2bpp.rle"
+FlameBlockGfx:  INCBIN "gfx/enemies/flame_block.2bpp.rle"
+ClearGate2Gfx:  INCBIN "gfx/enemies/clear_gate.2bpp.rle"
+TadpoleGfx:     INCBIN "gfx/enemies/tadpole.2bpp.rle"
+RockGfx:        INCBIN "gfx/enemies/rock.2bpp.rle"
+FireGfx:        INCBIN "gfx/enemies/fire.2bpp.rle"
+WallCrackGfx:   INCBIN "gfx/enemies/wall_crack.2bpp.rle"
+
+
+SECTION "Enemy Gfx 1 Slot 4", ROMX
+
+TorchGfx:          INCBIN "gfx/enemies/torch.2bpp.rle"
+FireBotGfx:        INCBIN "gfx/enemies/fire_bot.2bpp.rle"
+BeamBotGfx:        INCBIN "gfx/enemies/beam_bot.2bpp.rle"
+BarrelGfx:         INCBIN "gfx/enemies/barrel.2bpp.rle"
+SmallLeafGfx:      INCBIN "gfx/enemies/small_leaf.2bpp.rle"
+ElectricLampGfx:   INCBIN "gfx/enemies/electric_lamp.2bpp.rle"
+TeruteruGfx:       INCBIN "gfx/enemies/teruteru.2bpp.rle"
+OmodonmekaGfx:     INCBIN "gfx/enemies/omodonmeka.2bpp.rle"
+BrrrBearGfx:       INCBIN "gfx/enemies/brrr_bear.2bpp.rle"
+TogebaGfx:         INCBIN "gfx/enemies/togeba.2bpp.rle"
+FallingSnowGfx:    INCBIN "gfx/enemies/falling_snow.2bpp.rle"
+PillarPlatformGfx: INCBIN "gfx/enemies/pillar_platform.2bpp.rle"
+WaterDropGfx:      INCBIN "gfx/enemies/water_drop.2bpp.rle"
+NobiiruGfx:        INCBIN "gfx/enemies/nobiiru.2bpp.rle"
+ClearGate3Gfx:     INCBIN "gfx/enemies/clear_gate.2bpp.rle"
+OctohonGfx:        INCBIN "gfx/enemies/octohon.2bpp.rle"
+SparkGfx:          INCBIN "gfx/enemies/spark.2bpp.rle"
+
+
+SECTION "Enemy Gfx 2 Slot 1", ROMX
+
+Anonster1Gfx:    INCBIN "gfx/enemies/anonster1.2bpp.rle"
+DollBoy1Gfx:     INCBIN "gfx/enemies/doll_boy1.2bpp.rle"
+Wormwould1Gfx:   INCBIN "gfx/enemies/wormwould1.2bpp.rle"
+YellowBelly1Gfx: INCBIN "gfx/enemies/yellow_belly1.2bpp.rle"
+Pesce1Gfx:       INCBIN "gfx/enemies/pesce1.2bpp.rle"
+Scowler1Gfx:     INCBIN "gfx/enemies/scowler1.2bpp.rle"
+Jamano1Gfx:      INCBIN "gfx/enemies/jamano1.2bpp.rle"
+Muddee1Gfx:      INCBIN "gfx/enemies/muddee1.2bpp.rle"
+Wolfenboss1Gfx:  INCBIN "gfx/enemies/wolfenboss1.2bpp.rle"
+Shoot1Gfx:       INCBIN "gfx/enemies/shoot1.2bpp.rle"
+
+
+SECTION "Enemy Gfx 2 Slot 2", ROMX
+
+Anonster2Gfx:    INCBIN "gfx/enemies/anonster2.2bpp.rle"
+DollBoy2Gfx:     INCBIN "gfx/enemies/doll_boy2.2bpp.rle"
+Wormwould2Gfx:   INCBIN "gfx/enemies/wormwould2.2bpp.rle"
+YellowBelly2Gfx: INCBIN "gfx/enemies/yellow_belly2.2bpp.rle"
+Pesce2Gfx:       INCBIN "gfx/enemies/pesce2.2bpp.rle"
+Scowler2Gfx:     INCBIN "gfx/enemies/scowler2.2bpp.rle"
+Jamano2Gfx:      INCBIN "gfx/enemies/jamano2.2bpp.rle"
+Muddee2Gfx:      INCBIN "gfx/enemies/muddee2.2bpp.rle"
+Wolfenboss2Gfx:  INCBIN "gfx/enemies/wolfenboss2.2bpp.rle"
+Shoot2Gfx:       INCBIN "gfx/enemies/shoot2.2bpp.rle"
+
+
+SECTION "Enemy Gfx 2 Slot 3", ROMX
+
+Anonster3Gfx:    INCBIN "gfx/enemies/anonster3.2bpp.rle"
+DollBoy3Gfx:     INCBIN "gfx/enemies/doll_boy3.2bpp.rle"
+Wormwould3Gfx:   INCBIN "gfx/enemies/wormwould3.2bpp.rle"
+YellowBelly3Gfx: INCBIN "gfx/enemies/yellow_belly3.2bpp.rle"
+Pesce3Gfx:       INCBIN "gfx/enemies/pesce3.2bpp.rle"
+Scowler3Gfx:     INCBIN "gfx/enemies/scowler3.2bpp.rle"
+Jamano3Gfx:      INCBIN "gfx/enemies/jamano3.2bpp.rle"
+Muddee3Gfx:      INCBIN "gfx/enemies/muddee3.2bpp.rle"
+Wolfenboss3Gfx:  INCBIN "gfx/enemies/wolfenboss3.2bpp.rle"
+Shoot3Gfx:       INCBIN "gfx/enemies/shoot3.2bpp.rle"
+
+
+SECTION "Enemy Gfx 2 Slot 4", ROMX
+
+Anonster4Gfx:    INCBIN "gfx/enemies/anonster4.2bpp.rle"
+DollBoy4Gfx:     INCBIN "gfx/enemies/doll_boy4.2bpp.rle"
+Wormwould4Gfx:   INCBIN "gfx/enemies/wormwould4.2bpp.rle"
+YellowBelly4Gfx: INCBIN "gfx/enemies/yellow_belly4.2bpp.rle"
+Pesce4Gfx:       INCBIN "gfx/enemies/pesce4.2bpp.rle"
+Scowler4Gfx:     INCBIN "gfx/enemies/scowler4.2bpp.rle"
+Jamano4Gfx:      INCBIN "gfx/enemies/jamano4.2bpp.rle"
+Muddee4Gfx:      INCBIN "gfx/enemies/muddee4.2bpp.rle"
+Wolfenboss4Gfx:  INCBIN "gfx/enemies/wolfenboss4.2bpp.rle"
+Shoot4Gfx:       INCBIN "gfx/enemies/shoot4.2bpp.rle"
+
+
+SECTION "Wario OAM 1", ROMX
+
+INCLUDE "gfx/oam/wario1.asm"
+
+
+SECTION "Wario OAM 2", ROMX
+
+INCLUDE "gfx/oam/wario2.asm"
+
+
+SECTION "Wario OAM 3", ROMX
+
+INCLUDE "gfx/oam/wario3.asm"
+
+
+SECTION "Object Framesets", ROMX
+
+INCLUDE "gfx/oam/object_framesets.asm"
+
+
+SECTION "Objects OAM 1", ROMX
+
+INCLUDE "gfx/oam/objects1.asm"
+
+
+SECTION "Objects OAM 2", ROMX
+
+INCLUDE "gfx/oam/objects2.asm"
+
+
+SECTION "Objects OAM 3", ROMX
+
+INCLUDE "gfx/oam/objects3.asm"
+
+
+SECTION "Objects OAM 4", ROMX
+
+INCLUDE "gfx/oam/objects4.asm"
+
+
+SECTION "Objects OAM 5", ROMX
+
+INCLUDE "gfx/oam/objects5.asm"
+
+
+SECTION "Objects OAM 6", ROMX
+
+INCLUDE "gfx/oam/objects6.asm"
+
+
+SECTION "Level Palettes", ROMX
+
+INCLUDE "data/levels/palettes.asm"
+
+
+SECTION "Animated Tile Gfx", ROMX
+
+AnimatedTilesGfx:
+AnimatedTiles1Gfx:  INCBIN "gfx/levels/animated/animated_tiles1.2bpp"  ; ANIMATED_TILES_GFX_00
+AnimatedTiles2Gfx:  INCBIN "gfx/levels/animated/animated_tiles2.2bpp"  ; ANIMATED_TILES_GFX_01
+AnimatedTiles3Gfx:  INCBIN "gfx/levels/animated/animated_tiles3.2bpp"  ; ANIMATED_TILES_GFX_02
+AnimatedTiles4Gfx:  INCBIN "gfx/levels/animated/animated_tiles4.2bpp"  ; ANIMATED_TILES_GFX_03
+AnimatedTiles5Gfx:  INCBIN "gfx/levels/animated/animated_tiles5.2bpp"  ; ANIMATED_TILES_GFX_04
+AnimatedTiles6Gfx:  INCBIN "gfx/levels/animated/animated_tiles6.2bpp"  ; ANIMATED_TILES_GFX_05
+AnimatedTiles7Gfx:  INCBIN "gfx/levels/animated/animated_tiles7.2bpp"  ; ANIMATED_TILES_GFX_06
+AnimatedTiles8Gfx:  INCBIN "gfx/levels/animated/animated_tiles8.2bpp"  ; ANIMATED_TILES_GFX_07
+AnimatedTiles9Gfx:  INCBIN "gfx/levels/animated/animated_tiles9.2bpp"  ; ANIMATED_TILES_GFX_08
+AnimatedTiles10Gfx: INCBIN "gfx/levels/animated/animated_tiles10.2bpp" ; ANIMATED_TILES_GFX_09
+AnimatedTiles11Gfx: INCBIN "gfx/levels/animated/animated_tiles11.2bpp" ; ANIMATED_TILES_GFX_10
+AnimatedTiles12Gfx: INCBIN "gfx/levels/animated/animated_tiles12.2bpp" ; ANIMATED_TILES_GFX_11
+AnimatedTiles13Gfx: INCBIN "gfx/levels/animated/animated_tiles13.2bpp" ; ANIMATED_TILES_GFX_12
+AnimatedTiles14Gfx: INCBIN "gfx/levels/animated/animated_tiles14.2bpp" ; ANIMATED_TILES_GFX_13
+AnimatedTiles15Gfx: INCBIN "gfx/levels/animated/animated_tiles15.2bpp" ; ANIMATED_TILES_GFX_14
+AnimatedTiles16Gfx: INCBIN "gfx/levels/animated/animated_tiles16.2bpp" ; ANIMATED_TILES_GFX_15
+AnimatedTiles17Gfx: INCBIN "gfx/levels/animated/animated_tiles17.2bpp" ; ANIMATED_TILES_GFX_16
+AnimatedTiles18Gfx: INCBIN "gfx/levels/animated/animated_tiles18.2bpp" ; ANIMATED_TILES_GFX_17
+AnimatedTiles19Gfx: INCBIN "gfx/levels/animated/animated_tiles19.2bpp" ; ANIMATED_TILES_GFX_18
+AnimatedTiles20Gfx: INCBIN "gfx/levels/animated/animated_tiles20.2bpp" ; ANIMATED_TILES_GFX_19
+AnimatedTiles21Gfx: INCBIN "gfx/levels/animated/animated_tiles21.2bpp" ; ANIMATED_TILES_GFX_20
+AnimatedTiles22Gfx: INCBIN "gfx/levels/animated/animated_tiles22.2bpp" ; ANIMATED_TILES_GFX_21
+AnimatedTiles23Gfx: INCBIN "gfx/levels/animated/animated_tiles23.2bpp" ; ANIMATED_TILES_GFX_22
+AnimatedTiles24Gfx: INCBIN "gfx/levels/animated/animated_tiles24.2bpp" ; ANIMATED_TILES_GFX_23
+
+
+SECTION "Hidden Figure Gfx", ROMX
+
+HiddenFigure1Gfx: INCBIN "gfx/enemies/hidden_figure1.2bpp"
+HiddenFigure2Gfx: INCBIN "gfx/enemies/hidden_figure2.2bpp"
+
+Pals_db000:
+	rgb  1,  4,  9
+	rgb 31,  0,  0
+	rgb  6, 10, 10
+	rgb  0,  0,  0
+
+	rgb 31, 31, 31
+	rgb  0, 30, 31
+	rgb  6, 10, 10
+	rgb  0,  0,  0
+
+	rgb  1,  4,  9
+	rgb  0, 31, 18
+	rgb  6, 10, 10
+	rgb  0,  0,  0
+
+	rgb  1,  4,  9
+	rgb 28, 20,  6
+	rgb  6, 10, 10
+	rgb  0,  0,  0
+
+	rgb  1,  4,  9
+	rgb  0, 11, 21
+	rgb 31, 25,  0
+	rgb  0,  0,  0
+
+	rgb  1,  4,  9
+	rgb 15,  0,  0
+	rgb 31, 25,  0
+	rgb  0,  0,  0
+
+	rgb 31, 19, 23
+	rgb 21,  8, 17
+	rgb 12,  2,  6
+	rgb  0,  0,  0
+
+	rgb 27, 23, 11
+	rgb 22, 13,  2
+	rgb 13,  6,  1
+	rgb  5,  2,  0
+
+Pals_db040:
+	rgb 21, 21, 21
+	rgb 31, 31, 31
+	rgb 31,  0,  0
+	rgb  0,  0,  0
+
+	rgb 21, 21, 21
+	rgb  4, 24, 12
+	rgb  4, 11, 12
+	rgb  0,  0,  0
+
+	rgb 21, 21, 21
+	rgb 15,  0,  0
+	rgb 31, 25,  0
+	rgb  0,  0,  0
+
+	rgb 21, 21, 21
+	rgb 25, 10,  0
+	rgb 31, 25,  0
+	rgb  0,  0,  0
+
+	rgb 21, 21, 21
+	rgb  0, 21, 31
+	rgb 31, 25,  0
+	rgb  0,  0,  0
+
+HiddenFigure1Map: INCBIN "data/bgmaps/hidden_figure1.tilemap.rle"
+HiddenFigure2Map: INCBIN "data/bgmaps/hidden_figure1.attrmap.rle"
+HiddenFigure3Map: INCBIN "data/bgmaps/hidden_figure2.tilemap.rle"
+HiddenFigure4Map: INCBIN "data/bgmaps/hidden_figure2.attrmap.rle"
+
+SECTION "Golf Gfx 1", ROMX
+
+GolfGfx:     INCBIN "gfx/golf/golf.2bpp.rle"
+GolfFlagGfx: INCBIN "gfx/golf/golf_flag.2bpp.rle"
+
+
+SECTION "Golf Hole BGMaps", ROMX
+
+GolfBackground1Tilemap: INCBIN "data/bgmaps/golf/background_1.tilemap.rle"
+GolfBackground1Attrmap: INCBIN "data/bgmaps/golf/background_1.attrmap.rle"
+GolfBackground2Tilemap: INCBIN "data/bgmaps/golf/background_2.tilemap.rle"
+GolfBackground2Attrmap: INCBIN "data/bgmaps/golf/background_2.attrmap.rle"
+
+GolfHole01_1Tilemap: INCBIN "data/golf/holes/01_1.tilemap.rle"
+GolfHole01_1Attrmap: INCBIN "data/golf/holes/01_1.attrmap.rle"
+GolfHole01_2Tilemap: INCBIN "data/golf/holes/01_2.tilemap.rle"
+GolfHole01_2Attrmap: INCBIN "data/golf/holes/01_2.attrmap.rle"
+
+GolfHole00_1Tilemap: INCBIN "data/golf/holes/00_1.tilemap.rle"
+GolfHole00_1Attrmap: INCBIN "data/golf/holes/00_1.attrmap.rle"
+GolfHole00_2Tilemap: INCBIN "data/golf/holes/00_2.tilemap.rle"
+GolfHole00_2Attrmap: INCBIN "data/golf/holes/00_2.attrmap.rle"
+
+GolfHole10_1Tilemap: INCBIN "data/golf/holes/10_1.tilemap.rle"
+GolfHole10_1Attrmap: INCBIN "data/golf/holes/10_1.attrmap.rle"
+GolfHole10_2Tilemap: INCBIN "data/golf/holes/10_2.tilemap.rle"
+GolfHole10_2Attrmap: INCBIN "data/golf/holes/10_2.attrmap.rle"
+
+GolfHole06_1Tilemap: INCBIN "data/golf/holes/06_1.tilemap.rle"
+GolfHole06_1Attrmap: INCBIN "data/golf/holes/06_1.attrmap.rle"
+GolfHole06_2Tilemap: INCBIN "data/golf/holes/06_2.tilemap.rle"
+GolfHole06_2Attrmap: INCBIN "data/golf/holes/06_2.attrmap.rle"
+
+GolfHole05_1Tilemap: INCBIN "data/golf/holes/05_1.tilemap.rle"
+GolfHole05_1Attrmap: INCBIN "data/golf/holes/05_1.attrmap.rle"
+GolfHole05_2Tilemap: INCBIN "data/golf/holes/05_2.tilemap.rle"
+GolfHole05_2Attrmap: INCBIN "data/golf/holes/05_2.attrmap.rle"
+
+GolfHole07_1Tilemap: INCBIN "data/golf/holes/07_1.tilemap.rle"
+GolfHole07_1Attrmap: INCBIN "data/golf/holes/07_1.attrmap.rle"
+GolfHole07_2Tilemap: INCBIN "data/golf/holes/07_2.tilemap.rle"
+GolfHole07_2Attrmap: INCBIN "data/golf/holes/07_2.attrmap.rle"
+
+GolfHole08_1Tilemap: INCBIN "data/golf/holes/08_1.tilemap.rle"
+GolfHole08_1Attrmap: INCBIN "data/golf/holes/08_1.attrmap.rle"
+GolfHole08_2Tilemap: INCBIN "data/golf/holes/08_2.tilemap.rle"
+GolfHole08_2Attrmap: INCBIN "data/golf/holes/08_2.attrmap.rle"
+
+GolfHole13_1Tilemap: INCBIN "data/golf/holes/13_1.tilemap.rle"
+GolfHole13_1Attrmap: INCBIN "data/golf/holes/13_1.attrmap.rle"
+GolfHole13_2Tilemap: INCBIN "data/golf/holes/13_2.tilemap.rle"
+GolfHole13_2Attrmap: INCBIN "data/golf/holes/13_2.attrmap.rle"
+
+GolfHole02_1Tilemap: INCBIN "data/golf/holes/02_1.tilemap.rle"
+GolfHole02_1Attrmap: INCBIN "data/golf/holes/02_1.attrmap.rle"
+GolfHole02_2Tilemap: INCBIN "data/golf/holes/02_2.tilemap.rle"
+GolfHole02_2Attrmap: INCBIN "data/golf/holes/02_2.attrmap.rle"
+
+GolfHole18_1Tilemap: INCBIN "data/golf/holes/18_1.tilemap.rle"
+GolfHole18_1Attrmap: INCBIN "data/golf/holes/18_1.attrmap.rle"
+GolfHole18_2Tilemap: INCBIN "data/golf/holes/18_2.tilemap.rle"
+GolfHole18_2Attrmap: INCBIN "data/golf/holes/18_2.attrmap.rle"
+
+GolfHole16_1Tilemap: INCBIN "data/golf/holes/16_1.tilemap.rle"
+GolfHole16_1Attrmap: INCBIN "data/golf/holes/16_1.attrmap.rle"
+GolfHole16_2Tilemap: INCBIN "data/golf/holes/16_2.tilemap.rle"
+GolfHole16_2Attrmap: INCBIN "data/golf/holes/16_2.attrmap.rle"
+
+GolfHole11_1Tilemap: INCBIN "data/golf/holes/11_1.tilemap.rle"
+GolfHole11_1Attrmap: INCBIN "data/golf/holes/11_1.attrmap.rle"
+GolfHole11_2Tilemap: INCBIN "data/golf/holes/11_2.tilemap.rle"
+GolfHole11_2Attrmap: INCBIN "data/golf/holes/11_2.attrmap.rle"
+
+GolfHole03_1Tilemap: INCBIN "data/golf/holes/03_1.tilemap.rle"
+GolfHole03_1Attrmap: INCBIN "data/golf/holes/03_1.attrmap.rle"
+GolfHole03_2Tilemap: INCBIN "data/golf/holes/03_2.tilemap.rle"
+GolfHole03_2Attrmap: INCBIN "data/golf/holes/03_2.attrmap.rle"
+
+GolfHole09_1Tilemap: INCBIN "data/golf/holes/09_1.tilemap.rle"
+GolfHole09_1Attrmap: INCBIN "data/golf/holes/09_1.attrmap.rle"
+GolfHole09_2Tilemap: INCBIN "data/golf/holes/09_2.tilemap.rle"
+GolfHole09_2Attrmap: INCBIN "data/golf/holes/09_2.attrmap.rle"
+
+GolfHole04_1Tilemap: INCBIN "data/golf/holes/04_1.tilemap.rle"
+GolfHole04_1Attrmap: INCBIN "data/golf/holes/04_1.attrmap.rle"
+GolfHole04_2Tilemap: INCBIN "data/golf/holes/04_2.tilemap.rle"
+GolfHole04_2Attrmap: INCBIN "data/golf/holes/04_2.attrmap.rle"
+
+GolfHole12_1Tilemap: INCBIN "data/golf/holes/12_1.tilemap.rle"
+GolfHole12_1Attrmap: INCBIN "data/golf/holes/12_1.attrmap.rle"
+GolfHole12_2Tilemap: INCBIN "data/golf/holes/12_2.tilemap.rle"
+GolfHole12_2Attrmap: INCBIN "data/golf/holes/12_2.attrmap.rle"
+
+GolfHole17_1Tilemap: INCBIN "data/golf/holes/17_1.tilemap.rle"
+GolfHole17_1Attrmap: INCBIN "data/golf/holes/17_1.attrmap.rle"
+GolfHole17_2Tilemap: INCBIN "data/golf/holes/17_2.tilemap.rle"
+GolfHole17_2Attrmap: INCBIN "data/golf/holes/17_2.attrmap.rle"
+
+GolfHole14_1Tilemap: INCBIN "data/golf/holes/14_1.tilemap.rle"
+GolfHole14_1Attrmap: INCBIN "data/golf/holes/14_1.attrmap.rle"
+GolfHole14_2Tilemap: INCBIN "data/golf/holes/14_2.tilemap.rle"
+GolfHole14_2Attrmap: INCBIN "data/golf/holes/14_2.attrmap.rle"
+
+GolfHole15_1Tilemap: INCBIN "data/golf/holes/15_1.tilemap.rle"
+GolfHole15_1Attrmap: INCBIN "data/golf/holes/15_1.attrmap.rle"
+GolfHole15_2Tilemap: INCBIN "data/golf/holes/15_2.tilemap.rle"
+GolfHole15_2Attrmap: INCBIN "data/golf/holes/15_2.attrmap.rle"
+
+GolfHole19_1Tilemap: INCBIN "data/golf/holes/19_1.tilemap.rle"
+GolfHole19_1Attrmap: INCBIN "data/golf/holes/19_1.attrmap.rle"
+GolfHole19_2Tilemap: INCBIN "data/golf/holes/19_2.tilemap.rle"
+GolfHole19_2Attrmap: INCBIN "data/golf/holes/19_2.attrmap.rle"
+
+
+SECTION "Golf Holes", ROMX
+
+INCLUDE "data/golf/holes.asm"
+
+
+SECTION "Golf Gfx 2", ROMX
+
+WarioGolfMissGfx: INCBIN "gfx/wario/golf_miss.2bpp"
+
+GolfBuildingCourseScrollingAttrmap: INCBIN "data/bgmaps/golf/building_course_scrolling.attrmap"
+
+GolfBuildingCourse1Tilemap: INCBIN "data/bgmaps/golf/building_course_1.tilemap"
+GolfBuildingCourse2Tilemap: INCBIN "data/bgmaps/golf/building_course_2.tilemap"
+GolfBuildingCourse3Tilemap: INCBIN "data/bgmaps/golf/building_course_3.tilemap"
+GolfBuildingCourse4Tilemap: INCBIN "data/bgmaps/golf/building_course_4.tilemap"
+
+GolfBuildingCoursesLockedTilemap:   INCBIN "data/bgmaps/golf/building_courses_locked.tilemap.rle"
+GolfBuildingCoursesUnlockedTilemap: INCBIN "data/bgmaps/golf/building_courses_unlocked.tilemap.rle"
+GolfBuildingCoursesAttrmap:         INCBIN "data/bgmaps/golf/building_courses.attrmap.rle"
+
+GolfLobbyGfx: INCBIN "gfx/golf/golf_lobby.2bpp.rle"
+
+GolfLobbyTilemap: INCBIN "data/bgmaps/golf/lobby.tilemap.rle"
+GolfLobbyAttrmap: INCBIN "data/bgmaps/golf/lobby.attrmap.rle"
+
+GolfClearTilemap: INCBIN "data/bgmaps/golf/clear.tilemap.rle"
+GolfClearAttrmap: INCBIN "data/bgmaps/golf/clear.attrmap.rle"
+
+
+SECTION "Bank 72", ROMX
+
+INCLUDE "engine/golf/lobby.asm"
+INCLUDE "engine/golf/building.asm"
+INCLUDE "engine/golf/hole.asm"
+INCLUDE "gfx/pals/golf.asm"
+
+GolfFlagNumbersGfx:   INCBIN "gfx/golf/golf_flag_numbers.2bpp"
+GolfParNumbersGfx:    INCBIN "gfx/golf/golf_par_numbers.2bpp"
+GolfStrokeNumbersGfx: INCBIN "gfx/golf/golf_stroke_numbers.2bpp"
+GolfHoleFlagGfx:      INCBIN "gfx/golf/golf_hole_flag.2bpp"
+UnusedGolfFlagGfx:    INCBIN "gfx/golf/unused_golf_flag.2bpp" ; unreferenced
+
+INCLUDE "gfx/golf/oam.asm"
+
+SECTION "Bank 20", ROMX
+
+INCLUDE "data/overworld/unlockable_connections.asm"
+INCLUDE "engine/bank20.asm"
+
+
+SECTION "Bank 21", ROMX
+
+INCLUDE "data/overworld/palettes.asm"
+INCLUDE "engine/bank21.asm"
+
+
+SECTION "Bank 22", ROMX
+
+Overworld1Gfx:       INCBIN "gfx/overworld/overworld1.2bpp.rle"
+Overworld2Gfx:       INCBIN "gfx/overworld/overworld2.2bpp.rle"
+Overworld3Gfx:       INCBIN "gfx/overworld/overworld3.2bpp.rle"
+Overworld4Gfx:       INCBIN "gfx/overworld/overworld4.2bpp.rle"
+OverworldRocksGfx:   INCBIN "gfx/overworld/rocks.2bpp.rle"
+OverworldCommonGfx:  INCBIN "gfx/overworld/common.2bpp.rle"
+OverworldArrowsGfx:  INCBIN "gfx/overworld/arrows.2bpp.rle"
+OverworldGlowGfx:    INCBIN "gfx/overworld/glow.2bpp.rle"
+OverworldNumbersGfx: INCBIN "gfx/overworld/numbers.2bpp.rle"
+
+DebugUnknownTextGfx: INCBIN "gfx/debug_unknown_text.2bpp"
+
+	ds $2, $0
+
+
+SECTION "Bank 23", ROMX
+
+Overworld5Gfx:          INCBIN "gfx/overworld/overworld5.2bpp.rle"
+OverworldThunderGfx:    INCBIN "gfx/overworld/thunder.2bpp.rle"
+OverworldTowerGfx:      INCBIN "gfx/overworld/tower.2bpp.rle"
+OverworldFanGfx:        INCBIN "gfx/overworld/fan.2bpp.rle"
+OverworldExplosion1Gfx: INCBIN "gfx/overworld/explosion1.2bpp.rle"
+Overworld6Gfx:          INCBIN "gfx/overworld/overworld6.2bpp.rle"
+OverworldExplosion2Gfx: INCBIN "gfx/overworld/explosion2.2bpp.rle"
+OverworldFireGfx:       INCBIN "gfx/overworld/fire.2bpp.rle"
+OverworldTorchGfx:      INCBIN "gfx/overworld/torch.2bpp.rle"
+OverworldExplosion3Gfx: INCBIN "gfx/overworld/explosion3.2bpp.rle"
+OverworldSmokeGfx:      INCBIN "gfx/overworld/smoke.2bpp.rle"
+
+
+SECTION "Bank 24", ROMX
+
+LevelNamesJPGfx::
+LevelNamesNorthJPGfx: INCBIN "gfx/gui/level_names_north_jp.2bpp"
+LevelNamesWestJPGfx:  INCBIN "gfx/gui/level_names_west_jp.2bpp"
+LevelNamesSouthJPGfx: INCBIN "gfx/gui/level_names_south_jp.2bpp"
+LevelNamesEastJPGfx:  INCBIN "gfx/gui/level_names_east_jp.2bpp"
+
+
+SECTION "Bank 25", ROMX
+
+LevelNamesENGfx:
+LevelNamesNorthENGfx: INCBIN "gfx/gui/level_names_north_en.2bpp"
+LevelNamesWestENGfx:  INCBIN "gfx/gui/level_names_west_en.2bpp"
+LevelNamesSouthENGfx: INCBIN "gfx/gui/level_names_south_en.2bpp"
+LevelNamesEastENGfx:  INCBIN "gfx/gui/level_names_east_en.2bpp"
+
+
+SECTION "Bank 26", ROMX
+
+INCLUDE "engine/bank26.asm"
+
+
+SECTION "Bank 27", ROMX
+
+INCLUDE "engine/bank27.asm"
+
+
+SECTION "Cutscenes Gfx 1", ROMX
+
+Cutscenes1Gfx: INCBIN "gfx/cutscenes/cutscenes1.2bpp.rle"
+Cutscenes2Gfx: INCBIN "gfx/cutscenes/cutscenes2.2bpp.rle"
+Cutscenes3Gfx: INCBIN "gfx/cutscenes/cutscenes3.2bpp.rle"
+Cutscenes4Gfx: INCBIN "gfx/cutscenes/cutscenes4.2bpp.rle"
+Cutscenes5Gfx: INCBIN "gfx/cutscenes/cutscenes5.2bpp.rle"
+
+	ds $932, $00
+
+
+SECTION "Cutscenes Gfx 2", ROMX
+
+Cutscenes6Gfx:  INCBIN "gfx/cutscenes/cutscenes6.2bpp.rle"
+Cutscenes7Gfx:  INCBIN "gfx/cutscenes/cutscenes7.2bpp.rle"
+Cutscenes8Gfx:  INCBIN "gfx/cutscenes/cutscenes8.2bpp.rle"
+Cutscenes9Gfx:  INCBIN "gfx/cutscenes/cutscenes9.2bpp.rle"
+Cutscenes10Gfx: INCBIN "gfx/cutscenes/cutscenes10.2bpp.rle"
+
+
+SECTION "Overworld OAM 1", ROMX
+
+INCLUDE "data/overworld/oam_1.asm"
+
+
+SECTION "Bank 2B", ROMX
+
+INCLUDE "engine/bank2b.asm"
+
+
+SECTION "Bank 2C", ROMX
+
+MusicBoxGfx: INCBIN "gfx/music_box.2bpp"
+
+TempleTilemap: INCBIN "data/bgmaps/temple.tilemap"
+TempleAttrmap: INCBIN "data/bgmaps/temple.attrmap"
+TempleGfx:     INCBIN "gfx/temple.2bpp"
+
+PrologueBackgroundGfx:: INCBIN "gfx/cutscenes/prologue_background.2bpp"
+PrologueGfx:            INCBIN "gfx/cutscenes/prologue.2bpp.rle"
+
+TempleMusicBoxSceneGfx: INCBIN "gfx/temple_music_box_scene.2bpp.rle"
+
+TextJP_HiddenFigureHeadFor:
+INCBIN "text/jp/hidden_figure_head_for.tilemap.rle"
+
+; unreferenced
+Text_b2107:
+	db "@グ@グ@グ@グ@グ@グ@グ@グ"
+	db "ギグ:"
+
+TextEN_HiddenFigureHeadFor:
+INCBIN "text/en/hidden_figure_head_for.tilemap.rle"
+
+; unreferenced
+Text_b231c:
+	db "@グ@グ@グ@グ@グ@グ@グ@グ"
+	db "ギグ:"
+
+TextJP_HiddenFigureReplenishPower:
+INCBIN "text/jp/hidden_figure_replenish_power.tilemap.rle"
+
+; unreferenced
+Text_b2411:
+	db "@グ@グ@グ@グ@グ@グ@グ@グ"
+	db "ギグ:"
+
+TextEN_HiddenFigureReplenishPower:
+INCBIN "text/en/hidden_figure_replenish_power.tilemap.rle"
+
+; unreferenced
+Text_b2533:
+	db "@グ@グ@グ@グ@グ@グ@グ@グ"
+	db "ギグ:"
+
+GolfBuildingTilemap: INCBIN "data/bgmaps/golf/building.tilemap.rle"
+GolfBuildingAttrmap: INCBIN "data/bgmaps/golf/building.attrmap.rle"
+
+BestTimeListGfx:     INCBIN "gfx/best_time_list.2bpp.rle"
+BestTimeListTilemap: INCBIN "data/bgmaps/best_time_list.tilemap.rle"
+BestTimeListAttrmap: INCBIN "data/bgmaps/best_time_list.attrmap.rle"
+
+PrologueTilemap: INCBIN "data/bgmaps/prologue.tilemap.rle"
+PrologueAttrmap: INCBIN "data/bgmaps/prologue.attrmap.rle"
+
+TextJP_HiddenFigureAreYouAware:
+INCBIN "text/jp/hidden_figure_are_you_aware.tilemap.rle"
+
+; unreferenced
+Text_b37e6:
+	db "@グ@グ@グ@グ@グ@グ@グ@グ"
+	db "ギグ:"
+
+TextEN_HiddenFigureAreYouAware:
+INCBIN "text/en/hidden_figure_are_you_aware.tilemap.rle"
+
+; unreferenced
+Text_b39f0:
+	db "@グ@グ@グ@グ@グ@グ@グ@グ"
+	db "ギグ:"
+
+MusicBoxTilemap: INCBIN "data/bgmaps/music_box.tilemap.rle"
+MusicBoxAttrmap: INCBIN "data/bgmaps/music_box.attrmap.rle"
+
+HiddenFigureCutsceneTilemap: INCBIN "data/bgmaps/hidden_figure_cutscene.tilemap.rle"
+HiddenFigureCutsceneAttrmap: INCBIN "data/bgmaps/hidden_figure_cutscene.attrmap.rle"
+
+
+SECTION "Bank 2D", ROMX
+
+INCLUDE "engine/bank2d.asm"
+
+
+SECTION "Cutscene Palettes", ROMX
+
+INCLUDE "data/overworld/cutscene/palettes.asm"
+
+
+SECTION "Cutscene BG Maps", ROMX
+
+Cutscene01Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_01.tilemap.rle"
+Cutscene01Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_01.attrmap.rle"
+
+Cutscene02Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_02.tilemap.rle"
+Cutscene02Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_02.attrmap.rle"
+
+Cutscene03Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_03.tilemap.rle"
+Cutscene03Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_03.attrmap.rle"
+
+Cutscene04Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_04.tilemap.rle"
+Cutscene04Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_04.attrmap.rle"
+
+Cutscene05Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_05.tilemap.rle"
+Cutscene05Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_05.attrmap.rle"
+
+Cutscene06Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_06.tilemap.rle"
+Cutscene06Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_06.attrmap.rle"
+
+Cutscene07Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_07.tilemap.rle"
+Cutscene07Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_07.attrmap.rle"
+
+Cutscene08Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_08.tilemap.rle"
+Cutscene08Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_08.attrmap.rle"
+
+Cutscene09Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_09.tilemap.rle"
+Cutscene09Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_09.attrmap.rle"
+
+Cutscene10Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_10.tilemap.rle"
+Cutscene10Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_10.attrmap.rle"
+
+Cutscene11Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_11.tilemap.rle"
+Cutscene11Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_11.attrmap.rle"
+
+Cutscene12Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_12.tilemap.rle"
+Cutscene12Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_12.attrmap.rle"
+
+Cutscene13Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_13.tilemap.rle"
+Cutscene13Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_13.attrmap.rle"
+
+Cutscene14Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_14.tilemap.rle"
+Cutscene14Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_14.attrmap.rle"
+
+Cutscene15Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_15.tilemap.rle"
+Cutscene15Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_15.attrmap.rle"
+
+Cutscene16Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_16.tilemap.rle"
+Cutscene16Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_16.attrmap.rle"
+
+Cutscene17Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_17.tilemap.rle"
+Cutscene17Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_17.attrmap.rle"
+
+Cutscene18Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_18.tilemap.rle"
+Cutscene18Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_18.attrmap.rle"
+
+Cutscene19Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_19.tilemap.rle"
+Cutscene19Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_19.attrmap.rle"
+
+Cutscene20Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_20.tilemap.rle"
+Cutscene20Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_20.attrmap.rle"
+
+Cutscene21Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_21.tilemap.rle"
+Cutscene21Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_21.attrmap.rle"
+
+Cutscene22Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_22.tilemap.rle"
+Cutscene22Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_22.attrmap.rle"
+
+Cutscene23Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_23.tilemap.rle"
+Cutscene23Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_23.attrmap.rle"
+
+Cutscene24Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_24.tilemap.rle"
+Cutscene24Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_24.attrmap.rle"
+
+Cutscene25Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_25.tilemap.rle"
+Cutscene25Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_25.attrmap.rle"
+
+Cutscene26Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_26.tilemap.rle"
+Cutscene26Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_26.attrmap.rle"
+
+Cutscene27Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_27.tilemap.rle"
+Cutscene27Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_27.attrmap.rle"
+
+Cutscene28Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_28.tilemap.rle"
+Cutscene28Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_28.attrmap.rle"
+
+Cutscene29Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_29.tilemap.rle"
+Cutscene29Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_29.attrmap.rle"
+
+Cutscene30Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_30.tilemap.rle"
+Cutscene30Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_30.attrmap.rle"
+
+Cutscene31Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_31.tilemap.rle"
+Cutscene31Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_31.attrmap.rle"
+
+Cutscene32Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_32.tilemap.rle"
+Cutscene32Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_32.attrmap.rle"
+
+Cutscene33Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_33.tilemap.rle"
+Cutscene33Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_33.attrmap.rle"
+
+Cutscene34Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_34.tilemap.rle"
+Cutscene34Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_34.attrmap.rle"
+
+Cutscene35Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_35.tilemap.rle"
+Cutscene35Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_35.attrmap.rle"
+
+Cutscene36Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_36.tilemap.rle"
+Cutscene36Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_36.attrmap.rle"
+
+Cutscene37Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_37.tilemap.rle"
+Cutscene37Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_37.attrmap.rle"
+
+Cutscene38Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_38.tilemap.rle"
+Cutscene38Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_38.attrmap.rle"
+
+Cutscene39Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_39.tilemap.rle"
+Cutscene39Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_39.attrmap.rle"
+
+Cutscene40Tilemap: INCBIN "data/bgmaps/cutscenes/cutscene_40.tilemap.rle"
+Cutscene40Attrmap: INCBIN "data/bgmaps/cutscenes/cutscene_40.attrmap.rle"
+
+
+SECTION "Overworld OAM 2", ROMX
+
+INCLUDE "data/overworld/oam_2.asm"
+
+
+SECTION "Bank 56", ROMX
+
+INCLUDE "engine/bank56.asm"
+
+
+SECTION "Bank 57", ROMX
+
+OldMan2Gfx:      INCBIN "gfx/cutscenes/old_man2.2bpp"
+EpilogueStarGfx: INCBIN "gfx/epilogue_star.2bpp"
+OldMan1Gfx:      INCBIN "gfx/cutscenes/old_man1.2bpp"
+
+EpilogueCrowdTilemap:          INCBIN "data/bgmaps/epilogue_crowd.tilemap"
+EpilogueCrowdAttrmap:          INCBIN "data/bgmaps/epilogue_crowd.attrmap"
+EpilogueGfx:                   INCBIN "gfx/epilogue.2bpp.rle"
+EpilogueTransformationTilemap: INCBIN "data/bgmaps/epilogue_transformation.tilemap.rle"
+EpilogueTransformationAttrmap: INCBIN "data/bgmaps/epilogue_transformation.attrmap.rle"
+
+TextJP_OldManThankYou: INCBIN "text/jp/old_man_thank_you.tilemap.rle"
+
+; unreferenced
+Text_15e212:
+	db "@グ@グ@グ@グ@グ@グ@グ@グ"
+	db "ギグ:"
+
+TextEN_OldManThankYou: INCBIN "text/en/old_man_thank_you.tilemap.rle"
+
+; unreferenced
+Text_15e437:
+	db "@グ@グ@グ@グ@グ@グ@グ@グ"
+	db "ギグ:"
+
+
+SECTION "Credits OAM", ROMX
+
+INCLUDE "data/credits/oam.asm"
+
+
+SECTION "Bank 76", ROMX
+
+INCLUDE "engine/bank76.asm"

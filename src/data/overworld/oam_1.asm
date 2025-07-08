@@ -4833,19 +4833,19 @@ Frameset_aa25e:
 	db   4,  4
 	db $ff
 
-Frameset_aa261::
+Frameset_aa261:
 	db   5,  4
 	db $ff
 
-Frameset_aa264::
+Frameset_aa264:
 	db   6,  4
 	db $ff
 
-Frameset_aa267::
+Frameset_aa267:
 	db   7,  4
 	db $ff
 
-Frameset_aa26a::
+Frameset_aa26a:
 	db   8,  4
 	db $ff
 
@@ -5462,7 +5462,7 @@ OAM_aa5fe:
 	frame_oam -21,   9, $14, 0
 	db $80
 
-Frameset_aa6a5::
+Frameset_aa6a5:
 	db   1,  5
 	db   0, 30
 	db   1,  5
@@ -5479,16 +5479,16 @@ Frameset_aa6a5::
 	db   4,  8
 	db $ff
 
-Frameset_aa6c2::
+Frameset_aa6c2:
 	db   3,  5
 	db   2,  4
 	db $ff
 
-Frameset_aa6c7::
+Frameset_aa6c7:
 	db   2,  4
 	db $ff
 
-Frameset_aa6ca::
+Frameset_aa6ca:
 	db   3,  5
 	db   4, 30
 	db   3,  5
@@ -5698,14 +5698,14 @@ OAM_aa6e7:
 	frame_oam -16, -11, $3c, 0 | OAMF_XFLIP
 	db $80
 
-Frameset_aa8ec::
+Frameset_aa8ec:
 	db   0,  2
 	db   1,  2
 	db   2,  2
 	db   3,  2
 	db $ff
 
-Frameset_aa8f5::
+Frameset_aa8f5:
 	db   4,  2
 	db   5,  2
 	db   4,  2
@@ -5714,7 +5714,7 @@ Frameset_aa8f5::
 	db   6,  4
 	db $ff
 
-Frameset_aa902::
+Frameset_aa902:
 	db   7,  3
 	db   8,  5
 	db   9,  3
@@ -5722,7 +5722,7 @@ Frameset_aa902::
 	db  11,  6
 	db $ff
 
-Frameset_aa90d::
+Frameset_aa90d:
 	db   6,  4
 	db $ff
 
@@ -5731,7 +5731,7 @@ Frameset_aa910:
 	db  12,  4
 	db $ff
 
-Frameset_aa913::
+Frameset_aa913:
 	db  13, 12
 	db  14,  4
 	db  15,  2
@@ -5742,7 +5742,7 @@ Frameset_aa913::
 	db  12, 40
 	db $ff
 
-Frameset_aa924::
+Frameset_aa924:
 	db  16,  2
 	db  17,  2
 	db  16,  2
@@ -5751,7 +5751,7 @@ Frameset_aa924::
 	db  18,  4
 	db $ff
 
-Frameset_aa931::
+Frameset_aa931:
 	db  18,  4
 	db $ff
 
@@ -5937,7 +5937,7 @@ OAM_aa934:
 	frame_oam -16,   4, $4c, 0
 	db $80
 
-Frameset_aab27::
+Frameset_aab27:
 	db   0, 20
 	db   1,  6
 	db   2,  2
@@ -5945,7 +5945,7 @@ Frameset_aab27::
 	db   4,  3
 	db $ff
 
-Frameset_aab32::
+Frameset_aab32:
 	db   4,  3
 	db   5,  5
 	db   4,  3
@@ -5954,15 +5954,15 @@ Frameset_aab32::
 	db   7, 60
 	db $ff
 
-Frameset_aab3f::
+Frameset_aab3f:
 	db   4,  4
 	db $ff
 
-Frameset_aab42::
+Frameset_aab42:
 	db   7,  4
 	db $ff
 
-Frameset_aab45::
+Frameset_aab45:
 	db   8,  4
 	db   9,  5
 	db  10, 10
@@ -6138,7 +6138,7 @@ OAM_aab5c::
 	frame_oam -56, -10, $58, 0
 	db $80
 
-Frameset_aaccb::
+Frameset_aaccb:
 	db   5,  3
 	db   6,  2
 	db   5,  3
@@ -6152,7 +6152,7 @@ Frameset_aaccb::
 	db   6,  2
 	db $ff
 
-Frameset_aace2::
+Frameset_aace2:
 	db   5,  4
 	db   6,  3
 	db   0,  4
@@ -6165,11 +6165,11 @@ Frameset_aace2::
 	db   8, 30
 	db $ff
 
-Frameset_aacf7::
+Frameset_aacf7:
 	db   8,  4
 	db $ff
 
-Frameset_aacfa::
+Frameset_aacfa:
 	db   9, 24
 	db  10,  3
 	db  11,  4
@@ -6465,7 +6465,7 @@ OAM_aad1e:
 	frame_oam -32,  13, $78, 0
 	db $80
 
-Frameset_ab03c::
+Frameset_ab03c:
 	db   0, 20
 	db   1,  8
 	db   2, 10
@@ -6491,7 +6491,7 @@ Frameset_ab03c::
 	db   8,  5
 	db $ff
 
-Frameset_ab06b::
+Frameset_ab06b:
 	db   0, 60
 	db  10,  5
 	db  11,  3
@@ -6510,7 +6510,7 @@ Frameset_ab06b::
 	db  10, 30
 	db $ff
 
-Frameset_ab08c::
+Frameset_ab08c:
 	db   8, 14
 	db   9, 26
 	db   8, 12
@@ -6522,12 +6522,12 @@ Frameset_ab095:
 	db   0, 60
 	db $ff
 
-Frameset_ab098::
+Frameset_ab098:
 	db   7,  8
 	db   0, 60
 	db $ff
 
-Frameset_ab09d::
+Frameset_ab09d:
 	db   3,  2
 	db   4,  4
 	db   5,  2
@@ -6537,7 +6537,7 @@ Frameset_ab09d::
 	db   4,  2
 	db $ff
 
-Frameset_ab0ac::
+Frameset_ab0ac:
 	db   0, 10
 	db   8,  8
 	db   9,  9
@@ -6601,7 +6601,7 @@ OAM_ab0c5:
 	frame_oam -16,   4, $1a, 0 | OAMF_XFLIP
 	db $80
 
-Frameset_ab14d::
+Frameset_ab14d:
 	db   0,  4
 	db   1,  2
 	db   0,  3
@@ -6613,11 +6613,11 @@ Frameset_ab14d::
 	db   2,  3
 	db $ff
 
-Frameset_ab160::
+Frameset_ab160:
 	db   3, 60
 	db $ff
 
-Frameset_ab163::
+Frameset_ab163:
 	db   2,  4
 	db   1,  2
 	db   0,  3

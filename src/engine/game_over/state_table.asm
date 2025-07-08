@@ -1,4 +1,4 @@
-_GameOverStateTable::
+_GameOverStateTable:
 	ld a, [wSubState]
 	jumptable
 

@@ -1110,7 +1110,7 @@ GetLevelThatContainsTreasure:
 	srl b ; /4
 	ret
 
-LoadLevelTreasureData::
+LoadLevelTreasureData:
 	push_wram BANK("WRAM2")
 	call ClearTreasureData
 	call LoadLevelTreasures
@@ -1512,28 +1512,28 @@ OAM_9ac5d:
 	frame_oam  -8,  -4, $16, 2 | OAMF_XFLIP
 	db $80
 
-Frameset_9ace1::
+Frameset_9ace1:
 	db   0,  3
 	db   1,  3
 	db   2,  3
 	db   1,  3
 	db $ff
 
-Frameset_9acea::
+Frameset_9acea:
 	db   3,  6
 	db   4,  6
 	db   5,  6
 	db   4,  6
 	db $ff
 
-Frameset_9acf3::
+Frameset_9acf3:
 	db   6,  8
 	db   7,  4
 	db   8,  8
 	db   7,  4
 	db $ff
 
-Frameset_9acfc::
+Frameset_9acfc:
 	db   9,  8
 	db  10,  4
 	db  11,  8

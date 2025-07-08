@@ -1,4 +1,4 @@
-TitleStateTable:
+TitleStateTable::
 	push_wram BANK("GFX RAM")
 	call .jump
 	pop_wram
