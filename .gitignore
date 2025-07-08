@@ -26,6 +26,7 @@
 
 # converted text data
 src/text/en/*.tilemap
+src/text/jp/*.tilemap
 
 # compressed data
 *.rle

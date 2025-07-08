@@ -42,6 +42,7 @@ clean: tidy
 	find src/gfx \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.rle' \) -delete
 	find src/text \( -iname '*.rle' \) -delete
 	find src/text/en \( -iname '*.tilemap' \) -delete
+	find src/text/jp \( -iname '*.tilemap' \) -delete
 	find src/data \( -iname '*.rle' \) -delete
 	find src/data/golf/holes \( -iname '*.bin' -o -iname '*.tilemap' -o -iname '*.attrmap' \) -delete
 
@@ -126,7 +127,7 @@ src/data/bgmaps/golf/background_2.attrmap.rle: tools/compressor += --force-trail
 src/data/golf/holes/%.tilemap.rle: tools/compressor += --force-trailing-repeat
 src/data/golf/holes/%.attrmap.rle: tools/compressor += --force-trailing-repeat
 
-src/text/text_b232f.tilemap.rle: tools/compressor += --force-trailing-copy
+src/text/jp/hidden_figure_replenish_power.tilemap.rle: tools/compressor += --force-trailing-copy
 src/text/en/hidden_figure_replenish_power.tilemap.rle: tools/compressor += --force-trailing-copy
 
 src/data/levels/block_map/the_peaceful_village_1.bin.rle: tools/compressor += --force-trailing-copy

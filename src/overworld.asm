@@ -114,7 +114,7 @@ PrologueGfx::           INCBIN "gfx/cutscenes/prologue.2bpp.rle"
 TempleMusicBoxSceneGfx: INCBIN "gfx/temple_music_box_scene.2bpp.rle"
 
 TextJP_HiddenFigureHeadFor:
-INCBIN "data/bgmaps/map_b1fd7.bin.rle"
+INCBIN "text/jp/hidden_figure_head_for.tilemap.rle"
 
 ; unreferenced
 BGMap_b2107: INCBIN "data/bgmaps/map_b2107.bin"
@@ -126,7 +126,7 @@ INCBIN "text/en/hidden_figure_head_for.tilemap.rle"
 BGMap_b231c: INCBIN "data/bgmaps/map_b231c.bin"
 
 TextJP_HiddenFigureReplenishPower:
-INCBIN "text/text_b232f.tilemap.rle"
+INCBIN "text/jp/hidden_figure_replenish_power.tilemap.rle"
 
 ; unreferenced
 BGMap_b2411: INCBIN "data/bgmaps/map_b2411.bin"
@@ -148,7 +148,7 @@ PrologueTilemap: INCBIN "data/bgmaps/prologue.tilemap.rle"
 PrologueAttrmap: INCBIN "data/bgmaps/prologue.attrmap.rle"
 
 TextJP_HiddenFigureAreYouAware:
-INCBIN "text/text_b3675.tilemap.rle"
+INCBIN "text/jp/hidden_figure_are_you_aware.tilemap.rle"
 
 ; unreferenced
 BGMap_b37e6: INCBIN "data/bgmaps/map_b37e6.bin"
@@ -311,9 +311,9 @@ INCLUDE "engine/bank56.asm"
 
 SECTION "Bank 57", ROMX
 
-OldMan2Gfx: INCBIN "gfx/cutscenes/old_man2.2bpp"
+OldMan2Gfx:      INCBIN "gfx/cutscenes/old_man2.2bpp"
 EpilogueStarGfx: INCBIN "gfx/epilogue_star.2bpp"
-OldMan1Gfx: INCBIN "gfx/cutscenes/old_man1.2bpp"
+OldMan1Gfx:      INCBIN "gfx/cutscenes/old_man1.2bpp"
 
 EpilogueCrowdTilemap:          INCBIN "data/bgmaps/epilogue_crowd.tilemap"
 EpilogueCrowdAttrmap:          INCBIN "data/bgmaps/epilogue_crowd.attrmap"
@@ -321,10 +321,19 @@ EpilogueGfx:                   INCBIN "gfx/epilogue.2bpp.rle"
 EpilogueTransformationTilemap: INCBIN "data/bgmaps/epilogue_transformation.tilemap.rle"
 EpilogueTransformationAttrmap: INCBIN "data/bgmaps/epilogue_transformation.attrmap.rle"
 
-TextJP_OldManThankYou: INCBIN "text/text_15e06b.tilemap.rle"
-Text_15e212: INCBIN "text/text_15e212.tilemap" ; unreferenced
+TextJP_OldManThankYou: INCBIN "text/jp/old_man_thank_you.tilemap.rle"
+
+; unreferenced
+Text_15e212:
+	db "@グ@グ@グ@グ@グ@グ@グ@グ"
+	db "ギグ:"
+
 TextEN_OldManThankYou: INCBIN "text/en/old_man_thank_you.tilemap.rle"
-Text_15e437: INCBIN "text/text_15e437.tilemap" ; unreferenced
+
+; unreferenced
+Text_15e437:
+	db "@グ@グ@グ@グ@グ@グ@グ@グ"
+	db "ギグ:"
 
 
 SECTION "Credits OAM", ROMX
