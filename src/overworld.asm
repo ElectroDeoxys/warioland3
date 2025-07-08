@@ -117,25 +117,33 @@ TextJP_HiddenFigureHeadFor:
 INCBIN "text/jp/hidden_figure_head_for.tilemap.rle"
 
 ; unreferenced
-BGMap_b2107: INCBIN "data/bgmaps/map_b2107.bin"
+Text_b2107:
+	db "@グ@グ@グ@グ@グ@グ@グ@グ"
+	db "ギグ:"
 
 TextEN_HiddenFigureHeadFor:
 INCBIN "text/en/hidden_figure_head_for.tilemap.rle"
 
 ; unreferenced
-BGMap_b231c: INCBIN "data/bgmaps/map_b231c.bin"
+Text_b231c:
+	db "@グ@グ@グ@グ@グ@グ@グ@グ"
+	db "ギグ:"
 
 TextJP_HiddenFigureReplenishPower:
 INCBIN "text/jp/hidden_figure_replenish_power.tilemap.rle"
 
 ; unreferenced
-BGMap_b2411: INCBIN "data/bgmaps/map_b2411.bin"
+Text_b2411:
+	db "@グ@グ@グ@グ@グ@グ@グ@グ"
+	db "ギグ:"
 
 TextEN_HiddenFigureReplenishPower:
 INCBIN "text/en/hidden_figure_replenish_power.tilemap.rle"
 
 ; unreferenced
-BGMap_b2533: INCBIN "data/bgmaps/map_b2533.bin"
+Text_b2533:
+	db "@グ@グ@グ@グ@グ@グ@グ@グ"
+	db "ギグ:"
 
 GolfBuildingTilemap: INCBIN "data/bgmaps/golf/building.tilemap.rle"
 GolfBuildingAttrmap: INCBIN "data/bgmaps/golf/building.attrmap.rle"
@@ -151,13 +159,17 @@ TextJP_HiddenFigureAreYouAware:
 INCBIN "text/jp/hidden_figure_are_you_aware.tilemap.rle"
 
 ; unreferenced
-BGMap_b37e6: INCBIN "data/bgmaps/map_b37e6.bin"
+Text_b37e6:
+	db "@グ@グ@グ@グ@グ@グ@グ@グ"
+	db "ギグ:"
 
 TextEN_HiddenFigureAreYouAware:
 INCBIN "text/en/hidden_figure_are_you_aware.tilemap.rle"
 
 ; unreferenced
-BGMap_b39f0: INCBIN "data/bgmaps/map_b39f0.bin"
+Text_b39f0:
+	db "@グ@グ@グ@グ@グ@グ@グ@グ"
+	db "ギグ:"
 
 MusicBoxTilemap: INCBIN "data/bgmaps/music_box.tilemap.rle"
 MusicBoxAttrmap: INCBIN "data/bgmaps/music_box.attrmap.rle"

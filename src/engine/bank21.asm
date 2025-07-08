@@ -1891,7 +1891,7 @@ Data_85657::
 OWSceneFreezeSeaTilemap:: INCBIN "data/bgmaps/overworld/ow_scene_freeze_sea.tilemap"
 OWSceneFreezeSeaAttrmap:: INCBIN "data/bgmaps/overworld/ow_scene_freeze_sea.attrmap"
 
-BGMap_85928:: INCBIN "data/bgmaps/map_85928.bin" ; unreferenced
+Tilemap_85928:: INCBIN "data/bgmaps/map_85928.tilemap" ; unreferenced
 
 Func_85a68:
 .asm_85a68

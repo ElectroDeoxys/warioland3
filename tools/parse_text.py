@@ -253,7 +253,7 @@ charmap = {
 	0x7f: "@",
 }
 
-with open("src/text/text_15e212.tilemap", "rb") as file:
+with open("src/data/bgmaps/map_b39f0.bin", "rb") as file:
     buffer = file.read()
     stringArray = [charmap[c] for c in buffer]
 
