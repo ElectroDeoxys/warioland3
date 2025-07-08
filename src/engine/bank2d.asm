@@ -895,12 +895,12 @@ Func_b46a0:
 	ld [w2d03e], a
 	ld [w2d046], a
 
-	ld hl, OWSceneFreezeSeaTilemap
+	hlbgcoord 15, 10, OWSceneFreezeSeaTilemap
 	debgcoord 15, 10, wTilemap
 	ld c, $91
 	ld b, BANK(OWSceneFreezeSeaTilemap)
 	call CopyFarBytes
-	ld hl, OWSceneFreezeSeaAttrmap
+	hlbgcoord 15,  0, OWSceneFreezeSeaAttrmap
 	debgcoord 15, 10, wAttrmap
 	ld c, $91
 	ld b, BANK(OWSceneFreezeSeaAttrmap)

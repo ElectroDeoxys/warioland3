@@ -1888,10 +1888,7 @@ Data_85657::
 
 	db $00 ; end
 
-
-BGMap_856a8:: INCBIN "data/bgmaps/map_856a8.bin" ; unreferenced
 OWSceneFreezeSeaTilemap:: INCBIN "data/bgmaps/overworld/ow_scene_freeze_sea.tilemap"
-BGMap_85888:: INCBIN "data/bgmaps/map_85888.bin" ; unreferenced
 OWSceneFreezeSeaAttrmap:: INCBIN "data/bgmaps/overworld/ow_scene_freeze_sea.attrmap"
 
 BGMap_85928:: INCBIN "data/bgmaps/map_85928.bin" ; unreferenced
