@@ -236,19 +236,19 @@ HandleSound::
 	ld [hld], a
 	ld [hl], a
 	call PlayNewMusic
-	jr .asm_2cb
+	jr .update
 
 .valid_music
 	ld c, [hl]
 	ld b, a
 	or c
-	jr z, .asm_2cb
+	jr z, .update
 	xor a
 	ld [hld], a
 	ld [hl], a
 	call PlayNewMusic_SetNoise
 
-.asm_2cb
+.update
 	call UpdateAudio
 	ret
 
