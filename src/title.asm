@@ -32,57 +32,18 @@ INCLUDE "data/title/palettes.asm"
 TitleScreenGfx: INCBIN "gfx/intro/title_screen.2bpp.rle"
 PlaneGfx:       INCBIN "gfx/intro/plane.2bpp.rle"
 
-TitleScreenTilemap:    INCBIN "data/bgmaps/title_screen.tilemap.rle"
-TitleScreenAttrmap:    INCBIN "data/bgmaps/title_screen.attrmap.rle"
-TitleScreenBoxTilemap: INCBIN "data/bgmaps/title_screen_box.tilemap"
+TitleScreenTilemap:    INCBIN "data/title/title_screen.tilemap.rle"
+TitleScreenAttrmap:    INCBIN "data/title/title_screen.attrmap.rle"
+TitleScreenBoxTilemap: INCBIN "data/title/title_screen_box.tilemap"
 
 INCLUDE "data/title/oam.asm"
 
 
 SECTION "Time Attack Gfx", ROMX
 
-Pals_71b0:
-	rgb 31, 31, 31
-	rgb 21, 21, 21
-	rgb 10, 10, 10
-	rgb  0,  7,  0
+INCLUDE "data/title/time_attack/palettes.asm"
 
-	rgb 31, 25, 9
-	rgb 21, 15, 4
-	rgb 13,  8, 1
-	rgb 0,   0, 0
-
-	rgb 31, 31, 31
-	rgb 21, 21, 21
-	rgb 10, 10, 10
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 21, 21, 21
-	rgb 10, 10, 10
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 21, 21, 21
-	rgb 10, 10, 10
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 21, 21, 21
-	rgb 10, 10, 10
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 21, 21, 21
-	rgb 10, 10, 10
-	rgb  0,  0,  0
-
-	rgb 31, 31, 31
-	rgb 21, 21, 21
-	rgb 10, 10, 10
-	rgb  0,  0,  0
-
-TimeAttack1JPTextMap: INCBIN "data/bgmaps/text/time_attack_en.tilemap"
-TimeAttack2JPTextMap: INCBIN "data/bgmaps/text/time_attack_en.attrmap"
-TimeAttack1ENTextMap: INCBIN "data/bgmaps/text/time_attack_jp.tilemap"
-TimeAttack2ENTextMap: INCBIN "data/bgmaps/text/time_attack_jp.attrmap"
+TimeAttack1JPTextMap: INCBIN "data/title/time_attack/time_attack_en.tilemap"
+TimeAttack2JPTextMap: INCBIN "data/title/time_attack/time_attack_en.attrmap"
+TimeAttack1ENTextMap: INCBIN "data/title/time_attack/time_attack_jp.tilemap"
+TimeAttack2ENTextMap: INCBIN "data/title/time_attack/time_attack_jp.attrmap"
