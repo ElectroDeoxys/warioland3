@@ -1,6 +1,7 @@
 rom := warioland3.gbc
 
 rom_obj := \
+src/action_help.o \
 src/audio.o \
 src/clear.o \
 src/golf.o \
