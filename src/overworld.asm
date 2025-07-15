@@ -13,13 +13,13 @@ INCLUDE "engine/overworld/cutscene/common.asm"
 INCLUDE "engine/overworld/treasure_collection/common.asm"
 INCLUDE "engine/overworld/best_times/common.asm"
 INCLUDE "engine/overworld/temple/common.asm"
-INCLUDE "engine/bank20.asm"
+INCLUDE "engine/overworld/bank20.asm"
 
 
 SECTION "Bank 21", ROMX
 
 INCLUDE "data/overworld/palettes.asm"
-INCLUDE "engine/bank21.asm"
+INCLUDE "engine/overworld/bank21.asm"
 
 
 SECTION "Bank 22", ROMX
@@ -74,12 +74,12 @@ LevelNamesEastENGfx:  INCBIN "gfx/gui/level_names_east_en.2bpp"
 
 SECTION "Bank 26", ROMX
 
-INCLUDE "engine/bank26.asm"
+INCLUDE "engine/overworld/bank26.asm"
 
 
 SECTION "Bank 27", ROMX
 
-INCLUDE "engine/bank27.asm"
+INCLUDE "engine/overworld/bank27.asm"
 
 
 SECTION "Cutscenes Gfx 1", ROMX
@@ -109,7 +109,7 @@ INCLUDE "data/overworld/oam_1.asm"
 
 SECTION "Bank 2B", ROMX
 
-INCLUDE "engine/bank2b.asm"
+INCLUDE "engine/overworld/bank2b.asm"
 
 
 SECTION "Temple/Prologue Gfx", ROMX
@@ -204,7 +204,7 @@ HiddenFigureCutsceneAttrmap: INCBIN "data/overworld/bgmaps/hidden_figure_cutscen
 
 SECTION "Bank 2D", ROMX
 
-INCLUDE "engine/bank2d.asm"
+INCLUDE "engine/overworld/bank2d.asm"
 
 
 SECTION "Cutscene Palettes", ROMX
@@ -342,12 +342,12 @@ INCLUDE "data/overworld/oam_2.asm"
 
 SECTION "Bank 56", ROMX
 
-INCLUDE "engine/bank56.asm"
+INCLUDE "engine/overworld/bank56.asm"
 
 
 SECTION "Bank 76", ROMX
 
-INCLUDE "engine/bank76.asm"
+INCLUDE "engine/overworld/bank76.asm"
 
 
 SECTION "Epilogue Gfx", ROMX

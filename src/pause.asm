@@ -21,4 +21,4 @@ INCLUDE "data/pause/palettes.asm"
 
 SECTION "Bank 7D", ROMX
 
-INCLUDE "engine/bank7d.asm"
+INCLUDE "engine/pause/bank7d.asm"

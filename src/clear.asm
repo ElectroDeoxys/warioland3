@@ -28,4 +28,4 @@ INCLUDE "data/clear/pencil_oam.asm"
 
 SECTION "Bank 78", ROMX
 
-INCLUDE "engine/bank78.asm"
+INCLUDE "engine/clear/bank78.asm"
