@@ -1770,7 +1770,7 @@ Frameset_1fd000:
 	db  16,  2
 	db $ff
 
-OAM_1fd031:
+OAM_1fd031::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -2142,7 +2142,7 @@ Frameset_1fd429:
 	db  14,  4
 	db $ff
 
-Frameset_1fd42c:
+Frameset_1fd42c::
 	db  14,  3
 	db  15,  4
 	db $ff
@@ -2157,7 +2157,7 @@ Frameset_1fd434:
 	db  17,  4
 	db $ff
 
-Frameset_1fd439:
+Frameset_1fd439::
 	db  19,  4
 	db  20,  6
 	db   8,  7
@@ -2191,7 +2191,7 @@ Frameset_1fd45f:
 	db  27,  4
 	db $ff
 
-Frameset_1fd46c:
+Frameset_1fd46c::
 	db  28,  8
 	db  16,  5
 	db  29,  3
@@ -2200,7 +2200,7 @@ Frameset_1fd46c:
 	db  29,  4
 	db $ff
 
-Frameset_1fd479:
+Frameset_1fd479::
 	db   0,  1
 	db   1,  8
 	db   2,  8
@@ -2218,7 +2218,7 @@ Frameset_1fd479:
 	db  16,  1
 	db $ff
 
-OAM_1fd498:
+OAM_1fd498::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -2550,7 +2550,7 @@ Frameset_1fd825:
 	db   6,  6
 	db $ff
 
-Frameset_1fd82e:
+Frameset_1fd82e::
 	db  11,  6
 	db   8,  6
 	db   9,  6
@@ -3126,7 +3126,7 @@ Frameset_1fdda7:
 	db  14,  1
 	db $ff
 
-OAM_1fddb4:
+OAM_1fddb4::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -4375,7 +4375,7 @@ Frameset_1fed53:
 	db   3,  2
 	db $ff
 
-Frameset_1fed7c:
+Frameset_1fed7c::
 	db   4,  5
 	db   5,  5
 	db   6,  5
@@ -4388,7 +4388,7 @@ Frameset_1fed7c:
 	db  13,  5
 	db $ff
 
-Frameset_1fed91:
+Frameset_1fed91::
 	db  14,  5
 	db  15,  5
 	db  16,  5
@@ -4401,7 +4401,7 @@ Frameset_1fed91:
 	db  23,  5
 	db $ff
 
-Frameset_1feda6:
+Frameset_1feda6::
 	db  24,  3
 	db  25,  3
 	db  26,  3
@@ -4414,7 +4414,7 @@ Frameset_1feda6:
 	db  33,  3
 	db $ff
 
-Frameset_1fedbb:
+Frameset_1fedbb::
 	db  34,  3
 	db  35,  3
 	db  36,  3
@@ -4427,7 +4427,7 @@ Frameset_1fedbb:
 	db  43,  3
 	db $ff
 
-Frameset_1fedd0:
+Frameset_1fedd0::
 	db  46,  5
 	db  47,  5
 	db  48,  5
@@ -4455,13 +4455,13 @@ Frameset_1fede5:
 	db  55,  2
 	db $ff
 
-Frameset_1fedfe:
+Frameset_1fedfe::
 	db  66,  2
 	db  67,  3
 	db  68,  4
 	db $ff
 
-OAM_1fee05:
+OAM_1fee05::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -4523,7 +4523,7 @@ OAM_1fee05:
 	frame_oam -11,  13, $58, 0
 	db $80
 
-Frameset_1feeb4:
+Frameset_1feeb4::
 	db   0,  4
 	db   1,  6
 	db   2,  4
@@ -4537,7 +4537,7 @@ Frameset_1feebd:
 	db   4,  8
 	db $ff
 
-Frameset_1feec4:
+Frameset_1feec4::
 	db   1,  2
 	db $ff
 

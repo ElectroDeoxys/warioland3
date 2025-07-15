@@ -3,6 +3,7 @@ rom := warioland3.gbc
 rom_obj := \
 src/audio.o \
 src/home.o \
+src/level.o \
 src/main.o \
 src/title.o \
 src/overworld.o \

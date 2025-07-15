@@ -390,7 +390,7 @@ ENDR
 	ld [hl], a
 	ret
 
-DrawObjects_NoPriority:
+DrawObjects_NoPriority::
 FOR n, 1, NUM_OBJECTS + 1
 	ld hl, wObj{u:n}Flags
 	ld a, [hl]
@@ -405,7 +405,7 @@ FOR n, 1, NUM_OBJECTS + 1
 ENDR
 	ret
 
-DrawObjects_WithPriority:
+DrawObjects_WithPriority::
 FOR n, 1, NUM_OBJECTS + 1
 	ld hl, wObj{u:n}Flags
 	ld a, [hl]

@@ -9,7 +9,7 @@ WarioDefaultPal::
 	rgb 31, 30, 12
 	rgb  6,  5, 26
 
-WarioInvisiblePal:
+WarioInvisiblePal::
 	rgb  0, 22, 16
 	rgb  0,  0,  0
 	rgb  0,  7, 11
@@ -20,7 +20,7 @@ WarioInvisiblePal:
 	rgb 21, 21, 21
 	rgb 31, 31, 31
 
-WarioOnFirePal:
+WarioOnFirePal::
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -31,7 +31,7 @@ WarioOnFirePal:
 	rgb 31,  0,  0
 	rgb  0,  0,  0
 
-WarioHot1Pal:
+WarioHot1Pal::
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -42,7 +42,7 @@ WarioHot1Pal:
 	rgb 31,  0,  0
 	rgb  0,  0,  0
 
-WarioHot2Pal:
+WarioHot2Pal::
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -53,7 +53,7 @@ WarioHot2Pal:
 	rgb 24,  0,  0
 	rgb  0,  0,  0
 
-WarioHot3Pal:
+WarioHot3Pal::
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -64,7 +64,7 @@ WarioHot3Pal:
 	rgb 20,  0,  0
 	rgb  0,  0,  0
 
-WarioStringPal:
+WarioStringPal::
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -75,7 +75,7 @@ WarioStringPal:
 	rgb 31, 31,  0
 	rgb  0,  0,  0
 
-WarioElectricPal:
+WarioElectricPal::
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -98,7 +98,7 @@ WarioUnused1Pal:
 	rgb 21, 21, 21
 	rgb 31, 31, 31
 
-WarioZombiePal:
+WarioZombiePal::
 	rgb 21, 21, 21
 	rgb 31, 31, 21
 	rgb  0, 23, 10
@@ -193,7 +193,7 @@ WarioUnused8Pal:
 	rgb 21, 21, 21
 	rgb  0,  0,  0
 
-WarioBouncyPal:
+WarioBouncyPal::
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -204,7 +204,7 @@ WarioBouncyPal:
 	rgb  0, 26, 31
 	rgb 29,  1, 19
 
-WarioBouncyRedPal:
+WarioBouncyRedPal::
 	rgb  0, 22, 16
 	rgb 31, 30,  1
 	rgb 31,  0,  0
@@ -239,7 +239,7 @@ WarioUnused10Pal:
 	rgb  0, 26, 31
 	rgb 29,  1, 19
 
-WarioVampirePal:
+WarioVampirePal::
 	rgb 18, 18, 18
 	rgb 31, 31,  4
 	rgb 18, 12, 31
@@ -274,7 +274,7 @@ WarioUnused12Pal:
 	rgb 31,  5,  5
 	rgb  0,  0,  0
 
-WarioBubblePal:
+WarioBubblePal::
 	rgb 10, 10, 10
 	rgb 31, 31, 31
 	rgb 23, 15, 31
@@ -285,7 +285,7 @@ WarioBubblePal:
 	rgb 11, 15, 31
 	rgb  0,  4, 11
 
-WarioIceSkatinPal:
+WarioIceSkatinPal::
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -296,7 +296,7 @@ WarioIceSkatinPal:
 	rgb 18, 16, 31
 	rgb  0,  0,  0
 
-WarioSnowmanPal:
+WarioSnowmanPal::
 	rgb 15, 15, 15
 	rgb 31, 31, 31
 	rgb 31, 15, 10
@@ -307,7 +307,7 @@ WarioSnowmanPal:
 	rgb  0, 19, 31
 	rgb  0,  0,  0
 
-WarioMagicPal:
+WarioMagicPal::
 	rgb  0, 22, 16
 	rgb 31, 30, 12
 	rgb 29, 14,  0
@@ -318,7 +318,7 @@ WarioMagicPal:
 	rgb  8, 31, 31
 	rgb  6,  5, 26
 
-WarioBallPal:
+WarioBallPal::
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 30,  8,  5
@@ -329,7 +329,7 @@ WarioBallPal:
 	rgb 31, 30, 12
 	rgb  6,  5, 26
 
-WarioBallShotPal:
+WarioBallShotPal::
 	rgb  0, 22, 16
 	rgb 31, 30,  0
 	rgb 30,  0,  3
@@ -340,7 +340,7 @@ WarioBallShotPal:
 	rgb 31, 30, 12
 	rgb  6,  5, 26
 
-WarioSplitPal:
+WarioSplitPal::
 	rgb  0, 22, 16
 	rgb 31, 31, 31
 	rgb 31, 15, 10

@@ -1,4 +1,4 @@
-VBlank_Level:
+VBlank_Level::
 	ld hl, .Func
 	ld de, wVBlankFunc
 	ld b, .end - .Func
@@ -9,7 +9,7 @@ VBlank_Level:
 	jp LevelVBlankFunc
 .end
 
-SetTileQueueProcessingFunctions:
+SetTileQueueProcessingFunctions::
 	ld hl, wVBlankFunc + $10
 	ld a, [wBGMapTileQueueSize]
 	and a

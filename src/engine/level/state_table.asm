@@ -1,4 +1,4 @@
-_LevelStateTable:
+_LevelStateTable::
 	ld a, [wSubState]
 	jumptable
 
