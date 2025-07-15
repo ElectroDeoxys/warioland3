@@ -87,14 +87,6 @@ INCLUDE "data/perfect/oam.asm"
 INCLUDE "data/perfect/framesets.asm"
 
 
-SECTION "Credits", ROMX
-
-INCLUDE "engine/credits.asm"
-INCLUDE "data/credits.asm"
-
-CreditsPalsMap: INCBIN "gfx/pals/credits_pals_map.bin"
-
-
 SECTION "Load Font", ROMX
 
 INCLUDE "engine/load_font.asm"
@@ -239,8 +231,3 @@ HiddenFigure1Map: INCBIN "data/bgmaps/hidden_figure1.tilemap.rle"
 HiddenFigure2Map: INCBIN "data/bgmaps/hidden_figure1.attrmap.rle"
 HiddenFigure3Map: INCBIN "data/bgmaps/hidden_figure2.tilemap.rle"
 HiddenFigure4Map: INCBIN "data/bgmaps/hidden_figure2.attrmap.rle"
-
-
-SECTION "Credits OAM", ROMX
-
-INCLUDE "data/credits/oam.asm"
