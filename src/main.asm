@@ -52,21 +52,6 @@ SECTION "Wario Palettes", romx
 INCLUDE "gfx/pals/wario.asm"
 
 
-SECTION "Game Over", ROMX
-
-INCLUDE "engine/game_over/state_table.asm"
-INCLUDE "engine/game_over/core.asm"
-INCLUDE "engine/game_over/load_gfx.asm"
-INCLUDE "data/game_over/palettes.asm"
-
-GameOverGfx:     INCBIN "gfx/game_over.2bpp.rle"
-GameOverTilemap: INCBIN "data/bgmaps/game_over.tilemap.rle"
-GameOverAttrmap: INCBIN "data/bgmaps/game_over.attrmap.rle"
-
-INCLUDE "data/game_over/oam.asm"
-INCLUDE "data/game_over/framesets.asm"
-
-
 SECTION "Perfect", ROMX
 
 INCLUDE "engine/perfect/state_table.asm"
@@ -214,7 +199,7 @@ Pals_db040::
 	rgb 31, 25,  0
 	rgb  0,  0,  0
 
-HiddenFigure1Map: INCBIN "data/bgmaps/hidden_figure1.tilemap.rle"
-HiddenFigure2Map: INCBIN "data/bgmaps/hidden_figure1.attrmap.rle"
-HiddenFigure3Map: INCBIN "data/bgmaps/hidden_figure2.tilemap.rle"
-HiddenFigure4Map: INCBIN "data/bgmaps/hidden_figure2.attrmap.rle"
+HiddenFigure1Map:: INCBIN "data/bgmaps/hidden_figure1.tilemap.rle"
+HiddenFigure2Map:: INCBIN "data/bgmaps/hidden_figure1.attrmap.rle"
+HiddenFigure3Map:: INCBIN "data/bgmaps/hidden_figure2.tilemap.rle"
+HiddenFigure4Map:: INCBIN "data/bgmaps/hidden_figure2.attrmap.rle"
