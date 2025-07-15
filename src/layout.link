@@ -273,7 +273,13 @@ ROMX $7a
 ROMX $7b
 	"Wario States 4"
 ROMX $7c
-	"Bank 7C"
+	"Pause Engine 1"
+	"Load Font"
+	"Pause Engine 2"
+	"Font"
+	"GB Incompatible Gfx"
+	"Pause Palettes"
+	"Language Selection BG Maps"
 ROMX $7d
 	"Bank 7D"
 ROMX $7e

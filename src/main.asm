@@ -95,36 +95,27 @@ INCLUDE "data/credits.asm"
 CreditsPalsMap: INCBIN "gfx/pals/credits_pals_map.bin"
 
 
-SECTION "Bank 7C", ROMX
+SECTION "Load Font", ROMX
 
-INCLUDE "engine/pause/state_table.asm"
-INCLUDE "engine/pause/pause_menu_1.asm"
-INCLUDE "engine/pause/save/save.asm"
 INCLUDE "engine/load_font.asm"
-INCLUDE "engine/pause/pause_menu_2.asm"
-INCLUDE "engine/pause/save/checksum.asm"
-INCLUDE "engine/pause/save/vblank.asm"
-INCLUDE "engine/pause/save/validate_save.asm"
-INCLUDE "data/pause/oam.asm"
+
+
+SECTION "Font", ROMX
 
 FontGfx:: INCBIN "gfx/font.2bpp.rle"
+
+
+SECTION "GB Incompatible Gfx", ROMX
 
 GBIncompatibleGfx:     INCBIN "gfx/gb_incompatible.2bpp.rle"
 GBIncompatibleTilemap: INCBIN "data/bgmaps/gb_incompatible.tilemap.rle"
 GBIncompatibleAttrmap: INCBIN "data/bgmaps/gb_incompatible.attrmap.rle" ; unreferenced
 
-INCLUDE "data/pause/palettes.asm"
 
-LanguageSelection1TextMap:
-INCBIN "data/bgmaps/text/language_selection1.tilemap"
+SECTION "Language Selection BG Maps", ROMX
 
-LanguageSelection2TextMap:
-INCBIN "data/bgmaps/text/language_selection2.tilemap"
-
-
-SECTION "Bank 7D", ROMX
-
-INCLUDE "engine/bank7d.asm"
+LanguageSelection1TextMap:: INCBIN "data/bgmaps/text/language_selection1.tilemap"
+LanguageSelection2TextMap:: INCBIN "data/bgmaps/text/language_selection2.tilemap"
 
 
 SECTION "Action Help 1", ROMX

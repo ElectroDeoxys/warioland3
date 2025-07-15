@@ -1,4 +1,4 @@
-_PauseMenuStateTable:
+_PauseMenuStateTable::
 	ld a, [wSubState]
 	jumptable
 

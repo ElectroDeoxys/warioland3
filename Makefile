@@ -6,6 +6,7 @@ src/clear.o \
 src/home.o \
 src/level.o \
 src/main.o \
+src/pause.o \
 src/title.o \
 src/overworld.o \
 src/ram.o
