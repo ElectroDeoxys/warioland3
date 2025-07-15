@@ -1,4 +1,4 @@
-_ClearScreenStateTable:
+_ClearScreenStateTable::
 	ld a, [wSubState]
 	jumptable
 

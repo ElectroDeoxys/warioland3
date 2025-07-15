@@ -703,7 +703,7 @@ Frameset_1f1cbb:
 	db  28,  4
 	db $ff
 
-Frameset_1f1cd4:
+Frameset_1f1cd4::
 	db  29, 10
 	db  30,  9
 	db  31,  8

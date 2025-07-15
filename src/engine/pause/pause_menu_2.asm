@@ -1,4 +1,4 @@
-LoadPauseMenuSprite:
+LoadPauseMenuSprite::
 	ld a, [hli]
 	add OAM_Y_OFS
 	ld [wCurSpriteYCoord], a
