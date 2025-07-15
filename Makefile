@@ -12,6 +12,7 @@ src/home.o \
 src/level.o \
 src/main.o \
 src/pause.o \
+src/perfect.o \
 src/title.o \
 src/overworld.o \
 src/ram.o

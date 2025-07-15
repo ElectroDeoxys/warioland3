@@ -1,4 +1,4 @@
-_PerfectStateTable:
+_PerfectStateTable::
 	ld a, [wSubState]
 	jumptable
 
