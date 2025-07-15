@@ -1,4 +1,4 @@
-OAM_1fc000:
+OAM_1fc000::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -300,7 +300,7 @@ Frameset_1fc30d:
 	db  16,  1
 	db $ff
 
-Frameset_1fc316:
+Frameset_1fc316::
 	db   0, 20
 	db   1, 20
 	db $ff
@@ -411,7 +411,7 @@ OAM_1fc31b::
 	frame_oam -31,   4, $40, 0 | OAMF_XFLIP
 	db $80
 
-Frameset_1fc439:
+Frameset_1fc439::
 	db   2,  2
 	db   1,  1
 	db   0,  1
@@ -420,7 +420,7 @@ Frameset_1fc439:
 	db   7,  2
 	db $ff
 
-Frameset_1fc446:
+Frameset_1fc446::
 	db   2,  2
 	db   3,  1
 	db   4,  1
@@ -429,26 +429,26 @@ Frameset_1fc446:
 	db   7,  2
 	db $ff
 
-Frameset_1fc453:
+Frameset_1fc453::
 	db   7,  4
 	db   8,  2
 	db   9,  4
 	db $ff
 
-Frameset_1fc45a:
+Frameset_1fc45a::
 	db   7,  4
 	db   6,  2
 	db   5,  4
 	db $ff
 
-Frameset_1fc461:
+Frameset_1fc461::
 	db   9,  2
 	db   0,  1
 	db   1,  1
 	db   2,  2
 	db $ff
 
-Frameset_1fc46a:
+Frameset_1fc46a::
 	db   5,  2
 	db   4,  1
 	db   3,  1
@@ -469,11 +469,11 @@ Frameset_1fc47c::
 	db   9,  2
 	db $ff
 
-Frameset_1fc485:
+Frameset_1fc485::
 	db   9,  4
 	db $ff
 
-Frameset_1fc488:
+Frameset_1fc488::
 	db   5,  4
 	db $ff
 

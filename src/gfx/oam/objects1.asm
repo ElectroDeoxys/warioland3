@@ -81,7 +81,7 @@ OAM_180003:
 	frame_oam -34,  -5, $c4, 2
 	db $80
 
-OAM_18007b:
+OAM_18007b::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1238,7 +1238,7 @@ OAM_1809ff:
 	frame_oam -31,  -4, $46, 5 | OAMF_BANK1
 	db $80
 
-OAM_180b43:
+OAM_180b43::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1626,7 +1626,7 @@ OAM_180b43:
 	frame_oam -27,  -6, $70, 3 | OAMF_BANK1
 	db $80
 
-OAM_180ea7:
+OAM_180ea7::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2

@@ -32,9 +32,9 @@ INCLUDE "data/title/palettes.asm"
 TitleScreenGfx: INCBIN "gfx/intro/title_screen.2bpp.rle"
 PlaneGfx:       INCBIN "gfx/intro/plane.2bpp.rle"
 
-TitleScreenTilemap:    INCBIN "data/title/title_screen.tilemap.rle"
-TitleScreenAttrmap:    INCBIN "data/title/title_screen.attrmap.rle"
-TitleScreenBoxTilemap: INCBIN "data/title/title_screen_box.tilemap"
+TitleScreenTilemap:    INCBIN "data/title/bgmaps/title_screen.tilemap.rle"
+TitleScreenAttrmap:    INCBIN "data/title/bgmaps/title_screen.attrmap.rle"
+TitleScreenBoxTilemap: INCBIN "data/title/bgmaps/title_screen_box.tilemap"
 
 INCLUDE "data/title/oam.asm"
 
@@ -43,7 +43,7 @@ SECTION "Time Attack Gfx", ROMX
 
 INCLUDE "data/title/time_attack/palettes.asm"
 
-TimeAttack1JPTextMap: INCBIN "data/title/time_attack/time_attack_en.tilemap"
-TimeAttack2JPTextMap: INCBIN "data/title/time_attack/time_attack_en.attrmap"
-TimeAttack1ENTextMap: INCBIN "data/title/time_attack/time_attack_jp.tilemap"
-TimeAttack2ENTextMap: INCBIN "data/title/time_attack/time_attack_jp.attrmap"
+TimeAttack1JPTextMap: INCBIN "data/title/time_attack/bgmaps/time_attack_en.tilemap"
+TimeAttack2JPTextMap: INCBIN "data/title/time_attack/bgmaps/time_attack_en.attrmap"
+TimeAttack1ENTextMap: INCBIN "data/title/time_attack/bgmaps/time_attack_jp.tilemap"
+TimeAttack2ENTextMap: INCBIN "data/title/time_attack/bgmaps/time_attack_jp.attrmap"

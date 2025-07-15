@@ -1110,7 +1110,7 @@ GetLevelThatContainsTreasure:
 	srl b ; /4
 	ret
 
-LoadLevelTreasureData:
+LoadLevelTreasureData::
 	push_wram BANK("WRAM2")
 	call ClearTreasureData
 	call LoadLevelTreasures

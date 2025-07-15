@@ -941,7 +941,7 @@ Pals_cc580:
 	rgb  4,  5, 11
 	rgb  0,  1, 10
 
-Pals_cc5c0:
+Pals_cc5c0::
 	rgb 31, 31, 31
 	rgb 21, 21, 21
 	rgb 11, 10, 11

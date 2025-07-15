@@ -11,7 +11,7 @@ Frameset_76b5:
 	db  13,  8
 	db $ff
 
-Frameset_76ca:
+Frameset_76ca::
 	db   1,  4
 	db   2,  4
 	db   3,  4

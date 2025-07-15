@@ -1,4 +1,4 @@
-OAM_15e44a:
+OAM_15e44a::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -362,17 +362,17 @@ OAM_15e44a:
 	frame_oam  -8,   0, $64, 5 | OAMF_BANK1 | OAMF_XFLIP
 	db $80
 
-Frameset_15e741:
+Frameset_15e741::
 	db   2,  3
 	db   1,  3
 	db   0,  3
 	db $ff
 
-Frameset_15e748:
+Frameset_15e748::
 	db   3,  4
 	db $ff
 
-Frameset_15e74b:
+Frameset_15e74b::
 	db   4,  5
 	db   5,  5
 	db   6,  5
@@ -395,39 +395,39 @@ Frameset_15e74b:
 	db   5,  2
 	db $ff
 
-Frameset_15e774:
+Frameset_15e774::
 	db   7,  3
 	db   8,  3
 	db   9,  3
 	db  10,  3
 	db $ff
 
-Frameset_15e77d:
+Frameset_15e77d::
 	db  11,  4
 	db $ff
 
-Frameset_15e780:
+Frameset_15e780::
 	db  12,  4
 	db $ff
 
-Frameset_15e783:
+Frameset_15e783::
 	db  14,  3
 	db  15,  3
 	db  16,  3
 	db $ff
 
-Frameset_15e78a:
+Frameset_15e78a::
 	db  17,  9
 	db  18,  8
 	db  19,  7
 	db  20,  7
 	db $ff
 
-Frameset_15e793:
+Frameset_15e793::
 	db  13,  4
 	db $ff
 
-Frameset_15e796:
+Frameset_15e796::
 	db  21,  2
 	db  22,  2
 	db  23,  6
@@ -436,11 +436,11 @@ Frameset_15e796:
 	db  24,  3
 	db $ff
 
-Frameset_15e7a3:
+Frameset_15e7a3::
 	db  25,  4
 	db $ff
 
-Frameset_15e7a6:
+Frameset_15e7a6::
 	db  25,  1
 	db  28,  2
 	db  26,  2
@@ -451,7 +451,7 @@ Frameset_15e7a6:
 	db  32,  2
 	db $ff
 
-Frameset_15e7b7:
+Frameset_15e7b7::
 	db  33,  4
 	db  34,  4
 	db  35,  4
@@ -460,7 +460,7 @@ Frameset_15e7b7:
 	db  38,  4
 	db $ff
 
-Frameset_15e7c4:
+Frameset_15e7c4::
 	db  39,  2
 	db  40,  1
 	db  41,  2
@@ -483,41 +483,41 @@ Frameset_15e7c4:
 	db  40,  1
 	db $ff
 
-Frameset_15e7ed:
+Frameset_15e7ed::
 	db  49,  4
 	db $ff
 
-Frameset_15e7f0:
+Frameset_15e7f0::
 	db   2,  2
 	db  48,  2
 	db $ff
 
-Frameset_15e7f5:
+Frameset_15e7f5::
 	db  12,  2
 	db  48,  2
 	db $ff
 
-Frameset_15e7fa:
+Frameset_15e7fa::
 	db  44,  2
 	db  40,  1
 	db  50,  2
 	db $ff
 
-Frameset_15e801:
+Frameset_15e801::
 	db  52,  2
 	db  50,  1
 	db  41,  2
 	db  50,  1
 	db $ff
 
-Frameset_15e80a:
+Frameset_15e80a::
 	db  41,  2
 	db  45,  1
 	db  51,  2
 	db  45,  1
 	db $ff
 
-OAM_15e813:
+OAM_15e813::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -582,52 +582,52 @@ OAM_15e813:
 	frame_oam -20,   0, $2c, 0 | OAMF_BANK1
 	db $80
 
-Frameset_15e88d:
+Frameset_15e88d::
 	db   0,  4
 	db $ff
 
-Frameset_15e890:
+Frameset_15e890::
 	db   1,  4
 	db $ff
 
-Frameset_15e893:
+Frameset_15e893::
 	db   2,  4
 	db $ff
 
-Frameset_15e896:
+Frameset_15e896::
 	db   3,  4
 	db $ff
 
-Frameset_15e899:
+Frameset_15e899::
 	db   4,  4
 	db $ff
 
-Frameset_15e89c:
+Frameset_15e89c::
 	db   5,  4
 	db $ff
 
-Frameset_15e89f:
+Frameset_15e89f::
 	db   6,  4
 	db $ff
 
-Frameset_15e8a2:
+Frameset_15e8a2::
 	db   7,  4
 	db $ff
 
-Frameset_15e8a5:
+Frameset_15e8a5::
 	db   8,  4
 	db $ff
 
-Frameset_15e8a8:
+Frameset_15e8a8::
 	db   9,  4
 	db $ff
 
-Frameset_15e8ab:
+Frameset_15e8ab::
 	db   0, 20
 	db   1, 20
 	db $ff
 
-Frameset_15e8b0:
+Frameset_15e8b0::
 	db   0, 10
 	db   2,  4
 	db   3, 10
@@ -775,7 +775,7 @@ Frameset_15e92f:
 	db  26,  4
 	db $ff
 
-Frameset_15e932:
+Frameset_15e932::
 	db  27,  4
 	db $ff
 
@@ -844,7 +844,7 @@ Frameset_15e959:
 	db  41,  4
 	db $ff
 
-Frameset_15e95c:
+Frameset_15e95c::
 	db  42,  4
 	db $ff
 
@@ -884,7 +884,7 @@ Frameset_15e974:
 	db  50,  6
 	db $ff
 
-OAM_15e97d:
+OAM_15e97d::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -1329,30 +1329,30 @@ OAM_15e97d:
 	frame_oam -16,  -4, $30, 0 | OAMF_BANK1
 	db $80
 
-Frameset_15ed91:
+Frameset_15ed91::
 	db   0,  4
 	db $ff
 
-Frameset_15ed94:
+Frameset_15ed94::
 	db   1,  4
 	db $ff
 
-Frameset_15ed97:
+Frameset_15ed97::
 	db   2,  4
 	db $ff
 
-Frameset_15ed9a:
+Frameset_15ed9a::
 	db   3,  4
 	db $ff
 
-Frameset_15ed9d:
+Frameset_15ed9d::
 	db   7,  4
 	db   6,  4
 	db   5,  4
 	db   4,  4
 	db $ff
 
-Frameset_15eda6:
+Frameset_15eda6::
 	db   8,  5
 	db   9,  5
 	db  10,  5
@@ -1361,7 +1361,7 @@ Frameset_15eda6:
 	db  13,  5
 	db $ff
 
-Frameset_15edb3:
+Frameset_15edb3::
 	db   8,  7
 	db   9,  7
 	db  10,  7
@@ -1370,15 +1370,15 @@ Frameset_15edb3:
 	db  13,  7
 	db $ff
 
-Frameset_15edc0:
+Frameset_15edc0::
 	db   6,  4
 	db $ff
 
-Frameset_15edc3:
+Frameset_15edc3::
 	db   4,  4
 	db $ff
 
-Frameset_15edc6:
+Frameset_15edc6::
 	db   4,  4
 	db  14,  4
 	db   4, 20
@@ -1398,14 +1398,14 @@ Frameset_15edc6:
 	db   5, 30
 	db $ff
 
-Frameset_15ede9:
+Frameset_15ede9::
 	db   4,  4
 	db  16,  8
 	db  17, 14
 	db  20,  3
 	db $ff
 
-Frameset_15edf2:
+Frameset_15edf2::
 	db   4,  4
 	db  20,  9
 	db  21,  9
@@ -1422,7 +1422,7 @@ Frameset_15edf2:
 	db  14,  4
 	db $ff
 
-Frameset_15ee0f:
+Frameset_15ee0f::
 	db   4,  4
 	db   3,  5
 	db  22, 10
@@ -1432,7 +1432,7 @@ Frameset_15ee0f:
 	db   5,  5
 	db $ff
 
-Frameset_15ee1e:
+Frameset_15ee1e::
 	db  15, 20
 	db  16,  4
 	db  23, 10
@@ -1449,14 +1449,14 @@ Frameset_15ee1e:
 	db  26,  2
 	db $ff
 
-Frameset_15ee3b:
+Frameset_15ee3b::
 	db   7,  4
 	db  27, 14
 	db  28, 24
 	db  27, 16
 	db $ff
 
-Frameset_15ee44:
+Frameset_15ee44::
 	db  29,  2
 	db  30,  2
 	db  31,  1
@@ -1468,7 +1468,7 @@ Frameset_15ee44:
 	db  39,  1
 	db $ff
 
-Frameset_15ee57:
+Frameset_15ee57::
 	db  31,  2
 	db  29,  2
 	db  35,  2
@@ -1477,40 +1477,40 @@ Frameset_15ee57:
 	db  37,  2
 	db $ff
 
-Frameset_15ee64:
+Frameset_15ee64::
 	db  41,  4
 	db $ff
 
-Frameset_15ee67:
+Frameset_15ee67::
 	db  42,  4
 	db  43,  4
 	db  44,  4
 	db  45,  4
 	db $ff
 
-Frameset_15ee70:
+Frameset_15ee70::
 	db  46,  4
 	db  47,  4
 	db  48,  4
 	db  49,  4
 	db $ff
 
-Frameset_15ee79:
+Frameset_15ee79::
 	db  50,  4
 	db  51,  4
 	db  52,  4
 	db  53,  4
 	db $ff
 
-Frameset_15ee82:
+Frameset_15ee82::
 	db  25,  2
 	db  26,  2
 	db $ff
 
-Frameset_15ee87:
+Frameset_15ee87::
 	db  54,  4
 	db $ff
 
-Frameset_15ee8a:
+Frameset_15ee8a::
 	db  55,  4
 	db $ff

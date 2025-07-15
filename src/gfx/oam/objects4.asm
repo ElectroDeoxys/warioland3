@@ -754,7 +754,7 @@ OAM_18c000:
 	frame_oam  -8,  -4, $b8, 0 | OAMF_YFLIP
 	db $80
 
-OAM_18c806:
+OAM_18c806::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -828,7 +828,7 @@ OAM_18c806:
 	frame_oam -16,   0, $b6, 6 | OAMF_BANK1
 	db $80
 
-OAM_18c88a:
+OAM_18c88a::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2

@@ -259,7 +259,7 @@ INCBIN "gfx/wario/unk3.2bpp"
 WarioUnk4Gfx:
 INCBIN "gfx/wario/unk4.2bpp"
 
-WarioSleepGfx:
+WarioSleepGfx::
 INCBIN "gfx/wario/sleep.2bpp"
 
 WarioUnk5Gfx:

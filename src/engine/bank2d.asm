@@ -1232,7 +1232,7 @@ LoadOverworldTorchGfx:
 	decompress_tiles0 OverworldTorchGfx, v0Tiles0, $40
 	ret
 
-LoadOverworldFireGfx:
+LoadOverworldFireGfx::
 	decompress_tiles0 OverworldFireGfx, v0Tiles0
 	ret
 
@@ -4015,7 +4015,7 @@ WOWFunc_Earthquake:
 	ld a, $01
 	ld [wOWUIObj1YCoord], a
 	ld a, $01
-	ld [wSceneWarioDuration], a
+	ld [wOWUIObj1Duration], a
 	ld a, $17
 	ld hl, wSceneObj11State
 	call SetSceneObjState
@@ -4038,7 +4038,7 @@ WOWFunc_Earthquake:
 
 .Func_b5cc4:
 	xor a
-	ld [wSceneWarioDuration], a
+	ld [wOWUIObj1Duration], a
 	ld a, $03
 	ld [wOWUIObj1YCoord], a
 	ld a, $18
@@ -4070,7 +4070,7 @@ WOWFunc_Earthquake:
 	jp AdvanceOWFunc
 
 .Func_b5d0a:
-	ld hl, wSceneWarioDuration
+	ld hl, wOWUIObj1Duration
 	ld a, [hli]
 	and a
 	ret z
@@ -4124,7 +4124,7 @@ WOWFunc_Earthquake:
 
 .Func_b5d5a:
 	ld a, $01
-	ld hl, wSceneWarioDuration
+	ld hl, wOWUIObj1Duration
 	ld [hli], a
 	xor a
 	ld [hl], a
@@ -6788,7 +6788,7 @@ EOWFunc_FreezeSea:
 	ret nz
 	ld a, $01
 	ld [wOWUIObj2YCoord], a
-	ld hl, wSceneWarioOAMPtr
+	ld hl, wOWUIObj2XCoord
 	jr .asm_b6f31
 
 .Func_b6f4a:
@@ -6878,13 +6878,13 @@ EOWFunc_FreezeSea:
 	jr z, .asm_b6ff9
 	ld [wOWUIObj1Attributes], a
 	ld a, [hli]
-	ld [wSceneWarioDuration], a
+	ld [wOWUIObj1Duration], a
 	ld a, [hli]
 	ld [wOWUIObj1FramesetOffset], a
 	ld a, [hli]
 	ld [wOWUIObj1State], a
 	ld a, [hli]
-	ld [wSceneWarioUnk7], a
+	ld [wOWUIObj1Unk7], a
 	ld a, l
 	ld [wOWUIObj1XCoord], a
 	ld a, h
@@ -6909,7 +6909,7 @@ EOWFunc_FreezeSea:
 	ret c
 	ld a, $01
 	ld [hli], a
-	ld hl, wSceneWarioOAMPtr
+	ld hl, wOWUIObj2XCoord
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -6920,13 +6920,13 @@ EOWFunc_FreezeSea:
 	ld a, [hli]
 	ld [wOWUIObj2Duration], a
 	ld a, [hli]
-	ld [wSceneWarioIgnoreScroll], a
+	ld [wOWUIObj2FramesetOffset], a
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
 	ld d, a
 	ld a, l
-	ld [wSceneWarioOAMPtr], a
+	ld [wOWUIObj2XCoord], a
 	ld a, h
 	ld [wOWUIObj2Frame], a
 	ld hl, $140
@@ -7646,7 +7646,7 @@ EOWFunc_FormCastle:
 
 .asm_b750a
 	xor a
-	ld hl, wSceneWarioOAMPtr
+	ld hl, wOWUIObj2XCoord
 	ld [hld], a
 	inc [hl]
 	ret
@@ -7654,7 +7654,7 @@ EOWFunc_FormCastle:
 .asm_b7511
 	call .Func_b7544
 	ld b, [hl]
-	ld a, [wSceneWarioOAMPtr]
+	ld a, [wOWUIObj2XCoord]
 	cp b
 	ret c
 	ld hl, wPalConfig1
@@ -7665,14 +7665,14 @@ EOWFunc_FormCastle:
 	call .Func_b7544
 	inc hl
 	ld b, [hl]
-	ld a, [wSceneWarioOAMPtr]
+	ld a, [wOWUIObj2XCoord]
 	cp b
 	ret c
 	ld hl, wPalConfig2
 	ld a, LOW(rBCPS)
 	ld [hli], a
 	xor a
-	ld hl, wSceneWarioOAMPtr
+	ld hl, wOWUIObj2XCoord
 	ld [hld], a
 	dec [hl]
 	ret

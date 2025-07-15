@@ -1,4 +1,4 @@
-OverworldStateTable:
+OverworldStateTable::
 	ld a, [wSubState]
 	jumptable
 
@@ -29,7 +29,7 @@ OverworldStateTable:
 	dw FadeBGToWhite_Normal
 	dw Func_80db1
 
-	dw FadeBGToWhite_Normal ; SST_OVERWORLD_BEST_TIME_LIST
+	dw FadeBGToWhite_Normal ; SST_OVERWORLD_BEST_TIMES
 	dw InitBestTimeList
 	dw DarkenBGToPal_Normal
 	dw BestTimeList
@@ -41,7 +41,7 @@ OverworldStateTable:
 	dw Func_80e33
 
 	dw FadeBGToWhite_Normal
-	dw GolfBuilding           ; SST_OVERWORLD_20
+	dw GolfBuilding           ; SST_OVERWORLD_GOLF_BUILDING
 	dw DarkenBGToPal_Normal
 	dw Func_80e55
 

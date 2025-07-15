@@ -36,6 +36,15 @@ MACRO scene_obj_struct
 \1End::
 ENDM
 
+MACRO ow_unk_struct_sub
+	ds $9
+ENDM
+
+MACRO ow_unk_struct
+	ow_unk_struct_sub \1
+	ds $17
+ENDM
+
 MACRO golf_obj_struct
 \1State::          db
 \1Duration::       db

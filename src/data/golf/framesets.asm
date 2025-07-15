@@ -110,7 +110,7 @@ Frameset_d4d5f::
 	db  11,  4
 	db $ff
 
-Frameset_d4de4:
+Frameset_d4de4::
 	db  10,  8
 	db  11,  4
 	db  12,  4

@@ -80,6 +80,8 @@ DEF OW_EXITS EQU const_value
 	const OW_EXIT_RIGHT ; $e
 	const OW_EXIT_LEFT  ; $f
 
+DEF OW_NONE EQU $80 ; denotes level directions with no paths
+
 ; OW bottom bar action
 	const_def
 	const BOTBAR_CLOSED  ; $0
@@ -225,3 +227,12 @@ DEF NUM_SOUTH_CONNECTIONS EQU const_value - 1
 	const EASTCONN_7 ; $7
 	const EASTCONN_8 ; $8
 DEF NUM_EAST_CONNECTIONS EQU const_value - 1
+
+; path shapes to take between OW positions
+	const_def
+	const PATH_NONE     ; $0
+	const PATH_BEELINE  ; $1
+	const PATH_Y_THEN_X ; $2
+	const PATH_X_THEN_Y ; $3
+	const PATH_S_SHAPE  ; $4
+DEF NUM_PATH_SHAPES EQU const_value

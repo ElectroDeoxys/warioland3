@@ -5,6 +5,7 @@ src/audio.o \
 src/home.o \
 src/main.o \
 src/title.o \
+src/overworld.o \
 src/ram.o
 
 warioland3_obj := $(rom_obj:.o=.o)
@@ -116,7 +117,7 @@ src/gfx/golf/golf_lobby.2bpp.rle: tools/compressor += --no-trailing-repeat
 src/gfx/misc/action_help_objects1.2bpp.rle: tools/compressor += --force-trailing-repeat
 src/gfx/misc/action_help_objects2.2bpp.rle: tools/compressor += --force-trailing-repeat
 
-src/data/bgmaps/prologue.attrmap.rle: tools/compressor += --force-trailing-copy
+src/data/overworld/bgmaps/prologue.attrmap.rle: tools/compressor += --force-trailing-copy
 src/data/bgmaps/golf/background_1.tilemap.rle: tools/compressor += --force-trailing-copy
 src/data/bgmaps/golf/background_1.attrmap.rle: tools/compressor += --force-trailing-copy
 src/data/bgmaps/golf/background_2.tilemap.rle: tools/compressor += --force-trailing-copy

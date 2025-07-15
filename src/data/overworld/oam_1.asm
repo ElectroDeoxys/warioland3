@@ -6138,7 +6138,7 @@ OAM_aab5c::
 	frame_oam -56, -10, $58, 0
 	db $80
 
-Frameset_aaccb:
+Frameset_aaccb::
 	db   5,  3
 	db   6,  2
 	db   5,  3
@@ -6152,7 +6152,7 @@ Frameset_aaccb:
 	db   6,  2
 	db $ff
 
-Frameset_aace2:
+Frameset_aace2::
 	db   5,  4
 	db   6,  3
 	db   0,  4

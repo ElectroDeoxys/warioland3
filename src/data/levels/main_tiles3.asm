@@ -16,8 +16,8 @@ INCBIN "gfx/levels/main_tiles20.2bpp"
 LevelMainTiles21:
 INCBIN "gfx/levels/main_tiles21.2bpp"
 
-LevelMainTiles22:
+LevelMainTiles22::
 INCBIN "gfx/levels/main_tiles22.2bpp"
 
-LevelMainTiles23:
+LevelMainTiles23::
 INCBIN "gfx/levels/main_tiles23.2bpp"

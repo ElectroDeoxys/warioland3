@@ -988,7 +988,7 @@ Frameset_149ed:
 	db  23,  3
 	db $ff
 
-Frameset_149fe:
+Frameset_149fe::
 	db  62,  3
 	db  24,  3
 	db  25,  3
@@ -1010,7 +1010,7 @@ Frameset_14a0f:
 	db  29,  3
 	db $ff
 
-Frameset_14a20:
+Frameset_14a20::
 	db  30,  4
 	db $ff
 
@@ -1314,13 +1314,13 @@ OAM_14a82::
 	frame_oam -31,  -4, $40, 0 | OAMF_XFLIP
 	db $80
 
-Frameset_14cbe:
+Frameset_14cbe::
 	db   1,  1
 	db   2,  2
 	db   3,  1
 	db $ff
 
-Frameset_14cc5:
+Frameset_14cc5::
 	db   3,  1
 	db   2,  1
 	db   1,  1
@@ -1365,21 +1365,21 @@ Frameset_14cf6::
 	db  19,  2
 	db $ff
 
-Frameset_14d0b:
+Frameset_14d0b::
 	db   6,  3
 	db   7,  3
 	db $ff
 
-Frameset_14d10:
+Frameset_14d10::
 	db   8,  3
 	db   7,  3
 	db $ff
 
-Frameset_14d15:
+Frameset_14d15::
 	db   7,  4
 	db $ff
 
-Frameset_14d18:
+Frameset_14d18::
 	db   2,  4
 	db $ff
 
@@ -3388,7 +3388,7 @@ Frameset_16063:
 	db  56,  1
 	db $ff
 
-OAM_1606a:
+OAM_1606a::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -3712,7 +3712,7 @@ OAM_1606a:
 	frame_oam -27, -18, $fe, 0 | OAMF_XFLIP | OAMF_YFLIP
 	db $80
 
-Frameset_163ec:
+Frameset_163ec::
 	db   0,  3
 	db   1,  3
 	db   2,  1
@@ -3794,7 +3794,7 @@ Frameset_16441:
 	db  21,  2
 	db $ff
 
-OAM_1644a:
+OAM_1644a::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -4112,7 +4112,7 @@ Frameset_16737:
 	db  17,  6
 	db $ff
 
-OAM_1673c:
+OAM_1673c::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2
@@ -4514,14 +4514,14 @@ Frameset_16b49:
 	db  23,  2
 	db $ff
 
-Frameset_16b5a:
+Frameset_16b5a::
 	db  24,  2
 	db  25,  2
 	db  26,  2
 	db  27,  2
 	db $ff
 
-Frameset_16b63:
+Frameset_16b63::
 	db  28,  2
 	db  29,  2
 	db  30,  2

@@ -284,7 +284,7 @@ Frameset_681cd:
 	db  73,  3
 	db $ff
 
-Frameset_681d2:
+Frameset_681d2::
 	db   0, 12
 	db   1, 12
 	db   0, 12
@@ -774,7 +774,7 @@ Frameset_68430:
 	db   9,  8
 	db $ff
 
-Frameset_68439:
+Frameset_68439::
 	db   0,  8
 	db   1, 12
 	db   2,  8
@@ -871,7 +871,7 @@ Frameset_684b7:
 	db  31,  4
 	db $ff
 
-Frameset_684ba:
+Frameset_684ba::
 	db  32,  4
 	db  33,  6
 	db  34,  6
@@ -980,7 +980,7 @@ Frameset_6855f:
 	db  44, 127
 	db $ff
 
-Frameset_68562:
+Frameset_68562::
 	db   0, 12
 	db   1, 12
 	db   0, 12
@@ -2069,7 +2069,7 @@ Frameset_68b01:
 	db   5,  8
 	db $ff
 
-Frameset_68b12:
+Frameset_68b12::
 	db   0, 20
 	db   1, 20
 	db $ff
@@ -3447,7 +3447,7 @@ Frameset_6919e:
 	db   2,  8
 	db $ff
 
-Frameset_691a7:
+Frameset_691a7::
 	db   4, 100
 	db $ff
 
@@ -3465,11 +3465,11 @@ Frameset_691b3:
 	db   6,  6
 	db $ff
 
-Frameset_691bc:
+Frameset_691bc::
 	db   9, 100
 	db $ff
 
-Frameset_691bf:
+Frameset_691bf::
 	db   5, 24
 	db  10, 24
 	db $ff
@@ -3702,7 +3702,7 @@ Frameset_692de:
 	db  27,  6
 	db $ff
 
-Frameset_692e7:
+Frameset_692e7::
 	db   1, 17
 	db   2, 20
 	db   3, 20
@@ -3746,7 +3746,7 @@ Frameset_69318:
 	db   7,  2
 	db $ff
 
-Frameset_69335:
+Frameset_69335::
 	db   8,  5
 	db   9,  5
 	db  10,  5
@@ -5450,7 +5450,7 @@ Frameset_69b2f:
 	db   2, 14
 	db $ff
 
-Frameset_69b38:
+Frameset_69b38::
 	db   3, 10
 	db   4, 14
 	db   3, 10
@@ -5480,7 +5480,7 @@ Frameset_69b57:
 	db  11, 14
 	db $ff
 
-Frameset_69b60:
+Frameset_69b60::
 	db  12, 10
 	db  13, 14
 	db  12, 10
@@ -5528,7 +5528,7 @@ Frameset_69b91:
 	db   9, 20
 	db $ff
 
-Frameset_69ba0:
+Frameset_69ba0::
 	db   3, 20
 	db  26,  4
 	db   3,  4
@@ -5603,14 +5603,14 @@ Frameset_69c01:
 	db   3,  6
 	db $ff
 
-Frameset_69c0a:
+Frameset_69c0a::
 	db   0,  6
 	db   1,  6
 	db   2,  6
 	db   3,  6
 	db $ff
 
-Frameset_69c13:
+Frameset_69c13::
 	db   4,  6
 	db   5,  6
 	db   6,  6
@@ -6472,7 +6472,7 @@ Frameset_6a04f:
 	db  17, 127
 	db $ff
 
-Frameset_6a052:
+Frameset_6a052::
 	db   0,  3
 	db   1,  3
 	db   2,  3
@@ -6481,7 +6481,7 @@ Frameset_6a052:
 	db   5,  3
 	db $ff
 
-Frameset_6a05f:
+Frameset_6a05f::
 	db   6,  3
 	db   7,  3
 	db   8,  3

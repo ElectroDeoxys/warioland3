@@ -1635,25 +1635,20 @@ w2d069::
 w2d06a::
 	db
 
-wLevel1Coords::
-wLevel1YCoord:: db
-wLevel1XCoord:: db
+wOWCoords1::
+wOWYCoord1:: db
+wOWXCoord1:: db
 
-wLevel2Coords::
-wLevel2YCoord:: db
-wLevel2XCoord:: db
+wOWCoords2::
+wOWYCoord2:: db
+wOWXCoord2:: db
 
-w2d06f::
-	db
+w2d06f:: db
+w2d070:: db
 
-w2d070::
-	db
-
-w2d071::
-	db
-
-w2d072::
-	db
+; PATH_* constant to connect 2 OW map points
+wOWPathShape:: db
+w2d072:: db
 
 wLevelArrowDirections1:: db
 w2d074::                 db
@@ -1727,32 +1722,16 @@ w2d096::
 
 	ds $9
 
-w2d0a0::
-	db
+w2d0a0:: db
+w2d0a1:: db
+w2d0a2:: db
+w2d0a3:: db
+w2d0a4:: db
+w2d0a5:: db
+w2d0a6:: db
 
-w2d0a1::
-	db
-
-w2d0a2::
-	db
-
-w2d0a3::
-	db
-
-w2d0a4::
-	db
-
-w2d0a5::
-	db
-
-w2d0a6::
-	db
-
-w2d0a7::
-	db
-
-w2d0a8::
-	db
+wOWYDistance:: db
+wOWXDistance:: db
 
 	ds $7
 
@@ -2064,14 +2043,10 @@ SECTION "WRAM2 2", WRAMX
 
 UNION
 
-w2d800::
-wLCDCFlagsToFlip::
-	db
-
-w2d801::
-	db
-
-	ds $7e
+w2d800:: ow_unk_struct w2d800
+w2d820:: ow_unk_struct w2d820
+w2d840:: ow_unk_struct w2d840
+w2d860:: ow_unk_struct w2d860
 
 w2d880::
 	ds $9
@@ -2084,11 +2059,8 @@ w2d88b::
 
 	ds $2
 
-w2d88e::
-	db
-
-w2d88f::
-	db
+w2d88e:: db
+w2d88f:: db
 
 w2d890::
 	db
@@ -2257,11 +2229,15 @@ w2dfff::
 
 NEXTU
 
-	ds 2
+wLCDCFlagsToFlip::
+	db
+
+w2d801::
+	ds $1
 
 wColourFadeDiff::           db
 wColourFadeAccumulator::    db
-	ds 2
+	ds $2
 wDayNightTransistionSteps:: db
 
 w2d807::

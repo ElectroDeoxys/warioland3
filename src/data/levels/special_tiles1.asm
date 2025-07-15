@@ -1,7 +1,7 @@
-SpecialTiles0:
+SpecialTiles0::
 INCBIN "gfx/levels/special_tiles0.2bpp"
 
-SpecialTiles1:
+SpecialTiles1::
 INCBIN "gfx/levels/special_tiles1.2bpp"
 
 SpecialTiles2:

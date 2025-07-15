@@ -1895,7 +1895,7 @@ Tilemap_85928: INCBIN "data/bgmaps/map_85928.tilemap" ; unreferenced
 
 Func_85a68:
 .asm_85a68
-	ld hl, wSceneWarioDuration
+	ld hl, wOWUIObj1Duration
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
@@ -1917,7 +1917,7 @@ Func_85a68:
 	dec a
 	ld [wOWUIObj1Attributes], a
 	ret z
-	ld de, wSceneWarioDuration
+	ld de, wOWUIObj1Duration
 	call Func_85a91
 	call Func_85a91
 	jr .asm_85a68
@@ -2334,7 +2334,7 @@ Pals_86acd:
 	rgb 31, 11,  8
 	rgb  7,  2, 20
 
-Pals_86ad5:
+Pals_86ad5::
 	rgb  0,  0,  0
 	rgb 31, 31, 31
 	rgb 31, 15, 10

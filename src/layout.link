@@ -134,7 +134,11 @@ ROMX $2a
 ROMX $2b
 	"Bank 2B"
 ROMX $2c
-	"Bank 2C"
+	"Temple/Prologue Gfx"
+	"Hidden Figure Text 1"
+	"OW BG Maps 1"
+	"Hidden Figure Text 2"
+	"OW BG Maps 2"
 ROMX $2d
 	"Bank 2D"
 ROMX $2e

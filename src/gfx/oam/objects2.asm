@@ -182,7 +182,7 @@ OAM_184000:
 	frame_oam -32,  -4, $1a, 4 | OAMF_BANK1 | OAMF_XFLIP
 	db $80
 
-OAM_18422f:
+OAM_18422f::
 	dw .frame_0
 	dw .frame_1
 	dw .frame_2

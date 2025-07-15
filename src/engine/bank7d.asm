@@ -298,7 +298,7 @@ Pals_1f41c2:
 PauseMenuGfx:
 INCBIN "gfx/pause/pause_menu.2bpp.rle"
 
-ActionHelpOwlGfx:
+ActionHelpOwlGfx::
 INCBIN "gfx/pause/action_help_owl.2bpp"
 
 ActionHelpRailGfx:
