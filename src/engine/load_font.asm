@@ -4,13 +4,13 @@ LoadFontTiles::
 	call Decompress
 	ret
 
-LoadGBIncompatibleScreenGfx:
+LoadGBIncompatibleScreenGfx::
 	ld hl, GBIncompatibleGfx
 	ld bc, v0Tiles0
 	call Decompress
 	ret
 
-LoadGBIncompatibleScreenMap:
+LoadGBIncompatibleScreenMap::
 	ld hl, GBIncompatibleTilemap
 	ld bc, v0BGMap0
 	call Decompress

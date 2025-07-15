@@ -5,6 +5,7 @@ src/action_help.o \
 src/audio.o \
 src/clear.o \
 src/credits.o \
+src/gb_incompatible.o \
 src/golf.o \
 src/home.o \
 src/level.o \

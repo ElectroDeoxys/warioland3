@@ -17,12 +17,6 @@ INCLUDE "engine/credits/common.asm"
 INCLUDE "engine/golf_building/common.asm"
 
 
-SECTION "GB Incompatible", ROMX
-
-INCLUDE "engine/gb_incompatible/state_table.asm"
-INCLUDE "engine/gb_incompatible/core.asm"
-
-
 SECTION "Common 2", ROMX
 
 INCLUDE "engine/game_over/common.asm"
@@ -95,13 +89,6 @@ INCLUDE "engine/load_font.asm"
 SECTION "Font", ROMX
 
 FontGfx:: INCBIN "gfx/font.2bpp.rle"
-
-
-SECTION "GB Incompatible Gfx", ROMX
-
-GBIncompatibleGfx:     INCBIN "gfx/gb_incompatible.2bpp.rle"
-GBIncompatibleTilemap: INCBIN "data/bgmaps/gb_incompatible.tilemap.rle"
-GBIncompatibleAttrmap: INCBIN "data/bgmaps/gb_incompatible.attrmap.rle" ; unreferenced
 
 
 SECTION "Language Selection BG Maps", ROMX

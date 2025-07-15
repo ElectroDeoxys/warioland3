@@ -1,4 +1,4 @@
-GBIncompatibleStateTable:
+GBIncompatibleStateTable::
 	ld a, [wSubState]
 	jumptable
 
