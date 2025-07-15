@@ -1,4 +1,4 @@
-Frameset_76b5:
+Frameset_76b5::
 	db   0,  8
 	db   5,  8
 	db   6,  8

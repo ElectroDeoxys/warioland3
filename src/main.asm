@@ -10,7 +10,7 @@ INCLUDE "engine/level/common.asm"
 INCLUDE "engine/clear/common.asm"
 INCLUDE "engine/pause/common.asm"
 INCLUDE "engine/golf/common.asm"
-INCLUDE "engine/epilogue/state_table.asm"
+INCLUDE "engine/overworld/epilogue/state_table.asm"
 INCLUDE "engine/action_help/common.asm"
 INCLUDE "engine/level/key_delay.asm"
 INCLUDE "engine/credits/common.asm"
@@ -152,12 +152,6 @@ ActionHelpTilemap: INCBIN "data/bgmaps/action_help.tilemap.rle"
 ActionHelpAttrmap: INCBIN "data/bgmaps/action_help.attrmap.rle"
 
 INCLUDE "gfx/oam/action_help.asm"
-
-
-SECTION "Epilogue Gfx", ROMX
-
-INCLUDE "data/overworld/epilogue/oam.asm"
-INCLUDE "data/overworld/epilogue/framesets.asm"
 
 
 SECTION "Wario Gfx 1", ROMX

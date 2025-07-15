@@ -345,6 +345,17 @@ SECTION "Bank 56", ROMX
 INCLUDE "engine/bank56.asm"
 
 
+SECTION "Bank 76", ROMX
+
+INCLUDE "engine/bank76.asm"
+
+
+SECTION "Epilogue Gfx", ROMX
+
+INCLUDE "data/overworld/epilogue/oam.asm"
+INCLUDE "data/overworld/epilogue/framesets.asm"
+
+
 SECTION "Bank 57", ROMX
 
 OldMan2Gfx:      INCBIN "gfx/cutscenes/old_man2.2bpp"
@@ -370,8 +381,3 @@ TextEN_OldManThankYou: INCBIN "text/en/old_man_thank_you.tilemap.rle"
 Text_15e437:
 	db "@グ@グ@グ@グ@グ@グ@グ@グ"
 	db "ギグ:"
-
-
-SECTION "Bank 76", ROMX
-
-INCLUDE "engine/bank76.asm"
