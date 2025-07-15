@@ -9,6 +9,7 @@ src/game_over.o \
 src/gb_incompatible.o \
 src/golf.o \
 src/home.o \
+src/language_selection.o \
 src/level.o \
 src/main.o \
 src/pause.o \

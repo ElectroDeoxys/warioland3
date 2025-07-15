@@ -18,14 +18,14 @@ LoadGBIncompatibleScreenMap::
 	ldh [rBGP], a
 	ret
 
-LoadFontPals:
+LoadFontPals::
 	ld hl, Pals_1f3610
 	call LoadPalsToTempPals1
 	ld hl, Pals_1f3610
 	call LoadPalsToTempPals2
 	ret
 
-LoadLanguageSelectionText:
+LoadLanguageSelectionText::
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, LanguageSelection2TextMap

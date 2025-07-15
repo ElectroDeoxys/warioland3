@@ -23,23 +23,10 @@ INCLUDE "engine/game_over/common.asm"
 INCLUDE "engine/perfect/common.asm"
 
 
-SECTION "Language Selection", ROMX
-
-INCLUDE "engine/language_selection/state_table.asm"
-INCLUDE "engine/language_selection/init.asm"
-INCLUDE "engine/language_selection/core.asm"
-
-
 SECTION "Print Counts", ROMX
 
 INCLUDE "engine/print_counts.asm"
 INCLUDE "engine/overworld/level_select.asm"
-
-
-SECTION "Language Selection Gfx Engine", ROMX
-
-INCLUDE "engine/language_selection/vblank.asm"
-INCLUDE "engine/language_selection/load_oam.asm"
 
 
 SECTION "Level Treasure Requirements", ROMX
@@ -60,12 +47,6 @@ INCLUDE "engine/load_font.asm"
 SECTION "Font", ROMX
 
 FontGfx:: INCBIN "gfx/font.2bpp.rle"
-
-
-SECTION "Language Selection BG Maps", ROMX
-
-LanguageSelection1TextMap:: INCBIN "data/bgmaps/text/language_selection1.tilemap"
-LanguageSelection2TextMap:: INCBIN "data/bgmaps/text/language_selection2.tilemap"
 
 
 SECTION "Wario Gfx 1", ROMX
