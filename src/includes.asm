@@ -1,3 +1,5 @@
+INCLUDE "constants/hardware.inc"
+
 INCLUDE "charmaps.asm"
 
 INCLUDE "macros/asserts.asm"
@@ -15,8 +17,6 @@ INCLUDE "constants/audio_constants.asm"
 INCLUDE "constants/event_constants.asm"
 INCLUDE "constants/gfx_constants.asm"
 INCLUDE "constants/golf_constants.asm"
-INCLUDE "constants/hardware.inc"
-INCLUDE "constants/input_constants.asm"
 INCLUDE "constants/level_constants.asm"
 INCLUDE "constants/menu_constants.asm"
 INCLUDE "constants/misc_constants.asm"

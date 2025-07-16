@@ -53,7 +53,7 @@ _InitCutscene:
 	ld a, [wLCDCFlagsToFlip]
 	ld b, a
 	and a
-	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_WIN9C00 | LCDCF_ON
+	ld a, LCDC_BG_ON | LCDC_OBJ_ON | LCDC_OBJ_16 | LCDC_WIN_9C00 | LCDC_ON
 	jr z, .no_lcd_bit_flips
 	xor b
 .no_lcd_bit_flips
@@ -251,7 +251,7 @@ CutsceneInitFunctions:
 	ld b, BANK(Pals_b8200)
 	call LoadFarPalsToTempPals1
 
-	ld a, LCDCF_BG9C00
+	ld a, LCDC_BG_9C00
 	ld [wLCDCFlagsToFlip], a
 	call LoadCutscenes2Gfx
 	call Func_9ca6a
@@ -344,7 +344,7 @@ CutsceneInitFunctions:
 	ld b, BANK(Pals_b8e00)
 	ld hl, Pals_b8e00
 	call LoadFarPalsToTempPals2
-	ld a, LCDCF_BG9C00
+	ld a, LCDC_BG_9C00
 	ld [wLCDCFlagsToFlip], a
 	call LoadCutscenes4Gfx
 	jp Func_9cbbc
@@ -356,7 +356,7 @@ CutsceneInitFunctions:
 	ld b, BANK(Pals_b8a40)
 	ld hl, Pals_b8a40
 	call LoadFarPalsToTempPals2
-	ld a, LCDCF_BG9C00
+	ld a, LCDC_BG_9C00
 	ld [wLCDCFlagsToFlip], a
 	call LoadCutscenes2Gfx
 	call Func_9ca6a
@@ -370,7 +370,7 @@ CutsceneInitFunctions:
 	ld hl, Pals_b8e80
 	call LoadFarPalsToTempPals2
 .asm_9c367
-	ld a, LCDCF_WINON
+	ld a, LCDC_WIN_ON
 	ld [wLCDCFlagsToFlip], a
 	ld a, $28
 	ldh [rWY], a
@@ -737,7 +737,7 @@ CutsceneInitFunctions:
 	jp Func_9e91a
 
 .InitCutscene44:
-	ld a, LCDCF_BG9C00
+	ld a, LCDC_BG_9C00
 	ld [wLCDCFlagsToFlip], a
 	ld b, BANK(Pals_b8200)
 	ld hl, Pals_b8200
@@ -1113,16 +1113,16 @@ Func_9cc17:
 	ret
 
 SetBGPriorityOnTopRows_Vram1:
-	ld d, BGF_BANK1 | BGF_PRI
+	ld d, BG_BANK1 | BG_PRIO
 	jr SetBGPriorityOnTopRows
 SetBGPriorityOnTopRows_Vram0:
-	ld d, BGF_BANK0 | BGF_PRI
+	ld d, BG_BANK0 | BG_PRIO
 ;	fallthrough
 SetBGPriorityOnTopRows:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	hlbgcoord 0, 0, v1BGMap0
-	ld bc, 5 * BG_MAP_WIDTH
+	ld bc, 5 * TILEMAP_WIDTH
 	ld a, d
 	call WriteAToHL_BCTimes
 	xor a
@@ -1133,8 +1133,8 @@ SetBGPriorityOnTopRows_BGMap1:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	hlbgcoord 0, 0, v1BGMap1
-	ld bc, 5 * BG_MAP_WIDTH
-	ld a, BGF_BANK0 | BGF_PRI
+	ld bc, 5 * TILEMAP_WIDTH
+	ld a, BG_BANK0 | BG_PRIO
 	call WriteAToHL_BCTimes
 	xor a
 	ldh [rVBK], a
@@ -1145,7 +1145,7 @@ SetBGPriorityOnTopRows_BGMap1:
 Func_9cc4f:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld d, BGF_BANK0 | BGF_PRI
+	ld d, BG_BANK0 | BG_PRIO
 	hlbgcoord 0, 5
 	ld e, 7 ; num rows
 .loop_outer
@@ -1157,7 +1157,7 @@ Func_9cc4f:
 	jr nz, .loop_inner
 	dec e
 	jr z, .done
-	ld a, BG_MAP_WIDTH - 6
+	ld a, TILEMAP_WIDTH - 6
 	add l
 	ld l, a
 	ld a, 0
@@ -1200,7 +1200,7 @@ VBlank_Cutscene:
 
 .Func:
 	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	ld a, [wSCY]
 	ldh [rSCY], a
 	ld a, [wSCX]
@@ -1309,11 +1309,11 @@ Func_9cd40:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempPals1)
 	ld [wPalConfig1SourceLo], a
-	ld a, BCPSF_AUTOINC | palette 0
+	ld a, BGPI_AUTOINC | palette 0
 	ld [wPalConfig1Index], a
 	ld a, 8
 	ld [wPalConfig1Number], a
-	ld a, LOW(rBCPS)
+	ld a, LOW(rBGPI)
 	ld [wPalConfig1Register], a
 	ret
 
@@ -1322,11 +1322,11 @@ Func_9cd5a:
 	ld [wPalConfig2SourceHi], a
 	ld a, LOW(wTempPals2)
 	ld [wPalConfig2SourceLo], a
-	ld a, OCPSF_AUTOINC | palette 0
+	ld a, OBPI_AUTOINC | palette 0
 	ld [wPalConfig2Index], a
 	ld a, 8
 	ld [wPalConfig2Number], a
-	ld a, LOW(rOCPS)
+	ld a, LOW(rOBPI)
 	ld [wPalConfig2Register], a
 	ret
 
@@ -2113,11 +2113,11 @@ Cutscene19Func:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempPals1 palette 2)
 	ld [wPalConfig1SourceLo], a
-	ld a, BCPSF_AUTOINC | palette 2
+	ld a, BGPI_AUTOINC | palette 2
 	ld [wPalConfig1Index], a
 	ld a, 1
 	ld [wPalConfig1Number], a
-	ld a, LOW(rBCPS)
+	ld a, LOW(rBGPI)
 	ld [wPalConfig1Register], a
 	jp AdvanceCutsceneFunc
 
@@ -2217,11 +2217,11 @@ Cutscene11Func:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempPals1)
 	ld [wPalConfig1SourceLo], a
-	ld a, BCPSF_AUTOINC | palette 0
+	ld a, BGPI_AUTOINC | palette 0
 	ld [wPalConfig1Index], a
 	ld a, 8
 	ld [wPalConfig1Number], a
-	ld a, LOW(rBCPS)
+	ld a, LOW(rBGPI)
 	ld [wPalConfig1Register], a
 	jp AdvanceCutsceneFunc
 
@@ -2812,7 +2812,7 @@ Cutscene02Func:
 	jp WaitCutsceneFunc
 
 .Func_9d7e6:
-	ld a, LCDCF_BG9C00
+	ld a, LCDC_BG_9C00
 	ld [wLCDCFlagsToFlip], a
 	jp AdvanceCutsceneFunc
 
@@ -2821,7 +2821,7 @@ Cutscene02Func:
 	jp WaitCutsceneFunc
 
 .Func_9d7f3:
-	ld a, LCDCF_BG9C00
+	ld a, LCDC_BG_9C00
 	ld [wLCDCFlagsToFlip], a
 	xor a
 	ld hl, wSceneObj2State
@@ -7307,7 +7307,7 @@ Func_9f8da:
 	ld a, [wSceneObj2Frame]
 	cp $07
 	ret nz
-	ld a, LCDCF_BG9C00
+	ld a, LCDC_BG_9C00
 	ld [wLCDCFlagsToFlip], a
 	ld [hl], $01
 	ret

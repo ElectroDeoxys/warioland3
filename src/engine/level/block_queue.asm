@@ -224,7 +224,7 @@ Func_bb85:
 	inc e
 
 	; bottom-left tile
-	ld bc, BG_MAP_WIDTH
+	ld bc, TILEMAP_WIDTH
 	add hl, bc
 	ld a, h
 	and $fb

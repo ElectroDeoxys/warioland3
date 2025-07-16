@@ -119,7 +119,7 @@ UpdateGameOverScreen:
 
 .asm_db38a
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr z, .asm_db3a9
 	play_sfx SFX_SELECTION
 	ld hl, wGameOverWarioFramesetOffset

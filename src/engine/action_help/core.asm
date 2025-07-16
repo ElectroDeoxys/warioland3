@@ -136,7 +136,7 @@ InitActionHelp:
 	sla e
 	ld d, $00
 	add hl, de
-	ld e, BG_MAP_WIDTH
+	ld e, TILEMAP_WIDTH
 	ld a, $03
 	ld [hli], a
 	ld [hld], a
@@ -157,7 +157,7 @@ InitActionHelp:
 	hlbgcoord 0, 16, v1BGMap1
 	sla e
 	add hl, de
-	ld e, BG_MAP_WIDTH
+	ld e, TILEMAP_WIDTH
 	ld a, b
 	ld [hli], a
 	ld [hld], a
@@ -169,7 +169,7 @@ InitActionHelp:
 	xor a
 	ldh [rVBK], a
 	call ClearUnusedVirtualOAM
-	ld a, LCDCF_ON | LCDCF_BG9C00 | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
+	ld a, LCDC_ON | LCDC_BG_9C00 | LCDC_OBJ_16 | LCDC_OBJ_ON | LCDC_BG_ON
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]
@@ -187,7 +187,7 @@ UpdateActionHelp:
 	and $80
 	jr nz, .skip_handle_input
 	ld a, [wJoypadPressed]
-	and A_BUTTON | B_BUTTON | START
+	and PAD_A | PAD_B | PAD_START
 	jp nz, .CloseActionHelp
 
 .skip_handle_input

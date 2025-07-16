@@ -26,10 +26,10 @@ ClearTransformationValues::
 ; recovering from Blind transformation
 .RestoreBlindPalettes:
 	ld hl, wTempPals1
-	ld a, BCPSF_AUTOINC | palette 0
-	ldh [rBCPS], a
+	ld a, BGPI_AUTOINC | palette 0
+	ldh [rBGPI], a
 	ld b, 8
-	ld c, LOW(rBCPD)
+	ld c, LOW(rBGPD)
 
 .loop_copy_bg_pals
 	wait_ppu_busy
@@ -42,10 +42,10 @@ ENDR
 	jr nz, .loop_copy_bg_pals
 
 	ld hl, wTempPals2 palette 3
-	ld a, OCPSF_AUTOINC | palette 3
-	ldh [rOCPS], a
+	ld a, OBPI_AUTOINC | palette 3
+	ldh [rOBPI], a
 	ld b, 4
-	ld c, LOW(rOCPD)
+	ld c, LOW(rOBPD)
 
 .loop_copy_ob_pals
 	wait_ppu_busy

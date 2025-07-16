@@ -256,7 +256,7 @@ UpdateLevel:
 	ret nz
 
 	ld a, [wJoypadPressed]
-	and SELECT | START
+	and PAD_SELECT | PAD_START
 	ret z
 	ld a, [wTransformation]
 	cp TRANSFORMATION_BLIND

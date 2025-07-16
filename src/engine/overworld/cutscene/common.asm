@@ -17,7 +17,7 @@ UpdateCutscene:
 	cp $01
 	ret c
 	ld a, [wJoypadPressed]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	ret z
 	; b btn pressed
 	pop hl ; skip rest of UpdateCutscene

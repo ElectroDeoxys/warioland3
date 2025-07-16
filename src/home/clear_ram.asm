@@ -21,7 +21,7 @@ ClearWRAM::
 	ld e, 1 ; WRAM1
 .loop
 	ld a, e
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	xor a
 	ld hl, $d000
 	ld bc, $1000
@@ -30,5 +30,5 @@ ClearWRAM::
 	bit 3, e
 	jr z, .loop
 	xor a ; WRAM0
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	ret

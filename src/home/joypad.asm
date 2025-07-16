@@ -5,12 +5,12 @@ UpdateJoypad::
 
 ; can only get four inputs at a time
 ; take d-pad first
-	ld a, P1F_GET_DPAD
-	ldh [rP1], a
+	ld a, JOYP_GET_CTRL_PAD
+	ldh [rJOYP], a
 
 ; read a couple of times to give some time
 REPT 4
-	ldh a, [rP1]
+	ldh a, [rJOYP]
 ENDR
 
 ; the Joypad register output is in the lo nybble (inverted)
@@ -22,12 +22,12 @@ ENDR
 
 ; buttons make 8 total inputs (A, B, Select, Start)
 ; we can fit this into one byte
-	ld a, P1F_GET_BTN
-	ldh [rP1], a
+	ld a, JOYP_GET_BUTTONS
+	ldh [rJOYP], a
 
 ; read a couple of times to give some time
 REPT 10
-	ldh a, [rP1]
+	ldh a, [rJOYP]
 ENDR
 
 ; input is in the lo nybble
@@ -47,6 +47,6 @@ ENDR
 	ld [wJoypadDown], a
 
 ; reset joypad
-	ld a, P1F_GET_NONE
-	ldh [rP1], a
+	ld a, JOYP_GET_NONE
+	ldh [rJOYP], a
 	ret

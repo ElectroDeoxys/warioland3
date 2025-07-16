@@ -117,7 +117,7 @@ InitIntroSequence:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	hlbgcoord 4, 12
-	ld de, BG_MAP_WIDTH
+	ld de, TILEMAP_WIDTH
 	ld c, 2
 .loop_outer
 	push hl
@@ -155,7 +155,7 @@ InitIntroSequence:
 	call CopyHLToDE
 	pop de
 	ld a, e
-	add BG_MAP_WIDTH
+	add TILEMAP_WIDTH
 	ld e, a
 	ld a, d
 	adc 0

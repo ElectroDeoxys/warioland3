@@ -1,7 +1,7 @@
 ; hl = BG map address
 PrintNumberCoins::
-	ld bc, -BG_MAP_WIDTH
-	ld de, BG_MAP_WIDTH
+	ld bc, -TILEMAP_WIDTH
+	ld de, TILEMAP_WIDTH
 	ld a, [wNumCoins]
 	and $0f ; hundreds
 	add a
@@ -87,8 +87,8 @@ GetOWLevelCollectedTreasures::
 	ret
 
 PrintNumCollectedTreasures::
-	ld bc, -BG_MAP_WIDTH
-	ld de, BG_MAP_WIDTH
+	ld bc, -TILEMAP_WIDTH
+	ld de, TILEMAP_WIDTH
 
 	; hundreds
 	ld a, [wNumCollectedTreasures + 0]

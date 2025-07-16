@@ -31,23 +31,23 @@ LevelVBlankFunc::
 	ld hl, wPendingDMASourceBank
 	ld a, [hli]
 	ld [rROMB0 + $100], a
-	ld c, LOW(rHDMA1)
+	ld c, LOW(rVDMA_SRC_HIGH)
 	ld a, [hli] ; wPendingDMASourcePtr
-	ld [$ff00+c], a ; rHDMA1
+	ld [$ff00+c], a ; rVDMA_SRC_HIGH
 	inc c
 	ld a, [hli]
-	ld [$ff00+c], a ; rHDMA2
+	ld [$ff00+c], a ; rVDMA_SRC_LOW
 	ld a, [hli] ; wPendingDMADestinationBank
 	ldh [rVBK], a
 	inc c
 	ld a, [hli] ; wPendingDMADestinationPtr
-	ld [$ff00+c], a ; rHDMA3
+	ld [$ff00+c], a ; rVDMA_DEST_HIGH
 	inc c
 	ld a, [hli]
-	ld [$ff00+c], a ; rHDMA4
+	ld [$ff00+c], a ; rVDMA_DEST_LOW
 	inc c
 	ld a, [hl] ; wPendingDMALength
-	ld [$ff00+c], a ; rHDMA5
+	ld [$ff00+c], a ; rVDMA_LEN
 
 	xor a
 	ld [wIsDMATransferPending], a

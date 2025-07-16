@@ -605,7 +605,7 @@ BlockFunc_DownPipe_Left:
 	and COLLISION_DOWN
 	jp z, BlockFunc_Solid
 	ld a, [wJoypadDown]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jp z, BlockFunc_Solid
 	ld a, [wWarioXPos + 1]
 	and $f0
@@ -631,7 +631,7 @@ BlockFunc_DownPipe_Right:
 	and COLLISION_DOWN
 	jp z, BlockFunc_Solid
 	ld a, [wJoypadDown]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jp z, BlockFunc_Solid
 	ld a, [wWarioXPos + 1]
 	and $f0
@@ -694,7 +694,7 @@ BlockFunc_UpPipe_Left:
 	and COLLISION_UNK5
 	jp z, BlockFunc_Solid
 	ld a, [wJoypadDown]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jp z, BlockFunc_Solid
 	ld a, [wWarioXPos + 1]
 	and $f0
@@ -720,7 +720,7 @@ BlockFunc_UpPipe_Right:
 	and COLLISION_UNK5
 	jp z, BlockFunc_Solid
 	ld a, [wJoypadDown]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jp z, BlockFunc_Solid
 	ld a, [wWarioXPos + 1]
 	and $f0
@@ -776,7 +776,7 @@ BlockFunc_Door:
 	bit COLLISION_UNK7_F, a
 	jp z, BlockFunc_Free
 	ld a, [wJoypadPressed]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jp z, BlockFunc_Free
 	ld a, [wWarioState]
 	cp WST_IDLING
@@ -798,7 +798,7 @@ BlockFunc_MinigameDoor:
 	bit COLLISION_UNK7_F, a
 	jp z, BlockFunc_Free
 	ld a, [wJoypadPressed]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jp z, BlockFunc_Free
 	ld a, [wWarioState]
 	cp WST_IDLING
@@ -819,7 +819,7 @@ Func_18624:
 	bit COLLISION_UNK7_F, a
 	jp z, BlockFunc_Free
 	ld a, [wJoypadPressed]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jp z, BlockFunc_Free
 	ld a, [wWarioState]
 	cp WST_IDLING
@@ -840,7 +840,7 @@ Func_1864e:
 	bit COLLISION_UNK7_F, a
 	jp z, BlockFunc_Free
 	ld a, [wJoypadPressed]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jp z, BlockFunc_Free
 	ld a, [wWarioState]
 	cp WST_IDLING
@@ -922,7 +922,7 @@ BlockFunc_UnderwaterDoor:
 	ld a, SUBMERSIBLE_WATER
 	ld [wWaterInteraction], a
 	ld a, [wJoypadPressed]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr z, .asm_18724
 	ld a, ROOMTRANSITION_UNDERWATER_DOOR | ROOMTRANSITIONF_DOOR | ROOMTRANSITIONF_RELOAD_OBJECTS
 	ld [wRoomTransitionParam], a
@@ -945,7 +945,7 @@ BlockFunc_18727:
 	ld a, SUBMERSIBLE_WATER
 	ld [wWaterInteraction], a
 	ld a, [wJoypadPressed]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr z, .asm_18752
 	ld a, ROOMTRANSITION_UNDERWATER_DOOR | ROOMTRANSITIONF_DOOR
 	ld [wRoomTransitionParam], a
@@ -967,7 +967,7 @@ Func_18755:
 	bit COLLISION_UNK7_F, a
 	jp z, BlockFunc_Free
 	ld a, [wJoypadPressed]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr z, .asm_1877b
 	ld a, ROOMTRANSITION_8 | ROOMTRANSITIONF_DOOR | ROOMTRANSITIONF_RELOAD_OBJECTS | ROOMTRANSITIONF_DELAY
 	ld [wRoomTransitionParam], a
@@ -979,7 +979,7 @@ BlockFunc_TreasureDoor:
 	and a
 	jp z, BlockFunc_Free
 	ld a, [wJoypadPressed]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jp z, BlockFunc_Free
 	ld a, [wTransformation]
 	and a

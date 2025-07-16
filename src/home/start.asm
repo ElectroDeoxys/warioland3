@@ -29,11 +29,11 @@ InitWithoutDemoPowerUpReset::
 
 	xor a
 	ldh [rVBK], a
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	ldh [rRP], a
 
 	; set lcd on and wait for VBlank
-	ld a, LCDCF_ON
+	ld a, LCDC_ON
 	ldh [rLCDC], a
 .wait_vblank
 	ldh a, [rLY]
@@ -41,7 +41,7 @@ InitWithoutDemoPowerUpReset::
 	jr nz, .wait_vblank
 
 	; enable BG and OBJ
-	ld a, LCDCF_BGON | LCDCF_OBJON
+	ld a, LCDC_BG_ON | LCDC_OBJ_ON
 	ldh [rLCDC], a
 	call ClearVRAM
 	call EnableDoubleSpeed
@@ -53,7 +53,7 @@ InitWithoutDemoPowerUpReset::
 	; is CGB
 	xor a
 	ldh [rVBK], a
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	ldh [rRP], a
 
 .clear_wram
@@ -66,7 +66,7 @@ InitWithoutDemoPowerUpReset::
 
 	; clear OAM
 	xor a
-	ld hl, _OAMRAM
+	ld hl, STARTOF(OAM)
 	ld bc, $100
 	call WriteAToHL_BCTimes
 
@@ -113,12 +113,12 @@ InitWithoutDemoPowerUpReset::
 
 	xor a
 	ldh [rIF], a
-	ld a, IEF_VBLANK
+	ld a, IE_VBLANK
 	ldh [rIE], a
 	call InitLCD
 
 	; enable SRAM
-	ld a, CART_SRAM_ENABLE
+	ld a, RAMG_SRAM_ENABLE
 	ld [rRAMG], a
 	farcall ValidateSaveData
 	ei
@@ -141,7 +141,7 @@ InitWithoutDemoPowerUpReset::
 	xor a
 	ld [wJoypadPressed], a
 	call FillWhiteBGPal
-	ld a, LCDCF_ON
+	ld a, LCDC_ON
 	ldh [rLCDC], a
 
 	; init audio
@@ -158,8 +158,8 @@ InitWithoutDemoPowerUpReset::
 
 ; restart the game if all four buttons are down
 	ld a, [wJoypadDown]
-	and BUTTONS
-	cp A_BUTTON | B_BUTTON | SELECT | START
+	and PAD_BUTTONS
+	cp PAD_A | PAD_B | PAD_SELECT | PAD_START
 	jr nz, .no_reset
 	; restart game
 	call TurnMusicOff

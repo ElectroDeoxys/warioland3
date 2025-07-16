@@ -342,18 +342,18 @@ UpdateState_GrabbingOwl:
 	and a
 	ret z
 	ld a, [wJoypadDown]
-	and D_PAD
+	and PAD_CTRL_PAD
 	jp nz, HandleWarioOwlInput
 UpdateWarioOwlDirection:
 	ld a, [wDirection]
 	and a
 	jr nz, .right
 ; left
-	ld a, D_LEFT
+	ld a, PAD_LEFT
 	ld [wSwimmingDirectionInput], a
 	jr SetState_OwlWario
 .right
-	ld a, D_RIGHT
+	ld a, PAD_RIGHT
 	ld [wSwimmingDirectionInput], a
 ;	fallthrough
 
@@ -371,7 +371,7 @@ SetState_OwlWario:
 	ld [wAnimationFrame], a
 
 	ld a, [wSwimmingDirectionInput]
-	and D_UP | D_DOWN
+	and PAD_UP | PAD_DOWN
 	jr nz, .asm_1ec3b0
 	ld a, [wDirection]
 	and a
@@ -400,7 +400,7 @@ SetState_OwlWario:
 
 UpdateState_OwlSlow:
 	ld a, [wJoypadPressed]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jp nz, Func_1ec64d
 	farcall Func_19b25
 	ld a, [wRoomTransitionParam]
@@ -413,7 +413,7 @@ UpdateState_OwlSlow:
 	cp WST_OWL_SLOW
 	ret nz
 	ld a, [wJoypadDown]
-	and D_PAD
+	and PAD_CTRL_PAD
 	jp nz, HandleWarioOwlInput
 	ld a, [wSFXLoopCounter]
 	sub 1
@@ -427,11 +427,11 @@ UpdateState_OwlSlow:
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
 	ld a, [wSwimmingDirectionInput]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .go_right
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr nz, .go_up
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr nz, .go_down
 
 ; go left
@@ -491,12 +491,12 @@ UpdateState_OwlSlow:
 	ret
 
 .asm_1ec4b0
-	ld a, D_DOWN
+	ld a, PAD_DOWN
 	ld [wSwimmingDirectionInput], a
 	jp SetState_OwlWario
 
 .asm_1ec4b8
-	ld a, D_UP
+	ld a, PAD_UP
 	ld [wSwimmingDirectionInput], a
 	jp SetState_OwlWario
 
@@ -506,27 +506,27 @@ HandleWarioOwlInput:
 	xor a
 	ld [wSFXLoopCounter], a
 	ld a, [wJoypadDown]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr nz, .d_up
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr nz, .d_down
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .d_right
 ; d_left
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
-	ld a, D_LEFT
+	ld a, PAD_LEFT
 	jr .asm_1ec4f0
 .d_right
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
-	ld a, D_RIGHT
+	ld a, PAD_RIGHT
 	jr .asm_1ec4f0
 .d_up
-	ld a, D_UP
+	ld a, PAD_UP
 	jr .asm_1ec4f0
 .d_down
-	ld a, D_DOWN
+	ld a, PAD_DOWN
 .asm_1ec4f0
 	ld [wSwimmingDirectionInput], a
 
@@ -538,7 +538,7 @@ HandleWarioOwlInput:
 	ld [wAnimationFrame], a
 
 	ld a, [wSwimmingDirectionInput]
-	and D_UP | D_DOWN
+	and PAD_UP | PAD_DOWN
 	jr nz, .up_or_down
 	ld a, [wDirection]
 	and a
@@ -567,7 +567,7 @@ HandleWarioOwlInput:
 
 UpdateState_OwlFast:
 	ld a, [wJoypadPressed]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jp nz, Func_1ec64d
 	farcall Func_19b25
 	ld a, [wRoomTransitionParam]
@@ -580,7 +580,7 @@ UpdateState_OwlFast:
 	cp WST_OWL_FAST
 	ret nz
 	ld a, [wJoypadDown]
-	and D_PAD
+	and PAD_CTRL_PAD
 	jp z, SetState_OwlWario
 	ld a, [wSFXLoopCounter]
 	sub 1
@@ -594,16 +594,16 @@ UpdateState_OwlFast:
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
 	ld a, [wSwimmingDirectionInput]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .going_right
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr nz, .going_up
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr nz, .going_down
 
 ; going left
 	ld a, [wJoypadDown]
-	and D_LEFT
+	and PAD_LEFT
 	jp z, HandleWarioOwlInput
 	farcall Func_197b1
 	ld a, [wWarioState]
@@ -618,7 +618,7 @@ UpdateState_OwlFast:
 
 .going_right
 	ld a, [wJoypadDown]
-	and D_RIGHT
+	and PAD_RIGHT
 	jp z, HandleWarioOwlInput
 	farcall Func_19741
 	ld a, [wWarioState]
@@ -633,7 +633,7 @@ UpdateState_OwlFast:
 
 .going_up
 	ld a, [wJoypadDown]
-	and D_UP
+	and PAD_UP
 	jp z, HandleWarioOwlInput
 	farcall CheckUpCollision
 	ld a, [wWarioState]
@@ -648,7 +648,7 @@ UpdateState_OwlFast:
 
 .going_down
 	ld a, [wJoypadDown]
-	and D_DOWN
+	and PAD_DOWN
 	jp z, HandleWarioOwlInput
 	farcall CheckCentreCollision
 	ld a, [wWarioState]
@@ -758,9 +758,9 @@ UpdateState_HangingRail:
 	hcall UpdateAnimation
 
 	ld a, [wJoypadPressed]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jp nz, RecoverFromTransformation_WithoutInvincibility
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, Func_1ede4d
 	ld a, [wAutoMoveState]
 	and a
@@ -929,9 +929,9 @@ SetState_SnowmanWalking:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 	ld a, [wJoypadDown]
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .left
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .right
 	ld a, [wDirection]
 	and a
@@ -1026,7 +1026,7 @@ UpdateState_SnowmanTurning:
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, SetState_SnowmanAirborne_Jump
 	ld a, [wAnimationEnded]
 	and a
@@ -2079,9 +2079,9 @@ SetState_BlindWalking:
 	ld [wOAMPtr + 1], a
 
 	ld a, [wJoypadDown]
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .asm_1ed443
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .asm_1ed44f
 
 	ld a, [wDirection]
@@ -2178,7 +2178,7 @@ UpdateState_BlindTurning:
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, Func_1ed558
 	ld a, [wAnimationEnded]
 	and a
@@ -2778,7 +2778,7 @@ Func_1edaca:
 	and a
 	jr nz, .asm_1edae4
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jp nz, SetState_BallTurning
 	ld a, HIGH(Frameset_1dd316)
 	ld [wFramesetPtr + 0], a
@@ -2787,7 +2787,7 @@ Func_1edaca:
 	jr Func_1edd24
 .asm_1edae4
 	ld a, [wJoypadDown]
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jp nz, SetState_BallTurning
 	ld a, HIGH(Frameset_1dd323)
 	ld [wFramesetPtr + 0], a
@@ -2800,7 +2800,7 @@ Func_1edaf8:
 	and a
 	jr nz, .asm_1edb12
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jp nz, SetState_BallTurning
 	ld a, HIGH(Frameset_1dd230)
 	ld [wFramesetPtr + 0], a
@@ -2809,7 +2809,7 @@ Func_1edaf8:
 	jr Func_1edd24
 .asm_1edb12
 	ld a, [wJoypadDown]
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jp nz, SetState_BallTurning
 	ld a, HIGH(Frameset_1dd295)
 	ld [wFramesetPtr + 0], a
@@ -3169,21 +3169,21 @@ Func_1ede69:
 
 HandleSnowmanInput:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, SetState_SnowmanAirborne_Jump
 	ld a, [wJoypadDown]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jp nz, SetState_SnowmanWalking
 	ret
 
 Func_1ede96:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, SetState_SnowmanAirborne_Jump
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .d_right
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .d_left
 	jp SetState_SnowmanIdle
 .d_right
@@ -3249,9 +3249,9 @@ Func_1edf47:
 	and a
 	jr nz, .asm_1edf70
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jp nz, SetState_FanTurning
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	ret z
 	farcall Func_197b1
 	ld a, b
@@ -3262,9 +3262,9 @@ Func_1edf47:
 	ret
 .asm_1edf70
 	ld a, [wJoypadDown]
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jp nz, SetState_FanTurning
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	ret z
 	farcall Func_19741
 	ld a, b
@@ -3276,21 +3276,21 @@ Func_1edf47:
 
 Func_1edf93:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, Func_1ed558
 	ld a, [wJoypadDown]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jp nz, SetState_BlindWalking
 	ret
 
 Func_1edfa4:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, Func_1ed558
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .asm_1edfba
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .asm_1edfe4
 	jp SetState_BlindIdling
 

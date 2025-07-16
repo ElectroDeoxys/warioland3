@@ -4,10 +4,10 @@ StoreBGPals::
 	ld e, a
 	ld hl, wTempBGPals
 	ld b, 8 palettes
-	ld c, LOW(rBCPD)
+	ld c, LOW(rBGPD)
 .loop
 	ld a, e
-	ldh [rBCPS], a
+	ldh [rBGPI], a
 	ld a, [$ff00+c]
 	ld [hli], a
 	inc e
@@ -21,10 +21,10 @@ StoreOBPals::
 	ld e, a
 	ld hl, wTempOBPals
 	ld b, 8 palettes
-	ld c, LOW(rOCPD)
+	ld c, LOW(rOBPD)
 .loop
 	ld a, e
-	ldh [rOCPS], a
+	ldh [rOBPI], a
 	ld a, [$ff00+c]
 	ld [hli], a
 	inc e
@@ -35,10 +35,10 @@ StoreOBPals::
 ; fills BG palette with just white
 FillWhiteBGPal::
 	ld hl, PalsWhite
-	ld a, BCPSF_AUTOINC | palette 0
-	ldh [rBCPS], a
+	ld a, BGPI_AUTOINC | palette 0
+	ldh [rBGPI], a
 	ld b, 8 palettes
-	ld c, LOW(rBCPD)
+	ld c, LOW(rBGPD)
 .loop
 	ld a, [hli]
 	ld [$ff00+c], a
@@ -49,10 +49,10 @@ FillWhiteBGPal::
 ; fills OB palette with just white
 FillWhiteOBPal::
 	ld hl, PalsWhite
-	ld a, OCPSF_AUTOINC | palette 0
-	ldh [rOCPS], a
+	ld a, OBPI_AUTOINC | palette 0
+	ldh [rOBPI], a
 	ld b, 8 palettes
-	ld c, LOW(rOCPD)
+	ld c, LOW(rOBPD)
 .loop
 	ld a, [hli]
 	ld [$ff00+c], a
@@ -89,10 +89,10 @@ SetWarioPal::
 	hcall CopyHLToDE_Short
 	pop hl
 
-	ld a, OCPSF_AUTOINC | palette 0
-	ldh [rOCPS], a
+	ld a, OBPI_AUTOINC | palette 0
+	ldh [rOBPI], a
 	ld b, 2
-	ld c, LOW(rOCPD)
+	ld c, LOW(rOBPD)
 
 ; apply OBJ palette
 .loop_copy
@@ -146,10 +146,10 @@ LoadCollectedTreasurePal_Level::
 	ld b, 1 palettes
 	farcall BANK(TreasurePals), CopyHLToDE_Short ; unneeded farcall
 	pop hl
-	ld a, OCPSF_AUTOINC | palette 4
+	ld a, OBPI_AUTOINC | palette 4
 	or c
-	ldh [rOCPS], a
-	ld c, LOW(rOCPD)
+	ldh [rOBPI], a
+	ld c, LOW(rOBPD)
 	wait_ppu_busy
 	wait_ppu_free
 ; apply OBJ palette
@@ -210,9 +210,9 @@ CopyAndApplyOBPals::
 	add a
 	add a
 	add a ; *8
-	or OCPSF_AUTOINC
-	ldh [rOCPS], a
-	ld c, LOW(rOCPD)
+	or OBPI_AUTOINC
+	ldh [rOBPI], a
+	ld c, LOW(rOBPD)
 
 .loop_copy
 	wait_ppu_busy
@@ -227,10 +227,10 @@ ENDR
 
 ApplyTempPals1ToBGPals::
 	ld hl, wTempPals1
-	ld a, BCPSF_AUTOINC | palette 0
-	ldh [rBCPS], a
+	ld a, BGPI_AUTOINC | palette 0
+	ldh [rBGPI], a
 	ld b, 8 palettes
-	ld c, LOW(rBCPD)
+	ld c, LOW(rBGPD)
 .loop
 	ld a, [hli]
 	ld [$ff00+c], a
@@ -240,10 +240,10 @@ ApplyTempPals1ToBGPals::
 
 ApplyTempPals2ToOBPals::
 	ld hl, wTempPals2
-	ld a, OCPSF_AUTOINC | palette 0
-	ldh [rOCPS], a
+	ld a, OBPI_AUTOINC | palette 0
+	ldh [rOBPI], a
 	ld b, 8 palettes
-	ld c, LOW(rOCPD)
+	ld c, LOW(rOBPD)
 .loop
 	ld a, [hli]
 	ld [$ff00+c], a

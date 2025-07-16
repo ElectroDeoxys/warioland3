@@ -95,7 +95,7 @@ UpdateState_Idling:
 	ret nz ; not idling
 
 	ld a, [wJoypadDown]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr z, .not_pressing_down
 ; pressing down, handle what state to change to
 	farcall Func_19b12
@@ -122,7 +122,7 @@ UpdateState_Idling:
 	and a
 	jr z, .skip_ladder
 	ld a, [wJoypadDown]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr z, .skip_ladder
 	; start climbing up ladder
 	farcall SetState_LadderClimbing
@@ -133,7 +133,7 @@ UpdateState_Idling:
 	and a
 	jr z, .handle_input
 	ld a, [wJoypadDown]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr z, .handle_input
 	farcall SetState_FenceMovingVertical
 	ret
@@ -211,9 +211,9 @@ UpdateState_Walking:
 
 UpdateState_Turning:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, StartJump_FromInput
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jp nz, SetState_Attacking
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
@@ -224,7 +224,7 @@ UpdateState_Turning:
 	ret z ; continue animation
 	; change state to either walking or idling
 	ld a, [wJoypadDown]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jp nz, SetState_Walking_ResetWalkVel
 	jp SetState_Idling
 
@@ -251,7 +251,7 @@ StartJump_FromSand:
 	ld a, JUMP_VEL_KNOCK_BACK
 	jr c, .got_jump_vel_table
 	ld hl, wJoypadDown
-	bit D_UP_F, [hl]
+	bit B_PAD_UP, [hl]
 	jr z, .got_jump_vel_table
 	ld a, JUMP_VEL_NORMAL
 .got_jump_vel_table
@@ -281,7 +281,7 @@ StartJump:
 	ld a, JUMP_VEL_NORMAL
 	jr c, .got_jump_vel_table
 	ld hl, wJoypadDown
-	bit D_UP_F, [hl]
+	bit B_PAD_UP, [hl]
 	jr z, .got_jump_vel_table
 	ld a, JUMP_VEL_HIGH_JUMP
 .got_jump_vel_table
@@ -374,7 +374,7 @@ UpdateState_Airborne:
 	and a
 	jr z, .no_ladder
 	ld a, [wJoypadDown]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr z, .no_ladder
 	farcall SetState_LadderClimbing
 	ret
@@ -389,7 +389,7 @@ UpdateState_Airborne:
 	and a
 	jr z, .handle_input
 	ld a, [wJoypadDown]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr z, .handle_input
 	farcall SetState_FenceMovingVertical
 	ret
@@ -414,7 +414,7 @@ UpdateState_Airborne:
 	jr c, .continue
 
 	ld a, [wJoypadDown]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr z, .continue
 	ld a, TRUE
 	ld [wIsSmashAttacking], a
@@ -429,7 +429,7 @@ UpdateState_Airborne:
 
 .check_still_smash_attacking
 	ld a, [wJoypadDown]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr nz, .continue
 	xor a ; FALSE
 	ld [wIsSmashAttacking], a
@@ -534,7 +534,7 @@ UpdateState_Airborne:
 	cp MAX_JUMP_VEL_INDEX
 	jr c, DoSoftLand
 	ld a, [wJoypadDown]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jr z, DoHardLand
 ;	fallthrough
 
@@ -555,7 +555,7 @@ DoSoftLand:
 
 .not_smash_attacking
 	ld a, [wJoypadDown]
-	and D_DOWN
+	and PAD_DOWN
 	jp nz, CrouchOrSlide
 	ld a, -27
 	ld [wCollisionBoxTop], a
@@ -566,7 +566,7 @@ DoSoftLand:
 	jp CrouchOrSlide
 .no_collision_on_top
 	ld a, [wJoypadDown]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jp nz, SetState_Walking
 	jp SetState_Idling
 
@@ -590,7 +590,7 @@ DoHardLand:
 
 .not_smash_attacking
 	ld a, [wJoypadDown]
-	and D_DOWN
+	and PAD_DOWN
 	jp nz, CrouchOrSlide
 
 	play_sfx SFX_LAND
@@ -725,7 +725,7 @@ SetState_SmashAttacking:
 
 UpdateState_Landing:
 	ld a, [wJoypadPressed]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jr nz, .walk
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
@@ -742,14 +742,14 @@ UpdateState_Landing:
 	and a
 	jr nz, .jumping_upwards
 	ld a, [wJoypadDown]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, .jump
 .jumping_upwards
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, .jump
 	ld a, [wJoypadDown]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jp nz, CrouchOrSlide
 	jp SetState_Idling
 
@@ -831,7 +831,7 @@ UpdateState_CrouchSliding:
 	ret nz ; not crouch sliding anymore
 
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, .try_jump
 
 	farcall CheckCentreCollision
@@ -930,7 +930,7 @@ UpdateState_CrouchSliding:
 
 .end_slide
 	ld a, [wJoypadDown]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr nz, .crouching
 	ld a, -27
 	ld [wCollisionBoxTop], a
@@ -1042,7 +1042,7 @@ UpdateState_Attacking:
 	ret
 .not_slippery
 	ld a, [wJoypadDown]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jp nz, SetState_Walking_ResetWalkVel
 	jp SetState_Idling
 
@@ -1315,7 +1315,7 @@ UpdateState_AttackingAirborne:
 	and a
 	jr nz, .asm_1cc58
 	ld a, [wJoypadPressed]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr z, .asm_1cc5f
 .asm_1cc51
 	xor a
@@ -1323,7 +1323,7 @@ UpdateState_AttackingAirborne:
 	jp StartFall
 .asm_1cc58
 	ld a, [wJoypadPressed]
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .asm_1cc51
 
 .asm_1cc5f
@@ -1749,7 +1749,7 @@ UpdateState_WaterSurfaceIdling:
 	ret nz ; not water idling anymore
 
 	ld a, [wJoypadDown]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jr nz, SetState_WaterSurfaceMoving
 	call ApplyWaterCurrentMovement
 	ret
@@ -1819,9 +1819,9 @@ UpdateState_WaterSurfaceMoving:
 
 .HandleDirectionalInput:
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .d_right
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .d_left
 	jp SetState_WaterSurfaceIdling
 
@@ -1923,13 +1923,13 @@ HandleWaterSurfaceFloatingMovement:
 	ret
 
 StartUpwardsUnderwaterThrusting:
-	ld a, D_UP
+	ld a, PAD_UP
 	ld [wSwimmingDirectionInput], a
 	jr SetState_UnderwaterThrusting
 
 StartUnderwaterThrusting:
 	ld a, [wJoypadDown]
-	and D_PAD
+	and PAD_CTRL_PAD
 	ld [wSwimmingDirectionInput], a
 ;	fallthrough
 
@@ -1957,9 +1957,9 @@ SetState_UnderwaterThrusting:
 	and a
 	jr z, .no_input
 	ld a, [wSwimmingDirectionInput] ; unnecessary
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .thrust_left
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .thrust_right
 	ld a, [wDirection]
 	and a
@@ -2007,11 +2007,11 @@ SetState_UnderwaterThrusting:
 	ld a, [wDirection]
 	cp DIRECTION_RIGHT
 	jr z, .facing_right
-	ld a, D_LEFT
+	ld a, PAD_LEFT
 	ld [wSwimmingDirectionInput], a
 	jr .thrust_left
 .facing_right
-	ld a, D_RIGHT
+	ld a, PAD_RIGHT
 	ld [wSwimmingDirectionInput], a
 	jr .thrust_right
 
@@ -2159,7 +2159,7 @@ UpdateState_WaterStung:
 	ld a, [wWarioStateCounter]
 	cp $78
 	ret c
-	ld a, D_UP
+	ld a, PAD_UP
 	ld [wc0e1], a
 .asm_1d3f8
 	xor a
@@ -2208,7 +2208,7 @@ SetState_TryingSubmerge:
 
 UpdateState_TryingSubmerge:
 	ld a, [wJoypadDown]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jp z, SetState_WaterSurfaceIdling
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
@@ -2295,7 +2295,7 @@ UpdateState_CrouchAirborne:
 	ret nz ; not crouch jumping anymore
 
 	ld a, [wJoypadDown]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr nz, .asm_1d583
 	ld a, -27
 	ld [wCollisionBoxTop], a
@@ -2375,7 +2375,7 @@ UpdateState_CrouchAirborne:
 
 	call DoSoftLand
 	ld a, [wJoypadDown]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	ret z
 	jp CrouchOrSlide
 
@@ -2551,7 +2551,7 @@ UpdateState_StungRecovery:
 	and a
 	jr nz, .asm_1d7b9
 	ld a, [wJoypadDown]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jp z, SetState_Idling
 .asm_1d7b9
 	ld a, -15
@@ -2698,7 +2698,7 @@ UpdateState_SmashAttacking:
 
 UpdateState_PickingUp:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, Func_1dd78
 	ld a, [wGrabState]
 	and a
@@ -2834,7 +2834,7 @@ UpdateState_GrabAirborne:
 
 .asm_1da8f
 	ld a, [wJoypadPressed]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jp nz, SetState_ThrowingAirborne
 	call HandleInput_Airborne
 	ld a, [wWarioState]
@@ -2851,7 +2851,7 @@ UpdateState_GrabAirborne:
 	cp FALLING_JUMP_VEL_INDEX
 	jr c, .asm_1dadc
 	ld a, [wJoypadDown]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr z, .asm_1dadc
 	ld a, TRUE
 	ld [wIsSmashAttacking], a
@@ -2867,7 +2867,7 @@ UpdateState_GrabAirborne:
 
 .asm_1dacf
 	ld a, [wJoypadDown]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr nz, .asm_1dadc
 	xor a ; FALSE
 	ld [wIsSmashAttacking], a
@@ -3110,11 +3110,11 @@ UpdateState_ThrowCharging:
 	and a
 	jp z, SetState_Idling
 	ld a, [wJoypadDown]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jp z, Func_1de3f
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, Func_1dd78
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jp nz, CrouchOrSlide
 
 	ld a, [wGrabState]
@@ -3222,11 +3222,11 @@ UpdateState_ThrowFullyCharged:
 	hcall UpdateAnimation
 
 	ld a, [wJoypadDown]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jr z, .asm_1de01
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, Func_1dd78
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jp nz, CrouchOrSlide
 	ret
 
@@ -3531,7 +3531,7 @@ UpdateState_Rolling:
 	hcall UpdateAnimation
 
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, .asm_1e145
 	ld a, [wDirection]
 	and a
@@ -3738,7 +3738,7 @@ UpdateState_PickedUp:
 
 ; dir left
 	ld a, [wJoypadPressed]
-	and A_BUTTON | B_BUTTON | D_RIGHT
+	and PAD_A | PAD_B | PAD_RIGHT
 	jr nz, .wiggle_right
 
 .asm_1e2d2
@@ -3749,14 +3749,14 @@ UpdateState_PickedUp:
 	ld hl, wPickedUpFrameCounter
 	dec [hl]
 	ret nz
-	ld a, MAX_PICKED_UP_FRAME_COUNTER
+	ld a, MAX_PICKEB_PAD_UPRAME_COUNTER
 	ld [hl], a ; reset frame counter
 	ld a, NUM_WIGGLES_TO_ESCAPE
 	ld [wPickedUpWiggleCounter], a
 	ret
 
 .wiggle_right
-	ld a, MAX_PICKED_UP_FRAME_COUNTER
+	ld a, MAX_PICKEB_PAD_UPRAME_COUNTER
 	ld [wPickedUpFrameCounter], a ; reset frame counter
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
@@ -3772,7 +3772,7 @@ UpdateState_PickedUp:
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
 
-	ld a, MAX_PICKED_UP_FRAME_COUNTER
+	ld a, MAX_PICKEB_PAD_UPRAME_COUNTER
 	ld [wPickedUpFrameCounter], a ; reset frame counter
 	ld hl, wPickedUpWiggleCounter
 	dec [hl]
@@ -3783,9 +3783,9 @@ UpdateState_PickedUp:
 
 .dir_right
 	ld a, [wJoypadPressed]
-	and A_BUTTON | B_BUTTON | D_LEFT
+	and PAD_A | PAD_B | PAD_LEFT
 	jr z, .asm_1e2d2
-	ld a, MAX_PICKED_UP_FRAME_COUNTER
+	ld a, MAX_PICKEB_PAD_UPRAME_COUNTER
 	ld [wPickedUpFrameCounter], a ; reset frame counter
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
@@ -3904,7 +3904,7 @@ UpdateState_EnteringDoor:
 	and a
 	ret z
 	ld a, [wJoypadDown]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jp nz, SetState_Walking_ResetWalkVel
 	jp SetState_Idling
 
@@ -3938,16 +3938,16 @@ ApplyWaterCurrentMovement:
 	ld [wCurWaterCurrent], a
 	res CURRENT_RIGHT_F, [hl]
 	ld a, [wc0e1]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	ret nz
 	farcall Func_19741
 	ld a, b
 	and a
 	ret nz
 	ld a, [wSwimmingDirectionInput]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	ret nz
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr z, .push_right
 	ld a, [wPowerUpLevel]
 	cp PRINCE_FROGS_GLOVES
@@ -3966,16 +3966,16 @@ ApplyWaterCurrentMovement:
 	ld [wCurWaterCurrent], a
 	res CURRENT_LEFT_F, [hl]
 	ld a, [wc0e1]
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	ret nz
 	farcall Func_197b1
 	ld a, b
 	and a
 	ret nz
 	ld a, [wSwimmingDirectionInput]
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	ret nz
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr z, .push_left
 	ld a, [wPowerUpLevel]
 	cp PRINCE_FROGS_GLOVES
@@ -3994,16 +3994,16 @@ ApplyWaterCurrentMovement:
 	ld [wCurWaterCurrent], a
 	res CURRENT_UP_F, [hl]
 	ld a, [wc0e1]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	ret nz
 	farcall CheckUpCollision
 	ld a, b
 	and a
 	ret nz
 	ld a, [wSwimmingDirectionInput]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	ret nz
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr z, .push_up
 	ld a, [wPowerUpLevel]
 	cp PRINCE_FROGS_GLOVES
@@ -4022,16 +4022,16 @@ ApplyWaterCurrentMovement:
 	ld [wCurWaterCurrent], a
 	res CURRENT_DOWN_F, [hl]
 	ld a, [wc0e1]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	ret nz
 	farcall CheckCentreCollision
 	ld a, b
 	and a
 	ret nz
 	ld a, [wSwimmingDirectionInput]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	ret nz
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr z, .push_down
 	ld a, [wPowerUpLevel]
 	cp PRINCE_FROGS_GLOVES
@@ -4069,16 +4069,16 @@ ApplyLastWaterCurrentMovement:
 
 .right_current
 	ld a, [wc0e1]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .reset_last_water_current
 	farcall Func_19741
 	ld a, b
 	and a
 	jr nz, .reset_last_water_current
 	ld a, [wSwimmingDirectionInput]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .decr_counter
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr z, .push_right
 	ld a, [wPowerUpLevel]
 	cp PRINCE_FROGS_GLOVES
@@ -4090,16 +4090,16 @@ ApplyLastWaterCurrentMovement:
 
 .left_current
 	ld a, [wc0e1]
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .reset_last_water_current
 	farcall Func_197b1
 	ld a, b
 	and a
 	jr nz, .reset_last_water_current
 	ld a, [wSwimmingDirectionInput]
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .decr_counter
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr z, .push_left
 	ld a, [wPowerUpLevel]
 	cp PRINCE_FROGS_GLOVES
@@ -4121,16 +4121,16 @@ ApplyLastWaterCurrentMovement:
 
 .up_current
 	ld a, [wc0e1]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr nz, .reset_last_water_current
 	farcall CheckUpCollision
 	ld a, b
 	and a
 	jr nz, .reset_last_water_current
 	ld a, [wSwimmingDirectionInput]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr nz, .decr_counter
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr z, .push_up
 	ld a, [wPowerUpLevel]
 	cp PRINCE_FROGS_GLOVES
@@ -4142,16 +4142,16 @@ ApplyLastWaterCurrentMovement:
 
 .down_current
 	ld a, [wc0e1]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr nz, .reset_last_water_current
 	farcall CheckCentreCollision
 	ld a, b
 	and a
 	jr nz, .reset_last_water_current
 	ld a, [wSwimmingDirectionInput]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr nz, .decr_counter
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr z, .push_down
 	ld a, [wPowerUpLevel]
 	cp PRINCE_FROGS_GLOVES
@@ -4163,14 +4163,14 @@ ApplyLastWaterCurrentMovement:
 
 HandleInput_Idling:
 	ld a, [wJoypadPressed]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jp nz, SetState_Attacking
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, StartJump_FromInput
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .d_right_1
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .d_left_1
 	ret
 
@@ -4194,9 +4194,9 @@ SetState_Walking:
 	ld a, WST_WALKING
 	ld [wWarioState], a
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .d_right_2
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .d_left_2
 	jr .ok
 .d_right_2
@@ -4404,7 +4404,7 @@ CrouchOrSlide:
 	ld [wIsCrouching], a
 
 	ld a, [wJoypadDown]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jp nz, SetState_CrouchWalking
 
 	ld a, BANK(WarioWalkGfx)
@@ -4447,22 +4447,22 @@ HandleInput_Walking:
 	and a
 	jr nz, .skip_jump
 	ld a, [wJoypadDown]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, StartJump_FromInput
 .skip_jump
 
 	ld a, [wJoypadPressed]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jp nz, SetState_Attacking
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, StartJump_FromInput
 
 	ld a, [wJoypadDown]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr nz, .d_down
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .d_right
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .d_left
 	jr .asm_1e970
 
@@ -4585,20 +4585,20 @@ HandleInput_Attacking:
 	and a
 	jr nz, .dir_left
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jp nz, SetState_Turning
 
 .check_pressed
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, StartJumpingAirborneAttack
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jp nz, SetState_CrouchSliding
 	ret
 
 .dir_left
 	ld a, [wJoypadDown]
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jp nz, SetState_Turning
 	jr .check_pressed
 
@@ -4618,9 +4618,9 @@ HandleBumpMovement:
 	cp 28
 	jr c, .no_control
 	ld a, [wJoypadDown]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jr z, .no_control
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .d_right
 ; d-left
 	ld a, DIRECTION_LEFT
@@ -4703,12 +4703,12 @@ HandleBumpMovement:
 
 Func_1eb46:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, Func_1ec19
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jp nz, Func_1ec4b
 	ld a, [wJoypadDown]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr nz, .asm_1eb79
 
 	ld a, -27
@@ -4726,9 +4726,9 @@ Func_1eb46:
 	ld a, -15
 	ld [wCollisionBoxTop], a
 	ld a, [wJoypadDown]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	ret z
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .asm_1eb8f
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
@@ -4834,12 +4834,12 @@ Func_1ec4b:
 
 Func_1ec6c:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, Func_1ec19
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jr nz, Func_1ec4b
 	ld a, [wJoypadDown]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr nz, .asm_1ec9d
 
 	ld a, -27
@@ -4857,9 +4857,9 @@ Func_1ec6c:
 	ld a, -15
 	ld [wCollisionBoxTop], a
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .asm_1ecb0
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .asm_1ecf2
 	jp CrouchOrSlide
 
@@ -5013,7 +5013,7 @@ Func_1ede9:
 	ld a, JUMP_VEL_NORMAL
 	jr c, .asm_1ee0a
 	ld hl, wJoypadDown
-	bit D_UP_F, [hl]
+	bit B_PAD_UP, [hl]
 	jr z, .asm_1ee0a
 	ld a, JUMP_VEL_HIGH_JUMP
 .asm_1ee0a
@@ -5075,14 +5075,14 @@ SetState_GrabAirborne:
 
 Func_1ee88:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, Func_1ede9
 	ld a, [wJoypadDown]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jp nz, SetState_ThrowCharging
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jp nz, CrouchOrSlide
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jr nz, .asm_1eea2
 	ret
 
@@ -5103,7 +5103,7 @@ Func_1ee88:
 	ld [wCollisionBoxRight], a
 
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .asm_1eeeb
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
@@ -5127,16 +5127,16 @@ Func_1ee88:
 
 Func_1eefc:
 	ld a, [wJoypadPressed]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jp nz, SetState_ThrowCharging
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, Func_1ede9
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jp nz, .asm_1efaf
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .asm_1ef31
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .asm_1ef4d
 	call IsOnSlipperyGround
 	jr z, .not_slippery
@@ -5296,7 +5296,7 @@ SetState_GrabIdling:
 
 HandleInput_Airborne:
 	ld a, [wJoypadDown]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, .skip_set_fall
 
 ; not pressing A button any more, so
@@ -5360,9 +5360,9 @@ HandleInput_Airborne:
 
 .check_input
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .d_right
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .d_left
 	ret
 
@@ -5423,9 +5423,9 @@ HandleDivingHorizontalMovement:
 	cp SWIMMING_FLIPPERS
 	ret c
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .d_right
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .d_left
 	ret
 
@@ -5467,12 +5467,12 @@ Func_1f1a9:
 	cp SWIMMING_FLIPPERS
 	jr c, .asm_1f1f5
 	ld a, [wJoypadPressed]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jp nz, StartUnderwaterThrusting
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, StartUpwardsUnderwaterThrusting
 	ld a, [wJoypadDown]
-	and D_PAD
+	and PAD_CTRL_PAD
 	jp nz, Func_1f24c
 
 	ld a, [wWarioStateCycles]
@@ -5522,7 +5522,7 @@ Func_1f1a9:
 	ret
 
 .asm_1f246
-	ld a, D_UP
+	ld a, PAD_UP
 	ld [wc0e1], a
 	ret
 
@@ -5565,17 +5565,17 @@ Func_1f24c:
 	and %1
 	jr z, .asm_1f2b2
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .asm_1f2c0
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jp nz, Func_1f357
 	ret
 
 .asm_1f2b2
 	ld a, [wJoypadDown]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jp nz, Func_1f3d9
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jp nz, Func_1f3a7
 	ret
 
@@ -5637,12 +5637,12 @@ Func_1f310:
 	ld a, [wDirection]
 	and a
 	jr z, .asm_1f351
-	ld a, D_RIGHT
+	ld a, PAD_RIGHT
 	ld [wc0e1], a
 	ret
 
 .asm_1f351
-	ld a, D_LEFT
+	ld a, PAD_LEFT
 	ld [wc0e1], a
 	ret
 
@@ -5679,7 +5679,7 @@ Func_1f3a7:
 	and a
 	jr z, .asm_1f3cb
 	update_pos_y
-	ld a, D_DOWN
+	ld a, PAD_DOWN
 	ld [wc0e1], a
 	ret
 
@@ -5713,16 +5713,16 @@ Func_1f3d9:
 
 HandleWaterSurfaceInput:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, StartJump_FromWaterSurface
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jr z, .no_thrust
 
 	ld a, [wPowerUpLevel]
 	cp SWIMMING_FLIPPERS
 	jp c, .no_thrust ; should be jr
 	ld a, [wJoypadDown]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	ret nz
 	farcall Func_19b12
 	ld a, [wWaterInteraction]
@@ -5734,7 +5734,7 @@ HandleWaterSurfaceInput:
 
 .no_thrust
 	ld a, [wJoypadDown]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	ret z
 	ld a, [wPowerUpLevel]
 	cp SWIMMING_FLIPPERS
@@ -5756,17 +5756,17 @@ HandleUnderwaterThrustingInput:
 	jp SetState_Submerged
 .continue
 	ld a, [wJoypadDown]
-	and A_BUTTON | B_BUTTON
+	and PAD_A | PAD_B
 	jp z, SetState_Submerged
 
 	ld a, [wSwimmingDirectionInput]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .right
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .left
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jp nz, .up
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jp nz, .down
 	ret
 
@@ -5789,7 +5789,7 @@ HandleUnderwaterThrustingInput:
 	ld d, $00
 	ld hl, SwimStraightVelTable
 	ld a, [wSwimmingDirectionInput]
-	and D_UP | D_DOWN
+	and PAD_UP | PAD_DOWN
 	jr z, .not_diagonal_1
 	ld hl, SwimDiagonalVelTable
 .not_diagonal_1
@@ -5797,9 +5797,9 @@ HandleUnderwaterThrustingInput:
 	ld b, [hl]
 	call MoveWarioRight
 	ld a, [wSwimmingDirectionInput]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jp nz, .up
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jp nz, .down
 	jr .handle_diagonal_movement
 
@@ -5822,7 +5822,7 @@ HandleUnderwaterThrustingInput:
 	ld d, $00
 	ld hl, SwimStraightVelTable
 	ld a, [wSwimmingDirectionInput]
-	and D_UP | D_DOWN
+	and PAD_UP | PAD_DOWN
 	jr z, .not_diagonal_2
 	ld hl, SwimDiagonalVelTable
 .not_diagonal_2
@@ -5830,17 +5830,17 @@ HandleUnderwaterThrustingInput:
 	ld b, [hl]
 	call MoveWarioLeft
 	ld a, [wSwimmingDirectionInput]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jp nz, .up
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jp nz, .down
 	jr .handle_diagonal_movement ; useless
 
 .handle_diagonal_movement
 	ld a, [wJoypadDown]
-	and D_UP | D_DOWN
+	and PAD_UP | PAD_DOWN
 	ret z
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr nz, .diagonal_down
 
 ; diagonal up
@@ -5858,7 +5858,7 @@ HandleUnderwaterThrustingInput:
 
 .asm_1f593
 	ld hl, wc0e1
-	set D_UP_F, [hl]
+	set B_PAD_UP, [hl]
 	ret
 
 .diagonal_down
@@ -5873,7 +5873,7 @@ HandleUnderwaterThrustingInput:
 .asm_1f5b2
 	update_pos_y
 	ld hl, wc0e1
-	set D_DOWN_F, [hl]
+	set B_PAD_DOWN, [hl]
 	ret
 
 .down
@@ -5886,7 +5886,7 @@ HandleUnderwaterThrustingInput:
 	ld d, $00
 	ld hl, SwimStraightVelTable
 	ld a, [wSwimmingDirectionInput]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jr z, .asm_1f5e9
 	ld hl, Data_1f894
 .asm_1f5e9
@@ -5898,7 +5898,7 @@ HandleUnderwaterThrustingInput:
 .asm_1f5ef
 	update_pos_y
 	ld hl, wc0e1
-	set D_DOWN_F, [hl]
+	set B_PAD_DOWN, [hl]
 	ret
 
 .up
@@ -5915,7 +5915,7 @@ HandleUnderwaterThrustingInput:
 	ld d, $00
 	ld hl, SwimStraightVelTable
 	ld a, [wSwimmingDirectionInput]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jr z, .asm_1f63c
 	ld hl, Data_1f894
 .asm_1f63c
@@ -5926,7 +5926,7 @@ HandleUnderwaterThrustingInput:
 
 .asm_1f642
 	ld hl, wc0e1
-	set D_UP_F, [hl]
+	set B_PAD_UP, [hl]
 	jp StartDive
 
 HandleInvincibility:
@@ -5985,7 +5985,7 @@ HandleInvincibility:
 	ld [wInvisibleFrame], a
 
 	ld a, [wJoypadDown]
-	and D_RIGHT | D_LEFT | D_DOWN
+	and PAD_RIGHT | PAD_LEFT | PAD_DOWN
 	ret nz
 	farcall CheckUpCollision
 	ret
@@ -6178,7 +6178,7 @@ SetState_LadderShakeStunned:
 
 Func_1f825:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, .a_btn
 	ld a, [wDirection]
 	and a
@@ -6186,7 +6186,7 @@ Func_1f825:
 
 ; dir left
 	ld a, [wJoypadPressed]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .asm_1f855
 	call WalkIfPossible_Left
 .asm_1f83c
@@ -6200,7 +6200,7 @@ Func_1f825:
 
 .dir_right
 	ld a, [wJoypadPressed]
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .asm_1f855
 	call WalkIfPossible_Right
 	jr .asm_1f83c

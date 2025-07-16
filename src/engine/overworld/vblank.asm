@@ -7,7 +7,7 @@ VBlank_Overworld:
 
 .Func:
 	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	ld a, [wSCY]
 	ldh [rSCY], a
 	ld a, [wSCX]
@@ -77,7 +77,7 @@ VBlank_Overworld:
 	xor a
 	ld [hli], a
 	ld a, b
-	ld c, LOW(rHDMA1)
+	ld c, LOW(rVDMA_SRC_HIGH)
 	ld [$ff00+c], a
 	ld a, [hli]
 	inc c
@@ -103,7 +103,7 @@ VBlank_Overworld:
 	xor a
 	ld [hli], a
 	ld a, b
-	ld c, LOW(rHDMA1)
+	ld c, LOW(rVDMA_SRC_HIGH)
 	ld [$ff00+c], a
 	ld a, [hli]
 	inc c
@@ -136,7 +136,7 @@ VBlank_OWScene:
 
 .Func:
 	ld a, $02
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	ld a, [wSCY]
 	ldh [rSCY], a
 	ld a, [wSCX]
@@ -145,15 +145,15 @@ VBlank_OWScene:
 	ld a, [wOWPendingTileUpdate]
 	and a
 	jr z, .skip_update_tiles
-	ld c, LOW(rHDMA1)
+	ld c, LOW(rVDMA_SRC_HIGH)
 	ld a, HIGH(wTilemap)
-	ld [$ff00+c], a ; rHDMA1
+	ld [$ff00+c], a ; rVDMA_SRC_HIGH
 	inc c
 	xor a ; LOW(wTilemap)
-	ld [$ff00+c], a ; rHDMA2
+	ld [$ff00+c], a ; rVDMA_SRC_LOW
 	inc c
 	ld a, HIGH(v0BGMap0) - $80
-	ld [$ff00+c], a ; rHDMA3
+	ld [$ff00+c], a ; rVDMA_DEST_HIGH
 	inc c
 	xor a ; LOW(v0BGMap0)
 	ld [$ff00+c], a
@@ -163,15 +163,15 @@ VBlank_OWScene:
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld c, LOW(rHDMA1)
+	ld c, LOW(rVDMA_SRC_HIGH)
 	ld a, HIGH(wAttrmap)
-	ld [$ff00+c], a ; rHDMA1
+	ld [$ff00+c], a ; rVDMA_SRC_HIGH
 	inc c
 	xor a ; LOW(wAttrmap)
-	ld [$ff00+c], a ; rHDMA2
+	ld [$ff00+c], a ; rVDMA_SRC_LOW
 	inc c
 	ld a, HIGH(v1BGMap0) - $80
-	ld [$ff00+c], a ; rHDMA3
+	ld [$ff00+c], a ; rVDMA_DEST_HIGH
 	inc c
 	xor a ; LOW(v1BGMap0)
 	ld [$ff00+c], a

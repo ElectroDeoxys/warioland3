@@ -17,9 +17,9 @@ InitLCD::
 	xor a
 	ldh [rIF], a
 	ld hl, rIE
-	res IEB_STAT, [hl]
+	res B_IE_STAT, [hl]
 	ld hl, rSTAT
-	res STATB_LYC, [hl]
+	res B_STAT_LYC, [hl]
 	ret
 
 VBlank_GBIncompatible::

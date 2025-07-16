@@ -1,10 +1,10 @@
 LanguageSelection:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, StartOverworldStateAndNewGameParam
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr nz, .d_down
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr nz, .d_up
 	jr .update_anim
 

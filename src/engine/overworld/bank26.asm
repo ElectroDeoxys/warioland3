@@ -156,7 +156,7 @@ _InitTreasureCollection:
 	ld [wSCY], a
 
 	ld a, $02
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	call VBlank_TreasureCollection
 	call Func_9a54e
 	call Func_9a559
@@ -222,7 +222,7 @@ _InitTreasureCollection:
 	call ApplyPageTreasuresPals
 
 	hlbgcoord 2, 1, wAttrmap
-	ld a, $1 | BGF_BANK1
+	ld a, $1 | BG_BANK1
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
@@ -238,13 +238,13 @@ _InitTreasureCollection:
 
 	ld hl, wTilemap
 	ld de, v0BGMap1
-	ld bc, 18 * BG_MAP_WIDTH
+	ld bc, 18 * TILEMAP_WIDTH
 	call CopyHLToDE_BC
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, wAttrmap
 	ld de, v0BGMap1
-	ld bc, 18 * BG_MAP_WIDTH
+	ld bc, 18 * TILEMAP_WIDTH
 	call CopyHLToDE_BC
 
 	xor a
@@ -264,7 +264,7 @@ _InitTreasureCollection:
 	ld a, $98
 	ld [hld], a
 	ld [hl], b
-	ld a, LCDCF_ON | LCDCF_BG9C00 | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
+	ld a, LCDC_ON | LCDC_BG_9C00 | LCDC_OBJ_16 | LCDC_OBJ_ON | LCDC_BG_ON
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]
@@ -312,7 +312,7 @@ VBlank_TreasureCollection:
 
 .Func:
 	ld a, $02
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	ld a, [wSCY]
 	ldh [rSCY], a
 	ld a, [wSCX]
@@ -372,7 +372,7 @@ ApplyPageTreasuresPals:
 	ld a, $04
 	ld [hli], a
 	ld [hl], a
-	ld de, BG_MAP_WIDTH
+	ld de, TILEMAP_WIDTH
 	add hl, de
 	ld [hld], a
 	ld [hl], a
@@ -403,7 +403,7 @@ ApplyPageTreasuresPals:
 
 ; outputs in hl and de the addresses in wTilemap
 ; for the treasure in Cell w2dffe
-; hl = de + BG_MAP_WIDTH
+; hl = de + TILEMAP_WIDTH
 .GetAttrmapAddress:
 	ld a, [w2dffe]
 	ld d, HIGH(wTilemap) + $1
@@ -418,7 +418,7 @@ ApplyPageTreasuresPals:
 	ld l, [hl]
 	ld h, d
 	ld e, l
-	ld a, BG_MAP_WIDTH
+	ld a, TILEMAP_WIDTH
 	add l
 	ld l, a
 	ret
@@ -454,7 +454,7 @@ _TreasureCollection:
 
 HandleTreasureCollectionInput:
 	ld a, [wJoypadPressed]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jr z, .asm_9a646
 
 ; b btn
@@ -468,15 +468,15 @@ HandleTreasureCollectionInput:
 	ld hl, wCollectionPage
 	ld a, [wJoypadDown]
 	ld b, a
-	bit A_BUTTON_F, b
+	bit B_PAD_A, b
 	jr z, .no_a_btn
 	ld a, [wCollectionScrollMode]
 	and a
 	call z, .SetScrollMode
 	ld hl, wCollectionPage
-	bit D_RIGHT_F, b
+	bit B_PAD_RIGHT, b
 	jr nz, .a_right
-	bit D_LEFT_F, b
+	bit B_PAD_LEFT, b
 	jr nz, .a_left
 	ret
 
@@ -525,15 +525,15 @@ HandleTreasureCollectionInput:
 	ld b, a
 	ld hl, wCollectionCol
 	ld a, [hl]
-	bit D_RIGHT_F, b
+	bit B_PAD_RIGHT, b
 	jr nz, .right
-	bit D_LEFT_F, b
+	bit B_PAD_LEFT, b
 	jr nz, .left
 	ld hl, wCollectionRow
 	ld a, [hl]
-	bit D_UP_F, b
+	bit B_PAD_UP, b
 	jr nz, .up
-	bit D_DOWN_F, b
+	bit B_PAD_DOWN, b
 	jr nz, .down
 	call ProcessCollectionLinkState
 	ret
@@ -1455,37 +1455,37 @@ OAM_9ac5d:
 .frame_0
 	frame_oam -23, -11, $00, 0
 	frame_oam  -7, -11, $02, 0
-	frame_oam -23,   3, $00, 0 | OAMF_XFLIP
-	frame_oam  -7,   3, $02, 0 | OAMF_XFLIP
+	frame_oam -23,   3, $00, 0 | OAM_XFLIP
+	frame_oam  -7,   3, $02, 0 | OAM_XFLIP
 	db $80
 
 .frame_1
 	frame_oam -22, -11, $04, 0
 	frame_oam  -6, -11, $06, 0
-	frame_oam -22,   3, $04, 0 | OAMF_XFLIP
-	frame_oam  -6,   3, $06, 0 | OAMF_XFLIP
+	frame_oam -22,   3, $04, 0 | OAM_XFLIP
+	frame_oam  -6,   3, $06, 0 | OAM_XFLIP
 	db $80
 
 .frame_2
 	frame_oam -21, -11, $08, 0
 	frame_oam  -5, -11, $0a, 0
-	frame_oam -21,   3, $08, 0 | OAMF_XFLIP
-	frame_oam  -5,   3, $0a, 0 | OAMF_XFLIP
+	frame_oam -21,   3, $08, 0 | OAM_XFLIP
+	frame_oam  -5,   3, $0a, 0 | OAM_XFLIP
 	db $80
 
 .frame_3
 	frame_oam  -8, -11, $0c, 0
-	frame_oam  -8,   3, $0c, 0 | OAMF_XFLIP
+	frame_oam  -8,   3, $0c, 0 | OAM_XFLIP
 	db $80
 
 .frame_4
 	frame_oam  -8, -11, $0e, 0
-	frame_oam  -8,   3, $0e, 0 | OAMF_XFLIP
+	frame_oam  -8,   3, $0e, 0 | OAM_XFLIP
 	db $80
 
 .frame_5
 	frame_oam  -8, -11, $10, 1
-	frame_oam  -8,   3, $10, 1 | OAMF_XFLIP
+	frame_oam  -8,   3, $10, 1 | OAM_XFLIP
 	db $80
 
 .frame_6
@@ -1501,15 +1501,15 @@ OAM_9ac5d:
 	db $80
 
 .frame_9
-	frame_oam  -8,  -4, $12, 2 | OAMF_XFLIP
+	frame_oam  -8,  -4, $12, 2 | OAM_XFLIP
 	db $80
 
 .frame_10
-	frame_oam  -8,  -4, $14, 2 | OAMF_XFLIP
+	frame_oam  -8,  -4, $14, 2 | OAM_XFLIP
 	db $80
 
 .frame_11
-	frame_oam  -8,  -4, $16, 2 | OAMF_XFLIP
+	frame_oam  -8,  -4, $16, 2 | OAM_XFLIP
 	db $80
 
 Frameset_9ace1:

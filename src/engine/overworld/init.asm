@@ -12,7 +12,7 @@ Func_803e6:
 
 InitOverworld:
 	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	stop_music2
 
 	ld a, [wTransitionParam]
@@ -160,7 +160,7 @@ UpdateStoredTransitionParam:
 ; waits for A button input
 Func_804ec:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	ret z
 	ld hl, wSubState
 	inc [hl]
@@ -212,7 +212,7 @@ InitMapSide:
 	stop_music2
 
 	ld a, $02
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	call ClearVirtualOAM
 	call VBlank_Overworld
 
@@ -412,13 +412,13 @@ Func_8065e:
 
 	hlbgcoord 0, 30
 	debgcoord 0, 21, wAttrmap
-	ld b, 2 * BG_MAP_WIDTH
+	ld b, 2 * TILEMAP_WIDTH
 	call CopyHLToDE
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	hlbgcoord 0, 30
 	debgcoord 0, 19, wAttrmap
-	ld b, 2 * BG_MAP_WIDTH
+	ld b, 2 * TILEMAP_WIDTH
 	call CopyHLToDE
 	xor a
 	ldh [rVBK], a
@@ -429,13 +429,13 @@ Func_8065e:
 	call UpdateTopBar.InitTopBarButtons
 	hlbgcoord 0, 21, wAttrmap
 	debgcoord 0, 30
-	ld b, 2 * BG_MAP_WIDTH
+	ld b, 2 * TILEMAP_WIDTH
 	call CopyHLToDE
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	hlbgcoord 0, 19, wAttrmap
 	debgcoord 0, 30
-	ld b, 2 * BG_MAP_WIDTH
+	ld b, 2 * TILEMAP_WIDTH
 	call CopyHLToDE
 	xor a
 	ldh [rVBK], a
@@ -470,7 +470,7 @@ Func_8065e:
 	ld [wOWPalTransitionState], a
 	ld [w2d013], a
 
-	ld a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
+	ld a, LCDC_ON | LCDC_WIN_9C00 | LCDC_WIN_ON | LCDC_OBJ_16 | LCDC_OBJ_ON | LCDC_BG_ON
 	ldh [rLCDC], a
 
 	ld hl, wSubState
@@ -561,7 +561,7 @@ Func_8086f:
 	ld a, [wCurEvent]
 	cp EVENT_MAGNIFYING_GLASS
 	jr nz, .no_window_display
-	ld a, LCDCF_ON | LCDCF_WIN9C00 | LCDCF_WINON | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
+	ld a, LCDC_ON | LCDC_WIN_9C00 | LCDC_WIN_ON | LCDC_OBJ_16 | LCDC_OBJ_ON | LCDC_BG_ON
 	jr .apply_lcd
 .no_window_display
 	ld a, LCDC_DEFAULT
@@ -733,13 +733,13 @@ ClearOWWRAM:
 WriteBGMapFromWRAM:
 	ld hl, wTilemap
 	ld de, v0BGMap0
-	ld bc, 19 * BG_MAP_WIDTH
+	ld bc, 19 * TILEMAP_WIDTH
 	call CopyHLToDE_BC
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	ld hl, wAttrmap
 	ld de, v1BGMap0
-	ld bc, 19 * BG_MAP_WIDTH
+	ld bc, 19 * TILEMAP_WIDTH
 	call CopyHLToDE_BC
 	xor a
 	ldh [rVBK], a
@@ -806,24 +806,24 @@ LoadCloudAndSeaGfx:
 
 Func_80bd9:
 	hlbgcoord 0, 14, wAttrmap
-	res BGB_PRI, [hl]
+	res B_BG_PRIO, [hl]
 
 	; reset BG priority inside a
 	; 3x4 rectangle, at coord (0, 15)
-	ld de, 15 * BG_MAP_WIDTH
+	ld de, 15 * TILEMAP_WIDTH
 	ld c, 4
 .loop_outer
 	ld hl, wAttrmap
 	add hl, de
 	ld b, 3
 .loop_inner
-	res BGB_PRI, [hl]
+	res B_BG_PRIO, [hl]
 	inc hl
 	dec b
 	jr nz, .loop_inner
 	dec c
 	ret z
-	ld hl, BG_MAP_WIDTH
+	ld hl, TILEMAP_WIDTH
 	add hl, de
 	ld e, l
 	ld d, h

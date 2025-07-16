@@ -1348,9 +1348,9 @@ DebugSceneWario:
 	ld a, [wJoypadPressed]
 	ld b, a
 	ld a, [wDebugSceneWarioState]
-	bit D_RIGHT_F, b
+	bit B_PAD_RIGHT, b
 	jr nz, .d_right
-	bit D_LEFT_F, b
+	bit B_PAD_LEFT, b
 	ret z
 ; d_left
 	and a
@@ -1525,22 +1525,22 @@ Func_ac9ec:
 	ret
 
 Data_ac9f5:
-	db LOW(rBCPS), BCPSF_AUTOINC
+	db LOW(rBGPI), BGPI_AUTOINC
 	db 8 ; number of pals
 	bigdw wTempPals1 ; source pals
 
 Data_ac9fa:
-	db LOW(rBCPS), BCPSF_AUTOINC
+	db LOW(rBGPI), BGPI_AUTOINC
 	db 8 ; number of pals
 	bigdw wTempBGPals ; source pals
 
 Data_ac9ff:
-	db LOW(rOCPS), OCPSF_AUTOINC
+	db LOW(rOBPI), OBPI_AUTOINC
 	db 1 ; number of pals
 	bigdw wTempOBPals ; source pals
 
 Data_aca04:
-	db LOW(rOCPS), OCPSF_AUTOINC
+	db LOW(rOBPI), OBPI_AUTOINC
 	db 8 ; number of pals
 	bigdw wTempPals2 ; source pals
 
@@ -1685,7 +1685,7 @@ Func_acacd:
 	cp [hl]
 	jr z, .clear
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	ret z
 	xor a
 	ld hl, wSceneObj1State
@@ -1740,7 +1740,7 @@ _InitTempleScene:
 	stop_music2
 
 	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
+	ldh [rWBK], a
 
 	xor a
 	ldh [rSCX], a
@@ -1836,7 +1836,7 @@ _InitTempleScene:
 	ld a, [wLCDCFlagsToFlip]
 	ld b, a
 	and a
-	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_WIN9C00 | LCDCF_ON
+	ld a, LCDC_BG_ON | LCDC_OBJ_ON | LCDC_OBJ_16 | LCDC_WIN_9C00 | LCDC_ON
 	jr z, .got_lcdc_config
 	xor b
 .got_lcdc_config
@@ -1872,7 +1872,7 @@ VBlank_PrologueEpilogue:
 
 .Func:
 	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
+	ldh [rWBK], a
 
 	; apply scroll
 	ld a, [wSCY]
@@ -1894,20 +1894,20 @@ VBlank_PrologueEpilogue:
 	ldh [rVBK], a
 	ld hl, wHDMA
 	ld a, [hli]
-	ld c, LOW(rHDMA1)
-	ld [$ff00+c], a ; rHDMA1
+	ld c, LOW(rVDMA_SRC_HIGH)
+	ld [$ff00+c], a ; rVDMA_SRC_HIGH
 	ld a, [hli]
 	inc c
-	ld [$ff00+c], a ; rHDMA2
+	ld [$ff00+c], a ; rVDMA_SRC_LOW
 	ld a, [hli]
 	inc c
-	ld [$ff00+c], a ; rHDMA3
+	ld [$ff00+c], a ; rVDMA_DEST_HIGH
 	ld a, [hli]
 	inc c
-	ld [$ff00+c], a ; rHDMA4
+	ld [$ff00+c], a ; rVDMA_DEST_LOW
 	ld a, [hli]
 	inc c
-	ld [$ff00+c], a ; rHDMA5
+	ld [$ff00+c], a ; rVDMA_LEN
 	pop af
 	bankswitch
 .skip_hdma_config
@@ -2048,7 +2048,7 @@ _UpdateTempleScene:
 	and a
 	call z, PrintTextWithHeader
 	ld a, [wJoypadPressed]
-	and B_BUTTON | D_LEFT
+	and PAD_B | PAD_LEFT
 	jr nz, .start_exit
 	ret
 .start_exit
@@ -2096,7 +2096,7 @@ _UpdateTempleScene:
 
 .walk_left
 	ld a, [wJoypadPressed]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jr nz, .exit
 	call ApplySceneWarioMovementLeft
 	cp $f0
@@ -2135,12 +2135,12 @@ _UpdateTempleScene:
 	ret
 
 ClearTextbox:
-	ld d, 6 * BG_MAP_WIDTH ; dest lo
+	ld d, 6 * TILEMAP_WIDTH ; dest lo
 	ld e, $8 dma_tiles
 	jr ClearTextboxAtCoord
 
 ClearTextboxExceptHeader:
-	ld d, 7 * BG_MAP_WIDTH ; dest lo
+	ld d, 7 * TILEMAP_WIDTH ; dest lo
 	ld e, $6 dma_tiles
 ;	fallthrough
 
@@ -2255,7 +2255,7 @@ PrintText:
 	; then text delay is halved
 	ld b, 4
 	ld a, [wJoypadDown]
-	and A_BUTTON | D_DOWN
+	and PAD_A | PAD_DOWN
 	jr z, .got_delay
 	srl b ; 2
 .got_delay
@@ -2283,7 +2283,7 @@ PrintText:
 	cp "@"
 	jr z, .no_char
 	ld [wPendingCharTile], a
-	ld a, $1 | BGF_BANK1
+	ld a, $1 | BG_BANK1
 	ld [wPendingCharAttr], a
 	hlbgcoord 2, 14
 	ld a, [wBGMapToPrintText]
@@ -2431,7 +2431,7 @@ HiddenFigureRevealScene:
 	bit MODE_FOUGHT_A_HIDDEN_FIGURE_F, a
 	jr z, .cant_skip
 	ld a, [wJoypadPressed]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jp nz, SetFightAgainstAHiddenFigure
 .cant_skip
 	call DoHiddenFigureLeftHandMovement
@@ -2506,7 +2506,7 @@ HiddenFigureRevealScene:
 
 .WaitAButtonThenClearTextbox:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	ret z
 	xor a
 	ld hl, wSceneObj1State
@@ -2562,7 +2562,7 @@ HiddenFigureRevealScene:
 	jr nz, .loop_rocks
 	and a
 	ret nz
-	ld a, LCDCF_BG9C00
+	ld a, LCDC_BG_9C00
 	ld [wLCDCFlagsToFlip], a
 	jp Func_ad016
 
@@ -2717,7 +2717,7 @@ HiddenFigureRevealScene:
 
 .Func_ad259:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	ret z
 	xor a
 	ld hl, wSceneObj1State
@@ -2837,7 +2837,7 @@ HiddenFigureRevealScene:
 
 .Func_ad319:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	ret z
 	xor a
 	ld [wSceneObj1State], a
@@ -3004,9 +3004,9 @@ HandleEnterTempleWithAllMusicBoxesScene:
 
 .WaitInput:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, .a_btn ; can be jr
-	and B_BUTTON | D_LEFT
+	and PAD_B | PAD_LEFT
 	ret z
 	xor a
 	ld [wSceneObj1State], a
@@ -3818,7 +3818,7 @@ _GolfBuilding:
 	stop_music2
 
 	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
+	ldh [rWBK], a
 
 	xor a
 	ldh [rSCX], a
@@ -3920,7 +3920,7 @@ _GolfBuilding:
 
 .func
 	ld a, BANK("WRAM2")
-	ldh [rSVBK], a
+	ldh [rWBK], a
 
 	ld a, [wSCY]
 	ldh [rSCY], a
@@ -3939,7 +3939,7 @@ _GolfBuilding:
 	bankswitch
 	ld hl, wHDMA
 	ld a, [hli]
-	ld c, LOW(rHDMA1)
+	ld c, LOW(rVDMA_SRC_HIGH)
 	ld [$ff00+c], a
 	ld a, [hli]
 	inc c
@@ -4095,7 +4095,7 @@ Func_adbfe:
 	cp $04
 	jr z, .no_carry
 	ld a, [wJoypadPressed]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jr nz, .exit
 .no_carry
 	xor a
@@ -4282,11 +4282,11 @@ Func_adbfe:
 
 .Func_add36:
 	ld a, [wJoypadPressed]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .d_right
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .d_left
-	and A_BUTTON | D_UP
+	and PAD_A | PAD_UP
 	jr nz, .a_btn_or_d_up
 	ret
 
@@ -4504,7 +4504,7 @@ _InitPrologueSequence:
 	ld [wSceneWarioStateGroup], a
 	xor a ; SCENEWARIO_NONE
 	call SetSceneWarioState
-	ld a, LCDCF_BG9C00
+	ld a, LCDC_BG_9C00
 	ld [wLCDCFlagsToFlip], a
 	ret
 
@@ -4647,7 +4647,7 @@ Func_ae079:
 	xor a
 	ld [wSCY], a
 	ld [wSCX], a
-	ld a, LCDCF_BG9C00
+	ld a, LCDC_BG_9C00
 	ld [wLCDCFlagsToFlip], a
 	ld a, $50
 	ld hl, wSceneObj8
@@ -4685,7 +4685,7 @@ Func_ae0c4:
 	ld [wSCY], a
 	xor a
 	ld [wSCX], a
-	ld a, LCDCF_BG9C00
+	ld a, LCDC_BG_9C00
 	ld [wLCDCFlagsToFlip], a
 	ld a, SCENEWARIO_HOLD_MUSIC_BOX
 	call SetSceneWarioState
@@ -4747,7 +4747,7 @@ Func_ae134:
 	xor a
 	ld [wSCY], a
 	ld [wSCX], a
-	ld a, LCDCF_BG9C00
+	ld a, LCDC_BG_9C00
 	ld [wLCDCFlagsToFlip], a
 	ld hl, wSceneWarioYCoord
 	ld a, $60
@@ -4817,7 +4817,7 @@ Func_ae19e:
 
 Func_ae1af:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	ret z
 	ld hl, wSceneObj1State
 	xor a
@@ -6768,7 +6768,7 @@ _InitEpilogue:
 	stop_music2
 
 	ld a, $02
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	xor a
 	ldh [rSCX], a
 	ld [wSCX], a
@@ -6837,7 +6837,7 @@ _InitEpilogue:
 	ld a, [wCollectionRow]
 	ld b, a
 	and a
-	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_WIN9C00 | LCDCF_ON
+	ld a, LCDC_BG_ON | LCDC_OBJ_ON | LCDC_OBJ_16 | LCDC_WIN_9C00 | LCDC_ON
 	jr z, .asm_af014
 	xor b
 .asm_af014
@@ -6857,7 +6857,7 @@ Func_af01f:
 	play_music2 MUSIC_EPILOGUE
 
 	ld a, $02
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	ld a, SCREEN_WIDTH_PX
 	ldh [rSCX], a
 	ld [wSCX], a
@@ -6928,7 +6928,7 @@ Func_af01f:
 	ld a, [wCollectionRow]
 	ld b, a
 	and a
-	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_WIN9C00 | LCDCF_ON
+	ld a, LCDC_BG_ON | LCDC_OBJ_ON | LCDC_OBJ_16 | LCDC_WIN_9C00 | LCDC_ON
 	jr z, .asm_af127
 	xor b
 .asm_af127
@@ -7720,7 +7720,7 @@ Func_af13c:
 
 .Func_af69a:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	ret z
 	xor a
 	ld hl, wSceneObj1State

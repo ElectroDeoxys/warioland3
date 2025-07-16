@@ -242,7 +242,7 @@ ExitClearScreen:
 	call ClearUnusedVirtualOAM
 
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, .skip_timer
 	ld hl, wTimer
 	dec [hl]

@@ -87,7 +87,7 @@ Func_1c8604:
 	call GetGolfCourseTargetSCX
 	ld hl, wGolfCourseTileMap
 	debgcoord 0, 6
-	ld b, 7 * BG_MAP_WIDTH
+	ld b, 7 * TILEMAP_WIDTH
 	call CopyHLToDE
 
 	xor a
@@ -118,7 +118,7 @@ Func_1c8604:
 	ld a, $d4
 	ld [de], a
 	ld a, e
-	add BG_MAP_WIDTH
+	add TILEMAP_WIDTH
 	ld e, a
 	ld a, $d5
 	ld [de], a
@@ -131,7 +131,7 @@ Func_1c8604:
 	ld a, $d2
 	ld [de], a
 	ld a, e
-	add BG_MAP_WIDTH
+	add TILEMAP_WIDTH
 	ld e, a
 	ld a, $d3
 	ld [de], a
@@ -153,7 +153,7 @@ Func_1c8604:
 	; b = tens digit
 	; c = ones digit
 	ld a, e
-	sub BG_MAP_WIDTH - 1
+	sub TILEMAP_WIDTH - 1
 	ld e, a
 	ld a, b
 	add a ; *2
@@ -161,13 +161,13 @@ Func_1c8604:
 	ld b, a
 	ld [de], a
 	ld a, e
-	add BG_MAP_WIDTH
+	add TILEMAP_WIDTH
 	ld e, a
 	ld a, b
 	inc a
 	ld [de], a
 	ld a, e
-	sub BG_MAP_WIDTH - 1
+	sub TILEMAP_WIDTH - 1
 	ld e, a
 	ld a, c
 	add a ; *2
@@ -175,7 +175,7 @@ Func_1c8604:
 	ld c, a
 	ld [de], a
 	ld a, e
-	add BG_MAP_WIDTH
+	add TILEMAP_WIDTH
 	ld e, a
 	ld a, c
 	inc a
@@ -196,7 +196,7 @@ Func_1c8604:
 	ld a, $be
 	ld [de], a
 	ld a, e
-	add BG_MAP_WIDTH
+	add TILEMAP_WIDTH
 	ld e, a
 	ld a, $bf
 	ld [de], a
@@ -207,7 +207,7 @@ Func_1c8604:
 	xor a
 	ld [de], a
 	ld a, e
-	add BG_MAP_WIDTH
+	add TILEMAP_WIDTH
 	ld e, a
 	xor a
 	ld [de], a
@@ -343,7 +343,7 @@ Func_1c87db:
 	ld h, d
 	ld l, e
 	ld de, wGolfCourseTileMap
-	ld bc, 7 * BG_MAP_WIDTH
+	ld bc, 7 * TILEMAP_WIDTH
 	call FarCopyHLToDE_BC2
 	pop hl
 	ld a, [hli]
@@ -387,13 +387,13 @@ Func_1c882b:
 
 Func_1c8837:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, .a_btn
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jr nz, .b_btn
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .d_right
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .d_left
 	ret
 
@@ -470,7 +470,7 @@ Func_1c8837:
 	call Func_1c87db
 	ld hl, GolfBuildingCourseScrollingAttrmap
 	ld de, wGoldBuildingCourseAttrMap
-	ld bc, 7 * BG_MAP_WIDTH
+	ld bc, 7 * TILEMAP_WIDTH
 	call FarCopyHLToDE_BC2
 	jp GetGolfCourseTargetSCX
 

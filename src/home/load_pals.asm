@@ -1,9 +1,9 @@
 LoadBGPalettesFromWRAM::
 	ld hl, wTempBGPals
-	ld a, BCPSF_AUTOINC | palette 0
-	ldh [rBCPS], a
+	ld a, BGPI_AUTOINC | palette 0
+	ldh [rBGPI], a
 	ld b, 8 palettes
-	ld c, LOW(rBCPD)
+	ld c, LOW(rBGPD)
 .loop
 	ld a, [hli]
 	ld [$ff00+c], a
@@ -13,10 +13,10 @@ LoadBGPalettesFromWRAM::
 
 LoadOBPalettesFromWRAM::
 	ld hl, wTempOBPals
-	ld a, OCPSF_AUTOINC | palette 0
-	ldh [rOCPS], a
+	ld a, OBPI_AUTOINC | palette 0
+	ldh [rOBPI], a
 	ld b, 8 palettes
-	ld c, LOW(rOCPD)
+	ld c, LOW(rOBPD)
 .loop
 	ld a, [hli]
 	ld [$ff00+c], a

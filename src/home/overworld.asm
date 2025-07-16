@@ -258,7 +258,7 @@ LoadFarBGMap::
 	push af
 	ld a, b
 	bankswitch
-	ld bc, 18 * BG_MAP_WIDTH
+	ld bc, 18 * TILEMAP_WIDTH
 	ld de, v0BGMap0
 	call CopyHLToDE_BC
 	pop af
@@ -343,7 +343,7 @@ Func_3c03::
 	ldh [rVBK], a
 	ld hl, w2d0b5
 	ld a, [hli]
-	ld c, LOW(rHDMA1)
+	ld c, LOW(rVDMA_SRC_HIGH)
 	ld [$ff00+c], a
 	ld a, [hli]
 	inc c

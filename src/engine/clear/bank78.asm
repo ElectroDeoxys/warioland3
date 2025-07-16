@@ -75,8 +75,8 @@ Func_1e005f:
 	ld a, [hl]
 	ld [w3d511 + 1], a
 	hlbgcoord 10, 7
-	ld bc, -BG_MAP_WIDTH
-	ld de, BG_MAP_WIDTH
+	ld bc, -TILEMAP_WIDTH
+	ld de, TILEMAP_WIDTH
 	ld a, [w3d511 + 0]
 	swap a
 	and $0f
@@ -121,8 +121,8 @@ Func_1e005f:
 	and a
 	ret z
 	hlbgcoord 10, 10
-	ld bc, -BG_MAP_WIDTH
-	ld de, BG_MAP_WIDTH
+	ld bc, -TILEMAP_WIDTH
+	ld de, TILEMAP_WIDTH
 	ld a, [wLevelTime + 0]
 	swap a
 	and $0f

@@ -176,9 +176,9 @@ SetState_Hot:
 	ld [wAnimationFrame], a
 
 	ld a, [wJoypadDown]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jr z, .asm_28195
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .asm_28190
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
@@ -682,7 +682,7 @@ SetState_FlatWalking:
 	hcall UpdateAnimation
 
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .asm_2866c
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
@@ -733,7 +733,7 @@ SetState_FlatJumping:
 	ld [wWarioStateCycles], a
 	ld [wJumpVelIndex], a
 	ld a, [wJoypadDown]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr nz, .asm_286fc
 	ld a, JUMP_VEL_KNOCK_BACK
 	jr .asm_286fe
@@ -888,12 +888,12 @@ UpdateState_FlatFalling:
 	jr nz, .asm_28866
 
 	ld a, [wJoypadDown]
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .asm_288a7
 	jr .asm_2886d
 .asm_28866
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .asm_288a7
 
 .asm_2886d
@@ -1620,10 +1620,10 @@ UpdateState_FatIdling:
 
 Func_28f6d:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, Func_290a1
 	ld a, [wJoypadDown]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jr nz, SetState_FatWalking
 	ret
 
@@ -1729,7 +1729,7 @@ UpdateState_FatTurning:
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, Func_290a1
 	ld a, [wAnimationEnded]
 	and a
@@ -3515,13 +3515,13 @@ UpdateState_BouncyFloor:
 	ret z
 
 	ld a, [wJoypadDown]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, Func_2a0bb
 	jr Func_2a0c2
 
 Func_2a0b2:
 	ld a, [wJoypadDown]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, Func_2a0bb
 	jr Func_2a0c2
 
@@ -4123,7 +4123,7 @@ UpdateState_CrazyTurning:
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, Func_2a675
 	ld a, [wAnimationEnded]
 	and a
@@ -4268,9 +4268,9 @@ SetState_VampireWalking:
 	ld [wJumpVelIndex], a
 
 	ld a, [wJoypadDown]
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .asm_2a7d4
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .asm_2a7e5
 
 	ld a, [wDirection]
@@ -4536,9 +4536,9 @@ UpdateState_BatIdling:
 	hcall UpdateAnimation
 
 	ld a, [wJoypadPressed]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jr nz, .asm_2aa55
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, SetState_BatFlying
 	ret
 
@@ -4735,7 +4735,7 @@ UpdateState_BatFalling:
 	hcall UpdateAnimation
 
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, SetState_BatFlying
 	call ApplyJumpVelocity
 	call Func_2b17a
@@ -4972,7 +4972,7 @@ Func_2ae5c:
 
 Func_2ae8a:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr z, .asm_2aea7
 	farcall CheckUpCollision
 	ld a, b
@@ -5193,9 +5193,9 @@ Func_2b027:
 
 HandleHotWarioInput:
 	ld a, [wJoypadDown]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	ret z
-	and D_RIGHT
+	and PAD_RIGHT
 	jr nz, .asm_2b0c7
 	ld a, [wDirection]
 	and a
@@ -5251,21 +5251,21 @@ HandleHotWarioInput:
 
 Func_2b10a:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, SetState_FlatJumping
 	ld a, [wJoypadDown]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jp nz, SetState_FlatWalking
 	ret
 
 Func_2b11b:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, SetState_FlatJumping
 	ld a, [wJoypadDown]
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .asm_2b131
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .asm_2b150
 	jp SetState_FlatIdling
 
@@ -5301,9 +5301,9 @@ Func_2b11b:
 
 Func_2b17a:
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .right
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .left
 	ret
 .right
@@ -5379,12 +5379,12 @@ Func_2b1cc:
 
 Func_2b239:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, Func_290a1
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .asm_2b24f
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .asm_2b279
 	jp SetState_FatIdling
 
@@ -5467,9 +5467,9 @@ Func_2b2c2:
 	and a
 	jr nz, .asm_2b31f
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jp nz, SetState_PuffyTurning
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	ret z
 	farcall Func_197b1
 	ld a, b
@@ -5481,9 +5481,9 @@ Func_2b2c2:
 
 .asm_2b31f
 	ld a, [wJoypadDown]
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jp nz, SetState_PuffyTurning
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	ret z
 	farcall Func_19741
 	ld a, b
@@ -5503,9 +5503,9 @@ Func_2b342:
 
 Func_2b34e:
 	ld a, [wJoypadDown]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, Func_29be1
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jp nz, SetState_ZombieWalking
 
 	farcall CheckCentreCollision
@@ -5528,11 +5528,11 @@ Func_2b34e:
 
 Func_2b381:
 	ld a, [wJoypadDown]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, Func_29be1
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .asm_2b394
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .asm_2b3b3
 	jp SetState_ZombieIdling
 
@@ -5586,7 +5586,7 @@ Func_2b3dd:
 
 Func_2b3f9:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, Func_2a675
 	call Func_2b42b
 	ld a, [wWarioState]
@@ -5601,7 +5601,7 @@ Func_2b3f9:
 	and a
 	jr nz, .asm_2b421
 	ld a, [wJoypadDown]
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr z, .asm_2b428
 .asm_2b41c
 	xor a
@@ -5609,7 +5609,7 @@ Func_2b3f9:
 	ret
 .asm_2b421
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .asm_2b41c
 .asm_2b428
 	jp SetState_CrazyTurning
@@ -5695,24 +5695,24 @@ Func_2b4d0:
 
 Func_2b4f3:
 	ld a, [wJoypadPressed]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jp nz, SetState_BatTransforming
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, Func_2a8ae
 	ld a, [wJoypadDown]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jp nz, SetState_VampireWalking
 	ret
 
 Func_2b509:
 	ld a, [wJoypadDown]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jp nz, SetState_BatTransforming
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, Func_2a8ae
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .asm_2b521
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .asm_2b539
 	jp SetState_VampireIdling
 
@@ -5765,9 +5765,9 @@ Func_2b56f:
 
 .asm_2b5b2
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .asm_2b607
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .asm_2b621
 
 	ld a, [wWarioStateCounter]
@@ -5826,7 +5826,7 @@ Func_2b56f:
 
 Func_2b63b:
 	ld a, [wJoypadDown]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp z, SetState_BatFalling
 
 	ld hl, wJumpVelIndex

@@ -73,14 +73,14 @@ DoorTransition::
 	ld [hli], a
 	ld a, [hl] ; wDoorTransitionEffectBGPtr
 	; one row below
-	add BG_MAP_WIDTH
+	add TILEMAP_WIDTH
 	ld [hli], a
 	ld a, [hl]
 	adc $00
-	cp HIGH(v0BGMap0 + BG_MAP_WIDTH * BG_MAP_HEIGHT)
+	cp HIGH(v0BGMap0 + TILEMAP_WIDTH * TILEMAP_HEIGHT)
 	jr c, .no_wrap_up
 	; wrap up
-	sub HIGH(BG_MAP_WIDTH * BG_MAP_HEIGHT)
+	sub HIGH(TILEMAP_WIDTH * TILEMAP_HEIGHT)
 .no_wrap_up
 	ld [hld], a
 
@@ -93,7 +93,7 @@ DoorTransition::
 	ret nz
 	; wrap right
 	ld a, [hl]
-	add BG_MAP_WIDTH
+	add TILEMAP_WIDTH
 	ld [hl], a
 	ret
 
@@ -125,7 +125,7 @@ VBlank_DoorTransition::
 	ldh [rSCX], a
 
 	push_wram $03
-	ld de, -BG_MAP_WIDTH
+	ld de, -TILEMAP_WIDTH
 	ld a, [wDoorTransitionOrientation]
 	and a
 	jr z, .left_then_up
@@ -151,7 +151,7 @@ VBlank_DoorTransition::
 	ldh [rVBK], a
 	ld [hl], $7f ; overwrite tile
 
-	; go up a row (-BG_MAP_WIDTH)
+	; go up a row (-TILEMAP_WIDTH)
 	add hl, de
 	ld a, h
 	cp HIGH(v0BGMap0)
@@ -182,7 +182,7 @@ VBlank_DoorTransition::
 	jr nz, .no_wrap_left_1
 	; wrap left
 	ld a, l
-	sub BG_MAP_WIDTH
+	sub TILEMAP_WIDTH
 	ld l, a
 	ld a, h
 	sbc $00
@@ -217,7 +217,7 @@ VBlank_DoorTransition::
 	jr nz, .no_wrap_left_2
 	; wrap left
 	ld a, l
-	sub BG_MAP_WIDTH
+	sub TILEMAP_WIDTH
 	ld l, a
 	ld a, h
 	sbc $00
@@ -239,7 +239,7 @@ VBlank_DoorTransition::
 	ldh [rVBK], a
 	ld [hl], $7f ; overwrite tile
 
-	; go up a row (-BG_MAP_WIDTH)
+	; go up a row (-TILEMAP_WIDTH)
 	add hl, de
 	ld a, h
 	cp HIGH(v0BGMap0)

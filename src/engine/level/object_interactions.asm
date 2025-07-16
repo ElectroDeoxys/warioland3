@@ -669,7 +669,7 @@ StepOnObject:
 	ld [wJumpVelIndex], a
 
 	ld a, [wJoypadDown]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr z, .asm_20578
 	ld a, [wPowerUpLevel]
 	cp HIGH_JUMP_BOOTS
@@ -797,7 +797,7 @@ Func_20602:
 	ld a, $0a
 	ld [wJumpVelIndex], a
 	ld a, [wJoypadDown]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr z, .asm_20655
 	ld a, [wPowerUpLevel]
 	cp HIGH_JUMP_BOOTS
@@ -3303,10 +3303,10 @@ ObjInteraction_Teruteru:
 
 	farcall SetState_BlindIdling
 
-	ld a, BCPSF_AUTOINC | palette 0
-	ldh [rBCPS], a
+	ld a, BGPI_AUTOINC | palette 0
+	ldh [rBGPI], a
 	ld b, 4
-	ld c, LOW(rBCPD)
+	ld c, LOW(rBGPD)
 .loop_zero_bg_pals
 	wait_ppu_busy
 	wait_ppu_free
@@ -3317,10 +3317,10 @@ ENDR
 	dec b
 	jr nz, .loop_zero_bg_pals
 
-	ld a, OCPSF_AUTOINC | palette 3
-	ldh [rOCPS], a
+	ld a, OBPI_AUTOINC | palette 3
+	ldh [rOBPI], a
 	ld b, 2
-	ld c, LOW(rOCPD)
+	ld c, LOW(rOBPD)
 .loop_zero_ob_pals
 	wait_ppu_busy
 	wait_ppu_free

@@ -22,7 +22,7 @@ VBlank_Title:
 	call CopyHLToDE
 	pop de
 	ld a, e
-	add BG_MAP_WIDTH
+	add TILEMAP_WIDTH
 	ld e, a
 	ld a, d
 	adc 0

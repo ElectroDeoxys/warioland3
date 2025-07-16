@@ -56,7 +56,7 @@ _InitAudio::
 	ldh [rAUD1ENV], a
 	ldh [rAUD2ENV], a
 	ldh [rAUD4ENV], a
-	ld a, AUDHIGH_RESTART
+	ld a, AUD1HIGH_RESTART ; AUD2HIGH_RESTART/AUD3HIGH_RESTART/AUD4GO_RESTART
 	ldh [rAUD1HIGH], a
 	ldh [rAUD2HIGH], a
 	ldh [rAUD4GO], a
@@ -2621,7 +2621,7 @@ SetTimbre:
 	ldh [rAUD4LEN], a
 	ld a, %01000000 ; counter
 .no_noise_duration
-	or AUDHIGH_RESTART
+	or AUD4GO_RESTART
 	ldh [rAUD4GO], a
 	ret
 
@@ -2741,7 +2741,7 @@ SetFrequency:
 	ld [$ff00+c], a ; freq lo
 	inc c
 	ld a, [$ff00+c] ; freq hi
-	and AUDHIGH_LENGTH_ON
+	and AUD1HIGH_LENGTH_ON ; AUD2HIGH_LENGTH_ON/AUD3HIGH_LENGTH_ON/AUD1HIGH_LENGTH_ON/AUD4GO_LENGTH_ON
 	jr z, .length_counter
 	or h
 	ld [$ff00+c], a
@@ -2761,7 +2761,7 @@ SetFrequency:
 	pop hl
 	ld bc, TRACK_FREQUENCY + 1 - TRACK_UNK0E
 	add hl, bc
-	or AUDHIGH_RESTART
+	or AUD1HIGH_RESTART ; AUD2HIGH_RESTART/AUD3HIGH_RESTART/AUD4GO_RESTART
 	ld [hl], a
 	ret
 
@@ -2863,7 +2863,7 @@ SetVolumeEnvelope:
 	ld a, b
 	ld [$ff00+c], a
 	ldh a, [rAUD4GO]
-	or AUDHIGH_RESTART
+	or AUD4GO_RESTART
 	ldh [rAUD4GO], a
 	ret
 

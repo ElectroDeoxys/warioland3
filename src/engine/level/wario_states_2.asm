@@ -111,7 +111,7 @@ UpdateState_Slipping:
 	ld b, a
 
 	ld a, [wJoypadDown]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jp z, .asm_19db6
 	rlca
 	rlca
@@ -198,14 +198,14 @@ UpdateState_Slipping:
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr z, .asm_19ddc
 	farcall StartJump_FromInput
 	ret
 
 .asm_19ddc
 	ld a, [wJoypadDown]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr z, .asm_19de6
 	jp Func_19e89
 
@@ -331,7 +331,7 @@ UpdateState_CrouchSlipping:
 	and a
 	jp nz, TriggerRoomTransition
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr z, .asm_19f1e
 	farcall StartCrouchJump
 	ret
@@ -649,7 +649,7 @@ UpdateState_SandJumping:
 
 .asm_1a211
 	ld a, [wJoypadDown]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp z, SetState_SandFalling
 
 	ld a, [wJumpVelIndex]
@@ -717,9 +717,9 @@ SetState_SandWalking:
 	ld [wWarioState], a
 
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .d_right
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .d_left
 	jr .asm_1a2bc
 
@@ -813,7 +813,7 @@ SetState_SandTurning:
 
 UpdateState_SandTurning:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, SetState_SandJumping
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
@@ -822,7 +822,7 @@ UpdateState_SandTurning:
 	and a
 	ret z
 	ld a, [wJoypadDown]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jp nz, SetState_SandWalking
 	jp SetState_SandIdling
 
@@ -1033,7 +1033,7 @@ SetState_GettingOffLadder:
 	ld [wIsIntangible], a
 
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .asm_1a611
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
@@ -1122,7 +1122,7 @@ UpdateState_LadderSliding:
 	hcall UpdateAnimation
 
 	ld a, [wJoypadDown]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jp nz, SetState_LadderClimbing
 
 	ld b, $02
@@ -1216,7 +1216,7 @@ UpdateState_GrabSlipping:
 
 .asm_1a802
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr z, .asm_1a819
 	farcall Func_1ede9
 	ret
@@ -1626,7 +1626,7 @@ UpdateState_GetTreasureLookFront:
 UpdateState_GetTreasureClear:
 	ld hl, wWarioStateCounter
 	ld a, [wJoypadDown]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, .next
 	inc [hl]
 	ld a, [hl]
@@ -2045,9 +2045,9 @@ SetState_FenceMovingHorizontal:
 	ld [wAnimationFrame], a
 
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .d_right
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .d_left
 
 	ld a, [wDirection]
@@ -2143,7 +2143,7 @@ UpdateState_FenceSliding:
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
 	ld a, [wJoypadDown]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr z, .asm_1b0f2
 	jp SetState_FenceMovingVertical
 
@@ -2185,15 +2185,15 @@ UpdateState_FenceSliding:
 
 Func_1b168:
 	ld a, [wJoypadDown]
-	and B_BUTTON | D_DOWN
-	cp B_BUTTON | D_DOWN
+	and PAD_B | PAD_DOWN
+	cp PAD_B | PAD_DOWN
 	jp z, SetState_FenceSliding
 
 	ld a, [wJumpingUpwards]
 	and a
 	jr nz, .asm_1b18f
 	ld a, [wJoypadDown]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr z, .asm_1b18f
 .asm_1b17f
 	farcall StartJump_FromInput
@@ -2201,15 +2201,15 @@ Func_1b168:
 
 .asm_1b18f
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, .asm_1b17f
 
 	ld a, [wJoypadDown]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr nz, .d_up
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr nz, .d_down
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jp nz, SetState_FenceMovingHorizontal
 	jp SetState_FenceIdling
 
@@ -2246,7 +2246,7 @@ Func_1b21a:
 	and a
 	jr nz, .asm_1b237
 	ld a, [wJoypadDown]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr z, .asm_1b237
 .asm_1b227
 	farcall StartJump_FromInput
@@ -2254,13 +2254,13 @@ Func_1b21a:
 
 .asm_1b237
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, .asm_1b227
 	ld a, [wJoypadDown]
-	and D_UP | D_DOWN
+	and PAD_UP | PAD_DOWN
 	jp nz, SetState_FenceMovingVertical
 	ld a, [wJoypadDown]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jp nz, SetState_FenceMovingHorizontal
 	ret
 
@@ -2269,7 +2269,7 @@ Func_1b24f:
 	and a
 	jr nz, .asm_1b26c
 	ld a, [wJoypadDown]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr z, .asm_1b26c
 .asm_1b25c
 	farcall StartJump_FromInput
@@ -2277,14 +2277,14 @@ Func_1b24f:
 
 .asm_1b26c
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, .asm_1b25c
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .d_right
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .d_left
-	and D_UP | D_DOWN
+	and PAD_UP | PAD_DOWN
 	jp nz, SetState_FenceMovingVertical
 	jp SetState_FenceIdling
 
@@ -2312,7 +2312,7 @@ Func_1b24f:
 
 Func_1b2c0:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, SetState_SandJumping
 	call Func_1b302
 
@@ -2343,7 +2343,7 @@ Func_1b302:
 
 	ld b, $01
 	ld a, [wJoypadDown]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr z, .asm_1b31e
 	inc b
 .asm_1b31e
@@ -2352,21 +2352,21 @@ Func_1b302:
 
 Func_1b322:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, SetState_SandJumping
 	ld a, [wJoypadDown]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jp nz, SetState_SandWalking
 	ret
 
 Func_1b333:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jp nz, SetState_SandJumping
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .d_right
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .d_left
 	jp SetState_SandIdling
 
@@ -2415,14 +2415,14 @@ Func_1b333:
 
 HandleLadderInput:
 	ld a, [wJoypadDown]
-	and B_BUTTON | D_DOWN
-	cp B_BUTTON | D_DOWN
+	and PAD_B | PAD_DOWN
+	cp PAD_B | PAD_DOWN
 	jp z, SetState_LadderSliding
 
 	ld a, [wJoypadDown]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr nz, .d_up
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr nz, .d_down
 	jp SetState_LadderIdling
 
@@ -2494,15 +2494,15 @@ HandleLadderInput:
 
 Func_1b480:
 	ld a, [wJoypadDown]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jr z, .asm_1b48e
 	ld a, [wJoypadDown]
-	and D_RIGHT | D_LEFT
+	and PAD_RIGHT | PAD_LEFT
 	jr nz, .asm_1b4a7
 
 .asm_1b48e
 	ld a, [wJoypadDown]
-	and D_UP | D_DOWN
+	and PAD_UP | PAD_DOWN
 	jp nz, SetState_LadderClimbing
 	ld hl, wWarioStateCounter
 	ld a, [hl]
@@ -2517,7 +2517,7 @@ Func_1b480:
 
 .asm_1b4a7
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .asm_1b4d3
 	ld a, -16
 	ld [wCollisionBoxLeft], a

@@ -24,7 +24,7 @@ InitTimeAttackDescription:
 TimeAttackDescription:
 	call AdjustJapaneseTimeAttackDescriptionWindow
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	ret z
 	call DisableLCD
 	call FillWhiteBGPal

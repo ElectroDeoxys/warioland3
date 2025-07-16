@@ -75,8 +75,8 @@ Func_1f403f:
 	ld a, [hl]
 	ld [w3d511 + 1], a
 	hlbgcoord 4, 2, v1BGMap1
-	ld bc, -BG_MAP_WIDTH
-	ld de, BG_MAP_WIDTH
+	ld bc, -TILEMAP_WIDTH
+	ld de, TILEMAP_WIDTH
 	ld a, [w3d511 + 0]
 	swap a
 	and $0f
@@ -118,8 +118,8 @@ Func_1f403f:
 	add hl, bc
 
 	hlbgcoord 11, 2, v1BGMap1
-	ld bc, -BG_MAP_WIDTH
-	ld de, BG_MAP_WIDTH
+	ld bc, -TILEMAP_WIDTH
+	ld de, TILEMAP_WIDTH
 	ld a, [wLevelTime + 0]
 	swap a
 	and $0f

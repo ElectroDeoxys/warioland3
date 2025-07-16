@@ -19,13 +19,13 @@ REPT 3
 	rr l
 ENDR
 
-; hl *= BG_MAP_WIDTH
+; hl *= TILEMAP_WIDTH
 REPT 5
 	sla l
 	rl h
 ENDR
 	ld a, h
-	and HIGH(BG_MAP_WIDTH * BG_MAP_HEIGHT - 1)
+	and HIGH(TILEMAP_WIDTH * TILEMAP_HEIGHT - 1)
 	ld d, a
 	ld e, l
 
@@ -39,7 +39,7 @@ REPT 3
 	rr l
 ENDR
 	ld a, l
-	and BG_MAP_WIDTH - 1
+	and TILEMAP_WIDTH - 1
 	ld l, a
 
 	ld h, HIGH(v0BGMap0)
@@ -67,13 +67,13 @@ REPT 3
 	rr l
 ENDR
 
-; hl *= BG_MAP_WIDTH
+; hl *= TILEMAP_WIDTH
 REPT 5
 	sla l
 	rl h
 ENDR
 	ld a, h
-	and HIGH(BG_MAP_WIDTH * BG_MAP_HEIGHT - 1)
+	and HIGH(TILEMAP_WIDTH * TILEMAP_HEIGHT - 1)
 	ld d, a
 	ld e, l
 	ld a, [wBlockXPos + 0]
@@ -87,7 +87,7 @@ REPT 3
 	rr l
 ENDR
 	ld a, l
-	and BG_MAP_WIDTH - 1
+	and TILEMAP_WIDTH - 1
 	ld l, a
 	ld h, HIGH(v0BGMap0)
 	add hl, de

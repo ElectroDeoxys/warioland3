@@ -3,23 +3,23 @@
 ; w1dc13 = length - 1
 Func_2c30::
 	ld a, h
-	ldh [rHDMA1], a
+	ldh [rVDMA_SRC_HIGH], a
 	ld a, l
-	ldh [rHDMA2], a
+	ldh [rVDMA_SRC_LOW], a
 	ld a, [wdc11 + 0]
-	ldh [rHDMA3], a
+	ldh [rVDMA_DEST_HIGH], a
 	ld a, [wdc11 + 1]
-	ldh [rHDMA4], a
+	ldh [rVDMA_DEST_LOW], a
 	ld a, [w1dc13]
-	ldh [rHDMA5], a
+	ldh [rVDMA_LEN], a
 	ret
 
 Func_2c46::
-	ld de, rBCPS
+	ld de, rBGPI
 	ld c, 4
 	jr .asm_2c52
 
-	ld de, rOCPS
+	ld de, rOBPI
 	ld c, 4
 
 .asm_2c52

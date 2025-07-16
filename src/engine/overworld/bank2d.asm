@@ -319,14 +319,14 @@ Func_b4247:
 
 	hlbgcoord 0, 30
 	debgcoord 0, 21, wAttrmap
-	ld b, 2 * BG_MAP_WIDTH
+	ld b, 2 * TILEMAP_WIDTH
 	call CopyHLToDE
 
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	hlbgcoord 0, 30
 	debgcoord 0, 19, wAttrmap
-	ld b, 2 * BG_MAP_WIDTH
+	ld b, 2 * TILEMAP_WIDTH
 	call CopyHLToDE
 	xor a
 	ldh [rVBK], a
@@ -473,11 +473,11 @@ Func_b43a8:
 	xor a
 	ld [wSceneObj5State], a
 	hlbgcoord 16, 5, wAttrmap
-	res BGB_PRI, [hl]
+	res B_BG_PRIO, [hl]
 	hlbgcoord 16, 6, wAttrmap
-	res BGB_PRI, [hl]
+	res B_BG_PRIO, [hl]
 	hlbgcoord  0, 7, wAttrmap
-	res BGB_PRI, [hl]
+	res B_BG_PRIO, [hl]
 	ret
 .asm_b43ce
 	ld hl, wSceneObj5
@@ -716,12 +716,12 @@ Func_b4567:
 	call InitSceneObjParams
 
 	ld b, 3
-	ld de, BG_MAP_WIDTH - 1
+	ld de, TILEMAP_WIDTH - 1
 	hlbgcoord 14, 9, wAttrmap
 .loop
-	set BGB_PRI, [hl]
+	set B_BG_PRIO, [hl]
 	inc hl
-	set BGB_PRI, [hl]
+	set B_BG_PRIO, [hl]
 	add hl, de
 	dec b
 	jr nz, .loop
@@ -1190,7 +1190,7 @@ Func_b4895:
 ; starting from hl in BGMap
 SetBGMapBytesPriority:
 .loop
-	set BGB_PRI, [hl]
+	set B_BG_PRIO, [hl]
 	inc hl
 	dec b
 	jr nz, .loop
@@ -2096,7 +2096,7 @@ Func_b4f58:
 	ld b, 1 palettes
 	call CopyHLToDE
 	ld hl, wPalConfig1
-	ld a, LOW(rBCPS)
+	ld a, LOW(rBGPI)
 	ld [hl], a
 	ret
 
@@ -3159,9 +3159,9 @@ NOWFunc_BottomBar:
 	ld c, 1 palettes
 	call CopyFarBytes
 	ld hl, wPalConfig1
-	ld a, LOW(rBCPS)
+	ld a, LOW(rBGPI)
 	ld [hli], a
-	ld a, BCPSF_AUTOINC | palette 7
+	ld a, BGPI_AUTOINC | palette 7
 	ld [hli], a
 	ld a, 1
 	ld [hli], a
@@ -3352,42 +3352,42 @@ NOWFunc_DayNightSpell:
 	db $34, $35
 	db $36, $37
 
-	db $7 | BGF_BANK1, $7 | BGF_BANK1
-	db $7 | BGF_BANK1, $7 | BGF_BANK1
+	db $7 | BG_BANK1, $7 | BG_BANK1
+	db $7 | BG_BANK1, $7 | BG_BANK1
 
 .invisible_button_attr
 	db $3e, $3e
 	db $3f, $3f
 
-	db $7 | BGF_BANK1, $7 | BGF_BANK1 | BGF_XFLIP
-	db $7 | BGF_BANK1, $7 | BGF_BANK1 | BGF_XFLIP
+	db $7 | BG_BANK1, $7 | BG_BANK1 | BG_XFLIP
+	db $7 | BG_BANK1, $7 | BG_BANK1 | BG_XFLIP
 
 .pressed_button_attr
 	db $48, $49
 	db $4a, $4b
 
-	db $7 | BGF_BANK1, $7 | BGF_BANK1
-	db $7 | BGF_BANK1, $7 | BGF_BANK1
+	db $7 | BG_BANK1, $7 | BG_BANK1
+	db $7 | BG_BANK1, $7 | BG_BANK1
 
 .Func_b57f4:
-	ld a, HIGH(wAttrmap + 0 + 21 * BG_MAP_WIDTH)
+	ld a, HIGH(wAttrmap + 0 + 21 * TILEMAP_WIDTH)
 	ld [wHDMASourceHi], a
-	ld a, LOW(wAttrmap + 0 + 21 * BG_MAP_WIDTH)
+	ld a, LOW(wAttrmap + 0 + 21 * TILEMAP_WIDTH)
 	ld [wHDMASourceLo], a
-	ld a, HIGH(v0BGMap0 + 0 + 30 * BG_MAP_WIDTH) - $80
+	ld a, HIGH(v0BGMap0 + 0 + 30 * TILEMAP_WIDTH) - $80
 	ld [wHDMADestHi], a
-	ld a, LOW(v0BGMap0 + 0 + 30 * BG_MAP_WIDTH)
+	ld a, LOW(v0BGMap0 + 0 + 30 * TILEMAP_WIDTH)
 	ld [wHDMADestLo], a
 	ld a, 2 dma_rows
 	ld [wHDMAMode], a
 
-	ld a, HIGH(wAttrmap + 0 + 19 * BG_MAP_WIDTH)
+	ld a, HIGH(wAttrmap + 0 + 19 * TILEMAP_WIDTH)
 	ld [w2d0b5SourceHi], a
-	ld a, LOW(wAttrmap + 0 + 19 * BG_MAP_WIDTH)
+	ld a, LOW(wAttrmap + 0 + 19 * TILEMAP_WIDTH)
 	ld [w2d0b5SourceLo], a
-	ld a, HIGH(v0BGMap0 + 0 + 30 * BG_MAP_WIDTH) - $80
+	ld a, HIGH(v0BGMap0 + 0 + 30 * TILEMAP_WIDTH) - $80
 	ld [w2d0b5DestHi], a
-	ld a, LOW(v0BGMap0 + 0 + 30 * BG_MAP_WIDTH)
+	ld a, LOW(v0BGMap0 + 0 + 30 * TILEMAP_WIDTH)
 	ld [w2d0b5DestLo], a
 	ld a, 2 dma_rows
 	ld [w2d0b5Mode], a
@@ -3397,7 +3397,7 @@ NOWFunc_DayNightSpell:
 	debgcoord 11, 19, wAttrmap
 	push de
 	ld a, e
-	add 2 * BG_MAP_WIDTH
+	add 2 * TILEMAP_WIDTH
 	ld e, a
 	ld a, $00
 	adc d
@@ -3412,7 +3412,7 @@ NOWFunc_DayNightSpell:
 	ld [de], a
 	dec e
 	ld a, e
-	add BG_MAP_WIDTH
+	add TILEMAP_WIDTH
 	ld e, a
 	ld a, [hli]
 	ld [de], a
@@ -3780,9 +3780,9 @@ WOWFunc_Rain:
 	ld c, 8 palettes
 	call CopyFarBytes
 	ld hl, wPalConfig1
-	ld a, LOW(rBCPS)
+	ld a, LOW(rBGPI)
 	ld [hli], a
-	ld a, BCPSF_AUTOINC | palette 0
+	ld a, BGPI_AUTOINC | palette 0
 	ld [hli], a
 	ld a, 1 palettes
 	ld [hli], a
@@ -4204,7 +4204,7 @@ WOWFunc_VulcanoEruption:
 	ld [hl], a
 
 	ld hl, wPalConfig1Index
-	ld a, BCPSF_AUTOINC | palette 5
+	ld a, BGPI_AUTOINC | palette 5
 	ld [hli], a
 	ld a, 1
 	ld [hli], a
@@ -4258,9 +4258,9 @@ WOWFunc_VulcanoEruption:
 	call Func_b69a6
 
 	ld hl, wPalConfig1
-	ld a, LOW(rBCPS)
+	ld a, LOW(rBGPI)
 	ld [hli], a
-	ld a, BCPSF_AUTOINC | palette 0
+	ld a, BGPI_AUTOINC | palette 0
 	ld [hli], a
 	ld a, 1 palettes
 	ld [hli], a
@@ -4270,9 +4270,9 @@ WOWFunc_VulcanoEruption:
 	ld [hli], a
 
 	ld hl, wPalConfig2
-	ld a, LOW(rOCPS)
+	ld a, LOW(rOBPI)
 	ld [hli], a
-	ld a, OCPSF_AUTOINC | palette 0
+	ld a, OBPI_AUTOINC | palette 0
 	ld [hli], a
 	ld a, 1 palettes
 	ld [hli], a
@@ -4301,9 +4301,9 @@ WOWFunc_VulcanoEruption:
 	call Func_b5868
 
 	ld hl, wPalConfig1
-	ld a, LOW(rBCPS)
+	ld a, LOW(rBGPI)
 	ld [hli], a
-	ld a, BCPSF_AUTOINC | palette 0
+	ld a, BGPI_AUTOINC | palette 0
 	ld [hli], a
 	ld a, 1 palettes
 	ld [hli], a
@@ -4313,9 +4313,9 @@ WOWFunc_VulcanoEruption:
 	ld [hli], a
 
 	ld hl, wPalConfig2
-	ld a, LOW(rOCPS)
+	ld a, LOW(rOBPI)
 	ld [hli], a
-	ld a, OCPSF_AUTOINC | palette 0
+	ld a, OBPI_AUTOINC | palette 0
 	ld [hli], a
 	ld a, 1 palettes
 	ld [hli], a
@@ -5756,9 +5756,9 @@ SOWFunc_CanyonThunder:
 	call CopyFarBytes
 .apply_pals
 	ld hl, wPalConfig1
-	ld a, LOW(rBCPS)
+	ld a, LOW(rBGPI)
 	ld [hli], a
-	ld a, BCPSF_AUTOINC | palette 0
+	ld a, BGPI_AUTOINC | palette 0
 	ld [hli], a
 	ld a, 1 palettes
 	ld [hli], a
@@ -6807,9 +6807,9 @@ EOWFunc_FreezeSea:
 	call Func_b4874
 .asm_b6f64
 	ld hl, wPalConfig1
-	ld a, LOW(rBCPS)
+	ld a, LOW(rBGPI)
 	ld [hli], a
-	ld a, BCPSF_AUTOINC | palette 4
+	ld a, BGPI_AUTOINC | palette 4
 	ld [hli], a
 	ld a, 1
 	ld [hli], a
@@ -7049,14 +7049,14 @@ EOWFunc_Earthquake:
 	ld b, $04
 	hlbgcoord 2, 10, wAttrmap
 .asm_b7147
-	set BGB_PRI, [hl]
+	set B_BG_PRIO, [hl]
 	inc hl
 	dec b
 	jr nz, .asm_b7147
 	ld b, $04
 	hlbgcoord 2, 11, wAttrmap
 .asm_b7152
-	set BGB_PRI, [hl]
+	set B_BG_PRIO, [hl]
 	inc hl
 	dec b
 	jr nz, .asm_b7152
@@ -7619,7 +7619,7 @@ EOWFunc_FormCastle:
 	ret
 .asm_b74df
 	ld hl, wPalConfig1Index
-	ld a, BCPSF_AUTOINC | palette 0
+	ld a, BGPI_AUTOINC | palette 0
 	ld [hli], a
 	ld a, 6
 	ld [hli], a
@@ -7629,7 +7629,7 @@ EOWFunc_FormCastle:
 	ld [hli], a
 
 	ld hl, wPalConfig2Index
-	ld a, BCPSF_AUTOINC | palette 0
+	ld a, BGPI_AUTOINC | palette 0
 	ld [hli], a
 	ld a, 6
 	ld [hli], a
@@ -7658,7 +7658,7 @@ EOWFunc_FormCastle:
 	cp b
 	ret c
 	ld hl, wPalConfig1
-	ld a, LOW(rBCPS)
+	ld a, LOW(rBGPI)
 	ld [hli], a
 	jr .asm_b750a
 .asm_b7522
@@ -7669,7 +7669,7 @@ EOWFunc_FormCastle:
 	cp b
 	ret c
 	ld hl, wPalConfig2
-	ld a, LOW(rBCPS)
+	ld a, LOW(rBGPI)
 	ld [hli], a
 	xor a
 	ld hl, wOWUIObj2XCoord
@@ -7679,7 +7679,7 @@ EOWFunc_FormCastle:
 
 .asm_b7539
 	ld hl, wPalConfig2
-	ld a, LOW(rBCPS)
+	ld a, LOW(rBGPI)
 	ld [hli], a
 	xor a
 	ld [wOWUIObj2YCoord], a

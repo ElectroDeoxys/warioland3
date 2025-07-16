@@ -4,7 +4,7 @@ Func_80de0:
 	bit MODE_TIME_ATTACK_F, a
 	ret z
 	ld a, [wJoypadPressed]
-	bit START_F, a
+	bit B_PAD_START, a
 	ret z
 	ld a, SST_OVERWORLD_BEST_TIMES
 	ld [wSubState], a

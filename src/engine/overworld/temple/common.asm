@@ -8,7 +8,7 @@ UpdateTempleScene:
 
 Func_80e33:
 	ld a, [wJoypadDown]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jr nz, .b_btn
 	ld hl, wSubState
 	inc [hl]

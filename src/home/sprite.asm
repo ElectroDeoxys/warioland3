@@ -65,7 +65,7 @@ LoadSprite::
 	ld h, HIGH(wVirtualOAM)
 .loop
 	ld a, l
-	cp OAM_COUNT * SPRITEOAMSTRUCT_LENGTH
+	cp OAM_SIZE
 	ret nc
 	ld a, [de]
 	cp $80

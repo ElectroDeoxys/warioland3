@@ -167,6 +167,6 @@ Func_d434c:
 	call ClearUnusedVirtualOAM
 
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	ret z
 	jp OpenMusicalCoinsScreen

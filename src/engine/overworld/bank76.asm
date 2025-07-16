@@ -210,7 +210,7 @@ _LoadCloudAndSeaGfx:
 Func_1d8c2c:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-	ld c, LOW(rHDMA1)
+	ld c, LOW(rVDMA_SRC_HIGH)
 	ld a, HIGH(wTilemap tile $24)
 	ld [$ff00+c], a
 	ld a, LOW(wTilemap tile $24)
@@ -229,7 +229,7 @@ Func_1d8c2c:
 	ld a, [w2d044 + 0]
 	and a
 	jr z, .done
-	ld c, LOW(rHDMA1)
+	ld c, LOW(rVDMA_SRC_HIGH)
 	ld [$ff00+c], a
 	ld a, [w2d044 + 1]
 	inc c

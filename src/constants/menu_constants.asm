@@ -54,7 +54,7 @@ DEF TRANSITION_NEW_GAME             EQU $ff
 	const PAUSEMENU_ACTION_HELP ; $2
 	const PAUSEMENU_TO_MAP      ; $3
 
-DEF PAUSEMENUF_SELECT_F EQU 7
+DEF PAUSEMENUF_B_PAD_SELECT EQU 7
 
 ; flags in wPowerUpLevel for Action Help stuff
 	const_def 6

@@ -345,10 +345,10 @@ UpdateRoomAnimatedPals::
 	push af
 	ld a, BANK("Level Palettes")
 	bankswitch
-	ld a, BCPSF_AUTOINC | palette 0
-	ldh [rBCPS], a
+	ld a, BGPI_AUTOINC | palette 0
+	ldh [rBGPI], a
 	ld b, 5
-	ld c, LOW(rBCPD)
+	ld c, LOW(rBGPD)
 .loop_copy_pals
 	wait_ppu_busy
 	wait_ppu_free

@@ -15,15 +15,15 @@ ENDM
 ; used to temporarily switch
 ; to the given WRAM bank
 MACRO push_wram
-	ldh a, [rSVBK]
+	ldh a, [rWBK]
 	push af
 	ld a, \1 ; WRAM bank number
-	ldh [rSVBK], a
+	ldh [rWBK], a
 ENDM
 
 MACRO pop_wram
 	pop af
-	ldh [rSVBK], a
+	ldh [rWBK], a
 ENDM
 
 MACRO jumptable
@@ -86,14 +86,14 @@ ENDM
 MACRO wait_ppu_busy
 :
 	ldh a, [rSTAT]
-	and STATF_LCD
+	and STAT_LCD
 	jr z, :-
 ENDM
 
 MACRO wait_ppu_free
 :
 	ldh a, [rSTAT]
-	and STATF_LCD
+	and STAT_LCD
 	jr nz, :-
 ENDM
 

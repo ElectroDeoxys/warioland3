@@ -18,7 +18,7 @@ Func_d47f1:
 	cp 13
 	jr nz, .next_bit
 	ld a, e
-	add BG_MAP_WIDTH - 5
+	add TILEMAP_WIDTH - 5
 	ld e, a
 .next_bit
 	dec c

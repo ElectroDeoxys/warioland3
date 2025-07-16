@@ -40,10 +40,10 @@ DrawLevelObjectsAfterLevelReturn::
 
 HandlePauseMenuInput:
 	ld a, [wPauseMenuSelection]
-	bit PAUSEMENUF_SELECT_F, a
+	bit PAUSEMENUF_B_PAD_SELECT, a
 	ret nz
 	ld a, [wJoypadPressed]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jp nz, .Return
 
 	ld a, [wPauseMenuSelection]
@@ -56,9 +56,9 @@ HandlePauseMenuInput:
 
 	; PAUSEMENU_RETURN
 	ld a, [wJoypadPressed]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .asm_1f09e7
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	ret z
 	jp .Return
 .asm_1f09e7
@@ -69,21 +69,21 @@ HandlePauseMenuInput:
 
 .asm_1f09f0
 	ld a, [wJoypadPressed]
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jp nz, .highlight_return_button
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .highlight_action_help_button
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	ret z
 	jp .Save
 
 .asm_1f0a02
 	ld a, [wJoypadPressed]
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .asm_1f0a13
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .highlight_to_map_button
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	ret z
 	jp .ActionHelp
 .asm_1f0a13
@@ -94,9 +94,9 @@ HandlePauseMenuInput:
 
 .asm_1f0a1d
 	ld a, [wJoypadPressed]
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .highlight_action_help_button
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	ret z
 	jp .ToMap
 
@@ -216,7 +216,7 @@ HandlePauseMenuInput:
 	ld [hl], a
 
 	ld hl, wPauseMenuSelection
-	set PAUSEMENUF_SELECT_F, [hl]
+	set PAUSEMENUF_B_PAD_SELECT, [hl]
 	play_sfx SFX_0E7
 	ret
 
@@ -273,6 +273,6 @@ HandlePauseMenuInput:
 
 .do_selection
 	ld hl, wPauseMenuSelection
-	set PAUSEMENUF_SELECT_F, [hl]
+	set PAUSEMENUF_B_PAD_SELECT, [hl]
 	play_sfx SFX_SELECTION
 	ret

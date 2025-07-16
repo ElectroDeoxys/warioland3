@@ -544,9 +544,9 @@ SetOBPals::
 	add a
 	add a
 	add a ; *8
-	or OCPSF_AUTOINC
-	ldh [rOCPS], a
-	ld c, LOW(rOCPD)
+	or OBPI_AUTOINC
+	ldh [rOBPI], a
+	ld c, LOW(rOBPD)
 .loop_copy_pals
 	wait_ppu_busy
 	wait_ppu_free
@@ -566,13 +566,13 @@ SetBGPals::
 	add a
 	add a
 	add a ; *8
-	or BCPSF_AUTOINC
-	ldh [rBCPS], a
-	ld c, LOW(rBCPD)
+	or BGPI_AUTOINC
+	ldh [rBGPI], a
+	ld c, LOW(rBGPD)
 .loop_copy_pals
 	wait_ppu_busy
 	wait_ppu_free
-REPT PALETTE_SIZE
+REPT PAL_SIZE
 	ld a, [hli]
 	ld [$ff00+c], a
 ENDR
@@ -587,14 +587,14 @@ BlackOutOBPals::
 	add a
 	add a
 	add a ; *8
-	or OCPSF_AUTOINC
-	ldh [rOCPS], a
-	ld c, LOW(rOCPD)
+	or OBPI_AUTOINC
+	ldh [rOBPI], a
+	ld c, LOW(rOBPD)
 .loop_clear_pals
 	wait_ppu_busy
 	wait_ppu_free
 	xor a ; black
-REPT PALETTE_SIZE
+REPT PAL_SIZE
 	ld [$ff00+c], a
 ENDR
 	dec b
@@ -608,14 +608,14 @@ BlackOutBGPals::
 	add a
 	add a
 	add a ; *8
-	or BCPSF_AUTOINC
-	ldh [rBCPS], a
-	ld c, LOW(rBCPD)
+	or BGPI_AUTOINC
+	ldh [rBGPI], a
+	ld c, LOW(rBGPD)
 .loop_clear_pals
 	wait_ppu_busy
 	wait_ppu_free
 	xor a ; black
-REPT PALETTE_SIZE
+REPT PAL_SIZE
 	ld [$ff00+c], a
 ENDR
 	dec b

@@ -797,7 +797,7 @@ REPT 23
 	ld [de], a
 	inc e
 	push de
-	ld de, BG_MAP_WIDTH
+	ld de, TILEMAP_WIDTH
 	add hl, de
 	pop de
 	ld a, h

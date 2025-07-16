@@ -241,9 +241,9 @@ Func_19832:
 	jr nz, .done
 
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .add_offset
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .sub_offset
 	ld a, [wDirection]
 	and a

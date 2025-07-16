@@ -1014,7 +1014,7 @@ DrawRoom_FromStart:
 	ld a, [hl]
 	ld [de], a
 
-	ld a, BG_MAP_WIDTH
+	ld a, TILEMAP_WIDTH
 	ld [wDrawRoomWidthLoopVar], a
 .loop_row
 	call .QueueRowTilesAndAttributes
@@ -1024,12 +1024,12 @@ DrawRoom_FromStart:
 	ld a, [wBGPtr + 1]
 	ld e, a
 	ld hl, wBGMapTileVRAM0Queue
-	ld b, BG_MAP_HEIGHT
+	ld b, TILEMAP_HEIGHT
 .loop_col_vram0
 	ld a, [hli]
 	ld [de], a
 	ld a, e
-	add BG_MAP_WIDTH
+	add TILEMAP_WIDTH
 	ld e, a
 	ld a, d
 	adc 0
@@ -1048,12 +1048,12 @@ DrawRoom_FromStart:
 	ld a, [wBGPtr + 1]
 	ld e, a
 	ld hl, wBGMapTileVRAM1Queue
-	ld b, BG_MAP_HEIGHT
+	ld b, TILEMAP_HEIGHT
 .loop_col_vram1
 	ld a, [hli]
 	ld [de], a
 	ld a, e
-	add BG_MAP_WIDTH
+	add TILEMAP_WIDTH
 	ld e, a
 	ld a, d
 	adc 0
@@ -1105,7 +1105,7 @@ DrawRoom_FromStart:
 	ld a, e
 	add b
 	ld e, a
-	ld b, BG_MAP_HEIGHT
+	ld b, TILEMAP_HEIGHT
 .loop_col
 	ld a, h
 	ld [de], a
@@ -1114,7 +1114,7 @@ DrawRoom_FromStart:
 	ld [de], a
 	inc e
 	push de
-	ld de, BG_MAP_WIDTH
+	ld de, TILEMAP_WIDTH
 	add hl, de
 	pop de
 	ld a, h
@@ -1124,7 +1124,7 @@ DrawRoom_FromStart:
 	jr nz, .loop_col
 
 	ld a, [wBGMapAddressQueueSize]
-	add 2 * BG_MAP_HEIGHT
+	add 2 * TILEMAP_HEIGHT
 	ld [wBGMapAddressQueueSize], a
 
 	ld hl, wBlockPos
@@ -1154,6 +1154,6 @@ DrawRoom_FromStart:
 
 .done_queuing
 	ld a, [wBGMapTileQueueSize]
-	add BG_MAP_WIDTH
+	add TILEMAP_WIDTH
 	ld [wBGMapTileQueueSize], a
 	ret

@@ -95,11 +95,11 @@ Func_80f3c:
 	ld c, $00
 	ld b, $00
 	ld a, [wMapSideLevelID]
-	set D_LEFT_F, c
+	set B_PAD_LEFT, c
 	cp OW_EXIT_RIGHT
 	jr z, .is_exit
 	ld c, b
-	set D_RIGHT_F, c
+	set B_PAD_RIGHT, c
 	cp OW_EXIT_LEFT
 	jr z, .is_exit
 
@@ -140,7 +140,7 @@ Func_80f3c:
 
 .GetDirectionalInput:
 	ld a, [wJoypadDown]
-	and D_PAD
+	and PAD_CTRL_PAD
 	ld b, a
 	rla
 	jr c, .up_down ; down
@@ -150,7 +150,7 @@ Func_80f3c:
 	ld a, b
 	ret
 .up_down
-	ld a, D_UP | D_DOWN
+	ld a, PAD_UP | PAD_DOWN
 	and b
 	ret
 
@@ -193,10 +193,10 @@ Func_80ff7:
 	and a
 	jr nz, Func_81055
 	ld a, [wJoypadDown]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jr nz, .asm_81016
 	ld a, [wJoypadPressed]
-	bit SELECT_F, a
+	bit B_PAD_SELECT, a
 	jr z, .asm_81016
 	ld hl, wOWBarsState
 	inc [hl]
@@ -248,7 +248,7 @@ Func_81077:
 	ret nz
 	; OW position is in The Temple
 	ld a, [wJoypadPressed]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	ret z
 	ld a, [wNextTreasure]
 	cp TREASURES_END
@@ -268,7 +268,7 @@ Func_81077:
 
 Func_810a9:
 	ld a, [wJoypadPressed]
-	and D_PAD
+	and PAD_CTRL_PAD
 	ld b, a
 	rla
 	jr c, .up_down
@@ -277,7 +277,7 @@ Func_810a9:
 	ld a, b
 	ret
 .up_down
-	ld a, D_UP | D_DOWN
+	ld a, PAD_UP | PAD_DOWN
 	and b
 	ret
 
@@ -409,7 +409,7 @@ Func_8115c:
 	jr nz, .asm_81177
 
 	ld a, [wJoypadDown]
-	and D_PAD
+	and PAD_CTRL_PAD
 	jr z, .asm_81175
 	inc [hl]
 	ld a, [hl]
@@ -527,7 +527,7 @@ Func_81240:
 	cp $80
 	jr z, .no_carry
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr z, .no_carry
 	call LoadMapLevelFromLevelIndex
 	ld a, [wOWLevel]
@@ -788,7 +788,7 @@ Func_813f6:
 
 Func_81413:
 	ld a, [wJoypadPressed]
-	and B_BUTTON | D_RIGHT | D_LEFT | D_DOWN
+	and PAD_B | PAD_RIGHT | PAD_LEFT | PAD_DOWN
 	jr nz, .asm_81423
 	ld hl, wSceneObj13State
 	ld a, [hl]
@@ -841,7 +841,7 @@ Func_8143d:
 
 Func_81477:
 	ld a, [wJoypadDown]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jr z, .asm_8148e
 	ld hl, w2d0e2
 	inc [hl]
@@ -1492,7 +1492,7 @@ Func_818ad:
 	and a
 	jr z, .no_top_bar
 	ld a, [wJoypadPressed]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jp nz, Func_81931
 .no_top_bar
 	ld hl, w2d014
@@ -2991,14 +2991,14 @@ GetConnectedLevel1ArrowCoord:
 	ld b, a
 	ld a, $8
 	ld hl, wOWXCoord1
-	bit D_RIGHT_F, b
+	bit B_PAD_RIGHT, b
 	jr nz, .right_down
-	bit D_LEFT_F, b
+	bit B_PAD_LEFT, b
 	jr nz, .left_up
 	ld hl, wOWYCoord1
-	bit D_UP_F, b
+	bit B_PAD_UP, b
 	jr nz, .left_up
-	bit D_DOWN_F, b
+	bit B_PAD_DOWN, b
 	jr nz, .right_down
 	ret
 .left_up
@@ -3034,9 +3034,9 @@ Func_81feb:
 
 	call .GetTilePalIndex
 	ld a, [wAttrToPlaceInOW]
-	and $ff ^ BGF_PALMASK
+	and $ff ^ BG_PALMASK
 	or c ; always $7
-	or BGF_BANK1
+	or BG_BANK1
 	ld [wAttrToPlaceInOW], a
 
 	ld a, [w2d07f]
@@ -3258,23 +3258,23 @@ GetOWAllowedDPadInput:
 	ld c, $00
 
 	inc hl
-	ld b, D_RIGHT
+	ld b, PAD_RIGHT
 	call .CheckAllowedDirection
 
 	dec hl
 	dec hl
-	ld b, D_LEFT
+	ld b, PAD_LEFT
 	call .CheckAllowedDirection
 
 	inc hl
-	ld de, -BG_MAP_WIDTH
+	ld de, -TILEMAP_WIDTH
 	add hl, de
-	ld b, D_UP
+	ld b, PAD_UP
 	call .CheckAllowedDirection
 
-	ld de, 2 * BG_MAP_WIDTH
+	ld de, 2 * TILEMAP_WIDTH
 	add hl, de
-	ld b, D_DOWN
+	ld b, PAD_DOWN
 	call .CheckAllowedDirection
 
 	ld a, c
@@ -3296,7 +3296,7 @@ GetOWAllowedDPadInput:
 	dec d
 	dec d
 	ld a, [de] ; wAttrmap
-	bit BGB_BANK1, a
+	bit B_BG_BANK1, a
 	ret z ; not an arrow
 	ld a, c
 	or b
@@ -3304,7 +3304,7 @@ GetOWAllowedDPadInput:
 	ret
 
 .junction
-	ld a, D_RIGHT | D_UP | D_DOWN
+	ld a, PAD_RIGHT | PAD_UP | PAD_DOWN
 	ld [wOWAllowedDPadInput], a
 	ret
 
@@ -3476,13 +3476,13 @@ UpdateTopBar:
 	call .InitTopBarButtons
 	call ApplyTopBarButtonAttributes
 
-	ld a, LOW(rOCPS)
+	ld a, LOW(rOBPI)
 	ld [wPalConfig1Register], a
 	ld a, HIGH(wTempPals2 palette 4)
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempPals2 palette 4)
 	ld [wPalConfig1SourceLo], a
-	ld a, OCPSF_AUTOINC | palette 4
+	ld a, OBPI_AUTOINC | palette 4
 	ld [wPalConfig1Index], a
 	ld a, 4 ; number of pals
 	ld [wPalConfig1Number], a
@@ -3531,7 +3531,7 @@ UpdateTopBar:
 	call HandleTopBarDPad
 	jr c, .done_input
 	ld a, [wJoypadPressed]
-	and B_BUTTON | SELECT
+	and PAD_B | PAD_SELECT
 	jr z, .done_input
 	play_sfx SFX_0EA
 	ld hl, wOWBarsState
@@ -3564,13 +3564,13 @@ UpdateTopBar:
 	ld c, 4 palettes
 	ld b, BANK(Pals_84900)
 	call CopyFarBytes
-	ld a, LOW(rOCPS)
+	ld a, LOW(rOBPI)
 	ld [wPalConfig1Register], a
 	ld a, HIGH(wTempPals2 palette 4)
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempPals2 palette 4)
 	ld [wPalConfig1SourceLo], a
-	ld a, OCPSF_AUTOINC | palette 4
+	ld a, OBPI_AUTOINC | palette 4
 	ld [wPalConfig1Index], a
 	ld a, 4 ; number of pals
 	ld [wPalConfig1Number], a
@@ -3581,7 +3581,7 @@ UpdateTopBar:
 
 .Cutscene:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, .skip_cutscene_wait
 	ld a, [wOWBarsStateCounter]
 	cp 30
@@ -3602,7 +3602,7 @@ UpdateTopBar:
 
 .Collection:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, .skip_collection_wait
 	ld a, [wOWBarsStateCounter]
 	cp 30
@@ -3621,7 +3621,7 @@ UpdateTopBar:
 
 .NextMap:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, .skip_next_map_wait
 	ld a, [wOWBarsStateCounter]
 	cp 30
@@ -3729,9 +3729,9 @@ HandleTopBarDPad:
 	ld c, a
 	ld a, [wTopBarSelectableButtons]
 	ld d, a
-	bit D_RIGHT_F, c
+	bit B_PAD_RIGHT, c
 	jr nz, .d_right
-	bit D_LEFT_F, c
+	bit B_PAD_LEFT, c
 	jr nz, .d_left
 	ret
 
@@ -3974,7 +3974,7 @@ Func_82521:
 HandleTopBarSelection:
 	xor a ; reset carry flag
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	ret z ; no A button
 
 	ld a, [wTopBarSelection]
@@ -4116,11 +4116,11 @@ LoadTopBarButtonAttributes:
 ;	fallthrough
 
 Func_8269f:
-; loops twice, once for de + (2 * BG_MAP_WIDTH)
+; loops twice, once for de + (2 * TILEMAP_WIDTH)
 ; and then for the original de
 	push de
 	ld a, e
-	add 2 * BG_MAP_WIDTH
+	add 2 * TILEMAP_WIDTH
 	ld e, a
 	ld a, $00
 	adc d
@@ -4134,7 +4134,7 @@ Func_8269f:
 	ld [de], a
 	dec e
 	ld a, e
-	add BG_MAP_WIDTH
+	add TILEMAP_WIDTH
 	ld e, a
 	ld a, [hli]
 	ld [de], a
@@ -4213,14 +4213,14 @@ LOAD UNION "LCD Function", WRAM0
 	push de
 	push hl
 	ld a, $02
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	wait_ppu_free
 	ld hl, rLCDC
-	set LCDCB_BG9C00, [hl]
+	set B_LCDC_BG_MAP, [hl] ; use BGMap1
 	ldh [rSCY], a
 	ldh [rSCX], a
 	xor a
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	pop hl
 	pop de
 	pop bc
@@ -4302,7 +4302,7 @@ HandleBottomBar:
 	ret z ; no magnifying glass, exit
 	ld hl, wMagnifyingGlassCounter
 	ld a, [wJoypadDown]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jr nz, .b_btn_down
 	; reset counter
 	xor a
@@ -4321,7 +4321,7 @@ HandleBottomBar:
 
 .HandleOpenedBottomBar:
 	ld a, [wJoypadDown]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	ret nz ; B button still pressed
 
 	; no longer pressing B,
@@ -4336,7 +4336,7 @@ HandleBottomBar:
 
 .OpenBottomBar:
 	ld a, [wJoypadDown]
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jr z, .no_b_btn
 	ld a, [wBottomBarState]
 	jumptable
@@ -4840,13 +4840,13 @@ ShowLevelArrowInOW:
 	ld b, a
 	xor a
 	ld [hl], a ; attribute
-	bit D_RIGHT_F, b
+	bit B_PAD_RIGHT, b
 	jr nz, .right
-	bit D_LEFT_F, b
+	bit B_PAD_LEFT, b
 	jr nz, .left
-	bit D_UP_F, b
+	bit B_PAD_UP, b
 	jr nz, .up
-	bit D_DOWN_F, b
+	bit B_PAD_DOWN, b
 	jr nz, .down
 	ret
 .left

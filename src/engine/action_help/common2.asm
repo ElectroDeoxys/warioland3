@@ -102,7 +102,7 @@ LoadActionHelpBGMaps:
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 	hlbgcoord 0, 16, v1BGMap1
-	ld de, BG_MAP_WIDTH
+	ld de, TILEMAP_WIDTH
 	ld b, $00
 .asm_1e4969
 	push hl
@@ -147,7 +147,7 @@ LoadActionHelpBGMaps:
 	jr .asm_1e498a
 
 .Func_1e499c:
-	ld de, BG_MAP_WIDTH
+	ld de, TILEMAP_WIDTH
 	push hl
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
@@ -178,10 +178,10 @@ LoadActionHelpBGPals:
 	call CopyHLToDE_Short
 	pop hl
 
-	ld a, BCPSF_AUTOINC | palette 0
-	ldh [rBCPS], a
+	ld a, BGPI_AUTOINC | palette 0
+	ldh [rBGPI], a
 	ld b, 8
-	ld c, LOW(rBCPD)
+	ld c, LOW(rBGPD)
 
 .loop_copy_bg_pals
 	wait_ppu_busy
@@ -223,10 +223,10 @@ LoadActionHelpOBPals:
 	pop hl
 
 .apply_palettes
-	ld a, OCPSF_AUTOINC | palette 0
-	ldh [rOCPS], a
+	ld a, OBPI_AUTOINC | palette 0
+	ldh [rOBPI], a
 	ld b, 8
-	ld c, LOW(rOCPD)
+	ld c, LOW(rOBPD)
 .loop_copy_ob_pals
 	wait_ppu_busy
 	wait_ppu_free
@@ -270,14 +270,14 @@ Func_1e4a47:
 	pop hl
 
 .asm_1e4a84
-	ld a, OCPSF_AUTOINC | palette 4
-	ldh [rOCPS], a
-	ld c, LOW(rOCPD)
+	ld a, OBPI_AUTOINC | palette 4
+	ldh [rOBPI], a
+	ld c, LOW(rOBPD)
 	ld b, 4
 .loop_copy_pals
 	wait_ppu_busy
 	wait_ppu_free
-REPT PALETTE_SIZE
+REPT PAL_SIZE
 	ld a, [hli]
 	ld [$ff00+c], a
 ENDR

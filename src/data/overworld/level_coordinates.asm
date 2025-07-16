@@ -4,7 +4,7 @@
 ; \4 = unknown 2
 MACRO ow_coord
 IF (\1) != -1
-DEF x = \2 + (\1 * BG_MAP_WIDTH)
+DEF x = \2 + (\1 * TILEMAP_WIDTH)
 	db ((x & $1e0) >> 2) ; y coord in px
 	db ((x & $01f) << 3) ; x coord in px
 ELSE

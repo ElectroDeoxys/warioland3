@@ -1226,7 +1226,7 @@ _InitBestTimeList:
 	ld [wSCY], a
 
 	ld a, $02
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	call .VBlank_158a14
 	call .Func_158a09
 
@@ -1238,7 +1238,7 @@ _InitBestTimeList:
 	decompress_tilemap BestTimeListTilemap, v0BGMap0
 
 	call PrintBestTimes
-	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_ON
+	ld a, LCDC_BG_ON | LCDC_OBJ_ON | LCDC_ON
 	ldh [rLCDC], a
 	ld hl, wSubState
 	inc [hl]
@@ -1260,7 +1260,7 @@ _InitBestTimeList:
 
 .func
 	ld a, $02
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	ld a, [wSCY]
 	ldh [rSCY], a
 	ld a, [wSCX]
@@ -1277,9 +1277,9 @@ _BestTimeList:
 	jr nz, .asm_158a76
 	ld hl, wSCY
 	ld a, [wJoypadDown]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr nz, .d_up
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr nz, .d_down
 
 	; no input
@@ -1294,7 +1294,7 @@ _BestTimeList:
 	ld [wColourFadeDiff], a
 .asm_158a5a
 	ld a, [wJoypadPressed]
-	and B_BUTTON | START
+	and PAD_B | PAD_START
 	ret z
 	ld a, $08
 	ld [wSubState], a
@@ -1370,7 +1370,7 @@ _BestTimeList:
 
 .Func_158ac2:
 	ld a, [wJoypadPressed]
-	and A_BUTTON | B_BUTTON | START | D_UP | D_DOWN
+	and PAD_A | PAD_B | PAD_START | PAD_UP | PAD_DOWN
 	ret z
 	xor a
 	ld [wCollectionRow], a
@@ -1439,7 +1439,7 @@ PrintBestTimes:
 	ld a, b
 	cp 2
 	ret z
-	ld a, BG_MAP_WIDTH - $5
+	ld a, TILEMAP_WIDTH - $5
 	add e
 	ld e, a
 	ld a, d

@@ -118,160 +118,160 @@ UnlockableLevelArrows:
 	db $ff, $ff
 
 .NorthConnection1:
-	db D_LEFT,  1
-	db D_RIGHT, 1
+	db PAD_LEFT,  1
+	db PAD_RIGHT, 1
 	db $ff
 
 .NorthConnection2:
-	db D_DOWN,  1
-	db D_UP,    1
+	db PAD_DOWN,  1
+	db PAD_UP,    1
 	db $ff
 
 .NorthConnection3:
-	db D_RIGHT, 1
-	db D_LEFT,  1
+	db PAD_RIGHT, 1
+	db PAD_LEFT,  1
 	db $ff
 
 .NorthConnection4:
-	db D_DOWN,  1
-	db D_RIGHT, 1
+	db PAD_DOWN,  1
+	db PAD_RIGHT, 1
 	db $ff
 
 .NorthConnection5:
-	db D_DOWN,  1
-	db D_LEFT,  1
+	db PAD_DOWN,  1
+	db PAD_LEFT,  1
 	db $ff
 
 .NorthConnection6:
-	db D_RIGHT, 1
-	db D_LEFT,  1
+	db PAD_RIGHT, 1
+	db PAD_LEFT,  1
 	db $ff
 
 .NorthConnection7:
-	db D_RIGHT, 1
-	db D_LEFT,  1
+	db PAD_RIGHT, 1
+	db PAD_LEFT,  1
 	db $ff
 
 .NorthConnection8:
-	db D_RIGHT, 1
-	db D_LEFT,  1
+	db PAD_RIGHT, 1
+	db PAD_LEFT,  1
 	db $ff
 
 .InvalidWestConnection:
 	db $ff, $ff
 
 .WestConnection1:
-	db D_UP,    1
-	db D_LEFT,  1
+	db PAD_UP,    1
+	db PAD_LEFT,  1
 	db $ff
 
 .WestConnection2:
-	db D_DOWN,  1
-	db D_LEFT,  1
+	db PAD_DOWN,  1
+	db PAD_LEFT,  1
 	db $ff
 
 .WestConnection3:
-	db D_RIGHT, 1
-	db D_DOWN,  1
+	db PAD_RIGHT, 1
+	db PAD_DOWN,  1
 	db $ff
 
 .WestConnection4:
-	db D_UP,    1
-	db D_LEFT,  1
+	db PAD_UP,    1
+	db PAD_LEFT,  1
 	db $ff
 
 .WestConnection5:
-	db D_DOWN,  1
-	db D_UP,    1
+	db PAD_DOWN,  1
+	db PAD_UP,    1
 	db $ff
 
 .WestConnection6:
-	db D_UP,    1
-	db D_LEFT,  1
+	db PAD_UP,    1
+	db PAD_LEFT,  1
 	db $ff
 
 .WestConnection7:
-	db D_RIGHT, 1
-	db D_LEFT,  1
+	db PAD_RIGHT, 1
+	db PAD_LEFT,  1
 	db $ff
 
 .InvalidSouthConnection:
 	db $ff, $ff
 
 .SouthConnection1:
-	db D_RIGHT, 1
-	db D_LEFT,  1
+	db PAD_RIGHT, 1
+	db PAD_LEFT,  1
 	db $ff
 
 .SouthConnection2:
-	db D_RIGHT, 1
-	db D_LEFT,  1
+	db PAD_RIGHT, 1
+	db PAD_LEFT,  1
 	db $ff
 
 .SouthConnection3:
-	db D_DOWN,  1
-	db D_LEFT,  1
+	db PAD_DOWN,  1
+	db PAD_LEFT,  1
 	db $ff
 
 .SouthConnection4:
-	db D_UP,    1
-	db D_LEFT,  1
+	db PAD_UP,    1
+	db PAD_LEFT,  1
 	db $ff
 
 .SouthConnection5:
-	db D_UP,    1
-	db D_LEFT,  1
+	db PAD_UP,    1
+	db PAD_LEFT,  1
 	db $ff
 
 .SouthConnection6:
-	db D_RIGHT, 1
-	db D_LEFT,  1
+	db PAD_RIGHT, 1
+	db PAD_LEFT,  1
 	db $ff
 
 .SouthConnection7:
-	db D_RIGHT, 1
-	db D_LEFT,  1
+	db PAD_RIGHT, 1
+	db PAD_LEFT,  1
 	db $ff
 
 .InvalidEastConnection:
 	db $ff, $ff
 
 .EastConnection1:
-	db D_DOWN,  1
-	db D_LEFT,  1
+	db PAD_DOWN,  1
+	db PAD_LEFT,  1
 	db $ff
 
 .EastConnection2:
-	db D_UP,    1
-	db D_LEFT,  1
+	db PAD_UP,    1
+	db PAD_LEFT,  1
 	db $ff
 
 .EastConnection3:
-	db D_UP,    1
-	db D_DOWN,  1
+	db PAD_UP,    1
+	db PAD_DOWN,  1
 	db $ff
 
 .EastConnection4:
-	db D_DOWN,  1
-	db D_UP,    1
+	db PAD_DOWN,  1
+	db PAD_UP,    1
 	db $ff
 
 .EastConnection5:
-	db D_UP,    1
-	db D_LEFT,  1
+	db PAD_UP,    1
+	db PAD_LEFT,  1
 	db $ff
 
 .EastConnection6:
-	db D_UP,    1
-	db D_DOWN,  1
+	db PAD_UP,    1
+	db PAD_DOWN,  1
 	db $ff
 
 .EastConnection7:
-	db D_RIGHT, 1
-	db D_LEFT,  1
+	db PAD_RIGHT, 1
+	db PAD_LEFT,  1
 	db $ff
 
 .EastConnection8:
-	db D_RIGHT, 1
-	db D_LEFT,  1
+	db PAD_RIGHT, 1
+	db PAD_LEFT,  1
 	db $ff

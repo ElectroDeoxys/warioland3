@@ -2,9 +2,9 @@ DEF palred   EQUS "(1 << 0) *"
 DEF palgreen EQUS "(1 << 5) *"
 DEF palblue  EQUS "(1 << 10) *"
 
-DEF palettes EQUS "* PALETTE_SIZE"
-DEF palette  EQUS "+ PALETTE_SIZE *"
-DEF color    EQUS "+ PAL_COLOR_SIZE *"
+DEF palettes EQUS "* PAL_SIZE"
+DEF palette  EQUS "+ PAL_SIZE *"
+DEF color    EQUS "+ COLOR_SIZE *"
 
 MACRO frame_oam
 ; ycoord, xcoord, tile ID, attributes
@@ -42,7 +42,7 @@ MACRO decompress_tilemap
 	ld [wTempBank], a
 	ld hl, \1
 IF _NARG == 3
-	ld bc, \2 + (\3 * BG_MAP_WIDTH)
+	ld bc, \2 + (\3 * TILEMAP_WIDTH)
 ELSE
 	ld bc, \2
 ENDC

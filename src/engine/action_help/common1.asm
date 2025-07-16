@@ -147,7 +147,7 @@ VBlank_1fb6b7:
 	ld hl, wPendingDMASourceBank
 	ld a, [hli]
 	ld [rROMB0 + $100], a
-	ld c, LOW(rHDMA1)
+	ld c, LOW(rVDMA_SRC_HIGH)
 	ld a, [hli]
 	ld [$ff00+c], a
 	inc c
@@ -180,9 +180,9 @@ VBlank_1fb6b7:
 Func_1fb6f7:
 	ld hl, wActionHelpPowerUp
 	ld a, [wJoypadPressed]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .d_right
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .d_left
 	ret
 
@@ -225,7 +225,7 @@ Func_1fb6f7:
 	sla e
 	ld d, $00
 	add hl, de
-	ld e, BG_MAP_WIDTH
+	ld e, TILEMAP_WIDTH
 	call WaitVBlank
 	ld a, $03
 	ld [hli], a
@@ -247,7 +247,7 @@ Func_1fb6f7:
 	hlbgcoord 0, 16, v1BGMap1
 	sla e
 	add hl, de
-	ld e, BG_MAP_WIDTH
+	ld e, TILEMAP_WIDTH
 	call WaitVBlank
 	ld a, b
 	ld [hli], a

@@ -17,11 +17,11 @@ ScrollCameraRight:
 
 	ld a, [wCameraConfigFlags]
 	bit CAM_BORDER_RIGHT_F, a
-	; scroll window ranges between [SCRN_VX - SCRN_X, SCRN_VX]
-	ld b, SCRN_VX - SCRN_X
+	; scroll window ranges between [TILEMAP_WIDTH_PX - SCREEN_WIDTH_PX, TILEMAP_WIDTH_PX]
+	ld b, TILEMAP_WIDTH_PX - SCREEN_WIDTH_PX
 	jr z, .check_scroll_limit
-	; scroll window ranges between [SCRN_VX - (SCRN_X + $20), SCRN_VX - $20]
-	ld b, SCRN_VX - (SCRN_X + CAMERA_BORDER_RIGHT_W)
+	; scroll window ranges between [TILEMAP_WIDTH_PX - (SCREEN_WIDTH_PX + $20), TILEMAP_WIDTH_PX - $20]
+	ld b, TILEMAP_WIDTH_PX - (SCREEN_WIDTH_PX + CAMERA_BORDER_RIGHT_W)
 .check_scroll_limit
 	ld a, [wCameraSCX + 0]
 	cp c
@@ -65,10 +65,10 @@ ScrollCameraRight:
 	ret nc ; no adjustment needed
 	ld a, [wCameraConfigFlags]
 	bit CAM_BORDER_LEFT_F, a
-	; scroll window ranges between [0, SCRN_X]
+	; scroll window ranges between [0, SCREEN_WIDTH_PX]
 	ld a, 0
 	jr z, .got_left_scroll_adjustment
-	; scroll window ranges between [$20, SCRN_X + $20]
+	; scroll window ranges between [$20, SCREEN_WIDTH_PX + $20]
 	ld a, CAMERA_BORDER_LEFT_W
 .got_left_scroll_adjustment
 	ld [wCameraSCX + 1], a
@@ -101,10 +101,10 @@ ScrollCameraLeft:
 	jr nz, .not_on_limit
 	ld a, [wCameraConfigFlags]
 	bit CAM_BORDER_LEFT_F, a
-	; scroll window ranges between [0, SCRN_X]
+	; scroll window ranges between [0, SCREEN_WIDTH_PX]
 	ld b, $10
 	jr z, .check_scroll_limit
-	; scroll window ranges between [$20, SCRN_X + $20]
+	; scroll window ranges between [$20, SCREEN_WIDTH_PX + $20]
 	ld b, CAMERA_BORDER_LEFT_W + $10
 .check_scroll_limit
 	ld a, l
@@ -135,9 +135,9 @@ ScrollCameraLeft:
 	ld a, [wCamRightSpacing]
 .got_cam_spacing
 	ld c, a
-	ld a, SCRN_X + 8
+	ld a, SCREEN_WIDTH_PX + 8
 	sub c
-	ld c, a ; (SCRN_X + 8) - cam spacing
+	ld c, a ; (SCREEN_WIDTH_PX + 8) - cam spacing
 	xor a
 	sub c
 	ld c, a
@@ -158,11 +158,11 @@ ScrollCameraLeft:
 	ld [wCameraSCX + 0], a
 	ld a, [wCameraConfigFlags]
 	bit CAM_BORDER_RIGHT_F, a
-	; scroll window ranges between [SCRN_VX - SCRN_X, SCRN_VX]
-	ld a, SCRN_VX - SCRN_X
+	; scroll window ranges between [TILEMAP_WIDTH_PX - SCREEN_WIDTH_PX, TILEMAP_WIDTH_PX]
+	ld a, TILEMAP_WIDTH_PX - SCREEN_WIDTH_PX
 	jr z, .got_right_scroll_adjustment
-	; scroll window ranges between [SCRN_VX - (SCRN_X + $20), SCRN_VX - $20]
-	ld a, SCRN_VX - (SCRN_X + CAMERA_BORDER_RIGHT_W)
+	; scroll window ranges between [TILEMAP_WIDTH_PX - (SCREEN_WIDTH_PX + $20), TILEMAP_WIDTH_PX - $20]
+	ld a, TILEMAP_WIDTH_PX - (SCREEN_WIDTH_PX + CAMERA_BORDER_RIGHT_W)
 .got_right_scroll_adjustment
 	ld [wCameraSCX + 1], a
 	ret
@@ -186,11 +186,11 @@ ScrollCameraDown:
 	jr c, .not_on_limit
 	ld a, [wCameraConfigFlags]
 	bit CAM_BORDER_DOWN_F, a
-	; scroll window ranges between [SCRN_VY - (SCRN_Y + 8), SCRN_VY - 8]
-	ld b, SCRN_VY - (SCRN_Y + 8)
+	; scroll window ranges between [TILEMAP_HEIGHT_PX - (SCREEN_HEIGHT_PX + 8), TILEMAP_HEIGHT_PX - 8]
+	ld b, TILEMAP_HEIGHT_PX - (SCREEN_HEIGHT_PX + 8)
 	jr z, .check_scroll_limit
-	; scroll window ranges between [SCRN_VY - (SCRN_Y + $28), SCRN_VY - $28]
-	ld b, SCRN_VY - (SCRN_Y + CAMERA_BORDER_LOWER_H + 8)
+	; scroll window ranges between [TILEMAP_HEIGHT_PX - (SCREEN_HEIGHT_PX + $28), TILEMAP_HEIGHT_PX - $28]
+	ld b, TILEMAP_HEIGHT_PX - (SCREEN_HEIGHT_PX + CAMERA_BORDER_LOWER_H + 8)
 .check_scroll_limit
 	ld a, [wCameraSCY + 1]
 	cp b
@@ -231,10 +231,10 @@ ScrollCameraDown:
 .asm_b836
 	ld a, [wCameraConfigFlags]
 	bit CAM_BORDER_UP_F, a
-	; scroll window ranges between [0, SCRN_Y]
+	; scroll window ranges between [0, SCREEN_HEIGHT_PX]
 	ld a, 0
 	jr z, .got_upper_scroll_adjustment
-	; scroll window ranges between [$20, $20 + SCRN_Y]
+	; scroll window ranges between [$20, $20 + SCREEN_HEIGHT_PX]
 	ld a, CAMERA_BORDER_UPPER_H
 .got_upper_scroll_adjustment
 	ld [wCameraSCY + 1], a
@@ -260,10 +260,10 @@ ScrollCameraUp:
 
 	ld a, [wCameraConfigFlags]
 	bit CAM_BORDER_UP_F, a
-	; scroll window ranges between [0, SCRN_Y]
+	; scroll window ranges between [0, SCREEN_HEIGHT_PX]
 	ld b, $10
 	jr z, .asm_b86e
-	; scroll window ranges between [$20, $20 + SCRN_Y]
+	; scroll window ranges between [$20, $20 + SCREEN_HEIGHT_PX]
 	ld b, CAMERA_BORDER_UPPER_H + $10
 .asm_b86e
 	ld a, [wCameraSCY + 1]
@@ -302,12 +302,12 @@ ScrollCameraUp:
 	ret nz
 	ld a, [wPrevWarioScreenYPos]
 	ld c, a
-	ld a, SCRN_Y + $10
+	ld a, SCREEN_HEIGHT_PX + $10
 	sub c
 	ld c, a
 	xor a
 	sub c
-	ld c, a ; -((SCRN_Y + $10) - wPrevWarioScreenYPos)
+	ld c, a ; -((SCREEN_HEIGHT_PX + $10) - wPrevWarioScreenYPos)
 	ld a, [wCameraConfigFlags]
 	bit CAM_BORDER_DOWN_F, a
 	jr z, .asm_b8ba
@@ -322,11 +322,11 @@ ScrollCameraUp:
 	ld [wScrollUpEdge], a
 	ld a, [wCameraConfigFlags]
 	bit CAM_BORDER_DOWN_F, a
-	; scroll window ranges between [SCRN_VY - (SCRN_Y + 8), SCRN_VY - 8]
-	ld a, SCRN_VY - (SCRN_Y + 8)
+	; scroll window ranges between [TILEMAP_HEIGHT_PX - (SCREEN_HEIGHT_PX + 8), TILEMAP_HEIGHT_PX - 8]
+	ld a, TILEMAP_HEIGHT_PX - (SCREEN_HEIGHT_PX + 8)
 	jr z, .asm_b8cf
-	; scroll window ranges between [SCRN_VY - (SCRN_Y + $28), SCRN_VY - $28]
-	ld a, SCRN_VY - (SCRN_Y + CAMERA_BORDER_LOWER_H + 8)
+	; scroll window ranges between [TILEMAP_HEIGHT_PX - (SCREEN_HEIGHT_PX + $28), TILEMAP_HEIGHT_PX - $28]
+	ld a, TILEMAP_HEIGHT_PX - (SCREEN_HEIGHT_PX + CAMERA_BORDER_LOWER_H + 8)
 .asm_b8cf
 	ld [wCameraSCY + 1], a
 	ret

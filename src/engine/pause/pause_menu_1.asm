@@ -292,7 +292,7 @@ InitPauseMenu_SkipBackupVRAM:
 	ld hl, wMenuObj11
 	call LoadPauseMenuSprite
 
-	ld a, LCDCF_ON | LCDCF_BG9C00 | LCDCF_OBJ16 | LCDCF_OBJON | LCDCF_BGON
+	ld a, LCDC_ON | LCDC_BG_9C00 | LCDC_OBJ_16 | LCDC_OBJ_ON | LCDC_BG_ON
 	ldh [rLCDC], a
 
 	ld hl, wSubState
@@ -346,7 +346,7 @@ UpdatePauseMenu:
 	call ClearUnusedVirtualOAM
 
 	ld a, [wPauseMenuSelection]
-	bit PAUSEMENUF_SELECT_F, a
+	bit PAUSEMENUF_B_PAD_SELECT, a
 	ret z
 	ld a, [wObjAnimWasReset]
 	and a

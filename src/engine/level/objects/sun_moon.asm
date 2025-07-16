@@ -122,7 +122,7 @@ SunFunc:
 .Func_4731e:
 	call SunMoon_GeneralMovement
 	ld a, [wJoypadPressed]
-	and $ff ^ (SELECT | START)
+	and $ff ^ (PAD_SELECT | PAD_START)
 	jr z, .asm_4732d
 	; reset duration
 	ld a, 50
@@ -617,7 +617,7 @@ MoonFunc:
 .Func_4763f:
 	call SunMoon_GeneralMovement
 	ld a, [wJoypadPressed]
-	and $ff ^ (SELECT | START)
+	and $ff ^ (PAD_SELECT | PAD_START)
 	jr z, .asm_4764e
 	; reset duration
 	ld a, 50

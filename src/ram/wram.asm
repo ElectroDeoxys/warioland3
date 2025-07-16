@@ -714,7 +714,7 @@ wPickedUpWiggleCounter::
 
 ; counter determining number of remaining frames
 ; Wario has to wiggle out of being picked up
-; counts down from MAX_PICKED_UP_FRAME_COUNTER
+; counts down from MAX_PICKEB_PAD_UPRAME_COUNTER
 ; then resets after reaching 0
 wPickedUpFrameCounter::
 	db
@@ -1157,7 +1157,7 @@ UNION
 ; BGMap values to draw the golf course
 ; currently shown in the Golf Building menu
 wGolfCourseTileMap::
-	ds 7 * BG_MAP_WIDTH
+	ds 7 * TILEMAP_WIDTH
 
 NEXTU
 

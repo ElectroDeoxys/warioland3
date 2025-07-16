@@ -261,13 +261,13 @@ HandleGolfLobbyStates:
 
 .WaitingInput:
 	ld a, [wJoypadPressed]
-	bit D_DOWN_F, a
+	bit B_PAD_DOWN, a
 	jr nz, .d_down
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr nz, .d_up
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .d_right
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .d_left
 	ret
 
@@ -640,7 +640,7 @@ VBlank_1c84e0:
 
 .Func:
 	ld a, BANK("Golf RAM")
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	ld a, [wSCX]
 	ldh [rSCX], a
 	ld a, HIGH(wVirtualOAM)

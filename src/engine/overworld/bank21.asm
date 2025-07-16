@@ -68,7 +68,7 @@ DayNightTransition:
 	; then skip the day/night transition
 	ld a, [wJoypadPressed]
 	ld b, a
-	bit B_BUTTON_F, b
+	bit B_PAD_B, b
 	jp nz, SkipDayNightTransition
 	ld a, [wOWAllowedDPadInput]
 	and b
@@ -82,7 +82,7 @@ DayNightTransition:
 
 	xor a
 	ld [wOWPalTransitionCounter], a
-	ld a, 8 * NUM_PAL_COLORS * 3
+	ld a, 8 * PAL_COLORS * 3
 	ld [w2d807], a
 
 	ld hl, wFadePals + COLOURFADESTRUCT_SIGN
@@ -408,7 +408,7 @@ GetOWPals:
 	ret
 
 InitColourFadeStructs:
-	ld a, 8 * NUM_PAL_COLORS * 3
+	ld a, 8 * PAL_COLORS * 3
 	ld [w2d807], a
 	ld hl, wFadePals
 .loop
@@ -457,7 +457,7 @@ InitColourFadeStructs:
 ; from the pal in de to hl
 ; in intervals of 8 bytes between them
 CopyPalToColourFadeStructs:
-	ld a, 8 * NUM_PAL_COLORS
+	ld a, 8 * PAL_COLORS
 	ld [w2d807], a
 .loop
 	ld a, [de]
@@ -499,7 +499,7 @@ CopyPalToColourFadeStructs:
 ApplyPalFadeColours:
 	ld hl, wFadePals + COLOURFADESTRUCT_CURRENT
 	ld de, wTempBGPals
-	ld a, 8 * NUM_PAL_COLORS
+	ld a, 8 * PAL_COLORS
 	ld [w2d807], a
 .loop
 	ld a, [hl] ; red
@@ -571,7 +571,7 @@ VBlank_OWPalTransition:
 
 .Func:
 	ld a, $02
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	ld a, [wSCY]
 	ldh [rSCY], a
 	ld a, [wSCX]
@@ -592,8 +592,8 @@ VBlank_OWPalTransition:
 	bankswitch
 
 	ld hl, wTempBGPals
-	ld c, LOW(rBCPS)
-	ld a, BCPSF_AUTOINC | palette 0
+	ld c, LOW(rBGPI)
+	ld a, BGPI_AUTOINC | palette 0
 	ld [$ff00+c], a
 	inc c
 	ld b, 8 ; num pals
@@ -718,7 +718,7 @@ Func_84e43:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals)
 	ld [wPalConfig1SourceLo], a
-	ld a, BCPSF_AUTOINC | palette 0
+	ld a, BGPI_AUTOINC | palette 0
 	ld [wPalConfig1Index], a
 	ld a, 8
 	ld [wPalConfig1Number], a
@@ -727,7 +727,7 @@ Func_84e43:
 	ld [wPalConfig2SourceHi], a
 	ld a, LOW(wTempOBPals)
 	ld [wPalConfig2SourceLo], a
-	ld a, OCPSF_AUTOINC | palette 0
+	ld a, OBPI_AUTOINC | palette 0
 	ld [wPalConfig2Index], a
 	ld a, 8
 	ld [wPalConfig2Number], a
@@ -768,7 +768,7 @@ Func_84e86:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals)
 	ld [wPalConfig1SourceLo], a
-	ld a, BCPSF_AUTOINC | palette 0
+	ld a, BGPI_AUTOINC | palette 0
 	ld [wPalConfig1Index], a
 	ld a, 8 ; number of pals
 	ld [wPalConfig1Number], a
@@ -777,7 +777,7 @@ Func_84e86:
 	ld [wPalConfig2SourceHi], a
 	ld a, LOW(wTempOBPals)
 	ld [wPalConfig2SourceLo], a
-	ld a, OCPSF_AUTOINC | palette 0
+	ld a, OBPI_AUTOINC | palette 0
 	ld [wPalConfig2Index], a
 	ld a, 8 ; number of pals
 	ld [wPalConfig2Number], a
@@ -933,7 +933,7 @@ Func_84fff:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals)
 	ld [wPalConfig1SourceLo], a
-	ld a, BCPSF_AUTOINC | palette 0
+	ld a, BGPI_AUTOINC | palette 0
 	ld [wPalConfig1Index], a
 	ld a, 8
 	ld [wPalConfig1Number], a
@@ -942,7 +942,7 @@ Func_84fff:
 	ld [wPalConfig2SourceHi], a
 	ld a, LOW(wTempOBPals)
 	ld [wPalConfig2SourceLo], a
-	ld a, OCPSF_AUTOINC | palette 0
+	ld a, OBPI_AUTOINC | palette 0
 	ld [wPalConfig2Index], a
 	ld a, 8
 	ld [wPalConfig2Number], a
@@ -987,7 +987,7 @@ Func_85046:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals palette 1)
 	ld [wPalConfig1SourceLo], a
-	ld a, BCPSF_AUTOINC | palette 1
+	ld a, BGPI_AUTOINC | palette 1
 	ld [wPalConfig1Index], a
 	ld a, 7
 	ld [wPalConfig1Number], a
@@ -995,7 +995,7 @@ Func_85046:
 	ld [wPalConfig2SourceHi], a
 	ld a, LOW(wTempOBPals)
 	ld [wPalConfig2SourceLo], a
-	ld a, OCPSF_AUTOINC | palette 0
+	ld a, OBPI_AUTOINC | palette 0
 	ld [wPalConfig2Index], a
 	ld a, 8
 	ld [wPalConfig2Number], a
@@ -1030,7 +1030,7 @@ Func_850b9:
 	ld [wPalConfig2SourceHi], a
 	ld a, LOW(wTempOBPals)
 	ld [wPalConfig2SourceLo], a
-	ld a, OCPSF_AUTOINC | palette 0
+	ld a, OBPI_AUTOINC | palette 0
 	ld [wPalConfig2Index], a
 	ld a, 8
 	ld [wPalConfig2Number], a
@@ -1064,7 +1064,7 @@ Func_850ff:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals palette 1)
 	ld [wPalConfig1SourceLo], a
-	ld a, BCPSF_AUTOINC | palette 1
+	ld a, BGPI_AUTOINC | palette 1
 	ld [wPalConfig1Index], a
 	ld a, 7
 	ld [wPalConfig1Number], a
@@ -1090,7 +1090,7 @@ Func_85145:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals)
 	ld [wPalConfig1SourceLo], a
-	ld a, BCPSF_AUTOINC | palette 0
+	ld a, BGPI_AUTOINC | palette 0
 	ld [wPalConfig1Index], a
 	ld a, 8
 	ld [wPalConfig1Number], a
@@ -1098,7 +1098,7 @@ Func_85145:
 	ld [wPalConfig2SourceHi], a
 	ld a, LOW(wTempOBPals)
 	ld [wPalConfig2SourceLo], a
-	ld a, OCPSF_AUTOINC | palette 0
+	ld a, OBPI_AUTOINC | palette 0
 	ld [wPalConfig2Index], a
 	ld a, 8
 	ld [wPalConfig2Number], a
@@ -1123,7 +1123,7 @@ Func_8518c:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals)
 	ld [wPalConfig1SourceLo], a
-	ld a, OCPSF_AUTOINC | palette 0
+	ld a, OBPI_AUTOINC | palette 0
 	ld [wPalConfig1Index], a
 	ld a, 8
 	ld [wPalConfig1Number], a
@@ -1142,7 +1142,7 @@ Func_8518c:
 	ret
 
 Func_851bc:
-	ld a, LOW(rBCPS)
+	ld a, LOW(rBGPI)
 	ld [wPalConfig1Register], a
 	xor a
 	ld [wPalConfigToFade], a
@@ -1153,7 +1153,7 @@ Func_851bc:
 	ret
 
 Func_851d1:
-	ld a, LOW(rOCPS)
+	ld a, LOW(rOBPI)
 	ld [wPalConfig2Register], a
 	ld a, 1
 	ld [wPalConfigToFade], a
@@ -1286,7 +1286,7 @@ FadeInLevelName:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals palette 7)
 	ld [wPalConfig1SourceLo], a
-	ld a, OCPSF_AUTOINC | palette 7
+	ld a, OBPI_AUTOINC | palette 7
 	ld [wPalConfig1Index], a
 	ld a, 1
 	ld [wPalConfig1Number], a
@@ -1342,7 +1342,7 @@ Func_852e5:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals palette 7)
 	ld [wPalConfig1SourceLo], a
-	ld a, OCPSF_AUTOINC | palette 7
+	ld a, OBPI_AUTOINC | palette 7
 	ld [wPalConfig1Index], a
 	ld a, 1
 	ld [wPalConfig1Number], a
@@ -1357,7 +1357,7 @@ Func_852e5:
 	ret
 
 FadeBGPalConfig:
-	ld a, LOW(rBCPS)
+	ld a, LOW(rBGPI)
 	ld [wPalConfig1Register], a
 	xor a
 	ld [wPalConfigToFade], a
@@ -1587,11 +1587,11 @@ LoadOWStarIndicatorPals:
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempPals2 palette 4)
 	ld [wPalConfig1SourceLo], a
-	ld a, OCPSF_AUTOINC | palette 4
+	ld a, OBPI_AUTOINC | palette 4
 	ld [wPalConfig1Index], a
 	ld a, 2
 	ld [wPalConfig1Number], a
-	ld a, LOW(rOCPS)
+	ld a, LOW(rOBPI)
 	ld [wPalConfig1Register], a
 	ret
 
@@ -1726,165 +1726,165 @@ Func_854ee:
 Data_8550b:
 	dwcoord 9, 8, wTilemap
 	db $6d, $6e, $6e, $6e, $79, $70
-	db $0 | BGF_BANK0, $0 | BGF_BANK0, $0 | BGF_BANK0, $0 | BGF_BANK0 | BGF_XFLIP, $0 | BGF_BANK0, $70
+	db $0 | BG_BANK0, $0 | BG_BANK0, $0 | BG_BANK0, $0 | BG_BANK0 | BG_XFLIP, $0 | BG_BANK0, $70
 
 	dwcoord 9, 9, wTilemap
 	db $6c, $7c, $7c, $7c, $6c, $70
-	db $0 | BGF_BANK0, $1 | BGF_BANK1, $1 | BGF_BANK1, $1 | BGF_BANK1, $0 | BGF_BANK0 | BGF_XFLIP, $70
+	db $0 | BG_BANK0, $1 | BG_BANK1, $1 | BG_BANK1, $1 | BG_BANK1, $0 | BG_BANK0 | BG_XFLIP, $70
 
 	dwcoord 9, 10, wTilemap
 	db $7d, $7e, $7e, $7e, $7d, $70
-	db $0 | BGF_BANK0, $0 | BGF_BANK0, $0 | BGF_BANK0, $0 | BGF_BANK0 | BGF_XFLIP, $0 | BGF_BANK0 | BGF_XFLIP, $70
+	db $0 | BG_BANK0, $0 | BG_BANK0, $0 | BG_BANK0, $0 | BG_BANK0 | BG_XFLIP, $0 | BG_BANK0 | BG_XFLIP, $70
 
 	db $00 ; end
 
 Data_85536:
 	dwcoord 7, 1, wTilemap
 	db $c4, $75, $76, $75, $7f, $77, $c4, $70
-	db $1 | BGF_BANK1, $5 | BGF_BANK1, $5 | BGF_BANK1, $5 | BGF_BANK1 | BGF_XFLIP, $5 | BGF_BANK1, $5 | BGF_BANK1, $1 | BGF_BANK1 | BGF_XFLIP, $70
+	db $1 | BG_BANK1, $5 | BG_BANK1, $5 | BG_BANK1, $5 | BG_BANK1 | BG_XFLIP, $5 | BG_BANK1, $5 | BG_BANK1, $1 | BG_BANK1 | BG_XFLIP, $70
 
 	db $00 ; end
 
 Data_85549:
 	dwcoord 8, 4, wTilemap
 	db $56, $57, $45, $46, $70
-	db $1 | BGF_BANK0, $1 | BGF_BANK0, $1 | BGF_BANK0, $1 | BGF_BANK0, $70
+	db $1 | BG_BANK0, $1 | BG_BANK0, $1 | BG_BANK0, $1 | BG_BANK0, $70
 
 	dwcoord 8, 5, wTilemap
 	db $58, $59, $5a, $5b, $70
-	db $1 | BGF_BANK0, $1 | BGF_BANK0, $1 | BGF_BANK0, $1 | BGF_BANK0, $70
+	db $1 | BG_BANK0, $1 | BG_BANK0, $1 | BG_BANK0, $1 | BG_BANK0, $70
 
 	dwcoord 8, 6, wTilemap
 	db $5c, $5d, $5e, $5f, $70
-	db $1 | BGF_BANK0, $1 | BGF_BANK0, $1 | BGF_BANK0, $1 | BGF_BANK0, $70
+	db $1 | BG_BANK0, $1 | BG_BANK0, $1 | BG_BANK0, $1 | BG_BANK0, $70
 
 	db $00 ; end
 
 Data_8556e:
 	dwcoord 6, 14, wTilemap
 	db $7e, $7e, $7e, $70
-	db $4 | BGF_BANK1, $4 | BGF_BANK1, $4 | BGF_BANK1, $70
+	db $4 | BG_BANK1, $4 | BG_BANK1, $4 | BG_BANK1, $70
 
 	db $00 ; end
 
 Data_85579:
 	dwcoord 14, 2, wTilemap
 	db $20, $21, $70
-	db $1 | BGF_BANK0, $1 | BGF_BANK0, $70
+	db $1 | BG_BANK0, $1 | BG_BANK0, $70
 
 	dwcoord 14, 3, wTilemap
 	db $30, $31, $70
-	db $1 | BGF_BANK0, $1 | BGF_BANK0, $70
+	db $1 | BG_BANK0, $1 | BG_BANK0, $70
 
 	dwcoord 14, 4, wTilemap
 	db $22, $23, $70
-	db $5 | BGF_BANK0, $5 | BGF_BANK0, $70
+	db $5 | BG_BANK0, $5 | BG_BANK0, $70
 
 	dwcoord 14, 5, wTilemap
 	db $32, $33, $70
-	db $5 | BGF_BANK0, $5 | BGF_BANK0, $70
+	db $5 | BG_BANK0, $5 | BG_BANK0, $70
 
 	dwcoord 14, 6, wTilemap
 	db $24, $25, $70
-	db $5 | BGF_BANK0, $5 | BGF_BANK0, $70
+	db $5 | BG_BANK0, $5 | BG_BANK0, $70
 
 	dwcoord 14, 7, wTilemap
 	db $34, $35, $70
-	db $5 | BGF_BANK0, $5 | BGF_BANK0, $70
+	db $5 | BG_BANK0, $5 | BG_BANK0, $70
 
 	dwcoord 14, 8, wTilemap
 	db $26, $27, $70
-	db $5 | BGF_BANK0, $5 | BGF_BANK0, $70
+	db $5 | BG_BANK0, $5 | BG_BANK0, $70
 
 	db $00 ; end
 
 Data_855b2:
 	dwcoord 5, 6, wTilemap
 	db $00, $70
-	db $0 | BGF_BANK0, $70
+	db $0 | BG_BANK0, $70
 
 	dwcoord 5, 7, wTilemap
 	db $0d, $0e, $0f, $04, $70
-	db $3 | BGF_BANK0, $3 | BGF_BANK0, $0 | BGF_BANK0, $0 | BGF_BANK0, $70
+	db $3 | BG_BANK0, $3 | BG_BANK0, $0 | BG_BANK0, $0 | BG_BANK0, $70
 
 	dwcoord 6, 8, wTilemap
 	db $00, $02, $12, $13, $70
-	db $7 | BGF_BANK1, $7 | BGF_BANK1, $3 | BGF_BANK0, $3 | BGF_BANK0, $70
+	db $7 | BG_BANK1, $7 | BG_BANK1, $3 | BG_BANK0, $3 | BG_BANK0, $70
 
 	dwcoord 7, 9, wTilemap
 	db $14, $15, $16, $70
-	db $3 | BGF_BANK0, $3 | BGF_BANK0, $3 | BGF_BANK0, $70
+	db $3 | BG_BANK0, $3 | BG_BANK0, $3 | BG_BANK0, $70
 
 	dwcoord 7, 10, wTilemap
 	db $17, $18, $19, $70
-	db $3 | BGF_BANK0, $3 | BGF_BANK0, $3 | BGF_BANK0, $70
+	db $3 | BG_BANK0, $3 | BG_BANK0, $3 | BG_BANK0, $70
 
 	dwcoord 7, 11, wTilemap
 	db $1a, $1b, $1c, $70
-	db $3 | BGF_BANK0, $3 | BGF_BANK0, $3 | BGF_BANK0, $70
+	db $3 | BG_BANK0, $3 | BG_BANK0, $3 | BG_BANK0, $70
 
 	dwcoord 7, 12, wTilemap
 	db $1d, $1e, $1f, $70
-	db $3 | BGF_BANK0, $3 | BGF_BANK0, $3 | BGF_BANK0, $70
+	db $3 | BG_BANK0, $3 | BG_BANK0, $3 | BG_BANK0, $70
 
 	db $00 ; end
 
 Data_855f9:
 	dwcoord 5, 10, wTilemap
 	db $19, $3e, $3f, $70
-	db $2 | BGF_BANK1, $3 | BGF_BANK0, $3 | BGF_BANK0, $70
+	db $2 | BG_BANK1, $3 | BG_BANK0, $3 | BG_BANK0, $70
 
 	dwcoord 5, 11, wTilemap
 	db $3d, $4e, $4f, $70
-	db $3 | BGF_BANK0, $3 | BGF_BANK0, $3 | BGF_BANK0, $70
+	db $3 | BG_BANK0, $3 | BG_BANK0, $3 | BG_BANK0, $70
 
 	db $00 ; end
 
 Data_8560e:
 	dwcoord 8, 2, wTilemap
 	db $48, $49, $70
-	db $1 | BGF_BANK0, $1 | BGF_BANK0, $70
+	db $1 | BG_BANK0, $1 | BG_BANK0, $70
 
 	dwcoord 8, 3, wTilemap
 	db $58, $59, $70
-	db $1 | BGF_BANK0, $1 | BGF_BANK0, $70
+	db $1 | BG_BANK0, $1 | BG_BANK0, $70
 
 	db $00 ; end
 
 Data_8561f:
 	dwcoord 16, 3, wTilemap
 	db $51, $5f, $53, $70
-	db $1 | BGF_BANK0, $1 | BGF_BANK0, $1 | BGF_BANK0, $70
+	db $1 | BG_BANK0, $1 | BG_BANK0, $1 | BG_BANK0, $70
 
 	dwcoord 16, 4, wTilemap
 	db $5c, $5d, $5e, $70
-	db $1 | BGF_BANK0, $0 | BGF_BANK0, $0 | BGF_BANK0, $70
+	db $1 | BG_BANK0, $0 | BG_BANK0, $0 | BG_BANK0, $70
 
 	dwcoord 16, 5, wTilemap
 	db $d9, $79, $7a, $70
-	db $1 | BGF_BANK1 | BGF_XFLIP, $0 | BGF_BANK0, $0 | BGF_BANK0, $70
+	db $1 | BG_BANK1 | BG_XFLIP, $0 | BG_BANK0, $0 | BG_BANK0, $70
 
 	db $00 ; end
 
 Data_8563e:
 	dwcoord 3, 9, wTilemap
 	db $6c, $6d, $6e, $6f, $70
-	db $0 | BGF_BANK0, $0 | BGF_BANK0, $0 | BGF_BANK0, $0 | BGF_BANK0, $70
+	db $0 | BG_BANK0, $0 | BG_BANK0, $0 | BG_BANK0, $0 | BG_BANK0, $70
 
 	dwcoord 3, 10, wTilemap
 	db $7c, $7d, $7e, $7f, $70
-	db $0 | BGF_BANK0, $0 | BGF_BANK0, $0 | BGF_BANK0, $0 | BGF_BANK0, $70
+	db $0 | BG_BANK0, $0 | BG_BANK0, $0 | BG_BANK0, $0 | BG_BANK0, $70
 
 	db $00 ; end
 
 Data_85657:
 	dwcoord 1, 13, wTilemap
 	db $f7, $f6, $f9, $f8, $f8, $f8, $f9, $f9, $f9, $40, $41, $42, $43, $2c, $2d, $f8, $f9, $f6, $70
-	db $2 | BGF_BANK1 | BGF_XFLIP, $2 | BGF_BANK1 | BGF_XFLIP, $2 | BGF_BANK1 | BGF_XFLIP, $2 | BGF_BANK1 | BGF_XFLIP, $2 | BGF_BANK1, $2 | BGF_BANK1 | BGF_XFLIP, $2 | BGF_BANK1, $2 | BGF_BANK1 | BGF_XFLIP, $2 | BGF_BANK1, $1 | BGF_BANK0, $1 | BGF_BANK0, $1 | BGF_BANK0, $1 | BGF_BANK0, $1 | BGF_BANK0, $2 | BGF_BANK0, $2 | BGF_BANK1, $2 | BGF_BANK1, $2 | BGF_BANK1, $70
+	db $2 | BG_BANK1 | BG_XFLIP, $2 | BG_BANK1 | BG_XFLIP, $2 | BG_BANK1 | BG_XFLIP, $2 | BG_BANK1 | BG_XFLIP, $2 | BG_BANK1, $2 | BG_BANK1 | BG_XFLIP, $2 | BG_BANK1, $2 | BG_BANK1 | BG_XFLIP, $2 | BG_BANK1, $1 | BG_BANK0, $1 | BG_BANK0, $1 | BG_BANK0, $1 | BG_BANK0, $1 | BG_BANK0, $2 | BG_BANK0, $2 | BG_BANK1, $2 | BG_BANK1, $2 | BG_BANK1, $70
 
 	dwcoord 1, 14, wTilemap
 	db $78, $79, $78, $79, $78, $79, $78, $79, $78, $50, $51, $52, $53, $3c, $3d, $79, $78, $79, $70
-	db $2 | BGF_BANK1, $2 | BGF_BANK1, $2 | BGF_BANK1, $2 | BGF_BANK1, $2 | BGF_BANK1, $2 | BGF_BANK1, $2 | BGF_BANK1, $2 | BGF_BANK1, $2 | BGF_BANK1, $2 | BGF_BANK0, $2 | BGF_BANK0, $2 | BGF_BANK0, $2 | BGF_BANK0, $2 | BGF_BANK0, $2 | BGF_BANK0, $2 | BGF_BANK1, $2 | BGF_BANK1, $2 | BGF_BANK1, $70
+	db $2 | BG_BANK1, $2 | BG_BANK1, $2 | BG_BANK1, $2 | BG_BANK1, $2 | BG_BANK1, $2 | BG_BANK1, $2 | BG_BANK1, $2 | BG_BANK1, $2 | BG_BANK1, $2 | BG_BANK0, $2 | BG_BANK0, $2 | BG_BANK0, $2 | BG_BANK0, $2 | BG_BANK0, $2 | BG_BANK0, $2 | BG_BANK1, $2 | BG_BANK1, $2 | BG_BANK1, $70
 
 	db $00 ; end
 

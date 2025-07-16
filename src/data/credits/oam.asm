@@ -54,312 +54,312 @@ OAM_15e44a::
 	dw .frame_52
 
 .frame_0
-	frame_oam -16,  -8, $00, 0 | OAMF_BANK1
-	frame_oam -16,   0, $02, 0 | OAMF_BANK1
+	frame_oam -16,  -8, $00, 0 | OAM_BANK1
+	frame_oam -16,   0, $02, 0 | OAM_BANK1
 	db $80
 
 .frame_1
-	frame_oam -16,  -8, $04, 0 | OAMF_BANK1
-	frame_oam -16,   0, $06, 0 | OAMF_BANK1
+	frame_oam -16,  -8, $04, 0 | OAM_BANK1
+	frame_oam -16,   0, $06, 0 | OAM_BANK1
 	db $80
 
 .frame_2
-	frame_oam -16,  -8, $08, 0 | OAMF_BANK1
-	frame_oam -16,   0, $0a, 0 | OAMF_BANK1
+	frame_oam -16,  -8, $08, 0 | OAM_BANK1
+	frame_oam -16,   0, $0a, 0 | OAM_BANK1
 	db $80
 
 .frame_3
-	frame_oam -16,  -4, $0c, 2 | OAMF_BANK1
+	frame_oam -16,  -4, $0c, 2 | OAM_BANK1
 	db $80
 
 .frame_4
-	frame_oam -16,  -8, $12, 1 | OAMF_BANK1
-	frame_oam -15,   0, $12, 1 | OAMF_BANK1 | OAMF_XFLIP | OAMF_YFLIP
+	frame_oam -16,  -8, $12, 1 | OAM_BANK1
+	frame_oam -15,   0, $12, 1 | OAM_BANK1 | OAM_XFLIP | OAM_YFLIP
 	db $80
 
 .frame_5
-	frame_oam -16,  -8, $14, 1 | OAMF_BANK1
-	frame_oam -15,   0, $14, 1 | OAMF_BANK1 | OAMF_XFLIP | OAMF_YFLIP
+	frame_oam -16,  -8, $14, 1 | OAM_BANK1
+	frame_oam -15,   0, $14, 1 | OAM_BANK1 | OAM_XFLIP | OAM_YFLIP
 	db $80
 
 .frame_6
-	frame_oam -17,  -8, $16, 1 | OAMF_BANK1
-	frame_oam -14,   0, $16, 1 | OAMF_BANK1 | OAMF_XFLIP | OAMF_YFLIP
+	frame_oam -17,  -8, $16, 1 | OAM_BANK1
+	frame_oam -14,   0, $16, 1 | OAM_BANK1 | OAM_XFLIP | OAM_YFLIP
 	db $80
 
 .frame_7
-	frame_oam -12,  -8, $10, 0 | OAMF_BANK1
-	frame_oam -20,   0, $10, 0 | OAMF_BANK1 | OAMF_XFLIP | OAMF_YFLIP
+	frame_oam -12,  -8, $10, 0 | OAM_BANK1
+	frame_oam -20,   0, $10, 0 | OAM_BANK1 | OAM_XFLIP | OAM_YFLIP
 	db $80
 
 .frame_8
-	frame_oam -16,  -4, $0e, 0 | OAMF_BANK1
+	frame_oam -16,  -4, $0e, 0 | OAM_BANK1
 	db $80
 
 .frame_9
-	frame_oam -16,  -4, $0e, 0 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam -16,  -4, $0e, 0 | OAM_BANK1 | OAM_XFLIP
 	db $80
 
 .frame_10
-	frame_oam -12,   0, $10, 0 | OAMF_BANK1 | OAMF_XFLIP
-	frame_oam -20,  -8, $10, 0 | OAMF_BANK1 | OAMF_YFLIP
+	frame_oam -12,   0, $10, 0 | OAM_BANK1 | OAM_XFLIP
+	frame_oam -20,  -8, $10, 0 | OAM_BANK1 | OAM_YFLIP
 	db $80
 
 .frame_11
-	frame_oam -16,  -8, $18, 2 | OAMF_BANK1
-	frame_oam -16,   0, $1a, 2 | OAMF_BANK1
+	frame_oam -16,  -8, $18, 2 | OAM_BANK1
+	frame_oam -16,   0, $1a, 2 | OAM_BANK1
 	db $80
 
 .frame_12
-	frame_oam -16,  -8, $1c, 2 | OAMF_BANK1
-	frame_oam -16,   0, $1e, 2 | OAMF_BANK1
+	frame_oam -16,  -8, $1c, 2 | OAM_BANK1
+	frame_oam -16,   0, $1e, 2 | OAM_BANK1
 	db $80
 
 .frame_13
-	frame_oam -16,  -6, $20, 0 | OAMF_BANK1
-	frame_oam -16,   2, $22, 0 | OAMF_BANK1
+	frame_oam -16,  -6, $20, 0 | OAM_BANK1
+	frame_oam -16,   2, $22, 0 | OAM_BANK1
 	db $80
 
 .frame_14
-	frame_oam -16,  -4, $24, 2 | OAMF_BANK1
+	frame_oam -16,  -4, $24, 2 | OAM_BANK1
 	db $80
 
 .frame_15
-	frame_oam -16,  -4, $26, 2 | OAMF_BANK1
+	frame_oam -16,  -4, $26, 2 | OAM_BANK1
 	db $80
 
 .frame_16
-	frame_oam -16,  -4, $28, 2 | OAMF_BANK1
+	frame_oam -16,  -4, $28, 2 | OAM_BANK1
 	db $80
 
 .frame_17
-	frame_oam -13,  -4, $2a, 0 | OAMF_BANK1 | OAMF_YFLIP
+	frame_oam -13,  -4, $2a, 0 | OAM_BANK1 | OAM_YFLIP
 	db $80
 
 .frame_18
-	frame_oam -16,  -8, $2a, 0 | OAMF_BANK1
-	frame_oam -16,   0, $2c, 0 | OAMF_BANK1
+	frame_oam -16,  -8, $2a, 0 | OAM_BANK1
+	frame_oam -16,   0, $2c, 0 | OAM_BANK1
 	db $80
 
 .frame_19
-	frame_oam -12,  -8, $2e, 0 | OAMF_BANK1 | OAMF_XFLIP | OAMF_YFLIP
-	frame_oam -28,  -4, $2c, 0 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam -12,  -8, $2e, 0 | OAM_BANK1 | OAM_XFLIP | OAM_YFLIP
+	frame_oam -28,  -4, $2c, 0 | OAM_BANK1 | OAM_XFLIP
 	db $80
 
 .frame_20
-	frame_oam -36,  -4, $2e, 0 | OAMF_BANK1
+	frame_oam -36,  -4, $2e, 0 | OAM_BANK1
 	db $80
 
 .frame_21
-	frame_oam -16,  -4, $30, 0 | OAMF_BANK1
+	frame_oam -16,  -4, $30, 0 | OAM_BANK1
 	db $80
 
 .frame_22
-	frame_oam -18,  -4, $30, 0 | OAMF_BANK1
+	frame_oam -18,  -4, $30, 0 | OAM_BANK1
 	db $80
 
 .frame_23
-	frame_oam -19,  -8, $34, 0 | OAMF_BANK1
-	frame_oam -19,   0, $34, 0 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam -19,  -8, $34, 0 | OAM_BANK1
+	frame_oam -19,   0, $34, 0 | OAM_BANK1 | OAM_XFLIP
 	db $80
 
 .frame_24
-	frame_oam -19,  -8, $32, 0 | OAMF_BANK1
-	frame_oam -19,   0, $32, 0 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam -19,  -8, $32, 0 | OAM_BANK1
+	frame_oam -19,   0, $32, 0 | OAM_BANK1 | OAM_XFLIP
 	db $80
 
 .frame_25
-	frame_oam  -8,  -8, $3a, 3 | OAMF_BANK1
-	frame_oam -10,   0, $3c, 2 | OAMF_BANK1
-	frame_oam -15,   8, $3e, 2 | OAMF_BANK1
-	frame_oam -24,  -8, $40, 4 | OAMF_BANK1
-	frame_oam -26,   0, $42, 4 | OAMF_BANK1
+	frame_oam  -8,  -8, $3a, 3 | OAM_BANK1
+	frame_oam -10,   0, $3c, 2 | OAM_BANK1
+	frame_oam -15,   8, $3e, 2 | OAM_BANK1
+	frame_oam -24,  -8, $40, 4 | OAM_BANK1
+	frame_oam -26,   0, $42, 4 | OAM_BANK1
 	db $80
 
 .frame_26
-	frame_oam -24,  -8, $36, 2 | OAMF_BANK1
-	frame_oam -24,   0, $36, 2 | OAMF_BANK1 | OAMF_XFLIP
-	frame_oam  -8,  -8, $3a, 3 | OAMF_BANK1
-	frame_oam -10,   0, $3c, 2 | OAMF_BANK1
-	frame_oam -15,   8, $3e, 2 | OAMF_BANK1
+	frame_oam -24,  -8, $36, 2 | OAM_BANK1
+	frame_oam -24,   0, $36, 2 | OAM_BANK1 | OAM_XFLIP
+	frame_oam  -8,  -8, $3a, 3 | OAM_BANK1
+	frame_oam -10,   0, $3c, 2 | OAM_BANK1
+	frame_oam -15,   8, $3e, 2 | OAM_BANK1
 	db $80
 
 .frame_27
-	frame_oam -24,  -8, $38, 3 | OAMF_BANK1
-	frame_oam -24,   0, $38, 3 | OAMF_BANK1 | OAMF_XFLIP
-	frame_oam  -8,  -8, $3a, 3 | OAMF_BANK1
-	frame_oam -10,   0, $3c, 2 | OAMF_BANK1
-	frame_oam -15,   8, $3e, 2 | OAMF_BANK1
+	frame_oam -24,  -8, $38, 3 | OAM_BANK1
+	frame_oam -24,   0, $38, 3 | OAM_BANK1 | OAM_XFLIP
+	frame_oam  -8,  -8, $3a, 3 | OAM_BANK1
+	frame_oam -10,   0, $3c, 2 | OAM_BANK1
+	frame_oam -15,   8, $3e, 2 | OAM_BANK1
 	db $80
 
 .frame_28
-	frame_oam -24,  -8, $44, 4 | OAMF_BANK1
-	frame_oam -24,   0, $44, 4 | OAMF_BANK1 | OAMF_XFLIP
-	frame_oam  -8,  -8, $3a, 5 | OAMF_BANK1
-	frame_oam -10,   0, $3c, 5 | OAMF_BANK1
-	frame_oam -15,   8, $3e, 5 | OAMF_BANK1
+	frame_oam -24,  -8, $44, 4 | OAM_BANK1
+	frame_oam -24,   0, $44, 4 | OAM_BANK1 | OAM_XFLIP
+	frame_oam  -8,  -8, $3a, 5 | OAM_BANK1
+	frame_oam -10,   0, $3c, 5 | OAM_BANK1
+	frame_oam -15,   8, $3e, 5 | OAM_BANK1
 	db $80
 
 .frame_29
-	frame_oam  -8,  -8, $3a, 3 | OAMF_BANK1
-	frame_oam -10,   0, $3c, 2 | OAMF_BANK1
-	frame_oam -24,  -8, $40, 4 | OAMF_BANK1
-	frame_oam -26,   0, $42, 4 | OAMF_BANK1
-	frame_oam -15,   8, $3e, 2 | OAMF_BANK1
+	frame_oam  -8,  -8, $3a, 3 | OAM_BANK1
+	frame_oam -10,   0, $3c, 2 | OAM_BANK1
+	frame_oam -24,  -8, $40, 4 | OAM_BANK1
+	frame_oam -26,   0, $42, 4 | OAM_BANK1
+	frame_oam -15,   8, $3e, 2 | OAM_BANK1
 	db $80
 
 .frame_30
-	frame_oam -24,  -8, $44, 4 | OAMF_BANK1
-	frame_oam -24,   0, $44, 4 | OAMF_BANK1 | OAMF_XFLIP
-	frame_oam  -8,  -8, $3a, 5 | OAMF_BANK1
-	frame_oam -10,   0, $3c, 5 | OAMF_BANK1
-	frame_oam -15,   8, $3e, 5 | OAMF_BANK1
+	frame_oam -24,  -8, $44, 4 | OAM_BANK1
+	frame_oam -24,   0, $44, 4 | OAM_BANK1 | OAM_XFLIP
+	frame_oam  -8,  -8, $3a, 5 | OAM_BANK1
+	frame_oam -10,   0, $3c, 5 | OAM_BANK1
+	frame_oam -15,   8, $3e, 5 | OAM_BANK1
 	db $80
 
 .frame_31
-	frame_oam -24,  -8, $36, 2 | OAMF_BANK1
-	frame_oam -24,   0, $36, 2 | OAMF_BANK1 | OAMF_XFLIP
-	frame_oam  -8,  -8, $3a, 3 | OAMF_BANK1
-	frame_oam -10,   0, $3c, 2 | OAMF_BANK1
-	frame_oam -15,   8, $3e, 2 | OAMF_BANK1
+	frame_oam -24,  -8, $36, 2 | OAM_BANK1
+	frame_oam -24,   0, $36, 2 | OAM_BANK1 | OAM_XFLIP
+	frame_oam  -8,  -8, $3a, 3 | OAM_BANK1
+	frame_oam -10,   0, $3c, 2 | OAM_BANK1
+	frame_oam -15,   8, $3e, 2 | OAM_BANK1
 	db $80
 
 .frame_32
-	frame_oam -24,  -8, $38, 3 | OAMF_BANK1
-	frame_oam -24,   0, $38, 3 | OAMF_BANK1 | OAMF_XFLIP
-	frame_oam  -8,  -8, $3a, 3 | OAMF_BANK1
-	frame_oam -10,   0, $3c, 2 | OAMF_BANK1
-	frame_oam -15,   8, $3e, 2 | OAMF_BANK1
+	frame_oam -24,  -8, $38, 3 | OAM_BANK1
+	frame_oam -24,   0, $38, 3 | OAM_BANK1 | OAM_XFLIP
+	frame_oam  -8,  -8, $3a, 3 | OAM_BANK1
+	frame_oam -10,   0, $3c, 2 | OAM_BANK1
+	frame_oam -15,   8, $3e, 2 | OAM_BANK1
 	db $80
 
 .frame_33
-	frame_oam -28, -13, $4a, 3 | OAMF_BANK1
-	frame_oam   0, -16, $4e, 3 | OAMF_BANK1 | OAMF_YFLIP
+	frame_oam -28, -13, $4a, 3 | OAM_BANK1
+	frame_oam   0, -16, $4e, 3 | OAM_BANK1 | OAM_YFLIP
 	db $80
 
 .frame_34
-	frame_oam -28, -13, $4c, 4 | OAMF_BANK1
-	frame_oam   0, -16, $50, 4 | OAMF_BANK1 | OAMF_YFLIP
+	frame_oam -28, -13, $4c, 4 | OAM_BANK1
+	frame_oam   0, -16, $50, 4 | OAM_BANK1 | OAM_YFLIP
 	db $80
 
 .frame_35
-	frame_oam -28, -13, $4e, 3 | OAMF_BANK1
-	frame_oam -16,   4, $4a, 3 | OAMF_BANK1 | OAMF_YFLIP
+	frame_oam -28, -13, $4e, 3 | OAM_BANK1
+	frame_oam -16,   4, $4a, 3 | OAM_BANK1 | OAM_YFLIP
 	db $80
 
 .frame_36
-	frame_oam -28, -13, $50, 4 | OAMF_BANK1
-	frame_oam -16,   4, $4c, 4 | OAMF_BANK1 | OAMF_YFLIP
+	frame_oam -28, -13, $50, 4 | OAM_BANK1
+	frame_oam -16,   4, $4c, 4 | OAM_BANK1 | OAM_YFLIP
 	db $80
 
 .frame_37
-	frame_oam -16,   4, $4e, 3 | OAMF_BANK1 | OAMF_YFLIP
-	frame_oam   0, -16, $4a, 3 | OAMF_BANK1 | OAMF_YFLIP
+	frame_oam -16,   4, $4e, 3 | OAM_BANK1 | OAM_YFLIP
+	frame_oam   0, -16, $4a, 3 | OAM_BANK1 | OAM_YFLIP
 	db $80
 
 .frame_38
-	frame_oam -16,   4, $50, 4 | OAMF_BANK1 | OAMF_YFLIP
-	frame_oam   0, -16, $4c, 4 | OAMF_BANK1 | OAMF_YFLIP
+	frame_oam -16,   4, $50, 4 | OAM_BANK1 | OAM_YFLIP
+	frame_oam   0, -16, $4c, 4 | OAM_BANK1 | OAM_YFLIP
 	db $80
 
 .frame_39
-	frame_oam  -8,  -4, $60, 1 | OAMF_BANK1
+	frame_oam  -8,  -4, $60, 1 | OAM_BANK1
 	db $80
 
 .frame_40
-	frame_oam  -8, -12, $68, 1 | OAMF_BANK1
-	frame_oam  -8,   4, $68, 1 | OAMF_BANK1 | OAMF_XFLIP
-	frame_oam -16,  -4, $6a, 1 | OAMF_BANK1
-	frame_oam   0,  -4, $6a, 1 | OAMF_BANK1 | OAMF_YFLIP
+	frame_oam  -8, -12, $68, 1 | OAM_BANK1
+	frame_oam  -8,   4, $68, 1 | OAM_BANK1 | OAM_XFLIP
+	frame_oam -16,  -4, $6a, 1 | OAM_BANK1
+	frame_oam   0,  -4, $6a, 1 | OAM_BANK1 | OAM_YFLIP
 	db $80
 
 .frame_41
-	frame_oam  -8,  -4, $62, 1 | OAMF_BANK1
+	frame_oam  -8,  -4, $62, 1 | OAM_BANK1
 	db $80
 
 .frame_42
-	frame_oam -16, -12, $6c, 1 | OAMF_BANK1
-	frame_oam -16,  -4, $6e, 1 | OAMF_BANK1
-	frame_oam -16, -12, $6c, 1 | OAMF_BANK1
-	frame_oam -16,  -4, $6e, 1 | OAMF_BANK1
-	frame_oam   0, -12, $6c, 1 | OAMF_BANK1 | OAMF_YFLIP
-	frame_oam   0,  -4, $6e, 1 | OAMF_BANK1 | OAMF_YFLIP
-	frame_oam -16,   4, $6c, 1 | OAMF_BANK1 | OAMF_XFLIP
-	frame_oam -16,   4, $6c, 1 | OAMF_BANK1 | OAMF_XFLIP
-	frame_oam   0,   4, $6c, 1 | OAMF_BANK1 | OAMF_XFLIP | OAMF_YFLIP
+	frame_oam -16, -12, $6c, 1 | OAM_BANK1
+	frame_oam -16,  -4, $6e, 1 | OAM_BANK1
+	frame_oam -16, -12, $6c, 1 | OAM_BANK1
+	frame_oam -16,  -4, $6e, 1 | OAM_BANK1
+	frame_oam   0, -12, $6c, 1 | OAM_BANK1 | OAM_YFLIP
+	frame_oam   0,  -4, $6e, 1 | OAM_BANK1 | OAM_YFLIP
+	frame_oam -16,   4, $6c, 1 | OAM_BANK1 | OAM_XFLIP
+	frame_oam -16,   4, $6c, 1 | OAM_BANK1 | OAM_XFLIP
+	frame_oam   0,   4, $6c, 1 | OAM_BANK1 | OAM_XFLIP | OAM_YFLIP
 	db $80
 
 .frame_43
-	frame_oam  -8,  -8, $64, 1 | OAMF_BANK1
-	frame_oam  -8,   0, $64, 1 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam  -8,  -8, $64, 1 | OAM_BANK1
+	frame_oam  -8,   0, $64, 1 | OAM_BANK1 | OAM_XFLIP
 	db $80
 
 .frame_44
-	frame_oam -16, -12, $70, 1 | OAMF_BANK1
-	frame_oam -16,  -4, $72, 1 | OAMF_BANK1
-	frame_oam   0, -12, $70, 1 | OAMF_BANK1 | OAMF_YFLIP
-	frame_oam   0,  -4, $72, 1 | OAMF_BANK1 | OAMF_YFLIP
-	frame_oam -16,   4, $70, 1 | OAMF_BANK1 | OAMF_XFLIP
-	frame_oam   0,   4, $70, 1 | OAMF_BANK1 | OAMF_XFLIP | OAMF_YFLIP
+	frame_oam -16, -12, $70, 1 | OAM_BANK1
+	frame_oam -16,  -4, $72, 1 | OAM_BANK1
+	frame_oam   0, -12, $70, 1 | OAM_BANK1 | OAM_YFLIP
+	frame_oam   0,  -4, $72, 1 | OAM_BANK1 | OAM_YFLIP
+	frame_oam -16,   4, $70, 1 | OAM_BANK1 | OAM_XFLIP
+	frame_oam   0,   4, $70, 1 | OAM_BANK1 | OAM_XFLIP | OAM_YFLIP
 	db $80
 
 .frame_45
-	frame_oam  -8,  -8, $66, 1 | OAMF_BANK1
-	frame_oam  -8,   0, $66, 1 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam  -8,  -8, $66, 1 | OAM_BANK1
+	frame_oam  -8,   0, $66, 1 | OAM_BANK1 | OAM_XFLIP
 	db $80
 
 .frame_46
-	frame_oam -16, -16, $74, 1 | OAMF_BANK1
-	frame_oam -24,  -8, $76, 1 | OAMF_BANK1
-	frame_oam -16,   8, $74, 1 | OAMF_BANK1 | OAMF_XFLIP
-	frame_oam -24,   0, $76, 1 | OAMF_BANK1 | OAMF_XFLIP
-	frame_oam   0, -16, $74, 1 | OAMF_BANK1 | OAMF_YFLIP
-	frame_oam   8,  -8, $76, 1 | OAMF_BANK1 | OAMF_YFLIP
-	frame_oam   0,   8, $74, 1 | OAMF_BANK1 | OAMF_XFLIP | OAMF_YFLIP
-	frame_oam   8,   0, $76, 1 | OAMF_BANK1 | OAMF_XFLIP | OAMF_YFLIP
+	frame_oam -16, -16, $74, 1 | OAM_BANK1
+	frame_oam -24,  -8, $76, 1 | OAM_BANK1
+	frame_oam -16,   8, $74, 1 | OAM_BANK1 | OAM_XFLIP
+	frame_oam -24,   0, $76, 1 | OAM_BANK1 | OAM_XFLIP
+	frame_oam   0, -16, $74, 1 | OAM_BANK1 | OAM_YFLIP
+	frame_oam   8,  -8, $76, 1 | OAM_BANK1 | OAM_YFLIP
+	frame_oam   0,   8, $74, 1 | OAM_BANK1 | OAM_XFLIP | OAM_YFLIP
+	frame_oam   8,   0, $76, 1 | OAM_BANK1 | OAM_XFLIP | OAM_YFLIP
 	db $80
 
 .frame_47
-	frame_oam -16, -24, $78, 1 | OAMF_BANK1
-	frame_oam -21, -16, $7a, 1 | OAMF_BANK1
-	frame_oam -30,  -8, $7c, 1 | OAMF_BANK1
-	frame_oam   0, -24, $78, 1 | OAMF_BANK1 | OAMF_YFLIP
-	frame_oam   5, -16, $7a, 1 | OAMF_BANK1 | OAMF_YFLIP
-	frame_oam  14,  -8, $7c, 1 | OAMF_BANK1 | OAMF_YFLIP
-	frame_oam -16,  16, $78, 1 | OAMF_BANK1 | OAMF_XFLIP
-	frame_oam -21,   8, $7a, 1 | OAMF_BANK1 | OAMF_XFLIP
-	frame_oam -30,   0, $7c, 1 | OAMF_BANK1 | OAMF_XFLIP
-	frame_oam   0,  16, $78, 1 | OAMF_BANK1 | OAMF_XFLIP | OAMF_YFLIP
-	frame_oam   5,   8, $7a, 1 | OAMF_BANK1 | OAMF_XFLIP | OAMF_YFLIP
-	frame_oam  14,   0, $7c, 1 | OAMF_BANK1 | OAMF_XFLIP | OAMF_YFLIP
+	frame_oam -16, -24, $78, 1 | OAM_BANK1
+	frame_oam -21, -16, $7a, 1 | OAM_BANK1
+	frame_oam -30,  -8, $7c, 1 | OAM_BANK1
+	frame_oam   0, -24, $78, 1 | OAM_BANK1 | OAM_YFLIP
+	frame_oam   5, -16, $7a, 1 | OAM_BANK1 | OAM_YFLIP
+	frame_oam  14,  -8, $7c, 1 | OAM_BANK1 | OAM_YFLIP
+	frame_oam -16,  16, $78, 1 | OAM_BANK1 | OAM_XFLIP
+	frame_oam -21,   8, $7a, 1 | OAM_BANK1 | OAM_XFLIP
+	frame_oam -30,   0, $7c, 1 | OAM_BANK1 | OAM_XFLIP
+	frame_oam   0,  16, $78, 1 | OAM_BANK1 | OAM_XFLIP | OAM_YFLIP
+	frame_oam   5,   8, $7a, 1 | OAM_BANK1 | OAM_XFLIP | OAM_YFLIP
+	frame_oam  14,   0, $7c, 1 | OAM_BANK1 | OAM_XFLIP | OAM_YFLIP
 	db $80
 
 .frame_48
-	frame_oam -16,  -4, $7e, 0 | OAMF_BANK1
+	frame_oam -16,  -4, $7e, 0 | OAM_BANK1
 	db $80
 
 .frame_49
-	frame_oam  -8,  -8, $52, 3 | OAMF_BANK1
-	frame_oam  -8,   8, $54, 3 | OAMF_BANK1
-	frame_oam -16,  16, $56, 3 | OAMF_BANK1
-	frame_oam -16, -24, $56, 3 | OAMF_BANK1 | OAMF_XFLIP
-	frame_oam -27, -16, $58, 6 | OAMF_BANK1
-	frame_oam -32, -24, $5a, 6 | OAMF_BANK1
-	frame_oam -27,  12, $5c, 7 | OAMF_BANK1
+	frame_oam  -8,  -8, $52, 3 | OAM_BANK1
+	frame_oam  -8,   8, $54, 3 | OAM_BANK1
+	frame_oam -16,  16, $56, 3 | OAM_BANK1
+	frame_oam -16, -24, $56, 3 | OAM_BANK1 | OAM_XFLIP
+	frame_oam -27, -16, $58, 6 | OAM_BANK1
+	frame_oam -32, -24, $5a, 6 | OAM_BANK1
+	frame_oam -27,  12, $5c, 7 | OAM_BANK1
 	db $80
 
 .frame_50
-	frame_oam  -8,  -8, $46, 1 | OAMF_BANK1
-	frame_oam  -8,   0, $46, 1 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam  -8,  -8, $46, 1 | OAM_BANK1
+	frame_oam  -8,   0, $46, 1 | OAM_BANK1 | OAM_XFLIP
 	db $80
 
 .frame_51
-	frame_oam  -8,  -4, $60, 5 | OAMF_BANK1
+	frame_oam  -8,  -4, $60, 5 | OAM_BANK1
 	db $80
 
 .frame_52
-	frame_oam  -8,  -8, $64, 5 | OAMF_BANK1
-	frame_oam  -8,   0, $64, 5 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam  -8,  -8, $64, 5 | OAM_BANK1
+	frame_oam  -8,   0, $64, 5 | OAM_BANK1 | OAM_XFLIP
 	db $80
 
 Frameset_15e741::
@@ -530,56 +530,56 @@ OAM_15e813::
 	dw .frame_9
 
 .frame_0
-	frame_oam -16,  -8, $00, 0 | OAMF_BANK1
-	frame_oam -16,   0, $00, 0 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam -16,  -8, $00, 0 | OAM_BANK1
+	frame_oam -16,   0, $00, 0 | OAM_BANK1 | OAM_XFLIP
 	db $80
 
 .frame_1
-	frame_oam -16,  -8, $02, 0 | OAMF_BANK1
-	frame_oam -16,   0, $04, 0 | OAMF_BANK1
+	frame_oam -16,  -8, $02, 0 | OAM_BANK1
+	frame_oam -16,   0, $04, 0 | OAM_BANK1
 	db $80
 
 .frame_2
-	frame_oam -16,  -8, $36, 0 | OAMF_BANK1
-	frame_oam -16,   0, $38, 0 | OAMF_BANK1
+	frame_oam -16,  -8, $36, 0 | OAM_BANK1
+	frame_oam -16,   0, $38, 0 | OAM_BANK1
 	db $80
 
 .frame_3
-	frame_oam -16,  -4, $3a, 0 | OAMF_BANK1
+	frame_oam -16,  -4, $3a, 0 | OAM_BANK1
 	db $80
 
 .frame_4
-	frame_oam -16,  -4, $06, 0 | OAMF_BANK1
+	frame_oam -16,  -4, $06, 0 | OAM_BANK1
 	db $80
 
 .frame_5
-	frame_oam -16,  -8, $10, 4 | OAMF_BANK1
-	frame_oam -16,   0, $12, 4 | OAMF_BANK1
-	frame_oam  -9,  -4, $24, 0 | OAMF_BANK1
+	frame_oam -16,  -8, $10, 4 | OAM_BANK1
+	frame_oam -16,   0, $12, 4 | OAM_BANK1
+	frame_oam  -9,  -4, $24, 0 | OAM_BANK1
 	db $80
 
 .frame_6
-	frame_oam -16,  -8, $14, 7 | OAMF_BANK1
-	frame_oam -16,   0, $16, 7 | OAMF_BANK1
-	frame_oam -16,  -3, $26, 0 | OAMF_BANK1
+	frame_oam -16,  -8, $14, 7 | OAM_BANK1
+	frame_oam -16,   0, $16, 7 | OAM_BANK1
+	frame_oam -16,  -3, $26, 0 | OAM_BANK1
 	db $80
 
 .frame_7
-	frame_oam -16,  -8, $18, 6 | OAMF_BANK1
-	frame_oam -16,   0, $1a, 6 | OAMF_BANK1
-	frame_oam -16,  -4, $28, 0 | OAMF_BANK1
+	frame_oam -16,  -8, $18, 6 | OAM_BANK1
+	frame_oam -16,   0, $1a, 6 | OAM_BANK1
+	frame_oam -16,  -4, $28, 0 | OAM_BANK1
 	db $80
 
 .frame_8
-	frame_oam -16,  -8, $1c, 5 | OAMF_BANK1
-	frame_oam -16,   0, $1e, 5 | OAMF_BANK1
-	frame_oam -16,  -4, $2a, 0 | OAMF_BANK1
+	frame_oam -16,  -8, $1c, 5 | OAM_BANK1
+	frame_oam -16,   0, $1e, 5 | OAM_BANK1
+	frame_oam -16,  -4, $2a, 0 | OAM_BANK1
 	db $80
 
 .frame_9
-	frame_oam -16,  -8, $20, 4 | OAMF_BANK1
-	frame_oam -16,   0, $22, 4 | OAMF_BANK1
-	frame_oam -20,   0, $2c, 0 | OAMF_BANK1
+	frame_oam -16,  -8, $20, 4 | OAM_BANK1
+	frame_oam -16,   0, $22, 4 | OAM_BANK1
+	frame_oam -20,   0, $2c, 0 | OAM_BANK1
 	db $80
 
 Frameset_15e88d::
@@ -987,12 +987,12 @@ OAM_15e97d::
 	db $80
 
 .frame_4
-	frame_oam -32,   3, $b4, 0 | OAMF_XFLIP
-	frame_oam -32,  -5, $b6, 0 | OAMF_XFLIP
-	frame_oam -32, -13, $b8, 0 | OAMF_XFLIP
-	frame_oam -16,   3, $ba, 6 | OAMF_XFLIP
-	frame_oam -16,  -5, $80, 6 | OAMF_XFLIP
-	frame_oam -16, -13, $82, 6 | OAMF_XFLIP
+	frame_oam -32,   3, $b4, 0 | OAM_XFLIP
+	frame_oam -32,  -5, $b6, 0 | OAM_XFLIP
+	frame_oam -32, -13, $b8, 0 | OAM_XFLIP
+	frame_oam -16,   3, $ba, 6 | OAM_XFLIP
+	frame_oam -16,  -5, $80, 6 | OAM_XFLIP
+	frame_oam -16, -13, $82, 6 | OAM_XFLIP
 	db $80
 
 .frame_5
@@ -1061,34 +1061,34 @@ OAM_15e97d::
 	db $80
 
 .frame_14
-	frame_oam -32, -13, $b8, 0 | OAMF_XFLIP
+	frame_oam -32, -13, $b8, 0 | OAM_XFLIP
 	frame_oam -32,  -5, $bc, 0
-	frame_oam -32,   3, $b4, 0 | OAMF_XFLIP
-	frame_oam -16, -13, $82, 6 | OAMF_XFLIP
+	frame_oam -32,   3, $b4, 0 | OAM_XFLIP
+	frame_oam -16, -13, $82, 6 | OAM_XFLIP
 	frame_oam -16,  -5, $be, 6
 	frame_oam -16,   3, $c0, 6
 	db $80
 
 .frame_15
-	frame_oam -32, -13, $b8, 0 | OAMF_XFLIP
+	frame_oam -32, -13, $b8, 0 | OAM_XFLIP
 	frame_oam -32,  -5, $c2, 0
 	frame_oam -32,   3, $c4, 0
-	frame_oam -16, -13, $82, 6 | OAMF_XFLIP
+	frame_oam -16, -13, $82, 6 | OAM_XFLIP
 	frame_oam -16,  -5, $be, 6
 	frame_oam -16,   3, $c0, 6
 	db $80
 
 .frame_16
-	frame_oam -32, -13, $b8, 0 | OAMF_XFLIP
+	frame_oam -32, -13, $b8, 0 | OAM_XFLIP
 	frame_oam -32,  -5, $bc, 0
-	frame_oam -32,   3, $b4, 0 | OAMF_XFLIP
+	frame_oam -32,   3, $b4, 0 | OAM_XFLIP
 	frame_oam -16, -13, $c6, 6
 	frame_oam -16,  -5, $c8, 6
 	frame_oam -16,   3, $ca, 6
 	db $80
 
 .frame_17
-	frame_oam -32, -13, $b8, 0 | OAMF_XFLIP
+	frame_oam -32, -13, $b8, 0 | OAM_XFLIP
 	frame_oam -32,  -5, $c2, 0
 	frame_oam -32,   3, $c4, 0
 	frame_oam -16, -16, $cc, 6
@@ -1102,9 +1102,9 @@ OAM_15e97d::
 	frame_oam -16,  -5, $d6, 6
 	frame_oam -16,   3, $d8, 6
 	frame_oam -18,   6, $da, 6
-	frame_oam -32,  -5, $b6, 0 | OAMF_XFLIP
-	frame_oam -32, -13, $b8, 0 | OAMF_XFLIP
-	frame_oam -32,   3, $b4, 0 | OAMF_XFLIP
+	frame_oam -32,  -5, $b6, 0 | OAM_XFLIP
+	frame_oam -32, -13, $b8, 0 | OAM_XFLIP
+	frame_oam -32,   3, $b4, 0 | OAM_XFLIP
 	db $80
 
 .frame_19
@@ -1112,13 +1112,13 @@ OAM_15e97d::
 	frame_oam -16,  -5, $d6, 6
 	frame_oam -16,   3, $d8, 6
 	frame_oam -17,   6, $da, 6
-	frame_oam -32,  -5, $b6, 0 | OAMF_XFLIP
-	frame_oam -32, -13, $b8, 0 | OAMF_XFLIP
-	frame_oam -32,   3, $b4, 0 | OAMF_XFLIP
+	frame_oam -32,  -5, $b6, 0 | OAM_XFLIP
+	frame_oam -32, -13, $b8, 0 | OAM_XFLIP
+	frame_oam -32,   3, $b4, 0 | OAM_XFLIP
 	db $80
 
 .frame_20
-	frame_oam -32, -13, $b8, 0 | OAMF_XFLIP
+	frame_oam -32, -13, $b8, 0 | OAM_XFLIP
 	frame_oam -32,  -5, $c2, 0
 	frame_oam -32,   3, $c4, 0
 	frame_oam -16, -12, $de, 6
@@ -1127,7 +1127,7 @@ OAM_15e97d::
 	db $80
 
 .frame_21
-	frame_oam -32, -13, $b8, 0 | OAMF_XFLIP
+	frame_oam -32, -13, $b8, 0 | OAM_XFLIP
 	frame_oam -32,  -5, $c2, 0
 	frame_oam -32,   3, $c4, 0
 	frame_oam -16,   0, $d0, 6
@@ -1137,15 +1137,15 @@ OAM_15e97d::
 	db $80
 
 .frame_22
-	frame_oam -32,   0, $8c, 0 | OAMF_XFLIP
-	frame_oam -32,  -8, $8e, 0 | OAMF_XFLIP
-	frame_oam -16,   5, $90, 6 | OAMF_XFLIP
-	frame_oam -16,  -3, $92, 6 | OAMF_XFLIP
-	frame_oam -16, -11, $94, 6 | OAMF_XFLIP
+	frame_oam -32,   0, $8c, 0 | OAM_XFLIP
+	frame_oam -32,  -8, $8e, 0 | OAM_XFLIP
+	frame_oam -16,   5, $90, 6 | OAM_XFLIP
+	frame_oam -16,  -3, $92, 6 | OAM_XFLIP
+	frame_oam -16, -11, $94, 6 | OAM_XFLIP
 	db $80
 
 .frame_23
-	frame_oam -32, -13, $b8, 0 | OAMF_XFLIP
+	frame_oam -32, -13, $b8, 0 | OAM_XFLIP
 	frame_oam -32,   3, $c4, 0
 	frame_oam -16,  -4, $e0, 6
 	frame_oam -32,  -5, $e4, 0
@@ -1168,9 +1168,9 @@ OAM_15e97d::
 	frame_oam -32,  -7, $fa, 0
 	frame_oam -32,   1, $fc, 0
 	frame_oam -24,   8, $fe, 6
-	frame_oam -16, -16, $00, 6 | OAMF_BANK1
-	frame_oam -16,  -8, $02, 6 | OAMF_BANK1
-	frame_oam -16,   0, $04, 6 | OAMF_BANK1
+	frame_oam -16, -16, $00, 6 | OAM_BANK1
+	frame_oam -16,  -8, $02, 6 | OAM_BANK1
+	frame_oam -16,   0, $04, 6 | OAM_BANK1
 	db $80
 
 .frame_26
@@ -1178,155 +1178,155 @@ OAM_15e97d::
 	frame_oam -32,  -7, $fa, 1
 	frame_oam -32,   1, $fc, 1
 	frame_oam -24,   8, $fe, 1
-	frame_oam -16, -16, $00, 1 | OAMF_BANK1
-	frame_oam -16,  -8, $02, 1 | OAMF_BANK1
-	frame_oam -16,   0, $04, 1 | OAMF_BANK1
+	frame_oam -16, -16, $00, 1 | OAM_BANK1
+	frame_oam -16,  -8, $02, 1 | OAM_BANK1
+	frame_oam -16,   0, $04, 1 | OAM_BANK1
 	db $80
 
 .frame_27
-	frame_oam -32,  -7, $06, 0 | OAMF_BANK1
-	frame_oam -40,   1, $08, 0 | OAMF_BANK1
-	frame_oam -40,   9, $0a, 0 | OAMF_BANK1
-	frame_oam -24,   1, $0c, 0 | OAMF_BANK1
-	frame_oam -24,   9, $0e, 0 | OAMF_BANK1
-	frame_oam -16,  -7, $10, 6 | OAMF_BANK1
-	frame_oam  -8,   1, $12, 6 | OAMF_BANK1
+	frame_oam -32,  -7, $06, 0 | OAM_BANK1
+	frame_oam -40,   1, $08, 0 | OAM_BANK1
+	frame_oam -40,   9, $0a, 0 | OAM_BANK1
+	frame_oam -24,   1, $0c, 0 | OAM_BANK1
+	frame_oam -24,   9, $0e, 0 | OAM_BANK1
+	frame_oam -16,  -7, $10, 6 | OAM_BANK1
+	frame_oam  -8,   1, $12, 6 | OAM_BANK1
 	db $80
 
 .frame_28
-	frame_oam -24,   0, $16, 0 | OAMF_BANK1
-	frame_oam -24,   8, $18, 0 | OAMF_BANK1
-	frame_oam -40,   7, $14, 0 | OAMF_BANK1
-	frame_oam -16,  -8, $1a, 6 | OAMF_BANK1
-	frame_oam  -8,   0, $1c, 6 | OAMF_BANK1
+	frame_oam -24,   0, $16, 0 | OAM_BANK1
+	frame_oam -24,   8, $18, 0 | OAM_BANK1
+	frame_oam -40,   7, $14, 0 | OAM_BANK1
+	frame_oam -16,  -8, $1a, 6 | OAM_BANK1
+	frame_oam  -8,   0, $1c, 6 | OAM_BANK1
 	db $80
 
 .frame_29
-	frame_oam -16,  -8, $66, 1 | OAMF_BANK1
-	frame_oam -16,   0, $66, 1 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam -16,  -8, $66, 1 | OAM_BANK1
+	frame_oam -16,   0, $66, 1 | OAM_BANK1 | OAM_XFLIP
 	db $80
 
 .frame_30
-	frame_oam -16,  -8, $64, 1 | OAMF_BANK1
-	frame_oam -16,   0, $64, 1 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam -16,  -8, $64, 1 | OAM_BANK1
+	frame_oam -16,   0, $64, 1 | OAM_BANK1 | OAM_XFLIP
 	db $80
 
 .frame_31
-	frame_oam -20,  -4, $1e, 1 | OAMF_BANK1
+	frame_oam -20,  -4, $1e, 1 | OAM_BANK1
 	db $80
 
 .frame_32
-	frame_oam -16,  -4, $60, 1 | OAMF_BANK1
+	frame_oam -16,  -4, $60, 1 | OAM_BANK1
 	db $80
 
 .frame_33
-	frame_oam -16,  -8, $66, 7 | OAMF_BANK1
-	frame_oam -16,   0, $66, 7 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam -16,  -8, $66, 7 | OAM_BANK1
+	frame_oam -16,   0, $66, 7 | OAM_BANK1 | OAM_XFLIP
 	db $80
 
 .frame_34
-	frame_oam -16,  -8, $64, 7 | OAMF_BANK1
-	frame_oam -16,   0, $64, 7 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam -16,  -8, $64, 7 | OAM_BANK1
+	frame_oam -16,   0, $64, 7 | OAM_BANK1 | OAM_XFLIP
 	db $80
 
 .frame_35
-	frame_oam -20,  -4, $1e, 7 | OAMF_BANK1
+	frame_oam -20,  -4, $1e, 7 | OAM_BANK1
 	db $80
 
 .frame_36
-	frame_oam -16,  -4, $60, 7 | OAMF_BANK1
+	frame_oam -16,  -4, $60, 7 | OAM_BANK1
 	db $80
 
 .frame_37
-	frame_oam -16,  -8, $66, 5 | OAMF_BANK1
-	frame_oam -16,   0, $66, 5 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam -16,  -8, $66, 5 | OAM_BANK1
+	frame_oam -16,   0, $66, 5 | OAM_BANK1 | OAM_XFLIP
 	db $80
 
 .frame_38
-	frame_oam -16,  -8, $64, 5 | OAMF_BANK1
-	frame_oam -16,   0, $64, 5 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam -16,  -8, $64, 5 | OAM_BANK1
+	frame_oam -16,   0, $64, 5 | OAM_BANK1 | OAM_XFLIP
 	db $80
 
 .frame_39
-	frame_oam -20,  -4, $1e, 5 | OAMF_BANK1
+	frame_oam -20,  -4, $1e, 5 | OAM_BANK1
 	db $80
 
 .frame_40
-	frame_oam -16,  -4, $60, 5 | OAMF_BANK1
+	frame_oam -16,  -4, $60, 5 | OAM_BANK1
 	db $80
 
 .frame_41
-	frame_oam -24, -12, $20, 4 | OAMF_BANK1
-	frame_oam -24,  -4, $22, 4 | OAMF_BANK1
-	frame_oam -24,   4, $24, 3 | OAMF_BANK1
-	frame_oam  -8, -12, $26, 4 | OAMF_BANK1
-	frame_oam  -8,  -4, $28, 4 | OAMF_BANK1
-	frame_oam  -8,   4, $2a, 5 | OAMF_BANK1
+	frame_oam -24, -12, $20, 4 | OAM_BANK1
+	frame_oam -24,  -4, $22, 4 | OAM_BANK1
+	frame_oam -24,   4, $24, 3 | OAM_BANK1
+	frame_oam  -8, -12, $26, 4 | OAM_BANK1
+	frame_oam  -8,  -4, $28, 4 | OAM_BANK1
+	frame_oam  -8,   4, $2a, 5 | OAM_BANK1
 	db $80
 
 .frame_42
-	frame_oam -16,  -4, $c0, 5 | OAMF_BANK1
+	frame_oam -16,  -4, $c0, 5 | OAM_BANK1
 	db $80
 
 .frame_43
-	frame_oam -17,  -4, $c2, 3 | OAMF_BANK1
+	frame_oam -17,  -4, $c2, 3 | OAM_BANK1
 	db $80
 
 .frame_44
-	frame_oam  -8,  -4, $c0, 5 | OAMF_BANK1 | OAMF_YFLIP
+	frame_oam  -8,  -4, $c0, 5 | OAM_BANK1 | OAM_YFLIP
 	db $80
 
 .frame_45
-	frame_oam -17,  -5, $c2, 3 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam -17,  -5, $c2, 3 | OAM_BANK1 | OAM_XFLIP
 	db $80
 
 .frame_46
-	frame_oam -16,  -8, $c4, 5 | OAMF_BANK1
-	frame_oam -16,   0, $c4, 5 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam -16,  -8, $c4, 5 | OAM_BANK1
+	frame_oam -16,   0, $c4, 5 | OAM_BANK1 | OAM_XFLIP
 	db $80
 
 .frame_47
-	frame_oam -16,  -8, $c6, 3 | OAMF_BANK1
-	frame_oam -16,   0, $c8, 3 | OAMF_BANK1
+	frame_oam -16,  -8, $c6, 3 | OAM_BANK1
+	frame_oam -16,   0, $c8, 3 | OAM_BANK1
 	db $80
 
 .frame_48
-	frame_oam -16,  -8, $c4, 5 | OAMF_BANK1 | OAMF_YFLIP
-	frame_oam -16,   0, $c4, 5 | OAMF_BANK1 | OAMF_XFLIP | OAMF_YFLIP
+	frame_oam -16,  -8, $c4, 5 | OAM_BANK1 | OAM_YFLIP
+	frame_oam -16,   0, $c4, 5 | OAM_BANK1 | OAM_XFLIP | OAM_YFLIP
 	db $80
 
 .frame_49
-	frame_oam -16,   0, $c6, 3 | OAMF_BANK1 | OAMF_XFLIP
-	frame_oam -16,  -8, $c8, 3 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam -16,   0, $c6, 3 | OAM_BANK1 | OAM_XFLIP
+	frame_oam -16,  -8, $c8, 3 | OAM_BANK1 | OAM_XFLIP
 	db $80
 
 .frame_50
-	frame_oam -16,  -8, $ca, 5 | OAMF_BANK1
-	frame_oam -16,   0, $ca, 5 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam -16,  -8, $ca, 5 | OAM_BANK1
+	frame_oam -16,   0, $ca, 5 | OAM_BANK1 | OAM_XFLIP
 	db $80
 
 .frame_51
-	frame_oam -16,  -8, $cc, 3 | OAMF_BANK1
-	frame_oam -16,   0, $ce, 3 | OAMF_BANK1
+	frame_oam -16,  -8, $cc, 3 | OAM_BANK1
+	frame_oam -16,   0, $ce, 3 | OAM_BANK1
 	db $80
 
 .frame_52
-	frame_oam -16,  -8, $ca, 5 | OAMF_BANK1 | OAMF_YFLIP
-	frame_oam -16,   0, $ca, 5 | OAMF_BANK1 | OAMF_XFLIP | OAMF_YFLIP
+	frame_oam -16,  -8, $ca, 5 | OAM_BANK1 | OAM_YFLIP
+	frame_oam -16,   0, $ca, 5 | OAM_BANK1 | OAM_XFLIP | OAM_YFLIP
 	db $80
 
 .frame_53
-	frame_oam -16,   0, $cc, 3 | OAMF_BANK1 | OAMF_XFLIP
-	frame_oam -16,  -8, $ce, 3 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam -16,   0, $cc, 3 | OAM_BANK1 | OAM_XFLIP
+	frame_oam -16,  -8, $ce, 3 | OAM_BANK1 | OAM_XFLIP
 	db $80
 
 .frame_54
-	frame_oam -16,  -8, $2c, 0 | OAMF_BANK1
-	frame_oam -16,   0, $2c, 0 | OAMF_BANK1 | OAMF_XFLIP
+	frame_oam -16,  -8, $2c, 0 | OAM_BANK1
+	frame_oam -16,   0, $2c, 0 | OAM_BANK1 | OAM_XFLIP
 	db $80
 
 .frame_55
-	frame_oam -16,  -4, $30, 0 | OAMF_BANK1
+	frame_oam -16,  -4, $30, 0 | OAM_BANK1
 	db $80
 
 Frameset_15ed91::

@@ -1755,7 +1755,7 @@ ThrowObject_Left:
 	ld b, $02
 .asm_6244b
 	ld a, [wJoypadDown]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr z, .asm_62454
 	ld b, $01
 .asm_62454
@@ -1773,7 +1773,7 @@ ThrowObject_Left:
 .asm_62462
 	ld b, $04
 	ld a, [wJoypadDown]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr z, .asm_6246d
 	ld b, $01
 .asm_6246d
@@ -1901,7 +1901,7 @@ ThrowObject_Right:
 	ld b, $02
 .asm_62544
 	ld a, [wJoypadDown]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr z, .asm_6254d
 	ld b, $01
 .asm_6254d
@@ -1919,7 +1919,7 @@ ThrowObject_Right:
 .asm_6255b
 	ld b, $04
 	ld a, [wJoypadDown]
-	bit D_UP_F, a
+	bit B_PAD_UP, a
 	jr z, .asm_62566
 	ld b, $01
 .asm_62566

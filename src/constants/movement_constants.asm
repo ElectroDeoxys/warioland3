@@ -17,7 +17,7 @@ DEF FALLING_JUMP_VEL_INDEX EQU $18
 ; to escape being picked up in the duration window
 DEF NUM_WIGGLES_TO_ESCAPE EQU 6
 ; duration window that Wario can decrement
-DEF MAX_PICKED_UP_FRAME_COUNTER EQU 32
+DEF MAX_PICKEB_PAD_UPRAME_COUNTER EQU 32
 
 ; wFloorTransitionDir flags
 DEF FLOOR_TRANSITION_DOWN_F EQU 2

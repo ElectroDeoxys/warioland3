@@ -875,13 +875,13 @@ GolfHoleState_WaitInput:
 	ld e, a
 
 	ld a, [wJoypadPressed]
-	bit SELECT_F, a
+	bit B_PAD_SELECT, a
 	jr nz, .select_btn
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, .a_btn
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr nz, .d_right
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr nz, .d_left
 	ret
 
@@ -1022,9 +1022,9 @@ GolfHoleState_Scroll:
 
 .HandleDirectionalInputScroll:
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, .restore_scroll
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jr nz, .restore_scroll
 
 	ld hl, wGolfXScroll
@@ -1037,7 +1037,7 @@ GolfHoleState_Scroll:
 
 ; dir right
 	ld a, [wJoypadDown]
-	bit D_RIGHT_F, a
+	bit B_PAD_RIGHT, a
 	jr z, .no_directional_input
 	ld a, d
 	and a
@@ -1051,7 +1051,7 @@ GolfHoleState_Scroll:
 
 .dir_left
 	ld a, [wJoypadDown]
-	bit D_LEFT_F, a
+	bit B_PAD_LEFT, a
 	jr z, .no_directional_input
 	ld a, d
 	or e
@@ -1166,7 +1166,7 @@ GolfHoleState_SelectShotPower:
 
 .check_a_btn
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	ret z ; no A button
 	xor a
 	ld [wGolfWarioDuration], a
@@ -1331,7 +1331,7 @@ GolfHoleState_SelectShotSpin:
 
 .check_a_btn
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	ret z ; no A button
 
 .check_spin
@@ -2504,7 +2504,7 @@ GolfHoleState_Cleared:
 	ret
 .input_allowed
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	ret z
 
 	; exit
@@ -2542,7 +2542,7 @@ GolfHoleState_Cleared:
 	ret
 .asm_1c9adc
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	ret z
 	ld a, [wGolfStroke]
 	ld c, a
@@ -2686,7 +2686,7 @@ GolfHoleState_GameOver:
 	ret
 .asm_1c9be5
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	ret z
 	ld a, [w1d800]
 	cp $02
@@ -2712,9 +2712,9 @@ GolfHoleState_Pause:
 	call LoadGolfSprite
 
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	jr nz, .asm_1c9c27
-	bit B_BUTTON_F, a
+	bit B_PAD_B, a
 	jr nz, .asm_1c9c40
 	ret
 .asm_1c9c27
@@ -2761,7 +2761,7 @@ GolfHoleState_Result:
 	ret
 .input_allowed
 	ld a, [wJoypadPressed]
-	bit A_BUTTON_F, a
+	bit B_PAD_A, a
 	ret z
 	ld hl, wGolfBestScores
 	ld a, [wGolfCourse]
@@ -2866,10 +2866,10 @@ Func_1c9cf9:
 	ld a, LCDC_DEFAULT
 	jr .got_lcd_config
 .split
-	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_WINON | LCDCF_WIN9C00 | LCDCF_ON
+	ld a, LCDC_BG_ON | LCDC_OBJ_ON | LCDC_OBJ_16 | LCDC_WIN_ON | LCDC_WIN_9C00 | LCDC_ON
 	jr .got_lcd_config
 .bgmap1
-	ld a, LCDCF_BGON | LCDCF_OBJON | LCDCF_OBJ16 | LCDCF_BG9C00 | LCDCF_ON
+	ld a, LCDC_BG_ON | LCDC_OBJ_ON | LCDC_OBJ_16 | LCDC_BG_9C00 | LCDC_ON
 .got_lcd_config
 	ld [wGolfLCDConfig], a
 
@@ -2889,7 +2889,7 @@ VBlank_1c9d1d:
 
 .Func:
 	ld a, BANK("Golf RAM")
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	ldh [rVBK], a
 	ld a, [wSCX]
 	ldh [rSCX], a
@@ -2897,7 +2897,7 @@ VBlank_1c9d1d:
 	ldh [rWX], a
 	ld a, [wGolfLCDConfig]
 	ldh [rLCDC], a
-	ld hl, rHDMA1
+	ld hl, rVDMA_SRC_HIGH
 	ld a, HIGH(wGolfPinFlagTiles)
 	ld [hli], a
 	ld a, LOW(wGolfPinFlagTiles)
@@ -2956,7 +2956,7 @@ VBlank_1c9e8d:
 
 .Func:
 	ld a, BANK("Golf RAM")
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	ldh [rVBK], a
 	ld a, $03
 	ldcoord_a 5, 10
@@ -2977,7 +2977,7 @@ VBlank_1c9eb3:
 
 .Func:
 	ld a, BANK("Golf RAM")
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	xor a
 	ld [wGolfVBlankMode], a
 	ld a, [wSCX]
@@ -2988,7 +2988,7 @@ VBlank_1c9eb3:
 	ldh [rLCDC], a
 	ld a, [wGolfWarioTilesBank]
 	ld [rROMB0], a
-	ld hl, rHDMA1
+	ld hl, rVDMA_SRC_HIGH
 	ld a, [wGolfWarioTilesPtr + 0]
 	ld [hli], a
 	ld a, [wGolfWarioTilesPtr + 1]
@@ -3010,7 +3010,7 @@ VBlank_1c9ef1:
 
 .Func:
 	ld a, BANK("Golf RAM")
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	ldh [rVBK], a
 	xor a
 	ld [wGolfVBlankMode], a
@@ -3020,7 +3020,7 @@ VBlank_1c9ef1:
 	ldh [rWX], a
 	ld a, [wGolfLCDConfig]
 	ldh [rLCDC], a
-	ld hl, rHDMA1
+	ld hl, rVDMA_SRC_HIGH
 	ld a, HIGH(w1db90)
 	ld [hli], a
 	ld a, LOW(w1db90)
@@ -3052,7 +3052,7 @@ VBlank_1c9f36:
 .Func:
 	; update the coin number in the Golf Lobby
 	ld a, BANK("Golf RAM")
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	xor a
 	ldh [rVBK], a
 	ld a, [wGolfNumCoins + 0]
@@ -3088,7 +3088,7 @@ VBlank_1c9f7a:
 
 .Func:
 	ld a, BANK("Golf RAM")
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	xor a
 	ld [wGolfVBlankMode], a
 	ld a, [wSCX]
@@ -3096,7 +3096,7 @@ VBlank_1c9f7a:
 
 	ld a, [wGolfWarioTilesBank]
 	ld [rROMB0], a
-	ld hl, rHDMA1
+	ld hl, rVDMA_SRC_HIGH
 	ld a, [wGolfWarioTilesPtr + 0]
 	ld [hli], a
 	ld a, [wGolfWarioTilesPtr + 1]
@@ -3149,7 +3149,7 @@ VBlank_1c9fe1:
 
 .Func:
 	ld a, BANK("Golf RAM")
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	ld a, [wSCX]
 	ldh [rSCX], a
 	ld a, HIGH(wVirtualOAM)
@@ -3157,9 +3157,9 @@ VBlank_1c9fe1:
 .end
 
 VBlank_1c9ffa:
-	ld a, HIGH(v1BGMap0 + 6 * BG_MAP_WIDTH) - $80
+	ld a, HIGH(v1BGMap0 + 6 * TILEMAP_WIDTH) - $80
 	ld [wdc11 + 0], a
-	ld a, LOW(v1BGMap0 + 6 * BG_MAP_WIDTH)
+	ld a, LOW(v1BGMap0 + 6 * TILEMAP_WIDTH)
 	ld [wdc11 + 1], a
 	ld a, 7 dma_rows
 	ld [w1dc13], a
@@ -3171,7 +3171,7 @@ VBlank_1c9ffa:
 
 .Func:
 	ld a, BANK("Golf RAM")
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	xor a
 	ld [wGolfVBlankMode], a
 	ld a, [wSCX]
@@ -3194,7 +3194,7 @@ VBlank_1ca033:
 
 .Func:
 	ld a, BANK("Golf RAM")
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	xor a
 	ld [wGolfVBlankMode], a
 	ld a, [wSCX]
@@ -3206,9 +3206,9 @@ VBlank_1ca033:
 .end
 
 VBlank_1ca056:
-	ld a, HIGH(v1BGMap0 + 6 * BG_MAP_WIDTH) - $80
+	ld a, HIGH(v1BGMap0 + 6 * TILEMAP_WIDTH) - $80
 	ld [wdc11 + 0], a
-	ld a, LOW(v1BGMap0 + 6 * BG_MAP_WIDTH)
+	ld a, LOW(v1BGMap0 + 6 * TILEMAP_WIDTH)
 	ld [wdc11 + 1], a
 	ld a, $e dma_tiles
 	ld [w1dc13], a
@@ -3220,7 +3220,7 @@ VBlank_1ca056:
 
 .Func:
 	ld a, BANK("Golf RAM")
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	xor a
 	ld [wGolfVBlankMode], a
 	ld a, [wSCX]

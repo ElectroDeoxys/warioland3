@@ -53,7 +53,7 @@ VBlank:
 	push af
 	ld a, [wSRAMBank]
 	push af
-	ldh a, [rSVBK]
+	ldh a, [rWBK]
 	push af
 	ldh a, [rVBK]
 	push af
@@ -61,7 +61,7 @@ VBlank:
 	pop af
 	ldh [rVBK], a
 	pop af
-	ldh [rSVBK], a
+	ldh [rWBK], a
 	pop af
 	sramswitch
 	pop af
