@@ -12,7 +12,7 @@ DisableLCD::
 ; wait until VBlank would normally happen
 .wait
 	ldh a, [rLY]
-	cp $91
+	cp LY_VBLANK + 1
 	jr nz, .wait
 
 ; turn LCD off

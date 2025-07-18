@@ -63,9 +63,9 @@ InitGolfHole:
 	ld [wSCY], a
 	ld [wSCX], a
 	ldh [rWY], a
-	ld a, $a6
+	ld a, 159 + WX_OFS
 	ldh [rWX], a
-	ld [w1dc25], a
+	ld [wGolfWX], a
 
 	call .SetUpGolfHole
 	call Func_1c9cf9
@@ -1117,10 +1117,10 @@ UpdateGolfDisplayMode:
 	cp LOW(MAX_GOLF_X_SCROLL)
 	jr c, .no_split
 ; split
-	ld a, $a7
+	ld a, 167
 	sub [hl]
-	add $60
-	ld [w1dc25], a
+	add 89 + WX_OFS
+	ld [wGolfWX], a
 	ld a, GOLF_DISPLAY_SPLIT
 	ld [wGolfDisplayMode], a
 	ret
@@ -2893,7 +2893,7 @@ VBlank_1c9d1d:
 	ldh [rVBK], a
 	ld a, [wSCX]
 	ldh [rSCX], a
-	ld a, [w1dc25]
+	ld a, [wGolfWX]
 	ldh [rWX], a
 	ld a, [wGolfLCDConfig]
 	ldh [rLCDC], a
@@ -2982,7 +2982,7 @@ VBlank_1c9eb3:
 	ld [wGolfVBlankMode], a
 	ld a, [wSCX]
 	ldh [rSCX], a
-	ld a, [w1dc25]
+	ld a, [wGolfWX]
 	ldh [rWX], a
 	ld a, [wGolfLCDConfig]
 	ldh [rLCDC], a
@@ -3016,7 +3016,7 @@ VBlank_1c9ef1:
 	ld [wGolfVBlankMode], a
 	ld a, [wSCX]
 	ldh [rSCX], a
-	ld a, [w1dc25]
+	ld a, [wGolfWX]
 	ldh [rWX], a
 	ld a, [wGolfLCDConfig]
 	ldh [rLCDC], a

@@ -37,7 +37,7 @@ InitWithoutDemoPowerUpReset::
 	ldh [rLCDC], a
 .wait_vblank
 	ldh a, [rLY]
-	cp $94
+	cp LY_VBLANK + 4
 	jr nz, .wait_vblank
 
 	; enable BG and OBJ

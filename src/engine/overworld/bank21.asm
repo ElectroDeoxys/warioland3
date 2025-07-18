@@ -579,7 +579,7 @@ VBlank_OWPalTransition:
 	ld a, [wWY]
 	ldh [rWY], a
 	ld a, [wWX]
-	add $07
+	add WX_OFS
 	ldh [rWX], a
 
 	ld b, BANK(Func_1d8c2c)

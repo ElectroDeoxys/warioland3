@@ -2683,7 +2683,7 @@ SetTimbre:
 	add hl, bc
 
 	ld c, LOW(_AUD3WAVERAM)
-	ld b, $10
+	ld b, AUD3WAVE_SIZE
 .loop_wave_sample
 	ld a, [hli]
 	ld [$ff00+c], a

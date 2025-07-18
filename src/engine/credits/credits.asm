@@ -19,7 +19,7 @@ InitCredits:
 	ld [wCreditsPage], a
 	ldh [rWY], a
 	ld [wcee4], a
-	ld a, $07
+	ld a, 0 + WX_OFS
 	ldh [rWX], a
 
 	ld a, HIGH(v0BGMap0 + $2e7) ; coords 7, 23

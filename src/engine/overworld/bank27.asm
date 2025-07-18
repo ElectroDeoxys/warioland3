@@ -251,7 +251,7 @@ CutsceneInitFunctions:
 	ld b, BANK(Pals_b8200)
 	call LoadFarPalsToTempPals1
 
-	ld a, LCDC_BG_9C00
+	ld a, LCDC_BG_MAP
 	ld [wLCDCFlagsToFlip], a
 	call LoadCutscenes2Gfx
 	call Func_9ca6a
@@ -344,7 +344,7 @@ CutsceneInitFunctions:
 	ld b, BANK(Pals_b8e00)
 	ld hl, Pals_b8e00
 	call LoadFarPalsToTempPals2
-	ld a, LCDC_BG_9C00
+	ld a, LCDC_BG_MAP
 	ld [wLCDCFlagsToFlip], a
 	call LoadCutscenes4Gfx
 	jp Func_9cbbc
@@ -356,7 +356,7 @@ CutsceneInitFunctions:
 	ld b, BANK(Pals_b8a40)
 	ld hl, Pals_b8a40
 	call LoadFarPalsToTempPals2
-	ld a, LCDC_BG_9C00
+	ld a, LCDC_BG_MAP
 	ld [wLCDCFlagsToFlip], a
 	call LoadCutscenes2Gfx
 	call Func_9ca6a
@@ -370,12 +370,12 @@ CutsceneInitFunctions:
 	ld hl, Pals_b8e80
 	call LoadFarPalsToTempPals2
 .asm_9c367
-	ld a, LCDC_WIN_ON
+	ld a, LCDC_WINDOW
 	ld [wLCDCFlagsToFlip], a
 	ld a, $28
 	ldh [rWY], a
 	ld [wCutsceneWY], a
-	ld a, $57
+	ld a, 80 + WX_OFS
 	ldh [rWX], a
 	ld [wCutsceneWX], a
 	call LoadCutscenes2Gfx
@@ -737,7 +737,7 @@ CutsceneInitFunctions:
 	jp Func_9e91a
 
 .InitCutscene44:
-	ld a, LCDC_BG_9C00
+	ld a, LCDC_BG_MAP
 	ld [wLCDCFlagsToFlip], a
 	ld b, BANK(Pals_b8200)
 	ld hl, Pals_b8200
@@ -2812,7 +2812,7 @@ Cutscene02Func:
 	jp WaitCutsceneFunc
 
 .Func_9d7e6:
-	ld a, LCDC_BG_9C00
+	ld a, LCDC_BG_MAP
 	ld [wLCDCFlagsToFlip], a
 	jp AdvanceCutsceneFunc
 
@@ -2821,7 +2821,7 @@ Cutscene02Func:
 	jp WaitCutsceneFunc
 
 .Func_9d7f3:
-	ld a, LCDC_BG_9C00
+	ld a, LCDC_BG_MAP
 	ld [wLCDCFlagsToFlip], a
 	xor a
 	ld hl, wSceneObj2State
@@ -7307,7 +7307,7 @@ Func_9f8da:
 	ld a, [wSceneObj2Frame]
 	cp $07
 	ret nz
-	ld a, LCDC_BG_9C00
+	ld a, LCDC_BG_MAP
 	ld [wLCDCFlagsToFlip], a
 	ld [hl], $01
 	ret

@@ -1850,8 +1850,8 @@ _InitTempleScene:
 	ret
 
 ClearGeneralSceneRAM:
-	ld hl, wLCDCFlagsToFlip
-	ld bc, wWRAM2End - wLCDCFlagsToFlip
+	ld hl, STARTOF("WRAM2 2")
+	ld bc, SIZEOF("WRAM2 2")
 	xor a
 	call WriteAToHL_BCTimes
 	ret
@@ -2562,7 +2562,7 @@ HiddenFigureRevealScene:
 	jr nz, .loop_rocks
 	and a
 	ret nz
-	ld a, LCDC_BG_9C00
+	ld a, LCDC_BG_MAP
 	ld [wLCDCFlagsToFlip], a
 	jp Func_ad016
 
@@ -4504,7 +4504,7 @@ _InitPrologueSequence:
 	ld [wSceneWarioStateGroup], a
 	xor a ; SCENEWARIO_NONE
 	call SetSceneWarioState
-	ld a, LCDC_BG_9C00
+	ld a, LCDC_BG_MAP
 	ld [wLCDCFlagsToFlip], a
 	ret
 
@@ -4647,7 +4647,7 @@ Func_ae079:
 	xor a
 	ld [wSCY], a
 	ld [wSCX], a
-	ld a, LCDC_BG_9C00
+	ld a, LCDC_BG_MAP
 	ld [wLCDCFlagsToFlip], a
 	ld a, $50
 	ld hl, wSceneObj8
@@ -4685,7 +4685,7 @@ Func_ae0c4:
 	ld [wSCY], a
 	xor a
 	ld [wSCX], a
-	ld a, LCDC_BG_9C00
+	ld a, LCDC_BG_MAP
 	ld [wLCDCFlagsToFlip], a
 	ld a, SCENEWARIO_HOLD_MUSIC_BOX
 	call SetSceneWarioState
@@ -4747,7 +4747,7 @@ Func_ae134:
 	xor a
 	ld [wSCY], a
 	ld [wSCX], a
-	ld a, LCDC_BG_9C00
+	ld a, LCDC_BG_MAP
 	ld [wLCDCFlagsToFlip], a
 	ld hl, wSceneWarioYCoord
 	ld a, $60

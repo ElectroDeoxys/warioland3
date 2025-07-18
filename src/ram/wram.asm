@@ -1265,7 +1265,7 @@ wGolfMaxStrokes::
 wGolfResult::
 	db
 
-w1dc25::
+wGolfWX::
 	db
 
 ; GOLF_DISPLAY_* constant
