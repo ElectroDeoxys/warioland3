@@ -79,6 +79,8 @@ INCLUDE "engine/overworld/bank26.asm"
 
 SECTION "Bank 27", ROMX
 
+INCLUDE "engine/overworld/cutscene/init.asm"
+INCLUDE "engine/overworld/cutscene/prologue/common.asm"
 INCLUDE "engine/overworld/bank27.asm"
 
 
@@ -109,7 +111,9 @@ INCLUDE "data/overworld/oam_1.asm"
 
 SECTION "Bank 2B", ROMX
 
-INCLUDE "engine/overworld/bank2b.asm"
+INCLUDE "engine/overworld/bank2b_1.asm"
+INCLUDE "engine/overworld/cutscene/prologue/init.asm"
+INCLUDE "engine/overworld/bank2b_2.asm"
 
 
 SECTION "Temple/Prologue Gfx", ROMX

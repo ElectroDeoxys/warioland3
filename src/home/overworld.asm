@@ -61,9 +61,13 @@ LoadOWSprite::
 	bankswitch
 	ret
 
-; hl = wSceneObjXDuration
-; de = frameset pointer
-; b = bank
+; input:
+; - hl = wSceneObjXDuration
+; - de = frameset pointer
+; - b  = bank
+; output:
+; - bc = wSceneObjXState
+; - hl = wSceneObjYCoord
 UpdateOWAnimation::
 	xor a
 	ld [wOWAnimationFinished], a

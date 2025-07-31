@@ -160,7 +160,7 @@ DEF NUM_MUSICS EQU const_value - 1
 	const SFX_05F                          ; 15f (unused)
 	const SFX_060                          ; 160 (unused)
 	const SFX_061                          ; 161
-	const SFX_062                          ; 162
+	const SFX_CLICK                        ; 162
 	const SFX_063                          ; 163
 	const SFX_064                          ; 164
 	const SFX_065                          ; 165
@@ -307,7 +307,7 @@ DEF NUM_MUSICS EQU const_value - 1
 	const SFX_0F2                          ; 1f2
 	const SFX_0F3                          ; 1f3
 	const SFX_0F4                          ; 1f4
-	const SFX_0F5                          ; 1f5
+	const SFX_SNORE                          ; 1f5
 	const SFX_PLANE1                       ; 1f6
 	const SFX_PLANE2                       ; 1f7
 	const SFX_PLANE3                       ; 1f8

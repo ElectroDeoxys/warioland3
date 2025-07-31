@@ -742,28 +742,28 @@ Func_84e43:
 	ld [wPalConfig2TotalSteps], a
 	ret
 
-Func_84e86:
+_PrologueFade:
 	ld a, [wPalConfig1TotalSteps]
 	cp 1
-	jp nc, .do_fade
+	jp nc, .do_fade ; >= 1
 ; init fade
 	ld a, [w2d880]
 	and a
-	jr z, .asm_84eec
+	jr z, .zero
 	dec a
-	jr z, .asm_84ef4
+	jr z, .one
 	dec a
-	jp z, .asm_84f36
+	jp z, .two
 	dec a
-	jp z, .asm_84f5d
+	jp z, .three
 	dec a
-	jp z, .asm_84f77
+	jp z, .four
 	dec a
-	jp z, .asm_84f97
+	jp z, .five
 	dec a
-	jp z, .asm_84f0f
+	jp z, .six
 
-.asm_84eab
+.set_pal_configs
 	ld a, HIGH(wTempBGPals)
 	ld [wPalConfig1SourceHi], a
 	ld a, LOW(wTempBGPals)
@@ -798,12 +798,12 @@ Func_84e86:
 	inc [hl]
 	ret
 
-.asm_84eec
+.zero
 	call .CopyPalsToBGAndOBPals
 	call ClearTempPals_Bank21
-	jr .asm_84eab
+	jr .set_pal_configs
 
-.asm_84ef4
+.one
 	call .CopyPalsToBGAndOBPals
 	ld hl, Pals_869cd
 	ld de, wTempPals1
@@ -813,9 +813,9 @@ Func_84e86:
 	ld de, wTempPals2
 	ld b, 8 palettes
 	call CopyHLToDE
-	jr .asm_84eab
+	jr .set_pal_configs
 
-.asm_84f0f
+.six
 	call .CopyPalsToBGAndOBPals
 	ld hl, Pals_869cd
 	ld de, wTempPals1
@@ -829,9 +829,9 @@ Func_84e86:
 	ld de, wTempPals2
 	ld b, 1 palettes
 	call CopyHLToDE
-	jp .asm_84eab
+	jp .set_pal_configs
 
-.asm_84f36
+.two
 	call .CopyPalsToBGAndOBPals
 	ld hl, Pals_86a4d
 	ld de, wTempPals1
@@ -845,9 +845,9 @@ Func_84e86:
 	ld de, wTempPals2
 	ld b, 1 palettes
 	call CopyHLToDE
-	jp .asm_84eab
+	jp .set_pal_configs
 
-.asm_84f5d
+.three
 	call .CopyPalsToBGAndOBPals
 	xor a
 	ld hl, wTempPals1
@@ -857,9 +857,9 @@ Func_84e86:
 	ld hl, wTempPals2 palette 1
 	ld bc, 7 palettes
 	call WriteAToHL_BCTimes
-	jp .asm_84eab
+	jp .set_pal_configs
 
-.asm_84f77
+.four
 	call .CopyPalsToBGAndOBPals
 	ld hl, Pals_db000
 	ld de, wTempPals1
@@ -871,9 +871,9 @@ Func_84e86:
 	ld c, 5 palettes
 	ld b, BANK(Pals_db040)
 	call CopyFarBytes
-	jp .asm_84eab
+	jp .set_pal_configs
 
-.asm_84f97
+.five
 	call .CopyPalsToBGAndOBPals
 	ld hl, Pals_86a4d palette 6
 	ld de, wTempPals1 palette 6
@@ -887,7 +887,7 @@ Func_84e86:
 	ld de, wTempPals2
 	ld b, 1 palettes
 	call CopyHLToDE
-	jp .asm_84eab
+	jp .set_pal_configs
 
 .CopyPalsToBGAndOBPals:
 	ld hl, wTempPals1

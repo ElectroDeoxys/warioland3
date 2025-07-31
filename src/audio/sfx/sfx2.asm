@@ -1669,7 +1669,7 @@ Sfx_062_Ch1:
 	audio_wait_3
 	audio_end
 
-Sfx_062:
+Sfx_Click:
 	db 1, 0
 	dw Sfx_062_Ch1
 
@@ -7900,7 +7900,7 @@ Sfx_0f4:
 	db 1, 0
 	dw Sfx_0f4_Ch1
 
-Sfx_0f5_Ch1:
+Sfx_Snore_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_68
@@ -7923,9 +7923,9 @@ Sfx_0f5_Ch1:
 	audio_wait_9
 	audio_end
 
-Sfx_0f5:
+Sfx_Snore:
 	db 1, 0
-	dw Sfx_0f5_Ch1
+	dw Sfx_Snore_Ch1
 
 Sfx_Plane1_Ch1:
 	semitone_offset 0

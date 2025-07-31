@@ -150,7 +150,7 @@ UpdateGameOverScreen:
 	ret
 
 .Func_db3db:
-	play_sfx SFX_0F5
+	play_sfx SFX_SNORE
 	ret
 
 Func_db3e4:

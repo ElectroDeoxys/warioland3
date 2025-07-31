@@ -169,7 +169,7 @@ SoundHeaders:
 	filler_sounds 20
 
 	sfx Sfx_061,                         $00, 239, CHAN8_F, 1 ; SFX_061
-	sfx Sfx_062,                         $00, 237, CHAN8_F, 1 ; SFX_062
+	sfx Sfx_Click,                       $00, 237, CHAN8_F, 1 ; SFX_CLICK
 	sfx Sfx_063,                         $00, 239, CHAN8_F, 1 ; SFX_063
 	sfx Sfx_064,                         $00, 220, CHAN5_F, 1 ; SFX_064
 	sfx Sfx_065,                         $00, 221, CHAN8_F, 1 ; SFX_065
@@ -288,7 +288,7 @@ SoundHeaders:
 	sfx Sfx_0f2,                         $00, 220, CHAN5_F, 1 ; SFX_0F2
 	sfx Sfx_0f3,                         $00, 220, CHAN8_F, 1 ; SFX_0F3
 	sfx Sfx_0f4,                         $00, 220, CHAN5_F, 1 ; SFX_0F4
-	sfx Sfx_0f5,                         $00, 220, CHAN8_F, 1 ; SFX_0F5
+	sfx Sfx_Snore,                       $00, 220, CHAN8_F, 1 ; SFX_SNORE
 	sfx Sfx_Plane1,                      $00, 220, CHAN8_F, 1 ; SFX_PLANE1
 	sfx Sfx_Plane2,                      $00, 220, CHAN8_F, 1 ; SFX_PLANE2
 	sfx Sfx_Plane3,                      $00, 220, CHAN8_F, 1 ; SFX_PLANE3
