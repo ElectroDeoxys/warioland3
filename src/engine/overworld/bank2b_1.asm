@@ -1713,7 +1713,7 @@ Func_acaf3:
 	ld hl, wTextBuffer
 	add hl, bc
 	ld a, [hl]
-	cp "▼"
+	cp '▼'
 	jp z, .asm_acb20 ; can be jr
 	ld hl, wSceneObj1State
 	ld a, $01
@@ -2169,13 +2169,13 @@ ClearTextboxAtCoord:
 
 FillClearedTextBuffer:
 	ld hl, wClearedTextBuffer
-	ld a, "@"
+	ld a, '@'
 	ld bc, 8 * TEXT_LINE_LENGTH
 	call WriteAToHL_BCTimes
 	ret
 
 ClearText:
-	ld a, "@"
+	ld a, '@'
 	ld hl, wText
 	ld bc, 4 * TEXT_LINE_LENGTH
 	call WriteAToHL_BCTimes
@@ -2278,7 +2278,7 @@ PrintText:
 	ld hl, wText
 	add hl, bc
 	ld a, [hl]
-	cp "@"
+	cp '@'
 	jr z, .no_char
 	ld [wPendingCharTile], a
 	ld a, $1 | BG_BANK1
@@ -2308,7 +2308,7 @@ PrintText:
 	ld a, h
 	ld [wPendingCharDest + 1], a
 	ld a, [wPendingCharTile]
-	cp " "
+	cp ' '
 	play_sfx nz, SFX_130
 	ld hl, wCurTextLinePos
 	inc [hl]
@@ -2384,7 +2384,7 @@ LoadNextObjectiveText:
 	ld hl, wTextBuffer + TEXT_LINE_LENGTH
 	ld b, TEXT_LINE_LENGTH
 	call CopyHLToDE
-	ld a, "@"
+	ld a, '@'
 	ld hl, wTextLine4
 	ld bc, TEXT_LINE_LENGTH
 	call WriteAToHL_BCTimes
