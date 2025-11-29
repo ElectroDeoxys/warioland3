@@ -1,7 +1,7 @@
-IF !DEF(__RGBDS_MAJOR__) || !DEF(__RGBDS_MINOR__) || !DEF(__RGBDS_PATCH__)
-	fail "warioland3 requires rgbds 0.9.4 or newer."
+IF !DEF(__RGBDS_MAJOR__)
+	fail "warioland3 requires rgbds 1.0.0 or newer."
 ENDC
 
-IF (__RGBDS_MAJOR__ == 0 && (__RGBDS_MINOR__ < 9 || __RGBDS_PATCH__ < 4))
-	fail "warioland3 requires rgbds 0.9.4 or newer."
+IF __RGBDS_MAJOR__ < 1
+	fail "warioland3 requires rgbds 1.0.0 or newer."
 ENDC

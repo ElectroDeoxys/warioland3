@@ -310,7 +310,7 @@ uint8_t convertCharacterToByte(const char *str, int *offset)
         return 0x7f;
     }
 
-    char characterBuffer[5] = "\0\0\0\0\0";
+    char characterBuffer[5] = "\0\0\0\0";
 
     // check how many bytes to consume as per UTF-8 encoding
     if ((str[0] & 0x80) == 0)

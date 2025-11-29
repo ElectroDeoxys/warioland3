@@ -158,7 +158,7 @@ ShowCredits:
 	ld a, [hli]
 	ld [de], a
 	inc e
-	cp "\n"
+	cp '\n'
 	jr nz, .loop1
 	ld a, h
 	ld [wCreditsTextPtr + 0], a
@@ -587,7 +587,7 @@ VBlank_160439:
 	ld hl, wCreditsTextBuffer
 .loop
 	ld a, [hli]
-	cp "\n"
+	cp '\n'
 	jr z, .asm_1604a6
 	ld [de], a
 	inc e
