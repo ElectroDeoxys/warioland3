@@ -135,7 +135,7 @@ RockFunc:
 	play_sfx SFX_TEMPLE_ROCK
 
 .Func_4aa0a:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -277,6 +277,6 @@ RockFunc:
 	xor a
 	ld [hld], a
 	ld [hl], b
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret

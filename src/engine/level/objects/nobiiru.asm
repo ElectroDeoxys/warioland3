@@ -53,7 +53,7 @@ NobiiruFunc:
 	dw .Func_43a2c
 
 .Func_4382e:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]

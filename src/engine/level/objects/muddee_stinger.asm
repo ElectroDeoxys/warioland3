@@ -77,7 +77,7 @@ MuddeeStingerFunc:
 	ld [wCurObjXPos + 0], a
 	ld a, [hl]
 	ld [wCurObjXPos + 1], a
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 .asm_4ca99

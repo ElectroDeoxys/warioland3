@@ -111,7 +111,7 @@ PneumoFunc:
 	ld [hld], a
 	ld de, Frameset_68c89
 	call SetObjectFramesetPtr
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 

@@ -32,7 +32,7 @@ MuddeeFunc:
 	jp MoveObjectUpByVar2
 
 .Func_5564e:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	call .Func_55c3a
 	ld a, [wMuddeeAmbushState]
@@ -52,7 +52,7 @@ MuddeeFunc:
 	jp CopyAndApplyOBPals
 
 .Func_55676:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	call .Func_55c3a
 	ld hl, wCurObjStateDuration
@@ -70,7 +70,7 @@ MuddeeFunc:
 	ret
 
 .Func_55696:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	call .Func_55c3a
 	ld a, [wWarioXPos + 0]
@@ -112,7 +112,7 @@ MuddeeFunc:
 	jp CreateObjectFromCurObjPos
 
 .Func_556f0:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjVar3]
 	cp $0e
@@ -130,7 +130,7 @@ MuddeeFunc:
 	ret
 
 .Func_55711:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjSubState
 	ld a, [wCurObjFrame]
@@ -147,7 +147,7 @@ MuddeeFunc:
 	ld b, $48
 	jr .asm_5574b
 .asm_55734
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	jr .asm_55752
 .asm_5573b
@@ -777,7 +777,7 @@ MuddeeFunc:
 	ret
 
 .Func_55ba7:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjVar1
 	ld a, [hl]
@@ -983,7 +983,7 @@ Turtle1Func:
 	dec [hl]
 	ret
 .asm_55d05
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	inc l
 	dec [hl]
@@ -996,7 +996,7 @@ Turtle1Func:
 	ret
 
 .Func_55d18:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wMuddeeAmbushState]
 	cp 2

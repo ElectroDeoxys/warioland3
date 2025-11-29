@@ -23,7 +23,7 @@ ApplebyFunc:
 	ret
 
 .Func_479e0:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld l, OBJ_FLAGS
 	bit OBJFLAG_ON_SCREEN_F, [hl]
@@ -59,7 +59,7 @@ ApplebyFunc:
 	ret
 
 .asm_47a1e
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
@@ -71,7 +71,7 @@ ApplebyFunc:
 	ret
 
 .asm_47a33
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
@@ -205,7 +205,7 @@ ApplebyFunc:
 	xor a
 	ld [hld], a
 	ld [hl], b
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 
@@ -341,7 +341,7 @@ AppleFunc:
 .Func_47bd8:
 	call MoveObjectRight
 .asm_47bdb
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld bc, Data_60040
 	jp ApplyObjYMovement

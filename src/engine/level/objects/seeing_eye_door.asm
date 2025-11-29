@@ -46,7 +46,7 @@ SeeingEyeDoorFunc:
 	call SetObjectFramesetPtr
 	jr .Default
 
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wTransformation]
 	cp TRANSFORMATION_INVISIBLE_WARIO
@@ -178,7 +178,7 @@ SeeingEyeDoorFunc:
 	jp SetObjectFramesetPtr
 
 .asm_455e7
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, e
 	add $46
@@ -213,7 +213,7 @@ SeeingEyeDoorFunc:
 	jp SetObjectFramesetPtr
 
 .asm_4562f
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, e
 	sub $47

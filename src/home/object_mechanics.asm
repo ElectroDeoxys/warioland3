@@ -638,6 +638,6 @@ SetOneWayPlatformAction::
 	add $2a
 	cp b
 	ret c ; return if Wario is over collision box
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret

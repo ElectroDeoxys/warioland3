@@ -1007,7 +1007,7 @@ ParaGoomFunc:
 	ld [hld], a
 	ld b, $02
 .asm_419b8
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [hl]
 	and $f0

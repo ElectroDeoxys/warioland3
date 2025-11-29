@@ -213,7 +213,7 @@ PesceFunc:
 	res OBJSUBFLAG_HDIR_F, [hl]
 	ret
 .asm_51e91
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 .asm_51e97
@@ -769,7 +769,7 @@ DragonflySpawnerFunc:
 	ret
 
 .Func_52282:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, $02
 	ld [wCurObjFrameDuration], a
@@ -784,7 +784,7 @@ DragonflySpawnerFunc:
 	ret
 
 .Func_5229a:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, $02
 	ld [wCurObjFrameDuration], a
@@ -827,7 +827,7 @@ DragonflySpawnerFunc:
 	ret
 
 .Func_522d9:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, $02
 	ld [wCurObjFrameDuration], a
@@ -859,7 +859,7 @@ Dragonfly1Func:
 	ret
 
 .Func_52321:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -938,12 +938,12 @@ Dragonfly1Func:
 	ld [hld], a
 	ld a, LOW(.Func_523b1)
 	ld [hld], a
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 
 .Func_523b1:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjSubState]
 	rlca
@@ -978,7 +978,7 @@ Dragonfly2Func:
 	jp MoveObjectUpByVar2
 
 .Func_523f2:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -1060,7 +1060,7 @@ FlySpawnerFunc:
 	ret
 
 .Func_52475:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, $02
 	ld [wCurObjFrameDuration], a
@@ -1080,7 +1080,7 @@ FlySpawnerFunc:
 	ret
 
 .Func_52497:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, $02
 	ld [wCurObjFrameDuration], a
@@ -1136,7 +1136,7 @@ FlySpawnerFunc:
 	ret
 
 .Func_524eb:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, $02
 	ld [wCurObjFrameDuration], a
@@ -1175,7 +1175,7 @@ FlyFunc:
 	jr z, .asm_5257d
 	jr .asm_52591
 .asm_52545
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
@@ -1205,7 +1205,7 @@ FlyFunc:
 	ld [wCurObjState], a
 	ret
 .asm_5257d
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld l, OBJ_FLAGS
 	bit OBJFLAG_ON_SCREEN_F, [hl]
@@ -1246,7 +1246,7 @@ FlyFunc:
 	ret
 
 CheeseFunc:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjState]
 	and a
@@ -1258,7 +1258,7 @@ CheeseFunc:
 	jr z, .asm_52614
 	cp $03
 	jr nz, .find_fly_obj
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 
 .find_fly_obj
@@ -1326,7 +1326,7 @@ CheeseFunc:
 	ret
 
 .in_water
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjFlags
 	bit OBJFLAG_ON_SCREEN_F, [hl]

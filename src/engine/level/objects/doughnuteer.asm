@@ -915,7 +915,7 @@ DoughnuteerFunc:
 	ld [hld], a
 	ld b, $02
 .asm_42046
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [hl]
 	and $f0
@@ -1092,7 +1092,7 @@ DoughnutFunc:
 .Update_Right:
 	call MoveObjectRight
 .asm_42165
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld bc, Data_60040
 	jp ApplyObjYMovement

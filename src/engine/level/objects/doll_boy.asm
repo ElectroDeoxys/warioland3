@@ -697,7 +697,7 @@ DollBoyFunc:
 	ret
 
 .HitWario:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -754,12 +754,12 @@ DollBoyFunc:
 .DoNothing:
 	; Wario was hit by a hammer,
 	; so no more actions to process
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 
 .Defeated:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjScreenYPos]
 	cp $d0
@@ -1158,7 +1158,7 @@ DollBoyHammerFunc:
 .HitRight:
 	call MoveObjectRight
 .hit_fall
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld bc, Data_60040
 	jp ApplyObjYMovement
@@ -1190,7 +1190,7 @@ HammerPlatformSpawnerFunc:
 .DoNothing:
 	ld a, 2
 	ld [wCurObjFrameDuration], a
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 

@@ -61,7 +61,7 @@ HandFunc:
 	dw .Invisible
 
 .Func_477b2:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [wIsInSand]
@@ -84,7 +84,7 @@ HandFunc:
 	ret
 
 .Func_477de:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -97,7 +97,7 @@ HandFunc:
 	ret
 
 .Func_477f3:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -113,7 +113,7 @@ HandFunc:
 	jp MoveObjectUpByVar2
 
 .Func_4780e:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -126,7 +126,7 @@ HandFunc:
 	jp MoveObjectUpByVar2
 
 .Func_47825:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -139,7 +139,7 @@ HandFunc:
 	jp MoveObjectUpByVar2
 
 .Func_4783c:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -152,7 +152,7 @@ HandFunc:
 	jp MoveObjectUpByVar2
 
 .Func_47853:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -165,7 +165,7 @@ HandFunc:
 	jp MoveObjectUpByVar2
 
 .Func_4786a:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -178,7 +178,7 @@ HandFunc:
 	jp MoveObjectUpByVar2
 
 .Func_47881:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -214,7 +214,7 @@ HandFunc:
 	call .ApplyOffsetToWario
 	ld l, OBJ_STATE_DURATION
 .asm_478be
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	dec [hl]
 	ret nz
@@ -234,7 +234,7 @@ HandFunc:
 	jp .ApplyOffsetToWario
 
 .Func_478e1:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -252,7 +252,7 @@ HandFunc:
 	jp .ApplyOffsetToWario
 
 .Func_47903:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -270,7 +270,7 @@ HandFunc:
 	jp .ApplyOffsetToWario
 
 .Func_47925:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -288,7 +288,7 @@ HandFunc:
 	jp .ApplyOffsetToWario
 
 .Func_47947:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -305,7 +305,7 @@ HandFunc:
 	jp .ApplyOffsetToWario
 
 .Func_47966:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -326,7 +326,7 @@ HandFunc:
 	jp .ApplyOffsetToWario
 
 .Invisible:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]

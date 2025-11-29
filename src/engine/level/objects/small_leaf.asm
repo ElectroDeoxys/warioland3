@@ -22,7 +22,7 @@ SmallLeafFunc:
 	ret
 
 .Update4:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -72,7 +72,7 @@ SmallLeafFunc:
 	ld a, [hl]
 	cp $0f
 	jr nc, .asm_43766
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 .asm_43766
 	dec [hl]
@@ -90,7 +90,7 @@ SmallLeafFunc:
 	ret
 
 .Update3:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]

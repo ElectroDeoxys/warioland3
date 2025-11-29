@@ -29,7 +29,7 @@ WormwouldFunc:
 	jp SetObjectFramesetPtr
 
 .Init:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wWarioYPos + 1]
 	ld c, a
@@ -142,7 +142,7 @@ WormwouldFunc:
 	ret
 
 .DoNothing:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 
@@ -437,7 +437,7 @@ WormwouldFunc:
 	ret
 
 .Underground:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjScreenYPos]
 	cp $3a
@@ -461,7 +461,7 @@ WormwouldFunc:
 	jp .check_change_side
 
 .DefeatedRaise:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjVar3
 	dec [hl]
@@ -481,7 +481,7 @@ WormwouldFunc:
 	ret
 
 .DefeatedWait:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -525,7 +525,7 @@ WormwouldFunc:
 	ld [hld], a
 	play_sfx SFX_0A3
 .DefeatedFall:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld bc, Data_60180
 	call ApplyObjYMovement
@@ -535,7 +535,7 @@ WormwouldFunc:
 	jp MoveObjectLeft
 
 RollingRockFunc_Left:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -550,7 +550,7 @@ RollingRockFunc_Left:
 	jr RollingRockFunc
 
 RollingRockFunc_Right:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -587,7 +587,7 @@ RollingRockFunc:
 	ret
 
 .Hit:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld bc, Data_60180
 	call ApplyObjYMovement
@@ -638,7 +638,7 @@ PalmTreeSpawnerFunc:
 .Wait:
 	ld a, 2
 	ld [wCurObjFrameDuration], a
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 
@@ -663,7 +663,7 @@ PalmTreeFunc:
 ; grow
 	dec [hl]
 	call MoveObjectUp
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 .set_frame_duration
 	ld a, 10
@@ -675,7 +675,7 @@ PalmTreeFunc:
 	and a
 	jr z, .set_frame_duration
 	dec [hl]
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 

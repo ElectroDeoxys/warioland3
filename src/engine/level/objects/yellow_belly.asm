@@ -33,7 +33,7 @@ YellowBellyBodyFunc:
 	ret
 
 .Func_5139d:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -50,7 +50,7 @@ YellowBellyBodyFunc:
 	jr .asm_513f1
 
 .Func_513bf:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -65,7 +65,7 @@ YellowBellyBodyFunc:
 	ld hl, Pals_51c99
 	jr .asm_513f1
 .Func_513d9:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -85,7 +85,7 @@ YellowBellyBodyFunc:
 	jp CopyAndApplyOBPals
 
 .Func_513fb:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -103,7 +103,7 @@ YellowBellyBodyFunc:
 	ret
 
 .Func_51419:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -301,7 +301,7 @@ YellowBellyBodyFunc:
 	jp SetObjectFramesetPtr
 
 .Func_51572:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjVar1]
 	cp $a6
@@ -434,7 +434,7 @@ YellowBellyBodyFunc:
 	ld a, [wDollBoyActiveBarrels]
 	and a
 	jr z, .asm_51662
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	xor a
 	ld [wCurObjState], a
@@ -609,7 +609,7 @@ YellowBellyBodyFunc:
 	ret
 
 .Func_5178c:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjScreenXPos]
 	cp $c8
@@ -658,7 +658,7 @@ YellowBellyBodyFunc:
 	ret
 
 .Func_517ee:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -791,7 +791,7 @@ PumpFunc:
 	ld a, [wGlobalCounter]
 	ld [wCurObjVar1], a
 .Func_518c6:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld bc, Data_609e0
 	call ApplyObjYMovement
@@ -969,7 +969,7 @@ PumpFunc:
 	ret
 
 .asm_51a03
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld l, OBJ_STATE_DURATION
 	ld a, [hl]
@@ -987,7 +987,7 @@ PumpFunc:
 	xor a
 	ld [wDollBoyHammerRange], a
 .asm_51a1d
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjScreenYPos]
 	cp $48
@@ -1073,7 +1073,7 @@ YellowBellyArrowFunc:
 	ld [wCurObjVar2], a
 	ret
 .Func_51aaa:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjScreenYPos]
 	cp $40
@@ -1126,7 +1126,7 @@ YellowBellyArrowFunc:
 	ret
 
 .Func_51b16:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -1145,7 +1145,7 @@ YellowBellyArrowFunc:
 	ret
 
 .Func_51b34:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjScreenYPos]
 	cp $40
@@ -1176,7 +1176,7 @@ YellowBellyArrowFunc:
 	cp b
 	ret c
 .asm_51b68
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 
@@ -1192,7 +1192,7 @@ YellowBellyHeadFunc:
 	ld a, [wTransformation]
 	cp TRANSFORMATION_PUFFY_WARIO
 	jr nz, .asm_51b87
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 .asm_51b87
 	ld hl, wCurObjState
@@ -1261,7 +1261,7 @@ YellowBellyHeadFunc:
 	jr z, .asm_51bf9
 	inc a
 	jr z, .asm_51c13
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 .asm_51bf9
 	inc l

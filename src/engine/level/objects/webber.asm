@@ -53,7 +53,7 @@ WebberFunc:
 	ld [hld], a ; OBJ_VAR_3
 	ld a, b
 	ld [hld], a ; OBJ_VAR_2
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 
@@ -360,7 +360,7 @@ WebberFunc:
 	jp CreateObjectAtRelativePos
 
 .Climb:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wGroundShakeCounter]
 	cp $10
@@ -450,7 +450,7 @@ WebberProjectileFunc:
 	ret
 
 .Destroy:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]

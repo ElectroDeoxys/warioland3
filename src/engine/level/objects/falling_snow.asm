@@ -13,7 +13,7 @@ FallingSnowSpawnerFunc:
 	ret
 
 .Func_49544:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, 2
 	ld [wCurObjFrameDuration], a
@@ -33,7 +33,7 @@ FallingSnowSpawnerFunc:
 	jp CreateObjectFromCurObjPos
 
 .Func_49566:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, 2
 	ld [wCurObjFrameDuration], a
@@ -62,7 +62,7 @@ FallingSnowSpawnerFunc:
 	jp MoveObjectLeftByVar2
 
 .Func_4959d:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -85,7 +85,7 @@ FallingSnowSpawnerFunc:
 	ret
 
 FallingSnowFunc:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjFlags
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -108,7 +108,7 @@ FallingSnowFunc:
 	ret
 
 .Func_495ef:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -184,7 +184,7 @@ FallingSnowFunc:
 	jp SetObjectFramesetPtr
 
 .Func_49675:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjYPos
 	ld a, [hli]
@@ -216,7 +216,7 @@ FallingSnowFunc:
 	ret
 
 .Func_496ae:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]

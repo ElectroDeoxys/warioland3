@@ -48,7 +48,7 @@ FlameBlockFunc:
 	ld a, [hl]
 	cp 25
 	jr nc, .asm_49715
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 .asm_49715
 	dec [hl]

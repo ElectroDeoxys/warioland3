@@ -19,7 +19,7 @@ UnusedFlowerFunc:
 	ret
 
 .Grow:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, 2
 	ld [wCurObjFrameDuration], a
@@ -43,7 +43,7 @@ UnusedFlowerFunc:
 	ret
 
 .Idle:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -71,7 +71,7 @@ UnusedFlowerFunc:
 	ret
 
 .PreparingAttack:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -100,7 +100,7 @@ UnusedFlowerFunc:
 	jp CreateObjectAtRelativePos
 
 .Attack:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -211,7 +211,7 @@ UnusedFlowerProjectileCommonFunc:
 	ret
 
 .Destroy:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]

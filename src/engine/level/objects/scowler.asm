@@ -554,7 +554,7 @@ ScowlerFunc:
 	jp SetObjectFramesetPtr
 
 .Func_548c5:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	call Func_54c07
 	ld hl, wCurObjYPos
@@ -590,7 +590,7 @@ ScowlerFunc:
 	ret
 
 .Func_5490b:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	call Func_54c07
 	call MoveObjectDown_Slow
@@ -611,7 +611,7 @@ ScowlerFunc:
 	ret
 
 .Func_54931:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	call Func_54c07
 	ld hl, wCurObjStateDuration
@@ -672,12 +672,12 @@ FloatingRingSpawnerFunc:
 .Func_549ab:
 	ld a, $02
 	ld [wCurObjFrameDuration], a
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 
 FloatingRingFunc:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_549c7)
@@ -687,7 +687,7 @@ FloatingRingFunc:
 	jp MoveObjectLeftByVar2
 
 .Func_549c7:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wGlobalCounter]
 	rra
@@ -863,7 +863,7 @@ ScrowlerTentacleFunc:
 	jr z, .asm_54b5a
 	jr .asm_54b2e
 .asm_54af0
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjInteractionType
 	ld a, [hl]
@@ -881,7 +881,7 @@ ScrowlerTentacleFunc:
 	jr z, .asm_54b5a
 	jr .asm_54b2e
 .asm_54b0e
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjInteractionType
 	ld a, [hl]
@@ -1035,7 +1035,7 @@ InkFunc:
 	ret
 
 .Func_54bf8:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]

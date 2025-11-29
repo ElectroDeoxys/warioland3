@@ -91,7 +91,7 @@ OmodonmekaFunc:
 	ld [hld], a
 	ld de, Frameset_68f3d
 	call SetObjectFramesetPtr
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, $3a
 	ld [wCurObjState], a
@@ -145,7 +145,7 @@ OmodonmekaFunc:
 	dw .Func_42369
 
 .Func_42261:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wAutoMoveState]
 	and a
@@ -178,7 +178,7 @@ OmodonmekaFunc:
 	ret
 
 .Func_42291:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wAutoMoveState]
 	and a
@@ -238,7 +238,7 @@ OmodonmekaFunc:
 	call HandleUpwardsFloorTransition
 	jp MoveObjectUp
 .Func_422fc:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wAutoMoveState]
 	and a
@@ -428,7 +428,7 @@ OmodonmekaFunc:
 	ret
 
 .Func_4244c:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld bc, Data_604e0
 	call ApplyObjYMovement
@@ -896,7 +896,7 @@ OmodonmekaWithOmodonFunc:
 	ret
 
 .Func_42714:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld bc, Data_604e0
 	call ApplyObjYMovement
@@ -1123,7 +1123,7 @@ Func_4279c:
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	ret nz
-	ld a, NO_ACTIONS_FOR 31
+	ld a, no_actions_for 31
 	ld [wCurObjAction], a
 	jr .asm_4283c
 

@@ -14,7 +14,7 @@ ElectricLampFunc:
 	ret
 
 .Discharged:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wGlobalCounter]
 	and a
@@ -31,7 +31,7 @@ ElectricLampFunc:
 	ret
 
 .Charging:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]

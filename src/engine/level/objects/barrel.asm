@@ -198,7 +198,7 @@ Barrel2Func:
 	set OBJFLAG_NO_COLLISION_F, [hl]
 	play_sfx SFX_TEMPLE_ROCK
 .Func_435c2:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -364,6 +364,6 @@ Barrel2Func:
 	xor a
 	ld [hld], a
 	ld [hl], b
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret

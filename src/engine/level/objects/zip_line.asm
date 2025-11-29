@@ -39,7 +39,7 @@ ZipLineFunc:
 	ret
 
 .Func_49369:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	call .Func_49418
 	ld a, [wCurObjVar1]
@@ -104,7 +104,7 @@ ZipLineFunc:
 	ret
 
 .Func_493dc:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	call .Func_49418
 	ld a, [wCurObjVar1]
@@ -125,7 +125,7 @@ ZipLineFunc:
 	ret
 
 .Func_49405:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -133,7 +133,7 @@ ZipLineFunc:
 	jp .Func_49356
 
 .Func_49412:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 

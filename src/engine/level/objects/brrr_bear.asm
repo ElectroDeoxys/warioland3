@@ -681,7 +681,7 @@ BrrrBearFunc:
 	ld [hld], a
 	ld de, Frameset_69164
 	call SetObjectFramesetPtr
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 
@@ -783,7 +783,7 @@ SnowflakeFunc:
 	ret
 
 .Update:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]

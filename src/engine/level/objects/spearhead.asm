@@ -924,7 +924,7 @@ SpearheadFunc:
 	xor a
 	ld [hld], a ; OBJ_VAR_3
 	ld [hl], b ; OBJ_VAR_2
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld de, Frameset_68277
 	jp SetObjectFramesetPtr

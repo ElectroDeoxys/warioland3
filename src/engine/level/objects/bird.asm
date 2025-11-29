@@ -131,7 +131,7 @@ BirdFunc:
 	ret
 
 .Func_43353:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 .asm_43358
 	ld a, [wCurObjSubState]
@@ -238,7 +238,7 @@ BirdFunc:
 	ld [hli], a
 	xor a
 	ld [hli], a
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [hl]
 	rlca

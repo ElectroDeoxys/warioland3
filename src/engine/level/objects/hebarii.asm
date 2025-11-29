@@ -379,7 +379,7 @@ HebariiFunc:
 	dec [hl]
 	ret nz
 .State0f:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a ; redundant, already done below
 	ld a, OBJSTATE_3F
 	ld [wCurObjState], a
@@ -390,7 +390,7 @@ HebariiFunc:
 	ld l, OBJ_FLAGS
 	res OBJFLAG_GRABBED_F, [hl]
 .State3f:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -602,7 +602,7 @@ HebariiFunc:
 	xor a
 	ld [hld], a ; OBJ_VAR_3
 	ld [hl], b ; OBJ_VAR_2
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 
@@ -695,7 +695,7 @@ HebariiProjectileFunc:
 	ret
 
 .Destroy:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]

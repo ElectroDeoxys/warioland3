@@ -48,7 +48,7 @@ HiddenFigureFunc:
 .Func_4cb9e:
 	ld a, $02
 	ld [wCurObjFrameDuration], a
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -70,7 +70,7 @@ HiddenFigureFunc:
 .Func_4cbc4:
 	ld a, $02
 	ld [wCurObjFrameDuration], a
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjVar1]
 	jumptable
@@ -383,7 +383,7 @@ HiddenFigureFunc:
 .Func_4cdbc:
 	ld a, $02
 	ld [wCurObjFrameDuration], a
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	call Func_4cfe0
 	ld a, [w1d14c]
@@ -418,7 +418,7 @@ HiddenFigureFunc:
 .Func_4ce01:
 	ld a, $02
 	ld [wCurObjFrameDuration], a
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjVar1
 	ld a, [hl]
@@ -579,7 +579,7 @@ HiddenFigureFaceFunc:
 	jp .asm_4ce9d
 
 .Func_4cf3f:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -591,7 +591,7 @@ HiddenFigureFaceFunc:
 	ret
 
 .Func_4cf55:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -848,7 +848,7 @@ HiddenFigureLeftHandFunc:
 	ret
 
 .Func_4d0c7:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjFlags
 	res OBJFLAG_NO_COLLISION_F, [hl]
@@ -1210,12 +1210,12 @@ HiddenFigureLeftHandFunc:
 	jp SetObjectFramesetPtr
 
 .Func_4d379:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 
 .Func_4d37f:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [w1d15f]
 	and a
@@ -1232,7 +1232,7 @@ HiddenFigureLeftHandFunc:
 	ret
 
 .Func_4d39b:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -1261,7 +1261,7 @@ HiddenFigureRightHandFunc:
 	ret
 
 .Func_4d3c8:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjFlags
 	res OBJFLAG_NO_COLLISION_F, [hl]
@@ -1577,12 +1577,12 @@ HiddenFigureRightHandFunc:
 	jp SetObjectFramesetPtr
 
 .Func_4d622:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 
 .Func_4d628:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [w1d15f]
 	and a
@@ -1599,7 +1599,7 @@ HiddenFigureRightHandFunc:
 	ret
 
 .Func_4d644:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -1734,7 +1734,7 @@ HiddenFigureRightHandFunc:
 	ret
 
 .Func_4d750:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjUnk07]
 	cp $3d
@@ -1854,7 +1854,7 @@ HiddenFigureRightHandFunc:
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld l, OBJ_FLAGS
 	res OBJFLAG_PRIORITY_F, [hl]
@@ -1883,13 +1883,13 @@ HiddenFigureRightHandFunc:
 	jr c, .Func_4d844
 .Func_4d83a:
 	ld hl, wCurObjAction
-	ld a, NO_ACTIONS_FOR 15
+	ld a, no_actions_for 15
 	ld [hld], a
 	ld a, $38
 	jr .asm_4d84c
 .Func_4d844:
 	ld hl, wCurObjAction
-	ld a, NO_ACTIONS_FOR 15
+	ld a, no_actions_for 15
 	ld [hld], a
 	ld a, $39
 .asm_4d84c

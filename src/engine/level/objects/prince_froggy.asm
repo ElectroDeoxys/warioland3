@@ -67,7 +67,7 @@ PrinceFroggyFunc:
 	ld [hld], a
 	ld a, $01
 	ld [hld], a
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld de, Frameset_68ae6
 	jp SetObjectFramesetPtr
@@ -250,7 +250,7 @@ PrinceFroggyFunc:
 	ret
 
 .Func_44220:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld bc, Data_60040
 	call ApplyObjYMovement

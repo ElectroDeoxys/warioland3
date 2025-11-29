@@ -302,7 +302,7 @@ DEF NO_ACTIONS   EQU (1 << NO_ACTIONS_F)
 
 ; sets the object to not process actions
 ; for a given amount of frames
-DEF NO_ACTIONS_FOR EQUS "(1 << NO_ACTIONS_F) |"
+DEF no_actions_for EQUS "(1 << NO_ACTIONS_F) |"
 
 	const_def
 	const OBJECT_GROUP_000 ; $00

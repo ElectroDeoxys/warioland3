@@ -97,7 +97,7 @@ KushimushiVerticalFunc:
 	ld [hld], a
 	ld a, b
 	ld [hld], a
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld de, Frameset_68698
 	jp SetObjectFramesetPtr

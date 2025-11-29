@@ -50,7 +50,7 @@ AnonsterFunc:
 	ret
 
 .Func_5005e:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -73,7 +73,7 @@ AnonsterFunc:
 	ret
 
 .Func_5007f:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjState
 	ld a, [hld]
@@ -196,7 +196,7 @@ AnonsterFunc:
 	ret
 
 .Func_5016f:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjVar3]
 	cp $1f
@@ -247,7 +247,7 @@ AnonsterFunc:
 	ret
 
 .Func_501c4:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -276,7 +276,7 @@ AnonsterFunc:
 	ld [hld], a
 	jr .asm_5018e
 .Func_50200:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -305,7 +305,7 @@ AnonsterFunc:
 	ld [hld], a
 	jp .asm_5018e
 .Func_5023d:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -342,7 +342,7 @@ AnonsterFunc:
 	ld [hld], a
 	play_sfx SFX_0B1
 .Func_50293:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -809,7 +809,7 @@ AnonsterFunc:
 	ret
 
 .Func_505be:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -831,7 +831,7 @@ AnonsterFunc:
 	jp .asm_50388
 
 .Func_505f4:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -848,7 +848,7 @@ AnonsterFunc:
 	ret
 
 .Func_50610:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -866,7 +866,7 @@ AnonsterFunc:
 	ret
 
 .Func_50635:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjScreenYPos]
 	cp $10
@@ -880,7 +880,7 @@ AnonsterFunc:
 	ret
 
 .Func_50650:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -897,7 +897,7 @@ AnonsterFunc:
 	ret
 
 .Func_5066c:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -914,7 +914,7 @@ AnonsterFunc:
 	ret
 
 .Func_50689:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -966,7 +966,7 @@ AnonsterFunc:
 	ld [hld], a
 	play_sfx SFX_0A3
 .Func_50705:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld bc, Data_60180
 	call ApplyObjYMovement
@@ -1000,7 +1000,7 @@ SilkPlatformsFunc:
 	ld bc, ObjParams_SilkPlatform1
 	ld de, .CreatePlatform2
 .asm_50746
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, 2
 	ld [wCurObjFrameDuration], a
@@ -1017,7 +1017,7 @@ SilkPlatformsFunc:
 	jp CreateObjectAtRelativePos
 
 .Wait:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, 2
 	ld [wCurObjFrameDuration], a
@@ -1202,7 +1202,7 @@ AnonsterSilkFunc:
 	ret
 
 .Func_50898:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_508be)
@@ -1220,7 +1220,7 @@ AnonsterSilkFunc:
 	ret
 
 .Func_508be:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -1416,7 +1416,7 @@ AnonsterSilkFunc:
 	ld [hld], a
 	ld a, b
 	ld [hld], a
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 
@@ -1478,7 +1478,7 @@ AnonsterSilkFunc:
 	jp .Func_50a44
 .Func_50a79:
 	ld hl, wCurObjAction
-	ld a, NO_ACTIONS_FOR 31
+	ld a, no_actions_for 31
 	ld [hld], a
 	ld a, $42
 	ld [hld], a ; OBJ_STATE

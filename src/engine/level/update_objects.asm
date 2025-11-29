@@ -427,7 +427,7 @@ DoObjectAction:
 	bit NO_ACTIONS_F, a
 	jr z, .jump
 	dec a
-	cp NO_ACTIONS_FOR 0
+	cp no_actions_for 0
 	jr nz, .asm_6176f
 	xor a
 .asm_6176f
@@ -603,13 +603,13 @@ DoObjectAction:
 	ret
 
 .Action0a:
-	ld a, NO_ACTIONS_FOR 15
+	ld a, no_actions_for 15
 	ld [wCurObjAction], a
 	ret
 
 .Flatten:
 	ld hl, wCurObjAction
-	ld a, NO_ACTIONS_FOR 15
+	ld a, no_actions_for 15
 	ld [hld], a
 	ld a, OBJSTATE_ACTIVATE
 	ld [hl], a ; OBJ_STATE
@@ -617,7 +617,7 @@ DoObjectAction:
 
 .Action0c:
 	ld hl, wCurObjAction
-	ld a, NO_ACTIONS_FOR 15
+	ld a, no_actions_for 15
 	ld [hld], a
 	ld a, OBJSTATE_ACTIVATE
 	ld [hl], a
@@ -625,7 +625,7 @@ DoObjectAction:
 
 .Action0d:
 	ld hl, wCurObjAction
-	ld a, NO_ACTIONS_FOR 15
+	ld a, no_actions_for 15
 	ld [hld], a
 	ld a, OBJSTATE_19
 	ld [hl], a
@@ -633,7 +633,7 @@ DoObjectAction:
 
 .Action0e:
 	ld hl, wCurObjAction
-	ld a, NO_ACTIONS_FOR 15
+	ld a, no_actions_for 15
 	ld [hld], a
 	ld a, OBJSTATE_ACTIVATE
 	ld [hl], a
@@ -641,7 +641,7 @@ DoObjectAction:
 
 .SmashAttackWalkable:
 	ld hl, wCurObjAction
-	ld a, NO_ACTIONS_FOR 2
+	ld a, no_actions_for 2
 	ld [hld], a
 	ld a, OBJSTATE_VANISH_TOUCH
 	ld [hl], a
@@ -649,7 +649,7 @@ DoObjectAction:
 
 .Teleport:
 	ld hl, wCurObjAction
-	ld a, NO_ACTIONS_FOR 15
+	ld a, no_actions_for 15
 	ld [hld], a
 	ld a, OBJSTATE_ACTIVATE
 	ld [hl], a
@@ -657,7 +657,7 @@ DoObjectAction:
 
 .Action11:
 	ld hl, wCurObjAction
-	ld a, NO_ACTIONS_FOR 15
+	ld a, no_actions_for 15
 	ld [hld], a
 	ld a, OBJSTATE_ACTIVATE
 	ld [hl], a
@@ -697,7 +697,7 @@ Func_618b4:
 	ld l, OBJ_FLAGS
 	res OBJFLAG_GRABBED_F, [hl]
 	set OBJFLAG_NO_COLLISION_F, [hl]
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 
 	ld l, OBJ_Y_POS
@@ -1006,7 +1006,7 @@ ClearObjDataPointers:
 	ret
 
 Func_61f54::
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 
 	ld a, [wGrabState]
@@ -1213,7 +1213,7 @@ Func_61f54::
 	jp HomeJumpRet
 
 Func_620a6::
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 
 	ld a, [wGrabState]
@@ -1423,7 +1423,7 @@ Func_620a6::
 	jp HomeJumpRet
 
 Func_621fb::
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wGrabState]
 	ld b, a
@@ -1532,7 +1532,7 @@ Func_621fb::
 	jp HomeJumpRet
 
 Func_622bd::
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wGrabState]
 	ld b, a
@@ -1643,7 +1643,7 @@ Func_622bd::
 	jp HomeJumpRet
 
 Func_62382::
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wGrabState]
 	ld b, a
@@ -1789,7 +1789,7 @@ ThrowObject_Left:
 	jp HomeJumpRet
 
 Func_6247b::
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wGrabState]
 	ld b, a
@@ -2420,7 +2420,7 @@ Func_6284f:
 	jr c, .asm_6288a
 	dec [hl]
 .asm_6288a
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	jp HomeJumpRet
 
@@ -2484,7 +2484,7 @@ Func_628a7:
 	jr c, .asm_628e2
 	dec [hl]
 .asm_628e2
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	jp HomeJumpRet
 

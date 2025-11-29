@@ -20,7 +20,7 @@ ShootFunc:
 	stop_music2
 
 	xor a
-	ld [wDollBoyActiveBarrels], a
+	ld [wDollBoyActiveBarrels], a ; FALSE
 	ld [wShootBallState], a
 
 	ld hl, wCurObjFlags
@@ -390,7 +390,7 @@ ShootFunc:
 	ld [hli], a
 	ld a, $04
 	ld [hli], a ; OBJ_VAR_1
-	xor a
+	xor a ; FALSE
 	ld [wDollBoyActiveBarrels], a
 	ret
 
@@ -505,7 +505,7 @@ ShootFunc:
 	ld a, $1 | (1 << 7)
 	ld [wAutoMoveState], a
 	play_sfx SFX_0C7
-	ld a, $01
+	ld a, TRUE
 	ld [wDollBoyActiveBarrels], a
 	ld hl, wCurObjSubState
 	res OBJSUBFLAG_VDIR_F, [hl]
@@ -518,7 +518,7 @@ ShootFunc:
 	ret
 
 .Won:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 
@@ -579,7 +579,7 @@ ShootFunc:
 	bit OBJSUBFLAG_HDIR_F, [hl]
 	ret z
 .asm_569fd
-	ld a, $01
+	ld a, TRUE
 	ld [wDollBoyActiveBarrels], a
 	ret
 
@@ -807,13 +807,13 @@ ShootFunc:
 	jr .Func_56bb8
 .Func_56bae:
 	ld hl, wCurObjAction
-	ld a, NO_ACTIONS_FOR 15
+	ld a, no_actions_for 15
 	ld [hld], a
 	ld a, $38
 	jr .asm_56bc0
 .Func_56bb8:
 	ld hl, wCurObjAction
-	ld a, NO_ACTIONS_FOR 15
+	ld a, no_actions_for 15
 	ld [hld], a
 	ld a, $39
 .asm_56bc0
@@ -915,12 +915,12 @@ ShootFunc:
 	jr .asm_56c25
 
 .Func_56c49:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wDollBoyActiveBarrels]
 	and a
 	jr z, .asm_56c5e
-	xor a
+	xor a ; FALSE
 	ld [wDollBoyActiveBarrels], a
 	ld de, Frameset_69f5d
 	call SetObjectFramesetPtr
@@ -1007,7 +1007,7 @@ ShootFunc:
 	ld hl, wCurObjSubState
 	res OBJSUBFLAG_VDIR_F, [hl]
 .asm_56d05
-	ld a, $01
+	ld a, TRUE
 	ld [wDollBoyActiveBarrels], a
 	play_sfx SFX_01A
 	ret
@@ -1018,7 +1018,7 @@ ShootFunc:
 	ret
 
 .Func_56d1c:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjFlags
 	res OBJFLAG_GRABBED_F, [hl]
@@ -1072,7 +1072,7 @@ ShootFunc:
 	ret
 
 .DefeatRise:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -1094,7 +1094,7 @@ ShootFunc:
 	ret
 
 .DefeatFall:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -1146,7 +1146,7 @@ GKTortoisePlatformFunc:
 	and a
 	jr z, .wait_set_move_up_and_down
 	dec [hl]
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	jp MoveObjectLeft
 .wait_set_move_up_and_down
@@ -1248,7 +1248,7 @@ GKTortoiseFunc:
 	ld a, [wTransformation]
 	and a
 	jr z, .asm_56eb7
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 .asm_56eb7
 	ld a, [wShootBallState]
@@ -1272,7 +1272,7 @@ GKTortoiseFunc:
 	dw .Func_5710f
 
 .Func_56edd:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -1494,7 +1494,7 @@ GKTortoiseFunc:
 .asm_57069
 	xor a
 	ld [wAutoMoveState], a
-	ld a, NO_ACTIONS_FOR 15
+	ld a, no_actions_for 15
 	ld [wCurObjAction], a
 	play_sfx SFX_067
 	ret
@@ -1686,7 +1686,7 @@ GKTortoiseFunc:
 	ld a, l
 	add OBJ_ACTION - OBJ_FLAGS
 	ld l, a
-	ld a, NO_ACTIONS_FOR 8
+	ld a, no_actions_for 8
 	ld [hl], a
 	ret
 
@@ -1840,7 +1840,7 @@ ShootGoalCounterFunc:
 	jp MoveObjectUpByVar2
 
 .UpdateScore:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, $7f
 	ld [wCurObjFrameDuration], a
@@ -1887,7 +1887,7 @@ WarioGoalCounterFunc:
 	jp MoveObjectUpByVar2
 
 .UpdateScore:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, $7f
 	ld [wCurObjFrameDuration], a

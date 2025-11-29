@@ -53,7 +53,7 @@ SunFunc:
 	ret
 
 .Func_472a6:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjVar1]
 	jumptable
@@ -484,7 +484,7 @@ SunFlameFunc:
 	ret
 
 .Update:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -548,7 +548,7 @@ MoonFunc:
 	ret
 
 .Func_475c7:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjVar1]
 	jumptable
@@ -740,7 +740,7 @@ MoonStarFunc:
 	ret
 
 .Update:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]

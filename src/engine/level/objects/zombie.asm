@@ -1,5 +1,5 @@
 ZombieFunc:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Init)
@@ -18,7 +18,7 @@ ZombieFunc:
 	ret
 
 .Init:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.OnUnderground)
@@ -45,7 +45,7 @@ ZombieFunc:
 	ret
 
 .OnUnderground:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, 2
 	ld [wCurObjFrameDuration], a
@@ -174,7 +174,7 @@ ZombieFunc:
 	ret
 
 .StartRise:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, 2
 	ld [wCurObjFrameDuration], a
@@ -214,7 +214,7 @@ ZombieFunc:
 	ld a, [wTransformation]
 	cp TRANSFORMATION_ZOMBIE_WARIO
 	jr nz, .asm_45c2f
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 .asm_45c2f
 	ld hl, wCurObjStateDuration
@@ -523,7 +523,7 @@ ZombieFunc:
 	jp CreateObjectAtRelativePos
 
 .Headless:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -623,7 +623,7 @@ ZombieHeadFunc:
 	ret
 
 .Flicker:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]

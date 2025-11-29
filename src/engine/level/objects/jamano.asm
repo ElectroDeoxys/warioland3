@@ -36,7 +36,7 @@ JamanoFunc:
 	jp MoveObjectUpByVar2
 
 .Func_54d7d:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -58,7 +58,7 @@ JamanoFunc:
 	ret
 
 .Func_54daa:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -107,7 +107,7 @@ JamanoFunc:
 	jp SetObjectFramesetPtr
 
 .Func_54e0a:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 
@@ -329,7 +329,7 @@ JamanoFunc:
 	ret
 
 .Func_54f9d:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -435,7 +435,7 @@ JamanoFunc:
 	jp MoveObjectUp
 
 .Func_5507b:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -452,7 +452,7 @@ JamanoFunc:
 	ret
 
 .Func_55097:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -469,7 +469,7 @@ JamanoFunc:
 	ret
 
 .Func_550b3:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -491,7 +491,7 @@ JamanoFunc:
 	jp CreateObjectAtRelativePos
 
 .Func_550db:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -512,13 +512,13 @@ JamanoFunc:
 	ret
 
 .Func_550ff:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld bc, Data_60d20
 	jp ApplyObjYMovement
 
 JamanoHatFunc:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -535,7 +535,7 @@ JamanoHatFunc:
 	ret
 
 .Func_55125:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjFlags
 	bit OBJFLAG_ON_SCREEN_F, [hl]
@@ -664,7 +664,7 @@ SkullSpawnerFunc:
 	ret
 
 .Func_5522c:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, $02
 	ld [wCurObjFrameDuration], a
@@ -712,7 +712,7 @@ SkullSpawnerFunc:
 
 SkullFunc:
 	call .Func_553e8
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_5529f)
@@ -723,7 +723,7 @@ SkullFunc:
 
 .Func_5529f:
 	call .Func_553e8
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, $02
 	ld [wCurObjFrameDuration], a
@@ -739,7 +739,7 @@ SkullFunc:
 
 .Func_552ba:
 	call .Func_553e8
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjVar1
 	dec [hl]
@@ -755,7 +755,7 @@ SkullFunc:
 
 .Func_552d4:
 	call .Func_553e8
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjUnk07]
 	ld b, a
@@ -795,7 +795,7 @@ SkullFunc:
 
 .Func_5531c:
 	call .Func_553e8
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -822,7 +822,7 @@ SkullFunc:
 	ld a, [w1d149]
 	and a
 	jr z, .asm_55355
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	jp .Func_553e8
 .asm_55355
@@ -854,7 +854,7 @@ SkullFunc:
 	call SetObjectFramesetPtr
 	ld a, $ff
 	ld [hli], a
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	play_sfx SFX_017
 	ld hl, w1d147
@@ -873,7 +873,7 @@ SkullFunc:
 	jp nz, Func_3326
 
 .asm_553a8
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]

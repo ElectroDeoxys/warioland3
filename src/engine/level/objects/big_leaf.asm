@@ -14,7 +14,7 @@ BigLeafSpawnerFunc:
 
 ; waits state duration then spawns 2 leaves
 .SpawnSet1:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, 2
 	ld [wCurObjFrameDuration], a
@@ -56,7 +56,7 @@ BigLeafSpawnerFunc:
 
 ; waits state duration then spawns 1 leaf
 .SpawnSet2:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, 2
 	ld [wCurObjFrameDuration], a
@@ -74,7 +74,7 @@ BigLeafSpawnerFunc:
 	jp CreateObjectAtRelativePos
 
 BigLeaf1Func:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjFlags
 	set OBJFLAG_INVISIBLE_F, [hl]
@@ -97,7 +97,7 @@ BigLeaf1Func:
 
 BigLeafFunc:
 BigLeaf2Func:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjFlags
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -187,7 +187,7 @@ BigLeaf2Func:
 	ld a, [wIsInWaterOrSand]
 	and a
 	ret z
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_42d0e)
@@ -209,7 +209,7 @@ BigLeaf2Func:
 	ret
 
 .Func_42d0e:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]

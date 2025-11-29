@@ -139,7 +139,7 @@ TeruteruFunc:
 	ret
 
 .Func_449d7:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wTransformation]
 	cp TRANSFORMATION_BLIND
@@ -568,7 +568,7 @@ TeruteruFunc:
 	ld [hld], a
 	ld de, Frameset_68ba2
 	call SetObjectFramesetPtr
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 

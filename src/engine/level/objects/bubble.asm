@@ -11,7 +11,7 @@ BubbleHoleFunc:
 	jr .asm_47c08
 
 .Update:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, 2
 	ld [wCurObjFrameDuration], a
@@ -43,7 +43,7 @@ BubbleHoleFunc:
 	ret
 
 BubbleFunc:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjFlags
 	set OBJFLAG_NO_COLLISION_F, [hl]
@@ -80,7 +80,7 @@ BubbleFunc:
 	ret
 
 .Burst:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]

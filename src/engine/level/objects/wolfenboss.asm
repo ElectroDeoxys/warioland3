@@ -52,7 +52,7 @@ WolfenbossFunc:
 	ret
 
 .WhispWaiting:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjFlags
 	bit OBJFLAG_ON_SCREEN_F, [hl]
@@ -76,7 +76,7 @@ WolfenbossFunc:
 	ret
 
 .WhispRising:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -94,7 +94,7 @@ WolfenbossFunc:
 	ret
 
 .SmokeEntrance:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -130,7 +130,7 @@ WolfenbossFunc:
 	ret
 
 .EmergeFromSmoke:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	; move up slowly while animation plays
 	ld a, [wCurObjFrame]
@@ -152,7 +152,7 @@ WolfenbossFunc:
 	ret
 
 .StartWait:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -172,7 +172,7 @@ WolfenbossFunc:
 	ret
 
 .SmokeExit:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -182,7 +182,7 @@ WolfenbossFunc:
 	ret
 
 .Disappear:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -216,7 +216,7 @@ WolfenbossFunc:
 	ret
 
 .Main:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 
 	; if Wario was hit, then exit the field
@@ -513,7 +513,7 @@ WolfenbossFunc:
 	jp SetObjectFramesetPtr
 
 .DefeatFall:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjScreenYPos]
 	cp $c0
@@ -573,7 +573,7 @@ MagicSpiralFunc:
 	ld [hld], a
 	play_sfx SFX_0C2
 .Grow:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -667,12 +667,12 @@ MagicSpiralFunc:
 	ld [hld], a
 	ld a, LOW(.Disappear)
 	ld [hld], a
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ret
 
 .Disappear:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -754,7 +754,7 @@ IgaguriFunc:
 	ld a, [wGlobalCounter]
 	and %111
 	play_sfx z, SFX_06B
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	dec [hl]
@@ -801,7 +801,7 @@ IgaguriFunc:
 	ld a, [wTransformation]
 	and a
 	jr z, .no_transformation_1
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 .no_transformation_1
 	ld a, $02
@@ -893,7 +893,7 @@ IgaguriFunc:
 	ld a, [wTransformation]
 	and a
 	jr z, .no_transformation_2
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 .no_transformation_2
 	ld a, $2
@@ -944,7 +944,7 @@ IgaguriFunc:
 	ld a, [wTransformation]
 	and a
 	jr z, .no_transformation_3
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 .no_transformation_3
 	ld hl, wCurObjVar1
@@ -994,7 +994,7 @@ IgaguriFunc:
 	ret
 
 KuriFunc:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld bc, Data_60d60
 	call ApplyObjYMovement
@@ -1048,7 +1048,7 @@ KuriFunc:
 	ld a, [wTransformation]
 	and a
 	jr z, .asm_56547
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 .asm_56547
 	ld hl, wCurObjState
@@ -1135,7 +1135,7 @@ KuriFunc:
 	jp SetObjectFramesetPtr
 
 .Launched:
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [wCurObjState]
 	and $fe

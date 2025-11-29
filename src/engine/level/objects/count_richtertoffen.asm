@@ -184,7 +184,7 @@ CountRichtertoffenFunc:
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	ret nz
-	ld a, NO_ACTIONS_FOR 31
+	ld a, no_actions_for 31
 	ld [wCurObjAction], a
 	jp .asm_40fe9
 
@@ -673,7 +673,7 @@ CountRichtertoffenFunc:
 	ld b, $01
 
 .asm_412a4
-	ld a, NO_ACTIONS_FOR 1
+	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld a, [hl] ; OBJ_SUBSTATE
 	and OBJSUBFLAGS_MASK
