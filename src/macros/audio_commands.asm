@@ -199,10 +199,10 @@ ENDM
 
 MACRO? note_sustain
 	db $ce
-REPT _NARG
-	db \1
-	shift 1
-ENDR
+	REPT _NARG
+		db \1
+		shift 1
+	ENDR
 ENDM
 
 ; commands to be used with AUDIOCMD_SPECIAL
@@ -225,8 +225,8 @@ MACRO? fade_in_envelope
 ENDM
 
 MACRO? note
-REPT _NARG
-	db \1
-	shift 1
-ENDR
+	REPT _NARG
+		db \1
+		shift 1
+	ENDR
 ENDM

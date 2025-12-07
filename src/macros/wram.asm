@@ -250,7 +250,7 @@ MACRO colour_fade_struct
 ENDM
 
 MACRO pal_fade_struct
-FOR n, 1, PAL_COLORS + 1
-	colour_fade_struct \1Colour{u:n}
-ENDR
+	FOR n, 1, PAL_COLORS + 1
+		colour_fade_struct \1Colour{u:n}
+	ENDR
 ENDM

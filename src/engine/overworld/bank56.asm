@@ -327,38 +327,34 @@ MACRO temple_rock_bounce
 	ret
 
 .Update:
-IF (\3) == TRUE
+	IF (\3) == TRUE
+		IF (\4) == DIRECTION_LEFT
+			REPT 2
+				ld hl, \2
+				call BounceTempleRockLeft
+				jr z, .Next
+			ENDR
+		ELSE ; (\4) == DIRECTION_RIGHT
+			REPT 2
+				ld hl, \2
+				call BounceTempleRockRight
+				jr z, .Next
+			ENDR
+		ENDC
+		ret
+	ELSE ; (\3) == FALSE
+		ld de, Data_158897
+		ld hl, \2
 
-IF (\4) == DIRECTION_LEFT
-REPT 2
-	ld hl, \2
-	call BounceTempleRockLeft
-	jr z, .Next
-ENDR
-ELSE ; (\4) == DIRECTION_RIGHT
-REPT 2
-	ld hl, \2
-	call BounceTempleRockRight
-	jr z, .Next
-ENDR
-ENDC
-	ret
+		IF (\4) == DIRECTION_LEFT
+			call ApplyOWMovement
+		ELSE ; (\4) == DIRECTION_RIGHT
+			call ApplyOWMovement_Mirrored
+		ENDC
 
-ELSE ; (\3) == FALSE
-
-	ld de, Data_158897
-	ld hl, \2
-
-IF (\4) == DIRECTION_LEFT
-	call ApplyOWMovement
-ELSE ; (\4) == DIRECTION_RIGHT
-	call ApplyOWMovement_Mirrored
-ENDC
-
-	ret nz
-	jr .Next
-
-ENDC
+		ret nz
+		jr .Next
+	ENDC
 
 .Reset:
 	ld a, [wTempleRock\1Size]

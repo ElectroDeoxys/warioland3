@@ -21,9 +21,9 @@ MACRO sfx
 ENDM
 
 MACRO filler_sounds
-REPT \1
-	music Music_OutOfTheWoodsDay, $00, 100, CHAN1_F, 4
-ENDR
+	REPT \1
+		music Music_OutOfTheWoodsDay, $00, 100, CHAN1_F, 4
+	ENDR
 ENDM
 
 SoundHeaders:

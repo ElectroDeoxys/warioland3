@@ -3,14 +3,15 @@
 ; \3 = unknown 1
 ; \4 = unknown 2
 MACRO ow_coord
-IF (\1) != -1
-DEF x = \2 + (\1 * TILEMAP_WIDTH)
-	db ((x & $1e0) >> 2) ; y coord in px
-	db ((x & $01f) << 3) ; x coord in px
-ELSE
-	db -1
-	db -1
-ENDC
+	IF (\1) != -1
+	DEF x = \2 + (\1 * TILEMAP_WIDTH)
+		db ((x & $1e0) >> 2) ; y coord in px
+		db ((x & $01f) << 3) ; x coord in px
+	ELSE
+		db -1
+		db -1
+	ENDC
+
 	db \3
 	db \4
 ENDM

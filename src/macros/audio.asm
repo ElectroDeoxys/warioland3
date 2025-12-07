@@ -32,14 +32,15 @@ ENDM
 
 ; plays SFX, optionally pass a condition
 MACRO play_sfx
-IF _NARG == 2
-IF STRCMP("\1", "nz") == 0
-	jr z, :+
-ELIF STRCMP("\1", "z") == 0
-	jr nz, :+
-ENDC
-SHIFT
-ENDC
+	IF _NARG == 2
+		IF STRCMP("\1", "nz") == 0
+			jr z, :+
+		ELIF STRCMP("\1", "z") == 0
+			jr nz, :+
+		ENDC
+	SHIFT
+	ENDC
+	
 	ld a, HIGH(\1)
 	ldh [hSFXID + 0], a
 	ld a, LOW(\1)

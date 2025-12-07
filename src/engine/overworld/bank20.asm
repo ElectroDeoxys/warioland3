@@ -2184,11 +2184,11 @@ GetOWSceneParams_GotPtr:
 MACRO ow_highlight_level
 	db HIGHLIGHT_LEVEL
 	db \1
-IF \1 == NORTH
-	db \2
-ELSE
-	db (\2) + 1
-ENDC
+	IF \1 == NORTH
+		db \2
+	ELSE
+		db (\2) + 1
+	ENDC
 ENDM
 
 ; \1 = map side

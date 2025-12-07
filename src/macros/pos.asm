@@ -41,11 +41,11 @@ ENDM
 MACRO update_pos
 	ld hl, hPos
 	ld de, wWarioPos
-REPT 3
-	ld a, [hli]
-	ld [de], a
-	inc de
-ENDR
+	REPT 3
+		ld a, [hli]
+		ld [de], a
+		inc de
+	ENDR
 	ld a, [hl]
 	ld [de], a
 ENDM
@@ -53,11 +53,11 @@ ENDM
 MACRO get_pos
 	ld hl, wWarioPos
 	ld de, hPos
-REPT 3
-	ld a, [hli]
-	ld [de], a
-	inc de
-ENDR
+	REPT 3
+		ld a, [hli]
+		ld [de], a
+		inc de
+	ENDR
 	ld a, [hl]
 	ld [de], a
 ENDM

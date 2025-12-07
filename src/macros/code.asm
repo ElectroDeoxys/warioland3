@@ -1,4 +1,4 @@
-MACRO lb ; r, hi, lo
+MACRO? lb ; r, hi, lo
 	ld \1, (\2) << 8 + ((\3) & $ff)
 ENDM
 
@@ -39,17 +39,17 @@ MACRO hcall
 ENDM
 
 MACRO farcall
-IF _NARG == 1
-	ld a, BANK(\1)
-	ldh [hCallFuncBank], a
-	hcall \1
-;assert warn, BANK(\1) != BANK(@), "farcall can be call"
-ELSE
-	ld a, \1
-	ldh [hCallFuncBank], a
-	hcall \2
-;assert warn, \1 != BANK(@), "farcall can be call"
-ENDC
+	IF _NARG == 1
+		ld a, BANK(\1)
+		ldh [hCallFuncBank], a
+		hcall \1
+	;assert warn, BANK(\1) != BANK(@), "farcall can be call"
+	ELSE
+		ld a, \1
+		ldh [hCallFuncBank], a
+		hcall \2
+	;assert warn, \1 != BANK(@), "farcall can be call"
+	ENDC
 ENDM
 
 MACRO homecall

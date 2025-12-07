@@ -6,7 +6,7 @@ DEF palettes EQUS "* PAL_SIZE"
 DEF palette  EQUS "+ PAL_SIZE *"
 DEF color    EQUS "+ COLOR_SIZE *"
 
-MACRO frame_oam
+MACRO? frame_oam
 ; ycoord, xcoord, tile ID, attributes
 	db \1, \2, \3, \4
 ENDM
@@ -15,11 +15,11 @@ MACRO decompress_tiles0
 	ld a, BANK(\1)
 	ld [wTempBank], a
 	ld hl, \1
-IF _NARG == 3
-	ld bc, \2 tile \3
-ELSE
-	ld bc, \2 tile $00
-ENDC
+	IF _NARG == 3
+		ld bc, \2 tile \3
+	ELSE
+		ld bc, \2 tile $00
+	ENDC
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	hcall Decompress
@@ -28,11 +28,11 @@ ENDM
 MACRO decompress_tiles1
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-IF _NARG == 3
-	decompress_tiles0 \1, \2, \3
-ELSE
-	decompress_tiles0 \1, \2
-ENDC
+	IF _NARG == 3
+		decompress_tiles0 \1, \2, \3
+	ELSE
+		decompress_tiles0 \1, \2
+	ENDC
 	xor a
 	ldh [rVBK], a
 ENDM
@@ -41,11 +41,11 @@ MACRO decompress_tilemap
 	ld a, BANK(\1)
 	ld [wTempBank], a
 	ld hl, \1
-IF _NARG == 3
-	ld bc, \2 + (\3 * TILEMAP_WIDTH)
-ELSE
-	ld bc, \2
-ENDC
+	IF _NARG == 3
+		ld bc, \2 + (\3 * TILEMAP_WIDTH)
+	ELSE
+		ld bc, \2
+	ENDC
 	ld a, [wTempBank]
 	ldh [hCallFuncBank], a
 	hcall Decompress
@@ -54,14 +54,14 @@ ENDM
 MACRO decompress_attrmap
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
-IF _NARG == 3
-	decompress_tilemap \1, \2, \3
-ELSE
-	decompress_tilemap \1, \2
-ENDC
+	IF _NARG == 3
+		decompress_tilemap \1, \2, \3
+	ELSE
+		decompress_tilemap \1, \2
+	ENDC
 	xor a
 	ldh [rVBK], a
 ENDM
 
 DEF dma_tiles EQUS " - 1"    ; number in tiles
-DEF dma_rows EQUS " * 2 - 1" ; number in rows
+DEF dma_rows  EQUS " * 2 - 1" ; number in rows

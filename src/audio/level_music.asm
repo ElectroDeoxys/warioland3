@@ -1,10 +1,10 @@
 MACRO level_music
-REPT 4
-	dw \1
-ENDR
-REPT 4
-	dw \2
-ENDR
+	REPT 4
+		dw \1
+	ENDR
+	REPT 4
+		dw \2
+	ENDR
 ENDM
 
 LevelMusic::

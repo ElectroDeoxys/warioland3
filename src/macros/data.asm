@@ -1,43 +1,43 @@
-MACRO dn ; nybbles
-REPT _NARG / 2
-	db ((\1) << 4) | (\2)
-	shift 2
-ENDR
+MACRO? dn ; nybbles
+	REPT _NARG / 2
+		db ((\1) << 4) | (\2)
+		shift 2
+	ENDR
 ENDM
 
-MACRO dbw
+MACRO? dbw
 	db \1
 	dw \2
 ENDM
 
-MACRO dwb
+MACRO? dwb
 	dw \1
 	db \2
 ENDM
 
-MACRO dab
+MACRO? dab
 	dw \1
 	db BANK(\1)
 ENDM
 
-MACRO dba
+MACRO? dba
 	db BANK(\1)
 	dw \1
 ENDM
 
-MACRO bigdw ; big-endian word
+MACRO? bigdw ; big-endian word
 	db HIGH(\1), LOW(\1)
 ENDM
 
-MACRO sgb
+MACRO? sgb
 	db \1 << 3 + \2 ; sgb_command * 8 + length
 ENDM
 
-MACRO rgb
+MACRO? rgb
 	dw (\3 << 10 | \2 << 5 | \1)
 ENDM
 
-MACRO room_data
+MACRO? room_data
 	dn \2, \1 ; y, x
 	dn \3, \4 ; y limits
 	dn \5, \6 ; x limits
