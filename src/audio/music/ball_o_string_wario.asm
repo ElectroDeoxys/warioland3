@@ -6,329 +6,329 @@ Music_BallOStringWario_Ch1:
 	wave WAVE_51
 	volume 56
 	note NOTE_DURATION_8, E_2, 14
-	audio_wait_8
+	audio_wait 8
 	note G_2
-	audio_wait_8
+	audio_wait 8
 	note C_3
-	audio_wait_8
+	audio_wait 8
 	note F_2
-	audio_wait_8
+	audio_wait 8
 	note A_2
-	audio_wait_8
+	audio_wait 8
 	note D_3
-	audio_wait_8
+	audio_wait 8
 	note G_2
-	audio_wait_8
+	audio_wait 8
 	note B_2
-	audio_wait_8
+	audio_wait 8
 	note E_3
-	audio_wait_8
+	audio_wait 8
 	note A_2
-	audio_wait_8
+	audio_wait 8
 	note C_3
-	audio_wait_8
+	audio_wait 8
 	note F_3
-	audio_wait_8
+	audio_wait 8
 .sub1
 	note NOTE_DURATION_8, B_2, 14
-	audio_wait_8
+	audio_wait 8
 	note D_3
-	audio_wait_8
+	audio_wait 8
 	note G_3
-	audio_wait_8
+	audio_wait 8
 	note C_3
-	audio_wait_8
+	audio_wait 8
 	note E_3
-	audio_wait_8
+	audio_wait 8
 	note A_3
-	audio_wait_8
+	audio_wait 8
 	note D_3
-	audio_wait_8
+	audio_wait 8
 	note F_3
-	audio_wait_8
+	audio_wait 8
 	note B_3
-	audio_wait_8
+	audio_wait 8
 	note E_3
-	audio_wait_8
+	audio_wait 8
 	note G_3
-	audio_wait_8
+	audio_wait 8
 	note C_4
-	audio_wait_8
+	audio_wait 8
 	audio_ret
 
 .sub2
 	note NOTE_DURATION_8, F_3, 14
-	audio_wait_8
+	audio_wait 8
 	note A_3
-	audio_wait_8
+	audio_wait 8
 	note D_4
-	audio_wait_8
+	audio_wait 8
 	note E_3
-	audio_wait_8
+	audio_wait 8
 	note G_3
-	audio_wait_8
+	audio_wait 8
 	note C_4
-	audio_wait_8
+	audio_wait 8
 	note D_3
-	audio_wait_8
+	audio_wait 8
 	note F_3
-	audio_wait_8
+	audio_wait 8
 	note B_3
-	audio_wait_8
+	audio_wait 8
 	note C_3
-	audio_wait_8
+	audio_wait 8
 	note E_3
-	audio_wait_8
+	audio_wait 8
 	note A_3
-	audio_wait_8
+	audio_wait 8
 	audio_ret
 
 .sub3
 	note NOTE_DURATION_8, B_2, 14
-	audio_wait_8
+	audio_wait 8
 	note D_3
-	audio_wait_8
+	audio_wait 8
 	note G_3
-	audio_wait_8
+	audio_wait 8
 	note A_2
-	audio_wait_8
+	audio_wait 8
 	note C_3
-	audio_wait_8
+	audio_wait 8
 	note F_3
-	audio_wait_8
+	audio_wait 8
 	note G_2
-	audio_wait_8
+	audio_wait 8
 	note B_2
-	audio_wait_8
+	audio_wait 8
 	note E_3
-	audio_wait_8
+	audio_wait 8
 	note F_2
-	audio_wait_8
+	audio_wait 8
 	note A_2
-	audio_wait_8
+	audio_wait 8
 	note D_3
-	audio_wait_8
+	audio_wait 8
 	audio_ret
 
 	note E_2
-	audio_wait_8
+	audio_wait 8
 	note G_2
-	audio_wait_8
+	audio_wait 8
 	note C_3
-	audio_wait_8
+	audio_wait 8
 	note F_2
-	audio_wait_8
+	audio_wait 8
 	note A_2
-	audio_wait_8
+	audio_wait 8
 	note D_3
-	audio_wait_8
+	audio_wait 8
 	note G_2
-	audio_wait_8
+	audio_wait 8
 	note B_2
-	audio_wait_8
+	audio_wait 8
 	note E_3
-	audio_wait_8
+	audio_wait 8
 	note A_2
-	audio_wait_8
+	audio_wait 8
 	note C_3
-	audio_wait_8
+	audio_wait 8
 	note F_3
-	audio_wait_8
+	audio_wait 8
 	audio_call .sub1
 	note NOTE_DURATION_8, F_3, 14
-	audio_wait_8
+	audio_wait 8
 	note A_3
-	audio_wait_8
+	audio_wait 8
 	note D_4
-	audio_wait_8
+	audio_wait 8
 	note G_3
-	audio_wait_8
+	audio_wait 8
 	note B_3
-	audio_wait_8
+	audio_wait 8
 	note E_4
-	audio_wait_8
+	audio_wait 8
 	note A_3
-	audio_wait_8
+	audio_wait 8
 	note C_4
-	audio_wait_8
+	audio_wait 8
 	note F_4
-	audio_wait_8
+	audio_wait 8
 	note B_3
-	audio_wait_8
+	audio_wait 8
 	note D_4
-	audio_wait_8
+	audio_wait 8
 	note G_4
-	audio_wait_8
+	audio_wait 8
 	note C_4
-	audio_wait_8
+	audio_wait 8
 	note E_4
-	audio_wait_8
+	audio_wait 8
 	note A_4
-	audio_wait_8
+	audio_wait 8
 	note D_4
-	audio_wait_8
+	audio_wait 8
 	note F_4
-	audio_wait_8
+	audio_wait 8
 	note B_4
-	audio_wait_8
+	audio_wait 8
 	note E_4
-	audio_wait_8
+	audio_wait 8
 	note G_4
-	audio_wait_8
+	audio_wait 8
 	note C_5
-	audio_wait_8
+	audio_wait 8
 	note F_4
-	audio_wait_8
+	audio_wait 8
 	note A_4
-	audio_wait_8
+	audio_wait 8
 	note D_5
-	audio_wait_8
+	audio_wait 8
 	note G_4
-	audio_wait_8
+	audio_wait 8
 	note B_4
-	audio_wait_8
+	audio_wait 8
 	note E_5
-	audio_wait_8
+	audio_wait 8
 	note F_4
-	audio_wait_8
+	audio_wait 8
 	note A_4
-	audio_wait_8
+	audio_wait 8
 	note D_5
-	audio_wait_8
+	audio_wait 8
 	note G_4
-	audio_wait_8
+	audio_wait 8
 	note B_4
-	audio_wait_8
+	audio_wait 8
 	note E_5
-	audio_wait_8
+	audio_wait 8
 	note F_4
-	audio_wait_8
+	audio_wait 8
 	note A_4
-	audio_wait_8
+	audio_wait 8
 	note D_5
-	audio_wait_8
+	audio_wait 8
 	note G_4
-	audio_wait_8
+	audio_wait 8
 	note B_4
-	audio_wait_8
+	audio_wait 8
 	note E_5
-	audio_wait_8
+	audio_wait 8
 	note F_4
-	audio_wait_8
+	audio_wait 8
 	note A_4
-	audio_wait_8
+	audio_wait 8
 	note D_5
-	audio_wait_8
+	audio_wait 8
 	note E_4
-	audio_wait_8
+	audio_wait 8
 	note G_4
-	audio_wait_8
+	audio_wait 8
 	note C_5
-	audio_wait_8
+	audio_wait 8
 	note D_4
-	audio_wait_8
+	audio_wait 8
 	note F_4
-	audio_wait_8
+	audio_wait 8
 	note B_4
-	audio_wait_8
+	audio_wait 8
 	note C_4
-	audio_wait_8
+	audio_wait 8
 	note E_4
-	audio_wait_8
+	audio_wait 8
 	note A_4
-	audio_wait_8
+	audio_wait 8
 	note B_3
-	audio_wait_8
+	audio_wait 8
 	note D_4
-	audio_wait_8
+	audio_wait 8
 	note G_4
-	audio_wait_8
+	audio_wait 8
 	note C_4
-	audio_wait_8
+	audio_wait 8
 	note E_4
-	audio_wait_8
+	audio_wait 8
 	note A_4
-	audio_wait_8
+	audio_wait 8
 	note B_3
-	audio_wait_8
+	audio_wait 8
 	note D_4
-	audio_wait_8
+	audio_wait 8
 	note G_4
-	audio_wait_8
+	audio_wait 8
 	note C_4
-	audio_wait_8
+	audio_wait 8
 	note E_4
-	audio_wait_8
+	audio_wait 8
 	note A_4
-	audio_wait_8
+	audio_wait 8
 	note B_3
-	audio_wait_8
+	audio_wait 8
 	note D_4
-	audio_wait_8
+	audio_wait 8
 	note G_4
-	audio_wait_8
+	audio_wait 8
 	note A_3
-	audio_wait_8
+	audio_wait 8
 	note C_4
-	audio_wait_8
+	audio_wait 8
 	note F_4
-	audio_wait_8
+	audio_wait 8
 	note G_3
-	audio_wait_8
+	audio_wait 8
 	note B_3
-	audio_wait_8
+	audio_wait 8
 	note E_4
-	audio_wait_8
+	audio_wait 8
 	audio_call .sub2
 	audio_call .sub3
 	note NOTE_DURATION_8, E_2, 14
-	audio_wait_8
+	audio_wait 8
 	note G_2
-	audio_wait_8
+	audio_wait 8
 	note C_3
-	audio_wait_8
+	audio_wait 8
 	note D_2
-	audio_wait_8
+	audio_wait 8
 	note F_2
-	audio_wait_8
+	audio_wait 8
 	note B_2
-	audio_wait_8
+	audio_wait 8
 	note C_2
-	audio_wait_8
+	audio_wait 8
 	note E_2
-	audio_wait_8
+	audio_wait 8
 	note A_2
-	audio_wait_8
+	audio_wait 8
 	note B_1
-	audio_wait_8
+	audio_wait 8
 	note D_2
-	audio_wait_8
+	audio_wait 8
 	note G_2
-	audio_wait_8
+	audio_wait 8
 	note C_2
-	audio_wait_8
+	audio_wait 8
 	note E_2
-	audio_wait_8
+	audio_wait 8
 	note A_2
-	audio_wait_8
+	audio_wait 8
 	note B_1
-	audio_wait_8
+	audio_wait 8
 	note D_2
-	audio_wait_8
+	audio_wait 8
 	note G_2
-	audio_wait_8
+	audio_wait 8
 	note C_2
-	audio_wait_8
+	audio_wait 8
 	note E_2
-	audio_wait_8
+	audio_wait 8
 	note A_2
-	audio_wait_8
+	audio_wait 8
 	note B_1
-	audio_wait_8
+	audio_wait 8
 	note D_2
-	audio_wait_8
+	audio_wait 8
 	note G_2
-	audio_wait_8
+	audio_wait 8
 	audio_jump .loop
 .end
 	audio_end
@@ -340,121 +340,121 @@ Music_BallOStringWario_Ch2:
 	wave WAVE_47
 	volume 56
 	note NOTE_DURATION_8, C_2, 14
-	audio_wait_24
+	audio_wait 24
 	note D_2
-	audio_wait_24
+	audio_wait 24
 	note E_2
-	audio_wait_24
+	audio_wait 24
 	note F_2
-	audio_wait_24
+	audio_wait 24
 .sub1
 	note NOTE_DURATION_8, G_2, 14
-	audio_wait_24
+	audio_wait 24
 	note A_2
-	audio_wait_24
+	audio_wait 24
 	note B_2
-	audio_wait_24
+	audio_wait 24
 	note C_3
-	audio_wait_24
+	audio_wait 24
 	audio_ret
 
 .sub2
 	note NOTE_DURATION_8, D_3, 14
-	audio_wait_24
+	audio_wait 24
 	note C_3
-	audio_wait_24
+	audio_wait 24
 	note B_2
-	audio_wait_24
+	audio_wait 24
 	note A_2
-	audio_wait_24
+	audio_wait 24
 	audio_ret
 
 .sub3
 	note NOTE_DURATION_8, G_2, 14
-	audio_wait_24
+	audio_wait 24
 	note F_2
-	audio_wait_24
+	audio_wait 24
 	note E_2
-	audio_wait_24
+	audio_wait 24
 	note D_2
-	audio_wait_24
+	audio_wait 24
 	audio_ret
 
 	note C_2
-	audio_wait_24
+	audio_wait 24
 	note D_2
-	audio_wait_24
+	audio_wait 24
 	note E_2
-	audio_wait_24
+	audio_wait 24
 	note F_2
-	audio_wait_24
+	audio_wait 24
 	audio_call .sub1
 	note NOTE_DURATION_8, D_3, 14
-	audio_wait_24
+	audio_wait 24
 	note E_3
-	audio_wait_24
+	audio_wait 24
 	note F_3
-	audio_wait_24
+	audio_wait 24
 	note G_3
-	audio_wait_24
+	audio_wait 24
 	note A_3
-	audio_wait_24
+	audio_wait 24
 	note B_3
-	audio_wait_24
+	audio_wait 24
 	note C_4
-	audio_wait_24
+	audio_wait 24
 	note D_4
-	audio_wait_24
+	audio_wait 24
 	note E_4
-	audio_wait_24
+	audio_wait 24
 	note D_4
-	audio_wait_24
+	audio_wait 24
 	note E_4
-	audio_wait_24
+	audio_wait 24
 	note D_4
-	audio_wait_24
+	audio_wait 24
 	note E_4
-	audio_wait_24
+	audio_wait 24
 	note D_4
-	audio_wait_24
+	audio_wait 24
 	note C_4
-	audio_wait_24
+	audio_wait 24
 	note B_3
-	audio_wait_24
+	audio_wait 24
 	note A_3
-	audio_wait_24
+	audio_wait 24
 	note G_3
-	audio_wait_24
+	audio_wait 24
 	note A_3
-	audio_wait_24
+	audio_wait 24
 	note G_3
-	audio_wait_24
+	audio_wait 24
 	note A_3
-	audio_wait_24
+	audio_wait 24
 	note G_3
-	audio_wait_24
+	audio_wait 24
 	note F_3
-	audio_wait_24
+	audio_wait 24
 	note E_3
-	audio_wait_24
+	audio_wait 24
 	audio_call .sub2
 	audio_call .sub3
 	note NOTE_DURATION_8, C_2, 14
-	audio_wait_24
+	audio_wait 24
 	note B_1
-	audio_wait_24
+	audio_wait 24
 	note A_1
-	audio_wait_24
+	audio_wait 24
 	note G_1
-	audio_wait_24
+	audio_wait 24
 	note A_1
-	audio_wait_24
+	audio_wait 24
 	note G_1
-	audio_wait_24
+	audio_wait 24
 	note A_1
-	audio_wait_24
+	audio_wait 24
 	note G_1
-	audio_wait_24
+	audio_wait 24
 	audio_jump .loop
 .end
 	audio_end

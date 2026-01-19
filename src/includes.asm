@@ -2,10 +2,10 @@ INCLUDE "constants/hardware.inc"
 
 INCLUDE "charmaps.asm"
 
+INCLUDE "macros/constants.asm"
 INCLUDE "macros/asserts.asm"
 INCLUDE "macros/audio.asm"
 INCLUDE "macros/audio_commands.asm"
-INCLUDE "macros/constants.asm"
 INCLUDE "macros/code.asm"
 INCLUDE "macros/coords.asm"
 INCLUDE "macros/data.asm"

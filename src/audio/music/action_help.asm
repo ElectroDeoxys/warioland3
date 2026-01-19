@@ -6,109 +6,109 @@ Music_ActionHelp_Ch1:
 	wave WAVE_52
 	volume 66
 	note NOTE_DURATION_3, C#1, 19
-	audio_wait_12
+	audio_wait 12
 	note F_2
-	audio_wait_12
+	audio_wait 12
 	note G#0
-	audio_wait_12
+	audio_wait 12
 	note F_2
-	audio_wait_12
+	audio_wait 12
 	note C#1
-	audio_wait_12
+	audio_wait 12
 	note F_2
-	audio_wait_12
+	audio_wait 12
 	note G#0
-	audio_wait_12
+	audio_wait 12
 	note F_2
-	audio_wait_12
+	audio_wait 12
 .sub1
 	note NOTE_DURATION_3, D_1, 19
-	audio_wait_12
+	audio_wait 12
 	note F#2
-	audio_wait_12
+	audio_wait 12
 	note A_0
-	audio_wait_12
+	audio_wait 12
 	note F#2
-	audio_wait_12
+	audio_wait 12
 	note D_1
-	audio_wait_12
+	audio_wait 12
 	note F#2
-	audio_wait_12
+	audio_wait 12
 	note A_0
-	audio_wait_12
+	audio_wait 12
 	note F#2
-	audio_wait_12
+	audio_wait 12
 	audio_ret
 
 	note C#1
-	audio_wait_12
+	audio_wait 12
 	note F_2
-	audio_wait_12
+	audio_wait 12
 	note G#0
-	audio_wait_12
+	audio_wait 12
 	note F_2
-	audio_wait_12
+	audio_wait 12
 	note C#1
-	audio_wait_12
+	audio_wait 12
 	note F_2
-	audio_wait_12
+	audio_wait 12
 	note G#0
-	audio_wait_12
+	audio_wait 12
 	note F_2
-	audio_wait_12
+	audio_wait 12
 	audio_call .sub1
 .sub2
 	note NOTE_DURATION_3, D#1, 19
-	audio_wait_12
+	audio_wait 12
 	note G_2
-	audio_wait_12
+	audio_wait 12
 	note A#0
-	audio_wait_12
+	audio_wait 12
 	note G_2
-	audio_wait_12
+	audio_wait 12
 	note D#1
-	audio_wait_12
+	audio_wait 12
 	note G_2
-	audio_wait_12
+	audio_wait 12
 	note A#0
-	audio_wait_12
+	audio_wait 12
 	note G_2
-	audio_wait_12
+	audio_wait 12
 	audio_ret
 
 	note E_1
-	audio_wait_12
+	audio_wait 12
 	note G#2
-	audio_wait_12
+	audio_wait 12
 	note B_0
-	audio_wait_12
+	audio_wait 12
 	note G#2
-	audio_wait_12
+	audio_wait 12
 	note E_1
-	audio_wait_12
+	audio_wait 12
 	note G#2
-	audio_wait_12
+	audio_wait 12
 	note B_0
-	audio_wait_12
+	audio_wait 12
 	note G#2
-	audio_wait_12
+	audio_wait 12
 	audio_call .sub2
 	note NOTE_DURATION_3, E_1, 19
-	audio_wait_12
+	audio_wait 12
 	note G#2
-	audio_wait_12
+	audio_wait 12
 	note B_0
-	audio_wait_12
+	audio_wait 12
 	note G#2
-	audio_wait_12
+	audio_wait 12
 	note D#1
-	audio_wait_12
+	audio_wait 12
 	note G_2
-	audio_wait_12
+	audio_wait 12
 	note D_1
-	audio_wait_12
+	audio_wait 12
 	note F#2
-	audio_wait_12
+	audio_wait 12
 	audio_jump .loop
 .end
 	audio_end
@@ -119,68 +119,68 @@ Music_ActionHelp_Ch2:
 .loop
 	wave WAVE_61
 	volume 75
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, C_2, 19
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 .sub1
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, C#2, 19
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	audio_ret
 
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, C_2
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	audio_call .sub1
 .sub2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, D_2, 19
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	audio_ret
 
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, D#2
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	audio_call .sub2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, D#2, 19
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3, D_2
-	audio_wait_24
+	audio_wait 24
 	note C#2
-	audio_wait_12
+	audio_wait 12
 	audio_jump .loop
 .end
 	audio_end

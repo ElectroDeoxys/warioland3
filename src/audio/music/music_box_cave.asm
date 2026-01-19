@@ -8,17 +8,17 @@ Music_MusicBoxCave_Ch1:
 	volume 47
 	pitch_offset 0
 	note NOTE_DURATION_2, B_5, 12
-	audio_wait_4
+	audio_wait 4
 	note A#5
-	audio_wait_4
+	audio_wait 4
 	note F#5
-	audio_wait_4
+	audio_wait 4
 	note D#5
-	audio_wait_4
+	audio_wait 4
 	note F#5
-	audio_wait_4
+	audio_wait 4
 	note A#5
-	audio_wait_4
+	audio_wait 4
 	audio_jump .loop
 .end
 	audio_end
@@ -32,17 +32,17 @@ Music_MusicBoxCave_Ch2:
 	volume 47
 	pitch_offset 0
 	note NOTE_DURATION_2, B_4, 12
-	audio_wait_4
+	audio_wait 4
 	note A#4
-	audio_wait_4
+	audio_wait 4
 	note F#4
-	audio_wait_4
+	audio_wait 4
 	note D#4
-	audio_wait_4
+	audio_wait 4
 	note F#4
-	audio_wait_4
+	audio_wait 4
 	note A#4
-	audio_wait_4
+	audio_wait 4
 	audio_jump .loop
 .end
 	audio_end
@@ -56,11 +56,11 @@ Music_MusicBoxCave_Ch3:
 	volume 56
 	pitch_offset 0
 	note NOTE_DURATION_3, B_5, 14
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_3
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_3
-	audio_wait_8
+	audio_wait 8
 	audio_jump .loop
 .end
 	audio_end

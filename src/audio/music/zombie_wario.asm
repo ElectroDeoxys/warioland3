@@ -3,53 +3,53 @@ Music_ZombieWario_Ch1:
 	tempo 50
 	wave WAVE_60
 	volume 75
-	audio_wait_8
+	audio_wait 8
 
 .loop
-	audio_wait_96
-	audio_wait_88
+	audio_wait 96
+	audio_wait 88
 	note NOTE_DURATION_8, D#3, 19
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_4, D_3
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_4, C_3
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_4, B_2
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_4, G#2
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_4, G_2
-	audio_wait_96
-	audio_wait_96
-	audio_wait_88
+	audio_wait 96
+	audio_wait 96
+	audio_wait 88
 	note NOTE_DURATION_8, D#3
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_4, D_3
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_4, C_3
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_4, B_2
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_4, C_3
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_4, B_2
-	audio_wait_96
+	audio_wait 96
 	audio_jump .loop
 .end
 	audio_end
@@ -59,95 +59,95 @@ Music_ZombieWario_Ch2:
 	wave WAVE_52
 	volume 75
 	note NOTE_DURATION_4, G_0, 19
-	audio_wait_4
+	audio_wait 4
 	note B_0
-	audio_wait_4
+	audio_wait 4
 
 .loop
 .sub1
 	note NOTE_DURATION_4, C_1, 19
-	audio_wait_40
+	audio_wait 40
 	note G_0
-	audio_wait_4
+	audio_wait 4
 	note B_0
-	audio_wait_4
+	audio_wait 4
 	note C_1
-	audio_wait_40
+	audio_wait 40
 	note G_0
-	audio_wait_4
+	audio_wait 4
 	note B_0
-	audio_wait_4
+	audio_wait 4
 	audio_ret
 
 	note C_1
-	audio_wait_24
+	audio_wait 24
 	note C_0
-	audio_wait_64
+	audio_wait 64
 	wave WAVE_1A
 	note NOTE_DURATION_8, G_3
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_4, F#3
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_4, D#3
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_4, D_3
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_4, C_3
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_4, B_2
-	audio_wait_21
+	audio_wait 21
 	note NOTE_DURATION_3, F#3
-	audio_wait_3
+	audio_wait 3
 	note NOTE_DURATION_4, G_3
-	audio_wait_64
+	audio_wait 64
 	wave WAVE_52
 	note NOTE_DURATION_4, G_0
-	audio_wait_4
+	audio_wait 4
 	note B_0
-	audio_wait_4
+	audio_wait 4
 	audio_call .sub1
 	note NOTE_DURATION_4, C_1, 19
-	audio_wait_24
+	audio_wait 24
 	note C_0
-	audio_wait_64
+	audio_wait 64
 	wave WAVE_1A
 	note NOTE_DURATION_8, C_4
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_4, B_3
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_4, G#3
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_4, G_3
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_4, G#3
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_4, G_3
-	audio_wait_21
+	audio_wait 21
 	note NOTE_DURATION_3, F#4
-	audio_wait_3
+	audio_wait 3
 	note NOTE_DURATION_4, G_4
-	audio_wait_64
+	audio_wait 64
 	wave WAVE_52
 	note NOTE_DURATION_4, G_0
-	audio_wait_4
+	audio_wait 4
 	note B_0
-	audio_wait_4
+	audio_wait 4
 	audio_jump .loop
 .end
 	audio_end

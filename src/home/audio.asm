@@ -81,12 +81,12 @@ ExecuteAudioMod::
 
 ; unreferenced
 ; input:
-; - a = ?
-Func_103e:
+; - a = fade out period (the higher the value, the slower the fade out)
+UnreferencedMusicFadeOut:
 	ldh [hffac], a
 	push_wram BANK("Audio RAM")
 	ldh a, [hffac]
-	call Func_3f3c
+	call AudioFunc_MusicFadeOut
 	pop_wram
 	ret
 

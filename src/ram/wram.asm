@@ -2282,9 +2282,10 @@ wWRAM2End::
 
 SECTION "Audio RAM", WRAMX
 
-; bit 5: ???
+; bit 5: whether is handling SFX (set) or music (unset)
 ; bit 6: whether to invoke audio callback function
-; bit 7: ???
+; bit 7: whether has a backup bank (wAudioBankBackup) to
+;        jump to after audio call
 wAudioEngineFlags::
 	db
 
@@ -2344,7 +2345,7 @@ w3d01a::
 	db
 
 wLoadedMusic::
-	ds $2
+	dw
 
 wCurWaveSample::
 	db
@@ -2355,13 +2356,13 @@ wVibratoValue::
 wAudioCmdArg::
 	db
 
-w3d020::
+wMusicFadeOutPeriod::
 	db
 
-w3d021::
+wMusicFadeOutTimer::
 	db
 
-w3d022::
+wMusicFadeOutVolumeMult::
 	db
 
 	ds $1

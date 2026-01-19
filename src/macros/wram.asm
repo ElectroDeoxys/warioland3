@@ -139,8 +139,8 @@ MACRO channel_struct
 \1Unk13::            dw
 \1Volume::           db
 \1Unk16::            db
-\1SO1::              db
-\1SO2::              db
+\1SinglePan::        db
+\1GlobalPan::        db
 \1Unk19::            db
 \1Unk1a::            db
 \1Unk1b::            dw

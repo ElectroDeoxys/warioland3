@@ -38,9 +38,9 @@ AudioFunc_ExecuteAudioMod:
 	call PrepareAudioJump_NoCallback
 	jp _ExecuteAudioMod
 
-Func_3f3c:
+AudioFunc_MusicFadeOut:
 	call PrepareAudioJump_NoCallback
-	jp Func_30519
+	jp _SetMusicFadeOut
 
 AudioFunc_GetPlayingSoundID:
 	call PrepareAudioJump_NoCallback

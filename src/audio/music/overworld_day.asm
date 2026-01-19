@@ -6,227 +6,227 @@ Music_OverworldDay_Ch1:
 	wave WAVE_55
 	volume 85
 	note NOTE_DURATION_3, C_3, 22
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, B_2
-	audio_wait_24
+	audio_wait 24
 	note G_2
-	audio_wait_24
+	audio_wait 24
 	note A_2
-	audio_wait_12
-	audio_wait_96
+	audio_wait 12
+	audio_wait 96
 .sub1
 	note NOTE_DURATION_3, D_3, 22
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, C_3
-	audio_wait_24
+	audio_wait 24
 	note A_2
-	audio_wait_24
+	audio_wait 24
 	note B_2
-	audio_wait_12
+	audio_wait 12
 	audio_ret
 
-	audio_wait_96
+	audio_wait 96
 .sub2
 	note NOTE_DURATION_3, E_3, 22
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, D_3
-	audio_wait_24
+	audio_wait 24
 	note B_2
-	audio_wait_24
+	audio_wait 24
 	note C_3
-	audio_wait_12
+	audio_wait 12
 	audio_ret
 
-	audio_wait_96
+	audio_wait 96
 	note F_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, E_3
-	audio_wait_24
+	audio_wait 24
 	note F_3
-	audio_wait_24
+	audio_wait 24
 	note D_3
-	audio_wait_12
-	audio_wait_60
+	audio_wait 12
+	audio_wait 60
 	note NOTE_DURATION_6, G_1
-	audio_wait_6
+	audio_wait 6
 	note G#1
-	audio_wait_6
+	audio_wait 6
 	note A_1
-	audio_wait_6
+	audio_wait 6
 	note G#1
-	audio_wait_6
+	audio_wait 6
 	note NOTE_DURATION_3, G_1
-	audio_wait_12
+	audio_wait 12
 	note C_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, B_2
-	audio_wait_24
+	audio_wait 24
 	note G_2
-	audio_wait_24
+	audio_wait 24
 	note A_2
-	audio_wait_12
-	audio_wait_96
+	audio_wait 12
+	audio_wait 96
 	audio_call .sub1
-	audio_wait_96
+	audio_wait 96
 	audio_call .sub2
-	audio_wait_96
+	audio_wait 96
 	note NOTE_DURATION_3, F_3, 22
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, E_3
-	audio_wait_12
+	audio_wait 12
 	note D_3
-	audio_wait_24
+	audio_wait 24
 	note B_2
-	audio_wait_24
+	audio_wait 24
 	note C_3
-	audio_wait_12
-	audio_wait_96
+	audio_wait 12
+	audio_wait 96
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, A#2
-	audio_wait_24
+	audio_wait 24
 	note G#2
-	audio_wait_24
+	audio_wait 24
 	note C_3
-	audio_wait_12
-	audio_wait_96
+	audio_wait 12
+	audio_wait 96
 	note E_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, C_3
-	audio_wait_24
+	audio_wait 24
 	note E_3
-	audio_wait_24
+	audio_wait 24
 	note D_3
-	audio_wait_12
-	audio_wait_96
+	audio_wait 12
+	audio_wait 96
 	note D#3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3, E_3
-	audio_wait_12
-	audio_wait_96
+	audio_wait 12
+	audio_wait 96
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, A_3
-	audio_wait_24
+	audio_wait 24
 	note E_3
-	audio_wait_24
+	audio_wait 24
 	note D_3
-	audio_wait_12
-	audio_wait_96
+	audio_wait 12
+	audio_wait 96
 	note C_4
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, B_3
-	audio_wait_24
+	audio_wait 24
 	note G_3
-	audio_wait_24
+	audio_wait 24
 	note A_3
-	audio_wait_12
-	audio_wait_96
+	audio_wait 12
+	audio_wait 96
 	note D_4
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, C_4
-	audio_wait_24
+	audio_wait 24
 	note A_3
-	audio_wait_24
+	audio_wait 24
 	note B_3
-	audio_wait_12
-	audio_wait_96
+	audio_wait 12
+	audio_wait 96
 	note E_4
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, D_4
-	audio_wait_24
+	audio_wait 24
 	note B_3
-	audio_wait_24
+	audio_wait 24
 	note C_4
-	audio_wait_12
-	audio_wait_96
+	audio_wait 12
+	audio_wait 96
 	note F_4
-	audio_wait_12
+	audio_wait 12
 	note E_4
-	audio_wait_12
+	audio_wait 12
 	note D_4
-	audio_wait_12
+	audio_wait 12
 	note C_4
-	audio_wait_24
+	audio_wait 24
 	note B_3
-	audio_wait_24
+	audio_wait 24
 	note C_4
-	audio_wait_12
-	audio_wait_12
+	audio_wait 12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_72
+	audio_wait 72
 	audio_jump .loop
 .end
 	wave WAVE_55
 	volume 85
 	note NOTE_DURATION_3, C_3, 22
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, B_2
-	audio_wait_24
+	audio_wait 24
 	note G_2
-	audio_wait_24
+	audio_wait 24
 	note A_2
-	audio_wait_3
+	audio_wait 3
 	audio_end
 
 Music_OverworldDay_Ch2:
@@ -236,209 +236,209 @@ Music_OverworldDay_Ch2:
 	wave WAVE_4B
 	volume 85
 	note NOTE_DURATION_3, E_2, 22
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3, F_2
-	audio_wait_12
-	audio_wait_96
+	audio_wait 12
+	audio_wait 96
 .sub1
 	note NOTE_DURATION_3, F#2, 22
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3, G_2
-	audio_wait_12
+	audio_wait 12
 	audio_ret
 
-	audio_wait_96
+	audio_wait 96
 .sub2
 	note NOTE_DURATION_3, G#2, 22
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3, A_2
-	audio_wait_12
+	audio_wait 12
 	audio_ret
 
-	audio_wait_96
+	audio_wait 96
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, G_2
-	audio_wait_24
+	audio_wait 24
 	note A_2
-	audio_wait_24
+	audio_wait 24
 	note F_2
-	audio_wait_12
-	audio_wait_96
+	audio_wait 12
+	audio_wait 96
 	note E_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3, F_2
-	audio_wait_12
-	audio_wait_96
+	audio_wait 12
+	audio_wait 96
 	audio_call .sub1
-	audio_wait_96
+	audio_wait 96
 	audio_call .sub2
-	audio_wait_96
+	audio_wait 96
 	note NOTE_DURATION_3, A_2, 22
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, G_2
-	audio_wait_12
+	audio_wait 12
 	note F_2
-	audio_wait_24
+	audio_wait 24
 	note D_2
-	audio_wait_24
+	audio_wait 24
 	note E_2
-	audio_wait_12
-	audio_wait_96
+	audio_wait 12
+	audio_wait 96
 	note G#2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, G_2
-	audio_wait_24
+	audio_wait 24
 	note F_2
-	audio_wait_24
+	audio_wait 24
 	note E_2
-	audio_wait_12
-	audio_wait_96
+	audio_wait 12
+	audio_wait 96
 .sub3
 	note NOTE_DURATION_3, F#2, 22
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3, F_2
-	audio_wait_12
+	audio_wait 12
 	audio_ret
 
-	audio_wait_96
+	audio_wait 96
 	note C_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, A#2
-	audio_wait_24
+	audio_wait 24
 	note G#2
-	audio_wait_24
+	audio_wait 24
 	note C_3
-	audio_wait_12
-	audio_wait_96
+	audio_wait 12
+	audio_wait 96
 	audio_call .sub3
-	audio_wait_96
+	audio_wait 96
 	note NOTE_DURATION_3, E_3, 22
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3, F_3
-	audio_wait_12
-	audio_wait_96
+	audio_wait 12
+	audio_wait 96
 	note F#3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3, F_3
-	audio_wait_12
-	audio_wait_96
+	audio_wait 12
+	audio_wait 96
 	note G#3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3, A_3
-	audio_wait_12
-	audio_wait_96
+	audio_wait 12
+	audio_wait 96
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, G_3
-	audio_wait_12
+	audio_wait 12
 	note F_3
-	audio_wait_12
+	audio_wait 12
 	note E_3
-	audio_wait_24
+	audio_wait 24
 	note D_3
-	audio_wait_24
+	audio_wait 24
 	note D#3
-	audio_wait_12
-	audio_wait_12
+	audio_wait 12
+	audio_wait 12
 	note F_3
-	audio_wait_12
+	audio_wait 12
 	note E_3
-	audio_wait_72
+	audio_wait 72
 	audio_jump .loop
 .end
 	wave WAVE_4B
 	volume 85
 	note NOTE_DURATION_3, E_2, 22
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3, F_2
-	audio_wait_3
+	audio_wait 3
 	audio_end
 
 Music_OverworldDay_Ch3:
@@ -448,136 +448,136 @@ Music_OverworldDay_Ch3:
 	wave WAVE_61
 	volume 108
 	note NOTE_DURATION_3, C_1, 22
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 .sub1
 	note NOTE_DURATION_3, F_1, 22
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	audio_ret
 
 .sub2
 	note NOTE_DURATION_3, D_1, 22
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	audio_ret
 
 .sub3
 	note NOTE_DURATION_3, G_1, 22
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	audio_ret
 
 .sub4
 	note NOTE_DURATION_3, E_1, 22
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	audio_ret
 
 .sub5
 	note NOTE_DURATION_3, A_1, 22
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	audio_ret
 
 	audio_call .sub2
 	note NOTE_DURATION_3, G_1, 22
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_6, G_0
-	audio_wait_6
+	audio_wait 6
 	note G#0
-	audio_wait_6
+	audio_wait 6
 	note A_0
-	audio_wait_6
+	audio_wait 6
 	note G#0
-	audio_wait_6
+	audio_wait 6
 	note NOTE_DURATION_3, G_0
-	audio_wait_12
+	audio_wait 12
 	note C_1
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3, F_1
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3, C_1
-	audio_wait_12
+	audio_wait 12
 	note F_1
-	audio_wait_12
+	audio_wait 12
 	note E_1
-	audio_wait_12
+	audio_wait 12
 	audio_call .sub2
 .sub6
 	note NOTE_DURATION_3, G_1, 22
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3, D_1
-	audio_wait_12
+	audio_wait 12
 	note G_1
-	audio_wait_12
+	audio_wait 12
 	note F_1
-	audio_wait_12
+	audio_wait 12
 	audio_ret
 
 	audio_call .sub4
 	audio_call .sub5
 	note NOTE_DURATION_3, D_1, 22
-	audio_wait_36
+	audio_wait 36
 	note G_1
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3, C_2
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, A#1
-	audio_wait_12
+	audio_wait 12
 .sub7
 	note NOTE_DURATION_3, G#1, 22
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	audio_ret
 
 	audio_call .sub3
 .sub8
 	note NOTE_DURATION_3, F#1, 22
-	audio_wait_36
+	audio_wait 36
 	note D_1
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	audio_ret
 
 	audio_call .sub3
@@ -585,56 +585,56 @@ Music_OverworldDay_Ch3:
 	audio_call .sub3
 	audio_call .sub8
 	note NOTE_DURATION_3, G_1, 22
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, A_1
-	audio_wait_12
+	audio_wait 12
 	note B_1
-	audio_wait_12
+	audio_wait 12
 	note C_2
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	audio_call .sub1
 	audio_call .sub2
 	audio_call .sub6
 	audio_call .sub4
 	note NOTE_DURATION_3, A_1, 22
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3, D_1
-	audio_wait_36
+	audio_wait 36
 	note G_1
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_3, G#1
-	audio_wait_12
-	audio_wait_12
+	audio_wait 12
+	audio_wait 12
 	note A#1
-	audio_wait_12
+	audio_wait 12
 	note C_2
-	audio_wait_72
+	audio_wait 72
 	audio_jump .loop
 .end
 	wave WAVE_61
 	volume 108
 	note NOTE_DURATION_3, C_1, 22
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_36
+	audio_wait 36
 	note NOTE_DURATION_3
-	audio_wait_3
+	audio_wait 3
 	audio_end
 
 Music_OverworldDay_Ch4:
@@ -644,38 +644,38 @@ Music_OverworldDay_Ch4:
 	wave WAVE_28
 	volume 85
 	note NOTE_DURATION_3, F#0, 22
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, G#0
-	audio_wait_12
+	audio_wait 12
 	note F#0
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, G#0
-	audio_wait_12
+	audio_wait 12
 	note F#0
-	audio_wait_12
+	audio_wait 12
 .sub1
 	note NOTE_DURATION_3, F#0, 22
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, G#0
-	audio_wait_12
+	audio_wait 12
 	note F#0
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, G#0
-	audio_wait_12
+	audio_wait 12
 	note F#0
-	audio_wait_12
+	audio_wait 12
 	audio_ret
 
 	audio_call .sub1
@@ -713,21 +713,21 @@ Music_OverworldDay_Ch4:
 	wave WAVE_28
 	volume 85
 	note NOTE_DURATION_3, F#0, 22
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, G#0
-	audio_wait_12
+	audio_wait 12
 	note F#0
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_3, G#0
-	audio_wait_12
+	audio_wait 12
 	note F#0
-	audio_wait_3
+	audio_wait 3
 	audio_end
 
 Music_OverworldDay:

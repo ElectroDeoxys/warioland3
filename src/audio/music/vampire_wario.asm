@@ -7,114 +7,114 @@ Music_VampireWario_Ch1:
 	vibrato_amplitude 10
 	vibrato_disabled FALSE
 	volume 85
-	audio_wait_96
+	audio_wait 96
 
 .loop
 .sub1
-	audio_wait_72
+	audio_wait 72
 	note NOTE_DURATION_8, G_0, 23
-	audio_wait_8
+	audio_wait 8
 	note A_0
-	audio_wait_8
+	audio_wait 8
 	note B_0
-	audio_wait_8
+	audio_wait 8
 	audio_ret
 
 	note NOTE_DURATION_4, C_1
-	audio_wait_48
+	audio_wait 48
 	note D#1
-	audio_wait_48
+	audio_wait 48
 	note D_1
-	audio_wait_48
+	audio_wait 48
 	note F#1
-	audio_wait_48
+	audio_wait 48
 	note F_1
-	audio_wait_48
+	audio_wait 48
 	note NOTE_DURATION_24, D#1
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_16, B_0
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_4, C_1
-	audio_wait_8
-	audio_wait_72
+	audio_wait 8
+	audio_wait 72
 	note NOTE_DURATION_8, G_1
-	audio_wait_8
+	audio_wait 8
 	note A_1
-	audio_wait_8
+	audio_wait 8
 	note B_1
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_4, C_2
-	audio_wait_48
+	audio_wait 48
 	note D#2
-	audio_wait_48
+	audio_wait 48
 	note D_2
-	audio_wait_48
+	audio_wait 48
 	note F#2
-	audio_wait_48
+	audio_wait 48
 	note F_2
-	audio_wait_48
+	audio_wait 48
 	note NOTE_DURATION_16, D#2
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8, B_1
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_16, D_2
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8, C_2
-	audio_wait_8
-	audio_wait_96
+	audio_wait 8
+	audio_wait 96
 	note NOTE_DURATION_16
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_16
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_4, B_1
-	audio_wait_56
+	audio_wait 56
 	note NOTE_DURATION_16, D#2
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_16
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_4, D_2
-	audio_wait_56
+	audio_wait 56
 	note G#2
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_4
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_4, F#2
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_16
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_4, G_2
-	audio_wait_8
+	audio_wait 8
 	audio_call .sub1
 	note NOTE_DURATION_4, C_1, 23
-	audio_wait_48
+	audio_wait 48
 	note NOTE_DURATION_16, G_1
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8, D#1
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_16, C_1
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8, C#1
-	audio_wait_8
-	audio_wait_48
+	audio_wait 8
+	audio_wait 48
 	note NOTE_DURATION_16, G#1
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8, F_1
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_16, C#1
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8, C_1
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_4, B_0
-	audio_wait_48
+	audio_wait 48
 	note NOTE_DURATION_16, G_0
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8, A_0
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_16, B_0
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_8, C_1
-	audio_wait_8
-	audio_wait_96
+	audio_wait 8
+	audio_wait 96
 	audio_jump .loop
 .end
 	audio_call .sub1
@@ -128,56 +128,56 @@ Music_VampireWario_Ch2:
 	vibrato_amplitude 10
 	vibrato_disabled FALSE
 	volume 85
-	audio_wait_96
+	audio_wait 96
 
 .loop
-	audio_wait_96
-	audio_wait_96
-	audio_wait_96
-	audio_wait_96
-	audio_wait_96
-	audio_wait_96
-	audio_wait_96
-	audio_wait_96
-	audio_wait_96
+	audio_wait 96
+	audio_wait 96
+	audio_wait 96
+	audio_wait 96
+	audio_wait 96
+	audio_wait 96
+	audio_wait 96
+	audio_wait 96
+	audio_wait 96
 .sub1
 	note NOTE_DURATION_16, G#1, 23
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_16
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_4, G_1
-	audio_wait_56
+	audio_wait 56
 	audio_ret
 
 	audio_call .sub1
 	note NOTE_DURATION_4, G#1, 23
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_4
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_4
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_16
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_4, G_1
-	audio_wait_8
-	audio_wait_96
-	audio_wait_96
-	audio_wait_96
-	audio_wait_96
-	audio_wait_96
+	audio_wait 8
+	audio_wait 96
+	audio_wait 96
+	audio_wait 96
+	audio_wait 96
+	audio_wait 96
 	audio_jump .loop
 .end
-	audio_wait_96
-	audio_wait_96
-	audio_wait_96
-	audio_wait_96
-	audio_wait_96
-	audio_wait_96
-	audio_wait_96
-	audio_wait_96
-	audio_wait_96
+	audio_wait 96
+	audio_wait 96
+	audio_wait 96
+	audio_wait 96
+	audio_wait 96
+	audio_wait 96
+	audio_wait 96
+	audio_wait 96
+	audio_wait 96
 	note NOTE_DURATION_16, G#1, 23
-	audio_wait_16
+	audio_wait 16
 	audio_end
 
 Music_VampireWario_Ch3:
@@ -185,32 +185,32 @@ Music_VampireWario_Ch3:
 	wave WAVE_28
 	volume 85
 	note NOTE_DURATION_5, C#0, 22
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_2, E_0
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_2, E_0
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_5, C#0
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_2, E_0
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_2, E_0
-	audio_wait_8
+	audio_wait 8
 
 .loop
 .sub1
 	note NOTE_DURATION_5, C#0, 22
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_2, E_0
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_2, E_0
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_5, C#0
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_2, E_0
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_2, E_0
-	audio_wait_8
+	audio_wait 8
 	audio_ret
 
 	audio_call .sub1
@@ -232,17 +232,17 @@ Music_VampireWario_Ch3:
 	audio_jump .loop
 .end
 	note NOTE_DURATION_5, C#0, 22
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_2, E_0
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_2, E_0
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_5, C#0
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_2, E_0
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_2, E_0
-	audio_wait_1
+	audio_wait 1
 	audio_end
 
 Music_VampireWario:

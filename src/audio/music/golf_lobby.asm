@@ -8,27 +8,27 @@ Music_GolfLobby_Ch1:
 	vibrato_disabled FALSE
 	volume 75
 	note NOTE_DURATION_2, G_3, 19
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_4
+	audio_wait 4
 	note NOTE_DURATION_2, A_3
-	audio_wait_12
+	audio_wait 12
 	note A#3
-	audio_wait_12
+	audio_wait 12
 	note B_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_12, G_4
-	audio_wait_24
+	audio_wait 24
 .sub1
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2, E_2, 19
-	audio_wait_20
+	audio_wait 20
 	note NOTE_DURATION_12, D#2
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_2, E_2
-	audio_wait_48
+	audio_wait 48
 	audio_ret
 
 	audio_call .sub1
@@ -36,73 +36,73 @@ Music_GolfLobby_Ch1:
 .loop
 .sub2
 	note NOTE_DURATION_2, E_2, 19
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_8, F_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2, F#2
-	audio_wait_8
+	audio_wait 8
 	note G_2
-	audio_wait_52
+	audio_wait 52
 	audio_ret
 
 	note A_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_8, B_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2, A_2
-	audio_wait_8
+	audio_wait 8
 	note G_2
-	audio_wait_52
+	audio_wait 52
 	note F_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_8, G_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2, F_2
-	audio_wait_8
+	audio_wait 8
 	note E_2
-	audio_wait_52
+	audio_wait 52
 	note D_2
-	audio_wait_12
+	audio_wait 12
 	note C_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_8, B_1
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2, C_2
-	audio_wait_8
+	audio_wait 8
 	note D_2
-	audio_wait_52
+	audio_wait 52
 	audio_call .sub2
 	note NOTE_DURATION_2, A_2, 19
-	audio_wait_12
+	audio_wait 12
 	note B_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_8, C_3
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2, D_3
-	audio_wait_8
+	audio_wait 8
 	note E_3
-	audio_wait_52
+	audio_wait 52
 	note NOTE_DURATION_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2, C_3
-	audio_wait_12
+	audio_wait 12
 	note A_2
-	audio_wait_12
+	audio_wait 12
 	note E_2
-	audio_wait_12
+	audio_wait 12
 	note D_2
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_8
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_2, C_2
-	audio_wait_4
-	audio_wait_96
+	audio_wait 4
+	audio_wait 96
 	audio_jump .loop
 .end
 	audio_end
@@ -116,27 +116,27 @@ Music_GolfLobby_Ch2:
 	vibrato_disabled FALSE
 	volume 75
 	note NOTE_DURATION_2, B_2, 19
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_4
+	audio_wait 4
 	note NOTE_DURATION_2, C_3
-	audio_wait_12
+	audio_wait 12
 	note C#3
-	audio_wait_12
+	audio_wait 12
 	note D_3
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_12, D#4
-	audio_wait_24
+	audio_wait 24
 .sub1
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2, G_1, 19
-	audio_wait_20
+	audio_wait 20
 	note NOTE_DURATION_12, F#1
-	audio_wait_16
+	audio_wait 16
 	note NOTE_DURATION_2, G_1
-	audio_wait_48
+	audio_wait 48
 	audio_ret
 
 	audio_call .sub1
@@ -144,73 +144,73 @@ Music_GolfLobby_Ch2:
 .loop
 .sub2
 	note NOTE_DURATION_2, C_2, 19
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_8
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_2
-	audio_wait_52
+	audio_wait 52
 	audio_ret
 
 	note NOTE_DURATION_2, F_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_8
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_2, E_2
-	audio_wait_52
+	audio_wait 52
 	note C_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_8, B_1
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_2, C_2
-	audio_wait_52
+	audio_wait 52
 	note A_1
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_8
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_2, B_1
-	audio_wait_52
+	audio_wait 52
 	audio_call .sub2
 	note NOTE_DURATION_2, F_2, 19
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_8
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_2, G#2
-	audio_wait_52
+	audio_wait 52
 	note C_3
-	audio_wait_12
+	audio_wait 12
 	note A_2
-	audio_wait_12
+	audio_wait 12
 	note E_2
-	audio_wait_12
+	audio_wait 12
 	note C_2
-	audio_wait_12
+	audio_wait 12
 	note A_1
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_8, F_1
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_2, E_1
-	audio_wait_4
-	audio_wait_96
+	audio_wait 4
+	audio_wait 96
 	audio_jump .loop
 .end
 	audio_end
@@ -224,30 +224,30 @@ Music_GolfLobby_Ch3:
 	vibrato_amplitude 10
 	vibrato_disabled FALSE
 	note NOTE_DURATION_2, G_1, 24
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_4
+	audio_wait 4
 	note NOTE_DURATION_2, F_1
-	audio_wait_12
+	audio_wait 12
 	note F#1
-	audio_wait_12
+	audio_wait 12
 	note G_1
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_12, B_3
-	audio_wait_24
+	audio_wait 24
 .sub1
 	note NOTE_DURATION_2, C_1, 24
-	audio_wait_72
+	audio_wait 72
 	note G_0
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_8
-	audio_wait_4
+	audio_wait 4
 	note NOTE_DURATION_8, A#0
-	audio_wait_8
+	audio_wait 8
 	note B_0
-	audio_wait_4
+	audio_wait 4
 	audio_ret
 
 	audio_call .sub1
@@ -255,88 +255,88 @@ Music_GolfLobby_Ch3:
 .loop
 .sub2
 	note NOTE_DURATION_2, C_1, 24
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_8, D_1
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2, D#1
-	audio_wait_8
+	audio_wait 8
 	note E_1
-	audio_wait_52
+	audio_wait 52
 	audio_ret
 
 	note F_1
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_8, G_1
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2, F_1
-	audio_wait_8
+	audio_wait 8
 	note E_1
-	audio_wait_52
+	audio_wait 52
 	note D_1
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_8, G_1
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_2, C_1
-	audio_wait_52
+	audio_wait 52
 	note D_0
-	audio_wait_12
+	audio_wait 12
 	note E_0
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_8, F#0
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2, D_0
-	audio_wait_8
+	audio_wait 8
 	note G_0
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_8, G#0
-	audio_wait_4
+	audio_wait 4
 	note A_0
-	audio_wait_8
+	audio_wait 8
 	note G#0
-	audio_wait_4
+	audio_wait 4
 	note NOTE_DURATION_2, G_0
-	audio_wait_12
+	audio_wait 12
 	audio_call .sub2
 	note NOTE_DURATION_2, F_1, 24
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_8
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_2, E_1
-	audio_wait_52
+	audio_wait 52
 	note A_1
-	audio_wait_48
+	audio_wait 48
 	note D_1
-	audio_wait_24
+	audio_wait 24
 	note NOTE_DURATION_8, G_0
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_2, C_1
-	audio_wait_4
-	audio_wait_72
+	audio_wait 4
+	audio_wait 72
 	note G_0
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_8
-	audio_wait_4
+	audio_wait 4
 	note NOTE_DURATION_8, A_0
-	audio_wait_8
+	audio_wait 8
 	note B_0
-	audio_wait_4
+	audio_wait 4
 	audio_jump .loop
 .end
-	audio_wait_4
+	audio_wait 4
 	audio_end
 
 Music_GolfLobby_Ch4:
@@ -344,54 +344,54 @@ Music_GolfLobby_Ch4:
 	wave WAVE_28
 	volume 75
 	note NOTE_DURATION_2, F#0, 19
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_2
-	audio_wait_4
+	audio_wait 4
 	note NOTE_DURATION_5, G#0
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2, F#0
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_2
-	audio_wait_4
+	audio_wait 4
 	note NOTE_DURATION_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_2
-	audio_wait_4
+	audio_wait 4
 	note NOTE_DURATION_5, G#0
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2, F#0
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_2
-	audio_wait_4
+	audio_wait 4
 .sub1
 	note NOTE_DURATION_2, F#0, 19
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_2
-	audio_wait_4
+	audio_wait 4
 	note NOTE_DURATION_5, G#0
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2, F#0
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_2
-	audio_wait_4
+	audio_wait 4
 	note NOTE_DURATION_2
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_2
-	audio_wait_4
+	audio_wait 4
 	note NOTE_DURATION_5, G#0
-	audio_wait_12
+	audio_wait 12
 	note NOTE_DURATION_2, F#0
-	audio_wait_8
+	audio_wait 8
 	note NOTE_DURATION_2
-	audio_wait_4
+	audio_wait 4
 	audio_ret
 
 	audio_call .sub1

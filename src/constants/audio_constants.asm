@@ -26,11 +26,11 @@ DEF MUSIC_CHANNELS EQU CHAN5 | CHAN6 | CHAN7 | CHAN8
 
 ; wAudioEngineFlags constants
 	const_def 5
-	const AUDIOENG_UNK5_F            ; 5
+	const AUDIOENG_HANDLING_SFX_F    ; 5
 	const AUDIOENG_HAS_CALLBACK_F    ; 6
 	const AUDIOENG_HAS_BACKUP_BANK_F ; 7
 
-DEF AUDIOENG_UNK5            EQU (1 << AUDIOENG_UNK5_F)
+DEF AUDIOENG_HANDLING_SFX    EQU (1 << AUDIOENG_HANDLING_SFX_F)
 DEF AUDIOENG_HAS_CALLBACK    EQU (1 << AUDIOENG_HAS_CALLBACK_F)
 DEF AUDIOENG_HAS_BACKUP_BANK EQU (1 << AUDIOENG_HAS_BACKUP_BANK_F)
 
@@ -56,8 +56,8 @@ DEF CHANNEL_SEMITONE_OFFSET   rb
 DEF CHANNEL_PITCH_OFFSET_MOD  rw
 DEF CHANNEL_VOLUME            rb
 DEF CHANNEL_VOLUME_MOD        rb
-DEF CHANNEL_SO1               rb
-DEF CHANNEL_SO2               rb
+DEF CHANNEL_SINGLE_PAN        rb
+DEF CHANNEL_GLOBAL_PAN        rb
 DEF CHANNEL_PITCH_OFFSET      rb ; signed integer
 DEF CHANNEL_PITCH_OFFSET_MULT rb ; multiplier for pitch offset
 DEF CHANNEL_PITCH_PRODUCT     rw ; result from pitch offset product
@@ -159,12 +159,9 @@ DEF TRACKFLAGS_6      EQU (1 << TRACKFLAGS_6_F)
 DEF TRACKFLAGS_7      EQU (1 << TRACKFLAGS_7_F)
 
 ; wVolume
-DEF VOLUME_SO1_F     EQU 3
-DEF VOLUME_SO2_F     EQU 7
-DEF VOLUME_SO1_LEVEL EQU %00000111
-DEF VOLUME_SO2_LEVEL EQU %01110000
-DEF MAX_VOLUME       EQU VOLUME_SO1_LEVEL | VOLUME_SO2_LEVEL
-
+DEF SO_RIGHT EQU AUDTERM_1_RIGHT | AUDTERM_2_RIGHT | AUDTERM_3_RIGHT | AUDTERM_4_RIGHT
+DEF SO_LEFT  EQU AUDTERM_1_LEFT  | AUDTERM_2_LEFT  | AUDTERM_3_LEFT  | AUDTERM_4_LEFT
+DEF MAX_VOLUME EQU AUDVOL_RIGHT | AUDVOL_LEFT
 
 ; duty cycle values for rect audio tracks
 DEF RECTWAVE_1_8 EQU %00
@@ -335,57 +332,6 @@ DEF SWEEP_TIME_7 EQU (%111 << 4) ; 54.7 ms
 	const WAVE_7A ; $7a
 DEF NUM_WAVES EQU const_value
 
-	const_def $cf
-	const NOTE_DURATION_0  ; $cf
-	const NOTE_DURATION_1  ; $d0
-	const NOTE_DURATION_2  ; $d1
-	const NOTE_DURATION_3  ; $d2
-	const NOTE_DURATION_4  ; $d3
-	const NOTE_DURATION_5  ; $d4
-	const NOTE_DURATION_6  ; $d5
-	const NOTE_DURATION_7  ; $d6
-	const NOTE_DURATION_8  ; $d7
-	const NOTE_DURATION_9  ; $d8
-	const NOTE_DURATION_10 ; $d9
-	const NOTE_DURATION_11 ; $da
-	const NOTE_DURATION_12 ; $db
-	const NOTE_DURATION_13 ; $dc
-	const NOTE_DURATION_14 ; $dd
-	const NOTE_DURATION_15 ; $de
-	const NOTE_DURATION_16 ; $df
-	const NOTE_DURATION_17 ; $e0
-	const NOTE_DURATION_18 ; $e1
-	const NOTE_DURATION_19 ; $e2
-	const NOTE_DURATION_20 ; $e3
-	const NOTE_DURATION_21 ; $e4
-	const NOTE_DURATION_22 ; $e5
-	const NOTE_DURATION_23 ; $e6
-	const NOTE_DURATION_24 ; $e7
-	const NOTE_DURATION_28 ; $e8
-	const NOTE_DURATION_30 ; $e9
-	const NOTE_DURATION_32 ; $ea
-	const NOTE_DURATION_36 ; $eb
-	const NOTE_DURATION_40 ; $ec
-	const NOTE_DURATION_42 ; $ed
-	const NOTE_DURATION_44 ; $ee
-	const NOTE_DURATION_48 ; $ef
-	const NOTE_DURATION_52 ; $f0
-	const NOTE_DURATION_54 ; $f1
-	const NOTE_DURATION_56 ; $f2
-	const NOTE_DURATION_60 ; $f3
-	const NOTE_DURATION_64 ; $f4
-	const NOTE_DURATION_66 ; $f5
-	const NOTE_DURATION_68 ; $f6
-	const NOTE_DURATION_72 ; $f7
-	const NOTE_DURATION_76 ; $f8
-	const NOTE_DURATION_78 ; $f9
-	const NOTE_DURATION_80 ; $fa
-	const NOTE_DURATION_84 ; $fb
-	const NOTE_DURATION_88 ; $fc
-	const NOTE_DURATION_90 ; $fd
-	const NOTE_DURATION_92 ; $fe
-	const NOTE_DURATION_96 ; $ff
-
 	const_def $24
 	const C_0 ; $24
 	const C#0 ; $25
@@ -479,6 +425,34 @@ DEF NUM_WAVES EQU const_value
 	const F_7 ; $7d
 	const F#7 ; $7e
 	const G_7 ; $7f
+	const G#7 ; $80
+	const A_7 ; $81
+	const A#7 ; $82
+	const B_7 ; $83
+	const C_8 ; $84
+	const C#8 ; $85
+	const D_8 ; $86
+	const D#8 ; $87
+	const E_8 ; $88
+	const F_8 ; $89
+	const F#8 ; $8a
+	const G_8 ; $8b
+	const G#8 ; $8c
+	const A_8 ; $8d
+	const A#8 ; $8e
+	const B_8 ; $8f
+	const C_9 ; $90
+	const C#9 ; $91
+	const D_9 ; $92
+	const D#9 ; $93
+	const E_9 ; $94
+	const F_9 ; $95
+	const F#9 ; $96
+	const G_9 ; $97
+	const G#9 ; $98
+	const A_9 ; $99
+	const A#9 ; $9a
+	const B_9 ; $9b
 
 ; constants related to functions used to "dynamically" modify
 ; some properties in audio channels (check AudioModFunctionTable)
