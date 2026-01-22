@@ -1,7 +1,8 @@
 name: build-and-compare
+
 on:
   push:
-    branches: [master]
+    branches: [ master ]
   pull_request:
 
 jobs:
@@ -21,11 +22,14 @@ jobs:
       - name: Install rgbds
         working-directory: rgbds
         run: |
+          sudo apt-get update
           sudo apt-get install -yq libpng-dev
-          sudo make install
+          sudo make -j$(nproc) install
+
       - name: Remove rgbds
         run: |
           rm -rf rgbds
+
       - name: Compare
         run: |
           make DEBUG=1 -j$(nproc) compare
@@ -34,4 +38,3 @@ jobs:
             git diff-index HEAD --
             return 1
           fi
-
