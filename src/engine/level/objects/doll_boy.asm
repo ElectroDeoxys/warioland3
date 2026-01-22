@@ -863,8 +863,8 @@ DollBoyBarrelFunc:
 	xor a
 	ld [hl], a ; wCurObjVar3
 .fall
-	ld a, [wCurObjUnk07]
-	cp $41
+	ld a, [wCurObjId]
+	cp DOLL_BOY_BARREL1
 	jr nz, .no_delay_fall
 	ld a, [wDollBoyActiveBarrels]
 	cp DOLLBOY_BARREL1 | DOLLBOY_BARREL2
@@ -905,7 +905,7 @@ DollBoyBarrelFunc:
 	ld a, [wCurObjVar1]
 	cp $08
 	ret z
-	ld a, [wCurObjUnk07]
+	ld a, [wCurObjId]
 	and %11
 	ld e, a
 	ld a, [wGlobalCounter]
@@ -1015,8 +1015,8 @@ DollBoyBarrelFunc:
 	ld [hld], a
 	play_sfx SFX_017
 	ld hl, wDollBoyActiveBarrels
-	ld a, [wCurObjUnk07]
-	cp $41
+	ld a, [wCurObjId]
+	cp DOLL_BOY_BARREL1
 	jr nz, .asm_5118a
 	ld a, [hl]
 	and $ff ^ DOLLBOY_BARREL1
@@ -1047,7 +1047,7 @@ UpdateDollBoyRemainingParts:
 	ld a, [wCurObjSubState]
 	dec a
 	ret z ; exit if wCurObjSubState == $1
-	ld a, [wCurObjUnk07]
+	ld a, [wCurObjId]
 	and $0f
 	ld b, a
 	ld a, [wDollBoyRemainingParts]

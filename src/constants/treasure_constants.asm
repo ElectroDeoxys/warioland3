@@ -16,7 +16,7 @@
 	const HEAD_SMASH_HELMET_T          ; $0e
 	const LANTERN                      ; $0f
 	const MAGICAL_FLAME                ; $10
-	const TORCH                        ; $11
+	const TORCH_T                      ; $11
 	const GEAR_1                       ; $12
 	const GEAR_2                       ; $13
 	const WARP_COMPACT                 ; $14

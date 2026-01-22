@@ -1736,8 +1736,8 @@ HiddenFigureRightHandFunc:
 .Func_4d750:
 	ld a, no_actions_for 1
 	ld [wCurObjAction], a
-	ld a, [wCurObjUnk07]
-	cp $3d
+	ld a, [wCurObjId]
+	cp HIDDEN_FIGURE_RIGHT_HAND
 	jr z, .asm_4d780
 	ld hl, w1d152
 	ld a, [hli]

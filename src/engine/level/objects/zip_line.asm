@@ -1,7 +1,7 @@
 ZipLineFunc:
 	ld hl, wCurObjSubState
-	ld a, [wCurObjUnk07]
-	cp $27
+	ld a, [wCurObjId]
+	cp ZIP_LINE4
 	jr c, .asm_49338
 	ld a, $03
 	jr nz, .asm_4933a
@@ -161,8 +161,8 @@ ZipLineFunc:
 	and a
 	jr nz, .asm_4947b
 	call .Func_494cb
-	ld a, [wCurObjUnk07]
-	cp $24
+	ld a, [wCurObjId]
+	cp ZIP_LINE1
 	ret z
 	rra
 	jp nc, .asm_494f5
@@ -185,15 +185,15 @@ ZipLineFunc:
 	and a
 	jr nz, .asm_4947b
 	call .Func_494af
-	ld a, [wCurObjUnk07]
-	cp $24
+	ld a, [wCurObjId]
+	cp ZIP_LINE1
 	ret z
 	rra
 	jr nc, .asm_494e7
 	jr .asm_494f5
 .asm_4947b
-	ld a, [wCurObjUnk07]
-	cp $27
+	ld a, [wCurObjId]
+	cp ZIP_LINE4
 	jr nc, .asm_49499
 	ld hl, wCurObjSubState
 	bit OBJSUBFLAG_HDIR_F, [hl]
@@ -249,8 +249,8 @@ ZipLineFunc:
 	ret nz
 	call MoveWarioDown
 	call HandleDownwardsFloorTransition
-	ld a, [wCurObjUnk07]
-	cp $27
+	ld a, [wCurObjId]
+	cp ZIP_LINE4
 	ret c
 	ld a, [wGlobalCounter]
 	and %111
@@ -259,8 +259,8 @@ ZipLineFunc:
 	ret
 
 .asm_49518
-	ld a, [wCurObjUnk07]
-	cp $27
+	ld a, [wCurObjId]
+	cp ZIP_LINE4
 	ret nc
 	ld a, [wGlobalCounter]
 	and %11111

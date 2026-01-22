@@ -31,14 +31,14 @@ MuddeeStingerFunc:
 	ld b, LOW(wObj1)
 	ld h, HIGH(wObj1)
 .asm_4ca4c
-	ld l, OBJ_UNK_07
+	ld l, OBJ_ID
 	add l
 	ld l, a
-	ld a, [hl] ; OBJ_UNK_07
-	cp $5a
+	ld a, [hl] ; OBJ_ID
+	cp MUDDEE
 	jr nz, .asm_4ca5d
 	ld a, l
-	sub OBJ_UNK_07 - OBJ_FLAGS
+	sub OBJ_ID - OBJ_FLAGS
 	ld l, a
 	ld a, [hl] ; OBJ_FLAGS
 	rra
@@ -58,8 +58,8 @@ MuddeeStingerFunc:
 	ld a, l
 	sub $0c
 	ld l, a
-	ld a, [wCurObjUnk07]
-	cp $35
+	ld a, [wCurObjId]
+	cp MUDDEE_STINGER2
 	jr z, .asm_4ca7b
 	ld de, Data_4caed
 	jr .asm_4ca7e

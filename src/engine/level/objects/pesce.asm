@@ -639,14 +639,14 @@ PesceFunc:
 	ld b, a
 	ld h, HIGH(wObj1)
 .asm_521a9
-	ld l, OBJ_UNK_07
+	ld l, OBJ_ID
 	add l
 	ld l, a
-	ld a, [hl] ; OBJ_UNK_07
-	cp $4a
+	ld a, [hl] ; OBJ_ID
+	cp CHEESE
 	jr c, .asm_521ba
 	ld a, l
-	sub OBJ_UNK_07 - OBJ_FLAGS
+	sub OBJ_ID - OBJ_FLAGS
 	ld l, a
 	ld a, [hl]
 	rra
@@ -795,14 +795,14 @@ DragonflySpawnerFunc:
 	ld b, a
 	ld h, HIGH(wObj1)
 .asm_522af
-	ld l, OBJ_UNK_07
+	ld l, OBJ_ID
 	add l
 	ld l, a
-	ld a, [hl] ; OBJ_UNK_07
-	cp $48
+	ld a, [hl] ; OBJ_ID
+	cp DRAGONFLY1
 	jr nz, .asm_522bf
 	ld a, l
-	sub OBJ_UNK_07 - OBJ_FLAGS
+	sub OBJ_ID - OBJ_FLAGS
 	ld l, a
 	ld a, [hli] ; OBJ_FLAGS
 	rra
@@ -1101,14 +1101,14 @@ FlySpawnerFunc:
 	ld b, a
 	ld h, HIGH(wObj1)
 .loop_objs
-	ld l, OBJ_UNK_07
+	ld l, OBJ_ID
 	add l
 	ld l, a
-	ld a, [hl] ; OBJ_UNK_07
-	cp $49
+	ld a, [hl] ; OBJ_ID
+	cp FLY
 	jr nz, .next_obj
 	ld a, l
-	sub OBJ_UNK_07 - OBJ_FLAGS
+	sub OBJ_ID - OBJ_FLAGS
 	ld l, a
 	ld a, [hli] ; OBJ_FLAGS
 	rra
@@ -1266,14 +1266,14 @@ CheeseFunc:
 	ld b, LOW(wObj1)
 	ld h, HIGH(wObj1)
 .loop_objs
-	ld l, OBJ_UNK_07
+	ld l, OBJ_ID
 	add l
 	ld l, a
-	ld a, [hl] ; OBJ_UNK_07
-	cp $49
+	ld a, [hl] ; OBJ_ID
+	cp FLY
 	jr nz, .next_obj
 	ld a, l
-	sub OBJ_UNK_07 - OBJ_FLAGS
+	sub OBJ_ID - OBJ_FLAGS
 	ld l, a
 	ld a, [hli] ; OBJ_FLAGS
 	rra

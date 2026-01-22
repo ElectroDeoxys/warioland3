@@ -757,9 +757,9 @@ SkullFunc:
 	call .Func_553e8
 	ld a, no_actions_for 1
 	ld [wCurObjAction], a
-	ld a, [wCurObjUnk07]
+	ld a, [wCurObjId]
 	ld b, a
-	cp $52
+	cp SKULL3
 	ld a, [wCurObjScreenXPos]
 	jr nc, .asm_552f8
 	cp $10
@@ -884,12 +884,12 @@ SkullFunc:
 	xor a
 	ld [wCurObjFlags], a
 
-	ld a, [wCurObjUnk07]
-	cp $50
+	ld a, [wCurObjId]
+	cp SKULL1
 	jr z, .deactivate_skull_1
-	cp $51
+	cp SKULL2
 	jr z, .deactivate_skull_2
-	cp $52
+	cp SKULL3
 	jr z, .deactivate_skull_3
 ; deactivate skull 4
 	ld b, $ff ^ JAMANO_SKULL4
@@ -1015,11 +1015,11 @@ Func_55407:
 	ld b, a
 	ld h, HIGH(wObj1)
 .asm_55494
-	ld l, OBJ_UNK_07
+	ld l, OBJ_ID
 	add l
 	ld l, a
-	ld a, [hl] ; OBJ_UNK_07
-	cp $56
+	ld a, [hl] ; OBJ_ID
+	cp JAMANO
 	jr nz, .asm_554a5
 	ld a, l
 	sub $07

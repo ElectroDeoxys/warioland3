@@ -208,7 +208,7 @@ ENDR
 	pop de
 
 	ld a, [hli]
-	ld [de], a ; OBJ_UNK_07
+	ld [de], a ; OBJ_ID
 	inc e
 	ld a, [hli]
 	ld [de], a ; OBJ_INTERACTION_TYPE
@@ -380,7 +380,7 @@ CreateObject_GotPos:
 	ld l, c
 	ld h, b
 	ld a, [hli]
-	ld [de], a ; OBJ_UNK_07
+	ld [de], a ; OBJ_ID
 	inc e
 	ld a, [hli]
 	ld [de], a ; OBJ_INTERACTION_TYPE

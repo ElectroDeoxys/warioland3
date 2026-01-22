@@ -1130,14 +1130,14 @@ Turtle2Func:
 	ld b, LOW(wObj1)
 	ld h, HIGH(wObj1)
 .asm_55e14
-	ld l, OBJ_UNK_07
+	ld l, OBJ_ID
 	add l
 	ld l, a
-	ld a, [hl] ; OBJ_UNK_07
-	cp $5b
+	ld a, [hl] ; OBJ_ID
+	cp TURTLE1
 	jr nz, .asm_55e25
 	ld a, l
-	sub OBJ_UNK_07 - OBJ_FLAGS
+	sub OBJ_ID - OBJ_FLAGS
 	ld l, a
 	ld a, [hl] ; OBJ_FLAGS
 	rra

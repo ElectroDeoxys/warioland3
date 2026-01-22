@@ -483,7 +483,7 @@ FOR n, 1, NUM_OBJECTS + 1
 	and e
 	dec a
 	jr nz, :+ ; jump if !active || transient
-	ld a, [wObj{u:n}Unk07]
+	ld a, [wObj{u:n}Id]
 	cp d
 	jp z, .got_snake_obj
 :

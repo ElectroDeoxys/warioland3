@@ -46,7 +46,7 @@ UpdateParticles:
 	and a
 	ret z
 
-FOR n, 1, MAX_NUM_PARTICLES + 1
+FOR n, 0, MAX_NUM_PARTICLES
 	ld hl, wParticle{u:n}
 	ld a, [hl]
 	and a

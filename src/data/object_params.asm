@@ -1,7 +1,7 @@
 ObjParams_HebariiProjectile:
 	db -8  ; y
 	db  0  ; x
-	dn $2, $1 ; unk7
+	db HEBARII_PROJECTILE ; id
 	db OBJ_INTERACTION_FULL_STING ; interaction type
 	db -3,  2, -3,  2 ; collision
 	dw OAM_18a703 ; OAM
@@ -18,7 +18,7 @@ ObjParams_HebariiProjectile:
 ObjParams_WebberProjectile:
 	db  5  ; y
 	db -8  ; x
-	dn $0, $3 ; unk7
+	db WEBBER_PROJECTILE ; id
 	db OBJ_INTERACTION_ELECTRIC ; interaction type
 	db -7, -3, -4, 3 ; collision
 	dw OAM_180242 ; OAM
@@ -35,7 +35,7 @@ ObjParams_WebberProjectile:
 ObjParams_UnusedFlowerProjectileLeft:
 	db -10 ; y
 	db   0 ; x
-	dn $0, $5 ; unk7
+	db UNUSED_FLOWER_PROJECTILE_LEFT ; id
 	db OBJ_INTERACTION_FULL_STING
 	db -13, -3, -6, 5 ; collision box
 	dw OAM_180916 ; OAM
@@ -52,7 +52,7 @@ ObjParams_UnusedFlowerProjectileLeft:
 ObjParams_UnusedFlowerProjectileRight:
 	db -10 ; y
 	db   0 ; x
-	dn $0, $5 ; unk7
+	db UNUSED_FLOWER_PROJECTILE_RIGHT ; id
 	db OBJ_INTERACTION_FULL_STING ; interaction type
 	db -13, -3, -6, 5 ; collision box
 	dw OAM_180916 ; OAM
@@ -69,7 +69,7 @@ ObjParams_UnusedFlowerProjectileRight:
 ObjParams_BigLeaf1:
 	db -10 ; y
 	db  15 ; x
-	dn $0, $8 ; unk7
+	db BIG_LEAF1 ; id
 	db OBJ_INTERACTION_WALKABLE ; interaction type
 	db -16, -8, -8, 7 ; collision box
 	dw OAM_1817b4 ; OAM
@@ -86,7 +86,7 @@ ObjParams_BigLeaf1:
 ObjParams_BigLeaf2:
 	db -10 ; y
 	db -17 ; x
-	dn $0, $8 ; unk7
+	db BIG_LEAF2 ; id
 	db OBJ_INTERACTION_WALKABLE ; interaction type
 	db -16, -8, -8, 7 ; collision box
 	dw OAM_1817b4 ; OAM
@@ -103,7 +103,7 @@ ObjParams_BigLeaf2:
 ObjParams_BigLeaf3:
 	db -10 ; y
 	db -48 ; x
-	dn $0, $8 ; unk7
+	db BIG_LEAF3 ; id
 	db OBJ_INTERACTION_WALKABLE ; interaction type
 	db -16, -8, -8, 7 ; collision box
 	dw OAM_1817b4 ; OAM
@@ -120,7 +120,7 @@ ObjParams_BigLeaf3:
 ObjParams_DoughnutLeft:
 	db -18 ; y
 	db  -9 ; x
-	dn $0, $b ; unk7
+	db DOUGHNUT_LEFT ; id
 	db OBJ_INTERACTION_FOOD ; interaction type
 	db -12, -4, -4, 3 ; collision box
 	dw OAM_180ea7 ; OAM
@@ -137,7 +137,7 @@ ObjParams_DoughnutLeft:
 ObjParams_DoughnutRight:
 	db -18 ; y
 	db   8 ; x
-	dn $0, $b ; unk7
+	db DOUGHNUT_RIGHT ; id
 	db OBJ_INTERACTION_FOOD ; interaction type
 	db -12, -4, -4, 3 ; collision box
 	dw OAM_180ea7 ; OAM
@@ -154,7 +154,7 @@ ObjParams_DoughnutRight:
 ObjParams_DoughnutUpLeft:
 	db -16 ; y
 	db  -8 ; x
-	dn $0, $b ; unk7
+	db DOUGHNUT_UP_LEFT ; id
 	db OBJ_INTERACTION_FOOD ; interaction type
 	db -12, -4, -4, 3 ; collision box
 	dw OAM_180ea7 ; OAM
@@ -171,7 +171,7 @@ ObjParams_DoughnutUpLeft:
 ObjParams_DoughnutUpRight:
 	db -16 ; y
 	db   7 ; x
-	dn $0, $b ; unk7
+	db DOUGHNUT_UP_RIGHT ; id
 	db OBJ_INTERACTION_FOOD ; interaction type
 	db -12, -4, -4, 3 ; collision box
 	dw OAM_180ea7 ; OAM
@@ -188,7 +188,7 @@ ObjParams_DoughnutUpRight:
 ObjParams_InvisibilityPotionLeft:
 	db  -8 ; y
 	db -16 ; x
-	dn $1, $6 ; unk7
+	db INVISIBILITY_POTION_LEFT ; id
 	db OBJ_INTERACTION_INVISIBILITY_POTION ; interaction type
 	db -12, -4, -4, 3 ; collision box
 	dw OAM_184ab2 ; OAM
@@ -205,7 +205,7 @@ ObjParams_InvisibilityPotionLeft:
 ObjParams_InvisibilityPotionRight:
 	db -8 ; y
 	db 15 ; x
-	dn $1, $6 ; unk7
+	db INVISIBILITY_POTION_RIGHT ; id
 	db OBJ_INTERACTION_INVISIBILITY_POTION ; interaction type
 	db -12, -4, -4, 3 ; collision box
 	dw OAM_184ab2 ; OAM
@@ -222,7 +222,7 @@ ObjParams_InvisibilityPotionRight:
 ObjParams_InvisibilityPotionDropLeft:
 	db  -8 ; y
 	db -16 ; x
-	dn $1, $6 ; unk7
+	db INVISIBILITY_POTION_DROP_LEFT ; id
 	db OBJ_INTERACTION_INVISIBILITY_POTION ; interaction type
 	db -12, -4, -4, 3 ; collision box
 	dw OAM_184ab2 ; OAM
@@ -239,7 +239,7 @@ ObjParams_InvisibilityPotionDropLeft:
 ObjParams_InvisibilityPotionDropRight:
 	db -8 ; y
 	db 15 ; x
-	dn $1, $6 ; unk7
+	db INVISIBILITY_POTION_DROP_RIGHT ; id
 	db OBJ_INTERACTION_INVISIBILITY_POTION ; interaction type
 	db -12, -4, -4, 3 ; collision box
 	dw OAM_184ab2 ; OAM
@@ -256,7 +256,7 @@ ObjParams_InvisibilityPotionDropRight:
 ObjParams_ZombieHeadLeft:
 	db -16 ; y
 	db   0 ; x
-	dn $1, $a ; unk7
+	db ZOMBIE_HEAD_LEFT ; id
 	db OBJ_INTERACTION_ZOMBIE_HEAD ; interaction type
 	db -12, -4, -4, 3 ; collision box
 	dw OAM_184ffa ; OAM
@@ -273,7 +273,7 @@ ObjParams_ZombieHeadLeft:
 ObjParams_ZombieHeadRight:
 	db -16 ; y
 	db   0 ; x
-	dn $1, $a ; unk7
+	db ZOMBIE_HEAD_RIGHT ; id
 	db OBJ_INTERACTION_ZOMBIE_HEAD ; interaction type
 	db -12, -4, -4, 3 ; collision box
 	dw OAM_184ffa ; OAM
@@ -290,7 +290,7 @@ ObjParams_ZombieHeadRight:
 ObjParams_StarsLeft:
 	db -20 ; y
 	db -12 ; x
-	dn $3, $0 ; unk7
+	db STARS_LEFT ; id
 	db OBJ_INTERACTION_01 ; interaction type
 	db 0, 0, 0, 0 ; collision box
 	dw OAM_18c000 ; OAM
@@ -307,7 +307,7 @@ ObjParams_StarsLeft:
 ObjParams_StarsRight:
 	db -20 ; y
 	db  11 ; x
-	dn $3, $0 ; unk7
+	db STARS_RIGHT ; id
 	db OBJ_INTERACTION_01 ; interaction type
 	db 0, 0, 0, 0 ; collision box
 	dw OAM_18c000 ; OAM
@@ -324,7 +324,7 @@ ObjParams_StarsRight:
 ObjParams_BeamLeft:
 	db  0 ; y
 	db -8 ; x
-	dn $1, $1 ; unk7
+	db BEAM_LEFT ; id
 	db OBJ_INTERACTION_BEAM ; interaction type
 	db -14, -3, -2, 1 ; collision box
 	dw OAM_1845aa ; OAM
@@ -341,7 +341,7 @@ ObjParams_BeamLeft:
 ObjParams_BeamRight:
 	db  0 ; y
 	db  8 ; x
-	dn $1, $1 ; unk7
+	db BEAM_RIGHT ; id
 	db OBJ_INTERACTION_BEAM ; interaction type
 	db -14, -3, -2, 1 ; collision box
 	dw OAM_1845aa ; OAM
@@ -358,7 +358,7 @@ ObjParams_BeamRight:
 ObjParams_AppleLeft:
 	db -14 ; y
 	db   7 ; x
-	dn $1, $1 ; unk7
+	db APPLE_LEFT ; id
 	db OBJ_INTERACTION_FOOD ; interaction type
 	db -12, -4, -4, 3 ; collision box
 	dw OAM_185a1c ; OAM
@@ -375,7 +375,7 @@ ObjParams_AppleLeft:
 ObjParams_AppleRight:
 	db -14 ; y
 	db  -8 ; x
-	dn $1, $1 ; unk7
+	db APPLE_RIGHT ; id
 	db OBJ_INTERACTION_FOOD ; interaction type
 	db -12, -4, -4, 3 ; collision box
 	dw OAM_185a1c ; OAM
@@ -392,7 +392,7 @@ ObjParams_AppleRight:
 ObjParams_SunFlameLeft:
 	db  4 ; y
 	db -8 ; x
-	dn $1, $b ; unk7
+	db SUN_FLAME_LEFT ; id
 	db OBJ_INTERACTION_FIRE ; interaction type
 	db -10, -2, -5, 4 ; collision box
 	dw OAM_1851df ; OAM
@@ -409,7 +409,7 @@ ObjParams_SunFlameLeft:
 ObjParams_SunFlameRight:
 	db  4 ; y
 	db  7 ; x
-	dn $1, $b ; unk7
+	db SUN_FLAME_RIGHT ; id
 	db OBJ_INTERACTION_FIRE ; interaction type
 	db -10, -2, -5, 4 ; collision box
 	dw OAM_1851df ; OAM
@@ -426,7 +426,7 @@ ObjParams_SunFlameRight:
 ObjParams_MoonStarLeft:
 	db  4 ; y
 	db -8 ; x
-	dn $1, $b ; unk7
+	db MOON_STAR_LEFT ; id
 	db OBJ_INTERACTION_ELECTRIC ; interaction type
 	db -10, -3, -5, 4 ; collision box
 	dw OAM_1854a2 ; OAM
@@ -443,7 +443,7 @@ ObjParams_MoonStarLeft:
 ObjParams_MoonStarRight:
 	db  4 ; y
 	db  7 ; x
-	dn $1, $b ; unk7
+	db MOON_STAR_RIGHT ; id
 	db OBJ_INTERACTION_ELECTRIC ; interaction type
 	db -10, -3, -5, 4 ; collision box
 	dw OAM_1854a2 ; OAM
@@ -457,10 +457,10 @@ ObjParams_MoonStarRight:
 	dw MoonStarFunc_Right
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_649c2:
+ObjParams_BirdStars1:
 	db -10 ; y
 	db  -7 ; x
-	dn $3, $0 ; unk7
+	db BIRD_STARS1 ; id
 	db OBJ_INTERACTION_01 ; interaction type
 	db 0, 0, 0, 0 ; collision box
 	dw OAM_18c000 ; OAM
@@ -474,10 +474,10 @@ ObjParams_649c2:
 	dw StarsFunc_SetFlags
 	db OBJFLAG_PRIORITY ; obj flags
 
-ObjParams_649d7:
+ObjParams_BirdStars2:
 	db -10 ; y
 	db   6 ; x
-	dn $3, $0 ; unk7
+	db BIRD_STARS2 ; id
 	db OBJ_INTERACTION_01 ; interaction type
 	db 0, 0, 0, 0 ; collision box
 	dw OAM_18c000 ; OAM
@@ -494,7 +494,7 @@ ObjParams_649d7:
 ObjParams_SnowflakeLeft:
 	db -8 ; y
 	db -8 ; x
-	dn $2, $1 ; unk7
+	db SNOWFLAKE_LEFT ; id
 	db OBJ_INTERACTION_ICE ; interaction type
 	db -12, -5, -6, 4 ; collision box
 	dw OAM_190000 ; OAM
@@ -511,7 +511,7 @@ ObjParams_SnowflakeLeft:
 ObjParams_SnowflakeRight:
 	db -8 ; y
 	db  7 ; x
-	dn $2, $1 ; unk7
+	db SNOWFLAKE_RIGHT ; id
 	db OBJ_INTERACTION_ICE ; interaction type
 	db -12, -5, -6, 4 ; collision box
 	dw OAM_190000 ; OAM
@@ -528,7 +528,7 @@ ObjParams_SnowflakeRight:
 ObjParams_MizzouProjectileLeft:
 	db -10 ; y
 	db -16 ; x
-	dn $2, $5 ; unk7
+	db MIZZOU_PROJECTILE_LEFT ; id
 	db OBJ_INTERACTION_FULL_STING ; interaction type
 	db -7, 0, -4, 3 ; collision box
 	dw OAM_188395 ; OAM
@@ -545,7 +545,7 @@ ObjParams_MizzouProjectileLeft:
 ObjParams_MizzouProjectileRight:
 	db -10 ; y
 	db  15 ; x
-	dn $2, $5 ; unk7
+	db MIZZOU_PROJECTILE_RIGHT ; id
 	db OBJ_INTERACTION_FULL_STING ; interaction type
 	db -7, 0, -4, 3 ; collision box
 	dw OAM_188395 ; OAM
@@ -562,7 +562,7 @@ ObjParams_MizzouProjectileRight:
 ObjParams_GreyTreasure:
 	db -40 ; y
 	db   0 ; x
-	dn $3, $3 ; unk7
+	db GREY_TREASURE_O ; id
 	db OBJ_INTERACTION_01 ; interaction type
 	db 0, 0, 0, 0 ; collision box
 	dw OAM_18c000 ; OAM
@@ -579,7 +579,7 @@ ObjParams_GreyTreasure:
 ObjParams_RedTreasure:
 	db -40 ; y
 	db   0 ; x
-	dn $3, $3 ; unk7
+	db RED_TREASURE_O ; id
 	db OBJ_INTERACTION_01 ; interaction type
 	db 0, 0, 0, 0 ; collision box
 	dw OAM_18c000 ; OAM
@@ -596,7 +596,7 @@ ObjParams_RedTreasure:
 ObjParams_GreenTreasure:
 	db -40 ; y
 	db   0 ; x
-	dn $3, $3 ; unk7
+	db GREEN_TREASURE_O ; id
 	db OBJ_INTERACTION_01 ; interaction type
 	db 0, 0, 0, 0 ; collision box
 	dw OAM_18c000 ; OAM
@@ -613,7 +613,7 @@ ObjParams_GreenTreasure:
 ObjParams_BlueTreasure:
 	db -40 ; y
 	db   0 ; x
-	dn $3, $3 ; unk7
+	db BLUE_TREASURE_O ; id
 	db OBJ_INTERACTION_01 ; interaction type
 	db 0, 0, 0, 0 ; collision box
 	dw OAM_18c000 ; OAM
@@ -630,7 +630,7 @@ ObjParams_BlueTreasure:
 ObjParams_AnonsterSilk1Left:
 	db  1 ; y
 	db -4 ; x
-	dn $4, $1 ; unk7
+	db ANONSTER_SILK1_LEFT ; id
 	db OBJ_INTERACTION_ANONSTER_SILK ; interaction type
 	db -8, -4, -5, 4 ; collision box
 	dw OAM_190000 ; OAM
@@ -647,7 +647,7 @@ ObjParams_AnonsterSilk1Left:
 ObjParams_AnonsterSilk1Right:
 	db 1 ; y
 	db 3 ; x
-	dn $4, $1 ; unk7
+	db ANONSTER_SILK1_RIGHT ; id
 	db OBJ_INTERACTION_ANONSTER_SILK ; interaction type
 	db -8, -4, -5, 4 ; collision box
 	dw OAM_190000 ; OAM
@@ -664,7 +664,7 @@ ObjParams_AnonsterSilk1Right:
 ObjParams_AnonsterSilk2Left:
 	db  1 ; y
 	db -4 ; x
-	dn $4, $1 ; unk7
+	db ANONSTER_SILK2_LEFT ; id
 	db OBJ_INTERACTION_ANONSTER_SILK ; interaction type
 	db -8, -4, -5, 4 ; collision box
 	dw OAM_190000 ; OAM
@@ -681,7 +681,7 @@ ObjParams_AnonsterSilk2Left:
 ObjParams_AnonsterSilk2Right:
 	db 1 ; y
 	db 3 ; x
-	dn $4, $1 ; unk7
+	db ANONSTER_SILK2_RIGHT ; id
 	db OBJ_INTERACTION_ANONSTER_SILK ; interaction type
 	db -8, -4, -5, 4 ; collision box
 	dw OAM_190000 ; OAM
@@ -698,7 +698,7 @@ ObjParams_AnonsterSilk2Right:
 ObjParams_AnonsterSilk3Left:
 	db  1 ; y
 	db -4 ; x
-	dn $4, $1 ; unk7
+	db ANONSTER_SILK3_LEFT ; id
 	db OBJ_INTERACTION_ANONSTER_SILK ; interaction type
 	db -8, -4, -5, 4 ; collision box
 	dw OAM_190000 ; OAM
@@ -715,7 +715,7 @@ ObjParams_AnonsterSilk3Left:
 ObjParams_AnonsterSilk3Right:
 	db 1 ; y
 	db 3 ; x
-	dn $4, $1 ; unk7
+	db ANONSTER_SILK3_RIGHT ; id
 	db OBJ_INTERACTION_ANONSTER_SILK ; interaction type
 	db -8, -4, -5, 4 ; collision box
 	dw OAM_190000 ; OAM
@@ -732,7 +732,7 @@ ObjParams_AnonsterSilk3Right:
 ObjParams_AnonsterWaveLeft:
 	db  4 ; y
 	db -5 ; x
-	dn $4, $1 ; unk7
+	db ANONSTER_WAVE_LEFT ; id
 	db OBJ_INTERACTION_ANONSTER_WAVE ; interaction type
 	db -8, -4, -5, 4 ; collision box
 	dw OAM_190000 ; OAM
@@ -749,7 +749,7 @@ ObjParams_AnonsterWaveLeft:
 ObjParams_AnonsterWaveRight:
 	db 4 ; y
 	db 4 ; x
-	dn $4, $1 ; unk7
+	db ANONSTER_WAVE_RIGHT ; id
 	db OBJ_INTERACTION_ANONSTER_WAVE ; interaction type
 	db -8, -4, -5, 4 ; collision box
 	dw OAM_190000 ; OAM
@@ -766,7 +766,7 @@ ObjParams_AnonsterWaveRight:
 ObjParams_SilkPlatform1:
 	db  -16 ; y
 	db -112 ; x
-	dn $4, $3 ; unk7
+	db SILK_PLATFORM1 ; id
 	db OBJ_INTERACTION_SOLID ; interaction type
 	db -8, -2, -5, 5 ; collision box
 	dw OAM_190000 ; OAM
@@ -783,7 +783,7 @@ ObjParams_SilkPlatform1:
 ObjParams_SilkPlatform2:
 	db -16 ; y
 	db -80 ; x
-	dn $4, $3 ; unk7
+	db SILK_PLATFORM2 ; id
 	db OBJ_INTERACTION_SOLID ; interaction type
 	db -8, -2, -5, 5 ; collision box
 	dw OAM_190000 ; OAM
@@ -800,7 +800,7 @@ ObjParams_SilkPlatform2:
 ObjParams_SilkPlatform3:
 	db -16 ; y
 	db -48 ; x
-	dn $4, $3 ; unk7
+	db SILK_PLATFORM3 ; id
 	db OBJ_INTERACTION_SOLID ; interaction type
 	db -8, -2, -5, 5 ; collision box
 	dw OAM_190000 ; OAM
@@ -817,7 +817,7 @@ ObjParams_SilkPlatform3:
 ObjParams_SnakeFireLeft:
 	db  16 ; y
 	db -21 ; x
-	dn $2, $e ; unk7
+	db SNAKE_FIRE_LEFT ; id
 	db OBJ_INTERACTION_FIRE ; interaction type
 	db -8, 0, -4, 3 ; collision box
 	dw OAM_189783 ; OAM
@@ -834,7 +834,7 @@ ObjParams_SnakeFireLeft:
 ObjParams_SnakeFireRight:
 	db 16 ; y
 	db  6 ; x
-	dn $2, $e ; unk7
+	db SNAKE_FIRE_RIGHT ; id
 	db OBJ_INTERACTION_FIRE ; interaction type
 	db -8, 0, -4, 3 ; collision box
 	dw OAM_189783 ; OAM
@@ -851,7 +851,7 @@ ObjParams_SnakeFireRight:
 ObjParams_DollBoyHammer:
 	db -18 ; y
 	db -10 ; x
-	dn $4, $9 ; unk7
+	db DOLL_BOY_HAMMER ; id
 	db OBJ_INTERACTION_DOLL_BOY_HAMMER ; interaction type
 	db -12, -4, -4, 3 ; collision box
 	dw OAM_19105c ; OAM
@@ -868,7 +868,7 @@ ObjParams_DollBoyHammer:
 ObjParams_HammerPlatform:
 	db -60 ; y
 	db  64 ; x
-	dn $4, $6 ; unk7
+	db HAMMER_PLATFORM ; id
 	db OBJ_INTERACTION_31 ; interaction type
 	db -10, -1, -5, 4 ; collision box
 	dw OAM_19105c ; OAM
@@ -885,7 +885,7 @@ ObjParams_HammerPlatform:
 ObjParams_HighRollingRockLeft:
 	db   4 ; y
 	db -13 ; x
-	dn $5, $8 ; unk7
+	db HIGH_ROLLING_ROCK_LEFT ; id
 	db OBJ_INTERACTION_ROLLING_ROCK ; interaction type
 	db -10, -4, -4, 3 ; collision box
 	dw OAM_194000 ; OAM
@@ -902,7 +902,7 @@ ObjParams_HighRollingRockLeft:
 ObjParams_HighRollingRockRight:
 	db   4 ; y
 	db  12 ; x
-	dn $5, $8 ; unk7
+	db HIGH_ROLLING_ROCK_RIGHT ; id
 	db OBJ_INTERACTION_ROLLING_ROCK ; interaction type
 	db -10, -4, -4, 3 ; collision box
 	dw OAM_194000 ; OAM
@@ -919,7 +919,7 @@ ObjParams_HighRollingRockRight:
 ObjParams_LowRollingRockLeft:
 	db   4 ; y
 	db -13 ; x
-	dn $5, $8 ; unk7
+	db LOW_ROLLING_ROCK_LEFT ; id
 	db OBJ_INTERACTION_ROLLING_ROCK ; interaction type
 	db -10, -4, -4, 3 ; collision box
 	dw OAM_194000 ; OAM
@@ -936,7 +936,7 @@ ObjParams_LowRollingRockLeft:
 ObjParams_LowRollingRockRight:
 	db   4 ; y
 	db  12 ; x
-	dn $5, $8 ; unk7
+	db LOW_ROLLING_ROCK_RIGHT ; id
 	db OBJ_INTERACTION_ROLLING_ROCK ; interaction type
 	db -10, -4, -4, 3 ; collision box
 	dw OAM_194000 ; OAM
@@ -954,7 +954,7 @@ ObjParams_LowRollingRockRight:
 ObjParams_PalmTreeShort:
 	db 16 ; y
 	db 16 ; x
-	dn $5, $a ; unk7
+	db PALM_TREE_SHORT ; id
 	db OBJ_INTERACTION_31 ; interaction type
 	db -6, -2, -7, 6 ; collision box
 	dw OAM_194000 ; OAM
@@ -971,7 +971,7 @@ ObjParams_PalmTreeShort:
 ObjParams_PalmTreeMedium:
 	db 28 ; y
 	db 72 ; x
-	dn $5, $a ; unk7
+	db PALM_TREE_MEDIUM ; id
 	db OBJ_INTERACTION_31 ; interaction type
 	db -14, -10, -7, 6 ; collision box
 	dw OAM_194000 ; OAM
@@ -988,7 +988,7 @@ ObjParams_PalmTreeMedium:
 ObjParams_PalmTreeTall:
 	db  39 ; y
 	db 127 ; x
-	dn $5, $a ; unk7
+	db PALM_TREE_TALL ; id
 	db OBJ_INTERACTION_31 ; interaction type
 	db -30, -26, -7, 6 ; collision box
 	dw OAM_194000 ; OAM
@@ -1005,7 +1005,7 @@ ObjParams_PalmTreeTall:
 ObjParams_YellowBellyArrowLeft:
 	db  16 ; y
 	db -16 ; x
-	dn $4, $d ; unk7
+	db YELLOW_BELLY_ARROW_LEFT ; id
 	db OBJ_INTERACTION_YELLOW_BELLY_ARROW ; interaction type
 	db -10, -4, -3, 2 ; collision box
 	dw OAM_1926dc ; OAM
@@ -1022,7 +1022,7 @@ ObjParams_YellowBellyArrowLeft:
 ObjParams_YellowBellyArrowRight:
 	db 16 ; y
 	db 15 ; x
-	dn $4, $d ; unk7
+	db YELLOW_BELLY_ARROW_RIGHT ; id
 	db OBJ_INTERACTION_YELLOW_BELLY_ARROW ; interaction type
 	db -10, -4, -3, 2 ; collision box
 	dw OAM_1926dc ; OAM
@@ -1039,7 +1039,7 @@ ObjParams_YellowBellyArrowRight:
 ObjParams_Dragonfly1:
 	db -64 ; y
 	db  48 ; x
-	dn $4, $8 ; unk7
+	db DRAGONFLY1 ; id
 	db OBJ_INTERACTION_WALKABLE ; interaction type
 	db -9, -7, -7, 6 ; collision box
 	dw OAM_1927d5 ; OAM
@@ -1056,7 +1056,7 @@ ObjParams_Dragonfly1:
 ObjParams_Fly:
 	db -48 ; y
 	db  48 ; x
-	dn $4, $9 ; unk7
+	db FLY ; id
 	db OBJ_INTERACTION_01 ; interaction type
 	db -12, 12, -6, 5 ; collision box
 	dw OAM_1927d5 ; OAM
@@ -1073,7 +1073,7 @@ ObjParams_Fly:
 ObjParams_Tadpole:
 	db -3 ; y
 	db  0 ; x
-	dn $2, $f ; unk7
+	db TADPOLE ; id
 	db OBJ_INTERACTION_TADPOLE ; interaction type
 	db -12, -4, -5, 4 ; collision box
 	dw OAM_18a642 ; OAM
@@ -1090,7 +1090,7 @@ ObjParams_Tadpole:
 ObjParams_InkLeft:
 	db -12 ; y
 	db  -4 ; x
-	dn $5, $3 ; unk7
+	db INK_LEFT ; id
 	db OBJ_INTERACTION_INK ; interaction type
 	db -13, -3, -3, 2 ; collision box
 	dw OAM_194895 ; OAM
@@ -1107,7 +1107,7 @@ ObjParams_InkLeft:
 ObjParams_InkRight:
 	db -12 ; y
 	db   3 ; x
-	dn $5, $3 ; unk7
+	db INK_RIGHT ; id
 	db OBJ_INTERACTION_INK ; interaction type
 	db -13, -3, -3, 2 ; collision box
 	dw OAM_194895 ; OAM
@@ -1124,7 +1124,7 @@ ObjParams_InkRight:
 ObjParams_FloatingRing:
 	db 64 ; y
 	db  0 ; x
-	dn $5, $5 ; unk7
+	db FLOATING_RING ; id
 	db OBJ_INTERACTION_31 ; interaction type
 	db -1, 4, -5, 4 ; collision box
 	dw OAM_194895 ; OAM
@@ -1141,7 +1141,7 @@ ObjParams_FloatingRing:
 ObjParams_Skull1:
 	db -28 ; y
 	db -16 ; x
-	dn $5, $0 ; unk7
+	db SKULL1 ; id
 	db OBJ_INTERACTION_STOVE ; interaction type
 	db -8, 7, -4, 3 ; collision box
 	dw OAM_19501c ; OAM
@@ -1158,7 +1158,7 @@ ObjParams_Skull1:
 ObjParams_Skull2:
 	db 20 ; y
 	db -16 ; x
-	dn $5, $1 ; unk7
+	db SKULL2 ; id
 	db OBJ_INTERACTION_STOVE ; interaction type
 	db -8, 7, -4, 3 ; collision box
 	dw OAM_19501c ; OAM
@@ -1175,7 +1175,7 @@ ObjParams_Skull2:
 ObjParams_Skull3:
 	db -28 ; y
 	db  16 ; x
-	dn $5, $2 ; unk7
+	db SKULL3 ; id
 	db OBJ_INTERACTION_STOVE ; interaction type
 	db -8, 7, -4, 3 ; collision box
 	dw OAM_19501c ; OAM
@@ -1192,7 +1192,7 @@ ObjParams_Skull3:
 ObjParams_Skull4:
 	db 20 ; y
 	db 16 ; x
-	dn $5, $3 ; unk7
+	db SKULL4 ; id
 	db OBJ_INTERACTION_STOVE ; interaction type
 	db -8, 7, -4, 3 ; collision box
 	dw OAM_19501c ; OAM
@@ -1209,7 +1209,7 @@ ObjParams_Skull4:
 ObjParams_JamanoHat:
 	db -12 ; y
 	db   0 ; x
-	dn $5, $8 ; unk7
+	db JAMANO_HAT ; id
 	db OBJ_INTERACTION_0B ; interaction type
 	db -4, 0, -6, 5 ; collision box
 	dw OAM_19501c ; OAM
@@ -1226,7 +1226,7 @@ ObjParams_JamanoHat:
 ObjParams_MagicSpiralLeft:
 	db  12 ; y
 	db -12 ; x
-	dn $5, $e ; unk7
+	db MAGIC_SPIRAL_LEFT ; id
 	db OBJ_INTERACTION_MAGICAL_SPIRAL ; interaction type
 	db -4, 3, -4, 3 ; collision box
 	dw OAM_195e06 ; OAM
@@ -1243,7 +1243,7 @@ ObjParams_MagicSpiralLeft:
 ObjParams_MagicSpiralRight:
 	db 12 ; y
 	db 11 ; x
-	dn $5, $e ; unk7
+	db MAGIC_SPIRAL_RIGHT ; id
 	db OBJ_INTERACTION_MAGICAL_SPIRAL ; interaction type
 	db -4, 3, -4, 3 ; collision box
 	dw OAM_195e06 ; OAM
@@ -1260,7 +1260,7 @@ ObjParams_MagicSpiralRight:
 ObjParams_IgaguriLeft:
 	db  21 ; y
 	db -12 ; x
-	dn $5, $f ; unk7
+	db IGAGURI_LEFT ; id
 	db OBJ_INTERACTION_YELLOW_BELLY_ARROW ; interaction type
 	db -16, -4, -5, 4 ; collision box
 	dw OAM_195e06 ; OAM
@@ -1277,7 +1277,7 @@ ObjParams_IgaguriLeft:
 ObjParams_IgaguriRight:
 	db 21 ; y
 	db 11 ; x
-	dn $5, $f ; unk7
+	db IGAGURI_RIGHT ; id
 	db OBJ_INTERACTION_YELLOW_BELLY_ARROW ; interaction type
 	db -16, -4, -5, 4 ; collision box
 	dw OAM_195e06 ; OAM
@@ -1294,7 +1294,7 @@ ObjParams_IgaguriRight:
 ObjParams_HiddenFigureFace:
 	db -16 ; y
 	db   8 ; x
-	dn $3, $b ; unk7
+	db HIDDEN_FIGURE_FACE ; id
 	db OBJ_INTERACTION_FULL_STING | HEAVY_OBJ ; interaction type
 	db -24, -19, -4, 3 ; collision box
 	dw OAM_18c88a ; OAM
@@ -1311,7 +1311,7 @@ ObjParams_HiddenFigureFace:
 ObjParams_HiddenFigureLeftHand:
 	db  18 ; y
 	db -40 ; x
-	dn $3, $c ; unk7
+	db HIDDEN_FIGURE_LEFT_HAND ; id
 	db OBJ_INTERACTION_0B | HEAVY_OBJ ; interaction type
 	db -24, -8, -8, 7 ; collision box
 	dw OAM_18c88a ; OAM
@@ -1328,7 +1328,7 @@ ObjParams_HiddenFigureLeftHand:
 ObjParams_HiddenFigureRightHand:
 	db 18 ; y
 	db 56 ; x
-	dn $3, $d ; unk7
+	db HIDDEN_FIGURE_RIGHT_HAND ; id
 	db OBJ_INTERACTION_0B | HEAVY_OBJ ; interaction type
 	db -24, -8, -8, 7 ; collision box
 	dw OAM_18c88a ; OAM
@@ -1345,7 +1345,7 @@ ObjParams_HiddenFigureRightHand:
 ObjParams_Omodon2:
 	db 16 ; y
 	db  0 ; x
-	dn $0, $d ; unk7
+	db OMODON2 ; id
 	db OBJ_INTERACTION_01 ; interaction type
 	db -16, 11, -17, 0 ; collision box
 	dw OAM_18154f ; OAM
@@ -1362,7 +1362,7 @@ ObjParams_Omodon2:
 ObjParams_Omodon1:
 	db 16 ; y
 	db  0 ; x
-	dn $0, $d ; unk7
+	db OMODON1 ; id
 	db OBJ_INTERACTION_01 ; interaction type
 	db -26, 11, -17, 0 ; collision box
 	dw OAM_18154f ; OAM
@@ -1379,7 +1379,7 @@ ObjParams_Omodon1:
 ObjParams_DollBoyHammerStarsLeft:
 	db -20 ; y
 	db -19 ; x
-	dn $3, $0 ; unk7
+	db DOLL_BOY_HAMMER_STARS_LEFT ; id
 	db OBJ_INTERACTION_01 ; interaction type
 	db 0, 0, 0, 0 ; collision box
 	dw OAM_18c000 ; OAM
@@ -1396,7 +1396,7 @@ ObjParams_DollBoyHammerStarsLeft:
 ObjParams_DollBoyHammerStarsRight:
 	db -20 ; y
 	db 18 ; x
-	dn $3, $0 ; unk7
+	db DOLL_BOY_HAMMER_STARS_RIGHT ; id
 	db OBJ_INTERACTION_01 ; interaction type
 	db 0, 0, 0, 0 ; collision box
 	dw OAM_18c000 ; OAM
@@ -1411,7 +1411,7 @@ ObjParams_DollBoyHammerStarsRight:
 	db OBJFLAG_PRIORITY ; obj flags
 
 ObjParams_Coin:
-	dn $8, $1 ; unk7
+	db COIN ; id
 	db OBJ_INTERACTION_REGULAR_COIN
 	db -12, 0, -4, 3
 	dw OAM_180003 ; OAM
@@ -1426,7 +1426,7 @@ ObjParams_Coin:
 	db OBJFLAG_PRIORITY ; obj flags
 
 ObjParams_ColourCoin:
-	dn $8, $1 ; unk7
+	db COLOUR_COIN ; id
 	db OBJ_INTERACTION_COLOUR_COIN
 	db -12, 0, -4, 3
 	dw OAM_180003 ; OAM
@@ -1441,7 +1441,7 @@ ObjParams_ColourCoin:
 	db OBJFLAG_PRIORITY ; obj flags
 
 ObjParams_TorchEmberLeft1:
-	dn $0, $5 ; unk7
+	db TORCH_EMBER_LEFT1 ; id
 	db OBJ_INTERACTION_FIRE ; interaction type
 	db -12, -3, -5, 3 ; collision box
 	dw OAM_180838 ; OAM
@@ -1456,7 +1456,7 @@ ObjParams_TorchEmberLeft1:
 	db OBJFLAG_PRIORITY ; obj flags
 
 ObjParams_TorchEmberRight1:
-	dn $0, $5 ; unk7
+	db TORCH_EMBER_RIGHT1 ; id
 	db OBJ_INTERACTION_FIRE ; interaction type
 	db -12, -3, -5, 3 ; collision box
 	dw OAM_180838 ; OAM
@@ -1471,7 +1471,7 @@ ObjParams_TorchEmberRight1:
 	db OBJFLAG_PRIORITY ; obj flags
 
 ObjParams_TorchEmberLeft2:
-	dn $0, $5 ; unk7
+	db TORCH_EMBER_LEFT2 ; id
 	db OBJ_INTERACTION_FIRE ; interaction type
 	db -12, -3, -5, 3 ; collision box
 	dw OAM_180838 ; OAM
@@ -1486,7 +1486,7 @@ ObjParams_TorchEmberLeft2:
 	db OBJFLAG_PRIORITY ; obj flags
 
 ObjParams_TorchEmberRight2:
-	dn $0, $5 ; unk7
+	db TORCH_EMBER_RIGHT2 ; id
 	db OBJ_INTERACTION_FIRE ; interaction type
 	db -12, -3, -5, 3 ; collision box
 	dw OAM_180838 ; OAM
@@ -1501,7 +1501,7 @@ ObjParams_TorchEmberRight2:
 	db OBJFLAG_PRIORITY ; obj flags
 
 ObjParams_ElectricLampSpark:
-	dn $1, $8 ; unk7
+	db ELECTRIC_LAMP_SPARK ; id
 	db OBJ_INTERACTION_ELECTRIC ; interaction type
 	db -6, -5, -4, 3 ; collision box
 	dw OAM_184eeb ; OAM
@@ -1516,7 +1516,7 @@ ObjParams_ElectricLampSpark:
 	db OBJFLAG_PRIORITY ; obj flags
 
 ObjParams_Bubble:
-	dn $1, $f ; unk7
+	db BUBBLE ; id
 	db OBJ_INTERACTION_BUBBLE ; interaction type
 	db -24, -7, -9, 8 ; collision box
 	dw OAM_185b98 ; OAM
@@ -1531,7 +1531,7 @@ ObjParams_Bubble:
 	db OBJFLAG_PRIORITY ; obj flags
 
 ObjParams_FallingSnow:
-	dn $2, $a ; unk7
+	db FALLING_SNOW ; id
 	db OBJ_INTERACTION_SNOW ; interaction type
 	db -15, -8, -5, 4 ; collision box
 	dw OAM_1893fe ; OAM
@@ -1546,7 +1546,7 @@ ObjParams_FallingSnow:
 	db OBJFLAG_PRIORITY ; obj flags
 
 ObjParams_StarsAbove:
-	dn $3, $0 ; unk7
+	db STARS_ABOVE ; id
 	db OBJ_INTERACTION_01 ; interaction type
 	db 0, 0, 0, 0 ; collision box
 	dw OAM_18c000 ; OAM
@@ -1561,7 +1561,7 @@ ObjParams_StarsAbove:
 	db OBJFLAG_PRIORITY ; obj flags
 
 ObjParams_YellowBellyHead:
-	dn $4, $c ; unk7
+	db YELLOW_BELLY_HEAD ; id
 	db OBJ_INTERACTION_YELLOW_BELLY_ARROW ; interaction type
 	db -10, -6, -4, 3 ; collision box
 	dw OAM_1926dc ; OAM
@@ -1576,7 +1576,7 @@ ObjParams_YellowBellyHead:
 	db OBJFLAG_PRIORITY ; obj flags
 
 ObjParams_Pump:
-	dn $4, $e ; unk7
+	db PUMP ; id
 	db OBJ_INTERACTION_36 ; interaction type
 	db -13, -1, -6, 5 ; collision box
 	dw OAM_1926dc ; OAM
@@ -1591,7 +1591,7 @@ ObjParams_Pump:
 	db OBJFLAG_PRIORITY ; obj flags
 
 ObjParams_Cheese:
-	dn $4, $a ; unk7
+	db CHEESE ; id
 	db OBJ_INTERACTION_0B ; interaction type
 	db -12, -5, -6, 5 ; collision box
 	dw OAM_1927d5 ; OAM
@@ -1606,7 +1606,7 @@ ObjParams_Cheese:
 	db OBJFLAG_PRIORITY ; obj flags
 
 ObjParams_ScrowlerTentacleRight:
-	dn $5, $1 ; unk7
+	db SCROWLER_TENTACLE_RIGHT ; id
 	db OBJ_INTERACTION_WATER_TELEPORTING ; interaction type
 	db -10, -2, -3, 2 ; collision box
 	dw OAM_194895 ; OAM
@@ -1621,7 +1621,7 @@ ObjParams_ScrowlerTentacleRight:
 	db OBJFLAG_PRIORITY ; obj flags
 
 ObjParams_ScrowlerTentacleLeft:
-	dn $5, $2 ; unk7
+	db SCROWLER_TENTACLE_LEFT ; id
 	db OBJ_INTERACTION_WATER_TELEPORTING ; interaction type
 	db -10, -2, -3, 2 ; collision box
 	dw OAM_194895 ; OAM
@@ -1636,7 +1636,7 @@ ObjParams_ScrowlerTentacleLeft:
 	db OBJFLAG_PRIORITY ; obj flags
 
 ObjParams_MuddeeStinger1:
-	dn $3, $4 ; unk7
+	db MUDDEE_STINGER1 ; id
 	db OBJ_INTERACTION_FULL_STING ; interaction type
 	db -12, 0, -4, 3 ; collision box
 	dw OAM_18c000 ; OAM
@@ -1651,7 +1651,7 @@ ObjParams_MuddeeStinger1:
 	db OBJFLAG_PRIORITY ; obj flags
 
 ObjParams_MuddeeStinger2:
-	dn $3, $5 ; unk7
+	db MUDDEE_STINGER2 ; id
 	db OBJ_INTERACTION_01 ; interaction type
 	db -12, 0, -4, 3 ; collision box
 	dw OAM_18c000 ; OAM
@@ -1666,7 +1666,7 @@ ObjParams_MuddeeStinger2:
 	db OBJFLAG_PRIORITY ; obj flags
 
 ObjParams_Kuri:
-	dn $5, $e ; unk7
+	db KURI ; id
 	db OBJ_INTERACTION_01 ; interaction type
 	db -12, 0, -5, 4 ; collision box
 	dw OAM_195e06 ; OAM
@@ -1681,7 +1681,7 @@ ObjParams_Kuri:
 	db OBJFLAG_PRIORITY ; obj flags
 
 ObjParams_StarsCentre:
-	dn $3, $0 ; unk7
+	db STARS_CENTRE ; id
 	db OBJ_INTERACTION_01 ; interaction type
 	db 0, 0, 0, 0 ; collision box
 	dw OAM_18c000 ; OAM

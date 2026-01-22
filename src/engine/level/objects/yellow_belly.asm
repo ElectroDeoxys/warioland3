@@ -367,14 +367,14 @@ YellowBellyBodyFunc:
 	ld b, LOW(wObj1)
 	ld h, HIGH(wObj1)
 .asm_515ff
-	ld l, OBJ_UNK_07
+	ld l, OBJ_ID
 	add l
 	ld l, a
-	ld a, [hl] ; OBJ_UNK_07
-	cp $4e
+	ld a, [hl] ; OBJ_ID
+	cp PUMP
 	jr nz, .asm_51610
 	ld a, l
-	sub OBJ_UNK_07 - OBJ_FLAGS
+	sub OBJ_ID - OBJ_FLAGS
 	ld l, a
 	ld a, [hli] ; OBJ_FLAGS
 	rra
@@ -755,14 +755,14 @@ YellowBellyBodyFunc:
 	ld b, LOW(wObj1)
 	ld h, HIGH(wObj1)
 .asm_51893
-	ld l, OBJ_UNK_07
+	ld l, OBJ_ID
 	add l
 	ld l, a
-	ld a, [hl] ; OBJ_UNK_07
-	cp $4f
+	ld a, [hl] ; OBJ_ID
+	cp YELLOW_BELLY_PLATFORM
 	jr nz, .asm_518a4
 	ld a, l
-	sub OBJ_UNK_07 - OBJ_FLAGS
+	sub OBJ_ID - OBJ_FLAGS
 	ld l, a
 	ld a, [hli] ; OBJ_FLAGS
 	rra
@@ -1001,14 +1001,14 @@ PumpFunc:
 	ld b, LOW(wObj1)
 	ld h, HIGH(wObj1)
 .asm_51a34
-	ld l, OBJ_UNK_07
+	ld l, OBJ_ID
 	add l
 	ld l, a
-	ld a, [hl] ; OBJ_UNK_07
-	cp $4d
+	ld a, [hl] ; OBJ_ID
+	cp YELLOW_BELLY_ARROW_LEFT ; YELLOW_BELLY_ARROW_RIGHT
 	jr nz, .asm_51a45
 	ld a, l
-	sub OBJ_UNK_07 - OBJ_FLAGS
+	sub OBJ_ID - OBJ_FLAGS
 	ld l, a
 	ld a, [hli] ; OBJ_FLAGS
 	rra
@@ -1222,14 +1222,14 @@ YellowBellyHeadFunc:
 	ld b, LOW(wObj1)
 	ld h, HIGH(wObj1)
 .asm_51bbe
-	ld l, OBJ_UNK_07
+	ld l, OBJ_ID
 	add l
 	ld l, a
-	ld a, [hl] ; OBJ_UNK_07
-	cp $4b
+	ld a, [hl] ; OBJ_ID
+	cp YELLOW_BELLY_BODY
 	jr nz, .asm_51bcf
 	ld a, l
-	sub OBJ_UNK_07 - OBJ_FLAGS
+	sub OBJ_ID - OBJ_FLAGS
 	ld l, a
 	ld a, [hli] ; OBJ_FLAGS
 	rra

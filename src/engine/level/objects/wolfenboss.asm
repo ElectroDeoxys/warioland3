@@ -536,14 +536,14 @@ WolfenbossFunc:
 	ld b, LOW(wObj1)
 	ld h, HIGH(wObj1)
 .loop_objects
-	ld l, OBJ_UNK_07
+	ld l, OBJ_ID
 	add l
 	ld l, a
-	ld a, [hl] ; OBJ_UNK_07
-	cp $5a
+	ld a, [hl] ; OBJ_ID
+	cp WOLFENBOSS_PLATFORM
 	jr nz, .next_object
 	ld a, l
-	sub OBJ_UNK_07 - OBJ_FLAGS
+	sub OBJ_ID - OBJ_FLAGS
 	ld l, a
 	ld a, [hli] ; OBJ_FLAGS
 	rra

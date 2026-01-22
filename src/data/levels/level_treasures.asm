@@ -129,7 +129,7 @@ LevelTreasureIDs_WithoutTemple::
 
 	; LEVEL_CASTLE_OF_ILLUSIONS
 	db SUPER_JUMP_SLAM_OVERALLS_T ; grey
-	db TORCH ; red
+	db TORCH_T ; red
 	db GOLD_MAGIC ; green
 	db RUST_SPRAY ; blue
 

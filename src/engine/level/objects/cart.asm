@@ -43,9 +43,10 @@ CartFunc:
 	play_sfx z, SFX_06D
 	srl b
 	ret c
-	ld a, [wCurObjUnk07]
-	cp $23
-	jr z, .asm_485d5
+	ld a, [wCurObjId]
+	cp CART_RIGHT
+	jr z, .cart_right
+; cart left
 	ld hl, wCurObjYPos
 	ld a, [hli]
 	sub $04
@@ -73,7 +74,8 @@ CartFunc:
 	ret nz
 	ld b, $01
 	jp MoveWarioLeft
-.asm_485d5
+
+.cart_right
 	ld hl, wCurObjYPos
 	ld a, [hli]
 	sub $04
@@ -156,12 +158,11 @@ CartVariableFunc:
 	ld [hld], a
 	ld a, LOW(.Moving)
 	ld [hld], a
-	ld a, [wCurObjUnk07]
-	cp $23
+	ld a, [wCurObjId]
+	cp CART_VARIABLE_RIGHT
 	jr z, .asm_48682
 	ld de, Frameset_691b3
 	jp SetObjectFramesetPtr
-
 .asm_48682
 	ld de, Frameset_691aa
 	jp SetObjectFramesetPtr
@@ -174,8 +175,8 @@ CartVariableFunc:
 	play_sfx z, SFX_06D
 	srl b
 	ret c
-	ld a, [wCurObjUnk07]
-	cp $23
+	ld a, [wCurObjId]
+	cp CART_VARIABLE_RIGHT
 	jr z, .asm_486e3
 	ld hl, wCurObjYPos
 	ld a, [hli]

@@ -9,12 +9,13 @@ NobiiruFunc:
 	ld [hld], a
 	ld l, OBJ_SUBSTATE
 	res OBJSUBFLAG_UNINITIALISED_F, [hl]
-	ld a, [wCurObjUnk07]
-	cp $0a
-	jr nz, .asm_437f5
+	ld a, [wCurObjId]
+	cp NOBIIRU_LEFT
+	jr nz, .left_variant
+; right variant
 	res OBJSUBFLAG_HDIR_F, [hl]
 	jr .asm_437f7
-.asm_437f5
+.left_variant
 	set OBJSUBFLAG_HDIR_F, [hl]
 
 .asm_437f7

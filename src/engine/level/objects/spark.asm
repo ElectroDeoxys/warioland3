@@ -34,8 +34,8 @@ SparkFunc:
 	jr z, .asm_4a8ed
 	dec [hl]
 	jr z, .asm_4a8e7
-	ld a, [wCurObjUnk07]
-	cp $22
+	ld a, [wCurObjId]
+	cp SPARK_HORIZONTAL
 	jp z, MoveObjectRight
 	jp MoveObjectUp
 .asm_4a8e7
@@ -47,8 +47,8 @@ SparkFunc:
 .asm_4a8ed
 	dec [hl]
 	jr z, .asm_4a8fb
-	ld a, [wCurObjUnk07]
-	cp $22
+	ld a, [wCurObjId]
+	cp SPARK_HORIZONTAL
 	jp z, MoveObjectLeft
 	jp MoveObjectDown
 .asm_4a8fb

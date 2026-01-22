@@ -60,7 +60,7 @@ ENDR
 	ld [hli], a
 	ld a, [wCurObjXPos + 1]
 	ld [hli], a
-	ld a, [wCurObjUnk07]
+	ld a, [wCurObjId]
 	ld [hli], a
 	ld a, [wCurObjInteractionType]
 	ld [hli], a
@@ -186,7 +186,7 @@ ENDR
 	call DoObjectAction
 
 ; call update function
-	ld a, [wCurObjUnk07]
+	ld a, [wCurObjId]
 	swap a
 	and $0f
 	or BANK("Object Functions 1")
@@ -228,7 +228,7 @@ ENDR
 	ld [hli], a
 	ld a, [wCurObjXPos + 1]
 	ld [hli], a
-	ld a, [wCurObjUnk07]
+	ld a, [wCurObjId]
 	ld [hli], a
 	ld a, [wCurObjInteractionType]
 	ld [hli], a
@@ -297,7 +297,7 @@ ENDR
 	bit OBJSUBFLAG_UNINITIALISED_F, [hl]
 	jr z, .skip_update_function
 	; init object
-	ld a, [wCurObjUnk07]
+	ld a, [wCurObjId]
 	swap a
 	and $0f
 	or BANK("Object Functions 1")
@@ -339,7 +339,7 @@ ENDR
 	ld [hli], a
 	ld a, [wCurObjXPos + 1]
 	ld [hli], a
-	ld a, [wCurObjUnk07]
+	ld a, [wCurObjId]
 	ld [hli], a
 	ld a, [wCurObjInteractionType]
 	ld [hli], a
@@ -399,7 +399,7 @@ FOR n, 1, NUM_OBJECTS + 1
 	jr nz, :+
 	; if (OBJFLAG_ACTIVE && OBJFLAG_ON_SCREEN && !OBJFLAG_INVISIBLE && OBJFLAG_PRIORITY)
 	ld e, LOW(wObj{u:n}ScreenYPos)
-	ld l, LOW(wObj{u:n}Unk07)
+	ld l, LOW(wObj{u:n}Id)
 	call UpdateObjSprite
 :
 ENDR
@@ -414,7 +414,7 @@ FOR n, 1, NUM_OBJECTS + 1
 	jr nz, :+
 	; if (OBJFLAG_ACTIVE && OBJFLAG_ON_SCREEN && !OBJFLAG_INVISIBLE && !OBJFLAG_PRIORITY)
 	ld e, LOW(wObj{u:n}ScreenYPos)
-	ld l, LOW(wObj{u:n}Unk07)
+	ld l, LOW(wObj{u:n}Id)
 	call UpdateObjSprite
 :
 ENDR
@@ -677,7 +677,7 @@ VanishObject_NoSFX:
 	ld [hld], a
 Func_618b4:
 	ld a, (BANK(StarsFunc) - BANK("Object Functions 1")) << 4
-	ld [wCurObjUnk07], a
+	ld [wCurObjId], a
 
 	ld hl, wCurObjOAMPtr
 	ld a, LOW(OAM_18c000)

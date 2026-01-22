@@ -2921,18 +2921,18 @@ UpdateState_BallShot:
 	and a
 	jr z, .asm_1edc91
 	bit 7, a
-	jr z, .asm_1edc71
+	jr z, .update_animation
 	and $7f
 	ld [wAutoMoveState], a
 	dec a
-	jr z, .asm_1edc5a
+	jr z, .phase_3
 	dec a
-	jr z, .asm_1edc2e
+	jr z, .phase_1
 	dec a
-	jr z, .asm_1edc41
+	jr z, .phase_2
 	ret
 
-.asm_1edc2e
+.phase_1
 	xor a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
@@ -2940,9 +2940,9 @@ UpdateState_BallShot:
 	ld [wFramesetPtr + 0], a
 	ld a, LOW(Frameset_1dd2d1)
 	ld [wFramesetPtr + 1], a
-	jr .asm_1edc71
+	jr .update_animation
 
-.asm_1edc41
+.phase_2
 	ld hl, WarioBallShotPal
 	call SetWarioPal
 
@@ -2953,9 +2953,9 @@ UpdateState_BallShot:
 	ld [wFramesetPtr + 0], a
 	ld a, LOW(Frameset_1dd27a)
 	ld [wFramesetPtr + 1], a
-	jr .asm_1edc71
+	jr .update_animation
 
-.asm_1edc5a
+.phase_3
 	ld hl, WarioBallPal
 	call SetWarioPal
 
@@ -2967,18 +2967,20 @@ UpdateState_BallShot:
 	ld a, LOW(Frameset_1dd26c)
 	ld [wFramesetPtr + 1], a
 
-.asm_1edc71
+.update_animation
 	ld a, BANK("Wario OAM 3")
 	ldh [hCallFuncBank], a
 	hcall UpdateAnimation
 
+	; is in phase 1?
 	ld a, [wAutoMoveState]
 	cp $02
 	ret nz
 	ld a, [wAnimationEnded]
 	and a
 	ret z
-	ld a, (1 << 7) | $03
+	; goto phase 2
+	ld a, $03 | (1 << 7)
 	ld [wAutoMoveState], a
 	ret
 

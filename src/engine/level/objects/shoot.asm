@@ -1,18 +1,51 @@
 DEF NUM_SHOOT_GOALS_NEEDED        EQU   3 ; number of goals Shoot needs to win
 DEF NUM_WARIO_GOALS_NEEDED        EQU   3 ; number of goals Wario needs to win
 
-DEF SHOOT_JUMP_LATERAL_SPEED      EQU   1 ; how fast Shoot moves horizontally while jumping
+DEF SHOOT_JUMP_X_SPEED            EQU   1 ; how fast Shoot moves horizontally while jumping
+DEF SHOOT_PRESHOOT_X_SPEED        EQU   1 ; how fast Shoot moves horizontally when it has Wario ball
+DEF SHOOT_OUT_OF_BALL_X_SPEED     EQU   2 ; how fast Shoot moves when jumping out of ball form
 
 DEF SHOOT_TAUNT_DURATION          EQU  80 ; duration of taunt animation
-DEF SHOOT_JUMP_DELAY_LONG         EQU  25 ; duration between jumps when Wario has 0 goals
-DEF SHOOT_JUMP_DELAY_SHORT        EQU   2 ; duration between jumps when Wario has at least 1 goal
-DEF SHOOT_REGULAR_BALL_DURATION   EQU 256 ; duration of ball form when Wario has 0 or 1 goal
+DEF SHOOT_JUMP_DELAY_LONG         EQU  25 ; delay between jumps when Wario has 0 goals
+DEF SHOOT_JUMP_DELAY_SHORT        EQU   2 ; delay between jumps when Wario has at least 1 goal
+DEF SHOOT_IDLE_DURATION           EQU  27 ; duration of staying in standing state
+DEF SHOOT_JUMP_UP_DURATION        EQU  22 ; duration of moving up while jumping
+DEF SHOOT_TURN_AROUND_DURATION    EQU  42 ; duration of moving up while jumping
+DEF SHOOT_REGULAR_BALL_DURATION   EQU 256 ; duration switching direction while following Wario
 DEF SHOOT_LAST_GOAL_BALL_DURATION EQU 160 ; duration of ball form when Wario already has 2 goals
+DEF SHOOT_DEFEAT_RISE_DURATION    EQU  28 ; duration of rising while playing defeated animation
+DEF SHOOT_DEFEAT_SUSPENDED_DURATION EQU  70 ; duration of staying suspended while playing defeated animation
+
+; Shoot phases controlled by Var1, when not in ball form
+	const_def
+	const SHOOTPHASE_STANDING
+	const SHOOTPHASE_JUMPING_UP
+	const SHOOTPHASE_JUMPING_DOWN
+	const SHOOTPHASE_BETWEEN_JUMPS
+	const SHOOTPHASE_TURNING
+	const SHOOTPHASE_PREKICK_JUMP
+	const SHOOTPHASE_PREKICK_ANIMATION
+	const SHOOTPHASE_KICKING
+	const SHOOTPHASE_SCORE_GOAL
+	const SHOOTPHASE_WON
 
 ; wShootBallState constants
 	const_def 5
 	const SHOOTBALL_WARIO_KICKED ; Wario is moving towards goal after being kicked
 	const SHOOTBALL_WARIO_GOAL   ; Wario entered the net zone and Shoot scores a goal
+
+; GK Tortoise phases controlled by Var1
+	const_def
+	const GKTORTOISEPHASE_0
+	const GKTORTOISEPHASE_1
+	const GKTORTOISEPHASE_2
+	const GKTORTOISEPHASE_3
+	const GKTORTOISEPHASE_4
+	const GKTORTOISEPHASE_5
+	const GKTORTOISEPHASE_6
+	const GKTORTOISEPHASE_DUCKING
+	const GKTORTOISEPHASE_8
+	const GKTORTOISEPHASE_9
 
 ShootFunc:
 	ld a, TRUE
@@ -20,7 +53,7 @@ ShootFunc:
 	stop_music2
 
 	xor a
-	ld [wDollBoyActiveBarrels], a ; FALSE
+	ld [wShootCanTurnAround], a ; FALSE
 	ld [wShootBallState], a
 
 	ld hl, wCurObjFlags
@@ -49,12 +82,12 @@ ShootFunc:
 	ld a, SHOOT_TAUNT_DURATION
 	ld [hli], a
 
-	; position Shoot $20 pixels up
-	; and $60 pixels right
-	ld a, $20
+	; position Shoot 32 pixels up
+	; and 96 pixels right
+	ld a, 32
 	ld [wCurObjVar2], a
 	call MoveObjectUpByVar2
-	ld a, $60
+	ld a, 96
 	ld [wCurObjVar2], a
 	jp MoveObjectRightByVar2
 
@@ -107,40 +140,45 @@ ShootFunc:
 	xor a
 	ld [hld], a ; OBJ_STATE
 	res OBJSUBFLAG_VDIR_F, [hl]
-	jr .asm_566c1
+	jr .jump_out_of_ball
 .asm_566bd
 	xor a
 	ld [hld], a ; OBJ_STATE
 	set OBJSUBFLAG_VDIR_F, [hl]
-.asm_566c1
+.jump_out_of_ball
 	ld a, [hld] ; OBJ_SUBSTATE
 	rlca
 	ld_obj_frameset Frameset_6a022 + $2, Frameset_6a03a + $2
-	ld a, $02
+	ld a, SHOOT_OUT_OF_BALL_X_SPEED
 	ld [wCurObjVar2], a
-	jp .asm_56787
+	jp .set_jumping_up
 
 .interacted_with_ball_wario
 	xor a
 	ld [hld], a ; OBJ_STATE
 	dec l
 	ld [hld], a ; OBJ_VAR_3
-	ld a, $10
+
+	; move up 16 pixels
+	ld a, 16
 	ld [hl], a ; OBJ_VAR_2
 	call MoveObjectUpByVar2
+
 	ld de, Frameset_69ffd
 	call SetObjectFramesetPtr
 	inc l
-	ld a, $05
+	ld a, SHOOTPHASE_PREKICK_JUMP
 	ld [hli], a ; OBJ_VAR_1
-	ld a, $01
+	ld a, SHOOT_PRESHOOT_X_SPEED
 	ld [hl], a ; OBJ_VAR_2
+
+	; place Wario 16 pixels below Shoot
 	ld l, OBJ_Y_POS
 	ld a, [hli]
-	add $10
+	add 16
 	ld [wWarioYPos + 1], a
 	ld a, [wWarioYPos + 0]
-	adc $00
+	adc 0
 	ld [wWarioYPos + 0], a
 	inc l
 	ld a, [hli]
@@ -152,11 +190,12 @@ ShootFunc:
 	set OBJSUBFLAG_HDIR_F, [hl]
 	; bug, this expects x position in register a
 	; but the play_sfx macro cobbles it
-	cp $7b
-	jr c, .asm_56714 ; jump is always taken
+	cp 123
+	jr c, .nove_closer_to_net ; jump is always taken
+; move farther from net
 	res OBJSUBFLAG_VDIR_F, [hl]
 	ret
-.asm_56714
+.nove_closer_to_net
 	set OBJSUBFLAG_VDIR_F, [hl]
 	ret
 
@@ -164,7 +203,7 @@ ShootFunc:
 	ld hl, wCurObjState
 	ld a, [hl]
 	and a
-	jr z, .asm_5673d
+	jr z, .HandleNormalState
 	cp $0e
 	jr z, .asm_566a9
 	cp $04
@@ -182,19 +221,19 @@ ShootFunc:
 	ld [hl], a
 	ret
 
-.asm_5673d
+.HandleNormalState:
 	ld a, [wCurObjVar1]
 	jumptable
-	dw .Standing
-	dw .JumpingUp
-	dw .JumpingDown
-	dw .Func_568a3
-	dw .Func_568ab
-	dw .Func_568bd
-	dw .Func_568f1
-	dw .Kicking
-	dw .ScoreGoal
-	dw .Won
+	dw .Standing         ; SHOOTPHASE_STANDING
+	dw .JumpingUp        ; SHOOTPHASE_JUMPING_UP
+	dw .JumpingDown      ; SHOOTPHASE_JUMPING_DOWN
+	dw .BetweenJumps     ; SHOOTPHASE_BETWEEN_JUMPS
+	dw .Turning          ; SHOOTPHASE_TURNING
+	dw .PreKickJump      ; SHOOTPHASE_PREKICK_JUMP
+	dw .PreKickAnimation ; SHOOTPHASE_PREKICK_ANIMATION
+	dw .Kicking          ; SHOOTPHASE_KICKING
+	dw .ScoreGoal        ; SHOOTPHASE_SCORE_GOAL
+	dw .Won              ; SHOOTPHASE_WON
 
 .set_standing
 	ld hl, wCurObjSubState
@@ -209,11 +248,11 @@ ShootFunc:
 	ld de, Frameset_6a03a
 .asm_56768
 	call SetObjectFramesetPtr
-	ld a, 27
+	ld a, SHOOT_IDLE_DURATION
 	ld [hli], a ; OBJ_STATE_DURATION
-	xor a
+	xor a ; SHOOTPHASE_STANDING
 	ld [hli], a ; OBJ_VAR_1
-	ld a, SHOOT_JUMP_LATERAL_SPEED
+	ld a, SHOOT_JUMP_X_SPEED
 	ld [hl], a ; OBJ_VAR_2
 	ret
 
@@ -224,11 +263,11 @@ ShootFunc:
 	ld a, [wCurObjSubState]
 	rlca
 	ld_obj_frameset Frameset_6a02b, Frameset_6a043
-.asm_56787
+.set_jumping_up
 	call SetObjectFramesetPtr
-	ld a, 22
+	ld a, SHOOT_JUMP_UP_DURATION
 	ld [hli], a ; OBJ_STATE_DURATION
-	ld a, $01
+	ld a, SHOOTPHASE_JUMPING_UP
 	ld [hli], a ; OBJ_VAR_1
 	inc l
 	xor a
@@ -245,7 +284,7 @@ ShootFunc:
 	jp .MoveLeftOrRight
 .set_jumping_down
 	inc l
-	ld a, $02
+	ld a, SHOOTPHASE_JUMPING_DOWN
 	ld [hli], a ; OBJ_VAR_1
 	inc l
 	xor a
@@ -271,37 +310,37 @@ ShootFunc:
 	and a
 	jr nz, .grounded
 
-	; check $10 pixels down collision
+	; check 16 pixels down collision
 	ld hl, wCurObjYPos
 	ld a, [hli]
-	add $10
+	add 16
 	ldh [hYPosLo], a
 	ld a, [hli]
-	adc $00
+	adc 0
 	ldh [hYPosHi], a
 	call Func_352b
 	and a
 	jr nz, .high_16_px
 
-	; check $20 pixels down collision
+	; check 32 pixels down collision
 	ld hl, wCurObjYPos
 	ld a, [hli]
-	add $20
+	add 32
 	ldh [hYPosLo], a
 	ld a, [hli]
-	adc $00
+	adc 0
 	ldh [hYPosHi], a
 	call Func_352b
 	and a
 	jr nz, .high_32_px
 
-	; check $30 pixels down collision
+	; check 48 pixels down collision
 	ld hl, wCurObjYPos
 	ld a, [hli]
-	add $30
+	add 48
 	ldh [hYPosLo], a
 	ld a, [hli]
-	adc $00
+	adc 0
 	ldh [hYPosHi], a
 	call Func_352b
 	and a
@@ -347,26 +386,33 @@ ShootFunc:
 .still_more_goals_needed
 	ld hl, wCurObjSubState
 	ld a, [wWarioXPos + 1]
-	cp $c0
-	jr nc, .asm_56863
+	cp 192
+	jr nc, .maybe_turn_around ; x >= 192
+	; x < 192
 	ld b, a
 	ld a, [wCurObjXPos]
 	cp b
+	; carry set if Wario is left of Shoot
 	bit OBJSUBFLAG_HDIR_F, [hl]
-	jr nz, .asm_56861
-	jr c, .asm_56889
-	jr .asm_56863
-.asm_56861
-	jr nc, .asm_56889
-.asm_56863
-	ld a, [wDollBoyActiveBarrels]
+	jr nz, .facing_right
+	; turn around if Wario to right
+	jr c, .turn_around
+	jr .maybe_turn_around
+.facing_right
+	; turn around if Wario to left
+	jr nc, .turn_around
+.maybe_turn_around
+	; only turn around if wShootCanTurnAround == TRUE
+	ld a, [wShootCanTurnAround]
 	and a
-	jr nz, .asm_56889
-	ld a, [hl]
+	jr nz, .turn_around
+	; else do a jump
+	ld a, [hl] ; OBJ_SUBSTATE
 	rlca
 	ld_obj_frameset Frameset_6a037, Frameset_6a04f
 	call SetObjectFramesetPtr
 
+	; set jumping delay
 	ld a, [wWarioGoals]
 	and a
 	jr nz, .at_least_1_goal
@@ -377,35 +423,36 @@ ShootFunc:
 	ld a, SHOOT_JUMP_DELAY_SHORT
 .got_jump_delay
 	ld [hli], a ; OBJ_STATE_DURATION
-	ld a, $03
+
+	ld a, SHOOTPHASE_BETWEEN_JUMPS
 	ld [hli], a ; OBJ_VAR_1
 	ret
 
-.asm_56889
+.turn_around
 	ld a, [hl]
 	rlca
 	ld_obj_frameset Frameset_69f35, Frameset_69f40
 	call SetObjectFramesetPtr
-	ld a, 42
-	ld [hli], a
-	ld a, $04
+	ld a, SHOOT_TURN_AROUND_DURATION
+	ld [hli], a ; OBJ_STATE_DURATION
+	ld a, SHOOTPHASE_TURNING
 	ld [hli], a ; OBJ_VAR_1
 	xor a ; FALSE
-	ld [wDollBoyActiveBarrels], a
+	ld [wShootCanTurnAround], a
 	ret
 
-.Func_568a3:
+.BetweenJumps:
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
 	jp .set_standing
 
-.Func_568ab:
+.Turning:
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	jp z, .set_standing
 	ld a, [hl]
-	cp 21
+	cp SHOOT_TURN_AROUND_DURATION / 2
 	ret nz
 	ld l, OBJ_SUBSTATE
 	ld a, [hl]
@@ -413,52 +460,66 @@ ShootFunc:
 	ld [hl], a
 	ret
 
-.Func_568bd:
-	call .Func_569b0
+.PreKickJump:
+	; handle movement in x and y axis
+	call .DoPreKickingXMovement
 	ld bc, Data_54000
-	call Func_57213
+	call DoPreKickingJumpYMovement
+
 	ld hl, wCurObjYPos
 	ld a, [hl]
-	ld b, $e0
+	ld b, 224
 	cp b
-	ret c
+	ret c ; y < 224
+
+	; y >= 224
 	ld de, Frameset_6a000
 	call SetObjectFramesetPtr
 	inc l
-	ld a, $06
-	ld [hli], a
-	ld a, $10
-	ld [hl], a
+	ld a, SHOOTPHASE_PREKICK_ANIMATION
+	ld [hli], a ; OBJ_VAR_1
+
+	; move down 16 pixels
+	ld a, 16
+	ld [hl], a ; OBJ_VAR_2
 	call MoveObjectDownByVar2
+
+	; snap Shoot and Wario to y = 240
+	; and position Wario to (Shoot's x + 8)
 	ld l, OBJ_Y_POS
-	ld a, $f0
+	ld a, 240
 	ld [hli], a
 	ld [wWarioYPos + 1], a
 	ld a, [hli]
 	ld [wWarioYPos + 0], a
-	ld a, [hli]
-	add $08
+	ld a, [hli] ; OBJ_X_POS
+	add 8
 	ld [wWarioXPos + 1], a
 	ret
 
-.Func_568f1:
+.PreKickAnimation:
+	; wait frame to finish
 	ld hl, wCurObjFrameDuration
 	ld a, [hli]
 	and a
 	ret nz
-	ld a, [hli]
-	cp $06
-	jr z, .asm_56909
-	cp $0a
+
+	; is it frame 6?
+	ld a, [hli] ; OBJ_FRAMESET_OFFSET
+	cp 6
+	jr z, .frame_6
+	; is it frame 10?
+	cp 10
 	ret nz
 	inc l
-	ld a, $07
-	ld [hl], a
+	ld a, SHOOTPHASE_KICKING
+	ld [hl], a ; OBJ_VAR_1
 	ld de, Frameset_69f54
 	jp SetObjectFramesetPtr
-.asm_56909
+.frame_6
+	; move Wario 8 pixels right
 	ld a, [wWarioXPos + 1]
-	add $08
+	add 8
 	ld [wWarioXPos + 1], a
 	play_sfx SFX_HANG_GRAB
 	ret
@@ -472,12 +533,12 @@ ShootFunc:
 	and a
 	ret nz
 	ld a, [hli] ; OBJ_FRAMESET_OFFSET
-	cp $4
+	cp 4
 	jr z, .shoot_wario
-	cp $8
+	cp 8
 	ret nz
 	inc l
-	ld a, $08
+	ld a, SHOOTPHASE_SCORE_GOAL
 	ld [hl], a ; OBJ_VAR_1
 	ld de, Frameset_6a00b
 	jp SetObjectFramesetPtr
@@ -506,14 +567,14 @@ ShootFunc:
 	ld [wAutoMoveState], a
 	play_sfx SFX_0C7
 	ld a, TRUE
-	ld [wDollBoyActiveBarrels], a
+	ld [wShootCanTurnAround], a
 	ld hl, wCurObjSubState
 	res OBJSUBFLAG_VDIR_F, [hl]
 	ld a, b
 	cp NUM_SHOOT_GOALS_NEEDED
 	jp nz, .still_more_goals_needed
 	; reached target num of goals
-	ld a, $09
+	ld a, SHOOTPHASE_WON
 	ld [wCurObjVar1], a
 	ret
 
@@ -524,7 +585,7 @@ ShootFunc:
 
 .MoveWarioBallAfterKick:
 	ld a, [wWarioXPos + 1]
-	cp $ed
+	cp 237
 	jr nc, .ball_wario_inside_net
 ; move Wario right
 	ld bc, Data_54010
@@ -534,7 +595,7 @@ ShootFunc:
 .ball_wario_inside_net
 ; move Wario down to the ground
 	ld a, [wWarioYPos + 1]
-	cp $f0
+	cp 240
 	jr nc, .set_wario_ball_goal_state
 	ld b, 3
 	jp MoveWarioDown
@@ -544,15 +605,16 @@ ShootFunc:
 	ld [wShootBallState], a
 	ret
 
-.Func_569b0:
+.DoPreKickingXMovement:
 	ld a, [wCurObjVar2]
 	ld b, a
 	ld hl, wCurObjSubState
 	bit OBJSUBFLAG_VDIR_F, [hl]
-	jr nz, .asm_569c1
+	jr nz, .move_with_wario_right
+; move with Wario left
 	call MoveObjectLeftByVar2
 	jp MoveWarioLeft
-.asm_569c1
+.move_with_wario_right
 	call MoveObjectRightByVar2
 	jp MoveWarioRight
 
@@ -561,26 +623,27 @@ ShootFunc:
 	rlca
 	rlca
 	ld a, [wCurObjXPos]
-	jr c, .asm_569e8 ; OBJSUBFLAG_VDIR_F
-	cp $1b
+	jr c, .moving_right ; OBJSUBFLAG_VDIR_F
+; moving left
+	cp 27
 	jp nc, MoveObjectLeftByVar2
 	play_sfx SFX_08D
 	ld hl, wCurObjSubState
 	set OBJSUBFLAG_VDIR_F, [hl]
 	bit OBJSUBFLAG_HDIR_F, [hl]
 	ret nz
-	jr .asm_569fd
-.asm_569e8
-	cp $db
+	jr .set_can_turn_around
+.moving_right
+	cp 219
 	jp c, MoveObjectRightByVar2
 	play_sfx SFX_08D
 	ld hl, wCurObjSubState
 	res OBJSUBFLAG_VDIR_F, [hl]
 	bit OBJSUBFLAG_HDIR_F, [hl]
 	ret z
-.asm_569fd
+.set_can_turn_around
 	ld a, TRUE
-	ld [wDollBoyActiveBarrels], a
+	ld [wShootCanTurnAround], a
 	ret
 
 .stepped_on
@@ -595,13 +658,13 @@ ShootFunc:
 	ld a, OBJ_INTERACTION_01
 	ld [hli], a
 	ld a, -18
-	ld [hli], a
+	ld [hli], a ; OBJ_COLLBOX_TOP
 	ld a, 0
-	ld [hl], a
+	ld [hl], a ; OBJ_COLLBOX_BOTTOM
 .BallForm:
 	ld hl, wCurObjFlags
 	ld a, [wCurObjXPos]
-	cp $db
+	cp 219
 	jr nc, .asm_56a2a
 	set OBJFLAG_GRABBED_F, [hl]
 	jr .asm_56a2c
@@ -897,7 +960,7 @@ ShootFunc:
 	xor a
 	ld [hld], a
 	ld a, [wCurObjYPos]
-	cp $d8
+	cp 216
 	jr c, .asm_56c37
 	ld a, $02
 	ld [hld], a
@@ -917,11 +980,11 @@ ShootFunc:
 .Func_56c49:
 	ld a, no_actions_for 1
 	ld [wCurObjAction], a
-	ld a, [wDollBoyActiveBarrels]
+	ld a, [wShootCanTurnAround]
 	and a
 	jr z, .asm_56c5e
 	xor a ; FALSE
-	ld [wDollBoyActiveBarrels], a
+	ld [wShootCanTurnAround], a
 	ld de, Frameset_69f5d
 	call SetObjectFramesetPtr
 .asm_56c5e
@@ -937,10 +1000,14 @@ ShootFunc:
 	call ApplyObjYMovement
 	ld hl, wCurObjYPos
 	ld a, [hl]
-	ld b, $f0
+	ld b, 240
 	cp b
-	ret c
+	ret c ; y < 240
+	; y >= 240
+
+	; snap Shoot to y = 240
 	ld [hl], b
+
 	ld a, [wShootBallState]
 	cp $04
 	jr nz, .asm_56c93
@@ -956,30 +1023,33 @@ ShootFunc:
 	jr nz, .asm_56c9e
 	inc l
 	ld a, $09
-	ld [hl], a
+	ld [hl], a ; OBJ_STATE
 	ret
 .asm_56c9e
 	ld a, [wCurObjXPos]
-	cp $db
+	cp 219
 	jr nc, .asm_56caa
 	inc l
 	ld a, $08
-	ld [hl], a
+	ld [hl], a ; OBJ_STATE
 	ret
 .asm_56caa
 	inc l
 	ld a, $2d
-	ld [hl], a
+	ld [hl], a ; OBJ_STATE
+
 	ld a, $02
 	ld [wShootBallState], a
+
 	play_sfx SFX_0C7
+
 	ld hl, wWarioGoals
 	ld a, [hl]
-	cp $03
+	cp NUM_WARIO_GOALS_NEEDED
 	jr z, .asm_56cd5
 	inc [hl]
 	ld a, [hl]
-	cp $03
+	cp NUM_WARIO_GOALS_NEEDED
 	jr nz, .asm_56cd5
 	stop_music2
 .asm_56cd5
@@ -992,28 +1062,28 @@ ShootFunc:
 	rlca
 	jr c, .asm_56cf1
 	ld a, [wCurObjXPos]
-	cp $1b
+	cp 27
 	jp nc, MoveObjectLeftByVar2
 	ld hl, wCurObjSubState
 	set OBJSUBFLAG_VDIR_F, [hl]
 	jr .asm_56d05
 .asm_56cf1
 	ld a, [wCurObjYPos]
-	cp $d0
+	cp 208
 	jr nc, .asm_56d13
 	ld a, [wCurObjXPos]
-	cp $db
+	cp 219
 	jp c, MoveObjectRightByVar2
 	ld hl, wCurObjSubState
 	res OBJSUBFLAG_VDIR_F, [hl]
 .asm_56d05
 	ld a, TRUE
-	ld [wDollBoyActiveBarrels], a
+	ld [wShootCanTurnAround], a
 	play_sfx SFX_01A
 	ret
 .asm_56d13
 	ld a, [wCurObjXPos]
-	cp $f3
+	cp 243
 	jp c, MoveObjectRightByVar2
 	ret
 
@@ -1035,7 +1105,7 @@ ShootFunc:
 	xor a
 	ld [hld], a ; OBJ_VAR_3
 	ld a, [wWarioGoals]
-	cp $03
+	cp NUM_WARIO_GOALS_NEEDED
 	jr nz, .asm_56d47
 	ld a, $01
 	jr .asm_56d49
@@ -1048,7 +1118,7 @@ ShootFunc:
 .set_defeated
 	ld de, Frameset_69f8a
 	call SetObjectFramesetPtr
-	ld a, $1c
+	ld a, SHOOT_DEFEAT_RISE_DURATION
 	ld [hli], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.DefeatRise)
@@ -1058,11 +1128,11 @@ ShootFunc:
 	ld l, OBJ_STATE
 	ld a, $48
 	ld [hld], a
-	ld a, [hl]
-	and $e0
+	ld a, [hl] ; OBJ_SUBSTATE
+	and OBJSUBFLAG_UNINITIALISED | OBJSUBFLAG_VDIR | OBJSUBFLAG_HDIR
 	ld [hld], a
 	xor a
-	ld [hl], a
+	ld [hl], a ; OBJ_VAR_3
 	ld l, OBJ_FLAGS
 	set OBJFLAG_PRIORITY_F, [hl]
 	ld hl, wCurObjUnk02
@@ -1084,27 +1154,28 @@ ShootFunc:
 	ld [wCurObjVar3], a
 	ld de, Frameset_69f6f
 	call SetObjectFramesetPtr
-	ld a, 70
+	ld a, SHOOT_DEFEAT_SUSPENDED_DURATION
 	ld [hli], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.DefeatFall)
+	ld a, HIGH(.DefeatSuspendAndFall)
 	ld [hld], a
-	ld a, LOW(.DefeatFall)
+	ld a, LOW(.DefeatSuspendAndFall)
 	ld [hld], a
 	ret
 
-.DefeatFall:
+.DefeatSuspendAndFall:
 	ld a, no_actions_for 1
 	ld [wCurObjAction], a
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
 	and a
-	jr z, .asm_56dc6
+	jr z, .fall
+; still supsended in air
 	dec [hl]
 	ret nz
 	play_sfx SFX_0A3
 	ret
-.asm_56dc6
+.fall
 	ld bc, Data_60ea0
 	jp ApplyObjYMovement
 
@@ -1131,11 +1202,11 @@ GKTortoisePlatformFunc:
 	ld a, 60
 	ld [hli], a ; OBJ_VAR_1
 
-	; move $40 pixels right and $10 pixels down
-	ld a, $40
+	; move 64 pixels right and 16 pixels down
+	ld a, 64
 	ld [hl], a ; OBJ_VAR_2
 	call MoveObjectRightByVar2
-	ld a, $10
+	ld a, 16
 	ld [wCurObjVar2], a
 	jp MoveObjectDownByVar2
 
@@ -1169,7 +1240,7 @@ GKTortoisePlatformFunc:
 	ld a, [hld]
 	and a
 	jr z, .moving_up
-	inc [hl]
+	inc [hl] ; OBJ_STATE_DURATION
 	ld a, [hli]
 	cp 176
 	jr z, .set_move_up
@@ -1183,12 +1254,12 @@ GKTortoisePlatformFunc:
 	jp MoveObjectDown
 .set_move_up
 	xor a
-	ld [hl], a
+	ld [hl], a ; OBJ_VAR_1
 	ld [wCurObjState], a
 	ret
 
 .moving_up
-	dec [hl]
+	dec [hl] ; OBJ_STATE_DURATION
 	jr z, .set_move_down
 	ld l, OBJ_FLAGS
 	bit OBJFLAG_STEPPED_F, [hl]
@@ -1201,7 +1272,7 @@ GKTortoisePlatformFunc:
 .set_move_down
 	inc l
 	ld a, $01
-	ld [hl], a
+	ld [hl], a ; OBJ_VAR_1
 	ret
 
 GKTortoiseFunc:
@@ -1223,22 +1294,22 @@ GKTortoiseFunc:
 	ld de, Frameset_69fed
 	call SetObjectFramesetPtr
 	inc l
-	xor a
+	xor a ; GKTORTOISEPHASE_0
 	ld [hli], a ; OBJ_VAR_1
 
-	; move $40 pixels right and $10 pixels down
-	ld a, $40
+	; move 64 pixels right and 16 pixels down
+	ld a, 64
 	ld [hl], a
 	call MoveObjectRightByVar2
-	ld a, $10
+	ld a, 16
 	ld [wCurObjVar2], a
 	jp MoveObjectDownByVar2
 
-.asm_56e9c
+.set_ducking
 	ld de, Frameset_6a017
 	call SetObjectFramesetPtr
 	inc l
-	ld a, $07
+	ld a, GKTORTOISEPHASE_DUCKING
 	ld [hl], a ; OBJ_VAR_1
 	ld a, -10
 	ld [wCurObjCollBoxTop], a
@@ -1247,29 +1318,32 @@ GKTortoiseFunc:
 .Main:
 	ld a, [wTransformation]
 	and a
-	jr z, .asm_56eb7
+	jr z, .wario_not_transformed
 	ld a, no_actions_for 1
 	ld [wCurObjAction], a
-.asm_56eb7
+.wario_not_transformed
+	; GK Tortoise will automatically duck
+	; if Shoot kicks Wario towards net
 	ld a, [wShootBallState]
 	cp SHOOTBALL_WARIO_KICKED
-	jr nz, .asm_56ec5
+	jr nz, .no_kicked_wario
+	; is it already ducking?
 	ld a, [wCurObjVar1]
-	cp $07
-	jr nz, .asm_56e9c
-.asm_56ec5
+	cp GKTORTOISEPHASE_DUCKING
+	jr nz, .set_ducking
+.no_kicked_wario
 	ld a, [wCurObjVar1]
 	jumptable
-	dw .Func_56f27
-	dw .Func_56f2e
-	dw .Func_56fef
-	dw .Func_57021
-	dw .Func_5707b
-	dw .Func_57039
-	dw .Func_57198
-	dw .Func_56f0c
-	dw .Func_56edd
-	dw .Func_5710f
+	dw .Func_56f27 ; GKTORTOISEPHASE_0
+	dw .Func_56f2e ; GKTORTOISEPHASE_1
+	dw .Func_56fef ; GKTORTOISEPHASE_2
+	dw .Func_57021 ; GKTORTOISEPHASE_3
+	dw .Func_5707b ; GKTORTOISEPHASE_4
+	dw .Func_57039 ; GKTORTOISEPHASE_5
+	dw .Func_57198 ; GKTORTOISEPHASE_6
+	dw .Ducking ; GKTORTOISEPHASE_DUCKING
+	dw .Func_56edd ; GKTORTOISEPHASE_8
+	dw .Func_5710f ; GKTORTOISEPHASE_9
 
 .Func_56edd:
 	ld a, no_actions_for 1
@@ -1289,21 +1363,22 @@ GKTortoiseFunc:
 	ld [wIsBossBattle], a
 	ret
 
-.Func_56f0c:
+.Ducking:
 	ld hl, wCurObjFramesetOffset
 	ld a, [hld]
-	cp $0a
-	jr z, .asm_56f21
-	cp $06
-	ret c
+	cp 10
+	jr z, .duck_delay
+	cp 6
+	ret c ; < 6
+	; add delay if Wario still didn't enter net
 	ld a, [wShootBallState]
 	cp SHOOTBALL_WARIO_GOAL
 	ret z
-	ld a, $10
-	ld [hl], a
+	ld a, 16
+	ld [hl], a ; OBJ_FRAME_DURATION
 	ret
-.asm_56f21
-	ld a, [hl]
+.duck_delay
+	ld a, [hl] ; OBJ_FRAME_DURATION
 	and a
 	ret nz
 	jp .asm_56fd2
@@ -1319,7 +1394,7 @@ GKTortoiseFunc:
 	ld hl, wCurObjAction
 	xor a
 	ld [hld], a
-	ld a, [hl]
+	ld a, [hl] ; OBJ_STATE
 	and a
 	ret z
 	cp $2f
@@ -1328,35 +1403,41 @@ GKTortoiseFunc:
 	cp $08
 	jr nz, .asm_56f7d
 	xor a
-	ld [hl], a
+	ld [hl], a ; OBJ_STATE
 	ld de, Frameset_69ff2
 	call SetObjectFramesetPtr
 	inc l
-	ld a, $09
-	ld [hl], a
+	ld a, GKTORTOISEPHASE_9
+	ld [hl], a ; OBJ_VAR_1
 	ld a, $03
 	ld [wShootBallState], a
 	play_sfx SFX_FAT_WALK
 	call .Func_57170
-.asm_56f63
-	call .GetShootYPosPtr
+
+.set_shoot_pos_11x_16y
+	call .GetShootPosPtr
+
+	; set Shoot.y = GK.y - 16
 	ld de, wCurObjYPos
 	ld a, [de]
-	sub $10
+	sub 16
 	ld [hli], a
 	inc e
 	ld a, [de]
-	sbc $00
+	sbc 0
+	ld [hli], a
+
+	; set Shoot.x = GK.x - 11
+	inc e
+	ld a, [de]
+	sub 11
 	ld [hli], a
 	inc e
 	ld a, [de]
-	sub $0b
-	ld [hli], a
-	inc e
-	ld a, [de]
-	sbc $00
+	sbc 0
 	ld [hli], a
 	ret
+
 .asm_56f7d
 	xor a
 	ld [hl], a
@@ -1379,28 +1460,32 @@ GKTortoiseFunc:
 	ld a, $04
 	ld [hl], a
 	ret
+
 .asm_56fa3
 	xor a
-	ld [hl], a
+	ld [hl], a ; OBJ_STATE
 	ld de, Frameset_69ff2
 	call SetObjectFramesetPtr
 	inc l
-	ld a, $05
+	ld a, GKTORTOISEPHASE_5
 	ld [hl], a ; OBJ_VAR_1
 	play_sfx SFX_FAT_WALK
-.asm_56fb7
+.set_wario_pos_11x_16y
+	; set Wario.y = GK.y - 16
 	ld l, OBJ_Y_POS
 	ld a, [hli]
-	sub $10
+	sub 16
 	ld [wWarioYPos + 1], a
 	ld a, [hli]
-	sbc $00
+	sbc 0
 	ld [wWarioYPos + 0], a
+
+	; set Wario.x = GK.x - 11
 	ld a, [hli]
-	sub $0b
+	sub 11
 	ld [wWarioXPos + 1], a
 	ld a, [hli]
-	sbc $00
+	sbc 0
 	ld [wWarioXPos + 0], a
 	ret
 
@@ -1437,11 +1522,11 @@ GKTortoiseFunc:
 	ld de, Frameset_69fa9
 	call SetObjectFramesetPtr
 	inc l
-	ld a, $01
-	ld [hl], a
+	ld a, GKTORTOISEPHASE_1
+	ld [hl], a ; OBJ_VAR_1
 	xor a
 	ld [wCurObjState], a
-	ld a, $ec
+	ld a, -20
 	ld [wCurObjCollBoxTop], a
 	ld l, OBJ_FLAGS
 	res OBJFLAG_NO_COLLISION_F, [hl]
@@ -1468,29 +1553,35 @@ GKTortoiseFunc:
 	ld a, [hli]
 	and a
 	ret nz
+	; end of frame
 	ld a, [hl]
-	cp $02
-	jr z, .asm_57052
-	cp $04
-	jp z, .asm_56fb7
-	cp $06
+	cp 2
+	jr z, .set_wario_pos_22y
+	cp 4
+	jp z, .set_wario_pos_11x_16y
+	cp 6
 	jr z, .asm_57069
-	cp $0a
+	cp 10
 	ret nz
 	jr .asm_57009
-.asm_57052
+
+.set_wario_pos_22y
+	; set Wario.y = GK.y - 16
 	ld l, OBJ_Y_POS
 	ld a, [hli]
-	sub $16
+	sub 22
 	ld [wWarioYPos + 1], a
 	ld a, [hli]
-	sbc $00
+	sbc 0
 	ld [wWarioYPos + 0], a
+
+	; set Wario.x = GK.x
 	ld a, [hli]
 	ld [wWarioXPos + 1], a
 	ld a, [hli]
 	ld [wWarioXPos + 0], a
 	ret
+
 .asm_57069
 	xor a
 	ld [wAutoMoveState], a
@@ -1501,7 +1592,7 @@ GKTortoiseFunc:
 
 .Func_5707b:
 	ld hl, wCurObjFlags
-	set 3, [hl]
+	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld l, OBJ_FRAME_DURATION
 	ld a, [hli]
 	and a
@@ -1522,10 +1613,10 @@ GKTortoiseFunc:
 	jp nz, .asm_57009
 	ld de, Frameset_6a00e
 	call SetObjectFramesetPtr
-	ld a, $b4
-	ld [hli], a
-	ld a, $08
-	ld [hl], a
+	ld a, 180
+	ld [hli], a ; OBJ_STATE_DURATION
+	ld a, GKTORTOISEPHASE_8
+	ld [hl], a ; OBJ_VAR_1
 	ld a, -10
 	ld [wCurObjCollBoxTop], a
 	ret
@@ -1538,7 +1629,7 @@ GKTortoiseFunc:
 
 .asm_570c1
 	play_sfx SFX_FAT_WALK
-	call .GetShootYPosPtr
+	call .GetShootPosPtr
 	ld de, wCurObjYPos
 	ld a, [de]
 	ld [hli], a
@@ -1555,7 +1646,7 @@ GKTortoiseFunc:
 	ld [hli], a
 	ret
 .asm_570df
-	call .GetShootYPosPtr
+	call .GetShootPosPtr
 	ld de, wCurObjYPos
 	ld a, [de]
 	sub $16
@@ -1572,7 +1663,7 @@ GKTortoiseFunc:
 	ld [hli], a
 	ret
 .asm_570f5
-	call .GetShootYPosPtr
+	call .GetShootPosPtr
 	ld de, wCurObjYPos
 	ld a, [de]
 	sub $10
@@ -1596,26 +1687,32 @@ GKTortoiseFunc:
 	ld a, [hli]
 	and a
 	ret nz
-	ld a, [hl]
-	cp $02
-	jr z, .asm_57129
-	cp $04
-	jp z, .asm_56f63
-	cp $06
+	; end of a frame
+	ld a, [hl] ; OBJ_FRAMESET_OFFSET
+	cp 2
+	jr z, .set_shoot_pos_22y
+	cp 4
+	jp z, .set_shoot_pos_11x_16y
+	cp 6
 	jr z, .asm_5713f
-	cp $0a
+	cp 10
 	ret nz
 	jp .asm_57009
-.asm_57129
-	call .GetShootYPosPtr
+
+.set_shoot_pos_22y
+	call .GetShootPosPtr
+
+	; set Shoot.y = GK.y - 22
 	ld de, wCurObjYPos
 	ld a, [de]
-	sub $16
+	sub 22
 	ld [hli], a
 	inc e
 	ld a, [de]
-	sbc $00
+	sbc 0
 	ld [hli], a
+
+	; set Shoot.x = GK.x
 	inc e
 	ld a, [de]
 	ld [hli], a
@@ -1623,25 +1720,26 @@ GKTortoiseFunc:
 	ld a, [de]
 	ld [hli], a
 	ret
+
 .asm_5713f
 	ld a, $04
 	ld [wShootBallState], a
 	play_sfx SFX_067
 	ret
 
-.GetShootYPosPtr:
+.GetShootPosPtr:
 	ld a, LOW(wObj1)
 	ld b, LOW(wObj1)
 	ld h, HIGH(wObj1)
 .loop_find_shoot_obj_1
-	ld l, OBJ_UNK_07
+	ld l, OBJ_ID
 	add l
 	ld l, a
-	ld a, [hl] ; OBJ_UNK_07
-	cp $50
+	ld a, [hl] ; OBJ_ID
+	cp SHOOT
 	jr nz, .next_obj_1
 	ld a, l
-	sub OBJ_UNK_07 - OBJ_FLAGS
+	sub OBJ_ID - OBJ_FLAGS
 	ld l, a
 	ld a, [hli] ; OBJ_FLAGS
 	rra
@@ -1663,14 +1761,14 @@ GKTortoiseFunc:
 	ld b, LOW(wObj1)
 	ld h, HIGH(wObj1)
 .loop_find_shoot_obj_2
-	ld l, OBJ_UNK_07
+	ld l, OBJ_ID
 	add l
 	ld l, a
-	ld a, [hl] ; OBJ_UNK_07
-	cp $50
+	ld a, [hl] ; OBJ_ID
+	cp SHOOT
 	jr nz, .next_obj_2
 	ld a, l
-	sub OBJ_UNK_07 - OBJ_FLAGS
+	sub OBJ_ID - OBJ_FLAGS
 	ld l, a
 	ld a, [hl] ; OBJ_FLAGS
 	rra
@@ -1756,41 +1854,48 @@ GKTortoiseFunc:
 	ld [wWarioXPos + 0], a
 	ret
 
-Func_57213:
+; input:
+; - bc = movement data
+DoPreKickingJumpYMovement:
 	ld hl, wCurObjVar3
 	ld a, [hl]
 	add c
 	ld c, a
 	ld a, [bc]
+
+	; if already past end of list, get last valid offset
 	cp $80
-	jr nz, .asm_57222
+	jr nz, .valid_index
 	dec c
 	ld a, [bc]
-	jr .asm_57223
-.asm_57222
-	inc [hl]
-.asm_57223
+	jr .got_offset
+.valid_index
+	inc [hl] ; OBJ_VAR_3
+.got_offset
 	ld b, a
 	ld l, OBJ_Y_POS
-	cp $80
-	ld c, [hl]
-	jr nc, .asm_57236
+	cp -128
+	ld c, [hl] ; OBJ_Y_POS
+	jr nc, .moving_up
+
+; moving down
 	add c
 	ld [hli], a
-	jr nc, .asm_57230
+	jr nc, .move_wario_down
 	inc [hl]
-.asm_57230
+.move_wario_down
 	call MoveWarioDown
 	jp HandleDownwardsFloorTransition
-.asm_57236
+
+.moving_up
 	add c
 	ld [hli], a
-	jr c, .asm_5723b
+	jr c, .move_wario_up
 	dec [hl]
-.asm_5723b
+.move_wario_up
 	xor a
 	sub b
-	ld b, a
+	ld b, a ; b = -b
 	call MoveWarioUp
 	jp HandleUpwardsFloorTransition
 

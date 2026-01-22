@@ -815,14 +815,14 @@ ScrowlerTentacleFunc:
 	ld b, LOW(wObj1)
 	ld h, HIGH(wObj1)
 .asm_54aac
-	ld l, OBJ_UNK_07
+	ld l, OBJ_ID
 	add l
 	ld l, a
-	ld a, [hl] ; OBJ_UNK_07
-	cp $50
+	ld a, [hl] ; OBJ_ID
+	cp SCOWLER
 	jr nz, .asm_54abd
 	ld a, l
-	sub OBJ_UNK_07 - OBJ_FLAGS
+	sub OBJ_ID - OBJ_FLAGS
 	ld l, a
 	ld a, [hli] ; OBJ_FLAGS
 	rra
@@ -858,8 +858,8 @@ ScrowlerTentacleFunc:
 	jr z, .asm_54b0e
 	cp $ff
 	jr z, .asm_54b23
-	ld a, [wCurObjUnk07]
-	cp $51
+	ld a, [wCurObjId]
+	cp SCROWLER_TENTACLE_RIGHT
 	jr z, .asm_54b5a
 	jr .asm_54b2e
 .asm_54af0
@@ -876,8 +876,8 @@ ScrowlerTentacleFunc:
 	ld [hli], a
 	ret
 .asm_54b05
-	ld a, [wCurObjUnk07]
-	cp $51
+	ld a, [wCurObjId]
+	cp SCROWLER_TENTACLE_RIGHT
 	jr z, .asm_54b5a
 	jr .asm_54b2e
 .asm_54b0e
@@ -904,8 +904,8 @@ ScrowlerTentacleFunc:
 	jr nz, .asm_54b5a
 .asm_54b2e
 	ld hl, wCurObjYPos
-	ld a, [wCurObjUnk07]
-	cp $51
+	ld a, [wCurObjId]
+	cp SCROWLER_TENTACLE_RIGHT
 	jr z, .asm_54b49
 	ld a, c
 	sub $0b
@@ -936,8 +936,8 @@ ScrowlerTentacleFunc:
 	ret
 .asm_54b5a
 	ld hl, wCurObjYPos
-	ld a, [wCurObjUnk07]
-	cp $51
+	ld a, [wCurObjId]
+	cp SCROWLER_TENTACLE_RIGHT
 	jr z, .asm_54b75
 	ld a, c
 	sub $04

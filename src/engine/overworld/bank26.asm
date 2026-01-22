@@ -871,7 +871,7 @@ CollectionLinkTable:
 	dw .none ; HEAD_SMASH_HELMET_T
 	dw .lantern_and_flame ; LANTERN
 	dw .lantern_and_flame ; MAGICAL_FLAME
-	dw .none ; TORCH
+	dw .none ; TORCH_T
 	dw .gears ; GEAR_1
 	dw .gears ; GEAR_2
 	dw .none ; WARP_COMPACT
@@ -1351,7 +1351,7 @@ TreasureOBPals:
 	db OBPAL_TREASURE_GREEN  ; HEAD_SMASH_HELMET_T
 	db OBPAL_TREASURE_YELLOW ; LANTERN
 	db OBPAL_TREASURE_RED    ; MAGICAL_FLAME
-	db OBPAL_TREASURE_RED    ; TORCH
+	db OBPAL_TREASURE_RED    ; TORCH_T
 	db OBPAL_TREASURE_BLUE   ; GEAR_1
 	db OBPAL_TREASURE_BLUE   ; GEAR_2
 	db OBPAL_TREASURE_BLUE   ; WARP_COMPACT

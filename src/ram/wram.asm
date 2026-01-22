@@ -752,53 +752,15 @@ wIsOnSteppableObject::
 SECTION "Sprites WRAM", WRAM0
 
 wVirtualOAM::
-wVirtualOAMSprite00:: sprite_oam_struct wVirtualOAMSprite00
-wVirtualOAMSprite01:: sprite_oam_struct wVirtualOAMSprite01
-wVirtualOAMSprite02:: sprite_oam_struct wVirtualOAMSprite02
-wVirtualOAMSprite03:: sprite_oam_struct wVirtualOAMSprite03
-wVirtualOAMSprite04:: sprite_oam_struct wVirtualOAMSprite04
-wVirtualOAMSprite05:: sprite_oam_struct wVirtualOAMSprite05
-wVirtualOAMSprite06:: sprite_oam_struct wVirtualOAMSprite06
-wVirtualOAMSprite07:: sprite_oam_struct wVirtualOAMSprite07
-wVirtualOAMSprite08:: sprite_oam_struct wVirtualOAMSprite08
-wVirtualOAMSprite09:: sprite_oam_struct wVirtualOAMSprite09
-wVirtualOAMSprite10:: sprite_oam_struct wVirtualOAMSprite10
-wVirtualOAMSprite11:: sprite_oam_struct wVirtualOAMSprite11
-wVirtualOAMSprite12:: sprite_oam_struct wVirtualOAMSprite12
-wVirtualOAMSprite13:: sprite_oam_struct wVirtualOAMSprite13
-wVirtualOAMSprite14:: sprite_oam_struct wVirtualOAMSprite14
-wVirtualOAMSprite15:: sprite_oam_struct wVirtualOAMSprite15
-wVirtualOAMSprite16:: sprite_oam_struct wVirtualOAMSprite16
-wVirtualOAMSprite17:: sprite_oam_struct wVirtualOAMSprite17
-wVirtualOAMSprite18:: sprite_oam_struct wVirtualOAMSprite18
-wVirtualOAMSprite19:: sprite_oam_struct wVirtualOAMSprite19
-wVirtualOAMSprite20:: sprite_oam_struct wVirtualOAMSprite20
-wVirtualOAMSprite21:: sprite_oam_struct wVirtualOAMSprite21
-wVirtualOAMSprite22:: sprite_oam_struct wVirtualOAMSprite22
-wVirtualOAMSprite23:: sprite_oam_struct wVirtualOAMSprite23
-wVirtualOAMSprite24:: sprite_oam_struct wVirtualOAMSprite24
-wVirtualOAMSprite25:: sprite_oam_struct wVirtualOAMSprite25
-wVirtualOAMSprite26:: sprite_oam_struct wVirtualOAMSprite26
-wVirtualOAMSprite27:: sprite_oam_struct wVirtualOAMSprite27
-wVirtualOAMSprite28:: sprite_oam_struct wVirtualOAMSprite28
-wVirtualOAMSprite29:: sprite_oam_struct wVirtualOAMSprite29
-wVirtualOAMSprite30:: sprite_oam_struct wVirtualOAMSprite30
-wVirtualOAMSprite31:: sprite_oam_struct wVirtualOAMSprite31
-wVirtualOAMSprite32:: sprite_oam_struct wVirtualOAMSprite32
-wVirtualOAMSprite33:: sprite_oam_struct wVirtualOAMSprite33
-wVirtualOAMSprite34:: sprite_oam_struct wVirtualOAMSprite34
-wVirtualOAMSprite35:: sprite_oam_struct wVirtualOAMSprite35
-wVirtualOAMSprite36:: sprite_oam_struct wVirtualOAMSprite36
-wVirtualOAMSprite37:: sprite_oam_struct wVirtualOAMSprite37
-wVirtualOAMSprite38:: sprite_oam_struct wVirtualOAMSprite38
-wVirtualOAMSprite39:: sprite_oam_struct wVirtualOAMSprite39
+FOR n, 0, OAM_COUNT
+	wVirtualOAMSprite{02u:n}:: sprite_oam_struct wVirtualOAMSprite{02u:n}
+ENDR
 wVirtualOAMEnd::
 
 wParticles::
-wParticle1:: particle_struct wParticle1
-wParticle2:: particle_struct wParticle2
-wParticle3:: particle_struct wParticle3
-wParticle4:: particle_struct wParticle4
+FOR n, 0, MAX_NUM_PARTICLES
+	wParticle{u:n}:: particle_struct wParticle{u:n}
+ENDR
 
 ; how many particles are active now
 wNumParticles::
@@ -1014,37 +976,47 @@ wNumLitTorches::
 wShootGoals:: db
 wWarioGoals:: db
 
+; union used by each boss to keep track of various variables
+UNION
+
 ; during Doll Boy's barrel phase,
 ; each 4 lower significant bits represent a Doll Boy
 ; barrel that is still active, or Doll Boy itself
 wDollBoyActiveBarrels::
-
-; decides what the next Wolfenboss attack will be
-; - if 0, then spawn Spiral
-; - if 1, then spawn Igaguri
-wWolfenbossNextAttack::
-
-wJamanoActiveSkulls::
-wMuddeeAmbushState::
 	db
 
 ; if TRUE, then DollBoy will fall immediately
 ; when the middle barrel is destroyed
 wDollBoyFallImmediatelyMiddleBarrel::
-
-; which state ball Wario or ball Shoot is in
-wShootBallState::
-
-; if TRUE, then there is an Igaguri or Kuri still on screen
-; this is checked so that Wolfenboss doesn't spawn another one
-wWolfenbossIgaguriOrKuriActive::
-
-w1d147::
 	db
 
 ; decides which range for Doll Boy's hammer
 ; can be short, mid-short, mid-long and long range
 wDollBoyHammerRange::
+	db
+
+NEXTU
+
+; if TRUE, then Shoot can turn around in between jumps
+wShootCanTurnAround::
+	db
+
+; which state ball Wario or ball Shoot is in
+wShootBallState::
+	db
+
+NEXTU
+
+; decides what the next Wolfenboss attack will be
+; - if 0, then spawn Spiral
+; - if 1, then spawn Igaguri
+wWolfenbossNextAttack::
+	db
+
+; if TRUE, then there is an Igaguri or Kuri still on screen
+; this is checked so that Wolfenboss doesn't spawn another one
+wWolfenbossIgaguriOrKuriActive::
+	db
 
 ; remaining hits to defeat Wolfenboss + 1
 wWolfenbossRemainingHits::
@@ -1053,9 +1025,27 @@ wWolfenbossRemainingHits::
 ; how many spirals that Wolfenboss will shoot
 ; before switching to attacking with a Igaguri
 wWolfenbossConsecutiveSpirals::
+	db
+
+NEXTU
+
+wJamanoActiveSkulls::
+	db
+
+w1d147::
+	db
+
+	ds $1
 
 w1d149::
-	ds $1
+	db
+
+NEXTU
+
+wMuddeeAmbushState::
+	db
+
+ENDU
 
 SECTION "WRAM1", WRAMX
 

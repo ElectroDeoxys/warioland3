@@ -166,11 +166,11 @@ BirdFunc:
 
 
 .asm_4338f
-	ld bc, ObjParams_649c2
+	ld bc, ObjParams_BirdStars1
 	jr .asm_43397
 
 .asm_43394
-	ld bc, ObjParams_649d7
+	ld bc, ObjParams_BirdStars2
 .asm_43397
 	xor a
 	ld [hl], a
@@ -185,15 +185,15 @@ BirdFunc:
 .asm_433a7
 	set OBJFLAG_NO_COLLISION_F, [hl]
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, [wCurObjUnk07]
-	cp $0d
-	jr z, .asm_433bb
+	ld a, [wCurObjId]
+	cp BLUE_BIRD
+	jr z, .blue_bird
 	ld a, HIGH(.Func_43353)
 	ld [hld], a
 	ld a, LOW(.Func_43353)
 	ld [hld], a
 	jp CreateObjectAtRelativePos
-.asm_433bb
+.blue_bird
 	ld a, HIGH(.Func_4340b)
 	ld [hld], a
 	ld a, LOW(.Func_4340b)

@@ -3244,7 +3244,7 @@ BreakBlock:
 	; backup CurObj
 	ld hl, wCurObjUnk01
 	ld de, hCurObjBackup
-	ld b, OBJ_UNK_07 - OBJ_UNK_01
+	ld b, OBJ_ID - OBJ_UNK_01
 	call CopyHLToDE
 
 	ld hl, wCurObjUnk01
@@ -3265,7 +3265,7 @@ BreakBlock:
 	; restore CurObj
 	ld hl, hCurObjBackup
 	ld de, wCurObjUnk01
-	ld b, OBJ_UNK_07 - OBJ_UNK_01
+	ld b, OBJ_ID - OBJ_UNK_01
 	call CopyHLToDE
 	pop_wram
 
@@ -3299,7 +3299,7 @@ BreakBlockWithColourCoin:
 	; backup CurObj
 	ld hl, wCurObjUnk01
 	ld de, hCurObjBackup
-	ld b, OBJ_UNK_07 - OBJ_UNK_01
+	ld b, OBJ_ID - OBJ_UNK_01
 	call CopyHLToDE
 
 	ld hl, wCurObjUnk01
@@ -3320,7 +3320,7 @@ BreakBlockWithColourCoin:
 	; restore CurObj
 	ld hl, hCurObjBackup
 	ld de, wCurObjUnk01
-	ld b, OBJ_UNK_07 - OBJ_UNK_01
+	ld b, OBJ_ID - OBJ_UNK_01
 	call CopyHLToDE
 	pop_wram
 

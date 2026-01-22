@@ -59,7 +59,7 @@ MACRO obj_struct
 \1Unk02::           db
 \1YPos::            dw
 \1XPos::            dw
-\1Unk07::           db ; high nybble = OAM bank
+\1Id::              db
 \1InteractionType:: db
 \1CollBoxTop::      db
 \1CollBoxBottom::   db
