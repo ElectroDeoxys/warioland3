@@ -118,7 +118,7 @@ Func_1e409a:
 	ret
 
 Func_1e4104:
-	play_sfx_rept 32, SFX_071
+	play_sfx_rept 32, SFX_FLAP
 
 	ld a, [wActionHelpCounter]
 	and %1
@@ -137,7 +137,7 @@ Func_1e4104:
 	ret
 
 Func_1e4134:
-	play_sfx_rept 32, SFX_071
+	play_sfx_rept 32, SFX_FLAP
 
 	ld a, [wActionHelpCounter]
 	and %1
@@ -159,7 +159,7 @@ Func_1e4134:
 	jp ActionHelp2_ClearDPadInput
 
 Func_1e4165:
-	play_sfx_rept 32, SFX_071
+	play_sfx_rept 32, SFX_FLAP
 
 	ld a, [wActionHelpCounter]
 	and %1
@@ -178,7 +178,7 @@ Func_1e4165:
 	ret
 
 Func_1e4195:
-	play_sfx_rept 32, SFX_071
+	play_sfx_rept 32, SFX_FLAP
 
 	ld a, [wActionHelpCounter]
 	and %1
@@ -201,7 +201,7 @@ Func_1e4195:
 	jp ActionHelp2_ClearDPadInput
 
 Func_1e41c9:
-	play_sfx_rept 32, SFX_071
+	play_sfx_rept 32, SFX_FLAP
 
 	ld a, [wActionHelpCounter]
 	and %1
@@ -222,7 +222,7 @@ Func_1e41c9:
 	ret
 
 Func_1e41fd:
-	play_sfx_rept 16, SFX_071
+	play_sfx_rept 16, SFX_FLAP
 
 	ld hl, wActionHelpWarioXCoord
 	dec [hl]
@@ -238,7 +238,7 @@ Func_1e41fd:
 	ret
 
 Func_1e4227:
-	play_sfx_rept 16, SFX_071
+	play_sfx_rept 16, SFX_FLAP
 
 	ld hl, wActionHelpWarioXCoord
 	inc [hl]

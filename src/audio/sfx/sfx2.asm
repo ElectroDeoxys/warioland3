@@ -2095,7 +2095,7 @@ Sfx_070:
 	db 1, 0
 	dw Sfx_070_Ch1
 
-Sfx_071_Ch1:
+Sfx_Flap_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_65
@@ -2110,9 +2110,9 @@ Sfx_071_Ch1:
 	audio_wait 4
 	audio_end
 
-Sfx_071:
+Sfx_Flap:
 	db 1, 2
-	dw Sfx_071_Ch1
+	dw Sfx_Flap_Ch1
 
 Sfx_072_Ch1:
 	semitone_offset 0
@@ -2257,7 +2257,7 @@ Sfx_076:
 	db 1, 0
 	dw Sfx_076_Ch1
 
-Sfx_077_Ch1:
+Sfx_OwlHoot_Ch1:
 	semitone_offset 0
 	tempo 74
 	wave WAVE_64
@@ -2284,9 +2284,9 @@ Sfx_077_Ch1:
 	audio_wait 2
 	audio_end
 
-Sfx_077:
+Sfx_OwlHoot:
 	db 1, 0
-	dw Sfx_077_Ch1
+	dw Sfx_OwlHoot_Ch1
 
 Sfx_078_Ch1:
 	semitone_offset 0

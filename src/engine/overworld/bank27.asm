@@ -6142,7 +6142,7 @@ Func_9f244:
 	ld a, [wOWAnimationFinished]
 	cp $ff
 	ret nz
-	play_sfx SFX_071
+	play_sfx SFX_FLAP
 	ret
 
 .asm_9f27a

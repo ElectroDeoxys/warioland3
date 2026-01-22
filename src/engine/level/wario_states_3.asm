@@ -4529,7 +4529,7 @@ UpdateState_BatIdling:
 	jr nc, .skip_sfx
 	ld a, $20
 	ld [wSFXLoopCounter], a
-	play_sfx SFX_071
+	play_sfx SFX_FLAP
 .skip_sfx
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
@@ -4655,7 +4655,7 @@ UpdateState_BatFlying:
 	jr nc, .skip_sfx
 	ld a, $10
 	ld [wSFXLoopCounter], a
-	play_sfx SFX_071
+	play_sfx SFX_FLAP
 .skip_sfx
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a

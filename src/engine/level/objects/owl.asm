@@ -13,25 +13,26 @@ OwlFunc:
 	ld [hl], a
 	ld a, [wDayNight]
 	rra
-	jr c, .asm_491fd
+	jr c, .night
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_4920f)
+	ld a, HIGH(.Sleep)
 	ld [hld], a
-	ld a, LOW(.Func_4920f)
+	ld a, LOW(.Sleep)
 	ld [hld], a
 	ld de, Frameset_692e7
 	jp SetObjectFramesetPtr
 
-.asm_491fd
-	play_sfx SFX_077
+.night
+	; at night Owl immediately flies upwards
+	play_sfx SFX_OWL_HOOT
 	ld l, OBJ_INTERACTION_TYPE
 	ld a, [hl]
 	and HEAVY_OBJ
 	or OBJ_INTERACTION_0B
 	ld [hld], a
-	jr .asm_49253
+	jr .set_fly_upwards
 
-.Func_4920f:
+.Sleep:
 	ld hl, wCurObjState
 	ld a, [hl]
 	and a
@@ -39,9 +40,9 @@ OwlFunc:
 	xor a
 	ld [hl], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_49239)
+	ld a, HIGH(.WakeUp)
 	ld [hld], a
-	ld a, LOW(.Func_49239)
+	ld a, LOW(.WakeUp)
 	ld [hld], a
 	ld de, Frameset_69318
 	call SetObjectFramesetPtr
@@ -52,45 +53,45 @@ OwlFunc:
 	and HEAVY_OBJ
 	or OBJ_INTERACTION_0B
 	ld [hld], a
-	play_sfx SFX_077
+	play_sfx SFX_OWL_HOOT
 	ret
 
-.Func_49239:
+.WakeUp:
 	ld a, [wCurObjFrame]
 	cp $0c
 	jr nz, .asm_4924e
 	ld a, [wCurObjFrameDuration]
 	dec a
-	play_sfx z, SFX_071
+	play_sfx z, SFX_FLAP
 .asm_4924e
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
-.asm_49253
+.set_fly_upwards
 	ld l, OBJ_UPDATE_FUNCTION + 1
-	ld a, HIGH(.Func_49265)
+	ld a, HIGH(.FlyUpwards)
 	ld [hld], a
-	ld a, LOW(.Func_49265)
+	ld a, LOW(.FlyUpwards)
 	ld [hld], a
 	ld de, Frameset_69335
 	call SetObjectFramesetPtr
-	ld a, $36
+	ld a, 54
 	ld [hli], a
 	ret
 
-.Func_49265:
+.FlyUpwards:
 	ld a, [wCurObjFrame]
 	cp $0c
 	jr nz, .asm_4927a
 	ld a, [wCurObjFrameDuration]
 	dec a
-	play_sfx z, SFX_071
+	play_sfx z, SFX_FLAP
 .asm_4927a
 	call MoveObjectUp
 	ld l, OBJ_STATE_DURATION
 	dec [hl]
 	ret nz
-	ld a, $1e
+	ld a, 30
 	ld [hli], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.Func_492b4)
@@ -121,32 +122,34 @@ OwlFunc:
 .Func_492b4:
 	ld a, [wCurObjState]
 	cp $18
-	jr z, .asm_4930f
+	jr z, .despawn
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	jr z, .asm_492f7
 	ld a, [wCurObjSubState]
 	rlca
-	jr c, .asm_492df
+	jr c, .flying_right
 	ld a, [wCurObjFrame]
 	cp $1e
-	jr nz, .asm_492dc
+	jr nz, .move_left
 	ld a, [wCurObjFrameDuration]
 	dec a
-	play_sfx z, SFX_071
-.asm_492dc
+	play_sfx z, SFX_FLAP
+.move_left
 	jp MoveObjectLeft
-.asm_492df
+
+.flying_right
 	ld a, [wCurObjFrame]
 	cp $23
-	jr nz, .asm_492f4
+	jr nz, .move_right
 	ld a, [wCurObjFrameDuration]
 	dec a
-	play_sfx z, SFX_071
-.asm_492f4
+	play_sfx z, SFX_FLAP
+.move_right
 	jp MoveObjectRight
+
 .asm_492f7
-	ld a, $3c
+	ld a, 60
 	ld [hl], a
 	ld l, OBJ_SUBSTATE
 	ld a, [hl]
@@ -156,12 +159,11 @@ OwlFunc:
 	jr c, .asm_49309
 	ld de, Frameset_6936c
 	jp SetObjectFramesetPtr
-
 .asm_49309
 	ld de, Frameset_69377
 	jp SetObjectFramesetPtr
 
-.asm_4930f
+.despawn
 	xor a
 	ld [wCurObjFlags], a
 	ld hl, wCurObjUnk02

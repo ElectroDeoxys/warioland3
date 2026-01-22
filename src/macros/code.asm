@@ -43,12 +43,12 @@ MACRO farcall
 		ld a, BANK(\1)
 		ldh [hCallFuncBank], a
 		hcall \1
-	;assert warn, BANK(\1) != BANK(@), "farcall can be call"
+	; assert warn, BANK(\1) != BANK(@), "farcall can be call"
 	ELSE
 		ld a, \1
 		ldh [hCallFuncBank], a
 		hcall \2
-	;assert warn, \1 != BANK(@), "farcall can be call"
+	; assert warn, \1 != BANK(@), "farcall can be call"
 	ENDC
 ENDM
 

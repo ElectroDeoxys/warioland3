@@ -146,7 +146,7 @@ Func_1e465e:
 	ret
 
 Func_1e4684:
-	play_sfx_rept 32, SFX_071
+	play_sfx_rept 32, SFX_FLAP
 
 	ld hl, wTimer
 	dec [hl]
@@ -160,7 +160,7 @@ Func_1e4684:
 	ret
 
 ApplyWaterCurrentMovementb:
-	play_sfx_rept 16, SFX_071
+	play_sfx_rept 16, SFX_FLAP
 
 	ld a, [wActionHelpCounter]
 	and %1
@@ -219,7 +219,7 @@ Func_1e46e8:
 	ret
 
 Func_1e471c:
-	play_sfx_rept 16, SFX_071
+	play_sfx_rept 16, SFX_FLAP
 
 	ld a, [wActionHelpCounter]
 	and %1
@@ -278,7 +278,7 @@ Func_1e4759:
 	ret
 
 Func_1e478d:
-	play_sfx_rept 16, SFX_071
+	play_sfx_rept 16, SFX_FLAP
 
 	ld a, [wActionHelpCounter]
 	and %1
@@ -337,7 +337,7 @@ Func_1e47ca:
 	ret
 
 Func_1e47fe:
-	play_sfx_rept 16, SFX_071
+	play_sfx_rept 16, SFX_FLAP
 
 	ld hl, wActionHelpWario
 	ld a, [hl]
@@ -396,7 +396,7 @@ Func_1e483d:
 	ret
 
 Func_1e4871:
-	play_sfx_rept 32, SFX_071
+	play_sfx_rept 32, SFX_FLAP
 
 	ld hl, wTimer
 	dec [hl]

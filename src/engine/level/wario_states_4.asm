@@ -421,7 +421,7 @@ UpdateState_OwlSlow:
 	jr nc, .asm_1ec406
 	ld a, $20
 	ld [wSFXLoopCounter], a
-	play_sfx SFX_071
+	play_sfx SFX_FLAP
 .asm_1ec406
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
@@ -588,7 +588,7 @@ UpdateState_OwlFast:
 	jr nc, .asm_1ec58a
 	ld a, $10
 	ld [wSFXLoopCounter], a
-	play_sfx SFX_071
+	play_sfx SFX_FLAP
 .asm_1ec58a
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a

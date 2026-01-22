@@ -169,19 +169,23 @@ InitWithoutDemoPowerUpReset::
 	jp Init
 
 .no_reset
+	; where all main game logic is handled
 	call MainStateTable
 
+	; update animated tiles if enabled
 	ld a, [wRoomAnimatedTilesEnabled]
 	and a
-	jr z, .animated_pals
+	jr z, .skip_animated_tiles
 	farcall UpdateRoomAnimatedTiles
-.animated_pals
+.skip_animated_tiles
+	; update animated pals if enabled
 	ld a, [wRoomAnimatedPalsEnabled]
 	and a
 	jr z, .skip_animated_pals
 	call UpdateRoomAnimatedPals
 .skip_animated_pals
 
+	; enable V-Blank handler and wait for it to be executed
 	ld a, TRUE
 	ld [wEnableVBlankFunc], a
 	halt
@@ -191,12 +195,18 @@ InitWithoutDemoPowerUpReset::
 	and a
 	jr z, .wait_vblank_exec
 
+	; increment global counter
 	ld hl, wGlobalCounter
 	inc [hl]
+
 	xor a ; FALSE
 	ld [wEnableVBlankFunc], a
 	ld [wVBlankFuncExecuted], a
+
+	; audio handler
 	call HandleSound
+
+	; loop back to game loop
 	jp .GameLoop
 
 ; used as a handler for invalid jumptable entries

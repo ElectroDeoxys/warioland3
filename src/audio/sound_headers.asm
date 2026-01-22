@@ -184,13 +184,13 @@ SoundHeaders:
 	sfx Sfx_06e,                         $00, 220, CHAN8_F, 1 ; SFX_06E
 	sfx Sfx_06f,                         $00, 220, CHAN5_F, 1 ; SFX_06F
 	sfx Sfx_070,                         $00, 220, CHAN5_F, 1 ; SFX_070
-	sfx Sfx_071,                         $00, 220, CHAN8_F, 1 ; SFX_071
+	sfx Sfx_Flap,                        $00, 220, CHAN8_F, 1 ; SFX_FLAP
 	sfx Sfx_072,                         $00, 220, CHAN8_F, 1 ; SFX_072
 	sfx Sfx_073,                         $00, 227, CHAN8_F, 1 ; SFX_073
 	sfx Sfx_074,                         $00, 221, CHAN5_F, 1 ; SFX_074
 	sfx Sfx_075,                         $00, 220, CHAN5_F, 1 ; SFX_075
 	sfx Sfx_076,                         $00, 235, CHAN8_F, 1 ; SFX_076
-	sfx Sfx_077,                         $00, 220, CHAN7_F, 1 ; SFX_077
+	sfx Sfx_OwlHoot,                     $00, 220, CHAN7_F, 1 ; SFX_OWL_HOOT
 	sfx Sfx_078,                         $00, 240, CHAN8_F, 1 ; SFX_078
 	sfx Sfx_079,                         $00, 227, CHAN8_F, 1 ; SFX_079
 	sfx Sfx_07a,                         $00, 227, CHAN8_F, 1 ; SFX_07A

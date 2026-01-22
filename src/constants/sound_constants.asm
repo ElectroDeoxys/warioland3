@@ -175,13 +175,13 @@ DEF NUM_MUSICS EQU const_value - 1
 	const SFX_06E                          ; 16e
 	const SFX_06F                          ; 16f
 	const SFX_070                          ; 170
-	const SFX_071                          ; 171
+	const SFX_FLAP                         ; 171
 	const SFX_072                          ; 172
 	const SFX_073                          ; 173
 	const SFX_074                          ; 174
 	const SFX_075                          ; 175
 	const SFX_076                          ; 176
-	const SFX_077                          ; 177
+	const SFX_OWL_HOOT                     ; 177
 	const SFX_078                          ; 178
 	const SFX_079                          ; 179
 	const SFX_07A                          ; 17a
