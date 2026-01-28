@@ -18,7 +18,7 @@ Init::
 InitWithoutDemoPowerUpReset::
 	; init stack
 	di
-	ld sp, wStackTop
+	ld sp, wStackTop - $1
 	ld hl, sp+$00
 	ld c, 0 ; aka $100 bytes
 	xor a

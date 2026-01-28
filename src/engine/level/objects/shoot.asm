@@ -126,8 +126,8 @@ ShootFunc:
 	ld [hli], a
 	ld a, $01
 	ld [wShootBallState], a
-	ld a, $02
-	ld [wBossBattleMusic], a
+	ld a, BOSS_REGULAR
+	ld [wBossState], a
 	call UpdateLevelMusic
 	jp .set_standing
 
@@ -1356,8 +1356,8 @@ GKTortoiseFunc:
 	ld hl, wCurObjUnk02
 	ld e, $08
 	farcall Func_ba42
-	ld a, $03
-	ld [wBossBattleMusic], a
+	ld a, BOSS_DEFEATED
+	ld [wBossState], a
 	call UpdateLevelMusic
 	xor a
 	ld [wIsBossBattle], a
@@ -1969,7 +1969,7 @@ ShootGoalCounterFunc:
 	ld a, $3e
 	ld [wCurObjFrame], a
 	xor a
-	ld [wBossBattleMusic], a
+	ld [wBossState], a
 	ret
 
 WarioGoalCounterFunc:

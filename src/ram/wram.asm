@@ -733,7 +733,7 @@ wIsMinigameCleared::
 wCoinCooldown::
 	db
 
-wBossBattleMusic::
+wBossState::
 	db
 
 wCameraSCY:: dw
@@ -922,9 +922,8 @@ wNumMusicBoxes::
 SECTION "Stack", WRAM0
 
 wStackBottom::
-	ds $100 - 1
+	ds $100
 wStackTop::
-	db
 
 SECTION "Level Objects WRAM", WRAMX
 

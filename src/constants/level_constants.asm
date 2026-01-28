@@ -156,6 +156,13 @@ DEF LEVEL_EDGE_UPDATE_LEFT  EQU 1 << LEVEL_EDGE_UPDATE_LEFT_F
 DEF LEVEL_EDGE_UPDATE_UP    EQU 1 << LEVEL_EDGE_UPDATE_UP_F
 DEF LEVEL_EDGE_UPDATE_DOWN  EQU 1 << LEVEL_EDGE_UPDATE_DOWN_F
 
+; wBossState constants, decides which
+; music to play in UpdateLevelMusic
+	const_def 1
+	const BOSS_HIDDEN_FIGURE ; $1
+	const BOSS_REGULAR       ; $2
+	const BOSS_DEFEATED      ; $3
+
 ; number of different types of blocks
 ; that can fit inside a single room
 DEF NUM_ROOM_BLOCK_TYPES EQU $80

@@ -68,8 +68,8 @@ JamanoFunc:
 .asm_54dc3
 	dec [hl]
 	ret nz
-	ld a, $02
-	ld [wBossBattleMusic], a
+	ld a, BOSS_REGULAR
+	ld [wBossState], a
 	call UpdateLevelMusic
 	ld hl, wCurObjFlags
 	set 7, [hl]
@@ -548,8 +548,8 @@ JamanoHatFunc:
 	ld hl, wCurObjUnk02
 	ld e, $06
 	farcall Func_ba42
-	ld a, $03
-	ld [wBossBattleMusic], a
+	ld a, BOSS_DEFEATED
+	ld [wBossState], a
 	call UpdateLevelMusic
 	xor a
 	ld [wIsBossBattle], a

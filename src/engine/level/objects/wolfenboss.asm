@@ -124,8 +124,8 @@ WolfenbossFunc:
 	ld [hli], a
 	ld a, 7
 	ld [hli], a
-	ld a, $02
-	ld [wBossBattleMusic], a
+	ld a, BOSS_REGULAR
+	ld [wBossState], a
 	call UpdateLevelMusic
 	ret
 
@@ -212,7 +212,7 @@ WolfenbossFunc:
 	ld a, LOW(.Disappear)
 	ld [hld], a
 	xor a
-	ld [wBossBattleMusic], a
+	ld [wBossState], a
 	ret
 
 .Main:
@@ -524,8 +524,8 @@ WolfenbossFunc:
 	ld bc, Data_60da0
 	jp ApplyObjYMovement
 .asm_561ca
-	ld a, $03
-	ld [wBossBattleMusic], a
+	ld a, BOSS_DEFEATED
+	ld [wBossState], a
 	call UpdateLevelMusic
 	xor a
 	ld [wIsBossBattle], a

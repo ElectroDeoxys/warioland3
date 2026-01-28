@@ -43,8 +43,8 @@ WormwouldFunc:
 	ld a, $20
 	ld [wCurObjVar2], a
 	call MoveObjectDownByVar2
-	ld a, $02
-	ld [wBossBattleMusic], a
+	ld a, BOSS_REGULAR
+	ld [wBossState], a
 	call UpdateLevelMusic
 	ld a, TRUE
 	ld [wIsBossBattle], a
@@ -279,8 +279,8 @@ WormwouldFunc:
 	ld [hld], a
 	ld a, LOW(.DoNothing)
 	ld [hld], a
-	ld a, $00
-	ld [wBossBattleMusic], a
+	ld a, NONE
+	ld [wBossState], a
 	call UpdateLevelMusic
 	ret
 
@@ -447,8 +447,8 @@ WormwouldFunc:
 	ld [hld], a
 	ld a, LOW(.DoNothing)
 	ld [hld], a
-	ld a, $00
-	ld [wBossBattleMusic], a
+	ld a, NONE
+	ld [wBossState], a
 	call UpdateLevelMusic
 	ret
 
@@ -510,8 +510,8 @@ WormwouldFunc:
 	ld [hl], a ; wCurObjVar3
 	ld l, OBJ_FLAGS
 	set OBJFLAG_PRIORITY_F, [hl]
-	ld a, $03
-	ld [wBossBattleMusic], a
+	ld a, BOSS_DEFEATED
+	ld [wBossState], a
 	call UpdateLevelMusic
 	xor a
 	ld [wIsBossBattle], a

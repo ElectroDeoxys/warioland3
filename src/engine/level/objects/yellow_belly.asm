@@ -97,8 +97,8 @@ YellowBellyBodyFunc:
 	ld [hld], a
 	ld a, LOW(.Func_51419)
 	ld [hld], a
-	ld a, $02
-	ld [wBossBattleMusic], a
+	ld a, BOSS_REGULAR
+	ld [wBossState], a
 	call UpdateLevelMusic
 	ret
 
@@ -1122,7 +1122,7 @@ YellowBellyArrowFunc:
 	ld [hld], a
 	stop_music2
 	xor a
-	ld [wBossBattleMusic], a
+	ld [wBossState], a
 	ret
 
 .Func_51b16:
@@ -1207,7 +1207,7 @@ YellowBellyHeadFunc:
 	ld [wDollBoyActiveBarrels], a
 	stop_music2
 	xor a
-	ld [wBossBattleMusic], a
+	ld [wBossState], a
 .asm_51baa
 	ld hl, wCurObjStateDuration
 	ld a, [hl]
@@ -1324,8 +1324,8 @@ YellowBellyPlatformFunc:
 	ld [hld], a
 	ld a, LOW(Func_51c77)
 	ld [hld], a
-	ld a, $03
-	ld [wBossBattleMusic], a
+	ld a, BOSS_DEFEATED
+	ld [wBossState], a
 	call UpdateLevelMusic
 	xor a
 	ld [wIsBossBattle], a

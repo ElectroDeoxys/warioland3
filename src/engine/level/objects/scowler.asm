@@ -37,8 +37,8 @@ ScowlerFunc:
 .Func_54520:
 	ld a, TRUE
 	ld [wIsBossBattle], a
-	ld a, $02
-	ld [wBossBattleMusic], a
+	ld a, BOSS_REGULAR
+	ld [wBossState], a
 	call UpdateLevelMusic
 	ld hl, wCurObjUpdateFunction + 1
 	ld a, HIGH(.Func_5458a)
@@ -623,8 +623,8 @@ ScowlerFunc:
 	ld hl, wCurObjUnk02
 	ld e, $05
 	farcall Func_ba42
-	ld a, $03
-	ld [wBossBattleMusic], a
+	ld a, BOSS_DEFEATED
+	ld [wBossState], a
 	call UpdateLevelMusic
 	xor a
 	ld [wIsBossBattle], a

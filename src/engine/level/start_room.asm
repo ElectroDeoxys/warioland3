@@ -311,7 +311,7 @@ StartRoom_FromLevelStart:
 	ld [wLevelTime + 0], a
 	ld [wLevelTime + 1], a
 	ld [wLevelTime + 2], a
-	ld [wBossBattleMusic], a
+	ld [wBossState], a
 	ld [wSwimVelIndex], a
 	ld [wWaterSurfaceFloatingCounter], a
 	call ClearTransformationValues

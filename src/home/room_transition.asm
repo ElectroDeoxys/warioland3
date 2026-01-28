@@ -6,7 +6,7 @@ TriggerRoomTransition::
 	ld [wWaterCurrent], a
 	ld [wLastWaterCurrent], a
 	ld [wCurWaterCurrent], a
-	ld [wBossBattleMusic], a
+	ld [wBossState], a
 	ld [wIsBossBattle], a
 	inc a ; TRUE
 	ld [wIsIntangible], a

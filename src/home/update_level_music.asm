@@ -34,9 +34,12 @@ SetPerfectState::
 ; loads a music ID to hMusicID, depending on wLevel
 ; and whether there's a new transformation music
 UpdateLevelMusic::
-	ld a, [wBossBattleMusic]
+	; is it a Boss Battle?
+	ld a, [wBossState]
 	and a
 	jr nz, .boss_music
+
+	; not a boss battle
 	ld a, [wTransformation]
 	and a
 	jr nz, .transformation
@@ -62,6 +65,7 @@ UpdateLevelMusic::
 	ret
 
 .boss_music
+	; play music corresponding to wBossState
 	dec a
 	ld d, $00
 	add a
@@ -98,9 +102,9 @@ UpdateLevelMusic::
 	ret
 
 .BossMusicIDs:
-	dw MUSIC_HIDDEN_FIGURE_BATTLE_1
-	dw MUSIC_BOSS_BATTLE
-	dw MUSIC_BOSS_DEFEAT
+	dw MUSIC_HIDDEN_FIGURE_BATTLE_1 ; BOSS_HIDDEN_FIGURE
+	dw MUSIC_BOSS_BATTLE            ; BOSS_REGULAR
+	dw MUSIC_BOSS_DEFEAT            ; BOSS_DEFEATED
 
 ; set game state to Title
 InitGameState::

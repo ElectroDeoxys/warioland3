@@ -36,7 +36,7 @@ DollBoyFunc:
 	ld l, OBJ_SUBSTATE
 	res OBJSUBFLAG_UNINITIALISED_F, [hl]
 	ld a, [hl]
-	and $f0
+	and OBJSUBFLAGS_MASK
 	or $5 | OBJSUBFLAG_HDIR
 	ld [hl], a
 	ld l, OBJ_UPDATE_FUNCTION + 1
@@ -86,8 +86,8 @@ DollBoyFunc:
 	ld a, DOLLBOY_BARREL1 | DOLLBOY_BARREL2 | DOLLBOY_BARREL3
 	ld [wDollBoyActiveBarrels], a
 
-	ld a, $02
-	ld [wBossBattleMusic], a
+	ld a, BOSS_REGULAR
+	ld [wBossState], a
 	call UpdateLevelMusic
 	ret
 
@@ -249,7 +249,7 @@ DollBoyFunc:
 	ld a, LOW(.DoNothing)
 	ld [hld], a
 	xor a
-	ld [wBossBattleMusic], a
+	ld [wBossState], a
 	ret
 
 .not_bouncy
@@ -322,7 +322,7 @@ DollBoyFunc:
 	ld [hld], a
 	xor a
 	ld [wCurObjVar3], a
-	ld [wBossBattleMusic], a
+	ld [wBossState], a
 	stop_sfx
 	call SetObjectFramesetPtr
 	ld a, 1
@@ -486,7 +486,7 @@ DollBoyFunc:
 	ld a, $48
 	ld [hld], a ; wCurObjState
 	ld a, [hl] ; wCurObjSubState
-	and $f0
+	and OBJSUBFLAGS_MASK
 	ld [hld], a
 	xor a
 	ld [hld], a ; wCurObjVar3
@@ -787,8 +787,8 @@ DollBoyFunc:
 .set_defeat_music
 	xor a
 	ld [wCurObjFlags], a
-	ld a, $03
-	ld [wBossBattleMusic], a
+	ld a, BOSS_DEFEATED
+	ld [wBossState], a
 	call UpdateLevelMusic
 	xor a
 	ld [wIsBossBattle], a
@@ -1000,7 +1000,7 @@ DollBoyBarrelFunc:
 
 .attacked
 	ld a, [hl] ; wCurObjSubState
-	and $f0
+	and OBJSUBFLAGS_MASK
 	ld [hld], a
 	xor a
 	ld [hld], a ; wCurObjVar3

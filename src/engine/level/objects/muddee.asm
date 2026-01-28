@@ -99,8 +99,8 @@ MuddeeFunc:
 	ld [wCurObjVar3], a
 	ld l, OBJ_FLAGS
 	res OBJFLAG_INVISIBLE_F, [hl]
-	ld a, $02
-	ld [wBossBattleMusic], a
+	ld a, BOSS_REGULAR
+	ld [wBossState], a
 	call UpdateLevelMusic
 	xor a
 	ld [w1d147], a
@@ -1028,8 +1028,8 @@ Turtle1Func:
 	jr z, .asm_55d6a
 	dec [hl]
 	ret nz
-	ld a, $03
-	ld [wBossBattleMusic], a
+	ld a, BOSS_DEFEATED
+	ld [wBossState], a
 	call UpdateLevelMusic
 	xor a
 	ld [wIsBossBattle], a

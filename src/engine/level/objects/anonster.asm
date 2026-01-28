@@ -21,8 +21,8 @@ AnonsterFunc:
 	ld hl, wCurObjStateDuration
 	dec [hl]
 	ret nz
-	ld a, $02
-	ld [wBossBattleMusic], a
+	ld a, BOSS_REGULAR
+	ld [wBossState], a
 	call UpdateLevelMusic
 
 .asm_50031
@@ -927,8 +927,8 @@ AnonsterFunc:
 	ld hl, wCurObjUnk02
 	ld e, $05
 	farcall Func_ba42
-	ld a, $03
-	ld [wBossBattleMusic], a
+	ld a, BOSS_DEFEATED
+	ld [wBossState], a
 	call UpdateLevelMusic
 	xor a
 	ld [wIsBossBattle], a
