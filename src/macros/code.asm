@@ -83,17 +83,19 @@ MACRO debug_assert_not
 :
 ENDM
 
-MACRO wait_ppu_busy
+MACRO wait_not_hblank
 :
 	ldh a, [rSTAT]
-	and STAT_LCD
+	and STAT_MODE
+	; z set if in Mode 0 (H-Blank)
 	jr z, :-
 ENDM
 
-MACRO wait_ppu_free
+MACRO wait_hblank
 :
 	ldh a, [rSTAT]
-	and STAT_LCD
+	and STAT_MODE
+	; z set if in Mode 0 (H-Blank)
 	jr nz, :-
 ENDM
 

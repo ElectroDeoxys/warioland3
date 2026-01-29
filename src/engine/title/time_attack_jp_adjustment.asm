@@ -7,7 +7,7 @@ AdjustJapaneseTimeAttackDescriptionWindow:
 	ldh a, [rLY]
 	cp $2f
 	jr c, .asm_4d84
-	call WaitVBlank
+	call WaitNextHBlank
 	ldh a, [rSCY]
 	add $07
 	ldh [rSCY], a
@@ -15,7 +15,7 @@ AdjustJapaneseTimeAttackDescriptionWindow:
 	ldh a, [rLY]
 	cp $38
 	jr c, .asm_4d93
-	call WaitVBlank
+	call WaitNextHBlank
 	ldh a, [rSCY]
 	add $07
 	ldh [rSCY], a
@@ -23,7 +23,7 @@ AdjustJapaneseTimeAttackDescriptionWindow:
 	ldh a, [rLY]
 	cp $41
 	jr c, .asm_4da2
-	call WaitVBlank
+	call WaitNextHBlank
 	ldh a, [rSCY]
 	add $07
 	ldh [rSCY], a
@@ -31,7 +31,7 @@ AdjustJapaneseTimeAttackDescriptionWindow:
 	ldh a, [rLY]
 	cp $5a
 	jr c, .asm_4db1
-	call WaitVBlank
+	call WaitNextHBlank
 	ldh a, [rSCY]
 	add $07
 	ldh [rSCY], a
@@ -39,7 +39,7 @@ AdjustJapaneseTimeAttackDescriptionWindow:
 	ldh a, [rLY]
 	cp $63
 	jr c, .asm_4dc0
-	call WaitVBlank
+	call WaitNextHBlank
 	ldh a, [rSCY]
 	add $07
 	ldh [rSCY], a
@@ -47,7 +47,7 @@ AdjustJapaneseTimeAttackDescriptionWindow:
 	ldh a, [rLY]
 	cp $6c
 	jr c, .asm_4dcf
-	call WaitVBlank
+	call WaitNextHBlank
 	ldh a, [rSCY]
 	add $07
 	ldh [rSCY], a

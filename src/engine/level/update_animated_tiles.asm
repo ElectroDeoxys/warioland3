@@ -4,9 +4,11 @@
 ; wAnimatedTilesGfx determines which of these blocks to load
 ; wAnimatedTilesFrame determines which of the subset (frame) to load
 UpdateRoomAnimatedTiles::
+	; only animate if at least 20 scanlines from V-Blank
 	ldh a, [rLY]
-	cp $7c
+	cp LY_VBLANK - 20
 	jr nc, .done
+	; we have 20 scanlines of margin, continue
 	jr .useless_jump ; can be fallthrough
 
 .useless_jump
@@ -50,8 +52,8 @@ UpdateRoomAnimatedTiles::
 	ld a, BANK("VRAM1")
 	ldh [rVBK], a
 .loop_copy_tiles
-	wait_ppu_busy
-	wait_ppu_free
+	wait_not_hblank
+	wait_hblank
 REPT 8
 	ld a, [hli]
 	ld [de], a

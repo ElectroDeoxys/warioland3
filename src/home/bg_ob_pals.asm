@@ -96,8 +96,8 @@ SetWarioPal::
 
 ; apply OBJ palette
 .loop_copy
-	wait_ppu_busy
-	wait_ppu_free
+	wait_not_hblank
+	wait_hblank
 REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
@@ -150,8 +150,8 @@ LoadCollectedTreasurePal_Level::
 	or c
 	ldh [rOBPI], a
 	ld c, LOW(rOBPD)
-	wait_ppu_busy
-	wait_ppu_free
+	wait_not_hblank
+	wait_hblank
 ; apply OBJ palette
 REPT 1 palettes
 	ld a, [hli]
@@ -215,8 +215,8 @@ CopyAndApplyOBPals::
 	ld c, LOW(rOBPD)
 
 .loop_copy
-	wait_ppu_busy
-	wait_ppu_free
+	wait_not_hblank
+	wait_hblank
 REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a

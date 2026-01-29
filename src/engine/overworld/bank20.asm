@@ -4214,7 +4214,7 @@ LOAD UNION "LCD Function", WRAM0
 	push hl
 	ld a, $02
 	ldh [rWBK], a
-	wait_ppu_free
+	wait_hblank
 	ld hl, rLCDC
 	set B_LCDC_BG_MAP, [hl] ; use BGMap1
 	ldh [rSCY], a

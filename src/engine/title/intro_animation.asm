@@ -69,7 +69,7 @@ PanIntroBackgroundLayers:
 	ldh a, [rLY]
 	cp $5b
 	jr c, .sky
-	call WaitVBlank
+	call WaitNextHBlank
 
 	ld a, [wIntroBGXOffsetFar]
 	ldh [rSCX], a
@@ -77,7 +77,7 @@ PanIntroBackgroundLayers:
 	ldh a, [rLY]
 	cp $63
 	jr c, .far_layer
-	call WaitVBlank
+	call WaitNextHBlank
 
 	ld a, [wIntroBGXOffsetCentre]
 	ldh [rSCX], a
@@ -85,7 +85,7 @@ PanIntroBackgroundLayers:
 	ldh a, [rLY]
 	cp $73
 	jr c, .centre_layer
-	call WaitVBlank
+	call WaitNextHBlank
 
 	ld a, [wIntroBGXOffsetNear]
 	ldh [rSCX], a
@@ -93,7 +93,7 @@ PanIntroBackgroundLayers:
 	ldh a, [rLY]
 	cp $83
 	jr c, .near_layer
-	call WaitVBlank
+	call WaitNextHBlank
 
 	ld a, [wSCX]
 	ldh [rSCX], a

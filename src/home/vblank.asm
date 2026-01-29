@@ -43,7 +43,7 @@ VBlank_TimeAttackDescription::
 	ret
 .end
 
-WaitVBlank::
-	wait_ppu_busy
-	wait_ppu_free
+WaitNextHBlank::
+	wait_not_hblank
+	wait_hblank
 	ret

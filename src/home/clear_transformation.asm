@@ -32,8 +32,8 @@ ClearTransformationValues::
 	ld c, LOW(rBGPD)
 
 .loop_copy_bg_pals
-	wait_ppu_busy
-	wait_ppu_free
+	wait_not_hblank
+	wait_hblank
 REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a
@@ -48,8 +48,8 @@ ENDR
 	ld c, LOW(rOBPD)
 
 .loop_copy_ob_pals
-	wait_ppu_busy
-	wait_ppu_free
+	wait_not_hblank
+	wait_hblank
 REPT 1 palettes
 	ld a, [hli]
 	ld [$ff00+c], a

@@ -226,7 +226,7 @@ Func_1fb6f7:
 	ld d, $00
 	add hl, de
 	ld e, TILEMAP_WIDTH
-	call WaitVBlank
+	call WaitNextHBlank
 	ld a, $03
 	ld [hli], a
 	ld [hld], a
@@ -248,7 +248,7 @@ Func_1fb6f7:
 	sla e
 	add hl, de
 	ld e, TILEMAP_WIDTH
-	call WaitVBlank
+	call WaitNextHBlank
 	ld a, b
 	ld [hli], a
 	ld [hld], a

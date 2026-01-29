@@ -293,9 +293,11 @@ LoadRoomPalettes::
 	ret
 
 UpdateRoomAnimatedPals::
+	; only animate if at least 8 scanlines from V-Blank
 	ldh a, [rLY]
-	cp $88
+	cp LY_VBLANK - 8
 	jp nc, .done
+	; we have 8 scanlines of margin, continue
 	ld a, [wRoomPalCycleDuration]
 	and a
 	jp z, .done
@@ -350,8 +352,8 @@ UpdateRoomAnimatedPals::
 	ld b, 5
 	ld c, LOW(rBGPD)
 .loop_copy_pals
-	wait_ppu_busy
-	wait_ppu_free
+	wait_not_hblank
+	wait_hblank
 REPT 12
 	ld a, [hli]
 	ld [$ff00+c], a
@@ -359,8 +361,8 @@ ENDR
 	dec b
 	jr nz, .loop_copy_pals
 
-	wait_ppu_busy
-	wait_ppu_free
+	wait_not_hblank
+	wait_hblank
 REPT 3
 	ld a, [hli]
 	ld [$ff00+c], a
