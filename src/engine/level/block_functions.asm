@@ -665,18 +665,18 @@ EnterPipeDown:
 	ld [wDMASourcePtr + 1], a
 	call LoadWarioGfx
 	ld a, BANK(OAM_14a82)
-	ld [wOAMBank], a
+	ld [wWarioOAMBank], a
 	ld a, HIGH(OAM_14a82)
-	ld [wOAMPtr + 0], a
+	ld [wWarioOAMPtr + 0], a
 	ld a, LOW(OAM_14a82)
-	ld [wOAMPtr + 1], a
+	ld [wWarioOAMPtr + 1], a
 	ld a, HIGH(Frameset_14cf6)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_14cf6)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	jp BlockFunc_Solid
 
 BlockFunc_UpPipe_Left:
@@ -754,18 +754,18 @@ EnterPipeUp:
 	ld [wDMASourcePtr + 1], a
 	call LoadWarioGfx
 	ld a, BANK(OAM_14a82)
-	ld [wOAMBank], a
+	ld [wWarioOAMBank], a
 	ld a, HIGH(OAM_14a82)
-	ld [wOAMPtr + 0], a
+	ld [wWarioOAMPtr + 0], a
 	ld a, LOW(OAM_14a82)
-	ld [wOAMPtr + 1], a
+	ld [wWarioOAMPtr + 1], a
 	ld a, HIGH(Frameset_14cf6)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_14cf6)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	jp BlockFunc_Solid
 
 BlockFunc_Door:
@@ -882,28 +882,28 @@ EnterDoor:
 	ld [wDMASourcePtr + 1], a
 	call LoadWarioGfx
 	ld a, BANK(OAM_14a82)
-	ld [wOAMBank], a
+	ld [wWarioOAMBank], a
 	ld a, HIGH(OAM_14a82)
-	ld [wOAMPtr + 0], a
+	ld [wWarioOAMPtr + 0], a
 	ld a, LOW(OAM_14a82)
-	ld [wOAMPtr + 1], a
+	ld [wWarioOAMPtr + 1], a
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_186dd
 	ld a, HIGH(Frameset_14d0b)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_14d0b)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_186e7
 .asm_186dd
 	ld a, HIGH(Frameset_14d10)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_14d10)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_186e7
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	jp BlockFunc_Free
 
 BlockFunc_UnderwaterDoor:
@@ -1153,7 +1153,7 @@ BlockFunc_Fire:
 	ld a, TRANSFORMATION_HOT_WARIO
 	ld [wTransformation], a
 	ld a, 1
-	ld [wWarioTransformationProgress], a
+	ld [wTransformationProgress], a
 	ld a, TOUCH_BUMP
 	ld [wTouchState], a
 	ld a, TOUCH_BUMP
@@ -1389,7 +1389,7 @@ Func_18aa8:
 	ld a, [wTransformation]
 	cp TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
-	ld a, [wWarioTransformationProgress]
+	ld a, [wTransformationProgress]
 	cp 1
 	jp c, BlockFunc_Solid ; not in snowball
 	ld a, $01
@@ -1425,7 +1425,7 @@ Func_18aec:
 	ld a, [wTransformation]
 	cp TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
-	ld a, [wWarioTransformationProgress]
+	ld a, [wTransformationProgress]
 	cp 1
 	jp c, BlockFunc_Solid ; not in snowball
 	ld a, $03
@@ -1466,7 +1466,7 @@ Func_18b2d:
 	ld a, [wTransformation]
 	cp TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
-	ld a, [wWarioTransformationProgress]
+	ld a, [wTransformationProgress]
 	cp 1
 	jp c, BlockFunc_Solid ; not in snowball
 	ld a, $02
@@ -1508,7 +1508,7 @@ Func_18b71:
 	ld a, [wTransformation]
 	cp TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
-	ld a, [wWarioTransformationProgress]
+	ld a, [wTransformationProgress]
 	cp 1
 	jp c, BlockFunc_Solid ; not in snowball
 	ld a, $04
@@ -1551,7 +1551,7 @@ Func_18bb5:
 	ld a, [wTransformation]
 	cp TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
-	ld a, [wWarioTransformationProgress]
+	ld a, [wTransformationProgress]
 	cp 3
 	jp nz, BlockFunc_Solid ; not big snowball
 	ld a, $01
@@ -1594,7 +1594,7 @@ Func_18bf9:
 	ld a, [wTransformation]
 	cp TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
-	ld a, [wWarioTransformationProgress]
+	ld a, [wTransformationProgress]
 	cp 3
 	jp nz, BlockFunc_Solid ; not big snowball
 	ld a, $03
@@ -1635,7 +1635,7 @@ Func_18c3a:
 	ld a, [wTransformation]
 	cp TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
-	ld a, [wWarioTransformationProgress]
+	ld a, [wTransformationProgress]
 	cp 3
 	jp nz, BlockFunc_Solid ; not big snowball
 	ld a, $02
@@ -1677,7 +1677,7 @@ Func_18c7e:
 	ld a, [wTransformation]
 	cp TRANSFORMATION_SNOWMAN_WARIO
 	jp nz, BlockFunc_Solid
-	ld a, [wWarioTransformationProgress]
+	ld a, [wTransformationProgress]
 	cp 3
 	jp nz, BlockFunc_Solid ; not big snowball
 	ld a, $04
@@ -2923,7 +2923,7 @@ BonfireBlockCollision:
 	ld a, [wTransformation]
 	cp TRANSFORMATION_HOT_WARIO
 	jr nz, .dont_break
-	ld a, [wWarioTransformationProgress]
+	ld a, [wTransformationProgress]
 	cp 2
 	jr nc, Func_19481 ; engulfed in flames
 .dont_break

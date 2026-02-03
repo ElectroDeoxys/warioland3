@@ -737,6 +737,10 @@ Func_1f0d60:
 	; we'll use main checksum value for wChecksum
 	ld a, MISMATCH_ORIG | MISMATCH_ECHO1 | MISMATCH_ECHO2
 	ld [wChecksumMismatches], a
+
+	; wChecksum <- checksum
+	; wcee9 <- checksum echo 1
+	; wceeb <- checksum echo 2
 	ld a, b
 	ld [wChecksum + 0], a
 	ld a, d
@@ -756,6 +760,9 @@ Func_1f0d60:
 	; that value for wChecksum
 	ld a, MISMATCH_ECHO2
 	ld [wChecksumMismatches], a
+
+	; wChecksum & wceeb <- checksum
+	; wcee9 <- checksum echo 2
 	ld a, b
 	ld [wChecksum + 0], a
 	ld [wceeb + 0], a
@@ -773,6 +780,9 @@ Func_1f0d60:
 	; that value for wChecksum
 	ld a, MISMATCH_ECHO1
 	ld [wChecksumMismatches], a
+
+	; wChecksum & wceeb <- checksum
+	; wcee9 <- checksum echo 1
 	ld a, b
 	ld [wChecksum + 0], a
 	ld [wceeb + 0], a
@@ -790,6 +800,9 @@ Func_1f0d60:
 	; use that for wChecksum
 	ld a, MISMATCH_ORIG
 	ld [wChecksumMismatches], a
+
+	; wChecksum & wceeb <- checksum echo 1
+	; wcee9 <- checksum
 	ld a, d
 	ld [wChecksum + 0], a
 	ld [wceeb + 0], a
@@ -806,6 +819,8 @@ Func_1f0d60:
 	; all checksums match, use that value for wChecksum
 	xor a
 	ld [wChecksumMismatches], a
+
+	; wChecksum & wceeb & wcee9 <- checksum
 	ld a, b
 	ld [wChecksum + 0], a
 	ld [wcee9 + 0], a

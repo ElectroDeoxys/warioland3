@@ -313,7 +313,7 @@ wPendingDMADestinationBank:: db
 wPendingDMADestinationPtr::  dw
 wPendingDMALength::          db
 
-wAnimationEnded::
+wWarioAnimationEnded::
 	db
 
 wFloorTransitionTimer::
@@ -502,10 +502,13 @@ wWarioPos::
 wWarioYPos:: dw
 wWarioXPos:: dw
 
-wca65::
+; which frame in the animation Wario is in
+wWarioFrame::
 	db
 
-wca66::
+; which OAM attributes to apply to Wario's sprite
+; is always $0
+wWarioAttributes::
 	db
 
 wFrameDuration::
@@ -582,10 +585,10 @@ wWarioPalsPtr::
 wDMASourceBank:: db
 wDMASourcePtr::  dw
 
-wOAMBank:: db
-wOAMPtr::  dw
+wWarioOAMBank:: db
+wWarioOAMPtr::  dw
 
-wFramesetPtr::
+wWarioFramesetPtr::
 	dw
 
 ; a STATE_* constant, corresponding
@@ -646,7 +649,7 @@ wTransformation::
 ; - 1: small snowball
 ; - 2: medium snowball
 ; - 3: big snowball
-wWarioTransformationProgress::
+wTransformationProgress::
 	db
 
 ; duration left for current transformation

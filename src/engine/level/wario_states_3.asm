@@ -102,7 +102,7 @@ UpdateState_OnFire:
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_28100
-	ld a, [wAnimationEnded]
+	ld a, [wWarioAnimationEnded]
 	and a
 	jr z, .asm_28100
 	ld a, $01
@@ -112,19 +112,19 @@ UpdateState_OnFire:
 	and a
 	jr nz, .asm_280f6
 	ld a, HIGH(Frameset_16b14)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_16b14)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_28100
 .asm_280f6
 	ld a, HIGH(Frameset_16b1d)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_16b1d)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_28100
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	call DecrementTransformationDuration
 	ld hl, wTransformationDuration
@@ -158,7 +158,7 @@ SetState_Hot_ResetDuration:
 
 SetState_Hot:
 	ld a, 2
-	ld [wWarioTransformationProgress], a
+	ld [wTransformationProgress], a
 	ld a, WST_HOT
 	ld [wWarioState], a
 	xor a
@@ -192,19 +192,19 @@ SetState_Hot:
 	and a
 	jr nz, .asm_281b5
 	ld a, HIGH(Frameset_16b26)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_16b26)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_281a5
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 .asm_281b5
 	ld a, HIGH(Frameset_16b2f)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_16b2f)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_281a5
 
 UpdateState_OnFireAirborne:
@@ -218,7 +218,7 @@ UpdateState_OnFireAirborne:
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_2820b
-	ld a, [wAnimationEnded]
+	ld a, [wWarioAnimationEnded]
 	and a
 	jr z, .asm_2820b
 	ld a, $01
@@ -228,19 +228,19 @@ UpdateState_OnFireAirborne:
 	and a
 	jr nz, .asm_28201
 	ld a, HIGH(Frameset_16b14)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_16b14)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_2820b
 .asm_28201
 	ld a, HIGH(Frameset_16b1d)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_16b1d)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_2820b
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	call Func_2af9c
 	ld a, [wWarioState]
@@ -294,7 +294,7 @@ UpdateState_Hot:
 .skip_sfx
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	call DecrementTransformationDuration
 	ld hl, wTransformationDuration
@@ -357,29 +357,29 @@ UpdateState_Hot:
 	ld [wDMASourcePtr + 1], a
 	call LoadWarioGfx
 	ld a, BANK(OAM_16b6c)
-	ld [wOAMBank], a
+	ld [wWarioOAMBank], a
 	ld a, HIGH(OAM_16b6c)
-	ld [wOAMPtr + 0], a
+	ld [wWarioOAMPtr + 0], a
 	ld a, LOW(OAM_16b6c)
-	ld [wOAMPtr + 1], a
+	ld [wWarioOAMPtr + 1], a
 
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_28366
 	ld a, HIGH(Frameset_16e47)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_16e47)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_28370
 .asm_28366
 	ld a, HIGH(Frameset_16e72)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_16e72)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_28370
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 Func_28380:
@@ -410,7 +410,7 @@ UpdateState_HotAirborne:
 	jp nz, Func_2ade4
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	call Func_2b027
 	ld a, [wWarioState]
 	cp WST_HOT_AIRBORNE
@@ -451,8 +451,8 @@ UpdateState_HotAirborne:
 UpdateState_Burnt:
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
-	ld a, [wAnimationEnded]
+	hcall UpdateWarioAnimation
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 	jp RecoverFromTransformation
@@ -537,18 +537,18 @@ SetState_FlatAirborne:
 	ld [wDMASourcePtr + 1], a
 	call LoadWarioGfx
 	ld a, BANK(OAM_16e9d)
-	ld [wOAMBank], a
+	ld [wWarioOAMBank], a
 	ld a, HIGH(OAM_16e9d)
-	ld [wOAMPtr + 0], a
+	ld [wWarioOAMPtr + 0], a
 	ld a, LOW(OAM_16e9d)
-	ld [wOAMPtr + 1], a
+	ld [wWarioOAMPtr + 1], a
 	ld a, HIGH(Frameset_171bd)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_171bd)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_GettingFlatAirborne:
@@ -594,20 +594,20 @@ UpdateState_GettingFlatAirborne:
 	ld [wCollisionBoxRight], a
 
 	ld a, HIGH(Frameset_1715f)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1715f)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_GettingFlat:
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
-	ld a, [wAnimationEnded]
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 	xor a
@@ -639,18 +639,18 @@ SetState_FlatIdling:
 	ld [wCollisionBoxRight], a
 
 	ld a, HIGH(Frameset_1718b)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1718b)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_FlatIdling:
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	call Func_2b10a
 	farcall CheckCentreCollision
@@ -674,12 +674,12 @@ SetState_FlatWalking:
 	ld [wJumpVelIndex], a
 
 	ld a, HIGH(Frameset_17175)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17175)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	ld a, [wJoypadDown]
 	bit B_PAD_RIGHT, a
@@ -708,7 +708,7 @@ UpdateState_FlatWalking:
 .skip_sfx
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	call Func_2b11b
 	farcall CheckCentreCollision
@@ -743,12 +743,12 @@ SetState_FlatJumping:
 	ld [wJumpVelTable], a
 
 	ld a, HIGH(Frameset_17190)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17190)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	ld a, [wIsOnSteppableObject]
 	and a
@@ -791,19 +791,19 @@ SetState_FlatFalling:
 	jr nz, .asm_28796
 
 	ld a, HIGH(Frameset_171b8)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_171b8)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_28786
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 .asm_28796
 	ld a, HIGH(Frameset_17186)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17186)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_28786
 
 UpdateState_FlatFalling:
@@ -816,14 +816,14 @@ UpdateState_FlatFalling:
 	and a
 	jp nz, SetState_FlatSinking
 
-	ld a, [wAnimationEnded]
+	ld a, [wWarioAnimationEnded]
 	and a
 	jr nz, .asm_287ff
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
-	ld a, [wAnimationEnded]
+	ld a, [wWarioAnimationEnded]
 	and a
 	jr z, .asm_287ff
 
@@ -832,15 +832,15 @@ UpdateState_FlatFalling:
 	ld [wAnimationFrame], a
 
 	ld a, HIGH(Frameset_17190)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17190)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	ld a, $01
-	ld [wAnimationEnded], a
+	ld [wWarioAnimationEnded], a
 .asm_287ff
 	ld hl, wWalkVelIndex
 	ld e, [hl]
@@ -900,7 +900,7 @@ UpdateState_FlatFalling:
 	xor a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
-	ld [wAnimationEnded], a
+	ld [wWarioAnimationEnded], a
 
 	ld a, [wDirection]
 	xor $1 ; switch direction
@@ -908,19 +908,19 @@ UpdateState_FlatFalling:
 	and a
 	jr nz, .asm_2888e
 	ld a, HIGH(Frameset_171b8)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_171b8)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_28898
 .asm_2888e
 	ld a, HIGH(Frameset_17186)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17186)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_28898
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 .asm_288a7
 	xor a
@@ -955,9 +955,9 @@ UpdateState_FlatFalling:
 UpdateState_FlatStretching:
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
-	ld a, [wAnimationEnded]
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 	xor a
@@ -990,18 +990,18 @@ SetState_FlatSinking:
 	ld [wAnimationFrame], a
 
 	ld a, HIGH(Frameset_1719a)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1719a)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_FlatSinking:
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	farcall Func_19b25
 
@@ -1089,20 +1089,20 @@ Func_289c5:
 	ld [wAnimationFrame], a
 
 	ld a, HIGH(Frameset_171a3)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_171a3)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_FlatStretchingUnderwater:
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
-	ld a, [wAnimationEnded]
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 	jp Func_2ad6a
@@ -1128,18 +1128,18 @@ SetState_FlatSquishedLifting:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 	ld a, HIGH(Frameset_1716c)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1716c)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_FlatSquishedLifting:
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	ld b, $01
 	call MoveWarioUp
@@ -1155,8 +1155,8 @@ UpdateState_FlatSquishedLifting:
 UpdateState_GettingWrappedInString:
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
-	ld a, [wAnimationEnded]
+	hcall UpdateWarioAnimation
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 	farcall CheckCentreCollision
@@ -1170,7 +1170,7 @@ SetState_BallOString:
 	ld a, WST_BALL_O_STRING
 	ld [wWarioState], a
 	ld a, 1
-	ld [wWarioTransformationProgress], a
+	ld [wTransformationProgress], a
 	xor a
 	ld [wSFXLoopCounter], a
 	ld [wWalkVelIndex], a
@@ -1193,19 +1193,19 @@ SetState_BallOString:
 	and a
 	jr nz, .asm_28b2a
 	ld a, HIGH(Frameset_1741f)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1741f)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_28b1a
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 .asm_28b2a
 	ld a, HIGH(Frameset_173fe)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_173fe)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_28b1a
 
 UpdateState_BallOString:
@@ -1224,7 +1224,7 @@ UpdateState_BallOString:
 .skip_sfx
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	ld a, [wDirection]
 	and a
@@ -1276,19 +1276,19 @@ Func_28bd5:
 	and a
 	jr nz, .asm_28c06
 	ld a, HIGH(Frameset_1741f)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1741f)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_28bf6
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 .asm_28c06
 	ld a, HIGH(Frameset_173fe)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_173fe)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_28bf6
 
 .asm_28c12
@@ -1313,7 +1313,7 @@ UpdateState_BallOStringAirborne:
 	jp nz, RecoverFromTransformation
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	farcall CheckFrontCollision
 	ld a, b
@@ -1338,7 +1338,7 @@ UpdateState_BallOStringAirborne:
 
 SetState_BallOStringKnockBack:
 	xor a
-	ld [wWarioTransformationProgress], a
+	ld [wTransformationProgress], a
 	play_sfx SFX_BUMP
 	ld a, WST_BALL_O_STRING_KNOCK_BACK
 	ld [wWarioState], a
@@ -1362,12 +1362,12 @@ SetState_BallOStringKnockBack:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 	ld a, HIGH(Frameset_1742a)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1742a)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_BallOStringKnockBack:
@@ -1380,7 +1380,7 @@ UpdateState_BallOStringKnockBack:
 	jp nz, RecoverFromTransformation
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	call Func_2b1cc
 	ld a, [wJumpVelIndex]
 	cp FALLING_JUMP_VEL_INDEX
@@ -1422,19 +1422,19 @@ UpdateState_BallOStringKnockBack:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 	ld a, HIGH(Frameset_17409)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17409)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_GettingUnwrappedInString:
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
-	ld a, [wAnimationEnded]
+	hcall UpdateWarioAnimation
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 
@@ -1469,25 +1469,25 @@ UpdateState_GettingUnwrappedInString:
 	ld [wDMASourcePtr + 1], a
 	call LoadWarioGfx
 	ld a, BANK(OAM_17bbc)
-	ld [wOAMBank], a
+	ld [wWarioOAMBank], a
 	ld a, HIGH(OAM_17bbc)
-	ld [wOAMPtr + 0], a
+	ld [wWarioOAMPtr + 0], a
 	ld a, LOW(OAM_17bbc)
-	ld [wOAMPtr + 1], a
+	ld [wWarioOAMPtr + 1], a
 	ld a, HIGH(Frameset_17ce2)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17ce2)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_BallOStringDizzy:
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
-	ld a, [wAnimationEnded]
+	hcall UpdateWarioAnimation
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 	jp RecoverFromTransformation
@@ -1505,26 +1505,26 @@ SetState_FatBumping:
 	and a
 	jr nz, .asm_28e64
 	ld a, HIGH(Frameset_178fc)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_178fc)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_28e54
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 .asm_28e64
 	ld a, HIGH(Frameset_17905)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17905)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_28e54
 
 UpdateState_FatBumping:
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
-	ld a, [wAnimationEnded]
+	hcall UpdateWarioAnimation
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 	jp SetState_FatIdling
@@ -1555,8 +1555,8 @@ UpdateState_FatEating:
 .asm_28ecd
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
-	ld a, [wAnimationEnded]
+	hcall UpdateWarioAnimation
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 	ld a, -9
@@ -1587,19 +1587,19 @@ SetState_FatIdling:
 	and a
 	jr nz, .asm_28f2d
 	ld a, HIGH(Frameset_1781c)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1781c)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_28f1d
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 .asm_28f2d
 	ld a, HIGH(Frameset_1781f)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1781f)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_28f1d
 
 UpdateState_FatIdling:
@@ -1643,19 +1643,19 @@ SetState_FatWalking:
 	and a
 	jr nz, .asm_28fb4
 	ld a, HIGH(Frameset_17822)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17822)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_28fa4
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 .asm_28fb4
 	ld a, HIGH(Frameset_1782b)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1782b)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_28fa4
 
 UpdateState_FatWalking:
@@ -1674,7 +1674,7 @@ UpdateState_FatWalking:
 .skip_sfx
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	call DecrementTransformationDuration
 	ld hl, wTransformationDuration
@@ -1705,19 +1705,19 @@ SetState_FatTurning:
 	and a
 	jr nz, .asm_29061
 	ld a, HIGH(Frameset_178f3)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_178f3)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_29051
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 .asm_29061
 	ld a, HIGH(Frameset_178ea)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_178ea)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_29051
 
 UpdateState_FatTurning:
@@ -1727,11 +1727,11 @@ UpdateState_FatTurning:
 	jp nz, TriggerRoomTransition
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ld a, [wJoypadPressed]
 	bit B_PAD_A, a
 	jr nz, Func_290a1
-	ld a, [wAnimationEnded]
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 	jp SetState_FatWalking
@@ -1749,15 +1749,15 @@ Func_290a1:
 	and a
 	jr nz, .asm_290ca
 	ld a, HIGH(Frameset_17834)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17834)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_290d4
 .asm_290ca
 	ld a, HIGH(Frameset_17839)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17839)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_290d4
 	jr SetState_FatAirborne
 
@@ -1774,15 +1774,15 @@ Func_290d6:
 	and a
 	jr nz, .asm_290fa
 	ld a, HIGH(Frameset_1783e)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1783e)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr SetState_FatAirborne
 .asm_290fa
 	ld a, HIGH(Frameset_17841)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17841)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 ;	fallthrough
 
 SetState_FatAirborne:
@@ -1792,7 +1792,7 @@ SetState_FatAirborne:
 	ld [wAnimationFrame], a
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ld a, WST_FAT_AIRBORNE
 	ld [wWarioState], a
 	ret
@@ -1814,11 +1814,11 @@ UpdateState_FatAirborne:
 .asm_2914b
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_2919d
-	ld a, [wAnimationEnded]
+	ld a, [wWarioAnimationEnded]
 	and a
 	jr z, .asm_2919d
 	xor a
@@ -1830,19 +1830,19 @@ UpdateState_FatAirborne:
 	and a
 	jr nz, .asm_29184
 	ld a, HIGH(Frameset_1783e)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1783e)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_2918e
 .asm_29184
 	ld a, HIGH(Frameset_17841)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17841)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_2918e
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 .asm_2919d
 	call Func_2b2a4
@@ -1899,19 +1899,19 @@ SetState_FatLanding:
 	and a
 	jr nz, .asm_29229
 	ld a, HIGH(Frameset_17872)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17872)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_29233
 .asm_29229
 	ld a, HIGH(Frameset_17887)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17887)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_29233
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_FatLanding:
@@ -1924,7 +1924,7 @@ UpdateState_FatLanding:
 	jp z, SetState_FatRecovering
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ld a, [wGroundShakeCounter]
 	and a
 	ret nz
@@ -1956,25 +1956,25 @@ Func_2926a:
 	and a
 	jr nz, .asm_292cb
 	ld a, HIGH(Frameset_17872)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17872)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_292d5
 .asm_292cb
 	ld a, HIGH(Frameset_17887)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17887)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_292d5
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_FatSinking:
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ld a, [wGlobalCounter]
 	and %1111
 	call z, Func_29317
@@ -2055,26 +2055,26 @@ SetState_FatRecovering:
 	and a
 	jr nz, .asm_2939f
 	ld a, HIGH(Frameset_17844)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17844)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_293a9
 .asm_2939f
 	ld a, HIGH(Frameset_1785b)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1785b)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_293a9
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_FatRecovering:
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
-	ld a, [wAnimationEnded]
+	hcall UpdateWarioAnimation
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 	jp RecoverFromTransformation
@@ -2089,9 +2089,9 @@ UpdateState_ElectricStart:
 	jp nz, RecoverFromTransformation
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
-	ld a, [wAnimationEnded]
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 
@@ -2167,19 +2167,19 @@ UpdateState_ElectricStart:
 	and a
 	jr nz, .asm_294a5
 	ld a, HIGH(Frameset_17b8d)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17b8d)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_294af
 .asm_294a5
 	ld a, HIGH(Frameset_17b7c)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17b7c)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_294af
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_Electric:
@@ -2192,7 +2192,7 @@ UpdateState_Electric:
 	jp nz, RecoverFromTransformation
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	farcall CheckFrontCollision
 	ld a, b
@@ -2372,26 +2372,26 @@ UpdateState_Electric:
 	and a
 	jr nz, .asm_29658
 	ld a, HIGH(Frameset_17b9e)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17b9e)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_29662
 .asm_29658
 	ld a, HIGH(Frameset_17bad)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17bad)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_29662
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_ElectricDizzy:
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
-	ld a, [wAnimationEnded]
+	hcall UpdateWarioAnimation
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 	jp RecoverFromTransformation
@@ -2446,36 +2446,36 @@ SetState_TurningInvisible:
 	call LoadWarioGfx
 
 	ld a, BANK(OAM_17cf7)
-	ld [wOAMBank], a
+	ld [wWarioOAMBank], a
 	ld a, HIGH(OAM_17cf7)
-	ld [wOAMPtr + 0], a
+	ld [wWarioOAMPtr + 0], a
 	ld a, LOW(OAM_17cf7)
-	ld [wOAMPtr + 1], a
+	ld [wWarioOAMPtr + 1], a
 
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29714
 	ld a, HIGH(Frameset_17e1b)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17e1b)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_2971e
 .asm_29714
 	ld a, HIGH(Frameset_17e3a)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17e3a)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_2971e
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_TurningInvisible:
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
-	ld a, [wAnimationEnded]
+	hcall UpdateWarioAnimation
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 	xor a
@@ -2541,37 +2541,37 @@ SetState_PuffyInflating:
 	call LoadWarioGfx
 
 	ld a, BANK(OAM_1dc93f)
-	ld [wOAMBank], a
+	ld [wWarioOAMBank], a
 	ld a, HIGH(OAM_1dc93f)
-	ld [wOAMPtr + 0], a
+	ld [wWarioOAMPtr + 0], a
 	ld a, LOW(OAM_1dc93f)
-	ld [wOAMPtr + 1], a
+	ld [wWarioOAMPtr + 1], a
 
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_297fb
 	ld a, HIGH(Frameset_1dccc0)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1dccc0)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_29805
 .asm_297fb
 	ld a, HIGH(Frameset_1dccc9)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1dccc9)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_29805
-	ld a, [wOAMBank]
+	ld a, [wWarioOAMBank]
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_PuffyInflating:
-	ld a, [wOAMBank]
+	ld a, [wWarioOAMBank]
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
-	ld a, [wAnimationEnded]
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 ;	fallthrough
@@ -2594,19 +2594,19 @@ SetState_PuffyRising:
 	and a
 	jr nz, .asm_29856
 	ld a, HIGH(Frameset_1dcd4e)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1dcd4e)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_29860
 .asm_29856
 	ld a, HIGH(Frameset_1dcd57)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1dcd57)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_29860
-	ld a, [wOAMBank]
+	ld a, [wWarioOAMBank]
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_PuffyRising:
@@ -2624,9 +2624,9 @@ UpdateState_PuffyRising:
 	play_sfx SFX_PUFF_RAISE
 .skip_sfx
 
-	ld a, [wOAMBank]
+	ld a, [wWarioOAMBank]
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	call Func_2b2c2
 	ret
@@ -2647,25 +2647,25 @@ SetState_PuffyTurning:
 	and a
 	jr nz, .asm_298d8
 	ld a, HIGH(Frameset_1dcce3)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1dcce3)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_298e2
 .asm_298d8
 	ld a, HIGH(Frameset_1dccd8)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1dccd8)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_298e2
-	ld a, [wOAMBank]
+	ld a, [wWarioOAMBank]
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_PuffyTurning:
-	ld a, [wOAMBank]
+	ld a, [wWarioOAMBank]
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	call Func_2b342
 	farcall CheckUpCollision
@@ -2680,7 +2680,7 @@ UpdateState_PuffyTurning:
 	jp SetState_PuffyDeflating
 
 .asm_29922
-	ld a, [wAnimationEnded]
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 	jp SetState_PuffyRising
@@ -2703,19 +2703,19 @@ SetState_PuffyDeflating:
 	and a
 	jr nz, .asm_2995a
 	ld a, HIGH(Frameset_1dccee)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1dccee)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_29964
 .asm_2995a
 	ld a, HIGH(Frameset_1dcd1e)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1dcd1e)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_29964
-	ld a, [wOAMBank]
+	ld a, [wWarioOAMBank]
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_PuffyDeflating:
@@ -2723,11 +2723,11 @@ UpdateState_PuffyDeflating:
 	and a
 	jr nz, .asm_299b8
 
-	ld a, [wOAMBank]
+	ld a, [wWarioOAMBank]
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
-	ld a, [wAnimationEnded]
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 	ld a, $01
@@ -2740,21 +2740,21 @@ UpdateState_PuffyDeflating:
 	and a
 	jr nz, .asm_299ae
 	ld a, HIGH(Frameset_1dcd01)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1dcd01)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_299b8
 .asm_299ae
 	ld a, HIGH(Frameset_1dcd31)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1dcd31)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_299b8
-	ld a, [wOAMBank]
+	ld a, [wWarioOAMBank]
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
-	ld a, [wAnimationEnded]
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 	jp RecoverFromTransformation
@@ -2807,29 +2807,29 @@ SetState_ZombieIdling:
 	ld [wDMASourcePtr + 1], a
 	call LoadWarioGfx
 	ld a, BANK(OAM_1fc48b)
-	ld [wOAMBank], a
+	ld [wWarioOAMBank], a
 	ld a, HIGH(OAM_1fc48b)
-	ld [wOAMPtr + 0], a
+	ld [wWarioOAMPtr + 0], a
 	ld a, LOW(OAM_1fc48b)
-	ld [wOAMPtr + 1], a
+	ld [wWarioOAMPtr + 1], a
 
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_29a5a
 	ld a, HIGH(Frameset_1fc8b6)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc8b6)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_29a64
 .asm_29a5a
 	ld a, HIGH(Frameset_1fc8b9)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc8b9)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_29a64
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_ZombieIdling:
@@ -2849,7 +2849,7 @@ UpdateState_ZombieIdling:
 	update_pos_y
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	call Func_2b34e
 	ret
 
@@ -2870,19 +2870,19 @@ SetState_ZombieWalking:
 	and a
 	jr nz, .asm_29aec
 	ld a, HIGH(Frameset_1fc870)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc870)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_29af6
 .asm_29aec
 	ld a, HIGH(Frameset_1fc879)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc879)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_29af6
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_ZombieWalking:
@@ -2901,7 +2901,7 @@ UpdateState_ZombieWalking:
 .skip_sfx
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	call Func_2b381
 
@@ -2928,26 +2928,26 @@ SetState_ZombieTurning:
 	and a
 	jr nz, .asm_29b88
 	ld a, HIGH(Frameset_1fc89d)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc89d)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_29b92
 .asm_29b88
 	ld a, HIGH(Frameset_1fc894)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc894)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_29b92
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_ZombieTurning:
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
-	ld a, [wAnimationEnded]
+	hcall UpdateWarioAnimation
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 	jp SetState_ZombieWalking
@@ -2957,15 +2957,15 @@ Func_29bb9:
 	and a
 	jr nz, .asm_29bcb
 	ld a, HIGH(Frameset_1fc8b0)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc8b0)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_29bd5
 .asm_29bcb
 	ld a, HIGH(Frameset_1fc8b3)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc8b3)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 
 .asm_29bd5
 	ld a, $01
@@ -2979,15 +2979,15 @@ Func_29be1:
 	and a
 	jr nz, .asm_29bf3
 	ld a, HIGH(Frameset_1fc8a6)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc8a6)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_29bfd
 .asm_29bf3
 	ld a, HIGH(Frameset_1fc8ab)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc8ab)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 
 .asm_29bfd
 	xor a
@@ -3007,7 +3007,7 @@ SetState_ZombieAirborne:
 	ld [wAnimationFrame], a
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_ZombieAirborne:
@@ -3030,7 +3030,7 @@ UpdateState_ZombieAirborne:
 	ld a, [wWarioStateCounter]
 	and a
 	jr nz, .asm_29c88
-	ld a, [wAnimationEnded]
+	ld a, [wWarioAnimationEnded]
 	and a
 	jr z, .asm_29c88
 	xor a
@@ -3043,19 +3043,19 @@ UpdateState_ZombieAirborne:
 	and a
 	jr nz, .asm_29c7e
 	ld a, HIGH(Frameset_1fc8b0)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc8b0)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_29c88
 .asm_29c7e
 	ld a, HIGH(Frameset_1fc8b3)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc8b3)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_29c88
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ld a, [wWarioState]
 	cp WST_ZOMBIE_AIRBORNE
 	ret nz ; done if not zombie airborne anymore
@@ -3117,15 +3117,15 @@ SetState_ZombieLanding:
 	and a
 	jr nz, .asm_29d37
 	ld a, HIGH(Frameset_1fc8bc)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc8bc)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_29d5f
 .asm_29d37
 	ld a, HIGH(Frameset_1fc8d5)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc8d5)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_29d5f
 
 .asm_29d43
@@ -3133,26 +3133,26 @@ SetState_ZombieLanding:
 	and a
 	jr nz, .asm_29d55
 	ld a, HIGH(Frameset_1fc948)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc948)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_29d5f
 .asm_29d55
 	ld a, HIGH(Frameset_1fc953)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc953)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_29d5f
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_ZombieLanding:
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
-	ld a, [wAnimationEnded]
+	hcall UpdateWarioAnimation
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 	ld a, [wWarioStateCounter]
@@ -3178,19 +3178,19 @@ UpdateState_ZombieLanding:
 	and a
 	jr nz, .asm_29db9
 	ld a, HIGH(Frameset_1fc928)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc928)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_29dc3
 .asm_29db9
 	ld a, HIGH(Frameset_1fc92b)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc92b)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_29dc3
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_ZombieSlippingThroughFloor:
@@ -3208,7 +3208,7 @@ UpdateState_ZombieSlippingThroughFloor:
 	call Func_2b3dd
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ld a, [wWarioState]
 	cp WST_ZOMBIE_SLIPPING_THROUGH_FLOOR
 	ret nz ; done if not slipping through floor anymore
@@ -3234,25 +3234,25 @@ UpdateState_ZombieSlippingThroughFloor:
 	and a
 	jr nz, .asm_29e48
 	ld a, HIGH(Frameset_1fc8ee)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc8ee)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_29e52
 .asm_29e48
 	ld a, HIGH(Frameset_1fc90b)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc90b)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_29e52
 	xor a
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
-	ld [wAnimationEnded], a
+	ld [wWarioAnimationEnded], a
 	ld a, $02
 	ld [wWarioStateCounter], a
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 SetState_ZombieRecovering:
@@ -3315,26 +3315,26 @@ SetState_ZombieKnockBack:
 	and a
 	jr nz, .asm_29ed9
 	ld a, HIGH(Frameset_1fc92e)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc92e)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_29ee3
 .asm_29ed9
 	ld a, HIGH(Frameset_1fc93b)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc93b)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_29ee3
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_ZombieKnockBack:
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
-	ld a, [wAnimationEnded]
+	hcall UpdateWarioAnimation
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 	jp SetState_ZombieIdling
@@ -3351,25 +3351,25 @@ SetState_ZombieWrithing:
 	and a
 	jr nz, .asm_29f28
 	ld a, HIGH(Frameset_1fc882)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc882)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_29f32
 .asm_29f28
 	ld a, HIGH(Frameset_1fc88b)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fc88b)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_29f32
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_ZombieWrithing:
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ld a, [wJoypadDown]
 	and a
 	jp nz, SetState_ZombieIdling
@@ -3419,19 +3419,19 @@ SetState_BouncyStart:
 	call LoadWarioGfx
 
 	ld a, BANK(OAM_1fc95e)
-	ld [wOAMBank], a
+	ld [wWarioOAMBank], a
 	ld a, HIGH(OAM_1fc95e)
-	ld [wOAMPtr + 0], a
+	ld [wWarioOAMPtr + 0], a
 	ld a, LOW(OAM_1fc95e)
-	ld [wOAMPtr + 1], a
+	ld [wWarioOAMPtr + 1], a
 
 	ld a, HIGH(Frameset_1fcc6c)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fcc6c)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	farcall Func_197b1
 	ld a, b
@@ -3491,12 +3491,12 @@ SetState_BouncyFloor:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 	ld a, HIGH(Frameset_1fcc5f)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fcc5f)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_BouncyFloor:
@@ -3508,9 +3508,9 @@ UpdateState_BouncyFloor:
 	call Func_2ae3b
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
-	ld a, [wAnimationEnded]
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 
@@ -3549,12 +3549,12 @@ SetState_BouncyAirborne:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 	ld a, HIGH(Frameset_1fcc6c)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fcc6c)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_BouncyAirborne:
@@ -3565,17 +3565,17 @@ UpdateState_BouncyAirborne:
 	ld a, [wWaterInteraction]
 	and a
 	jp nz, RecoverFromTransformation
-	ld a, [wAnimationEnded]
+	ld a, [wWarioAnimationEnded]
 	and a
 	jr nz, .asm_2a15a
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	ld a, [wJumpVelTable]
 	cp JUMP_VEL_BOUNCY_HIGH_JUMP
 	jr nz, .asm_2a15a
-	ld a, [wAnimationEnded]
+	ld a, [wWarioAnimationEnded]
 	and a
 	jr z, .asm_2a15a
 
@@ -3644,12 +3644,12 @@ UpdateState_BouncyAirborne:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 	ld a, HIGH(Frameset_1fcc75)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fcc75)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_BouncyCeiling:
@@ -3661,9 +3661,9 @@ UpdateState_BouncyCeiling:
 	call Func_2ae3b
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
-	ld a, [wAnimationEnded]
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 	ld a, FALLING_JUMP_VEL_INDEX
@@ -3695,12 +3695,12 @@ SetState_BouncyUpsideDown:
 	call SetWarioPal
 
 	ld a, HIGH(Frameset_1fcc82)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fcc82)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_BouncyUpsideDown:
@@ -3733,19 +3733,19 @@ UpdateState_BouncyUpsideDown:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 	ld a, HIGH(Frameset_1fcc85)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fcc85)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_BouncyUpsideLanding:
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
-	ld a, [wAnimationEnded]
+	hcall UpdateWarioAnimation
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 ;	fallthrough
@@ -3765,15 +3765,15 @@ Func_2a2e7:
 	and a
 	jr nz, .asm_2a30e
 	ld a, HIGH(Frameset_1fccbf)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fccbf)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_2a318
 .asm_2a30e
 	ld a, HIGH(Frameset_1fccb2)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fccb2)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_2a318
 	xor a
 	ld [wFrameDuration], a
@@ -3784,15 +3784,15 @@ Func_2a2e7:
 	and a
 	jr nz, .asm_2a333
 	ld a, HIGH(Frameset_1fcca5)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fcca5)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_2a33d
 .asm_2a333
 	ld a, HIGH(Frameset_1fcc98)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fcc98)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_2a33d
 	xor a
 	ld [wFrameDuration], a
@@ -3808,7 +3808,7 @@ SetState_BouncyLastBounce:
 	ld [wJumpVelTable], a
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_BouncyLastBounce:
@@ -3819,12 +3819,12 @@ UpdateState_BouncyLastBounce:
 	ld a, [wWaterInteraction]
 	and a
 	jp nz, RecoverFromTransformation
-	ld a, [wAnimationEnded]
+	ld a, [wWarioAnimationEnded]
 	and a
 	jr nz, .asm_2a394
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 .asm_2a394
 	call ApplyJumpVelocity
@@ -3907,30 +3907,30 @@ SetState_CrazySpinning:
 	call LoadWarioGfx
 
 	ld a, BANK(OAM_14a82)
-	ld [wOAMBank], a
+	ld [wWarioOAMBank], a
 	ld a, HIGH(OAM_14a82)
-	ld [wOAMPtr + 0], a
+	ld [wWarioOAMPtr + 0], a
 	ld a, LOW(OAM_14a82)
-	ld [wOAMPtr + 1], a
+	ld [wWarioOAMPtr + 1], a
 
 	ld a, [wObjDirection]
 	ld [wDirection], a
 	and a
 	jr nz, .asm_2a46f
 	ld a, HIGH(Frameset_14ccc)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_14ccc)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_2a479
 .asm_2a46f
 	ld a, HIGH(Frameset_14ce1)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_14ce1)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_2a479
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_CrazySpinning:
@@ -3960,7 +3960,7 @@ UpdateState_CrazySpinning:
 .asm_2a4cf
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	ld hl, wWarioStateCounter
 	inc [hl]
@@ -3990,26 +3990,26 @@ UpdateState_CrazySpinning:
 	ld [wDMASourcePtr + 1], a
 	call LoadWarioGfx
 	ld a, BANK(OAM_17bbc)
-	ld [wOAMBank], a
+	ld [wWarioOAMBank], a
 	ld a, HIGH(OAM_17bbc)
-	ld [wOAMPtr + 0], a
+	ld [wWarioOAMPtr + 0], a
 	ld a, LOW(OAM_17bbc)
-	ld [wOAMPtr + 1], a
+	ld [wWarioOAMPtr + 1], a
 
 	ld a, HIGH(Frameset_17ce2)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_17ce2)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_CrazyDizzy:
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
-	ld a, [wAnimationEnded]
+	hcall UpdateWarioAnimation
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 ;	fallthrough
@@ -4045,29 +4045,29 @@ SetState_Crazy:
 	call LoadWarioGfx
 
 	ld a, BANK(OAM_1fccd5)
-	ld [wOAMBank], a
+	ld [wWarioOAMBank], a
 	ld a, HIGH(OAM_1fccd5)
-	ld [wOAMPtr + 0], a
+	ld [wWarioOAMPtr + 0], a
 	ld a, LOW(OAM_1fccd5)
-	ld [wOAMPtr + 1], a
+	ld [wWarioOAMPtr + 1], a
 
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_2a5be
 	ld a, HIGH(Frameset_1fcf9f)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fcf9f)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_2a5c8
 .asm_2a5be
 	ld a, HIGH(Frameset_1fcf6e)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fcf6e)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_2a5c8
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_Crazy:
@@ -4077,7 +4077,7 @@ UpdateState_Crazy:
 	jp nz, TriggerRoomTransition
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	call Func_2b3f9
 	ld a, [wWarioState]
@@ -4103,29 +4103,29 @@ SetState_CrazyTurning:
 	and a
 	jr nz, .asm_2a63d
 	ld a, HIGH(Frameset_1fcfd0)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fcfd0)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_2a647
 .asm_2a63d
 	ld a, HIGH(Frameset_1fcfd7)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fcfd7)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_2a647
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_CrazyTurning:
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ld a, [wJoypadPressed]
 	bit B_PAD_A, a
 	jr nz, Func_2a675
-	ld a, [wAnimationEnded]
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 	jp SetState_Crazy
@@ -4155,19 +4155,19 @@ SetState_CrazyAirborne:
 	and a
 	jr nz, .asm_2a6a6
 	ld a, HIGH(Frameset_1fcf9f)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fcf9f)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_2a6b0
 .asm_2a6a6
 	ld a, HIGH(Frameset_1fcf6e)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fcf6e)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_2a6b0
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_CrazyAirborne:
@@ -4180,7 +4180,7 @@ UpdateState_CrazyAirborne:
 	jp nz, RecoverFromTransformation
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	call ApplyJumpVelocity
 	call HandleWalk
@@ -4227,16 +4227,16 @@ SetState_VampireIdling:
 	ld [wDMASourcePtr + 1], a
 	call LoadWarioGfx
 	ld a, HIGH(OAM_1fd498)
-	ld [wOAMPtr + 0], a
+	ld [wWarioOAMPtr + 0], a
 	ld a, LOW(OAM_1fd498)
-	ld [wOAMPtr + 1], a
+	ld [wWarioOAMPtr + 1], a
 	ld a, HIGH(Frameset_1fd81c)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fd81c)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_VampireIdling:
@@ -4250,7 +4250,7 @@ UpdateState_VampireIdling:
 	jp z, Func_2a8a7
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	call Func_2b4f3
 	ret
 
@@ -4280,21 +4280,21 @@ SetState_VampireWalking:
 	ld a, DIRECTION_LEFT
 	ld [wDirection], a
 	ld a, HIGH(Frameset_1fd825)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fd825)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_2a7f4
 .asm_2a7e5
 	ld a, DIRECTION_RIGHT
 	ld [wDirection], a
 	ld a, HIGH(Frameset_1fd82e)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fd82e)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_2a7f4
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_VampireWalking:
@@ -4308,7 +4308,7 @@ UpdateState_VampireWalking:
 
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	call Func_2b509
 	ld a, [wWarioState]
 	cp WST_VAMPIRE_WALKING
@@ -4339,26 +4339,26 @@ SetState_VampireTurning:
 	and a
 	jr nz, .asm_2a876
 	ld a, HIGH(Frameset_1fd841)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fd841)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_2a880
 .asm_2a876
 	ld a, HIGH(Frameset_1fd83a)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fd83a)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_2a880
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_VampireTurning:
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
-	ld a, [wAnimationEnded]
+	hcall UpdateWarioAnimation
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 	jp SetState_VampireWalking
@@ -4400,7 +4400,7 @@ UpdateState_VampireAirborne:
 
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	call Func_2b55c
 	ld a, [wWarioState]
 	cp WST_VAMPIRE_AIRBORNE
@@ -4450,34 +4450,34 @@ SetState_BatTransforming:
 	ld [wDMASourcePtr + 1], a
 	call LoadWarioGfx
 	ld a, HIGH(OAM_1fd031)
-	ld [wOAMPtr + 0], a
+	ld [wWarioOAMPtr + 0], a
 	ld a, LOW(OAM_1fd031)
-	ld [wOAMPtr + 1], a
+	ld [wWarioOAMPtr + 1], a
 
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_2a998
 	ld a, HIGH(Frameset_1fd40a)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fd40a)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_2a9a2
 .asm_2a998
 	ld a, HIGH(Frameset_1fd479)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fd479)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_2a9a2
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_BatTransforming:
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
-	ld a, [wAnimationEnded]
+	hcall UpdateWarioAnimation
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 ;	fallthrough
@@ -4498,19 +4498,19 @@ SetState_BatIdling:
 	and a
 	jr nz, .asm_2a9ee
 	ld a, HIGH(Frameset_1fd45f)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fd45f)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_2a9f8
 .asm_2a9ee
 	ld a, HIGH(Frameset_1fd46c)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fd46c)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_2a9f8
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_BatIdling:
@@ -4533,7 +4533,7 @@ UpdateState_BatIdling:
 .skip_sfx
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	ld a, [wJoypadPressed]
 	bit B_PAD_B, a
@@ -4604,25 +4604,25 @@ SetState_VampireTransforming:
 	ld [wDMASourcePtr + 1], a
 	call LoadWarioGfx
 	ld a, BANK(OAM_1fd031)
-	ld [wOAMBank], a
+	ld [wWarioOAMBank], a
 	ld a, HIGH(OAM_1fd031)
-	ld [wOAMPtr + 0], a
+	ld [wWarioOAMPtr + 0], a
 	ld a, LOW(OAM_1fd031)
-	ld [wOAMPtr + 1], a
+	ld [wWarioOAMPtr + 1], a
 	ld a, HIGH(Frameset_1fd439)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fd439)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_VampireTransforming:
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
-	ld a, [wAnimationEnded]
+	hcall UpdateWarioAnimation
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 	jp SetState_VampireIdling
@@ -4659,7 +4659,7 @@ UpdateState_BatFlying:
 .skip_sfx
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	farcall CheckUpCollision
 	ld a, [wWarioState]
@@ -4695,19 +4695,19 @@ Func_2abc1:
 	and a
 	jr nz, .asm_2abda
 	ld a, HIGH(Frameset_1fd42c)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fd42c)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_2abe4
 .asm_2abda
 	ld a, HIGH(Frameset_1fd434)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fd434)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_2abe4
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 SetState_BatFalling:
@@ -4732,7 +4732,7 @@ UpdateState_BatFalling:
 	ret nz ; done if not bat falling any more
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	ld a, [wJoypadPressed]
 	bit B_PAD_A, a
@@ -4800,22 +4800,22 @@ Func_2ac7d:
 	ld [wDMASourcePtr + 1], a
 	call LoadWarioGfx
 	ld a, BANK(OAM_1fd87c)
-	ld [wOAMBank], a
+	ld [wWarioOAMBank], a
 	ld a, HIGH(OAM_1fd87c)
-	ld [wOAMPtr + 0], a
+	ld [wWarioOAMPtr + 0], a
 	ld a, LOW(OAM_1fd87c)
-	ld [wOAMPtr + 1], a
+	ld [wWarioOAMPtr + 1], a
 
 	ld a, [wObjDirection]
 	ld [wDirection], a
 	ld [wWarioStateCounter], a
 	ld a, HIGH(Frameset_1fdb2c)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_1fdb2c)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 UpdateState_InBubble:
@@ -4834,7 +4834,7 @@ UpdateState_InBubble:
 .skip_sfx
 	ld a, BANK("Wario OAM 2")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	call Func_2b56f
 	ret
 
@@ -4866,29 +4866,29 @@ Func_2ad6a:
 	ld [wDMASourcePtr + 1], a
 	call LoadWarioGfx
 	ld a, BANK(OAM_15254)
-	ld [wOAMBank], a
+	ld [wWarioOAMBank], a
 	ld a, HIGH(OAM_15254)
-	ld [wOAMPtr + 0], a
+	ld [wWarioOAMPtr + 0], a
 	ld a, LOW(OAM_15254)
-	ld [wOAMPtr + 1], a
+	ld [wWarioOAMPtr + 1], a
 
 	ld a, [wDirection]
 	and a
 	jr nz, .asm_2adc8
 	ld a, HIGH(Frameset_155a6)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_155a6)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_2add2
 .asm_2adc8
 	ld a, HIGH(Frameset_155ab)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_155ab)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_2add2
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	jp PlayRecoverySFX
 
 Func_2ade4:
@@ -5018,15 +5018,15 @@ Func_2ae8a:
 	and a
 	jr nz, .asm_2af0d
 	ld a, HIGH(Frameset_16b49)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_16b49)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_2af3f
 .asm_2af0d
 	ld a, HIGH(Frameset_16b1d)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_16b1d)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_2af3f
 
 .asm_2af19
@@ -5038,19 +5038,19 @@ Func_2ae8a:
 	and a
 	jr nz, .asm_2af35
 	ld a, HIGH(Frameset_16b38)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_16b38)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_2af3f
 .asm_2af35
 	ld a, HIGH(Frameset_16b14)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_16b14)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_2af3f
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 	farcall CheckCentreCollision
 	ld a, b
@@ -5116,15 +5116,15 @@ Func_2afc5:
 	and a
 	jr nz, .asm_2afea
 	ld a, HIGH(Frameset_16b38)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_16b38)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_2b017
 .asm_2afea
 	ld a, HIGH(Frameset_16b14)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_16b14)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_2b017
 .asm_2aff6
 	ld b, $03
@@ -5133,19 +5133,19 @@ Func_2afc5:
 	and a
 	jr nz, .asm_2b00d
 	ld a, HIGH(Frameset_16b49)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_16b49)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_2b017
 .asm_2b00d
 	ld a, HIGH(Frameset_16b1d)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_16b1d)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_2b017
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 Func_2b027:
@@ -5176,19 +5176,19 @@ Func_2b027:
 	and a
 	jr nz, .asm_2b060
 	ld a, HIGH(Frameset_16b26)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_16b26)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	jr .asm_2b06a
 .asm_2b060
 	ld a, HIGH(Frameset_16b2f)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_16b2f)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 .asm_2b06a
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 	ret
 
 HandleHotWarioInput:
@@ -5207,12 +5207,12 @@ HandleHotWarioInput:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 	ld a, HIGH(Frameset_16b26)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_16b26)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 .asm_2b0af
 	farcall CheckFrontCollision
 	ld a, b
@@ -5233,12 +5233,12 @@ HandleHotWarioInput:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 	ld a, HIGH(Frameset_16b2f)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_16b2f)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 .asm_2b0f2
 	farcall CheckFrontCollision
@@ -5593,7 +5593,7 @@ Func_2b3f9:
 	cp WST_CRAZY
 	ret nz ; done if not crazy any more
 
-	ld a, [wAnimationEnded]
+	ld a, [wWarioAnimationEnded]
 	and a
 	ret z
 

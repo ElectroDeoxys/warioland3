@@ -36,9 +36,9 @@ StartMenu:
 	cp STARTMENU_CONTINUE
 	jr z, .tick_action_help_timer
 	; start Action Help timer
-	ld a, 8
+	ld a, HIGH(ACTION_HELP_TIMER)
 	ld [wTimer + 1], a
-	ld a, 68
+	ld a, LOW(ACTION_HELP_TIMER)
 	ld [wTimer], a
 	ret
 

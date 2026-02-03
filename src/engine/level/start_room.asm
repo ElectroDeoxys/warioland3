@@ -112,12 +112,12 @@ StartRoom_FromTransition:
 	ld [wFrameDuration], a
 	ld [wAnimationFrame], a
 	ld a, HIGH(Frameset_14d18)
-	ld [wFramesetPtr + 0], a
+	ld [wWarioFramesetPtr + 0], a
 	ld a, LOW(Frameset_14d18)
-	ld [wFramesetPtr + 1], a
+	ld [wWarioFramesetPtr + 1], a
 	ld a, BANK("Wario OAM 1")
 	ldh [hCallFuncBank], a
-	hcall UpdateAnimation
+	hcall UpdateWarioAnimation
 
 .not_entering_door
 	call UpdateLevelMusic
@@ -306,7 +306,7 @@ StartRoom_FromLevelStart:
 	ld [wIsMinigameCleared], a
 	ld [wIsRolling], a
 	ld [wIsGettingOffLadder], a
-	ld [wca66], a
+	ld [wWarioAttributes], a
 	ld [wSwitchStateUpdated], a
 	ld [wLevelTime + 0], a
 	ld [wLevelTime + 1], a

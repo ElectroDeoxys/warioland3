@@ -20,23 +20,23 @@ DrawWario::
 	ret nz
 
 .show_wario
-	ld a, [wOAMBank]
+	ld a, [wWarioOAMBank]
 	ld [wTempBank], a
 	ld a, [wROMBank]
 	push af
 	ld a, [wTempBank]
 	bankswitch
-	ld a, [wOAMPtr + 0]
+	ld a, [wWarioOAMPtr + 0]
 	ld h, a
-	ld a, [wOAMPtr + 1]
+	ld a, [wWarioOAMPtr + 1]
 	ld l, a
 	ld a, [wWarioScreenYPos]
 	ld [wCurSpriteYCoord], a
 	ld a, [wWarioScreenXPos]
 	ld [wCurSpriteXCoord], a
-	ld a, [wca65]
+	ld a, [wWarioFrame]
 	ld [wCurSpriteFrame], a
-	ld a, [wca66]
+	ld a, [wWarioAttributes]
 	ld [wCurSpriteAttributes], a
 	call LoadSprite
 	pop af
@@ -124,14 +124,14 @@ Func_e31::
 	ld [wc19e], a
 	ret
 
-UpdateAnimation::
-	ld a, [wFramesetPtr + 0]
+UpdateWarioAnimation::
+	ld a, [wWarioFramesetPtr + 0]
 	ld d, a
-	ld a, [wFramesetPtr + 1]
+	ld a, [wWarioFramesetPtr + 1]
 	ld e, a
 
 	xor a ; FALSE
-	ld [wAnimationEnded], a
+	ld [wWarioAnimationEnded], a
 	ld hl, wFrameDuration
 	ld a, [hl]
 	sub 1
@@ -149,7 +149,7 @@ UpdateAnimation::
 	jr z, .finished
 
 ; next frame
-	ld [wca65], a
+	ld [wWarioFrame], a
 	ld a, [hl] ; wAnimationFrame
 	add 2
 	ld [hld], a
@@ -163,5 +163,5 @@ UpdateAnimation::
 	ld [hld], a ; wAnimationFrame
 	ld [hl], a ; wFrameDuration
 	ld a, TRUE
-	ld [wAnimationEnded], a
+	ld [wWarioAnimationEnded], a
 	ret
