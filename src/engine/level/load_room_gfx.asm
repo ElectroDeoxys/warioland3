@@ -94,7 +94,7 @@ InitRoomAnimatedPals::
 	ld [wRoomPalCyclePtr + 0], a
 	ld l, [hl]
 	ld h, a
-	ld de, ROOM_PAL_CYCLE_LENGTH
+	ld de, ROOM_PALCYCLE_LENGTH
 	add hl, de
 	ld a, [hl]
 	ld [wRoomPalCycleDuration], a

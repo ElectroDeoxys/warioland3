@@ -147,7 +147,7 @@ ROMX $2e
 ROMX $2f
 	"Overworld OAM 2"
 ROMX $30
-	"Level Headers"
+	"Level Maps"
 	"Rooms 1"
 ROMX $31
 	"Rooms 2"

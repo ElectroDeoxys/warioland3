@@ -255,10 +255,10 @@ SECTION "Object Loading", ROMX
 INCLUDE "engine/level/load_objects.asm"
 
 
-SECTION "Level Headers", ROMX
+SECTION "Level Maps", ROMX
 
 INCLUDE "engine/level/load_room_gfx.asm"
-INCLUDE "data/levels/level_headers.asm"
+INCLUDE "data/levels/level_maps.asm"
 
 
 SECTION "Rooms 1", ROMX
@@ -637,12 +637,19 @@ ThePeacefulVillage2ObjectMap: INCBIN "data/levels/object_map/the_peaceful_villag
 
 SECTION "Room Special Tiles 1", ROMX
 
-INCLUDE "data/levels/special_tiles1.asm"
+SpecialTiles0:: INCBIN "gfx/levels/special_tiles0.2bpp"
+SpecialTiles1:: INCBIN "gfx/levels/special_tiles1.2bpp"
+SpecialTiles2:  INCBIN "gfx/levels/special_tiles2.2bpp"
+SpecialTiles3:  INCBIN "gfx/levels/special_tiles3.2bpp"
+SpecialTiles4:  INCBIN "gfx/levels/special_tiles4.2bpp"
+SpecialTiles5:  INCBIN "gfx/levels/special_tiles5.2bpp"
+SpecialTiles6:  INCBIN "gfx/levels/special_tiles6.2bpp"
+SpecialTiles7:  INCBIN "gfx/levels/special_tiles7.2bpp"
 
 
 SECTION "Room Special Tiles 2", ROMX
 
-INCLUDE "data/levels/special_tiles2.asm"
+SpecialTiles8: INCBIN "gfx/levels/special_tiles8.2bpp"
 
 
 SECTION "Block Function Tables 2", ROMX
@@ -652,27 +659,62 @@ INCLUDE "data/levels/function_tables2.asm"
 
 SECTION "Room Main Tiles 1", ROMX
 
-INCLUDE "data/levels/main_tiles1.asm"
+LevelMainTiles0:  INCBIN "gfx/levels/main_tiles0.2bpp"
+LevelMainTiles1:  INCBIN "gfx/levels/main_tiles1.2bpp"
+LevelMainTiles2:  INCBIN "gfx/levels/main_tiles2.2bpp"
+LevelMainTiles3:  INCBIN "gfx/levels/main_tiles3.2bpp"
+LevelMainTiles4:  INCBIN "gfx/levels/main_tiles4.2bpp"
+LevelMainTiles5:  INCBIN "gfx/levels/main_tiles5.2bpp"
+LevelMainTiles6:  INCBIN "gfx/levels/main_tiles6.2bpp"
+LevelMainTiles7:: INCBIN "gfx/levels/main_tiles7.2bpp"
 
 
 SECTION "Room Main Tiles 2", ROMX
 
-INCLUDE "data/levels/main_tiles2.asm"
+LevelMainTiles8:   INCBIN "gfx/levels/main_tiles8.2bpp"
+LevelMainTiles9:   INCBIN "gfx/levels/main_tiles9.2bpp"
+LevelMainTiles10:  INCBIN "gfx/levels/main_tiles10.2bpp"
+LevelMainTiles11:: INCBIN "gfx/levels/main_tiles11.2bpp"
+LevelMainTiles12:  INCBIN "gfx/levels/main_tiles12.2bpp"
+LevelMainTiles13:  INCBIN "gfx/levels/main_tiles13.2bpp"
+LevelMainTiles14:: INCBIN "gfx/levels/main_tiles14.2bpp"
+LevelMainTiles15:  INCBIN "gfx/levels/main_tiles15.2bpp"
 
 
 SECTION "Room Main Tiles 3", ROMX
 
-INCLUDE "data/levels/main_tiles3.asm"
+LevelMainTiles16:  INCBIN "gfx/levels/main_tiles16.2bpp"
+LevelMainTiles17:  INCBIN "gfx/levels/main_tiles17.2bpp"
+LevelMainTiles18:  INCBIN "gfx/levels/main_tiles18.2bpp"
+LevelMainTiles19:  INCBIN "gfx/levels/main_tiles19.2bpp"
+LevelMainTiles20:  INCBIN "gfx/levels/main_tiles20.2bpp"
+LevelMainTiles21:  INCBIN "gfx/levels/main_tiles21.2bpp"
+LevelMainTiles22:: INCBIN "gfx/levels/main_tiles22.2bpp"
+LevelMainTiles23:: INCBIN "gfx/levels/main_tiles23.2bpp"
 
 
 SECTION "Room Main Tiles 4", ROMX
 
-INCLUDE "data/levels/main_tiles4.asm"
+LevelMainTiles24:: INCBIN "gfx/levels/main_tiles24.2bpp"
+LevelMainTiles25:  INCBIN "gfx/levels/main_tiles25.2bpp"
+LevelMainTiles26:  INCBIN "gfx/levels/main_tiles26.2bpp"
+LevelMainTiles27:: INCBIN "gfx/levels/main_tiles27.2bpp"
+LevelMainTiles28:: INCBIN "gfx/levels/main_tiles28.2bpp"
+LevelMainTiles29:: INCBIN "gfx/levels/main_tiles29.2bpp"
+LevelMainTiles30:: INCBIN "gfx/levels/main_tiles30.2bpp"
+LevelMainTiles31:: INCBIN "gfx/levels/main_tiles31.2bpp"
 
 
 SECTION "Room Main Tiles 5", ROMX
 
-INCLUDE "data/levels/main_tiles5.asm"
+LevelMainTiles32:  INCBIN "gfx/levels/main_tiles32.2bpp"
+LevelMainTiles33:  INCBIN "gfx/levels/main_tiles33.2bpp"
+LevelMainTiles34:  INCBIN "gfx/levels/main_tiles34.2bpp"
+LevelMainTiles35:  INCBIN "gfx/levels/main_tiles35.2bpp"
+LevelMainTiles36:: INCBIN "gfx/levels/main_tiles36.2bpp"
+LevelMainTiles37:  INCBIN "gfx/levels/main_tiles37.2bpp"
+LevelMainTiles38:  INCBIN "gfx/levels/main_tiles38.2bpp"
+LevelMainTiles39:  INCBIN "gfx/levels/main_tiles39.2bpp"
 
 
 SECTION "Wario States 4", ROMX
@@ -682,7 +724,7 @@ INCLUDE "engine/level/wario_states_4.asm"
 
 SECTION "Enemy Gfx 1 Slot 1", ROMX
 
-SpearheadGfx::     INCBIN "gfx/enemies/spearhead.2bpp.rle"
+SpearheadGfx::    INCBIN "gfx/enemies/spearhead.2bpp.rle"
 UnusedFlowerGfx:  INCBIN "gfx/enemies/unused_flower.2bpp.rle"
 MizuuoGfx:        INCBIN "gfx/enemies/mizuuo.2bpp.rle"
 SilkyGfx:         INCBIN "gfx/enemies/silky.2bpp.rle"
@@ -693,7 +735,7 @@ Sun1Gfx:          INCBIN "gfx/enemies/sun1.2bpp.rle"
 Moon1Gfx:         INCBIN "gfx/enemies/moon1.2bpp.rle"
 RoboMouse1Gfx:    INCBIN "gfx/enemies/robo_mouse1.2bpp.rle"
 HaridamaGfx:      INCBIN "gfx/enemies/haridama.2bpp.rle"
-OwlGfx::           INCBIN "gfx/enemies/owl.2bpp.rle"
+OwlGfx::          INCBIN "gfx/enemies/owl.2bpp.rle"
 StoveGfx:         INCBIN "gfx/enemies/stove.2bpp.rle"
 WaterSparkGfx:    INCBIN "gfx/enemies/water_spark.2bpp.rle"
 
@@ -753,7 +795,7 @@ PillarPlatformGfx: INCBIN "gfx/enemies/pillar_platform.2bpp.rle"
 WaterDropGfx:      INCBIN "gfx/enemies/water_drop.2bpp.rle"
 NobiiruGfx:        INCBIN "gfx/enemies/nobiiru.2bpp.rle"
 ClearGate3Gfx:     INCBIN "gfx/enemies/clear_gate.2bpp.rle"
-OctohonGfx::        INCBIN "gfx/enemies/octohon.2bpp.rle"
+OctohonGfx::       INCBIN "gfx/enemies/octohon.2bpp.rle"
 SparkGfx:          INCBIN "gfx/enemies/spark.2bpp.rle"
 
 

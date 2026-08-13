@@ -9,11 +9,11 @@ LoadLevelBlockMapAndObjects::
 	add a ; *2
 	ld e, a
 	rl d
-	ld hl, LevelHeaders
+	ld hl, LevelBlockAndObjectMaps
 	add hl, de
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(LevelHeaders)
+	ld a, BANK(LevelBlockAndObjectMaps)
 	bankswitch
 	ld a, [hli]
 	ld h, [hl]
@@ -55,11 +55,11 @@ ReloadLevelObjects::
 	add a ; *2
 	ld e, a
 	rl d
-	ld hl, LevelHeaders
+	ld hl, LevelBlockAndObjectMaps
 	add hl, de
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(LevelHeaders)
+	ld a, BANK(LevelBlockAndObjectMaps)
 	bankswitch
 	ld a, [hli]
 	ld h, [hl]

@@ -37,7 +37,7 @@ MACRO? rgb
 	dw (\3 << 10 | \2 << 5 | \1)
 ENDM
 
-MACRO? room_data
+MACRO? room_header
 	dn \2, \1 ; y, x
 	dn \3, \4 ; y limits
 	dn \5, \6 ; x limits

@@ -16,7 +16,7 @@ LoadBlockFunctionTable::
 	cp $ff
 	jr z, .reset
 	ld a, [wRoomBlockFunctionTable]
-	cp NUM_BLOCKSETS_GROUP_1 - 1
+	cp NUM_BLOCK_FUNCTION_TABLES_GROUP_1 - 1
 	jr nc, .group_2
 
 ; group_1
@@ -57,14 +57,14 @@ LoadRoom::
 
 	ld a, [wROMBank]
 	push af
-	ld a, BANK(LevelRooms)
+	ld a, BANK(LevelHeaders)
 	bankswitch
 	ld a, [wLevel]
 	add a ; *2
 	ld e, a
 	ld d, $00
 	rl d
-	ld hl, LevelRooms
+	ld hl, LevelHeaders
 	add hl, de
 	ld a, [hli]
 	ld h, [hl]
@@ -317,7 +317,7 @@ UpdateRoomAnimatedPals::
 
 	ld a, [wRoomPalCycleIndex]
 	inc a
-	cp ROOM_PAL_CYCLE_LENGTH
+	cp ROOM_PALCYCLE_LENGTH
 	jr c, .ok
 	xor a ; reset to 0
 .ok

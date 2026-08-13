@@ -1,4 +1,4 @@
-LevelHeaders::
+LevelBlockAndObjectMaps::
 	dw .out_of_the_woods       ; OUT_OF_THE_WOODS_DAY_1
 	dw .out_of_the_woods       ; OUT_OF_THE_WOODS_DAY_2
 	dw .out_of_the_woods       ; OUT_OF_THE_WOODS_DAY_3

@@ -154,14 +154,6 @@
 	const ROOM_152 ; $98
 	const ROOM_153 ; $99
 	const ROOM_154 ; $9a
-	const ROOM_UNUSED_155 ; $9b
-	const ROOM_UNUSED_156 ; $9c
-	const ROOM_UNUSED_157 ; $9d
-	const ROOM_UNUSED_158 ; $9e
-	const ROOM_UNUSED_159 ; $9f
-	const ROOM_UNUSED_160 ; $a0
-	const ROOM_UNUSED_161 ; $a1
-	const ROOM_UNUSED_162 ; $a2
 DEF NUM_ROOMS EQU const_value
 
 	const_def
@@ -229,7 +221,6 @@ DEF NUM_ROOMS EQU const_value
 	const BLOCKSET_61 ; $3d
 	const BLOCKSET_62 ; $3e
 	const BLOCKSET_63 ; $3f
-DEF NUM_BLOCKSETS_GROUP_1 EQU const_value
 	const BLOCKSET_64 ; $40
 	const BLOCKSET_65 ; $41
 	const BLOCKSET_66 ; $42
@@ -255,15 +246,6 @@ DEF NUM_BLOCKSETS_GROUP_1 EQU const_value
 	const BLOCKSET_86 ; $56
 	const BLOCKSET_87 ; $57
 	const BLOCKSET_88 ; $58
-	const BLOCKSET_UNUSED_89 ; $59
-	const BLOCKSET_UNUSED_90 ; $5a
-	const BLOCKSET_UNUSED_91 ; $5b
-	const BLOCKSET_UNUSED_92 ; $5c
-	const BLOCKSET_UNUSED_93 ; $5d
-	const BLOCKSET_UNUSED_94 ; $5e
-	const BLOCKSET_UNUSED_95 ; $5f
-	const BLOCKSET_UNUSED_96 ; $60
-	const BLOCKSET_UNUSED_97 ; $61
 DEF NUM_BLOCKSETS EQU const_value
 
 	const_def
@@ -484,29 +466,29 @@ DEF NUM_BLOCK_FUNCTION_TABLES EQU const_value
 
 ; wRoomPalCycle constants
 	const_def
-	const ROOM_PAL_CYCLE_00 ; $00
-	const ROOM_PAL_CYCLE_01 ; $01
-	const ROOM_PAL_CYCLE_02 ; $02
-	const ROOM_PAL_CYCLE_03 ; $03
-	const ROOM_PAL_CYCLE_04 ; $04
-	const ROOM_PAL_CYCLE_05 ; $05
-	const ROOM_PAL_CYCLE_06 ; $06
-	const ROOM_PAL_CYCLE_07 ; $07
-	const ROOM_PAL_CYCLE_08 ; $08
-	const ROOM_PAL_CYCLE_09 ; $09
-	const ROOM_PAL_CYCLE_10 ; $0a
-	const ROOM_PAL_CYCLE_11 ; $0b
-	const ROOM_PAL_CYCLE_12 ; $0c
-	const ROOM_PAL_CYCLE_13 ; $0d
-	const ROOM_PAL_CYCLE_14 ; $0e
-	const ROOM_PAL_CYCLE_15 ; $0f
-	const ROOM_PAL_CYCLE_16 ; $10
-	const ROOM_PAL_CYCLE_17 ; $11
-	const ROOM_PAL_CYCLE_18 ; $12
-	const ROOM_PAL_CYCLE_19 ; $13
+	const ROOM_PALCYCLE_00 ; $00
+	const ROOM_PALCYCLE_01 ; $01
+	const ROOM_PALCYCLE_02 ; $02
+	const ROOM_PALCYCLE_03 ; $03
+	const ROOM_PALCYCLE_04 ; $04
+	const ROOM_PALCYCLE_05 ; $05
+	const ROOM_PALCYCLE_06 ; $06
+	const ROOM_PALCYCLE_07 ; $07
+	const ROOM_PALCYCLE_08 ; $08
+	const ROOM_PALCYCLE_09 ; $09
+	const ROOM_PALCYCLE_10 ; $0a
+	const ROOM_PALCYCLE_11 ; $0b
+	const ROOM_PALCYCLE_12 ; $0c
+	const ROOM_PALCYCLE_13 ; $0d
+	const ROOM_PALCYCLE_14 ; $0e
+	const ROOM_PALCYCLE_15 ; $0f
+	const ROOM_PALCYCLE_16 ; $10
+	const ROOM_PALCYCLE_17 ; $11
+	const ROOM_PALCYCLE_18 ; $12
+	const ROOM_PALCYCLE_19 ; $13
 
 ; how many pals are in each cycle
-DEF ROOM_PAL_CYCLE_LENGTH EQU 8
+DEF ROOM_PALCYCLE_LENGTH EQU 8
 
 	const_def
 	const ROOM_PAL_000 ; $00
