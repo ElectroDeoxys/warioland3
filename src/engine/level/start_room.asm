@@ -49,7 +49,7 @@ StartRoom_FromTransition:
 	swap b
 	ld a, [wWarioXPos + 0]
 	or b
-	ld [wca6c], a
+	ld [wUnused_ca6c], a
 
 	; get next room ID from Wario's position
 	ld hl, wWarioPos
@@ -290,7 +290,7 @@ StartRoom_FromLevelStart:
 
 	xor a
 	ld [wLevelRoomID], a
-	ld [wca6c], a
+	ld [wUnused_ca6c], a
 	ld [wTempLevelRoomID], a
 	xor a ; unnecessary
 	ld [wLevelEndScreen], a
@@ -505,8 +505,8 @@ Func_896f:
 	ld a, c
 	ld [wccec], a
 	sramswitch
-	ld a, $01
-	ld [wUnused_ccef], a
+	ld a, 1
+	ld [wUnused_ObjectParity], a
 	ld b, a
 	ld d, $10
 .loop_search

@@ -533,7 +533,7 @@ wSwitchStateUpdated:: db
 ; - $68 is on
 wSwitchState::        db
 
-wca6c::
+wUnused_ca6c::
 	db
 
 wSwimVelIndex::
@@ -791,7 +791,7 @@ wccec::
 wObjectSpawnBlockY:: db
 wObjectSpawnBlockX:: db
 
-wUnused_ccef::
+wUnused_ObjectParity::
 	db
 
 wBGPtr::

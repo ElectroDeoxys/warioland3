@@ -3,7 +3,7 @@
 ; output:
 ; - l = x block
 ; - h = y block
-; - b = ?
+; - b = 1 if even object, 0 if odd object
 Func_cc0::
 	; [hl] = y pos
 	ld a, [hli]
@@ -20,6 +20,7 @@ Func_cc0::
 	add HIGH(STARTOF(SRAM))
 	ld c, a
 	ld [wObjectSpawnBlockY], a
+	; got correct row
 
 	; [hl] = x pos
 	ld a, [hli]
@@ -35,16 +36,18 @@ Func_cc0::
 	srl a
 	; a = [hl] >> 5
 	ld l, a
-	ld a, $00
-	adc $00
-	xor $01
-	ld [wUnused_ccef], a
-	ld b, a
+	ld a, 0
+	adc 0
+	xor $1
+	; a is 1 if x was even, 0 if odd
+	ld [wUnused_ObjectParity], a
+	ld b, a ; object parity
 
 	ld a, l
 	add $b0
 	ld l, a
 	ld [wObjectSpawnBlockX], a
+	; got correct column
 	ld h, c
 	ret
 
@@ -131,10 +134,10 @@ Func_d3e::
 	adc $00
 	ldh [hXPosHi], a
 	ld a, l
-	and $01
-	xor $01
+	and 1
+	xor 1
 	ld b, a
-	ld [wUnused_ccef], a
+	ld [wUnused_ObjectParity], a
 	ret
 
 Func_d81::
