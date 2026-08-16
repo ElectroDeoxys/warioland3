@@ -1231,11 +1231,11 @@ ObjParams_MagicSpiralLeft:
 	db -4, 3, -4, 3 ; collision box
 	dw OAM_195e06 ; OAM
 	dw Frameset_69e30 ; frameset
-	db 92 ; action duration
+	db MAGIC_SPIRAL_MOVE_DELAY ; action duration
 	db $00 ; var1
 	db $00 ; var2
 	db $00 ; var3
-	db 5 | OBJSUBFLAG_VDIR ; substate
+	db MAGIC_SPIRAL_NUMBER_BOUNCES | OBJSUBFLAG_VDIR ; substate
 	db $00 ; state
 	dw MagicSpiralFunc
 	db OBJFLAG_PRIORITY ; obj flags
@@ -1248,11 +1248,11 @@ ObjParams_MagicSpiralRight:
 	db -4, 3, -4, 3 ; collision box
 	dw OAM_195e06 ; OAM
 	dw Frameset_69e30 ; frameset
-	db 92 ; action duration
+	db MAGIC_SPIRAL_MOVE_DELAY ; action duration
 	db $00 ; var1
 	db $00 ; var2
 	db $00 ; var3
-	db 5 | OBJSUBFLAG_VDIR | OBJSUBFLAG_HDIR ; substate
+	db MAGIC_SPIRAL_NUMBER_BOUNCES | OBJSUBFLAG_VDIR | OBJSUBFLAG_HDIR ; substate
 	db $00 ; state
 	dw MagicSpiralFunc
 	db OBJFLAG_PRIORITY ; obj flags

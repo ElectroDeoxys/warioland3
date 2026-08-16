@@ -1,17 +1,20 @@
-DEF WOLFENBOSS_NUM_HITS                EQU   3  ; number of hits to defeat
-DEF WOLFENBOSS_WHISP_WAIT_DURATION     EQU  20  ; duration of whisp waiting to rise
-DEF WOLFENBOSS_WHISP_RISE_DURATION     EQU  64  ; duration of whisp rising
-DEF WOLFENBOSS_SMOKE_ENTRANCE_DURATION EQU  19  ; duration of smoke animation when entering field
-DEF WOLFENBOSS_SMOKE_EXIT_DURATION     EQU  14  ; duration of smoke animation when exiting field
-DEF WOLFENBOSS_START_DELAY             EQU  40  ; delay before starting actions
-DEF WOLFENBOSS_DISAPPEAR_DELAY         EQU  70  ; delay before exiting field
-DEF WOLFENBOSS_SPIRAL_ATTACK_DURATION  EQU 103  ; duration of spiral attack
-DEF WOLFENBOSS_IGUGARI_ATTACK_DURATION EQU  72  ; duration of igugari attack
-DEF WOLFENBOSS_SPAWN_SPIRAL_DELAY      EQU  16  ; delay before spawning spiral
-DEF WOLFENBOSS_SPAWN_IGUGARI_DELAY     EQU  16  ; delay before spawning igugari
-DEF WOLFENBOSS_AFTER_ATTACK_DELAY      EQU  19  ; delay after attack animation
-DEF WOLFENBOSS_HURT_DURATION           EQU  60  ; duration of hurt state
-DEF WOLFENBOSS_AFTER_HURT_DELAY        EQU  40  ; delay after hurt animation
+DEF WOLFENBOSS_NUM_HITS                EQU   3 ; number of hits to defeat
+DEF WOLFENBOSS_WHISP_WAIT_DURATION     EQU  20 ; duration of whisp waiting to rise
+DEF WOLFENBOSS_WHISP_RISE_DURATION     EQU  64 ; duration of whisp rising
+DEF WOLFENBOSS_SMOKE_ENTRANCE_DURATION EQU  19 ; duration of smoke animation when entering field
+DEF WOLFENBOSS_SMOKE_EXIT_DURATION     EQU  14 ; duration of smoke animation when exiting field
+DEF WOLFENBOSS_START_DELAY             EQU  40 ; delay before starting actions
+DEF WOLFENBOSS_DISAPPEAR_DELAY         EQU  70 ; delay before exiting field
+DEF WOLFENBOSS_SPIRAL_ATTACK_DURATION  EQU 103 ; duration of spiral attack
+DEF WOLFENBOSS_IGUGARI_ATTACK_DURATION EQU  72 ; duration of igugari attack
+DEF WOLFENBOSS_SPAWN_SPIRAL_DELAY      EQU  16 ; delay before spawning spiral
+DEF WOLFENBOSS_SPAWN_IGUGARI_DELAY     EQU  16 ; delay before spawning igugari
+DEF WOLFENBOSS_AFTER_ATTACK_DELAY      EQU  19 ; delay after attack animation
+DEF WOLFENBOSS_HURT_DURATION           EQU  60 ; duration of hurt state
+DEF WOLFENBOSS_AFTER_HURT_DELAY        EQU  40 ; delay after hurt animation
+
+EXPORT DEF MAGIC_SPIRAL_NUMBER_BOUNCES EQU   5 ; how many bounces a Magic Spiral does before disappearing
+EXPORT DEF MAGIC_SPIRAL_MOVE_DELAY     EQU  92 ; delay before Magic Spiral begins moving
 
 WolfenbossFunc:
 	ld hl, wCurObjFlags
@@ -590,7 +593,7 @@ MagicSpiralFunc:
 	jp SetObjectFramesetPtr
 .done_grow
 	ld a, 8
-	ld [hl], a
+	ld [hl], a ; OBJ_STATE_DURATION
 	ld l, OBJ_UPDATE_FUNCTION + 1
 	ld a, HIGH(.Move)
 	ld [hld], a
@@ -617,7 +620,7 @@ MagicSpiralFunc:
 	ld a, [wCurObjScreenYPos]
 	jr nz, .moving_down
 ; moving up
-	cp $18
+	cp 24
 	jr c, .set_move_down
 	call MoveObjectUp
 	jr .done_vertical_movement
@@ -631,16 +634,16 @@ MagicSpiralFunc:
 	jr .done_vertical_movement
 .set_move_up
 	res OBJSUBFLAG_VDIR_F, [hl]
-
 .asm_56281
 	call .reflect
+
 .done_vertical_movement
 	ld l, OBJ_SUBSTATE
 	bit OBJSUBFLAG_HDIR_F, [hl]
 	ld a, [wCurObjScreenXPos]
 	jr nz, .moving_right
 ; moving left
-	cp $10
+	cp 16
 	jp nc, MoveObjectLeft
 	set OBJSUBFLAG_HDIR_F, [hl]
 	jr .reflect
@@ -716,7 +719,7 @@ WolfenbossPlatformFunc:
 	ld [hld], a
 	ld a, LOW(.Open)
 	ld [hld], a
-	ld a, $50
+	ld a, 80
 	ld [wCurObjStateDuration], a
 	ret
 
