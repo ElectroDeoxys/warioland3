@@ -2124,45 +2124,89 @@ Pals_8694d:
 	rgb  0,  0,  0
 
 Pals_8698d:
-	rgb 31, 31, 31
-	rgb 31, 31, 31
-	rgb  0,  0,  0
-	rgb  0,  0,  0
+	vc_patch FPA_80_BG_Flash_Palette_0
+	IF DEF(_VC)
+		rgb 11, 11, 11
+        rgb 11, 11, 11
+        rgb  0,  0,  0
+        rgb  0,  0,  0
 
-	rgb 31, 31, 31
-	rgb  6,  6,  7
-	rgb  3,  0,  0
-	rgb  0,  0,  0
+        rgb 11, 11, 11
+        rgb  6,  6,  7
+        rgb  3,  0,  0
+        rgb  0,  0,  0
 
-	rgb  6,  6,  7
-	rgb 31, 31, 31
-	rgb  0,  2,  2
-	rgb  0,  0,  0
+        rgb  6,  6,  7
+        rgb 11, 11, 11
+        rgb  0,  2,  2
+        rgb  0,  0,  0
 
-	rgb 14, 14, 14
-	rgb 31, 31, 31
-	rgb  4,  0,  1
-	rgb  0,  2,  2
+        rgb 11, 11, 11
+        rgb 11, 11, 11
+        rgb  4,  0,  1
+        rgb  0,  2,  2
 
-	rgb 14, 14, 14
-	rgb  0,  0,  0
-	rgb  3,  0,  3
-	rgb  0,  0,  0
+        rgb 11, 11, 11
+        rgb  0,  0,  0
+        rgb  3,  0,  3
+        rgb  0,  0,  0
 
-	rgb 31, 31, 31
-	rgb  6,  6,  7
-	rgb  8,  3,  2
-	rgb  0,  0,  0
+        rgb 11, 11, 11
+        rgb  6,  6,  7
+        rgb  8,  3,  2
+        rgb  0,  0,  0
 
-	rgb 31, 31, 31
-	rgb 31, 26,  2
-	rgb 27, 12,  0
-	rgb  7,  5,  3
+        rgb 11, 11, 11
+        rgb 31, 26,  2
+        rgb 27, 12,  0
+        rgb  7,  5,  3
 
-	rgb 31, 31, 31
-	rgb 31, 31, 31
-	rgb 14, 14, 14
-	rgb  0,  0,  0
+        rgb 11, 11, 11
+        rgb 11, 11, 11
+        rgb 11, 11, 11
+        rgb  0,  0,  0
+	ELSE
+		rgb 31, 31, 31
+		rgb 31, 31, 31
+		rgb  0,  0,  0
+		rgb  0,  0,  0
+
+		rgb 31, 31, 31
+		rgb  6,  6,  7
+		rgb  3,  0,  0
+		rgb  0,  0,  0
+
+		rgb  6,  6,  7
+		rgb 31, 31, 31
+		rgb  0,  2,  2
+		rgb  0,  0,  0
+
+		rgb 14, 14, 14
+		rgb 31, 31, 31
+		rgb  4,  0,  1
+		rgb  0,  2,  2
+
+		rgb 14, 14, 14
+		rgb  0,  0,  0
+		rgb  3,  0,  3
+		rgb  0,  0,  0
+
+		rgb 31, 31, 31
+		rgb  6,  6,  7
+		rgb  8,  3,  2
+		rgb  0,  0,  0
+
+		rgb 31, 31, 31
+		rgb 31, 26,  2
+		rgb 27, 12,  0
+		rgb  7,  5,  3
+
+		rgb 31, 31, 31
+		rgb 31, 31, 31
+		rgb 14, 14, 14
+		rgb  0,  0,  0
+	ENDC
+	vc_patch_end
 
 Pals_869cd:
 	rgb 31, 31, 31

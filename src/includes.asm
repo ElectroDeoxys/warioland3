@@ -11,6 +11,7 @@ INCLUDE "macros/coords.asm"
 INCLUDE "macros/data.asm"
 INCLUDE "macros/gfx.asm"
 INCLUDE "macros/pos.asm"
+INCLUDE "macros/vc.asm"
 INCLUDE "macros/wram.asm"
 
 INCLUDE "constants/audio_constants.asm"

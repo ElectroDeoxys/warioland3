@@ -5621,6 +5621,7 @@ SOWFunc_CanyonThunder:
 	dw EndOWFunc
 
 .Func_b67c7:
+	vc_hook Canyon_thunder_motion_blur_begin
 	ld a, 34
 	jp WaitOWFunc
 
@@ -5690,6 +5691,7 @@ SOWFunc_CanyonThunder:
 	jp WaitOWFunc
 
 .Func_b6836:
+	vc_hook Canyon_thunder_motion_blur_end
 	ld a, $0a
 	ld hl, wSceneObj5State
 	call SetSceneObjState
@@ -5903,9 +5905,21 @@ SOWFunc_CanyonThunder:
 
 Func_b69a6:
 .asm_b69a6
-	ld a, $9c
+	vc_patch FPA_80_BG_Flash_Palette_1_0
+	IF DEF(_VC)
+		ld a, $4a
+	ELSE
+		ld a, $9c
+	ENDC
+	vc_patch_end
 	ld [hli], a
-	ld a, $73
+	vc_patch FPA_80_BG_Flash_Palette_1_1
+	IF DEF(_VC)
+		ld a, $29
+	ELSE
+		ld a, $73
+	ENDC
+	vc_patch_end
 	ld [hli], a
 	dec b
 	jr nz, .asm_b69a6

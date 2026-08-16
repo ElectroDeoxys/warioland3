@@ -1,9 +1,9 @@
 .PHONY: all clean
 
 CC := gcc
-CFLAGS := -O3 -std=c99 -Wall -Wextra -pedantic
+CFLAGS := -O3 -std=c17 -Wall -Wextra -pedantic
 
-tools := scan_includes gfx compressor text golf golf_patch
+tools := compressor gfx golf golf_patch make_patch scan_includes text
 
 all: $(tools)
 	@:
@@ -11,6 +11,5 @@ all: $(tools)
 clean:
 	rm -f $(tools)
 
-gfx: common.h
-%: %.c
+%: %.c common.h
 	$(CC) $(CFLAGS) -o $@ $<

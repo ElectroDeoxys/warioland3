@@ -1,11 +1,6 @@
+#define PROGRAM_NAME "text"
+#define USAGE_OPTS "[-h|--help] [-o|--out outfile] infile"
 #define  _GNU_SOURCE
-
-#include <stdio.h>
-#include <getopt.h>
-#include <stdbool.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <string.h>
 
 #include "common.h"
 
@@ -291,11 +286,6 @@ const char *charmap[0x100] = {
 	"ィ", // 0xff
 };
 
-static void usage(void)
-{
-    fprintf(stderr, "Usage: text [-h] [-o outfile] infile\n");
-}
-
 static void error(char *message) {
     fputs(message, stderr);
     fputs("\n", stderr);
@@ -358,54 +348,45 @@ uint8_t convertCharacterToByte(const char *str, int *offset)
 
 struct Options
 {
-    int help;
     char *outfile;
 };
 
-struct Options Options;
+struct Options options;
 
-void get_args(int argc, char *argv[])
+void parse_args(int argc, char *argv[])
 {
     struct option long_options[] =
     {
+		{"out", required_argument, 0, 'o'},
+		{"help", no_argument, 0, 'h'},
         {0}
     };
 
-    for (int opt = 0; opt != -1;)
+	for (int opt; (opt = getopt_long(argc, argv, "d:o:p:h", long_options)) != -1;)
     {
-        switch (opt = getopt_long(argc, argv, "ho:", long_options))
+        switch (opt)
         {
-            case 'h':
-                Options.help = true;
-                break;
             case 'o':
-                Options.outfile = optarg;
+                options.outfile = optarg;
                 break;
-            case 0:
-            case -1:
+            case 'h':
+                usage_exit(0);
                 break;
             default:
-                usage();
-            exit(1);
-            break;
+                usage_exit(1);
         }
     }
 }
 
 int main(int argc, char *argv[])
 {
-    get_args(argc, argv);
+    parse_args(argc, argv);
     argc -= optind;
     argv += optind;
-    if (Options.help)
-    {
-        usage();
-        return 0;
-    }
+
     if (argc < 1)
     {
-        usage();
-        exit(1);
+        usage_exit(1);
     }
 
     FILE *infile = fopen(argv[0], "r");
@@ -459,9 +440,9 @@ int main(int argc, char *argv[])
         }
     }
 
-    if (Options.outfile)
+    if (options.outfile)
     {
-        write_u8(Options.outfile, buff, BUFFER_SIZE);
+        write_u8(options.outfile, buff, BUFFER_SIZE);
     }
 
     free(lineBuffer);

@@ -1,6 +1,7 @@
 compressor
 gfx
-scan_includes
-text
 golf
 golf_patch
+make_patch
+scan_includes
+text

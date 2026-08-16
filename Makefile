@@ -1,4 +1,6 @@
 rom := warioland3.gbc
+patch := warioland3.patch
+patch_rom := warioland3_vc.gbc
 
 rom_obj := \
 src/action_help.o \
@@ -18,7 +20,7 @@ src/title.o \
 src/overworld.o \
 src/ram.o
 
-warioland3_obj := $(rom_obj:.o=.o)
+patch_obj := $(rom_obj:.o=_vc.o)
 
 ### Build tools
 
@@ -41,10 +43,11 @@ RGBLINK ?= $(RGBDS)rgblink
 .SECONDEXPANSION:
 .PRECIOUS:
 .SECONDARY:
-.PHONY: all warioland3 clean tidy compare tools
+.PHONY: all warioland3 patch clean tidy compare tools
 
 all: $(rom) compare
 warioland3: $(rom) compare
+patch: $(patch)
 
 clean: tidy
 	find src/gfx \( -iname '*.1bpp' -o -iname '*.2bpp' -o -iname '*.rle' \) -delete
@@ -55,10 +58,12 @@ clean: tidy
 	find src/data/golf/holes \( -iname '*.bin' -o -iname '*.tilemap' -o -iname '*.attrmap' \) -delete
 
 tidy:
-	rm -f $(rom) $(rom_obj) $(rom:.gbc=.map) $(rom:.gbc=.sym) src/rgbdscheck.o
+	rm -f $(rom) $(rom_obj) $(rom:.gbc=.map) $(rom:.gbc=.sym) \
+		  $(patch) $(patch_obj) $(patch:.patch=_vc.gbc) $(patch:.patch=_vc.map) $(patch:.patch=_vc.sym) $(patch:%.patch=src/vc/%.constants.sym) \
+		  src/rgbdscheck.o
 	$(MAKE) clean -C tools/
 
-compare: $(rom)
+compare: $(rom) $(patch)
 	@$(SHA1) -c rom.sha1
 
 tools:
@@ -70,6 +75,9 @@ RGBASMFLAGS = -P includes.asm -I src/ -Weverything
 ifeq ($(DEBUG),1)
 RGBASMFLAGS += -E
 endif
+
+$(rom_obj):   RGBASMFLAGS +=
+$(patch_obj): RGBASMFLAGS += -D _VC
 
 src/rgbdscheck.o: src/rgbdscheck.asm
 	$(RGBASM) -o $@ $<
@@ -90,6 +98,7 @@ $(info $(shell $(MAKE) -C tools))
 
 # Dependencies for objects
 $(foreach obj, $(rom_obj), $(eval $(call DEP,$(obj),$(obj:.o=.asm))))
+$(foreach obj, $(patch_obj), $(eval $(call DEP,$(obj),$(obj:_vc.o=.asm))))
 
 endif
 
@@ -102,6 +111,13 @@ opts = -Cjv -k 01 -l 0x33 -m MBC5+RAM+BATTERY -p 0 -r 03 -t WARIOLAND3 -i AW8A
 $(rom): $(rom_obj) src/layout.link
 	$(RGBLINK) -p 0xff -m $(rom:.gbc=.map) -n $(rom:.gbc=.sym) -l src/layout.link -o $@ $(filter %.o,$^)
 	$(RGBFIX) $(opts) $@
+
+$(patch_rom): $(patch_obj) src/layout.link
+	$(RGBLINK) -p 0xff -m $(patch_rom:.gbc=.map) -n $(patch_rom:.gbc=.sym) -l src/layout.link -o $@ $(filter %.o,$^)
+	$(RGBFIX) $(opts) $@
+
+$(patch): $(patch_rom) $(rom) src/vc/warioland3.patch.template
+	tools/make_patch $(patch_rom:.gbc=.sym) $^ $@
 
 ### Compression exceptions for matching purposes
 

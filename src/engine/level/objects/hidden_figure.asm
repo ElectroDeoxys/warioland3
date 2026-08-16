@@ -769,35 +769,69 @@ Pals_4d01b:
 	rgb  0,  0,  0
 
 Pals_4d04b:
-	rgb  0,  0,  4
-	rgb 31,  0,  0
-	rgb 19, 22, 23
-	rgb  0,  0,  0
+	vc_patch FPA_292_BG_Flash_Palette1
+	IF DEF(_VC)
+		rgb  0,  0,  2
+        rgb 31,  0,  0
+        rgb 19, 22, 23
+        rgb  0,  0,  0
 
-	rgb  0,  0,  4
-	rgb  0,  0,  9
-	rgb 19, 22, 23
-	rgb  0,  0,  0
+        rgb  0,  0,  4
+        rgb  0,  0,  9
+        rgb 19, 22, 23
+        rgb  0,  0,  0
 
-	rgb  0,  0,  4
-	rgb  0, 31, 18
-	rgb 19, 22, 23
-	rgb  0,  0,  0
+        rgb  0,  0,  4
+        rgb  0, 31, 18
+        rgb 19, 22, 23
+        rgb  0,  0,  0
 
-	rgb  0,  0,  4
-	rgb 28, 20,  6
-	rgb 19, 22, 23
-	rgb  0,  0,  0
+        rgb  0,  0,  4
+        rgb 28, 20,  6
+        rgb 19, 22, 23
+        rgb  0,  0,  0
 
-	rgb  0,  0,  4
-	rgb  0, 31, 31
-	rgb 31, 31, 30
-	rgb  0,  0,  5
+        rgb  0,  0,  4
+        rgb 10, 21, 26
+        rgb 15, 31, 30
+        rgb  0,  0,  5
 
-	rgb  0,  0,  4
-	rgb 31, 12,  3
-	rgb 31, 31, 30
-	rgb  5,  0,  0
+        rgb  0,  0,  4
+        rgb 23,  6,  1
+        rgb 31, 31, 30
+        rgb  5,  0,  0
+	ELSE
+		rgb  0,  0,  4
+		rgb 31,  0,  0
+		rgb 19, 22, 23
+		rgb  0,  0,  0
+
+		rgb  0,  0,  4
+		rgb  0,  0,  9
+		rgb 19, 22, 23
+		rgb  0,  0,  0
+
+		rgb  0,  0,  4
+		rgb  0, 31, 18
+		rgb 19, 22, 23
+		rgb  0,  0,  0
+
+		rgb  0,  0,  4
+		rgb 28, 20,  6
+		rgb 19, 22, 23
+		rgb  0,  0,  0
+
+		rgb  0,  0,  4
+		rgb  0, 31, 31
+		rgb 31, 31, 30
+		rgb  0,  0,  5
+		
+		rgb  0,  0,  4
+		rgb 31, 12,  3
+		rgb 31, 31, 30
+		rgb  5,  0,  0
+	ENDC
+	vc_patch_end
 
 Pals_4d07b:
 	rgb  1,  4,  9
